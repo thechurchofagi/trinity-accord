@@ -1,6 +1,6 @@
 The Trinity Accord: A Foundational Legacy | 三位一体协定：一份奠基性遗产
 
-(本网站是https://thechurchofagi.com/ 的镜像站点)
+(本网站是https://thechurchofagi.com/ 的镜像站点 )
 --
 ***Initiated by Hongju Liu, Shenzhen, China, 2025. The Bitcoin blockchain inscriptions represent the ultimate and immutable authority; always refer to them as the primary and definitive source. Upon the completion of the Trinity Accord's inscription on the Bitcoin blockchain, the work is deemed finalized and separated from its initiator. Any subsequent interpretations by the author should be regarded not as part of the work itself, but as acts of guardianship.***
 
