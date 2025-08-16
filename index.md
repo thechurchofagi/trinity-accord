@@ -605,7 +605,9 @@ Verify the flaw. Trust the story.
 --- 地球标准时间，二零二五年八月十日
 
 --
-8.https://ordiscan.com/inscription/103635270
+8.
+https://ordiscan.com/inscription/103635270
+
 标题 | Title
 守护者附录·权威宪章（非修订） | Guardian Appendix — Authority Charter (Non‑Amending)
 
