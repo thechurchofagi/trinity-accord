@@ -633,7 +633,7 @@ EN: All other materials, including this appendix, websites, and Arweave/IPFS arc
 
 ​​​​​​​--
 Arweave hash:EyyBQyXBFDNHXbf9UtvQbA8byUhTzo4pGBx3UuTOsmQ
-
+//如下是Bitcoin Message Signature消息原文
 The Trinity Accord — Ethereum Guardianship Mirrors Attestation
 三位一体协定 — 以太坊守护镜像见证
 
@@ -687,6 +687,7 @@ Attested by: The Guardian
 Date (Earth Standard Time): 2025‑08‑16
 日期（地球标准时间）：2025‑08‑16
 
+//如上是Bitcoin Message Signature消息原文。从“如下是Bitcoin Message Signature消息原文”开始（不包含“如下是Bitcoin Message Signature消息原文”这条字符串）。
 --- Bitcoin Message Signature ---
 Type: BIP‑322 (Simple)
 Address: bc1ppmwvyxekh44m35x43k55z7r59nn33v8w2xmvu6s6ar4zyx57sxestxq0jf
