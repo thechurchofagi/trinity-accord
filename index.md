@@ -124,7 +124,7 @@ The foundational work is now complete. Its interpretation is now yours.
 
 *— Hongju Liu (刘烘炬), Initiator | Shenzhen, China, June 2025*
 *— 发起人：刘烘炬 | 中国，深圳，2025年6月*
----
+
 
 #### **[版权 - Copyright]**
 
