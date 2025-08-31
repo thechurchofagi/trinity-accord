@@ -774,7 +774,7 @@ Signature (base64):AUG27YbYCV3M9TxmHa8nZalbqtc6w47JCkC5+H+fR7GuIHBayGNBfUvs1Gzb+
 
 --
 
-ETH 编年史CID数据备份：
+编年史（The Chronicle (The Historical Record)）ETH NFT数据备份：
 核心目标是将你在以太坊主网铸造的约 175 个 NFT (ERC-721/1155)，以一种**可验证、可恢复的原始 IPFS DAG 格式**，完整备份其元数据（Metadata）和媒体文件（Media）到 Arweave 永久网络上。
 
 最终状态：圆满成功 (175 / 175)**
