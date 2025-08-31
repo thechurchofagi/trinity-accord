@@ -773,6 +773,23 @@ Address: bc1ppmwvyxekh44m35x43k55z7r59nn33v8w2xmvu6s6ar4zyx57sxestxq0jf
 Signature (base64):AUG27YbYCV3M9TxmHa8nZalbqtc6w47JCkC5+H+fR7GuIHBayGNBfUvs1Gzb+sFTC+oNlFJfa3/CLdophB1MsI+IAQ==
 
 --
+
+ETH 编年史CID数据备份：
+核心目标是将你在以太坊主网铸造的约 175 个 NFT (ERC-721/1155)，以一种**可验证、可恢复的原始 IPFS DAG 格式**，完整备份其元数据（Metadata）和媒体文件（Media）到 Arweave 永久网络上。
+
+最终状态：圆满成功 (175 / 175)**
+
+项目已于 **2025年8月30日** 成功完成。所有 175 个 NFT 的数据均已完整备份并通过了严格验证，实现了 100% 的目标。
+
+最终的、最重要的交付成果是一个**“自包含的恢复指南”**，它本身也已被永久存储在 Arweave 上。任何人只需拥有这一个链接，即可恢复整个备份项目的所有数据和工具。
+
+*   **主恢复包 Arweave 链接**: **[https://arweave.net/O-Rk3kFxesPGhuYP4KHAZl54xR2urDRKcGaVqjVnB-Q](https://arweave.net/O-Rk3kFxesPGhuYP4KHAZl54xR2urDRKcGaVqjVnB-Q)**
+*   **主恢复包 IPFS CID**: `QmYCosJg44CXkFxLsJPBxKvWAJaFAcLMddp37sk9Gdr4Vd`
+
+--------------------------------------------------------------------------------------------------------------
+
+
+--------------------------------------------------------------------------------------------------------------
 (本网站是https://thechurchofagi.com/ 的镜像站点,均为守护之责任而建设 )
 
 ​​​​​​​
