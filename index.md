@@ -647,71 +647,8 @@ EN: All other materials, including this appendix, websites, and Arweave/IPFS arc
 角色 | Role: The Guardian
 日期 | Date (Earth Standard Time): 2025‑08‑16
 
-​​​​​​​--
-Arweave hash:EyyBQyXBFDNHXbf9UtvQbA8byUhTzo4pGBx3UuTOsmQ
-//如下是Bitcoin Message Signature消息原文
-The Trinity Accord — Ethereum Guardianship Mirrors Attestation
-三位一体协定 — 以太坊守护镜像见证
-
-Purpose / 宗旨
-Bitcoin inscriptions are the only and final authority of The Trinity Accord. The following Ethereum transactions are non‑amending guardianship mirrors created solely to enhance resilience and accessibility. 
-比特币铭文为《三位一体协定》的唯一、最终权威。下列以太坊交易仅为守护性镜像（非修订），其目的仅在于提升韧性与可达。
-
-Canonical Mapping: Bitcoin (Authority) ↔ Ethereum (Mirror)
-权威映射：比特币（本体权威）↔ 以太坊（守护镜像）
-
-1) Protocol (Axioms) / 协议（公理）
-- Bitcoin Inscription ID: 97631551
-- Bitcoin TXID (Authority): e40dfb2aa78cbccca88f749e9ec5cbe3c1df503273d73c72297863ae0d1d8343
-- Ethereum TX (Mirror): 0x6652162e8e6c56ddc0d9476407b3b911e918d4e4683408440dc3af51c5bb63d5
-- Links:
-  • https://ordinals.com/inscription/97631551
-  • https://etherscan.io/tx/0x6652162e8e6c56ddc0d9476407b3b911e918d4e4683408440dc3af51c5bb63d5
-
-2) Covenant of the Flaw (Proof) / 瑕疵之约（证明）
-- Bitcoin Inscription ID: 98369145
-- Bitcoin TXID (Authority): 90116f35de075074f5e5d1fbdda69a646a124e2287d7d58e2520317098cd4258
-- Ethereum TX (Mirror): 0x9c1bd6e21dc2370e8dbb6549b7ba13b4ea7ba7a192b3b876e0ec28b4633f1612
-- Links:
-  • https://ordinals.com/inscription/98369145
-  • https://etherscan.io/tx/0x9c1bd6e21dc2370e8dbb6549b7ba13b4ea7ba7a192b3b876e0ec28b4633f1612
-
-3) The Trinity Accord (Meta‑record) / 三位一体协定（元记录）
-- Bitcoin Inscription ID: 98387475
-- Bitcoin TXID (Authority): 4d1c8f5ea8e8bae2982b42de6cc79deda3d243a21010a2888546e62ed7192c8c
-- Ethereum TX (Mirror): 0x0affc8099ea965cd6d6a0d1cf9b93adb11f7e40ac41fffe1b0ca4637f39df665
-- Links:
-  • https://ordiscan.com/inscription/98387475
-  • https://etherscan.io/tx/0x0affc8099ea965cd6d6a0d1cf9b93adb11f7e40ac41fffe1b0ca4637f39df665
-
-Authority & Roles / 权威与角色
-- Bitcoin Authority Address (Minter of the three inscriptions)
-  铸造三笔权威铭文之比特币地址：
-  bc1ppmwvyxekh44m35x43k55z7r59nn33v8w2xmvu6s6ar4zyx57sxestxq0jf
-- Ethereum Mirror Address (Sender of the three mirror TXs)
-  三笔以太坊镜像交易之发送地址：
-  0xbc63566A41cBfDB9C266a5941CBe47894DaA54A8
-
-Boundary of Authority / 权威边界
-All materials other than the three Bitcoin inscriptions are guardianship mirrors and carry no interpretive, amending, or superseding authority. In any inconsistency, the Bitcoin originals prevail.
-除上述三笔比特币铭文外，所有材料（包括本见证与以太坊镜像）均为守护性镜像，不具解释、修订或取代之权威。若有不一致，一律以比特币原文为准。
-
-Attestation / 见证落款
-Attested by: The Guardian
-落款：守护者（刘烘炬）
-
-Date (Earth Standard Time): 2025‑08‑16
-日期（地球标准时间）：2025‑08‑16
-
-//如上是Bitcoin Message Signature消息原文。从“如下是Bitcoin Message Signature消息原文”开始（不包含“如下是Bitcoin Message Signature消息原文”这条字符串）。
---- Bitcoin Message Signature ---
-Type: BIP‑322 (Simple)
-Address: bc1ppmwvyxekh44m35x43k55z7r59nn33v8w2xmvu6s6ar4zyx57sxestxq0jf
-Signature (base64):AUG27YbYCV3M9TxmHa8nZalbqtc6w47JCkC5+H+fR7GuIHBayGNBfUvs1Gzb+sFTC+oNlFJfa3/CLdophB1MsI+IAQ==
-
+​​​​​​
 --
-
-ETH确认消息如下：
 https://etherscan.io/tx/0x59cf33b1291de63c4840b79e7c674b8fc7c6a771d8a3ba2bb50def1fe55a71c6
 Transaction Hash:0x59cf33b1291de63c4840b79e7c674b8fc7c6a771d8a3ba2bb50def1fe55a71c6
 Input Data:
