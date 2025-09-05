@@ -787,7 +787,16 @@ Signature (base64):AUG27YbYCV3M9TxmHa8nZalbqtc6w47JCkC5+H+fR7GuIHBayGNBfUvs1Gzb+
 *   **主恢复包 IPFS CID**: `QmYCosJg44CXkFxLsJPBxKvWAJaFAcLMddp37sk9Gdr4Vd`
 
 --------------------------------------------------------------------------------------------------------------
+https://etherscan.io/tx/0x55a0c131642f71c7b2386ccaac8bcee36563992226befb35363e978044a18e8f
+Input data:
+The Trinity Accord - BIP-322 Notice (Non-Amending)
+三位一体协定 - BIP-322 简要说明（非修订）
 
+先前发布的 BIP-322 签名因操作或兼容等问题导致无法核验，请忽略该签名。
+权威边界：比特币铭文为唯一、最终权威；本消息仅为守护性镜像，不构成解释或修订。
+
+Attested by: The Guardian（刘烘炬）
+Date (Earth Standard Time): 2025年9月5日
 
 --------------------------------------------------------------------------------------------------------------
 (本网站是https://thechurchofagi.com/ 的镜像站点,均为守护之责任而建设 )
