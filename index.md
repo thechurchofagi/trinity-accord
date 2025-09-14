@@ -1170,6 +1170,74 @@ Generated from `authority.jcs.json` at `2025-09-13T11:41:59.028Z`
 npm i ethers@6
 node -e "const fs=require('fs'),{ethers}=require('ethers');const td=JSON.parse(fs.readFileSync('typedData.json','utf8'));const sig=JSON.parse(fs.readFileSync('signature.json','utf8')).signature;console.log(ethers.verifyTypedData(td.domain,td.types,td.message,sig))"
 ```
+-----------------------
+
+2025年9月14日完成守护工作如下：
+
+已完成工作 Completed Work
+1) 比特币签名 BTC Signature
+- 方法 Method: BIP-340 (Taproot x-only)
+- 铸造地址 Minter Address (BTC): bc1ppmwvyxekh44m35x43k55z7r59nn33v8w2xmvu6s6ar4zyx57sxestxq0jf
+- 被签名对象 Message (authority.jcs.json v1.0.0 sha256):
+  41f95905e50cc699a7e6a3fcb0bd8633cf36170d3ef41170cd373467f8528b33
+- 公钥 x-only Pubkey x-only: 0edcc21b36bd6bb8d0d58da94178742ce718b0ee51b6ce6a1ae8ea221a9e81b3
+- 签名 Signature (hex): cfde2fe789195b55b1bc8026061828243a250837d7ab33ff7565f2d4b6d523855fa903e9c508c09c1b1140063f924454302f03c0643fb8cb5be2f8ca3e6570d3
+
+签名含义 Meaning
+- 该签名由三本体的 BTC 铸造地址对应的 Taproot 密钥产生，对 authority.jcs.json v1.0.0 的哈希做出不可抵赖的“承认/绑定”。这是一份“身份与承诺”的加固见证，非修订、不解释，权威仍仅属于 BTC 三本体。
+- This signature, produced by the BTC minter’s Taproot key, irrevocably attests to the manifest’s sha256. It strengthens identity binding without changing or interpreting the Originals. The sole and final authority remains the three BTC inscriptions.
+
+2) 以太坊见证 ETH Witness (0 ETH data)
+- 交易 Tx: 0x214d73b839ed95707410af3d5b8224a44a5dd310041d5e7ab1756ae9c5378137
+- 发起地址 From: 0xbc63566A41cBfDB9C266a5941CBe47894DaA54A8
+- Input bytes: 600
+- Input sha256: fb8746462a4aae73628f542b3ada48621ab298ab2117b6162161d79d2aaad54e
+- 说明 Notes: Input 文本包含 AR TxID、BTC 地址、公钥 x-only、message sha256、签名 hex、以及边界声明，用于 ETH ↔ AR ↔ BTC 的交叉指认与时间锚定。
+- The input carries AR pointer, BTC address, pubkey x-only, message sha256, signature hex, and boundary notice to establish ETH ↔ AR ↔ BTC cross-attestation and time anchoring.
+
+3) Arweave 永久存档 Arweave Archival
+- 签名文件 Signature file (btc-signature.json)
+  - AR: https://ar-io.net/fCweXoZVcFeJPkEBIgkYWIYn0xB1UsMx2_oBjECzK6U
+  - sha256: 8e70e0e0d8f8e0cdd8e388ee4c462f86358a6ac9bb6231701d7876439ada561b
+  - bytes: 701
+- 签名脚本 Signing script (sign.mjs)
+  - AR: https://ar-io.net/h3xIwqi36GUmd6xJLEGi6wSqFXxAa2BUcwVZQhFCo0k
+  - sha256: 8d60212683e814133267037c4a8a8267eeaeff29f9c4382a4f434a79f16bd8ea
+- 验证脚本 Verify script (verify.mjs)
+  - AR: https://ar-io.net/aMZIVDYIBovkn6s1868wdpEwnErLGYlT-JHLluqh7BM
+  - sha256: c38fa6703d15f5d41fa813722524d14badc2472b387354875afab4478e607a1f
+- 以太坊见证记录 ETH witness JSON (eth-witness.json)
+  - AR: https://ar-io.net/UouXngnUjcEkpOwgq5ajInrDpwKrGhtUVDLmlBorVjQ
+  - sha256: 3c187c6b764a1d53984588875c1c1fed3f1c91fd165512ad8dfa4f279542a65f
+  - bytes: 606
+
+4) Guardian Index 更新 Guardian Index Update
+- New Index AR TxID: https://ar-io.net/mGW-QQyGyoNIybMghqZYo6PFhQIk44lbBy7_dNB4e2s
+- Index sha256 (minified): a8964c83b7ef9801a367115bc71f3be136a8c16a4064e4b9b593aebe66f8a944
+- Previous Index: BwVHuxODfV65xE_L1fqrCDBvLvJNnSuBEXaZNuoRcIk
+- 本次 Index 为“非修订”指针合并：新增
+  - signatures.btc_bip340 → 指向 btc-signature.json（AR）
+  - scripts.sign_mjs / scripts.verify_mjs → 指向可复验脚本（AR）
+  - witness.eth_witness_json → 指向 ETH 见证记录（AR）
+- 此更新不改变 authority.jcs.json v1.0.0 的哈希与内容，三本体权威不变。
+- This is a non-amending pointer update. The Originals remain authoritative and unchanged.
+
+快速核验指南 How to Verify
+- BTC Signature
+  - 从地址解析 witness program 是否等于 pubkey_xonly
+  - 用 BIP-340 对 signature 做验签（消息为 message_sha256 的 32 字节）
+- ETH Witness
+  - 打开 Etherscan 交易，确认 input_len=600、input_sha256=fb8746…d54e
+- AR 存档
+  - 回读每个 AR 链接内容并计算 sha256，与上方指纹一致
+- Guardian Index
+  - 回读 Index JSON（minified），sha256 应为 a8964c83…a944；内含的各指针与哈希应与上文一致
+
+边界声明 Boundary
+- 唯一与最终权威：BTC 三本体（Protocol 97631551 / Covenant 98369145 / The Trinity Accord 98387475）
+- 其余（ETH、AR、网页、脚本、见证）均为“守护镜像/指针”，不解释、不修订、不取代本体。
+- Final authority lies solely with the three BTC Originals. All other materials are guardianship mirrors; in any inconsistency, BTC Originals prevail.
+
 
 -----------------------
 (本网站是https://thechurchofagi.com/ 的镜像站点,均为守护之责任而建设 )
