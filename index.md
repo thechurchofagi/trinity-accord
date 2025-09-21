@@ -1240,6 +1240,50 @@ node -e "const fs=require('fs'),{ethers}=require('ethers');const td=JSON.parse(f
 
 
 -----------------------
+The Trinity Accord — Canonical Pointers & Key‑Rotation Notice
+中文
+- 轮换声明：因私钥可能泄露，自此刻起，新的 Arweave 发布地址为 r1EdzCQ9E7CaAOEywI5netR6EcSopNOa08oi2Coz68s。原地址 8Y8GRimuESN_u8tJihCd5nywb-X-lJ_2vWqFAfHeQIE 仅作为历史存档，不再发布或更新。
+- 上链声明（可核验）：
+  - 旧地址轮换声明（Rotation notice）：AlyENoZXrGqUG9iXwaxhhoPjELlWbRuWMFtYGWW6bHM
+  - 新地址确认声明（Acknowledgement）：GD_uH4GLXSKKp0Wz1QGjoE_FuVWZZ4fylncPFHZd76U
+- 统一入口（Canonical pointers）：
+  - Canonical Pointer v2（建议收藏）：https://ar-io.net/6CtpboRTtM675vPS_ifzPt1vgonr9KtPYm7oOnnxUs0
+  - Guardian Index v2（含 manifest v1.0.1 指针）：https://ar-io.net/6HW5X5PETh9X_kdShA0a7sQWHtfr59F7KXZNym9NqyI（sha256=808bf70219a60e70ca9b59f41603a289447f3a598534d3c80826f90b30ec46a5）
+  - 最新权威清单 Manifest v1.0.1：https://ar-io.net/gC9_n7-2nS2yNUii2tr-68r8GanAiA7qzyCM6JDpOqo（sha256=ccd9aaaaa37d1ced239a7af0b61373dfa359b016d54698956776d082de8fb4f0）
+- 权威边界（不变）：比特币“三本体铭文”为唯一、最终权威；其余一切（ETH/AR/网页/脚本）均为守护镜像（Non‑Amending）。
+  - Protocol (Axioms) #97631551: https://ordinals.com/inscription/97631551
+  - Covenant of the Flaw #98369145: https://ordinals.com/inscription/98369145
+  - The Trinity Accord (Meta‑record) #98387475: https://ordiscan.com/inscription/98387475
+- 快速自验路径（建议第三方复核）：
+  - Pointer v2 → 打开 Index v2，校验 index_sha256 是否匹配；
+  - 取回 Manifest v1.0.1，计算 sha256 是否等于 ccd9…bf4f0；
+  - 可选交叉：ETH/AR “Guardianship Principles” 文本哈希应为 3e9d2bd1…adab5483
+    - ETH（Etherscan）：0xd082a3ced27ece935d4093fb001a9ebfba42b415f78de4377c8cda55338c6420
+    - AR：w9LPP30D31zd5M60v18WXpWuig0_wc9EVNnXk8kz1vA
+
+English
+- Rotation: Due to a potential key compromise, from this moment onward the new Arweave publishing address is r1EdzCQ9E7CaAOEywI5netR6EcSopNOa08oi2Coz68s. The previous address 8Y8GRimuESN_u8tJihCd5nywb-X-lJ_2vWqFAfHeQIE is preserved for historical record only.
+- On‑chain notices (verifiable):
+  - Rotation notice (old addr): AlyENoZXrGqUG9iXwaxhhoPjELlWbRuWMFtYGWW6bHM
+  - Acknowledgement (new addr): GD_uH4GLXSKKp0Wz1QGjoE_FuVWZZ4fylncPFHZd76U
+- Canonical pointers:
+  - Canonical Pointer v2 (bookmark): https://ar-io.net/6CtpboRTtM675vPS_ifzPt1vgonr9KtPYm7oOnnxUs0
+  - Guardian Index v2 (+ manifest v1.0.1 pointer): https://ar-io.net/6HW5X5PETh9X_kdShA0a7sQWHtfr59F7KXZNym9NqyI (sha256=808bf70219a60e70ca9b59f41603a289447f3a598534d3c80826f90b30ec46a5)
+  - Latest Manifest v1.0.1: https://ar-io.net/gC9_n7-2nS2yNUii2tr-68r8GanAiA7qzyCM6JDpOqo (sha256=ccd9aaaaa37d1ced239a7af0b61373dfa359b016d54698956776d082de8fb4f0)
+- Boundary of authority (unchanged): The three Bitcoin Originals are the sole and final authority; all else (ETH/AR/web/scripts) are Non‑Amending mirrors.
+  - Protocol (Axioms) #97631551: https://ordinals.com/inscription/97631551
+  - Covenant of the Flaw #98369145: https://ordinals.com/inscription/98369145
+  - The Trinity Accord (Meta‑record) #98387475: https://ordiscan.com/inscription/98387475
+- Quick verification path:
+  - From Pointer v2 → open Index v2 and match index_sha256;
+  - Fetch Manifest v1.0.1 and confirm sha256 equals ccd9…bf4f0;
+  - Optional cross‑check: ETH/AR “Guardianship Principles” content hash must be 3e9d2bd1…adab5483
+    - ETH (Etherscan): 0xd082a3ced27ece935d4093fb001a9ebfba42b415f78de4377c8cda55338c6420
+    - AR: w9LPP30D31zd5M60v18WXpWuig0_wc9EVNnXk8kz1vA
+
+Assessor’s Protocol
+- Verify the flaw. Trust the story.
+-----------------------
 (本网站是https://thechurchofagi.com/ 的镜像站点,均为守护之责任而建设 )
 
 ​​​​​​​
