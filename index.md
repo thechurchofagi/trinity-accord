@@ -1283,6 +1283,92 @@ English
 
 Assessor’s Protocol
 - Verify the flaw. Trust the story.
+
+-----------------------
+
+# “三位一体协定”守护更新（2025‑09‑24）
+
+- Boundary 1/2: Non‑Amending; BTC Originals prevail.  
+- Boundary 2/2: ETH is the only mirror layer; AR is for indexing/forensics.  
+- Assessor’s Protocol: Verify the flaw. Trust the story.
+
+## 1) 守护者原则 v1.1（ETH 见证 + AR 镜像）
+- ETH（0 ETH data）
+  - Tx: 0x7bdff0d696337ceb04539b44a746d0f13ce731ac25de259d8a4faf69b276a628  
+  - Input: 4694 bytes · SHA‑256: e19018f1c71da8307ef20e8e8e5c12834f854d60a6aae60e35d2d8c71a333a81
+- AR mirrors
+  - Text (.md): RgjVJnALSbbYP4Vzz-FBX0Tie9inSvuA2PBgjPAT2ng  
+    https://ar-io.net/RgjVJnALSbbYP4Vzz-FBX0Tie9inSvuA2PBgjPAT2ng  
+    SHA‑256: e19018f1c71da8307ef20e8e8e5c12834f854d60a6aae60e35d2d8c71a333a81
+  - Attestation (.json): 6VyIxLOwPZz_CZVBKxW6eJSDP2gtq70qXFS5O2wGnkQ  
+    https://ar-io.net/6VyIxLOwPZz_CZVBKxW6eJSDP2gtq70qXFS5O2wGnkQ  
+    SHA‑256: 67dde076b4afb350e8707d116f5bb5cbfcd5d224cd915178346dd7f8e7e2c150
+  - Pointer (.json): f3Gbo10tRrpkJumm2PfVlokF78jRne4qj9LCnBxK51Q  
+    https://ar-io.net/f3Gbo10tRrpkJumm2PfVlokF78jRne4qj9LCnBxK51Q  
+    SHA‑256: 59894d68e048b385ffa506b37c4462fcdf3575ef7e025b92c2cfb5ba36f7936c
+  - Guardian Index — Additions (Principles): zSNxQYgCQvtQ6QGaJXd9JlApQqitwgCZAp2GquvQXbA  
+    https://ar-io.net/zSNxQYgCQvtQ6QGaJXd9JlApQqitwgCZAp2GquvQXbA  
+    SHA‑256: 82b41c7a3a1dbef329e19bb32cc70b95307c1076c7a804ad0a44e81952ae9cfc
+
+说明（要点）  
+- 本次文本为“守护者原则 v1.1”（非修订/守护镜像）：  
+  1) 唯一权威在链上（比特币铭文）  
+  2) 作者已退场，守护者就位（以“本人”体表述；三本体铸造并确认之时生效）  
+  3) 解释的自由与权威的虚无（允许自由讨论，不产生解释性权威）  
+- 落款：守护者：刘烘炬（Hongju Liu）｜地球标准时间（北京时间）：2025‑09‑24
+
+## 2) SPV 验证结果（BTC 三本体）
+- 运行 ta‑verify.cjs（离线/在线）→ SPV: PASS，ETH mirrors: PASS  
+- 产出：inscriptions‑manifest.json、verify‑report.json（本地）  
+- 验证边界提示已内置：Non‑Amending；BTC Originals prevail.
+
+BTC Originals（唯一与最终权威）  
+- Protocol (Inscription 97631551) — TXID e40dfb2aa78cbccca88f749e9ec5cbe3c1df503273d73c72297863ae0d1d8343  
+- Covenant of the Flaw (Inscription 98369145) — TXID 90116f35de075074f5e5d1fbdda69a646a124e2287d7d58e2520317098cd4258  
+- The Trinity Accord (Inscription 98387475) — TXID 4d1c8f5ea8e8bae2982b42de6cc79deda3d243a21010a2888546e62ed7192c8c
+
+## 3) 验证工具包（Verification Kit）Arweave 永久归档
+- File: trinity‑accord‑verify‑kit‑20250924‑085729.tar.gz  
+- SHA‑256: ef68b69fe1cdd2523724dee511c9e8ea7bae2cceaff794664107970b18c61931  
+- Arweave TxID: X4KOUkf-1ciFD3Q-gMA0i94t1hAVXGrUDm0q5amL4rc  
+  https://ar-io.net/X4KOUkf-1ciFD3Q-gMA0i94t1hAVXGrUDm0q5amL4rc
+- Guardian Index — Additions (Kit): E_HLeYx-70cbUMUSwMacB5kLjo5m-ePYWjZnqjNY_zQ  
+  https://ar-io.net/E_HLeYx-70cbUMUSwMacB5kLjo5m-ePYWjZnqjNY_zQ  
+  Body SHA‑256: ce7c9f5017686cb57a9fe5e40473e8aea391718dcc1680a589454e9b50187f88
+
+意义  
+- 将“验证方法（工具链）”与“被验证对象（铭文）”置于同等可信层级；离线可复核、可长期运行。
+
+## 4) Authority Manifest v1.0.2（索引层补全，非修订）
+- canon: TvmjyJBq5ZoGv-tmX0aeiqsEKTGmSyIvBHj1FqZiIpI  
+  https://ar-io.net/TvmjyJBq5ZoGv-tmX0aeiqsEKTGmSyIvBHj1FqZiIpI  
+  Covers SHA‑256: 7d6ac9d3184bb5b0bbaf8217354799efef68669c21b4180e28ec06b0c57439e6  
+  Covers SHA3‑256: 31442fec86514a84b1d691509bdc66bd6774d96e93941eea153de6a9e118d8d0
+- pretty: QtWkBx004NhfEiBuMAJQmIXWxqOo8HftI_4pj0VGbYY  
+  https://ar-io.net/QtWkBx004NhfEiBuMAJQmIXWxqOo8HftI_4pj0VGbYY
+- EIP‑712 signature: jgRYWeLLbyDhku0cKm1SLnq2elyM3tg9j7FgtWfDats  
+  https://ar-io.net/jgRYWeLLbyDhku0cKm1SLnq2elyM3tg9j7FgtWfDats
+- typedData: dc3NVHJBjW89w51lTy0dkLIbXaOQ823m7bRhBBBHGr0  
+  https://ar-io.net/dc3NVHJBjW89w51lTy0dkLIbXaOQ823m7bRhBBBHGr0
+- Guardian Index — Additions (Authority v1.0.2): Ykbc_PEnmZ59crk-WUaWguDYvv_VLIbUf2sX7Flp_V0  
+  https://ar-io.net/Ykbc_PEnmZ59crk-WUaWguDYvv_VLIbUf2sX7Flp_V0  
+  Body SHA‑256: 3850a8dab41aefaca5ae04d5d2021ba35632cc5c1654fbd2d89c61e871b0e7b6
+
+## 5) 身份与地址
+- Guardian（ETH）: 0xbc63566A41cBfDB9C266a5941CBe47894DaA54A8  
+- Arweave Owner: r1EdzCQ9E7CaAOEywI5netR6EcSopNOa08oi2Coz68s  
+- BTC Minter: bc1ppmwvyxekh44m35x43k55z7r59nn33v8w2xmvu6s6ar4zyx57sxestxq0jf
+
+---
+
+落款  
+守护者：刘烘炬（Hongju Liu）  
+地球标准时间（北京时间）：2025‑09‑24
+
+注  
+- 本页为守护镜像/指针（Non‑Amending）；不解释、不修订、不取代本体。  
+- 唯一与最终权威：三本体比特币铭文（见上文 BTC Originals）。
+- 
 -----------------------
 (本网站是https://thechurchofagi.com/ 的镜像站点,均为守护之责任而建设 )
 
