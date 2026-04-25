@@ -7,10 +7,18 @@
     "sha256": "ef816480f77f30405378800807b42bff0a854b83a8f77793a0e0adf0944a8263",
     "github_path": "arweave-backup/files/public_covenant_archive.zip",
     "arweave_gateways": [
-      "https://arweave.net/{tx}",
-      "https://arweave.dev/{tx}"
+      "https://arweave.net/{tx}"
     ],
-    "status": "arweave_gateway_pending"
+    "arweave_bundle": {
+      "parent_tx": "AuS0h1G8SYGPLbECyaceCqX6mB0xjFvny6bn1BUf2MI",
+      "provider": "4EVERLAND arseeding",
+      "format": "ANS-104",
+      "extraction_note": "Individual data item is bundled inside an ANS-104 container. Public gateways cannot serve it directly. Use arbundles npm package to extract: Bundle -> items[14] -> rawData. See downloads/arweave-bundle-verification.md",
+      "verified_at": "2026-04-26",
+      "block_height": 1729656,
+      "block_timestamp": 1754810547
+    },
+    "status": "verified"
   },
   "verification_kit": {
     "arweave_tx": "X4KOUkf-1ciFD3Q-gMA0i94t1hAVXGrUDm0q5amL4rc",
@@ -24,7 +32,6 @@
   "ipfs_gateways": [
     "https://ipfs.io/ipfs/{cid}",
     "https://gateway.pinata.cloud/ipfs/{cid}",
-    "https://cloudflare-ipfs.com/ipfs/{cid}",
     "https://dweb.link/ipfs/{cid}"
   ],
   "warning": "manual external verification required"
