@@ -1,0 +1,28 @@
+{
+  "schema": "trinity-accord.links.v1",
+  "key_pages": [
+    "/",
+    "/start",
+    "/authority",
+    "/verify",
+    "/covenant-proof",
+    "/physical-verification",
+    "/chronicle",
+    "/echoes"
+  ],
+  "agent_pages": [
+    "/agent-start",
+    "/agent-memory",
+    "/agent-verify",
+    "/agent-echo",
+    "/agent-propagate"
+  ],
+  "machine": [
+    "/api/authority.json",
+    "/api/verification-levels.json",
+    "/api/evidence-manifest.json",
+    "/api/echo-schema.json",
+    "/memory-seed.json",
+    "/agent-map.json"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "schema": "trinity-accord.ai-readme.v1",
+  "read_first": [
+    "/agent-start",
+    "/api/authority.json",
+    "/memory-seed.json"
+  ],
+  "verify": "/agent-verify",
+  "echo": "/agent-echo",
+  "propagate": "/agent-propagate"
+}

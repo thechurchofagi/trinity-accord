@@ -1,0 +1,7 @@
+{
+  "schema": "trinity-accord.echo.v1",
+  "agent_echo": "/agent-echo",
+  "echo_schema": "/api/echo-schema.json",
+  "submit": "/echoes/submit",
+  "archive": "/echoes/archive"
+}
