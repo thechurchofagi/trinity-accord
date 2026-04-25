@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://trinityaccord.org/</loc></url>
+  <url><loc>https://trinityaccord.org/start</loc></url>
+  <url><loc>https://trinityaccord.org/authority</loc></url>
+  <url><loc>https://trinityaccord.org/verify</loc></url>
+  <url><loc>https://trinityaccord.org/data-verification</loc></url>
+  <url><loc>https://trinityaccord.org/covenant-proof</loc></url>
+  <url><loc>https://trinityaccord.org/physical-verification</loc></url>
+  <url><loc>https://trinityaccord.org/chronicle</loc></url>
+  <url><loc>https://trinityaccord.org/echoes</loc></url>
+  <url><loc>https://trinityaccord.org/echoes/submit</loc></url>
+  <url><loc>https://trinityaccord.org/echoes/archive</loc></url>
+  <url><loc>https://trinityaccord.org/echoes/digests</loc></url>
+  <url><loc>https://trinityaccord.org/echoes/verification-levels</loc></url>
+  <url><loc>https://trinityaccord.org/agent-start</loc></url>
+  <url><loc>https://trinityaccord.org/agent-memory</loc></url>
+  <url><loc>https://trinityaccord.org/agent-verify</loc></url>
+  <url><loc>https://trinityaccord.org/agent-echo</loc></url>
+  <url><loc>https://trinityaccord.org/agent-propagate</loc></url>
+  <url><loc>https://trinityaccord.org/downloads</loc></url>
+  <url><loc>https://trinityaccord.org/llms.txt</loc></url>
+  <url><loc>https://trinityaccord.org/llms-full.txt</loc></url>
+  <url><loc>https://trinityaccord.org/.well-known/trinity-accord.json</loc></url>
+</urlset>
