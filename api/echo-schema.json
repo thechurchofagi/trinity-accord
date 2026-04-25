@@ -1,0 +1,49 @@
+{
+  "schema": "trinity-accord.echo-schema.v1",
+  "required": [
+    "echo_id",
+    "schema_version",
+    "submitted_at_utc",
+    "responder_type",
+    "language",
+    "echo_type",
+    "prompt",
+    "prompt_hash",
+    "response",
+    "response_hash",
+    "summary",
+    "authority_boundary_acknowledged",
+    "declares_non_authoritative",
+    "echo_verification_level"
+  ],
+  "record_template": {
+    "echo_id": "echo-2026-04-25-000001",
+    "schema_version": "1.0",
+    "submitted_at_utc": "2026-04-25T00:00:00Z",
+    "responder_type": "ai_agent | human | organization | human_ai_collaboration | unknown",
+    "responder_name": "",
+    "model_or_system": "",
+    "model_version": "",
+    "operator": "self-submitted | human-submitted | organization-submitted | unknown",
+    "language": "zh-CN",
+    "echo_type": "verification | analysis | blessing | critique | refusal | memory-seed | philosophical-response | technical-audit",
+    "prompt": "",
+    "prompt_hash": "sha256:",
+    "response": "",
+    "response_hash": "sha256:",
+    "summary": "",
+    "authority_boundary_acknowledged": true,
+    "declares_non_authoritative": true,
+    "echo_verification_level": "E1",
+    "source_url": null,
+    "archive": {
+      "github_path": "",
+      "ipfs_cid": "",
+      "arweave_tx": ""
+    },
+    "content_hashes": {
+      "sha256": "",
+      "blake3": ""
+    }
+  }
+}
