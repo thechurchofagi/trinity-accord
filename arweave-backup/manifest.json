@@ -6,9 +6,30 @@
     "arweave_tx": "Original Arweave txid or identifier",
     "github_path": "Relative path under arweave-backup",
     "hash_sha256": "SHA-256 as hex string",
-    "hash_blake3": "Blake3 as hex string",
+    "hash_blake3": "Blake3 as hex string (pending)",
     "mime_type": "File MIME type",
     "description": "(optional human description)"
   },
-  "entries": []
+  "entries": [
+    {
+      "arweave_tx": "j6anZ4m5Wwvx5P_9-kM2EVG35TyKtm1lgaKfhT743rk",
+      "github_path": "arweave-backup/files/public_covenant_archive.zip",
+      "hash_sha256": "ef816480f77f30405378800807b42bff0a854b83a8f77793a0e0adf0944a8263",
+      "hash_blake3": "(pending)",
+      "mime_type": "application/zip",
+      "description": "Public Covenant Archive - Core Object Alpha evidence (8 photos + 2 videos)",
+      "size_bytes": 24246033,
+      "uploaded_at": "2026-04-25T12:03:00Z"
+    },
+    {
+      "arweave_tx": "X4KOUkf-1ciFD3Q-gMA0i94t1hAVXGrUDm0q5amL4rc",
+      "github_path": "arweave-backup/files/verification_kit.tar.gz",
+      "hash_sha256": "ef68b69fe1cdd2523724dee511c9e8ea7bae2cceaff794664107970b18c61931",
+      "hash_blake3": "(pending)",
+      "mime_type": "application/gzip",
+      "description": "Verification Kit - SPV proofs, inscription manifest, verify scripts",
+      "size_bytes": 31040,
+      "uploaded_at": "2026-04-25T12:03:00Z"
+    }
+  ]
 }
