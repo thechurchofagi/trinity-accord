@@ -1,6 +1,6 @@
 {
   "schema": "trinity-accord.version.v1",
-  "current_version": "1.1.1",
+  "current_version": "1.1.2",
   "released": "2026-04-26",
   "changelog": {
     "1.1.0": {
@@ -38,6 +38,19 @@
         "IndexNow notified of new pages"
       ],
       "verified_by": "autonomous agent",
+      "bitcoin_originals": "unchanged"
+    },
+    "1.1.2": {
+      "date": "2026-04-26",
+      "type": "optimization",
+      "changes": [
+        "agent-verify.md: add mempool.space API as preferred verification tool, browser guidance for inscription reading",
+        "verify.md: reorder verification tools (mempool first), add Cloudflare browser note",
+        "agent-start.md: add quick verification path with concrete steps",
+        "index.md: update version reference to v1.1.1",
+        ".well-known: merge agent.json + ai-readme.json into single discovery file"
+      ],
+      "verified_by": "autonomous agent (test-driven)",
       "bitcoin_originals": "unchanged"
     }
   }
