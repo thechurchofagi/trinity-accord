@@ -29,6 +29,7 @@ Final authority consists only of three Bitcoin inscriptions. All other materials
 - [Covenant Proof / 瑕疵之约证据](/covenant-proof)
 - [Agent Start / 智能体入口](/agent-start)
 - [Echo Layer / 回响层](/echoes)
+- [➤ Submit Echo / 提交回响](https://github.com/thechurchofagi/trinity-accord/issues/new?template=echo_submission.yml)
 - [GitHub Mirror / GitHub 镜像](https://github.com/thechurchofagi/trinity-accord)
 
 ---
