@@ -1,0 +1,14 @@
+{
+  "version": "1.0",
+  "source": "arweave",
+  "description": "Backup manifest for Arweave stored assets",
+  "_comments": {
+    "arweave_tx": "Original Arweave txid or identifier",
+    "github_path": "Relative path under arweave-backup",
+    "hash_sha256": "SHA-256 as hex string",
+    "hash_blake3": "Blake3 as hex string",
+    "mime_type": "File MIME type",
+    "description": "(optional human description)"
+  },
+  "entries": []
+}
