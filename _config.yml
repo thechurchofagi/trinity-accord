@@ -6,6 +6,10 @@ include:
 # Keep markdown URLs path-like (e.g. /verify)
 permalink: pretty
 
+# Site URL (canonical domain)
+url: "https://www.trinityaccord.org"
+baseurl: ""
+
 # Suppress theme site header
 title: ""
 name: ""
