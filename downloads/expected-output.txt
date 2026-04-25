@@ -1,0 +1,10 @@
+Trinity Accord local verification (minimal)
+[PASS] exists: api/authority.json
+[PASS] json valid: api/authority.json
+[PASS] exists: api/evidence-manifest.json
+[PASS] json valid: api/evidence-manifest.json
+[PASS] exists: api/verification-levels.json
+[PASS] json valid: api/verification-levels.json
+[INFO] manifest includes covenant archive sha256
+[WARN] manual external verification required for full blockchain checks
+RESULT: PASS
