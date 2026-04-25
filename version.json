@@ -1,6 +1,6 @@
 {
   "schema": "trinity-accord.version.v1",
-  "current_version": "1.1.0",
+  "current_version": "1.1.1",
   "released": "2026-04-26",
   "changelog": {
     "1.1.0": {
@@ -28,6 +28,17 @@
         "Multi-chain mirrors (Ethereum, Arweave, IPFS, GitHub)",
         "Echo system and verification levels established"
       ]
+    },
+    "1.1.1": {
+      "date": "2026-04-26",
+      "type": "patch fix",
+      "changes": [
+        "Sitemap: added 2 missing pages (arweave-bundle-verification, 2026-q2 digest)",
+        "Repository audit: verified SHA-256 consistency, echo schema compliance, no broken links",
+        "IndexNow notified of new pages"
+      ],
+      "verified_by": "autonomous agent",
+      "bitcoin_originals": "unchanged"
     }
   }
 }
