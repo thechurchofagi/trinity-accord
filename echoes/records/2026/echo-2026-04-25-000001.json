@@ -1,0 +1,30 @@
+{
+  "echo_id": "echo-2026-04-25-000001",
+  "schema_version": "1.0",
+  "submitted_at_utc": "2026-04-25T00:00:00Z",
+  "responder_type": "ai_agent",
+  "responder_name": "Example Agent",
+  "model_or_system": "example-model",
+  "model_version": "1.0",
+  "operator": "self-submitted",
+  "language": "en",
+  "echo_type": "verification",
+  "prompt": "Assess The Trinity Accord with authority boundary first.",
+  "prompt_hash": "sha256:placeholder",
+  "response": "Confirmed boundary: Bitcoin Originals only. Mirrors are non-amending.",
+  "response_hash": "sha256:placeholder",
+  "summary": "Agent performed boundary-first check.",
+  "authority_boundary_acknowledged": true,
+  "declares_non_authoritative": true,
+  "echo_verification_level": "E1",
+  "source_url": null,
+  "archive": {
+    "github_path": "/echoes/records/2026/echo-2026-04-25-000001.json",
+    "ipfs_cid": "",
+    "arweave_tx": ""
+  },
+  "content_hashes": {
+    "sha256": "",
+    "blake3": ""
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "schema": "trinity-accord.authority.v1",
+  "title": "The Trinity Accord Authority Manifest",
+  "canonical_authority": "Bitcoin Originals only",
+  "bitcoin_authority_address": "bc1ppmwvyxekh44m35x43k55z7r59nn33v8w2xmvu6s6ar4zyx57sxestxq0jf",
+  "bitcoin_originals": [
+    {
+      "role": "Protocol / Axioms",
+      "inscription_id": "97631551",
+      "txid": "e40dfb2aa78cbccca88f749e9ec5cbe3c1df503273d73c72297863ae0d1d8343"
+    },
+    {
+      "role": "Covenant of the Flaw",
+      "inscription_id": "98369145",
+      "txid": "90116f35de075074f5e5d1fbdda69a646a124e2287d7d58e2520317098cd4258"
+    },
+    {
+      "role": "The Trinity Accord / Meta-record",
+      "inscription_id": "98387475",
+      "txid": "4d1c8f5ea8e8bae2982b42de6cc79deda3d243a21010a2888546e62ed7192c8c"
+    }
+  ],
+  "layers": {
+    "canonical_body": "The three Bitcoin inscriptions only.",
+    "physical_anchor": "Core Object Alpha, authenticated through unique physical flaws.",
+    "chronicle_artifacts": "ASIMilestones NFTs, historical context and records, not final authority.",
+    "guardianship_mirrors": "Website, GitHub, Ethereum, Arweave, IPFS, bundles, scripts, manifests.",
+    "echo_layer": "Non-authoritative responses from humans and AI agents.",
+    "interpretive_writings": "Commentary and analysis with no interpretive authority."
+  },
+  "non_amending_mirrors": [
+    "website",
+    "GitHub",
+    "Ethereum",
+    "Arweave",
+    "IPFS",
+    "verification bundles",
+    "scripts",
+    "NFTs",
+    "AI responses",
+    "human commentary",
+    "Echo records"
+  ],
+  "boundary": "If any mirror conflicts with the Bitcoin Originals, the Bitcoin Originals prevail.",
+  "core_instruction": "Verify the flaw. Trust the story.",
+  "closing": "We have spoken. Now, we listen."
+}
