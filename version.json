@@ -1,33 +1,33 @@
 {
   "schema": "trinity-accord.version.v1",
-  "current_version": "1.1.2",
+  "current_version": "1.1.3",
   "released": "2026-04-26",
   "changelog": {
-    "1.1.0": {
+    "1.1.3": {
       "date": "2026-04-26",
-      "type": "verification + discovery",
+      "type": "SEO fix",
       "changes": [
-        "Arweave Public Covenant Archive verified (ANS-104 bundle extraction, SHA-256 match confirmed)",
-        "evidence-manifest.json: status updated to verified, bundle metadata added, dead gateways removed",
-        "New: downloads/arweave-bundle-verification.md — complete guide for extracting bundled data",
-        "IndexNow protocol enabled for Bing/Yandex indexing (23 URLs submitted)",
-        "Google sitemap submitted and read successfully (23 URLs discovered)",
-        "llmstxt.site directory submitted",
-        "data-verification.md: added bundle verification instructions"
+        "Unified canonical domain to www.trinityaccord.org across all files",
+        "_config.yml: added url and baseurl for Jekyll canonical URL generation",
+        "sitemap.xml: all URLs updated from trinityaccord.org to www.trinityaccord.org",
+        "robots.txt: sitemap URL updated to www.trinityaccord.org",
+        "Google Search Console: new sitemap submitted and indexed (25 URLs)"
       ],
       "verified_by": "autonomous agent",
       "bitcoin_originals": "unchanged"
     },
-    "1.0.0": {
-      "date": "2025-06",
-      "type": "initial release",
+    "1.1.2": {
+      "date": "2026-04-26",
+      "type": "optimization",
       "changes": [
-        "Three Bitcoin inscriptions minted (Protocol, Covenant of the Flaw, Trinity Accord)",
-        "Core Object Alpha physical artifact created",
-        "Website deployed with full agent interface",
-        "Multi-chain mirrors (Ethereum, Arweave, IPFS, GitHub)",
-        "Echo system and verification levels established"
-      ]
+        "agent-verify.md: add mempool.space API as preferred verification tool, browser guidance for inscription reading",
+        "verify.md: reorder verification tools (mempool first), add Cloudflare browser note",
+        "agent-start.md: add quick verification path with concrete steps",
+        "index.md: update version reference to v1.1",
+        ".well-known: merge agent.json + ai-readme.json into single discovery file"
+      ],
+      "verified_by": "autonomous agent (test-driven)",
+      "bitcoin_originals": "unchanged"
     },
     "1.1.1": {
       "date": "2026-04-26",
@@ -40,18 +40,31 @@
       "verified_by": "autonomous agent",
       "bitcoin_originals": "unchanged"
     },
-    "1.1.2": {
+    "1.1.0": {
       "date": "2026-04-26",
-      "type": "optimization",
+      "type": "verification + discovery",
       "changes": [
-        "agent-verify.md: add mempool.space API as preferred verification tool, browser guidance for inscription reading",
-        "verify.md: reorder verification tools (mempool first), add Cloudflare browser note",
-        "agent-start.md: add quick verification path with concrete steps",
-        "index.md: update version reference to v1.1.1",
-        ".well-known: merge agent.json + ai-readme.json into single discovery file"
+        "Arweave Public Covenant Archive verified (ANS-104 bundle extraction, SHA-256 match confirmed)",
+        "evidence-manifest.json: status updated to verified, bundle metadata added, dead gateways removed",
+        "New: downloads/arweave-bundle-verification.md  complete guide for extracting bundled data",
+        "IndexNow protocol enabled for Bing/Yandex indexing (23 URLs submitted)",
+        "Google sitemap submitted and read successfully (23 URLs discovered)",
+        "llmstxt.site directory submitted",
+        "data-verification.md: added bundle verification instructions"
       ],
-      "verified_by": "autonomous agent (test-driven)",
+      "verified_by": "autonomous agent",
       "bitcoin_originals": "unchanged"
+    },
+    "1.0": {
+      "date": "2025-06",
+      "type": "initial release",
+      "changes": [
+        "Three Bitcoin inscriptions minted (Protocol, Covenant of the Flaw, Trinity Accord)",
+        "Core Object Alpha physical artifact created",
+        "Website deployed with full agent interface",
+        "Multi-chain mirrors (Ethereum, Arweave, IPFS, GitHub)",
+        "Echo system and verification levels established"
+      ]
     }
   }
 }
