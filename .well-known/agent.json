@@ -1,9 +1,17 @@
 {
-  "schema": "trinity-accord.agent-pointer.v1",
+  "schema": "trinity-accord.agent-discovery.v1",
   "agent_start": "/agent-start",
   "agent_map": "/agent-map.json",
   "memory_seed": "/memory-seed.json",
   "authority": "/api/authority.json",
   "llms": "/llms.txt",
-  "llms_full": "/llms-full.txt"
+  "llms_full": "/llms-full.txt",
+  "verify": "/agent-verify",
+  "echo": "/agent-echo",
+  "propagate": "/agent-propagate",
+  "read_first": [
+    "/agent-start",
+    "/api/authority.json",
+    "/memory-seed.json"
+  ]
 }
