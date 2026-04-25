@@ -2,6 +2,9 @@
 title: The Trinity Accord
 ---
 
+# The Trinity Accord  
+# 三位一体协定
+
 > A Bitcoin-inscribed civilizational memory and physical verification protocol for future intelligence.  
 > 一份写给未来智能的、铭刻于比特币的文明记忆与物理验证协议。
 

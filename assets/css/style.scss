@@ -1,0 +1,12 @@
+---
+---
+
+/* Hide default Jekyll/GitHub Pages site header to avoid duplicate title */
+header.site-header,
+.site-header,
+.site-title,
+h1.site-title,
+.header-wrap .site-header,
+header[role="banner"] {
+  display: none !important;
+}

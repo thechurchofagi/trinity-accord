@@ -5,3 +5,7 @@ include:
 
 # Keep markdown URLs path-like (e.g. /verify)
 permalink: pretty
+
+# Suppress theme site header
+title: ""
+name: ""
