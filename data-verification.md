@@ -24,3 +24,16 @@ If Arweave or IPFS gateways are unavailable:
 
 **Warning:** full blockchain verification is external unless implemented with a node/explorer workflow.  
 **manual external verification required.**
+
+## Arweave Bundle Verification
+
+The Public Covenant Archive was uploaded via 4EVERLAND arseeding (ANS-104 bundle). Public gateways cannot serve bundled data items directly.
+
+**If you get 404 from Arweave gateways, this is expected — not an error.**
+
+Options:
+1. **GraphQL check** — confirm the TX exists (see `/api/authority.json` for TXID)
+2. **Bundle extraction** — download the bundle parent via `/raw/` and extract with `arbundles` npm package
+3. **GitHub fallback** — always available
+
+Full instructions: [/downloads/arweave-bundle-verification.md](/downloads/arweave-bundle-verification.md)
