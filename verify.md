@@ -14,9 +14,23 @@ Pass: can state Accord scope, Bitcoin Originals final authority, mirrors non-ame
 Goal: verify three inscriptions, TXIDs, and shared authority address.
 Pass: confirm inscriptions 97631551/98369145/98387475, listed TXIDs, and authority address.
 
+**How to verify:**
+- Use any of these block explorers (if one is blocked, try another):
+  - ordinals.com: `/inscription/{ID}`
+  - ordiscan.com: `/inscription/{ID}`
+  - mempool.space API: `/api/tx/{TXID}` (returns JSON, no browser needed)
+- Confirm all three TXIDs exist on Bitcoin mainnet.
+- Confirm the output address matches the authority address.
+
 ## L2 — Mirror Integrity Verification / 镜像完整性验证级
 Goal: verify mirror manifests, hashes, pointers.
 Pass: fetch `/api/authority.json` + `/api/evidence-manifest.json`, verify listed hashes/pointers, keep non-amending boundary.
+
+**How to verify:**
+1. Fetch `/api/authority.json` and confirm it lists the three inscriptions.
+2. Fetch `/api/evidence-manifest.json` and confirm hashes.
+3. Download evidence files (from GitHub or Arweave) and verify SHA-256.
+4. If Arweave/IPFS is unavailable, use GitHub fallback: [github.com/thechurchofagi/trinity-accord](https://github.com/thechurchofagi/trinity-accord)
 
 ## L3 — Public Covenant Evidence Verification / 公开瑕疵证据验证级
 Goal: remote verification of public Covenant evidence package.

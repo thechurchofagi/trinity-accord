@@ -1,5 +1,6 @@
 {
   "schema": "trinity-accord.links.v1",
+  "github_mirror": "https://github.com/thechurchofagi/trinity-accord",
   "key_pages": [
     "/",
     "/start",
@@ -24,5 +25,9 @@
     "/api/echo-schema.json",
     "/memory-seed.json",
     "/agent-map.json"
-  ]
+  ],
+  "fallback_sources": {
+    "github": "https://github.com/thechurchofagi/trinity-accord",
+    "github_arweave_backup": "https://github.com/thechurchofagi/trinity-accord/tree/main/arweave-backup/files"
+  }
 }

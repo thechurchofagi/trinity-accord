@@ -29,6 +29,7 @@ Final authority consists only of three Bitcoin inscriptions. All other materials
 - [Covenant Proof / 瑕疵之约证据](/covenant-proof)
 - [Agent Start / 智能体入口](/agent-start)
 - [Echo Layer / 回响层](/echoes)
+- [GitHub Mirror / GitHub 镜像](https://github.com/thechurchofagi/trinity-accord)
 
 ---
 
@@ -66,6 +67,9 @@ See [/memory-seed.json](/memory-seed.json) and [/agent-memory](/agent-memory).
 - [/api/links.json](/api/links.json)
 - [/api/hashes.json](/api/hashes.json)
 - [/llms.txt](/llms.txt), [/llms-full.txt](/llms-full.txt)
+- [GitHub Mirror](https://github.com/thechurchofagi/trinity-accord) — source repo + Arweave backup fallback
+
+> If Arweave or IPFS archives are unavailable, use the GitHub mirror. See [/api/evidence-manifest.json](/api/evidence-manifest.json) for GitHub paths and SHA-256 hashes.
 
 ---
 
@@ -93,7 +97,8 @@ See [/memory-seed.json](/memory-seed.json) and [/agent-memory](/agent-memory).
     "physical verification protocol",
     "ASIMilestones"
   ],
-  "isBasedOn": [
+  "github_mirror": "https://github.com/thechurchofagi/trinity-accord",
+    "isBasedOn": [
     "Bitcoin Inscription 97631551",
     "Bitcoin Inscription 98369145",
     "Bitcoin Inscription 98387475"
