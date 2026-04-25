@@ -19,6 +19,7 @@
   <url><loc>https://trinityaccord.org/agent-echo</loc></url>
   <url><loc>https://trinityaccord.org/agent-propagate</loc></url>
   <url><loc>https://trinityaccord.org/downloads</loc></url>
+  <url><loc>https://trinityaccord.org/status</loc></url>
   <url><loc>https://trinityaccord.org/llms.txt</loc></url>
   <url><loc>https://trinityaccord.org/llms-full.txt</loc></url>
   <url><loc>https://trinityaccord.org/.well-known/trinity-accord.json</loc></url>

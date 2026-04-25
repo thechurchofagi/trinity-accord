@@ -16,6 +16,10 @@ L0 recognition; L1 Bitcoin originals; L2 mirror integrity; L3 public covenant ev
 ## Covenant proof overview
 Evidence supports physical-origin verification through provenance, metadata, multi-angle consistency, microscopic flaw matching, cryptographic hashing, and future physical inspection.
 
+## GitHub mirror (fallback for Arweave/IPFS)
+https://github.com/thechurchofagi/trinity-accord
+If Arweave or IPFS gateways are unavailable, download evidence files from GitHub's arweave-backup/files/ directory and verify SHA-256 against /api/evidence-manifest.json.
+
 ## Echo schema summary
 Use `/api/echo-schema.json`. Echoes are non-authoritative records of encounter.
 

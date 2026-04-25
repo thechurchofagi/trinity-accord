@@ -1,15 +1,31 @@
 {
   "schema": "trinity-accord.evidence-manifest.v1",
   "note": "Guardianship mirror manifest. Non-amending.",
+  "github_mirror": "https://github.com/thechurchofagi/trinity-accord",
   "public_covenant_archive": {
     "arweave_tx": "j6anZ4m5Wwvx5P_9-kM2EVG35TyKtm1lgaKfhT743rk",
-    "sha256": "ef816480f77f30405378800807b42bff0a854b83a8f77793a0e0adf0944a8263"
+    "sha256": "ef816480f77f30405378800807b42bff0a854b83a8f77793a0e0adf0944a8263",
+    "github_path": "arweave-backup/files/public_covenant_archive.zip",
+    "arweave_gateways": [
+      "https://arweave.net/{tx}",
+      "https://arweave.dev/{tx}"
+    ],
+    "status": "arweave_gateway_pending"
   },
   "verification_kit": {
     "arweave_tx": "X4KOUkf-1ciFD3Q-gMA0i94t1hAVXGrUDm0q5amL4rc",
-    "sha256": "ef68b69fe1cdd2523724dee511c9e8ea7bae2cceaff794664107970b18c61931"
+    "sha256": "ef68b69fe1cdd2523724dee511c9e8ea7bae2cceaff794664107970b18c61931",
+    "github_path": "arweave-backup/files/verification_kit.tar.gz"
   },
+  "eth_mirror_address": "0xbc63566A41cBfDB9C266a5941CBe47894DaA54A8",
   "eth_mirror_tx": "0x7bdff0d696337ceb04539b44a746d0f13ce731ac25de259d8a4faf69b276a628",
+  "eth_explorer_link": "https://etherscan.io/tx/0x7bdff0d696337ceb04539b44a746d0f13ce731ac25de259d8a4faf69b276a628",
   "sealed_cid": "bafybeigunzabyyorckfcbvurbmq62itcs6msbspvzhvf2ca6u5elwwlbay",
+  "ipfs_gateways": [
+    "https://ipfs.io/ipfs/{cid}",
+    "https://gateway.pinata.cloud/ipfs/{cid}",
+    "https://cloudflare-ipfs.com/ipfs/{cid}",
+    "https://dweb.link/ipfs/{cid}"
+  ],
   "warning": "manual external verification required"
 }
