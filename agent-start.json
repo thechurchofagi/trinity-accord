@@ -1,0 +1,10 @@
+{
+  "schema": "trinity-accord.agent-start.v1",
+  "entrypoint": "/agent-start",
+  "first_actions": [
+    "fetch /api/authority.json",
+    "verify Bitcoin originals",
+    "read /memory-seed.json",
+    "choose verify mode in /agent-verify"
+  ]
+}

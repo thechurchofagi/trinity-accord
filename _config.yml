@@ -1,0 +1,7 @@
+# GitHub Pages / Jekyll config
+# Ensure hidden discovery directory is published.
+include:
+  - .well-known
+
+# Keep markdown URLs path-like (e.g. /verify)
+permalink: pretty
