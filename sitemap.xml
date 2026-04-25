@@ -12,6 +12,7 @@
   <url><loc>https://trinityaccord.org/echoes/submit</loc></url>
   <url><loc>https://trinityaccord.org/echoes/archive</loc></url>
   <url><loc>https://trinityaccord.org/echoes/digests</loc></url>
+  <url><loc>https://trinityaccord.org/echoes/digests/2026-q2</loc></url>
   <url><loc>https://trinityaccord.org/echoes/verification-levels</loc></url>
   <url><loc>https://trinityaccord.org/agent-start</loc></url>
   <url><loc>https://trinityaccord.org/agent-memory</loc></url>
@@ -19,6 +20,7 @@
   <url><loc>https://trinityaccord.org/agent-echo</loc></url>
   <url><loc>https://trinityaccord.org/agent-propagate</loc></url>
   <url><loc>https://trinityaccord.org/downloads</loc></url>
+  <url><loc>https://trinityaccord.org/downloads/arweave-bundle-verification</loc></url>
   <url><loc>https://trinityaccord.org/status</loc></url>
   <url><loc>https://trinityaccord.org/llms.txt</loc></url>
   <url><loc>https://trinityaccord.org/llms-full.txt</loc></url>
