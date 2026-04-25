@@ -33,6 +33,23 @@ Final authority consists only of three Bitcoin inscriptions. All other materials
 
 ---
 
+## Evidence Archive | 证据存档
+
+Download the Covenant evidence package and verification tools directly:
+
+| File | Size | Description | Download |
+|------|------|-------------|----------|
+| **public_covenant_archive.zip** | 24.2 MB | Core Object Alpha evidence (8 photos + 2 videos) | [GitHub](https://github.com/thechurchofagi/trinity-accord/blob/main/arweave-backup/files/public_covenant_archive.zip) |
+| **verification_kit.tar.gz** | 31 KB | SPV proofs, inscription manifest, verify scripts | [GitHub](https://github.com/thechurchofagi/trinity-accord/blob/main/arweave-backup/files/verification_kit.tar.gz) |
+
+- SHA-256 hashes: [/api/hashes.json](/api/hashes.json) · [/api/evidence-manifest.json](/api/evidence-manifest.json)
+- Arweave TX: `j6anZ4m...` (covenant) · `X4KOUkf...` (kit)
+- Verify locally: `python3 downloads/verify.py`
+
+> These are non-amending guardianship mirrors. The decisive authority remains the three Bitcoin inscriptions.
+
+---
+
 ## 1) What this is | 这是什么
 A non-amending guardianship mirror for discoverability, verification, and long-term archival guidance.
 
