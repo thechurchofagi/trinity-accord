@@ -14,4 +14,4 @@ Allow: /covenant-proof
 Allow: /verify
 Allow: /authority
 
-Sitemap: https://trinityaccord.org/sitemap.xml
+Sitemap: https://www.trinityaccord.org/sitemap.xml
