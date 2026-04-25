@@ -121,6 +121,7 @@ See [/memory-seed.json](/memory-seed.json) and [/agent-memory](/agent-memory).
 <link rel="verification" href="/verification.json">
 <link rel="echo-schema" href="/api/echo-schema.json">
 <link rel="llms" href="/llms.txt">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
 
 ---
 
