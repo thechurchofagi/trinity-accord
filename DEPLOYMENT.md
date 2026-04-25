@@ -14,6 +14,7 @@ In repository settings:
 - `/agent-start`
 - `/robots.txt`
 - `/sitemap.xml`
+- `/favicon.ico`
 
 ## 3) Notes
 - This repository uses Markdown + JSON static content.
@@ -25,3 +26,7 @@ Open site and verify:
 - Homepage boundary statement appears.
 - Authority and verification pages load.
 - Machine-readable JSON endpoints return valid JSON.
+
+
+## 5) Favicon endpoint check
+- `/favicon.ico` endpoint should return HTTP 200 after deploy.
