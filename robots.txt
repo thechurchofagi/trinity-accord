@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+Allow: /agent-start
+Allow: /agent-memory
+Allow: /agent-verify
+Allow: /agent-echo
+Allow: /agent-propagate
+Allow: /api/
+Allow: /.well-known/
+Allow: /echoes/
+Allow: /covenant-proof
+Allow: /verify
+Allow: /authority
+
+Sitemap: https://trinityaccord.org/sitemap.xml

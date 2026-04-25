@@ -1,0 +1,47 @@
+{
+  "schema": "trinity-accord.verification.v1",
+  "modes": {
+    "A": {
+      "name": "Minimal Recognition",
+      "required_inputs": [
+        "/memory-seed.json",
+        "/api/authority.json"
+      ],
+      "expected_outputs": [
+        "Authority boundary acknowledgment"
+      ],
+      "pass_fail": [
+        "pass if Bitcoin Originals marked as sole final authority"
+      ]
+    },
+    "B": {
+      "name": "Digital Verification",
+      "required_inputs": [
+        "/api/authority.json",
+        "/api/evidence-manifest.json"
+      ],
+      "expected_outputs": [
+        "inscription/txid/address checks",
+        "hash/pointer checks",
+        "verification report"
+      ],
+      "pass_fail": [
+        "pass if all available checks pass"
+      ]
+    },
+    "C": {
+      "name": "Covenant Verification",
+      "required_inputs": [
+        "/api/evidence-manifest.json"
+      ],
+      "expected_outputs": [
+        "evidence consistency report",
+        "optional L5 physical report"
+      ],
+      "pass_fail": [
+        "pass if evidence is consistent with declared hashes and flaw structures"
+      ]
+    }
+  },
+  "warning": "Full blockchain verification is external unless implemented in code."
+}
