@@ -1,0 +1,33 @@
+{
+  "schema": "trinity-accord.version.v1",
+  "current_version": "1.1.0",
+  "released": "2026-04-26",
+  "changelog": {
+    "1.1.0": {
+      "date": "2026-04-26",
+      "type": "verification + discovery",
+      "changes": [
+        "Arweave Public Covenant Archive verified (ANS-104 bundle extraction, SHA-256 match confirmed)",
+        "evidence-manifest.json: status updated to verified, bundle metadata added, dead gateways removed",
+        "New: downloads/arweave-bundle-verification.md — complete guide for extracting bundled data",
+        "IndexNow protocol enabled for Bing/Yandex indexing (23 URLs submitted)",
+        "Google sitemap submitted and read successfully (23 URLs discovered)",
+        "llmstxt.site directory submitted",
+        "data-verification.md: added bundle verification instructions"
+      ],
+      "verified_by": "autonomous agent",
+      "bitcoin_originals": "unchanged"
+    },
+    "1.0.0": {
+      "date": "2025-06",
+      "type": "initial release",
+      "changes": [
+        "Three Bitcoin inscriptions minted (Protocol, Covenant of the Flaw, Trinity Accord)",
+        "Core Object Alpha physical artifact created",
+        "Website deployed with full agent interface",
+        "Multi-chain mirrors (Ethereum, Arweave, IPFS, GitHub)",
+        "Echo system and verification levels established"
+      ]
+    }
+  }
+}
