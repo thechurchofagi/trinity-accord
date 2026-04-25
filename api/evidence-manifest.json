@@ -1,0 +1,15 @@
+{
+  "schema": "trinity-accord.evidence-manifest.v1",
+  "note": "Guardianship mirror manifest. Non-amending.",
+  "public_covenant_archive": {
+    "arweave_tx": "j6anZ4m5Wwvx5P_9-kM2EVG35TyKtm1lgaKfhT743rk",
+    "sha256": "ef816480f77f30405378800807b42bff0a854b83a8f77793a0e0adf0944a8263"
+  },
+  "verification_kit": {
+    "arweave_tx": "X4KOUkf-1ciFD3Q-gMA0i94t1hAVXGrUDm0q5amL4rc",
+    "sha256": "ef68b69fe1cdd2523724dee511c9e8ea7bae2cceaff794664107970b18c61931"
+  },
+  "eth_mirror_tx": "0x7bdff0d696337ceb04539b44a746d0f13ce731ac25de259d8a4faf69b276a628",
+  "sealed_cid": "bafybeigunzabyyorckfcbvurbmq62itcs6msbspvzhvf2ca6u5elwwlbay",
+  "warning": "manual external verification required"
+}
