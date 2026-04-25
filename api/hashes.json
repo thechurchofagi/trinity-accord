@@ -1,13 +1,16 @@
 {
   "schema": "trinity-accord.hashes.v1",
+  "github_mirror": "https://github.com/thechurchofagi/trinity-accord",
   "reference_hashes": [
     {
       "name": "public_covenant_archive_sha256",
-      "value": "ef816480f77f30405378800807b42bff0a854b83a8f77793a0e0adf0944a8263"
+      "value": "ef816480f77f30405378800807b42bff0a854b83a8f77793a0e0adf0944a8263",
+      "github_path": "arweave-backup/files/public_covenant_archive.zip"
     },
     {
       "name": "verification_kit_sha256",
-      "value": "ef68b69fe1cdd2523724dee511c9e8ea7bae2cceaff794664107970b18c61931"
+      "value": "ef68b69fe1cdd2523724dee511c9e8ea7bae2cceaff794664107970b18c61931",
+      "github_path": "arweave-backup/files/verification_kit.tar.gz"
     }
   ]
 }
