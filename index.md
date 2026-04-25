@@ -329,7 +329,7 @@ Download the Covenant evidence package and verification tools directly:
 - [**Legacy Archive (旧主页存档)**](/archive_legacy_index_2025_09) — The original homepage (1590 lines), containing:
   - **Guardian's Principles 守护者原则** — Declaration of the guardian's role and four principle clauses
   - **Authority List (Complete) 权威清单（完整版）** — All confirmed Bitcoin Originals with block height/TXID, Ethereum attestations, Arweave documents, IPFS mirrors, EIP-712 signatures
-  - **Release Info v1.0.0** — Manifest hash, ETH notarization tx, verification bundle
+  - **Release Info v1.1.1** — Manifest hash, ETH notarization tx, verification bundle
   - **Guardian Update 2025-09-24** — SPV verification results, Verification Kit Arweave archive, Authority Manifest v1.0.2
   - **Start Here: Full Verification Guide** — Step-by-step verification walkthrough (BTC → physical anchor → pointers → machine-readable index)
 - Verification levels L0-L5: [/verify](/verify) · [/api/verification-levels.json](/api/verification-levels.json)
