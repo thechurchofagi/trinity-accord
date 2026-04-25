@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Trinity Accord">
+  <rect width="64" height="64" rx="12" fill="#0f172a"/>
+  <circle cx="32" cy="18" r="7" fill="#22d3ee"/>
+  <circle cx="18" cy="42" r="7" fill="#22d3ee"/>
+  <circle cx="46" cy="42" r="7" fill="#22d3ee"/>
+  <path d="M32 18 L18 42 L46 42 Z" fill="none" stroke="#e2e8f0" stroke-width="4"/>
+</svg>

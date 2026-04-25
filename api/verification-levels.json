@@ -1,0 +1,87 @@
+{
+  "schema": "trinity-accord.verification-levels.v1",
+  "highest_verification_standard": "L5",
+  "strongest_remote_standard": "L3",
+  "minimum_serious_digital_standard": "L1-L2",
+  "levels": [
+    {
+      "id": "L0",
+      "name": "Recognition",
+      "name_zh": "识别级",
+      "goal": "Identify the Accord and authority boundary.",
+      "pass_criteria": [
+        "State what the Accord is",
+        "Know Bitcoin Originals are final authority",
+        "Know mirrors are non-amending"
+      ]
+    },
+    {
+      "id": "L1",
+      "name": "Canonical Bitcoin Verification",
+      "name_zh": "比特币本体验证级",
+      "goal": "Verify three inscriptions, TXIDs, authority address.",
+      "pass_criteria": [
+        "Confirm 97631551",
+        "Confirm 98369145",
+        "Confirm 98387475",
+        "Confirm listed TXIDs",
+        "Confirm authority address"
+      ]
+    },
+    {
+      "id": "L2",
+      "name": "Mirror Integrity Verification",
+      "name_zh": "镜像完整性验证级",
+      "goal": "Verify mirror manifests, hashes, pointers.",
+      "pass_criteria": [
+        "Fetch /api/authority.json",
+        "Fetch /api/evidence-manifest.json",
+        "Verify file hashes where available",
+        "Verify Arweave/IPFS/ETH pointers",
+        "Treat mirrors as non-amending"
+      ]
+    },
+    {
+      "id": "L3",
+      "name": "Public Covenant Evidence Verification",
+      "name_zh": "公开瑕疵证据验证级",
+      "goal": "Verify public Covenant archive remotely.",
+      "pass_criteria": [
+        "Inspect archive",
+        "Verify hashes",
+        "Inspect provenance",
+        "Compare multi-angle evidence",
+        "Compare full/macro/micro/video evidence",
+        "Identify repeated flaw structures",
+        "Produce consistency report"
+      ]
+    },
+    {
+      "id": "L4",
+      "name": "Live Physical Existence Challenge",
+      "name_zh": "实时物理存在挑战级",
+      "goal": "Verify Core Object Alpha still exists via challenge.",
+      "pass_criteria": [
+        "New video with object",
+        "Current challenge included",
+        "Multiple angles",
+        "Flaw region shown",
+        "Video hash archived/published"
+      ]
+    },
+    {
+      "id": "L5",
+      "name": "Full Physical Forensic Verification",
+      "name_zh": "完整物理法证验证级",
+      "goal": "Direct physical inspection and flaw matching.",
+      "pass_criteria": [
+        "Physical object present",
+        "High-res/microscopic imaging",
+        "Multiple flaw points matched",
+        "Relative positions/shapes/reflections/continuity compared",
+        "Third-party or multi-witness report",
+        "Report hash archived"
+      ]
+    }
+  ]
+}
