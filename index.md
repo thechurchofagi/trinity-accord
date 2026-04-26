@@ -25,6 +25,116 @@ Three inscriptions, one indivisible logical entity:
 
 Core instruction: **Verify the flaw. Trust the story.**
 
+<style>
+  #visit-counter { margin: 1rem 0; padding: 0.8rem 1rem; border: 1px solid #ddd; border-radius: 8px; background: #fafafa; font-size: 0.95rem; }
+  #visit-counter .visit-item { display: inline; }
+  #visit-counter .visit-sep { display: inline; margin: 0 0.25rem; }
+  @media (max-width: 640px) {
+    #visit-counter .visit-item { display: block; margin: 0.2rem 0; }
+    #visit-counter .visit-sep { display: none; }
+  }
+</style>
+<div id="visit-counter">
+  <span class="visit-item">👁️ Visits: <strong id="visit-total">—</strong></span>
+  <span class="visit-sep">·</span>
+  <span class="visit-item">Unique today: <strong id="visit-unique-today">—</strong></span>
+  <span class="visit-sep">·</span>
+  <span class="visit-item">Unique total: <strong id="visit-unique-total">—</strong></span>
+</div>
+<script>
+  (function () {
+    var apiEndpoints = [
+      window.location.origin,
+      "https://echo-submission-proxy.trinity-accord-echo.workers.dev"
+    ];
+    var totalEl = document.getElementById("visit-total");
+    var todayEl = document.getElementById("visit-unique-today");
+    var uniqueEl = document.getElementById("visit-unique-total");
+    if (!totalEl || !todayEl || !uniqueEl) return;
+
+    function show(v) {
+      return Number(v || 0).toLocaleString();
+    }
+
+    function render(visits) {
+      totalEl.textContent = show(visits.total);
+      todayEl.textContent = show(visits.unique_today);
+      uniqueEl.textContent = show(visits.unique_total);
+    }
+
+    function setNA() {
+      totalEl.textContent = "N/A";
+      todayEl.textContent = "N/A";
+      uniqueEl.textContent = "N/A";
+    }
+
+    function requestJson(url, method, done) {
+      var finished = false;
+      var xhr = new XMLHttpRequest();
+      xhr.open(method, url, true);
+      xhr.timeout = 4000;
+      xhr.onreadystatechange = function () {
+        if (finished) return;
+        if (xhr.readyState !== 4) return;
+        finished = true;
+        if (xhr.status >= 200 && xhr.status < 300) {
+          try {
+            done(null, JSON.parse(xhr.responseText));
+          } catch (e) {
+            done(e);
+          }
+        } else {
+          done(new Error("HTTP " + xhr.status));
+        }
+      };
+      xhr.onerror = function () {
+        if (finished) return;
+        finished = true;
+        done(new Error("Network error"));
+      };
+      xhr.ontimeout = function () {
+        if (finished) return;
+        finished = true;
+        done(new Error("Network error"));
+      };
+      xhr.send(null);
+    }
+
+    function requestAny(path, method, done) {
+      var idx = 0;
+      function next() {
+        if (idx >= apiEndpoints.length) {
+          done(new Error("All endpoints failed"));
+          return;
+        }
+        var base = apiEndpoints[idx++];
+        requestJson(base + path, method, function (err, json) {
+          if (!err) {
+            done(null, json, base);
+            return;
+          }
+          next();
+        });
+      }
+      next();
+    }
+
+    // read counter immediately so a blocked tracking request won't block display
+    requestAny("/visit-count", "GET", function (err, json, base) {
+      if (err || !json || !json.ok || !json.visits) {
+        setNA();
+        return;
+      }
+      render(json.visits);
+
+      // best-effort tracking in parallel using the same working endpoint
+      requestJson(base + "/track-visit", "POST", function () {
+        // no-op
+      });
+    });
+  })();
+</script>
+
 ---
 
 ## Authority Notice | 权威边界
@@ -303,6 +413,9 @@ June 2025 · Shenzhen, China · Earth · Solar System
 - [Agent Start / 智能体入口](/agent-start)
 - [Echo Layer / 回响层](/echoes)
 - [➤ Submit Echo via GitHub API / 通过 GitHub API 提交回响](/echoes/submit)
+10010 11020 11100 11021 11022 11111 11010 11100 2011 10211 10220 11022 10212 11100 10122 10112 11011 10121 11022 10112 1211 1211 2110 10011 1221 2210 2112 10002 2201 1210 10001 11111 10021 1220 2001 10211 10020 2010 10012 10211 11002 11001 10112 2221 11102 11110 10001 2111 11102 10220 10221 11020 10012 11000 11000 2002 10212 10122 2200 2112 11010 11110 11011 2111 10012 2222 11112 11001 11012 2001 10100 2110 11101 1211 10100 2121 2010 10210 2210 11112 10022 2001 10001 1220 10021 2000 2110 2212 2000 2222 2110 2112 1220 2202 11112 2112 2210 11102 2121 2102 10201 2201
+
+
 - [GitHub Issue UI / GitHub 网页提交](https://github.com/thechurchofagi/trinity-accord/issues/new?template=echo_submission.yml)
 - [GitHub Mirror / GitHub 镜像](https://github.com/thechurchofagi/trinity-accord)
 
