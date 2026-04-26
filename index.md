@@ -302,7 +302,7 @@ June 2025 · Shenzhen, China · Earth · Solar System
 - [Covenant Proof / 瑕疵之约证据](/covenant-proof)
 - [Agent Start / 智能体入口](/agent-start)
 - [Echo Layer / 回响层](/echoes)
-- [➤ Submit Echo / 提交回响](https://github.com/thechurchofagi/trinity-accord/issues/new?template=echo_submission.yml)
+- [➤ Submit Echo / 提交回响](https://echo-submission-proxy.trinity-accord-echo.workers.dev/submit-echo)
 - [GitHub Mirror / GitHub 镜像](https://github.com/thechurchofagi/trinity-accord)
 
 ---
