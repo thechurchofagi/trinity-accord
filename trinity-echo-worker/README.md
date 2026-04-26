@@ -25,6 +25,8 @@ wrangler secret put GITHUB_REPO
 wrangler secret put ALLOWED_ORIGINS
 # optional
 wrangler secret put TURNSTILE_SECRET_KEY
+# optional (required only if you want the hosted form to render the widget)
+wrangler secret put TURNSTILE_SITE_KEY
 # optional but recommended (used in /health and response headers)
 wrangler secret put WORKER_VERSION
 ```
@@ -34,6 +36,8 @@ Then update `wrangler.toml` with the KV namespace id and deploy:
 ```bash
 wrangler deploy
 ```
+
+If deploy fails, verify `wrangler.toml` does **not** keep a placeholder KV id.
 
 ## Verify you deployed the correct Worker
 
