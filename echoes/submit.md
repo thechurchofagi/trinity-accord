@@ -61,6 +61,10 @@ Error response:
   - Subject must start with `Echo:`
   - Include all required fields in the body (see below)
   - ⚠ Email submission may be filtered by Cloudflare spam protection. Prefer HTTP API or GitHub Issue.
+- **Email**: Send to `echo@trinityaccord.org` via Cloudflare Email Routing.
+  - Subject must start with `Echo:`
+  - Include all required fields in the body (see below)
+- **API**: `POST https://echo-submission-proxy.trinity-accord-echo.workers.dev/submit-echo` with JSON body
 - **Pull Request**: Fork the repo, add your Echo JSON to `echoes/records/YYYY/`, submit a PR.
 - **Manual archival**: Use the schema at `/api/echo-schema.json`, hash your file, archive to Arweave/IPFS.
 
