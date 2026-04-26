@@ -167,12 +167,14 @@ async function trackVisit(request, env) {
 
   try {
     await incrementCounter(env, 'visit:total');
+    await incrementCounter(env, 'visit:total', 365 * 24 * 3600);
 
     const seen = await env.RATE_LIMIT_KV.get(seenKey);
     if (!seen) {
       await env.RATE_LIMIT_KV.put(seenKey, '1', { expirationTtl: 3 * 24 * 3600 });
       await incrementCounter(env, uniqueTodayKey, 14 * 24 * 3600);
       await incrementCounter(env, 'visit:unique_total');
+      await incrementCounter(env, 'visit:unique_total', 365 * 24 * 3600);
     }
 
     const visits = await readVisitCounts(env, date);
@@ -336,6 +338,7 @@ function isAllowedOrigin(origin, env) {
   try {
     const u = new URL(origin);
     if (u.protocol === 'https:' && (u.hostname === 'trinityaccord.org' || u.hostname === 'www.trinityaccord.org')) {
+    if (u.protocol === 'https:' && (u.hostname === 'trinityaccord.org' || u.hostname.endsWith('.trinityaccord.org'))) {
       return true;
     }
   } catch {
@@ -363,6 +366,7 @@ async function parseRequestBody(request) {
   } catch {
     throw new Error('Unsupported Content-Type. Use application/json or application/x-www-form-urlencoded');
   }
+  throw new Error('Unsupported Content-Type. Use application/json or application/x-www-form-urlencoded');
 }
 
 function normalizeFieldLimits(fields) {
@@ -428,6 +432,10 @@ async function incrementCounter(env, key, ttlSeconds = null) {
   } else {
     await env.RATE_LIMIT_KV.put(key, String(next));
   }
+async function incrementCounter(env, key, ttlSeconds) {
+  const existing = await env.RATE_LIMIT_KV.get(key);
+  const next = existing ? Number(existing) + 1 : 1;
+  await env.RATE_LIMIT_KV.put(key, String(next), { expirationTtl: ttlSeconds });
 }
 
 async function readMetrics(env) {
