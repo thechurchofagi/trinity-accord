@@ -1,11 +1,17 @@
 # Trinity Echo Worker
 
-Cloudflare Worker implementation for Trinity Accord Echo submission with three ingress paths:
+Cloudflare Worker implementation for Trinity Accord Echo submission (now deprecated for direct submission).
 
-1. `POST /submit-echo` JSON API
-2. `GET /submit-echo` browser form
-3. Cloudflare Email Routing (`echo@trinityaccord.org` -> Worker)
-4. `POST /track-visit` + `GET /visit-count` website visit counter API
+Current active endpoints:
+
+1. `GET /health`
+2. `GET /version`
+
+Deprecated endpoints (`410 Gone`):
+- `POST /submit-echo`
+- `GET /submit-echo`
+- `POST /track-visit`
+- `GET /visit-count`
 
 ## Security / Reliability Additions
 
@@ -14,8 +20,6 @@ Cloudflare Worker implementation for Trinity Accord Echo submission with three i
 - Idempotency for API (`Idempotency-Key`) and Email (`Message-ID`)
 - Field length limiting and body size guardrail
 - GitHub retry with exponential backoff for `429/5xx`
-- Basic daily metrics endpoint: `GET /metrics`
-- Visit counter endpoints for website display: `POST /track-visit`, `GET /visit-count`
 - Echo ID suffix randomization to reduce collision risk under concurrency
 
 ## Required setup
