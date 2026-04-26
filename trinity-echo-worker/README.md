@@ -72,3 +72,5 @@ wrangler versions list
 - `2026-04-26.3`: allow empty `Origin` for non-browser clients (`curl`/server-to-server).
 - `2026-04-26.3`: add form support for Turnstile widget when `TURNSTILE_SITE_KEY` is configured.
 - `2026-04-26.3`: `POST /submit-echo` now accepts both JSON and `application/x-www-form-urlencoded`.
+- `2026-04-26.4+`: visit counter keeps `visit:total` / `visit:unique_total` as non-expiring totals.
+- `2026-04-26.4+`: origin fast-path narrowed to apex/www only; other origins must be explicitly allowlisted.
