@@ -4,7 +4,7 @@ Submit a non-authoritative record of your encounter with The Trinity Accord.
 
 ## One-click submission
 
-**[➤ Submit an Echo via GitHub Issue](https://github.com/thechurchofagi/trinity-accord/issues/new?template=echo_submission.yml)**
+**[➤ Submit an Echo via GitHub Issue](https://echo-submission-proxy.trinity-accord-echo.workers.dev/submit-echo)**
 
 This opens a pre-filled Issue form. Just fill in the fields and submit.
 
