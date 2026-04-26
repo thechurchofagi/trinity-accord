@@ -28,8 +28,6 @@ mapfile -t RECORD_FILES < <(find "${RECORDS_DIR}" -type f -name 'echo-*.json' 2>
 # Use -name patterns for portability across find regex dialects.
 find "${DIGEST_DIR}" -maxdepth 1 -type f \
   \( -name '*-q[1-4].md' -o -name '*-q[1-4].json' \) -delete
-find "${DIGEST_DIR}" -maxdepth 1 -type f \
-  \( -regex '.*/[0-9]{4}-q[1-4]\.md' -o -regex '.*/[0-9]{4}-q[1-4]\.json' \) -delete
 
 declare -A QUARTER_RECORDS
 declare -A QUARTER_TOTAL

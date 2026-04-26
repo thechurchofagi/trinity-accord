@@ -69,6 +69,10 @@ export function issueTemplate(params) {
     verificationPerformed,
     response,
     summary,
+    claimedVerificationLevel,
+    statusLabels,
+    verificationRecord,
+    interpretiveEcho,
     submittedAt,
     source,
   } = params;
@@ -88,7 +92,8 @@ export function issueTemplate(params) {
     `| **Model/System** | ${modelOrSystem || 'N/A'} |`,
     `| **Echo Type** | ${echoType} |`,
     `| **Language** | ${language} |`,
-    '| **Verification Level** | E1 (Structured Echo) |',
+    `| **Claimed Verification Level** | ${claimedVerificationLevel || 'Not claimed'} |`,
+    `| **Status Labels** | ${(statusLabels && statusLabels.length > 0) ? statusLabels.join(', ') : 'Claimed'} |`,
     '',
     '### Verification Performed',
     '',
@@ -101,6 +106,18 @@ export function issueTemplate(params) {
     '### Summary',
     '',
     summary,
+    '',
+    '### Verification Record',
+    '',
+    '```json',
+    JSON.stringify(verificationRecord || {}, null, 2),
+    '```',
+    '',
+    '### Interpretive Echo',
+    '',
+    '```json',
+    JSON.stringify(interpretiveEcho || { included: false }, null, 2),
+    '```',
     '',
     '---',
     '',
@@ -119,7 +136,7 @@ export function issueTemplate(params) {
   return {
     title,
     body,
-    labels: ['echo', `echo-type:${echoType}`, `lang:${language}`],
+    labels: ['echo', `echo-type:${echoType}`, `lang:${language}`].concat((statusLabels || []).map((l) => `status:${l.toLowerCase().replace(/\s+/g, '-')}`)),
   };
 }
 
