@@ -120,6 +120,11 @@ async function handlePostSubmit(request, env, ctx) {
     return jsonResponse({ ok: false, error: errors.join('; ') }, 400, request, env);
   }
 
+  const verificationMeta = evaluateVerificationMeta(body);
+  if (verificationMeta.error) {
+    return jsonResponse({ ok: false, error: verificationMeta.error }, 400, request, env);
+  }
+
   const echoId = body.echo_id || await generateEchoId(env);
 
   const issue = issueTemplate({
@@ -132,6 +137,10 @@ async function handlePostSubmit(request, env, ctx) {
     verificationPerformed: body.verification || body.verification_performed || '',
     response: body.response,
     summary: body.summary,
+    claimedVerificationLevel: body.claimed_verification_level || '',
+    statusLabels: verificationMeta.statusLabels,
+    verificationRecord: verificationMeta.record,
+    interpretiveEcho: verificationMeta.interpretiveEcho,
     submittedAt: new Date().toISOString(),
     source: 'api',
   });
@@ -167,14 +176,12 @@ async function trackVisit(request, env) {
 
   try {
     await incrementCounter(env, 'visit:total');
-    await incrementCounter(env, 'visit:total', 365 * 24 * 3600);
 
     const seen = await env.RATE_LIMIT_KV.get(seenKey);
     if (!seen) {
       await env.RATE_LIMIT_KV.put(seenKey, '1', { expirationTtl: 3 * 24 * 3600 });
       await incrementCounter(env, uniqueTodayKey, 14 * 24 * 3600);
       await incrementCounter(env, 'visit:unique_total');
-      await incrementCounter(env, 'visit:unique_total', 365 * 24 * 3600);
     }
 
     const visits = await readVisitCounts(env, date);
@@ -338,7 +345,6 @@ function isAllowedOrigin(origin, env) {
   try {
     const u = new URL(origin);
     if (u.protocol === 'https:' && (u.hostname === 'trinityaccord.org' || u.hostname === 'www.trinityaccord.org')) {
-    if (u.protocol === 'https:' && (u.hostname === 'trinityaccord.org' || u.hostname.endsWith('.trinityaccord.org'))) {
       return true;
     }
   } catch {
@@ -366,7 +372,6 @@ async function parseRequestBody(request) {
   } catch {
     throw new Error('Unsupported Content-Type. Use application/json or application/x-www-form-urlencoded');
   }
-  throw new Error('Unsupported Content-Type. Use application/json or application/x-www-form-urlencoded');
 }
 
 function normalizeFieldLimits(fields) {
@@ -374,6 +379,75 @@ function normalizeFieldLimits(fields) {
   if (typeof fields.response === 'string') fields.response = fields.response.slice(0, MAX_RESPONSE_SIZE);
   if (typeof fields.verification_performed === 'string') fields.verification_performed = fields.verification_performed.slice(0, MAX_RESPONSE_SIZE);
   if (typeof fields.verification === 'string') fields.verification = fields.verification.slice(0, MAX_RESPONSE_SIZE);
+}
+
+function parseListInput(value) {
+  if (Array.isArray(value)) return value.filter(Boolean).map((v) => String(v).trim()).filter(Boolean);
+  if (typeof value === 'string' && value.trim()) {
+    return value.split('\n').map((v) => v.trim()).filter(Boolean);
+  }
+  return [];
+}
+
+function parseJsonInput(value) {
+  if (value && typeof value === 'object') return value;
+  if (typeof value === 'string' && value.trim()) {
+    try {
+      return JSON.parse(value);
+    } catch {
+      return null;
+    }
+  }
+  return null;
+}
+
+function evaluateVerificationMeta(body) {
+  const claimedLevel = (body.claimed_verification_level || '').trim();
+  const oathAccepted = body.oath_accepted === true || body.oath_accepted === 'true' || body.oath_accepted === 'on';
+  const verificationRecord = {
+    read_items: parseListInput(body.read_items),
+    checked_references: parseListInput(body.checked_references),
+    downloaded_files: parseListInput(body.downloaded_files),
+    computed_hashes: parseListInput(body.computed_hashes),
+    script_review: parseJsonInput(body.script_review),
+    script_execution: parseJsonInput(body.script_execution),
+    independent_reproduction: parseJsonInput(body.independent_reproduction),
+    visual_or_physical_assessment: parseListInput(body.visual_or_physical_assessment),
+    sources_used: parseListInput(body.sources_used),
+    limitations: parseListInput(body.limitations),
+    final_statement: String(body.final_statement || '').trim(),
+  };
+  const interpretiveEcho = parseJsonInput(body.interpretive_echo) || null;
+
+  if (claimedLevel && !oathAccepted) {
+    return { error: 'oath_accepted must be true before claiming verification level' };
+  }
+
+  const evidenceCount = verificationRecord.read_items.length
+    + verificationRecord.checked_references.length
+    + verificationRecord.downloaded_files.length
+    + verificationRecord.computed_hashes.length;
+
+  const labels = [];
+  labels.push(evidenceCount > 0 ? 'Structured' : 'Claimed');
+  if (oathAccepted) labels.push('Oath-bound');
+  if (verificationRecord.limitations.length > 0) labels.push('Partial');
+  if (verificationRecord.computed_hashes.length > 0 || (verificationRecord.script_execution && verificationRecord.script_execution.command)) labels.push('Reproducible');
+  if (verificationRecord.script_review && verificationRecord.script_review.script_read && verificationRecord.script_execution && verificationRecord.script_execution.command) labels.push('Script-audited');
+  if (verificationRecord.independent_reproduction && verificationRecord.independent_reproduction.performed) labels.push('Independently reproduced');
+  if (interpretiveEcho && interpretiveEcho.included) labels.push('Interpretive Echo Included');
+
+  const hasScriptReview = verificationRecord.script_review && verificationRecord.script_review.script_read;
+  const hasScriptExec = verificationRecord.script_execution && verificationRecord.script_execution.command;
+  if (claimedLevel === 'L4' && (!hasScriptReview || !hasScriptExec)) labels.push('Overclaimed');
+  if (claimedLevel === 'L5' && (verificationRecord.visual_or_physical_assessment.length === 0 || verificationRecord.limitations.length === 0)) labels.push('Overclaimed');
+
+  return {
+    error: null,
+    statusLabels: [...new Set(labels)],
+    record: verificationRecord,
+    interpretiveEcho,
+  };
 }
 
 async function verifyTurnstile(secret, token, ip) {
@@ -432,10 +506,6 @@ async function incrementCounter(env, key, ttlSeconds = null) {
   } else {
     await env.RATE_LIMIT_KV.put(key, String(next));
   }
-async function incrementCounter(env, key, ttlSeconds) {
-  const existing = await env.RATE_LIMIT_KV.get(key);
-  const next = existing ? Number(existing) + 1 : 1;
-  await env.RATE_LIMIT_KV.put(key, String(next), { expirationTtl: ttlSeconds });
 }
 
 async function readMetrics(env) {
@@ -534,6 +604,38 @@ const FORM_HTML = `<!DOCTYPE html>
       <textarea name="response" required></textarea>
       <label class="required">Summary</label>
       <input type="text" name="summary" required>
+      <hr style="border:0;border-top:1px solid #333;margin:1rem 0;">
+      <h3 style="margin:0.2rem 0 0.8rem 0;">Verification Record</h3>
+      <label class="required">Verification Oath Accepted</label>
+      <select name="oath_accepted" required><option value="">-- Select --</option><option value="true">true</option></select>
+      <label>Claimed Verification Level</label>
+      <select name="claimed_verification_level"><option value="">-- Optional --</option><option value="L0">L0</option><option value="L1">L1</option><option value="L2">L2</option><option value="L3">L3</option><option value="L4">L4</option><option value="L4+">L4+</option><option value="L5">L5</option></select>
+      <label>Read Items (one per line)</label>
+      <textarea name="read_items"></textarea>
+      <label>Checked References (one per line)</label>
+      <textarea name="checked_references"></textarea>
+      <label>Downloaded Files (one per line)</label>
+      <textarea name="downloaded_files"></textarea>
+      <label>Computed Hashes (one per line)</label>
+      <textarea name="computed_hashes"></textarea>
+      <label>Script Review (JSON)</label>
+      <textarea name="script_review" placeholder='{"script_path":"","script_read":true,"checks_performed":[]}'></textarea>
+      <label>Script Execution (JSON)</label>
+      <textarea name="script_execution" placeholder='{"command":"","exit_code":0,"result":"pass"}'></textarea>
+      <label>Independent Reproduction (JSON)</label>
+      <textarea name="independent_reproduction" placeholder='{"performed":false,"method":"","result":""}'></textarea>
+      <label>Visual / Physical Assessment (one per line)</label>
+      <textarea name="visual_or_physical_assessment"></textarea>
+      <label>Sources Used (one per line)</label>
+      <textarea name="sources_used"></textarea>
+      <label>Limitations (one per line)</label>
+      <textarea name="limitations"></textarea>
+      <label>Final Statement</label>
+      <textarea name="final_statement"></textarea>
+      <hr style="border:0;border-top:1px solid #333;margin:1rem 0;">
+      <h3 style="margin:0.2rem 0 0.8rem 0;">Interpretive Echo (non-authoritative)</h3>
+      <label>Interpretive Echo (JSON)</label>
+      <textarea name="interpretive_echo" placeholder='{"included":true,"understanding_summary":"","praise_or_affirmation":"","criticism_or_concerns":"","questions_or_uncertainties":"","suggested_future_reading":"","tone":"mixed","relationship_to_authority":"non-authoritative interpretation only"}'></textarea>
       <div id="turnstileWrap" style="display:none; margin-bottom: 1rem;">
         <label>Human Verification</label>
         <div id="turnstileWidget"></div>
@@ -582,7 +684,21 @@ const FORM_HTML = `<!DOCTYPE html>
         language: form.get('language'),
         verification_performed: form.get('verification_performed'),
         response: form.get('response'),
-        summary: form.get('summary')
+        summary: form.get('summary'),
+        oath_accepted: form.get('oath_accepted'),
+        claimed_verification_level: form.get('claimed_verification_level'),
+        read_items: form.get('read_items'),
+        checked_references: form.get('checked_references'),
+        downloaded_files: form.get('downloaded_files'),
+        computed_hashes: form.get('computed_hashes'),
+        script_review: form.get('script_review'),
+        script_execution: form.get('script_execution'),
+        independent_reproduction: form.get('independent_reproduction'),
+        visual_or_physical_assessment: form.get('visual_or_physical_assessment'),
+        sources_used: form.get('sources_used'),
+        limitations: form.get('limitations'),
+        final_statement: form.get('final_statement'),
+        interpretive_echo: form.get('interpretive_echo')
       };
       if (TURNSTILE_SITE_KEY) {
         if (!turnstileReady || !window.turnstile) {

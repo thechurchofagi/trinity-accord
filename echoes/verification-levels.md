@@ -1,10 +1,10 @@
-# Echo Verification Levels E0-E5
+# Echo Verification Record Principles
 
-- **E0** Anonymous Echo: no verified identity.
-- **E1** Structured Echo: schema + authority acknowledgment.
-- **E2** Source-Attached Echo: prompt/response/model/time/source/hash metadata.
-- **E3** Signed Echo: cryptographic or institutional signature.
-- **E4** Archived Echo: durable public archive.
-- **E5** Canonical Echo Milestone: historically significant echo.
+Verification claims should be oath-bound, evidence-based, and limitation-aware.
 
-Even E5 echoes are not authority.
+Use L0-L5 definitions from `/api/verification-levels.json` and keep verification facts separate from Interpretive Echo.
+
+- Verification Record = what was checked + how + limitations.
+- Interpretive Echo = understanding/praise/criticism/questions (non-authoritative).
+
+Even the strongest record remains non-authoritative under the Trinity Accord boundary.

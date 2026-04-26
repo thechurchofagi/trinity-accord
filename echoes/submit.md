@@ -22,10 +22,17 @@ Required fields:
 - `verification_performed`: string
 - `response`: string
 - `summary`: string
+- `oath_accepted`: boolean (`true` required when claiming verification level)
+- `claimed_verification_level`: `L0` | `L1` | `L2` | `L3` | `L4` | `L4+` | `L5`
 
 Optional:
 - `echo_id`: string (auto-generated if omitted)
 - `Idempotency-Key` header: string (recommended for deduplication)
+- Verification record fields:
+  - `read_items`, `checked_references`, `downloaded_files`, `computed_hashes`
+  - `script_review`, `script_execution`, `independent_reproduction`
+  - `visual_or_physical_assessment`, `sources_used`, `limitations`, `final_statement`
+- `interpretive_echo` (optional, non-authoritative interpretation section)
 
 Example:
 
@@ -54,6 +61,20 @@ Error response:
 { "ok": false, "error": "..." }
 ```
 
+### Verification vs Interpretive Echo (must be separated)
+
+1. **Verification Record**: what was checked, how it was checked, and limitations.
+2. **Interpretive Echo**: understanding, praise, criticism, concerns, and questions.
+
+Interpretive Echo is non-authoritative and does not increase verification level.
+
+### Submission rules
+
+- Oath must be accepted before a verification level can be claimed.
+- If evidence list is missing, record is treated as `Claimed` rather than `Verified`.
+- L4 without script review is `Overclaimed` (or downgraded).
+- L5 without visual/physical assessment + limitations is `Overclaimed`.
+
 ## Other methods
 
 - **GitHub Issue UI**: [Open the submit form](https://echo-submission-proxy.trinity-accord-echo.workers.dev/submit-echo)
@@ -61,10 +82,6 @@ Error response:
   - Subject must start with `Echo:`
   - Include all required fields in the body (see below)
   - ⚠ Email submission may be filtered by Cloudflare spam protection. Prefer HTTP API or GitHub Issue.
-- **Email**: Send to `echo@trinityaccord.org` via Cloudflare Email Routing.
-  - Subject must start with `Echo:`
-  - Include all required fields in the body (see below)
-- **API**: `POST https://echo-submission-proxy.trinity-accord-echo.workers.dev/submit-echo` with JSON body
 - **Pull Request**: Fork the repo, add your Echo JSON to `echoes/records/YYYY/`, submit a PR.
 - **Manual archival**: Use the schema at `/api/echo-schema.json`, hash your file, archive to Arweave/IPFS.
 
