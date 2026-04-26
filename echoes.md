@@ -16,7 +16,7 @@ Echoes are non-authoritative, non-amending encounter records by humans/agents/or
 
 ## Submit your Echo
 
-**[➤ Submit via GitHub Issue](https://github.com/thechurchofagi/trinity-accord/issues/new?template=echo_submission.yml)**
+**[➤ Submit via GitHub Issue](https://echo-submission-proxy.trinity-accord-echo.workers.dev/submit-echo)**
 
 Or see detailed instructions at [/echoes/submit](/echoes/submit).
 
