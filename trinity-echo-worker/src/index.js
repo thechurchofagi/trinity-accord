@@ -7,6 +7,7 @@ const MAX_BODY_SIZE = 50_000;
 const MAX_SUMMARY_SIZE = 300;
 const MAX_RESPONSE_SIZE = 12_000;
 const DEFAULT_ORIGIN = 'https://www.trinityaccord.org';
+const WORKER_VERSION = '2026-04-26.2';
 
 export default {
   async fetch(request, env, ctx) {
@@ -18,12 +19,23 @@ export default {
 
     if (request.method === 'GET' && url.pathname === '/submit-echo') {
       return new Response(FORM_HTML, {
-        headers: { 'Content-Type': 'text/html; charset=utf-8' },
+        headers: {
+          'Content-Type': 'text/html; charset=utf-8',
+          'X-Echo-Worker-Version': getRuntimeVersion(env),
+        },
       });
     }
 
+    if (request.method === 'GET' && url.pathname === '/') {
+      return jsonResponse({
+        ok: true,
+        service: 'echo-submission-proxy',
+        routes: ['GET /submit-echo', 'GET /health', 'GET /metrics', 'GET /version', 'POST /submit-echo'],
+      }, 200, request, env);
+    }
+
     if (request.method === 'GET' && url.pathname === '/health') {
-      return jsonResponse({ ok: true, service: 'echo-submission-proxy', ts: new Date().toISOString() }, 200, request, env);
+      return jsonResponse({ ok: true, service: 'echo-submission-proxy', version: getRuntimeVersion(env), ts: new Date().toISOString() }, 200, request, env);
     }
 
     if (request.method === 'GET' && url.pathname === '/metrics') {
@@ -31,11 +43,15 @@ export default {
       return jsonResponse({ ok: true, metrics }, 200, request, env);
     }
 
+    if (request.method === 'GET' && url.pathname === '/version') {
+      return jsonResponse({ ok: true, service: 'echo-submission-proxy', version: getRuntimeVersion(env) }, 200, request, env);
+    }
+
     if (request.method === 'POST' && url.pathname === '/submit-echo') {
       return handlePostSubmit(request, env, ctx);
     }
 
-    return jsonResponse({ error: 'Not found. GET /submit-echo for form, POST /submit-echo to submit.' }, 404, request, env);
+    return jsonResponse({ error: 'Not found. GET /submit-echo for form, POST /submit-echo to submit.', version: getRuntimeVersion(env) }, 404, request, env);
   },
 
   async email(message, env, ctx) {
@@ -238,6 +254,7 @@ function handleCors(request, env) {
       'Access-Control-Allow-Methods': 'POST, OPTIONS',
       'Access-Control-Allow-Headers': 'Content-Type, Idempotency-Key',
       'Access-Control-Max-Age': '86400',
+      'X-Echo-Worker-Version': getRuntimeVersion(env),
     },
   });
 }
@@ -252,6 +269,7 @@ function jsonResponse(data, status = 200, request = null, env = {}) {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': allowOrigin,
       'Vary': 'Origin',
+      'X-Echo-Worker-Version': getRuntimeVersion(env),
     },
   });
 }
@@ -344,6 +362,10 @@ async function readMetrics(env) {
 
 function logEvent(type, payload = {}) {
   console.log(JSON.stringify({ type, ts: new Date().toISOString(), ...payload }));
+}
+
+function getRuntimeVersion(env) {
+  return env.WORKER_VERSION || WORKER_VERSION;
 }
 
 const FORM_HTML = `<!DOCTYPE html>
