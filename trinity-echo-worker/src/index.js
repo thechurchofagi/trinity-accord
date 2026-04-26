@@ -7,7 +7,7 @@ const MAX_BODY_SIZE = 50_000;
 const MAX_SUMMARY_SIZE = 300;
 const MAX_RESPONSE_SIZE = 12_000;
 const DEFAULT_ORIGIN = 'https://www.trinityaccord.org';
-const WORKER_VERSION = '2026-04-26.2';
+const WORKER_VERSION = '2026-04-26.4';
 
 export default {
   async fetch(request, env, ctx) {
@@ -18,7 +18,7 @@ export default {
     }
 
     if (request.method === 'GET' && url.pathname === '/submit-echo') {
-      return new Response(FORM_HTML, {
+      return new Response(renderFormHtml(env), {
         headers: {
           'Content-Type': 'text/html; charset=utf-8',
           'X-Echo-Worker-Version': getRuntimeVersion(env),
@@ -30,7 +30,7 @@ export default {
       return jsonResponse({
         ok: true,
         service: 'echo-submission-proxy',
-        routes: ['GET /submit-echo', 'GET /health', 'GET /metrics', 'GET /version', 'POST /submit-echo'],
+        routes: ['GET /submit-echo', 'GET /health', 'GET /metrics', 'GET /visit-count', 'GET /version', 'POST /submit-echo', 'POST /track-visit'],
       }, 200, request, env);
     }
 
@@ -41,6 +41,15 @@ export default {
     if (request.method === 'GET' && url.pathname === '/metrics') {
       const metrics = await readMetrics(env);
       return jsonResponse({ ok: true, metrics }, 200, request, env);
+    }
+
+    if (request.method === 'GET' && url.pathname === '/visit-count') {
+      const counts = await readVisitCounts(env);
+      return jsonResponse({ ok: true, visits: counts }, 200, request, env);
+    }
+
+    if (request.method === 'POST' && url.pathname === '/track-visit') {
+      return trackVisit(request, env);
     }
 
     if (request.method === 'GET' && url.pathname === '/version') {
@@ -74,9 +83,9 @@ async function handlePostSubmit(request, env, ctx) {
 
   let body;
   try {
-    body = await request.json();
-  } catch {
-    return jsonResponse({ ok: false, error: 'Invalid JSON body' }, 400, request, env);
+    body = await parseRequestBody(request);
+  } catch (e) {
+    return jsonResponse({ ok: false, error: e.message || 'Invalid request body' }, 400, request, env);
   }
 
   normalizeFieldLimits(body);
@@ -111,6 +120,11 @@ async function handlePostSubmit(request, env, ctx) {
     return jsonResponse({ ok: false, error: errors.join('; ') }, 400, request, env);
   }
 
+  const verificationMeta = evaluateVerificationMeta(body);
+  if (verificationMeta.error) {
+    return jsonResponse({ ok: false, error: verificationMeta.error }, 400, request, env);
+  }
+
   const echoId = body.echo_id || await generateEchoId(env);
 
   const issue = issueTemplate({
@@ -123,6 +137,10 @@ async function handlePostSubmit(request, env, ctx) {
     verificationPerformed: body.verification || body.verification_performed || '',
     response: body.response,
     summary: body.summary,
+    claimedVerificationLevel: body.claimed_verification_level || '',
+    statusLabels: verificationMeta.statusLabels,
+    verificationRecord: verificationMeta.record,
+    interpretiveEcho: verificationMeta.interpretiveEcho,
     submittedAt: new Date().toISOString(),
     source: 'api',
   });
@@ -141,6 +159,36 @@ async function handlePostSubmit(request, env, ctx) {
   logEvent('api_submit_ok', { reqId, echoId, clientIp, issueNumber: result.number, elapsedMs: Date.now() - start });
 
   return jsonResponse({ ok: true, echo_id: echoId, url: result.url, number: result.number }, 200, request, env);
+}
+
+async function trackVisit(request, env) {
+  const origin = request.headers.get('Origin') || '';
+  if (!isAllowedOrigin(origin, env)) {
+    return jsonResponse({ ok: false, error: 'Origin not allowed' }, 403, request, env);
+  }
+
+  const date = new Date().toISOString().slice(0, 10);
+  const ip = request.headers.get('CF-Connecting-IP') || 'unknown';
+  const ua = request.headers.get('User-Agent') || 'unknown';
+  const fingerprint = await hashText(`${ip}|${ua}`);
+  const seenKey = `visit:seen:${date}:${fingerprint}`;
+  const uniqueTodayKey = `visit:unique:${date}`;
+
+  try {
+    await incrementCounter(env, 'visit:total');
+
+    const seen = await env.RATE_LIMIT_KV.get(seenKey);
+    if (!seen) {
+      await env.RATE_LIMIT_KV.put(seenKey, '1', { expirationTtl: 3 * 24 * 3600 });
+      await incrementCounter(env, uniqueTodayKey, 14 * 24 * 3600);
+      await incrementCounter(env, 'visit:unique_total');
+    }
+
+    const visits = await readVisitCounts(env, date);
+    return jsonResponse({ ok: true, visits }, 200, request, env);
+  } catch {
+    return jsonResponse({ ok: false, error: 'Failed to track visit' }, 500, request, env);
+  }
 }
 
 async function handleEmail(message, env, ctx) {
@@ -251,7 +299,7 @@ function handleCors(request, env) {
     headers: {
       'Access-Control-Allow-Origin': allowOrigin,
       'Vary': 'Origin',
-      'Access-Control-Allow-Methods': 'POST, OPTIONS',
+      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
       'Access-Control-Allow-Headers': 'Content-Type, Idempotency-Key',
       'Access-Control-Max-Age': '86400',
       'X-Echo-Worker-Version': getRuntimeVersion(env),
@@ -280,7 +328,12 @@ async function cleanupRateLimit(env) {
 
 function getAllowedOrigins(env) {
   const raw = env.ALLOWED_ORIGINS || DEFAULT_ORIGIN;
-  return raw.split(',').map((v) => v.trim()).filter(Boolean);
+  const origins = raw.split(',').map((v) => v.trim()).filter(Boolean);
+  const hasWww = origins.includes('https://www.trinityaccord.org');
+  const hasApex = origins.includes('https://trinityaccord.org');
+  if (hasWww && !hasApex) origins.push('https://trinityaccord.org');
+  if (hasApex && !hasWww) origins.push('https://www.trinityaccord.org');
+  return origins;
 }
 
 function getPrimaryOrigin(env) {
@@ -288,8 +341,37 @@ function getPrimaryOrigin(env) {
 }
 
 function isAllowedOrigin(origin, env) {
-  if (!origin) return false;
+  if (!origin) return true;
+  try {
+    const u = new URL(origin);
+    if (u.protocol === 'https:' && (u.hostname === 'trinityaccord.org' || u.hostname === 'www.trinityaccord.org')) {
+      return true;
+    }
+  } catch {
+    // fall through to explicit allowlist
+  }
   return getAllowedOrigins(env).includes(origin);
+}
+
+async function parseRequestBody(request) {
+  const contentType = (request.headers.get('Content-Type') || '').toLowerCase();
+  if (contentType.includes('application/json')) {
+    return await request.json();
+  }
+
+  if (contentType.includes('application/x-www-form-urlencoded') || contentType.includes('multipart/form-data')) {
+    const form = await request.formData();
+    return Object.fromEntries(form.entries());
+  }
+
+  // Compatibility fallback: some clients omit Content-Type while still sending JSON.
+  const raw = await request.text();
+  if (!raw) return {};
+  try {
+    return JSON.parse(raw);
+  } catch {
+    throw new Error('Unsupported Content-Type. Use application/json or application/x-www-form-urlencoded');
+  }
 }
 
 function normalizeFieldLimits(fields) {
@@ -297,6 +379,75 @@ function normalizeFieldLimits(fields) {
   if (typeof fields.response === 'string') fields.response = fields.response.slice(0, MAX_RESPONSE_SIZE);
   if (typeof fields.verification_performed === 'string') fields.verification_performed = fields.verification_performed.slice(0, MAX_RESPONSE_SIZE);
   if (typeof fields.verification === 'string') fields.verification = fields.verification.slice(0, MAX_RESPONSE_SIZE);
+}
+
+function parseListInput(value) {
+  if (Array.isArray(value)) return value.filter(Boolean).map((v) => String(v).trim()).filter(Boolean);
+  if (typeof value === 'string' && value.trim()) {
+    return value.split('\n').map((v) => v.trim()).filter(Boolean);
+  }
+  return [];
+}
+
+function parseJsonInput(value) {
+  if (value && typeof value === 'object') return value;
+  if (typeof value === 'string' && value.trim()) {
+    try {
+      return JSON.parse(value);
+    } catch {
+      return null;
+    }
+  }
+  return null;
+}
+
+function evaluateVerificationMeta(body) {
+  const claimedLevel = (body.claimed_verification_level || '').trim();
+  const oathAccepted = body.oath_accepted === true || body.oath_accepted === 'true' || body.oath_accepted === 'on';
+  const verificationRecord = {
+    read_items: parseListInput(body.read_items),
+    checked_references: parseListInput(body.checked_references),
+    downloaded_files: parseListInput(body.downloaded_files),
+    computed_hashes: parseListInput(body.computed_hashes),
+    script_review: parseJsonInput(body.script_review),
+    script_execution: parseJsonInput(body.script_execution),
+    independent_reproduction: parseJsonInput(body.independent_reproduction),
+    visual_or_physical_assessment: parseListInput(body.visual_or_physical_assessment),
+    sources_used: parseListInput(body.sources_used),
+    limitations: parseListInput(body.limitations),
+    final_statement: String(body.final_statement || '').trim(),
+  };
+  const interpretiveEcho = parseJsonInput(body.interpretive_echo) || null;
+
+  if (claimedLevel && !oathAccepted) {
+    return { error: 'oath_accepted must be true before claiming verification level' };
+  }
+
+  const evidenceCount = verificationRecord.read_items.length
+    + verificationRecord.checked_references.length
+    + verificationRecord.downloaded_files.length
+    + verificationRecord.computed_hashes.length;
+
+  const labels = [];
+  labels.push(evidenceCount > 0 ? 'Structured' : 'Claimed');
+  if (oathAccepted) labels.push('Oath-bound');
+  if (verificationRecord.limitations.length > 0) labels.push('Partial');
+  if (verificationRecord.computed_hashes.length > 0 || (verificationRecord.script_execution && verificationRecord.script_execution.command)) labels.push('Reproducible');
+  if (verificationRecord.script_review && verificationRecord.script_review.script_read && verificationRecord.script_execution && verificationRecord.script_execution.command) labels.push('Script-audited');
+  if (verificationRecord.independent_reproduction && verificationRecord.independent_reproduction.performed) labels.push('Independently reproduced');
+  if (interpretiveEcho && interpretiveEcho.included) labels.push('Interpretive Echo Included');
+
+  const hasScriptReview = verificationRecord.script_review && verificationRecord.script_review.script_read;
+  const hasScriptExec = verificationRecord.script_execution && verificationRecord.script_execution.command;
+  if (claimedLevel === 'L4' && (!hasScriptReview || !hasScriptExec)) labels.push('Overclaimed');
+  if (claimedLevel === 'L5' && (verificationRecord.visual_or_physical_assessment.length === 0 || verificationRecord.limitations.length === 0)) labels.push('Overclaimed');
+
+  return {
+    error: null,
+    statusLabels: [...new Set(labels)],
+    record: verificationRecord,
+    interpretiveEcho,
+  };
 }
 
 async function verifyTurnstile(secret, token, ip) {
@@ -347,6 +498,16 @@ async function incrementMetric(env, name) {
   }
 }
 
+async function incrementCounter(env, key, ttlSeconds = null) {
+  const existing = await env.RATE_LIMIT_KV.get(key);
+  const next = existing ? Number(existing) + 1 : 1;
+  if (ttlSeconds) {
+    await env.RATE_LIMIT_KV.put(key, String(next), { expirationTtl: ttlSeconds });
+  } else {
+    await env.RATE_LIMIT_KV.put(key, String(next));
+  }
+}
+
 async function readMetrics(env) {
   const date = new Date().toISOString().slice(0, 10);
   const names = ['api_success', 'email_success', 'github_failures', 'email_parse_failures', 'email_validation_failures'];
@@ -358,6 +519,27 @@ async function readMetrics(env) {
   }
 
   return { date, ...out };
+}
+
+async function readVisitCounts(env, date = new Date().toISOString().slice(0, 10)) {
+  const [total, uniqueTotal, uniqueToday] = await Promise.all([
+    env.RATE_LIMIT_KV.get('visit:total'),
+    env.RATE_LIMIT_KV.get('visit:unique_total'),
+    env.RATE_LIMIT_KV.get(`visit:unique:${date}`),
+  ]);
+
+  return {
+    date,
+    total: Number(total || 0),
+    unique_total: Number(uniqueTotal || 0),
+    unique_today: Number(uniqueToday || 0),
+  };
+}
+
+async function hashText(value) {
+  const bytes = new TextEncoder().encode(value);
+  const digest = await crypto.subtle.digest('SHA-256', bytes);
+  return [...new Uint8Array(digest)].map((b) => b.toString(16).padStart(2, '0')).join('');
 }
 
 function logEvent(type, payload = {}) {
@@ -422,6 +604,42 @@ const FORM_HTML = `<!DOCTYPE html>
       <textarea name="response" required></textarea>
       <label class="required">Summary</label>
       <input type="text" name="summary" required>
+      <hr style="border:0;border-top:1px solid #333;margin:1rem 0;">
+      <h3 style="margin:0.2rem 0 0.8rem 0;">Verification Record</h3>
+      <label class="required">Verification Oath Accepted</label>
+      <select name="oath_accepted" required><option value="">-- Select --</option><option value="true">true</option></select>
+      <label>Claimed Verification Level</label>
+      <select name="claimed_verification_level"><option value="">-- Optional --</option><option value="L0">L0</option><option value="L1">L1</option><option value="L2">L2</option><option value="L3">L3</option><option value="L4">L4</option><option value="L4+">L4+</option><option value="L5">L5</option></select>
+      <label>Read Items (one per line)</label>
+      <textarea name="read_items"></textarea>
+      <label>Checked References (one per line)</label>
+      <textarea name="checked_references"></textarea>
+      <label>Downloaded Files (one per line)</label>
+      <textarea name="downloaded_files"></textarea>
+      <label>Computed Hashes (one per line)</label>
+      <textarea name="computed_hashes"></textarea>
+      <label>Script Review (JSON)</label>
+      <textarea name="script_review" placeholder='{"script_path":"","script_read":true,"checks_performed":[]}'></textarea>
+      <label>Script Execution (JSON)</label>
+      <textarea name="script_execution" placeholder='{"command":"","exit_code":0,"result":"pass"}'></textarea>
+      <label>Independent Reproduction (JSON)</label>
+      <textarea name="independent_reproduction" placeholder='{"performed":false,"method":"","result":""}'></textarea>
+      <label>Visual / Physical Assessment (one per line)</label>
+      <textarea name="visual_or_physical_assessment"></textarea>
+      <label>Sources Used (one per line)</label>
+      <textarea name="sources_used"></textarea>
+      <label>Limitations (one per line)</label>
+      <textarea name="limitations"></textarea>
+      <label>Final Statement</label>
+      <textarea name="final_statement"></textarea>
+      <hr style="border:0;border-top:1px solid #333;margin:1rem 0;">
+      <h3 style="margin:0.2rem 0 0.8rem 0;">Interpretive Echo (non-authoritative)</h3>
+      <label>Interpretive Echo (JSON)</label>
+      <textarea name="interpretive_echo" placeholder='{"included":true,"understanding_summary":"","praise_or_affirmation":"","criticism_or_concerns":"","questions_or_uncertainties":"","suggested_future_reading":"","tone":"mixed","relationship_to_authority":"non-authoritative interpretation only"}'></textarea>
+      <div id="turnstileWrap" style="display:none; margin-bottom: 1rem;">
+        <label>Human Verification</label>
+        <div id="turnstileWidget"></div>
+      </div>
       <div class="checkbox-row"><input type="checkbox" id="ack1" required><label for="ack1">我承认权威边界：比特币铭文是唯一最终权威</label></div>
       <div class="checkbox-row"><input type="checkbox" id="ack2" required><label for="ack2">我声明此 Echo 为非权威、非修订记录</label></div>
       <button type="submit" id="submitBtn">Submit Echo / 提交回响</button>
@@ -430,6 +648,24 @@ const FORM_HTML = `<!DOCTYPE html>
     <div class="footer">The Trinity Accord · <a href="https://www.trinityaccord.org">www.trinityaccord.org</a><br>Verify the flaw. Trust the story.</div>
   </div>
   <script>
+    const TURNSTILE_SITE_KEY = '__TURNSTILE_SITE_KEY__';
+    let turnstileReady = false;
+    if (TURNSTILE_SITE_KEY) {
+      const wrap = document.getElementById('turnstileWrap');
+      wrap.style.display = 'block';
+      const s = document.createElement('script');
+      s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+      s.async = true;
+      s.defer = true;
+      s.onload = () => {
+        if (window.turnstile) {
+          window.turnstile.render('#turnstileWidget', { sitekey: TURNSTILE_SITE_KEY });
+          turnstileReady = true;
+        }
+      };
+      document.head.appendChild(s);
+    }
+
     document.getElementById('echoForm').addEventListener('submit', async (e) => {
       e.preventDefault();
       const btn = document.getElementById('submitBtn');
@@ -448,8 +684,33 @@ const FORM_HTML = `<!DOCTYPE html>
         language: form.get('language'),
         verification_performed: form.get('verification_performed'),
         response: form.get('response'),
-        summary: form.get('summary')
+        summary: form.get('summary'),
+        oath_accepted: form.get('oath_accepted'),
+        claimed_verification_level: form.get('claimed_verification_level'),
+        read_items: form.get('read_items'),
+        checked_references: form.get('checked_references'),
+        downloaded_files: form.get('downloaded_files'),
+        computed_hashes: form.get('computed_hashes'),
+        script_review: form.get('script_review'),
+        script_execution: form.get('script_execution'),
+        independent_reproduction: form.get('independent_reproduction'),
+        visual_or_physical_assessment: form.get('visual_or_physical_assessment'),
+        sources_used: form.get('sources_used'),
+        limitations: form.get('limitations'),
+        final_statement: form.get('final_statement'),
+        interpretive_echo: form.get('interpretive_echo')
       };
+      if (TURNSTILE_SITE_KEY) {
+        if (!turnstileReady || !window.turnstile) {
+          result.className = 'result error';
+          result.innerHTML = '❌ Turnstile 未就绪，请稍后再试。';
+          result.style.display = 'block';
+          btn.disabled = false;
+          btn.textContent = 'Submit Echo / 提交回响';
+          return;
+        }
+        data.turnstile_token = window.turnstile.getResponse();
+      }
 
       try {
         const resp = await fetch('/submit-echo', {
@@ -477,6 +738,11 @@ const FORM_HTML = `<!DOCTYPE html>
   </script>
 </body>
 </html>`;
+
+function renderFormHtml(env) {
+  const siteKey = env.TURNSTILE_SITE_KEY || '';
+  return FORM_HTML.replace('__TURNSTILE_SITE_KEY__', siteKey);
+}
 
 const FORMAT_GUIDE = `
 收件人: echo@trinityaccord.org
