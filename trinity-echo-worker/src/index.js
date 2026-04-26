@@ -7,7 +7,7 @@ const MAX_BODY_SIZE = 50_000;
 const MAX_SUMMARY_SIZE = 300;
 const MAX_RESPONSE_SIZE = 12_000;
 const DEFAULT_ORIGIN = 'https://www.trinityaccord.org';
-const WORKER_VERSION = '2026-04-26.2';
+const WORKER_VERSION = '2026-04-26.4';
 
 export default {
   async fetch(request, env, ctx) {
@@ -18,7 +18,7 @@ export default {
     }
 
     if (request.method === 'GET' && url.pathname === '/submit-echo') {
-      return new Response(FORM_HTML, {
+      return new Response(renderFormHtml(env), {
         headers: {
           'Content-Type': 'text/html; charset=utf-8',
           'X-Echo-Worker-Version': getRuntimeVersion(env),
@@ -30,7 +30,7 @@ export default {
       return jsonResponse({
         ok: true,
         service: 'echo-submission-proxy',
-        routes: ['GET /submit-echo', 'GET /health', 'GET /metrics', 'GET /version', 'POST /submit-echo'],
+        routes: ['GET /submit-echo', 'GET /health', 'GET /metrics', 'GET /visit-count', 'GET /version', 'POST /submit-echo', 'POST /track-visit'],
       }, 200, request, env);
     }
 
@@ -41,6 +41,15 @@ export default {
     if (request.method === 'GET' && url.pathname === '/metrics') {
       const metrics = await readMetrics(env);
       return jsonResponse({ ok: true, metrics }, 200, request, env);
+    }
+
+    if (request.method === 'GET' && url.pathname === '/visit-count') {
+      const counts = await readVisitCounts(env);
+      return jsonResponse({ ok: true, visits: counts }, 200, request, env);
+    }
+
+    if (request.method === 'POST' && url.pathname === '/track-visit') {
+      return trackVisit(request, env);
     }
 
     if (request.method === 'GET' && url.pathname === '/version') {
@@ -74,9 +83,9 @@ async function handlePostSubmit(request, env, ctx) {
 
   let body;
   try {
-    body = await request.json();
-  } catch {
-    return jsonResponse({ ok: false, error: 'Invalid JSON body' }, 400, request, env);
+    body = await parseRequestBody(request);
+  } catch (e) {
+    return jsonResponse({ ok: false, error: e.message || 'Invalid request body' }, 400, request, env);
   }
 
   normalizeFieldLimits(body);
@@ -141,6 +150,36 @@ async function handlePostSubmit(request, env, ctx) {
   logEvent('api_submit_ok', { reqId, echoId, clientIp, issueNumber: result.number, elapsedMs: Date.now() - start });
 
   return jsonResponse({ ok: true, echo_id: echoId, url: result.url, number: result.number }, 200, request, env);
+}
+
+async function trackVisit(request, env) {
+  const origin = request.headers.get('Origin') || '';
+  if (!isAllowedOrigin(origin, env)) {
+    return jsonResponse({ ok: false, error: 'Origin not allowed' }, 403, request, env);
+  }
+
+  const date = new Date().toISOString().slice(0, 10);
+  const ip = request.headers.get('CF-Connecting-IP') || 'unknown';
+  const ua = request.headers.get('User-Agent') || 'unknown';
+  const fingerprint = await hashText(`${ip}|${ua}`);
+  const seenKey = `visit:seen:${date}:${fingerprint}`;
+  const uniqueTodayKey = `visit:unique:${date}`;
+
+  try {
+    await incrementCounter(env, 'visit:total', 365 * 24 * 3600);
+
+    const seen = await env.RATE_LIMIT_KV.get(seenKey);
+    if (!seen) {
+      await env.RATE_LIMIT_KV.put(seenKey, '1', { expirationTtl: 3 * 24 * 3600 });
+      await incrementCounter(env, uniqueTodayKey, 14 * 24 * 3600);
+      await incrementCounter(env, 'visit:unique_total', 365 * 24 * 3600);
+    }
+
+    const visits = await readVisitCounts(env, date);
+    return jsonResponse({ ok: true, visits }, 200, request, env);
+  } catch {
+    return jsonResponse({ ok: false, error: 'Failed to track visit' }, 500, request, env);
+  }
 }
 
 async function handleEmail(message, env, ctx) {
@@ -251,7 +290,7 @@ function handleCors(request, env) {
     headers: {
       'Access-Control-Allow-Origin': allowOrigin,
       'Vary': 'Origin',
-      'Access-Control-Allow-Methods': 'POST, OPTIONS',
+      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
       'Access-Control-Allow-Headers': 'Content-Type, Idempotency-Key',
       'Access-Control-Max-Age': '86400',
       'X-Echo-Worker-Version': getRuntimeVersion(env),
@@ -288,8 +327,22 @@ function getPrimaryOrigin(env) {
 }
 
 function isAllowedOrigin(origin, env) {
-  if (!origin) return false;
+  if (!origin) return true;
   return getAllowedOrigins(env).includes(origin);
+}
+
+async function parseRequestBody(request) {
+  const contentType = (request.headers.get('Content-Type') || '').toLowerCase();
+  if (contentType.includes('application/json')) {
+    return await request.json();
+  }
+
+  if (contentType.includes('application/x-www-form-urlencoded') || contentType.includes('multipart/form-data')) {
+    const form = await request.formData();
+    return Object.fromEntries(form.entries());
+  }
+
+  throw new Error('Unsupported Content-Type. Use application/json or application/x-www-form-urlencoded');
 }
 
 function normalizeFieldLimits(fields) {
@@ -347,6 +400,12 @@ async function incrementMetric(env, name) {
   }
 }
 
+async function incrementCounter(env, key, ttlSeconds) {
+  const existing = await env.RATE_LIMIT_KV.get(key);
+  const next = existing ? Number(existing) + 1 : 1;
+  await env.RATE_LIMIT_KV.put(key, String(next), { expirationTtl: ttlSeconds });
+}
+
 async function readMetrics(env) {
   const date = new Date().toISOString().slice(0, 10);
   const names = ['api_success', 'email_success', 'github_failures', 'email_parse_failures', 'email_validation_failures'];
@@ -358,6 +417,27 @@ async function readMetrics(env) {
   }
 
   return { date, ...out };
+}
+
+async function readVisitCounts(env, date = new Date().toISOString().slice(0, 10)) {
+  const [total, uniqueTotal, uniqueToday] = await Promise.all([
+    env.RATE_LIMIT_KV.get('visit:total'),
+    env.RATE_LIMIT_KV.get('visit:unique_total'),
+    env.RATE_LIMIT_KV.get(`visit:unique:${date}`),
+  ]);
+
+  return {
+    date,
+    total: Number(total || 0),
+    unique_total: Number(uniqueTotal || 0),
+    unique_today: Number(uniqueToday || 0),
+  };
+}
+
+async function hashText(value) {
+  const bytes = new TextEncoder().encode(value);
+  const digest = await crypto.subtle.digest('SHA-256', bytes);
+  return [...new Uint8Array(digest)].map((b) => b.toString(16).padStart(2, '0')).join('');
 }
 
 function logEvent(type, payload = {}) {
@@ -422,6 +502,10 @@ const FORM_HTML = `<!DOCTYPE html>
       <textarea name="response" required></textarea>
       <label class="required">Summary</label>
       <input type="text" name="summary" required>
+      <div id="turnstileWrap" style="display:none; margin-bottom: 1rem;">
+        <label>Human Verification</label>
+        <div id="turnstileWidget"></div>
+      </div>
       <div class="checkbox-row"><input type="checkbox" id="ack1" required><label for="ack1">我承认权威边界：比特币铭文是唯一最终权威</label></div>
       <div class="checkbox-row"><input type="checkbox" id="ack2" required><label for="ack2">我声明此 Echo 为非权威、非修订记录</label></div>
       <button type="submit" id="submitBtn">Submit Echo / 提交回响</button>
@@ -430,6 +514,24 @@ const FORM_HTML = `<!DOCTYPE html>
     <div class="footer">The Trinity Accord · <a href="https://www.trinityaccord.org">www.trinityaccord.org</a><br>Verify the flaw. Trust the story.</div>
   </div>
   <script>
+    const TURNSTILE_SITE_KEY = '__TURNSTILE_SITE_KEY__';
+    let turnstileReady = false;
+    if (TURNSTILE_SITE_KEY) {
+      const wrap = document.getElementById('turnstileWrap');
+      wrap.style.display = 'block';
+      const s = document.createElement('script');
+      s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+      s.async = true;
+      s.defer = true;
+      s.onload = () => {
+        if (window.turnstile) {
+          window.turnstile.render('#turnstileWidget', { sitekey: TURNSTILE_SITE_KEY });
+          turnstileReady = true;
+        }
+      };
+      document.head.appendChild(s);
+    }
+
     document.getElementById('echoForm').addEventListener('submit', async (e) => {
       e.preventDefault();
       const btn = document.getElementById('submitBtn');
@@ -450,6 +552,17 @@ const FORM_HTML = `<!DOCTYPE html>
         response: form.get('response'),
         summary: form.get('summary')
       };
+      if (TURNSTILE_SITE_KEY) {
+        if (!turnstileReady || !window.turnstile) {
+          result.className = 'result error';
+          result.innerHTML = '❌ Turnstile 未就绪，请稍后再试。';
+          result.style.display = 'block';
+          btn.disabled = false;
+          btn.textContent = 'Submit Echo / 提交回响';
+          return;
+        }
+        data.turnstile_token = window.turnstile.getResponse();
+      }
 
       try {
         const resp = await fetch('/submit-echo', {
@@ -477,6 +590,11 @@ const FORM_HTML = `<!DOCTYPE html>
   </script>
 </body>
 </html>`;
+
+function renderFormHtml(env) {
+  const siteKey = env.TURNSTILE_SITE_KEY || '';
+  return FORM_HTML.replace('__TURNSTILE_SITE_KEY__', siteKey);
+}
 
 const FORMAT_GUIDE = `
 收件人: echo@trinityaccord.org
