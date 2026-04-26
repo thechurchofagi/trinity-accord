@@ -8,6 +8,7 @@ workers_dev = true
 # - GITHUB_REPO:  owner/repo (default: thechurchofagi/trinity-accord)
 # - ALLOWED_ORIGINS: comma-separated exact origins for CORS
 # - TURNSTILE_SECRET_KEY: optional Cloudflare Turnstile secret
+# - TURNSTILE_SITE_KEY: optional Cloudflare Turnstile site key (for hosted form widget)
 
 [[kv_namespaces]]
 binding = "RATE_LIMIT_KV"

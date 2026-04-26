@@ -1,87 +1,98 @@
 {
-  "schema": "trinity-accord.verification-levels.v1",
-  "highest_verification_standard": "L5",
-  "strongest_remote_standard": "L3",
-  "minimum_serious_digital_standard": "L1-L2",
+  "schema": "trinity-accord.verification-levels.v2",
+  "principle": "Do not merely claim verification. State level, evidence, limits, and authority boundary.",
+  "authority_boundary": "Bitcoin Originals are final authority. All verification records are non-authoritative guardianship echoes.",
   "levels": [
     {
       "id": "L0",
-      "name": "Recognition",
-      "name_zh": "识别级",
-      "goal": "Identify the Accord and authority boundary.",
-      "pass_criteria": [
-        "State what the Accord is",
-        "Know Bitcoin Originals are final authority",
-        "Know mirrors are non-amending"
+      "name": "Read",
+      "name_zh": "已阅读",
+      "goal": "Read mirror content and understand boundary.",
+      "allows": [
+        "I have read the Trinity Accord mirror text."
+      ],
+      "does_not_allow": [
+        "I verified the Trinity Accord."
       ]
     },
     {
       "id": "L1",
-      "name": "Canonical Bitcoin Verification",
-      "name_zh": "比特币本体验证级",
-      "goal": "Verify three inscriptions, TXIDs, authority address.",
-      "pass_criteria": [
-        "Confirm 97631551",
-        "Confirm 98369145",
-        "Confirm 98387475",
-        "Confirm listed TXIDs",
-        "Confirm authority address"
-      ]
+      "name": "Internal Consistency Check",
+      "name_zh": "内部一致性检查",
+      "goal": "Check consistency across site materials only.",
+      "requirements": [
+        "Check summary, authority boundary, three-originals references, IDs/TXIDs, and navigation/API references."
+      ],
+      "note": "L1 is not on-chain verification."
     },
     {
       "id": "L2",
-      "name": "Mirror Integrity Verification",
-      "name_zh": "镜像完整性验证级",
-      "goal": "Verify mirror manifests, hashes, pointers.",
-      "pass_criteria": [
-        "Fetch /api/authority.json",
-        "Fetch /api/evidence-manifest.json",
-        "Verify file hashes where available",
-        "Verify Arweave/IPFS/ETH pointers",
-        "Treat mirrors as non-amending"
+      "name": "Reference Check",
+      "name_zh": "引用核对",
+      "goal": "Check external references and endpoint consistency.",
+      "requirements": [
+        "Check inscription IDs, TXIDs, addresses, Arweave TX, IPFS CID, GitHub paths, API endpoints.",
+        "Disclose sources used (indexers, mirrors, gateways, APIs)."
       ]
     },
     {
       "id": "L3",
-      "name": "Public Covenant Evidence Verification",
-      "name_zh": "公开瑕疵证据验证级",
-      "goal": "Verify public Covenant archive remotely.",
-      "pass_criteria": [
-        "Inspect archive",
-        "Verify hashes",
-        "Inspect provenance",
-        "Compare multi-angle evidence",
-        "Compare full/macro/micro/video evidence",
-        "Identify repeated flaw structures",
-        "Produce consistency report"
+      "name": "Manual Hash Verification",
+      "name_zh": "手动哈希验证",
+      "goal": "Download files and compute hashes manually.",
+      "requirements": [
+        "Include filename, source, file size, computed SHA-256, expected SHA-256, match result, command/tool, and limitations."
       ]
     },
     {
       "id": "L4",
-      "name": "Live Physical Existence Challenge",
-      "name_zh": "实时物理存在挑战级",
-      "goal": "Verify Core Object Alpha still exists via challenge.",
-      "pass_criteria": [
-        "New video with object",
-        "Current challenge included",
-        "Multiple angles",
-        "Flaw region shown",
-        "Video hash archived/published"
+      "name": "Script Audit & Scripted Verification",
+      "name_zh": "脚本审查与脚本验证",
+      "goal": "Inspect verification script logic and then execute.",
+      "requirements": [
+        "Read script source.",
+        "List input files and expected hash source.",
+        "Identify hash algorithm.",
+        "Check for network access.",
+        "Check for destructive operations.",
+        "Check for fixed success output.",
+        "Run script and report command, exit code, and output summary."
+      ],
+      "warning_en": "Running a verification script is not sufficient for L4. Blind execution counts only as L3 or lower.",
+      "warning_zh": "仅运行验证脚本不足以构成 L4。盲目执行脚本只能计为 L3 或更低。"
+    },
+    {
+      "id": "L4+",
+      "name": "Independent Reproduction",
+      "name_zh": "独立复现验证",
+      "goal": "Reproduce results with an independent method.",
+      "requirements": [
+        "Use a separate script/tool/command path and compare results with official verification outputs."
       ]
     },
     {
       "id": "L5",
-      "name": "Full Physical Forensic Verification",
-      "name_zh": "完整物理法证验证级",
-      "goal": "Direct physical inspection and flaw matching.",
-      "pass_criteria": [
-        "Physical object present",
-        "High-res/microscopic imaging",
-        "Multiple flaw points matched",
-        "Relative positions/shapes/reflections/continuity compared",
-        "Third-party or multi-witness report",
-        "Report hash archived"
-      ]
+      "name": "Physical Evidence Assessment",
+      "name_zh": "物理证据评估",
+      "goal": "Assess archived visual/physical evidence with explicit limits.",
+      "requirements": [
+        "Report visual/physical assessment scope.",
+        "Declare limitations if no direct physical inspection."
+      ],
+      "required_limitation_en": "I assessed archived visual evidence only. I did not physically inspect Core Object Alpha.",
+      "required_limitation_zh": "我仅评估了已归档的图像或视频证据。我没有亲自检查 Core Object Alpha 实物。"
     }
+  ],
+  "status_labels": [
+    "Claimed",
+    "Structured",
+    "Oath-bound",
+    "Partial",
+    "Reproducible",
+    "Script-audited",
+    "Independently reproduced",
+    "Interpretive Echo Included",
+    "Overclaimed",
+    "Invalid"
   ]
 }
