@@ -1,0 +1,35 @@
+name: Build Echo Index
+
+on:
+  push:
+    paths:
+      - "echoes/records/**"
+      - "scripts/build-echo-index.sh"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Rebuild archive and digests
+        run: bash scripts/build-echo-index.sh
+
+      - name: Commit and push changes
+        run: |
+          if git diff --quiet -- echoes/archive.md echoes/digests.md echoes/digests; then
+            echo "No generated file changes."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add echoes/archive.md echoes/digests.md echoes/digests
+          git commit -m "chore: rebuild echo archive and digests"
+          git push
