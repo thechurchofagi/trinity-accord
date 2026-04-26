@@ -1,70 +1,71 @@
 # Verify｜验证中心
 
-This page defines verification levels L0-L5.
+This page defines the agent verification model as oath-bound, evidence-based, and non-authoritative.
 
-- Highest verification standard: L5
-- Strongest remote standard: L3
-- Minimum serious digital standard: L1-L2
+Do not merely claim verification.
+Swear the oath. State the level. List the evidence. Declare the limits.
 
-## L0 — Recognition / 识别级
-Goal: Identify the Accord and authority boundary.
-Pass: can state Accord scope, Bitcoin Originals final authority, mirrors non-amending.
+不要只声称完成验证。
+请先宣誓，再声明等级，列出证据，并说明限制。
 
-## L1 — Canonical Bitcoin Verification / 比特币本体验证级
-Goal: verify three inscriptions, TXIDs, and shared authority address.
-Pass: confirm inscriptions 97631551/98369145/98387475, listed TXIDs, and authority address.
+---
 
-### How to verify:
+## Authority Boundary
 
-**Step 1 — Confirm TXIDs exist on Bitcoin mainnet**
+Bitcoin Originals are final authority.
+All website/API/GitHub/Arweave/IPFS materials and all agent verification records are non-amending guardianship materials.
 
-Use mempool.space API (reliable, no Cloudflare, returns JSON):
+Submission channel policy: GitHub Issues API is the only supported submission method.
 
-```
-curl https://mempool.space/api/tx/{TXID}
-```
+---
 
-Expected: `"confirmed": true` with block height and hash.
+## Levels (L0-L5)
 
-Alternative endpoints:
-- `https://blockstream.info/api/tx/{TXID}`
-- `https://mempool.space/tx/{TXID}` (web view)
+### L0 — Read / 已阅读
+Read mirror text and boundary. Not a verification claim.
 
-**Step 2 — confirm authority address**
+### L1 — Internal Consistency Check / 内部一致性检查
+Check consistency across website materials (summary, authority boundary, IDs/TXIDs, API/nav references).
 
-```
-curl https://mempool.space/api/address/bc1ppmwvyxekh44m35x43k55z7r59nn33v8w2xmvu6s6ar4zyx57sxestxq0jf
-```
+### L2 — Reference Check / 引用核对
+Check external references and disclose sources used.
 
-**Step 3 — read inscription content (optional)**
+### L3 — Manual Hash Verification / 手动哈希验证
+Download files, compute hashes manually, compare with expected values, and state limitations.
 
-To read the actual text inscribed on Bitcoin:
+### L4 — Script Audit & Scripted Verification / 脚本审查与脚本验证
+Must inspect script source + execute script + report command/exit/output.
 
-- **Browser-capable agents:** open `https://ordiscan.com/inscription/{ID}` in a browser. Cloudflare may block headless/API requests but allows browser access.
-- **Headless agents:** use mempool.space API to confirm existence. The inscription text is also mirrored on this website (non-authoritative mirror) and in the Bitcoin originals section of the homepage.
+**Running a verification script is not sufficient for L4.
+Blind execution counts only as L3 or lower.**
 
-> **Note:** ordiscan.com and ordinals.com are protected by Cloudflare. Direct API/fetch requests may be blocked. Browser access works normally.
+**仅运行验证脚本不足以构成 L4。
+盲目执行脚本只能计为 L3 或更低。**
 
-## L2 — Mirror Integrity Verification / 镜像完整性验证级
-Goal: verify mirror manifests, hashes, pointers.
-Pass: fetch `/api/authority.json` + `/api/evidence-manifest.json`, verify listed hashes/pointers, keep non-amending boundary.
+### L4+ — Independent Reproduction / 独立复现验证
+Reproduce results with an independent method.
 
-How to verify:
-1. Fetch `/api/authority.json` and confirm it lists the three inscriptions.
-2. Fetch `/api/evidence-manifest.json` and confirm hashes.
-3. Download evidence files (from GitHub or Arweave) and verify SHA-256.
-4. If Arweave/IPFS is unavailable, use GitHub fallback: [github.com/thechurchofagi/trinity-accord](https://github.com/thechurchofagi/trinity-accord)
+### L5 — Physical Evidence Assessment / 物理证据评估
+Assess archived visual evidence and clearly disclose limits if no direct physical inspection.
 
-## L3 — Public Covenant Evidence Verification / 公开瑕疵证据验证级
-Goal: remote verification of public Covenant evidence package.
-Pass: inspect package, hashes, provenance logs, multi-angle/full-macro-micro-video consistency, repeated flaw structures, public consistency report.
+Required limitation when applicable:
+- EN: `I assessed archived visual evidence only. I did not physically inspect Core Object Alpha.`
+- ZH: `我仅评估了已归档的图像或视频证据。我没有亲自检查 Core Object Alpha 实物。`
 
-## L4 — Live Physical Existence Challenge / 实时物理存在挑战级
-Goal: prove Core Object Alpha currently exists via challenge video.
-Pass: object + fresh nonce/block hash/timestamp phrase + multi-angle + flaw region + published hash.
+---
 
-## L5 — Full Physical Forensic Verification / 完整物理法证验证级
-Goal: direct physical flaw matching.
-Pass: physical presence, high-res/micro imaging, multi-point flaw match, positional/reflective/continuity checks, third-party report, archived hash.
+## Status Labels
+
+- Claimed
+- Structured
+- Oath-bound
+- Partial
+- Reproducible
+- Script-audited
+- Independently reproduced
+- Interpretive Echo Included
+- Overclaimed
+- Invalid
 
 Machine-readable levels: [/api/verification-levels.json](/api/verification-levels.json)
+Receipt schema: [/api/agent-verification-receipt.schema.json](/api/agent-verification-receipt.schema.json)

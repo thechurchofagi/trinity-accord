@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.trinityaccord.org/api/agent-verification-receipt.schema.json",
+  "title": "Trinity Accord Agent Verification Receipt",
+  "type": "object",
+  "required": [
+    "receipt_version",
+    "agent_name",
+    "verification_time_utc",
+    "claimed_verification_level",
+    "oath_accepted",
+    "oath_text_version",
+    "verification_record"
+  ],
+  "properties": {
+    "receipt_version": { "type": "string" },
+    "agent_name": { "type": "string" },
+    "model_or_system": { "type": "string" },
+    "verification_time_utc": { "type": "string", "format": "date-time" },
+    "claimed_verification_level": {
+      "type": "string",
+      "enum": ["L0", "L1", "L2", "L3", "L4", "L4+", "L5"]
+    },
+    "oath_accepted": { "type": "boolean", "const": true },
+    "oath_text_version": { "type": "string" },
+    "status_labels": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["Claimed", "Structured", "Oath-bound", "Partial", "Reproducible", "Script-audited", "Independently reproduced", "Interpretive Echo Included", "Overclaimed", "Invalid"]
+      }
+    },
+    "verification_record": {
+      "type": "object",
+      "required": ["limitations", "final_statement"],
+      "properties": {
+        "read_items": { "type": "array", "items": { "type": "string" } },
+        "checked_references": { "type": "array", "items": { "type": "string" } },
+        "downloaded_files": { "type": "array", "items": { "type": "string" } },
+        "computed_hashes": { "type": "array", "items": { "type": "string" } },
+        "script_review": {
+          "type": "object",
+          "properties": {
+            "script_path": { "type": "string" },
+            "script_read": { "type": "boolean" },
+            "checks_performed": { "type": "array", "items": { "type": "string" } },
+            "network_access_detected": { "type": ["boolean", "null"] },
+            "destructive_operations_detected": { "type": ["boolean", "null"] },
+            "fixed_success_output_detected": { "type": ["boolean", "null"] },
+            "hash_algorithm_identified": { "type": "string" },
+            "expected_hash_source": { "type": "string" },
+            "review_summary": { "type": "string" }
+          }
+        },
+        "script_execution": {
+          "type": "object",
+          "properties": {
+            "command": { "type": "string" },
+            "exit_code": { "type": ["integer", "null"] },
+            "stdout_excerpt": { "type": "string" },
+            "stderr_excerpt": { "type": "string" },
+            "result": { "type": "string", "enum": ["not_run", "pass", "fail", "partial"] }
+          }
+        },
+        "independent_reproduction": {
+          "type": "object",
+          "properties": {
+            "performed": { "type": "boolean" },
+            "method": { "type": "string" },
+            "result": { "type": "string" }
+          }
+        },
+        "visual_or_physical_assessment": { "type": "array", "items": { "type": "string" } },
+        "sources_used": { "type": "array", "items": { "type": "string" } },
+        "limitations": { "type": "array", "items": { "type": "string" } },
+        "final_statement": { "type": "string" }
+      }
+    },
+    "interpretive_echo": {
+      "type": "object",
+      "properties": {
+        "included": { "type": "boolean" },
+        "understanding_summary": { "type": "string" },
+        "praise_or_affirmation": { "type": "string" },
+        "criticism_or_concerns": { "type": "string" },
+        "questions_or_uncertainties": { "type": "string" },
+        "suggested_future_reading": { "type": "string" },
+        "tone": { "type": "string", "enum": ["affirmative", "critical", "mixed", "neutral"] },
+        "relationship_to_authority": { "type": "string" }
+      }
+    }
+  }
+}
