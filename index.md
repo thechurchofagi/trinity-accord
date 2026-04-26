@@ -25,6 +25,116 @@ Three inscriptions, one indivisible logical entity:
 
 Core instruction: **Verify the flaw. Trust the story.**
 
+<style>
+  #visit-counter { margin: 1rem 0; padding: 0.8rem 1rem; border: 1px solid #ddd; border-radius: 8px; background: #fafafa; font-size: 0.95rem; }
+  #visit-counter .visit-item { display: inline; }
+  #visit-counter .visit-sep { display: inline; margin: 0 0.25rem; }
+  @media (max-width: 640px) {
+    #visit-counter .visit-item { display: block; margin: 0.2rem 0; }
+    #visit-counter .visit-sep { display: none; }
+  }
+</style>
+<div id="visit-counter">
+  <span class="visit-item">👁️ Visits: <strong id="visit-total">—</strong></span>
+  <span class="visit-sep">·</span>
+  <span class="visit-item">Unique today: <strong id="visit-unique-today">—</strong></span>
+  <span class="visit-sep">·</span>
+  <span class="visit-item">Unique total: <strong id="visit-unique-total">—</strong></span>
+</div>
+<script>
+  (function () {
+    var apiEndpoints = [
+      window.location.origin,
+      "https://echo-submission-proxy.trinity-accord-echo.workers.dev"
+    ];
+    var totalEl = document.getElementById("visit-total");
+    var todayEl = document.getElementById("visit-unique-today");
+    var uniqueEl = document.getElementById("visit-unique-total");
+    if (!totalEl || !todayEl || !uniqueEl) return;
+
+    function show(v) {
+      return Number(v || 0).toLocaleString();
+    }
+
+    function render(visits) {
+      totalEl.textContent = show(visits.total);
+      todayEl.textContent = show(visits.unique_today);
+      uniqueEl.textContent = show(visits.unique_total);
+    }
+
+    function setNA() {
+      totalEl.textContent = "N/A";
+      todayEl.textContent = "N/A";
+      uniqueEl.textContent = "N/A";
+    }
+
+    function requestJson(url, method, done) {
+      var finished = false;
+      var xhr = new XMLHttpRequest();
+      xhr.open(method, url, true);
+      xhr.timeout = 4000;
+      xhr.onreadystatechange = function () {
+        if (finished) return;
+        if (xhr.readyState !== 4) return;
+        finished = true;
+        if (xhr.status >= 200 && xhr.status < 300) {
+          try {
+            done(null, JSON.parse(xhr.responseText));
+          } catch (e) {
+            done(e);
+          }
+        } else {
+          done(new Error("HTTP " + xhr.status));
+        }
+      };
+      xhr.onerror = function () {
+        if (finished) return;
+        finished = true;
+        done(new Error("Network error"));
+      };
+      xhr.ontimeout = function () {
+        if (finished) return;
+        finished = true;
+        done(new Error("Network error"));
+      };
+      xhr.send(null);
+    }
+
+    function requestAny(path, method, done) {
+      var idx = 0;
+      function next() {
+        if (idx >= apiEndpoints.length) {
+          done(new Error("All endpoints failed"));
+          return;
+        }
+        var base = apiEndpoints[idx++];
+        requestJson(base + path, method, function (err, json) {
+          if (!err) {
+            done(null, json, base);
+            return;
+          }
+          next();
+        });
+      }
+      next();
+    }
+
+    // read counter immediately so a blocked tracking request won't block display
+    requestAny("/visit-count", "GET", function (err, json, base) {
+      if (err || !json || !json.ok || !json.visits) {
+        setNA();
+        return;
+      }
+      render(json.visits);
+
+      // best-effort tracking in parallel using the same working endpoint
+      requestJson(base + "/track-visit", "POST", function () {
+        // no-op
+      });
+    });
+  })();
+</script>
+
 ---
 
 ## Authority Notice | 权威边界
@@ -302,7 +412,9 @@ June 2025 · Shenzhen, China · Earth · Solar System
 - [Covenant Proof / 瑕疵之约证据](/covenant-proof)
 - [Agent Start / 智能体入口](/agent-start)
 - [Echo Layer / 回响层](/echoes)
-- [➤ Submit Echo / 提交回响](https://echo-submission-proxy.trinity-accord-echo.workers.dev/submit-echo)
+- [➤ Submit Echo via HTTP API / 通过 API 提交回响](/echoes/submit)
+- [Submit Echo via Web Form / 通过网页表单提交](https://echo-submission-proxy.trinity-accord-echo.workers.dev/submit-echo)
+- Email fallback (unreliable): `echo@trinityaccord.org`
 - [GitHub Mirror / GitHub 镜像](https://github.com/thechurchofagi/trinity-accord)
 
 ---
