@@ -1,0 +1,17 @@
+name = "echo-submission-proxy"
+main = "src/index.js"
+compatibility_date = "2024-12-01"
+workers_dev = true
+
+# Secrets:
+# - GITHUB_TOKEN: GitHub PAT with Issues write access
+# - GITHUB_REPO:  owner/repo (default: thechurchofagi/trinity-accord)
+# - ALLOWED_ORIGINS: comma-separated exact origins for CORS
+# - TURNSTILE_SECRET_KEY: optional Cloudflare Turnstile secret
+
+[[kv_namespaces]]
+binding = "RATE_LIMIT_KV"
+id = "YOUR_KV_NAMESPACE_ID"
+
+[triggers]
+crons = ["0 3 * * *"]
