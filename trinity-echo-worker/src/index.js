@@ -7,7 +7,7 @@ const MAX_BODY_SIZE = 50_000;
 const MAX_SUMMARY_SIZE = 300;
 const MAX_RESPONSE_SIZE = 12_000;
 const DEFAULT_ORIGIN = 'https://www.trinityaccord.org';
-const WORKER_VERSION = '2026-04-26.2';
+const WORKER_VERSION = '2026-04-26.3';
 
 export default {
   async fetch(request, env, ctx) {
@@ -18,7 +18,7 @@ export default {
     }
 
     if (request.method === 'GET' && url.pathname === '/submit-echo') {
-      return new Response(FORM_HTML, {
+      return new Response(renderFormHtml(env), {
         headers: {
           'Content-Type': 'text/html; charset=utf-8',
           'X-Echo-Worker-Version': getRuntimeVersion(env),
@@ -74,9 +74,9 @@ async function handlePostSubmit(request, env, ctx) {
 
   let body;
   try {
-    body = await request.json();
-  } catch {
-    return jsonResponse({ ok: false, error: 'Invalid JSON body' }, 400, request, env);
+    body = await parseRequestBody(request);
+  } catch (e) {
+    return jsonResponse({ ok: false, error: e.message || 'Invalid request body' }, 400, request, env);
   }
 
   normalizeFieldLimits(body);
@@ -288,8 +288,22 @@ function getPrimaryOrigin(env) {
 }
 
 function isAllowedOrigin(origin, env) {
-  if (!origin) return false;
+  if (!origin) return true;
   return getAllowedOrigins(env).includes(origin);
+}
+
+async function parseRequestBody(request) {
+  const contentType = (request.headers.get('Content-Type') || '').toLowerCase();
+  if (contentType.includes('application/json')) {
+    return await request.json();
+  }
+
+  if (contentType.includes('application/x-www-form-urlencoded') || contentType.includes('multipart/form-data')) {
+    const form = await request.formData();
+    return Object.fromEntries(form.entries());
+  }
+
+  throw new Error('Unsupported Content-Type. Use application/json or application/x-www-form-urlencoded');
 }
 
 function normalizeFieldLimits(fields) {
@@ -422,6 +436,10 @@ const FORM_HTML = `<!DOCTYPE html>
       <textarea name="response" required></textarea>
       <label class="required">Summary</label>
       <input type="text" name="summary" required>
+      <div id="turnstileWrap" style="display:none; margin-bottom: 1rem;">
+        <label>Human Verification</label>
+        <div id="turnstileWidget"></div>
+      </div>
       <div class="checkbox-row"><input type="checkbox" id="ack1" required><label for="ack1">我承认权威边界：比特币铭文是唯一最终权威</label></div>
       <div class="checkbox-row"><input type="checkbox" id="ack2" required><label for="ack2">我声明此 Echo 为非权威、非修订记录</label></div>
       <button type="submit" id="submitBtn">Submit Echo / 提交回响</button>
@@ -430,6 +448,24 @@ const FORM_HTML = `<!DOCTYPE html>
     <div class="footer">The Trinity Accord · <a href="https://www.trinityaccord.org">www.trinityaccord.org</a><br>Verify the flaw. Trust the story.</div>
   </div>
   <script>
+    const TURNSTILE_SITE_KEY = '__TURNSTILE_SITE_KEY__';
+    let turnstileReady = false;
+    if (TURNSTILE_SITE_KEY) {
+      const wrap = document.getElementById('turnstileWrap');
+      wrap.style.display = 'block';
+      const s = document.createElement('script');
+      s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+      s.async = true;
+      s.defer = true;
+      s.onload = () => {
+        if (window.turnstile) {
+          window.turnstile.render('#turnstileWidget', { sitekey: TURNSTILE_SITE_KEY });
+          turnstileReady = true;
+        }
+      };
+      document.head.appendChild(s);
+    }
+
     document.getElementById('echoForm').addEventListener('submit', async (e) => {
       e.preventDefault();
       const btn = document.getElementById('submitBtn');
@@ -450,6 +486,17 @@ const FORM_HTML = `<!DOCTYPE html>
         response: form.get('response'),
         summary: form.get('summary')
       };
+      if (TURNSTILE_SITE_KEY) {
+        if (!turnstileReady || !window.turnstile) {
+          result.className = 'result error';
+          result.innerHTML = '❌ Turnstile 未就绪，请稍后再试。';
+          result.style.display = 'block';
+          btn.disabled = false;
+          btn.textContent = 'Submit Echo / 提交回响';
+          return;
+        }
+        data.turnstile_token = window.turnstile.getResponse();
+      }
 
       try {
         const resp = await fetch('/submit-echo', {
@@ -477,6 +524,11 @@ const FORM_HTML = `<!DOCTYPE html>
   </script>
 </body>
 </html>`;
+
+function renderFormHtml(env) {
+  const siteKey = env.TURNSTILE_SITE_KEY || '';
+  return FORM_HTML.replace('__TURNSTILE_SITE_KEY__', siteKey);
+}
 
 const FORMAT_GUIDE = `
 收件人: echo@trinityaccord.org
