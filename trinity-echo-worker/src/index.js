@@ -166,12 +166,14 @@ async function trackVisit(request, env) {
   const uniqueTodayKey = `visit:unique:${date}`;
 
   try {
+    await incrementCounter(env, 'visit:total');
     await incrementCounter(env, 'visit:total', 365 * 24 * 3600);
 
     const seen = await env.RATE_LIMIT_KV.get(seenKey);
     if (!seen) {
       await env.RATE_LIMIT_KV.put(seenKey, '1', { expirationTtl: 3 * 24 * 3600 });
       await incrementCounter(env, uniqueTodayKey, 14 * 24 * 3600);
+      await incrementCounter(env, 'visit:unique_total');
       await incrementCounter(env, 'visit:unique_total', 365 * 24 * 3600);
     }
 
@@ -335,6 +337,7 @@ function isAllowedOrigin(origin, env) {
   if (!origin) return true;
   try {
     const u = new URL(origin);
+    if (u.protocol === 'https:' && (u.hostname === 'trinityaccord.org' || u.hostname === 'www.trinityaccord.org')) {
     if (u.protocol === 'https:' && (u.hostname === 'trinityaccord.org' || u.hostname.endsWith('.trinityaccord.org'))) {
       return true;
     }
@@ -355,6 +358,14 @@ async function parseRequestBody(request) {
     return Object.fromEntries(form.entries());
   }
 
+  // Compatibility fallback: some clients omit Content-Type while still sending JSON.
+  const raw = await request.text();
+  if (!raw) return {};
+  try {
+    return JSON.parse(raw);
+  } catch {
+    throw new Error('Unsupported Content-Type. Use application/json or application/x-www-form-urlencoded');
+  }
   throw new Error('Unsupported Content-Type. Use application/json or application/x-www-form-urlencoded');
 }
 
@@ -413,6 +424,14 @@ async function incrementMetric(env, name) {
   }
 }
 
+async function incrementCounter(env, key, ttlSeconds = null) {
+  const existing = await env.RATE_LIMIT_KV.get(key);
+  const next = existing ? Number(existing) + 1 : 1;
+  if (ttlSeconds) {
+    await env.RATE_LIMIT_KV.put(key, String(next), { expirationTtl: ttlSeconds });
+  } else {
+    await env.RATE_LIMIT_KV.put(key, String(next));
+  }
 async function incrementCounter(env, key, ttlSeconds) {
   const existing = await env.RATE_LIMIT_KV.get(key);
   const next = existing ? Number(existing) + 1 : 1;
