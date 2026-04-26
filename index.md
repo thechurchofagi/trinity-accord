@@ -43,7 +43,10 @@ Core instruction: **Verify the flaw. Trust the story.**
 </div>
 <script>
   (function () {
-    var api = "https://echo-submission-proxy.trinity-accord-echo.workers.dev";
+    var apiEndpoints = [
+      window.location.origin,
+      "https://echo-submission-proxy.trinity-accord-echo.workers.dev"
+    ];
     var totalEl = document.getElementById("visit-total");
     var todayEl = document.getElementById("visit-unique-today");
     var uniqueEl = document.getElementById("visit-unique-total");
@@ -97,18 +100,37 @@ Core instruction: **Verify the flaw. Trust the story.**
       xhr.send(null);
     }
 
+    function requestAny(path, method, done) {
+      var idx = 0;
+      function next() {
+        if (idx >= apiEndpoints.length) {
+          done(new Error("All endpoints failed"));
+          return;
+        }
+        var base = apiEndpoints[idx++];
+        requestJson(base + path, method, function (err, json) {
+          if (!err) {
+            done(null, json, base);
+            return;
+          }
+          next();
+        });
+      }
+      next();
+    }
+
     // read counter immediately so a blocked tracking request won't block display
-    requestJson(api + "/visit-count", "GET", function (err, json) {
+    requestAny("/visit-count", "GET", function (err, json, base) {
       if (err || !json || !json.ok || !json.visits) {
         setNA();
         return;
       }
       render(json.visits);
-    });
 
-    // best-effort tracking in parallel
-    requestJson(api + "/track-visit", "POST", function () {
-      // no-op
+      // best-effort tracking in parallel using the same working endpoint
+      requestJson(base + "/track-visit", "POST", function () {
+        // no-op
+      });
     });
   })();
 </script>

@@ -333,6 +333,14 @@ function getPrimaryOrigin(env) {
 
 function isAllowedOrigin(origin, env) {
   if (!origin) return true;
+  try {
+    const u = new URL(origin);
+    if (u.protocol === 'https:' && (u.hostname === 'trinityaccord.org' || u.hostname.endsWith('.trinityaccord.org'))) {
+      return true;
+    }
+  } catch {
+    // fall through to explicit allowlist
+  }
   return getAllowedOrigins(env).includes(origin);
 }
 
