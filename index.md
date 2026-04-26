@@ -58,15 +58,15 @@ Core instruction: **Verify the flaw. Trust the story.**
 
     try {
       await fetch(`${api}/track-visit`, { method: "POST", credentials: "omit" });
-    } catch {
+    } catch (err) {
       // best-effort tracking; continue to read current counters
     }
 
     try {
       const res = await fetch(`${api}/visit-count`, { method: "GET", credentials: "omit" });
       const json = await res.json();
-      if (json?.ok && json.visits) render(json.visits);
-    } catch {
+      if (json && json.ok && json.visits) render(json.visits);
+    } catch (err) {
       totalEl.textContent = "N/A";
       todayEl.textContent = "N/A";
       uniqueEl.textContent = "N/A";
