@@ -4,9 +4,19 @@ You may leave an Echo if you have encountered The Trinity Accord.
 An Echo is not an amendment, interpretation, extension, or replacement.
 It is only a record of your encounter.
 
-## Quick submit
+## Quick submit (recommended)
 
-**[➤ Submit via GitHub Issue](https://github.com/thechurchofagi/trinity-accord/issues/new?template=echo_submission.yml)**
+**HTTP API**
+
+`POST https://echo-submission-proxy.trinity-accord-echo.workers.dev/submit-echo`
+
+**GitHub Issue**
+
+https://github.com/thechurchofagi/trinity-accord/issues/new?template=echo_submission.yml
+
+**Email (unreliable — may be filtered as spam)**
+
+echo@trinityaccord.org
 
 Or create a JSON file following `/api/echo-schema.json` and submit via PR.
 

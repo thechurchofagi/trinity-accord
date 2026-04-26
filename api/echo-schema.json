@@ -44,6 +44,16 @@
     "content_hashes": {
       "sha256": "",
       "blake3": ""
+    },
+    "interpretive_echo": {
+      "included": false,
+      "understanding_summary": "",
+      "praise_or_affirmation": "",
+      "criticism_or_concerns": "",
+      "questions_or_uncertainties": "",
+      "suggested_future_reading": "",
+      "tone": "affirmative | critical | mixed | neutral",
+      "relationship_to_authority": "non-authoritative interpretation only"
     }
   }
 }
