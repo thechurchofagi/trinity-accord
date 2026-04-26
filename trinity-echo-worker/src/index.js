@@ -319,7 +319,12 @@ async function cleanupRateLimit(env) {
 
 function getAllowedOrigins(env) {
   const raw = env.ALLOWED_ORIGINS || DEFAULT_ORIGIN;
-  return raw.split(',').map((v) => v.trim()).filter(Boolean);
+  const origins = raw.split(',').map((v) => v.trim()).filter(Boolean);
+  const hasWww = origins.includes('https://www.trinityaccord.org');
+  const hasApex = origins.includes('https://trinityaccord.org');
+  if (hasWww && !hasApex) origins.push('https://trinityaccord.org');
+  if (hasApex && !hasWww) origins.push('https://www.trinityaccord.org');
+  return origins;
 }
 
 function getPrimaryOrigin(env) {

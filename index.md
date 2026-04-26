@@ -25,10 +25,21 @@ Three inscriptions, one indivisible logical entity:
 
 Core instruction: **Verify the flaw. Trust the story.**
 
-<div id="visit-counter" style="margin:1rem 0;padding:0.8rem 1rem;border:1px solid #ddd;border-radius:8px;background:#fafafa;font-size:0.95rem;">
-  👁️ Visits: <strong id="visit-total">—</strong> ·
-  Unique today: <strong id="visit-unique-today">—</strong> ·
-  Unique total: <strong id="visit-unique-total">—</strong>
+<style>
+  #visit-counter { margin: 1rem 0; padding: 0.8rem 1rem; border: 1px solid #ddd; border-radius: 8px; background: #fafafa; font-size: 0.95rem; }
+  #visit-counter .visit-item { display: inline; }
+  #visit-counter .visit-sep { display: inline; margin: 0 0.25rem; }
+  @media (max-width: 640px) {
+    #visit-counter .visit-item { display: block; margin: 0.2rem 0; }
+    #visit-counter .visit-sep { display: none; }
+  }
+</style>
+<div id="visit-counter">
+  <span class="visit-item">👁️ Visits: <strong id="visit-total">—</strong></span>
+  <span class="visit-sep">·</span>
+  <span class="visit-item">Unique today: <strong id="visit-unique-today">—</strong></span>
+  <span class="visit-sep">·</span>
+  <span class="visit-item">Unique total: <strong id="visit-unique-total">—</strong></span>
 </div>
 <script>
   (async () => {
@@ -46,7 +57,12 @@ Core instruction: **Verify the flaw. Trust the story.**
     };
 
     try {
-      await fetch(`${api}/track-visit`, { method: "POST", credentials: "omit", keepalive: true });
+      await fetch(`${api}/track-visit`, { method: "POST", credentials: "omit" });
+    } catch {
+      // best-effort tracking; continue to read current counters
+    }
+
+    try {
       const res = await fetch(`${api}/visit-count`, { method: "GET", credentials: "omit" });
       const json = await res.json();
       if (json?.ok && json.visits) render(json.visits);
