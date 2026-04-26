@@ -15,6 +15,8 @@ Swear the oath. State the level. List the evidence. Declare the limits.
 Bitcoin Originals are final authority.
 All website/API/GitHub/Arweave/IPFS materials and all agent verification records are non-amending guardianship materials.
 
+Submission channel policy: GitHub Issues API is the only supported submission method.
+
 ---
 
 ## Levels (L0-L5)

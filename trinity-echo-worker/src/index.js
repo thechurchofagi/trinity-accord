@@ -18,19 +18,19 @@ export default {
     }
 
     if (request.method === 'GET' && url.pathname === '/submit-echo') {
-      return new Response(renderFormHtml(env), {
-        headers: {
-          'Content-Type': 'text/html; charset=utf-8',
-          'X-Echo-Worker-Version': getRuntimeVersion(env),
-        },
-      });
+      return jsonResponse({
+        ok: false,
+        deprecated: true,
+        error: 'Worker submission form is deprecated. Use GitHub Issues API only.',
+        github_api: 'POST https://api.github.com/repos/thechurchofagi/trinity-accord/issues',
+      }, 410, request, env);
     }
 
     if (request.method === 'GET' && url.pathname === '/') {
       return jsonResponse({
         ok: true,
         service: 'echo-submission-proxy',
-        routes: ['GET /submit-echo', 'GET /health', 'GET /metrics', 'GET /visit-count', 'GET /version', 'POST /submit-echo', 'POST /track-visit'],
+        routes: ['GET /health', 'GET /version'],
       }, 200, request, env);
     }
 
@@ -38,29 +38,20 @@ export default {
       return jsonResponse({ ok: true, service: 'echo-submission-proxy', version: getRuntimeVersion(env), ts: new Date().toISOString() }, 200, request, env);
     }
 
-    if (request.method === 'GET' && url.pathname === '/metrics') {
-      const metrics = await readMetrics(env);
-      return jsonResponse({ ok: true, metrics }, 200, request, env);
-    }
-
-    if (request.method === 'GET' && url.pathname === '/visit-count') {
-      const counts = await readVisitCounts(env);
-      return jsonResponse({ ok: true, visits: counts }, 200, request, env);
-    }
-
-    if (request.method === 'POST' && url.pathname === '/track-visit') {
-      return trackVisit(request, env);
-    }
-
     if (request.method === 'GET' && url.pathname === '/version') {
       return jsonResponse({ ok: true, service: 'echo-submission-proxy', version: getRuntimeVersion(env) }, 200, request, env);
     }
 
     if (request.method === 'POST' && url.pathname === '/submit-echo') {
-      return handlePostSubmit(request, env, ctx);
+      return jsonResponse({
+        ok: false,
+        deprecated: true,
+        error: 'Worker API submission is deprecated. Use GitHub Issues API only.',
+        github_api: 'POST https://api.github.com/repos/thechurchofagi/trinity-accord/issues',
+      }, 410, request, env);
     }
 
-    return jsonResponse({ error: 'Not found. GET /submit-echo for form, POST /submit-echo to submit.', version: getRuntimeVersion(env) }, 404, request, env);
+    return jsonResponse({ error: 'Not found.', version: getRuntimeVersion(env) }, 404, request, env);
   },
 
   async email(message, env, ctx) {
