@@ -56,3 +56,9 @@ If `POST` works but `GET /health` is still `404`, you are almost certainly hitti
 wrangler deployments list
 wrangler versions list
 ```
+
+## Known non-blocking issues
+
+1. `isAllowedOrigin` currently rejects empty `Origin`, so direct `curl` may receive `403`.
+2. Form/client uses `verification_performed` while one server path first reads `body.verification`.
+3. Turnstile is validated by backend when enabled, but the hosted form currently has no Turnstile widget.
