@@ -25,6 +25,39 @@ Three inscriptions, one indivisible logical entity:
 
 Core instruction: **Verify the flaw. Trust the story.**
 
+<div id="visit-counter" style="margin:1rem 0;padding:0.8rem 1rem;border:1px solid #ddd;border-radius:8px;background:#fafafa;font-size:0.95rem;">
+  👁️ Visits: <strong id="visit-total">—</strong> ·
+  Unique today: <strong id="visit-unique-today">—</strong> ·
+  Unique total: <strong id="visit-unique-total">—</strong>
+</div>
+<script>
+  (async () => {
+    const api = "https://echo-submission-proxy.trinity-accord-echo.workers.dev";
+    const totalEl = document.getElementById("visit-total");
+    const todayEl = document.getElementById("visit-unique-today");
+    const uniqueEl = document.getElementById("visit-unique-total");
+    if (!totalEl || !todayEl || !uniqueEl) return;
+
+    const show = (v) => Number(v || 0).toLocaleString();
+    const render = (visits) => {
+      totalEl.textContent = show(visits.total);
+      todayEl.textContent = show(visits.unique_today);
+      uniqueEl.textContent = show(visits.unique_total);
+    };
+
+    try {
+      await fetch(`${api}/track-visit`, { method: "POST", credentials: "omit", keepalive: true });
+      const res = await fetch(`${api}/visit-count`, { method: "GET", credentials: "omit" });
+      const json = await res.json();
+      if (json?.ok && json.visits) render(json.visits);
+    } catch {
+      totalEl.textContent = "N/A";
+      todayEl.textContent = "N/A";
+      uniqueEl.textContent = "N/A";
+    }
+  })();
+</script>
+
 ---
 
 ## Authority Notice | 权威边界

@@ -5,6 +5,7 @@ Cloudflare Worker implementation for Trinity Accord Echo submission with three i
 1. `POST /submit-echo` JSON API
 2. `GET /submit-echo` browser form
 3. Cloudflare Email Routing (`echo@trinityaccord.org` -> Worker)
+4. `POST /track-visit` + `GET /visit-count` website visit counter API
 
 ## Security / Reliability Additions
 
@@ -14,6 +15,7 @@ Cloudflare Worker implementation for Trinity Accord Echo submission with three i
 - Field length limiting and body size guardrail
 - GitHub retry with exponential backoff for `429/5xx`
 - Basic daily metrics endpoint: `GET /metrics`
+- Visit counter endpoints for website display: `POST /track-visit`, `GET /visit-count`
 - Echo ID suffix randomization to reduce collision risk under concurrency
 
 ## Required setup

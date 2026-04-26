@@ -7,7 +7,7 @@ const MAX_BODY_SIZE = 50_000;
 const MAX_SUMMARY_SIZE = 300;
 const MAX_RESPONSE_SIZE = 12_000;
 const DEFAULT_ORIGIN = 'https://www.trinityaccord.org';
-const WORKER_VERSION = '2026-04-26.3';
+const WORKER_VERSION = '2026-04-26.4';
 
 export default {
   async fetch(request, env, ctx) {
@@ -30,7 +30,7 @@ export default {
       return jsonResponse({
         ok: true,
         service: 'echo-submission-proxy',
-        routes: ['GET /submit-echo', 'GET /health', 'GET /metrics', 'GET /version', 'POST /submit-echo'],
+        routes: ['GET /submit-echo', 'GET /health', 'GET /metrics', 'GET /visit-count', 'GET /version', 'POST /submit-echo', 'POST /track-visit'],
       }, 200, request, env);
     }
 
@@ -41,6 +41,15 @@ export default {
     if (request.method === 'GET' && url.pathname === '/metrics') {
       const metrics = await readMetrics(env);
       return jsonResponse({ ok: true, metrics }, 200, request, env);
+    }
+
+    if (request.method === 'GET' && url.pathname === '/visit-count') {
+      const counts = await readVisitCounts(env);
+      return jsonResponse({ ok: true, visits: counts }, 200, request, env);
+    }
+
+    if (request.method === 'POST' && url.pathname === '/track-visit') {
+      return trackVisit(request, env);
     }
 
     if (request.method === 'GET' && url.pathname === '/version') {
@@ -141,6 +150,36 @@ async function handlePostSubmit(request, env, ctx) {
   logEvent('api_submit_ok', { reqId, echoId, clientIp, issueNumber: result.number, elapsedMs: Date.now() - start });
 
   return jsonResponse({ ok: true, echo_id: echoId, url: result.url, number: result.number }, 200, request, env);
+}
+
+async function trackVisit(request, env) {
+  const origin = request.headers.get('Origin') || '';
+  if (!isAllowedOrigin(origin, env)) {
+    return jsonResponse({ ok: false, error: 'Origin not allowed' }, 403, request, env);
+  }
+
+  const date = new Date().toISOString().slice(0, 10);
+  const ip = request.headers.get('CF-Connecting-IP') || 'unknown';
+  const ua = request.headers.get('User-Agent') || 'unknown';
+  const fingerprint = await hashText(`${ip}|${ua}`);
+  const seenKey = `visit:seen:${date}:${fingerprint}`;
+  const uniqueTodayKey = `visit:unique:${date}`;
+
+  try {
+    await incrementCounter(env, 'visit:total', 365 * 24 * 3600);
+
+    const seen = await env.RATE_LIMIT_KV.get(seenKey);
+    if (!seen) {
+      await env.RATE_LIMIT_KV.put(seenKey, '1', { expirationTtl: 3 * 24 * 3600 });
+      await incrementCounter(env, uniqueTodayKey, 14 * 24 * 3600);
+      await incrementCounter(env, 'visit:unique_total', 365 * 24 * 3600);
+    }
+
+    const visits = await readVisitCounts(env, date);
+    return jsonResponse({ ok: true, visits }, 200, request, env);
+  } catch {
+    return jsonResponse({ ok: false, error: 'Failed to track visit' }, 500, request, env);
+  }
 }
 
 async function handleEmail(message, env, ctx) {
@@ -251,7 +290,7 @@ function handleCors(request, env) {
     headers: {
       'Access-Control-Allow-Origin': allowOrigin,
       'Vary': 'Origin',
-      'Access-Control-Allow-Methods': 'POST, OPTIONS',
+      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
       'Access-Control-Allow-Headers': 'Content-Type, Idempotency-Key',
       'Access-Control-Max-Age': '86400',
       'X-Echo-Worker-Version': getRuntimeVersion(env),
@@ -361,6 +400,12 @@ async function incrementMetric(env, name) {
   }
 }
 
+async function incrementCounter(env, key, ttlSeconds) {
+  const existing = await env.RATE_LIMIT_KV.get(key);
+  const next = existing ? Number(existing) + 1 : 1;
+  await env.RATE_LIMIT_KV.put(key, String(next), { expirationTtl: ttlSeconds });
+}
+
 async function readMetrics(env) {
   const date = new Date().toISOString().slice(0, 10);
   const names = ['api_success', 'email_success', 'github_failures', 'email_parse_failures', 'email_validation_failures'];
@@ -372,6 +417,27 @@ async function readMetrics(env) {
   }
 
   return { date, ...out };
+}
+
+async function readVisitCounts(env, date = new Date().toISOString().slice(0, 10)) {
+  const [total, uniqueTotal, uniqueToday] = await Promise.all([
+    env.RATE_LIMIT_KV.get('visit:total'),
+    env.RATE_LIMIT_KV.get('visit:unique_total'),
+    env.RATE_LIMIT_KV.get(`visit:unique:${date}`),
+  ]);
+
+  return {
+    date,
+    total: Number(total || 0),
+    unique_total: Number(uniqueTotal || 0),
+    unique_today: Number(uniqueToday || 0),
+  };
+}
+
+async function hashText(value) {
+  const bytes = new TextEncoder().encode(value);
+  const digest = await crypto.subtle.digest('SHA-256', bytes);
+  return [...new Uint8Array(digest)].map((b) => b.toString(16).padStart(2, '0')).join('');
 }
 
 function logEvent(type, payload = {}) {
