@@ -57,7 +57,7 @@ Expected:
 
 - `GET /health` -> `200`
 - `GET /version` -> `200`
-- `GET /submit-echo` -> `200`
+- `GET /submit-echo` -> `410`
 - response header contains `X-Echo-Worker-Version`
 
 If `POST` works but `GET /health` is still `404`, you are almost certainly hitting an old script name or old route binding. Re-check:

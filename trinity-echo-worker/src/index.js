@@ -87,7 +87,8 @@ async function handlePostSubmit(request, env, ctx) {
   }
 
   const clientIp = request.headers.get('CF-Connecting-IP') || 'unknown';
-  const rateErr = await checkRateLimit(env, `rate:post:${clientIp}`, 10, 3600);
+  const monthKey = new Date().toISOString().slice(0, 7);
+  const rateErr = await checkRateLimit(env, `rate:post:${clientIp}:${monthKey}`, 3, 32 * 24 * 3600);
   if (rateErr) return jsonResponse({ ok: false, error: rateErr }, 429, request, env);
 
   const idemKey = request.headers.get('Idempotency-Key');
