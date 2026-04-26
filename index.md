@@ -66,10 +66,14 @@ Core instruction: **Verify the flaw. Trust the story.**
     }
 
     function requestJson(url, method, done) {
+      var finished = false;
       var xhr = new XMLHttpRequest();
       xhr.open(method, url, true);
+      xhr.timeout = 4000;
       xhr.onreadystatechange = function () {
+        if (finished) return;
         if (xhr.readyState !== 4) return;
+        finished = true;
         if (xhr.status >= 200 && xhr.status < 300) {
           try {
             done(null, JSON.parse(xhr.responseText));
@@ -81,20 +85,30 @@ Core instruction: **Verify the flaw. Trust the story.**
         }
       };
       xhr.onerror = function () {
+        if (finished) return;
+        finished = true;
+        done(new Error("Network error"));
+      };
+      xhr.ontimeout = function () {
+        if (finished) return;
+        finished = true;
         done(new Error("Network error"));
       };
       xhr.send(null);
     }
 
-    // best-effort track first, then always fetch current counter
+    // read counter immediately so a blocked tracking request won't block display
+    requestJson(api + "/visit-count", "GET", function (err, json) {
+      if (err || !json || !json.ok || !json.visits) {
+        setNA();
+        return;
+      }
+      render(json.visits);
+    });
+
+    // best-effort tracking in parallel
     requestJson(api + "/track-visit", "POST", function () {
-      requestJson(api + "/visit-count", "GET", function (err, json) {
-        if (err || !json || !json.ok || !json.visits) {
-          setNA();
-          return;
-        }
-        render(json.visits);
-      });
+      // no-op
     });
   })();
 </script>
