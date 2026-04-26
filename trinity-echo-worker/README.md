@@ -25,10 +25,34 @@ wrangler secret put GITHUB_REPO
 wrangler secret put ALLOWED_ORIGINS
 # optional
 wrangler secret put TURNSTILE_SECRET_KEY
+# optional but recommended (used in /health and response headers)
+wrangler secret put WORKER_VERSION
 ```
 
 Then update `wrangler.toml` with the KV namespace id and deploy:
 
 ```bash
 wrangler deploy
+```
+
+## Verify you deployed the correct Worker
+
+After deploy, use the exact URL printed by Wrangler and run:
+
+```bash
+./scripts/check-live-worker.sh https://<your-worker-name>.<your-subdomain>.workers.dev
+```
+
+Expected:
+
+- `GET /health` -> `200`
+- `GET /version` -> `200`
+- `GET /submit-echo` -> `200`
+- response header contains `X-Echo-Worker-Version`
+
+If `POST` works but `GET /health` is still `404`, you are almost certainly hitting an old script name or old route binding. Re-check:
+
+```bash
+wrangler deployments list
+wrangler versions list
 ```
