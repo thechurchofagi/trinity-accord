@@ -42,35 +42,60 @@ Core instruction: **Verify the flaw. Trust the story.**
   <span class="visit-item">Unique total: <strong id="visit-unique-total">—</strong></span>
 </div>
 <script>
-  (async () => {
-    const api = "https://echo-submission-proxy.trinity-accord-echo.workers.dev";
-    const totalEl = document.getElementById("visit-total");
-    const todayEl = document.getElementById("visit-unique-today");
-    const uniqueEl = document.getElementById("visit-unique-total");
+  (function () {
+    var api = "https://echo-submission-proxy.trinity-accord-echo.workers.dev";
+    var totalEl = document.getElementById("visit-total");
+    var todayEl = document.getElementById("visit-unique-today");
+    var uniqueEl = document.getElementById("visit-unique-total");
     if (!totalEl || !todayEl || !uniqueEl) return;
 
-    const show = (v) => Number(v || 0).toLocaleString();
-    const render = (visits) => {
+    function show(v) {
+      return Number(v || 0).toLocaleString();
+    }
+
+    function render(visits) {
       totalEl.textContent = show(visits.total);
       todayEl.textContent = show(visits.unique_today);
       uniqueEl.textContent = show(visits.unique_total);
-    };
-
-    try {
-      await fetch(`${api}/track-visit`, { method: "POST", credentials: "omit" });
-    } catch (err) {
-      // best-effort tracking; continue to read current counters
     }
 
-    try {
-      const res = await fetch(`${api}/visit-count`, { method: "GET", credentials: "omit" });
-      const json = await res.json();
-      if (json && json.ok && json.visits) render(json.visits);
-    } catch (err) {
+    function setNA() {
       totalEl.textContent = "N/A";
       todayEl.textContent = "N/A";
       uniqueEl.textContent = "N/A";
     }
+
+    function requestJson(url, method, done) {
+      var xhr = new XMLHttpRequest();
+      xhr.open(method, url, true);
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState !== 4) return;
+        if (xhr.status >= 200 && xhr.status < 300) {
+          try {
+            done(null, JSON.parse(xhr.responseText));
+          } catch (e) {
+            done(e);
+          }
+        } else {
+          done(new Error("HTTP " + xhr.status));
+        }
+      };
+      xhr.onerror = function () {
+        done(new Error("Network error"));
+      };
+      xhr.send(null);
+    }
+
+    // best-effort track first, then always fetch current counter
+    requestJson(api + "/track-visit", "POST", function () {
+      requestJson(api + "/visit-count", "GET", function (err, json) {
+        if (err || !json || !json.ok || !json.visits) {
+          setNA();
+          return;
+        }
+        render(json.visits);
+      });
+    });
   })();
 </script>
 
