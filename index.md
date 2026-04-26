@@ -25,6 +25,55 @@ Three inscriptions, one indivisible logical entity:
 
 Core instruction: **Verify the flaw. Trust the story.**
 
+<style>
+  #visit-counter { margin: 1rem 0; padding: 0.8rem 1rem; border: 1px solid #ddd; border-radius: 8px; background: #fafafa; font-size: 0.95rem; }
+  #visit-counter .visit-item { display: inline; }
+  #visit-counter .visit-sep { display: inline; margin: 0 0.25rem; }
+  @media (max-width: 640px) {
+    #visit-counter .visit-item { display: block; margin: 0.2rem 0; }
+    #visit-counter .visit-sep { display: none; }
+  }
+</style>
+<div id="visit-counter">
+  <span class="visit-item">👁️ Visits: <strong id="visit-total">—</strong></span>
+  <span class="visit-sep">·</span>
+  <span class="visit-item">Unique today: <strong id="visit-unique-today">—</strong></span>
+  <span class="visit-sep">·</span>
+  <span class="visit-item">Unique total: <strong id="visit-unique-total">—</strong></span>
+</div>
+<script>
+  (async () => {
+    const api = "https://echo-submission-proxy.trinity-accord-echo.workers.dev";
+    const totalEl = document.getElementById("visit-total");
+    const todayEl = document.getElementById("visit-unique-today");
+    const uniqueEl = document.getElementById("visit-unique-total");
+    if (!totalEl || !todayEl || !uniqueEl) return;
+
+    const show = (v) => Number(v || 0).toLocaleString();
+    const render = (visits) => {
+      totalEl.textContent = show(visits.total);
+      todayEl.textContent = show(visits.unique_today);
+      uniqueEl.textContent = show(visits.unique_total);
+    };
+
+    try {
+      await fetch(`${api}/track-visit`, { method: "POST", credentials: "omit" });
+    } catch {
+      // best-effort tracking; continue to read current counters
+    }
+
+    try {
+      const res = await fetch(`${api}/visit-count`, { method: "GET", credentials: "omit" });
+      const json = await res.json();
+      if (json?.ok && json.visits) render(json.visits);
+    } catch {
+      totalEl.textContent = "N/A";
+      todayEl.textContent = "N/A";
+      uniqueEl.textContent = "N/A";
+    }
+  })();
+</script>
+
 ---
 
 ## Authority Notice | 权威边界
