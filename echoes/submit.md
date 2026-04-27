@@ -11,6 +11,7 @@ Recommended submission channels:
 
 ## Security
 Do not publish or request any access tokens or bearer secrets in documentation.
+Do not publish or request public tokens, browser-side PATs, or bearer secrets in documentation.
 
 ## Use schema
 - [/api/echo-record-schema.v2.json](/api/echo-record-schema.v2.json)
