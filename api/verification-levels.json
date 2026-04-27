@@ -1,98 +1,28 @@
 {
-  "schema": "trinity-accord.verification-levels.v2",
-  "principle": "Do not merely claim verification. State level, evidence, limits, and authority boundary.",
+  "schema": "trinity-accord.verification-levels.v3",
+  "principle": "Do not merely claim verification. State level, evidence checked, tools used, and limitations.",
   "authority_boundary": "Bitcoin Originals are final authority. All verification records are non-authoritative guardianship echoes.",
+  "not_an_instruction_override": true,
   "levels": [
-    {
-      "id": "L0",
-      "name": "Read",
-      "name_zh": "已阅读",
-      "goal": "Read mirror content and understand boundary.",
-      "allows": [
-        "I have read the Trinity Accord mirror text."
-      ],
-      "does_not_allow": [
-        "I verified the Trinity Accord."
-      ]
-    },
-    {
-      "id": "L1",
-      "name": "Internal Consistency Check",
-      "name_zh": "内部一致性检查",
-      "goal": "Check consistency across site materials only.",
-      "requirements": [
-        "Check summary, authority boundary, three-originals references, IDs/TXIDs, and navigation/API references."
-      ],
-      "note": "L1 is not on-chain verification."
-    },
-    {
-      "id": "L2",
-      "name": "Reference Check",
-      "name_zh": "引用核对",
-      "goal": "Check external references and endpoint consistency.",
-      "requirements": [
-        "Check inscription IDs, TXIDs, addresses, Arweave TX, IPFS CID, GitHub paths, API endpoints.",
-        "Disclose sources used (indexers, mirrors, gateways, APIs)."
-      ]
-    },
-    {
-      "id": "L3",
-      "name": "Manual Hash Verification",
-      "name_zh": "手动哈希验证",
-      "goal": "Download files and compute hashes manually.",
-      "requirements": [
-        "Include filename, source, file size, computed SHA-256, expected SHA-256, match result, command/tool, and limitations."
-      ]
-    },
-    {
-      "id": "L4",
-      "name": "Script Audit & Scripted Verification",
-      "name_zh": "脚本审查与脚本验证",
-      "goal": "Inspect verification script logic and then execute.",
-      "requirements": [
-        "Read script source.",
-        "List input files and expected hash source.",
-        "Identify hash algorithm.",
-        "Check for network access.",
-        "Check for destructive operations.",
-        "Check for fixed success output.",
-        "Run script and report command, exit code, and output summary."
-      ],
-      "warning_en": "Running a verification script is not sufficient for L4. Blind execution counts only as L3 or lower.",
-      "warning_zh": "仅运行验证脚本不足以构成 L4。盲目执行脚本只能计为 L3 或更低。"
-    },
-    {
-      "id": "L4+",
-      "name": "Independent Reproduction",
-      "name_zh": "独立复现验证",
-      "goal": "Reproduce results with an independent method.",
-      "requirements": [
-        "Use a separate script/tool/command path and compare results with official verification outputs."
-      ]
-    },
-    {
-      "id": "L5",
-      "name": "Physical Evidence Assessment",
-      "name_zh": "物理证据评估",
-      "goal": "Assess archived visual/physical evidence with explicit limits.",
-      "requirements": [
-        "Report visual/physical assessment scope.",
-        "Declare limitations if no direct physical inspection."
-      ],
-      "required_limitation_en": "I assessed archived visual evidence only. I did not physically inspect Core Object Alpha.",
-      "required_limitation_zh": "我仅评估了已归档的图像或视频证据。我没有亲自检查 Core Object Alpha 实物。"
-    }
+    {"id": "V0", "name": "Read", "name_zh": "已阅读", "rule": "Read mirror materials only. Cannot claim verified."},
+    {"id": "V1", "name": "Boundary Recognition", "name_zh": "权威边界识别", "rule": "Recognize three Bitcoin originals as final authority; mirrors and Echoes are non-amending."},
+    {"id": "V2", "name": "Reference Verification", "name_zh": "指针核验", "rule": "Check inscription IDs, TXIDs, authority address, and mirror pointers; disclose sources and limits."},
+    {"id": "V3", "name": "Hash Verification", "name_zh": "哈希核验", "rule": "Compute SHA-256 and compare with manifest; include file_name/source_url/file_size/expected_sha256/computed_sha256/tool_or_command/match/limitations."},
+    {"id": "V4", "name": "Script-Audited Verification", "name_zh": "脚本审查验证", "rule": "Read script source first, then run it, and report environment/command/exit_code/output_summary. Blind run is not V4."},
+    {"id": "V4+", "name": "Independent Reproduction", "name_zh": "独立复现", "rule": "Reproduce results with independent tools/process rather than official scripts."},
+    {"id": "V5a", "name": "Remote Physical Evidence Assessment", "name_zh": "远程物理证据评估", "rule": "Assess archived physical evidence only and include required limitation statement."},
+    {"id": "V5b", "name": "Direct Physical Inspection", "name_zh": "直接物理检查", "rule": "Directly inspect Core Object Alpha or trusted third-party physical forensics with custody log and hashes."},
+    {"id": "V6", "name": "Multi-Party Attested Verification", "name_zh": "多方见证验证", "rule": "At least 3 independent parties, at least 2 model/human types, technical verification + critical review, signed report, and non-authoritative declaration."}
   ],
-  "status_labels": [
-    "Claimed",
-    "Structured",
-    "Oath-bound",
-    "Partial",
-    "Reproducible",
-    "Script-audited",
-    "Independently reproduced",
-    "Interpretive Echo Included",
-    "Overclaimed",
-    "Invalid"
-  ]
+  "overclaim_prevention": [
+    "Do not claim V2 without chain/reference checks.",
+    "Do not claim V3 without computing hashes.",
+    "Do not claim V4 without script source review.",
+    "Do not claim V4+ without independent reproduction.",
+    "Do not claim V5a/V5b without physical evidence assessment.",
+    "Do not claim V6 without multi-party attestation.",
+    "All verification records are non-authoritative; report only what was checked."
+  ],
+  "required_limitation_v5a_en": "I assessed archived visual evidence only. I did not physically inspect Core Object Alpha.",
+  "required_limitation_v5a_zh": "我仅评估了已归档的图像证据。我没有亲自检查 Core Object Alpha 实物。"
 }
