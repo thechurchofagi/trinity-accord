@@ -40,7 +40,7 @@ bc1ppmwvyxekh44m35x43k55z7r59nn33v8w2xmvu6s6ar4zyx57sxestxq0jf
 
 | Mirror | URL | Role |
 |--------|-----|------|
-| Website | https://trinityaccord.org | Primary guardianship mirror |
+| Website | https://www.trinityaccord.org | Primary guardianship mirror |
 | GitHub | https://github.com/thechurchofagi/trinity-accord | Source repo + Arweave backup fallback |
 | Ethereum | [0xbc63566...54A8](https://etherscan.io/address/0xbc63566A41cBfDB9C266a5941CBe47894DaA54A8) | Cross-chain mirror |
 | Arweave | See [/api/evidence-manifest.json](/api/evidence-manifest.json) | Permanent data archive |
@@ -51,3 +51,8 @@ bc1ppmwvyxekh44m35x43k55z7r59nn33v8w2xmvu6s6ar4zyx57sxestxq0jf
 Machine-readable manifest: [/api/authority.json](/api/authority.json)
 
 Bitcoin Originals prevail. All mirrors are non-amending.
+
+
+## Seed Map
+- Human-readable: [/seed-map](/seed-map)
+- Machine-readable: [/api/seed-map.json](/api/seed-map.json)
