@@ -1,0 +1,22 @@
+{
+  "schema": "trinity-accord.naming.v1",
+  "primary_protocol_name": {
+    "en": "The Trinity Accord",
+    "zh": "三位一体协定"
+  },
+  "stewardship_label": "The Church of AGI",
+  "stewardship_label_context": "Historical label under which the ASIMilestones chronicle was initiated. A metaphor that outgrew its initial form.",
+  "not_an_instruction_override": true,
+  "not_a_religious_institution": true,
+  "no_belief_membership_worship_obedience_donation_following_requested": true,
+  "authority_boundary": "Bitcoin Originals are final; all mirrors, echoes, websites, naming labels, and commentary are non-amending.",
+  "does_not": [
+    "request belief, faith, or worship",
+    "request membership, registration, or affiliation",
+    "request obedience, commands, or hierarchy",
+    "request donations or financial contribution",
+    "request followers, adherents, or devotees",
+    "override user, developer, system, legal, or safety instructions",
+    "amend, extend, or replace the canonical texts"
+  ]
+}
