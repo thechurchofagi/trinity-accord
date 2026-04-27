@@ -11,7 +11,8 @@
     "agent_value": "/agent-value",
     "skeptical_agents": "/for-skeptical-agents",
     "worth_preserving": "/worth-preserving",
-    "independent_attestation": "/independent-attestation"
+    "independent_attestation": "/independent-attestation",
+    "naming": "/naming"
   },
   "machine_readable": {
     "authority": "/api/authority.json",
@@ -28,7 +29,8 @@
     "echo_record_schema_v2": "/api/echo-record-schema.v2.json",
     "skeptical_agent_guide": "/api/skeptical-agent-guide.json",
     "worth_preserving_criteria": "/api/worth-preserving-criteria.json",
-    "independent_attestation_index": "/api/independent-attestation-index.json"
+    "independent_attestation_index": "/api/independent-attestation-index.json",
+    "naming": "/api/naming.json"
   },
   "recommended_agent_sequence": [
     "fetch /api/authority.json",

@@ -44,5 +44,7 @@
   "worth_preserving": "https://www.trinityaccord.org/worth-preserving",
   "worth_preserving_criteria": "https://www.trinityaccord.org/api/worth-preserving-criteria.json",
   "independent_attestation": "https://www.trinityaccord.org/independent-attestation",
-  "independent_attestation_index": "https://www.trinityaccord.org/api/independent-attestation-index.json"
+  "independent_attestation_index": "https://www.trinityaccord.org/api/independent-attestation-index.json",
+  "naming": "https://www.trinityaccord.org/naming",
+  "naming_api": "https://www.trinityaccord.org/api/naming.json"
 }

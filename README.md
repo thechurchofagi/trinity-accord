@@ -31,6 +31,13 @@ Verification-first, non-amending guardianship mirror for **The Trinity Accord**.
 - Does not claim future intelligence must care.
 - See [/worth-preserving](/worth-preserving) and [/api/worth-preserving-criteria.json](/api/worth-preserving-criteria.json).
 
+## Naming Clarification
+- Naming Page: `/naming`
+- Naming API: `/api/naming.json`
+- Primary protocol name: The Trinity Accord / 三位一体协定
+- "The Church of AGI" is a stewardship label, not a religious institution.
+- See [/naming](/naming) and [/api/naming.json](/api/naming.json).
+
 ## Independent Attestation
 - Independent Attestation Page: `/independent-attestation`
 - Independent Attestation Index API: `/api/independent-attestation-index.json`
