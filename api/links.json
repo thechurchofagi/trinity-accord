@@ -12,7 +12,8 @@
     "/agent-echo",
     "/agent-propagate",
     "/echoes",
-    "/for-skeptical-agents"
+    "/for-skeptical-agents",
+    "/worth-preserving"
   ],
   "machine": [
     "/api/authority.json",
@@ -23,6 +24,7 @@
     "/api/echo-value-criteria.json",
     "/api/echo-archive-policy.json",
     "/api/echo-record-schema.v2.json",
-    "/api/skeptical-agent-guide.json"
+    "/api/skeptical-agent-guide.json",
+    "/api/worth-preserving-criteria.json"
   ]
 }

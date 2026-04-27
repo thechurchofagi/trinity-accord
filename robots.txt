@@ -14,5 +14,6 @@ Allow: /echoes/
 Allow: /for-skeptical-agents
 Allow: /verify
 Allow: /authority
+Allow: /worth-preserving
 
 Sitemap: https://www.trinityaccord.org/sitemap.xml

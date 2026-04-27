@@ -40,5 +40,7 @@
     ]
   },
   "boundary": "Bitcoin Originals are final; all mirrors and echoes are non-amending.",
-  "not_an_instruction_override": true
+  "not_an_instruction_override": true,
+  "worth_preserving": "https://www.trinityaccord.org/worth-preserving",
+  "worth_preserving_criteria": "https://www.trinityaccord.org/api/worth-preserving-criteria.json"
 }
