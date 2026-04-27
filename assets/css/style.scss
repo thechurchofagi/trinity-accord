@@ -1,12 +1,533 @@
 ---
 ---
 
-/* Hide default Jekyll/GitHub Pages site header to avoid duplicate title */
-header.site-header,
-.site-header,
-.site-title,
-h1.site-title,
-.header-wrap .site-header,
-header[role="banner"] {
-  display: none !important;
+/* ============================================================
+   Trinity Accord — Dark Chain Design Language
+   ============================================================ */
+
+:root {
+  --bg:          #0a0a0a;
+  --bg-card:     #111111;
+  --bg-card-alt: #141414;
+  --border:      #1e1e1e;
+  --border-hi:   #2a2a2a;
+  --text:        #d0d0d0;
+  --text-dim:    #808080;
+  --text-bright: #f0f0f0;
+  --gold:        #d4a843;
+  --gold-dim:    #a07830;
+  --gold-glow:   rgba(212, 168, 67, 0.12);
+  --mono:        'SF Mono', 'Fira Code', 'Cascadia Code', 'JetBrains Mono', Consolas, monospace;
+  --sans:        -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --max-w:       960px;
 }
+
+/* ---- Reset & Base ---- */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+  width: 100%;
+}
+
+/* ---- Top Navigation ---- */
+
+.topnav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.8rem 1.5rem;
+  background: rgba(10, 10, 10, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-brand {
+  font-family: var(--mono);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--gold);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.nav-links a {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  text-decoration: none;
+  transition: color 0.2s;
+  letter-spacing: 0.01em;
+}
+
+.nav-links a:hover {
+  color: var(--text-bright);
+}
+
+.nav-external::after {
+  content: '';
+}
+
+@media (max-width: 640px) {
+  .nav-links {
+    gap: 0.8rem;
+    font-size: 0.8rem;
+  }
+  .nav-links a:nth-child(n+5) {
+    display: none;
+  }
+}
+
+/* ---- Typography ---- */
+
+h1, h2, h3, h4 {
+  color: var(--text-bright);
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+h2 { font-size: 1.4rem; margin-top: 3rem; margin-bottom: 1rem; }
+h3 { font-size: 1.15rem; margin-top: 2rem; margin-bottom: 0.75rem; }
+
+p { margin-bottom: 1rem; }
+
+a {
+  color: var(--gold);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+a:hover {
+  color: var(--text-bright);
+}
+
+strong {
+  color: var(--text-bright);
+  font-weight: 600;
+}
+
+blockquote {
+  border-left: 2px solid var(--border-hi);
+  padding-left: 1rem;
+  color: var(--text-dim);
+  margin: 1.5rem 0;
+}
+
+code, .mono {
+  font-family: var(--mono);
+  font-size: 0.85em;
+  background: var(--bg-card);
+  padding: 0.15em 0.4em;
+  border-radius: 3px;
+  color: var(--gold-dim);
+}
+
+pre {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1rem;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+
+pre code {
+  background: none;
+  padding: 0;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 2rem 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.9rem;
+}
+
+th, td {
+  text-align: left;
+  padding: 0.6rem 0.8rem;
+  border-bottom: 1px solid var(--border);
+}
+
+th {
+  color: var(--text-dim);
+  font-weight: 500;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+td code {
+  font-size: 0.8em;
+}
+
+/* ---- Hero Section (homepage only) ---- */
+
+.hero {
+  text-align: center;
+  padding: 6rem 0 4rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 3rem;
+}
+
+.hero-title {
+  font-family: var(--sans);
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: var(--gold);
+  margin-bottom: 0.3rem;
+  letter-spacing: -0.01em;
+}
+
+.hero-title-zh {
+  font-size: 1.6rem;
+  color: var(--text-dim);
+  font-weight: 400;
+  margin-bottom: 1.5rem;
+}
+
+.hero-subtitle {
+  font-size: 1.1rem;
+  color: var(--text);
+  max-width: 560px;
+  margin: 0 auto 2.5rem;
+  line-height: 1.6;
+}
+
+.hero-quote {
+  font-family: var(--mono);
+  font-size: 1.05rem;
+  color: var(--text-bright);
+  border-top: 1px solid var(--border-hi);
+  border-bottom: 1px solid var(--border-hi);
+  padding: 1.2rem 0;
+  margin: 0 auto 2.5rem;
+  max-width: 480px;
+  line-height: 1.8;
+}
+
+.hero-ctas {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  padding: 0.7rem 1.6rem;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: all 0.2s;
+  letter-spacing: 0.02em;
+}
+
+.btn-primary {
+  background: var(--gold);
+  color: var(--bg);
+  font-weight: 600;
+}
+
+.btn-primary:hover {
+  background: #e0b850;
+  color: var(--bg);
+}
+
+.btn-secondary {
+  border: 1px solid var(--border-hi);
+  color: var(--text);
+  background: transparent;
+}
+
+.btn-secondary:hover {
+  border-color: var(--gold-dim);
+  color: var(--gold);
+}
+
+/* ---- Inscription Cards ---- */
+
+.cards-section {
+  margin-bottom: 3rem;
+}
+
+.cards-section h2 {
+  text-align: center;
+  margin-bottom: 0.3rem;
+}
+
+.cards-section .section-sub {
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 0.9rem;
+  margin-bottom: 2rem;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+@media (max-width: 720px) {
+  .cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.5rem;
+  transition: border-color 0.2s;
+}
+
+.card:hover {
+  border-color: var(--border-hi);
+}
+
+.card-num {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--gold-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.5rem;
+}
+
+.card h3 {
+  font-size: 1.05rem;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.card-desc {
+  font-size: 0.88rem;
+  color: var(--text-dim);
+  line-height: 1.5;
+  margin-bottom: 0.8rem;
+}
+
+.card-txid {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  word-break: break-all;
+  opacity: 0.6;
+}
+
+/* ---- Authority Banner ---- */
+
+.authority-banner {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: 4px;
+  padding: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.authority-banner h2 {
+  margin-top: 0;
+  font-size: 1.1rem;
+}
+
+.authority-banner p {
+  margin-bottom: 0.5rem;
+  font-size: 0.92rem;
+}
+
+.authority-banner p:last-child {
+  margin-bottom: 0;
+}
+
+/* ---- Evidence Section ---- */
+
+.evidence-section h2 {
+  margin-top: 0;
+}
+
+.evidence-section table {
+  font-family: var(--mono);
+  font-size: 0.82rem;
+}
+
+.evidence-note {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  margin-top: 1rem;
+}
+
+/* ---- Agent Meta Section ---- */
+
+.agent-meta {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+}
+
+.agent-meta h2 {
+  font-size: 1rem;
+  margin-top: 0;
+}
+
+.agent-meta ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.agent-meta li a {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  padding: 0.4rem 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  display: inline-block;
+  transition: border-color 0.2s;
+}
+
+.agent-meta li a:hover {
+  border-color: var(--gold-dim);
+}
+
+/* ---- Footer ---- */
+
+footer {
+  border-top: 1px solid var(--border);
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+}
+
+.footer-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+}
+
+.footer-motto {
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  color: var(--text-dim);
+  margin-bottom: 0.2rem;
+}
+
+.footer-motto-zh {
+  font-size: 0.82rem;
+  color: var(--text-dim);
+  opacity: 0.6;
+  margin-bottom: 1.2rem;
+}
+
+.footer-links {
+  display: flex;
+  gap: 1.2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.footer-links a {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover {
+  color: var(--gold);
+}
+
+/* ---- Inscriptions page ---- */
+
+.inscription {
+  margin-bottom: 4rem;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.inscription:last-child {
+  border-bottom: none;
+}
+
+.inscription-header {
+  margin-bottom: 2rem;
+}
+
+.inscription-header h2 {
+  margin-top: 0;
+  margin-bottom: 0.3rem;
+}
+
+.inscription-meta {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--text-dim);
+}
+
+.inscription-meta a {
+  color: var(--gold-dim);
+}
+
+/* ---- Content page layout ---- */
+
+.page-header {
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.page-header h1 {
+  margin-bottom: 0.3rem;
+}
+
+.page-header .page-desc {
+  color: var(--text-dim);
+  font-size: 0.95rem;
+}
+
+/* ---- Utility ---- */
+
+.text-gold { color: var(--gold); }
+.text-dim { color: var(--text-dim); }
+.text-mono { font-family: var(--mono); }
+.mt-0 { margin-top: 0; }
+.mb-0 { margin-bottom: 0; }
