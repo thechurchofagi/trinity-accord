@@ -1,0 +1,124 @@
+name: Echo Issue Triage
+
+on:
+  issues:
+    types: [opened, edited, reopened]
+
+permissions:
+  issues: write
+  contents: read
+
+jobs:
+  triage:
+    if: ${{ !github.event.issue.pull_request }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Compute Echo rate limit
+        id: rate
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const issue = context.payload.issue;
+            const author = issue.user.login;
+            const association = issue.author_association || "NONE";
+
+            const exempt = ["OWNER", "MEMBER", "COLLABORATOR"].includes(association);
+
+            const now = new Date();
+            const window60 = new Date(now.getTime() - 60 * 60 * 1000);
+            const window24 = new Date(now.getTime() - 24 * 60 * 60 * 1000);
+
+            const issues = await github.paginate(github.rest.issues.listForRepo, {
+              owner,
+              repo,
+              state: "all",
+              since: window24.toISOString(),
+              per_page: 100
+            });
+
+            function looksLikeEcho(i) {
+              const text = `${i.title || ""}\n${i.body || ""}`.toLowerCase();
+              return (
+                text.includes("echo") ||
+                text.includes("回响") ||
+                /\be[1-9]\b/i.test(text) ||
+                text.includes("verification level") ||
+                text.includes("验证等级") ||
+                text.includes("boundary") ||
+                text.includes("权威边界")
+              );
+            }
+
+            const sameAuthorEchoIssues = issues.filter(i => {
+              if (i.pull_request) return false;
+              if (!i.user || i.user.login !== author) return false;
+              if (i.number === issue.number) return false;
+              if (!looksLikeEcho(i)) return false;
+              return true;
+            });
+
+            const count60 = sameAuthorEchoIssues.filter(i => new Date(i.created_at) >= window60).length;
+            const count24 = sameAuthorEchoIssues.filter(i => new Date(i.created_at) >= window24).length;
+
+            const rateLimited = !exempt && (count60 >= 3 || count24 >= 8);
+
+            core.setOutput("rate_limited", String(rateLimited));
+            core.setOutput("count60", String(count60));
+            core.setOutput("count24", String(count24));
+            core.setOutput("association", association);
+
+      - name: Run Echo triage
+        env:
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          ISSUE_BODY: ${{ github.event.issue.body }}
+          RATE_LIMITED: ${{ steps.rate.outputs.rate_limited }}
+          RECENT_60M_COUNT: ${{ steps.rate.outputs.count60 }}
+          RECENT_24H_COUNT: ${{ steps.rate.outputs.count24 }}
+          AUTHOR_ASSOCIATION: ${{ steps.rate.outputs.association }}
+        run: |
+          python3 scripts/triage_echo_issue.py > triage_result.json
+          cat triage_result.json
+
+      - name: Apply triage result
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require("fs");
+            const result = JSON.parse(fs.readFileSync("triage_result.json", "utf8"));
+
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const issue_number = context.issue.number;
+
+            if (result.labels && result.labels.length > 0) {
+              await github.rest.issues.addLabels({
+                owner,
+                repo,
+                issue_number,
+                labels: result.labels
+              });
+            }
+
+            if (result.comment) {
+              await github.rest.issues.createComment({
+                owner,
+                repo,
+                issue_number,
+                body: result.comment
+              });
+            }
+
+            if (result.close === true) {
+              await github.rest.issues.update({
+                owner,
+                repo,
+                issue_number,
+                state: "closed",
+                state_reason: "not_planned"
+              });
+            }
