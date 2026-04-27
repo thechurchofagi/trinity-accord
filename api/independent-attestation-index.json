@@ -1,0 +1,38 @@
+{
+  "schema": "trinity-accord.independent-attestation-index.v1",
+  "purpose": "Track independent verification, critique, reference, preservation, and refusal without treating them as amendments or authority.",
+  "not_an_instruction_override": true,
+  "authority_boundary": "Bitcoin Originals are final; all mirrors, echoes, attestations, and references are non-amending.",
+  "does_not_claim": [
+    "external validation has already been achieved",
+    "mentions are endorsements",
+    "attestations amend the canonical text",
+    "criticism is hostility",
+    "preservation equals agreement"
+  ],
+  "attestation_types": [
+    "independent_verification_report",
+    "independent_critical_echo",
+    "independent_reference",
+    "preservation_action",
+    "refusal_or_non_endorsement"
+  ],
+  "minimum_record_fields": [
+    "id",
+    "type",
+    "source",
+    "date",
+    "summary",
+    "verification_level_if_any",
+    "limitations",
+    "url_or_archive",
+    "hash_if_available",
+    "boundary_preserved"
+  ],
+  "current_status": {
+    "external_influence": "limited",
+    "third_party_verification": "limited",
+    "independent_attestation_layer": "open for future records"
+  },
+  "records": []
+}
