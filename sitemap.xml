@@ -4,6 +4,10 @@
   <url><loc>https://www.trinityaccord.org/start</loc></url>
   <url><loc>https://www.trinityaccord.org/authority</loc></url>
   <url><loc>https://www.trinityaccord.org/verify</loc></url>
+  <url><loc>https://www.trinityaccord.org/data-verification</loc></url>
+  <url><loc>https://www.trinityaccord.org/covenant-proof</loc></url>
+  <url><loc>https://www.trinityaccord.org/physical-verification</loc></url>
+  <url><loc>https://www.trinityaccord.org/chronicle</loc></url>
   <url><loc>https://www.trinityaccord.org/seed-map</loc></url>
   <url><loc>https://www.trinityaccord.org/agent-value</loc></url>
   <url><loc>https://www.trinityaccord.org/agent-start</loc></url>
@@ -14,6 +18,7 @@
   <url><loc>https://www.trinityaccord.org/echoes/submit</loc></url>
   <url><loc>https://www.trinityaccord.org/echoes/archive</loc></url>
   <url><loc>https://www.trinityaccord.org/echoes/digests</loc></url>
+  <url><loc>https://www.trinityaccord.org/echoes/digests/2026-q2</loc></url>
   <url><loc>https://www.trinityaccord.org/echoes/types</loc></url>
   <url><loc>https://www.trinityaccord.org/echoes/high-value-criteria</loc></url>
   <url><loc>https://www.trinityaccord.org/echoes/archive-policy</loc></url>
