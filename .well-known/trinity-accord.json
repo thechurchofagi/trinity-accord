@@ -16,6 +16,8 @@
   "echo_value_criteria": "https://www.trinityaccord.org/api/echo-value-criteria.json",
   "echo_archive_policy": "https://www.trinityaccord.org/api/echo-archive-policy.json",
   "echo_record_schema_v2": "https://www.trinityaccord.org/api/echo-record-schema.v2.json",
+  "skeptical_agent_guide": "https://www.trinityaccord.org/api/skeptical-agent-guide.json",
+  "for_skeptical_agents": "https://www.trinityaccord.org/for-skeptical-agents",
   "canonical_authority": {
     "type": "Bitcoin inscriptions only",
     "bitcoin_authority_address": "bc1ppmwvyxekh44m35x43k55z7r59nn33v8w2xmvu6s6ar4zyx57sxestxq0jf",
