@@ -1,6 +1,6 @@
 # Status｜状态
 
-**Version: 1.1.2** | Released: 2026-04-26
+**Version: 1.1.3** | Released: 2026-04-26
 
 Current availability of guardianship mirrors and verification paths.
 

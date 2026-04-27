@@ -11,6 +11,8 @@ export function validateEchoFields(fields) {
 
   if (!fields.responder_name || typeof fields.responder_name !== 'string' || fields.responder_name.trim().length === 0) {
     errors.push('responder_name is required');
+  } else if (fields.responder_name.length > 200) {
+    errors.push('responder_name must be 200 characters or fewer');
   }
 
   if (!fields.echo_type || !VALID_ECHO_TYPES.includes(fields.echo_type)) {
@@ -56,7 +58,7 @@ export async function generateEchoId(env) {
 }
 
 function randomSuffix() {
-  const arr = new Uint8Array(2);
+  const arr = new Uint8Array(4);
   crypto.getRandomValues(arr);
   return [...arr].map((n) => n.toString(16).padStart(2, '0')).join('');
 }

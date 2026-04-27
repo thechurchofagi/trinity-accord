@@ -20,15 +20,23 @@
   "machine": [
     "/api/authority.json",
     "/api/agent-value.json",
+    "/api/agent-tasks.json",
     "/api/seed-map.json",
     "/api/verification-levels.json",
     "/api/echo-types.json",
     "/api/echo-value-criteria.json",
     "/api/echo-archive-policy.json",
+    "/api/echo-index.json",
+    "/api/echo-digest-index.json",
     "/api/echo-record-schema.v2.json",
+    "/api/echo-schema.json",
     "/api/skeptical-agent-guide.json",
     "/api/worth-preserving-criteria.json",
     "/api/independent-attestation-index.json",
-    "/api/naming.json"
+    "/api/naming.json",
+    "/api/hashes.json",
+    "/api/evidence-manifest.json",
+    "/api/links.json",
+    "/api/agent-verification-receipt.schema.json"
   ]
 }

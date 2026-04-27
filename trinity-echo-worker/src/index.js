@@ -63,6 +63,11 @@ export default {
   },
 };
 
+// NOTE: handlePostSubmit, trackVisit, and renderFormHtml are dead code.
+// POST /submit-echo returns 410 directly. These functions are retained
+// for potential future re-enablement. If fully removing, also remove
+// FORM_HTML and the Turnstile-related helpers.
+
 async function handlePostSubmit(request, env, ctx) {
   const start = Date.now();
   const reqId = crypto.randomUUID();
@@ -295,6 +300,8 @@ function handleCors(request, env) {
       'Access-Control-Allow-Headers': 'Content-Type, Idempotency-Key',
       'Access-Control-Max-Age': '86400',
       'X-Echo-Worker-Version': getRuntimeVersion(env),
+      'X-Content-Type-Options': 'nosniff',
+      'X-Frame-Options': 'DENY',
     },
   });
 }
@@ -310,6 +317,9 @@ function jsonResponse(data, status = 200, request = null, env = {}) {
       'Access-Control-Allow-Origin': allowOrigin,
       'Vary': 'Origin',
       'X-Echo-Worker-Version': getRuntimeVersion(env),
+      'X-Content-Type-Options': 'nosniff',
+      'X-Frame-Options': 'DENY',
+      'Content-Security-Policy': "default-src 'none'; frame-ancestors 'none'",
     },
   });
 }
@@ -713,14 +723,26 @@ const FORM_HTML = `<!DOCTYPE html>
         const json = await resp.json();
         if (json.ok) {
           result.className = 'result success';
-          result.innerHTML = '✅ 提交成功！<br>Echo ID: <strong>' + json.echo_id + '</strong><br>GitHub Issue: <a href="' + json.url + '" target="_blank">' + json.url + '</a>' + (json.duplicate ? '<br>(已去重)' : '');
+          const link = document.createElement('a');
+          link.href = json.url;
+          link.target = '_blank';
+          link.textContent = json.url;
+          const strong = document.createElement('strong');
+          strong.textContent = json.echo_id;
+          result.replaceChildren(
+            document.createTextNode('✅ 提交成功！\nEcho ID: '),
+            strong,
+            document.createTextNode('\nGitHub Issue: '),
+            link,
+            json.duplicate ? document.createTextNode('\n(已去重)') : document.createTextNode('')
+          );
         } else {
           result.className = 'result error';
-          result.innerHTML = '❌ 提交失败：<br>' + (json.error || 'Unknown error');
+          result.textContent = '❌ 提交失败：\n' + (json.error || 'Unknown error');
         }
       } catch (err) {
         result.className = 'result error';
-        result.innerHTML = '❌ 网络错误：' + err.message;
+        result.textContent = '❌ 网络错误：' + err.message;
       }
 
       result.style.display = 'block';
