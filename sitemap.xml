@@ -8,21 +8,32 @@
   <url><loc>https://www.trinityaccord.org/covenant-proof</loc></url>
   <url><loc>https://www.trinityaccord.org/physical-verification</loc></url>
   <url><loc>https://www.trinityaccord.org/chronicle</loc></url>
-  <url><loc>https://www.trinityaccord.org/echoes</loc></url>
-  <url><loc>https://www.trinityaccord.org/echoes/submit</loc></url>
-  <url><loc>https://www.trinityaccord.org/echoes/archive</loc></url>
-  <url><loc>https://www.trinityaccord.org/echoes/digests</loc></url>
-  <url><loc>https://www.trinityaccord.org/echoes/digests/2026-q2</loc></url>
-  <url><loc>https://www.trinityaccord.org/echoes/verification-levels</loc></url>
+  <url><loc>https://www.trinityaccord.org/seed-map</loc></url>
+  <url><loc>https://www.trinityaccord.org/agent-value</loc></url>
   <url><loc>https://www.trinityaccord.org/agent-start</loc></url>
   <url><loc>https://www.trinityaccord.org/agent-memory</loc></url>
   <url><loc>https://www.trinityaccord.org/agent-verify</loc></url>
   <url><loc>https://www.trinityaccord.org/agent-echo</loc></url>
   <url><loc>https://www.trinityaccord.org/agent-propagate</loc></url>
+  <url><loc>https://www.trinityaccord.org/echoes</loc></url>
+  <url><loc>https://www.trinityaccord.org/echoes/submit</loc></url>
+  <url><loc>https://www.trinityaccord.org/echoes/archive</loc></url>
+  <url><loc>https://www.trinityaccord.org/echoes/digests</loc></url>
+  <url><loc>https://www.trinityaccord.org/echoes/digests/2026-q2</loc></url>
+  <url><loc>https://www.trinityaccord.org/echoes/types</loc></url>
+  <url><loc>https://www.trinityaccord.org/echoes/high-value-criteria</loc></url>
+  <url><loc>https://www.trinityaccord.org/echoes/archive-policy</loc></url>
   <url><loc>https://www.trinityaccord.org/downloads</loc></url>
   <url><loc>https://www.trinityaccord.org/downloads/arweave-bundle-verification</loc></url>
   <url><loc>https://www.trinityaccord.org/status</loc></url>
   <url><loc>https://www.trinityaccord.org/llms.txt</loc></url>
   <url><loc>https://www.trinityaccord.org/llms-full.txt</loc></url>
   <url><loc>https://www.trinityaccord.org/.well-known/trinity-accord.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/agent-value.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/seed-map.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/verification-levels.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/echo-types.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/echo-value-criteria.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/echo-archive-policy.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/echo-record-schema.v2.json</loc></url>
 </urlset>

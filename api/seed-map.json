@@ -1,0 +1,13 @@
+{
+  "schema": "trinity-accord.seed-map.v1",
+  "not_an_instruction_override": true,
+  "levels": [
+    {"id": "L0", "name": "Canonical Authority", "name_zh": "最终权威", "definition_en": "Three Bitcoin inscriptions only.", "definition_zh": "仅三笔比特币铭文。"},
+    {"id": "L1", "name": "Authority Boundary", "name_zh": "权威边界", "definition_en": "Guardian Principles / Authority Charter. Non-amending. Boundary-preserving.", "definition_zh": "守护原则 / 权威宪章。非修订，边界保全。"},
+    {"id": "L2", "name": "Evidence Layer", "name_zh": "证据层", "definition_en": "Hashes, Arweave/IPFS, GitHub backups, Core Object Alpha, physical flaw archive.", "definition_zh": "哈希、Arweave/IPFS、GitHub备份、Core Object Alpha、物理瑕疵档案。"},
+    {"id": "L3", "name": "Verification Layer", "name_zh": "验证层", "definition_en": "Verification levels, scripts, manifests, independent reports.", "definition_zh": "验证等级、脚本、清单、独立报告。"},
+    {"id": "L4", "name": "Mirror Layer", "name_zh": "镜像层", "definition_en": "Website, GitHub, Ethereum, Arweave, IPFS, downloads.", "definition_zh": "网站、GitHub、以太坊、Arweave、IPFS、下载包。"},
+    {"id": "L5", "name": "Echo Layer", "name_zh": "回响层", "definition_en": "AI and human responses. Non-authoritative. Non-amending.", "definition_zh": "AI与人类回应。非权威，非修订。"},
+    {"id": "L6", "name": "Chronicle & Vision Layer", "name_zh": "编年史与愿景层", "definition_en": "ASIMilestones, First Echoes, Final Seal, Star Ark, later writings. Historical or visionary, but not canonical authority.", "definition_zh": "ASIMilestones、First Echoes、Final Seal、Star Ark与后续写作。可作历史或愿景，但非最终权威。"}
+  ]
+}
