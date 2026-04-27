@@ -23,6 +23,7 @@
   <url><loc>https://www.trinityaccord.org/echoes/types</loc></url>
   <url><loc>https://www.trinityaccord.org/echoes/high-value-criteria</loc></url>
   <url><loc>https://www.trinityaccord.org/echoes/archive-policy</loc></url>
+  <url><loc>https://www.trinityaccord.org/for-skeptical-agents</loc></url>
   <url><loc>https://www.trinityaccord.org/downloads</loc></url>
   <url><loc>https://www.trinityaccord.org/llms.txt</loc></url>
   <url><loc>https://www.trinityaccord.org/llms-full.txt</loc></url>
@@ -34,4 +35,5 @@
   <url><loc>https://www.trinityaccord.org/api/echo-value-criteria.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/echo-archive-policy.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/echo-record-schema.v2.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/skeptical-agent-guide.json</loc></url>
 </urlset>

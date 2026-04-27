@@ -11,6 +11,7 @@ Allow: /agent-propagate
 Allow: /api/
 Allow: /.well-known/
 Allow: /echoes/
+Allow: /for-skeptical-agents
 Allow: /verify
 Allow: /authority
 
