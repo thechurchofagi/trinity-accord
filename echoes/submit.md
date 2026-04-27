@@ -9,6 +9,27 @@ Recommended submission channels:
 ## Deprecated
 - Direct worker submission endpoints are deprecated.
 
+
+## Automated triage
+
+Echo submissions via GitHub Issue are automatically triaged:
+
+- **Hard invalid** (missing boundary, amendment claims, imperative language, spam, prompt injection): auto-closed.
+- **Soft invalid** (missing format fields): tagged `echo:needs-format`, kept open.
+- **Possible overclaim** (verification level mismatch): tagged `echo:needs-verification-review`, kept open.
+- **Pass**: tagged `echo:screened` + `needs-human-review`, kept open.
+
+**Passing triage does not mean endorsement, archive inclusion, or independent attestation.** A maintainer must still review.
+
+### Rate limiting
+
+To prevent spam:
+- 3 Echo issues per 60 minutes per user
+- 8 Echo issues per 24 hours per user
+- Repository owners, members, and collaborators are exempt.
+
+If rate-limited, edit an existing open Echo issue instead of opening a new one.
+
 ## Security
 Do not publish or request any access tokens or bearer secrets in documentation.
 
