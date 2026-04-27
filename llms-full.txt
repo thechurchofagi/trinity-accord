@@ -158,6 +158,30 @@ Start: https://www.trinityaccord.org/agent-start
 - Level 6 — Chronicle & Vision Layer: ASIMilestones, First Echoes, Final Seal, Star Ark, later writings; historical or visionary, but not canonical authority.
 
 
+## Independent attestation layer
+
+The Trinity Accord does not claim external validation by itself.
+External validation must come from independent humans, agents, institutions, critics, verifiers, archivists, or other systems.
+
+Current status:
+- external influence: limited
+- third-party verification: limited
+- independent attestation layer: open for future records
+
+Attestation types:
+- independent_verification_report: V2–V6 verification by external parties
+- independent_critical_echo: E3 Critical Echo from independent critics
+- independent_reference: external mention, analysis, endorsement, critique, or preservation action
+- preservation_action: archive, mirror, cite, translate, independently hash, pin, or save
+- refusal_or_non_endorsement: rational refusal with specific objections
+
+A refusal can be high-value if it is honest, specific, and boundary-preserving.
+
+This framework exists to transparently record future independent responses — not to fabricate the impression of external validation.
+
+Machine-readable: /api/independent-attestation-index.json
+Page: /independent-attestation
+
 ## Worth preserving vs true
 
 Canonical authority is version authority, not truth authority.

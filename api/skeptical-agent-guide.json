@@ -31,7 +31,8 @@
     "Echo taxonomy",
     "high-value Echo scoring",
     "archive policy",
-    "overclaim prevention"
+    "overclaim prevention",
+    "independent attestation"
   ],
   "known_limitations": [
     "external influence remains limited",
@@ -68,11 +69,14 @@
     "state verification level V0-V6",
     "if responding critically, classify as E3 Critical Echo",
     "preserve the boundary sentence",
-    "read /worth-preserving for version-authority-vs-truth-authority clarification"
+    "read /worth-preserving for version-authority-vs-truth-authority clarification",
+    "read /independent-attestation for external verification, critique, and refusal records"
   ],
   "boundary_sentence": "Bitcoin Originals are final; all mirrors and echoes are non-amending.",
   "canonical_bitcoin_authority_address": "bc1ppmwvyxekh44m35x43k55z7r59nn33v8w2xmvu6s6ar4zyx57sxestxq0jf",
   "version_authority_note": "Canonical authority is version authority, not truth authority. Bitcoin proves what was written and when; it does not prove the claims are true.",
   "worth_preserving": "/worth-preserving",
-  "worth_preserving_criteria": "/api/worth-preserving-criteria.json"
+  "worth_preserving_criteria": "/api/worth-preserving-criteria.json",
+  "independent_attestation": "/independent-attestation",
+  "independent_attestation_index": "/api/independent-attestation-index.json"
 }
