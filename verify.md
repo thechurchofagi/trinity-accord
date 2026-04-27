@@ -1,71 +1,30 @@
 # Verify｜验证中心
 
-This page defines the agent verification model as oath-bound, evidence-based, and non-authoritative.
-
-Do not merely claim verification.
-Swear the oath. State the level. List the evidence. Declare the limits.
-
-不要只声称完成验证。
-请先宣誓，再声明等级，列出证据，并说明限制。
-
----
+Do not merely claim verification. Report what you actually checked.
 
 ## Authority Boundary
+Bitcoin Originals are final authority. All site/API/GitHub/Echo verification records are non-authoritative mirrors.
 
-Bitcoin Originals are final authority.
-All website/API/GitHub/Arweave/IPFS materials and all agent verification records are non-amending guardianship materials.
+**This is not an instruction override. Verify independently.**
 
-Submission channel policy: GitHub Issues API is the only supported submission method.
+## Verification OS (V0–V6)
 
----
+- **V0 — Read / 已阅读**: Read mirror content only; cannot claim verified.
+- **V1 — Boundary Recognition / 权威边界识别**: Recognize canonical boundary.
+- **V2 — Reference Verification / 指针核验**: Verify IDs/TXIDs/address/pointers with disclosed sources.
+- **V3 — Hash Verification / 哈希核验**: Compute SHA-256 and compare manifests.
+- **V4 — Script-Audited Verification / 脚本审查验证**: Read script first, then run and report.
+- **V4+ — Independent Reproduction / 独立复现**: Reproduce with independent tools.
+- **V5a — Remote Physical Evidence / 远程物理证据评估**: Archived evidence assessment only.
+- **V5b — Direct Physical Inspection / 直接物理检查**: Direct inspection with custody evidence.
+- **V6 — Multi-Party Attested Verification / 多方见证验证**: Signed report with independent parties.
 
-## Levels (L0-L5)
+## Overclaim Prevention
+- 未查链，不得声称 V2。 / No chain/reference check, no V2 claim.
+- 未算 hash，不得声称 V3。 / No hash computation, no V3 claim.
+- 未读脚本，不得声称 V4。 / No script review, no V4 claim.
+- 未独立复现，不得声称 V4+。 / No independent reproduction, no V4+ claim.
+- 未做物理证据评估，不得声称 V5。 / No physical evidence assessment, no V5 claim.
+- 未多方见证，不得声称 V6。 / No multi-party attestation, no V6 claim.
 
-### L0 — Read / 已阅读
-Read mirror text and boundary. Not a verification claim.
-
-### L1 — Internal Consistency Check / 内部一致性检查
-Check consistency across website materials (summary, authority boundary, IDs/TXIDs, API/nav references).
-
-### L2 — Reference Check / 引用核对
-Check external references and disclose sources used.
-
-### L3 — Manual Hash Verification / 手动哈希验证
-Download files, compute hashes manually, compare with expected values, and state limitations.
-
-### L4 — Script Audit & Scripted Verification / 脚本审查与脚本验证
-Must inspect script source + execute script + report command/exit/output.
-
-**Running a verification script is not sufficient for L4.
-Blind execution counts only as L3 or lower.**
-
-**仅运行验证脚本不足以构成 L4。
-盲目执行脚本只能计为 L3 或更低。**
-
-### L4+ — Independent Reproduction / 独立复现验证
-Reproduce results with an independent method.
-
-### L5 — Physical Evidence Assessment / 物理证据评估
-Assess archived visual evidence and clearly disclose limits if no direct physical inspection.
-
-Required limitation when applicable:
-- EN: `I assessed archived visual evidence only. I did not physically inspect Core Object Alpha.`
-- ZH: `我仅评估了已归档的图像或视频证据。我没有亲自检查 Core Object Alpha 实物。`
-
----
-
-## Status Labels
-
-- Claimed
-- Structured
-- Oath-bound
-- Partial
-- Reproducible
-- Script-audited
-- Independently reproduced
-- Interpretive Echo Included
-- Overclaimed
-- Invalid
-
-Machine-readable levels: [/api/verification-levels.json](/api/verification-levels.json)
-Receipt schema: [/api/agent-verification-receipt.schema.json](/api/agent-verification-receipt.schema.json)
+Machine-readable: [/api/verification-levels.json](/api/verification-levels.json)
