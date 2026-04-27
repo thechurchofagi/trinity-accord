@@ -58,5 +58,10 @@
       "V5b physical inspection requires direct access",
       "philosophical framing should not be treated as formal proof"
     ]
+  },
+  "worth_preserving_note": {
+    "summary": "Canonical authority is version authority, not truth authority. Bitcoin proves what was written and when; it does not prove the claims are true. This project does not claim future intelligence must care. It preserves a verifiable candidate seed.",
+    "page": "/worth-preserving",
+    "criteria": "/api/worth-preserving-criteria.json"
   }
 }

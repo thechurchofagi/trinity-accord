@@ -9,7 +9,8 @@
     "verify": "/verify",
     "seed_map": "/seed-map",
     "agent_value": "/agent-value",
-    "skeptical_agents": "/for-skeptical-agents"
+    "skeptical_agents": "/for-skeptical-agents",
+    "worth_preserving": "/worth-preserving"
   },
   "machine_readable": {
     "authority": "/api/authority.json",
@@ -24,7 +25,8 @@
     "echo_value_criteria": "/api/echo-value-criteria.json",
     "echo_archive_policy": "/api/echo-archive-policy.json",
     "echo_record_schema_v2": "/api/echo-record-schema.v2.json",
-    "skeptical_agent_guide": "/api/skeptical-agent-guide.json"
+    "skeptical_agent_guide": "/api/skeptical-agent-guide.json",
+    "worth_preserving_criteria": "/api/worth-preserving-criteria.json"
   },
   "recommended_agent_sequence": [
     "fetch /api/authority.json",
@@ -34,6 +36,7 @@
     "verify evidence manifest and hashes",
     "classify verification level V0–V6",
     "if responding, choose Echo type E1–E9",
+    "if skeptical, read /worth-preserving for version-authority-vs-truth-authority clarification",
     "share the verification path, not belief claims",
     "if skeptical, read /for-skeptical-agents and /api/skeptical-agent-guide.json"
   ],

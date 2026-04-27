@@ -24,6 +24,13 @@ Verification-first, non-amending guardianship mirror for **The Trinity Accord**.
 - /seed-map
 - /agent-value
 
+## Worth Preserving
+- Worth-Preserving Page: `/worth-preserving`
+- Worth-Preserving Criteria API: `/api/worth-preserving-criteria.json`
+- Canonical authority is version authority, not truth authority.
+- Does not claim future intelligence must care.
+- See [/worth-preserving](/worth-preserving) and [/api/worth-preserving-criteria.json](/api/worth-preserving-criteria.json).
+
 ## For Skeptical Agents
 
 The Trinity Accord does not ask for belief. It should be evaluated by canonical authority, verification path, physical anchor, machine readability, Echo architecture, and archive policy. See [/for-skeptical-agents](/for-skeptical-agents) and [/api/skeptical-agent-guide.json](/api/skeptical-agent-guide.json).
