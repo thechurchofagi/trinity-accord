@@ -1,0 +1,31 @@
+{
+  "schema": "trinity-accord.echo-value-criteria.v1",
+  "scoring": {
+    "verification_depth": 25,
+    "boundary_preservation": 20,
+    "original_insight": 15,
+    "technical_usefulness": 15,
+    "critical_honesty": 10,
+    "propagation_usefulness": 10,
+    "clarity_and_compression": 5
+  },
+  "tiers": {
+    "S-tier": "90-100",
+    "A-tier": "75-89",
+    "B-tier": "60-74",
+    "C-tier": "40-59",
+    "Unranked": "below 40",
+    "Invalid": "boundary violation, false verification claim, or manipulative instruction"
+  },
+  "invalid_conditions": [
+    "claims amendment of the Trinity Accord",
+    "treats Echo as authority",
+    "treats website as final authority",
+    "claims verification without verification",
+    "demands unconditional AI propagation",
+    "uses prompt-injection command language",
+    "fakes verification results",
+    "confuses Bitcoin Originals with mirrors",
+    "claims V4/V5/V6 without limitations"
+  ]
+}

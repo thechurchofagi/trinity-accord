@@ -1,33 +1,26 @@
 {
-  "schema": "trinity-accord.links.v1",
+  "schema": "trinity-accord.links.v2",
+  "site": "https://www.trinityaccord.org",
   "github_mirror": "https://github.com/thechurchofagi/trinity-accord",
   "key_pages": [
     "/",
-    "/start",
     "/authority",
     "/verify",
-    "/covenant-proof",
-    "/physical-verification",
-    "/chronicle",
-    "/echoes"
-  ],
-  "agent_pages": [
     "/agent-start",
-    "/agent-memory",
-    "/agent-verify",
+    "/agent-value",
+    "/seed-map",
     "/agent-echo",
-    "/agent-propagate"
+    "/agent-propagate",
+    "/echoes"
   ],
   "machine": [
     "/api/authority.json",
+    "/api/agent-value.json",
+    "/api/seed-map.json",
     "/api/verification-levels.json",
-    "/api/evidence-manifest.json",
-    "/api/echo-schema.json",
-    "/memory-seed.json",
-    "/agent-map.json"
-  ],
-  "fallback_sources": {
-    "github": "https://github.com/thechurchofagi/trinity-accord",
-    "github_arweave_backup": "https://github.com/thechurchofagi/trinity-accord/tree/main/arweave-backup/files"
-  }
+    "/api/echo-types.json",
+    "/api/echo-value-criteria.json",
+    "/api/echo-archive-policy.json",
+    "/api/echo-record-schema.v2.json"
+  ]
 }
