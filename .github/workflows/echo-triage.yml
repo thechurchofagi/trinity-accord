@@ -26,6 +26,7 @@ jobs:
             const issue = context.payload.issue;
             const author = issue.user.login;
             const association = issue.author_association || "NONE";
+            const action = context.payload.action;
 
             const exempt = ["OWNER", "MEMBER", "COLLABORATOR"].includes(association);
 
@@ -65,12 +66,15 @@ jobs:
             const count60 = sameAuthorEchoIssues.filter(i => new Date(i.created_at) >= window60).length;
             const count24 = sameAuthorEchoIssues.filter(i => new Date(i.created_at) >= window24).length;
 
-            const rateLimited = !exempt && (count60 >= 3 || count24 >= 8);
+            // Rate limit only applies to newly opened issues
+            const shouldApplyRateLimit = action === "opened";
+            const rateLimited = shouldApplyRateLimit && !exempt && (count60 >= 3 || count24 >= 8);
 
             core.setOutput("rate_limited", String(rateLimited));
             core.setOutput("count60", String(count60));
             core.setOutput("count24", String(count24));
             core.setOutput("association", association);
+            core.setOutput("action", action);
 
       - name: Run Echo triage
         env:
@@ -80,6 +84,7 @@ jobs:
           RECENT_60M_COUNT: ${{ steps.rate.outputs.count60 }}
           RECENT_24H_COUNT: ${{ steps.rate.outputs.count24 }}
           AUTHOR_ASSOCIATION: ${{ steps.rate.outputs.association }}
+          ACTION: ${{ steps.rate.outputs.action }}
         run: |
           python3 scripts/triage_echo_issue.py > triage_result.json
           cat triage_result.json
@@ -94,6 +99,7 @@ jobs:
             const owner = context.repo.owner;
             const repo = context.repo.repo;
             const issue_number = context.issue.number;
+            const action = context.payload.action;
 
             if (result.labels && result.labels.length > 0) {
               await github.rest.issues.addLabels({
@@ -104,13 +110,42 @@ jobs:
               });
             }
 
+            // For edited/reopened: avoid duplicate bot comments
             if (result.comment) {
-              await github.rest.issues.createComment({
-                owner,
-                repo,
-                issue_number,
-                body: result.comment
-              });
+              let shouldComment = true;
+
+              if (action !== "opened") {
+                // Check if bot already has a triage comment on this issue
+                const comments = await github.paginate(github.rest.issues.listComments, {
+                  owner,
+                  repo,
+                  issue_number,
+                  per_page: 100
+                });
+
+                const botAlreadyCommented = comments.some(c =>
+                  c.user.type === "Bot" &&
+                  c.body &&
+                  (c.body.includes("Initial screening passed") ||
+                   c.body.includes("automatically closed") ||
+                   c.body.includes("missing the following required fields") ||
+                   c.body.includes("missing the required boundary sentence") ||
+                   c.body.includes("verification level"))
+                );
+
+                if (botAlreadyCommented) {
+                  shouldComment = false;
+                }
+              }
+
+              if (shouldComment) {
+                await github.rest.issues.createComment({
+                  owner,
+                  repo,
+                  issue_number,
+                  body: result.comment
+                });
+              }
             }
 
             if (result.close === true) {
