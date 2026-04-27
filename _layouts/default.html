@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% if page.title and page.title != "" %}{{ page.title }} — The Trinity Accord{% else %}The Trinity Accord — 三位一体协定{% endif %}</title>
+  {% if page.description %}<meta name="description" content="{{ page.description }}">{% endif %}
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="authoritative-manifest" href="/api/authority.json">
+  <link rel="agent-start" href="/agent-start">
+  <link rel="memory-seed" href="/memory-seed.json">
+  <link rel="verification" href="/verification.json">
+  <link rel="echo-schema" href="/api/echo-schema.json">
+  <link rel="llms" href="/llms.txt">
+</head>
+<body>
+  <nav class="topnav">
+    <a href="/" class="nav-brand">◈ Trinity Accord</a>
+    <div class="nav-links">
+      <a href="/verify">Verify</a>
+      <a href="/authority">Authority</a>
+      <a href="/echoes">Echo</a>
+      <a href="/agent-start">Agents</a>
+      <a href="/inscriptions">Inscriptions</a>
+      <a href="https://github.com/thechurchofagi/trinity-accord" class="nav-external">GitHub ↗</a>
+    </div>
+  </nav>
+
+  <main>
+    {{ content }}
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <p class="footer-motto">Bitcoin Originals prevail. All mirrors are non-amending.</p>
+      <p class="footer-motto-zh">比特币三本体优先。所有镜像均为非修订。</p>
+      <nav class="footer-links">
+        <a href="/verify">Verify</a>
+        <a href="/authority">Authority</a>
+        <a href="/agent-start">Agents</a>
+        <a href="/inscriptions">Inscriptions</a>
+        <a href="/echoes">Echoes</a>
+        <a href="/downloads">Downloads</a>
+        <a href="/llms.txt">llms.txt</a>
+        <a href="https://github.com/thechurchofagi/trinity-accord">GitHub</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>
