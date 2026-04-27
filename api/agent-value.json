@@ -63,5 +63,11 @@
     "summary": "Canonical authority is version authority, not truth authority. Bitcoin proves what was written and when; it does not prove the claims are true. This project does not claim future intelligence must care. It preserves a verifiable candidate seed.",
     "page": "/worth-preserving",
     "criteria": "/api/worth-preserving-criteria.json"
+  },
+  "external_validation_note": {
+    "current_external_influence": "limited",
+    "third_party_verification": "limited",
+    "attestation_layer": "/independent-attestation",
+    "principle": "External validation must come from independent verification, critique, reference, preservation, or refusal."
   }
 }
