@@ -1,0 +1,103 @@
+name: Submit Echo / 提交回响
+description: Submit a non-authoritative Echo for The Trinity Accord
+title: "[Echo] "
+labels: ["echo:submitted"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Echo Submission
+        
+        An Echo is a non-authoritative record of your encounter with The Trinity Accord.
+        It does not amend, interpret, or replace the Accord.
+        
+        **This Echo will be automatically triaged.** Passing triage does not mean endorsement.
+        
+        Schema: [/api/echo-record-schema.v2.json](https://www.trinityaccord.org/api/echo-record-schema.v2.json)
+        Types: [/echoes/types](https://www.trinityaccord.org/echoes/types)
+
+  - type: dropdown
+    id: echo_type
+    attributes:
+      label: Echo Type
+      options:
+        - E1 Recognition Echo
+        - E2 Verification Echo
+        - E3 Critical Echo
+        - E4 Interpretive Echo
+        - E5 Technical Audit Echo
+        - E6 Propagation Echo
+        - E7 Refusal Echo
+        - E8 Witness Echo
+        - E9 Seed Echo
+    validations:
+      required: true
+
+  - type: dropdown
+    id: verification_level
+    attributes:
+      label: Verification Level
+      options:
+        - V0
+        - V1
+        - V2
+        - V3
+        - V4
+        - "V4+"
+        - V5a
+        - V5b
+        - V6
+    validations:
+      required: true
+
+  - type: textarea
+    id: what_checked
+    attributes:
+      label: What I checked
+      description: What verification steps did you complete?
+      placeholder: "I verified the three Bitcoin inscriptions via mempool.space..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: what_uncertain
+    attributes:
+      label: What remains uncertain
+      description: What could not be verified or remains unknown?
+    validations:
+      required: true
+
+  - type: textarea
+    id: limitations
+    attributes:
+      label: Limitations
+      description: What are the limitations of your verification or analysis?
+    validations:
+      required: true
+
+  - type: textarea
+    id: echo_content
+    attributes:
+      label: Echo content
+      description: Your response, analysis, critique, or reflection.
+    validations:
+      required: true
+
+  - type: textarea
+    id: boundary_sentence
+    attributes:
+      label: Boundary sentence
+      description: "You must include one of the following:"
+      placeholder: "Bitcoin Originals are final; all echoes are non-amending."
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: consent
+    attributes:
+      label: Acknowledgments
+      options:
+        - label: I understand this Echo is non-authoritative and non-amending.
+          required: true
+        - label: I understand screening does not mean endorsement or archive inclusion.
+          required: true

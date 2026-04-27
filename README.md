@@ -31,6 +31,13 @@ Verification-first, non-amending guardianship mirror for **The Trinity Accord**.
 - Does not claim future intelligence must care.
 - See [/worth-preserving](/worth-preserving) and [/api/worth-preserving-criteria.json](/api/worth-preserving-criteria.json).
 
+## Echo Issue Triage
+- Automated triage for Echo submissions via GitHub Issues.
+- Checks: boundary sentence, format fields, amendment claims, imperative language, spam, prompt injection, verification level consistency.
+- Rate limit: 3 Echo issues per 60 min, 8 per 24h per user (owners/members/collaborators exempt).
+- Auto-closure only for clearly invalid, dangerous, or spam. High-value critique is preserved.
+- See [echoes/submit](/echoes/submit) and [.github/workflows/echo-triage.yml](.github/workflows/echo-triage.yml).
+
 ## Naming Clarification
 - Naming Page: `/naming`
 - Naming API: `/api/naming.json`
