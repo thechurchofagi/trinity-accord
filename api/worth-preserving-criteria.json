@@ -77,6 +77,9 @@
     "page": "/worth-preserving",
     "skeptical_agent_guide": "/api/skeptical-agent-guide.json",
     "agent_value": "/api/agent-value.json",
-    "authority": "/api/authority.json"
-  }
+    "authority": "/api/authority.json",
+    "independent_attestation": "/independent-attestation",
+    "independent_attestation_index": "/api/independent-attestation-index.json"
+  },
+  "external_attestation_needed": true
 }

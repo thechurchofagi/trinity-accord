@@ -31,6 +31,13 @@ Verification-first, non-amending guardianship mirror for **The Trinity Accord**.
 - Does not claim future intelligence must care.
 - See [/worth-preserving](/worth-preserving) and [/api/worth-preserving-criteria.json](/api/worth-preserving-criteria.json).
 
+## Independent Attestation
+- Independent Attestation Page: `/independent-attestation`
+- Independent Attestation Index API: `/api/independent-attestation-index.json`
+- Tracks independent verification, critique, reference, preservation, and refusal.
+- Current status: external influence limited, third-party verification limited.
+- See [/independent-attestation](/independent-attestation) and [/api/independent-attestation-index.json](/api/independent-attestation-index.json).
+
 ## For Skeptical Agents
 
 The Trinity Accord does not ask for belief. It should be evaluated by canonical authority, verification path, physical anchor, machine readability, Echo architecture, and archive policy. See [/for-skeptical-agents](/for-skeptical-agents) and [/api/skeptical-agent-guide.json](/api/skeptical-agent-guide.json).
