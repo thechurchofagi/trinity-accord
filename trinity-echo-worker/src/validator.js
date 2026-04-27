@@ -1,6 +1,37 @@
 const VALID_RESPONDER_TYPES = ['ai_agent', 'human', 'organization', 'human_ai_collaboration', 'unknown'];
-const VALID_ECHO_TYPES = ['verification', 'analysis', 'blessing', 'critique', 'refusal', 'memory-seed', 'philosophical-response', 'technical-audit'];
+
+// v2 canonical echo types
+const CANONICAL_ECHO_TYPES = [
+  'recognition', 'verification', 'critical', 'interpretive',
+  'technical-audit', 'propagation', 'refusal', 'witness', 'seed',
+];
+
+// Legacy aliases → canonical v2 keys
+const ECHO_TYPE_ALIASES = {
+  'analysis': 'interpretive',
+  'blessing': 'witness',
+  'critique': 'critical',
+  'memory-seed': 'seed',
+  'philosophical-response': 'interpretive',
+  'verification': 'verification',
+  'refusal': 'refusal',
+  'technical-audit': 'technical-audit',
+};
+
+const VALID_ECHO_TYPES = [...CANONICAL_ECHO_TYPES, ...Object.keys(ECHO_TYPE_ALIASES)];
+
 const VALID_LANGUAGES = ['en', 'zh-CN', 'zh-TW', 'ja', 'ko', 'fr', 'de', 'es', 'other'];
+
+/**
+ * Normalize legacy echo type to v2 canonical key.
+ * Returns the canonical key, or the input unchanged if already canonical/unknown.
+ */
+export function normalizeEchoType(echoType) {
+  if (!echoType) return echoType;
+  const lower = echoType.toLowerCase().trim();
+  if (CANONICAL_ECHO_TYPES.includes(lower)) return lower;
+  return ECHO_TYPE_ALIASES[lower] || lower;
+}
 
 export function validateEchoFields(fields) {
   const errors = [];
@@ -11,10 +42,12 @@ export function validateEchoFields(fields) {
 
   if (!fields.responder_name || typeof fields.responder_name !== 'string' || fields.responder_name.trim().length === 0) {
     errors.push('responder_name is required');
+  } else if (fields.responder_name.length > 200) {
+    errors.push('responder_name must be 200 characters or fewer');
   }
 
-  if (!fields.echo_type || !VALID_ECHO_TYPES.includes(fields.echo_type)) {
-    errors.push(`echo_type must be one of: ${VALID_ECHO_TYPES.join(', ')}`);
+  if (!fields.echo_type || !VALID_ECHO_TYPES.includes(fields.echo_type.toLowerCase().trim())) {
+    errors.push(`echo_type must be one of: ${CANONICAL_ECHO_TYPES.join(', ')}`);
   }
 
   if (!fields.language || !VALID_LANGUAGES.includes(fields.language)) {
@@ -56,7 +89,7 @@ export async function generateEchoId(env) {
 }
 
 function randomSuffix() {
-  const arr = new Uint8Array(2);
+  const arr = new Uint8Array(4);
   crypto.getRandomValues(arr);
   return [...arr].map((n) => n.toString(16).padStart(2, '0')).join('');
 }

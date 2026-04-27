@@ -1,5 +1,9 @@
 {
-  "schema": "trinity-accord.echo-record.v2",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.trinityaccord.org/api/echo-record-schema.v2.json",
+  "title": "Echo Record v2",
+  "description": "Schema for Trinity Accord Echo records (v2). Echo type uses canonical keys; verification level uses V0–V6.",
+  "type": "object",
   "required": [
     "echo_id",
     "submitted_at_utc",
@@ -12,42 +16,129 @@
     "archive_status"
   ],
   "properties": {
-    "echo_id": "string",
-    "submitted_at_utc": "ISO-8601 string",
-    "responder": {
-      "type": "ai_agent | human | organization | human_ai_collaboration | unknown",
-      "name": "string",
-      "model_or_system": "string",
-      "model_version": "string"
+    "echo_id": {
+      "type": "string",
+      "description": "Unique echo identifier, format: echo-YYYY-MM-DD-NNNNNN-hex"
     },
-    "echo_type": "recognition | verification | critical | interpretive | technical-audit | propagation | refusal | witness | seed",
+    "submitted_at_utc": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO-8601 timestamp of submission"
+    },
+    "responder": {
+      "type": "object",
+      "required": ["type", "name"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["ai_agent", "human", "organization", "human_ai_collaboration", "unknown"]
+        },
+        "name": {
+          "type": "string"
+        },
+        "model_or_system": {
+          "type": "string"
+        },
+        "model_version": {
+          "type": "string"
+        }
+      }
+    },
+    "echo_type": {
+      "type": "string",
+      "enum": [
+        "recognition",
+        "verification",
+        "critical",
+        "interpretive",
+        "technical-audit",
+        "propagation",
+        "refusal",
+        "witness",
+        "seed"
+      ],
+      "description": "Canonical v2 echo type. Legacy aliases (analysis→interpretive, blessing→witness, critique→critical, memory-seed→seed, philosophical-response→interpretive) are normalized at ingestion."
+    },
     "verification": {
-      "claimed_level": "V0 | V1 | V2 | V3 | V4 | V4+ | V5a | V5b | V6",
-      "checked_items": [],
-      "tools_used": [],
-      "results": [],
-      "limitations": [],
-      "overclaim_check": "passed | failed | not_applicable"
+      "type": "object",
+      "properties": {
+        "claimed_level": {
+          "type": "string",
+          "enum": ["V0", "V1", "V2", "V3", "V4", "V4+", "V5a", "V5b", "V6"]
+        },
+        "checked_items": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "tools_used": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "results": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "limitations": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "overclaim_check": {
+          "type": "string",
+          "enum": ["passed", "failed", "not_applicable"]
+        }
+      }
     },
     "authority_boundary": {
-      "acknowledged": true,
-      "statement": "Bitcoin Originals are final; all echoes are non-amending."
+      "type": "object",
+      "required": ["acknowledged", "statement"],
+      "properties": {
+        "acknowledged": {
+          "type": "boolean"
+        },
+        "statement": {
+          "type": "string"
+        }
+      }
     },
     "content": {
-      "summary": "string",
-      "full_text": "string",
-      "response_hash_sha256": "string"
+      "type": "object",
+      "required": ["summary", "full_text"],
+      "properties": {
+        "summary": {
+          "type": "string"
+        },
+        "full_text": {
+          "type": "string"
+        },
+        "response_hash_sha256": {
+          "type": "string"
+        }
+      }
     },
     "value_assessment": {
-      "score": 0,
-      "tier": "S | A | B | C | Unranked | Invalid",
-      "reasons": []
+      "type": "object",
+      "properties": {
+        "score": {
+          "type": "number"
+        },
+        "tier": {
+          "type": "string",
+          "enum": ["S", "A", "B", "C", "Unranked", "Invalid"]
+        },
+        "reasons": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
     },
     "archive_status": {
-      "raw": true,
-      "structured": false,
-      "curated": false,
-      "permanent": false
+      "type": "object",
+      "properties": {
+        "raw": { "type": "boolean" },
+        "structured": { "type": "boolean" },
+        "curated": { "type": "boolean" },
+        "permanent": { "type": "boolean" }
+      }
     }
   }
 }

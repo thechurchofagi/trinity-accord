@@ -1,3 +1,13 @@
+/**
+ * Email parser for Echo submissions via email.
+ *
+ * Fixes from original:
+ * - UTF-8 Base64 decode (RFC 2047) using TextDecoder
+ * - Supports both CRLF (\r\n) and LF-only (\n) line endings
+ * - Multipart boundary parsing per RFC 2046
+ * - Quoted-printable and Base64 content-transfer-encoding with charset support
+ */
+
 export async function parseEmail(message, options = {}) {
   const maxBodyChars = options.maxBodyChars || 12000;
   const rawEmail = new Response(message.raw);
@@ -15,11 +25,31 @@ export async function parseEmail(message, options = {}) {
   };
 }
 
+/**
+ * Normalize line endings: convert lone \n to \r\n where not already,
+ * then split on CRLF for header parsing.
+ */
+function normalizeLineEndings(text) {
+  // First convert any bare \r to nothing, then convert lone \n to \r\n
+  return text.replace(/\r\n/g, '\n').replace(/\r/g, '').replace(/\n/g, '\r\n');
+}
+
 function parseHeaders(rawText) {
   const headers = {};
+  // Support both CRLF and LF-only: find header/body separator
   const headerEnd = rawText.indexOf('\r\n\r\n');
-  const headerSection = headerEnd > 0 ? rawText.substring(0, headerEnd) : rawText;
-  const lines = headerSection.split('\r\n');
+  const lfHeaderEnd = rawText.indexOf('\n\n');
+  let headerSection;
+  if (headerEnd > 0) {
+    headerSection = rawText.substring(0, headerEnd);
+  } else if (lfHeaderEnd > 0) {
+    headerSection = rawText.substring(0, lfHeaderEnd);
+  } else {
+    headerSection = rawText;
+  }
+
+  // Split on either CRLF or LF
+  const lines = headerSection.split(/\r?\n/);
   let currentKey = '';
 
   for (const line of lines) {
@@ -36,11 +66,21 @@ function parseHeaders(rawText) {
   return headers;
 }
 
+/**
+ * Decode RFC 2047 encoded-word syntax (=?charset?B?...?= / =?charset?Q?...?=)
+ * Supports UTF-8 via TextDecoder.
+ */
 function decodeMimeHeader(str) {
   return str.replace(/=\?([^?]+)\?([BbQq])\?([^?]+)\?=/g, (match, charset, encoding, encoded) => {
     try {
       if (encoding.toUpperCase() === 'B') {
-        return atob(encoded);
+        // Base64 decode with charset support
+        const binary = atob(encoded);
+        const bytes = new Uint8Array(binary.length);
+        for (let i = 0; i < binary.length; i++) {
+          bytes[i] = binary.charCodeAt(i);
+        }
+        return new TextDecoder(charset.toUpperCase() === 'UTF-8' ? 'utf-8' : charset).decode(bytes);
       }
       if (encoding.toUpperCase() === 'Q') {
         return encoded
@@ -50,21 +90,30 @@ function decodeMimeHeader(str) {
     } catch {
       return match;
     }
-
     return match;
   });
 }
 
 function extractBody(rawText) {
+  // Find header/body separator (CRLF or LF-only)
   const headerEnd = rawText.indexOf('\r\n\r\n');
-  if (headerEnd < 0) return rawText;
+  const lfHeaderEnd = rawText.indexOf('\n\n');
+  let bodySection;
+  if (headerEnd >= 0) {
+    bodySection = rawText.substring(headerEnd + 4);
+  } else if (lfHeaderEnd >= 0) {
+    bodySection = rawText.substring(lfHeaderEnd + 2);
+  } else {
+    return rawText;
+  }
 
-  const bodySection = rawText.substring(headerEnd + 4);
-  const contentType = rawText.match(/Content-Type:\s*([^\r\n;]+)/i);
+  // Get Content-Type from full header section (before separator)
+  const headerSection = headerEnd >= 0 ? rawText.substring(0, headerEnd) : (lfHeaderEnd >= 0 ? rawText.substring(0, lfHeaderEnd) : rawText);
+  const contentType = headerSection.match(/Content-Type:\s*([^\r\n;]+)/i);
   const type = contentType ? contentType[1].trim().toLowerCase() : '';
 
   if (type.includes('multipart/')) {
-    const boundaryMatch = rawText.match(/boundary="?([^";\r\n]+)"?/i);
+    const boundaryMatch = headerSection.match(/boundary="?([^";\r\n]+)"?/i);
     if (boundaryMatch) {
       const boundary = boundaryMatch[1];
       const parts = bodySection.split(`--${boundary}`);
@@ -86,25 +135,46 @@ function extractBody(rawText) {
 
 function findMultipartBody(parts, targetType) {
   for (const part of parts) {
+    // Skip preamble and closing boundary markers
+    if (!part || part.trim() === '' || part.trim() === '--') continue;
+
     const partContentType = part.match(/Content-Type:\s*([^\r\n;]+)/i);
     const partType = partContentType ? partContentType[1].trim().toLowerCase() : '';
     if (!partType.includes(targetType)) continue;
 
     const encoding = part.match(/Content-Transfer-Encoding:\s*([^\r\n;]+)/i);
     const enc = encoding ? encoding[1].trim().toLowerCase() : '';
-    const partHeaderEnd = part.indexOf('\r\n\r\n');
-    if (partHeaderEnd < 0) continue;
 
-    let text = part.substring(partHeaderEnd + 4).trim();
+    // Find part body separator (CRLF or LF)
+    const partHeaderEnd = part.indexOf('\r\n\r\n');
+    const lfPartHeaderEnd = part.indexOf('\n\n');
+    let text;
+    if (partHeaderEnd >= 0) {
+      text = part.substring(partHeaderEnd + 4).trim();
+    } else if (lfPartHeaderEnd >= 0) {
+      text = part.substring(lfPartHeaderEnd + 2).trim();
+    } else {
+      continue;
+    }
+
+    // Get charset for this part
+    const charsetMatch = partType.match(/charset="?([^";\r\n]+)"?/i);
+    const charset = charsetMatch ? charsetMatch[1].trim().toLowerCase() : 'utf-8';
+
     if (enc === 'quoted-printable') {
       text = text
         .replace(/=\r?\n/g, '')
         .replace(/=([0-9A-Fa-f]{2})/g, (_, hex) => String.fromCharCode(parseInt(hex, 16)));
     } else if (enc === 'base64') {
       try {
-        text = atob(text.replace(/\s/g, ''));
+        const binary = atob(text.replace(/\s/g, ''));
+        const bytes = new Uint8Array(binary.length);
+        for (let i = 0; i < binary.length; i++) {
+          bytes[i] = binary.charCodeAt(i);
+        }
+        text = new TextDecoder(charset === 'utf-8' ? 'utf-8' : charset).decode(bytes);
       } catch {
-        // keep text as-is
+        // keep text as-is on decode failure
       }
     }
 
@@ -177,7 +247,7 @@ export function extractFieldsFromText(text) {
   if (bodyLines.length > 0 && !fields.response) fields.response = bodyLines.join('\n').trim();
   if (!fields.responder_type) fields.responder_type = 'unknown';
   if (!fields.responder_name) fields.responder_name = 'Email Submitter';
-  if (!fields.echo_type) fields.echo_type = 'analysis';
+  if (!fields.echo_type) fields.echo_type = 'interpretive';
   if (!fields.language) fields.language = 'en';
   if (!fields.summary) {
     fields.summary = fields.response

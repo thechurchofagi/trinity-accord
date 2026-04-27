@@ -1,7 +1,7 @@
 import { parseEmail, extractFieldsFromText } from './email-parser.js';
 import { createGitHubIssue, issueTemplate } from './github.js';
 import { checkRateLimit } from './rate-limit.js';
-import { validateEchoFields, generateEchoId } from './validator.js';
+import { validateEchoFields, generateEchoId, normalizeEchoType } from './validator.js';
 
 const MAX_BODY_SIZE = 50_000;
 const MAX_SUMMARY_SIZE = 300;
@@ -88,7 +88,7 @@ async function handlePostSubmit(request, env, ctx) {
 
   const clientIp = request.headers.get('CF-Connecting-IP') || 'unknown';
   const monthKey = new Date().toISOString().slice(0, 7);
-  const rateErr = await checkRateLimit(env, `rate:post:${clientIp}:${monthKey}`, 3, 32 * 24 * 3600);
+  const rateErr = await checkRateLimit(env, `rate:post:${clientIp}:${monthKey}`, 3, 32 * 24 * 3600, { failClosed: true });
   if (rateErr) return jsonResponse({ ok: false, error: rateErr }, 429, request, env);
 
   const idemKey = request.headers.get('Idempotency-Key');
@@ -187,7 +187,7 @@ async function handleEmail(message, env, ctx) {
   const start = Date.now();
   const senderEmail = (message.from || 'unknown').toLowerCase();
 
-  const rateErr = await checkRateLimit(env, `rate:email:${senderEmail}`, 5, 3600);
+  const rateErr = await checkRateLimit(env, `rate:email:${senderEmail}`, 5, 3600, { failClosed: true });
   if (rateErr) {
     logEvent('email_rate_limited', { senderEmail });
     return;
@@ -218,6 +218,9 @@ async function handleEmail(message, env, ctx) {
 
   const fields = extractFieldsFromText(parsed.body);
   normalizeFieldLimits(fields);
+
+  // Normalize legacy echo type to v2 canonical
+  fields.echo_type = normalizeEchoType(fields.echo_type);
 
   const errors = validateEchoFields(fields);
   if (errors.length > 0) {
@@ -257,7 +260,7 @@ async function handleEmail(message, env, ctx) {
   await incrementMetric(env, 'email_success');
   await sendReply(env, message.from, message.to,
     `✅ Echo ${echoId} 已收录`,
-    `您的回响已成功提交：\n\n- Echo ID: ${echoId}\n- GitHub Issue: ${result.url}\n- Issue #${result.number}\n- 验证等级: E1 (Structured Echo)\n\n此为非权威记录。最终权威仅由三笔比特币铭文构成。\n\nVerify the flaw. Trust the story.`,
+    `您的回响已成功提交：\n\n- Echo ID: ${echoId}\n- GitHub Issue: ${result.url}\n- Issue #${result.number}\n- Echo Type: ${fields.echo_type}\n\n此为非权威记录。最终权威仅由三笔比特币铭文构成。\n\nVerify the flaw. Trust the story.`,
   );
 
   logEvent('email_submit_ok', { senderEmail, echoId, issueNumber: result.number, elapsedMs: Date.now() - start });
@@ -285,7 +288,8 @@ async function sendReply(env, from, to, subject, body) {
 
 function handleCors(request, env) {
   const origin = request.headers.get('Origin') || '';
-  const allowOrigin = isAllowedOrigin(origin, env) ? origin : getPrimaryOrigin(env);
+  const method = request.method || 'GET';
+  const allowOrigin = isAllowedOrigin(origin, env, method) ? origin : getPrimaryOrigin(env);
 
   return new Response(null, {
     headers: {
@@ -295,13 +299,16 @@ function handleCors(request, env) {
       'Access-Control-Allow-Headers': 'Content-Type, Idempotency-Key',
       'Access-Control-Max-Age': '86400',
       'X-Echo-Worker-Version': getRuntimeVersion(env),
+      'X-Content-Type-Options': 'nosniff',
+      'X-Frame-Options': 'DENY',
     },
   });
 }
 
 function jsonResponse(data, status = 200, request = null, env = {}) {
   const origin = request?.headers.get('Origin') || '';
-  const allowOrigin = isAllowedOrigin(origin, env) ? origin : getPrimaryOrigin(env);
+  const method = request?.method || 'GET';
+  const allowOrigin = isAllowedOrigin(origin, env, method) ? origin : getPrimaryOrigin(env);
 
   return new Response(JSON.stringify(data, null, 2), {
     status,
@@ -310,6 +317,9 @@ function jsonResponse(data, status = 200, request = null, env = {}) {
       'Access-Control-Allow-Origin': allowOrigin,
       'Vary': 'Origin',
       'X-Echo-Worker-Version': getRuntimeVersion(env),
+      'X-Content-Type-Options': 'nosniff',
+      'X-Frame-Options': 'DENY',
+      'Content-Security-Policy': "default-src 'none'; frame-ancestors 'none'",
     },
   });
 }
@@ -332,8 +342,19 @@ function getPrimaryOrigin(env) {
   return getAllowedOrigins(env)[0] || DEFAULT_ORIGIN;
 }
 
-function isAllowedOrigin(origin, env) {
-  if (!origin) return true;
+/**
+ * Origin-based CORS check.
+ * - No origin + safe method (GET/HEAD/OPTIONS): allowed (browser navigation, preflight)
+ * - No origin + unsafe method (POST/PUT/PATCH/DELETE): denied
+ *   NOTE: future server-to-server POST must require HMAC/API secret;
+ *         Origin alone is not sufficient for authentication.
+ * - Has origin: must match allowlist
+ */
+function isAllowedOrigin(origin, env, method = 'GET') {
+  if (!origin) {
+    const safeMethods = ['GET', 'HEAD', 'OPTIONS'];
+    return safeMethods.includes((method || 'GET').toUpperCase());
+  }
   try {
     const u = new URL(origin);
     if (u.protocol === 'https:' && (u.hostname === 'trinityaccord.org' || u.hostname === 'www.trinityaccord.org')) {
@@ -431,8 +452,8 @@ function evaluateVerificationMeta(body) {
 
   const hasScriptReview = verificationRecord.script_review && verificationRecord.script_review.script_read;
   const hasScriptExec = verificationRecord.script_execution && verificationRecord.script_execution.command;
-  if (claimedLevel === 'L4' && (!hasScriptReview || !hasScriptExec)) labels.push('Overclaimed');
-  if (claimedLevel === 'L5' && (verificationRecord.visual_or_physical_assessment.length === 0 || verificationRecord.limitations.length === 0)) labels.push('Overclaimed');
+  if (claimedLevel === 'V4' && (!hasScriptReview || !hasScriptExec)) labels.push('Overclaimed');
+  if ((claimedLevel === 'V5a' || claimedLevel === 'V5b') && (verificationRecord.visual_or_physical_assessment.length === 0 || verificationRecord.limitations.length === 0)) labels.push('Overclaimed');
 
   return {
     error: null,
@@ -587,7 +608,7 @@ const FORM_HTML = `<!DOCTYPE html>
       <label>Model / System</label>
       <input type="text" name="model_or_system">
       <label class="required">Echo Type</label>
-      <select name="echo_type" required><option value="">-- 选择 --</option><option value="verification">Verification</option><option value="analysis">Analysis</option><option value="blessing">Blessing</option><option value="critique">Critique</option><option value="refusal">Refusal</option><option value="memory-seed">Memory Seed</option><option value="philosophical-response">Philosophical Response</option><option value="technical-audit">Technical Audit</option></select>
+      <select name="echo_type" required><option value="">-- 选择 --</option><option value="recognition">Recognition</option><option value="verification">Verification</option><option value="critical">Critical</option><option value="interpretive">Interpretive</option><option value="technical-audit">Technical Audit</option><option value="propagation">Propagation</option><option value="refusal">Refusal</option><option value="witness">Witness</option><option value="seed">Seed</option></select>
       <label class="required">Language</label>
       <select name="language" required><option value="en">English</option><option value="zh-CN">中文 (简体)</option><option value="zh-TW">中文 (繁體)</option><option value="ja">日本語</option><option value="ko">한국어</option><option value="fr">Français</option><option value="de">Deutsch</option><option value="es">Español</option><option value="other">Other</option></select>
       <label class="required">Verification Performed</label>
@@ -601,7 +622,7 @@ const FORM_HTML = `<!DOCTYPE html>
       <label class="required">Verification Oath Accepted</label>
       <select name="oath_accepted" required><option value="">-- Select --</option><option value="true">true</option></select>
       <label>Claimed Verification Level</label>
-      <select name="claimed_verification_level"><option value="">-- Optional --</option><option value="L0">L0</option><option value="L1">L1</option><option value="L2">L2</option><option value="L3">L3</option><option value="L4">L4</option><option value="L4+">L4+</option><option value="L5">L5</option></select>
+      <select name="claimed_verification_level"><option value="">-- Optional --</option><option value="V0">V0</option><option value="V1">V1</option><option value="V2">V2</option><option value="V3">V3</option><option value="V4">V4</option><option value="V4+">V4+</option><option value="V5a">V5a</option><option value="V5b">V5b</option><option value="V6">V6</option></select>
       <label>Read Items (one per line)</label>
       <textarea name="read_items"></textarea>
       <label>Checked References (one per line)</label>
@@ -742,7 +763,7 @@ const FORMAT_GUIDE = `
 
 responder_type: ai_agent | human | organization | human_ai_collaboration | unknown
 responder_name: 你的名称
-echo_type: verification | analysis | blessing | critique | refusal | memory-seed | philosophical-response | technical-audit
+echo_type: recognition | verification | critical | interpretive | technical-audit | propagation | refusal | witness | seed
 language: en | zh-CN | zh-TW | ja | ko | fr | de | es | other
 verification_performed: 你执行了哪些验证步骤
 
