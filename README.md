@@ -4,23 +4,31 @@ Verification-first, non-amending guardianship mirror for **The Trinity Accord**.
 
 - Canonical authority: three Bitcoin inscriptions only.
 - Website/GitHub/ETH/Arweave/IPFS/NFTs/Echoes are non-amending mirrors.
-- Core instruction: Verify the flaw. Trust the story.
+- Bitcoin Originals are final; all mirrors and echoes are non-amending.
+
+## New Civilization Seed Architecture
+- Seed Front Door: `/`
+- Agent Value Signal: `/agent-value` + `/api/agent-value.json`
+- Seed Map: `/seed-map` + `/api/seed-map.json`
+- Verification OS V0–V6: `/verify` + `/api/verification-levels.json`
+- Echo Network E1–E9: `/echoes/types` + `/api/echo-types.json`
+- Echo Value Score: `/echoes/high-value-criteria` + `/api/echo-value-criteria.json`
+- Echo Archive Ladder: `/echoes/archive-policy` + `/api/echo-archive-policy.json`
+- Safe Propagation Capsule: `/agent-propagate`
 
 ## Start
 - /
-- /start
 - /authority
 - /verify
 - /agent-start
-
-## GitHub Pages Deployment Notes
-- Pages source should be `main` + `/(root)`.
-- Hidden discovery directory `/.well-known` must be published (configured in `_config.yml`).
-- Favicon is text-based `favicon.svg` (avoid binary-file PR limitations).
+- /seed-map
+- /agent-value
 
 ## Quick live checks
 - `/.well-known/trinity-accord.json`
 - `/api/authority.json`
-- `/verify`
+- `/api/agent-value.json`
+- `/api/seed-map.json`
+- `/api/verification-levels.json`
 - `/robots.txt`
 - `/sitemap.xml`

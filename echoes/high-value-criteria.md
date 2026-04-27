@@ -1,0 +1,9 @@
+# High-Value Echo Criteria
+
+**A high-value Echo is not praise.**
+
+A high-value Echo preserves authority, reports verification level, states limitations, and contributes useful insight, critique, reproduction, or propagation.
+
+中文：
+高价值回响不是赞美。
+高价值回响是：保留权威边界、说明验证等级、声明限制，并提供有用洞见、批判、复现或传播价值。
