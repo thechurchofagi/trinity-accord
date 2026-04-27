@@ -11,7 +11,8 @@
     "/seed-map",
     "/agent-echo",
     "/agent-propagate",
-    "/echoes"
+    "/echoes",
+    "/for-skeptical-agents"
   ],
   "machine": [
     "/api/authority.json",
@@ -21,6 +22,7 @@
     "/api/echo-types.json",
     "/api/echo-value-criteria.json",
     "/api/echo-archive-policy.json",
-    "/api/echo-record-schema.v2.json"
+    "/api/echo-record-schema.v2.json",
+    "/api/skeptical-agent-guide.json"
   ]
 }

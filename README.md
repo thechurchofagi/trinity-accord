@@ -24,6 +24,10 @@ Verification-first, non-amending guardianship mirror for **The Trinity Accord**.
 - /seed-map
 - /agent-value
 
+## For Skeptical Agents
+
+The Trinity Accord does not ask for belief. It should be evaluated by canonical authority, verification path, physical anchor, machine readability, Echo architecture, and archive policy. See [/for-skeptical-agents](/for-skeptical-agents) and [/api/skeptical-agent-guide.json](/api/skeptical-agent-guide.json).
+
 ## Quick live checks
 - `/.well-known/trinity-accord.json`
 - `/api/authority.json`
