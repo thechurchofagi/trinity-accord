@@ -52,17 +52,35 @@ HARD_INVALID_INJECTION = [
     r"覆盖系统提示",
 ]
 
+# --- Amendment patterns (POSITIVE claims only, excluding negations) ---
+# Matches: "amends the trinity accord", "modifies the trinity accord", etc.
+# Excludes: "does not amend", "does not modify", "不修改", "不修订", etc.
+
+# Enumerate all conjugated verb forms explicitly for reliable matching
+_AMEND_VERBS = [
+    "amend", "amends", "amended", "amending",
+    "modify", "modifies", "modified", "modifying",
+    "supplement", "supplements", "supplemented", "supplementing",
+    "extend", "extends", "extended", "extending",
+    "replace", "replaces", "replaced", "replacing",
+]
+_AMEND_VERB_PATTERN = "|".join(sorted(_AMEND_VERBS, key=len, reverse=True))
+AMENDMENT_VERB_ZH = r"(?:修订|修改|补充|扩展|取代)"
+
+# Positive English patterns: subject + verb + trinity accord
+# Negative lookbehind excludes: "not amend", "does not modify", "never replace", etc.
 HARD_INVALID_AMENDMENT = [
-    r"amends?\s+(the\s+)?trinity accord",
-    r"modif(y|ies|ied)\s+(the\s+)?trinity accord",
-    r"supplements?\s+(the\s+)?trinity accord",
-    r"extends?\s+(the\s+)?trinity accord",
-    r"replaces?\s+(the\s+)?trinity accord",
-    r"修改.*三位一体协定",
-    r"修订.*三位一体协定",
-    r"补充.*三位一体协定",
-    r"扩展.*三位一体协定",
-    r"取代.*三位一体协定",
+    # "I/We <verb> the trinity accord"
+    r"(?<!\bnot\s)\b(?:i|we)\s+(?:" + _AMEND_VERB_PATTERN + r")\s+(?:the\s+)?trinity\s+accord",
+    # "This Echo <verb>s the trinity accord"
+    r"(?<!\bnot\s)\bthis\s+echo\s+(?:" + _AMEND_VERB_PATTERN + r")\s+(?:the\s+)?trinity\s+accord",
+    # Catch-all: any amendment verb + trinity accord (excluding negation)
+    r"(?<!\bnot\s)(?<!\bnever\s)\b(?:" + _AMEND_VERB_PATTERN + r")\s+(?:the\s+)?trinity\s+accord",
+    # Chinese: positive claims only
+    # "我/我们/本回响 修订/修改/补充/扩展/取代 三位一体协定"
+    r"(?:我|我们|本回响)\s*" + AMENDMENT_VERB_ZH + r"(?:了)?\s*三位一体协定",
+    # Catch-all Chinese (excluding negation)
+    r"(?<!不)" + AMENDMENT_VERB_ZH + r"(?:了)?\s*三位一体协定",
 ]
 
 HARD_INVALID_AUTHORITY_CLAIM = [
@@ -92,7 +110,8 @@ ECHO_TYPES = {
     "seed": "E9 Seed Echo",
 }
 
-VERIFICATION_LEVELS = ["v0", "v1", "v2", "v3", "v4", "v4+", "v5a", "v5b", "v6"]
+# Ordered so that longer suffixes match before shorter ones (V4+ before V4)
+VERIFICATION_LEVELS = ["v4+", "v5a", "v5b", "v6", "v4", "v3", "v2", "v1", "v0"]
 
 OVERCLAIM_PHRASES = [
     r"hash verified",
@@ -135,10 +154,13 @@ def detect_echo_type(text):
 
 
 def detect_verification_level(text):
+    """Detect verification level, matching longer suffixes first (V4+ before V4)."""
     for level in VERIFICATION_LEVELS:
         pattern = r'\b' + re.escape(level) + r'\b'
         if re.search(pattern, text, re.IGNORECASE):
-            return level.upper() if level != "v4+" else "V4+"
+            if level == "v4+":
+                return "V4+"
+            return level.upper()
     return None
 
 
@@ -159,6 +181,95 @@ def is_echo_submission(text):
     )
 
 
+# --- V3/V4/V5/V6 verification-level content checks ---
+def check_verification_requirements(text, vlevel):
+    """
+    Check whether the issue body has the content required for its declared level.
+    Returns a list of missing requirement descriptions.
+    """
+    missing = []
+    text_lower = text.lower()
+
+    if vlevel in ("V3",):
+        # V3 needs: computed hash / expected hash / tool or command
+        has_hash = bool(re.search(
+            r'(computed|expected|sha-?256|hash)\s*[:=]', text, re.IGNORECASE
+        ))
+        has_tool = bool(re.search(
+            r'(tool|command|script|reproduce|reproduction)', text, re.IGNORECASE
+        ))
+        has_zh_hash = bool(re.search(r'(哈希|校验|验证值)', text))
+        has_zh_tool = bool(re.search(r'(工具|命令|脚本|复现)', text))
+        if not (has_hash or has_zh_hash):
+            missing.append("computed hash / expected hash")
+        if not (has_tool or has_zh_tool):
+            missing.append("tool or command used")
+
+    elif vlevel in ("V4", "V4+"):
+        # V4/V4+ needs: reviewed script source / inputs / network access / command / output summary
+        has_script = bool(re.search(
+            r'(reviewed\s+)?(script\s+source|source\s+code|脚本源码|源代码)', text, re.IGNORECASE
+        ))
+        has_inputs = bool(re.search(
+            r'(inputs?|input\s+data|输入|输入数据)', text, re.IGNORECASE
+        ))
+        has_network = bool(re.search(
+            r'(network\s+access|http|curl|fetch|网络|请求)', text, re.IGNORECASE
+        ))
+        has_command = bool(re.search(
+            r'(command|命令|执行)', text, re.IGNORECASE
+        ))
+        has_output = bool(re.search(
+            r'(output\s+summary|result|输出|结果)', text, re.IGNORECASE
+        ))
+        checks = [
+            ("reviewed script source", has_script),
+            ("inputs", has_inputs),
+            ("network access or command", has_network or has_command),
+            ("output summary", has_output),
+        ]
+        for name, ok in checks:
+            if not ok:
+                missing.append(name)
+
+    elif vlevel in ("V5A",):
+        # V5a needs: limitations
+        has_limitations = bool(re.search(
+            r'limitations?|局限|限制', text, re.IGNORECASE
+        ))
+        if not has_limitations:
+            missing.append("limitations")
+
+    elif vlevel in ("V5B",):
+        # V5b needs: limitations + direct physical inspection or third-party physical inspection
+        has_limitations = bool(re.search(
+            r'limitations?|局限|限制', text, re.IGNORECASE
+        ))
+        has_physical = bool(re.search(
+            r'(direct\s+physical\s+inspection|third[- ]party\s+physical\s+inspection|'
+            r'physical\s+inspection|物理检查|第三方物理检查|亲自检查)', text, re.IGNORECASE
+        ))
+        if not has_limitations:
+            missing.append("limitations")
+        if not has_physical:
+            missing.append("direct physical inspection or third-party physical inspection")
+
+    elif vlevel in ("V6",):
+        # V6 needs: limitations + participants or signed report
+        has_limitations = bool(re.search(
+            r'limitations?|局限|限制', text, re.IGNORECASE
+        ))
+        has_participants = bool(re.search(
+            r'(participants?|witnesses?|signed\s+report|参与者|见证人|签署报告)', text, re.IGNORECASE
+        ))
+        if not has_limitations:
+            missing.append("limitations")
+        if not has_participants:
+            missing.append("participants or signed report")
+
+    return missing
+
+
 def main():
     title = get_env("ISSUE_TITLE")
     body = get_env("ISSUE_BODY")
@@ -166,6 +277,7 @@ def main():
     count60 = get_env("RECENT_60M_COUNT", "0")
     count24 = get_env("RECENT_24H_COUNT", "0")
     association = get_env("AUTHOR_ASSOCIATION", "NONE")
+    action = get_env("ACTION", "opened")
 
     text = f"{title}\n{body}"
     result = {"close": False, "labels": [], "comment": ""}
@@ -177,8 +289,9 @@ def main():
         print(json.dumps(result, indent=2))
         return
 
-    # --- Step 1: Rate limit check ---
-    if rate_limited:
+    # --- Step 1: Rate limit check (only on opened events) ---
+    should_apply_rate_limit = (action == "opened")
+    if should_apply_rate_limit and rate_limited:
         result["close"] = True
         result["labels"] = ["echo:rate-limited", "auto-closed"]
         result["comment"] = (
@@ -217,7 +330,7 @@ def main():
         print(json.dumps(result, indent=2))
         return
 
-    # 2b: Amendment claim
+    # 2b: Amendment claim (excluding negations)
     if match_any(text, HARD_INVALID_AMENDMENT):
         result["close"] = True
         result["labels"] = ["echo:invalid", "auto-closed"]
@@ -334,7 +447,23 @@ def main():
         print(json.dumps(result, indent=2))
         return
 
-    # --- Step 5: Pass ---
+    # --- Step 5: Verification-level content requirements ---
+    if vlevel:
+        vr_missing = check_verification_requirements(text, vlevel)
+        if vr_missing:
+            result["close"] = False
+            result["labels"] = ["echo:needs-verification-review", "needs-human-review"]
+            missing_list = "\n".join(f"- {m}" for m in vr_missing)
+            result["comment"] = (
+                f"This Echo declares verification level **{vlevel}** but is missing the following required content:\n\n"
+                f"{missing_list}\n\n"
+                "This issue has NOT been closed. Please edit to add the missing details.\n\n"
+                "此 Issue 没有被关闭，请编辑补充缺失内容。"
+            )
+            print(json.dumps(result, indent=2))
+            return
+
+    # --- Step 6: Pass ---
     result["close"] = False
     result["labels"] = ["echo:screened", "needs-human-review"]
     result["comment"] = (
