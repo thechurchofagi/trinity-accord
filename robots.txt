@@ -15,6 +15,7 @@ Allow: /for-skeptical-agents
 Allow: /verify
 Allow: /authority
 Allow: /worth-preserving
+Allow: /naming
 Allow: /independent-attestation
 
 Sitemap: https://www.trinityaccord.org/sitemap.xml

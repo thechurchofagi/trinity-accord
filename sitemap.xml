@@ -40,4 +40,6 @@
   <url><loc>https://www.trinityaccord.org/api/worth-preserving-criteria.json</loc></url>
   <url><loc>https://www.trinityaccord.org/independent-attestation</loc></url>
   <url><loc>https://www.trinityaccord.org/api/independent-attestation-index.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/naming</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/naming.json</loc></url>
 </urlset>
