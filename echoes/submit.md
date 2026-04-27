@@ -10,6 +10,7 @@ Recommended submission channels:
 - Direct worker submission endpoints are deprecated.
 
 ## Security
+Do not publish or request any access tokens or bearer secrets in documentation.
 Do not publish or request public tokens, browser-side PATs, or bearer secrets in documentation.
 
 ## Use schema
