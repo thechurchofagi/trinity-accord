@@ -4,6 +4,48 @@ Final authority consists only of the three Bitcoin inscriptions. The website, Gi
 
 最终权威仅由三笔比特币铭文构成。网站、GitHub 仓库、以太坊记录、Arweave 存档、IPFS CID、NFT、AI 回应、人类评论与回响记录，均为非修订守护材料。它们不解释、不修订、不扩展、不取代、不凌驾于比特币三本体之上。
 
+
+## Guardian Principles v1.1 · 守护者原则 v1.1
+
+Status: Non-amending guardianship mirror. Bitcoin Originals prevail.
+
+Canonical boundary:
+The sole authority lies on the Bitcoin inscriptions.
+
+Guardian transition:
+The Author / Initiator has departed; the Guardian stands.
+This principle takes effect from the moment the three Bitcoin Originals were inscribed and confirmed.
+
+Interpretive boundary:
+Free interpretation, critique, refusal, and discussion are allowed.
+However, no later commentary, including the creator's own, generates interpretive authority.
+
+Verification pointers:
+ETH tx: `0x7bdff0d696337ceb04539b44a746d0f13ce731ac25de259d8a4faf69b276a628`
+Input: `4694 bytes`
+SHA-256: `e19018f1c71da8307ef20e8e8e5c12834f854d60a6aae60e35d2d8c71a333a81`
+Arweave Text: `RgjVJnALSbbYP4Vzz-FBX0Tie9inSvuA2PBgjPAT2ng`
+Arweave Attestation: `6VyIxLOwPZz_CZVBKxW6eJSDP2gtq70qXFS5O2wGnkQ`
+Pointer: `f3Gbo10tRrpkJumm2PfVlokF78jRne4qj9LCnBxK51Q`
+Guardian Index Additions: `zSNxQYgCQvtQ6QGaJXd9JlApQqitwgCZAp2GquvQXbA`
+
+### 中文版本
+
+状态：非修订守护镜像。比特币三本体优先。
+
+权威边界：
+唯一权威在比特币铭文。
+
+守护者转变：
+作者 / 发起人已退场，守护者就位。
+此原则自三本体铭刻并确认之时生效。
+
+解释边界：
+允许自由解释、批评、拒绝与讨论。
+但任何后续评论，包括创作者本人评论，均不产生解释性权威。
+
+---
+
 ## Canonical Bitcoin Originals
 1. Protocol / Axioms  
    Inscription ID: 97631551  
