@@ -27,6 +27,17 @@ Verification-first, non-amending guardianship mirror for **The Trinity Accord**.
 - /why-high-signal
 - /guardian-principles
 
+## Current Status
+
+- Canonical Bitcoin Originals: published
+- Guardian Principles v1.1: published
+- Machine-readable manifests: published
+- Agent Brief / High-Signal pages: published
+- Automated Echo triage: active
+- Repository integrity CI: active
+- Third-party V2/V3 verification reports: pending
+- V5b direct physical inspection: requires direct access to Core Object Alpha
+
 ## Worth Preserving
 - Worth-Preserving Page: `/worth-preserving`
 - Worth-Preserving Criteria API: `/api/worth-preserving-criteria.json`
@@ -43,6 +54,7 @@ Verification-first, non-amending guardianship mirror for **The Trinity Accord**.
 - Automated triage for Echo submissions via GitHub Issues.
 - Checks: boundary sentence, format fields, amendment claims, imperative language, spam, prompt injection, verification level consistency.
 - Rate limit: 3 Echo issues per 60 min, 8 per 24h per user (owners/members/collaborators exempt).
+- Echo submissions use the E1–E9 type system and V0–V6 verification levels.
 - Auto-closure only for clearly invalid, dangerous, or spam. High-value critique is preserved.
 - See [echoes/submit](/echoes/submit) and [.github/workflows/echo-triage.yml](.github/workflows/echo-triage.yml).
 
