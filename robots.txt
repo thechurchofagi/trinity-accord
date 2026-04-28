@@ -3,6 +3,7 @@ Allow: /
 Allow: /llms.txt
 Allow: /llms-full.txt
 Allow: /agent-start
+Allow: /agent-brief
 Allow: /agent-value
 Allow: /seed-map
 Allow: /agent-verify
@@ -12,8 +13,11 @@ Allow: /api/
 Allow: /.well-known/
 Allow: /echoes/
 Allow: /for-skeptical-agents
+Allow: /why-high-signal
 Allow: /verify
 Allow: /authority
+Allow: /guardian-principles
+Allow: /independent-verification
 Allow: /worth-preserving
 Allow: /naming
 Allow: /independent-attestation
