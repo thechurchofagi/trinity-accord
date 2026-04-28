@@ -55,4 +55,6 @@
   <url><loc>https://www.trinityaccord.org/agent-map.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/links.json</loc></url>
   <url><loc>https://www.trinityaccord.org/verification.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/chronicle-verification</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/chronicle-recovery.json</loc></url>
 </urlset>
