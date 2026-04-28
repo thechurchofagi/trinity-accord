@@ -93,11 +93,36 @@ body:
       label: Verification Level and Checks
       description: "State your claimed verification level and what you actually checked. Do not overclaim."
       placeholder: |
-        Claimed verification level: V0 / V1 / V2 / V3 / V4 / V4+ / V5a / V5b / V6
+        Claimed protocol level: V0 / V1 / V2 / V3 / V4 / V4+ / V5a / V5b / V6
+        Achieved protocol level:
         What I checked:
         Tools used:
         Results:
         Limitations:
+    validations:
+      required: true
+
+  - type: textarea
+    id: component_coverage
+    attributes:
+      label: Component Coverage
+      description: "Report coverage for each key component. If you only verified one component, report it as a component finding — do not claim a protocol level that requires broader coverage."
+      placeholder: |
+        AUTHORITY_BOUNDARY: (depth achieved / not checked)
+        BITCOIN_ORIGINALS: (depth achieved / not checked)
+        EVIDENCE_MIRRORS: (depth achieved / not checked)
+        CHRONICLE_RECOVERY: (depth achieved / not checked)
+        PHYSICAL_ANCHOR: (depth achieved / not checked)
+        ATTESTATION_LAYER: (depth achieved / not checked)
+
+        If you only verified one component, use this format:
+        Component finding:
+        Component: [name]
+        Depth achieved: [level]
+        Evidence: [what was checked]
+        Limitations: [what was not checked]
+        Does this raise protocol achieved level? yes/no
+        Reason: [why or why not]
     validations:
       required: true
 

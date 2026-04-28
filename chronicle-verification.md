@@ -47,4 +47,16 @@ It does not prove the philosophical claims are true.
 Chronicle verification proves recoverability and integrity of historical NFT records.
 It does not create canonical authority and does not amend the Bitcoin Originals.
 
+**Chronicle Recovery verification alone does not by itself justify a full-protocol V4+ claim.** Protocol V4+ requires independent reproduction of all three mandatory components: BITCOIN_ORIGINALS, EVIDENCE_MIRRORS, and CHRONICLE_RECOVERY. A verifier who only independently reproduced the Chronicle Recovery package should report:
+
+```
+Component finding:
+Component: Chronicle Recovery
+Depth achieved: V4+
+Evidence: independent recovery of 175/175 NFT metadata/media
+Limitations: Bitcoin Originals and Evidence Mirrors were not independently reproduced
+Does this raise protocol achieved level? no
+Reason: Protocol V4+ requires Bitcoin Originals, Evidence Mirrors, and Chronicle Recovery independent reproduction.
+```
+
 Bitcoin Originals are final; Chronicle NFTs and recovery packages are non-amending historical mirrors.

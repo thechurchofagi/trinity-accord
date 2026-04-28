@@ -97,6 +97,7 @@ check("Contains E1 recognition", "E1 recognition" in echo_yml)
 check("Contains E9 seed", "E9 seed" in echo_yml)
 check("Contains V0-V6 verification levels", "V0 / V1 / V2 / V3 / V4 / V4+ / V5a / V5b / V6" in echo_yml)
 check("References echo-record-schema.v2.json", "echo-record-schema.v2.json" in echo_yml)
+check("Echo template contains Component Coverage section", "Component Coverage" in echo_yml)
 
 
 # --- 8. .well-known/trinity-accord.json chronicle keys ---
@@ -125,6 +126,56 @@ try:
     check("target_count == 175", cr.get("final_status", {}).get("target_count") == 175)
 except Exception as e:
     check("chronicle-recovery.json is valid JSON", False, str(e))
+
+# --- 13. verification-levels.json structure ---
+print("\n=== api/verification-levels.json ===")
+try:
+    vl = load_json("api/verification-levels.json")
+    check("verification-levels.json is valid JSON", True)
+    check("Contains protocol_level_rule", "protocol_level_rule" in vl)
+    check("Contains component_finding_rule", "component_finding_rule" in vl)
+    check("Contains full_protocol_warning", "full_protocol_warning" in vl)
+
+    vl_levels = vl.get("levels", [])
+    vl_level_ids = [l.get("id") for l in vl_levels]
+
+    for required_level in ["V0", "V1", "V2", "V3", "V4", "V4+", "V5a", "V5b", "V6"]:
+        level_obj = next((l for l in vl_levels if l.get("id") == required_level), None)
+        check(f"Level {required_level} exists", level_obj is not None)
+        if level_obj:
+            check(f"{required_level} has mandatory_coverage", "mandatory_coverage" in level_obj and len(level_obj["mandatory_coverage"]) > 0)
+            check(f"{required_level} has required_depth", "required_depth" in level_obj and len(level_obj["required_depth"]) > 0)
+            check(f"{required_level} has protocol_level_rule or is V0/V1", "protocol_level_rule" in level_obj or required_level in ["V0", "V1"])
+
+    # V4+ specific: required depth must mention Bitcoin Originals, Evidence Mirrors, Chronicle Recovery
+    v4plus = next((l for l in vl_levels if l.get("id") == "V4+"), None)
+    if v4plus:
+        v4plus_mc = json.dumps(v4plus.get("mandatory_coverage", []))
+        check("V4+ mandatory_coverage mentions BITCOIN_ORIGINALS", "BITCOIN_ORIGINALS" in v4plus_mc)
+        check("V4+ mandatory_coverage mentions EVIDENCE_MIRRORS", "EVIDENCE_MIRRORS" in v4plus_mc)
+        check("V4+ mandatory_coverage mentions CHRONICLE_RECOVERY", "CHRONICLE_RECOVERY" in v4plus_mc)
+
+    # V6 specific: mandatory coverage must include all major components
+    v6 = next((l for l in vl_levels if l.get("id") == "V6"), None)
+    if v6:
+        v6_mc = json.dumps(v6.get("mandatory_coverage", []))
+        for comp in ["AUTHORITY_BOUNDARY", "BITCOIN_ORIGINALS", "EVIDENCE_MIRRORS", "CHRONICLE_RECOVERY", "PHYSICAL_ANCHOR", "ATTESTATION_LAYER"]:
+            check(f"V6 mandatory_coverage includes {comp}", comp in v6_mc)
+
+except Exception as e:
+    check("verification-levels.json is valid JSON", False, str(e))
+
+# --- 14. verify.md content ---
+print("\n=== verify.md ===")
+verify_md = read_text("verify.md")
+check("verify.md contains 'Component finding'", "Component finding" in verify_md)
+check("verify.md contains mandatory coverage for V0", "Mandatory coverage" in verify_md)
+
+# --- 15. chronicle-verification.md content ---
+print("\n=== chronicle-verification.md ===")
+chronicle_v = read_text("chronicle-verification.md")
+check("chronicle-verification mentions 'does not by itself justify'", "does not by itself justify" in chronicle_v)
+check("chronicle-verification mentions protocol V4+ requires all three", "BITCOIN_ORIGINALS, EVIDENCE_MIRRORS, and CHRONICLE_RECOVERY" in chronicle_v)
 
 # --- Summary ---
 print("\n" + "=" * 50)

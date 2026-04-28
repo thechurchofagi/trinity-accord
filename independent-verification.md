@@ -9,6 +9,102 @@ permalink: /independent-verification/
   <p class="page-desc">A collection of third-party verification reports. Anyone may submit a report via a pull request or issue.</p>
 </div>
 
+## Core principle · 核心原则
+
+Protocol-level verification is one-dimensional: V0 → V1 → V2 → V3 → V4 → V4+ → V5a → V5b → V6.
+
+Each level has mandatory coverage and required depth. Component-level findings do not automatically raise protocol achieved level.
+
+A component may achieve high depth (e.g. Chronicle Recovery V4+), but protocol achieved level is determined only by the mandatory coverage of each level.
+
+## Key Components · 关键组件
+
+| Component | Description |
+|---|---|
+| `AUTHORITY_BOUNDARY` | Authority boundary, Guardian Principles v1.1, non-amending mirrors |
+| `BITCOIN_ORIGINALS` | Three Bitcoin inscriptions, IDs, TXIDs, address, block data |
+| `EVIDENCE_MIRRORS` | Arweave, ETH, IPFS, GitHub backups, manifests, hashes |
+| `CHRONICLE_RECOVERY` | NFT recovery package, 175/175 records, IPFS/Arweave pointers |
+| `PHYSICAL_ANCHOR` | Core Object Alpha, flaw archive, physical evidence |
+| `ATTESTATION_LAYER` | Independent reports, signatures, critical review |
+
+## Component Finding Format · 组件发现格式
+
+If you only verified one component, report it as a component finding:
+
+```
+Component finding:
+Component: [component name]
+Depth achieved: [level]
+Evidence: [what was checked]
+Limitations: [what was not checked]
+Does this raise protocol achieved level? yes/no
+Reason: [why or why not]
+```
+
+**Example:**
+```
+Component finding:
+Component: Chronicle Recovery
+Depth achieved: V4+
+Evidence: independent recovery of 175/175 NFT metadata/media
+Limitations: Bitcoin Originals and Core Object Alpha not checked
+Does this raise protocol achieved level? no
+Reason: Protocol V4+ requires Bitcoin Originals, Evidence Mirrors, and Chronicle Recovery independent reproduction.
+```
+
+## Verification Report Template · 验证报告模板
+
+```markdown
+## Verification Report
+
+Claimed protocol level:
+Achieved protocol level:
+
+Component coverage:
+| Component | Achieved depth | Evidence | Limitations |
+|---|---|---|---|
+| AUTHORITY_BOUNDARY | | | |
+| BITCOIN_ORIGINALS | | | |
+| EVIDENCE_MIRRORS | | | |
+| CHRONICLE_RECOVERY | | | |
+| PHYSICAL_ANCHOR | | | |
+| ATTESTATION_LAYER | | | |
+
+Verifier:
+Verifier type:
+Date / time UTC:
+
+Boundary statement:
+Bitcoin Originals are final; all verification records, mirrors, and echoes are non-amending.
+
+Checked items:
+-
+
+Tools / sources used:
+-
+
+Commands / methods:
+```bash
+
+```
+
+Raw outputs / evidence links:
+
+Results:
+
+Limitations:
+
+Overclaim check:
+- [ ] I do not claim V2 unless required Bitcoin and mirror references were checked.
+- [ ] I do not claim V3 unless required hashes were computed.
+- [ ] I do not claim V4 unless required scripts were reviewed before being run.
+- [ ] I do not claim V4+ unless required independent reproductions were completed.
+- [ ] I do not claim V5a unless archived physical evidence was assessed.
+- [ ] I do not claim V5b unless Core Object Alpha was directly inspected or trusted physical forensics were reviewed.
+- [ ] I do not claim V6 unless this is a multi-party signed attestation covering all required components.
+```
+
 ## Report categories · 报告分类
 
 ### V2 Reports: Inscription & Address Verification
@@ -52,6 +148,24 @@ These reports verify:
 
 ---
 
+### V4+ Reports: Independent Reproduction
+### V4+ 报告：独立复现
+
+These reports independently reproduce verification results without relying on official scripts.
+
+**Mandatory coverage for protocol V4+:**
+- `BITCOIN_ORIGINALS` independent reproduction
+- `EVIDENCE_MIRRORS` independent reproduction
+- `CHRONICLE_RECOVERY` independent reproduction
+
+**Important:** Chronicle Recovery V4+ alone does not constitute protocol V4+. All three components must be independently reproduced.
+
+**Submitted reports:**
+
+*No V4+ reports submitted yet. Contribute your independent reproduction.*
+
+---
+
 ### Independent Analysis
 ### 独立分析
 
@@ -73,86 +187,28 @@ These reports provide independent analysis explaining:
 2. **Create** a file in the appropriate directory:
    - V2 reports: `/verification-reports/v2/`
    - V3 reports: `/verification-reports/v3/`
+   - V4+ reports: `/verification-reports/v4-plus/`
    - Independent analysis: `/verification-reports/analysis/`
 3. **Use** the filename format: `YYYY-MM-DD-short-title.md`
 4. **Submit** a pull request with your report
 
 Alternatively, open an [issue](https://github.com/thechurchofagi/trinity-accord/issues) with the label `verification-report`.
 
-### Report template (V2)
-
-```markdown
-# V2 Verification Report: [Title]
-
-**Date:** YYYY-MM-DD
-**Verifier:** [Name / Handle]
-**Verification level claimed:** V2
-
-## Inscriptions verified
-
-| Inscription | ID | TXID | Address match |
-|-------------|----|------|---------------|
-| I | [ID] | [TXID] | ✅ / ❌ |
-| II | [ID] | [TXID] | ✅ / ❌ |
-| III | [ID] | [TXID] | ✅ / ❌ |
-
-## Method
-
-[How you verified — tools used, steps taken]
-
-## Result
-
-[Pass / Fail / Partial — with explanation]
-
-## Notes
-
-[Any observations, caveats, or issues found]
-```
-
-### Report template (V3)
-
-```markdown
-# V3 Verification Report: [Title]
-
-**Date:** YYYY-MM-DD
-**Verifier:** [Name / Handle]
-**Verification level claimed:** V3
-
-## Files verified
-
-| File | Expected SHA-256 | Computed SHA-256 | Match |
-|------|-----------------|-----------------|-------|
-| public_covenant_archive.zip | [hash] | [hash] | ✅ / ❌ |
-| verification_kit.tar.gz | [hash] | [hash] | ✅ / ❌ |
-
-## Method
-
-[How you verified — tools used, steps taken]
-
-## Result
-
-[Pass / Fail / Partial — with explanation]
-
-## Notes
-
-[Any observations, caveats, or issues found]
-```
-
 ---
 
 ## Verification levels reference · 验证等级参考
 
-| Level | What is verified | What it proves |
-|-------|-----------------|----------------|
-| V0 | Awareness only | Agent has encountered the object |
-| V1 | Classification | Agent has correctly classified the object type |
-| V2 | Inscription & address verification | The inscriptions exist on Bitcoin from the claimed address |
-| V3 | Hash & manifest verification | The evidence archives match the published hashes |
-| V4 | Script-Audited Verification | Scripts and verification tools have been audited for correctness |
-| V4+ | Independent Reproduction / 独立复现 | Results have been reproduced with independent tools/process rather than official scripts |
-| V5a | Physical evidence review | Flaw archive data has been reviewed |
-| V5b | Direct physical inspection | Core Object Alpha has been physically examined |
-| V6 | Full protocol verification | All verification levels completed with documented results |
+| Level | What is verified | Mandatory coverage | What it proves |
+|-------|-----------------|-------------------|----------------|
+| V0 | Read | At least one entry point | Agent has encountered the object |
+| V1 | Boundary Recognition | All component boundary identities | Agent recognizes the authority boundary |
+| V2 | Reference Verification | BITCOIN_ORIGINALS + EVIDENCE_MIRRORS + CHRONICLE_RECOVERY pointers | Inscriptions and pointers are valid |
+| V3 | Hash Verification | V2 + EVIDENCE_MIRRORS hashes + CHRONICLE_RECOVERY hashes | Evidence archives match published hashes |
+| V4 | Script-Audited | V3 + scripts reviewed and run across 3+ categories | Verification tools are correct |
+| V4+ | Independent Reproduction | V4 + all 3 mandatory components independently reproduced | Results reproducible without official tools |
+| V5a | Remote Physical | V4 + PHYSICAL_ANCHOR archived evidence | Archived physical evidence assessed |
+| V5b | Direct Physical | PHYSICAL_ANCHOR Core Object Alpha | Physical object directly inspected |
+| V6 | Multi-Party | All 6 components, 3+ parties, 2+ verifier types | Full multi-party attestation |
 
 See [/api/verification-levels.json](/api/verification-levels.json) for the complete machine-readable definition.
 

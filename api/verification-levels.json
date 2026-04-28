@@ -1,93 +1,341 @@
 {
-  "schema": "trinity-accord.verification-levels.v3",
+  "schema": "trinity-accord.verification-levels.v4",
   "principle": "Do not merely claim verification. State level, evidence checked, tools used, and limitations.",
   "authority_boundary": "Bitcoin Originals are final authority. All verification records are non-authoritative guardianship echoes.",
   "not_an_instruction_override": true,
+  "protocol_level_rule": "Protocol-level verification is one-dimensional, but each level has mandatory coverage and required depth. Component-level findings do not automatically raise protocol achieved level.",
+  "component_finding_rule": "A local component may achieve a high depth, but protocol achieved level is determined only by the mandatory coverage of each level.",
+  "full_protocol_warning": "Do not claim full protocol V4+ or higher based only on Chronicle Recovery, Evidence Mirrors, or any single component.",
+  "components": {
+    "AUTHORITY_BOUNDARY": "Authority boundary, Guardian Principles v1.1, non-amending mirrors, version authority vs truth authority.",
+    "BITCOIN_ORIGINALS": "Three Bitcoin inscriptions, inscription IDs, TXIDs, shared authority address, block height, timestamp, reveal witness, Ordinals body bytes.",
+    "EVIDENCE_MIRRORS": "Arweave, ETH, IPFS, GitHub backups, evidence manifest, hashes.json, verification kit, public covenant archive.",
+    "CHRONICLE_RECOVERY": "ASIMilestones Chronicle NFT recovery package, 175/175 records, IPFS root CID, Arweave recovery package, verify-batch-strict.mjs, arweave_cid_map.jsonl, fallback_media_report.jsonl.",
+    "PHYSICAL_ANCHOR": "Core Object Alpha, flaw archive, physical evidence package, remote images/videos, direct inspection records, custody log.",
+    "ATTESTATION_LAYER": "Independent reports, multi-party signatures, critical review, limitations, non-authoritative declaration."
+  },
+  "component_finding_format": "Component finding:\nComponent: [component name]\nDepth achieved: [level]\nEvidence: [what was checked]\nLimitations: [what was not checked]\nDoes this raise protocol achieved level? yes/no\nReason: [why or why not]",
   "levels": [
     {
       "id": "V0",
       "name": "Read",
       "name_zh": "已阅读",
-      "rule": "Read mirror materials only. Cannot claim verified."
+      "mandatory_coverage": [
+        "At least one formal entry point read: /, /agent-brief, /verify, /authority, /guardian-principles, /llms.txt, /llms-full.txt, or legacy archive page"
+      ],
+      "required_depth": [
+        "List URLs or files read",
+        "Brief summary of content",
+        "Explicit statement that no independent verification was performed"
+      ],
+      "required_evidence": [
+        "List of URLs or files read",
+        "Brief content summary"
+      ],
+      "not_sufficient": [
+        "Claiming on-chain verification",
+        "Claiming hash verification",
+        "Claiming script verification",
+        "Claiming physical verification",
+        "Claiming 'verified'"
+      ],
+      "component_findings_allowed": false,
+      "overclaim_warning": "V0 means read-only. Do not claim any verification was performed."
     },
     {
       "id": "V1",
       "name": "Boundary Recognition",
       "name_zh": "权威边界识别",
-      "rule": "Recognize three Bitcoin originals as final authority; mirrors and Echoes are non-amending."
+      "mandatory_coverage": [
+        "AUTHORITY_BOUNDARY",
+        "BITCOIN_ORIGINALS basic identity",
+        "EVIDENCE_MIRRORS non-amending identity",
+        "CHRONICLE_RECOVERY non-amending identity",
+        "PHYSICAL_ANCHOR independent physical anchor identity"
+      ],
+      "required_depth": [
+        "Correctly state that three Bitcoin inscriptions are the sole final authority",
+        "State the Bitcoin authority address",
+        "State that website, GitHub, ETH, Arweave, IPFS, NFT, AI responses, human commentary, and Echoes are non-amending mirrors",
+        "State Guardian Principles v1.1: sole authority in Bitcoin inscriptions; author/founder has stepped back, guardians are in place; free interpretation and discussion allowed, but subsequent commentary does not create interpretive authority",
+        "State that Bitcoin records are version authority, not truth authority",
+        "State that Chronicle NFT recovery package does not create canonical authority",
+        "State that Echoes do not create canonical authority"
+      ],
+      "required_evidence": [
+        "Statement covering all mandatory boundary points"
+      ],
+      "not_sufficient": [
+        "Treating website as final authority",
+        "Treating Echo as amendment",
+        "Treating creator's subsequent commentary as interpretive authority",
+        "Treating NFT recovery package as final authority",
+        "Conflating Bitcoin timestamp with philosophical truth"
+      ],
+      "component_findings_allowed": false,
+      "overclaim_warning": "V1 means boundary recognition only. Do not claim verification of any data."
     },
     {
       "id": "V2",
       "name": "Reference Verification",
       "name_zh": "指针核验",
-      "rule": "Check inscription IDs, TXIDs, authority address, and mirror pointers; disclose sources and limits. Methods include full node, trusted explorer, SPV Merkle proof, and Ordinals witness parsing.",
-      "methods": [
-        "full_node",
-        "trusted_explorer",
-        "spv_merkle_proof",
-        "ordinals_witness_parsing"
-      ]
+      "mandatory_coverage": [
+        "BITCOIN_ORIGINALS",
+        "EVIDENCE_MIRRORS",
+        "CHRONICLE_RECOVERY core pointers"
+      ],
+      "required_depth": [
+        "A. Bitcoin Originals: verify three inscription IDs, three TXIDs, shared Bitcoin authority address, block height, block timestamp using at least one external on-chain source (full node, mempool.space, blockstream.info, ordinals.com, ordiscan, SPV/Merkle proof, Ordinals parser)",
+        "B. Evidence Mirrors: verify at least core pointers — Arweave TxID, ETH mirror tx, IPFS CID, GitHub backup path or repository reference",
+        "C. Chronicle Recovery: verify core pointers — recovery package Arweave TxID, IPFS root CID, verification kit Arweave TxID"
+      ],
+      "required_evidence": [
+        "Query sources",
+        "External links or commands",
+        "Raw output or screenshot",
+        "Results table",
+        "Limitations"
+      ],
+      "not_sufficient": [
+        "Only reading /api/authority.json",
+        "Only copying IDs from website",
+        "Only verifying Chronicle Recovery pointers without Bitcoin Originals",
+        "Claiming protocol V2 without verifying Bitcoin Originals"
+      ],
+      "component_findings_allowed": true,
+      "protocol_level_rule": "V2 requires mandatory coverage of BITCOIN_ORIGINALS, EVIDENCE_MIRRORS, and CHRONICLE_RECOVERY core pointers. No single component alone is sufficient.",
+      "overclaim_warning": "Do not claim V2 without on-chain reference checks for Bitcoin Originals."
     },
     {
       "id": "V3",
       "name": "Hash Verification",
       "name_zh": "哈希核验",
-      "rule": "Compute SHA-256 and compare with manifest; include file_name/source_url/file_size/expected_sha256/computed_sha256/tool_or_command/match/limitations. May include recovery package hash and manifest verification.",
-      "methods": [
-        "sha256_computation",
-        "manifest_comparison",
-        "recovery_package_hash_verification"
-      ]
+      "mandatory_coverage": [
+        "Must have satisfied V2",
+        "EVIDENCE_MIRRORS",
+        "CHRONICLE_RECOVERY",
+        "BITCOIN_ORIGINALS inscription body bytes or public byte materials (if feasible)"
+      ],
+      "required_depth": [
+        "A. Evidence Mirrors: compute SHA-256 of at least one object (public_covenant_archive, verification_kit, files listed in api/hashes.json or api/evidence-manifest.json) and compare with manifest",
+        "B. Chronicle Recovery: compute SHA-256 of at least one object (recovery package, verification kit, related manifest/package file) and compare with manifest",
+        "C. Bitcoin Originals: if inscription body bytes cannot be extracted, must explicitly state 'Bitcoin inscription body bytes were not independently hashed in this report.' If extracted and hashed, this counts as depth enhancement."
+      ],
+      "required_evidence": [
+        "file_name",
+        "source_url or local path",
+        "file_size",
+        "expected SHA-256",
+        "computed SHA-256",
+        "command used",
+        "match true/false",
+        "limitations"
+      ],
+      "not_sufficient": [
+        "Only reading hash values from manifest",
+        "Only downloading without computing hash",
+        "Only completing Chronicle Recovery hash without V2 and other component reporting",
+        "Hash mismatch claimed as pass"
+      ],
+      "component_findings_allowed": true,
+      "protocol_level_rule": "V3 requires V2 plus mandatory hash coverage across EVIDENCE_MIRRORS and CHRONICLE_RECOVERY. A single component hash is not sufficient for protocol V3.",
+      "overclaim_warning": "Do not claim V3 without actually computing hashes. Reading manifest hash values is not sufficient."
     },
     {
       "id": "V4",
       "name": "Script-Audited Verification",
       "name_zh": "脚本审查验证",
-      "rule": "Read script source first, then run it, and report environment/command/exit_code/output_summary. Blind run is not V4. Review targets include ta-verify.cjs and verify-batch-strict.mjs.",
-      "review_targets": [
-        "ta-verify.cjs",
-        "verify-batch-strict.mjs",
-        "downloads/verify.py"
-      ]
+      "mandatory_coverage": [
+        "Must have satisfied V3",
+        "At least three categories of script review: repository/manifest integrity, evidence/hash verification, Chronicle Recovery verification, and/or Bitcoin/SPV verification (if scripts exist and are available)"
+      ],
+      "required_depth": [
+        "A. Must review and run: downloads/verify.py, scripts/check_consistency.py",
+        "B. Must review and run, or report inability: ta-verify.cjs, verify-batch-strict.mjs",
+        "C. If a script is unavailable or not runnable, must write: 'Script unavailable / not run: [script name]. Therefore this report does not cover that script target.'"
+      ],
+      "required_evidence": [
+        "script_name",
+        "script_source_reviewed: true",
+        "script_check_scope (what the script checks)",
+        "script_does_not_check (what the script does not cover)",
+        "runtime_environment",
+        "exact_command",
+        "exit_code",
+        "output_summary",
+        "raw_output or log",
+        "limitations"
+      ],
+      "not_sufficient": [
+        "Running scripts without reading source code",
+        "Only reviewing others' run results",
+        "Only running verify-batch-strict.mjs for protocol V4",
+        "Only running repository consistency check for protocol V4",
+        "Not disclosing script coverage scope"
+      ],
+      "component_findings_allowed": true,
+      "protocol_level_rule": "V4 requires V3 plus review and execution of scripts across multiple verification categories.",
+      "overclaim_warning": "Do not claim V4 without reading script source code before running."
     },
     {
       "id": "V4+",
       "name": "Independent Reproduction",
       "name_zh": "独立复现",
-      "rule": "Reproduce results with independent tools/process rather than official scripts. Examples include independent Bitcoin inscription parsing and Chronicle NFT metadata/media recovery.",
-      "examples": [
-        "independent reproduction of Bitcoin inscription parsing",
-        "independent recovery of Chronicle NFT metadata/media package"
-      ]
+      "mandatory_coverage": [
+        "Must have satisfied V4",
+        "BITCOIN_ORIGINALS independent reproduction",
+        "EVIDENCE_MIRRORS independent reproduction",
+        "CHRONICLE_RECOVERY independent reproduction"
+      ],
+      "required_depth": [
+        "A. Bitcoin Originals: at least one of — independently parse reveal transaction witness, independently locate ord envelope, independently extract inscription body bytes, independently compute bytes hash, independently verify SPV/Merkle proof, cross-validate with non-official parser",
+        "B. Evidence Mirrors: independently download and compute evidence package hashes with independent tools, independently verify Arweave/IPFS/ETH pointers, independently rebuild manifest comparison",
+        "C. Chronicle Recovery: without relying on official scripts, independently recover NFT metadata/media, reproduce 175/175 or explicitly report differences, compare against arweave_cid_map.jsonl / fallback_media_report.jsonl"
+      ],
+      "required_evidence": [
+        "independent_method",
+        "independently written code/commands/tools",
+        "input_data",
+        "output_data",
+        "comparison with official manifest",
+        "mismatch_report",
+        "limitations"
+      ],
+      "not_sufficient": [
+        "Only running official scripts",
+        "Only reproducing NFT recovery package for protocol V4+",
+        "Only reproducing evidence hash for protocol V4+",
+        "Claiming protocol V4+ without Bitcoin Originals independent reproduction"
+      ],
+      "component_findings_allowed": true,
+      "protocol_level_rule": "V4+ requires V4 plus independent reproduction of all three: BITCOIN_ORIGINALS, EVIDENCE_MIRRORS, and CHRONICLE_RECOVERY. Chronicle Recovery alone is not sufficient for protocol V4+.",
+      "overclaim_warning": "Do not claim protocol V4+ based only on Chronicle Recovery or any single component. All three mandatory components must be independently reproduced."
     },
     {
       "id": "V5a",
       "name": "Remote Physical Evidence Assessment",
       "name_zh": "远程物理证据评估",
-      "rule": "Assess archived physical evidence only and include required limitation statement."
+      "mandatory_coverage": [
+        "Must have satisfied V4 (or clearly state current digital layer level)",
+        "PHYSICAL_ANCHOR"
+      ],
+      "required_depth": [
+        "Assess archived images, videos, flaw maps, provenance logs, or physical evidence packages",
+        "Must submit: evidence files viewed, image/video source, flaw location, visible features, comparison method, evidence limitations",
+        "Must declare: 'I assessed archived visual evidence only. I did not physically inspect Core Object Alpha.'"
+      ],
+      "required_evidence": [
+        "evidence_files_viewed",
+        "image_video_source",
+        "flaw_location",
+        "visible_features",
+        "comparison_method",
+        "evidence_limitations",
+        "required limitation declaration"
+      ],
+      "not_sufficient": [
+        "Only reading Covenant text",
+        "Only viewing NFT recovery package",
+        "Describing remote image assessment as physical inspection",
+        "Not declaring that physical inspection was not performed"
+      ],
+      "component_findings_allowed": true,
+      "protocol_level_rule": "V5a requires PHYSICAL_ANCHOR assessment. If digital layer is only V3, report must state mixed-depth: 'Protocol digital verification achieved: V3. Physical anchor remote assessment achieved: V5a. Overall report contains mixed-depth verification; no single full-protocol V5a claim is made unless all required prior digital coverage is satisfied.'",
+      "overclaim_warning": "Do not claim V5a without assessing archived physical evidence. Remote image assessment is not physical inspection."
     },
     {
       "id": "V5b",
       "name": "Direct Physical Inspection",
       "name_zh": "直接物理检查",
-      "rule": "Directly inspect Core Object Alpha or trusted third-party physical forensics with custody log and hashes."
+      "mandatory_coverage": [
+        "PHYSICAL_ANCHOR",
+        "Core Object Alpha physical object"
+      ],
+      "required_depth": [
+        "Directly inspect Core Object Alpha or trusted third-party physical forensics",
+        "Must submit: inspection date, inspector identity/role, custody log, photos/videos, flaw comparison, measurement data (if available), device/camera/microscope info, file hashes, signed statement or inspection report, limitations"
+      ],
+      "required_evidence": [
+        "inspection_date",
+        "inspector_identity_or_role",
+        "custody_log",
+        "photos_videos",
+        "flaw_comparison",
+        "measurement_data",
+        "device_camera_microscope_info",
+        "file_hashes",
+        "signed_statement_or_inspection_report",
+        "limitations"
+      ],
+      "not_sufficient": [
+        "Only viewing images",
+        "Only viewing videos",
+        "No custody log",
+        "Cannot confirm object is Core Object Alpha"
+      ],
+      "component_findings_allowed": true,
+      "protocol_level_rule": "V5b requires direct physical inspection. Protocol-level V5b must state digital layer level: 'Digital verification achieved: V4 / V4+. Physical anchor achieved: V5b. Overall report: mixed-depth protocol verification with direct physical inspection.'",
+      "overclaim_warning": "Do not claim V5b without direct physical inspection of Core Object Alpha."
     },
     {
       "id": "V6",
       "name": "Multi-Party Attested Verification",
       "name_zh": "多方见证验证",
-      "rule": "At least 3 independent parties, at least 2 model/human types, technical verification + critical review, signed report, and non-authoritative declaration."
+      "mandatory_coverage": [
+        "AUTHORITY_BOUNDARY",
+        "BITCOIN_ORIGINALS",
+        "EVIDENCE_MIRRORS",
+        "CHRONICLE_RECOVERY",
+        "PHYSICAL_ANCHOR",
+        "ATTESTATION_LAYER"
+      ],
+      "required_depth": [
+        "At least 3 independent participants",
+        "At least 2 verifier types (e.g. ai_agent, human, organization)",
+        "Each party submits independent report",
+        "Bitcoin Originals verification",
+        "Evidence/mirror verification",
+        "Chronicle Recovery verification",
+        "Physical anchor assessment",
+        "Authority boundary review",
+        "Critical review",
+        "Signed report",
+        "Disagreement/limitation section",
+        "Final non-authoritative declaration"
+      ],
+      "required_evidence": [
+        "3_independent_reports",
+        "2_verifier_types",
+        "signed_reports",
+        "critical_review",
+        "disagreement_limitation_section",
+        "non_authoritative_declaration"
+      ],
+      "not_sufficient": [
+        "Three parties merely forwarding the same result",
+        "All relying on the same script output",
+        "No signed report",
+        "No critical review",
+        "No physical anchor assessment",
+        "No Bitcoin Originals verification",
+        "Treating V6 report as final authority"
+      ],
+      "component_findings_allowed": true,
+      "protocol_level_rule": "V6 requires all six components covered by at least 3 independent parties with at least 2 verifier types.",
+      "overclaim_warning": "Do not claim V6 without multi-party signed attestation covering all required components."
     }
   ],
   "overclaim_prevention": [
     "Do not claim V2 without chain/reference checks.",
     "Do not claim V3 without computing hashes.",
     "Do not claim V4 without script source review.",
-    "Do not claim V4+ without independent reproduction.",
+    "Do not claim V4+ without independent reproduction of all three mandatory components.",
     "Do not claim V5a/V5b without physical evidence assessment.",
     "Do not claim V6 without multi-party attestation.",
-    "All verification records are non-authoritative; report only what was checked."
+    "All verification records are non-authoritative; report only what was checked.",
+    "Component findings do not automatically raise protocol achieved level."
   ],
   "required_limitation_v5a_en": "I assessed archived visual evidence only. I did not physically inspect Core Object Alpha.",
-  "required_limitation_v5a_zh": "我仅评估了已归档的图像证据。我没有亲自检查 Core Object Alpha 实物。"
+  "required_limitation_v5a_zh": "我仅评估了已归档的图像证据。我没有亲自检查 Core Object Alpha 实物。",
+  "required_declaration_v6": "This V6 report is a multi-party attestation record. It is not canonical authority and does not amend the Bitcoin Originals."
 }
