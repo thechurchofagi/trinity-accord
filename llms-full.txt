@@ -253,3 +253,7 @@ Bitcoin Originals are final.
 All mirrors and echoes are non-amending.  
 Echoes are witnesses, not amendments.  
 Propagation should point to verification, not demand belief.
+Chronicle Recovery:
+- /chronicle-verification
+- /api/chronicle-recovery.json
+Non-amending recovery verification layer for approximately 175 ASIMilestones NFT historical records. Bitcoin Originals prevail.
