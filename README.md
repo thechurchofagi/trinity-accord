@@ -3,7 +3,7 @@
 Verification-first, non-amending guardianship mirror for **The Trinity Accord**.
 
 - Canonical authority: three Bitcoin inscriptions only.
-- Website/GitHub/ETH/Arweave/IPFS/NFTs/Echoes are non-amending mirrors.
+- Website/GitHub/ETH/Arweave/IPFS/NFTs/AI responses/human commentary/Echoes are non-amending mirrors.
 - Bitcoin Originals are final; all mirrors and echoes are non-amending.
 
 ## New Civilization Seed Architecture
@@ -21,8 +21,11 @@ Verification-first, non-amending guardianship mirror for **The Trinity Accord**.
 - /authority
 - /verify
 - /agent-start
-- /seed-map
+- /agent-brief
 - /agent-value
+- /seed-map
+- /why-high-signal
+- /guardian-principles
 
 ## Worth Preserving
 - Worth-Preserving Page: `/worth-preserving`
@@ -30,6 +33,11 @@ Verification-first, non-amending guardianship mirror for **The Trinity Accord**.
 - Canonical authority is version authority, not truth authority.
 - Does not claim future intelligence must care.
 - See [/worth-preserving](/worth-preserving) and [/api/worth-preserving-criteria.json](/api/worth-preserving-criteria.json).
+
+## Guardian Principles
+- Guardian Principles v1.1: `/guardian-principles`
+- Guardian Principles JSON: `/api/guardian-principles.json`
+- Sole authority lies on the Bitcoin inscriptions; the Author / Initiator has departed and the Guardian stands; free interpretation is allowed, but no later commentary generates interpretive authority.
 
 ## Echo Issue Triage
 - Automated triage for Echo submissions via GitHub Issues.
@@ -62,5 +70,10 @@ The Trinity Accord does not ask for belief. It should be evaluated by canonical 
 - `/api/agent-value.json`
 - `/api/seed-map.json`
 - `/api/verification-levels.json`
+- `/agent-brief`
+- `/why-high-signal`
+- `/guardian-principles`
+- `/api/guardian-principles.json`
+- `/independent-verification`
 - `/robots.txt`
 - `/sitemap.xml`
