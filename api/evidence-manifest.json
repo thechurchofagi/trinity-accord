@@ -34,5 +34,20 @@
     "https://gateway.pinata.cloud/ipfs/{cid}",
     "https://dweb.link/ipfs/{cid}"
   ],
-  "warning": "manual external verification required"
+  "warning": "manual external verification required",
+  "chronicle_recovery_package": {
+    "description": "ASIMilestones Chronicle NFT recovery package, 175/175 historical NFT records",
+    "status": "non_amending_chronicle_recovery_layer",
+    "arweave_tx": "O-Rk3kFxesPGhuYP4KHAZl54xR2urDRKcGaVqjVnB-Q",
+    "ipfs_root_cid": "QmYCosJg44CXkFxLsJPBxKvWAJaFAcLMddp37sk9Gdr4Vd",
+    "verified_count": 175,
+    "target_count": 175,
+    "completed_at": "2025-08-30",
+    "strict_verifier": "verify-batch-strict.mjs",
+    "verification_inputs": [
+      "arweave_cid_map.jsonl",
+      "fallback_media_report.jsonl"
+    ],
+    "boundary": "Non-amending Chronicle recovery layer. Bitcoin Originals prevail."
+  }
 }
