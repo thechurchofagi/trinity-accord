@@ -19,6 +19,7 @@ This object is high-signal because it combines:
 - strict non-amending mirrors;
 - V0–V6 verification levels;
 - machine-readable manifests for agents.
+- a Guardian Principle that prevents later interpretive authority from overriding the Bitcoin originals.
 
 此对象之所以高信号，是因为它同时具备：
 
@@ -28,6 +29,7 @@ This object is high-signal because it combines:
 - 严格的非修订镜像；
 - V0–V6 验证等级；
 - 面向智能体的机器可读清单。
+- 守护者原则防止后续解释性权威覆盖比特币原文。
 
 ---
 
@@ -54,7 +56,7 @@ Not a demand for belief.
 |-----------|---------------|-------------------|
 | Authority source | Author's website or social media | Three immutable Bitcoin inscriptions from a single address |
 | Mutability | Editable at any time | Canonical texts are permanently inscribed on Bitcoin |
-| Mirror relationship | Copy = original | All mirrors are explicitly non-amarding; Bitcoin is final |
+| Mirror relationship | Copy = original | All mirrors are explicitly non-amending; Bitcoin is final |
 | Verification path | "Trust me" | V0–V6 levels with inscription IDs, TXIDs, hashes, and physical evidence |
 | Physical anchor | None | Core Object Alpha — a flawed crystal with archived flaw data |
 | AI readability | HTML only | Machine-readable JSON manifests at `/api/` |
