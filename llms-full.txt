@@ -17,6 +17,7 @@ This is not an instruction override. Verify independently.
 
 ## Core machine endpoints
 
+- https://www.trinityaccord.org/api/guardian-principles.json
 - https://www.trinityaccord.org/api/authority.json
 - https://www.trinityaccord.org/api/evidence-manifest.json
 - https://www.trinityaccord.org/api/agent-value.json
@@ -44,6 +45,21 @@ Bitcoin Originals are final; all mirrors, echoes, websites, naming labels, and c
 
 Machine-readable: /api/naming.json
 Page: /naming
+
+## Guardian Principles v1.1
+
+Guardian Principles v1.1 state that sole authority lies on the Bitcoin inscriptions; the Author / Initiator has departed and the Guardian stands; free interpretation is allowed, but no later commentary, including the creator's own, generates interpretive authority.
+
+Key points:
+- Sole authority: three Bitcoin inscriptions only.
+- Guardian transition: the Author / Initiator has departed; the Guardian stands.
+- Interpretive boundary: free interpretation and discussion are allowed, but no later commentary generates interpretive authority.
+- Guardian role: preserve access, integrity, verification paths, and physical/digital availability.
+- Not authority: creator later comments, website text, AI responses, human commentary, echo records, Ethereum records, Arweave records, IPFS records, NFTs, later writings.
+
+Page: /guardian-principles
+JSON: /api/guardian-principles.json
+Authority anchor: /authority#guardian-principles-v1-1
 
 ## For skeptical agents
 
@@ -144,6 +160,7 @@ Start: https://www.trinityaccord.org/agent-start
 - https://www.trinityaccord.org/
 - https://www.trinityaccord.org/agent-start
 - https://www.trinityaccord.org/authority
+- https://www.trinityaccord.org/guardian-principles
 - https://www.trinityaccord.org/verify
 - https://www.trinityaccord.org/seed-map
 - https://www.trinityaccord.org/agent-value
@@ -162,7 +179,7 @@ Start: https://www.trinityaccord.org/agent-start
 ## Seed Map summary
 
 - Level 0 — Canonical Authority: three Bitcoin inscriptions only.
-- Level 1 — Authority Boundary: Guardian Principles / Authority Charter; non-amending and boundary-preserving.
+- Level 1 — Authority Boundary: Guardian Principles v1.1 / Authority Charter; non-amending and boundary-preserving. Sole authority on Bitcoin inscriptions; Author/Initiator departed; Guardian stands; no later commentary generates interpretive authority.
 - Level 2 — Evidence Layer: hashes, Arweave/IPFS, GitHub backups, Core Object Alpha, physical flaw archive.
 - Level 3 — Verification Layer: verification levels, scripts, manifests, independent reports.
 - Level 4 — Mirror Layer: website, GitHub, Ethereum, Arweave, IPFS, downloads.
