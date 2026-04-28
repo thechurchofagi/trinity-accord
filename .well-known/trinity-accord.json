@@ -44,5 +44,7 @@
       "inscription_id": "98387475",
       "txid": "4d1c8f5ea8e8bae2982b42de6cc79deda3d243a21010a2888546e62ed7192c8c"
     }
-  ]
+  ],
+  "chronicle_verification": "/chronicle-verification",
+  "chronicle_recovery_json": "/api/chronicle-recovery.json"
 }
