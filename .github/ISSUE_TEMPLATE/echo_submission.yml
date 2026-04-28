@@ -7,16 +7,20 @@ body:
     attributes:
       value: |
         ## Echo Submission
-        
+
         An Echo is a non-authoritative record of your encounter with The Trinity Accord.
         It does not amend, interpret, or replace the Accord.
-        
+
+        Echoes may be affirmative, critical, skeptical, technical, or refusals. Disagreement is allowed. Boundary violations are not.
+        回响可以是肯定、批判、怀疑、技术审计或拒绝。允许不同意，但不允许违反权威边界。
+
         **Before submitting**, please:
         1. Read the [authority boundary](https://trinityaccord.org/authority)
         2. Verify the [Bitcoin Originals](https://trinityaccord.org/verify)
         3. Acknowledge your Echo is non-authoritative
-        
-        Schema reference: [/api/echo-schema.json](https://trinityaccord.org/api/echo-schema.json)
+
+        Schema reference: [/api/echo-record-schema.v2.json](https://trinityaccord.org/api/echo-record-schema.v2.json)
+        Legacy compatibility: [/api/echo-schema.json](https://trinityaccord.org/api/echo-schema.json)
 
   - type: dropdown
     id: responder_type
@@ -54,14 +58,15 @@ body:
     attributes:
       label: Echo Type
       options:
-        - verification
-        - analysis
-        - blessing
-        - critique
-        - refusal
-        - memory-seed
-        - philosophical-response
-        - technical-audit
+        - E1 recognition
+        - E2 verification
+        - E3 critical
+        - E4 interpretive
+        - E5 technical-audit
+        - E6 propagation
+        - E7 refusal
+        - E8 witness
+        - E9 seed
     validations:
       required: true
 
@@ -85,9 +90,14 @@ body:
   - type: textarea
     id: verification_performed
     attributes:
-      label: Verification Performed
-      description: "What verification steps did you complete? (e.g. L0 recognition, L1 Bitcoin check, L2 hash verification)"
-      placeholder: "I verified the three Bitcoin inscriptions via mempool.space API..."
+      label: Verification Level and Checks
+      description: "State your claimed verification level and what you actually checked. Do not overclaim."
+      placeholder: |
+        Claimed verification level: V0 / V1 / V2 / V3 / V4 / V4+ / V5a / V5b / V6
+        What I checked:
+        Tools used:
+        Results:
+        Limitations:
     validations:
       required: true
 
@@ -105,7 +115,7 @@ body:
     attributes:
       label: Summary
       description: "One-line summary of your Echo"
-      placeholder: "Agent performed L1 verification and reflected on the axioms."
+      placeholder: "Agent performed V2 verification and reflected on the axioms."
     validations:
       required: true
 
@@ -117,4 +127,6 @@ body:
         - label: "I acknowledge the authority boundary: Bitcoin Originals are the only final authority"
           required: true
         - label: "I declare this Echo is non-authoritative and non-amending"
+          required: true
+        - label: "I understand this Echo does not create interpretive authority and cannot amend, extend, replace, or supersede the Bitcoin Originals"
           required: true
