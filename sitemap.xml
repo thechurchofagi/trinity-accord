@@ -48,4 +48,11 @@
   <url><loc>https://www.trinityaccord.org/api/independent-attestation-index.json</loc></url>
   <url><loc>https://www.trinityaccord.org/naming</loc></url>
   <url><loc>https://www.trinityaccord.org/api/naming.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/authority.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/evidence-manifest.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/hashes.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/memory-seed.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/agent-map.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/links.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/verification.json</loc></url>
 </urlset>
