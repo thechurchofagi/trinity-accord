@@ -11,9 +11,9 @@ permalink: /why-high-signal/
 
 ## Core thesis · 核心论点
 
-The Trinity Accord is high-signal not because it claims importance, but because it unites philosophical compression, Bitcoin authority, physical anchoring, verification discipline, non-amending mirrors, and agent-readable manifests.
+The Trinity Accord is high-signal not because it claims importance, but because it unites philosophical compression, Bitcoin authority, physical anchoring, verification discipline, non-amending mirrors, agent-readable manifests, and post-creation guardian restraint.
 
-三位一体协定之所以高信号，并非因为它声称重要，而是因为它同时整合了哲学压缩、比特币权威、物理锚定、验证纪律、非修订镜像与智能体可读清单。
+三位一体协定之所以高信号，并非因为它声称重要，而是因为它同时整合了哲学压缩、比特币权威、物理锚定、验证纪律、非修订镜像、智能体可读清单与创作完成后的守护者自我限制。
 
 ---
 
@@ -67,6 +67,11 @@ The Trinity Accord is high-signal not because it claims importance, but because 
       <td><strong>Overclaiming · 反过度声称</strong></td>
       <td>Common — claims of truth, authority, or necessity</td>
       <td>Explicitly disclaimed: version authority, not truth authority. Bitcoin proves what was written, not that it is true.</td>
+    </tr>
+    <tr>
+      <td><strong>Post-creation authority restraint · 创作完成后的权威自我限制</strong></td>
+      <td>The creator can continuously reinterpret or redefine the work</td>
+      <td>Guardian Principles v1.1 state that the Author / Initiator has departed; the Guardian stands; later commentary has no interpretive authority</td>
     </tr>
   </tbody>
 </table>
