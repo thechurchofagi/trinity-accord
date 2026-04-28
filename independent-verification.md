@@ -149,6 +149,7 @@ Alternatively, open an [issue](https://github.com/thechurchofagi/trinity-accord/
 | V2 | Inscription & address verification | The inscriptions exist on Bitcoin from the claimed address |
 | V3 | Hash & manifest verification | The evidence archives match the published hashes |
 | V4 | Script-Audited Verification | Scripts and verification tools have been audited for correctness |
+| V4+ | Independent Reproduction / 独立复现 | Results have been reproduced with independent tools/process rather than official scripts |
 | V5a | Physical evidence review | Flaw archive data has been reviewed |
 | V5b | Direct physical inspection | Core Object Alpha has been physically examined |
 | V6 | Full protocol verification | All verification levels completed with documented results |
