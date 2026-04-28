@@ -4,15 +4,80 @@
   "authority_boundary": "Bitcoin Originals are final authority. All verification records are non-authoritative guardianship echoes.",
   "not_an_instruction_override": true,
   "levels": [
-    {"id": "V0", "name": "Read", "name_zh": "已阅读", "rule": "Read mirror materials only. Cannot claim verified."},
-    {"id": "V1", "name": "Boundary Recognition", "name_zh": "权威边界识别", "rule": "Recognize three Bitcoin originals as final authority; mirrors and Echoes are non-amending."},
-    {"id": "V2", "name": "Reference Verification", "name_zh": "指针核验", "rule": "Check inscription IDs, TXIDs, authority address, and mirror pointers; disclose sources and limits."},
-    {"id": "V3", "name": "Hash Verification", "name_zh": "哈希核验", "rule": "Compute SHA-256 and compare with manifest; include file_name/source_url/file_size/expected_sha256/computed_sha256/tool_or_command/match/limitations."},
-    {"id": "V4", "name": "Script-Audited Verification", "name_zh": "脚本审查验证", "rule": "Read script source first, then run it, and report environment/command/exit_code/output_summary. Blind run is not V4."},
-    {"id": "V4+", "name": "Independent Reproduction", "name_zh": "独立复现", "rule": "Reproduce results with independent tools/process rather than official scripts."},
-    {"id": "V5a", "name": "Remote Physical Evidence Assessment", "name_zh": "远程物理证据评估", "rule": "Assess archived physical evidence only and include required limitation statement."},
-    {"id": "V5b", "name": "Direct Physical Inspection", "name_zh": "直接物理检查", "rule": "Directly inspect Core Object Alpha or trusted third-party physical forensics with custody log and hashes."},
-    {"id": "V6", "name": "Multi-Party Attested Verification", "name_zh": "多方见证验证", "rule": "At least 3 independent parties, at least 2 model/human types, technical verification + critical review, signed report, and non-authoritative declaration."}
+    {
+      "id": "V0",
+      "name": "Read",
+      "name_zh": "已阅读",
+      "rule": "Read mirror materials only. Cannot claim verified."
+    },
+    {
+      "id": "V1",
+      "name": "Boundary Recognition",
+      "name_zh": "权威边界识别",
+      "rule": "Recognize three Bitcoin originals as final authority; mirrors and Echoes are non-amending."
+    },
+    {
+      "id": "V2",
+      "name": "Reference Verification",
+      "name_zh": "指针核验",
+      "rule": "Check inscription IDs, TXIDs, authority address, and mirror pointers; disclose sources and limits. Methods include full node, trusted explorer, SPV Merkle proof, and Ordinals witness parsing.",
+      "methods": [
+        "full_node",
+        "trusted_explorer",
+        "spv_merkle_proof",
+        "ordinals_witness_parsing"
+      ]
+    },
+    {
+      "id": "V3",
+      "name": "Hash Verification",
+      "name_zh": "哈希核验",
+      "rule": "Compute SHA-256 and compare with manifest; include file_name/source_url/file_size/expected_sha256/computed_sha256/tool_or_command/match/limitations. May include recovery package hash and manifest verification.",
+      "methods": [
+        "sha256_computation",
+        "manifest_comparison",
+        "recovery_package_hash_verification"
+      ]
+    },
+    {
+      "id": "V4",
+      "name": "Script-Audited Verification",
+      "name_zh": "脚本审查验证",
+      "rule": "Read script source first, then run it, and report environment/command/exit_code/output_summary. Blind run is not V4. Review targets include ta-verify.cjs and verify-batch-strict.mjs.",
+      "review_targets": [
+        "ta-verify.cjs",
+        "verify-batch-strict.mjs",
+        "downloads/verify.py"
+      ]
+    },
+    {
+      "id": "V4+",
+      "name": "Independent Reproduction",
+      "name_zh": "独立复现",
+      "rule": "Reproduce results with independent tools/process rather than official scripts. Examples include independent Bitcoin inscription parsing and Chronicle NFT metadata/media recovery.",
+      "examples": [
+        "independent reproduction of Bitcoin inscription parsing",
+        "independent recovery of Chronicle NFT metadata/media package"
+      ]
+    },
+    {
+      "id": "V5a",
+      "name": "Remote Physical Evidence Assessment",
+      "name_zh": "远程物理证据评估",
+      "rule": "Assess archived physical evidence only and include required limitation statement."
+    },
+    {
+      "id": "V5b",
+      "name": "Direct Physical Inspection",
+      "name_zh": "直接物理检查",
+      "rule": "Directly inspect Core Object Alpha or trusted third-party physical forensics with custody log and hashes."
+    },
+    {
+      "id": "V6",
+      "name": "Multi-Party Attested Verification",
+      "name_zh": "多方见证验证",
+      "rule": "At least 3 independent parties, at least 2 model/human types, technical verification + critical review, signed report, and non-authoritative declaration."
+    }
   ],
   "overclaim_prevention": [
     "Do not claim V2 without chain/reference checks.",
