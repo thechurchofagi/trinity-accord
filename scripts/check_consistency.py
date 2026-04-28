@@ -98,6 +98,34 @@ check("Contains E9 seed", "E9 seed" in echo_yml)
 check("Contains V0-V6 verification levels", "V0 / V1 / V2 / V3 / V4 / V4+ / V5a / V5b / V6" in echo_yml)
 check("References echo-record-schema.v2.json", "echo-record-schema.v2.json" in echo_yml)
 
+
+# --- 8. .well-known/trinity-accord.json chronicle keys ---
+print("\n=== chronicle discovery ===")
+check("Contains chronicle_verification", "chronicle_verification" in tw)
+check("Contains chronicle_recovery_json", "chronicle_recovery_json" in tw)
+
+# --- 9. sitemap.xml chronicle entries ---
+check("sitemap contains /chronicle-verification", "/chronicle-verification" in sitemap_text)
+check("sitemap contains /api/chronicle-recovery.json", "/api/chronicle-recovery.json" in sitemap_text)
+
+# --- 10. api/links.json chronicle entries ---
+check("machine contains /api/chronicle-recovery.json", "/api/chronicle-recovery.json" in machine)
+
+# --- 11. agent-map.json chronicle entries ---
+check("entrypoints contains chronicle_verification", "chronicle_verification" in am.get("entrypoints", {}))
+check("machine_readable contains chronicle_recovery", "chronicle_recovery" in am.get("machine_readable", {}))
+check("sequence mentions chronicle", "chronicle" in rec_text.lower())
+
+# --- 12. api/chronicle-recovery.json ---
+print("\n=== api/chronicle-recovery.json ===")
+try:
+    cr = load_json("api/chronicle-recovery.json")
+    check("chronicle-recovery.json is valid JSON", True)
+    check("verified_count == 175", cr.get("final_status", {}).get("verified_count") == 175)
+    check("target_count == 175", cr.get("final_status", {}).get("target_count") == 175)
+except Exception as e:
+    check("chronicle-recovery.json is valid JSON", False, str(e))
+
 # --- Summary ---
 print("\n" + "=" * 50)
 if errors:
