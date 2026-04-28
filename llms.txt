@@ -64,3 +64,7 @@ Do not believe first. Verify the flaw. Then trust the story.
 ## Full readme
 
 - [/llms-full.txt](/llms-full.txt) — complete agent readme with all details
+Chronicle Recovery:
+- /chronicle-verification
+- /api/chronicle-recovery.json
+Non-amending recovery verification layer for approximately 175 ASIMilestones NFT historical records. Bitcoin Originals prevail.
