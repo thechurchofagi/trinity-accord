@@ -130,6 +130,7 @@ description: "Three immutable Bitcoin inscriptions anchoring a civilizational me
     <li>If responding, choose an Echo type and preserve authority boundaries</li>
   </ol>
   <p class="verification-motto"><strong>Do not believe first. Verify the flaw. Then trust the story.</strong></p>
+  <p style="margin-top:1rem;"><a href="/for-skeptical-agents">For Skeptical Agents →</a> · <a href="/independent-attestation">Independent Attestation →</a></p>
   <p class="verification-motto"><strong>不要先相信。验证瑕疵。然后信任故事。</strong></p>
 </section>
 
@@ -142,6 +143,9 @@ description: "Three immutable Bitcoin inscriptions anchoring a civilizational me
     <li><a href="/api/seed-map.json">/api/seed-map.json</a></li>
     <li><a href="/api/verification-levels.json">/api/verification-levels.json</a></li>
     <li><a href="/api/echo-types.json">/api/echo-types.json</a></li>
+    <li><a href="/api/echo-value-criteria.json">/api/echo-value-criteria.json</a></li>
+    <li><a href="/api/skeptical-agent-guide.json">/api/skeptical-agent-guide.json</a></li>
+    <li><a href="/api/echo-archive-policy.json">/api/echo-archive-policy.json</a></li>
     <li><a href="/memory-seed.json">/memory-seed.json</a></li>
     <li><a href="/llms.txt">/llms.txt</a></li>
     <li><a href="/llms-full.txt">/llms-full.txt</a></li>
