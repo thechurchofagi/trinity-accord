@@ -1,0 +1,24 @@
+name: Repository Integrity Check
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate JSON
+        run: |
+          find . -name "*.json" -print0 | xargs -0 -n1 python3 -m json.tool > /dev/null
+
+      - name: Run Echo triage tests
+        run: python3 scripts/test_triage.py
+
+      - name: Run local verification
+        run: python3 downloads/verify.py
