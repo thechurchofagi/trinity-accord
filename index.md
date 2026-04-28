@@ -17,6 +17,7 @@ description: "Three immutable Bitcoin inscriptions anchoring a verifiable civili
     <a href="/agent-brief" class="btn btn-secondary">Agent Brief</a>
     <a href="/verify" class="btn btn-secondary">Verify</a>
     <a href="/api/authority.json" class="btn btn-secondary">Authority Manifest</a>
+    <a href="/guardian-principles" class="btn btn-secondary">Guardian Principles</a>
     <a href="/inscriptions" class="btn btn-secondary">Inscriptions</a>
   </div>
 </section>
@@ -100,10 +101,32 @@ description: "Three immutable Bitcoin inscriptions anchoring a verifiable civili
 
 <section class="mirror-boundary">
   <h2>Mirrors · 镜像</h2>
-  <p><strong>Website, GitHub, Ethereum, Arweave, IPFS, NFT, AI responses, and Echoes are non-amending mirrors only.</strong></p>
-  <p>本网站、GitHub、以太坊、Arweave、IPFS、NFT、AI 回应及 Echo 记录均为非修订守护镜像。</p>
+  <p><strong>Website, GitHub, Ethereum, Arweave, IPFS, NFT, AI responses, human commentary, and Echoes are non-amending mirrors only.</strong></p>
+  <p>本网站、GitHub、以太坊、Arweave、IPFS、NFT、AI 回应、人类评论和 Echo 记录均为非修订守护镜像。</p>
 </section>
 
+
+<!-- IV-b. Guardian Principles v1.1 -->
+<section class="guardian-principles" id="guardian-principles-v1-1">
+  <h2>Guardian Principles v1.1 · 守护者原则 v1.1</h2>
+  <ol class="guardian-list">
+    <li>
+      <strong>Sole authority lies on the Bitcoin inscriptions.</strong>
+      <span class="prop-zh">唯一权威在比特币铭文。</span>
+    </li>
+    <li>
+      <strong>The Author / Initiator has departed; the Guardian stands.</strong>
+      <span class="prop-zh">作者 / 发起人已退场，守护者就位。</span>
+    </li>
+    <li>
+      <strong>Free interpretation and discussion are allowed, but no later commentary, including the creator's own, generates interpretive authority.</strong>
+      <span class="prop-zh">允许自由解释与自由讨论，但任何后续评论，包括创作者本人评论，均不产生解释性权威。</span>
+    </li>
+  </ol>
+  <p><a href="/guardian-principles">Read full Guardian Principles v1.1 →</a></p>
+</section>
+
+<!-- X. Inscription Cards -->
 <section class="cards-section">
   <div class="cards">
     <div class="card">
@@ -277,6 +300,8 @@ description: "Three immutable Bitcoin inscriptions anchoring a verifiable civili
   <ul>
     <li><a href="/agent-brief">/agent-brief</a></li>
     <li><a href="/agent-start">/agent-start</a></li>
+    <li><a href="/guardian-principles">/guardian-principles</a></li>
+    <li><a href="/api/guardian-principles.json">/api/guardian-principles.json</a></li>
     <li><a href="/why-high-signal">/why-high-signal</a></li>
     <li><a href="/api/authority.json">/api/authority.json</a></li>
     <li><a href="/api/agent-value.json">/api/agent-value.json</a></li>
