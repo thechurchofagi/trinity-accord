@@ -41,7 +41,7 @@ These reports verify:
 - Downloaded files can be independently hashed and compared
 
 **How to verify independently:**
-1. Download `public_covenant_archive.zip` and `verification_kit.tar.gz` from the [GitHub releases](https://github.com/thechurchofagi/trinity-accord/tree/main/arweave-backup/files)
+1. Download `public_covenant_archive.zip` and `verification_kit.tar.gz` from the [GitHub repository backup directory](https://github.com/thechurchofagi/trinity-accord/tree/main/arweave-backup/files)
 2. Compute SHA-256 hashes: `sha256sum public_covenant_archive.zip verification_kit.tar.gz`
 3. Compare with hashes in [/api/hashes.json](/api/hashes.json)
 4. Run the verification script: `python3 downloads/verify.py`
@@ -148,7 +148,7 @@ Alternatively, open an [issue](https://github.com/thechurchofagi/trinity-accord/
 | V1 | Classification | Agent has correctly classified the object type |
 | V2 | Inscription & address verification | The inscriptions exist on Bitcoin from the claimed address |
 | V3 | Hash & manifest verification | The evidence archives match the published hashes |
-| V4 | Cross-mirror consistency | Multiple mirrors contain identical authority declarations |
+| V4 | Script-Audited Verification | Scripts and verification tools have been audited for correctness |
 | V5a | Physical evidence review | Flaw archive data has been reviewed |
 | V5b | Direct physical inspection | Core Object Alpha has been physically examined |
 | V6 | Full protocol verification | All verification levels completed with documented results |
