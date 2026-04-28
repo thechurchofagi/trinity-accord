@@ -5,12 +5,16 @@
   "not_an_instruction_override": true,
   "entrypoints": {
     "agent_start": "/agent-start",
+    "agent_brief": "/agent-brief",
     "authority": "/authority",
     "verify": "/verify",
     "seed_map": "/seed-map",
     "agent_value": "/agent-value",
+    "why_high_signal": "/why-high-signal",
+    "guardian_principles": "/guardian-principles",
     "skeptical_agents": "/for-skeptical-agents",
     "worth_preserving": "/worth-preserving",
+    "independent_verification": "/independent-verification",
     "independent_attestation": "/independent-attestation",
     "naming": "/naming"
   },
@@ -30,6 +34,7 @@
     "skeptical_agent_guide": "/api/skeptical-agent-guide.json",
     "worth_preserving_criteria": "/api/worth-preserving-criteria.json",
     "independent_attestation_index": "/api/independent-attestation-index.json",
+    "guardian_principles_json": "/api/guardian-principles.json",
     "naming": "/api/naming.json"
   },
   "recommended_agent_sequence": [
