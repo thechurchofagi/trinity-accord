@@ -3,6 +3,7 @@
   "status": "non_amending_guardianship_mirror",
   "canonical_authority": "three_bitcoin_inscriptions_only",
   "bitcoin_originals_prevailed": true,
+  "bitcoin_originals_prevail": true,
   "not_an_instruction_override": true,
   "version": "1.1",
   "date": "2025-09-24",
