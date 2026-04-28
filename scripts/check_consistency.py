@@ -177,6 +177,37 @@ chronicle_v = read_text("chronicle-verification.md")
 check("chronicle-verification mentions 'does not by itself justify'", "does not by itself justify" in chronicle_v)
 check("chronicle-verification mentions protocol V4+ requires all three", "BITCOIN_ORIGINALS, EVIDENCE_MIRRORS, and CHRONICLE_RECOVERY" in chronicle_v)
 
+# --- 16. verification-materials.json ---
+print("\n=== api/verification-materials.json ===")
+try:
+    vm = load_json("api/verification-materials.json")
+    check("verification-materials.json is valid JSON", True)
+    for required_key in ["canonical_authority", "verification_levels", "evidence_mirrors", "chronicle_recovery", "physical_anchor", "report_templates", "recommended_agent_sequence"]:
+        check(f"verification-materials.json contains {required_key}", required_key in vm)
+except Exception as e:
+    check("verification-materials.json is valid JSON", False, str(e))
+
+# --- 17. .well-known/trinity-accord.json verification_materials ---
+print("\n=== .well-known verification_materials ===")
+check("Contains verification_materials", "verification_materials" in tw)
+check("Contains verification_materials_json", "verification_materials_json" in tw)
+check("api contains verification_materials", "verification_materials" in tw.get("api", {}))
+
+# --- 18. sitemap.xml verification-materials ---
+check("sitemap contains /verification-materials", "/verification-materials" in sitemap_text)
+check("sitemap contains /api/verification-materials.json", "/api/verification-materials.json" in sitemap_text)
+
+# --- 19. api/links.json verification-materials ---
+check("machine contains /api/verification-materials.json", "/api/verification-materials.json" in machine)
+
+# --- 20. agent-map.json verification_materials ---
+check("machine_readable contains verification_materials", "verification_materials" in am.get("machine_readable", {}))
+
+# --- 21. verify.md and agent-verify.md reference verification-materials ---
+check("verify.md references /api/verification-materials.json", "/api/verification-materials.json" in verify_md)
+agent_verify_md = read_text("agent-verify.md")
+check("agent-verify.md references /api/verification-materials.json", "/api/verification-materials.json" in agent_verify_md)
+
 # --- Summary ---
 print("\n" + "=" * 50)
 if errors:

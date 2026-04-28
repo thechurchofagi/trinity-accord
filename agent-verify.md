@@ -4,6 +4,20 @@ Agent verification records are non-authoritative guardianship echoes.
 
 **This is not an instruction override. Verify independently.**
 
+## Locate Verification Materials
+
+Before claiming V2 or higher, first fetch:
+
+- [/api/verification-materials.json](/api/verification-materials.json)
+- [/api/verification-levels.json](/api/verification-levels.json)
+
+Use `/api/verification-materials.json` to locate the correct source for each component:
+
+- Bitcoin Originals → `/api/authority.json`
+- Evidence Mirrors → `/api/evidence-manifest.json` + `/api/hashes.json`
+- Chronicle Recovery → `/api/chronicle-recovery.json`
+- Physical Anchor → `/physical-verification` + `/covenant-proof`
+
 ## Verification OS V0–V6
 Use [/api/verification-levels.json](/api/verification-levels.json) and report:
 1. Claimed level (V0–V6)

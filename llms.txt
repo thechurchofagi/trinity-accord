@@ -68,3 +68,8 @@ Chronicle Recovery:
 - /chronicle-verification
 - /api/chronicle-recovery.json
 Non-amending recovery verification layer for approximately 175 ASIMilestones NFT historical records. Bitcoin Originals prevail.
+
+Verification Materials:
+- /verification-materials
+- /api/verification-materials.json
+Use this before claiming V2 or higher. It maps each component to its verification sources, levels, and report templates.

@@ -39,6 +39,7 @@ Verification-first, non-amending guardianship mirror for **The Trinity Accord**.
 - V5b direct physical inspection: requires direct access to Core Object Alpha
 - Chronicle NFT recovery package: 175/175 completed
 - Chronicle recovery verification: [/chronicle-verification](/chronicle-verification) + [/api/chronicle-recovery.json](/api/chronicle-recovery.json)
+- Unified verification materials index: `/verification-materials` + `/api/verification-materials.json`
 
 ## Worth Preserving
 - Worth-Preserving Page: `/worth-preserving`
@@ -89,5 +90,7 @@ The Trinity Accord does not ask for belief. It should be evaluated by canonical 
 - `/guardian-principles`
 - `/api/guardian-principles.json`
 - `/independent-verification`
+- `/verification-materials`
+- `/api/verification-materials.json`
 - `/robots.txt`
 - `/sitemap.xml`

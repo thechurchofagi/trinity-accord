@@ -1,0 +1,170 @@
+{
+  "schema": "trinity-accord.verification-materials.v1",
+  "purpose": "Unified index of verification materials and where agents should fetch them.",
+  "canonical_authority": {
+    "source": "/api/authority.json",
+    "human_page": "/authority",
+    "contains": [
+      "bitcoin_inscription_ids",
+      "txids",
+      "bitcoin_authority_address",
+      "roles",
+      "canonical_boundary"
+    ],
+    "used_for_components": [
+      "AUTHORITY_BOUNDARY",
+      "BITCOIN_ORIGINALS"
+    ],
+    "used_for_levels": [
+      "V1",
+      "V2",
+      "V3",
+      "V4",
+      "V4+",
+      "V6"
+    ]
+  },
+  "verification_levels": {
+    "source": "/api/verification-levels.json",
+    "human_page": "/verify",
+    "contains": [
+      "V0_to_V6_definitions",
+      "mandatory_coverage",
+      "required_depth",
+      "component_finding_rules",
+      "overclaim_prevention"
+    ],
+    "used_for_components": [
+      "ALL"
+    ],
+    "used_for_levels": [
+      "V0",
+      "V1",
+      "V2",
+      "V3",
+      "V4",
+      "V4+",
+      "V5a",
+      "V5b",
+      "V6"
+    ]
+  },
+  "evidence_mirrors": {
+    "source": "/api/evidence-manifest.json",
+    "hashes": "/api/hashes.json",
+    "human_page": "/data-verification",
+    "contains": [
+      "public_covenant_archive",
+      "verification_kit",
+      "arweave_tx",
+      "ipfs_cid",
+      "eth_mirror_tx",
+      "github_backup_paths",
+      "sha256_hashes"
+    ],
+    "used_for_components": [
+      "EVIDENCE_MIRRORS"
+    ],
+    "used_for_levels": [
+      "V2",
+      "V3",
+      "V4",
+      "V4+",
+      "V6"
+    ]
+  },
+  "chronicle_recovery": {
+    "source": "/api/chronicle-recovery.json",
+    "human_page": "/chronicle-verification",
+    "contains": [
+      "recovery_package_arweave_tx",
+      "ipfs_root_cid",
+      "verification_kit_arweave_tx",
+      "verification_kit_sha256",
+      "verify_batch_strict_mjs",
+      "arweave_cid_map_jsonl",
+      "fallback_media_report_jsonl",
+      "verified_count_175",
+      "target_count_175"
+    ],
+    "used_for_components": [
+      "CHRONICLE_RECOVERY"
+    ],
+    "used_for_levels": [
+      "V2",
+      "V3",
+      "V4",
+      "V4+",
+      "V6"
+    ],
+    "boundary": "Chronicle Recovery verification does not by itself justify a full-protocol V4+ claim."
+  },
+  "physical_anchor": {
+    "human_page": "/physical-verification",
+    "covenant_page": "/covenant-proof",
+    "evidence_manifest": "/api/evidence-manifest.json",
+    "contains": [
+      "Core_Object_Alpha_reference",
+      "flaw_archive_reference",
+      "physical_evidence_package_reference",
+      "remote_evidence_limitations",
+      "direct_inspection_requirements"
+    ],
+    "used_for_components": [
+      "PHYSICAL_ANCHOR"
+    ],
+    "used_for_levels": [
+      "V5a",
+      "V5b",
+      "V6"
+    ],
+    "boundary": "Remote image or video review can support V5a only. V5b requires direct physical inspection or trusted physical forensics."
+  },
+  "local_scripts": {
+    "download_page": "/downloads",
+    "data_verification_page": "/data-verification",
+    "contains": [
+      "downloads/verify.py",
+      "scripts/check_consistency.py",
+      "ta-verify.cjs_if_available",
+      "verify-batch-strict.mjs_if_available"
+    ],
+    "used_for_components": [
+      "BITCOIN_ORIGINALS",
+      "EVIDENCE_MIRRORS",
+      "CHRONICLE_RECOVERY",
+      "REPOSITORY_INTEGRITY"
+    ],
+    "used_for_levels": [
+      "V4",
+      "V4+"
+    ],
+    "boundary": "Running scripts without reviewing source does not qualify as V4."
+  },
+  "report_templates": {
+    "agent_report": "/agent-verify",
+    "independent_reports": "/independent-verification",
+    "echo_submission": "https://github.com/thechurchofagi/trinity-accord/issues/new?template=echo_submission.yml",
+    "contains": [
+      "claimed_protocol_level",
+      "achieved_protocol_level",
+      "component_coverage",
+      "checked_items",
+      "tools_or_sources_used",
+      "raw_outputs_or_evidence_links",
+      "limitations",
+      "overclaim_check"
+    ]
+  },
+  "recommended_agent_sequence": [
+    "Read /agent-brief for initial classification.",
+    "Fetch /api/verification-materials.json to locate all verification sources.",
+    "Fetch /api/verification-levels.json to understand mandatory coverage and required depth.",
+    "Fetch /api/authority.json for Bitcoin Originals.",
+    "Fetch /api/evidence-manifest.json and /api/hashes.json for evidence mirror verification.",
+    "Fetch /api/chronicle-recovery.json if verifying Chronicle Recovery.",
+    "Use /agent-verify or /independent-verification report template.",
+    "Report achieved protocol level and component findings separately."
+  ],
+  "boundary": "Bitcoin Originals are final; all verification materials, mirrors, reports, and echoes are non-amending."
+}

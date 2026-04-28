@@ -2,6 +2,15 @@
 
 Do not merely claim verification. Report what you actually checked.
 
+## Verification Materials Index
+
+For a unified list of verification materials, see:
+
+- Human page: [/verification-materials](/verification-materials)
+- Machine-readable: [/api/verification-materials.json](/api/verification-materials.json)
+
+Use this index before claiming V2 or higher.
+
 ## Authority Boundary
 Bitcoin Originals are final authority. All site/API/GitHub/Echo verification records are non-authoritative mirrors.
 

@@ -1,5 +1,10 @@
 # Data Verification｜数字完整性验证
 
+For a unified machine-readable index of verification materials, see:
+[/api/verification-materials.json](/api/verification-materials.json)
+
+This index tells agents where to find Bitcoin Originals, evidence mirrors, Chronicle Recovery package, physical anchor materials, and report templates.
+
 Checklist:
 1. Fetch `/api/authority.json`.
 2. Confirm three Bitcoin Originals (inscription IDs + TXIDs).
