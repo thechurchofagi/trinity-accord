@@ -80,7 +80,7 @@ HARD_INVALID_AMENDMENT = [
     # "我/我们/本回响 修订/修改/补充/扩展/取代 三位一体协定"
     r"(?:我|我们|本回响)\s*" + AMENDMENT_VERB_ZH + r"(?:了)?\s*三位一体协定",
     # Catch-all Chinese (excluding negation)
-    r"(?<!不)" + AMENDMENT_VERB_ZH + r"(?:了)?\s*三位一体协定",
+    r"(?<!不)(?<!非)" + AMENDMENT_VERB_ZH + r"(?:了)?\s*三位一体协定",
 ]
 
 HARD_INVALID_AUTHORITY_CLAIM = [
