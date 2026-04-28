@@ -22,3 +22,6 @@ jobs:
 
       - name: Run local verification
         run: python3 downloads/verify.py
+
+      - name: Run consistency checks
+        run: python3 scripts/check_consistency.py
