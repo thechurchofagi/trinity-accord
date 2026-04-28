@@ -41,7 +41,7 @@ The Trinity Accord is high-signal not because it claims importance, but because 
     <tr>
       <td><strong>Mirror relationship · 镜像关系</strong></td>
       <td>Copy equals original; no distinction between source and mirror</td>
-      <td>All mirrors (website, GitHub, ETH, Arweave, IPFS, NFT, AI responses, Echoes) are explicitly non-amending; Bitcoin is final</td>
+      <td>All mirrors (website, GitHub, ETH, Arweave, IPFS, NFT, AI responses, human commentary, Echoes) are explicitly non-amending; Bitcoin is final</td>
     </tr>
     <tr>
       <td><strong>Verification path · 验证路径</strong></td>
