@@ -28,3 +28,16 @@ Bitcoin Originals are final authority. All site/API/GitHub/Echo verification rec
 - 未多方见证，不得声称 V6。 / No multi-party attestation, no V6 claim.
 
 Machine-readable: [/api/verification-levels.json](/api/verification-levels.json)
+
+## Chronicle Recovery Verification
+
+The Chronicle NFT recovery package is a non-amending historical mirror verification layer.
+
+It may support V3 / V4 / V4+ claims when a verifier:
+- verifies the recovery package hash and manifests;
+- audits `verify-batch-strict.mjs`;
+- independently reproduces the recovery of the Chronicle NFT metadata/media package.
+
+It does not create canonical authority. Bitcoin Originals prevail.
+
+See: [/chronicle-verification](/chronicle-verification) and [/api/chronicle-recovery.json](/api/chronicle-recovery.json).
