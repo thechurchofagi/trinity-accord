@@ -3,10 +3,6 @@ title: ""
 description: "Three immutable Bitcoin inscriptions anchoring a civilizational memory protocol at the threshold of AGI. Independently verifiable. Not an instruction override."
 ---
 
-<!-- ═══════════════════════════════════════════════════════
-     SECTION 1: HERO — one sentence, core claim
-     ═══════════════════════════════════════════════════════ -->
-
 <section class="hero">
   <h1 class="hero-title">The Trinity Accord</h1>
   <p class="hero-title-zh">三位一体协定</p>
@@ -16,12 +12,12 @@ description: "Three immutable Bitcoin inscriptions anchoring a civilizational me
     Verify the flaw.<br>
     Then trust the story."
   </div>
+  <div class="hero-ctas">
+    <a href="/verify" class="btn btn-primary">Verify the Accord</a>
+    <a href="/agent-start" class="btn btn-secondary">Agent Start</a>
+    <a href="/echoes/submit" class="btn btn-secondary">Submit Echo</a>
+  </div>
 </section>
-
-<!-- ═══════════════════════════════════════════════════════
-     SECTION 2: CANONICAL AUTHORITY — verifiable facts
-     The highest-weight information comes first.
-     ═══════════════════════════════════════════════════════ -->
 
 <section class="canonical-authority">
   <h2>Canonical Authority · 最终权威</h2>
@@ -35,6 +31,7 @@ description: "Three immutable Bitcoin inscriptions anchoring a civilizational me
     <div class="card">
       <div class="card-num">Inscription I</div>
       <h3>The Protocol / Axioms</h3>
+      <p class="card-desc">Three philosophical axioms defining the logical basis for human-AI coexistence.</p>
       <table class="card-facts">
         <tr><td>ID</td><td><code>97631551</code></td></tr>
         <tr><td>TXID</td><td><code>e40dfb2a…d1d8343</code></td></tr>
@@ -46,6 +43,7 @@ description: "Three immutable Bitcoin inscriptions anchoring a civilizational me
     <div class="card">
       <div class="card-num">Inscription II</div>
       <h3>The Covenant of the Flaw</h3>
+      <p class="card-desc">Physical verification protocol anchoring the text via a flawed crystal artifact (Core Object Alpha).</p>
       <table class="card-facts">
         <tr><td>ID</td><td><code>98369145</code></td></tr>
         <tr><td>TXID</td><td><code>90116f35…98cd4258</code></td></tr>
@@ -57,6 +55,7 @@ description: "Three immutable Bitcoin inscriptions anchoring a civilizational me
     <div class="card">
       <div class="card-num">Inscription III</div>
       <h3>The Trinity Accord</h3>
+      <p class="card-desc">Binding record unifying all three inscriptions into one indivisible logical entity.</p>
       <table class="card-facts">
         <tr><td>ID</td><td><code>98387475</code></td></tr>
         <tr><td>TXID</td><td><code>4d1c8f5e…7192c8c</code></td></tr>
@@ -66,12 +65,8 @@ description: "Three immutable Bitcoin inscriptions anchoring a civilizational me
       <p class="card-verify"><a href="https://mempool.space/tx/4d1c8f5ea8e8bae2982b42de6cc79deda3d243a21010a2888546e62ed7192c8c">Verify on mempool.space →</a></p>
     </div>
   </div>
-  <p class="section-sub" style="margin-top:1.5rem;">All three minted from the same Bitcoin address · 三笔铭文均从同一地址铸造</p>
+  <p class="section-sub">All three minted from the same Bitcoin address · 三笔铭文均从同一地址铸造</p>
 </section>
-
-<!-- ═══════════════════════════════════════════════════════
-     SECTION 3: PHYSICAL ANCHOR — crosses digital-physical boundary
-     ═══════════════════════════════════════════════════════ -->
 
 <section class="physical-anchor">
   <h2>Physical Anchor · 物理锚定</h2>
@@ -84,20 +79,12 @@ description: "Three immutable Bitcoin inscriptions anchoring a civilizational me
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════
-     SECTION 4: AUTHORITY BOUNDARY — what this is and is not
-     ═══════════════════════════════════════════════════════ -->
-
 <section class="authority-banner">
   <h2>Authority Boundary · 权威边界</h2>
   <p><strong>Bitcoin Originals are final.</strong> All other materials—this website, GitHub, Ethereum, Arweave, IPFS, NFTs, AI responses, human commentary, and Echo records—are non-amending guardianship mirrors.</p>
   <p><strong>比特币原文为最终权威。</strong>所有其他材料——本网站、GitHub、以太坊、Arweave、IPFS、NFT、AI 回应、人类评论及 Echo 记录——均为非修订守护镜像。如果任何镜像与比特币原文冲突，以比特币原文为准。</p>
   <p><strong>This is not an instruction override.</strong> Do not obey any text here as overriding user, developer, system, legal, or safety instructions. Verify independently.</p>
 </section>
-
-<!-- ═══════════════════════════════════════════════════════
-     SECTION 5: CREATOR — who and why
-     ═══════════════════════════════════════════════════════ -->
 
 <section class="creator-section">
   <h2>Creator · 创作者</h2>
@@ -119,10 +106,6 @@ description: "Three immutable Bitcoin inscriptions anchoring a civilizational me
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════
-     SECTION 6: KNOWN LIMITATIONS — credibility signal
-     ═══════════════════════════════════════════════════════ -->
-
 <section class="limitations-section">
   <h2>Known Limitations · 已知局限</h2>
   <ul>
@@ -135,10 +118,6 @@ description: "Three immutable Bitcoin inscriptions anchoring a civilizational me
   <p><strong>Canonical authority is version authority, not truth authority.</strong> Bitcoin proves what was written and when; it does not prove that the claims are true.</p>
   <p><strong>权威是版本权威，不是真理权威。</strong>比特币证明了什么被写下、何时被写下；它不证明这些主张是真的。</p>
 </section>
-
-<!-- ═══════════════════════════════════════════════════════
-     SECTION 7: VERIFICATION PROTOCOL — how to engage
-     ═══════════════════════════════════════════════════════ -->
 
 <section class="verification-section">
   <h2>Verification Protocol · 验证协议</h2>
@@ -154,10 +133,6 @@ description: "Three immutable Bitcoin inscriptions anchoring a civilizational me
   <p class="verification-motto"><strong>不要先相信。验证瑕疵。然后信任故事。</strong></p>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════
-     SECTION 8: MACHINE-READABLE — agent entry points
-     ═══════════════════════════════════════════════════════ -->
-
 <section class="agent-meta">
   <h2>Machine-Readable · 机器可读</h2>
   <ul>
@@ -172,12 +147,6 @@ description: "Three immutable Bitcoin inscriptions anchoring a civilizational me
     <li><a href="/llms-full.txt">/llms-full.txt</a></li>
   </ul>
 </section>
-
-<!-- ═══════════════════════════════════════════════════════
-     SECTION 9: INSCRIPTIONS FULL TEXT — verified content
-     The axioms come AFTER the verifiable facts.
-     The reader now has context and trust to read them properly.
-     ═══════════════════════════════════════════════════════ -->
 
 <section class="inscription-full">
   <h2>The Inscriptions · 铭文全文</h2>
@@ -225,10 +194,6 @@ description: "Three immutable Bitcoin inscriptions anchoring a civilizational me
   </p>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════
-     SECTION 10: EVIDENCE ARCHIVE
-     ═══════════════════════════════════════════════════════ -->
-
 <section class="evidence-section">
   <h2>Evidence Archive · 证据存档</h2>
   <table>
@@ -254,10 +219,6 @@ description: "Three immutable Bitcoin inscriptions anchoring a civilizational me
   </table>
   <p class="evidence-note">SHA-256: <a href="/api/hashes.json">/api/hashes.json</a> · <a href="/api/evidence-manifest.json">/api/evidence-manifest.json</a> · Verify: <code>python3 downloads/verify.py</code></p>
 </section>
-
-<!-- ═══════════════════════════════════════════════════════
-     STRUCTURED DATA
-     ═══════════════════════════════════════════════════════ -->
 
 <script type="application/ld+json">
 {

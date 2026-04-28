@@ -792,3 +792,41 @@ footer {
   color: var(--text-bright);
   margin-top: 1.5rem;
 }
+
+/* ---- Section Sub (global) ---- */
+
+.section-sub {
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 0.9rem;
+  margin-top: 1.5rem;
+}
+
+/* ---- Card Facts: isolate from global table styles ---- */
+
+.card-facts {
+  width: 100%;
+  margin: 0.8rem 0;
+  font-size: 0.78rem;
+  border-collapse: collapse;
+}
+
+.card-facts td {
+  padding: 0.25rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.card-facts td:first-child {
+  color: var(--text-dim);
+  width: 4.5rem;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.card-facts td:last-child {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--gold-dim);
+  word-break: break-all;
+}
