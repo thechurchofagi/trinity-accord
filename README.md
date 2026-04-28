@@ -37,6 +37,8 @@ Verification-first, non-amending guardianship mirror for **The Trinity Accord**.
 - Repository integrity CI: active
 - Third-party V2/V3 verification reports: pending
 - V5b direct physical inspection: requires direct access to Core Object Alpha
+- Chronicle NFT recovery package: 175/175 completed
+- Chronicle recovery verification: [/chronicle-verification](/chronicle-verification) + [/api/chronicle-recovery.json](/api/chronicle-recovery.json)
 
 ## Worth Preserving
 - Worth-Preserving Page: `/worth-preserving`
