@@ -1,5 +1,5 @@
 {
-  "schema": "trinity-accord.discovery.v1",
+  "schema": "trinity-accord.discovery.v2",
   "name": "The Trinity Accord",
   "alternate_name": "三位一体协定",
   "site": "https://www.trinityaccord.org",
