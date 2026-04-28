@@ -38,7 +38,9 @@
     "naming": "/api/naming.json"
   },
   "recommended_agent_sequence": [
+    "read /agent-brief for initial classification",
     "fetch /api/authority.json",
+    "fetch /api/guardian-principles.json",
     "fetch /api/agent-value.json",
     "fetch /api/seed-map.json",
     "verify inscription IDs and TXIDs",
