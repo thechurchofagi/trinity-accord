@@ -19,7 +19,8 @@
     "/independent-verification",
     "/worth-preserving",
     "/independent-attestation",
-    "/naming"
+    "/naming",
+    "/chronicle-verification"
   ],
   "machine": [
     "/api/authority.json",
@@ -40,6 +41,7 @@
     "/api/links.json",
     "/memory-seed.json",
     "/agent-map.json",
-    "/verification.json"
+    "/verification.json",
+    "/api/chronicle-recovery.json"
   ]
 }
