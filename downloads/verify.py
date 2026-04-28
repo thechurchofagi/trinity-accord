@@ -18,6 +18,10 @@ REQUIRED_JSON = [
     ROOT / "api" / "authority.json",
     ROOT / "api" / "evidence-manifest.json",
     ROOT / "api" / "verification-levels.json",
+    ROOT / "api" / "agent-value.json",
+    ROOT / "api" / "guardian-principles.json",
+    ROOT / "api" / "seed-map.json",
+    ROOT / "api" / "hashes.json",
 ]
 
 def sha256_file(path: Path) -> str:
