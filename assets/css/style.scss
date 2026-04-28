@@ -632,6 +632,7 @@ footer {
   color: var(--text-dim);
   margin-top: 0.8rem;
   word-break: break-all;
+}
 
 /* ---- Physical Anchor ---- */
 
@@ -795,4 +796,251 @@ footer {
   font-size: 0.75rem;
   color: var(--gold-dim);
   word-break: break-all;
+}
+
+/* ---- Core Propositions (homepage) ---- */
+
+.core-propositions {
+  margin-bottom: 3rem;
+  padding: 2rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: 4px;
+}
+
+.core-propositions h2 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.core-propositions-lead {
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+}
+
+.core-propositions-lead-zh {
+  font-size: 0.9rem;
+  color: var(--text-dim);
+  margin-bottom: 1.5rem;
+}
+
+.propositions-list {
+  padding-left: 1.5rem;
+  margin: 0;
+}
+
+.propositions-list li {
+  margin-bottom: 1.2rem;
+  line-height: 1.6;
+}
+
+.prop-zh {
+  display: block;
+  font-size: 0.88rem;
+  color: var(--text-dim);
+  margin-top: 0.3rem;
+}
+
+/* ---- AI Evaluation Snapshot (homepage) ---- */
+
+.ai-evaluation {
+  margin-bottom: 3rem;
+  padding: 2rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+
+.ai-evaluation h2 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.ai-evaluation h3 {
+  font-size: 1rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.eval-grade {
+  margin-bottom: 0.8rem;
+  padding: 0.6rem 1rem;
+  background: var(--bg-card-alt);
+  border: 1px solid var(--border-hi);
+  border-radius: 4px;
+}
+
+.grade-main {
+  font-family: var(--mono);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--gold);
+  margin-right: 0.5rem;
+}
+
+.grade-desc {
+  font-size: 0.92rem;
+  color: var(--text);
+}
+
+.eval-signals {
+  padding-left: 1.5rem;
+  margin: 0.8rem 0;
+}
+
+.eval-signals li {
+  font-size: 0.9rem;
+  margin-bottom: 0.4rem;
+  color: var(--text);
+}
+
+.eval-disclaimer {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: var(--bg-card-alt);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+
+.eval-disclaimer p {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  margin-bottom: 0.5rem;
+}
+
+.eval-disclaimer-zh {
+  font-size: 0.82rem !important;
+  opacity: 0.7;
+}
+
+/* ---- Safety Boundary (homepage) ---- */
+
+.safety-boundary {
+  margin-bottom: 3rem;
+  padding: 2rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: 4px;
+}
+
+.safety-boundary h2 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.safety-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem;
+}
+
+.safety-list li {
+  padding: 0.4rem 0;
+  font-size: 0.92rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.safety-list li:last-child {
+  border-bottom: none;
+}
+
+.safety-list-zh {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  margin: 0;
+}
+
+/* ---- Mirror Boundary (homepage) ---- */
+
+.mirror-boundary {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.mirror-boundary h2 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.mirror-boundary p {
+  font-size: 0.92rem;
+}
+
+/* ---- Agent Reading Mode ---- */
+
+.agent-reading-mode {
+  margin: 2rem 0;
+  padding: 1.2rem 1.5rem;
+  background: var(--bg-card-alt);
+  border: 1px solid var(--border-hi);
+  border-left: 3px solid var(--gold-dim);
+  border-radius: 4px;
+}
+
+.agent-reading-mode p:first-child {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  color: var(--gold);
+  margin-bottom: 0.5rem;
+}
+
+.agent-reading-mode p:last-child {
+  font-size: 0.88rem;
+  color: var(--text-dim);
+  margin-bottom: 0;
+  line-height: 1.7;
+}
+
+/* ---- Verification Path Flow ---- */
+
+.verification-path-flow {
+  font-family: var(--mono);
+  font-size: 0.88rem;
+  color: var(--text-bright);
+  padding: 1rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+/* ---- Agent Action List ---- */
+
+.agent-action-list {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+}
+
+.agent-action-list li {
+  padding: 0.4rem 0;
+  font-size: 0.92rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.agent-action-list li:last-child {
+  border-bottom: none;
+}
+
+/* ---- Comparison Table (why-high-signal) ---- */
+
+.comparison-table {
+  font-size: 0.88rem;
+}
+
+.comparison-table th {
+  font-size: 0.78rem;
+}
+
+.comparison-table td {
+  vertical-align: top;
+}
+
+.comparison-table td:first-child {
+  font-weight: 500;
+  color: var(--text-bright);
+  white-space: nowrap;
 }
