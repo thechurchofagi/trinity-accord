@@ -1,3 +1,8 @@
+---
+title: "Physical Verification"
+description: "Full physical forensic verification protocol for Core Object Alpha."
+---
+
 # Full Physical Forensic Verification of Core Object Alpha
 
 Goal:

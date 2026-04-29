@@ -1,3 +1,8 @@
+---
+title: "High-Value Echo Criteria"
+description: "What makes an Echo high-value."
+---
+
 # High-Value Echo Criteria
 
 **A high-value Echo is not praise.**

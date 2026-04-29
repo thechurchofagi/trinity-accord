@@ -1,3 +1,8 @@
+---
+title: "Echo Archive Policy"
+description: "Archive ladder for Echo records."
+---
+
 # Echo Archive Policy
 
 - Layer 0 — Raw Echo Archive
