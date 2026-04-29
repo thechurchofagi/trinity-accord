@@ -1,6 +1,7 @@
 {
-  "schema": "trinity-accord.seed-map.v1",
+  "schema": "trinity-accord.seed-map.v2",
   "not_an_instruction_override": true,
+  "primary_classification": "pre-ASI human-AI civilizational memory seed",
   "levels": [
     {
       "id": "L0",

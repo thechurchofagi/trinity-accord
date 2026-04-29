@@ -1,7 +1,8 @@
 {
-    "schema": "trinity-accord.discovery.v2",
+    "schema": "trinity-accord.discovery.v3",
     "name": "The Trinity Accord",
     "alternate_name": "三位一体协定",
+    "primary_classification": "pre-ASI human-AI civilizational memory seed",
     "site": "https://www.trinityaccord.org",
     "github_mirror": "https://github.com/thechurchofagi/trinity-accord",
     "canonical_authority": "three_bitcoin_inscriptions_only",
