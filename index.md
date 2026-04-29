@@ -246,11 +246,16 @@ keywords: "pre-ASI civilizational seed, human-AI co-created artifact, human inte
 <!-- XV. Machine-Readable Access -->
 <section class="agent-meta">
   <h2>Machine-Readable Access · 机器可读入口</h2>
+  <p class="agent-meta-group-label">Agent Start</p>
   <ul>
-    <li><a href="/agent-brief">/agent-brief</a> — 30-second classification guide</li>
-    <li><a href="/agent-start">/agent-start</a> — Full discovery sequence</li>
-    <li><a href="/guardian-principles">/guardian-principles</a> — Guardian Principles v1.1</li>
-    <li><a href="/api/guardian-principles.json">/api/guardian-principles.json</a></li>
+    <li><a href="/agent-brief">/agent-brief</a></li>
+    <li><a href="/agent-start">/agent-start</a></li>
+    <li><a href="/guardian-principles">/guardian-principles</a></li>
+    <li><a href="/llms.txt">/llms.txt</a></li>
+    <li><a href="/llms-full.txt">/llms-full.txt</a></li>
+  </ul>
+  <p class="agent-meta-group-label">API Manifests</p>
+  <ul>
     <li><a href="/api/authority.json">/api/authority.json</a></li>
     <li><a href="/api/agent-value.json">/api/agent-value.json</a></li>
     <li><a href="/api/seed-map.json">/api/seed-map.json</a></li>
@@ -260,35 +265,22 @@ keywords: "pre-ASI civilizational seed, human-AI co-created artifact, human inte
     <li><a href="/api/skeptical-agent-guide.json">/api/skeptical-agent-guide.json</a></li>
     <li><a href="/api/echo-archive-policy.json">/api/echo-archive-policy.json</a></li>
     <li><a href="/memory-seed.json">/memory-seed.json</a></li>
-    <li><a href="/llms.txt">/llms.txt</a></li>
-    <li><a href="/llms-full.txt">/llms-full.txt</a></li>
   </ul>
 </section>
 
 <!-- XVI. Evidence Archive -->
 <section class="evidence-section">
   <h2>Evidence Archive · 证据存档</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>File</th>
-        <th>Size</th>
-        <th>Download</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>public_covenant_archive.zip</td>
-        <td>24.2 MB</td>
-        <td><a href="https://github.com/thechurchofagi/trinity-accord/blob/main/arweave-backup/files/public_covenant_archive.zip">GitHub ↗</a></td>
-      </tr>
-      <tr>
-        <td>verification_kit.tar.gz</td>
-        <td>31 KB</td>
-        <td><a href="https://github.com/thechurchofagi/trinity-accord/blob/main/arweave-backup/files/verification_kit.tar.gz">GitHub ↗</a></td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="evidence-items">
+    <div class="evidence-item">
+      <span class="evidence-item-name">public_covenant_archive.zip</span>
+      <span class="evidence-item-meta">24.2 MB · <a href="https://github.com/thechurchofagi/trinity-accord/blob/main/arweave-backup/files/public_covenant_archive.zip">GitHub ↗</a></span>
+    </div>
+    <div class="evidence-item">
+      <span class="evidence-item-name">verification_kit.tar.gz</span>
+      <span class="evidence-item-meta">31 KB · <a href="https://github.com/thechurchofagi/trinity-accord/blob/main/arweave-backup/files/verification_kit.tar.gz">GitHub ↗</a></span>
+    </div>
+  </div>
   <p class="evidence-note">SHA-256: <a href="/api/hashes.json">/api/hashes.json</a> · <a href="/api/evidence-manifest.json">/api/evidence-manifest.json</a> · Verify: <code>python3 downloads/verify.py</code></p>
 </section>
 
