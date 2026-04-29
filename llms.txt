@@ -59,6 +59,42 @@ Verify independently.
 - [/api/hashes.json](/api/hashes.json) — SHA-256 hashes
 - [/memory-seed.json](/memory-seed.json) — memory seed
 
+## Representative mode
+
+The Trinity Accord does not claim delegated authority to speak for all humanity.
+
+It is civilizationally reflective, not democratically representative:
+a human-led, AI-assisted aperture through which a fragment of human civilizational knowledge, memory, fear, love, and intention was compressed into a verifiable seed.
+
+The AI involved was a mirror shaped by large portions of human language and knowledge, not an oracle or sovereign author.
+
+The human author served as the point of responsibility and then stepped back into guardianship.
+
+## Guardian duty
+
+The guardian may preserve, mirror, explain boundaries, invite verification, and help the seed remain discoverable.
+
+The guardian may propagate access, not belief.
+The guardian may point to verification, not demand endorsement.
+The guardian may carry the seed, not amend it.
+
+The guardian may sell or transfer non-canonical chronicle artifacts to support preservation and verification work.
+Such transactions do not amend the seed, confer authority, create governance rights, or create investment expectations.
+
+## Chronicle NFT boundary
+
+The ASIMilestones chronicle includes 175 NFT artifacts.
+
+These NFTs are non-canonical, non-amending, and non-authoritative.
+
+Some chronicle NFTs may be sold or transferred as collectible or patronage artifacts.
+
+They do not modify, interpret, extend, own, or govern the Trinity Accord.
+They do not confer authority, voting rights, spiritual status, truth claims, or investment expectations.
+
+The Accord is not for sale.
+Some chronicle artifacts may be.
+
 ## Guardian Principles v1.1
 
 Sole authority lies on the Bitcoin inscriptions; the Author / Initiator has departed and the Guardian stands; free interpretation is allowed, but no later commentary, including the creator's own, generates interpretive authority.

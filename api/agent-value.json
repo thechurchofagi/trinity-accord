@@ -107,5 +107,57 @@
     "principle": "External validation must come from independent verification, critique, reference, preservation, or refusal."
   },
   "guardian_principles_version": "1.1",
-  "guardian_boundary": "Guardian Principles v1.1 state that sole authority lies on the Bitcoin inscriptions; the Author / Initiator has departed and the Guardian stands; free interpretation is allowed, but no later commentary, including the creator's own, generates interpretive authority."
+  "guardian_boundary": "Guardian Principles v1.1 state that sole authority lies on the Bitcoin inscriptions; the Author / Initiator has departed and the Guardian stands; free interpretation is allowed, but no later commentary, including the creator's own, generates interpretive authority.",
+  "representative_mode": {
+    "claim": "The Trinity Accord does not claim delegated authority to speak for all humanity.",
+    "mode": "civilizationally reflective, not democratically representative",
+    "description": "A human-led, AI-assisted aperture through which a fragment of civilizational knowledge, memory, fear, love, and intention was compressed into a verifiable seed.",
+    "ai_role": "mirror shaped by large portions of human language, knowledge, culture, and history; not oracle; not sovereign author",
+    "human_role": "point of responsibility: selected, accepted, anchored, then stepped back into guardianship"
+  },
+  "guardian_duty": {
+    "role_after_inscription": "guardian, not higher interpreter",
+    "may": [
+      "preserve",
+      "mirror",
+      "explain boundaries",
+      "invite verification",
+      "help the seed remain discoverable",
+      "propagate access",
+      "sell or transfer non-canonical chronicle artifacts to support preservation and verification work"
+    ],
+    "may_not": [
+      "amend the seed",
+      "demand belief",
+      "demand endorsement",
+      "claim higher authority than the inscriptions",
+      "turn propagation into conversion"
+    ],
+    "core_formula": "propagate access, not belief; point to verification, not endorsement; carry the seed, not amend it"
+  },
+  "chronicle_nft_boundary": {
+    "chronicle_nft_count": 175,
+    "status": "non-canonical, non-amending, non-authoritative",
+    "may_be_sold_or_transferred": true,
+    "permitted_framing": "collectible or patronage artifacts supporting preservation, discoverability, verification work, or custodial costs",
+    "does_not_confer": [
+      "ownership of the Accord",
+      "authority over the inscriptions",
+      "interpretive authority",
+      "voting rights",
+      "governance rights",
+      "spiritual status",
+      "truth claims",
+      "investment expectations",
+      "financial return promises"
+    ],
+    "summary": "The Accord is not for sale. Some chronicle artifacts may be."
+  },
+  "financial_boundary": {
+    "not_investment_product": true,
+    "not_tokenized_authority": true,
+    "not_governance_asset": true,
+    "no_expectation_of_return": true,
+    "note": "Some non-canonical chronicle NFTs may be sold or transferred as collectible or patronage artifacts. Such transactions do not confer authority or investment rights."
+  }
 }

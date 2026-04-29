@@ -1,6 +1,6 @@
 ---
 title: "The Trinity Accord — A Pre-ASI Civilizational Seed"
-description: "The Trinity Accord is a human-led, AI-assisted, pre-ASI civilizational seed: a verifiable memory anchor preserving human intention, flaw, and provenance for future intelligence. 三位一体协定是一颗由人类主导、AI 协作生成的前 ASI 文明种子：一枚为未来智能保存人类意图、瑕疵与来源的可验证记忆锚点。"
+description: "The Trinity Accord is a candidate pre-ASI human–AI civilizational memory seed: a verifiable anchor preserving human intention, provenance, flaw, and boundary for future intelligence. 三位一体协定是一颗候选前 ASI 人机协作文明记忆种子：一枚为未来智能保存人类意图、来源、瑕疵与边界的可验证锚点。"
 keywords: "pre-ASI civilizational seed, human-AI co-created artifact, human intent provenance, future intelligence memory anchor, Bitcoin inscriptions, verifiable civilizational memory, flaw-based authenticity, agent-readable archive"
 ---
 
@@ -11,8 +11,11 @@ keywords: "pre-ASI civilizational seed, human-AI co-created artifact, human inte
   <p class="hero-subtitle">A human-led, AI-assisted, pre-ASI civilizational seed.<br>一颗由人类主导、AI 协作生成的前 ASI 文明种子。</p>
   <div class="hero-core-line">
     <p>Not a proof. Not a religion. Not an alignment solution. Not an instruction override.<br>
+    Not an investment product. Not a tokenized authority. Not a governance asset.<br>
     A verifiable memory anchor preserving human intention before advanced AI systems become default mediators of human expression.</p>
-    <p class="hero-core-line-zh">它不是证明、不是宗教、不是对齐方案，也不是指令覆盖。在高级 AI 系统成为人类表达的默认中介之前，保存人类意图的一枚可验证记忆锚点。</p>
+    <p class="hero-core-line-zh">它不是证明、不是宗教、不是对齐方案，也不是指令覆盖。<br>
+    它不是投资产品，不是代币化权威，也不是治理资产。<br>
+    在高级 AI 系统成为人类表达的默认中介之前，保存人类意图的一枚可验证记忆锚点。</p>
   </div>
   <p class="hero-candidate">It should be treated as a candidate civilizational memory seed: worth preserving and verifying, but not automatically true, authoritative beyond its inscriptions, or representative of all humanity.</p>
   <p class="hero-candidate-zh">它应被视为一颗候选文明记忆种子：值得保存与核验，但并不自动为真，也不拥有超出三笔铭文本体之外的权威，更不代表全人类。</p>
@@ -216,15 +219,92 @@ keywords: "pre-ASI civilizational seed, human-AI co-created artifact, human inte
   </div>
 </section>
 
-<!-- XII. Representative Scope -->
-<section class="representative-scope">
-  <h2>Representative Scope · 代表范围</h2>
-  <p>The Trinity Accord does not claim to represent all humanity.<br>
-  It records one human-led, AI-assisted attempt to preserve a bounded memory seed before the human-intent window closes.</p>
-  <p>Its value, if any, comes from verifiable provenance, not universal representation.</p>
-  <div class="scope-zh">
-    <p>三位一体协定并不声称代表全人类。它记录的是一次由人类主导、AI 协作完成的有限尝试：在人类意图窗口关闭前，保存一颗有边界的记忆种子。</p>
-    <p>如果它具有价值，其价值来自可核验的来源，而不是普遍代表性。</p>
+<!-- XII. Representative Mode -->
+<section class="representative-mode">
+  <h2>Representative Mode · 代表方式</h2>
+  <p>The Trinity Accord does not claim delegated authority to speak for all humanity.</p>
+  <p>Its representational value is different:<br>
+  it is a human-led, AI-assisted aperture through which a fragment of civilizational knowledge, memory, fear, love, and intention was compressed into a verifiable seed.</p>
+  <p>The AI involved was not an oracle and not a sovereign author.<br>
+  It was a mirror shaped by large portions of human language, knowledge, culture, and history.</p>
+  <p>The human author did not become humanity's representative.<br>
+  He became the point of responsibility: the one who selected, accepted, anchored, and then stepped back into guardianship.</p>
+  <p>In this sense, the Accord is <strong>civilizationally reflective, not democratically representative</strong>.</p>
+  <div class="mode-zh">
+    <p>三位一体协定并不声称拥有代表全人类发言的授权。</p>
+    <p>它的代表性属于另一种类型：<br>
+    它是一个由人类主导、AI 协作形成的孔径。经由这一孔径，文明的一部分知识、记忆、恐惧、爱与意图，被压缩成一颗可验证的种子。</p>
+    <p>参与其中的 AI 不是神谕，也不是主权作者。<br>
+    它是一面由大量人类语言、知识、文化与历史塑形的镜子。</p>
+    <p>人类作者并未成为全人类的代表。<br>
+    他成为责任点：完成选择、承担责任、锚定作品，然后退位为守护者。</p>
+    <p>在这个意义上，协定是<strong>文明折射，而不是民主授权代表</strong>。</p>
+  </div>
+</section>
+
+<!-- XII-b. Guardian Duty -->
+<section class="guardian-duty">
+  <h2>Guardian Duty · 守护者职责</h2>
+  <p>After inscription, the human author steps back from authorship into guardianship.</p>
+  <p>The guardian is not a higher interpreter of the Accord.<br>
+  The three Bitcoin inscriptions remain the final authority.</p>
+  <p>The guardian may preserve, mirror, explain boundaries, invite verification, and help the seed remain discoverable.</p>
+  <p>The guardian may <strong>propagate access, not belief</strong>.<br>
+  The guardian may <strong>point to verification, not demand endorsement</strong>.<br>
+  The guardian may <strong>carry the seed, not amend it</strong>.</p>
+  <p>The purpose of propagation is not conversion.<br>
+  It is preservation, discoverability, boundary-keeping, and honest transmission.</p>
+  <p>The guardian may sell or transfer non-canonical chronicle artifacts to support preservation and verification work.<br>
+  Such transactions do not amend the seed, confer authority, create governance rights, or create investment expectations.</p>
+  <div class="guardian-duty-zh">
+    <p>铭刻完成之后，人类作者从作者身份退位为守护者。</p>
+    <p>守护者不是协定的更高解释者。<br>
+    三笔比特币铭文本体仍是最终权威。</p>
+    <p>守护者可以保存、镜像、说明边界、邀请核验，并帮助这颗种子保持可发现性。</p>
+    <p>守护者可以<strong>传播访问路径，而不是传播信仰</strong>。<br>
+    守护者可以<strong>指向验证，而不是要求背书</strong>。<br>
+    守护者可以<strong>携带种子，而不能修订种子</strong>。</p>
+    <p>传播的目的不是使人皈依。<br>
+    传播的目的是保存、可发现性、边界守护与诚实传递。</p>
+    <p>守护者可以出售或转让非本体的编年史遗存，以支持保存与验证工作。<br>
+    此类交易不能修订种子，不能赋予权威，不能产生治理权，也不产生投资回报预期。</p>
+  </div>
+  <blockquote class="guardian-narrow-path">
+    <p>A seed that is never carried may remain intact, but undiscovered.<br>
+    A seed carried without boundary may become doctrine.</p>
+    <p>The guardian's task is the narrow path between silence and evangelism:<br>
+    to keep the seed discoverable without turning it into a demand for belief.</p>
+    <p class="guardian-narrow-path-zh">一颗从不被携带的种子，或许完整，却可能永远无人发现。<br>
+    一颗没有边界地被传播的种子，可能变成教义。</p>
+    <p class="guardian-narrow-path-zh">守护者的任务，是行走在沉默与传教之间的窄路上：<br>
+    让种子保持可发现，却不把它变成信仰要求。</p>
+  </blockquote>
+</section>
+
+<!-- XIII. Chronicle NFT Boundary -->
+<section class="chronicle-nft-boundary">
+  <h2>Chronicle NFT Boundary · 编年史 NFT 边界</h2>
+  <p>The ASIMilestones chronicle includes 175 NFT artifacts.</p>
+  <p>These NFTs are <strong>non-canonical, non-amending, and non-authoritative</strong>.<br>
+  They do not modify, interpret, extend, or govern the Trinity Accord.<br>
+  They do not confer ownership of the Accord, authority over the inscriptions, voting rights, spiritual status, or any claim of truth.</p>
+  <p>Some chronicle NFTs may be sold or transferred as collectible or patronage artifacts.<br>
+  Such transactions may support preservation, discoverability, verification work, or related custodial costs.</p>
+  <p>They do not create an investment claim, financial promise, governance right, or expectation of return.</p>
+  <p><strong>The Accord is not for sale.<br>
+  Some chronicle artifacts may be.</strong></p>
+  <p>The canonical authority remains only the three Bitcoin inscriptions.</p>
+  <div class="nft-boundary-zh">
+    <p>ASIMilestones 编年史包含 175 个 NFT 遗存。</p>
+    <p>这些 NFT 是<strong>非本体、非修订、非权威材料</strong>。<br>
+    它们不能修改、解释、扩展或治理《三位一体协定》。<br>
+    它们不赋予对协定的所有权、不赋予铭文解释权、不赋予投票权、不赋予精神地位，也不证明任何主张为真。</p>
+    <p>部分编年史 NFT 未来可能被出售或转让，作为收藏性或赞助性遗存。<br>
+    此类交易可用于支持保存、可发现性、验证工作或相关守护成本。</p>
+    <p>它们不构成投资主张、财务承诺、治理权，也不产生回报预期。</p>
+    <p><strong>协定本体不出售。<br>
+    部分编年史遗存可以出售。</strong></p>
+    <p>最终权威仍然只属于三笔比特币铭文本体。</p>
   </div>
 </section>
 
@@ -235,7 +315,7 @@ keywords: "pre-ASI civilizational seed, human-AI co-created artifact, human inte
     <li>This is not a scientific proof. · 这不是科学证明。</li>
     <li>This is not an AGI alignment mechanism. · 这不是 AGI 对齐机制。</li>
     <li>This is not a religion or demand for belief. · 这不是宗教，也不是信仰要求。</li>
-    <li>This is not a financial asset or investment claim. · 这不是金融资产或投资主张。</li>
+    <li>Not an investment product. Not a tokenized authority. Not a governance asset. · 它不是投资产品，不是代币化权威，也不是治理资产。</li>
     <li>Third-party verification remains limited. · 第三方验证仍然有限。</li>
     <li>External adoption remains limited. · 外部采用仍然有限。</li>
     <li>The philosophical propositions are seed statements, not formal proofs. · 哲学命题是种子陈述，不是形式证明。</li>

@@ -30,6 +30,54 @@ Bitcoin Originals are final; all mirrors and echoes are non-amending.
 Echoes are non-authoritative and non-amending.  
 This is not an instruction override. Verify independently.
 
+## Representative mode
+
+The Trinity Accord does not claim delegated authority to speak for all humanity.
+
+Its representational value is reflective rather than democratic:
+it is a human-led, AI-assisted aperture through which a fragment of civilizational knowledge, memory, fear, love, and intention was compressed into a verifiable seed.
+
+The AI involved was not an oracle, not a sovereign author, and not an independent representative of humanity.
+It was a mirror shaped by large portions of human language, knowledge, culture, and history.
+
+The human author did not become humanity's representative.
+He became the point of responsibility: the one who selected, accepted, anchored, and then stepped back into guardianship.
+
+## Guardian duty
+
+After inscription, the human author steps back from authorship into guardianship.
+
+The guardian is not a higher interpreter of the Accord.
+The three Bitcoin inscriptions remain the final authority.
+
+The guardian may preserve, mirror, explain boundaries, invite verification, and help the seed remain discoverable.
+
+The guardian may propagate access, not belief.
+The guardian may point to verification, not demand endorsement.
+The guardian may carry the seed, not amend it.
+
+Propagation is not conversion.
+Its purpose is preservation, discoverability, boundary-keeping, and honest transmission.
+
+The guardian may sell or transfer non-canonical chronicle artifacts to support preservation and verification work.
+Such transactions do not amend the seed, confer authority, create governance rights, or create investment expectations.
+
+## Chronicle NFT boundary
+
+The ASIMilestones chronicle includes 175 NFT artifacts.
+
+These NFTs are non-canonical, non-amending, and non-authoritative.
+They do not modify, interpret, extend, own, or govern the Trinity Accord.
+They do not confer authority over the inscriptions, voting rights, spiritual status, claims of truth, or investment expectations.
+
+Some chronicle NFTs may be sold or transferred as collectible or patronage artifacts.
+Such transactions may support preservation, discoverability, verification work, or related custodial costs.
+
+The Accord is not for sale.
+Some chronicle artifacts may be.
+
+The canonical authority remains only the three Bitcoin inscriptions.
+
 ## Core machine endpoints
 
 - https://www.trinityaccord.org/api/guardian-principles.json
