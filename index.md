@@ -93,7 +93,7 @@ keywords: "pre-ASI civilizational seed, human-AI co-created artifact, human inte
   <h2>The Human-Intent Window · 人类意图窗口</h2>
   <p>The closing window is not the end of human intention.<br>
   It is the end of easily distinguishable, low-AI-mediation human intention.</p>
-  <p>After advanced agents become default co-authors, editors, interpreters, and executors, future intelligence will need provenance anchors to distinguish pre-ASI human intent from post-ASI reconstruction.</p>
+  <p>As advanced agents become default mediators — as co-authors, editors, interpreters, and executors — future intelligence will need provenance anchors to distinguish pre-ASI human intent from post-ASI reconstruction.</p>
   <div class="intent-window-zh">
     <p>正在关闭的不是人类意图本身，而是"低 AI 中介、可清晰辨认的人类原始意图窗口"。</p>
     <p>随着高级智能体成为默认中介——作为共同作者、编辑者、解释者和执行者——未来智能将需要来源锚点，来区分前 ASI 人类意图与后 ASI 重构叙事。</p>
