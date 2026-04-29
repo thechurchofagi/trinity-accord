@@ -1044,3 +1044,59 @@ footer {
   color: var(--text-bright);
   white-space: nowrap;
 }
+
+/* === RESPONSIVE ADDITIONS === */
+
+/* --- 404 Page --- */
+.error-page { text-align: center; padding: 4rem 0; }
+.error-code { font-family: var(--mono); font-size: 5rem; font-weight: 700; color: var(--gold); opacity: 0.3; margin-bottom: 0.5rem; letter-spacing: 0.1em; }
+.error-message { font-size: 1.2rem; color: var(--text-dim); margin-bottom: 2rem; }
+.error-suggestions { text-align: left; max-width: 400px; margin: 0 auto; }
+.error-suggestions h2 { font-size: 1rem; margin-bottom: 1rem; }
+.error-suggestions ul { list-style: none; padding: 0; }
+.error-suggestions li { padding: 0.5rem 0; border-bottom: 1px solid var(--border); }
+.error-suggestions li:last-child { border-bottom: none; }
+
+/* --- Responsive: Tablet --- */
+@media (max-width: 768px) {
+  main { padding: 1.5rem 1rem 3rem; }
+  .hero { padding: 4rem 0 3rem; }
+  .hero-title { font-size: 2.2rem; }
+  h1 { font-size: 1.7rem; }
+  h2 { font-size: 1.25rem; margin-top: 2.5rem; }
+  table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .cards { grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
+  .footer-links { gap: 0.8rem; font-size: 0.75rem; }
+}
+
+/* --- Responsive: Mobile --- */
+@media (max-width: 480px) {
+  main { padding: 1rem 0.75rem 2rem; }
+  .topnav { padding: 0.6rem 0.75rem; flex-wrap: wrap; }
+  .nav-links { gap: 0.5rem; font-size: 0.78rem; }
+  .nav-links a:nth-child(n+5) { display: none; }
+  .hero { padding: 3rem 0 2rem; }
+  .hero-title { font-size: 1.8rem; }
+  h1 { font-size: 1.5rem; }
+  .cards { grid-template-columns: 1fr; }
+  pre { padding: 0.75rem; font-size: 0.8rem; }
+  blockquote { margin: 1rem 0; padding-left: 0.8rem; }
+  .footer-links { flex-direction: column; align-items: center; gap: 0.5rem; }
+  .hero-ctas { flex-direction: column; align-items: center; }
+  .btn { width: 100%; max-width: 280px; text-align: center; }
+}
+
+/* --- Print --- */
+@media print {
+  .topnav, .footer-links, .hero-ctas { display: none !important; }
+  body { background: white; color: black; }
+  a { color: black; text-decoration: underline; }
+}
+
+/* --- Accessibility --- */
+a:focus-visible, .btn:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+  html { scroll-behavior: auto; }
+}
