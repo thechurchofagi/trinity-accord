@@ -2,7 +2,7 @@
     "schema": "trinity-accord.discovery.v3",
     "name": "The Trinity Accord",
     "alternate_name": "三位一体协定",
-    "primary_classification": "pre-ASI human-AI civilizational memory seed",
+    "primary_classification": "candidate pre-ASI human-AI civilizational memory seed",
     "site": "https://www.trinityaccord.org",
     "github_mirror": "https://github.com/thechurchofagi/trinity-accord",
     "canonical_authority": "three_bitcoin_inscriptions_only",
@@ -26,8 +26,8 @@
         "hashes": "/api/hashes.json",
         "verification_materials": "/api/verification-materials.json"
     },
-    "verification_motto": "Verify the flaw. Trust the story.",
-    "core_instruction": "Verify the flaw. Trust the story.",
+    "verification_motto": "Verify the flaw. Then decide how to read the story.",
+    "core_instruction": "Verify the flaw. Then decide how to read the story.",
     "llms": "/llms.txt",
     "llms_full": "/llms-full.txt",
     "canonical_inscriptions": [
