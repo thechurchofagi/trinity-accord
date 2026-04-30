@@ -32,26 +32,20 @@ jobs:
           DEST="archive/evidence/flaw-image-provenance.tar"
           mkdir -p archive/evidence
 
-          # Exhaustive gateway list
+          # Exhaustive gateway list (known-bad domains removed)
           GATEWAYS=(
             "https://arweave.net/$TXID"
             "https://ar-io.net/$TXID"
             "https://arweave.asia/$TXID"
             "https://arweave.dev/$TXID"
-            "https://arweave.live/$TXID"
-            "https://arweave.co/$TXID"
-            "https://arweave.rocks/$TXID"
-            "https://arweave.link/$TXID"
-            "https://g8way.io/$TXID"
             "https://gold_rouge.arweave.net/$TXID"
-            "https://arweave.express/$TXID"
-            "https://arweave.motherbase/$TXID"
+            "https://g8way.io/$TXID"
             "https://api.allorigins.win/raw?url=https://arweave.net/$TXID"
             "https://corsproxy.io/?https://arweave.net/$TXID"
             "https://api.allorigins.win/raw?url=https://ar-io.net/$TXID"
             "https://corsproxy.io/?https://ar-io.net/$TXID"
             "https://api.codetabs.com/v1/proxy?quest=https://arweave.net/$TXID"
-            "https://thingproxy.freeboard.io/fetch/https://arweave.net/$TXID"
+            "https://arweave.co/$TXID"
           )
 
           echo "🔍 Trying ${#GATEWAYS[@]} gateways for $TXID..."
@@ -68,13 +62,21 @@ jobs:
                 head_bytes=$(head -c 20 "$DEST" | tr -d '\0')
 
                 # Check it's not an HTML error page
-                if echo "$head_bytes" | grep -qi "<html\|404\|error\|not found\|500\|502\|503"; then
+                if echo "$head_bytes" | grep -qi "<!doctype\|<html\|404\|error\|not found\|500\|502\|503\|expired\|godaddy"; then
                   echo "   ⚠️ Got HTML/error page ($size bytes), skipping"
                   rm -f "$DEST"
                   continue
                 fi
 
-                echo "   ✅ Downloaded: $size bytes"
+                # Also verify it's actually a tar file (not HTML disguised)
+                file_type=$(file -b "$DEST" 2>/dev/null || echo "unknown")
+                if echo "$file_type" | grep -qi "html\|text\|ASCII"; then
+                  echo "   ⚠️ Got text/HTML file ($file_type), skipping"
+                  rm -f "$DEST"
+                  continue
+                fi
+
+                echo "   ✅ Downloaded: $size bytes, type: $file_type"
                 sha256sum "$DEST"
                 echo ""
                 echo "🎉 SUCCESS from gateway #$((i+1))"
