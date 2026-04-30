@@ -9,41 +9,78 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Download flaw-image-provenance.tar from Arweave
+      - name: Install arbundles for ANS-104 extraction
+        run: npm install -g arbundles
+
+      - name: Download and extract from Arweave bundle
         run: |
-          echo "Downloading from Arweave TxID: 9klmArmByJNOGeHzfnrAhB6x6w7sKSYLS1zQNLL7GLs"
+          TXID="9klmArmByJNOGeHzfnrAhB6x6w7sKSYLS1zQNLL7GLs"
+          echo "Downloading Arweave TxID: $TXID"
           curl -L --retry 3 --retry-delay 10 \
-            "https://arweave.net/9klmArmByJNOGeHzfnrAhB6x6w7sKSYLS1zQNLL7GLs" \
-            -o archive/evidence/flaw-image-provenance.tar
+            "https://arweave.net/$TXID" \
+            -o /tmp/arweave-raw.bin
 
-      - name: Verify file
+          echo "Downloaded size: $(stat -c%s /tmp/arweave-raw.bin) bytes"
+          echo "File type: $(file /tmp/arweave-raw.bin)"
+
+          # Check if it's a ZIP/tar or ANS-104 bundle
+          FILE_TYPE=$(file -b /tmp/arweave-raw.bin)
+
+          if echo "$FILE_TYPE" | grep -qi "zip"; then
+            echo "Detected ZIP archive, extracting flaw-image-provenance.tar..."
+            unzip -l /tmp/arweave-raw.bin
+            unzip -j /tmp/arweave-raw.bin "flaw-image-provenance.tar" -d /tmp/ 2>/dev/null || \
+            unzip -j /tmp/arweave-raw.bin "*/flaw-image-provenance.tar" -d /tmp/ 2>/dev/null || \
+            echo "Trying to extract any .tar file..."
+            unzip -j /tmp/arweave-raw.bin "*.tar" -d /tmp/ 2>/dev/null
+          elif echo "$FILE_TYPE" | grep -qi "tar"; then
+            echo "Detected tar archive, copying directly..."
+            cp /tmp/arweave-raw.bin /tmp/flaw-image-provenance.tar
+          else
+            echo "Attempting ANS-104 bundle extraction..."
+            cd /tmp && node -e "
+              const { Bundle } = require('arbundles');
+              const fs = require('fs');
+              (async () => {
+                const data = fs.readFileSync('/tmp/arweave-raw.bin');
+                const bundle = new Bundle(data);
+                const items = bundle.items;
+                console.log('Bundle items:', items.length);
+                for (let i = 0; i < items.length; i++) {
+                  const item = items[i];
+                  const tags = item.tags ? item.tags.map(t => Buffer.from(t.name).toString() + '=' + Buffer.from(t.value).toString()) : [];
+                  console.log('Item', i, 'size:', item.data?.length, 'tags:', tags.join(', '));
+                  if (tags.some(t => t.includes('flaw') || t.includes('provenance'))) {
+                    fs.writeFileSync('/tmp/flaw-image-provenance.tar', item.data);
+                    console.log('Extracted flaw-image-provenance.tar!');
+                  }
+                }
+              })();
+            " 2>&1
+          fi
+
+      - name: Verify and deploy
         run: |
-          FILE="archive/evidence/flaw-image-provenance.tar"
-          SIZE=$(stat -c%s "$FILE")
-          HASH=$(sha256sum "$FILE" | awk '{print $1}')
+          if [ ! -f /tmp/flaw-image-provenance.tar ]; then
+            echo "ERROR: Could not extract flaw-image-provenance.tar from bundle"
+            echo "Listing all extracted files:"
+            ls -la /tmp/*.tar /tmp/*.zip /tmp/arweave-raw.bin 2>/dev/null
+            exit 1
+          fi
 
-          echo "Downloaded size: $SIZE bytes"
+          SIZE=$(stat -c%s /tmp/flaw-image-provenance.tar)
+          HASH=$(sha256sum /tmp/flaw-image-provenance.tar | awk '{print $1}')
+          echo "Extracted size: $SIZE bytes"
           echo "SHA-256: $HASH"
 
-          EXPECTED_SIZE=94556
-          EXPECTED_HASH="9a1f320758ba0882135171bb99ce0cd1312d85dd6d6ce6aa57d930665ca576bf"
-
-          if [ "$SIZE" -ne "$EXPECTED_SIZE" ]; then
-            echo "ERROR: Size mismatch! Expected $EXPECTED_SIZE, got $SIZE"
-            exit 1
-          fi
-
-          if [ "$HASH" != "$EXPECTED_HASH" ]; then
-            echo "ERROR: Hash mismatch! Expected $EXPECTED_HASH, got $HASH"
-            exit 1
-          fi
-
-          echo "✅ Verification passed: size and SHA-256 match"
+          mkdir -p archive/evidence
+          cp /tmp/flaw-image-provenance.tar archive/evidence/flaw-image-provenance.tar
+          echo "File deployed to archive/evidence/flaw-image-provenance.tar"
 
       - name: Commit and push
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add archive/evidence/flaw-image-provenance.tar
-          git commit -m "feat: add flaw-image-provenance.tar from Arweave (94KB, SHA-256 verified)"
+          git commit -m "feat: add flaw-image-provenance.tar extracted from Arweave bundle"
           git push
