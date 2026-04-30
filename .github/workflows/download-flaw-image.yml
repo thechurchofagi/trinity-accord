@@ -10,97 +10,63 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Download from Arweave (with gateway fallback)
+      - name: Download from Arweave
         run: |
           TXID="9klmArmByJNOGeHzfnrAhB6x6w7sKSYLS1zQNLL7GLs"
-          SUCCESS=false
-
           for GW in "https://ar-io.dev" "https://arweave.net" "https://g8way.io"; do
-            echo "Trying gateway: $GW"
-            if curl -L --connect-timeout 30 --max-time 600 --retry 3 --retry-delay 10 \
-              "$GW/$TXID" -o /tmp/arweave-raw.bin 2>&1; then
+            echo "Trying: $GW"
+            if curl -L --connect-timeout 30 --max-time 600 --retry 3 --retry-delay 10 "$GW/$TXID" -o /tmp/arweave-raw.bin 2>&1; then
               SIZE=$(stat -c%s /tmp/arweave-raw.bin 2>/dev/null || echo 0)
-              echo "Downloaded: $SIZE bytes"
-              if [ "$SIZE" -gt 1000 ]; then
-                SUCCESS=true
-                echo "Download OK from $GW"
-                break
-              fi
+              echo "Downloaded: $SIZE bytes from $GW"
+              [ "$SIZE" -gt 1000 ] && break
             fi
-            echo "Failed or too small, trying next gateway..."
           done
+          echo "Type: $(file /tmp/arweave-raw.bin)"
 
-          if [ "$SUCCESS" != "true" ]; then
-            echo "ERROR: All gateways failed"
-            exit 1
-          fi
-
-          echo "File type: $(file /tmp/arweave-raw.bin)"
-
-      - name: Extract flaw-image-provenance.tar
+      - name: List and extract from archive
         run: |
           FILE_TYPE=$(file -b /tmp/arweave-raw.bin)
-          echo "Detected: $FILE_TYPE"
+          echo "=== File type: $FILE_TYPE ==="
 
           if echo "$FILE_TYPE" | grep -qi "zip"; then
-            echo "ZIP archive detected, listing contents..."
-            unzip -l /tmp/arweave-raw.bin || true
-            # Try to extract flaw-image-provenance.tar
-            unzip -o /tmp/arweave-raw.bin "flaw-image-provenance.tar" -d /tmp/ 2>/dev/null || \
-            unzip -o /tmp/arweave-raw.bin "*/flaw-image-provenance.tar" -d /tmp/ 2>/dev/null || \
-            unzip -o /tmp/arweave-raw.bin "*.tar" -d /tmp/ 2>/dev/null
-            # Rename if needed
-            if [ ! -f /tmp/flaw-image-provenance.tar ]; then
-              FOUND=$(find /tmp -name "flaw-image-provenance.tar" 2>/dev/null | head -1)
-              if [ -n "$FOUND" ]; then
-                mv "$FOUND" /tmp/flaw-image-provenance.tar
-              fi
+            echo "=== ZIP contents ==="
+            unzip -l /tmp/arweave-raw.bin 2>&1
+
+            echo "=== Attempting extraction ==="
+            # Try all possible paths
+            unzip -o /tmp/arweave-raw.bin -d /tmp/zipout/ 2>&1
+            echo "=== Extracted files ==="
+            find /tmp/zipout -type f -ls 2>/dev/null
+
+            # Look for any .tar file
+            FOUND=$(find /tmp/zipout -name "*.tar" -o -name "*flaw*" -o -name "*provenance*" 2>/dev/null | head -1)
+            if [ -n "$FOUND" ]; then
+              echo "Found: $FOUND"
+              cp "$FOUND" /tmp/flaw-image-provenance.tar
             fi
           elif echo "$FILE_TYPE" | grep -qi "tar"; then
             cp /tmp/arweave-raw.bin /tmp/flaw-image-provenance.tar
-          else
-            echo "Unknown format, attempting arbundles extraction..."
-            npm install -g arbundles 2>/dev/null || true
-            cd /tmp && node -e "
-              const fs = require('fs');
-              try {
-                const { Bundle } = require('arbundles');
-                const data = fs.readFileSync('/tmp/arweave-raw.bin');
-                const bundle = new Bundle(data);
-                console.log('Bundle items:', bundle.items?.length || 'unknown');
-                for (let i = 0; i < (bundle.items?.length || 0); i++) {
-                  const item = bundle.items[i];
-                  console.log('Item', i, 'size:', item.data?.length);
-                  if (item.data && item.data.length > 10000 && item.data.length < 200000) {
-                    fs.writeFileSync('/tmp/flaw-candidate-' + i + '.bin', item.data);
-                  }
-                }
-              } catch(e) {
-                console.log('arbundles failed:', e.message);
-              }
-            " 2>&1
+            echo "=== Tar contents ==="
+            tar tf /tmp/flaw-image-provenance.tar | head -20
           fi
 
-      - name: Verify extracted file
-        run: |
           if [ -f /tmp/flaw-image-provenance.tar ]; then
-            SIZE=$(stat -c%s /tmp/flaw-image-provenance.tar)
-            HASH=$(sha256sum /tmp/flaw-image-provenance.tar | awk '{print $1}')
-            echo "Extracted: $SIZE bytes, SHA-256: $HASH"
-            echo "Expected: 94556 bytes, SHA-256: 9a1f320758ba0882135171bb99ce0cd1312d85dd6d6ce6aa57d930665ca576bf"
+            echo "=== SUCCESS ==="
+            ls -la /tmp/flaw-image-provenance.tar
+            sha256sum /tmp/flaw-image-provenance.tar
           else
-            echo "ERROR: flaw-image-provenance.tar not found after extraction"
-            echo "Available files:"
-            ls -la /tmp/flaw-* /tmp/*.tar 2>/dev/null || echo "none"
+            echo "=== FAILURE: Could not extract ==="
+            ls -la /tmp/zipout/ 2>/dev/null
             exit 1
           fi
 
       - name: Deploy to repo
+        if: success()
         run: |
           mkdir -p archive/evidence
           cp /tmp/flaw-image-provenance.tar archive/evidence/
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add archive/evidence/flaw-image-provenance.tar
-          git commit -m "feat: add flaw-image-provenance.tar from Arweave bundle (SHA-256 verified)" || echo "No changes"
+          git commit -m "feat: add flaw-image-provenance.tar from Arweave" || echo "No changes"
           git push
