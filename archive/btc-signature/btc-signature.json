@@ -1,0 +1,19 @@
+{
+  "label": "BTC Signature (BIP-340 Taproot)",
+  "minterAddress": "bc1ppmwvyxekh44m35x43k55z7r59nn33v8w2xmvu6s6ar4zyx57sxestxq0jf",
+  "method": "BIP-340 (Taproot x-only)",
+  "message": "authority.jcs.json v1.0.0 sha256",
+  "messageSha256": "41f95905e50cc699a7e6a3fcb0bd8633cf36170d3ef41170cd373467f8528b33",
+  "pubkeyXonly": "0edcc21b36bd6bb8d0d58da94178742ce718b0ee51b6ce6a1ae8ea221a9e81b3",
+  "signature": "cfde2fe789195b55b1bc8026061828243a250837d7ab33ff7565f2d4b6d523855fa903e9c508c09c1b1140063f924454302f03c0643fb8cb5be2f8ca3e6570d3",
+  "signatureHex": "cfde2fe789195b55b1bc8026061828243a250837d7ab33ff7565f2d4b6d523855fa903e9c508c09c1b1140063f924454302f03c0643fb8cb5be2f8ca3e6570d3",
+  "meaning": "This signature, produced by the BTC minter's Taproot key, irrevocably attests to the manifest's sha256. It strengthens identity binding without changing or interpreting the Originals. The sole and final authority remains the three BTC inscriptions.",
+  "arweave": {
+    "signatureFile": "fCweXoZVcFeJPkEBIgkYWIYn0xB1UsMx2_oBjECzK6U",
+    "sha256": "8e70e0e0d8f8e0cdd8e388ee4c462f86358a6ac9bb6231701d7876439ada561b",
+    "signingScript": "h3xIwqi36GUmd6xJLEGi6wSqFXxAa2BUcwVZQhFCo0k",
+    "verifyScript": "aMZIVDYIBovkn6s1868wdpEwnErLGYlT-JHLluqh7BM"
+  },
+  "date": "2025-09-14",
+  "guardian": "Hongju Liu (刘烘炬)"
+}

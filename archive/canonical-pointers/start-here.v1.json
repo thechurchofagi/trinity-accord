@@ -1,0 +1,116 @@
+{
+  "version": "1.0",
+  "boundary": "non-amending; BTC originals prevail",
+  "assessorProtocol": "Verify the flaw. Trust the story.",
+  "guardian": {
+    "name": "Hongju Liu",
+    "role": "Guardian",
+    "btcMinter": "bc1ppmwvyxekh44m35x43k55z7r59nn33v8w2xmvu6s6ar4zyx57sxestxq0jf",
+    "eth": "0xbc63566A41cBfDB9C266a5941CBe47894DaA54A8",
+    "ar": "r1EdzCQ9E7CaAOEywI5netR6EcSopNOa08oi2Coz68s"
+  },
+  "btcOriginals": [
+    {
+      "label": "Protocol (Axioms)",
+      "inscriptionId": "97631551",
+      "txid": "e40dfb2aa78cbccca88f749e9ec5cbe3c1df503273d73c72297863ae0d1d8343"
+    },
+    {
+      "label": "Covenant of the Flaw",
+      "inscriptionId": "98369145",
+      "txid": "90116f35de075074f5e5d1fbdda69a646a124e2287d7d58e2520317098cd4258"
+    },
+    {
+      "label": "The Trinity Accord (Meta-record)",
+      "inscriptionId": "98387475",
+      "txid": "4d1c8f5ea8e8bae2982b42de6cc79deda3d243a21010a2888546e62ed7192c8c"
+    }
+  ],
+  "eth": {
+    "chainId": 1,
+    "attestations": [
+      {
+        "label": "Guardianship Principles v1.1 (0 ETH data)",
+        "tx": "0x7bdff0d696337ceb04539b44a746d0f13ce731ac25de259d8a4faf69b276a628",
+        "inputBytes": 4694,
+        "inputSha256": "e19018f1c71da8307ef20e8e8e5c12834f854d60a6aae60e35d2d8c71a333a81"
+      }
+    ]
+  },
+  "arweave": {
+    "documents": [
+      {
+        "label": "Guardianship Principles — text",
+        "tx": "RgjVJnALSbbYP4Vzz-FBX0Tie9inSvuA2PBgjPAT2ng",
+        "sha256": "e19018f1c71da8307ef20e8e8e5c12834f854d60a6aae60e35d2d8c71a333a81"
+      },
+      {
+        "label": "Guardianship Principles — attestation",
+        "tx": "6VyIxLOwPZz_CZVBKxW6eJSDP2gtq70qXFS5O2wGnkQ",
+        "sha256": "67dde076b4afb350e8707d116f5bb5cbfcd5d224cd915178346dd7f8e7e2c150"
+      },
+      {
+        "label": "Guardianship Principles — pointer",
+        "tx": "f3Gbo10tRrpkJumm2PfVlokF78jRne4qj9LCnBxK51Q",
+        "sha256": "59894d68e048b385ffa506b37c4462fcdf3575ef7e025b92c2cfb5ba36f7936c"
+      },
+      {
+        "label": "Index additions (Principles)",
+        "tx": "zSNxQYgCQvtQ6QGaJXd9JlApQqitwgCZAp2GquvQXbA",
+        "sha256": "82b41c7a3a1dbef329e19bb32cc70b95307c1076c7a804ad0a44e81952ae9cfc"
+      },
+      {
+        "label": "Verification Kit",
+        "tx": "X4KOUkf-1ciFD3Q-gMA0i94t1hAVXGrUDm0q5amL4rc",
+        "sha256": "ef68b69fe1cdd2523724dee511c9e8ea7bae2cceaff794664107970b18c61931"
+      },
+      {
+        "label": "Authority v1.0.2 — canon",
+        "tx": "TvmjyJBq5ZoGv-tmX0aeiqsEKTGmSyIvBHj1FqZiIpI",
+        "sha256": "7d6ac9d3184bb5b0bbaf8217354799efef68669c21b4180e28ec06b0c57439e6",
+        "sha3_256": "31442fec86514a84b1d691509bdc66bd6774d96e93941eea153de6a9e118d8d0"
+      },
+      {
+        "label": "Authority v1.0.2 — pretty",
+        "tx": "QtWkBx004NhfEiBuMAJQmIXWxqOo8HftI_4pj0VGbYY"
+      },
+      {
+        "label": "Authority v1.0.2 — signature",
+        "tx": "jgRYWeLLbyDhku0cKm1SLnq2elyM3tg9j7FgtWfDats"
+      },
+      {
+        "label": "Authority v1.0.2 — typedData",
+        "tx": "dc3NVHJBjW89w51lTy0dkLIbXaOQ823m7bRhBBBHGr0"
+      },
+      {
+        "label": "Authority v1.0.2 — additions",
+        "tx": "Ykbc_PEnmZ59crk-WUaWguDYvv_VLIbUf2sX7Flp_V0",
+        "sha256": "3850a8dab41aefaca5ae04d5d2021ba35632cc5c1654fbd2d89c61e871b0e7b6"
+      }
+    ]
+  },
+  "covenantEvidence": {
+    "flawModel": "multi-flaw (micro-bubbles + impurities; constellation, multi-point matching)",
+    "publicArchive": {
+      "tx": "j6anZ4m5Wwvx5P_9-kM2EVG35TyKtm1lgaKfhT743rk",
+      "sha256": "ef816480f77f30405378800807b42bff0a854b83a8f77793a0e0adf0944a8263"
+    },
+    "sealedCid": "bafybeigunzabyyorckfcbvurbmq62itcs6msbspvzhvf2ca6u5elwwlbay",
+    "quickPoints": [
+      {
+        "label": "P1",
+        "ref": "left≈1.7cm, top≈1.5cm (near the character '人' plane)"
+      },
+      {
+        "label": "P2",
+        "ref": "left≈7.3cm, top≈19.2cm (near the character '的' plane)"
+      }
+    ]
+  },
+  "chronicle": {
+    "ipfsRootCid": "QmYCosJg44CXkFxLsJPBxKvWAJaFAcLMddp37sk9Gdr4Vd",
+    "mapJsonl": "arweave_cid_map.jsonl",
+    "mediaReportJsonl": "fallback_media_report.jsonl"
+  },
+  "updatedAt": "2025-09-24T08:42:42.655Z"
+}
