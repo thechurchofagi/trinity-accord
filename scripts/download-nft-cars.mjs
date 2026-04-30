@@ -31,11 +31,7 @@ const RELEASE_TAG = process.env.RELEASE_TAG || 'nft-backup-v1';
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 const REPO = 'thechurchofagi/trinity-accord';
 
-const GATEWAYS = [
-  'https://arweave.net',
-  'https://ar-io.net',
-];
-
+const GATEWAYS = ['https://arweave.net', 'https://ar-io.net'];
 const TMP_DIR = '/tmp/nft-cars';
 const PART_SIZE = 50; // files per archive part
 
@@ -52,9 +48,7 @@ function sha256hex(buf) {
 function parseCarHeader(data) {
   let pos = 0, shift = 0, headerLen = 0;
   while (true) {
-    const b = data[pos];
-    headerLen |= (b & 0x7f) << shift;
-    pos++; shift += 7;
+    const b = data[pos]; headerLen |= (b & 0x7f) << shift; pos++; shift += 7;
     if (b < 0x80) break;
   }
   return pos + headerLen;
@@ -66,50 +60,91 @@ function* iterCarBlocks(data) {
   while (pos < data.length) {
     let shift = 0, blockLen = 0;
     while (pos < data.length) {
-      const b = data[pos];
-      blockLen |= (b & 0x7f) << shift;
-      pos++; shift += 7;
+      const b = data[pos]; blockLen |= (b & 0x7f) << shift; pos++; shift += 7;
       if (b < 0x80) break;
     }
     if (blockLen === 0 || pos + blockLen > data.length) break;
     yield { data: data.slice(pos, pos + blockLen), index: idx };
-    pos += blockLen;
-    idx++;
+    pos += blockLen; idx++;
   }
 }
 
+/** Extract token_index.json from the recovery CAR by finding the largest token-index JSON */
 function extractTokenIndex(carPath) {
   const raw = fs.readFileSync(carPath);
+  let bestObj = null;
+  let bestKeyCount = 0;
+
   for (const block of iterCarBlocks(raw)) {
-    const jsonStart = block.data.indexOf(0x7b);
-    if (jsonStart < 0) continue;
-    let depth = 0;
-    for (let i = jsonStart; i < block.data.length; i++) {
-      if (block.data[i] === 0x7b) depth++;
-      else if (block.data[i] === 0x7d) depth--;
-      if (depth === 0) {
-        try { return JSON.parse(block.data.slice(jsonStart, i + 1).toString()); }
-        catch { break; }
+    // Search for all JSON objects in this block
+    let searchPos = 0;
+    while (searchPos < block.data.length) {
+      const jsonStart = block.data.indexOf(0x7b, searchPos); // '{'
+      if (jsonStart < 0) break;
+
+      let depth = 0, endPos = -1;
+      for (let i = jsonStart; i < block.data.length; i++) {
+        if (block.data[i] === 0x7b) depth++;
+        else if (block.data[i] === 0x7d) depth--;
+        if (depth === 0) { endPos = i; break; }
+      }
+
+      if (endPos > jsonStart) {
+        try {
+          const obj = JSON.parse(block.data.slice(jsonStart, endPos + 1).toString());
+          if (typeof obj === 'object' && !Array.isArray(obj)) {
+            const keys = Object.keys(obj);
+            // Verify this is a token_index: contract -> token_id -> {metadata, media}
+            const isTokenIndex = keys.some(k => {
+              const v = obj[k];
+              if (typeof v !== 'object' || v === null || Array.isArray(v)) return false;
+              return Object.values(v).some(t =>
+                t && typeof t === 'object' && (t.metadata || t.media)
+              );
+            });
+            if (isTokenIndex && keys.length > bestKeyCount) {
+              bestObj = obj;
+              bestKeyCount = keys.length;
+            }
+          }
+        } catch {}
+        searchPos = endPos + 1;
+      } else {
+        searchPos = jsonStart + 1;
       }
     }
   }
+
+  if (bestObj) return bestObj;
   throw new Error('token_index.json not found in CAR');
 }
 
+/** Collect all unique txids from token_index */
 function collectTxids(index) {
-  const txids = new Map();
+  const txids = new Map(); // txid → { role, contract, token_id, ... }
   for (const [contract, tokens] of Object.entries(index)) {
     for (const [token_id, entry] of Object.entries(tokens)) {
       const meta = entry.metadata;
-      if (meta?.txid) txids.set(meta.txid, { role: 'metadata', contract, token_id, cid: meta.root_cid, sha256: meta.car_sha256 });
+      if (meta?.txid) {
+        txids.set(meta.txid, {
+          role: 'metadata', contract, token_id,
+          cid: meta.root_cid, sha256: meta.car_sha256, size: meta.car_size,
+        });
+      }
       for (const m of entry.media || []) {
-        if (m.txid) txids.set(m.txid, { role: 'media', contract, token_id, cid: m.root_cid, leaf: m.leaf_path, sha256: m.car_sha256 });
+        if (m.txid) {
+          txids.set(m.txid, {
+            role: 'media', contract, token_id,
+            cid: m.root_cid, leaf: m.leaf_path, sha256: m.car_sha256, size: m.car_size,
+          });
+        }
       }
     }
   }
   return txids;
 }
 
+/** Download with gateway rotation + retries */
 async function downloadTxid(txid, retries = MAX_RETRIES) {
   for (let attempt = 0; attempt <= retries; attempt++) {
     const gw = GATEWAYS[attempt % GATEWAYS.length];
@@ -129,6 +164,7 @@ async function downloadTxid(txid, retries = MAX_RETRIES) {
 
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
+/** Run async tasks with concurrency limit */
 async function pool(tasks, limit) {
   const results = [];
   let i = 0;
@@ -146,7 +182,6 @@ async function pool(tasks, limit) {
 async function ensureRelease() {
   if (!GITHUB_TOKEN) throw new Error('GITHUB_TOKEN required for release upload');
 
-  // Check if release exists
   const res = await fetch(`https://api.github.com/repos/${REPO}/releases/tags/${RELEASE_TAG}`, {
     headers: { Authorization: `Bearer ${GITHUB_TOKEN}`, Accept: 'application/vnd.github+json' },
   });
@@ -157,7 +192,6 @@ async function ensureRelease() {
     return data;
   }
 
-  // Create release
   console.log(`   Creating release ${RELEASE_TAG}...`);
   const create = await fetch(`https://api.github.com/repos/${REPO}/releases`, {
     method: 'POST',
@@ -170,7 +204,6 @@ async function ensureRelease() {
       tag_name: RELEASE_TAG,
       name: `NFT Backup - 175 NFTs (Arweave CAR Files)`,
       body: `## NFT Recovery CAR Files\n\nBackup of 175 Ethereum NFT metadata and media as IPFS CAR files from Arweave.\n\nSee \`token_index.json\` in the main repo for the mapping of contract+token_id → Arweave txid.\n\nGenerated: ${new Date().toISOString()}`,
-      prerelease: false,
     }),
   });
 
@@ -194,10 +227,8 @@ async function uploadAsset(releaseId, filePath, filename) {
     body: buf,
   });
 
-  if (!res.ok) throw new Error(`Upload ${filename} failed: ${res.status}`);
-  const data = await res.json();
-  console.log(`   ✅ Uploaded: ${filename} (${(stat.size / 1024 / 1024).toFixed(1)}MB)`);
-  return data;
+  if (!res.ok) throw new Error(`Upload failed: ${res.status}`);
+  console.log(`   ✅ Uploaded: ${filename} (${(buf.length / 1024 / 1024).toFixed(1)}MB)`);
 }
 
 // --------------- Main ---------------
@@ -217,13 +248,13 @@ async function main() {
 
   // 2. Collect txids
   const txids = collectTxids(index);
-  console.log(`   ${txids.size} unique txids`);
+  console.log(`   ${txids.size} unique txids to download`);
   console.log();
 
   if (DRY_RUN) {
-    console.log('🔍 DRY RUN — would download:');
+    console.log('🔍 DRY RUN — listing txids:');
     for (const [txid, info] of txids) {
-      console.log(`   ${txid}  ${info.role}  ${info.contract.slice(0, 10)}...`);
+      console.log(`   ${txid}  ${info.role}  ${info.contract.slice(0, 10)}.../${info.token_id.slice(0, 20)}...`);
     }
     console.log(`\nTotal: ${txids.size} files`);
     return;
@@ -238,10 +269,12 @@ async function main() {
   const tasks = txidList.map(([txid, info]) => async () => {
     const dest = path.join(TMP_DIR, `${txid}.car`);
 
+    // Skip if already downloaded and verified
     if (fs.existsSync(dest) && fs.statSync(dest).size > 0) {
       const hash = sha256hex(fs.readFileSync(dest));
       manifest.push({ ...info, txid, sha256: hash, size: fs.statSync(dest).size, cached: true });
       done++; pass++;
+      if (done % 50 === 0) process.stdout.write(`\r   ${done}/${txids.size}`);
       return;
     }
 
@@ -265,7 +298,7 @@ async function main() {
   const manifestPath = path.join(TMP_DIR, 'manifest.json');
   fs.writeFileSync(manifestPath, JSON.stringify({
     timestamp: new Date().toISOString(),
-    total: txids.size,
+    total_txids: txids.size,
     downloaded: pass,
     failed: fail,
     contracts: contracts.length,
