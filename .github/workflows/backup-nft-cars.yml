@@ -11,6 +11,8 @@ on:
         description: 'Dry run (list only, no download)'
         type: boolean
         default: false
+  repository_dispatch:
+    types: [backup-nft-cars]
 
 jobs:
   download-and-release:
@@ -29,7 +31,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CONCURRENCY: ${{ inputs.concurrency || '10' }}
-          DRY_RUN: ${{ inputs.dry_run && '1' || '' }}
+          DRY_RUN: ${{ inputs.dry_run == 'true' && '1' || '' }}
           RELEASE_TAG: nft-backup-v1
         run: |
           node scripts/download-nft-cars.mjs
