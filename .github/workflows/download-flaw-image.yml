@@ -1,0 +1,104 @@
+name: Download Flaw Image (retry)
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "*/30 * * * *"
+
+jobs:
+  download:
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, 'backup:')"
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check if already downloaded
+        id: check
+        run: |
+          if [ -f archive/evidence/flaw-image-provenance.tar ] && [ $(stat -c%s archive/evidence/flaw-image-provenance.tar 2>/dev/null || echo 0) -gt 1000 ]; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+            echo "✅ flaw-image-provenance.tar already exists ($(stat -c%s archive/evidence/flaw-image-provenance.tar) bytes)"
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+            echo "❌ flaw-image-provenance.tar missing or too small, will download"
+          fi
+
+      - name: Download flaw-image-provenance.tar
+        if: steps.check.outputs.exists == 'false'
+        run: |
+          TXID="9klmArmByJNOGeHzfnrAhB6x6w7sKSYLS1zQNLL7GLs"
+          DEST="archive/evidence/flaw-image-provenance.tar"
+          mkdir -p archive/evidence
+
+          # Exhaustive gateway list
+          GATEWAYS=(
+            "https://arweave.net/$TXID"
+            "https://ar-io.net/$TXID"
+            "https://arweave.asia/$TXID"
+            "https://arweave.dev/$TXID"
+            "https://arweave.live/$TXID"
+            "https://arweave.co/$TXID"
+            "https://arweave.rocks/$TXID"
+            "https://arweave.link/$TXID"
+            "https://g8way.io/$TXID"
+            "https://gold_rouge.arweave.net/$TXID"
+            "https://arweave.express/$TXID"
+            "https://arweave.motherbase/$TXID"
+            "https://api.allorigins.win/raw?url=https://arweave.net/$TXID"
+            "https://corsproxy.io/?https://arweave.net/$TXID"
+            "https://api.allorigins.win/raw?url=https://ar-io.net/$TXID"
+            "https://corsproxy.io/?https://ar-io.net/$TXID"
+            "https://api.codetabs.com/v1/proxy?quest=https://arweave.net/$TXID"
+            "https://thingproxy.freeboard.io/fetch/https://arweave.net/$TXID"
+          )
+
+          echo "🔍 Trying ${#GATEWAYS[@]} gateways for $TXID..."
+          echo ""
+
+          for i in "${!GATEWAYS[@]}"; do
+            url="${GATEWAYS[$i]}"
+            echo "[$(($i+1))/${#GATEWAYS[@]}] $url"
+            rm -f "$DEST"
+
+            if curl -sL --max-time 180 --connect-timeout 30 "$url" -o "$DEST" 2>/dev/null; then
+              if [ -s "$DEST" ]; then
+                size=$(stat -c%s "$DEST")
+                head_bytes=$(head -c 20 "$DEST" | tr -d '\0')
+
+                # Check it's not an HTML error page
+                if echo "$head_bytes" | grep -qi "<html\|404\|error\|not found\|500\|502\|503"; then
+                  echo "   ⚠️ Got HTML/error page ($size bytes), skipping"
+                  rm -f "$DEST"
+                  continue
+                fi
+
+                echo "   ✅ Downloaded: $size bytes"
+                sha256sum "$DEST"
+                echo ""
+                echo "🎉 SUCCESS from gateway #$((i+1))"
+                exit 0
+              fi
+            fi
+            echo "   ❌ Failed"
+          done
+
+          echo ""
+          echo "❌ ALL ${#GATEWAYS[@]} GATEWAYS FAILED"
+          echo "   Will retry in 30 minutes via schedule trigger."
+          exit 1
+
+      - name: Commit if downloaded
+        if: steps.check.outputs.exists == 'false'
+        run: |
+          if [ -f archive/evidence/flaw-image-provenance.tar ] && [ $(stat -c%s archive/evidence/flaw-image-provenance.tar) -gt 1000 ]; then
+            git config user.email "guardian@trinityaccord.org"
+            git config user.name "Trinity Accord Guardian"
+            git add archive/evidence/flaw-image-provenance.tar
+            git commit -m "backup: flaw-image-provenance.tar downloaded from Arweave"
+            git push
+            echo "✅ Committed and pushed"
+          else
+            echo "ℹ️ No file to commit"
+          fi
