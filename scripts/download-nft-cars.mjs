@@ -317,9 +317,9 @@ async function main() {
     const partPath = path.join(TMP_DIR, partName);
 
     console.log(`   Part ${partNum}: ${batch.length} files → ${partName}`);
-    // Use --files-from to avoid filenames starting with '-' being parsed as options
+    // Use --files-from with ./  prefix to avoid '-' filenames being parsed as options
     const listFile = path.join(TMP_DIR, `.part${partNum}.txt`);
-    fs.writeFileSync(listFile, batch.join('\n'));
+    fs.writeFileSync(listFile, batch.map(f => `./${f}`).join('\n'));
     execSync(`tar czf "${partPath}" -C "${TMP_DIR}" -T "${listFile}"`, { stdio: 'pipe' });
     fs.unlinkSync(listFile);
     parts.push({ name: partName, path: partPath, count: batch.length });
