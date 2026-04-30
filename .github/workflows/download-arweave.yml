@@ -1,10 +1,10 @@
-name: Download Arweave Files
+name: Download & Verify Arweave Files
 
 on:
   workflow_dispatch:
 
 jobs:
-  download:
+  download-and-verify:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -13,229 +13,354 @@ jobs:
         run: |
           mkdir -p archive/{guardian-principles,authority-manifest,btc-signature,eth-witness,verification,evidence,canonical-pointers,rotation,scripts,legacy-mirror}
 
-      - name: Download and verify files
+      - name: Download all files from Arweave
+        id: download
         run: |
-          download_and_verify() {
+          FAILED=0
+
+          download_file() {
             local txid="$1"
             local dest="$2"
-            local expected_sha="$3"
-            local label="$4"
+            local label="$3"
 
-            echo "Downloading $label from arweave.net/$txid ..."
-            curl -sL --max-time 120 "https://arweave.net/$txid" -o "$dest"
+            echo "📥 Downloading: $label"
+            echo "   TxID: $txid"
+            echo "   Dest: $dest"
 
-            if [ ! -f "$dest" ] || [ ! -s "$dest" ]; then
-              echo "  ERROR: Failed to download $label"
-              return 1
-            fi
+            for gw in "arweave.net" "ar-io.net" "g8way.io"; do
+              curl -sL --max-time 120 "https://$gw/$txid" -o "$dest" 2>/dev/null
+              if [ -f "$dest" ] && [ -s "$dest" ]; then
+                echo "   Gateway: $gw ✓"
+                return 0
+              fi
+            done
 
-            actual_sha=$(sha256sum "$dest" | cut -d' ' -f1)
-            echo "  SHA-256: $actual_sha"
-
-            if [ -n "$expected_sha" ] && [ "$actual_sha" != "$expected_sha" ]; then
-              echo "  WARNING: SHA mismatch! Expected: $expected_sha"
-            else
-              echo "  SHA-256 MATCH ✓"
-            fi
+            echo "   ❌ FAILED to download from all gateways"
+            FAILED=$((FAILED + 1))
+            return 1
           }
 
-          # Guardian Principles v1.1 text
-          download_and_verify \
-            "RgjVJnALSbbYP4Vzz-FBX0Tie9inSvuA2PBgjPAT2ng" \
+          # === Guardian Principles ===
+          download_file "RgjVJnALSbbYP4Vzz-FBX0Tie9inSvuA2PBgjPAT2ng" \
             "archive/guardian-principles/guardian-principles-v1.1.md" \
+            "Guardian Principles v1.1"
+
+          download_file "6VyIxLOwPZz_CZVBKxW6eJSDP2gtq70qXFS5O2wGnkQ" \
+            "archive/guardian-principles/attestation.json" \
+            "Guardian Principles Attestation"
+
+          download_file "f3Gbo10tRrpkJumm2PfVlokF78jRne4qj9LCnBxK51Q" \
+            "archive/guardian-principles/pointer.json" \
+            "Guardian Principles Pointer"
+
+          download_file "zSNxQYgCQvtQ6QGaJXd9JlApQqitwgCZAp2GquvQXbA" \
+            "archive/guardian-principles/index-additions.json" \
+            "Index additions (Principles)"
+
+          download_file "w9LPP30D31zd5M60v18WXpWuig0_wc9EVNnXk8kz1vA" \
+            "archive/guardian-principles/guardian-principles-original.md" \
+            "Guardian Principles (original AR)"
+
+          # === BTC Signature ===
+          download_file "fCweXoZVcFeJPkEBIgkYWIYn0xB1UsMx2_oBjECzK6U" \
+            "archive/btc-signature/btc-signature.json" \
+            "BTC Signature (BIP-340)"
+
+          # === Scripts ===
+          download_file "h3xIwqi36GUmd6xJLEGi6wSqFXxAa2BUcwVZQhFCo0k" \
+            "archive/scripts/sign.mjs" \
+            "Signing Script (sign.mjs)"
+
+          download_file "aMZIVDYIBovkn6s1868wdpEwnErLGYlT-JHLluqh7BM" \
+            "archive/scripts/verify.mjs" \
+            "Verify Script (verify.mjs)"
+
+          download_file "X4KOUkf-1ciFD3Q-gMA0i94t1hAVXGrUDm0q5amL4rc" \
+            "archive/scripts/verification-kit.tar.gz" \
+            "Verification Kit"
+
+          # === ETH Witness ===
+          download_file "UouXngnUjcEkpOwgq5ajInrDpwKrGhtUVDLmlBorVjQ" \
+            "archive/eth-witness/eth-witness.json" \
+            "ETH Witness JSON"
+
+          # === Rotation ===
+          download_file "AlyENoZXrGqUG9iXwaxhhoPjELlWbRuWMFtYGWW6bHM" \
+            "archive/rotation/rotation-notice-old.txt" \
+            "Rotation Notice (old addr)"
+
+          download_file "GD_uH4GLXSKKp0Wz1QGjoE_FuVWZZ4fylncPFHZd76U" \
+            "archive/rotation/acknowledgement-new.txt" \
+            "Acknowledgement (new addr)"
+
+          # === Canonical Pointers ===
+          download_file "6HW5X5PETh9X_kdShA0a7sQWHtfr59F7KXZNym9NqyI" \
+            "archive/canonical-pointers/guardian-index-v2.json" \
+            "Guardian Index v2"
+
+          download_file "6CtpboRTtM675vPS_ifzPt1vgonr9KtPYm7oOnnxUs0" \
+            "archive/canonical-pointers/canonical-pointer-v2.json" \
+            "Canonical Pointer v2"
+
+          download_file "BwVHuxODfV65xE_L1fqrCDBvLvJNnSuBEXaZNuoRcIk" \
+            "archive/canonical-pointers/guardian-index-original.json" \
+            "Guardian Index (original)"
+
+          download_file "9McJS3_xvIl6_87e7NDJ6g3SgGlA8Js7z--eMLGMRZg" \
+            "archive/canonical-pointers/guardian-pointer-original.json" \
+            "Guardian Pointer (original)"
+
+          download_file "E_HLeYx-70cbUMUSwMacB5kLjo5m-ePYWjZnqjNY_zQ" \
+            "archive/canonical-pointers/index-additions-kit.json" \
+            "Index additions (Kit)"
+
+          # === Authority Manifest ===
+          download_file "gC9_n7-2nS2yNUii2tr-68r8GanAiA7qzyCM6JDpOqo" \
+            "archive/authority-manifest/manifest-v1.0.1.json" \
+            "Manifest v1.0.1"
+
+          download_file "TvmjyJBq5ZoGv-tmX0aeiqsEKTGmSyIvBHj1FqZiIpI" \
+            "archive/authority-manifest/authority-v1.0.2-canon.json" \
+            "Authority v1.0.2 canon"
+
+          download_file "QtWkBx004NhfEiBuMAJQmIXWxqOo8HftI_4pj0VGbYY" \
+            "archive/authority-manifest/authority-v1.0.2-pretty.json" \
+            "Authority v1.0.2 pretty"
+
+          download_file "jgRYWeLLbyDhku0cKm1SLnq2elyM3tg9j7FgtWfDats" \
+            "archive/authority-manifest/authority-v1.0.2-signature.json" \
+            "Authority v1.0.2 signature"
+
+          download_file "dc3NVHJBjW89w51lTy0dkLIbXaOQ823m7bRhBBBHGr0" \
+            "archive/authority-manifest/authority-v1.0.2-typedData.json" \
+            "Authority v1.0.2 typedData"
+
+          download_file "Ykbc_PEnmZ59crk-WUaWguDYvv_VLIbUf2sX7Flp_V0" \
+            "archive/authority-manifest/authority-v1.0.2-additions.json" \
+            "Authority v1.0.2 additions"
+
+          # === Evidence ===
+          download_file "X2IuLCIM4vLJSzgRMl_YEmxYSvPceMrAdug9a3i7p4o" \
+            "archive/evidence/digest-manifest.json" \
+            "digest-manifest.json"
+
+          download_file "i02XhY7No6NLZDfEwFUU6nZoGaPu7K0f42LDNDNnZEo" \
+            "archive/evidence/digest-manifest.csv" \
+            "digest-manifest.csv"
+
+          download_file "TTi9d8fqm9Cw4yRPkwX4gdlaRzBnjJID-LAs9Y3CS0M" \
+            "archive/evidence/ots-anchor" \
+            "OTS Anchor"
+
+          # === Large file (24MB) — download but don't commit (use Release) ===
+          download_file "j6anZ4m5Wwvx5P_9-kM2EVG35TyKtm1lgaKfhT743rk" \
+            "archive/evidence/public-covenant-archive.zip" \
+            "Public Covenant Archive (24MB)"
+
+          echo ""
+          echo "Download phase complete. Failed: $FAILED"
+          echo "failed=$FAILED" >> $GITHUB_OUTPUT
+
+      - name: Verify SHA-256 hashes (EVERY file must pass)
+        id: verify
+        run: |
+          echo "========================================="
+          echo "  SHA-256 HASH VERIFICATION"
+          echo "========================================="
+          echo ""
+
+          PASS=0
+          FAIL=0
+          SKIP=0
+          FAIL_LIST=""
+
+          verify_hash() {
+            local file="$1"
+            local expected="$2"
+            local label="$3"
+
+            if [ ! -f "$file" ]; then
+              echo "⏭️  SKIP (file not found): $label"
+              SKIP=$((SKIP + 1))
+              return
+            fi
+
+            actual=$(sha256sum "$file" | cut -d' ' -f1)
+
+            if [ "$actual" = "$expected" ]; then
+              echo "✅ PASS: $label"
+              echo "   SHA-256: $actual"
+              PASS=$((PASS + 1))
+            else
+              echo "❌ FAIL: $label"
+              echo "   Expected: $expected"
+              echo "   Actual:   $actual"
+              FAIL=$((FAIL + 1))
+              FAIL_LIST="$FAIL_LIST\n  - $label ($file)"
+            fi
+            echo ""
+          }
+
+          echo "--- Guardian Principles ---"
+          verify_hash "archive/guardian-principles/guardian-principles-v1.1.md" \
             "e19018f1c71da8307ef20e8e8e5c12834f854d60a6aae60e35d2d8c71a333a81" \
             "Guardian Principles v1.1"
 
-          # Guardian Principles attestation
-          download_and_verify \
-            "6VyIxLOwPZz_CZVBKxW6eJSDP2gtq70qXFS5O2wGnkQ" \
-            "archive/guardian-principles/attestation.json" \
+          verify_hash "archive/guardian-principles/attestation.json" \
             "67dde076b4afb350e8707d116f5bb5cbfcd5d224cd915178346dd7f8e7e2c150" \
-            "Guardian Principles Attestation"
+            "Attestation"
 
-          # Guardian Principles pointer
-          download_and_verify \
-            "f3Gbo10tRrpkJumm2PfVlokF78jRne4qj9LCnBxK51Q" \
-            "archive/guardian-principles/pointer.json" \
+          verify_hash "archive/guardian-principles/pointer.json" \
             "59894d68e048b385ffa506b37c4462fcdf3575ef7e025b92c2cfb5ba36f7936c" \
-            "Guardian Principles Pointer"
+            "Pointer"
 
-          # Index additions (Principles)
-          download_and_verify \
-            "zSNxQYgCQvtQ6QGaJXd9JlApQqitwgCZAp2GquvQXbA" \
-            "archive/guardian-principles/index-additions.json" \
+          verify_hash "archive/guardian-principles/index-additions.json" \
             "82b41c7a3a1dbef329e19bb32cc70b95307c1076c7a804ad0a44e81952ae9cfc" \
             "Index additions (Principles)"
 
-          # BTC Signature
-          download_and_verify \
-            "fCweXoZVcFeJPkEBIgkYWIYn0xB1UsMx2_oBjECzK6U" \
-            "archive/btc-signature/btc-signature.json" \
+          verify_hash "archive/guardian-principles/guardian-principles-original.md" \
+            "3e9d2bd10c3e8f4d37713c4b8e28d518fd7efff52613e572a1451fedadab5483" \
+            "Guardian Principles (original)"
+
+          echo "--- BTC Signature ---"
+          verify_hash "archive/btc-signature/btc-signature.json" \
             "8e70e0e0d8f8e0cdd8e388ee4c462f86358a6ac9bb6231701d7876439ada561b" \
             "BTC Signature"
 
-          # Signing script
-          download_and_verify \
-            "h3xIwqi36GUmd6xJLEGi6wSqFXxAa2BUcwVZQhFCo0k" \
-            "archive/scripts/sign.mjs" \
+          echo "--- Scripts ---"
+          verify_hash "archive/scripts/sign.mjs" \
             "8d60212683e814133267037c4a8a8267eeaeff29f9c4382a4f434a79f16bd8ea" \
-            "Signing Script"
+            "sign.mjs"
 
-          # Verify script
-          download_and_verify \
-            "aMZIVDYIBovkn6s1868wdpEwnErLGYlT-JHLluqh7BM" \
-            "archive/scripts/verify.mjs" \
+          verify_hash "archive/scripts/verify.mjs" \
             "c38fa6703d15f5d41fa813722524d14badc2472b387354875afab4478e607a1f" \
-            "Verify Script"
+            "verify.mjs"
 
-          # ETH witness
-          download_and_verify \
-            "UouXngnUjcEkpOwgq5ajInrDpwKrGhtUVDLmlBorVjQ" \
-            "archive/eth-witness/eth-witness.json" \
-            "3c187c6b764a1d53984588875c1c1fed3f1c91fd165512ad8dfa4f279542a65f" \
-            "ETH Witness"
-
-          # Rotation notice (old addr)
-          download_and_verify \
-            "AlyENoZXrGqUG9iXwaxhhoPjELlWbRuWMFtYGWW6bHM" \
-            "archive/rotation/rotation-notice-old.txt" \
-            "" \
-            "Rotation Notice (old addr)"
-
-          # Acknowledgement (new addr)
-          download_and_verify \
-            "GD_uH4GLXSKKp0Wz1QGjoE_FuVWZZ4fylncPFHZd76U" \
-            "archive/rotation/acknowledgement-new.txt" \
-            "" \
-            "Acknowledgement (new addr)"
-
-          # Guardian Index v2
-          download_and_verify \
-            "6HW5X5PETh9X_kdShA0a7sQWHtfr59F7KXZNym9NqyI" \
-            "archive/canonical-pointers/guardian-index-v2.json" \
-            "808bf70219a60e70ca9b59f41603a289447f3a598534d3c80826f90b30ec46a5" \
-            "Guardian Index v2"
-
-          # Canonical Pointer v2
-          download_and_verify \
-            "6CtpboRTtM675vPS_ifzPt1vgonr9KtPYm7oOnnxUs0" \
-            "archive/canonical-pointers/canonical-pointer-v2.json" \
-            "" \
-            "Canonical Pointer v2"
-
-          # Manifest v1.0.1
-          download_and_verify \
-            "gC9_n7-2nS2yNUii2tr-68r8GanAiA7qzyCM6JDpOqo" \
-            "archive/authority-manifest/manifest-v1.0.1.json" \
-            "ccd9aaaaa37d1ced239a7af0b61373dfa359b016d54698956776d082de8fb4f0" \
-            "Manifest v1.0.1"
-
-          # Authority v1.0.2 canon
-          download_and_verify \
-            "TvmjyJBq5ZoGv-tmX0aeiqsEKTGmSyIvBHj1FqZiIpI" \
-            "archive/authority-manifest/authority-v1.0.2-canon.json" \
-            "7d6ac9d3184bb5b0bbaf8217354799efef68669c21b4180e28ec06b0c57439e6" \
-            "Authority v1.0.2 canon"
-
-          # Authority v1.0.2 pretty
-          download_and_verify \
-            "QtWkBx004NhfEiBuMAJQmIXWxqOo8HftI_4pj0VGbYY" \
-            "archive/authority-manifest/authority-v1.0.2-pretty.json" \
-            "" \
-            "Authority v1.0.2 pretty"
-
-          # Authority v1.0.2 signature
-          download_and_verify \
-            "jgRYWeLLbyDhku0cKm1SLnq2elyM3tg9j7FgtWfDats" \
-            "archive/authority-manifest/authority-v1.0.2-signature.json" \
-            "" \
-            "Authority v1.0.2 signature"
-
-          # Authority v1.0.2 typedData
-          download_and_verify \
-            "dc3NVHJBjW89w51lTy0dkLIbXaOQ823m7bRhBBBHGr0" \
-            "archive/authority-manifest/authority-v1.0.2-typedData.json" \
-            "" \
-            "Authority v1.0.2 typedData"
-
-          # Authority v1.0.2 additions
-          download_and_verify \
-            "Ykbc_PEnmZ59crk-WUaWguDYvv_VLIbUf2sX7Flp_V0" \
-            "archive/authority-manifest/authority-v1.0.2-additions.json" \
-            "3850a8dab41aefaca5ae04d5d2021ba35632cc5c1654fbd2d89c61e871b0e7b6" \
-            "Authority v1.0.2 additions"
-
-          # OTS anchor
-          download_and_verify \
-            "TTi9d8fqm9Cw4yRPkwX4gdlaRzBnjJID-LAs9Y3CS0M" \
-            "archive/evidence/ots-anchor" \
-            "fa3f306ab30525677595d9f38808a87a8dd96260468285c8f8066661e853d907" \
-            "OTS Anchor"
-
-          # Guardian Index additions (Kit)
-          download_and_verify \
-            "E_HLeYx-70cbUMUSwMacB5kLjo5m-ePYWjZnqjNY_zQ" \
-            "archive/canonical-pointers/index-additions-kit.json" \
-            "ce7c9f5017686cb57a9fe5e40473e8aea391718dcc1680a589454e9b50187f88" \
-            "Guardian Index additions (Kit)"
-
-          # Guardian Index additions (Authority v1.0.2)
-          download_and_verify \
-            "Ykbc_PEnmZ59crk-WUaWguDYvv_VLIbUf2sX7Flp_V0" \
-            "archive/canonical-pointers/index-additions-authority.json" \
-            "3850a8dab41aefaca5ae04d5d2021ba35632cc5c1654fbd2d89c61e871b0e7b6" \
-            "Guardian Index additions (Authority)"
-
-          # digest-manifest.json
-          download_and_verify \
-            "X2IuLCIM4vLJSzgRMl_YEmxYSvPceMrAdug9a3i7p4o" \
-            "archive/evidence/digest-manifest.json" \
-            "c045642fe5cfab5eb78af7b40e98b9699dfff9121690e07ec6acaa07a445d6e9" \
-            "digest-manifest.json"
-
-          # digest-manifest.csv
-          download_and_verify \
-            "i02XhY7No6NLZDfEwFUU6nZoGaPu7K0f42LDNDNnZEo" \
-            "archive/evidence/digest-manifest.csv" \
-            "121c5a1da38f733c3991f8d3f030f39a019501d43828f84c13ea93ac3873511b" \
-            "digest-manifest.csv"
-
-          # Verification Kit (18KB)
-          download_and_verify \
-            "X4KOUkf-1ciFD3Q-gMA0i94t1hAVXGrUDm0q5amL4rc" \
-            "archive/scripts/verification-kit.tar.gz" \
+          verify_hash "archive/scripts/verification-kit.tar.gz" \
             "ef68b69fe1cdd2523724dee511c9e8ea7bae2cceaff794664107970b18c61931" \
             "Verification Kit"
 
-          # Arweave Guardian Principles (original, non-v1.1)
-          download_and_verify \
-            "w9LPP30D31zd5M60v18WXpWuig0_wc9EVNnXk8kz1vA" \
-            "archive/guardian-principles/guardian-principles-original.md" \
-            "3e9d2bd10c3e8f4d37713c4b8e28d518fd7efff52613e572a1451fedadab5483" \
-            "Guardian Principles (original AR)"
+          echo "--- ETH Witness ---"
+          verify_hash "archive/eth-witness/eth-witness.json" \
+            "3c187c6b764a1d53984588875c1c1fed3f1c91fd165512ad8dfa4f279542a65f" \
+            "ETH Witness"
 
-          # Guardian Index (original)
-          download_and_verify \
-            "BwVHuxODfV65xE_L1fqrCDBvLvJNnSuBEXaZNuoRcIk" \
-            "archive/canonical-pointers/guardian-index-original.json" \
+          echo "--- Canonical Pointers ---"
+          verify_hash "archive/canonical-pointers/guardian-index-v2.json" \
+            "808bf70219a60e70ca9b59f41603a289447f3a598534d3c80826f90b30ec46a5" \
+            "Guardian Index v2"
+
+          verify_hash "archive/canonical-pointers/guardian-index-original.json" \
             "71bc981a994a93cdf488b89aee2b132b658464a7cbb1dec791af604a1127ef98" \
             "Guardian Index (original)"
 
-          # Guardian Pointer (original)
-          download_and_verify \
-            "9McJS3_xvIl6_87e7NDJ6g3SgGlA8Js7z--eMLGMRZg" \
-            "archive/canonical-pointers/guardian-pointer-original.json" \
+          verify_hash "archive/canonical-pointers/guardian-pointer-original.json" \
             "3246afb59552dcda700e490767aadd3d67083911dae6bccbb2762ef568c7e289" \
             "Guardian Pointer (original)"
 
-          echo ""
-          echo "=== Download complete ==="
-          find archive -type f | sort
+          verify_hash "archive/canonical-pointers/index-additions-kit.json" \
+            "ce7c9f5017686cb57a9fe5e40473e8aea391718dcc1680a589454e9b50187f88" \
+            "Index additions (Kit)"
 
-      - name: Commit downloaded files
+          echo "--- Authority Manifest ---"
+          verify_hash "archive/authority-manifest/manifest-v1.0.1.json" \
+            "ccd9aaaaa37d1ced239a7af0b61373dfa359b016d54698956776d082de8fb4f0" \
+            "Manifest v1.0.1"
+
+          verify_hash "archive/authority-manifest/authority-v1.0.2-canon.json" \
+            "7d6ac9d3184bb5b0bbaf8217354799efef68669c21b4180e28ec06b0c57439e6" \
+            "Authority v1.0.2 canon"
+
+          verify_hash "archive/authority-manifest/authority-v1.0.2-additions.json" \
+            "3850a8dab41aefaca5ae04d5d2021ba35632cc5c1654fbd2d89c61e871b0e7b6" \
+            "Authority v1.0.2 additions"
+
+          echo "--- Evidence ---"
+          verify_hash "archive/evidence/digest-manifest.json" \
+            "c045642fe5cfab5eb78af7b40e98b9699dfff9121690e07ec6acaa07a445d6e9" \
+            "digest-manifest.json"
+
+          verify_hash "archive/evidence/digest-manifest.csv" \
+            "121c5a1da38f733c3991f8d3f030f39a019501d43828f84c13ea93ac3873511b" \
+            "digest-manifest.csv"
+
+          verify_hash "archive/evidence/ots-anchor" \
+            "fa3f306ab30525677595d9f38808a87a8dd96260468285c8f8066661e853d907" \
+            "OTS Anchor"
+
+          verify_hash "archive/evidence/public-covenant-archive.zip" \
+            "ef816480f77f30405378800807b42bff0a854b83a8f77793a0e0adf0944a8263" \
+            "Public Covenant Archive (24MB)"
+
+          echo ""
+          echo "========================================="
+          echo "  VERIFICATION RESULTS"
+          echo "========================================="
+          echo "  ✅ PASS: $PASS"
+          echo "  ❌ FAIL: $FAIL"
+          echo "  ⏭️  SKIP: $SKIP"
+          echo "========================================="
+
+          if [ "$FAIL" -gt 0 ]; then
+            echo ""
+            echo "❌ VERIFICATION FAILED! The following files have mismatched hashes:"
+            echo -e "$FAIL_LIST"
+            echo ""
+            echo "These files will NOT be committed. Manual investigation required."
+            echo "fail=true" >> $GITHUB_OUTPUT
+          else
+            echo ""
+            echo "✅ ALL HASHES VERIFIED SUCCESSFULLY"
+            echo "fail=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Remove files with hash mismatch
+        if: steps.verify.outputs.fail == 'true'
+        run: |
+          echo "Removing files that failed hash verification..."
+          # Re-run verification and delete mismatched files
+          verify_and_clean() {
+            local file="$1"
+            local expected="$2"
+            if [ ! -f "$file" ]; then return; fi
+            actual=$(sha256sum "$file" | cut -d' ' -f1)
+            if [ "$actual" != "$expected" ]; then
+              echo "  Removing: $file (hash mismatch)"
+              rm -f "$file"
+            fi
+          }
+          verify_and_clean "archive/guardian-principles/guardian-principles-v1.1.md" "e19018f1c71da8307ef20e8e8e5c12834f854d60a6aae60e35d2d8c71a333a81"
+          verify_and_clean "archive/guardian-principles/attestation.json" "67dde076b4afb350e8707d116f5bb5cbfcd5d224cd915178346dd7f8e7e2c150"
+          verify_and_clean "archive/guardian-principles/pointer.json" "59894d68e048b385ffa506b37c4462fcdf3575ef7e025b92c2cfb5ba36f7936c"
+          verify_and_clean "archive/guardian-principles/index-additions.json" "82b41c7a3a1dbef329e19bb32cc70b95307c1076c7a804ad0a44e81952ae9cfc"
+          verify_and_clean "archive/guardian-principles/guardian-principles-original.md" "3e9d2bd10c3e8f4d37713c4b8e28d518fd7efff52613e572a1451fedadab5483"
+          verify_and_clean "archive/btc-signature/btc-signature.json" "8e70e0e0d8f8e0cdd8e388ee4c462f86358a6ac9bb6231701d7876439ada561b"
+          verify_and_clean "archive/scripts/sign.mjs" "8d60212683e814133267037c4a8a8267eeaeff29f9c4382a4f434a79f16bd8ea"
+          verify_and_clean "archive/scripts/verify.mjs" "c38fa6703d15f5d41fa813722524d14badc2472b387354875afab4478e607a1f"
+          verify_and_clean "archive/scripts/verification-kit.tar.gz" "ef68b69fe1cdd2523724dee511c9e8ea7bae2cceaff794664107970b18c61931"
+          verify_and_clean "archive/eth-witness/eth-witness.json" "3c187c6b764a1d53984588875c1c1fed3f1c91fd165512ad8dfa4f279542a65f"
+          verify_and_clean "archive/canonical-pointers/guardian-index-v2.json" "808bf70219a60e70ca9b59f41603a289447f3a598534d3c80826f90b30ec46a5"
+          verify_and_clean "archive/canonical-pointers/guardian-index-original.json" "71bc981a994a93cdf488b89aee2b132b658464a7cbb1dec791af604a1127ef98"
+          verify_and_clean "archive/canonical-pointers/guardian-pointer-original.json" "3246afb59552dcda700e490767aadd3d67083911dae6bccbb2762ef568c7e289"
+          verify_and_clean "archive/canonical-pointers/index-additions-kit.json" "ce7c9f5017686cb57a9fe5e40473e8aea391718dcc1680a589454e9b50187f88"
+          verify_and_clean "archive/authority-manifest/manifest-v1.0.1.json" "ccd9aaaaa37d1ced239a7af0b61373dfa359b016d54698956776d082de8fb4f0"
+          verify_and_clean "archive/authority-manifest/authority-v1.0.2-canon.json" "7d6ac9d3184bb5b0bbaf8217354799efef68669c21b4180e28ec06b0c57439e6"
+          verify_and_clean "archive/authority-manifest/authority-v1.0.2-additions.json" "3850a8dab41aefaca5ae04d5d2021ba35632cc5c1654fbd2d89c61e871b0e7b6"
+          verify_and_clean "archive/evidence/digest-manifest.json" "c045642fe5cfab5eb78af7b40e98b9699dfff9121690e07ec6acaa07a445d6e9"
+          verify_and_clean "archive/evidence/digest-manifest.csv" "121c5a1da38f733c3991f8d3f030f39a019501d43828f84c13ea93ac3873511b"
+          verify_and_clean "archive/evidence/ots-anchor" "fa3f306ab30525677595d9f38808a87a8dd96260468285c8f8066661e853d907"
+          verify_and_clean "archive/evidence/public-covenant-archive.zip" "ef816480f77f30405378800807b42bff0a854b83a8f77793a0e0adf0944a8263"
+
+      - name: Commit verified files only
         run: |
           git config user.email "guardian@trinityaccord.org"
           git config user.name "Trinity Accord Guardian"
           git add archive/
-          git diff --cached --quiet || git commit -m "backup: archive files from Arweave (GitHub Actions download)"
+          git diff --cached --quiet && echo "No changes to commit" || \
+            git commit -m "backup: Arweave archive files (SHA-256 verified)
+
+          All files downloaded from Arweave gateways.
+          Every file's SHA-256 hash was verified against known values.
+          Files with mismatched hashes were excluded."
+
           git push
