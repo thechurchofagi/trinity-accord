@@ -1,4 +1,4 @@
-name: NFT Arweave Mirror (175 NFTs)
+name: NFT Arweave Mirror (175 NFTs, strict verified)
 
 on:
   workflow_dispatch:
@@ -9,6 +9,10 @@ on:
         default: ''
       dry_run:
         description: 'Dry run (list only, no upload)'
+        type: boolean
+        default: false
+      delete_existing:
+        description: 'Delete existing NFT assets before re-upload (clean rebuild)'
         type: boolean
         default: false
 
@@ -28,11 +32,12 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Run Arweave → GitHub Release mirror
+      - name: Run strict Arweave → GitHub Release mirror
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
           RELEASE_TAG: 'nft-arweave-mirror-175-v1'
+          ETH_RPC_URL: ${{ secrets.ETH_RPC_URL }}
         run: |
           set -euo pipefail
           ARGS=""
@@ -41,5 +46,8 @@ jobs:
           fi
           if [ "${{ inputs.dry_run }}" = "true" ]; then
             ARGS="$ARGS --dry-run"
+          fi
+          if [ "${{ inputs.delete_existing }}" = "true" ]; then
+            ARGS="$ARGS --delete-existing"
           fi
           node scripts/backup-nft-arweave-mirror.mjs $ARGS
