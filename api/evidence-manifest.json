@@ -34,6 +34,19 @@
     "https://gateway.pinata.cloud/ipfs/{cid}",
     "https://dweb.link/ipfs/{cid}"
   ],
+  "github_archive_mirror": {
+    "description": "Complete GitHub mirror of Arweave and ETH attestation data for users who cannot access chains directly",
+    "path": "archive/",
+    "hash_manifest": "archive/hash-manifest.json",
+    "verification_report": "archive/VERIFICATION-REPORT.md",
+    "stats": {
+      "total_files": 40,
+      "sha256_verified_against_arweave": 25,
+      "eth_attestations_verified": 8,
+      "eth_attestations_total": 8
+    },
+    "boundary": "Non-amending mirror. Arweave originals and ETH attestations prevail in case of conflict."
+  },
   "warning": "manual external verification required",
   "chronicle_recovery_package": {
     "description": "ASIMilestones Chronicle NFT recovery package, 175/175 historical NFT records",
