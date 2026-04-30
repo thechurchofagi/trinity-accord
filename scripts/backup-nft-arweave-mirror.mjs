@@ -838,20 +838,20 @@ async function main() {
 
       checksumLines.push(`${carHash}  ${f.role}.car`);
       tarFiles.push({
-        name: `${nft.safeContract}_${nft.safeTokenId}/${f.role}.car`,
+        name: `nft/${f.role}.car`,
         data: carData,
       });
     }
 
     // Add manifest.json
     tarFiles.push({
-      name: `${nft.safeContract}_${nft.safeTokenId}/manifest.json`,
+      name: `nft/manifest.json`,
       data: Buffer.from(JSON.stringify(manifest, null, 2)),
     });
 
     // Add checksums.sha256
     tarFiles.push({
-      name: `${nft.safeContract}_${nft.safeTokenId}/checksums.sha256`,
+      name: `nft/checksums.sha256`,
       data: Buffer.from(checksumLines.join('\n') + '\n'),
     });
 
@@ -906,7 +906,7 @@ async function main() {
       let nftSha256Ok = true, nftSizeOk = true, nftCidOk = true;
 
       for (const f of nft.files) {
-        const tarEntry = tarFiles.find(t => t.name.endsWith(`${f.role}.car`));
+        const tarEntry = tarFiles.find(t => t.name === `nft/${f.role}.car`);
 
         if (!tarEntry) {
           err(`  ❌ ${nft.assetName}: missing ${f.role}.car in tar`);
