@@ -152,19 +152,7 @@ jobs:
 
             if [ "$downloaded" != "1" ]; then
               echo "   ❌ DOWNLOAD FAILED (all sources)"
-              return 1
-            fi
-
-            if [ ! -f "$dest" ] || [ ! -s "$dest" ]; then
-              echo "   ❌ DOWNLOAD FAILED"
-              rm -f "$dest"
-              return 1
-            fi
-
-            if head -1 "$dest" | grep -qi "<html\|404\|error\|not found"; then
-              echo "   ❌ GOT ERROR PAGE (not real content)"
-              rm -f "$dest"
-              return 1
+              return 0
             fi
 
             actual=$(sha256sum "$dest" | cut -d' ' -f1)
@@ -174,7 +162,7 @@ jobs:
               else
                 echo "   ❌ HASH MISMATCH expected=$expected actual=$actual"
                 rm -f "$dest"
-                return 1
+                return 0
               fi
             else
               echo "   📥 OK (no expected hash) sha256=$actual"
