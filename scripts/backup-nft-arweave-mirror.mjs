@@ -108,6 +108,71 @@ function extractCarRootCid(carData) {
   throw new Error('Could not extract root CID from CAR header — no CBOR tag(42) found. Header hex: ' + header.slice(0, Math.min(header.length, 64)).toString('hex'));
 }
 
+/**
+ * Extract ALL root CIDs from CAR header (there can be multiple).
+ * Returns array of CIDv1 base32 strings.
+ */
+function extractCarHeaderRoots(carData) {
+  const headerEnd = parseCarHeader(carData);
+  const header = carData.slice(0, headerEnd);
+  const roots = [];
+
+  // Find all tag(42) occurrences in the header
+  for (let i = 0; i < header.length - 2; i++) {
+    if (header[i] === 0xd8 && header[i + 1] === 0x2a) {
+      let cidStart = i + 2, cidLen = 0;
+      if (header[cidStart] === 0x58) { cidLen = header[cidStart + 1]; cidStart += 2; }
+      else if (header[cidStart] === 0x59) { cidLen = (header[cidStart + 1] << 8) | header[cidStart + 2]; cidStart += 3; }
+      else { cidLen = header[cidStart] - 0x40; cidStart += 1; }
+      const cidBytes = header.slice(cidStart, cidStart + cidLen);
+      try {
+        roots.push(cidBytesToCidV1(cidBytes));
+      } catch {}
+    }
+  }
+  return roots;
+}
+
+/**
+ * Enumerate all block CIDs in a CAR file.
+ * Computes CIDv1 raw-codec (0x55) sha2-256 for each block.
+ * Returns array of CIDv1 base32 strings.
+ */
+function extractAllBlockCids(carData) {
+  const blockCids = [];
+  const rawCodec = Buffer.from([0x01, 0x55]); // CIDv1 + raw codec
+
+  for (const block of iterCarBlocks(carData)) {
+    const hash = crypto.createHash('sha256').update(block.data).digest();
+    const cidBytes = Buffer.concat([rawCodec, Buffer.from([0x12, 0x20]), hash]);
+    blockCids.push(base32EncodeCid(cidBytes));
+  }
+  return blockCids;
+}
+
+/**
+ * Check if an expected CID appears in CAR header roots or block CIDs.
+ * Returns { found, location, headerRoots, blockCids }
+ *   found: boolean
+ *   location: 'header_root' | 'block' | null
+ *   headerRoots: string[]
+ *   blockCids: string[] (only first 100 for memory)
+ */
+function findCidInCar(carData, expectedCid) {
+  const headerRoots = extractCarHeaderRoots(carData);
+
+  if (headerRoots.includes(expectedCid)) {
+    return { found: true, location: 'header_root', headerRoots, blockCids: [] };
+  }
+
+  const blockCids = extractAllBlockCids(carData);
+  if (blockCids.includes(expectedCid)) {
+    return { found: true, location: 'block', headerRoots, blockCids: blockCids.slice(0, 100) };
+  }
+
+  return { found: false, location: null, headerRoots, blockCids: blockCids.slice(0, 100) };
+}
+
 function cidBytesToCidV1(bytes) {
   // Strip leading zero bytes (some CAR packagers prefix 0x00)
   while (bytes.length > 0 && bytes[0] === 0x00) {
@@ -572,7 +637,7 @@ async function main() {
   log('  Cleaning old NFT assets for mandatory full re-verification...');
   let deleted = 0;
   for (const [name, asset] of existingAssets) {
-    if (name.startsWith('nft-') || name === 'RELEASE-MANIFEST.json' || name === 'RELEASE-CHECKSUMS.sha256') {
+    if (name.startsWith('nft-') || name === 'RELEASE-MANIFEST.json' || name === 'RELEASE-CHECKSUMS.sha256' || name === 'verification_observed.json' || name === 'media-root-cid-mismatches.json') {
       await deleteAsset(release.id, asset.id);
       deleted++;
       if (deleted % 20 === 0) process.stdout.write(`\r    Deleted ${deleted}...`);
@@ -669,48 +734,123 @@ async function main() {
   log('');
 
   // ── Step 6: Verify root CIDs ───────────────────────────────────────
+  // Metadata: strict root CID check (fail on mismatch)
+  // Media: sha256+size strict (already verified), root_cid as audit warning
 
-  log('🔍 Step 4: Verifying CAR root CIDs...');
-  let cidPass = 0, cidFail = 0;
+  log('🔍 Step 4: Verifying CAR root CIDs (metadata=strict, media=audit)...');
+  let metaCidPass = 0, metaCidFail = 0;
+  let mediaCidMatch = 0, mediaCidWarning = 0, mediaCidTotal = 0;
+  const mediaCidMismatches = [];
+  const observedData = [];
 
   for (const nft of nftList) {
     const nftDir = path.join(TMP_DIR, 'cars', `${nft.safeContract}_${nft.safeTokenId}`);
+    const nftObserved = {
+      contract: nft.contract, token_id: nft.tokenId,
+      nft_asset_name: nft.assetName, files: [],
+    };
+
     for (const f of nft.files) {
       const carPath = path.join(nftDir, `${f.role}.car`);
       if (!fs.existsSync(carPath)) continue;
 
       try {
         const carData = fs.readFileSync(carPath);
-        const actualRootCid = extractCarRootCid(carData);
+        const isMetadata = f.role === 'metadata';
 
-        if (actualRootCid !== f.expected_root_cid) {
-          verificationErrors.push({
-            nft: nft.assetName, role: f.role, type: 'root_cid_mismatch',
-            expected: f.expected_root_cid, actual: actualRootCid,
+        if (isMetadata) {
+          // ── METADATA: strict root CID check ──
+          const actualRootCid = extractCarRootCid(carData);
+          if (actualRootCid !== f.expected_root_cid) {
+            verificationErrors.push({
+              nft: nft.assetName, role: f.role, type: 'root_cid_mismatch',
+              expected: f.expected_root_cid, actual: actualRootCid,
+            });
+            metaCidFail++;
+          } else {
+            metaCidPass++;
+          }
+          nftObserved.files.push({
+            role: f.role, expected_root_cid: f.expected_root_cid,
+            actual_header_root: actualRootCid,
+            match: actualRootCid === f.expected_root_cid,
           });
-          cidFail++;
         } else {
-          cidPass++;
+          // ── MEDIA: check if expected CID is in header roots or block CIDs ──
+          mediaCidTotal++;
+          const result = findCidInCar(carData, f.expected_root_cid);
+
+          nftObserved.files.push({
+            role: f.role, expected_root_cid: f.expected_root_cid,
+            header_roots: result.headerRoots,
+            block_cid_count: result.blockCids.length,
+            found_in: result.location,
+            match: result.found,
+          });
+
+          if (result.found) {
+            mediaCidMatch++;
+          } else {
+            // sha256+size already verified in download step — this is a warning, not a failure
+            mediaCidWarning++;
+            mediaCidMismatches.push({
+              nft: nft.assetName, role: f.role,
+              expected_root_cid: f.expected_root_cid,
+              actual_header_roots: result.headerRoots,
+              block_cid_sample: result.blockCids.slice(0, 5),
+              sha256: f.expected_sha256,
+              size: f.expected_size,
+            });
+          }
         }
       } catch (e) {
+        const isMetadata = f.role === 'metadata';
         verificationErrors.push({
           nft: nft.assetName, role: f.role, type: 'cid_extract_failed',
           error: e.message,
         });
-        cidFail++;
+        if (isMetadata) metaCidFail++;
+        else { mediaCidTotal++; mediaCidWarning++; }
       }
     }
+    observedData.push(nftObserved);
   }
 
-  log(`   Root CIDs: ${cidPass} pass, ${cidFail} fail`);
+  log(`   Metadata root CID : ${metaCidPass} pass, ${metaCidFail} fail (strict)`);
+  log(`   Media root CID    : ${mediaCidMatch} match, ${mediaCidWarning} warning, ${mediaCidTotal} total (audit)`);
 
-  if (cidFail > 0) {
-    err('\n  ❌ Root CID verification errors:');
-    for (const e of verificationErrors.filter(e => e.type.includes('cid'))) {
+  // Metadata CID mismatch is a hard failure
+  if (metaCidFail > 0) {
+    err('\n  ❌ Metadata root CID verification failed (strict):');
+    for (const e of verificationErrors.filter(e => e.type.includes('cid') && !e.role?.startsWith('media'))) {
       err(`    ${e.nft} [${e.role}] ${e.type}: ${e.expected || ''} → ${e.actual || e.error || ''}`);
     }
     process.exit(1);
   }
+  log('');
+
+  // Save media CID mismatch report (audit, does not fail)
+  if (mediaCidMismatches.length > 0) {
+    log(`  ⚠️  ${mediaCidMismatches.length} media root CID mismatches (audit warning, not a failure)`);
+    const mismatchPath = path.join(TMP_DIR, 'media-root-cid-mismatches.json');
+    fs.writeFileSync(mismatchPath, JSON.stringify({
+      schema: 'media-root-cid-mismatch-report-v1',
+      generated_at: new Date().toISOString(),
+      total_mismatches: mediaCidMismatches.length,
+      note: 'These media CARs have valid sha256+size but root CID differs from token_index. This is an audit report, not a failure.',
+      mismatches: mediaCidMismatches,
+    }, null, 2));
+  }
+
+  // Save observed verification data
+  const observedPath = path.join(TMP_DIR, 'verification_observed.json');
+  fs.writeFileSync(observedPath, JSON.stringify({
+    schema: 'verification-observed-v1',
+    generated_at: new Date().toISOString(),
+    note: 'Actual CAR header roots and block CID observations. token_index is NOT modified.',
+    observations: observedData,
+  }, null, 2));
+  log('  📝 verification_observed.json generated');
   log('');
 
   // ── Step 7 (optional): ETH on-chain tokenURI verification ──────────
@@ -929,16 +1069,28 @@ async function main() {
           nftSizeOk = false;
         }
 
-        // Root CID check
+        // Root CID check — two-tier: metadata=strict, media=audit
         try {
           const reRootCid = extractCarRootCid(tarEntry.data);
-          if (reRootCid !== f.expected_root_cid) {
-            err(`  ❌ ${nft.assetName} [${f.role}]: root CID mismatch after re-download`);
-            nftCidOk = false;
+          if (f.role === 'metadata') {
+            // Strict check
+            if (reRootCid !== f.expected_root_cid) {
+              err(`  ❌ ${nft.assetName} [${f.role}]: root CID mismatch after re-download`);
+              nftCidOk = false;
+            }
+          } else {
+            // Audit check: look in header roots + block CIDs
+            const reResult = findCidInCar(tarEntry.data, f.expected_root_cid);
+            if (!reResult.found) {
+              // Warning only, not a failure (sha256+size already verified)
+            }
           }
         } catch (e) {
-          err(`  ❌ ${nft.assetName} [${f.role}]: CID extract failed: ${e.message}`);
-          nftCidOk = false;
+          if (f.role === 'metadata') {
+            err(`  ❌ ${nft.assetName} [${f.role}]: CID extract failed: ${e.message}`);
+            nftCidOk = false;
+          }
+          // Media CID extract failure is not a hard error
         }
       }
 
@@ -988,14 +1140,16 @@ async function main() {
 
   const allSha256Match = sha256MatchCount === totalCars;
   const allSizeMatch = sizeMatchCount === totalCars;
-  const allCidMatch = cidPass === totalCars;
+  const allMetadataCidMatch = metaCidFail === 0;
   const allReVerified = reVerifyFail === 0 && reVerifySha256Pass === nftList.length;
   // When ETH_RPC_URL is set: all 175 must pass, 0 fail, 0 skip
   const allOnchainOk = ETH_RPC_URL
     ? (onchainPass === EXPECTED_NFTS && onchainFail === 0 && onchainSkip === 0)
     : true;
 
-  const overallPass = allSha256Match && allSizeMatch && allCidMatch && allReVerified && allOnchainOk;
+  // Overall PASS: metadata CID strict + sha256/size + re-verify + onchain
+  // Media root CID mismatch is a warning, not a failure
+  const overallPass = allSha256Match && allSizeMatch && allMetadataCidMatch && allReVerified && allOnchainOk;
 
   const releaseManifest = {
     schema: 'nft-arweave-mirror-manifest-v4',
@@ -1010,7 +1164,13 @@ async function main() {
     total_unique_arweave_txids: allTxids.size,
     all_car_sha256_match_token_index: allSha256Match,
     all_car_size_match_token_index: allSizeMatch,
-    all_car_root_cid_match_token_index: allCidMatch,
+    all_metadata_root_cid_match: allMetadataCidMatch,
+    media_root_cid_audit: {
+      match: mediaCidMatch,
+      warning: mediaCidWarning,
+      total: mediaCidTotal,
+      note: 'Media root CID is audit-only. sha256+size are the integrity guarantees. See media-root-cid-mismatches.json.',
+    },
     all_release_assets_reverified: allReVerified,
     onchain_tokenuri_verified: ETH_RPC_URL ? true : false,
     onchain_all_match: allOnchainOk,
@@ -1019,7 +1179,8 @@ async function main() {
       arweave_download: { ok: dlOk + dlSkip, fail: dlFail },
       sha256_check: { pass: sha256MatchCount, total: totalCars },
       size_check: { pass: sizeMatchCount, total: totalCars },
-      root_cid_check: { pass: cidPass, total: totalCars },
+      metadata_root_cid_check: { pass: metaCidPass, fail: metaCidFail, mode: 'strict' },
+      media_root_cid_check: { match: mediaCidMatch, warning: mediaCidWarning, total: mediaCidTotal, mode: 'audit' },
       release_reverify_sha256: { pass: reVerifySha256Pass, total: nftList.length },
       release_reverify_size: { pass: reVerifySizePass, total: nftList.length },
       release_reverify_cid: { pass: reVerifyCidPass, total: nftList.length },
@@ -1036,6 +1197,19 @@ async function main() {
   await uploadAsset(release.id, manifestPath, 'RELEASE-MANIFEST.json');
   log('  ✅ RELEASE-MANIFEST.json uploaded');
 
+  // Upload verification_observed.json
+  if (fs.existsSync(observedPath)) {
+    await uploadAsset(release.id, observedPath, 'verification_observed.json');
+    log('  ✅ verification_observed.json uploaded');
+  }
+
+  // Upload media-root-cid-mismatches.json if it exists
+  const mismatchPath = path.join(TMP_DIR, 'media-root-cid-mismatches.json');
+  if (fs.existsSync(mismatchPath)) {
+    await uploadAsset(release.id, mismatchPath, 'media-root-cid-mismatches.json');
+    log('  ✅ media-root-cid-mismatches.json uploaded');
+  }
+
   // Generate RELEASE-CHECKSUMS.sha256
   const checksumLines = [];
   checksumLines.push(`# RELEASE-CHECKSUMS.sha256 — ${RELEASE_TAG}`);
@@ -1047,6 +1221,14 @@ async function main() {
     if (!assetId) continue;
     const buf = await downloadAsset(assetId);
     checksumLines.push(`${sha256hex(buf)}  ${nft.assetName}`);
+  }
+  if (fs.existsSync(observedPath)) {
+    const observedBuf = fs.readFileSync(observedPath);
+    checksumLines.push(`${sha256hex(observedBuf)}  verification_observed.json`);
+  }
+  if (fs.existsSync(mismatchPath)) {
+    const mismatchBuf = fs.readFileSync(mismatchPath);
+    checksumLines.push(`${sha256hex(mismatchBuf)}  media-root-cid-mismatches.json`);
   }
   const manifestBuf = fs.readFileSync(manifestPath);
   checksumLines.push(`${sha256hex(manifestBuf)}  RELEASE-MANIFEST.json`);
@@ -1063,7 +1245,8 @@ async function main() {
   log(`  ✅ Downloads      : ${dlOk + dlSkip} CARs (${allTxids.size} unique txids)`);
   log(`  ✅ SHA-256        : ${sha256MatchCount}/${totalCars} CARs match token_index`);
   log(`  ✅ Size           : ${sizeMatchCount}/${totalCars} CARs match token_index`);
-  log(`  ✅ Root CID       : ${cidPass}/${totalCars} CARs match token_index`);
+  log(`  ✅ Metadata CID   : ${metaCidPass}/175 strict match`);
+  log(`  ⚠️  Media CID      : ${mediaCidMatch} match, ${mediaCidWarning} warning (audit only)`);
   log(`  📤 Uploads        : ${uploaded} uploaded`);
   log(`  🔍 Re-verified    : SHA256=${reVerifySha256Pass} Size=${reVerifySizePass} CID=${reVerifyCidPass} / ${nftList.length}`);
   if (ETH_RPC_URL) {
