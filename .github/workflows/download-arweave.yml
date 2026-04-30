@@ -32,11 +32,15 @@ jobs:
             mkdir -p "$(dirname "$dest")"
             echo "📥 $label"
 
-            # Try direct arweave.net first, then fallback proxies
+            # Multiple gateways including Asia and proxy fallbacks
             local urls=(
               "https://arweave.net/$txid"
               "https://ar-io.net/$txid"
+              "https://arweave.asia/$txid"
+              "https://arweave.dev/$txid"
+              "https://gold_rouge.arweave.net/$txid"
               "https://api.allorigins.win/raw?url=https://arweave.net/$txid"
+              "https://corsproxy.io/?https://arweave.net/$txid"
             )
 
             downloaded=0
@@ -135,7 +139,11 @@ jobs:
             local urls=(
               "https://arweave.net/$txid"
               "https://ar-io.net/$txid"
+              "https://arweave.asia/$txid"
+              "https://arweave.dev/$txid"
+              "https://gold_rouge.arweave.net/$txid"
               "https://api.allorigins.win/raw?url=https://arweave.net/$txid"
+              "https://corsproxy.io/?https://arweave.net/$txid"
             )
 
             downloaded=0
@@ -177,7 +185,7 @@ jobs:
           download_and_verify "fMO_dDSiCBF1aWxm2arjAJkbmHdsxiKfVHp_biMFtIE" "archive/authority-manifest/signature.json" "" "signature.json (DataItem)"
 
           # Flaw high-res image & provenance log
-          download_and_verify "9klmArmByJNOGeHzfnrAhB6x6w7sKSYLS1zQNLL7GLs" "archive/evidence/flaw-image-provenance.tar" "" "Flaw Image + Provenance" 180
+          download_and_verify "9klmArmByJNOGeHzfnrAhB6x6w7sKSYLS1zQNLL7GLs" "archive/evidence/flaw-image-provenance.tar" "" "Flaw Image + Provenance" 300
 
           echo ""
           echo "========================================="
@@ -195,6 +203,9 @@ jobs:
           urls=(
             "https://arweave.net/$TXID"
             "https://ar-io.net/$TXID"
+            "https://arweave.asia/$TXID"
+            "https://arweave.dev/$TXID"
+            "https://gold_rouge.arweave.net/$TXID"
           )
 
           for url in "${urls[@]}"; do
