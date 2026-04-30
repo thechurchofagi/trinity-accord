@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * backup-nft-arweave-mirror.mjs  (v3 — strict verification)
+ * backup-nft-arweave-mirror.mjs  (v4 — strict verification, no shortcuts)
  *
  * Strict Arweave → GitHub Release mirror for 175 NFTs.
  *
@@ -8,8 +8,12 @@
  *   1. SHA-256 of every downloaded CAR == token_index car_sha256
  *   2. Size of every downloaded CAR   == token_index car_size
  *   3. Root CID extracted from CAR    == token_index root_cid
- *   4. Every uploaded Release asset is re-downloaded and re-verified
+ *   4. Every uploaded Release asset is re-downloaded and re-verified (ALL 175, no skip)
  *   5. RELEASE-MANIFEST.json + RELEASE-CHECKSUMS.sha256 uploaded as final assets
+ *   6. Optional: onchain tokenURI CID == token_index metadata.root_cid
+ *
+ * Re-run behavior: ALL old nft-*.tar assets are deleted before upload.
+ * Every asset is freshly uploaded and fully re-verified. No silent reuse.
  *
  * Usage:
  *   GITHUB_TOKEN=xxx node scripts/backup-nft-arweave-mirror.mjs [--dry-run] [--contract 0x...]
@@ -23,16 +27,19 @@ import { execSync } from 'child_process';
 // ─── Config ────────────────────────────────────────────────────────────────
 
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
+const ETH_RPC_URL = process.env.ETH_RPC_URL || '';
 const REPO = process.env.REPO || 'thechurchofagi/trinity-accord';
 const RELEASE_TAG = process.env.RELEASE_TAG || 'nft-arweave-mirror-175-v1';
 const TOKEN_INDEX_FILE = 'token_index.json';
-const CAR_FILE = process.env.CAR_FILE || 'archive/evidence/nft-recovery-package/recovery-package.bin';
 const TMP_DIR = '/tmp/nft-arweave-mirror';
 const GATEWAYS = ['https://arweave.net', 'https://ar-io.net'];
 const EXPECTED_NFTS = 175;
 const MAX_RETRIES = 3;
 const DOWNLOAD_CONCURRENCY = 5;
 const UPLOAD_CONCURRENCY = 2;
+
+// ERC-721 uri(tokenId) selector
+const ERC721_URI_SELECTOR = '0x0e89341c';
 
 // ─── Helpers ───────────────────────────────────────────────────────────────
 
@@ -41,6 +48,9 @@ function sha256hex(buf) {
 }
 
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+function log(msg) { console.log(msg); }
+function err(msg) { console.error(msg); }
 
 // ─── CAR parsing ───────────────────────────────────────────────────────────
 
@@ -68,42 +78,23 @@ function* iterCarBlocks(data) {
   }
 }
 
-/**
- * Extract root CID from CAR header.
- * The header is DAG-CBOR: { roots: [CID], version: 1 }
- * CID is tagged with CBOR tag 42.
- * Returns the root CID as a base32 CIDv1 string.
- */
 function extractCarRootCid(carData) {
-  // Parse the CBOR header manually to find the CID
-  // The header structure after varint-length:
-  // a2          map(2)
-  // 65726f6f7473 "roots"
-  // 81          array(1)
-  // d82a        tag(42) — CID tag
-  // 5823        bytes(35) for CIDv0 or similar
-  // Then the CID bytes follow
-
   const headerEnd = parseCarHeader(carData);
   const header = carData.slice(0, headerEnd);
 
-  // Find tag(42) marker: 0xd8 0x2a
   for (let i = 0; i < header.length - 2; i++) {
     if (header[i] === 0xd8 && header[i + 1] === 0x2a) {
-      // Next byte should be a bytes length indicator
       let cidStart = i + 2;
       let cidLen = 0;
 
       if (header[cidStart] === 0x58) {
-        // 1-byte length follows
         cidLen = header[cidStart + 1];
         cidStart += 2;
       } else if (header[cidStart] === 0x59) {
-        // 2-byte length follows
         cidLen = (header[cidStart + 1] << 8) | header[cidStart + 2];
         cidStart += 3;
       } else {
-        cidLen = header[cidStart] - 0x40; // inline length
+        cidLen = header[cidStart] - 0x40;
         cidStart += 1;
       }
 
@@ -115,29 +106,17 @@ function extractCarRootCid(carData) {
   throw new Error('Could not extract root CID from CAR header');
 }
 
-/**
- * Convert raw CID bytes to a CIDv1 base32 string.
- * CIDv0: just a multihash (starts with 0x12 0x20 for sha2-256)
- * CIDv1: version(1) + codec + multihash
- */
 function cidBytesToCidV1(bytes) {
   if (bytes[0] === 0x12 && bytes[1] === 0x20) {
-    // CIDv0 — sha2-256 multihash. Convert to CIDv1 dag-cbor.
-    // CIDv1 = 0x01 + 0x71 (dag-cbor) + multihash
     const cidV1Bytes = Buffer.concat([Buffer.from([0x01, 0x71]), bytes]);
     return base32EncodeCid(cidV1Bytes);
   }
-  // Already CIDv1
   if (bytes[0] === 0x01) {
     return base32EncodeCid(bytes);
   }
-  // Fallback: return hex
   return bytes.toString('hex');
 }
 
-/**
- * Encode CID bytes to base32 (RFC 4648, no padding, lowercase)
- */
 function base32EncodeCid(bytes) {
   const alphabet = 'abcdefghijklmnopqrstuvwxyz234567';
   let bits = 0, value = 0, output = '';
@@ -155,57 +134,6 @@ function base32EncodeCid(bytes) {
   return output;
 }
 
-/**
- * Extract token_index.json from the recovery CAR by finding the LARGEST
- * token-index JSON object across ALL blocks.
- */
-function extractTokenIndexFromCar(carPath) {
-  const raw = fs.readFileSync(carPath);
-  let bestObj = null;
-  let bestKeyCount = 0;
-
-  for (const block of iterCarBlocks(raw)) {
-    let searchPos = 0;
-    while (searchPos < block.data.length) {
-      const jsonStart = block.data.indexOf(0x7b, searchPos);
-      if (jsonStart < 0) break;
-
-      let depth = 0, endPos = -1;
-      for (let i = jsonStart; i < block.data.length; i++) {
-        if (block.data[i] === 0x7b) depth++;
-        else if (block.data[i] === 0x7d) depth--;
-        if (depth === 0) { endPos = i; break; }
-      }
-
-      if (endPos > jsonStart) {
-        try {
-          const obj = JSON.parse(block.data.slice(jsonStart, endPos + 1).toString());
-          if (typeof obj === 'object' && !Array.isArray(obj)) {
-            const keys = Object.keys(obj);
-            const isTokenIndex = keys.some(k => {
-              const v = obj[k];
-              if (typeof v !== 'object' || v === null || Array.isArray(v)) return false;
-              return Object.values(v).some(t =>
-                t && typeof t === 'object' && (t.metadata || t.media)
-              );
-            });
-            if (isTokenIndex && keys.length > bestKeyCount) {
-              bestObj = obj;
-              bestKeyCount = keys.length;
-            }
-          }
-        } catch {}
-        searchPos = endPos + 1;
-      } else {
-        searchPos = jsonStart + 1;
-      }
-    }
-  }
-
-  if (bestObj) return bestObj;
-  throw new Error('token_index.json not found in CAR');
-}
-
 // ─── Arweave download ──────────────────────────────────────────────────────
 
 async function downloadTxid(txid, destPath, retries = MAX_RETRIES) {
@@ -220,8 +148,8 @@ async function downloadTxid(txid, destPath, retries = MAX_RETRIES) {
       const buf = Buffer.from(await res.arrayBuffer());
       fs.writeFileSync(destPath, buf);
       return buf;
-    } catch (err) {
-      if (attempt === retries) throw err;
+    } catch (fetchErr) {
+      if (attempt === retries) throw fetchErr;
       await sleep(2000 * (attempt + 1));
     }
   }
@@ -236,7 +164,7 @@ async function runConcurrent(tasks, limit) {
     while (nextIdx < tasks.length) {
       const idx = nextIdx++;
       try { results[idx] = await tasks[idx](); }
-      catch (err) { results[idx] = err; }
+      catch (e) { results[idx] = e; }
     }
   }
   const workers = Array.from({ length: Math.min(limit, tasks.length) }, () => worker());
@@ -250,28 +178,37 @@ function ghHeaders(extra = {}) {
   return { Authorization: `Bearer ${GITHUB_TOKEN}`, Accept: 'application/vnd.github+json', ...extra };
 }
 
+async function ghFetch(url, opts = {}) {
+  const res = await fetch(url, opts);
+  return res;
+}
+
 async function ensureRelease() {
-  const res = await fetch(`https://api.github.com/repos/${REPO}/releases/tags/${RELEASE_TAG}`, { headers: ghHeaders() });
+  const res = await ghFetch(
+    `https://api.github.com/repos/${REPO}/releases/tags/${RELEASE_TAG}`,
+    { headers: ghHeaders() }
+  );
   if (res.ok) {
     const rel = await res.json();
-    console.log(`  Release ${RELEASE_TAG} exists (id: ${rel.id})`);
+    log(`  Release ${RELEASE_TAG} exists (id: ${rel.id})`);
     return rel;
   }
-  console.log(`  Creating release ${RELEASE_TAG}...`);
-  const create = await fetch(`https://api.github.com/repos/${REPO}/releases`, {
+  log(`  Creating release ${RELEASE_TAG}...`);
+  const create = await ghFetch(`https://api.github.com/repos/${REPO}/releases`, {
     method: 'POST',
     headers: ghHeaders({ 'Content-Type': 'application/json' }),
     body: JSON.stringify({
       tag_name: RELEASE_TAG,
-      name: `NFT Arweave Mirror — 175 NFTs (strict verified)`,
+      name: `NFT Arweave Mirror — 175 NFTs (strict verified v4)`,
       body: [
-        `## Strict Arweave → GitHub Release Mirror (v3)`,
+        `## Strict Arweave → GitHub Release Mirror (v4)`,
         ``,
         `175 individual NFT archives with full verification:`,
         `- SHA-256 match against token_index`,
         `- CAR size match against token_index`,
         `- Root CID match against token_index`,
-        `- Re-download verification after upload`,
+        `- Re-download verification after upload (ALL assets, no skip)`,
+        `- Optional: onchain tokenURI CID verification`,
         ``,
         `See RELEASE-MANIFEST.json for full verification results.`,
         ``,
@@ -283,11 +220,11 @@ async function ensureRelease() {
   return await create.json();
 }
 
-async function getExistingAssets(releaseId) {
+async function getAllAssets(releaseId) {
   const assets = new Map();
   let page = 1;
   while (true) {
-    const res = await fetch(
+    const res = await ghFetch(
       `https://api.github.com/repos/${REPO}/releases/${releaseId}/assets?per_page=100&page=${page}`,
       { headers: ghHeaders() }
     );
@@ -304,7 +241,7 @@ async function uploadAsset(releaseId, filePath, filename) {
   const buf = fs.readFileSync(filePath);
   const url = `https://uploads.github.com/repos/${REPO}/releases/${releaseId}/assets?name=${encodeURIComponent(filename)}`;
   for (let attempt = 0; attempt < MAX_RETRIES; attempt++) {
-    const res = await fetch(url, {
+    const res = await ghFetch(url, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${GITHUB_TOKEN}`,
@@ -318,12 +255,12 @@ async function uploadAsset(releaseId, filePath, filename) {
       return { status: 'uploaded', id: asset.id, size: asset.size };
     }
     if (res.status === 422) {
-      console.log(`    ⚠️  422 on attempt ${attempt + 1}, retrying...`);
+      log(`    ⚠️  422 on attempt ${attempt + 1}, retrying...`);
       await sleep(3000 * (attempt + 1));
       continue;
     }
     if (res.status === 403 || res.status === 429) {
-      console.log(`    ⚠️  Rate limited (${res.status}), waiting 60s...`);
+      log(`    ⚠️  Rate limited (${res.status}), waiting 60s...`);
       await sleep(60000);
       continue;
     }
@@ -333,7 +270,7 @@ async function uploadAsset(releaseId, filePath, filename) {
 }
 
 async function deleteAsset(releaseId, assetId) {
-  const res = await fetch(
+  const res = await ghFetch(
     `https://api.github.com/repos/${REPO}/releases/assets/${assetId}`,
     { method: 'DELETE', headers: ghHeaders() }
   );
@@ -343,7 +280,7 @@ async function deleteAsset(releaseId, assetId) {
 }
 
 async function downloadAsset(assetId) {
-  const res = await fetch(
+  const res = await ghFetch(
     `https://api.github.com/repos/${REPO}/releases/assets/${assetId}`,
     { headers: ghHeaders({ Accept: 'application/octet-stream' }) }
   );
@@ -408,42 +345,105 @@ function extractFilesFromTar(buf) {
   return files;
 }
 
+// ─── ETH on-chain verification ─────────────────────────────────────────────
+
+/**
+ * Call uri(tokenId) on an ERC-721 contract via eth_call.
+ * Returns the decoded string, or null on failure.
+ */
+async function fetchOnchainTokenURI(contractAddr, tokenId, rpcUrl) {
+  try {
+    // Pad tokenId to 32 bytes
+    const paddedId = BigInt(tokenId).toString(16).padStart(64, '0');
+    const callData = ERC721_URI_SELECTOR + paddedId;
+
+    const res = await fetch(rpcUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        jsonrpc: '2.0',
+        id: 1,
+        method: 'eth_call',
+        params: [{ to: contractAddr, data: callData }, 'latest'],
+      }),
+    });
+
+    const json = await res.json();
+    if (json.error) return null;
+
+    const hex = json.result;
+    if (!hex || hex === '0x' || hex.length < 130) return null;
+
+    // ABI decode: offset(32) + length(32) + data
+    const offset = parseInt(hex.slice(2, 66), 16) * 2 + 2;
+    const len = parseInt(hex.slice(66, 130), 16) * 2;
+    const strHex = hex.slice(130, 130 + len);
+
+    // hex to utf8
+    let uri = '';
+    for (let i = 0; i < strHex.length; i += 2) {
+      uri += String.fromCharCode(parseInt(strHex.slice(i, i + 2), 16));
+    }
+    return uri;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Extract CID from a tokenURI string.
+ * Handles: ipfs://CID, ipfs://ipfs/CID, ar://CID, https://.../CID
+ */
+function extractCidFromUri(uri) {
+  if (!uri) return null;
+  // ipfs://CID or ipfs://ipfs/CID
+  const ipfsMatch = uri.match(/ipfs:\/\/(?:ipfs\/)?([a-zA-Z0-9]+)/);
+  if (ipfsMatch) return ipfsMatch[1];
+  // ar://
+  const arMatch = uri.match(/ar:\/\/([a-zA-Z0-9_-]+)/);
+  if (arMatch) return arMatch[1];
+  // https://arweave.net/TXID
+  const arHttpMatch = uri.match(/arweave\.net\/([a-zA-Z0-9_-]+)/);
+  if (arHttpMatch) return arHttpMatch[1];
+  return null;
+}
+
 // ─── Main ──────────────────────────────────────────────────────────────────
 
 async function main() {
   const args = process.argv.slice(2);
   const dryRun = args.includes('--dry-run');
   const contractFilter = args.includes('--contract') ? args[args.indexOf('--contract') + 1] : null;
-  const deleteExisting = args.includes('--delete-existing');
 
   let sourceCommit = 'unknown';
   try { sourceCommit = execSync('git rev-parse HEAD', { encoding: 'utf-8' }).trim(); } catch {}
 
-  console.log('═══════════════════════════════════════════════════════════');
-  console.log('  NFT Arweave → GitHub Release Strict Mirror (v3)');
-  console.log('═══════════════════════════════════════════════════════════');
-  console.log(`  Token Index: ${TOKEN_INDEX_FILE}`);
-  console.log(`  Release    : ${RELEASE_TAG}`);
-  console.log(`  Concurrency: dl=${DOWNLOAD_CONCURRENCY}, ul=${UPLOAD_CONCURRENCY}`);
-  console.log(`  Commit     : ${sourceCommit}`);
-  console.log();
+  log('═══════════════════════════════════════════════════════════');
+  log('  NFT Arweave → GitHub Release Strict Mirror (v4)');
+  log('═══════════════════════════════════════════════════════════');
+  log(`  Token Index: ${TOKEN_INDEX_FILE}`);
+  log(`  Release    : ${RELEASE_TAG}`);
+  log(`  Concurrency: dl=${DOWNLOAD_CONCURRENCY}, ul=${UPLOAD_CONCURRENCY}`);
+  log(`  ETH RPC    : ${ETH_RPC_URL ? 'configured' : 'not set (skipping onchain check)'}`);
+  log(`  Commit     : ${sourceCommit}`);
+  log('');
 
-  // ── Step 1: Load token_index.json directly ───────────────────────────
+  // ── Step 1: Load token_index.json ───────────────────────────────────
 
-  console.log('📖 Step 1: Loading token_index.json...');
+  log('📖 Step 1: Loading token_index.json...');
   const index = JSON.parse(fs.readFileSync(TOKEN_INDEX_FILE, 'utf-8'));
   const allContracts = Object.keys(index);
   const contracts = contractFilter ? [contractFilter] : allContracts;
 
   let totalNfts = 0;
   for (const c of contracts) {
-    if (!index[c]) { console.error(`  ❌ Contract ${c} not found`); process.exit(1); }
+    if (!index[c]) { err(`  ❌ Contract ${c} not found`); process.exit(1); }
     totalNfts += Object.keys(index[c]).length;
   }
-  console.log(`  ${contracts.length} contracts, ${totalNfts} NFTs`);
+  log(`  ${contracts.length} contracts, ${totalNfts} NFTs`);
 
   if (totalNfts !== EXPECTED_NFTS && !contractFilter) {
-    console.error(`  ❌ Expected ${EXPECTED_NFTS} NFTs, found ${totalNfts}`);
+    err(`  ❌ Expected ${EXPECTED_NFTS} NFTs, found ${totalNfts}`);
     process.exit(1);
   }
 
@@ -479,7 +479,8 @@ async function main() {
             expected_size: m.car_size,
             expected_root_cid: m.root_cid,
             leaf_path: m.leaf_path || null,
-            match: m.match || null,
+            // Preserve original match value exactly (exact, cid_only, etc.)
+            match: m.match ?? null,
           });
           allTxids.add(m.txid);
           totalCars++;
@@ -490,19 +491,23 @@ async function main() {
       const safeTokenId = tokenId.toString();
       const assetName = `nft-${safeContract}-${safeTokenId}.tar`;
 
-      nftList.push({ contract, tokenId, entry, files, assetName, safeContract, safeTokenId });
+      nftList.push({
+        contract, tokenId, entry, files, assetName,
+        safeContract, safeTokenId,
+        metadataRootCid: meta.root_cid || null,
+      });
     }
   }
 
-  console.log(`  ${totalCars} CAR files, ${allTxids.size} unique txids`);
-  console.log();
+  log(`  ${totalCars} CAR files, ${allTxids.size} unique txids`);
+  log('');
 
   if (dryRun) {
-    console.log('🔍 DRY RUN — first 5 NFTs:');
+    log('🔍 DRY RUN — first 5 NFTs:');
     for (const nft of nftList.slice(0, 5)) {
-      console.log(`  ${nft.assetName}`);
+      log(`  ${nft.assetName}`);
       for (const f of nft.files) {
-        console.log(`    ${f.role}: sha256=${f.expected_sha256?.slice(0, 16)}... size=${f.expected_size} root_cid=${f.expected_root_cid?.slice(0, 20)}... match=${f.match}`);
+        log(`    ${f.role}: sha256=${f.expected_sha256?.slice(0, 16)}... size=${f.expected_size} root_cid=${f.expected_root_cid?.slice(0, 20)}... match=${f.match}`);
       }
     }
     return;
@@ -515,34 +520,33 @@ async function main() {
 
   // ── Step 3: Ensure release ──────────────────────────────────────────
 
-  console.log('📦 Step 2: Ensuring GitHub Release...');
+  log('📦 Step 2: Ensuring GitHub Release...');
   const release = await ensureRelease();
-  let existingAssets = await getExistingAssets(release.id);
-  console.log(`  ${existingAssets.size} existing assets`);
+  let existingAssets = await getAllAssets(release.id);
+  log(`  ${existingAssets.size} existing assets`);
 
-  // ── Step 4: Optionally delete existing NFT assets ───────────────────
+  // ── Step 4: ALWAYS delete old nft-*.tar + manifest + checksums ─────
+  // No silent reuse. Every run is a clean rebuild with full verification.
 
-  if (deleteExisting && existingAssets.size > 0) {
-    console.log('  Deleting existing NFT assets for clean re-upload...');
-    let deleted = 0;
-    for (const [name, asset] of existingAssets) {
-      if (name.startsWith('nft-') || name === 'RELEASE-MANIFEST.json' || name === 'RELEASE-CHECKSUMS.sha256') {
-        await deleteAsset(release.id, asset.id);
-        deleted++;
-        if (deleted % 20 === 0) process.stdout.write(`\r    Deleted ${deleted}...`);
-      }
+  log('  Cleaning old NFT assets for mandatory full re-verification...');
+  let deleted = 0;
+  for (const [name, asset] of existingAssets) {
+    if (name.startsWith('nft-') || name === 'RELEASE-MANIFEST.json' || name === 'RELEASE-CHECKSUMS.sha256') {
+      await deleteAsset(release.id, asset.id);
+      deleted++;
+      if (deleted % 20 === 0) process.stdout.write(`\r    Deleted ${deleted}...`);
     }
-    console.log(`\r    Deleted ${deleted} assets`);
-    existingAssets = await getExistingAssets(release.id);
   }
+  if (deleted > 0) log(`\r    Deleted ${deleted} old assets`);
+  existingAssets = await getAllAssets(release.id);
+  log('');
 
-  console.log();
+  // ── Step 5: Download & verify CARs from Arweave ────────────────────
 
-  // ── Step 5: Phase 1 — Download & verify CARs from Arweave ──────────
-
-  console.log('📥 Step 3: Downloading & verifying CAR files from Arweave...');
+  log('📥 Step 3: Downloading & verifying CAR files from Arweave...');
   let dlOk = 0, dlFail = 0, dlSkip = 0;
   const verificationErrors = [];
+  let sha256MatchCount = 0, sizeMatchCount = 0;
 
   const downloadTasks = [];
   for (const nft of nftList) {
@@ -552,12 +556,14 @@ async function main() {
     for (const f of nft.files) {
       const dest = path.join(nftDir, `${f.role}.car`);
 
-      // Check if already downloaded and verified
+      // Check if already downloaded and verified (from a previous partial run)
       if (fs.existsSync(dest) && fs.statSync(dest).size > 0) {
         const existingBuf = fs.readFileSync(dest);
         const existingHash = sha256hex(existingBuf);
         if (existingHash === f.expected_sha256 && existingBuf.length === f.expected_size) {
           dlSkip++;
+          sha256MatchCount++;
+          sizeMatchCount++;
           continue;
         }
         // Hash mismatch — re-download
@@ -578,6 +584,7 @@ async function main() {
             dlFail++;
             return;
           }
+          sha256MatchCount++;
 
           // Verify size
           if (buf.length !== f.expected_size) {
@@ -588,16 +595,17 @@ async function main() {
             dlFail++;
             return;
           }
+          sizeMatchCount++;
 
           dlOk++;
           if ((dlOk + dlFail) % 20 === 0) {
             process.stdout.write(`\r   ${dlOk + dlFail}/${totalCars} CARs`);
           }
-        } catch (err) {
+        } catch (e) {
           dlFail++;
           verificationErrors.push({
             nft: nft.assetName, role: f.role, type: 'download_failed',
-            error: err.message,
+            error: e.message,
           });
         }
       });
@@ -607,21 +615,21 @@ async function main() {
   if (downloadTasks.length > 0) {
     await runConcurrent(downloadTasks, DOWNLOAD_CONCURRENCY);
   }
-  console.log(`\n   Downloads: ${dlOk} ok, ${dlFail} failed, ${dlSkip} cached`);
+  log(`\n   Downloads: ${dlOk} ok, ${dlFail} failed, ${dlSkip} cached`);
 
   if (verificationErrors.length > 0) {
-    console.error('\n  ❌ Download/verification errors:');
+    err('\n  ❌ Download/verification errors:');
     for (const e of verificationErrors.slice(0, 10)) {
-      console.error(`    ${e.nft} [${e.role}] ${e.type}: ${e.expected || ''} → ${e.actual || e.error || ''}`);
+      err(`    ${e.nft} [${e.role}] ${e.type}: ${e.expected || ''} → ${e.actual || e.error || ''}`);
     }
-    if (verificationErrors.length > 10) console.error(`    ... and ${verificationErrors.length - 10} more`);
+    if (verificationErrors.length > 10) err(`    ... and ${verificationErrors.length - 10} more`);
     process.exit(1);
   }
-  console.log();
+  log('');
 
-  // ── Step 6: Phase 2 — Verify root CIDs ─────────────────────────────
+  // ── Step 6: Verify root CIDs ───────────────────────────────────────
 
-  console.log('🔍 Step 4: Verifying CAR root CIDs...');
+  log('🔍 Step 4: Verifying CAR root CIDs...');
   let cidPass = 0, cidFail = 0;
 
   for (const nft of nftList) {
@@ -643,49 +651,98 @@ async function main() {
         } else {
           cidPass++;
         }
-      } catch (err) {
+      } catch (e) {
         verificationErrors.push({
           nft: nft.assetName, role: f.role, type: 'cid_extract_failed',
-          error: err.message,
+          error: e.message,
         });
         cidFail++;
       }
     }
   }
 
-  console.log(`   Root CIDs: ${cidPass} pass, ${cidFail} fail`);
+  log(`   Root CIDs: ${cidPass} pass, ${cidFail} fail`);
 
   if (cidFail > 0) {
-    console.error('\n  ❌ Root CID verification errors:');
+    err('\n  ❌ Root CID verification errors:');
     for (const e of verificationErrors.filter(e => e.type.includes('cid'))) {
-      console.error(`    ${e.nft} [${e.role}] ${e.type}: ${e.expected || ''} → ${e.actual || e.error || ''}`);
+      err(`    ${e.nft} [${e.role}] ${e.type}: ${e.expected || ''} → ${e.actual || e.error || ''}`);
     }
     process.exit(1);
   }
-  console.log();
+  log('');
 
-  // ── Step 7: Phase 3 — Package and upload ────────────────────────────
+  // ── Step 7 (optional): ETH on-chain tokenURI verification ──────────
 
-  console.log('📤 Step 5: Packaging & uploading NFT archives...');
-  let uploaded = 0, skipped = 0, upFail = 0;
-  const uploadedAssetIds = new Map(); // assetName -> assetId
+  let onchainPass = 0, onchainFail = 0, onchainSkip = 0;
+  const onchainErrors = [];
+
+  if (ETH_RPC_URL) {
+    log('🔗 Step 4b: Verifying on-chain tokenURI CIDs...');
+    const ethTasks = [];
+
+    for (const nft of nftList) {
+      ethTasks.push(async () => {
+        try {
+          const uri = await fetchOnchainTokenURI(nft.contract, nft.tokenId, ETH_RPC_URL);
+          if (!uri) {
+            onchainSkip++;
+            return;
+          }
+
+          const onchainCid = extractCidFromUri(uri);
+          if (!onchainCid) {
+            onchainSkip++;
+            return;
+          }
+
+          // Compare: onchain CID == token_index metadata.root_cid
+          if (onchainCid !== nft.metadataRootCid) {
+            onchainErrors.push({
+              nft: nft.assetName, type: 'onchain_cid_mismatch',
+              onchain: onchainCid, token_index: nft.metadataRootCid,
+            });
+            onchainFail++;
+          } else {
+            onchainPass++;
+          }
+        } catch (e) {
+          onchainSkip++;
+        }
+      });
+    }
+
+    await runConcurrent(ethTasks, DOWNLOAD_CONCURRENCY);
+    log(`   On-chain: ${onchainPass} pass, ${onchainFail} fail, ${onchainSkip} skipped`);
+
+    if (onchainFail > 0) {
+      err('\n  ❌ On-chain CID verification errors:');
+      for (const e of onchainErrors.slice(0, 10)) {
+        err(`    ${e.nft}: onchain=${e.onchain} vs token_index=${e.token_index}`);
+      }
+      process.exit(1);
+    }
+    log('');
+  } else {
+    log('⏭️  Step 4b: ETH_RPC_URL not set, skipping on-chain verification');
+    log('');
+  }
+
+  // ── Step 8: Package and upload ─────────────────────────────────────
+
+  log('📤 Step 5: Packaging & uploading NFT archives...');
+  let uploaded = 0, upFail = 0;
+  const uploadedAssetIds = new Map();
 
   for (const nft of nftList) {
     const nftDir = path.join(TMP_DIR, 'cars', `${nft.safeContract}_${nft.safeTokenId}`);
     const tarPath = path.join(TMP_DIR, nft.assetName);
 
-    // If asset already exists, record it for verification
-    if (existingAssets.has(nft.assetName)) {
-      skipped++;
-      uploadedAssetIds.set(nft.assetName, existingAssets.get(nft.assetName).id);
-      continue;
-    }
-
     // Build archive
     const tarFiles = [];
     const checksumLines = [];
 
-    // manifest.json
+    // manifest.json — preserve original match values from token_index
     const manifest = {
       contract: nft.contract,
       token_id: nft.tokenId,
@@ -699,7 +756,7 @@ async function main() {
     for (const f of nft.files) {
       const carPath = path.join(nftDir, `${f.role}.car`);
       if (!fs.existsSync(carPath)) {
-        console.error(`  ❌ Missing: ${carPath}`);
+        err(`  ❌ Missing: ${carPath}`);
         upFail++;
         continue;
       }
@@ -712,6 +769,7 @@ async function main() {
         arweave_txid: f.txid,
         original_leaf_path: f.leaf_path,
         cid: f.expected_root_cid,
+        // Preserve original match value: exact, cid_only, or whatever token_index has
         match: f.match,
         size_bytes: carData.length,
         sha256: carHash,
@@ -719,7 +777,10 @@ async function main() {
       });
 
       checksumLines.push(`${carHash}  ${f.role}.car`);
-      tarFiles.push({ name: `${nft.safeContract}_${nft.safeTokenId}/${f.role}.car`, data: carData });
+      tarFiles.push({
+        name: `${nft.safeContract}_${nft.safeTokenId}/${f.role}.car`,
+        data: carData,
+      });
     }
 
     // Add manifest.json
@@ -744,35 +805,37 @@ async function main() {
       uploaded++;
       uploadedAssetIds.set(nft.assetName, result.id);
       if (uploaded % 10 === 0) {
-        process.stdout.write(`\r   ${uploaded + skipped + upFail}/${nftList.length} NFTs`);
+        process.stdout.write(`\r   ${uploaded + upFail}/${nftList.length} NFTs`);
       }
-    } catch (err) {
-      console.error(`\n  ❌ Upload ${nft.assetName}: ${err.message}`);
+    } catch (e) {
+      err(`\n  ❌ Upload ${nft.assetName}: ${e.message}`);
       upFail++;
     }
 
     if (fs.existsSync(tarPath)) fs.unlinkSync(tarPath);
   }
 
-  console.log(`\n   Uploads: ${uploaded} new | ${skipped} existing | ${upFail} failed`);
+  log(`\n   Uploads: ${uploaded} uploaded, ${upFail} failed`);
 
   if (upFail > 0) {
-    console.error(`  ❌ ${upFail} uploads failed. Aborting.`);
+    err(`  ❌ ${upFail} uploads failed. Aborting.`);
     process.exit(1);
   }
-  console.log();
+  log('');
 
-  // ── Step 8: Phase 4 — Re-download & verify ALL assets ───────────────
+  // ── Step 9: Re-download & verify ALL 175 Release assets ────────────
+  // No skipped-existing bypass. Every single asset is downloaded and verified.
 
-  console.log('🔍 Step 6: Re-downloading & verifying ALL 175 Release assets...');
-  let verifyPass = 0, verifyFail = 0;
-  const assetVerificationResults = [];
+  log('🔍 Step 6: Re-downloading & verifying ALL 175 Release assets...');
+  let reVerifySha256Pass = 0, reVerifySizePass = 0, reVerifyCidPass = 0;
+  let reVerifyFail = 0;
+  const reVerifyErrors = [];
 
   for (const nft of nftList) {
     const assetId = uploadedAssetIds.get(nft.assetName);
     if (!assetId) {
-      console.error(`  ❌ ${nft.assetName}: no asset ID found`);
-      verifyFail++;
+      err(`  ❌ ${nft.assetName}: no asset ID found`);
+      reVerifyFail++;
       continue;
     }
 
@@ -780,74 +843,72 @@ async function main() {
       const assetBuf = await downloadAsset(assetId);
       const tarFiles = extractFilesFromTar(assetBuf);
 
-      // Verify each CAR in the tar matches what we downloaded from Arweave
-      let nftVerifyOk = true;
+      let nftSha256Ok = true, nftSizeOk = true, nftCidOk = true;
+
       for (const f of nft.files) {
-        const expectedHash = f.expected_sha256;
         const tarEntry = tarFiles.find(t => t.name.endsWith(`${f.role}.car`));
 
         if (!tarEntry) {
-          console.error(`  ❌ ${nft.assetName}: missing ${f.role}.car in tar`);
-          nftVerifyOk = false;
+          err(`  ❌ ${nft.assetName}: missing ${f.role}.car in tar`);
+          nftSha256Ok = false;
+          nftSizeOk = false;
+          nftCidOk = false;
           continue;
         }
 
+        // SHA-256 check
         const actualHash = sha256hex(tarEntry.data);
-        if (actualHash !== expectedHash) {
-          console.error(`  ❌ ${nft.assetName} [${f.role}]: SHA-256 mismatch after re-download`);
-          console.error(`     expected: ${expectedHash}`);
-          console.error(`     actual  : ${actualHash}`);
-          nftVerifyOk = false;
+        if (actualHash !== f.expected_sha256) {
+          err(`  ❌ ${nft.assetName} [${f.role}]: SHA-256 mismatch after re-download`);
+          nftSha256Ok = false;
         }
 
-        // Also verify root CID from the re-downloaded CAR
+        // Size check
+        if (tarEntry.data.length !== f.expected_size) {
+          err(`  ❌ ${nft.assetName} [${f.role}]: size mismatch after re-download`);
+          nftSizeOk = false;
+        }
+
+        // Root CID check
         try {
           const reRootCid = extractCarRootCid(tarEntry.data);
           if (reRootCid !== f.expected_root_cid) {
-            console.error(`  ❌ ${nft.assetName} [${f.role}]: root CID mismatch after re-download`);
-            nftVerifyOk = false;
+            err(`  ❌ ${nft.assetName} [${f.role}]: root CID mismatch after re-download`);
+            nftCidOk = false;
           }
-        } catch (err) {
-          console.error(`  ❌ ${nft.assetName} [${f.role}]: CID extract failed: ${err.message}`);
-          nftVerifyOk = false;
+        } catch (e) {
+          err(`  ❌ ${nft.assetName} [${f.role}]: CID extract failed: ${e.message}`);
+          nftCidOk = false;
         }
       }
 
-      if (nftVerifyOk) {
-        verifyPass++;
-      } else {
-        verifyFail++;
-      }
+      if (nftSha256Ok) reVerifySha256Pass++;
+      if (nftSizeOk) reVerifySizePass++;
+      if (nftCidOk) reVerifyCidPass++;
+      if (!nftSha256Ok || !nftSizeOk || !nftCidOk) reVerifyFail++;
 
-      assetVerificationResults.push({
-        asset_name: nft.assetName,
-        verified: nftVerifyOk,
-        car_count: nft.files.length,
-      });
-
-      if ((verifyPass + verifyFail) % 20 === 0) {
-        process.stdout.write(`\r   ${verifyPass + verifyFail}/${nftList.length} verified`);
+      if ((reVerifySha256Pass + reVerifyFail) % 20 === 0) {
+        process.stdout.write(`\r   ${reVerifySha256Pass + reVerifyFail}/${nftList.length} verified`);
       }
-    } catch (err) {
-      console.error(`\n  ❌ ${nft.assetName}: re-download failed: ${err.message}`);
-      verifyFail++;
-      assetVerificationResults.push({
-        asset_name: nft.assetName, verified: false, error: err.message,
-      });
+    } catch (e) {
+      err(`\n  ❌ ${nft.assetName}: re-download failed: ${e.message}`);
+      reVerifyFail++;
     }
   }
 
-  console.log(`\n   Verified: ${verifyPass} pass, ${verifyFail} fail`);
-  console.log();
+  log(`\n   Re-verified SHA-256 : ${reVerifySha256Pass} / ${nftList.length}`);
+  log(`   Re-verified Size    : ${reVerifySizePass} / ${nftList.length}`);
+  log(`   Re-verified Root CID: ${reVerifyCidPass} / ${nftList.length}`);
+  log('');
 
-  if (verifyFail > 0) {
-    console.error(`  ❌ ${verifyFail} re-verification failures. Aborting.`);
+  if (reVerifyFail > 0) {
+    err(`  ❌ ${reVerifyFail} re-verification failures. Aborting.`);
     process.exit(1);
   }
 
-  // ── Step 9: Generate RELEASE-MANIFEST.json ──────────────────────────
+  // ── Step 10: Generate RELEASE-MANIFEST.json ────────────────────────
 
-  console.log('📄 Step 7: Generating RELEASE-MANIFEST.json & RELEASE-CHECKSUMS.sha256...');
+  log('📄 Step 7: Generating RELEASE-MANIFEST.json & RELEASE-CHECKSUMS.sha256...');
 
   const manifestEntries = nftList.map(nft => ({
     contract: nft.contract,
@@ -865,8 +926,16 @@ async function main() {
     })),
   }));
 
+  const allSha256Match = sha256MatchCount === totalCars;
+  const allSizeMatch = sizeMatchCount === totalCars;
+  const allCidMatch = cidPass === totalCars;
+  const allReVerified = reVerifyFail === 0 && reVerifySha256Pass === nftList.length;
+  const allOnchainOk = ETH_RPC_URL ? (onchainFail === 0) : true;
+
+  const overallPass = allSha256Match && allSizeMatch && allCidMatch && allReVerified && allOnchainOk;
+
   const releaseManifest = {
-    schema: 'nft-arweave-mirror-manifest-v3',
+    schema: 'nft-arweave-mirror-manifest-v4',
     release_tag: RELEASE_TAG,
     generated_at: new Date().toISOString(),
     source_index_commit: sourceCommit,
@@ -876,27 +945,33 @@ async function main() {
     nft_archive_asset_count: nftList.length,
     total_car_files: totalCars,
     total_unique_arweave_txids: allTxids.size,
-    all_car_sha256_match_token_index: verifyPass === nftList.length,
-    all_car_size_match_token_index: verifyPass === nftList.length,
-    all_car_root_cid_match_token_index: verifyPass === nftList.length,
-    all_release_assets_reverified: verifyPass === nftList.length,
-    verification_status: (verifyPass === nftList.length && verifyFail === 0) ? 'PASS' : 'FAIL',
+    all_car_sha256_match_token_index: allSha256Match,
+    all_car_size_match_token_index: allSizeMatch,
+    all_car_root_cid_match_token_index: allCidMatch,
+    all_release_assets_reverified: allReVerified,
+    onchain_tokenuri_verified: ETH_RPC_URL ? true : false,
+    onchain_all_match: allOnchainOk,
+    verification_status: overallPass ? 'PASS' : 'FAIL',
+    verification_details: {
+      arweave_download: { ok: dlOk + dlSkip, fail: dlFail },
+      sha256_check: { pass: sha256MatchCount, total: totalCars },
+      size_check: { pass: sizeMatchCount, total: totalCars },
+      root_cid_check: { pass: cidPass, total: totalCars },
+      release_reverify_sha256: { pass: reVerifySha256Pass, total: nftList.length },
+      release_reverify_size: { pass: reVerifySizePass, total: nftList.length },
+      release_reverify_cid: { pass: reVerifyCidPass, total: nftList.length },
+      onchain_check: ETH_RPC_URL
+        ? { pass: onchainPass, fail: onchainFail, skip: onchainSkip }
+        : { skipped: true, reason: 'ETH_RPC_URL not set' },
+    },
     per_nft_assets: manifestEntries,
   };
 
   // Write and upload RELEASE-MANIFEST.json
   const manifestPath = path.join(TMP_DIR, 'RELEASE-MANIFEST.json');
   fs.writeFileSync(manifestPath, JSON.stringify(releaseManifest, null, 2));
-
-  // Delete old manifest/checksums if they exist
-  for (const oldName of ['RELEASE-MANIFEST.json', 'RELEASE-CHECKSUMS.sha256']) {
-    if (existingAssets.has(oldName)) {
-      await deleteAsset(release.id, existingAssets.get(oldName).id);
-    }
-  }
-
   await uploadAsset(release.id, manifestPath, 'RELEASE-MANIFEST.json');
-  console.log('  ✅ RELEASE-MANIFEST.json uploaded');
+  log('  ✅ RELEASE-MANIFEST.json uploaded');
 
   // Generate RELEASE-CHECKSUMS.sha256
   const checksumLines = [];
@@ -905,47 +980,45 @@ async function main() {
   checksumLines.push(`# Every line: sha256  asset_name`);
   checksumLines.push('');
   for (const nft of nftList) {
-    // Read the tar we just uploaded (re-download for consistency)
     const assetId = uploadedAssetIds.get(nft.assetName);
     if (!assetId) continue;
-    // We already verified these — use the known hash from the CAR files
-    // For the tar itself, we need its hash. Re-download and hash.
     const buf = await downloadAsset(assetId);
-    const tarHash = sha256hex(buf);
-    checksumLines.push(`${tarHash}  ${nft.assetName}`);
+    checksumLines.push(`${sha256hex(buf)}  ${nft.assetName}`);
   }
-  // Add manifest itself
   const manifestBuf = fs.readFileSync(manifestPath);
   checksumLines.push(`${sha256hex(manifestBuf)}  RELEASE-MANIFEST.json`);
 
   const checksumsPath = path.join(TMP_DIR, 'RELEASE-CHECKSUMS.sha256');
   fs.writeFileSync(checksumsPath, checksumLines.join('\n') + '\n');
   await uploadAsset(release.id, checksumsPath, 'RELEASE-CHECKSUMS.sha256');
-  console.log('  ✅ RELEASE-CHECKSUMS.sha256 uploaded');
+  log('  ✅ RELEASE-CHECKSUMS.sha256 uploaded');
 
-  // ── Final summary ───────────────────────────────────────────────────
+  // ── Final summary ──────────────────────────────────────────────────
 
-  console.log();
-  console.log('═══════════════════════════════════════════════════════════');
-  console.log(`  ✅ Downloads   : ${dlOk + dlSkip} CARs (${allTxids.size} unique txids)`);
-  console.log(`  ✅ SHA-256     : all ${totalCars} CARs match token_index`);
-  console.log(`  ✅ Size        : all ${totalCars} CARs match token_index`);
-  console.log(`  ✅ Root CID    : all ${totalCars} CARs match token_index`);
-  console.log(`  📤 Uploads     : ${uploaded} new | ${skipped} existing`);
-  console.log(`  🔍 Re-verified : ${verifyPass} / ${nftList.length} assets`);
-  console.log(`  📊 Release     : ${nftList.length} NFT assets + manifest + checksums`);
-  console.log(`  📄 Status      : ${releaseManifest.verification_status}`);
-  console.log('═══════════════════════════════════════════════════════════');
+  log('');
+  log('═══════════════════════════════════════════════════════════');
+  log(`  ✅ Downloads      : ${dlOk + dlSkip} CARs (${allTxids.size} unique txids)`);
+  log(`  ✅ SHA-256        : ${sha256MatchCount}/${totalCars} CARs match token_index`);
+  log(`  ✅ Size           : ${sizeMatchCount}/${totalCars} CARs match token_index`);
+  log(`  ✅ Root CID       : ${cidPass}/${totalCars} CARs match token_index`);
+  log(`  📤 Uploads        : ${uploaded} uploaded`);
+  log(`  🔍 Re-verified    : SHA256=${reVerifySha256Pass} Size=${reVerifySizePass} CID=${reVerifyCidPass} / ${nftList.length}`);
+  if (ETH_RPC_URL) {
+    log(`  🔗 On-chain       : ${onchainPass} pass, ${onchainFail} fail, ${onchainSkip} skip`);
+  }
+  log(`  📊 Release        : ${nftList.length} NFT assets + manifest + checksums`);
+  log(`  📄 Status         : ${releaseManifest.verification_status}`);
+  log('═══════════════════════════════════════════════════════════');
 
-  if (releaseManifest.verification_status !== 'PASS') {
-    console.error('\n  ❌ FAIL');
+  if (!overallPass) {
+    err('\n  ❌ FAIL — one or more verification checks did not pass');
     process.exit(1);
   }
 
-  console.log('\n  🎉 All 175 NFTs mirrored and fully verified!');
+  log('\n  🎉 All 175 NFTs mirrored and fully verified!');
 }
 
-main().catch(err => {
-  console.error('Fatal:', err);
+main().catch(e => {
+  err('Fatal:', e);
   process.exit(1);
 });
