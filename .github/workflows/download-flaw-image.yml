@@ -1,4 +1,4 @@
-name: Download flaw-image-provenance.tar from Arweave
+name: Download flaw images from Arweave
 
 on:
   workflow_dispatch:
@@ -15,58 +15,62 @@ jobs:
           TXID="9klmArmByJNOGeHzfnrAhB6x6w7sKSYLS1zQNLL7GLs"
           for GW in "https://ar-io.dev" "https://arweave.net" "https://g8way.io"; do
             echo "Trying: $GW"
-            if curl -L --connect-timeout 30 --max-time 600 --retry 3 --retry-delay 10 "$GW/$TXID" -o /tmp/arweave-raw.bin 2>&1; then
+            if curl -L --connect-timeout 30 --max-time 600 --retry 3 --retry-delay 10 \
+              "$GW/$TXID" -o /tmp/arweave-raw.bin 2>&1; then
               SIZE=$(stat -c%s /tmp/arweave-raw.bin 2>/dev/null || echo 0)
               echo "Downloaded: $SIZE bytes from $GW"
               [ "$SIZE" -gt 1000 ] && break
             fi
           done
           echo "Type: $(file /tmp/arweave-raw.bin)"
+          echo "SHA-256: $(sha256sum /tmp/arweave-raw.bin | awk '{print $1}')"
 
-      - name: List and extract from archive
+      - name: Save raw archive and extract images
         run: |
           FILE_TYPE=$(file -b /tmp/arweave-raw.bin)
-          echo "=== File type: $FILE_TYPE ==="
+          echo "File type: $FILE_TYPE"
+
+          mkdir -p archive/evidence/flaw-images
 
           if echo "$FILE_TYPE" | grep -qi "zip"; then
-            echo "=== ZIP contents ==="
-            unzip -l /tmp/arweave-raw.bin 2>&1
+            echo "ZIP archive detected"
+            # Save original ZIP as-is
+            cp /tmp/arweave-raw.bin archive/evidence/flaw-archive-bundle.zip
 
-            echo "=== Attempting extraction ==="
-            # Try all possible paths
-            unzip -o /tmp/arweave-raw.bin -d /tmp/zipout/ 2>&1
-            echo "=== Extracted files ==="
-            find /tmp/zipout -type f -ls 2>/dev/null
+            # Extract preserving directory structure
+            unzip -o /tmp/arweave-raw.bin -d archive/evidence/flaw-images/
 
-            # Look for any .tar file
-            FOUND=$(find /tmp/zipout -name "*.tar" -o -name "*flaw*" -o -name "*provenance*" 2>/dev/null | head -1)
-            if [ -n "$FOUND" ]; then
-              echo "Found: $FOUND"
-              cp "$FOUND" /tmp/flaw-image-provenance.tar
-            fi
+            echo "=== Extracted contents ==="
+            find archive/evidence/flaw-images -type f -exec ls -la {} \;
+
           elif echo "$FILE_TYPE" | grep -qi "tar"; then
-            cp /tmp/arweave-raw.bin /tmp/flaw-image-provenance.tar
-            echo "=== Tar contents ==="
-            tar tf /tmp/flaw-image-provenance.tar | head -20
+            cp /tmp/arweave-raw.bin archive/evidence/flaw-image-provenance.tar
+            tar xvf /tmp/arweave-raw.bin -C archive/evidence/flaw-images/
           fi
 
-          if [ -f /tmp/flaw-image-provenance.tar ]; then
-            echo "=== SUCCESS ==="
-            ls -la /tmp/flaw-image-provenance.tar
-            sha256sum /tmp/flaw-image-provenance.tar
-          else
-            echo "=== FAILURE: Could not extract ==="
-            ls -la /tmp/zipout/ 2>/dev/null
-            exit 1
-          fi
-
-      - name: Deploy to repo
-        if: success()
+      - name: Verify and report
         run: |
-          mkdir -p archive/evidence
-          cp /tmp/flaw-image-provenance.tar archive/evidence/
+          echo "=== Mirror Summary ==="
+          echo "Raw archive:"
+          ls -la archive/evidence/flaw-archive-bundle.zip 2>/dev/null || echo "  (not zip)"
+          ls -la archive/evidence/flaw-image-provenance.tar 2>/dev/null || echo "  (not tar)"
+          echo ""
+          echo "Extracted files:"
+          find archive/evidence/flaw-images -type f | wc -l
+          echo "files extracted"
+          du -sh archive/evidence/flaw-images/
+          echo ""
+          echo "SHA-256 of raw archive:"
+          sha256sum archive/evidence/flaw-archive-bundle.zip 2>/dev/null || \
+          sha256sum archive/evidence/flaw-image-provenance.tar 2>/dev/null
+
+      - name: Commit and push
+        run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add archive/evidence/flaw-image-provenance.tar
-          git commit -m "feat: add flaw-image-provenance.tar from Arweave" || echo "No changes"
+          git add archive/evidence/flaw-archive-bundle.zip \
+                  archive/evidence/flaw-images/ \
+                  archive/evidence/FLAW-MIRROR-NOTES.md
+          git status
+          git commit -m "feat: mirror flaw images from Arweave (11 JPGs, Core Object Alpha physical evidence)" || echo "No changes"
           git push
