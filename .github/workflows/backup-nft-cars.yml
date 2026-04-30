@@ -1,0 +1,35 @@
+name: Backup NFT CARs to Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      concurrency:
+        description: 'Parallel download count'
+        default: '10'
+        required: false
+      dry_run:
+        description: 'Dry run (list only, no download)'
+        type: boolean
+        default: false
+
+jobs:
+  download-and-release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Download NFT CARs and upload to release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CONCURRENCY: ${{ inputs.concurrency || '10' }}
+          DRY_RUN: ${{ inputs.dry_run && '1' || '' }}
+          RELEASE_TAG: nft-backup-v1
+        run: |
+          node scripts/download-nft-cars.mjs
