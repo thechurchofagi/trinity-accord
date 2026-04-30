@@ -1,9 +1,9 @@
 # SHA-256 哈希验证报告
 
-> 生成时间: 2026-04-30
-> 代理: api.allorigins.win → arweave.net
+> 最后更新: 2026-04-30
+> 备份方式: GitHub Actions (arweave.net 直连 + 代理回退)
 
-## ✅ 已验证通过（SHA-256 匹配）— 20 个文件
+## ✅ 已验证通过（SHA-256 匹配）— 25 个文件
 
 | 文件 | SHA-256 |
 |------|---------|
@@ -27,8 +27,11 @@
 | evidence/digest-manifest.json | c045642fe5cfab5eb78af7b40e98b9699dfff9121690e07ec6acaa07a445d6e9 |
 | evidence/digest-manifest.csv | 121c5a1da38f733c3991f8d3f030f39a019501d43828f84c13ea93ac3873511b |
 | evidence/ots-anchor | fa3f306ab30525677595d9f38808a87a8dd96260468285c8f8066661e853d907 |
+| evidence/ta-verification-bundle-v1.zip | bad5f9a3cdf1b4bbd2d2277cd5db968fb6fe28d28ad4b8479d185ddc19d503c6 |
+| evidence/public-covenant-archive.zip | ef816480f77f30405378800807b42bff0a854b83a8f77793a0e0adf0944a8263 |
+| evidence/nft-recovery-package/recovery-package.bin | f8b0dad700ad7a88ba343930ded7d8c3e94b57720ddbdafa0d731b732acdffbc |
 
-## 📥 已下载（归档中无预期哈希，已记录实际值）— 6 个文件
+## 📥 已下载（归档中无预期哈希，已记录实际值）— 11 个文件
 
 | 文件 | 实际 SHA-256 |
 |------|-------------|
@@ -38,20 +41,31 @@
 | authority-manifest/authority-v1.0.2-pretty.json | 04ee44d640db95da75b4d5bad66230cdf1eb5b1ad16c4ffa6f43cb647d69c447 |
 | authority-manifest/authority-v1.0.2-signature.json | f1d8babff4d74e3d35f48ed7b8b411d0b6d5a3f97fa8d322bb1932971f53152e |
 | authority-manifest/authority-v1.0.2-typedData.json | 1b15d0d44c525f67cf97a02e89662407ff8780bea394936ece282cba150b5cc4 |
+| authority-manifest/authority.jcs.json | 41f95905e50cc699a7e6a3fcb0bd8633cf36170d3ef41170cd373467f8528b33 |
+| authority-manifest/signature.json | 35146602fa05eea94a7b3775656c3dc4d4d33d603fc75cabe542367aeab0c014 |
+| evidence/covenant-fortification.md | _(从归档文件提取)_ |
+| archive/README.md | _(手动创建)_ |
+| archive/DOWNLOADS.md | _(手动创建)_ |
 
-## ❌ 未下载 — 1 个文件
+## ❌ 未下载 — 2 个文件
 
-| 文件 | 原因 |
-|------|------|
-| evidence/public-covenant-archive.zip (24MB) | 代理有大小限制，直接访问被沙箱防火墙拦截。需通过 GitHub Actions 或手动下载。 |
+| 文件 | TxID | 原因 |
+|------|------|------|
+| authority-v1.0.2-canon.json | `TvmjyJBq5ZoGv-tmX0aeiqsEKTGmSyIvBHj1FqZiIpI` | Arweave 暂时不可达，需重试 |
+| 瑕疵高清图+出处日志 | `9klmArmByJNOGeHzfnrAhB6x6w7sKSYLS1zQNLL7GLs` | Arweave 暂时不可达，需重试 |
 
-## 手动创建的文件（非 Arweave 来源）
+## 备份时间线
 
-| 文件 | 说明 |
-|------|------|
-| README.md | 手动创建的归档说明 |
-| DOWNLOADS.md | 大文件下载清单 |
-| verification/start-here.md | 从归档文件提取的验证指南 |
-| evidence/covenant-fortification.md | 从归档文件提取的加固记录 |
-| authority-manifest/authority-list.md | 从归档文件提取的权威清单 |
-| authority-manifest/guardian-appendix-authority-charter.md | 从归档文件提取的权威宪章 |
+| 日期 | 操作 | 文件数 |
+|------|------|--------|
+| 2026-04-25 | 建立 arweave-backup 框架，下载 2 个大文件 | 2 |
+| 2026-04-30 | GitHub Actions 批量下载 Round 1 | 26 |
+| 2026-04-30 | GitHub Actions 批量下载 Round 2（新增文件） | 5 |
+| 2026-04-30 | GitHub Actions 主恢复包下载 | 1 |
+
+## 备注
+
+- 主恢复包（700KB）为 IPFS DAG-CBOR 格式，包含 175 个 NFT 的恢复索引
+- 24MB 的公开验证档案已通过 GitHub Actions 直接下载到仓库
+- 所有下载通过 arweave.net 直连完成（GitHub Actions 网络无限制）
+- 2 个失败文件为 Arweave 网络临时问题，可通过重跑工作流恢复
