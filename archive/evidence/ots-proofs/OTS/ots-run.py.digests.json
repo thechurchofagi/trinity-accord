@@ -1,0 +1,26 @@
+{
+  "path": "E:\\guardian-release-2025-09-03\\tools\\ots-run.py",
+  "size_bytes": 1042,
+  "suite": [
+    "sha256",
+    "sha3-256",
+    "blake2b-256",
+    "shake256-256",
+    "sha512-256",
+    "blake3-256"
+  ],
+  "digests": {
+    "sha256": "a24b307cce7d163e5d068dd80e7b7bfc4aa781e14336f542acc8ca86b7a2a9f8",
+    "sha3_256": "3f046ba737ac3e285e4ae913b1837fd8c42d257ade75e6796e43752c6695bcd9",
+    "blake2b_256": "98397a14e4bce6cd996f3dc36a1c1e801f7122dc01916a1d4b14ef52c8c40187b9f93007d4d21da3825e521c12f0c2cb080b92dea6bb30fe326ddff14862feb4",
+    "shake256_256": "c3123aafbddf03f55154381d98e60ebb78bf2405075a41956664644f0a610946",
+    "sha512_256": "1b1d407491ccd7e884c9975425cb90b9777b068db3d7230589ec932c161f82fb",
+    "blake3_256": "f3c071f34a6208437689a537129f7ffcdbafa4d4d98c96f49ef8c6e527f652fa"
+  },
+  "quorum": {
+    "require": 6,
+    "of": 6
+  },
+  "suite_version": "v2",
+  "created_at": "2025-09-03T23:12:40.372Z"
+}
