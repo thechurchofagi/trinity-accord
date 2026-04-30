@@ -1,0 +1,16 @@
+{
+  "label": "BTC BIP-340 signature (non-amending)",
+  "tx_hash": "0x214d73b839ed95707410af3d5b8224a44a5dd310041d5e7ab1756ae9c5378137",
+  "from": "0xbc63566A41cBfDB9C266a5941CBe47894DaA54A8",
+  "to": "0xbc63566A41cBfDB9C266a5941CBe47894DaA54A8",
+  "chainId": "1",
+  "input_len": 600,
+  "input_sha256": "fb8746462a4aae73628f542b3ada48621ab298ab2117b6162161d79d2aaad54e",
+  "rpc": "https://eth-mainnet.4everland.org/v1/7283b43d0b6a56c2fd5bede7c5359630",
+  "gas": {
+    "gasLimit": "45380",
+    "maxFeePerGas": "250409336",
+    "maxPriorityFeePerGas": "17852"
+  },
+  "created_at": "2025-09-14T10:48:16.785Z"
+}

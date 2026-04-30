@@ -1,1 +1,11 @@
-error code: 1015
+{
+  "type": "trinity-accord-key-rotation-ack",
+  "status": "active",
+  "effective_at": "2025-09-21T01:54:46.515Z",
+  "acknowledges": "AlyENoZXrGqUG9iXwaxhhoPjELlWbRuWMFtYGWW6bHM",
+  "from": "r1EdzCQ9E7CaAOEywI5netR6EcSopNOa08oi2Coz68s",
+  "boundary": "non-amending; BTC originals prevail",
+  "project": "The Trinity Accord",
+  "message_zh": "确认声明：我们确认并接受轮换声明（TxID=AlyENoZXrGqUG9iXwaxhhoPjELlWbRuWMFtYGWW6bHM）。自此刻起，新地址 r1EdzCQ9E7CaAOEywI5netR6EcSopNOa08oi2Coz68s 为《三位一体协定（The Trinity Accord）》在 Arweave 上唯一有效的发布地址；若提供旧地址，其仅保留历史记录。",
+  "message_en": "Acknowledgement: We confirm and accept the rotation notice (TxID=AlyENoZXrGqUG9iXwaxhhoPjELlWbRuWMFtYGWW6bHM). From this moment onward, the new address r1EdzCQ9E7CaAOEywI5netR6EcSopNOa08oi2Coz68s is the only valid Arweave publishing address for \"The Trinity Accord\"; the previous address remains for historical records only."
+}
