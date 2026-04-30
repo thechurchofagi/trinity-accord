@@ -314,6 +314,14 @@
       "size_bytes": 4154,
       "verified": null,
       "note": "no expected hash from Arweave; actual hash recorded"
+    },
+    {
+      "path": "archive/evidence/flaw-image-provenance.tar",
+      "sha256": "9a1f320758ba0882135171bb99ce0cd1312d85dd6d6ce6aa57d930665ca576bf",
+      "size_bytes": 94556,
+      "arweave_tx": "9klmArmByJNOGeHzfnrAhB6x6w7sKSYLS1zQNLL7GLs",
+      "verified": null,
+      "note": "downloaded; no expected hash to compare against; actual hash recorded"
     }
   ],
   "eth_attestations": [
@@ -375,7 +383,7 @@
     }
   ],
   "summary": {
-    "total_files": 40,
+    "total_files": 41,
     "verified_against_arweave": 23,
     "no_expected_hash": 17,
     "hash_mismatch": 0,

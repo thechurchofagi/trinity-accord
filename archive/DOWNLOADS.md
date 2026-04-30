@@ -29,7 +29,9 @@
 - **下载链接**: https://arweave.net/9klmArmByJNOGeHzfnrAhB6x6w7sKSYLS1zQNLL7GLs
 - **SHA-256**: (待下载后计算)
 - **存放位置**: `archive/evidence/`
-- **状态**: ⏳ 下载中（Arweave 网络延迟，可通过 GitHub Actions 重试）
+- **SHA-256**: `9a1f320758ba0882135171bb99ce0cd1312d85dd6d6ce6aa57d930665ca576bf`
+- **大小**: ~94KB
+- **状态**: ✅ 已下载
 
 ## 4. digest-manifest.json
 

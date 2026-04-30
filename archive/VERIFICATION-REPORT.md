@@ -64,12 +64,13 @@
 | authority-manifest/authority-list.md | 8a77b4be8a194cdbe6d1be22488b65c338a003e06429f4b1879d1a960c1b94f4 | 已记录 |
 | authority-manifest/guardian-appendix-authority-charter.md | f59ef9db7a92984c2264e59e6186639b4302bfdb4ce0dc726acb33e6c2a41026 | 已记录 |
 | canonical-pointers/start-here.v1.json | ac8484caed9476dc78a4b79da659e6516fdf8f61a2b2f702c0d66f8b503bb5dd | 已记录 |
+| evidence/flaw-image-provenance.tar | 9a1f320758ba0882135171bb99ce0cd1312d85dd6d6ce6aa57d930665ca576bf | 已下载 (94KB) |
 
-## ❌ 未下载 — 1 个文件
+## ✅ 已下载（无预期哈希，已记录实际值）— 12 个文件
 
-| 文件 | TxID | 状态 |
-|------|------|------|
-| 瑕疵高清图+出处日志 (flaw-image-provenance.tar) | 9klmArmByJNOGeHzfnrAhB6x6w7sKSYLS1zQNLL7GLs | ⏳ 下载中（Arweave 网络延迟） |
+| 文件 | 实际 SHA-256 | 状态 |
+|------|-------------|------|
+| evidence/flaw-image-provenance.tar | 9a1f320758ba0882135171bb99ce0cd1312d85dd6d6ce6aa57d930665ca576bf | 已下载 (94,556 bytes) |
 
 ## 备份时间线
 
