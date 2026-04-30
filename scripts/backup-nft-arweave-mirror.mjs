@@ -353,13 +353,21 @@ async function deleteAsset(releaseId, assetId) {
   }
 }
 
-async function downloadAsset(assetId) {
-  const res = await ghFetch(
-    `https://api.github.com/repos/${REPO}/releases/assets/${assetId}`,
-    { headers: ghHeaders({ Accept: 'application/octet-stream' }) }
-  );
-  if (!res.ok) throw new Error(`Download asset failed: ${res.status}`);
-  return Buffer.from(await res.arrayBuffer());
+async function downloadAsset(assetId, retries = MAX_RETRIES) {
+  for (let attempt = 0; attempt <= retries; attempt++) {
+    const res = await ghFetch(
+      `https://api.github.com/repos/${REPO}/releases/assets/${assetId}`,
+      { headers: ghHeaders({ Accept: 'application/octet-stream' }) }
+    );
+    if (res.ok) return Buffer.from(await res.arrayBuffer());
+    if ((res.status >= 500 || res.status === 403 || res.status === 429) && attempt < retries) {
+      const wait = 5000 * (attempt + 1);
+      log(`    ⚠️  downloadAsset HTTP ${res.status}, retry ${attempt + 1}/${retries} in ${wait / 1000}s...`);
+      await sleep(wait);
+      continue;
+    }
+    throw new Error(`Download asset failed: ${res.status}`);
+  }
 }
 
 // ─── Tar creation (pure Node.js) ───────────────────────────────────────────
