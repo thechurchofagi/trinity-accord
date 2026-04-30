@@ -2,6 +2,9 @@ name: Download & Verify Arweave Files
 
 on:
   workflow_dispatch:
+  push:
+    tags:
+      - 'run-download-*'
 
 jobs:
   download-and-verify:
