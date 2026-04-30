@@ -15,7 +15,7 @@ jobs:
 
       - name: Create archive directories
         run: |
-          mkdir -p archive/{guardian-principles,authority-manifest,btc-signature,eth-witness,verification,evidence,canonical-pointers,rotation,scripts,legacy-mirror}
+          mkdir -p archive/{guardian-principles,authority-manifest,btc-signature,eth-witness,verification,evidence,canonical-pointers,rotation,scripts}
 
       - name: Download and verify all files
         run: |
@@ -35,6 +35,15 @@ jobs:
 
             if [ ! -f "$dest" ] || [ ! -s "$dest" ]; then
               echo "   ❌ DOWNLOAD FAILED"
+              rm -f "$dest"
+              FAIL=$((FAIL + 1))
+              return 1
+            fi
+
+            # Check if we got an HTML error page instead of actual content
+            if head -1 "$dest" | grep -qi "<html\|404\|error\|not found"; then
+              echo "   ❌ GOT ERROR PAGE (not real content)"
+              rm -f "$dest"
               FAIL=$((FAIL + 1))
               return 1
             fi
@@ -45,12 +54,12 @@ jobs:
                 echo "   ✅ PASS $actual"
                 PASS=$((PASS + 1))
               else
-                echo "   ❌ FAIL expected=$expected actual=$actual"
-                FAIL=$((FAIL + 1))
+                echo "   ❌ HASH MISMATCH expected=$expected actual=$actual"
                 rm -f "$dest"
+                FAIL=$((FAIL + 1))
               fi
             else
-              echo "   📥 OK (no expected hash) $actual"
+              echo "   📥 OK (no expected hash) sha256=$actual"
               PASS=$((PASS + 1))
             fi
           }
@@ -73,7 +82,7 @@ jobs:
           # ETH Witness
           download_and_verify "UouXngnUjcEkpOwgq5ajInrDpwKrGhtUVDLmlBorVjQ" "archive/eth-witness/eth-witness.json" "3c187c6b764a1d53984588875c1c1fed3f1c91fd165512ad8dfa4f279542a65f" "ETH Witness"
 
-          # Rotation
+          # Rotation (no pre-existing hash)
           download_and_verify "AlyENoZXrGqUG9iXwaxhhoPjELlWbRuWMFtYGWW6bHM" "archive/rotation/rotation-notice-old.txt" "" "Rotation Notice"
           download_and_verify "GD_uH4GLXSKKp0Wz1QGjoE_FuVWZZ4fylncPFHZd76U" "archive/rotation/acknowledgement-new.txt" "" "Acknowledgement"
 
@@ -97,38 +106,26 @@ jobs:
           download_and_verify "i02XhY7No6NLZDfEwFUU6nZoGaPu7K0f42LDNDNnZEo" "archive/evidence/digest-manifest.csv" "121c5a1da38f733c3991f8d3f030f39a019501d43828f84c13ea93ac3873511b" "digest-manifest.csv"
           download_and_verify "TTi9d8fqm9Cw4yRPkwX4gdlaRzBnjJID-LAs9Y3CS0M" "archive/evidence/ots-anchor" "fa3f306ab30525677595d9f38808a87a8dd96260468285c8f8066661e853d907" "OTS Anchor"
 
-          # 24MB file - use direct arweave.net (GitHub runners have internet access)
-          echo "⏳ Downloading 24MB Public Covenant Archive directly..."
-          curl -sL --max-time 300 "https://arweave.net/j6anZ4m5Wwvx5P_9-kM2EVG35TyKtm1lgaKfhT743rk" -o "archive/evidence/public-covenant-archive.zip"
-          if [ -f "archive/evidence/public-covenant-archive.zip" ] && [ -s "archive/evidence/public-covenant-archive.zip" ]; then
-            actual=$(sha256sum "archive/evidence/public-covenant-archive.zip" | cut -d' ' -f1)
-            expected="ef816480f77f30405378800807b42bff0a854b83a8f77793a0e0adf0944a8263"
-            size=$(stat -c%s "archive/evidence/public-covenant-archive.zip")
-            echo "   Size: $size bytes"
-            echo "   SHA-256: $actual"
-            if [ "$actual" = "$expected" ]; then
-              echo "   ✅ PASS"
-            else
-              echo "   ❌ FAIL (expected: $expected)"
-              rm -f "archive/evidence/public-covenant-archive.zip"
-            fi
-          else
-            echo "   ❌ DOWNLOAD FAILED"
-          fi
-
           echo ""
           echo "========================================="
           echo "  PASS: $PASS  FAIL: $FAIL"
           echo "========================================="
 
-      - name: Commit and push
+      - name: Commit only new/changed files (never delete)
         run: |
           git config user.email "guardian@trinityaccord.org"
           git config user.name "Trinity Accord Guardian"
+          # Only add new or modified files, never stage deletions
+          git add archive/ --intent-to-add 2>/dev/null || true
+          git diff --name-only --diff-filter=A -- archive/ | head -50
           git add archive/
+          # Unstage any deletions
+          git diff --cached --name-only --diff-filter=D | while read f; do
+            git reset HEAD "$f"
+          done
           if git diff --cached --quiet; then
             echo "No new files to commit"
           else
-            git commit -m "backup: Arweave files (SHA-256 verified, including 24MB archive)"
+            git commit -m "backup: Arweave files (SHA-256 verified, no deletions)"
             git push
           fi
