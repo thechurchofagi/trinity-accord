@@ -19,7 +19,6 @@ jobs:
 
       - name: Download and verify all files
         run: |
-          BASE="https://api.allorigins.win/raw?url=https://arweave.net"
           PASS=0
           FAIL=0
 
@@ -28,24 +27,34 @@ jobs:
             local dest="$2"
             local expected="$3"
             local label="$4"
+            local max_time="${5:-120}"
 
             mkdir -p "$(dirname "$dest")"
             echo "📥 $label"
-            curl -sL --max-time 120 "$BASE/$txid" -o "$dest" 2>/dev/null
 
-            if [ ! -f "$dest" ] || [ ! -s "$dest" ]; then
-              echo "   ❌ DOWNLOAD FAILED"
-              rm -f "$dest"
-              FAIL=$((FAIL + 1))
-              return 1
-            fi
+            # Try direct arweave.net first, then fallback proxies
+            local urls=(
+              "https://arweave.net/$txid"
+              "https://ar-io.net/$txid"
+              "https://api.allorigins.win/raw?url=https://arweave.net/$txid"
+            )
 
-            # Check if we got an HTML error page instead of actual content
-            if head -1 "$dest" | grep -qi "<html\|404\|error\|not found"; then
-              echo "   ❌ GOT ERROR PAGE (not real content)"
-              rm -f "$dest"
+            downloaded=0
+            for url in "${urls[@]}"; do
+              echo "   trying: $url"
+              if curl -sL --max-time "$max_time" "$url" -o "$dest" 2>/dev/null; then
+                if [ -s "$dest" ] && ! head -1 "$dest" | grep -qi "<html\|404\|error\|not found"; then
+                  downloaded=1
+                  break
+                fi
+                rm -f "$dest"
+              fi
+            done
+
+            if [ "$downloaded" != "1" ]; then
+              echo "   ❌ DOWNLOAD FAILED (all sources)"
               FAIL=$((FAIL + 1))
-              return 1
+              return 0
             fi
 
             actual=$(sha256sum "$dest" | cut -d' ' -f1)
@@ -113,8 +122,6 @@ jobs:
 
       - name: Download missing files (round 2)
         run: |
-          BASE="https://api.allorigins.win/raw?url=https://arweave.net"
-
           download_and_verify() {
             local txid="$1"
             local dest="$2"
@@ -124,7 +131,29 @@ jobs:
 
             mkdir -p "$(dirname "$dest")"
             echo "📥 $label"
-            curl -sL --max-time "$max_time" "$BASE/$txid" -o "$dest" 2>/dev/null
+
+            local urls=(
+              "https://arweave.net/$txid"
+              "https://ar-io.net/$txid"
+              "https://api.allorigins.win/raw?url=https://arweave.net/$txid"
+            )
+
+            downloaded=0
+            for url in "${urls[@]}"; do
+              echo "   trying: $url"
+              if curl -sL --max-time "$max_time" "$url" -o "$dest" 2>/dev/null; then
+                if [ -s "$dest" ] && ! head -1 "$dest" | grep -qi "<html\|404\|error\|not found"; then
+                  downloaded=1
+                  break
+                fi
+                rm -f "$dest"
+              fi
+            done
+
+            if [ "$downloaded" != "1" ]; then
+              echo "   ❌ DOWNLOAD FAILED (all sources)"
+              return 1
+            fi
 
             if [ ! -f "$dest" ] || [ ! -s "$dest" ]; then
               echo "   ❌ DOWNLOAD FAILED"
@@ -169,32 +198,33 @@ jobs:
 
       - name: Download main recovery package (large file)
         run: |
-          BASE="https://api.allorigins.win/raw?url=https://arweave.net"
           TXID="O-Rk3kFxesPGhuYP4KHAZl54xR2urDRKcGaVqjVnB-Q"
           DEST="archive/evidence/nft-recovery-package"
           mkdir -p "$DEST"
 
           echo "📥 Main Recovery Package (175 NFTs) — attempting download..."
-          echo "   This may be large. Trying with 300s timeout."
 
-          curl -sL --max-time 300 "$BASE/$TXID" -o "$DEST/recovery-package.bin" 2>/dev/null
+          urls=(
+            "https://arweave.net/$TXID"
+            "https://ar-io.net/$TXID"
+          )
 
-          if [ ! -f "$DEST/recovery-package.bin" ] || [ ! -s "$DEST/recovery-package.bin" ]; then
-            echo "   ❌ DOWNLOAD FAILED (timeout or proxy limit)"
-            echo "   ℹ️  Manual download required: https://arweave.net/$TXID"
-            rm -f "$DEST/recovery-package.bin"
-            exit 0
-          fi
+          for url in "${urls[@]}"; do
+            echo "   trying: $url"
+            if curl -sL --max-time 600 "$url" -o "$DEST/recovery-package.bin" 2>/dev/null; then
+              if [ -s "$DEST/recovery-package.bin" ] && ! head -1 "$DEST/recovery-package.bin" | grep -qi "<html\|404\|error\|not found"; then
+                actual=$(sha256sum "$DEST/recovery-package.bin" | cut -d' ' -f1)
+                size=$(stat -c%s "$DEST/recovery-package.bin")
+                echo "   ✅ Downloaded: $size bytes, sha256=$actual"
+                exit 0
+              fi
+              rm -f "$DEST/recovery-package.bin"
+            fi
+          done
 
-          if head -1 "$DEST/recovery-package.bin" | grep -qi "<html\|404\|error\|not found"; then
-            echo "   ❌ GOT ERROR PAGE (proxy blocked large file)"
-            rm -f "$DEST/recovery-package.bin"
-            exit 0
-          fi
-
-          actual=$(sha256sum "$DEST/recovery-package.bin" | cut -d' ' -f1)
-          size=$(stat -c%s "$DEST/recovery-package.bin")
-          echo "   ✅ Downloaded: $size bytes, sha256=$actual"
+          echo "   ❌ DOWNLOAD FAILED (all sources)"
+          echo "   ℹ️  Manual download required: https://arweave.net/$TXID"
+          rm -f "$DEST/recovery-package.bin"
 
       - name: Commit only new/changed files (never delete)
         run: |
