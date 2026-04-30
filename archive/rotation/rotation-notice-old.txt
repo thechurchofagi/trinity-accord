@@ -1,0 +1,13 @@
+{
+  "type": "trinity-accord-key-rotation",
+  "status": "deprecated",
+  "reason": "compromised",
+  "effective_at": "2025-09-21T01:37:33.076Z",
+  "from": "8Y8GRimuESN_u8tJihCd5nywb-X-lJ_2vWqFAfHeQIE",
+  "to": "r1EdzCQ9E7CaAOEywI5netR6EcSopNOa08oi2Coz68s",
+  "boundary": "non-amending; BTC originals prevail",
+  "project": "The Trinity Accord",
+  "manifest_sha256": "41f95905e50cc699a7e6a3fcb0bd8633cf36170d3ef41170cd373467f8528b33",
+  "message_zh": "声明：由于私钥可能已泄露，自此刻起，原地址不再发布或更新《三位一体协定（The Trinity Accord）》相关任何数据（镜像层，Non‑Amending）。请以新地址 r1EdzCQ9E7CaAOEywI5netR6EcSopNOa08oi2Coz68s 为唯一有效的 Arweave 发布地址；原地址仅保留历史记录。",
+  "message_en": "Notice: Due to a potential private-key compromise, from this moment onward, the original address will no longer publish or update any materials related to \"The Trinity Accord\" on Arweave (mirrors, Non‑Amending). Please treat the new address r1EdzCQ9E7CaAOEywI5netR6EcSopNOa08oi2Coz68s as the only valid Arweave publishing address; the original address remains for historical records only."
+}

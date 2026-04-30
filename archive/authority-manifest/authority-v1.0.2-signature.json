@@ -1,0 +1,42 @@
+{
+  "label": "authority.v1.0.2.eip712",
+  "file": "authority.v1.0.2.jcs.json",
+  "signer": "0xbc63566A41cBfDB9C266a5941CBe47894DaA54A8",
+  "recovered": "0xbc63566A41cBfDB9C266a5941CBe47894DaA54A8",
+  "match": true,
+  "typedData": {
+    "domain": {
+      "name": "TrinityAccordAuthority",
+      "version": "1",
+      "chainId": 1,
+      "verifyingContract": "0x0000000000000000000000000000000000000000"
+    },
+    "types": {
+      "Manifest": [
+        {
+          "name": "version",
+          "type": "string"
+        },
+        {
+          "name": "sha256",
+          "type": "bytes32"
+        },
+        {
+          "name": "sha3_256",
+          "type": "bytes32"
+        },
+        {
+          "name": "createdAt",
+          "type": "string"
+        }
+      ]
+    },
+    "message": {
+      "version": "1.0.2",
+      "sha256": "0x7d6ac9d3184bb5b0bbaf8217354799efef68669c21b4180e28ec06b0c57439e6",
+      "sha3_256": "0x31442fec86514a84b1d691509bdc66bd6774d96e93941eea153de6a9e118d8d0",
+      "createdAt": "2025-09-24T03:43:44.148Z"
+    }
+  },
+  "signature": "0x1deea5051ce3b37a8aba52497741db3f810c3c0eae2968124b00e8517b5305594ebac9cf378d8dd160ac6e8011ed039a3c8e6cb3317b7a92f5fcdca7593fa0af1c"
+}
