@@ -107,19 +107,26 @@ function extractCarRootCid(carData) {
 }
 
 function cidBytesToCidV1(bytes) {
+  // Strip leading zero bytes (some CAR packagers prefix 0x00)
+  while (bytes.length > 0 && bytes[0] === 0x00) {
+    bytes = bytes.slice(1);
+  }
+  if (bytes.length === 0) throw new Error('Empty CID bytes after stripping zeros');
+
   if (bytes[0] === 0x12 && bytes[1] === 0x20) {
+    // CIDv0 — sha2-256 multihash. Convert to CIDv1 dag-cbor.
     const cidV1Bytes = Buffer.concat([Buffer.from([0x01, 0x71]), bytes]);
     return base32EncodeCid(cidV1Bytes);
   }
   if (bytes[0] === 0x01) {
     return base32EncodeCid(bytes);
   }
-  return bytes.toString('hex');
+  return 'b' + bytes.toString('hex');
 }
 
 function base32EncodeCid(bytes) {
   const alphabet = 'abcdefghijklmnopqrstuvwxyz234567';
-  let bits = 0, value = 0, output = '';
+  let bits = 0, value = 0, output = 'b'; // 'b' = multibase prefix for base32-lower
   for (const byte of bytes) {
     value = (value << 8) | byte;
     bits += 8;
