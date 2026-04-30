@@ -1,0 +1,45 @@
+name: NFT Arweave Mirror (175 NFTs)
+
+on:
+  workflow_dispatch:
+    inputs:
+      contract:
+        description: 'Contract address filter (empty = all 175)'
+        required: false
+        default: ''
+      dry_run:
+        description: 'Dry run (list only, no upload)'
+        type: boolean
+        default: false
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    timeout-minutes: 360
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Run Arweave → GitHub Release mirror
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          RELEASE_TAG: 'nft-arweave-mirror-175-v1'
+        run: |
+          set -euo pipefail
+          ARGS=""
+          if [ -n "${{ inputs.contract }}" ]; then
+            ARGS="--contract ${{ inputs.contract }}"
+          fi
+          if [ "${{ inputs.dry_run }}" = "true" ]; then
+            ARGS="$ARGS --dry-run"
+          fi
+          node scripts/backup-nft-arweave-mirror.mjs $ARGS
