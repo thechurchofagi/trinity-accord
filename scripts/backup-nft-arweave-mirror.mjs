@@ -38,8 +38,10 @@ const MAX_RETRIES = 3;
 const DOWNLOAD_CONCURRENCY = 5;
 const UPLOAD_CONCURRENCY = 2;
 
-// ERC-721 uri(tokenId) selector
-const ERC721_URI_SELECTOR = '0x0e89341c';
+// ERC-721 tokenURI(uint256) selector
+const ERC721_TOKENURI_SELECTOR = '0xc87b56dd';
+// ERC-1155 uri(uint256) selector
+const ERC1155_URI_SELECTOR = '0x0e89341c';
 
 // ─── Helpers ───────────────────────────────────────────────────────────────
 
@@ -103,7 +105,7 @@ function extractCarRootCid(carData) {
     }
   }
 
-  throw new Error('Could not extract root CID from CAR header');
+  throw new Error('Could not extract root CID from CAR header — no CBOR tag(42) found. Header hex: ' + header.slice(0, Math.min(header.length, 64)).toString('hex'));
 }
 
 function cidBytesToCidV1(bytes) {
@@ -355,21 +357,18 @@ function extractFilesFromTar(buf) {
 // ─── ETH on-chain verification ─────────────────────────────────────────────
 
 /**
- * Call uri(tokenId) on an ERC-721 contract via eth_call.
- * Returns the decoded string, or null on failure.
+ * Try calling a function on-chain. Returns the decoded string or null.
  */
-async function fetchOnchainTokenURI(contractAddr, tokenId, rpcUrl) {
+async function tryEthCall(rpcUrl, contractAddr, tokenId, selector) {
   try {
-    // Pad tokenId to 32 bytes
     const paddedId = BigInt(tokenId).toString(16).padStart(64, '0');
-    const callData = ERC721_URI_SELECTOR + paddedId;
+    const callData = selector + paddedId;
 
     const res = await fetch(rpcUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        jsonrpc: '2.0',
-        id: 1,
+        jsonrpc: '2.0', id: 1,
         method: 'eth_call',
         params: [{ to: contractAddr, data: callData }, 'latest'],
       }),
@@ -381,38 +380,73 @@ async function fetchOnchainTokenURI(contractAddr, tokenId, rpcUrl) {
     const hex = json.result;
     if (!hex || hex === '0x' || hex.length < 130) return null;
 
-    // ABI decode: offset(32) + length(32) + data
+    // ABI decode dynamic bytes/string: offset(32) + length(32) + data
     const offset = parseInt(hex.slice(2, 66), 16) * 2 + 2;
     const len = parseInt(hex.slice(66, 130), 16) * 2;
     const strHex = hex.slice(130, 130 + len);
 
-    // hex to utf8
     let uri = '';
     for (let i = 0; i < strHex.length; i += 2) {
       uri += String.fromCharCode(parseInt(strHex.slice(i, i + 2), 16));
     }
-    return uri;
+    return uri || null;
   } catch {
     return null;
   }
 }
 
 /**
+ * Fetch on-chain tokenURI. Tries ERC-721 tokenURI first, then ERC-1155 uri.
+ * Returns the decoded URI string, or null if neither succeeds.
+ */
+async function fetchOnchainTokenURI(contractAddr, tokenId, rpcUrl) {
+  // Try ERC-721 tokenURI(uint256) first
+  const erc721Uri = await tryEthCall(rpcUrl, contractAddr, tokenId, ERC721_TOKENURI_SELECTOR);
+  if (erc721Uri) return erc721Uri;
+
+  // Fallback: ERC-1155 uri(uint256)
+  const erc1155Uri = await tryEthCall(rpcUrl, contractAddr, tokenId, ERC1155_URI_SELECTOR);
+  return erc1155Uri;
+}
+
+/**
  * Extract CID from a tokenURI string.
- * Handles: ipfs://CID, ipfs://ipfs/CID, ar://CID, https://.../CID
+ * Handles:
+ *   ipfs://CID, ipfs://ipfs/CID, ipfs://CID/path
+ *   ar://CID
+ *   https://arweave.net/TXID
+ *   https://.../ipfs/CID, https://.../ipfs/CID/path
+ * Also handles ERC-1155 {id} replacement.
  */
 function extractCidFromUri(uri) {
   if (!uri) return null;
-  // ipfs://CID or ipfs://ipfs/CID
+
+  // ipfs://CID or ipfs://ipfs/CID or ipfs://CID/path
   const ipfsMatch = uri.match(/ipfs:\/\/(?:ipfs\/)?([a-zA-Z0-9]+)/);
   if (ipfsMatch) return ipfsMatch[1];
-  // ar://
+
+  // https://.../ipfs/CID or https://.../ipfs/CID/path
+  const httpsIpfsMatch = uri.match(/\/ipfs\/([a-zA-Z0-9]+)/);
+  if (httpsIpfsMatch) return httpsIpfsMatch[1];
+
+  // ar://CID
   const arMatch = uri.match(/ar:\/\/([a-zA-Z0-9_-]+)/);
   if (arMatch) return arMatch[1];
+
   // https://arweave.net/TXID
   const arHttpMatch = uri.match(/arweave\.net\/([a-zA-Z0-9_-]+)/);
   if (arHttpMatch) return arHttpMatch[1];
+
   return null;
+}
+
+/**
+ * Replace ERC-1155 {id} placeholder in URI with hex-padded tokenId.
+ */
+function expandErc1155Id(uri, tokenId) {
+  if (!uri || !uri.includes('{id}')) return uri;
+  const hexId = BigInt(tokenId).toString(16).padStart(64, '0');
+  return uri.replace('{id}', hexId);
 }
 
 // ─── Main ──────────────────────────────────────────────────────────────────
@@ -691,14 +725,25 @@ async function main() {
     for (const nft of nftList) {
       ethTasks.push(async () => {
         try {
-          const uri = await fetchOnchainTokenURI(nft.contract, nft.tokenId, ETH_RPC_URL);
+          let uri = await fetchOnchainTokenURI(nft.contract, nft.tokenId, ETH_RPC_URL);
           if (!uri) {
+            onchainErrors.push({
+              nft: nft.assetName, type: 'onchain_no_uri',
+              error: 'Neither tokenURI nor uri returned a value',
+            });
             onchainSkip++;
             return;
           }
 
+          // Handle ERC-1155 {id} placeholder
+          uri = expandErc1155Id(uri, nft.tokenId);
+
           const onchainCid = extractCidFromUri(uri);
           if (!onchainCid) {
+            onchainErrors.push({
+              nft: nft.assetName, type: 'onchain_cid_parse_failed',
+              error: `Could not extract CID from URI: ${uri}`,
+            });
             onchainSkip++;
             return;
           }
@@ -714,7 +759,11 @@ async function main() {
             onchainPass++;
           }
         } catch (e) {
-          onchainSkip++;
+          onchainErrors.push({
+            nft: nft.assetName, type: 'onchain_error',
+            error: e.message,
+          });
+          onchainFail++;
         }
       });
     }
@@ -722,11 +771,15 @@ async function main() {
     await runConcurrent(ethTasks, DOWNLOAD_CONCURRENCY);
     log(`   On-chain: ${onchainPass} pass, ${onchainFail} fail, ${onchainSkip} skipped`);
 
-    if (onchainFail > 0) {
-      err('\n  ❌ On-chain CID verification errors:');
+    // When ETH_RPC_URL is set, ALL 175 must pass. No skip allowed.
+    if (onchainFail > 0 || onchainSkip > 0) {
+      err('\n  ❌ On-chain verification failed:');
+      if (onchainFail > 0) err(`    ${onchainFail} CID mismatches`);
+      if (onchainSkip > 0) err(`    ${onchainSkip} could not read/parse on-chain URI`);
       for (const e of onchainErrors.slice(0, 10)) {
-        err(`    ${e.nft}: onchain=${e.onchain} vs token_index=${e.token_index}`);
+        err(`    ${e.nft}: ${e.type} — ${e.onchain || e.error || ''}`);
       }
+      if (onchainErrors.length > 10) err(`    ... and ${onchainErrors.length - 10} more`);
       process.exit(1);
     }
     log('');
@@ -937,7 +990,10 @@ async function main() {
   const allSizeMatch = sizeMatchCount === totalCars;
   const allCidMatch = cidPass === totalCars;
   const allReVerified = reVerifyFail === 0 && reVerifySha256Pass === nftList.length;
-  const allOnchainOk = ETH_RPC_URL ? (onchainFail === 0) : true;
+  // When ETH_RPC_URL is set: all 175 must pass, 0 fail, 0 skip
+  const allOnchainOk = ETH_RPC_URL
+    ? (onchainPass === EXPECTED_NFTS && onchainFail === 0 && onchainSkip === 0)
+    : true;
 
   const overallPass = allSha256Match && allSizeMatch && allCidMatch && allReVerified && allOnchainOk;
 
