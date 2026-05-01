@@ -1,17 +1,20 @@
 #!/usr/bin/env node
 /**
- * verify-release-assets.mjs  (standalone release-level re-verification)
+ * verify-release-assets.mjs  (v2 — concurrent, optional CID check)
  *
  * Downloads ALL NFT .tar assets from a GitHub Release and re-verifies:
  *   1. SHA-256 of every CAR inside the tar == RELEASE-MANIFEST.json expected_sha256
  *   2. Size of every CAR               == expected_size
- *   3. Root CID (metadata=strict, media=audit)
+ *   3. Root CID (metadata=strict, media=audit) — ONLY when --cid-check is passed
  *
  * This is a SEPARATE script from backup-nft-arweave-mirror.mjs.
  * Run it independently to verify an existing release without re-uploading.
  *
  * Usage:
- *   GITHUB_TOKEN=xxx node scripts/verify-release-assets.mjs [--release-tag nft-arweave-mirror-175-v1]
+ *   GITHUB_TOKEN=xxx node scripts/verify-release-assets.mjs \
+ *     [--release-tag nft-arweave-mirror-175-v1] \
+ *     [--cid-check] \
+ *     [--concurrency 8]
  */
 
 import fs from 'fs';
@@ -23,6 +26,7 @@ import crypto from 'crypto';
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 const REPO = process.env.REPO || 'thechurchofagi/trinity-accord';
 const MAX_RETRIES = 3;
+const VERIFY_CONCURRENCY = Number(process.env.VERIFY_CONCURRENCY || 8);
 
 // ─── Helpers ───────────────────────────────────────────────────────────────
 
@@ -34,7 +38,24 @@ function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 function log(msg) { console.log(msg); }
 function err(msg) { console.error(msg); }
 
-// ─── CAR parsing (minimal — root CID extraction only) ──────────────────────
+// ─── Concurrency pool ──────────────────────────────────────────────────────
+
+async function runConcurrent(tasks, limit) {
+  const results = new Array(tasks.length);
+  let nextIdx = 0;
+  async function worker() {
+    while (nextIdx < tasks.length) {
+      const idx = nextIdx++;
+      try { results[idx] = await tasks[idx](); }
+      catch (e) { results[idx] = e; }
+    }
+  }
+  const workers = Array.from({ length: Math.min(limit, tasks.length) }, () => worker());
+  await Promise.all(workers);
+  return results;
+}
+
+// ─── CAR parsing (root CID extraction only) ────────────────────────────────
 
 function parseCarHeader(data) {
   let pos = 0, shift = 0, headerLen = 0;
@@ -160,14 +181,19 @@ async function downloadAsset(assetId, retries = MAX_RETRIES) {
 async function main() {
   const args = process.argv.slice(2);
   const releaseTag = args.includes('--release-tag') ? args[args.indexOf('--release-tag') + 1] : 'nft-arweave-mirror-175-v1';
+  const cidCheck = args.includes('--cid-check');
+  const concurrencyArg = args.includes('--concurrency') ? Number(args[args.indexOf('--concurrency') + 1]) : null;
+  const concurrency = concurrencyArg || VERIFY_CONCURRENCY;
 
   if (!GITHUB_TOKEN) { err('❌ GITHUB_TOKEN required'); process.exit(1); }
 
   log('═══════════════════════════════════════════════════════════');
-  log('  Release Asset Re-Verification (standalone)');
+  log('  Release Asset Re-Verification (v2 — concurrent)');
   log('═══════════════════════════════════════════════════════════');
   log(`  Repo       : ${REPO}`);
   log(`  Release    : ${releaseTag}`);
+  log(`  CID check  : ${cidCheck ? 'enabled (metadata=strict, media=audit)' : 'disabled'}`);
+  log(`  Concurrency: ${concurrency}`);
   log('');
 
   // 1. Get release + manifest
@@ -187,31 +213,36 @@ async function main() {
   log(`  Manifest: ${manifest.actual_nfts} NFTs, ${manifest.total_car_files} CARs`);
   log('');
 
-  // 2. Verify each NFT asset
+  // 2. Build verification tasks
   log('🔍 Re-verifying all NFT assets...');
   const nftAssets = allAssets.filter(a => a.name.startsWith('nft-'));
-  let pass = 0, fail = 0;
-  const errors = [];
 
-  for (const asset of nftAssets) {
+  let totalChecks = 0;
+  let sha256Pass = 0, sizePass = 0;
+  let metaCidPass = 0, metaCidFail = 0, mediaCidPass = 0, mediaCidAudit = 0;
+  const errors = [];
+  let pass = 0, fail = 0;
+
+  const tasks = nftAssets.map(asset => async () => {
     const manifestEntry = manifest.per_nft_assets?.find(m => m.nft_asset_name === asset.name);
     if (!manifestEntry) {
       errors.push({ asset: asset.name, error: 'not in manifest' });
       fail++;
-      continue;
+      return;
     }
 
     try {
       const tarBuf = await downloadAsset(asset.id);
       const tarFiles = extractFilesFromTar(tarBuf);
 
-      let ok = true;
+      let assetOk = true;
       for (const f of manifestEntry.files) {
+        totalChecks++;
         const carName = `${f.role}.car`;
         const tarEntry = tarFiles.find(t => t.name === `nft/${carName}`);
         if (!tarEntry) {
           errors.push({ asset: asset.name, role: f.role, error: 'missing in tar' });
-          ok = false;
+          assetOk = false;
           continue;
         }
 
@@ -219,31 +250,49 @@ async function main() {
         const hash = sha256hex(tarEntry.data);
         if (hash !== f.expected_sha256) {
           errors.push({ asset: asset.name, role: f.role, type: 'sha256_mismatch', expected: f.expected_sha256, actual: hash });
-          ok = false;
+          assetOk = false;
+        } else {
+          sha256Pass++;
         }
 
         // Size
         if (tarEntry.data.length !== f.expected_size) {
           errors.push({ asset: asset.name, role: f.role, type: 'size_mismatch', expected: f.expected_size, actual: tarEntry.data.length });
-          ok = false;
+          assetOk = false;
+        } else {
+          sizePass++;
         }
 
-        // Root CID (metadata=strict, media=audit)
-        try {
-          const rootCid = extractCarRootCid(tarEntry.data);
-          if (f.role === 'metadata' && rootCid !== f.expected_root_cid) {
-            errors.push({ asset: asset.name, role: f.role, type: 'cid_mismatch', expected: f.expected_root_cid, actual: rootCid });
-            ok = false;
-          }
-        } catch (e) {
-          if (f.role === 'metadata') {
-            errors.push({ asset: asset.name, role: f.role, type: 'cid_extract_failed', error: e.message });
-            ok = false;
+        // Root CID (only when --cid-check enabled)
+        if (cidCheck) {
+          try {
+            const rootCid = extractCarRootCid(tarEntry.data);
+            if (f.role === 'metadata') {
+              if (rootCid !== f.expected_root_cid) {
+                errors.push({ asset: asset.name, role: f.role, type: 'cid_mismatch', expected: f.expected_root_cid, actual: rootCid });
+                metaCidFail++;
+                assetOk = false;
+              } else {
+                metaCidPass++;
+              }
+            } else {
+              // media: audit only
+              if (rootCid === f.expected_root_cid) mediaCidPass++;
+              else mediaCidAudit++;
+            }
+          } catch (e) {
+            if (f.role === 'metadata') {
+              errors.push({ asset: asset.name, role: f.role, type: 'cid_extract_failed', error: e.message });
+              metaCidFail++;
+              assetOk = false;
+            } else {
+              mediaCidAudit++;
+            }
           }
         }
       }
 
-      if (ok) pass++;
+      if (assetOk) pass++;
       else fail++;
 
       if ((pass + fail) % 20 === 0) process.stdout.write(`\r   ${pass + fail}/${nftAssets.length}`);
@@ -251,8 +300,9 @@ async function main() {
       errors.push({ asset: asset.name, error: e.message });
       fail++;
     }
-  }
+  });
 
+  await runConcurrent(tasks, concurrency);
   log(`\r   Verified: ${pass} pass, ${fail} fail / ${nftAssets.length}`);
 
   if (errors.length > 0) {
@@ -264,9 +314,38 @@ async function main() {
     if (errors.length > 20) log(`    ... and ${errors.length - 20} more`);
   }
 
+  // 3. Write VERIFY-RELEASE-REPORT.json
+  const report = {
+    schema: 'verify-release-report-v2',
+    release_tag: releaseTag,
+    generated_at: new Date().toISOString(),
+    total_assets: allAssets.length,
+    nft_assets_checked: nftAssets.length,
+    car_files_checked: totalChecks,
+    sha256_pass: sha256Pass,
+    size_pass: sizePass,
+    cid_check_enabled: cidCheck,
+    metadata_cid_pass: cidCheck ? metaCidPass : null,
+    metadata_cid_fail: cidCheck ? metaCidFail : null,
+    media_cid_audit_pass: cidCheck ? mediaCidPass : null,
+    media_cid_audit_warning: cidCheck ? mediaCidAudit : null,
+    status: fail === 0 ? 'PASS' : 'FAIL',
+    errors: errors.slice(0, 100),
+  };
+
+  const reportPath = path.join(process.cwd(), 'VERIFY-RELEASE-REPORT.json');
+  fs.writeFileSync(reportPath, JSON.stringify(report, null, 2));
+  log(`\n  📝 VERIFY-RELEASE-REPORT.json written`);
+
   log('');
   log('═══════════════════════════════════════════════════════════');
   log(`  ${fail === 0 ? '✅ PASS' : '❌ FAIL'}: ${pass}/${nftAssets.length} assets verified`);
+  log(`  SHA-256 : ${sha256Pass}/${totalChecks} pass`);
+  log(`  Size    : ${sizePass}/${totalChecks} pass`);
+  if (cidCheck) {
+    log(`  Meta CID: ${metaCidPass} pass, ${metaCidFail} fail`);
+    log(`  Media CID: ${mediaCidPass} match, ${mediaCidAudit} audit-warning`);
+  }
   log('═══════════════════════════════════════════════════════════');
 
   if (fail > 0) process.exit(1);

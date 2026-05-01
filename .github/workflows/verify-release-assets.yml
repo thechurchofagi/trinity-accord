@@ -1,0 +1,53 @@
+name: Verify Release Assets (175 NFTs)
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: 'Release tag to verify'
+        required: false
+        default: 'nft-arweave-mirror-175-v1'
+      cid_check:
+        description: 'Enable root CID verification (metadata=strict, media=audit)'
+        type: boolean
+        default: false
+      concurrency:
+        description: 'Download concurrency'
+        required: false
+        default: '8'
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    timeout-minutes: 120
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Verify GitHub Release assets
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          VERIFY_CONCURRENCY: ${{ inputs.concurrency }}
+        run: |
+          set -euo pipefail
+          ARGS="--release-tag ${{ inputs.release_tag }}"
+          if [ "${{ inputs.cid_check }}" = "true" ]; then
+            ARGS="$ARGS --cid-check"
+          fi
+          node scripts/verify-release-assets.mjs $ARGS
+
+      - name: Upload verification report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: verify-release-report
+          path: VERIFY-RELEASE-REPORT.json

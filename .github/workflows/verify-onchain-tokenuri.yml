@@ -1,0 +1,57 @@
+name: Verify Onchain tokenURI (ETH audit)
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: 'Release tag (for manifest source)'
+        required: false
+        default: 'nft-arweave-mirror-175-v1'
+      source:
+        description: 'Data source: manifest or token_index'
+        required: false
+        default: 'manifest'
+        type: choice
+        options:
+          - manifest
+          - token_index
+      concurrency:
+        description: 'ETH call concurrency'
+        required: false
+        default: '10'
+
+jobs:
+  verify-onchain:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    timeout-minutes: 60
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Run onchain tokenURI audit
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ETH_RPC_URL: ${{ secrets.ETH_RPC_URL }}
+          REPO: ${{ github.repository }}
+          ETH_CONCURRENCY: ${{ inputs.concurrency }}
+        run: |
+          set -euo pipefail
+          node scripts/verify-onchain-tokenuri.mjs \
+            --release-tag ${{ inputs.release_tag }} \
+            --source ${{ inputs.source }} \
+            --concurrency ${{ inputs.concurrency }}
+
+      - name: Upload audit report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: onchain-read-audit
+          path: ONCHAIN-READ-AUDIT.json

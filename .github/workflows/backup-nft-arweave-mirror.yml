@@ -1,4 +1,4 @@
-name: NFT Arweave Mirror (175 NFTs, strict verified v4)
+name: NFT Arweave Mirror (175 NFTs, backup only)
 
 on:
   workflow_dispatch:
@@ -28,12 +28,11 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Run strict Arweave → GitHub Release mirror (v4)
+      - name: Run Arweave → GitHub Release mirror (v5, backup only)
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
           RELEASE_TAG: 'nft-arweave-mirror-175-v1'
-          ETH_RPC_URL: ${{ secrets.ETH_RPC_URL }}
         run: |
           set -euo pipefail
           ARGS=""
