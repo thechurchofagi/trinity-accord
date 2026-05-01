@@ -319,6 +319,106 @@ function extractRootsFromHeader(carData, headerStart, headerEnd) {
   return roots;
 }
 
+/**
+ * Extract the hash digest from a CID string (CIDv0 or CIDv1).
+ * Returns a Buffer of the raw hash bytes, or null if not extractable.
+ */
+function extractDigestFromCid(cid) {
+  if (!cid) return null;
+
+  // CIDv0: starts with 'Qm', is base58btc-encoded multihash
+  if (cid.startsWith('Qm')) {
+    try {
+      const bytes = base58btcDecode(cid);
+      // multihash: 0x12 0x20 <32 bytes>
+      if (bytes.length === 34 && bytes[0] === 0x12 && bytes[1] === 0x20) {
+        return bytes.slice(2);
+      }
+      return null;
+    } catch { return null; }
+  }
+
+  // CIDv1: starts with 'b', is base32-encoded
+  if (cid.startsWith('b')) {
+    try {
+      const bytes = base32DecodeCid(cid);
+      // Skip leading zeros
+      let pos = 0;
+      while (pos < bytes.length && bytes[pos] === 0x00) pos++;
+      if (pos >= bytes.length) return null;
+
+      // CIDv1: varint(version) varint(codec) multihash
+      // Read version varint
+      while (pos < bytes.length && bytes[pos] >= 0x80) pos++;
+      pos++; // skip final byte of version varint
+
+      // Read codec varint
+      while (pos < bytes.length && bytes[pos] >= 0x80) pos++;
+      pos++; // skip final byte of codec varint
+
+      // Read multihash code varint
+      while (pos < bytes.length && bytes[pos] >= 0x80) pos++;
+      pos++; // skip final byte of mh code varint
+
+      // Read multihash length varint
+      let mhLen = 0, shift = 0;
+      while (pos < bytes.length) {
+        const b = bytes[pos];
+        mhLen |= (b & 0x7f) << shift;
+        pos++;
+        shift += 7;
+        if (b < 0x80) break;
+      }
+
+      if (pos + mhLen <= bytes.length) {
+        return bytes.slice(pos, pos + mhLen);
+      }
+      return null;
+    } catch { return null; }
+  }
+
+  return null;
+}
+
+function base58btcDecode(str) {
+  const alphabet = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
+  const bytes = [0];
+  for (const ch of str) {
+    const val = alphabet.indexOf(ch);
+    if (val < 0) throw new Error('Invalid base58 char');
+    let carry = val;
+    for (let j = 0; j < bytes.length; j++) {
+      carry += bytes[j] * 58;
+      bytes[j] = carry & 0xff;
+      carry >>= 8;
+    }
+    while (carry > 0) { bytes.push(carry & 0xff); carry >>= 8; }
+  }
+  // Count leading 1s (zero bytes)
+  let leadingZeros = 0;
+  for (const ch of str) { if (ch === '1') leadingZeros++; else break; }
+  return Buffer.from([...Array(leadingZeros).fill(0), ...bytes.reverse()]);
+}
+
+function base32DecodeCid(str) {
+  const alphabet = 'abcdefghijklmnopqrstuvwxyz234567';
+  // Skip leading 'b'
+  const data = str.slice(1);
+  let bits = 0, value = 0;
+  const bytes = [];
+  for (const ch of data) {
+    const val = alphabet.indexOf(ch);
+    if (val < 0) throw new Error('Invalid base32 char');
+    value = (value << 5) | val;
+    bits += 5;
+    if (bits >= 8) {
+      bytes.push((value >>> (bits - 8)) & 0xff);
+      bits -= 8;
+    }
+  }
+  return Buffer.from(bytes);
+}
+
 function cidBytesToCid(bytes) {
   // Remove leading zeros
   let start = 0;
@@ -349,6 +449,7 @@ function verifyCarDag(carData) {
     blockCount: 0,
     missingBlocks: 0,
     cidMismatchBlocks: 0,
+    roots: [],
     errors: [],
   };
 
@@ -362,6 +463,7 @@ function verifyCarDag(carData) {
   }
 
   const { roots, blocks } = parsed;
+  result.roots = roots;
   result.blockCount = blocks.size;
 
   if (roots.length === 0) {
@@ -373,23 +475,16 @@ function verifyCarDag(carData) {
   // Verify each block's CID = hash(content)
   for (const [cid, block] of blocks) {
     const computedHash = sha256buf(block.data);
-    // CIDv0: base58btc of multihash(sha2-256, 32)
-    // CIDv1: base32 of CIDv1(dag-cbor or dag-pb, multihash(sha2-256, 32))
-    const expectedMh = Buffer.concat([Buffer.from([0x12, 0x20]), computedHash]);
-    const expectedCidv0 = cidv0Encode(expectedMh);
-    const expectedCidv1Bytes = Buffer.concat([Buffer.from([0x01, 0x71]), expectedMh]);
-    const expectedCidv1 = base32EncodeCid(expectedCidv1Bytes);
-
-    if (cid !== expectedCidv0 && cid !== expectedCidv1) {
-      // Also try with raw codec (0x55) for CIDv1
-      const rawCodecBytes = Buffer.concat([Buffer.from([0x01, 0x55]), expectedMh]);
-      const expectedCidRaw = base32EncodeCid(rawCodecBytes);
-
-      if (cid !== expectedCidRaw) {
-        result.cidMismatchBlocks++;
-        result.errors.push(`Block CID mismatch: ${cid.slice(0, 20)}... computed=${expectedCidv0.slice(0, 20)}...`);
-        result.valid = false;
-      }
+    // Extract the multihash digest from the stored CID and compare with computed hash
+    const storedDigest = extractDigestFromCid(cid);
+    if (!storedDigest) {
+      result.cidMismatchBlocks++;
+      result.errors.push(`Block CID digest not extractable: ${cid.slice(0, 30)}...`);
+      result.valid = false;
+    } else if (!storedDigest.equals(computedHash)) {
+      result.cidMismatchBlocks++;
+      result.errors.push(`Block CID mismatch: ${cid.slice(0, 30)}... hash differs`);
+      result.valid = false;
     }
   }
 
@@ -713,7 +808,7 @@ async function main() {
   const nftLookup = new Map();
   for (const [contract, tokens] of Object.entries(tokenIndex)) {
     for (const [tokenId, entry] of Object.entries(tokens)) {
-      nftLookup.set(`${contract}_${tokenId}`, { contract, tokenId, ...entry });
+      nftLookup.set(`${contract.toLowerCase()}_${tokenId}`, { contract, tokenId, ...entry });
     }
   }
   log('');
@@ -761,7 +856,7 @@ async function main() {
   if (ethAudit?.tokens) {
     for (const t of ethAudit.tokens) {
       if (t.extracted_cid) {
-        ethCidLookup.set(`${t.contract}_${t.token_id}`, t.extracted_cid);
+        ethCidLookup.set(`${t.contract.toLowerCase()}_${t.token_id}`, t.extracted_cid);
       }
     }
   }
