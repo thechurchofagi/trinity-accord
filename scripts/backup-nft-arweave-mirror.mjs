@@ -331,7 +331,8 @@ async function main() {
   log('  Cleaning old NFT assets for clean rebuild...');
   let deleted = 0;
   for (const [name, asset] of existingAssets) {
-    if (name.startsWith('nft-') || name === 'RELEASE-MANIFEST.json' || name === 'RELEASE-CHECKSUMS.sha256') {
+    if (name.startsWith('nft-') || name === 'RELEASE-MANIFEST.json' || name === 'RELEASE-CHECKSUMS.sha256'
+        || name === 'ONCHAIN-READ-AUDIT.json' || name === 'verification_observed.json' || name === 'media-root-cid-mismatches.json') {
       await deleteAsset(release.id, asset.id);
       deleted++;
       if (deleted % 20 === 0) process.stdout.write(`\r    Deleted ${deleted}...`);
