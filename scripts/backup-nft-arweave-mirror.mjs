@@ -171,11 +171,16 @@ async function uploadAsset(releaseId, filePath, filename) {
 }
 
 async function deleteAsset(releaseId, assetId) {
-  const res = await fetch(
-    `https://api.github.com/repos/${REPO}/releases/assets/${assetId}`,
-    { method: 'DELETE', headers: ghHeaders() }
-  );
-  if (!res.ok && res.status !== 404) {
+  for (let attempt = 0; attempt < MAX_RETRIES; attempt++) {
+    const res = await fetch(
+      `https://api.github.com/repos/${REPO}/releases/assets/${assetId}`,
+      { method: 'DELETE', headers: ghHeaders() }
+    );
+    if (res.ok || res.status === 404) return;
+    if (res.status === 403 || res.status === 429) {
+      await sleep(5000 * (attempt + 1));
+      continue;
+    }
     throw new Error(`Delete asset failed: ${res.status}`);
   }
 }
@@ -336,6 +341,7 @@ async function main() {
       await deleteAsset(release.id, asset.id);
       deleted++;
       if (deleted % 20 === 0) process.stdout.write(`\r    Deleted ${deleted}...`);
+      await sleep(200); // rate limit protection
     }
   }
   if (deleted > 0) log(`\r    Deleted ${deleted} old assets`);
