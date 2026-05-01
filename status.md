@@ -18,6 +18,9 @@ Current availability of guardianship mirrors and verification paths.
 | eth_witness_coverage_pass | true |
 | bitcoin_tx_anchor_pass | true |
 | ots_time_anchor_pass | true |
+| ots_finalization | true |
+| ots_upgrade_mutation | none |
+| ots_digest_manifest_mutation | none |
 | hard_failures | 0 |
 
 What this verifies:
@@ -30,7 +33,9 @@ What this verifies:
 - OTS time-anchor verification passes.
 
 Limitation:
-- OTS currently passes in ci-api mode, not fullnode independent Bitcoin Core verification.
+- OTS proof is complete and Bitcoin-anchored.
+- Verified with OpenTimestamps client v0.7.2 / CI path.
+- Not yet verified through local Bitcoin Core or pruned-node RPC.
 
 Artifacts: `full-evidence-chain-audit`, `dag-digest-audit`, `btc-signature-coverage-audit`, `eth-witness-audit`, `ots-time-anchor-audit`, `bitcoin-tx-anchor-audit`, `dag-cid-audit`
 
@@ -75,6 +80,7 @@ If a mirror is unavailable, try in this order:
 
 ## Last verified
 - Full Evidence Chain: 2026-05-01 (commit 3741e78, workflow #8, PASS)
+- OTS Finalization: 2026-05-01 (commit a1a02ec, client v0.7.2, complete and Bitcoin-anchored)
 - Bitcoin TXIDs: 2026-04-26
 - Arweave bundle extraction: 2026-04-26
 - SHA-256 hashes: 2026-04-26

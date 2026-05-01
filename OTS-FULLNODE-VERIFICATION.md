@@ -58,12 +58,13 @@ If that file does not exist, the correct status remains:
 OTS verified by OpenTimestamps client / CI path, but not yet fullnode-independent.
 ```
 
-**Current status: ci-api mode (no local Bitcoin Core available in this environment).**
+**Current status: OTS proof is complete and Bitcoin-anchored. Verified with OpenTimestamps client v0.7.2 / CI path. Not yet verified through local Bitcoin Core or pruned-node RPC.**
 
 To upgrade to fullnode verification, run:
 
 ```bash
-ots --bitcoin-node http://USER:PASS@127.0.0.1:8332/ verify -f digest-manifest.json digest-manifest.json.ots
+ots --bitcoin-node http://USER:PASS@127.0.0.1:8332/ verify -f digest-manifest.json digest-manifest.json.ots \
+  | tee evidence/ots/fullnode-verification/local-bitcoin-node-verify.txt
 ```
 
 ## Non-Amendment Statement
