@@ -459,7 +459,7 @@ async function main() {
       const carHash = sha256hex(carData);
 
       manifest.files.push({
-        role: f.role.startsWith('media') ? 'media' : 'metadata',
+        role: f.role,
         arweave_txid: f.txid,
         original_leaf_path: f.leaf_path,
         cid: f.expected_root_cid,
@@ -514,7 +514,7 @@ async function main() {
     nft_asset_name: nft.assetName,
     car_count: nft.files.length,
     files: nft.files.map(f => ({
-      role: f.role.startsWith('media') ? 'media' : 'metadata',
+      role: f.role,
       arweave_txid: f.txid,
       expected_sha256: f.expected_sha256,
       expected_size: f.expected_size,
