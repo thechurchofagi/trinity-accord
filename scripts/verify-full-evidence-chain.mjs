@@ -841,7 +841,7 @@ function fileSha256(filePath) {
 // CHAIN A: DAG + digest-manifest file hash chain
 // ═══════════════════════════════════════════════════════════════════════════
 
-async function verifyChainA(tokenIndex, nftAssets, digestManifest, ethAudit, concurrency) {
+async function verifyChainA(tokenIndex, nftAssets, digestManifest, ethAudit, concurrency, allReleaseAssets) {
   log('\n═══ Chain A: DAG + Digest Manifest Verification ═══\n');
 
   const nftLookup = new Map();
@@ -1043,7 +1043,7 @@ async function verifyChainA(tokenIndex, nftAssets, digestManifest, ethAudit, con
 
   // 1. Try to download verify-report.json from release assets
   const repoFilesToVerify = [];
-  const verifyReportAsset = allAssets.find(a => a.name === 'verify-report.json');
+  const verifyReportAsset = allReleaseAssets.find(a => a.name === 'verify-report.json');
   let verifyReportBuf = null;
   if (verifyReportAsset) {
     try {
@@ -2020,7 +2020,7 @@ async function main() {
 
   const startTime = Date.now();
 
-  const chainA = await verifyChainA(tokenIndex, nftAssets, digestManifest, ethAudit, CONCURRENCY);
+  const chainA = await verifyChainA(tokenIndex, nftAssets, digestManifest, ethAudit, CONCURRENCY, allAssets);
   const chainB = await verifyChainB();
   const chainC = await verifyChainC();
   const chainD1 = await verifyChainD1();
