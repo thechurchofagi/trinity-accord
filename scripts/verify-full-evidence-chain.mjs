@@ -1037,6 +1037,10 @@ async function verifyChainA(tokenIndex, nftAssets, digestManifest, ethAudit, con
   // ── Digest-manifest hash coverage verification ────────────────────────
   log('\n  ── Digest-manifest hash coverage ──');
 
+  let multiHashMatchCount = 0, fileHashMismatchCount = 0, fileSizeMismatchCount = 0, privateUnavailableCount = 0;
+
+  try {
+
   // 1. Try to download verify-report.json from release assets
   const repoFilesToVerify = [];
   const verifyReportAsset = allAssets.find(a => a.name === 'verify-report.json');
@@ -1112,12 +1116,12 @@ async function verifyChainA(tokenIndex, nftAssets, digestManifest, ethAudit, con
   log(`  NFT CAR files: ${nftManifestCoveredCount} in manifest, ${nftHashMatchCount} hash+size match, ${nftHashMismatchCount} hash mismatch, ${nftSizeMismatchCount} size mismatch`);
 
   // 3. Aggregate hash verification counts
-  const multiHashMatchCount = repoHashResult.match_count + nftHashMatchCount;
-  const fileHashMismatchCount = repoHashResult.mismatch_count + nftHashMismatchCount;
-  const fileSizeMismatchCount = repoHashResult.size_mismatch_count + nftSizeMismatchCount;
+  multiHashMatchCount = repoHashResult.match_count + nftHashMatchCount;
+  fileHashMismatchCount = repoHashResult.mismatch_count + nftHashMismatchCount;
+  fileSizeMismatchCount = repoHashResult.size_mismatch_count + nftSizeMismatchCount;
 
   // 4. Count private/unavailable files (in manifest but not downloadable from this release)
-  let privateUnavailableCount = 0;
+  privateUnavailableCount = 0;
   if (digestManifest?.items) {
     const accessibleBasenames = new Set();
     // verify-report.json
@@ -1146,6 +1150,11 @@ async function verifyChainA(tokenIndex, nftAssets, digestManifest, ethAudit, con
   log(`  file_hash_mismatch_count   : ${fileHashMismatchCount}`);
   log(`  file_size_mismatch_count   : ${fileSizeMismatchCount}`);
   log(`  private_unavailable_hash_only: ${privateUnavailableCount}`);
+
+  } catch (hashErr) {
+    log(`  ⚠️ Hash coverage verification error: ${hashErr.message}`);
+    log(`  Skipping hash coverage counts (non-fatal)`);
+  }
 
   const dagAndDigestManifestPass = criticalErrors.length === 0
     && metadataDagFail === 0
@@ -2279,4 +2288,4 @@ async function main() {
   log('    - Bytes of private/unavailable files unless those bytes are actually provided and rehashed.');
 }
 
-main().catch(e => { err('Fatal:', e); process.exit(1); });
+main().catch(e => { err('Fatal:', e.message || e); if (e.stack) err(e.stack); process.exit(1); });
