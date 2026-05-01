@@ -19,7 +19,7 @@ jobs:
 
       - name: Run ETH Witness Verification
         env:
-          ETH_RPC_URL: ${{ secrets.ETH_RPC_URL }}
+          ETH_RPC_URL: ${{ secrets.ETHEREUMMAINNET }}
         run: node scripts/verify-eth-witness.mjs
 
       - name: Upload ETH-WITNESS-AUDIT.json
