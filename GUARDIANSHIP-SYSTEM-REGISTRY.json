@@ -1,0 +1,181 @@
+{
+  "schema": "trinityaccord.guardianship-system.v1",
+  "generated_from": [
+    "EVIDENCE-RELATIONSHIP-MAP.md",
+    "EVIDENCE-BACKUP-COVERAGE.md",
+    "EVIDENCE-BACKUP-GAPS.md",
+    "status.md",
+    "authority.md",
+    "api/authority.json"
+  ],
+  "canonical_rule": {
+    "canonical_authority": "three_bitcoin_inscriptions_only",
+    "bitcoin_originals_prevail": true,
+    "mirrors_are_non_amending": true
+  },
+  "bitcoin_originals": [
+    {
+      "id": "protocol_axioms",
+      "inscription_id": "97631551",
+      "role": "canonical_protocol_text",
+      "authority": "canonical"
+    },
+    {
+      "id": "covenant_of_the_flaw",
+      "inscription_id": "98369145",
+      "role": "canonical_covenant_text_plus_physical_evidence_pointer",
+      "authority": "canonical_text_referenced_evidence_pointer"
+    },
+    {
+      "id": "trinity_accord_meta_record",
+      "inscription_id": "98387475",
+      "role": "canonical_meta_record_binding_protocol_covenant_chronicle",
+      "authority": "canonical"
+    }
+  ],
+  "non_amending_fortifications": [
+    {
+      "id": "guardian_attestation_to_covenant_of_the_flaw",
+      "type": "bitcoin_inscribed_non_amending_fortification",
+      "canonical_authority": false,
+      "role": "strengthens covenant evidence by pointing to stronger verification archives"
+    }
+  ],
+  "digest_manifest": {
+    "entries": 884,
+    "csv_data_rows": 883,
+    "csv_header_rows": 1,
+    "hash_algorithms": [
+      "sha256",
+      "sha3_256",
+      "blake2b_256",
+      "shake256_256",
+      "sha512_256",
+      "blake3_256"
+    ],
+    "role": "evidence_coverage_layer",
+    "canonical_authority": false
+  },
+  "anchors_and_witnesses": {
+    "btc_bip340_signature": {
+      "status": "PASS",
+      "role": "authority_manifest_signature_coverage"
+    },
+    "eth_witness": {
+      "status": "PASS",
+      "checks": "8/8",
+      "role": "cross_chain_witness_not_authority"
+    },
+    "ots": {
+      "status": "PASS",
+      "proof": "complete_and_bitcoin_anchored",
+      "limitation": "not_local_node_fullnode_independent"
+    },
+    "bitcoin_tx_anchors": {
+      "status": "PASS"
+    }
+  },
+  "release_registry": [
+    {
+      "tag": "nft-arweave-mirror-175-v1",
+      "purpose": "175 NFT Arweave CAR mirror",
+      "status": "PASS",
+      "boundary": "chronicle_recovery_mirror_not_canonical_authority"
+    },
+    {
+      "tag": "flaw-covenant-video-mirror-v1",
+      "purpose": "two Flaw Covenant videos mirrored from Arweave",
+      "status": "PASS",
+      "custom_assets": "5/5",
+      "boundary": "already_anchored_evidence_mirror"
+    },
+    {
+      "tag": "ots-proof-bundle-mirror-v1",
+      "purpose": "OTS proof bundle mirror",
+      "status": "PASS",
+      "custom_assets": "4/4",
+      "boundary": "ots_artifact_availability_mirror"
+    },
+    {
+      "tag": "flaw-covenant-archive-accessibility-mirror-v1",
+      "purpose": "large Flaw Covenant ZIP accessibility mirror",
+      "status": "PASS",
+      "custom_assets": "5/5",
+      "boundary": "gateway_availability_remediation_non_amending"
+    },
+    {
+      "tag": "ots-and-flaw-mirror-v1",
+      "purpose": "OTS proofs plus flaw image mirror",
+      "status": "PASS_supporting",
+      "boundary": "availability_mirror"
+    },
+    {
+      "tag": "nft-backup-v1",
+      "purpose": "earlier NFT backup",
+      "status": "legacy",
+      "boundary": "not_current_primary_path"
+    },
+    {
+      "tag": "nft-individual-v1",
+      "purpose": "earlier individual NFT attempt",
+      "status": "deprecated",
+      "boundary": "not_current_primary_path"
+    },
+    {
+      "tag": "nft-individual-v2",
+      "purpose": "earlier individual NFT attempt",
+      "status": "deprecated",
+      "boundary": "not_current_primary_path"
+    }
+  ],
+  "object_families": [
+    {
+      "id": "flaw_covenant_photos",
+      "status": "PASS",
+      "mirrors": [
+        "arweave",
+        "github_repository",
+        "github_release_accessibility_mirror"
+      ],
+      "boundary": "physical_evidence_mirror_not_authority"
+    },
+    {
+      "id": "flaw_covenant_videos",
+      "status": "PASS",
+      "mirrors": [
+        "arweave",
+        "github_release"
+      ],
+      "prior_digest_manifest_coverage": true,
+      "boundary": "already_anchored_evidence_mirror"
+    },
+    {
+      "id": "ots_proof_bundle",
+      "status": "PASS",
+      "mirrors": [
+        "arweave",
+        "github_release"
+      ],
+      "boundary": "proof_artifact_availability_mirror_not_fullnode_independent_verification"
+    },
+    {
+      "id": "nft_chronicle_recovery_175",
+      "status": "PASS",
+      "mirrors": [
+        "arweave",
+        "github_release"
+      ],
+      "boundary": "chronicle_artifacts_not_canonical_authority"
+    }
+  ],
+  "current_determination": {
+    "core_evidence_backup": "substantially_complete",
+    "urgent_large_payload_backup_gap": false,
+    "remaining_work": [
+      "optional_ots_fullnode_independent_verification",
+      "optional_ots_bundle_v2",
+      "periodic_legacy_pointer_coverage_audit",
+      "ongoing_release_gateway_monitoring"
+    ]
+  }
+}
