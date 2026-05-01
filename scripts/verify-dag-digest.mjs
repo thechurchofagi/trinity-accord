@@ -317,6 +317,46 @@ function verifyCarDag(carData) {
   return result;
 }
 
+/**
+ * Re-verify a CAR's DAG with cross-CAR block resolution.
+ * Returns granular counts: cross_car_references (resolved from other CARs)
+ * vs unresolved_missing_blocks (truly missing from all CARs).
+ */
+function verifyCarDagCrossResolved(carData, globalBlocks) {
+  const result = { valid: true, roots: [], blockCount: 0, crossCarReferences: 0, unresolvedMissingBlocks: 0, cidMismatchBlocks: 0, errors: [] };
+  let parsed;
+  try { parsed = parseCarFull(carData); } catch (e) { result.valid = false; result.errors.push(`CAR parse failed: ${e.message}`); return result; }
+  const { roots, blocks } = parsed;
+  result.roots = roots;
+  result.blockCount = blocks.size;
+  if (roots.length === 0) { result.valid = false; result.errors.push('No roots found'); return result; }
+  for (const [cid, block] of blocks) {
+    const computedHash = sha256buf(block.data);
+    const storedDigest = extractDigestFromCid(cid);
+    if (!storedDigest) { result.cidMismatchBlocks++; result.errors.push(`CID digest not extractable: ${cid.slice(0, 30)}`); result.valid = false; }
+    else if (!storedDigest.equals(computedHash)) { result.cidMismatchBlocks++; result.errors.push(`CID mismatch: ${cid.slice(0, 30)}`); result.valid = false; }
+  }
+  const visited = new Set();
+  const queue = [...roots];
+  while (queue.length > 0) {
+    const cid = queue.shift();
+    if (visited.has(cid)) continue;
+    visited.add(cid);
+    const block = blocks.get(cid);
+    if (block) {
+      for (const linkCid of extractLinksFromBlock(block.data)) { if (!visited.has(linkCid)) queue.push(linkCid); }
+    } else if (globalBlocks.has(cid)) {
+      // Block found in another CAR — cross-CAR reference, not an error
+      result.crossCarReferences++;
+    } else {
+      result.unresolvedMissingBlocks++;
+      result.errors.push(`Unresolved missing block: ${cid}`);
+      result.valid = false;
+    }
+  }
+  return result;
+}
+
 // ═══════════════════════════════════════════════════════════════════════════
 // TAR EXTRACTION
 // ═══════════════════════════════════════════════════════════════════════════
@@ -655,6 +695,7 @@ async function main() {
   let metadataDagPass = 0, metadataDagFail = 0;
   let mediaDagPass = 0, mediaDagFail = 0;
   let missingBlocksTotal = 0, cidRecomputeFail = 0;
+  let crossCarRefTotal = 0, crossCarRefResolvedTotal = 0, unresolvedMissingTotal = 0;
   let metadataTokenIndexCidMatch = 0, metadataTokenIndexCidMismatch = 0;
   let metadataEthCidMatch = 0, metadataEthCidMismatch = 0, metadataEthCidSkip = 0;
   let manifestDirectMatchCount = 0, releaseDerivVerifiedCount = 0;
@@ -701,15 +742,32 @@ async function main() {
       // nft-*.tar is a release derivative
       releaseDerivVerifiedCount++;
 
-      for (const tarFile of tarFiles) {
-        if (!tarFile.name.endsWith('.car')) continue;
-        const role = tarFile.name.replace('nft/', '').replace('.car', '');
-        const carData = tarFile.data;
+      // ── Pass 1: parse all CARs, build global block pool ──────────
+      const carFiles = tarFiles.filter(f => f.name.endsWith('.car'));
+      const globalBlocks = new Map();
+      const parsedCars = [];
+      for (const carFile of carFiles) {
+        try {
+          const parsed = parseCarFull(carFile.data);
+          for (const [cid, block] of parsed.blocks) {
+            if (!globalBlocks.has(cid)) globalBlocks.set(cid, block);
+          }
+          parsedCars.push({ carFile, parsed });
+        } catch { parsedCars.push({ carFile, parsed: null }); }
+      }
+
+      // ── Pass 2: verify each CAR with cross-resolve ──────────────
+      for (const { carFile, parsed: parsedCar } of parsedCars) {
+        if (!parsedCar) continue;
+        const role = carFile.name.replace('nft/', '').replace('.car', '');
+        const carData = carFile.data;
         const carSha = sha256hex(carData);
         const carSize = carData.length;
 
-        const dagResult = verifyCarDag(carData);
-        missingBlocksTotal += dagResult.missingBlocks;
+        const dagResult = verifyCarDagCrossResolved(carData, globalBlocks);
+        crossCarRefTotal += dagResult.crossCarReferences;
+        crossCarRefResolvedTotal += dagResult.crossCarReferences;
+        unresolvedMissingTotal += dagResult.unresolvedMissingBlocks;
         cidRecomputeFail += dagResult.cidMismatchBlocks;
         const rootCid = dagResult.roots?.[0] || null;
 
@@ -789,7 +847,9 @@ async function main() {
 
           detail.metadata = {
             dag_valid: dagResult.valid, block_count: dagResult.blockCount,
-            missing_blocks: dagResult.missingBlocks, cid_mismatch_blocks: dagResult.cidMismatchBlocks,
+            cross_car_references: dagResult.crossCarReferences,
+            unresolved_missing_blocks: dagResult.unresolvedMissingBlocks,
+            cid_mismatch_blocks: dagResult.cidMismatchBlocks,
             actual_root_cid: rootCid, token_index_cid: expectedTi || null, eth_cid: ethCid || null,
             sha256: carSha, size: carSize,
           };
@@ -856,6 +916,7 @@ async function main() {
     && fileSizeMismatchCount === 0
     && unavailableAlgorithmCount === 0
     && publicMissingCount === 0
+    && unresolvedMissingTotal === 0
     && (declaredJson?.ar_sha256 ? true : false)
     && (declaredCsv?.ar_sha256 ? true : false);
 
@@ -884,6 +945,9 @@ async function main() {
   log(`  Media sha256 fail             : ${mediaSha256Fail}`);
   log(`  Media size fail               : ${mediaSizeFail}`);
   log(`  Media CID mismatch warning    : ${mediaRootCidMismatchWarning}`);
+  log(`  Cross-CAR references          : ${crossCarRefTotal}`);
+  log(`  Cross-CAR resolved            : ${crossCarRefResolvedTotal}`);
+  log(`  Unresolved missing blocks     : ${unresolvedMissingTotal}`);
   log(`  Chain A pass                  : ${dagAndDigestManifestPass}`);
   log(`  blake2b_256 variant           : node_blake2b512_full (historical)`);
 
@@ -933,7 +997,9 @@ async function main() {
     metadata_token_index_cid_match: metadataTokenIndexCidMatch,
     metadata_eth_tokenuri_cid_match: metadataEthCidMatch,
 
-    missing_blocks: missingBlocksTotal,
+    cross_car_references: crossCarRefTotal,
+    cross_car_references_resolved: crossCarRefResolvedTotal,
+    unresolved_missing_blocks: unresolvedMissingTotal,
     cid_recompute_fail: cidRecomputeFail,
 
     media_sha256_fail: mediaSha256Fail,
