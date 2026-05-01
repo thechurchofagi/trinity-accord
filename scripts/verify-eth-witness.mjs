@@ -56,7 +56,7 @@ async function tryEthCallRaw(method, params, retries = MAX_RETRIES) {
 
 /**
  * Verify a single ETH transaction against declared attestation.
- * Returns detailed result with all fields explicitly set.
+ * All conditions must be explicitly true — null/undefined = fail.
  */
 async function verifyOneTx(txHash, expectedFrom, declaredInputSha256, declaredInputLen, label) {
   const detail = {
@@ -75,9 +75,16 @@ async function verifyOneTx(txHash, expectedFrom, declaredInputSha256, declaredIn
   };
 
   try {
+    // 1. tx_hash required
     if (!txHash) { detail.failure_reason = 'no_tx_hash'; return detail; }
 
-    // eth_getTransactionByHash
+    // 2. declared input_sha256 required
+    if (!declaredInputSha256) { detail.failure_reason = 'missing_declared_input_sha256'; return detail; }
+
+    // 3. declared input_len required
+    if (declaredInputLen == null) { detail.failure_reason = 'missing_declared_input_len'; return detail; }
+
+    // 4. eth_getTransactionByHash
     const txResult = await tryEthCallRaw('eth_getTransactionByHash', [txHash]);
     if (txResult.error || !txResult.result) {
       detail.failure_reason = `tx_fetch_failed: ${txResult.error}`;
@@ -88,13 +95,13 @@ async function verifyOneTx(txHash, expectedFrom, declaredInputSha256, declaredIn
     detail.exists = true;
     detail.observed_from = tx.from?.toLowerCase() || null;
 
-    // from match
+    // 5. from match
     if (expectedFrom && tx.from) {
       detail.from_match = tx.from.toLowerCase() === expectedFrom.toLowerCase();
-      if (!detail.from_match) { detail.failure_reason = 'from_mismatch'; }
+      if (!detail.from_match) { detail.failure_reason = 'from_mismatch'; return detail; }
     }
 
-    // input parsing
+    // 6. input parsing
     const inputData = tx.input || tx.data || '0x';
     if (!inputData || inputData === '0x') {
       detail.failure_reason = 'empty_input';
@@ -105,40 +112,34 @@ async function verifyOneTx(txHash, expectedFrom, declaredInputSha256, declaredIn
     detail.input_len_observed = inputBytes.length;
     detail.input_sha256_observed = sha256hex(inputBytes);
 
-    // input_len match
-    if (declaredInputLen != null) {
-      detail.input_size_match = detail.input_len_observed === Number(declaredInputLen);
-      if (!detail.input_size_match) {
-        detail.failure_reason = `input_len_mismatch: declared=${declaredInputLen} observed=${detail.input_len_observed}`;
-      }
-    } else {
-      detail.failure_reason = 'missing_declared_input_len';
+    // 7. input_len match (MUST be true)
+    detail.input_size_match = detail.input_len_observed === Number(declaredInputLen);
+    if (!detail.input_size_match) {
+      detail.failure_reason = `input_len_mismatch: declared=${declaredInputLen} observed=${detail.input_len_observed}`;
+      return detail;
     }
 
-    // input_sha256 match
-    if (declaredInputSha256) {
-      detail.input_sha256_match = detail.input_sha256_observed === String(declaredInputSha256).toLowerCase();
-      if (!detail.input_sha256_match) {
-        detail.failure_reason = `input_sha256_mismatch`;
-      }
-    } else {
-      detail.failure_reason = 'missing_declared_input_sha256';
+    // 8. input_sha256 match (MUST be true)
+    detail.input_sha256_match = detail.input_sha256_observed === String(declaredInputSha256).toLowerCase();
+    if (!detail.input_sha256_match) {
+      detail.failure_reason = 'input_sha256_mismatch';
+      return detail;
     }
 
-    // receipt
+    // 9. receipt
     const receiptResult = await tryEthCallRaw('eth_getTransactionReceipt', [txHash]);
-    if (receiptResult.result) {
-      detail.receipt_success = receiptResult.result.status === '0x1';
-      detail.block_confirmed = !!receiptResult.result.blockNumber;
-      if (!detail.receipt_success) detail.failure_reason = 'receipt_failed';
-      if (!detail.block_confirmed) detail.failure_reason = 'not_confirmed';
-    } else {
+    if (!receiptResult.result) {
       detail.failure_reason = 'receipt_fetch_failed';
+      return detail;
     }
+    detail.receipt_success = receiptResult.result.status === '0x1';
+    if (!detail.receipt_success) { detail.failure_reason = 'receipt_failed'; return detail; }
 
-    // overall pass
-    detail.pass = detail.exists && detail.receipt_success && detail.from_match
-      && detail.block_confirmed && detail.input_sha256_match === true && detail.input_size_match === true;
+    detail.block_confirmed = !!receiptResult.result.blockNumber;
+    if (!detail.block_confirmed) { detail.failure_reason = 'not_confirmed'; return detail; }
+
+    // 10. ALL conditions passed
+    detail.pass = true;
 
   } catch (e) {
     detail.failure_reason = `exception: ${e.message}`;
@@ -175,10 +176,19 @@ async function main() {
   const evidenceManifest = readRepoJson(EVIDENCE_MANIFEST_FILE);
   const primaryTxHash = evidenceManifest?.eth_mirror_tx;
 
-  // Find declared hash/size for primary tx from authority attestations
-  const primaryAttInAuthority = attestations.find(a => a.tx_hash?.toLowerCase() === primaryTxHash?.toLowerCase());
-  const primaryDeclaredSha256 = evidenceManifest?.input_sha256 || primaryAttInAuthority?.input_sha256 || null;
-  const primaryDeclaredLen = evidenceManifest?.input_len || primaryAttInAuthority?.input_len || null;
+  // Find declared input_sha256/input_len for primary tx:
+  // 1) evidence-manifest.json
+  // 2) authority.jcs.json.ethereum.attestations[] by tx_hash
+  let primaryDeclaredSha256 = evidenceManifest?.input_sha256 || null;
+  let primaryDeclaredLen = evidenceManifest?.input_len || evidenceManifest?.input_size || null;
+
+  if (!primaryDeclaredSha256 || primaryDeclaredLen == null) {
+    const primaryAttInAuthority = attestations.find(a => a.tx_hash?.toLowerCase() === primaryTxHash?.toLowerCase());
+    if (primaryAttInAuthority) {
+      if (!primaryDeclaredSha256) primaryDeclaredSha256 = primaryAttInAuthority.input_sha256 || null;
+      if (primaryDeclaredLen == null) primaryDeclaredLen = primaryAttInAuthority.input_len || primaryAttInAuthority.input_size || null;
+    }
+  }
 
   const primaryDetail = await verifyOneTx(primaryTxHash, guardianEthAddress, primaryDeclaredSha256, primaryDeclaredLen, 'primary-eth-witness');
   primaryDetail.source = 'evidence-manifest.json';
