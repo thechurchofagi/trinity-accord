@@ -48,7 +48,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
           DAG_VERIFY_CONCURRENCY: ${{ inputs.concurrency }}
-          ETH_RPC_URL: ${{ inputs.eth_rpc_url || secrets.ETH_RPC_URL }}
+          ETH_RPC_URL: ${{ inputs.eth_rpc_url || secrets.ETHEREUMMAINNET }}
           BITCOIN_API_BASE: ${{ inputs.btc_api_base }}
         run: |
           set -euo pipefail
