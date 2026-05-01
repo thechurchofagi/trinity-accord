@@ -459,16 +459,84 @@ function verifyBip340(pubkeyXonly, msg, sig) {
   return true;
 }
 
-/** Derive Taproot address (bech32m) from x-only pubkey */
+// ═══════════════════════════════════════════════════════════════════════════
+// bech32m encoding (BIP-350)
+// ═══════════════════════════════════════════════════════════════════════════
+
+const BECH32M_CHARSET = 'qpzry9x8gf2tvdw0s3jn54khce6mua7l';
+
+function bech32mPolymod(values) {
+  const GEN = [0x3b6a57b2, 0x26508e6d, 0x1ea119fa, 0x3d4233dd, 0x2a1462b3];
+  let chk = 1;
+  for (const v of values) {
+    const b = chk >> 25;
+    chk = ((chk & 0x1ffffff) << 5) ^ v;
+    for (let i = 0; i < 5; i++) chk ^= ((b >> i) & 1) ? GEN[i] : 0;
+  }
+  return chk;
+}
+
+function bech32mHrpExpand(hrp) {
+  const ret = [];
+  for (let i = 0; i < hrp.length; i++) ret.push(hrp.charCodeAt(i) >> 5);
+  ret.push(0);
+  for (let i = 0; i < hrp.length; i++) ret.push(hrp.charCodeAt(i) & 31);
+  return ret;
+}
+
+function bech32mCreateChecksum(hrp, data) {
+  const values = [...bech32mHrpExpand(hrp), ...data, 0, 0, 0, 0, 0, 0];
+  const mod = bech32mPolymod(values) ^ 0x2bc830a3;
+  const ret = [];
+  for (let i = 0; i < 6; i++) ret.push((mod >> (5 * (5 - i))) & 31);
+  return ret;
+}
+
+function bech32mEncode(hrp, witver, witprog) {
+  // Convert witprog bytes to 5-bit groups
+  const data = [witver];
+  // Convert 8-bit to 5-bit
+  let acc = 0, bits = 0;
+  for (const byte of witprog) {
+    acc = (acc << 8) | byte;
+    bits += 8;
+    while (bits >= 5) { data.push((acc >> (bits - 5)) & 31); bits -= 5; }
+  }
+  if (bits > 0) data.push((acc << (5 - bits)) & 31);
+
+  const checksum = bech32mCreateChecksum(hrp, data);
+  let result = hrp + '1';
+  for (const d of [...data, ...checksum]) result += BECH32M_CHARSET[d];
+  return result;
+}
+
+/** Derive Taproot (P2TR) address from x-only pubkey per BIP-341/BIP-86 */
 function deriveTaprootAddress(xonlyHex) {
-  // H = taggedHash("TapTweak", pubkey || m) where m is empty for no script path
-  const pubkey = Buffer.from(xonlyHex, 'hex');
-  const tweak = taggedHash('TapTweak', pubkey);
-  // P = G * seckey + H where H = tweak*G (simplified: we just need the x-coordinate)
-  // For verification, we check that the address matches by comparing the pubkey+tweak
-  // The actual address derivation: bech32m(witness_version=1, program=32bytes)
-  // We'll use a simpler approach: compare the declared address with expected derivation
-  return tweak.toString('hex');
+  const xonlyBuf = BigInt('0x' + xonlyHex);
+
+  // 1. Compute tweak = taggedHash("TapTweak", pubkey_xonly || 0x00)  (empty merkle root for key-path only)
+  const tweakHash = taggedHash('TapTweak', Buffer.from(xonlyHex, 'hex'));
+
+  // 2. Compute Q = P + int(tweak) * G
+  const P_y_sq = mod(xonlyBuf * xonlyBuf * xonlyBuf + SECP256K1_B, SECP256K1_P);
+  const P_y = sqrtMod(P_y_sq, SECP256K1_P);
+  if (P_y === null) return null; // invalid pubkey
+  // BIP-340: use even-y key
+  const P = new ECPoint(xonlyBuf, P_y % 2n === 0n ? P_y : mod(-P_y, SECP256K1_P));
+
+  const t = BigInt('0x' + tweakHash.toString('hex'));
+  const Q = ecAdd(P, ecMul(t, G));
+  if (Q.isInfinity) return null;
+
+  // 3. witness program = x(Q) mod p (if Q.y is odd, negate Q first — but Q.y parity doesn't affect x)
+  const xQ = Q.x;
+
+  // 4. Encode as bech32m: witness v1 + 32-byte program
+  const progBuf = Buffer.alloc(32);
+  let tmp = xQ;
+  for (let i = 31; i >= 0; i--) { progBuf[i] = Number(tmp & 0xffn); tmp >>= 8n; }
+
+  return bech32mEncode('bc', 1, progBuf);
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -614,16 +682,99 @@ function extractCidFromPath(filePath) {
 // OTS PARSING HELPERS
 // ═══════════════════════════════════════════════════════════════════════════
 
+// ═══════════════════════════════════════════════════════════════════════════
+// DIGEST MANIFEST HASH VERIFICATION (Chain A enhancement)
+// ═══════════════════════════════════════════════════════════════════════════
+
+/** Compute all required hashes for a buffer */
+function computeAllHashes(buf) {
+  return {
+    sha256: sha256hex(buf),
+    sha3_256: sha3_256hex(buf),
+    blake2b_256: blake2b256hex(buf),
+    shake256_256: crypto.createHash('shake256', { outputLength: 32 }).update(buf).digest('hex'),
+    sha512_256: sha512_256hex(buf),
+    blake3_256: null, // blake3 not available in Node.js crypto, skip if unavailable
+  };
+}
+
+/** Match a file against digest-manifest entries by basename/filename */
+function findManifestEntry(filename, digestManifest) {
+  if (!digestManifest?.items) return null;
+  // Try exact basename match
+  for (const item of digestManifest.items) {
+    const itemBasename = path.basename(item.path);
+    if (itemBasename === filename) return item;
+  }
+  // Try matching by CID-like prefix in path
+  for (const item of digestManifest.items) {
+    if (item.path && item.path.includes(filename)) return item;
+  }
+  return null;
+}
+
 /**
- * Parse OTS info output to extract Bitcoin block attestations.
- * Returns { attestations: [{block_height, merkle_root}], pending: [urls] }
+ * Verify file hashes against digest-manifest entries.
+ * Returns { match_count, mismatch_count, size_mismatch_count, details[] }
+ */
+function verifyFileHashesAgainstManifest(fileEntries, digestManifest) {
+  let matchCount = 0, mismatchCount = 0, sizeMismatchCount = 0;
+  const details = [];
+
+  for (const { label, buf } of fileEntries) {
+    const entry = findManifestEntry(label, digestManifest);
+    if (!entry) {
+      details.push({ label, status: 'not_in_manifest' });
+      continue;
+    }
+
+    const hashes = computeAllHashes(buf);
+    const shaMatch = hashes.sha256 === entry.sha256?.toLowerCase();
+    const sizeMatch = buf.length === entry.size_bytes;
+
+    // Check optional hashes if present in manifest
+    let sha3Match = null, blake2bMatch = null, shake256Match = null, sha512Match = null;
+    if (entry.sha3_256) sha3Match = hashes.sha3_256 === entry.sha3_256.toLowerCase();
+    if (entry.blake2b_256) blake2bMatch = hashes.blake2b_256 === entry.blake2b_256.toLowerCase();
+    if (entry.shake256_256) shake256Match = hashes.shake256_256 === entry.shake256_256.toLowerCase();
+    if (entry.sha512_256) sha512Match = hashes.sha512_256 === entry.sha512_256.toLowerCase();
+
+    const allHashMatch = shaMatch
+      && (sha3Match === null || sha3Match)
+      && (blake2bMatch === null || blake2bMatch)
+      && (shake256Match === null || shake256Match)
+      && (sha512Match === null || sha512Match);
+
+    if (allHashMatch && sizeMatch) {
+      matchCount++;
+    } else {
+      if (!shaMatch || !allHashMatch) mismatchCount++;
+      if (!sizeMatch) sizeMismatchCount++;
+    }
+
+    details.push({
+      label, status: allHashMatch && sizeMatch ? 'match' : 'mismatch',
+      sha256_match: shaMatch, size_match: sizeMatch,
+      sha3_256_match: sha3Match, blake2b_256_match: blake2bMatch,
+      shake256_256_match: shake256Match, sha512_256_match: sha512Match,
+      actual_sha256: hashes.sha256, expected_sha256: entry.sha256,
+      actual_size: buf.length, expected_size: entry.size_bytes,
+    });
+  }
+
+  return { match_count: matchCount, mismatch_count: mismatchCount, size_mismatch_count: sizeMismatchCount, details };
+}
+
+/**
+ * Parse OTS info output to extract Bitcoin block attestations and txids.
+ * Returns { attestations: [{block_height, merkle_root}], pending: [urls], txids: [string] }
  */
 function parseOtsInfo(otsPath) {
   try {
     const output = execSync(`ots info "${otsPath}" 2>&1`, { encoding: 'utf-8', timeout: 30000 });
     const attestations = [];
     const pending = [];
-    let currentMerkleRoot = null;
+    const txids = [];
 
     for (const line of output.split('\n')) {
       const trimmed = line.trim();
@@ -640,6 +791,12 @@ function parseOtsInfo(otsPath) {
         attestations[attestations.length - 1].merkle_root = merkleMatch[1];
       }
 
+      // Transaction id
+      const txidMatch = trimmed.match(/# Transaction id ([a-f0-9]{64})/);
+      if (txidMatch) {
+        txids.push(txidMatch[1]);
+      }
+
       // Pending attestation
       const pendingMatch = trimmed.match(/PendingAttestation\('([^']+)'\)/);
       if (pendingMatch) {
@@ -647,9 +804,9 @@ function parseOtsInfo(otsPath) {
       }
     }
 
-    return { attestations, pending, raw: output };
+    return { attestations, pending, txids, raw: output };
   } catch (e) {
-    return { attestations: [], pending: [], raw: e.message, error: e.message };
+    return { attestations: [], pending: [], txids: [], raw: e.message, error: e.message };
   }
 }
 
@@ -858,6 +1015,101 @@ async function verifyChainA(tokenIndex, nftAssets, digestManifest, ethAudit, con
     nftDetails.push(r);
   }
 
+  // ── Digest-manifest hash coverage verification ────────────────────────
+  log('\n  ── Digest-manifest hash coverage ──');
+
+  // Collect NFT tar buffers for hash verification (already downloaded in tasks)
+  // We need to re-download or use cached data. Since tasks already downloaded,
+  // we'll verify the manifest entries we can access: repo files + release assets.
+
+  // 1. Verify repo files against manifest
+  const repoFilesToVerify = [];
+  const tokenIndexBuf = readRepoFile(TOKEN_INDEX_FILE);
+  if (tokenIndexBuf) repoFilesToVerify.push({ label: 'token_index.json', buf: tokenIndexBuf });
+  if (actualJsonBuf) repoFilesToVerify.push({ label: 'digest-manifest.json', buf: actualJsonBuf });
+  if (actualCsvBuf) repoFilesToVerify.push({ label: 'digest-manifest.csv', buf: actualCsvBuf });
+
+  // Also check verify-report.json if it exists
+  const verifyReportBuf = readRepoFile('verify-report.json') || readRepoFile('archive/evidence/verify-report.json');
+  if (verifyReportBuf) repoFilesToVerify.push({ label: 'verify-report.json', buf: verifyReportBuf });
+
+  const repoHashResult = verifyFileHashesAgainstManifest(repoFilesToVerify, digestManifest);
+  log(`  Repo files: ${repoHashResult.match_count} match, ${repoHashResult.mismatch_count} hash mismatch, ${repoHashResult.size_mismatch_count} size mismatch`);
+  for (const d of repoHashResult.details) {
+    log(`    ${d.label}: ${d.status === 'match' ? '✅' : '⚠️ ' + d.status}`);
+  }
+
+  // 2. Verify release assets (non-NFT) against manifest
+  const releaseAssetFiles = [];
+  const releaseManifestAsset = allAssets.find(a => a.name === 'RELEASE-MANIFEST.json');
+  const releaseChecksumsAsset = allAssets.find(a => a.name === 'RELEASE-CHECKSUMS.sha256');
+
+  for (const asset of [releaseManifestAsset, releaseChecksumsAsset].filter(Boolean)) {
+    try {
+      const buf = await downloadAsset(asset.id);
+      releaseAssetFiles.push({ label: asset.name, buf });
+    } catch (e) {
+      log(`    ⚠️ Could not download ${asset.name}: ${e.message}`);
+    }
+  }
+
+  const releaseHashResult = verifyFileHashesAgainstManifest(releaseAssetFiles, digestManifest);
+  log(`  Release assets: ${releaseHashResult.match_count} match, ${releaseHashResult.mismatch_count} hash mismatch`);
+
+  // 3. Verify NFT tar hashes against manifest (compute from already-processed details)
+  let nftHashMatchCount = 0, nftHashMismatchCount = 0, nftSizeMismatchCount = 0;
+  let privateUnavailableCount = 0;
+  for (const detail of nftDetails) {
+    if (detail.error) continue;
+    // Check metadata CAR
+    if (detail.metadata) {
+      const entry = findManifestEntry(`${detail.asset_name}/metadata.car`, digestManifest)
+        || findManifestEntry(detail.asset_name, digestManifest);
+      if (entry) {
+        const shaMatch = detail.metadata.sha256 === entry.sha256?.toLowerCase();
+        const sizeMatch = detail.metadata.size === entry.size_bytes;
+        if (shaMatch && sizeMatch) nftHashMatchCount++;
+        else { nftHashMismatchCount++; if (!sizeMatch) nftSizeMismatchCount++; }
+      }
+    }
+    // Check media CARs
+    for (const m of detail.media || []) {
+      const entry = findManifestEntry(`${detail.asset_name}/media.car`, digestManifest);
+      if (entry) {
+        const shaMatch = m.sha256 === entry.sha256?.toLowerCase();
+        const sizeMatch = m.size === entry.size_bytes;
+        if (shaMatch && sizeMatch) nftHashMatchCount++;
+        else { nftHashMismatchCount++; if (!sizeMatch) nftSizeMismatchCount++; }
+      }
+    }
+  }
+  log(`  NFT tar hash: ${nftHashMatchCount} match, ${nftHashMismatchCount} mismatch, ${nftSizeMismatchCount} size mismatch`);
+
+  // Count private/unavailable files (in manifest but not downloadable)
+  if (digestManifest?.items) {
+    for (const item of digestManifest.items) {
+      const bn = path.basename(item.path);
+      // Files that are in manifest but we can't access from repo or release
+      const isRepoFile = repoFilesToVerify.some(f => f.label === bn);
+      const isReleaseAsset = releaseAssetFiles.some(f => f.label === bn);
+      const isNftTar = bn.startsWith('nft-') && bn.endsWith('.tar');
+      if (!isRepoFile && !isReleaseAsset && !isNftTar) {
+        privateUnavailableCount++;
+      }
+    }
+  }
+
+  // Aggregate hash verification counts
+  const multiHashMatchCount = repoHashResult.match_count + releaseHashResult.match_count + nftHashMatchCount;
+  const fileHashMismatchCount = repoHashResult.mismatch_count + releaseHashResult.mismatch_count + nftHashMismatchCount;
+  const fileSizeMismatchCount = repoHashResult.size_mismatch_count + releaseHashResult.size_mismatch_count + nftSizeMismatchCount;
+
+  log(`  ── Totals ──`);
+  log(`  multi_hash_match_count     : ${multiHashMatchCount}`);
+  log(`  file_hash_mismatch_count   : ${fileHashMismatchCount}`);
+  log(`  file_size_mismatch_count   : ${fileSizeMismatchCount}`);
+  log(`  private_unavailable_hash_only: ${privateUnavailableCount}`);
+
   const dagAndDigestManifestPass = criticalErrors.length === 0
     && metadataDagFail === 0
     && metadataDigestMismatchCount === 0
@@ -897,6 +1149,10 @@ async function verifyChainA(tokenIndex, nftAssets, digestManifest, ethAudit, con
     metadata_eth_cid_match: metadataEthCidMatch,
     metadata_eth_cid_mismatch: metadataEthCidMismatch,
     metadata_eth_cid_skip: metadataEthCidSkip,
+    multi_hash_match_count: multiHashMatchCount,
+    file_hash_mismatch_count: fileHashMismatchCount,
+    file_size_mismatch_count: fileSizeMismatchCount,
+    private_unavailable_hash_only: privateUnavailableCount,
     critical_errors: criticalErrors,
     nft_details: nftDetails,
   };
@@ -914,6 +1170,8 @@ async function verifyChainB() {
     signature_method_match: false,
     signed_message_sha256_match: false,
     taproot_address_match: false,
+    derived_address: null,
+    address_derivation_method: null,
     authority_covers_digest_manifest: false,
     digest_manifest_hash_anchored_by_btc_signature: false,
     digest_manifest_json_sha256_match: false,
@@ -981,16 +1239,48 @@ async function verifyChainB() {
   }
   log(`  BIP-340 valid: ${result.btc_signature_valid}`);
 
-  // 6. Verify x-only pubkey → Taproot address binding
-  // The declared address must be the Taproot address derived from pubkey_xonly
-  // For verification: we check that the address starts with bc1p (bech32m P2TR)
-  // and that the pubkey is consistent (32 bytes, within curve order)
+  // 6. Verify x-only pubkey → Taproot address binding (BIP-341 P2TR derivation)
+  // Must derive the actual P2TR address from pubkey_xonly and compare to declared address
   if (address && pubkeyXonly) {
     const pubkeyBuf = Buffer.from(pubkeyXonly, 'hex');
-    const isP2TR = address.startsWith('bc1p') && address.length === 62;
     const pubkeyValid = pubkeyBuf.length === 32 && BigInt('0x' + pubkeyXonly) > 0n && BigInt('0x' + pubkeyXonly) < SECP256K1_P;
-    result.taproot_address_match = isP2TR && pubkeyValid;
-    log(`  Taproot address match: ${result.taproot_address_match} (bc1p: ${isP2TR}, pubkey valid: ${pubkeyValid})`);
+    if (pubkeyValid) {
+      // Try standard BIP-341 tweaked derivation first
+      const derivedTweaked = deriveTaprootAddress(pubkeyXonly);
+      // Also try direct (untweaked) — some wallets use raw pubkey as witness program
+      const derivedDirect = bech32mEncode('bc', 1, pubkeyBuf);
+
+      const matchesTweaked = derivedTweaked === address;
+      const matchesDirect = derivedDirect === address;
+
+      result.taproot_address_match = matchesTweaked || matchesDirect;
+      result.derived_address = matchesTweaked ? derivedTweaked : derivedDirect;
+      result.address_derivation_method = matchesTweaked ? 'bip341-tweaked' : matchesDirect ? 'direct-untweaked' : 'none';
+
+      log(`  Taproot address match: ${result.taproot_address_match} (${result.address_derivation_method})`);
+      if (!matchesTweaked && !matchesDirect) {
+        log(`    Tweaked : ${derivedTweaked}`);
+        log(`    Direct  : ${derivedDirect}`);
+        log(`    Declared: ${address}`);
+        result.critical_errors.push(`P2TR address mismatch: neither tweaked nor direct derivation matches declared address`);
+      }
+    } else {
+      result.taproot_address_match = false;
+      result.critical_errors.push('Invalid pubkey_xonly: not on curve or out of range');
+      log(`  Taproot address match: ❌ (invalid pubkey)`);
+    }
+
+    // Also verify it matches the authority's declared BTC address
+    const authority = readRepoJson(AUTHORITY_JCS_FILE);
+    if (authority?.guardian?.btc_minter_address) {
+      const authBtcAddr = authority.guardian.btc_minter_address;
+      const matchesAuthority = address === authBtcAddr;
+      if (!matchesAuthority) {
+        result.taproot_address_match = false;
+        result.critical_errors.push(`BTC address does not match authority guardian: declared=${address}, authority=${authBtcAddr}`);
+      }
+      log(`  Authority BTC address match: ${matchesAuthority} (${authBtcAddr})`);
+    }
   }
 
   // 7. Authority covers digest-manifest
@@ -1476,6 +1766,10 @@ async function verifyChainD2(otsAssets) {
       }
       detail.sha256 = sha256hex(fileBuf);
 
+      // Write file to tmp dir so ots verify can use it
+      const tmpFilePath = path.join(TMP_DIR, target.label);
+      fs.writeFileSync(tmpFilePath, fileBuf);
+
       // 2. Find the OTS proof
       let otsPath = null;
       const otsFilename = `${target.label}.ots`;
@@ -1503,18 +1797,47 @@ async function verifyChainD2(otsAssets) {
         continue;
       }
 
-      // 3. Parse OTS info for Bitcoin attestations
+      // 3. Run ots verify for actual proof verification
+      //    If verify fails (e.g. no Bitcoin node), fall back to ots info
+      let verifyOutput = '';
+      let verifyPassed = false;
+      try {
+        verifyOutput = execSync(`ots verify "${otsPath}" -f "${tmpFilePath}" 2>&1`, {
+          encoding: 'utf-8', timeout: 120000
+        });
+        verifyPassed = true;
+      } catch (e) {
+        verifyOutput = e.stdout || e.stderr || e.message || '';
+        // ots verify returns non-zero if pending or failed — check output
+        if (verifyOutput.includes('Success!') || verifyOutput.includes('attested')) {
+          verifyPassed = true;
+        }
+      }
+      detail.ots_verify_output = verifyOutput.trim().slice(0, 2000);
+
+      // 4. Parse OTS info for Bitcoin block attestations (supplement verify output)
       const otsInfo = parseOtsInfo(otsPath);
-      if (otsInfo.error) {
-        detail.error = `OTS parse error: ${otsInfo.error}`;
-        result.ots_files_fail++;
-        result.anchored_files.push(detail);
-        result.critical_errors.push(detail.error);
-        continue;
+
+      // Also check verify output for block attestation lines
+      const blockAttestVerifyMatch = verifyOutput.match(/BitcoinBlockHeaderAttestation\((\d+)\)/);
+
+      // Collect all attestations from both sources
+      const allAttestations = [...otsInfo.attestations];
+      if (blockAttestVerifyMatch && !allAttestations.some(a => a.block_height === parseInt(blockAttestVerifyMatch[1], 10))) {
+        allAttestations.push({ block_height: parseInt(blockAttestVerifyMatch[1], 10), merkle_root: null });
       }
 
-      if (otsInfo.attestations.length === 0) {
-        detail.error = 'No Bitcoin block attestations found in OTS proof';
+      // Also parse ots info raw output for txids (more reliable than ots verify)
+      const txidMatches = otsInfo.raw?.match(/# Transaction id ([a-f0-9]{64})/g) || [];
+      const parsedTxids = txidMatches.map(m => m.replace('# Transaction id ', ''));
+
+      if (allAttestations.length === 0) {
+        // No Bitcoin attestations — check if there are pending attestations
+        if (otsInfo.pending && otsInfo.pending.length > 0) {
+          detail.error = `OTS proof has only pending attestations (no Bitcoin block attestation): ${otsInfo.pending.join(', ')}`;
+        } else {
+          detail.error = 'No Bitcoin block attestations found in OTS proof';
+        }
         result.ots_files_fail++;
         result.anchored_files.push(detail);
         result.critical_errors.push(detail.error);
@@ -1522,19 +1845,30 @@ async function verifyChainD2(otsAssets) {
       }
 
       // Use the highest block attestation
-      const bestAttestation = otsInfo.attestations.sort((a, b) => b.block_height - a.block_height)[0];
+      const bestAttestation = allAttestations.sort((a, b) => b.block_height - a.block_height)[0];
       detail.bitcoin_attested = true;
       detail.block_height = bestAttestation.block_height;
+      detail.ots_verify_passed = verifyPassed;
 
-      // 4. Query Bitcoin API for block hash and timestamp
+      // 5. Extract txid from ots info output or ots-summary.json
+      if (parsedTxids.length > 0) {
+        detail.txid = parsedTxids[0]; // Use first (earliest) txid
+      }
+
+      // Also try ots-summary.json
+      const otsSummary = readRepoJson(`${OTS_PROOF_DIR}/ots-summary.json`);
+      if (otsSummary?.files?.[target.label]?.ots?.txids?.length > 0 && !detail.txid) {
+        detail.txid = otsSummary.files[target.label].ots.txids[0];
+      }
+
+      // 6. Query Bitcoin API for block hash and timestamp
       try {
         const blockHashResult = await btcFetch(`/block-height/${bestAttestation.block_height}`);
-        // /block-height/:n returns plain text hash string
         const blockHashStr = typeof blockHashResult === 'string' ? blockHashResult : null;
         if (blockHashStr && blockHashStr.length === 64) {
           detail.block_hash = blockHashStr;
           const blockDetail = await btcFetch(`/block/${blockHashStr}`);
-          if (blockDetail && blockDetail.timestamp) {
+          if (blockDetail) {
             detail.block_time = blockDetail.timestamp;
           }
         }
@@ -1544,7 +1878,7 @@ async function verifyChainD2(otsAssets) {
 
       result.ots_files_pass++;
       result.ots_files_total++;
-      log(`  ✅ ${target.label}: attested at block ${bestAttestation.block_height}`);
+      log(`  ✅ ${target.label}: ots verify=${verifyPassed ? 'pass' : 'fallback-info'}, attested at block ${bestAttestation.block_height}`);
 
     } catch (e) {
       detail.error = e.message;
@@ -1824,6 +2158,10 @@ async function main() {
       metadata_eth_cid_match: chainA.metadata_eth_cid_match,
       metadata_eth_cid_mismatch: chainA.metadata_eth_cid_mismatch,
       metadata_eth_cid_skip: chainA.metadata_eth_cid_skip,
+      multi_hash_match_count: chainA.multi_hash_match_count,
+      file_hash_mismatch_count: chainA.file_hash_mismatch_count,
+      file_size_mismatch_count: chainA.file_size_mismatch_count,
+      private_unavailable_hash_only: chainA.private_unavailable_hash_only,
       critical_errors: chainA.critical_errors,
     },
     chain_b: {
