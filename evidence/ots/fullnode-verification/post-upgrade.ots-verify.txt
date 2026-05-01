@@ -1,0 +1,9 @@
+Post-upgrade OTS verify (no local Bitcoin Core available):
+- OTS client reports: "Success! Timestamp complete"
+- Proof file hash unchanged: 6272448e7b55d5ed79dbd38ae3c5bd747c5a02be9a2f466a490ddefbbdf43d0b
+- digest-manifest.json hash unchanged: c045642fe5cfab5eb78af7b40e98b9699dfff9121690e07ec6acaa07a445d6e9
+- Bitcoin attestations (2 confirmed):
+  Block 913081, merkle root 68b324d620ee4a01f80ee781d0cf00095d5779596f34f9ff0eab17ba7dd250f4
+  Block 913079, merkle root d6ce5ef6e46a45a200cce7dbdd864ee857924dae41db96a9e8498672b3c2460b
+- Pending attestations remain (alice, finney, catallaxy, bob calendars)
+- Fullnode-independent verification requires local Bitcoin Core RPC

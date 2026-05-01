@@ -1,0 +1,5 @@
+Pre-upgrade OTS verify (no local Bitcoin Core available):
+- OTS client cannot verify without Bitcoin node
+- Bitcoin attestations confirmed via ci-api mode (mempool.space):
+  Block 913081, merkle root 68b324d620ee4a01f80ee781d0cf00095d5779596f34f9ff0eab17ba7dd250f4
+  Block 913079, merkle root d6ce5ef6e46a45a200cce7dbdd864ee857924dae41db96a9e8498672b3c2460b
