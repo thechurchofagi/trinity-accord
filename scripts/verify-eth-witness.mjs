@@ -177,18 +177,28 @@ async function main() {
   const primaryTxHash = evidenceManifest?.eth_mirror_tx;
 
   // Find declared input_sha256/input_len for primary tx:
-  // 1) evidence-manifest.json
-  // 2) authority.jcs.json.ethereum.attestations[] by tx_hash
-  let primaryDeclaredSha256 = evidenceManifest?.input_sha256 || null;
-  let primaryDeclaredLen = evidenceManifest?.input_len || evidenceManifest?.input_size || null;
+  // 1) evidence-manifest.json (eth_mirror_input_sha256 / eth_mirror_input_len)
+  // 2) evidence-manifest.json (input_sha256 / input_len)
+  // 3) evidence-manifest.json (ethereum.primary_witness.input_sha256)
+  // 4) authority.jcs.json.ethereum.attestations[] by tx_hash
+  const primaryAttInAuthority = attestations.find(a => a.tx_hash?.toLowerCase() === primaryTxHash?.toLowerCase());
 
-  if (!primaryDeclaredSha256 || primaryDeclaredLen == null) {
-    const primaryAttInAuthority = attestations.find(a => a.tx_hash?.toLowerCase() === primaryTxHash?.toLowerCase());
-    if (primaryAttInAuthority) {
-      if (!primaryDeclaredSha256) primaryDeclaredSha256 = primaryAttInAuthority.input_sha256 || null;
-      if (primaryDeclaredLen == null) primaryDeclaredLen = primaryAttInAuthority.input_len || primaryAttInAuthority.input_size || null;
-    }
-  }
+  let primaryDeclaredSha256 =
+    evidenceManifest?.eth_mirror_input_sha256 ||
+    evidenceManifest?.input_sha256 ||
+    evidenceManifest?.ethereum?.primary_witness?.input_sha256 ||
+    primaryAttInAuthority?.input_sha256 ||
+    null;
+
+  let primaryDeclaredLen =
+    evidenceManifest?.eth_mirror_input_len ??
+    evidenceManifest?.input_len ??
+    evidenceManifest?.input_size ??
+    evidenceManifest?.ethereum?.primary_witness?.input_len ??
+    evidenceManifest?.ethereum?.primary_witness?.input_size ??
+    primaryAttInAuthority?.input_len ??
+    primaryAttInAuthority?.input_size ??
+    null;
 
   const primaryDetail = await verifyOneTx(primaryTxHash, guardianEthAddress, primaryDeclaredSha256, primaryDeclaredLen, 'primary-eth-witness');
   primaryDetail.source = 'evidence-manifest.json';

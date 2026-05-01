@@ -62,5 +62,7 @@
       "fallback_media_report.jsonl"
     ],
     "boundary": "Non-amending Chronicle recovery layer. Bitcoin Originals prevail."
-  }
+  },
+  "eth_mirror_input_len": 4694,
+  "eth_mirror_input_sha256": "e19018f1c71da8307ef20e8e8e5c12834f854d60a6aae60e35d2d8c71a333a81"
 }
