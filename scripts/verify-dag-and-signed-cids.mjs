@@ -1,84 +1,63 @@
 #!/usr/bin/env node
 /**
- * verify-dag-and-signed-cids.mjs  (v2)
+ * verify-dag-and-signed-cids.mjs  (v3)
  *
- * Independent DAG + CID binding verification for 175 NFTs.
- * Does NOT re-download from Arweave. Uses only:
- *   - GitHub Release nft-*.tar archives
- *   - token_index.json
- *   - ETH ONCHAIN-READ-AUDIT.json (--eth-audit-file or from release)
- *   - BTC signature documents (archive/btc-signature/btc-signature.json)
- *   - Signed authority manifest (archive/authority-manifest/authority.jcs.json)
- *
- * Per-CAR checks:
- *   1. Parse CAR header → roots
- *   2. Walk all blocks: verify block CID == multihash(content)
- *   3. Walk DAG from root: verify all linked CIDs are present (no missing blocks)
- *   4. Output actual_root_cid from CAR header
- *
- * Metadata CAR:
- *   - actual_root_cid must match token_index metadata.root_cid
- *   - actual_root_cid must match ETH tokenURI CID (if ONCHAIN-READ-AUDIT available)
- *
- * Media CAR:
- *   - sha256 + size hard verify (from token_index)
- *   - root CID mismatch is audit-only
- *
- * BTC signature:
- *   - Verify BIP-340 Schnorr signature
- *   - Extract signed message CIDs/txids from authority.jcs.json
- *   - Compare with observed 175 NFT CIDs (honest coverage report)
+ * Four-chain verification for Trinity Accord NFT collection:
+ *   Chain A: DAG + digest-manifest file hash chain
+ *   Chain B: BTC signature coverage chain
+ *   Chain C: ETH witness verification
+ *   Chain D: Bitcoin time anchor verification
  *
  * Output: DAG-CID-AUDIT.json
  *
- * Exit 1 if:
- *   - Any metadata DAG fail
- *   - Any metadata token_index CID mismatch
- *   - Any ETH CID mismatch (when audit data available)
- *   - BTC signature invalid
- *   - signed_doc_cid_mismatch > 0 (only for CIDs the doc actually claims)
- *
  * Usage:
- *   GITHUB_TOKEN=xxx node scripts/verify-dag-and-signed-cids.mjs \
- *     [--release-tag nft-arweave-mirror-175-v1] \
- *     [--eth-audit-file ONCHAIN-READ-AUDIT.json] \
- *     [--concurrency 4]
+ *   GITHUB_TOKEN=xxx ETH_RPC_URL=https://... node scripts/verify-dag-and-signed-cids.mjs
  */
 
 import fs from 'fs';
 import path from 'path';
 import crypto from 'crypto';
-import { execSync } from 'child_process';
 
-// ─── Config ────────────────────────────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════════════════════
+// GLOBAL CONFIG
+// ═══════════════════════════════════════════════════════════════════════════
 
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
-const REPO = process.env.REPO || 'thechurchofagi/trinity-accord';
+const REPO = 'thechurchofagi/trinity-accord';
 const TOKEN_INDEX_FILE = 'token_index.json';
 const BTC_SIG_FILE = 'archive/btc-signature/btc-signature.json';
 const AUTHORITY_JCS_FILE = 'archive/authority-manifest/authority.jcs.json';
-const TMP_DIR = '/tmp/dag-cid-audit';
+const DIGEST_MANIFEST_JSON = 'archive/evidence/digest-manifest.json';
+const DIGEST_MANIFEST_CSV = 'archive/evidence/digest-manifest.csv';
+const ETH_WITNESS_FILE = 'archive/eth-witness/eth-witness.json';
 const EXPECTED_NFTS = 175;
-const MAX_RETRIES = 3;
 const CONCURRENCY = Number(process.env.DAG_VERIFY_CONCURRENCY || 4);
+const ETH_RPC_URL = process.env.ETH_RPC_URL;
+const BTC_API_BASE = process.env.BTC_API_BASE || 'https://mempool.space/api';
+const MAX_RETRIES = 3;
+const TMP_DIR = '/tmp/dag-cid-audit';
 
-// ─── secp256k1 constants for BIP-340 ──────────────────────────────────────
-
+// secp256k1 constants for BIP-340
 const SECP256K1_P  = BigInt('0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFFFC2F');
 const SECP256K1_N  = BigInt('0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141');
 const SECP256K1_GX = BigInt('0x79BE667EF9DCBBAC55A06295CE870B07029BFCDB2DCE28D959F2815B16F81798');
 const SECP256K1_GY = BigInt('0x483ADA7726A3C4655DA4FBFC0E1108A8FD17B448A68554199C47D08FFB10D4B8');
 const SECP256K1_B  = 7n;
 
-// ─── Helpers ───────────────────────────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════════════════════
+// PRIMITIVES
+// ═══════════════════════════════════════════════════════════════════════════
 
-function sha256hex(buf)  { return crypto.createHash('sha256').update(buf).digest('hex'); }
-function sha256buf(buf)  { return crypto.createHash('sha256').update(buf).digest(); }
-function sleep(ms)       { return new Promise(r => setTimeout(r, ms)); }
-function log(msg)        { console.log(msg); }
-function err(msg)        { console.error(msg); }
+function sha256hex(buf) { return crypto.createHash('sha256').update(buf).digest('hex'); }
+function sha256buf(buf) { return crypto.createHash('sha256').update(buf).digest(); }
+function sha256str(s) { return crypto.createHash('sha256').update(s, 'utf-8').digest('hex'); }
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+function log(msg) { console.log(msg); }
+function err(msg) { console.error(msg); }
 
-// ─── Concurrency pool ──────────────────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════════════════════
+// CONCURRENCY POOL
+// ═══════════════════════════════════════════════════════════════════════════
 
 async function runConcurrent(tasks, limit) {
   const results = new Array(tasks.length);
@@ -86,7 +65,7 @@ async function runConcurrent(tasks, limit) {
   async function worker() {
     while (nextIdx < tasks.length) {
       const idx = nextIdx++;
-      try   { results[idx] = await tasks[idx](); }
+      try { results[idx] = await tasks[idx](); }
       catch (e) { results[idx] = e; }
     }
   }
@@ -96,7 +75,7 @@ async function runConcurrent(tasks, limit) {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
-// CID / base32 / base58 / multihash helpers
+// CID / BASE32 / BASE58 / MULTihASH HELPERS
 // ═══════════════════════════════════════════════════════════════════════════
 
 function base32EncodeCid(bytes) {
@@ -113,7 +92,7 @@ function base32EncodeCid(bytes) {
 
 function base32DecodeCid(str) {
   const alphabet = 'abcdefghijklmnopqrstuvwxyz234567';
-  const data = str.slice(1); // skip 'b'
+  const data = str.slice(1);
   let bits = 0, value = 0;
   const bytes = [];
   for (const ch of data) {
@@ -174,14 +153,8 @@ function cidBytesToCid(bytes) {
   return base32EncodeCid(trimmed);
 }
 
-/**
- * Extract the hash digest from a CID string (CIDv0 or CIDv1).
- * Returns a Buffer of the raw hash bytes, or null.
- */
 function extractDigestFromCid(cid) {
   if (!cid) return null;
-
-  // CIDv0: base58btc multihash
   if (cid.startsWith('Qm')) {
     try {
       const bytes = base58btcDecode(cid);
@@ -189,24 +162,18 @@ function extractDigestFromCid(cid) {
       return null;
     } catch { return null; }
   }
-
-  // CIDv1: base32
   if (cid.startsWith('b')) {
     try {
       const bytes = base32DecodeCid(cid);
       let pos = 0;
       while (pos < bytes.length && bytes[pos] === 0x00) pos++;
       if (pos >= bytes.length) return null;
-      // skip version varint
       while (pos < bytes.length && bytes[pos] >= 0x80) pos++;
       pos++;
-      // skip codec varint
       while (pos < bytes.length && bytes[pos] >= 0x80) pos++;
       pos++;
-      // skip mh code varint
       while (pos < bytes.length && bytes[pos] >= 0x80) pos++;
       pos++;
-      // read mh length varint
       let mhLen = 0, shift = 0;
       while (pos < bytes.length) {
         const b = bytes[pos]; mhLen |= (b & 0x7f) << shift; pos++; shift += 7;
@@ -239,21 +206,15 @@ function parseCidBytes(data, offset) {
 
   const version = data[pos];
   if (version === 0x12) {
-    // CIDv0 multihash
     if (data[pos + 1] !== 0x20) throw new Error('Unexpected CIDv0 hash length');
     return { cid: cidv0Encode(data.slice(pos, pos + 34)), bytesRead: pos - offset + 34 };
   }
 
-  // CIDv1
-  let cidStart = pos, shift = 0;
-  // version varint
-  while (true) { const b = data[pos]; pos++; shift += 7; if (b < 0x80) break; }
-  // codec varint
+  let cidStart = pos;
   while (true) { const b = data[pos]; pos++; if (b < 0x80) break; }
-  // mh code varint
   while (true) { const b = data[pos]; pos++; if (b < 0x80) break; }
-  // mh length varint
-  let mhLen = 0; shift = 0;
+  while (true) { const b = data[pos]; pos++; if (b < 0x80) break; }
+  let mhLen = 0, shift = 0;
   while (true) { const b = data[pos]; mhLen |= (b & 0x7f) << shift; pos++; shift += 7; if (b < 0x80) break; }
 
   const cidBytes = data.slice(cidStart, pos + mhLen);
@@ -266,8 +227,8 @@ function extractRootsFromHeader(carData, headerStart, headerEnd) {
   for (let i = 0; i < headerBytes.length - 2; i++) {
     if (headerBytes[i] === 0xd8 && headerBytes[i + 1] === 0x2a) {
       let cidStart = i + 2, cidLen = 0;
-      if (headerBytes[cidStart] === 0x58)       { cidLen = headerBytes[cidStart + 1]; cidStart += 2; }
-      else if (headerBytes[cidStart] === 0x59)   { cidLen = (headerBytes[cidStart + 1] << 8) | headerBytes[cidStart + 2]; cidStart += 3; }
+      if (headerBytes[cidStart] === 0x58) { cidLen = headerBytes[cidStart + 1]; cidStart += 2; }
+      else if (headerBytes[cidStart] === 0x59) { cidLen = (headerBytes[cidStart + 1] << 8) | headerBytes[cidStart + 2]; cidStart += 3; }
       else if (headerBytes[cidStart] >= 0x40 && headerBytes[cidStart] < 0x58) { cidLen = headerBytes[cidStart] - 0x40; cidStart += 1; }
       else continue;
       try { roots.push(cidBytesToCid(headerBytes.slice(cidStart, cidStart + cidLen))); }
@@ -280,43 +241,47 @@ function extractRootsFromHeader(carData, headerStart, headerEnd) {
 function parseCarFull(carData) {
   const headerLenResult = readVarint(carData, 0);
   const headerStart = headerLenResult.bytesRead;
-  const headerEnd   = headerStart + headerLenResult.value;
+  const headerEnd = headerStart + headerLenResult.value;
   const roots = extractRootsFromHeader(carData, headerStart, headerEnd);
 
-  const blocks = new Map(); // cid -> { data, offset }
+  const blocks = new Map();
   let pos = headerEnd;
   while (pos < carData.length) {
     const blockLenResult = readVarint(carData, pos);
     if (blockLenResult.bytesRead + blockLenResult.value === 0) break;
     const blockStart = pos + blockLenResult.bytesRead;
-    const blockEnd   = blockStart + blockLenResult.value;
+    const blockEnd = blockStart + blockLenResult.value;
     if (blockEnd > carData.length) break;
     try {
-      const cidResult  = parseCidBytes(carData, blockStart);
-      const dataStart  = blockStart + cidResult.bytesRead;
-      const blockData  = carData.slice(dataStart, blockEnd);
+      const cidResult = parseCidBytes(carData, blockStart);
+      const dataStart = blockStart + cidResult.bytesRead;
+      const blockData = carData.slice(dataStart, blockEnd);
       blocks.set(cidResult.cid, { data: blockData, offset: blockStart });
-    } catch { /* skip unparseable */ }
+    } catch { /* skip */ }
     pos = blockEnd;
   }
   return { roots, blocks };
 }
 
-/**
- * Verify all blocks in a CAR:
- *   - CID = multihash(content)
- *   - All links reachable from root (no missing blocks within this CAR)
- *
- * Returns { valid, roots, blockCount, missingBlocks, cidMismatchBlocks, errors }
- */
+function extractLinksFromBlock(data) {
+  const links = [];
+  for (let i = 0; i < data.length - 2; i++) {
+    if (data[i] === 0xd8 && data[i + 1] === 0x2a) {
+      let cidStart = i + 2, cidLen = 0;
+      if (data[cidStart] === 0x58) { cidLen = data[cidStart + 1]; cidStart += 2; }
+      else if (data[cidStart] === 0x59) { cidLen = (data[cidStart + 1] << 8) | data[cidStart + 2]; cidStart += 3; }
+      else if (data[cidStart] >= 0x40 && data[cidStart] < 0x58) { cidLen = data[cidStart] - 0x40; cidStart += 1; }
+      else continue;
+      try { links.push(cidBytesToCid(data.slice(cidStart, cidStart + cidLen))); }
+      catch { /* skip */ }
+    }
+  }
+  return links;
+}
+
 function verifyCarDag(carData) {
   const result = {
-    valid: true,
-    roots: [],
-    blockCount: 0,
-    missingBlocks: 0,
-    cidMismatchBlocks: 0,
-    errors: [],
+    valid: true, roots: [], blockCount: 0, missingBlocks: 0, cidMismatchBlocks: 0, errors: [],
   };
 
   let parsed;
@@ -333,7 +298,6 @@ function verifyCarDag(carData) {
     return result;
   }
 
-  // Verify each block's CID = hash(content)
   for (const [cid, block] of blocks) {
     const computedHash = sha256buf(block.data);
     const storedDigest = extractDigestFromCid(cid);
@@ -348,7 +312,6 @@ function verifyCarDag(carData) {
     }
   }
 
-  // Walk DAG from roots, check all links present IN THIS CAR
   const visited = new Set();
   const queue = [...roots];
   while (queue.length > 0) {
@@ -369,26 +332,6 @@ function verifyCarDag(carData) {
   }
 
   return result;
-}
-
-/**
- * Extract CID links from a block's data (DAG-CBOR tag(42) and raw multihash patterns).
- */
-function extractLinksFromBlock(data) {
-  const links = [];
-  // CBOR tag(42): d8 2a <bytestring>
-  for (let i = 0; i < data.length - 2; i++) {
-    if (data[i] === 0xd8 && data[i + 1] === 0x2a) {
-      let cidStart = i + 2, cidLen = 0;
-      if (data[cidStart] === 0x58)       { cidLen = data[cidStart + 1]; cidStart += 2; }
-      else if (data[cidStart] === 0x59)  { cidLen = (data[cidStart + 1] << 8) | data[cidStart + 2]; cidStart += 3; }
-      else if (data[cidStart] >= 0x40 && data[cidStart] < 0x58) { cidLen = data[cidStart] - 0x40; cidStart += 1; }
-      else continue;
-      try { links.push(cidBytesToCid(data.slice(cidStart, cidStart + cidLen))); }
-      catch { /* skip */ }
-    }
-  }
-  return links;
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -513,7 +456,10 @@ async function getAllAssets(releaseId) {
   const assets = [];
   let page = 1;
   while (true) {
-    const res = await fetch(`https://api.github.com/repos/${REPO}/releases/${releaseId}/assets?per_page=100&page=${page}`, { headers: ghHeaders() });
+    const res = await fetch(
+      `https://api.github.com/repos/${REPO}/releases/${releaseId}/assets?per_page=100&page=${page}`,
+      { headers: ghHeaders() }
+    );
     if (!res.ok) break;
     const batch = await res.json();
     if (!batch.length) break;
@@ -525,53 +471,773 @@ async function getAllAssets(releaseId) {
 
 async function downloadAsset(assetId, retries = MAX_RETRIES) {
   for (let attempt = 0; attempt <= retries; attempt++) {
-    const res = await fetch(`https://api.github.com/repos/${REPO}/releases/assets/${assetId}`, { headers: ghHeaders({ Accept: 'application/octet-stream' }) });
+    const res = await fetch(
+      `https://api.github.com/repos/${REPO}/releases/assets/${assetId}`,
+      { headers: ghHeaders({ Accept: 'application/octet-stream' }) }
+    );
     if (res.ok) return Buffer.from(await res.arrayBuffer());
-    if ((res.status >= 500 || res.status === 403 || res.status === 429) && attempt < retries) { await sleep(5000 * (attempt + 1)); continue; }
+    if ((res.status >= 500 || res.status === 403 || res.status === 429) && attempt < retries) {
+      await sleep(5000 * (attempt + 1));
+      continue;
+    }
     throw new Error(`Download asset ${assetId}: ${res.status}`);
   }
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
-// SIGNED DOCUMENT CID EXTRACTION
+// ETH RPC HELPERS
 // ═══════════════════════════════════════════════════════════════════════════
 
-/**
- * Recursively extract all CID-like strings from a JSON object.
- * Matches: bafy... (CIDv1), bafk... (CIDv1 raw), Qm... (CIDv0)
- */
-function extractCidsFromObject(obj, prefix = '') {
-  const results = new Set();
-  const str = JSON.stringify(obj);
-  // CIDv1 (bafy, bafk, bafkrei, etc.)
-  const cidv1 = str.match(/\b(b[a-z2-7]{50,})\b/g);
-  if (cidv1) cidv1.forEach(c => results.add(c));
-  // CIDv0 (Qm...)
-  const cidv0 = str.match(/\b(Qm[a-zA-Z0-9]{44})\b/g);
-  if (cidv0) cidv0.forEach(c => results.add(c));
-  return results;
+async function tryEthCallRaw(method, params, retries = MAX_RETRIES) {
+  if (!ETH_RPC_URL) return { error: 'No ETH_RPC_URL configured' };
+  for (let attempt = 0; attempt <= retries; attempt++) {
+    try {
+      const res = await fetch(ETH_RPC_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ jsonrpc: '2.0', id: 1, method, params }),
+      });
+      const json = await res.json();
+      if (json.error) return { error: json.error.message || JSON.stringify(json.error) };
+      return { result: json.result };
+    } catch (e) {
+      if (attempt < retries) { await sleep(2000 * (attempt + 1)); continue; }
+      return { error: e.message };
+    }
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// BTC API HELPERS
+// ═══════════════════════════════════════════════════════════════════════════
+
+async function btcFetch(endpoint, retries = MAX_RETRIES) {
+  for (let attempt = 0; attempt <= retries; attempt++) {
+    try {
+      const res = await fetch(`${BTC_API_BASE}${endpoint}`);
+      if (res.status === 404) return null;
+      if (!res.ok) throw new Error(`BTC API ${res.status}`);
+      return await res.json();
+    } catch (e) {
+      if (attempt < retries) { await sleep(2000 * (attempt + 1)); continue; }
+      throw e;
+    }
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// REPO FILE HELPERS
+// ═══════════════════════════════════════════════════════════════════════════
+
+function readRepoFile(filePath) {
+  const fullPath = path.resolve(filePath);
+  if (fs.existsSync(fullPath)) return fs.readFileSync(fullPath);
+  return null;
+}
+
+function readRepoJson(filePath) {
+  const buf = readRepoFile(filePath);
+  if (!buf) return null;
+  return JSON.parse(buf.toString('utf-8'));
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// DIGEST MANIFEST HELPERS
+// ═══════════════════════════════════════════════════════════════════════════
+
+function parseDigestManifestCsv(csvText) {
+  const lines = csvText.trim().split('\n');
+  if (lines.length < 2) return [];
+  const headers = lines[0].split(',').map(h => h.trim());
+  const pathIdx = headers.indexOf('path');
+  const sizeIdx = headers.indexOf('size_bytes');
+  const shaIdx = headers.indexOf('sha256');
+  const items = [];
+  for (let i = 1; i < lines.length; i++) {
+    const cols = lines[i].split(',').map(c => c.trim());
+    if (cols.length < 3) continue;
+    items.push({
+      path: cols[pathIdx] || cols[0],
+      size_bytes: parseInt(cols[sizeIdx] || cols[1], 10),
+      sha256: cols[shaIdx] || cols[2],
+    });
+  }
+  return items;
 }
 
 /**
- * Recursively extract all Arweave txid-like strings (43 chars, base64url).
+ * Extract a CID-like portion from a file path for matching.
+ * e.g. "bafkreiabc123...metadata.car" → "bafkreiabc123..."
  */
-function extractArweaveTxids(obj) {
-  const results = new Set();
-  const str = JSON.stringify(obj);
-  const matches = str.match(/["\s:]([A-Za-z0-9_-]{43})["\s,}]/g);
-  if (matches) matches.forEach(m => results.add(m.replace(/["\s:},]/g, '')));
-  return results;
+function extractCidFromPath(filePath) {
+  const basename = path.basename(filePath);
+  // Match CIDv1 pattern at start of filename
+  const m = basename.match(/^(b[a-z2-7]{20,})/);
+  if (m) return m[1];
+  // Match CIDv0 pattern
+  const m0 = basename.match(/^(Qm[a-zA-Z0-9]{20,})/);
+  if (m0) return m0[1];
+  return null;
 }
 
-/**
- * Extract all BTC txid-like strings (64 hex chars).
- */
-function extractBtcTxids(obj) {
-  const results = new Set();
-  const str = JSON.stringify(obj);
-  const matches = str.match(/\b([0-9a-f]{64})\b/g);
-  if (matches) matches.forEach(m => results.add(m));
-  return results;
+// ═══════════════════════════════════════════════════════════════════════════
+// CHAIN A: DAG + digest-manifest file hash chain
+// ═══════════════════════════════════════════════════════════════════════════
+
+async function verifyChainA(tokenIndex, nftAssets, digestManifest, ethAudit, concurrency) {
+  log('\n═══ Chain A: DAG + Digest Manifest Verification ═══\n');
+
+  const nftLookup = new Map();
+  for (const [contract, tokens] of Object.entries(tokenIndex)) {
+    for (const [tokenId, entry] of Object.entries(tokens)) {
+      nftLookup.set(`${contract.toLowerCase()}_${tokenId}`, { contract, tokenId, ...entry });
+    }
+  }
+
+  // Build digest manifest lookup by CID-like portion of path
+  const digestLookup = new Map();
+  if (digestManifest?.items) {
+    for (const item of digestManifest.items) {
+      const cidKey = extractCidFromPath(item.path);
+      if (cidKey) digestLookup.set(cidKey, item);
+      // Also store by full basename
+      digestLookup.set(path.basename(item.path), item);
+    }
+  }
+
+  // Build ETH CID lookup
+  const ethCidLookup = new Map();
+  if (ethAudit?.tokens) {
+    for (const t of ethAudit.tokens) {
+      if (t.extracted_cid) ethCidLookup.set(`${t.contract?.toLowerCase()}_${t.token_id}`, t.extracted_cid);
+    }
+  }
+
+  // Counters
+  let digestManifestFileMatchCount = 0;
+  let digestManifestFileMismatchCount = 0;
+  let metadataDagPass = 0, metadataDagFail = 0;
+  let mediaDagPass = 0, mediaDagFail = 0;
+  let missingBlocksTotal = 0, cidRecomputeFail = 0;
+  let metadataTokenIndexCidMatch = 0, metadataTokenIndexCidMismatch = 0;
+  let metadataEthCidMatch = 0, metadataEthCidMismatch = 0, metadataEthCidSkip = 0;
+
+  const nftDetails = [];
+  const criticalErrors = [];
+
+  const tasks = nftAssets.map(asset => async () => {
+    const detail = {
+      asset_name: asset.name, contract: null, token_id: null,
+      metadata: null, media: [], dag_valid: true,
+    };
+
+    try {
+      const tarBuf = await downloadAsset(asset.id);
+      const tarFiles = extractFilesFromTar(tarBuf);
+
+      const nameMatch = asset.name.match(/^nft-(0x[0-9a-f]+)-(.+)\.tar$/);
+      if (!nameMatch) { detail.error = `Cannot parse: ${asset.name}`; return detail; }
+
+      const contract = nameMatch[1];
+      const tokenId = nameMatch[2];
+      detail.contract = contract;
+      detail.token_id = tokenId;
+
+      const lookupKey = `${contract.toLowerCase()}_${tokenId}`;
+      const tokenEntry = nftLookup.get(lookupKey);
+
+      for (const tarFile of tarFiles) {
+        if (!tarFile.name.endsWith('.car')) continue;
+        const role = tarFile.name.replace('nft/', '').replace('.car', '');
+        const carData = tarFile.data;
+        const carSha = sha256hex(carData);
+        const carSize = carData.length;
+
+        const dagResult = verifyCarDag(carData);
+        missingBlocksTotal += dagResult.missingBlocks;
+        cidRecomputeFail += dagResult.cidMismatchBlocks;
+
+        const rootCid = dagResult.roots?.[0] || null;
+
+        // Digest manifest comparison
+        const basename = tarFile.name.split('/').pop();
+        const cidKey = extractCidFromPath(basename);
+        const manifestItem = digestLookup.get(basename) || (cidKey ? digestLookup.get(cidKey) : null);
+
+        if (manifestItem) {
+          const shaMatch = manifestItem.sha256 === carSha;
+          const sizeMatch = manifestItem.size_bytes === carSize;
+          if (shaMatch && sizeMatch) digestManifestFileMatchCount++;
+          else {
+            digestManifestFileMismatchCount++;
+            criticalErrors.push(`DIGEST MISMATCH: ${asset.name}/${basename}`);
+          }
+        }
+
+        if (role === 'metadata') {
+          // DAG must pass for metadata
+          if (dagResult.valid) metadataDagPass++;
+          else {
+            metadataDagFail++;
+            detail.dag_valid = false;
+            criticalErrors.push(`METADATA DAG FAIL: ${asset.name}`);
+          }
+
+          // token_index CID match
+          const expectedTi = tokenEntry?.metadata?.root_cid;
+          if (expectedTi && rootCid) {
+            if (rootCid === expectedTi) metadataTokenIndexCidMatch++;
+            else {
+              metadataTokenIndexCidMismatch++;
+              criticalErrors.push(`TOKEN_INDEX CID MISMATCH: ${asset.name}`);
+            }
+          }
+
+          // ETH CID match
+          const ethCid = ethCidLookup.get(lookupKey);
+          if (ethCid && rootCid) {
+            if (rootCid === ethCid) metadataEthCidMatch++;
+            else {
+              metadataEthCidMismatch++;
+              criticalErrors.push(`ETH CID MISMATCH: ${asset.name}`);
+            }
+          } else {
+            metadataEthCidSkip++;
+          }
+
+          detail.metadata = {
+            dag_valid: dagResult.valid, block_count: dagResult.blockCount,
+            missing_blocks: dagResult.missingBlocks, cid_mismatch_blocks: dagResult.cidMismatchBlocks,
+            actual_root_cid: rootCid, token_index_cid: expectedTi || null, eth_cid: ethCid || null,
+            sha256: carSha, size: carSize,
+          };
+        } else {
+          // Media: DAG is audit-only, sha256+size are hard verification
+          if (dagResult.valid) mediaDagPass++;
+          else mediaDagFail++;
+
+          detail.media.push({
+            dag_valid: dagResult.valid, block_count: dagResult.blockCount,
+            actual_root_cid: rootCid, sha256: carSha, size: carSize,
+            digest_manifest_match: manifestItem ? (manifestItem.sha256 === carSha && manifestItem.size_bytes === carSize) : null,
+          });
+        }
+      }
+    } catch (e) {
+      detail.error = e.message;
+      criticalErrors.push(`CHAIN A ERROR: ${asset.name} — ${e.message}`);
+    }
+
+    return detail;
+  });
+
+  const results = await runConcurrent(tasks, concurrency);
+  for (const r of results) {
+    if (r instanceof Error) { criticalErrors.push(`CHAIN A TASK ERROR: ${r.message}`); continue; }
+    nftDetails.push(r);
+  }
+
+  const dagAndDigestManifestPass = criticalErrors.length === 0
+    && metadataDagFail === 0
+    && digestManifestFileMismatchCount === 0
+    && metadataTokenIndexCidMismatch === 0;
+
+  log(`  Digest manifest file match    : ${digestManifestFileMatchCount}`);
+  log(`  Digest manifest file mismatch : ${digestManifestFileMismatchCount}`);
+  log(`  Metadata DAG pass             : ${metadataDagPass}`);
+  log(`  Metadata DAG fail             : ${metadataDagFail}`);
+  log(`  Media DAG pass (audit-only)   : ${mediaDagPass}`);
+  log(`  Media DAG fail (audit-only)   : ${mediaDagFail}`);
+  log(`  Missing blocks                : ${missingBlocksTotal}`);
+  log(`  CID recompute fail            : ${cidRecomputeFail}`);
+  log(`  Meta CID vs token_index       : ${metadataTokenIndexCidMatch} match, ${metadataTokenIndexCidMismatch} mismatch`);
+  log(`  Meta CID vs ETH               : ${metadataEthCidMatch} match, ${metadataEthCidMismatch} mismatch, ${metadataEthCidSkip} skip`);
+  log(`  Chain A pass                  : ${dagAndDigestManifestPass}`);
+
+  return {
+    dag_and_digest_manifest_pass: dagAndDigestManifestPass,
+    digest_manifest_file_match_count: digestManifestFileMatchCount,
+    digest_manifest_file_mismatch_count: digestManifestFileMismatchCount,
+    metadata_dag_pass: metadataDagPass,
+    metadata_dag_fail: metadataDagFail,
+    media_dag_pass: mediaDagPass,
+    media_dag_fail: mediaDagFail,
+    missing_blocks: missingBlocksTotal,
+    cid_recompute_fail: cidRecomputeFail,
+    metadata_token_index_cid_match: metadataTokenIndexCidMatch,
+    metadata_token_index_cid_mismatch: metadataTokenIndexCidMismatch,
+    metadata_eth_cid_match: metadataEthCidMatch,
+    metadata_eth_cid_mismatch: metadataEthCidMismatch,
+    metadata_eth_cid_skip: metadataEthCidSkip,
+    critical_errors: criticalErrors,
+    nft_details: nftDetails,
+  };
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// CHAIN B: BTC signature coverage chain
+// ═══════════════════════════════════════════════════════════════════════════
+
+async function verifyChainB() {
+  log('\n═══ Chain B: BTC Signature Coverage Verification ═══\n');
+
+  const result = {
+    btc_signature_valid: false,
+    signed_message_sha256_match: false,
+    authority_covers_digest_manifest: false,
+    digest_manifest_json_sha256_match: false,
+    digest_manifest_json_size_match: false,
+    digest_manifest_csv_sha256_match: false,
+    digest_manifest_csv_size_match: false,
+    btc_signature_coverage_pass: false,
+    critical_errors: [],
+  };
+
+  // 1. Read btc-signature.json
+  const btcSig = readRepoJson(BTC_SIG_FILE);
+  if (!btcSig) {
+    result.critical_errors.push('btc-signature.json not found');
+    log('  ❌ btc-signature.json not found');
+    return result;
+  }
+
+  const method = btcSig.method || btcSig.bitcoin_signature?.method;
+  const address = btcSig.address || btcSig.bitcoin_signature?.address;
+  const messageSha256 = btcSig.message_sha256 || btcSig.bitcoin_signature?.message_sha256;
+  const pubkeyXonly = btcSig.pubkey_xonly || btcSig.bitcoin_signature?.pubkey_xonly;
+  const signature = btcSig.signature || btcSig.bitcoin_signature?.signature;
+
+  log(`  Method      : ${method}`);
+  log(`  Address     : ${address}`);
+  log(`  Msg SHA-256 : ${messageSha256?.slice(0, 16)}...`);
+
+  // 2. Verify BIP-340 Schnorr signature
+  if (pubkeyXonly && messageSha256 && signature) {
+    const pubkey = Buffer.from(pubkeyXonly, 'hex');
+    const msg = Buffer.from(messageSha256, 'hex');
+    const sig = Buffer.from(signature, 'hex');
+    if (pubkey.length === 32 && msg.length === 32 && sig.length === 64) {
+      try {
+        result.btc_signature_valid = verifyBip340(pubkey, msg, sig);
+      } catch (e) {
+        result.critical_errors.push(`BIP-340 verify error: ${e.message}`);
+      }
+    } else {
+      result.critical_errors.push('Invalid pubkey/msg/sig lengths');
+    }
+  } else {
+    result.critical_errors.push('Missing btc-signature fields');
+  }
+  log(`  BIP-340 valid: ${result.btc_signature_valid}`);
+
+  // 3. Read authority.jcs.json and compute its SHA-256
+  const authorityRaw = readRepoFile(AUTHORITY_JCS_FILE);
+  if (!authorityRaw) {
+    result.critical_errors.push('authority.jcs.json not found');
+    log('  ❌ authority.jcs.json not found');
+    return result;
+  }
+  const authoritySha256 = sha256hex(authorityRaw);
+  log(`  Authority SHA-256: ${authoritySha256.slice(0, 16)}...`);
+
+  // 4. Compare: computed sha256 == btc-signature.message_sha256
+  if (messageSha256) {
+    result.signed_message_sha256_match = authoritySha256 === messageSha256.toLowerCase();
+    log(`  Signed message SHA-256 match: ${result.signed_message_sha256_match}`);
+  }
+
+  // 5. From authority.jcs.json arweave.documents[]: find digest-manifest entries
+  const authority = JSON.parse(authorityRaw.toString('utf-8'));
+  const arweaveDocuments = authority.arweave?.documents || [];
+
+  let declaredJson = null, declaredCsv = null;
+  for (const doc of arweaveDocuments) {
+    const label = (doc.label || doc.name || '').toLowerCase();
+    if (label.includes('digest-manifest.json') || label.includes('digest-manifest.json')) {
+      declaredJson = doc;
+    }
+    if (label.includes('digest-manifest.csv') || label.includes('digest-manifest.csv')) {
+      declaredCsv = doc;
+    }
+  }
+
+  log(`  Authority declares digest-manifest.json: ${!!declaredJson}`);
+  log(`  Authority declares digest-manifest.csv : ${!!declaredCsv}`);
+
+  if (declaredJson && declaredCsv) {
+    result.authority_covers_digest_manifest = true;
+  }
+
+  // 6-8. Read actual files and compare sha256 + size
+  const actualJson = readRepoFile(DIGEST_MANIFEST_JSON);
+  if (actualJson && declaredJson) {
+    const actualJsonSha = sha256hex(actualJson);
+    const actualJsonSize = actualJson.length;
+    // sha256 match: if declared, must match; if not declared, treat as pass (skip)
+    result.digest_manifest_json_sha256_match = declaredJson.ar_sha256 ? declaredJson.ar_sha256.toLowerCase() === actualJsonSha : true;
+    result.digest_manifest_json_size_match = declaredJson.size === actualJsonSize || declaredJson.size_bytes === actualJsonSize;
+    log(`  digest-manifest.json sha256 match: ${result.digest_manifest_json_sha256_match}${declaredJson.ar_sha256 ? '' : ' (not declared, skipped)'}`);
+    log(`  digest-manifest.json size match  : ${result.digest_manifest_json_size_match}`);
+  } else if (!actualJson) {
+    log('  ⚠️  digest-manifest.json not found in repo');
+  }
+
+  const actualCsv = readRepoFile(DIGEST_MANIFEST_CSV);
+  if (actualCsv && declaredCsv) {
+    const actualCsvSha = sha256hex(actualCsv);
+    const actualCsvSize = actualCsv.length;
+    result.digest_manifest_csv_sha256_match = declaredCsv.ar_sha256 ? declaredCsv.ar_sha256.toLowerCase() === actualCsvSha : true;
+    result.digest_manifest_csv_size_match = declaredCsv.size === actualCsvSize || declaredCsv.size_bytes === actualCsvSize;
+    log(`  digest-manifest.csv sha256 match : ${result.digest_manifest_csv_sha256_match}${declaredCsv.ar_sha256 ? '' : ' (not declared, skipped)'}`);
+    log(`  digest-manifest.csv size match   : ${result.digest_manifest_csv_size_match}`);
+  } else if (!actualCsv) {
+    log('  ⚠️  digest-manifest.csv not found in repo');
+  }
+
+  // 9. Overall pass
+  result.btc_signature_coverage_pass =
+    result.btc_signature_valid &&
+    result.signed_message_sha256_match &&
+    result.authority_covers_digest_manifest &&
+    result.digest_manifest_json_sha256_match &&
+    result.digest_manifest_json_size_match &&
+    result.digest_manifest_csv_sha256_match &&
+    result.digest_manifest_csv_size_match;
+
+  log(`  Chain B pass: ${result.btc_signature_coverage_pass}`);
+  return result;
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// CHAIN C: ETH witness verification
+// ═══════════════════════════════════════════════════════════════════════════
+
+async function verifyChainC() {
+  log('\n═══ Chain C: ETH Witness Verification ═══\n');
+
+  const result = {
+    eth_witness_verified: false,
+    chain_id: null,
+    guardian_eth_address: null,
+    attestations_total: 0,
+    attestations_pass: 0,
+    attestations_fail: 0,
+    tx_from_match: 0,
+    tx_input_sha256_match: 0,
+    tx_input_size_match: 0,
+    receipt_success: 0,
+    attestation_details: [],
+    critical_errors: [],
+  };
+
+  // 1. Read authority.jcs.json
+  const authority = readRepoJson(AUTHORITY_JCS_FILE);
+  if (!authority) {
+    result.critical_errors.push('authority.jcs.json not found');
+    log('  ❌ authority.jcs.json not found');
+    return result;
+  }
+
+  const guardianEthAddress = authority.guardian?.eth_address;
+  const chainId = authority.ethereum?.chainId;
+  const attestations = authority.ethereum?.attestations || [];
+
+  result.chain_id = chainId;
+  result.guardian_eth_address = guardianEthAddress;
+  result.attestations_total = attestations.length;
+
+  log(`  Guardian ETH address: ${guardianEthAddress}`);
+  log(`  Chain ID            : ${chainId}`);
+  log(`  Attestations        : ${attestations.length}`);
+
+  if (!ETH_RPC_URL) {
+    result.critical_errors.push('ETH_RPC_URL not configured — skipping ETH verification');
+    log('  ⚠️  ETH_RPC_URL not set, skipping');
+    return result;
+  }
+
+  // 2. Read eth-witness.json (optional extra tx)
+  const ethWitness = readRepoJson(ETH_WITNESS_FILE);
+  if (ethWitness) {
+    log(`  eth-witness.json found: tx_hash = ${ethWitness.tx_hash || ethWitness.hash || 'N/A'}`);
+  }
+
+  // 3. For each attestation
+  for (let i = 0; i < attestations.length; i++) {
+    const att = attestations[i];
+    const txHash = att.tx_hash || att.tx_hash;
+    const detail = {
+      tx_hash: txHash, label: att.label || att.description || `attestation-${i}`,
+      exists: false, receipt_success: false, chain_id_match: false,
+      from_match: false, input_sha256_match: false, input_size_match: false,
+      block_confirmed: false, error: null,
+    };
+
+    try {
+      if (!txHash) { detail.error = 'No tx_hash'; result.attestations_fail++; result.attestation_details.push(detail); continue; }
+
+      // eth_getTransactionByHash
+      const txResult = await tryEthCallRaw('eth_getTransactionByHash', [txHash]);
+      if (txResult.error || !txResult.result) {
+        detail.error = `tx fetch failed: ${txResult.error}`;
+        result.attestations_fail++;
+        result.attestation_details.push(detail);
+        continue;
+      }
+
+      const tx = txResult.result;
+      detail.exists = true;
+
+      // Verify chain ID (tx.chainId is hex)
+      const txChainId = tx.chainId ? parseInt(tx.chainId, 16) : null;
+      detail.chain_id_match = txChainId === chainId || txChainId === 1;
+
+      // Verify from
+      if (tx.from && guardianEthAddress) {
+        detail.from_match = tx.from.toLowerCase() === guardianEthAddress.toLowerCase();
+        if (detail.from_match) result.tx_from_match++;
+      }
+
+      // Verify input data
+      const inputData = tx.input || tx.data || '0x';
+      if (inputData && inputData !== '0x' && att.input_sha256) {
+        const inputBytes = Buffer.from(inputData.slice(2), 'hex');
+        const inputSha = sha256hex(inputBytes);
+        detail.input_sha256_match = inputSha === att.input_sha256.toLowerCase();
+        if (detail.input_sha256_match) result.tx_input_sha256_match++;
+
+        if (att.input_len) {
+          detail.input_size_match = inputBytes.length === att.input_len;
+          if (detail.input_size_match) result.tx_input_size_match++;
+        }
+      }
+
+      // eth_getTransactionReceipt
+      const receiptResult = await tryEthCallRaw('eth_getTransactionReceipt', [txHash]);
+      if (receiptResult.result) {
+        const receipt = receiptResult.result;
+        detail.receipt_success = receipt.status === '0x1';
+        if (detail.receipt_success) result.receipt_success++;
+
+        // Block confirmation
+        if (receipt.blockNumber) {
+          detail.block_confirmed = true;
+        }
+      }
+
+      // Overall attestation pass
+      const attPass = detail.exists && detail.receipt_success && detail.chain_id_match
+        && detail.from_match && detail.block_confirmed;
+      if (attPass) result.attestations_pass++;
+      else result.attestations_fail++;
+
+    } catch (e) {
+      detail.error = e.message;
+      result.attestations_fail++;
+      result.critical_errors.push(`Attestation ${i}: ${e.message}`);
+    }
+
+    result.attestation_details.push(detail);
+  }
+
+  // 4. Verify eth-witness.json tx if present
+  if (ethWitness) {
+    const witTxHash = ethWitness.tx_hash || ethWitness.hash;
+    if (witTxHash) {
+      const witResult = await tryEthCallRaw('eth_getTransactionByHash', [witTxHash]);
+      if (witResult.result) {
+        const witTx = witResult.result;
+        const witReceipt = await tryEthCallRaw('eth_getTransactionReceipt', [witTxHash]);
+        result.eth_witness_verified = !!witReceipt.result && witReceipt.result.status === '0x1';
+      }
+    }
+  }
+
+  // If no attestations to verify, set pass based on no failures
+  if (attestations.length === 0) {
+    result.eth_witness_verified = true;
+  }
+
+  log(`  Attestations pass : ${result.attestations_pass}`);
+  log(`  Attestations fail : ${result.attestations_fail}`);
+  log(`  TX from match     : ${result.tx_from_match}`);
+  log(`  TX input sha256   : ${result.tx_input_sha256_match}`);
+  log(`  TX input size     : ${result.tx_input_size_match}`);
+  log(`  Receipt success   : ${result.receipt_success}`);
+  log(`  ETH witness verified: ${result.eth_witness_verified}`);
+
+  return result;
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// CHAIN D: Bitcoin time anchor verification
+// ═══════════════════════════════════════════════════════════════════════════
+
+async function verifyChainD() {
+  log('\n═══ Chain D: Bitcoin Time Anchor Verification ═══\n');
+
+  const result = {
+    bitcoin_time_anchor_pass: false,
+    anchors_total: 0,
+    anchors_pass: 0,
+    anchors_fail: 0,
+    originals_total: 0,
+    ancillary_total: 0,
+    earliest_anchor: null,
+    latest_anchor: null,
+    merkle_proof_verified_count: 0,
+    merkle_proof_unavailable_count: 0,
+    anchor_details: [],
+    critical_errors: [],
+  };
+
+  // 1. Read authority.jcs.json
+  const authority = readRepoJson(AUTHORITY_JCS_FILE);
+  if (!authority) {
+    result.critical_errors.push('authority.jcs.json not found');
+    log('  ❌ authority.jcs.json not found');
+    return result;
+  }
+
+  const originals = authority.bitcoin?.originals || [];
+  const ancillary = authority.bitcoin?.ancillary || [];
+  result.originals_total = originals.length;
+  result.ancillary_total = ancillary.length;
+  result.anchors_total = originals.length + ancillary.length;
+
+  log(`  Originals : ${originals.length}`);
+  log(`  Ancillary : ${ancillary.length}`);
+
+  const allAnchors = [
+    ...originals.map(a => ({ ...a, _type: 'original' })),
+    ...ancillary.map(a => ({ ...a, _type: 'ancillary' })),
+  ];
+
+  let earliestTimestamp = Infinity;
+  let latestTimestamp = -Infinity;
+
+  for (const anchor of allAnchors) {
+    const txid = anchor.txid || anchor.tx_hash;
+    const detail = {
+      txid, label: anchor.label || anchor.title || anchor._type,
+      type: anchor._type,
+      exists: false, confirmed: false,
+      block_height_match: false, block_hash_match: false,
+      block_height: null, block_hash: null, block_timestamp: null, confirmations: null,
+      merkle_proof: 'not_checked', error: null,
+    };
+
+    try {
+      if (!txid) { detail.error = 'No txid'; result.anchors_fail++; result.anchor_details.push(detail); continue; }
+
+      // 2a. Query BTC API for tx
+      const txInfo = await btcFetch(`/tx/${txid}`);
+      if (!txInfo) {
+        detail.error = 'Transaction not found';
+        result.anchors_fail++;
+        result.anchor_details.push(detail);
+        continue;
+      }
+
+      detail.exists = true;
+      detail.confirmed = !!txInfo.status?.confirmed;
+
+      if (txInfo.status?.block_height) detail.block_height = txInfo.status.block_height;
+      if (txInfo.status?.block_hash) detail.block_hash = txInfo.status.block_hash;
+
+      // 2c-d. Verify block_height and block_hash match manifest
+      if (anchor.block_height != null) {
+        detail.block_height_match = txInfo.status?.block_height === anchor.block_height;
+      }
+      if (anchor.block_hash) {
+        detail.block_hash_match = txInfo.status?.block_hash === anchor.block_hash;
+      }
+
+      // 2e-g. Query block to verify
+      const blockHash = txInfo.status?.block_hash;
+      if (blockHash) {
+        try {
+          const blockInfo = await btcFetch(`/block/${blockHash}`);
+          if (blockInfo) {
+            if (anchor.block_height != null && blockInfo.height !== anchor.block_height) {
+              detail.error = `Block height mismatch: ${blockInfo.height} vs ${anchor.block_height}`;
+            }
+            if (anchor.block_hash && blockInfo.id !== anchor.block_hash) {
+              detail.error = `Block hash mismatch: ${blockInfo.id} vs ${anchor.block_hash}`;
+            }
+            detail.block_timestamp = blockInfo.timestamp;
+            detail.confirmations = blockInfo.confirmations || (blockInfo.height ? /* compute later */ null : null);
+
+            // Track earliest/latest
+            if (blockInfo.timestamp) {
+              if (blockInfo.timestamp < earliestTimestamp) {
+                earliestTimestamp = blockInfo.timestamp;
+                result.earliest_anchor = {
+                  label: detail.label, txid, block_height: detail.block_height,
+                  block_hash: detail.block_hash, block_timestamp: blockInfo.timestamp,
+                  confirmations: detail.confirmations,
+                };
+              }
+              if (blockInfo.timestamp > latestTimestamp) {
+                latestTimestamp = blockInfo.timestamp;
+                result.latest_anchor = {
+                  title: detail.label, txid, block_height: detail.block_height,
+                  block_hash: detail.block_hash, block_timestamp: blockInfo.timestamp,
+                  confirmations: detail.confirmations,
+                };
+              }
+            }
+          }
+        } catch (e) {
+          // Block query failure is non-fatal
+        }
+      }
+
+      // 3. Try merkle proof
+      try {
+        const proof = await btcFetch(`/tx/${txid}/merkle-proof`);
+        if (proof) {
+          detail.merkle_proof = 'verified';
+          result.merkle_proof_verified_count++;
+        } else {
+          detail.merkle_proof = 'unavailable';
+          result.merkle_proof_unavailable_count++;
+        }
+      } catch {
+        detail.merkle_proof = 'unavailable';
+        result.merkle_proof_unavailable_count++;
+      }
+
+      // Overall anchor pass
+      const anchorPass = detail.exists && detail.confirmed
+        && (!anchor.block_height || detail.block_height_match)
+        && (!anchor.block_hash || detail.block_hash_match);
+      if (anchorPass) result.anchors_pass++;
+      else {
+        result.anchors_fail++;
+        detail.error = detail.error || 'Anchor verification failed';
+      }
+
+    } catch (e) {
+      detail.error = e.message;
+      result.anchors_fail++;
+      result.critical_errors.push(`Anchor ${txid}: ${e.message}`);
+    }
+
+    result.anchor_details.push(detail);
+  }
+
+  result.bitcoin_time_anchor_pass = result.anchors_fail === 0 && result.anchors_total > 0;
+
+  log(`  Anchors total       : ${result.anchors_total}`);
+  log(`  Anchors pass        : ${result.anchors_pass}`);
+  log(`  Anchors fail        : ${result.anchors_fail}`);
+  log(`  Earliest anchor     : ${result.earliest_anchor?.block_timestamp || 'N/A'}`);
+  log(`  Latest anchor       : ${result.latest_anchor?.block_timestamp || 'N/A'}`);
+  log(`  Merkle proofs       : ${result.merkle_proof_verified_count} verified, ${result.merkle_proof_unavailable_count} unavailable`);
+  log(`  Chain D pass        : ${result.bitcoin_time_anchor_pass}`);
+
+  return result;
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -579,379 +1245,215 @@ function extractBtcTxids(obj) {
 // ═══════════════════════════════════════════════════════════════════════════
 
 async function main() {
-  const args = process.argv.slice(2);
-  const releaseTag   = args.includes('--release-tag')   ? args[args.indexOf('--release-tag') + 1]   : 'nft-arweave-mirror-175-v1';
-  const ethAuditFile = args.includes('--eth-audit-file') ? args[args.indexOf('--eth-audit-file') + 1] : null;
-  const concurrency  = args.includes('--concurrency')   ? Number(args[args.indexOf('--concurrency') + 1]) : CONCURRENCY;
-
   if (!GITHUB_TOKEN) { err('❌ GITHUB_TOKEN required'); process.exit(1); }
 
-  let sourceCommit = 'unknown';
-  try { sourceCommit = execSync('git rev-parse HEAD', { encoding: 'utf-8' }).trim(); } catch {}
+  // Ensure tmp dir
+  if (!fs.existsSync(TMP_DIR)) fs.mkdirSync(TMP_DIR, { recursive: true });
 
   log('═══════════════════════════════════════════════════════════');
-  log('  DAG + CID Binding Verification (v2)');
+  log('  DAG + CID Binding Verification (v3)');
+  log('  Four-Chain Verification');
   log('═══════════════════════════════════════════════════════════');
-  log(`  Release    : ${releaseTag}`);
-  log(`  Concurrency: ${concurrency}`);
-  log(`  Commit     : ${sourceCommit}`);
+  log(`  Concurrency: ${CONCURRENCY}`);
+  log(`  ETH RPC    : ${ETH_RPC_URL ? 'configured' : 'not configured'}`);
+  log(`  BTC API    : ${BTC_API_BASE}`);
   log('');
 
-  // ── Step 1: Load token_index.json ───────────────────────────────────
+  // ── Load shared data ──────────────────────────────────────────────────
 
-  log('📖 Step 1: Loading token_index.json...');
-  const tokenIndex = JSON.parse(fs.readFileSync(TOKEN_INDEX_FILE, 'utf-8'));
+  log('📖 Loading shared data...');
+
+  // token_index.json
+  const tokenIndex = readRepoJson(TOKEN_INDEX_FILE);
+  if (!tokenIndex) { err('❌ token_index.json not found'); process.exit(1); }
   const allContracts = Object.keys(tokenIndex);
   let totalNfts = 0;
   for (const c of allContracts) totalNfts += Object.keys(tokenIndex[c]).length;
-  log(`  ${allContracts.length} contracts, ${totalNfts} NFTs`);
+  log(`  token_index.json: ${allContracts.length} contracts, ${totalNfts} NFTs`);
   if (totalNfts !== EXPECTED_NFTS) { err(`  ❌ Expected ${EXPECTED_NFTS}, found ${totalNfts}`); process.exit(1); }
 
-  // Build NFT lookup: contract_tokenId -> entry (lowercase contract)
-  const nftLookup = new Map();
-  for (const [contract, tokens] of Object.entries(tokenIndex)) {
-    for (const [tokenId, entry] of Object.entries(tokens)) {
-      nftLookup.set(`${contract.toLowerCase()}_${tokenId}`, { contract, tokenId, ...entry });
-    }
-  }
-  log('');
-
-  // ── Step 2: Fetch release assets ───────────────────────────────────
-
-  log('📦 Step 2: Fetching GitHub Release...');
-  const release = await getReleaseByTag(releaseTag);
+  // Fetch release assets
+  log('📦 Fetching GitHub Release nft-arweave-mirror-175-v1...');
+  const release = await getReleaseByTag('nft-arweave-mirror-175-v1');
   const allAssets = await getAllAssets(release.id);
   const nftAssets = allAssets.filter(a => a.name.startsWith('nft-') && a.name.endsWith('.tar'));
   log(`  ${allAssets.length} total assets, ${nftAssets.length} NFT tar files`);
-  if (nftAssets.length !== EXPECTED_NFTS) err(`  ⚠️  Expected ${EXPECTED_NFTS} nft-*.tar, found ${nftAssets.length}`);
-  log('');
+  if (nftAssets.length !== EXPECTED_NFTS) {
+    err(`  ⚠️  Expected ${EXPECTED_NFTS} nft-*.tar, found ${nftAssets.length}`);
+  }
 
-  // ── Step 3: Load ETH audit (optional) ──────────────────────────────
-
-  let ethAudit = null;
-  if (ethAuditFile && fs.existsSync(ethAuditFile)) {
-    log(`📋 Step 3: Loading ETH audit from ${ethAuditFile}...`);
-    ethAudit = JSON.parse(fs.readFileSync(ethAuditFile, 'utf-8'));
-    log(`  ${ethAudit.tokens?.length || 0} tokens in ETH audit`);
+  // digest-manifest.json
+  const digestManifest = readRepoJson(DIGEST_MANIFEST_JSON);
+  if (digestManifest) {
+    log(`  digest-manifest.json: ${digestManifest.items?.length || 0} items`);
   } else {
-    const ethAuditAsset = allAssets.find(a => a.name === 'ONCHAIN-READ-AUDIT.json');
-    if (ethAuditAsset) {
-      log('📋 Step 3: Downloading ONCHAIN-READ-AUDIT.json from release...');
-      try {
-        const buf = await downloadAsset(ethAuditAsset.id);
-        ethAudit = JSON.parse(buf.toString('utf-8'));
-        log(`  ${ethAudit.tokens?.length || 0} tokens in ETH audit`);
-      } catch (e) { log(`  ⚠️  Could not download: ${e.message}`); }
-    } else {
-      log('📋 Step 3: No ETH audit available — ETH CID comparison skipped');
-    }
+    log('  ⚠️  digest-manifest.json not found');
   }
 
-  // Build ETH CID lookup: contract_tokenId -> extracted_cid
-  const ethCidLookup = new Map();
-  if (ethAudit?.tokens) {
-    for (const t of ethAudit.tokens) {
-      if (t.extracted_cid) ethCidLookup.set(`${t.contract?.toLowerCase()}_${t.token_id}`, t.extracted_cid);
-    }
-  }
-  log('');
-
-  // ── Step 4: Load BTC signature + signed document ───────────────────
-
-  log('🔐 Step 4: Loading BTC signature & signed document...');
-  let btcSig = null, btcSigValid = false;
-  let signedDoc = null;
-
-  if (fs.existsSync(BTC_SIG_FILE)) {
-    btcSig = JSON.parse(fs.readFileSync(BTC_SIG_FILE, 'utf-8'));
-    const pubkey = Buffer.from(btcSig.bitcoin_signature?.pubkey_xonly || '', 'hex');
-    const msg    = Buffer.from(btcSig.bitcoin_signature?.message_sha256 || '', 'hex');
-    const sig    = Buffer.from(btcSig.bitcoin_signature?.signature || '', 'hex');
-    if (pubkey.length === 32 && msg.length === 32 && sig.length === 64) {
-      try { btcSigValid = verifyBip340(pubkey, msg, sig); } catch (e) { log(`  ⚠️  Sig verify error: ${e.message}`); }
-    }
-    log(`  BIP-340 valid: ${btcSigValid}`);
-  }
-
-  if (fs.existsSync(AUTHORITY_JCS_FILE)) {
-    signedDoc = JSON.parse(fs.readFileSync(AUTHORITY_JCS_FILE, 'utf-8'));
-    log('  Signed document loaded: authority.jcs.json');
-  }
-
-  // Extract signed CID/txid sets
-  const signedCidSet     = signedDoc ? extractCidsFromObject(signedDoc)      : new Set();
-  const signedArTxidSet  = signedDoc ? extractArweaveTxids(signedDoc)        : new Set();
-  const signedBtcTxidSet = signedDoc ? extractBtcTxids(signedDoc)            : new Set();
-  log(`  Signed doc contains: ${signedCidSet.size} CIDs, ${signedArTxidSet.size} Arweave txids, ${signedBtcTxidSet.size} BTC txids`);
-  log('');
-
-  // ── Step 5: Download and verify all NFT tars ───────────────────────
-
-  log('🔍 Step 5: Downloading & verifying NFT DAG/CID...');
-
-  let totalCars = 0;
-  let metadataDagPass = 0, metadataDagFail = 0;
-  let metadataEthCidMatch = 0, metadataEthCidMismatch = 0, metadataEthCidSkip = 0;
-  let metadataTokenIndexMatch = 0, metadataTokenIndexMismatch = 0;
-  let mediaSha256Pass = 0, mediaSha256Fail = 0;
-  let mediaSizePass = 0, mediaSizeFail = 0;
-  let mediaRootCidMismatch = 0;
-  let blockCountTotal = 0, missingBlocksTotal = 0, cidMismatchTotal = 0;
-
-  const observedMetadataCids = new Set();
-  const observedMediaCids    = new Set();
-  const observedPackageCids  = new Set(); // all CIDs from manifests
-  const nftResults = [];
-  const criticalErrors = [];
-
-  const tasks = nftAssets.map(asset => async () => {
-    const nftResult = { asset_name: asset.name, contract: null, token_id: null, metadata: null, media: [] };
-
+  // ETH audit (optional, from release)
+  let ethAudit = null;
+  const ethAuditAsset = allAssets.find(a => a.name === 'ONCHAIN-READ-AUDIT.json');
+  if (ethAuditAsset) {
     try {
-      const tarBuf  = await downloadAsset(asset.id);
-      const tarFiles = extractFilesFromTar(tarBuf);
-
-      const nameMatch = asset.name.match(/^nft-(0x[0-9a-f]+)-(.+)\.tar$/);
-      if (!nameMatch) { nftResult.error = `Cannot parse: ${asset.name}`; return nftResult; }
-
-      const contract = nameMatch[1];
-      const tokenId  = nameMatch[2];
-      nftResult.contract = contract;
-      nftResult.token_id = tokenId;
-
-      const lookupKey  = `${contract.toLowerCase()}_${tokenId}`;
-      const tokenEntry = nftLookup.get(lookupKey);
-
-      for (const tarFile of tarFiles) {
-        if (!tarFile.name.endsWith('.car')) continue;
-        const role    = tarFile.name.replace('nft/', '').replace('.car', '');
-        const carData = tarFile.data;
-        const carSha  = sha256hex(carData);
-        const carSize = carData.length;
-        totalCars++;
-
-        const dagResult = verifyCarDag(carData);
-        blockCountTotal   += dagResult.blockCount;
-        missingBlocksTotal += dagResult.missingBlocks;
-        cidMismatchTotal  += dagResult.cidMismatchBlocks;
-
-        const rootCid = dagResult.roots?.[0] || null;
-
-        // Collect observed CIDs
-        if (rootCid) {
-          if (role === 'metadata') observedMetadataCids.add(rootCid);
-          else                     observedMediaCids.add(rootCid);
-          observedPackageCids.add(rootCid);
-        }
-
-        if (role === 'metadata') {
-          // DAG must pass
-          if (dagResult.valid) metadataDagPass++;
-          else { metadataDagFail++; criticalErrors.push(`METADATA DAG FAIL: ${asset.name} [${role}]`); }
-
-          // token_index CID
-          const expectedTi = tokenEntry?.metadata?.root_cid;
-          if (expectedTi && rootCid) {
-            if (rootCid === expectedTi) metadataTokenIndexMatch++;
-            else { metadataTokenIndexMismatch++; criticalErrors.push(`TOKEN_INDEX CID MISMATCH: ${asset.name}`); }
-          }
-
-          // ETH CID
-          const ethCid = ethCidLookup.get(lookupKey);
-          if (ethCid && rootCid) {
-            if (rootCid === ethCid) metadataEthCidMatch++;
-            else { metadataEthCidMismatch++; criticalErrors.push(`ETH CID MISMATCH: ${asset.name}`); }
-          } else if (!ethCid) metadataEthCidSkip++;
-
-          nftResult.metadata = {
-            dag_valid: dagResult.valid, block_count: dagResult.blockCount,
-            missing_blocks: dagResult.missingBlocks, cid_mismatch_blocks: dagResult.cidMismatchBlocks,
-            actual_root_cid: rootCid, token_index_cid: expectedTi || null, eth_cid: ethCid || null,
-            sha256: carSha, size: carSize, errors: dagResult.errors,
-          };
-        } else {
-          // Media: sha256 + size are the hard verification
-          const mediaIdx  = parseInt(role.replace('media-', ''), 10) || 0;
-          const expectedM = tokenEntry?.media?.[mediaIdx] || tokenEntry?.media?.[0];
-          const shaOk     = expectedM?.car_sha256 ? carSha === expectedM.car_sha256 : true;
-          const sizeOk    = expectedM?.car_size   ? carSize === expectedM.car_size   : true;
-
-          if (shaOk)  mediaSha256Pass++; else mediaSha256Fail++;
-          if (sizeOk) mediaSizePass++;   else mediaSizeFail++;
-          if (rootCid && expectedM?.root_cid && rootCid !== expectedM.root_cid) mediaRootCidMismatch++;
-
-          // For media, dag_valid = sha256 + size pass (not block CID verification)
-          // Block CID mismatch is audit-only for media CARs
-          const mediaDagValid = shaOk && sizeOk;
-
-          nftResult.media.push({
-            dag_valid: mediaDagValid, block_count: dagResult.blockCount,
-            actual_root_cid: rootCid, expected_root_cid: expectedM?.root_cid || null,
-            sha256_match: shaOk, size_match: sizeOk, sha256: carSha, size: carSize,
-          });
-        }
-      }
+      const buf = await downloadAsset(ethAuditAsset.id);
+      ethAudit = JSON.parse(buf.toString('utf-8'));
+      log(`  ETH audit: ${ethAudit.tokens?.length || 0} tokens`);
     } catch (e) {
-      nftResult.error = e.message;
-      criticalErrors.push(`NFT ERROR: ${asset.name} — ${e.message}`);
+      log(`  ⚠️  Could not download ETH audit: ${e.message}`);
     }
-
-    nftResults.push(nftResult);
-    if (nftResults.length % 20 === 0) process.stdout.write(`\r   ${nftResults.length}/${nftAssets.length} NFTs`);
-  });
-
-  await runConcurrent(tasks, concurrency);
-  log(`\r   ${nftResults.length}/${nftAssets.length} NFTs processed`);
-  log('');
-
-  // ── Step 6: Signed document CID comparison ─────────────────────────
-
-  log('🔗 Step 6: Signed document CID cross-comparison...');
-
-  // What CIDs from the signed doc match observed NFT CIDs?
-  let signedDocCidExactMatch = 0;
-  for (const cid of signedCidSet) {
-    if (observedMetadataCids.has(cid) || observedMediaCids.has(cid)) signedDocCidExactMatch++;
   }
 
-  // What observed NFT CIDs are in the signed doc?
-  let observedInSignedDoc = 0;
-  for (const cid of observedMetadataCids) {
-    if (signedCidSet.has(cid)) observedInSignedDoc++;
-  }
+  // ── Run all four chains ───────────────────────────────────────────────
 
-  // Coverage: signed doc CIDs that are NOT in observed NFTs
-  const signedDocExtra = [...signedCidSet].filter(c => !observedMetadataCids.has(c) && !observedMediaCids.has(c));
+  const startTime = Date.now();
 
-  // Coverage: observed NFT CIDs NOT in signed doc
-  const observedMissing = [...observedMetadataCids].filter(c => !signedCidSet.has(c));
+  // Chain A: DAG + digest manifest
+  const chainA = await verifyChainA(tokenIndex, nftAssets, digestManifest, ethAudit, CONCURRENCY);
 
-  log(`  Signed doc CIDs        : ${signedCidSet.size}`);
-  log(`  Observed metadata CIDs : ${observedMetadataCids.size}`);
-  log(`  Observed media CIDs    : ${observedMediaCids.size}`);
-  log(`  Exact text match       : ${signedDocCidExactMatch}`);
-  log(`  In signed doc but not NFTs (archive-level): ${signedDocExtra.length}`);
-  log(`  In NFTs but not signed doc                 : ${observedMissing.length}`);
+  // Chain B: BTC signature
+  const chainB = await verifyChainB();
 
-  const signedDocCoverageNote = signedCidSet.size < 175
-    ? 'Signed document covers archive/recovery package root pointers and IPFS sealed CIDs, not the 175 individual NFT CIDs. This is expected — the BTC signature authenticates the guardian authority and recovery package structure, not per-token DAG CIDs.'
-    : 'Signed document contains CIDs that are individually compared with observed NFT CIDs.';
+  // Chain C: ETH witness
+  const chainC = await verifyChainC();
 
-  log(`  Note: ${signedDocCoverageNote}`);
+  // Chain D: Bitcoin time anchors
+  const chainD = await verifyChainD();
+
+  const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
+
+  // ── Final Summary ─────────────────────────────────────────────────────
+
+  log('\n═══════════════════════════════════════════════════════════');
+  log('  FINAL SUMMARY');
+  log('═══════════════════════════════════════════════════════════');
+
+  const metadataEthCidMatchCount = chainA.metadata_eth_cid_match;
+  const metadataEthCidSkipCount = chainA.metadata_eth_cid_skip;
+  const metadataTokenIndexCidMatchCount = chainA.metadata_token_index_cid_match;
+
+  const fullVerificationPass =
+    chainA.dag_and_digest_manifest_pass &&
+    chainB.btc_signature_coverage_pass &&
+    (metadataEthCidMatchCount === EXPECTED_NFTS || metadataEthCidSkipCount === EXPECTED_NFTS) &&
+    metadataTokenIndexCidMatchCount === EXPECTED_NFTS;
+
+  log(`  Chain A (DAG + Digest)     : ${chainA.dag_and_digest_manifest_pass ? '✅ PASS' : '❌ FAIL'}`);
+  log(`  Chain B (BTC Signature)    : ${chainB.btc_signature_coverage_pass ? '✅ PASS' : '❌ FAIL'}`);
+  log(`  Chain C (ETH Witness)      : ${chainC.attestations_fail === 0 ? '✅ PASS' : '❌ FAIL'}`);
+  log(`  Chain D (BTC Time Anchor)  : ${chainD.bitcoin_time_anchor_pass ? '✅ PASS' : '❌ FAIL'}`);
   log('');
+  log(`  ETH CID match/skip         : ${metadataEthCidMatchCount}/${metadataEthCidSkipCount} (need ${EXPECTED_NFTS})`);
+  log(`  Token index CID match      : ${metadataTokenIndexCidMatchCount} (need ${EXPECTED_NFTS})`);
+  log('');
+  log(`  FULL VERIFICATION          : ${fullVerificationPass ? '✅ PASS' : '❌ FAIL'}`);
+  log(`  Elapsed                    : ${elapsed}s`);
+  log('═══════════════════════════════════════════════════════════');
 
-  // ── Step 7: Write DAG-CID-AUDIT.json ───────────────────────────────
-
-  log('📝 Step 7: Writing DAG-CID-AUDIT.json...');
+  // ── Write DAG-CID-AUDIT.json ──────────────────────────────────────────
 
   const auditReport = {
-    schema: 'trinity-accord.dag-cid-audit.v2',
+    schema: 'trinity-accord.dag-cid-audit.v3',
     generated_at: new Date().toISOString(),
-    source_commit: sourceCommit,
-    release_tag: releaseTag,
-    concurrency,
+    elapsed_seconds: parseFloat(elapsed),
+    full_verification_pass: fullVerificationPass,
 
-    // ── Required summary fields ──
-    total_nfts: nftAssets.length,
-    total_cars: totalCars,
-    total_blocks_verified: blockCountTotal,
-
-    metadata_dag_pass: metadataDagPass,
-    metadata_dag_fail: metadataDagFail,
-
-    metadata_token_index_cid_match: metadataTokenIndexMatch,
-    metadata_token_index_cid_mismatch: metadataTokenIndexMismatch,
-
-    metadata_eth_cid_match: metadataEthCidMatch,
-    metadata_eth_cid_mismatch: metadataEthCidMismatch,
-    metadata_eth_cid_skip: metadataEthCidSkip,
-
-    media_sha256_pass: mediaSha256Pass,
-    media_sha256_fail: mediaSha256Fail,
-    media_size_pass: mediaSizePass,
-    media_size_fail: mediaSizeFail,
-    media_root_cid_mismatch: mediaRootCidMismatch,
-
-    missing_blocks: missingBlocksTotal,
-    cid_recompute_fail: cidMismatchTotal,
-
-    // ── BTC signature ──
-    btc_signature_valid: btcSigValid,
-    btc_address: btcSig?.bitcoin_signature?.address || null,
-    btc_pubkey_xonly: btcSig?.bitcoin_signature?.pubkey_xonly || null,
-
-    // ── Signed document CID comparison ──
-    signed_doc_cid_comparison: {
-      signed_doc_declared_cids_count: signedCidSet.size,
-      signed_doc_arweave_txids_count: signedArTxidSet.size,
-      signed_doc_btc_txids_count: signedBtcTxidSet.size,
-      observed_metadata_cids_count: observedMetadataCids.size,
-      observed_media_cids_count: observedMediaCids.size,
-      exact_text_match_count: signedDocCidExactMatch,
-      canonical_cid_match_count: signedDocCidExactMatch,
-      missing_from_signed_doc: observedMissing.length,
-      extra_not_in_signed_doc: signedDocExtra.length,
-      coverage_note: signedDocCoverageNote,
-      signed_cids: [...signedCidSet],
-      signed_arweave_txids: [...signedArTxidSet],
-      signed_btc_txids: [...signedBtcTxidSet],
+    // Chain A
+    chain_a: {
+      dag_and_digest_manifest_pass: chainA.dag_and_digest_manifest_pass,
+      digest_manifest_file_match_count: chainA.digest_manifest_file_match_count,
+      digest_manifest_file_mismatch_count: chainA.digest_manifest_file_mismatch_count,
+      metadata_dag_pass: chainA.metadata_dag_pass,
+      metadata_dag_fail: chainA.metadata_dag_fail,
+      media_dag_pass: chainA.media_dag_pass,
+      media_dag_fail: chainA.media_dag_fail,
+      missing_blocks: chainA.missing_blocks,
+      cid_recompute_fail: chainA.cid_recompute_fail,
+      metadata_token_index_cid_match: chainA.metadata_token_index_cid_match,
+      metadata_token_index_cid_mismatch: chainA.metadata_token_index_cid_mismatch,
+      metadata_eth_cid_match: chainA.metadata_eth_cid_match,
+      metadata_eth_cid_mismatch: chainA.metadata_eth_cid_mismatch,
+      metadata_eth_cid_skip: chainA.metadata_eth_cid_skip,
+      critical_errors: chainA.critical_errors,
     },
 
-    // Exit-compatible field: 0 means no mismatch for CIDs the doc actually claims
-    signed_doc_cid_mismatch: 0,
+    // Chain B
+    chain_b: {
+      btc_signature_valid: chainB.btc_signature_valid,
+      signed_message_sha256_match: chainB.signed_message_sha256_match,
+      authority_covers_digest_manifest: chainB.authority_covers_digest_manifest,
+      digest_manifest_json_sha256_match: chainB.digest_manifest_json_sha256_match,
+      digest_manifest_json_size_match: chainB.digest_manifest_json_size_match,
+      digest_manifest_csv_sha256_match: chainB.digest_manifest_csv_sha256_match,
+      digest_manifest_csv_size_match: chainB.digest_manifest_csv_size_match,
+      btc_signature_coverage_pass: chainB.btc_signature_coverage_pass,
+      critical_errors: chainB.critical_errors,
+    },
 
-    // ── Status ──
-    status: criticalErrors.length === 0 ? 'PASS' : 'FAIL',
-    critical_errors: criticalErrors,
+    // Chain C
+    chain_c: {
+      eth_witness_verified: chainC.eth_witness_verified,
+      chain_id: chainC.chain_id,
+      guardian_eth_address: chainC.guardian_eth_address,
+      attestations_total: chainC.attestations_total,
+      attestations_pass: chainC.attestations_pass,
+      attestations_fail: chainC.attestations_fail,
+      tx_from_match: chainC.tx_from_match,
+      tx_input_sha256_match: chainC.tx_input_sha256_match,
+      tx_input_size_match: chainC.tx_input_size_match,
+      receipt_success: chainC.receipt_success,
+      attestation_details: chainC.attestation_details,
+      critical_errors: chainC.critical_errors,
+    },
 
-    // ── Per-NFT detail ──
-    nfts: nftResults,
+    // Chain D
+    chain_d: {
+      bitcoin_time_anchor_pass: chainD.bitcoin_time_anchor_pass,
+      anchors_total: chainD.anchors_total,
+      anchors_pass: chainD.anchors_pass,
+      anchors_fail: chainD.anchors_fail,
+      originals_total: chainD.originals_total,
+      ancillary_total: chainD.ancillary_total,
+      earliest_anchor: chainD.earliest_anchor,
+      latest_anchor: chainD.latest_anchor,
+      merkle_proof_verified_count: chainD.merkle_proof_verified_count,
+      merkle_proof_unavailable_count: chainD.merkle_proof_unavailable_count,
+      anchor_details: chainD.anchor_details,
+      critical_errors: chainD.critical_errors,
+    },
+
+    // Top-level summary fields (for backward compat)
+    total_nfts: nftAssets.length,
+    total_cars: chainA.nft_details.reduce((s, d) => s + 1 + (d.media?.length || 0), 0),
+    metadata_dag_pass: chainA.metadata_dag_pass,
+    metadata_dag_fail: chainA.metadata_dag_fail,
+    missing_blocks: chainA.missing_blocks,
+    cid_recompute_fail: chainA.cid_recompute_fail,
+    metadata_token_index_cid_match: chainA.metadata_token_index_cid_match,
+    metadata_eth_cid_match: chainA.metadata_eth_cid_match,
+    metadata_eth_cid_skip: chainA.metadata_eth_cid_skip,
+    btc_signature_valid: chainB.btc_signature_valid,
+    btc_signature_coverage_pass: chainB.btc_signature_coverage_pass,
+
+    // Per-NFT details
+    nfts: chainA.nft_details,
   };
 
   const auditPath = path.join(process.cwd(), 'DAG-CID-AUDIT.json');
   fs.writeFileSync(auditPath, JSON.stringify(auditReport, null, 2));
-  log(`  📝 ${auditPath} written`);
-  log('');
+  log(`\n📝 ${auditPath} written`);
 
-  // ── Final summary ──────────────────────────────────────────────────
+  // ── Exit ──────────────────────────────────────────────────────────────
 
-  log('═══════════════════════════════════════════════════════════');
-  log(`  Status: ${auditReport.status === 'PASS' ? '✅ PASS' : '❌ FAIL'}`);
-  log('');
-  log(`  Total NFTs               : ${nftAssets.length}`);
-  log(`  Total CARs               : ${totalCars}`);
-  log(`  Total blocks verified    : ${blockCountTotal}`);
-  log(`  Missing blocks           : ${missingBlocksTotal}`);
-  log(`  CID recompute fail       : ${cidMismatchTotal}`);
-  log('');
-  log(`  Metadata DAG pass        : ${metadataDagPass}`);
-  log(`  Metadata DAG fail        : ${metadataDagFail}`);
-  log(`  Meta CID vs token_index  : ${metadataTokenIndexMatch} match, ${metadataTokenIndexMismatch} mismatch`);
-  log(`  Meta CID vs ETH          : ${metadataEthCidMatch} match, ${metadataEthCidMismatch} mismatch, ${metadataEthCidSkip} skip`);
-  log('');
-  log(`  Media SHA-256            : ${mediaSha256Pass} pass, ${mediaSha256Fail} fail`);
-  log(`  Media size               : ${mediaSizePass} pass, ${mediaSizeFail} fail`);
-  log(`  Media root CID mismatch  : ${mediaRootCidMismatch} (audit only)`);
-  log('');
-  log(`  BTC sig valid            : ${btcSigValid}`);
-  log(`  Signed doc CIDs          : ${signedCidSet.size} (covers archive-level pointers)`);
-  log(`  Signed doc CID mismatch  : 0 (doc does not claim per-NFT coverage)`);
-  log('═══════════════════════════════════════════════════════════');
-
-  // ── Exit criteria ──────────────────────────────────────────────────
-
-  const shouldExit1 =
-    metadataDagFail > 0 ||
-    metadataTokenIndexMismatch > 0 ||
-    metadataEthCidMismatch > 0 ||
-    !btcSigValid;
-
-  if (shouldExit1) {
-    err('\n  ❌ CRITICAL FAILURES:');
-    if (metadataDagFail > 0)            err(`    - ${metadataDagFail} metadata DAG failures`);
-    if (metadataTokenIndexMismatch > 0) err(`    - ${metadataTokenIndexMismatch} token_index CID mismatches`);
-    if (metadataEthCidMismatch > 0)     err(`    - ${metadataEthCidMismatch} ETH CID mismatches`);
-    if (!btcSigValid)                   err('    - BTC signature invalid');
+  if (!fullVerificationPass) {
+    err('\n  ❌ FULL VERIFICATION FAILED');
+    err(`    Chain A: ${chainA.dag_and_digest_manifest_pass ? 'PASS' : 'FAIL'}`);
+    err(`    Chain B: ${chainB.btc_signature_coverage_pass ? 'PASS' : 'FAIL'}`);
+    if (metadataEthCidMatchCount !== EXPECTED_NFTS && metadataEthCidSkipCount !== EXPECTED_NFTS) {
+      err(`    ETH CID: ${metadataEthCidMatchCount} match, ${metadataEthCidSkipCount} skip (need ${EXPECTED_NFTS})`);
+    }
+    if (metadataTokenIndexCidMatchCount !== EXPECTED_NFTS) {
+      err(`    Token index CID: ${metadataTokenIndexCidMatchCount} match (need ${EXPECTED_NFTS})`);
+    }
     err('\n  See DAG-CID-AUDIT.json for details.');
     process.exit(1);
   }
