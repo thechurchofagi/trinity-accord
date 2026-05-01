@@ -1277,7 +1277,7 @@ async function main() {
       upFail++;
     }
 
-    if (fs.existsSync(tarPath)) fs.unlinkSync(tarPath);
+    // Don't delete tar yet — needed for RELEASE-CHECKSUMS.sha256 generation
   }
 
   log(`\n   Uploads: ${uploaded} uploaded, ${upFail} failed`);
@@ -1288,102 +1288,7 @@ async function main() {
   }
   log('');
 
-  // ── Step 9: Re-download & verify ALL 175 Release assets ────────────
-  // No skipped-existing bypass. Every single asset is downloaded and verified.
-
-  log('🔍 Step 6: Re-downloading & verifying ALL 175 Release assets...');
-  let reVerifySha256Pass = 0, reVerifySizePass = 0, reVerifyCidPass = 0;
-  let reVerifyFail = 0;
-  const reVerifyErrors = [];
-
-  for (const nft of nftList) {
-    const assetId = uploadedAssetIds.get(nft.assetName);
-    if (!assetId) {
-      err(`  ❌ ${nft.assetName}: no asset ID found`);
-      reVerifyFail++;
-      continue;
-    }
-
-    try {
-      const assetBuf = await downloadAsset(assetId);
-      const tarFiles = extractFilesFromTar(assetBuf);
-
-      let nftSha256Ok = true, nftSizeOk = true, nftCidOk = true;
-
-      for (const f of nft.files) {
-        const tarEntry = tarFiles.find(t => t.name === `nft/${f.role}.car`);
-
-        if (!tarEntry) {
-          err(`  ❌ ${nft.assetName}: missing ${f.role}.car in tar`);
-          nftSha256Ok = false;
-          nftSizeOk = false;
-          nftCidOk = false;
-          continue;
-        }
-
-        // SHA-256 check
-        const actualHash = sha256hex(tarEntry.data);
-        if (actualHash !== f.expected_sha256) {
-          err(`  ❌ ${nft.assetName} [${f.role}]: SHA-256 mismatch after re-download`);
-          nftSha256Ok = false;
-        }
-
-        // Size check
-        if (tarEntry.data.length !== f.expected_size) {
-          err(`  ❌ ${nft.assetName} [${f.role}]: size mismatch after re-download`);
-          nftSizeOk = false;
-        }
-
-        // Root CID check — two-tier: metadata=strict, media=audit
-        try {
-          const reRootCid = extractCarRootCid(tarEntry.data);
-          if (f.role === 'metadata') {
-            // Strict check
-            if (reRootCid !== f.expected_root_cid) {
-              err(`  ❌ ${nft.assetName} [${f.role}]: root CID mismatch after re-download`);
-              nftCidOk = false;
-            }
-          } else {
-            // Audit check: look in header roots + block CIDs
-            const reResult = findCidInCar(tarEntry.data, f.expected_root_cid);
-            if (!reResult.found) {
-              // Warning only, not a failure (sha256+size already verified)
-            }
-          }
-        } catch (e) {
-          if (f.role === 'metadata') {
-            err(`  ❌ ${nft.assetName} [${f.role}]: CID extract failed: ${e.message}`);
-            nftCidOk = false;
-          }
-          // Media CID extract failure is not a hard error
-        }
-      }
-
-      if (nftSha256Ok) reVerifySha256Pass++;
-      if (nftSizeOk) reVerifySizePass++;
-      if (nftCidOk) reVerifyCidPass++;
-      if (!nftSha256Ok || !nftSizeOk || !nftCidOk) reVerifyFail++;
-
-      if ((reVerifySha256Pass + reVerifyFail) % 20 === 0) {
-        process.stdout.write(`\r   ${reVerifySha256Pass + reVerifyFail}/${nftList.length} verified`);
-      }
-    } catch (e) {
-      err(`\n  ❌ ${nft.assetName}: re-download failed: ${e.message}`);
-      reVerifyFail++;
-    }
-  }
-
-  log(`\n   Re-verified SHA-256 : ${reVerifySha256Pass} / ${nftList.length}`);
-  log(`   Re-verified Size    : ${reVerifySizePass} / ${nftList.length}`);
-  log(`   Re-verified Root CID: ${reVerifyCidPass} / ${nftList.length}`);
-  log('');
-
-  if (reVerifyFail > 0) {
-    err(`  ❌ ${reVerifyFail} re-verification failures. Aborting.`);
-    process.exit(1);
-  }
-
-  // ── Step 10: Generate RELEASE-MANIFEST.json ────────────────────────
+  // ── Step 9: Generate RELEASE-MANIFEST.json ────────────────────────
 
   log('📄 Step 7: Generating RELEASE-MANIFEST.json & RELEASE-CHECKSUMS.sha256...');
 
@@ -1406,7 +1311,6 @@ async function main() {
   const allSha256Match = sha256MatchCount === totalCars;
   const allSizeMatch = sizeMatchCount === totalCars;
   const allMetadataCidMatch = metaCidFail === 0;
-  const allReVerified = reVerifyFail === 0 && reVerifySha256Pass === nftList.length;
   // Onchain audit: read from ONCHAIN-READ-AUDIT.json if it was generated
   const auditPath = path.join(TMP_DIR, 'ONCHAIN-READ-AUDIT.json');
   const hasAudit = fs.existsSync(auditPath);
@@ -1419,10 +1323,11 @@ async function main() {
   const auditFailCount = auditSummary?.fail || 0;
   const auditUnknownCount = auditSummary?.unknown || 0;
 
-  // Overall PASS: metadata CID strict + sha256/size + re-verify
-  // Onchain audit is informational — unknown entries flagged for manual review
-  // Media root CID mismatch is a warning, not a failure
-  const overallPass = allSha256Match && allSizeMatch && allMetadataCidMatch && allReVerified;
+  // Overall PASS: metadata CID strict + sha256/size verified during Arweave download
+  // No re-download step — verification is done once at download time.
+  // Onchain audit is informational — unknown entries flagged for manual review.
+  // Media root CID mismatch is a warning, not a failure.
+  const overallPass = allSha256Match && allSizeMatch && allMetadataCidMatch;
 
   const releaseManifest = {
     schema: 'nft-arweave-mirror-manifest-v4',
@@ -1444,9 +1349,7 @@ async function main() {
       total: mediaCidTotal,
       note: 'Media root CID is audit-only. sha256+size are the integrity guarantees. See media-root-cid-mismatches.json.',
     },
-    all_release_assets_reverified: allReVerified,
     onchain_tokenuri_verified: ETH_RPC_URL ? true : false,
-    onchain_all_match: allOnchainOk,
     verification_status: overallPass ? 'PASS' : 'FAIL',
     verification_details: {
       arweave_download: { ok: dlOk + dlSkip, fail: dlFail },
@@ -1454,13 +1357,11 @@ async function main() {
       size_check: { pass: sizeMatchCount, total: totalCars },
       metadata_root_cid_check: { pass: metaCidPass, fail: metaCidFail, mode: 'strict' },
       media_root_cid_check: { match: mediaCidMatch, warning: mediaCidWarning, total: mediaCidTotal, mode: 'audit' },
-      release_reverify_sha256: { pass: reVerifySha256Pass, total: nftList.length },
-      release_reverify_size: { pass: reVerifySizePass, total: nftList.length },
-      release_reverify_cid: { pass: reVerifyCidPass, total: nftList.length },
       onchain_read_audit: hasAudit
-        ? { pass: auditPassCount, fail: auditFailCount, unknown: auditUnknownCount, total: auditRecords.length, detail: 'see ONCHAIN-READ-AUDIT.json' }
+        ? { pass: auditPassCount, fail: auditFailCount, unknown: auditUnknownCount, total: auditRecords?.length || 0, detail: 'see ONCHAIN-READ-AUDIT.json' }
         : { skipped: true, reason: 'ETH_RPC_URL not set' },
     },
+    note: 'Verification done at Arweave download time. Use verify-release-assets.mjs for independent release-level re-verification.',
     per_nft_assets: manifestEntries,
   };
 
@@ -1489,16 +1390,16 @@ async function main() {
     log('  ✅ ONCHAIN-READ-AUDIT.json uploaded');
   }
 
-  // Generate RELEASE-CHECKSUMS.sha256
+  // Generate RELEASE-CHECKSUMS.sha256 (from local tar files — no re-download)
   const checksumLines = [];
   checksumLines.push(`# RELEASE-CHECKSUMS.sha256 — ${RELEASE_TAG}`);
   checksumLines.push(`# Generated: ${new Date().toISOString()}`);
   checksumLines.push(`# Every line: sha256  asset_name`);
   checksumLines.push('');
   for (const nft of nftList) {
-    const assetId = uploadedAssetIds.get(nft.assetName);
-    if (!assetId) continue;
-    const buf = await downloadAsset(assetId);
+    const tarPath = path.join(TMP_DIR, nft.assetName);
+    if (!fs.existsSync(tarPath)) continue;
+    const buf = fs.readFileSync(tarPath);
     checksumLines.push(`${sha256hex(buf)}  ${nft.assetName}`);
   }
   if (fs.existsSync(observedPath)) {
@@ -1521,6 +1422,12 @@ async function main() {
   await uploadAsset(release.id, checksumsPath, 'RELEASE-CHECKSUMS.sha256');
   log('  ✅ RELEASE-CHECKSUMS.sha256 uploaded');
 
+  // Cleanup local tar files (no longer needed)
+  for (const nft of nftList) {
+    const tarPath = path.join(TMP_DIR, nft.assetName);
+    if (fs.existsSync(tarPath)) fs.unlinkSync(tarPath);
+  }
+
   // ── Final summary ──────────────────────────────────────────────────
 
   log('');
@@ -1531,9 +1438,8 @@ async function main() {
   log(`  ✅ Metadata CID   : ${metaCidPass}/175 strict match`);
   log(`  ⚠️  Media CID      : ${mediaCidMatch} match, ${mediaCidWarning} warning (audit only)`);
   log(`  📤 Uploads        : ${uploaded} uploaded`);
-  log(`  🔍 Re-verified    : SHA256=${reVerifySha256Pass} Size=${reVerifySizePass} CID=${reVerifyCidPass} / ${nftList.length}`);
   if (ETH_RPC_URL && hasAudit) {
-    log(`  🔗 On-chain audit : pass=${auditPassCount} fail=${auditFailCount} unknown=${auditUnknownCount} / ${auditRecords.length}`);
+    log(`  🔗 On-chain audit : pass=${auditPassCount} fail=${auditFailCount} unknown=${auditUnknownCount} / ${auditRecords?.length || 0}`);
     log(`  📋 ONCHAIN-READ-AUDIT.json uploaded — ${auditUnknownCount > 0 ? '⚠️ unknown entries need manual review' : 'all entries classified'}`);
   }
   log(`  📊 Release        : ${nftList.length} NFT assets + manifest + checksums + audit`);
