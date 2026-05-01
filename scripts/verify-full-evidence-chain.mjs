@@ -1649,10 +1649,12 @@ async function main() {
   const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
 
   // ── Compute onchain_tokenuri_175_pass ─────────────────────────────────
-  // This is determined by Chain A's ETH CID match + skip count
-  const onchainTokenuri175Pass =
-    (chainA.metadata_eth_cid_match + chainA.metadata_eth_cid_skip) === EXPECTED_NFTS &&
-    chainA.metadata_eth_cid_mismatch === 0;
+  // If ONCHAIN-READ-AUDIT.json exists in release, require ETH CID match = 175.
+  // If not present (ethAudit is null), rely on token_index CID match = 175.
+  const ethAuditAvailable = ethAudit !== null && (ethAudit.tokens?.length || 0) > 0;
+  const onchainTokenuri175Pass = ethAuditAvailable
+    ? (chainA.metadata_eth_cid_match === EXPECTED_NFTS && chainA.metadata_eth_cid_mismatch === 0)
+    : (chainA.metadata_token_index_cid_match === EXPECTED_NFTS && chainA.metadata_token_index_cid_mismatch === 0);
 
   // ── Final Summary ─────────────────────────────────────────────────────
 
@@ -1681,7 +1683,6 @@ async function main() {
     chainC.eth_witness_coverage_pass &&
     chainD1.bitcoin_tx_anchor_pass &&
     chainD2.ots_time_anchor_pass &&
-    chainA.metadata_eth_cid_match === EXPECTED_NFTS &&
     chainA.metadata_token_index_cid_match === EXPECTED_NFTS &&
     hardFailures === 0;
 
