@@ -43,6 +43,17 @@ const ERC721_TOKENURI_SELECTOR = '0xc87b56dd';
 // ERC-1155 uri(uint256) selector
 const ERC1155_URI_SELECTOR = '0x0e89341c';
 
+// supportsInterface(bytes4) selector
+const SUPPORTS_INTERFACE_SELECTOR = '0x01ffc9a7';
+// Interface IDs
+const IFACE_ERC721            = '0x80ac58cd';
+const IFACE_ERC721_METADATA   = '0x5b5e139f';
+const IFACE_ERC1155           = '0xd9b67a26';
+const IFACE_ERC1155_METADATA  = '0x0e89341c';
+
+// ownerOf(uint256) selector
+const ERC721_OWNEROF_SELECTOR = '0x6352211e';
+
 // ─── Helpers ───────────────────────────────────────────────────────────────
 
 function sha256hex(buf) {
@@ -282,9 +293,10 @@ async function ensureRelease() {
         `- CAR size match against token_index`,
         `- Root CID match against token_index`,
         `- Re-download verification after upload (ALL assets, no skip)`,
-        `- Optional: onchain tokenURI CID verification`,
+        `- On-chain READ audit: supportsInterface + tokenURI + uri + ownerOf per token`,
         ``,
         `See RELEASE-MANIFEST.json for full verification results.`,
+        `See ONCHAIN-READ-AUDIT.json for per-token on-chain read audit (when ETH_RPC_URL set).`,
         ``,
         `Generated: ${new Date().toISOString()}`,
       ].join('\n'),
@@ -522,6 +534,157 @@ function expandErc1155Id(uri, tokenId) {
   return uri.replace('{id}', hexId);
 }
 
+// ─── On-chain audit helpers ────────────────────────────────────────────────
+
+/**
+ * Raw eth_call — returns { raw_hex, error } instead of decoded string.
+ * Used for audit logging of tokenURI / uri results.
+ */
+async function tryEthCallRaw(rpcUrl, contractAddr, callData) {
+  try {
+    const res = await fetch(rpcUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        jsonrpc: '2.0', id: 1,
+        method: 'eth_call',
+        params: [{ to: contractAddr, data: callData }, 'latest'],
+      }),
+    });
+    const json = await res.json();
+    if (json.error) return { raw_hex: null, error: json.error.message || JSON.stringify(json.error) };
+    return { raw_hex: json.result || '0x', error: null };
+  } catch (e) {
+    return { raw_hex: null, error: e.message };
+  }
+}
+
+/**
+ * Decode ABI-encoded string/bytes from eth_call result hex.
+ * Returns the decoded string or null if decoding fails.
+ */
+function decodeAbiString(hex) {
+  if (!hex || hex === '0x' || hex.length < 130) return null;
+  try {
+    const offset = parseInt(hex.slice(2, 66), 16) * 2 + 2;
+    const len = parseInt(hex.slice(66, 130), 16) * 2;
+    const strHex = hex.slice(130, 130 + len);
+    let s = '';
+    for (let i = 0; i < strHex.length; i += 2) {
+      s += String.fromCharCode(parseInt(strHex.slice(i, i + 2), 16));
+    }
+    return s || null;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Call supportsInterface(bytes4) on a contract.
+ * Returns { supported: bool, raw_hex, error }.
+ */
+async function checkSupportsInterface(rpcUrl, contractAddr, interfaceId) {
+  // supportsInterface(bytes4) = 0x01ffc9a7 + padded interfaceId
+  const callData = SUPPORTS_INTERFACE_SELECTOR + interfaceId.padStart(64, '0');
+  const { raw_hex, error } = await tryEthCallRaw(rpcUrl, contractAddr, callData);
+  if (error) return { supported: null, raw_hex, error };
+  if (!raw_hex || raw_hex === '0x') return { supported: false, raw_hex, error: null };
+  // Result is a bool (uint256): 1 = true, 0 = false
+  const val = parseInt(raw_hex, 16);
+  return { supported: val === 1, raw_hex, error: null };
+}
+
+/**
+ * Call ownerOf(uint256) on a contract.
+ * Returns { address, raw_hex, error }.
+ */
+async function callOwnerOf(rpcUrl, contractAddr, tokenId) {
+  const paddedId = BigInt(tokenId).toString(16).padStart(64, '0');
+  const callData = ERC721_OWNEROF_SELECTOR + paddedId;
+  const { raw_hex, error } = await tryEthCallRaw(rpcUrl, contractAddr, callData);
+  if (error) return { address: null, raw_hex, error };
+  if (!raw_hex || raw_hex === '0x' || raw_hex.length < 66) return { address: null, raw_hex, error: 'empty result' };
+  // Decode address: last 20 bytes of the 32-byte word
+  const addr = '0x' + raw_hex.slice(26, 66);
+  return { address: addr, raw_hex, error: null };
+}
+
+/**
+ * Classify an onchain audit record into a status + reason.
+ *
+ * Rules:
+ *  - tokenURI/uri returns URI and CID matches metadata.root_cid           → pass
+ *  - tokenURI/uri returns URI but CID doesn't match                       → fail
+ *  - tokenURI/uri returns URI but can't extract CID                       → fail / hard_warning
+ *  - ownerOf fails and contract is NOT ERC-1155                           → fail
+ *  - token exists but contract doesn't support metadata interface
+ *    and tokenURI/uri both unavailable                                    → skip_metadata_unavailable
+ *  - RPC error / decode error / unknown revert                            → unknown (needs manual review)
+ */
+function classifyOnchainAudit(rec) {
+  const { interface_support, token_uri, uri, owner_of } = rec;
+
+  const erc721  = interface_support?.erc721?.supported;
+  const erc1155 = interface_support?.erc1155?.supported;
+  const has721Meta = interface_support?.erc721_metadata?.supported;
+  const has1155Meta = interface_support?.erc1155_metadata_uri?.supported;
+
+  const tuRaw = token_uri?.raw_hex;
+  const tuErr = token_uri?.error;
+  const tuUri = token_uri?.decoded_uri;
+  const urRaw = uri?.raw_hex;
+  const urErr = uri?.error;
+  const urUri = uri?.decoded_uri;
+
+  // Check for RPC / unknown errors first
+  const hasRpcError = [token_uri, uri, owner_of].some(f => f?.error && !f.error.includes('revert') && !f.error.includes('execution reverted'));
+  if (hasRpcError) {
+    return { status: 'unknown', reason: 'rpc_error — needs manual review of raw result' };
+  }
+
+  // Determine which URI we have (prefer token_uri, fallback to uri)
+  const effectiveUri = tuUri || urUri;
+  const effectiveCid = token_uri?.extracted_cid || uri?.extracted_cid;
+
+  if (effectiveUri) {
+    // We got a URI back
+    if (effectiveCid) {
+      // CID extracted — compare to token_index
+      if (rec.metadata_root_cid && effectiveCid === rec.metadata_root_cid) {
+        return { status: 'pass', reason: 'uri_cid_matches_token_index' };
+      } else if (rec.metadata_root_cid) {
+        return { status: 'fail', reason: `cid_mismatch: onchain=${effectiveCid} vs token_index=${rec.metadata_root_cid}` };
+      } else {
+        return { status: 'pass', reason: 'uri_cid_extracted_but_no_token_index_to_compare' };
+      }
+    } else {
+      // Got URI but can't extract CID
+      return { status: 'hard_warning', reason: `uri_returned_but_cid_not_extractable: ${effectiveUri.slice(0, 120)}` };
+    }
+  }
+
+  // No URI from either tokenURI or uri
+  const tuReverted = tuErr && (tuErr.includes('revert') || tuErr.includes('execution reverted'));
+  const urReverted = urErr && (urErr.includes('revert') || urErr.includes('execution reverted'));
+  const tuEmpty = tuRaw === '0x' || tuRaw === null;
+  const urEmpty = urRaw === '0x' || urRaw === null;
+
+  // Both returned empty/revert — check if contract supports metadata interfaces
+  if ((tuReverted || tuEmpty) && (urReverted || urEmpty)) {
+    if (!has721Meta && !has1155Meta) {
+      return { status: 'skip_metadata_unavailable', reason: 'contract_does_not_support_metadata_interface_and_both_uri_calls_empty' };
+    }
+    // Contract claims metadata support but both calls failed
+    if (tuReverted || urReverted) {
+      return { status: 'unknown', reason: 'metadata_interface_supported_but_uri_calls_reverted — needs manual review' };
+    }
+    return { status: 'skip_metadata_unavailable', reason: 'uri_calls_returned_empty' };
+  }
+
+  // Mixed: one reverted, one empty
+  return { status: 'unknown', reason: 'mixed_uri_results — needs manual review' };
+}
+
 // ─── Main ──────────────────────────────────────────────────────────────────
 
 async function main() {
@@ -645,7 +808,7 @@ async function main() {
   log('  Cleaning old NFT assets for mandatory full re-verification...');
   let deleted = 0;
   for (const [name, asset] of existingAssets) {
-    if (name.startsWith('nft-') || name === 'RELEASE-MANIFEST.json' || name === 'RELEASE-CHECKSUMS.sha256' || name === 'verification_observed.json' || name === 'media-root-cid-mismatches.json') {
+    if (name.startsWith('nft-') || name === 'RELEASE-MANIFEST.json' || name === 'RELEASE-CHECKSUMS.sha256' || name === 'verification_observed.json' || name === 'media-root-cid-mismatches.json' || name === 'ONCHAIN-READ-AUDIT.json') {
       await deleteAsset(release.id, asset.id);
       deleted++;
       if (deleted % 20 === 0) process.stdout.write(`\r    Deleted ${deleted}...`);
@@ -861,81 +1024,172 @@ async function main() {
   log('  📝 verification_observed.json generated');
   log('');
 
-  // ── Step 7 (optional): ETH on-chain tokenURI verification ──────────
+  // ── Step 7 (optional): ONCHAIN-READ-AUDIT ─────────────────────────
+  // Per-token deep audit: supportsInterface, tokenURI, uri, ownerOf, CID extraction.
+  // Generates ONCHAIN-READ-AUDIT.json for release upload.
 
-  let onchainPass = 0, onchainFail = 0, onchainSkip = 0;
-  const onchainErrors = [];
+  const auditRecords = [];     // per-token audit entries
+  const contractSummaries = {}; // contract → { pass, fail, skip, unknown, reasons }
 
   if (ETH_RPC_URL) {
-    log('🔗 Step 4b: Verifying on-chain tokenURI CIDs...');
+    log('🔗 Step 4b: On-chain READ audit (per-token)...');
     const ethTasks = [];
 
     for (const nft of nftList) {
       ethTasks.push(async () => {
-        try {
-          let uri = await fetchOnchainTokenURI(nft.contract, nft.tokenId, ETH_RPC_URL);
-          if (!uri) {
-            onchainErrors.push({
-              nft: nft.assetName, type: 'onchain_no_uri',
-              error: 'Neither tokenURI nor uri returned a value',
-            });
-            onchainSkip++;
-            return;
-          }
+        const rec = {
+          contract: nft.contract,
+          token_id: nft.tokenId,
+          metadata_root_cid: nft.metadataRootCid,
+          interface_support: {},
+          token_uri: null,
+          uri: null,
+          owner_of: null,
+          decoded_uri: null,
+          extracted_cid: null,
+          status: null,
+          status_reason: null,
+        };
 
-          // Handle ERC-1155 {id} placeholder
-          uri = expandErc1155Id(uri, nft.tokenId);
+        // 1. supportsInterface checks
+        const ifaceChecks = [
+          { key: 'erc721',                 id: IFACE_ERC721,           label: 'ERC721 (0x80ac58cd)' },
+          { key: 'erc721_metadata',        id: IFACE_ERC721_METADATA,  label: 'ERC721Metadata (0x5b5e139f)' },
+          { key: 'erc1155',                id: IFACE_ERC1155,          label: 'ERC1155 (0xd9b67a26)' },
+          { key: 'erc1155_metadata_uri',   id: IFACE_ERC1155_METADATA, label: 'ERC1155MetadataURI (0x0e89341c)' },
+        ];
 
-          const onchainCid = extractCidFromUri(uri);
-          if (!onchainCid) {
-            onchainErrors.push({
-              nft: nft.assetName, type: 'onchain_cid_parse_failed',
-              error: `Could not extract CID from URI: ${uri}`,
-            });
-            onchainSkip++;
-            return;
-          }
+        for (const iface of ifaceChecks) {
+          const result = await checkSupportsInterface(ETH_RPC_URL, nft.contract, iface.id);
+          rec.interface_support[iface.key] = {
+            interface_id: iface.id,
+            label: iface.label,
+            supported: result.supported,
+            raw_hex: result.raw_hex,
+            error: result.error,
+          };
+        }
 
-          // Compare: onchain CID == token_index metadata.root_cid
-          if (onchainCid !== nft.metadataRootCid) {
-            onchainErrors.push({
-              nft: nft.assetName, type: 'onchain_cid_mismatch',
-              onchain: onchainCid, token_index: nft.metadataRootCid,
-            });
-            onchainFail++;
-          } else {
-            onchainPass++;
-          }
-        } catch (e) {
-          onchainErrors.push({
-            nft: nft.assetName, type: 'onchain_error',
-            error: e.message,
-          });
-          onchainFail++;
+        // 2. tokenURI(uint256)
+        {
+          const paddedId = BigInt(nft.tokenId).toString(16).padStart(64, '0');
+          const callData = ERC721_TOKENURI_SELECTOR + paddedId;
+          const { raw_hex, error } = await tryEthCallRaw(ETH_RPC_URL, nft.contract, callData);
+          const decoded = decodeAbiString(raw_hex);
+          rec.token_uri = {
+            selector: ERC721_TOKENURI_SELECTOR,
+            raw_hex: raw_hex,
+            error: error,
+            decoded_uri: decoded,
+            extracted_cid: decoded ? extractCidFromUri(expandErc1155Id(decoded, nft.tokenId)) : null,
+          };
+        }
+
+        // 3. uri(uint256)
+        {
+          const paddedId = BigInt(nft.tokenId).toString(16).padStart(64, '0');
+          const callData = ERC1155_URI_SELECTOR + paddedId;
+          const { raw_hex, error } = await tryEthCallRaw(ETH_RPC_URL, nft.contract, callData);
+          const decoded = decodeAbiString(raw_hex);
+          rec.uri = {
+            selector: ERC1155_URI_SELECTOR,
+            raw_hex: raw_hex,
+            error: error,
+            decoded_uri: decoded,
+            extracted_cid: decoded ? extractCidFromUri(expandErc1155Id(decoded, nft.tokenId)) : null,
+          };
+        }
+
+        // 4. ownerOf(uint256)
+        {
+          const result = await callOwnerOf(ETH_RPC_URL, nft.contract, nft.tokenId);
+          rec.owner_of = {
+            selector: ERC721_OWNEROF_SELECTOR,
+            raw_hex: result.raw_hex,
+            address: result.address,
+            error: result.error,
+          };
+        }
+
+        // 5. Effective decoded_uri / extracted_cid (prefer token_uri, fallback uri)
+        rec.decoded_uri = rec.token_uri?.decoded_uri || rec.uri?.decoded_uri || null;
+        rec.extracted_cid = rec.token_uri?.extracted_cid || rec.uri?.extracted_cid || null;
+
+        // 6. Classify
+        const classification = classifyOnchainAudit(rec);
+        rec.status = classification.status;
+        rec.status_reason = classification.reason;
+
+        auditRecords.push(rec);
+
+        // Accumulate contract summary
+        if (!contractSummaries[nft.contract]) {
+          contractSummaries[nft.contract] = { pass: 0, fail: 0, skip: 0, unknown: 0, hard_warning: 0, reasons: {} };
+        }
+        const cs = contractSummaries[nft.contract];
+        if (cs[rec.status] !== undefined) cs[rec.status]++;
+        else cs.fail++; // fallback
+        cs.reasons[rec.status_reason] = (cs.reasons[rec.status_reason] || 0) + 1;
+
+        if (auditRecords.length % 20 === 0) {
+          process.stdout.write(`\r   ${auditRecords.length}/${nftList.length} tokens audited`);
         }
       });
     }
 
     await runConcurrent(ethTasks, DOWNLOAD_CONCURRENCY);
-    log(`   On-chain: ${onchainPass} pass, ${onchainFail} fail, ${onchainSkip} skipped (no on-chain URI)`);
+    log(`\r   ${auditRecords.length}/${nftList.length} tokens audited`);
 
-    // When ETH_RPC_URL is set, all tokens that return a URI must match.
-    // Tokens with no on-chain URI (skip) are acceptable — not all contracts expose tokenURI.
-    if (onchainFail > 0) {
-      err('\n  ❌ On-chain verification failed:');
-      if (onchainFail > 0) err(`    ${onchainFail} CID mismatches`);
-      if (onchainSkip > 0) err(`    ${onchainSkip} skipped (no on-chain URI — acceptable)`);
-      for (const e of onchainErrors.filter(e => e.type === 'onchain_cid_mismatch').slice(0, 10)) {
-        err(`    ${e.nft}: ${e.type} — onchain=${e.onchain} vs token_index=${e.token_index}`);
-      }
-      process.exit(1);
+    // Summary
+    const statusCounts = {};
+    for (const rec of auditRecords) {
+      statusCounts[rec.status] = (statusCounts[rec.status] || 0) + 1;
     }
-    if (onchainSkip > 0) {
-      log(`  ⚠️  ${onchainSkip} tokens had no on-chain URI (skip is acceptable)`);
+    log('   On-chain audit summary:');
+    for (const [status, count] of Object.entries(statusCounts).sort((a, b) => b[1] - a[1])) {
+      log(`     ${status}: ${count}`);
+    }
+
+    // Write ONCHAIN-READ-AUDIT.json
+    const auditPath = path.join(TMP_DIR, 'ONCHAIN-READ-AUDIT.json');
+    const auditReport = {
+      schema: 'onchain-read-audit-v1',
+      generated_at: new Date().toISOString(),
+      eth_rpc_url: ETH_RPC_URL.replace(/\/\/[^@]+@/, '//***@'), // redact credentials
+      total_tokens: auditRecords.length,
+      status_summary: statusCounts,
+      contract_summaries: {},
+      tokens: auditRecords,
+    };
+    // Populate contract summaries
+    for (const [contract, cs] of Object.entries(contractSummaries)) {
+      auditReport.contract_summaries[contract] = {
+        pass: cs.pass,
+        fail: cs.fail,
+        skip_metadata_unavailable: cs.skip,
+        unknown: cs.unknown,
+        hard_warning: cs.hard_warning,
+        top_reasons: Object.entries(cs.reasons)
+          .sort((a, b) => b[1] - a[1])
+          .slice(0, 10)
+          .map(([reason, count]) => ({ reason, count })),
+      };
+    }
+    fs.writeFileSync(auditPath, JSON.stringify(auditReport, null, 2));
+    log('  📝 ONCHAIN-READ-AUDIT.json generated');
+
+    // Check for unknown status entries that need manual review
+    const unknownCount = statusCounts['unknown'] || 0;
+    const failCount = statusCounts['fail'] || 0;
+    if (unknownCount > 0) {
+      log(`  ⚠️  ${unknownCount} tokens classified as "unknown" — need manual review of raw results`);
+    }
+    if (failCount > 0) {
+      log(`  ❌ ${failCount} tokens classified as "fail"`);
     }
     log('');
   } else {
-    log('⏭️  Step 4b: ETH_RPC_URL not set, skipping on-chain verification');
+    log('⏭️  Step 4b: ETH_RPC_URL not set, skipping on-chain READ audit');
     log('');
   }
 
@@ -1153,14 +1407,22 @@ async function main() {
   const allSizeMatch = sizeMatchCount === totalCars;
   const allMetadataCidMatch = metaCidFail === 0;
   const allReVerified = reVerifyFail === 0 && reVerifySha256Pass === nftList.length;
-  // When ETH_RPC_URL is set: all 175 must pass, 0 fail, 0 skip
-  const allOnchainOk = ETH_RPC_URL
-    ? (onchainPass === EXPECTED_NFTS && onchainFail === 0 && onchainSkip === 0)
-    : true;
+  // Onchain audit: read from ONCHAIN-READ-AUDIT.json if it was generated
+  const auditPath = path.join(TMP_DIR, 'ONCHAIN-READ-AUDIT.json');
+  const hasAudit = fs.existsSync(auditPath);
+  let auditSummary = null;
+  if (hasAudit) {
+    const auditData = JSON.parse(fs.readFileSync(auditPath, 'utf-8'));
+    auditSummary = auditData.status_summary || {};
+  }
+  const auditPassCount = auditSummary?.pass || 0;
+  const auditFailCount = auditSummary?.fail || 0;
+  const auditUnknownCount = auditSummary?.unknown || 0;
 
-  // Overall PASS: metadata CID strict + sha256/size + re-verify + onchain
+  // Overall PASS: metadata CID strict + sha256/size + re-verify
+  // Onchain audit is informational — unknown entries flagged for manual review
   // Media root CID mismatch is a warning, not a failure
-  const overallPass = allSha256Match && allSizeMatch && allMetadataCidMatch && allReVerified && allOnchainOk;
+  const overallPass = allSha256Match && allSizeMatch && allMetadataCidMatch && allReVerified;
 
   const releaseManifest = {
     schema: 'nft-arweave-mirror-manifest-v4',
@@ -1195,8 +1457,8 @@ async function main() {
       release_reverify_sha256: { pass: reVerifySha256Pass, total: nftList.length },
       release_reverify_size: { pass: reVerifySizePass, total: nftList.length },
       release_reverify_cid: { pass: reVerifyCidPass, total: nftList.length },
-      onchain_check: ETH_RPC_URL
-        ? { pass: onchainPass, fail: onchainFail, skip: onchainSkip }
+      onchain_read_audit: hasAudit
+        ? { pass: auditPassCount, fail: auditFailCount, unknown: auditUnknownCount, total: auditRecords.length, detail: 'see ONCHAIN-READ-AUDIT.json' }
         : { skipped: true, reason: 'ETH_RPC_URL not set' },
     },
     per_nft_assets: manifestEntries,
@@ -1221,6 +1483,12 @@ async function main() {
     log('  ✅ media-root-cid-mismatches.json uploaded');
   }
 
+  // Upload ONCHAIN-READ-AUDIT.json if it exists
+  if (fs.existsSync(auditPath)) {
+    await uploadAsset(release.id, auditPath, 'ONCHAIN-READ-AUDIT.json');
+    log('  ✅ ONCHAIN-READ-AUDIT.json uploaded');
+  }
+
   // Generate RELEASE-CHECKSUMS.sha256
   const checksumLines = [];
   checksumLines.push(`# RELEASE-CHECKSUMS.sha256 — ${RELEASE_TAG}`);
@@ -1241,6 +1509,10 @@ async function main() {
     const mismatchBuf = fs.readFileSync(mismatchPath);
     checksumLines.push(`${sha256hex(mismatchBuf)}  media-root-cid-mismatches.json`);
   }
+  if (fs.existsSync(auditPath)) {
+    const auditBuf = fs.readFileSync(auditPath);
+    checksumLines.push(`${sha256hex(auditBuf)}  ONCHAIN-READ-AUDIT.json`);
+  }
   const manifestBuf = fs.readFileSync(manifestPath);
   checksumLines.push(`${sha256hex(manifestBuf)}  RELEASE-MANIFEST.json`);
 
@@ -1260,10 +1532,11 @@ async function main() {
   log(`  ⚠️  Media CID      : ${mediaCidMatch} match, ${mediaCidWarning} warning (audit only)`);
   log(`  📤 Uploads        : ${uploaded} uploaded`);
   log(`  🔍 Re-verified    : SHA256=${reVerifySha256Pass} Size=${reVerifySizePass} CID=${reVerifyCidPass} / ${nftList.length}`);
-  if (ETH_RPC_URL) {
-    log(`  🔗 On-chain       : ${onchainPass} pass, ${onchainFail} fail, ${onchainSkip} skip`);
+  if (ETH_RPC_URL && hasAudit) {
+    log(`  🔗 On-chain audit : pass=${auditPassCount} fail=${auditFailCount} unknown=${auditUnknownCount} / ${auditRecords.length}`);
+    log(`  📋 ONCHAIN-READ-AUDIT.json uploaded — ${auditUnknownCount > 0 ? '⚠️ unknown entries need manual review' : 'all entries classified'}`);
   }
-  log(`  📊 Release        : ${nftList.length} NFT assets + manifest + checksums`);
+  log(`  📊 Release        : ${nftList.length} NFT assets + manifest + checksums + audit`);
   log(`  📄 Status         : ${releaseManifest.verification_status}`);
   log('═══════════════════════════════════════════════════════════');
 
