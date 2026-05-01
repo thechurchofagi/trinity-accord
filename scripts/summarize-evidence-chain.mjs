@@ -86,7 +86,7 @@ async function main() {
 
   const ethWitnessPass = artifacts.ethWitness?.eth_witness_coverage_pass === true
     && artifacts.ethWitness?.primary_eth_witness_pass === true
-    && (artifacts.ethWitness?.eth_attestations_fail ?? 0) === 0;
+    && (artifacts.ethWitness?.auxiliary_attestations_fail ?? artifacts.ethWitness?.eth_attestations_fail ?? 0) === 0;
 
   const otsPass = artifacts.otsAnchor?.ots_time_anchor_pass === true
     && (artifacts.otsAnchor?.ots_files_pass ?? 0) === 3
@@ -103,7 +103,7 @@ async function main() {
     { name: 'Onchain tokenURI 175/175', pass: onchainTokenuri175Pass, detail: artifacts.onchain ? `readable_pass=${artifacts.onchain.readable_pass}, fail=${artifacts.onchain.fail}` : 'artifact missing' },
     { name: 'DAG + digest-manifest', pass: dagAndDigestPass, detail: artifacts.dagDigest ? `metadata_dag_pass=${artifacts.dagDigest.metadata_dag_pass}, hash_mismatch=${artifacts.dagDigest.file_hash_mismatch_count}` : 'artifact missing' },
     { name: 'BTC signature coverage', pass: btcSigPass, detail: artifacts.btcSig ? `sig_valid=${artifacts.btcSig.btc_signature_valid}, taproot=${artifacts.btcSig.taproot_address_match}` : 'artifact missing' },
-    { name: 'ETH witness coverage', pass: ethWitnessPass, detail: artifacts.ethWitness ? `primary=${artifacts.ethWitness.primary_eth_witness_pass}, att_fail=${artifacts.ethWitness.eth_attestations_fail}` : 'artifact missing' },
+    { name: 'ETH witness coverage', pass: ethWitnessPass, detail: artifacts.ethWitness ? `primary=${artifacts.ethWitness.primary_eth_witness_pass}, att_fail=${artifacts.ethWitness?.auxiliary_attestations_fail ?? artifacts.ethWitness?.eth_attestations_fail ?? '?'}` : 'artifact missing' },
     { name: 'OTS time anchor', pass: otsPass, detail: artifacts.otsAnchor ? `pass=${artifacts.otsAnchor.ots_files_pass}, fail=${artifacts.otsAnchor.ots_files_fail}` : 'artifact missing' },
     { name: 'Bitcoin TX anchor', pass: btcTxPass, detail: artifacts.btcTxAnchor ? `pass=${artifacts.btcTxAnchor.bitcoin_anchors_pass}, fail=${artifacts.btcTxAnchor.bitcoin_anchors_fail}` : 'artifact missing' },
   ];
