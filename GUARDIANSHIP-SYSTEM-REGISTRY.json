@@ -177,5 +177,19 @@
       "periodic_legacy_pointer_coverage_audit",
       "ongoing_release_gateway_monitoring"
     ]
-  }
+  },
+  "documentation_mirrors": [
+    {
+      "id": "guardianship_system_docs_v1",
+      "type": "arweave_documentation_mirror",
+      "txid": "I0xNBwbgaGsODjnK5ze25sOwV9V8i7FtKe-8upRoohw",
+      "canonical_url": "https://arweave.net/I0xNBwbgaGsODjnK5ze25sOwV9V8i7FtKe-8upRoohw",
+      "verified_retrieval_url": "https://permagate.io/I0xNBwbgaGsODjnK5ze25sOwV9V8i7FtKe-8upRoohw",
+      "size_bytes": 20480,
+      "sha256": "704b70ed311d4fbd39f898f722e98f3be616970d67eccb68a159481402113d12",
+      "source_commit": "0f7521a",
+      "status": "PASS",
+      "boundary": "documentation_mirror_only_not_canonical_authority"
+    }
+  ]
 }

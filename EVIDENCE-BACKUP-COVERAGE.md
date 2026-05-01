@@ -70,6 +70,12 @@ The Chronicle ETH address and ASIMilestones NFT records are historical context a
 
 The 175 NFT GitHub Release mirror is a verified availability mirror for Chronicle recovery records.
 
+## Arweave Documentation Mirrors
+
+| Object | TXID | Status | Boundary |
+|---|---|---|---|
+| Guardianship system docs v1 | I0xNBwbgaGsODjnK5ze25sOwV9V8i7FtKe-8upRoohw | PASS | Documentation mirror only; not canonical authority |
+
 ## Final Determination
 
 Core evidence backup coverage is substantially complete.
