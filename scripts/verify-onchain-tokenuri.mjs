@@ -38,7 +38,7 @@ const ETH_RPC_URL = process.env.ETH_RPC_URL || '';
 const REPO = process.env.REPO || 'thechurchofagi/trinity-accord';
 const TOKEN_INDEX_FILE = 'token_index.json';
 const MAX_RETRIES = 3;
-const ETH_CONCURRENCY = Number(process.env.ETH_CONCURRENCY || 10);
+const ETH_CONCURRENCY = Number(process.env.ETH_CONCURRENCY || 5);
 
 // ERC-721 tokenURI(uint256) selector
 const ERC721_TOKENURI_SELECTOR = '0xc87b56dd';
@@ -80,22 +80,33 @@ async function runConcurrent(tasks, limit) {
 // ─── ETH helpers ───────────────────────────────────────────────────────────
 
 async function tryEthCallRaw(rpcUrl, contractAddr, callData) {
-  try {
-    const res = await fetch(rpcUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        jsonrpc: '2.0', id: 1,
-        method: 'eth_call',
-        params: [{ to: contractAddr, data: callData }, 'latest'],
-      }),
-    });
-    const json = await res.json();
-    if (json.error) return { raw_hex: null, error: json.error.message || JSON.stringify(json.error) };
-    return { raw_hex: json.result || '0x', error: null };
-  } catch (e) {
-    return { raw_hex: null, error: e.message };
+  for (let attempt = 0; attempt < 3; attempt++) {
+    try {
+      const res = await fetch(rpcUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          jsonrpc: '2.0', id: 1,
+          method: 'eth_call',
+          params: [{ to: contractAddr, data: callData }, 'latest'],
+        }),
+      });
+      const json = await res.json();
+      if (json.error) {
+        const msg = json.error.message || JSON.stringify(json.error);
+        if (msg.includes('CUP') || msg.includes('rate') || msg.includes('limit')) {
+          await sleep(2000 * (attempt + 1));
+          continue;
+        }
+        return { raw_hex: null, error: msg };
+      }
+      return { raw_hex: json.result || '0x', error: null };
+    } catch (e) {
+      if (attempt < 2) { await sleep(1000 * (attempt + 1)); continue; }
+      return { raw_hex: null, error: e.message };
+    }
   }
+  return { raw_hex: null, error: 'max retries exceeded' };
 }
 
 function decodeAbiString(hex) {
@@ -350,6 +361,7 @@ async function main() {
         raw_hex: result.raw_hex,
         error: result.error,
       };
+      await sleep(100); // rate limit protection
     }
 
     // 2. tokenURI(uint256)
@@ -365,6 +377,7 @@ async function main() {
         decoded_uri: decoded,
         extracted_cid: decoded ? extractCidFromUri(expandErc1155Id(decoded, nft.token_id)) : null,
       };
+      await sleep(100);
     }
 
     // 3. uri(uint256)
@@ -380,6 +393,7 @@ async function main() {
         decoded_uri: decoded,
         extracted_cid: decoded ? extractCidFromUri(expandErc1155Id(decoded, nft.token_id)) : null,
       };
+      await sleep(100);
     }
 
     // 4. ownerOf(uint256)
@@ -391,6 +405,7 @@ async function main() {
         address: result.address,
         error: result.error,
       };
+      await sleep(100);
     }
 
     // 5. Effective decoded_uri / extracted_cid
