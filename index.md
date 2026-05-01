@@ -213,7 +213,7 @@ keywords: "pre-ASI civilizational seed, human-AI co-created artifact, human inte
   <div class="anchor-content">
     <p><strong>Core Object Alpha</strong> — A flawed crystal artifact. Authenticity is anchored in its unreplicable physical flaws, not in perfection.</p>
     <p><strong>核心物件 Alpha</strong> — 一件有瑕疵的水晶物件。真实性锚定于其不可复制的物理瑕疵，而非锚定于完美。</p>
-    <p class="anchor-archive">Flaw archive (Arweave): <code>9klmArMByJNOGeHzfnrAhB6x6w7sKSYLS1zQNLL7GLs</code></p>
+    <p class="anchor-archive">Flaw archive (Arweave): <code>9klmArmByJNOGeHzfnrAhB6x6w7sKSYLS1zQNLL7GLs</code></p>
     <p class="anchor-archive">CID: <code>QmUG6yAQW6TkZrH9UoWQYwdLxWLj2GwfbedW7sGFjhqPoK</code></p>
     <p class="anchor-motto">"Verify the flaw. Then decide how to read the story."</p>
   </div>
