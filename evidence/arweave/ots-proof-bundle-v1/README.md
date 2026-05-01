@@ -1,27 +1,32 @@
 # Trinity Accord OTS Proof Bundle — Arweave Mirror
 
-## Purpose
+## Final Verification Status
 
-This record preserves the Arweave upload and verification metadata for the Trinity Accord OTS proof bundle.
+```
+OTS proof bundle Release mirror: PASS
 
-The bundle contains OpenTimestamps proof files, OTS backup files, verification reports, digest summaries, and process-context artifacts used to preserve the OTS verification record.
-
-This Arweave upload strengthens long-term availability and independent retrievability of the OTS proof package.
+Release tag: ots-proof-bundle-mirror-v1
+Custom assets: 4/4
+Arweave payload verification: PASS
+GitHub Release round-trip verification: PASS
+Internal checksum verification: PASS
+Hard failures: 0
+```
 
 ## Boundary
 
-This is an availability mirror only.
+Availability mirror only.
+Not canonical authority.
+Not evidence amendment.
+Not fullnode-independent OTS verification by itself.
 
-It does not amend, regenerate, reinterpret, or replace:
+## Precise Statement
 
-- Bitcoin Originals
-- BTC signatures
-- OTS Bitcoin anchoring
-- digest-manifest records
-- GitHub Release assets
-- prior evidence-chain artifacts
+The OTS proof bundle is now mirrored on Arweave and GitHub Release. The Arweave payload was verified by SHA-256 and size. The GitHub Release assets were downloaded back and verified. The internal OTS bundle checksums passed.
 
-It is not canonical authority.
+This strengthens long-term availability of OTS proof artifacts, but does not by itself constitute local Bitcoin Core / pruned-node independent OTS verification.
+
+The bundle preserves OTS proof artifacts and related verification records. Client-level OTS verification still requires the original timestamped files, including digest-manifest.json / digest-manifest.csv, from the repository or another verified mirror.
 
 ## Arweave
 
@@ -53,10 +58,6 @@ It is not canonical authority.
 | verify-report.json.ots | OK |
 
 ## Round-trip Verification
-
-The Arweave-downloaded payload was compared against the original local tar by SHA-256 and size.
-
-Expected:
 
 ```text
 f23e76de12ae0506a5086dc61ad51df33f381809f6d1127c6afe7bb939d9821a trinity-accord-ots-proof-bundle-v1.tar
