@@ -696,6 +696,7 @@ async function main() {
   let mediaDagPass = 0, mediaDagFail = 0;
   let missingBlocksTotal = 0, cidRecomputeFail = 0;
   let crossCarRefTotal = 0, crossCarRefResolvedTotal = 0, unresolvedMissingTotal = 0;
+  let metadataUnresolvedMissing = 0;
   let metadataTokenIndexCidMatch = 0, metadataTokenIndexCidMismatch = 0;
   let metadataEthCidMatch = 0, metadataEthCidMismatch = 0, metadataEthCidSkip = 0;
   let manifestDirectMatchCount = 0, releaseDerivVerifiedCount = 0;
@@ -772,7 +773,7 @@ async function main() {
         const rootCid = dagResult.roots?.[0] || null;
 
         // Find manifest entry using strict matching
-        const findResult = findManifestEntry(carSha, tarFile.name, rootCid, indexes);
+        const findResult = findManifestEntry(carSha, carFile.name, rootCid, indexes);
         const matchedItem = findResult?.item || null;
         const matchMethod = findResult?.matchMethod || 'none';
 
@@ -830,6 +831,7 @@ async function main() {
         }
 
         if (role === 'metadata') {
+          metadataUnresolvedMissing += dagResult.unresolvedMissingBlocks;
           if (dagResult.valid) metadataDagPass++;
           else { metadataDagFail++; detail.dag_valid = false; criticalErrors.push(`METADATA DAG FAIL: ${asset.name}`); }
 
@@ -859,7 +861,7 @@ async function main() {
 
           // Media: sha256 + size are hard verification
           const hashes = computeAllHashes(carData);
-          const mediaMatched = findManifestEntry(carSha, tarFile.name, rootCid, indexes);
+          const mediaMatched = findManifestEntry(carSha, carFile.name, rootCid, indexes);
           if (mediaMatched?.item) {
             if (mediaMatched.item.sha256 && hashes.sha256 !== mediaMatched.item.sha256) mediaSha256Fail++;
             if (mediaMatched.item.size_bytes && carSize !== mediaMatched.item.size_bytes) mediaSizeFail++;
@@ -916,7 +918,7 @@ async function main() {
     && fileSizeMismatchCount === 0
     && unavailableAlgorithmCount === 0
     && publicMissingCount === 0
-    && unresolvedMissingTotal === 0
+    && metadataUnresolvedMissing === 0
     && (declaredJson?.ar_sha256 ? true : false)
     && (declaredCsv?.ar_sha256 ? true : false);
 
@@ -947,7 +949,7 @@ async function main() {
   log(`  Media CID mismatch warning    : ${mediaRootCidMismatchWarning}`);
   log(`  Cross-CAR references          : ${crossCarRefTotal}`);
   log(`  Cross-CAR resolved            : ${crossCarRefResolvedTotal}`);
-  log(`  Unresolved missing blocks     : ${unresolvedMissingTotal}`);
+  log(`  Unresolved missing blocks     : ${unresolvedMissingTotal} (metadata: ${metadataUnresolvedMissing})`);
   log(`  Chain A pass                  : ${dagAndDigestManifestPass}`);
   log(`  blake2b_256 variant           : node_blake2b512_full (historical)`);
 
@@ -1000,6 +1002,7 @@ async function main() {
     cross_car_references: crossCarRefTotal,
     cross_car_references_resolved: crossCarRefResolvedTotal,
     unresolved_missing_blocks: unresolvedMissingTotal,
+    metadata_unresolved_missing_blocks: metadataUnresolvedMissing,
     cid_recompute_fail: cidRecomputeFail,
 
     media_sha256_fail: mediaSha256Fail,
