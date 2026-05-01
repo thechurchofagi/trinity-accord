@@ -41,6 +41,20 @@ const EXPECTED_NFTS = 175;
 const MAX_RETRIES = 3;
 const TMP_DIR = '/tmp/dag-digest-verify';
 
+const HASH_ALGORITHMS = ['sha256', 'sha3_256', 'blake2b_256', 'shake256_256', 'sha512_256', 'blake3_256'];
+
+function isNonEmptyHash(v) {
+  return typeof v === 'string' && v.trim().length > 0;
+}
+
+function declaredHashAlgorithms(record) {
+  return HASH_ALGORITHMS.filter(algo => isNonEmptyHash(record[algo]));
+}
+
+function normalizeHashValue(v) {
+  return String(v || '').trim().toLowerCase().replace(/^0x/, '');
+}
+
 // ═══════════════════════════════════════════════════════════════════════════
 // PRIMITIVES
 // ═══════════════════════════════════════════════════════════════════════════
@@ -347,13 +361,68 @@ async function getAllAssets(releaseId) {
   return assets;
 }
 
-async function downloadAsset(assetId, retries = MAX_RETRIES) {
-  for (let attempt = 0; attempt <= retries; attempt++) {
-    const res = await fetch(`https://api.github.com/repos/${REPO}/releases/assets/${assetId}`, { headers: ghHeaders({ Accept: 'application/octet-stream' }) });
-    if (res.ok) return Buffer.from(await res.arrayBuffer());
-    if ((res.status >= 500 || res.status === 403 || res.status === 429) && attempt < retries) { await sleep(5000 * (attempt + 1)); continue; }
-    throw new Error(`Download asset ${assetId}: ${res.status}`);
+function isRetryableFetchError(err) {
+  const msg = String(err?.message || err);
+  return /fetch failed|ECONNRESET|ETIMEDOUT|timeout|network|socket|429|5\d\d/i.test(msg);
+}
+
+async function fetchBufferWithRetry(url, options = {}) {
+  const {
+    label = url,
+    attempts = Number(process.env.RELEASE_ASSET_DOWNLOAD_RETRIES || 5),
+    baseDelayMs = 1000,
+    maxDelayMs = 15000,
+    headers = {}
+  } = options;
+
+  let lastError = null;
+
+  for (let i = 1; i <= attempts; i++) {
+    try {
+      const res = await fetch(url, { headers });
+
+      if (res.ok) {
+        return Buffer.from(await res.arrayBuffer());
+      }
+
+      const body = await res.text().catch(() => '');
+
+      const retryable =
+        res.status === 408 ||
+        res.status === 429 ||
+        res.status >= 500;
+
+      lastError = new Error(
+        `${label}: HTTP ${res.status} ${res.statusText} ${body.slice(0, 300)}`
+      );
+
+      if (!retryable || i === attempts) {
+        throw lastError;
+      }
+    } catch (e) {
+      lastError = e;
+
+      if (!isRetryableFetchError(e) || i === attempts) {
+        throw e;
+      }
+    }
+
+    const delay = Math.min(maxDelayMs, baseDelayMs * 2 ** (i - 1));
+    log(`  Retry ${i}/${attempts} for ${label} after ${delay}ms`);
+    await sleep(delay);
   }
+
+  throw lastError;
+}
+
+async function downloadAsset(assetId) {
+  return fetchBufferWithRetry(
+    `https://api.github.com/repos/${REPO}/releases/assets/${assetId}`,
+    {
+      label: `asset-${assetId}`,
+      headers: ghHeaders({ Accept: 'application/octet-stream' })
+    }
+  );
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -588,6 +657,15 @@ async function main() {
   let shake256MatchCount = 0, sha512MatchCount = 0, blake3MatchCount = 0;
   let fileHashMismatchCount = 0, fileSizeMismatchCount = 0;
   let mediaSha256Fail = 0, mediaSizeFail = 0, mediaRootCidMismatchWarning = 0;
+  let downloadFailures = 0;
+  const downloadFailureDetails = [];
+  let declaredHashChecksTotal = 0;
+  let skippedUndeclaredHashFields = 0;
+  let unavailableAlgorithmCount = 0;
+  const unavailableAlgorithmDetails = [];
+  const hashMatchByAlgorithm = { sha256: 0, sha3_256: 0, blake2b_256: 0, shake256_256: 0, sha512_256: 0, blake3_256: 0 };
+  const hashMismatchByAlgorithm = { sha256: 0, sha3_256: 0, blake2b_256: 0, shake256_256: 0, sha512_256: 0, blake3_256: 0 };
+  const hashMismatchDetails = [];
 
   const criticalErrors = [];
   const nftDetails = [];
@@ -595,7 +673,17 @@ async function main() {
   const tasks = nftAssets.map(asset => async () => {
     const detail = { asset_name: asset.name, contract: null, token_id: null, metadata: null, media: [], dag_valid: true };
     try {
-      const tarBuf = await downloadAsset(asset.id);
+      let tarBuf;
+      try {
+        tarBuf = await downloadAsset(asset.id);
+      } catch (e) {
+        downloadFailures++;
+        downloadFailureDetails.push({ asset: asset.name, error: String(e?.stack || e) });
+        criticalErrors.push(`DOWNLOAD FAILED: ${asset.name} — ${e.message}`);
+        detail.error = `Download failed: ${e.message}`;
+        return detail;
+      }
+
       const tarFiles = extractFilesFromTar(tarBuf);
       const nameMatch = asset.name.match(/^nft-(0x[0-9a-f]+)-(.+)\.tar$/);
       if (!nameMatch) { detail.error = `Cannot parse: ${asset.name}`; return detail; }
@@ -625,24 +713,55 @@ async function main() {
         const matchMethod = findResult?.matchMethod || 'none';
 
         if (matchedItem && matchMethod !== 'path_contains_cid_candidate') {
-          // Verify all hash fields declared in manifest
+          // Only verify hash fields that are explicitly declared (non-empty) in manifest
           const hashes = computeAllHashes(carData);
-          if (matchedItem.sha256) { if (hashes.sha256 === matchedItem.sha256) sha256MatchCount++; else fileHashMismatchCount++; }
-          if (matchedItem.sha3_256) { if (hashes.sha3_256 === matchedItem.sha3_256) sha3MatchCount++; else fileHashMismatchCount++; }
-          if (matchedItem.blake2b_256) { if (hashes.blake2b_256 === matchedItem.blake2b_256) blake2bMatchCount++; else fileHashMismatchCount++; }
-          if (matchedItem.shake256_256) { if (hashes.shake256_256 === matchedItem.shake256_256) shake256MatchCount++; else fileHashMismatchCount++; }
-          if (matchedItem.sha512_256) { if (hashes.sha512_256 === matchedItem.sha512_256) sha512MatchCount++; else fileHashMismatchCount++; }
-          if (matchedItem.blake3_256) { if (hashes.blake3_256 === matchedItem.blake3_256) blake3MatchCount++; else fileHashMismatchCount++; }
+          const declared = declaredHashAlgorithms(matchedItem);
+          const skipped = HASH_ALGORITHMS.length - declared.length;
+          skippedUndeclaredHashFields += skipped;
+
+          for (const algo of declared) {
+            declaredHashChecksTotal++;
+            const expected = normalizeHashValue(matchedItem[algo]);
+            const observed = normalizeHashValue(hashes[algo]);
+
+            if (!observed) {
+              unavailableAlgorithmCount++;
+              unavailableAlgorithmDetails.push({ path: matchedItem.path, algorithm: algo, reason: 'algorithm_declared_but_not_computed' });
+              continue;
+            }
+
+            if (observed === expected) {
+              hashMatchByAlgorithm[algo]++;
+              // Also update legacy counters
+              if (algo === 'sha256') sha256MatchCount++;
+              else if (algo === 'sha3_256') sha3MatchCount++;
+              else if (algo === 'blake2b_256') blake2bMatchCount++;
+              else if (algo === 'shake256_256') shake256MatchCount++;
+              else if (algo === 'sha512_256') sha512MatchCount++;
+              else if (algo === 'blake3_256') blake3MatchCount++;
+            } else {
+              hashMismatchByAlgorithm[algo]++;
+              fileHashMismatchCount++;
+              hashMismatchDetails.push({ path: matchedItem.path, algorithm: algo, expected, observed });
+            }
+          }
+
           if (matchedItem.size_bytes && carSize !== matchedItem.size_bytes) fileSizeMismatchCount++;
           manifestDirectMatchCount++;
         } else if (matchedItem && matchMethod === 'path_contains_cid_candidate') {
-          // CID path match is only a candidate — verify hash
+          // CID path match is only a candidate — verify hash (sha256 only)
           const hashes = computeAllHashes(carData);
-          if (matchedItem.sha256 && hashes.sha256 === matchedItem.sha256) {
-            sha256MatchCount++;
-            manifestDirectMatchCount++;
-          } else {
-            fileHashMismatchCount++;
+          if (matchedItem.sha256) {
+            declaredHashChecksTotal++;
+            if (normalizeHashValue(hashes.sha256) === normalizeHashValue(matchedItem.sha256)) {
+              sha256MatchCount++;
+              hashMatchByAlgorithm.sha256++;
+              manifestDirectMatchCount++;
+            } else {
+              fileHashMismatchCount++;
+              hashMismatchByAlgorithm.sha256++;
+              hashMismatchDetails.push({ path: matchedItem.path, algorithm: 'sha256', expected: normalizeHashValue(matchedItem.sha256), observed: normalizeHashValue(hashes.sha256) });
+            }
           }
         }
 
@@ -722,12 +841,14 @@ async function main() {
 
   // ── Summary ────────────────────────────────────────────────────────
   const dagAndDigestManifestPass = criticalErrors.length === 0
+    && downloadFailures === 0
     && metadataDagFail === 0
     && metadataTokenIndexCidMismatch === 0
     && digestJsonShaMatch && digestCsvShaMatch
     && digestJsonSizeMatch && digestCsvSizeMatch
     && fileHashMismatchCount === 0
     && fileSizeMismatchCount === 0
+    && unavailableAlgorithmCount === 0
     && publicMissingCount === 0
     && (declaredJson?.ar_sha256 ? true : false)
     && (declaredCsv?.ar_sha256 ? true : false);
@@ -739,6 +860,10 @@ async function main() {
   log(`  Release derivative verified   : ${releaseDerivVerifiedCount}`);
   log(`  Private/unavailable           : ${privateUnavailableCount}`);
   log(`  Public missing                : ${publicMissingCount}`);
+  log(`  Download failures             : ${downloadFailures}`);
+  log(`  Declared hash checks total    : ${declaredHashChecksTotal}`);
+  log(`  Skipped undeclared hash fields: ${skippedUndeclaredHashFields}`);
+  log(`  Unavailable algorithm count   : ${unavailableAlgorithmCount}`);
   log(`  sha256 matches                : ${sha256MatchCount}`);
   log(`  sha3_256 matches              : ${sha3MatchCount}`);
   log(`  blake2b_256 matches           : ${blake2bMatchCount}`);
@@ -762,6 +887,9 @@ async function main() {
     dag_and_digest_manifest_pass: dagAndDigestManifestPass,
     release_nft_tar_count: nftAssets.length,
 
+    download_failures: downloadFailures,
+    download_failure_details: downloadFailureDetails,
+
     digest_manifest_json_sha256_match: digestJsonShaMatch,
     digest_manifest_csv_sha256_match: digestCsvShaMatch,
     digest_manifest_json_size_match: digestJsonSizeMatch,
@@ -774,6 +902,14 @@ async function main() {
     private_unavailable_hash_only: privateUnavailableCount,
     public_missing_count: publicMissingCount,
 
+    declared_hash_checks_total: declaredHashChecksTotal,
+    skipped_undeclared_hash_fields: skippedUndeclaredHashFields,
+    unavailable_algorithm_count: unavailableAlgorithmCount,
+    unavailable_algorithm_details: unavailableAlgorithmDetails,
+
+    hash_match_by_algorithm: hashMatchByAlgorithm,
+    hash_mismatch_by_algorithm: hashMismatchByAlgorithm,
+
     sha256_match_count: sha256MatchCount,
     sha3_256_match_count: sha3MatchCount,
     blake2b_256_match_count: blake2bMatchCount,
@@ -783,6 +919,7 @@ async function main() {
 
     file_hash_mismatch_count: fileHashMismatchCount,
     file_size_mismatch_count: fileSizeMismatchCount,
+    hash_mismatch_details: hashMismatchDetails,
 
     metadata_dag_pass: metadataDagPass,
     metadata_dag_fail: metadataDagFail,
