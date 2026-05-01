@@ -62,11 +62,11 @@ async function main() {
 
   // ── Extract pass/fail from each artifact ──────────────────────────────
 
-  const releaseVerified = artifacts.release?.status === 'PASS'
+  const releaseVerified = !!(artifacts.release?.status === 'PASS'
     && (artifacts.release?.nft_assets_checked === EXPECTED_NFTS || artifacts.release?.total_assets >= EXPECTED_NFTS)
     && (artifacts.release?.sha256_pass ?? 0) > 0
     && (artifacts.release?.sha256_mismatch ?? 0) === 0
-    && (artifacts.release?.size_mismatch ?? 0) === 0;
+    && (artifacts.release?.size_mismatch ?? 0) === 0);
 
   const onchainTokenuri175Pass = artifacts.onchain?.readable_pass === EXPECTED_NFTS
     && (artifacts.onchain?.fail ?? 0) === 0

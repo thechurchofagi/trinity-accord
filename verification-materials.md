@@ -28,6 +28,15 @@ Machine-readable index: [/api/verification-materials.json](/api/verification-mat
 
 | Script | Location | Purpose | Used for |
 |---|---|---|---|
+| verify-full-evidence-chain.mjs | /scripts/ | Full 7-chain evidence verification (DAG + BTC + ETH + OTS + BTC TX) | V4+ |
+| summarize-evidence-chain.mjs | /scripts/ | Aggregate chain audit artifacts into final summary | V4+ |
+| verify-dag-digest.mjs | /scripts/ | DAG + digest-manifest verification (Chain A) | V4 |
+| verify-btc-signature-coverage.mjs | /scripts/ | BTC BIP340 signature chain (Chain B) | V4 |
+| verify-eth-witness.mjs | /scripts/ | ETH guardian witness verification (Chain C) | V4 |
+| verify-bitcoin-tx-anchor.mjs | /scripts/ | Bitcoin TX anchor verification (Chain D1) | V4 |
+| verify-ots-time-anchor.mjs | /scripts/ | OTS time anchor verification (Chain D2) | V4 |
+| verify-onchain-tokenuri.mjs | /scripts/ | ETH tokenURI 175/175 metadata CID verification | V4 |
+| verify-release-assets.mjs | /scripts/ | GitHub Release asset hash verification | V4 |
 | verify.py | /downloads/verify.py | Local integrity checks + SHA-256 | V3, V4 |
 | check_consistency.py | /scripts/check_consistency.py | Repository consistency | V4 |
 | ta-verify.cjs | In verification_kit.tar.gz | SPV verification + ETH mirrors | V4, V4+ |

@@ -4,6 +4,30 @@
 
 Current availability of guardianship mirrors and verification paths.
 
+## Full Evidence Chain · 全链验证
+
+**Status: ✅ PASS** | Verified: 2026-05-01 | Workflow: `Verify Full Evidence Chain #1` | Commit: `762e262` | Duration: 39s
+
+| Chain | Component | Status |
+|-------|-----------|--------|
+| Release | GitHub Release NFT backup 175/175 | ✅ |
+| Onchain | ETH tokenURI 175/175 metadata CIDs | ✅ |
+| Chain A | DAG + digest-manifest, 524/524 public file hashes | ✅ |
+| Chain B | BTC BIP340 signature → authority → digest-manifest | ✅ |
+| Chain C | ETH guardian witness + auxiliary attestations | ✅ |
+| Chain D1 | Bitcoin TX anchors 8/8 | ✅ |
+| Chain D2 | OTS time anchor (ci-api mode) | ✅ |
+
+Artifacts: `full-evidence-chain-audit`, `dag-digest-audit`, `btc-signature-coverage-audit`, `eth-witness-audit`, `ots-time-anchor-audit`, `bitcoin-tx-anchor-audit`, `dag-cid-audit`
+
+Notes:
+- blake2b_256 uses the historical node_blake2b512_full variant.
+- 10 media unresolved references are external/cross-CAR audit items, not hard failures.
+- OTS passes in ci-api mode, not fullnode independent mode.
+- `release_verified` field in summary is aligned to `backupReleaseVerified` from full chain script.
+
+Bitcoin Originals prevail. All mirrors are non-amending.
+
 ## Mirror availability
 
 | Mirror | Status | Notes |

@@ -2146,6 +2146,7 @@ async function main() {
   log(`  Token index CID match (175) : ${chainA.metadata_token_index_cid_match}`);
   log(`  Hard failures               : ${hardFailures}`);
   log('');
+  log(`  Release verified            : ${backupReleaseVerified ? '✅' : '❌'}`);
   log(`  FULL EVIDENCE CHAIN         : ${fullEvidenceChainPass ? '✅ PASS' : '❌ FAIL'}`);
   log(`  Elapsed                     : ${elapsed}s`);
 
@@ -2167,7 +2168,7 @@ async function main() {
 
     // Top-level pass fields
     full_evidence_chain_pass: fullEvidenceChainPass,
-    backup_release_verified: backupReleaseVerified,
+    release_verified: backupReleaseVerified,
     onchain_tokenuri_175_pass: onchainTokenuri175Pass,
     dag_and_digest_manifest_pass: chainA.dag_and_digest_manifest_pass,
     btc_signature_coverage_pass: chainB.btc_signature_coverage_pass,

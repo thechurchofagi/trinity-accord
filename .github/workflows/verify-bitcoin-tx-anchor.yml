@@ -15,7 +15,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
 
       - name: Run Bitcoin TX Anchor Verification
         run: node scripts/verify-bitcoin-tx-anchor.mjs
