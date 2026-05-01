@@ -1,0 +1,31 @@
+name: Verify ETH Witness
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-eth-witness:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run ETH Witness Verification
+        env:
+          ETH_RPC_URL: ${{ secrets.ETH_RPC_URL }}
+        run: node scripts/verify-eth-witness.mjs
+
+      - name: Upload ETH-WITNESS-AUDIT.json
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: eth-witness-audit
+          path: ETH-WITNESS-AUDIT.json
+          retention-days: 90

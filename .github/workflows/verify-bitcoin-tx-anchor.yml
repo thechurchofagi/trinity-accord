@@ -1,0 +1,29 @@
+name: Verify Bitcoin TX Anchor
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-bitcoin-tx-anchor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run Bitcoin TX Anchor Verification
+        run: node scripts/verify-bitcoin-tx-anchor.mjs
+
+      - name: Upload BITCOIN-TX-ANCHOR-AUDIT.json
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bitcoin-tx-anchor-audit
+          path: BITCOIN-TX-ANCHOR-AUDIT.json
+          retention-days: 90

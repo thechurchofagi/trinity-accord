@@ -1,0 +1,41 @@
+name: Verify OTS Time Anchor
+
+on:
+  workflow_dispatch:
+    inputs:
+      ots_release_tag:
+        description: 'GitHub Release tag for OTS proofs'
+        required: false
+        default: 'ots-and-flaw-mirror-v1'
+
+permissions:
+  contents: read
+
+jobs:
+  verify-ots-time-anchor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install ots CLI
+        run: pip3 install opentimestamps-client
+
+      - name: Run OTS Time Anchor Verification
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          node scripts/verify-ots-time-anchor.mjs \
+            --ots-release-tag "${{ inputs.ots_release_tag || 'ots-and-flaw-mirror-v1' }}"
+
+      - name: Upload OTS-TIME-ANCHOR-AUDIT.json
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ots-time-anchor-audit
+          path: OTS-TIME-ANCHOR-AUDIT.json
+          retention-days: 90

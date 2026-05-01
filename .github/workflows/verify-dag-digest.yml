@@ -1,0 +1,43 @@
+name: Verify DAG + Digest Manifest
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: 'GitHub Release tag for NFT backup'
+        required: false
+        default: 'nft-arweave-mirror-175-v1'
+      concurrency:
+        description: 'Concurrency level'
+        required: false
+        default: '4'
+
+permissions:
+  contents: read
+
+jobs:
+  verify-dag-digest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run DAG + Digest Manifest Verification
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          node scripts/verify-dag-digest.mjs \
+            --release-tag "${{ inputs.release_tag || 'nft-arweave-mirror-175-v1' }}" \
+            --concurrency "${{ inputs.concurrency || '4' }}"
+
+      - name: Upload DAG-DIGEST-AUDIT.json
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dag-digest-audit
+          path: DAG-DIGEST-AUDIT.json
+          retention-days: 90

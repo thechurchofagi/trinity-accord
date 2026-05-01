@@ -1,0 +1,29 @@
+name: Summarize Evidence Chain
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  summarize-evidence-chain:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run Summary
+        run: node scripts/summarize-evidence-chain.mjs
+
+      - name: Upload FULL-EVIDENCE-CHAIN-AUDIT.json
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: full-evidence-chain-audit
+          path: FULL-EVIDENCE-CHAIN-AUDIT.json
+          retention-days: 90
