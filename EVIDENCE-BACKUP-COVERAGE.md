@@ -48,6 +48,7 @@ Remaining work is documentation-level relationship mapping and optional hardenin
 | flaw-covenant-video-mirror-v1 | Two flaw videos mirrored from Arweave | 5/5 | PASS | Already-anchored evidence mirror |
 | ots-proof-bundle-mirror-v1 | OTS proof bundle mirror | 4/4 | PASS | OTS artifact availability mirror |
 | ots-and-flaw-mirror-v1 | OTS proofs + flaw image mirror | Existing release | PASS / legacy supporting mirror | Availability mirror |
+| flaw-covenant-archive-accessibility-mirror-v1 | Large Flaw Covenant ZIP accessibility mirror | 5/5 | PASS | Non-amending accessibility mirror for gateway availability mitigation |
 | nft-backup-v1 | Earlier NFT backup | Legacy | Legacy | Not current primary path |
 | nft-individual-v1 | Deprecated individual NFT attempt | Deprecated | Deprecated | Not current primary path |
 | nft-individual-v2 | Deprecated individual NFT attempt | Deprecated | Deprecated | Not current primary path |

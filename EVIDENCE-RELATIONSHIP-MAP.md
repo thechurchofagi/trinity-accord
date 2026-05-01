@@ -99,3 +99,11 @@ flowchart TD
 GitHub, Arweave, ETH, IPFS, NFTs, and Releases strengthen availability and verification, but do not create canonical authority.
 
 Bitcoin Originals prevail.
+
+## 7. Gateway Availability Note
+
+Two large Flaw Covenant ZIP archives (46MB flaw photos, 24MB Primary Verification Archive) experienced `arweave.net` 404 errors. Diagnosis confirmed they are standard ZIP files, not ANS-104 bundles. `permagate.io` successfully returned valid payloads.
+
+Resolution: GitHub Release `flaw-covenant-archive-accessibility-mirror-v1` created as a non-amending accessibility mirror with 5/5 custom assets, SHA-256 round-trip verified.
+
+Original Arweave pointers remain the original evidence pointers. The GitHub Release is an accessibility fallback, not an evidence amendment.

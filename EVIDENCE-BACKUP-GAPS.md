@@ -20,6 +20,7 @@ The remaining items are cautions and optional hardening tasks.
 | Legacy homepage external pointer coverage | Low | Old homepage contains many pointers and explanatory materials | Generate a dedicated pointer coverage table |
 | Arweave/GitHub authority confusion | Medium | Mirrors may be mistaken for canonical authority | Repeat boundary statement in all summary docs |
 | Large payload repository risk | Low | Videos/tar/CAR files should not be committed to repository tree | Keep large payloads in Arweave and GitHub Releases only |
+| Gateway availability for large ZIPs | ~~Medium~~ → Resolved | arweave.net returned 404 for large flaw archive ZIPs | ✅ Resolved: GitHub Release `flaw-covenant-archive-accessibility-mirror-v1` created as non-amending accessibility mirror |
 
 ## Not Considered Gaps
 
@@ -31,6 +32,7 @@ The following are not evidence-chain failures:
 - OTS bundle mirror not being fullnode-independent OTS verification
 - Deprecated NFT releases existing as historical artifacts
 - GitHub release pages showing source archives in asset count
+- Gateway availability for large Arweave payloads (mitigated by GitHub Release accessibility mirror)
 
 ## Optional Hardening Tasks
 
