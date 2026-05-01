@@ -6,25 +6,33 @@ Current availability of guardianship mirrors and verification paths.
 
 ## Full Evidence Chain · 全链验证
 
-**Status: ✅ PASS** | Verified: 2026-05-01 | Workflow: `Verify Full Evidence Chain #1` | Commit: `762e262` | Duration: 39s
+**Status: ✅ PASS** | Verified: 2026-05-01 | Workflow: `Verify Full Evidence Chain #8` | Commit: `3741e78` | Duration: 34s | Artifacts: 7/7 uploaded | hard_failures: 0
 
-| Chain | Component | Status |
-|-------|-----------|--------|
-| Release | GitHub Release NFT backup 175/175 | ✅ |
-| Onchain | ETH tokenURI 175/175 metadata CIDs | ✅ |
-| Chain A | DAG + digest-manifest, 524/524 public file hashes | ✅ |
-| Chain B | BTC BIP340 signature → authority → digest-manifest | ✅ |
-| Chain C | ETH guardian witness + auxiliary attestations | ✅ |
-| Chain D1 | Bitcoin TX anchors 8/8 | ✅ |
-| Chain D2 | OTS time anchor (ci-api mode) | ✅ |
+| Field | Value |
+|-------|-------|
+| full_evidence_chain_pass | true |
+| release_verified | true |
+| onchain_tokenuri_175_pass | true |
+| dag_and_digest_manifest_pass | true |
+| btc_signature_coverage_pass | true |
+| eth_witness_coverage_pass | true |
+| bitcoin_tx_anchor_pass | true |
+| ots_time_anchor_pass | true |
+| hard_failures | 0 |
+
+What this verifies:
+- GitHub Release backup 175/175 verified.
+- ETH tokenURI returns 175/175 metadata CIDs matching token_index.
+- DAG + digest-manifest verification passes; 524/524 public file hashes match across all declared algorithms.
+- BTC BIP340 signature verifies the authority message, which anchors the digest-manifest hash chain.
+- ETH guardian witness verification passes.
+- Bitcoin tx anchors pass.
+- OTS time-anchor verification passes.
+
+Limitation:
+- OTS currently passes in ci-api mode, not fullnode independent Bitcoin Core verification.
 
 Artifacts: `full-evidence-chain-audit`, `dag-digest-audit`, `btc-signature-coverage-audit`, `eth-witness-audit`, `ots-time-anchor-audit`, `bitcoin-tx-anchor-audit`, `dag-cid-audit`
-
-Notes:
-- blake2b_256 uses the historical node_blake2b512_full variant.
-- 10 media unresolved references are external/cross-CAR audit items, not hard failures.
-- OTS passes in ci-api mode, not fullnode independent mode.
-- `release_verified` field in summary is aligned to `backupReleaseVerified` from full chain script.
 
 Bitcoin Originals prevail. All mirrors are non-amending.
 
@@ -66,6 +74,7 @@ If a mirror is unavailable, try in this order:
 - IndexNow — active for Bing/Yandex
 
 ## Last verified
+- Full Evidence Chain: 2026-05-01 (commit 3741e78, workflow #8, PASS)
 - Bitcoin TXIDs: 2026-04-26
 - Arweave bundle extraction: 2026-04-26
 - SHA-256 hashes: 2026-04-26
