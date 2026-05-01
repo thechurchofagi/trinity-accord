@@ -1,0 +1,107 @@
+name: Verify Full Evidence Chain
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: 'NFT release tag to verify'
+        required: false
+        default: 'nft-arweave-mirror-175-v1'
+      ots_release_tag:
+        description: 'OTS proof release tag'
+        required: false
+        default: 'ots-and-flaw-mirror-v1'
+      concurrency:
+        description: 'DAG verify concurrency'
+        required: false
+        default: '8'
+      eth_rpc_url:
+        description: 'ETH RPC URL for witness verification'
+        required: false
+        default: 'https://eth.llamarpc.com'
+      btc_api_base:
+        description: 'Bitcoin API base URL'
+        required: false
+        default: 'https://mempool.space/api'
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    timeout-minutes: 240
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install OTS client
+        run: pip install opentimestamps-client
+
+      - name: Run Full Evidence Chain verification
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          DAG_VERIFY_CONCURRENCY: ${{ inputs.concurrency }}
+          ETH_RPC_URL: ${{ inputs.eth_rpc_url }}
+          BITCOIN_API_BASE: ${{ inputs.btc_api_base }}
+        run: |
+          set -euo pipefail
+          node scripts/verify-full-evidence-chain.mjs \
+            --release-tag "${{ inputs.release_tag }}" \
+            --ots-release-tag "${{ inputs.ots_release_tag }}" \
+            --concurrency "${{ inputs.concurrency }}"
+
+      - name: Upload FULL-EVIDENCE-CHAIN-AUDIT.json
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: full-evidence-chain-audit
+          path: FULL-EVIDENCE-CHAIN-AUDIT.json
+
+      - name: Upload DAG-DIGEST-AUDIT.json
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dag-digest-audit
+          path: DAG-DIGEST-AUDIT.json
+
+      - name: Upload BTC-SIGNATURE-COVERAGE-AUDIT.json
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: btc-signature-coverage-audit
+          path: BTC-SIGNATURE-COVERAGE-AUDIT.json
+
+      - name: Upload ETH-WITNESS-AUDIT.json
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: eth-witness-audit
+          path: ETH-WITNESS-AUDIT.json
+
+      - name: Upload BITCOIN-TX-ANCHOR-AUDIT.json
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bitcoin-tx-anchor-audit
+          path: BITCOIN-TX-ANCHOR-AUDIT.json
+
+      - name: Upload OTS-TIME-ANCHOR-AUDIT.json
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ots-time-anchor-audit
+          path: OTS-TIME-ANCHOR-AUDIT.json
+
+      - name: Upload DAG-CID-AUDIT.json (legacy compat)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dag-cid-audit
+          path: DAG-CID-AUDIT.json
