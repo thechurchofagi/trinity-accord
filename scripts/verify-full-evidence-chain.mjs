@@ -698,18 +698,37 @@ function computeAllHashes(buf) {
   };
 }
 
-/** Match a file against digest-manifest entries by basename/filename */
+/** Normalize Windows-style path separators for cross-platform matching */
+function normalizePath(p) {
+  return p.replace(/\\/g, '/');
+}
+
+/** Match a file against digest-manifest entries by basename/filename/CID */
 function findManifestEntry(filename, digestManifest) {
   if (!digestManifest?.items) return null;
-  // Try exact basename match
+  const normalized = normalizePath(filename);
+
+  // 1. Try exact basename match (normalized)
   for (const item of digestManifest.items) {
-    const itemBasename = path.basename(item.path);
-    if (itemBasename === filename) return item;
+    const itemBasename = path.basename(normalizePath(item.path));
+    if (itemBasename === filename || itemBasename === path.basename(normalized)) return item;
   }
-  // Try matching by CID-like prefix in path
+
+  // 2. Try normalized path contains
   for (const item of digestManifest.items) {
-    if (item.path && item.path.includes(filename)) return item;
+    const itemNorm = normalizePath(item.path);
+    if (itemNorm.endsWith('/' + normalized) || itemNorm.endsWith('/' + path.basename(normalized))) return item;
   }
+
+  // 3. Try CID-based match (extract CID from filename, look in manifest paths)
+  const cidMatch = filename.match(/(b[a-z2-7]{20,}|Qm[a-zA-Z0-9]{20,})/);
+  if (cidMatch) {
+    const cid = cidMatch[1];
+    for (const item of digestManifest.items) {
+      if (item.path && item.path.includes(cid)) return item;
+    }
+  }
+
   return null;
 }
 
@@ -1018,91 +1037,109 @@ async function verifyChainA(tokenIndex, nftAssets, digestManifest, ethAudit, con
   // ── Digest-manifest hash coverage verification ────────────────────────
   log('\n  ── Digest-manifest hash coverage ──');
 
-  // Collect NFT tar buffers for hash verification (already downloaded in tasks)
-  // We need to re-download or use cached data. Since tasks already downloaded,
-  // we'll verify the manifest entries we can access: repo files + release assets.
-
-  // 1. Verify repo files against manifest
+  // 1. Try to download verify-report.json from release assets
   const repoFilesToVerify = [];
-  const tokenIndexBuf = readRepoFile(TOKEN_INDEX_FILE);
-  if (tokenIndexBuf) repoFilesToVerify.push({ label: 'token_index.json', buf: tokenIndexBuf });
-  if (actualJsonBuf) repoFilesToVerify.push({ label: 'digest-manifest.json', buf: actualJsonBuf });
-  if (actualCsvBuf) repoFilesToVerify.push({ label: 'digest-manifest.csv', buf: actualCsvBuf });
-
-  // Also check verify-report.json if it exists
-  const verifyReportBuf = readRepoFile('verify-report.json') || readRepoFile('archive/evidence/verify-report.json');
-  if (verifyReportBuf) repoFilesToVerify.push({ label: 'verify-report.json', buf: verifyReportBuf });
+  const verifyReportAsset = allAssets.find(a => a.name === 'verify-report.json');
+  let verifyReportBuf = null;
+  if (verifyReportAsset) {
+    try {
+      verifyReportBuf = await downloadAsset(verifyReportAsset.id);
+      repoFilesToVerify.push({ label: 'verify-report.json', buf: verifyReportBuf });
+      log(`  Downloaded verify-report.json (${verifyReportBuf.length} bytes)`);
+    } catch (e) {
+      log(`  ⚠️ Could not download verify-report.json: ${e.message}`);
+    }
+  } else {
+    // Try local repo
+    verifyReportBuf = readRepoFile('verify-report.json') || readRepoFile('archive/evidence/verify-report.json');
+    if (verifyReportBuf) repoFilesToVerify.push({ label: 'verify-report.json', buf: verifyReportBuf });
+  }
 
   const repoHashResult = verifyFileHashesAgainstManifest(repoFilesToVerify, digestManifest);
-  log(`  Repo files: ${repoHashResult.match_count} match, ${repoHashResult.mismatch_count} hash mismatch, ${repoHashResult.size_mismatch_count} size mismatch`);
+  log(`  verify-report.json: ${repoHashResult.match_count} match, ${repoHashResult.mismatch_count} hash mismatch`);
   for (const d of repoHashResult.details) {
     log(`    ${d.label}: ${d.status === 'match' ? '✅' : '⚠️ ' + d.status}`);
   }
 
-  // 2. Verify release assets (non-NFT) against manifest
-  const releaseAssetFiles = [];
-  const releaseManifestAsset = allAssets.find(a => a.name === 'RELEASE-MANIFEST.json');
-  const releaseChecksumsAsset = allAssets.find(a => a.name === 'RELEASE-CHECKSUMS.sha256');
-
-  for (const asset of [releaseManifestAsset, releaseChecksumsAsset].filter(Boolean)) {
-    try {
-      const buf = await downloadAsset(asset.id);
-      releaseAssetFiles.push({ label: asset.name, buf });
-    } catch (e) {
-      log(`    ⚠️ Could not download ${asset.name}: ${e.message}`);
-    }
-  }
-
-  const releaseHashResult = verifyFileHashesAgainstManifest(releaseAssetFiles, digestManifest);
-  log(`  Release assets: ${releaseHashResult.match_count} match, ${releaseHashResult.mismatch_count} hash mismatch`);
-
-  // 3. Verify NFT tar hashes against manifest (compute from already-processed details)
+  // 2. Verify NFT tar CAR files against manifest by root CID
+  //    The manifest has entries like: E:\...\cars\<rootCID>.car
+  //    We match by extracting root CID from CAR data and finding the manifest entry
   let nftHashMatchCount = 0, nftHashMismatchCount = 0, nftSizeMismatchCount = 0;
-  let privateUnavailableCount = 0;
+  let nftManifestCoveredCount = 0;
+  const nftHashDetails = [];
+
   for (const detail of nftDetails) {
     if (detail.error) continue;
+
     // Check metadata CAR
-    if (detail.metadata) {
-      const entry = findManifestEntry(`${detail.asset_name}/metadata.car`, digestManifest)
-        || findManifestEntry(detail.asset_name, digestManifest);
-      if (entry) {
-        const shaMatch = detail.metadata.sha256 === entry.sha256?.toLowerCase();
-        const sizeMatch = detail.metadata.size === entry.size_bytes;
+    if (detail.metadata?.actual_root_cid) {
+      const rootCid = detail.metadata.actual_root_cid;
+      const matchedItem = digestManifest?.items?.find(item => item.path && item.path.includes(rootCid));
+      if (matchedItem) {
+        nftManifestCoveredCount++;
+        const shaMatch = detail.metadata.sha256 === matchedItem.sha256?.toLowerCase();
+        const sizeMatch = detail.metadata.size === matchedItem.size_bytes;
         if (shaMatch && sizeMatch) nftHashMatchCount++;
         else { nftHashMismatchCount++; if (!sizeMatch) nftSizeMismatchCount++; }
+        nftHashDetails.push({
+          asset: detail.asset_name, role: 'metadata', root_cid: rootCid.slice(0, 20),
+          sha256_match: shaMatch, size_match: sizeMatch,
+          actual_sha256: detail.metadata.sha256, expected_sha256: matchedItem.sha256,
+          actual_size: detail.metadata.size, expected_size: matchedItem.size_bytes,
+        });
       }
     }
+
     // Check media CARs
     for (const m of detail.media || []) {
-      const entry = findManifestEntry(`${detail.asset_name}/media.car`, digestManifest);
-      if (entry) {
-        const shaMatch = m.sha256 === entry.sha256?.toLowerCase();
-        const sizeMatch = m.size === entry.size_bytes;
-        if (shaMatch && sizeMatch) nftHashMatchCount++;
-        else { nftHashMismatchCount++; if (!sizeMatch) nftSizeMismatchCount++; }
+      if (m.actual_root_cid) {
+        const rootCid = m.actual_root_cid;
+        const matchedItem = digestManifest?.items?.find(item => item.path && item.path.includes(rootCid));
+        if (matchedItem) {
+          nftManifestCoveredCount++;
+          const shaMatch = m.sha256 === matchedItem.sha256?.toLowerCase();
+          const sizeMatch = m.size === matchedItem.size_bytes;
+          if (shaMatch && sizeMatch) nftHashMatchCount++;
+          else { nftHashMismatchCount++; if (!sizeMatch) nftSizeMismatchCount++; }
+          nftHashDetails.push({
+            asset: detail.asset_name, role: 'media', root_cid: rootCid.slice(0, 20),
+            sha256_match: shaMatch, size_match: sizeMatch,
+          });
+        }
       }
     }
   }
-  log(`  NFT tar hash: ${nftHashMatchCount} match, ${nftHashMismatchCount} mismatch, ${nftSizeMismatchCount} size mismatch`);
+  log(`  NFT CAR files: ${nftManifestCoveredCount} in manifest, ${nftHashMatchCount} hash+size match, ${nftHashMismatchCount} hash mismatch, ${nftSizeMismatchCount} size mismatch`);
 
-  // Count private/unavailable files (in manifest but not downloadable)
+  // 3. Aggregate hash verification counts
+  const multiHashMatchCount = repoHashResult.match_count + nftHashMatchCount;
+  const fileHashMismatchCount = repoHashResult.mismatch_count + nftHashMismatchCount;
+  const fileSizeMismatchCount = repoHashResult.size_mismatch_count + nftSizeMismatchCount;
+
+  // 4. Count private/unavailable files (in manifest but not downloadable from this release)
+  let privateUnavailableCount = 0;
   if (digestManifest?.items) {
-    for (const item of digestManifest.items) {
-      const bn = path.basename(item.path);
-      // Files that are in manifest but we can't access from repo or release
-      const isRepoFile = repoFilesToVerify.some(f => f.label === bn);
-      const isReleaseAsset = releaseAssetFiles.some(f => f.label === bn);
-      const isNftTar = bn.startsWith('nft-') && bn.endsWith('.tar');
-      if (!isRepoFile && !isReleaseAsset && !isNftTar) {
-        privateUnavailableCount++;
+    const accessibleBasenames = new Set();
+    // verify-report.json
+    if (verifyReportBuf) accessibleBasenames.add('verify-report.json');
+    // NFT CAR root CIDs
+    for (const detail of nftDetails) {
+      if (detail.metadata?.actual_root_cid) accessibleBasenames.add(detail.metadata.actual_root_cid);
+      for (const m of detail.media || []) {
+        if (m.actual_root_cid) accessibleBasenames.add(m.actual_root_cid);
       }
     }
+    for (const item of digestManifest.items) {
+      const norm = normalizePath(item.path);
+      const bn = path.basename(norm);
+      // Check if this item was matched by any accessible file
+      let found = false;
+      for (const acc of accessibleBasenames) {
+        if (item.path.includes(acc) || bn === acc) { found = true; break; }
+      }
+      if (!found) privateUnavailableCount++;
+    }
   }
-
-  // Aggregate hash verification counts
-  const multiHashMatchCount = repoHashResult.match_count + releaseHashResult.match_count + nftHashMatchCount;
-  const fileHashMismatchCount = repoHashResult.mismatch_count + releaseHashResult.mismatch_count + nftHashMismatchCount;
-  const fileSizeMismatchCount = repoHashResult.size_mismatch_count + releaseHashResult.size_mismatch_count + nftSizeMismatchCount;
 
   log(`  ── Totals ──`);
   log(`  multi_hash_match_count     : ${multiHashMatchCount}`);
