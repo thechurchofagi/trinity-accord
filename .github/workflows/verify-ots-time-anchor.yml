@@ -7,6 +7,10 @@ on:
         description: 'GitHub Release tag for OTS proofs'
         required: false
         default: 'ots-and-flaw-mirror-v1'
+      ots_verify_mode:
+        description: 'OTS verification mode: ci-api or fullnode'
+        required: false
+        default: 'ci-api'
 
 permissions:
   contents: read
@@ -28,6 +32,8 @@ jobs:
       - name: Run OTS Time Anchor Verification
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OTS_VERIFY_MODE: ${{ inputs.ots_verify_mode || 'ci-api' }}
+          BITCOIN_API_BASE: https://mempool.space/api
         run: |
           node scripts/verify-ots-time-anchor.mjs \
             --ots-release-tag "${{ inputs.ots_release_tag || 'ots-and-flaw-mirror-v1' }}"
