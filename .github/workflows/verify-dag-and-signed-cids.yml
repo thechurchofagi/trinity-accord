@@ -1,0 +1,53 @@
+name: Verify DAG and Signed CIDs (175 NFTs)
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: 'Release tag to verify'
+        required: false
+        default: 'nft-arweave-mirror-175-v1'
+      eth_audit_file:
+        description: 'Path to ONCHAIN-READ-AUDIT.json (optional)'
+        required: false
+        default: ''
+      concurrency:
+        description: 'DAG verify concurrency'
+        required: false
+        default: '8'
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    timeout-minutes: 120
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Verify DAG and signed CIDs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          DAG_VERIFY_CONCURRENCY: ${{ inputs.concurrency }}
+        run: |
+          set -euo pipefail
+          ARGS="--release-tag ${{ inputs.release_tag }} --concurrency ${{ inputs.concurrency }}"
+          if [ -n "${{ inputs.eth_audit_file }}" ]; then
+            ARGS="$ARGS --eth-audit-file ${{ inputs.eth_audit_file }}"
+          fi
+          node scripts/verify-dag-and-signed-cids.mjs $ARGS
+
+      - name: Upload DAG-CID-AUDIT.json
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dag-cid-audit
+          path: DAG-CID-AUDIT.json
