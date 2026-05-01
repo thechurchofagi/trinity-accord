@@ -126,7 +126,7 @@ function decodeAbiString(hex) {
 }
 
 async function checkSupportsInterface(rpcUrl, contractAddr, interfaceId) {
-  const callData = SUPPORTS_INTERFACE_SELECTOR + interfaceId.padStart(64, '0');
+  const callData = SUPPORTS_INTERFACE_SELECTOR + interfaceId.slice(2).padEnd(64, '0');
   const { raw_hex, error } = await tryEthCallRaw(rpcUrl, contractAddr, callData);
   if (error) return { supported: null, raw_hex, error };
   if (!raw_hex || raw_hex === '0x') return { supported: false, raw_hex, error: null };
