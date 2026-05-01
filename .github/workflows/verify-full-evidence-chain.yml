@@ -16,9 +16,9 @@ on:
         required: false
         default: '8'
       eth_rpc_url:
-        description: 'ETH RPC URL for witness verification'
+        description: 'ETH RPC URL for witness verification (or use ETH_RPC_URL secret)'
         required: false
-        default: 'https://eth.llamarpc.com'
+        default: ''
       btc_api_base:
         description: 'Bitcoin API base URL'
         required: false
@@ -48,7 +48,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
           DAG_VERIFY_CONCURRENCY: ${{ inputs.concurrency }}
-          ETH_RPC_URL: ${{ inputs.eth_rpc_url }}
+          ETH_RPC_URL: ${{ inputs.eth_rpc_url || secrets.ETH_RPC_URL }}
           BITCOIN_API_BASE: ${{ inputs.btc_api_base }}
         run: |
           set -euo pipefail
