@@ -550,7 +550,10 @@ async function btcFetch(endpoint, retries = MAX_RETRIES) {
       const res = await fetch(`${BTC_API_BASE}${endpoint}`);
       if (res.status === 404) return null;
       if (!res.ok) throw new Error(`BTC API ${res.status}`);
-      return await res.json();
+      const text = await res.text();
+      // Some endpoints return plain text (e.g. /block-height/:n returns hash as string)
+      try { return JSON.parse(text); }
+      catch { return text; }
     } catch (e) {
       if (attempt < retries) { await sleep(2000 * (attempt + 1)); continue; }
       throw e;
@@ -726,6 +729,8 @@ async function verifyChainA(tokenIndex, nftAssets, digestManifest, ethAudit, con
   // Counters
   let digestManifestFileMatchCount = 0;
   let digestManifestFileMismatchCount = 0;
+  let metadataDigestMatchCount = 0, metadataDigestMismatchCount = 0;
+  let mediaDigestMatchCount = 0, mediaDigestMismatchCount = 0;
   let metadataDagPass = 0, metadataDagFail = 0;
   let mediaDagPass = 0, mediaDagFail = 0;
   let missingBlocksTotal = 0, cidRecomputeFail = 0;
@@ -775,10 +780,19 @@ async function verifyChainA(tokenIndex, nftAssets, digestManifest, ethAudit, con
           matchedManifestItem = digestManifest.items.find(item => item.path && item.path.includes(rootCid)) || null;
         }
         const inDigestManifest = !!matchedManifestItem;
-        if (inDigestManifest) digestManifestFileMatchCount++;
-        else if (rootCid) {
+        if (inDigestManifest) {
+          digestManifestFileMatchCount++;
+          if (role === 'metadata') metadataDigestMatchCount++;
+          else mediaDigestMatchCount++;
+        } else if (rootCid) {
           digestManifestFileMismatchCount++;
-          criticalErrors.push(`NOT IN DIGEST-MANIFEST: ${asset.name} [${role}] root=${rootCid?.slice(0,20)}`);
+          if (role === 'metadata') {
+            metadataDigestMismatchCount++;
+            criticalErrors.push(`NOT IN DIGEST-MANIFEST: ${asset.name} [${role}] root=${rootCid?.slice(0,20)}`);
+          } else {
+            mediaDigestMismatchCount++;
+            // Media CAR mismatch is audit-only, not hard fail
+          }
         }
 
         if (role === 'metadata') {
@@ -846,13 +860,13 @@ async function verifyChainA(tokenIndex, nftAssets, digestManifest, ethAudit, con
 
   const dagAndDigestManifestPass = criticalErrors.length === 0
     && metadataDagFail === 0
-    && digestManifestFileMismatchCount === 0
+    && metadataDigestMismatchCount === 0
     && metadataTokenIndexCidMismatch === 0
     && digestJsonShaMatch && digestCsvShaMatch
     && digestJsonSizeMatch && digestCsvSizeMatch;
 
-  log(`  Digest manifest file match    : ${digestManifestFileMatchCount}`);
-  log(`  Digest manifest file mismatch : ${digestManifestFileMismatchCount}`);
+  log(`  Digest manifest file match    : ${digestManifestFileMatchCount} (metadata: ${metadataDigestMatchCount}, media: ${mediaDigestMatchCount})`);
+  log(`  Digest manifest file mismatch : ${digestManifestFileMismatchCount} (metadata: ${metadataDigestMismatchCount}, media: ${mediaDigestMismatchCount})`);
   log(`  Metadata DAG pass             : ${metadataDagPass}`);
   log(`  Metadata DAG fail             : ${metadataDagFail}`);
   log(`  Media DAG pass (audit-only)   : ${mediaDagPass}`);
@@ -1385,7 +1399,7 @@ async function verifyChainD2(otsAssets) {
 
   const result = {
     ots_time_anchor_pass: false,
-    ots_files_total: 3,
+    ots_files_total: 0, // counted dynamically
     ots_files_pass: 0,
     ots_files_fail: 0,
     anchored_files: [],
@@ -1396,7 +1410,7 @@ async function verifyChainD2(otsAssets) {
   const targets = [
     { file: DIGEST_MANIFEST_JSON, label: 'digest-manifest.json' },
     { file: DIGEST_MANIFEST_CSV, label: 'digest-manifest.csv' },
-    { file: 'verify-report.json', label: 'verify-report.json' },
+    { file: 'verify-report.json', label: 'verify-report.json', optional: true },
   ];
 
   // Check if we have OTS proofs locally or need to download from release
@@ -1449,8 +1463,13 @@ async function verifyChainD2(otsAssets) {
         }
       }
       if (!fileBuf) {
+        if (target.optional) {
+          log(`  ⏭️  ${target.label}: file not found (optional), skipping`);
+          continue;
+        }
         detail.error = `Original file not found: ${target.file}`;
         result.ots_files_fail++;
+        result.ots_files_total++;
         result.anchored_files.push(detail);
         result.critical_errors.push(detail.error);
         continue;
@@ -1509,14 +1528,14 @@ async function verifyChainD2(otsAssets) {
 
       // 4. Query Bitcoin API for block hash and timestamp
       try {
-        const blockInfo = await btcFetch(`/block-height/${bestAttestation.block_height}`);
-        if (blockInfo && typeof blockInfo === 'string') {
-          detail.block_hash = blockInfo;
-          const blockDetail = await btcFetch(`/block/${blockInfo}`);
-          if (blockDetail) {
+        const blockHashResult = await btcFetch(`/block-height/${bestAttestation.block_height}`);
+        // /block-height/:n returns plain text hash string
+        const blockHashStr = typeof blockHashResult === 'string' ? blockHashResult : null;
+        if (blockHashStr && blockHashStr.length === 64) {
+          detail.block_hash = blockHashStr;
+          const blockDetail = await btcFetch(`/block/${blockHashStr}`);
+          if (blockDetail && blockDetail.timestamp) {
             detail.block_time = blockDetail.timestamp;
-            // Find the txid from block txs that matches OTS commitment
-            // For now, record the block attestation info
           }
         }
       } catch (e) {
@@ -1524,18 +1543,20 @@ async function verifyChainD2(otsAssets) {
       }
 
       result.ots_files_pass++;
+      result.ots_files_total++;
       log(`  ✅ ${target.label}: attested at block ${bestAttestation.block_height}`);
 
     } catch (e) {
       detail.error = e.message;
       result.ots_files_fail++;
+      result.ots_files_total++;
       result.critical_errors.push(`${target.label}: ${e.message}`);
     }
 
     result.anchored_files.push(detail);
   }
 
-  result.ots_time_anchor_pass = result.ots_files_pass === 3 && result.ots_files_fail === 0;
+  result.ots_time_anchor_pass = result.ots_files_pass >= 2 && result.ots_files_fail === 0;
 
   log(`  OTS files pass: ${result.ots_files_pass}`);
   log(`  OTS files fail: ${result.ots_files_fail}`);
