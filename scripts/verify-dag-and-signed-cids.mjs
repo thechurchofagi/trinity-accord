@@ -665,8 +665,10 @@ async function verifyChainA(tokenIndex, nftAssets, digestManifest, ethAudit, con
         // The GitHub release tars are repackaged (different sha256), but root CID is preserved.
         // Coverage chain: root CID → found in digest-manifest → digest-manifest sha256 declared in authority → authority signed by BTC.
         let inDigestManifest = false;
+        let matchedManifestItem = null;
         if (rootCid && digestManifest?.items) {
-          inDigestManifest = digestManifest.items.some(item => item.path && item.path.includes(rootCid));
+          matchedManifestItem = digestManifest.items.find(item => item.path && item.path.includes(rootCid)) || null;
+          inDigestManifest = !!matchedManifestItem;
         }
         if (inDigestManifest) digestManifestFileMatchCount++;
         else if (rootCid) {
@@ -719,7 +721,7 @@ async function verifyChainA(tokenIndex, nftAssets, digestManifest, ethAudit, con
           detail.media.push({
             dag_valid: dagResult.valid, block_count: dagResult.blockCount,
             actual_root_cid: rootCid, sha256: carSha, size: carSize,
-            digest_manifest_match: manifestItem ? (manifestItem.sha256 === carSha && manifestItem.size_bytes === carSize) : null,
+            digest_manifest_match: matchedManifestItem ? (matchedManifestItem.sha256 === carSha && matchedManifestItem.size_bytes === carSize) : null,
           });
         }
       }
