@@ -70,7 +70,7 @@ const SECP256K1_B  = 7n;
 function sha256hex(buf) { return crypto.createHash('sha256').update(buf).digest('hex'); }
 function sha256buf(buf) { return crypto.createHash('sha256').update(buf).digest(); }
 function sha3_256hex(buf) { return crypto.createHash('sha3-256').update(buf).digest('hex'); }
-function blake2b256hex(buf) { return crypto.createHash('blake2b512').update(buf).digest('hex').slice(0, 64); }
+function blake2b256hex(buf) { return crypto.createHash('blake2b512').update(buf).digest('hex'); }
 function sha512_256hex(buf) { return crypto.createHash('sha512-256').update(buf).digest('hex'); }
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 function log(msg) { console.log(msg); }
@@ -352,6 +352,49 @@ function verifyCarDag(carData) {
     }
   }
 
+  return result;
+}
+
+/**
+ * Re-verify a CAR's DAG with cross-CAR block resolution.
+ * Returns granular counts: cross_car_references (resolved from other CARs)
+ * vs unresolved_missing_blocks (truly missing from all CARs).
+ */
+function verifyCarDagCrossResolved(carData, globalBlocks) {
+  const result = {
+    valid: true, roots: [], blockCount: 0, crossCarReferences: 0,
+    unresolvedMissingBlocks: 0, cidMismatchBlocks: 0, errors: [],
+  };
+  let parsed;
+  try { parsed = parseCarFull(carData); }
+  catch (e) { result.valid = false; result.errors.push(`CAR parse failed: ${e.message}`); return result; }
+  const { roots, blocks } = parsed;
+  result.roots = roots;
+  result.blockCount = blocks.size;
+  if (roots.length === 0) { result.valid = false; result.errors.push('No roots found'); return result; }
+  for (const [cid, block] of blocks) {
+    const computedHash = sha256buf(block.data);
+    const storedDigest = extractDigestFromCid(cid);
+    if (!storedDigest) { result.cidMismatchBlocks++; result.errors.push(`CID digest not extractable: ${cid.slice(0, 30)}`); result.valid = false; }
+    else if (!storedDigest.equals(computedHash)) { result.cidMismatchBlocks++; result.errors.push(`CID mismatch: ${cid.slice(0, 30)}`); result.valid = false; }
+  }
+  const visited = new Set();
+  const queue = [...roots];
+  while (queue.length > 0) {
+    const cid = queue.shift();
+    if (visited.has(cid)) continue;
+    visited.add(cid);
+    const block = blocks.get(cid);
+    if (block) {
+      for (const linkCid of extractLinksFromBlock(block.data)) { if (!visited.has(linkCid)) queue.push(linkCid); }
+    } else if (globalBlocks.has(cid)) {
+      result.crossCarReferences++;
+    } else {
+      result.unresolvedMissingBlocks++;
+      result.errors.push(`Unresolved missing block: ${cid}`);
+      result.valid = false;
+    }
+  }
   return result;
 }
 
@@ -910,6 +953,8 @@ async function verifyChainA(tokenIndex, nftAssets, digestManifest, ethAudit, con
   let metadataDagPass = 0, metadataDagFail = 0;
   let mediaDagPass = 0, mediaDagFail = 0;
   let missingBlocksTotal = 0, cidRecomputeFail = 0;
+  let crossCarRefTotal = 0, crossCarRefResolvedTotal = 0, unresolvedMissingTotal = 0;
+  let metadataUnresolvedMissing = 0;
   let metadataTokenIndexCidMatch = 0, metadataTokenIndexCidMismatch = 0;
   let metadataEthCidMatch = 0, metadataEthCidMismatch = 0, metadataEthCidSkip = 0;
 
@@ -937,15 +982,32 @@ async function verifyChainA(tokenIndex, nftAssets, digestManifest, ethAudit, con
       const lookupKey = `${contract.toLowerCase()}_${tokenId}`;
       const tokenEntry = nftLookup.get(lookupKey);
 
-      for (const tarFile of tarFiles) {
-        if (!tarFile.name.endsWith('.car')) continue;
-        const role = tarFile.name.replace('nft/', '').replace('.car', '');
-        const carData = tarFile.data;
+      // Pass 1: parse all CARs, build global block pool
+      const carFiles = tarFiles.filter(f => f.name.endsWith('.car'));
+      const globalBlocks = new Map();
+      const parsedCars = [];
+      for (const carFile of carFiles) {
+        try {
+          const parsed = parseCarFull(carFile.data);
+          for (const [cid, block] of parsed.blocks) {
+            if (!globalBlocks.has(cid)) globalBlocks.set(cid, block);
+          }
+          parsedCars.push({ carFile, parsed });
+        } catch { parsedCars.push({ carFile, parsed: null }); }
+      }
+
+      // Pass 2: verify each CAR with cross-resolve
+      for (const { carFile, parsed: parsedCar } of parsedCars) {
+        if (!parsedCar) continue;
+        const role = carFile.name.replace('nft/', '').replace('.car', '');
+        const carData = carFile.data;
         const carSha = sha256hex(carData);
         const carSize = carData.length;
 
-        const dagResult = verifyCarDag(carData);
-        missingBlocksTotal += dagResult.missingBlocks;
+        const dagResult = verifyCarDagCrossResolved(carData, globalBlocks);
+        crossCarRefTotal += dagResult.crossCarReferences;
+        crossCarRefResolvedTotal += dagResult.crossCarReferences;
+        unresolvedMissingTotal += dagResult.unresolvedMissingBlocks;
         cidRecomputeFail += dagResult.cidMismatchBlocks;
 
         const rootCid = dagResult.roots?.[0] || null;
@@ -972,6 +1034,7 @@ async function verifyChainA(tokenIndex, nftAssets, digestManifest, ethAudit, con
         }
 
         if (role === 'metadata') {
+          metadataUnresolvedMissing += dagResult.unresolvedMissingBlocks;
           // DAG must pass for metadata
           if (dagResult.valid) metadataDagPass++;
           else {
@@ -1004,7 +1067,9 @@ async function verifyChainA(tokenIndex, nftAssets, digestManifest, ethAudit, con
 
           detail.metadata = {
             dag_valid: dagResult.valid, block_count: dagResult.blockCount,
-            missing_blocks: dagResult.missingBlocks, cid_mismatch_blocks: dagResult.cidMismatchBlocks,
+            cross_car_references: dagResult.crossCarReferences,
+            unresolved_missing_blocks: dagResult.unresolvedMissingBlocks,
+            cid_mismatch_blocks: dagResult.cidMismatchBlocks,
             actual_root_cid: rootCid, token_index_cid: expectedTi || null, eth_cid: ethCid || null,
             sha256: carSha, size: carSize,
           };
@@ -1160,6 +1225,7 @@ async function verifyChainA(tokenIndex, nftAssets, digestManifest, ethAudit, con
     && metadataDagFail === 0
     && metadataDigestMismatchCount === 0
     && metadataTokenIndexCidMismatch === 0
+    && metadataUnresolvedMissing === 0
     && digestJsonShaMatch && digestCsvShaMatch
     && digestJsonSizeMatch && digestCsvSizeMatch;
 
@@ -1169,7 +1235,9 @@ async function verifyChainA(tokenIndex, nftAssets, digestManifest, ethAudit, con
   log(`  Metadata DAG fail             : ${metadataDagFail}`);
   log(`  Media DAG pass (audit-only)   : ${mediaDagPass}`);
   log(`  Media DAG fail (audit-only)   : ${mediaDagFail}`);
-  log(`  Missing blocks                : ${missingBlocksTotal}`);
+  log(`  Cross-CAR references          : ${crossCarRefTotal}`);
+  log(`  Cross-CAR resolved            : ${crossCarRefResolvedTotal}`);
+  log(`  Unresolved missing blocks     : ${unresolvedMissingTotal} (metadata: ${metadataUnresolvedMissing})`);
   log(`  CID recompute fail            : ${cidRecomputeFail}`);
   log(`  Meta CID vs token_index       : ${metadataTokenIndexCidMatch} match, ${metadataTokenIndexCidMismatch} mismatch`);
   log(`  Meta CID vs ETH               : ${metadataEthCidMatch} match, ${metadataEthCidMismatch} mismatch, ${metadataEthCidSkip} skip`);
@@ -1188,7 +1256,10 @@ async function verifyChainA(tokenIndex, nftAssets, digestManifest, ethAudit, con
     metadata_dag_fail: metadataDagFail,
     media_dag_pass: mediaDagPass,
     media_dag_fail: mediaDagFail,
-    missing_blocks: missingBlocksTotal,
+    cross_car_references: crossCarRefTotal,
+    cross_car_references_resolved: crossCarRefResolvedTotal,
+    unresolved_missing_blocks: unresolvedMissingTotal,
+    metadata_unresolved_missing_blocks: metadataUnresolvedMissing,
     cid_recompute_fail: cidRecomputeFail,
     metadata_token_index_cid_match: metadataTokenIndexCidMatch,
     metadata_token_index_cid_mismatch: metadataTokenIndexCidMismatch,
@@ -2197,7 +2268,10 @@ async function main() {
       metadata_dag_fail: chainA.metadata_dag_fail,
       media_dag_pass: chainA.media_dag_pass,
       media_dag_fail: chainA.media_dag_fail,
-      missing_blocks: chainA.missing_blocks,
+      cross_car_references: chainA.cross_car_references,
+      cross_car_references_resolved: chainA.cross_car_references_resolved,
+      unresolved_missing_blocks: chainA.unresolved_missing_blocks,
+      metadata_unresolved_missing_blocks: chainA.metadata_unresolved_missing_blocks,
       cid_recompute_fail: chainA.cid_recompute_fail,
       metadata_token_index_cid_match: chainA.metadata_token_index_cid_match,
       metadata_token_index_cid_mismatch: chainA.metadata_token_index_cid_mismatch,
@@ -2250,7 +2324,10 @@ async function main() {
     total_nfts: chainA.release_nft_tar_count,
     metadata_dag_pass: chainA.metadata_dag_pass,
     metadata_dag_fail: chainA.metadata_dag_fail,
-    missing_blocks: chainA.missing_blocks,
+    cross_car_references: chainA.cross_car_references,
+      cross_car_references_resolved: chainA.cross_car_references_resolved,
+      unresolved_missing_blocks: chainA.unresolved_missing_blocks,
+      metadata_unresolved_missing_blocks: chainA.metadata_unresolved_missing_blocks,
     cid_recompute_fail: chainA.cid_recompute_fail,
     metadata_token_index_cid_match: chainA.metadata_token_index_cid_match,
     metadata_eth_cid_match: chainA.metadata_eth_cid_match,
