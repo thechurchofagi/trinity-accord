@@ -1,30 +1,15 @@
 #!/usr/bin/env node
 /**
- * verify-eth-witness.mjs  (Step 4)
+ * verify-eth-witness.mjs  (Step B — strict version)
  *
- * ETH guardian witness verification for Trinity Accord.
- *
- * Proves:
- *   - Primary ETH witness tx (evidence-manifest.json eth_mirror_tx) exists and is valid
- *   - Auxiliary ETH attestations (authority.jcs.json ethereum.attestations[]) are valid
- *   - tx.from matches guardian ETH address
- *   - tx.input sha256 and size match manifest declarations
- *
- * Does NOT verify: DAG, BTC signatures, OTS, Bitcoin tx anchors.
- *
- * Output: ETH-WITNESS-AUDIT.json
- *
- * Usage:
- *   ETH_RPC_URL=https://... node scripts/verify-eth-witness.mjs
+ * ETH guardian witness verification.
+ * Primary witness + auxiliary attestations must ALL hard pass.
+ * input_sha256 + input_len must be declared and verified for every tx.
  */
 
 import fs from 'fs';
 import path from 'path';
 import crypto from 'crypto';
-
-// ═══════════════════════════════════════════════════════════════════════════
-// CONFIG
-// ═══════════════════════════════════════════════════════════════════════════
 
 const AUTHORITY_JCS_FILE = 'archive/authority-manifest/authority.jcs.json';
 const EVIDENCE_MANIFEST_FILE = 'api/evidence-manifest.json';
@@ -36,29 +21,27 @@ function err(msg) { console.error(msg); }
 function sha256hex(buf) { return crypto.createHash('sha256').update(buf).digest('hex'); }
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
-function readRepoFile(filePath) {
+function readRepoJson(filePath) {
   const fullPath = path.resolve(filePath);
-  if (fs.existsSync(fullPath)) return fs.readFileSync(fullPath);
+  if (fs.existsSync(fullPath)) return JSON.parse(fs.readFileSync(fullPath, 'utf-8'));
   return null;
 }
 
-function readRepoJson(filePath) {
-  const buf = readRepoFile(filePath);
-  if (!buf) return null;
-  return JSON.parse(buf.toString('utf-8'));
+function hexDataToBytes(hex) {
+  const s = String(hex || '');
+  if (!s.startsWith('0x')) throw new Error('tx.input is not 0x-prefixed hex');
+  const clean = s.slice(2);
+  if (!/^[0-9a-fA-F]*$/.test(clean)) throw new Error('tx.input contains non-hex characters');
+  if (clean.length % 2 !== 0) throw new Error('tx.input hex has odd length');
+  return Buffer.from(clean, 'hex');
 }
-
-// ═══════════════════════════════════════════════════════════════════════════
-// ETH RPC HELPERS
-// ═══════════════════════════════════════════════════════════════════════════
 
 async function tryEthCallRaw(method, params, retries = MAX_RETRIES) {
   if (!ETH_RPC_URL) return { error: 'No ETH_RPC_URL configured' };
   for (let attempt = 0; attempt <= retries; attempt++) {
     try {
       const res = await fetch(ETH_RPC_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ jsonrpc: '2.0', id: 1, method, params }),
       });
       const json = await res.json();
@@ -71,226 +54,207 @@ async function tryEthCallRaw(method, params, retries = MAX_RETRIES) {
   }
 }
 
-// ═══════════════════════════════════════════════════════════════════════════
-// MAIN
-// ═══════════════════════════════════════════════════════════════════════════
+/**
+ * Verify a single ETH transaction against declared attestation.
+ * Returns detailed result with all fields explicitly set.
+ */
+async function verifyOneTx(txHash, expectedFrom, declaredInputSha256, declaredInputLen, label) {
+  const detail = {
+    label, tx_hash: txHash,
+    expected_from: expectedFrom,
+    observed_from: null,
+    exists: false, receipt_success: false, from_match: false, block_confirmed: false,
+    input_len_declared: declaredInputLen != null ? Number(declaredInputLen) : null,
+    input_len_observed: null,
+    input_size_match: null,
+    input_sha256_declared: declaredInputSha256 ? String(declaredInputSha256).toLowerCase() : null,
+    input_sha256_observed: null,
+    input_sha256_match: null,
+    pass: false,
+    failure_reason: null,
+  };
+
+  try {
+    if (!txHash) { detail.failure_reason = 'no_tx_hash'; return detail; }
+
+    // eth_getTransactionByHash
+    const txResult = await tryEthCallRaw('eth_getTransactionByHash', [txHash]);
+    if (txResult.error || !txResult.result) {
+      detail.failure_reason = `tx_fetch_failed: ${txResult.error}`;
+      return detail;
+    }
+
+    const tx = txResult.result;
+    detail.exists = true;
+    detail.observed_from = tx.from?.toLowerCase() || null;
+
+    // from match
+    if (expectedFrom && tx.from) {
+      detail.from_match = tx.from.toLowerCase() === expectedFrom.toLowerCase();
+      if (!detail.from_match) { detail.failure_reason = 'from_mismatch'; }
+    }
+
+    // input parsing
+    const inputData = tx.input || tx.data || '0x';
+    if (!inputData || inputData === '0x') {
+      detail.failure_reason = 'empty_input';
+      return detail;
+    }
+
+    const inputBytes = hexDataToBytes(inputData);
+    detail.input_len_observed = inputBytes.length;
+    detail.input_sha256_observed = sha256hex(inputBytes);
+
+    // input_len match
+    if (declaredInputLen != null) {
+      detail.input_size_match = detail.input_len_observed === Number(declaredInputLen);
+      if (!detail.input_size_match) {
+        detail.failure_reason = `input_len_mismatch: declared=${declaredInputLen} observed=${detail.input_len_observed}`;
+      }
+    } else {
+      detail.failure_reason = 'missing_declared_input_len';
+    }
+
+    // input_sha256 match
+    if (declaredInputSha256) {
+      detail.input_sha256_match = detail.input_sha256_observed === String(declaredInputSha256).toLowerCase();
+      if (!detail.input_sha256_match) {
+        detail.failure_reason = `input_sha256_mismatch`;
+      }
+    } else {
+      detail.failure_reason = 'missing_declared_input_sha256';
+    }
+
+    // receipt
+    const receiptResult = await tryEthCallRaw('eth_getTransactionReceipt', [txHash]);
+    if (receiptResult.result) {
+      detail.receipt_success = receiptResult.result.status === '0x1';
+      detail.block_confirmed = !!receiptResult.result.blockNumber;
+      if (!detail.receipt_success) detail.failure_reason = 'receipt_failed';
+      if (!detail.block_confirmed) detail.failure_reason = 'not_confirmed';
+    } else {
+      detail.failure_reason = 'receipt_fetch_failed';
+    }
+
+    // overall pass
+    detail.pass = detail.exists && detail.receipt_success && detail.from_match
+      && detail.block_confirmed && detail.input_sha256_match === true && detail.input_size_match === true;
+
+  } catch (e) {
+    detail.failure_reason = `exception: ${e.message}`;
+  }
+
+  return detail;
+}
 
 async function main() {
   log('═══════════════════════════════════════════════════════════');
-  log('  Step 4: ETH Witness Verification');
+  log('  Step B: ETH Witness Verification (strict)');
   log('═══════════════════════════════════════════════════════════\n');
 
-  const result = {
-    primary_eth_witness_pass: false,
-    eth_witness_coverage_pass: false,
-    guardian_eth_address: null,
-    primary_witness: null,
-    eth_attestations_total: 0,
-    eth_attestations_pass: 0,
-    eth_attestations_fail: 0,
-    tx_from_match: 0,
-    tx_input_sha256_match: 0,
-    tx_input_size_match: 0,
-    receipt_success: 0,
-    attestation_details: [],
-    critical_errors: [],
-  };
-
-  // 1. Read authority
-  const authority = readRepoJson(AUTHORITY_JCS_FILE);
-  if (!authority) {
-    result.critical_errors.push('authority.jcs.json not found');
-    err('❌ authority.jcs.json not found');
-    writeOutput(result); process.exit(1);
+  if (!ETH_RPC_URL) {
+    err('❌ ETH_RPC_URL not set — cannot verify ETH witness');
+    const result = { eth_witness_coverage_pass: false, fatal_error: 'ETH_RPC_URL not set' };
+    fs.writeFileSync(path.join(process.cwd(), 'ETH-WITNESS-AUDIT.json'), JSON.stringify({ schema: 'trinity-accord.eth-witness-audit.v1', generated_at: new Date().toISOString(), ...result }, null, 2));
+    process.exit(1);
   }
+
+  const authority = readRepoJson(AUTHORITY_JCS_FILE);
+  if (!authority) { err('❌ authority.jcs.json not found'); process.exit(1); }
 
   const guardianEthAddress = authority.guardian?.eth_address;
   const chainId = authority.ethereum?.chainId;
   const attestations = authority.ethereum?.attestations || [];
 
-  result.guardian_eth_address = guardianEthAddress;
-  result.eth_attestations_total = attestations.length;
+  log(`  Guardian ETH: ${guardianEthAddress}`);
+  log(`  Chain ID    : ${chainId}`);
+  log(`  Attestations: ${attestations.length}\n`);
 
-  log(`  Guardian ETH address: ${guardianEthAddress}`);
-  log(`  Chain ID            : ${chainId}`);
-  log(`  Attestations        : ${attestations.length}`);
-
-  if (!ETH_RPC_URL) {
-    result.critical_errors.push('ETH_RPC_URL not configured');
-    err('❌ ETH_RPC_URL not set');
-    writeOutput(result); process.exit(1);
-  }
-
-  // 2. Primary witness from evidence-manifest.json
-  log('\n── Primary ETH Witness ──\n');
+  // ── Primary witness ────────────────────────────────────────────────
+  log('── Primary ETH Witness ──\n');
   const evidenceManifest = readRepoJson(EVIDENCE_MANIFEST_FILE);
-  if (evidenceManifest?.eth_mirror_tx) {
-    const primaryTxHash = evidenceManifest.eth_mirror_tx;
-    const primaryDetail = {
-      tx_hash: primaryTxHash, label: 'primary-eth-witness',
-      source: 'evidence-manifest.json',
-      exists: false, receipt_success: false, from_match: false,
-      input_sha256_match: null, input_size_match: null,
-      block_confirmed: false, error: null,
-    };
+  const primaryTxHash = evidenceManifest?.eth_mirror_tx;
 
-    try {
-      const txResult = await tryEthCallRaw('eth_getTransactionByHash', [primaryTxHash]);
-      if (txResult.error || !txResult.result) {
-        primaryDetail.error = `tx fetch failed: ${txResult.error}`;
-      } else {
-        const tx = txResult.result;
-        primaryDetail.exists = true;
+  // Find declared hash/size for primary tx from authority attestations
+  const primaryAttInAuthority = attestations.find(a => a.tx_hash?.toLowerCase() === primaryTxHash?.toLowerCase());
+  const primaryDeclaredSha256 = evidenceManifest?.input_sha256 || primaryAttInAuthority?.input_sha256 || null;
+  const primaryDeclaredLen = evidenceManifest?.input_len || primaryAttInAuthority?.input_len || null;
 
-        if (tx.from && guardianEthAddress) {
-          primaryDetail.from_match = tx.from.toLowerCase() === guardianEthAddress.toLowerCase();
-        }
+  const primaryDetail = await verifyOneTx(primaryTxHash, guardianEthAddress, primaryDeclaredSha256, primaryDeclaredLen, 'primary-eth-witness');
+  primaryDetail.source = 'evidence-manifest.json';
 
-        const inputData = tx.input || tx.data || '0x';
-        if (inputData && inputData !== '0x') {
-          const inputBytes = Buffer.from(inputData.slice(2), 'hex');
-          // Check if authority has matching attestation with sha256
-          const matchingAtt = attestations.find(a => a.tx_hash?.toLowerCase() === primaryTxHash.toLowerCase());
-          if (matchingAtt?.input_sha256) {
-            const inputSha = sha256hex(inputBytes);
-            primaryDetail.input_sha256_match = inputSha === matchingAtt.input_sha256.toLowerCase();
-          }
-          if (matchingAtt?.input_len) {
-            primaryDetail.input_size_match = inputBytes.length === matchingAtt.input_len;
-          }
-        }
+  log(`  tx: ${primaryTxHash?.slice(0, 20)}...`);
+  log(`  exists: ${primaryDetail.exists}, receipt: ${primaryDetail.receipt_success}, from: ${primaryDetail.from_match}`);
+  log(`  input_sha256: ${primaryDetail.input_sha256_match}, input_size: ${primaryDetail.input_size_match}`);
+  log(`  Primary pass: ${primaryDetail.pass}`);
+  if (!primaryDetail.pass) log(`  Failure: ${primaryDetail.failure_reason}`);
 
-        const receiptResult = await tryEthCallRaw('eth_getTransactionReceipt', [primaryTxHash]);
-        if (receiptResult.result) {
-          primaryDetail.receipt_success = receiptResult.result.status === '0x1';
-          primaryDetail.block_confirmed = !!receiptResult.result.blockNumber;
-        }
-      }
-
-      primaryDetail.pass = primaryDetail.exists && primaryDetail.receipt_success
-        && primaryDetail.from_match && primaryDetail.block_confirmed
-        && (primaryDetail.input_sha256_match === true || primaryDetail.input_sha256_match === null)
-        && (primaryDetail.input_size_match === true || primaryDetail.input_size_match === null);
-
-      result.primary_eth_witness_pass = primaryDetail.pass;
-      log(`  Primary witness tx: ${primaryTxHash.slice(0, 20)}...`);
-      log(`  exists: ${primaryDetail.exists}, receipt: ${primaryDetail.receipt_success}, from: ${primaryDetail.from_match}`);
-      log(`  input_sha256: ${primaryDetail.input_sha256_match}, input_size: ${primaryDetail.input_size_match}`);
-      log(`  Primary witness pass: ${primaryDetail.pass}`);
-
-    } catch (e) {
-      primaryDetail.error = e.message;
-      result.critical_errors.push(`Primary witness: ${e.message}`);
-    }
-    result.primary_witness = primaryDetail;
-  } else {
-    result.critical_errors.push('No eth_mirror_tx in evidence-manifest.json');
-    log('  ⚠️ No primary witness tx found');
-  }
-
-  // 3. Auxiliary attestations
+  // ── Auxiliary attestations ──────────────────────────────────────────
   log('\n── Auxiliary ETH Attestations ──\n');
+  const auxDetails = [];
+  let auxPass = 0, auxFail = 0;
+  let txFromMatch = 0, txInputSha256Match = 0, txInputSizeMatch = 0, receiptSuccess = 0;
+
   for (let i = 0; i < attestations.length; i++) {
     const att = attestations[i];
-    const txHash = att.tx_hash;
-    const detail = {
-      tx_hash: txHash,
-      label: att.label || `attestation-${i}`,
-      exists: false, receipt_success: false, chain_id_match: false,
-      from_match: false, input_sha256_match: false, input_size_match: false,
-      block_confirmed: false, error: null,
-    };
-
-    try {
-      if (!txHash) { detail.error = 'No tx_hash'; result.eth_attestations_fail++; result.attestation_details.push(detail); continue; }
-
-      const txResult = await tryEthCallRaw('eth_getTransactionByHash', [txHash]);
-      if (txResult.error || !txResult.result) {
-        detail.error = `tx fetch failed: ${txResult.error}`;
-        result.eth_attestations_fail++;
-        result.attestation_details.push(detail);
-        continue;
-      }
-
-      const tx = txResult.result;
-      detail.exists = true;
-      const txChainId = tx.chainId ? parseInt(tx.chainId, 16) : null;
-      detail.chain_id_match = txChainId === chainId || txChainId === 1;
-
-      if (tx.from && guardianEthAddress) {
-        detail.from_match = tx.from.toLowerCase() === guardianEthAddress.toLowerCase();
-        if (detail.from_match) result.tx_from_match++;
-      }
-
-      const inputData = tx.input || tx.data || '0x';
-      if (inputData && inputData !== '0x') {
-        const inputBytes = Buffer.from(inputData.slice(2), 'hex');
-        if (att.input_sha256) {
-          const inputSha = sha256hex(inputBytes);
-          detail.input_sha256_match = inputSha === att.input_sha256.toLowerCase();
-          if (detail.input_sha256_match) result.tx_input_sha256_match++;
-        } else { detail.input_sha256_match = null; }
-        if (att.input_len) {
-          detail.input_size_match = inputBytes.length === att.input_len;
-          if (detail.input_size_match) result.tx_input_size_match++;
-        } else { detail.input_size_match = null; }
-      }
-
-      const receiptResult = await tryEthCallRaw('eth_getTransactionReceipt', [txHash]);
-      if (receiptResult.result) {
-        detail.receipt_success = receiptResult.result.status === '0x1';
-        if (detail.receipt_success) result.receipt_success++;
-        if (receiptResult.result.blockNumber) detail.block_confirmed = true;
-      }
-
-      const attPass = detail.exists && detail.receipt_success && detail.chain_id_match
-        && detail.from_match && detail.block_confirmed
-        && (detail.input_sha256_match === true || detail.input_sha256_match === null)
-        && (detail.input_size_match === true || detail.input_size_match === null);
-
-      if (attPass) result.eth_attestations_pass++;
-      else result.eth_attestations_fail++;
-
-      log(`  [${i}] ${detail.label}: exists=${detail.exists} receipt=${detail.receipt_success} from=${detail.from_match} sha256=${detail.input_sha256_match} size=${detail.input_size_match} → ${attPass ? 'PASS' : 'FAIL'}`);
-
-    } catch (e) {
-      detail.error = e.message;
-      result.eth_attestations_fail++;
-      result.critical_errors.push(`Attestation ${i}: ${e.message}`);
+    // Skip if this is the same as primary witness
+    if (att.tx_hash?.toLowerCase() === primaryTxHash?.toLowerCase()) {
+      log(`  [${i}] ${att.label}: skipped (same as primary witness)`);
+      continue;
     }
-    result.attestation_details.push(detail);
+
+    const detail = await verifyOneTx(att.tx_hash, guardianEthAddress, att.input_sha256, att.input_len, att.label || `attestation-${i}`);
+
+    if (detail.pass) { auxPass++; } else { auxFail++; }
+    if (detail.from_match) txFromMatch++;
+    if (detail.input_sha256_match === true) txInputSha256Match++;
+    if (detail.input_size_match === true) txInputSizeMatch++;
+    if (detail.receipt_success) receiptSuccess++;
+
+    log(`  [${i}] ${detail.label}: pass=${detail.pass} ${detail.pass ? '' : `reason=${detail.failure_reason}`}`);
+    auxDetails.push(detail);
   }
 
-  // 4. Overall pass
-  result.eth_witness_coverage_pass =
-    result.primary_eth_witness_pass &&
-    result.eth_attestations_total > 0 &&
-    result.eth_attestations_fail === 0;
+  // ── Overall ────────────────────────────────────────────────────────
+  const primaryPass = primaryDetail.pass;
+  const hardFailures = (primaryPass ? 0 : 1) + auxFail;
+  const ethWitnessCoveragePass = primaryPass && auxFail === 0 && hardFailures === 0;
 
-  log(`\n  Primary witness pass  : ${result.primary_eth_witness_pass}`);
-  log(`  Attestations pass     : ${result.eth_attestations_pass}`);
-  log(`  Attestations fail     : ${result.eth_attestations_fail}`);
-  log(`  Chain C pass          : ${result.eth_witness_coverage_pass}`);
+  log(`\n  Primary witness pass          : ${primaryPass}`);
+  log(`  Auxiliary attestations total  : ${auxDetails.length}`);
+  log(`  Auxiliary attestations pass   : ${auxPass}`);
+  log(`  Auxiliary attestations fail   : ${auxFail}`);
+  log(`  Hard failures                 : ${hardFailures}`);
+  log(`  Chain B pass                  : ${ethWitnessCoveragePass}`);
 
-  writeOutput(result);
-
-  if (!result.eth_witness_coverage_pass) {
-    err('\n  ❌ ETH WITNESS VERIFICATION FAILED');
-    for (const e of result.critical_errors) err(`    ❌ ${e}`);
-    process.exit(1);
-  }
-  log('\n  ✅ ETH witness verification passed.');
-}
-
-function writeOutput(result) {
-  const outPath = path.join(process.cwd(), 'ETH-WITNESS-AUDIT.json');
   const audit = {
     schema: 'trinity-accord.eth-witness-audit.v1',
     generated_at: new Date().toISOString(),
-    ...result,
+    eth_witness_coverage_pass: ethWitnessCoveragePass,
+    guardian_eth_address: guardianEthAddress,
+    eth_chain_id_expected: chainId,
+    primary_eth_witness_pass: primaryPass,
+    primary_eth_witness: primaryDetail,
+    auxiliary_attestations_total: auxDetails.length,
+    auxiliary_attestations_pass: auxPass,
+    auxiliary_attestations_fail: auxFail,
+    auxiliary_attestations: auxDetails,
+    tx_from_match: txFromMatch + (primaryDetail.from_match ? 1 : 0),
+    tx_input_sha256_match: txInputSha256Match + (primaryDetail.input_sha256_match ? 1 : 0),
+    tx_input_size_match: txInputSizeMatch + (primaryDetail.input_size_match ? 1 : 0),
+    receipt_success: receiptSuccess + (primaryDetail.receipt_success ? 1 : 0),
+    hard_failures: hardFailures,
   };
+
+  const outPath = path.join(process.cwd(), 'ETH-WITNESS-AUDIT.json');
   fs.writeFileSync(outPath, JSON.stringify(audit, null, 2));
   log(`\n📝 ${outPath} written`);
+
+  if (!ethWitnessCoveragePass) {
+    err('\n  ❌ ETH WITNESS VERIFICATION FAILED');
+    process.exit(1);
+  }
+  log('\n  ✅ ETH witness verification passed.');
 }
 
 main().catch(e => { err('Fatal:', e.message || e); if (e.stack) err(e.stack); process.exit(1); });

@@ -212,7 +212,10 @@ async function main() {
     btc_signature_valid: false,
     signature_method_match: false,
     signed_message_sha256_match: false,
+    declared_address: null,
+    derived_taproot_address: null,
     taproot_address_match: false,
+    authority_bitcoin_address_match: false,
     derived_address: null,
     address_derivation_method: null,
     authority_bitcoin_address_match: false,
@@ -293,7 +296,8 @@ async function main() {
       const matchesTweaked = derivedTweaked === address;
       const matchesDirect = derivedDirect === address;
       result.taproot_address_match = matchesTweaked || matchesDirect;
-      result.derived_address = matchesTweaked ? derivedTweaked : derivedDirect;
+      result.declared_address = address;
+      result.derived_taproot_address = matchesTweaked ? derivedTweaked : derivedDirect;
       result.address_derivation_method = matchesTweaked ? 'bip341-tweaked' : matchesDirect ? 'direct-untweaked' : 'none';
       log(`  Taproot address match: ${result.taproot_address_match} (${result.address_derivation_method})`);
       if (!matchesTweaked && !matchesDirect) {

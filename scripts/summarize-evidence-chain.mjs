@@ -89,7 +89,7 @@ async function main() {
     && (artifacts.ethWitness?.eth_attestations_fail ?? 0) === 0;
 
   const otsPass = artifacts.otsAnchor?.ots_time_anchor_pass === true
-    && (artifacts.otsAnchor?.ots_files_pass ?? 0) >= 2
+    && (artifacts.otsAnchor?.ots_files_pass ?? 0) === 3
     && (artifacts.otsAnchor?.ots_files_fail ?? 0) === 0;
 
   const btcTxPass = artifacts.btcTxAnchor?.bitcoin_tx_anchor_pass === true

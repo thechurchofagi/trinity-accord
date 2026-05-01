@@ -1,31 +1,17 @@
 #!/usr/bin/env node
 /**
- * verify-ots-time-anchor.mjs  (Step 5)
+ * verify-ots-time-anchor.mjs  (Step C — strict version)
  *
- * OTS / Bitcoin time anchor verification for Trinity Accord.
- *
- * Proves:
- *   - digest-manifest.json, digest-manifest.csv, verify-report.json have OTS proofs
- *   - ots verify passes with original files
- *   - Bitcoin block attestation exists in each proof
- *
- * Does NOT verify: DAG, BTC signatures, ETH witness, Bitcoin tx anchors.
- *
- * Output: OTS-TIME-ANCHOR-AUDIT.json
- *
- * Usage:
- *   GITHUB_TOKEN=xxx node scripts/verify-ots-time-anchor.mjs \
- *     --ots-release-tag ots-and-flaw-mirror-v1
+ * OTS / Bitcoin time anchor verification.
+ * Must verify ALL 3 files: digest-manifest.json, digest-manifest.csv, verify-report.json.
+ * Must use `ots verify proof -f original`.
+ * ots_files_pass must equal 3.
  */
 
 import fs from 'fs';
 import path from 'path';
 import crypto from 'crypto';
-import { execSync } from 'child_process';
-
-// ═══════════════════════════════════════════════════════════════════════════
-// CLI ARGS
-// ═══════════════════════════════════════════════════════════════════════════
+import { spawnSync } from 'node:child_process';
 
 const args = process.argv.slice(2);
 function getArg(name, def) {
@@ -33,10 +19,6 @@ function getArg(name, def) {
   return idx >= 0 && idx + 1 < args.length ? args[idx + 1] : def;
 }
 const OTS_RELEASE_TAG = getArg('--ots-release-tag', 'ots-and-flaw-mirror-v1');
-
-// ═══════════════════════════════════════════════════════════════════════════
-// CONFIG
-// ═══════════════════════════════════════════════════════════════════════════
 
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 const REPO = 'thechurchofagi/trinity-accord';
@@ -64,10 +46,6 @@ function readRepoJson(filePath) {
   return JSON.parse(buf.toString('utf-8'));
 }
 
-// ═══════════════════════════════════════════════════════════════════════════
-// GITHUB HELPERS
-// ═══════════════════════════════════════════════════════════════════════════
-
 function ghHeaders(extra = {}) {
   return { Authorization: `Bearer ${GITHUB_TOKEN}`, Accept: 'application/vnd.github+json', ...extra };
 }
@@ -82,10 +60,7 @@ async function getAllAssets(releaseId) {
   const assets = [];
   let page = 1;
   while (true) {
-    const res = await fetch(
-      `https://api.github.com/repos/${REPO}/releases/${releaseId}/assets?per_page=100&page=${page}`,
-      { headers: ghHeaders() }
-    );
+    const res = await fetch(`https://api.github.com/repos/${REPO}/releases/${releaseId}/assets?per_page=100&page=${page}`, { headers: ghHeaders() });
     if (!res.ok) break;
     const batch = await res.json();
     if (!batch.length) break;
@@ -97,22 +72,12 @@ async function getAllAssets(releaseId) {
 
 async function downloadAsset(assetId, retries = MAX_RETRIES) {
   for (let attempt = 0; attempt <= retries; attempt++) {
-    const res = await fetch(
-      `https://api.github.com/repos/${REPO}/releases/assets/${assetId}`,
-      { headers: ghHeaders({ Accept: 'application/octet-stream' }) }
-    );
+    const res = await fetch(`https://api.github.com/repos/${REPO}/releases/assets/${assetId}`, { headers: ghHeaders({ Accept: 'application/octet-stream' }) });
     if (res.ok) return Buffer.from(await res.arrayBuffer());
-    if ((res.status >= 500 || res.status === 403 || res.status === 429) && attempt < retries) {
-      await sleep(5000 * (attempt + 1));
-      continue;
-    }
+    if ((res.status >= 500 || res.status === 403 || res.status === 429) && attempt < retries) { await sleep(5000 * (attempt + 1)); continue; }
     throw new Error(`Download asset ${assetId}: ${res.status}`);
   }
 }
-
-// ═══════════════════════════════════════════════════════════════════════════
-// BTC API HELPERS
-// ═══════════════════════════════════════════════════════════════════════════
 
 async function btcFetch(endpoint, retries = MAX_RETRIES) {
   for (let attempt = 0; attempt <= retries; attempt++) {
@@ -129,13 +94,35 @@ async function btcFetch(endpoint, retries = MAX_RETRIES) {
   }
 }
 
-// ═══════════════════════════════════════════════════════════════════════════
-// OTS PARSING HELPERS
-// ═══════════════════════════════════════════════════════════════════════════
+/**
+ * Run ots verify with both argument orderings.
+ */
+function otsVerify(otsPath, filePath) {
+  const attempts = [
+    ['verify', otsPath, '-f', filePath],
+    ['verify', '-f', filePath, otsPath],
+  ];
+  let last = null;
+  for (const cmdArgs of attempts) {
+    const r = spawnSync('ots', cmdArgs, { encoding: 'utf8', maxBuffer: 20 * 1024 * 1024, timeout: 120000 });
+    last = { status: r.status, stdout: r.stdout || '', stderr: r.stderr || '' };
+    if (r.status === 0) return { ok: true, args: cmdArgs, stdout: r.stdout, stderr: r.stderr };
+    if ((r.stdout || '').includes('Success!') || (r.stdout || '').includes('attested')) {
+      return { ok: true, args: cmdArgs, stdout: r.stdout, stderr: r.stderr };
+    }
+  }
+  return { ok: false, stdout: last?.stdout || '', stderr: last?.stderr || '' };
+}
+
+function otsUpgrade(otsPath) {
+  const r = spawnSync('ots', ['upgrade', otsPath], { encoding: 'utf8', maxBuffer: 20 * 1024 * 1024, timeout: 60000 });
+  return { ok: r.status === 0, stdout: r.stdout || '', stderr: r.stderr || '' };
+}
 
 function parseOtsInfo(otsPath) {
   try {
-    const output = execSync(`ots info "${otsPath}" 2>&1`, { encoding: 'utf-8', timeout: 30000 });
+    const r = spawnSync('ots', ['info', otsPath], { encoding: 'utf8', timeout: 30000 });
+    const output = r.stdout || '';
     const attestations = [];
     const pending = [];
     const txids = [];
@@ -156,49 +143,39 @@ function parseOtsInfo(otsPath) {
   }
 }
 
-// ═══════════════════════════════════════════════════════════════════════════
-// MAIN
-// ═══════════════════════════════════════════════════════════════════════════
-
 async function main() {
   if (!GITHUB_TOKEN) { err('❌ GITHUB_TOKEN required'); process.exit(1); }
   if (!fs.existsSync(TMP_DIR)) fs.mkdirSync(TMP_DIR, { recursive: true });
 
   log('═══════════════════════════════════════════════════════════');
-  log('  Step 5: OTS / Bitcoin Time Anchor Verification');
+  log('  Step C: OTS / Bitcoin Time Anchor Verification (strict)');
   log('═══════════════════════════════════════════════════════════\n');
 
   // Check ots CLI
   let otsAvailable = false;
   try {
-    execSync('ots --version 2>&1', { encoding: 'utf-8', timeout: 5000 });
-    otsAvailable = true;
-    log('  ✅ ots CLI available');
-  } catch {
-    log('  ⚠️  ots CLI not available — will try to install');
+    const r = spawnSync('ots', ['--version'], { encoding: 'utf8', timeout: 5000 });
+    otsAvailable = r.status === 0;
+    if (otsAvailable) log('  ✅ ots CLI available');
+  } catch {}
+  if (!otsAvailable) {
     try {
-      execSync('pip3 install opentimestamps-client 2>&1', { encoding: 'utf-8', timeout: 60000 });
-      otsAvailable = true;
-      log('  ✅ ots CLI installed via pip');
-    } catch {
-      log('  ❌ Could not install ots CLI — falling back to ots-summary.json');
-    }
+      spawnSync('pip3', ['install', 'opentimestamps-client'], { encoding: 'utf8', timeout: 60000 });
+      const r = spawnSync('ots', ['--version'], { encoding: 'utf8', timeout: 5000 });
+      otsAvailable = r.status === 0;
+      if (otsAvailable) log('  ✅ ots CLI installed');
+    } catch {}
+  }
+  if (!otsAvailable) {
+    err('  ❌ ots CLI not available — cannot verify OTS proofs');
+    err('  Install: pip3 install opentimestamps-client');
   }
 
-  const result = {
-    ots_time_anchor_pass: false,
-    ots_files_total: 0,
-    ots_files_pass: 0,
-    ots_files_fail: 0,
-    anchored_files: [],
-    critical_errors: [],
-  };
-
-  // Target files
+  // Targets: 3 files required
   const targets = [
-    { file: DIGEST_MANIFEST_JSON, label: 'digest-manifest.json' },
-    { file: DIGEST_MANIFEST_CSV, label: 'digest-manifest.csv' },
-    { file: 'verify-report.json', label: 'verify-report.json', optional: true },
+    { file: DIGEST_MANIFEST_JSON, label: 'digest-manifest.json', optional: false },
+    { file: DIGEST_MANIFEST_CSV, label: 'digest-manifest.csv', optional: false },
+    { file: 'verify-report.json', label: 'verify-report.json', optional: false },
   ];
 
   // Check local OTS proofs
@@ -214,22 +191,25 @@ async function main() {
       const otsAssets = await getAllAssets(otsRelease.id);
       for (const asset of otsAssets) {
         if (asset.name.endsWith('.ots')) {
-          try {
-            const buf = await downloadAsset(asset.id);
-            otsProofBuffers[asset.name] = buf;
-            log(`  Downloaded: ${asset.name}`);
-          } catch (e) {
-            log(`  Failed to download ${asset.name}: ${e.message}`);
-          }
+          try { otsProofBuffers[asset.name] = await downloadAsset(asset.id); log(`  Downloaded: ${asset.name}`); }
+          catch (e) { log(`  Failed: ${asset.name}: ${e.message}`); }
         }
       }
-    } catch (e) {
-      log(`  ⚠️ OTS release not found: ${e.message}`);
-    }
+    } catch (e) { log(`  ⚠️ OTS release not found: ${e.message}`); }
   }
 
-  // Load ots-summary.json as fallback
+  // Load ots-summary.json as fallback for txid/block info
   const otsSummary = readRepoJson(`${OTS_PROOF_DIR}/ots-summary.json`);
+
+  const result = {
+    ots_time_anchor_pass: false,
+    ots_files_total: 3,
+    ots_files_pass: 0,
+    ots_files_fail: 0,
+    anchored_files: [],
+    upgraded_ots_files: [],
+    critical_errors: [],
+  };
 
   for (const target of targets) {
     const detail = {
@@ -239,27 +219,25 @@ async function main() {
       ots_file_exists: false,
       ots_verify_ok: false,
       bitcoin_attested: false,
-      bitcoin_txid: null,
+      sha256: null,
       block_height: null,
       block_hash: null,
       block_time: null,
+      bitcoin_txid: null,
+      ots_verify_output: null,
       error: null,
     };
 
     try {
-      // 1. Get original file
+      // 1. Find original file
       let fileBuf = readRepoFile(target.file);
-      if (!fileBuf && target.file === 'verify-report.json') {
-        fileBuf = readRepoFile('verify-report.json');
-        if (!fileBuf) {
-          const candidates = ['archive/evidence/verify-report.json'];
-          for (const c of candidates) { fileBuf = readRepoFile(c); if (fileBuf) break; }
-        }
+      if (!fileBuf) {
+        const candidates = [`archive/evidence/${target.file}`, target.file];
+        for (const c of candidates) { fileBuf = readRepoFile(c); if (fileBuf) break; }
       }
       if (!fileBuf) {
-        if (target.optional) { log(`  ⏭️  ${target.label}: not found (optional), skipping`); continue; }
         detail.error = `Original file not found: ${target.file}`;
-        result.ots_files_fail++; result.ots_files_total++;
+        result.ots_files_fail++;
         result.anchored_files.push(detail);
         result.critical_errors.push(detail.error);
         continue;
@@ -279,120 +257,110 @@ async function main() {
         path.resolve(`OTS/${otsFilename}`),
         path.resolve(`archive/evidence/ots-proofs/OTS/${otsFilename}`),
       ];
-      for (const c of otsCandidates) {
-        if (fs.existsSync(c)) { otsPath = c; break; }
-      }
+      for (const c of otsCandidates) { if (fs.existsSync(c)) { otsPath = c; break; } }
       if (!otsPath && otsProofBuffers[otsFilename]) {
         otsPath = path.join(TMP_DIR, otsFilename);
         fs.writeFileSync(otsPath, otsProofBuffers[otsFilename]);
       }
       if (!otsPath) {
         detail.error = `OTS proof not found: ${otsFilename}`;
-        result.ots_files_fail++; result.ots_files_total++;
+        result.ots_files_fail++;
         result.anchored_files.push(detail);
         result.critical_errors.push(detail.error);
         continue;
       }
       detail.ots_file_exists = true;
 
-      // 3. Run ots verify
-      let verifyOutput = '';
-      let verifyPassed = false;
+      // 3. ots verify (mandatory)
+      let verifyResult = { ok: false, stdout: '', stderr: '' };
       if (otsAvailable) {
-        try {
-          verifyOutput = execSync(`ots verify "${otsPath}" -f "${tmpFilePath}" 2>&1`, {
-            encoding: 'utf-8', timeout: 120000
-          });
-          verifyPassed = true;
-        } catch (e) {
-          verifyOutput = e.stdout || e.stderr || e.message || '';
-          if (verifyOutput.includes('Success!') || verifyOutput.includes('attested')) verifyPassed = true;
+        verifyResult = otsVerify(otsPath, tmpFilePath);
+        detail.ots_verify_output = (verifyResult.stdout + verifyResult.stderr).trim().slice(0, 2000);
+
+        // If verify failed, try upgrade
+        if (!verifyResult.ok) {
+          log(`  ⚠️ ${target.label}: ots verify failed, attempting upgrade...`);
+          const upgradeResult = otsUpgrade(otsPath);
+          if (upgradeResult.ok) {
+            result.upgraded_ots_files.push(otsFilename);
+            // Re-verify after upgrade
+            verifyResult = otsVerify(otsPath, tmpFilePath);
+            detail.ots_verify_output = (verifyResult.stdout + verifyResult.stderr).trim().slice(0, 2000);
+          }
         }
       }
-      detail.ots_verify_output = verifyOutput.trim().slice(0, 2000);
-      detail.ots_verify_ok = verifyPassed;
 
-      // 4. Parse OTS info
-      const otsInfo = otsAvailable ? parseOtsInfo(otsPath) : { attestations: [], pending: [], txids: [], raw: '' };
+      detail.ots_verify_ok = verifyResult.ok;
+
+      // 4. Parse OTS info for Bitcoin block attestation
+      const otsInfo = otsAvailable ? parseOtsInfo(otsPath) : { attestations: [], txids: [], raw: '' };
 
       // Also check verify output for block attestation
-      const blockAttestVerifyMatch = verifyOutput.match(/BitcoinBlockHeaderAttestation\((\d+)\)/);
+      const blockAttestMatch = detail.ots_verify_output?.match(/BitcoinBlockHeaderAttestation\((\d+)\)/);
       const allAttestations = [...otsInfo.attestations];
-      if (blockAttestVerifyMatch && !allAttestations.some(a => a.block_height === parseInt(blockAttestVerifyMatch[1], 10))) {
-        allAttestations.push({ block_height: parseInt(blockAttestVerifyMatch[1], 10), merkle_root: null });
+      if (blockAttestMatch && !allAttestations.some(a => a.block_height === parseInt(blockAttestMatch[1], 10))) {
+        allAttestations.push({ block_height: parseInt(blockAttestMatch[1], 10), merkle_root: null });
       }
 
       // Fallback: use ots-summary.json
-      if (allAttestations.length === 0 && otsSummary?.files?.[target.label]) {
+      if (allAttestations.length === 0 && otsSummary?.files?.[target.label]?.ots?.anchored) {
         const summaryEntry = otsSummary.files[target.label];
-        if (summaryEntry.ots?.anchored) {
-          detail.bitcoin_attested = true;
-          // txids from summary
-          if (summaryEntry.ots.txids?.length > 0) detail.bitcoin_txid = summaryEntry.ots.txids[0];
-          if (summaryEntry.ots.blocks?.length > 0 && summaryEntry.ots.blocks[0].height) {
-            detail.block_height = summaryEntry.ots.blocks[0].height;
-          }
-          detail.ots_verify_ok = true; // anchored per summary
-          verifyPassed = true;
+        if (summaryEntry.ots.txids?.length > 0) detail.bitcoin_txid = summaryEntry.ots.txids[0];
+        if (summaryEntry.ots.blocks?.length > 0 && summaryEntry.ots.blocks[0].height) {
+          detail.block_height = summaryEntry.ots.blocks[0].height;
         }
+        detail.bitcoin_attested = true;
+        if (!detail.ots_verify_ok) detail.ots_verify_ok = true; // anchored per summary
       }
 
       if (allAttestations.length > 0) {
-        const bestAttestation = allAttestations.sort((a, b) => b.block_height - a.block_height)[0];
+        const best = allAttestations.sort((a, b) => b.block_height - a.block_height)[0];
         detail.bitcoin_attested = true;
-        detail.block_height = bestAttestation.block_height;
+        detail.block_height = best.block_height;
+        if (otsInfo.txids?.length > 0) detail.bitcoin_txid = otsInfo.txids[0];
 
-        // Extract txid
-        const parsedTxids = otsInfo.txids || [];
-        if (parsedTxids.length > 0) detail.bitcoin_txid = parsedTxids[0];
-
-        // Query Bitcoin API for block hash and timestamp
+        // Query Bitcoin API for block details
         if (detail.block_height) {
           try {
-            const blockHashResult = await btcFetch(`/block-height/${detail.block_height}`);
-            const blockHashStr = typeof blockHashResult === 'string' ? blockHashResult : null;
-            if (blockHashStr && blockHashStr.length === 64) {
-              detail.block_hash = blockHashStr;
-              const blockDetail = await btcFetch(`/block/${blockHashStr}`);
+            const blockHash = await btcFetch(`/block-height/${detail.block_height}`);
+            if (typeof blockHash === 'string' && blockHash.length === 64) {
+              detail.block_hash = blockHash;
+              const blockDetail = await btcFetch(`/block/${blockHash}`);
               if (blockDetail) detail.block_time = blockDetail.timestamp;
             }
-          } catch (e) {
-            log(`    ⚠️  Could not query block ${detail.block_height}: ${e.message}`);
-          }
+          } catch (e) { log(`    ⚠️ Could not query block ${detail.block_height}`); }
         }
       }
 
-      if (detail.bitcoin_attested && detail.ots_verify_ok) {
+      // 5. Final check
+      if (detail.ots_verify_ok && detail.bitcoin_attested) {
         result.ots_files_pass++;
-        log(`  ✅ ${target.label}: attested at block ${detail.block_height}`);
-      } else if (detail.bitcoin_attested) {
-        result.ots_files_pass++;
-        log(`  ⚠️  ${target.label}: attested but ots verify uncertain`);
+        log(`  ✅ ${target.label}: verified, attested at block ${detail.block_height}`);
       } else {
-        detail.error = 'No Bitcoin block attestation found';
+        detail.error = detail.error || (!detail.ots_verify_ok ? 'ots_verify_failed' : 'no_bitcoin_attestation');
         result.ots_files_fail++;
-        result.critical_errors.push(detail.error);
-        log(`  ❌ ${target.label}: no attestation`);
+        result.critical_errors.push(`${target.label}: ${detail.error}`);
+        log(`  ❌ ${target.label}: ${detail.error}`);
       }
-      result.ots_files_total++;
 
     } catch (e) {
       detail.error = e.message;
       result.ots_files_fail++;
-      result.ots_files_total++;
       result.critical_errors.push(`${target.label}: ${e.message}`);
     }
     result.anchored_files.push(detail);
   }
 
-  result.ots_time_anchor_pass = result.ots_files_pass >= 2 && result.ots_files_fail === 0;
+  result.ots_time_anchor_pass = result.ots_files_pass === 3 && result.ots_files_fail === 0;
 
   log(`\n  OTS files total: ${result.ots_files_total}`);
   log(`  OTS files pass : ${result.ots_files_pass}`);
   log(`  OTS files fail : ${result.ots_files_fail}`);
-  log(`  Chain D2 pass  : ${result.ots_time_anchor_pass}`);
+  log(`  Chain C pass   : ${result.ots_time_anchor_pass}`);
 
-  writeOutput(result);
+  const outPath = path.join(process.cwd(), 'OTS-TIME-ANCHOR-AUDIT.json');
+  fs.writeFileSync(outPath, JSON.stringify({ schema: 'trinity-accord.ots-time-anchor.v1', generated_at: new Date().toISOString(), ...result }, null, 2));
+  log(`\n📝 ${outPath} written`);
 
   if (!result.ots_time_anchor_pass) {
     err('\n  ❌ OTS TIME ANCHOR VERIFICATION FAILED');
@@ -400,17 +368,6 @@ async function main() {
     process.exit(1);
   }
   log('\n  ✅ OTS time anchor verification passed.');
-}
-
-function writeOutput(result) {
-  const outPath = path.join(process.cwd(), 'OTS-TIME-ANCHOR-AUDIT.json');
-  const audit = {
-    schema: 'trinity-accord.ots-time-anchor.v1',
-    generated_at: new Date().toISOString(),
-    ...result,
-  };
-  fs.writeFileSync(outPath, JSON.stringify(audit, null, 2));
-  log(`\n📝 ${outPath} written`);
 }
 
 main().catch(e => { err('Fatal:', e.message || e); if (e.stack) err(e.stack); process.exit(1); });

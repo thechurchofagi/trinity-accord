@@ -16,6 +16,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
+      - run: npm install
 
       - name: Run BTC Signature Coverage Verification
         run: node scripts/verify-btc-signature-coverage.mjs

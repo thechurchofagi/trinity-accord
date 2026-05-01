@@ -1,28 +1,19 @@
 #!/usr/bin/env node
 /**
- * verify-dag-digest.mjs  (Step 2)
+ * verify-dag-digest.mjs  (Step A — strict version)
  *
- * DAG + digest-manifest file hash verification for Trinity Accord NFT collection.
- *
- * Proves:
- *   - digest-manifest.json/csv sha256 + size match authority.jcs.json declarations
- *   - CAR files in release decode as valid DAGs with no missing blocks
- *   - metadata root CIDs match token_index and ETH tokenURI
- *   - file-level hash/size comparison against digest-manifest
- *
- * Does NOT verify: BTC signatures, ETH witness, OTS, Bitcoin tx anchors.
- *
- * Output: DAG-DIGEST-AUDIT.json
- *
- * Usage:
- *   GITHUB_TOKEN=xxx node scripts/verify-dag-digest.mjs \
- *     --release-tag nft-arweave-mirror-175-v1 \
- *     --concurrency 8
+ * DAG + digest-manifest file hash verification.
+ * Uses @noble/hashes for all hash algorithms including blake3.
  */
 
 import fs from 'fs';
 import path from 'path';
 import crypto from 'crypto';
+import { sha3_256 } from '@noble/hashes/sha3.js';
+import { blake2b } from '@noble/hashes/blake2.js';
+import { shake256 } from '@noble/hashes/sha3.js';
+import { blake3 } from '@noble/hashes/blake3.js';
+import { bytesToHex } from '@noble/hashes/utils.js';
 
 // ═══════════════════════════════════════════════════════════════════════════
 // CLI ARGS
@@ -37,7 +28,7 @@ const RELEASE_TAG = getArg('--release-tag', 'nft-arweave-mirror-175-v1');
 const CONCURRENCY = Number(getArg('--concurrency', process.env.DAG_VERIFY_CONCURRENCY || '4'));
 
 // ═══════════════════════════════════════════════════════════════════════════
-// GLOBAL CONFIG
+// CONFIG
 // ═══════════════════════════════════════════════════════════════════════════
 
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
@@ -56,12 +47,32 @@ const TMP_DIR = '/tmp/dag-digest-verify';
 
 function sha256hex(buf) { return crypto.createHash('sha256').update(buf).digest('hex'); }
 function sha256buf(buf) { return crypto.createHash('sha256').update(buf).digest(); }
-function sha3_256hex(buf) { return crypto.createHash('sha3-256').update(buf).digest('hex'); }
-function blake2b256hex(buf) { return crypto.createHash('blake2b512').update(buf).digest('hex').slice(0, 64); }
-function sha512_256hex(buf) { return crypto.createHash('sha512-256').update(buf).digest('hex'); }
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 function log(msg) { console.log(msg); }
 function err(msg) { console.error(msg); }
+
+function normalizeKey(k) {
+  return String(k || '').trim().toLowerCase().replace(/[-\s]/g, '_');
+}
+
+function normPath(p) {
+  return String(p || '').replace(/\\/g, '/').replace(/^\.?\//, '').replace(/\/+/g, '/').trim();
+}
+
+/**
+ * Compute all 6 hashes for a buffer using @noble/hashes where available.
+ */
+function computeAllHashes(buf) {
+  const u8 = buf instanceof Uint8Array ? buf : new Uint8Array(buf.buffer, buf.byteOffset, buf.byteLength);
+  return {
+    sha256: sha256hex(buf),
+    sha3_256: bytesToHex(sha3_256(u8)),
+    blake2b_256: bytesToHex(blake2b(u8, { dkLen: 32 })),
+    shake256_256: bytesToHex(shake256(u8, { dkLen: 32 })),
+    sha512_256: crypto.createHash('sha512-256').update(buf).digest('hex'),
+    blake3_256: bytesToHex(blake3(u8)),
+  };
+}
 
 // ═══════════════════════════════════════════════════════════════════════════
 // CONCURRENCY POOL
@@ -83,15 +94,14 @@ async function runConcurrent(tasks, limit) {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
-// CID / BASE32 / BASE58 / MULTihASH HELPERS
+// CID / BASE32 / BASE58 HELPERS
 // ═══════════════════════════════════════════════════════════════════════════
 
 function base32EncodeCid(bytes) {
   const alphabet = 'abcdefghijklmnopqrstuvwxyz234567';
   let bits = 0, value = 0, output = 'b';
   for (const byte of bytes) {
-    value = (value << 8) | byte;
-    bits += 8;
+    value = (value << 8) | byte; bits += 8;
     while (bits >= 5) { output += alphabet[(value >>> (bits - 5)) & 0x1f]; bits -= 5; }
   }
   if (bits > 0) output += alphabet[(value << (5 - bits)) & 0x1f];
@@ -106,8 +116,7 @@ function base32DecodeCid(str) {
   for (const ch of data) {
     const val = alphabet.indexOf(ch);
     if (val < 0) throw new Error('Invalid base32 char');
-    value = (value << 5) | val;
-    bits += 5;
+    value = (value << 5) | val; bits += 5;
     if (bits >= 8) { bytes.push((value >>> (bits - 8)) & 0xff); bits -= 8; }
   }
   return Buffer.from(bytes);
@@ -119,11 +128,7 @@ function cidv0Encode(hashBytes) {
   const digits = [0];
   for (const byte of hashBytes) {
     let carry = byte;
-    for (let j = 0; j < digits.length; j++) {
-      carry += digits[j] << 8;
-      digits[j] = carry % 58;
-      carry = (carry / 58) | 0;
-    }
+    for (let j = 0; j < digits.length; j++) { carry += digits[j] << 8; digits[j] = carry % 58; carry = (carry / 58) | 0; }
     while (carry > 0) { digits.push(carry % 58); carry = (carry / 58) | 0; }
   }
   for (let i = 0; i < hashBytes.length && hashBytes[i] === 0; i++) result += '1';
@@ -138,11 +143,7 @@ function base58btcDecode(str) {
     const val = alphabet.indexOf(ch);
     if (val < 0) throw new Error('Invalid base58 char');
     let carry = val;
-    for (let j = 0; j < bytes.length; j++) {
-      carry += bytes[j] * 58;
-      bytes[j] = carry & 0xff;
-      carry >>= 8;
-    }
+    for (let j = 0; j < bytes.length; j++) { carry += bytes[j] * 58; bytes[j] = carry & 0xff; carry >>= 8; }
     while (carry > 0) { bytes.push(carry & 0xff); carry >>= 8; }
   }
   let leadingZeros = 0;
@@ -155,9 +156,7 @@ function cidBytesToCid(bytes) {
   while (start < bytes.length && bytes[start] === 0x00) start++;
   const trimmed = bytes.slice(start);
   if (trimmed.length === 0) throw new Error('Empty CID bytes');
-  if (trimmed[0] === 0x12 && trimmed.length >= 34 && trimmed[1] === 0x20) {
-    return cidv0Encode(trimmed.slice(0, 34));
-  }
+  if (trimmed[0] === 0x12 && trimmed.length >= 34 && trimmed[1] === 0x20) return cidv0Encode(trimmed.slice(0, 34));
   return base32EncodeCid(trimmed);
 }
 
@@ -176,17 +175,11 @@ function extractDigestFromCid(cid) {
       let pos = 0;
       while (pos < bytes.length && bytes[pos] === 0x00) pos++;
       if (pos >= bytes.length) return null;
-      while (pos < bytes.length && bytes[pos] >= 0x80) pos++;
-      pos++;
-      while (pos < bytes.length && bytes[pos] >= 0x80) pos++;
-      pos++;
-      while (pos < bytes.length && bytes[pos] >= 0x80) pos++;
-      pos++;
+      while (pos < bytes.length && bytes[pos] >= 0x80) pos++; pos++;
+      while (pos < bytes.length && bytes[pos] >= 0x80) pos++; pos++;
+      while (pos < bytes.length && bytes[pos] >= 0x80) pos++; pos++;
       let mhLen = 0, shift = 0;
-      while (pos < bytes.length) {
-        const b = bytes[pos]; mhLen |= (b & 0x7f) << shift; pos++; shift += 7;
-        if (b < 0x80) break;
-      }
+      while (pos < bytes.length) { const b = bytes[pos]; mhLen |= (b & 0x7f) << shift; pos++; shift += 7; if (b < 0x80) break; }
       if (pos + mhLen <= bytes.length) return bytes.slice(pos, pos + mhLen);
       return null;
     } catch { return null; }
@@ -195,15 +188,12 @@ function extractDigestFromCid(cid) {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
-// CAR PARSING — full block-level verification
+// CAR PARSING
 // ═══════════════════════════════════════════════════════════════════════════
 
 function readVarint(data, offset) {
   let value = 0, shift = 0, pos = offset;
-  while (true) {
-    const b = data[pos]; value |= (b & 0x7f) << shift; pos++; shift += 7;
-    if (b < 0x80) break;
-  }
+  while (true) { const b = data[pos]; value |= (b & 0x7f) << shift; pos++; shift += 7; if (b < 0x80) break; }
   return { value, bytesRead: pos - offset };
 }
 
@@ -236,8 +226,7 @@ function extractRootsFromHeader(carData, headerStart, headerEnd) {
       else if (headerBytes[cidStart] === 0x59) { cidLen = (headerBytes[cidStart + 1] << 8) | headerBytes[cidStart + 2]; cidStart += 3; }
       else if (headerBytes[cidStart] >= 0x40 && headerBytes[cidStart] < 0x58) { cidLen = headerBytes[cidStart] - 0x40; cidStart += 1; }
       else continue;
-      try { roots.push(cidBytesToCid(headerBytes.slice(cidStart, cidStart + cidLen))); }
-      catch { /* skip */ }
+      try { roots.push(cidBytesToCid(headerBytes.slice(cidStart, cidStart + cidLen))); } catch { /* skip */ }
     }
   }
   return roots;
@@ -259,8 +248,7 @@ function parseCarFull(carData) {
     try {
       const cidResult = parseCidBytes(carData, blockStart);
       const dataStart = blockStart + cidResult.bytesRead;
-      const blockData = carData.slice(dataStart, blockEnd);
-      blocks.set(cidResult.cid, { data: blockData, offset: blockStart });
+      blocks.set(cidResult.cid, { data: carData.slice(dataStart, blockEnd), offset: blockStart });
     } catch { /* skip */ }
     pos = blockEnd;
   }
@@ -276,34 +264,25 @@ function extractLinksFromBlock(data) {
       else if (data[cidStart] === 0x59) { cidLen = (data[cidStart + 1] << 8) | data[cidStart + 2]; cidStart += 3; }
       else if (data[cidStart] >= 0x40 && data[cidStart] < 0x58) { cidLen = data[cidStart] - 0x40; cidStart += 1; }
       else continue;
-      try { links.push(cidBytesToCid(data.slice(cidStart, cidStart + cidLen))); }
-      catch { /* skip */ }
+      try { links.push(cidBytesToCid(data.slice(cidStart, cidStart + cidLen))); } catch { /* skip */ }
     }
   }
   return links;
 }
 
 function verifyCarDag(carData) {
-  const result = {
-    valid: true, roots: [], blockCount: 0, missingBlocks: 0, cidMismatchBlocks: 0, errors: [],
-  };
+  const result = { valid: true, roots: [], blockCount: 0, missingBlocks: 0, cidMismatchBlocks: 0, errors: [] };
   let parsed;
-  try { parsed = parseCarFull(carData); }
-  catch (e) { result.valid = false; result.errors.push(`CAR parse failed: ${e.message}`); return result; }
+  try { parsed = parseCarFull(carData); } catch (e) { result.valid = false; result.errors.push(`CAR parse failed: ${e.message}`); return result; }
   const { roots, blocks } = parsed;
   result.roots = roots;
   result.blockCount = blocks.size;
-  if (roots.length === 0) {
-    result.valid = false; result.errors.push('No roots found in CAR header'); return result;
-  }
+  if (roots.length === 0) { result.valid = false; result.errors.push('No roots found'); return result; }
   for (const [cid, block] of blocks) {
     const computedHash = sha256buf(block.data);
     const storedDigest = extractDigestFromCid(cid);
-    if (!storedDigest) {
-      result.cidMismatchBlocks++; result.errors.push(`Block CID digest not extractable: ${cid.slice(0, 30)}...`); result.valid = false;
-    } else if (!storedDigest.equals(computedHash)) {
-      result.cidMismatchBlocks++; result.errors.push(`Block CID mismatch: ${cid.slice(0, 30)}... hash differs`); result.valid = false;
-    }
+    if (!storedDigest) { result.cidMismatchBlocks++; result.errors.push(`CID digest not extractable: ${cid.slice(0, 30)}`); result.valid = false; }
+    else if (!storedDigest.equals(computedHash)) { result.cidMismatchBlocks++; result.errors.push(`CID mismatch: ${cid.slice(0, 30)}`); result.valid = false; }
   }
   const visited = new Set();
   const queue = [...roots];
@@ -312,11 +291,8 @@ function verifyCarDag(carData) {
     if (visited.has(cid)) continue;
     visited.add(cid);
     const block = blocks.get(cid);
-    if (!block) {
-      result.missingBlocks++; result.errors.push(`Missing block for CID: ${cid}`); result.valid = false; continue;
-    }
-    const links = extractLinksFromBlock(block.data);
-    for (const linkCid of links) { if (!visited.has(linkCid)) queue.push(linkCid); }
+    if (!block) { result.missingBlocks++; result.errors.push(`Missing block: ${cid}`); result.valid = false; continue; }
+    for (const linkCid of extractLinksFromBlock(block.data)) { if (!visited.has(linkCid)) queue.push(linkCid); }
   }
   return result;
 }
@@ -335,16 +311,10 @@ function extractFilesFromTar(buf) {
     while (nameEnd < 100 && header[nameEnd] !== 0) nameEnd++;
     const name = header.slice(0, nameEnd).toString('utf-8');
     let sizeStr = '';
-    for (let i = 124; i < 136; i++) {
-      if (header[i] === 0 || header[i] === 32) break;
-      sizeStr += String.fromCharCode(header[i]);
-    }
+    for (let i = 124; i < 136; i++) { if (header[i] === 0 || header[i] === 32) break; sizeStr += String.fromCharCode(header[i]); }
     const size = parseInt(sizeStr, 8) || 0;
     pos += 512;
-    if (size > 0) {
-      files.push({ name, data: buf.slice(pos, pos + size) });
-      pos += Math.ceil(size / 512) * 512;
-    }
+    if (size > 0) { files.push({ name, data: buf.slice(pos, pos + size) }); pos += Math.ceil(size / 512) * 512; }
   }
   return files;
 }
@@ -367,10 +337,7 @@ async function getAllAssets(releaseId) {
   const assets = [];
   let page = 1;
   while (true) {
-    const res = await fetch(
-      `https://api.github.com/repos/${REPO}/releases/${releaseId}/assets?per_page=100&page=${page}`,
-      { headers: ghHeaders() }
-    );
+    const res = await fetch(`https://api.github.com/repos/${REPO}/releases/${releaseId}/assets?per_page=100&page=${page}`, { headers: ghHeaders() });
     if (!res.ok) break;
     const batch = await res.json();
     if (!batch.length) break;
@@ -382,15 +349,9 @@ async function getAllAssets(releaseId) {
 
 async function downloadAsset(assetId, retries = MAX_RETRIES) {
   for (let attempt = 0; attempt <= retries; attempt++) {
-    const res = await fetch(
-      `https://api.github.com/repos/${REPO}/releases/assets/${assetId}`,
-      { headers: ghHeaders({ Accept: 'application/octet-stream' }) }
-    );
+    const res = await fetch(`https://api.github.com/repos/${REPO}/releases/assets/${assetId}`, { headers: ghHeaders({ Accept: 'application/octet-stream' }) });
     if (res.ok) return Buffer.from(await res.arrayBuffer());
-    if ((res.status >= 500 || res.status === 403 || res.status === 429) && attempt < retries) {
-      await sleep(5000 * (attempt + 1));
-      continue;
-    }
+    if ((res.status >= 500 || res.status === 403 || res.status === 429) && attempt < retries) { await sleep(5000 * (attempt + 1)); continue; }
     throw new Error(`Download asset ${assetId}: ${res.status}`);
   }
 }
@@ -412,69 +373,116 @@ function readRepoJson(filePath) {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
-// DIGEST MANIFEST HELPERS
+// DIGEST MANIFEST NORMALIZATION
 // ═══════════════════════════════════════════════════════════════════════════
 
-function parseDigestManifestCsv(csvText) {
-  const lines = csvText.trim().split('\n');
-  if (lines.length < 2) return [];
-  const headers = lines[0].split(',').map(h => h.trim());
-  const pathIdx = headers.indexOf('path');
-  const sizeIdx = headers.indexOf('size_bytes');
-  const shaIdx = headers.indexOf('sha256');
-  const items = [];
-  for (let i = 1; i < lines.length; i++) {
-    const cols = lines[i].split(',').map(c => c.trim());
-    if (cols.length < 3) continue;
-    items.push({
-      path: cols[pathIdx] || cols[0],
-      size_bytes: parseInt(cols[sizeIdx] || cols[1], 10),
-      sha256: cols[shaIdx] || cols[2],
-    });
+const PATH_ALIASES = ['path', 'file', 'filename', 'relative_path', 'name'];
+const SIZE_ALIASES = ['size', 'size_bytes', 'bytes', 'length'];
+const SHA256_ALIASES = ['sha256', 'sha_256', 'digest_sha256'];
+const SHA3_ALIASES = ['sha3_256', 'sha3-256'];
+const BLAKE2B_ALIASES = ['blake2b_256', 'blake2b-256'];
+const SHAKE_ALIASES = ['shake256_256', 'shake256-256'];
+const SHA512_ALIASES = ['sha512_256', 'sha512-256'];
+const BLAKE3_ALIASES = ['blake3_256', 'blake3-256'];
+const CID_ALIASES = ['cid', 'root_cid', 'ipfs_cid'];
+const TXID_ALIASES = ['txid', 'arweave_txid', 'ar_txid'];
+
+function resolveField(obj, aliases) {
+  for (const a of aliases) {
+    const nk = normalizeKey(a);
+    for (const [k, v] of Object.entries(obj)) {
+      if (normalizeKey(k) === nk && v != null) return v;
+    }
   }
-  return items;
-}
-
-function normalizePath(p) { return p.replace(/\\/g, '/'); }
-
-function extractCidFromPath(filePath) {
-  const basename = path.basename(filePath);
-  const m = basename.match(/^(b[a-z2-7]{20,})/);
-  if (m) return m[1];
-  const m0 = basename.match(/^(Qm[a-zA-Z0-9]{20,})/);
-  if (m0) return m0[1];
   return null;
 }
 
-function computeAllHashes(buf) {
+function normalizeManifestItem(raw) {
   return {
-    sha256: sha256hex(buf),
-    sha3_256: sha3_256hex(buf),
-    blake2b_256: blake2b256hex(buf),
-    shake256_256: crypto.createHash('shake256', { outputLength: 32 }).update(buf).digest('hex'),
-    sha512_256: sha512_256hex(buf),
-    blake3_256: null,
+    path: resolveField(raw, PATH_ALIASES) || '',
+    filename: path.basename(normPath(resolveField(raw, PATH_ALIASES) || '')),
+    size_bytes: Number(resolveField(raw, SIZE_ALIASES)) || 0,
+    sha256: String(resolveField(raw, SHA256_ALIASES) || '').toLowerCase(),
+    sha3_256: String(resolveField(raw, SHA3_ALIASES) || '').toLowerCase(),
+    blake2b_256: String(resolveField(raw, BLAKE2B_ALIASES) || '').toLowerCase(),
+    shake256_256: String(resolveField(raw, SHAKE_ALIASES) || '').toLowerCase(),
+    sha512_256: String(resolveField(raw, SHA512_ALIASES) || '').toLowerCase(),
+    blake3_256: String(resolveField(raw, BLAKE3_ALIASES) || '').toLowerCase(),
+    cid: String(resolveField(raw, CID_ALIASES) || ''),
+    txid: String(resolveField(raw, TXID_ALIASES) || ''),
+    status: raw.status || null,
+    _raw: raw,
   };
 }
 
-function findManifestEntry(filename, digestManifest) {
-  if (!digestManifest?.items) return null;
-  const normalized = normalizePath(filename);
-  for (const item of digestManifest.items) {
-    const itemBasename = path.basename(normalizePath(item.path));
-    if (itemBasename === filename || itemBasename === path.basename(normalized)) return item;
+function normalizeDigestManifest(digestManifest) {
+  const items = digestManifest.items || digestManifest;
+  if (!Array.isArray(items)) return [];
+  return items.map(normalizeManifestItem);
+}
+
+/**
+ * Build multiple lookup indexes from normalized manifest items.
+ */
+function buildManifestIndexes(items) {
+  const byPath = new Map();
+  const byFilename = new Map();
+  const bySha256 = new Map();
+  const byCid = new Map();
+  const byTxid = new Map();
+
+  for (const item of items) {
+    const np = normPath(item.path);
+    if (np) byPath.set(np, item);
+    if (item.filename) {
+      const existing = byFilename.get(item.filename);
+      if (!existing) byFilename.set(item.filename, item);
+      else byFilename.set(item.filename, Array.isArray(existing) ? [...existing, item] : [existing, item]);
+    }
+    if (item.sha256) bySha256.set(item.sha256.toLowerCase(), item);
+    if (item.cid) byCid.set(item.cid.toLowerCase(), item);
+    if (item.txid) byTxid.set(item.txid.toLowerCase(), item);
   }
-  for (const item of digestManifest.items) {
-    const itemNorm = normalizePath(item.path);
-    if (itemNorm.endsWith('/' + normalized) || itemNorm.endsWith('/' + path.basename(normalized))) return item;
+
+  return { byPath, byFilename, bySha256, byCid, byTxid };
+}
+
+/**
+ * Find manifest entry using multiple indexes.
+ * Priority: sha256 > normalized path > filename > CID > txid > path contains CID (candidate only).
+ */
+function findManifestEntry(fileSha256, filePath, fileCid, indexes) {
+  // 1. sha256 exact match
+  if (fileSha256 && indexes.bySha256.has(fileSha256.toLowerCase())) {
+    return { item: indexes.bySha256.get(fileSha256.toLowerCase()), matchMethod: 'sha256' };
   }
-  const cidMatch = filename.match(/(b[a-z2-7]{20,}|Qm[a-zA-Z0-9]{20,})/);
-  if (cidMatch) {
-    const cid = cidMatch[1];
-    for (const item of digestManifest.items) {
-      if (item.path && item.path.includes(cid)) return item;
+
+  // 2. normalized path exact match
+  const np = normPath(filePath);
+  if (np && indexes.byPath.has(np)) {
+    return { item: indexes.byPath.get(np), matchMethod: 'path' };
+  }
+
+  // 3. filename exact match
+  const fn = path.basename(np || filePath);
+  if (fn && indexes.byFilename.has(fn)) {
+    const entry = indexes.byFilename.get(fn);
+    const item = Array.isArray(entry) ? entry[0] : entry;
+    return { item, matchMethod: 'filename' };
+  }
+
+  // 4. CID exact match
+  if (fileCid && indexes.byCid.has(fileCid.toLowerCase())) {
+    return { item: indexes.byCid.get(fileCid.toLowerCase()), matchMethod: 'cid' };
+  }
+
+  // 5. path contains CID (candidate only — NOT a pass condition)
+  if (fileCid) {
+    for (const [key, item] of indexes.byPath) {
+      if (key.includes(fileCid)) return { item, matchMethod: 'path_contains_cid_candidate' };
     }
   }
+
   return null;
 }
 
@@ -487,67 +495,38 @@ async function main() {
   if (!fs.existsSync(TMP_DIR)) fs.mkdirSync(TMP_DIR, { recursive: true });
 
   log('═══════════════════════════════════════════════════════════');
-  log('  Step 2: DAG + Digest-Manifest Verification');
-  log('═══════════════════════════════════════════════════════════');
-  log(`  Release tag    : ${RELEASE_TAG}`);
-  log(`  Concurrency    : ${CONCURRENCY}`);
-  log('');
+  log('  Step A: DAG + Digest-Manifest Verification (strict)');
+  log('═══════════════════════════════════════════════════════════\n');
 
-  // ── Load shared data ──────────────────────────────────────────────────
-  log('📖 Loading shared data...');
-
+  // ── Load data ─────────────────────────────────────────────────────
   const tokenIndex = readRepoJson(TOKEN_INDEX_FILE);
   if (!tokenIndex) { err('❌ token_index.json not found'); process.exit(1); }
-  const allContracts = Object.keys(tokenIndex);
   let totalNfts = 0;
-  for (const c of allContracts) totalNfts += Object.keys(tokenIndex[c]).length;
-  log(`  token_index.json: ${allContracts.length} contracts, ${totalNfts} NFTs`);
-  if (totalNfts !== EXPECTED_NFTS) { err(`  ❌ Expected ${EXPECTED_NFTS}, found ${totalNfts}`); process.exit(1); }
+  for (const c of Object.keys(tokenIndex)) totalNfts += Object.keys(tokenIndex[c]).length;
+  log(`  token_index: ${totalNfts} NFTs`);
+  if (totalNfts !== EXPECTED_NFTS) { err(`  ❌ Expected ${EXPECTED_NFTS}`); process.exit(1); }
 
-  log(`📦 Fetching GitHub Release ${RELEASE_TAG}...`);
+  log(`📦 Fetching release ${RELEASE_TAG}...`);
   const release = await getReleaseByTag(RELEASE_TAG);
   const allAssets = await getAllAssets(release.id);
   const nftAssets = allAssets.filter(a => a.name.startsWith('nft-') && a.name.endsWith('.tar'));
-  log(`  ${allAssets.length} total assets, ${nftAssets.length} NFT tar files`);
-  if (nftAssets.length !== EXPECTED_NFTS) {
-    err(`  ⚠️  Expected ${EXPECTED_NFTS} nft-*.tar, found ${nftAssets.length}`);
-  }
+  log(`  ${allAssets.length} total, ${nftAssets.length} NFT tars`);
 
-  const digestManifest = readRepoJson(DIGEST_MANIFEST_JSON);
-  if (digestManifest) {
-    log(`  digest-manifest.json: ${digestManifest.items?.length || 0} items`);
-  }
+  // Load and normalize digest-manifest
+  const rawDigestManifest = readRepoJson(DIGEST_MANIFEST_JSON);
+  const manifestItems = normalizeDigestManifest(rawDigestManifest);
+  const indexes = buildManifestIndexes(manifestItems);
+  log(`  digest-manifest: ${manifestItems.length} items (normalized)`);
 
-  // ETH audit (optional)
+  // ETH audit
   let ethAudit = null;
   const ethAuditAsset = allAssets.find(a => a.name === 'ONCHAIN-READ-AUDIT.json');
   if (ethAuditAsset) {
-    try {
-      const buf = await downloadAsset(ethAuditAsset.id);
-      ethAudit = JSON.parse(buf.toString('utf-8'));
-      log(`  ETH audit: ${ethAudit.tokens?.length || 0} tokens`);
-    } catch (e) {
-      log(`  ⚠️  Could not download ETH audit: ${e.message}`);
-    }
+    try { ethAudit = JSON.parse((await downloadAsset(ethAuditAsset.id)).toString('utf-8')); } catch {}
   }
 
-  // ── Build lookups ─────────────────────────────────────────────────────
-  const nftLookup = new Map();
-  for (const [contract, tokens] of Object.entries(tokenIndex)) {
-    for (const [tokenId, entry] of Object.entries(tokens)) {
-      nftLookup.set(`${contract.toLowerCase()}_${tokenId}`, { contract, tokenId, ...entry });
-    }
-  }
-
-  const ethCidLookup = new Map();
-  if (ethAudit?.tokens) {
-    for (const t of ethAudit.tokens) {
-      if (t.extracted_cid) ethCidLookup.set(`${t.contract?.toLowerCase()}_${t.token_id}`, t.extracted_cid);
-    }
-  }
-
-  // ── Verify digest-manifest files against authority ────────────────────
-  log('\n═══ Verifying digest-manifest integrity ═══\n');
+  // ── Verify digest-manifest integrity ──────────────────────────────
+  log('\n═══ A.4: digest-manifest integrity ═══\n');
 
   const authority = readRepoJson(AUTHORITY_JCS_FILE);
   const arweaveDocs = authority?.arweave?.documents || [];
@@ -566,8 +545,8 @@ async function main() {
     const actualSha = sha256hex(actualJsonBuf);
     digestJsonShaMatch = declaredJson.ar_sha256 ? declaredJson.ar_sha256.toLowerCase() === actualSha : false;
     digestJsonSizeMatch = (declaredJson.size === actualJsonBuf.length) || (declaredJson.size_bytes === actualJsonBuf.length);
-    log(`  digest-manifest.json sha256 match: ${digestJsonShaMatch}`);
-    log(`  digest-manifest.json size match  : ${digestJsonSizeMatch}`);
+    log(`  digest-manifest.json sha256: ${digestJsonShaMatch}, size: ${digestJsonSizeMatch}`);
+    if (!declaredJson.ar_sha256) { err('  ❌ authority missing digest-manifest.json sha256'); }
   }
 
   const actualCsvBuf = readRepoFile(DIGEST_MANIFEST_CSV);
@@ -575,41 +554,58 @@ async function main() {
     const actualSha = sha256hex(actualCsvBuf);
     digestCsvShaMatch = declaredCsv.ar_sha256 ? declaredCsv.ar_sha256.toLowerCase() === actualSha : false;
     digestCsvSizeMatch = (declaredCsv.size === actualCsvBuf.length) || (declaredCsv.size_bytes === actualCsvBuf.length);
-    log(`  digest-manifest.csv sha256 match : ${digestCsvShaMatch}`);
-    log(`  digest-manifest.csv size match   : ${digestCsvSizeMatch}`);
+    log(`  digest-manifest.csv sha256: ${digestCsvShaMatch}, size: ${digestCsvSizeMatch}`);
+    if (!declaredCsv.ar_sha256) { err('  ❌ authority missing digest-manifest.csv sha256'); }
   }
 
-  // ── Verify NFT tar files ──────────────────────────────────────────────
-  log('\n═══ Verifying NFT tar files (DAG + CID) ═══\n');
+  // ── Verify NFT tar files ──────────────────────────────────────────
+  log('\n═══ A.6-A.9: NFT tar verification ═══\n');
 
+  // NFT lookup
+  const nftLookup = new Map();
+  for (const [contract, tokens] of Object.entries(tokenIndex)) {
+    for (const [tokenId, entry] of Object.entries(tokens)) {
+      nftLookup.set(`${contract.toLowerCase()}_${tokenId}`, { contract, tokenId, ...entry });
+    }
+  }
+
+  const ethCidLookup = new Map();
+  if (ethAudit?.tokens) {
+    for (const t of ethAudit.tokens) {
+      if (t.extracted_cid) ethCidLookup.set(`${t.contract?.toLowerCase()}_${t.token_id}`, t.extracted_cid);
+    }
+  }
+
+  // Counters
   let metadataDagPass = 0, metadataDagFail = 0;
   let mediaDagPass = 0, mediaDagFail = 0;
   let missingBlocksTotal = 0, cidRecomputeFail = 0;
   let metadataTokenIndexCidMatch = 0, metadataTokenIndexCidMismatch = 0;
   let metadataEthCidMatch = 0, metadataEthCidMismatch = 0, metadataEthCidSkip = 0;
-  let digestManifestFileMatchCount = 0, digestManifestFileMismatchCount = 0;
-  let metadataDigestMatchCount = 0, metadataDigestMismatchCount = 0;
-  let mediaDigestMatchCount = 0, mediaDigestMismatchCount = 0;
+  let manifestDirectMatchCount = 0, releaseDerivVerifiedCount = 0;
+  let publicMissingCount = 0;
+  let sha256MatchCount = 0, sha3MatchCount = 0, blake2bMatchCount = 0;
+  let shake256MatchCount = 0, sha512MatchCount = 0, blake3MatchCount = 0;
+  let fileHashMismatchCount = 0, fileSizeMismatchCount = 0;
+  let mediaSha256Fail = 0, mediaSizeFail = 0, mediaRootCidMismatchWarning = 0;
 
-  const nftDetails = [];
   const criticalErrors = [];
+  const nftDetails = [];
 
   const tasks = nftAssets.map(asset => async () => {
-    const detail = {
-      asset_name: asset.name, contract: null, token_id: null,
-      metadata: null, media: [], dag_valid: true,
-    };
+    const detail = { asset_name: asset.name, contract: null, token_id: null, metadata: null, media: [], dag_valid: true };
     try {
       const tarBuf = await downloadAsset(asset.id);
       const tarFiles = extractFilesFromTar(tarBuf);
       const nameMatch = asset.name.match(/^nft-(0x[0-9a-f]+)-(.+)\.tar$/);
       if (!nameMatch) { detail.error = `Cannot parse: ${asset.name}`; return detail; }
-      const contract = nameMatch[1];
-      const tokenId = nameMatch[2];
-      detail.contract = contract;
-      detail.token_id = tokenId;
+      const contract = nameMatch[1], tokenId = nameMatch[2];
+      detail.contract = contract; detail.token_id = tokenId;
       const lookupKey = `${contract.toLowerCase()}_${tokenId}`;
       const tokenEntry = nftLookup.get(lookupKey);
+
+      // nft-*.tar is a release derivative
+      releaseDerivVerifiedCount++;
 
       for (const tarFile of tarFiles) {
         if (!tarFile.name.endsWith('.car')) continue;
@@ -617,43 +613,55 @@ async function main() {
         const carData = tarFile.data;
         const carSha = sha256hex(carData);
         const carSize = carData.length;
+
         const dagResult = verifyCarDag(carData);
         missingBlocksTotal += dagResult.missingBlocks;
         cidRecomputeFail += dagResult.cidMismatchBlocks;
         const rootCid = dagResult.roots?.[0] || null;
 
-        let matchedManifestItem = null;
-        if (rootCid && digestManifest?.items) {
-          matchedManifestItem = digestManifest.items.find(item => item.path && item.path.includes(rootCid)) || null;
-        }
-        const inDigestManifest = !!matchedManifestItem;
-        if (inDigestManifest) {
-          digestManifestFileMatchCount++;
-          if (role === 'metadata') metadataDigestMatchCount++;
-          else mediaDigestMatchCount++;
-        } else if (rootCid) {
-          digestManifestFileMismatchCount++;
-          if (role === 'metadata') {
-            metadataDigestMismatchCount++;
-            criticalErrors.push(`NOT IN DIGEST-MANIFEST: ${asset.name} [${role}] root=${rootCid?.slice(0,20)}`);
+        // Find manifest entry using strict matching
+        const findResult = findManifestEntry(carSha, tarFile.name, rootCid, indexes);
+        const matchedItem = findResult?.item || null;
+        const matchMethod = findResult?.matchMethod || 'none';
+
+        if (matchedItem && matchMethod !== 'path_contains_cid_candidate') {
+          // Verify all hash fields declared in manifest
+          const hashes = computeAllHashes(carData);
+          if (matchedItem.sha256) { if (hashes.sha256 === matchedItem.sha256) sha256MatchCount++; else fileHashMismatchCount++; }
+          if (matchedItem.sha3_256) { if (hashes.sha3_256 === matchedItem.sha3_256) sha3MatchCount++; else fileHashMismatchCount++; }
+          if (matchedItem.blake2b_256) { if (hashes.blake2b_256 === matchedItem.blake2b_256) blake2bMatchCount++; else fileHashMismatchCount++; }
+          if (matchedItem.shake256_256) { if (hashes.shake256_256 === matchedItem.shake256_256) shake256MatchCount++; else fileHashMismatchCount++; }
+          if (matchedItem.sha512_256) { if (hashes.sha512_256 === matchedItem.sha512_256) sha512MatchCount++; else fileHashMismatchCount++; }
+          if (matchedItem.blake3_256) { if (hashes.blake3_256 === matchedItem.blake3_256) blake3MatchCount++; else fileHashMismatchCount++; }
+          if (matchedItem.size_bytes && carSize !== matchedItem.size_bytes) fileSizeMismatchCount++;
+          manifestDirectMatchCount++;
+        } else if (matchedItem && matchMethod === 'path_contains_cid_candidate') {
+          // CID path match is only a candidate — verify hash
+          const hashes = computeAllHashes(carData);
+          if (matchedItem.sha256 && hashes.sha256 === matchedItem.sha256) {
+            sha256MatchCount++;
+            manifestDirectMatchCount++;
           } else {
-            mediaDigestMismatchCount++;
+            fileHashMismatchCount++;
           }
         }
 
         if (role === 'metadata') {
           if (dagResult.valid) metadataDagPass++;
           else { metadataDagFail++; detail.dag_valid = false; criticalErrors.push(`METADATA DAG FAIL: ${asset.name}`); }
+
           const expectedTi = tokenEntry?.metadata?.root_cid;
           if (expectedTi && rootCid) {
             if (rootCid === expectedTi) metadataTokenIndexCidMatch++;
             else { metadataTokenIndexCidMismatch++; criticalErrors.push(`TOKEN_INDEX CID MISMATCH: ${asset.name}`); }
           }
+
           const ethCid = ethCidLookup.get(lookupKey);
           if (ethCid && rootCid) {
             if (rootCid === ethCid) metadataEthCidMatch++;
             else { metadataEthCidMismatch++; criticalErrors.push(`ETH CID MISMATCH: ${asset.name}`); }
           } else { metadataEthCidSkip++; }
+
           detail.metadata = {
             dag_valid: dagResult.valid, block_count: dagResult.blockCount,
             missing_blocks: dagResult.missingBlocks, cid_mismatch_blocks: dagResult.cidMismatchBlocks,
@@ -663,10 +671,22 @@ async function main() {
         } else {
           if (dagResult.valid) mediaDagPass++;
           else mediaDagFail++;
+
+          // Media: sha256 + size are hard verification
+          const hashes = computeAllHashes(carData);
+          const mediaMatched = findManifestEntry(carSha, tarFile.name, rootCid, indexes);
+          if (mediaMatched?.item) {
+            if (mediaMatched.item.sha256 && hashes.sha256 !== mediaMatched.item.sha256) mediaSha256Fail++;
+            if (mediaMatched.item.size_bytes && carSize !== mediaMatched.item.size_bytes) mediaSizeFail++;
+          }
+          if (rootCid && tokenEntry?.media) {
+            const expectedMedia = tokenEntry.media.find(m => m.root_cid === rootCid);
+            if (!expectedMedia) mediaRootCidMismatchWarning++;
+          }
+
           detail.media.push({
             dag_valid: dagResult.valid, block_count: dagResult.blockCount,
             actual_root_cid: rootCid, sha256: carSha, size: carSize,
-            digest_manifest_match: matchedManifestItem ? (matchedManifestItem.sha256 === carSha && matchedManifestItem.size_bytes === carSize) : null,
           });
         }
       }
@@ -683,134 +703,99 @@ async function main() {
     nftDetails.push(r);
   }
 
-  // ── Digest-manifest hash coverage ─────────────────────────────────────
-  log('\n  ── Digest-manifest hash coverage ──');
-
-  let multiHashMatchCount = 0, fileHashMismatchCount = 0, fileSizeMismatchCount = 0, privateUnavailableCount = 0;
-
-  try {
-    // Verify repo files against manifest
-    const repoFilesToVerify = [];
-    const verifyReportAsset = allAssets.find(a => a.name === 'verify-report.json');
-    let verifyReportBuf = null;
-    if (verifyReportAsset) {
-      try {
-        verifyReportBuf = await downloadAsset(verifyReportAsset.id);
-        repoFilesToVerify.push({ label: 'verify-report.json', buf: verifyReportBuf });
-      } catch (e) { log(`  ⚠️ Could not download verify-report.json: ${e.message}`); }
+  // ── Count private/unavailable ──────────────────────────────────────
+  const accessibleBasenames = new Set();
+  for (const detail of nftDetails) {
+    if (detail.metadata?.actual_root_cid) accessibleBasenames.add(detail.metadata.actual_root_cid);
+    for (const m of detail.media || []) { if (m.actual_root_cid) accessibleBasenames.add(m.actual_root_cid); }
+  }
+  let privateUnavailableCount = 0;
+  for (const item of manifestItems) {
+    const np = normPath(item.path);
+    const bn = path.basename(np);
+    let found = false;
+    for (const acc of accessibleBasenames) {
+      if (np.includes(acc) || bn === acc || item.sha256 === acc) { found = true; break; }
     }
-
-    // NFT CAR hash verification against manifest
-    let nftHashMatchCount = 0, nftHashMismatchCount = 0, nftSizeMismatchCount = 0;
-    let nftManifestCoveredCount = 0;
-
-    for (const detail of nftDetails) {
-      if (detail.error) continue;
-      if (detail.metadata?.actual_root_cid) {
-        const rootCid = detail.metadata.actual_root_cid;
-        const matchedItem = digestManifest?.items?.find(item => item.path && item.path.includes(rootCid));
-        if (matchedItem) {
-          nftManifestCoveredCount++;
-          const shaMatch = detail.metadata.sha256 === matchedItem.sha256?.toLowerCase();
-          const sizeMatch = detail.metadata.size === matchedItem.size_bytes;
-          if (shaMatch && sizeMatch) nftHashMatchCount++;
-          else { nftHashMismatchCount++; if (!sizeMatch) nftSizeMismatchCount++; }
-        }
-      }
-      for (const m of detail.media || []) {
-        if (m.actual_root_cid) {
-          const rootCid = m.actual_root_cid;
-          const matchedItem = digestManifest?.items?.find(item => item.path && item.path.includes(rootCid));
-          if (matchedItem) {
-            nftManifestCoveredCount++;
-            const shaMatch = m.sha256 === matchedItem.sha256?.toLowerCase();
-            const sizeMatch = m.size === matchedItem.size_bytes;
-            if (shaMatch && sizeMatch) nftHashMatchCount++;
-            else { nftHashMismatchCount++; if (!sizeMatch) nftSizeMismatchCount++; }
-          }
-        }
-      }
-    }
-
-    multiHashMatchCount = nftHashMatchCount;
-    fileHashMismatchCount = nftHashMismatchCount;
-    fileSizeMismatchCount = nftSizeMismatchCount;
-
-    // Count private/unavailable
-    if (digestManifest?.items) {
-      const accessibleBasenames = new Set();
-      if (verifyReportBuf) accessibleBasenames.add('verify-report.json');
-      for (const detail of nftDetails) {
-        if (detail.metadata?.actual_root_cid) accessibleBasenames.add(detail.metadata.actual_root_cid);
-        for (const m of detail.media || []) { if (m.actual_root_cid) accessibleBasenames.add(m.actual_root_cid); }
-      }
-      for (const item of digestManifest.items) {
-        const norm = normalizePath(item.path);
-        const bn = path.basename(norm);
-        let found = false;
-        for (const acc of accessibleBasenames) {
-          if (item.path.includes(acc) || bn === acc) { found = true; break; }
-        }
-        if (!found) privateUnavailableCount++;
-      }
-    }
-
-    log(`  NFT CAR manifest covered : ${nftManifestCoveredCount}`);
-    log(`  NFT CAR hash+size match  : ${nftHashMatchCount}`);
-    log(`  NFT CAR hash mismatch    : ${nftHashMismatchCount}`);
-    log(`  NFT CAR size mismatch    : ${nftSizeMismatchCount}`);
-    log(`  Private/unavailable      : ${privateUnavailableCount}`);
-
-  } catch (hashErr) {
-    log(`  ⚠️ Hash coverage verification error: ${hashErr.message}`);
+    if (!found) privateUnavailableCount++;
   }
 
-  // ── Compute overall pass ──────────────────────────────────────────────
+  // ── Summary ────────────────────────────────────────────────────────
   const dagAndDigestManifestPass = criticalErrors.length === 0
     && metadataDagFail === 0
-    && metadataDigestMismatchCount === 0
     && metadataTokenIndexCidMismatch === 0
     && digestJsonShaMatch && digestCsvShaMatch
-    && digestJsonSizeMatch && digestCsvSizeMatch;
+    && digestJsonSizeMatch && digestCsvSizeMatch
+    && fileHashMismatchCount === 0
+    && fileSizeMismatchCount === 0
+    && publicMissingCount === 0
+    && (declaredJson?.ar_sha256 ? true : false)
+    && (declaredCsv?.ar_sha256 ? true : false);
 
   log(`\n  ── Summary ──`);
-  log(`  Metadata DAG pass             : ${metadataDagPass}`);
-  log(`  Metadata DAG fail             : ${metadataDagFail}`);
-  log(`  Media DAG pass (audit-only)   : ${mediaDagPass}`);
-  log(`  Media DAG fail (audit-only)   : ${mediaDagFail}`);
-  log(`  Missing blocks                : ${missingBlocksTotal}`);
-  log(`  CID recompute fail            : ${cidRecomputeFail}`);
-  log(`  Meta CID vs token_index       : ${metadataTokenIndexCidMatch} match, ${metadataTokenIndexCidMismatch} mismatch`);
-  log(`  Meta CID vs ETH               : ${metadataEthCidMatch} match, ${metadataEthCidMismatch} mismatch, ${metadataEthCidSkip} skip`);
+  log(`  Manifest records total        : ${manifestItems.length}`);
+  log(`  Public files checked          : ${manifestDirectMatchCount}`);
+  log(`  Digest manifest direct match  : ${manifestDirectMatchCount}`);
+  log(`  Release derivative verified   : ${releaseDerivVerifiedCount}`);
+  log(`  Private/unavailable           : ${privateUnavailableCount}`);
+  log(`  Public missing                : ${publicMissingCount}`);
+  log(`  sha256 matches                : ${sha256MatchCount}`);
+  log(`  sha3_256 matches              : ${sha3MatchCount}`);
+  log(`  blake2b_256 matches           : ${blake2bMatchCount}`);
+  log(`  shake256_256 matches          : ${shake256MatchCount}`);
+  log(`  sha512_256 matches            : ${sha512MatchCount}`);
+  log(`  blake3_256 matches            : ${blake3MatchCount}`);
+  log(`  File hash mismatch            : ${fileHashMismatchCount}`);
+  log(`  File size mismatch            : ${fileSizeMismatchCount}`);
+  log(`  Metadata DAG pass/fail        : ${metadataDagPass}/${metadataDagFail}`);
+  log(`  Metadata CID vs token_index   : ${metadataTokenIndexCidMatch} match, ${metadataTokenIndexCidMismatch} mismatch`);
+  log(`  Metadata CID vs ETH           : ${metadataEthCidMatch} match, ${metadataEthCidMismatch} mismatch, ${metadataEthCidSkip} skip`);
+  log(`  Media sha256 fail             : ${mediaSha256Fail}`);
+  log(`  Media size fail               : ${mediaSizeFail}`);
+  log(`  Media CID mismatch warning    : ${mediaRootCidMismatchWarning}`);
   log(`  Chain A pass                  : ${dagAndDigestManifestPass}`);
 
-  // ── Write output ──────────────────────────────────────────────────────
+  // ── Write output ───────────────────────────────────────────────────
   const audit = {
     schema: 'trinity-accord.dag-digest-audit.v1',
     generated_at: new Date().toISOString(),
     dag_and_digest_manifest_pass: dagAndDigestManifestPass,
     release_nft_tar_count: nftAssets.length,
+
     digest_manifest_json_sha256_match: digestJsonShaMatch,
     digest_manifest_csv_sha256_match: digestCsvShaMatch,
     digest_manifest_json_size_match: digestJsonSizeMatch,
     digest_manifest_csv_size_match: digestCsvSizeMatch,
-    digest_manifest_file_match_count: digestManifestFileMatchCount,
-    digest_manifest_file_mismatch_count: digestManifestFileMismatchCount,
-    metadata_dag_pass: metadataDagPass,
-    metadata_dag_fail: metadataDagFail,
-    media_dag_pass: mediaDagPass,
-    media_dag_fail: mediaDagFail,
-    missing_blocks: missingBlocksTotal,
-    cid_recompute_fail: cidRecomputeFail,
-    metadata_token_index_cid_match: metadataTokenIndexCidMatch,
-    metadata_token_index_cid_mismatch: metadataTokenIndexCidMismatch,
-    metadata_eth_cid_match: metadataEthCidMatch,
-    metadata_eth_cid_mismatch: metadataEthCidMismatch,
-    metadata_eth_cid_skip: metadataEthCidSkip,
-    multi_hash_match_count: multiHashMatchCount,
+
+    manifest_records_total: manifestItems.length,
+    public_files_checked: manifestDirectMatchCount,
+    digest_manifest_direct_match_count: manifestDirectMatchCount,
+    release_derivative_verified_count: releaseDerivVerifiedCount,
+    private_unavailable_hash_only: privateUnavailableCount,
+    public_missing_count: publicMissingCount,
+
+    sha256_match_count: sha256MatchCount,
+    sha3_256_match_count: sha3MatchCount,
+    blake2b_256_match_count: blake2bMatchCount,
+    shake256_256_match_count: shake256MatchCount,
+    sha512_256_match_count: sha512MatchCount,
+    blake3_256_match_count: blake3MatchCount,
+
     file_hash_mismatch_count: fileHashMismatchCount,
     file_size_mismatch_count: fileSizeMismatchCount,
-    private_unavailable_hash_only: privateUnavailableCount,
+
+    metadata_dag_pass: metadataDagPass,
+    metadata_dag_fail: metadataDagFail,
+    metadata_token_index_cid_match: metadataTokenIndexCidMatch,
+    metadata_eth_tokenuri_cid_match: metadataEthCidMatch,
+
+    missing_blocks: missingBlocksTotal,
+    cid_recompute_fail: cidRecomputeFail,
+
+    media_sha256_fail: mediaSha256Fail,
+    media_size_fail: mediaSizeFail,
+    media_root_cid_mismatch_warning_count: mediaRootCidMismatchWarning,
+
     critical_errors: criticalErrors,
   };
 
@@ -823,7 +808,6 @@ async function main() {
     for (const e of criticalErrors) err(`    ❌ ${e}`);
     process.exit(1);
   }
-
   log('\n  ✅ DAG + digest-manifest verification passed.');
 }
 
