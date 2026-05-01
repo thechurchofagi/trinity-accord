@@ -64,5 +64,18 @@
     "boundary": "Non-amending Chronicle recovery layer. Bitcoin Originals prevail."
   },
   "eth_mirror_input_len": 4694,
-  "eth_mirror_input_sha256": "e19018f1c71da8307ef20e8e8e5c12834f854d60a6aae60e35d2d8c71a333a81"
+  "eth_mirror_input_sha256": "e19018f1c71da8307ef20e8e8e5c12834f854d60a6aae60e35d2d8c71a333a81",
+  "eth_mirror_input_provenance": {
+    "source": "Ethereum mainnet via eth_getTransactionByHash",
+    "computed_at": "2026-05-01T05:53:00Z",
+    "method": "SHA-256 of raw tx.input bytes (0x-prefixed hex decoded to Buffer, NOT UTF-8 text)",
+    "rpc_endpoint": "https://eth-mainnet.4everland.org/v1/...",
+    "tx_hash": "0x7bdff0d696337ceb04539b44a746d0f13ce731ac25de259d8a4faf69b276a628",
+    "from_address": "0xbc63566a41cbfdb9c266a5941cbe47894daa54a8",
+    "receipt_status": "0x1",
+    "block_number": "0x16582b5 (23495413)",
+    "input_bytes_length": 4694,
+    "input_sha256": "e19018f1c71da8307ef20e8e8e5c12834f854d60a6aae60e35d2d8c71a333a81",
+    "note": "These values were computed by querying the Ethereum mainnet RPC for tx.input bytes, then hashing the raw bytes with SHA-256. The from address matches eth_mirror_address. This data enables strict verification (input_sha256_match + input_size_match) in verify-eth-witness.mjs."
+  }
 }
