@@ -75,13 +75,19 @@ function normPath(p) {
 
 /**
  * Compute all 6 hashes for a buffer using @noble/hashes where available.
+ *
+ * blake2b_256 uses the HISTORICAL generation variant:
+ *   crypto.createHash('blake2b512').update(buf).digest('hex')
+ * The manifest stores full blake2b-512 output (128 hex chars / 64 bytes)
+ * under the field name "blake2b_256". This was confirmed by probe-blake2b-variants.mjs
+ * (node_blake2b512_full matched 524/524 public files).
  */
 function computeAllHashes(buf) {
   const u8 = buf instanceof Uint8Array ? buf : new Uint8Array(buf.buffer, buf.byteOffset, buf.byteLength);
   return {
     sha256: sha256hex(buf),
     sha3_256: bytesToHex(sha3_256(u8)),
-    blake2b_256: bytesToHex(blake2b(u8, { dkLen: 32 })),
+    blake2b_256: crypto.createHash('blake2b512').update(buf).digest('hex'),
     shake256_256: bytesToHex(shake256(u8, { dkLen: 32 })),
     sha512_256: crypto.createHash('sha512-256').update(buf).digest('hex'),
     blake3_256: bytesToHex(blake3(u8)),
@@ -879,6 +885,7 @@ async function main() {
   log(`  Media size fail               : ${mediaSizeFail}`);
   log(`  Media CID mismatch warning    : ${mediaRootCidMismatchWarning}`);
   log(`  Chain A pass                  : ${dagAndDigestManifestPass}`);
+  log(`  blake2b_256 variant           : node_blake2b512_full (historical)`);
 
   // ── Write output ───────────────────────────────────────────────────
   const audit = {
@@ -934,6 +941,12 @@ async function main() {
     media_root_cid_mismatch_warning_count: mediaRootCidMismatchWarning,
 
     critical_errors: criticalErrors,
+
+    // blake2b_256 historical generation variant note:
+    // The manifest stores full blake2b-512 output (128 hex chars) under field name "blake2b_256".
+    // Canonical check uses crypto.createHash('blake2b512').update(buf).digest('hex').
+    // Confirmed by probe-blake2b-variants.mjs: node_blake2b512_full matched 524/524 public files.
+    blake2b_256_generation_variant: 'node_blake2b512_full (historical, 128-hex-char output)',
   };
 
   const outPath = path.join(process.cwd(), 'DAG-DIGEST-AUDIT.json');
