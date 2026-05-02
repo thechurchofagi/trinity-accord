@@ -73,6 +73,87 @@
 }
 
 /* ============================================================
+   Table of Contents Sidebar
+   ============================================================ */
+
+.toc-sidebar {
+  display: none;
+}
+
+.toc-sidebar.toc-visible {
+  display: block;
+  position: fixed;
+  top: 80px;
+  right: calc((100vw - var(--max-w)) / 2 - 220px);
+  width: 200px;
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+  z-index: 50;
+}
+
+.toc-header {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.toc-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.toc-link {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  text-decoration: none;
+  padding: 0.35rem 0.6rem;
+  border-left: 2px solid transparent;
+  border-radius: 0 4px 4px 0;
+  transition: all var(--duration) var(--ease-out);
+  line-height: 1.45;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.toc-link:hover {
+  color: var(--text);
+  background: var(--gold-glow);
+  border-left-color: var(--border-hi);
+}
+
+.toc-link.toc-active {
+  color: var(--gold);
+  border-left-color: var(--gold);
+  background: var(--gold-glow);
+  font-weight: 500;
+}
+
+/* Hide TOC when screen is too narrow */
+@media (max-width: 1340px) {
+  .toc-sidebar.toc-visible {
+    display: none;
+  }
+}
+
+.toc-sidebar::-webkit-scrollbar {
+  width: 3px;
+}
+
+.toc-sidebar::-webkit-scrollbar-thumb {
+  background: var(--border-hi);
+  border-radius: 2px;
+}
+
+/* ============================================================
    Reading Progress Bar
    ============================================================ */
 
