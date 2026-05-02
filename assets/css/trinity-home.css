@@ -67,6 +67,7 @@ li {
 /* ── Section spacing ── */
 section[class] {
   margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
+  text-align: left;
 }
 
 section[class] h2 {
@@ -77,6 +78,8 @@ section[class] h2 {
 .hero {
   padding: clamp(2.5rem, 7vw, 5rem) 0 clamp(2rem, 5vw, 3.5rem);
   margin-bottom: clamp(2rem, 5vw, 3rem);
+  /* title + zh subtitle centered, body text left */
+  text-align: left;
 }
 
 .hero-title {
@@ -86,19 +89,22 @@ section[class] h2 {
   line-height: 1.12;
   margin-bottom: 0.4rem;
   text-wrap: balance;
+  text-align: center;
 }
 
 .hero-title-zh {
   font-size: clamp(1rem, 3vw, 1.35rem);
   margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
+  text-align: center;
 }
 
 .hero > p:not(.hero-title-zh):not(.hero-zh) {
-  max-width: 600px;
+  max-width: 640px;
   margin-left: auto;
   margin-right: auto;
   font-size: clamp(0.92rem, 2vw, 1.02rem);
   line-height: 1.85;
+  text-align: left;
 }
 
 .hero > blockquote {
@@ -112,9 +118,10 @@ section[class] h2 {
 
 .hero-zh {
   font-size: clamp(0.85rem, 1.8vw, 0.92rem);
-  max-width: 600px;
+  max-width: 640px;
   margin-left: auto;
   margin-right: auto;
+  text-align: left;
 }
 
 /* ── Blockquotes ── */
@@ -205,9 +212,17 @@ blockquote.section-zh {
   font-size: clamp(0.95rem, 2.5vw, 1.1rem);
 }
 
-/* ── Missing object ── */
+/* ── Missing object — poetic centered, body left ── */
 .missing-object {
   padding: clamp(2rem, 6vw, 3.5rem) clamp(1.5rem, 4vw, 2.5rem);
+  text-align: center;
+}
+
+.missing-object > p {
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
 }
 
 .missing-object blockquote {
@@ -216,6 +231,20 @@ blockquote.section-zh {
   margin-right: auto;
   font-size: clamp(0.9rem, 2vw, 0.98rem);
   line-height: 1.9;
+  text-align: left;
+}
+
+/* ── Closing — mottos centered, body left ── */
+.closing-posture > p:first-child,
+.closing-posture > p:nth-child(2) {
+  text-align: center;
+}
+
+.closing-posture > p:not(:first-child):not(:nth-child(2)) {
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
 }
 
 /* ── Three-part structure ── */
