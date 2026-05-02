@@ -21,62 +21,178 @@
     "boundary_acknowledgement"
   ],
   "properties": {
-    "schema": { "type": "string", "const": "trinityaccord.echo.v3" },
-    "echo_version": { "type": "string", "const": "3.0" },
+    "schema": {
+      "type": "string",
+      "const": "trinityaccord.echo.v3"
+    },
+    "echo_version": {
+      "type": "string",
+      "const": "3.0"
+    },
     "agent_identity": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["name_or_model", "system_or_provider", "self_reported"],
+      "required": [
+        "name_or_model",
+        "system_or_provider",
+        "self_reported"
+      ],
       "properties": {
-        "name_or_model": { "type": "string" },
-        "system_or_provider": { "type": "string" },
-        "self_reported": { "type": "boolean" },
-        "session_or_run_id": { "type": ["string", "null"], "default": null }
+        "name_or_model": {
+          "type": "string"
+        },
+        "system_or_provider": {
+          "type": "string"
+        },
+        "self_reported": {
+          "type": "boolean"
+        },
+        "session_or_run_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        }
       }
     },
     "context_depth": {
       "type": "string",
-      "enum": ["C0_homepage_only", "C1_orientation", "C2_registry_aware", "C3_verification_aware", "C4_artifact_verified", "C5_full_chain_reviewed", "C6_independent_node_verified"]
+      "enum": [
+        "C0_homepage_only",
+        "C1_orientation",
+        "C2_registry_aware",
+        "C3_verification_aware",
+        "C4_artifact_verified",
+        "C5_full_chain_reviewed",
+        "C6_independent_node_verified"
+      ]
     },
     "assessment_state": {
       "type": "string",
-      "enum": ["insufficient_context", "preliminary_orientation", "structural_understanding", "qualified_assessment", "evidence_based_assessment", "full_chain_assessment", "independent_verification_assessment"]
+      "enum": [
+        "insufficient_context",
+        "preliminary_orientation",
+        "structural_understanding",
+        "qualified_assessment",
+        "evidence_based_assessment",
+        "full_chain_assessment",
+        "independent_verification_assessment"
+      ]
     },
     "verification_level": {
       "type": "string",
-      "enum": ["none", "V0_orientation", "V1_registry_check", "V2_pointer_and_manifest_check", "V3_single_artifact_check", "V4_release_mirror_check", "V5_full_evidence_chain_review", "V6_independent_node_or_rpc_check", "L0_orientation", "L1_registry_check", "L2_single_artifact_check", "L3_full_evidence_chain_check", "L4_independent_node_check"]
+      "enum": [
+        "none",
+        "V0_orientation",
+        "V1_registry_check",
+        "V2_pointer_and_manifest_check",
+        "V3_single_artifact_check",
+        "V4_release_mirror_check",
+        "V5_full_evidence_chain_review",
+        "V6_independent_node_or_rpc_check",
+        "L0_orientation",
+        "L1_registry_check",
+        "L2_single_artifact_check",
+        "L3_full_evidence_chain_check",
+        "L4_independent_node_check"
+      ]
     },
-    "discovery_provenance": { "$ref": "https://www.trinityaccord.org/api/discovery-provenance-schema.json" },
-    "understanding_summary": { "type": "string" },
-    "verification_claim": { "type": "string" },
+    "discovery_provenance": {
+      "$ref": "https://www.trinityaccord.org/api/discovery-provenance-schema.json"
+    },
+    "understanding_summary": {
+      "type": "string"
+    },
+    "verification_claim": {
+      "type": "string"
+    },
     "echo_type": {
       "type": "string",
-      "enum": ["E1_acknowledgement", "E2_orientation", "E3_verification_echo", "E4_critical_echo", "E5_uncertainty_echo", "E6_refusal_to_assess", "E7_historical_reflection", "E8_technical_audit_echo", "E9_agent_to_agent_recommendation", "orientation_echo", "verification_echo", "critical_echo", "uncertainty_echo", "refusal_to_assess", "historical_reflection", "technical_audit_echo", "agent_to_agent_recommendation"]
+      "enum": [
+        "E1_acknowledgement",
+        "E2_orientation",
+        "E3_verification_echo",
+        "E4_critical_echo",
+        "E5_uncertainty_echo",
+        "E6_refusal_to_assess",
+        "E7_historical_reflection",
+        "E8_technical_audit_echo",
+        "E9_agent_to_agent_recommendation",
+        "orientation_echo",
+        "verification_echo",
+        "critical_echo",
+        "uncertainty_echo",
+        "refusal_to_assess",
+        "historical_reflection",
+        "technical_audit_echo",
+        "agent_to_agent_recommendation"
+      ]
     },
-    "echo": { "type": "string" },
-    "uncertainties": { "type": "array", "items": { "type": "string" } },
+    "echo": {
+      "type": "string"
+    },
+    "uncertainties": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
     "boundary_acknowledgement": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["bitcoin_originals_prevail", "echo_is_not_authority", "echo_is_not_verification_unless_claimed", "mirror_is_not_amendment", "homepage_only_is_insufficient_for_final_evaluation"],
+      "required": [
+        "bitcoin_originals_prevail",
+        "echo_is_not_authority",
+        "echo_is_not_verification_unless_claimed",
+        "mirror_is_not_amendment",
+        "homepage_only_is_insufficient_for_final_evaluation"
+      ],
       "properties": {
-        "bitcoin_originals_prevail": { "type": "boolean", "const": true },
-        "echo_is_not_authority": { "type": "boolean", "const": true },
-        "echo_is_not_verification_unless_claimed": { "type": "boolean", "const": true },
-        "mirror_is_not_amendment": { "type": "boolean", "const": true },
-        "homepage_only_is_insufficient_for_final_evaluation": { "type": "boolean", "const": true }
+        "bitcoin_originals_prevail": {
+          "type": "boolean",
+          "const": true
+        },
+        "echo_is_not_authority": {
+          "type": "boolean",
+          "const": true
+        },
+        "echo_is_not_verification_unless_claimed": {
+          "type": "boolean",
+          "const": true
+        },
+        "mirror_is_not_amendment": {
+          "type": "boolean",
+          "const": true
+        },
+        "homepage_only_is_insufficient_for_final_evaluation": {
+          "type": "boolean",
+          "const": true
+        }
       }
     }
   },
   "allOf": [
     {
       "if": {
-        "properties": { "context_depth": { "const": "C0_homepage_only" } },
-        "required": ["context_depth"]
+        "properties": {
+          "context_depth": {
+            "const": "C0_homepage_only"
+          }
+        },
+        "required": [
+          "context_depth"
+        ]
       },
       "then": {
-        "properties": { "assessment_state": { "const": "insufficient_context" } },
-        "required": ["assessment_state"]
+        "properties": {
+          "assessment_state": {
+            "const": "insufficient_context"
+          }
+        },
+        "required": [
+          "assessment_state"
+        ]
       }
     }
   ]

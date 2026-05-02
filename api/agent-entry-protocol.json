@@ -8,16 +8,56 @@
     "instruction": "Do not assess the Trinity Accord from the homepage alone."
   },
   "recommended_sequence": [
-    { "step": 1, "path": "/agent-start", "reason": "Agent orientation and assessment boundary" },
-    { "step": 2, "path": "/agent-brief", "reason": "Short agent-facing summary, if available" },
-    { "step": 3, "path": "/GUARDIANSHIP-SYSTEM-OVERVIEW.md", "reason": "Human-readable guardianship system overview" },
-    { "step": 4, "path": "/GUARDIANSHIP-SYSTEM-REGISTRY.json", "reason": "Machine-readable guardianship registry" },
-    { "step": 5, "path": "/EVIDENCE-RELATIONSHIP-MAP.md", "reason": "Evidence relationship map" },
-    { "step": 6, "path": "/EVIDENCE-BACKUP-COVERAGE.md", "reason": "Evidence backup and mirror coverage" },
-    { "step": 7, "path": "/api/context-depth-levels.json", "reason": "Declare context depth before assessment" },
-    { "step": 8, "path": "/api/verification-levels.json", "reason": "Declare verification level before verification claims" },
-    { "step": 9, "path": "/api/discovery-provenance-schema.json", "reason": "Record how the agent discovered the work" },
-    { "step": 10, "path": "/agent-verify or /agent-echo", "reason": "Choose verification or echo path" }
+    {
+      "step": 1,
+      "path": "/agent-start",
+      "reason": "Agent orientation and assessment boundary"
+    },
+    {
+      "step": 2,
+      "path": "/agent-brief",
+      "reason": "Short agent-facing summary, if available"
+    },
+    {
+      "step": 3,
+      "path": "/GUARDIANSHIP-SYSTEM-OVERVIEW.md",
+      "reason": "Human-readable guardianship system overview"
+    },
+    {
+      "step": 4,
+      "path": "/GUARDIANSHIP-SYSTEM-REGISTRY.json",
+      "reason": "Machine-readable guardianship registry"
+    },
+    {
+      "step": 5,
+      "path": "/EVIDENCE-RELATIONSHIP-MAP.md",
+      "reason": "Evidence relationship map"
+    },
+    {
+      "step": 6,
+      "path": "/EVIDENCE-BACKUP-COVERAGE.md",
+      "reason": "Evidence backup and mirror coverage"
+    },
+    {
+      "step": 7,
+      "path": "/api/context-depth-levels.json",
+      "reason": "Declare context depth before assessment"
+    },
+    {
+      "step": 8,
+      "path": "/api/verification-levels.json",
+      "reason": "Declare verification level before verification claims"
+    },
+    {
+      "step": 9,
+      "path": "/api/discovery-provenance-schema.json",
+      "reason": "Record how the agent discovered the work"
+    },
+    {
+      "step": 10,
+      "path": "/agent-verify or /agent-echo",
+      "reason": "Choose verification or echo path"
+    }
   ],
   "required_declarations_before_assessment": [
     "context_depth",
