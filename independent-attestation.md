@@ -131,14 +131,32 @@ Examples of recorded refusals:
 
 ---
 
+## Test / workflow-validation records
+## 测试 / 工作流验证记录
+
+One human-solicited AI workflow test has been recorded. It is not counted as formal independent attestation, unsolicited external discovery, or institutional third-party verification.
+
+已记录一次人类请求的 AI 工作流测试。它不被计为正式独立见证、非请求外部发现或机构第三方验证。
+
+| Field / 字段 | Value / 值 |
+|---|---|
+| id | 2026-05-02-openclaw-v3-verification |
+| type | human_solicited_ai_workflow_test |
+| source | OpenClaw AI Agent (automated sandbox) |
+| date | 2026-05-02 |
+| counts_as_independent_attestation | no |
+
+---
+
 ## Current status
 ## 当前状态
 
 | Dimension / 维度 | Status / 状态 |
 |---|---|
 | External influence / 外部影响力 | limited |
-| Third-party verification / 第三方验证 | limited |
+| Third-party verification / 第三方验证 | none formally accepted |
 | Independent attestation layer / 独立见证层 | open for future records |
+| Test records / 测试记录 | 1 human-solicited AI workflow test, not counted as attestation |
 
 This project is in an early stage. The attestation framework exists to transparently record future independent responses — not to fabricate the impression of external validation.
 

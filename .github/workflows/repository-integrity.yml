@@ -25,3 +25,6 @@ jobs:
 
       - name: Run consistency checks
         run: python3 scripts/check_consistency.py
+
+      - name: Validate Echo records
+        run: python3 scripts/validate_echo_records.py

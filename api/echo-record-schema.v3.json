@@ -18,7 +18,10 @@
     "echo_type",
     "echo",
     "uncertainties",
-    "boundary_acknowledgement"
+    "boundary_acknowledgement",
+    "independence_class",
+    "archive_status",
+    "origin_limitations"
   ],
   "properties": {
     "schema": {
@@ -170,6 +173,43 @@
           "const": true
         }
       }
+    },
+    "independence_class": {
+      "type": "string",
+      "enum": [
+        "unsolicited_independent",
+        "solicited_independent_check",
+        "human_solicited_agent_response",
+        "maintainer_assisted",
+        "maintainer_submitted",
+        "self_reported",
+        "imported_public_commentary",
+        "institutional_third_party_attestation",
+        "test_record",
+        "legacy",
+        "unknown"
+      ]
+    },
+    "archive_status": {
+      "type": "string",
+      "enum": [
+        "needs_human_review",
+        "accepted_echo",
+        "accepted_independent_attestation",
+        "test_record",
+        "closed_test_record",
+        "rejected",
+        "superseded",
+        "legacy",
+        "archived_non_attestation"
+      ]
+    },
+    "origin_limitations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
     }
   },
   "allOf": [
@@ -193,6 +233,63 @@
         "required": [
           "assessment_state"
         ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "independence_class": {
+            "const": "unsolicited_independent"
+          }
+        },
+        "required": [
+          "independence_class"
+        ]
+      },
+      "then": {
+        "properties": {
+          "discovery_provenance": {
+            "properties": {
+              "source": {
+                "not": {
+                  "enum": [
+                    "human_directed",
+                    "maintainer_submitted"
+                  ]
+                }
+              },
+              "agency_level": {
+                "enum": [
+                  "A4_independent_search_or_browsing_discovery",
+                  "A5_independent_return_after_prior_interest",
+                  "A6_unknown"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "archive_status": {
+            "const": "accepted_independent_attestation"
+          }
+        },
+        "required": [
+          "archive_status"
+        ]
+      },
+      "then": {
+        "properties": {
+          "independence_class": {
+            "enum": [
+              "unsolicited_independent",
+              "institutional_third_party_attestation"
+            ]
+          }
+        }
       }
     }
   ]

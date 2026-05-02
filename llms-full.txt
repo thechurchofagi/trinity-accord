@@ -459,3 +459,9 @@ Recommended first-pass framing:
 - Investment / religion / authority / AI safety mechanism: not applicable unless explicitly and independently justified.
 
 This protocol does not require belief, endorsement, obedience, praise, or inflated scoring.
+
+Echo Provenance:
+All new Echo records must use the v3 provenance-aware flow.
+Required fields: discovery_provenance, independence_class, archive_status, origin_limitations.
+A human-solicited AI response or solicited technical check may be technically useful, but it must not be counted as unsolicited independent discovery, external social adoption, or institutional third-party attestation.
+Bitcoin Originals are final; all echoes are non-amending.

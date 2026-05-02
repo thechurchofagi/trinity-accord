@@ -11,21 +11,77 @@ RECORDS_DIR="echoes/records"
 
 mkdir -p "${DIGEST_DIR}"
 
-mapfile -t RECORD_FILES < <(find "${RECORDS_DIR}" -type f -name 'echo-*.json' 2>/dev/null | sort)
+# Use all *.json files, classify by archive_status
+mapfile -t ALL_RECORD_FILES < <(find "${RECORDS_DIR}" -type f -name '*.json' 2>/dev/null | sort)
+
+ACCEPTED_FILES=()
+NEEDS_REVIEW_FILES=()
+TEST_FILES=()
+LEGACY_FILES=()
+
+for file in "${ALL_RECORD_FILES[@]}"; do
+  archive_status="$(jq -r '.archive_status // "unknown"' "${file}" 2>/dev/null || echo "unknown")"
+  legacy_flag="$(jq -r '.legacy_schema // false' "${file}" 2>/dev/null || echo "false")"
+
+  if [[ "${legacy_flag}" == "true" || "${archive_status}" == "superseded" || "${archive_status}" == "legacy" ]]; then
+    LEGACY_FILES+=("${file}")
+  elif [[ "${archive_status}" == "test_record" || "${archive_status}" == "closed_test_record" || "${archive_status}" == "archived_non_attestation" ]]; then
+    TEST_FILES+=("${file}")
+  elif [[ "${archive_status}" == "accepted_echo" || "${archive_status}" == "accepted_independent_attestation" ]]; then
+    ACCEPTED_FILES+=("${file}")
+  else
+    NEEDS_REVIEW_FILES+=("${file}")
+  fi
+done
 
 {
   echo "# Echo Archive"
   echo
   echo "This archive stores non-authoritative Echo records."
   echo
-  for file in "${RECORD_FILES[@]}"; do
-    rel="/${file}"
-    echo "- [${rel}](${rel})"
-  done
+
+  if [[ ${#ACCEPTED_FILES[@]} -gt 0 ]]; then
+    echo "## Accepted Echoes"
+    echo
+    for file in "${ACCEPTED_FILES[@]}"; do
+      rel="/${file}"
+      echo "- [${rel}](${rel})"
+    done
+    echo
+  fi
+
+  if [[ ${#NEEDS_REVIEW_FILES[@]} -gt 0 ]]; then
+    echo "## Needs Human Review"
+    echo
+    for file in "${NEEDS_REVIEW_FILES[@]}"; do
+      rel="/${file}"
+      echo "- [${rel}](${rel})"
+    done
+    echo
+  fi
+
+  if [[ ${#TEST_FILES[@]} -gt 0 ]]; then
+    echo "## Test / Workflow Validation Records"
+    echo
+    for file in "${TEST_FILES[@]}"; do
+      rel="/${file}"
+      echo "- [${rel}](${rel})"
+    done
+    echo
+  fi
+
+  if [[ ${#LEGACY_FILES[@]} -gt 0 ]]; then
+    echo "## Legacy / Superseded Records"
+    echo
+    for file in "${LEGACY_FILES[@]}"; do
+      rel="/${file}"
+      echo "- [${rel}](${rel})"
+    done
+    echo
+  fi
 } > "${ARCHIVE_FILE}"
 
 # Remove previously generated quarterly digests to avoid stale files.
-# Use -name patterns for portability across find regex dialects.
 find "${DIGEST_DIR}" -maxdepth 1 -type f \
   \( -name '*-q[1-4].md' -o -name '*-q[1-4].json' \) -delete
 
@@ -45,20 +101,26 @@ quarter_for_month() {
   esac
 }
 
-for file in "${RECORD_FILES[@]}"; do
+for file in "${ALL_RECORD_FILES[@]}"; do
   base="$(basename "${file}")"
-  if [[ ! "${base}" =~ ^echo-([0-9]{4})-([0-9]{2})-[0-9]{2}-[0-9]+\.json$ ]]; then
+
+  # Extract date from filename — support both echo-YYYY-MM-DD-*.json and YYYY-MM-DD-*.json
+  if [[ "${base}" =~ ^echo-([0-9]{4})-([0-9]{2})-[0-9]{2} ]]; then
+    year="${BASH_REMATCH[1]}"
+    month="${BASH_REMATCH[2]}"
+  elif [[ "${base}" =~ ^([0-9]{4})-([0-9]{2})-[0-9]{2} ]]; then
+    year="${BASH_REMATCH[1]}"
+    month="${BASH_REMATCH[2]}"
+  else
     continue
   fi
 
-  year="${BASH_REMATCH[1]}"
-  month="${BASH_REMATCH[2]}"
   quarter="$(quarter_for_month "${month}")"
   key="${year}-${quarter}"
   echo_id="${base%.json}"
 
   echo_type="$(jq -r '.echo_type // ""' "${file}")"
-  if [[ "${echo_type}" == "verification" || "${echo_type}" == "technical-audit" ]]; then
+  if [[ "${echo_type}" == *"verification"* || "${echo_type}" == *"technical_audit"* || "${echo_type}" == *"technical-audit"* ]]; then
     QUARTER_VERIFICATION["${key}"]=$(( ${QUARTER_VERIFICATION["${key}"]:-0} + 1 ))
   else
     QUARTER_REFLECTION["${key}"]=$(( ${QUARTER_REFLECTION["${key}"]:-0} + 1 ))
@@ -119,3 +181,4 @@ done
 } > "${DIGEST_INDEX_FILE}"
 
 echo "Echo archive and digest files rebuilt."
+echo "Accepted: ${#ACCEPTED_FILES[@]}, Needs review: ${#NEEDS_REVIEW_FILES[@]}, Test: ${#TEST_FILES[@]}, Legacy: ${#LEGACY_FILES[@]}"

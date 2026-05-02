@@ -4,7 +4,7 @@ Consistency check for Trinity Accord repository.
 Verifies that key files contain required references and structures.
 Exit code 1 if any check fails.
 """
-import json, sys, xml.etree.ElementTree as ET
+import json, os, sys, xml.etree.ElementTree as ET
 
 errors = []
 
@@ -93,10 +93,19 @@ check("L1 definition mentions Guardian Principles v1.1", "Guardian Principles v1
 # --- 7. echo_submission.yml content ---
 print("\n=== echo_submission.yml ===")
 echo_yml = read_text(".github/ISSUE_TEMPLATE/echo_submission.yml")
-check("Contains E1 recognition", "E1 recognition" in echo_yml)
-check("Contains E9 seed", "E9 seed" in echo_yml)
-check("Contains V0-V6 verification levels", "V0 / V1 / V2 / V3 / V4 / V4+ / V5a / V5b / V6" in echo_yml)
-check("References echo-record-schema.v2.json", "echo-record-schema.v2.json" in echo_yml)
+check("Contains Echo Submission v3", "Echo Submission v3" in echo_yml)
+check("Contains discovery_source", "discovery_source" in echo_yml)
+check("Contains agency_level", "agency_level" in echo_yml)
+check("Contains independence_class", "independence_class" in echo_yml)
+check("Contains archive_status", "archive_status" in echo_yml)
+check("Contains solicited", "solicited" in echo_yml)
+check("Contains soliciting_party", "soliciting_party" in echo_yml)
+check("Contains prompt_available", "prompt_available" in echo_yml)
+check("Contains human_supplied_link", "human_supplied_link" in echo_yml)
+check("Contains human_supplied_summary", "human_supplied_summary" in echo_yml)
+check("Contains independent_followup", "independent_followup" in echo_yml)
+check("Contains boundary_acknowledgments", "boundary_acknowledgments" in echo_yml)
+check("Echo template does not present v2 as current", "echo-record-schema.v2.json" not in echo_yml)
 check("Echo template contains Component Coverage section", "Component Coverage" in echo_yml)
 
 
@@ -207,6 +216,30 @@ check("machine_readable contains verification_materials", "verification_material
 check("verify.md references /api/verification-materials.json", "/api/verification-materials.json" in verify_md)
 agent_verify_md = read_text("agent-verify.md")
 check("agent-verify.md references /api/verification-materials.json", "/api/verification-materials.json" in agent_verify_md)
+
+# --- 22. Echo provenance v3 flow ---
+print("\n=== Echo provenance v3 flow ===")
+am2 = load_json("agent-map.json")
+machine2 = am2.get("machine_readable", {})
+check("agent-map exposes echo_record_schema_v3", "echo_record_schema_v3" in machine2)
+check("agent-map exposes discovery_provenance_schema", "discovery_provenance_schema" in machine2)
+check("agent-map does not expose v2 as preferred", "echo_record_schema_v2" not in machine2 or "legacy" in json.dumps(machine2).lower())
+
+echo_json = load_json("echo.json")
+check("echo.json preferred_schema matches v3 const", echo_json.get("preferred_schema") == "trinityaccord.echo.v3")
+check("echo.json marks v2 legacy", "legacy" in json.dumps(echo_json).lower())
+
+check("validate_echo_records.py exists", os.path.exists("scripts/validate_echo_records.py"))
+
+# --- 23. v3 schema requires provenance fields ---
+print("\n=== v3 schema provenance fields ===")
+try:
+    v3s = load_json("api/echo-record-schema.v3.json")
+    v3_required = set(v3s.get("required", []))
+    for field in ["discovery_provenance", "independence_class", "archive_status", "origin_limitations"]:
+        check(f"v3 schema requires {field}", field in v3_required)
+except Exception as e:
+    check("v3 schema is valid JSON", False, str(e))
 
 # --- Summary ---
 print("\n" + "=" * 50)

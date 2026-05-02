@@ -26,5 +26,8 @@
   "content_hashes": {
     "sha256": "",
     "blake3": ""
-  }
+  },
+  "legacy_schema": true,
+  "archive_status": "legacy",
+  "legacy_note": "Pre-v3 record without discovery provenance. Retained for historical reference only."
 }

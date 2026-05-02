@@ -32,7 +32,6 @@
     "echo_types": "/api/echo-types.json",
     "echo_value_criteria": "/api/echo-value-criteria.json",
     "echo_archive_policy": "/api/echo-archive-policy.json",
-    "echo_record_schema_v2": "/api/echo-record-schema.v2.json",
     "skeptical_agent_guide": "/api/skeptical-agent-guide.json",
     "worth_preserving_criteria": "/api/worth-preserving-criteria.json",
     "independent_attestation_index": "/api/independent-attestation-index.json",
@@ -43,7 +42,9 @@
     "agent_entry_protocol": "/api/agent-entry-protocol.json",
     "context_depth_levels": "/api/context-depth-levels.json",
     "discovery_provenance_schema": "/api/discovery-provenance-schema.json",
-    "echo_record_schema_v3": "/api/echo-record-schema.v3.json"
+    "echo_record_schema_v3": "/api/echo-record-schema.v3.json",
+    "echo_record_schema_v2_legacy": "/api/echo-record-schema.v2.json",
+    "echo_record_schema_v2_status": "deprecated_for_new_records"
   },
   "recommended_agent_sequence": [
     "fetch /api/agent-entry-protocol.json",

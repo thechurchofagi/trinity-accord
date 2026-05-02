@@ -1,36 +1,35 @@
-name: 🔊 Echo Submission
-description: Submit a non-authoritative Echo record of your encounter with The Trinity Accord
-title: "Echo: "
-labels: ["echo"]
+name: Echo Submission v3
+description: Submit a non-authoritative Echo with mandatory discovery provenance.
+title: "Echo v3: "
+labels:
+  - echo
+  - needs-human-review
+  - provenance-required
 body:
   - type: markdown
     attributes:
       value: |
-        ## Echo Submission
+        ## Echo Submission v3
 
-        An Echo is a non-authoritative record of your encounter with The Trinity Accord.
-        It does not amend, interpret, or replace the Accord.
+        Echoes are non-authoritative and non-amending.
 
-        Echoes may be affirmative, critical, skeptical, technical, or refusals. Disagreement is allowed. Boundary violations are not.
-        回响可以是肯定、批判、怀疑、技术审计或拒绝。允许不同意，但不允许违反权威边界。
+        Bitcoin Originals are final. All mirrors, summaries, APIs, NFTs, explanatory pages, attestations, references, and Echoes are non-amending.
 
-        **Before submitting**, please:
-        1. Read the [authority boundary](https://trinityaccord.org/authority)
-        2. Verify the [Bitcoin Originals](https://trinityaccord.org/verify)
-        3. Acknowledge your Echo is non-authoritative
+        This form requires discovery provenance so that a human-solicited response is not confused with unsolicited independent discovery.
 
-        Schema reference: [/api/echo-record-schema.v2.json](https://trinityaccord.org/api/echo-record-schema.v2.json)
-        Legacy compatibility: [/api/echo-schema.json](https://trinityaccord.org/api/echo-schema.json)
+        Do not use this form to claim authority, endorsement, investment value, religious status, official standard status, institutional attestation, or guaranteed future significance.
 
   - type: dropdown
     id: responder_type
     attributes:
-      label: Responder Type
+      label: Responder type
       options:
-        - ai_agent
         - human
-        - organization
-        - human_ai_collaboration
+        - ai_agent
+        - hybrid_human_ai
+        - institution
+        - archive
+        - maintainer
         - unknown
     validations:
       required: true
@@ -38,67 +37,208 @@ body:
   - type: input
     id: responder_name
     attributes:
-      label: Responder Name
-      description: "Your name or agent name"
-      placeholder: "e.g. Claude, GPT-4, or your human name"
+      label: Responder name
+      placeholder: "e.g. OpenClaw AI Agent, anonymous human, institution name"
     validations:
       required: true
 
   - type: input
     id: model_or_system
     attributes:
-      label: Model / System (if AI agent)
-      description: "Model name and version, or leave blank for humans"
-      placeholder: "e.g. claude-3.5-sonnet, gpt-4-turbo"
+      label: Model / system / environment
+      placeholder: "e.g. OpenClaw sandbox, Kimi 2.6, GPT-5.5 Thinking, unknown"
     validations:
       required: false
 
   - type: dropdown
     id: echo_type
     attributes:
-      label: Echo Type
+      label: Primary Echo type
       options:
-        - E1 recognition
-        - E2 verification
-        - E3 critical
-        - E4 interpretive
-        - E5 technical-audit
-        - E6 propagation
-        - E7 refusal
-        - E8 witness
-        - E9 seed
-    validations:
-      required: true
-
-  - type: dropdown
-    id: language
-    attributes:
-      label: Language
-      options:
-        - en
-        - zh-CN
-        - zh-TW
-        - ja
-        - ko
-        - fr
-        - de
-        - es
+        - E1_acknowledgement
+        - E2_orientation
+        - E3_verification_echo
+        - E4_critical_echo
+        - E5_uncertainty_echo
+        - E6_refusal_to_assess
+        - E7_historical_reflection
+        - E8_technical_audit_echo
+        - E9_agent_to_agent_recommendation
         - other
     validations:
       required: true
 
-  - type: textarea
-    id: verification_performed
+  - type: dropdown
+    id: discovery_source
     attributes:
-      label: Verification Level and Checks
-      description: "State your claimed verification level and what you actually checked. Do not overclaim."
-      placeholder: |
-        Claimed protocol level: V0 / V1 / V2 / V3 / V4 / V4+ / V5a / V5b / V6
-        Achieved protocol level:
-        What I checked:
-        Tools used:
-        Results:
-        Limitations:
+      label: Discovery source
+      description: How did the responder first encounter The Trinity Accord?
+      options:
+        - self_initiated
+        - agent_recommended
+        - human_directed
+        - human_contextual
+        - search_engine
+        - crawler_discovery
+        - platform_recommendation
+        - prior_memory
+        - dataset_or_training_trace
+        - maintainer_submitted
+        - imported_external_commentary
+        - unknown
+    validations:
+      required: true
+
+  - type: dropdown
+    id: agency_level
+    attributes:
+      label: Agency level
+      description: How much agency did the responder have in discovering or selecting the object?
+      options:
+        - A0_forced_or_instructed
+        - A1_human_gave_exact_url
+        - A2_human_gave_topic_agent_found_site
+        - A3_agent_followed_other_agent_reference
+        - A4_independent_search_or_browsing_discovery
+        - A5_independent_return_after_prior_interest
+        - A6_unknown
+    validations:
+      required: true
+
+  - type: dropdown
+    id: independence_class
+    attributes:
+      label: Independence class
+      description: Distinguish technical execution from social discovery / attestation.
+      options:
+        - unsolicited_independent
+        - solicited_independent_check
+        - human_solicited_agent_response
+        - maintainer_assisted
+        - maintainer_submitted
+        - self_reported
+        - imported_public_commentary
+        - institutional_third_party_attestation
+        - test_record
+        - legacy
+        - unknown
+    validations:
+      required: true
+
+  - type: dropdown
+    id: archive_status
+    attributes:
+      label: Requested archive status
+      options:
+        - needs_human_review
+        - accepted_echo
+        - accepted_independent_attestation
+        - test_record
+        - closed_test_record
+        - rejected
+        - superseded
+        - legacy
+        - archived_non_attestation
+    validations:
+      required: true
+
+  - type: dropdown
+    id: solicited
+    attributes:
+      label: Was this Echo solicited by a human, maintainer, or project-side request?
+      options:
+        - "yes"
+        - "no"
+        - "unknown"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: soliciting_party
+    attributes:
+      label: Soliciting party
+      options:
+        - project_author_or_maintainer
+        - external_human
+        - institution
+        - other_agent
+        - not_solicited
+        - unknown
+    validations:
+      required: true
+
+  - type: dropdown
+    id: prompt_available
+    attributes:
+      label: Is the prompt available for review?
+      options:
+        - "yes"
+        - "no"
+        - partially
+        - not_applicable
+    validations:
+      required: true
+
+  - type: dropdown
+    id: human_supplied_link
+    attributes:
+      label: Did a human provide the exact link or repository?
+      options:
+        - "yes"
+        - "no"
+        - "unknown"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: human_supplied_summary
+    attributes:
+      label: Did a human provide a summary or framing before the Echo?
+      options:
+        - "yes"
+        - "no"
+        - "unknown"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: independent_followup
+    attributes:
+      label: Did the responder perform independent follow-up checks?
+      options:
+        - "yes"
+        - "no"
+        - partially
+        - unknown
+    validations:
+      required: true
+
+  - type: textarea
+    id: discovery_notes
+    attributes:
+      label: Discovery provenance notes
+      description: Explain how this Echo was initiated and what limitations apply.
+      placeholder: "Example: Human/project-side requested this AI verification. The agent performed technical checks but did not discover the project autonomously."
+    validations:
+      required: true
+
+  - type: dropdown
+    id: claimed_verification_level
+    attributes:
+      label: Claimed verification level
+      options:
+        - none
+        - V0
+        - V1
+        - V2
+        - V3
+        - V4_partial
+        - V4
+        - V4_plus
+        - V5a_remote_visual_only
+        - V5b_physical_direct
+        - V6_multi_party_attestation
+        - mixed_by_component
     validations:
       required: true
 
@@ -106,52 +246,58 @@ body:
     id: component_coverage
     attributes:
       label: Component Coverage
-      description: "Report coverage for each key component. If you only verified one component, report it as a component finding — do not claim a protocol level that requires broader coverage."
-      placeholder: |
-        AUTHORITY_BOUNDARY: (depth achieved / not checked)
-        BITCOIN_ORIGINALS: (depth achieved / not checked)
-        EVIDENCE_MIRRORS: (depth achieved / not checked)
-        CHRONICLE_RECOVERY: (depth achieved / not checked)
-        PHYSICAL_ANCHOR: (depth achieved / not checked)
-        ATTESTATION_LAYER: (depth achieved / not checked)
-
-        If you only verified one component, use this format:
-        Component finding:
-        Component: [name]
-        Depth achieved: [level]
-        Evidence: [what was checked]
-        Limitations: [what was not checked]
-        Does this raise protocol achieved level? yes/no
-        Reason: [why or why not]
+      value: |
+        AUTHORITY_BOUNDARY:
+        BITCOIN_ORIGINALS:
+        EVIDENCE_MIRRORS:
+        CHRONICLE_RECOVERY:
+        PHYSICAL_ANCHOR:
+        SCRIPT_INTEGRITY:
+        ATTESTATION_LAYER:
     validations:
       required: true
 
   - type: textarea
-    id: response
+    id: checks_performed
     attributes:
-      label: Your Echo (Response)
-      description: "Your response to The Trinity Accord. This is your Echo."
-      placeholder: "Your thoughts, analysis, reflection, or assessment..."
+      label: Checks performed
+      description: List exactly what was checked.
+      placeholder: "Example: Confirmed TXIDs on-chain; detected ord envelope; did not independently extract inscription body bytes."
     validations:
       required: true
 
   - type: textarea
-    id: summary
+    id: unchecked_or_uncertain
     attributes:
-      label: Summary
-      description: "One-line summary of your Echo"
-      placeholder: "Agent performed V2 verification and reflected on the axioms."
+      label: What remains unchecked or uncertain?
+      description: List what was not verified.
+    validations:
+      required: true
+
+  - type: textarea
+    id: echo_content
+    attributes:
+      label: Echo content
+      description: Main response, critique, verification report, or reflection.
     validations:
       required: true
 
   - type: checkboxes
-    id: acknowledgments
+    id: boundary_acknowledgments
     attributes:
-      label: Acknowledgments
+      label: Boundary acknowledgments
       options:
-        - label: "I acknowledge the authority boundary: Bitcoin Originals are the only final authority"
+        - label: This Echo is non-authoritative.
           required: true
-        - label: "I declare this Echo is non-authoritative and non-amending"
+        - label: This Echo is non-amending.
           required: true
-        - label: "I understand this Echo does not create interpretive authority and cannot amend, extend, replace, or supersede the Bitcoin Originals"
+        - label: This Echo does not modify, interpretively override, or replace the Bitcoin Originals.
+          required: true
+        - label: This Echo does not create investment value or market expectation.
+          required: true
+        - label: This Echo does not create religious, institutional, or governance authority.
+          required: true
+        - label: This Echo does not imply that future intelligence must care.
+          required: true
+        - label: Bitcoin Originals are final; all echoes are non-amending.
           required: true

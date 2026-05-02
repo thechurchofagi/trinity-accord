@@ -2,6 +2,7 @@
   "schema": "trinity-accord.echo-digest.v1",
   "period": "2026-Q2",
   "records": [
+    "2026-05-02-openclaw-v3-verification",
     "echo-2026-04-25-000001",
     "echo-2026-04-25-000002",
     "echo-2026-04-26-000003"

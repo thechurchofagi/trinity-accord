@@ -5,7 +5,7 @@
   "submit": "/echoes/submit",
   "archive": "/echoes/archive",
   "echo_schema_legacy_v2": "/api/echo-record-schema.v2.json",
-  "preferred_schema": "trinity-accord.echo-record.v3",
+  "preferred_schema": "trinityaccord.echo.v3",
   "context_depth_levels": "/api/context-depth-levels.json",
   "discovery_provenance_schema": "/api/discovery-provenance-schema.json",
   "homepage_only_policy": {
@@ -13,5 +13,6 @@
     "assessment_state": "insufficient_context",
     "final_evaluation_allowed": false
   },
-  "boundary": "Bitcoin Originals are final; all echoes are non-amending."
+  "boundary": "Bitcoin Originals are final; all echoes are non-amending.",
+  "echo_schema_legacy_v2_status": "deprecated_for_new_records"
 }

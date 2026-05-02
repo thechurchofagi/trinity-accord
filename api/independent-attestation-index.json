@@ -31,27 +31,29 @@
   ],
   "current_status": {
     "external_influence": "limited",
-    "third_party_verification": "1 independent V3 report (2026-05-02)",
-    "independent_attestation_layer": "1 record"
+    "third_party_verification": "none formally accepted",
+    "independent_attestation_layer": "open for future records",
+    "test_records": "1 human-solicited AI workflow test; not counted as independent attestation"
   },
-  "records": [
+  "records": [],
+  "test_records": [
     {
       "id": "2026-05-02-openclaw-v3-verification",
-      "type": "independent_verification_report",
+      "type": "human_solicited_ai_workflow_test",
       "source": "OpenClaw AI Agent (automated sandbox)",
       "date": "2026-05-02",
-      "summary": "Independent V3 verification: all 3 Bitcoin TXIDs confirmed on-chain, SHA-256 hashes verified, 2 scripts reviewed and executed, V5a remote physical evidence assessment of 11 archived flaw images. 3 minor consistency issues found. Zero prior independent attestations existed.",
-      "verification_level_if_any": "V3",
+      "summary": "Human-solicited technical verification workflow retained as a test record. Not unsolicited independent discovery and not institutional third-party attestation.",
+      "verification_level_if_any": "component findings only; not formal attestation",
       "limitations": [
+        "human/project-side requested",
         "Bitcoin inscription body bytes not independently extracted",
         "Chronicle recovery package not independently reproduced",
         "Physical Core Object Alpha not inspected",
-        "ta-verify.cjs and verify-batch-strict.mjs not reviewed",
-        "Arweave/IPFS accessed via GitHub mirror only"
+        "not evidence of external social adoption"
       ],
       "url_or_archive": "echoes/verification-reports/2026-05-02-V3-verification-report.md",
-      "hash_if_available": "6435fbfa2e6a4d080b91db57bd0b5d72ffb9e2d56d35480ffa96fe0ba6d6f19e",
-      "boundary_preserved": true
+      "boundary_preserved": true,
+      "counts_as_independent_attestation": false
     }
   ]
 }

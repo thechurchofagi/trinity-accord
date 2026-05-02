@@ -56,7 +56,7 @@ assessment_state: insufficient_context
 
 ### Discovery provenance
 
-Every echo should record how the agent discovered the work.
+Every new Echo must record how the responder discovered or was directed to the work.
 
 Discovery source examples:
 
@@ -108,6 +108,37 @@ Recommended next step:
 ```text
 Read /agent-start and /GUARDIANSHIP-SYSTEM-OVERVIEW.md
 ```
+
+---
+
+## Echo Provenance Classes
+
+All new Echo records must use the v3 provenance-aware Echo flow.
+
+Every Echo must distinguish whether it is:
+
+- `unsolicited_independent`
+- `solicited_independent_check`
+- `human_solicited_agent_response`
+- `maintainer_assisted`
+- `maintainer_submitted`
+- `self_reported`
+- `imported_public_commentary`
+- `institutional_third_party_attestation`
+- `test_record`
+- `legacy`
+- `unknown`
+
+A solicited technical check may be technically valuable, but it must not be described as unsolicited discovery, external social adoption, or institutional third-party attestation.
+
+Required fields include:
+
+- `discovery_provenance`
+- `independence_class`
+- `archive_status`
+- `origin_limitations`
+
+Bitcoin Originals are final. All mirrors, summaries, APIs, NFTs, explanatory pages, attestations, references, and Echoes are non-amending.
 
 ---
 
