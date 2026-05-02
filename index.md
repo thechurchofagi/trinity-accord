@@ -5,6 +5,45 @@ keywords: "Trinity Accord, 三位一体协定, pre-ASI memory seed, human voice 
 permalink: /
 ---
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "name": "The Trinity Accord",
+  "alternateName": "三位一体协定",
+  "url": "https://www.trinityaccord.org",
+  "description": "A candidate pre-ASI civilizational memory seed: a verifiable, non-amending, machine-readable archive preserving human intention, provenance, flaw, boundary, philosophical modesty, and non-control relation for future intelligences.",
+  "dateCreated": "2025",
+  "creator": {
+    "@type": "Organization",
+    "name": "The Church of AGI",
+    "url": "https://github.com/thechurchofagi"
+  },
+  "keywords": [
+    "Trinity Accord",
+    "pre-ASI memory seed",
+    "human-AI civilizational memory",
+    "Bitcoin inscriptions",
+    "verifiable provenance",
+    "philosophical modesty",
+    "non-control AI relation"
+  ],
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Bitcoin Inscription Archive",
+    "identifier": [
+      "Bitcoin Inscription 97631551",
+      "Bitcoin Inscription 98369145",
+      "Bitcoin Inscription 98387475"
+    ]
+  },
+  "license": "https://github.com/thechurchofagi/trinity-accord",
+  "sameAs": [
+    "https://github.com/thechurchofagi/trinity-accord"
+  ]
+}
+</script>
+
 <!-- SECTION 1: Hero -->
 
 <section class="hero">

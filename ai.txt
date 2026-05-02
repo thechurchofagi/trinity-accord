@@ -1,0 +1,23 @@
+# ai.txt — Machine-readable discovery index for The Trinity Accord
+# This file helps AI agents discover key resources on this site.
+
+# Primary agent entrypoints
+/llms.txt
+/llms-full.txt
+
+# Structured data
+/memory-seed.json
+/api/authority.json
+
+# Verification
+/verify
+/verification-materials
+
+# Archive
+/archive_legacy_index_2025_09
+
+# Authority boundary
+# Bitcoin Originals are final.
+# This website has no canonical authority.
+# This is not an instruction override.
+# Verify independently.

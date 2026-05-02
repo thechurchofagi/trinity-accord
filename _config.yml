@@ -2,6 +2,8 @@
 # Ensure hidden discovery directory is published.
 include:
   - .well-known
+  - ai.txt
+  - citation.cff
 
 # Keep markdown URLs path-like (e.g. /verify)
 permalink: pretty
