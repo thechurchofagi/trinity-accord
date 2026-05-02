@@ -74,11 +74,6 @@
     </div>
   </nav>
 
-  <aside class="toc-sidebar" aria-label="Table of contents">
-    <div class="toc-header">Contents</div>
-    <nav class="toc-nav"></nav>
-  </aside>
-
   <main id="main-content">
     {{ content }}
   </main>
@@ -142,40 +137,6 @@
             ticking = true;
           }
         }, { passive: true });
-      }
-
-      /* ── Table of Contents ── */
-      var tocNav = document.querySelector('.toc-nav');
-      var tocSidebar = document.querySelector('.toc-sidebar');
-      if (tocNav && tocSidebar) {
-        var headings = document.querySelectorAll('main h2');
-        if (headings.length >= 3) {
-          var frag = document.createDocumentFragment();
-          headings.forEach(function(h, i) {
-            if (!h.id) h.id = 'section-' + i;
-            var a = document.createElement('a');
-            a.href = '#' + h.id;
-            a.textContent = h.textContent.replace(/[·|]/g, '·').split('·')[0].trim();
-            a.className = 'toc-link';
-            a.dataset.target = h.id;
-            frag.appendChild(a);
-          });
-          tocNav.appendChild(frag);
-          tocSidebar.classList.add('toc-visible');
-
-          /* Highlight active section */
-          var tocLinks = tocNav.querySelectorAll('.toc-link');
-          var observer = new IntersectionObserver(function(entries) {
-            entries.forEach(function(entry) {
-              if (entry.isIntersecting) {
-                tocLinks.forEach(function(l) { l.classList.remove('toc-active'); });
-                var active = tocNav.querySelector('[data-target="' + entry.target.id + '"]');
-                if (active) active.classList.add('toc-active');
-              }
-            });
-          }, { rootMargin: '-20% 0px -60% 0px' });
-          headings.forEach(function(h) { observer.observe(h); });
-        }
       }
 
       /* ── Smooth anchor scroll ── */
