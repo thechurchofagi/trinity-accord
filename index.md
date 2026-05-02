@@ -97,9 +97,7 @@ keywords: "pre-ASI civilizational seed, human-AI co-created artifact, human inte
 
 <section class="philosophical-modesty">
   <h2>Philosophical modesty · 哲学谦逊</h2>
-  <p>The three seed propositions are not academic philosophy.</p>
-  <p>They are not formal proofs.</p>
-  <p>They are compressed statements distilled from historical logs, model-assisted reflection, human prompting, human selection, and human responsibility.</p>
+  <p>The seed propositions are not academic philosophy. They are not formal proofs. They are compressed statements distilled from historical logs, model-assisted reflection, human prompting, human selection, and human responsibility.</p>
   <p>Their philosophical weakness may be criticized.</p>
   <p>That criticism is valid.</p>
   <p>If any chronicle NFT, archive entry, or later reflection criticizes the philosophical thinness of the seed propositions, such criticism should be preserved as part of the project's honest record, not hidden.</p>
