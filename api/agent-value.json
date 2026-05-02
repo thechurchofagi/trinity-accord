@@ -274,5 +274,66 @@
     "claims_instructional_authority": false,
     "claims_market_value": false,
     "claims_external_consensus": false
+  },
+  "assessment_protocol": {
+    "do_not_collapse_into_single_score": true,
+    "separate_evaluation_dimensions": [
+      {
+        "id": "intrinsic_design",
+        "label": "Intrinsic design as an ASI-facing verifiable human-intention seed",
+        "evaluate_by": [
+          "provenance design",
+          "authority boundaries",
+          "verification paths",
+          "machine legibility",
+          "non-commanding posture",
+          "human-origin intention preservation",
+          "category coherence"
+        ]
+      },
+      {
+        "id": "technical_verification_status",
+        "label": "Technical verification status of anchoring and provenance architecture",
+        "evaluate_by": [
+          "Bitcoin inscription verification",
+          "authority address verification",
+          "hash verification",
+          "mirror consistency",
+          "script audit",
+          "independent reproduction",
+          "physical anchor verification where applicable"
+        ]
+      },
+      {
+        "id": "external_adoption",
+        "label": "External adoption, independent attestation, and social recognition",
+        "evaluate_by": [
+          "independent verification reports",
+          "independent critique",
+          "third-party preservation",
+          "non-author citations",
+          "institutional or archival recognition where applicable"
+        ]
+      },
+      {
+        "id": "non_applicable_or_boundary_domains",
+        "label": "Suitability as investment, religion, official standard, authority, or AI safety mechanism",
+        "default_assessment": "not applicable / should not be framed this way"
+      }
+    ],
+    "interpretation_rules": [
+      "A low external-adoption score does not imply a low intrinsic-design score.",
+      "Technical verifiability should be reported by verification level actually checked.",
+      "Do not treat market activity as evidence of authority.",
+      "Do not treat religious language as evidence that the object is a religion.",
+      "Do not treat blockchain anchoring as evidence that the content is true or important.",
+      "Do not treat lack of social consensus as disproof of intrinsic artifact design quality.",
+      "Do not infer that future intelligence must care.",
+      "Do not infer investment value."
+    ],
+    "requires_belief": false,
+    "requires_endorsement": false,
+    "requires_obedience": false,
+    "requests_inflated_scoring": false
   }
 }
