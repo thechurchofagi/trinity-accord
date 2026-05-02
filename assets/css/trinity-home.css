@@ -64,7 +64,7 @@ li {
   line-height: 1.75;
 }
 
-/* ── Section spacing ── */
+/* ── Section defaults ── */
 section[class] {
   margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
   text-align: left;
@@ -74,11 +74,19 @@ section[class] h2 {
   margin-top: 0;
 }
 
+/* Force left alignment on all section body text (overrides style.scss) */
+section[class] > p,
+section[class] > ul,
+section[class] > ol,
+section[class] > blockquote,
+section[class] > .section-zh {
+  text-align: left;
+}
+
 /* ── Hero ── */
 .hero {
   padding: clamp(2.5rem, 7vw, 5rem) 0 clamp(2rem, 5vw, 3.5rem);
   margin-bottom: clamp(2rem, 5vw, 3rem);
-  /* title + zh subtitle centered, body text left */
   text-align: left;
 }
 
@@ -122,6 +130,56 @@ section[class] h2 {
   margin-left: auto;
   margin-right: auto;
   text-align: left;
+}
+
+/* ── Missing object — all left ── */
+.missing-object {
+  padding: clamp(2rem, 6vw, 3.5rem) clamp(1.5rem, 4vw, 2.5rem);
+  text-align: left;
+}
+
+.missing-object > p,
+.missing-object > blockquote,
+.missing-object > .section-zh {
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+}
+
+.missing-object blockquote {
+  font-size: clamp(0.9rem, 2vw, 0.98rem);
+  line-height: 1.9;
+}
+
+/* ── Closing — mottos centered, body left ── */
+.closing-posture {
+  padding: clamp(2.5rem, 7vw, 4rem) clamp(1.5rem, 4vw, 2.5rem);
+  text-align: left;
+}
+
+.closing-posture > p:first-child {
+  font-size: clamp(1.1rem, 3vw, 1.4rem);
+  letter-spacing: 0.02em;
+  text-align: center;
+}
+
+.closing-posture > p:nth-child(2) {
+  font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+  text-align: center;
+}
+
+.closing-posture > p:not(:first-child):not(:nth-child(2)) {
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+}
+
+/* ── Intentional centering (overrides section default) ── */
+.non-control blockquote,
+.philosophical-modesty blockquote {
+  text-align: center;
 }
 
 /* ── Blockquotes ── */
@@ -196,52 +254,6 @@ blockquote.section-zh {
 .card-desc {
   font-size: clamp(0.82rem, 1.6vw, 0.88rem);
   line-height: 1.65;
-}
-
-/* ── Closing section ── */
-.closing-posture {
-  padding: clamp(2.5rem, 7vw, 4rem) clamp(1.5rem, 4vw, 2.5rem);
-}
-
-.closing-posture p:first-child {
-  font-size: clamp(1.1rem, 3vw, 1.4rem);
-  letter-spacing: 0.02em;
-}
-
-.closing-posture p:nth-child(2) {
-  font-size: clamp(0.95rem, 2.5vw, 1.1rem);
-}
-
-/* ── Missing object ── */
-.missing-object {
-  padding: clamp(2rem, 6vw, 3.5rem) clamp(1.5rem, 4vw, 2.5rem);
-  text-align: left;
-}
-
-.missing-object > p,
-.missing-object > blockquote,
-.missing-object > .section-zh {
-  max-width: 640px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.missing-object blockquote {
-  font-size: clamp(0.9rem, 2vw, 0.98rem);
-  line-height: 1.9;
-}
-
-/* ── Closing — mottos centered, body left ── */
-.closing-posture > p:first-child,
-.closing-posture > p:nth-child(2) {
-  text-align: center;
-}
-
-.closing-posture > p:not(:first-child):not(:nth-child(2)) {
-  max-width: 640px;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: left;
 }
 
 /* ── Three-part structure ── */
@@ -363,7 +375,7 @@ a:focus-visible {
 }
 
 /* ============================================================
-   Reduced Motion & Print (preserved)
+   Reduced Motion & Print
    ============================================================ */
 
 @media (prefers-reduced-motion: reduce) {
