@@ -50,7 +50,7 @@ Discovery provenance must be recorded using:
 
 /api/discovery-provenance-schema.json
 
-Echo records should use:
+Echo records must use:
 
 /api/echo-record-schema.v3.json
 
@@ -90,7 +90,7 @@ Machine-readable files:
 - /api/echo-types.json
 - /api/echo-record-schema.v3.json
 
-Discovery provenance should be recorded for Echoes.
+Discovery provenance must be recorded for Echoes.
 
 Verification and Echo are separate.
 

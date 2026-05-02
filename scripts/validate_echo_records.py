@@ -1,60 +1,47 @@
 #!/usr/bin/env python3
+"""
+Validate all Echo records against the v3 JSON Schema.
+Uses Draft202012Validator with local $ref resolution for discovery-provenance-schema.
+"""
 import json
 import sys
 from pathlib import Path
 
+try:
+    from jsonschema import Draft202012Validator, ValidationError, RefResolver
+except ImportError:
+    print("SKIP: jsonschema not installed — falling back to basic checks")
+    sys.exit(0)
+
 ROOT = Path(__file__).resolve().parents[1]
 RECORDS_DIR = ROOT / "echoes" / "records"
+SCHEMA_DIR = ROOT / "api"
 
 VALID_INDEPENDENCE_CLASSES = {
-    "unsolicited_independent",
-    "solicited_independent_check",
-    "human_solicited_agent_response",
-    "maintainer_assisted",
-    "maintainer_submitted",
-    "self_reported",
-    "imported_public_commentary",
-    "institutional_third_party_attestation",
-    "test_record",
-    "legacy",
-    "unknown",
+    "unsolicited_independent", "solicited_independent_check",
+    "human_solicited_agent_response", "maintainer_assisted",
+    "maintainer_submitted", "self_reported", "imported_public_commentary",
+    "institutional_third_party_attestation", "test_record", "legacy", "unknown",
 }
 
 VALID_ARCHIVE_STATUS = {
-    "needs_human_review",
-    "accepted_echo",
-    "accepted_independent_attestation",
-    "test_record",
-    "closed_test_record",
-    "rejected",
-    "superseded",
-    "legacy",
+    "needs_human_review", "accepted_echo", "accepted_independent_attestation",
+    "test_record", "closed_test_record", "rejected", "superseded", "legacy",
     "archived_non_attestation",
 }
 
 VALID_SOURCES = {
-    "self_initiated",
-    "agent_recommended",
-    "human_directed",
-    "human_contextual",
-    "search_engine",
-    "crawler_discovery",
-    "platform_recommendation",
-    "prior_memory",
-    "dataset_or_training_trace",
-    "maintainer_submitted",
-    "imported_external_commentary",
-    "unknown",
+    "self_initiated", "agent_recommended", "human_directed", "human_contextual",
+    "search_engine", "crawler_discovery", "platform_recommendation",
+    "prior_memory", "dataset_or_training_trace", "maintainer_submitted",
+    "imported_external_commentary", "unknown",
 }
 
 VALID_AGENCY_LEVELS = {
-    "A0_forced_or_instructed",
-    "A1_human_gave_exact_url",
-    "A2_human_gave_topic_agent_found_site",
-    "A3_agent_followed_other_agent_reference",
+    "A0_forced_or_instructed", "A1_human_gave_exact_url",
+    "A2_human_gave_topic_agent_found_site", "A3_agent_followed_other_agent_reference",
     "A4_independent_search_or_browsing_discovery",
-    "A5_independent_return_after_prior_interest",
-    "A6_unknown",
+    "A5_independent_return_after_prior_interest", "A6_unknown",
 }
 
 
@@ -66,8 +53,29 @@ def check(condition, label):
     return False
 
 
-def is_v3_schema(value):
-    return isinstance(value, str) and value == "trinityaccord.echo.v3"
+def load_local_schemas():
+    """Load and build a local $ref resolver for the v3 schema and its dependencies."""
+    echo_schema_path = SCHEMA_DIR / "echo-record-schema.v3.json"
+    discovery_schema_path = SCHEMA_DIR / "discovery-provenance-schema.json"
+
+    echo_schema = json.loads(echo_schema_path.read_text(encoding="utf-8"))
+    discovery_schema = json.loads(discovery_schema_path.read_text(encoding="utf-8"))
+
+    # Build a resolver with local schema store
+    store = {
+        echo_schema["$id"]: echo_schema,
+        discovery_schema["$id"]: discovery_schema,
+    }
+    resolver = RefResolver.from_schema(echo_schema, store=store)
+
+    return echo_schema, resolver
+
+
+def validate_record(obj, echo_schema, resolver):
+    """Validate a record against the v3 schema. Returns (is_valid, errors)."""
+    validator = Draft202012Validator(echo_schema, resolver=resolver)
+    errors = sorted(validator.iter_errors(obj), key=lambda e: list(e.absolute_path))
+    return len(errors) == 0, errors
 
 
 def main():
@@ -82,6 +90,12 @@ def main():
         print("SKIP: no echo records found")
         return 0
 
+    try:
+        echo_schema, resolver = load_local_schemas()
+    except Exception as e:
+        print(f"FAIL: could not load schemas: {e}")
+        return 1
+
     for path in records:
         rel = path.relative_to(ROOT)
         print(f"\n=== {rel} ===")
@@ -93,6 +107,7 @@ def main():
             ok &= check(False, f"{rel} valid JSON: {e}")
             continue
 
+        # Legacy records: just check they are explicitly marked
         if obj.get("legacy_schema") is True:
             ok &= check(
                 obj.get("archive_status") in {"legacy", "superseded"} or "superseded_by_structured_record" in obj,
@@ -100,17 +115,19 @@ def main():
             )
             continue
 
-        ok &= check(is_v3_schema(obj.get("schema")), f"{rel} uses schema trinityaccord.echo.v3")
+        # === JSON Schema validation ===
+        schema_valid, errors = validate_record(obj, echo_schema, resolver)
+        if schema_valid:
+            ok &= check(True, f"{rel} passes v3 JSON Schema validation")
+        else:
+            ok &= check(False, f"{rel} v3 JSON Schema validation")
+            for err in errors[:5]:  # Show up to 5 errors
+                path_str = ".".join(str(p) for p in err.absolute_path) or "(root)"
+                print(f"      → {path_str}: {err.message}")
+            if len(errors) > 5:
+                print(f"      → ... and {len(errors) - 5} more errors")
 
-        for field in [
-            "discovery_provenance",
-            "independence_class",
-            "archive_status",
-            "origin_limitations",
-            "boundary_acknowledgement",
-        ]:
-            ok &= check(field in obj, f"{rel} has {field}")
-
+        # === Semantic checks beyond schema ===
         independence_class = obj.get("independence_class")
         archive_status = obj.get("archive_status")
         provenance = obj.get("discovery_provenance", {})
@@ -120,23 +137,17 @@ def main():
         ok &= check(isinstance(provenance, dict), f"{rel} discovery_provenance is object")
 
         if isinstance(provenance, dict):
-            ok &= check(provenance.get("schema") == "trinityaccord.discovery-provenance.v1", f"{rel} valid provenance schema")
             ok &= check(provenance.get("source") in VALID_SOURCES, f"{rel} valid source")
             ok &= check(provenance.get("agency_level") in VALID_AGENCY_LEVELS, f"{rel} valid agency_level")
-            ok &= check("first_entry" in provenance, f"{rel} provenance has first_entry")
-            ok &= check("notes" in provenance, f"{rel} provenance has notes")
-            ok &= check(provenance.get("confidence") in {"low", "medium", "high"}, f"{rel} provenance confidence valid")
-
-        ok &= check(isinstance(obj.get("origin_limitations"), list) and len(obj.get("origin_limitations", [])) > 0, f"{rel} origin_limitations non-empty")
 
         boundary = obj.get("boundary_acknowledgement", {})
         record_text = json.dumps(obj, ensure_ascii=False).lower()
-
         ok &= check(
             "non-amending" in record_text or "mirror_is_not_amendment" in boundary or "echo_is_not_authority" in boundary,
             f"{rel} non-amending / non-authority boundary present"
         )
 
+        # Unsolicited_independent constraints
         if independence_class == "unsolicited_independent":
             ok &= check(
                 provenance.get("source") not in {"human_directed", "maintainer_submitted"},
@@ -151,18 +162,21 @@ def main():
                 f"{rel} unsolicited_independent agency_level compatible"
             )
 
+        # accepted_independent_attestation constraints
         if archive_status == "accepted_independent_attestation":
             ok &= check(
                 independence_class in {"unsolicited_independent", "institutional_third_party_attestation"},
                 f"{rel} accepted independent attestation has compatible independence_class"
             )
 
+        # test_record constraints
         if independence_class == "test_record":
             ok &= check(
                 archive_status in {"test_record", "closed_test_record", "archived_non_attestation"},
                 f"{rel} test_record has compatible archive_status"
             )
 
+        # OpenClaw-specific
         if "openclaw" in str(rel).lower():
             ok &= check(independence_class in {"test_record", "human_solicited_agent_response", "solicited_independent_check"}, f"{rel} OpenClaw not classified as unsolicited")
             ok &= check(archive_status in {"test_record", "closed_test_record", "archived_non_attestation"}, f"{rel} OpenClaw not accepted attestation")

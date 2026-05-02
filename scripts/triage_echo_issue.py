@@ -111,7 +111,19 @@ ECHO_TYPES = {
 }
 
 # Ordered so that longer suffixes match before shorter ones (V4+ before V4)
+# Ordered so that longer suffixes match before shorter ones (V4+ before V4)
 VERIFICATION_LEVELS = ["v4+", "v5a", "v5b", "v6", "v4", "v3", "v2", "v1", "v0"]
+
+# Schema enum values (full form) — map to short form for checks
+SCHEMA_VERIFICATION_MAP = {
+    "V0_orientation": "V0",
+    "V1_registry_check": "V1",
+    "V2_pointer_and_manifest_check": "V2",
+    "V3_single_artifact_check": "V3",
+    "V4_release_mirror_check": "V4",
+    "V5_full_evidence_chain_review": "V5B",
+    "V6_independent_node_or_rpc_check": "V6",
+}
 
 OVERCLAIM_PHRASES = [
     r"hash verified",
@@ -124,6 +136,21 @@ OVERCLAIM_PHRASES = [
     r"已独立复现",
     r"已物理检查",
     r"多方见证",
+]
+
+# --- V3 Provenance field detection ---
+PROVENANCE_FIELDS = [
+    "discovery_source", "agency_level", "independence_class",
+    "archive_status", "solicited", "soliciting_party",
+    "prompt_available", "human_supplied_link", "human_supplied_summary",
+    "independent_followup",
+]
+
+INDEPENDENCE_CLASSES = [
+    "unsolicited_independent", "solicited_independent_check",
+    "human_solicited_agent_response", "maintainer_assisted",
+    "maintainer_submitted", "self_reported", "imported_public_commentary",
+    "institutional_third_party_attestation", "test_record", "legacy", "unknown",
 ]
 
 
@@ -154,7 +181,13 @@ def detect_echo_type(text):
 
 
 def detect_verification_level(text):
-    """Detect verification level, matching longer suffixes first (V4+ before V4)."""
+    """Detect verification level, matching longer suffixes first (V4+ before V4).
+    Also recognizes schema enum values like V3_single_artifact_check."""
+    # First check for schema enum values (full form)
+    for schema_val, short_val in SCHEMA_VERIFICATION_MAP.items():
+        if re.search(re.escape(schema_val), text, re.IGNORECASE):
+            return short_val
+    # Then check for short forms
     for level in VERIFICATION_LEVELS:
         pattern = r'\b' + re.escape(level) + r'\b'
         if re.search(pattern, text, re.IGNORECASE):
@@ -169,6 +202,120 @@ def detect_boundary(text):
         if re.search(p, text, re.IGNORECASE):
             return True
     return False
+
+
+def detect_independence_class(text):
+    """Detect independence_class from issue body."""
+    text_lower = text.lower()
+    for cls in INDEPENDENCE_CLASSES:
+        if cls in text_lower:
+            return cls
+    return None
+
+
+def detect_discovery_source(text):
+    """Detect discovery source from issue body."""
+    sources = [
+        "self_initiated", "agent_recommended", "human_directed", "human_contextual",
+        "search_engine", "crawler_discovery", "platform_recommendation",
+        "prior_memory", "dataset_or_training_trace", "maintainer_submitted",
+        "imported_external_commentary", "unknown",
+    ]
+    text_lower = text.lower()
+    for src in sources:
+        if src in text_lower:
+            return src
+    return None
+
+
+def detect_solicited(text):
+    """Detect whether the echo was solicited."""
+    text_lower = text.lower()
+    if re.search(r'solicited[:\s]*yes|was.*solicited.*yes|solicited.*true', text_lower):
+        return "yes"
+    if re.search(r'solicited[:\s]*no|was.*solicited.*no|unsolicited', text_lower):
+        return "no"
+    return None
+
+
+def detect_soliciting_party(text):
+    """Detect who solicited the echo."""
+    text_lower = text.lower()
+    parties = [
+        "project_author_or_maintainer", "external_human", "institution",
+        "other_agent", "not_solicited", "unknown",
+    ]
+    for party in parties:
+        if party in text_lower:
+            return party
+    return None
+
+
+def check_provenance_conflicts(text, independence_class, discovery_source, solicited, soliciting_party):
+    """
+    Check for provenance conflicts.
+    Returns (labels, comment) if conflict found, else (None, None).
+    """
+    labels = []
+    comments = []
+
+    # Conflict: unsolicited_independent + human_directed / maintainer_submitted
+    if independence_class == "unsolicited_independent" and discovery_source in ("human_directed", "maintainer_submitted"):
+        labels.append("echo:provenance-conflict")
+        comments.append(
+            f"Provenance conflict: independence_class is `unsolicited_independent` but discovery_source is `{discovery_source}`. "
+            "An unsolicited independent echo cannot be human-directed or maintainer-submitted."
+        )
+
+    # Conflict: institutional_third_party_attestation without institution evidence
+    if independence_class == "institutional_third_party_attestation":
+        has_institution = bool(re.search(
+            r'institution[:\s]+\S+|organization[:\s]+\S+|机构[:\s]*\S+|组织[:\s]*\S+',
+            text, re.IGNORECASE
+        ))
+        if not has_institution:
+            labels.append("echo:attestation-overclaim")
+            comments.append(
+                "Independence class claims `institutional_third_party_attestation` but no institution identity or evidence was found. "
+                "An institutional attestation must identify the institution."
+            )
+
+    # human_solicited_agent_response / test_record should not be screened as independent
+    if independence_class in ("human_solicited_agent_response", "test_record"):
+        if "echo:screened" in labels:
+            labels.remove("echo:screened")
+        labels.append("echo:solicited-record")
+        comments.append(
+            f"This echo is classified as `{independence_class}`. "
+            "It will not be counted as unsolicited independent discovery, external social adoption, or institutional attestation."
+        )
+
+    if labels:
+        return labels, "\n\n".join(comments)
+    return None, None
+
+
+def detect_missing_provenance(text):
+    """Check which provenance fields are missing from the issue body."""
+    missing = []
+    text_lower = text.lower()
+    for field in PROVENANCE_FIELDS:
+        # Match field name with underscores, spaces, or hyphens
+        field_pattern = field.replace("_", "[-_ ]")
+        if not re.search(field_pattern, text_lower):
+            missing.append(field)
+    return missing
+
+
+def is_v3_submission(text):
+    """Check if this issue uses the v3 provenance-aware template."""
+    text_lower = text.lower()
+    # Look for explicit v3 markers or presence of provenance fields
+    if "echo v3" in text_lower or "provenance" in text_lower:
+        return True
+    # Check if at least 5 provenance fields are present
+    found = sum(1 for field in PROVENANCE_FIELDS if re.search(field.replace("_", "[-_ ]"), text_lower))
+    return found >= 5
 
 
 def is_echo_submission(text):
@@ -447,8 +594,8 @@ def main():
         print(json.dumps(result, indent=2))
         return
 
-    # --- Step 5: Verification-level content requirements ---
-    if vlevel:
+    # --- Step 5: Verification-level content requirements (skip for v3 provenance-aware submissions) ---
+    if vlevel and not is_v3_submission(text):
         vr_missing = check_verification_requirements(text, vlevel)
         if vr_missing:
             result["close"] = False
@@ -460,6 +607,43 @@ def main():
                 "This issue has NOT been closed. Please edit to add the missing details.\n\n"
                 "此 Issue 没有被关闭，请编辑补充缺失内容。"
             )
+            print(json.dumps(result, indent=2))
+            return
+
+    # --- Step 5b: V3 Provenance checks (only for v3-aware submissions) ---
+    if is_v3_submission(text):
+        missing_provenance = detect_missing_provenance(text)
+        if len(missing_provenance) >= 5:
+            result["close"] = False
+            result["labels"] = ["echo:missing-provenance", "needs-human-review"]
+            missing_list = "\n".join(f"- {f}" for f in missing_provenance)
+            result["comment"] = (
+                "This Echo submission is missing most v3 provenance fields:\n\n"
+                f"{missing_list}\n\n"
+                "Please resubmit using the v3 Echo Submission template:\n"
+                "https://github.com/thechurchofagi/trinity-accord/issues/new?template=echo_submission.yml\n\n"
+                "Missing provenance fields make it impossible to distinguish solicited responses from unsolicited discovery."
+            )
+            print(json.dumps(result, indent=2))
+            return
+
+        # Check for provenance conflicts
+        independence_class = detect_independence_class(text)
+        discovery_source = detect_discovery_source(text)
+        solicited = detect_solicited(text)
+        soliciting_party = detect_soliciting_party(text)
+
+        conflict_labels, conflict_comment = check_provenance_conflicts(
+            text, independence_class, discovery_source, solicited, soliciting_party
+        )
+        if conflict_labels:
+            result["close"] = False
+            for lbl in conflict_labels:
+                if lbl not in result["labels"]:
+                    result["labels"].append(lbl)
+            if "needs-human-review" not in result["labels"]:
+                result["labels"].append("needs-human-review")
+            result["comment"] = conflict_comment
             print(json.dumps(result, indent=2))
             return
 

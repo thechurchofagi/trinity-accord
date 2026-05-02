@@ -115,6 +115,13 @@ for file in "${ALL_RECORD_FILES[@]}"; do
     continue
   fi
 
+  # Skip test, legacy, and closed records from quarterly digests
+  archive_status="$(jq -r '.archive_status // "unknown"' "${file}" 2>/dev/null || echo "unknown")"
+  legacy_flag="$(jq -r '.legacy_schema // false' "${file}" 2>/dev/null || echo "false")"
+  if [[ "${legacy_flag}" == "true" || "${archive_status}" == "legacy" || "${archive_status}" == "superseded" || "${archive_status}" == "test_record" || "${archive_status}" == "closed_test_record" || "${archive_status}" == "archived_non_attestation" ]]; then
+    continue
+  fi
+
   quarter="$(quarter_for_month "${month}")"
   key="${year}-${quarter}"
   echo_id="${base%.json}"
@@ -129,9 +136,10 @@ for file in "${ALL_RECORD_FILES[@]}"; do
   QUARTER_RECORDS["${key}"]+="${echo_id}"$'\n'
 done
 
-mapfile -t QUARTERS < <(printf '%s\n' "${!QUARTER_TOTAL[@]}" | sort)
+mapfile -t QUARTERS < <(printf '%s\n' "${!QUARTER_TOTAL[@]}" 2>/dev/null | sort)
 
 for quarter_key in "${QUARTERS[@]}"; do
+  [[ -z "${quarter_key}" ]] && continue
   year="${quarter_key%-Q*}"
   quarter="${quarter_key##*-}"
   quarter_lower="$(echo "${quarter}" | tr '[:upper:]' '[:lower:]')"

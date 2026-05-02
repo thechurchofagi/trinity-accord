@@ -70,6 +70,8 @@ crawler_discovery
 platform_recommendation
 prior_memory
 dataset_or_training_trace
+maintainer_submitted
+imported_external_commentary
 unknown
 ```
 

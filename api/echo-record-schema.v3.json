@@ -210,6 +210,39 @@
         "type": "string"
       },
       "minItems": 1
+    },
+    "component_findings": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "depth_achieved": {
+            "type": "string"
+          },
+          "limitations": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "depth_achieved",
+          "limitations"
+        ]
+      }
+    },
+    "report_file": {
+      "type": "string"
+    },
+    "not_authority": {
+      "type": "boolean",
+      "const": true
+    },
+    "not_amendment": {
+      "type": "boolean",
+      "const": true
+    },
+    "not_endorsement": {
+      "type": "boolean",
+      "const": true
     }
   },
   "allOf": [

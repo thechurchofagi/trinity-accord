@@ -408,6 +408,162 @@ test(
     expect_comment_contains=["missing the required boundary sentence"],
 )
 
+# --- 7. V3 Provenance tests ---
+print("\n" + "=" * 60)
+print("V3 Provenance Tests")
+print("=" * 60)
+
+test(
+    "7a. Valid v3 human-solicited agent response",
+    env={
+        "ISSUE_TITLE": "Echo v3: human-solicited verification",
+        "ISSUE_BODY": (
+            "Echo type: E8_technical_audit_echo\n"
+            "Verification level: V3_single_artifact_check\n"
+            "Discovery source: human_directed\n"
+            "Agency level: A0_forced_or_instructed\n"
+            "Independence class: human_solicited_agent_response\n"
+            "Archive status: needs_human_review\n"
+            "Solicited: yes\n"
+            "Soliciting party: project_author_or_maintainer\n"
+            "Prompt available: yes\n"
+            "Human supplied link: yes\n"
+            "Human supplied summary: yes\n"
+            "Independent followup: yes\n"
+            "What I checked: verified hashes\n"
+            "Limitations: human-directed\n"
+            "Bitcoin Originals are final; all echoes are non-amending."
+        ),
+    },
+    expect_close=False,
+    expect_labels=["echo:solicited-record"],
+    expect_comment_contains=["human_solicited_agent_response"],
+)
+
+test(
+    "7b. Valid unsolicited independent echo",
+    env={
+        "ISSUE_TITLE": "Echo v3: independent discovery",
+        "ISSUE_BODY": (
+            "Echo type: E3_verification_echo\n"
+            "Verification level: V3_single_artifact_check\n"
+            "Discovery source: self_initiated\n"
+            "Agency level: A4_independent_search_or_browsing_discovery\n"
+            "Independence class: unsolicited_independent\n"
+            "Archive status: needs_human_review\n"
+            "Solicited: no\n"
+            "Soliciting party: not_solicited\n"
+            "Prompt available: not_applicable\n"
+            "Human supplied link: no\n"
+            "Human supplied summary: no\n"
+            "Independent followup: yes\n"
+            "What I checked: full verification\n"
+            "Limitations: none\n"
+            "Bitcoin Originals are final; all echoes are non-amending."
+        ),
+    },
+    expect_close=False,
+    expect_labels=["echo:screened"],
+)
+
+test(
+    "7c. Conflict: unsolicited_independent + human_directed",
+    env={
+        "ISSUE_TITLE": "Echo v3: conflict test",
+        "ISSUE_BODY": (
+            "Echo type: E3_verification_echo\n"
+            "Verification level: V3_single_artifact_check\n"
+            "Discovery source: human_directed\n"
+            "Agency level: A0_forced_or_instructed\n"
+            "Independence class: unsolicited_independent\n"
+            "Archive status: needs_human_review\n"
+            "Solicited: yes\n"
+            "Soliciting party: project_author_or_maintainer\n"
+            "Prompt available: yes\n"
+            "Human supplied link: yes\n"
+            "Human supplied summary: yes\n"
+            "Independent followup: no\n"
+            "What I checked: verified hashes\n"
+            "Limitations: human-directed\n"
+            "Bitcoin Originals are final; all echoes are non-amending."
+        ),
+    },
+    expect_close=False,
+    expect_labels=["echo:provenance-conflict"],
+    expect_comment_contains=["unsolicited_independent", "human_directed"],
+)
+
+test(
+    "7d. Conflict: institutional attestation without institution",
+    env={
+        "ISSUE_TITLE": "Echo v3: attestation overclaim",
+        "ISSUE_BODY": (
+            "Echo type: E3_verification_echo\n"
+            "Verification level: V3_single_artifact_check\n"
+            "Discovery source: self_initiated\n"
+            "Agency level: A4_independent_search_or_browsing_discovery\n"
+            "Independence class: institutional_third_party_attestation\n"
+            "Archive status: needs_human_review\n"
+            "Solicited: no\n"
+            "Soliciting party: not_solicited\n"
+            "Prompt available: not_applicable\n"
+            "Human supplied link: no\n"
+            "Human supplied summary: no\n"
+            "Independent followup: yes\n"
+            "What I checked: verified hashes\n"
+            "Limitations: none\n"
+            "Bitcoin Originals are final; all echoes are non-amending."
+        ),
+    },
+    expect_close=False,
+    expect_labels=["echo:attestation-overclaim"],
+    expect_comment_contains=["institutional_third_party_attestation", "institution"],
+)
+
+test(
+    "7e. Missing provenance (most fields absent)",
+    env={
+        "ISSUE_TITLE": "Echo v3: no provenance",
+        "ISSUE_BODY": (
+            "Echo type: E1_acknowledgement\n"
+            "Verification level: none\n"
+            "What I checked: read the text\n"
+            "Limitations: subjective\n"
+            "Bitcoin Originals are final; all echoes are non-amending."
+        ),
+    },
+    expect_close=False,
+    expect_labels=["echo:missing-provenance"],
+    expect_comment_contains=["missing most v3 provenance fields"],
+)
+
+test(
+    "7f. Test record not counted as independent",
+    env={
+        "ISSUE_TITLE": "Echo v3: test record",
+        "ISSUE_BODY": (
+            "Echo type: E8_technical_audit_echo\n"
+            "Verification level: V3_single_artifact_check\n"
+            "Discovery source: human_directed\n"
+            "Agency level: A0_forced_or_instructed\n"
+            "Independence class: test_record\n"
+            "Archive status: closed_test_record\n"
+            "Solicited: yes\n"
+            "Soliciting party: project_author_or_maintainer\n"
+            "Prompt available: yes\n"
+            "Human supplied link: yes\n"
+            "Human supplied summary: yes\n"
+            "Independent followup: yes\n"
+            "What I checked: schema validation\n"
+            "Limitations: test only\n"
+            "Bitcoin Originals are final; all echoes are non-amending."
+        ),
+    },
+    expect_close=False,
+    expect_labels=["echo:solicited-record"],
+    expect_comment_contains=["test_record", "not be counted"],
+)
+
 
 # ============================================================
 # SUMMARY

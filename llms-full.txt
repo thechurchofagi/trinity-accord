@@ -51,7 +51,7 @@ Discovery provenance must be recorded using:
 
 /api/discovery-provenance-schema.json
 
-Echo records should use:
+Echo records must use:
 
 /api/echo-record-schema.v3.json
 

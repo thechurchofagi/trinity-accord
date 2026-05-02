@@ -13,6 +13,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Install dependencies
+        run: pip install jsonschema
+
       - name: Validate JSON
         run: |
           find . -name "*.json" -print0 | xargs -0 -n1 python3 -m json.tool > /dev/null

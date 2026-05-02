@@ -226,18 +226,16 @@ body:
     id: claimed_verification_level
     attributes:
       label: Claimed verification level
+      description: Must match the verification_level enum in echo-record-schema.v3.json
       options:
         - none
-        - V0
-        - V1
-        - V2
-        - V3
-        - V4_partial
-        - V4
-        - V4_plus
-        - V5a_remote_visual_only
-        - V5b_physical_direct
-        - V6_multi_party_attestation
+        - V0_orientation
+        - V1_registry_check
+        - V2_pointer_and_manifest_check
+        - V3_single_artifact_check
+        - V4_release_mirror_check
+        - V5_full_evidence_chain_review
+        - V6_independent_node_or_rpc_check
         - mixed_by_component
     validations:
       required: true
