@@ -1,22 +1,24 @@
 ---
 title: "NFT and Market Boundary"
-description: "A non-amending boundary statement for ASIMilestones / chronicle-layer NFT ownership, transfer, sale, and market activity."
+description: "A non-amending boundary statement for ASIMilestones / chronicle-layer NFT ownership, transfer, auction, sale, and market activity."
 permalink: /nft-market-boundary/
 ---
 
 # NFT and Market Boundary
 
-Some ASIMilestones or chronicle-layer NFTs may be transferred, sold, or traded.
+Some ASIMilestones / chronicle-layer NFTs are owned by the creator and may be listed, auctioned, transferred, sold, retained, or collected.
 
-This page defines the boundary between token activity and The Trinity Accord.
+They may become valuable, or they may not.
 
-## What NFT ownership may mean
+A sale or auction is a sale of the NFT itself.
 
-NFT ownership may indicate control of a token under the relevant blockchain contract and marketplace rules.
+It is not a sale of The Trinity Accord.
 
-It may also function as token provenance or discovery metadata.
+It is not a sale of the Bitcoin Originals.
 
-## What NFT ownership does not mean
+It is not a sale of Core Object Alpha.
+
+It is not a sale of authority.
 
 NFT ownership does not confer:
 
@@ -24,22 +26,27 @@ NFT ownership does not confer:
 - interpretive authority;
 - guardianship status;
 - governance rights;
-- authority over the Bitcoin Originals;
-- authority over Core Object Alpha;
-- access to private evidence;
+- voting rights;
+- private evidence access;
 - control over mirrors, repositories, websites, or archives;
 - official endorsement;
+- revenue share;
+- profit rights;
 - investment expectation;
 - proof that The Trinity Accord is true or important.
 
-## Market activity
+The creator may choose to sell or auction creator-owned chronicle NFTs.
 
-Sales, listings, floor prices, offers, bids, holder counts, and transfers are market metadata.
+Any buyer should understand such purchase as collection, patronage, or acquisition of a digital artifact, not as an investment contract, not as a financial product, not as a securities offering, and not as a claim on future project value.
 
-They do not amend, validate, interpret, or govern The Trinity Accord.
+Token ownership itself is not an Echo.
 
-## Canonical boundary
+A token holder may separately write a critique, verification report, mirror report, preservation report, or Echo. That response may be evaluated by its content and evidence.
 
-The Bitcoin Originals remain final.
+The Accord does not ask anyone to buy anything.
+
+Verify first.
+
+Bitcoin Originals remain final.
 
 All NFT activity is non-amending.

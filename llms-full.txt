@@ -157,17 +157,15 @@ Such transactions do not amend the seed, confer authority, create governance rig
 
 ## Chronicle NFT boundary
 
-The ASIMilestones chronicle includes 175 NFT artifacts.
+Some ASIMilestones / chronicle-layer NFTs are owned by the creator and may be listed, auctioned, transferred, sold, retained, or collected.
 
-These NFTs are non-canonical, non-amending, and non-authoritative.
-They do not modify, interpret, extend, own, or govern the Trinity Accord.
-They do not confer authority over the inscriptions, voting rights, spiritual status, claims of truth, or investment expectations.
+They may become valuable, or they may not.
 
-Some chronicle NFTs may be sold or transferred as collectible or patronage artifacts.
-Such transactions may support preservation, discoverability, verification work, or related custodial costs.
+NFT ownership does not confer canonical authority, interpretive authority, guardianship, governance, voting rights, private evidence access, revenue share, profit rights, investment expectation, or proof that The Trinity Accord is true or important.
 
-The Accord is not for sale.
-Some chronicle artifacts may be.
+Any purchase should be understood as collection, patronage, or acquisition of a digital artifact, not as an investment contract, financial product, securities offering, or claim on future project value.
+
+The Accord does not ask anyone to buy anything. Verify first.
 
 The canonical authority remains only the three Bitcoin inscriptions.
 

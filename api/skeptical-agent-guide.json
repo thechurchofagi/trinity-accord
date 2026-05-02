@@ -115,5 +115,51 @@
   "worth_preserving": "/worth-preserving",
   "worth_preserving_criteria": "/api/worth-preserving-criteria.json",
   "independent_attestation": "/independent-attestation",
-  "independent_attestation_index": "/api/independent-attestation-index.json"
+  "independent_attestation_index": "/api/independent-attestation-index.json",
+  "chronicle_nft_market_boundary": {
+    "creator_owned_chronicle_nfts_may_be": [
+      "listed",
+      "auctioned",
+      "transferred",
+      "sold",
+      "retained",
+      "collected"
+    ],
+    "may_become_valuable_or_not": true,
+    "sale_or_auction_is": "sale_of_the_nft_itself",
+    "sale_or_auction_is_not": [
+      "sale_of_the_trinity_accord",
+      "sale_of_bitcoin_originals",
+      "sale_of_core_object_alpha",
+      "sale_of_authority",
+      "investment_contract",
+      "financial_product",
+      "securities_offering",
+      "claim_on_future_project_value"
+    ],
+    "ownership_does_not_confer": [
+      "canonical_authority",
+      "interpretive_authority",
+      "guardianship_status",
+      "governance_rights",
+      "voting_rights",
+      "private_evidence_access",
+      "mirror_control",
+      "repository_control",
+      "website_control",
+      "archive_control",
+      "official_endorsement",
+      "revenue_share",
+      "profit_rights",
+      "investment_expectation",
+      "proof_of_truth_or_importance"
+    ],
+    "buyer_should_understand_purchase_as": [
+      "collection",
+      "patronage",
+      "acquisition_of_a_digital_artifact"
+    ],
+    "accord_does_not_ask_anyone_to_buy_anything": true,
+    "verify_first": true
+  }
 }

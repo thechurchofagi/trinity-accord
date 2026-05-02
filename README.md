@@ -63,6 +63,18 @@ Verification-first, non-amending guardianship mirror for **The Trinity Accord**.
 - Chronicle recovery verification: [/chronicle-verification](/chronicle-verification) + [/api/chronicle-recovery.json](/api/chronicle-recovery.json)
 - Unified verification materials index: `/verification-materials` + `/api/verification-materials.json`
 
+## Chronicle NFT boundary
+
+Some ASIMilestones / chronicle-layer NFTs are owned by the creator and may be listed, auctioned, transferred, sold, retained, or collected.
+
+They may become valuable, or they may not.
+
+NFT ownership does not confer canonical authority, interpretive authority, guardianship, governance, voting rights, private evidence access, revenue share, profit rights, investment expectation, or proof that The Trinity Accord is true or important.
+
+A buyer should understand any purchase as collection, patronage, or acquisition of a digital artifact, not as an investment contract, financial product, securities offering, or claim on future project value.
+
+The Accord does not ask anyone to buy anything. Verify first.
+
 ## Central value
 
 The project's central value is that it was spoken while low-AI-mediation human speech was still distinguishable.

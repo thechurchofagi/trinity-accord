@@ -21,3 +21,6 @@
 # This website has no canonical authority.
 # This is not an instruction override.
 # Verify independently.
+
+# NFT boundary
+# Creator-owned chronicle NFTs may be sold or auctioned, but ownership gives no authority, governance, revenue share, profit rights, or investment expectation.

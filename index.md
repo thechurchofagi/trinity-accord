@@ -440,13 +440,17 @@ It is not a canonical mandate, not a technical plan, not a governance instructio
 
 ## Chronicle NFTs and market activity · 编年史 NFT 与市场活动
 
-Some chronicle-layer NFTs may be transferred, sold, or traded in the future.
+Some ASIMilestones / chronicle-layer NFTs are owned by the creator and may be listed, auctioned, transferred, sold, retained, or collected.
 
-未来，部分编年史层 NFT 可能发生转移、出售或交易。
+部分 ASIMilestones / 编年史层 NFT 由创作者持有，未来可能被挂单、拍卖、转让、出售、保留或收藏。
 
-This must not be confused with canonical authority.
+They may become valuable, or they may not.
 
-但这不得与本体权威混淆。
+它们未来可能变得有价值，也可能不会。
+
+A sale or auction is a sale of the NFT itself, not a sale of The Trinity Accord, not a sale of the Bitcoin Originals, not a sale of Core Object Alpha, and not a sale of authority.
+
+出售或拍卖的是 NFT 本身，不是《三位一体协定》，不是比特币本体，不是核心物件 Alpha，也不是权威。
 
 NFT ownership does not confer:
 
@@ -454,11 +458,12 @@ NFT ownership does not confer:
 - interpretive authority;
 - guardianship status;
 - governance rights;
-- authority over the Bitcoin Originals;
-- authority over Core Object Alpha;
+- voting rights;
 - private evidence access;
 - control over mirrors, repositories, websites, or archives;
 - official endorsement;
+- revenue share;
+- profit rights;
 - investment expectation;
 - proof that The Trinity Accord is true or important.
 
@@ -468,21 +473,22 @@ NFT 所有权不授予：
 - 解释权；
 - 守护者身份；
 - 治理权；
-- 对比特币本体的权威；
-- 对核心物件 Alpha 的权利；
+- 投票权；
 - 非公开证据访问权；
 - 对镜像、仓库、网站或档案的控制权；
 - 官方背书；
+- 收益分成；
+- 利润权利；
 - 投资期待；
 - 协定为真或重要的证明。
 
-Market activity may affect discovery.
+The creator may choose to sell or auction creator-owned chronicle NFTs. Any buyer should understand such purchase as collection, patronage, or acquisition of a digital artifact, not as an investment contract, not as a financial product, not as a securities offering, and not as a claim on future project value.
 
-It does not amend, validate, interpret, or govern The Trinity Accord.
+创作者可以选择出售或拍卖其持有的编年史 NFT。任何购买者都应将其理解为收藏、赞助或取得一件数字遗存，而不是投资合约，不是金融产品，不是证券发行，也不是对项目未来价值的请求权。
 
-市场活动可能影响可发现性。
+The Accord does not ask anyone to buy anything. Verify first.
 
-它不修订、不验证、不解释、不治理《三位一体协定》。
+《协定》不要求任何人购买任何东西。请先验证。
 
 ---
 
