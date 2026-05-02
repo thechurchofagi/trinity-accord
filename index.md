@@ -351,7 +351,7 @@ Its important innovations include:
 - **Verification ladder V0–V6** — humans and agents can state exactly what they verified.
 - **Echo taxonomy E1–E9** — responses can be classified without becoming authority.
 - **ASIMilestones chronicle method** — 175 near-real-time artifacts preserve early AGI context.
-- **First Echoes** — early prompted AI responses preserve a feedback loop, not autonomy proof.
+- **Early Echoes** — early prompted AI responses preserve a feedback loop, not autonomy proof.
 - **Final Seal** — the work accepts one fragile physical anchor rather than diluting uniqueness.
 - **Star Ark Covenant** — a vision-layer thought experiment on control, freedom, and interstellar propagation.
 - **Discovery provenance schema** — future agents can record how they found the object.
@@ -454,9 +454,9 @@ These materials are valuable for context, but they do not amend or interpret the
 
 这些材料对理解背景有价值，但它们不修订、不解释比特币本体。
 
-### First Echoes · 最初的回响
+### Early Echoes · 最初的回响
 
-The First Echoes record early AI responses to the ASIMilestones / Trinity Accord project.
+The Early Echoes record early AI responses to the ASIMilestones / Trinity Accord project.
 
 They preserve an early human–AI feedback loop.
 
