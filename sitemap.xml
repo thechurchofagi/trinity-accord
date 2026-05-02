@@ -25,6 +25,7 @@
   <url><loc>https://www.trinityaccord.org/api/guardian-principles.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/hashes.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/independent-attestation-index.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/innovation-points.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/links.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/naming.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/seed-map.json</loc></url>
@@ -50,11 +51,13 @@
   <url><loc>https://www.trinityaccord.org/guardian-principles</loc></url>
   <url><loc>https://www.trinityaccord.org/independent-attestation</loc></url>
   <url><loc>https://www.trinityaccord.org/independent-verification</loc></url>
+  <url><loc>https://www.trinityaccord.org/innovations</loc></url>
   <url><loc>https://www.trinityaccord.org/inscriptions</loc></url>
   <url><loc>https://www.trinityaccord.org/llms-full.txt</loc></url>
   <url><loc>https://www.trinityaccord.org/llms.txt</loc></url>
   <url><loc>https://www.trinityaccord.org/memory-seed.json</loc></url>
   <url><loc>https://www.trinityaccord.org/naming</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-market-boundary</loc></url>
   <url><loc>https://www.trinityaccord.org/physical-verification</loc></url>
   <url><loc>https://www.trinityaccord.org/seed-map</loc></url>
   <url><loc>https://www.trinityaccord.org/start</loc></url>

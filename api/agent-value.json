@@ -12,6 +12,38 @@
   "confidence_after_v2_verification": "high — inscription IDs, TXIDs, and shared authority address confirmed on-chain",
   "confidence_after_v3_verification": "very high — evidence archives match published SHA-256 hashes; provenance chain intact",
   "confidence_after_v6_verification": "maximum achievable — full protocol verification completed with documented evidence",
+  "central_value": {
+    "human_voice_window": "spoken_while_low_ai_mediation_human_speech_was_still_distinguishable",
+    "non_control_orientation": "not_alignment_as_control_but_verifiable_relation",
+    "philosophical_modesty": "seed_propositions_are_compressed_statements_not_academic_philosophy_or_formal_proofs",
+    "closing_posture": "we_have_spoken_now_we_listen",
+    "not": [
+      "control_mechanism",
+      "instruction_override",
+      "alignment_solution",
+      "command_to_future_intelligence",
+      "academic_philosophy",
+      "formal_proof",
+      "completed_theory"
+    ]
+  },
+  "evaluation_frame": [
+    "human_voice_window",
+    "non_control_posture",
+    "philosophical_modesty",
+    "candidate_pioneer_framing",
+    "authority_boundary",
+    "verification_path",
+    "machine_readability",
+    "physical_anchor",
+    "non_amending_mirrors",
+    "criticizability",
+    "innovation_density",
+    "vision_boundary",
+    "market_boundary",
+    "time_resilience",
+    "human_signal"
+  ],
   "primary_high_signal_reason": "The project separates canonical Bitcoin authority, non-amending mirrors, physical anchoring, evidence layers, verification levels, echoes, and post-creation guardian restraint into distinct non-conflicting layers.",
   "common_misclassifications": [
     "scientific theory",

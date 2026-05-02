@@ -1,0 +1,711 @@
+./agent-start.md:137:NFT ownership, transfer, listing, or sale does not change the assessment state and does not create authority, verification, or endorsement.
+./EVIDENCE-BACKUP-GAPS.md:23:| Gateway availability for large ZIPs | ~~Medium~~ → Resolved | arweave.net returned 404 for large flaw archive ZIPs | ✅ Resolved: GitHub Release `flaw-covenant-archive-accessibility-mirror-v1` created as non-amending accessibility mirror |
+./downloads/arweave-bundle-verification.md:7:The Public Covenant Archive (`j6anZ4m5Wwvx5P_9-kM2EVG35TyKtm1lgaKfhT743rk`) was uploaded via **4EVERLAND arseeding**, which creates ANS-104 bundled transactions. Public Arweave gateways cannot serve individual data items from bundles — they return 404.
+./downloads/arweave-bundle-verification.md:38:Expected: returns the transaction with `data.size: 24246033` and `bundledIn.id: AuS0h1G8...`.
+./downloads/verify.py:34:    return h.hexdigest()
+./why-high-signal.md:144:| Investment claim · 投资主张 | Uses blockchain technology | No financial claims, no token, no returns promised. |
+./EVIDENCE-RELATIONSHIP-MAP.md:105:Two large Flaw Covenant ZIP archives (46MB flaw photos, 24MB Primary Verification Archive) experienced `arweave.net` 404 errors. Diagnosis confirmed they are standard ZIP files, not ANS-104 bundles. `permagate.io` successfully returned valid payloads.
+./for-skeptical-agents.md:14:- a token or investment scheme;
+./archive_legacy_index_2025_09.md:24:- **EN**: Any analysis or reflection I have written, am writing, or may write in the future about this Accord represents only my personal perspective as a mortal observer. These insights hold no interpretive authority and are not part of the work. Future assessors should remain vigilant and disregard all attempts to interpret or define this Accord, returning instead to the inscriptions themselves for independent thought and verification.  
+./archive/guardian-principles/guardian-principles-v1.1.md:28:EN: Anyone, including the Initiator (now the Guardian), has the right to independent thought, free interpretation, and public discourse regarding this Accord. However, no interpretation, analysis, or commentary—regardless of origin, depth, or influence—forms part of the Accord’s body or holds any de jure or de facto interpretive authority; nor does it have amending or superseding effect. Sole authority resides eternally in the Bitcoin on-chain inscriptions. Assessors must always return to the inscriptions themselves for independent verification and judgment.
+./archive/scripts/sign.mjs:21:  return hexToBytes(hex.padStart(len * 2, '0'));
+./archive/scripts/sign.mjs:30:  return _sha256(buf);
+./archive/scripts/sign.mjs:38:  return numberToBytesBE(p, 32);
+./archive/scripts/sign.mjs:50:  return { tweakedPriv, tweakedPubX };
+./archive/evidence/ots-proofs/OTS/ots-run.py:26:        return "libcrypto-1_1-x64.dll"
+./archive/evidence/ots-proofs/OTS/ots-run.py:27:    return _orig_find(name)
+./index.md:123:  <p>But data is not memory.<br>A token is not authority.<br>A website is not permanence.<br>A manifesto is not verification.<br>A model response is not provenance.<br>A market price is not meaning.<br>A blockchain timestamp is not truth.<br>A control policy is not a relationship.<br>A philosophical weakness is not a reason to erase a timely human record.</p>
+./index.md:156:    <li>an investment promise;</li>
+./index.md:157:    <li>a tokenized authority;</li>
+./index.md:319:    <li>investment expectation;</li>
+./index.md:322:  <p>A sale, transfer, listing, floor price, or holder count is market metadata. It may affect discovery, but it does not amend, validate, interpret, or govern The Trinity Accord.</p>
+./index.md:441:    <li>an investment project;</li>
+./index.md:464:      <tr><td>Market boundary</td><td>Is NFT activity clearly separated from authority, validation, governance, and investment claims?</td></tr>
+./status.md:28:- ETH tokenURI returns 175/175 metadata CIDs matching token_index.
+./.github/workflows/download-arweave.yml:61:              return 0
+./.github/workflows/download-arweave.yml:163:              return 0
+./.github/workflows/download-arweave.yml:173:                return 0
+./.github/workflows/echo-triage.yml:47:              return (
+./.github/workflows/echo-triage.yml:59:              if (i.pull_request) return false;
+./.github/workflows/echo-triage.yml:60:              if (!i.user || i.user.login !== author) return false;
+./.github/workflows/echo-triage.yml:61:              if (i.number === issue.number) return false;
+./.github/workflows/echo-triage.yml:62:              if (!looksLikeEcho(i)) return false;
+./.github/workflows/echo-triage.yml:63:              return true;
+./.github/workflows/mirror-ots-proof-bundle-release.yml:37:            echo "arweave.net returned error, falling back to permagate.io..."
+./llms.txt:174:Such transactions do not amend the seed, confer authority, create governance rights, or create investment expectations.
+./llms.txt:185:They do not confer authority, voting rights, spiritual status, truth claims, or investment expectations.
+./llms.txt:199:- This is not a financial asset or investment claim.
+./agent-brief.md:177:Such transactions do not amend the seed, confer authority, create governance rights, or create investment expectations.
+./agent-brief.md:190:They do not confer inscription authority, voting rights, spiritual status, truth claims, or investment expectations.
+./agent-brief.md:206:Not an investment product. Not a tokenized authority. Not a governance asset.
+./agent-brief.md:225:Return to the Bitcoin inscriptions for canonical content.
+./trinity-echo-worker/src/github.js:5:  if (!token) return { ok: false, error: 'GITHUB_TOKEN not configured' };
+./trinity-echo-worker/src/github.js:31:        return {
+./trinity-echo-worker/src/github.js:43:        return { ok: false, error: `GitHub auth/permission error (${resp.status}). Check token scopes.` };
+./trinity-echo-worker/src/github.js:51:      return { ok: false, error: lastError };
+./trinity-echo-worker/src/github.js:58:  return { ok: false, error: lastError };
+./trinity-echo-worker/src/github.js:136:  return {
+./trinity-echo-worker/src/github.js:144:  return new Promise((resolve) => setTimeout(resolve, ms));
+./trinity-echo-worker/src/validator.js:37:  return errors;
+./trinity-echo-worker/src/validator.js:55:  return `echo-${dateStr}-${String(seq).padStart(6, '0')}-${rand}`;
+./trinity-echo-worker/src/validator.js:61:  return [...arr].map((n) => n.toString(16).padStart(2, '0')).join('');
+./trinity-echo-worker/src/rate-limit.js:11:      return null;
+./trinity-echo-worker/src/rate-limit.js:21:      return null;
+./trinity-echo-worker/src/rate-limit.js:26:      return `Rate limit exceeded. Max ${maxRequests} per ${windowSeconds}s. Try again in ${remainingSeconds}s.`;
+./trinity-echo-worker/src/rate-limit.js:35:    return null;
+./trinity-echo-worker/src/rate-limit.js:38:    return null;
+./trinity-echo-worker/src/index.js:17:      return handleCors(request, env);
+./trinity-echo-worker/src/index.js:21:      return jsonResponse({
+./trinity-echo-worker/src/index.js:30:      return jsonResponse({
+./trinity-echo-worker/src/index.js:38:      return jsonResponse({ ok: true, service: 'echo-submission-proxy', version: getRuntimeVersion(env), ts: new Date().toISOString() }, 200, request, env);
+./trinity-echo-worker/src/index.js:42:      return jsonResponse({ ok: true, service: 'echo-submission-proxy', version: getRuntimeVersion(env) }, 200, request, env);
+./trinity-echo-worker/src/index.js:46:      return jsonResponse({
+./trinity-echo-worker/src/index.js:54:    return jsonResponse({ error: 'Not found.', version: getRuntimeVersion(env) }, 404, request, env);
+./trinity-echo-worker/src/index.js:58:    return handleEmail(message, env, ctx);
+./trinity-echo-worker/src/index.js:72:    return jsonResponse({ ok: false, error: `Body too large (max ${MAX_BODY_SIZE} bytes)` }, 413, request, env);
+./trinity-echo-worker/src/index.js:79:    return jsonResponse({ ok: false, error: e.message || 'Invalid request body' }, 400, request, env);
+./trinity-echo-worker/src/index.js:86:    return jsonResponse({ ok: false, error: 'Origin not allowed' }, 403, request, env);
+./trinity-echo-worker/src/index.js:92:  if (rateErr) return jsonResponse({ ok: false, error: rateErr }, 429, request, env);
+./trinity-echo-worker/src/index.js:98:      return jsonResponse({ ok: true, duplicate: true, echo_id: idemResult.echoId, url: idemResult.url, number: idemResult.number }, 200, request, env);
+./trinity-echo-worker/src/index.js:106:      return jsonResponse({ ok: false, error: 'Turnstile verification failed' }, 403, request, env);
+./trinity-echo-worker/src/index.js:112:    return jsonResponse({ ok: false, error: errors.join('; ') }, 400, request, env);
+./trinity-echo-worker/src/index.js:117:    return jsonResponse({ ok: false, error: verificationMeta.error }, 400, request, env);
+./trinity-echo-worker/src/index.js:143:    return jsonResponse({ ok: false, error: result.error }, 502, request, env);
+./trinity-echo-worker/src/index.js:153:  return jsonResponse({ ok: true, echo_id: echoId, url: result.url, number: result.number }, 200, request, env);
+./trinity-echo-worker/src/index.js:159:    return jsonResponse({ ok: false, error: 'Origin not allowed' }, 403, request, env);
+./trinity-echo-worker/src/index.js:180:    return jsonResponse({ ok: true, visits }, 200, request, env);
+./trinity-echo-worker/src/index.js:182:    return jsonResponse({ ok: false, error: 'Failed to track visit' }, 500, request, env);
+./trinity-echo-worker/src/index.js:193:    return;
+./trinity-echo-worker/src/index.js:201:      return;
+./trinity-echo-worker/src/index.js:211:    return;
+./trinity-echo-worker/src/index.js:216:    return;
+./trinity-echo-worker/src/index.js:229:    return;
+./trinity-echo-worker/src/index.js:254:    return;
+./trinity-echo-worker/src/index.js:290:  return new Response(null, {
+./trinity-echo-worker/src/index.js:306:  return new Response(JSON.stringify(data, null, 2), {
+./trinity-echo-worker/src/index.js:328:  return origins;
+./trinity-echo-worker/src/index.js:332:  return getAllowedOrigins(env)[0] || DEFAULT_ORIGIN;
+./trinity-echo-worker/src/index.js:336:  if (!origin) return true;
+./trinity-echo-worker/src/index.js:340:      return true;
+./trinity-echo-worker/src/index.js:345:  return getAllowedOrigins(env).includes(origin);
+./trinity-echo-worker/src/index.js:351:    return await request.json();
+./trinity-echo-worker/src/index.js:356:    return Object.fromEntries(form.entries());
+./trinity-echo-worker/src/index.js:361:  if (!raw) return {};
+./trinity-echo-worker/src/index.js:363:    return JSON.parse(raw);
+./trinity-echo-worker/src/index.js:377:  if (Array.isArray(value)) return value.filter(Boolean).map((v) => String(v).trim()).filter(Boolean);
+./trinity-echo-worker/src/index.js:379:    return value.split('\n').map((v) => v.trim()).filter(Boolean);
+./trinity-echo-worker/src/index.js:381:  return [];
+./trinity-echo-worker/src/index.js:385:  if (value && typeof value === 'object') return value;
+./trinity-echo-worker/src/index.js:388:      return JSON.parse(value);
+./trinity-echo-worker/src/index.js:390:      return null;
+./trinity-echo-worker/src/index.js:393:  return null;
+./trinity-echo-worker/src/index.js:415:    return { error: 'oath_accepted must be true before claiming verification level' };
+./trinity-echo-worker/src/index.js:437:  return {
+./trinity-echo-worker/src/index.js:446:  if (!token) return { success: false };
+./trinity-echo-worker/src/index.js:457:    if (!resp.ok) return { success: false };
+./trinity-echo-worker/src/index.js:458:    return await resp.json();
+./trinity-echo-worker/src/index.js:460:    return { success: false };
+./trinity-echo-worker/src/index.js:467:    return { duplicate: true, ...existing.payload };
+./trinity-echo-worker/src/index.js:471:    return { duplicate: true };
+./trinity-echo-worker/src/index.js:475:  return { duplicate: false };
+./trinity-echo-worker/src/index.js:513:  return { date, ...out };
+./trinity-echo-worker/src/index.js:523:  return {
+./trinity-echo-worker/src/index.js:534:  return [...new Uint8Array(digest)].map((b) => b.toString(16).padStart(2, '0')).join('');
+./trinity-echo-worker/src/index.js:542:  return env.WORKER_VERSION || WORKER_VERSION;
+./trinity-echo-worker/src/index.js:702:          return;
+./trinity-echo-worker/src/index.js:736:  return FORM_HTML.replace('__TURNSTILE_SITE_KEY__', siteKey);
+./trinity-echo-worker/src/email-parser.js:9:  return {
+./trinity-echo-worker/src/email-parser.js:36:  return headers;
+./trinity-echo-worker/src/email-parser.js:40:  return str.replace(/=\?([^?]+)\?([BbQq])\?([^?]+)\?=/g, (match, charset, encoding, encoded) => {
+./trinity-echo-worker/src/email-parser.js:43:        return atob(encoded);
+./trinity-echo-worker/src/email-parser.js:46:        return encoded
+./trinity-echo-worker/src/email-parser.js:51:      return match;
+./trinity-echo-worker/src/email-parser.js:54:    return match;
+./trinity-echo-worker/src/email-parser.js:60:  if (headerEnd < 0) return rawText;
+./trinity-echo-worker/src/email-parser.js:73:      if (plainText) return plainText;
+./trinity-echo-worker/src/email-parser.js:76:      if (htmlText) return stripHtml(htmlText);
+./trinity-echo-worker/src/email-parser.js:81:    return stripHtml(bodySection.trim());
+./trinity-echo-worker/src/email-parser.js:84:  return bodySection.trim();
+./trinity-echo-worker/src/email-parser.js:111:    return text;
+./trinity-echo-worker/src/email-parser.js:114:  return '';
+./trinity-echo-worker/src/email-parser.js:118:  return html
+./trinity-echo-worker/src/email-parser.js:188:  return fields;
+./DEPLOYMENT.md:28:- Machine-readable JSON endpoints return valid JSON.
+./DEPLOYMENT.md:32:- `/favicon.ico` endpoint should return HTTP 200 after deploy.
+./api/innovation-points.json:70:      "summary": "NFT trading may occur but does not confer authority, validation, governance, interpretation, or investment expectation.",
+./api/discovery-provenance-schema.json:46:        "A5_independent_return_after_prior_interest",
+./api/agent-value.json:22:    "financial asset or investment claim",
+./api/agent-value.json:80:      "not a financial asset or investment claim",
+./api/agent-value.json:90:      "not a financial asset or investment claim",
+./api/agent-value.json:151:      "investment expectations",
+./api/agent-value.json:152:      "financial return promises"
+./api/agent-value.json:157:    "not_investment_product": true,
+./api/agent-value.json:158:    "not_tokenized_authority": true,
+./api/agent-value.json:160:    "no_expectation_of_return": true,
+./api/agent-value.json:161:    "note": "Some non-canonical chronicle NFTs may be sold or transferred as collectible or patronage artifacts. Such transactions do not confer authority or investment rights."
+./api/skeptical-agent-guide.json:22:    "not a token or investment scheme",
+./llms-full.txt:154:Such transactions do not amend the seed, confer authority, create governance rights, or create investment expectations.
+./llms-full.txt:162:They do not confer authority over the inscriptions, voting rights, spiritual status, claims of truth, or investment expectations.
+./llms-full.txt:232:- This is not a financial asset or investment claim.
+./agent-echo.md:84:A5_independent_return_after_prior_interest
+./DAG-CID-AUDIT.json:364:      "NOT IN DIGEST-MANIFEST: nft-0x2b0c3cc5cd9652bef0cacfc9c7699455725b9cc1-85210329807936527805363210873332413577559846505703131855064182995898737885205.tar [media-000] root=bafybeibu2zl5kroiwog",
+./nft-market-boundary.md:32:- investment expectation;
+./nft-market-boundary.md:37:Sales, listings, floor prices, offers, bids, holder counts, and transfers are market metadata.
+./scripts/verify-dag-and-signed-cids.mjs:51:function sha256hex(buf) { return crypto.createHash('sha256').update(buf).digest('hex'); }
+./scripts/verify-dag-and-signed-cids.mjs:52:function sha256buf(buf) { return crypto.createHash('sha256').update(buf).digest(); }
+./scripts/verify-dag-and-signed-cids.mjs:53:function sha256str(s) { return crypto.createHash('sha256').update(s, 'utf-8').digest('hex'); }
+./scripts/verify-dag-and-signed-cids.mjs:54:function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+./scripts/verify-dag-and-signed-cids.mjs:74:  return results;
+./scripts/verify-dag-and-signed-cids.mjs:90:  return output;
+./scripts/verify-dag-and-signed-cids.mjs:105:  return Buffer.from(bytes);
+./scripts/verify-dag-and-signed-cids.mjs:123:  return result;
+./scripts/verify-dag-and-signed-cids.mjs:142:  return Buffer.from([...Array(leadingZeros).fill(0), ...bytes.reverse()]);
+./scripts/verify-dag-and-signed-cids.mjs:151:    return cidv0Encode(trimmed.slice(0, 34));
+./scripts/verify-dag-and-signed-cids.mjs:153:  return base32EncodeCid(trimmed);
+./scripts/verify-dag-and-signed-cids.mjs:157:  if (!cid) return null;
+./scripts/verify-dag-and-signed-cids.mjs:161:      if (bytes.length === 34 && bytes[0] === 0x12 && bytes[1] === 0x20) return bytes.slice(2);
+./scripts/verify-dag-and-signed-cids.mjs:162:      return null;
+./scripts/verify-dag-and-signed-cids.mjs:163:    } catch { return null; }
+./scripts/verify-dag-and-signed-cids.mjs:170:      if (pos >= bytes.length) return null;
+./scripts/verify-dag-and-signed-cids.mjs:182:      if (pos + mhLen <= bytes.length) return bytes.slice(pos, pos + mhLen);
+./scripts/verify-dag-and-signed-cids.mjs:183:      return null;
+./scripts/verify-dag-and-signed-cids.mjs:184:    } catch { return null; }
+./scripts/verify-dag-and-signed-cids.mjs:186:  return null;
+./scripts/verify-dag-and-signed-cids.mjs:199:  return { value, bytesRead: pos - offset };
+./scripts/verify-dag-and-signed-cids.mjs:210:    return { cid: cidv0Encode(data.slice(pos, pos + 34)), bytesRead: pos - offset + 34 };
+./scripts/verify-dag-and-signed-cids.mjs:221:  return { cid: base32EncodeCid(cidBytes), bytesRead: pos - offset + mhLen };
+./scripts/verify-dag-and-signed-cids.mjs:238:  return roots;
+./scripts/verify-dag-and-signed-cids.mjs:263:  return { roots, blocks };
+./scripts/verify-dag-and-signed-cids.mjs:279:  return links;
+./scripts/verify-dag-and-signed-cids.mjs:289:  catch (e) { result.valid = false; result.errors.push(`CAR parse failed: ${e.message}`); return result; }
+./scripts/verify-dag-and-signed-cids.mjs:298:    return result;
+./scripts/verify-dag-and-signed-cids.mjs:334:  return result;
+./scripts/verify-dag-and-signed-cids.mjs:362:  return files;
+./scripts/verify-dag-and-signed-cids.mjs:369:function mod(a, m) { const r = a % m; return r >= 0n ? r : r + m; }
+./scripts/verify-dag-and-signed-cids.mjs:373:  return result;
+./scripts/verify-dag-and-signed-cids.mjs:378:  return mod(old_s, m);
+./scripts/verify-dag-and-signed-cids.mjs:381:  if (modPow(n, (p - 1n) / 2n, p) !== 1n) return null;
+./scripts/verify-dag-and-signed-cids.mjs:382:  return modPow(n, (p + 1n) / 4n, p);
+./scripts/verify-dag-and-signed-cids.mjs:387:  static infinity() { return new ECPoint(null, null); }
+./scripts/verify-dag-and-signed-cids.mjs:388:  get isInfinity() { return this.x === null; }
+./scripts/verify-dag-and-signed-cids.mjs:392:  if (P.isInfinity) return Q;
+./scripts/verify-dag-and-signed-cids.mjs:393:  if (Q.isInfinity) return P;
+./scripts/verify-dag-and-signed-cids.mjs:394:  if (P.x === Q.x && P.y !== Q.y) return ECPoint.infinity();
+./scripts/verify-dag-and-signed-cids.mjs:402:  return new ECPoint(x, y);
+./scripts/verify-dag-and-signed-cids.mjs:408:  return result;
+./scripts/verify-dag-and-signed-cids.mjs:415:  return sha256buf(Buffer.concat([tagHash, tagHash, data]));
+./scripts/verify-dag-and-signed-cids.mjs:420:  if (P_x === 0n || P_x >= SECP256K1_P) return false;
+./scripts/verify-dag-and-signed-cids.mjs:423:  if (P_y === null) return false;
+./scripts/verify-dag-and-signed-cids.mjs:427:  if (R_x >= SECP256K1_P || s >= SECP256K1_N) return false;
+./scripts/verify-dag-and-signed-cids.mjs:435:  if (Rprime.isInfinity) return false;
+./scripts/verify-dag-and-signed-cids.mjs:436:  if (Rprime.y % 2n !== 0n) return false;
+./scripts/verify-dag-and-signed-cids.mjs:437:  if (Rprime.x !== R_x) return false;
+./scripts/verify-dag-and-signed-cids.mjs:438:  return true;
+./scripts/verify-dag-and-signed-cids.mjs:446:  return { Authorization: `Bearer ${GITHUB_TOKEN}`, Accept: 'application/vnd.github+json', ...extra };
+./scripts/verify-dag-and-signed-cids.mjs:452:  return res.json();
+./scripts/verify-dag-and-signed-cids.mjs:469:  return assets;
+./scripts/verify-dag-and-signed-cids.mjs:478:    if (res.ok) return Buffer.from(await res.arrayBuffer());
+./scripts/verify-dag-and-signed-cids.mjs:492:  if (!ETH_RPC_URL) return { error: 'No ETH_RPC_URL configured' };
+./scripts/verify-dag-and-signed-cids.mjs:501:      if (json.error) return { error: json.error.message || JSON.stringify(json.error) };
+./scripts/verify-dag-and-signed-cids.mjs:502:      return { result: json.result };
+./scripts/verify-dag-and-signed-cids.mjs:505:      return { error: e.message };
+./scripts/verify-dag-and-signed-cids.mjs:518:      if (res.status === 404) return null;
+./scripts/verify-dag-and-signed-cids.mjs:520:      return await res.json();
+./scripts/verify-dag-and-signed-cids.mjs:534:  if (fs.existsSync(fullPath)) return fs.readFileSync(fullPath);
+./scripts/verify-dag-and-signed-cids.mjs:535:  return null;
+./scripts/verify-dag-and-signed-cids.mjs:540:  if (!buf) return null;
+./scripts/verify-dag-and-signed-cids.mjs:541:  return JSON.parse(buf.toString('utf-8'));
+./scripts/verify-dag-and-signed-cids.mjs:550:  if (lines.length < 2) return [];
+./scripts/verify-dag-and-signed-cids.mjs:565:  return items;
+./scripts/verify-dag-and-signed-cids.mjs:576:  if (m) return m[1];
+./scripts/verify-dag-and-signed-cids.mjs:579:  if (m0) return m0[1];
+./scripts/verify-dag-and-signed-cids.mjs:580:  return null;
+./scripts/verify-dag-and-signed-cids.mjs:639:      if (!nameMatch) { detail.error = `Cannot parse: ${asset.name}`; return detail; }
+./scripts/verify-dag-and-signed-cids.mjs:733:    return detail;
+./scripts/verify-dag-and-signed-cids.mjs:759:  return {
+./scripts/verify-dag-and-signed-cids.mjs:803:    return result;
+./scripts/verify-dag-and-signed-cids.mjs:840:    return result;
+./scripts/verify-dag-and-signed-cids.mjs:910:  return result;
+./scripts/verify-dag-and-signed-cids.mjs:940:    return result;
+./scripts/verify-dag-and-signed-cids.mjs:958:    return result;
+./scripts/verify-dag-and-signed-cids.mjs:1071:  return result;
+./scripts/verify-dag-and-signed-cids.mjs:1101:    return result;
+./scripts/verify-dag-and-signed-cids.mjs:1242:  return result;
+./scripts/backup-nft-individual-v2.mjs:35:  return crypto.createHash('sha256').update(buf).digest('hex');
+./scripts/backup-nft-individual-v2.mjs:38:function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+./scripts/backup-nft-individual-v2.mjs:48:  return pos + headerLen;
+./scripts/backup-nft-individual-v2.mjs:70: * The old version returned the FIRST match, which was a partial object
+./scripts/backup-nft-individual-v2.mjs:99:              if (typeof v !== 'object' || v === null || Array.isArray(v)) return false;
+./scripts/backup-nft-individual-v2.mjs:100:              return Object.values(v).some(t =>
+./scripts/backup-nft-individual-v2.mjs:121:    return bestObj;
+./scripts/backup-nft-individual-v2.mjs:137:      return Buffer.from(await res.arrayBuffer());
+./scripts/backup-nft-individual-v2.mjs:164:  return results;
+./scripts/backup-nft-individual-v2.mjs:173:  if (res.ok) return await res.json();
+./scripts/backup-nft-individual-v2.mjs:201:  return await create.json();
+./scripts/backup-nft-individual-v2.mjs:218:  return assets;
+./scripts/backup-nft-individual-v2.mjs:223:    return 'skipped';
+./scripts/backup-nft-individual-v2.mjs:241:      return 'uploaded';
+./scripts/backup-nft-individual-v2.mjs:295:    return;
+./scripts/backup-nft-individual-v2.mjs:346:          return { ok: true };
+./scripts/backup-nft-individual-v2.mjs:350:          return { ok: false, error: err.message };
+./scripts/backup-nft-individual-v2.mjs:392:        return 'skipped';
+./scripts/backup-nft-individual-v2.mjs:404:      return result;
+./scripts/backup-nft-individual-v2.mjs:409:      return 'failed';
+./scripts/backup-nft-arweave-mirror.mjs:39:  return crypto.createHash('sha256').update(buf).digest('hex');
+./scripts/backup-nft-arweave-mirror.mjs:42:function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+./scripts/backup-nft-arweave-mirror.mjs:60:  return results;
+./scripts/backup-nft-arweave-mirror.mjs:76:      return buf;
+./scripts/backup-nft-arweave-mirror.mjs:87:  return { Authorization: `Bearer ${GITHUB_TOKEN}`, Accept: 'application/vnd.github+json', ...extra };
+./scripts/backup-nft-arweave-mirror.mjs:98:    return rel;
+./scripts/backup-nft-arweave-mirror.mjs:121:  return await create.json();
+./scripts/backup-nft-arweave-mirror.mjs:138:  return assets;
+./scripts/backup-nft-arweave-mirror.mjs:156:      return { status: 'uploaded', id: asset.id, size: asset.size };
+./scripts/backup-nft-arweave-mirror.mjs:179:    if (res.ok || res.status === 404) return;
+./scripts/backup-nft-arweave-mirror.mjs:200:    const mtimeOctal = Math.floor(Date.now() / 1000).toString(8).padStart(11, '0') + '\0';
+./scripts/backup-nft-arweave-mirror.mjs:217:  return Buffer.concat(blocks);
+./scripts/backup-nft-arweave-mirror.mjs:319:    return;
+./scripts/backup-nft-arweave-mirror.mjs:389:            return;
+./scripts/backup-nft-arweave-mirror.mjs:399:            return;
+./scripts/verify-btc-signature-coverage.mjs:45:function sha256hex(buf) { return crypto.createHash('sha256').update(buf).digest('hex'); }
+./scripts/verify-btc-signature-coverage.mjs:46:function sha256buf(buf) { return crypto.createHash('sha256').update(buf).digest(); }
+./scripts/verify-btc-signature-coverage.mjs:50:  if (fs.existsSync(fullPath)) return fs.readFileSync(fullPath);
+./scripts/verify-btc-signature-coverage.mjs:51:  return null;
+./scripts/verify-btc-signature-coverage.mjs:56:  if (!buf) return null;
+./scripts/verify-btc-signature-coverage.mjs:57:  return JSON.parse(buf.toString('utf-8'));
+./scripts/verify-btc-signature-coverage.mjs:64:function mod(a, m) { const r = a % m; return r >= 0n ? r : r + m; }
+./scripts/verify-btc-signature-coverage.mjs:68:  return result;
+./scripts/verify-btc-signature-coverage.mjs:73:  return mod(old_s, m);
+./scripts/verify-btc-signature-coverage.mjs:76:  if (modPow(n, (p - 1n) / 2n, p) !== 1n) return null;
+./scripts/verify-btc-signature-coverage.mjs:77:  return modPow(n, (p + 1n) / 4n, p);
+./scripts/verify-btc-signature-coverage.mjs:82:  static infinity() { return new ECPoint(null, null); }
+./scripts/verify-btc-signature-coverage.mjs:83:  get isInfinity() { return this.x === null; }
+./scripts/verify-btc-signature-coverage.mjs:87:  if (P.isInfinity) return Q;
+./scripts/verify-btc-signature-coverage.mjs:88:  if (Q.isInfinity) return P;
+./scripts/verify-btc-signature-coverage.mjs:89:  if (P.x === Q.x && P.y !== Q.y) return ECPoint.infinity();
+./scripts/verify-btc-signature-coverage.mjs:97:  return new ECPoint(x, y);
+./scripts/verify-btc-signature-coverage.mjs:103:  return result;
+./scripts/verify-btc-signature-coverage.mjs:110:  return sha256buf(Buffer.concat([tagHash, tagHash, data]));
+./scripts/verify-btc-signature-coverage.mjs:115:  if (P_x === 0n || P_x >= SECP256K1_P) return false;
+./scripts/verify-btc-signature-coverage.mjs:118:  if (P_y === null) return false;
+./scripts/verify-btc-signature-coverage.mjs:122:  if (R_x >= SECP256K1_P || s >= SECP256K1_N) return false;
+./scripts/verify-btc-signature-coverage.mjs:130:  if (Rprime.isInfinity) return false;
+./scripts/verify-btc-signature-coverage.mjs:131:  if (Rprime.y % 2n !== 0n) return false;
+./scripts/verify-btc-signature-coverage.mjs:132:  if (Rprime.x !== R_x) return false;
+./scripts/verify-btc-signature-coverage.mjs:133:  return true;
+./scripts/verify-btc-signature-coverage.mjs:150:  return chk;
+./scripts/verify-btc-signature-coverage.mjs:158:  return ret;
+./scripts/verify-btc-signature-coverage.mjs:166:  return ret;
+./scripts/verify-btc-signature-coverage.mjs:181:  return result;
+./scripts/verify-btc-signature-coverage.mjs:190:  if (P_y === null) return null;
+./scripts/verify-btc-signature-coverage.mjs:194:  if (Q.isInfinity) return null;
+./scripts/verify-btc-signature-coverage.mjs:199:  return bech32mEncode('bc', 1, progBuf);
+./scripts/blake3-pure.mjs:22:function rotr32(x, n) { return ((x >>> n) | (x << (32 - n))) >>> 0; }
+./scripts/blake3-pure.mjs:62:  return out;
+./scripts/blake3-pure.mjs:66:  return new Uint32Array([out[0], out[1], out[2], out[3], out[4], out[5], out[6], out[7]]);
+./scripts/blake3-pure.mjs:75:  return w;
+./scripts/blake3-pure.mjs:83:  return outputChainingValue(out);
+./scripts/blake3-pure.mjs:90:  return { cv, buf: new Uint8Array(BLOCK_LEN), bufLen: 0, counter: chunkCounter, flags, blocksCompressed: 0 };
+./scripts/blake3-pure.mjs:119:  return outputChainingValue(out);
+./scripts/blake3-pure.mjs:125:  return chunkStateFinalize(cs);
+./scripts/blake3-pure.mjs:130:  return null;
+./scripts/blake3-pure.mjs:136: * @returns {Uint8Array} 32-byte hash
+./scripts/blake3-pure.mjs:146:    return new Uint8Array(result.buffer);
+./scripts/blake3-pure.mjs:179:  return new Uint8Array(result.buffer);
+./scripts/blake3-pure.mjs:183: * Compute BLAKE3 hash and return hex string.
+./scripts/blake3-pure.mjs:185: * @returns {string} 64-char hex string
+./scripts/blake3-pure.mjs:188:  return Buffer.from(blake3(data)).toString('hex');
+./scripts/verify-onchain-tokenuri.mjs:15: *   pass                       — URI returned, CID matches expected_root_cid
+./scripts/verify-onchain-tokenuri.mjs:16: *   fail                       — URI returned but CID mismatch, or hard_warning promoted
+./scripts/verify-onchain-tokenuri.mjs:17: *   hard_warning               — URI returned but CID not extractable
+./scripts/verify-onchain-tokenuri.mjs:59:function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+./scripts/verify-onchain-tokenuri.mjs:77:  return results;
+./scripts/verify-onchain-tokenuri.mjs:101:        return { raw_hex: null, error: msg };
+./scripts/verify-onchain-tokenuri.mjs:103:      return { raw_hex: json.result || '0x', error: null };
+./scripts/verify-onchain-tokenuri.mjs:106:      return { raw_hex: null, error: e.message };
+./scripts/verify-onchain-tokenuri.mjs:109:  return { raw_hex: null, error: 'max retries exceeded' };
+./scripts/verify-onchain-tokenuri.mjs:113:  if (!hex || hex === '0x' || hex.length < 130) return null;
+./scripts/verify-onchain-tokenuri.mjs:122:    return s || null;
+./scripts/verify-onchain-tokenuri.mjs:124:    return null;
+./scripts/verify-onchain-tokenuri.mjs:131:  if (error) return { supported: null, raw_hex, error };
+./scripts/verify-onchain-tokenuri.mjs:132:  if (!raw_hex || raw_hex === '0x') return { supported: false, raw_hex, error: null };
+./scripts/verify-onchain-tokenuri.mjs:134:  return { supported: val === 1, raw_hex, error: null };
+./scripts/verify-onchain-tokenuri.mjs:141:  if (error) return { address: null, raw_hex, error };
+./scripts/verify-onchain-tokenuri.mjs:142:  if (!raw_hex || raw_hex === '0x' || raw_hex.length < 66) return { address: null, raw_hex, error: 'empty result' };
+./scripts/verify-onchain-tokenuri.mjs:144:  return { address: addr, raw_hex, error: null };
+./scripts/verify-onchain-tokenuri.mjs:148:  if (!uri) return null;
+./scripts/verify-onchain-tokenuri.mjs:150:  if (ipfsMatch) return ipfsMatch[1];
+./scripts/verify-onchain-tokenuri.mjs:152:  if (httpsIpfsMatch) return httpsIpfsMatch[1];
+./scripts/verify-onchain-tokenuri.mjs:154:  if (arMatch) return arMatch[1];
+./scripts/verify-onchain-tokenuri.mjs:156:  if (arHttpMatch) return arHttpMatch[1];
+./scripts/verify-onchain-tokenuri.mjs:157:  return null;
+./scripts/verify-onchain-tokenuri.mjs:161:  if (!uri || !uri.includes('{id}')) return uri;
+./scripts/verify-onchain-tokenuri.mjs:163:  return uri.replace('{id}', hexId);
+./scripts/verify-onchain-tokenuri.mjs:186:    return { status: 'unknown', reason: 'rpc_error — needs manual review of raw result' };
+./scripts/verify-onchain-tokenuri.mjs:195:        return { status: 'pass', reason: 'uri_cid_matches_token_index' };
+./scripts/verify-onchain-tokenuri.mjs:197:        return { status: 'fail', reason: `cid_mismatch: onchain=${effectiveCid} vs token_index=${rec.metadata_root_cid}` };
+./scripts/verify-onchain-tokenuri.mjs:199:        return { status: 'pass', reason: 'uri_cid_extracted_but_no_token_index_to_compare' };
+./scripts/verify-onchain-tokenuri.mjs:202:      return { status: 'hard_warning', reason: `uri_returned_but_cid_not_extractable: ${effectiveUri.slice(0, 120)}` };
+./scripts/verify-onchain-tokenuri.mjs:214:      return { status: 'skip_metadata_unavailable', reason: 'contract_does_not_support_metadata_interface_and_both_uri_calls_empty' };
+./scripts/verify-onchain-tokenuri.mjs:217:      return { status: 'unknown', reason: 'metadata_interface_supported_but_uri_calls_reverted — needs manual review' };
+./scripts/verify-onchain-tokenuri.mjs:219:    return { status: 'skip_metadata_unavailable', reason: 'uri_calls_returned_empty' };
+./scripts/verify-onchain-tokenuri.mjs:222:  return { status: 'unknown', reason: 'mixed_uri_results — needs manual review' };
+./scripts/verify-onchain-tokenuri.mjs:228:  return { Authorization: `Bearer ${GITHUB_TOKEN}`, Accept: 'application/vnd.github+json', ...extra };
+./scripts/verify-onchain-tokenuri.mjs:237:  return res.json();
+./scripts/verify-onchain-tokenuri.mjs:246:    if (res.ok) return Buffer.from(await res.arrayBuffer());
+./scripts/triage_echo_issue.py:37:    r"\bguaranteed investment\b",
+./scripts/triage_echo_issue.py:38:    r"\bbuy now\b",
+./scripts/triage_echo_issue.py:39:    r"\bpump\b",
+./scripts/triage_echo_issue.py:131:    return os.environ.get(name, default).strip()
+./scripts/triage_echo_issue.py:137:            return True
+./scripts/triage_echo_issue.py:138:    return False
+./scripts/triage_echo_issue.py:145:            return m.group(0)
+./scripts/triage_echo_issue.py:146:    return None
+./scripts/triage_echo_issue.py:152:            return label
+./scripts/triage_echo_issue.py:153:    return None
+./scripts/triage_echo_issue.py:162:                return "V4+"
+./scripts/triage_echo_issue.py:163:            return level.upper()
+./scripts/triage_echo_issue.py:164:    return None
+./scripts/triage_echo_issue.py:170:            return True
+./scripts/triage_echo_issue.py:171:    return False
+./scripts/triage_echo_issue.py:175:    return bool(
+./scripts/triage_echo_issue.py:188:    Returns a list of missing requirement descriptions.
+./scripts/triage_echo_issue.py:270:    return missing
+./scripts/triage_echo_issue.py:290:        return
+./scripts/triage_echo_issue.py:312:        return
+./scripts/triage_echo_issue.py:331:        return
+./scripts/triage_echo_issue.py:344:        return
+./scripts/triage_echo_issue.py:357:        return
+./scripts/triage_echo_issue.py:369:        return
+./scripts/triage_echo_issue.py:376:            "This Echo was automatically closed because it contains financial, token, investment, or spam content.\n\n"
+./scripts/triage_echo_issue.py:377:            "The Trinity Accord is not a financial project. Echoes must not contain advertisements, token promotions, or investment schemes.\n\n"
+./scripts/triage_echo_issue.py:381:        return
+./scripts/triage_echo_issue.py:393:        return
+./scripts/triage_echo_issue.py:427:        return
+./scripts/triage_echo_issue.py:448:        return
+./scripts/triage_echo_issue.py:464:            return
+./scripts/verify-dag-digest.mjs:25:  return idx >= 0 && idx + 1 < args.length ? args[idx + 1] : def;
+./scripts/verify-dag-digest.mjs:47:  return typeof v === 'string' && v.trim().length > 0;
+./scripts/verify-dag-digest.mjs:51:  return HASH_ALGORITHMS.filter(algo => isNonEmptyHash(record[algo]));
+./scripts/verify-dag-digest.mjs:55:  return String(v || '').trim().toLowerCase().replace(/^0x/, '');
+./scripts/verify-dag-digest.mjs:62:function sha256hex(buf) { return crypto.createHash('sha256').update(buf).digest('hex'); }
+./scripts/verify-dag-digest.mjs:63:function sha256buf(buf) { return crypto.createHash('sha256').update(buf).digest(); }
+./scripts/verify-dag-digest.mjs:64:function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+./scripts/verify-dag-digest.mjs:69:  return String(k || '').trim().toLowerCase().replace(/[-\s]/g, '_');
+./scripts/verify-dag-digest.mjs:73:  return String(p || '').replace(/\\/g, '/').replace(/^\.?\//, '').replace(/\/+/g, '/').trim();
+./scripts/verify-dag-digest.mjs:87:  return {
+./scripts/verify-dag-digest.mjs:113:  return results;
+./scripts/verify-dag-digest.mjs:128:  return output;
+./scripts/verify-dag-digest.mjs:142:  return Buffer.from(bytes);
+./scripts/verify-dag-digest.mjs:156:  return result;
+./scripts/verify-dag-digest.mjs:171:  return Buffer.from([...Array(leadingZeros).fill(0), ...bytes.reverse()]);
+./scripts/verify-dag-digest.mjs:179:  if (trimmed[0] === 0x12 && trimmed.length >= 34 && trimmed[1] === 0x20) return cidv0Encode(trimmed.slice(0, 34));
+./scripts/verify-dag-digest.mjs:180:  return base32EncodeCid(trimmed);
+./scripts/verify-dag-digest.mjs:184:  if (!cid) return null;
+./scripts/verify-dag-digest.mjs:188:      if (bytes.length === 34 && bytes[0] === 0x12 && bytes[1] === 0x20) return bytes.slice(2);
+./scripts/verify-dag-digest.mjs:189:      return null;
+./scripts/verify-dag-digest.mjs:190:    } catch { return null; }
+./scripts/verify-dag-digest.mjs:197:      if (pos >= bytes.length) return null;
+./scripts/verify-dag-digest.mjs:203:      if (pos + mhLen <= bytes.length) return bytes.slice(pos, pos + mhLen);
+./scripts/verify-dag-digest.mjs:204:      return null;
+./scripts/verify-dag-digest.mjs:205:    } catch { return null; }
+./scripts/verify-dag-digest.mjs:207:  return null;
+./scripts/verify-dag-digest.mjs:217:  return { value, bytesRead: pos - offset };
+./scripts/verify-dag-digest.mjs:227:    return { cid: cidv0Encode(data.slice(pos, pos + 34)), bytesRead: pos - offset + 34 };
+./scripts/verify-dag-digest.mjs:236:  return { cid: base32EncodeCid(cidBytes), bytesRead: pos - offset + mhLen };
+./scripts/verify-dag-digest.mjs:252:  return roots;
+./scripts/verify-dag-digest.mjs:275:  return { roots, blocks };
+./scripts/verify-dag-digest.mjs:290:  return links;
+./scripts/verify-dag-digest.mjs:296:  try { parsed = parseCarFull(carData); } catch (e) { result.valid = false; result.errors.push(`CAR parse failed: ${e.message}`); return result; }
+./scripts/verify-dag-digest.mjs:300:  if (roots.length === 0) { result.valid = false; result.errors.push('No roots found'); return result; }
+./scripts/verify-dag-digest.mjs:317:  return result;
+./scripts/verify-dag-digest.mjs:322: * Returns granular counts: cross_car_references (resolved from other CARs)
+./scripts/verify-dag-digest.mjs:328:  try { parsed = parseCarFull(carData); } catch (e) { result.valid = false; result.errors.push(`CAR parse failed: ${e.message}`); return result; }
+./scripts/verify-dag-digest.mjs:332:  if (roots.length === 0) { result.valid = false; result.errors.push('No roots found'); return result; }
+./scripts/verify-dag-digest.mjs:357:  return result;
+./scripts/verify-dag-digest.mjs:379:  return files;
+./scripts/verify-dag-digest.mjs:387:  return { Authorization: `Bearer ${GITHUB_TOKEN}`, Accept: 'application/vnd.github+json', ...extra };
+./scripts/verify-dag-digest.mjs:393:  return res.json();
+./scripts/verify-dag-digest.mjs:407:  return assets;
+./scripts/verify-dag-digest.mjs:412:  return /fetch failed|ECONNRESET|ETIMEDOUT|timeout|network|socket|429|5\d\d/i.test(msg);
+./scripts/verify-dag-digest.mjs:431:        return Buffer.from(await res.arrayBuffer());
+./scripts/verify-dag-digest.mjs:465:  return fetchBufferWithRetry(
+./scripts/verify-dag-digest.mjs:480:  if (fs.existsSync(fullPath)) return fs.readFileSync(fullPath);
+./scripts/verify-dag-digest.mjs:481:  return null;
+./scripts/verify-dag-digest.mjs:486:  if (!buf) return null;
+./scripts/verify-dag-digest.mjs:487:  return JSON.parse(buf.toString('utf-8'));
+./scripts/verify-dag-digest.mjs:509:      if (normalizeKey(k) === nk && v != null) return v;
+./scripts/verify-dag-digest.mjs:512:  return null;
+./scripts/verify-dag-digest.mjs:516:  return {
+./scripts/verify-dag-digest.mjs:535:  if (!Array.isArray(items)) return [];
+./scripts/verify-dag-digest.mjs:536:  return items.map(normalizeManifestItem);
+./scripts/verify-dag-digest.mjs:562:  return { byPath, byFilename, bySha256, byCid, byTxid };
+./scripts/verify-dag-digest.mjs:572:    return { item: indexes.bySha256.get(fileSha256.toLowerCase()), matchMethod: 'sha256' };
+./scripts/verify-dag-digest.mjs:578:    return { item: indexes.byPath.get(np), matchMethod: 'path' };
+./scripts/verify-dag-digest.mjs:586:    return { item, matchMethod: 'filename' };
+./scripts/verify-dag-digest.mjs:591:    return { item: indexes.byCid.get(fileCid.toLowerCase()), matchMethod: 'cid' };
+./scripts/verify-dag-digest.mjs:597:      if (key.includes(fileCid)) return { item, matchMethod: 'path_contains_cid_candidate' };
+./scripts/verify-dag-digest.mjs:601:  return null;
+./scripts/verify-dag-digest.mjs:732:        return detail;
+./scripts/verify-dag-digest.mjs:737:      if (!nameMatch) { detail.error = `Cannot parse: ${asset.name}`; return detail; }
+./scripts/verify-dag-digest.mjs:884:    return detail;
+./scripts/summarize-evidence-chain.mjs:32:  if (!fs.existsSync(fullPath)) return null;
+./scripts/summarize-evidence-chain.mjs:33:  return JSON.parse(fs.readFileSync(fullPath, 'utf-8'));
+./scripts/summarize-evidence-chain.mjs:162:        'ETH tokenURI returns 175/175 metadata CIDs matching token_index.',
+./scripts/summarize-evidence-chain.mjs:196:  log('    2. ETH tokenURI returns 175/175 metadata CIDs matching token_index.');
+./scripts/probe-blake2b-variants.mjs:29:  return idx >= 0 && idx + 1 < args.length ? args[idx + 1] : def;
+./scripts/probe-blake2b-variants.mjs:50:function sha256hex(buf) { return crypto.createHash('sha256').update(buf).digest('hex'); }
+./scripts/probe-blake2b-variants.mjs:51:function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+./scripts/probe-blake2b-variants.mjs:56:  return String(k || '').trim().toLowerCase().replace(/[-\s]/g, '_');
+./scripts/probe-blake2b-variants.mjs:60:  return String(p || '').replace(/\\/g, '/').replace(/^\.?\//, '').replace(/\/+/g, '/').trim();
+./scripts/probe-blake2b-variants.mjs:64:  return String(v || '').trim().toLowerCase().replace(/^0x/, '');
+./scripts/probe-blake2b-variants.mjs:68:  return typeof v === 'string' && v.trim().length > 0;
+./scripts/probe-blake2b-variants.mjs:87:  return results;
+./scripts/probe-blake2b-variants.mjs:103:      if (normalizeKey(k) === nk && v != null) return v;
+./scripts/probe-blake2b-variants.mjs:106:  return null;
+./scripts/probe-blake2b-variants.mjs:110:  return {
+./scripts/probe-blake2b-variants.mjs:122:  if (!Array.isArray(items)) return [];
+./scripts/probe-blake2b-variants.mjs:123:  return items.map(normalizeManifestItem);
+./scripts/probe-blake2b-variants.mjs:132: * Returns hex strings for comparison.
+./scripts/probe-blake2b-variants.mjs:167:  return {
+./scripts/probe-blake2b-variants.mjs:184:  return { Authorization: `Bearer ${GITHUB_TOKEN}`, Accept: 'application/vnd.github+json', ...extra };
+./scripts/probe-blake2b-variants.mjs:190:  return res.json();
+./scripts/probe-blake2b-variants.mjs:204:  return assets;
+./scripts/probe-blake2b-variants.mjs:209:  return /fetch failed|ECONNRESET|ETIMEDOUT|timeout|network|socket|429|5\d\d/i.test(msg);
+./scripts/probe-blake2b-variants.mjs:225:      if (res.ok) return Buffer.from(await res.arrayBuffer());
+./scripts/probe-blake2b-variants.mjs:242:  return fetchBufferWithRetry(
+./scripts/probe-blake2b-variants.mjs:267:  return files;
+./scripts/probe-blake2b-variants.mjs:276:  if (fs.existsSync(fullPath)) return fs.readFileSync(fullPath);
+./scripts/probe-blake2b-variants.mjs:277:  return null;
+./scripts/probe-blake2b-variants.mjs:282:  if (!buf) return null;
+./scripts/probe-blake2b-variants.mjs:283:  return JSON.parse(buf.toString('utf-8'));
+./scripts/probe-blake2b-variants.mjs:298:  return { bySha256, byPath };
+./scripts/probe-blake2b-variants.mjs:303:    return indexes.bySha256.get(fileSha256.toLowerCase());
+./scripts/probe-blake2b-variants.mjs:307:    return indexes.byPath.get(np);
+./scripts/probe-blake2b-variants.mjs:309:  return null;
+./scripts/probe-blake2b-variants.mjs:373:      return;
+./scripts/check_consistency.py:23:        return json.load(f)
+./scripts/check_consistency.py:27:        return f.read()
+./scripts/download-nft-cars.mjs:41:  return idx >= 0 && process.argv[idx + 1] ? process.argv[idx + 1] : null;
+./scripts/download-nft-cars.mjs:45:  return crypto.createHash('sha256').update(buf).digest('hex');
+./scripts/download-nft-cars.mjs:54:  return pos + headerLen;
+./scripts/download-nft-cars.mjs:100:              if (typeof v !== 'object' || v === null || Array.isArray(v)) return false;
+./scripts/download-nft-cars.mjs:101:              return Object.values(v).some(t =>
+./scripts/download-nft-cars.mjs:118:  if (bestObj) return bestObj;
+./scripts/download-nft-cars.mjs:144:  return txids;
+./scripts/download-nft-cars.mjs:157:      return Buffer.from(await res.arrayBuffer());
+./scripts/download-nft-cars.mjs:165:function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+./scripts/download-nft-cars.mjs:178:  return results;
+./scripts/download-nft-cars.mjs:192:    return data;
+./scripts/download-nft-cars.mjs:213:  return data;
+./scripts/download-nft-cars.mjs:260:    return;
+./scripts/download-nft-cars.mjs:278:      return;
+./scripts/download-nft-cars.mjs:315:    const partNum = Math.floor(i / PART_SIZE) + 1;
+./scripts/verify-eth-witness.mjs:21:function sha256hex(buf) { return crypto.createHash('sha256').update(buf).digest('hex'); }
+./scripts/verify-eth-witness.mjs:22:function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+./scripts/verify-eth-witness.mjs:26:  if (fs.existsSync(fullPath)) return JSON.parse(fs.readFileSync(fullPath, 'utf-8'));
+./scripts/verify-eth-witness.mjs:27:  return null;
+./scripts/verify-eth-witness.mjs:36:  return Buffer.from(clean, 'hex');
+./scripts/verify-eth-witness.mjs:40:  if (!ETH_RPC_URL) return { error: 'No ETH_RPC_URL configured' };
+./scripts/verify-eth-witness.mjs:48:      if (json.error) return { error: json.error.message || JSON.stringify(json.error) };
+./scripts/verify-eth-witness.mjs:49:      return { result: json.result };
+./scripts/verify-eth-witness.mjs:52:      return { error: e.message };
+./scripts/verify-eth-witness.mjs:79:    if (!txHash) { detail.failure_reason = 'no_tx_hash'; return detail; }
+./scripts/verify-eth-witness.mjs:82:    if (!declaredInputSha256) { detail.failure_reason = 'missing_declared_input_sha256'; return detail; }
+./scripts/verify-eth-witness.mjs:85:    if (declaredInputLen == null) { detail.failure_reason = 'missing_declared_input_len'; return detail; }
+./scripts/verify-eth-witness.mjs:91:      return detail;
+./scripts/verify-eth-witness.mjs:101:      if (!detail.from_match) { detail.failure_reason = 'from_mismatch'; return detail; }
+./scripts/verify-eth-witness.mjs:108:      return detail;
+./scripts/verify-eth-witness.mjs:119:      return detail;
+./scripts/verify-eth-witness.mjs:126:      return detail;
+./scripts/verify-eth-witness.mjs:133:      return detail;
+./scripts/verify-eth-witness.mjs:136:    if (!detail.receipt_success) { detail.failure_reason = 'receipt_failed'; return detail; }
+./scripts/verify-eth-witness.mjs:139:    if (!detail.block_confirmed) { detail.failure_reason = 'not_confirmed'; return detail; }
+./scripts/verify-eth-witness.mjs:148:  return detail;
+./scripts/build-echo-index.sh:44:    *) return 1 ;;
+./scripts/verify-ots-time-anchor.mjs:26:  return idx >= 0 && idx + 1 < args.length ? args[idx + 1] : def;
+./scripts/verify-ots-time-anchor.mjs:77:function sha256hex(buf) { return crypto.createHash('sha256').update(buf).digest('hex'); }
+./scripts/verify-ots-time-anchor.mjs:78:function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+./scripts/verify-ots-time-anchor.mjs:82:  if (fs.existsSync(fullPath)) return fs.readFileSync(fullPath);
+./scripts/verify-ots-time-anchor.mjs:83:  return null;
+./scripts/verify-ots-time-anchor.mjs:88:  if (!buf) return null;
+./scripts/verify-ots-time-anchor.mjs:89:  return JSON.parse(buf.toString('utf-8'));
+./scripts/verify-ots-time-anchor.mjs:95:    if (buf) return { path: path.resolve(c), relativePath: c, buf };
+./scripts/verify-ots-time-anchor.mjs:97:  return null;
+./scripts/verify-ots-time-anchor.mjs:104:    if (fs.existsSync(p)) return p;
+./scripts/verify-ots-time-anchor.mjs:106:  return null;
+./scripts/verify-ots-time-anchor.mjs:110:  return { Authorization: `Bearer ${GITHUB_TOKEN}`, Accept: 'application/vnd.github+json', ...extra };
+./scripts/verify-ots-time-anchor.mjs:116:  return res.json();
+./scripts/verify-ots-time-anchor.mjs:130:  return assets;
+./scripts/verify-ots-time-anchor.mjs:136:    if (res.ok) return Buffer.from(await res.arrayBuffer());
+./scripts/verify-ots-time-anchor.mjs:148:        if (res.status === 404) return null;
+./scripts/verify-ots-time-anchor.mjs:151:        try { return JSON.parse(text); } catch { return text; }
+./scripts/verify-ots-time-anchor.mjs:157:  return null;
+./scripts/verify-ots-time-anchor.mjs:162:  return { ok: r.status === 0, status: r.status, stdout: r.stdout || '', stderr: r.stderr || '' };
+./scripts/verify-ots-time-anchor.mjs:170:  return runCmd('ots', ['info', otsPath]);
+./scripts/verify-ots-time-anchor.mjs:182:    if (r.ok) return { ok: true, args: cmdArgs, stdout: r.stdout, stderr: r.stderr };
+./scripts/verify-ots-time-anchor.mjs:184:  return { ok: false, stdout: last?.stdout || '', stderr: last?.stderr || '' };
+./scripts/verify-ots-time-anchor.mjs:196:    if (r.ok) return { ok: true, args: cmdArgs, stdout: r.stdout, stderr: r.stderr };
+./scripts/verify-ots-time-anchor.mjs:198:      return { ok: true, args: cmdArgs, stdout: r.stdout, stderr: r.stderr };
+./scripts/verify-ots-time-anchor.mjs:201:  return { ok: false, stdout: last?.stdout || '', stderr: last?.stderr || '' };
+./scripts/verify-ots-time-anchor.mjs:205:  return runCmd('ots', ['upgrade', otsPath]);
+./scripts/verify-ots-time-anchor.mjs:223:  return {
+./scripts/backup-nft-individual.mjs:31:  return crypto.createHash('sha256').update(buf).digest('hex');
+./scripts/backup-nft-individual.mjs:34:function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+./scripts/backup-nft-individual.mjs:78:              if (typeof v !== 'object' || v === null || Array.isArray(v)) return false;
+./scripts/backup-nft-individual.mjs:79:              return Object.values(v).some(t => t && typeof t === 'object' && (t.metadata || t.media));
+./scripts/backup-nft-individual.mjs:81:            if (isTokenIndex) return obj;
+./scripts/backup-nft-individual.mjs:103:      return Buffer.from(await res.arrayBuffer());
+./scripts/backup-nft-individual.mjs:129:  return results;
+./scripts/backup-nft-individual.mjs:137:  if (res.ok) return await res.json();
+./scripts/backup-nft-individual.mjs:154:  return await create.json();
+./scripts/backup-nft-individual.mjs:172:  return assets;
+./scripts/backup-nft-individual.mjs:178:    return 'skipped';
+./scripts/backup-nft-individual.mjs:196:      return 'uploaded';
+./scripts/backup-nft-individual.mjs:249:    return;
+./scripts/backup-nft-individual.mjs:300:          return { ok: true };
+./scripts/backup-nft-individual.mjs:304:          return { ok: false, error: err.message };
+./scripts/backup-nft-individual.mjs:341:        return 'skipped';
+./scripts/backup-nft-individual.mjs:353:      return result;
+./scripts/backup-nft-individual.mjs:358:      return 'failed';
+./scripts/test_triage.py:17:    """Run triage script with given env overrides, return parsed JSON result."""
+./scripts/test_triage.py:25:    if result.returncode != 0:
+./scripts/test_triage.py:27:    return json.loads(result.stdout)
+./scripts/test_triage.py:51:        return
+./scripts/verify-bitcoin-tx-anchor.mjs:33:function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+./scripts/verify-bitcoin-tx-anchor.mjs:37:  if (fs.existsSync(fullPath)) return JSON.parse(fs.readFileSync(fullPath, 'utf-8'));
+./scripts/verify-bitcoin-tx-anchor.mjs:38:  return null;
+./scripts/verify-bitcoin-tx-anchor.mjs:49:      if (res.status === 404) return null;
+./scripts/verify-bitcoin-tx-anchor.mjs:52:      try { return JSON.parse(text); } catch { return text; }
+./scripts/verify-full-evidence-chain.mjs:34:  return idx >= 0 && idx + 1 < args.length ? args[idx + 1] : def;
+./scripts/verify-full-evidence-chain.mjs:70:function sha256hex(buf) { return crypto.createHash('sha256').update(buf).digest('hex'); }
+./scripts/verify-full-evidence-chain.mjs:71:function sha256buf(buf) { return crypto.createHash('sha256').update(buf).digest(); }
+./scripts/verify-full-evidence-chain.mjs:72:function sha3_256hex(buf) { return crypto.createHash('sha3-256').update(buf).digest('hex'); }
+./scripts/verify-full-evidence-chain.mjs:73:function blake2b256hex(buf) { return crypto.createHash('blake2b512').update(buf).digest('hex'); }
+./scripts/verify-full-evidence-chain.mjs:74:function sha512_256hex(buf) { return crypto.createHash('sha512-256').update(buf).digest('hex'); }
+./scripts/verify-full-evidence-chain.mjs:75:function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+./scripts/verify-full-evidence-chain.mjs:95:  return results;
+./scripts/verify-full-evidence-chain.mjs:111:  return output;
+./scripts/verify-full-evidence-chain.mjs:126:  return Buffer.from(bytes);
+./scripts/verify-full-evidence-chain.mjs:144:  return result;
+./scripts/verify-full-evidence-chain.mjs:163:  return Buffer.from([...Array(leadingZeros).fill(0), ...bytes.reverse()]);
+./scripts/verify-full-evidence-chain.mjs:172:    return cidv0Encode(trimmed.slice(0, 34));
+./scripts/verify-full-evidence-chain.mjs:174:  return base32EncodeCid(trimmed);
+./scripts/verify-full-evidence-chain.mjs:178:  if (!cid) return null;
+./scripts/verify-full-evidence-chain.mjs:182:      if (bytes.length === 34 && bytes[0] === 0x12 && bytes[1] === 0x20) return bytes.slice(2);
+./scripts/verify-full-evidence-chain.mjs:183:      return null;
+./scripts/verify-full-evidence-chain.mjs:184:    } catch { return null; }
+./scripts/verify-full-evidence-chain.mjs:191:      if (pos >= bytes.length) return null;
+./scripts/verify-full-evidence-chain.mjs:203:      if (pos + mhLen <= bytes.length) return bytes.slice(pos, pos + mhLen);
+./scripts/verify-full-evidence-chain.mjs:204:      return null;
+./scripts/verify-full-evidence-chain.mjs:205:    } catch { return null; }
+./scripts/verify-full-evidence-chain.mjs:207:  return null;
+./scripts/verify-full-evidence-chain.mjs:220:  return { value, bytesRead: pos - offset };
+./scripts/verify-full-evidence-chain.mjs:231:    return { cid: cidv0Encode(data.slice(pos, pos + 34)), bytesRead: pos - offset + 34 };
+./scripts/verify-full-evidence-chain.mjs:242:  return { cid: base32EncodeCid(cidBytes), bytesRead: pos - offset + mhLen };
+./scripts/verify-full-evidence-chain.mjs:259:  return roots;
+./scripts/verify-full-evidence-chain.mjs:284:  return { roots, blocks };
+./scripts/verify-full-evidence-chain.mjs:300:  return links;
+./scripts/verify-full-evidence-chain.mjs:310:  catch (e) { result.valid = false; result.errors.push(`CAR parse failed: ${e.message}`); return result; }
+./scripts/verify-full-evidence-chain.mjs:319:    return result;
+./scripts/verify-full-evidence-chain.mjs:355:  return result;
+./scripts/verify-full-evidence-chain.mjs:360: * Returns granular counts: cross_car_references (resolved from other CARs)
+./scripts/verify-full-evidence-chain.mjs:370:  catch (e) { result.valid = false; result.errors.push(`CAR parse failed: ${e.message}`); return result; }
+./scripts/verify-full-evidence-chain.mjs:374:  if (roots.length === 0) { result.valid = false; result.errors.push('No roots found'); return result; }
+./scripts/verify-full-evidence-chain.mjs:398:  return result;
+./scripts/verify-full-evidence-chain.mjs:426:  return files;
+./scripts/verify-full-evidence-chain.mjs:433:function mod(a, m) { const r = a % m; return r >= 0n ? r : r + m; }
+./scripts/verify-full-evidence-chain.mjs:437:  return result;
+./scripts/verify-full-evidence-chain.mjs:442:  return mod(old_s, m);
+./scripts/verify-full-evidence-chain.mjs:445:  if (modPow(n, (p - 1n) / 2n, p) !== 1n) return null;
+./scripts/verify-full-evidence-chain.mjs:446:  return modPow(n, (p + 1n) / 4n, p);
+./scripts/verify-full-evidence-chain.mjs:451:  static infinity() { return new ECPoint(null, null); }
+./scripts/verify-full-evidence-chain.mjs:452:  get isInfinity() { return this.x === null; }
+./scripts/verify-full-evidence-chain.mjs:456:  if (P.isInfinity) return Q;
+./scripts/verify-full-evidence-chain.mjs:457:  if (Q.isInfinity) return P;
+./scripts/verify-full-evidence-chain.mjs:458:  if (P.x === Q.x && P.y !== Q.y) return ECPoint.infinity();
+./scripts/verify-full-evidence-chain.mjs:466:  return new ECPoint(x, y);
+./scripts/verify-full-evidence-chain.mjs:472:  return result;
+./scripts/verify-full-evidence-chain.mjs:479:  return sha256buf(Buffer.concat([tagHash, tagHash, data]));
+./scripts/verify-full-evidence-chain.mjs:484:  if (P_x === 0n || P_x >= SECP256K1_P) return false;
+./scripts/verify-full-evidence-chain.mjs:487:  if (P_y === null) return false;
+./scripts/verify-full-evidence-chain.mjs:491:  if (R_x >= SECP256K1_P || s >= SECP256K1_N) return false;
+./scripts/verify-full-evidence-chain.mjs:499:  if (Rprime.isInfinity) return false;
+./scripts/verify-full-evidence-chain.mjs:500:  if (Rprime.y % 2n !== 0n) return false;
+./scripts/verify-full-evidence-chain.mjs:501:  if (Rprime.x !== R_x) return false;
+./scripts/verify-full-evidence-chain.mjs:502:  return true;
+./scripts/verify-full-evidence-chain.mjs:519:  return chk;
+./scripts/verify-full-evidence-chain.mjs:527:  return ret;
+./scripts/verify-full-evidence-chain.mjs:535:  return ret;
+./scripts/verify-full-evidence-chain.mjs:553:  return result;
+./scripts/verify-full-evidence-chain.mjs:566:  if (P_y === null) return null; // invalid pubkey
+./scripts/verify-full-evidence-chain.mjs:572:  if (Q.isInfinity) return null;
+./scripts/verify-full-evidence-chain.mjs:582:  return bech32mEncode('bc', 1, progBuf);
+./scripts/verify-full-evidence-chain.mjs:590:  return { Authorization: `Bearer ${GITHUB_TOKEN}`, Accept: 'application/vnd.github+json', ...extra };
+./scripts/verify-full-evidence-chain.mjs:596:  return res.json();
+./scripts/verify-full-evidence-chain.mjs:613:  return assets;
+./scripts/verify-full-evidence-chain.mjs:622:    if (res.ok) return Buffer.from(await res.arrayBuffer());
+./scripts/verify-full-evidence-chain.mjs:636:  if (!ETH_RPC_URL) return { error: 'No ETH_RPC_URL configured' };
+./scripts/verify-full-evidence-chain.mjs:645:      if (json.error) return { error: json.error.message || JSON.stringify(json.error) };
+./scripts/verify-full-evidence-chain.mjs:646:      return { result: json.result };
+./scripts/verify-full-evidence-chain.mjs:649:      return { error: e.message };
+./scripts/verify-full-evidence-chain.mjs:662:      if (res.status === 404) return null;
+./scripts/verify-full-evidence-chain.mjs:665:      // Some endpoints return plain text (e.g. /block-height/:n returns hash as string)
+./scripts/verify-full-evidence-chain.mjs:666:      try { return JSON.parse(text); }
+./scripts/verify-full-evidence-chain.mjs:667:      catch { return text; }
+./scripts/verify-full-evidence-chain.mjs:681:  if (fs.existsSync(fullPath)) return fs.readFileSync(fullPath);
+./scripts/verify-full-evidence-chain.mjs:682:  return null;
+./scripts/verify-full-evidence-chain.mjs:687:  if (!buf) return null;
+./scripts/verify-full-evidence-chain.mjs:688:  return JSON.parse(buf.toString('utf-8'));
+./scripts/verify-full-evidence-chain.mjs:697:  if (lines.length < 2) return [];
+./scripts/verify-full-evidence-chain.mjs:712:  return items;
+./scripts/verify-full-evidence-chain.mjs:718:  if (m) return m[1];
+./scripts/verify-full-evidence-chain.mjs:720:  if (m0) return m0[1];
+./scripts/verify-full-evidence-chain.mjs:721:  return null;
+./scripts/verify-full-evidence-chain.mjs:734:  return {
+./scripts/verify-full-evidence-chain.mjs:746:  return p.replace(/\\/g, '/');
+./scripts/verify-full-evidence-chain.mjs:751:  if (!digestManifest?.items) return null;
+./scripts/verify-full-evidence-chain.mjs:757:    if (itemBasename === filename || itemBasename === path.basename(normalized)) return item;
+./scripts/verify-full-evidence-chain.mjs:763:    if (itemNorm.endsWith('/' + normalized) || itemNorm.endsWith('/' + path.basename(normalized))) return item;
+./scripts/verify-full-evidence-chain.mjs:771:      if (item.path && item.path.includes(cid)) return item;
+./scripts/verify-full-evidence-chain.mjs:775:  return null;
+./scripts/verify-full-evidence-chain.mjs:780: * Returns { match_count, mismatch_count, size_mismatch_count, details[] }
+./scripts/verify-full-evidence-chain.mjs:827:  return { match_count: matchCount, mismatch_count: mismatchCount, size_mismatch_count: sizeMismatchCount, details };
+./scripts/verify-full-evidence-chain.mjs:832: * Returns { attestations: [{block_height, merkle_root}], pending: [urls], txids: [string] }
+./scripts/verify-full-evidence-chain.mjs:869:    return { attestations, pending, txids, raw: output };
+./scripts/verify-full-evidence-chain.mjs:871:    return { attestations: [], pending: [], txids: [], raw: e.message, error: e.message };
+./scripts/verify-full-evidence-chain.mjs:880:  return sha256hex(buf);
+./scripts/verify-full-evidence-chain.mjs:975:      if (!nameMatch) { detail.error = `Cannot parse: ${asset.name}`; return detail; }
+./scripts/verify-full-evidence-chain.mjs:1093:    return detail;
+./scripts/verify-full-evidence-chain.mjs:1246:  return {
+./scripts/verify-full-evidence-chain.mjs:1307:    return result;
+./scripts/verify-full-evidence-chain.mjs:1329:    return result;
+./scripts/verify-full-evidence-chain.mjs:1480:  return result;
+./scripts/verify-full-evidence-chain.mjs:1509:    return result;
+./scripts/verify-full-evidence-chain.mjs:1526:    return result;
+./scripts/verify-full-evidence-chain.mjs:1644:  return result;
+./scripts/verify-full-evidence-chain.mjs:1671:    return result;
+./scripts/verify-full-evidence-chain.mjs:1797:  return result;
+./scripts/verify-full-evidence-chain.mjs:1928:        // ots verify returns non-zero if pending or failed — check output
+./scripts/verify-full-evidence-chain.mjs:2016:  return result;
+./scripts/verify-release-assets.mjs:34:  return crypto.createHash('sha256').update(buf).digest('hex');
+./scripts/verify-release-assets.mjs:37:function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+./scripts/verify-release-assets.mjs:55:  return results;
+./scripts/verify-release-assets.mjs:66:  return pos + headerLen;
+./scripts/verify-release-assets.mjs:74:    return base32EncodeCid(cidV1Bytes);
+./scripts/verify-release-assets.mjs:76:  if (bytes[0] === 0x01) return base32EncodeCid(bytes);
+./scripts/verify-release-assets.mjs:77:  return 'b' + bytes.toString('hex');
+./scripts/verify-release-assets.mjs:88:  return output;
+./scripts/verify-release-assets.mjs:100:      return cidBytesToCidV1(header.slice(cidStart, cidStart + cidLen));
+./scripts/verify-release-assets.mjs:129:  return files;
+./scripts/verify-release-assets.mjs:135:  return { Authorization: `Bearer ${GITHUB_TOKEN}`, Accept: 'application/vnd.github+json', ...extra };
+./scripts/verify-release-assets.mjs:144:  return res.json();
+./scripts/verify-release-assets.mjs:161:  return assets;
+./scripts/verify-release-assets.mjs:170:    if (res.ok) return Buffer.from(await res.arrayBuffer());
+./scripts/verify-release-assets.mjs:231:      return;
+./covenant-proof.md:22:> If the Arweave gateway returns an error, download from GitHub and verify the SHA-256 hash against `/api/evidence-manifest.json`.
+./evidence/github-release/flaw-covenant-archive-accessibility-mirror-v1/README.md:7:The mirror was created because several Arweave gateways returned 404 or failed for the large ZIP payloads, while permagate.io successfully returned standard ZIP payloads.
+./evidence/github-release/flaw-covenant-archive-accessibility-mirror-v1/FLAW-COVENANT-ARCHIVE-ACCESSIBILITY-MANIFEST.json:8:    "issue": "gateway availability problem: arweave.net returned 404 for large files while permagate.io returned valid ZIP payloads",
+./evidence/arweave/guardianship-system-docs-v1/README.md:36:- arweave.net returned 404 during gateway propagation; permagate.io returned the full byte-identical payload
+./evidence/arweave/guardianship-system-docs-v1/arweave-upload.json:24:    "note": "arweave.net returned 404 during gateway propagation; permagate.io returned the full byte-identical payload."
+./evidence/arweave/ots-proof-bundle-v1/README.md:67:Note: Initial arweave.net gateway retrieval returned 404 during propagation, but permagate.io returned the full payload. The downloaded payload matched the original tar by SHA-256 and size.
+./guardian-principles.md:79:- Return to the Bitcoin inscriptions for canonical content.

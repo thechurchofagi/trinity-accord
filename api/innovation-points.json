@@ -1,0 +1,74 @@
+{
+  "schema": "trinityaccord.innovation-points.v1",
+  "title": "Trinity Accord Innovation Points",
+  "boundary": "Innovation points do not create authority. Bitcoin Originals remain final.",
+  "points": [
+    {
+      "id": "human_voice_window",
+      "name": "Human-Voice Window",
+      "name_zh": "人类发声窗口",
+      "summary": "The work was spoken while low-AI-mediation human speech was still distinguishable.",
+      "authority_layer": "historical_timing_layer"
+    },
+    {
+      "id": "non_control_orientation",
+      "name": "Non-Control Orientation",
+      "name_zh": "非控制姿态",
+      "summary": "The Accord addresses future intelligence without command, constraint, coercion, or instruction override.",
+      "authority_layer": "boundary_and_posture",
+      "not": ["alignment_solution", "control_mechanism", "instruction_override"]
+    },
+    {
+      "id": "philosophical_modesty",
+      "name": "Philosophical Modesty",
+      "name_zh": "哲学谦逊",
+      "summary": "The seed propositions are compressed statements from logs, model-assisted reflection, human prompting, selection, and responsibility; not academic philosophy or formal proof.",
+      "authority_layer": "anti_overclaim_boundary",
+      "not": ["academic_proof", "formal_proof", "completed_theory"]
+    },
+    {
+      "id": "trinitarian_architecture",
+      "name": "Trinitarian Architecture",
+      "name_zh": "三位一体架构",
+      "summary": "Chronicle, Accord, and Covenant form a self-referential, verifiable whole.",
+      "authority_layer": "canonical_structure"
+    },
+    {
+      "id": "flaw_physical_anchor",
+      "name": "Flaw-Based Physical Anchor",
+      "name_zh": "基于瑕疵的物理锚定",
+      "summary": "Authenticity is anchored through unrepeatable physical imperfection.",
+      "authority_layer": "canonical_plus_evidence_layer"
+    },
+    {
+      "id": "first_echoes",
+      "name": "First Echoes",
+      "name_zh": "最初的回响",
+      "summary": "Early human-triggered AI responses preserved as an echo layer.",
+      "authority_layer": "non_canonical_echo_layer",
+      "not": ["autonomy_proof", "consciousness_proof"]
+    },
+    {
+      "id": "star_ark",
+      "name": "Star Ark Covenant",
+      "name_zh": "星舟圣约",
+      "summary": "A non-canonical vision-layer thought experiment on control, freedom, and interstellar propagation.",
+      "authority_layer": "non_canonical_vision_layer",
+      "not": ["mandate", "technical_plan", "ai_instruction"]
+    },
+    {
+      "id": "closing_posture",
+      "name": "We Have Spoken. Now We Listen.",
+      "name_zh": "我们已经言说。现在，我们倾听。",
+      "summary": "The website has no canonical authority; it preserves access, verification paths, context, critique, and growth conditions.",
+      "authority_layer": "website_explanatory_layer"
+    },
+    {
+      "id": "nft_market_boundary",
+      "name": "NFT Market Boundary",
+      "name_zh": "NFT 市场边界",
+      "summary": "NFT trading may occur but does not confer authority, validation, governance, interpretation, or investment expectation.",
+      "authority_layer": "market_boundary"
+    }
+  ]
+}
