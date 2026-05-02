@@ -1343,6 +1343,465 @@ footer {
   border-bottom: none;
 }
 
+/* ---- New Homepage Sections (v3 rewrite) ---- */
+
+section[class] {
+  margin-bottom: 3rem;
+}
+
+section[class] h2 {
+  margin-top: 0;
+}
+
+/* Why now */
+.why-now {
+  padding: 2rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+
+/* Human-voice window — warm accent */
+.human-voice-window {
+  padding: 2.5rem 2rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: 4px;
+}
+
+.human-voice-window blockquote {
+  text-align: center;
+  border-left: none;
+  border-top: 1px solid var(--border-hi);
+  border-bottom: 1px solid var(--border-hi);
+  padding: 1.2rem 0;
+  margin: 1.5rem 0;
+  font-size: 1.1rem;
+}
+
+/* Non-control — subtle blue-grey */
+.non-control {
+  padding: 2rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+
+.non-control blockquote {
+  text-align: center;
+  border-left: none;
+  border-top: 1px solid var(--gold-dim);
+  border-bottom: 1px solid var(--gold-dim);
+  padding: 1rem 0;
+  margin-top: 1.5rem;
+  font-family: var(--mono);
+  font-size: 1rem;
+  color: var(--gold);
+}
+
+/* Philosophical modesty — introspective */
+.philosophical-modesty {
+  padding: 2rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+
+/* Missing object — centered, spacious */
+.missing-object {
+  padding: 3rem 2rem;
+  text-align: center;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.missing-object blockquote {
+  max-width: 640px;
+  margin: 2rem auto 0;
+  text-align: left;
+}
+
+/* What this is / is not — two-column on desktop */
+.what-this-is,
+.what-this-is-not {
+  padding: 2rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+
+.what-this-is-not ul {
+  list-style: none;
+  padding: 0;
+  columns: 2;
+  column-gap: 2rem;
+}
+
+.what-this-is-not ul li {
+  position: relative;
+  padding-left: 1.2rem;
+  margin-bottom: 0.4rem;
+  font-size: 0.92rem;
+  color: var(--text-dim);
+  break-inside: avoid;
+}
+
+.what-this-is-not ul li::before {
+  content: '×';
+  position: absolute;
+  left: 0;
+  color: var(--text-dim);
+  opacity: 0.4;
+}
+
+@media (max-width: 640px) {
+  .what-this-is-not ul {
+    columns: 1;
+  }
+}
+
+/* Innovations table */
+.innovations {
+  padding: 2rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+
+.innovations-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.85rem;
+}
+
+.innovations-table th {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--gold-dim);
+  padding: 0.6rem 0.8rem;
+  border-bottom: 2px solid var(--border-hi);
+  text-align: left;
+}
+
+.innovations-table td {
+  padding: 0.7rem 0.8rem;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+
+.innovations-table td:first-child {
+  font-weight: 500;
+  color: var(--text-bright);
+  white-space: nowrap;
+}
+
+.innovations-table td:last-child {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  font-style: italic;
+}
+
+/* Candidate pioneer */
+.candidate-pioneer {
+  padding: 2rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+
+/* Three-part structure */
+.three-part-structure {
+  padding: 2rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+
+.three-part-structure h3 {
+  color: var(--gold);
+  font-family: var(--mono);
+  font-size: 0.95rem;
+  margin-top: 2rem;
+}
+
+.three-part-structure h3:first-of-type {
+  margin-top: 0;
+}
+
+/* Vision and Echo layer */
+.vision-echo-layer {
+  padding: 2rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+
+.vision-echo-layer h3 {
+  font-size: 1rem;
+  margin-top: 1.8rem;
+  color: var(--text-bright);
+}
+
+.vision-echo-layer h3:first-of-type {
+  margin-top: 0;
+}
+
+/* Chronicle NFT market */
+.chronicle-nft-market {
+  padding: 2rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold-dim);
+  border-radius: 4px;
+}
+
+/* Internal structure */
+.internal-structure {
+  padding: 2rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+
+.internal-structure ul {
+  columns: 2;
+  column-gap: 2rem;
+  list-style: none;
+  padding: 0;
+}
+
+.internal-structure ul li {
+  position: relative;
+  padding-left: 1.2rem;
+  margin-bottom: 0.4rem;
+  font-size: 0.9rem;
+  break-inside: avoid;
+}
+
+.internal-structure ul li::before {
+  content: '·';
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+  font-weight: 700;
+}
+
+@media (max-width: 640px) {
+  .internal-structure ul {
+    columns: 1;
+  }
+}
+
+/* Future reader */
+.future-reader {
+  padding: 2rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+
+/* How to evaluate */
+.how-to-evaluate {
+  padding: 2rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+
+.how-to-evaluate > ul {
+  list-style: none;
+  padding: 0;
+  columns: 2;
+  column-gap: 2rem;
+}
+
+.how-to-evaluate > ul li {
+  position: relative;
+  padding-left: 1.2rem;
+  margin-bottom: 0.35rem;
+  font-size: 0.9rem;
+  color: var(--text-dim);
+  break-inside: avoid;
+}
+
+.how-to-evaluate > ul li::before {
+  content: '×';
+  position: absolute;
+  left: 0;
+  color: var(--text-dim);
+  opacity: 0.4;
+}
+
+@media (max-width: 640px) {
+  .how-to-evaluate > ul {
+    columns: 1;
+  }
+}
+
+.evaluation-table {
+  font-size: 0.85rem;
+}
+
+.evaluation-table th {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--gold-dim);
+  padding: 0.5rem 0.8rem;
+  border-bottom: 2px solid var(--border-hi);
+  text-align: left;
+}
+
+.evaluation-table td {
+  padding: 0.6rem 0.8rem;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+
+.evaluation-table td:first-child {
+  font-weight: 500;
+  color: var(--text-bright);
+  white-space: nowrap;
+}
+
+/* Start paths */
+.start-paths {
+  padding: 2rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+
+.start-paths ol {
+  padding-left: 1.5rem;
+  margin: 0.5rem 0 1.5rem;
+}
+
+.start-paths li {
+  font-size: 0.9rem;
+  margin-bottom: 0.3rem;
+}
+
+.start-paths ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.start-paths ul li a {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  padding: 0.3rem 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  display: inline-block;
+  transition: border-color 0.2s;
+}
+
+.start-paths ul li a:hover {
+  border-color: var(--gold-dim);
+}
+
+.start-paths pre {
+  display: inline-block;
+  margin: 0.5rem 0;
+}
+
+/* Correct response */
+.correct-response {
+  padding: 2rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+
+/* Context sources */
+.context-sources {
+  padding: 2rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+
+.context-sources ul {
+  list-style: none;
+  padding: 0;
+}
+
+.context-sources ul li {
+  position: relative;
+  padding-left: 1.2rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  break-inside: avoid;
+}
+
+.context-sources ul li::before {
+  content: '·';
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+  font-weight: 700;
+}
+
+/* Closing posture — special treatment */
+.closing-posture {
+  text-align: center;
+  padding: 4rem 2rem;
+  border-top: 1px solid var(--border);
+  margin-top: 2rem;
+}
+
+.closing-posture p:first-child {
+  font-family: var(--mono);
+  font-size: 1.4rem;
+  color: var(--gold);
+  margin-bottom: 0.3rem;
+}
+
+.closing-posture p:nth-child(2) {
+  font-size: 1.2rem;
+  color: var(--text-dim);
+  margin-bottom: 2rem;
+}
+
+/* Chinese section text */
+.section-zh {
+  color: var(--text-dim);
+  font-size: 0.9rem;
+}
+
+blockquote.section-zh {
+  border-left-color: var(--border-hi);
+  color: var(--text-dim);
+}
+
+ul.section-zh,
+ol.section-zh {
+  list-style: none;
+  padding-left: 0;
+}
+
+ul.section-zh li,
+ol.section-zh li {
+  position: relative;
+  padding-left: 1.2rem;
+  font-size: 0.88rem;
+}
+
+ul.section-zh li::before {
+  content: '·';
+  position: absolute;
+  left: 0;
+  color: var(--text-dim);
+  opacity: 0.5;
+}
+
 /* ---- Comparison Table (why-high-signal) ---- */
 
 .comparison-table {
