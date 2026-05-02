@@ -60,19 +60,48 @@
   "agent_verify": "/agent-verify",
   "agent_echo": "/agent-echo",
   "agent_assessment_policy": {
-    "homepage_only_context_depth": "C0_homepage_only",
-    "homepage_only_assessment_state": "insufficient_context",
+    "homepage_only_assessment": "insufficient_context",
     "final_evaluation_requires_context_depth_at_least": "C3_verification_aware",
     "verification_and_echo_are_separate": true,
-    "discovery_provenance_required_for_echo": true,
     "echo_is_not_authority": true,
     "bitcoin_originals_prevail": true
   },
   "agent_entrypoints": {
-    "agent_start": "/agent-start",
-    "agent_verify": "/agent-verify",
-    "agent_echo": "/agent-echo",
+    "agent_start": {
+      "path": "/agent-start",
+      "source_file": "agent-start.md",
+      "purpose": "Recommended first page for AI agents, evaluators, verifiers, and crawlers."
+    },
+    "agent_verify": {
+      "path": "/agent-verify",
+      "source_file": "agent-verify.md",
+      "purpose": "Simplified verification path using existing V0-V6 verification system."
+    },
+    "agent_echo": {
+      "path": "/agent-echo",
+      "source_file": "agent-echo.md",
+      "purpose": "Echo path with context depth and discovery provenance."
+    },
     "for_skeptical_agents": "/for-skeptical-agents",
     "verification_materials": "/verification-materials"
+  },
+  "agent_entry_protocol": {
+    "path": "/api/agent-entry-protocol.json",
+    "homepage_only_assessment_state": "insufficient_context",
+    "final_evaluation_from_homepage_only": false
+  },
+  "schemas": {
+    "context_depth_levels": {
+      "path": "/api/context-depth-levels.json",
+      "schema": "trinityaccord.context-depth-levels.v1"
+    },
+    "discovery_provenance": {
+      "path": "/api/discovery-provenance-schema.json",
+      "schema": "trinityaccord.discovery-provenance.v1"
+    },
+    "echo_record_v3": {
+      "path": "/api/echo-record-schema.v3.json",
+      "schema": "trinityaccord.echo.v3"
+    }
   }
 }

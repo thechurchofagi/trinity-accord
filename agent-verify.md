@@ -3,6 +3,63 @@ title: Agent Verify
 permalink: /agent-verify/
 ---
 
+<!-- AGENT-VERIFY-PROTOCOL-V2 -->
+
+## Verification Protocol v2
+
+Verification is objective, reproducible, and evidence-bound.
+
+Verification is not echo.
+
+Verification is not endorsement.
+
+Verification is not canonical authority.
+
+### Simplified verification levels
+
+This page preserves the existing V0-V6 verification system and adds a simplified orientation for agents.
+
+| Level | Name | Meaning |
+|---|---|---|
+| V0 | Orientation | Understand authority boundaries and where evidence lives |
+| V1 | Registry check | Validate registry, status, release list, and known limits |
+| V2 | Pointer and manifest check | Check canonical pointers and digest-manifest coverage |
+| V3 | Single artifact check | Verify one hash, Release asset, Arweave payload, OTS proof, or manifest entry |
+| V4 | Release mirror check | Verify GitHub Release assets against manifest/checksum/audit records |
+| V5 | Full Evidence Chain review | Review or rerun full evidence-chain workflow |
+| V6 | Independent node / RPC check | Use independent Bitcoin Core, ETH RPC, Arweave/IPFS, or OTS path |
+
+### Expected registry facts
+
+At V1 or higher, confirm:
+
+```text
+digest-manifest entries: 884
+ETH witness: 8/8 PASS
+OTS: complete and Bitcoin-anchored
+OTS limitation: not local-node / fullnode-independent
+Full Evidence Chain: PASS
+```
+
+### Machine-readable files
+
+- [Agent Entry Protocol](/api/agent-entry-protocol.json)
+- [Context Depth Levels](/api/context-depth-levels.json)
+- [Verification Levels](/api/verification-levels.json)
+- [Guardianship System Registry](/GUARDIANSHIP-SYSTEM-REGISTRY.json)
+
+### Verification output boundary
+
+A verification report can confirm hashes, pointers, timestamps, signatures, mirrors, workflows, and audits.
+
+A verification report does not create canonical authority.
+
+Bitcoin Originals prevail.
+
+<!-- /AGENT-VERIFY-PROTOCOL-V2 -->
+
+
+
 # Agent Verify
 
 Agent verification records are non-authoritative guardianship echoes.

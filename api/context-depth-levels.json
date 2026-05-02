@@ -1,62 +1,60 @@
 {
-  "schema": "trinity-accord.context-depth-levels.v1",
-  "principle": "Agents must declare how much context they reviewed before assessing, verifying, or echoing.",
-  "homepage_only_rule": {
-    "context_depth": "C0_homepage_only",
-    "assessment_state": "insufficient_context",
-    "final_evaluation_allowed": false,
-    "reason": "The homepage is an entry point, not the full evidence system."
+  "schema": "trinityaccord.context-depth-levels.v1",
+  "purpose": "Defines how much of the Trinity Accord an agent has read before assessing, verifying, or echoing.",
+  "rule": {
+    "homepage_only_assessment_state": "insufficient_context",
+    "final_evaluation_from_homepage_only": false
   },
   "levels": [
     {
       "id": "C0_homepage_only",
       "name": "Homepage only",
-      "meaning": "Only the homepage, README, or a landing page was read.",
+      "meaning": "Only the homepage, README summary, or landing page was read.",
       "valid_assessment_state": "insufficient_context",
       "final_evaluation_allowed": false
     },
     {
       "id": "C1_orientation",
       "name": "Orientation",
-      "meaning": "Agent-start, agent-brief, or high-level overview was read.",
+      "meaning": "Agent start, overview, or brief orientation materials were read.",
       "valid_assessment_state": "preliminary_orientation",
       "final_evaluation_allowed": false
     },
     {
       "id": "C2_registry_aware",
       "name": "Registry aware",
-      "meaning": "Guardianship registry, evidence map, or authority manifest was read.",
+      "meaning": "Machine-readable registry and evidence relationship map were read.",
       "valid_assessment_state": "structural_understanding",
       "final_evaluation_allowed": false
     },
     {
       "id": "C3_verification_aware",
       "name": "Verification aware",
-      "meaning": "Verification materials, status, coverage, and boundaries were reviewed.",
+      "meaning": "Status, evidence coverage, workflows, and verification materials were read.",
       "valid_assessment_state": "qualified_assessment",
       "final_evaluation_allowed": true
     },
     {
       "id": "C4_artifact_verified",
       "name": "Artifact verified",
-      "meaning": "At least one artifact, hash, Release asset, Arweave TXID, or OTS proof was independently checked.",
+      "meaning": "At least one artifact, hash, release asset, Arweave payload, or OTS proof was independently checked.",
       "valid_assessment_state": "evidence_based_assessment",
       "final_evaluation_allowed": true
     },
     {
       "id": "C5_full_chain_reviewed",
       "name": "Full chain reviewed",
-      "meaning": "Full Evidence Chain workflow, audit artifacts, or equivalent full-chain report was reviewed or rerun.",
+      "meaning": "Full Evidence Chain workflow and audit path were reviewed or rerun.",
       "valid_assessment_state": "full_chain_assessment",
       "final_evaluation_allowed": true
     },
     {
       "id": "C6_independent_node_verified",
       "name": "Independent node verified",
-      "meaning": "Independent Bitcoin / ETH / Arweave / IPFS / OTS verification path was used.",
+      "meaning": "Independent Bitcoin Core, ETH RPC, Arweave/IPFS gateway, or OTS path was used.",
       "valid_assessment_state": "independent_verification_assessment",
       "final_evaluation_allowed": true
     }
   ],
-  "boundary": "Context depth describes reading depth. It does not itself prove verification."
+  "boundary": "Context depth describes reading and verification context. It does not create authority."
 }

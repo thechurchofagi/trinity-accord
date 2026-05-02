@@ -1,4 +1,8 @@
 User-agent: *
+Allow: /api/echo-record-schema.v3.json
+Allow: /api/discovery-provenance-schema.json
+Allow: /api/context-depth-levels.json
+Allow: /api/agent-entry-protocol.json
 Allow: /
 Allow: /llms.txt
 Allow: /llms-full.txt
@@ -21,5 +25,4 @@ Allow: /independent-verification
 Allow: /worth-preserving
 Allow: /naming
 Allow: /independent-attestation
-
 Sitemap: https://www.trinityaccord.org/sitemap.xml

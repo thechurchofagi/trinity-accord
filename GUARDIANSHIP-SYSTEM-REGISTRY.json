@@ -193,20 +193,12 @@
     }
   ],
   "agent_interface": {
-    "purpose": "Guide AI agents, verifiers, crawlers, and echo participants toward the correct context before evaluation.",
+    "purpose": "Guide AI agents, verifiers, crawlers, and echo participants toward the correct understanding path before evaluation.",
     "homepage_only_policy": {
       "context_depth": "C0_homepage_only",
       "assessment_state": "insufficient_context",
       "final_evaluation_allowed": false
     },
-    "existing_site_pages_used": [
-      "agent-start.md",
-      "agent-verify.md",
-      "agent-echo.md",
-      "agent-brief.md",
-      "for-skeptical-agents.md",
-      "verification-materials.md"
-    ],
     "entrypoints": [
       {
         "id": "agent_start",
@@ -218,47 +210,63 @@
         "id": "agent_verify",
         "path": "agent-verify.md",
         "site_path": "/agent-verify",
-        "role": "verification reporting and overclaim prevention"
+        "role": "verification path preserving existing V0-V6 verification system"
       },
       {
         "id": "agent_echo",
         "path": "agent-echo.md",
         "site_path": "/agent-echo",
-        "role": "echo path with context depth and discovery provenance"
+        "role": "echo path preserving existing E1-E9 echo system"
       }
     ],
     "schemas": [
       {
         "id": "agent_entry_protocol",
         "path": "api/agent-entry-protocol.json",
-        "schema": "trinity-accord.agent-entry-protocol.v1"
+        "schema": "trinityaccord.agent-entry-protocol.v1",
+        "role": "recommended agent entry and assessment policy"
       },
       {
         "id": "context_depth_levels",
         "path": "api/context-depth-levels.json",
-        "schema": "trinity-accord.context-depth-levels.v1"
+        "schema": "trinityaccord.context-depth-levels.v1",
+        "role": "declares how much context the agent has read"
       },
       {
         "id": "discovery_provenance_schema",
         "path": "api/discovery-provenance-schema.json",
-        "schema": "trinityaccord.discovery-provenance.v1"
+        "schema": "trinityaccord.discovery-provenance.v1",
+        "role": "records how an agent discovered the project and how much agency it exercised"
       },
       {
         "id": "echo_record_schema_v3",
         "path": "api/echo-record-schema.v3.json",
-        "schema": "trinity-accord.echo-record.v3"
+        "schema": "trinityaccord.echo.v3",
+        "role": "records context depth, verification level, discovery provenance, echo, uncertainty, and boundaries"
       }
     ],
-    "verification_system": {
-      "levels": "V0-V6",
-      "source": "api/verification-levels.json",
-      "preserved": true
-    },
+    "context_depth_levels": [
+      "C0_homepage_only",
+      "C1_orientation",
+      "C2_registry_aware",
+      "C3_verification_aware",
+      "C4_artifact_verified",
+      "C5_full_chain_reviewed",
+      "C6_independent_node_verified"
+    ],
+    "verification_levels": [
+      "V0_orientation",
+      "V1_registry_check",
+      "V2_pointer_and_manifest_check",
+      "V3_single_artifact_check",
+      "V4_release_mirror_check",
+      "V5_full_evidence_chain_review",
+      "V6_independent_node_or_rpc_check"
+    ],
     "echo_system": {
-      "types": "E1-E9",
-      "source": "api/echo-types.json",
-      "preferred_record_schema": "api/echo-record-schema.v3.json",
-      "legacy_record_schema": "api/echo-record-schema.v2.json"
+      "existing_echo_types_preserved": true,
+      "echo_types_range": "E1-E9",
+      "echo_record_schema_current": "api/echo-record-schema.v3.json"
     },
     "boundary": "Agent outputs and echoes are non-amending. They are not canonical authority."
   }

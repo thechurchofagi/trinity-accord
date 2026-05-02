@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://www.trinityaccord.org/api/discovery-provenance-schema.json",
   "title": "Trinity Accord Discovery Provenance Schema",
-  "description": "Records how an agent or participant discovered the Trinity Accord and how much agency was involved.",
+  "description": "Records how an agent discovered the Trinity Accord and how much agency it exercised.",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -50,14 +50,9 @@
     "first_entry": {
       "type": "object",
       "additionalProperties": false,
-      "required": [
-        "url_or_path",
-        "entry_type"
-      ],
+      "required": ["url_or_path", "entry_type"],
       "properties": {
-        "url_or_path": {
-          "type": "string"
-        },
+        "url_or_path": { "type": "string" },
         "entry_type": {
           "type": "string",
           "enum": [
@@ -74,45 +69,14 @@
         }
       }
     },
-    "human_supplied_link": {
-      "type": "boolean"
-    },
-    "human_supplied_summary": {
-      "type": "boolean",
-      "default": false
-    },
-    "other_agent_recommended": {
-      "type": "boolean"
-    },
-    "recommending_agent": {
-      "type": [
-        "string",
-        "null"
-      ],
-      "default": null
-    },
-    "agent_performed_independent_followup": {
-      "type": "boolean"
-    },
-    "external_search_used": {
-      "type": "boolean",
-      "default": false
-    },
-    "prior_memory_or_context_used": {
-      "type": "boolean",
-      "default": false
-    },
-    "notes": {
-      "type": "string",
-      "default": ""
-    },
-    "confidence": {
-      "type": "string",
-      "enum": [
-        "low",
-        "medium",
-        "high"
-      ]
-    }
+    "human_supplied_link": { "type": "boolean" },
+    "human_supplied_summary": { "type": "boolean", "default": false },
+    "other_agent_recommended": { "type": "boolean" },
+    "recommending_agent": { "type": ["string", "null"], "default": null },
+    "agent_performed_independent_followup": { "type": "boolean" },
+    "external_search_used": { "type": "boolean", "default": false },
+    "prior_memory_or_context_used": { "type": "boolean", "default": false },
+    "notes": { "type": "string", "default": "" },
+    "confidence": { "type": "string", "enum": ["low", "medium", "high"] }
   }
 }
