@@ -1,732 +1,320 @@
 /* ============================================================
-   trinity-home.css — Premium Visual Enhancements
-   Works WITH style.scss, not against it.
-   Dark cosmic · Gold accent · High-trust · Mobile-first
+   trinity-home.css — Typography & Layout Enhancements
+   Thin layer on top of style.scss
+   Only fixes: font sizes, spacing, alignment, readability
    ============================================================ */
 
-/* ── Enhanced Root Tokens ── */
+/* ── Root additions ── */
 :root {
-  --ta-glow: rgba(201, 168, 76, 0.06);
-  --ta-glow-hi: rgba(201, 168, 76, 0.12);
-  --ta-glow-spread: rgba(201, 168, 76, 0.03);
-  --ta-ambient-1: rgba(139, 211, 255, 0.04);
-  --ta-ambient-2: rgba(189, 167, 255, 0.03);
-  --ta-glass: rgba(15, 15, 15, 0.65);
-  --ta-glass-border: rgba(255, 255, 255, 0.04);
   --ta-content: 1060px;
   --ta-reading: 860px;
 }
 
-/* ── Ambient Background ── */
+/* ── Body typography polish ── */
 body {
-  background:
-    radial-gradient(ellipse 800px 600px at 20% -5%, var(--ta-glow-spread), transparent),
-    radial-gradient(ellipse 600px 500px at 85% 5%, var(--ta-ambient-2), transparent),
-    var(--bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
-/* Subtle star-field grain */
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  background-image:
-    radial-gradient(1px 1px at 15% 25%, rgba(201,168,76,0.15), transparent),
-    radial-gradient(1px 1px at 72% 18%, rgba(201,168,76,0.1), transparent),
-    radial-gradient(1px 1px at 45% 65%, rgba(201,168,76,0.08), transparent),
-    radial-gradient(1px 1px at 88% 42%, rgba(139,211,255,0.06), transparent),
-    radial-gradient(1px 1px at 30% 80%, rgba(189,167,255,0.05), transparent),
-    radial-gradient(1.5px 1.5px at 55% 10%, rgba(201,168,76,0.12), transparent),
-    radial-gradient(1px 1px at 8% 55%, rgba(201,168,76,0.07), transparent),
-    radial-gradient(1px 1px at 92% 75%, rgba(139,211,255,0.04), transparent);
-  mask-image: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.3) 50%, transparent 100%);
-  z-index: -1;
-  opacity: 0.8;
-}
-
-/* ── Enhanced Main Container ── */
+/* ── Content width ── */
 main {
   max-width: var(--ta-content);
   padding-left: clamp(1.25rem, 4vw, 2.5rem);
   padding-right: clamp(1.25rem, 4vw, 2.5rem);
 }
 
-/* ── Hero Section Enhancement ── */
+/* ── Heading hierarchy ── */
+h1 {
+  font-size: clamp(1.85rem, 5vw, 2.6rem);
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  margin-bottom: 0.6rem;
+}
+
+h2 {
+  font-size: clamp(1.2rem, 2.8vw, 1.5rem);
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+  margin-top: clamp(2.5rem, 6vw, 4rem);
+  margin-bottom: 1rem;
+}
+
+h3 {
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  line-height: 1.35;
+  margin-top: clamp(1.5rem, 4vw, 2.5rem);
+  margin-bottom: 0.75rem;
+}
+
+/* ── Paragraph & list spacing ── */
+p {
+  max-width: 72ch;
+  line-height: 1.82;
+  margin-bottom: 1.1rem;
+}
+
+ul, ol {
+  padding-left: 1.5rem;
+  margin-bottom: 1.1rem;
+}
+
+li {
+  margin-bottom: 0.4rem;
+  line-height: 1.75;
+}
+
+/* ── Section spacing ── */
+section[class] {
+  margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+section[class] h2 {
+  margin-top: 0;
+}
+
+/* ── Hero ── */
 .hero {
-  position: relative;
-  padding: clamp(3rem, 8vw, 6rem) 0 clamp(2.5rem, 6vw, 4rem);
-  border-bottom: 1px solid var(--border);
-  margin-bottom: clamp(2rem, 5vw, 3.5rem);
-  text-align: center;
+  padding: clamp(2.5rem, 7vw, 5rem) 0 clamp(2rem, 5vw, 3.5rem);
+  margin-bottom: clamp(2rem, 5vw, 3rem);
 }
 
-.hero::before {
-  content: "";
-  position: absolute;
-  top: -40%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: min(700px, 90vw);
-  height: 500px;
-  background:
-    radial-gradient(ellipse, var(--ta-glow) 0%, transparent 65%);
-  pointer-events: none;
-  z-index: -1;
-}
-
-/* Hero title — cinematic scale */
 .hero-title {
-  font-size: clamp(2rem, 6vw, 3.2rem) !important;
-  font-weight: 750 !important;
-  letter-spacing: -0.035em !important;
-  line-height: 1.1 !important;
-  margin-bottom: 0.4rem !important;
-  background: linear-gradient(
-    135deg,
-    var(--gold) 0%,
-    var(--gold-light) 40%,
-    #f0d88a 70%,
-    var(--gold) 100%
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  font-size: clamp(2rem, 6vw, 3rem) !important;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.12;
+  margin-bottom: 0.4rem;
   text-wrap: balance;
-  max-width: 780px;
-  margin-left: auto !important;
-  margin-right: auto !important;
 }
 
 .hero-title-zh {
-  font-size: clamp(1rem, 3vw, 1.4rem) !important;
-  color: var(--text-dim) !important;
-  margin-bottom: clamp(2rem, 5vw, 3rem) !important;
-  letter-spacing: 0.02em;
-  font-weight: 400;
+  font-size: clamp(1rem, 3vw, 1.35rem);
+  margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
 }
 
-/* Hero subtitle paragraphs */
 .hero > p:not(.hero-title-zh):not(.hero-zh) {
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
   font-size: clamp(0.92rem, 2vw, 1.02rem);
   line-height: 1.85;
-  color: var(--text);
 }
 
-.hero > p strong {
-  color: var(--gold);
-  font-weight: 600;
+.hero > blockquote {
+  max-width: 580px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  font-size: clamp(0.95rem, 2vw, 1.05rem);
+  line-height: 1.85;
 }
 
 .hero-zh {
-  font-size: clamp(0.85rem, 1.8vw, 0.92rem) !important;
-  color: var(--text-dim) !important;
+  font-size: clamp(0.85rem, 1.8vw, 0.92rem);
   max-width: 600px;
-  margin-left: auto !important;
-  margin-right: auto !important;
-  line-height: 1.8;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-/* Hero blockquotes — elegant dividers */
-.hero > blockquote {
-  max-width: 580px;
-  margin-left: auto !important;
-  margin-right: auto !important;
-  text-align: center;
-  border-left: none !important;
-  border-top: 1px solid var(--border-hi) !important;
-  border-bottom: 1px solid var(--border-hi) !important;
-  border-radius: 0 !important;
-  padding: 1.5rem 1.25rem !important;
-  background: transparent !important;
-  font-size: clamp(0.95rem, 2vw, 1.05rem);
+/* ── Blockquotes ── */
+section blockquote {
+  font-size: clamp(0.95rem, 2vw, 1.02rem);
   line-height: 1.85;
-  color: var(--text-bright);
-  font-style: italic;
+  padding: clamp(1rem, 2.5vw, 1.5rem) clamp(1.1rem, 3vw, 1.6rem);
 }
 
-.hero > blockquote.section-zh {
-  color: var(--text-dim) !important;
-  border-color: var(--border) !important;
-  font-size: clamp(0.88rem, 1.8vw, 0.95rem) !important;
+blockquote.section-zh {
+  font-size: clamp(0.88rem, 1.8vw, 0.95rem);
 }
 
-/* ── Section Cards — Glass Morphism ── */
-section[class] {
-  margin-bottom: clamp(1.5rem, 4vw, 2.5rem) !important;
-  transition: border-color 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
+/* ── Section Chinese text ── */
+.section-zh {
+  font-size: clamp(0.85rem, 1.8vw, 0.92rem);
+  line-height: 1.85;
 }
 
-section[class]:hover {
-  border-color: var(--border-hi) !important;
-  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.15);
-}
-
-/* Enhanced section headers */
-section[class] h2 {
-  margin-top: 0 !important;
-  position: relative;
-}
-
-/* Gold accent line before h2 in sections */
-section[class] h2::after {
-  content: "";
-  display: block;
-  width: min(120px, 30vw);
-  height: 1px;
-  margin-top: 0.6rem;
-  background: linear-gradient(90deg, var(--gold), var(--gold-dim), transparent);
-  opacity: 0.5;
-}
-
-/* ── Human Voice Window — Signature Section ── */
-.human-voice-window {
-  position: relative;
-  overflow: hidden;
-}
-
-.human-voice-window::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  width: 3px;
-  background: linear-gradient(to bottom, var(--gold), var(--gold-dim));
-  box-shadow: 0 0 20px var(--ta-glow-hi), 0 0 60px var(--ta-glow);
-  z-index: 1;
-}
-
-.human-voice-window blockquote {
-  position: relative;
-  padding-left: 2rem !important;
-}
-
-.human-voice-window blockquote::before {
-  content: "◈";
-  position: absolute;
-  left: 0;
-  top: 1.25rem;
-  color: var(--gold);
-  opacity: 0.4;
-  font-size: 0.9rem;
-}
-
-/* ── Non-Control Section — Accent Line ── */
-.non-control {
-  border-left: 3px solid var(--gold-dim) !important;
-  border-radius: 0 10px 10px 0 !important;
-}
-
-.non-control blockquote {
-  font-family: var(--mono) !important;
-  font-size: clamp(0.9rem, 2vw, 1rem) !important;
-  color: var(--gold) !important;
-  text-align: center;
-  border-left: none !important;
-  border-top: 1px solid var(--gold-dim) !important;
-  border-bottom: 1px solid var(--gold-dim) !important;
-  border-radius: 0 !important;
-  padding: 1.5rem 1rem !important;
-  background: var(--ta-glow) !important;
-  letter-spacing: 0.01em;
-}
-
-/* ── Philosophical Modesty — Subtle Refinement ── */
-.philosophical-modesty {
-  background: linear-gradient(
-    180deg,
-    var(--bg-card) 0%,
-    rgba(15, 15, 15, 0.9) 100%
-  ) !important;
-}
-
-/* ── Missing Object — Centered Impact ── */
-.missing-object {
-  position: relative;
-  padding: clamp(2.5rem, 6vw, 4rem) clamp(1.5rem, 4vw, 2.5rem) !important;
-}
-
-.missing-object blockquote {
-  max-width: 640px !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-  text-align: left;
-  border-left: 2px solid var(--gold-dim) !important;
-  padding: 1.5rem !important;
-  background: var(--ta-glow) !important;
-  border-radius: 0 8px 8px 0 !important;
-  font-size: clamp(0.9rem, 2vw, 0.98rem);
-  line-height: 1.9;
-  color: var(--text-bright);
-}
-
-/* ── Innovations Table — Premium Styling ── */
-.innovations {
-  overflow: hidden;
-}
-
+/* ── Innovations table ── */
 .innovations table {
   width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
+  border-collapse: collapse;
   margin: 1.5rem 0;
-  font-size: 0.85rem;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  overflow: hidden;
-  background: rgba(15, 15, 15, 0.5);
-}
-
-.innovations thead tr {
-  background: linear-gradient(135deg, rgba(201,168,76,0.08), rgba(201,168,76,0.04));
+  font-size: clamp(0.8rem, 1.6vw, 0.88rem);
 }
 
 .innovations th {
-  font-size: 0.7rem !important;
-  text-transform: uppercase;
-  letter-spacing: 0.1em !important;
-  color: var(--gold) !important;
-  padding: 0.9rem 1rem !important;
-  border-bottom: 1px solid var(--border-hi) !important;
-  font-weight: 600;
-  position: static;
-  background: transparent !important;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  padding: 0.75rem 0.9rem;
 }
 
 .innovations td {
-  padding: 0.8rem 1rem !important;
-  border-bottom: 1px solid var(--border) !important;
-  vertical-align: top;
-  color: var(--text) !important;
-  font-size: 0.85rem;
-  line-height: 1.6;
-  min-width: 0 !important;
+  padding: 0.75rem 0.9rem;
+  font-size: clamp(0.8rem, 1.6vw, 0.88rem);
+  line-height: 1.65;
 }
 
 .innovations td:first-child {
-  font-weight: 600;
-  color: var(--text-bright) !important;
+  font-weight: 500;
   white-space: normal;
-  min-width: 140px;
+  min-width: 130px;
 }
 
 .innovations td:last-child {
-  font-size: 0.8rem;
-  color: var(--text-dim) !important;
-  font-style: italic;
+  font-size: clamp(0.75rem, 1.5vw, 0.82rem);
 }
 
-.innovations tbody tr:last-child td {
-  border-bottom: none !important;
-}
-
-.innovations tbody tr {
-  transition: background 0.2s ease;
-}
-
-.innovations tbody tr:hover {
-  background: var(--ta-glow);
-}
-
-.innovations tbody tr:nth-child(even) {
-  background: rgba(255, 255, 255, 0.015);
-}
-
-.innovations tbody tr:nth-child(even):hover {
-  background: var(--ta-glow);
-}
-
-/* ── Candidate Pioneer — Subtle Frame ── */
-.candidate-pioneer {
-  border-left: 3px solid var(--border-hi) !important;
-  border-radius: 0 10px 10px 0 !important;
-}
-
-.candidate-pioneer ul {
-  columns: 2;
-  column-gap: 2rem;
-}
-
-@media (max-width: 640px) {
-  .candidate-pioneer ul {
-    columns: 1;
-  }
-}
-
-/* ── Three-Part Structure — Chapter Feel ── */
-.three-part-structure h3 {
-  color: var(--gold) !important;
-  font-family: var(--mono) !important;
-  font-size: clamp(0.88rem, 1.8vw, 0.95rem) !important;
-  letter-spacing: 0.02em;
-  margin-top: clamp(1.5rem, 4vw, 2.5rem) !important;
-  position: relative;
-  padding-left: 1.5rem;
-}
-
-.three-part-structure h3::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 50%;
-  width: 8px;
-  height: 1px;
-  background: var(--gold);
-  opacity: 0.6;
-}
-
-/* ── Vision & Echo Layer ── */
-.vision-echo-layer h3 {
-  font-size: clamp(0.9rem, 1.8vw, 1rem) !important;
-  color: var(--text-bright) !important;
-}
-
-/* ── Chronicle NFT Market — Bordered ── */
-.chronicle-nft-market {
-  border-left: 3px solid var(--gold-dim) !important;
-  border-radius: 0 10px 10px 0 !important;
-}
-
-/* ── Inscription Cards — Premium Grid ── */
+/* ── Cards grid ── */
 .cards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: clamp(0.75rem, 2vw, 1.25rem);
 }
 
-@media (max-width: 900px) {
-  .cards {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 580px) {
-  .cards {
-    grid-template-columns: 1fr;
-  }
-}
-
 .card {
-  background: var(--bg-card) !important;
-  border: 1px solid var(--border) !important;
-  border-radius: 12px !important;
-  padding: clamp(1.25rem, 3vw, 1.75rem) !important;
-  transition: all 0.35s var(--ease-out) !important;
-  position: relative;
-}
-
-.card::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
-  opacity: 0;
-  transition: opacity 0.35s;
-  border-radius: 12px 12px 0 0;
+  padding: clamp(1.25rem, 3vw, 1.75rem);
+  border-radius: 10px;
+  transition: border-color 0.3s var(--ease-out), transform 0.3s var(--ease-out);
 }
 
 .card:hover {
-  border-color: var(--border-hi) !important;
-  transform: translateY(-3px) !important;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
-}
-
-.card:hover::after {
-  opacity: 1;
-}
-
-.card-num {
-  font-family: var(--mono) !important;
-  font-size: 0.68rem !important;
-  color: var(--gold-dim) !important;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  margin-bottom: 0.75rem !important;
-}
-
-.card h3 {
-  font-size: clamp(0.95rem, 2vw, 1.05rem) !important;
-  margin-top: 0 !important;
-  margin-bottom: 0.5rem !important;
-}
-
-.card-desc {
-  font-size: clamp(0.82rem, 1.6vw, 0.88rem) !important;
-  color: var(--text-dim) !important;
-  line-height: 1.65;
-}
-
-/* Card facts table */
-.card-facts {
-  font-size: 0.78rem !important;
-  margin-top: 1rem !important;
-}
-
-.card-facts td {
-  padding: 0.35rem 0 !important;
-  border-bottom: 1px solid var(--border) !important;
-}
-
-.card-facts td:first-child {
-  color: var(--text-dim) !important;
-  font-size: 0.65rem !important;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  width: 3rem;
-}
-
-.card-facts td:last-child {
-  font-family: var(--mono) !important;
-  font-size: 0.72rem !important;
-  color: var(--gold-dim) !important;
-  word-break: break-all;
-}
-
-/* ── Closing Posture — Centered Gravity ── */
-.closing-posture {
-  position: relative;
-  padding: clamp(3rem, 8vw, 5rem) clamp(1.5rem, 4vw, 2.5rem) !important;
-  border-top: 1px solid var(--border) !important;
-  margin-top: clamp(2rem, 5vw, 3rem) !important;
-}
-
-.closing-posture::before {
-  content: "";
-  position: absolute;
-  top: -1px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: min(200px, 50vw);
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
-}
-
-.closing-posture p:first-child {
-  font-family: var(--mono) !important;
-  font-size: clamp(1.1rem, 3vw, 1.5rem) !important;
-  color: var(--gold) !important;
-  letter-spacing: 0.03em;
-  font-weight: 600;
-}
-
-.closing-posture p:nth-child(2) {
-  font-size: clamp(0.95rem, 2.5vw, 1.15rem) !important;
-  color: var(--text-dim) !important;
-}
-
-/* ── Blockquote Refinements ── */
-section blockquote {
-  font-size: clamp(0.95rem, 2vw, 1.02rem);
-  line-height: 1.85;
-}
-
-section blockquote.section-zh {
-  border-left-color: var(--border-hi) !important;
-  color: var(--text-dim) !important;
-  background: transparent !important;
-  font-size: clamp(0.88rem, 1.8vw, 0.95rem);
-}
-
-/* ── Section Chinese Text ── */
-.section-zh {
-  font-size: clamp(0.85rem, 1.8vw, 0.92rem);
-  color: var(--text-dim);
-  line-height: 1.85;
-}
-
-/* ── Authority Banner ── */
-.authority-banner {
-  position: relative;
-  overflow: hidden;
-}
-
-.authority-banner::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 120px;
-  height: 100%;
-  background: linear-gradient(to left, var(--ta-glow-spread), transparent);
-  pointer-events: none;
-}
-
-/* ── Buttons — Refined ── */
-.btn {
-  font-size: 0.82rem;
-  padding: 0.7rem 1.6rem;
-  border-radius: 8px;
-  letter-spacing: 0.02em;
-  transition: all 0.3s var(--ease-out);
-}
-
-.btn-primary {
-  box-shadow: 0 2px 12px rgba(201, 168, 76, 0.15);
-}
-
-.btn-primary:hover {
-  box-shadow: 0 6px 28px rgba(201, 168, 76, 0.25);
   transform: translateY(-2px);
 }
 
-/* ── Code & Pre — Consistent ── */
+.card h3 {
+  font-size: clamp(0.95rem, 2vw, 1.05rem);
+  margin-top: 0;
+}
+
+.card-desc {
+  font-size: clamp(0.82rem, 1.6vw, 0.88rem);
+  line-height: 1.65;
+}
+
+/* ── Closing section ── */
+.closing-posture {
+  padding: clamp(2.5rem, 7vw, 4rem) clamp(1.5rem, 4vw, 2.5rem);
+}
+
+.closing-posture p:first-child {
+  font-size: clamp(1.1rem, 3vw, 1.4rem);
+  letter-spacing: 0.02em;
+}
+
+.closing-posture p:nth-child(2) {
+  font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+}
+
+/* ── Missing object ── */
+.missing-object {
+  padding: clamp(2rem, 6vw, 3.5rem) clamp(1.5rem, 4vw, 2.5rem);
+}
+
+.missing-object blockquote {
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: clamp(0.9rem, 2vw, 0.98rem);
+  line-height: 1.9;
+}
+
+/* ── Three-part structure ── */
+.three-part-structure h3 {
+  font-size: clamp(0.88rem, 1.8vw, 0.95rem);
+}
+
+/* ── Code blocks ── */
 pre {
-  border-radius: 10px !important;
+  border-radius: 10px;
   font-size: 0.85rem;
+  padding: 1.15rem;
 }
 
 code {
   font-size: 0.82em;
 }
 
-/* ── Table Refinements ── */
-table {
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-th {
-  position: static !important;
-}
-
-/* ── Focus Visible — Gold Ring ── */
+/* ── Focus visible ── */
 a:focus-visible {
-  outline: 2px solid var(--gold-dim) !important;
+  outline: 2px solid var(--gold-dim);
   outline-offset: 3px;
   border-radius: 4px;
 }
 
-/* ── Selection — Gold ── */
-::selection {
-  background: var(--gold-glow-hi) !important;
-  color: var(--text-bright) !important;
-}
-
-/* ── Smooth Transitions ── */
-section, .card, blockquote, table {
-  transition: border-color 0.35s var(--ease-out), box-shadow 0.35s var(--ease-out);
-}
-
 /* ============================================================
-   Responsive — Mobile First
+   Responsive
    ============================================================ */
 
-/* Tablet */
 @media (max-width: 900px) {
   main {
-    padding-left: clamp(1rem, 3vw, 1.5rem);
-    padding-right: clamp(1rem, 3vw, 1.5rem);
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
   }
 
-  .hero {
-    padding: clamp(2.5rem, 6vw, 4rem) 0 clamp(2rem, 5vw, 3rem);
-  }
-
-  .hero-title {
-    font-size: clamp(1.8rem, 5.5vw, 2.6rem) !important;
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
-/* Mobile */
 @media (max-width: 760px) {
   main {
     padding-left: 1rem;
     padding-right: 1rem;
   }
 
+  h1 {
+    font-size: clamp(1.6rem, 8vw, 2.2rem);
+  }
+
+  h2 {
+    font-size: clamp(1.15rem, 5vw, 1.35rem);
+    margin-top: clamp(2rem, 5vw, 3rem);
+  }
+
   .hero {
     padding: 2.5rem 0 2rem;
-    margin-bottom: 2rem;
   }
 
   .hero-title {
-    font-size: clamp(1.6rem, 8vw, 2.2rem) !important;
-    letter-spacing: -0.025em !important;
-  }
-
-  .hero-title-zh {
-    font-size: 0.95rem !important;
+    font-size: clamp(1.7rem, 8vw, 2.3rem) !important;
   }
 
   section[class] {
-    padding: clamp(1.25rem, 4vw, 1.75rem) !important;
-    border-radius: 8px !important;
+    padding: clamp(1.25rem, 4vw, 1.75rem);
+    border-radius: 8px;
   }
 
-  section[class] h2 {
-    font-size: clamp(1.15rem, 5vw, 1.4rem) !important;
-  }
-
-  /* Innovations table — horizontal scroll */
   .innovations table {
     display: block;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
-    font-size: 0.8rem;
+    font-size: 0.82rem;
   }
 
   .innovations th,
   .innovations td {
-    padding: 0.65rem 0.8rem !important;
+    padding: 0.6rem 0.75rem;
     min-width: 120px;
   }
 
-  .innovations td:first-child {
-    min-width: 110px;
-    white-space: nowrap;
-  }
-
-  /* Cards — single column */
   .cards {
     grid-template-columns: 1fr;
-    gap: 1rem;
   }
 
-  .card {
-    padding: 1.25rem !important;
+  .closing-posture {
+    padding: 2.5rem 1rem;
   }
 
-  /* Blockquotes */
-  section blockquote {
-    padding: 1rem 1.25rem !important;
-    font-size: 0.92rem;
-  }
-
-  /* Missing object */
   .missing-object {
-    padding: 2rem 1rem !important;
+    padding: 2rem 1rem;
   }
 
   .missing-object blockquote {
-    padding: 1.25rem !important;
-    font-size: 0.88rem;
-  }
-
-  /* Closing */
-  .closing-posture {
-    padding: 2.5rem 1rem !important;
-  }
-
-  /* Candidate pioneer — single column */
-  .candidate-pioneer ul {
-    columns: 1;
-  }
-
-  /* Three-part structure */
-  .three-part-structure h3 {
-    padding-left: 1.25rem;
-    font-size: 0.88rem !important;
+    padding: 1.25rem;
+    font-size: 0.9rem;
   }
 }
 
-/* Small Mobile */
 @media (max-width: 400px) {
   main {
     padding-left: 0.75rem;
@@ -734,49 +322,38 @@ section, .card, blockquote, table {
   }
 
   .hero-title {
-    font-size: 1.5rem !important;
+    font-size: 1.55rem !important;
   }
 
   section[class] {
-    padding: 1rem !important;
+    padding: 1rem;
   }
 
   .innovations th,
   .innovations td {
-    padding: 0.55rem 0.65rem !important;
+    padding: 0.5rem 0.65rem;
     font-size: 0.78rem;
   }
 }
 
 /* ============================================================
-   Reduced Motion
+   Reduced Motion & Print (preserved)
    ============================================================ */
+
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  *, *::before, *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
 }
 
-/* ============================================================
-   Print
-   ============================================================ */
 @media print {
-  :root {
-    color-scheme: light;
-  }
+  :root { color-scheme: light; }
 
   body {
     background: #fff;
     color: #1a1a1a;
-  }
-
-  body::before,
-  body::after {
-    display: none;
   }
 
   main {
@@ -786,51 +363,19 @@ section, .card, blockquote, table {
 
   section[class] {
     break-inside: avoid;
-    border: 1px solid #ddd !important;
-    padding: 1rem !important;
-    background: #fff !important;
-    box-shadow: none !important;
+    border: 1px solid #ddd;
+    padding: 1rem;
+    background: #fff;
   }
 
-  .hero::before {
-    display: none;
+  h1, h2, h3, p, li, td, th, blockquote {
+    color: #1a1a1a;
   }
 
-  .hero-title {
-    color: #000 !important;
-    background: none !important;
-    -webkit-background-clip: border-box !important;
-    background-clip: border-box !important;
-  }
+  a { color: #1a1a1a; text-decoration: underline; }
 
-  h1, h2, h3, h4 {
-    color: #000 !important;
-  }
-
-  p, li, td, blockquote {
-    color: #333 !important;
-  }
-
-  a {
-    color: #1a1a1a !important;
-    text-decoration: underline;
-  }
-
-  blockquote {
-    border-left-color: #999 !important;
-    background: #f9f9f9 !important;
-  }
-
-  .innovations table {
-    border-color: #ddd !important;
-  }
-
-  .innovations th {
-    background: #f5f5f5 !important;
-    color: #333 !important;
-  }
-
-  .innovations td {
-    border-color: #ddd !important;
+  pre, code {
+    color: #1a1a1a;
+    background: #f6f8fa;
   }
 }
