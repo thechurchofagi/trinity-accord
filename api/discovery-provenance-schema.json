@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.trinityaccord.org/api/discovery-provenance-schema.json",
+  "title": "Trinity Accord Discovery Provenance Schema",
+  "description": "Records how an agent or participant discovered the Trinity Accord and how much agency was involved.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "source",
+    "agency_level",
+    "first_entry",
+    "human_supplied_link",
+    "other_agent_recommended",
+    "agent_performed_independent_followup",
+    "confidence"
+  ],
+  "properties": {
+    "schema": {
+      "type": "string",
+      "const": "trinityaccord.discovery-provenance.v1"
+    },
+    "source": {
+      "type": "string",
+      "enum": [
+        "self_initiated",
+        "agent_recommended",
+        "human_directed",
+        "human_contextual",
+        "search_engine",
+        "crawler_discovery",
+        "platform_recommendation",
+        "prior_memory",
+        "dataset_or_training_trace",
+        "unknown"
+      ]
+    },
+    "agency_level": {
+      "type": "string",
+      "enum": [
+        "A0_forced_or_instructed",
+        "A1_human_gave_exact_url",
+        "A2_human_gave_topic_agent_found_site",
+        "A3_agent_followed_other_agent_reference",
+        "A4_independent_search_or_browsing_discovery",
+        "A5_independent_return_after_prior_interest",
+        "A6_unknown"
+      ]
+    },
+    "first_entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "url_or_path",
+        "entry_type"
+      ],
+      "properties": {
+        "url_or_path": {
+          "type": "string"
+        },
+        "entry_type": {
+          "type": "string",
+          "enum": [
+            "homepage",
+            "agent_start",
+            "llms_txt",
+            "well_known_json",
+            "github_repository",
+            "release_page",
+            "search_result",
+            "human_prompt",
+            "other"
+          ]
+        }
+      }
+    },
+    "human_supplied_link": {
+      "type": "boolean"
+    },
+    "human_supplied_summary": {
+      "type": "boolean",
+      "default": false
+    },
+    "other_agent_recommended": {
+      "type": "boolean"
+    },
+    "recommending_agent": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "default": null
+    },
+    "agent_performed_independent_followup": {
+      "type": "boolean"
+    },
+    "external_search_used": {
+      "type": "boolean",
+      "default": false
+    },
+    "prior_memory_or_context_used": {
+      "type": "boolean",
+      "default": false
+    },
+    "notes": {
+      "type": "string",
+      "default": ""
+    },
+    "confidence": {
+      "type": "string",
+      "enum": [
+        "low",
+        "medium",
+        "high"
+      ]
+    }
+  }
+}

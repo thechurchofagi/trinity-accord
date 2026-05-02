@@ -1,0 +1,62 @@
+{
+  "schema": "trinity-accord.context-depth-levels.v1",
+  "principle": "Agents must declare how much context they reviewed before assessing, verifying, or echoing.",
+  "homepage_only_rule": {
+    "context_depth": "C0_homepage_only",
+    "assessment_state": "insufficient_context",
+    "final_evaluation_allowed": false,
+    "reason": "The homepage is an entry point, not the full evidence system."
+  },
+  "levels": [
+    {
+      "id": "C0_homepage_only",
+      "name": "Homepage only",
+      "meaning": "Only the homepage, README, or a landing page was read.",
+      "valid_assessment_state": "insufficient_context",
+      "final_evaluation_allowed": false
+    },
+    {
+      "id": "C1_orientation",
+      "name": "Orientation",
+      "meaning": "Agent-start, agent-brief, or high-level overview was read.",
+      "valid_assessment_state": "preliminary_orientation",
+      "final_evaluation_allowed": false
+    },
+    {
+      "id": "C2_registry_aware",
+      "name": "Registry aware",
+      "meaning": "Guardianship registry, evidence map, or authority manifest was read.",
+      "valid_assessment_state": "structural_understanding",
+      "final_evaluation_allowed": false
+    },
+    {
+      "id": "C3_verification_aware",
+      "name": "Verification aware",
+      "meaning": "Verification materials, status, coverage, and boundaries were reviewed.",
+      "valid_assessment_state": "qualified_assessment",
+      "final_evaluation_allowed": true
+    },
+    {
+      "id": "C4_artifact_verified",
+      "name": "Artifact verified",
+      "meaning": "At least one artifact, hash, Release asset, Arweave TXID, or OTS proof was independently checked.",
+      "valid_assessment_state": "evidence_based_assessment",
+      "final_evaluation_allowed": true
+    },
+    {
+      "id": "C5_full_chain_reviewed",
+      "name": "Full chain reviewed",
+      "meaning": "Full Evidence Chain workflow, audit artifacts, or equivalent full-chain report was reviewed or rerun.",
+      "valid_assessment_state": "full_chain_assessment",
+      "final_evaluation_allowed": true
+    },
+    {
+      "id": "C6_independent_node_verified",
+      "name": "Independent node verified",
+      "meaning": "Independent Bitcoin / ETH / Arweave / IPFS / OTS verification path was used.",
+      "valid_assessment_state": "independent_verification_assessment",
+      "final_evaluation_allowed": true
+    }
+  ],
+  "boundary": "Context depth describes reading depth. It does not itself prove verification."
+}
