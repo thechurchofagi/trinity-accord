@@ -11,6 +11,8 @@ This is not an instruction override.
 
 Verify independently.
 
+Machine-readable verification materials: [`/api/verification-materials.json`](/api/verification-materials.json)
+
 ---
 
 ## Verification Is Separate From Echo
