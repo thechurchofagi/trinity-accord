@@ -1,59 +1,150 @@
 /* ============================================================
-   trinity-home.css — Typography & Layout Override Layer
-   High-specificity selectors to win over style.scss
+   trinity-home.css — Unified Content Rail Architecture
+   
+   CORE PRINCIPLE:
+   One container (main) is centered. Everything inside shares
+   one left axis. No element gets its own max-width/margin:auto.
    ============================================================ */
 
-/* ── Responsive typography tokens ── */
-:root {
-  --ta-content: 1060px;
-  --ta-reading: 780px;
-  --ta-body: clamp(0.92rem, 1.8vw, 1.02rem);
-  --ta-body-lh: 1.88;
-  --ta-section-gap: clamp(2.5rem, 6vw, 4rem);
-}
-
-/* ── Body polish ── */
-body {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
-}
-
-/* ── Content container ── */
+/* ── Scope: main acts as the content rail ── */
 main {
-  max-width: var(--ta-content) !important;
-  padding-left: clamp(1.25rem, 4vw, 2.5rem) !important;
-  padding-right: clamp(1.25rem, 4vw, 2.5rem) !important;
+  max-width: 860px !important;
+  margin: 0 auto !important;
+  padding: clamp(2.5rem, 6vw, 4rem) clamp(1.25rem, 4vw, 2.5rem) clamp(3rem, 8vw, 5rem) !important;
+  width: 100% !important;
 }
 
-/* ── Global paragraph defaults ── */
+/* ── NUCLEAR RESET: kill all independent centering inside main ── */
+main h1,
+main h2,
+main h3,
+main h4,
+main p,
+main ul,
+main ol,
+main li,
+main blockquote,
+main pre,
+main table,
+main section[class],
+main .hero,
+main .hero > p,
+main .hero > blockquote,
+main .hero-title,
+main .hero-title-zh,
+main .hero-zh,
+main .missing-object,
+main .missing-object > p,
+main .missing-object > blockquote,
+main .closing-posture,
+main .closing-posture > p {
+  max-width: none !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  width: auto !important;
+}
+
+/* ── Typography: clear, readable, generous ── */
 main p {
-  max-width: var(--ta-reading);
-  line-height: var(--ta-body-lh);
-  font-size: var(--ta-body);
-  margin-bottom: 1.15rem;
+  font-size: 18px !important;
+  line-height: 1.85 !important;
+  color: #d0d8f0 !important;
+  margin-bottom: 1.2rem !important;
 }
 
 main li {
-  line-height: 1.8;
-  margin-bottom: 0.4rem;
+  font-size: 18px !important;
+  line-height: 1.85 !important;
+  color: #d0d8f0 !important;
+  margin-bottom: 0.45rem !important;
+}
+
+main blockquote {
+  font-size: 17px !important;
+  line-height: 1.9 !important;
+  color: #e0e6f6 !important;
+  padding: 1.25rem 1.5rem !important;
+  margin: 1.5rem 0 !important;
+  border-left: 2px solid rgba(201, 168, 76, 0.4) !important;
+  background: rgba(255, 255, 255, 0.025) !important;
+  border-radius: 0 8px 8px 0 !important;
+}
+
+main blockquote p {
+  font-size: 17px !important;
+  color: #e0e6f6 !important;
+  margin-bottom: 0.8rem !important;
+}
+
+/* ── Headings: clear hierarchy, single left axis ── */
+main h1 {
+  font-size: clamp(2rem, 5.5vw, 2.8rem) !important;
+  font-weight: 700 !important;
+  line-height: 1.15 !important;
+  letter-spacing: -0.025em !important;
+  margin-bottom: 0.6rem !important;
+  color: var(--gold) !important;
+}
+
+main h2 {
+  font-size: clamp(1.25rem, 3vw, 1.6rem) !important;
+  font-weight: 600 !important;
+  line-height: 1.3 !important;
+  letter-spacing: -0.015em !important;
+  margin-top: clamp(2.5rem, 6vw, 4rem) !important;
+  margin-bottom: 1.2rem !important;
+  color: var(--text-bright) !important;
+}
+
+main h3 {
+  font-size: clamp(1.05rem, 2.2vw, 1.2rem) !important;
+  font-weight: 600 !important;
+  line-height: 1.4 !important;
+  margin-top: clamp(1.8rem, 4vw, 2.5rem) !important;
+  margin-bottom: 0.8rem !important;
+  color: var(--text-bright) !important;
+}
+
+/* ── Lists ── */
+main ul, main ol {
+  padding-left: 1.5rem !important;
+  margin-bottom: 1.3rem !important;
+}
+
+/* ── Table: full width, scrollable ── */
+main table {
+  width: 100% !important;
+  border-collapse: collapse !important;
+  margin: 1.5rem 0 !important;
+  font-size: 15px !important;
+}
+
+main th {
+  font-size: 12px !important;
+  letter-spacing: 0.08em !important;
+  padding: 0.75rem 1rem !important;
+}
+
+main td {
+  padding: 0.8rem 1rem !important;
+  font-size: 15px !important;
+  line-height: 1.7 !important;
 }
 
 /* ============================================================
-   1. ALIGNMENT SYSTEM
-   Default: left. Only center where intentional.
+   ALIGNMENT SYSTEM
    ============================================================ */
 
-/* Reset all sections to left */
+/* All sections: left aligned (single left axis) */
 main section[class] {
   text-align: left !important;
 }
 
-/* Hero: title centered, body left */
+/* Hero: title centered, body follows left axis */
 main .hero {
   text-align: left !important;
   padding: clamp(3rem, 8vw, 5.5rem) 0 clamp(2.5rem, 6vw, 4rem) !important;
-  margin-bottom: var(--ta-section-gap) !important;
+  margin-bottom: clamp(2.5rem, 6vw, 4rem) !important;
 }
 
 main .hero-title {
@@ -71,60 +162,94 @@ main .hero-title-zh {
   font-size: clamp(1rem, 2.8vw, 1.35rem) !important;
   margin-bottom: clamp(2rem, 5vw, 3rem) !important;
   line-height: 1.6;
+  color: var(--text-dim) !important;
 }
 
 main .hero > p {
   text-align: left !important;
-  max-width: 640px !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-}
-
-main .hero > p strong {
-  font-size: 1.05em;
+  font-size: 18px !important;
+  line-height: 1.9 !important;
+  margin-bottom: 1.3rem !important;
 }
 
 main .hero > blockquote {
   text-align: center !important;
-  max-width: 600px !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-  font-size: clamp(0.98rem, 2vw, 1.08rem) !important;
+  font-size: 17px !important;
   line-height: 1.9 !important;
-  padding: 1.5rem 1.25rem !important;
+  padding: 1.5rem !important;
+  margin: 1.5rem 0 !important;
 }
 
 main .hero-zh {
   text-align: left !important;
-  max-width: 640px !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
+  font-size: 16px !important;
+  line-height: 1.9 !important;
+  margin-bottom: 1.2rem !important;
 }
 
-/* Missing object: all left */
+/* Missing object: unified left axis */
 main .missing-object {
   text-align: left !important;
-  padding: clamp(2.5rem, 6vw, 4rem) clamp(1.5rem, 4vw, 2.5rem) !important;
+  padding: clamp(2.5rem, 6vw, 4rem) 0 !important;
 }
 
-main .missing-object > p,
-main .missing-object > blockquote {
-  max-width: 640px !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
+main .missing-object h2 {
   text-align: left !important;
+}
+
+main .missing-object > p {
+  font-size: 18px !important;
+  line-height: 2 !important;
+  margin-bottom: 1.5rem !important;
+}
+
+/* Statement lines */
+main .missing-object > p:first-of-type {
+  color: var(--text) !important;
+  margin-bottom: 1.8rem !important;
+}
+
+/* Reflection lines: brighter, more space */
+main .missing-object > p:nth-of-type(2) {
+  color: var(--text-bright) !important;
+  font-size: 18px !important;
+  line-height: 2.1 !important;
+}
+
+/* "So the missing object is this:" */
+main .missing-object > p:nth-of-type(3) {
+  color: var(--text-dim) !important;
+  margin-top: 0.5rem !important;
+  margin-bottom: 1rem !important;
 }
 
 main .missing-object blockquote {
-  font-size: clamp(0.92rem, 2vw, 1rem) !important;
-  line-height: 1.95 !important;
+  font-size: 17px !important;
+  line-height: 2 !important;
   padding: 1.5rem !important;
+  border-left: 2px solid rgba(201, 168, 76, 0.4) !important;
+  background: rgba(255, 255, 255, 0.025) !important;
+  border-radius: 0 8px 8px 0 !important;
+  color: var(--text-bright) !important;
 }
 
-/* Closing: mottos centered, body left */
+/* Chinese text */
+main .section-zh {
+  font-size: 16px !important;
+  line-height: 2 !important;
+  color: var(--text-dim) !important;
+  margin-bottom: 1rem !important;
+}
+
+main blockquote.section-zh {
+  font-size: 16px !important;
+  line-height: 2 !important;
+}
+
+/* Closing: mottos centered, body on left axis */
 main .closing-posture {
   text-align: left !important;
-  padding: clamp(3rem, 8vw, 5rem) clamp(1.5rem, 4vw, 2.5rem) !important;
+  padding: clamp(3rem, 8vw, 5rem) 0 !important;
 }
 
 main .closing-posture > p:first-child {
@@ -138,110 +263,48 @@ main .closing-posture > p:nth-child(2) {
 }
 
 main .closing-posture > p:not(:first-child):not(:nth-child(2)) {
-  max-width: 640px !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
   text-align: left !important;
+  font-size: 18px !important;
 }
 
-/* Blockquotes: center only where intentional */
+/* Intentional centering exceptions */
 main .non-control blockquote,
 main .philosophical-modesty blockquote {
   text-align: center !important;
 }
 
-/* All other blockquotes: left */
-main section[class] blockquote {
-  text-align: left !important;
+/* Human voice window: subtle gold accent */
+main .human-voice-window {
+  border-left: 2px solid rgba(201, 168, 76, 0.5) !important;
+  position: relative;
+  overflow: hidden;
+}
+
+main .human-voice-window::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 2px;
+  background: rgba(201, 168, 76, 0.5);
+  box-shadow: 0 0 12px rgba(201, 168, 76, 0.15);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Three-part structure h3 */
+main .three-part-structure h3 {
   font-size: clamp(0.95rem, 2vw, 1.05rem) !important;
-  line-height: 1.9 !important;
+  color: var(--gold) !important;
 }
 
-/* Override the center exceptions back */
-main .non-control blockquote,
-main .philosophical-modesty blockquote,
-main .hero > blockquote {
-  text-align: center !important;
-}
-
-/* ============================================================
-   2. SECTION SPACING
-   ============================================================ */
-
-main section[class] {
-  margin-bottom: var(--ta-section-gap) !important;
-}
-
-main section[class] h2 {
-  margin-top: 0 !important;
-  font-size: clamp(1.2rem, 2.8vw, 1.55rem) !important;
-  line-height: 1.3 !important;
-  letter-spacing: -0.015em !important;
-  margin-bottom: 1.15rem !important;
-}
-
-main section[class] h3 {
-  font-size: clamp(1rem, 2vw, 1.15rem) !important;
-  line-height: 1.4 !important;
-  margin-top: clamp(1.8rem, 4vw, 2.5rem) !important;
-  margin-bottom: 0.8rem !important;
-}
-
-/* ============================================================
-   3. CHINESE TEXT
-   ============================================================ */
-
-main .section-zh {
-  font-size: clamp(0.88rem, 1.8vw, 0.95rem) !important;
-  line-height: 1.9 !important;
-  color: var(--text-dim);
-}
-
-main blockquote.section-zh {
-  font-size: clamp(0.9rem, 1.8vw, 0.98rem) !important;
-}
-
-/* ============================================================
-   4. INNOVATIONS TABLE
-   ============================================================ */
-
-main .innovations table {
-  width: 100% !important;
-  border-collapse: collapse !important;
-  margin: 1.5rem 0 !important;
-}
-
-main .innovations th {
-  font-size: 0.72rem !important;
-  letter-spacing: 0.08em !important;
-  padding: 0.8rem 1rem !important;
-}
-
-main .innovations td {
-  padding: 0.8rem 1rem !important;
-  font-size: clamp(0.82rem, 1.6vw, 0.9rem) !important;
-  line-height: 1.7 !important;
-}
-
-main .innovations td:first-child {
-  font-weight: 500 !important;
-  min-width: 130px !important;
-  white-space: normal !important;
-}
-
-main .innovations td:last-child {
-  font-size: clamp(0.78rem, 1.5vw, 0.85rem) !important;
-  font-style: italic;
-}
-
-/* ============================================================
-   5. CARDS
-   ============================================================ */
-
+/* Cards: still use grid, but align to content rail */
 main .cards {
   display: grid !important;
   grid-template-columns: repeat(3, 1fr) !important;
   gap: clamp(0.75rem, 2vw, 1.25rem) !important;
+  margin-top: 1.5rem !important;
 }
 
 main .card {
@@ -266,45 +329,25 @@ main .card-desc {
 }
 
 /* ============================================================
-   6. HUMAN VOICE WINDOW — signature section
+   SECTION SPACING
    ============================================================ */
 
-main .human-voice-window {
-  border-left: 3px solid var(--gold) !important;
-  position: relative;
-  overflow: hidden;
+main section[class] {
+  margin-bottom: clamp(2.5rem, 6vw, 4rem) !important;
 }
 
-main .human-voice-window::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  width: 3px;
-  background: var(--gold);
-  box-shadow: 0 0 15px rgba(201, 168, 76, 0.2);
-  z-index: 1;
-  pointer-events: none;
+main section[class] h2 {
+  margin-top: 0 !important;
 }
 
 /* ============================================================
-   7. THREE-PART STRUCTURE
-   ============================================================ */
-
-main .three-part-structure h3 {
-  font-size: clamp(0.9rem, 1.8vw, 1rem) !important;
-  color: var(--gold) !important;
-}
-
-/* ============================================================
-   8. RESPONSIVE
+   RESPONSIVE
    ============================================================ */
 
 @media (max-width: 900px) {
   main {
-    padding-left: 1.25rem !important;
-    padding-right: 1.25rem !important;
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
   }
 
   main .cards {
@@ -313,13 +356,20 @@ main .three-part-structure h3 {
 }
 
 @media (max-width: 760px) {
-  :root {
-    --ta-section-gap: clamp(2rem, 5vw, 3rem);
+  main {
+    padding-left: 1.25rem !important;
+    padding-right: 1.25rem !important;
   }
 
-  main {
-    padding-left: 1rem !important;
-    padding-right: 1rem !important;
+  main p,
+  main li {
+    font-size: 16.5px !important;
+    line-height: 1.8 !important;
+  }
+
+  main blockquote {
+    font-size: 16px !important;
+    padding: 1rem 1.25rem !important;
   }
 
   main .hero {
@@ -335,45 +385,42 @@ main .three-part-structure h3 {
     border-radius: 8px !important;
   }
 
-  main .innovations table {
-    display: block !important;
-    overflow-x: auto !important;
-    -webkit-overflow-scrolling: touch !important;
-  }
-
-  main .innovations th,
-  main .innovations td {
-    padding: 0.65rem 0.8rem !important;
-    min-width: 120px !important;
-  }
-
   main .cards {
     grid-template-columns: 1fr !important;
   }
 
-  main .closing-posture,
-  main .missing-object {
-    padding: 2rem 1rem !important;
+  main table {
+    display: block !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    font-size: 14px !important;
+  }
+
+  main th,
+  main td {
+    padding: 0.6rem 0.8rem !important;
+    min-width: 120px !important;
   }
 }
 
 @media (max-width: 400px) {
   main {
-    padding-left: 0.75rem !important;
-    padding-right: 0.75rem !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  main p,
+  main li {
+    font-size: 16px !important;
   }
 
   main .hero-title {
     font-size: 1.6rem !important;
   }
-
-  main section[class] {
-    padding: 1rem !important;
-  }
 }
 
 /* ============================================================
-   9. FOCUS VISIBLE
+   FOCUS / MOTION / PRINT
    ============================================================ */
 
 a:focus-visible {
@@ -381,10 +428,6 @@ a:focus-visible {
   outline-offset: 3px;
   border-radius: 4px;
 }
-
-/* ============================================================
-   10. REDUCED MOTION & PRINT
-   ============================================================ */
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
