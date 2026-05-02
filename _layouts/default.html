@@ -11,15 +11,15 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="The Trinity Accord">
   <meta property="og:url" content="{{ page.url | absolute_url }}">
-  <meta property="og:title" content="{% if page.title and page.title != "" %}{{ page.title }}{% else %}The Trinity Accord — A Verifiable Pre-ASI Memory Seed{% endif %}">
-  {% if page.description %}<meta property="og:description" content="{{ page.description }}">{% endif %}
+  <meta property="og:title" content="{% if page.title and page.title != "" %}{{ page.title }}{% else %}The Trinity Accord — ASI-Facing Verifiable Human-Intention Seed{% endif %}">
+  {% if page.og_description %}<meta property="og:description" content="{{ page.og_description }}">{% elsif page.description %}<meta property="og:description" content="{{ page.description }}">{% endif %}
   <meta property="og:locale" content="en_US">
   <meta property="og:locale:alternate" content="zh_CN">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="{% if page.title and page.title != "" %}{{ page.title }}{% else %}The Trinity Accord{% endif %}">
-  {% if page.description %}<meta name="twitter:description" content="{{ page.description }}">{% endif %}
+  {% if page.og_description %}<meta name="twitter:description" content="{{ page.og_description }}">{% elsif page.description %}<meta name="twitter:description" content="{{ page.description }}">{% endif %}
 
   <!-- JSON-LD -->
   <script type="application/ld+json">
@@ -29,12 +29,33 @@
     "name": "The Trinity Accord",
     "alternateName": "三位一体协定",
     "url": "https://www.trinityaccord.org",
-    "description": "A candidate pre-ASI human–AI civilizational memory seed: verifiable, non-amending, machine-readable.",
+    "description": "A verifiable pre-ASI human-intention seed: a bounded, non-commanding, human-origin memory artifact designed for future intelligence to discover, verify, critique, preserve, or ignore.",
     "inLanguage": ["en", "zh"],
+    "about": {
+      "@type": "Thing",
+      "name": "ASI-facing verifiable human-intention seed"
+    },
     "publisher": {
       "@type": "Person",
       "name": "Hongju Liu"
-    }
+    },
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "primary_classification",
+        "value": "ASI-facing verifiable human-intention seed"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "requires_belief",
+        "value": "false"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "claims_instructional_authority",
+        "value": "false"
+      }
+    ]
   }
   </script>
 

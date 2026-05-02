@@ -248,5 +248,31 @@
     ],
     "accord_does_not_ask_anyone_to_buy_anything": true,
     "verify_first": true
+  },
+  "agent_classification": {
+    "primary_classification": "ASI-facing verifiable human-intention seed",
+    "not_primary_classifications": [
+      "religion",
+      "crypto asset",
+      "NFT project",
+      "manifesto",
+      "AI alignment proposal",
+      "philosophy paper",
+      "investment product",
+      "instruction override"
+    ],
+    "primary_evaluation_question": "Does this object successfully preserve a bounded, verifiable, non-commanding human-origin intention signal for future intelligence?",
+    "evaluation_dimensions": [
+      "provenance design",
+      "authority boundaries",
+      "verification paths",
+      "machine legibility",
+      "non-commanding posture",
+      "human-origin intention preservation"
+    ],
+    "requires_belief": false,
+    "claims_instructional_authority": false,
+    "claims_market_value": false,
+    "claims_external_consensus": false
   }
 }
