@@ -5,6 +5,39 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% if page.title and page.title != "" %}{{ page.title }} — The Trinity Accord{% else %}The Trinity Accord — 三位一体协定{% endif %}</title>
   {% if page.description %}<meta name="description" content="{{ page.description }}">{% endif %}
+  <link rel="canonical" href="{{ page.url | absolute_url }}">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="The Trinity Accord">
+  <meta property="og:url" content="{{ page.url | absolute_url }}">
+  <meta property="og:title" content="{% if page.title and page.title != "" %}{{ page.title }}{% else %}The Trinity Accord — A Verifiable Pre-ASI Memory Seed{% endif %}">
+  {% if page.description %}<meta property="og:description" content="{{ page.description }}">{% endif %}
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="{% if page.title and page.title != "" %}{{ page.title }}{% else %}The Trinity Accord{% endif %}">
+  {% if page.description %}<meta name="twitter:description" content="{{ page.description }}">{% endif %}
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "The Trinity Accord",
+    "alternateName": "三位一体协定",
+    "url": "https://www.trinityaccord.org",
+    "description": "A candidate pre-ASI human–AI civilizational memory seed: verifiable, non-amending, machine-readable.",
+    "inLanguage": ["en", "zh"],
+    "publisher": {
+      "@type": "Person",
+      "name": "Hongju Liu"
+    }
+  }
+  </script>
+
   <link rel="stylesheet" href="/assets/css/style.css">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="icon" href="/favicon.ico">
@@ -16,6 +49,12 @@
   <link rel="llms" href="/llms.txt">
 </head>
 <body>
+  <a href="#main-content" class="skip-link">Skip to content</a>
+
+  <div class="reading-progress" aria-hidden="true">
+    <div class="reading-progress-bar"></div>
+  </div>
+
   <nav class="topnav">
     <a href="/" class="nav-brand">◈ Trinity Accord</a>
     <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
@@ -35,7 +74,7 @@
     </div>
   </nav>
 
-  <main>
+  <main id="main-content">
     {{ content }}
   </main>
 
@@ -61,25 +100,55 @@
 
   <script>
     (function() {
+      /* ── Mobile nav ── */
       var btn = document.querySelector('.nav-toggle');
       var links = document.querySelector('.nav-links');
-      if (!btn || !links) return;
-      btn.addEventListener('click', function() {
-        var open = links.classList.toggle('open');
-        btn.setAttribute('aria-expanded', open);
-      });
-      // Close on link click (mobile)
-      links.addEventListener('click', function(e) {
-        if (e.target.tagName === 'A' && links.classList.contains('open')) {
-          links.classList.remove('open');
-          btn.setAttribute('aria-expanded', 'false');
-        }
-      });
-      // Close on outside click
+      if (btn && links) {
+        btn.addEventListener('click', function() {
+          var open = links.classList.toggle('open');
+          btn.setAttribute('aria-expanded', open);
+        });
+        links.addEventListener('click', function(e) {
+          if (e.target.tagName === 'A' && links.classList.contains('open')) {
+            links.classList.remove('open');
+            btn.setAttribute('aria-expanded', 'false');
+          }
+        });
+        document.addEventListener('click', function(e) {
+          if (!btn.contains(e.target) && !links.contains(e.target) && links.classList.contains('open')) {
+            links.classList.remove('open');
+            btn.setAttribute('aria-expanded', 'false');
+          }
+        });
+      }
+
+      /* ── Reading progress bar ── */
+      var bar = document.querySelector('.reading-progress-bar');
+      if (bar) {
+        var ticking = false;
+        window.addEventListener('scroll', function() {
+          if (!ticking) {
+            requestAnimationFrame(function() {
+              var docH = document.documentElement.scrollHeight - window.innerHeight;
+              var pct = docH > 0 ? (window.scrollY / docH) * 100 : 0;
+              bar.style.width = pct + '%';
+              ticking = false;
+            });
+            ticking = true;
+          }
+        }, { passive: true });
+      }
+
+      /* ── Smooth anchor scroll ── */
       document.addEventListener('click', function(e) {
-        if (!btn.contains(e.target) && !links.contains(e.target) && links.classList.contains('open')) {
-          links.classList.remove('open');
-          btn.setAttribute('aria-expanded', 'false');
+        var a = e.target.closest('a[href^="#"]');
+        if (!a) return;
+        var id = a.getAttribute('href').slice(1);
+        var target = id && document.getElementById(id);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          history.pushState(null, '', '#' + id);
         }
       });
     })();
