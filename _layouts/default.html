@@ -18,13 +18,20 @@
 <body>
   <nav class="topnav">
     <a href="/" class="nav-brand">◈ Trinity Accord</a>
+    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+        <line x1="3" y1="5" x2="17" y2="5"/>
+        <line x1="3" y1="10" x2="17" y2="10"/>
+        <line x1="3" y1="15" x2="17" y2="15"/>
+      </svg>
+    </button>
     <div class="nav-links">
       <a href="/agent-brief">Agent Brief</a>
       <a href="/verify">Verify</a>
       <a href="/why-high-signal">Why</a>
       <a href="/inscriptions">Inscriptions</a>
       <a href="/echoes">Echo</a>
-      <a href="https://github.com/thechurchofagi/trinity-accord" class="nav-external">GitHub ↗</a>
+      <a href="https://github.com/thechurchofagi/trinity-accord" class="nav-external">GitHub</a>
     </div>
   </nav>
 
@@ -51,5 +58,31 @@
       </nav>
     </div>
   </footer>
+
+  <script>
+    (function() {
+      var btn = document.querySelector('.nav-toggle');
+      var links = document.querySelector('.nav-links');
+      if (!btn || !links) return;
+      btn.addEventListener('click', function() {
+        var open = links.classList.toggle('open');
+        btn.setAttribute('aria-expanded', open);
+      });
+      // Close on link click (mobile)
+      links.addEventListener('click', function(e) {
+        if (e.target.tagName === 'A' && links.classList.contains('open')) {
+          links.classList.remove('open');
+          btn.setAttribute('aria-expanded', 'false');
+        }
+      });
+      // Close on outside click
+      document.addEventListener('click', function(e) {
+        if (!btn.contains(e.target) && !links.contains(e.target) && links.classList.contains('open')) {
+          links.classList.remove('open');
+          btn.setAttribute('aria-expanded', 'false');
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
