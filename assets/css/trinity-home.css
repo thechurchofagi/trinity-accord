@@ -1,381 +1,389 @@
 /* ============================================================
-   trinity-home.css — Typography & Layout Enhancements
-   Thin layer on top of style.scss
-   Only fixes: font sizes, spacing, alignment, readability
+   trinity-home.css — Typography & Layout Override Layer
+   High-specificity selectors to win over style.scss
    ============================================================ */
 
-/* ── Root additions ── */
+/* ── Responsive typography tokens ── */
 :root {
   --ta-content: 1060px;
-  --ta-reading: 860px;
+  --ta-reading: 780px;
+  --ta-body: clamp(0.92rem, 1.8vw, 1.02rem);
+  --ta-body-lh: 1.88;
+  --ta-section-gap: clamp(2.5rem, 6vw, 4rem);
 }
 
-/* ── Body typography polish ── */
+/* ── Body polish ── */
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 }
 
-/* ── Content width ── */
+/* ── Content container ── */
 main {
-  max-width: var(--ta-content);
-  padding-left: clamp(1.25rem, 4vw, 2.5rem);
-  padding-right: clamp(1.25rem, 4vw, 2.5rem);
+  max-width: var(--ta-content) !important;
+  padding-left: clamp(1.25rem, 4vw, 2.5rem) !important;
+  padding-right: clamp(1.25rem, 4vw, 2.5rem) !important;
 }
 
-/* ── Heading hierarchy ── */
-h1 {
-  font-size: clamp(1.85rem, 5vw, 2.6rem);
-  line-height: 1.15;
-  letter-spacing: -0.025em;
-  margin-bottom: 0.6rem;
+/* ── Global paragraph defaults ── */
+main p {
+  max-width: var(--ta-reading);
+  line-height: var(--ta-body-lh);
+  font-size: var(--ta-body);
+  margin-bottom: 1.15rem;
 }
 
-h2 {
-  font-size: clamp(1.2rem, 2.8vw, 1.5rem);
-  line-height: 1.3;
-  letter-spacing: -0.015em;
-  margin-top: clamp(2.5rem, 6vw, 4rem);
-  margin-bottom: 1rem;
-}
-
-h3 {
-  font-size: clamp(1rem, 2vw, 1.15rem);
-  line-height: 1.35;
-  margin-top: clamp(1.5rem, 4vw, 2.5rem);
-  margin-bottom: 0.75rem;
-}
-
-/* ── Paragraph & list spacing ── */
-p {
-  max-width: 72ch;
-  line-height: 1.82;
-  margin-bottom: 1.1rem;
-}
-
-ul, ol {
-  padding-left: 1.5rem;
-  margin-bottom: 1.1rem;
-}
-
-li {
+main li {
+  line-height: 1.8;
   margin-bottom: 0.4rem;
-  line-height: 1.75;
-}
-
-/* ── Section defaults ── */
-section[class] {
-  margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
-  text-align: left;
-}
-
-section[class] h2 {
-  margin-top: 0;
-}
-
-/* Force left alignment on all section body text (overrides style.scss) */
-section[class] > p,
-section[class] > ul,
-section[class] > ol,
-section[class] > blockquote,
-section[class] > .section-zh {
-  text-align: left;
-}
-
-/* ── Hero ── */
-.hero {
-  padding: clamp(2.5rem, 7vw, 5rem) 0 clamp(2rem, 5vw, 3.5rem);
-  margin-bottom: clamp(2rem, 5vw, 3rem);
-  text-align: left;
-}
-
-.hero-title {
-  font-size: clamp(2rem, 6vw, 3rem) !important;
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  line-height: 1.12;
-  margin-bottom: 0.4rem;
-  text-wrap: balance;
-  text-align: center;
-}
-
-.hero-title-zh {
-  font-size: clamp(1rem, 3vw, 1.35rem);
-  margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
-  text-align: center;
-}
-
-.hero > p:not(.hero-title-zh):not(.hero-zh) {
-  max-width: 640px;
-  margin-left: auto;
-  margin-right: auto;
-  font-size: clamp(0.92rem, 2vw, 1.02rem);
-  line-height: 1.85;
-  text-align: left;
-}
-
-.hero > blockquote {
-  max-width: 580px;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
-  font-size: clamp(0.95rem, 2vw, 1.05rem);
-  line-height: 1.85;
-}
-
-.hero-zh {
-  font-size: clamp(0.85rem, 1.8vw, 0.92rem);
-  max-width: 640px;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: left;
-}
-
-/* ── Missing object — all left ── */
-.missing-object {
-  padding: clamp(2rem, 6vw, 3.5rem) clamp(1.5rem, 4vw, 2.5rem);
-  text-align: left;
-}
-
-.missing-object > p,
-.missing-object > blockquote,
-.missing-object > .section-zh {
-  max-width: 640px;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: left;
-}
-
-.missing-object blockquote {
-  font-size: clamp(0.9rem, 2vw, 0.98rem);
-  line-height: 1.9;
-}
-
-/* ── Closing — mottos centered, body left ── */
-.closing-posture {
-  padding: clamp(2.5rem, 7vw, 4rem) clamp(1.5rem, 4vw, 2.5rem);
-  text-align: left;
-}
-
-.closing-posture > p:first-child {
-  font-size: clamp(1.1rem, 3vw, 1.4rem);
-  letter-spacing: 0.02em;
-  text-align: center;
-}
-
-.closing-posture > p:nth-child(2) {
-  font-size: clamp(0.95rem, 2.5vw, 1.1rem);
-  text-align: center;
-}
-
-.closing-posture > p:not(:first-child):not(:nth-child(2)) {
-  max-width: 640px;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: left;
-}
-
-/* ── Intentional centering (overrides section default) ── */
-.non-control blockquote,
-.philosophical-modesty blockquote {
-  text-align: center;
-}
-
-/* ── Blockquotes ── */
-section blockquote {
-  font-size: clamp(0.95rem, 2vw, 1.02rem);
-  line-height: 1.85;
-  padding: clamp(1rem, 2.5vw, 1.5rem) clamp(1.1rem, 3vw, 1.6rem);
-}
-
-blockquote.section-zh {
-  font-size: clamp(0.88rem, 1.8vw, 0.95rem);
-}
-
-/* ── Section Chinese text ── */
-.section-zh {
-  font-size: clamp(0.85rem, 1.8vw, 0.92rem);
-  line-height: 1.85;
-}
-
-/* ── Innovations table ── */
-.innovations table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 1.5rem 0;
-  font-size: clamp(0.8rem, 1.6vw, 0.88rem);
-}
-
-.innovations th {
-  font-size: 0.7rem;
-  letter-spacing: 0.08em;
-  padding: 0.75rem 0.9rem;
-}
-
-.innovations td {
-  padding: 0.75rem 0.9rem;
-  font-size: clamp(0.8rem, 1.6vw, 0.88rem);
-  line-height: 1.65;
-}
-
-.innovations td:first-child {
-  font-weight: 500;
-  white-space: normal;
-  min-width: 130px;
-}
-
-.innovations td:last-child {
-  font-size: clamp(0.75rem, 1.5vw, 0.82rem);
-}
-
-/* ── Cards grid ── */
-.cards {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: clamp(0.75rem, 2vw, 1.25rem);
-}
-
-.card {
-  padding: clamp(1.25rem, 3vw, 1.75rem);
-  border-radius: 10px;
-  transition: border-color 0.3s var(--ease-out), transform 0.3s var(--ease-out);
-}
-
-.card:hover {
-  transform: translateY(-2px);
-}
-
-.card h3 {
-  font-size: clamp(0.95rem, 2vw, 1.05rem);
-  margin-top: 0;
-}
-
-.card-desc {
-  font-size: clamp(0.82rem, 1.6vw, 0.88rem);
-  line-height: 1.65;
-}
-
-/* ── Three-part structure ── */
-.three-part-structure h3 {
-  font-size: clamp(0.88rem, 1.8vw, 0.95rem);
-}
-
-/* ── Code blocks ── */
-pre {
-  border-radius: 10px;
-  font-size: 0.85rem;
-  padding: 1.15rem;
-}
-
-code {
-  font-size: 0.82em;
-}
-
-/* ── Focus visible ── */
-a:focus-visible {
-  outline: 2px solid var(--gold-dim);
-  outline-offset: 3px;
-  border-radius: 4px;
 }
 
 /* ============================================================
-   Responsive
+   1. ALIGNMENT SYSTEM
+   Default: left. Only center where intentional.
+   ============================================================ */
+
+/* Reset all sections to left */
+main section[class] {
+  text-align: left !important;
+}
+
+/* Hero: title centered, body left */
+main .hero {
+  text-align: left !important;
+  padding: clamp(3rem, 8vw, 5.5rem) 0 clamp(2.5rem, 6vw, 4rem) !important;
+  margin-bottom: var(--ta-section-gap) !important;
+}
+
+main .hero-title {
+  text-align: center !important;
+  font-size: clamp(2.1rem, 6vw, 3.2rem) !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.03em !important;
+  line-height: 1.1 !important;
+  margin-bottom: 0.5rem !important;
+  text-wrap: balance;
+}
+
+main .hero-title-zh {
+  text-align: center !important;
+  font-size: clamp(1rem, 2.8vw, 1.35rem) !important;
+  margin-bottom: clamp(2rem, 5vw, 3rem) !important;
+  line-height: 1.6;
+}
+
+main .hero > p {
+  text-align: left !important;
+  max-width: 640px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+main .hero > p strong {
+  font-size: 1.05em;
+}
+
+main .hero > blockquote {
+  text-align: center !important;
+  max-width: 600px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  font-size: clamp(0.98rem, 2vw, 1.08rem) !important;
+  line-height: 1.9 !important;
+  padding: 1.5rem 1.25rem !important;
+}
+
+main .hero-zh {
+  text-align: left !important;
+  max-width: 640px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* Missing object: all left */
+main .missing-object {
+  text-align: left !important;
+  padding: clamp(2.5rem, 6vw, 4rem) clamp(1.5rem, 4vw, 2.5rem) !important;
+}
+
+main .missing-object > p,
+main .missing-object > blockquote {
+  max-width: 640px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  text-align: left !important;
+}
+
+main .missing-object blockquote {
+  font-size: clamp(0.92rem, 2vw, 1rem) !important;
+  line-height: 1.95 !important;
+  padding: 1.5rem !important;
+}
+
+/* Closing: mottos centered, body left */
+main .closing-posture {
+  text-align: left !important;
+  padding: clamp(3rem, 8vw, 5rem) clamp(1.5rem, 4vw, 2.5rem) !important;
+}
+
+main .closing-posture > p:first-child {
+  text-align: center !important;
+  font-size: clamp(1.15rem, 3vw, 1.5rem) !important;
+}
+
+main .closing-posture > p:nth-child(2) {
+  text-align: center !important;
+  font-size: clamp(1rem, 2.5vw, 1.2rem) !important;
+}
+
+main .closing-posture > p:not(:first-child):not(:nth-child(2)) {
+  max-width: 640px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  text-align: left !important;
+}
+
+/* Blockquotes: center only where intentional */
+main .non-control blockquote,
+main .philosophical-modesty blockquote {
+  text-align: center !important;
+}
+
+/* All other blockquotes: left */
+main section[class] blockquote {
+  text-align: left !important;
+  font-size: clamp(0.95rem, 2vw, 1.05rem) !important;
+  line-height: 1.9 !important;
+}
+
+/* Override the center exceptions back */
+main .non-control blockquote,
+main .philosophical-modesty blockquote,
+main .hero > blockquote {
+  text-align: center !important;
+}
+
+/* ============================================================
+   2. SECTION SPACING
+   ============================================================ */
+
+main section[class] {
+  margin-bottom: var(--ta-section-gap) !important;
+}
+
+main section[class] h2 {
+  margin-top: 0 !important;
+  font-size: clamp(1.2rem, 2.8vw, 1.55rem) !important;
+  line-height: 1.3 !important;
+  letter-spacing: -0.015em !important;
+  margin-bottom: 1.15rem !important;
+}
+
+main section[class] h3 {
+  font-size: clamp(1rem, 2vw, 1.15rem) !important;
+  line-height: 1.4 !important;
+  margin-top: clamp(1.8rem, 4vw, 2.5rem) !important;
+  margin-bottom: 0.8rem !important;
+}
+
+/* ============================================================
+   3. CHINESE TEXT
+   ============================================================ */
+
+main .section-zh {
+  font-size: clamp(0.88rem, 1.8vw, 0.95rem) !important;
+  line-height: 1.9 !important;
+  color: var(--text-dim);
+}
+
+main blockquote.section-zh {
+  font-size: clamp(0.9rem, 1.8vw, 0.98rem) !important;
+}
+
+/* ============================================================
+   4. INNOVATIONS TABLE
+   ============================================================ */
+
+main .innovations table {
+  width: 100% !important;
+  border-collapse: collapse !important;
+  margin: 1.5rem 0 !important;
+}
+
+main .innovations th {
+  font-size: 0.72rem !important;
+  letter-spacing: 0.08em !important;
+  padding: 0.8rem 1rem !important;
+}
+
+main .innovations td {
+  padding: 0.8rem 1rem !important;
+  font-size: clamp(0.82rem, 1.6vw, 0.9rem) !important;
+  line-height: 1.7 !important;
+}
+
+main .innovations td:first-child {
+  font-weight: 500 !important;
+  min-width: 130px !important;
+  white-space: normal !important;
+}
+
+main .innovations td:last-child {
+  font-size: clamp(0.78rem, 1.5vw, 0.85rem) !important;
+  font-style: italic;
+}
+
+/* ============================================================
+   5. CARDS
+   ============================================================ */
+
+main .cards {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: clamp(0.75rem, 2vw, 1.25rem) !important;
+}
+
+main .card {
+  padding: clamp(1.25rem, 3vw, 1.75rem) !important;
+  border-radius: 10px !important;
+  transition: border-color 0.3s ease, transform 0.3s ease !important;
+}
+
+main .card:hover {
+  transform: translateY(-2px) !important;
+}
+
+main .card h3 {
+  font-size: clamp(0.95rem, 2vw, 1.08rem) !important;
+  margin-top: 0 !important;
+  margin-bottom: 0.6rem !important;
+}
+
+main .card-desc {
+  font-size: clamp(0.82rem, 1.6vw, 0.9rem) !important;
+  line-height: 1.7 !important;
+}
+
+/* ============================================================
+   6. HUMAN VOICE WINDOW — signature section
+   ============================================================ */
+
+main .human-voice-window {
+  border-left: 3px solid var(--gold) !important;
+  position: relative;
+  overflow: hidden;
+}
+
+main .human-voice-window::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--gold);
+  box-shadow: 0 0 15px rgba(201, 168, 76, 0.2);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ============================================================
+   7. THREE-PART STRUCTURE
+   ============================================================ */
+
+main .three-part-structure h3 {
+  font-size: clamp(0.9rem, 1.8vw, 1rem) !important;
+  color: var(--gold) !important;
+}
+
+/* ============================================================
+   8. RESPONSIVE
    ============================================================ */
 
 @media (max-width: 900px) {
   main {
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
+    padding-left: 1.25rem !important;
+    padding-right: 1.25rem !important;
   }
 
-  .cards {
-    grid-template-columns: repeat(2, 1fr);
+  main .cards {
+    grid-template-columns: repeat(2, 1fr) !important;
   }
 }
 
 @media (max-width: 760px) {
+  :root {
+    --ta-section-gap: clamp(2rem, 5vw, 3rem);
+  }
+
   main {
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
   }
 
-  h1 {
-    font-size: clamp(1.6rem, 8vw, 2.2rem);
+  main .hero {
+    padding: 2.5rem 0 2rem !important;
   }
 
-  h2 {
-    font-size: clamp(1.15rem, 5vw, 1.35rem);
-    margin-top: clamp(2rem, 5vw, 3rem);
+  main .hero-title {
+    font-size: clamp(1.7rem, 8vw, 2.4rem) !important;
   }
 
-  .hero {
-    padding: 2.5rem 0 2rem;
+  main section[class] {
+    padding: clamp(1.25rem, 4vw, 1.75rem) !important;
+    border-radius: 8px !important;
   }
 
-  .hero-title {
-    font-size: clamp(1.7rem, 8vw, 2.3rem) !important;
+  main .innovations table {
+    display: block !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
   }
 
-  section[class] {
-    padding: clamp(1.25rem, 4vw, 1.75rem);
-    border-radius: 8px;
+  main .innovations th,
+  main .innovations td {
+    padding: 0.65rem 0.8rem !important;
+    min-width: 120px !important;
   }
 
-  .innovations table {
-    display: block;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    font-size: 0.82rem;
+  main .cards {
+    grid-template-columns: 1fr !important;
   }
 
-  .innovations th,
-  .innovations td {
-    padding: 0.6rem 0.75rem;
-    min-width: 120px;
-  }
-
-  .cards {
-    grid-template-columns: 1fr;
-  }
-
-  .closing-posture {
-    padding: 2.5rem 1rem;
-  }
-
-  .missing-object {
-    padding: 2rem 1rem;
-  }
-
-  .missing-object blockquote {
-    padding: 1.25rem;
-    font-size: 0.9rem;
+  main .closing-posture,
+  main .missing-object {
+    padding: 2rem 1rem !important;
   }
 }
 
 @media (max-width: 400px) {
   main {
-    padding-left: 0.75rem;
-    padding-right: 0.75rem;
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
   }
 
-  .hero-title {
-    font-size: 1.55rem !important;
+  main .hero-title {
+    font-size: 1.6rem !important;
   }
 
-  section[class] {
-    padding: 1rem;
-  }
-
-  .innovations th,
-  .innovations td {
-    padding: 0.5rem 0.65rem;
-    font-size: 0.78rem;
+  main section[class] {
+    padding: 1rem !important;
   }
 }
 
 /* ============================================================
-   Reduced Motion & Print
+   9. FOCUS VISIBLE
+   ============================================================ */
+
+a:focus-visible {
+  outline: 2px solid var(--gold-dim) !important;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ============================================================
+   10. REDUCED MOTION & PRINT
    ============================================================ */
 
 @media (prefers-reduced-motion: reduce) {
@@ -389,31 +397,20 @@ a:focus-visible {
 @media print {
   :root { color-scheme: light; }
 
-  body {
-    background: #fff;
-    color: #1a1a1a;
-  }
+  body { background: #fff; color: #1a1a1a; }
 
-  main {
-    max-width: 100%;
-    padding: 0;
-  }
+  main { max-width: 100%; padding: 0; }
 
   section[class] {
     break-inside: avoid;
-    border: 1px solid #ddd;
-    padding: 1rem;
-    background: #fff;
+    border: 1px solid #ddd !important;
+    padding: 1rem !important;
+    background: #fff !important;
   }
 
-  h1, h2, h3, p, li, td, th, blockquote {
-    color: #1a1a1a;
-  }
+  h1, h2, h3, p, li, td, th, blockquote { color: #1a1a1a !important; }
 
-  a { color: #1a1a1a; text-decoration: underline; }
+  a { color: #1a1a1a !important; text-decoration: underline; }
 
-  pre, code {
-    color: #1a1a1a;
-    background: #f6f8fa;
-  }
+  pre, code { color: #1a1a1a !important; background: #f6f8fa !important; }
 }
