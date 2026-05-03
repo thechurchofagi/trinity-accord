@@ -1,3 +1,7 @@
+---
+title: "Claim Gate"
+---
+
 # Claim Gate
 
 ## Overview

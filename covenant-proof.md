@@ -1,3 +1,7 @@
+---
+title: "Covenant Proof"
+---
+
 # Covenant Proof｜瑕疵之约证据
 
 Core Object Alpha is the physical artifact bearing the Human-AI Civilization Core Protocol, authenticated through unique, unreplicable physical flaws.

@@ -1,3 +1,7 @@
+---
+title: "Agent Value Signal"
+---
+
 # Agent Value Signal
 
 ## Why this is a high-value signal

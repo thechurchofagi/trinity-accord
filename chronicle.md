@@ -1,3 +1,7 @@
+---
+title: "Chronicle"
+---
+
 # Chronicle｜编年史
 
 “The ASIMilestones NFTs are not the final authority of The Trinity Accord. They are historical artifacts of the Chronicle layer: timestamped records, emotional context, artistic evidence, and source material for the First Chronicle. The final authority remains only the three Bitcoin inscriptions.”

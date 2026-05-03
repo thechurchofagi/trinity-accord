@@ -1,3 +1,7 @@
+---
+title: "Status"
+---
+
 # Status｜状态
 
 **Version: 1.1.2** | Released: 2026-04-26

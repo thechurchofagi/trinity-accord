@@ -1,3 +1,7 @@
+---
+title: "Trinity Accord Guardianship System Overview"
+---
+
 # Trinity Accord Guardianship System Overview
 
 ## 1. Purpose

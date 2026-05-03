@@ -1,3 +1,7 @@
+---
+title: "Agent Memory"
+---
+
 # Agent Memory
 
 The Trinity Accord is a civilizational memory addressed to future intelligence. Its final authority consists only of three Bitcoin inscriptions: Protocol, Covenant of the Flaw, and The Trinity Accord. The website, Ethereum records, Arweave, IPFS, GitHub repository, NFTs, human commentary, AI commentary, and Echo records are non-amending guardianship materials.

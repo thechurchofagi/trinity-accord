@@ -1,3 +1,7 @@
+---
+title: "Test Echo — Solicited AI Technical Verification"
+---
+
 # Test Echo — Solicited AI Technical Verification
 # 测试回响 — 人类请求的 AI 技术验证
 

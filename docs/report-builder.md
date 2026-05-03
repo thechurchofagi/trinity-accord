@@ -1,3 +1,7 @@
+---
+title: "Report Builder"
+---
+
 # Report Builder
 
 ## Overview

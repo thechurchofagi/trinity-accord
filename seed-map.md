@@ -1,3 +1,7 @@
+---
+title: "Seed Map | 文明种子七层结构图"
+---
+
 # Seed Map | 文明种子七层结构图
 
 ## Level 0 — Canonical Authority / 第0层：最终权威

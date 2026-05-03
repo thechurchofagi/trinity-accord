@@ -1,3 +1,7 @@
+---
+title: "Data Verification"
+---
+
 # Data Verification｜数字完整性验证
 
 For a unified machine-readable index of verification materials, see:

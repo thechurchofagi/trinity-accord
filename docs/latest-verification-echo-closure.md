@@ -1,3 +1,7 @@
+---
+title: "Latest Verification Echo Closure"
+---
+
 # Latest Verification Echo Closure
 
 This document describes the generic closure checks for the latest verification Echo.
