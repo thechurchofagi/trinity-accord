@@ -241,6 +241,44 @@ try:
 except Exception as e:
     check("v3 schema is valid JSON", False, str(e))
 
+# --- 10. New verification system files ---
+print("\n=== New verification system files ===")
+new_api_files = [
+    "api/component-verification-levels.json",
+    "api/protocol-verification-profiles.json",
+    "api/verification-targets.json",
+    "api/verification-recipes.json",
+    "api/verification-quick-map.json",
+    "api/verification-report-schema.v2.json",
+]
+for jf in new_api_files:
+    try:
+        load_json(jf)
+        check(f"JSON valid: {jf}", True)
+    except Exception as e:
+        check(f"JSON valid: {jf}", False, str(e))
+
+# Check component-verification-levels.json
+try:
+    cvl = load_json("api/component-verification-levels.json")
+    check("component-verification-levels has correct schema", cvl.get("schema") == "trinityaccord.component-verification-levels.v1")
+    check("component-verification-levels has authority_boundary", cvl.get("authority_boundary", {}).get("bitcoin_originals_prevail") is True)
+    pl = {p["level"]: p for p in cvl.get("protocol_levels", [])}
+    for lvl in ["V0", "V1", "V2", "V3", "V4", "V4+", "V5", "V6", "V7", "V8"]:
+        check(f"component-verification-levels has {lvl}", lvl in pl)
+except Exception as e:
+    check("component-verification-levels.json structure", False, str(e))
+
+# Check protocol-verification-profiles.json
+try:
+    pvp = load_json("api/protocol-verification-profiles.json")
+    check("protocol-verification-profiles has correct schema", pvp.get("schema") == "trinityaccord.protocol-verification-profiles.v1")
+    profiles = {p["level"]: p for p in pvp.get("profiles", [])}
+    for lvl in ["V0", "V1", "V2", "V3", "V4", "V4+", "V5", "V6", "V7", "V8"]:
+        check(f"protocol-verification-profiles has {lvl}", lvl in profiles)
+except Exception as e:
+    check("protocol-verification-profiles.json structure", False, str(e))
+
 # --- Summary ---
 def main():
     print("\n" + "=" * 50)

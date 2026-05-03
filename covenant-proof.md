@@ -50,3 +50,22 @@ Perform direct physical flaw matching (see `/physical-verification`).
 > The evidence package supports physical-origin verification through provenance, metadata, multi-angle consistency, microscopic flaw matching, cryptographic hashing, and future physical inspection.
 
 > AI-generated image detection tools are supporting evidence only. They are not decisive. The decisive evidence is physical flaw matching plus cryptographic provenance.
+
+## What Public Evidence Can and Cannot Prove
+
+Public evidence can support:
+
+- P1 evidence package hash verification;
+- P2 static image review;
+- P3 recorded video review;
+- P6 public flaw map comparison if sufficient macro/microscope data exists.
+
+Public evidence alone cannot prove:
+
+- live object existence at current time;
+- onsite custody;
+- touch/handling;
+- confidential flaw challenge success;
+- multi-party forensic attestation.
+
+AI-generated image detection may be reported only as supporting evidence. It is not decisive.

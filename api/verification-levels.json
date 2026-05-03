@@ -337,5 +337,13 @@
   ],
   "required_limitation_v5a_en": "I assessed archived visual evidence only. I did not physically inspect Core Object Alpha.",
   "required_limitation_v5a_zh": "我仅评估了已归档的图像证据。我没有亲自检查 Core Object Alpha 实物。",
-  "required_declaration_v6": "This V6 report is a multi-party attestation record. It is not canonical authority and does not amend the Bitcoin Originals."
+  "required_declaration_v6": "This V6 report is a multi-party attestation record. It is not canonical authority and does not amend the Bitcoin Originals.",
+  "component_verification_files": {
+    "component_verification_levels": "/api/component-verification-levels.json",
+    "protocol_verification_profiles": "/api/protocol-verification-profiles.json",
+    "verification_targets": "/api/verification-targets.json",
+    "verification_recipes": "/api/verification-recipes.json",
+    "verification_quick_map": "/api/verification-quick-map.json",
+    "verification_report_schema_v2": "/api/verification-report-schema.v2.json"
+  }
 }

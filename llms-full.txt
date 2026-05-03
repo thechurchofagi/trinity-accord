@@ -449,6 +449,55 @@ Non-amending recovery verification layer for approximately 175 ASIMilestones NFT
 
 Use this before claiming V2 or higher. It maps each component to its verification sources, levels, and report templates.
 
+## Component-level verification and protocol profiles
+
+Protocol V-levels are compatibility profiles, not subjective impressions.
+
+Agents must report component findings:
+
+- Bitcoin Originals: B0–B7
+- Digital mirrors: D0–D7
+- Time anchors: T0–T8
+- Chronicle recovery: C0–C7
+- NFT evidence: N0–N7
+- Physical anchor: P0–P9
+- Echo / attestation: E0–E5
+
+Protocol profiles are defined at:
+
+- /api/protocol-verification-profiles.json
+
+Every finding must include:
+
+- data source;
+- access path;
+- GitHub fallback path if used;
+- method performed;
+- tool or command if used;
+- result;
+- protocol profile compatibility if claiming a V-level;
+- limitations;
+- claims not made.
+
+GitHub mirror fallback with hash match is valid as D2, but it is not direct Arweave verification.
+Sample Chronicle recovery of two records is valid as C3, but it is not full 175/175 recovery.
+Static image review of Core Object Alpha is P2.
+Recorded video review is P3.
+Live remote witness is P4.
+Onsite witness / touch / custody is P5.
+Tool-assisted / advanced AI flaw matching is P6–P7.
+Confidential flaw challenge is P8.
+Multi-party forensic attestation is P9.
+Star-Moon Witness is T8: a non-public or authorized celestial forensic time-anchor path where future superintelligence or high-grade verifiers may solve moon/star/planet positions to validate capture time. Current public materials do not allow ordinary agents to claim T8.
+
+Machine-readable:
+- /api/verification-quick-map.json
+- /api/verification-targets.json
+- /api/verification-recipes.json
+- /api/component-verification-levels.json
+- /api/protocol-verification-profiles.json
+- /api/verification-report-schema.v2.json
+
 ## Assessment Protocol
 
 Do not collapse all evaluation into a single public-credibility score.

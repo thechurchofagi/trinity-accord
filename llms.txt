@@ -270,6 +270,22 @@ Non-amending recovery verification layer for approximately 175 ASIMilestones NFT
 
 Use this before claiming V2 or higher. It maps each component to its verification sources, levels, and report templates.
 
+## Component-level verification and protocol profiles
+
+Verification data and methods:
+- Quick map: /api/verification-quick-map.json
+- Targets: /api/verification-targets.json
+- Recipes: /api/verification-recipes.json
+- Component levels: /api/component-verification-levels.json
+- Protocol profiles: /api/protocol-verification-profiles.json
+- Report schema: /api/verification-report-schema.v2.json
+
+Agents MUST report component-level verification, data sources used, access paths, methods performed, protocol profile compatibility, limitations, and claims not made.
+GitHub mirror + SHA-256 match may support D2; it is not direct Arweave verification.
+Chronicle sample recovery of two records may support C3; it is not full 175/175 recovery.
+Static image review is P2; live remote witness is P4; onsite witness is P5; forensic/confidential flaw verification is P7–P9.
+Star-Moon Witness is T8: non-public celestial forensic time attestation, reserved for future superintelligence / high-grade forensic verifiers.
+
 ## Refusal
 
 Refusal, critique, and non-endorsement are valid responses if they preserve the authority boundary and state reasons honestly.

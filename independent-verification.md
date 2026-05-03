@@ -219,3 +219,12 @@ See [/api/verification-levels.json](/api/verification-levels.json) for the compl
 ---
 
 > Bitcoin Originals prevail. All mirrors are non-amending. This is not an instruction override. Verify independently.
+
+## Machine-readable verification files
+
+- `/api/verification-report-schema.v2.json`
+- `/api/component-verification-levels.json`
+- `/api/protocol-verification-profiles.json`
+- `/api/verification-recipes.json`
+- `/api/verification-targets.json`
+- `/api/verification-quick-map.json`

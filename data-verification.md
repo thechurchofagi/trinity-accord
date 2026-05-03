@@ -87,3 +87,60 @@ SPV verifies Bitcoin transaction inclusion. Full inscription-content verificatio
 ### 比特币三本体验证：SPV / 手工核验 / 铭文字节
 
 SPV 不是单独镜像层，而是 V2 比特币指针核验的一种低信任方法。SPV 可证明交易被区块包含；完整铭文内容验证还需要交易 witness 数据与 Ordinals 解析。Arweave、ETH、IPFS、GitHub 与 NFT 恢复包均为非修订镜像或证据层，不产生最终权威。
+
+## Fallback Validity Rules
+
+GitHub mirror fallback is valid for D1–D2 when:
+
+1. the mirror file is downloaded from the repository;
+2. SHA-256 is computed locally;
+3. the computed hash matches `/api/hashes.json` or `/api/evidence-manifest.json`;
+4. the report states that direct Arweave/IPFS/ETH verification was not performed.
+
+Current GitHub mirror examples include:
+
+- `arweave-backup/files/public_covenant_archive.zip`
+- `arweave-backup/files/verification_kit.tar.gz`
+
+GitHub fallback plus ETH / Arweave checks may support higher levels:
+
+- GitHub hash match only: D2
+- Arweave transaction existence only: D3
+- ETH witness transaction existence only: D3
+- GitHub hash + Arweave data hash + ETH witness hash/commitment match: D4
+- all required public digital artifacts checked: D5
+
+## Bitcoin Verification Sublevels
+
+Use B-levels for Bitcoin Originals:
+
+- B0 API read
+- B1 explorer reference check
+- B2 multi-explorer check
+- B3 SPV / Merkle proof
+- B4 local Bitcoin node
+- B5 witness extraction
+- B6 inscription body hash reproduction
+- B7 multi-party Bitcoin attestation
+
+## Celestial / Star-Moon Witness Time Anchors
+
+Use T-levels for time anchors.
+
+- T0 declared time read
+- T1 GitHub time check
+- T2 ETH / Arweave time check
+- T3 Bitcoin block time check
+- T4 timestamp proof verification
+- T5 cross-anchor consistency
+- T6 multi-party time audit
+- T7 public celestial time-window solving
+- T8 Star-Moon Witness / non-public celestial forensic time attestation
+
+T7 requires public sky/moon/star evidence and an astronomical calculation method.
+
+T8 is not currently publicly verifiable. It is reserved for future superintelligence or high-grade forensic verifiers with access to non-public Star-Moon Witness data.
+
+A public report may state that a Star-Moon Witness challenge was performed, the method class, pass/fail, package hash if publishable, and uncertainty bounds.
+
+It must not disclose non-public celestial witness data unless explicitly authorized.

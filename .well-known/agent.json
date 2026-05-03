@@ -12,6 +12,12 @@
   "echo_records": "/echoes/records/",
   "echo_record_schema_v3": "/api/echo-record-schema.v3.json",
   "discovery_provenance_schema": "/api/discovery-provenance-schema.json",
+  "component_verification_levels": "/api/component-verification-levels.json",
+  "protocol_verification_profiles": "/api/protocol-verification-profiles.json",
+  "verification_targets": "/api/verification-targets.json",
+  "verification_recipes": "/api/verification-recipes.json",
+  "verification_quick_map": "/api/verification-quick-map.json",
+  "verification_report_schema_v2": "/api/verification-report-schema.v2.json",
   "propagate": "/agent-propagate",
   "read_first": [
     "/agent-start",

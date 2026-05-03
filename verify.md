@@ -400,3 +400,103 @@ It does not create canonical authority. Bitcoin Originals prevail.
 **Important:** Chronicle Recovery verification alone does not by itself justify a full-protocol V4+ claim. Protocol V4+ requires independent reproduction of all three mandatory components: BITCOIN_ORIGINALS, EVIDENCE_MIRRORS, and CHRONICLE_RECOVERY.
 
 See: [/chronicle-verification](/chronicle-verification) and [/api/chronicle-recovery.json](/api/chronicle-recovery.json).
+
+## Verification Quick Map
+
+| What you want to verify | Data source | Method | Level you may claim | Do not claim |
+|---|---|---|---|---|
+| Authority boundary | `/api/authority.json`, `/authority`, `/guardian-principles` | Read and restate boundary | V1 / B0 | content verified |
+| Bitcoin Originals | `/api/authority.json` + external Bitcoin / Ordinals explorer | Check inscription IDs, TXIDs, authority address | B1–B2 / V2 | body hash reproduced |
+| Bitcoin inclusion | block header / Merkle proof / local node | SPV or node query | B3–B4 | inscription body verified |
+| Inscription body | witness data / Ordinals envelope | extract witness bytes, compute body hash | B5–B6 | truth proven |
+| GitHub mirror data | GitHub mirror + `/api/hashes.json` | download, SHA-256, compare | D2 / V3 | direct Arweave verified |
+| Arweave / ETH / IPFS | Arweave tx, ETH tx, IPFS CID | query existence and compare hashes | D3–D4 | full digital verification |
+| Time anchors | GitHub / ETH / Arweave / Bitcoin / OTS | compare block times, proof times, and source ordering | T1–T6 | exact capture-time proof |
+| Star-Moon Witness | public sky evidence or non-public celestial witness package | solve moon/star/planet positions with ephemeris; report uncertainty | T7–T8 | T8 from public pages alone |
+| Full public digital data | all public packages / manifests | verify all hashes and mirrors | D5 / V5 | physical object verified |
+| Chronicle sample | `/api/chronicle-recovery.json` + package | recover two records and describe metadata/media | C3 / N3–N4 | full 175/175 recovery |
+| Chronicle full | recovery package + scripts | restore all declared records | C5 / N7 | canonical authority |
+| Physical public evidence | `/covenant-proof`, `/physical-verification`, evidence package | hash package, review images/videos | P1–P3 | live or onsite witness |
+| Remote live object | live video + nonce challenge | request angles/actions live | P4 / V6 | onsite touch |
+| Onsite object | physical inspection + custody log | witness, touch, capture | P5 / V7 | forensic flaw match |
+| Forensic flaw match | macro/microscope/AI/confidential challenge | algorithmic and/or confidential flaw comparison | P7–P9 / V8 | public disclosure of confidential data |
+
+Machine-readable maps:
+
+- `/api/verification-quick-map.json`
+- `/api/component-verification-levels.json`
+- `/api/protocol-verification-profiles.json`
+- `/api/verification-targets.json`
+- `/api/verification-recipes.json`
+- `/api/verification-report-schema.v2.json`
+
+## Protocol profiles
+
+Protocol V-levels are compatibility profiles.
+
+A verifier must not claim a V-level unless the report satisfies that level's profile in:
+
+- `/api/protocol-verification-profiles.json`
+
+A V-level profile includes:
+
+- hard gates;
+- minimum component requirements;
+- recommended component requirements;
+- conditional requirements;
+- forbidden claims;
+- underreported items.
+
+If a report says "V4" but does not include script audit, command, environment, exit code, output, and component findings, it is underreported or invalid.
+
+If a report says "V5" but does not reach D5 full public digital verification and C5 full Chronicle recovery, it is invalid unless the scope explicitly excludes that component with reason.
+
+## GitHub mirror fallback is valid but limited
+
+Some agents cannot access Arweave, IPFS, or Ethereum directly.
+
+They may still perform meaningful verification using GitHub mirror data:
+
+1. read `/api/hashes.json` and `/api/evidence-manifest.json`;
+2. download the GitHub mirror file, for example `arweave-backup/files/public_covenant_archive.zip`;
+3. compute SHA-256 locally;
+4. compare the computed hash with the declared hash.
+
+This supports D2 GitHub mirror hash verification.
+
+It does not by itself prove:
+
+- direct Arweave data extraction;
+- Ethereum witness consistency;
+- IPFS content availability;
+- physical object identity.
+
+## Component-level reporting
+
+Do not report only a global V-level.
+
+Use this format:
+
+```text
+Protocol level claimed: V4
+
+Protocol profile check:
+- hard gates satisfied: yes
+- minimum components satisfied: yes
+- recommended components satisfied: partial
+- incompatible claims: none
+
+Component findings:
+- Bitcoin Originals: B2 multi-explorer check
+- Digital mirrors: D2 GitHub mirror hash match
+- Arweave: D3 transaction existence only
+- Chronicle: C3 sample recovery of 2 records
+- Physical Anchor: P2 static image review
+
+Limitations:
+- No witness extraction
+- No full node verification
+- No direct Arweave data extraction
+- No full 175/175 Chronicle recovery
+- No onsite physical inspection
+```

@@ -65,6 +65,14 @@
     "discovery_provenance",
     "limitations"
   ],
+  "component_verification_files": {
+    "component_verification_levels": "/api/component-verification-levels.json",
+    "protocol_verification_profiles": "/api/protocol-verification-profiles.json",
+    "verification_targets": "/api/verification-targets.json",
+    "verification_recipes": "/api/verification-recipes.json",
+    "verification_quick_map": "/api/verification-quick-map.json",
+    "verification_report_schema_v2": "/api/verification-report-schema.v2.json"
+  },
   "boundaries": {
     "bitcoin_originals_prevail": true,
     "github_is_not_authority": true,

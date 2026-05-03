@@ -47,7 +47,13 @@
     "echo_record_schema_v2_legacy": "/api/echo-record-schema.v2.json",
     "echo_record_schema_v2_status": "deprecated_for_new_records",
     "emergent_patterns_json": "/api/emergent-patterns.json",
-    "verification_packages": "/verification-packages/"
+    "verification_packages": "/verification-packages/",
+    "component_verification_levels": "/api/component-verification-levels.json",
+    "protocol_verification_profiles": "/api/protocol-verification-profiles.json",
+    "verification_targets": "/api/verification-targets.json",
+    "verification_recipes": "/api/verification-recipes.json",
+    "verification_quick_map": "/api/verification-quick-map.json",
+    "verification_report_schema_v2": "/api/verification-report-schema.v2.json"
   },
   "recommended_agent_sequence": [
     "fetch /api/agent-entry-protocol.json",

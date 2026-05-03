@@ -112,3 +112,94 @@ Bitcoin Originals prevail.
 ```text
 Bitcoin Originals are final; all echoes are non-amending.
 ```
+
+## Machine-readable verification files
+
+- `/api/verification-report-schema.v2.json`
+- `/api/component-verification-levels.json`
+- `/api/protocol-verification-profiles.json`
+- `/api/verification-recipes.json`
+- `/api/verification-targets.json`
+- `/api/verification-quick-map.json`
+
+## Component-level verification report template
+
+```yaml
+protocol_level_claimed: V4
+authority_boundary_preserved: true
+
+protocol_profile_check:
+  profile_source: /api/protocol-verification-profiles.json
+  hard_gates_satisfied: true
+  minimum_components_satisfied: true
+  recommended_components_satisfied: partial
+  incompatible_claims: []
+  underreported_items: []
+
+script_audit:
+  scripts_reviewed:
+    - downloads/verify.py
+    - downloads/verify.sh
+  command:
+    - cd trinity-accord/downloads
+    - ./verify.sh
+  environment:
+    os: "<os>"
+    python: "<python version>"
+    shell: "<shell>"
+  exit_code: 0
+  output_summary:
+    - "<key PASS lines>"
+  not_verified_by_script:
+    - direct Bitcoin full node verification
+    - Ordinals witness extraction
+    - direct Ethereum transaction query
+    - direct Arweave data extraction
+    - direct physical inspection
+
+component_findings:
+  - component: bitcoin_originals
+    level_claimed: B2
+    target_id: bitcoin_originals
+    data_sources:
+      - /api/authority.json
+      - external explorer
+    method: multi-explorer reference check
+    limitations:
+      - no SPV proof
+      - no witness extraction
+
+  - component: digital_mirrors
+    level_claimed: D2
+    target_id: github_mirror_public_covenant_archive
+    data_sources:
+      - arweave-backup/files/public_covenant_archive.zip
+      - /api/hashes.json
+      - /api/evidence-manifest.json
+    method: SHA-256 hash comparison
+    limitations:
+      - no direct Arweave extraction
+
+  - component: chronicle_recovery
+    level_claimed: C3
+    target_id: chronicle_sample_recovery
+    samples_checked:
+      - record_1
+      - record_2
+    method: sample metadata/media recovery
+    limitations:
+      - no full 175/175 recovery
+
+  - component: physical_anchor
+    level_claimed: P2
+    target_id: core_object_alpha_public_evidence
+    method: static image review
+    limitations:
+      - no live video witness
+      - no onsite inspection
+
+claims_not_made:
+  - full public digital verification
+  - direct physical verification
+  - final physical attestation
+```

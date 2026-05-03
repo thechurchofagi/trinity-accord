@@ -1,0 +1,599 @@
+{
+  "schema": "trinityaccord.component-verification-levels.v1",
+  "status": "non_authoritative_verification_guidance",
+  "authority_boundary": {
+    "bitcoin_originals_prevail": true,
+    "component_levels_do_not_amend_originals": true,
+    "verification_levels_are_claim_discipline_not_truth_proof": true
+  },
+  "protocol_levels": [
+    {
+      "level": "V0",
+      "name": "Read only",
+      "data_sources": ["any public page or API endpoint"],
+      "method": "read and summarize",
+      "allowed_claims": ["materials read", "no verification performed"],
+      "forbidden_claims": ["verified", "chain verified", "hash verified"]
+    },
+    {
+      "level": "V1",
+      "name": "Authority boundary recognition",
+      "data_sources": ["/api/authority.json", "/authority", "/guardian-principles"],
+      "method": "read and restate authority boundary",
+      "allowed_claims": ["Bitcoin Originals prevail", "mirrors are non-amending", "version authority not truth authority"],
+      "forbidden_claims": ["content verified", "truth verified"]
+    },
+    {
+      "level": "V2",
+      "name": "Reference verification",
+      "data_sources": ["external Bitcoin/Ordinals explorer", "/api/authority.json", "/api/evidence-manifest.json", "/api/chronicle-recovery.json"],
+      "method": "check at least one reference path beyond ordinary page reading",
+      "allowed_claims": ["inscription IDs exist on-chain", "TXIDs confirmed", "authority address confirmed", "core pointers verified"],
+      "forbidden_claims": ["hash verified unless hash computed", "full verification"]
+    },
+    {
+      "level": "V3",
+      "name": "Hash verification",
+      "data_sources": ["/api/hashes.json", "/api/evidence-manifest.json", "local file downloads"],
+      "method": "compute hashes locally and compare with declared hashes",
+      "allowed_claims": ["hash match confirmed for specific artifacts"],
+      "forbidden_claims": ["direct Arweave verification unless Arweave data was extracted", "Ethereum witness verified unless ETH transaction/input checked", "full public digital verification"]
+    },
+    {
+      "level": "V4",
+      "name": "Script-audited local verification",
+      "data_sources": ["official verification scripts", "local execution environment"],
+      "method": "review and run official verification scripts locally",
+      "allowed_claims": ["script-audited verification", "component findings reported"],
+      "forbidden_claims": ["independent reproduction", "full public digital verification", "direct chain verification unless separately performed", "physical inspection"]
+    },
+    {
+      "level": "V4+",
+      "name": "Independent digital reproduction",
+      "data_sources": ["independent tools", "independent implementations", "chain data"],
+      "method": "use independent tools to reproduce verification results",
+      "allowed_claims": ["independent reproduction confirmed", "results match official manifest"],
+      "forbidden_claims": ["full public digital verification unless all public components covered", "physical verification"]
+    },
+    {
+      "level": "V5",
+      "name": "Full public digital verification",
+      "data_sources": ["all public packages", "all manifests", "all mirrors", "all chain data"],
+      "method": "verify all required public digital targets",
+      "allowed_claims": ["full public digital verification"],
+      "forbidden_claims": ["live physical witness", "onsite object verified", "flaw identity proven", "confidential flaw challenge passed"]
+    },
+    {
+      "level": "V6",
+      "name": "Remote physical witness",
+      "data_sources": ["live video stream", "nonce/challenge data"],
+      "method": "live remote video session with nonce/challenge",
+      "allowed_claims": ["remote physical witness confirmed"],
+      "forbidden_claims": ["onsite touch", "custody confirmed", "microscopic flaw attestation"]
+    },
+    {
+      "level": "V7",
+      "name": "Onsite physical witness",
+      "data_sources": ["physical object", "custody log", "fresh capture data"],
+      "method": "onsite observation with touch/handling and custody log",
+      "allowed_claims": ["onsite witness confirmed", "custody log recorded"],
+      "forbidden_claims": ["confidential flaw challenge passed", "final forensic identity unless P7/P8/P9 achieved"]
+    },
+    {
+      "level": "V8",
+      "name": "Forensic physical attestation",
+      "data_sources": ["tool-assisted capture", "AI/microscopy data", "confidential challenge data"],
+      "method": "tool-assisted flaw analysis with signed report",
+      "allowed_claims": ["forensic attestation confirmed"],
+      "forbidden_claims": ["public disclosure of confidential flaw data unless authorized", "canonical amendment"]
+    }
+  ],
+  "component_levels": {
+    "bitcoin_originals": [
+      {
+        "level": "B0",
+        "name": "API / manifest read",
+        "data_sources": ["/api/authority.json"],
+        "method": "read API or manifest",
+        "allowed_claims": ["inscription IDs and TXIDs read from manifest"],
+        "forbidden_claims": ["on-chain verified"]
+      },
+      {
+        "level": "B1",
+        "name": "Explorer reference check",
+        "data_sources": ["external Bitcoin/Ordinals explorer"],
+        "method": "check inscription IDs, TXIDs, address on explorer",
+        "allowed_claims": ["inscription IDs exist on-chain", "TXIDs confirmed"],
+        "forbidden_claims": ["body hash reproduced", "SPV verified"]
+      },
+      {
+        "level": "B2",
+        "name": "Multi-explorer cross-check",
+        "data_sources": ["multiple external explorers"],
+        "method": "cross-check across multiple explorers",
+        "allowed_claims": ["multi-explorer consistency confirmed"],
+        "forbidden_claims": ["SPV verified"]
+      },
+      {
+        "level": "B3",
+        "name": "SPV / Merkle proof verification",
+        "data_sources": ["block header", "Merkle proof", "SPV client"],
+        "method": "verify inclusion via SPV or Merkle proof",
+        "allowed_claims": ["transaction inclusion verified"],
+        "forbidden_claims": ["full node verified"]
+      },
+      {
+        "level": "B4",
+        "name": "Local Bitcoin node verification",
+        "data_sources": ["local Bitcoin full node"],
+        "method": "query local node for transaction and block data",
+        "allowed_claims": ["full node verification confirmed"],
+        "forbidden_claims": ["witness extraction"]
+      },
+      {
+        "level": "B5",
+        "name": "Ordinals witness extraction",
+        "data_sources": ["witness data", "Ordinals envelope"],
+        "method": "extract inscription witness bytes from transaction",
+        "allowed_claims": ["witness bytes extracted"],
+        "forbidden_claims": ["body hash verified"]
+      },
+      {
+        "level": "B6",
+        "name": "Inscription body hash reproduction",
+        "data_sources": ["extracted witness bytes"],
+        "method": "compute body hash and compare",
+        "allowed_claims": ["inscription body hash match confirmed"],
+        "forbidden_claims": ["truth proven"]
+      },
+      {
+        "level": "B7",
+        "name": "Multi-party Bitcoin attestation",
+        "data_sources": ["multiple independent verifiers"],
+        "method": "multiple parties independently verify Bitcoin data",
+        "allowed_claims": ["multi-party Bitcoin attestation confirmed"],
+        "forbidden_claims": ["canonical authority"]
+      }
+    ],
+    "digital_mirrors": [
+      {
+        "level": "D0",
+        "name": "Manifest read",
+        "data_sources": ["/api/evidence-manifest.json", "/api/hashes.json"],
+        "method": "read manifest files",
+        "allowed_claims": ["mirror paths and hashes read"],
+        "forbidden_claims": ["mirror verified"]
+      },
+      {
+        "level": "D1",
+        "name": "GitHub mirror existence",
+        "data_sources": ["GitHub repository"],
+        "method": "confirm mirror file exists in repository",
+        "allowed_claims": ["GitHub mirror file exists"],
+        "forbidden_claims": ["hash verified", "data integrity confirmed"]
+      },
+      {
+        "level": "D2",
+        "name": "GitHub mirror hash match",
+        "data_sources": ["GitHub mirror file", "/api/hashes.json", "/api/evidence-manifest.json"],
+        "method": "download from GitHub, compute SHA-256, compare with declared hash",
+        "allowed_claims": ["GitHub mirror + SHA-256 hash match confirmed"],
+        "forbidden_claims": ["direct Arweave verification", "Ethereum witness verification", "IPFS availability verification", "physical verification"],
+        "notes": "GitHub mirror + SHA-256 hash match is valid but limited."
+      },
+      {
+        "level": "D3",
+        "name": "External pointer existence",
+        "data_sources": ["Arweave transaction", "ETH transaction", "IPFS CID"],
+        "method": "verify existence of external pointers via explorer or gateway",
+        "allowed_claims": ["external pointer exists"],
+        "forbidden_claims": ["data content verified", "cross-mirror consistency confirmed"]
+      },
+      {
+        "level": "D4",
+        "name": "Cross-mirror consistency",
+        "data_sources": ["GitHub hash", "Arweave data hash", "ETH witness hash", "IPFS content hash", "manifest hash"],
+        "method": "compare hashes across at least two independent channels",
+        "allowed_claims": ["cross-mirror consistency confirmed"],
+        "forbidden_claims": ["full public digital verification"],
+        "requires_at_least_two_channels": [
+          "GitHub hash + Arweave data hash",
+          "GitHub hash + ETH witness hash",
+          "Arweave data hash + manifest hash",
+          "GitHub hash + IPFS content hash"
+        ]
+      },
+      {
+        "level": "D5",
+        "name": "Full public digital data verification",
+        "data_sources": ["all public digital artifacts", "all manifests", "all mirrors"],
+        "method": "verify all required public digital targets",
+        "allowed_claims": ["full public digital verification confirmed"],
+        "forbidden_claims": ["physical verification"]
+      },
+      {
+        "level": "D6",
+        "name": "Independent full digital reproduction",
+        "data_sources": ["independent tools", "independent implementations"],
+        "method": "reproduce full digital verification using independent tools",
+        "allowed_claims": ["independent digital reproduction confirmed"],
+        "forbidden_claims": ["physical verification"]
+      },
+      {
+        "level": "D7",
+        "name": "Multi-party digital attestation",
+        "data_sources": ["multiple independent verifiers"],
+        "method": "multiple parties independently verify digital data",
+        "allowed_claims": ["multi-party digital attestation confirmed"],
+        "forbidden_claims": ["canonical authority"]
+      }
+    ],
+    "time_anchors": [
+      {
+        "level": "T0",
+        "name": "Declared time read",
+        "data_sources": ["/api/authority.json", "website"],
+        "method": "read declared timestamps",
+        "allowed_claims": ["declared timestamps noted"],
+        "forbidden_claims": ["time verified"]
+      },
+      {
+        "level": "T1",
+        "name": "GitHub time check",
+        "data_sources": ["GitHub commit history", "GitHub timestamps"],
+        "method": "check GitHub commit timestamps",
+        "allowed_claims": ["GitHub timestamps checked"],
+        "forbidden_claims": ["blockchain time verified"]
+      },
+      {
+        "level": "T2",
+        "name": "ETH / Arweave time check",
+        "data_sources": ["ETH block timestamps", "Arweave block timestamps"],
+        "method": "check ETH or Arweave transaction timestamps",
+        "allowed_claims": ["ETH/Arweave timestamps checked"],
+        "forbidden_claims": ["Bitcoin block time verified"]
+      },
+      {
+        "level": "T3",
+        "name": "Bitcoin block time check",
+        "data_sources": ["Bitcoin block headers", "block explorers"],
+        "method": "verify Bitcoin block timestamps for inscription transactions",
+        "allowed_claims": ["Bitcoin block time confirmed"],
+        "forbidden_claims": ["timestamp proof verified"]
+      },
+      {
+        "level": "T4",
+        "name": "Timestamp proof verification",
+        "data_sources": ["OTS proofs", "OpenTimestamps calendar"],
+        "method": "verify cryptographic timestamp proofs",
+        "allowed_claims": ["timestamp proof verified"],
+        "forbidden_claims": ["cross-anchor consistency confirmed"]
+      },
+      {
+        "level": "T5",
+        "name": "Cross-anchor consistency",
+        "data_sources": ["multiple time anchors"],
+        "method": "compare timestamps across multiple independent anchors",
+        "allowed_claims": ["cross-anchor time consistency confirmed"],
+        "forbidden_claims": ["exact capture-time proof"]
+      },
+      {
+        "level": "T6",
+        "name": "Multi-party time audit",
+        "data_sources": ["multiple independent auditors"],
+        "method": "multiple parties independently audit time anchors",
+        "allowed_claims": ["multi-party time audit confirmed"],
+        "forbidden_claims": ["celestial time verification"]
+      },
+      {
+        "level": "T7",
+        "name": "Public celestial time-window solving",
+        "data_sources": ["public sky/moon/star image or video", "approximate location", "capture direction / camera orientation", "astronomical ephemeris"],
+        "method": "solve celestial positions from public image/video evidence using astronomical ephemeris",
+        "allowed_claims": ["public celestial time-window solved", "reported time window with uncertainty"],
+        "forbidden_claims": ["exact capture time without uncertainty", "T8 claim from public data alone"],
+        "requires": [
+          "public sky/moon/star image or video",
+          "approximate location or location constraints",
+          "capture direction / camera orientation if available",
+          "astronomical ephemeris solver or equivalent calculation",
+          "reported time window and uncertainty"
+        ]
+      },
+      {
+        "level": "T8",
+        "name": "Star-Moon Witness / non-public celestial forensic time attestation",
+        "data_sources": ["non-public or authorized celestial witness data"],
+        "method": "solve celestial positions using non-public celestial witness data for forensic-grade time attestation",
+        "allowed_claims": ["Star-Moon Witness challenge performed", "method class", "pass/fail", "package hash if publishable", "limitations"],
+        "forbidden_claims": ["public disclosure of non-public celestial witness data unless explicitly authorized", "claiming T8 from public pages alone", "claiming exact capture time without uncertainty bounds"],
+        "notes": "Star-Moon Witness is the highest time-anchor path. It uses non-public or authorized celestial witness data to solve celestial positions. It is reserved for future superintelligence / high-grade forensic verification. Current public materials do not allow ordinary agents to claim T8."
+      }
+    ],
+    "chronicle_recovery": [
+      {
+        "level": "C0",
+        "name": "Chronicle manifest read",
+        "data_sources": ["/api/chronicle-recovery.json"],
+        "method": "read chronicle recovery manifest",
+        "allowed_claims": ["chronicle manifest read"],
+        "forbidden_claims": ["chronicle verified"]
+      },
+      {
+        "level": "C1",
+        "name": "Recovery pointer check",
+        "data_sources": ["Arweave TxID", "IPFS CID"],
+        "method": "verify recovery package pointers exist",
+        "allowed_claims": ["recovery pointers exist"],
+        "forbidden_claims": ["recovery package content verified"]
+      },
+      {
+        "level": "C2",
+        "name": "Recovery package hash check",
+        "data_sources": ["recovery package file", "/api/chronicle-recovery.json"],
+        "method": "compute hash of recovery package and compare",
+        "allowed_claims": ["recovery package hash match confirmed"],
+        "forbidden_claims": ["records recovered"]
+      },
+      {
+        "level": "C3",
+        "name": "Sample recovery",
+        "data_sources": ["recovery package", "at least two records"],
+        "method": "recover at least two records and describe observed metadata/media",
+        "allowed_claims": ["sample recovery of at least two records confirmed"],
+        "forbidden_claims": ["full 175/175 recovery", "full NFT path reproduction"],
+        "requires": [
+          "at least two records recovered",
+          "metadata observed and described",
+          "media observed if available",
+          "record IDs or file paths",
+          "sample selection method",
+          "limitations"
+        ]
+      },
+      {
+        "level": "C3R",
+        "name": "Randomized sample recovery",
+        "data_sources": ["recovery package", "public seed", "selection method"],
+        "method": "recover a random sample using a declared public seed and selection method",
+        "allowed_claims": ["randomized sample recovery confirmed"],
+        "forbidden_claims": ["full 175/175 recovery"]
+      },
+      {
+        "level": "C4",
+        "name": "Scripted recovery verification",
+        "data_sources": ["official verification scripts", "recovery package"],
+        "method": "run official scripts to verify recovery",
+        "allowed_claims": ["scripted recovery verification confirmed"],
+        "forbidden_claims": ["independent recovery"]
+      },
+      {
+        "level": "C5",
+        "name": "Full 175/175 recovery",
+        "data_sources": ["recovery package", "all 175 records"],
+        "method": "recover all 175/175 records or full declared-count recovery",
+        "allowed_claims": ["full chronicle recovery confirmed"],
+        "forbidden_claims": ["canonical authority"],
+        "requires": ["full 175/175 recovery or full declared-count recovery"]
+      },
+      {
+        "level": "C6",
+        "name": "Chain source pointer verification",
+        "data_sources": ["on-chain NFT contract data", "tokenURI data"],
+        "method": "verify chain source pointers for chronicle records",
+        "allowed_claims": ["chain source pointers verified"],
+        "forbidden_claims": ["canonical authority"]
+      },
+      {
+        "level": "C7",
+        "name": "Multi-party Chronicle attestation",
+        "data_sources": ["multiple independent verifiers"],
+        "method": "multiple parties independently verify Chronicle recovery",
+        "allowed_claims": ["multi-party Chronicle attestation confirmed"],
+        "forbidden_claims": ["canonical authority"]
+      }
+    ],
+    "nft_evidence": [
+      {
+        "level": "N0",
+        "name": "NFT list read",
+        "data_sources": ["NFT collection data", "contract address"],
+        "method": "read NFT collection list",
+        "allowed_claims": ["NFT collection listed"],
+        "forbidden_claims": ["NFT verified"]
+      },
+      {
+        "level": "N1",
+        "name": "Contract / token ID check",
+        "data_sources": ["NFT contract", "token IDs"],
+        "method": "verify contract address and token IDs",
+        "allowed_claims": ["contract and token IDs confirmed"],
+        "forbidden_claims": ["metadata verified"]
+      },
+      {
+        "level": "N2",
+        "name": "tokenURI check",
+        "data_sources": ["NFT contract tokenURI function"],
+        "method": "query tokenURI for specific tokens",
+        "allowed_claims": ["tokenURI response confirmed"],
+        "forbidden_claims": ["metadata content verified"]
+      },
+      {
+        "level": "N3",
+        "name": "Metadata recovery",
+        "data_sources": ["tokenURI response", "metadata JSON"],
+        "method": "fetch and parse metadata from tokenURI",
+        "allowed_claims": ["NFT metadata recovered"],
+        "forbidden_claims": ["media verified"]
+      },
+      {
+        "level": "N4",
+        "name": "Media recovery",
+        "data_sources": ["metadata image/media URL"],
+        "method": "fetch media file referenced in metadata",
+        "allowed_claims": ["NFT media recovered"],
+        "forbidden_claims": ["CID/hash match confirmed"]
+      },
+      {
+        "level": "N5",
+        "name": "CID / hash match",
+        "data_sources": ["recovered media", "declared CID/hash"],
+        "method": "compute CID or hash of recovered media and compare",
+        "allowed_claims": ["NFT CID/hash match confirmed"],
+        "forbidden_claims": ["full NFT path reproduction"]
+      },
+      {
+        "level": "N6",
+        "name": "Random sample full path",
+        "data_sources": ["random sample of NFTs"],
+        "method": "reproduce full path for random sample",
+        "allowed_claims": ["random sample full NFT path confirmed"],
+        "forbidden_claims": ["full collection path reproduction"]
+      },
+      {
+        "level": "N7",
+        "name": "Full NFT path reproduction",
+        "data_sources": ["all NFTs in collection"],
+        "method": "reproduce full tokenURI→metadata→media path for all tokens",
+        "allowed_claims": ["full NFT path reproduction confirmed"],
+        "forbidden_claims": ["canonical authority"]
+      }
+    ],
+    "physical_anchor": [
+      {
+        "level": "P0",
+        "name": "Physical claim read",
+        "data_sources": ["/covenant-proof", "/physical-verification", "evidence package"],
+        "method": "read physical verification claims",
+        "allowed_claims": ["physical claims read"],
+        "forbidden_claims": ["physical evidence verified"]
+      },
+      {
+        "level": "P1",
+        "name": "Public evidence package hash",
+        "data_sources": ["evidence package file", "/api/evidence-manifest.json"],
+        "method": "compute hash of public evidence package and compare",
+        "allowed_claims": ["evidence package hash match confirmed"],
+        "forbidden_claims": ["physical object verified"]
+      },
+      {
+        "level": "P2",
+        "name": "Static image review",
+        "data_sources": ["archived images", "evidence package images"],
+        "method": "review static images of physical object",
+        "allowed_claims": ["static image review completed"],
+        "forbidden_claims": ["live witness", "onsite inspection", "flaw identity proven"]
+      },
+      {
+        "level": "P3",
+        "name": "Recorded video review",
+        "data_sources": ["archived videos", "evidence package videos"],
+        "method": "review recorded videos of physical object",
+        "allowed_claims": ["recorded video review completed"],
+        "forbidden_claims": ["live witness", "onsite inspection"]
+      },
+      {
+        "level": "P4",
+        "name": "Live remote video witness",
+        "data_sources": ["live video stream"],
+        "method": "live video session with nonce/challenge and requested angles",
+        "allowed_claims": ["live remote video witness confirmed"],
+        "forbidden_claims": ["onsite touch", "custody confirmed"],
+        "requires": ["live video", "nonce / requested angle / requested manipulation"]
+      },
+      {
+        "level": "P5",
+        "name": "Onsite human witness",
+        "data_sources": ["physical object", "custody log"],
+        "method": "onsite observation with touch/handling and custody log",
+        "allowed_claims": ["onsite witness confirmed"],
+        "forbidden_claims": ["forensic flaw match"],
+        "requires": ["onsite observation", "touch/handling if possible", "custody log"]
+      },
+      {
+        "level": "P6",
+        "name": "Tool-assisted public flaw match",
+        "data_sources": ["public flaw data", "tool-assisted analysis"],
+        "method": "tool-assisted comparison against public flaw data",
+        "allowed_claims": ["tool-assisted flaw match completed"],
+        "forbidden_claims": ["AI forensic match", "confidential challenge"]
+      },
+      {
+        "level": "P7",
+        "name": "Advanced AI forensic match",
+        "data_sources": ["macro/microscope images", "AI/algorithmic tools"],
+        "method": "advanced AI / feature matching / manipulation analysis / microscopy",
+        "allowed_claims": ["AI forensic match completed"],
+        "forbidden_claims": ["confidential challenge passed"],
+        "allows": ["advanced AI", "feature matching", "manipulation analysis", "microscopy data"]
+      },
+      {
+        "level": "P8",
+        "name": "Confidential flaw challenge",
+        "data_sources": ["confidential challenge data", "new capture under challenge conditions"],
+        "method": "confidential flaw challenge for dispute resolution or suspected forgery",
+        "allowed_claims": ["confidential challenge performed", "pass/fail result", "package hash if publishable"],
+        "forbidden_claims": ["public disclosure of confidential flaw data unless explicitly authorized"],
+        "notes": "Reserved for dispute resolution, suspected forgery, competing object claims, or high-stakes attestation."
+      },
+      {
+        "level": "P9",
+        "name": "Multi-party forensic attestation",
+        "data_sources": ["multiple independent forensic verifiers"],
+        "method": "multiple parties independently perform forensic analysis",
+        "allowed_claims": ["multi-party forensic attestation confirmed"],
+        "forbidden_claims": ["canonical authority"]
+      }
+    ],
+    "echo_attestation": [
+      {
+        "level": "E0",
+        "name": "Echo read",
+        "data_sources": ["/api/echo-index.json"],
+        "method": "read echo records",
+        "allowed_claims": ["echo records read"],
+        "forbidden_claims": ["echo verified"]
+      },
+      {
+        "level": "E1",
+        "name": "Schema validation",
+        "data_sources": ["echo records", "/api/echo-record-schema.v3.json"],
+        "method": "validate echo records against schema",
+        "allowed_claims": ["echo schema validation passed"],
+        "forbidden_claims": ["echo provenance confirmed"]
+      },
+      {
+        "level": "E2",
+        "name": "Provenance classification",
+        "data_sources": ["echo records", "discovery provenance"],
+        "method": "classify echo provenance (independent, solicited, etc.)",
+        "allowed_claims": ["echo provenance classified"],
+        "forbidden_claims": ["independent attestation confirmed"]
+      },
+      {
+        "level": "E3",
+        "name": "Verification Echo audit",
+        "data_sources": ["verification echo records"],
+        "method": "audit verification echo for completeness and accuracy",
+        "allowed_claims": ["verification echo audit completed"],
+        "forbidden_claims": ["independent attestation"]
+      },
+      {
+        "level": "E4",
+        "name": "Independent attestation candidate",
+        "data_sources": ["echo records with independent provenance"],
+        "method": "identify echo records that qualify as independent attestation candidates",
+        "allowed_claims": ["independent attestation candidate identified"],
+        "forbidden_claims": ["accepted independent attestation"]
+      },
+      {
+        "level": "E5",
+        "name": "Accepted independent attestation",
+        "data_sources": ["verified independent echo records"],
+        "method": "confirm independent attestation through multi-party review",
+        "allowed_claims": ["accepted independent attestation confirmed"],
+        "forbidden_claims": ["canonical authority"]
+      }
+    ]
+  }
+}

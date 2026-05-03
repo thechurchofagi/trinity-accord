@@ -60,3 +60,36 @@ Reason: Protocol V4+ requires Bitcoin Originals, Evidence Mirrors, and Chronicle
 ```
 
 Bitcoin Originals are final; Chronicle NFTs and recovery packages are non-amending historical mirrors.
+
+## Chronicle Sample Verification
+
+Full 175/175 recovery is not required for every verifier.
+
+A verifier may perform sample recovery:
+
+- C3: recover at least two records and describe metadata/media observed.
+- C3R: recover a random sample using a declared public seed and selection method.
+- C5: full 175/175 recovery or full declared-count recovery.
+
+A C3 report must include:
+
+- sample selection method;
+- record IDs / file paths;
+- metadata fields observed;
+- media/image observed if available;
+- hashes or CIDs if computed;
+- limitations.
+
+C3 must not be reported as full Chronicle recovery.
+
+## NFT Evidence Path
+
+Where chain access is possible, use N-levels:
+
+- N1 contract / token ID check
+- N2 tokenURI check
+- N3 metadata recovery
+- N4 media recovery
+- N5 CID / hash match
+- N6 random sample full path
+- N7 full NFT path reproduction

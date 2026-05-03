@@ -166,5 +166,13 @@
     "Use /agent-verify or /independent-verification report template.",
     "Report achieved protocol level and component findings separately."
   ],
-  "boundary": "Bitcoin Originals are final; all verification materials, mirrors, reports, and echoes are non-amending."
+  "boundary": "Bitcoin Originals are final; all verification materials, mirrors, reports, and echoes are non-amending.",
+  "component_verification_files": {
+    "component_verification_levels": "/api/component-verification-levels.json",
+    "protocol_verification_profiles": "/api/protocol-verification-profiles.json",
+    "verification_targets": "/api/verification-targets.json",
+    "verification_recipes": "/api/verification-recipes.json",
+    "verification_quick_map": "/api/verification-quick-map.json",
+    "verification_report_schema_v2": "/api/verification-report-schema.v2.json"
+  }
 }

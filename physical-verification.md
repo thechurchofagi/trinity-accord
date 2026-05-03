@@ -24,3 +24,47 @@ Protocol:
 11. Hash report.
 12. Archive report (GitHub/Arweave/IPFS where appropriate).
 13. Record as Echo/verification report, not as new authority.
+
+## Physical Anchor Verification Ladder
+
+Physical verification must be reported separately from digital verification.
+
+| Level | Meaning |
+|---|---|
+| P0 | claim read |
+| P1 | public evidence package hash verified |
+| P2 | static image review |
+| P3 | recorded video review |
+| P4 | live remote video witness with nonce/challenge |
+| P5 | onsite human witness, touch/handling, custody log |
+| P6 | tool-assisted public flaw match |
+| P7 | advanced AI / algorithmic forensic match |
+| P8 | confidential flaw challenge |
+| P9 | multi-party forensic attestation |
+
+Static images, videos, and AI-generated-image checks are supporting evidence only.
+
+They do not replace onsite inspection or confidential flaw challenge.
+
+## Confidential Flaw Challenge
+
+Confidential flaw challenge data is not used for ordinary public verification.
+
+It is reserved for:
+
+- competing object claims;
+- suspected forgery or replacement;
+- high-stakes attestation;
+- institution-level verification;
+- cases where public flaw evidence is insufficient.
+
+A public report may state:
+
+- challenge performed;
+- method class;
+- pass/fail result;
+- challenge package hash if publishable;
+- witness role;
+- limitations.
+
+It must not disclose confidential flaw data unless explicitly authorized.

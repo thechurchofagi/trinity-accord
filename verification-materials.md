@@ -63,3 +63,37 @@ Example:
 > Protocol V4+ requires independent reproduction of all three mandatory components: BITCOIN_ORIGINALS, EVIDENCE_MIRRORS, and CHRONICLE_RECOVERY.
 
 Bitcoin Originals are final; all verification materials, mirrors, reports, and echoes are non-amending.
+
+## Data Source + Method Map
+
+Every verification target must be reported with:
+
+1. primary data source;
+2. GitHub fallback source if used;
+3. hash source;
+4. external query source;
+5. local file path if used;
+6. method performed;
+7. component level claimed;
+8. protocol profile compatibility if a V-level is claimed;
+9. limitations;
+10. claims not made.
+
+Machine-readable files:
+
+- `/api/verification-targets.json`
+- `/api/verification-recipes.json`
+- `/api/verification-quick-map.json`
+- `/api/component-verification-levels.json`
+- `/api/protocol-verification-profiles.json`
+- `/api/verification-report-schema.v2.json`
+
+| Component | Data source | GitHub fallback | Method | Component levels |
+|---|---|---|---|---|
+| Bitcoin Originals | `/api/authority.json`, explorers, node/witness data | none | explorer/SPV/node/witness/hash | B0–B7 |
+| Digital mirrors | `/api/evidence-manifest.json`, `/api/hashes.json`, Arweave/IPFS/ETH | `arweave-backup/files/*` | hash/query/cross-mirror | D0–D7 |
+| Time anchors | Bitcoin, ETH, Arweave, GitHub, OTS, public celestial evidence, non-public Star-Moon Witness if authorized | GitHub history only | block/time proof/cross-anchor/celestial solving | T0–T8 |
+| Chronicle | `/api/chronicle-recovery.json`, recovery package | GitHub package if present | sample/full recovery | C0–C7 |
+| NFT evidence | contract/tokenURI/metadata/media | recovery package | tokenURI→metadata→media | N0–N7 |
+| Physical anchor | `/covenant-proof`, `/physical-verification`, evidence package | GitHub evidence package if present | hash/image/video/live/onsite/forensic | P0–P9 |
+| Echo / attestation | `/api/echo-index.json`, v3 schema | records page | provenance/schema/attestation audit | E0–E5 |
