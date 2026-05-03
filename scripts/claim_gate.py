@@ -160,7 +160,9 @@ def derive_t_level(evidence):
     max_level = "T0"
     for check in time_checks:
         anchor_type = check.get("anchor_type", "")
-        if anchor_type == "bitcoin_block_time":
+        if anchor_type == "star_moon_witness" and check.get("nonpublic_boundary") and check.get("authorized"):
+            candidate = "T8"
+        elif anchor_type == "bitcoin_block_time":
             candidate = "T3"
         elif anchor_type in ("eth_timestamp", "arweave_timestamp"):
             candidate = "T2"
