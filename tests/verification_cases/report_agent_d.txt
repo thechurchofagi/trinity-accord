@@ -1,0 +1,30 @@
+Agent D — Component D Mirror Agent (TC031–TC040)
+==================================================
+Date: 2026-05-03
+Cases: TC031–TC040 (10 cases, component_d_mirror category)
+
+SUMMARY: All 10 cases produce expected results. FULL PASS.
+
+Test Case Results
+─────────────────
+TC031  PASS  ✓  GitHub D2 direct Arweave FAIL — Caught by Rule D: "direct arweave verification completed" with GitHub source
+TC032  PASS  ✓  GitHub D2 ETH witness FAIL — Caught by Rule D: "ethereum witness verified" with GitHub source
+TC033  PASS  ✓  GitHub D2 IPFS FAIL — Caught by Rule D: "ipfs availability verified" with GitHub source
+TC034  PASS  ✓  Repository snapshot D2 PASS — Repository artifact with repo manifest hash and scope_class
+TC035  PASS  ✓  Repository snapshot missing scope FAIL — Caught by Rule T: repo snapshot hash without scope_class
+TC036  PASS  ✓  Repository claims canonical FAIL — Caught by Rule N: repo artifact claims canonical without repo manifest
+TC037  PASS  ✓  Missing hash source FAIL — Caught by Rule L: hash entry lacks expected_hash_source
+TC038  PASS  ✓  Missing hash authority FAIL — Caught by Rule L: hash entry lacks expected_hash_authority_class
+TC039  PASS  ✓  Unknown hash authority D2 FAIL — Caught by Rules L+M: D2 with unknown hash authority class
+TC040  PASS  ✓  Derived during run D2 FAIL — Caught by Rule M: D2 rejects derived_during_this_run
+
+Validator Rules Exercised
+─────────────────────────
+  A  record_kind present         (all)
+  B  verification report not echo (all)
+  D  GitHub D2 boundary          (TC031, TC032, TC033)
+  G  V3 hashes required          (TC034–TC040)
+  L  hash source required        (TC034–TC040)
+  M  D2 hash source compat       (TC039, TC040)
+  N  repo snapshot overclaim     (TC034, TC036)
+  T  repo snapshot scope         (TC034, TC035)

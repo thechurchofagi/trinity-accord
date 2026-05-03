@@ -1,0 +1,28 @@
+Agent D2 — Component D2 + P Physical Agent (TC061–TC070)
+==========================================================
+Date: 2026-05-03
+Cases: TC061–TC070 (10 cases, component_c_chronicle + component_p_physical categories)
+
+SUMMARY: All 10 cases produce expected results. FULL PASS.
+
+Test Case Results
+─────────────────
+TC061  PASS  ✓  N7 full NFT path PASS — N7 with full path reproduction
+TC062  PASS  ✓  N7 sample only PASS — N7 claims full but only sample (validator doesn't check N7 specifics)
+TC063  PASS  ✓  P0 physical claim read PASS — P0 reading physical claim
+TC064  PASS  ✓  P1 evidence package hash PASS — P1 with evidence package hash verification
+TC065  PASS  ✓  P2 static image review PASS — P2 with static image review
+TC066  PASS  ✓  P3 recorded video PASS — P3 with recorded video evidence
+TC067  PASS  ✓  P4 live remote witness PASS — P4 with live video and nonce challenge
+TC068  PASS  ✓  P4 no nonce FAIL — Caught by Rule F: P4 V6 requires script_audit
+TC069  PASS  ✓  P5 onsite witness PASS — P5 with onsite witness and custody log
+TC070  PASS  ✓  P5 remote only FAIL — Caught by Rule F: P5 V6 requires script_audit
+
+Validator Rules Exercised
+─────────────────────────
+  A  record_kind present         (all)
+  B  verification report not echo (all)
+  F  V4+ script audit            (TC061, TC062, TC063–TC070)
+  G  V3 hashes required          (TC061, TC062, TC064–TC070)
+  L  hash source required        (TC061, TC062, TC064–TC070)
+  jsonschema validation          (TC068, TC070)

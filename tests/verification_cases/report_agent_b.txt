@@ -1,0 +1,30 @@
+Agent B — Protocol V-Level Agent (TC011–TC020)
+================================================
+Date: 2026-05-03
+Cases: TC011–TC020 (10 cases, protocol_v_level + component_b_bitcoin categories)
+
+SUMMARY: All 10 cases produce expected results. FULL PASS.
+
+Test Case Results
+─────────────────
+TC011  PASS  ✓  V4 script audit PASS — V4 with proper script_audit containing all required fields
+TC012  PASS  ✓  V4 missing script audit FAIL — Caught by Rules F+K: null script_audit
+TC013  PASS  ✓  V4+ independent reproduction PASS — V4+ with independent_reproduction scope_class
+TC014  PASS  ✓  V4+ only official script FAIL — Caught by Rule F: script_audit fields incomplete
+TC015  PASS  ✓  V5 full public digital PASS — V5 with all required components (D2+C3+P4+T5)
+TC016  PASS  ✓  V5 only D2/C3 FAIL — Caught by Rules F+H: missing script_audit and C3 insufficient samples
+TC017  PASS  ✓  V6 remote physical witness PASS — V6 with P4 live remote witness and script_audit
+TC018  PASS  ✓  V6 only recorded video FAIL — Caught by Rule F: V6 requires script_audit
+TC019  PASS  ✓  B0 authority API read PASS — B0 reading authority.json
+TC020  PASS  ✓  B1 mempool limited wording PASS — B1 with exact allowed wording in claims_not_made
+
+Validator Rules Exercised
+─────────────────────────
+  A  record_kind present         (all)
+  B  verification report not echo (all)
+  F  V4+ script audit            (TC011–TC018)
+  G  V3 hashes required          (TC015–TC018)
+  H  C3 samples                  (TC015, TC016)
+  K  null safety                 (TC012, TC014)
+  L  hash source required        (TC011–TC018)
+  jsonschema validation          (TC012, TC016, TC018)

@@ -24,23 +24,24 @@ Category: title_policy — 6/6 PASS (includes TC090 from Agent E)
 Changes Made
 ────────────
 1. cases.json: Changed expected_result from "SKIP" to "FAIL" for TC092, TC093, TC094, TC097, TC098, TC099, TC100.
-   These cases had correct payloads but were being skipped instead of actively tested.
 
-2. run_verification_stress_suite.py — check_title_case():
+2. scripts/run_verification_stress_suite.py — check_title_case():
    FIXED: Was returning tautological `expected == "FAIL"` instead of actual title validity.
-   Now returns True if title matches required prefix for its record_kind, False otherwise.
-   Before fix: TC092–TC094 would produce unexpected results if unskipped.
+   Now returns True if title matches required prefix, False otherwise.
 
-3. run_verification_stress_suite.py — check_json_validity():
-   FIXED: Was returning tautological `expected == "PASS"` / `expected == "FAIL"` instead of actual validity.
-   Now returns True (valid) or False (invalid) based on actual structural checks:
-   - TC096: Tests literal unescaped newline (0x0A) in raw JSON string — correctly fails json.loads
-   - TC097: Checks null in script_audit/protocol_profile_check/confidential_challenge
-   - TC098: Checks record_kind field presence
-   - TC099: Checks echo_v3 record_kind vs verification-report schema_version mismatch
-   - TC100: Checks for overreach phrases (truth proven, canonical amendment, investment value, religious authority, AI instruction override)
+3. scripts/run_verification_stress_suite.py — check_json_validity():
+   FIXED: Was returning tautological `expected == "PASS"` / `expected == "FAIL"`.
+   Now returns actual validity for each test case.
 
-Full Suite Status
-─────────────────
-Results: 50 PASS, 41 FAIL, 0 WARN, 9 SKIP
+4. scripts/validate_agent_submission.py — validate_repo_snapshot_scope():
+   FIXED (Rule T): `has_repo_scope` was computed but never checked at end.
+   Added final guard: repo_snapshot_hashes require a finding with scope_class.
+
+5. scripts/validate_agent_submission.py — validate_t5_multiple_anchors():
+   NEW (Rule AB): T5 requires multiple independent time anchors or cross-anchoring.
+   Single-anchor signal without multi-anchor evidence → FAIL.
+
+Full Suite Status (after all fixes)
+────────────────────────────────────
+Results: 54 PASS, 46 FAIL, 0 WARN, 0 SKIP
 FINAL: PASS — verification stress suite passed.
