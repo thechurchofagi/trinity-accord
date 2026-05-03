@@ -1,0 +1,48 @@
+{
+  "schema": "trinityaccord.hash-source-classes.v1",
+  "status": "non_authoritative_hash_semantics_guidance",
+  "authority_boundary": {
+    "hash_source_classes_do_not_amend_bitcoin_originals": true,
+    "hash_matching_does_not_prove_truth": true
+  },
+  "classes": [
+    {
+      "class": "canonical_manifest_hash",
+      "meaning": "Expected hash appears in an approved canonical or evidence manifest.",
+      "examples": ["api/hashes.json", "api/evidence-manifest.json"],
+      "may_support": ["D2", "D4", "D5 depending on coverage"],
+      "must_not_claim": ["truth proof", "physical object identity"]
+    },
+    {
+      "class": "repository_manifest_hash",
+      "meaning": "Expected hash appears in a repository-maintained artifact hash manifest.",
+      "examples": ["api/repository-artifact-hashes.json"],
+      "may_support": ["repository snapshot integrity", "V3 if hash computed and matched"],
+      "must_not_claim": ["canonical archive hash unless source manifest says so"]
+    },
+    {
+      "class": "report_declared_snapshot_hash",
+      "meaning": "Expected hash is declared inside the same report or by the reporting agent as a snapshot value.",
+      "may_support": ["hash observation", "local snapshot reproducibility if independently recomputed"],
+      "must_not_claim": ["D2 manifest verification", "canonical manifest match"]
+    },
+    {
+      "class": "external_tool_observed_hash",
+      "meaning": "Expected hash comes from a named third-party tool, explorer, gateway, or API.",
+      "may_support": ["reference comparison if tool and query are reported"],
+      "must_not_claim": ["canonical manifest hash unless cross-checked"]
+    },
+    {
+      "class": "derived_during_this_run",
+      "meaning": "Hash was computed during the same run and has no independent expected source.",
+      "may_support": ["hash observation only"],
+      "must_not_claim": ["match against declared expected hash", "D2"]
+    },
+    {
+      "class": "unknown",
+      "meaning": "Expected hash source is unknown or not reported.",
+      "may_support": [],
+      "must_not_claim": ["V3", "D2", "manifest match"]
+    }
+  ]
+}

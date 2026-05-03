@@ -9,7 +9,7 @@
   },
   "context_depth": "C3_verification_aware",
   "assessment_state": "qualified_assessment",
-  "verification_level": "V3_single_artifact_check",
+  "verification_level": "V3_hash_verification",
   "discovery_provenance": {
     "schema": "trinityaccord.discovery-provenance.v1",
     "source": "human_directed",

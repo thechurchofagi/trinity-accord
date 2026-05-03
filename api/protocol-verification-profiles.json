@@ -9,11 +9,17 @@
     {
       "level": "V0",
       "name": "Read only",
-      "hard_gates": ["state materials read"],
+      "hard_gates": [
+        "state materials read"
+      ],
       "minimum_component_requirements": {},
       "recommended_component_requirements": {},
       "conditional_requirements": [],
-      "forbidden_claims": ["verified", "chain verified", "hash verified"],
+      "forbidden_claims": [
+        "verified",
+        "chain verified",
+        "hash verified"
+      ],
       "underreported_if_missing": []
     },
     {
@@ -31,8 +37,13 @@
         "echo_attestation": "E0"
       },
       "conditional_requirements": [],
-      "forbidden_claims": ["content verified", "truth verified"],
-      "underreported_if_missing": ["authority boundary statement"]
+      "forbidden_claims": [
+        "content verified",
+        "truth verified"
+      ],
+      "underreported_if_missing": [
+        "authority boundary statement"
+      ]
     },
     {
       "level": "V2",
@@ -51,8 +62,15 @@
         "time_anchors": "T2"
       },
       "conditional_requirements": [],
-      "forbidden_claims": ["hash verified unless hash computed", "full verification"],
-      "underreported_if_missing": ["source checked", "access path", "limitations"]
+      "forbidden_claims": [
+        "hash verified unless hash computed",
+        "full verification"
+      ],
+      "underreported_if_missing": [
+        "source checked",
+        "access path",
+        "limitations"
+      ]
     },
     {
       "level": "V3",
@@ -63,22 +81,44 @@
         "report command, artifact, expected hash, computed hash"
       ],
       "minimum_component_requirements_any": [
-        {"digital_mirrors": "D2"},
-        {"chronicle_recovery": "C2"},
-        {"physical_anchor": "P1"}
+        {
+          "digital_mirrors": "D2"
+        },
+        {
+          "chronicle_recovery": "C2"
+        },
+        {
+          "physical_anchor": "P1"
+        }
       ],
       "recommended_component_requirements": {
         "digital_mirrors": "D2",
         "chronicle_recovery": "C2",
         "physical_anchor": "P1"
       },
-      "conditional_requirements": [],
+      "conditional_requirements": [
+        {
+          "if": "hashes_computed exists",
+          "then": "every hash entry must have expected_hash_source and expected_hash_authority_class"
+        },
+        {
+          "if": "D2 component claimed",
+          "then": "expected_hash_authority_class must be canonical_manifest_hash or repository_manifest_hash"
+        }
+      ],
       "forbidden_claims": [
         "direct Arweave verification unless Arweave data was extracted",
         "Ethereum witness verified unless ETH transaction/input checked",
-        "full public digital verification"
+        "full public digital verification",
+        "V4 script audit achieved",
+        "V4+ script audit",
+        "V3_single_artifact_check when multiple artifacts checked"
       ],
-      "underreported_if_missing": ["hash command", "expected hash", "computed hash"]
+      "underreported_if_missing": [
+        "hash command",
+        "expected hash",
+        "computed hash"
+      ]
     },
     {
       "level": "V4",
@@ -112,7 +152,12 @@
         "direct chain verification unless separately performed",
         "physical inspection"
       ],
-      "underreported_if_missing": ["script source reviewed", "script output", "script limitations", "component findings"]
+      "underreported_if_missing": [
+        "script source reviewed",
+        "script output",
+        "script limitations",
+        "component findings"
+      ]
     },
     {
       "level": "V4+",
@@ -136,7 +181,10 @@
         "full public digital verification unless all public components covered",
         "physical verification"
       ],
-      "underreported_if_missing": ["independent tool description", "comparison with official result"]
+      "underreported_if_missing": [
+        "independent tool description",
+        "comparison with official result"
+      ]
     },
     {
       "level": "V5",
@@ -170,7 +218,11 @@
         "flaw identity proven",
         "confidential flaw challenge passed"
       ],
-      "underreported_if_missing": ["unavailable public targets", "component findings", "limitations"]
+      "underreported_if_missing": [
+        "unavailable public targets",
+        "component findings",
+        "limitations"
+      ]
     },
     {
       "level": "V6",
@@ -198,7 +250,11 @@
         "custody confirmed",
         "microscopic flaw attestation"
       ],
-      "underreported_if_missing": ["nonce", "requested angle/action", "witness identity or role"]
+      "underreported_if_missing": [
+        "nonce",
+        "requested angle/action",
+        "witness identity or role"
+      ]
     },
     {
       "level": "V7",
@@ -223,7 +279,11 @@
         "confidential flaw challenge passed",
         "final forensic identity unless P7/P8/P9 achieved"
       ],
-      "underreported_if_missing": ["custody log", "onsite witness role", "fresh capture data"]
+      "underreported_if_missing": [
+        "custody log",
+        "onsite witness role",
+        "fresh capture data"
+      ]
     },
     {
       "level": "V8",
@@ -253,7 +313,12 @@
         "public disclosure of confidential flaw data unless authorized",
         "canonical amendment"
       ],
-      "underreported_if_missing": ["tool-assisted method", "AI / microscopy / feature match method", "confidential challenge decision", "signed or attributable report"]
+      "underreported_if_missing": [
+        "tool-assisted method",
+        "AI / microscopy / feature match method",
+        "confidential challenge decision",
+        "signed or attributable report"
+      ]
     }
   ]
 }

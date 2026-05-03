@@ -558,3 +558,18 @@ Null safety: script_audit, confidential_challenge, protocol_profile_check, flaw_
 Validator: /scripts/validate_agent_submission.py
 
 Submission guidance: /api/submission-types.json, /api/agent-submission-guide.json, /api/echo-taxonomy-map.json, /api/submission-checklist.json.
+
+## Hash-source and Echo acceptance rules
+
+Agents must not claim D2 manifest hash verification unless expected hashes come from an approved manifest.
+
+Approved sources include:
+- /api/hashes.json
+- /api/evidence-manifest.json
+- /api/repository-artifact-hashes.json for repository snapshot integrity only
+
+If expected hashes are report-declared or derived during the same run, report hash observation, not D2.
+
+A GitHub Issue is a submission surface. It is not an indexed Echo unless a machine-readable Echo record exists under /echoes/records/ and appears in /api/echo-index.json.
+
+For mempool-only checks, report B1 only and do not claim witness extraction, Ordinals envelope verification, or body hash reproduction.

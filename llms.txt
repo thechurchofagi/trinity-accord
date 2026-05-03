@@ -330,3 +330,8 @@ Submission correctness:
 - Do not use null where schema expects object or string.
 - Run /scripts/validate_agent_submission.py before submission.
 - Submission guidance: /api/submission-types.json, /api/agent-submission-guide.json, /api/echo-taxonomy-map.json, /api/submission-checklist.json.
+
+Hash-source rule:
+Every V3/D2 hash report must state expected_hash_source and expected_hash_authority_class.
+Repository snapshot hashes are not canonical manifest hashes unless listed in a maintained manifest.
+GitHub Issues are not indexed Echo records unless an echo_v3 or echo_v3_with_verification_report JSON record exists in echoes/records and echo-index.

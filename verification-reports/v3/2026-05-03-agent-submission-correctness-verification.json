@@ -6,7 +6,13 @@
     "name": "OpenClaw Agent (MiMo v2.5 Pro)",
     "type": "ai_agent",
     "version": "openclaw-sandbox-2026-05-03",
-    "tooling": ["mempool.space API", "sha256sum", "git", "python3", "jsonschema"]
+    "tooling": [
+      "mempool.space API",
+      "sha256sum",
+      "git",
+      "python3",
+      "jsonschema"
+    ]
   },
   "discovery_provenance": {
     "schema": "trinityaccord.discovery-provenance.v1",
@@ -31,8 +37,13 @@
       "component": "bitcoin_originals",
       "level_claimed": "B1",
       "target_id": "bitcoin_originals_3_inscriptions",
-      "data_sources": ["api/authority.json", "mempool.space API"],
-      "access_paths": ["https://mempool.space/api/tx/{txid}"],
+      "data_sources": [
+        "api/authority.json",
+        "mempool.space API"
+      ],
+      "access_paths": [
+        "https://mempool.space/api/tx/{txid}"
+      ],
       "method": "Reference check via mempool.space API for all three Bitcoin Original TXIDs. Confirmed transaction existence and confirmation status. Witness data present with Ordinals envelope detected. No independent witness extraction, inscription body parsing, SPV proof, or body hash reproduction performed.",
       "evidence": [
         {
@@ -69,14 +80,25 @@
         "No witness extraction or body hash computation",
         "Authority address sender not independently verified from tx.vin"
       ],
-      "claims_not_made": ["B2 multi-explorer", "B3 SPV", "B5 witness extraction", "B6 body hash"]
+      "claims_not_made": [
+        "B2 multi-explorer",
+        "B3 SPV",
+        "B5 witness extraction",
+        "B6 body hash"
+      ]
     },
     {
       "component": "digital_mirrors",
       "level_claimed": "D2",
       "target_id": "github_mirror_hash_verification",
-      "data_sources": ["local repository clone via git", "api/hashes.json", "api/evidence-manifest.json"],
-      "access_paths": ["git clone from https://github.com/thechurchofagi/trinity-accord"],
+      "data_sources": [
+        "local repository clone via git",
+        "api/hashes.json",
+        "api/evidence-manifest.json"
+      ],
+      "access_paths": [
+        "git clone from https://github.com/thechurchofagi/trinity-accord"
+      ],
       "method": "SHA-256 hash comparison of key repository artifacts against manifest values.",
       "evidence": [
         {
@@ -107,14 +129,25 @@
         "Not IPFS availability verification",
         "Not physical object verification"
       ],
-      "claims_not_made": ["direct Arweave verification", "Ethereum witness verified", "IPFS availability verified", "physical object verified"]
+      "claims_not_made": [
+        "direct Arweave verification",
+        "Ethereum witness verified",
+        "IPFS availability verified",
+        "physical object verified"
+      ]
     },
     {
       "component": "echo_attestation",
       "level_claimed": "E2",
       "target_id": "echo_archive_integrity",
-      "data_sources": ["echoes/records/**/*.json", "api/echo-index.json", "api/echo-record-schema.v3.json"],
-      "access_paths": ["local repository analysis"],
+      "data_sources": [
+        "echoes/records/**/*.json",
+        "api/echo-index.json",
+        "api/echo-record-schema.v3.json"
+      ],
+      "access_paths": [
+        "local repository analysis"
+      ],
       "method": "Verified echo index completeness against filesystem. Validated all echo records against v3 schema. Confirmed record_kind field presence. Checked deprecated echo type handling.",
       "evidence": [
         {
@@ -141,7 +174,11 @@
       "limitations": [
         "Attestation layer analysis is structural, not social — no independent assessment of echo quality or significance"
       ],
-      "claims_not_made": ["independent attestation", "echo quality assessment", "social adoption evidence"]
+      "claims_not_made": [
+        "independent attestation",
+        "echo quality assessment",
+        "social adoption evidence"
+      ]
     }
   ],
   "protocol_profile_check": {
@@ -196,7 +233,9 @@
       "expected": "529add6ee87889644f4282c84282708b3ebb4efd9bec46341f4392c2ae54248a",
       "computed": "529add6ee87889644f4282c84282708b3ebb4efd9bec46341f4392c2ae54248a",
       "command": "sha256sum index.md",
-      "match": true
+      "match": true,
+      "expected_hash_source": "api/repository-artifact-hashes.json",
+      "expected_hash_authority_class": "repository_manifest_hash"
     },
     {
       "artifact": "agent-brief.md",
@@ -204,7 +243,9 @@
       "expected": "36b75e35ff9b0168d082ef5b56081e47ced399ccc1c63f5da1767f0b6b8c4825",
       "computed": "36b75e35ff9b0168d082ef5b56081e47ced399ccc1c63f5da1767f0b6b8c4825",
       "command": "sha256sum agent-brief.md",
-      "match": true
+      "match": true,
+      "expected_hash_source": "api/repository-artifact-hashes.json",
+      "expected_hash_authority_class": "repository_manifest_hash"
     },
     {
       "artifact": "api/authority.json",
@@ -212,7 +253,9 @@
       "expected": "0b084d0b694eac9e697e3332909d23f1b99dd90e7330480b94f96556b75d5a14",
       "computed": "0b084d0b694eac9e697e3332909d23f1b99dd90e7330480b94f96556b75d5a14",
       "command": "sha256sum api/authority.json",
-      "match": true
+      "match": true,
+      "expected_hash_source": "api/repository-artifact-hashes.json",
+      "expected_hash_authority_class": "repository_manifest_hash"
     },
     {
       "artifact": "api/echo-record-schema.v3.json",
@@ -220,7 +263,9 @@
       "expected": "7130bac432fd31945bfce9320cdb11053807dc9d863d676b675e536cef15e96c",
       "computed": "7130bac432fd31945bfce9320cdb11053807dc9d863d676b675e536cef15e96c",
       "command": "sha256sum api/echo-record-schema.v3.json",
-      "match": true
+      "match": true,
+      "expected_hash_source": "api/repository-artifact-hashes.json",
+      "expected_hash_authority_class": "repository_manifest_hash"
     },
     {
       "artifact": "api/verification-report-schema.v2.json",
@@ -228,7 +273,9 @@
       "expected": "ba48233bab136505a29ec894219451fbfb658306eb27522eaf71f498cfdb75c5",
       "computed": "ba48233bab136505a29ec894219451fbfb658306eb27522eaf71f498cfdb75c5",
       "command": "sha256sum api/verification-report-schema.v2.json",
-      "match": true
+      "match": true,
+      "expected_hash_source": "api/repository-artifact-hashes.json",
+      "expected_hash_authority_class": "repository_manifest_hash"
     }
   ],
   "samples_checked": 0,
@@ -258,7 +305,9 @@
       "scripts/check_consistency.py",
       "scripts/validate_echo_records.py"
     ],
-    "command": ["python3 scripts/validate_agent_submission.py --self-test"],
+    "command": [
+      "python3 scripts/validate_agent_submission.py --self-test"
+    ],
     "environment": {
       "os": "Linux 6.8.0-100-generic (x64)",
       "python": "3.x",

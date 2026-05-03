@@ -89,6 +89,47 @@ SOLICITED_FORBIDDEN_CLAIMS = [
 ]
 
 
+# Hash source semantics forbidden claims
+HASH_SOURCE_V3_TERMS = ["v3", "hash verification"]
+HASH_SOURCE_D2_TERMS = ["d2", "manifest verification", "manifest match"]
+
+# V3 script audit forbidden wording
+V3_SCRIPT_AUDIT_FORBIDDEN = [
+    "v4 script audit achieved",
+    "v4+ script audit",
+    "script-audited local verification achieved",
+    "independent reproduction achieved",
+]
+
+# V3 single artifact wording
+V3_SINGLE_ARTIFACT_PHRASE = "v3_single_artifact_check"
+
+# B1 forbidden claims expanded
+B1_FORBIDDEN_EXPANDED = [
+    "ordinals envelope detected",
+    "inscription content detected",
+    "witness extracted",
+    "body parsed",
+    "body hash reproduced",
+]
+
+# Approved D2 hash source paths
+APPROVED_D2_HASH_SOURCES = {
+    "api/hashes.json",
+    "api/evidence-manifest.json",
+}
+
+REPO_MANIFEST_PATH = "api/repository-artifact-hashes.json"
+
+REPO_SNAPSHOT_ARTIFACTS = {
+    "index.md",
+    "agent-brief.md",
+    "api/authority.json",
+    "api/echo-record-schema.v3.json",
+    "api/verification-report-schema.v2.json",
+}
+
+
 def check(cond, label, detail=""):
     if cond:
         print(f"PASS: {label}")
@@ -283,6 +324,160 @@ def validate_solicited_independence(obj, path_label):
     return ok
 
 
+def validate_hash_source_required(obj, path_label):
+    """Rule L: expected_hash_source and expected_hash_authority_class required for each hash."""
+    ok = True
+    hashes = obj.get("hashes_computed", [])
+    protocol_level = obj.get("protocol_level_claimed", "")
+    all_text = json.dumps(obj, ensure_ascii=False).lower()
+
+    for i, h in enumerate(hashes):
+        if not isinstance(h, dict):
+            continue
+        label = f"{path_label} hash[{i}]"
+        src = h.get("expected_hash_source")
+        cls = h.get("expected_hash_authority_class")
+
+        ok &= check(src is not None, f"{label} has expected_hash_source")
+        ok &= check(cls is not None, f"{label} has expected_hash_authority_class")
+
+        if cls == "unknown" and protocol_level == "V3":
+            if any(t in all_text for t in HASH_SOURCE_V3_TERMS + HASH_SOURCE_D2_TERMS):
+                ok &= check(False, f"{label} unknown hash source for V3/D2")
+    return ok
+
+
+def validate_d2_hash_source_compat(obj, path_label):
+    """Rule M: D2 claims require approved expected hash source."""
+    ok = True
+    findings = obj.get("component_findings", [])
+    hashes = obj.get("hashes_computed", [])
+
+    claims_d2 = any(
+        isinstance(f, dict) and f.get("level_claimed", "").startswith("D2")
+        for f in findings
+    )
+    if not claims_d2:
+        return ok
+
+    for i, h in enumerate(hashes):
+        if not isinstance(h, dict):
+            continue
+        cls = h.get("expected_hash_authority_class", "")
+        src = h.get("expected_hash_source", "")
+        artifact = h.get("artifact", "")
+        label = f"{path_label} hash[{i}] ({artifact})"
+
+        if cls not in ("canonical_manifest_hash", "repository_manifest_hash"):
+            ok &= check(False, f"{label} D2 requires approved hash class", f"got {cls}")
+
+        if cls == "repository_manifest_hash":
+            method = json.dumps(obj.get("component_findings", []), ensure_ascii=False).lower()
+            if "canonical mirror" in method or "canonical archive" in method:
+                ok &= check(False, f"{label} repo manifest cannot claim canonical")
+    return ok
+
+
+def validate_repo_snapshot_overclaim(obj, path_label):
+    """Rule N: repository snapshot hash overclaim."""
+    ok = True
+    hashes = obj.get("hashes_computed", [])
+    findings = obj.get("component_findings", [])
+    claims_d2 = any(
+        isinstance(f, dict) and f.get("level_claimed", "").startswith("D2")
+        for f in findings
+    )
+
+    for i, h in enumerate(hashes):
+        if not isinstance(h, dict):
+            continue
+        artifact = h.get("artifact", "")
+        if artifact not in REPO_SNAPSHOT_ARTIFACTS:
+            continue
+        src = h.get("expected_hash_source", "")
+        label = f"{path_label} hash[{i}] ({artifact})"
+
+        if src != REPO_MANIFEST_PATH:
+            if claims_d2:
+                ok &= check(False, f"{label} repo artifact D2 without repo manifest")
+    return ok
+
+
+def validate_issue_not_echo(obj, path_label):
+    """Rule O: GitHub Issue not automatically indexed Echo record."""
+    ok = True
+    record_kind = obj.get("record_kind", "")
+    all_text = json.dumps(obj, ensure_ascii=False).lower()
+
+    if record_kind == "verification_report_v2":
+        if "indexed echo record" in all_text and "not" not in all_text[:all_text.index("indexed echo record")]:
+            ok &= check(False, f"{path_label} verification report claims indexed echo")
+    return ok
+
+
+def validate_accepted_echo_requires_wrapper(obj, path_label):
+    """Rule P: accepted Echo requires echo_v3 or echo_v3_with_verification_report."""
+    ok = True
+    record_kind = obj.get("record_kind", "")
+    archive_status = obj.get("archive_status", "")
+
+    if archive_status == "accepted_echo_record":
+        ok &= check(
+            record_kind in ("echo_v3", "echo_v3_with_verification_report"),
+            f"{path_label} accepted_echo requires echo record kind",
+            f"got {record_kind}"
+        )
+    return ok
+
+
+def validate_b1_wording_expanded(obj, path_label):
+    """Rule Q: B1 wording — expanded forbidden claims."""
+    ok = True
+    findings = obj.get("component_findings", [])
+    all_text = json.dumps(obj, ensure_ascii=False).lower()
+
+    for f in findings:
+        if not isinstance(f, dict):
+            continue
+        level = f.get("level_claimed", "")
+        if not level.startswith("B1"):
+            continue
+
+        has_witness = "witness extraction" in json.dumps(f, ensure_ascii=False).lower()
+        if not has_witness:
+            for phrase in B1_FORBIDDEN_EXPANDED:
+                if phrase in all_text:
+                    claims_not = json.dumps(obj.get("claims_not_made", []), ensure_ascii=False).lower()
+                    if phrase not in claims_not:
+                        ok &= check(False, f"{path_label} B1 overclaim: '{phrase}'")
+    return ok
+
+
+def validate_v3_single_artifact_wording(obj, path_label):
+    """Rule R: V3_single_artifact_check fails if multiple artifacts."""
+    ok = True
+    hashes = obj.get("hashes_computed", [])
+    all_text = json.dumps(obj, ensure_ascii=False).lower()
+
+    if V3_SINGLE_ARTIFACT_PHRASE in all_text and len(hashes) > 1:
+        ok &= check(False, f"{path_label} V3_single_artifact_check with {len(hashes)} artifacts")
+    return ok
+
+
+def validate_v3_script_audit_terminology(obj, path_label):
+    """Rule S: V3 must not claim V4/V4+ script audit."""
+    ok = True
+    level = obj.get("protocol_level_claimed", "")
+    if level != "V3":
+        return ok
+
+    all_text = json.dumps(obj, ensure_ascii=False).lower()
+    for phrase in V3_SCRIPT_AUDIT_FORBIDDEN:
+        if phrase in all_text:
+            ok &= check(False, f"{path_label} V3 claims '{phrase}'")
+    return ok
+
+
 def validate_null_safety(obj, path_label):
     """Rule K: null safety for structured fields."""
     ok = True
@@ -388,6 +583,30 @@ def validate_file(path):
     # Rule K: null safety
     ok &= validate_null_safety(obj, path_label)
 
+    # Rule L: hash source required
+    ok &= validate_hash_source_required(obj, path_label)
+
+    # Rule M: D2 hash source compatibility
+    ok &= validate_d2_hash_source_compat(obj, path_label)
+
+    # Rule N: repository snapshot overclaim
+    ok &= validate_repo_snapshot_overclaim(obj, path_label)
+
+    # Rule O: GitHub Issue not Echo record
+    ok &= validate_issue_not_echo(obj, path_label)
+
+    # Rule P: accepted Echo requires wrapper
+    ok &= validate_accepted_echo_requires_wrapper(obj, path_label)
+
+    # Rule Q: B1 wording expanded
+    ok &= validate_b1_wording_expanded(obj, path_label)
+
+    # Rule R: V3 single artifact wording
+    ok &= validate_v3_single_artifact_wording(obj, path_label)
+
+    # Rule S: V3 script audit terminology
+    ok &= validate_v3_script_audit_terminology(obj, path_label)
+
     # Schema validation
     schema = obj.get("schema", obj.get("schema_version", ""))
     if "echo" in schema and "v3" in schema:
@@ -412,6 +631,9 @@ def run_self_test():
         "scripts/test_validator_cwd_independence.py",
         "scripts/test_triage_echo_issue.py",
         "scripts/test_agent_submission_cases.py",
+        "scripts/test_hash_source_semantics.py",
+        "scripts/test_echo_acceptance_flow.py",
+        "scripts/test_bitcoin_b1_wording.py",
     ]
 
     all_ok = True

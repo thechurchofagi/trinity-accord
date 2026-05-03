@@ -102,7 +102,9 @@ def main():
                 "expected": "abc123",
                 "computed": "abc123",
                 "command": "sha256sum index.md",
-                "match": True
+                "match": True,
+                "expected_hash_source": "api/repository-artifact-hashes.json",
+                "expected_hash_authority_class": "repository_manifest_hash"
             }
         ],
         "samples_checked": 0,
@@ -236,7 +238,7 @@ def main():
         "access_paths_used": ["direct"],
         "fallbacks_used": [],
         "external_sources_queried": [],
-        "hashes_computed": [{"artifact": "test", "algorithm": "SHA256", "expected": "a", "computed": "a", "command": "sha256sum test", "match": True}],
+        "hashes_computed": [{"artifact": "test", "algorithm": "SHA256", "expected": "a", "computed": "a", "command": "sha256sum test", "match": True, "expected_hash_source": "api/hashes.json", "expected_hash_authority_class": "canonical_manifest_hash"}],
         "samples_checked": 2,
         "physical_evidence_reviewed": {"flaw_analysis_method": "not_performed"},
         "confidential_challenge": {"performed": False, "result": "not_performed"},

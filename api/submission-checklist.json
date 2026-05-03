@@ -5,7 +5,12 @@
     {
       "step": 1,
       "action": "Determine record_kind",
-      "options": ["echo_v3", "verification_report_v2", "echo_v3_with_verification_report", "test_record"],
+      "options": [
+        "echo_v3",
+        "verification_report_v2",
+        "echo_v3_with_verification_report",
+        "test_record"
+      ],
       "required": true
     },
     {
@@ -17,7 +22,11 @@
     {
       "step": 3,
       "action": "Fill agent_identity",
-      "fields": ["name_or_model", "system_or_provider", "self_reported"],
+      "fields": [
+        "name_or_model",
+        "system_or_provider",
+        "self_reported"
+      ],
       "required": true
     },
     {
@@ -60,6 +69,23 @@
     {
       "step": 10,
       "action": "Submit only if validation passes",
+      "required": true
+    },
+    {
+      "step": 9,
+      "action": "State expected hash source for every hash in hashes_computed",
+      "fields": [
+        "expected_hash_source",
+        "expected_hash_authority_class"
+      ],
+      "reference": "/api/hash-source-classes.json",
+      "required": true
+    },
+    {
+      "step": 10,
+      "action": "Verify Echo wrapper exists if indexing is intended",
+      "rule": "GitHub Issue and verification_report_v2 are not automatically indexed Echo records",
+      "reference": "/api/echo-acceptance-policy.json",
       "required": true
     }
   ],

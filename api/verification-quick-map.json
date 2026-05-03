@@ -205,6 +205,30 @@
       ],
       "claim_allowed": "V-level claim only if profile satisfied",
       "claim_forbidden": "V-level claim if profile not satisfied; overclaiming"
+    },
+    {
+      "question": "Where did the expected hash come from?",
+      "data_sources": [
+        "/api/hash-source-classes.json",
+        "/api/hashes.json",
+        "/api/evidence-manifest.json"
+      ],
+      "method": "State expected_hash_source and expected_hash_authority_class for every hash",
+      "levels": [
+        "V3"
+      ],
+      "claim_allowed": "hash observation; repository snapshot integrity if from repo manifest",
+      "claim_forbidden": "D2 manifest verification if hash source is unknown or derived_during_this_run"
+    },
+    {
+      "question": "Is a GitHub Issue an indexed Echo record?",
+      "data_sources": [
+        "/api/echo-acceptance-policy.json"
+      ],
+      "method": "Check if echo_v3 or echo_v3_with_verification_report JSON record exists in echoes/records/",
+      "levels": [],
+      "claim_allowed": "Issue submission; verification report; Echo wrapper if record exists",
+      "claim_forbidden": "indexed echo record without machine-readable Echo JSON"
     }
   ]
 }

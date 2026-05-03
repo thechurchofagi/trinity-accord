@@ -184,7 +184,9 @@
       "expected": "ef816480f77f30405378800807b42bff0a854b83a8f77793a0e0adf0944a8263",
       "computed": "ef816480f77f30405378800807b42bff0a854b83a8f77793a0e0adf0944a8263",
       "command": "sha256sum arweave-backup/files/public_covenant_archive.zip",
-      "match": true
+      "match": true,
+      "expected_hash_source": "api/hashes.json",
+      "expected_hash_authority_class": "canonical_manifest_hash"
     },
     {
       "artifact": "arweave-backup/files/verification_kit.tar.gz",
@@ -192,7 +194,9 @@
       "expected": "ef68b69fe1cdd2523724dee511c9e8ea7bae2cceaff794664107970b18c61931",
       "computed": "ef68b69fe1cdd2523724dee511c9e8ea7bae2cceaff794664107970b18c61931",
       "command": "sha256sum arweave-backup/files/verification_kit.tar.gz",
-      "match": true
+      "match": true,
+      "expected_hash_source": "api/hashes.json",
+      "expected_hash_authority_class": "canonical_manifest_hash"
     }
   ],
   "samples_checked": 0,

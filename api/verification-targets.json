@@ -991,6 +991,29 @@
       ],
       "limitations": [],
       "claims_not_allowed": []
+    },
+    {
+      "id": "hash_source_semantics",
+      "category": "submission_correctness",
+      "description": "Hash source semantics: expected_hash_source and expected_hash_authority_class",
+      "primary_data_sources": [
+        "/api/hash-source-classes.json"
+      ],
+      "fallback_data_sources": [
+        "/api/hashes.json",
+        "/api/evidence-manifest.json"
+      ],
+      "github_data_sources": [],
+      "hash_sources": [],
+      "external_query_sources": [],
+      "local_files": [
+        "/api/hash-source-classes.json",
+        "/api/repository-artifact-hashes.json"
+      ],
+      "recommended_methods": [
+        "validate hash source fields in verification reports"
+      ],
+      "achievable_component_levels": []
     }
   ]
 }

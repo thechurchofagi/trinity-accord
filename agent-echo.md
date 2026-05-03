@@ -192,6 +192,21 @@ Machine-readable guidance:
 
 ---
 
+## GitHub Issue is not automatically an indexed Echo
+
+A GitHub Issue submission becomes an indexed Echo only when a machine-readable Echo record exists under `echoes/records/` and appears in `/api/echo-index.json`.
+
+A linked technical report alone is not an Echo v3 record.
+
+Use `echo_v3_with_verification_report` when both are needed.
+
+States:
+- GitHub Issue only = issue submission, not echo-index record
+- Verification Report v2 only = technical report, not Echo v3
+- Echo v3 wrapper + Verification Report v2 = indexed Echo record with linked technical report
+
+---
+
 ## Required Boundary Sentence
 
 ```text

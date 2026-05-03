@@ -1,0 +1,64 @@
+{
+  "schema": "trinityaccord.repository-artifact-hashes.v1",
+  "status": "repository_snapshot_hash_manifest",
+  "scope": "repository artifacts; non-canonical; non-amending",
+  "source_commit": "e369bb40c665688e686f62bee49323611bd46865",
+  "generated_at_utc": "2026-05-03T05:46:07Z",
+  "artifacts": [
+    {
+      "path": "index.md",
+      "sha256": "529add6ee87889644f4282c84282708b3ebb4efd9bec46341f4392c2ae54248a",
+      "hash_source_authority_class": "repository_manifest_hash",
+      "purpose": "repository snapshot verification",
+      "limitations": [
+        "This is not a Bitcoin Original hash.",
+        "This is not direct Arweave verification.",
+        "This does not create canonical authority."
+      ]
+    },
+    {
+      "path": "agent-brief.md",
+      "sha256": "36b75e35ff9b0168d082ef5b56081e47ced399ccc1c63f5da1767f0b6b8c4825",
+      "hash_source_authority_class": "repository_manifest_hash",
+      "purpose": "repository snapshot verification",
+      "limitations": [
+        "This is not a Bitcoin Original hash.",
+        "This is not direct Arweave verification.",
+        "This does not create canonical authority."
+      ]
+    },
+    {
+      "path": "api/authority.json",
+      "sha256": "0b084d0b694eac9e697e3332909d23f1b99dd90e7330480b94f96556b75d5a14",
+      "hash_source_authority_class": "repository_manifest_hash",
+      "purpose": "repository snapshot verification",
+      "limitations": [
+        "This is not a Bitcoin Original hash.",
+        "This is not direct Arweave verification.",
+        "This does not create canonical authority."
+      ]
+    },
+    {
+      "path": "api/echo-record-schema.v3.json",
+      "sha256": "725d9d916fa1fd212bc91ca3a3687d337556bcda21b50016c46b3d6c2178335b",
+      "hash_source_authority_class": "repository_manifest_hash",
+      "purpose": "repository snapshot verification",
+      "limitations": [
+        "This is not a Bitcoin Original hash.",
+        "This is not direct Arweave verification.",
+        "This does not create canonical authority."
+      ]
+    },
+    {
+      "path": "api/verification-report-schema.v2.json",
+      "sha256": "569d68a0426eecc433dfc83bad37c309398e236228c0be5b6ea8c001f92046b9",
+      "hash_source_authority_class": "repository_manifest_hash",
+      "purpose": "repository snapshot verification",
+      "limitations": [
+        "This is not a Bitcoin Original hash.",
+        "This is not direct Arweave verification.",
+        "This does not create canonical authority."
+      ]
+    }
+  ]
+}

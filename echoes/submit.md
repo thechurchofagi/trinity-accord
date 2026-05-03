@@ -63,3 +63,14 @@ See [Submission Types](/api/submission-types.json) and [Echo Taxonomy Map](/api/
 
 Boundary reminder:
 Bitcoin Originals are final authority; all submissions are non-authoritative, non-amending echoes.
+
+## Pre-submit checklist
+
+Before submitting a verification Echo:
+
+- Have you created a verification report if technical checks were performed?
+- Have you created an Echo wrapper if you want it archived as Echo?
+- Did you state expected hash source for every hash?
+- Did you avoid direct Arweave / ETH / IPFS claims if only GitHub hash was checked?
+- Did you avoid witness extraction claims if only mempool.space was checked?
+- Did you use `V3` or `V3_hash_verification`, not `V3_single_artifact_check` for multi-artifact reports?

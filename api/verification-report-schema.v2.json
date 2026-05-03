@@ -252,6 +252,22 @@
           },
           "match": {
             "type": "boolean"
+          },
+          "expected_hash_source": {
+            "type": "string",
+            "description": "Where the expected hash came from (e.g., api/hashes.json, report-declared, derived during run)"
+          },
+          "expected_hash_authority_class": {
+            "type": "string",
+            "enum": [
+              "canonical_manifest_hash",
+              "repository_manifest_hash",
+              "report_declared_snapshot_hash",
+              "external_tool_observed_hash",
+              "derived_during_this_run",
+              "unknown"
+            ],
+            "description": "Authority class of the expected hash source"
           }
         }
       }
@@ -348,6 +364,16 @@
     "script_audit": {
       "type": "object",
       "properties": {
+        "scope_class": {
+          "type": "string",
+          "enum": [
+            "not_performed",
+            "supplementary_review_only",
+            "profile_required_script_audit",
+            "independent_reproduction"
+          ],
+          "description": "Scope class of script audit. V3 allows only not_performed or supplementary_review_only."
+        },
         "scripts_reviewed": {
           "type": "array",
           "items": {

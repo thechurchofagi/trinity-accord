@@ -66,5 +66,31 @@
     "Fill discovery_provenance fields",
     "Run /scripts/validate_agent_submission.py on the JSON file",
     "Confirm no overclaims relative to what was actually checked"
-  ]
+  ],
+  "hash_source_rules": {
+    "required_fields": [
+      "expected_hash_source",
+      "expected_hash_authority_class"
+    ],
+    "allowed_classes": [
+      "canonical_manifest_hash",
+      "repository_manifest_hash",
+      "report_declared_snapshot_hash",
+      "external_tool_observed_hash",
+      "derived_during_this_run",
+      "unknown"
+    ],
+    "d2_requires_approved_source": true,
+    "approved_d2_sources": [
+      "api/hashes.json",
+      "api/evidence-manifest.json"
+    ],
+    "repository_snapshot_note": "Repository file hashes without api/repository-artifact-hashes.json are report_declared_snapshot_hash, not D2."
+  },
+  "echo_acceptance_rules": {
+    "github_issue_not_echo": true,
+    "verification_report_not_echo_v3": true,
+    "echo_wrapper_required_for_indexing": true,
+    "human_solicited_not_independent": true
+  }
 }

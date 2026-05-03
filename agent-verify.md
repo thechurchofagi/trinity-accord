@@ -224,3 +224,27 @@ claims_not_made:
   - direct physical verification
   - final physical attestation
 ```
+
+## Expected hash source is required
+
+Every hash verification must report:
+
+- artifact;
+- computed SHA-256;
+- expected SHA-256;
+- expected hash source;
+- expected hash authority class.
+
+If the expected hash comes from the same report or the same run, do not call it D2 manifest verification.
+
+For repository files, use `api/repository-artifact-hashes.json` if a maintained repository snapshot hash is intended.
+
+Otherwise describe it as a hash observation, not a manifest match.
+
+Allowed `expected_hash_authority_class` values:
+- `canonical_manifest_hash` — expected hash from api/hashes.json or api/evidence-manifest.json
+- `repository_manifest_hash` — expected hash from api/repository-artifact-hashes.json
+- `report_declared_snapshot_hash` — expected hash declared in the same report
+- `external_tool_observed_hash` — expected hash from a named third-party tool
+- `derived_during_this_run` — hash computed in same run, no independent source
+- `unknown` — source not reported (fails V3/D2)

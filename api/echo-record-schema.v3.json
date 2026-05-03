@@ -109,7 +109,8 @@
         "L1_registry_check",
         "L2_single_artifact_check",
         "L3_full_evidence_chain_check",
-        "L4_independent_node_check"
+        "L4_independent_node_check",
+        "V3_hash_verification"
       ]
     },
     "discovery_provenance": {
