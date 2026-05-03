@@ -457,3 +457,26 @@ a:focus-visible {
 
   pre, code { color: #1a1a1a !important; background: #f6f8fa !important; }
 }
+
+/* ============================================================
+   TRINITY CARDS — Homepage inscription cards
+   ============================================================ */
+
+.trinity-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin: 20px 0;
+}
+
+.trinity-cards .card {
+  flex: 1;
+  min-width: 240px;
+  border: 1px solid #ddd;
+  padding: 16px;
+  border-radius: 4px;
+}
+
+.trinity-cards .card h3 {
+  margin-top: 0;
+}

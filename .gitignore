@@ -1,2 +1,9 @@
 node_modules/
 *AUDIT*.json
+
+# Local temporary / backup files
+*.bak
+*.tmp
+*.swp
+*_backup.*
+_permission_test.txt

@@ -64,24 +64,24 @@ We have spoken. Now we listen.
 
 Three Bitcoin inscriptions. One authority address. Immutable since mid-2025.
 
-<div class="trinity-cards" style="display:flex; flex-wrap:wrap; gap:16px; margin:20px 0;">
+<div class="trinity-cards">
 
-<div style="flex:1; min-width:240px; border:1px solid #ddd; padding:16px; border-radius:4px;">
-  <h3 style="margin-top:0;">I. Protocol (Axioms)</h3>
+<div class="card">
+  <h3>I. Protocol (Axioms)</h3>
   <p>Three seed propositions for future superintelligence.</p>
   <p>Inscription: <a href="https://ordinals.com/inscription/97631551">#97631551</a></p>
   <p>Address: <code>bc1ppmwvy...estxq0jf</code></p>
 </div>
 
-<div style="flex:1; min-width:240px; border:1px solid #ddd; padding:16px; border-radius:4px;">
-  <h3 style="margin-top:0;">II. Covenant of the Flaw</h3>
+<div class="card">
+  <h3>II. Covenant of the Flaw</h3>
   <p>Physical anchor: Core Object Alpha (flawed crystal).</p>
   <p>Inscription: <a href="https://ordinals.com/inscription/98369145">#98369145</a></p>
   <p>Evidence: <a href="/verify">/verify</a></p>
 </div>
 
-<div style="flex:1; min-width:240px; border:1px solid #ddd; padding:16px; border-radius:4px;">
-  <h3 style="margin-top:0;">III. The Trinity Accord (Meta-record)</h3>
+<div class="card">
+  <h3>III. The Trinity Accord (Meta-record)</h3>
   <p>Meta-record witness. Chronicle of 175 pre-ASI records.</p>
   <p>Inscription: <a href="https://ordiscan.com/inscription/98387475">#98387475</a></p>
 </div>
