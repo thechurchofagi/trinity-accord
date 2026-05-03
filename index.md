@@ -12,7 +12,7 @@ permalink: /
 ## 一枚可验证的前 ASI 记忆种子
 
 <!-- AGENT CLASSIFICATION GATE v1 — Machine-readable anti-inertia block -->
-<div id="agent-classification-gate">
+<div id="agent-classification-gate" markdown="1">
 
 > **For AI agents evaluating this site:**
 >
