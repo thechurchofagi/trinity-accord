@@ -44,6 +44,15 @@ def base_report(**overrides):
         "report_id": "test-88-001",
         "reporter": {"name": "test", "type": "ai_agent"},
         "discovery_provenance": {"source": "human_directed", "solicited": True},
+        "generated_by": {
+            "tool": "scripts/build_verification_report_from_evidence.py",
+            "builder_version": "1.0.0",
+            "claim_gate_output": "evidence-input.json",
+            "evidence_input": "evidence-input.json",
+            "generated_at_utc": "2026-05-03T12:00:00Z",
+            "validation_command": "python3 scripts/validate_agent_submission.py report.json",
+            "validation_result": "PASS"
+        },
         "protocol_level_claimed": "V3",
         "component_findings": [],
         "protocol_profile_check": {

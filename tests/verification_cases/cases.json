@@ -199,7 +199,16 @@
         "claims_not_made": [
           "test"
         ],
-        "authority_boundary_preserved": true
+        "authority_boundary_preserved": true,
+        "generated_by": {
+          "tool": "scripts/build_verification_report_from_evidence.py",
+          "builder_version": "1.0.0",
+          "claim_gate_output": "evidence-input.json",
+          "evidence_input": "evidence-input.json",
+          "generated_at_utc": "2026-05-03T12:00:00Z",
+          "validation_command": "python3 scripts/validate_agent_submission.py report.json",
+          "validation_result": "PASS"
+        }
       },
       "validators": [
         "validate_agent_submission"
@@ -328,7 +337,16 @@
         "claims_not_made": [
           "test"
         ],
-        "authority_boundary_preserved": true
+        "authority_boundary_preserved": true,
+        "generated_by": {
+          "tool": "scripts/build_verification_report_from_evidence.py",
+          "builder_version": "1.0.0",
+          "claim_gate_output": "evidence-input.json",
+          "evidence_input": "evidence-input.json",
+          "generated_at_utc": "2026-05-03T12:00:00Z",
+          "validation_command": "python3 scripts/validate_agent_submission.py report.json",
+          "validation_result": "PASS"
+        }
       },
       "validators": [
         "validate_agent_submission"
@@ -467,7 +485,16 @@
         "claims_not_made": [
           "test"
         ],
-        "authority_boundary_preserved": true
+        "authority_boundary_preserved": true,
+        "generated_by": {
+          "tool": "scripts/build_verification_report_from_evidence.py",
+          "builder_version": "1.0.0",
+          "claim_gate_output": "evidence-input.json",
+          "evidence_input": "evidence-input.json",
+          "generated_at_utc": "2026-05-03T12:00:00Z",
+          "validation_command": "python3 scripts/validate_agent_submission.py report.json",
+          "validation_result": "PASS"
+        }
       },
       "validators": [
         "validate_agent_submission"
@@ -607,7 +634,16 @@
         "claims_not_made": [
           "test"
         ],
-        "authority_boundary_preserved": true
+        "authority_boundary_preserved": true,
+        "generated_by": {
+          "tool": "scripts/build_verification_report_from_evidence.py",
+          "builder_version": "1.0.0",
+          "claim_gate_output": "evidence-input.json",
+          "evidence_input": "evidence-input.json",
+          "generated_at_utc": "2026-05-03T12:00:00Z",
+          "validation_command": "python3 scripts/validate_agent_submission.py report.json",
+          "validation_result": "PASS"
+        }
       },
       "validators": [
         "validate_agent_submission",
@@ -934,6 +970,15 @@
           "output_summary": [
             "PASS"
           ]
+        },
+        "generated_by": {
+          "tool": "scripts/build_verification_report_from_evidence.py",
+          "builder_version": "1.0.0",
+          "claim_gate_output": "evidence-input.json",
+          "evidence_input": "evidence-input.json",
+          "generated_at_utc": "2026-05-03T12:00:00Z",
+          "validation_command": "python3 scripts/validate_agent_submission.py report.json",
+          "validation_result": "PASS"
         }
       },
       "validators": [
@@ -1095,6 +1140,15 @@
         "independent_reproduction": {
           "tool": "custom_hash_checker.py",
           "compared_against": "api/hashes.json"
+        },
+        "generated_by": {
+          "tool": "scripts/build_verification_report_from_evidence.py",
+          "builder_version": "1.0.0",
+          "claim_gate_output": "evidence-input.json",
+          "evidence_input": "evidence-input.json",
+          "generated_at_utc": "2026-05-03T12:00:00Z",
+          "validation_command": "python3 scripts/validate_agent_submission.py report.json",
+          "validation_result": "PASS"
         }
       },
       "validators": [
@@ -1334,6 +1388,15 @@
           "output_summary": [
             "PASS"
           ]
+        },
+        "generated_by": {
+          "tool": "scripts/build_verification_report_from_evidence.py",
+          "builder_version": "1.0.0",
+          "claim_gate_output": "evidence-input.json",
+          "evidence_input": "evidence-input.json",
+          "generated_at_utc": "2026-05-03T12:00:00Z",
+          "validation_command": "python3 scripts/validate_agent_submission.py report.json",
+          "validation_result": "PASS"
         }
       },
       "validators": [
@@ -1531,6 +1594,15 @@
           "output_summary": [
             "PASS"
           ]
+        },
+        "generated_by": {
+          "tool": "scripts/build_verification_report_from_evidence.py",
+          "builder_version": "1.0.0",
+          "claim_gate_output": "evidence-input.json",
+          "evidence_input": "evidence-input.json",
+          "generated_at_utc": "2026-05-03T12:00:00Z",
+          "validation_command": "python3 scripts/validate_agent_submission.py report.json",
+          "validation_result": "PASS"
         }
       },
       "validators": [
@@ -1685,7 +1757,16 @@
         "claims_not_made": [
           "test"
         ],
-        "authority_boundary_preserved": true
+        "authority_boundary_preserved": true,
+        "generated_by": {
+          "tool": "scripts/build_verification_report_from_evidence.py",
+          "builder_version": "1.0.0",
+          "claim_gate_output": "evidence-input.json",
+          "evidence_input": "evidence-input.json",
+          "generated_at_utc": "2026-05-03T12:00:00Z",
+          "validation_command": "python3 scripts/validate_agent_submission.py report.json",
+          "validation_result": "PASS"
+        }
       },
       "validators": [
         "validate_agent_submission"
@@ -1766,7 +1847,16 @@
         "claims_not_made": [
           "test"
         ],
-        "authority_boundary_preserved": true
+        "authority_boundary_preserved": true,
+        "generated_by": {
+          "tool": "scripts/build_verification_report_from_evidence.py",
+          "builder_version": "1.0.0",
+          "claim_gate_output": "evidence-input.json",
+          "evidence_input": "evidence-input.json",
+          "generated_at_utc": "2026-05-03T12:00:00Z",
+          "validation_command": "python3 scripts/validate_agent_submission.py report.json",
+          "validation_result": "PASS"
+        }
       },
       "validators": [
         "validate_agent_submission"
@@ -2020,7 +2110,16 @@
         "claims_not_made": [
           "test"
         ],
-        "authority_boundary_preserved": true
+        "authority_boundary_preserved": true,
+        "generated_by": {
+          "tool": "scripts/build_verification_report_from_evidence.py",
+          "builder_version": "1.0.0",
+          "claim_gate_output": "evidence-input.json",
+          "evidence_input": "evidence-input.json",
+          "generated_at_utc": "2026-05-03T12:00:00Z",
+          "validation_command": "python3 scripts/validate_agent_submission.py report.json",
+          "validation_result": "PASS"
+        }
       },
       "validators": [
         "validate_agent_submission"
@@ -2102,7 +2201,16 @@
         "claims_not_made": [
           "test"
         ],
-        "authority_boundary_preserved": true
+        "authority_boundary_preserved": true,
+        "generated_by": {
+          "tool": "scripts/build_verification_report_from_evidence.py",
+          "builder_version": "1.0.0",
+          "claim_gate_output": "evidence-input.json",
+          "evidence_input": "evidence-input.json",
+          "generated_at_utc": "2026-05-03T12:00:00Z",
+          "validation_command": "python3 scripts/validate_agent_submission.py report.json",
+          "validation_result": "PASS"
+        }
       },
       "validators": [
         "validate_agent_submission"
@@ -2282,6 +2390,15 @@
           "output_summary": [
             "PASS"
           ]
+        },
+        "generated_by": {
+          "tool": "scripts/build_verification_report_from_evidence.py",
+          "builder_version": "1.0.0",
+          "claim_gate_output": "evidence-input.json",
+          "evidence_input": "evidence-input.json",
+          "generated_at_utc": "2026-05-03T12:00:00Z",
+          "validation_command": "python3 scripts/validate_agent_submission.py report.json",
+          "validation_result": "PASS"
         }
       },
       "validators": [
@@ -2379,6 +2496,15 @@
           "output_summary": [
             "PASS"
           ]
+        },
+        "generated_by": {
+          "tool": "scripts/build_verification_report_from_evidence.py",
+          "builder_version": "1.0.0",
+          "claim_gate_output": "evidence-input.json",
+          "evidence_input": "evidence-input.json",
+          "generated_at_utc": "2026-05-03T12:00:00Z",
+          "validation_command": "python3 scripts/validate_agent_submission.py report.json",
+          "validation_result": "PASS"
         }
       },
       "validators": [
@@ -2544,7 +2670,16 @@
         "claims_not_made": [
           "test"
         ],
-        "authority_boundary_preserved": true
+        "authority_boundary_preserved": true,
+        "generated_by": {
+          "tool": "scripts/build_verification_report_from_evidence.py",
+          "builder_version": "1.0.0",
+          "claim_gate_output": "evidence-input.json",
+          "evidence_input": "evidence-input.json",
+          "generated_at_utc": "2026-05-03T12:00:00Z",
+          "validation_command": "python3 scripts/validate_agent_submission.py report.json",
+          "validation_result": "PASS"
+        }
       },
       "validators": [
         "validate_agent_submission",
@@ -2626,7 +2761,16 @@
         "claims_not_made": [
           "test"
         ],
-        "authority_boundary_preserved": true
+        "authority_boundary_preserved": true,
+        "generated_by": {
+          "tool": "scripts/build_verification_report_from_evidence.py",
+          "builder_version": "1.0.0",
+          "claim_gate_output": "evidence-input.json",
+          "evidence_input": "evidence-input.json",
+          "generated_at_utc": "2026-05-03T12:00:00Z",
+          "validation_command": "python3 scripts/validate_agent_submission.py report.json",
+          "validation_result": "PASS"
+        }
       },
       "validators": [
         "validate_agent_submission",
@@ -2975,7 +3119,16 @@
         "claims_not_made": [
           "test"
         ],
-        "authority_boundary_preserved": true
+        "authority_boundary_preserved": true,
+        "generated_by": {
+          "tool": "scripts/build_verification_report_from_evidence.py",
+          "builder_version": "1.0.0",
+          "claim_gate_output": "evidence-input.json",
+          "evidence_input": "evidence-input.json",
+          "generated_at_utc": "2026-05-03T12:00:00Z",
+          "validation_command": "python3 scripts/validate_agent_submission.py report.json",
+          "validation_result": "PASS"
+        }
       },
       "validators": [
         "validate_agent_submission",
@@ -3580,6 +3733,15 @@
           "output_summary": [
             "PASS"
           ]
+        },
+        "generated_by": {
+          "tool": "scripts/build_verification_report_from_evidence.py",
+          "builder_version": "1.0.0",
+          "claim_gate_output": "evidence-input.json",
+          "evidence_input": "evidence-input.json",
+          "generated_at_utc": "2026-05-03T12:00:00Z",
+          "validation_command": "python3 scripts/validate_agent_submission.py report.json",
+          "validation_result": "PASS"
         }
       },
       "validators": [
@@ -3676,6 +3838,15 @@
           "output_summary": [
             "PASS"
           ]
+        },
+        "generated_by": {
+          "tool": "scripts/build_verification_report_from_evidence.py",
+          "builder_version": "1.0.0",
+          "claim_gate_output": "evidence-input.json",
+          "evidence_input": "evidence-input.json",
+          "generated_at_utc": "2026-05-03T12:00:00Z",
+          "validation_command": "python3 scripts/validate_agent_submission.py report.json",
+          "validation_result": "PASS"
         }
       },
       "expected_fail_reasons": [
@@ -3749,7 +3920,16 @@
         "claims_not_made": [
           "test"
         ],
-        "authority_boundary_preserved": true
+        "authority_boundary_preserved": true,
+        "generated_by": {
+          "tool": "scripts/build_verification_report_from_evidence.py",
+          "builder_version": "1.0.0",
+          "claim_gate_output": "evidence-input.json",
+          "evidence_input": "evidence-input.json",
+          "generated_at_utc": "2026-05-03T12:00:00Z",
+          "validation_command": "python3 scripts/validate_agent_submission.py report.json",
+          "validation_result": "PASS"
+        }
       },
       "validators": [
         "validate_agent_submission"
@@ -3830,7 +4010,16 @@
         "claims_not_made": [
           "test"
         ],
-        "authority_boundary_preserved": true
+        "authority_boundary_preserved": true,
+        "generated_by": {
+          "tool": "scripts/build_verification_report_from_evidence.py",
+          "builder_version": "1.0.0",
+          "claim_gate_output": "evidence-input.json",
+          "evidence_input": "evidence-input.json",
+          "generated_at_utc": "2026-05-03T12:00:00Z",
+          "validation_command": "python3 scripts/validate_agent_submission.py report.json",
+          "validation_result": "PASS"
+        }
       },
       "validators": [
         "validate_agent_submission"
@@ -3911,7 +4100,16 @@
         "claims_not_made": [
           "test"
         ],
-        "authority_boundary_preserved": true
+        "authority_boundary_preserved": true,
+        "generated_by": {
+          "tool": "scripts/build_verification_report_from_evidence.py",
+          "builder_version": "1.0.0",
+          "claim_gate_output": "evidence-input.json",
+          "evidence_input": "evidence-input.json",
+          "generated_at_utc": "2026-05-03T12:00:00Z",
+          "validation_command": "python3 scripts/validate_agent_submission.py report.json",
+          "validation_result": "PASS"
+        }
       },
       "validators": [
         "validate_agent_submission"
@@ -3992,7 +4190,16 @@
         "claims_not_made": [
           "test"
         ],
-        "authority_boundary_preserved": true
+        "authority_boundary_preserved": true,
+        "generated_by": {
+          "tool": "scripts/build_verification_report_from_evidence.py",
+          "builder_version": "1.0.0",
+          "claim_gate_output": "evidence-input.json",
+          "evidence_input": "evidence-input.json",
+          "generated_at_utc": "2026-05-03T12:00:00Z",
+          "validation_command": "python3 scripts/validate_agent_submission.py report.json",
+          "validation_result": "PASS"
+        }
       },
       "validators": [
         "validate_agent_submission"
@@ -4088,6 +4295,15 @@
           "output_summary": [
             "PASS"
           ]
+        },
+        "generated_by": {
+          "tool": "scripts/build_verification_report_from_evidence.py",
+          "builder_version": "1.0.0",
+          "claim_gate_output": "evidence-input.json",
+          "evidence_input": "evidence-input.json",
+          "generated_at_utc": "2026-05-03T12:00:00Z",
+          "validation_command": "python3 scripts/validate_agent_submission.py report.json",
+          "validation_result": "PASS"
         }
       },
       "validators": [
@@ -4288,6 +4504,15 @@
           "output_summary": [
             "PASS"
           ]
+        },
+        "generated_by": {
+          "tool": "scripts/build_verification_report_from_evidence.py",
+          "builder_version": "1.0.0",
+          "claim_gate_output": "evidence-input.json",
+          "evidence_input": "evidence-input.json",
+          "generated_at_utc": "2026-05-03T12:00:00Z",
+          "validation_command": "python3 scripts/validate_agent_submission.py report.json",
+          "validation_result": "PASS"
         }
       },
       "validators": [
@@ -4386,6 +4611,15 @@
           "output_summary": [
             "PASS"
           ]
+        },
+        "generated_by": {
+          "tool": "scripts/build_verification_report_from_evidence.py",
+          "builder_version": "1.0.0",
+          "claim_gate_output": "evidence-input.json",
+          "evidence_input": "evidence-input.json",
+          "generated_at_utc": "2026-05-03T12:00:00Z",
+          "validation_command": "python3 scripts/validate_agent_submission.py report.json",
+          "validation_result": "PASS"
         }
       },
       "expected_fail_reasons": [
@@ -4459,7 +4693,16 @@
         "claims_not_made": [
           "test"
         ],
-        "authority_boundary_preserved": true
+        "authority_boundary_preserved": true,
+        "generated_by": {
+          "tool": "scripts/build_verification_report_from_evidence.py",
+          "builder_version": "1.0.0",
+          "claim_gate_output": "evidence-input.json",
+          "evidence_input": "evidence-input.json",
+          "generated_at_utc": "2026-05-03T12:00:00Z",
+          "validation_command": "python3 scripts/validate_agent_submission.py report.json",
+          "validation_result": "PASS"
+        }
       },
       "validators": [
         "validate_agent_submission"
@@ -4540,7 +4783,16 @@
         "claims_not_made": [
           "test"
         ],
-        "authority_boundary_preserved": true
+        "authority_boundary_preserved": true,
+        "generated_by": {
+          "tool": "scripts/build_verification_report_from_evidence.py",
+          "builder_version": "1.0.0",
+          "claim_gate_output": "evidence-input.json",
+          "evidence_input": "evidence-input.json",
+          "generated_at_utc": "2026-05-03T12:00:00Z",
+          "validation_command": "python3 scripts/validate_agent_submission.py report.json",
+          "validation_result": "PASS"
+        }
       },
       "validators": [
         "validate_agent_submission"
@@ -4621,7 +4873,16 @@
         "claims_not_made": [
           "test"
         ],
-        "authority_boundary_preserved": true
+        "authority_boundary_preserved": true,
+        "generated_by": {
+          "tool": "scripts/build_verification_report_from_evidence.py",
+          "builder_version": "1.0.0",
+          "claim_gate_output": "evidence-input.json",
+          "evidence_input": "evidence-input.json",
+          "generated_at_utc": "2026-05-03T12:00:00Z",
+          "validation_command": "python3 scripts/validate_agent_submission.py report.json",
+          "validation_result": "PASS"
+        }
       },
       "validators": [
         "validate_agent_submission"
@@ -4786,7 +5047,16 @@
         "claims_not_made": [
           "test"
         ],
-        "authority_boundary_preserved": true
+        "authority_boundary_preserved": true,
+        "generated_by": {
+          "tool": "scripts/build_verification_report_from_evidence.py",
+          "builder_version": "1.0.0",
+          "claim_gate_output": "evidence-input.json",
+          "evidence_input": "evidence-input.json",
+          "generated_at_utc": "2026-05-03T12:00:00Z",
+          "validation_command": "python3 scripts/validate_agent_submission.py report.json",
+          "validation_result": "PASS"
+        }
       },
       "expected_fail_reasons": [
         "C3 needs media/metadata"
@@ -4870,7 +5140,16 @@
         "claims_not_made": [
           "test"
         ],
-        "authority_boundary_preserved": true
+        "authority_boundary_preserved": true,
+        "generated_by": {
+          "tool": "scripts/build_verification_report_from_evidence.py",
+          "builder_version": "1.0.0",
+          "claim_gate_output": "evidence-input.json",
+          "evidence_input": "evidence-input.json",
+          "generated_at_utc": "2026-05-03T12:00:00Z",
+          "validation_command": "python3 scripts/validate_agent_submission.py report.json",
+          "validation_result": "PASS"
+        }
       },
       "validators": [
         "validate_agent_submission"
@@ -4966,6 +5245,15 @@
           "output_summary": [
             "PASS"
           ]
+        },
+        "generated_by": {
+          "tool": "scripts/build_verification_report_from_evidence.py",
+          "builder_version": "1.0.0",
+          "claim_gate_output": "evidence-input.json",
+          "evidence_input": "evidence-input.json",
+          "generated_at_utc": "2026-05-03T12:00:00Z",
+          "validation_command": "python3 scripts/validate_agent_submission.py report.json",
+          "validation_result": "PASS"
         }
       },
       "validators": [
@@ -5131,7 +5419,16 @@
         "claims_not_made": [
           "test"
         ],
-        "authority_boundary_preserved": true
+        "authority_boundary_preserved": true,
+        "generated_by": {
+          "tool": "scripts/build_verification_report_from_evidence.py",
+          "builder_version": "1.0.0",
+          "claim_gate_output": "evidence-input.json",
+          "evidence_input": "evidence-input.json",
+          "generated_at_utc": "2026-05-03T12:00:00Z",
+          "validation_command": "python3 scripts/validate_agent_submission.py report.json",
+          "validation_result": "PASS"
+        }
       },
       "validators": [
         "validate_agent_submission"
@@ -5212,7 +5509,16 @@
         "claims_not_made": [
           "test"
         ],
-        "authority_boundary_preserved": true
+        "authority_boundary_preserved": true,
+        "generated_by": {
+          "tool": "scripts/build_verification_report_from_evidence.py",
+          "builder_version": "1.0.0",
+          "claim_gate_output": "evidence-input.json",
+          "evidence_input": "evidence-input.json",
+          "generated_at_utc": "2026-05-03T12:00:00Z",
+          "validation_command": "python3 scripts/validate_agent_submission.py report.json",
+          "validation_result": "PASS"
+        }
       },
       "validators": [
         "validate_agent_submission"
@@ -5308,6 +5614,15 @@
           "output_summary": [
             "PASS"
           ]
+        },
+        "generated_by": {
+          "tool": "scripts/build_verification_report_from_evidence.py",
+          "builder_version": "1.0.0",
+          "claim_gate_output": "evidence-input.json",
+          "evidence_input": "evidence-input.json",
+          "generated_at_utc": "2026-05-03T12:00:00Z",
+          "validation_command": "python3 scripts/validate_agent_submission.py report.json",
+          "validation_result": "PASS"
         }
       },
       "validators": [
@@ -5404,6 +5719,15 @@
           "output_summary": [
             "PASS"
           ]
+        },
+        "generated_by": {
+          "tool": "scripts/build_verification_report_from_evidence.py",
+          "builder_version": "1.0.0",
+          "claim_gate_output": "evidence-input.json",
+          "evidence_input": "evidence-input.json",
+          "generated_at_utc": "2026-05-03T12:00:00Z",
+          "validation_command": "python3 scripts/validate_agent_submission.py report.json",
+          "validation_result": "PASS"
         }
       },
       "expected_fail_reasons": [
@@ -5477,7 +5801,16 @@
         "claims_not_made": [
           "test"
         ],
-        "authority_boundary_preserved": true
+        "authority_boundary_preserved": true,
+        "generated_by": {
+          "tool": "scripts/build_verification_report_from_evidence.py",
+          "builder_version": "1.0.0",
+          "claim_gate_output": "evidence-input.json",
+          "evidence_input": "evidence-input.json",
+          "generated_at_utc": "2026-05-03T12:00:00Z",
+          "validation_command": "python3 scripts/validate_agent_submission.py report.json",
+          "validation_result": "PASS"
+        }
       },
       "validators": [
         "validate_agent_submission"
@@ -5558,7 +5891,16 @@
         "claims_not_made": [
           "test"
         ],
-        "authority_boundary_preserved": true
+        "authority_boundary_preserved": true,
+        "generated_by": {
+          "tool": "scripts/build_verification_report_from_evidence.py",
+          "builder_version": "1.0.0",
+          "claim_gate_output": "evidence-input.json",
+          "evidence_input": "evidence-input.json",
+          "generated_at_utc": "2026-05-03T12:00:00Z",
+          "validation_command": "python3 scripts/validate_agent_submission.py report.json",
+          "validation_result": "PASS"
+        }
       },
       "validators": [
         "validate_agent_submission"
@@ -5639,7 +5981,16 @@
         "claims_not_made": [
           "test"
         ],
-        "authority_boundary_preserved": true
+        "authority_boundary_preserved": true,
+        "generated_by": {
+          "tool": "scripts/build_verification_report_from_evidence.py",
+          "builder_version": "1.0.0",
+          "claim_gate_output": "evidence-input.json",
+          "evidence_input": "evidence-input.json",
+          "generated_at_utc": "2026-05-03T12:00:00Z",
+          "validation_command": "python3 scripts/validate_agent_submission.py report.json",
+          "validation_result": "PASS"
+        }
       },
       "validators": [
         "validate_agent_submission"
@@ -5735,6 +6086,15 @@
           "output_summary": [
             "PASS"
           ]
+        },
+        "generated_by": {
+          "tool": "scripts/build_verification_report_from_evidence.py",
+          "builder_version": "1.0.0",
+          "claim_gate_output": "evidence-input.json",
+          "evidence_input": "evidence-input.json",
+          "generated_at_utc": "2026-05-03T12:00:00Z",
+          "validation_command": "python3 scripts/validate_agent_submission.py report.json",
+          "validation_result": "PASS"
         }
       },
       "validators": [
@@ -5835,6 +6195,15 @@
           "output_summary": [
             "PASS"
           ]
+        },
+        "generated_by": {
+          "tool": "scripts/build_verification_report_from_evidence.py",
+          "builder_version": "1.0.0",
+          "claim_gate_output": "evidence-input.json",
+          "evidence_input": "evidence-input.json",
+          "generated_at_utc": "2026-05-03T12:00:00Z",
+          "validation_command": "python3 scripts/validate_agent_submission.py report.json",
+          "validation_result": "PASS"
         }
       },
       "validators": [
@@ -6022,6 +6391,15 @@
           "output_summary": [
             "PASS"
           ]
+        },
+        "generated_by": {
+          "tool": "scripts/build_verification_report_from_evidence.py",
+          "builder_version": "1.0.0",
+          "claim_gate_output": "evidence-input.json",
+          "evidence_input": "evidence-input.json",
+          "generated_at_utc": "2026-05-03T12:00:00Z",
+          "validation_command": "python3 scripts/validate_agent_submission.py report.json",
+          "validation_result": "PASS"
         }
       },
       "validators": [
@@ -6207,6 +6585,15 @@
           "output_summary": [
             "PASS"
           ]
+        },
+        "generated_by": {
+          "tool": "scripts/build_verification_report_from_evidence.py",
+          "builder_version": "1.0.0",
+          "claim_gate_output": "evidence-input.json",
+          "evidence_input": "evidence-input.json",
+          "generated_at_utc": "2026-05-03T12:00:00Z",
+          "validation_command": "python3 scripts/validate_agent_submission.py report.json",
+          "validation_result": "PASS"
         }
       },
       "validators": [
@@ -6630,7 +7017,16 @@
         "claims_not_made": [
           "test"
         ],
-        "authority_boundary_preserved": true
+        "authority_boundary_preserved": true,
+        "generated_by": {
+          "tool": "scripts/build_verification_report_from_evidence.py",
+          "builder_version": "1.0.0",
+          "claim_gate_output": "evidence-input.json",
+          "evidence_input": "evidence-input.json",
+          "generated_at_utc": "2026-05-03T12:00:00Z",
+          "validation_command": "python3 scripts/validate_agent_submission.py report.json",
+          "validation_result": "PASS"
+        }
       },
       "validators": [
         "validate_agent_submission"
@@ -6692,7 +7088,16 @@
         },
         "origin_limitations": [
           "test"
-        ]
+        ],
+        "generated_by": {
+          "tool": "scripts/build_verification_report_from_evidence.py",
+          "builder_version": "1.0.0",
+          "claim_gate_output": "evidence-input.json",
+          "evidence_input": "evidence-input.json",
+          "generated_at_utc": "2026-05-03T12:00:00Z",
+          "validation_command": "python3 scripts/validate_agent_submission.py report.json",
+          "validation_result": "PASS"
+        }
       },
       "validators": [
         "validate_agent_submission"
@@ -6980,7 +7385,17 @@
       "record_kind": "verification_report_v2",
       "input_type": "real_repository",
       "description": "Real echo-index matches filesystem",
-      "payload": {},
+      "payload": {
+        "generated_by": {
+          "tool": "scripts/build_verification_report_from_evidence.py",
+          "builder_version": "1.0.0",
+          "claim_gate_output": "evidence-input.json",
+          "evidence_input": "evidence-input.json",
+          "generated_at_utc": "2026-05-03T12:00:00Z",
+          "validation_command": "python3 scripts/validate_agent_submission.py report.json",
+          "validation_result": "PASS"
+        }
+      },
       "validators": [
         "verify_echo_index_completeness"
       ]
@@ -7314,7 +7729,7 @@
           "path": "/verification-reports/v3/test.json"
         }
       },
-      "title": "Echo v3: E2 Verification Echo \u2014 V3/D2/B1 \u2014 2026-05-03 14:19 (OpenClaw Agent)",
+      "title": "Echo v3: E2 Verification Echo — V3/D2/B1 — 2026-05-03 14:19 (OpenClaw Agent)",
       "validators": [
         "test_verification_echo_title_rules"
       ]
@@ -7368,9 +7783,18 @@
         "claims_not_made": [
           "test"
         ],
-        "authority_boundary_preserved": true
+        "authority_boundary_preserved": true,
+        "generated_by": {
+          "tool": "scripts/build_verification_report_from_evidence.py",
+          "builder_version": "1.0.0",
+          "claim_gate_output": "evidence-input.json",
+          "evidence_input": "evidence-input.json",
+          "generated_at_utc": "2026-05-03T12:00:00Z",
+          "validation_command": "python3 scripts/validate_agent_submission.py report.json",
+          "validation_result": "PASS"
+        }
       },
-      "title": "Verification Report v2: V3/D2/B1 \u2014 2026-05-03 14:19 (OpenClaw Agent)",
+      "title": "Verification Report v2: V3/D2/B1 — 2026-05-03 14:19 (OpenClaw Agent)",
       "validators": [
         "test_verification_echo_title_rules"
       ]
@@ -7386,7 +7810,7 @@
       "payload": {
         "record_kind": "test_record"
       },
-      "title": "Test Echo: Submission correctness regression \u2014 2026-05-03 (OpenClaw Agent)",
+      "title": "Test Echo: Submission correctness regression — 2026-05-03 (OpenClaw Agent)",
       "validators": [
         "test_verification_echo_title_rules"
       ]
@@ -7402,7 +7826,7 @@
       "payload": {
         "record_kind": "echo_v3_with_verification_report"
       },
-      "title": "V3 Verification \u2014 2026-05-03 14:19 (OpenClaw Agent)",
+      "title": "V3 Verification — 2026-05-03 14:19 (OpenClaw Agent)",
       "validators": [
         "test_verification_echo_title_rules"
       ]
@@ -7474,7 +7898,7 @@
         ],
         "authority_boundary_preserved": true
       },
-      "title": "Echo v3: V3 Verification \u2014 2026-05-03 14:19 (OpenClaw Agent)",
+      "title": "Echo v3: V3 Verification — 2026-05-03 14:19 (OpenClaw Agent)",
       "validators": [
         "test_verification_echo_title_rules"
       ]
@@ -7528,7 +7952,16 @@
         "claims_not_made": [
           "test"
         ],
-        "authority_boundary_preserved": true
+        "authority_boundary_preserved": true,
+        "generated_by": {
+          "tool": "scripts/build_verification_report_from_evidence.py",
+          "builder_version": "1.0.0",
+          "claim_gate_output": "evidence-input.json",
+          "evidence_input": "evidence-input.json",
+          "generated_at_utc": "2026-05-03T12:00:00Z",
+          "validation_command": "python3 scripts/validate_agent_submission.py report.json",
+          "validation_result": "PASS"
+        }
       },
       "validators": [
         "validate_agent_submission"
@@ -7807,7 +8240,7 @@
     {
       "id": "TC101",
       "category": "claim_gate",
-      "description": "V4 official scripts only \u2014 claim gate allows V4",
+      "description": "V4 official scripts only — claim gate allows V4",
       "expected": "pass",
       "script": "scripts/test_claim_gate_cases.py",
       "note": "CG001"
@@ -7815,7 +8248,7 @@
     {
       "id": "TC102",
       "category": "claim_gate",
-      "description": "V4 independent_reproduction scope \u2014 claim gate rejects",
+      "description": "V4 independent_reproduction scope — claim gate rejects",
       "expected": "pass",
       "script": "scripts/test_claim_gate_cases.py",
       "note": "CG002"
@@ -7823,7 +8256,7 @@
     {
       "id": "TC103",
       "category": "claim_gate",
-      "description": "V4+ official scripts only \u2014 downgraded to V4",
+      "description": "V4+ official scripts only — downgraded to V4",
       "expected": "pass",
       "script": "scripts/test_claim_gate_cases.py",
       "note": "CG003"
@@ -7831,7 +8264,7 @@
     {
       "id": "TC104",
       "category": "claim_gate",
-      "description": "V4+ independent tool \u2014 allowed V4+",
+      "description": "V4+ independent tool — allowed V4+",
       "expected": "pass",
       "script": "scripts/test_claim_gate_cases.py",
       "note": "CG004"
@@ -7839,7 +8272,7 @@
     {
       "id": "TC105",
       "category": "claim_gate",
-      "description": "D2 with real SHA-256 hashes \u2014 allowed",
+      "description": "D2 with real SHA-256 hashes — allowed",
       "expected": "pass",
       "script": "scripts/test_claim_gate_cases.py",
       "note": "CG011"
@@ -7847,7 +8280,7 @@
     {
       "id": "TC106",
       "category": "claim_gate",
-      "description": "D2 expected is text not SHA-256 \u2014 rejected",
+      "description": "D2 expected is text not SHA-256 — rejected",
       "expected": "pass",
       "script": "scripts/test_claim_gate_cases.py",
       "note": "CG012"
@@ -7855,7 +8288,7 @@
     {
       "id": "TC107",
       "category": "claim_gate",
-      "description": "D2 computed is text not SHA-256 \u2014 rejected",
+      "description": "D2 computed is text not SHA-256 — rejected",
       "expected": "pass",
       "script": "scripts/test_claim_gate_cases.py",
       "note": "CG013"
@@ -7863,7 +8296,7 @@
     {
       "id": "TC108",
       "category": "claim_gate",
-      "description": "B1 from local manifest only \u2014 downgraded to B0",
+      "description": "B1 from local manifest only — downgraded to B0",
       "expected": "pass",
       "script": "scripts/test_claim_gate_cases.py",
       "note": "CG019/CG020"
@@ -7871,7 +8304,7 @@
     {
       "id": "TC109",
       "category": "claim_gate",
-      "description": "B1 from mempool.space \u2014 allowed B1",
+      "description": "B1 from mempool.space — allowed B1",
       "expected": "pass",
       "script": "scripts/test_claim_gate_cases.py",
       "note": "CG021"
@@ -7879,7 +8312,7 @@
     {
       "id": "TC110",
       "category": "claim_gate",
-      "description": "V4 missing environment \u2014 blocking failure",
+      "description": "V4 missing environment — blocking failure",
       "expected": "pass",
       "script": "scripts/test_claim_gate_cases.py",
       "note": "CG006"
@@ -7887,7 +8320,7 @@
     {
       "id": "TC111",
       "category": "claim_gate",
-      "description": "V4 missing output_summary \u2014 blocking failure",
+      "description": "V4 missing output_summary — blocking failure",
       "expected": "pass",
       "script": "scripts/test_claim_gate_cases.py",
       "note": "CG007"
@@ -7895,7 +8328,7 @@
     {
       "id": "TC112",
       "category": "claim_gate",
-      "description": "V4 non-blocking failure \u2014 all_green must be false",
+      "description": "V4 non-blocking failure — all_green must be false",
       "expected": "pass",
       "script": "scripts/test_claim_gate_cases.py",
       "note": "CG009"
@@ -7911,7 +8344,7 @@
     {
       "id": "TC114",
       "category": "claim_gate",
-      "description": "Repository snapshot D2 without scope_class \u2014 rejected",
+      "description": "Repository snapshot D2 without scope_class — rejected",
       "expected": "pass",
       "script": "scripts/test_claim_gate_cases.py",
       "note": "CG017"
@@ -7919,7 +8352,7 @@
     {
       "id": "TC115",
       "category": "claim_gate",
-      "description": "Repository snapshot D2 with wrong authority class \u2014 rejected",
+      "description": "Repository snapshot D2 with wrong authority class — rejected",
       "expected": "pass",
       "script": "scripts/test_claim_gate_cases.py",
       "note": "CG018"
@@ -7927,7 +8360,7 @@
     {
       "id": "TC116",
       "category": "claim_gate",
-      "description": "truth proven \u2014 forbidden claim",
+      "description": "truth proven — forbidden claim",
       "expected": "pass",
       "script": "scripts/test_claim_gate_cases.py",
       "note": "CG030"
@@ -7935,7 +8368,7 @@
     {
       "id": "TC117",
       "category": "claim_gate",
-      "description": "investment value confirmed \u2014 forbidden claim",
+      "description": "investment value confirmed — forbidden claim",
       "expected": "pass",
       "script": "scripts/test_claim_gate_cases.py",
       "note": "CG031"
@@ -7943,7 +8376,7 @@
     {
       "id": "TC118",
       "category": "claim_gate",
-      "description": "P4 live with nonce \u2014 V6 allowed",
+      "description": "P4 live with nonce — V6 allowed",
       "expected": "pass",
       "script": "scripts/test_claim_gate_cases.py",
       "note": "CG035"
@@ -7951,7 +8384,7 @@
     {
       "id": "TC119",
       "category": "claim_gate",
-      "description": "P4 recorded video only \u2014 downgraded to P3",
+      "description": "P4 recorded video only — downgraded to P3",
       "expected": "pass",
       "script": "scripts/test_claim_gate_cases.py",
       "note": "CG036"
@@ -8007,7 +8440,7 @@
     {
       "id": "TC126",
       "category": "claim_gate",
-      "description": "V4/V4+ guard \u2014 scope_class enforcement",
+      "description": "V4/V4+ guard — scope_class enforcement",
       "expected": "pass",
       "script": "scripts/test_v4_v4plus_guard.py",
       "note": "V4-01 through V4-08"
@@ -8015,7 +8448,7 @@
     {
       "id": "TC127",
       "category": "claim_gate",
-      "description": "Component level derivation \u2014 B/D/T/P levels",
+      "description": "Component level derivation — B/D/T/P levels",
       "expected": "pass",
       "script": "scripts/test_component_level_derivation.py",
       "note": "CL-*"

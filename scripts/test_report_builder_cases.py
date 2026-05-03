@@ -128,9 +128,12 @@ def test_rb003():
     bitcoin = [{"source_type": "local_manifest", "sources": ["api/authority.json"]}]
     def check(r):
         errs = []
-        comp = r["report"]["component_findings"]["bitcoin_originals"]
-        if comp["level"] != "B0":
-            errs.append(f"Expected B0, got {comp['level']}")
+        findings = r["report"]["component_findings"]
+        comp = next((c for c in findings if c["component"] == "bitcoin_originals"), None)
+        if not comp:
+            errs.append("bitcoin_originals component not found")
+        elif comp.get("level_claimed", comp.get("level")) != "B0":
+            errs.append(f"Expected B0, got {comp.get('level_claimed', comp.get('level'))}")
         return errs
     run_test("RB003", "B1 request downgraded to B0",
              make_evidence_input(bitcoin=bitcoin, claims=["B1"]), check_fn=check)
@@ -141,8 +144,9 @@ def test_rb004():
     # No hashes but claiming D2 — should still build but D2 not achieved
     def check(r):
         errs = []
-        comp = r["report"]["component_findings"]["digital_mirrors"]
-        if comp["level"] == "D2":
+        findings = r["report"]["component_findings"]
+        comp = next((c for c in findings if c["component"] == "digital_mirrors"), None)
+        if comp and comp.get("level_claimed", comp.get("level")) == "D2":
             errs.append("Should not achieve D2 without hashes")
         return errs
     run_test("RB004", "D2 missing hash — no D2 level",

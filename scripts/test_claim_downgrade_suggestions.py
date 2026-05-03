@@ -80,11 +80,11 @@ run("CD-02", "V4+ independent tool → no downgrade",
         claims=["V4+"]),
     expect_downgrades=[])
 
-# B1 local manifest only → protocol downgrade from default V4 to V1
-run("CD-03", "B1 local manifest only → protocol downgrade V4→V1",
+# B1 local manifest only → allowed level V1 (no explicit protocol requested, so no downgrade entry)
+run("CD-03", "B1 local manifest only → allowed level V1",
     make_input({"bitcoin_checks": [{"source_type": "local_manifest", "sources": ["api/authority.json"]}]},
                claims=["B1"]),
-    expect_downgrades=[("V4", "V1")])
+    expect_downgrades=[])
 
 # Requested V5 with insufficient evidence → downgrade
 run("CD-04", "V5 insufficient evidence → downgrade",
