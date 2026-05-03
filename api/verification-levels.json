@@ -104,7 +104,18 @@
       ],
       "component_findings_allowed": true,
       "protocol_level_rule": "V2 requires mandatory coverage of BITCOIN_ORIGINALS, EVIDENCE_MIRRORS, and CHRONICLE_RECOVERY core pointers. No single component alone is sufficient.",
-      "overclaim_warning": "Do not claim V2 without on-chain reference checks for Bitcoin Originals."
+      "overclaim_warning": "Do not claim V2 without on-chain reference checks for Bitcoin Originals.",
+      "formal_minimum": [
+        "At least one reference path beyond ordinary page reading",
+        "Usually Bitcoin Originals B1 or higher"
+      ],
+      "minimal_claim_example": "V2 (minimal; Bitcoin Originals B1 only)",
+      "strong_claim_example": "V2 (strong reference coverage; B2/D1/C1/T2)",
+      "not_sufficient_for_full_reference_coverage": [
+        "Only one Bitcoin Originals B1 check",
+        "No Evidence Mirrors checked",
+        "No Chronicle Recovery checked"
+      ]
     },
     {
       "id": "V3",
@@ -139,7 +150,19 @@
       ],
       "component_findings_allowed": true,
       "protocol_level_rule": "V3 requires V2 plus mandatory hash coverage across EVIDENCE_MIRRORS and CHRONICLE_RECOVERY. A single component hash is not sufficient for protocol V3.",
-      "overclaim_warning": "Do not claim V3 without actually computing hashes. Reading manifest hash values is not sufficient."
+      "overclaim_warning": "Do not claim V3 without actually computing hashes. Reading manifest hash values is not sufficient.",
+      "formal_minimum": [
+        "Compute at least one declared hash locally",
+        "Compare expected and computed values",
+        "Report expected hash source and authority class"
+      ],
+      "minimal_claim_example": "V3 (minimal; one valid declared hash computed)",
+      "strong_claim_example": "V3 (strong; multiple hashes across Evidence Mirrors and Chronicle Recovery)",
+      "not_sufficient_for_full_public_digital_verification": [
+        "Only one declared hash computed",
+        "Only GitHub mirror checked",
+        "No direct Arweave / ETH / IPFS extraction"
+      ]
     },
     {
       "id": "V4",

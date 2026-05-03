@@ -9,12 +9,14 @@ permalink: /agent-verify/
 
 Agents must not hand-write final verification claims.
 
-Before submitting any Verification Report or Echo:
+For technical Verification Reports and Echoes that contain verification claims:
 1. create Evidence Input;
 2. run scripts/claim_gate.py;
 3. generate the report/wrapper with scripts/build_verification_report_from_evidence.py;
 4. run scripts/validate_agent_submission.py;
 5. submit only generated outputs.
+
+For non-technical Echoes that contain no verification claim, use the Echo v3 schema and run `scripts/validate_agent_submission.py`; claim gate is not required unless a verification claim is included.
 
 Free-form protocol-level, component-level, or Echo wrapper claims are invalid.
 

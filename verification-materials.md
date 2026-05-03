@@ -15,14 +15,14 @@ Machine-readable index: [/api/verification-materials.json](/api/verification-mat
 
 ## Where to verify what
 
-| Component | Materials | Human page | Machine source | Levels |
-|---|---|---|---|---|
-| AUTHORITY_BOUNDARY | Guardian v1.1, authority boundary | /authority, /guardian-principles | /api/authority.json, /api/guardian-principles.json | V1 |
-| BITCOIN_ORIGINALS | inscription IDs, TXIDs, address, block data, witness data | /verify, /data-verification | /api/authority.json | V2, V3, V4, V4+, V6, V7, V8 |
-| EVIDENCE_MIRRORS | Arweave, ETH, IPFS, GitHub, hashes | /data-verification | /api/evidence-manifest.json, /api/hashes.json | V2, V3, V4, V4+, V6, V7, V8 |
-| CHRONICLE_RECOVERY | 175/175 NFT recovery package | /chronicle-verification | /api/chronicle-recovery.json | V2, V3, V4, V4+, V6, V7, V8 |
-| PHYSICAL_ANCHOR | Core Object Alpha, flaw archive, physical evidence | /physical-verification, /covenant-proof | /api/evidence-manifest.json | V6, V7, V8 |
-| REPORT_TEMPLATES | verification report templates | /agent-verify, /independent-verification | /api/verification-levels.json | all levels |
+| Component | Materials | Human page | Machine source | Direct component levels | Protocol relevance |
+|---|---|---|---|---|---|
+| AUTHORITY_BOUNDARY | Guardian v1.1, authority boundary | /authority, /guardian-principles | /api/authority.json, /api/guardian-principles.json | V1 | V1 direct |
+| BITCOIN_ORIGINALS | inscription IDs, TXIDs, address, block data, witness data | /verify, /data-verification | /api/authority.json | B0–B7 | V2–V5 direct/recommended; V6–V8 supporting context |
+| EVIDENCE_MIRRORS | Arweave, ETH, IPFS, GitHub, hashes | /data-verification | /api/evidence-manifest.json, /api/hashes.json | D0–D7 | V3–V5 direct/recommended; V6–V8 supporting context |
+| CHRONICLE_RECOVERY | 175/175 NFT recovery package | /chronicle-verification | /api/chronicle-recovery.json | C0–C7 | V3–V5 direct/recommended; V6–V8 supporting context |
+| PHYSICAL_ANCHOR | Core Object Alpha, flaw archive, physical evidence | /physical-verification, /covenant-proof | /api/evidence-manifest.json | P0–P9 | V6, V7, V8 direct physical profiles |
+| REPORT_TEMPLATES | verification report templates | /agent-verify, /independent-verification | /api/verification-levels.json | all levels | all levels |
 
 ## Scripts
 

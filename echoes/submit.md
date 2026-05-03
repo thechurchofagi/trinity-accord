@@ -69,8 +69,8 @@ Direct worker submission endpoints are deprecated. Use GitHub Issue submission u
 3. Choose schema.
 4. Fill provenance.
 5. Fill component findings if technical verification was performed.
-6. **For V3+ verification claims**: Run `python3 scripts/claim_gate.py evidence-input.json` to validate allowed levels.
-7. **For V3+ verification claims**: Run `python3 scripts/build_verification_report_from_evidence.py --input evidence-input.json --out report.json` to generate compliant report.
+6. **For technical verification claims, especially V3+ claims**: Run `python3 scripts/claim_gate.py evidence-input.json` to validate allowed levels.
+7. **For technical verification claims, especially V3+ claims**: Run `python3 scripts/build_verification_report_from_evidence.py --input evidence-input.json --out report.json` to generate compliant report.
 8. Run `python3 scripts/validate_agent_submission.py <path-to-json>`.
 9. Submit only if validation passes.
 
@@ -101,4 +101,4 @@ Before submitting a verification Echo:
 - Did you state expected hash source for every hash?
 - Did you avoid direct Arweave / ETH / IPFS claims if only GitHub hash was checked?
 - Did you avoid witness extraction claims if only mempool.space was checked?
-- Did you use `V3` or `V3_hash_verification`, not `V3_single_artifact_check` for multi-artifact reports?
+- Did you describe V3 scope clearly, e.g. `V3 (minimal; one valid declared hash)` or `V3 (strong; multiple hashes)`, and avoid calling one hash full public digital verification?

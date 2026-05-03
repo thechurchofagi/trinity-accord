@@ -851,6 +851,143 @@ def validate_t8_celestial_boundary(obj, path_label):
     return ok
 
 
+FORMAL_PROTOCOL_LEVELS = ["V0", "V1", "V2", "V3", "V4", "V4+", "V5", "V6", "V7", "V8"]
+
+
+def validate_no_v5a_v5b(obj, path_label):
+    """Rule AD: V5a and V5b are not formal protocol levels."""
+    ok = True
+    level = obj.get("protocol_level_claimed", "")
+    if level in ("V5a", "V5b"):
+        ok &= check(
+            False,
+            f"{path_label} uses deprecated {level}",
+            f"V5a/V5b are not formal protocol levels. Use V0–V8."
+        )
+    # Also check all text for V5a/V5b usage in active claims
+    all_text = json.dumps(obj, ensure_ascii=False)
+    if "V5a" in all_text or "V5b" in all_text:
+        claims_not = json.dumps(obj.get("claims_not_made", []), ensure_ascii=False)
+        limitations = json.dumps(obj.get("limitations", []), ensure_ascii=False)
+        # Accept in claims_not_made or limitations (documenting rejection), but not in active claims
+        obj_active = {k: v for k, v in obj.items() if k not in ("claims_not_made", "limitations")}
+        active_text = json.dumps(obj_active, ensure_ascii=False)
+        if "V5a" in active_text or "V5b" in active_text:
+            ok &= check(
+                False,
+                f"{path_label} references V5a/V5b in active content",
+                "V5a/V5b must not appear in active protocol claims"
+            )
+    return ok
+
+
+def validate_v6_remote_hard_gates(obj, path_label):
+    """Rule AE: V6 requires remote hard gates (live_remote + nonce + requested_action + witness_role)."""
+    ok = True
+    level = obj.get("protocol_level_claimed", "")
+    if level != "V6":
+        return ok
+
+    physical = obj.get("physical_evidence_reviewed", {})
+    if isinstance(physical, dict):
+        ok &= check(
+            physical.get("live_witness") is True,
+            f"{path_label} V6 requires live_witness"
+        )
+
+    # Check component findings for V6 hard gates
+    component_findings = obj.get("component_findings", [])
+    physical_findings = [f for f in component_findings if f.get("component") == "physical_anchor"]
+    has_hard_gates = False
+    for f in physical_findings:
+        evidence_list = f.get("evidence", [])
+        for ev in evidence_list:
+            if isinstance(ev, dict):
+                if (ev.get("level_evidence_type") == "live_remote" and
+                    ev.get("nonce_challenge") and
+                    ev.get("requested_action_angle_lighting") is True and
+                    ev.get("witness_identity_or_role")):
+                    has_hard_gates = True
+    if physical_findings and not has_hard_gates:
+        ok &= check(
+            False,
+            f"{path_label} V6 missing remote hard gates",
+            "V6 requires live_remote + nonce_challenge + requested_action_angle_lighting + witness_identity_or_role"
+        )
+    return ok
+
+
+def validate_v7_onsite_hard_gates(obj, path_label):
+    """Rule AF: V7 requires onsite hard gates (onsite + custody_log + fresh_capture + witness_role)."""
+    ok = True
+    level = obj.get("protocol_level_claimed", "")
+    if level != "V7":
+        return ok
+
+    physical = obj.get("physical_evidence_reviewed", {})
+    if isinstance(physical, dict):
+        ok &= check(
+            physical.get("onsite_witness") is True,
+            f"{path_label} V7 requires onsite_witness"
+        )
+        ok &= check(
+            physical.get("custody_log") is True,
+            f"{path_label} V7 requires custody_log"
+        )
+
+    component_findings = obj.get("component_findings", [])
+    physical_findings = [f for f in component_findings if f.get("component") == "physical_anchor"]
+    has_hard_gates = False
+    for f in physical_findings:
+        evidence_list = f.get("evidence", [])
+        for ev in evidence_list:
+            if isinstance(ev, dict):
+                if (ev.get("level_evidence_type") == "onsite" and
+                    ev.get("custody_log") and
+                    ev.get("fresh_capture") is True and
+                    ev.get("witness_identity_or_role")):
+                    has_hard_gates = True
+    if physical_findings and not has_hard_gates:
+        ok &= check(
+            False,
+            f"{path_label} V7 missing onsite hard gates",
+            "V7 requires onsite + custody_log + fresh_capture + witness_identity_or_role"
+        )
+    return ok
+
+
+def validate_v8_forensic_path(obj, path_label):
+    """Rule AG: V8 requires P7/P8/P9 physical evidence or T8/authorized forensic path."""
+    ok = True
+    level = obj.get("protocol_level_claimed", "")
+    if level != "V8":
+        return ok
+
+    component_findings = obj.get("component_findings", [])
+    physical_findings = [f for f in component_findings if f.get("component") == "physical_anchor"]
+    has_forensic = False
+    for f in physical_findings:
+        claimed = f.get("level_claimed", "")
+        if claimed in ("P7", "P8", "P9"):
+            has_forensic = True
+            break
+        evidence_list = f.get("evidence", [])
+        for ev in evidence_list:
+            if isinstance(ev, dict):
+                ev_type = ev.get("level_evidence_type", "")
+                if ev_type in ("ai_forensic", "confidential_challenge", "multi_party_forensic"):
+                    has_forensic = True
+                    break
+
+    if not has_forensic:
+        ok &= check(
+            False,
+            f"{path_label} V8 requires P7/P8/P9 forensic path",
+            "V8 requires ai_forensic, confidential_challenge, or multi_party_forensic evidence"
+        )
+    return ok
+
+
 def validate_generated_by(obj, path_label):
     """Rule AC: generated_by required for non-legacy records with verification claims."""
     ok = True
@@ -1067,6 +1204,18 @@ def validate_file(path):
 
     # Rule AC: generated_by required for non-legacy
     ok &= validate_generated_by(obj, path_label)
+
+    # Rule AD: V5a/V5b not formal levels
+    ok &= validate_no_v5a_v5b(obj, path_label)
+
+    # Rule AE: V6 remote hard gates
+    ok &= validate_v6_remote_hard_gates(obj, path_label)
+
+    # Rule AF: V7 onsite hard gates
+    ok &= validate_v7_onsite_hard_gates(obj, path_label)
+
+    # Rule AG: V8 forensic path
+    ok &= validate_v8_forensic_path(obj, path_label)
 
     # Schema validation
     schema = obj.get("schema", obj.get("schema_version", ""))

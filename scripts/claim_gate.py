@@ -20,7 +20,7 @@ D_LEVELS = ["D0", "D1", "D2", "D4", "D5"]
 T_LEVELS = ["T0", "T1", "T2", "T3", "T5", "T8"]
 C_LEVELS = ["C0", "C2", "C3", "C3R", "C5"]
 N_LEVELS = ["N0", "N2", "N4", "N7"]
-P_LEVELS = ["P0", "P1", "P2", "P3", "P4", "P5", "P7", "P8", "P9"]
+P_LEVELS = ["P0", "P1", "P2", "P3", "P4", "P5", "P6", "P7", "P8", "P9"]
 
 SHA256_RE = re.compile(r'^[a-f0-9]{64}$')
 
@@ -38,6 +38,51 @@ def level_index(levels, val):
         return levels.index(val)
     except ValueError:
         return -1
+
+
+def has_p7_forensic_path(evidence):
+    return any(
+        check.get("level_evidence_type") == "ai_forensic"
+        and check.get("model_or_tool")
+        and check.get("confidence") is not None
+        and (
+            check.get("flaw_analysis_method")
+            or check.get("feature_match_method")
+            or check.get("microscopy_comparison")
+        )
+        for check in evidence.get("physical_checks", [])
+    )
+
+
+def has_p8_confidential_path(evidence):
+    for check in evidence.get("physical_checks", []):
+        if check.get("level_evidence_type") != "confidential_challenge":
+            continue
+        conf = check.get("confidential_challenge", {})
+        if (
+            conf.get("performed") is True
+            and conf.get("boundary")
+            and conf.get("raw_confidential_data_disclosed") is False
+        ):
+            return True
+    return False
+
+
+def has_p9_multi_party_path(evidence):
+    return any(
+        check.get("level_evidence_type") == "multi_party_forensic"
+        and check.get("independent_witness_count", 0) >= 2
+        for check in evidence.get("physical_checks", [])
+    )
+
+
+def has_t8_authorized_celestial_path(evidence):
+    return any(
+        check.get("anchor_type") == "star_moon_witness"
+        and check.get("nonpublic_boundary") is True
+        and check.get("authorized") is True
+        for check in evidence.get("time_anchor_checks", [])
+    )
 
 
 def level_at_least(levels, claimed, minimum):
@@ -266,22 +311,37 @@ def derive_protocol_level(evidence, requested_level, b_level, d_level, t_level, 
         level_at_least(P_LEVELS, p_level, "P1")):
         max_allowed = "V5"
 
-    # V6: P4+ with live + nonce (independent of V5 requirements)
+    # V6: P4+ with live + nonce + all remote hard gates (independent of V5 requirements)
     if level_at_least(P_LEVELS, p_level, "P4"):
         for check in evidence.get("physical_checks", []):
             if (check.get("level_evidence_type") == "live_remote" and
-                check.get("nonce_challenge") is not None):
+                check.get("nonce_challenge") is not None and
+                check.get("requested_action_angle_lighting") is True and
+                check.get("witness_identity_or_role")):
                 if level_index(PROTOCOL_LEVELS, "V6") > level_index(PROTOCOL_LEVELS, max_allowed):
                     max_allowed = "V6"
                 break
 
-    # V7: P5+ with onsite/custody (independent path)
+    # V7: P5+ with onsite/custody + all onsite hard gates (independent path)
     if level_at_least(P_LEVELS, p_level, "P5"):
         for check in evidence.get("physical_checks", []):
-            if check.get("level_evidence_type") == "onsite" and check.get("custody_log"):
+            if (check.get("level_evidence_type") == "onsite" and
+                check.get("custody_log") and
+                check.get("fresh_capture") is True and
+                check.get("witness_identity_or_role")):
                 if level_index(PROTOCOL_LEVELS, "V7") > level_index(PROTOCOL_LEVELS, max_allowed):
                     max_allowed = "V7"
                 break
+
+    # V8: forensic physical attestation paths
+    if (
+        has_p7_forensic_path(evidence)
+        or has_p8_confidential_path(evidence)
+        or has_p9_multi_party_path(evidence)
+        or has_t8_authorized_celestial_path(evidence)
+    ):
+        if level_index(PROTOCOL_LEVELS, "V8") > level_index(PROTOCOL_LEVELS, max_allowed):
+            max_allowed = "V8"
 
     # Return the maximum level supported by evidence
     # (evidence determines capability, not agent request)
@@ -496,6 +556,31 @@ def evaluate(input_path):
     # Combine non-blocking with script limitations for output
     all_non_blocking = non_blocking + script_limitations
 
+    # Add minimal V2/V3 scope limitations
+    hashes = evidence.get("hashes", [])
+    if allowed_protocol == "V2" and b_level == "B1" and d_level == "D0" and c_level == "C0":
+        all_non_blocking.append(
+            "Minimal V2 only: Bitcoin Originals B1 reference check. Evidence Mirrors and Chronicle Recovery were not checked."
+        )
+    if allowed_protocol == "V3":
+        exactly_one_valid_hash = (
+            len([h for h in hashes if
+                 SHA256_RE.match(h.get("expected", "")) and
+                 SHA256_RE.match(h.get("computed", "")) and
+                 h.get("match") is True and
+                 h.get("expected_hash_source") and
+                 h.get("expected_hash_authority_class", "unknown") != "unknown"
+            ]) == 1
+        )
+        stronger_hash_coverage = (
+            level_at_least(D_LEVELS, d_level, "D2") and
+            level_at_least(C_LEVELS, c_level, "C2")
+        )
+        if exactly_one_valid_hash and not stronger_hash_coverage:
+            all_non_blocking.append(
+                "Minimal V3 only: one valid declared hash computed. This is not full public digital verification."
+            )
+
     # Determine status
     if all_blocking:
         status = "FAIL_WITH_REASONS"
@@ -518,7 +603,9 @@ def evaluate(input_path):
         "digital_mirrors": d_level,
         "time_anchors": t_level,
         "chronicle_recovery": c_level,
-        "physical_verification": p_level,
+        "nft_evidence": "N0",
+        "physical_anchor": p_level,
+        "physical_verification": p_level,  # deprecated alias
     }
     title = generate_title(allowed_protocol, component_levels, agent.get("name", "Unknown"), requested_kind, date_str)
 

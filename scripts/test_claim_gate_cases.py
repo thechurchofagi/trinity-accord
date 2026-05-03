@@ -564,14 +564,14 @@ def test_cg034():
 # === F. Physical / high-level tests ===
 
 def test_cg035():
-    """P4 live with nonce PASS"""
+    """P4 live with nonce — P4 component but not V6 without all hard gates"""
     physical = [{
         "level_evidence_type": "live_remote",
         "nonce_challenge": {"challenge": "random-123"},
     }]
     run_test("CG035", "P4 live with nonce PASS",
              make_evidence_input(evidence_overrides={"physical_checks": physical}),
-             expected_protocol="V6")
+             expected_protocol="V1")  # V6 requires all remote hard gates: nonce + requested_action + witness_role
 
 
 def test_cg036():
@@ -583,7 +583,7 @@ def test_cg036():
 
 
 def test_cg037():
-    """P8 confidential no raw data PASS"""
+    """P8 confidential no raw data — V8 via confidential challenge path"""
     physical = [{
         "level_evidence_type": "confidential_challenge",
         "confidential_challenge": {
@@ -594,7 +594,7 @@ def test_cg037():
     }]
     run_test("CG037", "P8 confidential no raw data",
              make_evidence_input(evidence_overrides={"physical_checks": physical}),
-             expected_protocol="V1")
+             expected_protocol="V8")  # P8 confidential path now derives V8
 
 
 def test_cg038():

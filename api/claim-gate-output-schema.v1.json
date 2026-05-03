@@ -42,8 +42,12 @@
         "digital_mirrors": { "type": "string" },
         "time_anchors": { "type": "string" },
         "chronicle_recovery": { "type": "string" },
-        "nft_backup": { "type": "string" },
-        "physical_verification": { "type": "string" }
+        "nft_evidence": { "type": "string" },
+        "physical_anchor": { "type": "string" },
+        "physical_verification": {
+          "type": "string",
+          "description": "Deprecated alias for physical_anchor; retained for compatibility."
+        }
       }
     },
     "forbidden_claims": {

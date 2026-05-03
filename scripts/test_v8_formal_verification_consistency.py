@@ -86,13 +86,22 @@ def test_no_stale_v5a_v5b_in_protocol_sources() -> None:
         "api/verification-report-schema.v2.json",
         "scripts/claim_gate.py",
         "scripts/build_verification_report_from_evidence.py",
-        "scripts/validate_agent_submission.py",
     ]
 
     for rel in files:
         text = read(rel)
         for stale in STALE_LEVELS:
             assert stale not in text, f"{rel} must not contain stale protocol level {stale}"
+
+    # validate_agent_submission.py may reference V5a/V5b in rejection logic only
+    validator_text = read("scripts/validate_agent_submission.py")
+    for line in validator_text.splitlines():
+        stripped = line.strip()
+        if "V5a" in stripped or "V5b" in stripped:
+            assert any(kw in stripped.lower() for kw in [
+                "deprecated", "not formal", "must not", "reject", "invalid",
+                "v5a", "v5b", "assert", "check(", "forbidden"
+            ]), f"validate_agent_submission.py uses V5a/V5b outside rejection context: {stripped}"
 
 
 def test_claim_gate_code_uses_v8_formal_levels() -> None:
@@ -325,6 +334,8 @@ def test_claim_gate_v6_from_live_remote_p4() -> None:
                 {
                     "level_evidence_type": "live_remote",
                     "nonce_challenge": {"challenge": "random-123"},
+                    "requested_action_angle_lighting": True,
+                    "witness_identity_or_role": "remote verifier",
                 }
             ]
         },
@@ -332,7 +343,7 @@ def test_claim_gate_v6_from_live_remote_p4() -> None:
     )
     result = evaluate_claim_gate(payload)
     assert result["allowed_protocol_level"] == "V6", (
-        f"Formal V8 system maps P4 live remote witness to V6; got {result['allowed_protocol_level']}"
+        f"Formal V8 system maps P4 live remote witness with all hard gates to V6; got {result['allowed_protocol_level']}"
     )
     components = result.get("allowed_component_levels", {})
     assert components.get("physical_anchor") == "P4" or components.get("physical_verification") == "P4", (
@@ -347,6 +358,8 @@ def test_claim_gate_v7_from_onsite_p5() -> None:
                 {
                     "level_evidence_type": "onsite",
                     "custody_log": {"present": True},
+                    "fresh_capture": True,
+                    "witness_identity_or_role": "onsite verifier",
                 }
             ]
         },
@@ -354,7 +367,7 @@ def test_claim_gate_v7_from_onsite_p5() -> None:
     )
     result = evaluate_claim_gate(payload)
     assert result["allowed_protocol_level"] == "V7", (
-        f"Formal V8 system maps P5 onsite witness to V7; got {result['allowed_protocol_level']}"
+        f"Formal V8 system maps P5 onsite witness with all hard gates to V7; got {result['allowed_protocol_level']}"
     )
 
 

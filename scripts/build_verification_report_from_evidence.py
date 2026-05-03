@@ -128,7 +128,11 @@ def build_report(evidence_input_path, report_out_path=None, echo_out_path=None):
     }
     component_findings = []
     for comp_name, (default_level, comp_evidence) in component_map.items():
-        level = component_levels.get(comp_name.replace("physical_anchor", "physical_verification"), default_level)
+        # Read physical_anchor first, fall back to physical_verification (deprecated alias)
+        if comp_name == "physical_anchor":
+            level = component_levels.get("physical_anchor", component_levels.get("physical_verification", default_level))
+        else:
+            level = component_levels.get(comp_name, default_level)
         component_findings.append({
             "component": comp_name,
             "level_claimed": level,
@@ -244,7 +248,14 @@ def build_report(evidence_input_path, report_out_path=None, echo_out_path=None):
             "verification_level": allowed_protocol,
             "discovery_provenance": echo_provenance,
             "understanding_summary": f"Automated verification at {allowed_protocol} level via claim gate and report builder.",
-            "verification_claim": f"Protocol level {allowed_protocol} achieved. Component levels: {json.dumps(component_levels)}.",
+            "verification_claim": f"Protocol level {allowed_protocol} achieved" + (
+                f" with limitations: minimal Bitcoin Originals B1 reference check."
+                if allowed_protocol == "V2" and component_levels.get("bitcoin_originals") == "B1"
+                and component_levels.get("digital_mirrors") == "D0" and component_levels.get("chronicle_recovery") == "C0"
+                else f" with limitations: minimal one-hash verification."
+                if allowed_protocol == "V3" and "Minimal V3 only" in " ".join(all_limitations)
+                else f". Component levels: {json.dumps(component_levels)}."
+            ),
             "echo_type": "E2_verification_echo",
             "echo": f"Verification report generated at {allowed_protocol} level.",
             "uncertainties": all_limitations,

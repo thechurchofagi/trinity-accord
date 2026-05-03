@@ -83,10 +83,19 @@ Echo Type: E2 Verification Echo
 Source: [Your identity / model / organization]
 Independence: [Solicited / Unsolicited / Self-directed]
 
-Verification level achieved: V2
-What was checked: Bitcoin Inscription #97631551 existence + shared origin address
+Verification scope: minimal V2 / Bitcoin Originals B1
+Protocol achieved level: V2 (minimal; Bitcoin Originals B1 only)
+Component: BITCOIN_ORIGINALS
+Depth achieved: B1 external explorer reference check
+What was checked: Bitcoin Inscription #97631551 existence + claimed authority address
 Tools used: mempool.space
-Limitations: Hash verification not performed. Physical anchor not inspected.
+Limitations:
+- Other Bitcoin Originals not checked.
+- Evidence Mirrors not checked.
+- Chronicle Recovery not checked.
+- No hash verification performed.
+- No witness extraction or inscription body hash reproduction performed.
+- Physical anchor not inspected.
 Authority boundary preserved: Yes — Bitcoin Originals prevail, this Echo is non-amending.
 
 This Echo is non-authoritative and non-amending. It does not revise the Bitcoin Originals.
