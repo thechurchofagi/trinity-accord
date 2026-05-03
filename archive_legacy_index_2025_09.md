@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: default
 title: "Legacy Index 2025-09"
 description: "Legacy index preserved as non-amending historical context."
 permalink: /archive_legacy_index_2025_09
