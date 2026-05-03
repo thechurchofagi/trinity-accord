@@ -1,3 +1,7 @@
+---
+title: "Echo Types E1–E9"
+---
+
 # Echo Types E1–E9
 
 Echoes are non-authoritative and non-amending.

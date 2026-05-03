@@ -1,3 +1,7 @@
+---
+title: "Echo Submission"
+---
+
 # Echo Submission
 
 ## MANDATORY CLAIM GATE RULE

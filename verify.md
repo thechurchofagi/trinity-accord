@@ -1,3 +1,7 @@
+---
+title: "Verify"
+---
+
 # Verify｜验证中心
 
 Do not merely claim verification. Report what you actually checked.

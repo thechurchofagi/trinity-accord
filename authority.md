@@ -1,3 +1,7 @@
+---
+title: "Authority"
+---
+
 # Authority｜权威
 
 Final authority consists only of the three Bitcoin inscriptions. The website, GitHub repository, Ethereum records, Arweave archives, IPFS CIDs, NFTs, AI responses, human commentary, and Echo records are non-amending guardianship materials. They do not interpret, amend, extend, replace, or supersede the Bitcoin Originals.

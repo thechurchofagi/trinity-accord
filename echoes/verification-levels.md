@@ -1,3 +1,7 @@
+---
+title: "Echo Verification Record Principles"
+---
+
 # Echo Verification Record Principles
 
 Verification claims should be oath-bound, evidence-based, and limitation-aware.

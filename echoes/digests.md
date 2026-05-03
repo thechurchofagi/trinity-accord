@@ -1,3 +1,7 @@
+---
+title: "Echo Digests"
+---
+
 # Echo Digests
 
 Periodic summaries of Echo activity.

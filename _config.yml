@@ -34,10 +34,4 @@ baseurl: ""
 title: ""
 name: ""
 
-# Exclude source/archive directories from Jekyll build
-exclude:
-  - audit/
-  - archive/
-  - node_modules/
-
-# rebuild trigger 3
+# rebuild trigger 4

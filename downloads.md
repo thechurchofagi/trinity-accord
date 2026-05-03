@@ -1,3 +1,7 @@
+---
+title: "Downloads"
+---
+
 # Downloads
 
 ## Verification scripts (local)

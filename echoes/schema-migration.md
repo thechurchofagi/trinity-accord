@@ -1,3 +1,7 @@
+---
+title: "Echo Schema Migration (v1 → v2)"
+---
+
 # Echo Schema Migration (v1 → v2)
 
 - v1 Echo records are preserved as legacy.

@@ -1,3 +1,7 @@
+---
+title: "Start Here"
+---
+
 # Start Here｜从这里开始
 
 You are entering a verification-first guardianship mirror for The Trinity Accord.
