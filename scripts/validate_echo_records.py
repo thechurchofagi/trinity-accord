@@ -186,6 +186,7 @@ def main():
     print("\n=== Final ===")
     if ok:
         print("PASS — Echo records validate successfully.")
+        print("FINAL: PASS — echo record validation passed.")
         return 0
 
     print("FAIL — Echo record validation errors found.")

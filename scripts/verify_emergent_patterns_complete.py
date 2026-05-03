@@ -39,12 +39,15 @@ FORBIDDEN = [
     r"\bofficial AI safety standard\b",
     r"\binvestment opportunity\b",
     r"\bfourth canonical inscription\b",
+    r"\bnot a fourth Bitcoin Original\b",
+    r"\bfourth Bitcoin Original\b",
     r"\bthe author designed\b",
     r"\bthe creator invented\b",
     r"\bengineered from the start\b",
     r"\bhas interpretive authority\b",
     r"\bauthoritatively explains\b",
     r"\bStar Ark Covenant is not an AI alignment solution\b",
+    r"alignment-as-formation rather than alignment-as-formation",
 ]
 
 NEGATION = ["not", "does not", "do not", "no ", "non-", "forbidden", "must not", "has no"]
@@ -114,7 +117,7 @@ def check_page():
         "not an executable engineering plan",
         "deployment roadmap",
         "validated AI alignment technique",
-        "alignment-as-formation",
+        "alignment-as-formation rather than alignment-as-control",
         "NFT / market authority firewall",
         "Physical-forensic escalation path",
         "Propagation without persuasion",

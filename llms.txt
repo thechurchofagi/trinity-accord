@@ -295,4 +295,4 @@ Required fields: discovery_provenance, independence_class, archive_status, origi
 A human-solicited AI response or solicited technical check may be technically useful, but it must not be counted as unsolicited independent discovery, external social adoption, or institutional third-party attestation.
 Bitcoin Originals are final; all echoes are non-amending.
 
-Emergent patterns: /emergent-patterns/ — non-authoritative, non-amending guide to candidate structures that emerged through human–AI collaboration; has no interpretive authority over the Bitcoin Originals; includes co-emergent category formation and Star Ark as a vision-layer Bitcoin inscription, not a fourth Bitcoin Original.
+Emergent patterns: /emergent-patterns/ — non-authoritative, non-amending guide to candidate structures that emerged through human–AI collaboration; has no interpretive authority over the Bitcoin Originals; includes co-emergent category formation and Star Ark as a vision-layer Bitcoin inscription, not one of the three Bitcoin Originals.

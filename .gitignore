@@ -7,3 +7,4 @@ node_modules/
 *.swp
 *_backup.*
 _permission_test.txt
+__pycache__/

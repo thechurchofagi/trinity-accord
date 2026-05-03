@@ -242,12 +242,17 @@ except Exception as e:
     check("v3 schema is valid JSON", False, str(e))
 
 # --- Summary ---
-print("\n" + "=" * 50)
-if errors:
-    print(f"FAILED: {len(errors)} check(s) failed")
-    for e in errors:
-        print(f"  - {e}")
-    sys.exit(1)
-else:
-    print("ALL CHECKS PASSED")
-    sys.exit(0)
+def main():
+    print("\n" + "=" * 50)
+    if errors:
+        print(f"FAILED: {len(errors)} check(s) failed")
+        for e in errors:
+            print(f"  - {e}")
+        return 1
+    else:
+        print("ALL CHECKS PASSED")
+        print("FINAL: PASS — consistency validation passed.")
+        return 0
+
+if __name__ == "__main__":
+    sys.exit(main())

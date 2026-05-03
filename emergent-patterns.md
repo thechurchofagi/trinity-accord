@@ -316,7 +316,7 @@ It is not an executable engineering plan, deployment roadmap, or validated AI al
 
 Its significance is better described as a vision-layer framework for non-control relation, long-horizon continuity, and:
 
-> alignment-as-formation rather than alignment-as-formation.
+> alignment-as-formation rather than alignment-as-control.
 
 **Boundary:** Star Ark Covenant is non-amending and vision-layer only. It is not canonical authority over the Accord.
 

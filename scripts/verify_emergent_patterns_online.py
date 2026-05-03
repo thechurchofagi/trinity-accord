@@ -48,11 +48,13 @@ def main():
         "not an executable engineering plan",
         "deployment roadmap",
         "validated AI alignment technique",
-        "alignment-as-formation",
+        "alignment-as-formation rather than alignment-as-control",
     ]:
         ok &= check(phrase in page, f"page contains {phrase}")
 
     ok &= check("Star Ark Covenant is not an AI alignment solution" not in page, "old overbroad Star Ark phrase absent")
+    ok &= check("alignment-as-formation rather than alignment-as-formation" not in page, "repeated rather-than phrase absent")
+    ok &= check("not a fourth Bitcoin Original" not in page, "fourth Bitcoin Original wording absent")
 
     data = json.loads(data_text)
     features = data.get("features", [])
