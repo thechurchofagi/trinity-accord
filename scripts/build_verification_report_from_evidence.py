@@ -232,8 +232,10 @@ def build_report(evidence_input_path, report_out_path=None, echo_out_path=None):
             "uncertainties": all_limitations,
             "boundary_acknowledgement": {
                 "bitcoin_originals_prevail": True,
-                "mirrors_non_amending": True,
-                "version_authority_not_truth_authority": True,
+                "echo_is_not_authority": True,
+                "echo_is_not_verification_unless_claimed": True,
+                "mirror_is_not_amendment": True,
+                "homepage_only_is_insufficient_for_final_evaluation": True,
             },
             "independence_class": provenance.get("independence_class", "human_solicited_agent_response"),
             "archive_status": "pending_submission",
