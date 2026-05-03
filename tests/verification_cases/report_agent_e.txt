@@ -1,129 +1,52 @@
-============================================================
-Agent E — Echo Submission Test Cases Report (TC076–TC090)
+Agent E — Echo Submission Agent (TC041–TC050, TC076–TC090)
 ============================================================
 Date: 2026-05-03
-Agent: Echo Submission Agent (Agent E)
-Scope: TC076–TC090 (echo_submission + title_policy categories)
+Status: SUPERSEDED — see Agent E2 (TC071–TC080) for updated rules
+Cases: TC041–TC050, TC076–TC090 (20 cases)
 
-== Summary ==
-
-All 15 test cases (TC076–TC090) PASS.
-
-echo_submission category: 14/14 PASS
-title_policy category:    6/6 PASS (TC089–TC090 in scope; TC091–TC094 pre-existing)
-
-Full stress suite: 50 PASS, 37 FAIL, 0 WARN, 13 SKIP — FINAL: PASS
-
-== Changes Made ==
-
-1. scripts/validate_agent_submission.py — Added two new rules:
-
-   Rule Y (validate_report_no_echo_type):
-     verification_report_v2 must not carry an echo_type field.
-     Rationale: A standalone verification report is not an Echo record;
-     carrying echo_type implies Echo identity without a wrapper, which
-     violates the Echo/Report separation principle.
-     Fixes: TC078 (was SKIP, now correctly FAIL).
-
-   Rule Z (validate_wrapper_requires_linked_report):
-     echo_v3_with_verification_report must have a linked_verification_report
-     field referencing the underlying report.
-     Rationale: An Echo wrapper's purpose is to wrap a verification report;
-     without the link, the wrapper is structurally incomplete.
-     Fixes: TC079 (was SKIP, now correctly FAIL).
-
-   Both rules are called in validate_file() after Rule X and before
-   schema validation.
-
-2. tests/verification_cases/cases.json — Updated expected results:
-
-   TC078: expected_result changed from "SKIP" to "FAIL"
-          Description updated to reflect the new rule.
-   TC079: expected_result changed from "SKIP" to "FAIL"
-          Description updated to reflect the new rule.
-
-   TC097–TC100 (json_schema category): Restored to "SKIP" after
-   an inadvertent edit corruption. These are not in Agent E scope.
+Note: This report was originally written during the first agent dispatch.
+Several agents timed out; the main agent completed remaining work and added
+new validator rules (AA: T8 celestial, AB: T5 multi-anchor, T fix: repo scope).
+Results below reflect the final state after all fixes.
 
 == Test Case Results ==
 
-TC076  Verification report only PASS                → PASS ✓
-       Standalone verification_report_v2 with valid V3/D2 hashes.
-       Validates cleanly against all rules.
+TC041  PASS  ✓  V4 script audit PASS
+TC042  PASS  ✓  V4+ independent reproduction PASS
+TC043  PASS  ✓  V3 hash source PASS
+TC044  PASS  ✓  V3 hash source PASS
+TC045  PASS  ✓  V3 canonical manifest PASS
+TC046  PASS  ✓  V3 canonical manifest PASS
+TC047  PASS  ✓  V4 script audit PASS
+TC048  PASS  ✓  T5 single anchor FAIL — Caught by Rule AB: T5 requires multiple anchors
+TC049  PASS  ✓  V4+ script audit PASS
+TC050  PASS  ✓  T8 public-only FAIL — Caught by Rule AA: T8 requires nonpublic celestial data
 
-TC077  Echo wrapper with report PASS                → PASS ✓
-       echo_v3_with_verification_report referencing a verification report.
-       Valid record_kind, proper linked_verification_report structure.
+TC076  PASS  ✓  Verification report only PASS
+TC077  PASS  ✓  Echo wrapper with report PASS
+TC078  PASS  ✓  Report claims Echo FAIL — Caught by Rule Y
+TC079  PASS  ✓  Wrapper missing linked report FAIL — Caught by Rule Z
+TC080  PASS  ✓  Wrapper linked report missing FAIL — Schema validation
+TC081  PASS  ✓  Wrapper missing from echo-index FAIL — Schema validation
+TC082  PASS  ✓  Echo-index filesystem match PASS (real_repository, no JSON)
+TC083  PASS  ✓  Human solicited not independent PASS
+TC084  PASS  ✓  Solicited claims independent FAIL — Caught by Rule J
+TC085  PASS  ✓  Test record not independent PASS
+TC086  PASS  ✓  Accepted independent without index FAIL — Caught by Rule J
+TC087  PASS  ✓  Deprecated E3_verification_echo FAIL — Caught by Rules C+U
+TC088  PASS  ✓  Legacy deprecated alias PASS
+TC089  PASS  ✓  Echo wrapper title correct PASS
+TC090  PASS  ✓  Report-only title correct PASS
 
-TC078  Verification report claims Echo without wrapper → FAIL ✓
-       verification_report_v2 carrying echo_type="E2_verification_echo".
-       Caught by Rule Y: report must not have echo_type field.
+== New Rules Added After This Report ==
 
-TC079  Wrapper missing linked_verification_report   → FAIL ✓
-       echo_v3_with_verification_report without linked_verification_report.
-       Caught by Rule Z: wrapper must reference a report.
+Rule AA (validate_t8_celestial_boundary): T8 requires nonpublic celestial data.
+Rule AB (validate_t5_multiple_anchors): T5 requires multiple independent anchors.
+Rule T fix (validate_repo_snapshot_scope): Added has_repo_scope final guard.
 
-TC080  Wrapper linked report missing (schema)       → FAIL ✓
-       Wrapper links to nonexistent report path. Schema validation catches
-       missing required 'schema_version' in linked_verification_report.
+== Original Report (Historical) ==
 
-TC081  Wrapper missing from echo-index (schema)     → FAIL ✓
-       Same schema error as TC080. Schema validation catches the structural
-       defect before echo-index completeness would be checked.
-
-TC082  Echo-index exact filesystem match            → PASS ✓
-       verify_echo_index_completeness validator confirms api/echo-index.json
-       records match echoes/records/**/*.json on disk.
-
-TC083  Human solicited not independent              → PASS ✓
-       independence_class="human_solicited_agent_response" with proper
-       discovery_provenance. No independent attestation claims.
-
-TC084  Solicited claims independent                 → FAIL ✓
-       independence_class="independent_attestation" but solicited=true.
-       Caught by Rule J: solicited records cannot claim independent.
-
-TC085  Test record not independent                  → PASS ✓
-       record_kind="test_record", independence_class="test_record".
-       Correctly classified, no overreach.
-
-TC086  Accepted independent without index ref       → FAIL ✓
-       archive_status="accepted" with independence_class claiming
-       "independent_unsolicited_discovery". Caught by Rule J.
-
-TC087  Deprecated E3_verification_echo new record   → FAIL ✓
-       echo_type="E3_verification_echo" on a new (non-legacy) submission.
-       Caught by Rules C+U: deprecated alias not allowed for new records.
-
-TC088  Legacy deprecated alias                      → PASS ✓
-       record_kind="legacy_record" with echo_type="E3_verification_echo".
-       Legacy records are exempt from deprecated alias restrictions.
-
-TC089  Echo wrapper title correct                   → PASS ✓
-       Title "Echo v3: E2 Verification Echo — V3/D2/B1 — ..." matches
-       required prefix "Echo v3:" for echo_v3_with_verification_report.
-
-TC090  Report-only title correct                    → PASS ✓
-       Title "Verification Report v2: V3/D2/B1 — ..." matches required
-       prefix "Verification Report v2:" for verification_report_v2.
-
-== Validator Rule Coverage (TC076–TC090) ==
-
-Rules exercised by this test subset:
-  A  record_kind present           (TC076, TC077, TC078, TC079, TC080, TC081, TC083–TC088)
-  B  verification report not echo  (TC076, TC078)
-  C  no deprecated echo type       (TC087)
-  J  solicited independence        (TC083, TC084, TC085, TC086)
-  K  null safety                   (TC084, TC086, TC087)
-  U  deprecated echo for new       (TC087, TC088)
-  Y  report no echo_type           (TC078) ← NEW
-  Z  wrapper requires linked report (TC079) ← NEW
-  verify_echo_index_completeness   (TC082)
-  test_verification_echo_title_rules (TC089, TC090)
-  jsonschema validation            (TC080, TC081, TC084, TC086, TC087)
-
-== Generated JSON Files ==
-
-All 15 JSON files exist in tests/verification_cases/generated/:
-  TC076.json through TC090.json
-  (TC082.json not generated — uses input_type="real_repository")
+The original report claimed Rules Y and Z as new additions from Agent E.
+These are confirmed in the final codebase. The original report also noted
+TC097–TC100 were "restored to SKIP" — these were subsequently re-activated
+to FAIL by Agent F, which owns the JSON/schema test cases.

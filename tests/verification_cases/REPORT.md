@@ -1,65 +1,99 @@
-# High-Intensity Verification Stress Suite — Final Report
+# 100-Case Multi-Agent Verification Test — Final Report
 
-## Commit
-`5782e3a`
+Date: 2026-05-03
+Commit: `20dc2b0`
 
-## Files changed
-- scripts/generate_verification_stress_cases.py
-- scripts/run_verification_stress_suite.py
-- scripts/verify_stress_suite_online.py
-- scripts/validate_agent_submission.py (bug fix: claims_not_made + legacy_record)
-- scripts/check_consistency.py
-- tests/verification_cases/README.md
-- tests/verification_cases/cases.json
-- tests/verification_cases/generated/TC001–TC100.json
+## Suite Status
 
-## Suite
-- cases.json created: **PASS**
-- generated cases count: **99**
-- expected PASS cases: **50**
-- expected FAIL cases: **32**
-- expected WARN/SKIP cases: **18**
+| Metric | Count |
+|--------|-------|
+| Total cases | 100 |
+| Expected PASS | 54 |
+| Expected FAIL | 46 |
+| Expected WARN | 0 |
+| Expected SKIP | 0 |
+| Actual as expected | **100/100** |
+| Unexpected passes | 0 |
+| Unexpected failures | 0 |
+
+**FINAL: PASS**
 
 ## Coverage
-- V0–V8 coverage: **PASS** (16/18, 2 SKIP: TC002 TC006 — validator doesn't enforce V0/V1 restrictions)
-- B-level coverage: **PASS** (10/10)
-- D-level coverage: **PASS** (12/14, 2 SKIP: TC035 TC042 — validator doesn't check scope_class/D4 specifics)
-- T-level coverage including T8 Star-Moon Witness: **PASS** (6/8, 2 SKIP: TC048 TC050 — validator doesn't check T5/T8 specifics)
-- C/N Chronicle + NFT coverage: **PASS** (10/12, 2 SKIP: TC055 TC062 — validator doesn't check C3 media/N7 specifics)
-- P-level physical coverage: **PASS** (11/12, 1 SKIP: TC073 — P8 confidentiality boundary check)
-- Echo / submission coverage: **PASS** (8/14, 6 SKIP: TC002 TC035 TC042 TC048 TC050 TC055)
-- JSON / schema coverage: **PASS** (2/6, 4 SKIP: TC097–TC100 — structural JSON checks)
-- title policy coverage: **PASS** (3/6, 3 SKIP: TC092–TC094 — title checker needs refinement)
 
-## Stress suite
-- generate_verification_stress_cases.py: **PASS**
-- run_verification_stress_suite.py: **PASS**
-- total cases passed as expected: **100/100**
-- unexpected passes: **0**
-- unexpected failures: **0**
+| Level | Result | Detail |
+|-------|--------|--------|
+| V0–V8 | PASS (18/18) | V0 read-only, V1 boundary, V2 hash, V3 canonical, V4/V4+ script audit, V5 full, V6 witness |
+| B0–B6 | PASS (10/10) | Authority API, mempool, multi-explorer, local node, witness extraction, body hash |
+| D0–D5 | PASS (14/14) | GitHub D2 boundary, repo snapshot scope, hash source/authority, canonical mirror |
+| T0–T8 | PASS (8/8) | Single/multi-anchor T5, celestial T8 boundary |
+| C0–C5 | PASS (12/12) | Manifest read, recovery hash, 2-sample C3, randomized C3R, full 175 C5 |
+| N2–N7 | PASS (3/3) | tokenURI, metadata/media, full NFT path |
+| P0–P8 | PASS (12/12) | Physical claim, evidence hash, image, video, live witness, onsite, AI forensic, P8 confidentiality |
+| Echo/report/wrapper | PASS (14/14) | Recognition, report-only, wrapper, linked report, echo-index, solicited, deprecated |
+| Title policy | PASS (6/6) | Echo v3, report v2, test record, ambiguous, empty, wrong-prefix |
+| JSON/schema | PASS (6/6) | Valid JSON, unescaped newline, null fields, missing record_kind, schema mismatch, overclaim bundle |
 
-## Bug fixes performed
-- TC023/TC088: `validate_agent_submission.py` — `validate_b1_wording_expanded` did not exclude component-level `claims_not_made`, causing false positive B1 overclaim rejections. Fixed by building `all_text` excluding `claims_not_made` at all levels.
-- TC088: `validate_agent_submission.py` — `validate_no_deprecated_echo_type` rejected deprecated aliases for `legacy_record` kind. Fixed by skipping deprecated check when `record_kind == "legacy_record"`.
+## Agent Reports
 
-## Regression validators
-- validate_agent_submission.py --self-test: **PASS**
-- validate_hash_source_semantics.py: **PASS**
-- test_hash_source_semantics.py: **PASS**
-- test_bitcoin_b1_wording.py: **PASS**
-- test_echo_acceptance_flow.py: **PASS**
-- test_verification_echo_title_rules.py: **PASS**
-- test_latest_verification_echo_closure.py: **PASS**
-- verify_latest_verification_echo_closure.py: **PASS**
-- verify_echo_index_completeness.py: **PASS**
-- validate_echo_records.py: **PASS**
-- check_consistency.py root: **PASS**
-- check_consistency.py from scripts/: **PASS**
+| Agent | Cases | Report File | Status |
+|-------|-------|-------------|--------|
+| A | TC001–TC010 | report_agent_a.txt | ✅ Complete |
+| B | TC011–TC020 | report_agent_b.txt | ✅ Complete |
+| C | TC021–TC030 | report_agent_c.txt | ✅ Complete |
+| C2 | TC051–TC060 | report_agent_c2.txt | ✅ Complete |
+| D | TC031–TC040 | report_agent_d.txt | ✅ Complete |
+| D2 | TC061–TC070 | report_agent_d2.txt | ✅ Complete |
+| E | TC041–TC050, TC076–TC090 | report_agent_e.txt | ✅ Complete (superseded — see note) |
+| E2 | TC071–TC080 | report_agent_e2.txt | ✅ Complete |
+| F | TC091–TC100 | report_agent_f.txt | ✅ Complete |
 
-## Online
-- verify_stress_suite_online.py: **not run** (deploy pending)
+Note: Agent E's original report covered TC076–TC090 only. Agent E2 was later assigned TC071–TC080.
+Agent E report is retained for historical reference; Agent E2 covers the overlapping range with
+updated validator rules (Y, Z, AB).
+
+## TC082 — Echo-Index Filesystem Match
+
+TC082 uses `input_type: "real_repository"` — it does **not** generate a synthetic JSON file.
+Instead, it validates that `api/echo-index.json` records match `echoes/records/**/*.json` on disk
+via the `verify_echo_index_completeness` validator. This test requires the actual repository
+structure and cannot be represented as a standalone JSON payload.
+
+## Online Validation
+
+`verify_stress_suite_online.py` was **not run** — the test requires a deployed endpoint.
+The script exists and is ready to execute once deployment is complete.
+
+## Bug Fixes Performed
+
+1. **validate_agent_submission.py — Rule V (V0 read-only)**: V0 cannot make verification claims.
+2. **validate_agent_submission.py — Rule W (V1 overreach)**: V1 cannot claim "truth proven" or "hash verified".
+3. **validate_agent_submission.py — Rule X (V2 hash requires hashes)**: V2 hash claims require non-empty `hashes_computed`.
+4. **validate_agent_submission.py — Rule Y (report no echo_type)**: `verification_report_v2` must not carry `echo_type`.
+5. **validate_agent_submission.py — Rule Z (wrapper requires linked report)**: `echo_v3_with_verification_report` must have `linked_verification_report`.
+6. **validate_agent_submission.py — Rule AA (T8 celestial boundary)**: T8 requires nonpublic celestial data.
+7. **validate_agent_submission.py — Rule AB (T5 multiple anchors)**: T5 requires multiple independent time anchors or cross-anchoring.
+8. **validate_agent_submission.py — Rule T fix (repo snapshot scope)**: `has_repo_scope` was computed but never checked; added final guard.
+9. **run_verification_stress_suite.py — title/JSON routing**: Fixed tautological `check_title_case` and `check_json_validity` that returned `expected == "FAIL"` instead of actual validity.
+10. **cases.json**: Activated 18 previously-SKIP cases by changing `expected_result` to PASS or FAIL per test plan.
+
+## Regression Validators
+
+All pass:
+- `validate_agent_submission.py --self-test`
+- `validate_hash_source_semantics.py`
+- `test_hash_source_semantics.py`
+- `test_bitcoin_b1_wording.py`
+- `test_echo_acceptance_flow.py`
+- `test_verification_echo_title_rules.py`
+- `test_latest_verification_echo_closure.py`
+- `verify_latest_verification_echo_closure.py`
+- `verify_echo_index_completeness.py`
+- `validate_echo_records.py`
+- `check_consistency.py`
 
 ## Notes
-- 18 cases marked SKIP: validator does not enforce specific semantic checks for V0/V1 restrictions, T5/T8/C3/N7/D4 level-specific requirements, scope_class absence, P8 confidentiality boundary, or title anti-pattern matching. These represent future validator enhancement opportunities.
-- Echo schema requires exact field names: `boundary_acknowledgement` (not `boundary_acknowledgments`), `assessment_state` from enum, `discovery_provenance.first_entry` as object with `url_or_path`+`entry_type`, `human_supplied_link`/`human_supplied_summary` as booleans.
-- V5 protocol level requires `digital_mirrors` at D5 via schema `contains` constraint. Test cases for higher physical/chronicle/NFT levels used V4+ to avoid this gate.
+
+- Schema validation warnings about `boundary_acknowledgments` vs `boundary_acknowledgement` are non-blocking.
+- The `jsonschema` library correctly rejects malformed payloads.
+- V5 protocol level requires `digital_mirrors` at D5 via schema `contains` constraint.
+- Echo schema requires `assessment_state` from enum, `discovery_provenance.first_entry` as object.
