@@ -212,7 +212,14 @@ def validate_report(path):
             "ipfs availability verified",
             "physical object verified",
         ]
+        # Exclude claims_not_made at all levels to avoid false positives
         obj_no_claims = {k: v for k, v in obj.items() if k != "claims_not_made"}
+        if "component_findings" in obj_no_claims and isinstance(obj_no_claims["component_findings"], list):
+            obj_no_claims["component_findings"] = [
+                {k: v for k, v in f.items() if k != "claims_not_made"}
+                if isinstance(f, dict) else f
+                for f in obj_no_claims["component_findings"]
+            ]
         check_text = json.dumps(obj_no_claims, ensure_ascii=False).lower()
         for claim in github_forbidden:
             if claim in check_text:
