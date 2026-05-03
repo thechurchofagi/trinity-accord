@@ -13,18 +13,18 @@
   "protocol_level_claimed": "V6",
   "component_findings": [
     {
-      "component": "time_anchors",
-      "level_claimed": "T8",
+      "component": "chronicle_recovery",
+      "level_claimed": "C0",
       "target_id": "test-target",
       "data_sources": [
         "github"
       ],
       "access_paths": [],
-      "method": "public image from internet",
+      "method": "chronicle manifest read",
       "evidence": [],
       "limitations": [],
       "claims_not_made": [],
-      "scope_class": "physical_witness"
+      "scope_class": "chronicle_recovery"
     }
   ],
   "protocol_profile_check": {
@@ -35,7 +35,9 @@
     "underreported_items": [],
     "incompatible_claims": []
   },
-  "data_sources_used": [],
+  "data_sources_used": [
+    "github"
+  ],
   "access_paths_used": [],
   "fallbacks_used": [],
   "external_sources_queried": [],

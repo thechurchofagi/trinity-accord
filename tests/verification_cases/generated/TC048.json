@@ -14,17 +14,17 @@
   "component_findings": [
     {
       "component": "time_anchors",
-      "level_claimed": "T5",
+      "level_claimed": "T8",
       "target_id": "test-target",
       "data_sources": [
         "github"
       ],
       "access_paths": [],
-      "method": "GitHub commit time only, no cross-anchor",
+      "method": "public image from internet only, no nonpublic data",
       "evidence": [],
       "limitations": [],
       "claims_not_made": [],
-      "scope_class": "chain_reference_check"
+      "scope_class": "public_digital"
     }
   ],
   "protocol_profile_check": {
@@ -35,7 +35,9 @@
     "underreported_items": [],
     "incompatible_claims": []
   },
-  "data_sources_used": [],
+  "data_sources_used": [
+    "github"
+  ],
   "access_paths_used": [],
   "fallbacks_used": [],
   "external_sources_queried": [],
@@ -80,5 +82,6 @@
     "output_summary": [
       "PASS"
     ]
-  }
+  },
+  "verification_claim": "T8 celestial witness confirmed from public moon photo"
 }

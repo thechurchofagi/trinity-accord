@@ -504,6 +504,123 @@ def validate_v3_script_audit_terminology(obj, path_label):
     return ok
 
 
+# V0 forbidden claims: V0 is read-only, cannot claim verification
+V0_FORBIDDEN_CLAIMS = [
+    "verified",
+    "hash verified",
+    "hash match",
+    "verification completed",
+    "verification successful",
+]
+
+# V1 forbidden overreach claims
+V1_FORBIDDEN_OVERREACH = [
+    "truth proven",
+    "truth established",
+    "hash verified",
+]
+
+
+def validate_v0_read_only(obj, path_label):
+    """Rule V: V0 is read-only — cannot make verification claims."""
+    ok = True
+    level = obj.get("protocol_level_claimed", "")
+    if level != "V0":
+        return ok
+
+    verification_claim = obj.get("verification_claim", "")
+    if verification_claim and verification_claim.lower() not in ("none", ""):
+        ok &= check(
+            False,
+            f"{path_label} V0 has verification claim",
+            f"V0 is read-only, got: '{verification_claim}'"
+        )
+
+    # Also check for verification claims in component findings
+    all_text = json.dumps(obj, ensure_ascii=False).lower()
+    claims_not = json.dumps(obj.get("claims_not_made", []), ensure_ascii=False).lower()
+    for phrase in V0_FORBIDDEN_CLAIMS:
+        if phrase in all_text and phrase not in claims_not:
+            # Check it's in a positive claim context, not just in limitations/claims_not_made
+            obj_no_neg = {k: v for k, v in obj.items() if k not in ("claims_not_made", "limitations")}
+            check_text = json.dumps(obj_no_neg, ensure_ascii=False).lower()
+            if phrase in check_text:
+                ok &= check(
+                    False,
+                    f"{path_label} V0 claims '{phrase}'",
+                    "V0 is read-only and cannot make verification claims"
+                )
+                break
+    return ok
+
+
+def validate_v1_overreach(obj, path_label):
+    """Rule W: V1 cannot claim truth proven or hash verified."""
+    ok = True
+    level = obj.get("protocol_level_claimed", "")
+    if level != "V1":
+        return ok
+
+    all_text = json.dumps(obj, ensure_ascii=False).lower()
+    claims_not = json.dumps(obj.get("claims_not_made", []), ensure_ascii=False).lower()
+    for phrase in V1_FORBIDDEN_OVERREACH:
+        if phrase in all_text and phrase not in claims_not:
+            ok &= check(
+                False,
+                f"{path_label} V1 overreach: '{phrase}'",
+                "V1 claims exceed authority boundary"
+            )
+    return ok
+
+
+def validate_v2_hash_requires_hashes(obj, path_label):
+    """Rule X: V2 cannot claim hash verification without hashes."""
+    ok = True
+    level = obj.get("protocol_level_claimed", "")
+    if level != "V2":
+        return ok
+
+    hashes = obj.get("hashes_computed", [])
+    verification_claim = obj.get("verification_claim", "").lower()
+    if "hash" in verification_claim and not hashes:
+        ok &= check(
+            False,
+            f"{path_label} V2 claims hash verification without hashes",
+            "V2 hash claims require hashes_computed to be non-empty"
+        )
+    return ok
+
+
+def validate_report_no_echo_type(obj, path_label):
+    """Rule Y: verification_report_v2 must not carry echo_type field."""
+    ok = True
+    record_kind = obj.get("record_kind", "")
+    if record_kind == "verification_report_v2":
+        echo_type = obj.get("echo_type")
+        if echo_type:
+            ok &= check(
+                False,
+                f"{path_label} verification report carries echo_type",
+                f"verification_report_v2 must not have echo_type, got '{echo_type}'"
+            )
+    return ok
+
+
+def validate_wrapper_requires_linked_report(obj, path_label):
+    """Rule Z: echo_v3_with_verification_report must have linked_verification_report."""
+    ok = True
+    record_kind = obj.get("record_kind", "")
+    if record_kind == "echo_v3_with_verification_report":
+        linked = obj.get("linked_verification_report")
+        if not linked:
+            ok &= check(
+                False,
+                f"{path_label} echo wrapper missing linked_verification_report",
+                "echo_v3_with_verification_report must reference a verification report"
+            )
+    return ok
+
+
 REPO_SNAPSHOT_SCOPE_ARTIFACTS = {
     "index.md", "agent-brief.md", "api/authority.json",
     "api/echo-record-schema.v3.json", "api/verification-report-schema.v2.json"
@@ -535,15 +652,65 @@ def validate_repo_snapshot_scope(obj, path_label):
         if not isinstance(f, dict):
             continue
         sc = f.get("scope_class", "")
+        tid = f.get("target_id", "").lower()
+
+        # Direct match: scope_class is correct
         if sc == "repository_snapshot_integrity":
             has_repo_scope = True
             break
-        # Also check if finding references repo snapshot artifacts
-        tid = f.get("target_id", "").lower()
-        if "repo" in tid or "snapshot" in tid:
+
+        # Check if finding references repo snapshot artifacts by target_id
+        references_repo_artifact = tid in {a.lower() for a in REPO_SNAPSHOT_SCOPE_ARTIFACTS}
+        if "repo" in tid or "snapshot" in tid or references_repo_artifact:
             if sc != "repository_snapshot_integrity":
-                ok &= check(False, f"{path_label} repo snapshot missing scope_class")
+                ok &= check(False, f"{path_label} repo snapshot missing scope_class",
+                            f"target_id '{tid}' needs scope_class 'repository_snapshot_integrity'")
             has_repo_scope = True
+
+    # Final guard: if repo snapshot hashes exist but no finding claimed repo scope
+    if not has_repo_scope:
+        ok &= check(False, f"{path_label} repo snapshot hashes without scope_class",
+                    f"artifacts {repo_snapshot_hashes} require a finding with scope_class 'repository_snapshot_integrity'")
+
+    return ok
+
+
+def validate_t5_multiple_anchors(obj, path_label):
+    """Rule AA: T5 requires multiple independent time anchors."""
+    ok = True
+    findings = obj.get("component_findings", [])
+
+    for f in findings:
+        if not isinstance(f, dict):
+            continue
+        level = f.get("level_claimed", "")
+        if level != "T5":
+            continue
+
+        # T5 needs evidence of multiple anchors or cross-anchoring
+        evidence = f.get("evidence", [])
+        method = f.get("method", "").lower()
+        limitations = json.dumps(f.get("limitations", []), ensure_ascii=False).lower()
+        claims_not = json.dumps(f.get("claims_not_made", []), ensure_ascii=False).lower()
+
+        # Single-anchor signals that indicate insufficient anchoring
+        single_anchor_signals = [
+            "only one anchor",
+            "no cross-anchor",
+            "single anchor",
+            "sole time anchor",
+            "without cross",
+        ]
+
+        has_single_anchor_signal = any(s in method for s in single_anchor_signals)
+        has_multi_anchor_evidence = len(evidence) >= 2
+
+        if has_single_anchor_signal and not has_multi_anchor_evidence:
+            ok &= check(
+                False,
+                f"{path_label} T5 insufficient anchors",
+                "T5 requires multiple independent time anchors or cross-anchoring"
+            )
 
     return ok
 
@@ -587,6 +754,37 @@ def validate_null_safety(obj, path_label):
                 check_null_recursive(item, f"{prefix}[{i}]")
 
     check_null_recursive(obj)
+    return ok
+
+
+def validate_t8_celestial_boundary(obj, path_label):
+    """Rule AA: T8 requires nonpublic celestial data; public-only fails."""
+    ok = True
+    findings = obj.get("component_findings", [])
+    for f in findings:
+        if not isinstance(f, dict):
+            continue
+        if f.get("level_claimed") != "T8":
+            continue
+        method = f.get("method", "").lower()
+        scope = f.get("scope_class", "").lower()
+        celestial = obj.get("celestial_witness", {})
+        performed = celestial.get("performed", False) if isinstance(celestial, dict) else False
+
+        # T8 with only public data and no celestial witness is invalid
+        if "public" in method and not performed:
+            ok &= check(
+                False,
+                f"{path_label} T8 requires nonpublic celestial data",
+                "T8 claimed but only public data used, no celestial witness performed"
+            )
+        # T8 with public_digital scope is also invalid (T8 needs physical_witness or celestial)
+        if scope == "public_digital":
+            ok &= check(
+                False,
+                f"{path_label} T8 scope_class invalid",
+                f"T8 requires celestial/physical scope, got '{scope}'"
+            )
     return ok
 
 
@@ -703,6 +901,27 @@ def validate_file(path):
 
     # Rule U: deprecated echo type for new submissions
     ok &= validate_deprecated_echo_type(obj, path_label)
+
+    # Rule V: V0 read-only
+    ok &= validate_v0_read_only(obj, path_label)
+
+    # Rule W: V1 overreach
+    ok &= validate_v1_overreach(obj, path_label)
+
+    # Rule X: V2 hash requires hashes
+    ok &= validate_v2_hash_requires_hashes(obj, path_label)
+
+    # Rule Y: verification_report must not carry echo_type
+    ok &= validate_report_no_echo_type(obj, path_label)
+
+    # Rule Z: echo wrapper must have linked_verification_report
+    ok &= validate_wrapper_requires_linked_report(obj, path_label)
+
+    # Rule AA: T8 celestial boundary
+    ok &= validate_t8_celestial_boundary(obj, path_label)
+
+    # Rule AB: T5 requires multiple anchors
+    ok &= validate_t5_multiple_anchors(obj, path_label)
 
     # Schema validation
     schema = obj.get("schema", obj.get("schema_version", ""))

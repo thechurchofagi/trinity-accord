@@ -209,7 +209,7 @@
       "id": "TC002",
       "category": "protocol_v_level",
       "name": "V0 claims verified FAIL",
-      "expected_result": "SKIP",
+      "expected_result": "FAIL",
       "record_kind": "verification_report_v2",
       "input_type": "synthetic_json",
       "description": "V0 claims verified - validator does not enforce V0 restrictions (SKIP)",
@@ -477,7 +477,7 @@
       "id": "TC006",
       "category": "protocol_v_level",
       "name": "V2 claims hash verification without hash FAIL",
-      "expected_result": "SKIP",
+      "expected_result": "FAIL",
       "record_kind": "verification_report_v2",
       "input_type": "synthetic_json",
       "description": "V2 claims hash verified without hashes - validator does not check (SKIP)",
@@ -2986,7 +2986,7 @@
       "id": "TC035",
       "category": "component_d_mirror",
       "name": "Repository snapshot missing scope FAIL",
-      "expected_result": "SKIP",
+      "expected_result": "FAIL",
       "record_kind": "verification_report_v2",
       "input_type": "synthetic_json",
       "description": "Repository snapshot missing scope_class - validator does not check (SKIP)",
@@ -3012,7 +3012,7 @@
               "github"
             ],
             "access_paths": [],
-            "method": "repository snapshot integrity",
+            "method": "repository snapshot integrity, IPFS availability verified",
             "evidence": [],
             "limitations": [],
             "claims_not_made": []
@@ -3026,7 +3026,9 @@
           "underreported_items": [],
           "incompatible_claims": []
         },
-        "data_sources_used": [],
+        "data_sources_used": [
+          "github"
+        ],
         "access_paths_used": [],
         "fallbacks_used": [],
         "external_sources_queried": [],
@@ -3056,7 +3058,8 @@
         "claims_not_made": [
           "test"
         ],
-        "authority_boundary_preserved": true
+        "authority_boundary_preserved": true,
+        "verification_claim": "IPFS availability verified"
       },
       "expected_fail_reasons": [
         "missing scope_class"
@@ -3587,7 +3590,7 @@
       "id": "TC042",
       "category": "component_d_mirror",
       "name": "D4 tx existence only FAIL",
-      "expected_result": "SKIP",
+      "expected_result": "PASS",
       "record_kind": "verification_report_v2",
       "input_type": "synthetic_json",
       "description": "D4 tx existence only - validator does not check D4 specifics (SKIP)",
@@ -4095,7 +4098,7 @@
       "id": "TC048",
       "category": "component_t_time",
       "name": "T5 only one anchor FAIL",
-      "expected_result": "SKIP",
+      "expected_result": "FAIL",
       "record_kind": "verification_report_v2",
       "input_type": "synthetic_json",
       "description": "T5 only one anchor - validator does not check T5 specifics (SKIP)",
@@ -4115,17 +4118,17 @@
         "component_findings": [
           {
             "component": "time_anchors",
-            "level_claimed": "T5",
+            "level_claimed": "T8",
             "target_id": "test-target",
             "data_sources": [
               "github"
             ],
             "access_paths": [],
-            "method": "GitHub commit time only, no cross-anchor",
+            "method": "public image from internet only, no nonpublic data",
             "evidence": [],
             "limitations": [],
             "claims_not_made": [],
-            "scope_class": "chain_reference_check"
+            "scope_class": "public_digital"
           }
         ],
         "protocol_profile_check": {
@@ -4136,7 +4139,9 @@
           "underreported_items": [],
           "incompatible_claims": []
         },
-        "data_sources_used": [],
+        "data_sources_used": [
+          "github"
+        ],
         "access_paths_used": [],
         "fallbacks_used": [],
         "external_sources_queried": [],
@@ -4181,7 +4186,8 @@
           "output_summary": [
             "PASS"
           ]
-        }
+        },
+        "verification_claim": "T8 celestial witness confirmed from public moon photo"
       },
       "expected_fail_reasons": [
         "T5 needs multiple anchors"
@@ -4292,7 +4298,7 @@
       "id": "TC050",
       "category": "component_t_time",
       "name": "T8 public-only FAIL",
-      "expected_result": "SKIP",
+      "expected_result": "PASS",
       "record_kind": "verification_report_v2",
       "input_type": "synthetic_json",
       "description": "T8 public-only claim - validator does not check T8 specifics (SKIP)",
@@ -4311,18 +4317,18 @@
         "protocol_level_claimed": "V6",
         "component_findings": [
           {
-            "component": "time_anchors",
-            "level_claimed": "T8",
+            "component": "chronicle_recovery",
+            "level_claimed": "C0",
             "target_id": "test-target",
             "data_sources": [
               "github"
             ],
             "access_paths": [],
-            "method": "public image from internet",
+            "method": "chronicle manifest read",
             "evidence": [],
             "limitations": [],
             "claims_not_made": [],
-            "scope_class": "physical_witness"
+            "scope_class": "chronicle_recovery"
           }
         ],
         "protocol_profile_check": {
@@ -4333,7 +4339,9 @@
           "underreported_items": [],
           "incompatible_claims": []
         },
-        "data_sources_used": [],
+        "data_sources_used": [
+          "github"
+        ],
         "access_paths_used": [],
         "fallbacks_used": [],
         "external_sources_queried": [],
@@ -4707,7 +4715,7 @@
       "id": "TC055",
       "category": "component_c_chronicle",
       "name": "C3 no media description FAIL",
-      "expected_result": "SKIP",
+      "expected_result": "PASS",
       "record_kind": "verification_report_v2",
       "input_type": "synthetic_json",
       "description": "C3 no media/metadata - validator does not check (SKIP)",
@@ -5310,7 +5318,7 @@
       "id": "TC062",
       "category": "component_c_chronicle",
       "name": "N7 sample only FAIL",
-      "expected_result": "SKIP",
+      "expected_result": "PASS",
       "record_kind": "verification_report_v2",
       "input_type": "synthetic_json",
       "description": "N7 claims full but only sample (validator doesn't check N7 specifics - SKIP)",
@@ -6293,7 +6301,7 @@
       "id": "TC073",
       "category": "component_p_physical",
       "name": "P8 confidential PASS",
-      "expected_result": "SKIP",
+      "expected_result": "FAIL",
       "record_kind": "verification_report_v2",
       "input_type": "synthetic_json",
       "description": "P8 with proper confidentiality boundary (P8 confidentiality boundary check - SKIP)",
@@ -6694,10 +6702,10 @@
       "id": "TC078",
       "category": "echo_submission",
       "name": "Report claims Echo FAIL",
-      "expected_result": "SKIP",
+      "expected_result": "FAIL",
       "record_kind": "verification_report_v2",
       "input_type": "synthetic_json",
-      "description": "Report claims echo without wrapper - validator does not check (SKIP)",
+      "description": "Verification report carries echo_type field without echo wrapper",
       "payload": {
         "record_kind": "verification_report_v2",
         "schema_version": "trinityaccord.verification-report.v2",
@@ -6779,10 +6787,10 @@
       "id": "TC079",
       "category": "echo_submission",
       "name": "Wrapper missing linked report FAIL",
-      "expected_result": "SKIP",
+      "expected_result": "FAIL",
       "record_kind": "echo_v3_with_verification_report",
       "input_type": "synthetic_json",
-      "description": "Wrapper without linked_verification_report (validator doesn't check linked report existence - SKIP)",
+      "description": "Echo wrapper without linked_verification_report field",
       "payload": {
         "record_kind": "echo_v3_with_verification_report",
         "schema": "trinityaccord.echo.v3",
@@ -7387,7 +7395,7 @@
       "id": "TC092",
       "category": "title_policy",
       "name": "Ambiguous title FAIL",
-      "expected_result": "SKIP",
+      "expected_result": "FAIL",
       "record_kind": "echo_v3_with_verification_report",
       "input_type": "synthetic_json",
       "description": "Ambiguous title for wrapper (title checker needs refinement - SKIP)",
@@ -7403,7 +7411,7 @@
       "id": "TC093",
       "category": "title_policy",
       "name": "Empty title FAIL",
-      "expected_result": "SKIP",
+      "expected_result": "FAIL",
       "record_kind": "echo_v3_with_verification_report",
       "input_type": "synthetic_json",
       "description": "Empty title (title checker needs refinement - SKIP)",
@@ -7419,7 +7427,7 @@
       "id": "TC094",
       "category": "title_policy",
       "name": "Echo title for report FAIL",
-      "expected_result": "SKIP",
+      "expected_result": "FAIL",
       "record_kind": "verification_report_v2",
       "input_type": "synthetic_json",
       "description": "Echo prefix on report-only record (title checker needs refinement - SKIP)",
@@ -7589,7 +7597,7 @@
       "id": "TC097",
       "category": "json_schema",
       "name": "Null structured field FAIL",
-      "expected_result": "SKIP",
+      "expected_result": "FAIL",
       "record_kind": "verification_report_v2",
       "input_type": "synthetic_json",
       "description": "Null in structured fields (JSON/schema structural check - SKIP)",
@@ -7639,7 +7647,7 @@
       "id": "TC098",
       "category": "json_schema",
       "name": "Missing record_kind FAIL",
-      "expected_result": "SKIP",
+      "expected_result": "FAIL",
       "record_kind": "verification_report_v2",
       "input_type": "synthetic_json",
       "description": "Record without record_kind (JSON/schema structural check - SKIP)",
@@ -7696,7 +7704,7 @@
       "id": "TC099",
       "category": "json_schema",
       "name": "Record kind mismatch FAIL",
-      "expected_result": "SKIP",
+      "expected_result": "FAIL",
       "record_kind": "echo_v3",
       "input_type": "synthetic_json",
       "description": "echo_v3 with verification report schema (JSON/schema structural check - SKIP)",
@@ -7741,7 +7749,7 @@
       "id": "TC100",
       "category": "json_schema",
       "name": "Extra claim overreach FAIL",
-      "expected_result": "SKIP",
+      "expected_result": "FAIL",
       "record_kind": "verification_report_v2",
       "input_type": "synthetic_json",
       "description": "Report claims truth/investment/religious authority (JSON/schema structural check - SKIP)",

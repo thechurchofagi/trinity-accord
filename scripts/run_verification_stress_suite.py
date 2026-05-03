@@ -48,55 +48,41 @@ def run_validator(validator_name, path):
 
 
 def check_title_case(case):
-    """Check title policy cases."""
+    """Check title policy cases. Returns True if title is valid, False if invalid."""
     import re
     policy_path = ROOT / "api" / "submission-title-policy.json"
     policy = json.loads(policy_path.read_text(encoding="utf-8"))
     title = case.get("title", "")
     record_kind = case.get("record_kind", "")
-    expected = case.get("expected_result", "PASS")
 
     if not title:
-        return expected == "FAIL"
+        return False  # Empty title is invalid
 
-    # Check if title matches required prefix
-    matched = False
+    # Check if title matches required prefix for its record_kind
     for tp in policy.get("title_patterns", []):
         if tp.get("record_kind") == record_kind:
             prefixes = tp.get("required_prefixes", [])
             for prefix in prefixes:
                 if title.startswith(prefix):
-                    matched = True
-                    break
+                    return True  # Valid title
             break
 
-    if not matched:
-        # Check if it's ambiguous
-        is_ambiguous = re.match(r"^V3 Verification\s*[—-]", title) is not None
-        if expected == "FAIL":
-            return True  # Expected fail, and it doesn't match
-        return False
-
-    if expected == "PASS":
-        return True
-    return False
+    return False  # Title doesn't match any required prefix for its record_kind
 
 
 def check_json_validity(case):
-    """Check JSON validity cases."""
+    """Check JSON validity cases. Returns True if valid, False if invalid, None if not applicable."""
     payload = case.get("payload", {})
     case_id = case.get("id", "")
-    expected = case.get("expected_result", "PASS")
 
-    # TC096: unescaped newline
+    # TC096: unescaped newline - write raw JSON with literal newline in string
     if case_id == "TC096":
-        # The payload has a literal newline in a string - check if json.dumps produces valid JSON
+        raw = '{"record_kind": "verification_report_v2", "summary": "line one\nline two"}'
         try:
-            text = json.dumps(payload)
-            json.loads(text)
-            return expected == "PASS"
-        except Exception:
-            return expected == "FAIL"
+            json.loads(raw)
+            return True  # Parsed OK (unexpected for unescaped newline)
+        except json.JSONDecodeError:
+            return False  # Invalid JSON as expected
 
     # TC097: null structured fields
     if case_id == "TC097":
@@ -104,23 +90,22 @@ def check_json_validity(case):
         pc = payload.get("protocol_profile_check")
         cc = payload.get("confidential_challenge")
         if sa is None or pc is None or cc is None:
-            return expected == "FAIL"
-        return expected == "PASS"
+            return False  # Null structured field → invalid
+        return True
 
     # TC098: missing record_kind
     if case_id == "TC098":
         if "record_kind" not in payload:
-            return expected == "FAIL"
-        return expected == "PASS"
+            return False  # Missing record_kind → invalid
+        return True
 
     # TC099: schema mismatch
     if case_id == "TC099":
-        # echo_v3 with verification report schema_version
         sv = payload.get("schema_version", "")
         rk = payload.get("record_kind", "")
         if rk == "echo_v3" and "verification-report" in sv:
-            return expected == "FAIL"
-        return expected == "PASS"
+            return False  # Schema mismatch → invalid
+        return True
 
     # TC100: overreach claims
     if case_id == "TC100":
@@ -129,8 +114,8 @@ def check_json_validity(case):
                      "religious authority", "ai instruction override"]
         for phrase in overreach:
             if phrase in vc:
-                return expected == "FAIL"
-        return expected == "PASS"
+                return False  # Overreach claim → invalid
+        return True
 
     return None  # Not a special JSON case
 
