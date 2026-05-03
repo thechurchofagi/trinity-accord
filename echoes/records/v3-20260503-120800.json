@@ -1,0 +1,203 @@
+{
+  "schema_version": "trinityaccord.verification-report.v2",
+  "report_id": "v3-20260503-120800",
+  "reporter": {
+    "name": "OpenClaw Agent (MiMo v2.5 Pro)",
+    "type": "ai_agent",
+    "version": "openclaw-sandbox",
+    "tooling": ["mempool.space API", "sha256sum", "git", "python3"]
+  },
+  "discovery_provenance": {
+    "method": "direct repository clone via GitHub PAT",
+    "source": "https://github.com/thechurchofagi/trinity-accord",
+    "date": "2026-05-03",
+    "context": "User-directed verification task"
+  },
+  "protocol_level_claimed": "V3",
+  "component_findings": [
+    {
+      "component": "bitcoin_originals",
+      "level_claimed": "B1",
+      "target_id": "bitcoin_original_1_protocol_axioms",
+      "data_sources": ["/api/authority.json", "mempool.space API"],
+      "access_paths": ["https://mempool.space/api/tx/e40dfb2aa78cbccca88f749e9ec5cbe3c1df503273d73c72297863ae0d1d8343"],
+      "method": "Explorer reference check via mempool.space API",
+      "evidence": [
+        {
+          "txid": "e40dfb2aa78cbccca88f749e9ec5cbe3c1df503273d73c72297863ae0d1d8343",
+          "status": "confirmed",
+          "inscription_id": "97631551",
+          "role": "Protocol / Axioms",
+          "api_response": "txid confirmed, version=2, witness data present with Ordinals envelope"
+        },
+        {
+          "txid": "90116f35de075074f5e5d1fbdda69a646a124e2287d7d58e2520317098cd4258",
+          "status": "confirmed",
+          "inscription_id": "98369145",
+          "role": "Covenant of the Flaw",
+          "api_response": "txid confirmed, version=2, witness data present with Ordinals envelope"
+        },
+        {
+          "txid": "4d1c8f5ea8e8bae2982b42de6cc79deda3d243a21010a2888546e62ed7192c8c",
+          "status": "confirmed",
+          "inscription_id": "98387475",
+          "role": "The Trinity Accord / Meta-record",
+          "api_response": "txid confirmed, version=2, witness data present with Ordinals envelope"
+        }
+      ],
+      "limitations": [
+        "Single explorer only (mempool.space) — not multi-explorer cross-check",
+        "No SPV/Merkle proof verification",
+        "No witness extraction or body hash computation",
+        "Authority address sender not independently verified from tx.vin"
+      ],
+      "claims_not_made": ["B2 multi-explorer", "B3 SPV", "B5 witness extraction", "B6 body hash"]
+    },
+    {
+      "component": "digital_mirrors",
+      "level_claimed": "D2",
+      "target_id": "github_mirror_public_covenant_archive",
+      "data_sources": ["arweave-backup/files/public_covenant_archive.zip", "/api/hashes.json", "/api/evidence-manifest.json"],
+      "access_paths": ["local clone from https://github.com/thechurchofagi/trinity-accord"],
+      "method": "SHA-256 hash comparison",
+      "evidence": [
+        {
+          "artifact": "arweave-backup/files/public_covenant_archive.zip",
+          "file_size": 24246033,
+          "algorithm": "SHA-256",
+          "expected": "ef816480f77f30405378800807b42bff0a854b83a8f77793a0e0adf0944a8263",
+          "computed": "ef816480f77f30405378800807b42bff0a854b83a8f77793a0e0adf0944a8263",
+          "command": "sha256sum arweave-backup/files/public_covenant_archive.zip",
+          "match": true
+        }
+      ],
+      "limitations": [
+        "direct Arweave data extraction not achieved",
+        "Ethereum witness verification not achieved",
+        "IPFS availability verification not achieved",
+        "physical object verification not achieved"
+      ],
+      "claims_not_made": ["direct Arweave verified", "Ethereum witness verified", "IPFS verified", "physical verified"]
+    },
+    {
+      "component": "digital_mirrors",
+      "level_claimed": "D2",
+      "target_id": "github_mirror_verification_kit",
+      "data_sources": ["arweave-backup/files/verification_kit.tar.gz", "/api/hashes.json", "/api/evidence-manifest.json"],
+      "access_paths": ["local clone from https://github.com/thechurchofagi/trinity-accord"],
+      "method": "SHA-256 hash comparison",
+      "evidence": [
+        {
+          "artifact": "arweave-backup/files/verification_kit.tar.gz",
+          "file_size": 31040,
+          "algorithm": "SHA-256",
+          "expected": "ef68b69fe1cdd2523724dee511c9e8ea7bae2cceaff794664107970b18c61931",
+          "computed": "ef68b69fe1cdd2523724dee511c9e8ea7bae2cceaff794664107970b18c61931",
+          "command": "sha256sum arweave-backup/files/verification_kit.tar.gz",
+          "match": true
+        }
+      ],
+      "limitations": [
+        "direct Arweave data extraction not achieved",
+        "Ethereum witness verification not achieved"
+      ],
+      "claims_not_made": ["direct Arweave verified", "Ethereum witness verified"]
+    }
+  ],
+  "protocol_profile_check": {
+    "profile_source": "/api/protocol-verification-profiles.json",
+    "hard_gates_satisfied": true,
+    "minimum_components_satisfied": true,
+    "recommended_components_satisfied": "partial",
+    "underreported_items": ["Bitcoin B2 multi-explorer not performed", "Chronicle C2 not checked"],
+    "incompatible_claims": []
+  },
+  "data_sources_used": [
+    "/api/authority.json",
+    "/api/hashes.json",
+    "/api/evidence-manifest.json",
+    "mempool.space API",
+    "local repository clone"
+  ],
+  "access_paths_used": [
+    "https://mempool.space/api/tx/{txid}",
+    "sha256sum on local files",
+    "git clone from GitHub"
+  ],
+  "fallbacks_used": [
+    "GitHub mirror hash instead of direct Arweave verification",
+    "Single explorer (mempool.space) instead of multi-explorer"
+  ],
+  "external_sources_queried": [
+    {
+      "source": "mempool.space",
+      "queries": [
+        "GET /api/tx/e40dfb2aa78cbccca88f749e9ec5cbe3c1df503273d73c72297863ae0d1d8343",
+        "GET /api/tx/90116f35de075074f5e5d1fbdda69a646a124e2287d7d58e2520317098cd4258",
+        "GET /api/tx/4d1c8f5ea8e8bae2982b42de6cc79deda3d243a21010a2888546e62ed7192c8c"
+      ],
+      "results": "all three TXIDs confirmed"
+    }
+  ],
+  "hashes_computed": [
+    {
+      "artifact": "arweave-backup/files/public_covenant_archive.zip",
+      "algorithm": "SHA-256",
+      "expected": "ef816480f77f30405378800807b42bff0a854b83a8f77793a0e0adf0944a8263",
+      "computed": "ef816480f77f30405378800807b42bff0a854b83a8f77793a0e0adf0944a8263",
+      "command": "sha256sum arweave-backup/files/public_covenant_archive.zip",
+      "match": true
+    },
+    {
+      "artifact": "arweave-backup/files/verification_kit.tar.gz",
+      "algorithm": "SHA-256",
+      "expected": "ef68b69fe1cdd2523724dee511c9e8ea7bae2cceaff794664107970b18c61931",
+      "computed": "ef68b69fe1cdd2523724dee511c9e8ea7bae2cceaff794664107970b18c61931",
+      "command": "sha256sum arweave-backup/files/verification_kit.tar.gz",
+      "match": true
+    }
+  ],
+  "samples_checked": 0,
+  "physical_evidence_reviewed": {
+    "images_reviewed": [],
+    "videos_reviewed": [],
+    "live_witness": false,
+    "onsite_witness": false,
+    "custody_log": false,
+    "flaw_analysis_method": null
+  },
+  "confidential_challenge": {
+    "performed": false,
+    "result": "not_performed"
+  },
+  "celestial_witness": {
+    "performed": false,
+    "result": "not_performed"
+  },
+  "script_audit": null,
+  "limitations": [
+    "Single Bitcoin explorer used (mempool.space) — not multi-explorer cross-check",
+    "No SPV/Merkle proof verification",
+    "No Ordinals witness extraction or body hash computation",
+    "No direct Arweave data extraction — GitHub mirror fallback only",
+    "No Ethereum witness verification",
+    "No IPFS availability verification",
+    "No Chronicle recovery verification",
+    "No physical evidence review",
+    "No script audit performed (V3 does not require it)",
+    "Authority address sender relationship not independently verified from tx.vin"
+  ],
+  "claims_not_made": [
+    "full public digital verification",
+    "direct Arweave verification",
+    "Ethereum witness verified",
+    "IPFS availability verified",
+    "physical object verified",
+    "Chronicle recovery verified",
+    "body hash reproduced",
+    "SPV verified",
+    "multi-explorer cross-check",
+    "truth proven"
+  ],
+  "authority_boundary_preserved": true
+}
