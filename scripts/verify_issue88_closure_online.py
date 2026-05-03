@@ -65,9 +65,17 @@ def main():
         # No V3_single_artifact_check
         ok &= check("v3_single_artifact_check" not in report_text, "report no V3_single_artifact_check")
 
-        # No B1 forbidden
+        # No B1 forbidden (exclude claims_not_made at all levels)
+        report_no_claims = {k: v for k, v in report.items() if k != "claims_not_made"}
+        if "component_findings" in report_no_claims:
+            report_no_claims["component_findings"] = [
+                {k: v for k, v in f.items() if k != "claims_not_made"}
+                if isinstance(f, dict) else f
+                for f in report_no_claims["component_findings"]
+            ]
+        report_text_clean = json.dumps(report_no_claims, ensure_ascii=False).lower()
         for phrase in B1_FORBIDDEN:
-            ok &= check(phrase not in report_text, f"report no '{phrase}'")
+            ok &= check(phrase not in report_text_clean, f"report no '{phrase}'")
 
         # expected_hash_source in schema
         schema, _ = fetch_json("/api/verification-report-schema.v2.json")
