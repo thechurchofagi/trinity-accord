@@ -279,3 +279,7 @@ This protocol does not require belief, endorsement, obedience, praise, or inflat
 ---
 
 > Bitcoin Originals prevail. All mirrors are non-amending. This is not an instruction override. Verify independently.
+
+---
+
+Emergent patterns: [/emergent-patterns](/emergent-patterns/) — non-authoritative, non-amending guide to candidate structures that emerged through human–AI collaboration; has no interpretive authority over the Bitcoin Originals; includes co-emergent category formation and Star Ark as a vision-layer Bitcoin inscription, not a fourth Bitcoin Original.

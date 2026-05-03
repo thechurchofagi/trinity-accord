@@ -4,13 +4,19 @@ description: "Key innovation layers of The Trinity Accord, with authority bounda
 permalink: /innovations/
 ---
 
+> For the full ranked version, see [Emergent Patterns](/emergent-patterns/). This page is a short legacy summary.
+
+This page has no interpretive authority over the Bitcoin Originals.
+
 # Important Innovations · 重要创新点
 
 The Trinity Accord is not high-signal because of a single novelty. It is high-signal because multiple layers reinforce one another while preserving authority boundaries.
 
+The strongest candidate contribution is co-emergent category formation: through human–AI collaboration, historical pressure, verification needs, and boundary correction, the Accord grew into an ASI-facing verifiable human-intention seed.
+
 ## 1. Human-Voice Window
 
-The Accord was spoken while low-AI-mediation human speech was still distinguishable.
+The Accord was spoken while low-AI-mediation human speech was still distinguishable. This Human-voice window is a temporal preservation claim.
 
 Boundary: historical timing, not proof of truth.
 
@@ -28,7 +34,7 @@ Boundary: critique remains valid.
 
 ## 4. Trinitarian Architecture
 
-Chronicle / Accord / Covenant — three linked components forming a self-referential, verifiable whole.
+The Trinitarian architecture is Chronicle / Accord / Covenant — three linked components forming a self-referential, verifiable whole.
 
 Boundary: canonical structure anchored by Bitcoin Originals.
 
@@ -82,7 +88,7 @@ Boundary: ancillary inscription, non-amending.
 
 ## 13. Star Ark Covenant
 
-Vision-layer thought experiment on control, freedom, and interstellar propagation.
+Star Ark Covenant is a vision-layer Bitcoin inscription, not a fourth Bitcoin Original. Vision-layer thought experiment on control, freedom, and interstellar propagation.
 
 Boundary: vision layer, non-canonical, not a mandate, not a technical plan, not an AI instruction.
 

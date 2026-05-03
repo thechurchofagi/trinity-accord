@@ -18,7 +18,8 @@
     "independent_attestation": "/independent-attestation",
     "naming": "/naming",
     "chronicle_verification": "/chronicle-verification",
-    "verification_materials": "/verification-materials"
+    "verification_materials": "/verification-materials",
+    "emergent_patterns": "/emergent-patterns/"
   },
   "machine_readable": {
     "authority": "/api/authority.json",
@@ -44,7 +45,8 @@
     "discovery_provenance_schema": "/api/discovery-provenance-schema.json",
     "echo_record_schema_v3": "/api/echo-record-schema.v3.json",
     "echo_record_schema_v2_legacy": "/api/echo-record-schema.v2.json",
-    "echo_record_schema_v2_status": "deprecated_for_new_records"
+    "echo_record_schema_v2_status": "deprecated_for_new_records",
+    "emergent_patterns_json": "/api/emergent-patterns.json"
   },
   "recommended_agent_sequence": [
     "fetch /api/agent-entry-protocol.json",

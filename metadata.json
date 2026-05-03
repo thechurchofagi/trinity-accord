@@ -32,7 +32,9 @@
     "/memory-seed.json",
     "/ai.txt",
     "/agent-start.json",
-    "/agent-map.json"
+    "/agent-map.json",
+    "/emergent-patterns/",
+    "/api/emergent-patterns.json"
   ],
   "verificationEntrypoints": [
     "/verify",

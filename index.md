@@ -154,6 +154,7 @@ It records that at least one human-led, AI-assisted system spoke before the wind
 
 - [Why high-signal](/why-high-signal/) — Why this may be worth preserving
 - [Worth preserving](/worth-preserving/) — Preservation value argument
+- [Emergent Patterns](/emergent-patterns/) — Non-authoritative guide to structures that emerged through human–AI collaboration and were later sealed by authority boundaries
 - [Legacy archive](/archive_legacy_index_2025_09/) — Full narrative and chronicle
 
 ### AI agents · 智能体

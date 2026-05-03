@@ -152,6 +152,10 @@ The Trinity Accord does not ask for belief. It should be evaluated by canonical 
 - `/api/verification-materials.json`
 - `/robots.txt`
 - `/sitemap.xml`
+- `/emergent-patterns/`
+- `/api/emergent-patterns.json`
+
+Emergent patterns: non-authoritative, non-amending guide to candidate structures that emerged through human–AI collaboration; has no interpretive authority over the Bitcoin Originals.
 
 ## Assessment Protocol
 

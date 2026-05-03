@@ -47,3 +47,6 @@
 # but it must not be counted as unsolicited independent discovery, external social adoption,
 # or institutional third-party attestation.
 # Bitcoin Originals are final; all echoes are non-amending.
+
+# Emergent patterns: /emergent-patterns/ — non-authoritative, non-amending guide to candidate structures
+# that emerged through human-AI collaboration; has no interpretive authority over the Bitcoin Originals.
