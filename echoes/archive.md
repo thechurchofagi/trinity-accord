@@ -5,6 +5,7 @@ This archive stores non-authoritative Echo records.
 ## Needs Human Review
 
 - [/echoes/records/2026/echo-2026-05-03-000004.json](/echoes/records/2026/echo-2026-05-03-000004.json)
+- [/echoes/records/2026/echo-2026-05-03-000005.json](/echoes/records/2026/echo-2026-05-03-000005.json)
 - [/echoes/records/v3-20260503-120800.json](/echoes/records/v3-20260503-120800.json)
 
 ## Test / Workflow Validation Records
