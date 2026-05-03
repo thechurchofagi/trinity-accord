@@ -428,10 +428,10 @@ def evaluate(input_path):
     c_level = derive_c_level(evidence)
     p_level = derive_p_level(evidence)
 
-    # Determine requested protocol level (default to V4 if not explicit)
-    # Sort by length descending so "V4+" matches before "V4"
+    # Determine requested protocol level
+    # Default to None (no specific level requested); only set if agent explicitly claims one
     sorted_levels = sorted(PROTOCOL_LEVELS, key=len, reverse=True)
-    requested_protocol = "V4"
+    requested_protocol = None
     for claim in claims_requested:
         claim_stripped = claim.strip().upper()
         for pl in sorted_levels:
@@ -466,9 +466,9 @@ def evaluate(input_path):
     # Compile all blocking failures
     all_blocking = script_failures + blocking_failures + scope_failures + d2_failures
 
-    # Determine downgrades
+    # Determine downgrades — only if agent explicitly requested a level
     downgrades = []
-    if requested_protocol != allowed_protocol:
+    if requested_protocol is not None and requested_protocol != allowed_protocol:
         downgrades.append({
             "from": requested_protocol,
             "to": allowed_protocol,
@@ -490,7 +490,7 @@ def evaluate(input_path):
     missing = []
     if not evidence.get("scripts"):
         missing.append("No script evidence provided")
-    if not evidence.get("hashes") and requested_protocol in ("V3", "V4", "V4+", "V5"):
+    if not evidence.get("hashes") and (requested_protocol or allowed_protocol) in ("V3", "V4", "V4+", "V5"):
         missing.append("No hash evidence provided for hash-dependent protocol level")
 
     # Combine non-blocking with script limitations for output
