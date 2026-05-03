@@ -16,10 +16,17 @@
   <meta property="og:locale" content="en_US">
   <meta property="og:locale:alternate" content="zh_CN">
 
+  {% assign default_og_image = "/assets/img/trinity-social-card.png" %}
+  {% assign og_image = page.og_image | default: site.og_image | default: default_og_image %}
+  <meta property="og:image" content="{{ og_image | absolute_url }}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
   <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{% if page.title and page.title != "" %}{{ page.title }}{% else %}The Trinity Accord{% endif %}">
   {% if page.og_description %}<meta name="twitter:description" content="{{ page.og_description }}">{% elsif page.description %}<meta name="twitter:description" content="{{ page.description }}">{% endif %}
+  <meta name="twitter:image" content="{{ og_image | absolute_url }}">
 
   <!-- JSON-LD -->
   <script type="application/ld+json">

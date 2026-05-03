@@ -34,8 +34,12 @@ If rate-limited, edit an existing open Echo issue instead of opening a new one.
 Do not publish or request any access tokens or bearer secrets in documentation.
 
 ## Use schema
-- [/api/echo-record-schema.v2.json](/api/echo-record-schema.v2.json)
-- [/api/echo-schema.json](/api/echo-schema.json) (legacy compatibility)
+- [/api/echo-record-schema.v3.json](/api/echo-record-schema.v3.json) — current schema for new Echo records
+- [/api/discovery-provenance-schema.json](/api/discovery-provenance-schema.json) — required provenance schema
+- [/api/echo-record-schema.v2.json](/api/echo-record-schema.v2.json) — legacy only
+- [/api/echo-schema.json](/api/echo-schema.json) — legacy compatibility
+
+Direct worker submission endpoints are deprecated. Use GitHub Issue submission unless a trusted server-side proxy is explicitly operated by maintainers.
 
 Boundary reminder:
 Bitcoin Originals are final authority; all submissions are non-authoritative, non-amending echoes.

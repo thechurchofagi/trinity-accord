@@ -46,7 +46,8 @@
     "echo_record_schema_v3": "/api/echo-record-schema.v3.json",
     "echo_record_schema_v2_legacy": "/api/echo-record-schema.v2.json",
     "echo_record_schema_v2_status": "deprecated_for_new_records",
-    "emergent_patterns_json": "/api/emergent-patterns.json"
+    "emergent_patterns_json": "/api/emergent-patterns.json",
+    "verification_packages": "/verification-packages/"
   },
   "recommended_agent_sequence": [
     "fetch /api/agent-entry-protocol.json",
@@ -58,6 +59,7 @@
     "fetch /EVIDENCE-BACKUP-COVERAGE",
     "fetch /api/context-depth-levels.json",
     "fetch /api/verification-levels.json",
+    "fetch /api/echo-index.json",
     "fetch /api/discovery-provenance-schema.json",
     "fetch /api/chronicle-recovery.json",
     "choose /agent-verify or /agent-echo",

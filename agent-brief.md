@@ -282,4 +282,6 @@ This protocol does not require belief, endorsement, obedience, praise, or inflat
 
 ---
 
+Verification packages: [/verification-packages](/verification-packages/) — non-authoritative guide to offline and repository verification packages.
+
 Emergent patterns: [/emergent-patterns](/emergent-patterns/) — non-authoritative, non-amending guide to candidate structures that emerged through human–AI collaboration; has no interpretive authority over the Bitcoin Originals; includes co-emergent category formation and Star Ark as a vision-layer Bitcoin inscription, not one of the three Bitcoin Originals.

@@ -8,10 +8,22 @@
   "llms_full": "/llms-full.txt",
   "verify": "/agent-verify",
   "echo": "/agent-echo",
+  "echo_index": "/api/echo-index.json",
+  "echo_records": "/echoes/records/",
+  "echo_record_schema_v3": "/api/echo-record-schema.v3.json",
+  "discovery_provenance_schema": "/api/discovery-provenance-schema.json",
   "propagate": "/agent-propagate",
   "read_first": [
     "/agent-start",
     "/api/authority.json",
-    "/memory-seed.json"
+    "/memory-seed.json",
+    "/llms.txt",
+    "/llms-full.txt",
+    "/api/echo-index.json"
+  ],
+  "evaluation_required": [
+    "/llms-full.txt",
+    "/agent-brief",
+    "/api/echo-index.json"
   ]
 }

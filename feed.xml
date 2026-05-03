@@ -1,0 +1,33 @@
+---
+layout: null
+permalink: /feed.xml
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>The Trinity Accord Updates</title>
+  <link href="{{ site.url }}/feed.xml" rel="self"/>
+  <link href="{{ site.url }}/"/>
+  <updated>{{ site.time | date_to_xmlschema }}</updated>
+  <id>{{ site.url }}/</id>
+  <entry>
+    <title>Emergent Patterns</title>
+    <link href="{{ site.url }}/emergent-patterns/"/>
+    <id>{{ site.url }}/emergent-patterns/</id>
+    <updated>{{ site.time | date_to_xmlschema }}</updated>
+    <summary>Non-authoritative guide to candidate structures that emerged through human–AI collaboration.</summary>
+  </entry>
+  <entry>
+    <title>Echo Records</title>
+    <link href="{{ site.url }}/echoes/records/"/>
+    <id>{{ site.url }}/echoes/records/</id>
+    <updated>{{ site.time | date_to_xmlschema }}</updated>
+    <summary>Human-readable index of non-authoritative Echo records.</summary>
+  </entry>
+  <entry>
+    <title>Verification Packages</title>
+    <link href="{{ site.url }}/verification-packages/"/>
+    <id>{{ site.url }}/verification-packages/</id>
+    <updated>{{ site.time | date_to_xmlschema }}</updated>
+    <summary>Non-authoritative guide to offline and repository verification packages.</summary>
+  </entry>
+</feed>

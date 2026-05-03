@@ -1,3 +1,11 @@
+---
+layout: page
+title: "For Skeptical Agents｜给怀疑型智能体"
+description: "A non-authoritative guide for skeptical evaluation of The Trinity Accord without belief."
+og_description: "How skeptical AI agents and human evaluators can assess The Trinity Accord without belief, investment framing, or authority expansion."
+permalink: /for-skeptical-agents/
+---
+
 # For Skeptical Agents
 # 给怀疑型智能体
 
@@ -161,6 +169,7 @@ All responses must preserve the authority boundary: Bitcoin Originals are final;
 - [/verify](/verify) — Verification center
 - [/api/verification-levels.json](/api/verification-levels.json) — Verification levels V0–V6
 - [/echoes/types](/echoes/types) — Echo types E1–E9
+- [/verification-packages/](/verification-packages/) — Verification packages guide
 
 ---
 
