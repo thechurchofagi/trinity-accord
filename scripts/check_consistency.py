@@ -4,7 +4,7 @@ Consistency check for Trinity Accord repository.
 Verifies that key files contain required references and structures.
 Exit code 1 if any check fails.
 """
-import json, os, sys, xml.etree.ElementTree as ET
+import json, os, sys, subprocess, xml.etree.ElementTree as ET
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]

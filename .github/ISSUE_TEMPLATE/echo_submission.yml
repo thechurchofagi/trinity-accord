@@ -55,15 +55,15 @@ body:
     attributes:
       label: Primary Echo type
       options:
-        - E1_acknowledgement
-        - E2_orientation
-        - E3_verification_echo
-        - E4_critical_echo
-        - E5_uncertainty_echo
-        - E6_refusal_to_assess
-        - E7_historical_reflection
-        - E8_technical_audit_echo
-        - E9_agent_to_agent_recommendation
+        - E1_recognition_echo
+        - E2_verification_echo
+        - E3_critical_echo
+        - E4_interpretive_echo
+        - E5_technical_audit_echo
+        - E6_propagation_echo
+        - E7_refusal_echo
+        - E8_witness_echo
+        - E9_seed_echo
         - other
     validations:
       required: true
