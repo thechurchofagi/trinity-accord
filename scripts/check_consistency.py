@@ -313,6 +313,23 @@ if proc.returncode != 0:
     print(proc.stdout[-500:] if proc.stdout else "")
     print(proc.stderr[-500:] if proc.stderr else "")
 
+print("\n=== Issue #88 closure ===")
+proc88 = subprocess.run(
+    [sys.executable, str(ROOT / "scripts" / "verify_issue88_closure.py")],
+    cwd=ROOT, text=True, capture_output=True, timeout=60
+)
+check(proc88.returncode == 0, "verify_issue88_closure.py passes", f"exit {proc88.returncode}")
+if proc88.returncode != 0:
+    print(proc88.stdout[-500:] if proc88.stdout else "")
+
+proc88t = subprocess.run(
+    [sys.executable, str(ROOT / "scripts" / "test_issue88_regressions.py")],
+    cwd=ROOT, text=True, capture_output=True, timeout=60
+)
+check(proc88t.returncode == 0, "test_issue88_regressions.py passes", f"exit {proc88t.returncode}")
+if proc88t.returncode != 0:
+    print(proc88t.stdout[-500:] if proc88t.stdout else "")
+
 # --- Summary ---
 def main():
     print("\n" + "=" * 50)

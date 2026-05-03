@@ -6,7 +6,12 @@
     "name": "OpenClaw Agent",
     "type": "ai_agent",
     "version": "MiMo v2.5 Pro",
-    "tooling": ["sha256sum", "mempool.space API", "git", "python3"]
+    "tooling": [
+      "sha256sum",
+      "mempool.space API",
+      "git",
+      "python3"
+    ]
   },
   "discovery_provenance": {
     "schema": "trinityaccord.discovery-provenance.v1",
@@ -78,7 +83,8 @@
         "B6",
         "truth verified",
         "content verified"
-      ]
+      ],
+      "scope_class": "chain_reference_check"
     },
     {
       "component": "digital_mirrors",
@@ -127,7 +133,8 @@
         "physical object verification",
         "truth verified",
         "content verified"
-      ]
+      ],
+      "scope_class": "canonical_mirror_integrity"
     },
     {
       "component": "digital_mirrors",
@@ -137,7 +144,9 @@
         "api/repository-artifact-hashes.json",
         "repository files"
       ],
-      "access_paths": ["local repository checkout"],
+      "access_paths": [
+        "local repository checkout"
+      ],
       "method": "SHA-256 hash comparison of repository files against api/repository-artifact-hashes.json. Repository snapshot integrity verification.",
       "evidence": [
         {
@@ -180,7 +189,8 @@
         "canonical mirror verification",
         "direct Arweave verification",
         "truth verified"
-      ]
+      ],
+      "scope_class": "repository_snapshot_integrity"
     }
   ],
   "protocol_profile_check": {

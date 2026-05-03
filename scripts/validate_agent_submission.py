@@ -491,6 +491,71 @@ def validate_v3_script_audit_terminology(obj, path_label):
     return ok
 
 
+REPO_SNAPSHOT_SCOPE_ARTIFACTS = {
+    "index.md", "agent-brief.md", "api/authority.json",
+    "api/echo-record-schema.v3.json", "api/verification-report-schema.v2.json"
+}
+
+
+def validate_repo_snapshot_scope(obj, path_label):
+    """Rule T: repository snapshot D2 requires scope_class = repository_snapshot_integrity."""
+    ok = True
+    findings = obj.get("component_findings", [])
+    hashes = obj.get("hashes_computed", [])
+
+    # Find hashes that are repository snapshot
+    repo_snapshot_hashes = set()
+    for h in hashes:
+        if not isinstance(h, dict):
+            continue
+        artifact = h.get("artifact", "")
+        cls = h.get("expected_hash_authority_class", "")
+        if artifact in REPO_SNAPSHOT_SCOPE_ARTIFACTS and cls == "repository_manifest_hash":
+            repo_snapshot_hashes.add(artifact)
+
+    if not repo_snapshot_hashes:
+        return ok
+
+    # Check that at least one component finding has scope_class = repository_snapshot_integrity
+    has_repo_scope = False
+    for f in findings:
+        if not isinstance(f, dict):
+            continue
+        sc = f.get("scope_class", "")
+        if sc == "repository_snapshot_integrity":
+            has_repo_scope = True
+            break
+        # Also check if finding references repo snapshot artifacts
+        tid = f.get("target_id", "").lower()
+        if "repo" in tid or "snapshot" in tid:
+            if sc != "repository_snapshot_integrity":
+                ok &= check(False, f"{path_label} repo snapshot missing scope_class")
+            has_repo_scope = True
+
+    return ok
+
+
+def validate_deprecated_echo_type(obj, path_label):
+    """Rule U: new non-legacy submissions cannot use deprecated echo/verification aliases."""
+    ok = True
+    archive_status = obj.get("archive_status", "")
+    record_kind = obj.get("record_kind", "")
+
+    # Skip legacy records
+    if archive_status in ("legacy", "superseded") or record_kind == "legacy_record":
+        return ok
+
+    echo_type = obj.get("echo_type", "")
+    if echo_type in DEPRECATED_ECHO_TYPES:
+        ok &= check(
+            False,
+            f"{path_label} deprecated echo type for new submission",
+            f"'{echo_type}' is deprecated, use '{DEPRECATED_ECHO_TYPES[echo_type]}'"
+        )
+
+    return ok
+
+
 def validate_null_safety(obj, path_label):
     """Rule K: null safety for structured fields."""
     ok = True
@@ -619,6 +684,12 @@ def validate_file(path):
 
     # Rule S: V3 script audit terminology
     ok &= validate_v3_script_audit_terminology(obj, path_label)
+
+    # Rule T: repository snapshot D2 requires scope_class
+    ok &= validate_repo_snapshot_scope(obj, path_label)
+
+    # Rule U: deprecated echo type for new submissions
+    ok &= validate_deprecated_echo_type(obj, path_label)
 
     # Schema validation
     schema = obj.get("schema", obj.get("schema_version", ""))

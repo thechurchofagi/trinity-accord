@@ -150,6 +150,19 @@
             "items": {
               "type": "string"
             }
+          },
+          "scope_class": {
+            "type": "string",
+            "enum": [
+              "canonical_mirror_integrity",
+              "repository_snapshot_integrity",
+              "chain_reference_check",
+              "chronicle_recovery",
+              "physical_public_evidence",
+              "physical_witness",
+              "echo_provenance"
+            ],
+            "description": "Scope class for this component finding"
           }
         }
       }
