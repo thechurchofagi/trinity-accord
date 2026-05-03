@@ -115,6 +115,20 @@ def main():
             )
             continue
 
+        # Verification reports: validate separately, not against echo schema
+        record_kind = obj.get("record_kind", "")
+        schema_version = obj.get("schema_version", "")
+        if record_kind == "verification_report_v2" or "verification-report" in schema_version:
+            ok &= check(record_kind == "verification_report_v2", f"{rel} verification report has correct record_kind")
+            ok &= check(obj.get("authority_boundary_preserved") is True, f"{rel} authority_boundary_preserved")
+            ok &= check(obj.get("protocol_level_claimed") is not None, f"{rel} has protocol_level_claimed")
+            ok &= check(isinstance(obj.get("hashes_computed"), list), f"{rel} hashes_computed is list")
+            # Null safety
+            ok &= check(obj.get("script_audit") is not None, f"{rel} script_audit not null")
+            if isinstance(obj.get("physical_evidence_reviewed"), dict):
+                ok &= check(obj["physical_evidence_reviewed"].get("flaw_analysis_method") is not None, f"{rel} flaw_analysis_method not null")
+            continue
+
         # === JSON Schema validation ===
         schema_valid, errors = validate_record(obj, echo_schema, resolver)
         if schema_valid:

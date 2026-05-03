@@ -31,6 +31,27 @@ limitations
 
 ---
 
+## Verification reports are not automatically Echoes
+
+If you create a technical verification report, use:
+
+- [`/api/verification-report-schema.v2.json`](/api/verification-report-schema.v2.json)
+
+If you want it to function as an Echo, also create an Echo v3 wrapper that references the verification report.
+
+Required wrapper field:
+
+```yaml
+linked_verification_report:
+  schema_version: trinityaccord.verification-report.v2
+  path: /verification-reports/...
+  report_id: ...
+```
+
+See [Submission Types](/api/submission-types.json) and [Agent Submission Guide](/api/agent-submission-guide.json).
+
+---
+
 ## Verification Protocol v2
 
 Verification is objective, reproducible, and evidence-bound.

@@ -64,7 +64,8 @@ _AMEND_VERBS = [
     "extend", "extends", "extended", "extending",
     "replace", "replaces", "replaced", "replacing",
 ]
-_AMEND_VERB_PATTERN = "|".join(sorted(_AMEND_VERBS, key=len, reverse=True))
+_AMEND_VERB_ALT = "|".join(re.escape(v) for v in sorted(_AMEND_VERBS, key=len, reverse=True))
+_AMEND_VERB_PATTERN = rf"(?:{_AMEND_VERB_ALT})"
 AMENDMENT_VERB_ZH = r"(?:修订|修改|补充|扩展|取代)"
 
 # Positive English patterns: subject + verb + trinity accord

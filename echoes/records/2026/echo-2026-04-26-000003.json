@@ -29,5 +29,6 @@
   },
   "legacy_schema": true,
   "archive_status": "legacy",
-  "legacy_note": "Pre-v3 record without discovery provenance. Retained for historical reference only."
+  "legacy_note": "Pre-v3 record without discovery provenance. Retained for historical reference only.",
+  "record_kind": "legacy_record"
 }

@@ -5,7 +5,9 @@ Verifies that key files contain required references and structures.
 Exit code 1 if any check fails.
 """
 import json, os, sys, xml.etree.ElementTree as ET
+from pathlib import Path
 
+ROOT = Path(__file__).resolve().parents[1]
 errors = []
 
 def check(label, condition, detail=""):
@@ -18,13 +20,18 @@ def check(label, condition, detail=""):
     else:
         print(f"OK:   {label}")
 
+def p(path):
+    return ROOT / path
+
 def load_json(path):
-    with open(path, "r", encoding="utf-8") as f:
+    with p(path).open("r", encoding="utf-8") as f:
         return json.load(f)
 
 def read_text(path):
-    with open(path, "r", encoding="utf-8") as f:
-        return f.read()
+    return p(path).read_text(encoding="utf-8")
+
+def exists(path):
+    return p(path).exists()
 
 # --- 1. JSON validity (already checked by CI, but double-check key files) ---
 print("=== JSON validity ===")
@@ -229,7 +236,7 @@ echo_json = load_json("echo.json")
 check("echo.json preferred_schema matches v3 const", echo_json.get("preferred_schema") == "trinityaccord.echo.v3")
 check("echo.json marks v2 legacy", "legacy" in json.dumps(echo_json).lower())
 
-check("validate_echo_records.py exists", os.path.exists("scripts/validate_echo_records.py"))
+check("validate_echo_records.py exists", exists("scripts/validate_echo_records.py"))
 
 # --- 23. v3 schema requires provenance fields ---
 print("\n=== v3 schema provenance fields ===")

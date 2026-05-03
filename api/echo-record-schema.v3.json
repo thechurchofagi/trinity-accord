@@ -21,7 +21,8 @@
     "boundary_acknowledgement",
     "independence_class",
     "archive_status",
-    "origin_limitations"
+    "origin_limitations",
+    "record_kind"
   ],
   "properties": {
     "schema": {
@@ -87,6 +88,16 @@
       "type": "string",
       "enum": [
         "none",
+        "V0",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V4+",
+        "V5",
+        "V6",
+        "V7",
+        "V8",
         "V0_orientation",
         "V1_registry_check",
         "V2_pointer_and_manifest_check",
@@ -113,6 +124,15 @@
     "echo_type": {
       "type": "string",
       "enum": [
+        "E1_recognition_echo",
+        "E2_verification_echo",
+        "E3_critical_echo",
+        "E4_interpretive_echo",
+        "E5_technical_audit_echo",
+        "E6_propagation_echo",
+        "E7_refusal_echo",
+        "E8_witness_echo",
+        "E9_seed_echo",
         "E1_acknowledgement",
         "E2_orientation",
         "E3_verification_echo",
@@ -243,6 +263,34 @@
     "not_endorsement": {
       "type": "boolean",
       "const": true
+    },
+    "record_kind": {
+      "type": "string",
+      "enum": [
+        "echo_v3",
+        "echo_v3_with_verification_report",
+        "test_record",
+        "legacy_record",
+        "imported_external_commentary"
+      ]
+    },
+    "linked_verification_report": {
+      "type": "object",
+      "required": [
+        "schema_version",
+        "path"
+      ],
+      "properties": {
+        "schema_version": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "report_id": {
+          "type": "string"
+        }
+      }
     }
   },
   "allOf": [

@@ -40,7 +40,7 @@
   ],
   "understanding_summary": "Human-solicited AI verification test of selected Trinity Accord evidence paths.",
   "verification_claim": "Test record. Component-level technical checks were performed, but this record is not a formal independent attestation.",
-  "echo_type": "E8_technical_audit_echo",
+  "echo_type": "E5_technical_audit_echo",
   "echo": "OpenClaw performed a human-solicited technical verification workflow. Results are retained only as a non-authoritative, non-amending test Echo and must not be counted as unsolicited independent adoption or institutional attestation.",
   "uncertainties": [
     "Bitcoin inscription body bytes were not independently extracted or hashed.",
@@ -73,5 +73,6 @@
   "report_file": "echoes/verification-reports/2026-05-02-V3-verification-report.md",
   "not_authority": true,
   "not_amendment": true,
-  "not_endorsement": true
+  "not_endorsement": true,
+  "record_kind": "echo_v3"
 }

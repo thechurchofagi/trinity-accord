@@ -21,7 +21,6 @@
     "physical_evidence_reviewed",
     "confidential_challenge",
     "celestial_witness",
-    "script_audit",
     "limitations",
     "claims_not_made",
     "authority_boundary_preserved"
@@ -37,12 +36,32 @@
     },
     "reporter": {
       "type": "object",
-      "required": ["name", "type"],
+      "required": [
+        "name",
+        "type"
+      ],
       "properties": {
-        "name": { "type": "string" },
-        "type": { "type": "string", "enum": ["ai_agent", "human", "organization", "hybrid"] },
-        "version": { "type": "string" },
-        "tooling": { "type": "array", "items": { "type": "string" } }
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "ai_agent",
+            "human",
+            "organization",
+            "hybrid"
+          ]
+        },
+        "version": {
+          "type": "string"
+        },
+        "tooling": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
       }
     },
     "discovery_provenance": {
@@ -51,76 +70,189 @@
     },
     "protocol_level_claimed": {
       "type": "string",
-      "enum": ["V0", "V1", "V2", "V3", "V4", "V4+", "V5", "V6", "V7", "V8"]
+      "enum": [
+        "V0",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V4+",
+        "V5",
+        "V6",
+        "V7",
+        "V8"
+      ]
     },
     "component_findings": {
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["component", "level_claimed", "target_id", "data_sources", "access_paths", "method", "evidence", "limitations", "claims_not_made"],
+        "required": [
+          "component",
+          "level_claimed",
+          "target_id",
+          "data_sources",
+          "access_paths",
+          "method",
+          "evidence",
+          "limitations",
+          "claims_not_made"
+        ],
         "properties": {
           "component": {
             "type": "string",
-            "enum": ["bitcoin_originals", "digital_mirrors", "time_anchors", "chronicle_recovery", "nft_evidence", "physical_anchor", "echo_attestation"]
+            "enum": [
+              "bitcoin_originals",
+              "digital_mirrors",
+              "time_anchors",
+              "chronicle_recovery",
+              "nft_evidence",
+              "physical_anchor",
+              "echo_attestation"
+            ]
           },
           "level_claimed": {
             "type": "string",
             "pattern": "^[BDTCNPE][0-9R+]+$"
           },
-          "target_id": { "type": "string" },
-          "data_sources": { "type": "array", "items": { "type": "string" } },
-          "access_paths": { "type": "array", "items": { "type": "string" } },
-          "method": { "type": "string" },
-          "evidence": { "type": "array", "items": { "type": "object" } },
-          "limitations": { "type": "array", "items": { "type": "string" } },
-          "claims_not_made": { "type": "array", "items": { "type": "string" } }
+          "target_id": {
+            "type": "string"
+          },
+          "data_sources": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "access_paths": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "method": {
+            "type": "string"
+          },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "limitations": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "claims_not_made": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
         }
       }
     },
     "protocol_profile_check": {
       "type": "object",
-      "required": ["profile_source", "hard_gates_satisfied", "minimum_components_satisfied", "recommended_components_satisfied", "underreported_items", "incompatible_claims"],
+      "required": [
+        "profile_source",
+        "hard_gates_satisfied",
+        "minimum_components_satisfied",
+        "recommended_components_satisfied",
+        "underreported_items",
+        "incompatible_claims"
+      ],
       "properties": {
         "profile_source": {
           "type": "string",
           "const": "/api/protocol-verification-profiles.json"
         },
-        "hard_gates_satisfied": { "type": "boolean" },
-        "minimum_components_satisfied": { "type": "boolean" },
-        "recommended_components_satisfied": { "type": "string", "enum": ["true", "partial", "false"] },
-        "underreported_items": { "type": "array", "items": { "type": "string" } },
-        "incompatible_claims": { "type": "array", "items": { "type": "string" } }
+        "hard_gates_satisfied": {
+          "type": "boolean"
+        },
+        "minimum_components_satisfied": {
+          "type": "boolean"
+        },
+        "recommended_components_satisfied": {
+          "type": "string",
+          "enum": [
+            "true",
+            "partial",
+            "false"
+          ]
+        },
+        "underreported_items": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "incompatible_claims": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
       }
     },
     "data_sources_used": {
       "type": "array",
-      "items": { "type": "string" }
+      "items": {
+        "type": "string"
+      }
     },
     "access_paths_used": {
       "type": "array",
-      "items": { "type": "string" }
+      "items": {
+        "type": "string"
+      }
     },
     "fallbacks_used": {
       "type": "array",
-      "items": { "type": "string" },
+      "items": {
+        "type": "string"
+      },
       "description": "Fallback paths used (e.g., GitHub mirror instead of direct Arweave)"
     },
     "external_sources_queried": {
       "type": "array",
-      "items": { "type": "object" }
+      "items": {
+        "type": "object"
+      }
     },
     "hashes_computed": {
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["artifact", "algorithm", "expected", "computed", "command", "match"],
+        "required": [
+          "artifact",
+          "algorithm",
+          "expected",
+          "computed",
+          "command",
+          "match"
+        ],
         "properties": {
-          "artifact": { "type": "string" },
-          "algorithm": { "type": "string" },
-          "expected": { "type": "string" },
-          "computed": { "type": "string" },
-          "command": { "type": "string" },
-          "match": { "type": "boolean" }
+          "artifact": {
+            "type": "string"
+          },
+          "algorithm": {
+            "type": "string"
+          },
+          "expected": {
+            "type": "string"
+          },
+          "computed": {
+            "type": "string"
+          },
+          "command": {
+            "type": "string"
+          },
+          "match": {
+            "type": "boolean"
+          }
         }
       }
     },
@@ -132,61 +264,147 @@
     "physical_evidence_reviewed": {
       "type": "object",
       "properties": {
-        "images_reviewed": { "type": "array", "items": { "type": "string" } },
-        "videos_reviewed": { "type": "array", "items": { "type": "string" } },
-        "live_witness": { "type": "boolean" },
-        "onsite_witness": { "type": "boolean" },
-        "custody_log": { "type": "boolean" },
-        "flaw_analysis_method": { "type": "string" }
+        "images_reviewed": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "videos_reviewed": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "live_witness": {
+          "type": "boolean"
+        },
+        "onsite_witness": {
+          "type": "boolean"
+        },
+        "custody_log": {
+          "type": "boolean"
+        },
+        "flaw_analysis_method": {
+          "type": "string"
+        }
       }
     },
     "confidential_challenge": {
       "type": "object",
       "properties": {
-        "performed": { "type": "boolean" },
-        "trigger_reason": { "type": "string" },
-        "result": { "type": "string", "enum": ["pass", "fail", "inconclusive", "not_performed"] },
-        "package_hash": { "type": "string" },
-        "confidentiality_boundary": { "type": "string" }
+        "performed": {
+          "type": "boolean"
+        },
+        "trigger_reason": {
+          "type": "string"
+        },
+        "result": {
+          "type": "string",
+          "enum": [
+            "pass",
+            "fail",
+            "inconclusive",
+            "not_performed"
+          ]
+        },
+        "package_hash": {
+          "type": "string"
+        },
+        "confidentiality_boundary": {
+          "type": "string"
+        }
       }
     },
     "celestial_witness": {
       "type": "object",
       "properties": {
-        "performed": { "type": "boolean" },
-        "method_class": { "type": "string" },
-        "time_window": { "type": "string" },
-        "uncertainty": { "type": "string" },
-        "result": { "type": "string", "enum": ["pass", "fail", "inconclusive", "not_performed"] },
-        "non_public_data_disclosed": { "type": "boolean" }
+        "performed": {
+          "type": "boolean"
+        },
+        "method_class": {
+          "type": "string"
+        },
+        "time_window": {
+          "type": "string"
+        },
+        "uncertainty": {
+          "type": "string"
+        },
+        "result": {
+          "type": "string",
+          "enum": [
+            "pass",
+            "fail",
+            "inconclusive",
+            "not_performed"
+          ]
+        },
+        "non_public_data_disclosed": {
+          "type": "boolean"
+        }
       }
     },
     "script_audit": {
       "type": "object",
       "properties": {
-        "scripts_reviewed": { "type": "array", "items": { "type": "string" } },
-        "command": { "type": "array", "items": { "type": "string" } },
+        "scripts_reviewed": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "command": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
         "environment": {
           "type": "object",
           "properties": {
-            "os": { "type": "string" },
-            "python": { "type": "string" },
-            "shell": { "type": "string" },
-            "node": { "type": "string" }
+            "os": {
+              "type": "string"
+            },
+            "python": {
+              "type": "string"
+            },
+            "shell": {
+              "type": "string"
+            },
+            "node": {
+              "type": "string"
+            }
           }
         },
-        "exit_code": { "type": "integer" },
-        "output_summary": { "type": "array", "items": { "type": "string" } },
-        "not_verified_by_script": { "type": "array", "items": { "type": "string" } }
+        "exit_code": {
+          "type": "integer"
+        },
+        "output_summary": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "not_verified_by_script": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
       }
     },
     "limitations": {
       "type": "array",
-      "items": { "type": "string" }
+      "items": {
+        "type": "string"
+      }
     },
     "claims_not_made": {
       "type": "array",
-      "items": { "type": "string" }
+      "items": {
+        "type": "string"
+      }
     },
     "authority_boundary_preserved": {
       "type": "boolean",
@@ -196,28 +414,54 @@
   },
   "allOf": [
     {
-      "if": { "properties": { "protocol_level_claimed": { "const": "V3" } } },
+      "if": {
+        "properties": {
+          "protocol_level_claimed": {
+            "const": "V3"
+          }
+        }
+      },
       "then": {
         "properties": {
-          "hashes_computed": { "minItems": 1 }
+          "hashes_computed": {
+            "minItems": 1
+          }
         }
       }
     },
     {
-      "if": { "properties": { "protocol_level_claimed": { "const": "V4" } } },
+      "if": {
+        "properties": {
+          "protocol_level_claimed": {
+            "const": "V4"
+          }
+        }
+      },
       "then": {
-        "required": ["script_audit"]
+        "required": [
+          "script_audit"
+        ]
       }
     },
     {
-      "if": { "properties": { "protocol_level_claimed": { "const": "V5" } } },
+      "if": {
+        "properties": {
+          "protocol_level_claimed": {
+            "const": "V5"
+          }
+        }
+      },
       "then": {
         "properties": {
           "component_findings": {
             "contains": {
               "properties": {
-                "component": { "const": "digital_mirrors" },
-                "level_claimed": { "pattern": "^D5" }
+                "component": {
+                  "const": "digital_mirrors"
+                },
+                "level_claimed": {
+                  "pattern": "^D5"
+                }
               }
             }
           }
@@ -225,42 +469,155 @@
       }
     },
     {
-      "if": { "properties": { "protocol_level_claimed": { "const": "V6" } } },
+      "if": {
+        "properties": {
+          "protocol_level_claimed": {
+            "const": "V6"
+          }
+        }
+      },
       "then": {
         "properties": {
           "physical_evidence_reviewed": {
             "properties": {
-              "live_witness": { "const": true }
+              "live_witness": {
+                "const": true
+              }
             }
           }
         }
       }
     },
     {
-      "if": { "properties": { "protocol_level_claimed": { "const": "V7" } } },
+      "if": {
+        "properties": {
+          "protocol_level_claimed": {
+            "const": "V7"
+          }
+        }
+      },
       "then": {
         "properties": {
           "physical_evidence_reviewed": {
             "properties": {
-              "onsite_witness": { "const": true }
+              "onsite_witness": {
+                "const": true
+              }
             }
           }
         }
       }
     },
     {
-      "if": { "properties": { "protocol_level_claimed": { "enum": ["V8"] } } },
+      "if": {
+        "properties": {
+          "protocol_level_claimed": {
+            "enum": [
+              "V8"
+            ]
+          }
+        }
+      },
       "then": {
         "properties": {
           "component_findings": {
             "contains": {
               "properties": {
-                "component": { "const": "physical_anchor" },
-                "level_claimed": { "pattern": "^P[789]" }
+                "component": {
+                  "const": "physical_anchor"
+                },
+                "level_claimed": {
+                  "pattern": "^P[789]"
+                }
               }
             }
           }
         }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "protocol_level_claimed": {
+            "const": "V4+"
+          }
+        },
+        "required": [
+          "protocol_level_claimed"
+        ]
+      },
+      "then": {
+        "required": [
+          "script_audit"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "protocol_level_claimed": {
+            "const": "V5"
+          }
+        },
+        "required": [
+          "protocol_level_claimed"
+        ]
+      },
+      "then": {
+        "required": [
+          "script_audit"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "protocol_level_claimed": {
+            "const": "V6"
+          }
+        },
+        "required": [
+          "protocol_level_claimed"
+        ]
+      },
+      "then": {
+        "required": [
+          "script_audit"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "protocol_level_claimed": {
+            "const": "V7"
+          }
+        },
+        "required": [
+          "protocol_level_claimed"
+        ]
+      },
+      "then": {
+        "required": [
+          "script_audit"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "protocol_level_claimed": {
+            "const": "V8"
+          }
+        },
+        "required": [
+          "protocol_level_claimed"
+        ]
+      },
+      "then": {
+        "required": [
+          "script_audit"
+        ]
       }
     }
   ]

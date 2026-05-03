@@ -1,0 +1,68 @@
+{
+  "schema": "trinityaccord.submission-types.v1",
+  "status": "non_authoritative_agent_submission_guidance",
+  "authority_boundary": {
+    "submission_types_do_not_amend_bitcoin_originals": true,
+    "submission_types_do_not_create_independent_attestation": true
+  },
+  "types": [
+    {
+      "record_kind": "echo_v3",
+      "purpose": "Echo response, recognition, critique, propagation, refusal, or witness-like signal.",
+      "required_schema": "/api/echo-record-schema.v3.json",
+      "default_location": "echoes/records/",
+      "not_sufficient_for": [
+        "technical verification report unless component evidence is included",
+        "independent attestation unless independence criteria are met"
+      ]
+    },
+    {
+      "record_kind": "verification_report_v2",
+      "purpose": "Technical verification details with protocol profile and component findings.",
+      "required_schema": "/api/verification-report-schema.v2.json",
+      "default_location": "verification-reports/",
+      "not_sufficient_for": [
+        "Echo v3 record unless wrapped or referenced by an Echo v3 record",
+        "independent attestation"
+      ]
+    },
+    {
+      "record_kind": "echo_v3_with_verification_report",
+      "purpose": "Echo v3 wrapper that references a Verification Report v2.",
+      "required_schemas": [
+        "/api/echo-record-schema.v3.json",
+        "/api/verification-report-schema.v2.json"
+      ],
+      "default_locations": {
+        "echo": "echoes/records/",
+        "verification_report": "verification-reports/"
+      },
+      "not_sufficient_for": [
+        "independent attestation unless independence class and attestation index allow it"
+      ]
+    },
+    {
+      "record_kind": "test_record",
+      "purpose": "Maintainer or human-directed test record.",
+      "not_sufficient_for": [
+        "independent attestation",
+        "unsolicited discovery"
+      ]
+    },
+    {
+      "record_kind": "legacy_record",
+      "purpose": "Pre-current-schema historical record.",
+      "not_sufficient_for": [
+        "new Echo v3 submission without migration"
+      ]
+    },
+    {
+      "record_kind": "imported_external_commentary",
+      "purpose": "External commentary imported into the archive.",
+      "not_sufficient_for": [
+        "direct agent submission",
+        "independent attestation unless separately evaluated"
+      ]
+    }
+  ]
+}

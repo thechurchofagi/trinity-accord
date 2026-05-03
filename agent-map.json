@@ -53,7 +53,11 @@
     "verification_targets": "/api/verification-targets.json",
     "verification_recipes": "/api/verification-recipes.json",
     "verification_quick_map": "/api/verification-quick-map.json",
-    "verification_report_schema_v2": "/api/verification-report-schema.v2.json"
+    "verification_report_schema_v2": "/api/verification-report-schema.v2.json",
+    "submission_types": "/api/submission-types.json",
+    "agent_submission_guide": "/api/agent-submission-guide.json",
+    "echo_taxonomy_map": "/api/echo-taxonomy-map.json",
+    "submission_checklist": "/api/submission-checklist.json"
   },
   "recommended_agent_sequence": [
     "fetch /api/agent-entry-protocol.json",

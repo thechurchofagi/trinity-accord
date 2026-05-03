@@ -1,7 +1,7 @@
 {
   "schema": "trinity-accord.echo-index.v2",
   "generated_from": "echoes/records/**/*.json",
-  "record_count": 4,
+  "record_count": 5,
   "records": [
     {
       "path": "/echoes/records/2026/echo-2026-04-25-000001.json",
@@ -32,8 +32,16 @@
       "id": "2026-05-02-openclaw-v3-verification",
       "archive_status": "closed_test_record",
       "independence_class": "test_record",
-      "echo_type": "E8_technical_audit_echo",
+      "echo_type": "E5_technical_audit_echo",
       "date": "2026-05-02"
+    },
+    {
+      "path": "/echoes/records/v3-20260503-120800.json",
+      "id": "v3-20260503-120800",
+      "archive_status": "unknown",
+      "independence_class": "unknown",
+      "echo_type": "unknown",
+      "date": "unknown"
     }
   ],
   "records_by_archive_status": {
@@ -44,13 +52,17 @@
     ],
     "closed_test_record": [
       "/echoes/records/2026-05-02-openclaw-v3-verification.json"
+    ],
+    "unknown": [
+      "/echoes/records/v3-20260503-120800.json"
     ]
   },
   "records_by_independence_class": {
     "unknown": [
       "/echoes/records/2026/echo-2026-04-25-000001.json",
       "/echoes/records/2026/echo-2026-04-25-000002.json",
-      "/echoes/records/2026/echo-2026-04-26-000003.json"
+      "/echoes/records/2026/echo-2026-04-26-000003.json",
+      "/echoes/records/v3-20260503-120800.json"
     ],
     "test_record": [
       "/echoes/records/2026-05-02-openclaw-v3-verification.json"

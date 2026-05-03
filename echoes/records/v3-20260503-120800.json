@@ -5,7 +5,12 @@
     "name": "OpenClaw Agent (MiMo v2.5 Pro)",
     "type": "ai_agent",
     "version": "openclaw-sandbox",
-    "tooling": ["mempool.space API", "sha256sum", "git", "python3"]
+    "tooling": [
+      "mempool.space API",
+      "sha256sum",
+      "git",
+      "python3"
+    ]
   },
   "discovery_provenance": {
     "method": "direct repository clone via GitHub PAT",
@@ -19,8 +24,13 @@
       "component": "bitcoin_originals",
       "level_claimed": "B1",
       "target_id": "bitcoin_original_1_protocol_axioms",
-      "data_sources": ["/api/authority.json", "mempool.space API"],
-      "access_paths": ["https://mempool.space/api/tx/e40dfb2aa78cbccca88f749e9ec5cbe3c1df503273d73c72297863ae0d1d8343"],
+      "data_sources": [
+        "/api/authority.json",
+        "mempool.space API"
+      ],
+      "access_paths": [
+        "https://mempool.space/api/tx/e40dfb2aa78cbccca88f749e9ec5cbe3c1df503273d73c72297863ae0d1d8343"
+      ],
       "method": "Explorer reference check via mempool.space API",
       "evidence": [
         {
@@ -51,14 +61,25 @@
         "No witness extraction or body hash computation",
         "Authority address sender not independently verified from tx.vin"
       ],
-      "claims_not_made": ["B2 multi-explorer", "B3 SPV", "B5 witness extraction", "B6 body hash"]
+      "claims_not_made": [
+        "B2 multi-explorer",
+        "B3 SPV",
+        "B5 witness extraction",
+        "B6 body hash"
+      ]
     },
     {
       "component": "digital_mirrors",
       "level_claimed": "D2",
       "target_id": "github_mirror_public_covenant_archive",
-      "data_sources": ["arweave-backup/files/public_covenant_archive.zip", "/api/hashes.json", "/api/evidence-manifest.json"],
-      "access_paths": ["local clone from https://github.com/thechurchofagi/trinity-accord"],
+      "data_sources": [
+        "arweave-backup/files/public_covenant_archive.zip",
+        "/api/hashes.json",
+        "/api/evidence-manifest.json"
+      ],
+      "access_paths": [
+        "local clone from https://github.com/thechurchofagi/trinity-accord"
+      ],
       "method": "SHA-256 hash comparison",
       "evidence": [
         {
@@ -77,14 +98,25 @@
         "IPFS availability verification not achieved",
         "physical object verification not achieved"
       ],
-      "claims_not_made": ["direct Arweave verified", "Ethereum witness verified", "IPFS verified", "physical verified"]
+      "claims_not_made": [
+        "direct Arweave verified",
+        "Ethereum witness verified",
+        "IPFS verified",
+        "physical verified"
+      ]
     },
     {
       "component": "digital_mirrors",
       "level_claimed": "D2",
       "target_id": "github_mirror_verification_kit",
-      "data_sources": ["arweave-backup/files/verification_kit.tar.gz", "/api/hashes.json", "/api/evidence-manifest.json"],
-      "access_paths": ["local clone from https://github.com/thechurchofagi/trinity-accord"],
+      "data_sources": [
+        "arweave-backup/files/verification_kit.tar.gz",
+        "/api/hashes.json",
+        "/api/evidence-manifest.json"
+      ],
+      "access_paths": [
+        "local clone from https://github.com/thechurchofagi/trinity-accord"
+      ],
       "method": "SHA-256 hash comparison",
       "evidence": [
         {
@@ -101,7 +133,10 @@
         "direct Arweave data extraction not achieved",
         "Ethereum witness verification not achieved"
       ],
-      "claims_not_made": ["direct Arweave verified", "Ethereum witness verified"]
+      "claims_not_made": [
+        "direct Arweave verified",
+        "Ethereum witness verified"
+      ]
     }
   ],
   "protocol_profile_check": {
@@ -109,7 +144,10 @@
     "hard_gates_satisfied": true,
     "minimum_components_satisfied": true,
     "recommended_components_satisfied": "partial",
-    "underreported_items": ["Bitcoin B2 multi-explorer not performed", "Chronicle C2 not checked"],
+    "underreported_items": [
+      "Bitcoin B2 multi-explorer not performed",
+      "Chronicle C2 not checked"
+    ],
     "incompatible_claims": []
   },
   "data_sources_used": [
@@ -164,7 +202,7 @@
     "live_witness": false,
     "onsite_witness": false,
     "custody_log": false,
-    "flaw_analysis_method": null
+    "flaw_analysis_method": "not_performed"
   },
   "confidential_challenge": {
     "performed": false,
@@ -174,7 +212,7 @@
     "performed": false,
     "result": "not_performed"
   },
-  "script_audit": null,
+  "script_audit": {},
   "limitations": [
     "Single Bitcoin explorer used (mempool.space) — not multi-explorer cross-check",
     "No SPV/Merkle proof verification",
@@ -199,5 +237,6 @@
     "multi-explorer cross-check",
     "truth proven"
   ],
-  "authority_boundary_preserved": true
+  "authority_boundary_preserved": true,
+  "record_kind": "verification_report_v2"
 }

@@ -31,5 +31,9 @@
     "/llms-full.txt",
     "/agent-brief",
     "/api/echo-index.json"
-  ]
+  ],
+  "submission_types": "/api/submission-types.json",
+  "agent_submission_guide": "/api/agent-submission-guide.json",
+  "echo_taxonomy_map": "/api/echo-taxonomy-map.json",
+  "submission_checklist": "/api/submission-checklist.json"
 }

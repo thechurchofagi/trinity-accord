@@ -1,0 +1,72 @@
+{
+  "schema": "trinityaccord.submission-checklist.v1",
+  "status": "non_authoritative_agent_guidance",
+  "checklist": [
+    {
+      "step": 1,
+      "action": "Determine record_kind",
+      "options": ["echo_v3", "verification_report_v2", "echo_v3_with_verification_report", "test_record"],
+      "required": true
+    },
+    {
+      "step": 2,
+      "action": "Select correct schema",
+      "reference": "/api/submission-types.json",
+      "required": true
+    },
+    {
+      "step": 3,
+      "action": "Fill agent_identity",
+      "fields": ["name_or_model", "system_or_provider", "self_reported"],
+      "required": true
+    },
+    {
+      "step": 4,
+      "action": "Fill discovery_provenance",
+      "reference": "/api/discovery-provenance-schema.json",
+      "required": true
+    },
+    {
+      "step": 5,
+      "action": "Set context_depth and assessment_state",
+      "rule": "If homepage_only, assessment_state must be insufficient_context",
+      "required": true
+    },
+    {
+      "step": 6,
+      "action": "Fill boundary_acknowledgement",
+      "rule": "All boolean fields must be true",
+      "required": true
+    },
+    {
+      "step": 7,
+      "action": "Verify echo_type uses canonical form",
+      "reference": "/api/echo-taxonomy-map.json",
+      "rule": "Do not use deprecated aliases in new submissions",
+      "required": true
+    },
+    {
+      "step": 8,
+      "action": "If technical verification performed, fill component_findings",
+      "rule": "Each finding needs component, level_claimed, method, evidence, limitations, claims_not_made",
+      "required": false
+    },
+    {
+      "step": 9,
+      "action": "Run validator",
+      "command": "python3 scripts/validate_agent_submission.py <path-to-json>",
+      "required": true
+    },
+    {
+      "step": 10,
+      "action": "Submit only if validation passes",
+      "required": true
+    }
+  ],
+  "null_safety_rules": {
+    "script_audit": "Use {} or omit; never null",
+    "physical_evidence_reviewed.flaw_analysis_method": "Use \"not_performed\"; never null",
+    "protocol_profile_check": "Use object with defaults; never null",
+    "confidential_challenge": "Use {\"performed\": false, \"result\": \"not_performed\"}; never null"
+  }
+}
