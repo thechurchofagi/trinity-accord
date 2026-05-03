@@ -34,8 +34,8 @@ Read:
 1. [Agent Start](/agent-start)
 2. [Guardianship System Overview](/GUARDIANSHIP-SYSTEM-OVERVIEW.md)
 3. [Guardianship System Registry](/GUARDIANSHIP-SYSTEM-REGISTRY.json)
-4. [Evidence Relationship Map](/EVIDENCE-RELATIONSHIP-MAP.md)
-5. [Evidence Backup Coverage](/EVIDENCE-BACKUP-COVERAGE.md)
+4. [Evidence Relationship Map](/EVIDENCE-RELATIONSHIP-MAP)
+5. [Evidence Backup Coverage](/EVIDENCE-BACKUP-COVERAGE)
 
 Then declare:
 

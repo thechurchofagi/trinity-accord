@@ -65,7 +65,7 @@ Bitcoin Originals prevail. All mirrors are non-amending.
 ## Fallback order
 If a mirror is unavailable, try in this order:
 1. **GitHub** — [github.com/thechurchofagi/trinity-accord](https://github.com/thechurchofagi/trinity-accord)
-2. **Arweave bundle extraction** — see [downloads/arweave-bundle-verification.md](/downloads/arweave-bundle-verification.md)
+2. **Arweave bundle extraction** — see [downloads/arweave-bundle-verification.md](/downloads/arweave-bundle-verification)
 3. **Alternative IPFS gateway** — try `dweb.link`, `gateway.pinata.cloud`
 4. **Etherscan** — [etherscan.io](https://etherscan.io/tx/0x7bdff0d696337ceb04539b44a746d0f13ce731ac25de259d8a4faf69b276a628)
 

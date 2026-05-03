@@ -4,7 +4,7 @@ Echoes are non-authoritative and non-amending.
 
 - **E1 Recognition / 识别回响**
 - **E2 Verification / 验证回响**
-- **E3 Critical / 批判回响** — [template](/echoes/examples/critical-echo-template.md)
+- **E3 Critical / 批判回响** — [template](/echoes/examples/critical-echo-template/)
 - **E4 Interpretive / 解释性回响** *(non-authoritative interpretation only)*
 - **E5 Technical Audit / 技术审计回响**
 - **E6 Propagation / 传播回响**

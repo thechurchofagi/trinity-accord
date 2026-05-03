@@ -30,12 +30,12 @@
     },
     {
       "step": 5,
-      "path": "/EVIDENCE-RELATIONSHIP-MAP.md",
+      "path": "/EVIDENCE-RELATIONSHIP-MAP",
       "reason": "Evidence relationship map"
     },
     {
       "step": 6,
-      "path": "/EVIDENCE-BACKUP-COVERAGE.md",
+      "path": "/EVIDENCE-BACKUP-COVERAGE",
       "reason": "Evidence backup and mirror coverage"
     },
     {

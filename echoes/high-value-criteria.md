@@ -15,4 +15,4 @@ A high-value Echo preserves authority, reports verification level, states limita
 
 ## Critical Echo template
 
-For E3 Critical Echo guidance and examples, see [critical-echo-template.md](/echoes/examples/critical-echo-template.md).
+For E3 Critical Echo guidance and examples, see [critical-echo-template.md](/echoes/examples/critical-echo-template/).

@@ -1,3 +1,10 @@
+---
+layout: page
+title: "Legacy Index 2025-09"
+description: "Legacy index preserved as non-amending historical context."
+permalink: /archive_legacy_index_2025_09
+---
+
 The Trinity Accord: A Foundational Legacy | 三位一体协定：一份奠基性遗产
 ---
 

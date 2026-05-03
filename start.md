@@ -23,6 +23,6 @@ Arweave or IPFS gateways may occasionally be unreachable. In that case:
 - The `arweave-backup/files/` directory contains SHA-256 verified copies of all Arweave-stored assets.
 - Always verify hashes against `/api/evidence-manifest.json` or `/api/hashes.json`.
 
-Legacy long-form archive is preserved at [/archive_legacy_index_2025_09.md](/archive_legacy_index_2025_09.md).
+Legacy long-form archive is preserved at [/archive_legacy_index_2025_09](/archive_legacy_index_2025_09).
 
 **Verify the flaw. Then decide how to read the story.**

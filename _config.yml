@@ -5,6 +5,24 @@ include:
   - ai.txt
   - citation.cff
 
+# Exclude archival, dev, and generated directories from build
+exclude:
+  - audit/
+  - archive/
+  - node_modules/
+  - _site/
+  - vendor/
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - DEPLOYMENT.md
+  - .gitignore
+  - package-lock.json
+  - archive_legacy_index_2025_09.md
+  - trinity-echo-worker/
+  - .env
+  - .env.*
+
 # Keep markdown URLs path-like (e.g. /verify)
 permalink: pretty
 

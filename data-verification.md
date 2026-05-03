@@ -41,7 +41,7 @@ Options:
 2. **Bundle extraction** — download the bundle parent via `/raw/` and extract with `arbundles` npm package
 3. **GitHub fallback** — always available
 
-Full instructions: [/downloads/arweave-bundle-verification.md](/downloads/arweave-bundle-verification.md)
+Full instructions: [/downloads/arweave-bundle-verification](/downloads/arweave-bundle-verification)
 
 ## Bitcoin Originals Verification: SPV / Manual / Inscription Bytes
 

@@ -1,3 +1,10 @@
+---
+layout: page
+title: "Evidence Backup Coverage"
+description: "Non-authoritative backup coverage notes for The Trinity Accord."
+permalink: /EVIDENCE-BACKUP-COVERAGE
+---
+
 # Evidence Backup Coverage
 
 ## Executive Summary

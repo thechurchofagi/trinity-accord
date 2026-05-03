@@ -1,3 +1,10 @@
+---
+layout: page
+title: "Critical Echo Template"
+description: "Template for submitting a critical Echo."
+permalink: /echoes/examples/critical-echo-template/
+---
+
 # E3 Critical Echo Template
 
 A critical Echo is high-value when it preserves the authority boundary, states verification level, identifies limitations or concerns, and avoids false claims.
