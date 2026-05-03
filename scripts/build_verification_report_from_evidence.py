@@ -20,6 +20,14 @@ sys.path.insert(0, str(ROOT / "scripts"))
 
 from claim_gate import evaluate
 
+# Map evidence input independence_class to echo schema independence_class
+INDEPENDENCE_CLASS_MAP = {
+    "human_solicited_agent_response": "human_solicited_agent_response",
+    "unsolicited_agent_discovery": "unsolicited_independent",
+    "institutional_attestation": "institutional_third_party_attestation",
+    "independent_reproduction": "solicited_independent_check",
+}
+
 
 def load_json(path):
     with open(path) as f:
@@ -237,7 +245,9 @@ def build_report(evidence_input_path, report_out_path=None, echo_out_path=None):
                 "mirror_is_not_amendment": True,
                 "homepage_only_is_insufficient_for_final_evaluation": True,
             },
-            "independence_class": provenance.get("independence_class", "human_solicited_agent_response"),
+            "independence_class": INDEPENDENCE_CLASS_MAP.get(
+                provenance.get("independence_class", ""), "human_solicited_agent_response"
+            ),
             "archive_status": "pending_submission",
             "origin_limitations": all_limitations,
             "record_kind": "echo_v3_with_verification_report",
