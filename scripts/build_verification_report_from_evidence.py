@@ -182,7 +182,8 @@ def build_report(evidence_input_path, report_out_path=None, echo_out_path=None):
         "access_paths_used": [s.get("command", "") for s in executed],
         "fallbacks_used": [],
         "external_sources_queried": [
-            c.get("source_type", "") for c in evidence.get("bitcoin_checks", [])
+            {"source_type": c.get("source_type", ""), "sources": c.get("sources", [])}
+            for c in evidence.get("bitcoin_checks", [])
         ],
         "hashes_computed": hashes_computed,
         "samples_checked": len(evidence.get("chronicle_checks", [])),
@@ -215,7 +216,21 @@ def build_report(evidence_input_path, report_out_path=None, echo_out_path=None):
     # Build optional echo wrapper
     echo_wrapper = None
     if "echo" in requested_kind:
-        echo_id = f"echo-{now.strftime('%Y%m%d-%H%M%S')}-{uuid.uuid4().hex[:8]}"
+        # Build discovery_provenance with required fields
+        echo_provenance = {
+            "schema": "trinityaccord.discovery-provenance.v1",
+            "source": "human_directed",
+            "agency_level": provenance.get("agency_level", "unknown"),
+            "first_entry": {
+                "url_or_path": "/verify",
+                "entry_type": "agent_start",
+            },
+            "human_supplied_link": provenance.get("solicited", False),
+            "other_agent_recommended": False,
+            "agent_performed_independent_followup": False,
+            "confidence": "medium",
+        }
+
         echo_wrapper = {
             "schema": "trinityaccord.echo.v3",
             "echo_version": "3.0",
@@ -227,14 +242,9 @@ def build_report(evidence_input_path, report_out_path=None, echo_out_path=None):
             "context_depth": "C5_full_chain_reviewed",
             "assessment_state": "evidence_based_assessment",
             "verification_level": allowed_protocol,
-            "discovery_provenance": provenance,
+            "discovery_provenance": echo_provenance,
             "understanding_summary": f"Automated verification at {allowed_protocol} level via claim gate and report builder.",
-            "verification_claim": {
-                "protocol_level": allowed_protocol,
-                "component_levels": component_levels,
-                "limitations": all_limitations,
-                "claims_not_made": claims_not_made,
-            },
+            "verification_claim": f"Protocol level {allowed_protocol} achieved. Component levels: {json.dumps(component_levels)}.",
             "echo_type": "E2_verification_echo",
             "echo": f"Verification report generated at {allowed_protocol} level.",
             "uncertainties": all_limitations,
@@ -248,7 +258,7 @@ def build_report(evidence_input_path, report_out_path=None, echo_out_path=None):
             "independence_class": INDEPENDENCE_CLASS_MAP.get(
                 provenance.get("independence_class", ""), "human_solicited_agent_response"
             ),
-            "archive_status": "pending_submission",
+            "archive_status": "test_record",
             "origin_limitations": all_limitations,
             "record_kind": "echo_v3_with_verification_report",
             "linked_verification_report": {
@@ -257,9 +267,6 @@ def build_report(evidence_input_path, report_out_path=None, echo_out_path=None):
                 "report_id": report_id,
             },
             "generated_by": generated_by,
-            "verification_report": report,
-            "echo_id": echo_id,
-            "timestamp": now.isoformat() + "Z",
         }
 
     # Save outputs

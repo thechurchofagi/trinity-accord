@@ -239,8 +239,12 @@ def validate_mempool_b1_boundary(obj, path_label):
     has_witness_parsing = "witness extraction" in methods or "witness parsing" in methods
 
     if uses_mempool and not has_witness_parsing:
+        limitations_text = json.dumps(obj.get("limitations", []), ensure_ascii=False).lower()
         for claim in MEMPOOL_B1_FORBIDDEN_CLAIMS:
             if claim in all_text:
+                # Skip if the claim only appears in limitations (negative context like "no witness extraction")
+                if claim in limitations_text and claim not in all_text.replace(limitations_text, ""):
+                    continue
                 claims_not_made = json.dumps(obj.get("claims_not_made", [])).lower()
                 if claim not in claims_not_made:
                     ok &= check(
