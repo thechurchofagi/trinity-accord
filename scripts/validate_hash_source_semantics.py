@@ -11,9 +11,12 @@ Usage:
 import json
 import sys
 import glob
+import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+
+SHA256_RE = re.compile(r'^[a-f0-9]{64}$')
 
 APPROVED_D2_SOURCES = {
     "api/hashes.json",
@@ -85,6 +88,37 @@ def validate_hashes_computed(obj, path_label):
 
         ok &= check(src is not None, f"{label} has expected_hash_source")
         ok &= check(cls is not None, f"{label} has expected_hash_authority_class")
+
+        # Rule: SHA-256 format enforcement for D2/V3/V4 hash claims
+        expected_val = h.get("expected", "")
+        computed_val = h.get("computed", "")
+        if claims_d2 or protocol_level in ("V3", "V4", "V4+"):
+            if expected_val and not SHA256_RE.match(str(expected_val)):
+                ok &= check(
+                    False,
+                    f"{label} expected is not a valid SHA-256: '{expected_val}'",
+                    "expected must be 64-char lowercase hex for D2/V3/V4 claims"
+                )
+            if computed_val and not SHA256_RE.match(str(computed_val)):
+                ok &= check(
+                    False,
+                    f"{label} computed is not a valid SHA-256: '{computed_val}'",
+                    "computed must be 64-char lowercase hex for D2/V3/V4 claims"
+                )
+
+        # Rule: D2 repository snapshot requires scope_class and repository_manifest_hash
+        artifact_class = h.get("artifact_class", "")
+        if artifact_class == "repository_snapshot" and claims_d2:
+            if h.get("expected_hash_authority_class") != "repository_manifest_hash":
+                ok &= check(
+                    False,
+                    f"{label} repository snapshot D2 requires expected_hash_authority_class=repository_manifest_hash"
+                )
+            if h.get("scope_class") != "repository_snapshot_integrity":
+                ok &= check(
+                    False,
+                    f"{label} repository snapshot D2 requires scope_class=repository_snapshot_integrity"
+                )
 
         if cls is None:
             continue

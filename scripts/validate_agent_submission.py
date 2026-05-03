@@ -262,6 +262,65 @@ def validate_script_audit(obj, path_label):
         if isinstance(script_audit, dict):
             for field in ["scripts_reviewed", "command", "environment", "exit_code", "output_summary"]:
                 ok &= check(field in script_audit, f"{path_label} script_audit.{field} present")
+
+            # Rule F2: V4 scope_class cannot be independent_reproduction
+            scope = script_audit.get("scope_class", "")
+            if level == "V4" and scope == "independent_reproduction":
+                ok &= check(
+                    False,
+                    f"{path_label} V4 cannot use scope_class=independent_reproduction"
+                )
+
+            # Rule F3: V4+ requires independent tool if only official scripts
+            if level == "V4+":
+                scripts = script_audit.get("scripts", [])
+                if isinstance(scripts, list) and scripts:
+                    all_official = all(s.get("official", True) for s in scripts if isinstance(s, dict))
+                    has_independent = any(
+                        s.get("scope_class") == "independent_reproduction" or s.get("independent", False)
+                        for s in scripts if isinstance(s, dict)
+                    )
+                    if all_official and not has_independent:
+                        ok &= check(
+                            False,
+                            f"{path_label} V4+ requires independent tool/implementation"
+                        )
+
+            # Rule F4: Script count consistency
+            scripts_list = script_audit.get("scripts", [])
+            if isinstance(scripts_list, list):
+                executed_count = script_audit.get("scripts_executed", 0)
+                actual_executed = sum(
+                    1 for s in scripts_list
+                    if isinstance(s, dict) and s.get("executed") and s.get("exists", True)
+                )
+                if executed_count and executed_count != actual_executed:
+                    ok &= check(
+                        False,
+                        f"{path_label} script_audit.scripts_executed mismatch",
+                        f"claimed {executed_count}, actual {actual_executed}"
+                    )
+
+                # Rule F5: Missing scripts not counted
+                not_found = [
+                    s for s in scripts_list
+                    if isinstance(s, dict) and not s.get("exists", True)
+                ]
+                for nf in not_found:
+                    if nf.get("executed"):
+                        ok &= check(
+                            False,
+                            f"{path_label} missing script counted as executed: {nf.get('path', '?')}"
+                        )
+
+            # Rule F6: Non-blocking failure prevents all_green
+            all_green = script_audit.get("all_validators_green")
+            non_blocking = script_audit.get("non_blocking_failures", [])
+            if all_green is True and non_blocking:
+                ok &= check(
+                    False,
+                    f"{path_label} all_validators_green=true but non_blocking_failures exist"
+                )
     return ok
 
 

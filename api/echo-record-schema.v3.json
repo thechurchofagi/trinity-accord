@@ -292,6 +292,27 @@
           "type": "string"
         }
       }
+    },
+    "claim_gate_output": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "description": "Output from claim gate evaluation, if echo was generated via claim gate",
+      "properties": {
+        "status": {
+          "type": "string"
+        },
+        "allowed_protocol_level": {
+          "type": "string"
+        },
+        "required_downgrades": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      }
     }
   },
   "allOf": [

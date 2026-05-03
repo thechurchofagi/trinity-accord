@@ -449,6 +449,36 @@
       "type": "boolean",
       "const": true,
       "description": "Must be true. If false, the report is invalid."
+    },
+    "claim_gate_output": {
+      "type": "object",
+      "description": "Output from claim gate evaluation, if report was generated via claim gate",
+      "properties": {
+        "status": {
+          "type": "string"
+        },
+        "allowed_protocol_level": {
+          "type": "string"
+        },
+        "required_downgrades": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "blocking_failures": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "non_blocking_limitations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
     }
   },
   "allOf": [

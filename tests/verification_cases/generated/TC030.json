@@ -43,8 +43,8 @@
     {
       "artifact": "arweave-backup/files/verification_kit.tar.gz",
       "algorithm": "SHA-256",
-      "expected": "abc123",
-      "computed": "abc123",
+      "expected": "ef816480f77f30405378800807b42bff0a854b83a8f77793a0e0adf0944a8263",
+      "computed": "ef816480f77f30405378800807b42bff0a854b83a8f77793a0e0adf0944a8263",
       "command": "sha256sum",
       "match": true,
       "expected_hash_source": "api/evidence-manifest.json",

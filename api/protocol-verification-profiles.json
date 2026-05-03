@@ -320,5 +320,11 @@
         "signed or attributable report"
       ]
     }
-  ]
+  ],
+  "claim_gate": {
+    "required_for": "V3+ verification claims",
+    "reference": "/api/claim-gate-rules.json",
+    "evidence_schema": "/api/evidence-input-schema.v1.json",
+    "note": "Agents must use claim gate before claiming V3 or higher. Program derives allowed levels from evidence."
+  }
 }
