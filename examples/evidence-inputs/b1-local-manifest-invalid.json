@@ -1,0 +1,38 @@
+{
+  "schema": "trinityaccord.evidence-input.v1",
+  "agent": {
+    "name": "Example Agent",
+    "model_or_system": "Example Model"
+  },
+  "provenance": {
+    "solicited": true,
+    "independence_class": "human_solicited_agent_response",
+    "agency_level": "A1_human_gave_exact_url"
+  },
+  "requested_record_kind": "echo_v3_with_verification_report",
+  "evidence": {
+    "scripts": [],
+    "hashes": [],
+    "bitcoin_checks": [
+      {
+        "source_type": "local_manifest",
+        "sources": ["api/authority.json"],
+        "txids_checked": [],
+        "inscription_ids_checked": [],
+        "authority_address_checked": false,
+        "method": "read local manifest",
+        "raw_witness_extracted": false,
+        "body_hash_reproduced": false
+      }
+    ],
+    "digital_mirror_checks": [],
+    "repository_snapshot_checks": [],
+    "time_anchor_checks": [],
+    "chronicle_checks": [],
+    "nft_checks": [],
+    "physical_checks": [],
+    "echo_context": {}
+  },
+  "limitations": ["Only local manifest read — cannot claim B1"],
+  "claims_requested_by_agent": ["B1"]
+}

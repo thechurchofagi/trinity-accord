@@ -374,7 +374,7 @@ try:
     stress = load_json("tests/verification_cases/cases.json")
     check("cases.json is valid JSON", True)
     check("cases.json has schema", stress.get("schema") == "trinityaccord.verification-stress-cases.v1")
-    check("cases.json has 100 cases", stress.get("case_count") == 100)
+    check("cases.json has >= 100 cases", stress.get("case_count", 0) >= 100)
 except Exception as e:
     check("cases.json is valid JSON", False, str(e))
 

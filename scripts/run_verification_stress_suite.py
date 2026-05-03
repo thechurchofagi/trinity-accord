@@ -210,6 +210,35 @@ def main():
             results[actual] += 1
             continue
 
+        # Handle claim_gate / report_builder script-based cases
+        if case.get("script"):
+            import subprocess
+            script_path = ROOT / case["script"]
+            if script_path.exists():
+                try:
+                    proc = subprocess.run(
+                        [sys.executable, str(script_path)],
+                        cwd=ROOT, text=True, capture_output=True, timeout=60
+                    )
+                    actual_pass = proc.returncode == 0
+                except Exception:
+                    actual_pass = False
+            else:
+                actual_pass = False
+            actual = "PASS" if actual_pass else "FAIL"
+            if actual == expected:
+                status = "PASS"
+                category_results[category]["pass"] += 1
+            else:
+                status = "FAIL"
+                unexpected.append(f"{case_id}: expected {expected}, got {actual}")
+            direction = "expected-pass" if expected == "PASS" else "expected-fail"
+            if expected == "FAIL" and actual == "FAIL":
+                direction = "expected-fail rejected"
+            print(f"{status} {direction} case: {case_id} ({case.get('note', '')})")
+            results[actual] += 1
+            continue
+
         # Write payload to temp file and run validators
         if not payload:
             print(f"SKIP no-payload case: {case_id}")
@@ -297,6 +326,8 @@ def main():
     print("  N-level: N2 N4 N7")
     print("  P-level: P0 P1 P2 P3 P4 P5 P7 P8")
     print("  E-level: E1 E2 legacy/deprecated")
+    print("  claim_gate: CG001-CG046, V4/V4+ guards, component derivation, script audit, downgrades")
+    print("  report_builder: RB001-RB012")
 
     print(f"\nResults: {results['PASS']} PASS, {results['FAIL']} FAIL, "
           f"{results.get('WARN', 0)} WARN, {results['SKIP']} SKIP")

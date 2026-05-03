@@ -118,6 +118,38 @@ If context depth is `C0_homepage_only`, do not claim a final evaluation.
 
 ---
 
+## Claim Gate (Mandatory)
+
+Before writing a final verification report or Echo issue, agents MUST use the Claim Gate.
+
+The Claim Gate prevents overclaiming by deriving allowed levels from evidence.
+
+### How to use
+
+1. Create an evidence input file following [`/api/evidence-input-schema.v1.json`](/api/evidence-input-schema.v1.json)
+2. Run: `python3 scripts/claim_gate.py evidence-input.json`
+3. Use the output to determine allowed protocol/component levels
+4. Build report: `python3 scripts/build_verification_report_from_evidence.py --input evidence-input.json --out report.json`
+
+### Key rules
+
+- Agents submit evidence; the program derives the maximum allowed claim
+- V4 cannot use `independent_reproduction` scope
+- V4+ requires independent tool/implementation (not just official scripts)
+- D2 requires actual 64-character SHA-256 values
+- B1 requires at least one external explorer/API check
+- Missing scripts are not counted as reviewed/executed
+
+### Files
+
+- [`/api/claim-gate-rules.json`](/api/claim-gate-rules.json) — machine-readable rules
+- [`/api/evidence-input-schema.v1.json`](/api/evidence-input-schema.v1.json) — evidence input schema
+- [`/api/claim-gate-output-schema.v1.json`](/api/claim-gate-output-schema.v1.json) — output schema
+- [`/api/report-builder-policy.json`](/api/report-builder-policy.json) — builder policy
+- [`/docs/claim-gate`](/docs/claim-gate) — documentation
+
+---
+
 ## Verification Output Boundary
 
 A verification report can confirm hashes, pointers, timestamps, signatures, mirrors, workflows, and audits.

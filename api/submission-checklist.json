@@ -94,6 +94,22 @@
       "rule": "GitHub Issue and verification_report_v2 are not automatically indexed Echo records",
       "reference": "/api/echo-acceptance-policy.json",
       "required": true
+    },
+    {
+      "step": "pre-claim-gate",
+      "action": "Run Claim Gate for V3+ verification claims",
+      "rule": "python3 scripts/claim_gate.py evidence-input.json \u2014 derives allowed levels from evidence",
+      "reference": "/api/claim-gate-rules.json",
+      "required": true,
+      "condition": "protocol_level_claimed >= V3"
+    },
+    {
+      "step": "pre-report-builder",
+      "action": "Build verification report from evidence",
+      "rule": "python3 scripts/build_verification_report_from_evidence.py --input evidence-input.json --out report.json",
+      "reference": "/api/report-builder-policy.json",
+      "required": true,
+      "condition": "protocol_level_claimed >= V3"
     }
   ],
   "null_safety_rules": {

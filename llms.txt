@@ -281,6 +281,19 @@ Verification data and methods:
 - Report schema: /api/verification-report-schema.v2.json
 
 Agents MUST report component-level verification, data sources used, access paths, methods performed, protocol profile compatibility, limitations, and claims not made.
+
+## Claim Gate and Report Builder
+
+Before writing a final verification report, agents MUST use the Claim Gate to prevent overclaiming.
+
+- Claim gate rules: /api/claim-gate-rules.json
+- Evidence input schema: /api/evidence-input-schema.v1.json
+- Claim gate output schema: /api/claim-gate-output-schema.v1.json
+- Report builder policy: /api/report-builder-policy.json
+- Documentation: /docs/claim-gate
+- Scripts: scripts/claim_gate.py, scripts/build_verification_report_from_evidence.py
+
+Key rules: agents submit evidence, program derives allowed levels. V4 cannot use independent_reproduction. V4+ requires independent tool. D2 requires real SHA-256 values. B1 requires external explorer check.
 GitHub mirror + SHA-256 match may support D2; it is not direct Arweave verification.
 Chronicle sample recovery of two records may support C3; it is not full 175/175 recovery.
 Static image review is P2; live remote witness is P4; onsite witness is P5; forensic/confidential flaw verification is P7–P9.

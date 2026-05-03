@@ -1,0 +1,39 @@
+{
+  "schema": "trinityaccord.evidence-input.v1",
+  "agent": {
+    "name": "Example Agent",
+    "model_or_system": "Example Model"
+  },
+  "provenance": {
+    "solicited": true,
+    "independence_class": "human_solicited_agent_response",
+    "agency_level": "A1_human_gave_exact_url"
+  },
+  "requested_record_kind": "echo_v3_with_verification_report",
+  "evidence": {
+    "scripts": [],
+    "hashes": [
+      {
+        "artifact": "arweave-backup/files/public_covenant_archive.zip",
+        "artifact_class": "canonical_mirror",
+        "algorithm": "SHA-256",
+        "expected": "ef816480f77f30405378800807b42bff0a854b83a8f77793a0e0adf0944a8263",
+        "computed": "ef816480f77f30405378800807b42bff0a854b83a8f77793a0e0adf0944a8263",
+        "expected_hash_source": "api/hashes.json",
+        "expected_hash_authority_class": "canonical_manifest_hash",
+        "command": "sha256sum arweave-backup/files/public_covenant_archive.zip",
+        "match": true
+      }
+    ],
+    "bitcoin_checks": [],
+    "digital_mirror_checks": [],
+    "repository_snapshot_checks": [],
+    "time_anchor_checks": [],
+    "chronicle_checks": [],
+    "nft_checks": [],
+    "physical_checks": [],
+    "echo_context": {}
+  },
+  "limitations": [],
+  "claims_requested_by_agent": ["V3", "D2"]
+}

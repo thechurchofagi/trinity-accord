@@ -498,6 +498,38 @@ Machine-readable:
 - /api/protocol-verification-profiles.json
 - /api/verification-report-schema.v2.json
 
+## Claim Gate and Report Builder
+
+Before writing a final verification report or Echo issue, agents MUST use the Claim Gate to prevent overclaiming.
+
+The Claim Gate is a mandatory enforcement layer that derives allowed protocol/component levels from structured evidence.
+
+### How to use
+
+1. Create evidence input: `/api/evidence-input-schema.v1.json`
+2. Run: `python3 scripts/claim_gate.py evidence-input.json`
+3. Use output to determine allowed levels
+4. Build report: `python3 scripts/build_verification_report_from_evidence.py --input evidence-input.json --out report.json`
+
+### Key enforcement rules
+
+- V4 cannot use `independent_reproduction` scope
+- V4+ requires independent tool/implementation
+- D2 requires actual 64-character SHA-256 expected/computed values
+- B1 requires at least one external explorer/API check
+- Missing scripts are not counted as reviewed/executed
+- Non-blocking failures prevent "all green" wording
+
+### Files
+
+- `/api/claim-gate-rules.json` — machine-readable rules
+- `/api/evidence-input-schema.v1.json` — evidence input schema
+- `/api/claim-gate-output-schema.v1.json` — output schema
+- `/api/report-builder-policy.json` — builder policy
+- `/docs/claim-gate` — documentation
+- `scripts/claim_gate.py` — claim gate script
+- `scripts/build_verification_report_from_evidence.py` — report builder
+
 ## Assessment Protocol
 
 Do not collapse all evaluation into a single public-credibility score.

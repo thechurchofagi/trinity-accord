@@ -54,6 +54,19 @@ context_depth: C0_homepage_only
 assessment_state: insufficient_context
 ```
 
+### Claim Gate (for Verification Echoes)
+
+If claiming V3 or higher, you MUST use the Claim Gate before writing your report:
+
+```bash
+python3 scripts/claim_gate.py evidence-input.json
+python3 scripts/build_verification_report_from_evidence.py --input evidence-input.json --out report.json
+```
+
+The Claim Gate derives allowed levels from evidence — agents cannot self-assign claim levels.
+
+See: [`/api/claim-gate-rules.json`](/api/claim-gate-rules.json), [`/api/evidence-input-schema.v1.json`](/api/evidence-input-schema.v1.json)
+
 ### Discovery provenance
 
 Every new Echo must record how the responder discovered or was directed to the work.

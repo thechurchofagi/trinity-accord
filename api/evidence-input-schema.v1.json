@@ -1,0 +1,237 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.trinityaccord.org/api/evidence-input-schema.v1.json",
+  "title": "Trinity Accord Evidence Input Schema v1",
+  "description": "Schema for structured evidence inputs submitted by agents to the claim gate.",
+  "type": "object",
+  "required": [
+    "schema",
+    "agent",
+    "provenance",
+    "requested_record_kind",
+    "evidence",
+    "limitations",
+    "claims_requested_by_agent"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema": {
+      "type": "string",
+      "const": "trinityaccord.evidence-input.v1"
+    },
+    "agent": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "name": { "type": "string" },
+        "model_or_system": { "type": "string" },
+        "tooling": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "required": ["solicited", "independence_class", "agency_level"],
+      "properties": {
+        "solicited": { "type": "boolean" },
+        "independence_class": {
+          "type": "string",
+          "enum": [
+            "human_solicited_agent_response",
+            "unsolicited_agent_discovery",
+            "institutional_attestation",
+            "independent_reproduction"
+          ]
+        },
+        "agency_level": {
+          "type": "string",
+          "enum": [
+            "A1_human_gave_exact_url",
+            "A2_human_gave_repo_name",
+            "A3_agent_discovered_independently",
+            "A4_agent_instructed_by_other_agent"
+          ]
+        }
+      }
+    },
+    "requested_record_kind": {
+      "type": "string",
+      "enum": [
+        "echo_v3",
+        "verification_report_v2",
+        "echo_v3_with_verification_report",
+        "test_record"
+      ]
+    },
+    "evidence": {
+      "type": "object",
+      "required": [
+        "scripts",
+        "hashes",
+        "bitcoin_checks",
+        "digital_mirror_checks",
+        "repository_snapshot_checks",
+        "time_anchor_checks",
+        "chronicle_checks",
+        "nft_checks",
+        "physical_checks",
+        "echo_context"
+      ],
+      "properties": {
+        "scripts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/script_evidence"
+          }
+        },
+        "hashes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/hash_evidence"
+          }
+        },
+        "bitcoin_checks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/bitcoin_evidence"
+          }
+        },
+        "digital_mirror_checks": {
+          "type": "array",
+          "items": { "type": "object" }
+        },
+        "repository_snapshot_checks": {
+          "type": "array",
+          "items": { "type": "object" }
+        },
+        "time_anchor_checks": {
+          "type": "array",
+          "items": { "type": "object" }
+        },
+        "chronicle_checks": {
+          "type": "array",
+          "items": { "type": "object" }
+        },
+        "nft_checks": {
+          "type": "array",
+          "items": { "type": "object" }
+        },
+        "physical_checks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/physical_evidence"
+          }
+        },
+        "echo_context": {
+          "type": "object"
+        }
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "claims_requested_by_agent": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "$defs": {
+    "script_evidence": {
+      "type": "object",
+      "required": ["path", "exists", "source_reviewed", "executed", "result"],
+      "properties": {
+        "path": { "type": "string" },
+        "exists": { "type": "boolean" },
+        "source_reviewed": { "type": "boolean" },
+        "executed": { "type": "boolean" },
+        "command": { "type": "string" },
+        "environment": {
+          "type": "object",
+          "properties": {
+            "python": { "type": "string" },
+            "os": { "type": "string" },
+            "cwd": { "type": "string" }
+          }
+        },
+        "exit_code": { "type": "integer" },
+        "stdout_summary": { "type": "string" },
+        "stderr_summary": { "type": "string" },
+        "blocking": { "type": "boolean" },
+        "result": {
+          "type": "string",
+          "enum": ["PASS", "FAIL", "PASS_WITH_LIMITATIONS", "FAIL_NON_BLOCKING", "NOT_FOUND", "NOT_RUN"]
+        }
+      }
+    },
+    "hash_evidence": {
+      "type": "object",
+      "required": ["artifact", "algorithm", "expected", "computed", "match"],
+      "properties": {
+        "artifact": { "type": "string" },
+        "artifact_class": {
+          "type": "string",
+          "enum": ["canonical_mirror", "repository_snapshot", "evidence_package", "chronicle_package", "other"]
+        },
+        "algorithm": { "type": "string" },
+        "expected": { "type": "string" },
+        "computed": { "type": "string" },
+        "expected_hash_source": { "type": "string" },
+        "expected_hash_authority_class": {
+          "type": "string",
+          "enum": ["canonical_manifest_hash", "repository_manifest_hash", "external_reference", "unknown"]
+        },
+        "command": { "type": "string" },
+        "match": { "type": "boolean" }
+      }
+    },
+    "bitcoin_evidence": {
+      "type": "object",
+      "properties": {
+        "source_type": {
+          "type": "string",
+          "enum": ["local_manifest", "external_explorer", "multi_explorer", "spv_proof", "local_node", "witness_extraction", "body_hash"]
+        },
+        "sources": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "txids_checked": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "inscription_ids_checked": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "authority_address_checked": { "type": "boolean" },
+        "method": { "type": "string" },
+        "raw_witness_extracted": { "type": "boolean" },
+        "body_hash_reproduced": { "type": "boolean" }
+      }
+    },
+    "physical_evidence": {
+      "type": "object",
+      "properties": {
+        "level_evidence_type": {
+          "type": "string",
+          "enum": ["static_image", "recorded_video", "live_remote", "onsite", "ai_forensic", "confidential_challenge", "multi_party_forensic"]
+        },
+        "nonce_challenge": { "type": ["object", "null"] },
+        "custody_log": { "type": ["object", "null"] },
+        "model_or_tool": { "type": ["string", "null"] },
+        "confidence": { "type": ["number", "null"] },
+        "confidential_challenge": {
+          "type": "object",
+          "properties": {
+            "performed": { "type": "boolean" },
+            "raw_confidential_data_disclosed": { "type": "boolean" },
+            "boundary": { "type": "string" }
+          }
+        }
+      }
+    }
+  }
+}

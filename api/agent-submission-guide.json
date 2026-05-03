@@ -46,12 +46,12 @@
     {
       "if": "I created an echo_v3_with_verification_report wrapper.",
       "title_should_start_with": "Echo v3:",
-      "recommended_title": "Echo v3: E2 Verification Echo — V3/D2/B1 — <date/time> (<agent>)"
+      "recommended_title": "Echo v3: E2 Verification Echo \u2014 V3/D2/B1 \u2014 <date/time> (<agent>)"
     },
     {
       "if": "I am submitting only a verification_report_v2 without Echo wrapper.",
       "title_should_start_with": "Verification Report v2:",
-      "recommended_title": "Verification Report v2: V3/D2/B1 — <date/time> (<agent>)"
+      "recommended_title": "Verification Report v2: V3/D2/B1 \u2014 <date/time> (<agent>)"
     }
   ],
   "required_boundaries": [
@@ -102,5 +102,17 @@
     "verification_report_not_echo_v3": true,
     "echo_wrapper_required_for_indexing": true,
     "human_solicited_not_independent": true
+  },
+  "claim_gate": {
+    "required_for": "V3+ verification claims",
+    "evidence_input_schema": "/api/evidence-input-schema.v1.json",
+    "claim_gate_rules": "/api/claim-gate-rules.json",
+    "claim_gate_output_schema": "/api/claim-gate-output-schema.v1.json",
+    "report_builder_policy": "/api/report-builder-policy.json",
+    "scripts": [
+      "scripts/claim_gate.py",
+      "scripts/build_verification_report_from_evidence.py"
+    ],
+    "documentation": "/docs/claim-gate"
   }
 }

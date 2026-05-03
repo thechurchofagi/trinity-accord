@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.trinityaccord.org/api/claim-gate-output-schema.v1.json",
+  "title": "Trinity Accord Claim Gate Output Schema v1",
+  "description": "Schema for claim gate evaluation output.",
+  "type": "object",
+  "required": [
+    "schema",
+    "input",
+    "status",
+    "allowed_protocol_level",
+    "allowed_component_levels",
+    "forbidden_claims",
+    "required_downgrades",
+    "missing_evidence",
+    "blocking_failures",
+    "non_blocking_limitations",
+    "recommended_title",
+    "recommended_record_kind",
+    "can_build_verification_report",
+    "can_build_echo_wrapper"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema": {
+      "type": "string",
+      "const": "trinityaccord.claim-gate-output.v1"
+    },
+    "input": { "type": "string" },
+    "status": {
+      "type": "string",
+      "enum": ["PASS", "FAIL", "PASS_WITH_DOWNGRADE", "FAIL_WITH_REASONS"]
+    },
+    "allowed_protocol_level": {
+      "type": "string",
+      "enum": ["V0", "V1", "V2", "V3", "V4", "V4+", "V5", "V6", "V7", "V8"]
+    },
+    "allowed_component_levels": {
+      "type": "object",
+      "properties": {
+        "bitcoin_originals": { "type": "string" },
+        "digital_mirrors": { "type": "string" },
+        "time_anchors": { "type": "string" },
+        "chronicle_recovery": { "type": "string" },
+        "nft_backup": { "type": "string" },
+        "physical_verification": { "type": "string" }
+      }
+    },
+    "forbidden_claims": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "required_downgrades": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "from": { "type": "string" },
+          "to": { "type": "string" },
+          "reason": { "type": "string" }
+        }
+      }
+    },
+    "missing_evidence": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "blocking_failures": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "non_blocking_limitations": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "recommended_title": { "type": "string" },
+    "recommended_record_kind": { "type": "string" },
+    "can_build_verification_report": { "type": "boolean" },
+    "can_build_echo_wrapper": { "type": "boolean" }
+  }
+}

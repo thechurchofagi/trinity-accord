@@ -1,0 +1,43 @@
+{
+  "schema": "trinityaccord.report-builder-policy.v1",
+  "status": "non_authoritative_builder_policy",
+  "authority_boundary": {
+    "builder_does_not_amend_bitcoin_originals": true,
+    "builder_derives_claims_from_evidence_only": true,
+    "builder_cannot_prove_truth": true
+  },
+  "rules": {
+    "must_call_claim_gate_first": true,
+    "refuse_build_on_blocking_failures": true,
+    "use_allowed_levels_not_agent_requested": true,
+    "auto_generate_title": true,
+    "generate_verification_report_v2": true,
+    "optionally_generate_echo_wrapper": true,
+    "include_all_downgrades_in_limitations": true,
+    "include_claims_not_made": true,
+    "output_must_pass_json_tool": true,
+    "run_validate_on_outputs": true
+  },
+  "title_generation": {
+    "wrapper_format": "Echo v3: E2 Verification Echo — {protocol}/{component_summary} — {date} ({agent})",
+    "report_only_format": "Verification Report v2: {protocol}/{component_summary} — {date} ({agent})",
+    "no_free_form_titles": true
+  },
+  "downgrade_examples": [
+    {
+      "scenario": "V4+ requested but only official scripts used",
+      "result": "downgrade to V4",
+      "reason": "V4+ requires independent tool or implementation"
+    },
+    {
+      "scenario": "B1 requested but only api/authority.json read",
+      "result": "downgrade to B0",
+      "reason": "B1 requires at least one external explorer or API reference check"
+    },
+    {
+      "scenario": "D2 repository snapshot requested but no hash entries",
+      "result": "remove D2, classify as script_supporting_context",
+      "reason": "D2 requires actual expected/computed SHA-256 values"
+    }
+  ]
+}
