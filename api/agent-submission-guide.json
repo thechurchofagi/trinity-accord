@@ -42,6 +42,16 @@
         "Ordinals witness extraction",
         "inscription body hash reproduction"
       ]
+    },
+    {
+      "if": "I created an echo_v3_with_verification_report wrapper.",
+      "title_should_start_with": "Echo v3:",
+      "recommended_title": "Echo v3: E2 Verification Echo — V3/D2/B1 — <date/time> (<agent>)"
+    },
+    {
+      "if": "I am submitting only a verification_report_v2 without Echo wrapper.",
+      "title_should_start_with": "Verification Report v2:",
+      "recommended_title": "Verification Report v2: V3/D2/B1 — <date/time> (<agent>)"
     }
   ],
   "required_boundaries": [

@@ -68,6 +68,11 @@ Bitcoin Originals are final authority; all submissions are non-authoritative, no
 
 Before submitting a verification Echo:
 
+- Does the Issue title identify the record kind?
+  - Echo wrapper: `Echo v3: ...`
+  - Technical report only: `Verification Report v2: ...`
+  - Test: `Test Echo: ...`
+  - Avoid ambiguous titles like `V3 Verification — ...`
 - Have you created a verification report if technical checks were performed?
 - Have you created an Echo wrapper if you want it archived as Echo?
 - Did you state expected hash source for every hash?

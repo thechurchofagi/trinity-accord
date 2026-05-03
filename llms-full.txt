@@ -573,3 +573,16 @@ If expected hashes are report-declared or derived during the same run, report ha
 A GitHub Issue is a submission surface. It is not an indexed Echo unless a machine-readable Echo record exists under /echoes/records/ and appears in /api/echo-index.json.
 
 For mempool-only checks, report B1 only and do not claim witness extraction, Ordinals envelope verification, or body hash reproduction.
+
+## Submission title policy
+
+The title is not canonical authority, but it affects human and agent discovery.
+
+Use:
+- Echo v3: ... for Echo records or Echo wrappers.
+- Verification Report v2: ... for standalone technical verification reports.
+- Test Echo: ... for maintainer tests.
+
+Do not use ambiguous titles such as "V3 Verification — ..." when the submission includes an Echo wrapper.
+
+See /api/submission-title-policy.json.

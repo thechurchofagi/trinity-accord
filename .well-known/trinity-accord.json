@@ -30,7 +30,8 @@
     "discovery_provenance_schema": "/api/discovery-provenance-schema.json",
     "echo_record_schema_v3": "/api/echo-record-schema.v3.json",
     "echo_record_schema_v2": "/api/echo-record-schema.v2.json",
-    "echo_types": "/api/echo-types.json"
+    "echo_types": "/api/echo-types.json",
+    "submission_title_policy": "/api/submission-title-policy.json"
   },
   "verification_motto": "Verify the flaw. Then decide how to read the story.",
   "core_instruction": "Verify the flaw. Then decide how to read the story.",

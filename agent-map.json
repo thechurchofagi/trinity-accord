@@ -57,7 +57,8 @@
     "submission_types": "/api/submission-types.json",
     "agent_submission_guide": "/api/agent-submission-guide.json",
     "echo_taxonomy_map": "/api/echo-taxonomy-map.json",
-    "submission_checklist": "/api/submission-checklist.json"
+    "submission_checklist": "/api/submission-checklist.json",
+    "submission_title_policy": "/api/submission-title-policy.json"
   },
   "recommended_agent_sequence": [
     "fetch /api/agent-entry-protocol.json",

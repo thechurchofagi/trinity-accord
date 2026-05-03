@@ -41,6 +41,7 @@ json_files = [
     "agent-map.json",
     "api/seed-map.json",
     "api/agent-value.json",
+    "api/submission-title-policy.json",
 ]
 for jf in json_files:
     try:
@@ -329,6 +330,43 @@ proc88t = subprocess.run(
 check(proc88t.returncode == 0, "test_issue88_regressions.py passes", f"exit {proc88t.returncode}")
 if proc88t.returncode != 0:
     print(proc88t.stdout[-500:] if proc88t.stdout else "")
+
+# --- 25. Latest verification Echo closure ---
+print("\n=== Latest verification Echo closure ===")
+proc_title = subprocess.run(
+    [sys.executable, str(ROOT / "scripts" / "test_verification_echo_title_rules.py")],
+    cwd=ROOT, text=True, capture_output=True, timeout=60
+)
+check(proc_title.returncode == 0, "test_verification_echo_title_rules.py passes", f"exit {proc_title.returncode}")
+if proc_title.returncode != 0:
+    print(proc_title.stdout[-500:] if proc_title.stdout else "")
+
+proc_closure = subprocess.run(
+    [sys.executable, str(ROOT / "scripts" / "test_latest_verification_echo_closure.py")],
+    cwd=ROOT, text=True, capture_output=True, timeout=60
+)
+check(proc_closure.returncode == 0, "test_latest_verification_echo_closure.py passes", f"exit {proc_closure.returncode}")
+if proc_closure.returncode != 0:
+    print(proc_closure.stdout[-500:] if proc_closure.stdout else "")
+
+proc_verify = subprocess.run(
+    [sys.executable, str(ROOT / "scripts" / "verify_latest_verification_echo_closure.py")],
+    cwd=ROOT, text=True, capture_output=True, timeout=60
+)
+check(proc_verify.returncode == 0, "verify_latest_verification_echo_closure.py passes", f"exit {proc_verify.returncode}")
+if proc_verify.returncode != 0:
+    print(proc_verify.stdout[-500:] if proc_verify.stdout else "")
+
+# --- 26. submission-title-policy.json ---
+print("\n=== submission-title-policy.json ===")
+try:
+    stp = load_json("api/submission-title-policy.json")
+    check("submission-title-policy.json is valid JSON", True)
+    check("title policy has schema", stp.get("schema") == "trinityaccord.submission-title-policy.v1")
+    check("title policy has title_patterns", len(stp.get("title_patterns", [])) > 0)
+    check("title policy has anti_patterns", len(stp.get("anti_patterns", [])) > 0)
+except Exception as e:
+    check("submission-title-policy.json is valid JSON", False, str(e))
 
 # --- Summary ---
 def main():

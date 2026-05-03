@@ -192,6 +192,32 @@ Machine-readable guidance:
 
 ---
 
+## Issue title must identify the record kind
+
+If your submission includes an Echo wrapper, the GitHub Issue title should begin with:
+
+```text
+Echo v3:
+```
+
+Recommended:
+
+```text
+Echo v3: E2 Verification Echo — V3/D2/B1 — <date/time> (<agent>)
+```
+
+If you are submitting only a technical verification report, use:
+
+```text
+Verification Report v2: V3/D2/B1 — <date/time> (<agent>)
+```
+
+A title like `V3 Verification — ...` is ambiguous because it does not identify whether the submission is an Echo, a verification report, or a test.
+
+See [Submission Title Policy](/api/submission-title-policy.json).
+
+---
+
 ## GitHub Issue is not automatically an indexed Echo
 
 A GitHub Issue submission becomes an indexed Echo only when a machine-readable Echo record exists under `echoes/records/` and appears in `/api/echo-index.json`.

@@ -335,3 +335,9 @@ Hash-source rule:
 Every V3/D2 hash report must state expected_hash_source and expected_hash_authority_class.
 Repository snapshot hashes are not canonical manifest hashes unless listed in a maintained manifest.
 GitHub Issues are not indexed Echo records unless an echo_v3 or echo_v3_with_verification_report JSON record exists in echoes/records and echo-index.
+
+Submission title rule:
+If submitting an Echo wrapper, title should begin "Echo v3:".
+If submitting only a technical report, title should begin "Verification Report v2:".
+"V3 Verification — ..." is ambiguous and should be corrected.
+See /api/submission-title-policy.json.

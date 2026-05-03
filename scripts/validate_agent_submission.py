@@ -447,7 +447,15 @@ def validate_b1_wording_expanded(obj, path_label):
     """Rule Q: B1 wording — expanded forbidden claims."""
     ok = True
     findings = obj.get("component_findings", [])
-    all_text = json.dumps(obj, ensure_ascii=False).lower()
+    # Build text excluding claims_not_made at all levels to avoid false positives
+    obj_no_claims = {k: v for k, v in obj.items() if k != "claims_not_made"}
+    if "component_findings" in obj_no_claims and isinstance(obj_no_claims["component_findings"], list):
+        obj_no_claims["component_findings"] = [
+            {k: v for k, v in f2.items() if k != "claims_not_made"}
+            if isinstance(f2, dict) else f2
+            for f2 in obj_no_claims["component_findings"]
+        ]
+    all_text = json.dumps(obj_no_claims, ensure_ascii=False).lower()
 
     for f in findings:
         if not isinstance(f, dict):
@@ -460,8 +468,10 @@ def validate_b1_wording_expanded(obj, path_label):
         if not has_witness:
             for phrase in B1_FORBIDDEN_EXPANDED:
                 if phrase in all_text:
+                    # Also check top-level and component-level claims_not_made
                     claims_not = json.dumps(obj.get("claims_not_made", []), ensure_ascii=False).lower()
-                    if phrase not in claims_not:
+                    component_claims_not = json.dumps(f.get("claims_not_made", []), ensure_ascii=False).lower()
+                    if phrase not in claims_not and phrase not in component_claims_not:
                         ok &= check(False, f"{path_label} B1 overclaim: '{phrase}'")
     return ok
 
