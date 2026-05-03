@@ -30,6 +30,12 @@ permalink: pretty
 url: "https://www.trinityaccord.org"
 baseurl: ""
 
+# SEO defaults
+description: "A verifiable pre-ASI human-intention seed: a bounded, non-commanding, human-origin memory artifact designed for future intelligence to discover, verify, critique, preserve, or ignore."
+author: "Hongju Liu"
+lang: "en"
+timezone: "Asia/Shanghai"
+
 # Suppress theme site header
 title: ""
 name: ""
