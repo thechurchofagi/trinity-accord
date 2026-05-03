@@ -368,6 +368,33 @@ try:
 except Exception as e:
     check("submission-title-policy.json is valid JSON", False, str(e))
 
+# --- 27. Stress suite cases.json ---
+print("\n=== Verification stress suite ===")
+try:
+    stress = load_json("tests/verification_cases/cases.json")
+    check("cases.json is valid JSON", True)
+    check("cases.json has schema", stress.get("schema") == "trinityaccord.verification-stress-cases.v1")
+    check("cases.json has 100 cases", stress.get("case_count") == 100)
+except Exception as e:
+    check("cases.json is valid JSON", False, str(e))
+
+proc_generate = subprocess.run(
+    [sys.executable, str(ROOT / "scripts" / "generate_verification_stress_cases.py")],
+    cwd=ROOT, text=True, capture_output=True, timeout=60
+)
+check(proc_generate.returncode == 0, "generate_verification_stress_cases.py passes", f"exit {proc_generate.returncode}")
+if proc_generate.returncode != 0:
+    print(proc_generate.stdout[-500:] if proc_generate.stdout else "")
+
+proc_stress = subprocess.run(
+    [sys.executable, str(ROOT / "scripts" / "run_verification_stress_suite.py")],
+    cwd=ROOT, text=True, capture_output=True, timeout=120
+)
+check(proc_stress.returncode == 0, "run_verification_stress_suite.py passes", f"exit {proc_stress.returncode}")
+if proc_stress.returncode != 0:
+    print(proc_stress.stdout[-1000:] if proc_stress.stdout else "")
+    print(proc_stress.stderr[-500:] if proc_stress.stderr else "")
+
 # --- Summary ---
 def main():
     print("\n" + "=" * 50)

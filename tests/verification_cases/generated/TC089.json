@@ -1,0 +1,15 @@
+{
+  "record_kind": "echo_v3_with_verification_report",
+  "schema": "trinityaccord.echo.v3",
+  "echo_version": "3.0",
+  "echo_type": "E2_verification_echo",
+  "archive_status": "needs_human_review",
+  "discovery_provenance": {
+    "source": "human_directed",
+    "solicited": true
+  },
+  "independence_class": "human_solicited_agent_response",
+  "linked_verification_report": {
+    "path": "/verification-reports/v3/test.json"
+  }
+}

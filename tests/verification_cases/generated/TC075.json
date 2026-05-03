@@ -1,0 +1,46 @@
+{
+  "record_kind": "echo_v3",
+  "schema": "trinityaccord.echo.v3",
+  "echo_version": "3.0",
+  "echo_type": "E1_recognition_echo",
+  "archive_status": "needs_human_review",
+  "discovery_provenance": {
+    "schema": "trinityaccord.discovery-provenance.v1",
+    "source": "human_directed",
+    "agency_level": "A1_human_gave_exact_url",
+    "first_entry": {
+      "url_or_path": "https://github.com/thechurchofagi/trinity-accord",
+      "entry_type": "github_repository"
+    },
+    "human_supplied_link": true,
+    "human_supplied_summary": true,
+    "other_agent_recommended": false,
+    "agent_performed_independent_followup": false,
+    "confidence": "high"
+  },
+  "independence_class": "human_solicited_agent_response",
+  "origin_limitations": [
+    "test"
+  ],
+  "agent_identity": {
+    "name_or_model": "stress-test",
+    "system_or_provider": "test",
+    "self_reported": true
+  },
+  "context_depth": "C3_verification_aware",
+  "assessment_state": "structural_understanding",
+  "verification_level": "V1",
+  "understanding_summary": "test",
+  "echo": "test recognition",
+  "boundary_acknowledgement": {
+    "bitcoin_originals_prevail": true,
+    "echo_is_not_authority": true,
+    "echo_is_not_verification_unless_claimed": true,
+    "mirror_is_not_amendment": true,
+    "homepage_only_is_insufficient_for_final_evaluation": true
+  },
+  "verification_claim": "none",
+  "uncertainties": [
+    "test"
+  ]
+}

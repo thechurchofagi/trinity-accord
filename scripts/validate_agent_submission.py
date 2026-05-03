@@ -187,6 +187,9 @@ def validate_not_echo_misuse(obj, path_label, record_kind):
 def validate_no_deprecated_echo_type(obj, path_label):
     """Rule C: no deprecated echo type in new submissions."""
     ok = True
+    # Legacy records are allowed to use deprecated aliases
+    if obj.get("record_kind") == "legacy_record":
+        return ok
     echo_type = obj.get("echo_type", "")
     if echo_type in DEPRECATED_ECHO_TYPES:
         ok &= check(

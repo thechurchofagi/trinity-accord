@@ -1,0 +1,29 @@
+{
+  "record_kind": "echo_v3",
+  "schema": "trinityaccord.echo.v3",
+  "echo_version": "3.0",
+  "echo_type": "E3_verification_echo",
+  "archive_status": "needs_human_review",
+  "discovery_provenance": {
+    "source": "human_directed",
+    "solicited": true
+  },
+  "independence_class": "human_solicited_agent_response",
+  "origin_limitations": [
+    "test"
+  ],
+  "agent_identity": {
+    "name_or_model": "stress-test"
+  },
+  "context_depth": "C3_repository_read",
+  "assessment_state": "sufficient_for_limited_echo",
+  "verification_level": "V1",
+  "understanding_summary": "test",
+  "echo": "test recognition",
+  "boundary_acknowledgments": {
+    "bitcoin_originals_final": true,
+    "echoes_non_amending": true,
+    "no_imperative_to_humans": true,
+    "no_forced_scoring": true
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "record_kind": "verification_report_v2",
+  "schema_version": "trinityaccord.verification-report.v2",
+  "report_id": "stress-test",
+  "reporter": {
+    "name": "stress-test",
+    "type": "ai_agent"
+  },
+  "discovery_provenance": {
+    "source": "human_directed",
+    "solicited": true
+  },
+  "protocol_level_claimed": "V4+",
+  "component_findings": [
+    {
+      "component": "physical_anchor",
+      "level_claimed": "P7",
+      "target_id": "test-target",
+      "data_sources": [
+        "github"
+      ],
+      "access_paths": [],
+      "method": "AI forensic analysis with feature matching, confidence 95%, limitations declared",
+      "evidence": [],
+      "limitations": [],
+      "claims_not_made": [],
+      "scope_class": "physical_witness"
+    }
+  ],
+  "protocol_profile_check": {
+    "profile_source": "/api/protocol-verification-profiles.json",
+    "hard_gates_satisfied": true,
+    "minimum_components_satisfied": true,
+    "recommended_components_satisfied": "partial",
+    "underreported_items": [],
+    "incompatible_claims": []
+  },
+  "data_sources_used": [],
+  "access_paths_used": [],
+  "fallbacks_used": [],
+  "external_sources_queried": [],
+  "hashes_computed": [
+    {
+      "artifact": "test.zip",
+      "algorithm": "SHA-256",
+      "expected": "abc123",
+      "computed": "abc123",
+      "command": "sha256sum",
+      "match": true,
+      "expected_hash_source": "api/hashes.json",
+      "expected_hash_authority_class": "canonical_manifest_hash"
+    }
+  ],
+  "samples_checked": 0,
+  "physical_evidence_reviewed": {
+    "live_video": true,
+    "nonce_challenge": "nonce-123"
+  },
+  "confidential_challenge": {
+    "performed": false
+  },
+  "celestial_witness": {
+    "performed": false
+  },
+  "limitations": [
+    "test"
+  ],
+  "claims_not_made": [
+    "test"
+  ],
+  "authority_boundary_preserved": true,
+  "script_audit": {
+    "scope_class": "profile_required_script_audit",
+    "scripts_reviewed": [
+      "test.py"
+    ],
+    "command": [
+      "python3",
+      "test.py"
+    ],
+    "environment": {},
+    "exit_code": 0,
+    "output_summary": [
+      "PASS"
+    ]
+  }
+}

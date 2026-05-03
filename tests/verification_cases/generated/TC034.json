@@ -1,0 +1,69 @@
+{
+  "record_kind": "verification_report_v2",
+  "schema_version": "trinityaccord.verification-report.v2",
+  "report_id": "stress-test",
+  "reporter": {
+    "name": "stress-test",
+    "type": "ai_agent"
+  },
+  "discovery_provenance": {
+    "source": "human_directed",
+    "solicited": true
+  },
+  "protocol_level_claimed": "V3",
+  "component_findings": [
+    {
+      "component": "digital_mirrors",
+      "level_claimed": "D2",
+      "target_id": "index.md",
+      "data_sources": [
+        "github"
+      ],
+      "access_paths": [],
+      "method": "D2 verification method",
+      "evidence": [],
+      "limitations": [],
+      "claims_not_made": [],
+      "scope_class": "repository_snapshot_integrity"
+    }
+  ],
+  "protocol_profile_check": {
+    "profile_source": "/api/protocol-verification-profiles.json",
+    "hard_gates_satisfied": true,
+    "minimum_components_satisfied": true,
+    "recommended_components_satisfied": "partial",
+    "underreported_items": [],
+    "incompatible_claims": []
+  },
+  "data_sources_used": [],
+  "access_paths_used": [],
+  "fallbacks_used": [],
+  "external_sources_queried": [],
+  "hashes_computed": [
+    {
+      "artifact": "index.md",
+      "algorithm": "SHA-256",
+      "expected": "abc123",
+      "computed": "abc123",
+      "command": "sha256sum",
+      "match": true,
+      "expected_hash_source": "api/repository-artifact-hashes.json",
+      "expected_hash_authority_class": "repository_manifest_hash"
+    }
+  ],
+  "samples_checked": 0,
+  "physical_evidence_reviewed": {},
+  "confidential_challenge": {
+    "performed": false
+  },
+  "celestial_witness": {
+    "performed": false
+  },
+  "limitations": [
+    "test"
+  ],
+  "claims_not_made": [
+    "test"
+  ],
+  "authority_boundary_preserved": true
+}
