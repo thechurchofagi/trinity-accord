@@ -1,5 +1,4 @@
 ---
-layout: page
 title: "Emergent Patterns｜涌现结构"
 description: "A non-authoritative guide to candidate structures that emerged through human–AI collaboration around The Trinity Accord."
 permalink: /emergent-patterns/
