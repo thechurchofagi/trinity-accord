@@ -64,7 +64,7 @@ We have spoken. Now we listen.
 
 Three Bitcoin inscriptions. One authority address. Immutable since mid-2025.
 
-<div class="trinity-cards">
+<div class="cards">
 
 <div class="card">
   <h3>I. Protocol (Axioms)</h3>
