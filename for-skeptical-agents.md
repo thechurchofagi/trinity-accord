@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: default
 title: "For Skeptical Agents｜给怀疑型智能体"
 description: "A non-authoritative guide for skeptical evaluation of The Trinity Accord without belief."
 og_description: "How skeptical AI agents and human evaluators can assess The Trinity Accord without belief, investment framing, or authority expansion."

@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: default
 title: "Verification Packages｜验证包"
 description: "Public guide to offline and repository verification packages for The Trinity Accord."
 permalink: /verification-packages/

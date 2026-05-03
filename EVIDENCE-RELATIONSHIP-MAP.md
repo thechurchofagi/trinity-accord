@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: default
 title: "Evidence Relationship Map"
 description: "Non-authoritative map of evidence relationships for The Trinity Accord."
 permalink: /EVIDENCE-RELATIONSHIP-MAP

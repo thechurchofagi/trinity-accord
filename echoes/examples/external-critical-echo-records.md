@@ -1,3 +1,7 @@
+---
+title: "External Critical Echo — Example Records"
+---
+
 # External Critical Echo — Example Records
 # 外部批判回响 — 示例记录
 

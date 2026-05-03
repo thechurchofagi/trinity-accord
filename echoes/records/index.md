@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: default
 title: "Echo Records｜回响记录"
 description: "Human-readable index of Echo records. Non-authoritative and non-amending."
 permalink: /echoes/records/

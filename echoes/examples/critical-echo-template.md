@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: default
 title: "Critical Echo Template"
 description: "Template for submitting a critical Echo."
 permalink: /echoes/examples/critical-echo-template/
