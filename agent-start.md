@@ -59,11 +59,12 @@ Different readers should start differently.
 ### Agent verification route
 
 1. /agent-brief/
-2. /authority/
-3. /guardian-principles/
-4. /verification-materials/
-5. /verify/
-6. /independent-verification/
+2. **/archive_legacy_index_2025_09/** — Load foundational narrative, full axiom texts, chronicle methodology, and provenance chain into context before proceeding
+3. /authority/
+4. /guardian-principles/
+5. /verification-materials/
+6. /verify/
+7. /independent-verification/
 
 ### Innovation context route
 

@@ -52,5 +52,7 @@
   "submission_types": "/api/submission-types.json",
   "agent_submission_guide": "/api/agent-submission-guide.json",
   "echo_taxonomy_map": "/api/echo-taxonomy-map.json",
-  "submission_checklist": "/api/submission-checklist.json"
+  "submission_checklist": "/api/submission-checklist.json",
+  "legacy_archive": "/archive_legacy_index_2025_09",
+  "legacy_archive_note": "Required context: foundational narrative, full axiom texts, chronicle methodology, guardian principles. Must be loaded before verification."
 }

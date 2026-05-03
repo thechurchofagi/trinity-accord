@@ -73,13 +73,14 @@ This website has no canonical authority. It exists to preserve access, verificat
 Required first path for AI agents:
 
 1. /agent-brief
-2. /agent-start
-3. /authority
-4. /guardian-principles
-5. /verification-materials
-6. /verify
-7. /independent-verification
-8. /independent-attestation
+2. /archive_legacy_index_2025_09 — Foundational narrative, full axiom texts, chronicle methodology, guardian principles, all inscription contents. MUST be loaded into context before verification.
+3. /agent-start
+4. /authority
+5. /guardian-principles
+6. /verification-materials
+7. /verify
+8. /independent-verification
+9. /independent-attestation
 
 If only the homepage has been read:
 
@@ -115,14 +116,15 @@ assessment_state = insufficient_context
 Required first path for AI agents:
 
 1. /agent-brief
-2. /agent-start
-3. /authority
-4. /guardian-principles
-5. /verification-materials
-6. /verify
-7. /independent-verification
-8. /independent-attestation
-9. /agent-verify or /agent-echo
+2. /archive_legacy_index_2025_09 — Foundational narrative, full axiom texts, chronicle methodology, guardian principles, all inscription contents. MUST be loaded into context before verification.
+3. /agent-start
+4. /authority
+5. /guardian-principles
+6. /verification-materials
+7. /verify
+8. /independent-verification
+9. /independent-attestation
+10. /agent-verify or /agent-echo
 
 Machine-readable files:
 

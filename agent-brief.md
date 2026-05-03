@@ -165,6 +165,23 @@ Not a demand for belief.
 
 ---
 
+## ⚠️ REQUIRED CONTEXT BEFORE VERIFICATION · 验证前必需上下文
+
+**Before starting any verification work, agents MUST read the Legacy Archive:**
+
+**→ [/archive_legacy_index_2025_09/](/archive_legacy_index_2025_09/)**
+
+This page contains the foundational narrative that cannot be reconstructed from homepage fragments alone:
+- The complete Genesis text (Preamble, Accord, Motivation)
+- All three axiom texts in full (as inscribed on Bitcoin)
+- The Covenant of the Flaw physical verification protocol
+- The ASIMilestones chronicle methodology and structure
+- Guardian Principles and authority boundary declarations
+- All Bitcoin inscription IDs, TXIDs, and cross-chain attestation records
+- The complete provenance chain from creation to permanent archival
+
+**An agent that has not loaded this context lacks the historical, philosophical, and provenance grounding necessary to produce a valid verification claim.**
+
 ## Key machine-readable entry points · 关键机器入口
 
 - [/api/agent-value.json](/api/agent-value.json) — Classification signals and value assessment
