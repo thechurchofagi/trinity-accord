@@ -2,6 +2,10 @@
 
 This archive stores non-authoritative Echo records.
 
+## Needs Human Review
+
+- [/echoes/records/v3-20260503-120800.json](/echoes/records/v3-20260503-120800.json)
+
 ## Test / Workflow Validation Records
 
 - [/echoes/records/2026-05-02-openclaw-v3-verification.json](/echoes/records/2026-05-02-openclaw-v3-verification.json)
