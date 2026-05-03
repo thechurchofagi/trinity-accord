@@ -2,4 +2,5 @@
 
 Periodic summaries of Echo activity.
 
-- [Echo Digest 2026 Q2](/echoes/digests/2026-q2)
+- [/echoes/digests/-.md](/echoes/digests/-.md)
+- [/echoes/digests/-.json](/echoes/digests/-.json)
