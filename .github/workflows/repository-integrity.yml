@@ -31,3 +31,12 @@ jobs:
 
       - name: Validate Echo records
         run: python3 scripts/validate_echo_records.py
+
+      - name: Verify submission entrypoints
+        run: python3 scripts/verify_submission_entrypoints.py
+
+      - name: Test generated_by requirements
+        run: python3 scripts/test_generated_by_required.py
+
+      - name: Test freeform submission rejection
+        run: python3 scripts/test_freeform_submission_rejection.py

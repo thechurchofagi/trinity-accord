@@ -450,6 +450,9 @@
       "const": true,
       "description": "Must be true. If false, the report is invalid."
     },
+    "generated_by": {
+      "$ref": "#/$defs/generated_by"
+    },
     "claim_gate_output": {
       "type": "object",
       "description": "Output from claim gate evaluation, if report was generated via claim gate",
@@ -689,5 +692,45 @@
         ]
       }
     }
-  ]
+  ],
+  "$defs": {
+    "generated_by": {
+      "type": "object",
+      "required": [
+        "tool",
+        "builder_version",
+        "claim_gate_output",
+        "evidence_input",
+        "generated_at_utc",
+        "validation_command",
+        "validation_result"
+      ],
+      "properties": {
+        "tool": {
+          "type": "string",
+          "enum": ["scripts/build_verification_report_from_evidence.py"]
+        },
+        "builder_version": {
+          "type": "string"
+        },
+        "claim_gate_output": {
+          "type": "string"
+        },
+        "evidence_input": {
+          "type": "string"
+        },
+        "generated_at_utc": {
+          "type": "string"
+        },
+        "validation_command": {
+          "type": "string"
+        },
+        "validation_result": {
+          "type": "string",
+          "enum": ["PASS"]
+        }
+      },
+      "additionalProperties": true
+    }
+  }
 }

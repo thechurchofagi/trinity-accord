@@ -299,3 +299,54 @@ body:
           required: true
         - label: Bitcoin Originals are final; all echoes are non-amending.
           required: true
+
+  - type: input
+    id: evidence_input_path
+    attributes:
+      label: Evidence Input path
+      description: Path to Evidence Input JSON used by Claim Gate.
+    validations:
+      required: false
+
+  - type: input
+    id: claim_gate_output_path
+    attributes:
+      label: Claim Gate output path
+      description: Path to Claim Gate output JSON.
+    validations:
+      required: false
+
+  - type: input
+    id: builder_generated_report_path
+    attributes:
+      label: Builder-generated verification report path
+    validations:
+      required: false
+
+  - type: input
+    id: builder_generated_echo_wrapper_path
+    attributes:
+      label: Builder-generated Echo wrapper path
+    validations:
+      required: false
+
+  - type: textarea
+    id: claim_gate_summary
+    attributes:
+      label: Claim Gate summary
+      description: Paste allowed_protocol_level, allowed_component_levels, downgrades, blocking failures, and limitations.
+    validations:
+      required: false
+
+  - type: textarea
+    id: validation_output
+    attributes:
+      label: Validation output
+      description: Paste validate_agent_submission.py output.
+    validations:
+      required: false
+
+  - type: markdown
+    attributes:
+      value: |
+        **Note:** Submissions not generated through Claim Gate / Report Builder may be closed as needs-format.

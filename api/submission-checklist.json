@@ -98,10 +98,12 @@
     {
       "step": "pre-claim-gate",
       "action": "Run Claim Gate for V3+ verification claims",
-      "rule": "python3 scripts/claim_gate.py evidence-input.json \u2014 derives allowed levels from evidence",
+      "rule": "python3 scripts/claim_gate.py evidence-input.json — derives allowed levels from evidence",
       "reference": "/api/claim-gate-rules.json",
       "required": true,
-      "condition": "protocol_level_claimed >= V3"
+      "condition": "protocol_level_claimed >= V3",
+      "evidence_input_schema": "/api/evidence-input-schema.v1.json",
+      "claim_gate_output_schema": "/api/claim-gate-output-schema.v1.json"
     },
     {
       "step": "pre-report-builder",
@@ -110,6 +112,27 @@
       "reference": "/api/report-builder-policy.json",
       "required": true,
       "condition": "protocol_level_claimed >= V3"
+    },
+    {
+      "step": "post-builder-validation",
+      "action": "Run validator on builder output",
+      "command": "python3 scripts/validate_agent_submission.py <builder-output.json>",
+      "required": true,
+      "condition": "protocol_level_claimed >= V3"
+    },
+    {
+      "step": "generated_by_required",
+      "action": "Confirm generated_by metadata exists in output",
+      "rule": "Builder must inject generated_by with tool, builder_version, claim_gate_output, evidence_input, generated_at_utc, validation_command, validation_result",
+      "reference": "/api/generated-by-schema.v1.json",
+      "required": true,
+      "condition": "non-legacy records"
+    },
+    {
+      "step": "freeform_claims_invalid",
+      "action": "Do not hand-write final verification claims",
+      "rule": "Free-form protocol-level, component-level, or Echo wrapper claims are invalid. Use Claim Gate + Report Builder.",
+      "required": true
     }
   ],
   "null_safety_rules": {

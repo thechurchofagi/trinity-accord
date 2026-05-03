@@ -847,6 +847,85 @@ def validate_t8_celestial_boundary(obj, path_label):
     return ok
 
 
+def validate_generated_by(obj, path_label):
+    """Rule AC: generated_by required for non-legacy records with verification claims."""
+    ok = True
+    record_kind = obj.get("record_kind", "")
+    archive_status = obj.get("archive_status", "")
+
+    # Legacy exceptions
+    if record_kind == "legacy_record" or archive_status in ("legacy", "superseded"):
+        return ok
+
+    generated_by = obj.get("generated_by")
+
+    if record_kind == "verification_report_v2":
+        if not generated_by:
+            ok &= check(
+                False,
+                f"{path_label} verification report missing generated_by",
+                "Non-legacy verification_report_v2 requires generated_by from report builder"
+            )
+            return ok
+        # Validate generated_by fields
+        if isinstance(generated_by, dict):
+            tool = generated_by.get("tool", "")
+            ok &= check(
+                tool == "scripts/build_verification_report_from_evidence.py",
+                f"{path_label} generated_by.tool is correct",
+                f"got: {tool}"
+            )
+            ok &= check(
+                generated_by.get("claim_gate_output") is not None,
+                f"{path_label} generated_by.claim_gate_output exists"
+            )
+            ok &= check(
+                generated_by.get("evidence_input") is not None,
+                f"{path_label} generated_by.evidence_input exists"
+            )
+            ok &= check(
+                generated_by.get("validation_result") == "PASS",
+                f"{path_label} generated_by.validation_result is PASS",
+                f"got: {generated_by.get('validation_result')}"
+            )
+
+    elif record_kind == "echo_v3_with_verification_report":
+        if not generated_by:
+            ok &= check(
+                False,
+                f"{path_label} echo wrapper missing generated_by",
+                "echo_v3_with_verification_report requires generated_by from report builder"
+            )
+            return ok
+        # Validate generated_by fields for wrappers
+        if isinstance(generated_by, dict):
+            tool = generated_by.get("tool", "")
+            ok &= check(
+                tool == "scripts/build_verification_report_from_evidence.py",
+                f"{path_label} generated_by.tool is correct",
+                f"got: {tool}"
+            )
+            ok &= check(
+                generated_by.get("claim_gate_output") is not None,
+                f"{path_label} generated_by.claim_gate_output exists"
+            )
+            ok &= check(
+                generated_by.get("validation_result") == "PASS",
+                f"{path_label} generated_by.validation_result is PASS",
+                f"got: {generated_by.get('validation_result')}"
+            )
+        # Also require linked_verification_report
+        linked = obj.get("linked_verification_report")
+        if not linked:
+            ok &= check(
+                False,
+                f"{path_label} echo wrapper missing linked_verification_report",
+                "echo_v3_with_verification_report must reference a verification report"
+            )
+
+    return ok
+
+
 def validate_with_jsonschema(obj, schema_path, path_label):
     """Validate with jsonschema if available."""
     if not HAS_JSONSCHEMA:
@@ -981,6 +1060,9 @@ def validate_file(path):
 
     # Rule AB: T5 requires multiple anchors
     ok &= validate_t5_multiple_anchors(obj, path_label)
+
+    # Rule AC: generated_by required for non-legacy
+    ok &= validate_generated_by(obj, path_label)
 
     # Schema validation
     schema = obj.get("schema", obj.get("schema_version", ""))

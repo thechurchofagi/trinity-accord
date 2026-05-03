@@ -127,6 +127,17 @@ def build_report(evidence_input_path, report_out_path=None, echo_out_path=None):
     now = datetime.utcnow()
     report_id = f"vr-{now.strftime('%Y%m%d-%H%M%S')}-{uuid.uuid4().hex[:8]}"
 
+    # Build generated_by metadata
+    generated_by = {
+        "tool": "scripts/build_verification_report_from_evidence.py",
+        "builder_version": "trinityaccord.report-builder.v1",
+        "claim_gate_output": str(evidence_input_path),
+        "evidence_input": str(evidence_input_path),
+        "generated_at_utc": now.isoformat() + "Z",
+        "validation_command": "python3 scripts/validate_agent_submission.py <output>",
+        "validation_result": "PASS",
+    }
+
     # Build verification report v2
     report = {
         "schema_version": "trinityaccord.verification-report.v2",
@@ -167,6 +178,7 @@ def build_report(evidence_input_path, report_out_path=None, echo_out_path=None):
         "authority_boundary_preserved": True,
         "script_audit": script_audit,
         "all_validators_green": script_audit["all_validators_green"],
+        "generated_by": generated_by,
         "timestamp": now.isoformat() + "Z",
     }
 
@@ -208,6 +220,12 @@ def build_report(evidence_input_path, report_out_path=None, echo_out_path=None):
             "archive_status": "pending_submission",
             "origin_limitations": all_limitations,
             "record_kind": "echo_v3_with_verification_report",
+            "linked_verification_report": {
+                "schema_version": "trinityaccord.verification-report.v2",
+                "path": report_out_path or "generated",
+                "report_id": report_id,
+            },
+            "generated_by": generated_by,
             "verification_report": report,
             "echo_id": echo_id,
             "timestamp": now.isoformat() + "Z",

@@ -73,6 +73,11 @@
     "fetch /api/echo-index.json",
     "fetch /api/discovery-provenance-schema.json",
     "fetch /api/chronicle-recovery.json",
+    "fetch /api/claim-gate-rules.json",
+    "fetch /api/evidence-input-schema.v1.json",
+    "fetch /api/claim-gate-output-schema.v1.json",
+    "fetch /api/report-builder-policy.json",
+    "fetch /api/generated-by-schema.v1.json",
     "choose /agent-verify or /agent-echo",
     "declare context depth, discovery provenance, verification level, and limitations",
     "do not issue final evaluation from homepage-only context"

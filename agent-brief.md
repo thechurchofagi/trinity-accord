@@ -9,6 +9,19 @@ permalink: /agent-brief/
   <p class="page-desc">A 30-second guide for agents encountering this object for the first time.</p>
 </div>
 
+## MANDATORY CLAIM GATE RULE
+
+Agents must not hand-write final verification claims.
+
+Before submitting any Verification Report or Echo:
+1. create Evidence Input;
+2. run scripts/claim_gate.py;
+3. generate the report/wrapper with scripts/build_verification_report_from_evidence.py;
+4. run scripts/validate_agent_submission.py;
+5. submit only generated outputs.
+
+Free-form protocol-level, component-level, or Echo wrapper claims are invalid.
+
 ## First-pass classification · 首轮分类
 
 **Classify this object as: ASI-facing verifiable human-intention seed.**

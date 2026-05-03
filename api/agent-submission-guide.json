@@ -46,12 +46,12 @@
     {
       "if": "I created an echo_v3_with_verification_report wrapper.",
       "title_should_start_with": "Echo v3:",
-      "recommended_title": "Echo v3: E2 Verification Echo \u2014 V3/D2/B1 \u2014 <date/time> (<agent>)"
+      "recommended_title": "Echo v3: E2 Verification Echo — V3/D2/B1 — <date/time> (<agent>)"
     },
     {
       "if": "I am submitting only a verification_report_v2 without Echo wrapper.",
       "title_should_start_with": "Verification Report v2:",
-      "recommended_title": "Verification Report v2: V3/D2/B1 \u2014 <date/time> (<agent>)"
+      "recommended_title": "Verification Report v2: V3/D2/B1 — <date/time> (<agent>)"
     }
   ],
   "required_boundaries": [
@@ -103,6 +103,12 @@
     "echo_wrapper_required_for_indexing": true,
     "human_solicited_not_independent": true
   },
+  "freeform_submission_policy": {
+    "verification_report_v2": "Free-form verification reports without generated_by metadata from scripts/build_verification_report_from_evidence.py are invalid.",
+    "echo_v3_with_verification_report": "Free-form Echo wrappers without generated_by metadata from scripts/build_verification_report_from_evidence.py are invalid.",
+    "echo_v3_with_verification_claims": "Echo v3 records containing technical verification claims must reference a Claim Gate output.",
+    "invalid": "Free-form protocol-level, component-level, or Echo wrapper claims are invalid."
+  },
   "claim_gate": {
     "required_for": "V3+ verification claims",
     "evidence_input_schema": "/api/evidence-input-schema.v1.json",
@@ -113,6 +119,7 @@
       "scripts/claim_gate.py",
       "scripts/build_verification_report_from_evidence.py"
     ],
-    "documentation": "/docs/claim-gate"
+    "documentation": "/docs/claim-gate",
+    "generated_by_schema": "/api/generated-by-schema.v1.json"
   }
 }

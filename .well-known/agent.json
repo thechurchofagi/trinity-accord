@@ -25,8 +25,25 @@
     "/memory-seed.json",
     "/llms.txt",
     "/llms-full.txt",
-    "/api/echo-index.json"
+    "/api/echo-index.json",
+    "/api/claim-gate-rules.json",
+    "/api/evidence-input-schema.v1.json",
+    "/api/claim-gate-output-schema.v1.json",
+    "/api/report-builder-policy.json"
   ],
+  "mandatory_before_submission": [
+    "/api/claim-gate-rules.json",
+    "/api/evidence-input-schema.v1.json",
+    "/api/claim-gate-output-schema.v1.json",
+    "/api/report-builder-policy.json",
+    "/api/generated-by-schema.v1.json"
+  ],
+  "submission_requires": {
+    "claim_gate": true,
+    "report_builder": true,
+    "generated_by_metadata": true,
+    "freeform_claims_allowed": false
+  },
   "evaluation_required": [
     "/llms-full.txt",
     "/agent-brief",

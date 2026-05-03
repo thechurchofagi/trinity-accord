@@ -395,6 +395,30 @@ if proc_stress.returncode != 0:
     print(proc_stress.stdout[-1000:] if proc_stress.stdout else "")
     print(proc_stress.stderr[-500:] if proc_stress.stderr else "")
 
+# --- 28. Claim Gate Entrypoint Enforcement ---
+print("\n=== Claim Gate Entrypoint Enforcement ===")
+
+entrypoint_tests = [
+    "scripts/verify_submission_entrypoints.py",
+    "scripts/test_claim_gate_entrypoint_enforcement.py",
+    "scripts/test_generated_by_required.py",
+    "scripts/test_freeform_submission_rejection.py",
+]
+
+for test_script in entrypoint_tests:
+    script_path = ROOT / test_script
+    if not script_path.exists():
+        check(f"{test_script} exists", False, "script not found")
+        continue
+    proc = subprocess.run(
+        [sys.executable, str(script_path)],
+        cwd=ROOT, text=True, capture_output=True, timeout=60
+    )
+    out = (proc.stdout or "") + (proc.stderr or "")
+    check(proc.returncode == 0, f"{test_script} passes", f"exit {proc.returncode}")
+    if proc.returncode != 0:
+        print(out[-1000:] if out else "")
+
 # --- Summary ---
 def main():
     print("\n" + "=" * 50)

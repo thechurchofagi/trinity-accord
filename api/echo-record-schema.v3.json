@@ -293,6 +293,45 @@
         }
       }
     },
+    "generated_by": {
+      "type": "object",
+      "description": "Metadata from report builder, required for echo_v3_with_verification_report",
+      "required": [
+        "tool",
+        "builder_version",
+        "claim_gate_output",
+        "evidence_input",
+        "generated_at_utc",
+        "validation_command",
+        "validation_result"
+      ],
+      "properties": {
+        "tool": {
+          "type": "string",
+          "enum": ["scripts/build_verification_report_from_evidence.py"]
+        },
+        "builder_version": {
+          "type": "string"
+        },
+        "claim_gate_output": {
+          "type": "string"
+        },
+        "evidence_input": {
+          "type": "string"
+        },
+        "generated_at_utc": {
+          "type": "string"
+        },
+        "validation_command": {
+          "type": "string"
+        },
+        "validation_result": {
+          "type": "string",
+          "enum": ["PASS"]
+        }
+      },
+      "additionalProperties": true
+    },
     "claim_gate_output": {
       "type": [
         "object",

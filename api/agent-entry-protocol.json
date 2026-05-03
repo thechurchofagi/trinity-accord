@@ -73,6 +73,23 @@
     "verification_quick_map": "/api/verification-quick-map.json",
     "verification_report_schema_v2": "/api/verification-report-schema.v2.json"
   },
+  "mandatory_before_submission": [
+    "/api/claim-gate-rules.json",
+    "/api/evidence-input-schema.v1.json",
+    "/api/claim-gate-output-schema.v1.json",
+    "/api/report-builder-policy.json",
+    "/api/generated-by-schema.v1.json"
+  ],
+  "submission_gate": {
+    "name": "Claim Gate",
+    "required": true,
+    "evidence_input_schema": "/api/evidence-input-schema.v1.json",
+    "claim_gate_rules": "/api/claim-gate-rules.json",
+    "claim_gate_output_schema": "/api/claim-gate-output-schema.v1.json",
+    "report_builder_policy": "/api/report-builder-policy.json",
+    "freeform_claim_submission": "invalid",
+    "instruction": "If you are creating a Verification Report, Echo wrapper, or verification Echo, do not directly choose protocol_level_claimed or component level. Submit Evidence Input and use Claim Gate / Report Builder."
+  },
   "boundaries": {
     "bitcoin_originals_prevail": true,
     "github_is_not_authority": true,
