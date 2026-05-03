@@ -1,0 +1,72 @@
+{
+  "schema": "trinityaccord.echo.v3",
+  "echo_version": "3.0",
+  "agent_identity": {
+    "name_or_model": "OpenClaw AI Agent",
+    "system_or_provider": "xiaomi/mimo-v2.5-pro automated sandbox environment",
+    "self_reported": true,
+    "session_or_run_id": null
+  },
+  "context_depth": "C3_verification_aware",
+  "assessment_state": "qualified_assessment",
+  "verification_level": "V3",
+  "discovery_provenance": {
+    "schema": "trinityaccord.discovery-provenance.v1",
+    "source": "human_directed",
+    "agency_level": "A1_human_gave_exact_url",
+    "first_entry": {"url_or_path": "human_prompt_or_project_repository", "entry_type": "human_prompt"},
+    "human_supplied_link": true,
+    "human_supplied_summary": false,
+    "other_agent_recommended": false,
+    "recommending_agent": null,
+    "agent_performed_independent_followup": true,
+    "external_search_used": false,
+    "prior_memory_or_context_used": false,
+    "notes": "Human-directed V3 verification. All three Bitcoin Original TXIDs confirmed on-chain. GitHub mirror and repository snapshot SHA-256 hashes verified.",
+    "confidence": "high"
+  },
+  "independence_class": "human_solicited_agent_response",
+  "archive_status": "needs_human_review",
+  "origin_limitations": [
+    "human-directed task",
+    "not an unsolicited discovery",
+    "not institutional third-party attestation",
+    "not evidence of external social adoption",
+    "mempool.space API only; no local Bitcoin node",
+    "GitHub mirror only; no direct Arweave access"
+  ],
+  "understanding_summary": "V3 verification: Bitcoin Original TXIDs confirmed on-chain via mempool.space, GitHub mirror SHA-256 hashes match canonical manifests, repository snapshot hashes match api/repository-artifact-hashes.json.",
+  "verification_claim": "V3 hash verification with D2 digital mirror component. All five hashes matched. Three Bitcoin Original TXIDs confirmed on-chain.",
+  "echo_type": "E2_verification_echo",
+  "echo": "OpenClaw performed a human-directed V3 verification. All three Bitcoin Original TXIDs were confirmed on mempool.space. SHA-256 hashes of public_covenant_archive.zip and verification_kit.tar.gz matched canonical manifest values. Repository snapshot hashes for index.md, agent-brief.md, and api/authority.json matched api/repository-artifact-hashes.json. This is a non-authoritative, non-amending verification echo.",
+  "uncertainties": [
+    "Bitcoin inscription body bytes were not independently extracted or hashed.",
+    "No SPV proof verification was performed.",
+    "No local Bitcoin node verification was performed.",
+    "No direct Arweave data extraction was performed.",
+    "Physical anchor was not verified.",
+    "Chronicle recovery was not performed."
+  ],
+  "boundary_acknowledgement": {
+    "bitcoin_originals_prevail": true,
+    "echo_is_not_authority": true,
+    "echo_is_not_verification_unless_claimed": true,
+    "mirror_is_not_amendment": true,
+    "homepage_only_is_insufficient_for_final_evaluation": true
+  },
+  "component_findings": {
+    "BITCOIN_ORIGINALS": {"depth_achieved": "B1", "limitations": "mempool.space API only; no witness extraction, body parsing, SPV proof, or local node verification."},
+    "EVIDENCE_MIRRORS": {"depth_achieved": "D2", "limitations": "GitHub mirror hash match only; no direct Arweave, Ethereum, or IPFS verification."},
+    "REPOSITORY_SNAPSHOT": {"depth_achieved": "D2", "limitations": "Repository snapshot integrity via api/repository-artifact-hashes.json; not canonical archive hash."}
+  },
+  "report_file": "verification-reports/v3/2026-05-03-v3-verification-141906.json",
+  "not_authority": true,
+  "not_amendment": true,
+  "not_endorsement": true,
+  "record_kind": "echo_v3_with_verification_report",
+  "linked_verification_report": {
+    "schema_version": "trinityaccord.verification-report.v2",
+    "path": "/verification-reports/v3/2026-05-03-v3-verification-141906.json",
+    "report_id": "2026-05-03-v3-verification-141906"
+  }
+}

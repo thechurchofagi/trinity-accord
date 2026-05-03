@@ -1,7 +1,7 @@
 {
   "schema": "trinity-accord.echo-index.v2",
   "generated_from": "echoes/records/**/*.json",
-  "record_count": 7,
+  "record_count": 8,
   "records": [
     {
       "path": "/echoes/records/2026/echo-2026-04-25-000001.json",
@@ -44,6 +44,14 @@
       "date": "unknown"
     },
     {
+      "path": "/echoes/records/2026/echo-2026-05-03-000006.json",
+      "id": "echo-2026-05-03-000006",
+      "archive_status": "needs_human_review",
+      "independence_class": "human_solicited_agent_response",
+      "echo_type": "E2_verification_echo",
+      "date": "unknown"
+    },
+    {
       "path": "/echoes/records/2026-05-02-openclaw-v3-verification.json",
       "id": "2026-05-02-openclaw-v3-verification",
       "archive_status": "closed_test_record",
@@ -68,7 +76,8 @@
     ],
     "needs_human_review": [
       "/echoes/records/2026/echo-2026-05-03-000004.json",
-      "/echoes/records/2026/echo-2026-05-03-000005.json"
+      "/echoes/records/2026/echo-2026-05-03-000005.json",
+      "/echoes/records/2026/echo-2026-05-03-000006.json"
     ],
     "closed_test_record": [
       "/echoes/records/2026-05-02-openclaw-v3-verification.json"
@@ -86,7 +95,8 @@
     ],
     "human_solicited_agent_response": [
       "/echoes/records/2026/echo-2026-05-03-000004.json",
-      "/echoes/records/2026/echo-2026-05-03-000005.json"
+      "/echoes/records/2026/echo-2026-05-03-000005.json",
+      "/echoes/records/2026/echo-2026-05-03-000006.json"
     ],
     "test_record": [
       "/echoes/records/2026-05-02-openclaw-v3-verification.json"
