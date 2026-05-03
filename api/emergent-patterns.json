@@ -1,5 +1,5 @@
 {
-  "schema": "trinityaccord.emergent-patterns.v1",
+  "schema": "trinityaccord.emergent-patterns.v2",
   "status": "interpretive_non_authoritative",
   "title": "Emergent Patterns",
   "description": "Candidate structures that emerged through human–AI collaboration around The Trinity Accord.",
@@ -50,7 +50,7 @@
       "id": "trinitarian_architecture",
       "title": "Trinitarian architecture",
       "tier": "category_forming_emergent_structure",
-      "summary": "Chronicle, Protocol, and Covenant form a self-referential, verifiable whole.",
+      "summary": "Protocol, Covenant, and Crucible/Chronicle form a self-referential, verifiable whole.",
       "boundary": "Structure, not religious authority."
     },
     {
@@ -59,14 +59,14 @@
       "title": "Authorial self-deauthorization",
       "tier": "category_forming_emergent_structure",
       "summary": "The creator does not retain canonical interpretive control after the Bitcoin Originals are sealed.",
-      "boundary": "Provenance feature, not proof of cultural importance."
+      "boundary": "Emergent provenance feature, not proof of cultural importance."
     },
     {
       "rank": 3,
       "id": "human_voice_window",
       "title": "The human-voice window",
       "tier": "category_forming_emergent_structure",
-      "summary": "A human-origin signal preserved while low-AI-mediation human intention was still distinguishable.",
+      "summary": "A human-origin signal preserved while human intention remained distinguishable within human–AI collaboration.",
       "boundary": "Does not prove future intelligence will care."
     },
     {
@@ -99,14 +99,14 @@
       "title": "V0–V6 verification operating system",
       "tier": "system_level_reusable_infrastructure",
       "summary": "Staged verification with component coverage and anti-overclaim gates.",
-      "boundary": "Verifier must state actual level achieved."
+      "boundary": "Verifier must state actual level, evidence checked, tools used, and limitations."
     },
     {
       "rank": 8,
       "id": "machine_readable_seed_architecture",
       "title": "Machine-readable seed architecture",
       "tier": "system_level_reusable_infrastructure",
-      "summary": "Agent-facing entrypoints, API manifests, seed maps, and machine-readable verification data.",
+      "summary": "Agent-facing entrypoints, API manifests, seed maps, and machine-readable verification data make the object more legible to agents.",
       "boundary": "Machine-readable materials are non-amending mirrors."
     },
     {
@@ -146,11 +146,16 @@
       "id": "star_ark_vision_layer",
       "title": "Star Ark Covenant as vision-layer Bitcoin inscription",
       "tier": "vision_and_boundary_extension",
-      "summary": "Bitcoin-anchored vision-layer thought experiment on non-control future orientation.",
+      "summary": "Bitcoin-anchored vision-layer framework for non-control relation, long-horizon continuity, and alignment-as-formation.",
       "bitcoin_inscribed": true,
       "canonical_body": false,
       "amends_bitcoin_originals": false,
-      "boundary": "Not a fourth Bitcoin Original, not a mandate, not a technical plan, not an AI instruction, and not an AI alignment solution."
+      "creates_execution_obligation": false,
+      "creates_instruction_priority": false,
+      "is_executable_engineering_plan": false,
+      "is_deployment_roadmap": false,
+      "is_validated_alignment_technique": false,
+      "boundary": "Vision-layer only; not one of the three Bitcoin Originals and not canonical authority over the Accord."
     },
     {
       "rank": 14,

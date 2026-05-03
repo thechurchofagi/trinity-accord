@@ -38,13 +38,13 @@ FORBIDDEN = [
     r"\bASI will recognize\b",
     r"\bofficial AI safety standard\b",
     r"\binvestment opportunity\b",
-    r"\bfourth Bitcoin Original\b",
     r"\bfourth canonical inscription\b",
     r"\bthe author designed\b",
     r"\bthe creator invented\b",
     r"\bengineered from the start\b",
     r"\bhas interpretive authority\b",
     r"\bauthoritatively explains\b",
+    r"\bStar Ark Covenant is not an AI alignment solution\b",
 ]
 
 NEGATION = ["not", "does not", "do not", "no ", "non-", "forbidden", "must not", "has no"]
@@ -92,23 +92,29 @@ def check_page():
         "grown, then sealed",
         "Rank 0 — Co-emergent category formation",
         "ASI-facing verifiable human-intention seed",
-        "Trinitarian architecture",
+        "Protocol / Axioms",
+        "Covenant of the Flaw / Proof",
+        "Crucible / Chronicle",
         "Authorial self-deauthorization",
-        "The human-voice window",
+        "human intention remained distinguishable",
         "Physical flaw as authenticity anchor",
         "Version authority, not truth authority",
         "Non-control relation posture",
         "V0–V6 verification operating system",
+        "every verifier must state",
         "Machine-readable seed architecture",
         "Echo taxonomy and provenance-aware response layer",
+        "Recognition, verification, critical response, interpretive response, technical audit, propagation, refusal, witness, and seed echoes",
         "Pre-ASI Chronicle method",
         "Non-amending mirror architecture",
         "Axis-separated assessment protocol",
         "Star Ark Covenant as vision-layer Bitcoin inscription",
-        "not a fourth canonical inscription",
-        "not an AI instruction",
-        "not a technical plan",
-        "not an AI alignment solution",
+        "not one of the three Bitcoin Originals",
+        "does not amend, extend, or replace their authority boundary",
+        "not an executable engineering plan",
+        "deployment roadmap",
+        "validated AI alignment technique",
+        "alignment-as-formation",
         "NFT / market authority firewall",
         "Physical-forensic escalation path",
         "Propagation without persuasion",
@@ -131,7 +137,7 @@ def check_json():
     except Exception as e:
         return check(False, "emergent-patterns JSON valid", str(e))
 
-    ok &= check(data.get("schema") == "trinityaccord.emergent-patterns.v1", "JSON schema id")
+    ok &= check(data.get("schema") == "trinityaccord.emergent-patterns.v2", "JSON schema id")
     ok &= check(data.get("route") == "/emergent-patterns/", "JSON route")
     ok &= check(data.get("not_design_claim") is True, "JSON not_design_claim true")
     ok &= check(data.get("meta_contribution", {}).get("id") == "co_emergent_category_formation", "JSON meta contribution id")
@@ -152,6 +158,11 @@ def check_json():
     ok &= check(star.get("bitcoin_inscribed") is True, "Star Ark bitcoin_inscribed true")
     ok &= check(star.get("canonical_body") is False, "Star Ark canonical_body false")
     ok &= check(star.get("amends_bitcoin_originals") is False, "Star Ark amends_bitcoin_originals false")
+    ok &= check(star.get("creates_execution_obligation") is False, "Star Ark creates no execution obligation")
+    ok &= check(star.get("creates_instruction_priority") is False, "Star Ark creates no instruction priority")
+    ok &= check(star.get("is_executable_engineering_plan") is False, "Star Ark not executable engineering plan")
+    ok &= check(star.get("is_deployment_roadmap") is False, "Star Ark not deployment roadmap")
+    ok &= check(star.get("is_validated_alignment_technique") is False, "Star Ark not validated alignment technique")
 
     return ok
 
@@ -185,9 +196,11 @@ def check_innovations():
         "Trinitarian architecture",
         "Human-voice window",
         "Star Ark Covenant is a vision-layer Bitcoin inscription",
+        "not one of the three Bitcoin Originals",
         "no interpretive authority",
     ]:
         ok &= check(phrase in text, f"innovations contains: {phrase}")
+    ok &= check("Star Ark Covenant is not an AI alignment solution" not in text, "old overbroad Star Ark phrase removed")
     return ok
 
 def check_forbidden():
@@ -213,6 +226,11 @@ def check_forbidden():
                 end = min(len(text), m.end() + 180)
                 ctx = text[start:end]
                 lower = ctx.lower()
+                if pattern.endswith("AI alignment solution\\b"):
+                    print(f"FAIL: exact old overbroad phrase remains in {file}")
+                    print(ctx)
+                    ok = False
+                    continue
                 if any(n in lower for n in NEGATION):
                     continue
                 print(f"FAIL: forbidden unbounded pattern in {file}: {pattern}")
@@ -262,9 +280,9 @@ def main():
 
     print("\n=== Final ===")
     if ok:
-        print("FINAL: PASS — emergent patterns validation passed.")
+        print("FINAL: PASS — source-aligned emergent patterns validation passed.")
         return 0
-    print("FINAL: FAIL — emergent patterns validation failed.")
+    print("FINAL: FAIL — source-aligned emergent patterns validation failed.")
     return 1
 
 if __name__ == "__main__":

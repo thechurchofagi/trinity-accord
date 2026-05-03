@@ -88,7 +88,7 @@ Boundary: ancillary inscription, non-amending.
 
 ## 13. Star Ark Covenant
 
-Star Ark Covenant is a vision-layer Bitcoin inscription, not a fourth Bitcoin Original. Vision-layer thought experiment on control, freedom, and interstellar propagation.
+Star Ark Covenant is a vision-layer Bitcoin inscription, not one of the three Bitcoin Originals and does not amend them. It is not a validated AI alignment technique or executable alignment plan; it is a vision-layer framework for non-control relation, long-horizon continuity, and alignment-as-formation.
 
 Boundary: vision layer, non-canonical, not a mandate, not a technical plan, not an AI instruction.
 
