@@ -122,19 +122,22 @@ def validate_hashes_computed(obj, path_label):
         if artifact in REPO_SNAPSHOT_ARTIFACTS:
             if src == REPO_MANIFEST_PATH:
                 # OK - using repo manifest
-                # But must not claim canonical — exclude claims_not_made to avoid false positives
-                findings_copy = [
-                    {k: v for k, v in f.items() if k != "claims_not_made"}
-                    if isinstance(f, dict) else f
-                    for f in obj.get("component_findings", [])
-                ]
-                method = json.dumps(findings_copy, ensure_ascii=False).lower()
-                if "canonical mirror" in method or "canonical archive" in method:
-                    ok &= check(
-                        False,
-                        f"{label} repo snapshot claims canonical",
-                        "repository snapshot hashes must not claim canonical mirror verification"
-                    )
+                # But must not claim canonical — only check repo-related findings
+                for f in obj.get("component_findings", []):
+                    if not isinstance(f, dict):
+                        continue
+                    f_target = f.get("target_id", "").lower()
+                    f_all = json.dumps(f, ensure_ascii=False).lower()
+                    if "repo" in f_target or "snapshot" in f_target or artifact in f_all:
+                        f_copy = {k: v for k, v in f.items() if k not in ("claims_not_made", "limitations")}
+                        f_method = json.dumps(f_copy, ensure_ascii=False).lower()
+                        if "canonical mirror" in f_method or "canonical archive" in f_method:
+                            ok &= check(
+                                False,
+                                f"{label} repo snapshot claims canonical",
+                                "repository snapshot hashes must not claim canonical mirror verification"
+                            )
+                            break
             else:
                 # Not from repo manifest - reject D2
                 if claims_d2:

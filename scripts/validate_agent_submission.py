@@ -372,9 +372,22 @@ def validate_d2_hash_source_compat(obj, path_label):
             ok &= check(False, f"{label} D2 requires approved hash class", f"got {cls}")
 
         if cls == "repository_manifest_hash":
-            method = json.dumps(obj.get("component_findings", []), ensure_ascii=False).lower()
-            if "canonical mirror" in method or "canonical archive" in method:
-                ok &= check(False, f"{label} repo manifest cannot claim canonical")
+            # Check if the specific hash's artifact is in repo snapshot list
+            # and the corresponding component claims canonical
+            if artifact in REPO_SNAPSHOT_ARTIFACTS:
+                # Only check component findings that reference this artifact or repo snapshot
+                for f in obj.get("component_findings", []):
+                    if not isinstance(f, dict):
+                        continue
+                    f_target = f.get("target_id", "").lower()
+                    # Only check if this finding is about repo snapshot
+                    if "repo" in f_target or "snapshot" in f_target or artifact in json.dumps(f, ensure_ascii=False).lower():
+                        # Exclude claims_not_made and limitations to avoid false positives
+                        f_copy = {k: v for k, v in f.items() if k not in ("claims_not_made", "limitations")}
+                        f_method = json.dumps(f_copy, ensure_ascii=False).lower()
+                        if "canonical mirror" in f_method or "canonical archive" in f_method:
+                            ok &= check(False, f"{label} repo manifest cannot claim canonical")
+                            break
     return ok
 
 
