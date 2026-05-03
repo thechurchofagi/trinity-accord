@@ -18,7 +18,6 @@ exclude:
   - DEPLOYMENT.md
   - .gitignore
   - package-lock.json
-  - archive_legacy_index_2025_09.md
   - trinity-echo-worker/
   - .env
   - .env.*
