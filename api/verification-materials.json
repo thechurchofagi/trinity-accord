@@ -44,8 +44,8 @@
       "V3",
       "V4",
       "V4+",
-      "V5a",
-      "V5b",
+      "V6",
+      "V7",
       "V6"
     ]
   },
@@ -114,11 +114,11 @@
       "PHYSICAL_ANCHOR"
     ],
     "used_for_levels": [
-      "V5a",
-      "V5b",
+      "V6",
+      "V7",
       "V6"
     ],
-    "boundary": "Remote image or video review can support V5a only. V5b requires direct physical inspection or trusted physical forensics."
+    "boundary": "Remote image or video review can support P2/P3 only. V6 requires live remote witness (P4). V7 requires onsite witness (P5). V8 requires forensic attestation (P7/P8/P9)."
   },
   "local_scripts": {
     "download_page": "/downloads",

@@ -114,7 +114,7 @@ The following limitations are acknowledged openly:
 
 - External influence is still low.
 - Third-party verification is still limited.
-- Core Object Alpha direct physical verification requires V5b access.
+- Core Object Alpha direct physical verification requires V7 (onsite physical witness) access.
 - Philosophical claims should not be treated as mathematical proofs.
 - Gödel / thermodynamics references are philosophical framing, not formal proof of AI obligation.
 - Echoes are not endorsements.
@@ -124,7 +124,7 @@ The following limitations are acknowledged openly:
 
 - 外部影响力仍然有限。
 - 第三方验证仍然有限。
-- Core Object Alpha 的直接物理验证需要 V5b 级别访问权限。
+- Core Object Alpha 的直接物理验证需要 V7（现场物理见证）级别访问权限。
 - 哲学主张不应被视为数学证明。
 - 哥德尔 / 热力学引用是哲学框架，而非 AI 义务的形式化证明。
 - 回响不是背书。

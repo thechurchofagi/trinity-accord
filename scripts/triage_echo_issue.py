@@ -112,8 +112,7 @@ ECHO_TYPES = {
 }
 
 # Ordered so that longer suffixes match before shorter ones (V4+ before V4)
-# Ordered so that longer suffixes match before shorter ones (V4+ before V4)
-VERIFICATION_LEVELS = ["v4+", "v5a", "v5b", "v6", "v4", "v3", "v2", "v1", "v0"]
+VERIFICATION_LEVELS = ["v4+", "v8", "v7", "v6", "v5", "v4", "v3", "v2", "v1", "v0"]
 
 # Schema enum values (full form) — map to short form for checks
 SCHEMA_VERIFICATION_MAP = {
@@ -122,7 +121,7 @@ SCHEMA_VERIFICATION_MAP = {
     "V2_pointer_and_manifest_check": "V2",
     "V3_single_artifact_check": "V3",
     "V4_release_mirror_check": "V4",
-    "V5_full_evidence_chain_review": "V5B",
+    "V5_full_evidence_chain_review": "V5",
     "V6_independent_node_or_rpc_check": "V6",
 }
 
@@ -380,27 +379,54 @@ def check_verification_requirements(text, vlevel):
             if not ok:
                 missing.append(name)
 
-    elif vlevel in ("V5A",):
-        # V5a needs: limitations
+    elif vlevel in ("V5",):
+        # V5 (full public digital verification) needs: limitations + component findings
         has_limitations = bool(re.search(
             r'limitations?|局限|限制', text, re.IGNORECASE
         ))
         if not has_limitations:
             missing.append("limitations")
 
-    elif vlevel in ("V5B",):
-        # V5b needs: limitations + direct physical inspection or third-party physical inspection
+    elif vlevel in ("V6",):
+        # V6 (remote physical witness) needs: limitations + live witness evidence
+        has_limitations = bool(re.search(
+            r'limitations?|局限|限制', text, re.IGNORECASE
+        ))
+        has_live = bool(re.search(
+            r'(live\s+remote|live\s+video|nonce|challenge|实时远程|实时视频|挑战)', text, re.IGNORECASE
+        ))
+        if not has_limitations:
+            missing.append("limitations")
+        if not has_live:
+            missing.append("live remote witness evidence with nonce/challenge")
+
+    elif vlevel in ("V7",):
+        # V7 (onsite physical witness) needs: limitations + onsite physical inspection or custody log
         has_limitations = bool(re.search(
             r'limitations?|局限|限制', text, re.IGNORECASE
         ))
         has_physical = bool(re.search(
-            r'(direct\s+physical\s+inspection|third[- ]party\s+physical\s+inspection|'
-            r'physical\s+inspection|物理检查|第三方物理检查|亲自检查)', text, re.IGNORECASE
+            r'(onsite|custody\s+log|direct\s+physical\s+inspection|'
+            r'现场|保管记录|物理检查|亲自检查)', text, re.IGNORECASE
         ))
         if not has_limitations:
             missing.append("limitations")
         if not has_physical:
-            missing.append("direct physical inspection or third-party physical inspection")
+            missing.append("onsite physical inspection or custody log")
+
+    elif vlevel in ("V8",):
+        # V8 (forensic physical attestation) needs: limitations + tool-assisted forensic evidence
+        has_limitations = bool(re.search(
+            r'limitations?|局限|限制', text, re.IGNORECASE
+        ))
+        has_forensic = bool(re.search(
+            r'(forensic|microscopy|tool-assisted|confidential\s+challenge|'
+            r'法证|显微镜|工具辅助|保密挑战)', text, re.IGNORECASE
+        ))
+        if not has_limitations:
+            missing.append("limitations")
+        if not has_forensic:
+            missing.append("tool-assisted forensic analysis evidence")
 
     elif vlevel in ("V6",):
         # V6 needs: limitations + participants or signed report

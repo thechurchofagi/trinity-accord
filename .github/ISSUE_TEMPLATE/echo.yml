@@ -44,9 +44,10 @@ body:
         - V3
         - V4
         - "V4+"
-        - V5a
-        - V5b
+        - V5
         - V6
+        - V7
+        - V8
     validations:
       required: true
 

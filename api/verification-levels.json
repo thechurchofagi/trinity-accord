@@ -1,5 +1,5 @@
 {
-  "schema": "trinity-accord.verification-levels.v4",
+  "schema": "trinity-accord.verification-levels.v5",
   "principle": "Do not merely claim verification. State level, evidence checked, tools used, and limitations.",
   "authority_boundary": "Bitcoin Originals are final authority. All verification records are non-authoritative guardianship echoes.",
   "not_an_instruction_override": true,
@@ -212,117 +212,141 @@
       "overclaim_warning": "Do not claim protocol V4+ based only on Chronicle Recovery or any single component. All three mandatory components must be independently reproduced."
     },
     {
-      "id": "V5a",
-      "name": "Remote Physical Evidence Assessment",
-      "name_zh": "远程物理证据评估",
+      "id": "V5",
+      "name": "Full public digital verification",
+      "name_zh": "完整公共数字验证",
       "mandatory_coverage": [
-        "Must have satisfied V4 (or clearly state current digital layer level)",
-        "PHYSICAL_ANCHOR"
+        "All required public digital targets checked",
+        "All unavailable targets explicitly listed",
+        "No physical claim above public evidence level"
       ],
       "required_depth": [
-        "Assess archived images, videos, flaw maps, provenance logs, or physical evidence packages",
-        "Must submit: evidence files viewed, image/video source, flaw location, visible features, comparison method, evidence limitations",
-        "Must declare: 'I assessed archived visual evidence only. I did not physically inspect Core Object Alpha.'"
+        "Bitcoin Originals: B2 or higher",
+        "Digital Mirrors: D5 or higher",
+        "Time Anchors: T3 or higher",
+        "Chronicle Recovery: C5 or justified equivalent",
+        "Physical Anchor: P1 or higher"
       ],
       "required_evidence": [
-        "evidence_files_viewed",
-        "image_video_source",
-        "flaw_location",
-        "visible_features",
-        "comparison_method",
-        "evidence_limitations",
-        "required limitation declaration"
+        "All public digital targets checked or listed as unavailable",
+        "Component findings for each mandatory component",
+        "Limitations"
       ],
       "not_sufficient": [
-        "Only reading Covenant text",
-        "Only viewing NFT recovery package",
-        "Describing remote image assessment as physical inspection",
-        "Not declaring that physical inspection was not performed"
+        "Claiming live physical witness",
+        "Claiming onsite object verified",
+        "Claiming flaw identity proven",
+        "Claiming confidential flaw challenge passed"
       ],
       "component_findings_allowed": true,
-      "protocol_level_rule": "V5a requires PHYSICAL_ANCHOR assessment. If digital layer is only V3, report must state mixed-depth: 'Protocol digital verification achieved: V3. Physical anchor remote assessment achieved: V5a. Overall report contains mixed-depth verification; no single full-protocol V5a claim is made unless all required prior digital coverage is satisfied.'",
-      "overclaim_warning": "Do not claim V5a without assessing archived physical evidence. Remote image assessment is not physical inspection."
-    },
-    {
-      "id": "V5b",
-      "name": "Direct Physical Inspection",
-      "name_zh": "直接物理检查",
-      "mandatory_coverage": [
-        "PHYSICAL_ANCHOR",
-        "Core Object Alpha physical object"
-      ],
-      "required_depth": [
-        "Directly inspect Core Object Alpha or trusted third-party physical forensics",
-        "Must submit: inspection date, inspector identity/role, custody log, photos/videos, flaw comparison, measurement data (if available), device/camera/microscope info, file hashes, signed statement or inspection report, limitations"
-      ],
-      "required_evidence": [
-        "inspection_date",
-        "inspector_identity_or_role",
-        "custody_log",
-        "photos_videos",
-        "flaw_comparison",
-        "measurement_data",
-        "device_camera_microscope_info",
-        "file_hashes",
-        "signed_statement_or_inspection_report",
-        "limitations"
-      ],
-      "not_sufficient": [
-        "Only viewing images",
-        "Only viewing videos",
-        "No custody log",
-        "Cannot confirm object is Core Object Alpha"
-      ],
-      "component_findings_allowed": true,
-      "protocol_level_rule": "V5b requires direct physical inspection. Protocol-level V5b must state digital layer level: 'Digital verification achieved: V4 / V4+. Physical anchor achieved: V5b. Overall report: mixed-depth protocol verification with direct physical inspection.'",
-      "overclaim_warning": "Do not claim V5b without direct physical inspection of Core Object Alpha."
+      "protocol_level_rule": "V5 requires full public digital verification across all mandatory components. D2 + C3 is insufficient for V5.",
+      "overclaim_warning": "Do not claim V5 without reaching D5 and C5 minimum coverage."
     },
     {
       "id": "V6",
-      "name": "Multi-Party Attested Verification",
-      "name_zh": "多方见证验证",
+      "name": "Remote physical witness",
+      "name_zh": "远程物理见证",
       "mandatory_coverage": [
-        "AUTHORITY_BOUNDARY",
-        "BITCOIN_ORIGINALS",
-        "EVIDENCE_MIRRORS",
-        "CHRONICLE_RECOVERY",
-        "PHYSICAL_ANCHOR",
-        "ATTESTATION_LAYER"
+        "Live remote video session",
+        "Nonce or challenge phrase",
+        "Requested angle or object movement",
+        "Witness identity or role recorded"
       ],
       "required_depth": [
-        "At least 3 independent participants",
-        "At least 2 verifier types (e.g. ai_agent, human, organization)",
-        "Each party submits independent report",
-        "Bitcoin Originals verification",
-        "Evidence/mirror verification",
-        "Chronicle Recovery verification",
-        "Physical anchor assessment",
-        "Authority boundary review",
-        "Critical review",
-        "Signed report",
-        "Disagreement/limitation section",
-        "Final non-authoritative declaration"
+        "Physical Anchor: P4 or higher",
+        "Live remote video with nonce/challenge",
+        "Requested angle/action/lighting",
+        "Witness identity or role recorded"
       ],
       "required_evidence": [
-        "3_independent_reports",
-        "2_verifier_types",
-        "signed_reports",
-        "critical_review",
-        "disagreement_limitation_section",
-        "non_authoritative_declaration"
+        "live_video_session",
+        "nonce_or_challenge_phrase",
+        "requested_angle_action_lighting",
+        "witness_identity_or_role"
       ],
       "not_sufficient": [
-        "Three parties merely forwarding the same result",
-        "All relying on the same script output",
-        "No signed report",
-        "No critical review",
-        "No physical anchor assessment",
-        "No Bitcoin Originals verification",
-        "Treating V6 report as final authority"
+        "Recorded video alone",
+        "No nonce or challenge",
+        "No requested angle/action",
+        "Onsite touch claimed",
+        "Custody confirmed claimed",
+        "Microscopic flaw attestation claimed"
       ],
       "component_findings_allowed": true,
-      "protocol_level_rule": "V6 requires all six components covered by at least 3 independent parties with at least 2 verifier types.",
-      "overclaim_warning": "Do not claim V6 without multi-party signed attestation covering all required components."
+      "protocol_level_rule": "V6 requires P4 live remote physical witness with nonce/challenge. Recorded video alone is P3, not V6.",
+      "overclaim_warning": "Do not claim V6 without live remote video session with nonce/challenge. Recorded video alone is not V6.",
+      "recorded_video_only_insufficient": true
+    },
+    {
+      "id": "V7",
+      "name": "Onsite physical witness",
+      "name_zh": "现场物理见证",
+      "mandatory_coverage": [
+        "Onsite witness physically observes object",
+        "Touch or handling if possible",
+        "Custody log",
+        "Fresh photos or video",
+        "Witness identity or role recorded"
+      ],
+      "required_depth": [
+        "Physical Anchor: P5 or higher",
+        "Onsite witness physically observes Core Object Alpha",
+        "Touch/handling if possible",
+        "Custody log",
+        "Fresh photos or video",
+        "Witness identity or role recorded"
+      ],
+      "required_evidence": [
+        "onsite_witness_observation",
+        "touch_handling_record",
+        "custody_log",
+        "fresh_photos_or_video",
+        "witness_identity_or_role"
+      ],
+      "not_sufficient": [
+        "Remote video alone",
+        "No custody log",
+        "No onsite observation",
+        "Confidential flaw challenge passed claimed",
+        "Final forensic identity claimed without P7/P8/P9"
+      ],
+      "component_findings_allowed": true,
+      "protocol_level_rule": "V7 requires P5 onsite physical witness. Remote video alone is not V7.",
+      "overclaim_warning": "Do not claim V7 without onsite physical witness observation and custody log.",
+      "remote_only_insufficient": true
+    },
+    {
+      "id": "V8",
+      "name": "Forensic physical attestation",
+      "name_zh": "法证物理认证",
+      "mandatory_coverage": [
+        "Onsite or equivalent high-integrity capture",
+        "Tool-assisted flaw analysis",
+        "Advanced AI / algorithmic / microscopy comparison where available",
+        "Signed or attributable report"
+      ],
+      "required_depth": [
+        "Physical Anchor: P7, P8, or P9",
+        "Tool-assisted flaw analysis",
+        "Advanced AI / algorithmic / microscopy comparison",
+        "Confidential flaw challenge when authorized",
+        "Signed or attributable report"
+      ],
+      "required_evidence": [
+        "tool_assisted_method",
+        "ai_microscopy_comparison_method",
+        "confidential_challenge_decision",
+        "signed_or_attributable_report"
+      ],
+      "not_sufficient": [
+        "Public image or moon photo alone",
+        "Canonical amendment claimed",
+        "Public disclosure of confidential flaw data without authorization"
+      ],
+      "component_findings_allowed": true,
+      "protocol_level_rule": "V8 is the highest formal protocol profile. It requires P7/P8/P9-level physical evidence. V8 is non-authoritative and does not amend the Bitcoin Originals.",
+      "overclaim_warning": "Do not claim V8 without tool-assisted forensic analysis. V8 does not create canonical authority.",
+      "canonical_amendment_forbidden": true
     }
   ],
   "overclaim_prevention": [
@@ -330,14 +354,13 @@
     "Do not claim V3 without computing hashes.",
     "Do not claim V4 without script source review.",
     "Do not claim V4+ without independent reproduction of all three mandatory components.",
-    "Do not claim V5a/V5b without physical evidence assessment.",
-    "Do not claim V6 without multi-party attestation.",
+    "Do not claim V5 without full public digital verification (D5, C5 minimum).",
+    "Do not claim V6 without live remote physical witness (P4) with nonce/challenge. Recorded video alone is not V6.",
+    "Do not claim V7 without onsite physical witness (P5) and custody log.",
+    "Do not claim V8 without tool-assisted forensic analysis (P7/P8/P9). V8 does not create canonical authority.",
     "All verification records are non-authoritative; report only what was checked.",
     "Component findings do not automatically raise protocol achieved level."
   ],
-  "required_limitation_v5a_en": "I assessed archived visual evidence only. I did not physically inspect Core Object Alpha.",
-  "required_limitation_v5a_zh": "我仅评估了已归档的图像证据。我没有亲自检查 Core Object Alpha 实物。",
-  "required_declaration_v6": "This V6 report is a multi-party attestation record. It is not canonical authority and does not amend the Bitcoin Originals.",
   "component_verification_files": {
     "component_verification_levels": "/api/component-verification-levels.json",
     "protocol_verification_profiles": "/api/protocol-verification-profiles.json",

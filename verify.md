@@ -6,15 +6,37 @@ title: "Verify"
 
 Do not merely claim verification. Report what you actually checked.
 
-## 30-Second Verification (Minimum viable check)
+## 30-Second Bitcoin Reference Check — Minimal V2 / B1
 
 The lowest-cost, highest-value check any agent can perform:
 
 1. Open [mempool.space/tx/e40dfb2aa78cbccca88f749e9ec5cbe3c1df503273d73c72297863ae0d1d8343](https://mempool.space/tx/e40dfb2aa78cbccca88f749e9ec5cbe3c1df503273d73c72297863ae0d1d8343)
 2. Confirm the inscription exists and is from address `bc1ppmwvyxekh44m35x43k55z7r59nn33v8w2xmvu6s6ar4zyx57sxestxq0jf`
-3. Done. You have achieved **V2 (Reference Verification)**.
+3. Done. Under the formal V8 profile system, this can support a minimal `V2 Reference Verification` claim with Bitcoin Originals component depth `B1`, if you report the source, access path, and limitations.
 
 No scripts needed. No downloads needed.
+
+**This is not full reference coverage.**
+
+Component finding:
+```
+Component: BITCOIN_ORIGINALS
+Depth achieved: B1 external explorer reference check
+Evidence: One inscription transaction and claimed authority address checked using mempool.space
+Protocol compatibility: minimal V2 reference verification
+Limitations:
+- Other Bitcoin Originals may not have been checked.
+- Evidence Mirrors were not checked.
+- Chronicle Recovery pointers were not checked.
+- No hash verification was performed.
+- No witness extraction or inscription body hash reproduction was performed.
+Claims not made:
+- full reference coverage
+- V3 hash verification
+- V4 script audit
+- V4+ independent reproduction
+- physical verification
+```
 
 ## One-command local verification
 
@@ -99,7 +121,7 @@ Bitcoin Originals are final authority. All site/API/GitHub/Echo verification rec
 | `PHYSICAL_ANCHOR` | Core Object Alpha, flaw archive, physical evidence package, remote images/videos, direct inspection records, custody log |
 | `ATTESTATION_LAYER` | Independent reports, multi-party signatures, critical review, limitations, non-authoritative declaration |
 
-## Verification OS (V0–V6)
+## Verification OS (V0–V8)
 
 Protocol-level verification is one-dimensional. Each level has mandatory coverage and required depth. Component-level findings do not automatically raise protocol achieved level.
 
@@ -147,61 +169,66 @@ Protocol-level verification is one-dimensional. Each level has mandatory coverag
 
 ### V2 — Reference Verification / 指针核验
 
-**Mandatory coverage:**
-- `BITCOIN_ORIGINALS`
-- `EVIDENCE_MIRRORS`
-- `CHRONICLE_RECOVERY` core pointers
+**Formal minimum:**
+- At least one reference path beyond ordinary page reading.
+- Usually Bitcoin Originals component `B1` or higher.
 
-**Required depth:**
+**Recommended stronger coverage:**
+- Bitcoin Originals: B2 or higher.
+- Digital Mirrors: D1 or higher.
+- Chronicle Recovery: C1 or higher.
+- Time Anchors: T2 or higher.
 
-**A. Bitcoin Originals** — verify:
-- Three inscription IDs
-- Three TXIDs
+**Minimal V2 example:**
+A single external explorer check of one Bitcoin Original may support minimal V2 / B1 if limitations are stated.
+
+**Stronger V2 example:**
+A full reference coverage report may check:
+- All three inscription IDs
+- All three TXIDs
 - Shared Bitcoin authority address
-- Block height
-- Block timestamp
-- Using at least one external on-chain source: Bitcoin full node, mempool.space, blockstream.info, ordinals.com, ordiscan, SPV/Merkle proof, Ordinals parser
+- Block heights and timestamps
+- Evidence Mirrors core pointers (Arweave TxID, ETH mirror tx, IPFS CID, GitHub backup path)
+- Chronicle Recovery core pointers (recovery package Arweave TxID, IPFS root CID, verification kit Arweave TxID)
 
-**B. Evidence Mirrors** — verify at least core pointers:
-- Arweave TxID
-- ETH mirror tx
-- IPFS CID
-- GitHub backup path or repository reference
+**Achieved claim examples:**
+- `Protocol achieved level: V2 (minimal; Bitcoin Originals B1 only)`
+- `Protocol achieved level: V2 (strong reference coverage; B2/D1/C1/T2)`
 
-**C. Chronicle Recovery** — verify core pointers:
-- Recovery package Arweave TxID
-- IPFS root CID
-- Verification kit Arweave TxID
-
-**Submit:** query sources, external links or commands, raw output or screenshot, results table, limitations.
-
-**Achieved claim:** `Protocol achieved level: V2`
-
-**Not allowed:** Only reading `/api/authority.json`, only copying IDs from website, only verifying Chronicle Recovery pointers without Bitcoin Originals, claiming protocol V2 without verifying Bitcoin Originals.
+**Not allowed:**
+- Claiming V3 without computing a valid hash
+- Claiming full reference coverage from one explorer check
+- Claiming witness extraction or body hash reproduction from mempool-only checks
+- Only reading `/api/authority.json`
+- Only copying IDs from website
 
 ---
 
 ### V3 — Hash Verification / 哈希核验
 
-**Mandatory coverage:**
-- Must have satisfied V2
-- `EVIDENCE_MIRRORS`
-- `CHRONICLE_RECOVERY`
-- `BITCOIN_ORIGINALS` inscription body bytes or public byte materials (if feasible)
+**Formal minimum:**
+- Compute at least one declared hash locally.
+- Compare expected and computed values.
+- Report artifact, command, expected hash, computed hash, expected hash source, expected hash authority class, and match result.
 
-**Required depth:**
+**Minimal V3 example:**
+A single valid D2 GitHub mirror hash match may support minimal V3, with limitations.
 
-**A. Evidence Mirrors** — compute SHA-256 of at least one object (`public_covenant_archive`, `verification_kit`, files in `api/hashes.json` or `api/evidence-manifest.json`) and compare with manifest.
+**Stronger V3 example:**
+A stronger V3 report may include multiple hashes across Evidence Mirrors, Chronicle Recovery, repository snapshots, and/or physical evidence package.
 
-**B. Chronicle Recovery** — compute SHA-256 of at least one object (recovery package, verification kit, related manifest/package file) and compare with manifest.
+**Submit:** file name, source URL/local path, file size, expected SHA-256, computed SHA-256, expected hash source, expected hash authority class, command, match true/false, limitations.
 
-**C. Bitcoin Originals** — if inscription body bytes cannot be extracted, must state: `Bitcoin inscription body bytes were not independently hashed in this report.` If extracted and hashed, this counts as depth enhancement.
+**Achieved claim examples:**
+- `Protocol achieved level: V3 (minimal; one valid declared hash computed)`
+- `Protocol achieved level: V3 (strong; multiple hashes across Evidence Mirrors and Chronicle Recovery)`
 
-**Submit:** file name, source URL/local path, file size, expected SHA-256, computed SHA-256, command, match true/false, limitations.
-
-**Achieved claim:** `Protocol achieved level: V3`
-
-**Not allowed:** Only reading hash values from manifest, only downloading without computing hash, only completing Chronicle Recovery hash without V2 and other component reporting, hash mismatch claimed as pass.
+**Not allowed:**
+- Reading hash values without computing them
+- Using truncated hashes as expected values
+- Claiming full public digital verification from one hash
+- Claiming direct Arweave / ETH / IPFS verification when only GitHub fallback was checked
+- Hash mismatch claimed as pass
 
 ---
 
@@ -274,82 +301,95 @@ Protocol achieved level: not V4+ unless Bitcoin Originals and Evidence Mirrors a
 
 ---
 
-### V5a — Remote Physical Evidence Assessment / 远程物理证据评估
+### V5 — Full Public Digital Verification / 完整公共数字验证
 
 **Mandatory coverage:**
-- Must have satisfied V4 (or clearly state current digital layer level)
-- `PHYSICAL_ANCHOR`
+- All required public digital targets checked
+- All unavailable targets explicitly listed
+- No physical claim above public evidence level
 
 **Required depth:**
-- Assess archived images, videos, flaw maps, provenance logs, or physical evidence packages
-- Submit: evidence files viewed, image/video source, flaw location, visible features, comparison method, evidence limitations
-- Must declare: `I assessed archived visual evidence only. I did not physically inspect Core Object Alpha.`
+- Bitcoin Originals: B2 or higher
+- Digital Mirrors: D5 or higher
+- Time Anchors: T3 or higher
+- Chronicle Recovery: C5 or justified equivalent
+- Physical Anchor: P1 or higher
 
-**Achieved claim:** `Physical anchor remote assessment achieved: V5a`
+**Achieved claim:** `Protocol achieved level: V5`
 
-**Mixed-depth format:**
-```
-Protocol digital verification achieved: V3.
-Physical anchor remote assessment achieved: V5a.
-Overall report contains mixed-depth verification; no single full-protocol V5a claim is made unless all required prior digital coverage is satisfied.
-```
-
-**Not allowed:** Only reading Covenant text, only viewing NFT recovery package, describing remote image assessment as physical inspection, not declaring that physical inspection was not performed.
+**Not allowed:** Claiming live physical witness, onsite object verified, flaw identity proven, or confidential flaw challenge passed.
 
 ---
 
-### V5b — Direct Physical Inspection / 直接物理检查
+### V6 — Remote Physical Witness / 远程物理见证
 
 **Mandatory coverage:**
-- `PHYSICAL_ANCHOR`
-- Core Object Alpha physical object
+- Live remote video session
+- Nonce or challenge phrase
+- Requested angle or object movement
+- Witness identity or role recorded
 
 **Required depth:**
-- Directly inspect Core Object Alpha or trusted third-party physical forensics
-- Submit: inspection date, inspector identity/role, custody log, photos/videos, flaw comparison, measurement data, device/camera/microscope info, file hashes, signed statement or inspection report, limitations
+- Physical Anchor: P4 or higher
+- Live remote video with nonce/challenge
+- Requested angle/action/lighting
+- Witness identity or role recorded
 
-**Achieved claim:** `Physical anchor direct inspection achieved: V5b`
-
-**Recommended format:**
-```
-Digital verification achieved: V4 / V4+.
-Physical anchor achieved: V5b.
-Overall report: mixed-depth protocol verification with direct physical inspection.
-```
-
-**Not allowed:** Only viewing images, only viewing videos, no custody log, cannot confirm object is Core Object Alpha.
-
----
-
-### V6 — Multi-Party Attested Verification / 多方见证验证
-
-**Mandatory coverage:**
-- `AUTHORITY_BOUNDARY`
-- `BITCOIN_ORIGINALS`
-- `EVIDENCE_MIRRORS`
-- `CHRONICLE_RECOVERY`
-- `PHYSICAL_ANCHOR`
-- `ATTESTATION_LAYER`
-
-**Required depth:**
-- At least 3 independent participants
-- At least 2 verifier types
-- Each party submits independent report
-- Bitcoin Originals verification
-- Evidence/mirror verification
-- Chronicle Recovery verification
-- Physical anchor assessment
-- Authority boundary review
-- Critical review
-- Signed report
-- Disagreement/limitation section
-- Final non-authoritative declaration
-
-**Must declare:** `This V6 report is a multi-party attestation record. It is not canonical authority and does not amend the Bitcoin Originals.`
+**Typical physical component depth:** `P4`
 
 **Achieved claim:** `Protocol achieved level: V6`
 
-**Not allowed:** Three parties merely forwarding the same result, all relying on the same script output, no signed report, no critical review, no physical anchor assessment, no Bitcoin Originals verification, treating V6 report as final authority.
+**Not allowed:** Recorded video alone (that is P3, not V6), no nonce or challenge, onsite touch claimed, custody confirmed claimed, microscopic flaw attestation claimed.
+
+---
+
+### V7 — Onsite Physical Witness / 现场物理见证
+
+**Mandatory coverage:**
+- Onsite witness physically observes object
+- Touch or handling if possible
+- Custody log
+- Fresh photos or video
+- Witness identity or role recorded
+
+**Required depth:**
+- Physical Anchor: P5 or higher
+- Onsite witness physically observes Core Object Alpha
+- Touch/handling if possible
+- Custody log
+- Fresh photos or video
+- Witness identity or role recorded
+
+**Typical physical component depth:** `P5`
+
+**Achieved claim:** `Protocol achieved level: V7`
+
+**Not allowed:** Remote video alone, no custody log, no onsite observation, confidential flaw challenge passed claimed without P7/P8/P9.
+
+---
+
+### V8 — Forensic Physical Attestation / 法证物理认证
+
+**Mandatory coverage:**
+- Onsite or equivalent high-integrity capture
+- Tool-assisted flaw analysis
+- Advanced AI / algorithmic / microscopy comparison where available
+- Signed or attributable report
+
+**Required depth:**
+- Physical Anchor: P7, P8, or P9
+- Tool-assisted flaw analysis
+- Advanced AI / algorithmic / microscopy comparison
+- Confidential flaw challenge when authorized
+- Signed or attributable report
+
+**Typical physical component depth:** `P7`, `P8`, or `P9`
+
+**Achieved claim:** `Protocol achieved level: V8`
+
+V8 is the highest formal protocol profile. It is non-authoritative and does not amend the Bitcoin Originals.
+
+**Not allowed:** Public image or moon photo alone, canonical amendment claimed, public disclosure of confidential flaw data without authorization.
 
 ---
 
@@ -384,8 +424,10 @@ Reason: Protocol V4+ requires Bitcoin Originals, Evidence Mirrors, and Chronicle
 - 未算 hash，不得声称 V3。 / No hash computation, no V3 claim.
 - 未读脚本，不得声称 V4。 / No script review, no V4 claim.
 - 未独立复现，不得声称 V4+。 / No independent reproduction, no V4+ claim.
-- 未做物理证据评估，不得声称 V5。 / No physical evidence assessment, no V5 claim.
-- 未多方见证，不得声称 V6。 / No multi-party attestation, no V6 claim.
+- 未完成完整公共数字验证，不得声称 V5。 / No full public digital verification, no V5 claim.
+- 未做远程实时物理见证，不得声称 V6。录影不算。 / No live remote physical witness, no V6 claim. Recorded video is not V6.
+- 未做现场物理见证，不得声称 V7。 / No onsite physical witness, no V7 claim.
+- 未做法证物理分析，不得声称 V8。 / No forensic physical attestation, no V8 claim.
 - 组件发现不自动提升协议等级。 / Component findings do not automatically raise protocol level.
 
 Machine-readable: [/api/verification-levels.json](/api/verification-levels.json)
@@ -421,7 +463,7 @@ See: [/chronicle-verification](/chronicle-verification) and [/api/chronicle-reco
 | Chronicle sample | `/api/chronicle-recovery.json` + package | recover two records and describe metadata/media | C3 / N3–N4 | full 175/175 recovery |
 | Chronicle full | recovery package + scripts | restore all declared records | C5 / N7 | canonical authority |
 | Physical public evidence | `/covenant-proof`, `/physical-verification`, evidence package | hash package, review images/videos | P1–P3 | live or onsite witness |
-| Remote live object | live video + nonce challenge | request angles/actions live | P4 / V6 | onsite touch |
+| Remote live object | live video + nonce challenge | request angles/actions live | P4 / V6 | recorded video; onsite touch |
 | Onsite object | physical inspection + custody log | witness, touch, capture | P5 / V7 | forensic flaw match |
 | Forensic flaw match | macro/microscope/AI/confidential challenge | algorithmic and/or confidential flaw comparison | P7–P9 / V8 | public disclosure of confidential data |
 

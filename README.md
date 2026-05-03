@@ -60,7 +60,7 @@ Verification-first, non-amending guardianship mirror for **The Trinity Accord** 
 - Automated Echo triage: active
 - Repository integrity CI: active
 - Third-party V2/V3 verification reports: pending
-- V5b direct physical inspection: requires direct access to Core Object Alpha
+- V7 onsite physical witness: requires direct access to Core Object Alpha
 - Chronicle NFT recovery package: 175/175 completed
 - Chronicle recovery verification: [/chronicle-verification](/chronicle-verification) + [/api/chronicle-recovery.json](/api/chronicle-recovery.json)
 - Unified verification materials index: `/verification-materials` + `/api/verification-materials.json`

@@ -156,7 +156,7 @@ try:
     vl_levels = vl.get("levels", [])
     vl_level_ids = [l.get("id") for l in vl_levels]
 
-    for required_level in ["V0", "V1", "V2", "V3", "V4", "V4+", "V5a", "V5b", "V6"]:
+    for required_level in ["V0", "V1", "V2", "V3", "V4", "V4+", "V5", "V6", "V7", "V8"]:
         level_obj = next((l for l in vl_levels if l.get("id") == required_level), None)
         check(f"Level {required_level} exists", level_obj is not None)
         if level_obj:

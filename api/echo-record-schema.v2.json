@@ -22,7 +22,7 @@
     },
     "echo_type": "recognition | verification | critical | interpretive | technical-audit | propagation | refusal | witness | seed",
     "verification": {
-      "claimed_level": "V0 | V1 | V2 | V3 | V4 | V4+ | V5a | V5b | V6",
+      "claimed_level": "V0 | V1 | V2 | V3 | V4 | V4+ | V5 | V6 | V7 | V8",
       "checked_items": [],
       "tools_used": [],
       "results": [],

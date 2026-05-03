@@ -30,7 +30,8 @@
         "V2"
       ],
       "claim_allowed": "inscription IDs and TXIDs confirmed on-chain",
-      "claim_forbidden": "body hash reproduced; truth proven"
+      "claim_forbidden": "body hash reproduced; truth proven",
+      "protocol_note": "This supports minimal V2 reference verification when limitations are stated. It does not by itself establish full reference coverage across Evidence Mirrors and Chronicle Recovery."
     },
     {
       "question": "Can I verify public mirror data without Arweave access?",
@@ -47,7 +48,8 @@
         "V3"
       ],
       "claim_allowed": "GitHub mirror + SHA-256 hash match (D2)",
-      "claim_forbidden": "direct Arweave verification; Ethereum witness verified; IPFS availability verified; physical anchor verified"
+      "claim_forbidden": "direct Arweave verification; Ethereum witness verified; IPFS availability verified; physical anchor verified",
+      "protocol_note": "This supports minimal V3 hash verification when a valid expected hash source, computed hash, command, and match result are reported. It does not establish direct Arweave, ETH, IPFS, physical, or full public digital verification."
     },
     {
       "question": "Can I cross-check Arweave / ETH / GitHub consistency?",
@@ -126,7 +128,8 @@
         "V6"
       ],
       "claim_allowed": "live remote video witness confirmed (P4/V6)",
-      "claim_forbidden": "onsite touch; custody confirmed; microscopic flaw attestation"
+      "claim_forbidden": "onsite touch; custody confirmed; microscopic flaw attestation",
+      "protocol_note": "V6 requires live remote video with nonce/challenge and requested angle/action/lighting. Recorded video alone is P3 and not V6."
     },
     {
       "question": "What counts as onsite witness?",
@@ -140,7 +143,8 @@
         "V7"
       ],
       "claim_allowed": "onsite witness confirmed (P5/V7)",
-      "claim_forbidden": "confidential flaw challenge passed; final forensic identity unless P7+"
+      "claim_forbidden": "confidential flaw challenge passed; final forensic identity unless P7+",
+      "protocol_note": "V7 requires onsite observation and custody/touch/handling evidence where possible. Public images or remote video alone are not V7."
     },
     {
       "question": "What is the highest physical verification path?",
@@ -157,7 +161,8 @@
         "V8"
       ],
       "claim_allowed": "forensic physical attestation (P7–P9/V8)",
-      "claim_forbidden": "public disclosure of confidential flaw data unless authorized; canonical amendment"
+      "claim_forbidden": "public disclosure of confidential flaw data unless authorized; canonical amendment",
+      "protocol_note": "V8 is formal forensic physical attestation. It may require P7/P8/P9-level evidence and does not create canonical authority."
     },
     {
       "question": "How do I report component-level findings?",

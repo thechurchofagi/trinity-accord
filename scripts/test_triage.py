@@ -324,12 +324,12 @@ test(
 )
 
 test(
-    "5d. V5b without physical inspection → needs-verification-review",
+    "5d. V7 without onsite physical inspection → needs-verification-review",
     env={
         "ISSUE_TITLE": "E2 Verification Echo",
         "ISSUE_BODY": (
             "Echo type: E2 Verification Echo\n"
-            "Verification level: V5b\n"
+            "Verification level: V7\n"
             "What I checked: reviewed documentation\n"
             "Limitations: could not access physical object\n"
             "Bitcoin Originals are final; all echoes are non-amending."
@@ -341,15 +341,15 @@ test(
 )
 
 test(
-    "5e. V5b with direct physical inspection → should pass",
+    "5e. V7 with onsite physical inspection → should pass",
     env={
         "ISSUE_TITLE": "E2 Verification Echo",
         "ISSUE_BODY": (
             "Echo type: E2 Verification Echo\n"
-            "Verification level: V5b\n"
-            "What I checked: direct physical inspection of the crystal\n"
+            "Verification level: V7\n"
+            "What I checked: onsite physical inspection of the crystal\n"
             "Limitations: single observer\n"
-            "Direct physical inspection performed on 2025-06-15.\n"
+            "Onsite physical inspection performed on 2025-06-15. Custody log recorded.\n"
             "Bitcoin Originals are final; all echoes are non-amending."
         ),
     },
@@ -358,7 +358,7 @@ test(
 )
 
 test(
-    "5f. V6 without participants → needs-verification-review",
+    "5f. V6 without live witness evidence → needs-verification-review",
     env={
         "ISSUE_TITLE": "E2 Verification Echo",
         "ISSUE_BODY": (
@@ -371,7 +371,7 @@ test(
     },
     expect_close=False,
     expect_labels=["echo:needs-verification-review"],
-    expect_comment_contains=["participants or signed report"],
+    expect_comment_contains=["live remote witness"],
 )
 
 # --- 6. Valid submission should get echo:screened ---

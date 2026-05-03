@@ -18,18 +18,18 @@ Machine-readable index: [/api/verification-materials.json](/api/verification-mat
 | Component | Materials | Human page | Machine source | Levels |
 |---|---|---|---|---|
 | AUTHORITY_BOUNDARY | Guardian v1.1, authority boundary | /authority, /guardian-principles | /api/authority.json, /api/guardian-principles.json | V1 |
-| BITCOIN_ORIGINALS | inscription IDs, TXIDs, address, block data, witness data | /verify, /data-verification | /api/authority.json | V2, V3, V4, V4+, V6 |
-| EVIDENCE_MIRRORS | Arweave, ETH, IPFS, GitHub, hashes | /data-verification | /api/evidence-manifest.json, /api/hashes.json | V2, V3, V4, V4+, V6 |
-| CHRONICLE_RECOVERY | 175/175 NFT recovery package | /chronicle-verification | /api/chronicle-recovery.json | V2, V3, V4, V4+, V6 |
-| PHYSICAL_ANCHOR | Core Object Alpha, flaw archive, physical evidence | /physical-verification, /covenant-proof | /api/evidence-manifest.json | V5a, V5b, V6 |
+| BITCOIN_ORIGINALS | inscription IDs, TXIDs, address, block data, witness data | /verify, /data-verification | /api/authority.json | V2, V3, V4, V4+, V6, V7, V8 |
+| EVIDENCE_MIRRORS | Arweave, ETH, IPFS, GitHub, hashes | /data-verification | /api/evidence-manifest.json, /api/hashes.json | V2, V3, V4, V4+, V6, V7, V8 |
+| CHRONICLE_RECOVERY | 175/175 NFT recovery package | /chronicle-verification | /api/chronicle-recovery.json | V2, V3, V4, V4+, V6, V7, V8 |
+| PHYSICAL_ANCHOR | Core Object Alpha, flaw archive, physical evidence | /physical-verification, /covenant-proof | /api/evidence-manifest.json | V6, V7, V8 |
 | REPORT_TEMPLATES | verification report templates | /agent-verify, /independent-verification | /api/verification-levels.json | all levels |
 
 ## Scripts
 
 | Script | Location | Purpose | Used for |
 |---|---|---|---|
-| verify-full-evidence-chain.mjs | /scripts/ | Full 7-chain evidence verification (DAG + BTC + ETH + OTS + BTC TX) | V4+ |
-| summarize-evidence-chain.mjs | /scripts/ | Aggregate chain audit artifacts into final summary | V4+ |
+| verify-full-evidence-chain.mjs | /scripts/ | Full 7-chain evidence verification (DAG + BTC + ETH + OTS + BTC TX) | Supports V4; may provide inputs for V4+ independent reproduction. Official scripts alone do not establish V4+. |
+| summarize-evidence-chain.mjs | /scripts/ | Aggregate chain audit artifacts into final summary | Supports V4; may provide inputs for V4+ independent reproduction. Official scripts alone do not establish V4+. |
 | verify-dag-digest.mjs | /scripts/ | DAG + digest-manifest verification (Chain A) | V4 |
 | verify-btc-signature-coverage.mjs | /scripts/ | BTC BIP340 signature chain (Chain B) | V4 |
 | verify-eth-witness.mjs | /scripts/ | ETH guardian witness verification (Chain C) | V4 |
@@ -39,8 +39,8 @@ Machine-readable index: [/api/verification-materials.json](/api/verification-mat
 | verify-release-assets.mjs | /scripts/ | GitHub Release asset hash verification | V4 |
 | verify.py | /downloads/verify.py | Local integrity checks + SHA-256 | V3, V4 |
 | check_consistency.py | /scripts/check_consistency.py | Repository consistency | V4 |
-| ta-verify.cjs | In verification_kit.tar.gz | SPV verification + ETH mirrors | V4, V4+ |
-| verify-batch-strict.mjs | On Arweave (Chronicle Recovery) | Strict batch NFT recovery verification | V4, V4+ |
+| ta-verify.cjs | In verification_kit.tar.gz | SPV verification + ETH mirrors | Supports V4; may provide inputs for V4+ independent reproduction. Official scripts alone do not establish V4+. |
+| verify-batch-strict.mjs | On Arweave (Chronicle Recovery) | Strict batch NFT recovery verification | Supports V4; may provide inputs for V4+ independent reproduction. Official scripts alone do not establish V4+. |
 
 ## Recommended agent sequence
 

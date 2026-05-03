@@ -70,7 +70,8 @@
         "source checked",
         "access path",
         "limitations"
-      ]
+      ],
+      "minimal_claim_note": "A B1 external reference check may support minimal V2, but does not constitute full reference coverage."
     },
     {
       "level": "V3",
@@ -118,7 +119,8 @@
         "hash command",
         "expected hash",
         "computed hash"
-      ]
+      ],
+      "minimal_claim_note": "One valid declared hash may support minimal V3, but does not constitute full public digital verification."
     },
     {
       "level": "V4",

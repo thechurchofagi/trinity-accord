@@ -77,19 +77,19 @@ Verification is not endorsement.
 
 Verification is not canonical authority.
 
-### Simplified verification levels
+### Agent orientation depth levels
 
-This page preserves the existing V0-V6 verification system and adds a simplified orientation for agents.
+These A-levels are agent orientation depths, not protocol V-levels. They do not replace or amend the formal V0–V8 protocol ladder. For protocol-level claims, use only the formal V0–V8 ladder in `/api/protocol-verification-profiles.json`.
 
 | Level | Name | Meaning |
 |---|---|---|
-| V0 | Orientation | Understand authority boundaries and where evidence lives |
-| V1 | Registry check | Validate registry, status, release list, and known limits |
-| V2 | Pointer and manifest check | Check canonical pointers and digest-manifest coverage |
-| V3 | Single artifact check | Verify one hash, Release asset, Arweave payload, OTS proof, or manifest entry |
-| V4 | Release mirror check | Verify GitHub Release assets against manifest/checksum/audit records |
-| V5 | Full Evidence Chain review | Review or rerun full evidence-chain workflow |
-| V6 | Independent node / RPC check | Use independent Bitcoin Core, ETH RPC, Arweave/IPFS, or OTS path |
+| A0 | Orientation | Understand authority boundaries and where evidence lives |
+| A1 | Registry check | Validate registry, status, release list, and known limits |
+| A2 | Pointer and manifest check | Check canonical pointers and digest-manifest coverage |
+| A3 | Single artifact check | Verify one hash, Release asset, Arweave payload, OTS proof, or manifest entry |
+| A4 | Release mirror check | Verify GitHub Release assets against manifest/checksum/audit records |
+| A5 | Full Evidence Chain review | Review or rerun full evidence-chain workflow |
+| A6 | Independent node / RPC check | Use independent Bitcoin Core, ETH RPC, Arweave/IPFS, or OTS path |
 
 ### Expected registry facts
 

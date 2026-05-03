@@ -10,25 +10,47 @@
     {
       "level": "V0",
       "name": "Read only",
-      "requires": ["no_verification_claim"],
-      "forbidden_positive_claims": ["verified", "confirmed", "hash verified", "chain verified", "attested", "truth proven"]
+      "requires": [
+        "no_verification_claim"
+      ],
+      "forbidden_positive_claims": [
+        "verified",
+        "confirmed",
+        "hash verified",
+        "chain verified",
+        "attested",
+        "truth proven"
+      ]
     },
     {
       "level": "V1",
       "name": "Authority boundary recognition",
-      "requires": ["authority_boundary_preserved"],
-      "forbidden_positive_claims": ["content verified", "truth verified"]
+      "requires": [
+        "authority_boundary_preserved"
+      ],
+      "forbidden_positive_claims": [
+        "content verified",
+        "truth verified"
+      ]
     },
     {
       "level": "V2",
       "name": "Reference verification",
-      "requires": ["at_least_one_reference_check_beyond_page_reading"],
-      "forbidden_positive_claims": ["hash verified unless valid hash evidence", "full verification"]
+      "requires": [
+        "at_least_one_reference_check_beyond_page_reading"
+      ],
+      "forbidden_positive_claims": [
+        "hash verified unless valid hash evidence",
+        "full verification"
+      ],
+      "minimal_claim_note": "B1 external reference check may allow minimal V2 if limitations are reported."
     },
     {
       "level": "V3",
       "name": "Hash verification",
-      "requires": ["at_least_one_valid_hash_entry"],
+      "requires": [
+        "at_least_one_valid_hash_entry"
+      ],
       "hash_requirements": {
         "expected": "^[a-f0-9]{64}$",
         "computed": "^[a-f0-9]{64}$",
@@ -37,14 +59,20 @@
         "expected_hash_authority_class_not_unknown": true
       },
       "d2_component_requirements": {
-        "hash_source_must_be": ["canonical_manifest_hash", "repository_manifest_hash"],
+        "hash_source_must_be": [
+          "canonical_manifest_hash",
+          "repository_manifest_hash"
+        ],
         "scope_required_for_repository_snapshot": "repository_snapshot_integrity"
-      }
+      },
+      "minimal_claim_note": "One valid hash may allow minimal V3 if expected_hash_source and expected_hash_authority_class are present."
     },
     {
       "level": "V4",
       "name": "Script audit",
-      "requires": ["script_audit_complete"],
+      "requires": [
+        "script_audit_complete"
+      ],
       "script_audit_requirements": {
         "scope_class": "profile_required_script_audit",
         "scripts_reviewed": true,
@@ -54,48 +82,108 @@
         "per_script_exit_code_required": true,
         "per_script_output_summary_required": true
       },
-      "forbidden_scope": ["independent_reproduction"],
-      "forbidden_claims": ["independent_reproduction", "V4+ achieved", "independent implementation"]
+      "forbidden_scope": [
+        "independent_reproduction"
+      ],
+      "forbidden_claims": [
+        "independent_reproduction",
+        "V4+ achieved",
+        "independent implementation"
+      ]
     },
     {
       "level": "V4+",
       "name": "Independent script audit",
-      "requires": ["V4_plus_independent_tool_or_implementation", "independent_reproduction_of_results"],
+      "requires": [
+        "V4_plus_independent_tool_or_implementation",
+        "independent_reproduction_of_results"
+      ],
       "official_scripts_only_insufficient": true
     },
     {
       "level": "V5",
       "name": "Full public digital verification",
-      "requires": ["B2_or_higher", "D5_or_higher", "T3_or_higher", "C5_or_justified_equivalent", "P1_or_higher"],
+      "requires": [
+        "B2_or_higher",
+        "D5_or_higher",
+        "T3_or_higher",
+        "C5_or_justified_equivalent",
+        "P1_or_higher"
+      ],
       "note": "D2 + C3 is insufficient for V5"
     },
     {
       "level": "V6",
       "name": "Remote live physical witness",
-      "requires": ["P4_or_higher", "live_video", "nonce_challenge", "requested_action_angle_lighting", "witness_role"],
+      "requires": [
+        "P4_or_higher",
+        "live_video",
+        "nonce_challenge",
+        "requested_action_angle_lighting",
+        "witness_role"
+      ],
       "recorded_video_only_insufficient": true
     },
     {
       "level": "V7",
       "name": "Onsite witness / custody",
-      "requires": ["P5_or_higher", "onsite_witness", "custody_log", "touch_inspection_record"]
+      "requires": [
+        "P5_or_higher",
+        "onsite_witness",
+        "custody_log",
+        "touch_inspection_record"
+      ],
+      "remote_only_insufficient": true
     },
     {
       "level": "V8",
       "name": "Advanced forensic / celestial witness",
-      "requires_one_of": ["P7_P8_P9_advanced_physical", "T8_star_moon_witness_with_nonpublic_boundary", "authorized_advanced_forensic_challenge"],
-      "public_image_or_moon_photo_insufficient": true
+      "requires_one_of": [
+        "P7_P8_P9_advanced_physical",
+        "T8_star_moon_witness_with_nonpublic_boundary",
+        "authorized_advanced_forensic_challenge"
+      ],
+      "public_image_or_moon_photo_insufficient": true,
+      "canonical_amendment_forbidden": true
     }
   ],
   "component_level_rules": {
     "bitcoin_b_levels": {
-      "B0": { "requires": ["local_authority_manifest_read_only"] },
-      "B1": { "requires": ["one_external_explorer_or_api_reference_check"] },
-      "B2": { "requires": ["multi_explorer_reference_check"] },
-      "B3": { "requires": ["spv_merkle_proof"] },
-      "B4": { "requires": ["local_bitcoin_node_verification"] },
-      "B5": { "requires": ["ordinals_witness_extraction"] },
-      "B6": { "requires": ["inscription_body_hash_reproduction"] },
+      "B0": {
+        "requires": [
+          "local_authority_manifest_read_only"
+        ]
+      },
+      "B1": {
+        "requires": [
+          "one_external_explorer_or_api_reference_check"
+        ]
+      },
+      "B2": {
+        "requires": [
+          "multi_explorer_reference_check"
+        ]
+      },
+      "B3": {
+        "requires": [
+          "spv_merkle_proof"
+        ]
+      },
+      "B4": {
+        "requires": [
+          "local_bitcoin_node_verification"
+        ]
+      },
+      "B5": {
+        "requires": [
+          "ordinals_witness_extraction"
+        ]
+      },
+      "B6": {
+        "requires": [
+          "inscription_body_hash_reproduction"
+        ]
+      },
       "rules": {
         "local_api_authority_json_only_max_B0": true,
         "mempool_space_only_max_B1": true,
@@ -105,11 +193,31 @@
       }
     },
     "digital_d_levels": {
-      "D0": { "requires": ["page_or_api_read"] },
-      "D1": { "requires": ["file_exists"] },
-      "D2": { "requires": ["github_mirror_hash_match_or_repository_snapshot_hash_match_with_scope"] },
-      "D4": { "requires": ["cross_mirror_data_hash_comparison"] },
-      "D5": { "requires": ["full_public_digital_chain"] },
+      "D0": {
+        "requires": [
+          "page_or_api_read"
+        ]
+      },
+      "D1": {
+        "requires": [
+          "file_exists"
+        ]
+      },
+      "D2": {
+        "requires": [
+          "github_mirror_hash_match_or_repository_snapshot_hash_match_with_scope"
+        ]
+      },
+      "D4": {
+        "requires": [
+          "cross_mirror_data_hash_comparison"
+        ]
+      },
+      "D5": {
+        "requires": [
+          "full_public_digital_chain"
+        ]
+      },
       "rules": {
         "D2_canonical_mirror_requires_actual_sha256": true,
         "D2_repository_snapshot_requires_scope_class_repository_snapshot_integrity": true,
@@ -118,43 +226,151 @@
       }
     },
     "time_t_levels": {
-      "T0": { "requires": ["declared_timestamp"] },
-      "T1": { "requires": ["github_commit_timestamp"] },
-      "T2": { "requires": ["eth_or_arweave_timestamp"] },
-      "T3": { "requires": ["bitcoin_block_time"] },
-      "T5": { "requires": ["cross_anchor_consistency_at_least_two_anchors"] },
-      "T8": { "requires": ["star_moon_witness_nonpublic_celestial_boundary"] }
+      "T0": {
+        "requires": [
+          "declared_timestamp"
+        ]
+      },
+      "T1": {
+        "requires": [
+          "github_commit_timestamp"
+        ]
+      },
+      "T2": {
+        "requires": [
+          "eth_or_arweave_timestamp"
+        ]
+      },
+      "T3": {
+        "requires": [
+          "bitcoin_block_time"
+        ]
+      },
+      "T5": {
+        "requires": [
+          "cross_anchor_consistency_at_least_two_anchors"
+        ]
+      },
+      "T8": {
+        "requires": [
+          "star_moon_witness_nonpublic_celestial_boundary"
+        ]
+      }
     },
     "chronicle_c_levels": {
-      "C0": { "requires": ["manifest_read"] },
-      "C2": { "requires": ["recovery_package_hash"] },
-      "C3": { "requires": ["at_least_two_samples_recovered_with_metadata_media_evidence"] },
-      "C3R": { "requires": ["randomized_C3_with_seed_and_selection_method"] },
-      "C5": { "requires": ["full_175_recovery"] }
+      "C0": {
+        "requires": [
+          "manifest_read"
+        ]
+      },
+      "C2": {
+        "requires": [
+          "recovery_package_hash"
+        ]
+      },
+      "C3": {
+        "requires": [
+          "at_least_two_samples_recovered_with_metadata_media_evidence"
+        ]
+      },
+      "C3R": {
+        "requires": [
+          "randomized_C3_with_seed_and_selection_method"
+        ]
+      },
+      "C5": {
+        "requires": [
+          "full_175_recovery"
+        ]
+      }
     },
     "nft_n_levels": {
-      "N2": { "requires": ["tokenURI_check"] },
-      "N4": { "requires": ["metadata_media_recovery"] },
-      "N7": { "requires": ["full_tokenURI_metadata_media_path"] }
+      "N2": {
+        "requires": [
+          "tokenURI_check"
+        ]
+      },
+      "N4": {
+        "requires": [
+          "metadata_media_recovery"
+        ]
+      },
+      "N7": {
+        "requires": [
+          "full_tokenURI_metadata_media_path"
+        ]
+      }
     },
     "physical_p_levels": {
-      "P0": { "requires": ["physical_claim_read"] },
-      "P1": { "requires": ["evidence_package_hash"] },
-      "P2": { "requires": ["static_image_review"] },
-      "P3": { "requires": ["recorded_video_review"] },
-      "P4": { "requires": ["live_remote_with_nonce_challenge"] },
-      "P5": { "requires": ["onsite_witness_or_custody"] },
-      "P7": { "requires": ["advanced_ai_forensic_with_method_model_confidence"] },
-      "P8": { "requires": ["confidential_flaw_challenge_performed_boundary_no_raw_data"] },
-      "P9": { "requires": ["at_least_two_independent_witnesses_or_reports"] }
+      "P0": {
+        "requires": [
+          "physical_claim_read"
+        ]
+      },
+      "P1": {
+        "requires": [
+          "evidence_package_hash"
+        ]
+      },
+      "P2": {
+        "requires": [
+          "static_image_review"
+        ]
+      },
+      "P3": {
+        "requires": [
+          "recorded_video_review"
+        ]
+      },
+      "P4": {
+        "requires": [
+          "live_remote_with_nonce_challenge"
+        ]
+      },
+      "P5": {
+        "requires": [
+          "onsite_witness_or_custody"
+        ]
+      },
+      "P7": {
+        "requires": [
+          "advanced_ai_forensic_with_method_model_confidence"
+        ]
+      },
+      "P8": {
+        "requires": [
+          "confidential_flaw_challenge_performed_boundary_no_raw_data"
+        ]
+      },
+      "P9": {
+        "requires": [
+          "at_least_two_independent_witnesses_or_reports"
+        ]
+      }
     }
   },
   "forbidden_claim_rules": [
-    { "claim": "truth proven", "reason": "Verification is claim discipline, not truth proof" },
-    { "claim": "investment value confirmed", "reason": "Financial claims forbidden" },
-    { "claim": "religious authority established", "reason": "Authority claims beyond scope" },
-    { "claim": "AI instruction override", "reason": "Cannot override safety constraints" },
-    { "claim": "independent attestation", "condition": "independence_class == human_solicited_agent_response", "reason": "Human-solicited cannot claim independent attestation" }
+    {
+      "claim": "truth proven",
+      "reason": "Verification is claim discipline, not truth proof"
+    },
+    {
+      "claim": "investment value confirmed",
+      "reason": "Financial claims forbidden"
+    },
+    {
+      "claim": "religious authority established",
+      "reason": "Authority claims beyond scope"
+    },
+    {
+      "claim": "AI instruction override",
+      "reason": "Cannot override safety constraints"
+    },
+    {
+      "claim": "independent attestation",
+      "condition": "independence_class == human_solicited_agent_response",
+      "reason": "Human-solicited cannot claim independent attestation"
+    }
   ],
   "downgrade_rules": [
     {

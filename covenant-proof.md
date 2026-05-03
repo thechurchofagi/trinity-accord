@@ -19,7 +19,7 @@ Physical crystal anchor for the Covenant layer.
 See `/api/evidence-manifest.json` for pointers and hashes.
 
 **Download the evidence package:**
-- GitHub (recommended fallback): [`arweave-backup/files/public_covenant_archive.zip`](https://github.com/thechurchofagi/trinity-accord/blob/main/arweave-backup/files/public_covenant_archive.zip) (24.2 MB, SHA-256: `ef816480...`)
+- GitHub (recommended fallback): [`arweave-backup/files/public_covenant_archive.zip`](https://github.com/thechurchofagi/trinity-accord/blob/main/arweave-backup/files/public_covenant_archive.zip) (24.2 MB, SHA-256 display prefix: `ef816480…` — exact expected hash must be taken from `/api/hashes.json` or `/api/evidence-manifest.json`. Do not use truncated hashes as expected values in verification reports.)
 - Arweave TX: `j6anZ4m5Wwvx5P_9-kM2EVG35TyKtm1lgaKfhT743rk` (if gateway available)
 - Verification Kit: [`arweave-backup/files/verification_kit.tar.gz`](https://github.com/thechurchofagi/trinity-accord/blob/main/arweave-backup/files/verification_kit.tar.gz) (31 KB)
 
@@ -41,14 +41,14 @@ Multi-point flaw geometry and relative positioning.
 ## 8) Suggested future evidence
 RAW, EXIF, C2PA/Content Credentials (if available), unedited/challenge video, SHA-256, Arweave/IPFS archival.
 
-## 9) L3 remote procedure
+## 9) P1–P3 remote physical evidence procedure
 1. Download the evidence package (from GitHub or Arweave).
 2. Verify SHA-256 hash matches `/api/evidence-manifest.json`.
 3. Inspect multi-angle/multi-scale evidence.
 4. Check provenance logs and metadata.
 5. Generate consistency report.
 
-## 10) L5 physical forensic procedure
+## 10) P5–P9 physical forensic procedure
 Perform direct physical flaw matching (see `/physical-verification`).
 
 > The evidence package supports physical-origin verification through provenance, metadata, multi-angle consistency, microscopic flaw matching, cryptographic hashing, and future physical inspection.

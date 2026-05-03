@@ -11,7 +11,7 @@ permalink: /independent-verification/
 
 ## Core principle · 核心原则
 
-Protocol-level verification is one-dimensional: V0 → V1 → V2 → V3 → V4 → V4+ → V5a → V5b → V6.
+Protocol-level verification is one-dimensional: V0 → V1 → V2 → V3 → V4 → V4+ → V5 → V6 → V7 → V8.
 
 Each level has mandatory coverage and required depth. Component-level findings do not automatically raise protocol achieved level.
 
@@ -100,15 +100,31 @@ Overclaim check:
 - [ ] I do not claim V3 unless required hashes were computed.
 - [ ] I do not claim V4 unless required scripts were reviewed before being run.
 - [ ] I do not claim V4+ unless required independent reproductions were completed.
-- [ ] I do not claim V5a unless archived physical evidence was assessed.
-- [ ] I do not claim V5b unless Core Object Alpha was directly inspected or trusted physical forensics were reviewed.
-- [ ] I do not claim V6 unless this is a multi-party signed attestation covering all required components.
+- [ ] I do not claim V5 unless full public digital verification (D5, C5) was achieved.
+- [ ] I do not claim V6 unless live remote physical witness (P4) with nonce/challenge was performed.
+- [ ] I do not claim V7 unless onsite physical witness (P5) with custody log was performed.
+- [ ] I do not claim V8 unless tool-assisted forensic analysis (P7/P8/P9) was performed.
 ```
 
 ## Report categories · 报告分类
 
 ### V2 Reports: Inscription & Address Verification
 ### V2 报告：铭文与地址验证
+
+A V2 report may be minimal or strong.
+
+**Minimal V2:**
+- At least one reference path beyond ordinary page reading
+- Typically Bitcoin Originals B1
+- Limitations clearly stated
+
+**Strong V2:**
+- Bitcoin Originals B2 or higher
+- Digital Mirrors D1 or higher
+- Chronicle Recovery C1 or higher
+- Optional Time Anchors T2 or higher
+
+Do not call a minimal B1 check "full reference coverage."
 
 These reports verify:
 - Inscription IDs exist on Bitcoin
@@ -130,6 +146,19 @@ These reports verify:
 
 ### V3 Reports: Hash & Manifest Verification
 ### V3 报告：哈希与清单验证
+
+A V3 report may be minimal or strong.
+
+**Minimal V3:**
+- At least one valid declared hash computed locally
+- Expected hash source and authority class reported
+
+**Strong V3:**
+- Multiple artifacts and domains checked
+- GitHub fallback limitations stated
+- No direct Arweave/ETH/IPFS claim unless those sources were actually queried
+
+Do not call a single hash check "full public digital verification."
 
 These reports verify:
 - SHA-256 hashes of evidence archives match [/api/hashes.json](/api/hashes.json)
@@ -202,13 +231,14 @@ Alternatively, open an [issue](https://github.com/thechurchofagi/trinity-accord/
 |-------|-----------------|-------------------|----------------|
 | V0 | Read | At least one entry point | Agent has encountered the object |
 | V1 | Boundary Recognition | All component boundary identities | Agent recognizes the authority boundary |
-| V2 | Reference Verification | BITCOIN_ORIGINALS + EVIDENCE_MIRRORS + CHRONICLE_RECOVERY pointers | Inscriptions and pointers are valid |
-| V3 | Hash Verification | V2 + EVIDENCE_MIRRORS hashes + CHRONICLE_RECOVERY hashes | Evidence archives match published hashes |
+| V2 | Reference Verification | At least one reference path (minimal B1) | Inscriptions and pointers are valid |
+| V3 | Hash Verification | At least one valid declared hash computed | Evidence archives match published hashes |
 | V4 | Script-Audited | V3 + scripts reviewed and run across 3+ categories | Verification tools are correct |
 | V4+ | Independent Reproduction | V4 + all 3 mandatory components independently reproduced | Results reproducible without official tools |
-| V5a | Remote Physical | V4 + PHYSICAL_ANCHOR archived evidence | Archived physical evidence assessed |
-| V5b | Direct Physical | PHYSICAL_ANCHOR Core Object Alpha | Physical object directly inspected |
-| V6 | Multi-Party | All 6 components, 3+ parties, 2+ verifier types | Full multi-party attestation |
+| V5 | Full Public Digital | B2, D5, T3, C5, P1 minimum | All public digital targets verified |
+| V6 | Remote Physical Witness | P4 live remote with nonce/challenge | Live remote physical witness |
+| V7 | Onsite Physical Witness | P5 onsite with custody log | Onsite physical observation |
+| V8 | Forensic Physical | P7/P8/P9 tool-assisted forensic analysis | Forensic physical attestation |
 
 See [/api/verification-levels.json](/api/verification-levels.json) for the complete machine-readable definition.
 
