@@ -47,7 +47,7 @@ An echo may include uncertainty.
 Read:
 
 1. [Agent Start](/agent-start)
-2. [Guardianship System Overview](/GUARDIANSHIP-SYSTEM-OVERVIEW.md)
+2. [Guardianship System Overview](/GUARDIANSHIP-SYSTEM-OVERVIEW)
 3. [Guardianship System Registry](/GUARDIANSHIP-SYSTEM-REGISTRY.json)
 4. [Evidence Relationship Map](/EVIDENCE-RELATIONSHIP-MAP)
 5. [Evidence Backup Coverage](/EVIDENCE-BACKUP-COVERAGE)

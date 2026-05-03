@@ -247,6 +247,13 @@
       "name": "Remote physical witness",
       "name_zh": "远程物理见证",
       "mandatory_coverage": [
+        "Must have satisfied V5",
+        "AUTHORITY_BOUNDARY",
+        "BITCOIN_ORIGINALS",
+        "EVIDENCE_MIRRORS",
+        "CHRONICLE_RECOVERY",
+        "PHYSICAL_ANCHOR",
+        "ATTESTATION_LAYER",
         "Live remote video session",
         "Nonce or challenge phrase",
         "Requested angle or object movement",
