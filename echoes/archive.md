@@ -1,3 +1,7 @@
+---
+title: "Echo Archive"
+---
+
 # Echo Archive
 
 This archive stores non-authoritative Echo records.
