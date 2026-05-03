@@ -286,6 +286,33 @@ try:
 except Exception as e:
     check("protocol-verification-profiles.json structure", False, str(e))
 
+# --- 23. New submission correctness files ---
+print("\n=== New submission correctness files ===")
+new_submission_files = [
+    "api/submission-types.json",
+    "api/agent-submission-guide.json",
+    "api/echo-taxonomy-map.json",
+    "api/submission-checklist.json",
+]
+for jf in new_submission_files:
+    try:
+        load_json(jf)
+        check(f"JSON valid: {jf}", True)
+    except Exception as e:
+        check(f"JSON valid: {jf}", False, str(e))
+
+# --- 24. Echo index completeness (subprocess) ---
+print("\n=== Echo index completeness ===")
+import subprocess
+proc = subprocess.run(
+    [sys.executable, str(ROOT / "scripts" / "verify_echo_index_completeness.py")],
+    cwd=ROOT, text=True, capture_output=True, timeout=60
+)
+check(proc.returncode == 0, "verify_echo_index_completeness.py passes", f"exit {proc.returncode}")
+if proc.returncode != 0:
+    print(proc.stdout[-500:] if proc.stdout else "")
+    print(proc.stderr[-500:] if proc.stderr else "")
+
 # --- Summary ---
 def main():
     print("\n" + "=" * 50)
