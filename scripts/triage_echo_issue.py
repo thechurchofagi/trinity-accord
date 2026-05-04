@@ -15,7 +15,7 @@ def emit_result(result):
     comment = result.get("comment", "")
     if comment:
         result["comment"] = TRIAGE_MARKER + "\n" + comment
-    emit_result(result)
+    print(json.dumps(result, indent=2))
 
 # --- Config ---
 RATE_LIMIT_60M = 3
