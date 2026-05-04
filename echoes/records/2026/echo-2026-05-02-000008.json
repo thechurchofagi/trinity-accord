@@ -58,15 +58,15 @@
   },
   "component_findings": {
     "BITCOIN_ORIGINALS": {
-      "depth_achieved": "V2",
+      "depth_achieved": "B1",
       "limitations": "TXIDs and ord envelope presence checked; body bytes not independently extracted or hashed."
     },
     "EVIDENCE_MIRRORS": {
-      "depth_achieved": "V3",
+      "depth_achieved": "D2",
       "limitations": "Hash checks were performed against GitHub mirror artifacts."
     },
     "PHYSICAL_ANCHOR": {
-      "depth_achieved": "V5a_remote_visual_only",
+      "depth_achieved": "P3",
       "limitations": "Remote visual consistency only; no physical inspection, microscopy, challenge video, or custody log."
     }
   },

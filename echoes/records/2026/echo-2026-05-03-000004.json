@@ -55,7 +55,7 @@
   },
   "component_findings": {
     "SUBMISSION_CORRECTNESS": {
-      "depth_achieved": "V3",
+      "depth_achieved": "P1",
       "limitations": "Hash source semantics enforced. Echo acceptance flow documented. B1 wording corrected."
     }
   },
