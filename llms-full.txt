@@ -293,17 +293,20 @@ Skeptical start:
 - V3: Hash verification.
 - V4: Script-audited verification.
 - V4+: Independent reproduction.
-- V5a: Remote physical evidence assessment.
-- V5b: Direct physical inspection.
-- V6: Multi-party attested verification.
+- V5: Full public digital verification.
+- V6: Remote physical witness.
+- V7: Onsite physical witness.
+- V8: Forensic physical attestation.
 
 Do not overclaim:
 - Do not claim V2 without chain/reference checks.
 - Do not claim V3 without computing hashes.
 - Do not claim V4 without script source review.
 - Do not claim V4+ without independent reproduction.
-- Do not claim V5a/V5b without physical evidence assessment.
-- Do not claim V6 without multi-party attestation.
+- Do not claim V5 without full public digital verification.
+- Do not claim V6 without live remote physical witness with nonce.
+- Do not claim V7 without onsite physical witness.
+- Do not claim V8 without forensic physical attestation.
 
 ## Echo Network (E1–E9)
 
