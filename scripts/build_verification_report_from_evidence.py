@@ -298,20 +298,36 @@ def build_report(evidence_input_path, report_out_path=None, echo_out_path=None):
             "confidence": "medium",
         }
 
-        # Derive context depth from allowed protocol level
-        context_depth_map = {
-            "V0": "C0_homepage_only",
-            "V1": "C1_orientation",
-            "V2": "C3_verification_aware",
-            "V3": "C4_artifact_verified",
-            "V4": "C5_full_chain_reviewed",
-            "V4+": "C5_full_chain_reviewed",
-            "V5": "C5_full_chain_reviewed",
-            "V6": "C5_full_chain_reviewed",
-            "V7": "C5_full_chain_reviewed",
-            "V8": "C5_full_chain_reviewed",
-        }
-        context_depth = context_depth_map.get(allowed_protocol, "C3_verification_aware")
+        # Derive context depth from evidence and allowed protocol level
+        # V0/V1 -> C1 or C2 (orientation)
+        # minimal V2 (B1 only, no D/C) -> C3 (verification aware, not full chain)
+        # strong V2 -> C3
+        # minimal V3 -> C4 (artifact verified)
+        # V4/V4+ -> C4 or C5 depending on coverage
+        # V5+ -> C5
+        if allowed_protocol in ("V0",):
+            context_depth = "C0_homepage_only"
+        elif allowed_protocol in ("V1",):
+            context_depth = "C1_orientation"
+        elif allowed_protocol == "V2":
+            # Minimal V2 (B1 only) should not claim C5
+            if (component_levels.get("bitcoin_originals") == "B1"
+                    and component_levels.get("digital_mirrors", "D0") in ("D0",)
+                    and component_levels.get("chronicle_recovery", "C0") in ("C0",)):
+                context_depth = "C3_verification_aware"
+            else:
+                context_depth = "C3_verification_aware"
+        elif allowed_protocol == "V3":
+            context_depth = "C4_artifact_verified"
+        elif allowed_protocol in ("V4", "V4+"):
+            # Check if full chain was actually reviewed
+            has_full_chain = any(
+                s.get("scope_class") == "profile_required_script_audit"
+                for s in scripts
+            )
+            context_depth = "C5_full_chain_reviewed" if has_full_chain else "C4_artifact_verified"
+        else:
+            context_depth = "C5_full_chain_reviewed"
 
         echo_wrapper = {
             "schema": "trinityaccord.echo.v3",
@@ -355,6 +371,11 @@ def build_report(evidence_input_path, report_out_path=None, echo_out_path=None):
                 "path": report_out_path or "generated",
                 "report_id": report_id,
             },
+            "not_authority": True,
+            "not_amendment": True,
+            "not_endorsement": True,
+            "bitcoin_originals_prevail": True,
+            "not_verification_unless_claimed": True,
             "generated_by": generated_by,
         }
 

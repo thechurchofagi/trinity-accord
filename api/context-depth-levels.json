@@ -56,5 +56,11 @@
       "final_evaluation_allowed": true
     }
   ],
-  "boundary": "Context depth describes reading and verification context. It does not create authority."
+  "boundary": "Context depth describes reading and verification context. It does not create authority.",
+  "not_equivalent_to_verification_level": true,
+  "not_equivalent_examples": [
+    "C5_full_chain_reviewed does not imply V5 achieved",
+    "V3 hash verification does not imply C5 full chain reviewed",
+    "C4_artifact_verified does not imply V4 script audit"
+  ]
 }

@@ -39,11 +39,11 @@ def make_evidence_input(evidence_overrides=None, provenance_overrides=None, clai
             "bitcoin_checks": [],
             "digital_mirror_checks": [],
             "repository_snapshot_checks": [],
+            "echo_context": {"authority_boundary_recognized": True},
             "time_anchor_checks": [],
             "chronicle_checks": [],
             "nft_checks": [],
             "physical_checks": [],
-            "echo_context": {},
             **(evidence_overrides or {})
         },
         "limitations": limitations or [],
@@ -340,7 +340,7 @@ def test_cg013():
 def test_cg014():
     """D2 without hash entry FAIL (no D2 level)"""
     run_test("CG014", "D2 without hash entry — no D2 level",
-             make_evidence_input(evidence_overrides={"hashes": []}),
+             make_evidence_input(evidence_overrides={"hashes": [], "echo_context": {}}),
              expected_protocol="V0")
 
 
@@ -636,9 +636,9 @@ def test_cg040():
 # === Additional edge case tests ===
 
 def test_cg041():
-    """Empty evidence defaults to V0/V1"""
+    """Empty evidence defaults to V0 (no boundary recognition)"""
     run_test("CG041", "Empty evidence defaults to V0",
-             make_evidence_input(),
+             make_evidence_input(evidence_overrides={"echo_context": {}}),
              expected_protocol="V0")
 
 

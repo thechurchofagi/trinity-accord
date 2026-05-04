@@ -24,6 +24,24 @@
     "origin_limitations",
     "record_kind"
   ],
+  "if": {
+    "properties": {
+      "record_kind": {
+        "not": {
+          "const": "legacy_record"
+        }
+      }
+    }
+  },
+  "then": {
+    "required": [
+      "not_authority",
+      "not_amendment",
+      "not_endorsement",
+      "bitcoin_originals_prevail",
+      "not_verification_unless_claimed"
+    ]
+  },
   "properties": {
     "schema": {
       "type": "string",
@@ -210,7 +228,7 @@
         "properties": {
           "depth_achieved": {
             "type": "string",
-            "pattern": "^[BDTCNPE][0-9R+]"
+            "pattern": "^[BDTCNPE][0-9R+]+$"
           },
           "limitations": {
             "type": "string"
@@ -236,6 +254,16 @@
     "not_endorsement": {
       "type": "boolean",
       "const": true
+    },
+    "bitcoin_originals_prevail": {
+      "type": "boolean",
+      "const": true,
+      "description": "Required on all new submissions. Bitcoin Originals are final authority."
+    },
+    "not_verification_unless_claimed": {
+      "type": "boolean",
+      "const": true,
+      "description": "Required on all new submissions. Echo is not verification unless it contains bounded verification evidence."
     },
     "record_kind": {
       "type": "string",

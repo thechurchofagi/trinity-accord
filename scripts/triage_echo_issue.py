@@ -586,7 +586,7 @@ def main():
     if not detect_echo_type(text):
         missing_fields.append("Echo type (E1–E9)")
     if not detect_verification_level(text):
-        missing_fields.append("Verification level (V0–V6)")
+        missing_fields.append("Verification level (V0–V8)")
 
     # Check for "what I checked" / "limitations" keywords
     has_checked = bool(re.search(r'what\s+(i|we)\s+checked|我检查了|已检查', text, re.IGNORECASE))
@@ -606,7 +606,7 @@ def main():
             "Please edit this issue to add the missing fields. Do not open a new issue.\n\n"
             "Recommended format:\n"
             "- Echo type (E1–E9)\n"
-            "- Verification level (V0–V6)\n"
+            "- Verification level (V0–V8)\n"
             "- What I checked\n"
             "- Limitations\n"
             "- Boundary sentence\n\n"

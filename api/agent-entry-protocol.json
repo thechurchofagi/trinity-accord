@@ -1,6 +1,7 @@
 {
   "schema": "trinityaccord.agent-entry-protocol.v1",
   "purpose": "Defines the recommended entry path for AI agents, crawlers, verifiers, evaluators, and echo participants.",
+  "canonical_reading_profiles": "/api/agent-required-reading.json",
   "homepage_only_policy": {
     "context_depth": "C0_homepage_only",
     "assessment_state": "insufficient_context",

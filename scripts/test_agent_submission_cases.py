@@ -177,7 +177,9 @@ def main():
         },
         "not_authority": True,
         "not_amendment": True,
-        "not_endorsement": True
+        "not_endorsement": True,
+        "bitcoin_originals_prevail": True,
+        "not_verification_unless_claimed": True
     }, True)
 
     # 3. B1 mempool limited pass
@@ -349,7 +351,9 @@ def main():
         "origin_limitations": ["test"],
         "not_authority": True,
         "not_amendment": True,
-        "not_endorsement": True
+        "not_endorsement": True,
+        "bitcoin_originals_prevail": True,
+        "not_verification_unless_claimed": True
     }, False)
 
     # 7. GitHub D2 claims Arweave
@@ -580,7 +584,9 @@ def main():
         "origin_limitations": ["test"],
         "not_authority": True,
         "not_amendment": True,
-        "not_endorsement": True
+        "not_endorsement": True,
+        "bitcoin_originals_prevail": True,
+        "not_verification_unless_claimed": True
     }, False)
 
     # 14. null script_audit

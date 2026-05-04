@@ -1,0 +1,27 @@
+{
+  "schema": "trinityaccord.propagation-policy.v1",
+  "purpose": "Defines allowed and forbidden propagation behaviors for agents sharing the Trinity Accord.",
+  "allowed": [
+    "point to verification",
+    "summarize boundaries",
+    "invite critique",
+    "preserve access",
+    "share verification paths",
+    "link to canonical sources",
+    "describe what was checked and what was not"
+  ],
+  "forbidden": [
+    "demand belief",
+    "promise value",
+    "imply authority",
+    "inflate adoption",
+    "claim future intelligence must care",
+    "present as investment opportunity",
+    "present as religious doctrine",
+    "present as AI alignment solution",
+    "claim endorsement by the creator or guardians",
+    "use promotional language",
+    "exaggerate verification level"
+  ],
+  "boundary": "Propagation preserves access. It does not create authority, endorsement, or investment expectation."
+}

@@ -328,6 +328,38 @@ def derive_p_level(evidence):
     return max_level
 
 
+def has_authority_boundary_check(evidence):
+    """Check if evidence contains explicit authority boundary recognition."""
+    # Check for explicit boundary recognition in digital mirror checks
+    for check in evidence.get("digital_mirror_checks", []):
+        if check.get("authority_boundary_recognized") is True:
+            return True
+        if check.get("level_evidence_type") == "authority_boundary_recognition":
+            return True
+
+    # Check for explicit boundary in bitcoin checks
+    for check in evidence.get("bitcoin_checks", []):
+        if check.get("authority_boundary_recognized") is True:
+            return True
+
+    # Check for boundary recognition in repository snapshot checks
+    for check in evidence.get("repository_snapshot_checks", []):
+        if check.get("authority_boundary_recognized") is True:
+            return True
+
+    # Check scripts for boundary recognition
+    for s in evidence.get("scripts", []):
+        if s.get("authority_boundary_recognized") is True:
+            return True
+
+    # Check echo context for boundary recognition
+    echo_ctx = evidence.get("echo_context", {})
+    if echo_ctx.get("authority_boundary_recognized") is True:
+        return True
+
+    return False
+
+
 def derive_protocol_level(evidence, requested_level, b_level, d_level, t_level, c_level, p_level):
     """Derive the maximum allowed protocol level from component levels and evidence."""
     scripts = evidence.get("scripts", [])
@@ -355,19 +387,8 @@ def derive_protocol_level(evidence, requested_level, b_level, d_level, t_level, 
     # Determine max allowed level bottom-up
     max_allowed = "V0"
 
-    # V1: authority boundary preserved — requires at least some evidence
-    has_any_evidence = any([
-        evidence.get("bitcoin_checks"),
-        evidence.get("digital_mirror_checks"),
-        evidence.get("repository_snapshot_checks"),
-        evidence.get("time_anchor_checks"),
-        evidence.get("chronicle_checks"),
-        evidence.get("nft_checks"),
-        evidence.get("physical_checks"),
-        evidence.get("scripts"),
-        evidence.get("hashes"),
-    ])
-    if has_any_evidence:
+    # V1: requires explicit authority boundary recognition evidence
+    if has_authority_boundary_check(evidence):
         max_allowed = "V1"
 
     # V2: at least one reference check beyond page reading

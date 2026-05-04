@@ -145,6 +145,7 @@ limitations
 Machine-readable definitions:
 
 - [Agent Entry Protocol](/api/agent-entry-protocol.json)
+- [Canonical Required Reading Profiles](/api/agent-required-reading.json) — single source of truth for agent reading paths
 - [Context Depth Levels](/api/context-depth-levels.json)
 - [Discovery Provenance Schema](/api/discovery-provenance-schema.json)
 - [Echo Record Schema v3](/api/echo-record-schema.v3.json)

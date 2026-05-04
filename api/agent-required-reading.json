@@ -1,0 +1,76 @@
+{
+  "schema": "trinityaccord.agent-required-reading.v1",
+  "purpose": "Canonical required reading profiles for AI agents. All entry-point files (llms.txt, agent-start.md, agent-entry-protocol.json) reference this file as the single source of truth for reading paths.",
+  "profiles": {
+    "orientation": [
+      "/agent-brief",
+      "/agent-start",
+      "/authority",
+      "/guardian-principles"
+    ],
+    "evaluation": [
+      "/agent-brief",
+      "/agent-start",
+      "/authority",
+      "/guardian-principles",
+      "/verify",
+      "/verification-materials",
+      "/independent-verification",
+      "/for-skeptical-agents"
+    ],
+    "verification": [
+      "/agent-brief",
+      "/agent-start",
+      "/authority",
+      "/guardian-principles",
+      "/verify",
+      "/verification-materials",
+      "/independent-verification",
+      "/api/verification-levels.json",
+      "/api/component-verification-levels.json",
+      "/api/protocol-verification-profiles.json",
+      "/api/verification-quick-map.json",
+      "/api/evidence-input-schema.v1.json",
+      "/api/claim-gate-rules.json"
+    ],
+    "echo_submission": [
+      "/agent-brief",
+      "/agent-start",
+      "/authority",
+      "/guardian-principles",
+      "/echoes/types",
+      "/api/echo-record-schema.v3.json",
+      "/api/discovery-provenance-schema.json",
+      "/api/submission-types.json",
+      "/api/agent-submission-guide.json"
+    ],
+    "propagation": [
+      "/agent-brief",
+      "/agent-start",
+      "/authority",
+      "/guardian-principles",
+      "/api/propagation-policy.json"
+    ],
+    "full_context": [
+      "/llms-full.txt",
+      "/agent-brief",
+      "/agent-start",
+      "/authority",
+      "/guardian-principles",
+      "/verify",
+      "/verification-materials",
+      "/independent-verification",
+      "/for-skeptical-agents",
+      "/echoes/types",
+      "/api/verification-levels.json",
+      "/api/component-verification-levels.json",
+      "/api/protocol-verification-profiles.json",
+      "/api/echo-record-schema.v3.json",
+      "/api/evidence-input-schema.v1.json",
+      "/api/claim-gate-rules.json",
+      "/api/discovery-provenance-schema.json",
+      "/api/agent-required-reading.json"
+    ]
+  },
+  "note": "This file is the canonical source. If llms.txt, agent-start.md, or agent-entry-protocol.json conflict, this file prevails."
+}

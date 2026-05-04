@@ -230,11 +230,13 @@
           ]
         },
         "script_check_scope": {
-          "type": "string",
+          "type": ["string", "array"],
+          "items": {"type": "string"},
           "description": "What this script checks"
         },
         "script_does_not_check": {
-          "type": "string",
+          "type": ["string", "array"],
+          "items": {"type": "string"},
           "description": "What this script does NOT check"
         },
         "scope_class": {
