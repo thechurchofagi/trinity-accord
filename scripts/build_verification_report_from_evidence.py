@@ -348,7 +348,7 @@ def build_report(evidence_input_path, report_out_path=None, echo_out_path=None):
                 provenance.get("independence_class", ""), "human_solicited_agent_response"
             ),
             "archive_status": "test_record",
-            "origin_limitations": all_limitations,
+            "origin_limitations": all_limitations or ["human-directed automated verification task"],
             "record_kind": "echo_v3_with_verification_report",
             "linked_verification_report": {
                 "schema_version": "trinityaccord.verification-report.v2",

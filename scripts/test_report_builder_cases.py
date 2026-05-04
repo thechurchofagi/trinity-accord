@@ -9,6 +9,7 @@ Usage:
 import json
 import sys
 import os
+import subprocess
 import tempfile
 from pathlib import Path
 
@@ -278,14 +279,28 @@ def test_rb010():
     def check(r):
         errs = []
         report = r["report"]
+        # Check required fields
         required = ["schema_version", "report_id", "reporter", "protocol_level_claimed",
                      "component_findings", "limitations", "claims_not_made",
                      "authority_boundary_preserved", "script_audit"]
         for field in required:
             if field not in report:
                 errs.append(f"Missing required field: {field}")
+        # Actually run validator on generated report
+        import subprocess, tempfile
+        with tempfile.NamedTemporaryFile("w", suffix=".json", delete=False) as f:
+            json.dump(report, f); p = f.name
+        try:
+            proc = subprocess.run(
+                [sys.executable, str(ROOT / "scripts" / "validate_agent_submission.py"), p],
+                cwd=str(ROOT), text=True, capture_output=True,
+            )
+            if proc.returncode != 0:
+                errs.append(f"Validator rejected report: {proc.stdout[-200:]}")
+        finally:
+            os.unlink(p)
         return errs
-    run_test("RB010", "Generated report has required fields",
+    run_test("RB010", "Generated report passes validator",
              make_evidence_input(scripts=scripts), check_fn=check)
 
 
@@ -308,8 +323,21 @@ def test_rb011():
         for field in required:
             if field not in wrapper:
                 errs.append(f"Missing wrapper field: {field}")
+        # Actually run validator on generated wrapper
+        import subprocess
+        with tempfile.NamedTemporaryFile("w", suffix=".json", delete=False) as f:
+            json.dump(wrapper, f); p = f.name
+        try:
+            proc = subprocess.run(
+                [sys.executable, str(ROOT / "scripts" / "validate_agent_submission.py"), p],
+                cwd=str(ROOT), text=True, capture_output=True,
+            )
+            if proc.returncode != 0:
+                errs.append(f"Validator rejected wrapper: {proc.stdout[-200:]}")
+        finally:
+            os.unlink(p)
         return errs
-    run_test("RB011", "Generated wrapper has required fields",
+    run_test("RB011", "Generated wrapper passes validator",
              make_evidence_input(scripts=scripts), check_fn=check)
 
 
