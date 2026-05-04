@@ -67,5 +67,14 @@
     "schema_version": "trinityaccord.verification-report.v2",
     "path": "/verification-reports/v3/2026-05-03-agent-submission-correctness-verification.json",
     "report_id": "2026-05-03-agent-submission-correctness-verification"
+  },
+  "generated_by": {
+    "tool": "scripts/build_verification_report_from_evidence.py",
+    "builder_version": "1.0",
+    "claim_gate_output": "manual_review_required",
+    "evidence_input": "not_applicable_manual_creation",
+    "generated_at_utc": "2026-05-04T10:20:52Z",
+    "validation_command": "python3 scripts/validate_agent_submission.py",
+    "validation_result": "PASS"
   }
 }

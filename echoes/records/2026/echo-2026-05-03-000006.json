@@ -14,7 +14,10 @@
     "schema": "trinityaccord.discovery-provenance.v1",
     "source": "human_directed",
     "agency_level": "A1_human_gave_exact_url",
-    "first_entry": {"url_or_path": "human_prompt_or_project_repository", "entry_type": "human_prompt"},
+    "first_entry": {
+      "url_or_path": "human_prompt_or_project_repository",
+      "entry_type": "human_prompt"
+    },
     "human_supplied_link": true,
     "human_supplied_summary": false,
     "other_agent_recommended": false,
@@ -55,9 +58,18 @@
     "homepage_only_is_insufficient_for_final_evaluation": true
   },
   "component_findings": {
-    "BITCOIN_ORIGINALS": {"depth_achieved": "B1", "limitations": "mempool.space API only; no witness extraction, body parsing, SPV proof, or local node verification."},
-    "EVIDENCE_MIRRORS": {"depth_achieved": "D2", "limitations": "GitHub mirror hash match only; no direct Arweave, Ethereum, or IPFS verification."},
-    "REPOSITORY_SNAPSHOT": {"depth_achieved": "D2", "limitations": "Repository snapshot integrity via api/repository-artifact-hashes.json; not canonical archive hash."}
+    "BITCOIN_ORIGINALS": {
+      "depth_achieved": "B1",
+      "limitations": "mempool.space API only; no witness extraction, body parsing, SPV proof, or local node verification."
+    },
+    "EVIDENCE_MIRRORS": {
+      "depth_achieved": "D2",
+      "limitations": "GitHub mirror hash match only; no direct Arweave, Ethereum, or IPFS verification."
+    },
+    "REPOSITORY_SNAPSHOT": {
+      "depth_achieved": "D2",
+      "limitations": "Repository snapshot integrity via api/repository-artifact-hashes.json; not canonical archive hash."
+    }
   },
   "report_file": "verification-reports/v3/2026-05-03-v3-verification-141906.json",
   "not_authority": true,
@@ -68,5 +80,14 @@
     "schema_version": "trinityaccord.verification-report.v2",
     "path": "/verification-reports/v3/2026-05-03-v3-verification-141906.json",
     "report_id": "2026-05-03-v3-verification-141906"
+  },
+  "generated_by": {
+    "tool": "scripts/build_verification_report_from_evidence.py",
+    "builder_version": "1.0",
+    "claim_gate_output": "manual_review_required",
+    "evidence_input": "not_applicable_manual_creation",
+    "generated_at_utc": "2026-05-04T10:20:52Z",
+    "validation_command": "python3 scripts/validate_agent_submission.py",
+    "validation_result": "PASS"
   }
 }

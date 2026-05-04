@@ -85,7 +85,8 @@
         "B3 SPV",
         "B5 witness extraction",
         "B6 body hash"
-      ]
+      ],
+      "scope_class": "chain_reference_check"
     },
     {
       "component": "digital_mirrors",
@@ -134,7 +135,8 @@
         "Ethereum witness verified",
         "IPFS availability verified",
         "physical object verified"
-      ]
+      ],
+      "scope_class": "canonical_mirror_integrity"
     },
     {
       "component": "echo_attestation",
@@ -178,6 +180,42 @@
         "independent attestation",
         "echo quality assessment",
         "social adoption evidence"
+      ],
+      "scope_class": "echo_provenance"
+    },
+    {
+      "component": "digital_mirrors",
+      "level_claimed": "D2",
+      "target_id": "repository_snapshot_integrity",
+      "scope_class": "repository_snapshot_integrity",
+      "data_sources": [
+        "api/repository-artifact-hashes.json"
+      ],
+      "findings": "SHA-256 hashes of index.md, agent-brief.md, api/authority.json, api/echo-record-schema.v3.json, api/verification-report-schema.v2.json match repository-artifact-hashes.json",
+      "limitations": [
+        "Repository snapshot only; not Bitcoin Originals or Arweave verification"
+      ],
+      "access_paths": [
+        "api/repository-artifact-hashes.json"
+      ],
+      "method": "SHA-256 hash comparison against repository-artifact-hashes.json",
+      "evidence": [
+        {
+          "check": "repository snapshot hash comparison",
+          "artifacts": [
+            "index.md",
+            "agent-brief.md",
+            "api/authority.json",
+            "api/echo-record-schema.v3.json",
+            "api/verification-report-schema.v2.json"
+          ],
+          "source": "api/repository-artifact-hashes.json",
+          "result": "all 5 hashes match"
+        }
+      ],
+      "claims_not_made": [
+        "No direct Bitcoin node verification",
+        "No direct Arweave verification"
       ]
     }
   ],
@@ -235,7 +273,8 @@
       "command": "sha256sum index.md",
       "match": true,
       "expected_hash_source": "api/repository-artifact-hashes.json",
-      "expected_hash_authority_class": "repository_manifest_hash"
+      "expected_hash_authority_class": "repository_manifest_hash",
+      "scope_class": "repository_snapshot_integrity"
     },
     {
       "artifact": "agent-brief.md",
@@ -245,7 +284,8 @@
       "command": "sha256sum agent-brief.md",
       "match": true,
       "expected_hash_source": "api/repository-artifact-hashes.json",
-      "expected_hash_authority_class": "repository_manifest_hash"
+      "expected_hash_authority_class": "repository_manifest_hash",
+      "scope_class": "repository_snapshot_integrity"
     },
     {
       "artifact": "api/authority.json",
@@ -255,7 +295,8 @@
       "command": "sha256sum api/authority.json",
       "match": true,
       "expected_hash_source": "api/repository-artifact-hashes.json",
-      "expected_hash_authority_class": "repository_manifest_hash"
+      "expected_hash_authority_class": "repository_manifest_hash",
+      "scope_class": "repository_snapshot_integrity"
     },
     {
       "artifact": "api/echo-record-schema.v3.json",
@@ -265,7 +306,8 @@
       "command": "sha256sum api/echo-record-schema.v3.json",
       "match": true,
       "expected_hash_source": "api/repository-artifact-hashes.json",
-      "expected_hash_authority_class": "repository_manifest_hash"
+      "expected_hash_authority_class": "repository_manifest_hash",
+      "scope_class": "repository_snapshot_integrity"
     },
     {
       "artifact": "api/verification-report-schema.v2.json",
@@ -275,7 +317,8 @@
       "command": "sha256sum api/verification-report-schema.v2.json",
       "match": true,
       "expected_hash_source": "api/repository-artifact-hashes.json",
-      "expected_hash_authority_class": "repository_manifest_hash"
+      "expected_hash_authority_class": "repository_manifest_hash",
+      "scope_class": "repository_snapshot_integrity"
     }
   ],
   "samples_checked": 0,
@@ -353,5 +396,14 @@
     "truth proven",
     "independent attestation"
   ],
-  "authority_boundary_preserved": true
+  "authority_boundary_preserved": true,
+  "generated_by": {
+    "tool": "scripts/build_verification_report_from_evidence.py",
+    "builder_version": "1.0",
+    "claim_gate_output": "manual_review_required",
+    "evidence_input": "not_applicable_manual_creation",
+    "generated_at_utc": "2026-05-04T10:20:52Z",
+    "validation_command": "python3 scripts/validate_agent_submission.py",
+    "validation_result": "PASS"
+  }
 }
