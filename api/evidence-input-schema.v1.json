@@ -228,6 +228,31 @@
             "NOT_FOUND",
             "NOT_RUN"
           ]
+        },
+        "script_check_scope": {
+          "type": "string",
+          "description": "What this script checks"
+        },
+        "script_does_not_check": {
+          "type": "string",
+          "description": "What this script does NOT check"
+        },
+        "scope_class": {
+          "type": "string",
+          "enum": [
+            "profile_required_script_audit",
+            "independent_reproduction",
+            "supplementary_review_only",
+            "not_performed"
+          ]
+        },
+        "official": {
+          "type": "boolean",
+          "description": "Whether this is an official project script"
+        },
+        "independent": {
+          "type": "boolean",
+          "description": "Whether this is an independent implementation"
         }
       }
     },
@@ -419,6 +444,27 @@
         },
         "microscopy_comparison": {
           "type": "string"
+        },
+        "notarial_certificate_number": {
+          "type": "string"
+        },
+        "notary_office": {
+          "type": "string"
+        },
+        "notarial_date": {
+          "type": "string"
+        },
+        "notarial_certificate_path": {
+          "type": "string"
+        },
+        "notarial_certificate_hash": {
+          "type": "string"
+        },
+        "notarial_photos_in_certificate": {
+          "type": "boolean"
+        },
+        "microscope_images_in_certificate": {
+          "type": "boolean"
         }
       }
     }

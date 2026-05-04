@@ -234,7 +234,16 @@ def build_report(evidence_input_path, report_out_path=None, echo_out_path=None):
         },
         "data_sources_used": [s.get("path") for s in executed],
         "access_paths_used": [s.get("command", "") for s in executed],
-        "fallbacks_used": [],
+        "fallbacks_used": sorted(set(filter(None, [
+            "github_mirror" if any(
+                "github" in h.get("expected_hash_source", "").lower() or "github" in h.get("artifact", "").lower()
+                for h in evidence.get("hashes", [])
+            ) else None,
+            "external_explorer" if any(
+                any("mempool.space" in s or "ordinals.com" in s or "ordiscan" in s for s in c.get("sources", []))
+                for c in evidence.get("bitcoin_checks", [])
+            ) else None,
+        ]))),
         "external_sources_queried": [
             {"source_type": c.get("source_type", ""), "sources": c.get("sources", [])}
             for c in evidence.get("bitcoin_checks", [])

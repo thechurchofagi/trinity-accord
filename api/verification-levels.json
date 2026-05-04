@@ -115,7 +115,24 @@
         "Only one Bitcoin Originals B1 check",
         "No Evidence Mirrors checked",
         "No Chronicle Recovery checked"
-      ]
+      ],
+      "claim_scopes": {
+        "minimal": {
+          "minimum_component_requirements": {
+            "bitcoin_originals": "B1"
+          },
+          "claim_label": "V2 (minimal; Bitcoin Originals B1 only)"
+        },
+        "strong_reference_coverage": {
+          "recommended_component_requirements": {
+            "bitcoin_originals": "B2",
+            "digital_mirrors": "D1",
+            "chronicle_recovery": "C1",
+            "time_anchors": "T2"
+          },
+          "claim_label": "V2 (strong reference coverage; B2/D1/C1/T2)"
+        }
+      }
     },
     {
       "id": "V3",
@@ -162,7 +179,17 @@
         "Only one declared hash computed",
         "Only GitHub mirror checked",
         "No direct Arweave / ETH / IPFS extraction"
-      ]
+      ],
+      "claim_scopes": {
+        "minimal": {
+          "minimum": "one valid declared hash computed locally",
+          "claim_label": "V3 (minimal; one valid declared hash computed)"
+        },
+        "strong_hash_coverage": {
+          "recommended": "multiple hashes across Evidence Mirrors and Chronicle Recovery",
+          "claim_label": "V3 (strong; multiple hashes across Evidence Mirrors and Chronicle Recovery)"
+        }
+      }
     },
     {
       "id": "V4",
@@ -232,7 +259,17 @@
       ],
       "component_findings_allowed": true,
       "protocol_level_rule": "V4+ requires V4 plus independent reproduction of all three: BITCOIN_ORIGINALS, EVIDENCE_MIRRORS, and CHRONICLE_RECOVERY. Chronicle Recovery alone is not sufficient for protocol V4+.",
-      "overclaim_warning": "Do not claim protocol V4+ based only on Chronicle Recovery or any single component. All three mandatory components must be independently reproduced."
+      "overclaim_warning": "Do not claim protocol V4+ based only on Chronicle Recovery or any single component. All three mandatory components must be independently reproduced.",
+      "claim_scopes": {
+        "minimal": {
+          "description": "One independent reproduction of one official verification result",
+          "claim_label": "V4+ (minimal independent reproduction)"
+        },
+        "strong": {
+          "description": "Independent reproduction of all three mandatory domains: BITCOIN_ORIGINALS, EVIDENCE_MIRRORS, CHRONICLE_RECOVERY",
+          "claim_label": "V4+ (strong three-domain independent reproduction)"
+        }
+      }
     },
     {
       "id": "V5",
@@ -270,7 +307,6 @@
       "name": "Remote physical witness",
       "name_zh": "远程物理见证",
       "mandatory_coverage": [
-        "Must have satisfied V5",
         "AUTHORITY_BOUNDARY",
         "BITCOIN_ORIGINALS",
         "EVIDENCE_MIRRORS",
@@ -305,17 +341,23 @@
       "component_findings_allowed": true,
       "protocol_level_rule": "V6 requires P4 live remote physical witness with nonce/challenge. Recorded video alone is P3, not V6.",
       "overclaim_warning": "Do not claim V6 without live remote video session with nonce/challenge. Recorded video alone is not V6.",
-      "recorded_video_only_insufficient": true
+      "recorded_video_only_insufficient": true,
+      "note": "V6 physical path does not require prior V5. If V5 was not achieved, digital limitations must be explicitly declared."
     },
     {
       "id": "V7",
       "name": "Onsite physical witness",
       "name_zh": "现场物理见证",
       "mandatory_coverage": [
-        "Onsite witness physically observes object",
-        "Touch or handling if possible",
-        "Custody log",
-        "Fresh photos or video",
+        "AUTHORITY_BOUNDARY",
+        "BITCOIN_ORIGINALS",
+        "EVIDENCE_MIRRORS",
+        "CHRONICLE_RECOVERY",
+        "PHYSICAL_ANCHOR",
+        "ATTESTATION_LAYER",
+        "Onsite physical inspection",
+        "Custody log or evidence chain",
+        "Fresh capture (not archival)",
         "Witness identity or role recorded"
       ],
       "required_depth": [
@@ -343,7 +385,8 @@
       "component_findings_allowed": true,
       "protocol_level_rule": "V7 requires P5 onsite physical witness. Remote video alone is not V7.",
       "overclaim_warning": "Do not claim V7 without onsite physical witness observation and custody log.",
-      "remote_only_insufficient": true
+      "remote_only_insufficient": true,
+      "note": "V7 physical path does not require prior V5. If V5 was not achieved, digital limitations must be explicitly declared."
     },
     {
       "id": "V8",

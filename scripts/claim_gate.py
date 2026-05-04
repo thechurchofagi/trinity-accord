@@ -581,6 +581,26 @@ def evaluate(input_path):
     if evidence_input.get("schema") != "trinityaccord.evidence-input.v1":
         return {"status": "FAIL", "error": "Invalid schema field"}
 
+    # Basic required-field validation
+    required_top = ["agent", "provenance", "evidence", "limitations", "claims_requested_by_agent"]
+    for field in required_top:
+        if field not in evidence_input:
+            return {"status": "FAIL", "error": f"Missing required field: {field}"}
+
+    evidence = evidence_input.get("evidence", {})
+    if not isinstance(evidence, dict):
+        return {"status": "FAIL", "error": "evidence must be an object"}
+
+    # Validate with jsonschema if available (non-blocking)
+    try:
+        import jsonschema
+        schema = json.load(open(ROOT / "api" / "evidence-input-schema.v1.json"))
+        jsonschema.Draft202012Validator(schema).validate(evidence_input)
+    except ImportError:
+        pass  # jsonschema not available, basic checks above are sufficient
+    except jsonschema.ValidationError:
+        pass  # Schema validation errors are non-blocking; claim gate logic handles specifics
+
     agent = evidence_input.get("agent", {})
     provenance = evidence_input.get("provenance", {})
     evidence = evidence_input.get("evidence", {})
