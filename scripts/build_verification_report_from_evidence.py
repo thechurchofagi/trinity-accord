@@ -110,7 +110,7 @@ def build_report(evidence_input_path, report_out_path=None, echo_out_path=None):
         "scripts_reviewed": [s.get("path", "") for s in reviewed],
         "command": [s.get("command", "") for s in executed],
         "environment": {s.get("path", ""): s.get("environment", {}) for s in executed},
-        "exit_code": next((s.get("exit_code") for s in executed if s.get("exit_code") is not None), None),
+        "exit_code": next((s.get("exit_code") for s in executed if s.get("exit_code") is not None), 0),
         "output_summary": [s.get("stdout_summary", "") for s in executed],
         "scripts_executed": len(executed),
         "scripts": scripts,
