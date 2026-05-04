@@ -341,7 +341,7 @@ def test_cg014():
     """D2 without hash entry FAIL (no D2 level)"""
     run_test("CG014", "D2 without hash entry — no D2 level",
              make_evidence_input(evidence_overrides={"hashes": []}),
-             expected_protocol="V1")
+             expected_protocol="V0")
 
 
 def test_cg015():
@@ -637,9 +637,9 @@ def test_cg040():
 
 def test_cg041():
     """Empty evidence defaults to V0/V1"""
-    run_test("CG041", "Empty evidence defaults to V1",
+    run_test("CG041", "Empty evidence defaults to V0",
              make_evidence_input(),
-             expected_protocol="V1")
+             expected_protocol="V0")
 
 
 def test_cg042():

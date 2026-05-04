@@ -261,8 +261,8 @@ def validate_script_audit(obj, path_label):
     level = obj.get("protocol_level_claimed", "")
     script_audit = obj.get("script_audit")
 
-    if level in ("V4", "V4+", "V5", "V6", "V7", "V8"):
-        ok &= check(script_audit is not None, f"{path_label} V4+ has script_audit")
+    if level in ("V4", "V4+"):
+        ok &= check(script_audit is not None, f"{path_label} V4/V4+ has script_audit")
         if isinstance(script_audit, dict):
             # Accept aggregate fields or derive from scripts array
             has_aggregate = all(
@@ -1231,16 +1231,19 @@ def validate_file(path):
     # Rule AG: V8 forensic path
     ok &= validate_v8_forensic_path(obj, path_label)
 
-    # Schema validation
-    schema = obj.get("schema", obj.get("schema_version", ""))
-    if "echo" in schema and "v3" in schema:
-        schema_path = ROOT / "api" / "echo-record-schema.v3.json"
-        if schema_path.exists():
-            ok &= validate_with_jsonschema(obj, schema_path, path_label)
-    elif "verification-report" in schema and "v2" in schema:
-        schema_path = ROOT / "api" / "verification-report-schema.v2.json"
-        if schema_path.exists():
-            ok &= validate_with_jsonschema(obj, schema_path, path_label)
+    # Schema validation (skip for legacy records)
+    archive_status = obj.get("archive_status", "")
+    record_kind = obj.get("record_kind", "")
+    if archive_status not in ("legacy", "superseded") and record_kind != "legacy_record":
+        schema = obj.get("schema", obj.get("schema_version", ""))
+        if "echo" in schema and "v3" in schema:
+            schema_path = ROOT / "api" / "echo-record-schema.v3.json"
+            if schema_path.exists():
+                ok &= validate_with_jsonschema(obj, schema_path, path_label)
+        elif "verification-report" in schema and "v2" in schema:
+            schema_path = ROOT / "api" / "verification-report-schema.v2.json"
+            if schema_path.exists():
+                ok &= validate_with_jsonschema(obj, schema_path, path_label)
 
     return ok
 

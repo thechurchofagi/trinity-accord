@@ -92,9 +92,9 @@ run("V4-05", "V4 with mixed scripts — evidence supports V4+",
     expect_protocol="V4+")
 
 # V4 with no scripts — cannot reach V4
-run("V4-06", "V4 with no scripts — V1",
+run("V4-06", "V4 with no scripts — V0",
     make_input([], claims=["V4"]),
-    expect_protocol="V1")
+    expect_protocol="V0")
 
 # V4 with missing command — FAIL
 run("V4-07", "V4 missing command FAIL",

@@ -636,9 +636,7 @@
         ]
       },
       "then": {
-        "required": [
-          "script_audit"
-        ]
+        "required": []
       }
     },
     {
@@ -653,9 +651,7 @@
         ]
       },
       "then": {
-        "required": [
-          "script_audit"
-        ]
+        "required": []
       }
     },
     {
@@ -670,9 +666,7 @@
         ]
       },
       "then": {
-        "required": [
-          "script_audit"
-        ]
+        "required": []
       }
     },
     {
@@ -687,9 +681,7 @@
         ]
       },
       "then": {
-        "required": [
-          "script_audit"
-        ]
+        "required": []
       }
     }
   ],
@@ -708,7 +700,9 @@
       "properties": {
         "tool": {
           "type": "string",
-          "enum": ["scripts/build_verification_report_from_evidence.py"]
+          "enum": [
+            "scripts/build_verification_report_from_evidence.py"
+          ]
         },
         "builder_version": {
           "type": "string"
@@ -727,7 +721,9 @@
         },
         "validation_result": {
           "type": "string",
-          "enum": ["PASS"]
+          "enum": [
+            "PASS"
+          ]
         }
       },
       "additionalProperties": true

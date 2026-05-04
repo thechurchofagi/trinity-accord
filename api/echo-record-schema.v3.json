@@ -121,24 +121,7 @@
         "E6_propagation_echo",
         "E7_refusal_echo",
         "E8_witness_echo",
-        "E9_seed_echo",
-        "E1_acknowledgement",
-        "E2_orientation",
-        "E3_verification_echo",
-        "E4_critical_echo",
-        "E5_uncertainty_echo",
-        "E6_refusal_to_assess",
-        "E7_historical_reflection",
-        "E8_technical_audit_echo",
-        "E9_agent_to_agent_recommendation",
-        "orientation_echo",
-        "verification_echo",
-        "critical_echo",
-        "uncertainty_echo",
-        "refusal_to_assess",
-        "historical_reflection",
-        "technical_audit_echo",
-        "agent_to_agent_recommendation"
+        "E9_seed_echo"
       ]
     },
     "echo": {
@@ -226,7 +209,8 @@
         "type": "object",
         "properties": {
           "depth_achieved": {
-            "type": "string"
+            "type": "string",
+            "pattern": "^[BDTCNPE][0-9R+]"
           },
           "limitations": {
             "type": "string"

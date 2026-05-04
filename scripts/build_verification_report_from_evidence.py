@@ -28,6 +28,14 @@ INDEPENDENCE_CLASS_MAP = {
     "independent_reproduction": "solicited_independent_check",
 }
 
+# Map evidence input agency_level to echo discovery provenance agency_level
+EVIDENCE_TO_DISCOVERY_AGENCY_LEVEL = {
+    "A1_human_gave_exact_url": "A1_human_gave_exact_url",
+    "A2_human_gave_repo_name": "A2_human_gave_topic_agent_found_site",
+    "A3_agent_discovered_independently": "A4_independent_search_or_browsing_discovery",
+    "A4_agent_instructed_by_other_agent": "A3_agent_followed_other_agent_reference",
+}
+
 
 def load_json(path):
     with open(path) as f:
@@ -232,7 +240,9 @@ def build_report(evidence_input_path, report_out_path=None, echo_out_path=None):
             for c in evidence.get("bitcoin_checks", [])
         ],
         "hashes_computed": hashes_computed,
-        "samples_checked": len(evidence.get("chronicle_checks", [])),
+        "samples_checked": sum(
+            c.get("samples_recovered", 0) for c in evidence.get("chronicle_checks", [])
+        ) or len(evidence.get("chronicle_checks", [])),
         "physical_evidence_reviewed": {
             "images_reviewed": [p.get("image", "") for p in evidence.get("physical_checks", []) if p.get("image")],
             "videos_reviewed": [p.get("video", "") for p in evidence.get("physical_checks", []) if p.get("video")],
@@ -266,7 +276,9 @@ def build_report(evidence_input_path, report_out_path=None, echo_out_path=None):
         echo_provenance = {
             "schema": "trinityaccord.discovery-provenance.v1",
             "source": "human_directed",
-            "agency_level": provenance.get("agency_level", "unknown"),
+            "agency_level": EVIDENCE_TO_DISCOVERY_AGENCY_LEVEL.get(
+                provenance.get("agency_level", "unknown"), "A6_unknown"
+            ),
             "first_entry": {
                 "url_or_path": "/verify",
                 "entry_type": "agent_start",
@@ -277,6 +289,21 @@ def build_report(evidence_input_path, report_out_path=None, echo_out_path=None):
             "confidence": "medium",
         }
 
+        # Derive context depth from allowed protocol level
+        context_depth_map = {
+            "V0": "C0_homepage_only",
+            "V1": "C1_orientation",
+            "V2": "C3_verification_aware",
+            "V3": "C4_artifact_verified",
+            "V4": "C5_full_chain_reviewed",
+            "V4+": "C5_full_chain_reviewed",
+            "V5": "C5_full_chain_reviewed",
+            "V6": "C5_full_chain_reviewed",
+            "V7": "C5_full_chain_reviewed",
+            "V8": "C5_full_chain_reviewed",
+        }
+        context_depth = context_depth_map.get(allowed_protocol, "C3_verification_aware")
+
         echo_wrapper = {
             "schema": "trinityaccord.echo.v3",
             "echo_version": "3.0",
@@ -285,7 +312,7 @@ def build_report(evidence_input_path, report_out_path=None, echo_out_path=None):
                 "system_or_provider": agent.get("model_or_system", ""),
                 "self_reported": True,
             },
-            "context_depth": "C5_full_chain_reviewed",
+            "context_depth": context_depth,
             "assessment_state": "evidence_based_assessment",
             "verification_level": allowed_protocol,
             "discovery_provenance": echo_provenance,

@@ -355,8 +355,20 @@ def derive_protocol_level(evidence, requested_level, b_level, d_level, t_level, 
     # Determine max allowed level bottom-up
     max_allowed = "V0"
 
-    # V1: authority boundary preserved
-    max_allowed = "V1"
+    # V1: authority boundary preserved — requires at least some evidence
+    has_any_evidence = any([
+        evidence.get("bitcoin_checks"),
+        evidence.get("digital_mirror_checks"),
+        evidence.get("repository_snapshot_checks"),
+        evidence.get("time_anchor_checks"),
+        evidence.get("chronicle_checks"),
+        evidence.get("nft_checks"),
+        evidence.get("physical_checks"),
+        evidence.get("scripts"),
+        evidence.get("hashes"),
+    ])
+    if has_any_evidence:
+        max_allowed = "V1"
 
     # V2: at least one reference check beyond page reading
     # Local manifest only does NOT count as a reference check beyond page reading
@@ -589,17 +601,20 @@ def evaluate(input_path):
     p_level = derive_p_level(evidence)
 
     # Determine requested protocol level
-    # Default to None (no specific level requested); only set if agent explicitly claims one
+    # Only parse structured claims; do NOT use arbitrary substring match
     sorted_levels = sorted(PROTOCOL_LEVELS, key=len, reverse=True)
     requested_protocol = None
     for claim in claims_requested:
         claim_stripped = claim.strip().upper()
         for pl in sorted_levels:
-            if claim_stripped == pl or claim_stripped.startswith(pl + " ") or claim_stripped == pl.upper():
+            if claim_stripped == pl or claim_stripped.startswith(pl + " "):
                 requested_protocol = pl
                 break
-            # Fallback: case-insensitive substring match
-            if pl.lower() in claim.lower():
+            # Structured prefix matches only
+            if claim_stripped.startswith("PROTOCOL ACHIEVED LEVEL: " + pl):
+                requested_protocol = pl
+                break
+            if claim_stripped.startswith("PROTOCOL_LEVEL_CLAIMED: " + pl):
                 requested_protocol = pl
                 break
 

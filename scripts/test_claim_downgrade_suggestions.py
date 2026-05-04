@@ -92,7 +92,7 @@ run("CD-03", "B1 local manifest only → allowed level V1",
 # Requested V5 with insufficient evidence → downgrade
 run("CD-04", "V5 insufficient evidence → downgrade",
     make_input(claims=["V5"]),
-    expect_downgrades=[("V5", "V1")])
+    expect_downgrades=[("V5", "V0")])
 
 print(f"\n{'='*60}")
 print(f"Results: {PASS}/{TOTAL} passed, {FAIL}/{TOTAL} failed")
