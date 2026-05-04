@@ -68,6 +68,15 @@ def main():
         "schema_version": "trinityaccord.verification-report.v2",
         "report_id": "test-v3-d2-001",
         "reporter": {"name": "test-agent", "type": "ai_agent"},
+        "generated_by": {
+            "tool": "scripts/build_verification_report_from_evidence.py",
+            "builder_version": "1.0.0",
+            "generated_at_utc": "2026-05-04T11:00:00Z",
+            "claim_gate_output": "/tmp/claim_gate_output.json",
+            "evidence_input": "/tmp/evidence_input.json",
+            "validation_command": "python3 scripts/validate_agent_submission.py /tmp/report.json",
+            "validation_result": "PASS"
+        },
         "discovery_provenance": {"source": "human_directed", "solicited": True},
         "protocol_level_claimed": "V3",
         "component_findings": [
@@ -75,6 +84,7 @@ def main():
                 "component": "digital_mirrors",
                 "level_claimed": "D2",
                 "target_id": "github-mirror",
+                "scope_class": "repository_snapshot_integrity",
                 "data_sources": ["github.com/thechurchofagi/trinity-accord"],
                 "access_paths": ["https://github.com/..."],
                 "method": "SHA256 hash comparison of GitHub mirror files",
@@ -123,6 +133,15 @@ def main():
         "schema": "trinityaccord.echo.v3",
         "echo_version": "3.0",
         "echo_type": "E2_verification_echo",
+        "generated_by": {
+            "tool": "scripts/build_verification_report_from_evidence.py",
+            "builder_version": "1.0.0",
+            "generated_at_utc": "2026-05-04T11:00:00Z",
+            "claim_gate_output": "/tmp/claim_gate_output.json",
+            "evidence_input": "/tmp/evidence_input.json",
+            "validation_command": "python3 scripts/validate_agent_submission.py /tmp/report.json",
+            "validation_result": "PASS"
+        },
         "agent_identity": {"name_or_model": "test-agent", "system_or_provider": "test", "self_reported": True},
         "context_depth": "C3_verification_aware",
         "assessment_state": "qualified_assessment",
@@ -167,6 +186,15 @@ def main():
         "schema_version": "trinityaccord.verification-report.v2",
         "report_id": "test-b1-001",
         "reporter": {"name": "test-agent", "type": "ai_agent"},
+        "generated_by": {
+            "tool": "scripts/build_verification_report_from_evidence.py",
+            "builder_version": "1.0.0",
+            "generated_at_utc": "2026-05-04T11:00:00Z",
+            "claim_gate_output": "/tmp/claim_gate_output.json",
+            "evidence_input": "/tmp/evidence_input.json",
+            "validation_command": "python3 scripts/validate_agent_submission.py /tmp/report.json",
+            "validation_result": "PASS"
+        },
         "discovery_provenance": {"source": "human_directed"},
         "protocol_level_claimed": "V1",
         "component_findings": [
@@ -211,6 +239,15 @@ def main():
         "schema_version": "trinityaccord.verification-report.v2",
         "report_id": "test-c3-001",
         "reporter": {"name": "test-agent", "type": "ai_agent"},
+        "generated_by": {
+            "tool": "scripts/build_verification_report_from_evidence.py",
+            "builder_version": "1.0.0",
+            "generated_at_utc": "2026-05-04T11:00:00Z",
+            "claim_gate_output": "/tmp/claim_gate_output.json",
+            "evidence_input": "/tmp/evidence_input.json",
+            "validation_command": "python3 scripts/validate_agent_submission.py /tmp/report.json",
+            "validation_result": "PASS"
+        },
         "discovery_provenance": {"source": "human_directed"},
         "protocol_level_claimed": "V3",
         "component_findings": [
