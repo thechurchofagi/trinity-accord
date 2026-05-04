@@ -77,6 +77,12 @@ def build_report(evidence_input_path, report_out_path=None, echo_out_path=None):
         for me in gate_result["missing_evidence"]:
             claims_not_made.append(f"Not claimed due to missing evidence: {me}")
 
+    # Add minimal V2/V3 scope claims_not_made
+    if allowed_protocol == "V2" and component_levels.get("bitcoin_originals") == "B1":
+        claims_not_made.append("Full reference coverage not claimed.")
+    if allowed_protocol == "V3" and "Minimal V3 only" in " ".join(all_limitations):
+        claims_not_made.append("Full public digital verification not claimed.")
+
     # Build script audit
     scripts = evidence.get("scripts", [])
     executed = [s for s in scripts if s.get("executed") and s.get("exists")]

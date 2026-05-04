@@ -15,11 +15,11 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 PROTOCOL_LEVELS = ["V0", "V1", "V2", "V3", "V4", "V4+", "V5", "V6", "V7", "V8"]
-B_LEVELS = ["B0", "B1", "B2", "B3", "B4", "B5", "B6"]
-D_LEVELS = ["D0", "D1", "D2", "D4", "D5"]
-T_LEVELS = ["T0", "T1", "T2", "T3", "T5", "T8"]
-C_LEVELS = ["C0", "C2", "C3", "C3R", "C5"]
-N_LEVELS = ["N0", "N2", "N4", "N7"]
+B_LEVELS = ["B0", "B1", "B2", "B3", "B4", "B5", "B6", "B7"]
+D_LEVELS = ["D0", "D1", "D2", "D3", "D4", "D5", "D6", "D7"]
+T_LEVELS = ["T0", "T1", "T2", "T3", "T4", "T5", "T6", "T7", "T8"]
+C_LEVELS = ["C0", "C1", "C2", "C3", "C3R", "C4", "C5", "C6", "C7"]
+N_LEVELS = ["N0", "N1", "N2", "N3", "N4", "N5", "N6", "N7"]
 P_LEVELS = ["P0", "P1", "P2", "P3", "P4", "P5", "P6", "P7", "P8", "P9"]
 
 SHA256_RE = re.compile(r'^[a-f0-9]{64}$')
@@ -40,6 +40,11 @@ def level_index(levels, val):
         return -1
 
 
+def max_by_order(levels, a, b):
+    """Return the higher of two level values according to the levels list."""
+    return b if level_index(levels, b) > level_index(levels, a) else a
+
+
 def has_p7_forensic_path(evidence):
     return any(
         check.get("level_evidence_type") == "ai_forensic"
@@ -49,6 +54,11 @@ def has_p7_forensic_path(evidence):
             check.get("flaw_analysis_method")
             or check.get("feature_match_method")
             or check.get("microscopy_comparison")
+        )
+        and (
+            check.get("signed_or_attributable_report") is True
+            or check.get("report_id")
+            or check.get("report_path")
         )
         for check in evidence.get("physical_checks", [])
     )
@@ -134,21 +144,48 @@ def derive_d_level(evidence):
     digital_checks = evidence.get("digital_mirror_checks", [])
     repo_checks = evidence.get("repository_snapshot_checks", [])
 
-    has_valid_hash = False
+    max_level = "D0"
+
+    if digital_checks or repo_checks:
+        max_level = max_by_order(D_LEVELS, max_level, "D1")
+
     for h in hashes:
-        if (SHA256_RE.match(h.get("expected", "")) and
-            SHA256_RE.match(h.get("computed", "")) and
-            h.get("match") is True and
-            h.get("expected_hash_source") and
-            h.get("expected_hash_authority_class", "unknown") != "unknown"):
-            has_valid_hash = True
+        if (
+            SHA256_RE.match(h.get("expected", ""))
+            and SHA256_RE.match(h.get("computed", ""))
+            and h.get("match") is True
+            and h.get("expected_hash_source")
+            and h.get("expected_hash_authority_class", "unknown") != "unknown"
+        ):
+            max_level = max_by_order(D_LEVELS, max_level, "D2")
             break
 
-    if has_valid_hash:
-        return "D2"
-    if digital_checks or repo_checks:
-        return "D1"
-    return "D0"
+    for check in digital_checks:
+        if check.get("level_evidence_type") == "external_pointer_existence":
+            if check.get("external_pointer_exists") is True:
+                max_level = max_by_order(D_LEVELS, max_level, "D3")
+
+        if check.get("level_evidence_type") == "cross_mirror_consistency":
+            channels = check.get("channels_compared", [])
+            if len(channels) >= 2 and check.get("content_hashes_match") is True:
+                max_level = max_by_order(D_LEVELS, max_level, "D4")
+
+        if check.get("level_evidence_type") == "full_public_digital_data_verification":
+            if (
+                check.get("all_required_public_digital_targets_checked") is True
+                and check.get("all_unavailable_targets_listed") is True
+            ):
+                max_level = max_by_order(D_LEVELS, max_level, "D5")
+
+        if check.get("level_evidence_type") == "independent_full_digital_reproduction":
+            if check.get("independent_tool_or_implementation") is True:
+                max_level = max_by_order(D_LEVELS, max_level, "D6")
+
+        if check.get("level_evidence_type") == "multi_party_digital_attestation":
+            if check.get("independent_verifier_count", 0) >= 2:
+                max_level = max_by_order(D_LEVELS, max_level, "D7")
+
+    return max_level
 
 
 def derive_t_level(evidence):
@@ -189,18 +226,62 @@ def derive_c_level(evidence):
         full_recovery = check.get("full_recovery", False)
         has_package_hash = check.get("package_hash_valid", False)
 
+        candidate = "C0"
+
+        if check.get("pointer_check") is True or check.get("recovery_pointer_exists") is True:
+            candidate = "C1"
+
+        if has_package_hash:
+            candidate = max_by_order(C_LEVELS, candidate, "C2")
+
+        if samples_recovered >= 2:
+            candidate = max_by_order(C_LEVELS, candidate, "C3")
+
+        if check.get("scripted_recovery_verification") is True:
+            candidate = max_by_order(C_LEVELS, candidate, "C4")
+
         if full_recovery and samples_recovered >= 175:
-            candidate = "C5"
-        elif samples_recovered >= 2:
-            candidate = "C3"
-        elif has_package_hash:
-            candidate = "C2"
+            candidate = max_by_order(C_LEVELS, candidate, "C5")
+
+        if check.get("chain_source_pointer_verification") is True:
+            candidate = max_by_order(C_LEVELS, candidate, "C6")
+
+        if (
+            check.get("multi_party_chronicle_attestation") is True
+            and check.get("independent_verifier_count", 0) >= 2
+        ):
+            candidate = max_by_order(C_LEVELS, candidate, "C7")
+
+        max_level = max_by_order(C_LEVELS, max_level, candidate)
+
+    return max_level
+
+
+def derive_n_level(evidence):
+    """Derive NFT evidence component level from evidence."""
+    nft_checks = evidence.get("nft_checks", [])
+    if not nft_checks:
+        return "N0"
+
+    max_level = "N0"
+    for check in nft_checks:
+        if check.get("full_path_reproduction") is True:
+            candidate = "N7"
+        elif check.get("random_sample_full_path") is True:
+            candidate = "N6"
+        elif check.get("cid_or_hash_match") is True:
+            candidate = "N5"
+        elif check.get("media_recovered") is True:
+            candidate = "N4"
+        elif check.get("metadata_recovered") is True:
+            candidate = "N3"
+        elif check.get("token_uri_checked") is True:
+            candidate = "N2"
+        elif check.get("contract_or_token_id_checked") is True:
+            candidate = "N1"
         else:
-            candidate = "C0"
-
-        if level_index(C_LEVELS, candidate) > level_index(C_LEVELS, max_level):
-            max_level = candidate
-
+            candidate = "N0"
+        max_level = max_by_order(N_LEVELS, max_level, candidate)
     return max_level
 
 
@@ -236,6 +317,8 @@ def derive_p_level(evidence):
             candidate = "P3"
         elif ev_type == "static_image":
             candidate = "P2"
+        elif ev_type == "evidence_package_hash" and check.get("package_hash_valid"):
+            candidate = "P1"
         else:
             candidate = "P0"
 
@@ -305,12 +388,22 @@ def derive_protocol_level(evidence, requested_level, b_level, d_level, t_level, 
             if has_independent and not official_only:
                 max_allowed = "V4+"
 
-    # V5+: requires specific high component levels
-    if (level_at_least(B_LEVELS, b_level, "B2") and
-        level_at_least(D_LEVELS, d_level, "D5") and
-        level_at_least(T_LEVELS, t_level, "T3") and
-        level_at_least(C_LEVELS, c_level, "C5") and
-        level_at_least(P_LEVELS, p_level, "P1")):
+    # V5+: requires specific high component levels and explicit full-public-digital declaration
+    has_v5_full_public_declaration = any(
+        check.get("level_evidence_type") == "full_public_digital_data_verification"
+        and check.get("all_required_public_digital_targets_checked") is True
+        and check.get("all_unavailable_targets_listed") is True
+        for check in evidence.get("digital_mirror_checks", [])
+    )
+
+    if (
+        has_v5_full_public_declaration
+        and level_at_least(B_LEVELS, b_level, "B2")
+        and level_at_least(D_LEVELS, d_level, "D5")
+        and level_at_least(T_LEVELS, t_level, "T3")
+        and level_at_least(C_LEVELS, c_level, "C5")
+        and level_at_least(P_LEVELS, p_level, "P1")
+    ):
         max_allowed = "V5"
 
     # V6: P4+ with live + nonce + all remote hard gates (independent of V5 requirements)
@@ -488,6 +581,7 @@ def evaluate(input_path):
     d_level = derive_d_level(evidence)
     t_level = derive_t_level(evidence)
     c_level = derive_c_level(evidence)
+    n_level = derive_n_level(evidence)
     p_level = derive_p_level(evidence)
 
     # Determine requested protocol level
@@ -605,7 +699,7 @@ def evaluate(input_path):
         "digital_mirrors": d_level,
         "time_anchors": t_level,
         "chronicle_recovery": c_level,
-        "nft_evidence": "N0",
+        "nft_evidence": n_level,
         "physical_anchor": p_level,
         "physical_verification": p_level,  # deprecated alias
     }

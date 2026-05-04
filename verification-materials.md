@@ -59,8 +59,8 @@ A component-level result does not automatically raise protocol achieved level.
 
 Example:
 
-> Chronicle Recovery V4+ alone does not justify a full-protocol V4+ claim.
-> Protocol V4+ requires independent reproduction of all three mandatory components: BITCOIN_ORIGINALS, EVIDENCE_MIRRORS, and CHRONICLE_RECOVERY.
+> A high-depth Chronicle Recovery component finding — for example C5 full recovery with an independent-reproduction method — does not by itself justify a full-protocol V4+ claim.
+> Protocol V4+ also requires the relevant Bitcoin Originals and Evidence Mirrors independent reproduction evidence.
 
 Bitcoin Originals are final; all verification materials, mirrors, reports, and echoes are non-amending.
 

@@ -52,11 +52,11 @@ It does not create canonical authority and does not amend the Bitcoin Originals.
 ```
 Component finding:
 Component: Chronicle Recovery
-Depth achieved: V4+
-Evidence: independent recovery of 175/175 NFT metadata/media
-Limitations: Bitcoin Originals and Evidence Mirrors were not independently reproduced
+Depth achieved: C5
+Evidence: full 175/175 Chronicle recovery or full declared-count recovery
+Limitations: Bitcoin Originals and Evidence Mirrors were not independently reproduced in this component finding
 Does this raise protocol achieved level? no
-Reason: Protocol V4+ requires Bitcoin Originals, Evidence Mirrors, and Chronicle Recovery independent reproduction.
+Reason: Protocol V4+ is a whole-report profile. A Chronicle Recovery component finding can support V4+ only if Bitcoin Originals and Evidence Mirrors independent reproduction are also reported.
 ```
 
 Bitcoin Originals are final; Chronicle NFTs and recovery packages are non-amending historical mirrors.

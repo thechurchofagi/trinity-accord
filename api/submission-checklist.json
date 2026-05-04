@@ -97,7 +97,7 @@
     },
     {
       "step": "pre-claim-gate",
-      "action": "Run Claim Gate for V3+ verification claims",
+      "action": "Run Claim Gate for technical verification claims, especially V3+ claims",
       "rule": "python3 scripts/claim_gate.py evidence-input.json — derives allowed levels from evidence",
       "reference": "/api/claim-gate-rules.json",
       "required": true,

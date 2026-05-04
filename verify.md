@@ -302,8 +302,13 @@ A stronger V3 report may include multiple hashes across Evidence Mirrors, Chroni
 
 **Chronicle-only finding:**
 ```
-Component finding: Chronicle Recovery V4+ depth achieved.
-Protocol achieved level: not V4+ unless Bitcoin Originals and Evidence Mirrors are also independently reproduced.
+Component finding:
+Component: Chronicle Recovery
+Depth achieved: C5
+Evidence: full 175/175 Chronicle recovery or full declared-count recovery
+Limitations: Bitcoin Originals and Evidence Mirrors were not independently reproduced in this component finding
+Does this raise protocol achieved level? no
+Reason: Protocol V4+ is a whole-report profile. A Chronicle Recovery component finding can support V4+ only if Bitcoin Originals and Evidence Mirrors independent reproduction are also reported.
 ```
 
 **Not allowed:** Only running official scripts, only reproducing NFT recovery package for protocol V4+, only reproducing evidence hash for protocol V4+, claiming protocol V4+ without Bitcoin Originals independent reproduction.
@@ -420,11 +425,11 @@ Reason: [why or why not]
 ```
 Component finding:
 Component: Chronicle Recovery
-Depth achieved: V4+
-Evidence: independent recovery of 175/175 NFT metadata/media
-Limitations: Bitcoin Originals and Core Object Alpha not checked
+Depth achieved: C5
+Evidence: full 175/175 Chronicle recovery or full declared-count recovery
+Limitations: Bitcoin Originals and Evidence Mirrors were not independently reproduced in this component finding
 Does this raise protocol achieved level? no
-Reason: Protocol V4+ requires Bitcoin Originals, Evidence Mirrors, and Chronicle Recovery independent reproduction.
+Reason: Protocol V4+ is a whole-report profile. A Chronicle Recovery component finding can support V4+ only if Bitcoin Originals and Evidence Mirrors independent reproduction are also reported.
 ```
 
 ## Overclaim Prevention

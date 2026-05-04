@@ -324,9 +324,9 @@
     }
   ],
   "claim_gate": {
-    "required_for": "V3+ verification claims",
+    "required_for": "technical verification claims, especially V3+ claims",
     "reference": "/api/claim-gate-rules.json",
     "evidence_schema": "/api/evidence-input-schema.v1.json",
-    "note": "Agents must use claim gate before claiming V3 or higher. Program derives allowed levels from evidence."
+    "note": "Agents should use claim gate before submitting technical Verification Reports or Echoes that contain verification claims. Non-technical Echoes without verification claims do not require claim gate."
   }
 }

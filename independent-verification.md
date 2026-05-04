@@ -46,11 +46,11 @@ Reason: [why or why not]
 ```
 Component finding:
 Component: Chronicle Recovery
-Depth achieved: V4+
-Evidence: independent recovery of 175/175 NFT metadata/media
-Limitations: Bitcoin Originals and Core Object Alpha not checked
+Depth achieved: C5
+Evidence: full 175/175 Chronicle recovery or full declared-count recovery
+Limitations: Bitcoin Originals and Evidence Mirrors were not independently reproduced in this component finding
 Does this raise protocol achieved level? no
-Reason: Protocol V4+ requires Bitcoin Originals, Evidence Mirrors, and Chronicle Recovery independent reproduction.
+Reason: Protocol V4+ is a whole-report profile. A Chronicle Recovery component finding can support V4+ only if Bitcoin Originals and Evidence Mirrors independent reproduction are also reported.
 ```
 
 ## Verification Report Template · 验证报告模板
@@ -187,7 +187,7 @@ These reports independently reproduce verification results without relying on of
 - `EVIDENCE_MIRRORS` independent reproduction
 - `CHRONICLE_RECOVERY` independent reproduction
 
-**Important:** Chronicle Recovery V4+ alone does not constitute protocol V4+. All three components must be independently reproduced.
+**Important:** A high-depth Chronicle Recovery component finding — for example C5 full recovery with an independent-reproduction method — does not by itself constitute protocol V4+. All three components must be independently reproduced.
 
 **Submitted reports:**
 

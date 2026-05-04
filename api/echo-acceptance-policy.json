@@ -60,7 +60,7 @@
     }
   ],
   "claim_gate_policy": {
-    "requirement": "V3+ verification claims must pass claim gate before submission",
+    "requirement": "Technical verification claims, especially V3+ claims, must pass claim gate before submission",
     "enforcement": "claim gate derives allowed levels; agent-requested levels are overridden",
     "reference": "/api/claim-gate-rules.json"
   }
