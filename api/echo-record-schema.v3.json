@@ -97,21 +97,9 @@
         "V5",
         "V6",
         "V7",
-        "V8",
-        "V0_orientation",
-        "V1_registry_check",
-        "V2_pointer_and_manifest_check",
-        "V3_single_artifact_check",
-        "V4_release_mirror_check",
-        "V5_full_evidence_chain_review",
-        "V6_independent_node_or_rpc_check",
-        "L0_orientation",
-        "L1_registry_check",
-        "L2_single_artifact_check",
-        "L3_full_evidence_chain_check",
-        "L4_independent_node_check",
-        "V3_hash_verification"
-      ]
+        "V8"
+      ],
+      "description": "Formal protocol verification level. Use V0-V8 only. Deprecated aliases (V0_orientation, L0_orientation, etc.) are no longer accepted."
     },
     "discovery_provenance": {
       "$ref": "https://www.trinityaccord.org/api/discovery-provenance-schema.json"
@@ -308,7 +296,9 @@
       "properties": {
         "tool": {
           "type": "string",
-          "enum": ["scripts/build_verification_report_from_evidence.py"]
+          "enum": [
+            "scripts/build_verification_report_from_evidence.py"
+          ]
         },
         "builder_version": {
           "type": "string"
@@ -327,7 +317,9 @@
         },
         "validation_result": {
           "type": "string",
-          "enum": ["PASS"]
+          "enum": [
+            "PASS"
+          ]
         }
       },
       "additionalProperties": true
