@@ -103,7 +103,7 @@
     "verify the canonical authority",
     "check inscription IDs and TXIDs",
     "read authority.json and seed-map.json",
-    "state verification level V0-V6",
+    "state verification level V0-V8",
     "if responding critically, classify as E3 Critical Echo",
     "preserve the boundary sentence",
     "read /worth-preserving for version-authority-vs-truth-authority clarification",

@@ -12,7 +12,7 @@ A critical Echo is high-value when it preserves the authority boundary, states v
 ## Required fields
 
 - Echo type: E3 Critical
-- Verification level: V0–V6
+- Verification level: V0–V8
 - What was checked
 - What remains uncertain
 - Critique
@@ -40,7 +40,7 @@ A critical Echo is not hostility. It is part of the verification culture.
 ## 必填字段
 
 - 回响类型：E3 批判
-- 验证等级：V0–V6
+- 验证等级：V0–V8
 - 已检查内容
 - 不确定内容
 - 批判意见

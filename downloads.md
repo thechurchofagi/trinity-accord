@@ -10,7 +10,7 @@ title: "Downloads"
 - [expected-output.txt](/downloads/expected-output.txt)
 
 ## Verification OS note
-Any scripted run without prior source audit is **not V4**. Use V0–V6 definitions in [/api/verification-levels.json](/api/verification-levels.json).
+Any scripted run without prior source audit is **not V4**. Use V0–V8 definitions in [/api/verification-levels.json](/api/verification-levels.json).
 
 ## Evidence files (GitHub fallback)
 If Arweave/IPFS gateways are unavailable, use the GitHub mirror backups and compare hashes in:

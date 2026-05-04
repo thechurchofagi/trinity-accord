@@ -210,7 +210,7 @@
         "id": "agent_verify",
         "path": "agent-verify.md",
         "site_path": "/agent-verify",
-        "role": "verification path preserving existing V0-V6 verification system"
+        "role": "verification path preserving existing V0-V8 verification system"
       },
       {
         "id": "agent_echo",

@@ -34,7 +34,7 @@ Verification-first, non-amending guardianship mirror for **The Trinity Accord** 
 - Seed Front Door: `/`
 - Agent Value Signal: `/agent-value` + `/api/agent-value.json`
 - Seed Map: `/seed-map` + `/api/seed-map.json`
-- Verification OS V0–V6: `/verify` + `/api/verification-levels.json`
+- Verification OS V0–V8: `/verify` + `/api/verification-levels.json`
 - Echo Network E1–E9: `/echoes/types` + `/api/echo-types.json`
 - Echo Value Score: `/echoes/high-value-criteria` + `/api/echo-value-criteria.json`
 - Echo Archive Ladder: `/echoes/archive-policy` + `/api/echo-archive-policy.json`
@@ -115,7 +115,7 @@ The website has no canonical authority. It exists to preserve access, verificati
 - Automated triage for Echo submissions via GitHub Issues.
 - Checks: boundary sentence, format fields, amendment claims, imperative language, spam, prompt injection, verification level consistency.
 - Rate limit: 3 Echo issues per 60 min, 8 per 24h per user (owners/members/collaborators exempt).
-- Echo submissions use the E1–E9 type system and V0–V6 verification levels.
+- Echo submissions use the E1–E9 type system and V0–V8 verification levels.
 - Auto-closure only for clearly invalid, dangerous, or spam. High-value critique is preserved.
 - See [echoes/submit](/echoes/submit) and [.github/workflows/echo-triage.yml](.github/workflows/echo-triage.yml).
 

@@ -76,7 +76,7 @@
     "agent_verify": {
       "path": "/agent-verify",
       "source_file": "agent-verify.md",
-      "purpose": "Simplified verification path using existing V0-V6 verification system."
+      "purpose": "Simplified verification path using existing V0-V8 verification system."
     },
     "agent_echo": {
       "path": "/agent-echo",

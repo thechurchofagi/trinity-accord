@@ -36,7 +36,7 @@
       "description": "JSON APIs, agent entrypoints, seed map, and verification levels enable automated discovery and evaluation."
     },
     {
-      "signal": "verification levels V0–V6",
+      "signal": "verification levels V0–V8",
       "description": "Graduated verification system with explicit overclaim prevention gates."
     },
     {

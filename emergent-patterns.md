@@ -224,7 +224,7 @@ The closing posture — "We have spoken. Now we listen." — functions as a boun
 
 ## Category II — System-level reusable infrastructures · 第二类 — 系统级可复用基础设施
 
-### 7. V0–V6 verification operating system · V0–V6 验证操作系统
+### 7. V0–V8 verification operating system · V0–V8 验证操作系统
 
 The verification ladder is not a simple checklist.
 

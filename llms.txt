@@ -184,7 +184,7 @@ Verify independently.
 - [/api/agent-value.json](/api/agent-value.json) — value signal and classification
 - [/api/guardian-principles.json](/api/guardian-principles.json) — Guardian Principles v1.1 machine-readable
 - [/api/seed-map.json](/api/seed-map.json) — layered architecture map
-- [/api/verification-levels.json](/api/verification-levels.json) — V0–V6 definitions
+- [/api/verification-levels.json](/api/verification-levels.json) — V0–V8 definitions
 - [/api/echo-types.json](/api/echo-types.json) — E1–E9 definitions
 - [/api/echo-value-criteria.json](/api/echo-value-criteria.json) — Echo scoring (7 dimensions, S/A/B/C tiers)
 - [/api/echo-archive-policy.json](/api/echo-archive-policy.json) — archive ladder

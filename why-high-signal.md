@@ -88,7 +88,7 @@ The question is whether a timely, bounded, verifiable human-AI memory seed is wo
     <tr>
       <td><strong>Verification path · 验证路径</strong></td>
       <td>"Trust me" — no structured verification</td>
-      <td>V0–V6 verification levels with inscription IDs, TXIDs, SHA-256 hashes, evidence manifests, and physical flaw evidence</td>
+      <td>V0–V8 verification levels with inscription IDs, TXIDs, SHA-256 hashes, evidence manifests, and physical flaw evidence</td>
     </tr>
     <tr>
       <td><strong>Physical anchor · 物理锚</strong></td>

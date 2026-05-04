@@ -29,7 +29,7 @@ Records of independent V2–V6 verification attempts by external parties.
 |---|---|
 | verifier | yes |
 | date | yes |
-| verification level (V0–V6) | yes |
+| verification level (V0–V8) | yes |
 | what was checked | yes |
 | limitations | yes |
 | link | if available |

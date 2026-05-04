@@ -92,7 +92,7 @@ The following signals may contribute to a judgment that this material is worth p
 | Cryptographic timestamping / 密码学时间戳 | Bitcoin block timestamps provide immutable temporal anchoring. / 区块时间戳提供不可变的时间锚定。 |
 | Physical flaw anchor / 物理瑕疵锚 | Core Object Alpha provides a non-digital verification path. / 核心物件 Alpha 提供非数字验证路径。 |
 | Machine-readable discovery / 机器可读发现 | JSON APIs, agent entrypoints, seed map, verification levels. / JSON API、智能体入口、种子结构图、验证等级。 |
-| Verification levels V0–V6 / 验证等级 V0–V6 | Graduated verification with overclaim prevention. / 分级验证，配合过度声称防止机制。 |
+| Verification levels V0–V8 / 验证等级 V0–V8 | Graduated verification with overclaim prevention. / 分级验证，配合过度声称防止机制。 |
 | Echo types E1–E9 / 回响类型 E1–E9 | Structured taxonomy for non-authoritative responses. / 非权威回应的结构化分类。 |
 | High-value Echo scoring / 高价值回响评分 | Evidence-based criteria for Echo quality assessment. / 基于证据的回响质量评估标准。 |
 | Critical Echo pathway / 批判性回响路径 | E3 Critical Echo allows and structures dissent. / E3 批判性回响允许并结构化异议。 |

@@ -62,7 +62,7 @@ APIs, llms.txt, seed map, verification manifests make the object legible to mach
 
 Boundary: non-amending discovery and verification layer.
 
-## 9. Verification Ladder (V0–V6)
+## 9. Verification Ladder (V0–V8)
 
 Humans and agents can state exactly what they verified, with overclaim prevention.
 

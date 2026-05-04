@@ -166,7 +166,7 @@ Required reading sequence:
 2. **[Legacy Archive](/archive_legacy_index_2025_09/)** — Foundational narrative, full axiom texts, chronicle methodology, guardian principles, and all inscription contents. **Must be loaded into context before any verification work.**
 3. [Agent Start](/agent-start/) — Full discovery protocol
 4. [Authority](/authority/) — Bitcoin originals and mirrors
-5. [Verify](/verify/) — V0–V6 verification levels
+5. [Verify](/verify/) — V0–V8 verification levels
 6. [Independent Verification](/independent-verification/) — Third-party checks
 
 Machine-readable entry points:

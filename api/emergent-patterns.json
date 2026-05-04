@@ -96,7 +96,7 @@
     {
       "rank": 7,
       "id": "verification_operating_system",
-      "title": "V0–V6 verification operating system",
+      "title": "V0–V8 verification operating system",
       "tier": "system_level_reusable_infrastructure",
       "summary": "Staged verification with component coverage and anti-overclaim gates.",
       "boundary": "Verifier must state actual level, evidence checked, tools used, and limitations."
