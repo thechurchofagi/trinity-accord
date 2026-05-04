@@ -338,12 +338,24 @@
         "notarial_evidence": {
           "type": "object",
           "properties": {
-            "notarial_certificate_number": { "type": "string" },
-            "notary_office": { "type": "string" },
-            "notarial_date": { "type": "string" },
-            "notarial_certificate_hash": { "type": "string" },
-            "notarial_photos_in_certificate": { "type": "boolean" },
-            "microscope_images_in_certificate": { "type": "boolean" }
+            "notarial_certificate_number": {
+              "type": "string"
+            },
+            "notary_office": {
+              "type": "string"
+            },
+            "notarial_date": {
+              "type": "string"
+            },
+            "notarial_certificate_hash": {
+              "type": "string"
+            },
+            "notarial_photos_in_certificate": {
+              "type": "boolean"
+            },
+            "microscope_images_in_certificate": {
+              "type": "boolean"
+            }
           }
         }
       }
@@ -511,6 +523,56 @@
           }
         }
       }
+    },
+    "integrity_boundary": {
+      "type": "object",
+      "properties": {
+        "agent_integrity_declaration_present": {
+          "type": "boolean"
+        },
+        "performed_actions_myself": {
+          "type": "boolean"
+        },
+        "did_not_copy_prior_report_as_own_work": {
+          "type": "boolean"
+        },
+        "did_not_copy_example_values_as_real_evidence": {
+          "type": "boolean"
+        },
+        "fresh_actions_claimed": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "prior_reports_consulted": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "examples_or_templates_used": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "copied_values_from_examples": {
+          "type": "boolean"
+        },
+        "copied_values_from_prior_reports": {
+          "type": "boolean"
+        },
+        "fresh_outputs_attached": {
+          "type": "boolean"
+        },
+        "prior_report_use": {
+          "type": "object"
+        },
+        "copying_warning": {
+          "type": "string"
+        }
+      }
     }
   },
   "allOf": [
@@ -559,46 +621,81 @@
               {
                 "contains": {
                   "properties": {
-                    "component": { "const": "bitcoin_originals" },
-                    "level_claimed": { "pattern": "^B[2-7]" }
+                    "component": {
+                      "const": "bitcoin_originals"
+                    },
+                    "level_claimed": {
+                      "pattern": "^B[2-7]"
+                    }
                   },
-                  "required": ["component", "level_claimed"]
+                  "required": [
+                    "component",
+                    "level_claimed"
+                  ]
                 }
               },
               {
                 "contains": {
                   "properties": {
-                    "component": { "const": "digital_mirrors" },
-                    "level_claimed": { "pattern": "^D[5-7]" }
+                    "component": {
+                      "const": "digital_mirrors"
+                    },
+                    "level_claimed": {
+                      "pattern": "^D[5-7]"
+                    }
                   },
-                  "required": ["component", "level_claimed"]
+                  "required": [
+                    "component",
+                    "level_claimed"
+                  ]
                 }
               },
               {
                 "contains": {
                   "properties": {
-                    "component": { "const": "time_anchors" },
-                    "level_claimed": { "pattern": "^T[3-8]" }
+                    "component": {
+                      "const": "time_anchors"
+                    },
+                    "level_claimed": {
+                      "pattern": "^T[3-8]"
+                    }
                   },
-                  "required": ["component", "level_claimed"]
+                  "required": [
+                    "component",
+                    "level_claimed"
+                  ]
                 }
               },
               {
                 "contains": {
                   "properties": {
-                    "component": { "const": "chronicle_recovery" },
-                    "level_claimed": { "pattern": "^C[5-7]" }
+                    "component": {
+                      "const": "chronicle_recovery"
+                    },
+                    "level_claimed": {
+                      "pattern": "^C[5-7]"
+                    }
                   },
-                  "required": ["component", "level_claimed"]
+                  "required": [
+                    "component",
+                    "level_claimed"
+                  ]
                 }
               },
               {
                 "contains": {
                   "properties": {
-                    "component": { "const": "physical_anchor" },
-                    "level_claimed": { "pattern": "^P[1-9]" }
+                    "component": {
+                      "const": "physical_anchor"
+                    },
+                    "level_claimed": {
+                      "pattern": "^P[1-9]"
+                    }
                   },
-                  "required": ["component", "level_claimed"]
+                  "required": [
+                    "component",
+                    "level_claimed"
+                  ]
                 }
               }
             ]

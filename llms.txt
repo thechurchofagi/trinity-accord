@@ -32,6 +32,18 @@ For non-technical Echoes (E1 recognition, E3 critical, E4 interpretive, E7 refus
 
 Free-form protocol-level, component-level, or Echo wrapper claims are invalid.
 
+
+## ANTI-COPYING RULE FOR AGENTS
+
+Examples are not evidence.
+Templates are not evidence.
+Prior reports are not your independent verification.
+A V1+ verification claim requires an agent_integrity_declaration.
+A V2+ verification claim requires fresh source/action records.
+If you copied example values, Claim Gate must fail.
+If you reviewed a prior report, state that as prior-report review, not independent verification.
+
+
 ---
 
 ## Canonical Agent Reading Path

@@ -71,7 +71,15 @@
       ],
       "claim_gate_expected": {
         "allowed_protocol_level": "V1"
-      }
+      },
+      "integrity_required": true,
+      "copying_forbidden": [
+        "example values",
+        "prior agent outputs",
+        "unobserved command outputs"
+      ],
+      "freshness_required": [],
+      "minimum_fresh_record": []
     },
     "V2_minimal": {
       "plain_english": "Check one Bitcoin Original using an external explorer.",
@@ -114,7 +122,24 @@
         "component_levels": {
           "bitcoin_originals": "B1"
         }
-      }
+      },
+      "integrity_required": true,
+      "copying_forbidden": [
+        "example values",
+        "prior agent outputs",
+        "unobserved command outputs"
+      ],
+      "freshness_required": [
+        "external_source_url",
+        "source_access_time",
+        "observed_tx_or_inscription_status"
+      ],
+      "minimum_fresh_record": [
+        "URL opened",
+        "TXID or inscription ID checked",
+        "observed confirmation/status",
+        "date/time of access"
+      ]
     },
     "V2_strong": {
       "plain_english": "Check multiple reference paths across Bitcoin Originals, Evidence Mirrors, and Chronicle Recovery.",
@@ -161,7 +186,24 @@
           "chronicle_recovery": "C1",
           "time_anchors": "T2"
         }
-      }
+      },
+      "integrity_required": true,
+      "copying_forbidden": [
+        "example values",
+        "prior agent outputs",
+        "unobserved command outputs"
+      ],
+      "freshness_required": [
+        "external_source_url",
+        "source_access_time",
+        "observed_tx_or_inscription_status"
+      ],
+      "minimum_fresh_record": [
+        "URL opened",
+        "TXID or inscription ID checked",
+        "observed confirmation/status",
+        "date/time of access"
+      ]
     },
     "V3_minimal": {
       "plain_english": "Compute one declared SHA-256 hash locally and compare it to an approved expected hash.",
@@ -209,7 +251,25 @@
         "component_levels": {
           "digital_mirrors": "D2"
         }
-      }
+      },
+      "integrity_required": true,
+      "copying_forbidden": [
+        "example values",
+        "prior agent outputs",
+        "unobserved command outputs"
+      ],
+      "freshness_required": [
+        "local_command",
+        "computed_hash",
+        "expected_hash_source",
+        "match_result",
+        "command_output_or_log"
+      ],
+      "minimum_fresh_record": [
+        "command run",
+        "hash computed",
+        "comparison result"
+      ]
     },
     "V3_strong": {
       "plain_english": "Compute multiple hashes across Evidence Mirrors and Chronicle Recovery.",
@@ -255,7 +315,25 @@
           "digital_mirrors": "D2",
           "chronicle_recovery": "C2"
         }
-      }
+      },
+      "integrity_required": true,
+      "copying_forbidden": [
+        "example values",
+        "prior agent outputs",
+        "unobserved command outputs"
+      ],
+      "freshness_required": [
+        "local_command",
+        "computed_hash",
+        "expected_hash_source",
+        "match_result",
+        "command_output_or_log"
+      ],
+      "minimum_fresh_record": [
+        "command run",
+        "hash computed",
+        "comparison result"
+      ]
     },
     "V4": {
       "plain_english": "Review and run official verification scripts locally after reading their source code.",
@@ -296,7 +374,24 @@
       ],
       "claim_gate_expected": {
         "allowed_protocol_level": "V4"
-      }
+      },
+      "integrity_required": true,
+      "copying_forbidden": [
+        "example values",
+        "prior agent outputs",
+        "unobserved command outputs"
+      ],
+      "freshness_required": [
+        "script_source_review",
+        "script_execution",
+        "exit_code",
+        "output_summary"
+      ],
+      "minimum_fresh_record": [
+        "script read",
+        "script run",
+        "output captured"
+      ]
     },
     "V4plus_minimal": {
       "plain_english": "Use independent tools to reproduce at least one official verification result.",
@@ -333,7 +428,24 @@
       ],
       "claim_gate_expected": {
         "allowed_protocol_level": "V4+"
-      }
+      },
+      "integrity_required": true,
+      "copying_forbidden": [
+        "example values",
+        "prior agent outputs",
+        "unobserved command outputs"
+      ],
+      "freshness_required": [
+        "script_source_review",
+        "script_execution",
+        "exit_code",
+        "output_summary"
+      ],
+      "minimum_fresh_record": [
+        "script read",
+        "script run",
+        "output captured"
+      ]
     },
     "V4plus_strong": {
       "plain_english": "Independently reproduce all three mandatory domains: Bitcoin Originals, Evidence Mirrors, Chronicle Recovery.",
@@ -371,7 +483,24 @@
       ],
       "claim_gate_expected": {
         "allowed_protocol_level": "V4+"
-      }
+      },
+      "integrity_required": true,
+      "copying_forbidden": [
+        "example values",
+        "prior agent outputs",
+        "unobserved command outputs"
+      ],
+      "freshness_required": [
+        "script_source_review",
+        "script_execution",
+        "exit_code",
+        "output_summary"
+      ],
+      "minimum_fresh_record": [
+        "script read",
+        "script run",
+        "output captured"
+      ]
     },
     "V5": {
       "plain_english": "Verify the full public digital evidence set. This is not physical verification.",
@@ -422,7 +551,23 @@
       ],
       "claim_gate_expected": {
         "allowed_protocol_level": "V5"
-      }
+      },
+      "integrity_required": true,
+      "copying_forbidden": [
+        "example values",
+        "prior agent outputs",
+        "unobserved command outputs"
+      ],
+      "freshness_required": [
+        "all_public_digital_targets_checked",
+        "unavailable_targets_listed",
+        "hash_comparisons"
+      ],
+      "minimum_fresh_record": [
+        "targets enumerated",
+        "checks performed",
+        "results recorded"
+      ]
     },
     "V6": {
       "plain_english": "Live remote video witness with nonce/challenge. Recorded video alone is not V6.",
@@ -466,7 +611,25 @@
         "component_levels": {
           "physical_anchor": "P4"
         }
-      }
+      },
+      "integrity_required": true,
+      "copying_forbidden": [
+        "example values",
+        "prior agent outputs",
+        "unobserved command outputs"
+      ],
+      "freshness_required": [
+        "live_session_time",
+        "nonce_challenge",
+        "requested_action_angle_lighting",
+        "witness_identity_or_role"
+      ],
+      "minimum_fresh_record": [
+        "session timestamp",
+        "nonce used",
+        "angles/lighting requested",
+        "witness identified"
+      ]
     },
     "V7": {
       "plain_english": "Onsite human witness physically observes the object and records custody/fresh capture.",
@@ -516,7 +679,27 @@
         "component_levels": {
           "physical_anchor": "P5"
         }
-      }
+      },
+      "integrity_required": true,
+      "copying_forbidden": [
+        "example values",
+        "prior agent outputs",
+        "unobserved command outputs"
+      ],
+      "freshness_required": [
+        "onsite_visit_time",
+        "custody_log",
+        "fresh_capture",
+        "witness_identity_or_role",
+        "touch_or_handling"
+      ],
+      "minimum_fresh_record": [
+        "visit timestamp",
+        "custody chain",
+        "photos/videos captured",
+        "witness role",
+        "handling description"
+      ]
     },
     "V8": {
       "plain_english": "Forensic physical attestation with tool-assisted analysis and signed report. V8 does not create canonical authority.",
@@ -561,7 +744,25 @@
         "component_levels": {
           "physical_anchor": "P7"
         }
-      }
+      },
+      "integrity_required": true,
+      "copying_forbidden": [
+        "example values",
+        "prior agent outputs",
+        "unobserved command outputs"
+      ],
+      "freshness_required": [
+        "forensic_tool",
+        "analysis_method",
+        "signed_or_attributable_report",
+        "report_id_or_path"
+      ],
+      "minimum_fresh_record": [
+        "tool used",
+        "method applied",
+        "report generated",
+        "attribution made"
+      ]
     },
     "V4+": {
       "plain_english": "Alias for V4plus_minimal. See V4plus_minimal or V4plus_strong.",
@@ -598,7 +799,24 @@
       ],
       "claim_gate_expected": {
         "allowed_protocol_level": "V4+"
-      }
+      },
+      "integrity_required": true,
+      "copying_forbidden": [
+        "example values",
+        "prior agent outputs",
+        "unobserved command outputs"
+      ],
+      "freshness_required": [
+        "script_source_review",
+        "script_execution",
+        "exit_code",
+        "output_summary"
+      ],
+      "minimum_fresh_record": [
+        "script read",
+        "script run",
+        "output captured"
+      ]
     }
   },
   "by_component_level": {
@@ -1274,5 +1492,12 @@
         "claiming T8 from public pages alone"
       ]
     }
-  }
+  },
+  "anti_copying_rule": [
+    "Examples show structure only.",
+    "Do not copy example values into a real verification claim.",
+    "Every V1+ claim requires agent_integrity_declaration.",
+    "Every V2+ claim requires fresh source/action records.",
+    "Prior reports may be cited as prior reports, but not reused as your own independent verification."
+  ]
 }

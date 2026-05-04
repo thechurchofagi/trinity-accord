@@ -12,7 +12,10 @@
       "physical_checks": [
         {
           "level_evidence_type": "onsite",
-          "custody_log": {"present": true, "entries": 3},
+          "custody_log": {
+            "present": true,
+            "entries": 3
+          },
           "fresh_capture": true,
           "witness_identity_or_role": "independent verifier",
           "touch_or_handling": true,
@@ -21,6 +24,11 @@
         }
       ]
     },
-    "claims_requested_by_agent": ["V7"]
-  }
+    "claims_requested_by_agent": [
+      "V7"
+    ]
+  },
+  "example_type": "template_requires_replacement",
+  "must_not_submit_unchanged": true,
+  "contains_placeholders": true
 }

@@ -12,14 +12,23 @@
       "bitcoin_checks": [
         {
           "source_type": "external_explorer",
-          "sources": ["mempool.space"],
+          "sources": [
+            "mempool.space"
+          ],
           "access_path": "https://mempool.space/tx/example-txid",
           "date": "2026-05-04",
-          "txids_checked": ["example-txid"],
+          "txids_checked": [
+            "example-txid"
+          ],
           "result": "confirmed on explorer"
         }
       ]
     },
-    "claims_requested_by_agent": ["V2"]
-  }
+    "claims_requested_by_agent": [
+      "V2"
+    ]
+  },
+  "example_type": "template_requires_replacement",
+  "must_not_submit_unchanged": true,
+  "contains_placeholders": true
 }

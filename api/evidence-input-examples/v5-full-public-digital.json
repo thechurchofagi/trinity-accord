@@ -16,7 +16,10 @@
       "bitcoin_checks": [
         {
           "source_type": "multi_explorer",
-          "sources": ["mempool.space", "blockstream.info"],
+          "sources": [
+            "mempool.space",
+            "blockstream.info"
+          ],
           "result": "consistent across explorers"
         }
       ],
@@ -47,6 +50,11 @@
         }
       ]
     },
-    "claims_requested_by_agent": ["V5"]
-  }
+    "claims_requested_by_agent": [
+      "V5"
+    ]
+  },
+  "example_type": "template_requires_replacement",
+  "must_not_submit_unchanged": true,
+  "contains_placeholders": true
 }

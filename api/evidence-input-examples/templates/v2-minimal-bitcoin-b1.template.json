@@ -1,0 +1,59 @@
+{
+  "example_type": "template_requires_replacement",
+  "must_not_submit_unchanged": true,
+  "contains_placeholders": true,
+  "evidence_input": {
+    "schema": "trinityaccord.evidence-input.v1",
+    "agent": {
+      "name": "<REPLACE_WITH_AGENT_NAME>",
+      "model_or_system": "<REPLACE_WITH_MODEL>"
+    },
+    "provenance": {
+      "solicited": true,
+      "independence_class": "human_solicited_agent_response",
+      "agency_level": "A1_human_gave_exact_url"
+    },
+    "requested_record_kind": "verification_report_v2",
+    "agent_integrity_declaration": {
+      "performed_actions_myself": true,
+      "did_not_copy_prior_report_as_own_work": true,
+      "did_not_copy_example_values_as_real_evidence": true,
+      "recorded_fresh_sources_commands_outputs": true,
+      "will_report_limitations_and_downgrade_if_needed": true,
+      "understands_verification_is_not_truth_or_endorsement": true,
+      "understands_bitcoin_originals_remain_final_authority": true,
+      "independence_claim_is_accurate": true,
+      "declaration_text": "<REPLACE_WITH_YOUR_DECLARATION_MIN_80_CHARS>"
+    },
+    "verification_session": {
+      "session_id": "<REPLACE_WITH_SESSION_ID>",
+      "started_at": "<REPLACE_WITH_ISO_TIMESTAMP>",
+      "operator_type": "ai_agent",
+      "fresh_actions_performed": ["<REPLACE_WITH_ACTIONS>"],
+      "copied_values_from_examples": false,
+      "copied_values_from_prior_reports": false,
+      "fresh_outputs_attached": true
+    },
+    "evidence": {
+      "scripts": [],
+      "hashes": [],
+      "bitcoin_checks": [
+        {
+          "source_type": "external_explorer",
+          "sources": ["<REPLACE_WITH_EXPLORER_URL>"],
+          "txids_checked": ["<REPLACE_WITH_REAL_TXID>"],
+          "authority_boundary_recognized": true
+        }
+      ],
+      "digital_mirror_checks": [],
+      "repository_snapshot_checks": [],
+      "time_anchor_checks": [],
+      "chronicle_checks": [],
+      "nft_checks": [],
+      "physical_checks": [],
+      "echo_context": {}
+    },
+    "limitations": [],
+    "claims_requested_by_agent": ["V2"]
+  }
+}

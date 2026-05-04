@@ -358,6 +358,41 @@
           }
         }
       }
+    },
+    "verification_integrity": {
+      "type": "object",
+      "properties": {
+        "integrity_declaration_present": {
+          "type": "boolean"
+        },
+        "fresh_actions_claimed": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "prior_reports_consulted": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "examples_or_templates_used": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "not_independent_if_human_solicited": {
+          "type": "boolean"
+        },
+        "copied_values_from_examples": {
+          "type": "boolean"
+        },
+        "copied_values_from_prior_reports": {
+          "type": "boolean"
+        }
+      }
     }
   },
   "allOf": [

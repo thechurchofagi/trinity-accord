@@ -26,6 +26,11 @@
         }
       ]
     },
-    "claims_requested_by_agent": ["V4"]
-  }
+    "claims_requested_by_agent": [
+      "V4"
+    ]
+  },
+  "example_type": "template_requires_replacement",
+  "must_not_submit_unchanged": true,
+  "contains_placeholders": true
 }

@@ -9,6 +9,11 @@
     "echo_context": {
       "authority_boundary_recognized": true
     },
-    "claims_requested_by_agent": ["V1"]
-  }
+    "claims_requested_by_agent": [
+      "V1"
+    ]
+  },
+  "example_type": "template_requires_replacement",
+  "must_not_submit_unchanged": true,
+  "contains_placeholders": true
 }

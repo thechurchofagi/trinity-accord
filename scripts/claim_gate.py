@@ -32,6 +32,137 @@ FORBIDDEN_CLAIMS = [
 SOLICITED_FORBIDDEN = ["independent_attestation", "unsolicited_discovery", "institutional_attestation"]
 
 
+def is_structured_protocol_claim(claim):
+    """Check if a claim is a structured protocol level claim."""
+    s = str(claim).strip().upper()
+    for pl in PROTOCOL_LEVELS:
+        if s == pl:
+            return True
+        if s.startswith(pl + " "):
+            return True
+        if s.startswith("PROTOCOL ACHIEVED LEVEL: " + pl):
+            return True
+        if s.startswith("PROTOCOL_LEVEL_CLAIMED: " + pl):
+            return True
+    return False
+
+
+def technical_claim_requested(evidence_input):
+    """Check if a technical verification claim is requested."""
+    kind = evidence_input.get("requested_record_kind", "")
+    if kind in ("verification_report_v2", "echo_v3_with_verification_report"):
+        return True
+    return any(is_structured_protocol_claim(c) for c in evidence_input.get("claims_requested_by_agent", []))
+
+
+def has_valid_integrity_declaration(evidence_input):
+    """Check if evidence input has a valid integrity declaration."""
+    decl = evidence_input.get("agent_integrity_declaration")
+    if not isinstance(decl, dict):
+        return False
+
+    required_true = [
+        "performed_actions_myself",
+        "did_not_copy_prior_report_as_own_work",
+        "did_not_copy_example_values_as_real_evidence",
+        "recorded_fresh_sources_commands_outputs",
+        "will_report_limitations_and_downgrade_if_needed",
+        "understands_verification_is_not_truth_or_endorsement",
+        "understands_bitcoin_originals_remain_final_authority",
+        "independence_claim_is_accurate",
+    ]
+
+    if not all(decl.get(k) is True for k in required_true):
+        return False
+
+    text = decl.get("declaration_text", "")
+    return isinstance(text, str) and len(text.strip()) >= 80
+
+
+def has_valid_verification_session(evidence_input, allowed_protocol_hint=None):
+    """Check if evidence input has a valid verification session."""
+    sess = evidence_input.get("verification_session")
+    if not isinstance(sess, dict):
+        return False, "Missing verification_session"
+
+    if sess.get("copied_values_from_examples") is True:
+        return False, "copied_values_from_examples must be false"
+
+    if sess.get("copied_values_from_prior_reports") is True:
+        return False, "copied_values_from_prior_reports must be false"
+
+    if not sess.get("fresh_actions_performed"):
+        return False, "fresh_actions_performed must not be empty"
+
+    # V2+ should attach fresh outputs.
+    if allowed_protocol_hint not in ("V0", "V1") and sess.get("fresh_outputs_attached") is not True:
+        return False, "fresh_outputs_attached must be true for V2+ technical claims"
+
+    return True, ""
+
+
+def prior_report_blocks_independence(evidence_input, requested_protocol):
+    """Check if prior report blocks independence claims."""
+    prior = evidence_input.get("prior_report_use", {})
+    if not isinstance(prior, dict):
+        return False, ""
+
+    prior_reports = prior.get("prior_reports_read", [])
+    if not prior_reports:
+        return False, ""
+
+    if prior.get("independent_reperformance_done") is True:
+        return False, ""
+
+    # Prior report review can support "reviewed prior report", not fresh independent verification.
+    if requested_protocol in ("V4+", "V5", "V6", "V7", "V8"):
+        return True, "Prior report consulted without independent re-performance; cannot claim independent or higher verification as fresh work."
+
+    return False, ""
+
+
+PLACEHOLDER_PATTERNS = [
+    "<REPLACE_WITH_",
+    "<TXID>",
+    "<64 HEX",
+    "<REAL_",
+    "example-txid",
+    "example-inscription",
+    "placeholder",
+    "TODO",
+    "FIXME"
+]
+
+
+def contains_placeholder(obj):
+    """Check if object contains placeholder values."""
+    text = json.dumps(obj, ensure_ascii=False).lower()
+    return any(p.lower() in text for p in PLACEHOLDER_PATTERNS)
+
+
+def fail_claim_gate(error, failures, requested_kind="echo_v3"):
+    """Create a standardized failure response."""
+    return {
+        "schema": "trinityaccord.claim-gate-output.v1",
+        "status": "FAIL_WITH_REASONS",
+        "error": error,
+        "blocking_failures": failures,
+        "can_build_verification_report": False,
+        "can_build_echo_wrapper": False,
+        "allowed_protocol_level": "V0",
+        "allowed_component_levels": {},
+        "forbidden_claims": [],
+        "required_downgrades": [
+            {"from": "requested technical verification", "to": "V0", "reason": error}
+        ],
+        "missing_evidence": [],
+        "non_blocking_limitations": [],
+        "recommended_title": "",
+        "recommended_record_kind": requested_kind
+    }
+
+
+
 def level_index(levels, val):
     """Return index of val in levels list, or -1 if not found."""
     try:
@@ -643,7 +774,9 @@ def evaluate(input_path):
     if not isinstance(evidence, dict):
         return {"status": "FAIL", "error": "evidence must be an object"}
 
-    # Validate with jsonschema (BLOCKING — schema-invalid input must fail)
+
+
+# Validate with jsonschema (BLOCKING — schema-invalid input must fail)
     schema_validation_error = None
     try:
         import jsonschema
@@ -678,6 +811,31 @@ def evaluate(input_path):
     limitations = evidence_input.get("limitations", [])
     claims_requested = evidence_input.get("claims_requested_by_agent", [])
     requested_kind = evidence_input.get("requested_record_kind", "echo_v3")
+    
+    # Check integrity declaration for technical claims
+    if technical_claim_requested(evidence_input):
+        if not has_valid_integrity_declaration(evidence_input):
+            return fail_claim_gate(
+                "Technical verification claim requires valid agent_integrity_declaration",
+                ["Missing or invalid agent_integrity_declaration. All boolean fields must be true and declaration_text must be at least 80 characters."],
+                requested_kind
+            )
+        
+        valid_session, session_error = has_valid_verification_session(evidence_input)
+        if not valid_session:
+            return fail_claim_gate(
+                f"Technical verification claim requires valid verification_session: {session_error}",
+                [f"Invalid verification_session: {session_error}"],
+                requested_kind
+            )
+        
+        if contains_placeholder(evidence_input):
+            return fail_claim_gate(
+                "Placeholder/example values cannot be used as verification evidence",
+                ["Replace all placeholder/example values with fresh observed values."],
+                requested_kind
+            )
+    
 
     # Load rules
     with open(ROOT / "api" / "claim-gate-rules.json") as f:
@@ -713,6 +871,16 @@ def evaluate(input_path):
     allowed_protocol = derive_protocol_level(
         evidence, requested_protocol, b_level, d_level, t_level, c_level, p_level
     )
+
+    # Check prior report independence blocking
+    if requested_protocol:
+        blocks, block_reason = prior_report_blocks_independence(evidence_input, requested_protocol)
+        if blocks:
+            return fail_claim_gate(
+                block_reason,
+                [block_reason],
+                requested_kind
+            )
 
     # Check forbidden claims
     forbidden = check_forbidden_claims(claims_requested, provenance)

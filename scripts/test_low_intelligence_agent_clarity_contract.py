@@ -191,6 +191,67 @@ def test_every_protocol_profile_has_cheatsheet_entry():
         assert key in cheat
 
 
+
+
+def test_examples_are_copy_safe_not_unlabeled_passing_examples():
+    """Ensure all examples have explicit example_type classification."""
+    import os
+    examples_dir = ROOT / "api" / "evidence-input-examples"
+    assert examples_dir.exists()
+
+    for path in examples_dir.rglob("*.json"):
+        obj = json.loads(path.read_text(encoding="utf-8"))
+        example_type = obj.get("example_type")
+        assert example_type in [
+            "tutorial_non_passing",
+            "test_fixture_passing",
+            "template_requires_replacement"
+        ], f"{path} missing explicit example_type"
+
+
+def test_templates_and_tutorials_do_not_pass_claim_gate_unchanged():
+    """Ensure templates and tutorials fail Claim Gate when used unchanged."""
+    import os
+    import tempfile
+    
+    for subdir in ["templates", "tutorial"]:
+        d = ROOT / "api" / "evidence-input-examples" / subdir
+        if not d.exists():
+            continue
+        for path in d.glob("*.json"):
+            obj = json.loads(path.read_text(encoding="utf-8"))
+            evidence_input = obj.get("evidence_input", obj)
+
+            with tempfile.NamedTemporaryFile("w", suffix=".json", delete=False) as f:
+                json.dump(evidence_input, f)
+                temp_path = f.name
+
+            try:
+                proc = subprocess.run(
+                    [sys.executable, str(ROOT / "scripts" / "claim_gate.py"), temp_path],
+                    cwd=str(ROOT),
+                    text=True,
+                    capture_output=True
+                )
+                assert proc.returncode != 0 or "FAIL" in proc.stdout, (
+                    f"{path} should not pass Claim Gate unchanged"
+                )
+            finally:
+                os.unlink(temp_path)
+
+
+def test_test_fixtures_are_labeled_synthetic():
+    """Ensure test fixtures are properly labeled as synthetic."""
+    test_dir = ROOT / "api" / "evidence-input-examples" / "test-fixtures"
+    if not test_dir.exists():
+        return
+    
+    for path in test_dir.glob("*.json"):
+        obj = json.loads(path.read_text(encoding="utf-8"))
+        assert obj.get("synthetic_fixture") is True, f"{path} must be labeled as synthetic_fixture"
+        assert obj.get("not_real_world_submission") is True, f"{path} must be labeled as not_real_world_submission"
+
+
 def main():
     tests = [
         test_cheatsheet_exists_and_has_required_sections,
@@ -205,7 +266,10 @@ def main():
         test_examples_are_valid_json,
         test_quick_map_levels_have_cheatsheet_entries,
         test_every_protocol_profile_has_cheatsheet_entry,
-    ]
+            test_examples_are_copy_safe_not_unlabeled_passing_examples,
+        test_templates_and_tutorials_do_not_pass_claim_gate_unchanged,
+        test_test_fixtures_are_labeled_synthetic,
+]
 
     for test in tests:
         test()

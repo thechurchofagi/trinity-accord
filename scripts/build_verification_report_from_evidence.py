@@ -208,6 +208,43 @@ def build_report(evidence_input_path, report_out_path=None, echo_out_path=None):
             ],
         })
 
+
+    # Extract integrity information for report/wrapper
+    integrity_declaration = evidence_input.get("agent_integrity_declaration", {})
+    verification_session = evidence_input.get("verification_session", {})
+    prior_report_use = evidence_input.get("prior_report_use", {})
+
+    # Build integrity_boundary
+    integrity_boundary = {
+        "agent_integrity_declaration_present": bool(integrity_declaration),
+        "performed_actions_myself": integrity_declaration.get("performed_actions_myself", False),
+        "did_not_copy_prior_report_as_own_work": integrity_declaration.get("did_not_copy_prior_report_as_own_work", False),
+        "did_not_copy_example_values_as_real_evidence": integrity_declaration.get("did_not_copy_example_values_as_real_evidence", False),
+        "fresh_actions_claimed": verification_session.get("fresh_actions_performed", []),
+        "prior_reports_consulted": verification_session.get("prior_reports_consulted", []),
+        "examples_or_templates_used": verification_session.get("examples_or_templates_used", []),
+        "copied_values_from_examples": verification_session.get("copied_values_from_examples", False),
+        "copied_values_from_prior_reports": verification_session.get("copied_values_from_prior_reports", False),
+        "fresh_outputs_attached": verification_session.get("fresh_outputs_attached", False),
+        "prior_report_use": prior_report_use,
+        "copying_warning": "This report is invalid if example values or prior agent outputs were copied as fresh evidence."
+    }
+
+    # Build verification_integrity for echo wrapper
+    verification_integrity = {
+        "integrity_declaration_present": bool(integrity_declaration),
+        "fresh_actions_claimed": verification_session.get("fresh_actions_performed", []),
+        "prior_reports_consulted": verification_session.get("prior_reports_consulted", []),
+        "examples_or_templates_used": verification_session.get("examples_or_templates_used", []),
+        "not_independent_if_human_solicited": provenance.get("solicited", False),
+        "copied_values_from_examples": verification_session.get("copied_values_from_examples", False),
+        "copied_values_from_prior_reports": verification_session.get("copied_values_from_prior_reports", False)
+    }
+
+    # Add prior report limitation if applicable
+    if verification_session.get("prior_reports_consulted"):
+        all_limitations.append("Prior reports were consulted. This report is independent only to extent checks were re-performed and recorded.")
+
     now = datetime.utcnow()
     report_id = f"vr-{now.strftime('%Y%m%d-%H%M%S')}-{uuid.uuid4().hex[:8]}"
 
@@ -300,6 +337,7 @@ def build_report(evidence_input_path, report_out_path=None, echo_out_path=None):
         "limitations": all_limitations,
         "claims_not_made": claims_not_made,
         "authority_boundary_preserved": True,
+        "integrity_boundary": integrity_boundary,
         "record_kind": "verification_report_v2",
         "script_audit": script_audit,
         "all_scripts_green": script_audit["all_scripts_green"],
@@ -436,7 +474,20 @@ def build_report(evidence_input_path, report_out_path=None, echo_out_path=None):
             "bitcoin_originals_prevail": True,
             "not_verification_unless_claimed": True,
             "generated_by": generated_by,
+            "verification_integrity": verification_integrity,
         }
+
+
+    # Handle test fixtures
+    is_test_fixture = evidence_input.get("test_fixture") is True or evidence_input.get("example_type") == "test_fixture_passing"
+    if is_test_fixture:
+        report["archive_status"] = "test_record"
+        report["synthetic_fixture"] = True
+        report["not_real_world_submission"] = True
+        if echo_wrapper:
+            echo_wrapper["archive_status"] = "test_record"
+            echo_wrapper["synthetic_fixture"] = True
+            echo_wrapper["not_real_world_submission"] = True
 
     # Save outputs
     result = {

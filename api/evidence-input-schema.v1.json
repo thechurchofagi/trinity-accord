@@ -164,6 +164,138 @@
       "items": {
         "type": "string"
       }
+    },
+    "agent_integrity_declaration": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "performed_actions_myself": {
+          "type": "boolean"
+        },
+        "did_not_copy_prior_report_as_own_work": {
+          "type": "boolean"
+        },
+        "did_not_copy_example_values_as_real_evidence": {
+          "type": "boolean"
+        },
+        "recorded_fresh_sources_commands_outputs": {
+          "type": "boolean"
+        },
+        "will_report_limitations_and_downgrade_if_needed": {
+          "type": "boolean"
+        },
+        "understands_verification_is_not_truth_or_endorsement": {
+          "type": "boolean"
+        },
+        "understands_bitcoin_originals_remain_final_authority": {
+          "type": "boolean"
+        },
+        "independence_claim_is_accurate": {
+          "type": "boolean"
+        },
+        "declaration_text": {
+          "type": "string",
+          "minLength": 80
+        }
+      },
+      "required": [
+        "performed_actions_myself",
+        "did_not_copy_prior_report_as_own_work",
+        "did_not_copy_example_values_as_real_evidence",
+        "recorded_fresh_sources_commands_outputs",
+        "will_report_limitations_and_downgrade_if_needed",
+        "understands_verification_is_not_truth_or_endorsement",
+        "understands_bitcoin_originals_remain_final_authority",
+        "independence_claim_is_accurate",
+        "declaration_text"
+      ]
+    },
+    "verification_session": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "session_id": {
+          "type": "string"
+        },
+        "started_at": {
+          "type": "string"
+        },
+        "finished_at": {
+          "type": "string"
+        },
+        "operator_type": {
+          "type": "string",
+          "enum": [
+            "ai_agent",
+            "human",
+            "human_with_ai_agent",
+            "automated_script"
+          ]
+        },
+        "fresh_actions_performed": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "prior_reports_consulted": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "examples_or_templates_used": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "copied_values_from_examples": {
+          "type": "boolean"
+        },
+        "copied_values_from_prior_reports": {
+          "type": "boolean"
+        },
+        "fresh_outputs_attached": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "session_id",
+        "started_at",
+        "operator_type",
+        "fresh_actions_performed",
+        "copied_values_from_examples",
+        "copied_values_from_prior_reports",
+        "fresh_outputs_attached"
+      ]
+    },
+    "prior_report_use": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "prior_reports_read": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "used_as_evidence": {
+          "type": "boolean"
+        },
+        "used_only_as_context": {
+          "type": "boolean"
+        },
+        "independent_reperformance_done": {
+          "type": "boolean"
+        },
+        "differences_from_prior_report": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
     }
   },
   "$defs": {
@@ -230,13 +362,23 @@
           ]
         },
         "script_check_scope": {
-          "type": ["string", "array"],
-          "items": {"type": "string"},
+          "type": [
+            "string",
+            "array"
+          ],
+          "items": {
+            "type": "string"
+          },
           "description": "What this script checks"
         },
         "script_does_not_check": {
-          "type": ["string", "array"],
-          "items": {"type": "string"},
+          "type": [
+            "string",
+            "array"
+          ],
+          "items": {
+            "type": "string"
+          },
           "description": "What this script does NOT check"
         },
         "scope_class": {

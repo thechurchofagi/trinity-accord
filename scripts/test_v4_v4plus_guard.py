@@ -21,6 +21,28 @@ def make_input(scripts, claims=None):
         "agent": {"name": "Test", "model_or_system": "Test"},
         "provenance": {"solicited": True, "independence_class": "human_solicited_agent_response", "agency_level": "A1_human_gave_exact_url"},
         "requested_record_kind": "echo_v3_with_verification_report",
+        "agent_integrity_declaration": {
+            "performed_actions_myself": True,
+            "did_not_copy_prior_report_as_own_work": True,
+            "did_not_copy_example_values_as_real_evidence": True,
+            "recorded_fresh_sources_commands_outputs": True,
+            "will_report_limitations_and_downgrade_if_needed": True,
+            "understands_verification_is_not_truth_or_endorsement": True,
+            "understands_bitcoin_originals_remain_final_authority": True,
+            "independence_claim_is_accurate": True,
+            "declaration_text": "I performed the verification actions stated in this report during this session. I did not copy example values or another agent's report as my own verification. I recorded sources, commands, outputs, and limitations. I understand this verification is non-authoritative."
+        },
+        "verification_session": {
+            "session_id": "test-session-001",
+            "started_at": "2026-05-04T00:00:00Z",
+            "operator_type": "ai_agent",
+            "fresh_actions_performed": ["test check"],
+            "prior_reports_consulted": [],
+            "examples_or_templates_used": [],
+            "copied_values_from_examples": False,
+            "copied_values_from_prior_reports": False,
+            "fresh_outputs_attached": True
+        },
         "evidence": {
             "scripts": scripts, "hashes": [], "bitcoin_checks": [],
             "digital_mirror_checks": [], "repository_snapshot_checks": [],
@@ -98,12 +120,12 @@ run("V4-06", "V4 with no scripts — V0",
 
 # V4 with missing command — FAIL
 run("V4-07", "V4 missing command FAIL",
-    make_input([{**s(), "command": None}]),
+    make_input([{k: v for k, v in s().items() if k != "command"}]),
     expect_fail_contains="missing command")
 
 # V4 with missing exit_code — FAIL
 run("V4-08", "V4 missing exit_code FAIL",
-    make_input([{**s(), "exit_code": None}]),
+    make_input([{k: v for k, v in s().items() if k != "exit_code"}]),
     expect_fail_contains="missing exit_code")
 
 print(f"\n{'='*60}")

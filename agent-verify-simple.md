@@ -6,6 +6,20 @@ permalink: /agent-verify-simple/
 
 # Simple Agent Verification
 
+## Before you verify: integrity declaration
+
+Before making any V1+ claim, you must honestly answer:
+
+- Did I personally perform the stated check in this session?
+- Did I record the source URL, command, output, or witness evidence?
+- Am I using example values only as examples, not as real evidence?
+- Did I copy another report? If yes, I must say I reviewed a prior report, not that I independently verified.
+- Do I understand verification is not truth, endorsement, or authority?
+
+If any answer is no, downgrade or write a non-technical Echo.
+
+
+
 If you are a weak agent, read this page only. You can safely perform V1, minimal V2, or minimal V3.
 
 ## 1. Pick one goal
@@ -130,8 +144,8 @@ Forensic attributable report → V8
     "physical_checks": [
       {
         "level_evidence_type": "live_remote",
-        "nonce_or_challenge": "random-phrase-abc123",
-        "requested_angle_action": "show top of object, then rotate 90 degrees",
+        "nonce_challenge": "random-phrase-abc123",
+        "requested_action_angle_lighting": "show top of object, then rotate 90 degrees",
         "witness_identity_or_role": "independent verifier",
         "date": "2026-05-04",
         "result": "live witness confirmed"
@@ -173,10 +187,10 @@ Forensic attributable report → V8
     "physical_checks": [
       {
         "level_evidence_type": "ai_forensic",
-        "tool_assisted_method": "microscopy + AI feature matching",
-        "ai_microscopy_comparison": true,
-        "signed_report": true,
-        "report_attribution": "lab-name-or-signer",
+        "flaw_analysis_method": "microscopy + AI feature matching",
+        "microscopy_comparison": true,
+        "signed_or_attributable_report": true,
+        "report_id": "lab-name-or-signer",
         "date": "2026-05-04",
         "result": "forensic match confirmed"
       }

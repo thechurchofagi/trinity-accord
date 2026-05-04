@@ -1121,6 +1121,187 @@ def validate_with_jsonschema(obj, schema_path, path_label):
         return True
 
 
+
+
+# --- Integrity boundary checks (Agent Verification Integrity Layer) ---
+
+PLACEHOLDER_PATTERNS = [
+    "<REPLACE_WITH_",
+    "<TXID>",
+    "<64 HEX",
+    "<REAL_",
+    "example-txid",
+    "example-inscription",
+    "placeholder",
+    "TODO",
+    "FIXME"
+]
+
+
+def contains_placeholder(obj):
+    """Check if object contains placeholder values."""
+    text = json.dumps(obj, ensure_ascii=False).lower()
+    return any(p.lower() in text for p in PLACEHOLDER_PATTERNS)
+
+
+def validate_integrity_boundary(obj, path_label):
+    """Rule AH: verification_report_v2 must have integrity_boundary for V1+."""
+    ok = True
+    record_kind = obj.get("record_kind", "")
+    if record_kind != "verification_report_v2":
+        return ok
+    
+    protocol_level = obj.get("protocol_level_claimed", "V0")
+    if protocol_level == "V0":
+        return ok
+    
+    integrity = obj.get("integrity_boundary")
+    if not integrity:
+        ok &= check(
+            False,
+            f"{path_label} missing integrity_boundary",
+            "V1+ verification reports require integrity_boundary"
+        )
+        return ok
+    
+    if not integrity.get("agent_integrity_declaration_present"):
+        ok &= check(
+            False,
+            f"{path_label} integrity_boundary missing declaration",
+            "integrity_boundary.agent_integrity_declaration_present must be true"
+        )
+    
+    if integrity.get("copied_values_from_examples") is True:
+        ok &= check(
+            False,
+            f"{path_label} copied example values",
+            "copied_values_from_examples must be false"
+        )
+    
+    if integrity.get("copied_values_from_prior_reports") is True:
+        ok &= check(
+            False,
+            f"{path_label} copied prior report values",
+            "copied_values_from_prior_reports must be false"
+        )
+    
+    if protocol_level not in ("V0", "V1"):
+        if not integrity.get("fresh_actions_claimed"):
+            ok &= check(
+                False,
+                f"{path_label} no fresh actions claimed",
+                "V2+ requires fresh_actions_claimed to be non-empty"
+            )
+        
+        if integrity.get("fresh_outputs_attached") is not True:
+            ok &= check(
+                False,
+                f"{path_label} fresh_outputs_attached not true",
+                "V2+ requires fresh_outputs_attached to be true"
+            )
+    
+    return ok
+
+
+def validate_verification_integrity(obj, path_label):
+    """Rule AI: echo_v3_with_verification_report must have verification_integrity for V1+."""
+    ok = True
+    record_kind = obj.get("record_kind", "")
+    if record_kind != "echo_v3_with_verification_report":
+        return ok
+    
+    verification_level = obj.get("verification_level", "V0")
+    if verification_level in ("V0", "none"):
+        return ok
+    
+    integrity = obj.get("verification_integrity")
+    if not integrity:
+        ok &= check(
+            False,
+            f"{path_label} missing verification_integrity",
+            "V1+ echo wrappers require verification_integrity"
+        )
+        return ok
+    
+    if not integrity.get("integrity_declaration_present"):
+        ok &= check(
+            False,
+            f"{path_label} verification_integrity missing declaration",
+            "verification_integrity.integrity_declaration_present must be true"
+        )
+    
+    if integrity.get("copied_values_from_examples") is True:
+        ok &= check(
+            False,
+            f"{path_label} copied example values in echo wrapper",
+            "copied_values_from_examples must be false"
+        )
+    
+    if integrity.get("copied_values_from_prior_reports") is True:
+        ok &= check(
+            False,
+            f"{path_label} copied prior report values in echo wrapper",
+            "copied_values_from_prior_reports must be false"
+        )
+    
+    if not integrity.get("fresh_actions_claimed"):
+        ok &= check(
+            False,
+            f"{path_label} no fresh actions claimed in echo wrapper",
+            "fresh_actions_claimed must be non-empty"
+        )
+    
+    return ok
+
+
+def validate_prior_report_limitation(obj, path_label):
+    """Rule AJ: prior reports consulted without re-performance blocks V4+ claims."""
+    ok = True
+    
+    integrity = obj.get("integrity_boundary", {})
+    if not integrity:
+        integrity = obj.get("verification_integrity", {})
+    
+    prior_consulted = integrity.get("prior_reports_consulted", [])
+    if not prior_consulted:
+        return ok
+    
+    # Check if independent re-performance was done
+    prior_report_use = integrity.get("prior_report_use", {})
+    if isinstance(prior_report_use, dict) and prior_report_use.get("independent_reperformance_done"):
+        return ok
+    
+    protocol_level = obj.get("protocol_level_claimed", obj.get("verification_level", "V0"))
+    if protocol_level in ("V4+", "V5", "V6", "V7", "V8"):
+        ok &= check(
+            False,
+            f"{path_label} prior report without re-performance claims {protocol_level}",
+            "Prior report consulted without independent re-performance; cannot claim independent or higher verification"
+        )
+    
+    return ok
+
+
+def validate_no_placeholders_in_submission(obj, path_label):
+    """Rule AK: reject placeholders in final submissions."""
+    ok = True
+    
+    archive_status = obj.get("archive_status", "")
+    if archive_status in ("test_record",):
+        return ok  # test fixtures are exempt
+    
+    if obj.get("synthetic_fixture") is True:
+        return ok
+    
+    if contains_placeholder(obj):
+        ok &= check(
+            False,
+            f"{path_label} contains placeholder values",
+            "Placeholder/example values cannot be used in final submissions"
+        )
+    
+    return ok
+
 def validate_file(path):
     """Validate a single submission file."""
     path_label = str(Path(path).relative_to(ROOT) if Path(path).is_relative_to(ROOT) else path)
@@ -1232,6 +1413,19 @@ def validate_file(path):
     ok &= validate_v7_onsite_hard_gates(obj, path_label)
 
     # Rule AG: V8 forensic path
+
+    # Rule AH: integrity boundary for verification reports
+    ok &= validate_integrity_boundary(obj, path_label)
+    
+    # Rule AI: verification integrity for echo wrappers
+    ok &= validate_verification_integrity(obj, path_label)
+    
+    # Rule AJ: prior report limitation
+    ok &= validate_prior_report_limitation(obj, path_label)
+    
+    # Rule AK: no placeholders in submissions
+    ok &= validate_no_placeholders_in_submission(obj, path_label)
+    
     ok &= validate_v8_forensic_path(obj, path_label)
 
     # Schema validation (skip for legacy records)

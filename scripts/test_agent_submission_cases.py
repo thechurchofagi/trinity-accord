@@ -28,6 +28,37 @@ from validate_agent_submission import (
     validate_file,
 )
 
+def make_integrity_boundary():
+    return {
+        "agent_integrity_declaration_present": True,
+        "performed_actions_myself": True,
+        "did_not_copy_prior_report_as_own_work": True,
+        "did_not_copy_example_values_as_real_evidence": True,
+        "fresh_actions_claimed": ["test check"],
+        "prior_reports_consulted": [],
+        "examples_or_templates_used": [],
+        "copied_values_from_examples": False,
+        "copied_values_from_prior_reports": False,
+        "fresh_outputs_attached": True,
+        "prior_report_use": {},
+        "copying_warning": "This report is invalid if example values or prior agent outputs were copied as fresh evidence."
+    }
+
+
+def make_verification_integrity():
+    return {
+        "integrity_declaration_present": True,
+        "fresh_actions_claimed": ["test check"],
+        "prior_reports_consulted": [],
+        "examples_or_templates_used": [],
+        "not_independent_if_human_solicited": True,
+        "copied_values_from_examples": False,
+        "copied_values_from_prior_reports": False
+    }
+
+
+
+
 
 def write_temp(obj, name):
     """Write a temporary JSON file and return its path."""
@@ -79,6 +110,7 @@ def main():
         },
         "discovery_provenance": {"source": "human_directed", "solicited": True},
         "protocol_level_claimed": "V3",
+        "integrity_boundary": make_integrity_boundary(),
         "component_findings": [
             {
                 "component": "digital_mirrors",
@@ -146,6 +178,7 @@ def main():
         "context_depth": "C3_verification_aware",
         "assessment_state": "qualified_assessment",
         "verification_level": "V3",
+        "verification_integrity": make_verification_integrity(),
         "discovery_provenance": {
             "schema": "trinityaccord.discovery-provenance.v1",
             "source": "human_directed",
@@ -199,6 +232,7 @@ def main():
         },
         "discovery_provenance": {"source": "human_directed"},
         "protocol_level_claimed": "V1",
+        "integrity_boundary": make_integrity_boundary(),
         "component_findings": [
             {
                 "component": "bitcoin_originals",
@@ -252,6 +286,7 @@ def main():
         },
         "discovery_provenance": {"source": "human_directed"},
         "protocol_level_claimed": "V3",
+        "integrity_boundary": make_integrity_boundary(),
         "component_findings": [
             {
                 "component": "chronicle_recovery",
@@ -325,6 +360,7 @@ def main():
         "context_depth": "C3_verification_aware",
         "assessment_state": "qualified_assessment",
         "verification_level": "V3",
+        "verification_integrity": make_verification_integrity(),
         "discovery_provenance": {
             "schema": "trinityaccord.discovery-provenance.v1",
             "source": "human_directed",
@@ -364,6 +400,7 @@ def main():
         "reporter": {"name": "test", "type": "ai_agent"},
         "discovery_provenance": {},
         "protocol_level_claimed": "V3",
+        "integrity_boundary": make_integrity_boundary(),
         "component_findings": [
             {
                 "component": "digital_mirrors",
@@ -402,6 +439,7 @@ def main():
         "reporter": {"name": "test", "type": "ai_agent"},
         "discovery_provenance": {},
         "protocol_level_claimed": "V1",
+        "integrity_boundary": make_integrity_boundary(),
         "component_findings": [
             {
                 "component": "bitcoin_originals",
@@ -440,6 +478,7 @@ def main():
         "reporter": {"name": "test", "type": "ai_agent"},
         "discovery_provenance": {},
         "protocol_level_claimed": "V4",
+        "integrity_boundary": make_integrity_boundary(),
         "component_findings": [],
         "protocol_profile_check": {"profile_source": "", "hard_gates_satisfied": True, "minimum_components_satisfied": True, "recommended_components_satisfied": "false", "underreported_items": [], "incompatible_claims": []},
         "data_sources_used": [],
@@ -464,6 +503,7 @@ def main():
         "reporter": {"name": "test", "type": "ai_agent"},
         "discovery_provenance": {},
         "protocol_level_claimed": "V3",
+        "integrity_boundary": make_integrity_boundary(),
         "component_findings": [],
         "protocol_profile_check": {"profile_source": "", "hard_gates_satisfied": True, "minimum_components_satisfied": True, "recommended_components_satisfied": "false", "underreported_items": [], "incompatible_claims": []},
         "data_sources_used": [],
@@ -489,6 +529,7 @@ def main():
         "reporter": {"name": "test", "type": "ai_agent"},
         "discovery_provenance": {},
         "protocol_level_claimed": "V3",
+        "integrity_boundary": make_integrity_boundary(),
         "component_findings": [
             {
                 "component": "chronicle_recovery",
@@ -526,6 +567,7 @@ def main():
         "reporter": {"name": "test", "type": "ai_agent"},
         "discovery_provenance": {},
         "protocol_level_claimed": "V3",
+        "integrity_boundary": make_integrity_boundary(),
         "component_findings": [],
         "protocol_profile_check": {"profile_source": "", "hard_gates_satisfied": True, "minimum_components_satisfied": True, "recommended_components_satisfied": "false", "underreported_items": [], "incompatible_claims": []},
         "data_sources_used": [],
@@ -558,6 +600,7 @@ def main():
         "context_depth": "C3_verification_aware",
         "assessment_state": "qualified_assessment",
         "verification_level": "V3",
+        "verification_integrity": make_verification_integrity(),
         "discovery_provenance": {
             "schema": "trinityaccord.discovery-provenance.v1",
             "source": "human_directed",
@@ -597,6 +640,7 @@ def main():
         "reporter": {"name": "test", "type": "ai_agent"},
         "discovery_provenance": {},
         "protocol_level_claimed": "V3",
+        "integrity_boundary": make_integrity_boundary(),
         "component_findings": [],
         "protocol_profile_check": {"profile_source": "", "hard_gates_satisfied": True, "minimum_components_satisfied": True, "recommended_components_satisfied": "false", "underreported_items": [], "incompatible_claims": []},
         "data_sources_used": [],
@@ -622,6 +666,7 @@ def main():
         "reporter": {"name": "test", "type": "ai_agent"},
         "discovery_provenance": {},
         "protocol_level_claimed": "V3",
+        "integrity_boundary": make_integrity_boundary(),
         "component_findings": [],
         "protocol_profile_check": {"profile_source": "", "hard_gates_satisfied": True, "minimum_components_satisfied": True, "recommended_components_satisfied": "false", "underreported_items": [], "incompatible_claims": []},
         "data_sources_used": [],
