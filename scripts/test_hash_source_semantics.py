@@ -92,8 +92,8 @@ def main():
         hashes_computed=[{
             "artifact": "arweave-backup/files/public_covenant_archive.zip",
             "algorithm": "SHA-256",
-            "expected": "abc123",
-            "computed": "abc123",
+            "expected": "ef816480f77f30405378800807b42bff0a854b83a8f77793a0e0adf0944a8263",
+            "computed": "ef816480f77f30405378800807b42bff0a854b83a8f77793a0e0adf0944a8263",
             "command": "sha256sum ...",
             "match": True,
             "expected_hash_source": "api/hashes.json",
@@ -117,8 +117,8 @@ def main():
         hashes_computed=[{
             "artifact": "arweave-backup/files/verification_kit.tar.gz",
             "algorithm": "SHA-256",
-            "expected": "def456",
-            "computed": "def456",
+            "expected": "ef68b69fe1cdd2523724dee511c9e8ea7bae2cceaff794664107970b18c61931",
+            "computed": "ef68b69fe1cdd2523724dee511c9e8ea7bae2cceaff794664107970b18c61931",
             "command": "sha256sum ...",
             "match": True,
             "expected_hash_source": "api/evidence-manifest.json",
@@ -142,8 +142,8 @@ def main():
         hashes_computed=[{
             "artifact": "index.md",
             "algorithm": "SHA-256",
-            "expected": "aaa111",
-            "computed": "aaa111",
+            "expected": "9d5b3da041c14c942cb0899d1dde8f1b080e9462ba465ce6ce07f36c52dd51d6",
+            "computed": "9d5b3da041c14c942cb0899d1dde8f1b080e9462ba465ce6ce07f36c52dd51d6",
             "command": "sha256sum index.md",
             "match": True,
             "expected_hash_source": "api/repository-artifact-hashes.json",
@@ -167,8 +167,8 @@ def main():
         hashes_computed=[{
             "artifact": "agent-brief.md",
             "algorithm": "SHA-256",
-            "expected": "bbb222",
-            "computed": "bbb222",
+            "expected": "21e001f42125bc02e5b04f199c3005c0c1d38cac0bab2c9e17e312bffb116b77",
+            "computed": "21e001f42125bc02e5b04f199c3005c0c1d38cac0bab2c9e17e312bffb116b77",
             "command": "sha256sum agent-brief.md",
             "match": True,
             "expected_hash_source": "report-declared",
