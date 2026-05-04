@@ -330,7 +330,9 @@
         "validation_result": {
           "type": "string",
           "enum": [
-            "PASS"
+            "NOT_RUN",
+            "PASS",
+            "FAIL"
           ]
         }
       },

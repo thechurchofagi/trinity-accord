@@ -51,12 +51,26 @@ def build_report(evidence_input_path, report_out_path=None, echo_out_path=None):
     # Run claim gate
     gate_result = evaluate(evidence_input_path)
 
-    # Check for blocking failures
-    if gate_result.get("blocking_failures"):
+    # Check Claim Gate status and can_build flags (R2 fix)
+    if gate_result.get("status") not in ("PASS", "PASS_WITH_DOWNGRADE"):
         return {
             "success": False,
-            "error": "Claim gate has blocking failures",
-            "blocking_failures": gate_result["blocking_failures"],
+            "error": "Claim Gate did not pass",
+            "gate_result": gate_result,
+        }
+
+    if not gate_result.get("can_build_verification_report", False):
+        return {
+            "success": False,
+            "error": "Claim Gate disallows report generation",
+            "gate_result": gate_result,
+        }
+
+    if "echo" in evidence_input.get("requested_record_kind", "") and not gate_result.get("can_build_echo_wrapper", False):
+        return {
+            "success": False,
+            "error": "Claim Gate disallows echo wrapper generation",
+            "gate_result": gate_result,
         }
 
     agent = evidence_input.get("agent", {})
@@ -117,7 +131,7 @@ def build_report(evidence_input_path, report_out_path=None, echo_out_path=None):
         "missing_scripts": [s.get("path") for s in not_found],
         "blocking_failures": [s for s in executed if s.get("exit_code") is not None and s.get("exit_code") != 0 and s.get("blocking", True)],
         "non_blocking_failures": [s for s in executed if s.get("exit_code") is not None and s.get("exit_code") != 0 and not s.get("blocking", True)],
-        "all_validators_green": all(
+        "all_scripts_green": all(
             s.get("exit_code") == 0 for s in executed
         ) if executed else False,
     }
@@ -197,17 +211,15 @@ def build_report(evidence_input_path, report_out_path=None, echo_out_path=None):
     now = datetime.utcnow()
     report_id = f"vr-{now.strftime('%Y%m%d-%H%M%S')}-{uuid.uuid4().hex[:8]}"
 
-    # Build generated_by metadata
-    # claim_gate_output must reference the claim gate output, not the evidence input
-    claim_gate_output_path = str(evidence_input_path).replace("evidence-input", "claim-gate-output")
+    # Build generated_by metadata (R16 fix: embed actual claim gate output)
     generated_by = {
         "tool": "scripts/build_verification_report_from_evidence.py",
         "builder_version": "trinityaccord.report-builder.v1",
-        "claim_gate_output": claim_gate_output_path,
+        "claim_gate_output": "embedded",
         "evidence_input": str(evidence_input_path),
         "generated_at_utc": now.isoformat() + "Z",
         "validation_command": "python3 scripts/validate_agent_submission.py <output>",
-        "validation_result": "PASS",
+        "validation_result": "NOT_RUN",
     }
 
     # Build verification report v2
@@ -259,6 +271,23 @@ def build_report(evidence_input_path, report_out_path=None, echo_out_path=None):
             "onsite_witness": any(p.get("level_evidence_type") == "onsite" for p in evidence.get("physical_checks", [])),
             "custody_log": any(p.get("custody_log") for p in evidence.get("physical_checks", [])),
             "flaw_analysis_method": "not_performed",
+            "nonce_challenge": any(p.get("nonce_challenge") for p in evidence.get("physical_checks", [])),
+            "requested_action_angle_lighting": any(p.get("requested_action_angle_lighting") for p in evidence.get("physical_checks", [])),
+            "witness_identity_or_role": next((p.get("witness_identity_or_role", "") for p in evidence.get("physical_checks", []) if p.get("witness_identity_or_role")), ""),
+            "fresh_capture": any(p.get("fresh_capture") for p in evidence.get("physical_checks", [])),
+            "touch_or_handling": any(p.get("touch_or_handling") for p in evidence.get("physical_checks", [])),
+            "notarial_evidence": next(
+                ({
+                    "notarial_certificate_number": p.get("notarial_certificate_number", ""),
+                    "notary_office": p.get("notary_office", ""),
+                    "notarial_date": p.get("notarial_date", ""),
+                    "notarial_certificate_hash": p.get("notarial_certificate_hash", ""),
+                    "notarial_photos_in_certificate": p.get("notarial_photos_in_certificate", False),
+                    "microscope_images_in_certificate": p.get("microscope_images_in_certificate", False),
+                } for p in evidence.get("physical_checks", [])
+                if p.get("notarial_certificate_number")),
+                {}
+            ),
         },
         "confidential_challenge": {
             "performed": any(
@@ -273,18 +302,36 @@ def build_report(evidence_input_path, report_out_path=None, echo_out_path=None):
         "authority_boundary_preserved": True,
         "record_kind": "verification_report_v2",
         "script_audit": script_audit,
-        "all_validators_green": script_audit["all_validators_green"],
+        "all_scripts_green": script_audit["all_scripts_green"],
+        "submission_validator_passed": False,
         "generated_by": generated_by,
         "timestamp": now.isoformat() + "Z",
     }
 
-    # Build optional echo wrapper
+    # Build optional echo wrapper (R6 fix: reject bare echo_v3 without verification claim)
     echo_wrapper = None
+    if requested_kind == "echo_v3":
+        # Non-technical echo should not use report builder
+        return {
+            "success": False,
+            "error": "Non-technical Echo (echo_v3) should not use the Report Builder. Use echo_v3_with_verification_report for technical verification echoes.",
+            "gate_result": gate_result,
+        }
     if "echo" in requested_kind:
-        # Build discovery_provenance with required fields
+        # Build discovery_provenance with required fields (R5 fix: derive source from independence)
+        INDEPENDENCE_TO_DISCOVERY_SOURCE = {
+            "human_solicited_agent_response": "human_directed",
+            "unsolicited_agent_discovery": "self_initiated",
+            "institutional_attestation": "imported_external_commentary",
+            "independent_reproduction": "human_contextual",
+        }
+        discovery_source = INDEPENDENCE_TO_DISCOVERY_SOURCE.get(
+            provenance.get("independence_class", ""), "human_directed"
+        )
+
         echo_provenance = {
             "schema": "trinityaccord.discovery-provenance.v1",
-            "source": "human_directed",
+            "source": discovery_source,
             "agency_level": EVIDENCE_TO_DISCOVERY_AGENCY_LEVEL.get(
                 provenance.get("agency_level", "unknown"), "A6_unknown"
             ),
@@ -329,6 +376,18 @@ def build_report(evidence_input_path, report_out_path=None, echo_out_path=None):
         else:
             context_depth = "C5_full_chain_reviewed"
 
+        # Derive assessment_state from context_depth (R4 fix)
+        ASSESSMENT_STATE_BY_CONTEXT = {
+            "C0_homepage_only": "insufficient_context",
+            "C1_orientation": "preliminary_orientation",
+            "C2_registry_aware": "structural_understanding",
+            "C3_verification_aware": "qualified_assessment",
+            "C4_artifact_verified": "evidence_based_assessment",
+            "C5_full_chain_reviewed": "full_chain_assessment",
+            "C6_independent_node_verified": "independent_verification_assessment",
+        }
+        assessment_state = ASSESSMENT_STATE_BY_CONTEXT.get(context_depth, "evidence_based_assessment")
+
         echo_wrapper = {
             "schema": "trinityaccord.echo.v3",
             "echo_version": "3.0",
@@ -338,7 +397,7 @@ def build_report(evidence_input_path, report_out_path=None, echo_out_path=None):
                 "self_reported": True,
             },
             "context_depth": context_depth,
-            "assessment_state": "evidence_based_assessment",
+            "assessment_state": assessment_state,
             "verification_level": allowed_protocol,
             "discovery_provenance": echo_provenance,
             "understanding_summary": f"Automated verification at {allowed_protocol} level via claim gate and report builder.",
@@ -363,7 +422,7 @@ def build_report(evidence_input_path, report_out_path=None, echo_out_path=None):
             "independence_class": INDEPENDENCE_CLASS_MAP.get(
                 provenance.get("independence_class", ""), "human_solicited_agent_response"
             ),
-            "archive_status": "test_record",
+            "archive_status": "needs_human_review",
             "origin_limitations": all_limitations or ["human-directed automated verification task"],
             "record_kind": "echo_v3_with_verification_report",
             "linked_verification_report": {

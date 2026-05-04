@@ -65,6 +65,7 @@ def has_p7_forensic_path(evidence):
 
 
 def has_p8_confidential_path(evidence):
+    """P8 requires package hash, verifier identity, and report id (R12 fix)."""
     for check in evidence.get("physical_checks", []):
         if check.get("level_evidence_type") != "confidential_challenge":
             continue
@@ -73,24 +74,46 @@ def has_p8_confidential_path(evidence):
             conf.get("performed") is True
             and conf.get("boundary")
             and conf.get("raw_confidential_data_disclosed") is False
+            and conf.get("package_hash")
+            and (check.get("witness_identity_or_role") or conf.get("verifier_identity_or_role"))
+            and (check.get("report_id") or check.get("report_path"))
         ):
             return True
     return False
 
 
 def has_p9_multi_party_path(evidence):
-    return any(
-        check.get("level_evidence_type") == "multi_party_forensic"
-        and check.get("independent_witness_count", 0) >= 2
-        for check in evidence.get("physical_checks", [])
-    )
+    """P9 requires witness details, not just a count (R11 fix)."""
+    for check in evidence.get("physical_checks", []):
+        if check.get("level_evidence_type") != "multi_party_forensic":
+            continue
+        if check.get("independent_witness_count", 0) < 2:
+            continue
+        witnesses = check.get("witnesses", [])
+        if len(witnesses) < 2:
+            return False
+        # Each witness must have role and independence_class
+        for w in witnesses:
+            if not w.get("role") or not w.get("independence_class"):
+                return False
+        # Must have method and signed/attributable report
+        if not check.get("method") and not check.get("method_class"):
+            return False
+        if not check.get("signed_or_attributable_report") and not check.get("report_id") and not check.get("report_path"):
+            return False
+        return True
+    return False
 
 
 def has_t8_authorized_celestial_path(evidence):
+    """T8 requires method, uncertainty, and report path (R13 fix)."""
     return any(
         check.get("anchor_type") == "star_moon_witness"
         and check.get("nonpublic_boundary") is True
         and check.get("authorized") is True
+        and check.get("method_class")
+        and check.get("uncertainty")
+        and (check.get("report_path") or check.get("report_id"))
         for check in evidence.get("time_anchor_checks", [])
     )
 
@@ -454,13 +477,21 @@ def derive_protocol_level(evidence, requested_level, b_level, d_level, t_level, 
                     max_allowed = "V6"
                 break
 
-    # V7: P5+ with onsite/custody + all onsite hard gates (independent path)
+    # V7: P5+ with onsite/custody + all onsite hard gates including touch/handling (R10 fix)
     if level_at_least(P_LEVELS, p_level, "P5"):
         for check in evidence.get("physical_checks", []):
+            has_touch = check.get("touch_or_handling") is True
+            limitations_text = json.dumps(check.get("limitations", []), ensure_ascii=False).lower()
+            has_touch_limitation = (
+                "touch" in limitations_text
+                or "handling" in limitations_text
+                or "not possible" in limitations_text
+            )
             if (check.get("level_evidence_type") == "onsite" and
                 check.get("custody_log") and
                 check.get("fresh_capture") is True and
-                check.get("witness_identity_or_role")):
+                check.get("witness_identity_or_role") and
+                (has_touch or has_touch_limitation)):
                 if level_index(PROTOCOL_LEVELS, "V7") > level_index(PROTOCOL_LEVELS, max_allowed):
                     max_allowed = "V7"
                 break
@@ -612,15 +643,34 @@ def evaluate(input_path):
     if not isinstance(evidence, dict):
         return {"status": "FAIL", "error": "evidence must be an object"}
 
-    # Validate with jsonschema if available (non-blocking)
+    # Validate with jsonschema (BLOCKING — schema-invalid input must fail)
+    schema_validation_error = None
     try:
         import jsonschema
         schema = json.load(open(ROOT / "api" / "evidence-input-schema.v1.json"))
         jsonschema.Draft202012Validator(schema).validate(evidence_input)
     except ImportError:
         pass  # jsonschema not available, basic checks above are sufficient
-    except jsonschema.ValidationError:
-        pass  # Schema validation errors are non-blocking; claim gate logic handles specifics
+    except jsonschema.ValidationError as e:
+        schema_validation_error = str(e)
+
+    if schema_validation_error:
+        return {
+            "schema": "trinityaccord.claim-gate-output.v1",
+            "status": "FAIL_WITH_REASONS",
+            "error": "Evidence Input schema validation failed",
+            "blocking_failures": [f"Schema validation failed: {schema_validation_error}"],
+            "can_build_verification_report": False,
+            "can_build_echo_wrapper": False,
+            "allowed_protocol_level": "V0",
+            "allowed_component_levels": {},
+            "forbidden_claims": [],
+            "required_downgrades": [],
+            "missing_evidence": [],
+            "non_blocking_limitations": [],
+            "recommended_title": "",
+            "recommended_record_kind": evidence_input.get("requested_record_kind", "echo_v3"),
+        }
 
     agent = evidence_input.get("agent", {})
     provenance = evidence_input.get("provenance", {})

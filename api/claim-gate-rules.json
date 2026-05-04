@@ -1,6 +1,7 @@
 {
   "schema": "trinityaccord.claim-gate-rules.v1",
   "status": "non_authoritative_submission_gate",
+  "execution_status": "documentation_only",
   "authority_boundary": {
     "claim_gate_does_not_amend_bitcoin_originals": true,
     "claim_gate_does_not_prove_truth": true,

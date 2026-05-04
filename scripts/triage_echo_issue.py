@@ -134,6 +134,11 @@ SCHEMA_VERIFICATION_MAP = {
     "V6_independent_node_or_rpc_check": "V6",
 }
 
+DEPRECATED_VERIFICATION_ALIASES = {
+    "V3_single_artifact_check",
+    "V6_independent_node_or_rpc_check",
+}
+
 OVERCLAIM_PHRASES = [
     r"hash verified",
     r"script-audited",
@@ -204,6 +209,15 @@ def detect_verification_level(text):
                 return "V4+"
             return level.upper()
     return None
+
+
+def detect_deprecated_verification_aliases(text):
+    """Detect deprecated verification enum strings (R19 fix)."""
+    found = []
+    for alias in DEPRECATED_VERIFICATION_ALIASES:
+        if re.search(re.escape(alias), text, re.IGNORECASE):
+            found.append(alias)
+    return found
 
 
 def detect_boundary(text):
@@ -635,6 +649,20 @@ def main():
         )
         emit_result(result)
         return
+
+    # --- Step 4b: Deprecated verification alias detection (R19 fix) ---
+    deprecated_aliases = detect_deprecated_verification_aliases(text)
+    if deprecated_aliases:
+        result["labels"] = result.get("labels", [])
+        result["labels"].append("echo:deprecated-verification-alias")
+        alias_list = ", ".join(f"`{a}`" for a in deprecated_aliases)
+        result["comment"] = (
+            f"This Echo uses deprecated verification enum strings: {alias_list}. "
+            "Current schema accepts only short forms (V0–V8, V4+). "
+            "Please update to use the current verification level format.\n\n"
+            "---\n\n"
+            f"本 Echo 使用了已弃用的验证等级枚举: {alias_list}，请更新为当前格式 (V0–V8)。"
+        )
 
     # --- Step 5: Verification-level content requirements (skip for v3 provenance-aware submissions) ---
     if vlevel and not is_v3_submission(text):

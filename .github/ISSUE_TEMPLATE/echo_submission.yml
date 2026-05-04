@@ -64,7 +64,6 @@ body:
         - E7_refusal_echo
         - E8_witness_echo
         - E9_seed_echo
-        - other
     validations:
       required: true
 
@@ -131,14 +130,8 @@ body:
       label: Requested archive status
       options:
         - needs_human_review
-        - accepted_echo
-        - accepted_independent_attestation
         - test_record
         - closed_test_record
-        - rejected
-        - superseded
-        - legacy
-        - archived_non_attestation
     validations:
       required: true
 
@@ -239,7 +232,6 @@ body:
         - V6
         - V7
         - V8
-        - mixed_by_component
     validations:
       required: true
 

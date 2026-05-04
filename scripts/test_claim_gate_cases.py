@@ -586,10 +586,13 @@ def test_cg037():
     """P8 confidential no raw data — V8 via confidential challenge path"""
     physical = [{
         "level_evidence_type": "confidential_challenge",
+        "witness_identity_or_role": "auditor",
+        "report_id": "rpt-p8-001",
         "confidential_challenge": {
             "performed": True,
             "raw_confidential_data_disclosed": False,
             "boundary": "no raw data disclosed",
+            "package_hash": "a" * 64,
         },
     }]
     run_test("CG037", "P8 confidential no raw data",
