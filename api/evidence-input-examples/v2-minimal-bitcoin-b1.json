@@ -1,0 +1,25 @@
+{
+  "example_name": "v2-minimal-bitcoin-b1",
+  "expected_claim_gate": {
+    "allowed_protocol_level": "V2",
+    "allowed_component_levels": {
+      "bitcoin_originals": "B1"
+    }
+  },
+  "evidence_input": {
+    "schema": "trinityaccord.evidence-input.v1",
+    "evidence": {
+      "bitcoin_checks": [
+        {
+          "source_type": "external_explorer",
+          "sources": ["mempool.space"],
+          "access_path": "https://mempool.space/tx/example-txid",
+          "date": "2026-05-04",
+          "txids_checked": ["example-txid"],
+          "result": "confirmed on explorer"
+        }
+      ]
+    },
+    "claims_requested_by_agent": ["V2"]
+  }
+}

@@ -71,7 +71,11 @@
         "access path",
         "limitations"
       ],
-      "minimal_claim_note": "A B1 external reference check may support minimal V2, but does not constitute full reference coverage."
+      "minimal_claim_note": "A B1 external reference check may support minimal V2, but does not constitute full reference coverage.",
+      "low_agent_summary": "Check one Bitcoin Original on an external explorer for minimal V2, or multiple reference paths for strong V2.",
+      "evidence_input_minimum_fields": ["evidence.bitcoin_checks[0].source_type"],
+      "copy_paste_claim_label": "V2 (minimal; Bitcoin Originals B1 only)",
+      "if_missing_downgrade_to": "V1 if no explorer check performed"
     },
     {
       "level": "V3",
@@ -120,7 +124,11 @@
         "expected hash",
         "computed hash"
       ],
-      "minimal_claim_note": "One valid declared hash may support minimal V3, but does not constitute full public digital verification."
+      "minimal_claim_note": "One valid declared hash may support minimal V3, but does not constitute full public digital verification.",
+      "low_agent_summary": "Download one artifact, compute SHA-256, compare with declared hash for minimal V3.",
+      "evidence_input_minimum_fields": ["evidence.hashes[0].match"],
+      "copy_paste_claim_label": "V3 (minimal; one valid declared hash computed)",
+      "if_missing_downgrade_to": "V2 if no hash computed"
     },
     {
       "level": "V4",
@@ -159,7 +167,11 @@
         "script output",
         "script limitations",
         "component findings"
-      ]
+      ],
+      "low_agent_summary": "Read script source code, then run official verification scripts locally.",
+      "evidence_input_minimum_fields": ["evidence.scripts[0].source_reviewed", "evidence.scripts[0].exit_code"],
+      "copy_paste_claim_label": "V4 (script-audited verification)",
+      "if_missing_downgrade_to": "V3 if scripts not reviewed"
     },
     {
       "level": "V4+",
@@ -186,7 +198,11 @@
       "underreported_if_missing": [
         "independent tool description",
         "comparison with official result"
-      ]
+      ],
+      "low_agent_summary": "Use independent tools to reproduce at least one official verification result.",
+      "evidence_input_minimum_fields": ["evidence.scripts[0].independent"],
+      "copy_paste_claim_label": "V4+ (minimal independent reproduction)",
+      "if_missing_downgrade_to": "V4 if only official scripts used"
     },
     {
       "level": "V5",
@@ -224,7 +240,11 @@
         "unavailable public targets",
         "component findings",
         "limitations"
-      ]
+      ],
+      "low_agent_summary": "Verify all required public digital targets. List unavailable ones.",
+      "evidence_input_minimum_fields": ["evidence.digital_mirror_checks[0].all_required_public_digital_targets_checked"],
+      "copy_paste_claim_label": "V5 (full public digital verification)",
+      "if_missing_downgrade_to": "V4+ if not all public targets checked"
     },
     {
       "level": "V6",
@@ -256,7 +276,11 @@
         "nonce",
         "requested angle/action",
         "witness identity or role"
-      ]
+      ],
+      "low_agent_summary": "Live remote video session with nonce/challenge. Recorded video alone is NOT V6.",
+      "evidence_input_minimum_fields": ["evidence.physical_checks[0].level_evidence_type", "evidence.physical_checks[0].nonce_or_challenge"],
+      "copy_paste_claim_label": "V6 (remote physical witness)",
+      "if_missing_downgrade_to": "V5 if no live video with nonce"
     },
     {
       "level": "V7",
@@ -285,7 +309,11 @@
         "custody log",
         "onsite witness role",
         "fresh capture data"
-      ]
+      ],
+      "low_agent_summary": "Onsite human witness with custody log and fresh capture. Remote video alone is NOT V7.",
+      "evidence_input_minimum_fields": ["evidence.physical_checks[0].level_evidence_type", "evidence.physical_checks[0].custody_log"],
+      "copy_paste_claim_label": "V7 (onsite physical witness)",
+      "if_missing_downgrade_to": "V6 if no onsite observation"
     },
     {
       "level": "V8",
@@ -320,7 +348,11 @@
         "AI / microscopy / feature match method",
         "confidential challenge decision",
         "signed or attributable report"
-      ]
+      ],
+      "low_agent_summary": "Tool-assisted forensic analysis with signed report. V8 does not create canonical authority.",
+      "evidence_input_minimum_fields": ["evidence.physical_checks[0].tool_assisted_method", "evidence.physical_checks[0].signed_report"],
+      "copy_paste_claim_label": "V8 candidate (forensic physical attestation)",
+      "if_missing_downgrade_to": "V7 if no tool-assisted analysis"
     }
   ],
   "claim_gate": {

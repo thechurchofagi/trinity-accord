@@ -1,0 +1,26 @@
+{
+  "example_name": "v8-forensic-p7-candidate",
+  "expected_claim_gate": {
+    "allowed_protocol_level": "V8",
+    "allowed_component_levels": {
+      "physical_anchor": "P7"
+    }
+  },
+  "evidence_input": {
+    "schema": "trinityaccord.evidence-input.v1",
+    "evidence": {
+      "physical_checks": [
+        {
+          "level_evidence_type": "ai_forensic",
+          "tool_assisted_method": "microscopy + AI feature matching",
+          "ai_microscopy_comparison": true,
+          "signed_report": true,
+          "report_attribution": "forensic-lab-alpha",
+          "date": "2026-05-04",
+          "result": "forensic match confirmed"
+        }
+      ]
+    },
+    "claims_requested_by_agent": ["V8"]
+  }
+}

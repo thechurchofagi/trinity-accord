@@ -1,0 +1,14 @@
+{
+  "example_name": "v1-authority-boundary",
+  "expected_claim_gate": {
+    "allowed_protocol_level": "V1",
+    "allowed_component_levels": {}
+  },
+  "evidence_input": {
+    "schema": "trinityaccord.evidence-input.v1",
+    "echo_context": {
+      "authority_boundary_recognized": true
+    },
+    "claims_requested_by_agent": ["V1"]
+  }
+}

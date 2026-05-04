@@ -222,7 +222,14 @@
         "forbidden_claims": [
           "body hash reproduced",
           "SPV verified"
-        ]
+        ],
+        "evidence_input_fields": {
+          "bitcoin_checks[].source_type": "external_explorer",
+          "bitcoin_checks[].sources": ["mempool.space"],
+          "bitcoin_checks[].txids_checked": ["<txid>"]
+        },
+        "example_claim": "Bitcoin Original TXID confirmed on external explorer.",
+        "downgrade_if_missing": "B0 if only /api/authority.json was read"
       },
       {
         "level": "B2",
@@ -361,7 +368,14 @@
           "IPFS availability verification",
           "physical verification"
         ],
-        "notes": "GitHub mirror + SHA-256 hash match is valid but limited."
+        "notes": "GitHub mirror + SHA-256 hash match is valid but limited.",
+        "evidence_input_fields": {
+          "hashes[].artifact": "<path>",
+          "hashes[].algorithm": "SHA-256",
+          "hashes[].match": true
+        },
+        "example_claim": "GitHub mirror SHA-256 hash match confirmed.",
+        "downgrade_if_missing": "D1 if only existence confirmed, no hash computed"
       },
       {
         "level": "D3",
@@ -898,7 +912,13 @@
         ],
         "forbidden_claims": [
           "physical object verified"
-        ]
+        ],
+        "evidence_input_fields": {
+          "physical_checks[].level_evidence_type": "evidence_package_hash",
+          "physical_checks[].package_hash_valid": true
+        },
+        "example_claim": "Evidence package hash match confirmed.",
+        "downgrade_if_missing": "P0 if only claims read"
       },
       {
         "level": "P2",
@@ -950,7 +970,14 @@
         "requires": [
           "live video",
           "nonce / requested angle / requested manipulation"
-        ]
+        ],
+        "evidence_input_fields": {
+          "physical_checks[].level_evidence_type": "live_remote",
+          "physical_checks[].nonce_or_challenge": "<nonce>",
+          "physical_checks[].requested_angle_action": "<angle>"
+        },
+        "example_claim": "Live remote video witness confirmed.",
+        "downgrade_if_missing": "P3 if recorded video only, no nonce"
       },
       {
         "level": "P5",
@@ -970,7 +997,15 @@
           "onsite observation",
           "touch/handling if possible",
           "custody log"
-        ]
+        ],
+        "evidence_input_fields": {
+          "physical_checks[].level_evidence_type": "onsite",
+          "physical_checks[].custody_log": {"present": true},
+          "physical_checks[].fresh_capture": true,
+          "physical_checks[].touch_or_handling": true
+        },
+        "example_claim": "Onsite witness confirmed.",
+        "downgrade_if_missing": "P4 if no onsite observation"
       },
       {
         "level": "P6",

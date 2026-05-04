@@ -1,0 +1,25 @@
+{
+  "example_name": "v6-live-remote-p4",
+  "expected_claim_gate": {
+    "allowed_protocol_level": "V6",
+    "allowed_component_levels": {
+      "physical_anchor": "P4"
+    }
+  },
+  "evidence_input": {
+    "schema": "trinityaccord.evidence-input.v1",
+    "evidence": {
+      "physical_checks": [
+        {
+          "level_evidence_type": "live_remote",
+          "nonce_or_challenge": "random-challenge-phrase-abc123",
+          "requested_angle_action": "show top of object, rotate 90 degrees",
+          "witness_identity_or_role": "independent verifier",
+          "date": "2026-05-04",
+          "result": "live witness confirmed"
+        }
+      ]
+    },
+    "claims_requested_by_agent": ["V6"]
+  }
+}

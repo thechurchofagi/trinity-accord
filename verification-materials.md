@@ -17,7 +17,7 @@ Machine-readable index: [/api/verification-materials.json](/api/verification-mat
 
 | Component | Materials | Human page | Machine source | Direct component levels | Protocol relevance |
 |---|---|---|---|---|---|
-| AUTHORITY_BOUNDARY | Guardian v1.1, authority boundary | /authority, /guardian-principles | /api/authority.json, /api/guardian-principles.json | V1 | V1 direct |
+| AUTHORITY_BOUNDARY | Guardian v1.1, authority boundary | /authority, /guardian-principles | /api/authority.json, /api/guardian-principles.json | boundary check, no component code | V1 direct |
 | BITCOIN_ORIGINALS | inscription IDs, TXIDs, address, block data, witness data | /verify, /data-verification | /api/authority.json | B0–B7 | V2–V5 direct/recommended; V6–V8 supporting context |
 | EVIDENCE_MIRRORS | Arweave, ETH, IPFS, GitHub, hashes | /data-verification | /api/evidence-manifest.json, /api/hashes.json | D0–D7 | V3–V5 direct/recommended; V6–V8 supporting context |
 | CHRONICLE_RECOVERY | 175/175 NFT recovery package | /chronicle-verification | /api/chronicle-recovery.json | C0–C7 | V3–V5 direct/recommended; V6–V8 supporting context |

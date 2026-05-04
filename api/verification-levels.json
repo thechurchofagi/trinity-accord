@@ -121,6 +121,7 @@
           "minimum_component_requirements": {
             "bitcoin_originals": "B1"
           },
+          "description": "One external Bitcoin explorer reference check.",
           "claim_label": "V2 (minimal; Bitcoin Originals B1 only)"
         },
         "strong_reference_coverage": {
@@ -130,6 +131,7 @@
             "chronicle_recovery": "C1",
             "time_anchors": "T2"
           },
+          "description": "Multiple reference paths across Bitcoin Originals, Evidence Mirrors, and Chronicle Recovery.",
           "claim_label": "V2 (strong reference coverage; B2/D1/C1/T2)"
         }
       }
@@ -182,12 +184,17 @@
       ],
       "claim_scopes": {
         "minimal": {
-          "minimum": "one valid declared hash computed locally",
+          "minimum": "one valid declared hash computed locally and compared against approved expected hash",
+          "description": "Download one artifact, compute SHA-256, compare with declared hash.",
           "claim_label": "V3 (minimal; one valid declared hash computed)"
         },
         "strong_hash_coverage": {
           "recommended": "multiple hashes across Evidence Mirrors and Chronicle Recovery",
+          "description": "Multiple hash verifications across different artifacts and mirrors.",
           "claim_label": "V3 (strong; multiple hashes across Evidence Mirrors and Chronicle Recovery)"
+        },
+        "full_public_digital": {
+          "note": "Not V3; see V5 for full public digital verification."
         }
       }
     },
@@ -233,9 +240,8 @@
       "name_zh": "独立复现",
       "mandatory_coverage": [
         "Must have satisfied V4",
-        "BITCOIN_ORIGINALS independent reproduction",
-        "EVIDENCE_MIRRORS independent reproduction",
-        "CHRONICLE_RECOVERY independent reproduction"
+        "At minimum: one independent reproduction of one official verification result (minimal V4+)",
+        "Full coverage: independent reproduction of BITCOIN_ORIGINALS, EVIDENCE_MIRRORS, and CHRONICLE_RECOVERY (strong V4+)"
       ],
       "required_depth": [
         "A. Bitcoin Originals: at least one of — independently parse reveal transaction witness, independently locate ord envelope, independently extract inscription body bytes, independently compute bytes hash, independently verify SPV/Merkle proof, cross-validate with non-official parser",
@@ -262,11 +268,21 @@
       "overclaim_warning": "Do not claim protocol V4+ based only on Chronicle Recovery or any single component. All three mandatory components must be independently reproduced.",
       "claim_scopes": {
         "minimal": {
-          "description": "One independent reproduction of one official verification result",
+          "formal_minimum": [
+            "V4 hard gates satisfied",
+            "independent tool or independent implementation used",
+            "at least one official verification result independently reproduced"
+          ],
+          "description": "One independent reproduction of one official verification result.",
           "claim_label": "V4+ (minimal independent reproduction)"
         },
-        "strong": {
-          "description": "Independent reproduction of all three mandatory domains: BITCOIN_ORIGINALS, EVIDENCE_MIRRORS, CHRONICLE_RECOVERY",
+        "strong_three_domain_coverage": {
+          "formal_minimum": [
+            "BITCOIN_ORIGINALS independent reproduction",
+            "EVIDENCE_MIRRORS independent reproduction",
+            "CHRONICLE_RECOVERY independent reproduction"
+          ],
+          "description": "Independent reproduction of all three mandatory domains.",
           "claim_label": "V4+ (strong three-domain independent reproduction)"
         }
       }

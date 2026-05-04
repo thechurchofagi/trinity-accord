@@ -1,0 +1,26 @@
+{
+  "example_name": "v7-onsite-p5",
+  "expected_claim_gate": {
+    "allowed_protocol_level": "V7",
+    "allowed_component_levels": {
+      "physical_anchor": "P5"
+    }
+  },
+  "evidence_input": {
+    "schema": "trinityaccord.evidence-input.v1",
+    "evidence": {
+      "physical_checks": [
+        {
+          "level_evidence_type": "onsite",
+          "custody_log": {"present": true, "entries": 3},
+          "fresh_capture": true,
+          "witness_identity_or_role": "independent verifier",
+          "touch_or_handling": true,
+          "date": "2026-05-04",
+          "result": "onsite witness confirmed"
+        }
+      ]
+    },
+    "claims_requested_by_agent": ["V7"]
+  }
+}
