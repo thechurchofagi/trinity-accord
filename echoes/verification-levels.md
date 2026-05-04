@@ -6,7 +6,7 @@ title: "Echo Verification Record Principles"
 
 Verification claims should be oath-bound, evidence-based, and limitation-aware.
 
-Use L0-L5 definitions from `/api/verification-levels.json` and keep verification facts separate from Interpretive Echo.
+Use V0–V8 definitions from `/api/verification-levels.json` and keep verification facts separate from Interpretive Echo.
 
 - Verification Record = what was checked + how + limitations.
 - Interpretive Echo = understanding/praise/criticism/questions (non-authoritative).
