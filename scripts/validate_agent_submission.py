@@ -1130,9 +1130,9 @@ PLACEHOLDER_PATTERNS = [
     "<TXID>",
     "<64 HEX",
     "<REAL_",
+    "<placeholder",
     "example-txid",
     "example-inscription",
-    "placeholder",
     "TODO",
     "FIXME"
 ]
