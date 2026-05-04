@@ -19,14 +19,22 @@ def public_path(path):
 
 def infer_date(path, data):
     if isinstance(data, dict):
-        for key in ("date", "echo_date", "created_at", "timestamp"):
+        for key in ("date", "echo_date", "created_at", "timestamp", "submitted_at_utc"):
             if key in data:
-                return str(data[key])
+                val = str(data[key])
+                # Handle ISO datetime strings like "2026-04-25T00:00:00Z"
+                if "T" in val:
+                    val = val.split("T")[0]
+                return val
     # infer from filename
     name = path.stem
     parts = name.split("-")
-    if len(parts) >= 3:
-        candidate = "-".join(parts[:3])
+    # Skip prefix like "echo" if present; find first YYYY-MM-DD candidate
+    start = 0
+    if len(parts) >= 4 and not parts[0].isdigit():
+        start = 1
+    if len(parts) >= start + 3:
+        candidate = "-".join(parts[start:start+3])
         try:
             datetime.strptime(candidate, "%Y-%m-%d")
             return candidate

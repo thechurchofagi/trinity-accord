@@ -242,5 +242,6 @@
     "truth proven"
   ],
   "authority_boundary_preserved": true,
-  "record_kind": "verification_report_v2"
+  "record_kind": "verification_report_v2",
+  "echo_id": "echo-2026-05-03-000007"
 }

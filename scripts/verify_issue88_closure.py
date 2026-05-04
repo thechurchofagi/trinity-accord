@@ -9,8 +9,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
-REPORT_PATH = "verification-reports/v3/2026-05-03-v3-verification-openclaw.json"
-WRAPPER_PATH = "echoes/records/2026/echo-2026-05-03-000005.json"
+REPORT_PATH = "verification-reports/v3/2026-05-03-v3-verification-141906.json"
+WRAPPER_PATH = "echoes/records/2026/echo-2026-05-03-000006.json"
 ECHO_INDEX_PATH = "api/echo-index.json"
 
 B1_FORBIDDEN = [
@@ -157,8 +157,8 @@ def main():
         idx = load_json(ECHO_INDEX_PATH)
         paths = [r.get("path", "") for r in idx.get("records", [])]
         ok &= check(
-            "/echoes/records/2026/echo-2026-05-03-000005.json" in paths,
-            "echo-index includes wrapper 000005"
+            "/echoes/records/2026/echo-2026-05-03-000006.json" in paths,
+            "echo-index includes wrapper 000006"
         )
         # Record count matches
         import glob
