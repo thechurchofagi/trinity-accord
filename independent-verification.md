@@ -15,7 +15,7 @@ Protocol-level verification is one-dimensional: V0 → V1 → V2 → V3 → V4 �
 
 Each level has mandatory coverage and required depth. Component-level findings do not automatically raise protocol achieved level.
 
-A component may achieve high depth (e.g. Chronicle Recovery V4+), but protocol achieved level is determined only by the mandatory coverage of each level.
+A component may achieve high depth (e.g. Chronicle Recovery C5 full recovery), but protocol achieved level is determined only by the mandatory coverage of each level.
 
 ## Key Components · 关键组件
 
