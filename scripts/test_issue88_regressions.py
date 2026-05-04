@@ -67,7 +67,21 @@ def base_report(**overrides):
         "external_sources_queried": [], "hashes_computed": [], "samples_checked": 0,
         "physical_evidence_reviewed": {}, "confidential_challenge": {"performed": False},
         "celestial_witness": {"performed": False}, "limitations": ["test"],
-        "claims_not_made": ["test"], "authority_boundary_preserved": True
+        "claims_not_made": ["test"], "authority_boundary_preserved": True,
+        "integrity_boundary": {
+            "agent_integrity_declaration_present": True,
+            "performed_actions_myself": True,
+            "did_not_copy_prior_report_as_own_work": True,
+            "did_not_copy_example_values_as_real_evidence": True,
+            "fresh_actions_claimed": ["test check"],
+            "prior_reports_consulted": [],
+            "examples_or_templates_used": [],
+            "copied_values_from_examples": False,
+            "copied_values_from_prior_reports": False,
+            "fresh_outputs_attached": True,
+            "prior_report_use": {},
+            "copying_warning": "This report is invalid if example values or prior agent outputs were copied as fresh evidence."
+        }
     }
     r.update(overrides)
     return r

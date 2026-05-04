@@ -242,7 +242,7 @@ def test_ac5():
             "scripts": [{
                 "path": "scripts/v.py", "exists": True, "source_reviewed": True,
                 "executed": True, "command": "python3 v.py", "environment": {"p": "3"},
-                "exit_code": 0, "stdout_summary": "OK", "blocking": True,
+                "exit_code": 0, "stdout_summary": "OK", "blocking": True, "result": "PASS",
                 "script_check_scope": "verification", "script_does_not_check": "physical",
             }],
         },
@@ -307,6 +307,7 @@ def test_ac7():
                 "custody_log": {"chain": "test"},
                 "fresh_capture": True,
                 "witness_identity_or_role": "notary",
+                "touch_or_handling": True,
             }],
         },
         claims=["V7"],

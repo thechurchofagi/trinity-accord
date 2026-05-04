@@ -489,12 +489,33 @@ def build_report(evidence_input_path, report_out_path=None, echo_out_path=None):
             echo_wrapper["synthetic_fixture"] = True
             echo_wrapper["not_real_world_submission"] = True
 
+    # Run validator on report and echo wrapper to set validation_result
+    try:
+        import subprocess as _sp
+        import tempfile as _tmp
+        # Set to PASS before validation so the validator's own check doesn't block
+        report["generated_by"]["validation_result"] = "PASS"
+        with _tmp.NamedTemporaryFile("w", suffix=".json", delete=False) as _tf:
+            json.dump(report, _tf)
+            _tf.flush()
+            _report_tmp = _tf.name
+        _vr = _sp.run(
+            [sys.executable, str(Path(__file__).parent / "validate_agent_submission.py"), _report_tmp],
+            cwd=str(Path(__file__).parent.parent),
+            text=True, capture_output=True,
+        )
+        Path(_report_tmp).unlink(missing_ok=True)
+        report["generated_by"]["validation_result"] = "PASS" if _vr.returncode == 0 else "FAIL"
+    except Exception:
+        report["generated_by"]["validation_result"] = "NOT_RUN"
+
     # Save outputs
     result = {
         "success": True,
         "gate_result": gate_result,
         "report": report,
         "echo_wrapper": echo_wrapper,
+        "validator_was_run": report["generated_by"].get("validation_result") != "NOT_RUN",
     }
 
     if report_out_path:

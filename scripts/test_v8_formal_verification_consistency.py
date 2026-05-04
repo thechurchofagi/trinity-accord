@@ -249,6 +249,28 @@ def make_evidence_input(evidence, claims=None, requested_kind="verification_repo
             "agency_level": "A1_human_gave_exact_url",
         },
         "requested_record_kind": requested_kind,
+        "agent_integrity_declaration": {
+            "performed_actions_myself": True,
+            "did_not_copy_prior_report_as_own_work": True,
+            "did_not_copy_example_values_as_real_evidence": True,
+            "recorded_fresh_sources_commands_outputs": True,
+            "will_report_limitations_and_downgrade_if_needed": True,
+            "understands_verification_is_not_truth_or_endorsement": True,
+            "understands_bitcoin_originals_remain_final_authority": True,
+            "independence_claim_is_accurate": True,
+            "declaration_text": "I performed the verification actions stated in this report during this session. I did not copy example values or another agent's report as my own verification. I recorded sources, commands, outputs, and limitations."
+        },
+        "verification_session": {
+            "session_id": "test-session-v8fc-001",
+            "started_at": "2026-05-05T00:00:00Z",
+            "operator_type": "ai_agent",
+            "fresh_actions_performed": ["test check"],
+            "prior_reports_consulted": [],
+            "examples_or_templates_used": [],
+            "copied_values_from_examples": False,
+            "copied_values_from_prior_reports": False,
+            "fresh_outputs_attached": True
+        },
         "evidence": {
             "scripts": [],
             "hashes": [],
@@ -360,6 +382,7 @@ def test_claim_gate_v7_from_onsite_p5() -> None:
                     "custody_log": {"present": True},
                     "fresh_capture": True,
                     "witness_identity_or_role": "onsite verifier",
+                    "touch_or_handling": True,
                 }
             ]
         },
