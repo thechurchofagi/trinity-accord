@@ -21,21 +21,35 @@
     },
     "agent": {
       "type": "object",
-      "required": ["name"],
+      "required": [
+        "name"
+      ],
       "properties": {
-        "name": { "type": "string" },
-        "model_or_system": { "type": "string" },
+        "name": {
+          "type": "string"
+        },
+        "model_or_system": {
+          "type": "string"
+        },
         "tooling": {
           "type": "array",
-          "items": { "type": "string" }
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
     "provenance": {
       "type": "object",
-      "required": ["solicited", "independence_class", "agency_level"],
+      "required": [
+        "solicited",
+        "independence_class",
+        "agency_level"
+      ],
       "properties": {
-        "solicited": { "type": "boolean" },
+        "solicited": {
+          "type": "boolean"
+        },
         "independence_class": {
           "type": "string",
           "enum": [
@@ -100,23 +114,33 @@
         },
         "digital_mirror_checks": {
           "type": "array",
-          "items": { "type": "object" }
+          "items": {
+            "type": "object"
+          }
         },
         "repository_snapshot_checks": {
           "type": "array",
-          "items": { "type": "object" }
+          "items": {
+            "type": "object"
+          }
         },
         "time_anchor_checks": {
           "type": "array",
-          "items": { "type": "object" }
+          "items": {
+            "type": "object"
+          }
         },
         "chronicle_checks": {
           "type": "array",
-          "items": { "type": "object" }
+          "items": {
+            "type": "object"
+          }
         },
         "nft_checks": {
           "type": "array",
-          "items": { "type": "object" }
+          "items": {
+            "type": "object"
+          }
         },
         "physical_checks": {
           "type": "array",
@@ -131,60 +155,132 @@
     },
     "limitations": {
       "type": "array",
-      "items": { "type": "string" }
+      "items": {
+        "type": "string"
+      }
     },
     "claims_requested_by_agent": {
       "type": "array",
-      "items": { "type": "string" }
+      "items": {
+        "type": "string"
+      }
     }
   },
   "$defs": {
     "script_evidence": {
       "type": "object",
-      "required": ["path", "exists", "source_reviewed", "executed", "result"],
+      "required": [
+        "path",
+        "exists",
+        "source_reviewed",
+        "executed",
+        "result"
+      ],
       "properties": {
-        "path": { "type": "string" },
-        "exists": { "type": "boolean" },
-        "source_reviewed": { "type": "boolean" },
-        "executed": { "type": "boolean" },
-        "command": { "type": "string" },
+        "path": {
+          "type": "string"
+        },
+        "exists": {
+          "type": "boolean"
+        },
+        "source_reviewed": {
+          "type": "boolean"
+        },
+        "executed": {
+          "type": "boolean"
+        },
+        "command": {
+          "type": "string"
+        },
         "environment": {
           "type": "object",
           "properties": {
-            "python": { "type": "string" },
-            "os": { "type": "string" },
-            "cwd": { "type": "string" }
+            "python": {
+              "type": "string"
+            },
+            "os": {
+              "type": "string"
+            },
+            "cwd": {
+              "type": "string"
+            }
           }
         },
-        "exit_code": { "type": "integer" },
-        "stdout_summary": { "type": "string" },
-        "stderr_summary": { "type": "string" },
-        "blocking": { "type": "boolean" },
+        "exit_code": {
+          "type": "integer"
+        },
+        "stdout_summary": {
+          "type": "string"
+        },
+        "stderr_summary": {
+          "type": "string"
+        },
+        "blocking": {
+          "type": "boolean"
+        },
         "result": {
           "type": "string",
-          "enum": ["PASS", "FAIL", "PASS_WITH_LIMITATIONS", "FAIL_NON_BLOCKING", "NOT_FOUND", "NOT_RUN"]
+          "enum": [
+            "PASS",
+            "FAIL",
+            "PASS_WITH_LIMITATIONS",
+            "FAIL_NON_BLOCKING",
+            "NOT_FOUND",
+            "NOT_RUN"
+          ]
         }
       }
     },
     "hash_evidence": {
       "type": "object",
-      "required": ["artifact", "algorithm", "expected", "computed", "match"],
+      "required": [
+        "artifact",
+        "algorithm",
+        "expected",
+        "computed",
+        "match"
+      ],
       "properties": {
-        "artifact": { "type": "string" },
+        "artifact": {
+          "type": "string"
+        },
         "artifact_class": {
           "type": "string",
-          "enum": ["canonical_mirror", "repository_snapshot", "evidence_package", "chronicle_package", "other"]
+          "enum": [
+            "canonical_mirror",
+            "repository_snapshot",
+            "evidence_package",
+            "chronicle_package",
+            "other"
+          ]
         },
-        "algorithm": { "type": "string" },
-        "expected": { "type": "string" },
-        "computed": { "type": "string" },
-        "expected_hash_source": { "type": "string" },
+        "algorithm": {
+          "type": "string"
+        },
+        "expected": {
+          "type": "string"
+        },
+        "computed": {
+          "type": "string"
+        },
+        "expected_hash_source": {
+          "type": "string"
+        },
         "expected_hash_authority_class": {
           "type": "string",
-          "enum": ["canonical_manifest_hash", "repository_manifest_hash", "external_reference", "unknown"]
+          "enum": [
+            "canonical_manifest_hash",
+            "repository_manifest_hash",
+            "external_reference",
+            "unknown"
+          ]
         },
-        "command": { "type": "string" },
-        "match": { "type": "boolean" }
+        "command": {
+          "type": "string"
+        },
+        "match": {
+          "type": "boolean"
+        }
       }
     },
     "bitcoin_evidence": {
@@ -192,24 +288,46 @@
       "properties": {
         "source_type": {
           "type": "string",
-          "enum": ["local_manifest", "external_explorer", "multi_explorer", "spv_proof", "local_node", "witness_extraction", "body_hash"]
+          "enum": [
+            "local_manifest",
+            "external_explorer",
+            "multi_explorer",
+            "spv_proof",
+            "local_node",
+            "witness_extraction",
+            "body_hash"
+          ]
         },
         "sources": {
           "type": "array",
-          "items": { "type": "string" }
+          "items": {
+            "type": "string"
+          }
         },
         "txids_checked": {
           "type": "array",
-          "items": { "type": "string" }
+          "items": {
+            "type": "string"
+          }
         },
         "inscription_ids_checked": {
           "type": "array",
-          "items": { "type": "string" }
+          "items": {
+            "type": "string"
+          }
         },
-        "authority_address_checked": { "type": "boolean" },
-        "method": { "type": "string" },
-        "raw_witness_extracted": { "type": "boolean" },
-        "body_hash_reproduced": { "type": "boolean" }
+        "authority_address_checked": {
+          "type": "boolean"
+        },
+        "method": {
+          "type": "string"
+        },
+        "raw_witness_extracted": {
+          "type": "boolean"
+        },
+        "body_hash_reproduced": {
+          "type": "boolean"
+        }
       }
     },
     "physical_evidence": {
@@ -217,19 +335,90 @@
       "properties": {
         "level_evidence_type": {
           "type": "string",
-          "enum": ["static_image", "recorded_video", "live_remote", "onsite", "ai_forensic", "confidential_challenge", "multi_party_forensic"]
+          "enum": [
+            "static_image",
+            "recorded_video",
+            "live_remote",
+            "onsite",
+            "ai_forensic",
+            "confidential_challenge",
+            "multi_party_forensic",
+            "evidence_package_hash"
+          ]
         },
-        "nonce_challenge": { "type": ["object", "null"] },
-        "custody_log": { "type": ["object", "null"] },
-        "model_or_tool": { "type": ["string", "null"] },
-        "confidence": { "type": ["number", "null"] },
+        "nonce_challenge": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "custody_log": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "model_or_tool": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "confidence": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
         "confidential_challenge": {
           "type": "object",
           "properties": {
-            "performed": { "type": "boolean" },
-            "raw_confidential_data_disclosed": { "type": "boolean" },
-            "boundary": { "type": "string" }
+            "performed": {
+              "type": "boolean"
+            },
+            "raw_confidential_data_disclosed": {
+              "type": "boolean"
+            },
+            "boundary": {
+              "type": "string"
+            }
           }
+        },
+        "requested_action_angle_lighting": {
+          "type": "boolean"
+        },
+        "witness_identity_or_role": {
+          "type": "string"
+        },
+        "fresh_capture": {
+          "type": "boolean"
+        },
+        "touch_or_handling": {
+          "type": "boolean"
+        },
+        "image": {
+          "type": "string"
+        },
+        "video": {
+          "type": "string"
+        },
+        "signed_or_attributable_report": {
+          "type": "boolean"
+        },
+        "report_id": {
+          "type": "string"
+        },
+        "report_path": {
+          "type": "string"
+        },
+        "flaw_analysis_method": {
+          "type": "string"
+        },
+        "feature_match_method": {
+          "type": "string"
+        },
+        "microscopy_comparison": {
+          "type": "string"
         }
       }
     }

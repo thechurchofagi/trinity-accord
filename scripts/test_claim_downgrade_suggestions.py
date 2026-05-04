@@ -66,7 +66,8 @@ run("CD-01", "V4+ official only → V4",
         {"scripts": [{"path": "scripts/v.py", "exists": True, "source_reviewed": True,
                        "executed": True, "command": "python3 v.py", "environment": {"python": "3.x"},
                        "exit_code": 0, "stdout_summary": "PASS", "blocking": True, "result": "PASS",
-                       "official": True}]},
+                       "official": True, "script_check_scope": "hash verification",
+                       "script_does_not_check": "physical evidence"}]},
         claims=["V4+"]),
     expect_downgrades=[("V4+", "V4")])
 
@@ -76,7 +77,9 @@ run("CD-02", "V4+ independent tool → no downgrade",
         {"scripts": [{"path": "scripts/v.py", "exists": True, "source_reviewed": True,
                        "executed": True, "command": "python3 v.py", "environment": {"python": "3.x"},
                        "exit_code": 0, "stdout_summary": "PASS", "blocking": True, "result": "PASS",
-                       "official": False, "independent": True}]},
+                       "official": False, "independent": True,
+                       "script_check_scope": "hash verification",
+                       "script_does_not_check": "physical evidence"}]},
         claims=["V4+"]),
     expect_downgrades=[])
 

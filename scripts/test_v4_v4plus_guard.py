@@ -60,7 +60,7 @@ def run(tid, desc, inp, expect_protocol=None, expect_fail_contains=None, expect_
 
 def s(scope_class="profile_required_script_audit", official=True, independent=False):
     return {
-        "path": "scripts/v.py", "exists": True, "source_reviewed": True, "executed": True,
+        "path": "scripts/v.py", "exists": True, "source_reviewed": True, "script_check_scope": "verification", "script_does_not_check": "physical evidence", "executed": True,
         "command": "python3 v.py", "environment": {"python": "3.x"},
         "exit_code": 0, "stdout_summary": "PASS", "blocking": True, "result": "PASS",
         "scope_class": scope_class, "official": official, "independent": independent,

@@ -374,14 +374,18 @@ def derive_protocol_level(evidence, requested_level, b_level, d_level, t_level, 
     if has_valid_hash:
         max_allowed = "V3"
 
-    # V4: script audit with proper scope
+    # V4: script audit with proper scope and source review
     if executed_scripts:
         all_have_command = all(s.get("command") for s in executed_scripts)
         all_have_env = all(s.get("environment") for s in executed_scripts)
         all_have_exit = all(s.get("exit_code") is not None for s in executed_scripts)
         all_have_output = all(s.get("stdout_summary") for s in executed_scripts)
+        all_have_source_reviewed = all(s.get("source_reviewed") is True for s in executed_scripts)
+        all_have_scope = all(s.get("script_check_scope") for s in executed_scripts)
+        all_have_noscope = all(s.get("script_does_not_check") for s in executed_scripts)
 
-        if all_have_command and all_have_env and all_have_exit and all_have_output:
+        if (all_have_command and all_have_env and all_have_exit and all_have_output
+                and all_have_source_reviewed and all_have_scope and all_have_noscope):
             max_allowed = "V4"
 
             # V4+: requires independent tool/implementation

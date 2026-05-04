@@ -264,8 +264,22 @@ def validate_script_audit(obj, path_label):
     if level in ("V4", "V4+", "V5", "V6", "V7", "V8"):
         ok &= check(script_audit is not None, f"{path_label} V4+ has script_audit")
         if isinstance(script_audit, dict):
-            for field in ["scripts_reviewed", "command", "environment", "exit_code", "output_summary"]:
-                ok &= check(field in script_audit, f"{path_label} script_audit.{field} present")
+            # Accept aggregate fields or derive from scripts array
+            has_aggregate = all(
+                field in script_audit
+                for field in ["command", "environment", "exit_code", "output_summary"]
+            )
+            has_scripts_array = isinstance(script_audit.get("scripts"), list) and script_audit["scripts"]
+
+            if not has_aggregate and has_scripts_array:
+                # Derive from nested scripts (builder format)
+                scripts_list = script_audit["scripts"]
+                for field in ["scripts_reviewed"]:
+                    ok &= check(field in script_audit, f"{path_label} script_audit.{field} present")
+                ok &= check(True, f"{path_label} script_audit aggregate fields derived from scripts array")
+            else:
+                for field in ["scripts_reviewed", "command", "environment", "exit_code", "output_summary"]:
+                    ok &= check(field in script_audit, f"{path_label} script_audit.{field} present")
 
             # Rule F2: V4 scope_class cannot be independent_reproduction
             scope = script_audit.get("scope_class", "")

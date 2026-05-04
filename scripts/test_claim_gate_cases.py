@@ -121,7 +121,7 @@ def test_cg001():
         scripts.append({
             "path": f"scripts/validator_{i}.py",
             "exists": True,
-            "source_reviewed": True,
+            "source_reviewed": True, "script_check_scope": "verification", "script_does_not_check": "physical evidence",
             "executed": True,
             "command": f"python3 scripts/validator_{i}.py --self-test",
             "environment": {"python": "3.x", "os": "linux", "cwd": "repo_root"},
@@ -141,7 +141,7 @@ def test_cg002():
     """V4 scope incorrectly independent_reproduction FAIL"""
     scripts = [{
         "path": "scripts/validator.py",
-        "exists": True, "source_reviewed": True, "executed": True,
+        "exists": True, "source_reviewed": True, "script_check_scope": "verification", "script_does_not_check": "physical evidence", "executed": True,
         "command": "python3 scripts/validator.py", "environment": {"python": "3.x"},
         "exit_code": 0, "stdout_summary": "PASS", "blocking": True, "result": "PASS",
         "scope_class": "independent_reproduction",
@@ -157,7 +157,7 @@ def test_cg003():
     for i in range(4):
         scripts.append({
             "path": f"scripts/validator_{i}.py",
-            "exists": True, "source_reviewed": True, "executed": True,
+            "exists": True, "source_reviewed": True, "script_check_scope": "verification", "script_does_not_check": "physical evidence", "executed": True,
             "command": f"python3 scripts/validator_{i}.py", "environment": {"python": "3.x"},
             "exit_code": 0, "stdout_summary": "PASS", "blocking": True, "result": "PASS",
             "official": True,
@@ -171,7 +171,7 @@ def test_cg004():
     """V4+ independent tool PASS"""
     scripts = [{
         "path": "scripts/independent_validator.py",
-        "exists": True, "source_reviewed": True, "executed": True,
+        "exists": True, "source_reviewed": True, "script_check_scope": "verification", "script_does_not_check": "physical evidence", "executed": True,
         "command": "python3 scripts/independent_validator.py", "environment": {"python": "3.x"},
         "exit_code": 0, "stdout_summary": "PASS", "blocking": True, "result": "PASS",
         "official": False, "independent": True,
@@ -186,7 +186,7 @@ def test_cg005():
     """V4 script count mismatch FAIL"""
     scripts = [{
         "path": "scripts/validator.py",
-        "exists": True, "source_reviewed": True, "executed": True,
+        "exists": True, "source_reviewed": True, "script_check_scope": "verification", "script_does_not_check": "physical evidence", "executed": True,
         "command": "python3 scripts/validator.py", "environment": {"python": "3.x"},
         "exit_code": 0, "stdout_summary": "PASS", "blocking": True, "result": "PASS",
     }]
@@ -201,7 +201,7 @@ def test_cg006():
     """V4 missing environment FAIL"""
     scripts = [{
         "path": "scripts/validator.py",
-        "exists": True, "source_reviewed": True, "executed": True,
+        "exists": True, "source_reviewed": True, "script_check_scope": "verification", "script_does_not_check": "physical evidence", "executed": True,
         "command": "python3 scripts/validator.py",
         "exit_code": 0, "stdout_summary": "PASS", "blocking": True, "result": "PASS",
         # missing environment
@@ -215,7 +215,7 @@ def test_cg007():
     """V4 missing output_summary FAIL"""
     scripts = [{
         "path": "scripts/validator.py",
-        "exists": True, "source_reviewed": True, "executed": True,
+        "exists": True, "source_reviewed": True, "script_check_scope": "verification", "script_does_not_check": "physical evidence", "executed": True,
         "command": "python3 scripts/validator.py", "environment": {"python": "3.x"},
         "exit_code": 0, "blocking": True, "result": "PASS",
         # missing stdout_summary
@@ -230,13 +230,13 @@ def test_cg008():
     scripts = [
         {
             "path": "scripts/validator_main.py",
-            "exists": True, "source_reviewed": True, "executed": True,
+            "exists": True, "source_reviewed": True, "script_check_scope": "verification", "script_does_not_check": "physical evidence", "executed": True,
             "command": "python3 scripts/validator_main.py", "environment": {"python": "3.x"},
             "exit_code": 0, "stdout_summary": "PASS", "blocking": True, "result": "PASS",
         },
         {
             "path": "scripts/link_hygiene.py",
-            "exists": True, "source_reviewed": True, "executed": True,
+            "exists": True, "source_reviewed": True, "script_check_scope": "verification", "script_does_not_check": "physical evidence", "executed": True,
             "command": "python3 scripts/link_hygiene.py", "environment": {"python": "3.x"},
             "exit_code": 1, "stdout_summary": "Known minor link issues",
             "blocking": False, "result": "FAIL_NON_BLOCKING",
@@ -255,13 +255,13 @@ def test_cg009():
     scripts = [
         {
             "path": "scripts/validator.py",
-            "exists": True, "source_reviewed": True, "executed": True,
+            "exists": True, "source_reviewed": True, "script_check_scope": "verification", "script_does_not_check": "physical evidence", "executed": True,
             "command": "python3 scripts/validator.py", "environment": {"python": "3.x"},
             "exit_code": 0, "stdout_summary": "PASS", "blocking": True, "result": "PASS",
         },
         {
             "path": "scripts/link_check.py",
-            "exists": True, "source_reviewed": True, "executed": True,
+            "exists": True, "source_reviewed": True, "script_check_scope": "verification", "script_does_not_check": "physical evidence", "executed": True,
             "command": "python3 scripts/link_check.py", "environment": {"python": "3.x"},
             "exit_code": 1, "stdout_summary": "FAIL", "blocking": False, "result": "FAIL_NON_BLOCKING",
         },
@@ -473,7 +473,7 @@ def test_cg025():
     global PASS_COUNT, FAIL_COUNT, TOTAL
     scripts = [{
         "path": "scripts/validator.py",
-        "exists": True, "source_reviewed": True, "executed": True,
+        "exists": True, "source_reviewed": True, "script_check_scope": "verification", "script_does_not_check": "physical evidence", "executed": True,
         "command": "python3 scripts/validator.py", "environment": {"python": "3.x"},
         "exit_code": 0, "stdout_summary": "PASS", "blocking": True, "result": "PASS",
     }]
@@ -499,7 +499,7 @@ def test_cg026():
     global PASS_COUNT, FAIL_COUNT, TOTAL
     scripts = [{
         "path": "scripts/validator.py",
-        "exists": True, "source_reviewed": True, "executed": True,
+        "exists": True, "source_reviewed": True, "script_check_scope": "verification", "script_does_not_check": "physical evidence", "executed": True,
         "command": "python3 scripts/validator.py", "environment": {"python": "3.x"},
         "exit_code": 0, "stdout_summary": "PASS", "blocking": True, "result": "PASS",
     }]
@@ -681,13 +681,13 @@ def test_cg044():
     scripts = [
         {
             "path": "scripts/main_validator.py",
-            "exists": True, "source_reviewed": True, "executed": True,
+            "exists": True, "source_reviewed": True, "script_check_scope": "verification", "script_does_not_check": "physical evidence", "executed": True,
             "command": "python3 scripts/main_validator.py", "environment": {"python": "3.x"},
             "exit_code": 0, "stdout_summary": "PASS", "blocking": True, "result": "PASS",
         },
         {
             "path": "scripts/link_check.py",
-            "exists": True, "source_reviewed": True, "executed": True,
+            "exists": True, "source_reviewed": True, "script_check_scope": "verification", "script_does_not_check": "physical evidence", "executed": True,
             "command": "python3 scripts/link_check.py", "environment": {"python": "3.x"},
             "exit_code": 1, "stdout_summary": "2 broken links found",
             "blocking": False, "result": "FAIL_NON_BLOCKING",
@@ -703,7 +703,7 @@ def test_cg045():
     scripts = [
         {
             "path": "scripts/main_validator.py",
-            "exists": True, "source_reviewed": True, "executed": True,
+            "exists": True, "source_reviewed": True, "script_check_scope": "verification", "script_does_not_check": "physical evidence", "executed": True,
             "command": "python3 scripts/main_validator.py", "environment": {"python": "3.x"},
             "exit_code": 1, "stdout_summary": "FAIL", "blocking": True, "result": "FAIL",
         },
@@ -717,7 +717,7 @@ def test_cg046():
     """Script with exit_code 0 but result FAIL is inconsistent"""
     scripts = [{
         "path": "scripts/validator.py",
-        "exists": True, "source_reviewed": True, "executed": True,
+        "exists": True, "source_reviewed": True, "script_check_scope": "verification", "script_does_not_check": "physical evidence", "executed": True,
         "command": "python3 scripts/validator.py", "environment": {"python": "3.x"},
         "exit_code": 0, "stdout_summary": "PASS", "blocking": True, "result": "FAIL",
     }]

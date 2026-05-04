@@ -100,6 +100,10 @@ def build_report(evidence_input_path, report_out_path=None, echo_out_path=None):
     script_audit = {
         "scope_class": scope_class,
         "scripts_reviewed": [s.get("path", "") for s in reviewed],
+        "command": [s.get("command", "") for s in executed],
+        "environment": {s.get("path", ""): s.get("environment", {}) for s in executed},
+        "exit_code": next((s.get("exit_code") for s in executed if s.get("exit_code") is not None), None),
+        "output_summary": [s.get("stdout_summary", "") for s in executed],
         "scripts_executed": len(executed),
         "scripts": scripts,
         "missing_scripts": [s.get("path") for s in not_found],
@@ -183,7 +187,8 @@ def build_report(evidence_input_path, report_out_path=None, echo_out_path=None):
         "protocol_profile_check": {
             "profile_source": "/api/protocol-verification-profiles.json",
             "hard_gates_satisfied": len(gate_result.get("blocking_failures", [])) == 0,
-            "minimum_components_satisfied": True,
+            "minimum_components_satisfied": "derived_by_claim_gate",
+            "profile_check_method": "claim_gate_derivation",
             "recommended_components_satisfied": "partial",
             "underreported_items": [],
             "incompatible_claims": [],

@@ -87,7 +87,7 @@ def run_test(test_id, description, evidence_input, expect_success=True, check_fn
 def test_rb001():
     """RB001 valid V4 report generated"""
     scripts = [{
-        "path": "scripts/validator.py", "exists": True, "source_reviewed": True,
+        "path": "scripts/validator.py", "exists": True, "source_reviewed": True, "script_check_scope": "verification", "script_does_not_check": "physical evidence",
         "executed": True, "command": "python3 scripts/validator.py",
         "environment": {"python": "3.x"}, "exit_code": 0, "stdout_summary": "PASS",
         "blocking": True, "result": "PASS",
@@ -106,7 +106,7 @@ def test_rb001():
 def test_rb002():
     """RB002 V4+ request downgraded to V4"""
     scripts = [{
-        "path": "scripts/validator.py", "exists": True, "source_reviewed": True,
+        "path": "scripts/validator.py", "exists": True, "source_reviewed": True, "script_check_scope": "verification", "script_does_not_check": "physical evidence",
         "executed": True, "command": "python3 scripts/validator.py",
         "environment": {"python": "3.x"}, "exit_code": 0, "stdout_summary": "PASS",
         "blocking": True, "result": "PASS", "official": True,
@@ -157,13 +157,13 @@ def test_rb005():
     """RB005 non-blocking link hygiene appears in limitations"""
     scripts = [
         {
-            "path": "scripts/validator.py", "exists": True, "source_reviewed": True,
+            "path": "scripts/validator.py", "exists": True, "source_reviewed": True, "script_check_scope": "verification", "script_does_not_check": "physical evidence",
             "executed": True, "command": "python3 scripts/validator.py",
             "environment": {"python": "3.x"}, "exit_code": 0, "stdout_summary": "PASS",
             "blocking": True, "result": "PASS",
         },
         {
-            "path": "scripts/link_check.py", "exists": True, "source_reviewed": True,
+            "path": "scripts/link_check.py", "exists": True, "source_reviewed": True, "script_check_scope": "verification", "script_does_not_check": "physical evidence",
             "executed": True, "command": "python3 scripts/link_check.py",
             "environment": {"python": "3.x"}, "exit_code": 1, "stdout_summary": "2 broken",
             "blocking": False, "result": "FAIL_NON_BLOCKING",
@@ -184,13 +184,13 @@ def test_rb006():
     """RB006 missing scripts appear in limitations and not counted"""
     scripts = [
         {
-            "path": "scripts/validator.py", "exists": True, "source_reviewed": True,
+            "path": "scripts/validator.py", "exists": True, "source_reviewed": True, "script_check_scope": "verification", "script_does_not_check": "physical evidence",
             "executed": True, "command": "python3 scripts/validator.py",
             "environment": {"python": "3.x"}, "exit_code": 0, "stdout_summary": "PASS",
             "blocking": True, "result": "PASS",
         },
         {
-            "path": "scripts/nonexistent.py", "exists": False, "source_reviewed": False,
+            "path": "scripts/nonexistent.py", "exists": False, "source_reviewed": False, "script_check_scope": "", "script_does_not_check": "",
             "executed": False, "result": "NOT_FOUND",
         },
     ]
@@ -211,7 +211,7 @@ def test_rb006():
 def test_rb007():
     """RB007 generated report json.tool valid"""
     scripts = [{
-        "path": "scripts/validator.py", "exists": True, "source_reviewed": True,
+        "path": "scripts/validator.py", "exists": True, "source_reviewed": True, "script_check_scope": "verification", "script_does_not_check": "physical evidence",
         "executed": True, "command": "python3 scripts/validator.py",
         "environment": {"python": "3.x"}, "exit_code": 0, "stdout_summary": "PASS",
         "blocking": True, "result": "PASS",
@@ -230,7 +230,7 @@ def test_rb007():
 def test_rb008():
     """RB008 generated wrapper json.tool valid"""
     scripts = [{
-        "path": "scripts/validator.py", "exists": True, "source_reviewed": True,
+        "path": "scripts/validator.py", "exists": True, "source_reviewed": True, "script_check_scope": "verification", "script_does_not_check": "physical evidence",
         "executed": True, "command": "python3 scripts/validator.py",
         "environment": {"python": "3.x"}, "exit_code": 0, "stdout_summary": "PASS",
         "blocking": True, "result": "PASS",
@@ -252,7 +252,7 @@ def test_rb008():
 def test_rb009():
     """RB009 generated title starts with Echo v3"""
     scripts = [{
-        "path": "scripts/validator.py", "exists": True, "source_reviewed": True,
+        "path": "scripts/validator.py", "exists": True, "source_reviewed": True, "script_check_scope": "verification", "script_does_not_check": "physical evidence",
         "executed": True, "command": "python3 scripts/validator.py",
         "environment": {"python": "3.x"}, "exit_code": 0, "stdout_summary": "PASS",
         "blocking": True, "result": "PASS",
@@ -270,7 +270,7 @@ def test_rb009():
 def test_rb010():
     """RB010 generated report passes validate_agent_submission"""
     scripts = [{
-        "path": "scripts/validator.py", "exists": True, "source_reviewed": True,
+        "path": "scripts/validator.py", "exists": True, "source_reviewed": True, "script_check_scope": "verification", "script_does_not_check": "physical evidence",
         "executed": True, "command": "python3 scripts/validator.py",
         "environment": {"python": "3.x"}, "exit_code": 0, "stdout_summary": "PASS",
         "blocking": True, "result": "PASS",
@@ -292,7 +292,7 @@ def test_rb010():
 def test_rb011():
     """RB011 generated wrapper passes validate_agent_submission"""
     scripts = [{
-        "path": "scripts/validator.py", "exists": True, "source_reviewed": True,
+        "path": "scripts/validator.py", "exists": True, "source_reviewed": True, "script_check_scope": "verification", "script_does_not_check": "physical evidence",
         "executed": True, "command": "python3 scripts/validator.py",
         "environment": {"python": "3.x"}, "exit_code": 0, "stdout_summary": "PASS",
         "blocking": True, "result": "PASS",
@@ -317,13 +317,13 @@ def test_rb012():
     """RB012 generated report cannot contain ambiguous all_green claim"""
     scripts = [
         {
-            "path": "scripts/validator.py", "exists": True, "source_reviewed": True,
+            "path": "scripts/validator.py", "exists": True, "source_reviewed": True, "script_check_scope": "verification", "script_does_not_check": "physical evidence",
             "executed": True, "command": "python3 scripts/validator.py",
             "environment": {"python": "3.x"}, "exit_code": 0, "stdout_summary": "PASS",
             "blocking": True, "result": "PASS",
         },
         {
-            "path": "scripts/link_check.py", "exists": True, "source_reviewed": True,
+            "path": "scripts/link_check.py", "exists": True, "source_reviewed": True, "script_check_scope": "verification", "script_does_not_check": "physical evidence",
             "executed": True, "command": "python3 scripts/link_check.py",
             "environment": {"python": "3.x"}, "exit_code": 1, "stdout_summary": "FAIL",
             "blocking": False, "result": "FAIL_NON_BLOCKING",
