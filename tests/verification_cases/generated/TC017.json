@@ -21,7 +21,16 @@
       ],
       "access_paths": [],
       "method": "P4 verification method",
-      "evidence": [],
+      "evidence": [
+        {
+          "level_evidence_type": "live_remote",
+          "nonce_challenge": {
+            "challenge": "block-hash-901954"
+          },
+          "requested_action_angle_lighting": true,
+          "witness_identity_or_role": "remote verifier"
+        }
+      ],
       "limitations": [],
       "claims_not_made": [],
       "scope_class": "physical_witness"
@@ -54,7 +63,8 @@
   "samples_checked": 0,
   "physical_evidence_reviewed": {
     "live_video": true,
-    "nonce_challenge": "nonce-123"
+    "nonce_challenge": "nonce-123",
+    "live_witness": true
   },
   "confidential_challenge": {
     "performed": false

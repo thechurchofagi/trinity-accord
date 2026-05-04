@@ -54,7 +54,9 @@
     }
   ],
   "samples_checked": 0,
-  "physical_evidence_reviewed": {},
+  "physical_evidence_reviewed": {
+    "live_witness": true
+  },
   "confidential_challenge": {
     "performed": false
   },
