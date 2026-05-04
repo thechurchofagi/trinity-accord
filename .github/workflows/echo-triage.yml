@@ -8,17 +8,21 @@ permissions:
   issues: write
   contents: read
 
+concurrency:
+  group: echo-triage-${{ github.event.issue.number }}
+  cancel-in-progress: true
+
 jobs:
   triage:
     if: ${{ !github.event.issue.pull_request }}
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
 
       - name: Compute Echo rate limit
         id: rate
-        uses: actions/github-script@v7
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
         with:
           script: |
             const owner = context.repo.owner;
@@ -90,7 +94,7 @@ jobs:
           cat triage_result.json
 
       - name: Apply triage result
-        uses: actions/github-script@v7
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
         with:
           script: |
             const fs = require("fs");
@@ -126,11 +130,7 @@ jobs:
                 const botAlreadyCommented = comments.some(c =>
                   c.user.type === "Bot" &&
                   c.body &&
-                  (c.body.includes("Initial screening passed") ||
-                   c.body.includes("automatically closed") ||
-                   c.body.includes("missing the following required fields") ||
-                   c.body.includes("missing the required boundary sentence") ||
-                   c.body.includes("verification level"))
+                  c.body.includes("<!-- trinity-echo-triage-v1 -->")
                 );
 
                 if (botAlreadyCommented) {

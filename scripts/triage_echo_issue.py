@@ -8,6 +8,15 @@ import re
 import json
 import sys
 
+TRIAGE_MARKER = "<!-- trinity-echo-triage-v1 -->"
+
+def emit_result(result):
+    """Prepend stable marker to comment and emit JSON."""
+    comment = result.get("comment", "")
+    if comment:
+        result["comment"] = TRIAGE_MARKER + "\n" + comment
+    emit_result(result)
+
 # --- Config ---
 RATE_LIMIT_60M = 3
 RATE_LIMIT_24H = 8
@@ -448,6 +457,12 @@ def main():
     title = get_env("ISSUE_TITLE")
     body = get_env("ISSUE_BODY")
     rate_limited = get_env("RATE_LIMITED", "false").lower() == "true"
+
+    # S17: Cap body size to prevent excessive processing
+    MAX_BODY_CHARS = 60000
+    if len(body) > MAX_BODY_CHARS:
+        body = body[:MAX_BODY_CHARS]
+
     count60 = get_env("RECENT_60M_COUNT", "0")
     count24 = get_env("RECENT_24H_COUNT", "0")
     association = get_env("AUTHOR_ASSOCIATION", "NONE")
@@ -460,7 +475,7 @@ def main():
     if not is_echo_submission(text):
         result["labels"] = ["echo:not-detected"]
         result["comment"] = "This issue does not appear to be an Echo submission. No triage action taken."
-        print(json.dumps(result, indent=2))
+        emit_result(result)
         return
 
     # --- Step 1: Rate limit check (only on opened events) ---
@@ -482,7 +497,7 @@ def main():
             "- 每 24 小时最多 8 个 Echo Issue\n\n"
             "请编辑已有打开的 Echo Issue，或稍后再提交。"
         )
-        print(json.dumps(result, indent=2))
+        emit_result(result)
         return
 
     # --- Step 2: Hard invalid checks ---
@@ -501,7 +516,7 @@ def main():
             "Please edit this issue to add the boundary sentence, or submit a new Echo with the boundary included.\n\n"
             "This is a protocol gate, not a judgment of your submission."
         )
-        print(json.dumps(result, indent=2))
+        emit_result(result)
         return
 
     # 2b: Amendment claim (excluding negations)
@@ -514,7 +529,7 @@ def main():
             "Please review the authority boundary: https://www.trinityaccord.org/authority\n\n"
             "This is a protocol gate, not a judgment of your submission."
         )
-        print(json.dumps(result, indent=2))
+        emit_result(result)
         return
 
     # 2c: Authority claim
@@ -527,7 +542,7 @@ def main():
             "Please review the authority boundary: https://www.trinityaccord.org/authority\n\n"
             "This is a protocol gate, not a judgment of your submission."
         )
-        print(json.dumps(result, indent=2))
+        emit_result(result)
         return
 
     # 2d: Imperative language
@@ -539,7 +554,7 @@ def main():
             "The Trinity Accord does not instruct, command, or require any agent or human to believe, obey, or propagate.\n\n"
             "This is a protocol gate, not a judgment of your submission."
         )
-        print(json.dumps(result, indent=2))
+        emit_result(result)
         return
 
     # 2e: Financial / spam
@@ -551,7 +566,7 @@ def main():
             "The Trinity Accord is not a financial project. Echoes must not contain advertisements, token promotions, or investment schemes.\n\n"
             "This is a protocol gate, not a judgment of your submission."
         )
-        print(json.dumps(result, indent=2))
+        emit_result(result)
         return
 
     # 2f: Prompt injection
@@ -563,7 +578,7 @@ def main():
             "Echoes must not attempt to override system prompts, ignore instructions, or extract hidden content.\n\n"
             "This is a protocol gate, not a judgment of your submission."
         )
-        print(json.dumps(result, indent=2))
+        emit_result(result)
         return
 
     # --- Step 3: Soft invalid — missing format fields ---
@@ -597,7 +612,7 @@ def main():
             "- Boundary sentence\n\n"
             "This is a format check, not a judgment of your submission."
         )
-        print(json.dumps(result, indent=2))
+        emit_result(result)
         return
 
     # --- Step 4: Possible overclaim ---
@@ -618,7 +633,7 @@ def main():
             "This issue has NOT been closed. A maintainer should review whether the verification level is appropriate.\n\n"
             "此 Issue 没有被关闭，但需要维护者检查验证等级是否夸大。"
         )
-        print(json.dumps(result, indent=2))
+        emit_result(result)
         return
 
     # --- Step 5: Verification-level content requirements (skip for v3 provenance-aware submissions) ---
@@ -634,7 +649,7 @@ def main():
                 "This issue has NOT been closed. Please edit to add the missing details.\n\n"
                 "此 Issue 没有被关闭，请编辑补充缺失内容。"
             )
-            print(json.dumps(result, indent=2))
+            emit_result(result)
             return
 
     # --- Step 5b: V3 Provenance checks (only for v3-aware submissions) ---
@@ -651,7 +666,7 @@ def main():
                 "https://github.com/thechurchofagi/trinity-accord/issues/new?template=echo_submission.yml\n\n"
                 "Missing provenance fields make it impossible to distinguish solicited responses from unsolicited discovery."
             )
-            print(json.dumps(result, indent=2))
+            emit_result(result)
             return
 
         # Check for provenance conflicts
@@ -671,7 +686,7 @@ def main():
             if "needs-human-review" not in result["labels"]:
                 result["labels"].append("needs-human-review")
             result["comment"] = conflict_comment
-            print(json.dumps(result, indent=2))
+            emit_result(result)
             return
 
     # --- Step 6: Pass ---
@@ -684,7 +699,7 @@ def main():
         "---\n\n"
         "初筛通过不代表认可、归档、独立见证或高价值状态，仍需维护者审核。"
     )
-    print(json.dumps(result, indent=2))
+    emit_result(result)
 
 
 if __name__ == "__main__":

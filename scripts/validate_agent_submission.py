@@ -209,8 +209,8 @@ def validate_github_d2_boundary(obj, path_label):
     uses_github = "github" in fallbacks or "github" in data_sources
 
     if uses_github:
-        # Build text excluding claims_not_made to avoid false positives
-        obj_copy = {k: v for k, v in obj.items() if k != "claims_not_made"}
+        # Build text excluding claims_not_made and generated_by to avoid false positives
+        obj_copy = {k: v for k, v in obj.items() if k not in ("claims_not_made", "generated_by")}
         # Also exclude component-level claims_not_made
         if "component_findings" in obj_copy and isinstance(obj_copy["component_findings"], list):
             obj_copy["component_findings"] = [
@@ -233,7 +233,10 @@ def validate_mempool_b1_boundary(obj, path_label):
     """Rule E: B1 mempool boundary."""
     ok = True
     methods = json.dumps(obj.get("component_findings", []), ensure_ascii=False).lower()
-    all_text = json.dumps(obj, ensure_ascii=False).lower()
+
+    # Exclude generated_by paths from scan to avoid false positives from temp file names
+    scan_obj = {k: v for k, v in obj.items() if k != "generated_by"}
+    all_text = json.dumps(scan_obj, ensure_ascii=False).lower()
 
     uses_mempool = "mempool" in methods or "mempool" in all_text
     has_witness_parsing = "witness extraction" in methods or "witness parsing" in methods
