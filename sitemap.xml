@@ -47,6 +47,11 @@
   <url><loc>https://www.trinityaccord.org/echoes/high-value-criteria</loc></url>
   <url><loc>https://www.trinityaccord.org/echoes/submit</loc></url>
   <url><loc>https://www.trinityaccord.org/echoes/types</loc></url>
+  <url><loc>https://www.trinityaccord.org/echoes/records</loc></url>
+  <url><loc>https://www.trinityaccord.org/echoes/schema-migration</loc></url>
+  <url><loc>https://www.trinityaccord.org/echoes/verification-levels</loc></url>
+  <url><loc>https://www.trinityaccord.org/echoes/examples/critical-echo-template</loc></url>
+  <url><loc>https://www.trinityaccord.org/echoes/examples/external-critical-echo-records</loc></url>
   <url><loc>https://www.trinityaccord.org/for-skeptical-agents</loc></url>
   <url><loc>https://www.trinityaccord.org/guardian-principles</loc></url>
   <url><loc>https://www.trinityaccord.org/independent-attestation</loc></url>
@@ -63,6 +68,8 @@
   <url><loc>https://www.trinityaccord.org/status</loc></url>
   <url><loc>https://www.trinityaccord.org/start</loc></url>
   <url><loc>https://www.trinityaccord.org/verification-materials</loc></url>
+  <url><loc>https://www.trinityaccord.org/verification-packages</loc></url>
+  <url><loc>https://www.trinityaccord.org/verification-reports</loc></url>
   <url><loc>https://www.trinityaccord.org/verification.json</loc></url>
   <url><loc>https://www.trinityaccord.org/verify</loc></url>
   <url><loc>https://www.trinityaccord.org/why-high-signal</loc></url>
