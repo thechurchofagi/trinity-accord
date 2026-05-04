@@ -829,7 +829,7 @@ def evaluate(input_path):
                 requested_kind
             )
         
-        if contains_placeholder(evidence_input):
+        if contains_placeholder(evidence):
             return fail_claim_gate(
                 "Placeholder/example values cannot be used as verification evidence",
                 ["Replace all placeholder/example values with fresh observed values."],
