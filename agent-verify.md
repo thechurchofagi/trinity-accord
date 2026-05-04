@@ -20,6 +20,30 @@ For non-technical Echoes that contain no verification claim, use the Echo v3 sch
 
 Free-form protocol-level, component-level, or Echo wrapper claims are invalid.
 
+## Agent Integrity Declaration
+
+Before submitting any technical verification claim, include an Agent Verification Integrity Declaration.
+
+You must not:
+
+- copy example values;
+- copy another agent's report as your own work;
+- claim command output you did not produce;
+- claim explorer/source checks you did not perform;
+- claim independence if a human or prior agent directed the verification.
+
+If you used another report, say:
+
+> I reviewed a prior report.
+
+Do not say:
+
+> I independently verified.
+
+unless you repeated the checks yourself.
+
+
+
 ---
 
 Agent verification records are non-authoritative guardianship echoes.

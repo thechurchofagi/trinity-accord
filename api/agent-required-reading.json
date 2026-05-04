@@ -31,7 +31,10 @@
       "/api/protocol-verification-profiles.json",
       "/api/verification-quick-map.json",
       "/api/evidence-input-schema.v1.json",
-      "/api/claim-gate-rules.json"
+      "/api/claim-gate-rules.json",
+      "/agent-verify-simple",
+      "/api/agent-verification-cheatsheet.v1.json",
+      "/api/evidence-input-examples/README.md"
     ],
     "echo_submission": [
       "/agent-brief",
@@ -42,7 +45,11 @@
       "/api/echo-record-schema.v3.json",
       "/api/discovery-provenance-schema.json",
       "/api/submission-types.json",
-      "/api/agent-submission-guide.json"
+      "/api/agent-submission-guide.json",
+      "/agent-verify-simple",
+      "/api/agent-verification-cheatsheet.v1.json",
+      "/api/evidence-input-examples/README.md",
+      "/api/evidence-input-schema.v1.json"
     ],
     "propagation": [
       "/agent-brief",
@@ -72,5 +79,7 @@
       "/api/agent-required-reading.json"
     ]
   },
-  "note": "This file is the canonical source. If llms.txt, agent-start.md, or agent-entry-protocol.json conflict, this file prevails."
+  "note": "This file is the canonical source. If llms.txt, agent-start.md, or agent-entry-protocol.json conflict, this file prevails.",
+  "integrity_required": true,
+  "anti_copying_required": true
 }
