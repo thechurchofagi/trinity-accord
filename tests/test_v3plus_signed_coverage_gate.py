@@ -11,179 +11,220 @@ SCRIPT = ROOT / "scripts/check-v3plus-evidence-input-signed-coverage.py"
 GOOD_HASH = "a" * 64
 BAD_HASH = "b" * 64
 
+
 def write_json(path, obj):
     path.write_text(json.dumps(obj, indent=2), encoding="utf-8")
 
+
+def base_audit(target_results=None):
+    return {
+        "signed_manifest_coverage_pass": True,
+        "btc_bip340_signature_verified": True,
+        "legacy_eth_witness_verified": True,
+        "digest_manifest_json_hash_match": True,
+        "digest_manifest_csv_hash_match": True,
+        "target_results": target_results or [],
+    }
+
+
+def signed_gate():
+    return {
+        "btc_bip340_signature_verified": True,
+        "legacy_eth_witness_verified": True,
+        "authority_jcs_sha256_match": True,
+        "signed_manifest_coverage_audit_pass": True,
+    }
+
+
+def base_input(level="V3", hashes=None, include_gate=True):
+    evidence = {"hashes": hashes or []}
+    if include_gate:
+        evidence["signed_manifest_gate"] = signed_gate()
+
+    return {
+        "schema": "trinityaccord.evidence-input.v1",
+        "agent": {},
+        "provenance": {},
+        "limitations": [],
+        "claims_requested_by_agent": [level],
+        "evidence": evidence,
+    }
+
+
 class V3PlusSignedCoverageGateTests(unittest.TestCase):
-    def test_v2_does_not_require_signed_gate(self):
+    def run_gate(self, evidence_input, audit_obj=None):
         with tempfile.TemporaryDirectory() as td:
             td = Path(td)
-            inp = td / "v2.json"
+            inp = td / "evidence-input.json"
+            audit = td / "audit.json"
             out = td / "out.json"
-            write_json(inp, {
-                "schema": "trinityaccord.evidence-input.v1",
-                "agent": {},
-                "provenance": {},
-                "limitations": [],
-                "claims_requested_by_agent": ["V2"],
-                "evidence": {}
-            })
-            r = subprocess.run(["python3", str(SCRIPT), str(inp), "--out", str(out)], cwd=ROOT)
-            self.assertEqual(r.returncode, 0)
-            self.assertTrue(json.loads(out.read_text())["pass"])
+
+            write_json(inp, evidence_input)
+
+            cmd = ["python3", str(SCRIPT), str(inp), "--out", str(out)]
+
+            if audit_obj is not None:
+                write_json(audit, audit_obj)
+                cmd.extend(["--audit", str(audit)])
+
+            r = subprocess.run(cmd, cwd=ROOT)
+            result = json.loads(out.read_text()) if out.exists() else {}
+            return r.returncode, result
+
+    def test_v2_does_not_require_signed_gate(self):
+        obj = {
+            "schema": "trinityaccord.evidence-input.v1",
+            "agent": {},
+            "provenance": {},
+            "limitations": [],
+            "claims_requested_by_agent": ["V2"],
+            "evidence": {},
+        }
+        rc, result = self.run_gate(obj)
+        self.assertEqual(rc, 0)
+        self.assertTrue(result["pass"])
 
     def test_v3_missing_signed_gate_fails(self):
-        with tempfile.TemporaryDirectory() as td:
-            td = Path(td)
-            inp = td / "v3.json"
-            audit = td / "audit.json"
-            out = td / "out.json"
-            write_json(audit, {
-                "signed_manifest_coverage_pass": True,
-                "btc_bip340_signature_verified": True,
-                "legacy_eth_witness_verified": True,
-                "digest_manifest_json_hash_match": True,
-                "digest_manifest_csv_hash_match": True,
-                "target_results": []
-            })
-            write_json(inp, {
-                "schema": "trinityaccord.evidence-input.v1",
-                "agent": {},
-                "provenance": {},
-                "limitations": [],
-                "claims_requested_by_agent": ["V3"],
-                "evidence": {
-                    "hashes": [{
-                        "artifact": "general",
-                        "expected": GOOD_HASH,
-                        "computed": GOOD_HASH,
-                        "match": True,
-                        "expected_hash_source": "archive/evidence/digest-manifest.json",
-                        "expected_hash_authority_class": "signed_digest_manifest_hash"
-                    }]
-                }
-            })
-            r = subprocess.run(["python3", str(SCRIPT), str(inp), "--audit", str(audit), "--out", str(out)], cwd=ROOT)
-            self.assertNotEqual(r.returncode, 0)
+        h = {
+            "artifact": "general",
+            "expected": GOOD_HASH,
+            "computed": GOOD_HASH,
+            "match": True,
+            "expected_hash_source": "archive/evidence/digest-manifest.json",
+            "expected_hash_authority_class": "signed_digest_manifest_hash",
+        }
+        obj = base_input(level="V3", hashes=[h], include_gate=False)
+        rc, result = self.run_gate(obj, base_audit())
+        self.assertNotEqual(rc, 0)
+        self.assertFalse(result["pass"])
+        self.assertTrue(any("signed_manifest_gate" in x for x in result["blocking_failures"]))
+
+    def test_v3_general_hash_with_signed_gate_passes(self):
+        h = {
+            "artifact": "general",
+            "expected": GOOD_HASH,
+            "computed": GOOD_HASH,
+            "match": True,
+            "expected_hash_source": "archive/evidence/digest-manifest.json",
+            "expected_hash_authority_class": "signed_digest_manifest_hash",
+        }
+        obj = base_input(level="V3", hashes=[h], include_gate=True)
+        rc, result = self.run_gate(obj, base_audit())
+        self.assertEqual(rc, 0)
+        self.assertTrue(result["pass"])
 
     def test_v3_sensitive_hash_requires_target_coverage(self):
-        with tempfile.TemporaryDirectory() as td:
-            td = Path(td)
-            inp = td / "v3.json"
-            audit = td / "audit.json"
-            out = td / "out.json"
-            write_json(audit, {
-                "signed_manifest_coverage_pass": True,
-                "btc_bip340_signature_verified": True,
-                "legacy_eth_witness_verified": True,
-                "digest_manifest_json_hash_match": True,
-                "digest_manifest_csv_hash_match": True,
-                "target_results": [{
-                    "sha256": GOOD_HASH,
-                    "covered_by_signed_manifest_chain": True
-                }]
-            })
-            write_json(inp, {
-                "schema": "trinityaccord.evidence-input.v1",
-                "agent": {},
-                "provenance": {},
-                "limitations": [],
-                "claims_requested_by_agent": ["V3"],
-                "evidence": {
-                    "signed_manifest_gate": {
-                        "btc_bip340_signature_verified": True,
-                        "legacy_eth_witness_verified": True,
-                        "authority_jcs_sha256_match": True,
-                        "signed_manifest_coverage_audit_pass": True
-                    },
-                    "hashes": [{
-                        "artifact": "flaw archive",
-                        "artifact_class": "covenant_flaw",
-                        "expected": GOOD_HASH,
-                        "computed": GOOD_HASH,
-                        "match": True,
-                        "expected_hash_source": "archive/evidence/digest-manifest.json",
-                        "expected_hash_authority_class": "signed_digest_manifest_hash"
-                    }]
-                }
-            })
-            r = subprocess.run(["python3", str(SCRIPT), str(inp), "--audit", str(audit), "--out", str(out)], cwd=ROOT)
-            self.assertEqual(r.returncode, 0)
-            self.assertTrue(json.loads(out.read_text())["pass"])
+        h = {
+            "artifact": "flaw archive",
+            "artifact_class": "covenant_flaw",
+            "expected": GOOD_HASH,
+            "computed": GOOD_HASH,
+            "match": True,
+            "expected_hash_source": "archive/evidence/digest-manifest.json",
+            "expected_hash_authority_class": "signed_digest_manifest_hash",
+        }
+        obj = base_input(level="V3", hashes=[h], include_gate=True)
 
-            obj = json.loads(inp.read_text())
-            obj["evidence"]["hashes"][0]["expected"] = BAD_HASH
-            obj["evidence"]["hashes"][0]["computed"] = BAD_HASH
-            write_json(inp, obj)
-            r = subprocess.run(["python3", str(SCRIPT), str(inp), "--audit", str(audit), "--out", str(out)], cwd=ROOT)
-            self.assertNotEqual(r.returncode, 0)
+        rc, result = self.run_gate(obj, base_audit(target_results=[]))
+        self.assertNotEqual(rc, 0)
+        self.assertFalse(result["pass"])
+        self.assertTrue(any("not covered" in x for x in result["blocking_failures"]))
 
-    def test_v3_sensitive_hash_only_required_must_fail(self):
-        with tempfile.TemporaryDirectory() as td:
-            td = Path(td)
-            inp = td / "v3.json"
-            audit = td / "audit.json"
-            out = td / "out.json"
-            write_json(audit, {
-                "signed_manifest_coverage_pass": True,
-                "btc_bip340_signature_verified": True,
-                "legacy_eth_witness_verified": True,
-                "digest_manifest_json_hash_match": True,
-                "digest_manifest_csv_hash_match": True,
-                "target_results": [{
-                    "sha256": GOOD_HASH,
-                    "covered_by_signed_manifest_chain": True,
-                    "byte_verified": False,
-                    "coverage_only": False
-                }]
-            })
-            write_json(inp, {
-                "schema": "trinityaccord.evidence-input.v1",
-                "agent": {},
-                "provenance": {},
-                "limitations": [],
-                "claims_requested_by_agent": ["V3"],
-                "evidence": {
-                    "signed_manifest_gate": {
-                        "btc_bip340_signature_verified": True,
-                        "legacy_eth_witness_verified": True,
-                        "authority_jcs_sha256_match": True,
-                        "signed_manifest_coverage_audit_pass": True
-                    },
-                    "hashes": [{
-                        "artifact": "flaw archive",
-                        "artifact_class": "covenant_flaw",
-                        "expected": GOOD_HASH,
-                        "computed": GOOD_HASH,
-                        "match": True,
-                        "expected_hash_source": "archive/evidence/digest-manifest.json",
-                        "expected_hash_authority_class": "signed_digest_manifest_hash"
-                    }]
-                }
-            })
-            r = subprocess.run(["python3", str(SCRIPT), str(inp), "--audit", str(audit), "--out", str(out)], cwd=ROOT)
-            self.assertEqual(r.returncode, 0)
+    def test_v3_sensitive_hash_requires_byte_verified_target(self):
+        h = {
+            "artifact": "flaw archive",
+            "artifact_class": "covenant_flaw",
+            "expected": GOOD_HASH,
+            "computed": GOOD_HASH,
+            "match": True,
+            "expected_hash_source": "archive/evidence/digest-manifest.json",
+            "expected_hash_authority_class": "signed_digest_manifest_hash",
+        }
+        obj = base_input(level="V3", hashes=[h], include_gate=True)
 
-    def test_coverage_only_is_not_byte_verification(self):
-        with tempfile.TemporaryDirectory() as td:
-            td = Path(td)
-            audit = td / "audit.json"
-            write_json(audit, {
-                "signed_manifest_coverage_pass": True,
-                "btc_bip340_signature_verified": True,
-                "legacy_eth_witness_verified": True,
-                "digest_manifest_json_hash_match": True,
-                "digest_manifest_csv_hash_match": True,
-                "target_results": [{
-                    "sha256": GOOD_HASH,
-                    "covered_by_signed_manifest_chain": True,
-                    "byte_verified": False,
-                    "coverage_only": True
-                }]
-            })
-            data = json.loads(audit.read_text())
-            self.assertTrue(data["target_results"][0]["coverage_only"])
-            self.assertFalse(data["target_results"][0]["byte_verified"])
+        audit = base_audit(target_results=[{
+            "sha256": GOOD_HASH,
+            "covered_by_signed_manifest_chain": True,
+            "byte_verified": False,
+            "coverage_only": False,
+        }])
+
+        rc, result = self.run_gate(obj, audit)
+        self.assertNotEqual(rc, 0)
+        self.assertFalse(result["pass"])
+        self.assertTrue(any("not byte_verified" in x or "sha256-only" in x for x in result["blocking_failures"]))
+
+    def test_v3_sensitive_coverage_only_cannot_support_byte_claim(self):
+        h = {
+            "artifact": "flaw archive",
+            "artifact_class": "covenant_flaw",
+            "expected": GOOD_HASH,
+            "computed": GOOD_HASH,
+            "match": True,
+            "expected_hash_source": "archive/evidence/digest-manifest.json",
+            "expected_hash_authority_class": "signed_digest_manifest_hash",
+        }
+        obj = base_input(level="V3", hashes=[h], include_gate=True)
+
+        audit = base_audit(target_results=[{
+            "sha256": GOOD_HASH,
+            "covered_by_signed_manifest_chain": True,
+            "byte_verified": False,
+            "coverage_only": True,
+        }])
+
+        rc, result = self.run_gate(obj, audit)
+        self.assertNotEqual(rc, 0)
+        self.assertFalse(result["pass"])
+        self.assertTrue(any("coverage-only" in x or "coverage_only" in x for x in result["blocking_failures"]))
+
+    def test_v3_sensitive_byte_verified_target_passes(self):
+        h = {
+            "artifact": "flaw archive",
+            "artifact_class": "covenant_flaw",
+            "expected": GOOD_HASH,
+            "computed": GOOD_HASH,
+            "match": True,
+            "expected_hash_source": "archive/evidence/digest-manifest.json",
+            "expected_hash_authority_class": "signed_digest_manifest_hash",
+        }
+        obj = base_input(level="V3", hashes=[h], include_gate=True)
+
+        audit = base_audit(target_results=[{
+            "sha256": GOOD_HASH,
+            "covered_by_signed_manifest_chain": True,
+            "byte_verified": True,
+            "coverage_only": False,
+            "source_kind": "github_release_asset",
+        }])
+
+        rc, result = self.run_gate(obj, audit)
+        self.assertEqual(rc, 0)
+        self.assertTrue(result["pass"])
+
+    def test_v3_hash_mismatch_fails(self):
+        h = {
+            "artifact": "flaw archive",
+            "artifact_class": "covenant_flaw",
+            "expected": GOOD_HASH,
+            "computed": BAD_HASH,
+            "match": False,
+            "expected_hash_source": "archive/evidence/digest-manifest.json",
+            "expected_hash_authority_class": "signed_digest_manifest_hash",
+        }
+        obj = base_input(level="V3", hashes=[h], include_gate=True)
+
+        audit = base_audit(target_results=[{
+            "sha256": GOOD_HASH,
+            "covered_by_signed_manifest_chain": True,
+            "byte_verified": True,
+        }])
+
+        rc, result = self.run_gate(obj, audit)
+        self.assertNotEqual(rc, 0)
+        self.assertFalse(result["pass"])
+        self.assertTrue(any("match must be true" in x for x in result["blocking_failures"]))
+
 
 if __name__ == "__main__":
     unittest.main()
