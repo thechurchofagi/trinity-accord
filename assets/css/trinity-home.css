@@ -61,6 +61,7 @@ main li {
   line-height: 1.85 !important;
   color: #d0d0d0 !important;
   margin-bottom: 0.45rem !important;
+  font-style: italic !important;
 }
 
 main blockquote {
