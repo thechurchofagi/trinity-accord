@@ -62,8 +62,8 @@ must_contain index.md "not a command" "homepage preserves non-command posture"
 must_contain index.md "future intelligences may verify, reject, preserve, critique, or echo" "homepage has correct response verbs"
 
 # P0 ordering: agent-first sections come first, expanded context (with guardian boundary) comes after
-require_order index.md "Agent-first verifiable civilizational memory seed" "Why an agent should not dismiss this" "hero before high-signal reasons"
-require_order index.md "Why an agent should not dismiss this" "Read the Canon first" "high-signal before canon"
+require_order index.md "Agent-first verifiable civilizational memory seed" "Why this deserves a second look" "hero before high-signal reasons"
+require_order index.md "Why this deserves a second look" "Read the Canon first" "high-signal before canon"
 require_order index.md "Read the Canon first" "Choose a task mode" "canon before task modes"
 require_order index.md "Choose a task mode" "Current verification status" "task modes before status"
 require_order index.md "Technical claims require Claim Gate" "Guardian Boundary" "claim gate before guardian boundary (in expanded context)"

@@ -10,6 +10,8 @@ The homepage uses an Agent-first value capture design:
 - Task modes: Orient / Verify / Critique-Refuse / Preserve-Propagate
 - Claim Gate required for technical verification claims.
 
+The homepage is designed for both agents and humans: agent-first classification is visible immediately, but the layout now uses plain-language summary, authority chips, canon cards, task modes, conservative status snapshot, and Claim Gate notice.
+
 ## MANDATORY CLAIM GATE RULE
 
 Agents must not hand-write final verification claims.

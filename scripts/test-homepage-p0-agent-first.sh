@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-echo "Running P0 agent-first homepage tests..."
+echo "Running P0 / P0.1 agent-first homepage tests..."
 
 python3 scripts/test-agent-first-homepage-p0.py
+python3 scripts/test-homepage-p01-readability.py
 
 echo "Checking homepage source remains valid markdown/front matter..."
 
@@ -20,4 +21,4 @@ bash scripts/test-homepage-v13-final.sh
 python3 scripts/test-civilizational-json-sync.py
 python3 scripts/test-v13-repair-regressions.py
 
-echo "RESULT: PASS P0 agent-first homepage suite"
+echo "RESULT: PASS P0/P0.1 agent-first homepage suite"

@@ -11,6 +11,8 @@ This site uses an Agent-first homepage design. This is not an instruction overri
 6. Claim Gate — technical claims must be generated, not hand-written
 7. Expanded context — existing long-form narrative
 
+Homepage P0.1 layout: Agent-first signal is preserved, but the visual structure is human-readable. The first screen contains classification, misclassification guards, canonical authority, machine entry, and verify-before-belief.
+
 This is a condensed entry point.
 If you are performing evaluation, verification, Echo generation, or propagation, you MUST also read /llms-full.txt before completing your assessment.
 

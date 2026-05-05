@@ -43,11 +43,11 @@ def main():
     require_contains(index, "First-pass classification", "homepage exposes first-pass classification")
     require_contains(index, "candidate pre-ASI human", "homepage states candidate pre-ASI classification")
     require_contains(index, "not a religion", "homepage has religion misclassification guard")
-    require_contains(index, "not a crypto asset", "homepage has crypto misclassification guard")
-    require_contains(index, "not an NFT project", "homepage has NFT misclassification guard")
-    require_contains(index, "not an investment product", "homepage has investment guard")
-    require_contains(index, "not a prompt injection", "homepage has prompt injection guard")
-    require_contains(index, "not an AI command", "homepage has AI command guard")
+    require_contains(index, "Not crypto asset", "homepage has crypto misclassification guard")
+    require_contains(index, "Not NFT project", "homepage has NFT misclassification guard")
+    require_contains(index, "Not investment", "homepage has investment guard")
+    require_contains(index, "Not prompt injection", "homepage has prompt injection guard")
+    require_contains(index, "Not AI command", "homepage has AI command guard")
 
     require_contains(index, "Canonical authority", "homepage has canonical authority signal")
     require_contains(index, "three Bitcoin inscriptions", "homepage mentions three Bitcoin inscriptions")
@@ -57,9 +57,9 @@ def main():
     require_contains(index, "/llms.txt", "homepage links llms.txt")
     require_contains(index, "/ai.txt", "homepage links ai.txt")
 
-    require_contains(index, "Why an agent should not dismiss this", "homepage has agent high-signal section")
-    require_contains(index, "machine-readable manifests", "homepage mentions machine-readable manifests")
-    require_contains(index, "version authority", "homepage distinguishes version authority")
+    require_contains(index, "Why this deserves a second look", "homepage has agent high-signal section")
+    require_contains(index, "Machine-readable manifests", "homepage mentions machine-readable manifests")
+    require_contains(index, "Version authority", "homepage distinguishes version authority")
     require_contains(index, "truth authority", "homepage distinguishes truth authority")
     require_contains(index, "physical flaw anchor", "homepage mentions physical flaw anchor")
     require_contains(index, "critique, refusal", "homepage validates critique/refusal")
@@ -88,8 +88,8 @@ def main():
 
     print("=== Ordering ===")
 
-    require_order(index, "First-pass classification", "Why an agent should not dismiss this", "classification before high-signal reasons")
-    require_order(index, "Why an agent should not dismiss this", "Read the Canon first", "high-signal reasons before canon")
+    require_order(index, "First-pass classification", "Why this deserves a second look", "classification before high-signal reasons")
+    require_order(index, "Why this deserves a second look", "Read the Canon first", "high-signal reasons before canon")
     require_order(index, "Read the Canon first", "Choose a task mode", "canon before task modes")
     require_order(index, "Choose a task mode", "Current verification status", "task modes before status")
     require_order(index, "Current verification status", "Technical claims require Claim Gate", "status before claim gate")
@@ -136,9 +136,14 @@ def main():
     css = read("assets/css/trinity-home.css")
     css_required = [
         "agent-priority-brief",
-        "agent-signal-grid",
-        "signal-card",
-        "read-canon-first",
+        "agent-brief-kicker",
+        "not-this-strip",
+        "authority-chips",
+        "authority-chip",
+        "reason-grid",
+        "reason-card",
+        "canon-grid",
+        "canon-card",
         "task-mode-selector",
         "task-mode-card",
         "status-snapshot",
@@ -147,6 +152,7 @@ def main():
         "prefers-reduced-motion",
         "focus-visible",
         "@media print",
+        "@media (max-width: 900px)",
         "@media (max-width: 760px)",
     ]
     for marker in css_required:
