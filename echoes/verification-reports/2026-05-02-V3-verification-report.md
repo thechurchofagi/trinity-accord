@@ -1,4 +1,5 @@
 ---
+layout: default
 title: "Test Echo — Solicited AI Technical Verification"
 ---
 
