@@ -6,8 +6,8 @@
   "files": [
     {
       "path": "archive/DOWNLOADS.md",
-      "sha256": "bb49cf150758080df555f459db524183b7b6b2912c904cef0ea4cf37f7dfd59c",
-      "size_bytes": 2784,
+      "sha256": "53f14ecc4bd2ac582951f18f7cbdb81c11a97e18b20f76e825409151284e0747",
+      "size_bytes": 4221,
       "verified": null,
       "note": "no expected hash from Arweave; actual hash recorded"
     },
@@ -20,8 +20,8 @@
     },
     {
       "path": "archive/VERIFICATION-REPORT.md",
-      "sha256": "32407cf0eae43f3b878a9cc06e108fdebd58b0ddf6a8d0dc43487ff11f678c75",
-      "size_bytes": 4919,
+      "sha256": "b8b61d3df23a03698f91ee856f3b997619b4c57d1a6d5a16b0f0e98086424023",
+      "size_bytes": 7014,
       "verified": null,
       "note": "no expected hash from Arweave; actual hash recorded"
     },
@@ -97,8 +97,8 @@
     },
     {
       "path": "archive/authority-manifest/authority-v1.0.2-canon.json",
-      "sha256": "7d6ac9d3184bb5b0bbaf8217354799efef68669c21b4180e28ec06b0c57439e6",
-      "size_bytes": 9174,
+      "sha256": "c02e16dbff2e669125b75e688cfad0fabbe23b989bd3bc99a48f4097a08b009c",
+      "size_bytes": 12712,
       "arweave_tx": "TvmjyJBq5ZoGv-tmX0aeiqsEKTGmSyIvBHj1FqZiIpI",
       "expected_sha256": "7d6ac9d3184bb5b0bbaf8217354799efef68669c21b4180e28ec06b0c57439e6",
       "verified": true
@@ -314,14 +314,6 @@
       "size_bytes": 4154,
       "verified": null,
       "note": "no expected hash from Arweave; actual hash recorded"
-    },
-    {
-      "path": "archive/evidence/flaw-image-provenance.tar",
-      "sha256": "9a1f320758ba0882135171bb99ce0cd1312d85dd6d6ce6aa57d930665ca576bf",
-      "size_bytes": 94556,
-      "arweave_tx": "9klmArmByJNOGeHzfnrAhB6x6w7sKSYLS1zQNLL7GLs",
-      "verified": null,
-      "note": "downloaded; no expected hash to compare against; actual hash recorded"
     }
   ],
   "eth_attestations": [

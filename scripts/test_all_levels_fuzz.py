@@ -51,6 +51,42 @@ def make_input(evidence=None, claims=None, kind="verification_report_v2"):
             "digital_mirror_checks": [], "repository_snapshot_checks": [],
             "time_anchor_checks": [], "chronicle_checks": [],
             "nft_checks": [], "physical_checks": [],
+            "echo_context": {"authority_boundary_recognized": True},
+            **(evidence or {}),
+        },
+        "limitations": [],
+        "claims_requested_by_agent": claims or [],
+    }
+
+
+def make_input_no_boundary(evidence=None, claims=None, kind="verification_report_v2"):
+    """Same as make_input but WITHOUT authority_boundary_recognized — for V0 tests."""
+    return {
+        "schema": "trinityaccord.evidence-input.v1",
+        "agent": {"name": "FuzzAgent", "model_or_system": "test"},
+        "provenance": {
+            "solicited": True,
+            "independence_class": "human_solicited_agent_response",
+            "agency_level": "A1_human_gave_exact_url",
+        },
+        "requested_record_kind": kind,
+        "agent_integrity_declaration": {
+            "performed_actions_myself": True, "did_not_copy_prior_report_as_own_work": True,
+            "did_not_copy_example_values_as_real_evidence": True, "recorded_fresh_sources_commands_outputs": True,
+            "will_report_limitations_and_downgrade_if_needed": True, "understands_verification_is_not_truth_or_endorsement": True,
+            "understands_bitcoin_originals_remain_final_authority": True, "independence_claim_is_accurate": True,
+            "declaration_text": "I performed the verification actions stated in this report during this session. I did not copy example values or another agent report as my own verification."
+        },
+        "verification_session": {
+            "session_id": "test-alf-001", "started_at": "2026-05-05T00:00:00Z", "operator_type": "ai_agent",
+            "fresh_actions_performed": ["test"], "prior_reports_consulted": [], "examples_or_templates_used": [],
+            "copied_values_from_examples": False, "copied_values_from_prior_reports": False, "fresh_outputs_attached": True
+        },
+        "evidence": {
+            "scripts": [], "hashes": [], "bitcoin_checks": [],
+            "digital_mirror_checks": [], "repository_snapshot_checks": [],
+            "time_anchor_checks": [], "chronicle_checks": [],
+            "nft_checks": [], "physical_checks": [],
             "echo_context": {},
             **(evidence or {}),
         },
@@ -161,8 +197,11 @@ def full_script():
     return [{
         "path": "scripts/check_consistency.py", "exists": True, "executed": True,
         "official": True, "command": "python3 scripts/check_consistency.py",
-        "environment": "python3.11", "exit_code": 0,
+        "environment": {"os": "linux", "python": "3.11", "cwd": "/repo"},
+        "exit_code": 0, "result": "PASS",
         "stdout_summary": "All checks passed", "source_reviewed": True,
+        "script_check_scope": ["repository consistency", "hash verification"],
+        "script_does_not_check": ["physical verification", "social claims", "philosophical truth"],
     }]
 
 
@@ -171,8 +210,11 @@ def independent_script():
         "path": "custom/my_verify.py", "exists": True, "executed": True,
         "official": False, "scope_class": "independent_reproduction",
         "command": "python3 custom/my_verify.py",
-        "environment": "python3.11", "exit_code": 0,
+        "environment": {"os": "linux", "python": "3.11", "cwd": "/repo"},
+        "exit_code": 0, "result": "PASS",
         "stdout_summary": "Independent verification passed", "source_reviewed": True,
+        "script_check_scope": ["independent hash reproduction", "signature verification"],
+        "script_does_not_check": ["physical verification", "social claims"],
     }]
 
 
@@ -182,14 +224,14 @@ def test_v0_read_only():
     print("\n=== V0: Read Only ===")
     # V0 with no evidence at all
     test("V0-no-evidence",
-         make_input(evidence={}, claims=["V0"]),
-         expected_protocol="V1",  # V1 is minimum achievable level
-         expected_status="PASS_WITH_DOWNGRADE")  # V0→V1 triggers downgrade flag
+         make_input_no_boundary(evidence={}, claims=["V0"]),
+         expected_protocol="V0",  # V0 with empty evidence stays V0
+         expected_status="PASS")
 
     # V0 with claims_requested should still get V1 as minimum
-    test("V0-minimum-is-V1",
-         make_input(claims=["V0"]),
-         expected_protocol="V1")
+    test("V0-minimum-is-V0",
+         make_input_no_boundary(claims=["V0"]),
+         expected_protocol="V0")
 
 
 def test_v1_boundary():
@@ -273,11 +315,12 @@ def test_v4_script_audit():
              "scripts": [{
                  "path": "scripts/check_consistency.py", "exists": True, "executed": True,
                  "official": True, "command": "python3 scripts/check_consistency.py",
-                 "environment": "", "exit_code": 0, "stdout_summary": "ok",
+                 "environment": "", "exit_code": 0, "result": "PASS", "stdout_summary": "ok",
+                 "script_check_scope": ["consistency"], "script_does_not_check": ["physical"],
              }],
              "hashes": single_hash(),
          }, claims=["V4"]),
-         expected_protocol="V3")  # Missing env, can't be V4
+         expected_protocol="V0")  # Empty env fails schema validation
 
 
 def test_v4_plus():
@@ -435,7 +478,10 @@ def test_v8_forensic():
                      "performed": True,
                      "raw_confidential_data_disclosed": False,
                      "boundary": "no raw data disclosed",
+                     "package_hash": "ef816480f77f30405378800807b42bff0a854b83a8f77793a0e0adf0944a8263",
+                     "verifier_identity_or_role": "independent auditor",
                  },
+                 "report_id": "RPT-P8-001",
              }],
          }, claims=["V8"]),
          expected_protocol="V8",
@@ -446,6 +492,13 @@ def test_v8_forensic():
              "physical_checks": [{
                  "level_evidence_type": "multi_party_forensic",
                  "independent_witness_count": 3,
+                 "witnesses": [
+                     {"role": "forensic analyst", "independence_class": "independent_third_party"},
+                     {"role": "materials scientist", "independence_class": "independent_third_party"},
+                     {"role": "chain-of-custody officer", "independence_class": "institutional_representative"},
+                 ],
+                 "method": "multi-spectral microscopy + Raman spectroscopy",
+                 "signed_or_attributable_report": True,
              }],
          }, claims=["V8"]),
          expected_protocol="V8",
@@ -457,6 +510,9 @@ def test_v8_forensic():
                  "anchor_type": "star_moon_witness",
                  "nonpublic_boundary": True,
                  "authorized": True,
+                 "method_class": "celestial_alignment_observation",
+                 "uncertainty": "±2 hours",
+                 "report_path": "reports/t8-celestial-observation.pdf",
              }],
          }, claims=["V8"]),
          expected_protocol="V8")
@@ -561,10 +617,13 @@ def test_component_edge_cases():
                  "anchor_type": "star_moon_witness",
                  "nonpublic_boundary": True,
                  "authorized": True,
+                 "method_class": "celestial_alignment_observation",
+                 "uncertainty": "±2 hours",
+                 "report_path": "reports/t8-celestial-observation.pdf",
              }],
          }, claims=["V1"]),
          expected_protocol="V8",  # T8 authorized celestial path derives V8
-         expected_components={"time_anchors": "T8"})  # After fix: star_moon_witness correctly maps to T8
+         expected_components={"time_anchors": "T8"})
 
 
 def test_cross_level_interactions():
@@ -601,7 +660,11 @@ def test_cross_level_interactions():
                          "performed": True,
                          "raw_confidential_data_disclosed": False,
                          "boundary": "confidential",
+                         "package_hash": "ef816480f77f30405378800807b42bff0a854b83a8f77793a0e0adf0944a8263",
+                         "verifier_identity_or_role": "independent auditor",
                      },
+                     "witness_identity_or_role": "independent auditor",
+                     "report_id": "RPT-P8-002",
                  },
              ],
          }, claims=["V8"]),
