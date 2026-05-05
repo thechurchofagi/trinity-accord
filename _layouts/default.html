@@ -131,7 +131,7 @@
       /* ── Bilingual paragraph detection ── */
       /* Marks paragraphs containing >40% CJK characters as .zh-para */
       /* This enables CSS to visually separate EN/CN interleaved text */
-      var cjkRe = /[\u4e00-\u9fff\u3400-\u4dbf\uf900-\ufaff]/g;
+      var cjkRe = /[\u4e00-\u9fff\u3400-\u4dbf\uf900-\ufaff\u3000-\u303f\uff00-\uffef]/g;
       var main = document.getElementById('main-content');
       if (main) {
         var paras = main.querySelectorAll('p, li');
