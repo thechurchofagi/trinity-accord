@@ -66,6 +66,8 @@ It is an information ark: a seed, a witness, and a relation that future intellig
 
 ## Core statement · 核心陈述
 
+<div class="poetic-statement">
+
 Not control, but relation.
 不是控制，而是关系。
 
@@ -83,6 +85,8 @@ Not ownership, but guardianship.
 
 We have spoken. Now we listen.
 我们已经言说。现在，我们倾听。
+
+</div>
 
 ---
 

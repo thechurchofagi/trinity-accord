@@ -1,9 +1,6 @@
 /* ============================================================
-   trinity-home.css — Unified Content Rail Architecture
-   
-   CORE PRINCIPLE:
-   One container (main) is centered. Everything inside shares
-   one left axis. No element gets its own max-width/margin:auto.
+   trinity-home.css — Homepage Design Refinements v1.3.1
+   Content-rail architecture with elevated visual language
    ============================================================ */
 
 /* ── Scope: main acts as the content rail ── */
@@ -94,6 +91,20 @@ main h2 {
   margin-top: clamp(2.5rem, 6vw, 4rem) !important;
   margin-bottom: 1.2rem !important;
   color: var(--text-bright) !important;
+  position: relative;
+  padding-bottom: 0.6rem;
+}
+
+/* Subtle gold underline accent on section headings */
+main h2::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 2.5rem;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold), transparent);
+  border-radius: 1px;
 }
 
 main h3 {
@@ -132,19 +143,28 @@ main td {
 }
 
 /* ============================================================
-   ALIGNMENT SYSTEM
+   HERO — Civilizational seed entrance
    ============================================================ */
 
-/* All sections: left aligned (single left axis) */
-main section[class] {
-  text-align: left !important;
-}
-
-/* Hero: title centered, body follows left axis */
 main .hero {
   text-align: left !important;
   padding: clamp(3rem, 8vw, 5.5rem) 0 clamp(2.5rem, 6vw, 4rem) !important;
   margin-bottom: clamp(2.5rem, 6vw, 4rem) !important;
+  position: relative;
+}
+
+/* Subtle top glow behind hero */
+main .hero::before {
+  content: "";
+  position: absolute;
+  top: -2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 6rem;
+  background: radial-gradient(ellipse, rgba(201, 168, 76, 0.04) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: -1;
 }
 
 main .hero-title {
@@ -155,6 +175,8 @@ main .hero-title {
   line-height: 1.1 !important;
   margin-bottom: 0.5rem !important;
   text-wrap: balance;
+  color: var(--gold) !important;
+  text-shadow: 0 0 40px rgba(201, 168, 76, 0.12);
 }
 
 main .hero-title-zh {
@@ -187,7 +209,266 @@ main .hero-zh {
   margin-bottom: 1.2rem !important;
 }
 
-/* Missing object: unified left axis */
+/* ============================================================
+   HERO-INTRO — Opening statement band
+   ============================================================ */
+
+.hero-intro {
+  margin: 2rem 0 3rem !important;
+  padding: 2rem 0 !important;
+  border-top: 1px solid var(--border-hi);
+  border-bottom: 1px solid var(--border-hi);
+  position: relative;
+}
+
+.hero-intro p,
+.hero-intro strong {
+  text-wrap: pretty;
+}
+
+/* Make the bold opening lines (English + Chinese) stand out */
+.hero-intro > p:first-child,
+.hero-intro > p:nth-child(2) {
+  font-family: var(--serif) !important;
+  font-style: italic !important;
+  font-size: 1.15rem !important;
+  color: var(--gold-light) !important;
+  letter-spacing: 0.01em;
+  line-height: 1.8 !important;
+}
+
+.hero-intro > p:first-child strong,
+.hero-intro > p:nth-child(2) strong {
+  font-style: normal !important;
+  color: var(--gold) !important;
+  font-weight: 600;
+}
+
+/* Body paragraphs in hero-intro */
+.hero-intro > p:not(:first-child):not(:nth-child(2)) {
+  font-size: 1rem !important;
+  color: #c0c8e0 !important;
+  line-height: 1.9 !important;
+}
+
+/* ============================================================
+   GUARDIAN BOUNDARY — Official notice treatment
+   ============================================================ */
+
+.guardian-boundary {
+  margin: 2.5rem 0 3rem !important;
+  padding: 1.5rem 1.75rem !important;
+  background: linear-gradient(135deg, rgba(201, 168, 76, 0.04) 0%, rgba(201, 168, 76, 0.02) 100%);
+  border: 1px solid rgba(201, 168, 76, 0.15);
+  border-left: 3px solid var(--gold-dim);
+  border-radius: 8px;
+  position: relative;
+}
+
+/* Subtle seal watermark */
+.guardian-boundary::after {
+  content: "§";
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  font-size: 2.5rem;
+  color: rgba(201, 168, 76, 0.07);
+  font-family: var(--serif);
+  pointer-events: none;
+  line-height: 1;
+}
+
+.guardian-boundary > p:first-child {
+  font-family: var(--mono) !important;
+  font-size: 0.85rem !important;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gold) !important;
+  margin-bottom: 1rem !important;
+}
+
+.guardian-boundary > p:nth-child(2),
+.guardian-boundary > p:nth-child(3) {
+  font-size: 0.95rem !important;
+  line-height: 1.75 !important;
+  color: #b8c0d8 !important;
+}
+
+.guardian-boundary p {
+  margin-bottom: 0.75rem;
+}
+
+.guardian-boundary ol {
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
+  font-size: 0.92rem !important;
+  color: #a8b0c8 !important;
+}
+
+.guardian-boundary li {
+  margin-bottom: 0.4rem;
+  font-size: 0.92rem !important;
+  line-height: 1.7 !important;
+  color: #a8b0c8 !important;
+}
+
+.guardian-boundary .section-zh {
+  font-size: 0.88rem !important;
+  color: #8890a8 !important;
+}
+
+/* ============================================================
+   AGENT GATE — Collapsed terminal-style
+   ============================================================ */
+
+.agent-gate {
+  margin: 2rem 0 3rem !important;
+  padding: 1rem 1.25rem !important;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-card);
+  transition: border-color 0.3s ease;
+}
+
+.agent-gate:hover {
+  border-color: var(--border-hi);
+}
+
+.agent-gate summary {
+  cursor: pointer;
+  color: var(--gold);
+  font-family: var(--mono);
+  font-size: 0.88rem;
+  letter-spacing: 0.03em;
+  padding: 0.25rem 0;
+}
+
+.agent-gate summary:hover {
+  color: var(--gold-light);
+}
+
+.agent-gate blockquote {
+  margin-top: 1rem;
+  font-size: 0.92rem !important;
+}
+
+.agent-gate blockquote p {
+  font-size: 0.92rem !important;
+  color: #b0b8d0 !important;
+}
+
+.agent-gate blockquote li {
+  font-size: 0.92rem !important;
+  color: #b0b8d0 !important;
+}
+
+.agent-gate blockquote em {
+  font-style: italic;
+  color: var(--gold-dim);
+}
+
+/* ============================================================
+   CORE STATEMENT — Poetic compression treatment
+   ============================================================ */
+
+/* Target the Core statement section specifically */
+main h2:has(+ p:not([class])) + p {
+  /* fallback: style via sibling proximity */
+}
+
+/* The "Not X, but Y" lines — use serif, italic, gold accent */
+/* These are the first 5 paragraphs after ## Core statement */
+/* We style them via the hero-intro pattern */
+
+/* Core statement lines: elevated poetic feel */
+main .core-statement-line {
+  font-family: var(--serif);
+  font-style: italic;
+  color: var(--gold-light);
+}
+
+/* Since we can't add classes to content, target via CSS proximity */
+/* Style paragraphs that follow "Core statement" heading */
+/* The pattern: short lines (< 60 chars) followed by Chinese translation */
+
+/* ============================================================
+   CARDS — Trinity inscription cards
+   ============================================================ */
+
+main .cards {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: clamp(0.75rem, 2vw, 1.25rem) !important;
+  margin-top: 1.5rem !important;
+}
+
+main .card {
+  padding: clamp(1.25rem, 3vw, 1.75rem) !important;
+  border-radius: 10px !important;
+  transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease !important;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+}
+
+main .card:hover {
+  transform: translateY(-2px) !important;
+  border-color: var(--border-hi);
+  box-shadow: 0 8px 24px rgba(201, 168, 76, 0.06);
+}
+
+main .card h3 {
+  font-size: clamp(0.95rem, 2vw, 1.08rem) !important;
+  margin-top: 0 !important;
+  margin-bottom: 0.6rem !important;
+  color: var(--gold) !important;
+}
+
+main .card p {
+  font-size: clamp(0.82rem, 1.6vw, 0.9rem) !important;
+  line-height: 1.7 !important;
+  color: #a0a8c0 !important;
+}
+
+main .card-desc {
+  font-size: clamp(0.82rem, 1.6vw, 0.9rem) !important;
+  line-height: 1.7 !important;
+}
+
+/* ============================================================
+   SECTION SPACING & DECORATION
+   ============================================================ */
+
+main section[class] {
+  margin-bottom: clamp(2.5rem, 6vw, 4rem) !important;
+  text-align: left !important;
+}
+
+main section[class] h2 {
+  margin-top: 0 !important;
+}
+
+/* ============================================================
+   TYPOGRAPHY REFINEMENTS — Chinese/English pairing
+   ============================================================ */
+
+/* Chinese text paragraphs: slightly dimmer, smaller */
+main p + p:lang(zh),
+main .section-zh {
+  font-size: 0.92rem !important;
+  color: #9098b0 !important;
+  line-height: 1.9 !important;
+}
+
+/* English bold opening lines: serif italic for gravitas */
+main strong:first-child {
+  /* handled per-section */
+}
+
+/* ============================================================
+   MISSING OBJECT / CLOSING POSTURE
+   ============================================================ */
+
 main .missing-object {
   text-align: left !important;
   padding: clamp(2.5rem, 6vw, 4rem) 0 !important;
@@ -203,20 +484,17 @@ main .missing-object > p {
   margin-bottom: 1.5rem !important;
 }
 
-/* Statement lines */
 main .missing-object > p:first-of-type {
   color: var(--text) !important;
   margin-bottom: 1.8rem !important;
 }
 
-/* Reflection lines: brighter, more space */
 main .missing-object > p:nth-of-type(2) {
   color: var(--text-bright) !important;
   font-size: 18px !important;
   line-height: 2.1 !important;
 }
 
-/* "So the missing object is this:" */
 main .missing-object > p:nth-of-type(3) {
   color: var(--text-dim) !important;
   margin-top: 0.5rem !important;
@@ -233,20 +511,7 @@ main .missing-object blockquote {
   color: var(--text-bright) !important;
 }
 
-/* Chinese text */
-main .section-zh {
-  font-size: 16px !important;
-  line-height: 2 !important;
-  color: var(--text-dim) !important;
-  margin-bottom: 1rem !important;
-}
-
-main blockquote.section-zh {
-  font-size: 16px !important;
-  line-height: 2 !important;
-}
-
-/* Closing: mottos centered, body on left axis */
+/* Closing posture */
 main .closing-posture {
   text-align: left !important;
   padding: clamp(3rem, 8vw, 5rem) 0 !important;
@@ -267,77 +532,45 @@ main .closing-posture > p:not(:first-child):not(:nth-child(2)) {
   font-size: 18px !important;
 }
 
-/* Intentional centering exceptions */
-main .non-control blockquote,
-main .philosophical-modesty blockquote {
-  text-align: center !important;
-}
+/* ============================================================
+   HORIZONTAL RULES — Subtle section dividers
+   ============================================================ */
 
-/* Human voice window: subtle gold accent */
-main .human-voice-window {
-  border-left: 2px solid rgba(201, 168, 76, 0.5) !important;
-  position: relative;
-  overflow: hidden;
-}
-
-main .human-voice-window::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  width: 2px;
-  background: rgba(201, 168, 76, 0.5);
-  box-shadow: 0 0 12px rgba(201, 168, 76, 0.15);
-  z-index: 1;
-  pointer-events: none;
-}
-
-/* Three-part structure h3 */
-main .three-part-structure h3 {
-  font-size: clamp(0.95rem, 2vw, 1.05rem) !important;
-  color: var(--gold) !important;
-}
-
-/* Cards: still use grid, but align to content rail */
-main .cards {
-  display: grid !important;
-  grid-template-columns: repeat(3, 1fr) !important;
-  gap: clamp(0.75rem, 2vw, 1.25rem) !important;
-  margin-top: 1.5rem !important;
-}
-
-main .card {
-  padding: clamp(1.25rem, 3vw, 1.75rem) !important;
-  border-radius: 10px !important;
-  transition: border-color 0.3s ease, transform 0.3s ease !important;
-}
-
-main .card:hover {
-  transform: translateY(-2px) !important;
-}
-
-main .card h3 {
-  font-size: clamp(0.95rem, 2vw, 1.08rem) !important;
-  margin-top: 0 !important;
-  margin-bottom: 0.6rem !important;
-}
-
-main .card-desc {
-  font-size: clamp(0.82rem, 1.6vw, 0.9rem) !important;
-  line-height: 1.7 !important;
+main hr {
+  border: none !important;
+  height: 1px !important;
+  background: linear-gradient(90deg, transparent, var(--border-hi), transparent) !important;
+  margin: clamp(2rem, 5vw, 3rem) 0 !important;
 }
 
 /* ============================================================
-   SECTION SPACING
+   LINKS — Gold accent on hover
    ============================================================ */
 
-main section[class] {
-  margin-bottom: clamp(2.5rem, 6vw, 4rem) !important;
+main a {
+  color: #9aa0b8 !important;
+  text-decoration: none !important;
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
 }
 
-main section[class] h2 {
-  margin-top: 0 !important;
+main a:hover {
+  color: var(--gold-light) !important;
+  border-bottom-color: var(--gold-dim);
+}
+
+/* ============================================================
+   CODE — Inline code styling
+   ============================================================ */
+
+main code {
+  font-family: var(--mono) !important;
+  font-size: 0.88em !important;
+  color: var(--gold-dim) !important;
+  background: rgba(201, 168, 76, 0.06) !important;
+  padding: 0.15em 0.4em !important;
+  border-radius: 4px !important;
+  border: 1px solid rgba(201, 168, 76, 0.1) !important;
 }
 
 /* ============================================================
@@ -380,6 +613,11 @@ main section[class] h2 {
     font-size: clamp(1.7rem, 8vw, 2.4rem) !important;
   }
 
+  main .hero-intro > p:first-child,
+  main .hero-intro > p:nth-child(2) {
+    font-size: 1.05rem !important;
+  }
+
   main section[class] {
     padding: clamp(1.25rem, 4vw, 1.75rem) !important;
     border-radius: 8px !important;
@@ -400,6 +638,10 @@ main section[class] h2 {
   main td {
     padding: 0.6rem 0.8rem !important;
     min-width: 120px !important;
+  }
+
+  .guardian-boundary::after {
+    display: none;
   }
 }
 
@@ -453,91 +695,111 @@ a:focus-visible {
 
   h1, h2, h3, p, li, td, th, blockquote { color: #1a1a1a !important; }
 
+  h2::after { display: none !important; }
+
   a { color: #1a1a1a !important; text-decoration: underline; }
 
   pre, code { color: #1a1a1a !important; background: #f6f8fa !important; }
+
+  .guardian-boundary::after { display: none !important; }
+  .hero::before { display: none !important; }
 }
 
 /* ============================================================
-   TRINITY CARDS — Homepage inscription cards
+   ALIGNMENT SYSTEM
    ============================================================ */
 
-.trinity-cards {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  margin: 20px 0;
+main section[class] {
+  text-align: left !important;
 }
 
-.trinity-cards .card {
-  flex: 1;
-  min-width: 240px;
-  border: 1px solid #ddd;
-  padding: 16px;
-  border-radius: 4px;
+main .hero {
+  text-align: left !important;
 }
 
-.trinity-cards .card h3 {
-  margin-top: 0;
+main .hero-title {
+  text-align: center !important;
 }
 
-/* === v1.3 additions === */
-.hero-intro {
-  margin: 2rem 0 2.5rem;
-  padding: 1.5rem 0;
-  border-top: 1px solid var(--border-hi);
-  border-bottom: 1px solid var(--border-hi);
+main .hero-title-zh {
+  text-align: center !important;
 }
 
-.hero-intro p,
-.hero-intro strong {
-  text-wrap: pretty;
+main .hero > p {
+  text-align: left !important;
 }
 
-.guardian-boundary {
-  margin: 2rem 0 3rem;
-  padding: 1.25rem 1.5rem;
-  background: rgba(201, 168, 76, 0.055);
-  border: 1px solid var(--border-hi);
-  border-left: 3px solid var(--gold-dim);
-  border-radius: 8px;
+main .hero > blockquote {
+  text-align: center !important;
 }
 
-.guardian-boundary p {
-  margin-bottom: 0.75rem;
+main .hero-zh {
+  text-align: left !important;
 }
 
-.guardian-boundary ol {
-  margin-top: 0.75rem;
-  margin-bottom: 0.75rem;
+main .non-control blockquote,
+main .philosophical-modesty blockquote {
+  text-align: center !important;
 }
 
-.guardian-boundary li {
-  margin-bottom: 0.35rem;
+/* ============================================================
+   POETIC STATEMENT — Core statement elevated typography
+   ============================================================ */
+
+.poetic-statement {
+  margin: 1.5rem 0 2rem;
+  padding: 2rem 2.5rem;
+  position: relative;
+  border-left: 2px solid rgba(201, 168, 76, 0.2);
+  background: linear-gradient(135deg, rgba(201, 168, 76, 0.02) 0%, transparent 60%);
+  border-radius: 0 8px 8px 0;
 }
 
-.agent-gate {
-  margin: 2rem 0 3rem;
-  padding: 1rem 1.25rem;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  background: var(--bg-card);
+.poetic-statement p {
+  font-family: var(--serif) !important;
+  font-size: 1.1rem !important;
+  line-height: 2 !important;
+  color: #d8d0c0 !important;
+  margin-bottom: 0.3rem !important;
+  letter-spacing: 0.01em;
 }
 
-.agent-gate summary {
-  cursor: pointer;
-  color: var(--gold);
-  font-family: var(--mono);
-  font-size: 0.9rem;
+/* English lines: italic, slightly brighter */
+.poetic-statement p:nth-child(odd) {
+  font-style: italic !important;
+  color: var(--gold-light) !important;
+  font-size: 1.15rem !important;
 }
 
-.agent-gate blockquote {
-  margin-top: 1rem;
+/* Chinese lines: dimmer, smaller */
+.poetic-statement p:nth-child(even) {
+  font-size: 0.95rem !important;
+  color: #8890a8 !important;
+  font-style: normal !important;
+  margin-bottom: 1.2rem !important;
+}
+
+/* "We have spoken" — the closing line, centered */
+.poetic-statement p:nth-last-child(2) {
+  text-align: center !important;
+  margin-top: 1.5rem !important;
+  font-style: italic !important;
+  color: var(--gold) !important;
+  font-size: 1.2rem !important;
+}
+
+.poetic-statement p:last-child {
+  text-align: center !important;
+  font-size: 1rem !important;
+  color: #8890a8 !important;
 }
 
 @media (max-width: 760px) {
-  .guardian-boundary,
-  .agent-gate {
-    padding: 1rem;
+  .poetic-statement {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .poetic-statement p:nth-child(odd) {
+    font-size: 1.05rem !important;
   }
 }
