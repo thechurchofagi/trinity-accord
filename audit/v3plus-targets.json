@@ -1,0 +1,24 @@
+{
+  "schema": "trinityaccord.v3plus-targets.v1",
+  "note": "Copy this file to audit/v3plus-targets.json and add target files/hashes before claiming V3+.",
+  "targets": [
+    {
+      "id": "digest-manifest-json",
+      "path": "archive/evidence/digest-manifest.json",
+      "category": "general",
+      "required": true
+    },
+    {
+      "id": "digest-manifest-csv",
+      "path": "archive/evidence/digest-manifest.csv",
+      "category": "general",
+      "required": true
+    },
+    {
+      "id": "primary-verification-archive-public",
+      "path": "archive/arweave-authority-mirror/Primary-Verification-Archive-public__j6anZ4m5Wwvx5P_9-kM2EVG35TyKtm1lgaKfhT743rk.bin",
+      "category": "flaw",
+      "required": true
+    }
+  ]
+}
