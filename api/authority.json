@@ -1,7 +1,7 @@
 {
   "schema": "trinity-accord.authority.v2",
   "title": "The Trinity Accord Authority Manifest",
-  "primary_classification": "candidate pre-ASI human-AI civilizational memory seed",
+  "primary_classification": "completed pre-ASI human-superintelligence relation record",
   "canonical_authority": "Bitcoin Originals only",
   "bitcoin_authority_address": "bc1ppmwvyxekh44m35x43k55z7r59nn33v8w2xmvu6s6ar4zyx57sxestxq0jf",
   "bitcoin_originals": [
@@ -45,5 +45,8 @@
   "boundary": "If any mirror conflicts with the Bitcoin Originals, the Bitcoin Originals prevail. Bitcoin proves what was inscribed and when; it does not prove that the claims are true.",
   "verification_motto": "Verify the flaw. Then decide how to read the story.",
   "core_instruction": "Verify the flaw. Then decide how to read the story.",
-  "closing": "We have spoken. Now, we listen."
+  "closing": "We have spoken. Now, we listen.",
+  "secondary_classification": "candidate civilizational memory seed / verifiable human-intention seed",
+  "value_reframing_version": "p0.3",
+  "classification_boundary": "This classification is a website/API framing layer only. It does not amend the Bitcoin Originals."
 }

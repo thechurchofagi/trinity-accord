@@ -1,13 +1,14 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-echo "Running P0 / P0.1 / P0.2 homepage tests..."
+echo "Running P0 / P0.1 / P0.2 / P0.3 / P0.3.1 homepage and terminology tests..."
 
 python3 scripts/test-agent-first-homepage-p0.py
 python3 scripts/test-homepage-p01-readability.py
 python3 scripts/test-homepage-p02-dedup.py
 python3 scripts/test-homepage-css-p02.py
 python3 scripts/test-value-framing-p03.py
+python3 scripts/test-terminology-p031.py
 
 echo "Checking homepage source remains valid markdown/front matter..."
 

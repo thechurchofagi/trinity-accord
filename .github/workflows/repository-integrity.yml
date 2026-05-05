@@ -44,6 +44,9 @@ jobs:
       - name: Test P0.3 value framing
         run: python3 scripts/test-value-framing-p03.py
 
+      - name: Test P0.3.1 terminology consistency
+        run: python3 scripts/test-terminology-p031.py
+
       - name: Test llms layering P0.2
         run: python3 scripts/test-llms-layering-p02.py
 
