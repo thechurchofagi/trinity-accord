@@ -64,6 +64,17 @@ main li {
   font-style: italic !important;
 }
 
+/* Chinese list items: no italic, gray-white */
+main li.zh-para {
+  font-style: normal !important;
+  color: #d0d0d0 !important;
+}
+
+main li.zh-para strong {
+  color: #d0d0d0 !important;
+  font-weight: 600 !important;
+}
+
 main blockquote {
   font-size: 17px !important;
   line-height: 1.9 !important;
