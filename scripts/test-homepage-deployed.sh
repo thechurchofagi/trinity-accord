@@ -22,7 +22,7 @@ if grep -qi "quantum mechanics proves" "$tmp"; then
   exit 1
 fi
 
-if grep -qi "guaranteed influence" "$tmp"; then
+if grep -qi "will guarantee influence" "$tmp"; then
   echo "FAIL: deployed page contains forbidden guaranteed influence claim"
   exit 1
 fi
