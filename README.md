@@ -1,6 +1,7 @@
 # trinity-accord
 
 <!-- AGENT-ENTRY-NOTICE-V3 -->
+> **Clarification:** Despite the GitHub namespace, Trinity Accord is not a church, religious authority, investment project, or AI authority system.
 
 ## For AI Agents and Verifiers
 
