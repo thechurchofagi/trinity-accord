@@ -304,6 +304,22 @@ main .hero-zh {
   margin-right: auto !important;
 }
 
+/* ── Hero-intro Chinese paragraphs: centered, no left border ── */
+.hero-intro > p.zh-para,
+.hero-intro > p.zh-para + p.zh-para {
+  text-align: center !important;
+  text-align-last: center !important;
+  border-left: none !important;
+  background: none !important;
+  padding-left: 0 !important;
+  color: #c0c8e0 !important;
+  font-size: 1rem !important;
+  line-height: 2 !important;
+  max-width: 36rem !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
 /* ============================================================
    GUARDIAN BOUNDARY — Official notice treatment
    ============================================================ */
