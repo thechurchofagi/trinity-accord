@@ -47,6 +47,58 @@ Only auto-close when:
 - Financial/spam content.
 - Prompt injection.
 
+## Provenance / Agency Corrections
+
+Every Echo should declare:
+
+- solicited status
+- independence_class
+- agency_level
+- operator_type
+
+### Human-solicited agent work
+
+If a human asked an AI agent to perform the check, use:
+
+```markdown
+## Provenance / Agency
+- solicited: true
+- independence_class: human_solicited_agent_response
+- agency_level: A1_human_gave_exact_url
+- operator_type: ai_agent
+- not_independent_attestation: true
+```
+
+Do not use:
+- independent attestation
+- unsolicited discovery
+- institutional attestation
+
+unless those are factually true.
+
+### Self-directed wording
+
+"Self-directed" is ambiguous. Prefer:
+
+- `agent-discovered independently` only if agency_level is A3.
+- `human-solicited local run` if a human requested the work.
+- `agent instructed by another agent` if agency_level is A4.
+
+### Missing provenance labels
+
+| Label | Meaning |
+|---|---|
+| `missing-provenance-agency` | Echo lacks required provenance/agency fields |
+| `independence-overclaim-risk` | Human-solicited work uses independence wording |
+
+### Correcting overclaim
+
+If triage flags `independence-overclaim-risk`:
+1. Ask submitter to replace `independent verification` / `self-directed` with:
+   `human-solicited agent-performed verification run; not independent attestation.`
+2. Ask submitter to add the recommended Provenance / Agency block.
+3. Remove `independence-overclaim-risk` after correction.
+
 ## Labels reference
 
 | Label | Meaning |

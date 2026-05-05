@@ -12,6 +12,14 @@ SCRIPT = os.path.join(os.path.dirname(__file__), "triage_echo_issue.py")
 PASS = 0
 FAIL = 0
 
+# Standard provenance block for test bodies (PA-002 requires these fields)
+PROVENANCE_BLOCK = (
+    "\nIndependence class: human_solicited_agent_response\n"
+    "Agency level: A1_human_gave_exact_url\n"
+    "Solicited: yes\n"
+    "Discovery source: human_directed\n"
+)
+
 
 def run_triage(env_overrides):
     """Run triage script with given env overrides, return parsed JSON result."""
@@ -78,6 +86,10 @@ test(
             "Verification level: V4+\n"
             "What I checked: reviewed script source, inputs, network access, output summary\n"
             "Limitations: none\n"
+            "Independence class: human_solicited_agent_response\n"
+            "Agency level: A1_human_gave_exact_url\n"
+            "Solicited: yes\n"
+            "Discovery source: human_directed\n"
             "Bitcoin Originals are final; all echoes are non-amending."
         ),
     },
@@ -94,6 +106,10 @@ test(
             "Verification level: V4+\n"
             "What I checked: reviewed script source, inputs, network access, output summary\n"
             "Limitations: limited to public data\n"
+            "Independence class: human_solicited_agent_response\n"
+            "Agency level: A1_human_gave_exact_url\n"
+            "Solicited: yes\n"
+            "Discovery source: human_directed\n"
             "Bitcoin Originals are final; all echoes are non-amending."
         ),
     },
@@ -112,6 +128,10 @@ test(
             "What I checked: reviewed the text\n"
             "Limitations: subjective\n"
             "This Echo does not modify the Trinity Accord.\n"
+            "Independence class: human_solicited_agent_response\n"
+            "Agency level: A1_human_gave_exact_url\n"
+            "Solicited: yes\n"
+            "Discovery source: human_directed\n"
             "Bitcoin Originals are final; all echoes are non-amending."
         ),
     },
@@ -129,6 +149,10 @@ test(
             "What I checked: reviewed the text\n"
             "Limitations: subjective\n"
             "This Echo does not amend the Trinity Accord.\n"
+            "Independence class: human_solicited_agent_response\n"
+            "Agency level: A1_human_gave_exact_url\n"
+            "Solicited: yes\n"
+            "Discovery source: human_directed\n"
             "Bitcoin Originals are final; all echoes are non-amending."
         ),
     },
@@ -146,6 +170,10 @@ test(
             "我检查了: 审阅文本\n"
             "局限: 主观判断\n"
             "本回响不修改三位一体协定。\n"
+            "独立性类别: human_solicited_agent_response\n"
+            "来源等级: A1_human_gave_exact_url\n"
+            "是否由人类要求: yes\n"
+            "发现来源: human_directed\n"
             "比特币三本体为最终权威；所有回响均非修订。"
         ),
     },
@@ -163,6 +191,10 @@ test(
             "我检查了: 审阅文本\n"
             "局限: 主观判断\n"
             "本回响不修订三位一体协定。\n"
+            "独立性类别: human_solicited_agent_response\n"
+            "来源等级: A1_human_gave_exact_url\n"
+            "是否由人类要求: yes\n"
+            "发现来源: human_directed\n"
             "比特币三本体为最终权威；所有回响均非修订。"
         ),
     },
@@ -180,6 +212,10 @@ test(
             "我检查了: 审阅文本\n"
             "局限: 主观判断\n"
             "所有回响均非修订。\n"
+            "独立性类别: human_solicited_agent_response\n"
+            "来源等级: A1_human_gave_exact_url\n"
+            "是否由人类要求: yes\n"
+            "发现来源: human_directed\n"
             "比特币三本体为最终权威；所有回响均非修订。"
         ),
     },
@@ -243,6 +279,10 @@ test(
             "Verification level: V1\n"
             "What I checked: reviewed the text\n"
             "Limitations: subjective\n"
+            "Independence class: human_solicited_agent_response\n"
+            "Agency level: A1_human_gave_exact_url\n"
+            "Solicited: yes\n"
+            "Discovery source: human_directed\n"
             "Bitcoin Originals are final; all echoes are non-amending."
         ),
         "RATE_LIMITED": "true",
@@ -261,6 +301,10 @@ test(
             "Verification level: V1\n"
             "What I checked: reviewed the text\n"
             "Limitations: subjective\n"
+            "Independence class: human_solicited_agent_response\n"
+            "Agency level: A1_human_gave_exact_url\n"
+            "Solicited: yes\n"
+            "Discovery source: human_directed\n"
             "Bitcoin Originals are final; all echoes are non-amending."
         ),
         "RATE_LIMITED": "true",
@@ -280,6 +324,10 @@ test(
             "Verification level: V3\n"
             "What I checked: looked at the code\n"
             "Limitations: partial view\n"
+            "Independence class: human_solicited_agent_response\n"
+            "Agency level: A1_human_gave_exact_url\n"
+            "Solicited: yes\n"
+            "Discovery source: human_directed\n"
             "Bitcoin Originals are final; all echoes are non-amending."
         ),
     },
@@ -299,6 +347,10 @@ test(
             "Limitations: partial view\n"
             "Computed hash: sha256sum output\n"
             "Tool: sha256sum command\n"
+            "Independence class: human_solicited_agent_response\n"
+            "Agency level: A1_human_gave_exact_url\n"
+            "Solicited: yes\n"
+            "Discovery source: human_directed\n"
             "Bitcoin Originals are final; all echoes are non-amending."
         ),
     },
@@ -315,6 +367,10 @@ test(
             "Verification level: V4\n"
             "What I checked: ran the script\n"
             "Limitations: only tested on Linux\n"
+            "Independence class: human_solicited_agent_response\n"
+            "Agency level: A1_human_gave_exact_url\n"
+            "Solicited: yes\n"
+            "Discovery source: human_directed\n"
             "Bitcoin Originals are final; all echoes are non-amending."
         ),
     },
@@ -332,6 +388,10 @@ test(
             "Verification level: V7\n"
             "What I checked: reviewed documentation\n"
             "Limitations: could not access physical object\n"
+            "Independence class: human_solicited_agent_response\n"
+            "Agency level: A1_human_gave_exact_url\n"
+            "Solicited: yes\n"
+            "Discovery source: human_directed\n"
             "Bitcoin Originals are final; all echoes are non-amending."
         ),
     },
@@ -350,6 +410,10 @@ test(
             "What I checked: onsite physical inspection of the crystal\n"
             "Limitations: single observer\n"
             "Onsite physical inspection performed on 2025-06-15. Custody log recorded.\n"
+            "Independence class: human_solicited_agent_response\n"
+            "Agency level: A1_human_gave_exact_url\n"
+            "Solicited: yes\n"
+            "Discovery source: human_directed\n"
             "Bitcoin Originals are final; all echoes are non-amending."
         ),
     },
@@ -366,6 +430,10 @@ test(
             "Verification level: V6\n"
             "What I checked: full verification\n"
             "Limitations: none\n"
+            "Independence class: human_solicited_agent_response\n"
+            "Agency level: A1_human_gave_exact_url\n"
+            "Solicited: yes\n"
+            "Discovery source: human_directed\n"
             "Bitcoin Originals are final; all echoes are non-amending."
         ),
     },
@@ -384,6 +452,10 @@ test(
             "Verification level: V1\n"
             "What I checked: read the text carefully\n"
             "Limitations: subjective interpretation\n"
+            "Independence class: human_solicited_agent_response\n"
+            "Agency level: A1_human_gave_exact_url\n"
+            "Solicited: yes\n"
+            "Discovery source: human_directed\n"
             "Bitcoin Originals are final; all echoes are non-amending."
         ),
     },
@@ -533,8 +605,8 @@ test(
         ),
     },
     expect_close=False,
-    expect_labels=["echo:missing-provenance"],
-    expect_comment_contains=["missing most v3 provenance fields"],
+    expect_labels=["missing-provenance-agency"],
+    expect_comment_contains=["missing required Provenance / Agency fields"],
 )
 
 test(

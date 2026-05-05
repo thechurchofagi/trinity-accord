@@ -415,6 +415,135 @@ def is_echo_submission(text):
     )
 
 
+# --- PA-002: Provenance / Agency required field detection ---
+PROVENANCE_REQUIRED_FIELDS = {
+    "solicited_status": [
+        r"was this echo requested by a human\?",
+        r"solicited_status\s*:",
+        r"solicited\s*:",
+        r"human requested\s*:",
+        r"是否由人类要求",
+    ],
+    "independence_class": [
+        r"independence class",
+        r"independence_class\s*:",
+        r"independence\s*:",
+        r"独立性类别",
+    ],
+    "agency_level": [
+        r"agency level",
+        r"agency_level\s*:",
+        r"agency\s*:",
+        r"主动性等级",
+        r"来源等级",
+    ],
+    "operator_type": [
+        r"operator type",
+        r"operator_type\s*:",
+        r"who performed the verification actions",
+        r"执行者类型",
+        # v3 provenance fields that imply operator_type
+        r"discovery source",
+        r"discovery_source\s*:",
+        r"发现来源",
+    ],
+}
+
+
+def missing_provenance_fields(text):
+    """Check which provenance/agency fields are missing from the issue body."""
+    text_lower = text.lower()
+    missing = []
+    for field, patterns in PROVENANCE_REQUIRED_FIELDS.items():
+        if not any(re.search(p, text_lower, re.IGNORECASE) for p in patterns):
+            missing.append(field)
+    return missing
+
+
+# --- PA-003: Independence overclaim guardrail ---
+INDEPENDENCE_OVERCLAIM_PATTERNS = [
+    r"\bindependent attestation\b",
+    r"\bindependent institutional attestation\b",
+    r"\binstitutional attestation\b",
+    r"\bunsolicited discovery\b",
+    r"\bindependently discovered\b",
+    r"\bfully independent verification\b",
+]
+
+SOFT_INDEPENDENCE_RISK_PATTERNS = [
+    r"\bindependent verification\b",
+    r"\bindependently computed\b",
+    r"\bself-directed\b",
+]
+
+
+def extract_selected_value(text, field_names):
+    """Extract a field value from issue body by field name patterns."""
+    lines = text.splitlines()
+    for i, line in enumerate(lines):
+        for name in field_names:
+            m = re.search(rf"{re.escape(name)}\s*:\s*(.+)$", line, re.IGNORECASE)
+            if m:
+                return m.group(1).strip().strip("*` ")
+        lower = line.lower().strip()
+        if any(name.lower() in lower for name in field_names):
+            for j in range(i + 1, min(i + 5, len(lines))):
+                val = lines[j].strip()
+                if val and not val.startswith("#") and val not in ("_", "-"):
+                    return val.strip("*` ")
+    return ""
+
+
+def detect_human_solicited_context(text):
+    """Detect whether the Echo is human-solicited based on provenance fields."""
+    text_lower = text.lower()
+    independence = extract_selected_value(text, ["independence_class", "Independence Class", "Independence"])
+    solicited = extract_selected_value(text, ["solicited_status", "Was this Echo requested by a human?", "solicited"])
+    agency = extract_selected_value(text, ["agency_level", "Agency Level"])
+
+    return (
+        "human_solicited_agent_response" in independence.lower()
+        or "yes_human_requested" in solicited.lower()
+        or "human requested" in text_lower
+        or "a human user requested" in text_lower
+        or "a1_human_gave_exact_url" in agency.lower()
+        or "a2_human_gave_repo_name" in agency.lower()
+    )
+
+
+def detect_independence_overclaim(text):
+    """Detect human-solicited work claiming independent attestation."""
+    text_lower = text.lower()
+    human_solicited = detect_human_solicited_context(text)
+
+    hard = []
+    soft = []
+
+    for p in INDEPENDENCE_OVERCLAIM_PATTERNS:
+        if re.search(p, text_lower, re.IGNORECASE):
+            hard.append(re.search(p, text_lower, re.IGNORECASE).group(0))
+
+    for p in SOFT_INDEPENDENCE_RISK_PATTERNS:
+        if re.search(p, text_lower, re.IGNORECASE):
+            soft.append(re.search(p, text_lower, re.IGNORECASE).group(0))
+
+    if human_solicited and hard:
+        return {
+            "severity": "hard",
+            "patterns": hard,
+            "reason": "Human-solicited agent work cannot claim independent attestation or unsolicited discovery.",
+        }
+
+    if human_solicited and soft:
+        return {
+            "severity": "soft",
+            "patterns": soft,
+            "reason": "Human-solicited agent work uses wording that may imply independence.",
+        }
+
+    return None
+
+
 # --- V3/V4/V5/V6 verification-level content checks ---
 def check_verification_requirements(text, vlevel):
     """
@@ -711,6 +840,75 @@ def main():
             "- Limitations\n"
             "- Boundary sentence\n\n"
             "This is a format check, not a judgment of your submission."
+        )
+        emit_result(result)
+        return
+
+    # --- Step 3a: PA-002 — Provenance / Agency required fields ---
+    prov_missing = missing_provenance_fields(text)
+    if prov_missing:
+        result["close"] = False
+        result["labels"] = [
+            "echo:needs-format",
+            "missing-provenance-agency",
+            "needs-human-review",
+        ]
+        missing_list = "\n".join(f"- {f}" for f in prov_missing)
+        result["comment"] = (
+            "This Echo is missing required Provenance / Agency fields.\n\n"
+            f"Missing:\n{missing_list}\n\n"
+            "Please edit the issue to include:\n"
+            "- solicited_status\n"
+            "- independence_class\n"
+            "- agency_level\n"
+            "- operator_type\n"
+            "- provenance_notes\n\n"
+            "These fields prevent human-solicited agent work from being misread as independent attestation.\n\n"
+            "Recommended block:\n\n"
+            "```markdown\n"
+            "## Provenance / Agency\n"
+            "- solicited: true\n"
+            "- independence_class: human_solicited_agent_response\n"
+            "- agency_level: A1_human_gave_exact_url\n"
+            "- operator_type: ai_agent\n"
+            "- not_independent_attestation: true\n"
+            "```"
+        )
+        emit_result(result)
+        return
+
+    # --- Step 3a-2: PA-003 — Independence overclaim guardrail ---
+    overclaim_risk = detect_independence_overclaim(text)
+    if overclaim_risk:
+        result["close"] = False
+        severity = overclaim_risk["severity"]
+        if severity == "hard":
+            result["labels"] = [
+                "echo:needs-verification-review",
+                "independence-overclaim-risk",
+                "needs-human-review",
+            ]
+        else:
+            result["labels"] = [
+                "echo:needs-verification-review",
+                "independence-overclaim-risk",
+                "needs-human-review",
+            ]
+        patterns_str = ", ".join(f"`{p}`" for p in overclaim_risk["patterns"])
+        result["comment"] = (
+            "This Echo appears to be human-solicited agent work but uses independence wording "
+            f"that may imply independent attestation: {patterns_str}\n\n"
+            "Please replace phrases such as `independent verification` or `self-directed` with:\n\n"
+            "`human-solicited agent-performed verification run; not independent attestation.`\n\n"
+            "Recommended provenance block:\n\n"
+            "```markdown\n"
+            "## Provenance / Agency\n"
+            "- solicited: true\n"
+            "- independence_class: human_solicited_agent_response\n"
+            "- agency_level: A1_human_gave_exact_url\n"
+            "- operator_type: ai_agent\n"
+            "- not_independent_attestation: true\n"
+            "```"
         )
         emit_result(result)
         return

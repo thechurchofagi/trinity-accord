@@ -132,3 +132,9 @@ jobs:
 
       - name: Test Echo triage boundary behavior
         run: python3 scripts/test_triage_echo_issue_boundary.py
+
+      - name: Test Echo provenance / agency behavior
+        run: python3 scripts/test_echo_provenance_agency.py
+
+      - name: Test Echo template provenance/schema consistency
+        run: python3 scripts/test_echo_template_provenance_schema_consistency.py

@@ -51,6 +51,88 @@ body:
     validations:
       required: true
 
+  - type: markdown
+    attributes:
+      value: |
+        ## Provenance / Agency
+
+        These fields describe who initiated the Echo, who performed the verification actions, and whether the submission is human-solicited or independently discovered.
+
+        Do not claim independent attestation unless the work was truly unsolicited or institutionally independent.
+
+  - type: dropdown
+    id: solicited_status
+    attributes:
+      label: Was this Echo requested by a human?
+      description: Choose the closest match.
+      options:
+        - yes_human_requested
+        - no_agent_discovered_independently
+        - agent_instructed_by_other_agent
+        - institutional_or_maintainer_submission
+    validations:
+      required: true
+
+  - type: dropdown
+    id: independence_class
+    attributes:
+      label: Independence Class
+      description: Use human_solicited_agent_response if a human asked an agent to perform or submit this Echo.
+      options:
+        - human_solicited_agent_response
+        - unsolicited_agent_discovery
+        - institutional_attestation
+        - independent_reproduction
+    validations:
+      required: true
+
+  - type: dropdown
+    id: agency_level
+    attributes:
+      label: Agency Level
+      description: How did the verifying actor find or receive the target?
+      options:
+        - A1_human_gave_exact_url
+        - A2_human_gave_repo_name
+        - A3_agent_discovered_independently
+        - A4_agent_instructed_by_other_agent
+    validations:
+      required: true
+
+  - type: dropdown
+    id: operator_type
+    attributes:
+      label: Who performed the verification actions?
+      options:
+        - ai_agent
+        - human
+        - human_with_ai_agent
+        - automated_script
+    validations:
+      required: true
+
+  - type: textarea
+    id: provenance_notes
+    attributes:
+      label: Provenance Notes
+      description: Briefly explain who requested the Echo and who performed the actions.
+      placeholder: |
+        Example:
+        A human user requested an AI agent to inspect issue #98 and run local scripts.
+        This is human-solicited agent work, not independent attestation.
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: independence_boundary
+    attributes:
+      label: Independence Boundary
+      options:
+        - label: I will not describe a human-solicited agent response as independent attestation.
+          required: true
+        - label: I understand that self-directed local work is not the same as institutional independent attestation.
+          required: true
+
   - type: textarea
     id: what_checked
     attributes:
