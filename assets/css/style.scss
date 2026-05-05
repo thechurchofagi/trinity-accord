@@ -364,6 +364,14 @@ main p[lang="zh-CN"] {
   color: #d0d0d0 !important;
 }
 
+/* Chinese bold text: same gray-white, not gold */
+main .zh-para strong,
+main li.zh-para strong,
+main p.zh-para strong {
+  color: #d0d0d0 !important;
+  font-weight: 600 !important;
+}
+
 /* ── Blockquotes ── */
 blockquote {
   border-left: 2px solid var(--gold-dim);
