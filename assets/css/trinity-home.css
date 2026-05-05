@@ -280,13 +280,13 @@ main .hero-zh {
   text-wrap: pretty;
 }
 
-/* Make the opening lines stand out — poetic, centered */
+/* Make the opening lines stand out — poetic, left-aligned */
 .hero-intro > p:first-child,
 .hero-intro > p:nth-child(2) {
   font-family: 'Times New Roman', 'SimSun', '宋体', serif !important;
   font-style: italic !important;
   font-size: 1rem !important;
-  text-align: center !important;
+  text-align: left !important;
   color: #d0d0d0 !important;
   letter-spacing: 0.01em;
   line-height: 2 !important;
@@ -300,15 +300,12 @@ main .hero-zh {
   font-weight: 600;
 }
 
-/* Body paragraphs in hero-intro — poetic centered layout */
+/* Body paragraphs in hero-intro — left-aligned layout */
 .hero-intro > p:not(:first-child):not(:nth-child(2)) {
-  text-align: center !important;
+  text-align: left !important;
   font-size: 1rem !important;
   color: #d0d0d0 !important;
   line-height: 2 !important;
-  max-width: 36rem !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
   font-style: italic !important;
 }
 
@@ -316,17 +313,14 @@ main .hero-zh {
 /* Must use "main" prefix to match specificity of "main p.zh-para" */
 main .hero-intro > p.zh-para,
 main .hero-intro > p.zh-para + p.zh-para {
-  text-align: center !important;
-  text-align-last: center !important;
+  text-align: left !important;
+  text-align-last: left !important;
   border-left: none !important;
   background: none !important;
   padding-left: 0 !important;
   color: #d0d0d0 !important;
   font-size: 1rem !important;
   line-height: 2 !important;
-  max-width: 36rem !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
   font-style: normal !important;
 }
 
