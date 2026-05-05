@@ -91,7 +91,7 @@
   width: 0;
   background: linear-gradient(90deg, var(--gold-dim), var(--gold), var(--gold-light));
   transition: width 0.1s linear;
-  box-shadow: 0 0 8px var(--gold-glow-hi);
+  box-shadow: 0 0 12px var(--gold-glow-hi), 0 0 4px var(--gold-glow);
 }
 
 /* ============================================================
@@ -172,6 +172,11 @@ main {
   letter-spacing: 0.04em;
   white-space: nowrap;
   flex-shrink: 0;
+  transition: text-shadow 0.3s ease;
+}
+
+.nav-brand:hover {
+  text-shadow: 0 0 12px rgba(201, 168, 76, 0.3);
 }
 
 .nav-links {
@@ -1181,6 +1186,18 @@ footer {
   padding: 3rem 1.5rem;
   text-align: center;
   background: var(--bg-card);
+  position: relative;
+}
+
+footer::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6rem;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
 }
 
 .footer-inner {

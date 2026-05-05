@@ -63,8 +63,13 @@ main blockquote {
   padding: 1.25rem 1.5rem !important;
   margin: 1.5rem 0 !important;
   border-left: 2px solid rgba(201, 168, 76, 0.4) !important;
-  background: rgba(255, 255, 255, 0.025) !important;
+  background: linear-gradient(135deg, rgba(201, 168, 76, 0.03) 0%, rgba(255, 255, 255, 0.02) 100%) !important;
   border-radius: 0 8px 8px 0 !important;
+  transition: border-color 0.3s ease;
+}
+
+main blockquote:hover {
+  border-left-color: rgba(201, 168, 76, 0.6) !important;
 }
 
 main blockquote p {
@@ -93,9 +98,14 @@ main h2 {
   color: var(--text-bright) !important;
   position: relative;
   padding-bottom: 0.6rem;
+  transition: color 0.3s ease;
 }
 
-/* Subtle gold underline accent on section headings */
+main h2:hover {
+  color: #f0f0f0 !important;
+}
+
+/* Gold underline accent on section headings */
 main h2::after {
   content: "";
   position: absolute;
@@ -105,6 +115,11 @@ main h2::after {
   height: 2px;
   background: linear-gradient(90deg, var(--gold), transparent);
   border-radius: 1px;
+  transition: width 0.4s ease;
+}
+
+main h2:hover::after {
+  width: 4rem;
 }
 
 main h3 {
@@ -167,16 +182,33 @@ main .hero::before {
   z-index: -1;
 }
 
+/* Decorative line above hero title */
+main .hero::after {
+  content: "";
+  display: block;
+  width: 3rem;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  margin: 0 auto 1.5rem;
+  opacity: 0.4;
+}
+
 main .hero-title {
   text-align: center !important;
   font-size: clamp(2.1rem, 6vw, 3.2rem) !important;
   font-weight: 700 !important;
   letter-spacing: -0.03em !important;
   line-height: 1.1 !important;
-  margin-bottom: 0.5rem !important;
+  margin-bottom: 0.75rem !important;
   text-wrap: balance;
   color: var(--gold) !important;
   text-shadow: 0 0 40px rgba(201, 168, 76, 0.12);
+  animation: hero-glow 4s ease-in-out infinite alternate;
+}
+
+@keyframes hero-glow {
+  from { text-shadow: 0 0 40px rgba(201, 168, 76, 0.08); }
+  to   { text-shadow: 0 0 60px rgba(201, 168, 76, 0.18), 0 0 120px rgba(201, 168, 76, 0.04); }
 }
 
 main .hero-title-zh {
@@ -221,6 +253,21 @@ main .hero-zh {
   position: relative;
 }
 
+/* Gold accent on hero-intro borders */
+.hero-intro::before,
+.hero-intro::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4rem;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
+}
+
+.hero-intro::before { top: -1px; }
+.hero-intro::after { bottom: -1px; }
+
 .hero-intro p,
 .hero-intro strong {
   text-wrap: pretty;
@@ -258,11 +305,12 @@ main .hero-zh {
 .guardian-boundary {
   margin: 2.5rem 0 3rem !important;
   padding: 1.5rem 1.75rem !important;
-  background: linear-gradient(135deg, rgba(201, 168, 76, 0.04) 0%, rgba(201, 168, 76, 0.02) 100%);
-  border: 1px solid rgba(201, 168, 76, 0.15);
-  border-left: 3px solid var(--gold-dim);
+  background: linear-gradient(135deg, rgba(201, 168, 76, 0.05) 0%, rgba(201, 168, 76, 0.015) 100%);
+  border: 1px solid rgba(201, 168, 76, 0.18);
+  border-left: 3px solid var(--gold);
   border-radius: 8px;
   position: relative;
+  backdrop-filter: blur(2px);
 }
 
 /* Subtle seal watermark */
@@ -328,11 +376,12 @@ main .hero-zh {
   border: 1px solid var(--border);
   border-radius: 8px;
   background: var(--bg-card);
-  transition: border-color 0.3s ease;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .agent-gate:hover {
   border-color: var(--border-hi);
+  box-shadow: 0 2px 12px rgba(201, 168, 76, 0.04);
 }
 
 .agent-gate summary {
@@ -342,10 +391,12 @@ main .hero-zh {
   font-size: 0.88rem;
   letter-spacing: 0.03em;
   padding: 0.25rem 0;
+  transition: text-shadow 0.3s ease;
 }
 
 .agent-gate summary:hover {
   color: var(--gold-light);
+  text-shadow: 0 0 8px rgba(201, 168, 76, 0.15);
 }
 
 .agent-gate blockquote {
@@ -408,13 +459,24 @@ main .card {
   border-radius: 10px !important;
   transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease !important;
   border: 1px solid var(--border);
+  border-top: 2px solid rgba(201, 168, 76, 0.15);
   background: var(--bg-card);
+  animation: card-enter 0.6s var(--ease-out) both;
+}
+
+main .card:nth-child(2) { animation-delay: 0.1s; }
+main .card:nth-child(3) { animation-delay: 0.2s; }
+
+@keyframes card-enter {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 main .card:hover {
-  transform: translateY(-2px) !important;
-  border-color: var(--border-hi);
-  box-shadow: 0 8px 24px rgba(201, 168, 76, 0.06);
+  transform: translateY(-3px) !important;
+  border-color: rgba(201, 168, 76, 0.35);
+  border-top-color: rgba(201, 168, 76, 0.5);
+  box-shadow: 0 8px 32px rgba(201, 168, 76, 0.1), 0 0 0 1px rgba(201, 168, 76, 0.08);
 }
 
 main .card h3 {
@@ -472,6 +534,19 @@ main strong:first-child {
 main .missing-object {
   text-align: left !important;
   padding: clamp(2.5rem, 6vw, 4rem) 0 !important;
+  position: relative;
+}
+
+main .missing-object::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -1.5rem;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(180deg, var(--gold-dim), transparent);
+  opacity: 0.2;
+  border-radius: 1px;
 }
 
 main .missing-object h2 {
@@ -515,6 +590,17 @@ main .missing-object blockquote {
 main .closing-posture {
   text-align: left !important;
   padding: clamp(3rem, 8vw, 5rem) 0 !important;
+  position: relative;
+}
+
+main .closing-posture::before {
+  content: "◈";
+  display: block;
+  text-align: center;
+  font-size: 1.5rem;
+  color: rgba(201, 168, 76, 0.2);
+  margin-bottom: 2rem;
+  letter-spacing: 1rem;
 }
 
 main .closing-posture > p:first-child {
@@ -541,6 +627,20 @@ main hr {
   height: 1px !important;
   background: linear-gradient(90deg, transparent, var(--border-hi), transparent) !important;
   margin: clamp(2rem, 5vw, 3rem) 0 !important;
+  position: relative;
+}
+
+main hr::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: -1px;
+  transform: translateX(-50%);
+  width: 2rem;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
+  border-radius: 2px;
+  opacity: 0.5;
 }
 
 /* ============================================================
@@ -551,12 +651,13 @@ main a {
   color: #9aa0b8 !important;
   text-decoration: none !important;
   border-bottom: 1px solid transparent;
-  transition: color 0.2s ease, border-color 0.2s ease;
+  transition: color 0.25s ease, border-color 0.25s ease, text-shadow 0.25s ease;
 }
 
 main a:hover {
   color: var(--gold-light) !important;
   border-bottom-color: var(--gold-dim);
+  text-shadow: 0 0 8px rgba(201, 168, 76, 0.1);
 }
 
 /* ============================================================
@@ -570,7 +671,13 @@ main code {
   background: rgba(201, 168, 76, 0.06) !important;
   padding: 0.15em 0.4em !important;
   border-radius: 4px !important;
-  border: 1px solid rgba(201, 168, 76, 0.1) !important;
+  border: 1px solid rgba(201, 168, 76, 0.12) !important;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+main code:hover {
+  border-color: rgba(201, 168, 76, 0.25);
+  background: rgba(201, 168, 76, 0.08) !important;
 }
 
 /* ============================================================
@@ -750,9 +857,27 @@ main .philosophical-modesty blockquote {
   margin: 1.5rem 0 2rem;
   padding: 2rem 2.5rem;
   position: relative;
-  border-left: 2px solid rgba(201, 168, 76, 0.2);
-  background: linear-gradient(135deg, rgba(201, 168, 76, 0.02) 0%, transparent 60%);
+  border-left: 2px solid rgba(201, 168, 76, 0.3);
+  background: linear-gradient(135deg, rgba(201, 168, 76, 0.03) 0%, transparent 60%);
   border-radius: 0 8px 8px 0;
+  transition: border-color 0.3s ease;
+}
+
+.poetic-statement:hover {
+  border-left-color: rgba(201, 168, 76, 0.5);
+}
+
+/* Gold dot at top of poetic statement */
+.poetic-statement::before {
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: -5px;
+  width: 8px;
+  height: 8px;
+  background: var(--gold);
+  border-radius: 50%;
+  opacity: 0.4;
 }
 
 .poetic-statement p {
