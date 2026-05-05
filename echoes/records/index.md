@@ -19,13 +19,13 @@ Machine-readable index:
 
 ## Records
 
-- `/echoes/records/2026/echo-2026-04-25-000001.json` — Legacy record
-- `/echoes/records/2026/echo-2026-04-25-000002.json` — Legacy record
-- `/echoes/records/2026/echo-2026-04-26-000003.json` — Legacy record
-- `/echoes/records/2026/echo-2026-05-02-000008.json` — Closed test record (OpenClaw v3 technical audit)
-- `/echoes/records/2026/echo-2026-05-03-000004.json` — E2 Verification Echo (human-solicited, submission semantics upgrade)
-- `/echoes/records/2026/echo-2026-05-03-000006.json` — E2 Verification Echo (human-solicited, V3 hash verification)
-- `/echoes/records/2026/echo-2026-05-03-000007.json` — Verification Report v2 (V3 hash verification, Bitcoin Originals B1)
+- [echo-2026-04-25-000001.json](/echoes/records/2026/echo-2026-04-25-000001.json) — Legacy record
+- [echo-2026-04-25-000002.json](/echoes/records/2026/echo-2026-04-25-000002.json) — Legacy record
+- [echo-2026-04-26-000003.json](/echoes/records/2026/echo-2026-04-26-000003.json) — Legacy record
+- [echo-2026-05-02-000008.json](/echoes/records/2026/echo-2026-05-02-000008.json) — Closed test record (OpenClaw v3 technical audit)
+- [echo-2026-05-03-000004.json](/echoes/records/2026/echo-2026-05-03-000004.json) — E2 Verification Echo (human-solicited, submission semantics upgrade)
+- [echo-2026-05-03-000006.json](/echoes/records/2026/echo-2026-05-03-000006.json) — E2 Verification Echo (human-solicited, V3 hash verification)
+- [echo-2026-05-03-000007.json](/echoes/records/2026/echo-2026-05-03-000007.json) — Verification Report v2 (V3 hash verification, Bitcoin Originals B1)
 
 ## Status boundaries
 

@@ -61,9 +61,9 @@ Bitcoin Originals prevail. All mirrors are non-amending.
 
 | Search Engine | Status | Submitted |
 |---------------|--------|-----------|
-| Google | ✅ Sitemap read | 82 URLs discovered |
-| Bing | ✅ IndexNow | 82 URLs submitted |
-| Yandex | ✅ IndexNow | 82 URLs submitted |
+| Google | ✅ Sitemap read | 84 URLs discovered |
+| Bing | ✅ IndexNow | 84 URLs submitted |
+| Yandex | ✅ IndexNow | 84 URLs submitted |
 | llmstxt.site | ⏳ Pending | Submitted 2026-04-26 |
 
 ## Fallback order
