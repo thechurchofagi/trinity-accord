@@ -930,59 +930,84 @@ main .philosophical-modesty blockquote {
 }
 
 /* ============================================================
-   BILINGUAL TYPOGRAPHY — Language-aware paragraph styling
-   Solves: EN/CN interleaving on mobile, Chinese alignment
+   BILINGUAL TYPOGRAPHY — Civilizational Will Aesthetic
+   Design: EN = body text, CN = archival translation
+   Each EN→CN pair forms one visual unit
    ============================================================ */
 
-/* ── Chinese paragraph detection via JS-injected class ── */
-/* JS adds .zh-para to paragraphs containing >40% CJK chars */
-
-/* Desktop: subtle differentiation */
+/* ── Chinese paragraphs: warm gold, left-accent, archival feel ── */
 main p.zh-para {
-  font-size: 0.92em !important;
-  color: #a0a8c0 !important;
-  line-height: 1.95 !important;
+  font-size: 0.9em !important;
+  color: #c4a05a !important;          /* warm muted gold — dignified, not cold */
+  line-height: 1.9 !important;
   text-align: left !important;
   text-align-last: left !important;
-  margin-top: -0.4rem !important;   /* pull closer to preceding EN paragraph */
-  margin-bottom: 1.4rem !important; /* push further from next EN paragraph */
-  padding-left: 0.75rem !important;
-  border-left: 2px solid rgba(201, 168, 76, 0.15) !important;
+  word-break: break-all !important;
+  overflow-wrap: break-word !important;
+  margin-top: 0.15rem !important;     /* tight to preceding EN paragraph */
+  margin-bottom: 1.6rem !important;   /* generous gap before next EN paragraph */
+  padding: 0.4rem 0 0.4rem 0.85rem !important;
+  border-left: 2.5px solid rgba(196, 160, 90, 0.35) !important;
+  background: linear-gradient(90deg, rgba(196, 160, 90, 0.04) 0%, transparent 60%) !important;
+  font-style: normal !important;
 }
 
-/* When two Chinese paragraphs are adjacent (no EN between them) */
+/* Adjacent Chinese paragraphs (multi-line CN blocks) */
 main p.zh-para + p.zh-para {
-  margin-top: 0.2rem !important;
-  border-left-color: rgba(201, 168, 76, 0.1) !important;
+  margin-top: 0 !important;
+  border-left-color: rgba(196, 160, 90, 0.2) !important;
+  background: linear-gradient(90deg, rgba(196, 160, 90, 0.025) 0%, transparent 60%) !important;
 }
 
-/* Mobile: stronger differentiation */
+/* List items in Chinese */
+main li.zh-para {
+  font-size: 0.88em !important;
+  color: #c4a05a !important;
+  margin-bottom: 0.2rem !important;
+  padding-left: 0.5rem !important;
+  border-left: none !important;
+  background: none !important;
+}
+
+/* ── Mobile: civilizational will reading experience ── */
 @media (max-width: 600px) {
+  /* Chinese paragraphs: clear visual separation */
   main p.zh-para {
-    font-size: 0.88em !important;
-    color: #9098b0 !important;
-    line-height: 2 !important;
-    padding-left: 0.6rem !important;
-    margin-top: -0.3rem !important;
-    margin-bottom: 1.5rem !important;
-    border-left-width: 2px !important;
+    font-size: 0.85em !important;
+    color: #b89550 !important;          /* slightly deeper gold on mobile */
+    line-height: 1.95 !important;
+    padding: 0.35rem 0 0.35rem 0.7rem !important;
+    margin-top: 0.1rem !important;
+    margin-bottom: 1.8rem !important;   /* clear block separation */
+    border-left-width: 3px !important;
+    border-left-color: rgba(196, 160, 90, 0.4) !important;
+    background: linear-gradient(90deg, rgba(196, 160, 90, 0.05) 0%, transparent 50%) !important;
   }
 
-  /* Tighter EN→CN grouping on mobile */
+  main p.zh-para + p.zh-para {
+    margin-top: -0.1rem !important;
+    margin-bottom: 0.3rem !important;
+  }
+
+  /* English paragraphs: clear, readable */
+  main p:not(.zh-para) {
+    margin-bottom: 0.5rem !important;
+  }
+
+  /* EN→CN gap: minimal (they're a pair) */
   main p:not(.zh-para) + p.zh-para {
-    margin-top: -0.2rem !important;
+    margin-top: 0 !important;
   }
 
-  /* Larger gap between EN paragraphs (separates bilingual blocks) */
-  main p:not(.zh-para) + p:not(.zh-para) {
-    margin-top: 0.3rem !important;
-    margin-bottom: 1.2rem !important;
+  /* CN→EN gap: generous (separates pairs) */
+  main p.zh-para + p:not(.zh-para) {
+    margin-top: 1.2rem !important;
   }
 
-  /* Smaller EN headings on mobile for better proportion */
+  /* Headings: clear hierarchy */
   main h2 {
     font-size: 1.15rem !important;
-    margin-top: 2rem !important;
+    margin-top: 2.2rem !important;
     margin-bottom: 0.8rem !important;
   }
 
@@ -990,15 +1015,15 @@ main p.zh-para + p.zh-para {
     font-size: 1rem !important;
   }
 
-  /* Ensure all text is left-aligned on mobile */
+  /* All text left-aligned */
   main p, main li, main blockquote {
     text-align: left !important;
     text-align-last: left !important;
   }
 
-  /* Guardian boundary: tighter padding on mobile */
+  /* Guardian boundary */
   .guardian-boundary {
-    padding: 1rem 1rem !important;
+    padding: 1rem !important;
     margin: 1.5rem 0 !important;
   }
 
@@ -1006,51 +1031,31 @@ main p.zh-para + p.zh-para {
     padding-left: 1.2rem !important;
   }
 
-  /* Agent gate: full-width on mobile */
+  /* Agent gate */
   .agent-gate {
     padding: 0.75rem 1rem !important;
   }
 
-  /* Hero intro: reduce top/bottom padding */
+  /* Hero intro */
   .hero-intro {
     padding: 1.25rem 0 !important;
     margin: 1rem 0 2rem !important;
   }
 
-  /* Poetic statement: tighter on mobile */
+  /* Poetic statement */
   .poetic-statement {
-    padding: 1rem 1rem !important;
+    padding: 1rem !important;
   }
-}
 
-/* ── Chinese text global alignment (all breakpoints) ── */
-main p:lang(zh),
-main li:lang(zh),
-main blockquote:lang(zh) {
-  text-align: left !important;
-  text-align-last: left !important;
-  word-break: break-all !important;
-  overflow-wrap: break-word !important;
-}
-
-/* ── List items: bilingual treatment ── */
-main li.zh-para {
-  font-size: 0.9em !important;
-  color: #a0a8c0 !important;
-  margin-bottom: 0.3rem !important;
-  padding-left: 0.5rem !important;
-}
-
-/* ── Links: ensure tappable on mobile ── */
-@media (max-width: 600px) {
+  /* Links: tappable */
   main a {
-    min-height: 44px !important;  /* Apple HIG minimum tap target */
+    min-height: 44px !important;
     display: inline !important;
     padding: 0.15em 0 !important;
     word-break: break-all !important;
   }
 
-  /* Footer links: stacked on mobile */
+  /* Footer */
   .footer-links {
     display: flex !important;
     flex-wrap: wrap !important;
@@ -1062,29 +1067,34 @@ main li.zh-para {
     font-size: 0.8rem !important;
     padding: 0.3rem 0.5rem !important;
   }
+
+  /* Nav */
+  .reading-progress { height: 2px !important; }
+  .topnav { padding: 0.5rem 1rem !important; }
+  .nav-brand { font-size: 0.85rem !important; }
+  .nav-links { padding: 0.75rem 1rem !important; }
+  .nav-links a { padding: 0.5rem 0 !important; font-size: 0.9rem !important; }
 }
 
-/* ── Reading progress bar: thinner on mobile ── */
-@media (max-width: 600px) {
-  .reading-progress {
-    height: 2px !important;
-  }
+/* ── Hero section: special bilingual treatment ── */
+/* The hero-intro opening lines need more ceremony */
+.hero-intro > p.zh-para:first-of-type,
+.hero-intro > p.zh-para:nth-of-type(2) {
+  font-family: var(--serif) !important;
+  font-size: 0.95em !important;
+  color: #d4b06a !important;
+  letter-spacing: 0.02em;
+}
 
-  /* Nav: compact on mobile */
-  .topnav {
-    padding: 0.5rem 1rem !important;
-  }
-
-  .nav-brand {
-    font-size: 0.85rem !important;
-  }
-
-  .nav-links {
-    padding: 0.75rem 1rem !important;
-  }
-
-  .nav-links a {
-    padding: 0.5rem 0 !important;
-    font-size: 0.9rem !important;
-  }
+/* ── Poetic statement: already has nth-child styling, enhance CN ── */
+.poetic-statement p.zh-para {
+  font-size: 0.88em !important;
+  color: #b89550 !important;
+  border-left: none !important;
+  background: none !important;
+  padding-left: 0 !important;
+  text-align: center !important;
+  font-style: normal !important;
+  margin-top: 0 !important;
+  margin-bottom: 1.2rem !important;
 }
