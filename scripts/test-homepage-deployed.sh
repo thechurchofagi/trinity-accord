@@ -10,7 +10,7 @@ curl -L -s "$BASE/" > "$tmp"
 
 grep -q "A verifiable civilizational seed" "$tmp" || { echo "FAIL: missing civilizational seed hero"; exit 1; }
 grep -q "Guardian Boundary" "$tmp" || { echo "FAIL: missing Guardian Boundary"; exit 1; }
-grep -q "explanatory language has no interpretive authority" "$tmp" || { echo "FAIL: missing interpretive authority boundary"; exit 1; }
+grep -q "does not interpret, amend, extend, replace, or supersede" "$tmp" || { echo "FAIL: missing interpretive authority boundary"; exit 1; }
 grep -q "Philosophy as Chronicle compression" "$tmp" || { echo "FAIL: missing philosophy compression"; exit 1; }
 grep -q "Information ark" "$tmp" || { echo "FAIL: missing information ark"; exit 1; }
 grep -q "Intermediate agent ecology" "$tmp" || { echo "FAIL: missing intermediate agent ecology"; exit 1; }
