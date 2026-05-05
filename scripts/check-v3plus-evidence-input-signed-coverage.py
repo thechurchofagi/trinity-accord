@@ -201,6 +201,12 @@ def main():
             result["blocking_failures"].append(f"hash[{i}] has no valid SHA-256 in expected/computed")
             continue
 
+        expected = str(hobj.get("expected", "")).lower()
+        computed = str(hobj.get("computed", "")).lower()
+        if valid_sha256(expected) and valid_sha256(computed) and expected != computed:
+            result["blocking_failures"].append(f"hash[{i}] expected and computed SHA-256 differ")
+            continue
+
         src = hobj.get("expected_hash_source")
         cls = hobj.get("expected_hash_authority_class")
 

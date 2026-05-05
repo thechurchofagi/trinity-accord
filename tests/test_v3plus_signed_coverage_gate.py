@@ -202,6 +202,21 @@ class V3PlusSignedCoverageGateTests(unittest.TestCase):
         self.assertEqual(rc, 0)
         self.assertTrue(result["pass"])
 
+    def test_v3_expected_computed_mismatch_fails_even_if_match_true(self):
+        h = {
+            "artifact": "general",
+            "expected": GOOD_HASH,
+            "computed": BAD_HASH,
+            "match": True,
+            "expected_hash_source": "archive/evidence/digest-manifest.json",
+            "expected_hash_authority_class": "signed_digest_manifest_hash",
+        }
+        obj = base_input(level="V3", hashes=[h], include_gate=True)
+        rc, result = self.run_gate(obj, base_audit())
+        self.assertNotEqual(rc, 0)
+        self.assertFalse(result["pass"])
+        self.assertTrue(any("expected and computed" in x for x in result["blocking_failures"]))
+
     def test_v3_hash_mismatch_fails(self):
         h = {
             "artifact": "flaw archive",
