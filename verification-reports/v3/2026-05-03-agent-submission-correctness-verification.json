@@ -405,5 +405,9 @@
     "generated_at_utc": "2026-05-04T10:20:52Z",
     "validation_command": "python3 scripts/validate_agent_submission.py",
     "validation_result": "PASS"
-  }
+  },
+  "archive_status": "superseded",
+  "verification_status": "invalidated",
+  "do_not_count_as_attestation": true,
+  "superseded_reason": "Internal inconsistency and invalid hash field values; not accepted as verification."
 }

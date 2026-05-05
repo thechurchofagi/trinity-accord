@@ -28,7 +28,10 @@
     "blake3": ""
   },
   "legacy_schema": true,
-  "archive_status": "legacy",
+  "archive_status": "superseded",
   "legacy_note": "Pre-v3 record without discovery provenance. Retained for historical reference only.",
-  "record_kind": "legacy_record"
+  "record_kind": "legacy_record",
+  "verification_status": "invalidated",
+  "do_not_count_as_attestation": true,
+  "superseded_reason": "Internal inconsistency and invalid hash field values; not accepted as verification."
 }

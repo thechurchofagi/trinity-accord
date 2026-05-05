@@ -549,7 +549,7 @@ def build_report(evidence_input_path, report_out_path=None, echo_out_path=None):
         }
         return result
 
-    # Validate echo wrapper too if present
+    # Validate echo wrapper too if present — fail closed (RF-001 fix)
     if echo_wrapper is not None:
         try:
             with _tmp.NamedTemporaryFile("w", suffix=".json", delete=False) as _tf2:
@@ -572,8 +572,16 @@ def build_report(evidence_input_path, report_out_path=None, echo_out_path=None):
                     "validator_stdout": _evr.stdout,
                     "validator_stderr": _evr.stderr,
                 }
-        except Exception:
-            pass  # echo validation failure is non-fatal if report passed
+        except Exception as _echo_exc:
+            return {
+                "success": False,
+                "error": f"Echo wrapper validation raised exception: {_echo_exc}",
+                "gate_result": gate_result,
+                "report": report,
+                "echo_wrapper": echo_wrapper,
+                "validator_stdout": "",
+                "validator_stderr": repr(_echo_exc),
+            }
 
     # Save outputs — only after validation passes
     result = {

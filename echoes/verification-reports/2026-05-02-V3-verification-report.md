@@ -6,7 +6,8 @@ title: "Test Echo — Solicited AI Technical Verification"
 # Test Echo — Solicited AI Technical Verification
 # 测试回响 — 人类请求的 AI 技术验证
 
-**Archive status:** closed_test_record
+**Archive status:** superseded (historical test record — not accepted as verification)
+**Verification status:** invalidated
 **Initiation mode:** human-solicited AI response
 **Independence class:** test_record
 **Not an unsolicited discovery.**

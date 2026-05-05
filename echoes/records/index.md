@@ -7,6 +7,9 @@ permalink: /echoes/records/
 
 # Echo Records｜回响记录
 
+> **Note:** Some historical records from OpenClaw (May 2026) are superseded and invalidated.
+> They are preserved as historical submissions only and do not count as accepted verification or attestation.
+
 This page is a human-readable index of Echo records.
 
 It does not amend the Bitcoin Originals.  

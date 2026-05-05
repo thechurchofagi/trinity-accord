@@ -318,5 +318,9 @@
     "body hash reproduced",
     "independent attestation"
   ],
-  "authority_boundary_preserved": true
+  "authority_boundary_preserved": true,
+  "archive_status": "superseded",
+  "verification_status": "invalidated",
+  "do_not_count_as_attestation": true,
+  "superseded_reason": "Internal inconsistency and invalid hash field values; not accepted as verification."
 }

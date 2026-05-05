@@ -7,11 +7,14 @@ Usage:
     python3 scripts/validate_agent_submission.py --self-test
 """
 import json
+import re
 import sys
 import os
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+
+SHA256_RE = re.compile(r"^[a-f0-9]{64}$")
 
 # Try jsonschema; fall back to basic checks
 try:
@@ -384,18 +387,66 @@ def validate_c3_samples(obj, path_label):
 
 
 def validate_p8_confidential(obj, path_label):
-    """Rule I: P8 confidentiality."""
+    """Rule I: P8 confidentiality.
+
+    If confidential_challenge.performed is true, public report must include:
+    - non-empty confidentiality_boundary
+    - raw_confidential_data_disclosed is False
+    - 64-hex package_hash
+    - verifier_identity_or_role
+    - report_id or report_path
+    """
     ok = True
     cc = obj.get("confidential_challenge", {})
-    if isinstance(cc, dict) and cc.get("performed") is True:
-        # Check no raw confidential data in public report
-        all_text = json.dumps(obj, ensure_ascii=False).lower()
-        if "confidential_data" in all_text and "raw" in all_text:
-            ok &= check(False, f"{path_label} P8 may leak confidential data")
-        ok &= check(
-            cc.get("confidentiality_boundary") is not None,
-            f"{path_label} P8 has confidentiality_boundary"
-        )
+
+    if not (isinstance(cc, dict) and cc.get("performed") is True):
+        return ok
+
+    # Never leak raw confidential data.
+    # Exclude known safe field names from the check to avoid false positives.
+    all_text = json.dumps(obj, ensure_ascii=False).lower()
+    # Remove known safe field names before checking
+    safe_replacements = [
+        "raw_confidential_data_disclosed",
+        "raw_confidential_data",
+    ]
+    check_text = all_text
+    for safe in safe_replacements:
+        check_text = check_text.replace(safe, "")
+    if "confidential_data" in check_text and "raw" in check_text:
+        ok &= check(False, f"{path_label} P8 may leak confidential data")
+
+    boundary = cc.get("confidentiality_boundary", "")
+    ok &= check(
+        isinstance(boundary, str) and boundary.strip() != "",
+        f"{path_label} P8 has non-empty confidentiality_boundary"
+    )
+
+    ok &= check(
+        cc.get("raw_confidential_data_disclosed") is False,
+        f"{path_label} P8 raw_confidential_data_disclosed is false"
+    )
+
+    package_hash = cc.get("package_hash", "")
+    ok &= check(
+        isinstance(package_hash, str) and SHA256_RE.match(package_hash.lower()) is not None,
+        f"{path_label} P8 has valid 64-hex package_hash",
+        f"got: {package_hash}"
+    )
+
+    verifier = cc.get("verifier_identity_or_role", "")
+    ok &= check(
+        isinstance(verifier, str) and verifier.strip() != "",
+        f"{path_label} P8 has verifier_identity_or_role"
+    )
+
+    report_id = cc.get("report_id", "")
+    report_path = cc.get("report_path", "")
+    ok &= check(
+        bool(str(report_id).strip() or str(report_path).strip()),
+        f"{path_label} P8 has report_id or report_path"
+    )
+
     return ok
 
 

@@ -67,3 +67,21 @@ jobs:
 
       - name: Test freeform submission rejection
         run: python3 scripts/test_freeform_submission_rejection.py
+
+      - name: Test Claim Gate high-level hard gates
+        run: python3 scripts/test_claim_gate_high_level_hard_gates.py
+
+      - name: Test Report Builder fail-closed behavior
+        run: python3 scripts/test_report_builder_fail_closed.py
+
+      - name: Test confidential challenge report fields
+        run: python3 scripts/test_confidential_challenge_report_fields.py
+
+      - name: Test workflow dispatch input safety
+        run: python3 scripts/test_workflow_dispatch_input_safety.py
+
+      - name: Test invalid V4 Echo records are not indexed
+        run: python3 scripts/test_no_invalid_v4_echoes_indexed.py
+
+      - name: Test deprecated worker active src has no legacy submit logic
+        run: python3 scripts/test_deprecated_worker_no_legacy_submit_logic.py

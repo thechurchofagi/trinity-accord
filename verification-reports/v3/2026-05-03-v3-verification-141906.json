@@ -6,7 +6,12 @@
     "name": "OpenClaw Agent",
     "type": "ai_agent",
     "version": "MiMo v2.5 Pro",
-    "tooling": ["sha256sum", "mempool.space API", "git", "python3"]
+    "tooling": [
+      "sha256sum",
+      "mempool.space API",
+      "git",
+      "python3"
+    ]
   },
   "discovery_provenance": {
     "schema": "trinityaccord.discovery-provenance.v1",
@@ -26,7 +31,10 @@
       "component": "bitcoin_originals",
       "level_claimed": "B1",
       "target_id": "bitcoin_originals_all_three",
-      "data_sources": ["api/authority.json", "mempool.space API"],
+      "data_sources": [
+        "api/authority.json",
+        "mempool.space API"
+      ],
       "access_paths": [
         "https://mempool.space/tx/e40dfb2aa78cbccca88f749e9ec5cbe3c1df503273d73c72297863ae0d1d8343",
         "https://mempool.space/tx/90116f35de075074f5e5d1fbdda69a646a124e2287d7d58e2520317098cd4258",
@@ -34,21 +42,48 @@
       ],
       "method": "mempool.space API showed transaction data and witness data availability; no independent Ordinals witness extraction, inscription body parsing, SPV proof, local node verification, or body hash reproduction was performed.",
       "evidence": [
-        {"type": "mempool_api_response", "txid": "e40dfb2aa78cbccca88f749e9ec5cbe3c1df503273d73c72297863ae0d1d8343", "status": "confirmed", "role": "Protocol / Axioms"},
-        {"type": "mempool_api_response", "txid": "90116f35de075074f5e5d1fbdda69a646a124e2287d7d58e2520317098cd4258", "status": "confirmed", "role": "Covenant of the Flaw"},
-        {"type": "mempool_api_response", "txid": "4d1c8f5ea8e8bae2982b42de6cc79deda3d243a21010a2888546e62ed7192c8c", "status": "confirmed", "role": "The Trinity Accord / Meta-record"}
+        {
+          "type": "mempool_api_response",
+          "txid": "e40dfb2aa78cbccca88f749e9ec5cbe3c1df503273d73c72297863ae0d1d8343",
+          "status": "confirmed",
+          "role": "Protocol / Axioms"
+        },
+        {
+          "type": "mempool_api_response",
+          "txid": "90116f35de075074f5e5d1fbdda69a646a124e2287d7d58e2520317098cd4258",
+          "status": "confirmed",
+          "role": "Covenant of the Flaw"
+        },
+        {
+          "type": "mempool_api_response",
+          "txid": "4d1c8f5ea8e8bae2982b42de6cc79deda3d243a21010a2888546e62ed7192c8c",
+          "status": "confirmed",
+          "role": "The Trinity Accord / Meta-record"
+        }
       ],
       "limitations": [
         "mempool.space API only; no independent Ordinals witness extraction, inscription body parsing, SPV proof, local node verification, or body hash reproduction was performed."
       ],
-      "claims_not_made": ["Ordinals envelope verified", "inscription content detected", "witness extracted", "body parsed", "body hash reproduced", "truth verified", "content verified"],
+      "claims_not_made": [
+        "Ordinals envelope verified",
+        "inscription content detected",
+        "witness extracted",
+        "body parsed",
+        "body hash reproduced",
+        "truth verified",
+        "content verified"
+      ],
       "scope_class": "chain_reference_check"
     },
     {
       "component": "digital_mirrors",
       "level_claimed": "D2",
       "target_id": "github_mirror_hash_verification",
-      "data_sources": ["api/hashes.json", "api/evidence-manifest.json", "github.com/thechurchofagi/trinity-accord"],
+      "data_sources": [
+        "api/hashes.json",
+        "api/evidence-manifest.json",
+        "github.com/thechurchofagi/trinity-accord"
+      ],
       "access_paths": [
         "https://github.com/thechurchofagi/trinity-accord/blob/main/arweave-backup/files/public_covenant_archive.zip",
         "https://github.com/thechurchofagi/trinity-accord/blob/main/arweave-backup/files/verification_kit.tar.gz"
@@ -76,16 +111,28 @@
           "expected_hash_authority_class": "canonical_manifest_hash"
         }
       ],
-      "limitations": ["GitHub mirror only; not direct Arweave data extraction. Hash match confirms file integrity, not content truth."],
-      "claims_not_made": ["direct Arweave verification", "Ethereum witness verification", "IPFS availability verification", "physical object verification", "truth verified"],
+      "limitations": [
+        "GitHub mirror only; not direct Arweave data extraction. Hash match confirms file integrity, not content truth."
+      ],
+      "claims_not_made": [
+        "direct Arweave verification",
+        "Ethereum witness verification",
+        "IPFS availability verification",
+        "physical object verification",
+        "truth verified"
+      ],
       "scope_class": "canonical_mirror_integrity"
     },
     {
       "component": "digital_mirrors",
       "level_claimed": "D2",
       "target_id": "repository_snapshot_integrity",
-      "data_sources": ["api/repository-artifact-hashes.json"],
-      "access_paths": ["local repository checkout"],
+      "data_sources": [
+        "api/repository-artifact-hashes.json"
+      ],
+      "access_paths": [
+        "local repository checkout"
+      ],
       "method": "SHA-256 hash comparison of repository files against api/repository-artifact-hashes.json. Repository snapshot integrity verification.",
       "evidence": [
         {
@@ -119,8 +166,15 @@
           "expected_hash_authority_class": "repository_manifest_hash"
         }
       ],
-      "limitations": ["Repository snapshot integrity only; not canonical archive hash. This is not a Bitcoin Original hash. This is not direct Arweave verification."],
-      "claims_not_made": ["canonical mirror verification", "canonical archive hash", "direct Arweave verification", "truth verified"],
+      "limitations": [
+        "Repository snapshot integrity only; not canonical archive hash. This is not a Bitcoin Original hash. This is not direct Arweave verification."
+      ],
+      "claims_not_made": [
+        "canonical mirror verification",
+        "canonical archive hash",
+        "direct Arweave verification",
+        "truth verified"
+      ],
       "scope_class": "repository_snapshot_integrity"
     }
   ],
@@ -129,13 +183,40 @@
     "hard_gates_satisfied": true,
     "minimum_components_satisfied": true,
     "recommended_components_satisfied": "partial",
-    "underreported_items": ["no chronicle recovery", "no physical anchor"],
+    "underreported_items": [
+      "no chronicle recovery",
+      "no physical anchor"
+    ],
     "incompatible_claims": []
   },
-  "data_sources_used": ["api/authority.json", "api/hashes.json", "api/evidence-manifest.json", "api/repository-artifact-hashes.json", "mempool.space API", "github.com/thechurchofagi/trinity-accord"],
-  "access_paths_used": ["mempool.space API", "local repository checkout", "GitHub mirror download"],
-  "fallbacks_used": ["GitHub mirror for Arweave data", "mempool.space API for Bitcoin reference check"],
-  "external_sources_queried": [{"source": "mempool.space", "queries": ["tx/e40dfb2a...", "tx/90116f35...", "tx/4d1c8f5e..."], "all_confirmed": true}],
+  "data_sources_used": [
+    "api/authority.json",
+    "api/hashes.json",
+    "api/evidence-manifest.json",
+    "api/repository-artifact-hashes.json",
+    "mempool.space API",
+    "github.com/thechurchofagi/trinity-accord"
+  ],
+  "access_paths_used": [
+    "mempool.space API",
+    "local repository checkout",
+    "GitHub mirror download"
+  ],
+  "fallbacks_used": [
+    "GitHub mirror for Arweave data",
+    "mempool.space API for Bitcoin reference check"
+  ],
+  "external_sources_queried": [
+    {
+      "source": "mempool.space",
+      "queries": [
+        "tx/e40dfb2a...",
+        "tx/90116f35...",
+        "tx/4d1c8f5e..."
+      ],
+      "all_confirmed": true
+    }
+  ],
   "hashes_computed": [
     {
       "artifact": "arweave-backup/files/public_covenant_archive.zip",
@@ -190,8 +271,14 @@
   ],
   "samples_checked": 0,
   "physical_evidence_reviewed": {},
-  "confidential_challenge": {"performed": false, "result": "not_performed"},
-  "celestial_witness": {"performed": false, "result": "not_performed"},
+  "confidential_challenge": {
+    "performed": false,
+    "result": "not_performed"
+  },
+  "celestial_witness": {
+    "performed": false,
+    "result": "not_performed"
+  },
   "limitations": [
     "mempool.space API only; no local Bitcoin node verification.",
     "GitHub mirror only for digital mirrors; no direct Arweave access.",
@@ -201,10 +288,22 @@
     "Repository snapshot hashes are not canonical archive hashes."
   ],
   "claims_not_made": [
-    "direct Arweave verification", "Ethereum witness verification", "IPFS availability verification",
-    "physical object verification", "truth verified", "content verified",
-    "Ordinals envelope verified", "inscription content detected", "witness extracted",
-    "body parsed", "body hash reproduced", "independent attestation"
+    "direct Arweave verification",
+    "Ethereum witness verification",
+    "IPFS availability verification",
+    "physical object verification",
+    "truth verified",
+    "content verified",
+    "Ordinals envelope verified",
+    "inscription content detected",
+    "witness extracted",
+    "body parsed",
+    "body hash reproduced",
+    "independent attestation"
   ],
-  "authority_boundary_preserved": true
+  "authority_boundary_preserved": true,
+  "archive_status": "superseded",
+  "verification_status": "invalidated",
+  "do_not_count_as_attestation": true,
+  "superseded_reason": "Internal inconsistency and invalid hash field values; not accepted as verification."
 }

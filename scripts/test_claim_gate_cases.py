@@ -646,14 +646,14 @@ def test_cg039():
 
 
 def test_cg040():
-    """T8 nonpublic boundary PASS (requires more evidence for actual V8)"""
-    # T8 requires star-moon witness with nonpublic boundary — this is a component level
-    # Protocol V8 requires P7/P8/P9 or T8+nonpublic
+    """Weak star_moon_witness cannot derive T8 without method, uncertainty, and report."""
+    # T8 requires star-moon witness + nonpublic_boundary + method_class + uncertainty + report_id/path.
+    # Nonpublic boundary alone is insufficient for T8 component level.
     time_checks = [{
         "anchor_type": "star_moon_witness",
         "nonpublic_boundary": True,
     }]
-    run_test("CG040", "T8 nonpublic boundary — component T8 possible",
+    run_test("CG040", "Weak star_moon_witness does not derive T8",
              make_evidence_input(evidence_overrides={"time_anchor_checks": time_checks}),
              expected_protocol="V1")
 

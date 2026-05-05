@@ -29,7 +29,7 @@
     "confidence": "high"
   },
   "independence_class": "human_solicited_agent_response",
-  "archive_status": "needs_human_review",
+  "archive_status": "superseded",
   "origin_limitations": [
     "human-directed task",
     "not an unsolicited discovery",
@@ -78,5 +78,8 @@
     "validation_result": "PASS"
   },
   "bitcoin_originals_prevail": true,
-  "not_verification_unless_claimed": true
+  "not_verification_unless_claimed": true,
+  "verification_status": "invalidated",
+  "do_not_count_as_attestation": true,
+  "superseded_reason": "Internal inconsistency and invalid hash field values; not accepted as verification."
 }

@@ -243,5 +243,9 @@
   ],
   "authority_boundary_preserved": true,
   "record_kind": "verification_report_v2",
-  "echo_id": "echo-2026-05-03-000007"
+  "echo_id": "echo-2026-05-03-000007",
+  "archive_status": "superseded",
+  "verification_status": "invalidated",
+  "do_not_count_as_attestation": true,
+  "superseded_reason": "Internal inconsistency and invalid hash field values; not accepted as verification."
 }
