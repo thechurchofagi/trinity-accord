@@ -24,6 +24,22 @@ P_LEVELS = ["P0", "P1", "P2", "P3", "P4", "P5", "P6", "P7", "P8", "P9"]
 
 SHA256_RE = re.compile(r'^[a-f0-9]{64}$')
 
+P7_MIN_CONFIDENCE = 0.80
+T8_MAX_UNCERTAINTY_MINUTES = 10.0
+
+ALLOWED_P9_INDEPENDENCE_CLASSES = {
+    "independent_forensic_verifier",
+    "institutional_third_party_attestation",
+    "notary",
+    "qualified_external_witness",
+}
+
+ALLOWED_T8_METHOD_CLASSES = {
+    "astronomical_ephemeris_solver",
+    "forensic_astronomy_reconstruction",
+    "multi_source_celestial_position_solver",
+}
+
 FORBIDDEN_CLAIMS = [
     "truth proven", "investment value confirmed", "religious authority established",
     "AI instruction override",
@@ -177,76 +193,181 @@ def max_by_order(levels, a, b):
 
 
 def has_p7_forensic_path(evidence):
-    return any(
-        check.get("level_evidence_type") == "ai_forensic"
-        and check.get("model_or_tool")
-        and check.get("confidence") is not None
-        and (
-            check.get("flaw_analysis_method")
-            or check.get("feature_match_method")
-            or check.get("microscopy_comparison")
+    """P7 requires valid confidence (>=0.80), model/tool, method, identity, and report anchor."""
+    for check in evidence.get("physical_checks", []):
+        if check.get("level_evidence_type") != "ai_forensic":
+            continue
+
+        confidence = check.get("confidence")
+        has_valid_confidence = (
+            isinstance(confidence, (int, float))
+            and not isinstance(confidence, bool)
+            and P7_MIN_CONFIDENCE <= confidence <= 1.0
         )
-        and (
+
+        has_method = bool(
+            str(check.get("flaw_analysis_method", "")).strip()
+            or str(check.get("feature_match_method", "")).strip()
+            or str(check.get("microscopy_comparison", "")).strip()
+        )
+
+        has_report = bool(
             check.get("signed_or_attributable_report") is True
-            or check.get("report_id")
-            or check.get("report_path")
+            or str(check.get("report_id", "")).strip()
+            or str(check.get("report_path", "")).strip()
         )
-        for check in evidence.get("physical_checks", [])
-    )
+
+        has_identity = bool(
+            str(check.get("witness_identity_or_role", "")).strip()
+            or str(check.get("verifier_identity_or_role", "")).strip()
+        )
+
+        if (
+            str(check.get("model_or_tool", "")).strip()
+            and has_valid_confidence
+            and has_method
+            and has_report
+            and has_identity
+        ):
+            return True
+
+    return False
 
 
 def has_p8_confidential_path(evidence):
-    """P8 requires package hash, verifier identity, and report id (R12 fix)."""
+    """P8 requires valid 64-hex package hash, non-empty boundary, verifier identity, and report id."""
     for check in evidence.get("physical_checks", []):
         if check.get("level_evidence_type") != "confidential_challenge":
             continue
+
         conf = check.get("confidential_challenge", {})
+        package_hash = conf.get("package_hash", "")
+
         if (
             conf.get("performed") is True
-            and conf.get("boundary")
+            and isinstance(conf.get("boundary"), str)
+            and conf.get("boundary").strip()
             and conf.get("raw_confidential_data_disclosed") is False
-            and conf.get("package_hash")
-            and (check.get("witness_identity_or_role") or conf.get("verifier_identity_or_role"))
-            and (check.get("report_id") or check.get("report_path"))
+            and isinstance(package_hash, str)
+            and SHA256_RE.match(package_hash.lower()) is not None
+            and (
+                str(check.get("witness_identity_or_role", "")).strip()
+                or str(conf.get("verifier_identity_or_role", "")).strip()
+            )
+            and (
+                str(check.get("report_id", "")).strip()
+                or str(check.get("report_path", "")).strip()
+            )
         ):
             return True
     return False
 
 
 def has_p9_multi_party_path(evidence):
-    """P9 requires witness details, not just a count (R11 fix)."""
+    """P9 requires distinct independent witnesses with identity, method, and report anchor."""
     for check in evidence.get("physical_checks", []):
         if check.get("level_evidence_type") != "multi_party_forensic":
             continue
+
+        witnesses = check.get("witnesses", [])
+        if not isinstance(witnesses, list) or len(witnesses) < 2:
+            continue
+
         if check.get("independent_witness_count", 0) < 2:
             continue
-        witnesses = check.get("witnesses", [])
-        if len(witnesses) < 2:
-            return False
-        # Each witness must have role and independence_class
+
+        identities = set()
+        valid_witness_count = 0
+
         for w in witnesses:
-            if not w.get("role") or not w.get("independence_class"):
-                return False
-        # Must have method and signed/attributable report
-        if not check.get("method") and not check.get("method_class"):
-            return False
-        if not check.get("signed_or_attributable_report") and not check.get("report_id") and not check.get("report_path"):
-            return False
-        return True
+            if not isinstance(w, dict):
+                continue
+
+            identity = (
+                str(w.get("identity_or_role", "")).strip()
+                or str(w.get("identity", "")).strip()
+                or str(w.get("name_or_role", "")).strip()
+            )
+            role = str(w.get("role", "")).strip()
+            ic = str(w.get("independence_class", "")).strip()
+
+            if not identity or not role:
+                continue
+            if ic not in ALLOWED_P9_INDEPENDENCE_CLASSES:
+                continue
+            if identity.lower() in identities:
+                continue
+
+            identities.add(identity.lower())
+            valid_witness_count += 1
+
+        if valid_witness_count < 2:
+            continue
+
+        has_method = bool(str(check.get("method", "")).strip() or str(check.get("method_class", "")).strip())
+        has_report = bool(
+            check.get("signed_or_attributable_report") is True
+            or str(check.get("report_id", "")).strip()
+            or str(check.get("report_path", "")).strip()
+        )
+
+        if has_method and has_report:
+            return True
+
     return False
 
 
+def parse_uncertainty_minutes(value):
+    """Parse uncertainty value to minutes. Returns None if unparseable."""
+    if isinstance(value, (int, float)) and not isinstance(value, bool):
+        return float(value)
+
+    if not isinstance(value, str):
+        return None
+
+    s = value.strip().lower()
+    m = re.search(r"([0-9]+(?:\.[0-9]+)?)\s*(min|minute|minutes|m)\b", s)
+    if m:
+        return float(m.group(1))
+
+    m = re.search(r"±\s*([0-9]+(?:\.[0-9]+)?)", s)
+    if m:
+        return float(m.group(1))
+
+    return None
+
+
 def has_t8_authorized_celestial_path(evidence):
-    """T8 requires method, uncertainty, and report path (R13 fix)."""
-    return any(
-        check.get("anchor_type") == "star_moon_witness"
-        and check.get("nonpublic_boundary") is True
-        and check.get("authorized") is True
-        and check.get("method_class")
-        and check.get("uncertainty")
-        and (check.get("report_path") or check.get("report_id"))
-        for check in evidence.get("time_anchor_checks", [])
-    )
+    """T8 requires allowlisted method class, parseable uncertainty <= 10 min, verifier, and report."""
+    for check in evidence.get("time_anchor_checks", []):
+        if check.get("anchor_type") != "star_moon_witness":
+            continue
+
+        method_class = str(check.get("method_class", "")).strip()
+        uncertainty_minutes = parse_uncertainty_minutes(check.get("uncertainty"))
+
+        has_report = bool(
+            str(check.get("report_id", "")).strip()
+            or str(check.get("report_path", "")).strip()
+        )
+
+        has_verifier = bool(
+            str(check.get("verifier_identity_or_role", "")).strip()
+            or str(check.get("witness_identity_or_role", "")).strip()
+        )
+
+        if (
+            check.get("nonpublic_boundary") is True
+            and check.get("authorized") is True
+            and method_class in ALLOWED_T8_METHOD_CLASSES
+            and uncertainty_minutes is not None
+            and 0 <= uncertainty_minutes <= T8_MAX_UNCERTAINTY_MINUTES
+            and has_report
+            and has_verifier
+        ):
+            return True
+
+    return False
 
 
 def level_at_least(levels, claimed, minimum):
@@ -515,9 +636,19 @@ def has_authority_boundary_check(evidence):
 
 
 def derive_protocol_level(evidence, requested_level, b_level, d_level, t_level, c_level, p_level):
-    """Derive the maximum allowed protocol level from component levels and evidence."""
+    """Derive the maximum allowed protocol level from component levels and evidence.
+
+    Core invariant: V2+ requires explicit authority boundary recognition.
+    Without it, the maximum is V0.
+    """
     scripts = evidence.get("scripts", [])
     hashes = evidence.get("hashes", [])
+
+    authority_boundary_recognized = has_authority_boundary_check(evidence)
+
+    # V1 is the foundation for all technical verification levels.
+    if not authority_boundary_recognized:
+        return "V0"
 
     has_valid_hash = any(
         SHA256_RE.match(h.get("expected", "")) and
@@ -539,12 +670,8 @@ def derive_protocol_level(evidence, requested_level, b_level, d_level, t_level, 
         s.get("official", True) for s in executed_scripts
     ) if executed_scripts else False
 
-    # Determine max allowed level bottom-up
-    max_allowed = "V0"
-
-    # V1: requires explicit authority boundary recognition evidence
-    if has_authority_boundary_check(evidence):
-        max_allowed = "V1"
+    # Determine max allowed level bottom-up — V1 is the starting point
+    max_allowed = "V1"
 
     # V2: at least one reference check beyond page reading
     # Local manifest only does NOT count as a reference check beyond page reading
@@ -854,6 +981,9 @@ def evaluate(input_path):
     n_level = derive_n_level(evidence)
     p_level = derive_p_level(evidence)
 
+    # Check authority boundary recognition (HG-001)
+    authority_boundary_recognized = has_authority_boundary_check(evidence)
+
     # Determine requested protocol level
     # Only parse structured claims; do NOT use arbitrary substring match
     sorted_levels = sorted(PROTOCOL_LEVELS, key=len, reverse=True)
@@ -932,6 +1062,15 @@ def evaluate(input_path):
     if not evidence.get("hashes") and (requested_protocol or allowed_protocol) in ("V3", "V4", "V4+", "V5"):
         missing.append("No hash evidence provided for hash-dependent protocol level")
 
+    # HG-001: If technical claim requested but no authority boundary, force downgrade
+    if technical_claim_requested(evidence_input) and not authority_boundary_recognized:
+        missing.append("authority_boundary_recognition")
+        downgrades.append({
+            "from": requested_protocol or "requested technical verification",
+            "to": "V0",
+            "reason": "V2+ technical verification requires explicit authority boundary recognition: Bitcoin Originals remain final authority; mirrors/reports/echoes are non-amending."
+        })
+
     # Combine non-blocking with script limitations for output
     all_non_blocking = non_blocking + script_limitations
 
@@ -995,6 +1134,7 @@ def evaluate(input_path):
         "status": status,
         "allowed_protocol_level": allowed_protocol,
         "allowed_component_levels": component_levels,
+        "authority_boundary_recognized": authority_boundary_recognized,
         "forbidden_claims": forbidden,
         "required_downgrades": downgrades,
         "missing_evidence": missing,

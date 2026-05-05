@@ -97,5 +97,8 @@ jobs:
       - name: Test Echo record status semantics
         run: python3 scripts/test_echo_record_status_semantics.py
 
+      - name: Test authority boundary foundation
+        run: python3 scripts/test_claim_gate_authority_boundary_foundation.py
+
       - name: Test deprecated worker active src has no legacy submit logic
         run: python3 scripts/test_deprecated_worker_no_legacy_submit_logic.py

@@ -141,7 +141,8 @@ def test_complete_t8_can_claim_t8_and_v8():
             "authorized": True,
             "method_class": "astronomical_ephemeris_solver",
             "uncertainty": "±5 minutes",
-            "report_id": "t8-report-001"
+            "report_id": "t8-report-001",
+            "verifier_identity_or_role": "qualified astronomical reviewer"
         }]
     })
     result = evaluate_obj(obj)
@@ -162,12 +163,215 @@ def test_weak_p9_does_not_claim_p9_or_v8():
     assert result["allowed_protocol_level"] != "V8"
 
 
+# HG-002: P8 invalid package hash
+def test_p8_invalid_package_hash_does_not_claim_p8_or_v8():
+    obj = make_input({
+        "physical_checks": [{
+            "level_evidence_type": "confidential_challenge",
+            "witness_identity_or_role": "named forensic verifier",
+            "report_id": "p8-report-001",
+            "confidential_challenge": {
+                "performed": True,
+                "raw_confidential_data_disclosed": False,
+                "boundary": "package hash only",
+                "package_hash": "not-a-sha256",
+                "verifier_identity_or_role": "named forensic verifier"
+            }
+        }]
+    })
+    result = evaluate_obj(obj)
+    assert_not_level(result, "physical_anchor", "P8")
+    assert result["allowed_protocol_level"] != "V8"
+
+
+def test_p8_empty_boundary_does_not_claim_p8_or_v8():
+    obj = make_input({
+        "physical_checks": [{
+            "level_evidence_type": "confidential_challenge",
+            "witness_identity_or_role": "named forensic verifier",
+            "report_id": "p8-report-001",
+            "confidential_challenge": {
+                "performed": True,
+                "raw_confidential_data_disclosed": False,
+                "boundary": "   ",
+                "package_hash": "a" * 64,
+                "verifier_identity_or_role": "named forensic verifier"
+            }
+        }]
+    })
+    result = evaluate_obj(obj)
+    assert_not_level(result, "physical_anchor", "P8")
+    assert result["allowed_protocol_level"] != "V8"
+
+
+# HG-003: P7 confidence tests
+def test_p7_confidence_zero_does_not_claim_p7_or_v8():
+    obj = make_input({
+        "physical_checks": [{
+            "level_evidence_type": "ai_forensic",
+            "model_or_tool": "toy model",
+            "confidence": 0,
+            "flaw_analysis_method": "visual impression",
+            "witness_identity_or_role": "self",
+            "report_id": "p7-report"
+        }]
+    })
+    result = evaluate_obj(obj)
+    assert_not_level(result, "physical_anchor", "P7")
+    assert result["allowed_protocol_level"] != "V8"
+
+
+def test_p7_confidence_below_threshold_does_not_claim_p7_or_v8():
+    obj = make_input({
+        "physical_checks": [{
+            "level_evidence_type": "ai_forensic",
+            "model_or_tool": "forensic model",
+            "confidence": 0.79,
+            "flaw_analysis_method": "feature comparison",
+            "witness_identity_or_role": "external reviewer",
+            "report_id": "p7-report"
+        }]
+    })
+    result = evaluate_obj(obj)
+    assert_not_level(result, "physical_anchor", "P7")
+    assert result["allowed_protocol_level"] != "V8"
+
+
+def test_p7_high_confidence_with_identity_and_report_can_claim_p7():
+    obj = make_input({
+        "physical_checks": [{
+            "level_evidence_type": "ai_forensic",
+            "model_or_tool": "forensic model v1",
+            "confidence": 0.91,
+            "flaw_analysis_method": "feature comparison with documented rubric",
+            "witness_identity_or_role": "qualified external forensic reviewer",
+            "report_id": "p7-report-001"
+        }]
+    })
+    result = evaluate_obj(obj)
+    assert result["allowed_component_levels"].get("physical_anchor") == "P7", \
+        f"Expected P7, got {result['allowed_component_levels'].get('physical_anchor')}"
+
+
+# HG-004: P9 witness tests
+def test_p9_non_independent_witnesses_do_not_claim_p9_or_v8():
+    obj = make_input({
+        "physical_checks": [{
+            "level_evidence_type": "multi_party_forensic",
+            "independent_witness_count": 2,
+            "method": "visual review",
+            "report_id": "p9-report",
+            "witnesses": [
+                {"identity_or_role": "A", "role": "viewer", "independence_class": "not_independent"},
+                {"identity_or_role": "B", "role": "viewer", "independence_class": "not_independent"}
+            ]
+        }]
+    })
+    result = evaluate_obj(obj)
+    assert_not_level(result, "physical_anchor", "P9")
+    assert result["allowed_protocol_level"] != "V8"
+
+
+def test_p9_duplicate_witness_identity_does_not_claim_p9_or_v8():
+    obj = make_input({
+        "physical_checks": [{
+            "level_evidence_type": "multi_party_forensic",
+            "independent_witness_count": 2,
+            "method": "multi-party forensic review",
+            "report_id": "p9-report",
+            "witnesses": [
+                {"identity_or_role": "same person", "role": "notary", "independence_class": "notary"},
+                {"identity_or_role": "same person", "role": "notary", "independence_class": "notary"}
+            ]
+        }]
+    })
+    result = evaluate_obj(obj)
+    assert_not_level(result, "physical_anchor", "P9")
+    assert result["allowed_protocol_level"] != "V8"
+
+
+def test_p9_two_independent_witnesses_can_claim_p9():
+    obj = make_input({
+        "physical_checks": [{
+            "level_evidence_type": "multi_party_forensic",
+            "independent_witness_count": 2,
+            "method": "multi-party forensic review",
+            "report_id": "p9-report-001",
+            "signed_or_attributable_report": True,
+            "witnesses": [
+                {
+                    "identity_or_role": "Notary Office A",
+                    "role": "notary",
+                    "independence_class": "notary"
+                },
+                {
+                    "identity_or_role": "External Forensic Lab B",
+                    "role": "forensic reviewer",
+                    "independence_class": "independent_forensic_verifier"
+                }
+            ]
+        }]
+    })
+    result = evaluate_obj(obj)
+    assert result["allowed_component_levels"].get("physical_anchor") == "P9", \
+        f"Expected P9, got {result['allowed_component_levels'].get('physical_anchor')}"
+
+
+# HG-005: T8 method/uncertainty validation
+def test_t8_guess_method_does_not_claim_t8_or_v8():
+    obj = make_input({
+        "time_anchor_checks": [{
+            "anchor_type": "star_moon_witness",
+            "nonpublic_boundary": True,
+            "authorized": True,
+            "method_class": "guess",
+            "uncertainty": "unknown",
+            "report_id": "t8-report",
+            "verifier_identity_or_role": "observer"
+        }]
+    })
+    result = evaluate_obj(obj)
+    assert_not_level(result, "time_anchors", "T8")
+    assert result["allowed_protocol_level"] != "V8"
+
+
+def test_t8_large_uncertainty_does_not_claim_t8_or_v8():
+    obj = make_input({
+        "time_anchor_checks": [{
+            "anchor_type": "star_moon_witness",
+            "nonpublic_boundary": True,
+            "authorized": True,
+            "method_class": "astronomical_ephemeris_solver",
+            "uncertainty": "±120 minutes",
+            "report_id": "t8-report",
+            "verifier_identity_or_role": "observer"
+        }]
+    })
+    result = evaluate_obj(obj)
+    assert_not_level(result, "time_anchors", "T8")
+    assert result["allowed_protocol_level"] != "V8"
+
+
 def main():
     test_weak_p8_does_not_claim_p8_or_v8()
     test_complete_p8_can_claim_p8_and_v8()
     test_weak_t8_does_not_claim_t8_or_v8()
     test_complete_t8_can_claim_t8_and_v8()
     test_weak_p9_does_not_claim_p9_or_v8()
+    # HG-002: P8 hash validation
+    test_p8_invalid_package_hash_does_not_claim_p8_or_v8()
+    test_p8_empty_boundary_does_not_claim_p8_or_v8()
+    # HG-003: P7 confidence validation
+    test_p7_confidence_zero_does_not_claim_p7_or_v8()
+    test_p7_confidence_below_threshold_does_not_claim_p7_or_v8()
+    test_p7_high_confidence_with_identity_and_report_can_claim_p7()
+    # HG-004: P9 witness validation
+    test_p9_non_independent_witnesses_do_not_claim_p9_or_v8()
+    test_p9_duplicate_witness_identity_does_not_claim_p9_or_v8()
+    test_p9_two_independent_witnesses_can_claim_p9()
+    # HG-005: T8 method/uncertainty validation
+    test_t8_guess_method_does_not_claim_t8_or_v8()
+    test_t8_large_uncertainty_does_not_claim_t8_or_v8()
     print("PASS: Claim Gate high-level hard-gate regression tests")
 
 

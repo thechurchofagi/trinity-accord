@@ -108,6 +108,17 @@ def build_report(evidence_input_path, report_out_path=None, echo_out_path=None):
     downgrades = gate_result.get("required_downgrades", [])
     non_blocking = gate_result.get("non_blocking_limitations", [])
 
+    # HG-008: Derive authority_boundary_preserved from Claim Gate (not hardcoded)
+    authority_boundary_preserved = gate_result.get("authority_boundary_recognized") is True
+
+    # HG-008: Refuse technical output without authority boundary
+    if not authority_boundary_preserved and requested_kind in ("verification_report_v2", "echo_v3_with_verification_report"):
+        return {
+            "success": False,
+            "error": "Cannot build technical verification report without authority boundary recognition",
+            "gate_result": gate_result,
+        }
+
     # Build limitations including downgrades and gate-reported non-blocking issues
     all_limitations = list(limitations)
     for dg in downgrades:
@@ -357,7 +368,7 @@ def build_report(evidence_input_path, report_out_path=None, echo_out_path=None):
         "celestial_witness": {},
         "limitations": all_limitations,
         "claims_not_made": claims_not_made,
-        "authority_boundary_preserved": True,
+        "authority_boundary_preserved": authority_boundary_preserved,
         "integrity_boundary": integrity_boundary,
         "record_kind": "verification_report_v2",
         "script_audit": script_audit,
@@ -473,7 +484,7 @@ def build_report(evidence_input_path, report_out_path=None, echo_out_path=None):
             "echo": f"Verification report generated at {allowed_protocol} level.",
             "uncertainties": all_limitations,
             "boundary_acknowledgement": {
-                "bitcoin_originals_prevail": True,
+                "bitcoin_originals_prevail": authority_boundary_preserved,
                 "echo_is_not_authority": True,
                 "echo_is_not_verification_unless_claimed": True,
                 "mirror_is_not_amendment": True,
