@@ -354,9 +354,12 @@ em {
 }
 
 /* ── Chinese paragraphs: no italic (CJK fonts don't have italic) ── */
-.zh-para,
-p.zh-para,
-li.zh-para {
+/* High specificity to override all English italic rules */
+main p.zh-para,
+main li.zh-para,
+main .zh-para,
+main p[lang="zh"],
+main p[lang="zh-CN"] {
   font-style: normal !important;
   color: #d0d0d0 !important;
 }

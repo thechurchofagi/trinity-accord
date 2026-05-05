@@ -301,12 +301,22 @@ main .hero-zh {
 }
 
 /* Body paragraphs in hero-intro — left-aligned layout */
-.hero-intro > p:not(:first-child):not(:nth-child(2)) {
+/* Exclude Chinese paragraphs (.zh-para) from italic */
+.hero-intro > p:not(:first-child):not(:nth-child(2)):not(.zh-para) {
   text-align: left !important;
   font-size: 1rem !important;
   color: #d0d0d0 !important;
   line-height: 2 !important;
   font-style: italic !important;
+}
+
+/* Chinese body paragraphs in hero-intro — no italic */
+main .hero-intro > p.zh-para:not(:first-child):not(:nth-child(2)) {
+  font-style: normal !important;
+  text-align: left !important;
+  font-size: 1rem !important;
+  color: #d0d0d0 !important;
+  line-height: 2 !important;
 }
 
 /* ── Hero-intro Chinese paragraphs: centered, no left border ── */
