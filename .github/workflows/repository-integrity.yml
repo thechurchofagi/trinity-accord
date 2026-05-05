@@ -27,7 +27,19 @@ jobs:
         run: python3 downloads/verify.py
 
       - name: Run consistency checks
+
+      - name: Test homepage final v1.3 content
+        run: bash scripts/test-homepage-v13-final.sh
+
+      - name: Test civilizational JSON sync
+        run: python3 scripts/test-civilizational-json-sync.py
         run: python3 scripts/check_consistency.py
+
+      - name: Test homepage final v1.3 content
+        run: bash scripts/test-homepage-v13-final.sh
+
+      - name: Test civilizational JSON sync
+        run: python3 scripts/test-civilizational-json-sync.py
 
       - name: Validate Echo records
         run: python3 scripts/validate_echo_records.py

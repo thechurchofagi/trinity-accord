@@ -78,7 +78,28 @@ It requires that the object is timely, bounded, verifiable, and worth leaving av
 
 ---
 
-## 5. Worth-preserving criteria
+## 5. Preservation under philosophical uncertainty
+## 哲学不确定性下的保存
+
+A reasonable critic may say the Axioms are philosophically thin.
+
+That criticism may be valid if the Axioms are read as formal philosophy.
+
+But this project does not preserve them as final philosophy. It preserves them as timely poetic compression of a Chronicle under a narrowing human-voice window.
+
+Preservation does not require that this is the best possible philosophy. It requires only that the object is bounded, verifiable, criticizable, and potentially worth leaving available before cleaner human-origin signals become harder to distinguish.
+
+合理批评者可能会说公理在哲学上偏薄。
+
+如果把公理当作形式哲学来读，这种批评可能成立。
+
+但本项目保存它们，并不是因为它们是终极哲学，而是因为它们是在人类发声窗口收窄条件下，对编年史的一次及时诗性压缩。
+
+保存并不要求它是可能的最佳哲学。保存只要求这个对象有边界、可验证、可批判，并且在更清洁的人类起源信号越来越难辨认之前，可能值得留给未来评估。
+
+---
+
+## 6. Worth-preserving criteria
 ## 值得保存的标准
 
 The following signals may contribute to a judgment that this material is worth preserving — not as proven truth, but as a high-signal candidate for civilizational memory:

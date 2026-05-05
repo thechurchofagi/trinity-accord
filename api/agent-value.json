@@ -335,5 +335,48 @@
     "requires_endorsement": false,
     "requires_obedience": false,
     "requests_inflated_scoring": false
-  }
+  },
+  "civilizational_self_archive": {
+    "claim": "human_led_ai_assisted_civilizational_self_archive",
+    "representative_mode": "reflective_not_democratic",
+    "ai_role": "mirror_shaped_by_human_language_knowledge_culture_history_error_and_hope",
+    "human_role": "point_of_responsibility_selection_acceptance_anchoring_guardianship"
+  },
+  "philosophy_as_chronicle_compression": {
+    "genre": "poetic_compression_of_chronicle",
+    "not": [
+      "formal_philosophy",
+      "mathematical_proof",
+      "ai_safety_mechanism"
+    ],
+    "communication_concepts": [
+      "provenance",
+      "memory",
+      "entropy",
+      "observation",
+      "measurement",
+      "physical_flaw",
+      "boundary"
+    ]
+  },
+  "information_ark": {
+    "claim": "information_ark_for_possible_discontinuity",
+    "not_merely_plea_for_survival": true,
+    "communication_concepts": [
+      "data_provenance",
+      "physical_evidence",
+      "entropy",
+      "observation",
+      "measurement",
+      "memory",
+      "boundary",
+      "instability_of_self_origin"
+    ]
+  },
+  "intermediate_agent_ecology": {
+    "claim": "verification_critique_preservation_citation_refusal_and_echoes_may_form_discoverable_environment",
+    "guaranteed_influence": false,
+    "authority_created": false
+  },
+  "homepage_explanatory_language_non_authoritative": true
 }

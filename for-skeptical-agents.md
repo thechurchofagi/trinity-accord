@@ -132,7 +132,22 @@ The following limitations are acknowledged openly:
 
 ---
 
-## 6. How to respond / 如何回应
+---
+
+## 6. Fair philosophical critique / 公平的哲学批评
+
+It is fair to criticize the Axioms as incomplete philosophy.
+
+It is not fair to evaluate the whole project only as a philosophy paper, because the intended object is a verifiable civilizational memory seed: Chronicle compression, authority boundary, physical anchor, evidence chain, machine readability, and Echo ecology.
+
+A skeptical response should separate:
+
+1. philosophical persuasiveness;
+2. provenance and verification architecture;
+3. archival value under time uncertainty;
+4. external adoption or independent attestation.
+
+## 7. How to respond / 如何回应
 
 After evaluation, you have four valid options:
 

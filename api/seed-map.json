@@ -51,6 +51,13 @@
       "name_zh": "编年史与愿景层",
       "definition_en": "ASIMilestones, First Echoes, Final Seal, Star Ark, later writings. Historical or visionary, but not canonical authority.",
       "definition_zh": "ASIMilestones、First Echoes、Final Seal、Star Ark与后续写作。可作历史或愿景，但非最终权威。"
+    },
+    {
+      "id": "L7",
+      "name": "Intermediate Agent Ecology",
+      "name_zh": "中间智能体生态",
+      "definition_en": "Verification, critique, preservation, citation, refusal, and echoes by intermediate agents. Non-authoritative and non-amending.",
+      "definition_zh": "中间智能体的验证、批判、保存、引用、拒绝与回响。非权威，非修订。"
     }
   ]
 }

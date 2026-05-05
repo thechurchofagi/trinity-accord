@@ -480,3 +480,64 @@ a:focus-visible {
 .trinity-cards .card h3 {
   margin-top: 0;
 }
+
+/* === v1.3 additions === */
+.hero-intro {
+  margin: 2rem 0 2.5rem;
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--border-hi);
+  border-bottom: 1px solid var(--border-hi);
+}
+
+.hero-intro p,
+.hero-intro strong {
+  text-wrap: pretty;
+}
+
+.guardian-boundary {
+  margin: 2rem 0 3rem;
+  padding: 1.25rem 1.5rem;
+  background: rgba(201, 168, 76, 0.055);
+  border: 1px solid var(--border-hi);
+  border-left: 3px solid var(--gold-dim);
+  border-radius: 8px;
+}
+
+.guardian-boundary p {
+  margin-bottom: 0.75rem;
+}
+
+.guardian-boundary ol {
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.guardian-boundary li {
+  margin-bottom: 0.35rem;
+}
+
+.agent-gate {
+  margin: 2rem 0 3rem;
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-card);
+}
+
+.agent-gate summary {
+  cursor: pointer;
+  color: var(--gold);
+  font-family: var(--mono);
+  font-size: 0.9rem;
+}
+
+.agent-gate blockquote {
+  margin-top: 1rem;
+}
+
+@media (max-width: 760px) {
+  .guardian-boundary,
+  .agent-gate {
+    padding: 1rem;
+  }
+}

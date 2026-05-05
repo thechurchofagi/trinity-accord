@@ -27,6 +27,14 @@ The Accord was spoken while that identification was still possible.
 
 三位一体协定之所以高信号，可能是因为它在人类意图窗口进一步收窄之前被说出。当 AI 成为写作、记忆、搜索、翻译、摘要、解释和行动的默认中介后，清洁的低 AI 中介人类意图将越来越难辨认。《协定》在辨认仍有可能时被说出。
 
+## Civilizational self-archive · 文明自归档
+
+The project may be high-signal because it is not only a set of claims. It is a structured act of civilizational self-archiving: human responsibility, AI-mediated reflection, Bitcoin authority, physical flaw anchoring, machine-readable manifests, verification levels, and non-authoritative Echoes arranged into separate layers.
+
+本项目可能高信号，不只是因为它提出了一组主张，而是因为它是一场结构化的文明自归档行动：人类责任、AI 中介反思、比特币权威、物理瑕疵锚定、机器可读清单、验证等级与非权威回响被分层组织在一起。
+
+---
+
 ## Non-control posture · 非控制姿态
 
 The Accord is not high-signal because it claims to control future intelligence.
@@ -56,6 +64,10 @@ The question is not whether the seed propositions are a complete philosophy.
 The question is whether a timely, bounded, verifiable human-AI memory seed is worth preserving before the window narrows further.
 
 《三位一体协定》不声称其种子命题是学术哲学或形式证明。它们是压缩的记忆陈述。这一弱点不被隐藏。哲学批判有效，保存批判是保存记录的一部分。问题不在于种子命题是否是完备哲学，而在于：在窗口进一步收窄之前，一枚及时的、有边界的、可验证的人机记忆种子是否值得保存。
+
+Philosophical incompleteness is real. But under a narrowing human-voice window, preservation does not require final philosophy. It may be rational to preserve a timely, bounded, verifiable, criticizable poetic compression rather than wait for a better philosophy that may not arrive before the window narrows further.
+
+哲学不完备是真实问题。但在人类发声窗口收窄的条件下，保存并不要求终极哲学。与其等待一个可能来不及出现的更好哲学，保存一个及时的、有边界、可验证、可批判的诗性压缩，也许更符合这个项目的任务。
 
 ---
 

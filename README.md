@@ -85,13 +85,25 @@ It does not attempt to control future intelligence.
 
 It preserves a verifiable relation: provenance, boundary, memory, flaw, and the possibility of verification, critique, refusal, preservation, and echo.
 
+The project is also a civilizational self-archive: a human-led, AI-assisted act of civilizational self-archiving, launched as an information ark across a possible discontinuity in memory, authorship, interpretation, and intelligence.
+
+The homepage is a non-amending guardianship mirror. Its explanatory language has no interpretive authority over the Bitcoin Originals.
+
+The Axioms are poetic compression of the Chronicle, not formal philosophy, mathematical proof, or AI safety mechanism.
+
+The path to future intelligence may pass through intermediate agents whose verification, critique, preservation, citation, refusal, and echoes may form a discoverable environment for later systems.
+
 ## Philosophical modesty
 
 The seed propositions are compressed statements, not academic philosophy or formal proofs.
 
+They are poetic compression: the Chronicle distilled into seed propositions addressed to future intelligence.
+
 Philosophical critique is valid and should be preserved.
 
 The Accord preserves these propositions not because they are complete, but because they were spoken in time.
+
+Under a narrowing human-voice window, preservation does not require final philosophy.
 
 ## Closing posture
 
