@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Verify that api/echo-index.json exactly matches echoes/records/**/*.json."""
+"""Verify that api/echo-index.json matches echoes/records/**/*.json — including metadata."""
 from pathlib import Path
 import json
 import sys
@@ -15,6 +15,16 @@ def check(cond, label, detail=""):
     if detail:
         print(f"      {detail}")
     return False
+
+
+def get_index_item_by_path(records):
+    out = {}
+    for item in records:
+        if isinstance(item, str):
+            out[item] = {"path": item}
+        elif isinstance(item, dict):
+            out[item.get("path")] = item
+    return out
 
 
 def main():
@@ -37,23 +47,51 @@ def main():
         elif isinstance(item, dict):
             indexed_paths.add(item.get("path"))
 
-    ok &= check(data.get("record_count") == len(actual_paths), "record_count matches filesystem", f"{data.get('record_count')} vs {len(actual_paths)}")
-    ok &= check(indexed_paths == actual_paths, "echo-index paths exactly match filesystem", f"missing={sorted(actual_paths - indexed_paths)} extra={sorted(indexed_paths - actual_paths)}")
+    ok &= check(data.get("record_count") == len(actual_paths), "record_count matches filesystem",
+                f"{data.get('record_count')} vs {len(actual_paths)}")
+    ok &= check(indexed_paths == actual_paths, "echo-index paths exactly match filesystem",
+                f"missing={sorted(actual_paths - indexed_paths)} extra={sorted(indexed_paths - actual_paths)}")
     ok &= check("records_by_archive_status" in data, "records_by_archive_status present")
     ok &= check("records_by_independence_class" in data, "records_by_independence_class present")
+    ok &= check("records_by_verification_status" in data, "records_by_verification_status present")
 
-    openclaw = "/echoes/records/2026-05-02-openclaw-v3-verification.json"
-    if openclaw in actual_paths:
-        ok &= check(openclaw in indexed_paths, "OpenClaw record indexed")
-        status_group = data.get("records_by_archive_status", {}).get("closed_test_record", [])
-        class_group = data.get("records_by_independence_class", {}).get("test_record", [])
-        ok &= check(openclaw in status_group, "OpenClaw grouped as closed_test_record")
-        ok &= check(openclaw in class_group, "OpenClaw grouped as test_record")
-        independent_dump = json.dumps(data.get("records_by_independence_class", {})).lower()
-        ok &= check(
-            "independent_attestation" not in independent_dump or openclaw not in data.get("records_by_independence_class", {}).get("independent_attestation", []),
-            "OpenClaw not counted as independent attestation"
-        )
+    # Deep metadata comparison
+    indexed_by_path = get_index_item_by_path(records)
+
+    for actual_file in actual_files:
+        rel = "/" + actual_file.relative_to(ROOT).as_posix()
+        src = json.loads(actual_file.read_text(encoding="utf-8"))
+        idx = indexed_by_path.get(rel)
+
+        ok &= check(idx is not None, f"{rel} indexed")
+        if not idx:
+            continue
+
+        for field in [
+            "archive_status",
+            "verification_status",
+            "do_not_count_as_attestation",
+            "independence_class",
+            "echo_type",
+            "record_kind",
+        ]:
+            expected = src.get(field, "unknown" if field != "do_not_count_as_attestation" else False)
+            actual = idx.get(field, "unknown" if field != "do_not_count_as_attestation" else False)
+            ok &= check(
+                actual == expected,
+                f"{rel} index {field} matches source",
+                f"index={actual!r} source={expected!r}"
+            )
+
+        # OpenClaw-specific: content-based detection
+        record_text = json.dumps(src, ensure_ascii=False).lower()
+        is_openclaw = "openclaw" in record_text
+
+        if is_openclaw and src.get("verification_status") == "invalidated":
+            ok &= check(idx.get("verification_status") == "invalidated",
+                        f"{rel} invalidated OpenClaw index status")
+            ok &= check(idx.get("do_not_count_as_attestation") is True,
+                        f"{rel} invalidated OpenClaw do_not_count")
 
     print("\n=== Final ===")
     if ok:

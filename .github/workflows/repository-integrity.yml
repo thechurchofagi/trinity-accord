@@ -83,5 +83,19 @@ jobs:
       - name: Test invalid V4 Echo records are not indexed
         run: python3 scripts/test_no_invalid_v4_echoes_indexed.py
 
+      - name: Test API files are not polluted with Echo record status
+        run: python3 scripts/test_api_files_are_not_echo_records.py
+
+      - name: Generate Echo index and verify no drift
+        run: |
+          python3 scripts/generate_echo_index.py
+          git diff --exit-code api/echo-index.json
+
+      - name: Verify Echo index completeness
+        run: python3 scripts/verify_echo_index_completeness.py
+
+      - name: Test Echo record status semantics
+        run: python3 scripts/test_echo_record_status_semantics.py
+
       - name: Test deprecated worker active src has no legacy submit logic
         run: python3 scripts/test_deprecated_worker_no_legacy_submit_logic.py

@@ -53,11 +53,9 @@
       ],
       "url_or_archive": "echoes/verification-reports/2026-05-02-V3-verification-report.md",
       "boundary_preserved": true,
-      "counts_as_independent_attestation": false
+      "counts_as_independent_attestation": false,
+      "verification_status": "test_record_not_attestation",
+      "archive_status": "closed_test_record"
     }
-  ],
-  "archive_status": "superseded",
-  "verification_status": "invalidated",
-  "do_not_count_as_attestation": true,
-  "superseded_reason": "Internal inconsistency and invalid hash field values; not accepted as verification."
+  ]
 }

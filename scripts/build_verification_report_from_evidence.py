@@ -511,77 +511,87 @@ def build_report(evidence_input_path, report_out_path=None, echo_out_path=None):
             echo_wrapper["synthetic_fixture"] = True
             echo_wrapper["not_real_world_submission"] = True
 
-    # Run validator on report and echo wrapper to set validation_result
-    try:
+    # Run validator on report and echo wrapper using fail-closed helper
+    def run_submission_validator(obj, label):
+        """Validate a JSON object against validate_agent_submission.py. Fail-closed."""
         import subprocess as _sp
         import tempfile as _tmp
-        # Set to PASS before validation so the validator's own check doesn't block
-        report["generated_by"]["validation_result"] = "PASS"
-        with _tmp.NamedTemporaryFile("w", suffix=".json", delete=False) as _tf:
-            json.dump(report, _tf)
-            _tf.flush()
-            _report_tmp = _tf.name
-        _vr = _sp.run(
-            [sys.executable, str(Path(__file__).parent / "validate_agent_submission.py"), _report_tmp],
-            cwd=str(Path(__file__).parent.parent),
-            text=True, capture_output=True,
-        )
-        Path(_report_tmp).unlink(missing_ok=True)
-        report["generated_by"]["validation_result"] = "PASS" if _vr.returncode == 0 else "FAIL"
-    except Exception:
-        report["generated_by"]["validation_result"] = "NOT_RUN"
 
-    # Check validation result — fail closed
-    validation_passed = report["generated_by"].get("validation_result") == "PASS"
+        tmp_path = None
+        try:
+            with _tmp.NamedTemporaryFile("w", suffix=f"-{label}.json", delete=False) as _tf:
+                json.dump(obj, _tf, indent=2)
+                _tf.flush()
+                tmp_path = Path(_tf.name)
 
-    if not validation_passed:
-        result = {
+            proc = _sp.run(
+                [sys.executable, str(ROOT / "scripts" / "validate_agent_submission.py"), str(tmp_path)],
+                cwd=str(ROOT),
+                text=True,
+                capture_output=True,
+            )
+
+            return {
+                "ok": proc.returncode == 0,
+                "label": label,
+                "returncode": proc.returncode,
+                "stdout": proc.stdout,
+                "stderr": proc.stderr,
+                "exception": None,
+            }
+
+        except Exception as e:
+            return {
+                "ok": False,
+                "label": label,
+                "returncode": None,
+                "stdout": "",
+                "stderr": "",
+                "exception": repr(e),
+            }
+
+        finally:
+            if tmp_path:
+                try:
+                    tmp_path.unlink(missing_ok=True)
+                except Exception:
+                    pass
+
+    # Validate report
+    report["generated_by"]["validation_result"] = "PASS"
+    _vr = run_submission_validator(report, "report")
+    report["generated_by"]["validation_result"] = "PASS" if _vr["ok"] else "FAIL"
+
+    if not _vr["ok"]:
+        return {
             "success": False,
-            "error": "Generated report failed validation (validation_result={})".format(
-                report["generated_by"].get("validation_result", "UNKNOWN")
-            ),
+            "error": f"Generated report failed validation (validation_result={report['generated_by']['validation_result']})",
             "gate_result": gate_result,
             "report": report,
             "echo_wrapper": echo_wrapper,
-            "validator_was_run": report["generated_by"].get("validation_result") != "NOT_RUN",
-            "validator_stdout": _vr.stdout if '_vr' in dir() else "",
-            "validator_stderr": _vr.stderr if '_vr' in dir() else "",
+            "validator_was_run": _vr["returncode"] is not None,
+            "validator_stdout": _vr["stdout"],
+            "validator_stderr": _vr["stderr"],
         }
-        return result
 
     # Validate echo wrapper too if present — fail closed (RF-001 fix)
     if echo_wrapper is not None:
-        try:
-            with _tmp.NamedTemporaryFile("w", suffix=".json", delete=False) as _tf2:
-                json.dump(echo_wrapper, _tf2)
-                _tf2.flush()
-                _echo_tmp = _tf2.name
-            _evr = _sp.run(
-                [sys.executable, str(Path(__file__).parent / "validate_agent_submission.py"), _echo_tmp],
-                cwd=str(Path(__file__).parent.parent),
-                text=True, capture_output=True,
-            )
-            Path(_echo_tmp).unlink(missing_ok=True)
-            if _evr.returncode != 0:
-                return {
-                    "success": False,
-                    "error": "Generated echo wrapper failed validation",
-                    "gate_result": gate_result,
-                    "report": report,
-                    "echo_wrapper": echo_wrapper,
-                    "validator_stdout": _evr.stdout,
-                    "validator_stderr": _evr.stderr,
-                }
-        except Exception as _echo_exc:
+        _evr = run_submission_validator(echo_wrapper, "echo")
+        if not _evr["ok"]:
             return {
                 "success": False,
-                "error": f"Echo wrapper validation raised exception: {_echo_exc}",
+                "error": "Generated echo wrapper failed validation",
                 "gate_result": gate_result,
                 "report": report,
                 "echo_wrapper": echo_wrapper,
-                "validator_stdout": "",
-                "validator_stderr": repr(_echo_exc),
+                "validator_stdout": _evr["stdout"],
+                "validator_stderr": _evr["stderr"],
             }
+
+    # BUG-6 fix: Set submission_validator_passed=true on success
+    report["submission_validator_passed"] = True
+    if echo_wrapper is not None:
+        echo_wrapper["submission_validator_passed"] = True
 
     # Save outputs — only after validation passes
     result = {

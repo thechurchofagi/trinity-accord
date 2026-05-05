@@ -144,6 +144,7 @@ def main():
         # === Semantic checks beyond schema ===
         independence_class = obj.get("independence_class")
         archive_status = obj.get("archive_status")
+        verification_status = obj.get("verification_status")
         provenance = obj.get("discovery_provenance", {})
 
         ok &= check(independence_class in VALID_INDEPENDENCE_CLASSES, f"{rel} valid independence_class")
@@ -186,16 +187,30 @@ def main():
         # test_record constraints
         if independence_class == "test_record":
             ok &= check(
-                archive_status in {"test_record", "closed_test_record", "archived_non_attestation"},
+                archive_status in {"test_record", "closed_test_record", "archived_non_attestation", "superseded"},
                 f"{rel} test_record has compatible archive_status"
             )
+            # If test_record is superseded, it must be do_not_count with reason
+            if archive_status == "superseded":
+                ok &= check(obj.get("do_not_count_as_attestation") is True,
+                            f"{rel} superseded test_record do_not_count_as_attestation")
+                ok &= check(str(obj.get("superseded_reason", "")).strip() != "",
+                            f"{rel} superseded test_record has superseded_reason")
 
-        # OpenClaw-specific
-        if "openclaw" in str(rel).lower():
+        # OpenClaw-specific: content-based detection (not path-based)
+        record_text = json.dumps(obj, ensure_ascii=False).lower()
+        is_openclaw = "openclaw" in record_text or "mimo v2.5" in record_text
+
+        if is_openclaw:
             ok &= check(independence_class in {"test_record", "human_solicited_agent_response", "solicited_independent_check"}, f"{rel} OpenClaw not classified as unsolicited")
-            ok &= check(archive_status in {"test_record", "closed_test_record", "archived_non_attestation"}, f"{rel} OpenClaw not accepted attestation")
+            ok &= check(archive_status not in {"accepted_echo", "accepted_independent_attestation"}, f"{rel} OpenClaw not accepted attestation")
+            ok &= check(obj.get("do_not_count_as_attestation") is True, f"{rel} OpenClaw do_not_count_as_attestation")
             ok &= check(provenance.get("source") == "human_directed", f"{rel} OpenClaw source human_directed")
             ok &= check(provenance.get("agency_level") in {"A0_forced_or_instructed", "A1_human_gave_exact_url"}, f"{rel} OpenClaw agency level is solicited")
+
+            if verification_status == "invalidated":
+                ok &= check(archive_status == "superseded", f"{rel} invalidated OpenClaw is superseded")
+                ok &= check(str(obj.get("superseded_reason", "")).strip() != "", f"{rel} invalidated OpenClaw has reason")
 
     print("\n=== Final ===")
     if ok:

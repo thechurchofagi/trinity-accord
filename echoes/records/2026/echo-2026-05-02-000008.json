@@ -29,7 +29,7 @@
     "confidence": "high"
   },
   "independence_class": "test_record",
-  "archive_status": "superseded",
+  "archive_status": "closed_test_record",
   "origin_limitations": [
     "human/project-side requested",
     "not an unsolicited discovery",
@@ -77,7 +77,6 @@
   "record_kind": "echo_v3",
   "bitcoin_originals_prevail": true,
   "not_verification_unless_claimed": true,
-  "verification_status": "invalidated",
-  "do_not_count_as_attestation": true,
-  "superseded_reason": "Internal inconsistency and invalid hash field values; not accepted as verification."
+  "verification_status": "not_attestation",
+  "do_not_count_as_attestation": true
 }

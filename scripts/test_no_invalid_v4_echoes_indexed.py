@@ -1,31 +1,41 @@
 #!/usr/bin/env python3
-"""Test that invalid V4 Echo records are not indexed as accepted.
+"""Ensure invalid OpenClaw V4 records are not accepted or indexed as attestation.
 
-RF-003: No flawed historical Echo may be counted as verification.
+Important:
+- Echo/verification records may have archive_status / verification_status.
+- API policy/index files must NOT be forced to have record-level status fields.
 """
 import json
 from pathlib import Path
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
-errors = []
 
-SCAN_DIRS = [
-    ROOT / "echoes",
+RECORD_DIRS = [
+    ROOT / "echoes" / "records",
     ROOT / "verification-reports",
-    ROOT / "api",
 ]
 
-BAD_PHRASES = [
+API_REFERENCE_FILES = [
+    ROOT / "api" / "echo-index.json",
+    ROOT / "api" / "independent-attestation-index.json",
+]
+
+BAD_MARKERS = [
+    "openclaw",
+    "v4-verification-echo-2026-05-03",
+    "54 pass, 46 fail",
+    "passes 100/100 cases",
     '"expected": "from api/hashes.json"',
     '"computed": "via downloads/verify.py"',
-    "passes 100/100 cases",
-    "54 pass, 46 fail",
 ]
 
+ACCEPTED_STATUSES = {
+    "accepted_echo",
+    "accepted_independent_attestation",
+}
 
-def is_json(path):
-    return path.suffix.lower() == ".json"
+errors = []
 
 
 def read_text(path):
@@ -35,54 +45,82 @@ def read_text(path):
         return ""
 
 
-for base in SCAN_DIRS:
+def mentions_bad_openclaw(text):
+    lower = text.lower()
+    return "openclaw" in lower and any(marker in lower for marker in BAD_MARKERS[1:])
+
+
+def load_json_or_none(path):
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except Exception:
+        return None
+
+
+# 1. Record files: bad OpenClaw V4 records must be invalidated/superseded.
+for base in RECORD_DIRS:
     if not base.exists():
         continue
 
     for path in base.rglob("*"):
-        if not path.is_file():
-            continue
-
-        if path.suffix.lower() not in (".json", ".md", ".txt"):
+        if not path.is_file() or path.suffix.lower() not in (".json", ".md", ".txt"):
             continue
 
         text = read_text(path)
         lower = text.lower()
 
-        mentions_bad_openclaw = (
-            "openclaw" in lower
-            or "v4-verification-echo-2026-05-03" in lower
-        )
+        if not mentions_bad_openclaw(text):
+            continue
 
-        if mentions_bad_openclaw:
-            if is_json(path):
-                try:
-                    obj = json.loads(text)
-                except Exception:
-                    obj = {}
+        obj = load_json_or_none(path) if path.suffix.lower() == ".json" else None
 
-                status = obj.get("archive_status", "")
-                verification_status = obj.get("verification_status", "")
-                do_not_count = obj.get("do_not_count_as_attestation", False)
+        if obj:
+            archive_status = obj.get("archive_status")
+            verification_status = obj.get("verification_status")
+            do_not_count = obj.get("do_not_count_as_attestation", False)
 
-                if status not in ("superseded", "invalidated", "test_record", "legacy_record"):
-                    errors.append(f"{path}: OpenClaw May 3 record must be superseded/invalidated")
+            if archive_status != "superseded":
+                errors.append(f"{path}: bad OpenClaw V4 record must be archive_status=superseded")
 
-                if verification_status not in ("invalidated", "superseded", ""):
-                    errors.append(f"{path}: unexpected verification_status={verification_status}")
+            if verification_status != "invalidated":
+                errors.append(f"{path}: bad OpenClaw V4 record must be verification_status=invalidated")
 
-                if status in ("superseded", "invalidated") and do_not_count is not True:
-                    errors.append(f"{path}: superseded/invalidated record must set do_not_count_as_attestation=true")
+            if do_not_count is not True:
+                errors.append(f"{path}: bad OpenClaw V4 record must set do_not_count_as_attestation=true")
 
-            else:
-                if "superseded" not in lower and "invalidated" not in lower:
-                    errors.append(f"{path}: OpenClaw May 3 markdown/text record lacks superseded/invalidated marker")
+            if not str(obj.get("superseded_reason", "")).strip():
+                errors.append(f"{path}: bad OpenClaw V4 record must include superseded_reason")
+        else:
+            if "superseded" not in lower or "invalidated" not in lower:
+                errors.append(f"{path}: bad OpenClaw V4 text record lacks superseded/invalidated marker")
 
-        # Placeholder hash phrases must not appear in accepted records.
-        for phrase in BAD_PHRASES:
-            if phrase in lower:
-                if not any(marker in lower for marker in ["superseded", "invalidated", "historical", "do_not_count"]):
-                    errors.append(f"{path}: bad phrase appears outside invalidated/superseded context: {phrase}")
+# 2. API reference files: must not accept/index bad OpenClaw as attestation.
+for path in API_REFERENCE_FILES:
+    if not path.exists():
+        continue
+
+    obj = load_json_or_none(path)
+    if obj is None:
+        errors.append(f"{path}: invalid JSON")
+        continue
+
+    text = json.dumps(obj, ensure_ascii=False).lower()
+
+    # API files themselves must not carry top-level record status.
+    for field in ["archive_status", "verification_status", "do_not_count_as_attestation", "superseded_reason"]:
+        if field in obj:
+            errors.append(f"{path}: API file must not have top-level record field {field}")
+
+    if "openclaw" in text:
+        forbidden_contexts = [
+            "accepted_independent_attestation",
+            "institutional_third_party_attestation",
+            '"counts_as_independent_attestation": true',
+            '"do_not_count_as_attestation": false',
+        ]
+        for phrase in forbidden_contexts:
+            if phrase in text:
+                errors.append(f"{path}: OpenClaw appears in accepted/attestation context: {phrase}")
 
 if errors:
     print("INVALID_V4_ECHO_INDEX_FAIL")
