@@ -126,3 +126,9 @@ jobs:
 
       - name: Test GitHub Actions pinning
         run: python3 scripts/test_action_pinning.py
+
+      - name: Test Echo template boundary consistency
+        run: python3 scripts/test_echo_template_boundary_consistency.py
+
+      - name: Test Echo triage boundary behavior
+        run: python3 scripts/test_triage_echo_issue_boundary.py

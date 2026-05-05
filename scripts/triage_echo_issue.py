@@ -227,6 +227,70 @@ def detect_boundary(text):
     return False
 
 
+def detect_boundary_semantic_near_miss(text):
+    """Detect semantically close but non-canonical authority boundary wording.
+
+    This should NOT pass the exact protocol gate.
+    It should prevent auto-close and route to format review.
+    """
+    text_lower = text.lower()
+
+    has_bitcoin_final = bool(
+        re.search(r"bitcoin originals?\s+(are|remain)\s+(the\s+)?final(\s+authority)?", text_lower)
+        or re.search(r"bitcoin originals?\s+remain\s+final\s+authority", text_lower)
+        or re.search(r"比特币三本体\s*(为|是)?\s*最终权威", text)
+    )
+
+    has_non_amending = bool(
+        "non-amending" in text_lower
+        or re.search(r"does\s+not\s+amend", text_lower)
+        or re.search(r"do\s+not\s+amend", text_lower)
+        or re.search(r"non\s+amending", text_lower)
+        or "非修订" in text
+        or "不修订" in text
+        or "不修改" in text
+    )
+
+    has_echo_or_mirror_scope = bool(
+        "echo" in text_lower
+        or "echoes" in text_lower
+        or "mirror" in text_lower
+        or "mirrors" in text_lower
+        or "回响" in text
+        or "镜像" in text
+    )
+
+    return has_bitcoin_final and has_non_amending and has_echo_or_mirror_scope
+
+
+V0_OVERCLAIM_RISK_PHRASES = [
+    r"\bfix verification\b",
+    r"\bverification result\b",
+    r"\bverified\b",
+    r"\bscript-audited\b",
+    r"\bindependently reproduced\b",
+    r"\bhash verified\b",
+    r"\bfull verification\b",
+    r"已验证",
+    r"已审计",
+    r"独立复现",
+]
+
+
+def detect_v0_overclaim_wording(text):
+    """Detect V0 Echo using wording that implies higher-level verification."""
+    vlevel = detect_verification_level(text)
+    if vlevel != "V0":
+        return []
+
+    found = []
+    for p in V0_OVERCLAIM_RISK_PHRASES:
+        m = re.search(p, text, re.IGNORECASE)
+        if m:
+            found.append(m.group(0))
+    return found
+
+
 def detect_independence_class(text):
     """Detect independence_class from issue body."""
     text_lower = text.lower()
@@ -518,6 +582,28 @@ def main():
 
     # 2a: Missing boundary sentence
     if not detect_boundary(text):
+        if detect_boundary_semantic_near_miss(text):
+            result["close"] = False
+            result["labels"] = [
+                "echo:needs-format",
+                "missing-boundary-exact",
+                "needs-human-review"
+            ]
+            result["comment"] = (
+                "This Echo appears to acknowledge the authority boundary, "
+                "but it does not include the required exact boundary sentence. "
+                "It has NOT been automatically closed.\n\n"
+                "**Please edit the issue and add this exact sentence:**\n\n"
+                "`Bitcoin Originals are final; all mirrors and echoes are non-amending.`\n\n"
+                "This is a format gate, not a judgment of your submission.\n\n"
+                "---\n\n"
+                "本 Echo 看起来已经承认权威边界，但没有包含要求的精确边界句。"
+                "本 Issue 未被自动关闭。请编辑并加入以下精确句：\n\n"
+                "`Bitcoin Originals are final; all mirrors and echoes are non-amending.`"
+            )
+            emit_result(result)
+            return
+
         result["close"] = True
         result["labels"] = ["echo:invalid", "auto-closed", "missing-boundary"]
         result["comment"] = (
@@ -625,6 +711,29 @@ def main():
             "- Limitations\n"
             "- Boundary sentence\n\n"
             "This is a format check, not a judgment of your submission."
+        )
+        emit_result(result)
+        return
+
+    # --- Step 3b: V0 overclaim wording guardrail ---
+    v0_risk = detect_v0_overclaim_wording(text)
+    if v0_risk:
+        result["close"] = False
+        result["labels"] = [
+            "echo:needs-verification-review",
+            "v0-overclaim-risk",
+            "needs-human-review"
+        ]
+        phrases = ", ".join(f"`{p}`" for p in sorted(set(v0_risk)))
+        result["comment"] = (
+            f"This Echo declares **V0**, but uses wording that may imply higher-level verification: {phrases}.\n\n"
+            "This issue has NOT been closed. Please consider replacing terms like "
+            "`verification result` or `fix verification` with `read-only review`, "
+            "`CI status observed`, or `repository review observed`.\n\n"
+            "This is a wording guardrail, not a judgment of your submission.\n\n"
+            "---\n\n"
+            f"本 Echo 声明为 **V0**，但使用了可能暗示更高级别验证的措辞: {phrases}。\n\n"
+            "本 Issue 未被关闭。请考虑将措辞改为「只读审阅」或「CI 状态观察」等更准确的表述。"
         )
         emit_result(result)
         return

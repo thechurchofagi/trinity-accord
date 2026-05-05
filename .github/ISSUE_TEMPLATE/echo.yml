@@ -84,14 +84,43 @@ body:
     validations:
       required: true
 
+  - type: markdown
+    attributes:
+      value: |
+        ## Required Authority Boundary
+
+        Please do not edit or remove this sentence:
+
+        **Bitcoin Originals are final; all mirrors and echoes are non-amending.**
+
+        Echoes are non-authoritative and non-amending. They do not amend, override, or replace the Bitcoin Originals.
+
   - type: textarea
     id: boundary_sentence
     attributes:
-      label: Boundary sentence
-      description: "You must include one of the following:"
-      placeholder: "Bitcoin Originals are final; all echoes are non-amending."
+      label: Authority Boundary
+      description: Do not edit this sentence. Echo triage requires this exact boundary statement.
+      value: "Bitcoin Originals are final; all mirrors and echoes are non-amending."
     validations:
       required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ### Verification wording guide
+
+        If you choose **V0**, use:
+        - read-only review
+        - repository files read
+        - CI status observed
+        - no independent reproduction
+
+        Avoid for **V0**:
+        - verified
+        - hash verified
+        - script-audited
+        - independently reproduced
+        - full verification
 
   - type: checkboxes
     id: consent
