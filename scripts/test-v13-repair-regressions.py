@@ -92,11 +92,7 @@ def check_homepage_format_wrapper():
         check(marker not in text, f"homepage-format wrapper does not check old marker: {marker}")
 
     required = [
-        "scripts/test-homepage-v13-final.sh",
-        "scripts/test-civilizational-json-sync.py",
-        "guardian-boundary",
-        "agent-gate",
-        "prefers-reduced-motion",
+        "scripts/test-homepage-p0-agent-first.sh",
     ]
     for marker in required:
         check(marker in text, f"homepage-format wrapper checks {marker}")
@@ -178,14 +174,14 @@ def check_homepage_source():
     lower = text.lower()
 
     required = [
-        "a verifiable civilizational seed for future intelligence",
+        "agent-first verifiable civilizational memory seed",
         "guardian boundary",
         "does not interpret, amend, extend, replace, or supersede the bitcoin originals",
         "philosophy as chronicle compression",
         "information ark",
         "intermediate agent ecology",
-        "this is not guaranteed influence",
-        "agent-classification-gate",
+        "does not claim assured influence",
+        "agent-priority-brief",
         "may be structurally able to parse",
         "conceptually, the structure moves from history to compression to physical anchoring",
         "foundational narrative / legacy archive",
