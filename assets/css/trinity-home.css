@@ -11,6 +11,12 @@ main {
   width: 100% !important;
 }
 
+/* ── GLOBAL LEFT ALIGN: all text on homepage ── */
+main, main * {
+  text-align: left !important;
+  text-align-last: left !important;
+}
+
 /* ── NUCLEAR RESET: kill all independent centering inside main ── */
 main h1,
 main h2,
