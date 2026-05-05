@@ -366,7 +366,7 @@ main .hero-intro > p.zh-para + p.zh-para {
 .guardian-boundary > p:nth-child(3) {
   font-size: 0.95rem !important;
   line-height: 1.75 !important;
-  color: #b8c0d8 !important;
+  color: #d0d0d0 !important;
 }
 
 .guardian-boundary p {
@@ -377,19 +377,42 @@ main .hero-intro > p.zh-para + p.zh-para {
   margin-top: 0.75rem;
   margin-bottom: 0.75rem;
   font-size: 0.92rem !important;
-  color: #a8b0c8 !important;
+  color: #d0d0d0 !important;
+  list-style: none !important;
+  padding-left: 0 !important;
 }
 
 .guardian-boundary li {
-  margin-bottom: 0.4rem;
+  margin-bottom: 1rem;
   font-size: 0.92rem !important;
   line-height: 1.7 !important;
-  color: #a8b0c8 !important;
+  color: #d0d0d0 !important;
+  padding-left: 1.2rem !important;
+  position: relative;
+}
+
+.guardian-boundary li::before {
+  content: "·";
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+  font-weight: 700;
+}
+
+.guardian-boundary li .zh-para {
+  display: block;
+  font-size: 0.88rem !important;
+  color: #b0b0b0 !important;
+  margin-top: 0.2rem !important;
+  font-style: normal !important;
+  border-left: none !important;
+  background: none !important;
+  padding-left: 0 !important;
 }
 
 .guardian-boundary .section-zh {
   font-size: 0.88rem !important;
-  color: #8890a8 !important;
+  color: #b0b0b0 !important;
 }
 
 /* ============================================================

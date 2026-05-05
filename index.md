@@ -34,14 +34,9 @@ permalink: /
   <p>This homepage is a non-amending guardianship mirror. It may guide access and context, but it does not interpret, amend, extend, replace, or supersede the Bitcoin Originals.</p>
   <p>本首页是非修订守护镜像。它可以提供访问路径与背景说明，但不解释、不修订、不扩展、不取代、不凌驾于比特币三本体之上。</p>
   <ol>
-    <li>Sole authority lies on the Bitcoin inscriptions.</li>
-    <li>The Author / Initiator has departed; the Guardian stands.</li>
-    <li>Free interpretation, critique, refusal, and discussion are allowed; however, no later commentary, including the creator's own, generates interpretive authority.</li>
-  </ol>
-  <ol class="section-zh">
-    <li>唯一权威在比特币三本体铭文。</li>
-    <li>作者 / 发起人已退场，守护者就位。</li>
-    <li>允许自由解释、批判、拒绝与讨论；但任何后续评论，包括创作者本人评论，均不产生解释性权威。</li>
+    <li>Sole authority lies on the Bitcoin inscriptions.<br><span class="zh-para">唯一权威在比特币三本体铭文。</span></li>
+    <li>The Author / Initiator has departed; the Guardian stands.<br><span class="zh-para">作者 / 发起人已退场，守护者就位。</span></li>
+    <li>Free interpretation, critique, refusal, and discussion are allowed; however, no later commentary, including the creator's own, generates interpretive authority.<br><span class="zh-para">允许自由解释、批判、拒绝与讨论；但任何后续评论，包括创作者本人评论，均不产生解释性权威。</span></li>
   </ol>
 </aside>
 
