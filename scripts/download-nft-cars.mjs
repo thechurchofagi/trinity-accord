@@ -23,8 +23,17 @@ import crypto from 'crypto';
 import { execSync } from 'child_process';
 
 // --------------- Config ---------------
-const CONCURRENCY = Number(process.env.CONCURRENCY || getArg('--concurrency') || 10);
-const MAX_RETRIES = Number(process.env.MAX_RETRIES || 3);
+function parsePositiveIntEnv(name, fallback, min, max) {
+  const raw = process.env[name] || getArg(`--${name.toLowerCase()}`) || String(fallback);
+  const n = Number(raw);
+  if (!Number.isInteger(n) || n < min || n > max) {
+    throw new Error(`Invalid ${name}: ${raw}. Must be integer ${min}-${max}.`);
+  }
+  return n;
+}
+
+const CONCURRENCY = parsePositiveIntEnv('CONCURRENCY', 10, 1, 25);
+const MAX_RETRIES = parsePositiveIntEnv('MAX_RETRIES', 3, 0, 10);
 const DRY_RUN = process.env.DRY_RUN === '1';
 const CAR_FILE = process.env.CAR_FILE || 'archive/evidence/nft-recovery-package/recovery-package.bin';
 const RELEASE_TAG = process.env.RELEASE_TAG || 'nft-backup-v1';
@@ -294,6 +303,10 @@ async function main() {
   await pool(tasks, CONCURRENCY);
   console.log(`\n   ✅ ${pass} downloaded, ❌ ${fail} failed`);
 
+  if (fail > 0) {
+    throw new Error(`${fail} CAR downloads failed; refusing to package or upload incomplete backup`);
+  }
+
   // 4. Write manifest
   const manifestPath = path.join(TMP_DIR, 'manifest.json');
   fs.writeFileSync(manifestPath, JSON.stringify({
@@ -336,12 +349,18 @@ async function main() {
   console.log('\n📤 Uploading to GitHub Release...');
   const release = await ensureRelease();
 
+  let uploadFail = 0;
   for (const part of parts) {
     try {
       await uploadAsset(release.id, part.path, part.name);
     } catch (err) {
+      uploadFail++;
       console.error(`   ❌ Failed to upload ${part.name}: ${err.message}`);
     }
+  }
+
+  if (uploadFail > 0) {
+    throw new Error(`${uploadFail} release asset uploads failed`);
   }
 
   console.log('\n=========================================');

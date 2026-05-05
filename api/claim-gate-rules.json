@@ -1,7 +1,11 @@
 {
   "schema": "trinityaccord.claim-gate-rules.v1",
   "status": "non_authoritative_submission_gate",
-  "execution_status": "documentation_only",
+  "execution_status": "implemented",
+  "implementation_path": "scripts/claim_gate.py",
+  "ci_enforced": true,
+  "ci_workflow": ".github/workflows/repository-integrity.yml",
+  "note": "This JSON describes the rules; executable enforcement is implemented in scripts/claim_gate.py. Bitcoin Originals remain final authority.",
   "authority_boundary": {
     "claim_gate_does_not_amend_bitcoin_originals": true,
     "claim_gate_does_not_prove_truth": true,
@@ -138,11 +142,10 @@
     },
     {
       "level": "V8",
-      "name": "Advanced forensic / celestial witness",
+      "name": "Advanced forensic / celestial attestation",
       "requires_one_of": [
         "P7_P8_P9_advanced_physical",
-        "T8_star_moon_witness_with_nonpublic_boundary",
-        "authorized_advanced_forensic_challenge"
+        "T8_star_moon_witness_with_nonpublic_boundary"
       ],
       "public_image_or_moon_photo_insufficient": true,
       "canonical_amendment_forbidden": true

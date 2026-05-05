@@ -176,19 +176,23 @@
     },
     {
       "level": "V8",
-      "name": "Forensic physical attestation",
+      "name": "Advanced forensic / celestial attestation",
       "data_sources": [
-        "tool-assisted capture",
+        "tool-assisted physical capture",
         "AI/microscopy data",
-        "confidential challenge data"
+        "confidential challenge data",
+        "authorized non-public celestial witness data"
       ],
-      "method": "tool-assisted flaw analysis with signed report",
+      "method": "advanced physical forensic attestation or authorized celestial witness time attestation",
       "allowed_claims": [
-        "forensic attestation confirmed"
+        "forensic physical attestation confirmed",
+        "authorized celestial witness attestation confirmed",
+        "method class and limitations reported"
       ],
       "forbidden_claims": [
-        "public disclosure of confidential flaw data unless authorized",
-        "canonical amendment"
+        "public disclosure of confidential flaw or non-public celestial data unless authorized",
+        "canonical amendment",
+        "truth proven"
       ]
     }
   ],

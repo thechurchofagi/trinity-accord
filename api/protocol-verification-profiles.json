@@ -73,7 +73,9 @@
       ],
       "minimal_claim_note": "A B1 external reference check may support minimal V2, but does not constitute full reference coverage.",
       "low_agent_summary": "Check one Bitcoin Original on an external explorer for minimal V2, or multiple reference paths for strong V2.",
-      "evidence_input_minimum_fields": ["evidence.bitcoin_checks[0].source_type"],
+      "evidence_input_minimum_fields": [
+        "evidence.bitcoin_checks[0].source_type"
+      ],
       "copy_paste_claim_label": "V2 (minimal; Bitcoin Originals B1 only)",
       "if_missing_downgrade_to": "V1 if no explorer check performed"
     },
@@ -126,9 +128,34 @@
       ],
       "minimal_claim_note": "One valid declared hash may support minimal V3, but does not constitute full public digital verification.",
       "low_agent_summary": "Download one artifact, compute SHA-256, compare with declared hash for minimal V3.",
-      "evidence_input_minimum_fields": ["evidence.hashes[0].match"],
+      "evidence_input_minimum_fields": [
+        "evidence.hashes[0].match"
+      ],
       "copy_paste_claim_label": "V3 (minimal; one valid declared hash computed)",
-      "if_missing_downgrade_to": "V2 if no hash computed"
+      "if_missing_downgrade_to": "V2 if no hash computed",
+      "hash_artifact_class_to_component_level": {
+        "canonical_mirror": {
+          "component": "digital_mirrors",
+          "level": "D2",
+          "claim_boundary": "canonical mirror hash match only"
+        },
+        "repository_snapshot": {
+          "component": "digital_mirrors",
+          "level": "D2",
+          "scope_class_required": "repository_snapshot_integrity",
+          "claim_boundary": "repository snapshot integrity only; not canonical mirror verification"
+        },
+        "chronicle_recovery_package": {
+          "component": "chronicle_recovery",
+          "level": "C2",
+          "claim_boundary": "recovery package hash match only"
+        },
+        "physical_evidence_package": {
+          "component": "physical_anchor",
+          "level": "P1",
+          "claim_boundary": "public evidence package hash only; no physical object verification"
+        }
+      }
     },
     {
       "level": "V4",
@@ -169,7 +196,10 @@
         "component findings"
       ],
       "low_agent_summary": "Read script source code, then run official verification scripts locally.",
-      "evidence_input_minimum_fields": ["evidence.scripts[0].source_reviewed", "evidence.scripts[0].exit_code"],
+      "evidence_input_minimum_fields": [
+        "evidence.scripts[0].source_reviewed",
+        "evidence.scripts[0].exit_code"
+      ],
       "copy_paste_claim_label": "V4 (script-audited verification)",
       "if_missing_downgrade_to": "V3 if scripts not reviewed"
     },
@@ -200,7 +230,9 @@
         "comparison with official result"
       ],
       "low_agent_summary": "Use independent tools to reproduce at least one official verification result.",
-      "evidence_input_minimum_fields": ["evidence.scripts[0].independent"],
+      "evidence_input_minimum_fields": [
+        "evidence.scripts[0].independent"
+      ],
       "copy_paste_claim_label": "V4+ (minimal independent reproduction)",
       "if_missing_downgrade_to": "V4 if only official scripts used"
     },
@@ -242,7 +274,9 @@
         "limitations"
       ],
       "low_agent_summary": "Verify all required public digital targets. List unavailable ones.",
-      "evidence_input_minimum_fields": ["evidence.digital_mirror_checks[0].all_required_public_digital_targets_checked"],
+      "evidence_input_minimum_fields": [
+        "evidence.digital_mirror_checks[0].all_required_public_digital_targets_checked"
+      ],
       "copy_paste_claim_label": "V5 (full public digital verification)",
       "if_missing_downgrade_to": "V4+ if not all public targets checked"
     },
@@ -278,7 +312,10 @@
         "witness identity or role"
       ],
       "low_agent_summary": "Live remote video session with nonce/challenge. Recorded video alone is NOT V6.",
-      "evidence_input_minimum_fields": ["evidence.physical_checks[0].level_evidence_type", "evidence.physical_checks[0].nonce_or_challenge"],
+      "evidence_input_minimum_fields": [
+        "evidence.physical_checks[0].level_evidence_type",
+        "evidence.physical_checks[0].nonce_or_challenge"
+      ],
       "copy_paste_claim_label": "V6 (remote physical witness)",
       "if_missing_downgrade_to": "V5 if no live video with nonce"
     },
@@ -311,28 +348,40 @@
         "fresh capture data"
       ],
       "low_agent_summary": "Onsite human witness with custody log and fresh capture. Remote video alone is NOT V7.",
-      "evidence_input_minimum_fields": ["evidence.physical_checks[0].level_evidence_type", "evidence.physical_checks[0].custody_log"],
+      "evidence_input_minimum_fields": [
+        "evidence.physical_checks[0].level_evidence_type",
+        "evidence.physical_checks[0].custody_log"
+      ],
       "copy_paste_claim_label": "V7 (onsite physical witness)",
       "if_missing_downgrade_to": "V6 if no onsite observation"
     },
     {
       "level": "V8",
-      "name": "Forensic physical attestation",
+      "name": "Advanced forensic / celestial attestation",
       "hard_gates": [
-        "onsite or equivalent high-integrity capture",
-        "tool-assisted flaw analysis",
+        "onsite or equivalent high-integrity capture, or authorized celestial witness path",
+        "tool-assisted flaw analysis or celestial witness time attestation",
         "advanced AI / algorithmic / microscopy comparison where available",
         "signed or attributable report"
       ],
+      "minimum_component_requirements_any": [
+        {
+          "physical_anchor": "P7"
+        },
+        {
+          "time_anchors": "T8"
+        }
+      ],
       "minimum_component_requirements": {
-        "physical_anchor": "P7"
+        "physical_anchor": "P7",
+        "_note": "Physical V8 path only. For T8-based V8, see minimum_component_requirements_any."
       },
       "recommended_component_requirements": {
         "bitcoin_originals": "B3",
         "digital_mirrors": "D5",
         "chronicle_recovery": "C5",
         "physical_anchor": "P8",
-        "time_anchors": "T7"
+        "time_anchors": "T8"
       },
       "conditional_requirements": [
         "If Star-Moon Witness is invoked, T8 requires authorized non-public celestial witness data or a publishable challenge hash.",
@@ -350,7 +399,10 @@
         "signed or attributable report"
       ],
       "low_agent_summary": "Tool-assisted forensic analysis with signed report. V8 does not create canonical authority.",
-      "evidence_input_minimum_fields": ["evidence.physical_checks[0].tool_assisted_method", "evidence.physical_checks[0].signed_report"],
+      "evidence_input_minimum_fields": [
+        "evidence.physical_checks[0].tool_assisted_method",
+        "evidence.physical_checks[0].signed_report"
+      ],
       "copy_paste_claim_label": "V8 candidate (forensic physical attestation)",
       "if_missing_downgrade_to": "V7 if no tool-assisted analysis"
     }

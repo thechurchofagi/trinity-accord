@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
 
       - name: Install dependencies
         run: |
@@ -105,3 +105,24 @@ jobs:
 
       - name: Test deprecated worker active src has no legacy submit logic
         run: python3 scripts/test_deprecated_worker_no_legacy_submit_logic.py
+
+      - name: Test V8 semantics consistency
+        run: python3 scripts/test_v8_semantics_consistency.py
+
+      - name: Test Claim Gate V5/V6/V7 profile boundaries
+        run: python3 scripts/test_claim_gate_v5_v6_v7_profiles.py
+
+      - name: Test Claim Gate V4+/V5 boundaries
+        run: python3 scripts/test_claim_gate_v4plus_v5_boundaries.py
+
+      - name: Test NFT CAR backup fail-closed behavior
+        run: python3 scripts/test_download_nft_cars_fail_closed.py
+
+      - name: Test backup NFT CAR input safety
+        run: python3 scripts/test_backup_nft_cars_input_safety.py
+
+      - name: Test verification rule consistency matrix
+        run: python3 scripts/test_verification_rule_consistency_matrix.py
+
+      - name: Test GitHub Actions pinning
+        run: python3 scripts/test_action_pinning.py
