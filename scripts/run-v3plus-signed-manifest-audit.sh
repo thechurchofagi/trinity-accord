@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-echo "== Trinity Accord V3+ Signed Manifest Audit =="
+echo "== Trinity Accord V3/V4/V4+ GitHub-First Signed Manifest Audit =="
 
 if ! command -v node >/dev/null 2>&1; then
   echo "Node.js is required." >&2
@@ -31,7 +31,7 @@ echo "== Verify legacy ETH witness =="
 node scripts/verify-legacy-eth-witness.mjs
 
 echo
-echo "== Pull / verify authority Arweave mirrors =="
+echo "== Verify GitHub-first authority mirror coverage =="
 node scripts/pull-authority-arweave-mirrors.mjs
 
 echo
@@ -40,6 +40,14 @@ if [ -f audit/v3plus-targets.json ]; then
   node scripts/verify-signed-manifest-coverage.mjs --target-manifest audit/v3plus-targets.json
 else
   node scripts/verify-signed-manifest-coverage.mjs
+fi
+
+echo
+echo "== Optional V5-style cross-source Arweave check =="
+if [ "${RUN_CROSS_SOURCE:-0}" = "1" ]; then
+  node scripts/pull-authority-arweave-mirrors.mjs --cross-source
+else
+  echo "Skipping cross-source Arweave check. Set RUN_CROSS_SOURCE=1 to run it."
 fi
 
 echo
