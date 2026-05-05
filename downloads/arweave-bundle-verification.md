@@ -2,7 +2,7 @@
 layout: default
 title: "Arweave Bundle Verification"
 description: "Verification notes for the Arweave bundle."
-permalink: /downloads/arweave-bundle-verification
+permalink: /downloads/arweave-bundle-verification/
 ---
 
 # Arweave Bundle Verification Guide
