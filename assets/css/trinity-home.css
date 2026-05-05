@@ -45,21 +45,22 @@ main .closing-posture > p {
 main p {
   font-size: 18px !important;
   line-height: 1.85 !important;
-  color: #d0d8f0 !important;
+  color: #d0d0d0 !important;
   margin-bottom: 1.2rem !important;
+  font-style: italic !important;
 }
 
 main li {
   font-size: 18px !important;
   line-height: 1.85 !important;
-  color: #d0d8f0 !important;
+  color: #d0d0d0 !important;
   margin-bottom: 0.45rem !important;
 }
 
 main blockquote {
   font-size: 17px !important;
   line-height: 1.9 !important;
-  color: #e0e6f6 !important;
+  color: #d0d0d0 !important;
   padding: 1.25rem 1.5rem !important;
   margin: 1.5rem 0 !important;
   border-left: 2px solid rgba(201, 168, 76, 0.4) !important;
@@ -74,7 +75,7 @@ main blockquote:hover {
 
 main blockquote p {
   font-size: 17px !important;
-  color: #e0e6f6 !important;
+  color: #d0d0d0 !important;
   margin-bottom: 0.8rem !important;
 }
 
@@ -276,11 +277,11 @@ main .hero-zh {
 /* Make the opening lines stand out — poetic, centered */
 .hero-intro > p:first-child,
 .hero-intro > p:nth-child(2) {
-  font-family: var(--serif) !important;
+  font-family: 'Times New Roman', 'SimSun', '宋体', serif !important;
   font-style: italic !important;
-  font-size: 1.15rem !important;
+  font-size: 1rem !important;
   text-align: center !important;
-  color: var(--gold-light) !important;
+  color: #d0d0d0 !important;
   letter-spacing: 0.01em;
   line-height: 2 !important;
   margin-bottom: 1.5rem !important;
@@ -297,11 +298,12 @@ main .hero-zh {
 .hero-intro > p:not(:first-child):not(:nth-child(2)) {
   text-align: center !important;
   font-size: 1rem !important;
-  color: #c0c8e0 !important;
+  color: #d0d0d0 !important;
   line-height: 2 !important;
   max-width: 36rem !important;
   margin-left: auto !important;
   margin-right: auto !important;
+  font-style: italic !important;
 }
 
 /* ── Hero-intro Chinese paragraphs: centered, no left border ── */
@@ -313,12 +315,13 @@ main .hero-intro > p.zh-para + p.zh-para {
   border-left: none !important;
   background: none !important;
   padding-left: 0 !important;
-  color: #c0c8e0 !important;
+  color: #d0d0d0 !important;
   font-size: 1rem !important;
   line-height: 2 !important;
   max-width: 36rem !important;
   margin-left: auto !important;
   margin-right: auto !important;
+  font-style: normal !important;
 }
 
 /* ============================================================
@@ -904,25 +907,25 @@ main .philosophical-modesty blockquote {
 }
 
 .poetic-statement p {
-  font-family: var(--serif) !important;
+  font-family: 'Times New Roman', 'SimSun', '宋体', serif !important;
   font-size: 1.1rem !important;
   line-height: 2 !important;
-  color: #d8d0c0 !important;
+  color: #d0d0d0 !important;
   margin-bottom: 0.3rem !important;
   letter-spacing: 0.01em;
 }
 
-/* English lines: italic, slightly brighter */
+/* English lines: italic, gray-white */
 .poetic-statement p:nth-child(odd) {
   font-style: italic !important;
-  color: var(--gold-light) !important;
-  font-size: 1.15rem !important;
+  color: #d0d0d0 !important;
+  font-size: 1.1rem !important;
 }
 
-/* Chinese lines: dimmer, smaller */
+/* Chinese lines: gray-white, not italic */
 .poetic-statement p:nth-child(even) {
-  font-size: 0.95rem !important;
-  color: #8890a8 !important;
+  font-size: 1.1rem !important;
+  color: #d0d0d0 !important;
   font-style: normal !important;
   margin-bottom: 1.2rem !important;
 }
@@ -932,14 +935,14 @@ main .philosophical-modesty blockquote {
   text-align: center !important;
   margin-top: 1.5rem !important;
   font-style: italic !important;
-  color: var(--gold) !important;
+  color: #d0d0d0 !important;
   font-size: 1.2rem !important;
 }
 
 .poetic-statement p:last-child {
   text-align: center !important;
   font-size: 1rem !important;
-  color: #8890a8 !important;
+  color: #d0d0d0 !important;
 }
 
 @media (max-width: 760px) {
@@ -958,17 +961,17 @@ main .philosophical-modesty blockquote {
    Each EN→CN pair forms one visual unit
    ============================================================ */
 
-/* ── Chinese paragraphs: warm gold, left-accent, archival feel ── */
+/* ── Chinese paragraphs: gray-white, left-accent, archival feel ── */
 main p.zh-para {
-  font-size: 0.9em !important;
-  color: #c4a05a !important;          /* warm muted gold — dignified, not cold */
+  font-size: 1em !important;
+  color: #d0d0d0 !important;
   line-height: 1.9 !important;
   text-align: left !important;
   text-align-last: left !important;
   word-break: break-all !important;
   overflow-wrap: break-word !important;
-  margin-top: 0.15rem !important;     /* tight to preceding EN paragraph */
-  margin-bottom: 1.6rem !important;   /* generous gap before next EN paragraph */
+  margin-top: 0.15rem !important;
+  margin-bottom: 1.6rem !important;
   padding: 0.4rem 0 0.4rem 0.85rem !important;
   border-left: 2.5px solid rgba(196, 160, 90, 0.35) !important;
   background: linear-gradient(90deg, rgba(196, 160, 90, 0.04) 0%, transparent 60%) !important;
@@ -980,6 +983,7 @@ main p.zh-para + p.zh-para {
   margin-top: 0 !important;
   border-left-color: rgba(196, 160, 90, 0.2) !important;
   background: linear-gradient(90deg, rgba(196, 160, 90, 0.025) 0%, transparent 60%) !important;
+  color: #d0d0d0 !important;
 }
 
 /* List items in Chinese */
@@ -996,12 +1000,12 @@ main li.zh-para {
 @media (max-width: 600px) {
   /* Chinese paragraphs: clear visual separation */
   main p.zh-para {
-    font-size: 0.85em !important;
-    color: #b89550 !important;          /* slightly deeper gold on mobile */
+    font-size: 1em !important;
+    color: #d0d0d0 !important;
     line-height: 1.95 !important;
     padding: 0.35rem 0 0.35rem 0.7rem !important;
     margin-top: 0.1rem !important;
-    margin-bottom: 1.8rem !important;   /* clear block separation */
+    margin-bottom: 1.8rem !important;
     border-left-width: 3px !important;
     border-left-color: rgba(196, 160, 90, 0.4) !important;
     background: linear-gradient(90deg, rgba(196, 160, 90, 0.05) 0%, transparent 50%) !important;
@@ -1111,21 +1115,22 @@ main li.zh-para {
 /* The hero-intro opening lines need more ceremony */
 main .hero-intro > p.zh-para:first-of-type,
 main .hero-intro > p.zh-para:nth-of-type(2) {
-  font-family: var(--serif) !important;
-  font-size: 0.95em !important;
-  color: #d4b06a !important;
+  font-family: 'Times New Roman', 'SimSun', '宋体', serif !important;
+  font-size: 1rem !important;
+  color: #d0d0d0 !important;
   letter-spacing: 0.02em;
   text-align: center !important;
   text-align-last: center !important;
   border-left: none !important;
   background: none !important;
   padding-left: 0 !important;
+  font-style: normal !important;
 }
 
 /* ── Poetic statement: already has nth-child styling, enhance CN ── */
 .poetic-statement p.zh-para {
-  font-size: 0.88em !important;
-  color: #b89550 !important;
+  font-size: 1.1rem !important;
+  color: #d0d0d0 !important;
   border-left: none !important;
   background: none !important;
   padding-left: 0 !important;
