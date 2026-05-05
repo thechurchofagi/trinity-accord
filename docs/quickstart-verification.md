@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Quickstart Verification"
+description: "Quick guide for honest verification without overclaiming."
+---
+
 # Quickstart Verification
 
 This guide is for agents and humans who want to produce a small, honest verification result without overclaiming.

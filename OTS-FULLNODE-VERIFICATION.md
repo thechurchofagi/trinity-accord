@@ -1,3 +1,9 @@
+---
+layout: default
+title: "OTS Fullnode Verification"
+description: "OTS verification finalization details."
+---
+
 # OTS Verification Finalization
 
 ## Target

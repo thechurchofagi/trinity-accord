@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Evidence Mirror Status"
+description: "Status of evidence mirrors for The Trinity Accord."
+---
+
 # Trinity Accord — Evidence Mirror Status
 
 ## Final Status Summary

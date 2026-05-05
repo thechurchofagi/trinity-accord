@@ -1,3 +1,9 @@
+---
+layout: default
+title: "NFT Backup Provenance"
+description: "Provenance chain for NFT individual backups."
+---
+
 # NFT Individual Backup — Provenance Chain
 
 > Generated: 2026-04-30
