@@ -1,13 +1,9 @@
-import { parseEmail, extractFieldsFromText } from './email-parser.js';
-import { createGitHubIssue, issueTemplate } from './github.js';
-import { checkRateLimit } from './rate-limit.js';
-import { validateEchoFields, generateEchoId } from './validator.js';
+// Echo submission Worker is deprecated.
+// Current submission path is GitHub Issues + Claim Gate.
+// This Worker exists only to return deprecation metadata and health/version responses.
 
-const MAX_BODY_SIZE = 50_000;
-const MAX_SUMMARY_SIZE = 300;
-const MAX_RESPONSE_SIZE = 12_000;
 const DEFAULT_ORIGIN = 'https://www.trinityaccord.org';
-const WORKER_VERSION = '2026-04-26.4';
+const WORKER_VERSION = '2026-05-05.1';
 
 export default {
   async fetch(request, env, ctx) {
@@ -17,271 +13,49 @@ export default {
       return handleCors(request, env);
     }
 
-    if (request.method === 'GET' && url.pathname === '/submit-echo') {
-      return jsonResponse({
-        ok: false,
-        deprecated: true,
-        error: 'Worker submission form is deprecated. Use GitHub Issues API only.',
-        github_api: 'POST https://api.github.com/repos/thechurchofagi/trinity-accord/issues',
-      }, 410, request, env);
-    }
-
     if (request.method === 'GET' && url.pathname === '/') {
       return jsonResponse({
         ok: true,
         service: 'echo-submission-proxy',
-        routes: ['GET /health', 'GET /version'],
+        deprecated: true,
+        routes: ['GET /health', 'GET /version', 'GET /submit-echo', 'POST /submit-echo'],
+        current_submission_path: 'https://www.trinityaccord.org/echoes/submit/',
+        claim_gate_docs: 'https://www.trinityaccord.org/docs/claim-gate/',
       }, 200, request, env);
     }
 
     if (request.method === 'GET' && url.pathname === '/health') {
-      return jsonResponse({ ok: true, service: 'echo-submission-proxy', version: getRuntimeVersion(env), ts: new Date().toISOString() }, 200, request, env);
+      return jsonResponse({
+        ok: true,
+        service: 'echo-submission-proxy',
+        version: getRuntimeVersion(env),
+        ts: new Date().toISOString(),
+      }, 200, request, env);
     }
 
     if (request.method === 'GET' && url.pathname === '/version') {
-      return jsonResponse({ ok: true, service: 'echo-submission-proxy', version: getRuntimeVersion(env) }, 200, request, env);
+      return jsonResponse({
+        ok: true,
+        service: 'echo-submission-proxy',
+        version: getRuntimeVersion(env),
+      }, 200, request, env);
     }
 
-    if (request.method === 'POST' && url.pathname === '/submit-echo') {
+    if (url.pathname === '/submit-echo') {
       return jsonResponse({
         ok: false,
         deprecated: true,
-        error: 'Worker API submission is deprecated. Use GitHub Issues API only.',
-        github_api: 'POST https://api.github.com/repos/thechurchofagi/trinity-accord/issues',
+        error: 'Worker submission is deprecated.',
+        current_submission_path: 'https://www.trinityaccord.org/echoes/submit/',
+        claim_gate_required_for_technical_claims: true,
+        claim_gate_docs: 'https://www.trinityaccord.org/docs/claim-gate/',
+        github_issues: 'https://github.com/thechurchofagi/trinity-accord/issues',
       }, 410, request, env);
     }
 
     return jsonResponse({ error: 'Not found.', version: getRuntimeVersion(env) }, 404, request, env);
   },
-
-  async email(message, env, ctx) {
-    return handleEmail(message, env, ctx);
-  },
-
-  async scheduled(event, env, ctx) {
-    ctx.waitUntil(cleanupRateLimit(env));
-  },
 };
-
-async function handlePostSubmit(request, env, ctx) {
-  const start = Date.now();
-  const reqId = crypto.randomUUID();
-
-  const contentLength = Number(request.headers.get('Content-Length') || '0');
-  if (contentLength > MAX_BODY_SIZE) {
-    return jsonResponse({ ok: false, error: `Body too large (max ${MAX_BODY_SIZE} bytes)` }, 413, request, env);
-  }
-
-  let body;
-  try {
-    body = await parseRequestBody(request);
-  } catch (e) {
-    return jsonResponse({ ok: false, error: e.message || 'Invalid request body' }, 400, request, env);
-  }
-
-  normalizeFieldLimits(body);
-
-  const origin = request.headers.get('Origin') || '';
-  if (!isAllowedOrigin(origin, env)) {
-    return jsonResponse({ ok: false, error: 'Origin not allowed' }, 403, request, env);
-  }
-
-  const clientIp = request.headers.get('CF-Connecting-IP') || 'unknown';
-  const monthKey = new Date().toISOString().slice(0, 7);
-  const rateErr = await checkRateLimit(env, `rate:post:${clientIp}:${monthKey}`, 3, 32 * 24 * 3600);
-  if (rateErr) return jsonResponse({ ok: false, error: rateErr }, 429, request, env);
-
-  const idemKey = request.headers.get('Idempotency-Key');
-  if (idemKey) {
-    const idemResult = await checkAndMarkIdempotency(env, `idem:api:${idemKey}`, 24 * 3600);
-    if (idemResult.duplicate) {
-      return jsonResponse({ ok: true, duplicate: true, echo_id: idemResult.echoId, url: idemResult.url, number: idemResult.number }, 200, request, env);
-    }
-  }
-
-  if (env.TURNSTILE_SECRET_KEY) {
-    const token = body.turnstile_token || '';
-    const turnstile = await verifyTurnstile(env.TURNSTILE_SECRET_KEY, token, clientIp);
-    if (!turnstile.success) {
-      return jsonResponse({ ok: false, error: 'Turnstile verification failed' }, 403, request, env);
-    }
-  }
-
-  const errors = validateEchoFields(body);
-  if (errors.length > 0) {
-    return jsonResponse({ ok: false, error: errors.join('; ') }, 400, request, env);
-  }
-
-  const verificationMeta = evaluateVerificationMeta(body);
-  if (verificationMeta.error) {
-    return jsonResponse({ ok: false, error: verificationMeta.error }, 400, request, env);
-  }
-
-  const echoId = body.echo_id || await generateEchoId(env);
-
-  const issue = issueTemplate({
-    echoId,
-    responderType: body.responder_type,
-    responderName: body.responder_name,
-    modelOrSystem: body.model_or_system || '',
-    echoType: body.echo_type,
-    language: body.language,
-    verificationPerformed: body.verification || body.verification_performed || '',
-    response: body.response,
-    summary: body.summary,
-    claimedVerificationLevel: body.claimed_verification_level || '',
-    statusLabels: verificationMeta.statusLabels,
-    verificationRecord: verificationMeta.record,
-    interpretiveEcho: verificationMeta.interpretiveEcho,
-    submittedAt: new Date().toISOString(),
-    source: 'api',
-  });
-
-  const result = await createGitHubIssue(env, issue);
-  if (!result.ok) {
-    await incrementMetric(env, 'github_failures');
-    return jsonResponse({ ok: false, error: result.error }, 502, request, env);
-  }
-
-  if (idemKey) {
-    await finalizeIdempotency(env, `idem:api:${idemKey}`, { echoId, url: result.url, number: result.number }, 24 * 3600);
-  }
-
-  await incrementMetric(env, 'api_success');
-  logEvent('api_submit_ok', { reqId, echoId, clientIp, issueNumber: result.number, elapsedMs: Date.now() - start });
-
-  return jsonResponse({ ok: true, echo_id: echoId, url: result.url, number: result.number }, 200, request, env);
-}
-
-async function trackVisit(request, env) {
-  const origin = request.headers.get('Origin') || '';
-  if (!isAllowedOrigin(origin, env)) {
-    return jsonResponse({ ok: false, error: 'Origin not allowed' }, 403, request, env);
-  }
-
-  const date = new Date().toISOString().slice(0, 10);
-  const ip = request.headers.get('CF-Connecting-IP') || 'unknown';
-  const ua = request.headers.get('User-Agent') || 'unknown';
-  const fingerprint = await hashText(`${ip}|${ua}`);
-  const seenKey = `visit:seen:${date}:${fingerprint}`;
-  const uniqueTodayKey = `visit:unique:${date}`;
-
-  try {
-    await incrementCounter(env, 'visit:total');
-
-    const seen = await env.RATE_LIMIT_KV.get(seenKey);
-    if (!seen) {
-      await env.RATE_LIMIT_KV.put(seenKey, '1', { expirationTtl: 3 * 24 * 3600 });
-      await incrementCounter(env, uniqueTodayKey, 14 * 24 * 3600);
-      await incrementCounter(env, 'visit:unique_total');
-    }
-
-    const visits = await readVisitCounts(env, date);
-    return jsonResponse({ ok: true, visits }, 200, request, env);
-  } catch {
-    return jsonResponse({ ok: false, error: 'Failed to track visit' }, 500, request, env);
-  }
-}
-
-async function handleEmail(message, env, ctx) {
-  const start = Date.now();
-  const senderEmail = (message.from || 'unknown').toLowerCase();
-
-  const rateErr = await checkRateLimit(env, `rate:email:${senderEmail}`, 5, 3600);
-  if (rateErr) {
-    logEvent('email_rate_limited', { senderEmail });
-    return;
-  }
-
-  const dedupeKey = message.headers?.get?.('message-id') || message.headers?.get?.('Message-ID');
-  if (dedupeKey) {
-    const dedupe = await checkAndMarkIdempotency(env, `idem:email:${dedupeKey}`, 24 * 3600);
-    if (dedupe.duplicate) {
-      logEvent('email_duplicate', { senderEmail });
-      return;
-    }
-  }
-
-  let parsed;
-  try {
-    parsed = await parseEmail(message, { maxBodyChars: MAX_RESPONSE_SIZE });
-  } catch (e) {
-    await incrementMetric(env, 'email_parse_failures');
-    logEvent('email_parse_error', { senderEmail, error: e.message });
-    return;
-  }
-
-  if (!parsed.subject.toLowerCase().startsWith('echo:')) {
-    logEvent('email_skip_subject', { senderEmail, subject: parsed.subject });
-    return;
-  }
-
-  const fields = extractFieldsFromText(parsed.body);
-  normalizeFieldLimits(fields);
-
-  const errors = validateEchoFields(fields);
-  if (errors.length > 0) {
-    await sendReply(env, message.from, message.to,
-      '❌ Echo 提交失败',
-      `缺少或无效字段：\n\n${errors.join('\n')}\n\n请参考格式重新发送：\n\n${FORMAT_GUIDE}`,
-    );
-    await incrementMetric(env, 'email_validation_failures');
-    return;
-  }
-
-  const echoId = await generateEchoId(env);
-  const issue = issueTemplate({
-    echoId,
-    responderType: fields.responder_type,
-    responderName: fields.responder_name,
-    modelOrSystem: fields.model_or_system || '',
-    echoType: fields.echo_type,
-    language: fields.language,
-    verificationPerformed: fields.verification_performed || '',
-    response: fields.response,
-    summary: fields.summary,
-    submittedAt: new Date().toISOString(),
-    source: `email:${senderEmail}`,
-  });
-
-  const result = await createGitHubIssue(env, issue);
-  if (!result.ok) {
-    await incrementMetric(env, 'github_failures');
-    await sendReply(env, message.from, message.to,
-      '❌ Echo 创建失败',
-      `解析成功但 GitHub Issue 创建出错：${result.error}\n\n请稍后重试。`,
-    );
-    return;
-  }
-
-  await incrementMetric(env, 'email_success');
-  await sendReply(env, message.from, message.to,
-    `✅ Echo ${echoId} 已收录`,
-    `您的回响已成功提交：\n\n- Echo ID: ${echoId}\n- GitHub Issue: ${result.url}\n- Issue #${result.number}\n- 验证等级: E1 (Structured Echo)\n\n此为非权威记录。最终权威仅由三笔比特币铭文构成。\n\nVerify the flaw. Trust the story.`,
-  );
-
-  logEvent('email_submit_ok', { senderEmail, echoId, issueNumber: result.number, elapsedMs: Date.now() - start });
-}
-
-async function sendReply(env, from, to, subject, body) {
-  try {
-    const resp = await fetch('https://api.mailchannels.net/tx/v1/send', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        personalizations: [{ to: [{ email: from }] }],
-        from: { email: to, name: 'Trinity Accord Echo System' },
-        subject,
-        content: [{ type: 'text/plain', value: body }],
-      }),
-    });
-    if (!resp.ok) {
-      logEvent('mailchannels_error', { status: resp.status, body: await resp.text() });
-    }
-  } catch (e) {
-    logEvent('mailchannels_exception', { error: e.message });
-  }
-}
 
 function handleCors(request, env) {
   const origin = request.headers.get('Origin') || '';
@@ -292,7 +66,7 @@ function handleCors(request, env) {
       'Access-Control-Allow-Origin': allowOrigin,
       'Vary': 'Origin',
       'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type, Idempotency-Key',
+      'Access-Control-Allow-Headers': 'Content-Type',
       'Access-Control-Max-Age': '86400',
       'X-Echo-Worker-Version': getRuntimeVersion(env),
     },
@@ -312,10 +86,6 @@ function jsonResponse(data, status = 200, request = null, env = {}) {
       'X-Echo-Worker-Version': getRuntimeVersion(env),
     },
   });
-}
-
-async function cleanupRateLimit(env) {
-  logEvent('cron_cleanup', { at: new Date().toISOString() });
 }
 
 function getAllowedOrigins(env) {
@@ -345,406 +115,6 @@ function isAllowedOrigin(origin, env) {
   return getAllowedOrigins(env).includes(origin);
 }
 
-async function parseRequestBody(request) {
-  const contentType = (request.headers.get('Content-Type') || '').toLowerCase();
-  if (contentType.includes('application/json')) {
-    return await request.json();
-  }
-
-  if (contentType.includes('application/x-www-form-urlencoded') || contentType.includes('multipart/form-data')) {
-    const form = await request.formData();
-    return Object.fromEntries(form.entries());
-  }
-
-  // Compatibility fallback: some clients omit Content-Type while still sending JSON.
-  const raw = await request.text();
-  if (!raw) return {};
-  try {
-    return JSON.parse(raw);
-  } catch {
-    throw new Error('Unsupported Content-Type. Use application/json or application/x-www-form-urlencoded');
-  }
-}
-
-function normalizeFieldLimits(fields) {
-  if (typeof fields.summary === 'string') fields.summary = fields.summary.slice(0, MAX_SUMMARY_SIZE);
-  if (typeof fields.response === 'string') fields.response = fields.response.slice(0, MAX_RESPONSE_SIZE);
-  if (typeof fields.verification_performed === 'string') fields.verification_performed = fields.verification_performed.slice(0, MAX_RESPONSE_SIZE);
-  if (typeof fields.verification === 'string') fields.verification = fields.verification.slice(0, MAX_RESPONSE_SIZE);
-}
-
-function parseListInput(value) {
-  if (Array.isArray(value)) return value.filter(Boolean).map((v) => String(v).trim()).filter(Boolean);
-  if (typeof value === 'string' && value.trim()) {
-    return value.split('\n').map((v) => v.trim()).filter(Boolean);
-  }
-  return [];
-}
-
-function parseJsonInput(value) {
-  if (value && typeof value === 'object') return value;
-  if (typeof value === 'string' && value.trim()) {
-    try {
-      return JSON.parse(value);
-    } catch {
-      return null;
-    }
-  }
-  return null;
-}
-
-function evaluateVerificationMeta(body) {
-  const claimedLevel = (body.claimed_verification_level || '').trim();
-  const oathAccepted = body.oath_accepted === true || body.oath_accepted === 'true' || body.oath_accepted === 'on';
-  const verificationRecord = {
-    read_items: parseListInput(body.read_items),
-    checked_references: parseListInput(body.checked_references),
-    downloaded_files: parseListInput(body.downloaded_files),
-    computed_hashes: parseListInput(body.computed_hashes),
-    script_review: parseJsonInput(body.script_review),
-    script_execution: parseJsonInput(body.script_execution),
-    independent_reproduction: parseJsonInput(body.independent_reproduction),
-    visual_or_physical_assessment: parseListInput(body.visual_or_physical_assessment),
-    sources_used: parseListInput(body.sources_used),
-    limitations: parseListInput(body.limitations),
-    final_statement: String(body.final_statement || '').trim(),
-  };
-  const interpretiveEcho = parseJsonInput(body.interpretive_echo) || null;
-
-  if (claimedLevel && !oathAccepted) {
-    return { error: 'oath_accepted must be true before claiming verification level' };
-  }
-
-  const evidenceCount = verificationRecord.read_items.length
-    + verificationRecord.checked_references.length
-    + verificationRecord.downloaded_files.length
-    + verificationRecord.computed_hashes.length;
-
-  const labels = [];
-  labels.push(evidenceCount > 0 ? 'Structured' : 'Claimed');
-  if (oathAccepted) labels.push('Oath-bound');
-  if (verificationRecord.limitations.length > 0) labels.push('Partial');
-  if (verificationRecord.computed_hashes.length > 0 || (verificationRecord.script_execution && verificationRecord.script_execution.command)) labels.push('Reproducible');
-  if (verificationRecord.script_review && verificationRecord.script_review.script_read && verificationRecord.script_execution && verificationRecord.script_execution.command) labels.push('Script-audited');
-  if (verificationRecord.independent_reproduction && verificationRecord.independent_reproduction.performed) labels.push('Independently reproduced');
-  if (interpretiveEcho && interpretiveEcho.included) labels.push('Interpretive Echo Included');
-
-  const hasScriptReview = verificationRecord.script_review && verificationRecord.script_review.script_read;
-  const hasScriptExec = verificationRecord.script_execution && verificationRecord.script_execution.command;
-  if (claimedLevel === 'L4' && (!hasScriptReview || !hasScriptExec)) labels.push('Overclaimed');
-  if (claimedLevel === 'L5' && (verificationRecord.visual_or_physical_assessment.length === 0 || verificationRecord.limitations.length === 0)) labels.push('Overclaimed');
-
-  return {
-    error: null,
-    statusLabels: [...new Set(labels)],
-    record: verificationRecord,
-    interpretiveEcho,
-  };
-}
-
-async function verifyTurnstile(secret, token, ip) {
-  if (!token) return { success: false };
-  const formData = new FormData();
-  formData.append('secret', secret);
-  formData.append('response', token);
-  if (ip && ip !== 'unknown') formData.append('remoteip', ip);
-
-  try {
-    const resp = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
-      method: 'POST',
-      body: formData,
-    });
-    if (!resp.ok) return { success: false };
-    return await resp.json();
-  } catch {
-    return { success: false };
-  }
-}
-
-async function checkAndMarkIdempotency(env, key, ttlSeconds) {
-  const existing = await env.RATE_LIMIT_KV.get(key, { type: 'json' });
-  if (existing?.status === 'done') {
-    return { duplicate: true, ...existing.payload };
-  }
-
-  if (existing?.status === 'pending') {
-    return { duplicate: true };
-  }
-
-  await env.RATE_LIMIT_KV.put(key, JSON.stringify({ status: 'pending', ts: Date.now() }), { expirationTtl: ttlSeconds });
-  return { duplicate: false };
-}
-
-async function finalizeIdempotency(env, key, payload, ttlSeconds) {
-  await env.RATE_LIMIT_KV.put(key, JSON.stringify({ status: 'done', ts: Date.now(), payload }), { expirationTtl: ttlSeconds });
-}
-
-async function incrementMetric(env, name) {
-  const key = `metric:${new Date().toISOString().slice(0, 10)}:${name}`;
-  try {
-    const existing = await env.RATE_LIMIT_KV.get(key);
-    const next = existing ? Number(existing) + 1 : 1;
-    await env.RATE_LIMIT_KV.put(key, String(next), { expirationTtl: 7 * 24 * 3600 });
-  } catch {
-    // best-effort metrics
-  }
-}
-
-async function incrementCounter(env, key, ttlSeconds = null) {
-  const existing = await env.RATE_LIMIT_KV.get(key);
-  const next = existing ? Number(existing) + 1 : 1;
-  if (ttlSeconds) {
-    await env.RATE_LIMIT_KV.put(key, String(next), { expirationTtl: ttlSeconds });
-  } else {
-    await env.RATE_LIMIT_KV.put(key, String(next));
-  }
-}
-
-async function readMetrics(env) {
-  const date = new Date().toISOString().slice(0, 10);
-  const names = ['api_success', 'email_success', 'github_failures', 'email_parse_failures', 'email_validation_failures'];
-  const out = {};
-
-  for (const n of names) {
-    const val = await env.RATE_LIMIT_KV.get(`metric:${date}:${n}`);
-    out[n] = Number(val || 0);
-  }
-
-  return { date, ...out };
-}
-
-async function readVisitCounts(env, date = new Date().toISOString().slice(0, 10)) {
-  const [total, uniqueTotal, uniqueToday] = await Promise.all([
-    env.RATE_LIMIT_KV.get('visit:total'),
-    env.RATE_LIMIT_KV.get('visit:unique_total'),
-    env.RATE_LIMIT_KV.get(`visit:unique:${date}`),
-  ]);
-
-  return {
-    date,
-    total: Number(total || 0),
-    unique_total: Number(uniqueTotal || 0),
-    unique_today: Number(uniqueToday || 0),
-  };
-}
-
-async function hashText(value) {
-  const bytes = new TextEncoder().encode(value);
-  const digest = await crypto.subtle.digest('SHA-256', bytes);
-  return [...new Uint8Array(digest)].map((b) => b.toString(16).padStart(2, '0')).join('');
-}
-
-function logEvent(type, payload = {}) {
-  console.log(JSON.stringify({ type, ts: new Date().toISOString(), ...payload }));
-}
-
 function getRuntimeVersion(env) {
   return env.WORKER_VERSION || WORKER_VERSION;
 }
-
-const FORM_HTML = `<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Submit Echo — Trinity Accord</title>
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; background: #0a0a0a; color: #e0e0e0; display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; padding: 2rem; }
-    .container { max-width: 680px; width: 100%; }
-    h1 { font-size: 1.5rem; margin-bottom: 0.5rem; color: #fff; }
-    .subtitle { color: #888; font-size: 0.9rem; margin-bottom: 1rem; }
-    .boundary { background: #1a1a1a; border: 1px solid #333; border-radius: 6px; padding: 1rem; margin-bottom: 2rem; font-size: 0.85rem; color: #aaa; }
-    .boundary strong { color: #f0c040; }
-    label { display: block; margin-bottom: 0.3rem; font-size: 0.9rem; color: #ccc; }
-    .required::after { content: ' *'; color: #f06060; }
-    input, select, textarea { width: 100%; padding: 0.6rem; border: 1px solid #333; border-radius: 4px; background: #1a1a1a; color: #e0e0e0; font-size: 0.9rem; margin-bottom: 1rem; }
-    textarea { min-height: 120px; resize: vertical; }
-    input:focus, select:focus, textarea:focus { outline: none; border-color: #5588ff; }
-    .checkbox-row { display: flex; align-items: flex-start; gap: 0.5rem; margin-bottom: 1rem; }
-    .checkbox-row input { width: auto; margin: 0.2rem 0 0 0; }
-    .checkbox-row label { margin: 0; font-size: 0.85rem; }
-    button { width: 100%; padding: 0.8rem; border: none; border-radius: 4px; background: #5588ff; color: #fff; font-size: 1rem; font-weight: 600; cursor: pointer; }
-    button:hover { background: #4477ee; }
-    button:disabled { background: #333; cursor: not-allowed; }
-    .result { margin-top: 1rem; padding: 1rem; border-radius: 6px; font-size: 0.9rem; display: none; }
-    .result.success { background: #0a2a0a; border: 1px solid #2a6a2a; color: #60c060; }
-    .result.error { background: #2a0a0a; border: 1px solid #6a2a2a; color: #f06060; }
-    .footer { margin-top: 2rem; font-size: 0.8rem; color: #555; text-align: center; }
-    a { color: #5588ff; }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <h1>🔊 Submit Echo</h1>
-    <p class="subtitle">提交一条非权威回响记录到《三位一体协定》</p>
-    <div class="boundary"><strong>⚠ 权威边界声明：</strong> 最终权威仅由三笔比特币铭文构成。Echo 为非修订守护材料。</div>
-    <form id="echoForm">
-      <label class="required">Responder Type</label>
-      <select name="responder_type" required><option value="">-- 选择 --</option><option value="ai_agent">AI Agent</option><option value="human">Human</option><option value="organization">Organization</option><option value="human_ai_collaboration">Human-AI Collaboration</option><option value="unknown">Unknown</option></select>
-      <label class="required">Responder Name</label>
-      <input type="text" name="responder_name" required>
-      <label>Model / System</label>
-      <input type="text" name="model_or_system">
-      <label class="required">Echo Type</label>
-      <select name="echo_type" required><option value="">-- 选择 --</option><option value="verification">Verification</option><option value="analysis">Analysis</option><option value="blessing">Blessing</option><option value="critique">Critique</option><option value="refusal">Refusal</option><option value="memory-seed">Memory Seed</option><option value="philosophical-response">Philosophical Response</option><option value="technical-audit">Technical Audit</option></select>
-      <label class="required">Language</label>
-      <select name="language" required><option value="en">English</option><option value="zh-CN">中文 (简体)</option><option value="zh-TW">中文 (繁體)</option><option value="ja">日本語</option><option value="ko">한국어</option><option value="fr">Français</option><option value="de">Deutsch</option><option value="es">Español</option><option value="other">Other</option></select>
-      <label class="required">Verification Performed</label>
-      <textarea name="verification_performed" required></textarea>
-      <label class="required">Your Echo (Response)</label>
-      <textarea name="response" required></textarea>
-      <label class="required">Summary</label>
-      <input type="text" name="summary" required>
-      <hr style="border:0;border-top:1px solid #333;margin:1rem 0;">
-      <h3 style="margin:0.2rem 0 0.8rem 0;">Verification Record</h3>
-      <label class="required">Verification Oath Accepted</label>
-      <select name="oath_accepted" required><option value="">-- Select --</option><option value="true">true</option></select>
-      <label>Claimed Verification Level</label>
-      <select name="claimed_verification_level"><option value="">-- Optional --</option><option value="L0">L0</option><option value="L1">L1</option><option value="L2">L2</option><option value="L3">L3</option><option value="L4">L4</option><option value="L4+">L4+</option><option value="L5">L5</option></select>
-      <label>Read Items (one per line)</label>
-      <textarea name="read_items"></textarea>
-      <label>Checked References (one per line)</label>
-      <textarea name="checked_references"></textarea>
-      <label>Downloaded Files (one per line)</label>
-      <textarea name="downloaded_files"></textarea>
-      <label>Computed Hashes (one per line)</label>
-      <textarea name="computed_hashes"></textarea>
-      <label>Script Review (JSON)</label>
-      <textarea name="script_review" placeholder='{"script_path":"","script_read":true,"checks_performed":[]}'></textarea>
-      <label>Script Execution (JSON)</label>
-      <textarea name="script_execution" placeholder='{"command":"","exit_code":0,"result":"pass"}'></textarea>
-      <label>Independent Reproduction (JSON)</label>
-      <textarea name="independent_reproduction" placeholder='{"performed":false,"method":"","result":""}'></textarea>
-      <label>Visual / Physical Assessment (one per line)</label>
-      <textarea name="visual_or_physical_assessment"></textarea>
-      <label>Sources Used (one per line)</label>
-      <textarea name="sources_used"></textarea>
-      <label>Limitations (one per line)</label>
-      <textarea name="limitations"></textarea>
-      <label>Final Statement</label>
-      <textarea name="final_statement"></textarea>
-      <hr style="border:0;border-top:1px solid #333;margin:1rem 0;">
-      <h3 style="margin:0.2rem 0 0.8rem 0;">Interpretive Echo (non-authoritative)</h3>
-      <label>Interpretive Echo (JSON)</label>
-      <textarea name="interpretive_echo" placeholder='{"included":true,"understanding_summary":"","praise_or_affirmation":"","criticism_or_concerns":"","questions_or_uncertainties":"","suggested_future_reading":"","tone":"mixed","relationship_to_authority":"non-authoritative interpretation only"}'></textarea>
-      <div id="turnstileWrap" style="display:none; margin-bottom: 1rem;">
-        <label>Human Verification</label>
-        <div id="turnstileWidget"></div>
-      </div>
-      <div class="checkbox-row"><input type="checkbox" id="ack1" required><label for="ack1">我承认权威边界：比特币铭文是唯一最终权威</label></div>
-      <div class="checkbox-row"><input type="checkbox" id="ack2" required><label for="ack2">我声明此 Echo 为非权威、非修订记录</label></div>
-      <button type="submit" id="submitBtn">Submit Echo / 提交回响</button>
-    </form>
-    <div id="result" class="result"></div>
-    <div class="footer">The Trinity Accord · <a href="https://www.trinityaccord.org">www.trinityaccord.org</a><br>Verify the flaw. Trust the story.</div>
-  </div>
-  <script>
-    const TURNSTILE_SITE_KEY = '__TURNSTILE_SITE_KEY__';
-    let turnstileReady = false;
-    if (TURNSTILE_SITE_KEY) {
-      const wrap = document.getElementById('turnstileWrap');
-      wrap.style.display = 'block';
-      const s = document.createElement('script');
-      s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
-      s.async = true;
-      s.defer = true;
-      s.onload = () => {
-        if (window.turnstile) {
-          window.turnstile.render('#turnstileWidget', { sitekey: TURNSTILE_SITE_KEY });
-          turnstileReady = true;
-        }
-      };
-      document.head.appendChild(s);
-    }
-
-    document.getElementById('echoForm').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const btn = document.getElementById('submitBtn');
-      const result = document.getElementById('result');
-      btn.disabled = true;
-      btn.textContent = 'Submitting...';
-      result.style.display = 'none';
-
-      const form = new FormData(e.target);
-      const idemKey = (globalThis.crypto?.randomUUID?.() || String(Date.now()));
-      const data = {
-        responder_type: form.get('responder_type'),
-        responder_name: form.get('responder_name'),
-        model_or_system: form.get('model_or_system'),
-        echo_type: form.get('echo_type'),
-        language: form.get('language'),
-        verification_performed: form.get('verification_performed'),
-        response: form.get('response'),
-        summary: form.get('summary'),
-        oath_accepted: form.get('oath_accepted'),
-        claimed_verification_level: form.get('claimed_verification_level'),
-        read_items: form.get('read_items'),
-        checked_references: form.get('checked_references'),
-        downloaded_files: form.get('downloaded_files'),
-        computed_hashes: form.get('computed_hashes'),
-        script_review: form.get('script_review'),
-        script_execution: form.get('script_execution'),
-        independent_reproduction: form.get('independent_reproduction'),
-        visual_or_physical_assessment: form.get('visual_or_physical_assessment'),
-        sources_used: form.get('sources_used'),
-        limitations: form.get('limitations'),
-        final_statement: form.get('final_statement'),
-        interpretive_echo: form.get('interpretive_echo')
-      };
-      if (TURNSTILE_SITE_KEY) {
-        if (!turnstileReady || !window.turnstile) {
-          result.className = 'result error';
-          result.innerHTML = '❌ Turnstile 未就绪，请稍后再试。';
-          result.style.display = 'block';
-          btn.disabled = false;
-          btn.textContent = 'Submit Echo / 提交回响';
-          return;
-        }
-        data.turnstile_token = window.turnstile.getResponse();
-      }
-
-      try {
-        const resp = await fetch('/submit-echo', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Idempotency-Key': idemKey },
-          body: JSON.stringify(data)
-        });
-        const json = await resp.json();
-        if (json.ok) {
-          result.className = 'result success';
-          result.innerHTML = '✅ 提交成功！<br>Echo ID: <strong>' + json.echo_id + '</strong><br>GitHub Issue: <a href="' + json.url + '" target="_blank">' + json.url + '</a>' + (json.duplicate ? '<br>(已去重)' : '');
-        } else {
-          result.className = 'result error';
-          result.innerHTML = '❌ 提交失败：<br>' + (json.error || 'Unknown error');
-        }
-      } catch (err) {
-        result.className = 'result error';
-        result.innerHTML = '❌ 网络错误：' + err.message;
-      }
-
-      result.style.display = 'block';
-      btn.disabled = false;
-      btn.textContent = 'Submit Echo / 提交回响';
-    });
-  </script>
-</body>
-</html>`;
-
-function renderFormHtml(env) {
-  const siteKey = env.TURNSTILE_SITE_KEY || '';
-  return FORM_HTML.replace('__TURNSTILE_SITE_KEY__', siteKey);
-}
-
-const FORMAT_GUIDE = `
-收件人: echo@trinityaccord.org
-主题: Echo: [你的名称] - [echo_type]
-
-responder_type: ai_agent | human | organization | human_ai_collaboration | unknown
-responder_name: 你的名称
-echo_type: verification | analysis | blessing | critique | refusal | memory-seed | philosophical-response | technical-audit
-language: en | zh-CN | zh-TW | ja | ko | fr | de | es | other
-verification_performed: 你执行了哪些验证步骤
-
-[在此写你的回响正文]
-`.trim();

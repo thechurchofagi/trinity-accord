@@ -11,10 +11,18 @@ main {
   width: 100% !important;
 }
 
-/* ── GLOBAL LEFT ALIGN: all text on homepage ── */
-main, main * {
-  text-align: left !important;
-  text-align-last: left !important;
+/* ── TARGETED LEFT ALIGN: text elements only ── */
+main h1,
+main h2,
+main h3,
+main h4,
+main p,
+main li,
+main blockquote,
+main th,
+main td {
+  text-align: left;
+  text-align-last: left;
 }
 
 /* ── NUCLEAR RESET: kill all independent centering inside main ── */
@@ -53,7 +61,7 @@ main p {
   line-height: 1.85 !important;
   color: #d0d0d0 !important;
   margin-bottom: 1.2rem !important;
-  font-style: italic !important;
+  font-style: normal !important;
 }
 
 main li {
@@ -61,6 +69,15 @@ main li {
   line-height: 1.85 !important;
   color: #d0d0d0 !important;
   margin-bottom: 0.45rem !important;
+  font-style: normal !important;
+}
+
+/* Selective italic for poetic/specific elements only */
+.poetic-statement p:nth-child(odd),
+.canon-role,
+.homepage-limit,
+.status-note,
+.closing-line:not(.zh) {
   font-style: italic !important;
 }
 
@@ -1263,6 +1280,78 @@ main li.zh-para {
 }
 
 /* ============================================================
+   P0.2 — CONTEXT SUMMARY & COMPACT CLOSING
+   ============================================================ */
+
+.context-summary {
+  margin: 2.5rem 0 !important;
+}
+
+.context-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(0.75rem, 2vw, 1.25rem);
+  margin: 1.25rem 0;
+}
+
+.context-card {
+  padding: 1.15rem 1.25rem;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg-card);
+}
+
+.context-card h3 {
+  margin-top: 0 !important;
+  color: var(--gold) !important;
+  font-size: 1rem !important;
+}
+
+.context-card p {
+  font-size: 0.9rem !important;
+  line-height: 1.75 !important;
+  color: #a0a8c0 !important;
+  font-style: normal !important;
+}
+
+.context-card p.zh {
+  color: #8890a8 !important;
+}
+
+.context-links {
+  font-size: 0.92rem !important;
+  color: #a0a8c0 !important;
+  font-style: normal !important;
+}
+
+.compact-closing {
+  margin: 3rem 0 1rem !important;
+  padding: 1.75rem 0 0 !important;
+  border-top: 1px solid var(--border-hi);
+}
+
+.compact-closing .closing-line {
+  font-family: 'Times New Roman', 'SimSun', '宋体', serif !important;
+  font-size: clamp(1.05rem, 2.5vw, 1.25rem) !important;
+  line-height: 1.6 !important;
+  margin-bottom: 0.25rem !important;
+  color: #d0d0d0 !important;
+}
+
+.compact-closing .closing-line.zh {
+  font-style: normal !important;
+  color: #a0a8c0 !important;
+  margin-bottom: 1rem !important;
+}
+
+.compact-closing .closing-boundary {
+  margin-top: 1.2rem !important;
+  font-size: 0.9rem !important;
+  color: #8f98ad !important;
+  font-style: normal !important;
+}
+
+/* ============================================================
    RESPONSIVE — Fixed order: 900px first, then 760px
    ============================================================ */
 
@@ -1278,6 +1367,7 @@ main li.zh-para {
 
   .reason-grid,
   .canon-grid,
+  .context-grid,
   .task-mode-grid {
     grid-template-columns: repeat(2, 1fr) !important;
   }
@@ -1324,6 +1414,7 @@ main li.zh-para {
 
   .reason-grid,
   .canon-grid,
+  .context-grid,
   .task-mode-grid,
   .agent-signal-grid {
     grid-template-columns: 1fr !important;

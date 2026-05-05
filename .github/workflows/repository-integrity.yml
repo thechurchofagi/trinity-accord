@@ -38,6 +38,12 @@ jobs:
       - name: Test agent-first homepage P0
         run: bash scripts/test-homepage-p0-agent-first.sh
 
+      - name: Test worker deprecation P0.2
+        run: python3 scripts/test-worker-deprecated-p02.py
+
+      - name: Test llms layering P0.2
+        run: python3 scripts/test-llms-layering-p02.py
+
       - name: Test civilizational JSON sync
         run: python3 scripts/test-civilizational-json-sync.py
 

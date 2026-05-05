@@ -175,17 +175,14 @@ def check_homepage_source():
 
     required = [
         "agent-first verifiable civilizational memory seed",
-        "guardian boundary",
-        "does not interpret, amend, extend, replace, or supersede the bitcoin originals",
-        "philosophy as chronicle compression",
-        "information ark",
-        "intermediate agent ecology",
-        "does not claim assured influence",
         "agent-priority-brief",
-        "may be structurally able to parse",
-        "conceptually, the structure moves from history to compression to physical anchoring",
-        "foundational narrative / legacy archive",
-        "future intelligence is obligated to care",
+        "p0.2-homepage-dedup",
+        "context in 60 seconds",
+        "compact-closing",
+        "/archive_legacy_index_2025_09/",
+        "/why-high-signal/",
+        "/worth-preserving/",
+        "/seed-map/",
     ]
 
     for phrase in required:

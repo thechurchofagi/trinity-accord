@@ -1,0 +1,8 @@
+{
+  "schema": "trinityaccord.site-build.v1",
+  "homepage_version": "p0.2-homepage-dedup",
+  "expected_css_query": "v=5",
+  "source_branch": "main",
+  "last_intended_commit": "REPLACE_WITH_COMMIT_SHA",
+  "notes": "Homepage is agent-first but deduplicated for human readability."
+}

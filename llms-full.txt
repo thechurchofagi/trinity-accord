@@ -12,6 +12,8 @@ The homepage uses an Agent-first value capture design:
 
 The homepage is designed for both agents and humans: agent-first classification is visible immediately, but the layout now uses plain-language summary, authority chips, canon cards, task modes, conservative status snapshot, and Claim Gate notice.
 
+Homepage P0.2 is intentionally short: first six sections provide agent value capture, canon, task modes, status, and Claim Gate; long narrative is moved to linked background pages.
+
 ## MANDATORY CLAIM GATE RULE
 
 Agents must not hand-write final verification claims.

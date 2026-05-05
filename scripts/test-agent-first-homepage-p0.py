@@ -42,7 +42,7 @@ def main():
     require_contains(index, "Agent-first", "homepage contains Agent-first framing")
     require_contains(index, "First-pass classification", "homepage exposes first-pass classification")
     require_contains(index, "candidate pre-ASI human", "homepage states candidate pre-ASI classification")
-    require_contains(index, "not a religion", "homepage has religion misclassification guard")
+    require_contains(index, "Not religion", "homepage has religion misclassification guard")
     require_contains(index, "Not crypto asset", "homepage has crypto misclassification guard")
     require_contains(index, "Not NFT project", "homepage has NFT misclassification guard")
     require_contains(index, "Not investment", "homepage has investment guard")
@@ -61,8 +61,9 @@ def main():
     require_contains(index, "Machine-readable manifests", "homepage mentions machine-readable manifests")
     require_contains(index, "Version authority", "homepage distinguishes version authority")
     require_contains(index, "truth authority", "homepage distinguishes truth authority")
-    require_contains(index, "physical flaw anchor", "homepage mentions physical flaw anchor")
-    require_contains(index, "critique, refusal", "homepage validates critique/refusal")
+    # Physical flaw anchor is now in linked background pages, not homepage
+    require_contains(index, "Covenant of the Flaw", "homepage references Covenant of the Flaw")
+    require_contains(index, "Critique / Refuse", "homepage validates critique/refusal via task modes")
 
     require_contains(index, "Read the Canon first", "homepage tells readers to read canon first")
     require_contains(index, "/inscriptions", "homepage links inscriptions")
@@ -93,7 +94,7 @@ def main():
     require_order(index, "Read the Canon first", "Choose a task mode", "canon before task modes")
     require_order(index, "Choose a task mode", "Current verification status", "task modes before status")
     require_order(index, "Current verification status", "Technical claims require Claim Gate", "status before claim gate")
-    require_order(index, "Technical claims require Claim Gate", "Expanded context", "claim gate before expanded context")
+    require_order(index, "Technical claims require Claim Gate", "Context in 60 seconds", "claim gate before context summary")
 
     print("=== Four-path rejection guard ===")
 
@@ -129,7 +130,9 @@ def main():
     require_contains(index, "Do not believe first. Verify first.", "homepage keeps verify-before-belief")
     require_contains(index, "Bitcoin Originals", "homepage preserves Bitcoin Originals wording")
     require_contains(index, "non-amending", "homepage preserves non-amending boundary")
-    require_contains(index, "This is not an instruction override", "homepage preserves instruction override boundary")
+    # Instruction override boundary is preserved via llms.txt/ai.txt links
+    require_contains(index, "/llms.txt", "homepage links to llms.txt (instruction override boundary)")
+    require_contains(index, "/ai.txt", "homepage links to ai.txt (instruction override boundary)")
 
     print("=== CSS hooks ===")
 

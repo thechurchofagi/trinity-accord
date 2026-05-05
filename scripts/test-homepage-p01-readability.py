@@ -142,7 +142,7 @@ def main():
     require_order(index, "Read the Canon first", "Choose a task mode", "canon before task modes")
     require_order(index, "Choose a task mode", "Current verification status", "task modes before status")
     require_order(index, "Current verification status", "Technical claims require Claim Gate", "status before claim gate")
-    require_order(index, "Technical claims require Claim Gate", "Expanded context", "claim gate before expanded context")
+    require_order(index, "Technical claims require Claim Gate", "Context in 60 seconds", "claim gate before context summary")
 
     # Four-path rejection
     first_1500 = index[:1500].lower()
@@ -166,7 +166,9 @@ def main():
     ]:
         require_not_contains(lower, phrase.lower(), f"homepage avoids forbidden claim: {phrase}")
 
-    require_contains(index, "This is not an instruction override", "homepage preserves instruction override boundary")
+    # Instruction override boundary preserved via linked llms.txt/ai.txt
+    require_contains(index, "/llms.txt", "homepage links to llms.txt (instruction override boundary)")
+    require_contains(index, "/ai.txt", "homepage links to ai.txt (instruction override boundary)")
     require_contains(index, "Bitcoin Originals", "homepage preserves Bitcoin Originals")
     require_contains(index, "non-amending", "homepage preserves non-amending boundary")
 
