@@ -928,3 +928,163 @@ main .philosophical-modesty blockquote {
     font-size: 1.05rem !important;
   }
 }
+
+/* ============================================================
+   BILINGUAL TYPOGRAPHY — Language-aware paragraph styling
+   Solves: EN/CN interleaving on mobile, Chinese alignment
+   ============================================================ */
+
+/* ── Chinese paragraph detection via JS-injected class ── */
+/* JS adds .zh-para to paragraphs containing >40% CJK chars */
+
+/* Desktop: subtle differentiation */
+main p.zh-para {
+  font-size: 0.92em !important;
+  color: #a0a8c0 !important;
+  line-height: 1.95 !important;
+  text-align: left !important;
+  text-align-last: left !important;
+  margin-top: -0.4rem !important;   /* pull closer to preceding EN paragraph */
+  margin-bottom: 1.4rem !important; /* push further from next EN paragraph */
+  padding-left: 0.75rem !important;
+  border-left: 2px solid rgba(201, 168, 76, 0.15) !important;
+}
+
+/* When two Chinese paragraphs are adjacent (no EN between them) */
+main p.zh-para + p.zh-para {
+  margin-top: 0.2rem !important;
+  border-left-color: rgba(201, 168, 76, 0.1) !important;
+}
+
+/* Mobile: stronger differentiation */
+@media (max-width: 600px) {
+  main p.zh-para {
+    font-size: 0.88em !important;
+    color: #9098b0 !important;
+    line-height: 2 !important;
+    padding-left: 0.6rem !important;
+    margin-top: -0.3rem !important;
+    margin-bottom: 1.5rem !important;
+    border-left-width: 2px !important;
+  }
+
+  /* Tighter EN→CN grouping on mobile */
+  main p:not(.zh-para) + p.zh-para {
+    margin-top: -0.2rem !important;
+  }
+
+  /* Larger gap between EN paragraphs (separates bilingual blocks) */
+  main p:not(.zh-para) + p:not(.zh-para) {
+    margin-top: 0.3rem !important;
+    margin-bottom: 1.2rem !important;
+  }
+
+  /* Smaller EN headings on mobile for better proportion */
+  main h2 {
+    font-size: 1.15rem !important;
+    margin-top: 2rem !important;
+    margin-bottom: 0.8rem !important;
+  }
+
+  main h3 {
+    font-size: 1rem !important;
+  }
+
+  /* Ensure all text is left-aligned on mobile */
+  main p, main li, main blockquote {
+    text-align: left !important;
+    text-align-last: left !important;
+  }
+
+  /* Guardian boundary: tighter padding on mobile */
+  .guardian-boundary {
+    padding: 1rem 1rem !important;
+    margin: 1.5rem 0 !important;
+  }
+
+  .guardian-boundary ol {
+    padding-left: 1.2rem !important;
+  }
+
+  /* Agent gate: full-width on mobile */
+  .agent-gate {
+    padding: 0.75rem 1rem !important;
+  }
+
+  /* Hero intro: reduce top/bottom padding */
+  .hero-intro {
+    padding: 1.25rem 0 !important;
+    margin: 1rem 0 2rem !important;
+  }
+
+  /* Poetic statement: tighter on mobile */
+  .poetic-statement {
+    padding: 1rem 1rem !important;
+  }
+}
+
+/* ── Chinese text global alignment (all breakpoints) ── */
+main p:lang(zh),
+main li:lang(zh),
+main blockquote:lang(zh) {
+  text-align: left !important;
+  text-align-last: left !important;
+  word-break: break-all !important;
+  overflow-wrap: break-word !important;
+}
+
+/* ── List items: bilingual treatment ── */
+main li.zh-para {
+  font-size: 0.9em !important;
+  color: #a0a8c0 !important;
+  margin-bottom: 0.3rem !important;
+  padding-left: 0.5rem !important;
+}
+
+/* ── Links: ensure tappable on mobile ── */
+@media (max-width: 600px) {
+  main a {
+    min-height: 44px !important;  /* Apple HIG minimum tap target */
+    display: inline !important;
+    padding: 0.15em 0 !important;
+    word-break: break-all !important;
+  }
+
+  /* Footer links: stacked on mobile */
+  .footer-links {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 0.4rem 0.8rem !important;
+    justify-content: center !important;
+  }
+
+  .footer-links a {
+    font-size: 0.8rem !important;
+    padding: 0.3rem 0.5rem !important;
+  }
+}
+
+/* ── Reading progress bar: thinner on mobile ── */
+@media (max-width: 600px) {
+  .reading-progress {
+    height: 2px !important;
+  }
+
+  /* Nav: compact on mobile */
+  .topnav {
+    padding: 0.5rem 1rem !important;
+  }
+
+  .nav-brand {
+    font-size: 0.85rem !important;
+  }
+
+  .nav-links {
+    padding: 0.75rem 1rem !important;
+  }
+
+  .nav-links a {
+    padding: 0.5rem 0 !important;
+    font-size: 0.9rem !important;
+  }
+}
