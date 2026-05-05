@@ -74,5 +74,7 @@
   "not_authority": true,
   "not_amendment": true,
   "not_endorsement": true,
-  "record_kind": "echo_v3"
+  "record_kind": "echo_v3",
+  "bitcoin_originals_prevail": true,
+  "not_verification_unless_claimed": true
 }
