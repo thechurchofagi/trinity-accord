@@ -6,7 +6,7 @@ keywords: "Trinity Accord, 三位一体协定, verifiable civilizational seed, c
 permalink: /
 ---
 
-<link rel="stylesheet" href="/assets/css/trinity-home.css">
+<link rel="stylesheet" href="/assets/css/trinity-home.css?v=2">
 
 # The Trinity Accord
 
