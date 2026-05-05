@@ -305,8 +305,9 @@ main .hero-zh {
 }
 
 /* ── Hero-intro Chinese paragraphs: centered, no left border ── */
-.hero-intro > p.zh-para,
-.hero-intro > p.zh-para + p.zh-para {
+/* Must use "main" prefix to match specificity of "main p.zh-para" */
+main .hero-intro > p.zh-para,
+main .hero-intro > p.zh-para + p.zh-para {
   text-align: center !important;
   text-align-last: center !important;
   border-left: none !important;
@@ -1059,6 +1060,14 @@ main li.zh-para {
   }
 
   /* Hero intro */
+  main .hero-intro > p.zh-para {
+    text-align: center !important;
+    text-align-last: center !important;
+    border-left: none !important;
+    background: none !important;
+    padding-left: 0 !important;
+  }
+
   .hero-intro {
     padding: 1.25rem 0 !important;
     margin: 1rem 0 2rem !important;
@@ -1100,12 +1109,17 @@ main li.zh-para {
 
 /* ── Hero section: special bilingual treatment ── */
 /* The hero-intro opening lines need more ceremony */
-.hero-intro > p.zh-para:first-of-type,
-.hero-intro > p.zh-para:nth-of-type(2) {
+main .hero-intro > p.zh-para:first-of-type,
+main .hero-intro > p.zh-para:nth-of-type(2) {
   font-family: var(--serif) !important;
   font-size: 0.95em !important;
   color: #d4b06a !important;
   letter-spacing: 0.02em;
+  text-align: center !important;
+  text-align-last: center !important;
+  border-left: none !important;
+  background: none !important;
+  padding-left: 0 !important;
 }
 
 /* ── Poetic statement: already has nth-child styling, enhance CN ── */
