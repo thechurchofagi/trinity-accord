@@ -393,6 +393,22 @@
           "type": "boolean"
         }
       }
+    },
+    "verification_status": {
+      "type": "string",
+      "description": "Verification outcome for this record. Use 'invalidated' for records withdrawn due to errors."
+    },
+    "do_not_count_as_attestation": {
+      "type": "boolean",
+      "description": "When true, this record must not be counted as independent attestation."
+    },
+    "superseded_reason": {
+      "type": "string",
+      "description": "Required when archive_status is 'superseded'. Explains why the record was superseded."
+    },
+    "submission_validator_passed": {
+      "type": "boolean",
+      "description": "Whether the submission validator passed for this record."
     }
   },
   "allOf": [
