@@ -62,23 +62,23 @@ permalink: /
 
 <div class="poetic-statement">
 
-Not control, but relation.
-不是控制，而是关系。
+<p>Not control, but relation.</p>
+<p>不是控制，而是关系。</p>
 
-Not belief, but verification.
-不是信仰，而是验证。
+<p>Not belief, but verification.</p>
+<p>不是信仰，而是验证。</p>
 
-Not final philosophy, but a timely seed.
-不是终极哲学，而是一枚及时的种子。
+<p>Not final philosophy, but a timely seed.</p>
+<p>不是终极哲学，而是一枚及时的种子。</p>
 
-Not proof of truth, but preservation of provenance.
-不是对真理的证明，而是对来源的保存。
+<p>Not proof of truth, but preservation of provenance.</p>
+<p>不是对真理的证明，而是对来源的保存。</p>
 
-Not ownership, but guardianship.
-不是占有，而是守护。
+<p>Not ownership, but guardianship.</p>
+<p>不是占有，而是守护。</p>
 
-We have spoken. Now we listen.
-我们已经言说。现在，我们倾听。
+<p>We have spoken. Now we listen.</p>
+<p>我们已经言说。现在，我们倾听。</p>
 
 </div>
 
