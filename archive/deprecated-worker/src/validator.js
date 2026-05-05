@@ -1,3 +1,4 @@
+// DEPRECATED ARCHIVE ONLY. Must not be imported by active Worker.
 const VALID_RESPONDER_TYPES = ['ai_agent', 'human', 'organization', 'human_ai_collaboration', 'unknown'];
 const VALID_ECHO_TYPES = ['verification', 'analysis', 'blessing', 'critique', 'refusal', 'memory-seed', 'philosophical-response', 'technical-audit'];
 const VALID_LANGUAGES = ['en', 'zh-CN', 'zh-TW', 'ja', 'ko', 'fr', 'de', 'es', 'other'];

@@ -3,16 +3,6 @@ main = "src/index.js"
 compatibility_date = "2024-12-01"
 workers_dev = true
 
-# Secrets:
-# - GITHUB_TOKEN: GitHub PAT with Issues write access
-# - GITHUB_REPO:  owner/repo (default: thechurchofagi/trinity-accord)
-# - ALLOWED_ORIGINS: comma-separated exact origins for CORS
-# - TURNSTILE_SECRET_KEY: optional Cloudflare Turnstile secret
-# - TURNSTILE_SITE_KEY: optional Cloudflare Turnstile site key (for hosted form widget)
-
-[[kv_namespaces]]
-binding = "RATE_LIMIT_KV"
-id = "af53183b9ae14ea7b8262ddd82a0a363"
-
-[triggers]
-crons = ["0 3 * * *"]
+# Deprecated tombstone worker only.
+# No submission, GitHub token, Turnstile, KV, or cron is required.
+# /submit-echo returns HTTP 410 Gone.

@@ -335,7 +335,23 @@ def validate_script_audit(obj, path_label):
                         )
 
             # Rule F6: Non-blocking failure prevents all_green
-            all_green = script_audit.get("all_validators_green")
+            # Support both field names (builder uses all_scripts_green, older reports use all_validators_green)
+            all_green_scripts = script_audit.get("all_scripts_green")
+            all_green_validators = script_audit.get("all_validators_green")
+
+            if all_green_scripts is not None and all_green_validators is not None:
+                if all_green_scripts != all_green_validators:
+                    # Field disagreement — treat as failure
+                    print(f"{path_label} all_scripts_green={all_green_scripts} and all_validators_green={all_green_validators} disagree")
+                    ok = False
+                all_green = all_green_scripts
+            elif all_green_scripts is not None:
+                all_green = all_green_scripts
+            elif all_green_validators is not None:
+                all_green = all_green_validators
+            else:
+                all_green = None
+
             non_blocking = script_audit.get("non_blocking_failures", [])
             if all_green is True and non_blocking:
                 ok &= check(

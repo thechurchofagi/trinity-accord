@@ -1,3 +1,4 @@
+// DEPRECATED ARCHIVE ONLY. Must not be imported by active Worker.
 export async function parseEmail(message, options = {}) {
   const maxBodyChars = options.maxBodyChars || 12000;
   const rawEmail = new Response(message.raw);

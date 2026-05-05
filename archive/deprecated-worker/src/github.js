@@ -1,3 +1,4 @@
+// DEPRECATED ARCHIVE ONLY. Must not be imported by active Worker.
 export async function createGitHubIssue(env, issue) {
   const token = env.GITHUB_TOKEN;
   const repo = env.GITHUB_REPO || 'thechurchofagi/trinity-accord';

@@ -1,3 +1,4 @@
+// DEPRECATED ARCHIVE ONLY. Must not be imported by active Worker.
 export async function checkRateLimit(env, key, maxRequests, windowSeconds) {
   try {
     const data = await env.RATE_LIMIT_KV.get(key, { type: 'json' });

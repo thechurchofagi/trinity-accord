@@ -33,13 +33,19 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
           RELEASE_TAG: 'nft-arweave-mirror-175-v1'
+          CONTRACT: ${{ inputs.contract }}
+          DRY_RUN: ${{ inputs.dry_run }}
         run: |
           set -euo pipefail
-          ARGS=""
-          if [ -n "${{ inputs.contract }}" ]; then
-            ARGS="--contract ${{ inputs.contract }}"
+          ARGS=()
+          if [ -n "$CONTRACT" ]; then
+            if [[ ! "$CONTRACT" =~ ^0x[a-fA-F0-9]{40}$ ]]; then
+              echo "Invalid contract address: $CONTRACT"
+              exit 1
+            fi
+            ARGS+=(--contract "$CONTRACT")
           fi
-          if [ "${{ inputs.dry_run }}" = "true" ]; then
-            ARGS="$ARGS --dry-run"
+          if [ "$DRY_RUN" = "true" ]; then
+            ARGS+=(--dry-run)
           fi
-          node scripts/backup-nft-arweave-mirror.mjs $ARGS
+          node scripts/backup-nft-arweave-mirror.mjs "${ARGS[@]}"

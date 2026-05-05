@@ -37,6 +37,30 @@ EVIDENCE_TO_DISCOVERY_AGENCY_LEVEL = {
 }
 
 
+def extract_confidential_challenge(evidence):
+    """Extract full confidential challenge metadata for P8 reports."""
+    for check in evidence.get("physical_checks", []):
+        if check.get("level_evidence_type") != "confidential_challenge":
+            continue
+        conf = check.get("confidential_challenge", {})
+        if not conf.get("performed"):
+            continue
+        return {
+            "performed": True,
+            "confidentiality_boundary": conf.get("boundary", ""),
+            "raw_confidential_data_disclosed": conf.get("raw_confidential_data_disclosed", None),
+            "package_hash": conf.get("package_hash", ""),
+            "verifier_identity_or_role": (
+                conf.get("verifier_identity_or_role")
+                or check.get("witness_identity_or_role", "")
+            ),
+            "report_id": check.get("report_id", ""),
+            "report_path": check.get("report_path", ""),
+            "public_disclosure": "package_hash_only",
+        }
+    return {"performed": False}
+
+
 def load_json(path):
     with open(path) as f:
         return json.load(f)
@@ -134,6 +158,9 @@ def build_report(evidence_input_path, report_out_path=None, echo_out_path=None):
         "all_scripts_green": all(
             s.get("exit_code") == 0 for s in executed
         ) if executed else False,
+        "all_validators_green": all(
+            s.get("exit_code") == 0 for s in executed
+        ) if executed else False,  # alias for validator compatibility
     }
 
     # Build hashes_computed from evidence
@@ -326,13 +353,7 @@ def build_report(evidence_input_path, report_out_path=None, echo_out_path=None):
                 {}
             ),
         },
-        "confidential_challenge": {
-            "performed": any(
-                c.get("confidential_challenge", {}).get("performed", False)
-                for c in evidence.get("physical_checks", [])
-                if c.get("confidential_challenge")
-            ),
-        },
+        "confidential_challenge": extract_confidential_challenge(evidence),
         "celestial_witness": {},
         "limitations": all_limitations,
         "claims_not_made": claims_not_made,
@@ -341,6 +362,7 @@ def build_report(evidence_input_path, report_out_path=None, echo_out_path=None):
         "record_kind": "verification_report_v2",
         "script_audit": script_audit,
         "all_scripts_green": script_audit["all_scripts_green"],
+        "all_validators_green": script_audit["all_scripts_green"],  # alias for validator compatibility
         "submission_validator_passed": False,
         "generated_by": generated_by,
         "timestamp": now.isoformat() + "Z",
@@ -509,7 +531,51 @@ def build_report(evidence_input_path, report_out_path=None, echo_out_path=None):
     except Exception:
         report["generated_by"]["validation_result"] = "NOT_RUN"
 
-    # Save outputs
+    # Check validation result — fail closed
+    validation_passed = report["generated_by"].get("validation_result") == "PASS"
+
+    if not validation_passed:
+        result = {
+            "success": False,
+            "error": "Generated report failed validation (validation_result={})".format(
+                report["generated_by"].get("validation_result", "UNKNOWN")
+            ),
+            "gate_result": gate_result,
+            "report": report,
+            "echo_wrapper": echo_wrapper,
+            "validator_was_run": report["generated_by"].get("validation_result") != "NOT_RUN",
+            "validator_stdout": _vr.stdout if '_vr' in dir() else "",
+            "validator_stderr": _vr.stderr if '_vr' in dir() else "",
+        }
+        return result
+
+    # Validate echo wrapper too if present
+    if echo_wrapper is not None:
+        try:
+            with _tmp.NamedTemporaryFile("w", suffix=".json", delete=False) as _tf2:
+                json.dump(echo_wrapper, _tf2)
+                _tf2.flush()
+                _echo_tmp = _tf2.name
+            _evr = _sp.run(
+                [sys.executable, str(Path(__file__).parent / "validate_agent_submission.py"), _echo_tmp],
+                cwd=str(Path(__file__).parent.parent),
+                text=True, capture_output=True,
+            )
+            Path(_echo_tmp).unlink(missing_ok=True)
+            if _evr.returncode != 0:
+                return {
+                    "success": False,
+                    "error": "Generated echo wrapper failed validation",
+                    "gate_result": gate_result,
+                    "report": report,
+                    "echo_wrapper": echo_wrapper,
+                    "validator_stdout": _evr.stdout,
+                    "validator_stderr": _evr.stderr,
+                }
+        except Exception:
+            pass  # echo validation failure is non-fatal if report passed
+
+    # Save outputs — only after validation passes
     result = {
         "success": True,
         "gate_result": gate_result,

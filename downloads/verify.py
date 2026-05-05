@@ -6,7 +6,7 @@ Checks:
 2. authority.json lists the three canonical inscriptions.
 3. SHA-256 hashes match evidence-manifest.json (if local files available).
 """
-import json, hashlib, sys
+import json, hashlib, sys, argparse
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -26,6 +26,10 @@ REQUIRED_JSON = [
     ROOT / "api" / "verification-materials.json",
 ]
 
+parser = argparse.ArgumentParser(description="Trinity Accord local verification")
+parser.add_argument("--strict-artifacts", action="store_true", help="FAIL instead of SKIP when local artifacts are missing")
+args = parser.parse_args()
+
 def sha256_file(path: Path) -> str:
     h = hashlib.sha256()
     with open(path, "rb") as f:
@@ -34,6 +38,7 @@ def sha256_file(path: Path) -> str:
     return h.hexdigest()
 
 ok = True
+skipped = []
 print("=== Trinity Accord Local Verification ===\n")
 
 # 1. Check required JSON files
@@ -91,17 +96,28 @@ try:
                 print(f"         expected: {expected_hash}")
                 print(f"         actual:   {actual}")
         else:
-            print(f"  [SKIP] {key}: local file not found ({gh_path})")
+            skipped.append(key)
+            if args.strict_artifacts:
+                ok = False
+                print(f"  [FAIL] {key}: local file not found ({gh_path})")
+            else:
+                print(f"  [SKIP] {key}: local file not found ({gh_path})")
             print(f"         Expected SHA-256: {expected_hash}")
 except Exception as e:
     ok = False
     print(f"  [FAIL] Could not parse evidence-manifest.json: {e}")
 
 # 4. Summary
-print(f"\n=== RESULT: {'ALL PASS' if ok else 'FAILURES DETECTED'} ===")
-if not ok:
-    print("Some checks failed. Review output above.")
-    sys.exit(1)
-else:
+if ok and not skipped:
+    print(f"\n=== RESULT: ALL PASS ===")
     print("All local checks passed. For full blockchain verification, use external explorers.")
     sys.exit(0)
+elif ok and skipped:
+    print(f"\n=== RESULT: PARTIAL PASS — SOME ARTIFACTS SKIPPED ===")
+    print(f"Skipped artifacts: {', '.join(skipped)}")
+    print("All available checks passed. For full blockchain verification, use external explorers.")
+    sys.exit(0)
+else:
+    print(f"\n=== RESULT: FAILURES DETECTED ===")
+    print("Some checks failed. Review output above.")
+    sys.exit(1)

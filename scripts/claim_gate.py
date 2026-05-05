@@ -351,9 +351,7 @@ def derive_t_level(evidence):
     max_level = "T0"
     for check in time_checks:
         anchor_type = check.get("anchor_type", "")
-        if anchor_type == "star_moon_witness" and check.get("nonpublic_boundary") and check.get("authorized"):
-            candidate = "T8"
-        elif anchor_type == "bitcoin_block_time":
+        if anchor_type == "bitcoin_block_time":
             candidate = "T3"
         elif anchor_type in ("eth_timestamp", "arweave_timestamp"):
             candidate = "T2"
@@ -364,6 +362,10 @@ def derive_t_level(evidence):
 
         if level_index(T_LEVELS, candidate) > level_index(T_LEVELS, max_level):
             max_level = candidate
+
+    # T8 only through strict authorized celestial path.
+    if has_t8_authorized_celestial_path(evidence):
+        max_level = max_by_order(T_LEVELS, max_level, "T8")
 
     return max_level
 
@@ -450,20 +452,8 @@ def derive_p_level(evidence):
         ev_type = check.get("level_evidence_type", "")
         has_nonce = check.get("nonce_challenge") is not None
         has_custody = check.get("custody_log") is not None
-        conf = check.get("confidential_challenge", {})
-        conf_performed = conf.get("performed", False) if conf else False
-        conf_no_raw = not conf.get("raw_confidential_data_disclosed", True) if conf else True
-        conf_boundary = conf.get("boundary", "") if conf else ""
-        model_tool = check.get("model_or_tool")
-        confidence = check.get("confidence")
 
-        if ev_type == "multi_party_forensic":
-            candidate = "P9"
-        elif ev_type == "confidential_challenge" and conf_performed and conf_no_raw and conf_boundary:
-            candidate = "P8"
-        elif ev_type == "ai_forensic" and model_tool and confidence is not None:
-            candidate = "P7"
-        elif ev_type == "onsite" and has_custody:
+        if ev_type == "onsite" and has_custody:
             candidate = "P5"
         elif ev_type == "live_remote" and has_nonce:
             candidate = "P4"
@@ -478,6 +468,16 @@ def derive_p_level(evidence):
 
         if level_index(P_LEVELS, candidate) > level_index(P_LEVELS, max_level):
             max_level = candidate
+
+    # P7/P8/P9 require strict hard gates.
+    if has_p7_forensic_path(evidence):
+        max_level = max_by_order(P_LEVELS, max_level, "P7")
+
+    if has_p8_confidential_path(evidence):
+        max_level = max_by_order(P_LEVELS, max_level, "P8")
+
+    if has_p9_multi_party_path(evidence):
+        max_level = max_by_order(P_LEVELS, max_level, "P9")
 
     return max_level
 
