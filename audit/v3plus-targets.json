@@ -1,24 +1,32 @@
 {
   "schema": "trinityaccord.v3plus-targets.v1",
-  "note": "Copy this file to audit/v3plus-targets.json and add target files/hashes before claiming V3+.",
+  "note": "V3/V4/V4+ GitHub-first signed coverage targets. Large sensitive files are verified from GitHub Release assets downloaded to local cache.",
   "targets": [
     {
       "id": "digest-manifest-json",
       "path": "archive/evidence/digest-manifest.json",
       "category": "general",
-      "required": true
+      "required": true,
+      "require_local_bytes": true
     },
     {
       "id": "digest-manifest-csv",
       "path": "archive/evidence/digest-manifest.csv",
       "category": "general",
-      "required": true
+      "required": true,
+      "require_local_bytes": true
     },
     {
-      "id": "primary-verification-archive-public",
-      "path": "archive/arweave-authority-mirror/Primary-Verification-Archive-public__j6anZ4m5Wwvx5P_9-kM2EVG35TyKtm1lgaKfhT743rk.bin",
+      "id": "primary-verification-archive-public-release",
+      "release_tag": "signed-large-data-mirror-v1",
+      "asset_name": "public-covenant-archive.zip",
+      "cache_path": ".cache/v3plus-release-assets/public-covenant-archive.zip",
+      "sha256": "ef816480f77f30405378800807b42bff0a854b83a8f77793a0e0adf0944a8263",
+      "size_bytes": 24246033,
       "category": "flaw",
-      "required": true
+      "required": true,
+      "require_local_bytes": true,
+      "note": "Release-backed GitHub mirror byte verification. Direct Arweave retrieval is not claimed here."
     }
   ]
 }

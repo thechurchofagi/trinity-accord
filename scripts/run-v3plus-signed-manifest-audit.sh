@@ -1,23 +1,14 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-echo "== Trinity Accord V3/V4/V4+ GitHub-First Signed Manifest Audit =="
+echo "== Trinity Accord V3/V4/V4+ GitHub/Release-First Signed Manifest Audit =="
 
-if ! command -v node >/dev/null 2>&1; then
-  echo "Node.js is required." >&2
-  exit 1
-fi
-
-if ! command -v python3 >/dev/null 2>&1; then
-  echo "Python 3 is required." >&2
-  exit 1
-fi
+command -v node >/dev/null 2>&1 || { echo "Node.js required" >&2; exit 1; }
+command -v python3 >/dev/null 2>&1 || { echo "Python3 required" >&2; exit 1; }
 
 node --version
 python3 --version
 
-echo
-echo "== Install Node dependencies =="
 if [ -f package.json ]; then
   npm install
 fi
@@ -31,19 +22,19 @@ echo "== Verify legacy ETH witness =="
 node scripts/verify-legacy-eth-witness.mjs
 
 echo
-echo "== Verify GitHub-first authority mirror coverage =="
+echo "== Verify GitHub / Release authority mirror coverage =="
 node scripts/pull-authority-arweave-mirrors.mjs
 
 echo
 echo "== Verify signed manifest coverage =="
-if [ -f audit/v3plus-targets.json ]; then
-  node scripts/verify-signed-manifest-coverage.mjs --target-manifest audit/v3plus-targets.json
-else
-  node scripts/verify-signed-manifest-coverage.mjs
-fi
+node scripts/verify-signed-manifest-coverage.mjs --target-manifest audit/v3plus-targets.json
 
 echo
-echo "== Optional V5-style cross-source Arweave check =="
+echo "== Verify release-aware GitHub archive mirror =="
+bash scripts/verify-github-archive.sh
+
+echo
+echo "== Optional V5-style Arweave cross-source check =="
 if [ "${RUN_CROSS_SOURCE:-0}" = "1" ]; then
   node scripts/pull-authority-arweave-mirrors.mjs --cross-source
 else

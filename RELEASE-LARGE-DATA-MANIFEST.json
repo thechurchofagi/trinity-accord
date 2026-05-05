@@ -1,0 +1,21 @@
+{
+  "schema": "trinityaccord.release-large-data-manifest.v1",
+  "generated_at": "2026-05-05T02:16:21.409Z",
+  "release_tag": "signed-large-data-mirror-v1",
+  "min_size_mb": 10,
+  "boundary": "non-amending; Bitcoin Originals prevail",
+  "note": "Release assets are mirrors. Identity is determined by signed-covered hashes, not by release authority.",
+  "assets_total": 1,
+  "assets": [
+    {
+      "logical_path": "archive/evidence/public-covenant-archive.zip",
+      "asset_name": "public-covenant-archive.zip",
+      "sha256": "ef816480f77f30405378800807b42bff0a854b83a8f77793a0e0adf0944a8263",
+      "size_bytes": 24246033,
+      "arweave_tx": "j6anZ4m5Wwvx5P_9-kM2EVG35TyKtm1lgaKfhT743rk",
+      "category": "flaw",
+      "source_path_exists": true,
+      "non_amending": true
+    }
+  ]
+}

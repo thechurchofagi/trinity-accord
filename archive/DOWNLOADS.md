@@ -15,13 +15,15 @@
 
 ## 2. 公开验证档案 (Public Verification Archive)
 
+- **GitHub Release mirror**: `signed-large-data-mirror-v1` / `public-covenant-archive.zip`
 - **Arweave TxID**: `j6anZ4m5Wwvx5P_9-kM2EVG35TyKtm1lgaKfhT743rk`
-- **下载链接**: https://arweave.net/j6anZ4m5Wwvx5P_9-kM2EVG35TyKtm1lgaKfhT743rk
 - **SHA-256**: `ef816480f77f30405378800807b42bff0a854b83a8f77793a0e0adf0944a8263`
-- **大小**: ~24MB
+- **大小**: `24246033` bytes (~24MB)
 - **内容**: 水晶显微瑕疵图、视频、守护者指纹图像
-- **存放位置**: `archive/evidence/`
-- **状态**: ✅ 已下载
+- **Repository tree status**: moved to GitHub Release asset
+- **V3/V4/V4+ verification**: download Release asset, compute SHA-256, confirm signed authority/digest coverage
+- **V5/cross-source verification**: additionally compare direct Arweave/IPFS/public source retrieval when available
+- **Boundary**: GitHub Release is a non-amending mirror; Bitcoin Originals prevail
 
 ## 3. 瑕疵高清图+出处日志 (Flaw Image + Provenance)
 
@@ -90,8 +92,10 @@
 所有文件的 SHA-256 哈希已记录在 `hash-manifest.json` 中。
 
 运行验证脚本:
+
 ```bash
 bash scripts/verify-github-archive.sh
+./scripts/run-v3plus-signed-manifest-audit.sh
 ```
 
 ## 下载方法
