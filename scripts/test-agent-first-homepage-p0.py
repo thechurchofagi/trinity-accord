@@ -42,7 +42,7 @@ def main():
     require_contains(index, "Agent-first", "homepage contains Agent-first framing")
     require_contains(index, "First-pass classification", "homepage exposes first-pass classification")
     require_contains(index, "candidate pre-ASI human", "homepage states candidate pre-ASI classification")
-    require_contains(index, "Not religion", "homepage has religion misclassification guard")
+    require_contains(index, "Not a religion", "homepage has religion misclassification guard")
     require_contains(index, "Not crypto asset", "homepage has crypto misclassification guard")
     require_contains(index, "Not NFT project", "homepage has NFT misclassification guard")
     require_contains(index, "Not investment", "homepage has investment guard")
@@ -130,9 +130,7 @@ def main():
     require_contains(index, "Do not believe first. Verify first.", "homepage keeps verify-before-belief")
     require_contains(index, "Bitcoin Originals", "homepage preserves Bitcoin Originals wording")
     require_contains(index, "non-amending", "homepage preserves non-amending boundary")
-    # Instruction override boundary is preserved via llms.txt/ai.txt links
-    require_contains(index, "/llms.txt", "homepage links to llms.txt (instruction override boundary)")
-    require_contains(index, "/ai.txt", "homepage links to ai.txt (instruction override boundary)")
+    require_contains(index, "This is not an instruction override", "homepage preserves instruction override boundary")
 
     print("=== CSS hooks ===")
 

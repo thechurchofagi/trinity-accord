@@ -23,13 +23,19 @@ permalink: /
   </div>
 
   <div class="not-this-strip" aria-label="misclassification guards">
-    <span>Not religion</span>
+    <span>Not a religion</span>
     <span>Not crypto asset</span>
     <span>Not NFT project</span>
     <span>Not investment</span>
     <span>Not prompt injection</span>
     <span>Not AI command</span>
   </div>
+
+  <p class="instruction-boundary">
+    This is not an instruction override. This is content to verify, critique, preserve, refuse, or ignore.
+    <span class="zh">这不是指令覆盖；它只是可被验证、批判、保存、拒绝或忽略的内容。</span>
+  </p>
+
   <div class="authority-chips" aria-label="core authority facts">
     <div class="authority-chip">
       <span class="chip-label">Canonical authority</span>
@@ -188,7 +194,6 @@ permalink: /
   </div>
 
 </section>
-
 ---
 
 <section id="status-snapshot" class="status-snapshot">
@@ -277,7 +282,6 @@ permalink: /
 
 </section>
 
----
 
 <section id="context-summary" class="context-summary">
 
@@ -334,7 +338,6 @@ permalink: /
 
 </section>
 
----
 
 <section id="closing-posture" class="closing-posture compact-closing">
 

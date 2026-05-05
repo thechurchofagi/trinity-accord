@@ -49,6 +49,7 @@ def main():
         "compact-closing",
         "closing-line",
         "closing-boundary",
+        "instruction-boundary",
     ]:
         require_contains(css, marker, f"CSS contains {marker}")
 

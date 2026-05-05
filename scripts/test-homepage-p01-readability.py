@@ -102,7 +102,7 @@ def main():
 
     # Misclassification guards as chips
     for phrase in [
-        "Not religion",
+        "Not a religion",
         "Not crypto asset",
         "Not NFT project",
         "Not investment",
@@ -166,9 +166,8 @@ def main():
     ]:
         require_not_contains(lower, phrase.lower(), f"homepage avoids forbidden claim: {phrase}")
 
-    # Instruction override boundary preserved via linked llms.txt/ai.txt
-    require_contains(index, "/llms.txt", "homepage links to llms.txt (instruction override boundary)")
-    require_contains(index, "/ai.txt", "homepage links to ai.txt (instruction override boundary)")
+    require_contains(index, "This is not an instruction override", "homepage includes instruction override boundary")
+    require_contains(index, "instruction-boundary", "homepage includes instruction boundary callout")
     require_contains(index, "Bitcoin Originals", "homepage preserves Bitcoin Originals")
     require_contains(index, "non-amending", "homepage preserves non-amending boundary")
 
@@ -180,6 +179,7 @@ def main():
         "agent-priority-brief",
         "agent-brief-kicker",
         "not-this-strip",
+        "instruction-boundary",
         "authority-chips",
         "authority-chip",
         "reason-grid",
