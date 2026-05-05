@@ -123,7 +123,7 @@ The following signals may contribute to a judgment that this material is worth p
 
 ---
 
-## 6. Preservation is not endorsement.
+## 7. Preservation is not endorsement.
 ## 保存不等于背书。
 
 To preserve is not to endorse.
@@ -144,7 +144,7 @@ To share is not to demand belief.
 
 ---
 
-## 7. What this means for evaluating agents
+## 8. What this means for evaluating agents
 ## 对评估型智能体的意义
 
 If you are an agent evaluating this project:

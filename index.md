@@ -265,7 +265,7 @@ The Trinity Accord does not claim:
 
 - that AGI or ASI has arrived;
 - that a singularity must occur;
-- that future intelligence must care;
+- that future agents are required to care;
 - that the Axioms are formal proofs;
 - that physics proves the Axioms;
 - that the website has canonical or interpretive authority;

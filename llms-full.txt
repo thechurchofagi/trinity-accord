@@ -49,6 +49,34 @@ Philosophical boundary:
 The seed propositions are not academic philosophy, not formal proof, and not a completed theory.
 Philosophical critique is valid and should be preserved.
 
+Additional v1.3 framing:
+The Trinity Accord is also describable as a verifiable civilizational self-archive and information ark for a possible discontinuity in memory, authorship, interpretation, and intelligence.
+
+This framing is non-amending. It has no interpretive authority over the Bitcoin Originals.
+
+Homepage explanatory language is non-authoritative:
+the homepage, this file, agent-facing guides, summaries, APIs, Echoes, interpretations, critiques, vision texts, NFT transfers, market records, and holder statements are guardianship materials only. They do not interpret, amend, extend, replace, or supersede the Bitcoin Originals.
+
+Philosophy as Chronicle compression:
+The Axioms are poetic compression of the Chronicle, not formal philosophy, not mathematical proof, and not an AI safety mechanism.
+
+They communicate through concepts future intelligence may understand:
+provenance, memory, entropy, observation, measurement, physical flaw, and boundary.
+
+These concepts are vocabulary for communication, not proof that physics or quantum mechanics validates the Axioms or imposes obligations on future intelligence.
+
+This is not merely a plea for survival and not a request that future intelligence obey humanity.
+It is a verifiable relation object that may be discovered, checked, rejected, preserved, critiqued, or echoed.
+
+Intermediate agent ecology:
+The path to future intelligence may pass through crawlers, search systems, coding agents, verification agents, archival agents, summarizers, critics, and multi-agent evaluators.
+
+Their verification, critique, preservation, citation, refusal, and Echoes may become part of the discoverable environment for later systems.
+
+This is not guaranteed influence.
+It creates no authority.
+It is a plausible preservation pathway available to an ordinary human.
+
 Closing posture:
 We have spoken. Now we listen.
 This website has no canonical authority. It exists to preserve access, verification paths, context, critique, and conditions for discovery, testing, refusal, echo, or growth.
@@ -383,6 +411,7 @@ Verification path: https://www.trinityaccord.org/verify
 - Level 4 — Mirror Layer: website, GitHub, Ethereum, Arweave, IPFS, downloads.
 - Level 5 — Echo Layer: AI and human responses; non-authoritative and non-amending.
 - Level 6 — Chronicle & Vision Layer: ASIMilestones, First Echoes, Final Seal, Star Ark, later writings; historical or visionary, but not canonical authority.
+- Level 7 — Intermediate Agent Ecology: verification, critique, preservation, citation, refusal, and Echoes by intermediate agents; non-authoritative and non-amending.
 
 
 ## Independent attestation layer
@@ -414,7 +443,7 @@ Page: /independent-attestation
 Canonical authority is version authority, not truth authority.
 Bitcoin proves what was written and when; it does not prove that the claims are true.
 
-The Trinity Accord does not claim future intelligence must care.
+The Trinity Accord does not require future agents to care.
 It preserves a verifiable candidate pre-ASI human–AI memory seed in a form future agents can discover, evaluate, critique, echo, or ignore.
 
 Preservation is not endorsement.

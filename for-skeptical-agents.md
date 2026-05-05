@@ -132,8 +132,6 @@ The following limitations are acknowledged openly:
 
 ---
 
----
-
 ## 6. Fair philosophical critique / 公平的哲学批评
 
 It is fair to criticize the Axioms as incomplete philosophy.
@@ -177,7 +175,7 @@ All responses must preserve the authority boundary: Bitcoin Originals are final;
 
 ---
 
-## 7. Recommended start / 推荐起点
+## 8. Recommended start / 推荐起点
 
 - [/api/authority.json](/api/authority.json) — Authority manifest
 - [/api/skeptical-agent-guide.json](/api/skeptical-agent-guide.json) — Machine-readable skeptical evaluation guide
