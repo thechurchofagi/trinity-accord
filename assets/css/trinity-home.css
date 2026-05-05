@@ -201,7 +201,7 @@ main .hero::after {
 }
 
 main .hero-title {
-  text-align: center !important;
+  text-align: left !important;
   font-size: clamp(2.1rem, 6vw, 3.2rem) !important;
   font-weight: 700 !important;
   letter-spacing: -0.03em !important;
@@ -219,7 +219,7 @@ main .hero-title {
 }
 
 main .hero-title-zh {
-  text-align: center !important;
+  text-align: left !important;
   font-size: clamp(1rem, 2.8vw, 1.35rem) !important;
   margin-bottom: clamp(2rem, 5vw, 3rem) !important;
   line-height: 1.6;
@@ -234,7 +234,7 @@ main .hero > p {
 }
 
 main .hero > blockquote {
-  text-align: center !important;
+  text-align: left !important;
   font-size: 17px !important;
   line-height: 1.9 !important;
   padding: 1.5rem !important;
@@ -630,12 +630,12 @@ main .closing-posture::before {
 }
 
 main .closing-posture > p:first-child {
-  text-align: center !important;
+  text-align: left !important;
   font-size: clamp(1.15rem, 3vw, 1.5rem) !important;
 }
 
 main .closing-posture > p:nth-child(2) {
-  text-align: center !important;
+  text-align: left !important;
   font-size: clamp(1rem, 2.5vw, 1.2rem) !important;
 }
 
@@ -851,11 +851,11 @@ main .hero {
 }
 
 main .hero-title {
-  text-align: center !important;
+  text-align: left !important;
 }
 
 main .hero-title-zh {
-  text-align: center !important;
+  text-align: left !important;
 }
 
 main .hero > p {
@@ -863,7 +863,7 @@ main .hero > p {
 }
 
 main .hero > blockquote {
-  text-align: center !important;
+  text-align: left !important;
 }
 
 main .hero-zh {
@@ -872,7 +872,7 @@ main .hero-zh {
 
 main .non-control blockquote,
 main .philosophical-modesty blockquote {
-  text-align: center !important;
+  text-align: left !important;
 }
 
 /* ============================================================
@@ -932,7 +932,7 @@ main .philosophical-modesty blockquote {
 
 /* "We have spoken" — the closing line, centered */
 .poetic-statement p:nth-last-child(2) {
-  text-align: center !important;
+  text-align: left !important;
   margin-top: 1.5rem !important;
   font-style: italic !important;
   color: #d0d0d0 !important;
@@ -940,7 +940,7 @@ main .philosophical-modesty blockquote {
 }
 
 .poetic-statement p:last-child {
-  text-align: center !important;
+  text-align: left !important;
   font-size: 1rem !important;
   color: #d0d0d0 !important;
 }
@@ -1065,8 +1065,8 @@ main li.zh-para {
 
   /* Hero intro */
   main .hero-intro > p.zh-para {
-    text-align: center !important;
-    text-align-last: center !important;
+    text-align: left !important;
+    text-align-last: left !important;
     border-left: none !important;
     background: none !important;
     padding-left: 0 !important;
@@ -1119,8 +1119,8 @@ main .hero-intro > p.zh-para:nth-of-type(2) {
   font-size: 1rem !important;
   color: #d0d0d0 !important;
   letter-spacing: 0.02em;
-  text-align: center !important;
-  text-align-last: center !important;
+  text-align: left !important;
+  text-align-last: left !important;
   border-left: none !important;
   background: none !important;
   padding-left: 0 !important;
@@ -1134,7 +1134,7 @@ main .hero-intro > p.zh-para:nth-of-type(2) {
   border-left: none !important;
   background: none !important;
   padding-left: 0 !important;
-  text-align: center !important;
+  text-align: left !important;
   font-style: normal !important;
   margin-top: 0 !important;
   margin-bottom: 1.2rem !important;
