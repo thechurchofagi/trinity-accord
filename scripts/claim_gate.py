@@ -523,6 +523,7 @@ def derive_protocol_level(evidence, requested_level, b_level, d_level, t_level, 
         SHA256_RE.match(h.get("expected", "")) and
         SHA256_RE.match(h.get("computed", "")) and
         h.get("match") is True and
+        h.get("expected", "").lower() == h.get("computed", "").lower() and
         h.get("expected_hash_source") and
         h.get("expected_hash_authority_class", "unknown") != "unknown"
         for h in hashes
@@ -727,6 +728,10 @@ def check_d2_hash_validity(hashes):
             if not SHA256_RE.match(computed):
                 failures.append(
                     f"D2 hash for {h.get('artifact')}: computed is not a valid SHA-256: '{computed}'"
+                )
+            if SHA256_RE.match(expected) and SHA256_RE.match(computed) and expected.lower() != computed.lower():
+                failures.append(
+                    f"D2 hash for {h.get('artifact')}: expected and computed SHA-256 differ"
                 )
 
             if artifact_class == "repository_snapshot":
@@ -942,6 +947,7 @@ def evaluate(input_path):
                  SHA256_RE.match(h.get("expected", "")) and
                  SHA256_RE.match(h.get("computed", "")) and
                  h.get("match") is True and
+                 h.get("expected", "").lower() == h.get("computed", "").lower() and
                  h.get("expected_hash_source") and
                  h.get("expected_hash_authority_class", "unknown") != "unknown"
             ]) == 1

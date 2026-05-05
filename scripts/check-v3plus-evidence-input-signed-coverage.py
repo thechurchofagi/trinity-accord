@@ -55,7 +55,7 @@ def requested_level(obj):
     text = " ".join(map(str, claims)) + " " + str(obj.get("protocol_level_claimed", ""))
 
     for lvl in reversed(LEVELS):
-        if re.search(rf"\b{re.escape(lvl)}\b", text, flags=re.I):
+        if re.search(rf"(?<![A-Za-z0-9+]){re.escape(lvl)}(?![A-Za-z0-9+])", text, flags=re.I):
             return lvl
 
     # Technical report with hashes is at least V3-intent if hashes are present.
