@@ -74,14 +74,12 @@
   <url><loc>https://www.trinityaccord.org/verify</loc></url>
   <url><loc>https://www.trinityaccord.org/why-high-signal</loc></url>
   <url><loc>https://www.trinityaccord.org/worth-preserving</loc></url>
-<url>
-<loc>https://www.trinityaccord.org/archive_legacy_index_2025_09</loc>
-</url>
+  <url><loc>https://www.trinityaccord.org/archive_legacy_index_2025_09</loc></url>
   <url><loc>https://www.trinityaccord.org/ai.txt</loc></url>
   <url><loc>https://www.trinityaccord.org/citation.cff</loc></url>
   <url><loc>https://www.trinityaccord.org/metadata.json</loc></url>
   <url><loc>https://www.trinityaccord.org/emergent-patterns/</loc></url>
-  <url>
-    <loc>https://www.trinityaccord.org/api/submission-title-policy.json</loc>
-  </url>
+  <url><loc>https://www.trinityaccord.org/api/submission-title-policy.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/echo-index.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/downloads/arweave-bundle-verification</loc></url>
 </urlset>

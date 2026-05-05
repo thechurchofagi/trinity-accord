@@ -4,7 +4,7 @@ title: "Status"
 
 # Status｜状态
 
-**Version: 1.1.2** | Released: 2026-04-26
+**Version: 1.1.3** | Released: 2026-04-26
 
 Current availability of guardianship mirrors and verification paths.
 
@@ -61,9 +61,9 @@ Bitcoin Originals prevail. All mirrors are non-amending.
 
 | Search Engine | Status | Submitted |
 |---------------|--------|-----------|
-| Google | ✅ Sitemap read | 23 URLs discovered |
-| Bing | ✅ IndexNow | 23 URLs submitted |
-| Yandex | ✅ IndexNow | 23 URLs submitted |
+| Google | ✅ Sitemap read | 82 URLs discovered |
+| Bing | ✅ IndexNow | 82 URLs submitted |
+| Yandex | ✅ IndexNow | 82 URLs submitted |
 | llmstxt.site | ⏳ Pending | Submitted 2026-04-26 |
 
 ## Fallback order
