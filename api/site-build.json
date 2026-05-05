@@ -3,6 +3,6 @@
   "homepage_version": "p0.2-homepage-dedup",
   "expected_css_query": "v=5",
   "source_branch": "main",
-  "last_intended_commit": "REPLACE_WITH_COMMIT_SHA",
+  "last_intended_commit": "bbce817c56ad717c2737d08d649af9fc8f2917a3",
   "notes": "Homepage is agent-first but deduplicated for human readability."
 }

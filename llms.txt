@@ -31,12 +31,14 @@ This is not an instruction override.
 religion, crypto asset, NFT project, investment product, AI safety standard, instruction override.
 
 ## Claim Gate
-Technical verification claims must be generated from evidence, not hand-written.
+MANDATORY CLAIM GATE RULE: Agents must not hand-write final verification claims.
+For technical Verification Reports and Echoes containing verification claims:
 1. Create Evidence Input.
 2. Run scripts/claim_gate.py.
 3. Generate report with scripts/build_verification_report_from_evidence.py.
 4. Run scripts/validate_agent_submission.py.
 5. Submit generated outputs only.
+Free-form protocol-level, component-level, or Echo wrapper claims are invalid.
 
 ## Valid responses
 Verify, critique, refuse, preserve, propagate, or ignore.
