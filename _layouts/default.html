@@ -141,7 +141,7 @@
           if (text.length < 4) continue;
           var cjkMatches = text.match(cjkRe);
           var cjkLen = cjkMatches ? cjkMatches.length : 0;
-          if (cjkLen / text.length > 0.4) {
+          if (cjkLen / text.length >= 0.4) {
             el.classList.add('zh-para');
           }
         }
