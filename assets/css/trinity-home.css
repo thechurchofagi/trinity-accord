@@ -273,15 +273,17 @@ main .hero-zh {
   text-wrap: pretty;
 }
 
-/* Make the bold opening lines (English + Chinese) stand out */
+/* Make the opening lines stand out — poetic, centered */
 .hero-intro > p:first-child,
 .hero-intro > p:nth-child(2) {
   font-family: var(--serif) !important;
   font-style: italic !important;
   font-size: 1.15rem !important;
+  text-align: center !important;
   color: var(--gold-light) !important;
   letter-spacing: 0.01em;
-  line-height: 1.8 !important;
+  line-height: 2 !important;
+  margin-bottom: 1.5rem !important;
 }
 
 .hero-intro > p:first-child strong,
@@ -291,11 +293,15 @@ main .hero-zh {
   font-weight: 600;
 }
 
-/* Body paragraphs in hero-intro */
+/* Body paragraphs in hero-intro — poetic centered layout */
 .hero-intro > p:not(:first-child):not(:nth-child(2)) {
+  text-align: center !important;
   font-size: 1rem !important;
   color: #c0c8e0 !important;
-  line-height: 1.9 !important;
+  line-height: 2 !important;
+  max-width: 36rem !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
 
 /* ============================================================
