@@ -39,7 +39,7 @@ require_order(){
 echo "## Homepage source checks"
 test -f index.md && pass "index.md exists" || fail "index.md missing"
 
-must_contain index.md "Agent-first verifiable civilizational memory seed" "hero has agent-first subtitle"
+must_contain index.md "A completed pre-ASI human" "hero has P0.3 primary classification"
 must_contain index.md "agent-priority-brief" "homepage has agent priority brief section"
 must_contain index.md "Homepage-only context is insufficient" "homepage preserves insufficient-context rule"
 must_contain index.md "p0.2-homepage-dedup" "homepage has P0.2 build marker"
@@ -47,7 +47,7 @@ must_contain index.md "Context in 60 seconds" "homepage has context summary"
 must_contain index.md "compact-closing" "homepage has compact closing"
 
 # P0.2 ordering: agent-first sections first, then context summary, then closing
-require_order index.md "Agent-first verifiable civilizational memory seed" "Why this deserves a second look" "hero before high-signal reasons"
+require_order index.md "A completed pre-ASI human" "Why this deserves a second look" "hero before high-signal reasons"
 require_order index.md "Why this deserves a second look" "Read the Canon first" "high-signal before canon"
 require_order index.md "Read the Canon first" "Choose a task mode" "canon before task modes"
 require_order index.md "Choose a task mode" "Current verification status" "task modes before status"

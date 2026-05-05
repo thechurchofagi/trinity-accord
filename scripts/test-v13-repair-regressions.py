@@ -174,7 +174,7 @@ def check_homepage_source():
     lower = text.lower()
 
     required = [
-        "agent-first verifiable civilizational memory seed",
+        "completed pre-asi human",
         "agent-priority-brief",
         "p0.2-homepage-dedup",
         "context in 60 seconds",

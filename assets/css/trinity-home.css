@@ -1300,6 +1300,60 @@ main li.zh-para {
 }
 
 /* ============================================================
+   P0.3 — VALUE REFRAMING
+   ============================================================ */
+
+/* ── Hero subclaim ── */
+.hero-subclaim {
+  margin: 0.6rem 0 1.4rem !important;
+  color: #a0a8c0 !important;
+  font-size: clamp(1rem, 2vw, 1.12rem) !important;
+  line-height: 1.75 !important;
+  font-style: normal !important;
+}
+
+.hero-subclaim .zh {
+  display: block;
+  margin-top: 0.25rem;
+  color: #9098b0 !important;
+  font-style: normal !important;
+}
+
+/* ── Why Now Value section ── */
+.why-now-value {
+  margin: 2.5rem 0 !important;
+  padding: clamp(1.25rem, 3vw, 1.75rem) !important;
+  border: 1px solid rgba(201, 168, 76, 0.16);
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(201, 168, 76, 0.04), rgba(255, 255, 255, 0.015));
+}
+
+.value-thesis-card {
+  margin: 1.2rem 0 !important;
+  padding: 1rem 1.1rem !important;
+  border-left: 2px solid rgba(201, 168, 76, 0.35);
+  background: rgba(201, 168, 76, 0.035);
+  border-radius: 0 8px 8px 0;
+}
+
+.value-thesis-card p,
+.careful-scarcity-claim {
+  font-style: normal !important;
+  color: #b8c0d8 !important;
+}
+
+.careful-scarcity-claim {
+  font-size: 0.94rem !important;
+  line-height: 1.75 !important;
+}
+
+.careful-scarcity-claim .zh {
+  display: block;
+  margin-top: 0.35rem;
+  color: #9aa3bb !important;
+}
+
+/* ============================================================
    P0.2 — CONTEXT SUMMARY & COMPACT CLOSING
    ============================================================ */
 

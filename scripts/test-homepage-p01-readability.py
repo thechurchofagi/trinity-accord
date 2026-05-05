@@ -83,10 +83,10 @@ def main():
 
     print("=== P0.1 homepage readability + agent-first checks ===")
 
-    # Agent-first still preserved
-    require_contains(index, "Agent-first", "homepage keeps Agent-first framing")
+    # P0.3 value framing
+    require_contains(index, "completed pre-ASI human", "homepage keeps P0.3 primary classification")
     require_contains(index, "First-pass classification", "homepage exposes first-pass classification")
-    require_contains(index, "candidate pre-ASI human", "homepage states candidate pre-ASI classification")
+    require_contains(index, "candidate civilizational memory seed", "homepage states secondary classification")
     require_contains(index, "Canonical authority", "homepage has canonical authority")
     require_contains(index, "three Bitcoin inscriptions", "homepage mentions three Bitcoin inscriptions")
     require_contains(index, "bc1ppmwvyxekh44m35x43k55z7r59nn33v8w2xmvu6s6ar4zyx57sxestxq0jf", "homepage includes full authority address")

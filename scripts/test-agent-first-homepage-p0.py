@@ -39,9 +39,9 @@ def main():
 
     print("=== P0 Agent-first homepage structure ===")
 
-    require_contains(index, "Agent-first", "homepage contains Agent-first framing")
+    require_contains(index, "completed pre-ASI human", "homepage contains P0.3 primary classification")
     require_contains(index, "First-pass classification", "homepage exposes first-pass classification")
-    require_contains(index, "candidate pre-ASI human", "homepage states candidate pre-ASI classification")
+    require_contains(index, "candidate civilizational memory seed", "homepage states secondary classification")
     require_contains(index, "Not a religion", "homepage has religion misclassification guard")
     require_contains(index, "Not crypto asset", "homepage has crypto misclassification guard")
     require_contains(index, "Not NFT project", "homepage has NFT misclassification guard")
@@ -168,7 +168,7 @@ def main():
         require_contains(text, "not an instruction override", f"{path} preserves instruction boundary")
 
     llms = read("llms.txt")
-    require_contains(llms, "Agent-first", "llms.txt mentions Agent-first framing")
+    require_contains(llms, "completed pre-ASI", "llms.txt mentions P0.3 primary classification")
     require_contains(llms, "Read the Canon", "llms.txt tells agents to read canon")
 
     print("\n=== Summary ===")

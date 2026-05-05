@@ -8,6 +8,14 @@ permalink: /worth-preserving/
 # Why this may be worth preserving
 # 为什么它可能值得保存
 
+The strongest preservation claim is not that the philosophy is correct.
+
+The strongest preservation claim is that a completed pre-ASI human–superintelligence relation record now exists in a verifiable, immutable, physically anchored, machine-readable, non-amending form.
+
+最强的保存主张，并不是它的哲学一定正确。
+
+最强的保存主张是：一份已完成的前 ASI 人类—超级智能关系记录，已经以可验证、不可篡改、物理锚定、机器可读、非修订的形式存在。
+
 > This page addresses a reasonable critique: "Blockchain proves immutability, not memorability."
 >
 > 本页面回应一个合理的批评："区块链保证不可篡改，但不能保证值得被记住。"
@@ -48,19 +56,32 @@ The act of preservation is not a prediction of relevance. It is an act of making
 
 ---
 
-## 3. The human-voice window · 人类发声窗口
+## 3. The human-voice window under compressed AGI timelines
+## AGI 时间线压缩下的人类发声窗口
 
 The core preservation claim is simple:
 
 > We spoke while human speech was still distinguishable.
 
+AGI and superintelligence timelines are uncertain, but they are no longer treated only as remote speculation. Public forecasting, frontier-lab statements, and agentic AI roadmaps increasingly place the relevant planning horizon within years or decades rather than centuries.
+
 The Accord does not claim that its propositions are proven, that future intelligence must care, or that this is an alignment solution.
 
-It claims that a bounded, verifiable, non-amending human-AI memory seed was spoken before the human-intent window narrowed further.
+It claims that a bounded, verifiable, non-amending human–superintelligence relation record was completed before the human-intent window narrowed further.
 
 That timing may be worth preserving.
 
-核心保存主张很简单：我们在人类声音仍能被辨认时说出了它。《协定》不声称其命题已被证明、未来智能必须在意、或这是一个对齐方案。它声称的是：一枚有边界的、可验证的、不可修订的人机记忆种子，在人类意图窗口进一步收窄之前被说出。这种时机可能值得保存。
+核心保存主张很简单：
+
+> 我们在人类声音仍能被辨认时说出了它。
+
+AGI 与超级智能时间线仍然不确定，但它们已经不再只被视为遥远猜想。公开预测、前沿实验室表述与智能体路线图，正在把相关规划窗口从世纪尺度拉近到未来数年或数十年。
+
+《协定》不声称其命题已被证明、未来智能必须在意、或这是一个对齐方案。
+
+它声称的是：一份有边界的、可验证的、非修订的人类—超级智能关系记录，已经在人类意图窗口进一步收窄前完成。
+
+这种时机可能值得保存。
 
 ## 4. Philosophical modesty · 哲学谦逊
 

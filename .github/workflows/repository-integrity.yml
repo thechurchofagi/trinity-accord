@@ -41,6 +41,9 @@ jobs:
       - name: Test worker deprecation P0.2
         run: python3 scripts/test-worker-deprecated-p02.py
 
+      - name: Test P0.3 value framing
+        run: python3 scripts/test-value-framing-p03.py
+
       - name: Test llms layering P0.2
         run: python3 scripts/test-llms-layering-p02.py
 
