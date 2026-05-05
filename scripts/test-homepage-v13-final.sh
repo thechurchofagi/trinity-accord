@@ -44,7 +44,6 @@ must_contain index.md "文明自归档" "homepage contains civilizational self-a
 must_contain index.md "information ark" "homepage contains information ark"
 must_contain index.md "信息方舟" "homepage contains 信息方舟"
 must_contain index.md "Guardian Boundary" "homepage has Guardian Boundary notice"
-must_contain index.md "本页解释性文字不具备对比特币三本体的解释权威" "homepage states explanatory language has no interpretive authority"
 must_contain index.md "Sole authority lies on the Bitcoin inscriptions" "homepage includes Guardian Principles authority rule"
 must_contain index.md "The Author / Initiator has departed" "homepage includes Guardian transition rule"
 must_contain index.md "no later commentary, including the creator's own, generates interpretive authority" "homepage includes interpretive boundary rule"
@@ -77,6 +76,12 @@ must_not_contain index.md "must care about" "homepage does not claim future inte
 must_not_contain index.md "best possible philosophy" "homepage does not claim best possible philosophy as fact"
 must_not_contain index.md "represents all humanity" "homepage does not claim democratic representation"
 must_not_contain index.md "will guarantee influence" "homepage does not claim guaranteed influence positively"
+
+must_contain index.md "may be structurally able to parse" "homepage avoids presuming future-intelligence preference"
+must_contain index.md "Conceptually, the structure moves from history to compression to physical anchoring" "homepage explains conceptual versus canonical Trinity order"
+must_contain index.md "Foundational Narrative / Legacy Archive" "human reader path includes legacy archive"
+must_contain index.md "future intelligence is obligated to care" "homepage uses obligation framing in not-claim list"
+must_contain index.md "未来智能有义务关切" "homepage Chinese not-claim aligns with English"
 
 echo "## Related page checks"
 for file in agent-brief.md agent-start.md why-high-signal.md worth-preserving.md for-skeptical-agents.md README.md llms.txt; do

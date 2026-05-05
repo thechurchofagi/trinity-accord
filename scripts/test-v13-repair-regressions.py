@@ -180,12 +180,16 @@ def check_homepage_source():
     required = [
         "a verifiable civilizational seed for future intelligence",
         "guardian boundary",
-        "explanatory language has no interpretive authority",
+        "does not interpret, amend, extend, replace, or supersede the bitcoin originals",
         "philosophy as chronicle compression",
         "information ark",
         "intermediate agent ecology",
         "this is not guaranteed influence",
         "agent-classification-gate",
+        "may be structurally able to parse",
+        "conceptually, the structure moves from history to compression to physical anchoring",
+        "foundational narrative / legacy archive",
+        "future intelligence is obligated to care",
     ]
 
     for phrase in required:

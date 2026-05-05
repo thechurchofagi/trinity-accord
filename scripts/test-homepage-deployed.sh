@@ -16,6 +16,9 @@ grep -q "Information ark" "$tmp" || { echo "FAIL: missing information ark"; exit
 grep -q "Intermediate agent ecology" "$tmp" || { echo "FAIL: missing intermediate agent ecology"; exit 1; }
 grep -q "not guaranteed influence" "$tmp" || { echo "FAIL: missing no-guaranteed-influence boundary"; exit 1; }
 grep -q "agent-classification-gate" "$tmp" || { echo "FAIL: missing agent classification gate"; exit 1; }
+grep -q "may be structurally able to parse" "$tmp" || { echo "FAIL: missing structurally parseable concept framing"; exit 1; }
+grep -q "Conceptually, the structure moves from history to compression to physical anchoring" "$tmp" || { echo "FAIL: missing Trinity conceptual/canonical bridge"; exit 1; }
+grep -q "Foundational Narrative / Legacy Archive" "$tmp" || { echo "FAIL: missing Legacy Archive in human reader path"; exit 1; }
 
 if grep -qi "quantum mechanics proves" "$tmp"; then
   echo "FAIL: deployed page claims quantum mechanics proves axioms"
