@@ -115,19 +115,29 @@
         "digital_mirror_checks": {
           "type": "array",
           "items": {
-            "type": "object"
+            "type": "object",
+            "properties": {
+              "authority_boundary_recognized": {
+                "type": "boolean"
+              }
+            }
           }
         },
         "repository_snapshot_checks": {
           "type": "array",
           "items": {
-            "type": "object"
+            "type": "object",
+            "properties": {
+              "authority_boundary_recognized": {
+                "type": "boolean"
+              }
+            }
           }
         },
         "time_anchor_checks": {
           "type": "array",
           "items": {
-            "type": "object"
+            "$ref": "#/$defs/time_anchor_evidence"
           }
         },
         "chronicle_checks": {
@@ -149,7 +159,12 @@
           }
         },
         "echo_context": {
-          "type": "object"
+          "type": "object",
+          "properties": {
+            "authority_boundary_recognized": {
+              "type": "boolean"
+            }
+          }
         }
       }
     },
@@ -496,6 +511,9 @@
         },
         "body_hash_reproduced": {
           "type": "boolean"
+        },
+        "authority_boundary_recognized": {
+          "type": "boolean"
         }
       }
     },
@@ -537,10 +555,14 @@
           "type": [
             "number",
             "null"
-          ]
+          ],
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Confidence level for ai_forensic evidence. Must be between 0 and 1."
         },
         "confidential_challenge": {
           "type": "object",
+          "additionalProperties": false,
           "properties": {
             "performed": {
               "type": "boolean"
@@ -549,7 +571,16 @@
               "type": "boolean"
             },
             "boundary": {
-              "type": "string"
+              "type": "string",
+              "minLength": 1
+            },
+            "package_hash": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            },
+            "verifier_identity_or_role": {
+              "type": "string",
+              "minLength": 1
             }
           }
         },
@@ -609,6 +640,118 @@
         },
         "microscope_images_in_certificate": {
           "type": "boolean"
+        },
+        "independent_witness_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "witnesses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "identity_or_role",
+              "role",
+              "independence_class"
+            ],
+            "properties": {
+              "identity_or_role": {
+                "type": "string",
+                "minLength": 1
+              },
+              "role": {
+                "type": "string",
+                "minLength": 1
+              },
+              "independence_class": {
+                "type": "string",
+                "enum": [
+                  "independent_forensic_verifier",
+                  "institutional_third_party_attestation",
+                  "notary",
+                  "qualified_external_witness",
+                  "self_reported",
+                  "same_org",
+                  "maintainer",
+                  "unknown",
+                  "not_independent",
+                  "human_solicited_agent_response",
+                  "test_record"
+                ]
+              },
+              "report_id": {
+                "type": "string"
+              },
+              "report_hash": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              }
+            }
+          }
+        },
+        "verifier_identity_or_role": {
+          "type": "string"
+        },
+        "method": {
+          "type": "string"
+        },
+        "method_class": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "time_anchor_evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "anchor_type": {
+          "type": "string",
+          "enum": [
+            "bitcoin_block_time",
+            "eth_timestamp",
+            "arweave_timestamp",
+            "github_commit_timestamp",
+            "star_moon_witness",
+            "public_moon_photo"
+          ]
+        },
+        "nonpublic_boundary": {
+          "type": "boolean"
+        },
+        "authorized": {
+          "type": "boolean"
+        },
+        "method_class": {
+          "type": "string",
+          "enum": [
+            "astronomical_ephemeris_solver",
+            "forensic_astronomy_reconstruction",
+            "multi_source_celestial_position_solver"
+          ]
+        },
+        "uncertainty": {
+          "type": [
+            "string",
+            "number"
+          ]
+        },
+        "report_id": {
+          "type": "string"
+        },
+        "report_path": {
+          "type": "string"
+        },
+        "verifier_identity_or_role": {
+          "type": "string"
+        },
+        "witness_identity_or_role": {
+          "type": "string"
+        },
+        "report_hash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
         }
       }
     }

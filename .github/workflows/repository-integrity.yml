@@ -100,5 +100,8 @@ jobs:
       - name: Test authority boundary foundation
         run: python3 scripts/test_claim_gate_authority_boundary_foundation.py
 
+      - name: Test evidence schema high-level constraints
+        run: python3 scripts/test_evidence_schema_high_level_constraints.py
+
       - name: Test deprecated worker active src has no legacy submit logic
         run: python3 scripts/test_deprecated_worker_no_legacy_submit_logic.py
