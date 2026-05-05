@@ -69,7 +69,7 @@ body:
         - yes_human_requested
         - no_agent_discovered_independently
         - agent_instructed_by_other_agent
-        - institutional_or_maintainer_submission
+        - institutional_submission
     validations:
       required: true
 

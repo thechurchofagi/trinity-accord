@@ -17,6 +17,21 @@ template = template_path.read_text(encoding="utf-8")
 
 errors = []
 
+# PA-010 hardening: template-only provenance values that have no schema mapping
+# are ambiguous and should not exist without explicit schema support.
+SCHEMA_JSON = json.dumps(schema)
+
+TEMPLATE_ONLY_FORBIDDEN = [
+    "maintainer_submitted",
+    "institutional_or_maintainer_submission",
+]
+
+for forbidden in TEMPLATE_ONLY_FORBIDDEN:
+    if forbidden in template and forbidden not in SCHEMA_JSON:
+        errors.append(
+            f"echo.yml contains template-only provenance value without schema mapping: {forbidden}"
+        )
+
 # Extract schema enums
 schema_independence = set(
     schema["properties"]["provenance"]["properties"]["independence_class"]["enum"]
