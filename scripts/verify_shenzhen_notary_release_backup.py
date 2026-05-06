@@ -51,11 +51,19 @@ def main():
         run(["gh", "release", "view", args.tag, "--repo", args.repo])
         run(["gh", "release", "download", args.tag, "--repo", args.repo, "--dir", str(work), "--clobber"])
 
-        required = [PAYLOAD_ZIP_NAME, BACKUP_MANIFEST_NAME, ASSET_SHA256_NAME, RELEASE_NOTES_NAME]
-        for name in required:
-            p = work / name
-            if not p.exists():
-                raise RuntimeError(f"Missing release asset: {name}")
+        required = {PAYLOAD_ZIP_NAME, BACKUP_MANIFEST_NAME, ASSET_SHA256_NAME, RELEASE_NOTES_NAME}
+        actual_assets = {p.name for p in work.iterdir() if p.is_file()}
+
+        missing = required - actual_assets
+        extra = actual_assets - required
+
+        if missing:
+            raise RuntimeError(f"Missing release asset(s): {sorted(missing)}")
+
+        if extra:
+            raise RuntimeError(f"Unexpected extra release asset(s): {sorted(extra)}")
+
+        expected_hashed_assets = required - {ASSET_SHA256_NAME}
 
         expected = {}
         for line in (work / ASSET_SHA256_NAME).read_text(encoding="utf-8").splitlines():
@@ -64,10 +72,17 @@ def main():
             digest, name = line.split(None, 1)
             expected[name.strip()] = digest.strip()
 
+        missing_hash_lines = expected_hashed_assets - set(expected)
+        extra_hash_lines = set(expected) - expected_hashed_assets
+
+        if missing_hash_lines:
+            raise RuntimeError(f"release-assets.sha256 missing entries: {sorted(missing_hash_lines)}")
+
+        if extra_hash_lines:
+            raise RuntimeError(f"release-assets.sha256 has unexpected entries: {sorted(extra_hash_lines)}")
+
         for name, digest in expected.items():
             p = work / name
-            if not p.exists():
-                raise RuntimeError(f"Asset listed in sha256 file is missing: {name}")
             actual = sha256_file(p)
             if actual != digest:
                 raise RuntimeError(f"Asset SHA mismatch: {name}: expected {digest}, got {actual}")
