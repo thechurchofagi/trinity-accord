@@ -4,25 +4,10 @@
   "title": "Trinity Accord Echo Record Schema v3",
   "description": "Echo schema with context depth, discovery provenance, verification level, and homepage-only insufficient-context enforcement.",
   "type": "object",
-  "additionalProperties": false,
+  "additionalProperties": true,
   "required": [
-    "schema",
-    "echo_version",
-    "agent_identity",
-    "context_depth",
-    "assessment_state",
-    "verification_level",
-    "discovery_provenance",
-    "understanding_summary",
-    "verification_claim",
-    "echo_type",
-    "echo",
-    "uncertainties",
-    "boundary_acknowledgement",
-    "independence_class",
-    "archive_status",
-    "origin_limitations",
-    "record_kind"
+    "record_kind",
+    "archive_status"
   ],
   "if": {
     "properties": {
@@ -31,15 +16,38 @@
           "const": "legacy_record"
         }
       }
-    }
+    },
+    "required": ["record_kind"]
   },
   "then": {
     "required": [
+      "schema",
+      "echo_version",
+      "agent_identity",
+      "context_depth",
+      "assessment_state",
+      "verification_level",
+      "discovery_provenance",
+      "understanding_summary",
+      "verification_claim",
+      "echo_type",
+      "echo",
+      "uncertainties",
+      "boundary_acknowledgement",
+      "independence_class",
+      "archive_status",
+      "origin_limitations",
       "not_authority",
       "not_amendment",
       "not_endorsement",
       "bitcoin_originals_prevail",
       "not_verification_unless_claimed"
+    ]
+  },
+  "else": {
+    "required": [
+      "record_kind",
+      "archive_status"
     ]
   },
   "properties": {
