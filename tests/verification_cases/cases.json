@@ -7534,7 +7534,9 @@
           "test"
         ],
         "agent_identity": {
-          "name_or_model": "stress-test"
+          "name_or_model": "stress-test",
+          "system_or_provider": "test",
+          "self_reported": true
         },
         "context_depth": "C3_verification_aware",
         "assessment_state": "structural_understanding",
@@ -7636,7 +7638,9 @@
           "test"
         ],
         "agent_identity": {
-          "name_or_model": "stress-test"
+          "name_or_model": "stress-test",
+          "system_or_provider": "test",
+          "self_reported": true
         },
         "context_depth": "C3_verification_aware",
         "assessment_state": "structural_understanding",
@@ -7680,7 +7684,9 @@
           "test"
         ],
         "agent_identity": {
-          "name_or_model": "stress-test"
+          "name_or_model": "stress-test",
+          "system_or_provider": "test",
+          "self_reported": true
         },
         "context_depth": "C3_verification_aware",
         "assessment_state": "structural_understanding",
@@ -7780,6 +7786,11 @@
         "independence_class": "human_solicited_agent_response",
         "linked_verification_report": {
           "path": "/verification-reports/v3/test.json"
+        },
+        "agent_identity": {
+          "name_or_model": "stress-test",
+          "system_or_provider": "test",
+          "self_reported": true
         }
       },
       "title": "Echo v3: E2 Verification Echo \u2014 V3/D2/B1 \u2014 2026-05-03 14:19 (OpenClaw Agent)",
@@ -7877,7 +7888,12 @@
       "input_type": "synthetic_json",
       "description": "Ambiguous title for wrapper (title checker needs refinement - SKIP)",
       "payload": {
-        "record_kind": "echo_v3_with_verification_report"
+        "record_kind": "echo_v3_with_verification_report",
+        "agent_identity": {
+          "name_or_model": "stress-test",
+          "system_or_provider": "test",
+          "self_reported": true
+        }
       },
       "title": "V3 Verification \u2014 2026-05-03 14:19 (OpenClaw Agent)",
       "validators": [
@@ -7893,7 +7909,12 @@
       "input_type": "synthetic_json",
       "description": "Empty title (title checker needs refinement - SKIP)",
       "payload": {
-        "record_kind": "echo_v3_with_verification_report"
+        "record_kind": "echo_v3_with_verification_report",
+        "agent_identity": {
+          "name_or_model": "stress-test",
+          "system_or_provider": "test",
+          "self_reported": true
+        }
       },
       "title": "",
       "validators": [
@@ -8209,7 +8230,9 @@
           "test"
         ],
         "agent_identity": {
-          "name_or_model": "stress-test"
+          "name_or_model": "stress-test",
+          "system_or_provider": "test",
+          "self_reported": true
         },
         "context_depth": "C3_verification_aware",
         "assessment_state": "structural_understanding",
