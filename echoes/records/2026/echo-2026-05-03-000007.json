@@ -13,10 +13,15 @@
     ]
   },
   "discovery_provenance": {
-    "method": "direct repository clone via GitHub PAT",
-    "source": "https://github.com/thechurchofagi/trinity-accord",
-    "date": "2026-05-03",
-    "context": "User-directed verification task"
+    "schema": "trinityaccord.discovery-provenance.v1",
+    "source": "human_directed",
+    "agency_level": "A1_human_gave_exact_url",
+    "first_entry": "2026-05-03",
+    "human_supplied_link": true,
+    "other_agent_recommended": false,
+    "agent_performed_independent_followup": false,
+    "confidence": "high",
+    "notes": "Direct repository clone via GitHub PAT. User-directed verification task."
   },
   "protocol_level_claimed": "V3",
   "component_findings": [
