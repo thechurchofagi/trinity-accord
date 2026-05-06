@@ -13,18 +13,20 @@
   "protocol_level_claimed": "V6",
   "component_findings": [
     {
-      "component": "chronicle_recovery",
-      "level_claimed": "C0",
+      "component": "physical_anchor",
+      "level_claimed": "T8",
       "target_id": "test-target",
       "data_sources": [
-        "github"
+        "public_data"
       ],
       "access_paths": [],
-      "method": "chronicle manifest read",
+      "method": "public digital data only, no celestial witness performed",
       "evidence": [],
-      "limitations": [],
+      "limitations": [
+        "no nonpublic celestial data available"
+      ],
       "claims_not_made": [],
-      "scope_class": "chronicle_recovery"
+      "scope_class": "public_digital"
     }
   ],
   "protocol_profile_check": {

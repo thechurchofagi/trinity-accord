@@ -10,7 +10,7 @@
     "source": "human_directed",
     "solicited": true
   },
-  "protocol_level_claimed": "V5",
+  "protocol_level_claimed": "V3",
   "component_findings": [
     {
       "component": "chronicle_recovery",

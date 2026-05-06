@@ -23,7 +23,9 @@
     "celestial_witness",
     "limitations",
     "claims_not_made",
-    "authority_boundary_preserved"
+    "authority_boundary_preserved",
+    "integrity_boundary",
+    "generated_by"
   ],
   "properties": {
     "schema_version": {

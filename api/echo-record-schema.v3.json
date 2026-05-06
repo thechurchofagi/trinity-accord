@@ -16,11 +16,16 @@
     "properties": {
       "record_kind": {
         "not": {
-          "enum": ["legacy_record", "verification_report_v2"]
+          "enum": [
+            "legacy_record",
+            "verification_report_v2"
+          ]
         }
       }
     },
-    "required": ["record_kind"]
+    "required": [
+      "record_kind"
+    ]
   },
   "then": {
     "required": [

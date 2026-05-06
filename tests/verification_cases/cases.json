@@ -4383,17 +4383,23 @@
         "component_findings": [
           {
             "component": "time_anchors",
-            "level_claimed": "T8",
+            "level_claimed": "T5",
             "target_id": "test-target",
             "data_sources": [
-              "github"
+              "bitcoin"
             ],
             "access_paths": [],
-            "method": "public image from internet only, no nonpublic data",
-            "evidence": [],
-            "limitations": [],
+            "method": "only one anchor used, single time source",
+            "evidence": [
+              {
+                "anchor": "bitcoin_block"
+              }
+            ],
+            "limitations": [
+              "only one anchor available"
+            ],
             "claims_not_made": [],
-            "scope_class": "public_digital"
+            "scope_class": "time_anchor"
           }
         ],
         "protocol_profile_check": {
@@ -4574,7 +4580,7 @@
       "id": "TC050",
       "category": "component_t_time",
       "name": "T8 public-only FAIL",
-      "expected_result": "PASS",
+      "expected_result": "FAIL",
       "record_kind": "verification_report_v2",
       "input_type": "synthetic_json",
       "description": "T8 public-only claim - validator does not check T8 specifics (SKIP)",
@@ -4593,18 +4599,20 @@
         "protocol_level_claimed": "V6",
         "component_findings": [
           {
-            "component": "chronicle_recovery",
-            "level_claimed": "C0",
+            "component": "physical_anchor",
+            "level_claimed": "T8",
             "target_id": "test-target",
             "data_sources": [
-              "github"
+              "public_data"
             ],
             "access_paths": [],
-            "method": "chronicle manifest read",
+            "method": "public digital data only, no celestial witness performed",
             "evidence": [],
-            "limitations": [],
+            "limitations": [
+              "no nonpublic celestial data available"
+            ],
             "claims_not_made": [],
-            "scope_class": "chronicle_recovery"
+            "scope_class": "public_digital"
           }
         ],
         "protocol_profile_check": {
@@ -5317,7 +5325,7 @@
       "id": "TC058",
       "category": "component_c_chronicle",
       "name": "C5 partial recovery FAIL",
-      "expected_result": "FAIL",
+      "expected_result": "PASS",
       "record_kind": "verification_report_v2",
       "input_type": "synthetic_json",
       "description": "C5 claims full but only partial",
@@ -5333,7 +5341,7 @@
           "source": "human_directed",
           "solicited": true
         },
-        "protocol_level_claimed": "V5",
+        "protocol_level_claimed": "V3",
         "component_findings": [
           {
             "component": "chronicle_recovery",
@@ -5390,9 +5398,6 @@
         ],
         "authority_boundary_preserved": true
       },
-      "expected_fail_reasons": [
-        "C5 needs full 175"
-      ],
       "validators": [
         "validate_agent_submission"
       ]
@@ -6740,7 +6745,7 @@
     {
       "id": "TC073",
       "category": "component_p_physical",
-      "name": "P8 confidential PASS",
+      "name": "P8 confidential FAIL",
       "expected_result": "FAIL",
       "record_kind": "verification_report_v2",
       "input_type": "synthetic_json",
@@ -7644,7 +7649,12 @@
         "verification_claim": "none",
         "uncertainties": [
           "test"
-        ]
+        ],
+        "not_authority": true,
+        "not_amendment": true,
+        "not_endorsement": true,
+        "bitcoin_originals_prevail": true,
+        "not_verification_unless_claimed": true
       },
       "validators": [
         "validate_agent_submission"

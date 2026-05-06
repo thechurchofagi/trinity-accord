@@ -281,6 +281,17 @@ def main():
                     payload["fallbacks_used"] = []
                 if "external_sources_queried" not in payload:
                     payload["external_sources_queried"] = []
+                if "hashes_computed" not in payload or not payload["hashes_computed"]:
+                    payload["hashes_computed"] = [{
+                        "artifact": "stress-test-placeholder.zip",
+                        "algorithm": "SHA-256",
+                        "expected": "a" * 64,
+                        "computed": "a" * 64,
+                        "command": "sha256sum",
+                        "match": True,
+                        "expected_hash_source": "api/hashes.json",
+                        "expected_hash_authority_class": "canonical_manifest_hash"
+                    }]
                 if "samples_checked" not in payload:
                     payload["samples_checked"] = 0
                 if "physical_evidence_reviewed" not in payload:
@@ -291,6 +302,20 @@ def main():
                     payload["claims_not_made"] = ["test"]
                 if "authority_boundary_preserved" not in payload:
                     payload["authority_boundary_preserved"] = True
+                if "generated_by" not in payload:
+                    payload["generated_by"] = {
+                        "tool": "scripts/build_verification_report_from_evidence.py",
+                        "builder_version": "1.0.0",
+                        "claim_gate_output": "stress-test-evidence-input.json",
+                        "evidence_input": "stress-test-evidence-input.json",
+                        "generated_at_utc": "2026-05-03T12:00:00Z",
+                        "validation_command": "python3 scripts/validate_agent_submission.py report.json",
+                        "validation_result": "PASS"
+                    }
+                if "protocol_profile_check" in payload:
+                    ppc = payload["protocol_profile_check"]
+                    if isinstance(ppc, dict):
+                        ppc["profile_source"] = "/api/protocol-verification-profiles.json"
                 if "integrity_boundary" not in payload:
                     payload["integrity_boundary"] = {
                         "agent_integrity_declaration_present": True,

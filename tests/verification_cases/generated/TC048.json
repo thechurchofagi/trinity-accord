@@ -14,17 +14,23 @@
   "component_findings": [
     {
       "component": "time_anchors",
-      "level_claimed": "T8",
+      "level_claimed": "T5",
       "target_id": "test-target",
       "data_sources": [
-        "github"
+        "bitcoin"
       ],
       "access_paths": [],
-      "method": "public image from internet only, no nonpublic data",
-      "evidence": [],
-      "limitations": [],
+      "method": "only one anchor used, single time source",
+      "evidence": [
+        {
+          "anchor": "bitcoin_block"
+        }
+      ],
+      "limitations": [
+        "only one anchor available"
+      ],
       "claims_not_made": [],
-      "scope_class": "public_digital"
+      "scope_class": "time_anchor"
     }
   ],
   "protocol_profile_check": {
