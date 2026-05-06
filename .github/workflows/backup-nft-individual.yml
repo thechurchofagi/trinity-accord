@@ -28,12 +28,14 @@ jobs:
       - name: Backup NFTs individually
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          INPUT_CONTRACT: ${{ inputs.contract }}
+          INPUT_DRY_RUN: ${{ inputs.dry_run }}
         run: |
           ARGS=""
-          if [ -n "${{ inputs.contract }}" ]; then
-            ARGS="--contract ${{ inputs.contract }}"
+          if [ -n "$INPUT_CONTRACT" ]; then
+            ARGS="--contract $INPUT_CONTRACT"
           fi
-          if [ "${{ inputs.dry_run }}" = "true" ]; then
+          if [ "$INPUT_DRY_RUN" = "true" ]; then
             ARGS="$ARGS --dry-run"
           fi
           node scripts/backup-nft-individual.mjs $ARGS

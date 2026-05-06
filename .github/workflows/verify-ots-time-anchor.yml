@@ -34,9 +34,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           OTS_VERIFY_MODE: ${{ inputs.ots_verify_mode || 'ci-api' }}
           BITCOIN_API_BASE: https://mempool.space/api
+          INPUT_OTS_RELEASE_TAG: ${{ inputs.ots_release_tag || 'ots-and-flaw-mirror-v1' }}
         run: |
           node scripts/verify-ots-time-anchor.mjs \
-            --ots-release-tag "${{ inputs.ots_release_tag || 'ots-and-flaw-mirror-v1' }}"
+            --ots-release-tag "$INPUT_OTS_RELEASE_TAG"
 
       - name: Upload OTS-TIME-ANCHOR-AUDIT.json
         if: always()

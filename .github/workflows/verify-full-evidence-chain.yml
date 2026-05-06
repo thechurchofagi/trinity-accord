@@ -50,12 +50,14 @@ jobs:
           DAG_VERIFY_CONCURRENCY: ${{ inputs.concurrency }}
           ETH_RPC_URL: ${{ inputs.eth_rpc_url || secrets.ETHEREUMMAINNET }}
           BITCOIN_API_BASE: ${{ inputs.btc_api_base }}
+          INPUT_RELEASE_TAG: ${{ inputs.release_tag }}
+          INPUT_OTS_RELEASE_TAG: ${{ inputs.ots_release_tag }}
         run: |
           set -euo pipefail
           node scripts/verify-full-evidence-chain.mjs \
-            --release-tag "${{ inputs.release_tag }}" \
-            --ots-release-tag "${{ inputs.ots_release_tag }}" \
-            --concurrency "${{ inputs.concurrency }}"
+            --release-tag "$INPUT_RELEASE_TAG" \
+            --ots-release-tag "$INPUT_OTS_RELEASE_TAG" \
+            --concurrency "$DAG_VERIFY_CONCURRENCY"
 
       - name: Upload FULL-EVIDENCE-CHAIN-AUDIT.json
         if: always()

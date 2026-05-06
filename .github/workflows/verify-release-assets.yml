@@ -37,10 +37,12 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
           VERIFY_CONCURRENCY: ${{ inputs.concurrency }}
+          INPUT_RELEASE_TAG: ${{ inputs.release_tag }}
+          INPUT_CID_CHECK: ${{ inputs.cid_check }}
         run: |
           set -euo pipefail
-          ARGS="--release-tag ${{ inputs.release_tag }}"
-          if [ "${{ inputs.cid_check }}" = "true" ]; then
+          ARGS="--release-tag $INPUT_RELEASE_TAG"
+          if [ "$INPUT_CID_CHECK" = "true" ]; then
             ARGS="$ARGS --cid-check"
           fi
           node scripts/verify-release-assets.mjs $ARGS

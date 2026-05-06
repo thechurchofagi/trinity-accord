@@ -42,12 +42,14 @@ jobs:
           ETH_RPC_URL: ${{ secrets.ETH_RPC_URL }}
           REPO: ${{ github.repository }}
           ETH_CONCURRENCY: ${{ inputs.concurrency }}
+          INPUT_RELEASE_TAG: ${{ inputs.release_tag }}
+          INPUT_SOURCE: ${{ inputs.source }}
         run: |
           set -euo pipefail
           node scripts/verify-onchain-tokenuri.mjs \
-            --release-tag ${{ inputs.release_tag }} \
-            --source ${{ inputs.source }} \
-            --concurrency ${{ inputs.concurrency }}
+            --release-tag "$INPUT_RELEASE_TAG" \
+            --source "$INPUT_SOURCE" \
+            --concurrency "$ETH_CONCURRENCY"
 
       - name: Upload audit report
         if: always()

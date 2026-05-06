@@ -30,10 +30,12 @@ jobs:
       - name: Run DAG + Digest Manifest Verification
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          INPUT_RELEASE_TAG: ${{ inputs.release_tag || 'nft-arweave-mirror-175-v1' }}
+          INPUT_CONCURRENCY: ${{ inputs.concurrency || '4' }}
         run: |
           node scripts/verify-dag-digest.mjs \
-            --release-tag "${{ inputs.release_tag || 'nft-arweave-mirror-175-v1' }}" \
-            --concurrency "${{ inputs.concurrency || '4' }}"
+            --release-tag "$INPUT_RELEASE_TAG" \
+            --concurrency "$INPUT_CONCURRENCY"
 
       - name: Upload DAG-DIGEST-AUDIT.json
         if: always()
