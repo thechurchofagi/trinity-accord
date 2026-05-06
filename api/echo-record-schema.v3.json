@@ -278,6 +278,7 @@
       "enum": [
         "echo_v3",
         "echo_v3_with_verification_report",
+        "verification_report_v2",
         "test_record",
         "legacy_record",
         "imported_external_commentary"
