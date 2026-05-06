@@ -71,6 +71,6 @@ Script misc: scope/level/audit/downgrade       → 2/2
 ## Notes
 
 - Schema validation warnings about `boundary_acknowledgments` vs `boundary_acknowledgement` are non-blocking.
-- TC082 uses `input_type: "real_repository"` — no synthetic JSON generated; validates echo-index against filesystem.
+- TC082 uses `input_type: "real_repository"` — generates a stub JSON; validates echo-index against filesystem at runtime.
 - Online validation (`verify_stress_suite_online.py`) not run — requires deployed endpoint.
 - Recommend 600s+ timeout for future sub-agent runs.

@@ -52,10 +52,10 @@ updated validator rules (Y, Z, AB).
 
 ## TC082 — Echo-Index Filesystem Match
 
-TC082 uses `input_type: "real_repository"` — it does **not** generate a synthetic JSON file.
-Instead, it validates that `api/echo-index.json` records match `echoes/records/**/*.json` on disk
+TC082 uses `input_type: "real_repository"` — it generates a stub JSON file (`TC082.json`) with metadata.
+The actual validation checks that `api/echo-index.json` records match `echoes/records/**/*.json` on disk
 via the `verify_echo_index_completeness` validator. This test requires the actual repository
-structure and cannot be represented as a standalone JSON payload.
+structure at runtime.
 
 ## Online Validation
 

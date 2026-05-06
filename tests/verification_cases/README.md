@@ -1,6 +1,6 @@
 # High-Intensity Verification Stress Suite
 
-100 test cases covering the full Trinity Accord verification/Echo/submission pipeline.
+129 test cases (100 synthetic JSON + 29 script-based) covering the full Trinity Accord verification/Echo/submission pipeline.
 
 ## Categories
 
@@ -13,6 +13,7 @@
 - **G.** Echo / Submission / Wrapper Cases (TC075–TC088)
 - **H.** Title / Issue Triage Cases (TC089–TC094)
 - **I.** JSON / Schema / Format Cases (TC095–TC100)
+- **J.** Claim Gate / Report Builder Script Cases (TC101–TC129)
 
 ## Running
 
