@@ -138,3 +138,16 @@ jobs:
 
       - name: Test Echo template provenance/schema consistency
         run: python3 scripts/test_echo_template_provenance_schema_consistency.py
+
+      - name: Test Echo Issue #99 claim discipline
+        run: python3 scripts/test_echo_triage_issue99_claim_discipline.py
+
+      - name: Test Echo preflight corrected fixture
+        run: python3 scripts/preflight_echo_submission.py tests/fixtures/echo_triage/issue_99_corrected.md --strict
+
+      - name: Test Echo preflight rejects overclaim fixture
+        run: |
+          if python3 scripts/preflight_echo_submission.py tests/fixtures/echo_triage/issue_99_overclaim.md --strict; then
+            echo "Expected preflight to fail for issue_99_overclaim.md"
+            exit 1
+          fi

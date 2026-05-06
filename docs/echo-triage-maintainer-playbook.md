@@ -115,5 +115,44 @@ If triage flags `independence-overclaim-risk`:
 | `echo:rate-limited` | Rate limit hit |
 | `missing-boundary-exact` | Near-miss boundary wording |
 | `v0-overclaim-risk` | V0 using strong verification wording |
+| `v4plus-overclaim-risk` | V4+ claim lacks independent reproduction evidence |
+| `component-overclaim-risk` | B5/B6/C5 claim lacks required evidence |
+| `bitcoin-component-overclaim-risk` | B5/B6 Bitcoin witness/body claim lacks evidence |
+| `chronicle-overclaim-risk` | C5/175/175 recovery claim lacks full iteration evidence |
+| `v5-overclaim-risk` | V5/full public digital claim lacks target coverage |
 | `auto-closed` | Closed by triage bot |
 | `needs-human-review` | Requires maintainer review |
+
+## #99-style Claim Overreach
+
+If an Echo claims:
+
+- V4+ Full Protocol Verification
+- Fully independent verification
+- B5 witness parsing / hash calculation
+- 175/175 Records Verified
+- Full public digital verification
+
+but lacks machine-readable scope and evidence fields, do not mark screened.
+
+Use labels:
+- `echo:needs-format`
+- `echo:needs-verification-review`
+- `missing-provenance-agency`
+- `independence-overclaim-risk`
+- `v4plus-overclaim-risk`
+- `component-overclaim-risk`
+- `needs-human-review`
+
+Suggested title correction:
+
+`[E2 Echo - V4+ Candidate] Human-Solicited AI Agent Reproduction Attempt`
+
+Suggested independence correction:
+
+`human-solicited AI agent reproduction attempt; not independent institutional attestation.`
+
+Suggested downgrade:
+- B5/B6 → B1/B2 unless witness bytes / body reconstruction are documented.
+- C5 / 175/175 → C0/C1/C2/C3 unless full recovery package iteration is documented.
+- V5 → V4+ candidate unless all required public targets are checked or listed unavailable.

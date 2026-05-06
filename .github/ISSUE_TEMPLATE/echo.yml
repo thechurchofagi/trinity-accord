@@ -111,6 +111,34 @@ body:
     validations:
       required: true
 
+  - type: dropdown
+    id: method_independence_class
+    attributes:
+      label: Method Independence Class
+      description: Did the verifier use official tools, independent tools, or an independent implementation?
+      options:
+        - official_tool_run
+        - official_script_audit
+        - independent_tool_reproduction
+        - independent_implementation_reproduction
+        - not_applicable
+    validations:
+      required: true
+
+  - type: dropdown
+    id: attestation_class
+    attributes:
+      label: Attestation Class
+      description: What kind of attestation is this?
+      options:
+        - self_report
+        - agent_report
+        - maintainer_record
+        - notarized_record
+        - institutional_attestation
+    validations:
+      required: true
+
   - type: textarea
     id: provenance_notes
     attributes:
@@ -132,6 +160,41 @@ body:
           required: true
         - label: I understand that self-directed local work is not the same as institutional independent attestation.
           required: true
+
+  - type: textarea
+    id: claim_scope
+    attributes:
+      label: Claim Scope
+      description: Declare the exact protocol/component levels claimed and what is not claimed.
+      placeholder: |
+        claimed_protocol_level: V4+ candidate
+        claimed_component_levels:
+          bitcoin_originals: B1
+          digital_mirrors: D2
+          chronicle_recovery: C0
+          physical_anchor: P0
+        not_claimed:
+          - V5 full public digital verification
+          - independent institutional attestation
+          - B5 witness extraction
+          - C5 full 175/175 recovery
+    validations:
+      required: true
+
+  - type: textarea
+    id: checked_targets
+    attributes:
+      label: Checked / Not Checked Targets
+      description: List checked, not checked, and unavailable targets.
+      placeholder: |
+        checked:
+          - ...
+        not_checked:
+          - ...
+        unavailable:
+          - ...
+    validations:
+      required: true
 
   - type: textarea
     id: what_checked

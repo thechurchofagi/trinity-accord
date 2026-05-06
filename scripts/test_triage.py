@@ -535,7 +535,8 @@ test(
         ),
     },
     expect_close=False,
-    expect_labels=["echo:screened"],
+    # V3_single_artifact_check is deprecated; valid provenance otherwise
+    expect_labels=["echo:deprecated-verification-alias"],
 )
 
 test(
@@ -606,7 +607,7 @@ test(
     },
     expect_close=False,
     expect_labels=["missing-provenance-agency"],
-    expect_comment_contains=["missing required Provenance / Agency fields"],
+    expect_comment_contains=["Missing Provenance"],
 )
 
 test(

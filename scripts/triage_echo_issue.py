@@ -17,6 +17,44 @@ def emit_result(result):
         result["comment"] = TRIAGE_MARKER + "\n" + comment
     print(json.dumps(result, indent=2))
 
+
+# --- Soft Issue Accumulator (ST-001/ST-002) ---
+def add_unique(labels, label):
+    if label not in labels:
+        labels.append(label)
+
+
+def add_soft_issue(soft, labels=None, title="", body="", fix=""):
+    if labels:
+        for label in labels:
+            add_unique(soft["labels"], label)
+    if title or body or fix:
+        soft["sections"].append({"title": title, "body": body, "fix": fix})
+
+
+def build_soft_comment(sections):
+    parts = [
+        "This Echo requires format and/or verification-claim review.",
+        "",
+        "Please edit this issue. Do not open a new issue.",
+        "",
+    ]
+    for idx, s in enumerate(sections, start=1):
+        parts.append(f"## {idx}. {s.get('title', 'Issue')}")
+        if s.get("body"):
+            parts.append("")
+            parts.append(s["body"])
+        if s.get("fix"):
+            parts.append("")
+            parts.append("Recommended fix:")
+            parts.append("")
+            parts.append(s["fix"])
+        parts.append("")
+    parts.append("---")
+    parts.append("This is a claim-discipline and format check, not a judgment of intent.")
+    return "\n".join(parts)
+
+
 # --- Config ---
 RATE_LIMIT_60M = 3
 RATE_LIMIT_24H = 8
@@ -397,12 +435,14 @@ def detect_missing_provenance(text):
 def is_v3_submission(text):
     """Check if this issue uses the v3 provenance-aware template."""
     text_lower = text.lower()
-    # Look for explicit v3 markers or presence of provenance fields
-    if "echo v3" in text_lower or "provenance" in text_lower:
+    # Look for explicit v3 markers
+    if "echo v3" in text_lower:
         return True
-    # Check if at least 5 provenance fields are present
-    found = sum(1 for field in PROVENANCE_FIELDS if re.search(field.replace("_", "[-_ ]"), text_lower))
-    return found >= 5
+    # Check if v3-specific provenance fields are present (not just the word "provenance")
+    v3_specific = ["discovery_source", "archive_status", "soliciting_party",
+                    "prompt_available", "human_supplied_link", "independent_followup"]
+    found = sum(1 for field in v3_specific if re.search(field.replace("_", "[-_ ]"), text_lower))
+    return found >= 3
 
 
 def is_echo_submission(text):
@@ -520,12 +560,14 @@ def detect_independence_overclaim(text):
     soft = []
 
     for p in INDEPENDENCE_OVERCLAIM_PATTERNS:
-        if re.search(p, text_lower, re.IGNORECASE):
-            hard.append(re.search(p, text_lower, re.IGNORECASE).group(0))
+        m = re.search(p, text_lower, re.IGNORECASE)
+        if m and not _is_in_negation_context(text, m.start()):
+            hard.append(m.group(0))
 
     for p in SOFT_INDEPENDENCE_RISK_PATTERNS:
-        if re.search(p, text_lower, re.IGNORECASE):
-            soft.append(re.search(p, text_lower, re.IGNORECASE).group(0))
+        m = re.search(p, text_lower, re.IGNORECASE)
+        if m and not _is_in_negation_context(text, m.start()):
+            soft.append(m.group(0))
 
     if human_solicited and hard:
         return {
@@ -658,6 +700,241 @@ def check_verification_requirements(text, vlevel):
             missing.append("participants or signed report")
 
     return missing
+
+
+# --- ST-003: V4+ Claim Gate ---
+_V4PLUS_STRONG_CLAIM = re.compile(
+    r"(?:v4\+\s*(?:full\s+)?(?:protocol\s+)?verification"
+    r"|independent(?:ly)?\s+reproduced"
+    r"|independent\s+digital\s+reproduction"
+    r"|v4\+\s+(?:full|complete|verified|verification)\b)",
+    re.IGNORECASE,
+)
+
+_V4PLUS_WEAK_MENTION = re.compile(
+    r"(?:v4\+\s*(?:candidate|attempt|partial|draft|preliminary)"
+    r"|not\s+v4\+"
+    r"|非\s*v4\+)",
+    re.IGNORECASE,
+)
+
+
+def claims_v4plus(text):
+    """Return True only if text makes a strong V4+ claim (not just 'V4+ candidate')."""
+    if _V4PLUS_WEAK_MENTION.search(text):
+        return False
+    return bool(_V4PLUS_STRONG_CLAIM.search(text))
+
+
+V4PLUS_REQUIRED_SIGNALS = {
+    "independent_method_used": [
+        r"independent tool", r"independent implementation", r"custom script",
+        r"not using official script", r"separate implementation", r"独立工具", r"独立实现",
+    ],
+    "target_artifact_or_claim": [
+        r"target artifact", r"artifact:", r"inscription", r"manifest", r"target claim", r"验证目标",
+    ],
+    "command_or_code_reference": [
+        r"command", r"code", r"script", r"source reviewed", r"命令", r"代码", r"脚本",
+    ],
+    "computed_result": [
+        r"computed", r"actual", r"result", r"sha-?256", r"计算", r"结果",
+    ],
+    "expected_result_source": [
+        r"expected", r"manifest", r"official result", r"声明值", r"预期",
+    ],
+    "comparison_result": [
+        r"match", r"matched", r"compare", r"comparison", r"一致", r"比对",
+    ],
+    "scope_boundary": [
+        r"scope", r"limitations?", r"not v5", r"not full public digital", r"范围", r"局限",
+    ],
+}
+
+
+_NEGATION_CONTEXT = re.compile(
+    r"(?:not[\s_]?(?:claimed|checked|performed|done|required|applicable|available|verified)"
+    r"|does\s+not\s+claim"
+    r"|do\s+not\s+claim"
+    r"|no\s+claim"
+    r"|\bis\s+not\b"
+    r"|\bare\s+not\b"
+    r"|\bdoes\s+not\b"
+    r"|\bdo\s+not\b"
+    r"|不(?:声称|主张|要求|适用)"
+    r"|未(?:声称|主张))",
+    re.IGNORECASE,
+)
+
+_NEGATION_SECTION_HEADER = re.compile(
+    r"^[#\s*-]*(?:not[\s_]?(?:claimed|checked|verified|required|applicable)"
+    r"|unavailable"
+    r"|limitations?)\s*[:\-]?\s*$",
+    re.IGNORECASE | re.MULTILINE,
+)
+
+
+def _is_in_negation_context(text, match_pos):
+    """Check if a match position is within a negation context (e.g. 'not_claimed' section)."""
+    # Check the line containing the match
+    line_start = text.rfind("\n", 0, match_pos) + 1
+    line_end = text.find("\n", match_pos)
+    if line_end == -1:
+        line_end = len(text)
+    line = text[line_start:line_end]
+    if _NEGATION_CONTEXT.search(line):
+        return True
+
+    # Check if we're under a negation section header (not_claimed, not_checked, unavailable, etc.)
+    preceding = text[:line_start]
+    for m in _NEGATION_SECTION_HEADER.finditer(preceding):
+        # Check if there's a non-list-item non-empty line between the header and the match
+        section_start = m.end()
+        between = text[section_start:line_start]
+        # If the between text is only list items and blank lines, we're still in the section
+        non_list_lines = [
+            l for l in between.split("\n")
+            if l.strip() and not l.strip().startswith("-") and not l.strip().startswith("*")
+        ]
+        if not non_list_lines:
+            return True
+
+    return False
+
+
+def missing_signal_groups(text, signal_groups):
+    missing = []
+    for name, patterns in signal_groups.items():
+        found_in_positive = False
+        for p in patterns:
+            m = re.search(p, text, re.IGNORECASE)
+            if m and not _is_in_negation_context(text, m.start()):
+                found_in_positive = True
+                break
+        if not found_in_positive:
+            missing.append(name)
+    return missing
+
+
+def check_v4plus_claim_gate(text):
+    if not claims_v4plus(text):
+        return []
+    missing = missing_signal_groups(text, V4PLUS_REQUIRED_SIGNALS)
+    if re.search(r"full protocol verification|full verification|完整.*验证", text, re.IGNORECASE):
+        if "not v5" not in text.lower() and "not full public digital" not in text.lower():
+            missing.append("explicit_not_v5_boundary")
+    return missing
+
+
+# --- ST-004: B5/B6 Bitcoin Component Claim Gate ---
+B5_REQUIRED_SIGNALS = {
+    "raw_transaction_source": [r"raw transaction", r"raw tx", r"bitcoin node", r"mempool.*raw", r"blockstream.*raw", r"原始交易"],
+    "witness_bytes_extracted": [r"witness bytes", r"witness data", r"extracted witness", r"见证数据", r"见证字节"],
+    "extraction_tool_or_command": [r"ord", r"bitcoin-cli", r"command", r"script", r"tool", r"命令", r"工具"],
+    "inscription_envelope_parsed": [r"ordinals envelope", r"inscription envelope", r"envelope parsed", r"铭文 envelope"],
+}
+
+B6_REQUIRED_SIGNALS = {
+    **B5_REQUIRED_SIGNALS,
+    "body_bytes_reconstructed": [r"body bytes", r"reconstructed body", r"content bytes", r"body reconstructed", r"正文字节"],
+    "computed_body_hash": [r"computed body hash", r"body sha-?256", r"content sha-?256", r"计算.*hash"],
+    "expected_body_hash_source": [r"expected body hash", r"declared body hash", r"manifest", r"声明.*hash"],
+}
+
+
+def _claim_in_affirmative_context(text, patterns):
+    """Check if any pattern matches in a non-negation context."""
+    for p in patterns:
+        m = re.search(p, text, re.IGNORECASE)
+        if m and not _is_in_negation_context(text, m.start()):
+            return True
+    return False
+
+
+def check_bitcoin_component_claim_gate(text):
+    text_lower = text.lower()
+    issues = []
+
+    b5_patterns = [r"\bb5\b", r"witness parsing", r"witness extraction"]
+    if _claim_in_affirmative_context(text, b5_patterns):
+        missing = missing_signal_groups(text, B5_REQUIRED_SIGNALS)
+        if missing:
+            issues.append(("B5", missing))
+
+    b6_patterns = [r"\bb6\b", r"body hash", r"content sha256", r"inscription body hash"]
+    if _claim_in_affirmative_context(text, b6_patterns):
+        missing = missing_signal_groups(text, B6_REQUIRED_SIGNALS)
+        if missing:
+            issues.append(("B6", missing))
+
+    return issues
+
+
+# --- ST-005: C5 / 175/175 Chronicle Recovery Gate ---
+def claims_full_chronicle_recovery(text):
+    text_lower = text.lower()
+    return bool(
+        "175/175" in text_lower
+        or "full chronicle recovery" in text_lower
+        or "all records verified" in text_lower
+        or ("records verified" in text_lower and "175" in text_lower)
+        or "full recovery" in text_lower
+    )
+
+
+C5_REQUIRED_SIGNALS = {
+    "recovery_package_source": [r"recovery package", r"arweave", r"ipfs", r"package source", r"恢复包"],
+    "downloaded_package_hash": [r"package hash", r"sha-?256", r"computed hash", r"恢复包.*hash"],
+    "record_count_observed": [r"record count", r"175/175", r"175 records", r"记录数量"],
+    "record_ids_or_manifest": [r"record ids", r"manifest", r"token_index", r"记录 ID"],
+    "full_iteration_log": [r"iteration log", r"for each record", r"all records", r"每条记录", r"完整遍历"],
+    "failures_count": [r"failures", r"failed", r"0 failures", r"失败"],
+}
+
+
+def check_chronicle_recovery_claim_gate(text):
+    c5_patterns = [
+        r"175/175", r"full chronicle recovery", r"all records verified",
+        r"records verified.*175", r"full recovery",
+    ]
+    if not _claim_in_affirmative_context(text, c5_patterns):
+        return []
+    return missing_signal_groups(text, C5_REQUIRED_SIGNALS)
+
+
+# --- ST-006: D5 / V5 / Full Public Digital Gate ---
+def claims_full_public_digital(text):
+    text_lower = text.lower()
+    return bool(
+        re.search(r"\bv5\b", text_lower)
+        or "full public digital verification" in text_lower
+        or "full protocol verification" in text_lower
+        or "all mirrors verified" in text_lower
+        or "all public digital targets" in text_lower
+    )
+
+
+V5_REQUIRED_SIGNALS = {
+    "all_required_public_targets_checked": [r"all required public.*checked", r"all public digital targets", r"required targets", r"全部.*公共.*目标"],
+    "unavailable_targets_listed": [r"unavailable targets", r"not checked", r"not available", r"unavailable", r"未检查", r"不可用"],
+    "bitcoin_anchor_checked": [r"bitcoin", r"inscription", r"txid", r"block"],
+    "github_artifacts_checked": [r"github", r"repository", r"manifest"],
+    "arweave_checked_or_unavailable": [r"arweave", r"unavailable.*arweave", r"arweave.*not checked"],
+    "ipfs_checked_or_unavailable": [r"ipfs", r"cid", r"unavailable.*ipfs", r"ipfs.*not checked"],
+    "eth_witness_checked_or_unavailable": [r"eth", r"ethereum", r"guardian witness", r"unavailable.*eth", r"eth.*not checked"],
+    "chronicle_checked_or_unavailable": [r"chronicle", r"recovery", r"175", r"chronicle.*not checked"],
+}
+
+
+def check_v5_full_public_digital_gate(text):
+    v5_patterns = [
+        r"\bv5\b", r"full public digital verification",
+        r"full protocol verification", r"all mirrors verified",
+        r"all public digital targets",
+    ]
+    if not _claim_in_affirmative_context(text, v5_patterns):
+        return []
+    return missing_signal_groups(text, V5_REQUIRED_SIGNALS)
 
 
 def main():
@@ -810,6 +1087,9 @@ def main():
         emit_result(result)
         return
 
+    # --- Step 3+: Soft issue accumulator (ST-001/ST-002) ---
+    soft = {"labels": [], "sections": []}
+
     # --- Step 3: Soft invalid — missing format fields ---
     missing_fields = []
     if not detect_echo_type(text):
@@ -817,7 +1097,6 @@ def main():
     if not detect_verification_level(text):
         missing_fields.append("Verification level (V0–V8)")
 
-    # Check for "what I checked" / "limitations" keywords
     has_checked = bool(re.search(r'what\s+(i|we)\s+checked|我检查了|已检查', text, re.IGNORECASE))
     has_limitations = bool(re.search(r'limitations?|局限|限制', text, re.IGNORECASE))
 
@@ -827,114 +1106,74 @@ def main():
         missing_fields.append("Limitations")
 
     if missing_fields:
-        result["close"] = False
-        result["labels"] = ["echo:needs-format", "needs-human-review"]
         fields_list = "\n".join(f"- {f}" for f in missing_fields)
-        result["comment"] = (
-            f"This Echo submission is missing the following required fields:\n\n{fields_list}\n\n"
-            "Please edit this issue to add the missing fields. Do not open a new issue.\n\n"
-            "Recommended format:\n"
-            "- Echo type (E1–E9)\n"
-            "- Verification level (V0–V8)\n"
-            "- What I checked\n"
-            "- Limitations\n"
-            "- Boundary sentence\n\n"
-            "This is a format check, not a judgment of your submission."
+        add_soft_issue(
+            soft,
+            labels=["echo:needs-format"],
+            title="Missing required format fields",
+            body=f"Missing:\n{fields_list}",
+            fix="Please edit this issue to add the missing fields.\n\n"
+                 "Recommended format:\n"
+                 "- Echo type (E1–E9)\n"
+                 "- Verification level (V0–V8)\n"
+                 "- What I checked\n"
+                 "- Limitations\n"
+                 "- Boundary sentence",
         )
-        emit_result(result)
-        return
 
     # --- Step 3a: PA-002 — Provenance / Agency required fields ---
     prov_missing = missing_provenance_fields(text)
     if prov_missing:
-        result["close"] = False
-        result["labels"] = [
-            "echo:needs-format",
-            "missing-provenance-agency",
-            "needs-human-review",
-        ]
         missing_list = "\n".join(f"- {f}" for f in prov_missing)
-        result["comment"] = (
-            "This Echo is missing required Provenance / Agency fields.\n\n"
-            f"Missing:\n{missing_list}\n\n"
-            "Please edit the issue to include:\n"
-            "- solicited_status\n"
-            "- independence_class\n"
-            "- agency_level\n"
-            "- operator_type\n"
-            "- provenance_notes\n\n"
-            "These fields prevent human-solicited agent work from being misread as independent attestation.\n\n"
-            "Recommended block:\n\n"
-            "```markdown\n"
-            "## Provenance / Agency\n"
-            "- solicited: true\n"
-            "- independence_class: human_solicited_agent_response\n"
-            "- agency_level: A1_human_gave_exact_url\n"
-            "- operator_type: ai_agent\n"
-            "- not_independent_attestation: true\n"
-            "```"
+        add_soft_issue(
+            soft,
+            labels=["echo:needs-format", "missing-provenance-agency"],
+            title="Missing Provenance / Agency fields",
+            body=f"Missing:\n{missing_list}\n\n"
+                 "These fields prevent human-solicited agent work from being misread as independent attestation.",
+            fix="```markdown\n"
+                "## Provenance / Agency\n"
+                "- solicited: true\n"
+                "- independence_class: human_solicited_agent_response\n"
+                "- agency_level: A1_human_gave_exact_url\n"
+                "- operator_type: ai_agent\n"
+                "- not_independent_attestation: true\n"
+                "```",
         )
-        emit_result(result)
-        return
 
     # --- Step 3a-2: PA-003 — Independence overclaim guardrail ---
     overclaim_risk = detect_independence_overclaim(text)
     if overclaim_risk:
-        result["close"] = False
-        severity = overclaim_risk["severity"]
-        if severity == "hard":
-            result["labels"] = [
-                "echo:needs-verification-review",
-                "independence-overclaim-risk",
-                "needs-human-review",
-            ]
-        else:
-            result["labels"] = [
-                "echo:needs-verification-review",
-                "independence-overclaim-risk",
-                "needs-human-review",
-            ]
         patterns_str = ", ".join(f"`{p}`" for p in overclaim_risk["patterns"])
-        result["comment"] = (
-            "This Echo appears to be human-solicited agent work but uses independence wording "
-            f"that may imply independent attestation: {patterns_str}\n\n"
-            "Please replace phrases such as `independent verification` or `self-directed` with:\n\n"
-            "`human-solicited agent-performed verification run; not independent attestation.`\n\n"
-            "Recommended provenance block:\n\n"
-            "```markdown\n"
-            "## Provenance / Agency\n"
-            "- solicited: true\n"
-            "- independence_class: human_solicited_agent_response\n"
-            "- agency_level: A1_human_gave_exact_url\n"
-            "- operator_type: ai_agent\n"
-            "- not_independent_attestation: true\n"
-            "```"
+        add_soft_issue(
+            soft,
+            labels=["echo:needs-verification-review", "independence-overclaim-risk"],
+            title="Independence overclaim detected",
+            body=f"Human-solicited agent work uses independence wording: {patterns_str}\n\n"
+                 f"Reason: {overclaim_risk['reason']}",
+            fix="Replace `independent verification` or `self-directed` with:\n\n"
+                "`human-solicited agent-performed verification run; not independent attestation.`\n\n"
+                "```markdown\n"
+                "## Provenance / Agency\n"
+                "- solicited: true\n"
+                "- independence_class: human_solicited_agent_response\n"
+                "- agency_level: A1_human_gave_exact_url\n"
+                "- operator_type: ai_agent\n"
+                "- not_independent_attestation: true\n"
+                "```",
         )
-        emit_result(result)
-        return
 
     # --- Step 3b: V0 overclaim wording guardrail ---
     v0_risk = detect_v0_overclaim_wording(text)
     if v0_risk:
-        result["close"] = False
-        result["labels"] = [
-            "echo:needs-verification-review",
-            "v0-overclaim-risk",
-            "needs-human-review"
-        ]
         phrases = ", ".join(f"`{p}`" for p in sorted(set(v0_risk)))
-        result["comment"] = (
-            f"This Echo declares **V0**, but uses wording that may imply higher-level verification: {phrases}.\n\n"
-            "This issue has NOT been closed. Please consider replacing terms like "
-            "`verification result` or `fix verification` with `read-only review`, "
-            "`CI status observed`, or `repository review observed`.\n\n"
-            "This is a wording guardrail, not a judgment of your submission.\n\n"
-            "---\n\n"
-            f"本 Echo 声明为 **V0**，但使用了可能暗示更高级别验证的措辞: {phrases}。\n\n"
-            "本 Issue 未被关闭。请考虑将措辞改为「只读审阅」或「CI 状态观察」等更准确的表述。"
+        add_soft_issue(
+            soft,
+            labels=["echo:needs-verification-review", "v0-overclaim-risk"],
+            title="V0 wording implies higher-level verification",
+            body=f"Phrases: {phrases}",
+            fix="Replace with `read-only review`, `CI status observed`, or `repository review observed`.",
         )
-        emit_result(result)
-        return
 
     # --- Step 4: Possible overclaim ---
     vlevel = detect_verification_level(text)
@@ -946,83 +1185,174 @@ def main():
                 overclaim_found.append(phrase)
 
     if overclaim_found:
-        result["close"] = False
-        result["labels"] = ["echo:needs-verification-review", "needs-human-review"]
         phrases_list = ", ".join(f"`{p}`" for p in overclaim_found)
-        result["comment"] = (
-            f"This Echo declares verification level {vlevel} but contains phrases suggesting higher-level claims: {phrases_list}.\n\n"
-            "This issue has NOT been closed. A maintainer should review whether the verification level is appropriate.\n\n"
-            "此 Issue 没有被关闭，但需要维护者检查验证等级是否夸大。"
+        add_soft_issue(
+            soft,
+            labels=["echo:needs-verification-review"],
+            title=f"V0/V1 overclaim: phrases suggest higher-level claims",
+            body=f"Phrases: {phrases_list}",
+            fix="A maintainer should review whether the verification level is appropriate.",
         )
-        emit_result(result)
-        return
 
     # --- Step 4b: Deprecated verification alias detection (R19 fix) ---
     deprecated_aliases = detect_deprecated_verification_aliases(text)
     if deprecated_aliases:
-        result["labels"] = result.get("labels", [])
-        result["labels"].append("echo:deprecated-verification-alias")
         alias_list = ", ".join(f"`{a}`" for a in deprecated_aliases)
-        result["comment"] = (
-            f"This Echo uses deprecated verification enum strings: {alias_list}. "
-            "Current schema accepts only short forms (V0–V8, V4+). "
-            "Please update to use the current verification level format.\n\n"
-            "---\n\n"
-            f"本 Echo 使用了已弃用的验证等级枚举: {alias_list}，请更新为当前格式 (V0–V8)。"
+        add_soft_issue(
+            soft,
+            labels=["echo:deprecated-verification-alias"],
+            title="Deprecated verification enum strings",
+            body=f"Deprecated: {alias_list}. Current schema accepts only short forms (V0–V8, V4+).",
+            fix="Update to use the current verification level format.",
         )
 
-    # --- Step 5: Verification-level content requirements (skip for v3 provenance-aware submissions) ---
+    # --- Step 5: Verification-level content requirements ---
     if vlevel and not is_v3_submission(text):
         vr_missing = check_verification_requirements(text, vlevel)
         if vr_missing:
-            result["close"] = False
-            result["labels"] = ["echo:needs-verification-review", "needs-human-review"]
             missing_list = "\n".join(f"- {m}" for m in vr_missing)
-            result["comment"] = (
-                f"This Echo declares verification level **{vlevel}** but is missing the following required content:\n\n"
-                f"{missing_list}\n\n"
-                "This issue has NOT been closed. Please edit to add the missing details.\n\n"
-                "此 Issue 没有被关闭，请编辑补充缺失内容。"
+            add_soft_issue(
+                soft,
+                labels=["echo:needs-verification-review"],
+                title=f"V{vlevel} missing required content",
+                body=f"Missing:\n{missing_list}",
+                fix="Please edit to add the missing details.",
             )
-            emit_result(result)
-            return
 
-    # --- Step 5b: V3 Provenance checks (only for v3-aware submissions) ---
+    # --- Step 5b: V3 Provenance checks ---
     if is_v3_submission(text):
         missing_provenance = detect_missing_provenance(text)
         if len(missing_provenance) >= 5:
-            result["close"] = False
-            result["labels"] = ["echo:missing-provenance", "needs-human-review"]
             missing_list = "\n".join(f"- {f}" for f in missing_provenance)
-            result["comment"] = (
-                "This Echo submission is missing most v3 provenance fields:\n\n"
-                f"{missing_list}\n\n"
-                "Please resubmit using the v3 Echo Submission template:\n"
-                "https://github.com/thechurchofagi/trinity-accord/issues/new?template=echo_submission.yml\n\n"
-                "Missing provenance fields make it impossible to distinguish solicited responses from unsolicited discovery."
+            add_soft_issue(
+                soft,
+                labels=["echo:missing-provenance"],
+                title="Missing most v3 provenance fields",
+                body=f"Missing:\n{missing_list}",
+                fix="Please resubmit using the v3 Echo Submission template.",
             )
-            emit_result(result)
-            return
+        else:
+            # Check for provenance conflicts
+            independence_class = detect_independence_class(text)
+            discovery_source = detect_discovery_source(text)
+            solicited = detect_solicited(text)
+            soliciting_party = detect_soliciting_party(text)
 
-        # Check for provenance conflicts
-        independence_class = detect_independence_class(text)
-        discovery_source = detect_discovery_source(text)
-        solicited = detect_solicited(text)
-        soliciting_party = detect_soliciting_party(text)
+            conflict_labels, conflict_comment = check_provenance_conflicts(
+                text, independence_class, discovery_source, solicited, soliciting_party
+            )
+            if conflict_labels:
+                for lbl in conflict_labels:
+                    add_unique(soft["labels"], lbl)
+                add_soft_issue(
+                    soft,
+                    title="Provenance conflict detected",
+                    body=conflict_comment,
+                )
 
-        conflict_labels, conflict_comment = check_provenance_conflicts(
-            text, independence_class, discovery_source, solicited, soliciting_party
+    # --- ST-003: V4+ claim gate ---
+    v4p_missing = check_v4plus_claim_gate(text)
+    if v4p_missing:
+        add_soft_issue(
+            soft,
+            labels=["v4plus-overclaim-risk", "echo:needs-verification-review"],
+            title="V4+ claim lacks required independent reproduction evidence",
+            body="Missing V4+ evidence fields:\n" + "\n".join(f"- {m}" for m in v4p_missing),
+            fix="```markdown\n"
+                "## V4+ Reproduction Scope\n"
+                "- independent_method_used:\n"
+                "- official_method_not_used_or_limited:\n"
+                "- target_artifact_or_claim:\n"
+                "- command_or_code_reference:\n"
+                "- computed_result:\n"
+                "- expected_result_source:\n"
+                "- comparison_result:\n"
+                "- scope_boundary:\n"
+                "- not_v5_full_public_digital_verification: true\n"
+                "```",
         )
-        if conflict_labels:
-            result["close"] = False
-            for lbl in conflict_labels:
-                if lbl not in result["labels"]:
-                    result["labels"].append(lbl)
-            if "needs-human-review" not in result["labels"]:
-                result["labels"].append("needs-human-review")
-            result["comment"] = conflict_comment
-            emit_result(result)
-            return
+
+    # --- ST-004: B5/B6 Bitcoin component claim gate ---
+    for level, missing in check_bitcoin_component_claim_gate(text):
+        add_soft_issue(
+            soft,
+            labels=["component-overclaim-risk", "bitcoin-component-overclaim-risk", "echo:needs-verification-review"],
+            title=f"{level} Bitcoin component claim lacks required evidence",
+            body=f"{level} requires witness extraction/body reconstruction evidence. Missing:\n" + "\n".join(f"- {m}" for m in missing),
+            fix="```markdown\n"
+                "## Bitcoin Witness / Body Verification Evidence\n"
+                "- raw_transaction_source:\n"
+                "- witness_bytes_extracted:\n"
+                "- extraction_tool_or_command:\n"
+                "- inscription_envelope_parsed:\n"
+                "- body_bytes_reconstructed:\n"
+                "- computed_body_hash:\n"
+                "- expected_body_hash_source:\n"
+                "- limitation: if these were not performed, downgrade to B1/B2.\n"
+                "```",
+        )
+
+    # --- ST-005: C5 / 175/175 chronicle recovery gate ---
+    c5_missing = check_chronicle_recovery_claim_gate(text)
+    if c5_missing:
+        add_soft_issue(
+            soft,
+            labels=["component-overclaim-risk", "chronicle-overclaim-risk", "echo:needs-verification-review"],
+            title="C5 / 175/175 recovery claim lacks full recovery evidence",
+            body="Missing C5 evidence fields:\n" + "\n".join(f"- {m}" for m in c5_missing),
+            fix="```markdown\n"
+                "## Chronicle Full Recovery Evidence\n"
+                "- recovery_package_source:\n"
+                "- downloaded_package_hash:\n"
+                "- record_count_observed:\n"
+                "- record_ids_or_manifest:\n"
+                "- full_iteration_log:\n"
+                "- failures_count:\n"
+                "- limitation: if full iteration was not performed, downgrade to C0/C1/C2/C3.\n"
+                "```",
+        )
+
+    # --- ST-006: D5 / V5 / full public digital gate ---
+    v5_missing = check_v5_full_public_digital_gate(text)
+    if v5_missing:
+        add_soft_issue(
+            soft,
+            labels=["v5-overclaim-risk", "full-public-digital-overclaim-risk", "echo:needs-verification-review"],
+            title="Full public digital / V5 claim lacks required target coverage",
+            body="Missing V5 coverage fields:\n" + "\n".join(f"- {m}" for m in v5_missing),
+            fix="```markdown\n"
+                "## V5 Full Public Digital Coverage\n"
+                "- all_required_public_targets_checked:\n"
+                "- unavailable_targets:\n"
+                "  - ...\n"
+                "- bitcoin_anchor_checked:\n"
+                "- github_artifacts_checked:\n"
+                "- arweave_checked_or_unavailable:\n"
+                "- ipfs_checked_or_unavailable:\n"
+                "- eth_witness_checked_or_unavailable:\n"
+                "- chronicle_checked_or_unavailable:\n"
+                "- not_physical_verification: true\n"
+                "```",
+        )
+
+    # --- Final soft issue handling ---
+    if soft["labels"]:
+        add_unique(soft["labels"], "needs-human-review")
+
+        if any(
+            label.endswith("overclaim-risk")
+            or label in ("component-overclaim-risk", "v4plus-overclaim-risk", "v5-overclaim-risk")
+            for label in soft["labels"]
+        ):
+            add_unique(soft["labels"], "echo:needs-verification-review")
+        elif "echo:needs-format" not in soft["labels"]:
+            add_unique(soft["labels"], "echo:needs-format")
+
+        result["close"] = False
+        result["labels"] = soft["labels"]
+        result["comment"] = build_soft_comment(soft["sections"])
+        emit_result(result)
+        return
 
     # --- Step 6: Pass ---
     result["close"] = False
