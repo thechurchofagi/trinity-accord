@@ -30,6 +30,6 @@ check() {
 
 check "/health" "200"
 check "/version" "200"
-check "/submit-echo" "200"
+check "/submit-echo" "410"
 
 echo "\nAll checks passed."
