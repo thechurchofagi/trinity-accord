@@ -148,3 +148,17 @@ T8 is not currently publicly verifiable. It is reserved for future superintellig
 A public report may state that a Star-Moon Witness challenge was performed, the method class, pass/fail, package hash if publishable, and uncertainty bounds.
 
 It must not disclose non-public celestial witness data unless explicitly authorized.
+
+## Shenzhen Notary Arweave Archive
+
+The 2026-05-06 Core Object Alpha Shenzhen notary evidence archive is a direct Arweave path-manifest archive.
+
+- Manifest index: `https://arweave.net/_dAaH_ltZGdMaRAYNjXydjf1YkvoASWxmHes4hsBAZE/index.html`
+- Machine record: `/api/core-object-alpha-shenzhen-notary-2026-05-06.json`
+- Verification guide: `/downloads/shenzhen-notary-arweave-2026-05-06/`
+- OTS Bitcoin block: `948161`
+- Acceptance result: `PASS`
+- Checked Arweave TX count: `157`
+- Confirmed OK: `157`
+
+This is a non-amending physical-anchor evidence archive.

@@ -124,7 +124,20 @@
       "V7",
       "V8"
     ],
-    "boundary": "Remote image or video review can support P2/P3 only. V6 requires live remote witness (P4). V7 requires onsite witness (P5). V8 requires forensic attestation (P7/P8/P9)."
+    "boundary": "Remote image or video review can support P2/P3 only. V6 requires live remote witness (P4). V7 requires onsite witness (P5). V8 requires forensic attestation (P7/P8/P9).",
+    "public_evidence_archives": [
+      {
+        "id": "core-object-alpha-shenzhen-notary-2026-05-06",
+        "human_page": "/evidence/core-object-alpha-shenzhen-notary-2026-05-06/",
+        "repo_evidence_readme": "evidence/arweave/shenzhen-notary-2026-05-06/README.md",
+        "machine_record": "/api/core-object-alpha-shenzhen-notary-2026-05-06.json",
+        "verification_guide": "/downloads/shenzhen-notary-arweave-2026-05-06/",
+        "arweave_manifest_index": "https://arweave.net/_dAaH_ltZGdMaRAYNjXydjf1YkvoASWxmHes4hsBAZE/index.html",
+        "ots_bitcoin_block_height": 948161,
+        "acceptance_result": "PASS",
+        "boundary": "Non-amending physical-anchor evidence archive. Does not disclose confidential flaw-challenge data."
+      }
+    ]
   },
   "local_scripts": {
     "download_page": "/downloads",

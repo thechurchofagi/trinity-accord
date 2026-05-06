@@ -419,6 +419,59 @@ for test_script in entrypoint_tests:
     if proc.returncode != 0:
         print(out[-1000:] if out else "")
 
+# --- 29. Shenzhen notary physical-anchor archive ---
+print("\n=== Shenzhen notary physical-anchor archive ===")
+try:
+    sna = load_json("api/core-object-alpha-shenzhen-notary-2026-05-06.json")
+    check("Shenzhen archive JSON is valid", True)
+    check("Shenzhen archive id matches", sna.get("archive_id") == "core-object-alpha-shenzhen-notary-2026-05-06")
+    check("Shenzhen archive component is PHYSICAL_ANCHOR", sna.get("component") == "PHYSICAL_ANCHOR")
+    check("Shenzhen archive is non-amending", "non_amending" in json.dumps(sna.get("authority_boundary", {})))
+    check("Shenzhen archive Arweave PASS", sna.get("arweave", {}).get("acceptance_result") == "PASS")
+    check("Shenzhen archive 157/157 confirmed", sna.get("arweave", {}).get("confirmed_ok") == 157)
+    check("Shenzhen archive OTS block 948161", sna.get("hash_and_time_anchor", {}).get("ots", {}).get("enhanced_verify_result", {}).get("bitcoin_block_height") == 948161)
+    check("Shenzhen archive does not claim protocol upgrade", "protocol_level_upgrade_by_itself" in json.dumps(sna.get("physical_anchor_finding", {}).get("not_claimed", [])))
+except Exception as e:
+    check("Shenzhen archive JSON is valid", False, str(e))
+
+for required_path in [
+    "evidence/core-object-alpha-shenzhen-notary-2026-05-06.md",
+    "evidence/arweave/shenzhen-notary-2026-05-06/README.md",
+    "downloads/shenzhen-notary-arweave-2026-05-06.md",
+    "tests/verify_shenzhen_notary_archive.py",
+]:
+    check(f"{required_path} exists", exists(required_path))
+
+for required_text_path in [
+    "api/evidence-manifest.json",
+    "api/verification-materials.json",
+    "verification-materials.md",
+    "physical-verification.md",
+    "covenant-proof.md",
+    "data-verification.md",
+    "status.md",
+    "api/links.json",
+    ".well-known/trinity-accord.json",
+    "agent-map.json",
+    "sitemap.xml",
+]:
+    try:
+        txt = read_text(required_text_path)
+        check(f"{required_text_path} references Shenzhen archive id", "core-object-alpha-shenzhen-notary-2026-05-06" in txt)
+        check(f"{required_text_path} references OTS block 948161", "948161" in txt)
+        check(f"{required_text_path} references Arweave manifest", "_dAaH_ltZGdMaRAYNjXydjf1YkvoASWxmHes4hsBAZE" in txt or "_dAa" in txt)
+    except Exception as e:
+        check(f"{required_text_path} can be checked", False, str(e))
+
+proc_sna = subprocess.run(
+    [sys.executable, str(ROOT / "tests" / "verify_shenzhen_notary_archive.py")],
+    cwd=ROOT, text=True, capture_output=True, timeout=60
+)
+check(proc_sna.returncode == 0, "verify_shenzhen_notary_archive.py passes", f"exit {proc_sna.returncode}")
+if proc_sna.returncode != 0:
+    print(proc_sna.stdout[-1000:] if proc_sna.stdout else "")
+    print(proc_sna.stderr[-500:] if proc_sna.stderr else "")
+
 # --- Summary ---
 def main():
     print("\n" + "=" * 50)

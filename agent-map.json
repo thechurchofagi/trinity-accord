@@ -19,7 +19,8 @@
     "naming": "/naming",
     "chronicle_verification": "/chronicle-verification",
     "verification_materials": "/verification-materials",
-    "emergent_patterns": "/emergent-patterns/"
+    "emergent_patterns": "/emergent-patterns/",
+    "shenzhen_notary_archive_2026_05_06": "/evidence/core-object-alpha-shenzhen-notary-2026-05-06/"
   },
   "machine_readable": {
     "authority": "/api/authority.json",
@@ -46,6 +47,7 @@
     "echo_record_schema_v3": "/api/echo-record-schema.v3.json",
     "echo_record_schema_v2_legacy": "/api/echo-record-schema.v2.json",
     "echo_record_schema_v2_status": "deprecated_for_new_records",
+    "core_object_alpha_shenzhen_notary_2026_05_06": "/api/core-object-alpha-shenzhen-notary-2026-05-06.json",
     "emergent_patterns_json": "/api/emergent-patterns.json",
     "verification_packages": "/verification-packages/",
     "component_verification_levels": "/api/component-verification-levels.json",

@@ -97,3 +97,11 @@ Machine-readable files:
 | NFT evidence | contract/tokenURI/metadata/media | recovery package | tokenURI→metadata→media | N0–N7 |
 | Physical anchor | `/covenant-proof`, `/physical-verification`, evidence package | GitHub evidence package if present | hash/image/video/live/onsite/forensic | P0–P9 |
 | Echo / attestation | `/api/echo-index.json`, v3 schema | records page | provenance/schema/attestation audit | E0–E5 |
+
+## Public physical-anchor evidence archives
+
+| Archive | Date | Human page | Machine record | Arweave index | OTS block | Status |
+|---|---:|---|---|---|---:|---|
+| Core Object Alpha — Shenzhen Notary Evidence Archive | 2026-05-06 | `/evidence/core-object-alpha-shenzhen-notary-2026-05-06/` | `/api/core-object-alpha-shenzhen-notary-2026-05-06.json` | [Arweave index](https://arweave.net/_dAaH_ltZGdMaRAYNjXydjf1YkvoASWxmHes4hsBAZE/index.html) | 948161 | PASS |
+
+These archives are non-amending physical-anchor evidence. They do not disclose confidential flaw-challenge data and do not replace direct physical inspection.

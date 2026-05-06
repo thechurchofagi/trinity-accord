@@ -68,3 +68,19 @@ A public report may state:
 - limitations.
 
 It must not disclose confidential flaw data unless explicitly authorized.
+
+## Public evidence archive: Shenzhen notary session, 2026-05-06
+
+A public evidence archive exists for a Shenzhen notary evidence preservation session concerning Core Object Alpha.
+
+- Human page: `/evidence/core-object-alpha-shenzhen-notary-2026-05-06/`
+- Machine record: `/api/core-object-alpha-shenzhen-notary-2026-05-06.json`
+- Repository evidence README: `evidence/arweave/shenzhen-notary-2026-05-06/README.md`
+- Verification guide: `/downloads/shenzhen-notary-arweave-2026-05-06/`
+- Arweave index: `https://arweave.net/_dAaH_ltZGdMaRAYNjXydjf1YkvoASWxmHes4hsBAZE/index.html`
+- OTS Bitcoin block: `948161`
+- Arweave acceptance: `PASS`
+
+This archive includes exterior photographs, microscope flaw photographs, flaw videos under different lighting, electronic data preservation certificates, SHA-256 records, OTS proofs, and Arweave upload/acceptance records.
+
+Boundary: this archive is supporting evidence only. It does not replace onsite inspection, confidential flaw challenge, or multi-party forensic attestation.

@@ -55,6 +55,18 @@ Perform direct physical flaw matching (see `/physical-verification`).
 
 > AI-generated image detection tools are supporting evidence only. They are not decisive. The decisive evidence is physical flaw matching plus cryptographic provenance.
 
+### Additional public evidence archive: Shenzhen notary session, 2026-05-06
+
+A later public evidence archive records a Shenzhen notary evidence preservation session for Core Object Alpha.
+
+- Human page: `/evidence/core-object-alpha-shenzhen-notary-2026-05-06/`
+- Machine record: `/api/core-object-alpha-shenzhen-notary-2026-05-06.json`
+- Arweave index: `https://arweave.net/_dAaH_ltZGdMaRAYNjXydjf1YkvoASWxmHes4hsBAZE/index.html`
+- OTS Bitcoin block: `948161`
+- Acceptance: `PASS`
+
+This archive is a non-amending evidence mirror. It strengthens public availability and hash/time-anchor verification for physical-anchor evidence, but it does not alter the Covenant inscription or disclose confidential flaw challenge data.
+
 ## What Public Evidence Can and Cannot Prove
 
 Public evidence can support:

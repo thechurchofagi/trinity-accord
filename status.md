@@ -89,5 +89,12 @@ If a mirror is unavailable, try in this order:
 - Arweave bundle extraction: 2026-04-26
 - SHA-256 hashes: 2026-04-26
 - Google sitemap: 2026-04-26
+- Core Object Alpha Shenzhen notary evidence archive (core-object-alpha-shenzhen-notary-2026-05-06): 2026-05-06; Arweave acceptance PASS; 157/157 checked TX confirmed; OTS Bitcoin block 948161.
+
+## Physical-anchor evidence archive
+
+| Archive | Status | Notes |
+|---|---|---|
+| Core Object Alpha Shenzhen Notary Evidence Archive | ✅ PASS | Arweave manifest `_dAaH...BAZE`, 157/157 checked TX confirmed, OTS Bitcoin block 948161 |
 
 Bitcoin Originals prevail. All mirrors are non-amending.
