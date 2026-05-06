@@ -7,7 +7,10 @@
   "additionalProperties": true,
   "required": [
     "record_kind",
-    "archive_status"
+    "archive_status",
+    "discovery_provenance",
+    "independence_class",
+    "origin_limitations"
   ],
   "if": {
     "properties": {
