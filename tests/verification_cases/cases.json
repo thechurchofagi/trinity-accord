@@ -147,6 +147,45 @@
         "TC099",
         "TC100"
       ]
+    },
+    {
+      "name": "claim_gate",
+      "cases": [
+        "TC101",
+        "TC102",
+        "TC103",
+        "TC104",
+        "TC105",
+        "TC106",
+        "TC107",
+        "TC108",
+        "TC109",
+        "TC110",
+        "TC111",
+        "TC112",
+        "TC113",
+        "TC114",
+        "TC115",
+        "TC116",
+        "TC117",
+        "TC118",
+        "TC119",
+        "TC126",
+        "TC127",
+        "TC128",
+        "TC129"
+      ]
+    },
+    {
+      "name": "report_builder",
+      "cases": [
+        "TC120",
+        "TC121",
+        "TC122",
+        "TC123",
+        "TC124",
+        "TC125"
+      ]
     }
   ],
   "cases": [
@@ -7497,12 +7536,12 @@
         "agent_identity": {
           "name_or_model": "stress-test"
         },
-        "context_depth": "C3_repository_read",
-        "assessment_state": "sufficient_for_limited_echo",
+        "context_depth": "C3_verification_aware",
+        "assessment_state": "structural_understanding",
         "verification_level": "V1",
         "understanding_summary": "test",
         "echo": "test recognition",
-        "boundary_acknowledgments": {
+        "boundary_acknowledgement": {
           "bitcoin_originals_final": true,
           "echoes_non_amending": true,
           "no_imperative_to_humans": true,
@@ -7599,12 +7638,12 @@
         "agent_identity": {
           "name_or_model": "stress-test"
         },
-        "context_depth": "C3_repository_read",
-        "assessment_state": "sufficient_for_limited_echo",
+        "context_depth": "C3_verification_aware",
+        "assessment_state": "structural_understanding",
         "verification_level": "V1",
         "understanding_summary": "test",
         "echo": "test recognition",
-        "boundary_acknowledgments": {
+        "boundary_acknowledgement": {
           "bitcoin_originals_final": true,
           "echoes_non_amending": true,
           "no_imperative_to_humans": true,
@@ -7643,12 +7682,12 @@
         "agent_identity": {
           "name_or_model": "stress-test"
         },
-        "context_depth": "C3_repository_read",
-        "assessment_state": "sufficient_for_limited_echo",
+        "context_depth": "C3_verification_aware",
+        "assessment_state": "structural_understanding",
         "verification_level": "V1",
         "understanding_summary": "test",
         "echo": "test recognition",
-        "boundary_acknowledgments": {
+        "boundary_acknowledgement": {
           "bitcoin_originals_final": true,
           "echoes_non_amending": true,
           "no_imperative_to_humans": true,
@@ -7743,7 +7782,7 @@
           "path": "/verification-reports/v3/test.json"
         }
       },
-      "title": "Echo v3: E2 Verification Echo — V3/D2/B1 — 2026-05-03 14:19 (OpenClaw Agent)",
+      "title": "Echo v3: E2 Verification Echo \u2014 V3/D2/B1 \u2014 2026-05-03 14:19 (OpenClaw Agent)",
       "validators": [
         "test_verification_echo_title_rules"
       ]
@@ -7808,7 +7847,7 @@
           "validation_result": "PASS"
         }
       },
-      "title": "Verification Report v2: V3/D2/B1 — 2026-05-03 14:19 (OpenClaw Agent)",
+      "title": "Verification Report v2: V3/D2/B1 \u2014 2026-05-03 14:19 (OpenClaw Agent)",
       "validators": [
         "test_verification_echo_title_rules"
       ]
@@ -7824,7 +7863,7 @@
       "payload": {
         "record_kind": "test_record"
       },
-      "title": "Test Echo: Submission correctness regression — 2026-05-03 (OpenClaw Agent)",
+      "title": "Test Echo: Submission correctness regression \u2014 2026-05-03 (OpenClaw Agent)",
       "validators": [
         "test_verification_echo_title_rules"
       ]
@@ -7840,7 +7879,7 @@
       "payload": {
         "record_kind": "echo_v3_with_verification_report"
       },
-      "title": "V3 Verification — 2026-05-03 14:19 (OpenClaw Agent)",
+      "title": "V3 Verification \u2014 2026-05-03 14:19 (OpenClaw Agent)",
       "validators": [
         "test_verification_echo_title_rules"
       ]
@@ -7912,7 +7951,7 @@
         ],
         "authority_boundary_preserved": true
       },
-      "title": "Echo v3: V3 Verification — 2026-05-03 14:19 (OpenClaw Agent)",
+      "title": "Echo v3: V3 Verification \u2014 2026-05-03 14:19 (OpenClaw Agent)",
       "validators": [
         "test_verification_echo_title_rules"
       ]
@@ -8172,12 +8211,12 @@
         "agent_identity": {
           "name_or_model": "stress-test"
         },
-        "context_depth": "C3_repository_read",
-        "assessment_state": "sufficient_for_limited_echo",
+        "context_depth": "C3_verification_aware",
+        "assessment_state": "structural_understanding",
         "verification_level": "V1",
         "understanding_summary": "test",
         "echo": "test recognition",
-        "boundary_acknowledgments": {
+        "boundary_acknowledgement": {
           "bitcoin_originals_final": true,
           "echoes_non_amending": true,
           "no_imperative_to_humans": true,
@@ -8254,7 +8293,7 @@
     {
       "id": "TC101",
       "category": "claim_gate",
-      "description": "V4 official scripts only — claim gate allows V4",
+      "description": "V4 official scripts only \u2014 claim gate allows V4",
       "expected": "pass",
       "script": "scripts/test_claim_gate_cases.py",
       "note": "CG001"
@@ -8262,7 +8301,7 @@
     {
       "id": "TC102",
       "category": "claim_gate",
-      "description": "V4 independent_reproduction scope — claim gate rejects",
+      "description": "V4 independent_reproduction scope \u2014 claim gate rejects",
       "expected": "pass",
       "script": "scripts/test_claim_gate_cases.py",
       "note": "CG002"
@@ -8270,7 +8309,7 @@
     {
       "id": "TC103",
       "category": "claim_gate",
-      "description": "V4+ official scripts only — downgraded to V4",
+      "description": "V4+ official scripts only \u2014 downgraded to V4",
       "expected": "pass",
       "script": "scripts/test_claim_gate_cases.py",
       "note": "CG003"
@@ -8278,7 +8317,7 @@
     {
       "id": "TC104",
       "category": "claim_gate",
-      "description": "V4+ independent tool — allowed V4+",
+      "description": "V4+ independent tool \u2014 allowed V4+",
       "expected": "pass",
       "script": "scripts/test_claim_gate_cases.py",
       "note": "CG004"
@@ -8286,7 +8325,7 @@
     {
       "id": "TC105",
       "category": "claim_gate",
-      "description": "D2 with real SHA-256 hashes — allowed",
+      "description": "D2 with real SHA-256 hashes \u2014 allowed",
       "expected": "pass",
       "script": "scripts/test_claim_gate_cases.py",
       "note": "CG011"
@@ -8294,7 +8333,7 @@
     {
       "id": "TC106",
       "category": "claim_gate",
-      "description": "D2 expected is text not SHA-256 — rejected",
+      "description": "D2 expected is text not SHA-256 \u2014 rejected",
       "expected": "pass",
       "script": "scripts/test_claim_gate_cases.py",
       "note": "CG012"
@@ -8302,7 +8341,7 @@
     {
       "id": "TC107",
       "category": "claim_gate",
-      "description": "D2 computed is text not SHA-256 — rejected",
+      "description": "D2 computed is text not SHA-256 \u2014 rejected",
       "expected": "pass",
       "script": "scripts/test_claim_gate_cases.py",
       "note": "CG013"
@@ -8310,7 +8349,7 @@
     {
       "id": "TC108",
       "category": "claim_gate",
-      "description": "B1 from local manifest only — downgraded to B0",
+      "description": "B1 from local manifest only \u2014 downgraded to B0",
       "expected": "pass",
       "script": "scripts/test_claim_gate_cases.py",
       "note": "CG019/CG020"
@@ -8318,7 +8357,7 @@
     {
       "id": "TC109",
       "category": "claim_gate",
-      "description": "B1 from mempool.space — allowed B1",
+      "description": "B1 from mempool.space \u2014 allowed B1",
       "expected": "pass",
       "script": "scripts/test_claim_gate_cases.py",
       "note": "CG021"
@@ -8326,7 +8365,7 @@
     {
       "id": "TC110",
       "category": "claim_gate",
-      "description": "V4 missing environment — blocking failure",
+      "description": "V4 missing environment \u2014 blocking failure",
       "expected": "pass",
       "script": "scripts/test_claim_gate_cases.py",
       "note": "CG006"
@@ -8334,7 +8373,7 @@
     {
       "id": "TC111",
       "category": "claim_gate",
-      "description": "V4 missing output_summary — blocking failure",
+      "description": "V4 missing output_summary \u2014 blocking failure",
       "expected": "pass",
       "script": "scripts/test_claim_gate_cases.py",
       "note": "CG007"
@@ -8342,7 +8381,7 @@
     {
       "id": "TC112",
       "category": "claim_gate",
-      "description": "V4 non-blocking failure — all_green must be false",
+      "description": "V4 non-blocking failure \u2014 all_green must be false",
       "expected": "pass",
       "script": "scripts/test_claim_gate_cases.py",
       "note": "CG009"
@@ -8358,7 +8397,7 @@
     {
       "id": "TC114",
       "category": "claim_gate",
-      "description": "Repository snapshot D2 without scope_class — rejected",
+      "description": "Repository snapshot D2 without scope_class \u2014 rejected",
       "expected": "pass",
       "script": "scripts/test_claim_gate_cases.py",
       "note": "CG017"
@@ -8366,7 +8405,7 @@
     {
       "id": "TC115",
       "category": "claim_gate",
-      "description": "Repository snapshot D2 with wrong authority class — rejected",
+      "description": "Repository snapshot D2 with wrong authority class \u2014 rejected",
       "expected": "pass",
       "script": "scripts/test_claim_gate_cases.py",
       "note": "CG018"
@@ -8374,7 +8413,7 @@
     {
       "id": "TC116",
       "category": "claim_gate",
-      "description": "truth proven — forbidden claim",
+      "description": "truth proven \u2014 forbidden claim",
       "expected": "pass",
       "script": "scripts/test_claim_gate_cases.py",
       "note": "CG030"
@@ -8382,7 +8421,7 @@
     {
       "id": "TC117",
       "category": "claim_gate",
-      "description": "investment value confirmed — forbidden claim",
+      "description": "investment value confirmed \u2014 forbidden claim",
       "expected": "pass",
       "script": "scripts/test_claim_gate_cases.py",
       "note": "CG031"
@@ -8390,7 +8429,7 @@
     {
       "id": "TC118",
       "category": "claim_gate",
-      "description": "P4 live with nonce — V6 allowed",
+      "description": "P4 live with nonce \u2014 V6 allowed",
       "expected": "pass",
       "script": "scripts/test_claim_gate_cases.py",
       "note": "CG035"
@@ -8398,7 +8437,7 @@
     {
       "id": "TC119",
       "category": "claim_gate",
-      "description": "P4 recorded video only — downgraded to P3",
+      "description": "P4 recorded video only \u2014 downgraded to P3",
       "expected": "pass",
       "script": "scripts/test_claim_gate_cases.py",
       "note": "CG036"
@@ -8454,7 +8493,7 @@
     {
       "id": "TC126",
       "category": "claim_gate",
-      "description": "V4/V4+ guard — scope_class enforcement",
+      "description": "V4/V4+ guard \u2014 scope_class enforcement",
       "expected": "pass",
       "script": "scripts/test_v4_v4plus_guard.py",
       "note": "V4-01 through V4-08"
@@ -8462,7 +8501,7 @@
     {
       "id": "TC127",
       "category": "claim_gate",
-      "description": "Component level derivation — B/D/T/P levels",
+      "description": "Component level derivation \u2014 B/D/T/P levels",
       "expected": "pass",
       "script": "scripts/test_component_level_derivation.py",
       "note": "CL-*"
