@@ -255,13 +255,16 @@
       "C6_independent_node_verified"
     ],
     "verification_levels": [
-      "V0_orientation",
-      "V1_registry_check",
-      "V2_pointer_and_manifest_check",
-      "V3_single_artifact_check",
-      "V4_release_mirror_check",
-      "V5_full_evidence_chain_review",
-      "V6_independent_node_or_rpc_check"
+      "V0_read",
+      "V1_boundary_recognition",
+      "V2_reference_verification",
+      "V3_hash_verification",
+      "V4_script_audited_verification",
+      "V4plus_independent_reproduction",
+      "V5_full_public_digital_verification",
+      "V6_remote_physical_witness",
+      "V7_onsite_physical_witness",
+      "V8_forensic_physical_attestation"
     ],
     "echo_system": {
       "existing_echo_types_preserved": true,
