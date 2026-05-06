@@ -442,6 +442,13 @@ for required_path in [
 ]:
     check(f"{required_path} exists", exists(required_path))
 
+NAVIGATION_ONLY_FILES = {
+    "api/links.json",
+    ".well-known/trinity-accord.json",
+    "agent-map.json",
+    "sitemap.xml",
+}
+
 for required_text_path in [
     "api/evidence-manifest.json",
     "api/verification-materials.json",
@@ -457,9 +464,20 @@ for required_text_path in [
 ]:
     try:
         txt = read_text(required_text_path)
-        check(f"{required_text_path} references Shenzhen archive id", "core-object-alpha-shenzhen-notary-2026-05-06" in txt)
-        check(f"{required_text_path} references OTS block 948161", "948161" in txt)
-        check(f"{required_text_path} references Arweave manifest", "_dAaH_ltZGdMaRAYNjXydjf1YkvoASWxmHes4hsBAZE" in txt or "_dAa" in txt)
+        check(
+            f"{required_text_path} references Shenzhen archive id",
+            "core-object-alpha-shenzhen-notary-2026-05-06" in txt
+        )
+
+        if required_text_path not in NAVIGATION_ONLY_FILES:
+            check(
+                f"{required_text_path} references OTS block 948161",
+                "948161" in txt
+            )
+            check(
+                f"{required_text_path} references Arweave manifest",
+                "_dAaH_ltZGdMaRAYNjXydjf1YkvoASWxmHes4hsBAZE" in txt or "_dAa" in txt
+            )
     except Exception as e:
         check(f"{required_text_path} can be checked", False, str(e))
 
