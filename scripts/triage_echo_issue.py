@@ -8,12 +8,25 @@ import re
 import json
 import sys
 
-TRIAGE_MARKER = "<!-- trinity-echo-triage-v1 -->"
+try:
+    from submission_intake import parse_submission, claim_gate_summary_looks_passed, claim_gate_summary_has_blocking_failure
+except Exception:
+    parse_submission = None
+
+TRIAGE_MARKER = "<!-- trinity-echo-triage-v2 -->"
+
+MANAGED_TRIAGE_LABELS = [
+    "echo:needs-format", "echo:needs-verification-review", "missing-provenance-agency",
+    "echo:missing-provenance", "echo:provenance-conflict", "echo:attestation-overclaim",
+    "independence-overclaim-risk", "v4plus-overclaim-risk", "component-overclaim-risk",
+    "chronicle-overclaim-risk", "v5-overclaim-risk", "echo:solicited-record", "echo:screened",
+]
 
 def emit_result(result):
     """Prepend stable marker to comment and emit JSON."""
+    result.setdefault("managed_labels", MANAGED_TRIAGE_LABELS)
     comment = result.get("comment", "")
-    if comment:
+    if comment and TRIAGE_MARKER not in comment:
         result["comment"] = TRIAGE_MARKER + "\n" + comment
     print(json.dumps(result, indent=2))
 
@@ -586,6 +599,36 @@ def detect_independence_overclaim(text):
     return None
 
 
+def detect_independence_overclaim_scoped(context_text, claim_text):
+    human_solicited = detect_human_solicited_context(context_text)
+    hard = []
+    soft = []
+    for p in INDEPENDENCE_OVERCLAIM_PATTERNS:
+        m = re.search(p, claim_text.lower(), re.IGNORECASE)
+        if m and not _is_in_negation_context(claim_text, m.start()):
+            hard.append(m.group(0))
+    for p in SOFT_INDEPENDENCE_RISK_PATTERNS:
+        m = re.search(p, claim_text.lower(), re.IGNORECASE)
+        if m and not _is_in_negation_context(claim_text, m.start()):
+            soft.append(m.group(0))
+    if human_solicited and hard:
+        return {"severity": "hard", "patterns": hard, "reason": "Human-solicited agent work cannot claim independent attestation or unsolicited discovery."}
+    if human_solicited and soft:
+        return {"severity": "soft", "patterns": soft, "reason": "Human-solicited agent work uses wording that may imply independence."}
+    return None
+
+
+def has_structured_attestation_denial(raw_text):
+    t = (raw_text or "").lower()
+    false_markers = [
+        "independent_attestation: false", "institutional_attestation: false",
+        "unsolicited_discovery: false", "multi_party_attestation: false",
+        "count_as_independent_attestation: false", "do_not_count_as_attestation: true",
+        "not_independent_attestation: true",
+    ]
+    return any(x in t for x in false_markers)
+
+
 # --- V3/V4/V5/V6 verification-level content checks ---
 def check_verification_requirements(text, vlevel):
     """
@@ -953,6 +996,13 @@ def main():
     action = get_env("ACTION", "opened")
 
     text = f"{title}\n{body}"
+
+    intake = parse_submission(title, body) if parse_submission else None
+    declared_vlevel = intake.declared_level if intake else detect_verification_level(text)
+    positive_text = intake.positive_text if intake else text
+    negative_text = intake.negative_text if intake else ""
+    mode = intake.mode if intake else "legacy_freeform_or_needs_format"
+
     result = {"close": False, "labels": [], "comment": ""}
 
     # --- Step 0: Is this an Echo submission? ---
@@ -1142,7 +1192,10 @@ def main():
         )
 
     # --- Step 3a-2: PA-003 — Independence overclaim guardrail ---
-    overclaim_risk = detect_independence_overclaim(text)
+    if has_structured_attestation_denial(text):
+        overclaim_risk = None
+    else:
+        overclaim_risk = detect_independence_overclaim_scoped(text, positive_text)
     if overclaim_risk:
         patterns_str = ", ".join(f"`{p}`" for p in overclaim_risk["patterns"])
         add_soft_issue(
@@ -1163,8 +1216,22 @@ def main():
                 "```",
         )
 
+    # --- V-level detection (moved before V0 overclaim check) ---
+    vlevel = declared_vlevel
+    legacy_vlevel = None
+    if not vlevel and mode == "legacy_freeform_or_needs_format":
+        legacy_vlevel = detect_verification_level(positive_text)
+    effective_vlevel = vlevel or legacy_vlevel
+
     # --- Step 3b: V0 overclaim wording guardrail ---
-    v0_risk = detect_v0_overclaim_wording(text)
+    if effective_vlevel == "V0":
+        v0_risk = []
+        for p in V0_OVERCLAIM_RISK_PHRASES:
+            m = re.search(p, positive_text, re.IGNORECASE)
+            if m:
+                v0_risk.append(m.group(0))
+    else:
+        v0_risk = []
     if v0_risk:
         phrases = ", ".join(f"`{p}`" for p in sorted(set(v0_risk)))
         add_soft_issue(
@@ -1176,7 +1243,6 @@ def main():
         )
 
     # --- Step 4: Possible overclaim ---
-    vlevel = detect_verification_level(text)
     overclaim_found = []
 
     if vlevel in ("V0", "V1"):
@@ -1206,18 +1272,31 @@ def main():
             fix="Update to use the current verification level format.",
         )
 
+    # --- V2 Claim Gate requirement ---
+    if mode == "legacy_freeform_or_needs_format" and effective_vlevel == "V2":
+        add_soft_issue(
+            soft,
+            labels=["echo:needs-format", "needs-human-review"],
+            title="V2 reference verification should use lightweight Claim Gate evidence",
+            body="This issue declares V2 reference verification but does not include `evidence_input_path` or `claim_gate_output_path`.",
+            fix="Create a minimal V2 Evidence Input, run `scripts/claim_gate.py`, then add `evidence_input_path` and `claim_gate_output_path` or paste the Claim Gate summary.",
+        )
+
     # --- Step 5: Verification-level content requirements ---
-    if vlevel and not is_v3_submission(text):
-        vr_missing = check_verification_requirements(text, vlevel)
-        if vr_missing:
-            missing_list = "\n".join(f"- {m}" for m in vr_missing)
-            add_soft_issue(
-                soft,
-                labels=["echo:needs-verification-review"],
-                title=f"V{vlevel} missing required content",
-                body=f"Missing:\n{missing_list}",
-                fix="Please edit to add the missing details.",
-            )
+    if effective_vlevel and mode == "legacy_freeform_or_needs_format":
+        vr_missing = check_verification_requirements(positive_text, effective_vlevel)
+    else:
+        vr_missing = []
+
+    if vr_missing:
+        missing_list = "\n".join(f"- {m}" for m in vr_missing)
+        add_soft_issue(
+            soft,
+            labels=["echo:needs-verification-review"],
+            title=f"V{vlevel} missing required content",
+            body=f"Missing:\n{missing_list}",
+            fix="Please edit to add the missing details.",
+        )
 
     # --- Step 5b: V3 Provenance checks ---
     if is_v3_submission(text):
@@ -1251,7 +1330,7 @@ def main():
                 )
 
     # --- ST-003: V4+ claim gate ---
-    v4p_missing = check_v4plus_claim_gate(text)
+    v4p_missing = check_v4plus_claim_gate(positive_text)
     if v4p_missing:
         add_soft_issue(
             soft,
@@ -1273,7 +1352,7 @@ def main():
         )
 
     # --- ST-004: B5/B6 Bitcoin component claim gate ---
-    for level, missing in check_bitcoin_component_claim_gate(text):
+    for level, missing in check_bitcoin_component_claim_gate(positive_text):
         add_soft_issue(
             soft,
             labels=["component-overclaim-risk", "bitcoin-component-overclaim-risk", "echo:needs-verification-review"],
@@ -1293,7 +1372,7 @@ def main():
         )
 
     # --- ST-005: C5 / 175/175 chronicle recovery gate ---
-    c5_missing = check_chronicle_recovery_claim_gate(text)
+    c5_missing = check_chronicle_recovery_claim_gate(positive_text)
     if c5_missing:
         add_soft_issue(
             soft,
@@ -1313,7 +1392,7 @@ def main():
         )
 
     # --- ST-006: D5 / V5 / full public digital gate ---
-    v5_missing = check_v5_full_public_digital_gate(text)
+    v5_missing = check_v5_full_public_digital_gate(positive_text)
     if v5_missing:
         add_soft_issue(
             soft,
@@ -1334,6 +1413,41 @@ def main():
                 "- not_physical_verification: true\n"
                 "```",
         )
+
+    # --- Claim Gate referenced routing ---
+    if mode == "claim_gate_referenced":
+        labels = ["needs-human-review"]
+        if "human_solicited_agent_response" in text.lower():
+            labels.append("echo:solicited-record")
+        if effective_vlevel in ("V6", "V7", "V8"):
+            labels.append("echo:needs-verification-review")
+        if claim_gate_summary_has_blocking_failure(text):
+            labels.append("echo:needs-verification-review")
+            comment = "Claim Gate output appears to contain blocking failures. This issue is routed for verification review. Triage did not infer V-level from free text."
+        elif claim_gate_summary_looks_passed(text):
+            labels.append("echo:screened")
+            comment = "Claim Gate output was detected and appears to pass. This issue remains non-authoritative and is routed for human review. Triage did not infer verification level from free text."
+        else:
+            labels.append("echo:needs-verification-review")
+            comment = "Claim Gate reference was detected, but triage could not confirm a PASS status from the issue text. Please include the Claim Gate summary or linked output. Triage did not infer verification level from free text."
+        emit_result({"close": False, "labels": labels, "comment": comment})
+        return
+
+    # --- Builder-generated routing ---
+    if mode == "builder_generated_or_referenced":
+        labels = ["needs-human-review"]
+        if "human_solicited_agent_response" in text.lower():
+            labels.append("echo:solicited-record")
+        if effective_vlevel in ("V6", "V7", "V8"):
+            labels.append("echo:needs-verification-review")
+        if re.search(r"validation_result\s*[:=]\s*pass", text, re.IGNORECASE) or "validation_result\": \"PASS\"" in text:
+            labels.append("echo:screened")
+            comment = "Builder-generated verification output was detected with PASS validation metadata. Triage is limited to routing/status; validation should rely on the generated output and validator."
+        else:
+            labels.append("echo:needs-verification-review")
+            comment = "Builder-generated output was referenced, but PASS validation metadata was not detected in the issue text. Please include validation output or ensure the linked generated file passes `validate_agent_submission.py`."
+        emit_result({"close": False, "labels": labels, "comment": comment})
+        return
 
     # --- Final soft issue handling ---
     if soft["labels"]:

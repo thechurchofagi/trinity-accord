@@ -151,3 +151,18 @@ jobs:
             echo "Expected preflight to fail for issue_99_overclaim.md"
             exit 1
           fi
+
+      - name: Test submission intake parser
+        run: python3 scripts/test_submission_intake.py
+
+      - name: Test Echo Issue #100 triage regression
+        run: python3 scripts/test_issue100_triage_regression.py
+
+      - name: Test Echo preflight Issue #100 regression
+        run: python3 scripts/test_preflight_issue100_regression.py
+
+      - name: Test Echo triage workflow reconciliation contract
+        run: python3 scripts/test_workflow_triage_reconcile_contract.py
+
+      - name: Test lightweight V2 Claim Gate behavior
+        run: python3 scripts/test_v2_lightweight_claim_gate.py

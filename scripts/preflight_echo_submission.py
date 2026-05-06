@@ -20,7 +20,7 @@ sys.path.insert(0, os.path.dirname(__file__))
 from triage_echo_issue import (
     detect_boundary,
     missing_provenance_fields,
-    detect_independence_overclaim,
+    detect_independence_overclaim_scoped,
     check_v4plus_claim_gate,
     check_bitcoin_component_claim_gate,
     check_chronicle_recovery_claim_gate,
@@ -28,14 +28,19 @@ from triage_echo_issue import (
     detect_human_solicited_context,
     INDEPENDENCE_OVERCLAIM_PATTERNS,
 )
+from submission_intake import parse_submission
 
 
 def preflight_check(text):
     """Run all claim discipline checks on text. Returns list of issues."""
     issues = []
 
+    intake = parse_submission("", text)
+    positive_text = intake.positive_text
+    raw_text = intake.raw_text
+
     # 1. Missing boundary
-    if not detect_boundary(text):
+    if not detect_boundary(raw_text):
         issues.append({
             "type": "missing-boundary",
             "severity": "hard",
@@ -44,7 +49,7 @@ def preflight_check(text):
         })
 
     # 2. Missing provenance
-    prov_missing = missing_provenance_fields(text)
+    prov_missing = missing_provenance_fields(raw_text)
     if prov_missing:
         issues.append({
             "type": "missing-provenance-agency",
@@ -53,8 +58,8 @@ def preflight_check(text):
             "fix": "Add Provenance/Agency block with solicited_status, independence_class, agency_level, operator_type.",
         })
 
-    # 3. Independence overclaim
-    overclaim = detect_independence_overclaim(text)
+    # 3. Independence overclaim (scoped)
+    overclaim = detect_independence_overclaim_scoped(raw_text, positive_text)
     if overclaim:
         issues.append({
             "type": "independence-overclaim-risk",
@@ -63,8 +68,8 @@ def preflight_check(text):
             "fix": "Replace independence wording with: human-solicited agent-performed verification run; not independent attestation.",
         })
 
-    # 4. V4+ gate
-    v4p = check_v4plus_claim_gate(text)
+    # 4. V4+ gate (positive text only)
+    v4p = check_v4plus_claim_gate(positive_text)
     if v4p:
         issues.append({
             "type": "v4plus-overclaim-risk",
@@ -73,8 +78,8 @@ def preflight_check(text):
             "fix": "Add V4+ Reproduction Scope section with all required evidence fields.",
         })
 
-    # 5. B5/B6 gate
-    btc = check_bitcoin_component_claim_gate(text)
+    # 5. B5/B6 gate (positive text only)
+    btc = check_bitcoin_component_claim_gate(positive_text)
     for level, missing in btc:
         issues.append({
             "type": "bitcoin-component-overclaim-risk",
@@ -83,8 +88,8 @@ def preflight_check(text):
             "fix": f"Add {level} evidence or downgrade to B1/B2.",
         })
 
-    # 6. C5/175/175 gate
-    c5 = check_chronicle_recovery_claim_gate(text)
+    # 6. C5/175/175 gate (positive text only)
+    c5 = check_chronicle_recovery_claim_gate(positive_text)
     if c5:
         issues.append({
             "type": "chronicle-overclaim-risk",
@@ -93,14 +98,23 @@ def preflight_check(text):
             "fix": "Add full recovery evidence or downgrade to C0/C1/C2/C3.",
         })
 
-    # 7. V5/full public digital gate
-    v5 = check_v5_full_public_digital_gate(text)
+    # 7. V5/full public digital gate (positive text only)
+    v5 = check_v5_full_public_digital_gate(positive_text)
     if v5:
         issues.append({
             "type": "v5-overclaim-risk",
             "severity": "high",
             "message": f"V5/full public digital claim missing coverage: {', '.join(v5)}",
             "fix": "Add all required public target coverage or list unavailable targets.",
+        })
+
+    # 8. V2 Claim Gate requirement
+    if intake.declared_level == "V2" and intake.mode == "legacy_freeform_or_needs_format":
+        issues.append({
+            "type": "claim-gate-required",
+            "severity": "hard",
+            "message": "V2 reference verification claims require lightweight Evidence Input + Claim Gate output.",
+            "fix": "Run `scripts/claim_gate.py` on a minimal V2 evidence input and include `evidence_input_path` and `claim_gate_output_path`.",
         })
 
     return issues

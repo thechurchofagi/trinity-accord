@@ -104,57 +104,71 @@ jobs:
             const owner = context.repo.owner;
             const repo = context.repo.repo;
             const issue_number = context.issue.number;
-            const action = context.payload.action;
 
-            if (result.labels && result.labels.length > 0) {
-              await github.rest.issues.addLabels({
-                owner,
-                repo,
-                issue_number,
-                labels: result.labels
-              });
-            }
+            // Label reconciliation
+            const desiredLabels = new Set(result.labels || []);
+            const managedLabels = new Set(result.managed_labels || [
+              "echo:needs-format", "echo:needs-verification-review", "missing-provenance-agency",
+              "echo:missing-provenance", "echo:provenance-conflict", "echo:attestation-overclaim",
+              "independence-overclaim-risk", "v4plus-overclaim-risk", "component-overclaim-risk",
+              "chronicle-overclaim-risk", "v5-overclaim-risk", "echo:solicited-record", "echo:screened"
+            ]);
 
-            // For edited/reopened: avoid duplicate bot comments
-            if (result.comment) {
-              let shouldComment = true;
+            const currentLabels = context.payload.issue.labels.map(l => l.name);
 
-              if (action !== "opened") {
-                // Check if bot already has a triage comment on this issue
-                const comments = await github.paginate(github.rest.issues.listComments, {
-                  owner,
-                  repo,
-                  issue_number,
-                  per_page: 100
-                });
-
-                const botAlreadyCommented = comments.some(c =>
-                  c.user.type === "Bot" &&
-                  c.body &&
-                  c.body.includes("<!-- trinity-echo-triage-v1 -->")
-                );
-
-                if (botAlreadyCommented) {
-                  shouldComment = false;
+            for (const label of currentLabels) {
+              if (managedLabels.has(label) && !desiredLabels.has(label)) {
+                try {
+                  await github.rest.issues.removeLabel({
+                    owner, repo, issue_number, name: label
+                  });
+                } catch (e) {
+                  core.info(`Could not remove label ${label}: ${e.message}`);
                 }
               }
+            }
 
-              if (shouldComment) {
+            if (desiredLabels.size > 0) {
+              try {
+                await github.rest.issues.addLabels({
+                  owner, repo, issue_number, labels: Array.from(desiredLabels)
+                });
+              } catch (e) {
+                core.warning(`Could not add labels ${Array.from(desiredLabels).join(", ")}: ${e.message}`);
+              }
+            }
+
+            // Comment upsert
+            const comments = await github.paginate(github.rest.issues.listComments, {
+              owner, repo, issue_number, per_page: 100
+            });
+
+            const markerV1 = "<!-- trinity-echo-triage-v1 -->";
+            const markerV2 = "<!-- trinity-echo-triage-v2 -->";
+
+            const existing = comments.find(c =>
+              c.user && c.user.type === "Bot" && c.body &&
+              (c.body.includes(markerV1) || c.body.includes(markerV2))
+            );
+
+            if (result.comment) {
+              const body = result.comment.includes(markerV2)
+                ? result.comment
+                : `${markerV2}\n${result.comment}`;
+
+              if (existing) {
+                await github.rest.issues.updateComment({
+                  owner, repo, comment_id: existing.id, body
+                });
+              } else {
                 await github.rest.issues.createComment({
-                  owner,
-                  repo,
-                  issue_number,
-                  body: result.comment
+                  owner, repo, issue_number, body
                 });
               }
             }
 
             if (result.close === true) {
               await github.rest.issues.update({
-                owner,
-                repo,
-                issue_number,
-                state: "closed",
-                state_reason: "not_planned"
+                owner, repo, issue_number, state: "closed", state_reason: "not_planned"
               });
             }
