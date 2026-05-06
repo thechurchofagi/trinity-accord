@@ -134,6 +134,16 @@
       "deprecated": "agent_to_agent_recommendation",
       "canonical": "E6_propagation_echo",
       "reason": "Legacy alias; use canonical E6_propagation_echo."
+    },
+    {
+      "deprecated": "verification",
+      "canonical": "E2_verification_echo",
+      "reason": "Legacy v1 alias used in echo-2026-04-25-000001.json; canonical form is E2_verification_echo."
+    },
+    {
+      "deprecated": "analysis",
+      "canonical": "E4_interpretive_echo",
+      "reason": "Legacy v1 alias used in echo-2026-04-25-000002.json; analysis maps to interpretive in canonical taxonomy."
     }
   ],
   "policy": {
