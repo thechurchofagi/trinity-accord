@@ -1,25 +1,29 @@
-# 100-Case Verification Suite — Execution Report
+# 129-Case Verification Suite — Execution Report
 
-Date: 2026-05-03
-Commit: `20dc2b0`
+Date: 2026-05-03 (updated 2026-05-06)
+Commit: `20dc2b0` (cases.json updated post-report)
 
 ## Execution
 
 Six sub-agents were dispatched in parallel. Several timed out at the 5-minute limit.
 The main agent collected partial contributions and completed the remaining work directly.
-All 100 cases now produce expected results.
+All 100 synthetic JSON cases (TC001–TC100) now produce expected results.
+29 additional claim_gate/report_builder script cases (TC101–TC129) were added after the initial run.
 
 ## Results
 
 | Metric | Value |
 |--------|-------|
-| Total cases | 100 |
-| Expected PASS | 54 |
-| Expected FAIL | 46 |
+| Total cases | 129 |
+| Synthetic JSON cases (TC001–TC100) | 100 |
+| Script-based cases (TC101–TC129) | 29 |
+| Expected PASS (TC001–TC100) | 54 |
+| Expected FAIL (TC001–TC100) | 46 |
+| Expected PASS (TC101–TC129) | 29 |
 | WARN | 0 |
 | SKIP | 0 |
-| As expected | **100/100** |
-| Unexpected | 0 |
+| As expected (TC001–TC100) | **100/100** |
+| Unexpected (TC001–TC100) | 0 |
 
 **FINAL: PASS**
 
@@ -46,6 +50,9 @@ N-level:  N2 N4 N7                            →  3/3
 P-level:  P0 P1 P2 P3 P4 P5 P7 P8           → 12/12
 Echo:     recognition/report/wrapper/title    → 14/14
 JSON:     valid/null/missing/mismatch/overclaim →  6/6
+Claim Gate: V4/V4+/D2/B1/P4/forbidden/downgrade → 20/20
+Report Builder: generate/downgrade/limitation/JSON/title/all_green → 7/7
+Script misc: scope/level/audit/downgrade       → 2/2
 ```
 
 ## Validator Rules Added

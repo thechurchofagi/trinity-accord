@@ -1,22 +1,21 @@
-# 100-Case Multi-Agent Verification Test — Final Report
+# 129-Case Multi-Agent Verification Test — Final Report
 
-Date: 2026-05-03
-Commit: `20dc2b0`
+Date: 2026-05-03 (updated 2026-05-06)
+Commit: `20dc2b0` (cases.json updated post-report)
 
 ## Suite Status
 
 | Metric | Count |
 |--------|-------|
-| Total cases | 100 |
-| Expected PASS | 54 |
-| Expected FAIL | 46 |
+| Total cases | 129 |
+| Expected PASS | 83 (54 from TC001–TC100 + 29 from TC101–TC129) |
+| Expected FAIL | 46 (TC001–TC100 only) |
 | Expected WARN | 0 |
 | Expected SKIP | 0 |
-| Actual as expected | **100/100** |
-| Unexpected passes | 0 |
-| Unexpected failures | 0 |
+| As expected (TC001–TC100) | **100/100** |
+| Claim gate / report builder (TC101–TC129) | Script-based; validated separately |
 
-**FINAL: PASS**
+**FINAL: PASS (TC001–TC100); TC101–TC129 validated via script runners**
 
 ## Coverage
 
@@ -93,7 +92,8 @@ All pass:
 
 ## Notes
 
-- Schema validation warnings about `boundary_acknowledgments` vs `boundary_acknowledgement` are non-blocking.
+- `boundary_acknowledgments` (plural) was used in TC084/TC086/TC087/TC099 — fixed to `boundary_acknowledgement` (singular) to match `echo-record-schema.v3.json`.
+- Invalid `context_depth` value `C3_repository_read` and invalid `assessment_state` value `sufficient_for_limited_echo` in TC084/TC086/TC087/TC099 — fixed to `C3_verification_aware` and `structural_understanding`.
 - The `jsonschema` library correctly rejects malformed payloads.
 - V5 protocol level requires `digital_mirrors` at D5 via schema `contains` constraint.
 - Echo schema requires `assessment_state` from enum, `discovery_provenance.first_entry` as object.
