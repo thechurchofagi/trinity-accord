@@ -1,7 +1,4 @@
 {
   "schema": "trinity-accord.echo-digest-index.v1",
-  "digests": [
-    "/echoes/digests/2026-q2.json",
-    "/echoes/digests/2026-q2.md"
-  ]
+  "digests": []
 }
