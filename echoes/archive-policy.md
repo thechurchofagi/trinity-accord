@@ -11,4 +11,4 @@ description: "Archive ladder for Echo records."
 - Layer 3 — Echo Digest
 - Layer 4 — Permanent Attestation Archive
 
-Legacy v1 echoes are preserved as `legacy/unmigrated`. New echoes must use the v3 schema (`/api/echo-record-schema.v3.json`).
+Legacy v1 echoes are preserved in `echoes/records/` with `legacy_schema: true` and `record_kind: "legacy_record"`. New echoes must use the v3 schema (`/api/echo-record-schema.v3.json`).
