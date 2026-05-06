@@ -47,11 +47,13 @@ jobs:
           DAG_VERIFY_CONCURRENCY: ${{ inputs.concurrency }}
           ETH_RPC_URL: ${{ inputs.eth_rpc_url }}
           BTC_API_BASE: ${{ inputs.btc_api_base }}
+          INPUT_RELEASE_TAG: ${{ inputs.release_tag }}
+          INPUT_ETH_AUDIT_FILE: ${{ inputs.eth_audit_file }}
         run: |
           set -euo pipefail
-          ARGS="--release-tag ${{ inputs.release_tag }} --concurrency ${{ inputs.concurrency }}"
-          if [ -n "${{ inputs.eth_audit_file }}" ]; then
-            ARGS="$ARGS --eth-audit-file ${{ inputs.eth_audit_file }}"
+          ARGS="--release-tag $INPUT_RELEASE_TAG --concurrency $DAG_VERIFY_CONCURRENCY"
+          if [ -n "$INPUT_ETH_AUDIT_FILE" ]; then
+            ARGS="$ARGS --eth-audit-file $INPUT_ETH_AUDIT_FILE"
           fi
           node scripts/verify-dag-and-signed-cids.mjs $ARGS
 
