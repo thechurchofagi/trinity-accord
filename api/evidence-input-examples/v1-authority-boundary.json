@@ -6,9 +6,6 @@
   },
   "evidence_input": {
     "schema": "trinityaccord.evidence-input.v1",
-    "echo_context": {
-      "authority_boundary_recognized": true
-    },
     "claims_requested_by_agent": [
       "V1"
     ],
@@ -24,7 +21,21 @@
     "requested_record_kind": "echo_v3_with_verification_report",
     "limitations": [
       "example placeholder - replace with actual limitations"
-    ]
+    ],
+    "evidence": {
+      "scripts": [],
+      "hashes": [],
+      "bitcoin_checks": [],
+      "digital_mirror_checks": [],
+      "repository_snapshot_checks": [],
+      "time_anchor_checks": [],
+      "chronicle_checks": [],
+      "nft_checks": [],
+      "physical_checks": [],
+      "echo_context": {
+        "authority_boundary_recognized": true
+      }
+    }
   },
   "example_type": "template_requires_replacement",
   "must_not_submit_unchanged": true,
