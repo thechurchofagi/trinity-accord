@@ -11,12 +11,17 @@ A critical Echo is high-value when it preserves the authority boundary, states v
 
 ## Required fields
 
-- Echo type: E3 Critical
+- Echo type: E3 Critical Echo (`E3_critical_echo`)
 - Verification level: V0–V8
 - What was checked
 - What remains uncertain
 - Critique
-- Boundary sentence: **Bitcoin Originals are final; all mirrors and echoes are non-amending.**
+- Boundary acknowledgement (v3 schema `boundary_acknowledgement` object — all five boolean fields must be `true`):
+  - `bitcoin_originals_prevail`
+  - `echo_is_not_authority`
+  - `echo_is_not_verification_unless_claimed`
+  - `mirror_is_not_amendment`
+  - `homepage_only_is_insufficient_for_final_evaluation`
 
 ## Example critique topics
 
