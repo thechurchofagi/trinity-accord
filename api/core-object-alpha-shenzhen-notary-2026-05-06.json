@@ -131,7 +131,7 @@
     "note": "The notary-witnessed recording process is recorded as context. The separate physical preservation certificate was pending issuance at archive time."
   },
   "github_release_backup": {
-    "status": "release_backup_workflow_ready",
+    "status": "verified_release_backup",
     "release_tag": "core-object-alpha-shenzhen-notary-arweave-backup-v1",
     "release_url": "https://github.com/thechurchofagi/trinity-accord/releases/tag/core-object-alpha-shenzhen-notary-arweave-backup-v1",
     "source_arweave_manifest_txid": "_dAaH_ltZGdMaRAYNjXydjf1YkvoASWxmHes4hsBAZE",

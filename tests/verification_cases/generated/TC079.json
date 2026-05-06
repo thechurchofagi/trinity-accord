@@ -42,5 +42,10 @@
   },
   "origin_limitations": [
     "test"
-  ]
+  ],
+  "not_authority": true,
+  "not_amendment": true,
+  "not_endorsement": true,
+  "bitcoin_originals_prevail": true,
+  "not_verification_unless_claimed": true
 }

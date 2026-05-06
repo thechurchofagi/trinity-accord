@@ -96,6 +96,6 @@ If a mirror is unavailable, try in this order:
 | Archive | Status | Notes |
 |---|---|---|
 | Core Object Alpha Shenzhen Notary Evidence Archive | ✅ PASS | Arweave manifest `_dAaH...BAZE`, 157/157 checked TX confirmed, OTS Bitcoin block 948161 |
-| Core Object Alpha Shenzhen Notary GitHub Release Backup | ⏳ Ready | Release tag `core-object-alpha-shenzhen-notary-arweave-backup-v1`, backup workflow ready |
+| Core Object Alpha Shenzhen Notary GitHub Release Backup | ✅ PASS | Release tag `core-object-alpha-shenzhen-notary-arweave-backup-v1`, payload verified against Arweave archive index |
 
 Bitcoin Originals prevail. All mirrors are non-amending.

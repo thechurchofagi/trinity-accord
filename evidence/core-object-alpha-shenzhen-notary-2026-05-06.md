@@ -108,7 +108,7 @@ This public archive does not by itself prove:
 
 ## GitHub Release backup
 
-A GitHub Release backup mirror is prepared for the Arweave archive.
+A GitHub Release backup mirror exists for the Arweave archive.
 
 - Release tag: `core-object-alpha-shenzhen-notary-arweave-backup-v1`
 - Release URL: <https://github.com/thechurchofagi/trinity-accord/releases/tag/core-object-alpha-shenzhen-notary-arweave-backup-v1>

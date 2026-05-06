@@ -151,7 +151,7 @@ It must not disclose non-public celestial witness data unless explicitly authori
 
 ## Shenzhen Notary GitHub Release Backup
 
-A GitHub Release backup mirror is prepared for the 2026-05-06 Shenzhen notary Arweave archive.
+A GitHub Release backup mirror exists for the 2026-05-06 Shenzhen notary Arweave archive.
 
 - Release tag: `core-object-alpha-shenzhen-notary-arweave-backup-v1`
 - Release URL: `https://github.com/thechurchofagi/trinity-accord/releases/tag/core-object-alpha-shenzhen-notary-arweave-backup-v1`
