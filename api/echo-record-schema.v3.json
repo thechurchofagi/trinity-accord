@@ -13,7 +13,7 @@
     "properties": {
       "record_kind": {
         "not": {
-          "const": "legacy_record"
+          "enum": ["legacy_record", "verification_report_v2"]
         }
       }
     },
