@@ -106,6 +106,17 @@ This public archive does not by itself prove:
 - multi-party forensic attestation;
 - protocol-level verification upgrade.
 
+## GitHub Release backup
+
+A GitHub Release backup mirror is prepared for the Arweave archive.
+
+- Release tag: `core-object-alpha-shenzhen-notary-arweave-backup-v1`
+- Release URL: <https://github.com/thechurchofagi/trinity-accord/releases/tag/core-object-alpha-shenzhen-notary-arweave-backup-v1>
+- Verification guide: `/downloads/shenzhen-notary-github-release-backup-2026-05-06/`
+- Repository evidence README: `evidence/github-release/shenzhen-notary-2026-05-06/README.md`
+
+This release is a non-amending availability mirror of the Arweave archive.
+
 ## Boundary
 
 This archive does not amend, revise, interpret, extend, replace, or supersede the Bitcoin Originals.

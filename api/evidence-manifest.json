@@ -100,7 +100,17 @@
       "physical_preservation_notarization_initiated": true,
       "physical_preservation_certificate_status": "pending_issuance_at_time_of_archive"
     },
-    "boundary": "Non-amending physical-anchor evidence archive. Bitcoin Originals prevail."
+    "boundary": "Non-amending physical-anchor evidence archive. Bitcoin Originals prevail.",
+    "github_release_backup": {
+      "status": "release_backup_workflow_ready",
+      "release_tag": "core-object-alpha-shenzhen-notary-arweave-backup-v1",
+      "release_url": "https://github.com/thechurchofagi/trinity-accord/releases/tag/core-object-alpha-shenzhen-notary-arweave-backup-v1",
+      "expected_release_asset_count": 4,
+      "payload_source_file_count": 153,
+      "verification_script": "scripts/verify_shenzhen_notary_release_backup.py",
+      "workflow": ".github/workflows/backup-shenzhen-notary-arweave-release.yml",
+      "boundary": "Non-amending GitHub Release availability mirror. Bitcoin Originals and Arweave source records prevail."
+    }
   },
   "eth_mirror_input_len": 4694,
   "eth_mirror_input_sha256": "e19018f1c71da8307ef20e8e8e5c12834f854d60a6aae60e35d2d8c71a333a81",

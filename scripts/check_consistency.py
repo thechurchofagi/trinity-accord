@@ -490,6 +490,48 @@ if proc_sna.returncode != 0:
     print(proc_sna.stdout[-1000:] if proc_sna.stdout else "")
     print(proc_sna.stderr[-500:] if proc_sna.stderr else "")
 
+# --- Shenzhen notary GitHub Release backup ---
+print("\n=== Shenzhen notary GitHub Release backup ===")
+
+for required_path in [
+    "scripts/backup_shenzhen_notary_arweave_release.py",
+    "scripts/verify_shenzhen_notary_release_backup.py",
+    ".github/workflows/backup-shenzhen-notary-arweave-release.yml",
+    "downloads/shenzhen-notary-github-release-backup-2026-05-06.md",
+    "evidence/github-release/shenzhen-notary-2026-05-06/README.md",
+]:
+    check(f"{required_path} exists", exists(required_path))
+
+try:
+    sna = load_json("api/core-object-alpha-shenzhen-notary-2026-05-06.json")
+    grb = sna.get("github_release_backup", {})
+    check("Shenzhen archive has github_release_backup", bool(grb))
+    check("GitHub release backup tag correct", grb.get("release_tag") == "core-object-alpha-shenzhen-notary-arweave-backup-v1")
+    check("GitHub release backup URL present", "github.com/thechurchofagi/trinity-accord/releases/tag/core-object-alpha-shenzhen-notary-arweave-backup-v1" in grb.get("release_url", ""))
+    check("GitHub release backup expected asset count 4", grb.get("expected_release_asset_count") == 4)
+    check("GitHub release backup payload source count 153", grb.get("payload_source_file_count") == 153)
+    check("GitHub release backup has raw manifest URL", "/raw/_dAaH_ltZGdMaRAYNjXydjf1YkvoASWxmHes4hsBAZE" in grb.get("source_arweave_manifest_raw_url", ""))
+    check("GitHub release backup is non-amending", "Non-amending" in grb.get("boundary", "") or "non-amending" in grb.get("boundary", ""))
+    check("GitHub release backup status is valid", grb.get("status") in ["release_backup_workflow_ready", "verified_release_backup"])
+except Exception as e:
+    check("Shenzhen archive GitHub Release backup block valid", False, str(e))
+
+for required_text_path in [
+    "api/evidence-manifest.json",
+    "api/verification-materials.json",
+    "evidence/core-object-alpha-shenzhen-notary-2026-05-06.md",
+    "downloads/shenzhen-notary-arweave-2026-05-06.md",
+    "downloads/shenzhen-notary-github-release-backup-2026-05-06.md",
+    "evidence/github-release/shenzhen-notary-2026-05-06/README.md",
+    "data-verification.md",
+    "status.md",
+]:
+    try:
+        txt = read_text(required_text_path)
+        check(f"{required_text_path} references GitHub release backup tag", "core-object-alpha-shenzhen-notary-arweave-backup-v1" in txt)
+    except Exception as e:
+        check(f"{required_text_path} can be checked for GitHub release backup", False, str(e))
+
 # --- Summary ---
 def main():
     print("\n" + "=" * 50)

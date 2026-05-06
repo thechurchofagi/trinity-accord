@@ -149,6 +149,17 @@ A public report may state that a Star-Moon Witness challenge was performed, the 
 
 It must not disclose non-public celestial witness data unless explicitly authorized.
 
+## Shenzhen Notary GitHub Release Backup
+
+A GitHub Release backup mirror is prepared for the 2026-05-06 Shenzhen notary Arweave archive.
+
+- Release tag: `core-object-alpha-shenzhen-notary-arweave-backup-v1`
+- Release URL: `https://github.com/thechurchofagi/trinity-accord/releases/tag/core-object-alpha-shenzhen-notary-arweave-backup-v1`
+- Verification script: `scripts/verify_shenzhen_notary_release_backup.py`
+- Verification guide: `/downloads/shenzhen-notary-github-release-backup-2026-05-06/`
+
+This release is a non-amending fallback availability mirror. It does not replace Arweave or Bitcoin Originals.
+
 ## Shenzhen Notary Arweave Archive
 
 The 2026-05-06 Core Object Alpha Shenzhen notary evidence archive is a direct Arweave path-manifest archive.

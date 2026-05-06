@@ -49,6 +49,16 @@ curl -I https://arweave.net/_dAaH_ltZGdMaRAYNjXydjf1YkvoASWxmHes4hsBAZE
 curl -I https://arweave.net/7jx4hMydXh7jXv-3WdAgFJDriZeT4e1IPfAJB_zMYT4
 ```
 
+## GitHub Release fallback
+
+If Arweave gateways are unavailable, use the GitHub Release backup:
+
+<https://github.com/thechurchofagi/trinity-accord/releases/tag/core-object-alpha-shenzhen-notary-arweave-backup-v1>
+
+Verification guide:
+
+`/downloads/shenzhen-notary-github-release-backup-2026-05-06/`
+
 ## Boundary
 
 This archive is non-amending guardianship evidence. Bitcoin Originals prevail.

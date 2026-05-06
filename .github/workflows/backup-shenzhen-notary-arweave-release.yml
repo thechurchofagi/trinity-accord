@@ -1,0 +1,71 @@
+name: Backup Shenzhen Notary Arweave Archive to GitHub Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "build_only or publish_release"
+        required: true
+        default: "build_only"
+        type: choice
+        options:
+          - build_only
+          - publish_release
+
+permissions:
+  contents: write
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Show Python and gh versions
+        run: |
+          python --version
+          gh --version
+
+      - name: Build GitHub Release backup assets from Arweave
+        run: |
+          python scripts/backup_shenzhen_notary_arweave_release.py \
+            --out dist/shenzhen-notary-github-release-backup
+
+      - name: Upload build artifact for inspection
+        uses: actions/upload-artifact@v4
+        with:
+          name: shenzhen-notary-github-release-backup-assets
+          path: dist/shenzhen-notary-github-release-backup/release-assets/*
+
+      - name: Publish GitHub Release
+        if: ${{ inputs.mode == 'publish_release' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: core-object-alpha-shenzhen-notary-arweave-backup-v1
+          TITLE: Core Object Alpha Shenzhen Notary Arweave Backup v1
+        run: |
+          ASSET_DIR="dist/shenzhen-notary-github-release-backup/release-assets"
+          NOTES="$ASSET_DIR/core-object-alpha-shenzhen-notary-2026-05-06-release-notes.md"
+
+          if gh release view "$TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            gh release upload "$TAG" "$ASSET_DIR"/* --repo "$GITHUB_REPOSITORY" --clobber
+          else
+            gh release create "$TAG" "$ASSET_DIR"/* \
+              --repo "$GITHUB_REPOSITORY" \
+              --target "$GITHUB_SHA" \
+              --title "$TITLE" \
+              --notes-file "$NOTES" \
+              --latest=false
+          fi
+
+      - name: Verify GitHub Release backup
+        if: ${{ inputs.mode == 'publish_release' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python scripts/verify_shenzhen_notary_release_backup.py \
+            --repo "$GITHUB_REPOSITORY" \
+            --tag core-object-alpha-shenzhen-notary-arweave-backup-v1

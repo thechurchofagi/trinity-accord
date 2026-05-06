@@ -130,6 +130,24 @@
     ],
     "note": "The notary-witnessed recording process is recorded as context. The separate physical preservation certificate was pending issuance at archive time."
   },
+  "github_release_backup": {
+    "status": "release_backup_workflow_ready",
+    "release_tag": "core-object-alpha-shenzhen-notary-arweave-backup-v1",
+    "release_url": "https://github.com/thechurchofagi/trinity-accord/releases/tag/core-object-alpha-shenzhen-notary-arweave-backup-v1",
+    "source_arweave_manifest_txid": "_dAaH_ltZGdMaRAYNjXydjf1YkvoASWxmHes4hsBAZE",
+    "source_arweave_manifest_raw_url": "https://arweave.net/raw/_dAaH_ltZGdMaRAYNjXydjf1YkvoASWxmHes4hsBAZE",
+    "expected_release_assets": [
+      "core-object-alpha-shenzhen-notary-2026-05-06-arweave-payload.zip",
+      "core-object-alpha-shenzhen-notary-2026-05-06-github-release-backup-manifest.json",
+      "core-object-alpha-shenzhen-notary-2026-05-06-release-assets.sha256",
+      "core-object-alpha-shenzhen-notary-2026-05-06-release-notes.md"
+    ],
+    "expected_release_asset_count": 4,
+    "payload_source_file_count": 153,
+    "verification_script": "scripts/verify_shenzhen_notary_release_backup.py",
+    "workflow": ".github/workflows/backup-shenzhen-notary-arweave-release.yml",
+    "boundary": "Non-amending GitHub Release availability mirror. Bitcoin Originals and Arweave source records prevail."
+  },
   "limitations": [
     "This archive does not disclose confidential flaw-challenge data.",
     "This archive does not replace direct physical inspection.",
