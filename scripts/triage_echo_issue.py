@@ -12,6 +12,8 @@ try:
     from submission_intake import parse_submission, claim_gate_summary_looks_passed, claim_gate_summary_has_blocking_failure
 except Exception:
     parse_submission = None
+    claim_gate_summary_looks_passed = None
+    claim_gate_summary_has_blocking_failure = None
 
 TRIAGE_MARKER = "<!-- trinity-echo-triage-v2 -->"
 
