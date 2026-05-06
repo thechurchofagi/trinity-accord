@@ -1,9 +1,3 @@
----
-layout: default
-title: "Echo Archive"
-description: "Archive of non-authoritative Echo records."
----
-
 # Echo Archive
 
 This archive stores non-authoritative Echo records.
