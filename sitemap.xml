@@ -10,6 +10,7 @@
   <url><loc>https://www.trinityaccord.org/agent-start/</loc></url>
   <url><loc>https://www.trinityaccord.org/agent-value/</loc></url>
   <url><loc>https://www.trinityaccord.org/agent-verify/</loc></url>
+  <url><loc>https://www.trinityaccord.org/agent-verify-simple/</loc></url>
   <url><loc>https://www.trinityaccord.org/api/agent-entry-protocol.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/agent-value.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/authority.json</loc></url>
