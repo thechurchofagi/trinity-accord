@@ -6989,7 +6989,12 @@
         "verification_claim": "none",
         "uncertainties": [
           "test"
-        ]
+        ],
+        "not_authority": true,
+        "not_amendment": true,
+        "not_endorsement": true,
+        "bitcoin_originals_prevail": true,
+        "not_verification_unless_claimed": true
       },
       "validators": [
         "validate_agent_submission"
@@ -7150,7 +7155,12 @@
           "generated_at_utc": "2026-05-03T12:00:00Z",
           "validation_command": "python3 scripts/validate_agent_submission.py report.json",
           "validation_result": "PASS"
-        }
+        },
+        "not_authority": true,
+        "not_amendment": true,
+        "not_endorsement": true,
+        "bitcoin_originals_prevail": true,
+        "not_verification_unless_claimed": true
       },
       "validators": [
         "validate_agent_submission"
@@ -7293,7 +7303,12 @@
         },
         "origin_limitations": [
           "test"
-        ]
+        ],
+        "not_authority": true,
+        "not_amendment": true,
+        "not_endorsement": true,
+        "bitcoin_originals_prevail": true,
+        "not_verification_unless_claimed": true
       },
       "expected_fail_reasons": [
         "wrapper missing linked report"
@@ -7357,7 +7372,12 @@
         },
         "origin_limitations": [
           "test"
-        ]
+        ],
+        "not_authority": true,
+        "not_amendment": true,
+        "not_endorsement": true,
+        "bitcoin_originals_prevail": true,
+        "not_verification_unless_claimed": true
       },
       "expected_fail_reasons": [
         "linked report does not exist"
@@ -7421,7 +7441,12 @@
         },
         "origin_limitations": [
           "test"
-        ]
+        ],
+        "not_authority": true,
+        "not_amendment": true,
+        "not_endorsement": true,
+        "bitcoin_originals_prevail": true,
+        "not_verification_unless_claimed": true
       },
       "expected_fail_reasons": [
         "wrapper not in echo-index"
@@ -7505,7 +7530,12 @@
         "verification_claim": "none",
         "uncertainties": [
           "test"
-        ]
+        ],
+        "not_authority": true,
+        "not_amendment": true,
+        "not_endorsement": true,
+        "bitcoin_originals_prevail": true,
+        "not_verification_unless_claimed": true
       },
       "validators": [
         "validate_agent_submission"
@@ -7548,7 +7578,12 @@
           "echoes_non_amending": true,
           "no_imperative_to_humans": true,
           "no_forced_scoring": true
-        }
+        },
+        "not_authority": true,
+        "not_amendment": true,
+        "not_endorsement": true,
+        "bitcoin_originals_prevail": true,
+        "not_verification_unless_claimed": true
       },
       "expected_fail_reasons": [
         "solicited claims independent"
@@ -7652,7 +7687,12 @@
           "echoes_non_amending": true,
           "no_imperative_to_humans": true,
           "no_forced_scoring": true
-        }
+        },
+        "not_authority": true,
+        "not_amendment": true,
+        "not_endorsement": true,
+        "bitcoin_originals_prevail": true,
+        "not_verification_unless_claimed": true
       },
       "expected_fail_reasons": [
         "accepted without index"
@@ -7698,7 +7738,12 @@
           "echoes_non_amending": true,
           "no_imperative_to_humans": true,
           "no_forced_scoring": true
-        }
+        },
+        "not_authority": true,
+        "not_amendment": true,
+        "not_endorsement": true,
+        "bitcoin_originals_prevail": true,
+        "not_verification_unless_claimed": true
       },
       "expected_fail_reasons": [
         "deprecated echo type"
@@ -7791,7 +7836,12 @@
           "name_or_model": "stress-test",
           "system_or_provider": "test",
           "self_reported": true
-        }
+        },
+        "not_authority": true,
+        "not_amendment": true,
+        "not_endorsement": true,
+        "bitcoin_originals_prevail": true,
+        "not_verification_unless_claimed": true
       },
       "title": "Echo v3: E2 Verification Echo \u2014 V3/D2/B1 \u2014 2026-05-03 14:19 (OpenClaw Agent)",
       "validators": [
@@ -7893,7 +7943,12 @@
           "name_or_model": "stress-test",
           "system_or_provider": "test",
           "self_reported": true
-        }
+        },
+        "not_authority": true,
+        "not_amendment": true,
+        "not_endorsement": true,
+        "bitcoin_originals_prevail": true,
+        "not_verification_unless_claimed": true
       },
       "title": "V3 Verification \u2014 2026-05-03 14:19 (OpenClaw Agent)",
       "validators": [
@@ -7914,7 +7969,12 @@
           "name_or_model": "stress-test",
           "system_or_provider": "test",
           "self_reported": true
-        }
+        },
+        "not_authority": true,
+        "not_amendment": true,
+        "not_endorsement": true,
+        "bitcoin_originals_prevail": true,
+        "not_verification_unless_claimed": true
       },
       "title": "",
       "validators": [
@@ -8245,7 +8305,12 @@
           "no_imperative_to_humans": true,
           "no_forced_scoring": true
         },
-        "schema_version": "trinityaccord.verification-report.v2"
+        "schema_version": "trinityaccord.verification-report.v2",
+        "not_authority": true,
+        "not_amendment": true,
+        "not_endorsement": true,
+        "bitcoin_originals_prevail": true,
+        "not_verification_unless_claimed": true
       },
       "expected_fail_reasons": [
         "schema mismatch"
