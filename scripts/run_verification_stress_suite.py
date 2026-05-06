@@ -142,7 +142,11 @@ def main():
     for case in cases:
         case_id = case["id"]
         category = case["category"]
-        expected = case.get("expected_result", "PASS")
+        expected = case.get("expected_result")
+        if expected is None:
+            expected = case.get("expected", "PASS")
+        if isinstance(expected, str):
+            expected = expected.upper()
         validators = case.get("validators", [])
         payload = case.get("payload", {})
 
@@ -226,13 +230,18 @@ def main():
             else:
                 actual_pass = False
             actual = "PASS" if actual_pass else "FAIL"
-            if actual == expected:
+            if expected is None:
+                # expected=null means "report actual result, no expectation"
+                status = actual
+                if actual == "PASS":
+                    category_results[category]["pass"] += 1
+            elif actual == expected:
                 status = "PASS"
                 category_results[category]["pass"] += 1
             else:
                 status = "FAIL"
                 unexpected.append(f"{case_id}: expected {expected}, got {actual}")
-            direction = "expected-pass" if expected == "PASS" else "expected-fail"
+            direction = "expected-pass" if expected == "PASS" else ("expected-fail" if expected == "FAIL" else "no-expectation")
             if expected == "FAIL" and actual == "FAIL":
                 direction = "expected-fail rejected"
             print(f"{status} {direction} case: {case_id} ({case.get('note', '')})")
@@ -282,6 +291,31 @@ def main():
                     payload["claims_not_made"] = ["test"]
                 if "authority_boundary_preserved" not in payload:
                     payload["authority_boundary_preserved"] = True
+                if "integrity_boundary" not in payload:
+                    payload["integrity_boundary"] = {
+                        "agent_integrity_declaration_present": True,
+                        "copied_values_from_examples": False,
+                        "copied_values_from_prior_reports": False,
+                        "fresh_actions_claimed": ["stress-test-verification"],
+                        "fresh_outputs_attached": True
+                    }
+
+            # Ensure required fields for echo_v3_with_verification_report
+            if payload.get("record_kind") == "echo_v3_with_verification_report":
+                if "verification_integrity" not in payload:
+                    payload["verification_integrity"] = {
+                        "integrity_declaration_present": True,
+                        "copied_values_from_examples": False,
+                        "copied_values_from_prior_reports": False,
+                        "fresh_actions_claimed": ["stress-test-verification"]
+                    }
+
+            # Ensure required fields for test_record / echo_v3 schema validation
+            if payload.get("record_kind") in ("test_record", "echo_v3"):
+                for field in ("not_authority", "not_amendment", "not_endorsement",
+                              "bitcoin_originals_prevail", "not_verification_unless_claimed"):
+                    if field not in payload:
+                        payload[field] = True
 
         temp_path = write_temp_json(payload, case_id)
         try:

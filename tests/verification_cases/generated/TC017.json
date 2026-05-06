@@ -63,7 +63,7 @@
   "samples_checked": 0,
   "physical_evidence_reviewed": {
     "live_video": true,
-    "nonce_challenge": "nonce-123",
+    "nonce_challenge": true,
     "live_witness": true
   },
   "confidential_challenge": {

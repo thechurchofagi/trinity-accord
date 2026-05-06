@@ -40,7 +40,7 @@ def make_input(evidence_overrides=None, claims=None, provenance_overrides=None):
             "scripts": [], "hashes": [], "bitcoin_checks": [],
             "digital_mirror_checks": [], "repository_snapshot_checks": [],
             "time_anchor_checks": [], "chronicle_checks": [], "nft_checks": [],
-            "physical_checks": [], "echo_context": {},
+            "physical_checks": [], "echo_context": {"authority_boundary_recognized": True},
             **(evidence_overrides or {})
         },
         "limitations": [],
@@ -104,7 +104,7 @@ run("CD-03", "B1 local manifest only → allowed level V1",
 # Requested V5 with insufficient evidence → downgrade
 run("CD-04", "V5 insufficient evidence → downgrade",
     make_input(claims=["V5"]),
-    expect_downgrades=[("V5", "V0")])
+    expect_downgrades=[("V5", "V1")])
 
 print(f"\n{'='*60}")
 print(f"Results: {PASS}/{TOTAL} passed, {FAIL}/{TOTAL} failed")

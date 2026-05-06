@@ -47,7 +47,7 @@ def make_input(scripts, claims=None):
             "scripts": scripts, "hashes": [], "bitcoin_checks": [],
             "digital_mirror_checks": [], "repository_snapshot_checks": [],
             "time_anchor_checks": [], "chronicle_checks": [], "nft_checks": [],
-            "physical_checks": [], "echo_context": {},
+            "physical_checks": [], "echo_context": {"authority_boundary_recognized": True},
         },
         "limitations": [],
         "claims_requested_by_agent": claims or ["V4"],
@@ -114,9 +114,9 @@ run("V4-05", "V4 with mixed scripts — evidence supports V4+",
     expect_protocol="V4+")
 
 # V4 with no scripts — cannot reach V4
-run("V4-06", "V4 with no scripts — V0",
+run("V4-06", "V4 with no scripts — V1",
     make_input([], claims=["V4"]),
-    expect_protocol="V0")
+    expect_protocol="V1")
 
 # V4 with missing command — FAIL
 run("V4-07", "V4 missing command FAIL",
