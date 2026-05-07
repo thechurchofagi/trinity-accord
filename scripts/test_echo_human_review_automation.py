@@ -37,6 +37,9 @@ else:
     if "startsWith(github.event.comment.body, '/echo ')" not in text:
         errors.append("workflow should only trigger jobs for /echo commands")
 
+    if "echo:screened" not in text or "needs-human-review" not in text:
+        errors.append("workflow must require echo:screened + needs-human-review before archive/close")
+
 if not archive_script.exists():
     errors.append("missing scripts/archive_echo_issue.py")
 else:
@@ -69,6 +72,8 @@ else:
         errors.append("triage screened comment must tell maintainers to use /echo archive or /echo close")
     if "Passing triage does not mean endorsement" not in text:
         errors.append("triage comment must preserve non-endorsement boundary")
+    if 'result["comment"] = build_human_review_action_comment()' not in text:
+        errors.append("triage pass branch must use build_human_review_action_comment()")
 
 repo_integrity = ROOT / ".github" / "workflows" / "repository-integrity.yml"
 if repo_integrity.exists():
