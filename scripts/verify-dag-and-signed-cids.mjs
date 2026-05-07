@@ -19,6 +19,25 @@ import path from 'path';
 import crypto from 'crypto';
 
 // ═══════════════════════════════════════════════════════════════════════════
+// CLI ARGS
+// ═══════════════════════════════════════════════════════════════════════════
+
+const args = process.argv.slice(2);
+
+function getArg(name, def = '') {
+  const idx = args.indexOf(name);
+  return idx >= 0 && idx + 1 < args.length ? args[idx + 1] : def;
+}
+
+function parseBoundedInt(value, label, min = 1, max = 25) {
+  const n = Number(value);
+  if (!Number.isInteger(n) || n < min || n > max) {
+    throw new Error(`Invalid ${label}: ${value}`);
+  }
+  return n;
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
 // GLOBAL CONFIG
 // ═══════════════════════════════════════════════════════════════════════════
 
@@ -31,7 +50,14 @@ const DIGEST_MANIFEST_JSON = 'archive/evidence/digest-manifest.json';
 const DIGEST_MANIFEST_CSV = 'archive/evidence/digest-manifest.csv';
 const ETH_WITNESS_FILE = 'archive/eth-witness/eth-witness.json';
 const EXPECTED_NFTS = 175;
-const CONCURRENCY = Number(process.env.DAG_VERIFY_CONCURRENCY || 4);
+const RELEASE_TAG = getArg('--release-tag', process.env.INPUT_RELEASE_TAG || 'nft-arweave-mirror-175-v1');
+const INPUT_ETH_AUDIT_FILE = getArg('--eth-audit-file', process.env.INPUT_ETH_AUDIT_FILE || '');
+const CONCURRENCY = parseBoundedInt(
+  getArg('--concurrency', process.env.DAG_VERIFY_CONCURRENCY || '4'),
+  'concurrency',
+  1,
+  25
+);
 const ETH_RPC_URL = process.env.ETH_RPC_URL;
 const BTC_API_BASE = process.env.BTC_API_BASE || 'https://mempool.space/api';
 const MAX_RETRIES = 3;
@@ -580,6 +606,20 @@ function extractCidFromPath(filePath) {
   return null;
 }
 
+/**
+ * Find a digest manifest item by root CID or filename.
+ * Scoped helper — uses digestManifestItem, never a bare generic name.
+ */
+function findDigestManifestItem(digestLookup, rootCid, fileName = '') {
+  if (!rootCid) return null;
+  return (
+    digestLookup.get(rootCid) ||
+    digestLookup.get(`${rootCid}.car`) ||
+    (fileName ? digestLookup.get(path.basename(fileName)) : null) ||
+    null
+  );
+}
+
 // ═══════════════════════════════════════════════════════════════════════════
 // CHAIN A: DAG + digest-manifest file hash chain
 // ═══════════════════════════════════════════════════════════════════════════
@@ -665,10 +705,14 @@ async function verifyChainA(tokenIndex, nftAssets, digestManifest, ethAudit, con
         // The GitHub release tars are repackaged (different sha256), but root CID is preserved.
         // Coverage chain: root CID → found in digest-manifest → digest-manifest sha256 declared in authority → authority signed by BTC.
         let inDigestManifest = false;
-        let matchedManifestItem = null;
+        let digestManifestItem = null;
         if (rootCid && digestManifest?.items) {
-          matchedManifestItem = digestManifest.items.find(item => item.path && item.path.includes(rootCid)) || null;
-          inDigestManifest = !!matchedManifestItem;
+          digestManifestItem = findDigestManifestItem(digestLookup, rootCid, tarEntry?.name || '');
+          if (!digestManifestItem) {
+            // Fallback: search by path contains
+            digestManifestItem = digestManifest.items.find(item => item.path && item.path.includes(rootCid)) || null;
+          }
+          inDigestManifest = !!digestManifestItem;
         }
         if (inDigestManifest) digestManifestFileMatchCount++;
         else if (rootCid) {
@@ -721,7 +765,7 @@ async function verifyChainA(tokenIndex, nftAssets, digestManifest, ethAudit, con
           detail.media.push({
             dag_valid: dagResult.valid, block_count: dagResult.blockCount,
             actual_root_cid: rootCid, sha256: carSha, size: carSize,
-            digest_manifest_match: matchedManifestItem ? (matchedManifestItem.sha256 === carSha && matchedManifestItem.size_bytes === carSize) : null,
+            digest_manifest_match: digestManifestItem ? (digestManifestItem.sha256 === carSha && digestManifestItem.size_bytes === carSize) : null,
           });
         }
       }
@@ -1275,8 +1319,8 @@ async function main() {
   if (totalNfts !== EXPECTED_NFTS) { err(`  ❌ Expected ${EXPECTED_NFTS}, found ${totalNfts}`); process.exit(1); }
 
   // Fetch release assets
-  log('📦 Fetching GitHub Release nft-arweave-mirror-175-v1...');
-  const release = await getReleaseByTag('nft-arweave-mirror-175-v1');
+  log(`📦 Fetching GitHub Release ${RELEASE_TAG}...`);
+  const release = await getReleaseByTag(RELEASE_TAG);
   const allAssets = await getAllAssets(release.id);
   const nftAssets = allAssets.filter(a => a.name.startsWith('nft-') && a.name.endsWith('.tar'));
   log(`  ${allAssets.length} total assets, ${nftAssets.length} NFT tar files`);
@@ -1358,6 +1402,14 @@ async function main() {
     generated_at: new Date().toISOString(),
     elapsed_seconds: parseFloat(elapsed),
     full_verification_pass: fullVerificationPass,
+
+    input_parameters: {
+      release_tag: RELEASE_TAG,
+      eth_audit_file: INPUT_ETH_AUDIT_FILE || null,
+      concurrency: CONCURRENCY,
+      eth_rpc_configured: Boolean(ETH_RPC_URL),
+      btc_api_base: BTC_API_BASE
+    },
 
     // Chain A
     chain_a: {

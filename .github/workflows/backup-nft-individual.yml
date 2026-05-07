@@ -31,11 +31,14 @@ jobs:
           INPUT_CONTRACT: ${{ inputs.contract }}
           INPUT_DRY_RUN: ${{ inputs.dry_run }}
         run: |
-          ARGS=""
+          set -euo pipefail
+
+          ARGS=()
           if [ -n "$INPUT_CONTRACT" ]; then
-            ARGS="--contract $INPUT_CONTRACT"
+            [[ "$INPUT_CONTRACT" =~ ^0x[a-fA-F0-9]{40}$ ]] || { echo "Invalid contract address"; exit 1; }
+            ARGS+=(--contract "$INPUT_CONTRACT")
           fi
           if [ "$INPUT_DRY_RUN" = "true" ]; then
-            ARGS="$ARGS --dry-run"
+            ARGS+=(--dry-run)
           fi
-          node scripts/backup-nft-individual.mjs $ARGS
+          node scripts/backup-nft-individual.mjs "${ARGS[@]}"

@@ -54,6 +54,10 @@ jobs:
           INPUT_OTS_RELEASE_TAG: ${{ inputs.ots_release_tag }}
         run: |
           set -euo pipefail
+
+          [[ "$DAG_VERIFY_CONCURRENCY" =~ ^[0-9]+$ ]] || { echo "Invalid concurrency"; exit 1; }
+          [ "$DAG_VERIFY_CONCURRENCY" -ge 1 ] && [ "$DAG_VERIFY_CONCURRENCY" -le 25 ] || { echo "Concurrency out of range"; exit 1; }
+
           node scripts/verify-full-evidence-chain.mjs \
             --release-tag "$INPUT_RELEASE_TAG" \
             --ots-release-tag "$INPUT_OTS_RELEASE_TAG" \

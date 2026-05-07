@@ -33,6 +33,11 @@ jobs:
           INPUT_RELEASE_TAG: ${{ inputs.release_tag || 'nft-arweave-mirror-175-v1' }}
           INPUT_CONCURRENCY: ${{ inputs.concurrency || '4' }}
         run: |
+          set -euo pipefail
+
+          [[ "$INPUT_CONCURRENCY" =~ ^[0-9]+$ ]] || { echo "Invalid concurrency"; exit 1; }
+          [ "$INPUT_CONCURRENCY" -ge 1 ] && [ "$INPUT_CONCURRENCY" -le 25 ] || { echo "Concurrency out of range"; exit 1; }
+
           node scripts/verify-dag-digest.mjs \
             --release-tag "$INPUT_RELEASE_TAG" \
             --concurrency "$INPUT_CONCURRENCY"

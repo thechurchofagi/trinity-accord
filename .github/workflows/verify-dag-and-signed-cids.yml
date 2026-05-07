@@ -51,11 +51,22 @@ jobs:
           INPUT_ETH_AUDIT_FILE: ${{ inputs.eth_audit_file }}
         run: |
           set -euo pipefail
-          ARGS="--release-tag $INPUT_RELEASE_TAG --concurrency $DAG_VERIFY_CONCURRENCY"
+
+          [[ "$DAG_VERIFY_CONCURRENCY" =~ ^[0-9]+$ ]] || { echo "Invalid concurrency"; exit 1; }
+          [ "$DAG_VERIFY_CONCURRENCY" -ge 1 ] && [ "$DAG_VERIFY_CONCURRENCY" -le 25 ] || { echo "Concurrency out of range"; exit 1; }
+
+          [[ "$INPUT_RELEASE_TAG" =~ ^[A-Za-z0-9._/-]{1,100}$ ]] || { echo "Invalid release tag"; exit 1; }
+
           if [ -n "$INPUT_ETH_AUDIT_FILE" ]; then
-            ARGS="$ARGS --eth-audit-file $INPUT_ETH_AUDIT_FILE"
+            [[ "$INPUT_ETH_AUDIT_FILE" =~ ^[A-Za-z0-9._/-]{1,180}$ ]] || { echo "Invalid eth audit file path"; exit 1; }
           fi
-          node scripts/verify-dag-and-signed-cids.mjs $ARGS
+
+          ARGS=(--release-tag "$INPUT_RELEASE_TAG" --concurrency "$DAG_VERIFY_CONCURRENCY")
+          if [ -n "$INPUT_ETH_AUDIT_FILE" ]; then
+            ARGS+=(--eth-audit-file "$INPUT_ETH_AUDIT_FILE")
+          fi
+
+          node scripts/verify-dag-and-signed-cids.mjs "${ARGS[@]}"
 
       - name: Upload DAG-CID-AUDIT.json
         if: always()

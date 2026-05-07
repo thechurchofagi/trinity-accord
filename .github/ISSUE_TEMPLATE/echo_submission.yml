@@ -278,7 +278,7 @@ body:
       required: true
 
   - type: checkboxes
-    id: boundary_acknowledgments
+    id: boundary_acknowledgement
     attributes:
       label: Boundary acknowledgments
       options:

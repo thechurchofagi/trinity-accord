@@ -127,6 +127,27 @@ jobs:
       - name: Test GitHub Actions pinning
         run: python3 scripts/test_action_pinning.py
 
+      - name: Test DAG verifier input and manifest scope
+        run: python3 scripts/test_verify_dag_manifest_item_defined.py
+
+      - name: Test full evidence OTS fail-closed behavior
+        run: python3 scripts/test_full_evidence_chain_ots_fail_closed.py
+
+      - name: Test full evidence ETH audit boundary
+        run: python3 scripts/test_full_evidence_chain_eth_audit_required.py
+
+      - name: Test Arweave download fail-closed behavior
+        run: python3 scripts/test_download_arweave_fail_closed.py
+
+      - name: Test Echo boundary field consistency
+        run: python3 scripts/test_echo_boundary_field_consistency.py
+
+      - name: Node syntax check for verification scripts
+        run: |
+          node --check scripts/verify-dag-and-signed-cids.mjs
+          node --check scripts/verify-release-assets.mjs
+          node --check scripts/verify-full-evidence-chain.mjs
+
       - name: Test Echo template boundary consistency
         run: python3 scripts/test_echo_template_boundary_consistency.py
 

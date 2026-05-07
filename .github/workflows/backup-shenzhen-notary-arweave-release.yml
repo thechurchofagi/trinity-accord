@@ -13,16 +13,18 @@ on:
           - publish_release
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
-  backup:
+  build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     timeout-minutes: 90
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
 
       - name: Show Python and gh versions
         run: |
@@ -35,13 +37,38 @@ jobs:
             --out dist/shenzhen-notary-github-release-backup
 
       - name: Upload build artifact for inspection
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: shenzhen-notary-github-release-backup-assets
           path: dist/shenzhen-notary-github-release-backup/release-assets/*
 
+  publish:
+    needs: build
+    if: ${{ inputs.mode == 'publish_release' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    environment: release-publish
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+
+      - name: Download build artifact
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c6699f4d507c0 # v4
+        with:
+          name: shenzhen-notary-github-release-backup-assets
+          path: dist/shenzhen-notary-github-release-backup/release-assets
+
+      - name: Verify release assets exist
+        run: |
+          ASSET_DIR="dist/shenzhen-notary-github-release-backup/release-assets"
+          test -d "$ASSET_DIR"
+          test -f "$ASSET_DIR/core-object-alpha-shenzhen-notary-2026-05-06-release-assets.sha256"
+          test -f "$ASSET_DIR/core-object-alpha-shenzhen-notary-2026-05-06-github-release-backup-manifest.json"
+
       - name: Publish GitHub Release
-        if: ${{ inputs.mode == 'publish_release' }}
         env:
           GH_TOKEN: ${{ github.token }}
           TAG: core-object-alpha-shenzhen-notary-arweave-backup-v1
@@ -62,7 +89,6 @@ jobs:
           fi
 
       - name: Verify GitHub Release backup
-        if: ${{ inputs.mode == 'publish_release' }}
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
