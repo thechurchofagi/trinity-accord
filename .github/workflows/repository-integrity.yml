@@ -187,3 +187,18 @@ jobs:
 
       - name: Test lightweight V2 Claim Gate behavior
         run: python3 scripts/test_v2_lightweight_claim_gate.py
+
+      - name: Test archive hash manifest consistency
+        run: python3 scripts/test_archive_hash_manifest_consistency.py
+
+      - name: Test evidence manifest stats sync
+        run: python3 scripts/test_evidence_manifest_stats_sync.py
+
+      - name: Test API links current machine endpoints
+        run: python3 scripts/test_api_links_current_machine_endpoints.py
+
+      - name: Test verification level policy sync
+        run: python3 scripts/test_verification_level_policy_sync.py
+
+      - name: Test status current verifier semantics
+        run: python3 scripts/test_status_current_verifier_semantics.py

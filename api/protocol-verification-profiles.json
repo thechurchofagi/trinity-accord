@@ -77,7 +77,28 @@
         "evidence.bitcoin_checks[0].source_type"
       ],
       "copy_paste_claim_label": "V2 (minimal; Bitcoin Originals B1 only)",
-      "if_missing_downgrade_to": "V1 if no explorer check performed"
+      "if_missing_downgrade_to": "V1 if no explorer check performed",
+      "claim_scopes": {
+        "minimal": {
+          "required": [
+            "Authority boundary recognized",
+            "At least one reference path beyond ordinary page reading",
+            "Usually Bitcoin Originals B1"
+          ],
+          "must_not_claim": [
+            "full reference coverage",
+            "hash verification"
+          ]
+        },
+        "strong_reference_coverage": {
+          "required": [
+            "Bitcoin Originals B2",
+            "Digital Mirrors D1",
+            "Chronicle Recovery C1",
+            "Time Anchors T2"
+          ]
+        }
+      }
     },
     {
       "level": "V3",
@@ -154,6 +175,22 @@
           "component": "physical_anchor",
           "level": "P1",
           "claim_boundary": "public evidence package hash only; no physical object verification"
+        }
+      },
+      "claim_scopes": {
+        "minimal": {
+          "required": [
+            "At least one valid declared hash computed locally",
+            "Expected hash source and authority class recorded"
+          ],
+          "must_not_claim": [
+            "full public digital verification"
+          ]
+        },
+        "strong_hash_coverage": {
+          "required": [
+            "Multiple hashes across Evidence Mirrors and/or Chronicle Recovery"
+          ]
         }
       }
     },
@@ -234,7 +271,27 @@
         "evidence.scripts[0].independent"
       ],
       "copy_paste_claim_label": "V4+ (minimal independent reproduction)",
-      "if_missing_downgrade_to": "V4 if only official scripts used"
+      "if_missing_downgrade_to": "V4 if only official scripts used",
+      "claim_scopes": {
+        "minimal": {
+          "required": [
+            "V4 hard gates satisfied",
+            "Independent tool or implementation used",
+            "At least one official verification result independently reproduced"
+          ],
+          "must_not_claim": [
+            "strong three-domain reproduction",
+            "full public digital verification"
+          ]
+        },
+        "strong_three_domain_coverage": {
+          "required": [
+            "Bitcoin Originals independent reproduction",
+            "Evidence Mirrors independent reproduction",
+            "Chronicle Recovery independent reproduction"
+          ]
+        }
+      }
     },
     {
       "level": "V5",

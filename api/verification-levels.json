@@ -134,6 +134,19 @@
           "description": "Multiple reference paths across Bitcoin Originals, Evidence Mirrors, and Chronicle Recovery.",
           "claim_label": "V2 (strong reference coverage; B2/D1/C1/T2)"
         }
+      },
+      "minimum_gate": {
+        "label": "V2 minimal",
+        "requirements": [
+          "Authority boundary recognized",
+          "At least one reference path beyond ordinary page reading",
+          "Usually Bitcoin Originals B1 or higher"
+        ],
+        "must_not_claim": [
+          "full reference coverage",
+          "hash verification",
+          "full public digital verification"
+        ]
       }
     },
     {
@@ -196,6 +209,20 @@
         "full_public_digital": {
           "note": "Not V3; see V5 for full public digital verification."
         }
+      },
+      "minimum_gate": {
+        "label": "V3 minimal",
+        "requirements": [
+          "At least one valid declared hash computed locally",
+          "Expected hash source recorded",
+          "Expected hash authority class recorded",
+          "Computed hash equals expected hash"
+        ],
+        "must_not_claim": [
+          "full public digital verification",
+          "direct Arweave verification unless Arweave data was extracted",
+          "Ethereum witness verified unless ETH transaction/input checked"
+        ]
       }
     },
     {
@@ -285,6 +312,28 @@
           "description": "Independent reproduction of all three mandatory domains.",
           "claim_label": "V4+ (strong three-domain independent reproduction)"
         }
+      },
+      "minimum_gate": {
+        "label": "V4+ minimal independent reproduction",
+        "requirements": [
+          "V4 hard gates satisfied",
+          "Independent tool or implementation used",
+          "At least one official verification result independently reproduced",
+          "Comparison with official result reported"
+        ],
+        "must_not_claim": [
+          "strong three-domain reproduction",
+          "full public digital verification",
+          "physical verification"
+        ]
+      },
+      "strong_three_domain_coverage": {
+        "requirements": [
+          "BITCOIN_ORIGINALS independent reproduction",
+          "EVIDENCE_MIRRORS independent reproduction",
+          "CHRONICLE_RECOVERY independent reproduction"
+        ],
+        "claim_label": "V4+ (strong three-domain independent reproduction)"
       }
     },
     {
@@ -442,7 +491,7 @@
     "Do not claim V2 without chain/reference checks.",
     "Do not claim V3 without computing hashes.",
     "Do not claim V4 without script source review.",
-    "Do not claim V4+ without independent reproduction of all three mandatory components.",
+    "Do not claim V4+ strong three-domain coverage without independent reproduction of all three mandatory components. Minimal V4+ requires at least one independent reproduction and must label itself minimal.",
     "Do not claim V5 without full public digital verification (D5, C5 minimum).",
     "Do not claim V6 without live remote physical witness (P4) with nonce/challenge. Recorded video alone is not V6.",
     "Do not claim V7 without onsite physical witness (P5) and custody log.",

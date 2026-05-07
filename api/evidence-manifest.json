@@ -40,12 +40,21 @@
     "hash_manifest": "archive/hash-manifest.json",
     "verification_report": "archive/VERIFICATION-REPORT.md",
     "stats": {
-      "total_files": 40,
-      "sha256_verified_against_arweave": 25,
+      "total_files": 39,
+      "sha256_verified_against_arweave": 21,
       "eth_attestations_verified": 8,
-      "eth_attestations_total": 8
+      "eth_attestations_total": 8,
+      "no_expected_hash": 17,
+      "hash_mismatch": 1,
+      "eth_attestations_failed": 0
     },
-    "boundary": "Non-amending mirror. Arweave originals and ETH attestations prevail in case of conflict."
+    "boundary": "Non-amending mirror. Arweave originals and ETH attestations prevail in case of conflict.",
+    "stats_source": "archive/hash-manifest.json.summary",
+    "availability_only_unverified_mirrors": {
+      "policy": "Files without expected SHA-256 are availability-only and must not be counted as verified archive content.",
+      "committed_to_verified_archive": false,
+      "claim_boundary": "availability only; not verified archive content"
+    }
   },
   "warning": "manual external verification required",
   "chronicle_recovery_package": {

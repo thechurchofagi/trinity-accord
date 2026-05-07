@@ -10,24 +10,27 @@ Current availability of guardianship mirrors and verification paths.
 
 ## Full Evidence Chain · 全链验证
 
-**Status: ✅ PASS** | Verified: 2026-05-01 | Workflow: `Verify Full Evidence Chain #8` | Commit: `3741e78` | Duration: 34s | Artifacts: 7/7 uploaded | hard_failures: 0
+**Historical status:** ✅ PASS under 2026-05-01 verifier semantics
+**Verified:** 2026-05-01
+**Workflow:** `Verify Full Evidence Chain #8`
+**Commit:** `3741e78`
 
-| Field | Value |
-|-------|-------|
-| full_evidence_chain_pass | true |
-| release_verified | true |
-| onchain_tokenuri_175_pass | true |
-| dag_and_digest_manifest_pass | true |
-| btc_signature_coverage_pass | true |
-| eth_witness_coverage_pass | true |
-| bitcoin_tx_anchor_pass | true |
-| ots_time_anchor_pass | true |
-| ots_finalization | true |
-| ots_upgrade_mutation | none |
-| ots_digest_manifest_mutation | none |
-| hard_failures | 0 |
+**Current semantic boundary:** The verifier semantics were later hardened by red-team fixes: OTS must pass `ots verify`, ETH tokenURI claims require explicit ETH audit data, and Arweave archive downloads fail closed on missing expected hashes. A fresh full evidence-chain run under the current verifier semantics is required before restating `full_evidence_chain_pass: true` as current.
 
-What this verifies:
+| Field | Historical Value | Current status |
+|-------|------------------|----------------|
+| full_evidence_chain_pass | true | needs fresh current-semantics run |
+| release_verified | true | needs fresh current-semantics run |
+| onchain_tokenuri_175_pass | true | needs current ETH audit run |
+| dag_and_digest_manifest_pass | true | needs current DAG/hash manifest consistency run |
+| btc_signature_coverage_pass | true | needs current-semantics run |
+| eth_witness_coverage_pass | true | needs current-semantics run |
+| bitcoin_tx_anchor_pass | true | needs current-semantics run |
+| ots_time_anchor_pass | true | needs current `ots_verify_passed` run |
+| ots_finalization | true | needs current-semantics run |
+| hard_failures | 0 | — |
+
+Historical verification details:
 - GitHub Release backup 175/175 verified.
 - ETH tokenURI returns 175/175 metadata CIDs matching token_index.
 - DAG + digest-manifest verification passes; 524/524 public file hashes match across all declared algorithms.
@@ -36,7 +39,7 @@ What this verifies:
 - Bitcoin tx anchors pass.
 - OTS time-anchor verification passes.
 
-Limitation:
+Historical limitation:
 - OTS proof is complete and Bitcoin-anchored.
 - Verified with OpenTimestamps client v0.7.2 / CI path.
 - Not yet verified through local Bitcoin Core or pruned-node RPC.

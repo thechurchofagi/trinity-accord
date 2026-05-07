@@ -1128,11 +1128,52 @@ def evaluate(input_path):
     }
     title = generate_title(allowed_protocol, component_levels, agent.get("name", "Unknown"), requested_kind, date_str)
 
+    # Determine protocol scope label to prevent minimal claims being mistaken for strong/full
+    protocol_scope = "full"
+    protocol_label = allowed_protocol
+    if allowed_protocol == "V2" and b_level == "B1" and d_level == "D0" and c_level == "C0":
+        protocol_scope = "minimal"
+        protocol_label = "V2 (minimal; Bitcoin Originals B1 only)"
+    elif allowed_protocol == "V3":
+        exactly_one_valid_hash_for_label = (
+            len([h for h in hashes if
+                 SHA256_RE.match(h.get("expected", "")) and
+                 SHA256_RE.match(h.get("computed", "")) and
+                 h.get("match") is True and
+                 h.get("expected", "").lower() == h.get("computed", "").lower() and
+                 h.get("expected_hash_source") and
+                 h.get("expected_hash_authority_class", "unknown") != "unknown"
+            ]) == 1
+        )
+        stronger_hash_coverage_for_label = (
+            level_at_least(D_LEVELS, d_level, "D2") and
+            level_at_least(C_LEVELS, c_level, "C2")
+        )
+        if exactly_one_valid_hash_for_label and not stronger_hash_coverage_for_label:
+            protocol_scope = "minimal"
+            protocol_label = "V3 (minimal; one valid declared hash computed)"
+    elif allowed_protocol == "V4+":
+        # V4+ minimal: at least one independent reproduction but not all three domains
+        independent_any = any(
+            level_at_least(B_LEVELS, b_level, lvl) or level_at_least(D_LEVELS, d_level, lvl) or level_at_least(C_LEVELS, c_level, lvl)
+            for lvl in ("B3", "D3", "C3")
+        )
+        independent_all_three = (
+            level_at_least(B_LEVELS, b_level, "B3") and
+            level_at_least(D_LEVELS, d_level, "D3") and
+            level_at_least(C_LEVELS, c_level, "C3")
+        )
+        if independent_any and not independent_all_three:
+            protocol_scope = "minimal"
+            protocol_label = "V4+ (minimal independent reproduction)"
+
     result = {
         "schema": "trinityaccord.claim-gate-output.v1",
         "input": str(input_path),
         "status": status,
         "allowed_protocol_level": allowed_protocol,
+        "allowed_protocol_label": protocol_label,
+        "allowed_protocol_scope": protocol_scope,
         "allowed_component_levels": component_levels,
         "authority_boundary_recognized": authority_boundary_recognized,
         "forbidden_claims": forbidden,
