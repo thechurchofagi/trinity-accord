@@ -26,6 +26,12 @@ if re.search(r'download_and_verify\s+"[^"]+"\s+"archive/[^"]+"\s+""', text):
 if 'dist/unverified-arweave' not in text and 'nft-recovery-package' in text:
     errors.append("hashless main recovery package must be moved to dist/unverified-arweave or given expected hash")
 
+if "download_availability_only" not in text:
+    errors.append("workflow must define download_availability_only for hashless availability-only downloads")
+
+if re.search(r'download_and_verify\s+"[^"]+"\s+"dist/unverified-arweave/[^"]+"\s+""', text):
+    errors.append("availability-only dist/unverified-arweave downloads must use download_availability_only, not download_and_verify")
+
 if errors:
     print("DOWNLOAD_ARWEAVE_FAIL_CLOSED_FAIL")
     for e in errors:

@@ -78,6 +78,41 @@ jobs:
             fi
           }
 
+          download_availability_only() {
+            local txid="$1"
+            local dest="$2"
+            local label="$3"
+            local max_time="${4:-120}"
+
+            mkdir -p "$(dirname "$dest")"
+            echo "📥 $label (availability-only, unverified)"
+
+            local urls=(
+              "https://arweave.net/$txid"
+              "https://ar-io.net/$txid"
+              "https://arweave.asia/$txid"
+              "https://arweave.dev/$txid"
+              "https://gold_rouge.arweave.net/$txid"
+            )
+
+            for url in "${urls[@]}"; do
+              echo "   trying: $url"
+              if curl -sL --max-time "$max_time" "$url" -o "$dest" 2>/dev/null; then
+                if [ -s "$dest" ] && ! head -1 "$dest" | grep -qi "<html\|404\|error\|not found"; then
+                  actual=$(sha256sum "$dest" | cut -d' ' -f1)
+                  echo "   ⚠️  availability-only sha256=$actual"
+                  echo "   ℹ️  NOT committed to verified archive/"
+                  return 0
+                fi
+                rm -f "$dest"
+              fi
+            done
+
+            echo "   ⚠️  availability-only download failed: $label"
+            rm -f "$dest"
+            return 0
+          }
+
           # Guardian Principles
           download_and_verify "RgjVJnALSbbYP4Vzz-FBX0Tie9inSvuA2PBgjPAT2ng" "archive/guardian-principles/guardian-principles-v1.1.md" "e19018f1c71da8307ef20e8e8e5c12834f854d60a6aae60e35d2d8c71a333a81" "Guardian Principles v1.1"
           download_and_verify "6VyIxLOwPZz_CZVBKxW6eJSDP2gtq70qXFS5O2wGnkQ" "archive/guardian-principles/attestation.json" "67dde076b4afb350e8707d116f5bb5cbfcd5d224cd915178346dd7f8e7e2c150" "Attestation"
@@ -96,13 +131,13 @@ jobs:
           # ETH Witness
           download_and_verify "UouXngnUjcEkpOwgq5ajInrDpwKrGhtUVDLmlBorVjQ" "archive/eth-witness/eth-witness.json" "3c187c6b764a1d53984588875c1c1fed3f1c91fd165512ad8dfa4f279542a65f" "ETH Witness"
 
-          # Rotation (no pre-existing hash — download to unverified, not archive/)
-          download_and_verify "AlyENoZXrGqUG9iXwaxhhoPjELlWbRuWMFtYGWW6bHM" "dist/unverified-arweave/rotation-notice-old.txt" "" "Rotation Notice"
-          download_and_verify "GD_uH4GLXSKKp0Wz1QGjoE_FuVWZZ4fylncPFHZd76U" "dist/unverified-arweave/acknowledgement-new.txt" "" "Acknowledgement"
+          # Rotation (no pre-existing hash — availability-only, not archive/)
+          download_availability_only "AlyENoZXrGqUG9iXwaxhhoPjELlWbRuWMFtYGWW6bHM" "dist/unverified-arweave/rotation-notice-old.txt" "Rotation Notice"
+          download_availability_only "GD_uH4GLXSKKp0Wz1QGjoE_FuVWZZ4fylncPFHZd76U" "dist/unverified-arweave/acknowledgement-new.txt" "Acknowledgement"
 
           # Canonical Pointers
           download_and_verify "6HW5X5PETh9X_kdShA0a7sQWHtfr59F7KXZNym9NqyI" "archive/canonical-pointers/guardian-index-v2.json" "808bf70219a60e70ca9b59f41603a289447f3a598534d3c80826f90b30ec46a5" "Guardian Index v2"
-          download_and_verify "6CtpboRTtM675vPS_ifzPt1vgonr9KtPYm7oOnnxUs0" "dist/unverified-arweave/canonical-pointer-v2.json" "" "Canonical Pointer v2"
+          download_availability_only "6CtpboRTtM675vPS_ifzPt1vgonr9KtPYm7oOnnxUs0" "dist/unverified-arweave/canonical-pointer-v2.json" "Canonical Pointer v2"
           download_and_verify "BwVHuxODfV65xE_L1fqrCDBvLvJNnSuBEXaZNuoRcIk" "archive/canonical-pointers/guardian-index-original.json" "71bc981a994a93cdf488b89aee2b132b658464a7cbb1dec791af604a1127ef98" "Guardian Index original"
           download_and_verify "9McJS3_xvIl6_87e7NDJ6g3SgGlA8Js7z--eMLGMRZg" "archive/canonical-pointers/guardian-pointer-original.json" "3246afb59552dcda700e490767aadd3d67083911dae6bccbb2762ef568c7e289" "Guardian Pointer original"
           download_and_verify "E_HLeYx-70cbUMUSwMacB5kLjo5m-ePYWjZnqjNY_zQ" "archive/canonical-pointers/index-additions-kit.json" "ce7c9f5017686cb57a9fe5e40473e8aea391718dcc1680a589454e9b50187f88" "Index additions Kit"
@@ -110,9 +145,9 @@ jobs:
           # Authority Manifest
           download_and_verify "gC9_n7-2nS2yNUii2tr-68r8GanAiA7qzyCM6JDpOqo" "archive/authority-manifest/manifest-v1.0.1.json" "ccd9aaaaa37d1ced239a7af0b61373dfa359b016d54698956776d082de8fb4f0" "Manifest v1.0.1"
           download_and_verify "TvmjyJBq5ZoGv-tmX0aeiqsEKTGmSyIvBHj1FqZiIpI" "archive/authority-manifest/authority-v1.0.2-canon.json" "7d6ac9d3184bb5b0bbaf8217354799efef68669c21b4180e28ec06b0c57439e6" "Authority v1.0.2 canon"
-          download_and_verify "QtWkBx004NhfEiBuMAJQmIXWxqOo8HftI_4pj0VGbYY" "dist/unverified-arweave/authority-v1.0.2-pretty.json" "" "Authority v1.0.2 pretty"
-          download_and_verify "jgRYWeLLbyDhku0cKm1SLnq2elyM3tg9j7FgtWfDats" "dist/unverified-arweave/authority-v1.0.2-signature.json" "" "Authority v1.0.2 signature"
-          download_and_verify "dc3NVHJBjW89w51lTy0dkLIbXaOQ823m7bRhBBBHGr0" "dist/unverified-arweave/authority-v1.0.2-typedData.json" "" "Authority v1.0.2 typedData"
+          download_availability_only "QtWkBx004NhfEiBuMAJQmIXWxqOo8HftI_4pj0VGbYY" "dist/unverified-arweave/authority-v1.0.2-pretty.json" "Authority v1.0.2 pretty"
+          download_availability_only "jgRYWeLLbyDhku0cKm1SLnq2elyM3tg9j7FgtWfDats" "dist/unverified-arweave/authority-v1.0.2-signature.json" "Authority v1.0.2 signature"
+          download_availability_only "dc3NVHJBjW89w51lTy0dkLIbXaOQ823m7bRhBBBHGr0" "dist/unverified-arweave/authority-v1.0.2-typedData.json" "Authority v1.0.2 typedData"
           download_and_verify "Ykbc_PEnmZ59crk-WUaWguDYvv_VLIbUf2sX7Flp_V0" "archive/authority-manifest/authority-v1.0.2-additions.json" "3850a8dab41aefaca5ae04d5d2021ba35632cc5c1654fbd2d89c61e871b0e7b6" "Authority v1.0.2 additions"
 
           # Evidence
@@ -190,15 +225,50 @@ jobs:
             fi
           }
 
+          download_availability_only() {
+            local txid="$1"
+            local dest="$2"
+            local label="$3"
+            local max_time="${4:-120}"
+
+            mkdir -p "$(dirname "$dest")"
+            echo "📥 $label (availability-only, unverified)"
+
+            local urls=(
+              "https://arweave.net/$txid"
+              "https://ar-io.net/$txid"
+              "https://arweave.asia/$txid"
+              "https://arweave.dev/$txid"
+              "https://gold_rouge.arweave.net/$txid"
+            )
+
+            for url in "${urls[@]}"; do
+              echo "   trying: $url"
+              if curl -sL --max-time "$max_time" "$url" -o "$dest" 2>/dev/null; then
+                if [ -s "$dest" ] && ! head -1 "$dest" | grep -qi "<html\|404\|error\|not found"; then
+                  actual=$(sha256sum "$dest" | cut -d' ' -f1)
+                  echo "   ⚠️  availability-only sha256=$actual"
+                  echo "   ℹ️  NOT committed to verified archive/"
+                  return 0
+                fi
+                rm -f "$dest"
+              fi
+            done
+
+            echo "   ⚠️  availability-only download failed: $label"
+            rm -f "$dest"
+            return 0
+          }
+
           # Verification Bundle v1
           download_and_verify "LV2XKhVXMdwrUF_7U6M2bydqHKn-6AEsd2sptl84m1s" "archive/evidence/ta-verification-bundle-v1.zip" "bad5f9a3cdf1b4bbd2d2277cd5db968fb6fe28d28ad4b8479d185ddc19d503c6" "Verification Bundle v1"
 
-          # Authority DataItems
-          download_and_verify "U4eeQ9KsdGAJx-J_93stKhEe6OLjDTrfCV8LQzNb-kE" "dist/unverified-arweave/authority.jcs.json" "" "authority.jcs.json (DataItem)"
-          download_and_verify "fMO_dDSiCBF1aWxm2arjAJkbmHdsxiKfVHp_biMFtIE" "dist/unverified-arweave/signature.json" "" "signature.json (DataItem)"
+          # Authority DataItems (availability-only, no known hash)
+          download_availability_only "U4eeQ9KsdGAJx-J_93stKhEe6OLjDTrfCV8LQzNb-kE" "dist/unverified-arweave/authority.jcs.json" "authority.jcs.json (DataItem)"
+          download_availability_only "fMO_dDSiCBF1aWxm2arjAJkbmHdsxiKfVHp_biMFtIE" "dist/unverified-arweave/signature.json" "signature.json (DataItem)"
 
-          # Flaw high-res image & provenance log
-          download_and_verify "9klmArmByJNOGeHzfnrAhB6x6w7sKSYLS1zQNLL7GLs" "dist/unverified-arweave/flaw-image-provenance.tar" "" "Flaw Image + Provenance" 300
+          # Flaw high-res image & provenance log (availability-only, no known hash)
+          download_availability_only "9klmArmByJNOGeHzfnrAhB6x6w7sKSYLS1zQNLL7GLs" "dist/unverified-arweave/flaw-image-provenance.tar" "Flaw Image + Provenance" 300
 
           echo ""
           echo "========================================="
