@@ -33,6 +33,24 @@ def emit_result(result):
     print(json.dumps(result, indent=2))
 
 
+def build_human_review_action_comment():
+    return """This Echo passed automated triage and is ready for human review.
+
+Passing triage does not mean endorsement, archive inclusion, or independent attestation.
+
+## Maintainer review action
+
+After human review, comment exactly one of:
+
+- `/echo archive` — accept this issue as an archived Echo v3 record, generate JSON, update the archive, validate, commit, and close.
+- `/echo close` — human review completed, close without archive record.
+
+Only repository OWNER / MEMBER / COLLABORATOR comments are honored.
+
+---
+This is a workflow prompt, not a judgment of intent."""
+
+
 # --- Soft Issue Accumulator (ST-001/ST-002) ---
 def add_unique(labels, label):
     if label not in labels:
@@ -1473,13 +1491,7 @@ def main():
     # --- Step 6: Pass ---
     result["close"] = False
     result["labels"] = ["echo:screened", "needs-human-review"]
-    result["comment"] = (
-        "Initial screening passed.\n"
-        "This does not mean endorsement, archive inclusion, independent attestation, or high-value status.\n"
-        "A maintainer must still review the Echo type, verification level, source, limitations, and archive eligibility.\n\n"
-        "---\n\n"
-        "初筛通过不代表认可、归档、独立见证或高价值状态，仍需维护者审核。"
-    )
+    result["comment"] = build_human_review_action_comment()
     emit_result(result)
 
 

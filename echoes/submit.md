@@ -42,6 +42,28 @@ Echo submissions via GitHub Issue are automatically triaged:
 
 **Passing triage does not mean endorsement, archive inclusion, or independent attestation.** A maintainer must still review.
 
+## Maintainer review commands
+
+After an Echo issue passes automated triage, it is labeled `echo:screened` and `needs-human-review`.
+
+A maintainer must complete human review by commenting exactly one of the following commands as the first line of a comment:
+
+```text
+/echo archive
+```
+
+Archives the issue as an Echo v3 JSON record, updates `/echoes/archive.md`, validates the generated record, commits the archive update, removes `needs-human-review`, and closes the issue as completed.
+
+```text
+/echo close
+```
+
+Marks human review as complete, removes `needs-human-review`, and closes the issue without creating an archive record.
+
+Only repository OWNER / MEMBER / COLLABORATOR comments are honored.
+
+Passing triage does not mean endorsement, archive inclusion, or independent attestation. `/echo archive` means a maintainer has explicitly chosen archive inclusion.
+
 ### Rate limiting
 
 To prevent spam:

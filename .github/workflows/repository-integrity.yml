@@ -124,6 +124,9 @@ jobs:
       - name: Test verification rule consistency matrix
         run: python3 scripts/test_verification_rule_consistency_matrix.py
 
+      - name: Test Echo human review automation
+        run: python3 scripts/test_echo_human_review_automation.py
+
       - name: Test GitHub Actions pinning
         run: python3 scripts/test_action_pinning.py
 

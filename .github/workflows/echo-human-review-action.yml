@@ -1,0 +1,139 @@
+name: Echo Human Review Action
+
+on:
+  issue_comment:
+    types: [created]
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: echo-human-review-${{ github.event.issue.number }}
+  cancel-in-progress: false
+
+jobs:
+  review-action:
+    if: ${{ !github.event.issue.pull_request && startsWith(github.event.comment.body, '/echo ') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+        with:
+          fetch-depth: 0
+
+      - name: Parse and authorize command
+        id: cmd
+        env:
+          COMMENT_BODY: ${{ github.event.comment.body }}
+          COMMENT_ASSOC: ${{ github.event.comment.author_association }}
+          COMMENT_USER: ${{ github.event.comment.user.login }}
+        run: |
+          set -euo pipefail
+
+          case "$COMMENT_ASSOC" in
+            OWNER|MEMBER|COLLABORATOR)
+              ;;
+            *)
+              echo "authorized=false" >> "$GITHUB_OUTPUT"
+              echo "command=none" >> "$GITHUB_OUTPUT"
+              echo "Unauthorized commenter: $COMMENT_USER ($COMMENT_ASSOC)"
+              exit 0
+              ;;
+          esac
+
+          first_line="$(printf '%s\n' "$COMMENT_BODY" | sed -n '1p' | tr -d '\r')"
+
+          case "$first_line" in
+            "/echo archive")
+              echo "authorized=true" >> "$GITHUB_OUTPUT"
+              echo "command=archive" >> "$GITHUB_OUTPUT"
+              ;;
+            "/echo close")
+              echo "authorized=true" >> "$GITHUB_OUTPUT"
+              echo "command=close" >> "$GITHUB_OUTPUT"
+              ;;
+            *)
+              echo "authorized=true" >> "$GITHUB_OUTPUT"
+              echo "command=none" >> "$GITHUB_OUTPUT"
+              ;;
+          esac
+
+      - name: Stop on ignored command
+        if: ${{ steps.cmd.outputs.authorized != 'true' || steps.cmd.outputs.command == 'none' }}
+        run: |
+          echo "No authorized echo review action requested."
+
+      - name: Fetch issue JSON
+        if: ${{ steps.cmd.outputs.authorized == 'true' && steps.cmd.outputs.command != 'none' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          set -euo pipefail
+          gh issue view "$ISSUE_NUMBER" \
+            --repo "$GITHUB_REPOSITORY" \
+            --json number,title,body,url,createdAt,updatedAt,author,labels,state \
+            > issue.json
+          cat issue.json
+
+      - name: Archive Echo issue
+        if: ${{ steps.cmd.outputs.command == 'archive' }}
+        env:
+          REVIEWER: ${{ github.actor }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+
+          python3 scripts/archive_echo_issue.py \
+            --issue-json issue.json \
+            --reviewer "$REVIEWER" \
+            --write \
+            --result-json archive_result.json
+
+          record_path="$(python3 - <<'PY'
+          import json
+          print(json.load(open("archive_result.json", encoding="utf-8"))["record_path"])
+          PY
+          )"
+
+          python3 scripts/validate_agent_submission.py "$record_path"
+          python3 scripts/check_consistency.py
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add echoes/records echoes/archive.md
+          if git diff --cached --quiet; then
+            echo "No archive file changes to commit."
+          else
+            git commit -m "archive echo issue #${ISSUE_NUMBER}"
+            git push
+          fi
+
+          gh issue edit "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" --remove-label "needs-human-review" || true
+
+          gh issue comment "$ISSUE_NUMBER" \
+            --repo "$GITHUB_REPOSITORY" \
+            --body "Human review completed. Archived as \`$record_path\`. Closing as completed."
+
+          gh issue close "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" --reason completed
+
+      - name: Close reviewed Echo issue without archive
+        if: ${{ steps.cmd.outputs.command == 'close' }}
+        env:
+          REVIEWER: ${{ github.actor }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+
+          gh issue edit "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" --remove-label "needs-human-review" || true
+
+          gh issue comment "$ISSUE_NUMBER" \
+            --repo "$GITHUB_REPOSITORY" \
+            --body "Human review completed by @${REVIEWER}. Closed without archive record."
+
+          gh issue close "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" --reason completed
