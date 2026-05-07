@@ -1,29 +1,35 @@
 {
-  "schema": "trinity-accord.github-hash-manifest.v1",
+  "schema": "trinity-accord.asset-manifest.v2",
   "generated_at": "2026-04-30T20:10:00Z",
   "boundary": "non-amending; BTC originals prevail",
-  "note": "SHA-256 hashes of all files in archive/. For Arweave-originated files, the arweave_tx field links to the on-chain source.",
+  "note": "Asset-domain-aware manifest. files[] are repository files; release_assets[] are GitHub Release assets; arweave_assets[] are Arweave source/external assets; ipfs_assets[] are CID-addressed assets.",
   "files": [
     {
       "path": "archive/DOWNLOADS.md",
       "sha256": "53f14ecc4bd2ac582951f18f7cbdb81c11a97e18b20f76e825409151284e0747",
       "size_bytes": 4221,
       "verified": null,
-      "note": "no expected hash from Arweave; actual hash recorded"
+      "note": "no expected hash from Arweave; actual hash recorded",
+      "storage_domain": "repo",
+      "asset_id": "downloads_md"
     },
     {
       "path": "archive/README.md",
       "sha256": "e4ee02f5f48c076526c79f646da608214700eb12c6161232f768127d95597ba3",
       "size_bytes": 2341,
       "verified": null,
-      "note": "no expected hash from Arweave; actual hash recorded"
+      "note": "no expected hash from Arweave; actual hash recorded",
+      "storage_domain": "repo",
+      "asset_id": "readme_md"
     },
     {
       "path": "archive/VERIFICATION-REPORT.md",
       "sha256": "b8b61d3df23a03698f91ee856f3b997619b4c57d1a6d5a16b0f0e98086424023",
       "size_bytes": 7014,
       "verified": null,
-      "note": "no expected hash from Arweave; actual hash recorded"
+      "note": "no expected hash from Arweave; actual hash recorded",
+      "storage_domain": "repo",
+      "asset_id": "verification_report_md"
     },
     {
       "path": "archive/guardian-principles/attestation.json",
@@ -31,7 +37,9 @@
       "size_bytes": 877,
       "arweave_tx": "6VyIxLOwPZz_CZVBKxW6eJSDP2gtq70qXFS5O2wGnkQ",
       "expected_sha256": "67dde076b4afb350e8707d116f5bb5cbfcd5d224cd915178346dd7f8e7e2c150",
-      "verified": true
+      "verified": true,
+      "storage_domain": "repo",
+      "asset_id": "guardian_principles_attestation_json"
     },
     {
       "path": "archive/guardian-principles/guardian-principles-original.md",
@@ -39,7 +47,9 @@
       "size_bytes": 2446,
       "arweave_tx": "w9LPP30D31zd5M60v18WXpWuig0_wc9EVNnXk8kz1vA",
       "expected_sha256": "3e9d2bd10c3e8f4d37713c4b8e28d518fd7efff52613e572a1451fedadab5483",
-      "verified": true
+      "verified": true,
+      "storage_domain": "repo",
+      "asset_id": "guardian_principles_guardian_principles_original_md"
     },
     {
       "path": "archive/guardian-principles/guardian-principles-v1.1.md",
@@ -47,7 +57,9 @@
       "size_bytes": 4694,
       "arweave_tx": "RgjVJnALSbbYP4Vzz-FBX0Tie9inSvuA2PBgjPAT2ng",
       "expected_sha256": "e19018f1c71da8307ef20e8e8e5c12834f854d60a6aae60e35d2d8c71a333a81",
-      "verified": true
+      "verified": true,
+      "storage_domain": "repo",
+      "asset_id": "guardian_principles_guardian_principles_v1_1_md"
     },
     {
       "path": "archive/guardian-principles/index-additions.json",
@@ -55,7 +67,9 @@
       "size_bytes": 1746,
       "arweave_tx": "zSNxQYgCQvtQ6QGaJXd9JlApQqitwgCZAp2GquvQXbA",
       "expected_sha256": "82b41c7a3a1dbef329e19bb32cc70b95307c1076c7a804ad0a44e81952ae9cfc",
-      "verified": true
+      "verified": true,
+      "storage_domain": "repo",
+      "asset_id": "guardian_principles_index_additions_json"
     },
     {
       "path": "archive/guardian-principles/pointer.json",
@@ -63,14 +77,18 @@
       "size_bytes": 636,
       "arweave_tx": "f3Gbo10tRrpkJumm2PfVlokF78jRne4qj9LCnBxK51Q",
       "expected_sha256": "59894d68e048b385ffa506b37c4462fcdf3575ef7e025b92c2cfb5ba36f7936c",
-      "verified": true
+      "verified": true,
+      "storage_domain": "repo",
+      "asset_id": "guardian_principles_pointer_json"
     },
     {
       "path": "archive/verification/start-here.md",
       "sha256": "2b975e04ea8130d283d65eb06ca63a85517d0ba03ba691304824001a52df4524",
       "size_bytes": 4125,
       "verified": null,
-      "note": "no expected hash from Arweave; actual hash recorded"
+      "note": "no expected hash from Arweave; actual hash recorded",
+      "storage_domain": "repo",
+      "asset_id": "verification_start_here_md"
     },
     {
       "path": "archive/btc-signature/btc-signature.json",
@@ -78,14 +96,18 @@
       "size_bytes": 701,
       "arweave_tx": "fCweXoZVcFeJPkEBIgkYWIYn0xB1UsMx2_oBjECzK6U",
       "expected_sha256": "8e70e0e0d8f8e0cdd8e388ee4c462f86358a6ac9bb6231701d7876439ada561b",
-      "verified": true
+      "verified": true,
+      "storage_domain": "repo",
+      "asset_id": "btc_signature_btc_signature_json"
     },
     {
       "path": "archive/authority-manifest/authority-list.md",
       "sha256": "8a77b4be8a194cdbe6d1be22488b65c338a003e06429f4b1879d1a960c1b94f4",
       "size_bytes": 9478,
       "verified": null,
-      "note": "no expected hash from Arweave; actual hash recorded"
+      "note": "no expected hash from Arweave; actual hash recorded",
+      "storage_domain": "repo",
+      "asset_id": "authority_manifest_authority_list_md"
     },
     {
       "path": "archive/authority-manifest/authority-v1.0.2-additions.json",
@@ -93,7 +115,9 @@
       "size_bytes": 916,
       "arweave_tx": "Ykbc_PEnmZ59crk-WUaWguDYvv_VLIbUf2sX7Flp_V0",
       "expected_sha256": "3850a8dab41aefaca5ae04d5d2021ba35632cc5c1654fbd2d89c61e871b0e7b6",
-      "verified": true
+      "verified": true,
+      "storage_domain": "repo",
+      "asset_id": "authority_manifest_authority_v1_0_2_additions_json"
     },
     {
       "path": "archive/authority-manifest/authority-v1.0.2-canon.json",
@@ -103,7 +127,9 @@
       "expected_sha256": "7d6ac9d3184bb5b0bbaf8217354799efef68669c21b4180e28ec06b0c57439e6",
       "verified": false,
       "hash_mismatch": true,
-      "mismatch_reason": "actual sha256 does not match expected_sha256; do not treat as verified"
+      "mismatch_reason": "actual sha256 does not match expected_sha256; do not treat as verified",
+      "storage_domain": "repo",
+      "asset_id": "authority_manifest_authority_v1_0_2_canon_json"
     },
     {
       "path": "archive/authority-manifest/authority-v1.0.2-pretty.json",
@@ -111,7 +137,9 @@
       "size_bytes": 11817,
       "arweave_tx": "QtWkBx004NhfEiBuMAJQmIXWxqOo8HftI_4pj0VGbYY",
       "verified": null,
-      "note": "no expected hash from Arweave; actual hash recorded"
+      "note": "no expected hash from Arweave; actual hash recorded",
+      "storage_domain": "repo",
+      "asset_id": "authority_manifest_authority_v1_0_2_pretty_json"
     },
     {
       "path": "archive/authority-manifest/authority-v1.0.2-signature.json",
@@ -119,7 +147,9 @@
       "size_bytes": 1195,
       "arweave_tx": "jgRYWeLLbyDhku0cKm1SLnq2elyM3tg9j7FgtWfDats",
       "verified": null,
-      "note": "no expected hash from Arweave; actual hash recorded"
+      "note": "no expected hash from Arweave; actual hash recorded",
+      "storage_domain": "repo",
+      "asset_id": "authority_manifest_authority_v1_0_2_signature_json"
     },
     {
       "path": "archive/authority-manifest/authority-v1.0.2-typedData.json",
@@ -127,7 +157,9 @@
       "size_bytes": 746,
       "arweave_tx": "dc3NVHJBjW89w51lTy0dkLIbXaOQ823m7bRhBBBHGr0",
       "verified": null,
-      "note": "no expected hash from Arweave; actual hash recorded"
+      "note": "no expected hash from Arweave; actual hash recorded",
+      "storage_domain": "repo",
+      "asset_id": "authority_manifest_authority_v1_0_2_typeddata_json"
     },
     {
       "path": "archive/authority-manifest/authority.jcs.json",
@@ -135,14 +167,18 @@
       "size_bytes": 7344,
       "arweave_tx": "U4eeQ9KsdGAJx-J_93stKhEe6OLjDTrfCV8LQzNb-kE",
       "verified": null,
-      "note": "no expected hash from Arweave; actual hash recorded"
+      "note": "no expected hash from Arweave; actual hash recorded",
+      "storage_domain": "repo",
+      "asset_id": "authority_manifest_authority_jcs_json"
     },
     {
       "path": "archive/authority-manifest/guardian-appendix-authority-charter.md",
       "sha256": "f59ef9db7a92984c2264e59e6186639b4302bfdb4ce0dc726acb33e6c2a41026",
       "size_bytes": 2300,
       "verified": null,
-      "note": "no expected hash from Arweave; actual hash recorded"
+      "note": "no expected hash from Arweave; actual hash recorded",
+      "storage_domain": "repo",
+      "asset_id": "authority_manifest_guardian_appendix_authority_charter_md"
     },
     {
       "path": "archive/authority-manifest/manifest-v1.0.1.json",
@@ -150,7 +186,9 @@
       "size_bytes": 7344,
       "arweave_tx": "gC9_n7-2nS2yNUii2tr-68r8GanAiA7qzyCM6JDpOqo",
       "expected_sha256": "ccd9aaaaa37d1ced239a7af0b61373dfa359b016d54698956776d082de8fb4f0",
-      "verified": true
+      "verified": true,
+      "storage_domain": "repo",
+      "asset_id": "authority_manifest_manifest_v1_0_1_json"
     },
     {
       "path": "archive/authority-manifest/signature.json",
@@ -158,7 +196,9 @@
       "size_bytes": 1245,
       "arweave_tx": "fMO_dDSiCBF1aWxm2arjAJkbmHdsxiKfVHp_biMFtIE",
       "verified": null,
-      "note": "no expected hash from Arweave; actual hash recorded"
+      "note": "no expected hash from Arweave; actual hash recorded",
+      "storage_domain": "repo",
+      "asset_id": "authority_manifest_signature_json"
     },
     {
       "path": "archive/scripts/sign.mjs",
@@ -166,7 +206,9 @@
       "size_bytes": 4623,
       "arweave_tx": "h3xIwqi36GUmd6xJLEGi6wSqFXxAa2BUcwVZQhFCo0k",
       "expected_sha256": "8d60212683e814133267037c4a8a8267eeaeff29f9c4382a4f434a79f16bd8ea",
-      "verified": true
+      "verified": true,
+      "storage_domain": "repo",
+      "asset_id": "scripts_sign_mjs"
     },
     {
       "path": "archive/scripts/verification-kit.tar.gz",
@@ -174,7 +216,9 @@
       "size_bytes": 31040,
       "arweave_tx": "X4KOUkf-1ciFD3Q-gMA0i94t1hAVXGrUDm0q5amL4rc",
       "expected_sha256": "ef68b69fe1cdd2523724dee511c9e8ea7bae2cceaff794664107970b18c61931",
-      "verified": true
+      "verified": true,
+      "storage_domain": "repo",
+      "asset_id": "scripts_verification_kit_tar_gz"
     },
     {
       "path": "archive/scripts/verify.mjs",
@@ -182,14 +226,18 @@
       "size_bytes": 1022,
       "arweave_tx": "aMZIVDYIBovkn6s1868wdpEwnErLGYlT-JHLluqh7BM",
       "expected_sha256": "c38fa6703d15f5d41fa813722524d14badc2472b387354875afab4478e607a1f",
-      "verified": true
+      "verified": true,
+      "storage_domain": "repo",
+      "asset_id": "scripts_verify_mjs"
     },
     {
       "path": "archive/evidence/covenant-fortification.md",
       "sha256": "574f38bfb583ecda7f11a341f28e48a586b86426f66a29f517381de49a78c782",
       "size_bytes": 3347,
       "verified": null,
-      "note": "no expected hash from Arweave; actual hash recorded"
+      "note": "no expected hash from Arweave; actual hash recorded",
+      "storage_domain": "repo",
+      "asset_id": "evidence_covenant_fortification_md"
     },
     {
       "path": "archive/evidence/digest-manifest.csv",
@@ -197,7 +245,9 @@
       "size_bytes": 502283,
       "arweave_tx": "i02XhY7No6NLZDfEwFUU6nZoGaPu7K0f42LDNDNnZEo",
       "expected_sha256": "121c5a1da38f733c3991f8d3f030f39a019501d43828f84c13ea93ac3873511b",
-      "verified": true
+      "verified": true,
+      "storage_domain": "repo",
+      "asset_id": "evidence_digest_manifest_csv"
     },
     {
       "path": "archive/evidence/digest-manifest.json",
@@ -205,7 +255,9 @@
       "size_bytes": 685537,
       "arweave_tx": "X2IuLCIM4vLJSzgRMl_YEmxYSvPceMrAdug9a3i7p4o",
       "expected_sha256": "c045642fe5cfab5eb78af7b40e98b9699dfff9121690e07ec6acaa07a445d6e9",
-      "verified": true
+      "verified": true,
+      "storage_domain": "repo",
+      "asset_id": "evidence_digest_manifest_json"
     },
     {
       "path": "archive/evidence/ots-anchor",
@@ -213,7 +265,9 @@
       "size_bytes": 3614,
       "arweave_tx": "TTi9d8fqm9Cw4yRPkwX4gdlaRzBnjJID-LAs9Y3CS0M",
       "expected_sha256": "fa3f306ab30525677595d9f38808a87a8dd96260468285c8f8066661e853d907",
-      "verified": true
+      "verified": true,
+      "storage_domain": "repo",
+      "asset_id": "evidence_ots_anchor"
     },
     {
       "path": "archive/evidence/ta-verification-bundle-v1.zip",
@@ -221,7 +275,9 @@
       "size_bytes": 15689,
       "arweave_tx": "LV2XKhVXMdwrUF_7U6M2bydqHKn-6AEsd2sptl84m1s",
       "expected_sha256": "bad5f9a3cdf1b4bbd2d2277cd5db968fb6fe28d28ad4b8479d185ddc19d503c6",
-      "verified": true
+      "verified": true,
+      "storage_domain": "repo",
+      "asset_id": "evidence_ta_verification_bundle_v1_zip"
     },
     {
       "path": "archive/evidence/nft-recovery-package/recovery-package.bin",
@@ -229,7 +285,9 @@
       "size_bytes": 716478,
       "arweave_tx": "O-Rk3kFxesPGhuYP4KHAZl54xR2urDRKcGaVqjVnB-Q",
       "expected_sha256": "f8b0dad700ad7a88ba343930ded7d8c3e94b57720ddbdafa0d731b732acdffbc",
-      "verified": true
+      "verified": true,
+      "storage_domain": "repo",
+      "asset_id": "evidence_nft_recovery_package_recovery_package_bin"
     },
     {
       "path": "archive/rotation/acknowledgement-new.txt",
@@ -237,7 +295,9 @@
       "size_bytes": 1009,
       "arweave_tx": "GD_uH4GLXSKKp0Wz1QGjoE_FuVWZZ4fylncPFHZd76U",
       "verified": null,
-      "note": "no expected hash from Arweave; actual hash recorded"
+      "note": "no expected hash from Arweave; actual hash recorded",
+      "storage_domain": "repo",
+      "asset_id": "rotation_acknowledgement_new_txt"
     },
     {
       "path": "archive/rotation/rotation-notice-old.txt",
@@ -245,14 +305,18 @@
       "size_bytes": 1183,
       "arweave_tx": "AlyENoZXrGqUG9iXwaxhhoPjELlWbRuWMFtYGWW6bHM",
       "verified": null,
-      "note": "no expected hash from Arweave; actual hash recorded"
+      "note": "no expected hash from Arweave; actual hash recorded",
+      "storage_domain": "repo",
+      "asset_id": "rotation_rotation_notice_old_txt"
     },
     {
       "path": "archive/rotation/rotation-notice.md",
       "sha256": "ab2c41625372c326407d48202d17d076e6cd4b115b8981a8207f17c68d428ae9",
       "size_bytes": 1373,
       "verified": null,
-      "note": "no expected hash from Arweave; actual hash recorded"
+      "note": "no expected hash from Arweave; actual hash recorded",
+      "storage_domain": "repo",
+      "asset_id": "rotation_rotation_notice_md"
     },
     {
       "path": "archive/eth-witness/eth-witness.json",
@@ -260,7 +324,9 @@
       "size_bytes": 606,
       "arweave_tx": "UouXngnUjcEkpOwgq5ajInrDpwKrGhtUVDLmlBorVjQ",
       "expected_sha256": "3c187c6b764a1d53984588875c1c1fed3f1c91fd165512ad8dfa4f279542a65f",
-      "verified": true
+      "verified": true,
+      "storage_domain": "repo",
+      "asset_id": "eth_witness_eth_witness_json"
     },
     {
       "path": "archive/canonical-pointers/canonical-pointer-v2.json",
@@ -268,7 +334,9 @@
       "size_bytes": 558,
       "arweave_tx": "6CtpboRTtM675vPS_ifzPt1vgonr9KtPYm7oOnnxUs0",
       "verified": null,
-      "note": "no expected hash from Arweave; actual hash recorded"
+      "note": "no expected hash from Arweave; actual hash recorded",
+      "storage_domain": "repo",
+      "asset_id": "canonical_pointers_canonical_pointer_v2_json"
     },
     {
       "path": "archive/canonical-pointers/guardian-index-original.json",
@@ -276,7 +344,9 @@
       "size_bytes": 1200,
       "arweave_tx": "BwVHuxODfV65xE_L1fqrCDBvLvJNnSuBEXaZNuoRcIk",
       "expected_sha256": "71bc981a994a93cdf488b89aee2b132b658464a7cbb1dec791af604a1127ef98",
-      "verified": true
+      "verified": true,
+      "storage_domain": "repo",
+      "asset_id": "canonical_pointers_guardian_index_original_json"
     },
     {
       "path": "archive/canonical-pointers/guardian-index-v2.json",
@@ -284,7 +354,9 @@
       "size_bytes": 1145,
       "arweave_tx": "6HW5X5PETh9X_kdShA0a7sQWHtfr59F7KXZNym9NqyI",
       "expected_sha256": "808bf70219a60e70ca9b59f41603a289447f3a598534d3c80826f90b30ec46a5",
-      "verified": true
+      "verified": true,
+      "storage_domain": "repo",
+      "asset_id": "canonical_pointers_guardian_index_v2_json"
     },
     {
       "path": "archive/canonical-pointers/guardian-pointer-original.json",
@@ -292,7 +364,9 @@
       "size_bytes": 367,
       "arweave_tx": "9McJS3_xvIl6_87e7NDJ6g3SgGlA8Js7z--eMLGMRZg",
       "expected_sha256": "3246afb59552dcda700e490767aadd3d67083911dae6bccbb2762ef568c7e289",
-      "verified": true
+      "verified": true,
+      "storage_domain": "repo",
+      "asset_id": "canonical_pointers_guardian_pointer_original_json"
     },
     {
       "path": "archive/canonical-pointers/index-additions-kit.json",
@@ -300,14 +374,18 @@
       "size_bytes": 1149,
       "arweave_tx": "E_HLeYx-70cbUMUSwMacB5kLjo5m-ePYWjZnqjNY_zQ",
       "expected_sha256": "ce7c9f5017686cb57a9fe5e40473e8aea391718dcc1680a589454e9b50187f88",
-      "verified": true
+      "verified": true,
+      "storage_domain": "repo",
+      "asset_id": "canonical_pointers_index_additions_kit_json"
     },
     {
       "path": "archive/canonical-pointers/start-here.v1.json",
       "sha256": "ac8484caed9476dc78a4b79da659e6516fdf8f61a2b2f702c0d66f8b503bb5dd",
       "size_bytes": 4154,
       "verified": null,
-      "note": "no expected hash from Arweave; actual hash recorded"
+      "note": "no expected hash from Arweave; actual hash recorded",
+      "storage_domain": "repo",
+      "asset_id": "canonical_pointers_start_here_v1_json"
     }
   ],
   "eth_attestations": [
@@ -369,11 +447,49 @@
     }
   ],
   "summary": {
+    "repo_files_total": 39,
+    "repo_files_verified": 21,
+    "repo_files_no_expected_hash": 17,
+    "repo_files_hash_mismatch": 1,
+    "release_assets_total": 0,
+    "release_assets_verified": 0,
+    "release_assets_not_checked": 0,
+    "arweave_assets_total": 1,
+    "arweave_assets_verified": 0,
+    "arweave_assets_not_checked": 1,
+    "ipfs_assets_total": 0,
+    "ipfs_assets_verified": 0,
+    "ipfs_assets_not_checked": 0,
+    "eth_attestations_verified": 8,
+    "eth_attestations_failed": 0,
     "total_files": 39,
     "verified_against_arweave": 21,
     "no_expected_hash": 17,
-    "hash_mismatch": 1,
-    "eth_attestations_verified": 8,
-    "eth_attestations_failed": 0
-  }
+    "hash_mismatch": 1
+  },
+  "policy": {
+    "large_binary_assets_must_not_be_committed_to_git": true,
+    "verified_true_requires_hash_match": true,
+    "repo_files_checked_against_repository_bytes": true,
+    "release_assets_checked_by_github_release_download_sha256": true,
+    "arweave_assets_checked_by_tx_download_sha256": true,
+    "ipfs_assets_checked_by_cid_bytes_when_available": true
+  },
+  "release_assets": [],
+  "arweave_assets": [
+    {
+      "asset_id": "public_covenant_archive",
+      "storage_domain": "arweave",
+      "arweave_tx": "j6anZ4m5Wwvx5P_9-kM2EVG35TyKtm1lgaKfhT743rk",
+      "size_bytes": 24246033,
+      "sha256": "ef816480f77f30405378800807b42bff0a854b83a8f77793a0e0adf0944a8263",
+      "expected_sha256": "ef816480f77f30405378800807b42bff0a854b83a8f77793a0e0adf0944a8263",
+      "verified": null,
+      "last_known_sha256": "ef816480f77f30405378800807b42bff0a854b83a8f77793a0e0adf0944a8263",
+      "verification_status": "not_checked_in_this_run",
+      "github_release_mirror": null,
+      "boundary": "Arweave source asset. Large payload not committed to Git repository."
+    }
+  ],
+  "ipfs_assets": []
 }

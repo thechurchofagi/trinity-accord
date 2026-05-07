@@ -5,7 +5,6 @@
   "public_covenant_archive": {
     "arweave_tx": "j6anZ4m5Wwvx5P_9-kM2EVG35TyKtm1lgaKfhT743rk",
     "sha256": "ef816480f77f30405378800807b42bff0a854b83a8f77793a0e0adf0944a8263",
-    "github_path": "arweave-backup/files/public_covenant_archive.zip",
     "arweave_gateways": [
       "https://arweave.net/{tx}"
     ],
@@ -18,7 +17,13 @@
       "block_height": 1729656,
       "block_timestamp": 1754810547
     },
-    "status": "verified"
+    "status": "verified",
+    "storage_policy": "large_asset_not_committed_to_git",
+    "primary_storage_domain": "arweave",
+    "repo_path": null,
+    "legacy_repo_path": "archive/evidence/public-covenant-archive.zip",
+    "legacy_repo_path_status": "not_used_for_large_assets",
+    "github_release_mirror": null
   },
   "verification_kit": {
     "arweave_tx": "X4KOUkf-1ciFD3Q-gMA0i94t1hAVXGrUDm0q5amL4rc",
@@ -35,17 +40,25 @@
     "https://dweb.link/ipfs/{cid}"
   ],
   "github_archive_mirror": {
-    "description": "Complete GitHub mirror of Arweave and ETH attestation data for users who cannot access chains directly",
+    "description": "GitHub repository mirror for small verified metadata plus domain-aware external asset references for large payloads.",
     "path": "archive/",
     "hash_manifest": "archive/hash-manifest.json",
     "verification_report": "archive/VERIFICATION-REPORT.md",
     "stats": {
-      "total_files": 39,
-      "sha256_verified_against_arweave": 21,
+      "repo_files_total": 39,
+      "repo_files_verified": 21,
+      "repo_files_no_expected_hash": 17,
+      "repo_files_hash_mismatch": 1,
+      "release_assets_total": 0,
+      "release_assets_verified": 0,
+      "release_assets_not_checked": 0,
+      "arweave_assets_total": 1,
+      "arweave_assets_verified": 0,
+      "arweave_assets_not_checked": 1,
+      "ipfs_assets_total": 0,
+      "ipfs_assets_verified": 0,
+      "ipfs_assets_not_checked": 0,
       "eth_attestations_verified": 8,
-      "eth_attestations_total": 8,
-      "no_expected_hash": 17,
-      "hash_mismatch": 1,
       "eth_attestations_failed": 0
     },
     "boundary": "Non-amending mirror. Arweave originals and ETH attestations prevail in case of conflict.",
@@ -54,6 +67,13 @@
       "policy": "Files without expected SHA-256 are availability-only and must not be counted as verified archive content.",
       "committed_to_verified_archive": false,
       "claim_boundary": "availability only; not verified archive content"
+    },
+    "asset_manifest": "archive/hash-manifest.json",
+    "storage_domain_policy": {
+      "repo_files": "Small text/JSON/manifest files committed under archive/.",
+      "release_assets": "Large payloads stored in GitHub Releases.",
+      "arweave_assets": "Arweave-origin assets verified by txid and SHA-256.",
+      "ipfs_assets": "CID-addressed assets; availability depends on gateways."
     }
   },
   "warning": "manual external verification required",

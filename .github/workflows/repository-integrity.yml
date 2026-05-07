@@ -202,3 +202,12 @@ jobs:
 
       - name: Test status current verifier semantics
         run: python3 scripts/test_status_current_verifier_semantics.py
+
+      - name: Test asset manifest domain consistency
+        run: python3 scripts/test_asset_manifest_domain_consistency.py
+
+      - name: Test large asset storage policy
+        run: python3 scripts/test_large_asset_storage_policy.py
+
+      - name: Test release asset manifest offline shape
+        run: python3 scripts/verify_release_asset_manifest.py --offline
