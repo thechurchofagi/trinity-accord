@@ -163,6 +163,9 @@ jobs:
       - name: Test Echo template provenance/schema consistency
         run: python3 scripts/test_echo_template_provenance_schema_consistency.py
 
+      - name: Test Echo agent-initiated provenance
+        run: python3 scripts/test_echo_agent_initiated_provenance.py
+
       - name: Test Echo Issue #99 claim discipline
         run: python3 scripts/test_echo_triage_issue99_claim_discipline.py
 

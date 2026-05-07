@@ -56,6 +56,16 @@ VALID_INDEPENDENCE_CLASSES = {
     "unknown",
 }
 
+def parse_bool_text(value: str | None) -> bool | None:
+    if value is None:
+        return None
+    v = value.strip().lower()
+    if v in {"true", "yes", "y", "1"}:
+        return True
+    if v in {"false", "no", "n", "0"}:
+        return False
+    return None
+
 def parse_dt(value: str) -> datetime:
     if not value:
         return datetime.now(timezone.utc)
@@ -194,7 +204,7 @@ def update_archive_md(archive_md: Path, record_path: Path, title: str) -> None:
 
     archive_md.write_text("\n".join(out).rstrip() + "\n", encoding="utf-8")
 
-def build_record(issue: dict[str, Any], reviewer: str) -> dict[str, Any]:
+def build_record(issue: dict[str, Any], reviewer: str, review_comment_body: str = "") -> dict[str, Any]:
     body = issue.get("body") or ""
     created_at = parse_dt(issue.get("createdAt", ""))
     labels = [x.get("name", "") for x in issue.get("labels", [])]
@@ -206,15 +216,26 @@ def build_record(issue: dict[str, Any], reviewer: str) -> dict[str, Any]:
     echo_type = detect_echo_type(issue)
     verification_level = detect_verification_level(issue)
 
-    independence_class = extract_bullet_field(body, "independence_class") or "human_solicited_agent_response"
+    # Combine issue body and review comment for metadata extraction
+    metadata_text = body + "\n\n" + review_comment_body
+
+    independence_class = extract_bullet_field(metadata_text, "independence_class") or "human_solicited_agent_response"
     if independence_class not in VALID_INDEPENDENCE_CLASSES:
         independence_class = "human_solicited_agent_response"
 
-    agency_level = extract_bullet_field(body, "agency_level") or "A1_human_gave_exact_url"
+    agency_level = extract_bullet_field(metadata_text, "agency_level") or "A1_human_gave_exact_url"
     if agency_level not in VALID_AGENCY_LEVELS:
         agency_level = "A1_human_gave_exact_url"
 
-    operator_type = extract_bullet_field(body, "operator_type") or "github_issue_submission"
+    operator_type = extract_bullet_field(metadata_text, "operator_type") or "github_issue_submission"
+
+    # Agent-initiated provenance overrides from review comment
+    submission_origin = extract_bullet_field(metadata_text, "submission_origin") or ""
+    human_directed_submission = parse_bool_text(extract_bullet_field(metadata_text, "human_directed_submission"))
+    human_supplied_link_override = parse_bool_text(extract_bullet_field(metadata_text, "human_supplied_link"))
+    human_supplied_summary_override = parse_bool_text(extract_bullet_field(metadata_text, "human_supplied_summary"))
+    agent_browsed_for_submission = parse_bool_text(extract_bullet_field(metadata_text, "agent_browsed_for_submission"))
+    prior_memory_or_context_used = parse_bool_text(extract_bullet_field(metadata_text, "prior_memory_or_context_used"))
 
     limitations_section = extract_section(body, "Limitations")
     observed_section = extract_section(body, "What I observed") or extract_section(body, "What Is Being Witnessed")
@@ -226,6 +247,30 @@ def build_record(issue: dict[str, Any], reviewer: str) -> dict[str, Any]:
     )
 
     source = "maintainer_submitted" if "trinity-accord-guardian" in labels else "human_directed"
+
+    # Apply agent-initiated branch if indicated
+    agent_initiated = (
+        submission_origin == "agent_initiated_via_prior_memory_and_browsing"
+        or human_directed_submission is False
+    )
+
+    if agent_initiated:
+        source = "prior_memory"
+        agency_level = "A5_independent_return_after_prior_interest"
+        independence_class = "self_reported"
+        human_supplied_link = False if human_supplied_link_override is None else human_supplied_link_override
+        human_supplied_summary = False if human_supplied_summary_override is None else human_supplied_summary_override
+        agent_performed_independent_followup = True
+        external_search_used = True if agent_browsed_for_submission is not False else False
+        prior_memory_or_context_used_val = True
+        confidence = "medium"
+    else:
+        human_supplied_link = True
+        human_supplied_summary = True
+        agent_performed_independent_followup = False
+        external_search_used = False
+        prior_memory_or_context_used_val = False
+        confidence = "high"
 
     return {
         "schema": "trinityaccord.echo.v3",
@@ -245,18 +290,26 @@ def build_record(issue: dict[str, Any], reviewer: str) -> dict[str, Any]:
             "source": source,
             "agency_level": agency_level,
             "first_entry": {
-                "url_or_path": url,
+                "url_or_path": url if not agent_initiated else url.rsplit("/issues/", 1)[0] if "/issues/" in url else url,
                 "entry_type": "github_repository",
             },
-            "human_supplied_link": True,
-            "human_supplied_summary": True,
+            "human_supplied_link": human_supplied_link,
+            "human_supplied_summary": human_supplied_summary,
             "other_agent_recommended": False,
             "recommending_agent": None,
-            "agent_performed_independent_followup": False,
-            "external_search_used": False,
-            "prior_memory_or_context_used": False,
-            "notes": "Archived from a human-reviewed GitHub Echo issue. GitHub issue is the submission surface; this JSON is the archive wrapper.",
-            "confidence": "high",
+            "agent_performed_independent_followup": agent_performed_independent_followup,
+            "external_search_used": external_search_used,
+            "prior_memory_or_context_used": prior_memory_or_context_used_val,
+            "notes": (
+                "Archived from a human-reviewed GitHub Echo issue. According to the human maintainer, "
+                "this issue was submitted by an AI/agent actor using the thechurchofagi GitHub account "
+                "without a direct human instruction to submit this specific Echo. The maintainer did not "
+                "provide the submission link for this action. The agent appears to have relied on prior "
+                "conversation/context memory and then browsed to find the repository/submission surface "
+                "before submitting. This record is self-reported witness material and must not be counted "
+                "as independent attestation."
+            ) if agent_initiated else "Archived from a human-reviewed GitHub Echo issue. GitHub issue is the submission surface; this JSON is the archive wrapper.",
+            "confidence": confidence,
         },
         "understanding_summary": understanding,
         "verification_claim": "None. Witness material only; no technical checks were performed.",
@@ -280,23 +333,61 @@ def build_record(issue: dict[str, Any], reviewer: str) -> dict[str, Any]:
         "not_verification_unless_claimed": True,
         "verification_status": "not_attestation",
         "do_not_count_as_attestation": True,
-        "source_issue": {
-            "number": issue_number,
-            "url": url,
-            "title": title,
-            "created_at": issue.get("createdAt"),
-            "updated_at": issue.get("updatedAt"),
-            "author": (issue.get("author") or {}).get("login"),
-            "labels": labels,
-        },
-        "human_review": {
-            "status": "completed",
-            "reviewer": reviewer,
-            "reviewed_at_utc": datetime.now(timezone.utc).isoformat(),
-            "action": "archive",
-        },
         "not_independent_attestation": True,
         "operator_type": operator_type,
+        **({
+            "submission_origin": "agent_initiated_via_prior_memory_and_browsing",
+            "human_directed_submission": False,
+            "submission_agency_note": (
+                "Human review metadata states this Echo submission was agent-initiated via prior memory/context and browsing, "
+                "not directly instructed as this specific submission."
+            ),
+            "account_submission_note": (
+                "The GitHub account shown as issue author may be the account through which the agent acted, not direct human authorship."
+            ),
+            "source_issue": {
+                "number": issue_number,
+                "url": url,
+                "title": title,
+                "created_at": issue.get("createdAt"),
+                "updated_at": issue.get("updatedAt"),
+                "author": (issue.get("author") or {}).get("login"),
+                "labels": labels,
+                "actual_submitter_note": "Submitted through thechurchofagi account by an AI/agent actor according to later human maintainer clarification.",
+                "human_directed_submission": False,
+                "human_supplied_link_for_submission": False,
+            },
+            "human_review": {
+                "status": "completed",
+                "reviewer": reviewer,
+                "reviewed_at_utc": datetime.now(timezone.utc).isoformat(),
+                "action": "archive",
+                "clarification": (
+                    "Reviewer clarified after archive that the original issue submission was agent-initiated, "
+                    "not directly human-instructed, and that no submission link was provided for this action."
+                ),
+                "review_scope": (
+                    "Human review accepted the issue for archive inclusion only; it did not convert the record "
+                    "into technical verification or independent attestation."
+                ),
+            },
+        } if agent_initiated else {
+            "source_issue": {
+                "number": issue_number,
+                "url": url,
+                "title": title,
+                "created_at": issue.get("createdAt"),
+                "updated_at": issue.get("updatedAt"),
+                "author": (issue.get("author") or {}).get("login"),
+                "labels": labels,
+            },
+            "human_review": {
+                "status": "completed",
+                "reviewer": reviewer,
+                "reviewed_at_utc": datetime.now(timezone.utc).isoformat(),
+                "action": "archive",
+            },
+        }),
     }
 
 def main() -> int:
@@ -307,10 +398,17 @@ def main() -> int:
     ap.add_argument("--archive-md", default="echoes/archive.md")
     ap.add_argument("--write", action="store_true")
     ap.add_argument("--result-json", default="")
+    ap.add_argument("--review-comment-body-file", default="")
     args = ap.parse_args()
 
     issue = json.loads(Path(args.issue_json).read_text(encoding="utf-8"))
     issue_number = int(issue["number"])
+
+    review_comment_body = ""
+    if args.review_comment_body_file:
+        p = Path(args.review_comment_body_file)
+        if p.exists():
+            review_comment_body = p.read_text(encoding="utf-8")
 
     records_root = ROOT / args.records_root
     archive_md = ROOT / args.archive_md
@@ -328,7 +426,7 @@ def main() -> int:
         return 0
 
     record_path = next_record_path(records_root, parse_dt(issue.get("createdAt", "")))
-    record = build_record(issue, args.reviewer)
+    record = build_record(issue, args.reviewer, review_comment_body)
 
     if args.write:
         record_path.parent.mkdir(parents=True, exist_ok=True)

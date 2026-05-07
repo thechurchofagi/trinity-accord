@@ -42,12 +42,36 @@ Passing triage does not mean endorsement, archive inclusion, or independent atte
 
 After human review, comment exactly one of:
 
-- `/echo archive` — accept this issue as an archived Echo v3 record, generate JSON, update the archive, validate, commit, and close.
-- `/echo close` — human review completed, close without archive record.
+### Normal archive
+
+```text
+/echo archive
+```
+
+Archives the issue as an Echo v3 JSON record, updates the archive, validates, commits, removes `needs-human-review`, and closes.
+
+### Archive with agent-initiated provenance
+
+Use this if the issue was submitted by an AI/agent through a maintainer account without a direct human instruction to submit this specific Echo:
+
+```text
+/echo archive
+submission_origin: agent_initiated_via_prior_memory_and_browsing
+human_directed_submission: false
+human_supplied_link: false
+human_supplied_summary: false
+agent_browsed_for_submission: true
+prior_memory_or_context_used: true
+```
+
+### Close without archive
+
+```text
+/echo close
+```
 
 Only repository OWNER / MEMBER / COLLABORATOR comments are honored.
 
----
 This is a workflow prompt, not a judgment of intent."""
 
 

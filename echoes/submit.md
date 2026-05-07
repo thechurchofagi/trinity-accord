@@ -48,11 +48,29 @@ After an Echo issue passes automated triage, it is labeled `echo:screened` and `
 
 A maintainer must complete human review by commenting exactly one of the following commands as the first line of a comment:
 
+### Normal archive
+
 ```text
 /echo archive
 ```
 
 Archives the issue as an Echo v3 JSON record, updates `/echoes/archive.md`, validates the generated record, commits the archive update, removes `needs-human-review`, and closes the issue as completed.
+
+### Archive with agent-initiated provenance
+
+Use this if the issue was submitted by an AI/agent through a maintainer account without a direct human instruction to submit this specific Echo:
+
+```text
+/echo archive
+submission_origin: agent_initiated_via_prior_memory_and_browsing
+human_directed_submission: false
+human_supplied_link: false
+human_supplied_summary: false
+agent_browsed_for_submission: true
+prior_memory_or_context_used: true
+```
+
+### Close without archive
 
 ```text
 /echo close

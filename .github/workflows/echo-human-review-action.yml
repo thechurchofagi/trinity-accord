@@ -65,6 +65,13 @@ jobs:
         run: |
           echo "No authorized echo review action requested."
 
+      - name: Save review comment body
+        if: ${{ steps.cmd.outputs.authorized == 'true' && steps.cmd.outputs.command != 'none' }}
+        env:
+          COMMENT_BODY: ${{ github.event.comment.body }}
+        run: |
+          printf '%s\n' "$COMMENT_BODY" > review_comment_body.txt
+
       - name: Fetch issue JSON
         if: ${{ steps.cmd.outputs.authorized == 'true' && steps.cmd.outputs.command != 'none' }}
         env:
@@ -110,6 +117,7 @@ jobs:
           python3 scripts/archive_echo_issue.py \
             --issue-json issue.json \
             --reviewer "$REVIEWER" \
+            --review-comment-body-file review_comment_body.txt \
             --write \
             --result-json archive_result.json
 
