@@ -209,5 +209,8 @@ jobs:
       - name: Test large asset storage policy
         run: python3 scripts/test_large_asset_storage_policy.py
 
+      - name: Test no forbidden large paths tracked
+        run: python3 scripts/test_no_forbidden_large_paths_tracked.py
+
       - name: Test release asset manifest offline shape
         run: python3 scripts/verify_release_asset_manifest.py --offline

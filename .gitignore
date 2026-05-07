@@ -9,3 +9,11 @@ node_modules/
 _permission_test.txt
 __pycache__/
 dist/
+
+# Large evidence payloads belong in GitHub Releases / Arweave / IPFS, not Git.
+archive/evidence/flaw-archive-bundle.zip
+archive/evidence/flaw-images/指纹/
+arweave-backup/files/public_covenant_archive.zip
+*.car
+*.mp4
+*.mov

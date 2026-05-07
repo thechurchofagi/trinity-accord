@@ -17,13 +17,20 @@
       "block_height": 1729656,
       "block_timestamp": 1754810547
     },
-    "status": "verified",
+    "status": "verified_release_mirror_with_arweave_origin",
     "storage_policy": "large_asset_not_committed_to_git",
-    "primary_storage_domain": "arweave",
+    "primary_storage_domain": "github_release",
     "repo_path": null,
-    "legacy_repo_path": "archive/evidence/public-covenant-archive.zip",
-    "legacy_repo_path_status": "not_used_for_large_assets",
-    "github_release_mirror": null
+    "legacy_repo_path": "arweave-backup/files/public_covenant_archive.zip",
+    "legacy_repo_path_status": "removed_from_git_history",
+    "github_release_mirror": {
+      "release_tag": "trinity-accord-large-assets-v1",
+      "asset_name": "public_covenant_archive.zip",
+      "sha256": "ef816480f77f30405378800807b42bff0a854b83a8f77793a0e0adf0944a8263",
+      "size_bytes": 24246033,
+      "verified_by": "github_release_asset_download_sha256",
+      "status": "verified"
+    }
   },
   "verification_kit": {
     "arweave_tx": "X4KOUkf-1ciFD3Q-gMA0i94t1hAVXGrUDm0q5amL4rc",
@@ -40,7 +47,7 @@
     "https://dweb.link/ipfs/{cid}"
   ],
   "github_archive_mirror": {
-    "description": "GitHub repository mirror for small verified metadata plus domain-aware external asset references for large payloads.",
+    "description": "GitHub repository mirror for small verified metadata plus GitHub Release mirrors for large payloads.",
     "path": "archive/",
     "hash_manifest": "archive/hash-manifest.json",
     "verification_report": "archive/VERIFICATION-REPORT.md",
@@ -49,8 +56,8 @@
       "repo_files_verified": 21,
       "repo_files_no_expected_hash": 17,
       "repo_files_hash_mismatch": 1,
-      "release_assets_total": 0,
-      "release_assets_verified": 0,
+      "release_assets_total": 3,
+      "release_assets_verified": 3,
       "release_assets_not_checked": 0,
       "arweave_assets_total": 1,
       "arweave_assets_verified": 0,
@@ -155,5 +162,36 @@
     "input_bytes_length": 4694,
     "input_sha256": "e19018f1c71da8307ef20e8e8e5c12834f854d60a6aae60e35d2d8c71a333a81",
     "note": "These values were computed by querying the Ethereum mainnet RPC for tx.input bytes, then hashing the raw bytes with SHA-256. The from address matches eth_mirror_address. This data enables strict verification (input_sha256_match + input_size_match) in verify-eth-witness.mjs."
+  },
+  "flaw_archive_bundle": {
+    "storage_policy": "large_asset_not_committed_to_git",
+    "primary_storage_domain": "github_release",
+    "repo_path": null,
+    "legacy_repo_path": "archive/evidence/flaw-archive-bundle.zip",
+    "legacy_repo_path_status": "removed_from_git_history",
+    "github_release_mirror": {
+      "release_tag": "trinity-accord-large-assets-v1",
+      "asset_name": "flaw-archive-bundle.zip",
+      "sha256": "8be34c9c175c5ffdfd22b38576ad40384d3ac579a79085be5c67b602230d7926",
+      "size_bytes": 46078507,
+      "verified_by": "github_release_asset_download_sha256",
+      "status": "verified"
+    }
+  },
+  "flaw_fingerprint_images_2025_06_29": {
+    "storage_policy": "large_asset_not_committed_to_git",
+    "primary_storage_domain": "github_release",
+    "repo_path": null,
+    "legacy_repo_path": "archive/evidence/flaw-images/指纹/",
+    "legacy_repo_path_status": "removed_from_git_history",
+    "github_release_mirror": {
+      "release_tag": "trinity-accord-large-assets-v1",
+      "asset_name": "flaw-fingerprint-images-2025-06-29.zip",
+      "sha256": "7413936e0b8aa26440195f4d7814044342ce155b87aaa3f2754905696120d60a",
+      "size_bytes": 46069243,
+      "verified_by": "github_release_asset_download_sha256",
+      "status": "verified",
+      "internal_manifest_asset": "flaw-fingerprint-images-2025-06-29.payload.sha256"
+    }
   }
 }

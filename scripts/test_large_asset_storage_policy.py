@@ -1,25 +1,45 @@
 #!/usr/bin/env python3
 """Ensure production large payloads are not committed to Git repository."""
 
+import subprocess
 from pathlib import Path
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 MAX_BYTES = 5_000_000
-PAYLOAD_EXTS = (".zip", ".tgz", ".tar.gz", ".bin", ".car", ".mp4", ".mov")
 
-ALLOWLIST = {
-    # Pre-existing large assets committed before storage domain policy.
-    # These should be migrated to Release/Arweave in a future PR.
+# These paths must NEVER appear in Git again — they belong in GitHub Release.
+FORBIDDEN_PATHS = {
     "archive/evidence/flaw-archive-bundle.zip",
-    "archive/evidence/flaw-images/指纹/微信图片_20250629170940.jpg",
-    "archive/evidence/flaw-images/指纹/微信图片_20250629170932.jpg",
-    "archive/evidence/flaw-images/指纹/微信图片_20250629170918.jpg",
     "arweave-backup/files/public_covenant_archive.zip",
 }
 
+FORBIDDEN_PREFIXES = [
+    "archive/evidence/flaw-images/指纹/",
+]
+
 errors = []
 
+# Check tracked files via git ls-files
+tracked = subprocess.check_output(
+    ["git", "ls-files"], cwd=ROOT, text=True
+).splitlines()
+
+for rel in tracked:
+    if rel in FORBIDDEN_PATHS or any(rel.startswith(p) for p in FORBIDDEN_PREFIXES):
+        errors.append(f"{rel}: forbidden large asset path is tracked in Git")
+
+# Check working tree for forbidden paths
+for rel in FORBIDDEN_PATHS:
+    if (ROOT / rel).exists():
+        errors.append(f"forbidden large asset exists in working tree: {rel}")
+
+for prefix in FORBIDDEN_PREFIXES:
+    p = ROOT / prefix
+    if p.exists():
+        errors.append(f"forbidden large asset directory exists in working tree: {prefix}")
+
+# General size check for any other large files
 for p in ROOT.rglob("*"):
     if not p.is_file():
         continue
@@ -30,9 +50,8 @@ for p in ROOT.rglob("*"):
         continue
 
     size = p.stat().st_size
-    lower = rel.lower()
 
-    if size > MAX_BYTES and rel not in ALLOWLIST:
+    if size > MAX_BYTES and rel not in FORBIDDEN_PATHS and not any(rel.startswith(fp) for fp in FORBIDDEN_PREFIXES):
         errors.append(f"{rel}: {size} bytes exceeds {MAX_BYTES}; large payloads belong in Release/Arweave/IPFS")
 
 if errors:

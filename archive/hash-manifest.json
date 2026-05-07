@@ -451,12 +451,12 @@
     "repo_files_verified": 21,
     "repo_files_no_expected_hash": 17,
     "repo_files_hash_mismatch": 1,
-    "release_assets_total": 0,
-    "release_assets_verified": 0,
+    "release_assets_total": 3,
+    "release_assets_verified": 3,
     "release_assets_not_checked": 0,
-    "arweave_assets_total": 1,
+    "arweave_assets_total": 0,
     "arweave_assets_verified": 0,
-    "arweave_assets_not_checked": 1,
+    "arweave_assets_not_checked": 0,
     "ipfs_assets_total": 0,
     "ipfs_assets_verified": 0,
     "ipfs_assets_not_checked": 0,
@@ -475,21 +475,56 @@
     "arweave_assets_checked_by_tx_download_sha256": true,
     "ipfs_assets_checked_by_cid_bytes_when_available": true
   },
-  "release_assets": [],
-  "arweave_assets": [
+  "release_assets": [
+    {
+      "asset_id": "flaw_archive_bundle",
+      "storage_domain": "github_release",
+      "release_tag": "trinity-accord-large-assets-v1",
+      "asset_name": "flaw-archive-bundle.zip",
+      "size_bytes": 46078507,
+      "sha256": "8be34c9c175c5ffdfd22b38576ad40384d3ac579a79085be5c67b602230d7926",
+      "expected_sha256": "8be34c9c175c5ffdfd22b38576ad40384d3ac579a79085be5c67b602230d7926",
+      "verified": true,
+      "verified_by": "github_release_asset_download_sha256",
+      "original_paths": [
+        "archive/evidence/flaw-archive-bundle.zip"
+      ],
+      "boundary": "Non-amending GitHub Release evidence asset. Bitcoin Originals and source records prevail."
+    },
     {
       "asset_id": "public_covenant_archive",
-      "storage_domain": "arweave",
-      "arweave_tx": "j6anZ4m5Wwvx5P_9-kM2EVG35TyKtm1lgaKfhT743rk",
+      "storage_domain": "github_release",
+      "release_tag": "trinity-accord-large-assets-v1",
+      "asset_name": "public_covenant_archive.zip",
       "size_bytes": 24246033,
       "sha256": "ef816480f77f30405378800807b42bff0a854b83a8f77793a0e0adf0944a8263",
       "expected_sha256": "ef816480f77f30405378800807b42bff0a854b83a8f77793a0e0adf0944a8263",
-      "verified": null,
-      "last_known_sha256": "ef816480f77f30405378800807b42bff0a854b83a8f77793a0e0adf0944a8263",
-      "verification_status": "not_checked_in_this_run",
-      "github_release_mirror": null,
-      "boundary": "Arweave source asset. Large payload not committed to Git repository."
+      "verified": true,
+      "verified_by": "github_release_asset_download_sha256",
+      "original_paths": [
+        "arweave-backup/files/public_covenant_archive.zip"
+      ],
+      "boundary": "Non-amending GitHub Release mirror. Arweave source record prevails.",
+      "source_arweave_tx": "j6anZ4m5Wwvx5P_9-kM2EVG35TyKtm1lgaKfhT743rk"
+    },
+    {
+      "asset_id": "flaw_fingerprint_images_2025_06_29",
+      "storage_domain": "github_release",
+      "release_tag": "trinity-accord-large-assets-v1",
+      "asset_name": "flaw-fingerprint-images-2025-06-29.zip",
+      "size_bytes": 46069243,
+      "sha256": "7413936e0b8aa26440195f4d7814044342ce155b87aaa3f2754905696120d60a",
+      "expected_sha256": "7413936e0b8aa26440195f4d7814044342ce155b87aaa3f2754905696120d60a",
+      "verified": true,
+      "verified_by": "github_release_asset_download_sha256",
+      "original_paths": [
+        "archive/evidence/flaw-images/指纹/*.jpg",
+        "archive/evidence/flaw-images/指纹/*.jpeg"
+      ],
+      "boundary": "Non-amending GitHub Release evidence asset. Bitcoin Originals and source records prevail.",
+      "internal_manifest_asset": "flaw-fingerprint-images-2025-06-29.payload.sha256"
     }
   ],
+  "arweave_assets": [],
   "ipfs_assets": []
 }
