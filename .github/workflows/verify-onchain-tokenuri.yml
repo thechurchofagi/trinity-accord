@@ -46,6 +46,10 @@ jobs:
           INPUT_SOURCE: ${{ inputs.source }}
         run: |
           set -euo pipefail
+
+          [[ "$ETH_CONCURRENCY" =~ ^[0-9]+$ ]] || { echo "Invalid concurrency"; exit 1; }
+          [ "$ETH_CONCURRENCY" -ge 1 ] && [ "$ETH_CONCURRENCY" -le 25 ] || { echo "Concurrency out of range"; exit 1; }
+
           node scripts/verify-onchain-tokenuri.mjs \
             --release-tag "$INPUT_RELEASE_TAG" \
             --source "$INPUT_SOURCE" \

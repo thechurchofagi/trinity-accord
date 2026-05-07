@@ -1915,25 +1915,30 @@ async function verifyChainD2(otsAssets) {
       }
 
       // 3. Run ots verify for actual proof verification
-      //    If verify fails (e.g. no Bitcoin node), fall back to ots info
+      //    ots verify is the ONLY gate. ots info is diagnostic-only.
       let verifyOutput = '';
-      let verifyPassed = false;
+      detail.ots_verify_passed = false;
+      detail.ots_verify_exit_code = null;
+      detail.ots_info_parsed = false;
+      detail.diagnostic_only = false;
       try {
         verifyOutput = execSync(`ots verify "${otsPath}" -f "${tmpFilePath}" 2>&1`, {
           encoding: 'utf-8', timeout: 120000
         });
-        verifyPassed = true;
+        detail.ots_verify_passed = true;
+        detail.ots_verify_exit_code = 0;
       } catch (e) {
         verifyOutput = e.stdout || e.stderr || e.message || '';
-        // ots verify returns non-zero if pending or failed — check output
-        if (verifyOutput.includes('Success!') || verifyOutput.includes('attested')) {
-          verifyPassed = true;
-        }
+        detail.ots_verify_exit_code = e.status ?? 1;
+        // ots verify returns non-zero if pending or failed — must NOT pass
+        detail.ots_verify_passed = false;
       }
       detail.ots_verify_output = verifyOutput.trim().slice(0, 2000);
 
-      // 4. Parse OTS info for Bitcoin block attestations (supplement verify output)
+      // 4. Parse OTS info for Bitcoin block attestations (DIAGNOSTIC ONLY)
       const otsInfo = parseOtsInfo(otsPath);
+      detail.ots_info_parsed = !otsInfo.error;
+      detail.diagnostic_only = false;
 
       // Also check verify output for block attestation lines
       const blockAttestVerifyMatch = verifyOutput.match(/BitcoinBlockHeaderAttestation\((\d+)\)/);
@@ -1955,6 +1960,7 @@ async function verifyChainD2(otsAssets) {
         } else {
           detail.error = 'No Bitcoin block attestations found in OTS proof';
         }
+        detail.diagnostic_only = true;
         result.ots_files_fail++;
         result.anchored_files.push(detail);
         result.critical_errors.push(detail.error);
@@ -1965,7 +1971,15 @@ async function verifyChainD2(otsAssets) {
       const bestAttestation = allAttestations.sort((a, b) => b.block_height - a.block_height)[0];
       detail.bitcoin_attested = true;
       detail.block_height = bestAttestation.block_height;
-      detail.ots_verify_passed = verifyPassed;
+      detail.bitcoin_attestation_height = bestAttestation.block_height;
+
+      // CRITICAL: Only ots verify can pass. ots info is diagnostic-only.
+      if (detail.ots_verify_passed === true) {
+        result.ots_files_pass++;
+      } else {
+        detail.diagnostic_only = true;
+        result.ots_files_fail++;
+      }
 
       // 5. Extract txid from ots info output or ots-summary.json
       if (parsedTxids.length > 0) {
@@ -1993,9 +2007,8 @@ async function verifyChainD2(otsAssets) {
         log(`    ⚠️  Could not query block ${bestAttestation.block_height}: ${e.message}`);
       }
 
-      result.ots_files_pass++;
       result.ots_files_total++;
-      log(`  ✅ ${target.label}: ots verify=${verifyPassed ? 'pass' : 'fallback-info'}, attested at block ${bestAttestation.block_height}`);
+      log(`  ${detail.ots_verify_passed ? '✅' : '⚠️'} ${target.label}: ots verify=${detail.ots_verify_passed ? 'pass' : 'diagnostic-only'}, attested at block ${bestAttestation.block_height}`);
 
     } catch (e) {
       detail.error = e.message;
@@ -2101,11 +2114,20 @@ async function main() {
 
   // ── Compute onchain_tokenuri_175_pass ─────────────────────────────────
   // If ONCHAIN-READ-AUDIT.json exists in release, require ETH CID match = 175.
-  // If not present (ethAudit is null), rely on token_index CID match = 175.
-  const ethAuditAvailable = ethAudit !== null && (ethAudit.tokens?.length || 0) > 0;
-  const onchainTokenuri175Pass = ethAuditAvailable
-    ? (chainA.metadata_eth_cid_match === EXPECTED_NFTS && chainA.metadata_eth_cid_mismatch === 0)
-    : (chainA.metadata_token_index_cid_match === EXPECTED_NFTS && chainA.metadata_token_index_cid_mismatch === 0);
+  // If not present (ethAudit is null), this is NOT a pass — it's not_checked.
+  const ethAuditAvailable = Boolean(ethAudit && Array.isArray(ethAudit.tokens) && ethAudit.tokens.length > 0);
+  let ethTokenUriStatus = 'not_checked';
+  let onchainTokenUri175Pass = false;
+  const claimsNotMade = [];
+
+  if (ethAuditAvailable) {
+    ethTokenUriStatus = chainA.metadata_eth_cid_match === EXPECTED_NFTS && chainA.metadata_eth_cid_mismatch === 0 ? 'verified' : 'failed';
+    onchainTokenUri175Pass = chainA.metadata_eth_cid_match === EXPECTED_NFTS && chainA.metadata_eth_cid_mismatch === 0;
+  } else {
+    ethTokenUriStatus = 'not_checked';
+    onchainTokenUri175Pass = false;
+    claimsNotMade.push('ETH tokenURI 175/175 not checked');
+  }
 
   // ── Final Summary ─────────────────────────────────────────────────────
 
@@ -2170,6 +2192,8 @@ async function main() {
     full_evidence_chain_pass: fullEvidenceChainPass,
     release_verified: backupReleaseVerified,
     onchain_tokenuri_175_pass: onchainTokenuri175Pass,
+    eth_tokenuri_status: ethTokenUriStatus,
+    claims_not_made: claimsNotMade,
     dag_and_digest_manifest_pass: chainA.dag_and_digest_manifest_pass,
     btc_signature_coverage_pass: chainB.btc_signature_coverage_pass,
     eth_witness_coverage_pass: chainC.eth_witness_coverage_pass,
@@ -2193,7 +2217,9 @@ async function main() {
         'GitHub Release files match recorded hashes and sizes.',
         'digest-manifest covers the checked public files and retains hash records for private/unavailable files.',
         'CAR files decode as valid DAGs with no missing blocks.',
-        'metadata root CIDs match token_index and ETH tokenURI for 175/175 NFTs.',
+        ...(ethAuditAvailable
+          ? ['metadata root CIDs match token_index and ETH tokenURI for 175/175 NFTs.']
+          : ['metadata root CIDs match token_index for 175/175 NFTs. ETH tokenURI NOT independently verified.']),
         'BTC BIP340 signature covers the authority / digest-manifest hash chain.',
         'ETH guardian address witnessed attestation payloads whose input hashes match the manifest.',
         'OpenTimestamps anchors digest-manifest / verify-report to Bitcoin time.',
@@ -2204,6 +2230,7 @@ async function main() {
         'Physical inspection of Core Object Alpha.',
         'That mirrors override Bitcoin Originals.',
         'Bytes of private/unavailable files unless those bytes are actually provided and rehashed.',
+        ...(ethAuditAvailable ? [] : ['ETH tokenURI 175/175 — no on-chain audit was provided.']),
       ],
       chain_of_custody: 'BTC signature covers authority → authority declares digest-manifest pointers → digest-manifest covers file hash table → file bytes decode as DAG/CID → ETH tokenURI 175/175 matches metadata CID.',
     },

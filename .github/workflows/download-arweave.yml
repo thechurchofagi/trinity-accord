@@ -72,8 +72,9 @@ jobs:
                 FAIL=$((FAIL + 1))
               fi
             else
-              echo "   📥 OK (no expected hash) sha256=$actual"
-              PASS=$((PASS + 1))
+              echo "   ❌ NO EXPECTED HASH — refusing verified archive commit for $label"
+              rm -f "$dest"
+              FAIL=$((FAIL + 1))
             fi
           }
 
@@ -95,13 +96,13 @@ jobs:
           # ETH Witness
           download_and_verify "UouXngnUjcEkpOwgq5ajInrDpwKrGhtUVDLmlBorVjQ" "archive/eth-witness/eth-witness.json" "3c187c6b764a1d53984588875c1c1fed3f1c91fd165512ad8dfa4f279542a65f" "ETH Witness"
 
-          # Rotation (no pre-existing hash)
-          download_and_verify "AlyENoZXrGqUG9iXwaxhhoPjELlWbRuWMFtYGWW6bHM" "archive/rotation/rotation-notice-old.txt" "" "Rotation Notice"
-          download_and_verify "GD_uH4GLXSKKp0Wz1QGjoE_FuVWZZ4fylncPFHZd76U" "archive/rotation/acknowledgement-new.txt" "" "Acknowledgement"
+          # Rotation (no pre-existing hash — download to unverified, not archive/)
+          download_and_verify "AlyENoZXrGqUG9iXwaxhhoPjELlWbRuWMFtYGWW6bHM" "dist/unverified-arweave/rotation-notice-old.txt" "" "Rotation Notice"
+          download_and_verify "GD_uH4GLXSKKp0Wz1QGjoE_FuVWZZ4fylncPFHZd76U" "dist/unverified-arweave/acknowledgement-new.txt" "" "Acknowledgement"
 
           # Canonical Pointers
           download_and_verify "6HW5X5PETh9X_kdShA0a7sQWHtfr59F7KXZNym9NqyI" "archive/canonical-pointers/guardian-index-v2.json" "808bf70219a60e70ca9b59f41603a289447f3a598534d3c80826f90b30ec46a5" "Guardian Index v2"
-          download_and_verify "6CtpboRTtM675vPS_ifzPt1vgonr9KtPYm7oOnnxUs0" "archive/canonical-pointers/canonical-pointer-v2.json" "" "Canonical Pointer v2"
+          download_and_verify "6CtpboRTtM675vPS_ifzPt1vgonr9KtPYm7oOnnxUs0" "dist/unverified-arweave/canonical-pointer-v2.json" "" "Canonical Pointer v2"
           download_and_verify "BwVHuxODfV65xE_L1fqrCDBvLvJNnSuBEXaZNuoRcIk" "archive/canonical-pointers/guardian-index-original.json" "71bc981a994a93cdf488b89aee2b132b658464a7cbb1dec791af604a1127ef98" "Guardian Index original"
           download_and_verify "9McJS3_xvIl6_87e7NDJ6g3SgGlA8Js7z--eMLGMRZg" "archive/canonical-pointers/guardian-pointer-original.json" "3246afb59552dcda700e490767aadd3d67083911dae6bccbb2762ef568c7e289" "Guardian Pointer original"
           download_and_verify "E_HLeYx-70cbUMUSwMacB5kLjo5m-ePYWjZnqjNY_zQ" "archive/canonical-pointers/index-additions-kit.json" "ce7c9f5017686cb57a9fe5e40473e8aea391718dcc1680a589454e9b50187f88" "Index additions Kit"
@@ -109,9 +110,9 @@ jobs:
           # Authority Manifest
           download_and_verify "gC9_n7-2nS2yNUii2tr-68r8GanAiA7qzyCM6JDpOqo" "archive/authority-manifest/manifest-v1.0.1.json" "ccd9aaaaa37d1ced239a7af0b61373dfa359b016d54698956776d082de8fb4f0" "Manifest v1.0.1"
           download_and_verify "TvmjyJBq5ZoGv-tmX0aeiqsEKTGmSyIvBHj1FqZiIpI" "archive/authority-manifest/authority-v1.0.2-canon.json" "7d6ac9d3184bb5b0bbaf8217354799efef68669c21b4180e28ec06b0c57439e6" "Authority v1.0.2 canon"
-          download_and_verify "QtWkBx004NhfEiBuMAJQmIXWxqOo8HftI_4pj0VGbYY" "archive/authority-manifest/authority-v1.0.2-pretty.json" "" "Authority v1.0.2 pretty"
-          download_and_verify "jgRYWeLLbyDhku0cKm1SLnq2elyM3tg9j7FgtWfDats" "archive/authority-manifest/authority-v1.0.2-signature.json" "" "Authority v1.0.2 signature"
-          download_and_verify "dc3NVHJBjW89w51lTy0dkLIbXaOQ823m7bRhBBBHGr0" "archive/authority-manifest/authority-v1.0.2-typedData.json" "" "Authority v1.0.2 typedData"
+          download_and_verify "QtWkBx004NhfEiBuMAJQmIXWxqOo8HftI_4pj0VGbYY" "dist/unverified-arweave/authority-v1.0.2-pretty.json" "" "Authority v1.0.2 pretty"
+          download_and_verify "jgRYWeLLbyDhku0cKm1SLnq2elyM3tg9j7FgtWfDats" "dist/unverified-arweave/authority-v1.0.2-signature.json" "" "Authority v1.0.2 signature"
+          download_and_verify "dc3NVHJBjW89w51lTy0dkLIbXaOQ823m7bRhBBBHGr0" "dist/unverified-arweave/authority-v1.0.2-typedData.json" "" "Authority v1.0.2 typedData"
           download_and_verify "Ykbc_PEnmZ59crk-WUaWguDYvv_VLIbUf2sX7Flp_V0" "archive/authority-manifest/authority-v1.0.2-additions.json" "3850a8dab41aefaca5ae04d5d2021ba35632cc5c1654fbd2d89c61e871b0e7b6" "Authority v1.0.2 additions"
 
           # Evidence
@@ -124,8 +125,16 @@ jobs:
           echo "  PASS: $PASS  FAIL: $FAIL"
           echo "========================================="
 
+          if [ "$FAIL" -ne 0 ]; then
+            echo "❌ Download/verification failed: FAIL=$FAIL"
+            exit 1
+          fi
+
       - name: Download missing files (round 2)
         run: |
+          PASS=0
+          FAIL=0
+
           download_and_verify() {
             local txid="$1"
             local dest="$2"
@@ -160,6 +169,7 @@ jobs:
 
             if [ "$downloaded" != "1" ]; then
               echo "   ❌ DOWNLOAD FAILED (all sources)"
+              FAIL=$((FAIL + 1))
               return 0
             fi
 
@@ -167,13 +177,16 @@ jobs:
             if [ -n "$expected" ]; then
               if [ "$actual" = "$expected" ]; then
                 echo "   ✅ PASS $actual"
+                PASS=$((PASS + 1))
               else
                 echo "   ❌ HASH MISMATCH expected=$expected actual=$actual"
                 rm -f "$dest"
-                return 0
+                FAIL=$((FAIL + 1))
               fi
             else
-              echo "   📥 OK (no expected hash) sha256=$actual"
+              echo "   ❌ NO EXPECTED HASH — refusing verified archive commit for $label"
+              rm -f "$dest"
+              FAIL=$((FAIL + 1))
             fi
           }
 
@@ -181,21 +194,26 @@ jobs:
           download_and_verify "LV2XKhVXMdwrUF_7U6M2bydqHKn-6AEsd2sptl84m1s" "archive/evidence/ta-verification-bundle-v1.zip" "bad5f9a3cdf1b4bbd2d2277cd5db968fb6fe28d28ad4b8479d185ddc19d503c6" "Verification Bundle v1"
 
           # Authority DataItems
-          download_and_verify "U4eeQ9KsdGAJx-J_93stKhEe6OLjDTrfCV8LQzNb-kE" "archive/authority-manifest/authority.jcs.json" "" "authority.jcs.json (DataItem)"
-          download_and_verify "fMO_dDSiCBF1aWxm2arjAJkbmHdsxiKfVHp_biMFtIE" "archive/authority-manifest/signature.json" "" "signature.json (DataItem)"
+          download_and_verify "U4eeQ9KsdGAJx-J_93stKhEe6OLjDTrfCV8LQzNb-kE" "dist/unverified-arweave/authority.jcs.json" "" "authority.jcs.json (DataItem)"
+          download_and_verify "fMO_dDSiCBF1aWxm2arjAJkbmHdsxiKfVHp_biMFtIE" "dist/unverified-arweave/signature.json" "" "signature.json (DataItem)"
 
           # Flaw high-res image & provenance log
-          download_and_verify "9klmArmByJNOGeHzfnrAhB6x6w7sKSYLS1zQNLL7GLs" "archive/evidence/flaw-image-provenance.tar" "" "Flaw Image + Provenance" 300
+          download_and_verify "9klmArmByJNOGeHzfnrAhB6x6w7sKSYLS1zQNLL7GLs" "dist/unverified-arweave/flaw-image-provenance.tar" "" "Flaw Image + Provenance" 300
 
           echo ""
           echo "========================================="
           echo "  Round 2 download complete"
           echo "========================================="
 
+          if [ "$FAIL" -ne 0 ]; then
+            echo "❌ Round 2 download/verification failed: FAIL=$FAIL"
+            exit 1
+          fi
+
       - name: Download main recovery package (large file)
         run: |
           TXID="O-Rk3kFxesPGhuYP4KHAZl54xR2urDRKcGaVqjVnB-Q"
-          DEST="archive/evidence/nft-recovery-package"
+          DEST="dist/unverified-arweave/nft-recovery-package"
           mkdir -p "$DEST"
 
           echo "📥 Main Recovery Package (175 NFTs) — attempting download..."
@@ -214,7 +232,8 @@ jobs:
               if [ -s "$DEST/recovery-package.bin" ] && ! head -1 "$DEST/recovery-package.bin" | grep -qi "<html\|404\|error\|not found"; then
                 actual=$(sha256sum "$DEST/recovery-package.bin" | cut -d' ' -f1)
                 size=$(stat -c%s "$DEST/recovery-package.bin")
-                echo "   ✅ Downloaded: $size bytes, sha256=$actual"
+                echo "   ⚠️  Downloaded to dist/unverified-arweave/ (no expected hash): $size bytes, sha256=$actual"
+                echo "   ℹ️  NOT committed to verified archive/ — needs expected hash to enter archive/"
                 exit 0
               fi
               rm -f "$DEST/recovery-package.bin"
