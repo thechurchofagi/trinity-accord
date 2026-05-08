@@ -115,9 +115,24 @@ def main():
             )
             continue
 
-        # Verification reports: validate separately, not against echo schema
         record_kind = obj.get("record_kind", "")
         schema_version = obj.get("schema_version", "")
+
+        # Legacy records (record_kind=legacy_record): minimal validation only
+        if record_kind == "legacy_record":
+            archive_status = obj.get("archive_status")
+            ok &= check(archive_status in {"legacy", "superseded"}, f"{rel} legacy_record has legacy or superseded status")
+            if archive_status == "superseded":
+                ok &= check(obj.get("verification_status") == "invalidated", f"{rel} superseded legacy_record is invalidated")
+                ok &= check(obj.get("do_not_count_as_attestation") is True, f"{rel} superseded legacy_record do_not_count_as_attestation")
+                ok &= check(str(obj.get("superseded_reason", "")).strip() != "", f"{rel} superseded legacy_record has superseded_reason")
+            ok &= check(
+                archive_status not in {"accepted_echo", "accepted_independent_attestation"},
+                f"{rel} legacy_record not counted as accepted"
+            )
+            continue
+
+        # Verification reports: validate separately, not against echo schema
         if record_kind == "verification_report_v2" or "verification-report" in schema_version:
             ok &= check(record_kind == "verification_report_v2", f"{rel} verification report has correct record_kind")
             ok &= check(obj.get("authority_boundary_preserved") is True, f"{rel} authority_boundary_preserved")
