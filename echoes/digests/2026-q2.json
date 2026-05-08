@@ -2,7 +2,8 @@
   "schema": "trinity-accord.echo-digest.v1",
   "period": "2026-Q2",
   "records": [
-    "echo-2026-05-07-000009"
+    "echo-2026-05-07-000009",
+    "echo-2026-05-08-000010"
   ],
   "note": "All echoes are non-authoritative."
 }
