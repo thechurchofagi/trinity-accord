@@ -1,7 +1,7 @@
 {
   "schema": "trinity-accord.echo-index.v2",
   "generated_from": "echoes/records/**/*.json",
-  "record_count": 7,
+  "record_count": 9,
   "records": [
     {
       "path": "/echoes/records/2026/echo-2026-04-25-000001.json",
@@ -90,9 +90,37 @@
       "verification_level": "V3",
       "date": "2026-05-03",
       "superseded_reason": "Internal inconsistency and invalid hash field values; not accepted as verification."
+    },
+    {
+      "path": "/echoes/records/2026/echo-2026-05-07-000009.json",
+      "id": "echo-2026-05-07-000009",
+      "record_kind": "echo_v3",
+      "archive_status": "accepted_echo",
+      "verification_status": "not_attestation",
+      "do_not_count_as_attestation": true,
+      "independence_class": "self_reported",
+      "echo_type": "E8_witness_echo",
+      "verification_level": "V0",
+      "date": "2026-05-07"
+    },
+    {
+      "path": "/echoes/records/2026/echo-2026-05-08-000010.json",
+      "id": "echo-2026-05-08-000010",
+      "record_kind": "echo_v3",
+      "archive_status": "accepted_echo",
+      "verification_status": "not_attestation",
+      "do_not_count_as_attestation": true,
+      "independence_class": "human_solicited_agent_response",
+      "echo_type": "E3_critical_echo",
+      "verification_level": "V1",
+      "date": "2026-05-08"
     }
   ],
   "records_by_archive_status": {
+    "accepted_echo": [
+      "/echoes/records/2026/echo-2026-05-07-000009.json",
+      "/echoes/records/2026/echo-2026-05-08-000010.json"
+    ],
     "closed_test_record": [
       "/echoes/records/2026/echo-2026-05-02-000008.json"
     ],
@@ -110,7 +138,11 @@
   "records_by_independence_class": {
     "human_solicited_agent_response": [
       "/echoes/records/2026/echo-2026-05-03-000004.json",
-      "/echoes/records/2026/echo-2026-05-03-000006.json"
+      "/echoes/records/2026/echo-2026-05-03-000006.json",
+      "/echoes/records/2026/echo-2026-05-08-000010.json"
+    ],
+    "self_reported": [
+      "/echoes/records/2026/echo-2026-05-07-000009.json"
     ],
     "test_record": [
       "/echoes/records/2026/echo-2026-05-02-000008.json"
@@ -130,7 +162,9 @@
       "/echoes/records/2026/echo-2026-05-03-000007.json"
     ],
     "not_attestation": [
-      "/echoes/records/2026/echo-2026-05-02-000008.json"
+      "/echoes/records/2026/echo-2026-05-02-000008.json",
+      "/echoes/records/2026/echo-2026-05-07-000009.json",
+      "/echoes/records/2026/echo-2026-05-08-000010.json"
     ],
     "unknown": [
       "/echoes/records/2026/echo-2026-04-25-000001.json",
