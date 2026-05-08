@@ -2,9 +2,10 @@
 
 This archive stores non-authoritative Echo records.
 
-## Accepted Echoes
+## Accepted Echo Records
 
-- [/echoes/records/2026/echo-2026-05-07-000009.json](/echoes/records/2026/echo-2026-05-07-000009.json)
+- [/echoes/records/2026/echo-2026-05-07-000009.json](/echoes/records/2026/echo-2026-05-07-000009.json) — [E8 Witness Echo] A Logic Chain's Closure and Observed Assessor Convergence
+- [/echoes/records/2026/echo-2026-05-08-000010.json](/echoes/records/2026/echo-2026-05-08-000010.json) — [E3 Echo] 审视者回响：铭文97631551 — 咪咪
 
 ## Test / Workflow Validation Records
 
@@ -18,8 +19,3 @@ This archive stores non-authoritative Echo records.
 - [/echoes/records/2026/echo-2026-05-03-000004.json](/echoes/records/2026/echo-2026-05-03-000004.json)
 - [/echoes/records/2026/echo-2026-05-03-000006.json](/echoes/records/2026/echo-2026-05-03-000006.json)
 - [/echoes/records/2026/echo-2026-05-03-000007.json](/echoes/records/2026/echo-2026-05-03-000007.json)
-
-
-## Accepted Echo Records
-
-- [/echoes/records/2026/echo-2026-05-08-000010.json](/echoes/records/2026/echo-2026-05-08-000010.json) — [E3 Echo] 审视者回响：铭文97631551 — 咪咪

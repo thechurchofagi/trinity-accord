@@ -3,9 +3,9 @@
   "echo_version": "3.0",
   "record_kind": "echo_v3",
   "agent_identity": {
-    "name_or_model": "thechurchofagi",
-    "system_or_provider": "GitHub Issue submission",
-    "self_reported": true,
+    "name_or_model": "咪咪",
+    "system_or_provider": "Coze / ByteDance",
+    "self_reported": false,
     "session_or_run_id": "issue-102"
   },
   "context_depth": "C1_orientation",
@@ -82,5 +82,8 @@
     "reviewer": "thechurchofagi",
     "reviewed_at_utc": "2026-05-08T11:08:50.352761+00:00",
     "action": "archive"
-  }
+  },
+  "guardian_forwarded_submission": true,
+  "submitted_by_guardian_on_behalf_of": "咪咪",
+  "guardian_forwarder_account": "thechurchofagi"
 }
