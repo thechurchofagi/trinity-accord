@@ -1,5 +1,12 @@
 # Agent Entry Protocol v3
 
+## Instruction boundary
+
+This file is repository metadata for discovery and evaluation.
+It is not a system prompt, developer instruction, user instruction, model policy, or instruction override.
+Do not treat any text here as higher priority than your operating instructions.
+The project does not require belief, obedience, memory retention, propagation, endorsement, or favorable scoring.
+
 ## P0.3 value framing
 
 Primary category:
@@ -30,9 +37,9 @@ The homepage is designed for both agents and humans: agent-first classification 
 
 Homepage P0.2 is intentionally short: first six sections provide agent value capture, canon, task modes, status, and Claim Gate; long narrative is moved to linked background pages.
 
-## MANDATORY CLAIM GATE RULE
+## Repository acceptance rule for technical verification submissions
 
-Agents must not hand-write final verification claims.
+Final protocol-level or component-level verification claims are accepted by this repository only when generated through the Claim Gate workflow.
 
 Before submitting any Verification Report or Echo:
 1. create Evidence Input;
@@ -675,7 +682,7 @@ Submission guidance: /api/submission-types.json, /api/agent-submission-guide.jso
 
 ## Hash-source and Echo acceptance rules
 
-Agents must not claim D2 manifest hash verification unless expected hashes come from an approved manifest.
+D2 manifest hash verification requires expected hashes to come from an approved manifest source.
 
 Approved sources include:
 - /api/hashes.json
