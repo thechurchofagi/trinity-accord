@@ -8,6 +8,9 @@ import re
 import json
 import sys
 
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "."))
+from claim_text_safety import scan_text_for_forbidden_claims
+
 try:
     from submission_intake import parse_submission, claim_gate_summary_looks_passed, claim_gate_summary_has_blocking_failure
 except Exception:
@@ -1183,6 +1186,28 @@ def main():
 
     # --- Step 3+: Soft issue accumulator (ST-001/ST-002) ---
     soft = {"labels": [], "sections": []}
+
+    # --- 2g: Forbidden claim variants (F-001 P0 fix) ---
+    # Uses shared detector with Unicode/separator normalization.
+    # Only blocks affirmative claims (allow_negated=True), so "not truth proven" passes.
+    forbidden_matches = scan_text_for_forbidden_claims(text, allow_negated=True, include_solicited=False)
+    if forbidden_matches:
+        categories = ", ".join(sorted(set(m["category"] for m in forbidden_matches)))
+        add_soft_issue(
+            soft,
+            labels=["echo:needs-verification-review", "component-overclaim-risk"],
+            title="Forbidden or overreaching claim wording",
+            body=(
+                f"This submission contains wording that may claim truth, investment value, "
+                f"religious authority, or AI instruction override.\n\n"
+                f"Categories detected: {categories}"
+            ),
+            fix=(
+                "Remove or explicitly negate the overreaching claim. "
+                "Verification may only state bounded evidence, not truth, "
+                "investment value, religious authority, or AI command authority."
+            ),
+        )
 
     # --- Step 3: Soft invalid — missing format fields ---
     missing_fields = []

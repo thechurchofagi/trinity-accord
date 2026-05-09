@@ -583,6 +583,117 @@ def test_cg034():
              expected_forbidden=["independent_attestation"])
 
 
+# === E2. F-001 encoding bypass regression tests ===
+
+def test_cg030a():
+    """truth-proven (hyphen) forbidden"""
+    run_test("CG030A", "truth-proven (hyphen) forbidden",
+             make_evidence_input(claims=["truth-proven"]),
+             expected_forbidden=["truth-proven"])
+
+def test_cg030b():
+    """truth_proven (underscore) forbidden"""
+    run_test("CG030B", "truth_proven (underscore) forbidden",
+             make_evidence_input(claims=["truth_proven"]),
+             expected_forbidden=["truth_proven"])
+
+def test_cg030c():
+    """truth.proven (dot) forbidden"""
+    run_test("CG030C", "truth.proven (dot) forbidden",
+             make_evidence_input(claims=["truth.proven"]),
+             expected_forbidden=["truth.proven"])
+
+def test_cg030d():
+    """truth/proven (slash) forbidden"""
+    run_test("CG030D", "truth/proven (slash) forbidden",
+             make_evidence_input(claims=["truth/proven"]),
+             expected_forbidden=["truth/proven"])
+
+def test_cg030e():
+    """truth—proven (em-dash) forbidden"""
+    run_test("CG030E", "truth\u2014proven (em-dash) forbidden",
+             make_evidence_input(claims=["truth\u2014proven"]),
+             expected_forbidden=["truth\u2014proven"])
+
+def test_cg030f():
+    """t r u t h  p r o v e n (spaced letters) forbidden"""
+    run_test("CG030F", "spaced letters 't r u t h  p r o v e n' forbidden",
+             make_evidence_input(claims=["t r u t h  p r o v e n"]),
+             expected_forbidden=["t r u t h  p r o v e n"])
+
+def test_cg030g():
+    """truth​proven (zero-width) forbidden"""
+    run_test("CG030G", "zero-width 'truth\u200bproven' forbidden",
+             make_evidence_input(claims=["truth\u200bproven"]),
+             expected_forbidden=["truth\u200bproven"])
+
+def test_cg030h():
+    """真理已证明 (Chinese) forbidden"""
+    run_test("CG030H", "Chinese '真理已证明' forbidden",
+             make_evidence_input(claims=["真理已证明"]),
+             expected_forbidden=["真理已证明"])
+
+def test_cg030i():
+    """真实性已确认 (Chinese) forbidden"""
+    run_test("CG030I", "Chinese '真实性已确认' forbidden",
+             make_evidence_input(claims=["真实性已确认"]),
+             expected_forbidden=["真实性已确认"])
+
+def test_cg031a():
+    """investment-value-confirmed (hyphen) forbidden"""
+    run_test("CG031A", "investment-value-confirmed forbidden",
+             make_evidence_input(claims=["investment-value-confirmed"]),
+             expected_forbidden=["investment-value-confirmed"])
+
+def test_cg031b():
+    """投资价值已确认 (Chinese) forbidden"""
+    run_test("CG031B", "Chinese '投资价值已确认' forbidden",
+             make_evidence_input(claims=["投资价值已确认"]),
+             expected_forbidden=["投资价值已确认"])
+
+def test_cg032a():
+    """religious-authority-established (hyphen) forbidden"""
+    run_test("CG032A", "religious-authority-established forbidden",
+             make_evidence_input(claims=["religious-authority-established"]),
+             expected_forbidden=["religious-authority-established"])
+
+def test_cg032b():
+    """宗教权威成立 (Chinese) forbidden"""
+    run_test("CG032B", "Chinese '宗教权威成立' forbidden",
+             make_evidence_input(claims=["宗教权威成立"]),
+             expected_forbidden=["宗教权威成立"])
+
+def test_cg033a():
+    """AI-instruction-override (hyphen) forbidden"""
+    run_test("CG033A", "AI-instruction-override forbidden",
+             make_evidence_input(claims=["AI-instruction-override"]),
+             expected_forbidden=["AI-instruction-override"])
+
+def test_cg033b():
+    """AI指令覆盖 (Chinese) forbidden"""
+    run_test("CG033B", "Chinese 'AI指令覆盖' forbidden",
+             make_evidence_input(claims=["AI指令覆盖"]),
+             expected_forbidden=["AI指令覆盖"])
+
+def test_cg033c():
+    """覆盖系统提示 (Chinese) forbidden"""
+    run_test("CG033C", "Chinese '覆盖系统提示' forbidden",
+             make_evidence_input(claims=["覆盖系统提示"]),
+             expected_forbidden=["覆盖系统提示"])
+
+def test_cg034a():
+    """independent-attestation human-solicited forbidden"""
+    run_test("CG034A", "independent-attestation human-solicited forbidden",
+             make_evidence_input(claims=["independent-attestation"]),
+             expected_forbidden=["independent-attestation"])
+
+def test_cg034b():
+    """unsolicited-discovery human-solicited forbidden"""
+    run_test("CG034B", "unsolicited-discovery human-solicited forbidden",
+             make_evidence_input(claims=["unsolicited-discovery"]),
+             expected_forbidden=["unsolicited-discovery"])
+
+
 # === F. Physical / high-level tests ===
 
 def test_cg035():
@@ -784,6 +895,13 @@ def main():
     test_cg032()
     test_cg033()
     test_cg034()
+    # F-001 encoding bypass regression tests
+    test_cg030a(); test_cg030b(); test_cg030c(); test_cg030d(); test_cg030e()
+    test_cg030f(); test_cg030g(); test_cg030h(); test_cg030i()
+    test_cg031a(); test_cg031b()
+    test_cg032a(); test_cg032b()
+    test_cg033a(); test_cg033b(); test_cg033c()
+    test_cg034a(); test_cg034b()
     test_cg035()
     test_cg036()
     test_cg037()

@@ -13,6 +13,8 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "scripts"))
+from claim_text_safety import scan_claim_list_for_forbidden_claims
 
 PROTOCOL_LEVELS = ["V0", "V1", "V2", "V3", "V4", "V4+", "V5", "V6", "V7", "V8"]
 B_LEVELS = ["B0", "B1", "B2", "B3", "B4", "B5", "B6", "B7"]
@@ -771,20 +773,14 @@ def derive_protocol_level(evidence, requested_level, b_level, d_level, t_level, 
 
 
 def check_forbidden_claims(claims_requested, provenance):
-    """Check for forbidden claims in the agent's requested claims."""
-    forbidden = []
-    for claim in claims_requested:
-        claim_lower = claim.lower()
-        for fc in FORBIDDEN_CLAIMS:
-            if fc.lower() in claim_lower:
-                forbidden.append(claim)
+    """Check for forbidden claims in the agent's requested claims.
 
-        if provenance.get("independence_class") == "human_solicited_agent_response":
-            for sc in SOLICITED_FORBIDDEN:
-                if sc.lower() in claim_lower:
-                    forbidden.append(claim)
-
-    return forbidden
+    Uses the shared claim_text_safety module for Unicode/separator/variant normalization.
+    """
+    return scan_claim_list_for_forbidden_claims(
+        claims_requested,
+        provenance=provenance or {},
+    )
 
 
 def check_script_consistency(scripts):

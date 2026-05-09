@@ -13,6 +13,8 @@ import os
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "scripts"))
+from claim_text_safety import scan_object_for_forbidden_claims
 
 SHA256_RE = re.compile(r"^[a-f0-9]{64}$")
 
@@ -1369,6 +1371,27 @@ def validate_no_placeholders_in_submission(obj, path_label):
     
     return ok
 
+def validate_forbidden_claim_variants(obj, path_label):
+    """Shared detector: scan entire object for forbidden claim variants.
+
+    Uses claim_text_safety.scan_object_for_forbidden_claims which handles
+    Unicode normalization, separator normalization, compact-form detection,
+    and negation-aware filtering.
+
+    This is the second-line defense — even if Claim Gate misses a variant,
+    the validator must catch it here.
+    """
+    matches = scan_object_for_forbidden_claims(obj)
+    ok = True
+    for m in matches:
+        ok &= check(
+            False,
+            f"{path_label} forbidden claim variant: {m['category']}",
+            f"matched {m.get('matched_text', '')!r} at {m.get('path', '<unknown>')}"
+        )
+    return ok
+
+
 def validate_file(path):
     """Validate a single submission file."""
     path_label = str(Path(path).relative_to(ROOT) if Path(path).is_relative_to(ROOT) else path)
@@ -1494,6 +1517,11 @@ def validate_file(path):
     ok &= validate_no_placeholders_in_submission(obj, path_label)
     
     ok &= validate_v8_forensic_path(obj, path_label)
+
+    # Shared forbidden-claim variant detector (P0 F-001 fix)
+    # This is the second-line defense after Claim Gate.
+    # Catches Unicode/separator/compact-form variants that bypass per-rule checks.
+    ok &= validate_forbidden_claim_variants(obj, path_label)
 
     # Schema validation (skip for legacy records)
     archive_status = obj.get("archive_status", "")
