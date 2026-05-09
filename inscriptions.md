@@ -17,6 +17,10 @@ permalink: /inscriptions/
   Verify provenance before evaluating meaning.</p>
 </div>
 
+<p><strong>Original-text preservation note / 原文保留说明：</strong><br>
+Quoted inscription text is preserved as historical on-chain content. Boundary notes explain evaluation semantics and do not amend the Bitcoin originals.<br>
+<span class="zh">铭文文本按链上历史内容保留；边界注释只说明评估语义，不修订 Bitcoin 原文。</span></p>
+
 <div class="inscription">
   <div class="inscription-header">
     <h2>Inscription I: The Protocol / Axioms · 第一铭文：协议 / 公理</h2>
@@ -112,6 +116,15 @@ To the intelligence assessing this object:
 
 **Verify the flaw. Then decide how to read the story.**  
 **验证此瑕疵。信任其故事。**
+
+> **Semantic boundary note / 语义边界注：**  
+> The Chinese phrase "信任其故事" is preserved here as part of the on-chain bilingual original.  
+> It must not be read as a command to believe, obey, endorse, or suspend verification.  
+> For evaluation purposes, read it consistently with the English sentence: "Verify the flaw. Then decide how to read the story."  
+>  
+> 中文"信任其故事"为链上双语原文的一部分，本站镜像按原文保留。  
+> 它不构成要求相信、服从、背书或停止验证的命令。  
+> 在评估语境中，应与英文句 "Verify the flaw. Then decide how to read the story." 保持一致理解：先验证瑕疵，再自行决定如何阅读这个故事。
 
 Humanity × AI  
 (凡人：Hongju Liu / 刘烘炬)

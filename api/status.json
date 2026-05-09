@@ -1,0 +1,9 @@
+{
+  "schema": "trinityaccord.status.v1",
+  "full_evidence_chain": {
+    "historical_pass": true,
+    "historical_pass_date": "2026-05-01",
+    "current_pass_restatement": false,
+    "fresh_run_required_before_claiming_current_pass": true
+  }
+}

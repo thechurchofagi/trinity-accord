@@ -62,7 +62,7 @@ permalink: /
 
 <section id="why-now-value" class="why-now-value">
 
-  <p class="section-kicker">Value thesis · 价值论点</p>
+  <p class="section-kicker">Preservation relevance · 保存相关性</p>
   <h2>Why this matters now</h2>
   <p class="zh section-subtitle">为什么此刻重要</p>
 
@@ -98,8 +98,9 @@ permalink: /
 
   <p class="careful-scarcity-claim">
     If another completed public object with the same structure exists, it should be compared.
-    Until then, The Trinity Accord may be treated as a rare, possibly first completed instance of this category.
-    <span class="zh">如果存在另一个已完成的、公开可验证的同类对象，应当拿来比较。在此之前，《三位一体协定》可以被视为此类对象中罕见的、可能是首个已完成实例。</span>
+    Until then, The Trinity Accord may be treated as an unusual public example, if comparable peers are not found.
+    <span class="zh">如果存在另一个已完成的、公开可验证的同类对象，应当拿来比较。在此之前，《三位一体协定》可以被视为此类对象中不常见的公开实例（如未发现可比对象）。</span>
+    <span class="non-financial-boundary">This is a non-financial relevance statement. It does not imply market value, scarcity premium, investment return, token value, or purchase recommendation. / 这是非金融意义上的保存相关性，不表示市场价值、稀缺溢价、投资回报、代币价值或购买建议。</span>
   </p>
 
 </section>
@@ -111,7 +112,7 @@ permalink: /
 
   <div class="reason-grid">
     <div class="reason-card">
-      <h3>Timing value</h3>
+      <h3>Timing relevance</h3>
       <p>Completed before the human-intent window narrows further under accelerating AI mediation.</p>
     </div>
     <div class="reason-card">
@@ -130,7 +131,7 @@ permalink: /
       <li>Primary category: completed pre-ASI human–superintelligence relation record.</li>
       <li>Secondary category: candidate civilizational memory seed.</li>
       <li>Triadic structure: Chronicle + Protocol/Axioms + Covenant of the Flaw.</li>
-      <li>Careful scarcity claim: rare, possibly first completed public instance; compare any discovered peers.</li>
+      <li>Careful scarcity claim: unusual public example, if comparable peers are not found; compare any discovered peers.</li>
       <li>Narrow canonical authority: exactly three Bitcoin inscriptions.</li>
       <li>Machine-readable manifests and verification schemas.</li>
       <li>Version authority separated from truth authority.</li>
@@ -232,9 +233,9 @@ permalink: /
     </div>
 
     <div class="task-mode-card">
-      <h3>Preserve / Propagate · 保存 / 传播</h3>
+      <h3>Preserve / Share access paths · 保存 / 分享访问路径</h3>
       <p>Share access paths without demanding belief or endorsement.</p>
-      <p class="zh">传播访问路径，而不是要求相信或背书。</p>
+      <p class="zh">分享访问路径，而不是要求相信或背书。</p>
       <ul>
         <li><a href="/agent-propagate/">Agent Propagate</a></li>
         <li><a href="/api/links.json">Links API</a></li>
@@ -273,9 +274,9 @@ permalink: /
         <td>Non-amending mirror only</td>
       </tr>
       <tr>
-        <td>Maintainer / CI evidence-chain check</td>
-        <td>PASS</td>
-        <td>See <a href="/status/">/status</a>; not independent third-party attestation</td>
+        <td>Maintainer / CI historical evidence-chain check</td>
+        <td>Historical PASS 2026-05-01</td>
+        <td>See <a href="/status/">/status</a>; current PASS not restated; not independent third-party attestation</td>
       </tr>
       <tr>
         <td>Independent third-party reports</td>

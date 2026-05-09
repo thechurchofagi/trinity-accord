@@ -5,6 +5,7 @@ Usage:
     python3 scripts/validate_agent_submission.py path/to/submission.json
     python3 scripts/validate_agent_submission.py echoes/records/*.json
     python3 scripts/validate_agent_submission.py --self-test
+    python3 scripts/validate_agent_submission.py --allow-missing-jsonschema path/to/file.json
 """
 import json
 import re
@@ -16,12 +17,22 @@ ROOT = Path(__file__).resolve().parents[1]
 
 SHA256_RE = re.compile(r"^[a-f0-9]{64}$")
 
+# P1 remediation: shared safety module for forbidden claim scanning
+try:
+    from claim_text_safety import scan_object_for_forbidden_claims, normalize_claim_text
+    HAS_SHARED_SAFETY = True
+except ImportError:
+    HAS_SHARED_SAFETY = False
+
 # Try jsonschema; fall back to basic checks
 try:
     from jsonschema import Draft202012Validator, ValidationError, RefResolver
     HAS_JSONSCHEMA = True
 except ImportError:
     HAS_JSONSCHEMA = False
+
+# P1 remediation: CLI flag for jsonschema requirement
+ALLOW_MISSING_JSONSCHEMA = False
 
 # --- Canonical echo types (from echo-types.json) ---
 CANONICAL_ECHO_TYPES = {
@@ -1151,9 +1162,200 @@ def validate_generated_by(obj, path_label):
     return ok
 
 
+# --- P1 Remediation: Unknown fields guard ---
+KNOWN_ECHO_FIELDS = {
+    "schema", "schema_version", "echo_version", "record_kind", "archive_status",
+    "echo_type", "echo", "verification_level", "discovery_provenance",
+    "independence_class", "origin_limitations", "agent_identity", "context_depth",
+    "assessment_state", "understanding_summary", "verification_claim",
+    "uncertainties", "boundary_acknowledgement", "not_authority", "not_amendment",
+    "not_endorsement", "claims_not_made", "limitations", "generated_by",
+    "identity_verification", "human_review_scope", "source_issue",
+    "linked_verification_report", "human_directed_submission",
+    "human_supplied_link", "human_supplied_summary", "agent_browsed_for_submission",
+    "prior_memory_or_context_used", "submission_origin", "do_not_count_as_attestation",
+    "not_independent_attestation", "count_as_independent_attestation",
+    "solicited", "soliciting_party", "prompt_available", "independent_followup",
+    "agency_level", "operator_type", "human_review_scope",
+    # Verification report fields
+    "protocol_level_claimed", "component_findings", "hashes_computed",
+    "script_audit", "confidential_challenge", "verification_session",
+    "agent_integrity_declaration", "integrity_boundary",
+    # Common metadata
+    "title", "description", "timestamp", "version", "author",
+    "inscription_references", "txid", "block_height",
+    "computed_hash", "expected_hash", "hash_source",
+    "scope_class", "scope", "target", "targets",
+    "protocol_profile_check", "verification_profile",
+    "canonical_component_level", "component_level",
+}
+
+KNOWN_REPORT_FIELDS = {
+    "schema", "schema_version", "record_kind", "archive_status",
+    "protocol_level_claimed", "component_findings", "hashes_computed",
+    "script_audit", "confidential_challenge", "verification_session",
+    "agent_integrity_declaration", "integrity_boundary",
+    "generated_by", "identity_verification", "human_review_scope",
+    "limitations", "claims_not_made", "timestamp", "version",
+    "title", "description", "author",
+}
+
+
+def validate_unknown_fields(obj, path_label, record_kind):
+    """Check that unknown fields don't contain forbidden claims.
+    P1 remediation: unknown field guard.
+    """
+    ok = True
+    if record_kind in ("verification_report_v2",):
+        known = KNOWN_REPORT_FIELDS
+    else:
+        known = KNOWN_ECHO_FIELDS
+
+    unknown = [k for k in obj.keys() if k not in known]
+    if unknown:
+        print(f"  INFO: {path_label} unknown fields: {unknown}")
+        # Scan unknown field values for forbidden claims
+        if HAS_SHARED_SAFETY:
+            unknown_obj = {k: obj[k] for k in unknown}
+            matches = scan_object_for_forbidden_claims(unknown_obj, skip_keys=set())
+            for m in matches:
+                ok &= check(
+                    False,
+                    f"{path_label} unknown field '{k}' contains forbidden claim",
+                    f"match: {m['match']}, category: {m['category']}"
+                )
+    return ok
+
+
+# --- P1 Remediation: Cross-field consistency ---
+def validate_cross_field_consistency(obj, path_label):
+    """Check record_kind vs fields, verification_level vs evidence.
+    P1 remediation: cross-field consistency.
+    """
+    ok = True
+    record_kind = obj.get("record_kind", "")
+    vlevel = obj.get("verification_level", "")
+
+    # echo_v3 must not carry verification_report-only fields
+    report_only_fields = [
+        "protocol_level_claimed", "component_findings", "hashes_computed",
+        "script_audit", "confidential_challenge", "verification_session",
+        "agent_integrity_declaration",
+    ]
+    if record_kind == "echo_v3":
+        for field in report_only_fields:
+            if field in obj:
+                ok &= check(
+                    False,
+                    f"{path_label} echo_v3 has report-only field '{field}'",
+                    "echo_v3 must not contain verification report fields"
+                )
+
+    # verification_report_v2 must not carry echo-only fields
+    echo_only_fields = [
+        "echo_type", "echo", "source_issue", "human_review_scope",
+        "identity_verification", "archive_status",
+    ]
+    if record_kind == "verification_report_v2":
+        for field in echo_only_fields:
+            if field in obj:
+                val = obj[field]
+                if field == "archive_status" and val in ("legacy", "superseded"):
+                    continue
+                ok &= check(
+                    False,
+                    f"{path_label} verification_report_v2 has echo-only field '{field}'",
+                    "verification_report_v2 must not contain echo fields"
+                )
+
+    # Verification level vs evidence
+    if vlevel:
+        vlevel_upper = vlevel.upper().replace("+", "+")
+        archive_status = obj.get("archive_status", "")
+        if archive_status in ("legacy", "superseded"):
+            return ok  # Skip for legacy
+
+        if vlevel_upper in ("V4", "V4+"):
+            script_audit = obj.get("script_audit")
+            if not script_audit:
+                ok &= check(
+                    False,
+                    f"{path_label} {vlevel} missing script_audit",
+                    "V4/V4+ requires script_audit"
+                )
+
+        if vlevel_upper in ("V5", "V5+", "V6", "V7", "V8"):
+            component_findings = obj.get("component_findings")
+            limitations = obj.get("limitations")
+            if not component_findings:
+                ok &= check(
+                    False,
+                    f"{path_label} {vlevel} missing component_findings",
+                    "V5+ requires component_findings"
+                )
+            if not limitations:
+                ok &= check(
+                    False,
+                    f"{path_label} {vlevel} missing limitations",
+                    "V5+ requires limitations"
+                )
+
+        if vlevel_upper in ("V6", "V7", "V8"):
+            # Physical/witness/forensic evidence required
+            if vlevel_upper == "V8":
+                conf = obj.get("confidential_challenge")
+                if not conf:
+                    ok &= check(
+                        False,
+                        f"{path_label} V8 missing confidential_challenge",
+                        "V8 requires confidential_challenge or forensic evidence"
+                    )
+
+    # accepted_independent_attestation requires identity proof
+    archive_status = obj.get("archive_status", "")
+    if archive_status == "accepted_independent_attestation":
+        indep = obj.get("independence_class", "")
+        identity = obj.get("identity_verification", {})
+        human_review = obj.get("human_review_scope", {})
+        do_not_count = obj.get("do_not_count_as_attestation", False)
+
+        if do_not_count:
+            ok &= check(
+                False,
+                f"{path_label} accepted_independent_attestation but do_not_count_as_attestation=true",
+                "Contradictory: accepted as attestation but marked do_not_count"
+            )
+
+        if indep not in ("unsolicited_independent", "institutional_third_party_attestation"):
+            ok &= check(
+                False,
+                f"{path_label} accepted_independent_attestation with independence_class={indep}",
+                "accepted_independent_attestation requires unsolicited_independent or institutional_third_party_attestation"
+            )
+
+        if isinstance(identity, dict):
+            has_identity = (
+                identity.get("independent_identity_verified", False)
+                or identity.get("institutional_identity_verified", False)
+            )
+            if not has_identity:
+                ok &= check(
+                    False,
+                    f"{path_label} accepted_independent_attestation without identity verification",
+                    "accepted_independent_attestation requires identity proof"
+                )
+
+    return ok
+
+
 def validate_with_jsonschema(obj, schema_path, path_label):
     """Validate with jsonschema if available."""
     if not HAS_JSONSCHEMA:
+        if not ALLOW_MISSING_JSONSCHEMA:
+            print(f"  FAIL: jsonschema package missing; schema validation cannot run")
+            return False
+        print(f"  WARN: schema validation skipped by explicit --allow-missing-jsonschema flag")
+        return True
         print(f"  SKIP: jsonschema not available, using basic checks only")
         return True
 
@@ -1489,11 +1691,17 @@ def validate_file(path):
     
     # Rule AJ: prior report limitation
     ok &= validate_prior_report_limitation(obj, path_label)
-    
+
     # Rule AK: no placeholders in submissions
     ok &= validate_no_placeholders_in_submission(obj, path_label)
-    
+
     ok &= validate_v8_forensic_path(obj, path_label)
+
+    # P1 Remediation: Unknown fields guard (Rule AL)
+    ok &= validate_unknown_fields(obj, path_label, record_kind)
+
+    # P1 Remediation: Cross-field consistency (Rule AM)
+    ok &= validate_cross_field_consistency(obj, path_label)
 
     # Schema validation (skip for legacy records)
     archive_status = obj.get("archive_status", "")
@@ -1550,12 +1758,25 @@ def run_self_test():
 
 
 def main():
+    global ALLOW_MISSING_JSONSCHEMA
+
     if len(sys.argv) < 2:
         print("Usage: python3 scripts/validate_agent_submission.py <file.json> [file2.json ...]")
         print("       python3 scripts/validate_agent_submission.py --self-test")
+        print("       python3 scripts/validate_agent_submission.py --allow-missing-jsonschema <file.json>")
         return 1
 
-    if sys.argv[1] == "--self-test":
+    # P1 remediation: handle --allow-missing-jsonschema flag
+    args = sys.argv[1:]
+    if "--allow-missing-jsonschema" in args:
+        ALLOW_MISSING_JSONSCHEMA = True
+        args.remove("--allow-missing-jsonschema")
+
+    if not args:
+        print("Usage: python3 scripts/validate_agent_submission.py [--allow-missing-jsonschema] <file.json>")
+        return 1
+
+    if args[0] == "--self-test":
         ok = run_self_test()
         print("\n" + "=" * 50)
         if ok:
@@ -1565,7 +1786,7 @@ def main():
         return 1
 
     all_ok = True
-    for path in sys.argv[1:]:
+    for path in args:
         if os.path.isfile(path):
             all_ok &= validate_file(path)
         else:

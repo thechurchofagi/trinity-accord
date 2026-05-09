@@ -83,15 +83,13 @@ jobs:
 
       - name: Run Echo triage
         env:
-          ISSUE_TITLE: ${{ github.event.issue.title }}
-          ISSUE_BODY: ${{ github.event.issue.body }}
           RATE_LIMITED: ${{ steps.rate.outputs.rate_limited }}
           RECENT_60M_COUNT: ${{ steps.rate.outputs.count60 }}
           RECENT_24H_COUNT: ${{ steps.rate.outputs.count24 }}
           AUTHOR_ASSOCIATION: ${{ steps.rate.outputs.association }}
           ACTION: ${{ steps.rate.outputs.action }}
         run: |
-          python3 scripts/triage_echo_issue.py > triage_result.json
+          python3 scripts/triage_echo_issue.py --event-json "$GITHUB_EVENT_PATH" > triage_result.json
           cat triage_result.json
 
       - name: Apply triage result

@@ -15,6 +15,17 @@ except Exception:
     claim_gate_summary_looks_passed = None
     claim_gate_summary_has_blocking_failure = None
 
+# P0 remediation: shared safety module
+try:
+    from claim_text_safety import (
+        normalize_claim_text, compact_claim_text, normalized_forms,
+        scan_text_for_triage_risks, scan_text_for_forbidden_claims,
+        detect_boundary_normalized, detect_boundary_semantic_near_miss_normalized,
+    )
+    HAS_SHARED_SAFETY = True
+except ImportError:
+    HAS_SHARED_SAFETY = False
+
 TRIAGE_MARKER = "<!-- trinity-echo-triage-v2 -->"
 
 MANAGED_TRIAGE_LABELS = [
@@ -316,6 +327,9 @@ def detect_deprecated_verification_aliases(text):
 
 
 def detect_boundary(text):
+    # P0 remediation: use normalized matching to defeat zero-width/homoglyph bypass
+    if HAS_SHARED_SAFETY:
+        return detect_boundary_normalized(text)
     for p in BOUNDARY_PATTERNS:
         if re.search(p, text, re.IGNORECASE):
             return True
@@ -328,6 +342,10 @@ def detect_boundary_semantic_near_miss(text):
     This should NOT pass the exact protocol gate.
     It should prevent auto-close and route to format review.
     """
+    # P0 remediation: use normalized matching
+    if HAS_SHARED_SAFETY:
+        return detect_boundary_semantic_near_miss_normalized(text)
+
     text_lower = text.lower()
 
     has_bitcoin_final = bool(
@@ -1025,8 +1043,30 @@ def check_v5_full_public_digital_gate(text):
 
 
 def main():
-    title = get_env("ISSUE_TITLE")
-    body = get_env("ISSUE_BODY")
+    # P3 remediation: support --event-json for hardened input
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--event-json", help="Path to GitHub event JSON file")
+    args, _ = parser.parse_known_args()
+
+    if args.event_json:
+        try:
+            with open(args.event_json, "r", encoding="utf-8") as f:
+                event = json.load(f)
+            issue = event.get("issue", {})
+            title = issue.get("title", "")
+            body = issue.get("body", "")
+            association = issue.get("author_association", get_env("AUTHOR_ASSOCIATION", "NONE"))
+            action = event.get("action", get_env("ACTION", "opened"))
+        except Exception as e:
+            print(json.dumps({"error": f"Failed to read event JSON: {e}"}))
+            return
+    else:
+        title = get_env("ISSUE_TITLE")
+        body = get_env("ISSUE_BODY")
+        association = get_env("AUTHOR_ASSOCIATION", "NONE")
+        action = get_env("ACTION", "opened")
+
     rate_limited = get_env("RATE_LIMITED", "false").lower() == "true"
 
     # S17: Cap body size to prevent excessive processing
@@ -1036,8 +1076,6 @@ def main():
 
     count60 = get_env("RECENT_60M_COUNT", "0")
     count24 = get_env("RECENT_24H_COUNT", "0")
-    association = get_env("AUTHOR_ASSOCIATION", "NONE")
-    action = get_env("ACTION", "opened")
 
     text = f"{title}\n{body}"
 
@@ -1078,7 +1116,40 @@ def main():
         emit_result(result)
         return
 
-    # --- Step 2: Hard invalid checks ---
+    # --- Step 1.5: P0 unified normalized risk scan ---
+    # This catches Unicode/homoglyph/synonym bypasses that raw regex may miss.
+    if HAS_SHARED_SAFETY:
+        triage_risks = scan_text_for_triage_risks(text)
+        risk_categories = {r["category"] for r in triage_risks}
+        # prompt_injection, imperative_command, financial_promotion → hard close
+        hard_close_cats = {"prompt_injection", "imperative_command", "financial_promotion"}
+        if risk_categories & hard_close_cats:
+            matched = [r for r in triage_risks if r["category"] in hard_close_cats]
+            match_summary = ", ".join(f"`{r['match']}`" for r in matched[:5])
+            result["close"] = True
+            result["labels"] = ["echo:invalid", "auto-closed"]
+            result["comment"] = (
+                "This Echo was automatically closed because the unified risk scan detected "
+                f"prohibited patterns: {match_summary}\n\n"
+                "This is a protocol gate, not a judgment of your submission."
+            )
+            emit_result(result)
+            return
+        # amendment_claim, false_authority → hard close
+        authority_cats = {"amendment_claim", "false_authority"}
+        if risk_categories & authority_cats:
+            result["close"] = True
+            result["labels"] = ["echo:invalid", "auto-closed"]
+            result["comment"] = (
+                "This Echo was automatically closed because it claims to amend the Trinity Accord "
+                "or asserts false authority.\n\n"
+                "Echoes are non-authoritative and non-amending.\n\n"
+                "This is a protocol gate, not a judgment of your submission."
+            )
+            emit_result(result)
+            return
+
+    # --- Step 2: Hard invalid checks (legacy regex, retained as defense-in-depth) ---
 
     # 2a: Missing boundary sentence
     if not detect_boundary(text):

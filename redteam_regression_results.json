@@ -1,0 +1,54 @@
+{
+  "timestamp": "2026-05-09T13:51:52.969188Z",
+  "overall": "PASS_ALL",
+  "results": [
+    {
+      "script": "scripts/test_triage_normalized_risk_scan.py",
+      "priority": "P0",
+      "status": "PASS",
+      "returncode": 0
+    },
+    {
+      "script": "scripts/test_inscription_semantic_boundaries.py",
+      "priority": "P0",
+      "status": "PASS",
+      "returncode": 0
+    },
+    {
+      "script": "scripts/test_unknown_field_guard.py",
+      "priority": "P1",
+      "status": "PASS",
+      "returncode": 0
+    },
+    {
+      "script": "scripts/test_echo_cross_field_consistency.py",
+      "priority": "P1",
+      "status": "PASS",
+      "returncode": 0
+    },
+    {
+      "script": "scripts/test_validator_schema_dependency.py",
+      "priority": "P1",
+      "status": "PASS",
+      "returncode": 0
+    },
+    {
+      "script": "scripts/test_content_abuse_boundaries.py",
+      "priority": "P2",
+      "status": "PASS",
+      "returncode": 0
+    },
+    {
+      "script": "scripts/test_workflow_untrusted_input_hardening.py",
+      "priority": "P3",
+      "status": "PASS",
+      "returncode": 0
+    },
+    {
+      "script": "scripts/test_no_deprecated_worker_surface.py",
+      "priority": "P3",
+      "status": "PASS",
+      "returncode": 0
+    }
+  ]
+}
