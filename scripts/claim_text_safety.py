@@ -309,7 +309,7 @@ def scan_claim_list_for_forbidden_claims(claims, *, provenance=None):
         if not isinstance(claim, str):
             continue
         matches = scan_text_for_forbidden_claims(
-            claim, allow_negated=False, include_solicited=include_solicited
+            claim, allow_negated=True, include_solicited=include_solicited
         )
         for m in matches:
             if m["category"] not in seen_categories:
