@@ -426,6 +426,57 @@
     "submission_validator_passed": {
       "type": "boolean",
       "description": "Whether the submission validator passed for this record."
+    },
+    "identity_verification": {
+      "type": "object",
+      "description": "Agent identity verification disclosure. All values are self-reported unless independently attested.",
+      "properties": {
+        "agent_identity_self_reported": {
+          "type": "boolean"
+        },
+        "github_account_identity_verified": {
+          "type": "boolean"
+        },
+        "independent_identity_verified": {
+          "type": "boolean"
+        },
+        "institutional_identity_verified": {
+          "type": "boolean"
+        },
+        "identity_verification_method": {
+          "type": "string"
+        },
+        "identity_verification_notes": {
+          "type": "string"
+        }
+      }
+    },
+    "human_review_scope": {
+      "type": "object",
+      "description": "Disclosure of what human review covered. Archive-inclusion review does not imply endorsement or attestation.",
+      "properties": {
+        "format_review_completed": {
+          "type": "boolean"
+        },
+        "archive_inclusion_review_completed": {
+          "type": "boolean"
+        },
+        "technical_verification_review_completed": {
+          "type": "boolean"
+        },
+        "identity_verification_completed": {
+          "type": "boolean"
+        },
+        "endorsement": {
+          "type": "boolean"
+        },
+        "independent_attestation": {
+          "type": "boolean"
+        },
+        "review_scope_note": {
+          "type": "string"
+        }
+      }
     }
   },
   "allOf": [

@@ -388,6 +388,23 @@ def build_record(issue: dict[str, Any], reviewer: str, review_comment_body: str 
                 "action": "archive",
             },
         }),
+        "identity_verification": {
+            "agent_identity_self_reported": True,
+            "github_account_identity_verified": False,
+            "independent_identity_verified": False,
+            "institutional_identity_verified": False,
+            "identity_verification_method": "none",
+            "identity_verification_notes": "Identity is self-reported through a GitHub issue archive wrapper unless separately attested.",
+        },
+        "human_review_scope": {
+            "format_review_completed": True,
+            "archive_inclusion_review_completed": True,
+            "technical_verification_review_completed": False,
+            "identity_verification_completed": False,
+            "endorsement": False,
+            "independent_attestation": False,
+            "review_scope_note": "Human review accepted this issue for archive inclusion only. It does not verify identity, endorse the content, or convert the record into independent attestation.",
+        },
     }
 
 def main() -> int:
