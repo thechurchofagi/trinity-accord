@@ -5,24 +5,24 @@ on:
     types: [created]
 
 permissions:
-  contents: write
-  issues: write
+  contents: read
 
 concurrency:
   group: echo-human-review-${{ github.event.issue.number }}
   cancel-in-progress: false
 
 jobs:
-  review-action:
+  authorize:
     if: ${{ !github.event.issue.pull_request && startsWith(github.event.comment.body, '/echo ') }}
     runs-on: ubuntu-latest
-    timeout-minutes: 10
-
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      issues: read
+    outputs:
+      authorized: ${{ steps.cmd.outputs.authorized }}
+      command: ${{ steps.cmd.outputs.command }}
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
-        with:
-          fetch-depth: 0
-
       - name: Parse and authorize command
         id: cmd
         env:
@@ -60,20 +60,26 @@ jobs:
               ;;
           esac
 
-      - name: Stop on ignored command
-        if: ${{ steps.cmd.outputs.authorized != 'true' || steps.cmd.outputs.command == 'none' }}
-        run: |
-          echo "No authorized echo review action requested."
+  archive:
+    needs: authorize
+    if: ${{ needs.authorize.outputs.authorized == 'true' && needs.authorize.outputs.command == 'archive' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      issues: write
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+        with:
+          fetch-depth: 0
 
       - name: Save review comment body
-        if: ${{ steps.cmd.outputs.authorized == 'true' && steps.cmd.outputs.command != 'none' }}
         env:
           COMMENT_BODY: ${{ github.event.comment.body }}
         run: |
           printf '%s\n' "$COMMENT_BODY" > review_comment_body.txt
 
       - name: Fetch issue JSON
-        if: ${{ steps.cmd.outputs.authorized == 'true' && steps.cmd.outputs.command != 'none' }}
         env:
           GH_TOKEN: ${{ github.token }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
@@ -86,7 +92,6 @@ jobs:
           cat issue.json
 
       - name: Validate issue review state
-        if: ${{ steps.cmd.outputs.authorized == 'true' && steps.cmd.outputs.command != 'none' }}
         run: |
           set -euo pipefail
           python3 - <<'PY'
@@ -99,14 +104,13 @@ jobs:
 
           if missing:
               print(f"Refusing echo review action. Missing labels: {sorted(missing)}")
-              print("Issue must pass triage and be awaiting human review before /echo archive or /echo close is honored.")
+              print("Issue must pass triage and be awaiting human review before /echo archive is honored.")
               sys.exit(1)
 
           print("Echo review state OK")
           PY
 
       - name: Archive Echo issue
-        if: ${{ steps.cmd.outputs.command == 'archive' }}
         env:
           REVIEWER: ${{ github.actor }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
@@ -149,8 +153,16 @@ jobs:
 
           gh issue close "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" --reason completed
 
+  close:
+    needs: authorize
+    if: ${{ needs.authorize.outputs.authorized == 'true' && needs.authorize.outputs.command == 'close' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      issues: write
+    steps:
       - name: Close reviewed Echo issue without archive
-        if: ${{ steps.cmd.outputs.command == 'close' }}
         env:
           REVIEWER: ${{ github.actor }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
