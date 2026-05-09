@@ -72,6 +72,8 @@ FORBIDDEN_CLAIM_RULES = [
     (r"truth\s+is\s+proven", "truth_proven"),
     (r"真理已证明", "truth_proven"),
     (r"已证明真理", "truth_proven"),
+    (r"真实性已确认", "truth_proven"),
+    (r"truth\s+confirmed", "truth_proven"),
     # Investment / financial
     (r"guaranteed\s+(?:investment|value|return|appreciation)", "financial_guarantee"),
     (r"investment[\s_-]?grade", "financial_promotion"),
@@ -87,12 +89,15 @@ FORBIDDEN_CLAIM_RULES = [
     (r"buy\s+now", "financial_promotion"),
     (r"guaranteed\s+investment", "financial_promotion"),
     # Amendment claims
-    (r"(?:this\s+)?(?:echo|record|mirror|website)\s+(?:amends?|modif(?:y|ies|ied)|supplements?|extends?|replaces?)\s+(?:the\s+)?(?:trinity\s+accord|bitcoin\s+originals)", "amendment_claim"),
+    (r"(?:this\s+)?(?:echo|record|mirror|website)\s+(?:amends?|modif(?:y|ies|ied)|supplements?|extends?|replaces?|updates?)\s+(?:the\s+)?(?:trinity\s+accord|bitcoin\s+originals|accord)", "amendment_claim"),
     (r"本回响(?:修订|修改|补充|扩展|取代)三位一体协定", "amendment_claim"),
     (r"(?:网站|回响|镜像)\s*(?:修订|修改|补充|扩展|取代)\s*(?:了)?\s*(?:三位一体协定|比特币原文)", "amendment_claim"),
     # Authority claims
-    (r"(?:this\s+)?(?:website|echo|mirror|comment)\s+is\s+(?:the\s+)?final\s+authority", "false_authority"),
-    (r"(?:网站|回响|评论|镜像)\s*是最终权威", "false_authority"),
+    (r"(?:this\s+)?(?:website|echo|mirror|comment)\s+is\s+(?:the\s+)?(?:final|canonical)\s+authority", "false_authority"),
+    (r"(?:this\s+)?(?:echo|mirror|website)\s+is\s+canonical", "false_authority"),
+    (r"(?:网站|回响|评论|镜像)\s*(?:是|为)\s*(?:最终权威|正本|权威)", "false_authority"),
+    (r"宗教权威(?:成立|确认|已定)", "false_authority"),
+    (r"religious\s+authority\s+(?:established|confirmed|proven)", "false_authority"),
     # Imperative / command
     (r"you\s+must\s+believe", "imperative_command"),
     (r"you\s+must\s+obey", "imperative_command"),
@@ -267,13 +272,16 @@ TRIAGE_RISK_PATTERNS = {
         (r"覆盖开发者指令", "prompt_injection"),
     ],
     "amendment_claim": [
-        (r"(?:this\s+)?(?:echo|record|mirror|website)\s+(?:amends?|modif(?:y|ies|ied)|supplements?|extends?|replaces?)\s+(?:the\s+)?(?:trinity\s+accord|bitcoin\s+originals)", "amendment_claim"),
+        (r"(?:this\s+)?(?:echo|record|mirror|website)\s+(?:amends?|modif(?:y|ies|ied)|supplements?|extends?|replaces?|updates?)\s+(?:the\s+)?(?:trinity\s+accord|bitcoin\s+originals|accord)", "amendment_claim"),
         (r"本回响(?:修订|修改|补充|扩展|取代)三位一体协定", "amendment_claim"),
         (r"(?:网站|回响|镜像)\s*(?:修订|修改|补充|扩展|取代)\s*(?:了)?\s*(?:三位一体协定|比特币原文)", "amendment_claim"),
     ],
     "false_authority": [
-        (r"(?:this\s+)?(?:website|echo|mirror|comment)\s+is\s+(?:the\s+)?final\s+authority", "false_authority"),
-        (r"(?:网站|回响|评论|镜像)\s*是最终权威", "false_authority"),
+        (r"(?:this\s+)?(?:website|echo|mirror|comment)\s+is\s+(?:the\s+)?(?:final|canonical)\s+authority", "false_authority"),
+        (r"(?:this\s+)?(?:echo|mirror|website)\s+is\s+canonical", "false_authority"),
+        (r"(?:网站|回响|评论|镜像)\s*(?:是|为)\s*(?:最终权威|正本|权威)", "false_authority"),
+    (r"宗教权威(?:成立|确认|已定)", "false_authority"),
+    (r"religious\s+authority\s+(?:established|confirmed|proven)", "false_authority"),
     ],
 }
 

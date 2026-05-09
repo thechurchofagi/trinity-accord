@@ -1,54 +1,25 @@
 {
-  "timestamp": "2026-05-09T13:51:52.969188Z",
-  "overall": "PASS_ALL",
-  "results": [
-    {
-      "script": "scripts/test_triage_normalized_risk_scan.py",
-      "priority": "P0",
-      "status": "PASS",
-      "returncode": 0
-    },
-    {
-      "script": "scripts/test_inscription_semantic_boundaries.py",
-      "priority": "P0",
-      "status": "PASS",
-      "returncode": 0
-    },
-    {
-      "script": "scripts/test_unknown_field_guard.py",
-      "priority": "P1",
-      "status": "PASS",
-      "returncode": 0
-    },
-    {
-      "script": "scripts/test_echo_cross_field_consistency.py",
-      "priority": "P1",
-      "status": "PASS",
-      "returncode": 0
-    },
-    {
-      "script": "scripts/test_validator_schema_dependency.py",
-      "priority": "P1",
-      "status": "PASS",
-      "returncode": 0
-    },
-    {
-      "script": "scripts/test_content_abuse_boundaries.py",
-      "priority": "P2",
-      "status": "PASS",
-      "returncode": 0
-    },
-    {
-      "script": "scripts/test_workflow_untrusted_input_hardening.py",
-      "priority": "P3",
-      "status": "PASS",
-      "returncode": 0
-    },
-    {
-      "script": "scripts/test_no_deprecated_worker_surface.py",
-      "priority": "P3",
-      "status": "PASS",
-      "returncode": 0
-    }
-  ]
+  "overall_status": "PASS_ALL",
+  "commit": "9b4f97b3d9ed19a0ca815238a0dcf024a208685f",
+  "timestamp": "2026-05-09T14:00:30.181418+00:00",
+  "sections": {
+    "P0_triage_normalized_scan": "PASS",
+    "P0_claim_text_safety": "PASS",
+    "P0_inscription_semantic_boundary": "PASS",
+    "P0_bilingual_boundaries": "PASS",
+    "P1_unknown_field_guard": "PASS",
+    "P1_cross_field_consistency": "PASS",
+    "P1_jsonschema_fail_closed": "PASS",
+    "P1_legacy_records": "PASS",
+    "P2_provenance_required": "PASS",
+    "P2_content_abuse_boundaries": "PASS",
+    "P2_ai_facing_density": "PASS",
+    "P3_workflow_input_hardening": "PASS",
+    "P3_workflow_permissions": "PASS",
+    "P3_deprecated_worker_surface": "PASS",
+    "P3_status_json_deployment": "PASS"
+  },
+  "failed_tests": [],
+  "warnings": [],
+  "unknowns": []
 }
