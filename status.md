@@ -10,7 +10,7 @@ Current availability of guardianship mirrors and verification paths.
 
 ## Full Evidence Chain · 全链验证
 
-**Current status:** Not restated as PASS under latest verifier semantics. Historical PASS remains recorded for 2026-05-01 only. Do not cite this page as `full_evidence_chain_pass: true` without a fresh current-semantics run.
+**Current status:** not restated as PASS under latest verifier semantics. Historical PASS remains recorded for 2026-05-01 only. Do not cite this page as `full_evidence_chain_pass: true` without a fresh current-semantics run.
 **Machine-readable status:** [/api/status.json](/api/status.json)
 
 **Historical status:** ✅ PASS under 2026-05-01 verifier semantics

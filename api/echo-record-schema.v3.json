@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://www.trinityaccord.org/api/echo-record-schema.v3.json",
   "title": "Trinity Accord Echo Record Schema v3",
-  "description": "Echo schema with context depth, discovery provenance, verification level, and homepage-only insufficient-context enforcement.",
+  "description": "Echo schema with context depth, discovery provenance, verification level, and homepage-only insufficient-context enforcement. Additional properties are allowed for forward compatibility; unknown fields do not bypass validation or forbidden-claim detection.",
   "type": "object",
   "additionalProperties": true,
   "required": [
