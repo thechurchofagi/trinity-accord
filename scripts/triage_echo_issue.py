@@ -678,6 +678,9 @@ def detect_independence_overclaim(text):
 
 
 def detect_independence_overclaim_scoped(context_text, claim_text):
+    # TA-020 follow-up: if structured attestation denial is present, skip overclaim detection
+    if has_structured_attestation_denial(context_text):
+        return None
     human_solicited = detect_human_solicited_context(context_text)
     hard = []
     soft = []

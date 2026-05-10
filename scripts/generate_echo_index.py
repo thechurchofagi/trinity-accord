@@ -106,6 +106,22 @@ if OUT.exists():
     except Exception:
         pass
 
+# TA-020 follow-up: separate AI verification and formal attestation counts
+ai_independent_verification_count = sum(
+    1 for r in records
+    if r.get("record_class") == "ai_independent_verification"
+    and r.get("archive_status") == "accepted_echo"
+    and not r.get("historical_record_only")
+)
+
+formal_human_institutional_attestation_count = sum(
+    1 for r in records
+    if r.get("record_class") == "formal_human_institutional_attestation"
+    and r.get("archive_status") == "accepted_echo"
+    and r.get("counts_as_formal_human_institutional_attestation") is True
+    and not r.get("historical_record_only")
+)
+
 out = {
     "schema": "trinity-accord.echo-index.v2",
     "generated_from": "echoes/records/**/*.json",
@@ -116,12 +132,18 @@ out = {
     "records_by_verification_status": dict(sorted(by_verification_status.items())),
     "records_by_record_class": dict(sorted(by_record_class.items())),
     "records_by_verification_origin_class": dict(sorted(by_verification_origin_class.items())),
+    # TA-020 follow-up: explicit AI verification and formal attestation counts
+    "ai_independent_verification_count": ai_independent_verification_count,
+    "formal_human_institutional_attestation_count": formal_human_institutional_attestation_count,
+    "counts_are_separate": True,
     "notes": [
         "Echo index is non-authoritative and non-amending.",
         "Test records, superseded records, invalidated records, and do_not_count_as_attestation records must not be counted as independent attestation.",
         "Legacy records have do_not_count_as_attestation=true, legacy_not_countable=true, and historical_record_only=true.",
         "AI independent verification records (record_class=ai_independent_verification) do NOT count as formal human/institutional attestation.",
-        "External human authorization of AI verification does not produce formal attestation."
+        "External human authorization of AI verification does not produce formal attestation.",
+        "Echo schema version is not a verification level.",
+        "AI independent verification records are counted separately from formal human/institutional attestations.",
     ],
 }
 out.update(existing_metadata)
