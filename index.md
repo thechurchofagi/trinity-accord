@@ -270,34 +270,39 @@ permalink: /
       <p class="status-label">Independent third-party reports</p>
       <p class="status-number">0</p>
       <p class="status-note">No formally accepted independent verification report or independent attestation is currently indexed.</p>
-    </article>
-
-    <article class="status-card">
-      <p class="status-label">Maintainer / CI evidence-chain check</p>
-      <p class="status-number">pass</p>
-      <p class="status-note">Repository integrity checks pass. This is not independent third-party attestation.</p>
+      <p class="zh status-note">当前尚无正式接受的独立验证报告或独立见证记录。</p>
     </article>
 
     <article class="status-card">
       <p class="status-label">Archived non-attestation Echoes</p>
       <p class="status-number">2</p>
       <p class="status-note">Accepted Echo records exist, but they are explicitly not counted as independent attestation.</p>
+      <p class="zh status-note">已有被接受归档的 Echo，但它们明确不计为独立见证。</p>
     </article>
 
     <article class="status-card">
       <p class="status-label">Highest archived Echo level</p>
       <p class="status-number">V1</p>
       <p class="status-note">Echo metadata only. This is not a formal protocol verification level.</p>
+      <p class="zh status-note">仅为回响元数据等级，不代表正式协议验证等级。</p>
     </article>
   </div>
 
   <details class="status-details">
     <summary>What is counted here?</summary>
     <ul>
-      <li>Formal independent verification: records accepted as independent verification / attestation.</li>
-      <li>Archived non-attestation Echoes: Echo records with <code>do_not_count_as_attestation</code>.</li>
-      <li>Excluded: 7 test, legacy, invalidated, or superseded records.</li>
+      <li>Independent third-party reports: records explicitly accepted as independent verification / attestation.</li>
+      <li>Archived non-attestation Echoes: accepted Echo records with <code>do_not_count_as_attestation</code>.</li>
+      <li>Echo types currently represented in archived non-attestation Echoes: 1 critical Echo, 1 witness Echo.</li>
+      <li>Echo metadata levels currently represented: V0: 1, V1: 1.</li>
+      <li>Excluded from formal verification: 7 test, legacy, invalidated, or superseded records.</li>
     </ul>
+    <p>
+      Critical Echoes are included inside archived non-attestation Echoes; they are not displayed as a separate homepage verification category.
+    </p>
+    <p class="zh">
+      批判回响合并计入"已归档非见证 Echo"；首页不将其单独显示为验证类别。
+    </p>
   </details>
 
   <p class="status-generated-note">
