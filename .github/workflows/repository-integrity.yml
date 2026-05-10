@@ -294,6 +294,27 @@ jobs:
       - name: Test full evidence chain CLI injection regression
         run: python3 scripts/test_full_evidence_chain_cli_injection_regression.py
 
+      - name: Test BTC API endpoint allowlist
+        run: python3 scripts/test_btc_api_endpoint_allowlist.py
+
+      - name: Test BTC API cross-check conflict fail-closed
+        run: python3 scripts/test_btc_api_crosscheck_conflict_fail_closed.py
+
+      - name: Test OTS Bitcoin attestation parser strictness
+        run: python3 scripts/test_ots_parse_bitcoin_attestation_strict.py
+
+      - name: Validate full evidence chain audit report schema self-test
+        run: python3 scripts/validate_full_evidence_chain_audit.py --self-test
+
+      - name: Test full evidence chain report invariants
+        run: python3 scripts/test_full_evidence_chain_report_invariants.py
+
+      - name: Test digest manifest JSON/CSV cross-check
+        run: python3 scripts/test_digest_manifest_json_csv_crosscheck.py
+
+      - name: Check OTS time anchor verifier syntax
+        run: node --check scripts/verify-ots-time-anchor.mjs
+
       - name: Test Echo template boundary consistency
         run: python3 scripts/test_echo_template_boundary_consistency.py
 

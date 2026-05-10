@@ -52,7 +52,26 @@ const ETH_WITNESS_FILE = 'archive/eth-witness/eth-witness.json';
 const OTS_PROOF_DIR = 'archive/evidence/ots-proofs/OTS';
 const EXPECTED_NFTS = 175;
 const ETH_RPC_URL = process.env.ETH_RPC_URL;
-const BTC_API_BASE = process.env.BITCOIN_API_BASE || process.env.BTC_API_BASE || 'https://mempool.space/api';
+
+// ── BTC API allowlist (FEC-BTC-002 hardening) ──────────────────────────
+const BTC_API_ALLOWED_HOSTS = new Set(['mempool.space', 'blockstream.info']);
+function normalizeBtcApiBase(raw, label = 'BITCOIN_API_BASE') {
+  let url;
+  try { url = new URL(raw); } catch { throw new Error(`${label} must be a valid URL: ${raw}`); }
+  if (url.protocol !== 'https:') throw new Error(`${label} must use https: ${raw}`);
+  if (!BTC_API_ALLOWED_HOSTS.has(url.hostname)) throw new Error(`${label} host is not allowlisted: ${url.hostname}`);
+  url.search = ''; url.hash = '';
+  return url.toString().replace(/\/+$/, '');
+}
+const BTC_API_BASE = normalizeBtcApiBase(
+  process.env.BITCOIN_API_BASE || process.env.BTC_API_BASE || 'https://mempool.space/api',
+  'BITCOIN_API_BASE'
+);
+const BTC_API_FALLBACK = normalizeBtcApiBase(
+  process.env.BITCOIN_API_FALLBACK || 'https://blockstream.info/api',
+  'BITCOIN_API_FALLBACK'
+);
+
 const MAX_RETRIES = 3;
 const TMP_DIR = '/tmp/full-evidence-chain';
 
@@ -735,6 +754,40 @@ function parseDigestManifestCsv(csvText) {
     });
   }
   return items;
+}
+
+// ── FEC-E1: Digest manifest JSON/CSV cross-check ───────────────────────
+function normalizeManifestPath(p) {
+  return String(p).replace(/\\/g, '/').replace(/^\.\//, '').replace(/^\/+/g, '');
+}
+
+function crossCheckDigestManifestJsonCsv(jsonPath, csvPath) {
+  const jsonRaw = fs.readFileSync(jsonPath, 'utf8');
+  const jsonData = JSON.parse(jsonRaw);
+  const jsonItems = Array.isArray(jsonData) ? jsonData : jsonData.files || jsonData.entries || jsonData.manifest || [];
+  const jsonMap = new Map();
+  for (const item of jsonItems) {
+    const p = item.path || item.file || item.filename || item.name;
+    const sha = item.sha256 || item.digest || item.hash;
+    if (p && sha) jsonMap.set(normalizeManifestPath(p), String(sha).toLowerCase());
+  }
+
+  const csvItems = parseDigestManifestCsv(fs.readFileSync(csvPath, 'utf8'));
+  const csvMap = new Map();
+  for (const item of csvItems) {
+    if (item.path && item.sha256) csvMap.set(normalizeManifestPath(item.path), String(item.sha256).toLowerCase());
+  }
+
+  const errors = [];
+  for (const [p, sha] of jsonMap) {
+    if (!csvMap.has(p)) errors.push(`digest CSV missing path from JSON: ${p}`);
+    else if (csvMap.get(p) !== sha) errors.push(`digest mismatch for ${p}: json=${sha} csv=${csvMap.get(p)}`);
+  }
+  for (const [p] of csvMap) {
+    if (!jsonMap.has(p)) errors.push(`digest JSON missing path from CSV: ${p}`);
+  }
+
+  return { pass: errors.length === 0, json_count: jsonMap.size, csv_count: csvMap.size, errors };
 }
 
 function extractCidFromPath(filePath) {
@@ -2207,13 +2260,38 @@ async function main() {
 
   // ── Write output files ────────────────────────────────────────────────
 
+  // ── FEC-E1: Digest manifest JSON/CSV cross-check ──────────────────────
+  let digestManifestCrosscheck = { pass: true, json_count: 0, csv_count: 0, errors: [] };
+  try {
+    const crossResult = crossCheckDigestManifestJsonCsv(DIGEST_MANIFEST_JSON, DIGEST_MANIFEST_CSV);
+    digestManifestCrosscheck = crossResult;
+    if (!crossResult.pass) {
+      for (const e of crossResult.errors) criticalErrors.push(`DIGEST CROSSCHECK: ${e}`);
+    }
+  } catch (e) {
+    criticalErrors.push(`DIGEST CROSSCHECK ERROR: ${e.message}`);
+    digestManifestCrosscheck = { pass: false, json_count: 0, csv_count: 0, errors: [e.message] };
+  }
+
   // FULL-EVIDENCE-CHAIN-AUDIT.json
+  const allRequiredChainsPass = fullEvidenceChainPass;
   const fullAudit = {
-    schema: 'trinity-accord.full-evidence-chain.v1',
+    schema: 'trinity-accord.full-evidence-chain-audit.v1',
     generated_at: new Date().toISOString(),
+    overall_status: allRequiredChainsPass ? 'PASS' : 'FAIL',
+    verification_scope: 'full_evidence_chain_required_links',
     elapsed_seconds: parseFloat(elapsed),
 
-    // Top-level pass fields
+    // Required chains (machine-readable)
+    required_chains: {
+      dag_digest_chain: { required: true, status: chainA.dag_and_digest_manifest_pass ? 'PASS' : 'FAIL' },
+      btc_signature_coverage: { required: true, status: chainB.btc_signature_coverage_pass ? 'PASS' : 'FAIL' },
+      eth_witness_coverage: { required: true, status: chainC.eth_witness_coverage_pass ? 'PASS' : 'FAIL' },
+      bitcoin_tx_anchor: { required: true, status: chainD1.bitcoin_tx_anchor_pass ? 'PASS' : 'FAIL' },
+      ots_time_anchor: { required: true, status: chainD2.ots_time_anchor_pass ? 'PASS' : 'FAIL' },
+    },
+
+    // Top-level pass fields (backward compat)
     full_evidence_chain_pass: fullEvidenceChainPass,
     release_verified: backupReleaseVerified,
     onchain_tokenuri_175_pass: onchainTokenuri175Pass,
@@ -2229,12 +2307,26 @@ async function main() {
     release_nft_tar_count: chainA.release_nft_tar_count,
     hard_failures: hardFailures,
 
+    // FEC-E1: digest manifest crosscheck
+    digest_manifest_crosscheck: digestManifestCrosscheck,
+
     // Chains
     chain_a: chainA,
     chain_b: chainB,
     chain_c: chainC,
     chain_d1: chainD1,
     chain_d2: chainD2,
+
+    // Errors / warnings
+    errors: criticalErrors,
+    warnings: [],
+
+    // Verification limitations
+    limitations: [
+      'ci-api OTS mode uses public Bitcoin APIs and is not equivalent to local Bitcoin Core fullnode verification unless fullnode_independent_verification is true.',
+      'Public ETH RPC responses are external dependencies unless independently verified against a trusted node.',
+      'Public BTC API (mempool.space / blockstream.info) cross-checked but not equivalent to a local Bitcoin node.',
+    ],
 
     // Evidence provenance statement
     evidence_provenance: {
@@ -2255,9 +2347,20 @@ async function main() {
         'Physical inspection of Core Object Alpha.',
         'That mirrors override Bitcoin Originals.',
         'Bytes of private/unavailable files unless those bytes are actually provided and rehashed.',
+        'Human independent attestation.',
+        'Physical-world authorship.',
+        'Legal ownership.',
+        'Fullnode Bitcoin verification when OTS mode is ci-api.',
         ...(ethAuditAvailable ? [] : ['ETH tokenURI 175/175 — no on-chain audit was provided.']),
       ],
       chain_of_custody: 'BTC signature covers authority → authority declares digest-manifest pointers → digest-manifest covers file hash table → file bytes decode as DAG/CID → ETH tokenURI 175/175 matches metadata CID.',
+    },
+
+    // Dependency trust model
+    dependency_trust_model: {
+      bitcoin_time_anchor: 'ci-api uses public API cross-check; fullnode mode requires local Bitcoin Core',
+      ethereum_witness: 'requires ETH_RPC_URL and chain-specific checks',
+      btc_api: { primary: BTC_API_BASE, fallback: BTC_API_FALLBACK, conflict_policy: 'fail_closed' },
     },
   };
 

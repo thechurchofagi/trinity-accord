@@ -30,8 +30,32 @@ const OTS_RELEASE_TAG = getArg('--ots-release-tag', 'ots-and-flaw-mirror-v1');
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 const REPO = 'thechurchofagi/trinity-accord';
 const OTS_VERIFY_MODE = process.env.OTS_VERIFY_MODE || 'ci-api';
-const BTC_API_BASE = process.env.BITCOIN_API_BASE || 'https://mempool.space/api';
-const BTC_API_FALLBACK = 'https://blockstream.info/api';
+
+// ── BTC API allowlist (FEC-BTC-002 hardening) ──────────────────────────
+const BTC_API_ALLOWED_HOSTS = new Set([
+  'mempool.space',
+  'blockstream.info',
+]);
+
+function normalizeBtcApiBase(raw, label = 'BITCOIN_API_BASE') {
+  let url;
+  try { url = new URL(raw); } catch { throw new Error(`${label} must be a valid URL: ${raw}`); }
+  if (url.protocol !== 'https:') throw new Error(`${label} must use https: ${raw}`);
+  if (!BTC_API_ALLOWED_HOSTS.has(url.hostname)) throw new Error(`${label} host is not allowlisted: ${url.hostname}`);
+  url.search = '';
+  url.hash = '';
+  return url.toString().replace(/\/+$/, '');
+}
+
+const BTC_API_BASE = normalizeBtcApiBase(
+  process.env.BITCOIN_API_BASE || 'https://mempool.space/api',
+  'BITCOIN_API_BASE'
+);
+const BTC_API_FALLBACK = normalizeBtcApiBase(
+  process.env.BITCOIN_API_FALLBACK || 'https://blockstream.info/api',
+  'BITCOIN_API_FALLBACK'
+);
+
 const MAX_RETRIES = 3;
 const TMP_DIR = '/tmp/ots-verify';
 
@@ -139,22 +163,75 @@ async function downloadAsset(assetId, retries = MAX_RETRIES) {
   }
 }
 
-async function btcFetch(endpoint, retries = 2) {
-  const bases = [BTC_API_BASE, BTC_API_FALLBACK];
-  for (const base of bases) {
-    for (let attempt = 0; attempt <= retries; attempt++) {
-      try {
-        const res = await fetch(`${base}${endpoint}`);
-        if (res.status === 404) return null;
-        if (!res.ok) throw new Error(`BTC API ${res.status}`);
-        const text = await res.text();
-        try { return JSON.parse(text); } catch { return text; }
-      } catch (e) {
-        if (attempt < retries) { await sleep(1500 * (attempt + 1)); continue; }
-      }
+// ── BTC API cross-check (FEC-BTC-001 hardening) ────────────────────────
+const btcApiWarnings = [];
+
+async function btcFetchFromBase(base, endpoint, retries = 2) {
+  for (let attempt = 0; attempt <= retries; attempt++) {
+    try {
+      const res = await fetch(`${base}${endpoint}`);
+      if (res.status === 404) return { ok: true, value: null, status: 404 };
+      if (!res.ok) throw new Error(`BTC API ${res.status}`);
+      const text = await res.text();
+      let value;
+      try { value = JSON.parse(text); } catch { value = text; }
+      return { ok: true, value, status: res.status };
+    } catch (e) {
+      if (attempt < retries) { await sleep(1500 * (attempt + 1)); continue; }
+      return { ok: false, error: e.message };
     }
   }
-  return null;
+}
+
+function equivalentBtcApiResponse(a, b, endpoint) {
+  if (/^\/block-height\/\d+$/.test(endpoint)) {
+    return typeof a === 'string' && typeof b === 'string' &&
+      /^[0-9a-f]{64}$/i.test(a) && a.toLowerCase() === b.toLowerCase();
+  }
+  if (/^\/tx\/[0-9a-f]{64}$/i.test(endpoint)) {
+    const as = a?.status || {}; const bs = b?.status || {};
+    return Boolean(as.confirmed) === Boolean(bs.confirmed) &&
+      String(as.block_height || '') === String(bs.block_height || '') &&
+      String(as.block_hash || '').toLowerCase() === String(bs.block_hash || '').toLowerCase();
+  }
+  if (/^\/block\/[0-9a-f]{64}$/i.test(endpoint)) {
+    return String(a?.id || a?.hash || '').toLowerCase() === String(b?.id || b?.hash || '').toLowerCase() &&
+      String(a?.height || '') === String(b?.height || '') &&
+      String(a?.timestamp || '') === String(b?.timestamp || '');
+  }
+  return JSON.stringify(a) === JSON.stringify(b);
+}
+
+async function btcFetch(endpoint, retries = 2) {
+  const primary = await btcFetchFromBase(BTC_API_BASE, endpoint, retries);
+  const fallback = await btcFetchFromBase(BTC_API_FALLBACK, endpoint, retries);
+
+  if (!primary.ok && !fallback.ok) {
+    throw new Error(`BTC API failed for ${endpoint}: primary=${primary.error}; fallback=${fallback.error}`);
+  }
+
+  if (primary.ok && fallback.ok) {
+    if (primary.value === null && fallback.value === null) return null;
+    if (!equivalentBtcApiResponse(primary.value, fallback.value, endpoint)) {
+      throw new Error(`BTC API conflict for ${endpoint}: primary and fallback disagree`);
+    }
+    return primary.value;
+  }
+
+  // One succeeded, one failed — strict mode: require both
+  if (process.env.BTC_API_REQUIRE_BOTH !== '0') {
+    throw new Error(`BTC API cross-check requires both sources for ${endpoint}`);
+  }
+
+  const accepted = primary.ok ? primary : fallback;
+  const failed = primary.ok ? fallback : primary;
+  btcApiWarnings.push({
+    endpoint,
+    warning: 'single_source_btc_api_result',
+    failed_source: primary.ok ? BTC_API_FALLBACK : BTC_API_BASE,
+    error: failed.error || null,
+  });
+  return accepted.value;
 }
 
 function runCmd(cmd, cmdArgs, opts = {}) {
@@ -207,23 +284,52 @@ function otsUpgrade(otsPath) {
 
 function parseBitcoinAttestation(infoText) {
   const text = String(infoText || '');
-  const hasBitcoinAttestation = /BitcoinBlockHeaderAttestation|bitcoin block|block header/i.test(text);
+
+  const hasBitcoinAttestation =
+    /BitcoinBlockHeaderAttestation/i.test(text) ||
+    /bitcoin\s+block\s+header/i.test(text);
+
   const blockHeights = [];
-  for (const m of text.matchAll(/(?:block height|height|BitcoinBlockHeaderAttestation)\D+(\d+)/gi)) {
-    blockHeights.push(Number(m[1]));
-  }
   const blockHashes = [];
-  for (const m of text.matchAll(/\b[0-9a-f]{64}\b/gi)) {
-    blockHashes.push(m[0].toLowerCase());
-  }
   const txids = [];
-  for (const m of text.matchAll(/(?:txid|transaction id|tx)\D+([0-9a-f]{64})/gi)) {
-    txids.push(m[1].toLowerCase());
+
+  // Height: require context words
+  for (const re of [
+    /BitcoinBlockHeaderAttestation\s*\(?(?:height)?\s*[:=]?\s*(\d{1,9})/gi,
+    /\bblock\s+height\s*[:=]?\s*(\d{1,9})\b/gi,
+    /\bheight\s*[:=]\s*(\d{1,9})\b/gi,
+  ]) {
+    for (const m of text.matchAll(re)) {
+      const n = Number(m[1]);
+      if (Number.isSafeInteger(n) && n > 0) blockHeights.push(n);
+    }
   }
+
+  // Block hash: require "block hash" or "header hash" context
+  for (const re of [
+    /\bblock\s+hash\s*[:=]\s*([0-9a-f]{64})\b/gi,
+    /\bheader\s+hash\s*[:=]\s*([0-9a-f]{64})\b/gi,
+  ]) {
+    for (const m of text.matchAll(re)) {
+      blockHashes.push(m[1].toLowerCase());
+    }
+  }
+
+  // TXID: require "txid" or "transaction id" context
+  for (const re of [
+    /\btxid\s*[:=]\s*([0-9a-f]{64})\b/gi,
+    /\btransaction\s+id\s*[:=]\s*([0-9a-f]{64})\b/gi,
+  ]) {
+    for (const m of text.matchAll(re)) {
+      txids.push(m[1].toLowerCase());
+    }
+  }
+
   return {
     hasBitcoinAttestation,
     block_heights: [...new Set(blockHeights)],
-    candidate_hashes: [...new Set(blockHashes)],
+    block_hashes: [...new Set(blockHashes)],
+    candidate_hashes: [...new Set(blockHashes)],  // only context-bound hashes
     txids: [...new Set(txids)]
   };
 }
@@ -586,6 +692,13 @@ async function main() {
   const output = {
     schema: 'trinity-accord.ots-time-anchor.v1',
     generated_at: new Date().toISOString(),
+    btc_api_crosscheck: {
+      primary: BTC_API_BASE,
+      fallback: BTC_API_FALLBACK,
+      require_both: process.env.BTC_API_REQUIRE_BOTH !== '0',
+      conflict_policy: 'fail_closed',
+      warnings: btcApiWarnings,
+    },
     ...result
   };
   fs.writeFileSync(outPath, JSON.stringify(output, null, 2));
