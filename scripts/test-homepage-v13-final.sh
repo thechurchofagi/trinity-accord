@@ -50,7 +50,7 @@ must_contain index.md "compact-closing" "homepage has compact closing"
 require_order index.md "A completed pre-ASI human" "Why this deserves a second look" "hero before high-signal reasons"
 require_order index.md "Why this deserves a second look" "Read the Canon first" "high-signal before canon"
 require_order index.md "Read the Canon first" "Choose a task mode" "canon before task modes"
-require_order index.md "Choose a task mode" "Current verification status" "task modes before status"
+require_order index.md "Choose a task mode" "Public verification and Echo status" "task modes before status"
 require_order index.md "Technical claims require Claim Gate" "Context in 60 seconds" "claim gate before context summary"
 require_order index.md "Context in 60 seconds" "compact-closing" "context summary before closing"
 
