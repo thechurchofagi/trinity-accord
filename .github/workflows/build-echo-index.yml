@@ -16,12 +16,17 @@ permissions:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
         with:
           fetch-depth: 0
+
+      - name: Record toolchain provenance
+        run: |
+          python3 scripts/toolchain_provenance.py > toolchain-provenance.json
+          cat toolchain-provenance.json
 
       - name: Authorize write workflow actor
         env:
@@ -52,9 +57,7 @@ jobs:
           fi
 
       - name: Install Python dependencies
-        run: |
-          python3 -m pip install --upgrade pip
-          pip install jsonschema
+        run: python3 -m pip install -r requirements-ci.txt
 
       - name: Authorize manual dispatch actor
         if: ${{ github.event_name == 'workflow_dispatch' }}

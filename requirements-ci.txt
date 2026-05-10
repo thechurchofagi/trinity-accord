@@ -1,3 +1,6 @@
+# CI runtime dependencies for Trinity Accord verification.
+# Keep versions pinned. Update intentionally via PR.
 jsonschema==4.23.0
 referencing==0.35.1
 rpds-py==0.20.0
+opentimestamps-client==0.7.2

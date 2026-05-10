@@ -9,15 +9,22 @@ permissions:
 
 jobs:
   check:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
 
-      - name: Install dependencies
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version-file: .node-version
+
+      - name: Install Python dependencies
+        run: python3 -m pip install -r requirements-ci.txt
+
+      - name: Record toolchain provenance
         run: |
-          python3 -m pip install --upgrade pip
-          pip install jsonschema
+          python3 scripts/toolchain_provenance.py > toolchain-provenance.json
+          cat toolchain-provenance.json
 
       - name: Validate JSON
         run: |
@@ -414,3 +421,25 @@ jobs:
 
       - name: Test release asset manifest offline shape
         run: python3 scripts/verify_release_asset_manifest.py --offline
+
+      # TA-REDTEAM-2026-010: CI toolchain reproducibility hardening
+      - name: Test runner image pinning
+        run: python3 scripts/test_runner_image_pinning.py
+
+      - name: Test Python dependency pinning
+        run: python3 scripts/test_python_dependency_pinning.py
+
+      - name: Test Node dependency pinning
+        run: python3 scripts/test_node_dependency_pinning.py
+
+      - name: Test toolchain provenance script
+        run: python3 scripts/test_toolchain_provenance.py
+
+      - name: Test write workflow toolchain provenance
+        run: python3 scripts/test_write_workflow_toolchain_provenance.py
+
+      - name: Test no remote script execution
+        run: python3 scripts/test_no_remote_script_execution.py
+
+      - name: Test system tool version recording
+        run: python3 scripts/test_system_tool_version_recording.py

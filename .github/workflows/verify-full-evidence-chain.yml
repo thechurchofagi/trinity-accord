@@ -26,7 +26,7 @@ on:
 
 jobs:
   verify:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     permissions:
       contents: read
     timeout-minutes: 240
@@ -40,8 +40,8 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Install OTS client
-        run: pip install opentimestamps-client
+      - name: Install Python dependencies
+        run: python3 -m pip install -r requirements-ci.txt
 
       - name: Run Full Evidence Chain verification
         env:

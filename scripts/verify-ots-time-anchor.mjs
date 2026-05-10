@@ -14,6 +14,7 @@
 import fs from 'fs';
 import path from 'path';
 import crypto from 'crypto';
+import { collectToolchainProvenance } from './toolchain_provenance.mjs';
 import { spawnSync } from 'node:child_process';
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -699,7 +700,8 @@ async function main() {
       conflict_policy: 'fail_closed',
       warnings: btcApiWarnings,
     },
-    ...result
+    ...result,
+    toolchain_provenance: collectToolchainProvenance(),
   };
   fs.writeFileSync(outPath, JSON.stringify(output, null, 2));
   log(`\n📝 ${outPath} written`);

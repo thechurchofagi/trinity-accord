@@ -8,7 +8,7 @@ permissions:
 
 jobs:
   mirror-ots-proof-bundle:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     env:
       RELEASE_TAG: ots-proof-bundle-mirror-v1
@@ -21,6 +21,11 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+
+      - name: Record toolchain provenance
+        run: |
+          python3 scripts/toolchain_provenance.py > toolchain-provenance.json
+          cat toolchain-provenance.json
 
       - name: Authorize write workflow actor
         env:

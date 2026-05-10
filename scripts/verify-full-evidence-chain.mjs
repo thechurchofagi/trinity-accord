@@ -23,6 +23,7 @@ import fs from 'fs';
 import path from 'path';
 import crypto from 'crypto';
 import { execFileSync } from 'child_process';
+import { collectToolchainProvenance } from './toolchain_provenance.mjs';
 
 // ═══════════════════════════════════════════════════════════════════════════
 // CLI ARGS
@@ -2362,6 +2363,9 @@ async function main() {
       ethereum_witness: 'requires ETH_RPC_URL and chain-specific checks',
       btc_api: { primary: BTC_API_BASE, fallback: BTC_API_FALLBACK, conflict_policy: 'fail_closed' },
     },
+
+    // TA-REDTEAM-2026-010: toolchain provenance for reproducibility
+    toolchain_provenance: collectToolchainProvenance(),
   };
 
   const fullAuditPath = path.join(process.cwd(), 'FULL-EVIDENCE-CHAIN-AUDIT.json');

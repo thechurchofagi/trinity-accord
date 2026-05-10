@@ -29,6 +29,7 @@ import os from 'os';
 import crypto from 'crypto';
 import { execFileSync } from 'child_process';
 import { fileURLToPath } from 'url';
+import { collectToolchainProvenance } from './toolchain_provenance.mjs';
 
 // --------------- Config ---------------
 function getArg(name) {
@@ -623,6 +624,7 @@ async function main() {
     all_expected_size_matched: sizePass === txids.size,
     all_verified: allVerified,
     contracts: contracts.length, nfts: totalTokens, files: manifest,
+    toolchain_provenance: collectToolchainProvenance(),
   }, null, 2));
 
   // 8. Package into tar.gz parts

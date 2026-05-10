@@ -23,6 +23,7 @@ import fs from 'fs';
 import path from 'path';
 import crypto from 'crypto';
 import { fileURLToPath } from 'url';
+import { collectToolchainProvenance } from './toolchain_provenance.mjs';
 
 // ─── Config ────────────────────────────────────────────────────────────────
 
@@ -727,6 +728,7 @@ async function main() {
 
     status,
     errors: errors.slice(0, 100),
+    toolchain_provenance: collectToolchainProvenance(),
   };
 
   // ── 8. Write report ──────────────────────────────────────────────────
