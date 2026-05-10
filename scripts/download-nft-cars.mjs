@@ -47,6 +47,7 @@ const REPO = 'thechurchofagi/trinity-accord';
 
 const GATEWAYS = ['https://arweave.net', 'https://ar-io.net'];
 const PART_SIZE = 50; // files per archive part
+const EXPECTED_NFTS = 175; // TA-REDTEAM-2026-007: independent expected count
 
 // --------------- Resource limits ---------------
 const MAX_CAR_BYTES = parsePositiveIntEnv('MAX_CAR_BYTES', 500 * 1024 * 1024, 1, 5 * 1024 * 1024 * 1024);
@@ -155,13 +156,19 @@ function verifyDownloadedCarBuffer(txid, info, buf, source = 'download') {
 
     verified: true,
     cached: source === 'cache',
+    ...(info.all_references ? { all_references: info.all_references } : {}),
   };
 }
 
 function parseCarHeader(data) {
+  // TA-REDTEAM-2026-007 SRC-CAR-001: strict bounds check (ported from TA-006 verifier)
   let pos = 0, shift = 0, headerLen = 0;
-  while (true) {
-    const b = data[pos]; headerLen |= (b & 0x7f) << shift; pos++; shift += 7;
+  for (let i = 0; i < 10; i++) {
+    if (pos >= data.length) throw new Error('Truncated CAR header varint');
+    const b = data[pos];
+    headerLen += (b & 0x7f) * (2 ** shift);
+    pos++; shift += 7;
+    if (!Number.isSafeInteger(headerLen)) throw new Error('Unsafe CAR header varint');
     if (b < 0x80) break;
   }
   return pos + headerLen;
@@ -182,11 +189,48 @@ function* iterCarBlocks(data) {
   }
 }
 
-/** Extract token_index.json from the recovery CAR by finding the largest token-index JSON */
+/** TA-REDTEAM-2026-007 SRC-SCHEMA-001: Validate token_index entry schema */
+function validateTokenIndexEntry(contract, token_id, entry) {
+  const errors = [];
+  // contract: 0x + 40 hex
+  if (!/^0x[0-9a-fA-F]{40}$/.test(contract)) {
+    errors.push(`Invalid contract format: ${contract}`);
+  }
+  // token_id: non-empty string
+  if (!token_id || typeof token_id !== 'string') {
+    errors.push(`Invalid token_id: ${token_id}`);
+  }
+  // metadata required
+  if (!entry.metadata || typeof entry.metadata !== 'object') {
+    errors.push(`Missing metadata for ${contract}/${token_id}`);
+  } else {
+    const meta = entry.metadata;
+    if (!meta.txid || typeof meta.txid !== 'string') errors.push(`Missing metadata.txid for ${contract}/${token_id}`);
+    if (!SHA256_RE.test(meta.car_sha256 || '')) errors.push(`Invalid metadata.car_sha256 for ${contract}/${token_id}`);
+    const sz = normalizeExpectedSize(meta.car_size);
+    if (sz === null || sz <= 0) errors.push(`Invalid metadata.car_size for ${contract}/${token_id}`);
+    if (!meta.root_cid || typeof meta.root_cid !== 'string') errors.push(`Missing metadata.root_cid for ${contract}/${token_id}`);
+  }
+  // media required, must be array
+  if (!Array.isArray(entry.media)) {
+    errors.push(`Missing or non-array media for ${contract}/${token_id}`);
+  } else {
+    for (let i = 0; i < entry.media.length; i++) {
+      const m = entry.media[i];
+      if (!m.txid || typeof m.txid !== 'string') errors.push(`Missing media[${i}].txid for ${contract}/${token_id}`);
+      if (!SHA256_RE.test(m.car_sha256 || '')) errors.push(`Invalid media[${i}].car_sha256 for ${contract}/${token_id}`);
+      const sz = normalizeExpectedSize(m.car_size);
+      if (sz === null || sz <= 0) errors.push(`Invalid media[${i}].car_size for ${contract}/${token_id}`);
+    }
+  }
+  return errors;
+}
+
+/** Extract token_index.json from the recovery CAR by finding the unique token-index JSON */
 function extractTokenIndex(carPath) {
+  // TA-REDTEAM-2026-007 SRC-TOKEN-001: fail-closed on multiple candidates
   const raw = fs.readFileSync(carPath);
-  let bestObj = null;
-  let bestKeyCount = 0;
+  const candidates = [];
 
   for (const block of iterCarBlocks(raw)) {
     let searchPos = 0;
@@ -213,12 +257,14 @@ function extractTokenIndex(carPath) {
                 t && typeof t === 'object' && (t.metadata || t.media)
               );
             });
-            if (isTokenIndex && keys.length > bestKeyCount) {
-              bestObj = obj;
-              bestKeyCount = keys.length;
+            if (isTokenIndex) {
+              candidates.push({ obj, keyCount: keys.length });
             }
           }
-        } catch {}
+        } catch (err) {
+          // TA-REDTEAM-2026-007 SRC-CAR-001: log instead of silent swallow
+          console.warn(`⚠️  JSON parse error in CAR block at offset ${jsonStart}: ${err.message}`);
+        }
         searchPos = endPos + 1;
       } else {
         searchPos = jsonStart + 1;
@@ -226,28 +272,94 @@ function extractTokenIndex(carPath) {
     }
   }
 
-  if (bestObj) return bestObj;
-  throw new Error('token_index.json not found in CAR');
+  if (candidates.length === 0) {
+    throw new Error('token_index.json not found in CAR');
+  }
+  if (candidates.length > 1) {
+    // TA-REDTEAM-2026-007: fail-closed on ambiguity
+    throw new Error(
+      `Multiple token_index-like JSON objects found in CAR (${candidates.length} candidates). ` +
+      `Expected exactly 1. Key counts: [${candidates.map(c => c.keyCount).join(', ')}]. ` +
+      `Refusing to select — recovery CAR may be tampered.`
+    );
+  }
+
+  const index = candidates[0].obj;
+
+  // TA-REDTEAM-2026-007 SRC-SCHEMA-001: validate schema
+  let schemaErrors = 0;
+  for (const [contract, tokens] of Object.entries(index)) {
+    for (const [token_id, entry] of Object.entries(tokens)) {
+      const errs = validateTokenIndexEntry(contract, token_id, entry);
+      for (const e of errs) {
+        console.warn(`⚠️  Schema: ${e}`);
+        schemaErrors++;
+      }
+    }
+  }
+  if (schemaErrors > 0) {
+    throw new Error(`token_index has ${schemaErrors} schema errors; aborting`);
+  }
+
+  return index;
 }
 
-/** Collect all unique txids from token_index */
+/** Collect all unique txids from token_index — TA-REDTEAM-2026-007 SRC-DUPTXID-001: detect conflicts */
 function collectTxids(index) {
   const txids = new Map();
   for (const [contract, tokens] of Object.entries(index)) {
     for (const [token_id, entry] of Object.entries(tokens)) {
       const meta = entry.metadata;
       if (meta?.txid) {
-        txids.set(meta.txid, {
-          role: 'metadata', contract, token_id,
-          cid: meta.root_cid, sha256: meta.car_sha256, size: meta.car_size,
-        });
+        const existing = txids.get(meta.txid);
+        if (existing) {
+          // Check for conflicting expected values
+          if (existing.sha256 && meta.car_sha256 && existing.sha256.toLowerCase() !== meta.car_sha256.toLowerCase()) {
+            throw new Error(
+              `Duplicate txid ${meta.txid} with conflicting expected sha256: ` +
+              `${existing.contract}/${existing.token_id} (${existing.role}) vs ${contract}/${token_id} (metadata)`
+            );
+          }
+          if (existing.size != null && meta.car_size != null && existing.size !== meta.car_size) {
+            throw new Error(
+              `Duplicate txid ${meta.txid} with conflicting expected size: ` +
+              `${existing.contract}/${existing.token_id} (${existing.role}) vs ${contract}/${token_id} (metadata)`
+            );
+          }
+          // Preserve all references
+          if (!existing.all_references) existing.all_references = [existing.contract + '/' + existing.token_id + ':' + existing.role];
+          existing.all_references.push(contract + '/' + token_id + ':metadata');
+        } else {
+          txids.set(meta.txid, {
+            role: 'metadata', contract, token_id,
+            cid: meta.root_cid, sha256: meta.car_sha256, size: meta.car_size,
+          });
+        }
       }
       for (const m of entry.media || []) {
         if (m.txid) {
-          txids.set(m.txid, {
-            role: 'media', contract, token_id,
-            cid: m.root_cid, leaf: m.leaf_path, sha256: m.car_sha256, size: m.car_size,
-          });
+          const existing = txids.get(m.txid);
+          if (existing) {
+            if (existing.sha256 && m.car_sha256 && existing.sha256.toLowerCase() !== m.car_sha256.toLowerCase()) {
+              throw new Error(
+                `Duplicate txid ${m.txid} with conflicting expected sha256: ` +
+                `${existing.contract}/${existing.token_id} (${existing.role}) vs ${contract}/${token_id} (media)`
+              );
+            }
+            if (existing.size != null && m.car_size != null && existing.size !== m.car_size) {
+              throw new Error(
+                `Duplicate txid ${m.txid} with conflicting expected size: ` +
+                `${existing.contract}/${existing.token_id} (${existing.role}) vs ${contract}/${token_id} (media)`
+              );
+            }
+            if (!existing.all_references) existing.all_references = [existing.contract + '/' + existing.token_id + ':' + existing.role];
+            existing.all_references.push(contract + '/' + token_id + ':media');
+          } else {
+            txids.set(m.txid, {
+              role: 'media', contract, token_id,
+              cid: m.root_cid, leaf: m.leaf_path, sha256: m.car_sha256, size: m.car_size,
+            });
+          }
         }
       }
     }
@@ -353,12 +465,43 @@ async function main() {
   console.log(`   MAX_TOTAL_BYTES: ${(MAX_TOTAL_BYTES / 1024 / 1024 / 1024).toFixed(1)}GB`);
   console.log();
 
+  // TA-REDTEAM-2026-007 SRC-BIND-001: verify recovery package digest before use
+  const recoveryPackageSha256 = sha256hex(fs.readFileSync(CAR_FILE));
+  console.log(`🔐 Recovery package SHA-256: ${recoveryPackageSha256}`);
+  // Check against hash-manifest.json if available
+  const hashManifestPath = 'archive/hash-manifest.json';
+  if (fs.existsSync(hashManifestPath)) {
+    try {
+      const hm = JSON.parse(fs.readFileSync(hashManifestPath, 'utf8'));
+      const hmEntry = (hm.files || hm.arweave_assets || []).find(e =>
+        (e.path || '').includes('recovery-package.bin')
+      );
+      if (hmEntry && hmEntry.sha256) {
+        if (hmEntry.sha256.toLowerCase() !== recoveryPackageSha256.toLowerCase()) {
+          throw new Error(
+            `Recovery package digest mismatch! Expected ${hmEntry.sha256}, got ${recoveryPackageSha256}. ` +
+            `File may be tampered.`
+          );
+        }
+        console.log(`   ✅ Matches hash-manifest.json entry`);
+      }
+    } catch (err) {
+      if (err.message.includes('mismatch')) throw err;
+      console.warn(`   ⚠️  Could not verify against hash-manifest.json: ${err.message}`);
+    }
+  }
+
   // 1. Extract token index
   console.log('📖 Extracting token_index.json...');
   const index = extractTokenIndex(CAR_FILE);
   const contracts = Object.keys(index);
   const totalTokens = contracts.reduce((n, c) => n + Object.keys(index[c]).length, 0);
   console.log(`   ${totalTokens} NFTs, ${contracts.length} contracts`);
+
+  // TA-REDTEAM-2026-007 SRC-COUNT-001: enforce expected NFT count
+  if (totalTokens !== EXPECTED_NFTS) {
+    throw new Error(`Expected ${EXPECTED_NFTS} NFTs in token_index, found ${totalTokens}. Aborting.`);
+  }
 
   // 2. Collect txids
   const txids = collectTxids(index);
@@ -459,6 +602,7 @@ async function main() {
   const manifestPath = path.join(TMP_DIR, 'manifest.json');
   fs.writeFileSync(manifestPath, JSON.stringify({
     timestamp: new Date().toISOString(),
+    expected_nfts: EXPECTED_NFTS,
     total_txids: txids.size,
     downloaded: pass,
     failed: fail,
@@ -527,27 +671,38 @@ async function main() {
         expected_sha256: f.manifest_item.expected_sha256,
         expected_size: f.manifest_item.expected_size,
         expected_root_cid: f.manifest_item.cid || null,
+        root_cid_verified: false, // TA-REDTEAM-2026-007 SRC-H1: explicit boundary
         cid_check_required: false,
+        ...(f.manifest_item.all_references ? { all_references: f.manifest_item.all_references } : {}),
       })),
     }));
 
   const totalCarFiles = releaseAssets.reduce((sum, a) => sum + a.files.length, 0);
+
+  // TA-REDTEAM-2026-007 SRC-TRACE-001: source digests in manifest
+  const tokenIndexSha256 = sha256hex(fs.readFileSync('token_index.json'));
 
   const releaseManifest = {
     schema: 'trinity-release-manifest-v1',
     release_kind: 'nft-car-backup-parts',
     verification_basis: 'expected_sha256_and_expected_size',
     actual_nfts: totalTokens,
+    expected_nfts: EXPECTED_NFTS, // TA-REDTEAM-2026-007 SRC-COUNT-001
     total_car_files: totalCarFiles,
     contracts: contracts.length,
-    source_manifest: { generator: 'scripts/download-nft-cars.mjs' },
+    source_manifest: {
+      generator: 'scripts/download-nft-cars.mjs',
+      recovery_package_sha256: recoveryPackageSha256,
+      token_index_sha256: tokenIndexSha256,
+      token_index_entry_count: totalTokens,
+    },
     release_assets: releaseAssets,
     auxiliary_assets: ['nft-cars-manifest.tar.gz', 'RELEASE-MANIFEST.json'],
     does_not_prove: [
       'independent attestation',
       'on-chain ownership or tokenURI correctness',
       'physical authorship or provenance',
-      'CID/root/DAG correctness unless verify-release-assets.mjs is run with --cid-check',
+      'CID/root/DAG correctness — root_cid is metadata from token_index, NOT verified by this producer',
       'full evidence chain verification',
     ],
   };
