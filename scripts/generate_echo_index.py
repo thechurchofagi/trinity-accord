@@ -84,5 +84,12 @@ out = {
 }
 out.update(existing_metadata)
 
+# Recompute source_digest after regeneration (content may have changed)
+import hashlib
+def _stable_json(v):
+    return json.dumps(v, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+out_without_digest = {k: v for k, v in out.items() if k != "source_digest"}
+out["source_digest"] = hashlib.sha256(_stable_json(out_without_digest).encode()).hexdigest()[:16]
+
 OUT.write_text(json.dumps(out, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 print(f"Wrote {OUT} with {len(records)} records")

@@ -176,7 +176,7 @@
     "Test records, superseded records, invalidated records, and do_not_count_as_attestation records must not be counted as independent attestation."
   ],
   "version": "v1",
-  "source_digest": "81675912d98cd76d",
+  "source_digest": "a5ff1f4772799041",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
   "non_amending_boundary": true,
   "canonical_authority": "Bitcoin Originals only",

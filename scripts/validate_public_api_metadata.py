@@ -11,6 +11,8 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "scripts"))
+from public_metadata_utils import canonical_json_digest
 
 PUBLIC_API_REQUIRED = [
     "api/authority.json",
@@ -60,6 +62,16 @@ def validate_file(path: Path) -> list[str]:
         digest = data["source_digest"]
         if not re.match(r"^[a-fA-F0-9]{16}$|^[a-fA-F0-9]{64}$", str(digest)):
             errors.append(f"{path.name}: source_digest must be 16 or 64 hex, got: {digest}")
+        else:
+            # Recompute and verify digest matches
+            try:
+                expected_full = canonical_json_digest(path, ignored_fields={"source_digest"})
+                expected_16 = expected_full[:16]
+                expected_64 = expected_full
+                if str(digest) not in (expected_16, expected_64):
+                    errors.append(f"{path.name}: source_digest mismatch: stored={digest}, expected={expected_16}")
+            except Exception as e:
+                errors.append(f"{path.name}: cannot recompute source_digest: {e}")
 
     if "source_digest_algorithm" in data:
         algo = data["source_digest_algorithm"]
@@ -102,12 +114,24 @@ def self_test():
         base = {
             "schema": "trinity-accord.test.v1",
             "version": "v1",
-            "source_digest": "a7e6f39d82549f46",
             "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
             "non_amending_boundary": True,
             "limitations": ["test limitation"],
             "does_not_prove": ["test"],
         }
+        if overrides:
+            base.update(overrides)
+        return base
+
+    def make_api_with_correct_digest(overrides=None):
+        """Create API metadata with a correctly computed source_digest."""
+        import tempfile as tf
+        base = make_api()
+        tmp = Path(tf.mktemp(suffix=".json"))
+        tmp.write_text(json.dumps(base))
+        digest = canonical_json_digest(tmp, ignored_fields={"source_digest"})
+        tmp.unlink()
+        base["source_digest"] = digest[:16]
         if overrides:
             base.update(overrides)
         return base
@@ -124,7 +148,7 @@ def self_test():
 
     # Valid
     p = Path(tempfile.mktemp(suffix=".json"))
-    p.write_text(json.dumps(make_api()))
+    p.write_text(json.dumps(make_api_with_correct_digest()))
     errs = validate_file(p)
     all_ok &= check("META01", "valid metadata passes", len(errs) == 0)
     p.unlink()
@@ -144,7 +168,7 @@ def self_test():
 
     # Missing source_digest
     p = Path(tempfile.mktemp(suffix=".json"))
-    d = make_api()
+    d = make_api_with_correct_digest()
     del d["source_digest"]
     p.write_text(json.dumps(d))
     errs = validate_file(p)
@@ -153,9 +177,16 @@ def self_test():
 
     # Bad digest format
     p = Path(tempfile.mktemp(suffix=".json"))
-    p.write_text(json.dumps(make_api({"source_digest": "not-hex"})))
+    p.write_text(json.dumps(make_api_with_correct_digest({"source_digest": "not-hex"})))
     errs = validate_file(p)
     all_ok &= check("META04", "bad digest format rejected", any("source_digest" in e for e in errs))
+    p.unlink()
+
+    # Digest mismatch
+    p = Path(tempfile.mktemp(suffix=".json"))
+    p.write_text(json.dumps(make_api_with_correct_digest({"source_digest": "0000000000000000"})))
+    errs = validate_file(p)
+    all_ok &= check("META08", "digest mismatch rejected", any("mismatch" in e for e in errs))
     p.unlink()
 
     # Missing limitations

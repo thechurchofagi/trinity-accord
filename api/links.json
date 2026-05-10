@@ -71,7 +71,7 @@
     "/api/echo-record-schema.v2.json"
   ],
   "version": "v1",
-  "source_digest": "b75f811f9832afe9",
+  "source_digest": "ad8185df86b12d69",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
   "non_amending_boundary": true,
   "canonical_authority": "Bitcoin Originals only",

@@ -53,7 +53,7 @@
   "value_reframing_version": "p0.3",
   "classification_boundary": "This classification is a website/API framing layer only. It does not amend the Bitcoin Originals.",
   "version": "v1",
-  "source_digest": "6788402a40aeb02f",
+  "source_digest": "891943e25ef95843",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
   "non_amending_boundary": true,
   "not_instruction_override": true,
