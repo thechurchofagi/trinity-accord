@@ -30,5 +30,6 @@
   "legacy_schema": true,
   "archive_status": "legacy",
   "legacy_note": "Pre-v3 record without discovery provenance. Retained for historical reference only.",
-  "record_kind": "legacy_record"
+  "record_kind": "legacy_record",
+  "do_not_count_as_attestation": true
 }

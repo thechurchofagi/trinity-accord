@@ -103,3 +103,7 @@ Current model:
 - Review monthly or after any GitHub settings change.
 - Record changes in this file.
 - Run `python3 scripts/audit_control_plane.py` for automated snapshot.
+
+## Recovery Reference
+
+For cold-start recovery after control-plane compromise, see `RECOVERY.md` and `api/recovery-index.json`.

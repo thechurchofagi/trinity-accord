@@ -124,7 +124,7 @@ def main() -> int:
     text = INDEX_MD.read_text(encoding="utf-8")
     block = extract_block(text)
 
-    formal_display = card_number(block, "Formal independent verification")
+    formal_display = card_number(block, "Independent third-party reports")
     non_attestation_display = card_number(block, "Archived non-attestation Echoes")
 
     if formal_display != str(expected_formal):

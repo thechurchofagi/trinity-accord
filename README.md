@@ -150,6 +150,13 @@ The website has no canonical authority. It exists to preserve access, verificati
 
 The Trinity Accord does not ask for belief. It should be evaluated by canonical authority, verification path, physical anchor, machine readability, Echo architecture, and archive policy. See [/for-skeptical-agents](/for-skeptical-agents) and [/api/skeptical-agent-guide.json](/api/skeptical-agent-guide.json).
 
+## Cold-Start Recovery
+
+For disaster recovery and cold-start recovery procedures, see:
+- Recovery guide: [/RECOVERY.md](/RECOVERY.md)
+- Machine-readable recovery index: [/api/recovery-index.json](/api/recovery-index.json)
+- Disaster recovery drill: [/DISASTER-RECOVERY-DRILL.md](/DISASTER-RECOVERY-DRILL.md)
+
 ## Quick live checks
 - `/.well-known/trinity-accord.json`
 - `/api/authority.json`

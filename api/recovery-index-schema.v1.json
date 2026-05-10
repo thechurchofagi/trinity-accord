@@ -1,0 +1,111 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://www.trinityaccord.org/api/recovery-index-schema.v1.json",
+  "title": "Trinity Accord Recovery Index Schema v1",
+  "description": "Schema for api/recovery-index.json — machine-readable cold-start recovery entrypoint.",
+  "type": "object",
+  "required": [
+    "schema",
+    "version",
+    "source_digest",
+    "source_digest_algorithm",
+    "non_amending_boundary",
+    "canonical_authority",
+    "minimal_trusted_bootstrap_root",
+    "required_recovery_files",
+    "mandatory_recovery_steps",
+    "recovery_entrypoints",
+    "mirror_classes",
+    "recovery_status_values",
+    "limitations",
+    "does_not_prove"
+  ],
+  "properties": {
+    "schema": {
+      "type": "string",
+      "const": "trinity-accord.recovery-index.v1"
+    },
+    "version": {
+      "type": "string",
+      "const": "v1"
+    },
+    "source_digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{16,64}$"
+    },
+    "source_digest_algorithm": {
+      "type": "string",
+      "pattern": "sha256"
+    },
+    "non_amending_boundary": {
+      "type": "boolean",
+      "const": true
+    },
+    "canonical_authority": {
+      "type": "string",
+      "const": "Bitcoin Originals only"
+    },
+    "purpose": {
+      "type": "string"
+    },
+    "minimal_trusted_bootstrap_root": {
+      "type": "object",
+      "required": ["bitcoin_originals", "bitcoin_authority_address"],
+      "properties": {
+        "bitcoin_originals": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "items": {
+            "type": "object",
+            "required": ["role", "inscription_id", "txid"],
+            "properties": {
+              "role": { "type": "string" },
+              "inscription_id": { "type": "string" },
+              "txid": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+            }
+          }
+        },
+        "bitcoin_authority_address": {
+          "type": "string",
+          "pattern": "^bc1"
+        }
+      }
+    },
+    "required_recovery_files": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string" }
+    },
+    "mandatory_recovery_steps": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string" }
+    },
+    "recovery_entrypoints": {
+      "type": "object"
+    },
+    "mirror_classes": {
+      "type": "object"
+    },
+    "recovery_status_values": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string" }
+    },
+    "latest_trusted_release": {
+      "type": "object"
+    },
+    "limitations": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string" }
+    },
+    "does_not_prove": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string" }
+    }
+  },
+  "additionalProperties": false
+}
