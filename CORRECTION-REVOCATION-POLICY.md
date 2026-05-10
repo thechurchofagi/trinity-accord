@@ -117,3 +117,7 @@ Every release asset set has a corresponding digest manifest. The verification ch
 3. Digest manifest covers file hash table
 4. Release verifier checks assets against manifest
 5. Corrections index can revoke/supersede any release report
+
+## Recovery Procedures
+
+Recovery procedures must check `api/corrections-index.json` before accepting recovered artifacts as current. See `RECOVERY.md` for the complete cold-start recovery guide.

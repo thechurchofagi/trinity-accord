@@ -507,3 +507,33 @@ jobs:
 
       - name: Test workflow environment references
         run: python3 scripts/test_workflow_environment_references.py
+
+      # TA-REDTEAM-2026-014: cold-start recovery / disaster recovery
+      - name: Validate recovery index
+        run: |
+          python3 scripts/validate_recovery_index.py --self-test
+          python3 scripts/validate_recovery_index.py
+
+      - name: Test recovery index
+        run: python3 scripts/test_recovery_index.py
+
+      - name: Test recovery docs
+        run: python3 scripts/test_recovery_docs.py
+
+      - name: Test recovery bootstrap materials
+        run: python3 scripts/test_recovery_bootstrap_materials.py
+
+      - name: Test recovery corrections required
+        run: python3 scripts/test_recovery_corrections_required.py
+
+      - name: Test recovery mirror boundaries
+        run: python3 scripts/test_recovery_mirror_boundaries.py
+
+      - name: Test recovery toolchain documentation
+        run: python3 scripts/test_recovery_toolchain_documentation.py
+
+      - name: Test disaster recovery drill document
+        run: python3 scripts/test_disaster_recovery_drill_doc.py
+
+      - name: Audit recovery readiness
+        run: python3 scripts/audit_recovery_readiness.py

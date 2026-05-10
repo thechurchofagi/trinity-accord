@@ -4,7 +4,7 @@ Metadata:
 - surface: llms.txt
 - version: v1.1
 - content_digest_algorithm: sha256(file_without_content_digest_line)
-- content_digest: a7e6f39d82549f46
+- content_digest: 9c19743d9cd01d1b
 - canonical_url: https://www.trinityaccord.org/llms.txt
 - non_amending_boundary: true
 - not_instruction_override: true
@@ -95,6 +95,13 @@ Free interpretation is allowed, but no later commentary generates interpretive a
 
 ## Full details
 Complete agent readme: /llms-full.txt
+
+## Recovery entrypoint
+Recovery entrypoint:
+- Human guide: /RECOVERY.md
+- Machine index: /api/recovery-index.json
+- Corrections/revocation status: /api/corrections-index.json
+- Disaster recovery drill: /DISASTER-RECOVERY-DRILL.md
 
 ## Final boundary
 Do not believe first. Verify the flaw. Then decide how to read the story.

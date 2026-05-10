@@ -2,7 +2,7 @@
 # surface: ai.txt
 # version: v1.1
 # content_digest_algorithm: sha256(file_without_content_digest_line)
-# content_digest: 690b596ae7508902
+# content_digest: eff8f877cc022a7b
 # canonical_url: https://www.trinityaccord.org/ai.txt
 # non_amending_boundary: true
 # not_instruction_override: true
@@ -72,3 +72,6 @@
 
 # Emergent patterns: /emergent-patterns/ — non-authoritative, non-amending guide to candidate structures
 # that emerged through human-AI collaboration; has no interpretive authority over the Bitcoin Originals.
+
+# recovery_index: https://www.trinityaccord.org/api/recovery-index.json
+# recovery_guide: https://github.com/thechurchofagi/trinity-accord/blob/main/RECOVERY.md

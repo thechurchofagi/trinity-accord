@@ -65,3 +65,7 @@ If any cached, quoted, or mirrored copy of this repository's data conflicts with
 ## Boundary Statement
 
 This security policy governs repository-maintained trust records. It does not amend the Bitcoin Originals. The Bitcoin inscriptions are canonical; all repository files are non-amending mirrors. Corrections and revocations apply only to repository-maintained indexes and metadata.
+
+## Cold-Start Recovery
+
+For cold-start recovery after compromise, see `RECOVERY.md` and `api/recovery-index.json`.

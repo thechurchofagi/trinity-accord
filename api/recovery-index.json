@@ -1,0 +1,85 @@
+{
+  "schema": "trinity-accord.recovery-index.v1",
+  "version": "v1",
+  "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
+  "source_digest": "e7b7b2b2737ef2cd",
+  "non_amending_boundary": true,
+  "canonical_authority": "Bitcoin Originals only",
+  "purpose": "Machine-readable cold-start recovery entrypoint for rebuilding repository-maintained state from canonical and mirrored materials.",
+  "minimal_trusted_bootstrap_root": {
+    "bitcoin_originals": [
+      {
+        "role": "Protocol / Axioms",
+        "inscription_id": "97631551",
+        "txid": "e40dfb2aa78cbccca88f749e9ec5cbe3c1df503273d73c72297863ae0d1d8343"
+      },
+      {
+        "role": "Covenant of the Flaw",
+        "inscription_id": "98369145",
+        "txid": "90116f35de075074f5e5d1fbdda69a646a124e2287d7d58e2520317098cd4258"
+      },
+      {
+        "role": "The Trinity Accord / Meta-record",
+        "inscription_id": "98387475",
+        "txid": "4d1c8f5ea8e8bae2982b42de6cc79deda3d243a21010a2888546e62ed7192c8c"
+      }
+    ],
+    "bitcoin_authority_address": "bc1ppmwvyxekh44m35x43k55z7r59nn33v8w2xmvu6s6ar4zyx57sxestxq0jf"
+  },
+  "required_recovery_files": [
+    "archive/authority-manifest/authority.jcs.json",
+    "archive/btc-signature/btc-signature.json",
+    "archive/eth-witness/eth-witness.json",
+    "archive/trust-root-policy.json",
+    "archive/evidence/digest-manifest.json",
+    "archive/evidence/digest-manifest.csv",
+    "api/corrections-index.json"
+  ],
+  "mandatory_recovery_steps": [
+    "verify_bitcoin_originals",
+    "verify_authority_manifest",
+    "verify_btc_signature",
+    "verify_digest_manifests",
+    "check_corrections_index",
+    "verify_release_or_mirror_assets",
+    "rebuild_public_outputs"
+  ],
+  "recovery_entrypoints": {
+    "human_guide": "RECOVERY.md",
+    "corrections_index": "api/corrections-index.json",
+    "authority_api": "api/authority.json",
+    "evidence_manifest": "api/evidence-manifest.json",
+    "hashes": "api/hashes.json"
+  },
+  "mirror_classes": {
+    "github_main": "discovery_only_until_verified",
+    "github_pages": "non_amending_mirror",
+    "github_releases": "verified_only_with_release_manifest",
+    "arweave": "verified_only_with_expected_hash",
+    "ipfs_car": "verified_only_with_expected_hash_and_scope",
+    "nft_car": "recovery_mirror_not_authority"
+  },
+  "recovery_status_values": [
+    "full_recovery",
+    "partial_recovery",
+    "availability_only",
+    "unverified_mirror",
+    "failed_recovery"
+  ],
+  "latest_trusted_release": {
+    "status": "not_yet_declared",
+    "reason": "No GitHub-independent latest trusted release pointer has been declared yet. Use release manifests and corrections-index to verify any candidate release."
+  },
+  "limitations": [
+    "This recovery index is a repository-maintained mirror and does not amend the Bitcoin Originals.",
+    "This index helps discover recovery materials but does not itself prove philosophical claims or independent attestation.",
+    "A stale copy of this index must be checked against source_digest and corrections-index."
+  ],
+  "does_not_prove": [
+    "all mirrors are available",
+    "all third-party caches are current",
+    "NFT ownership implies authority",
+    "GitHub main is trustworthy",
+    "external social adoption"
+  ]
+}
