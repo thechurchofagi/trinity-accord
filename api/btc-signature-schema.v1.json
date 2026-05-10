@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://trinityaccord.org/api/btc-signature-schema.v1.json",
+  "title": "Trinity Accord BTC Signature Manifest",
+  "type": "object",
+  "required": ["bitcoin_signature"],
+  "properties": {
+    "bitcoin_signature": {
+      "type": "object",
+      "required": ["method", "address", "message_sha256", "pubkey_xonly", "signature", "boundary"],
+      "properties": {
+        "method": { "enum": ["bip340-taproot-xonly"] },
+        "address": {
+          "type": "string",
+          "pattern": "^bc1p[a-z0-9]{58,90}$"
+        },
+        "message_sha256": {
+          "type": "string",
+          "pattern": "^[a-fA-F0-9]{64}$"
+        },
+        "pubkey_xonly": {
+          "type": "string",
+          "pattern": "^[a-fA-F0-9]{64}$"
+        },
+        "signature": {
+          "type": "string",
+          "pattern": "^[a-fA-F0-9]{128}$"
+        },
+        "boundary": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

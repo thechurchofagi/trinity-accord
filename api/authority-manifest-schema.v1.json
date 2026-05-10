@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://trinityaccord.org/api/authority-manifest-schema.v1.json",
+  "title": "Trinity Accord Authority Manifest",
+  "type": "object",
+  "required": ["guardian", "bitcoin", "ethereum", "boundary"],
+  "properties": {
+    "guardian": {
+      "type": "object",
+      "required": ["name", "role", "btc_minter_address", "eth_address", "ar_owner"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "role": { "type": "string", "minLength": 1 },
+        "btc_minter_address": {
+          "type": "string",
+          "pattern": "^bc1p[a-z0-9]{58,90}$"
+        },
+        "eth_address": {
+          "type": "string",
+          "pattern": "^0x[a-fA-F0-9]{40}$"
+        },
+        "ar_owner": {
+          "type": "string",
+          "minLength": 20
+        }
+      },
+      "additionalProperties": true
+    },
+    "bitcoin": {
+      "type": "object",
+      "properties": {
+        "originals": { "type": "array" },
+        "ancillary": { "type": "array" }
+      },
+      "additionalProperties": true
+    },
+    "ethereum": {
+      "type": "object",
+      "properties": {
+        "attestations": { "type": "array" },
+        "chainId": { "type": ["string", "integer"] }
+      },
+      "additionalProperties": true
+    },
+    "boundary": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "additionalProperties": true
+}

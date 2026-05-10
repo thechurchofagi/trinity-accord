@@ -1,0 +1,45 @@
+{
+  "schema": "trinity-accord.trust-root-policy.v1",
+  "status": "active",
+  "policy_scope": [
+    "authority-manifest",
+    "btc-signature",
+    "eth-witness",
+    "digest-manifest",
+    "recovery-package-source",
+    "ots-proofs"
+  ],
+  "current_root": {
+    "authority_manifest_path": "archive/authority-manifest/authority.jcs.json",
+    "btc_signature_path": "archive/btc-signature/btc-signature.json",
+    "eth_witness_path": "archive/eth-witness/eth-witness.json",
+    "digest_manifest_json_path": "archive/evidence/digest-manifest.json",
+    "digest_manifest_csv_path": "archive/evidence/digest-manifest.csv",
+    "recovery_package_sha256_path": "archive/evidence/nft-recovery-package/recovery-package.sha256"
+  },
+  "rotation_policy": {
+    "btc_key_rotation_allowed": true,
+    "eth_key_rotation_allowed": true,
+    "requires_successor_root_record": true,
+    "requires_old_root_reference": true,
+    "requires_human_review": true,
+    "requires_codeowners_review": true,
+    "requires_ci_validators": true,
+    "requires_public_notice": true,
+    "requires_new_root_to_preserve_historical_roots": true
+  },
+  "revocation_policy": {
+    "compromise_response_required": true,
+    "revoked_roots_must_remain_auditable": true,
+    "revocation_record_required": true
+  },
+  "non_amending_boundary": {
+    "btc_originals_prevail": true,
+    "repo_trust_roots_do_not_amend_original_bitcoin_or_ethereum_records": true
+  },
+  "historical_roots": [],
+  "limitations": [
+    "This policy governs repository-maintained trust roots and does not itself constitute independent third-party attestation.",
+    "Rotation requires explicit review and a successor-root record before new roots are treated as current."
+  ]
+}

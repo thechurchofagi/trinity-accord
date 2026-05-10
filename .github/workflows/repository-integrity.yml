@@ -281,6 +281,36 @@ jobs:
       - name: Test Echo boundary field consistency
         run: python3 scripts/test_echo_boundary_field_consistency.py
 
+      # TA-REDTEAM-2026-009 trust-root governance hardening
+      - name: Test CODEOWNERS trust-root paths
+        run: python3 scripts/test_codeowners_trust_root_paths.py
+
+      - name: Test write workflows actor gates
+        run: python3 scripts/test_write_workflows_actor_gates.py
+
+      - name: Validate authority manifest
+        run: |
+          python3 scripts/validate_authority_manifest.py --self-test
+          python3 scripts/validate_authority_manifest.py archive/authority-manifest/authority.jcs.json
+
+      - name: Validate BTC signature manifest
+        run: |
+          python3 scripts/validate_btc_signature_manifest.py --self-test
+          python3 scripts/validate_btc_signature_manifest.py archive/btc-signature/btc-signature.json
+
+      - name: Validate ETH witness manifest
+        run: |
+          python3 scripts/validate_eth_witness_manifest.py --self-test
+          python3 scripts/validate_eth_witness_manifest.py archive/eth-witness/eth-witness.json
+
+      - name: Validate trust-root policy
+        run: |
+          python3 scripts/validate_trust_root_policy.py --self-test
+          python3 scripts/validate_trust_root_policy.py archive/trust-root-policy.json
+
+      - name: Test trust-root cross-checks
+        run: python3 scripts/test_trust_root_cross_checks.py
+
       - name: Node syntax check for verification scripts
         run: |
           node --check scripts/verify-dag-and-signed-cids.mjs
