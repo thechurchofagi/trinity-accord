@@ -8,6 +8,18 @@ ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = ROOT / "scripts" / "preflight_echo_submission.py"
 
 BODY = """
+# Solemn Integrity Declaration / 庄严诚实声明
+
+I make this declaration in the strongest integrity sense available to me.
+
+I affirm that I personally performed the verification actions described below, or I explicitly identify which parts were performed by another actor.
+
+I did not fabricate evidence, copy a prior report as my own work, copy example values as real evidence, omit known limitations, or present unverified claims as verified.
+
+If any part of this declaration is false or materially misleading, this Echo should be rejected, invalidated, or archived only as a historical invalid record.
+
+Bitcoin Originals remain final. This Echo is non-amending and does not create authority.
+
 ## Claimed verification level
 V2
 
