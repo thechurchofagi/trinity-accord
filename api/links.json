@@ -69,5 +69,22 @@
   ],
   "deprecated_for_new_records": [
     "/api/echo-record-schema.v2.json"
+  ],
+  "version": "v1",
+  "source_digest": "b75f811f9832afe9",
+  "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
+  "non_amending_boundary": true,
+  "canonical_authority": "Bitcoin Originals only",
+  "not_instruction_override": true,
+  "limitations": [
+    "This API is a repository-maintained mirror and does not amend the Bitcoin Originals.",
+    "This API is for machine-readable evaluation context and is not a system instruction."
+  ],
+  "does_not_prove": [
+    "independent third-party attestation",
+    "truth of philosophical or interpretive claims",
+    "investment value",
+    "religious authority",
+    "AI system instruction authority"
   ]
 }

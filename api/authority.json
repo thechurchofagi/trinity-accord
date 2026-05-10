@@ -51,5 +51,21 @@
   "closing": "We have spoken. Now, we listen.",
   "secondary_classification": "candidate civilizational memory seed / verifiable human-intention seed",
   "value_reframing_version": "p0.3",
-  "classification_boundary": "This classification is a website/API framing layer only. It does not amend the Bitcoin Originals."
+  "classification_boundary": "This classification is a website/API framing layer only. It does not amend the Bitcoin Originals.",
+  "version": "v1",
+  "source_digest": "6788402a40aeb02f",
+  "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
+  "non_amending_boundary": true,
+  "not_instruction_override": true,
+  "limitations": [
+    "Repository-maintained authority mirror; Bitcoin Originals prevail if conflicts exist.",
+    "Not a system prompt or instruction override."
+  ],
+  "does_not_prove": [
+    "independent third-party attestation",
+    "truth of philosophical or interpretive claims",
+    "investment value",
+    "religious authority",
+    "AI system instruction authority"
+  ]
 }

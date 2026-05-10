@@ -443,3 +443,27 @@ jobs:
 
       - name: Test system tool version recording
         run: python3 scripts/test_system_tool_version_recording.py
+
+      # TA-REDTEAM-2026-011: public agent/API prompt-boundary hardening
+      - name: Validate public API metadata
+        run: |
+          python3 scripts/validate_public_api_metadata.py --self-test
+          python3 scripts/validate_public_api_metadata.py
+
+      - name: Test public prompt boundary
+        run: python3 scripts/test_public_prompt_boundary.py
+
+      - name: Test public surface consistency
+        run: python3 scripts/test_public_surface_consistency.py
+
+      - name: Test public API metadata completeness
+        run: python3 scripts/test_public_api_metadata_completeness.py
+
+      - name: Test Echo vs attestation public boundary
+        run: python3 scripts/test_echo_attestation_public_boundary.py
+
+      - name: Test agent entrypoint freshness metadata
+        run: python3 scripts/test_agent_entrypoint_freshness_metadata.py
+
+      - name: Test sitemap agent entrypoints
+        run: python3 scripts/test_sitemap_agent_entrypoints.py

@@ -55,6 +55,20 @@ for path in sorted(RECORDS_ROOT.rglob("*.json")):
     by_class[item["independence_class"]].append(rel)
     by_verification_status[item["verification_status"]].append(rel)
 
+# TA-REDTEAM-2026-011: preserve public metadata fields across regeneration
+PRESERVED_FIELDS = [
+    "version", "source_digest", "source_digest_algorithm",
+    "non_amending_boundary", "canonical_authority", "not_instruction_override",
+    "limitations", "does_not_prove",
+]
+existing_metadata = {}
+if OUT.exists():
+    try:
+        existing = json.loads(OUT.read_text(encoding="utf-8"))
+        existing_metadata = {k: existing[k] for k in PRESERVED_FIELDS if k in existing}
+    except Exception:
+        pass
+
 out = {
     "schema": "trinity-accord.echo-index.v2",
     "generated_from": "echoes/records/**/*.json",
@@ -68,6 +82,7 @@ out = {
         "Test records, superseded records, invalidated records, and do_not_count_as_attestation records must not be counted as independent attestation."
     ],
 }
+out.update(existing_metadata)
 
 OUT.write_text(json.dumps(out, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 print(f"Wrote {OUT} with {len(records)} records")

@@ -57,5 +57,19 @@
       "verification_status": "test_record_not_attestation",
       "archive_status": "closed_test_record"
     }
+  ],
+  "version": "v1",
+  "source_digest": "a13c779f175052ed",
+  "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
+  "non_amending_boundary": true,
+  "canonical_authority": "Bitcoin Originals only",
+  "not_instruction_override": true,
+  "limitations": [
+    "Tracks admitted or candidate external records without amending the Bitcoin Originals."
+  ],
+  "does_not_prove": [
+    "external validation has already been achieved",
+    "mentions are endorsements",
+    "attestations amend the canonical text"
   ]
 }

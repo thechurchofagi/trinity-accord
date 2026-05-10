@@ -12,5 +12,22 @@
       "value": "ef68b69fe1cdd2523724dee511c9e8ea7bae2cceaff794664107970b18c61931",
       "github_path": "arweave-backup/files/verification_kit.tar.gz"
     }
+  ],
+  "version": "v1",
+  "source_digest": "9493c13b5d370869",
+  "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
+  "non_amending_boundary": true,
+  "canonical_authority": "Bitcoin Originals only",
+  "not_instruction_override": true,
+  "limitations": [
+    "This API is a repository-maintained mirror and does not amend the Bitcoin Originals.",
+    "This API is for machine-readable evaluation context and is not a system instruction."
+  ],
+  "does_not_prove": [
+    "independent third-party attestation",
+    "truth of philosophical or interpretive claims",
+    "investment value",
+    "religious authority",
+    "AI system instruction authority"
   ]
 }

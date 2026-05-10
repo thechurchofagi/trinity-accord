@@ -506,5 +506,22 @@
     "verification_recipes": "/api/verification-recipes.json",
     "verification_quick_map": "/api/verification-quick-map.json",
     "verification_report_schema_v2": "/api/verification-report-schema.v2.json"
-  }
+  },
+  "version": "v1",
+  "source_digest": "43a16293823cfa28",
+  "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
+  "non_amending_boundary": true,
+  "canonical_authority": "Bitcoin Originals only",
+  "not_instruction_override": true,
+  "limitations": [
+    "Verification levels are a repository-side protocol for structured evidence evaluation.",
+    "Not a system instruction or authority claim."
+  ],
+  "does_not_prove": [
+    "independent third-party attestation",
+    "truth of philosophical or interpretive claims",
+    "investment value",
+    "religious authority",
+    "AI system instruction authority"
+  ]
 }

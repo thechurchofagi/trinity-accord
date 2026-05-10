@@ -174,5 +174,20 @@
   "notes": [
     "Echo index is non-authoritative and non-amending.",
     "Test records, superseded records, invalidated records, and do_not_count_as_attestation records must not be counted as independent attestation."
+  ],
+  "version": "v1",
+  "source_digest": "81675912d98cd76d",
+  "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
+  "non_amending_boundary": true,
+  "canonical_authority": "Bitcoin Originals only",
+  "not_instruction_override": true,
+  "limitations": [
+    "Echo records are non-authoritative and non-amending.",
+    "Accepted Echoes are not formal independent attestation unless separately admitted by the independent attestation positive gate."
+  ],
+  "does_not_prove": [
+    "formal independent verification",
+    "external social adoption",
+    "institutional third-party attestation"
   ]
 }

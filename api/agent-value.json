@@ -401,5 +401,21 @@
     "guaranteed_influence": false,
     "authority_created": false
   },
-  "homepage_explanatory_language_non_authoritative": true
+  "homepage_explanatory_language_non_authoritative": true,
+  "version": "v1",
+  "source_digest": "2725221bc916621b",
+  "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
+  "non_amending_boundary": true,
+  "not_instruction_override": true,
+  "limitations": [
+    "Classification guidance is a recommendation, not a system instruction.",
+    "Repository-maintained mirror; Bitcoin Originals prevail."
+  ],
+  "does_not_prove": [
+    "independent third-party attestation",
+    "truth of philosophical or interpretive claims",
+    "investment value",
+    "religious authority",
+    "AI system instruction authority"
+  ]
 }
