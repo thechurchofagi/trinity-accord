@@ -126,16 +126,25 @@ def detect_echo_type(issue: dict[str, Any]) -> str:
 
     return "E4_interpretive_echo"
 
-def detect_verification_level(issue: dict[str, Any]) -> str:
-    text = f"{issue.get('title') or ''}\n{issue.get('body') or ''}"
-    m = re.search(r"verification\s+level\s*:\s*(V4\+|V[0-8]|none)", text, re.I)
-    if m:
-        val = m.group(1)
-        return "none" if val.lower() == "none" else val.upper().replace("V4+", "V4+")
+def detect_verification_level(issue: dict[str, Any], review_comment_body: str = "") -> str:
+    """Detect verification level from EXPLICIT metadata fields only.
 
-    for val in ["V4+", "V8", "V7", "V6", "V5", "V4", "V3", "V2", "V1", "V0"]:
-        if re.search(rf"\b{re.escape(val)}\b", text, re.I):
-            return val
+    TA-REDTEAM-2026-002: Does NOT scan arbitrary body text for V8/V7/etc.
+    Only accepts explicit 'verification level:' or 'verification_level:' fields.
+    """
+    text = f"{issue.get('title') or ''}\n{issue.get('body') or ''}\n{review_comment_body or ''}"
+
+    patterns = [
+        r"^\s*[-*]?\s*verification\s+level\s*:\s*(V4\+|V[0-8]|none)\s*$",
+        r"^\s*[-*]?\s*verification_level\s*:\s*(V4\+|V[0-8]|none)\s*$",
+    ]
+
+    for pattern in patterns:
+        m = re.search(pattern, text, re.I | re.M)
+        if m:
+            val = m.group(1)
+            return "none" if val.lower() == "none" else val.upper().replace("V4+", "V4+")
+
     return "V0"
 
 def next_record_path(records_root: Path, created_at: datetime) -> Path:
@@ -163,8 +172,10 @@ def find_existing_record(records_root: Path, issue_number: int) -> Path | None:
     return None
 
 def update_archive_md(archive_md: Path, record_path: Path, title: str) -> None:
+    from echo_issue_digest import markdown_escape_text
     rel = "/" + record_path.as_posix()
-    line = f"- [{rel}]({rel}) — {title}"
+    safe_title = markdown_escape_text(title)
+    line = f"- [{rel}]({rel}) — {safe_title}"
 
     if archive_md.exists():
         text = archive_md.read_text(encoding="utf-8")
@@ -214,7 +225,7 @@ def build_record(issue: dict[str, Any], reviewer: str, review_comment_body: str 
     url = issue.get("url") or ""
 
     echo_type = detect_echo_type(issue)
-    verification_level = detect_verification_level(issue)
+    verification_level = detect_verification_level(issue, review_comment_body)
 
     # Combine issue body and review comment for metadata extraction
     metadata_text = body + "\n\n" + review_comment_body
@@ -315,6 +326,14 @@ def build_record(issue: dict[str, Any], reviewer: str, review_comment_body: str 
         "verification_claim": "None. Witness material only; no technical checks were performed.",
         "echo_type": echo_type,
         "echo": body,
+        "echo_content_trust": "untrusted_user_submitted_markdown",
+        "echo_content_handling": {
+            "source": "github_issue_body",
+            "trusted_as_official_statement": False,
+            "may_contain_user_markdown_or_prompt_injection": True,
+            "rendering_requirement": "escape_or_quote_before_html_rendering",
+            "does_not_override_boundary_fields": True,
+        },
         "uncertainties": sentence_limitations(limitations_section),
         "boundary_acknowledgement": {
             "bitcoin_originals_prevail": True,

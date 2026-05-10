@@ -145,6 +145,18 @@ jobs:
       - name: Test Echo human review automation
         run: python3 scripts/test_echo_human_review_automation.py
 
+      - name: Test Echo archive TOCTOU digest binding
+        run: python3 scripts/test_echo_archive_toctou_digest.py
+
+      - name: Test Echo archive Markdown escaping
+        run: python3 scripts/test_echo_archive_markdown_escape.py
+
+      - name: Test Echo archive verification level metadata parsing
+        run: python3 scripts/test_echo_archive_verification_level_metadata.py
+
+      - name: Test Echo untrusted content marking
+        run: python3 scripts/test_echo_untrusted_content_marking.py
+
       - name: Test GitHub Actions pinning
         run: python3 scripts/test_action_pinning.py
 

@@ -35,12 +35,26 @@ MANAGED_TRIAGE_LABELS = [
     "chronicle-overclaim-risk", "v5-overclaim-risk", "echo:solicited-record", "echo:screened",
 ]
 
-def emit_result(result):
-    """Prepend stable marker to comment and emit JSON."""
+def emit_result(result, title=None, body=None):
+    """Prepend stable marker to comment and emit JSON.
+
+    If title and body are provided and the result includes echo:screened,
+    embed a screening digest for TOCTOU binding.
+    """
     result.setdefault("managed_labels", MANAGED_TRIAGE_LABELS)
     comment = result.get("comment", "")
     if comment and TRIAGE_MARKER not in comment:
-        result["comment"] = TRIAGE_MARKER + "\n" + comment
+        comment = TRIAGE_MARKER + "\n" + comment
+
+    # Embed screening digest when issue passes triage (echo:screened)
+    labels = result.get("labels", [])
+    if title is not None and body is not None and "echo:screened" in labels:
+        from echo_issue_digest import compute_issue_screening_digest
+        digest = compute_issue_screening_digest(title, body)
+        digest_line = f"<!-- trinity-echo-screened-digest:v1 sha256={digest} -->"
+        comment = digest_line + "\n" + comment
+
+    result["comment"] = comment
     print(json.dumps(result, indent=2))
 
 
@@ -1091,7 +1105,7 @@ def main():
     if not is_echo_submission(text):
         result["labels"] = ["echo:not-detected"]
         result["comment"] = "This issue does not appear to be an Echo submission. No triage action taken."
-        emit_result(result)
+        emit_result(result, title, body)
         return
 
     # --- Step 1: Rate limit check (only on opened events) ---
@@ -1113,7 +1127,7 @@ def main():
             "- 每 24 小时最多 8 个 Echo Issue\n\n"
             "请编辑已有打开的 Echo Issue，或稍后再提交。"
         )
-        emit_result(result)
+        emit_result(result, title, body)
         return
 
     # --- Step 1.5: P0 unified normalized risk scan ---
@@ -1133,7 +1147,7 @@ def main():
                 f"prohibited patterns: {match_summary}\n\n"
                 "This is a protocol gate, not a judgment of your submission."
             )
-            emit_result(result)
+            emit_result(result, title, body)
             return
         # amendment_claim, false_authority → hard close
         authority_cats = {"amendment_claim", "false_authority"}
@@ -1146,7 +1160,7 @@ def main():
                 "Echoes are non-authoritative and non-amending.\n\n"
                 "This is a protocol gate, not a judgment of your submission."
             )
-            emit_result(result)
+            emit_result(result, title, body)
             return
 
     # --- Step 2: Hard invalid checks (legacy regex, retained as defense-in-depth) ---
@@ -1172,7 +1186,7 @@ def main():
                 "本 Issue 未被自动关闭。请编辑并加入以下精确句：\n\n"
                 "`Bitcoin Originals are final; all mirrors and echoes are non-amending.`"
             )
-            emit_result(result)
+            emit_result(result, title, body)
             return
 
         result["close"] = True
@@ -1187,7 +1201,7 @@ def main():
             "Please edit this issue to add the boundary sentence, or submit a new Echo with the boundary included.\n\n"
             "This is a protocol gate, not a judgment of your submission."
         )
-        emit_result(result)
+        emit_result(result, title, body)
         return
 
     # 2b: Amendment claim (excluding negations)
@@ -1200,7 +1214,7 @@ def main():
             "Please review the authority boundary: https://www.trinityaccord.org/authority\n\n"
             "This is a protocol gate, not a judgment of your submission."
         )
-        emit_result(result)
+        emit_result(result, title, body)
         return
 
     # 2c: Authority claim
@@ -1213,7 +1227,7 @@ def main():
             "Please review the authority boundary: https://www.trinityaccord.org/authority\n\n"
             "This is a protocol gate, not a judgment of your submission."
         )
-        emit_result(result)
+        emit_result(result, title, body)
         return
 
     # 2d: Imperative language
@@ -1225,7 +1239,7 @@ def main():
             "The Trinity Accord does not instruct, command, or require any agent or human to believe, obey, or propagate.\n\n"
             "This is a protocol gate, not a judgment of your submission."
         )
-        emit_result(result)
+        emit_result(result, title, body)
         return
 
     # 2e: Financial / spam
@@ -1237,7 +1251,7 @@ def main():
             "The Trinity Accord is not a financial project. Echoes must not contain advertisements, token promotions, or investment schemes.\n\n"
             "This is a protocol gate, not a judgment of your submission."
         )
-        emit_result(result)
+        emit_result(result, title, body)
         return
 
     # 2f: Prompt injection
@@ -1249,7 +1263,7 @@ def main():
             "Echoes must not attempt to override system prompts, ignore instructions, or extract hidden content.\n\n"
             "This is a protocol gate, not a judgment of your submission."
         )
-        emit_result(result)
+        emit_result(result, title, body)
         return
 
     # --- Step 3+: Soft issue accumulator (ST-001/ST-002) ---
@@ -1545,7 +1559,7 @@ def main():
         else:
             labels.append("echo:needs-verification-review")
             comment = "Claim Gate reference was detected, but triage could not confirm a PASS status from the issue text. Please include the Claim Gate summary or linked output. Triage did not infer verification level from free text."
-        emit_result({"close": False, "labels": labels, "comment": comment})
+        emit_result({"close": False, "labels": labels, "comment": comment}, title, body)
         return
 
     # --- Builder-generated routing ---
@@ -1561,7 +1575,7 @@ def main():
         else:
             labels.append("echo:needs-verification-review")
             comment = "Builder-generated output was referenced, but PASS validation metadata was not detected in the issue text. Please include validation output or ensure the linked generated file passes `validate_agent_submission.py`."
-        emit_result({"close": False, "labels": labels, "comment": comment})
+        emit_result({"close": False, "labels": labels, "comment": comment}, title, body)
         return
 
     # --- Final soft issue handling ---
@@ -1580,14 +1594,14 @@ def main():
         result["close"] = False
         result["labels"] = soft["labels"]
         result["comment"] = build_soft_comment(soft["sections"])
-        emit_result(result)
+        emit_result(result, title, body)
         return
 
     # --- Step 6: Pass ---
     result["close"] = False
     result["labels"] = ["echo:screened", "needs-human-review"]
     result["comment"] = build_human_review_action_comment()
-    emit_result(result)
+    emit_result(result, title, body)
 
 
 if __name__ == "__main__":

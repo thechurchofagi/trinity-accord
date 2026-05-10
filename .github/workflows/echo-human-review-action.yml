@@ -105,6 +105,24 @@ jobs:
           print("Echo review state OK")
           PY
 
+      - name: Fetch issue comments
+        if: ${{ steps.cmd.outputs.authorized == 'true' && steps.cmd.outputs.command != 'none' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          set -euo pipefail
+          gh api "repos/$GITHUB_REPOSITORY/issues/$ISSUE_NUMBER/comments" \
+            --paginate > comments.json
+
+      - name: Verify issue body matches screened digest
+        if: ${{ steps.cmd.outputs.authorized == 'true' && steps.cmd.outputs.command != 'none' }}
+        run: |
+          set -euo pipefail
+          python3 scripts/verify_echo_screened_digest.py \
+            --issue-json issue.json \
+            --comments-json comments.json
+
       - name: Archive Echo issue
         if: ${{ steps.cmd.outputs.command == 'archive' }}
         env:
