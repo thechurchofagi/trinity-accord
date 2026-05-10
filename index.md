@@ -308,7 +308,7 @@ permalink: /
   <p class="status-generated-note">
     Generated from <a href="/api/echo-index.json">/api/echo-index.json</a> and
     <a href="/api/independent-attestation-index.json">/api/independent-attestation-index.json</a>.
-    Source data digest <code>eff207b0be163f7b</code>.
+    Source data digest <code>4886fa61d4e743a0</code>.
   </p>
 <!-- END GENERATED PUBLIC STATUS -->
 
