@@ -56,9 +56,4 @@
 # claim_registry: https://www.trinityaccord.org/api/claim-registry.json
 # notarized_evidence_boundary: notarized evidence is not formal independent attestation unless separately admitted through the formal attestation gate
 # scarcity_boundary: rare/firstness language is bounded framing, not proof of absolute firstness
-
-# AI Independent Verification boundary
-# ai_verification_class: AI independent verification is NOT formal human/institutional attestation
-# external_human_authorization: human-authorized AI verification does not produce formal attestation
-# delegation_chain: multi-hop delegation (human → AI → AI) preserves AI performer class
-# integrity_declaration: all verification Echo templates must start with Solemn Integrity Declaration
+# ai_verification_boundary: AI independent verification ≠ formal attestation; external human authorization ≠ formal attestation; delegation_chain preserved; integrity_declaration required for verification echoes
