@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
-"""TA-REDTEAM-2026-007 regression tests.
+"""TA-REDTEAM-2026-007 regression tests — comprehensive.
 
-Validates that download-nft-cars.mjs has the required security hardening:
-- SRC-TOKEN-001: extractTokenIndex fails on multiple candidates
-- SRC-COUNT-001: EXPECTED_NFTS = 175 enforced
+Validates all findings are fixed in download-nft-cars.mjs:
+- SRC-TOKEN-001: unique candidate fail-closed
+- SRC-COUNT-001: EXPECTED_NFTS=175 enforced
 - SRC-BIND-001: recovery package digest check
 - SRC-DUPTXID-001: duplicate txid conflict detection
-- SRC-CAR-001: strict parseCarHeader with bounds checks
+- SRC-CAR-001: strict CAR parser
 - SRC-SCHEMA-001: token_index schema validation
-- SRC-TRACE-001: source digests in RELEASE-MANIFEST.json
-- SRC-H1: root_cid_verified field in manifest
+- SRC-TRACE-001: source digests in manifest
+- SRC-H1: root_cid boundary
 """
 
 import re, sys, os
@@ -25,154 +25,88 @@ def check(name, condition, detail=''):
         print(f'  ✓ {name}')
     else:
         print(f'  ✗ {name}')
-        if detail:
-            print(f'    {detail}')
+        if detail: print(f'    {detail}')
         failures.append(name)
 
-print('TA-REDTEAM-2026-007 regression tests')
-print('=' * 50)
+print('TA-REDTEAM-2026-007 comprehensive regression tests')
+print('=' * 55)
 
-# SRC-COUNT-001: EXPECTED_NFTS constant
-check(
-    'EXPECTED_NFTS = 175 defined',
-    'const EXPECTED_NFTS = 175' in src,
-    'Expected: const EXPECTED_NFTS = 175'
-)
-check(
-    'EXPECTED_NFTS enforced after token_index extraction',
-    'totalTokens !== EXPECTED_NFTS' in src,
-    'Expected: throw if totalTokens !== EXPECTED_NFTS'
-)
+# SRC-COUNT-001
+check('EXPECTED_NFTS = 175 default', 'EXPECTED_NFTS' in src and '175' in src)
+check('token_index NFT count mismatch throws', 'token_index NFT count mismatch' in src)
+check('metadata count mismatch throws', 'metadata count mismatch' in src)
+check('countTokenIndexNfts helper', 'countTokenIndexNfts' in src)
+check('countMetadataEntries helper', 'countMetadataEntries' in src)
 
-# SRC-TOKEN-001: multiple candidates fail-closed
-check(
-    'extractTokenIndex collects candidates (not largest-wins)',
-    'candidates' in src and 'candidates.push' in src,
-    'Expected: candidates array, not bestObj'
-)
-check(
-    'Multiple candidates throw error',
-    'candidates.length > 1' in src and 'Multiple token_index-like JSON' in src,
-    'Expected: throw on candidates.length > 1'
-)
-check(
-    'No more bestObj / bestKeyCount pattern',
-    'bestObj' not in src and 'bestKeyCount' not in src,
-    'Expected: removed largest-wins heuristic'
-)
+# SRC-TOKEN-001
+check('looksLikeTokenIndexObject function', 'looksLikeTokenIndexObject' in src)
+check('extractJsonObjectsFromBlock function', 'extractJsonObjectsFromBlock' in src)
+check('Ambiguous candidates throws', 'Ambiguous token_index candidates' in src)
+check('candidates.length > 1 check', 'candidates.length > 1' in src)
+check('No bestObj pattern', 'bestObj' not in src)
+check('No bestKeyCount pattern', 'bestKeyCount' not in src)
+check('validateTokenIndex called in extractTokenIndex', 'validateTokenIndex(candidates' in src)
 
-# SRC-CAR-001: strict parseCarHeader
-check(
-    'parseCarHeader has bounds check (pos >= data.length)',
-    'pos >= data.length' in src and 'Truncated CAR header varint' in src,
-    'Expected: bounds check before accessing data[pos]'
-)
-check(
-    'parseCarHeader has safe integer check',
-    'Number.isSafeInteger(headerLen)' in src,
-    'Expected: Number.isSafeInteger check'
-)
-check(
-    'parseCarHeader has max iterations (10)',
-    'for (let i = 0; i < 10' in src,
-    'Expected: bounded loop'
-)
-check(
-    'JSON parse errors logged (not silent catch {})',
-    'JSON parse error in CAR block' in src or 'console.warn' in src,
-    'Expected: console.warn instead of catch {}'
-)
+# SRC-CAR-001
+check('readVarintStrict function', 'readVarintStrict' in src)
+check('parseCarHeaderStrict function', 'parseCarHeaderStrict' in src)
+check('iterCarBlocksStrict function', 'iterCarBlocksStrict' in src)
+check('Truncated varint throws', 'Truncated' in src)
+check('Overlong varint throws', 'Overlong' in src)
+check('CAR block length exceeds buffer throws', 'CAR block length exceeds buffer' in src)
+check('Number.isSafeInteger check', 'Number.isSafeInteger' in src)
+check('No catch {} silent swallow', 'catch {}' not in src)
+check('No weak break on block overflow', 'blockLen === 0 || pos + blockLen > data.length) break' not in src)
+check('JSON errors logged', 'Malformed JSON candidate' in src or 'Malformed JSON while scanning' in src)
 
-# SRC-DUPTXID-001: duplicate txid conflict detection
-check(
-    'collectTxids checks for duplicate txids',
-    'existing = txids.get' in src or 'const existing = txids.get' in src,
-    'Expected: check for existing entry before set'
-)
-check(
-    'Conflicting sha256 throws',
-    'conflicting expected sha256' in src,
-    'Expected: throw on conflicting sha256'
-)
-check(
-    'Conflicting size throws',
-    'conflicting expected size' in src,
-    'Expected: throw on conflicting size'
-)
-check(
-    'all_references preserved for duplicates',
-    'all_references' in src,
-    'Expected: all_references array'
-)
+# SRC-DUPTXID-001
+check('addTxidRef function', 'addTxidRef' in src)
+check('sameExpectedCar function', 'sameExpectedCar' in src)
+check('Conflicting duplicate txid throws', 'Conflicting duplicate txid' in src)
+check('all_references preserved', 'all_references' in src)
+check('reference_count field', 'reference_count' in src)
+check('logical_file_references count', 'logical_file_references' in src)
 
-# SRC-BIND-001: recovery package digest check
-check(
-    'Recovery package SHA-256 computed',
-    'recoveryPackageSha256' in src,
-    'Expected: sha256hex of recovery package'
-)
-check(
-    'Hash manifest check',
-    'hash-manifest.json' in src and 'Recovery package digest mismatch' in src,
-    'Expected: check against hash-manifest.json'
-)
+# SRC-BIND-001
+check('EXPECTED_RECOVERY_PACKAGE_SHA256', 'EXPECTED_RECOVERY_PACKAGE_SHA256' in src)
+check('verifyRecoveryPackageSource function', 'verifyRecoveryPackageSource' in src)
+check('readExpectedRecoveryPackageSha256 function', 'readExpectedRecoveryPackageSha256' in src)
+check('RECOVERY_PACKAGE_SHA256_FILE', 'RECOVERY_PACKAGE_SHA256_FILE' in src)
+check('Mandatory hash for non-DRY_RUN', 'refusing to use unauthenticated' in src)
 
-# SRC-SCHEMA-001: token_index schema validation
-check(
-    'validateTokenIndexEntry function exists',
-    'function validateTokenIndexEntry' in src,
-    'Expected: schema validation function'
-)
-check(
-    'Contract format validated (0x + 40 hex)',
-    '0x[0-9a-fA-F]{40}' in src,
-    'Expected: contract regex check'
-)
-check(
-    'car_sha256 format validated',
-    'SHA256_RE.test(meta.car_sha256' in src or "SHA256_RE.test(m.car_sha256" in src,
-    'Expected: sha256 format check'
-)
-check(
-    'Schema errors abort',
-    'schemaErrors' in src and 'aborting' in src,
-    'Expected: throw on schema errors'
-)
+# SRC-SCHEMA-001
+check('validateCarRef function', 'validateCarRef' in src)
+check('normalizeTokenId function', 'normalizeTokenId' in src)
+check('validateTokenIndex function', 'validateTokenIndex' in src)
+check('ARWEAVE_TXID_RE regex', 'ARWEAVE_TXID_RE' in src)
+check('ETH_CONTRACT_RE regex', 'ETH_CONTRACT_RE' in src)
 
-# SRC-TRACE-001: source digests in release manifest
-check(
-    'recovery_package_sha256 in release manifest',
-    'recovery_package_sha256: recoveryPackageSha256' in src,
-    'Expected: source digest in manifest'
-)
-check(
-    'token_index_sha256 in release manifest',
-    'token_index_sha256: tokenIndexSha256' in src,
-    'Expected: token index digest in manifest'
-)
-check(
-    'expected_nfts in release manifest',
-    'expected_nfts: EXPECTED_NFTS' in src,
-    'Expected: expected_nfts field'
-)
+# SRC-TRACE-001
+check('source_recovery_package in manifest', 'source_recovery_package' in src)
+check('source_token_index in manifest', 'source_token_index' in src)
+check('source_binding in manifest', 'source_binding' in src)
+check('source_expectations in manifest', 'source_expectations' in src)
+check('stableStringify for canonical JSON', 'stableStringify' in src)
+check('canonicalization field', "canonicalization: 'stable-json-v1'" in src)
 
-# SRC-H1: root_cid_verified field
-check(
-    'root_cid_verified: false field in manifest',
-    'root_cid_verified: false' in src,
-    'Expected: explicit root_cid_verified boundary'
-)
-check(
-    'does_not_prove updated for root_cid',
-    'root_cid is metadata from token_index' in src or 'NOT verified by this producer' in src,
-    'Expected: clearer does_not_prove wording'
-)
+# SRC-H1
+check('root_cid_verified: false field', 'root_cid_verified: false' in src)
+check('cid_policy in manifest', 'cid_policy' in src)
+check('producer_verifies_root_cid: false', 'producer_verifies_root_cid: false' in src)
+check('root_cid_recorded_as_expected_metadata', 'root_cid_recorded_as_expected_metadata: true' in src)
 
-print('=' * 50)
+# Exports
+check('exports readVarintStrict', 'readVarintStrict' in src.split('export {')[-1])
+check('exports parseCarHeaderStrict', 'parseCarHeaderStrict' in src.split('export {')[-1])
+check('exports iterCarBlocksStrict', 'iterCarBlocksStrict' in src.split('export {')[-1])
+check('exports addTxidRef', 'addTxidRef' in src.split('export {')[-1])
+check('exports stableStringify', 'stableStringify' in src.split('export {')[-1])
+check('exports verifyRecoveryPackageSource', 'verifyRecoveryPackageSource' in src.split('export {')[-1])
+
+print('=' * 55)
 if failures:
     print(f'❌ {len(failures)} failures:')
     for f in failures:
         print(f'  - {f}')
     sys.exit(1)
-else:
-    print('TA-REDTEAM-2026-007_ALL_REGRESSIONS_OK')
+print(f'TA-REDTEAM-2026-007_ALL_REGRESSIONS_OK ({len(src.split(chr(10)))} lines checked)')

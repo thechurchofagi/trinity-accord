@@ -208,6 +208,37 @@ jobs:
       - name: Test verify-release-assets consumes NFT CAR manifest
         run: python3 scripts/test_verify_release_assets_consumes_nft_cars_manifest.py
 
+      # TA-REDTEAM-2026-007 source-of-truth hardening
+      - name: Validate token index schema self-test
+        run: python3 scripts/validate_token_index.py --self-test
+
+      - name: Test token_index unique candidate gate
+        run: python3 scripts/test_download_nft_cars_token_index_unique_candidate.py
+
+      - name: Test token_index schema validation
+        run: python3 scripts/test_token_index_schema_validation.py
+
+      - name: Test NFT expected count gate
+        run: python3 scripts/test_download_nft_cars_expected_count_gate.py
+
+      - name: Test duplicate txid handling
+        run: python3 scripts/test_download_nft_cars_duplicate_txid_handling.py
+
+      - name: Test producer recovery CAR parser strictness
+        run: python3 scripts/test_download_nft_cars_recovery_car_parser_strict.py
+
+      - name: Test recovery source binding
+        run: python3 scripts/test_download_nft_cars_source_binding.py
+
+      - name: Test release manifest source traceability
+        run: python3 scripts/test_download_nft_cars_manifest_source_traceability.py
+
+      - name: Test root CID boundary
+        run: python3 scripts/test_download_nft_cars_root_cid_boundary.py
+
+      - name: Test TA-007 comprehensive regressions
+        run: python3 scripts/test_ta_redteam_2026_007_regressions.py
+
       - name: Validate verify release report self-test
         run: python3 scripts/validate_verify_release_report.py --self-test
 
