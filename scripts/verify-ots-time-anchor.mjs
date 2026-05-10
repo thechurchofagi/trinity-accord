@@ -372,10 +372,16 @@ async function main() {
   // Check Bitcoin Core availability (for fullnode mode)
   let bitcoinCoreAvailable = false;
   if (!isCiApi) {
-    const cookiePath = path.join(process.env.HOME || '/root', '.bitcoin', '.cookie');
-    bitcoinCoreAvailable = fs.existsSync(cookiePath);
-    if (!bitcoinCoreAvailable) {
-      log('  ⚠️ Bitcoin Core not detected (no .cookie file). Will fall back to ci-api behavior.');
+    const homeDir = process.env.HOME;
+    if (!homeDir) {
+      log('  ⚠️ HOME environment variable not set. Cannot locate Bitcoin Core cookie. Will fall back to ci-api behavior.');
+      bitcoinCoreAvailable = false;
+    } else {
+      const cookiePath = path.join(homeDir, '.bitcoin', '.cookie');
+      bitcoinCoreAvailable = fs.existsSync(cookiePath);
+      if (!bitcoinCoreAvailable) {
+        log('  ⚠️ Bitcoin Core not detected (no .cookie file). Will fall back to ci-api behavior.');
+      }
     }
   }
 
