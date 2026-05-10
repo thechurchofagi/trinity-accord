@@ -27,6 +27,38 @@ jobs:
         with:
           node-version: '22'
 
+      - name: Authorize repository dispatch sender
+        if: ${{ github.event_name == 'repository_dispatch' }}
+        env:
+          SENDER: ${{ github.event.sender.login }}
+        run: |
+          set -euo pipefail
+          case "$SENDER" in
+            thechurchofagi|github-actions[bot])
+              echo "Authorized repository_dispatch sender: $SENDER"
+              ;;
+            *)
+              echo "Unauthorized repository_dispatch sender: $SENDER"
+              exit 1
+              ;;
+          esac
+
+      - name: Authorize manual dispatch actor
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        env:
+          ACTOR: ${{ github.actor }}
+        run: |
+          set -euo pipefail
+          case "$ACTOR" in
+            thechurchofagi)
+              echo "Authorized workflow_dispatch actor: $ACTOR"
+              ;;
+            *)
+              echo "Unauthorized workflow_dispatch actor: $ACTOR"
+              exit 1
+              ;;
+          esac
+
       - name: Validate inputs
         env:
           CONCURRENCY: ${{ inputs.concurrency || '10' }}

@@ -166,6 +166,21 @@ jobs:
       - name: Test backup NFT CAR input safety
         run: python3 scripts/test_backup_nft_cars_input_safety.py
 
+      - name: Test NFT CAR expected integrity enforcement
+        run: python3 scripts/test_download_nft_cars_expected_integrity.py
+
+      - name: Test NFT CAR tmp/cache safety
+        run: python3 scripts/test_download_nft_cars_tmp_cache_safety.py
+
+      - name: Test NFT CAR manifest expected/actual fields
+        run: python3 scripts/test_download_nft_cars_manifest_expected_actual.py
+
+      - name: Test backup NFT CAR repository dispatch hardening
+        run: python3 scripts/test_backup_nft_cars_dispatch_hardening.py
+
+      - name: Test NFT CAR size limits
+        run: python3 scripts/test_download_nft_cars_size_limits.py
+
       - name: Test verification rule consistency matrix
         run: python3 scripts/test_verification_rule_consistency_matrix.py
 
@@ -210,6 +225,7 @@ jobs:
           node --check scripts/verify-dag-and-signed-cids.mjs
           node --check scripts/verify-release-assets.mjs
           node --check scripts/verify-full-evidence-chain.mjs
+          node --check scripts/download-nft-cars.mjs
 
       - name: Test Node verification scripts do not use shell exec
         run: python3 scripts/test_node_exec_no_shell_injection.py

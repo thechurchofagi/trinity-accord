@@ -15,12 +15,17 @@
  *   RELEASE_TAG    - release tag (default: nft-backup-v1)
  *   DRY_RUN        - set to "1" to only list txids without downloading
  *   CAR_FILE       - path to recovery-package.bin
+ *   NFT_CARS_TMP_DIR - explicit tmp directory (will be cleaned on start)
+ *   MAX_CAR_BYTES  - per-file size cap (default 500MB)
+ *   MAX_TOTAL_BYTES - total verified size cap (default 10GB)
  */
 
 import fs from 'fs';
 import path from 'path';
+import os from 'os';
 import crypto from 'crypto';
 import { execFileSync } from 'child_process';
+import { fileURLToPath } from 'url';
 
 // --------------- Config ---------------
 function parsePositiveIntEnv(name, fallback, min, max) {
@@ -41,8 +46,21 @@ const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 const REPO = 'thechurchofagi/trinity-accord';
 
 const GATEWAYS = ['https://arweave.net', 'https://ar-io.net'];
-const TMP_DIR = '/tmp/nft-cars';
 const PART_SIZE = 50; // files per archive part
+
+// --------------- Resource limits ---------------
+const MAX_CAR_BYTES = parsePositiveIntEnv('MAX_CAR_BYTES', 500 * 1024 * 1024, 1, 5 * 1024 * 1024 * 1024);
+const MAX_TOTAL_BYTES = parsePositiveIntEnv('MAX_TOTAL_BYTES', 10 * 1024 * 1024 * 1024, 1, 100 * 1024 * 1024 * 1024);
+
+// --------------- TMP_DIR: unique or cleaned ---------------
+const TMP_DIR = process.env.NFT_CARS_TMP_DIR
+  ? (() => {
+      // Explicit dir: clean and recreate
+      fs.rmSync(process.env.NFT_CARS_TMP_DIR, { recursive: true, force: true });
+      fs.mkdirSync(process.env.NFT_CARS_TMP_DIR, { recursive: true });
+      return process.env.NFT_CARS_TMP_DIR;
+    })()
+  : fs.mkdtempSync(path.join(os.tmpdir(), 'nft-cars-'));
 
 // --------------- Helpers ---------------
 function getArg(name) {
@@ -52,6 +70,92 @@ function getArg(name) {
 
 function sha256hex(buf) {
   return crypto.createHash('sha256').update(buf).digest('hex');
+}
+
+const SHA256_RE = /^[a-f0-9]{64}$/i;
+
+function normalizeExpectedSize(value) {
+  if (typeof value === 'number' && Number.isSafeInteger(value) && value >= 0) return value;
+  if (typeof value === 'string' && /^[0-9]+$/.test(value)) {
+    const n = Number(value);
+    if (Number.isSafeInteger(n) && n >= 0) return n;
+  }
+  return null;
+}
+
+function validateExpectedInfo(txid, info) {
+  if (!txid || typeof txid !== 'string') {
+    throw new Error(`Invalid txid: ${txid}`);
+  }
+  if (!info || typeof info !== 'object') {
+    throw new Error(`Missing info for txid=${txid}`);
+  }
+  if (!SHA256_RE.test(info.sha256 || '')) {
+    throw new Error(`Missing or invalid expected sha256 for txid=${txid}`);
+  }
+
+  const expectedSize = normalizeExpectedSize(info.size);
+  if (expectedSize === null) {
+    throw new Error(`Missing or invalid expected size for txid=${txid}`);
+  }
+
+  return {
+    expected_sha256: String(info.sha256).toLowerCase(),
+    expected_size: expectedSize,
+    expected_cid: info.cid || null,
+  };
+}
+
+function verifyDownloadedCarBuffer(txid, info, buf, source = 'download') {
+  const expected = validateExpectedInfo(txid, info);
+  const actualSha256 = sha256hex(buf);
+  const actualSize = buf.length;
+
+  // Per-file size cap
+  if (actualSize > MAX_CAR_BYTES) {
+    throw new Error(
+      `CAR too large for txid=${txid}: ${actualSize} > ${MAX_CAR_BYTES}`
+    );
+  }
+
+  // Expected size cap
+  if (expected.expected_size > MAX_CAR_BYTES) {
+    throw new Error(
+      `Expected size exceeds per-file cap for txid=${txid}: ${expected.expected_size}`
+    );
+  }
+
+  if (actualSha256 !== expected.expected_sha256) {
+    throw new Error(
+      `SHA256 mismatch for txid=${txid} source=${source}: expected=${expected.expected_sha256} actual=${actualSha256}`
+    );
+  }
+
+  if (actualSize !== expected.expected_size) {
+    throw new Error(
+      `Size mismatch for txid=${txid} source=${source}: expected=${expected.expected_size} actual=${actualSize}`
+    );
+  }
+
+  return {
+    txid,
+    role: info.role,
+    contract: info.contract,
+    token_id: info.token_id,
+    cid: expected.expected_cid,
+    leaf: info.leaf || null,
+
+    expected_sha256: expected.expected_sha256,
+    actual_sha256: actualSha256,
+    sha256_match: true,
+
+    expected_size: expected.expected_size,
+    actual_size: actualSize,
+    size_match: true,
+
+    verified: true,
+    cached: source === 'cache',
+  };
 }
 
 function parseCarHeader(data) {
@@ -85,10 +189,9 @@ function extractTokenIndex(carPath) {
   let bestKeyCount = 0;
 
   for (const block of iterCarBlocks(raw)) {
-    // Search for all JSON objects in this block
     let searchPos = 0;
     while (searchPos < block.data.length) {
-      const jsonStart = block.data.indexOf(0x7b, searchPos); // '{'
+      const jsonStart = block.data.indexOf(0x7b, searchPos);
       if (jsonStart < 0) break;
 
       let depth = 0, endPos = -1;
@@ -103,7 +206,6 @@ function extractTokenIndex(carPath) {
           const obj = JSON.parse(block.data.slice(jsonStart, endPos + 1).toString());
           if (typeof obj === 'object' && !Array.isArray(obj)) {
             const keys = Object.keys(obj);
-            // Verify this is a token_index: contract -> token_id -> {metadata, media}
             const isTokenIndex = keys.some(k => {
               const v = obj[k];
               if (typeof v !== 'object' || v === null || Array.isArray(v)) return false;
@@ -130,7 +232,7 @@ function extractTokenIndex(carPath) {
 
 /** Collect all unique txids from token_index */
 function collectTxids(index) {
-  const txids = new Map(); // txid → { role, contract, token_id, ... }
+  const txids = new Map();
   for (const [contract, tokens] of Object.entries(index)) {
     for (const [token_id, entry] of Object.entries(tokens)) {
       const meta = entry.metadata;
@@ -246,6 +348,9 @@ async function main() {
   console.log(`   Source: ${CAR_FILE}`);
   console.log(`   Release: ${RELEASE_TAG}`);
   console.log(`   Concurrency: ${CONCURRENCY}`);
+  console.log(`   TMP_DIR: ${TMP_DIR}`);
+  console.log(`   MAX_CAR_BYTES: ${(MAX_CAR_BYTES / 1024 / 1024).toFixed(0)}MB`);
+  console.log(`   MAX_TOTAL_BYTES: ${(MAX_TOTAL_BYTES / 1024 / 1024 / 1024).toFixed(1)}GB`);
   console.log();
 
   // 1. Extract token index
@@ -272,31 +377,65 @@ async function main() {
   // 3. Download all CARs
   fs.mkdirSync(TMP_DIR, { recursive: true });
   const manifest = [];
+  const verifiedCarFiles = [];
   const txidList = [...txids.entries()];
   let done = 0, pass = 0, fail = 0;
+  let totalVerifiedBytes = 0;
 
   const tasks = txidList.map(([txid, info]) => async () => {
     const dest = path.join(TMP_DIR, `${txid}.car`);
 
-    // Skip if already downloaded and verified
+    // Cache path: must verify expected hash/size before trusting
     if (fs.existsSync(dest) && fs.statSync(dest).size > 0) {
-      const hash = sha256hex(fs.readFileSync(dest));
-      manifest.push({ ...info, txid, sha256: hash, size: fs.statSync(dest).size, cached: true });
-      done++; pass++;
-      if (done % 50 === 0) process.stdout.write(`\r   ${done}/${txids.size}`);
-      return;
+      try {
+        const cachedBuf = fs.readFileSync(dest);
+        const verified = verifyDownloadedCarBuffer(txid, info, cachedBuf, 'cache');
+
+        // Total size cap check
+        totalVerifiedBytes += verified.actual_size;
+        if (totalVerifiedBytes > MAX_TOTAL_BYTES) {
+          throw new Error(`Total CAR verified size exceeds cap: ${totalVerifiedBytes} > ${MAX_TOTAL_BYTES}`);
+        }
+
+        manifest.push(verified);
+        verifiedCarFiles.push({ txid, path: dest });
+        done++; pass++;
+        if (done % 50 === 0) process.stdout.write(`\r   ${done}/${txids.size}`);
+        return;
+      } catch (err) {
+        // Stale or corrupted cache: delete and re-download
+        fs.rmSync(dest, { force: true });
+      }
     }
 
     try {
       const buf = await downloadTxid(txid);
-      const hash = sha256hex(buf);
+      const verified = verifyDownloadedCarBuffer(txid, info, buf, 'download');
+
+      // Total size cap check
+      totalVerifiedBytes += verified.actual_size;
+      if (totalVerifiedBytes > MAX_TOTAL_BYTES) {
+        throw new Error(`Total CAR verified size exceeds cap: ${totalVerifiedBytes} > ${MAX_TOTAL_BYTES}`);
+      }
+
       fs.writeFileSync(dest, buf);
-      manifest.push({ ...info, txid, sha256: hash, size: buf.length });
+      manifest.push(verified);
+      verifiedCarFiles.push({ txid, path: dest });
+
       done++; pass++;
       if (done % 10 === 0) process.stdout.write(`\r   ${done}/${txids.size} downloaded`);
     } catch (err) {
       done++; fail++;
-      manifest.push({ ...info, txid, error: err.message });
+      manifest.push({
+        txid,
+        role: info.role,
+        contract: info.contract,
+        token_id: info.token_id,
+        expected_sha256: info.sha256 || null,
+        expected_size: info.size ?? null,
+        error: err.message,
+        verified: false,
+      });
     }
   });
 
@@ -307,32 +446,50 @@ async function main() {
     throw new Error(`${fail} CAR downloads failed; refusing to package or upload incomplete backup`);
   }
 
-  // 4. Write manifest
+  // 4. Aggregate manifest checks
+  const sha256Pass = manifest.filter(x => x.sha256_match === true).length;
+  const sizePass = manifest.filter(x => x.size_match === true).length;
+  const allVerified = fail === 0 && pass === txids.size && sha256Pass === txids.size && sizePass === txids.size;
+
+  if (!allVerified) {
+    throw new Error(`Not all files verified: sha256_pass=${sha256Pass}/${txids.size} size_pass=${sizePass}/${txids.size}`);
+  }
+
+  // 5. Write manifest
   const manifestPath = path.join(TMP_DIR, 'manifest.json');
   fs.writeFileSync(manifestPath, JSON.stringify({
     timestamp: new Date().toISOString(),
     total_txids: txids.size,
     downloaded: pass,
     failed: fail,
+    verified: pass,
+    sha256_check: { pass: sha256Pass, total: txids.size },
+    size_check: { pass: sizePass, total: txids.size },
+    all_expected_sha256_matched: sha256Pass === txids.size,
+    all_expected_size_matched: sizePass === txids.size,
+    all_verified: allVerified,
     contracts: contracts.length,
     nfts: totalTokens,
     files: manifest,
   }, null, 2));
 
-  // 5. Package into tar.gz parts
+  // 6. Package into tar.gz parts — ONLY verified files
   console.log('\n📦 Packaging into archives...');
-  const carFiles = fs.readdirSync(TMP_DIR).filter(f => f.endsWith('.car')).sort();
+
+  if (verifiedCarFiles.length !== txids.size) {
+    throw new Error(`Verified CAR count mismatch: expected=${txids.size} actual=${verifiedCarFiles.length}`);
+  }
+
   const parts = [];
-  for (let i = 0; i < carFiles.length; i += PART_SIZE) {
-    const batch = carFiles.slice(i, i + PART_SIZE);
+  for (let i = 0; i < verifiedCarFiles.length; i += PART_SIZE) {
+    const batch = verifiedCarFiles.slice(i, i + PART_SIZE);
     const partNum = Math.floor(i / PART_SIZE) + 1;
     const partName = `nft-cars-part${String(partNum).padStart(2, '0')}.tar.gz`;
     const partPath = path.join(TMP_DIR, partName);
 
     console.log(`   Part ${partNum}: ${batch.length} files → ${partName}`);
-    // Use --files-from with ./  prefix to avoid '-' filenames being parsed as options
     const listFile = path.join(TMP_DIR, `.part${partNum}.txt`);
-    fs.writeFileSync(listFile, batch.map(f => `./${f}`).join('\n'));
+    fs.writeFileSync(listFile, batch.map(x => `./${path.basename(x.path)}`).join('\n'));
     execFileSync('tar', ['czf', partPath, '-C', TMP_DIR, '-T', listFile], { stdio: 'pipe' });
     fs.unlinkSync(listFile);
     parts.push({ name: partName, path: partPath, count: batch.length });
@@ -345,7 +502,7 @@ async function main() {
 
   console.log(`\n   ${parts.length} archives created`);
 
-  // 6. Upload to GitHub Release
+  // 7. Upload to GitHub Release
   console.log('\n📤 Uploading to GitHub Release...');
   const release = await ensureRelease();
 
@@ -370,7 +527,18 @@ async function main() {
   console.log('=========================================');
 }
 
-main().catch(err => {
-  console.error('Fatal:', err);
-  process.exit(1);
-});
+const isMain = process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.argv[1]);
+
+if (isMain) {
+  main().catch(err => {
+    console.error('Fatal:', err);
+    process.exit(1);
+  });
+}
+
+export {
+  normalizeExpectedSize,
+  validateExpectedInfo,
+  verifyDownloadedCarBuffer,
+  sha256hex,
+};
