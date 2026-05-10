@@ -510,6 +510,15 @@ def build_report(evidence_input_path, report_out_path=None, echo_out_path=None):
             "verification_integrity": verification_integrity,
         }
 
+        # V4+ echo wrapper must include script_audit (Rule F)
+        if allowed_protocol in ("V4", "V4+", "V5", "V6", "V7", "V8"):
+            echo_wrapper["script_audit"] = report.get("script_audit", {
+                "scope_class": "unknown",
+                "scripts_reviewed": [],
+                "scripts_executed": [],
+                "all_scripts_green": False,
+                "all_validators_green": False,
+            })
 
     # Handle test fixtures
     is_test_fixture = evidence_input.get("test_fixture") is True or evidence_input.get("example_type") == "test_fixture_passing"

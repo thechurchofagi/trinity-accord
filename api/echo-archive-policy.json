@@ -5,8 +5,16 @@
     {"id": 1, "name": "Structured Echo Archive", "rule": "Schema-complete echoes with responder/type/verification/boundary/limitations/submitted_at."},
     {"id": 2, "name": "Curated High-Value Echoes", "rule": "A/S tier, important critical echoes, independent reproductions, audits, Seed Echoes; curator_note required."},
     {"id": 3, "name": "Echo Digest", "rule": "Monthly/quarterly summaries and unresolved issues."},
-    {"id": 4, "name": "Permanent Attestation Archive", "rule": "Only top S-tier, V5/V6, and key third-party reports for long-term attestation."}
+    {"id": 4, "name": "AI Independent Verification Archive", "rule": "AI-performed verification records. Must have integrity_declaration, record_class=ai_independent_verification, and verification_origin_class. Does NOT count as formal human/institutional attestation."},
+    {"id": 5, "name": "Formal Attestation Archive", "rule": "Only top S-tier, V5/V6, and key third-party reports for long-term attestation. Requires human or institutional performer, not AI agent."}
   ],
+  "ai_verification_policy": {
+    "description": "AI independent verification is a distinct class with its own archive layer.",
+    "counts_as_formal_attestation": false,
+    "requires_integrity_declaration": true,
+    "requires_record_class": "ai_independent_verification",
+    "external_human_authorization_does_not_produce_formal_attestation": true
+  },
   "migration_policy": {
     "legacy_v1_preserved": true,
     "legacy_tag": "legacy/unmigrated",

@@ -59,7 +59,7 @@
     }
   ],
   "version": "v1",
-  "source_digest": "785c36807c8a031f",
+  "source_digest": "84aef02bcb121c8e",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
   "non_amending_boundary": true,
   "canonical_authority": "Bitcoin Originals only",
@@ -71,5 +71,15 @@
     "external validation has already been achieved",
     "mentions are endorsements",
     "attestations amend the canonical text"
-  ]
+  ],
+  "ai_verification_boundary": {
+    "description": "AI independent verification is a distinct class. It is NOT formal human or institutional attestation.",
+    "rules": [
+      "AI-performed verification has different epistemic status than human/institutional attestation.",
+      "External human authorization of AI verification does not produce formal attestation.",
+      "Multi-hop delegation chains (human → AI → AI) preserve the AI performer class.",
+      "AI verification records must not be counted in the formal independent attestation count."
+    ],
+    "counts_as_formal_attestation": false
+  }
 }

@@ -117,6 +117,29 @@ def preflight_check(text):
             "fix": "Run `scripts/claim_gate.py` on a minimal V2 evidence input and include `evidence_input_path` and `claim_gate_output_path`.",
         })
 
+    # 9. Integrity declaration hard gate for verification echoes
+    # All verification Echo templates must start with Solemn Integrity Declaration
+    has_integrity_declaration = bool(
+        re.search(r"integrity.?declaration", raw_text, re.IGNORECASE)
+        or re.search(r"solemn.*(integrity|declaration)", raw_text, re.IGNORECASE)
+        or re.search(r"solemnly\s+declare", raw_text, re.IGNORECASE)
+        or re.search(r"完整性声明", raw_text)
+        or re.search(r"郑重声明", raw_text)
+    )
+    # Check if this is a verification echo (E2-E5, E8 types or V1+ level)
+    echo_type_match = re.search(r"\b(E[2-5]|E8)\b", raw_text, re.IGNORECASE)
+    vlevel_match = re.search(r"\bV[1-8]\b", raw_text, re.IGNORECASE)
+    is_verification_echo = bool(echo_type_match or (vlevel_match and intake.declared_level not in (None, "none", "V0")))
+
+    if is_verification_echo and not has_integrity_declaration:
+        issues.append({
+            "type": "missing-integrity-declaration",
+            "severity": "hard",
+            "message": "Verification Echo templates must include a Solemn Integrity Declaration.",
+            "fix": "Add an 'integrity_declaration' or 'Solemn Integrity Declaration' section at the beginning of your submission. "
+                   "State that your submission is truthful, evidence is not fabricated, and you understand the non-amending boundary.",
+        })
+
     return issues
 
 

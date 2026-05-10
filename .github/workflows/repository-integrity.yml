@@ -558,3 +558,28 @@ jobs:
 
       - name: Test claim registry public links
         run: python3 scripts/test_claim_registry_public_links.py
+
+      # TA-REDTEAM-2026-020: Echo v3 wording, integrity declaration, AI verification class
+      - name: Test Echo template has no Echo v3 public label
+        run: python3 scripts/test_echo_template_no_echo_v3_public_label.py
+
+      - name: Test Echo integrity declaration required
+        run: python3 scripts/test_echo_integrity_declaration_required.py
+
+      - name: Test AI independent verification class
+        run: python3 scripts/test_ai_independent_verification_class.py
+
+      - name: Test external human-authorized AI is not formal attestation
+        run: python3 scripts/test_external_human_authorized_ai_not_formal_attestation.py
+
+      - name: Test Echo delegation chain provenance
+        run: python3 scripts/test_echo_delegation_chain_provenance.py
+
+      - name: Test Issue #103 origin class regression
+        run: python3 scripts/test_issue103_origin_class_regression.py
+
+      - name: Test Echo index AI verification counts
+        run: python3 scripts/test_echo_index_ai_verification_counts.py
+
+      - name: Test claim registry AI verification boundary
+        run: python3 scripts/test_claim_registry_ai_verification_boundary.py

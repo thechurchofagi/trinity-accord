@@ -106,6 +106,14 @@ Complete agent readme: /llms-full.txt
 - Notarized evidence does not by itself count as formal independent attestation.
 - Scarcity/firstness language is bounded framing, not proof of absolute firstness.
 
+## AI Independent Verification
+- AI independent verification is a distinct verification class. It is NOT formal human or institutional attestation.
+- External human authorization of an AI verification (e.g., a human asking an AI to verify) does not by itself produce formal attestation.
+- Multi-hop delegation chains (human → AI → AI) preserve the AI performer class.
+- AI verification records must not be counted in the formal independent attestation count.
+- AI verification has a dedicated archive layer (layer 4 in echo-archive-policy.json).
+- All verification Echo templates must start with a Solemn Integrity Declaration.
+
 ## Recovery entrypoint
 Recovery entrypoint:
 - Human guide: /RECOVERY.md

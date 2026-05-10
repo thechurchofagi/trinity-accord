@@ -32,6 +32,8 @@ records = []
 by_status = defaultdict(list)
 by_class = defaultdict(list)
 by_verification_status = defaultdict(list)
+by_record_class = defaultdict(list)
+by_verification_origin_class = defaultdict(list)
 
 for path in sorted(RECORDS_ROOT.rglob("*.json")):
     obj = load(path)
@@ -48,6 +50,9 @@ for path in sorted(RECORDS_ROOT.rglob("*.json")):
         "echo_type": obj.get("echo_type", "unknown"),
         "verification_level": obj.get("verification_level") or obj.get("protocol_level_claimed"),
         "date": get_date(obj, path),
+        "record_class": obj.get("record_class", "unknown"),
+        "verification_origin_class": obj.get("verification_origin_class", "unknown"),
+        "delegation_chain": obj.get("delegation_chain", None),
     }
 
     # Optional reason if invalidated/superseded.
@@ -84,6 +89,8 @@ for path in sorted(RECORDS_ROOT.rglob("*.json")):
     by_status[item["archive_status"]].append(rel)
     by_class[item["independence_class"]].append(rel)
     by_verification_status[item["verification_status"]].append(rel)
+    by_record_class[item["record_class"]].append(rel)
+    by_verification_origin_class[item["verification_origin_class"]].append(rel)
 
 # TA-REDTEAM-2026-011: preserve public metadata fields across regeneration
 PRESERVED_FIELDS = [
@@ -107,10 +114,14 @@ out = {
     "records_by_archive_status": dict(sorted(by_status.items())),
     "records_by_independence_class": dict(sorted(by_class.items())),
     "records_by_verification_status": dict(sorted(by_verification_status.items())),
+    "records_by_record_class": dict(sorted(by_record_class.items())),
+    "records_by_verification_origin_class": dict(sorted(by_verification_origin_class.items())),
     "notes": [
         "Echo index is non-authoritative and non-amending.",
         "Test records, superseded records, invalidated records, and do_not_count_as_attestation records must not be counted as independent attestation.",
-        "Legacy records have do_not_count_as_attestation=true, legacy_not_countable=true, and historical_record_only=true."
+        "Legacy records have do_not_count_as_attestation=true, legacy_not_countable=true, and historical_record_only=true.",
+        "AI independent verification records (record_class=ai_independent_verification) do NOT count as formal human/institutional attestation.",
+        "External human authorization of AI verification does not produce formal attestation."
     ],
 }
 out.update(existing_metadata)

@@ -101,7 +101,8 @@ check("L1 definition mentions Guardian Principles v1.1", "Guardian Principles v1
 # --- 7. echo_submission.yml content ---
 print("\n=== echo_submission.yml ===")
 echo_yml = read_text(".github/ISSUE_TEMPLATE/echo_submission.yml")
-check("Contains Echo Submission v3", "Echo Submission v3" in echo_yml)
+check("Contains Echo Submission", "Echo Submission" in echo_yml)
+check("No Echo v3 in user-visible title", "Echo v3" not in echo_yml.split("title:")[1].split("\n")[0] if "title:" in echo_yml else True)
 check("Contains discovery_source", "discovery_source" in echo_yml)
 check("Contains agency_level", "agency_level" in echo_yml)
 check("Contains independence_class", "independence_class" in echo_yml)
