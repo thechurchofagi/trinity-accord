@@ -100,6 +100,12 @@ Free interpretation is allowed, but no later commentary generates interpretive a
 ## Full details
 Complete agent readme: /llms-full.txt
 
+## Claim traceability
+- Machine-readable claim registry: /api/claim-registry.json
+- Public claims must be read with their source files, evidence files, validators, limitations, does_not_prove, and corrections path.
+- Notarized evidence does not by itself count as formal independent attestation.
+- Scarcity/firstness language is bounded framing, not proof of absolute firstness.
+
 ## Recovery entrypoint
 Recovery entrypoint:
 - Human guide: /RECOVERY.md

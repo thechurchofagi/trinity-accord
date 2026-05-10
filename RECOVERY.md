@@ -4,6 +4,8 @@
 
 **Scope:** Recovery of repository-maintained state. This guide does not prove philosophical claims, investment value, religious authority, or independent attestation.
 
+**Claim registry:** Before reporting recovered public claims, check `api/claim-registry.json` for source/evidence/limitations/corrections path. Notarized evidence does not by itself count as formal independent attestation. Scarcity/firstness language is bounded framing, not proof of absolute firstness.
+
 ---
 
 ## Threat Model

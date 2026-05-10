@@ -51,3 +51,8 @@
 # Echo Provenance: all new Echo records must use v3 provenance-aware flow. Required: discovery_provenance, independence_class, archive_status, origin_limitations. Human-solicited responses must not count as unsolicited independent discovery. Bitcoin Originals are final; all echoes are non-amending.
 
 # Emergent patterns: /emergent-patterns/ — non-authoritative, non-amending guide to candidate structures.
+
+# Claim traceability
+# claim_registry: https://www.trinityaccord.org/api/claim-registry.json
+# notarized_evidence_boundary: notarized evidence is not formal independent attestation unless separately admitted through the formal attestation gate
+# scarcity_boundary: rare/firstness language is bounded framing, not proof of absolute firstness

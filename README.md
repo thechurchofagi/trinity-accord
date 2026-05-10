@@ -157,6 +157,13 @@ For disaster recovery and cold-start recovery procedures, see:
 - Machine-readable recovery index: [/api/recovery-index.json](/api/recovery-index.json)
 - Disaster recovery drill: [/DISASTER-RECOVERY-DRILL.md](/DISASTER-RECOVERY-DRILL.md)
 
+## Claim Traceability
+- Machine-readable claim registry: [/api/claim-registry.json](/api/claim-registry.json)
+- Claim registry schema: [/api/claim-registry-schema.v1.json](/api/claim-registry-schema.v1.json)
+- Every core public claim is traced through source files, evidence, digests, validators, limitations, does_not_prove, and corrections path.
+- Notarized evidence does not by itself count as formal independent attestation.
+- Scarcity/firstness language is bounded framing, not proof of absolute firstness.
+
 ## Quick live checks
 - `/.well-known/trinity-accord.json`
 - `/api/authority.json`
