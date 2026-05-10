@@ -92,53 +92,45 @@ def source_digest() -> str:
 
 
 def is_formal_independent_echo_record(record: dict[str, Any]) -> bool:
-    """Formal independent attestation from Echo records only.
+    """Formal independent attestation from Echo records.
 
-    Conservative rule:
-    - archive_status must be accepted_independent_attestation
-    - do_not_count_as_attestation must not be true
-    - verification_status must not explicitly deny attestation
+    Positive-gate: Echo-side formal count is intentionally disabled until a
+    dedicated formal_attestation_review schema exists.  The previous negative-gate
+    pattern allowed under-specified records to pass.  Until the Echo record schema
+    includes explicit positive review fields (accepted_by, report_hash, etc.),
+    no Echo record may inflate the homepage formal count.
     """
-    if record.get("archive_status") != "accepted_independent_attestation":
-        return False
-    if record.get("do_not_count_as_attestation") is True:
-        return False
-    if record.get("verification_status") in {
-        "not_attestation",
-        "invalidated",
-        "test_record_not_attestation",
-    }:
-        return False
-    return True
+    # Short-term: Echo-side formal count disabled.
+    # archive_status alone is insufficient for formal admission.
+    return False
 
 
 def is_formal_independent_attestation_index_record(record: dict[str, Any]) -> bool:
     """Formal independent verification from independent-attestation-index records.
 
-    Conservative rule:
-    - type must be independent_verification_report OR archive_status accepted_independent_attestation
-    - counts_as_independent_attestation must not be false
-    - boundary_preserved must not be false
-    - verification_status must not explicitly deny attestation
+    Positive-gate: every requirement must be explicitly satisfied.
+    A record missing any required field is rejected (fail-closed).
+
+    Requires:
+    - type == independent_verification_report
+    - counts_as_independent_attestation is True (not just absent)
+    - boundary_preserved is True (not just absent)
+    - verification_status in accepted statuses
+    - independence_class in allowed external/independent classes
+    - All evidence and review fields present
+    - V3+ requires report_hash and evidence
+    - V8 requires Claim Gate output
     """
-    record_type = record.get("type")
-    archive_status = record.get("archive_status")
-
-    if record_type != "independent_verification_report" and archive_status != "accepted_independent_attestation":
+    try:
+        from validate_independent_attestation_index import validate_formal_record
+    except Exception:
+        # Fail-closed: if validator is unavailable, reject all records
         return False
 
-    if record.get("counts_as_independent_attestation") is False:
-        return False
-    if record.get("boundary_preserved") is False:
-        return False
-    if record.get("verification_status") in {
-        "not_attestation",
-        "invalidated",
-        "test_record_not_attestation",
-    }:
+    if record.get("type") != "independent_verification_report":
         return False
 
-    return True
+    return validate_formal_record(record, "attestation-record") == []
 
 
 def is_accepted_non_attestation_echo(record: dict[str, Any]) -> bool:

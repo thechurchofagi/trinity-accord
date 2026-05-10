@@ -91,6 +91,21 @@ jobs:
           python3 scripts/generate_echo_index.py
           git diff --exit-code api/echo-index.json
 
+      - name: Validate independent attestation index
+        run: python3 scripts/validate_independent_attestation_index.py
+
+      - name: Test formal attestation admission gates
+        run: python3 scripts/test_formal_attestation_admission_gates.py
+
+      - name: Test formal attestation homepage count
+        run: python3 scripts/test_formal_attestation_homepage_count.py
+
+      - name: Test formal attestation V8 requires Claim Gate
+        run: python3 scripts/test_formal_attestation_v8_requires_claim_gate.py
+
+      - name: Test formal attestation Echo record gates
+        run: python3 scripts/test_formal_attestation_echo_record_gates.py
+
       - name: Verify homepage public status has no drift
         run: python3 scripts/generate_public_home_status.py --check
 

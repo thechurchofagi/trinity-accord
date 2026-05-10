@@ -1,0 +1,136 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://trinityaccord.org/api/independent-attestation-record-schema.v1.json",
+  "title": "Trinity Accord Independent Attestation Record v1",
+  "description": "Schema for formal independent verification records in the attestation index. Only records passing this schema may be counted toward homepage formal verification.",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "id",
+    "type",
+    "source",
+    "date",
+    "summary",
+    "verification_level_if_any",
+    "limitations",
+    "url_or_archive",
+    "boundary_preserved",
+    "counts_as_independent_attestation",
+    "verification_status",
+    "verifier_identity_or_role",
+    "independence_class",
+    "accepted_by"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "type": {
+      "const": "independent_verification_report"
+    },
+    "source": {
+      "type": "string",
+      "minLength": 1
+    },
+    "date": {
+      "type": "string",
+      "minLength": 1
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "verification_level_if_any": {
+      "enum": ["V1", "V2", "V3", "V4", "V4+", "V5", "V6", "V7", "V8"]
+    },
+    "limitations": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "url_or_archive": {
+      "type": "string",
+      "minLength": 1
+    },
+    "hash_if_available": {
+      "type": "string",
+      "pattern": "^[a-fA-F0-9]{64}$"
+    },
+    "report_hash": {
+      "type": "string",
+      "pattern": "^[a-fA-F0-9]{64}$"
+    },
+    "boundary_preserved": {
+      "const": true
+    },
+    "counts_as_independent_attestation": {
+      "const": true
+    },
+    "verification_status": {
+      "enum": ["accepted", "formally_accepted", "accepted_independent_attestation"]
+    },
+    "verifier_identity_or_role": {
+      "type": "string",
+      "minLength": 1
+    },
+    "independence_class": {
+      "enum": [
+        "unsolicited_independent",
+        "solicited_independent_check",
+        "institutional_third_party_attestation"
+      ]
+    },
+    "accepted_by": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "evidence_summary": {
+      "type": "string"
+    },
+    "linked_verification_report": {
+      "type": "string"
+    },
+    "claim_gate_result": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "allowed_protocol_level": {
+          "type": "string"
+        },
+        "can_build_verification_report": {
+          "type": "boolean"
+        },
+        "source_report_hash": {
+          "type": "string",
+          "pattern": "^[a-fA-F0-9]{64}$"
+        },
+        "claim_gate_report_hash": {
+          "type": "string",
+          "pattern": "^[a-fA-F0-9]{64}$"
+        },
+        "core_baseline_satisfied": {
+          "type": "boolean"
+        },
+        "high_path_satisfied": {
+          "type": "boolean"
+        }
+      }
+    }
+  },
+  "anyOf": [
+    {
+      "required": ["report_hash"]
+    },
+    {
+      "required": ["hash_if_available"]
+    }
+  ]
+}
