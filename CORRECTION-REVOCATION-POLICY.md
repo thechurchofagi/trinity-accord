@@ -86,3 +86,34 @@ The Bitcoin Originals are canonical. All repository files, including this policy
 | `superseded` | `false` | `true` |
 | `revoked` | `false` | `true` |
 | `invalidated` | `false` | `true` |
+
+---
+
+## Release and Tag Immutability
+
+Release tags must not be force-moved or deleted after publication. Release assets must not be silently replaced. If an asset must be replaced due to a verified integrity issue:
+
+1. The old asset digest, replacement digest, reason, timestamp, and public notice must be recorded in `/api/corrections-index.json`.
+2. The release must be marked as superseded or revoked in the corrections index.
+3. The release verifier (`scripts/verify-release-assets.mjs`) must be re-run against the replacement.
+4. A public notice must be published via the corrections index endpoint.
+
+Protected tag rulesets enforce this policy at the GitHub control-plane level. See `CONTROL-PLANE-BASELINE.md` for current ruleset configuration.
+
+### Tag Protection
+
+Tags matching the following patterns are protected by GitHub ruleset:
+- `v*`, `nft-*`, `release-*`, `evidence-*`, `archive-*`
+- `core-object-*`, `signed-*`, `ots-*`, `flaw-*`
+- `trinity-accord-*`, `redteam-*`
+
+Protected operations: deletion, non-fast-forward updates.
+
+### Release Asset Digest Chain
+
+Every release asset set has a corresponding digest manifest. The verification chain is:
+1. BTC signature covers authority manifest
+2. Authority manifest declares digest-manifest pointers
+3. Digest manifest covers file hash table
+4. Release verifier checks assets against manifest
+5. Corrections index can revoke/supersede any release report

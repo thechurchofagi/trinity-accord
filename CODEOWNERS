@@ -13,6 +13,8 @@ index.md @thechurchofagi
 
 # Formal attestation / public API trust surfaces
 api/ @thechurchofagi
+api/independent-attestation-index.json @thechurchofagi
+api/independent-attestation-record-schema.v1.json @thechurchofagi
 
 # Core verification / generation scripts
 scripts/claim_gate.py @thechurchofagi

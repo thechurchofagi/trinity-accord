@@ -6,7 +6,25 @@ This document covers the security policy for the Trinity Accord repository, incl
 
 ## Reporting Contact
 
-Security vulnerabilities and data integrity issues should be reported via GitHub Security Advisories or by opening a private issue with the `security` label. Do not disclose vulnerabilities publicly before they are triaged.
+Security vulnerabilities and data integrity issues should be reported via:
+1. **GitHub Private Vulnerability Reporting** (preferred): Repository → Security → Report a vulnerability
+2. **GitHub Security Advisories**: Repository → Security → Advisories → New draft security advisory
+3. **Private issue** with the `security` label
+
+Do not disclose vulnerabilities publicly before they are triaged.
+
+## Control-Plane Incident Response
+
+If repository control-plane settings are compromised or drift from the documented baseline:
+
+1. **Branch protection removed**: Immediately re-enable via Settings → Branches. Check `CONTROL-PLANE-BASELINE.md` for required settings.
+2. **CODEOWNERS enforcement disabled**: Re-enable "Require review from Code Owners" in branch protection.
+3. **Actions permissions widened**: Revert to restricted settings. Audit recent workflow runs for unauthorized changes.
+4. **Tag/release tampered**: Check corrections-index for revocation records. Run release verifier against known-good manifests.
+5. **Secrets leaked**: Revoke immediately. Rotate all potentially affected credentials. Add revocation record to corrections-index.
+6. **Unauthorized push to main**: Force-revert if branch protection was bypassed. Audit all commits since last verified state.
+
+Run `python3 scripts/audit_control_plane.py --check` to detect settings drift.
 
 ## Severity Levels
 

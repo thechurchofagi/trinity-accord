@@ -500,3 +500,10 @@ jobs:
 
       - name: Test stale-copy correction endpoint
         run: python3 scripts/test_stale_copy_correction_endpoint.py
+
+      # TA-REDTEAM-2026-013: control-plane baseline and drift monitoring
+      - name: Test control-plane baseline document
+        run: python3 scripts/test_control_plane_baseline_doc.py
+
+      - name: Test workflow environment references
+        run: python3 scripts/test_workflow_environment_references.py
