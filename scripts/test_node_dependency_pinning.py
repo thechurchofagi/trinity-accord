@@ -14,8 +14,8 @@ if not NODE_VERSION.exists():
     errors.append(".node-version missing")
 else:
     v = NODE_VERSION.read_text(encoding="utf-8").strip()
-    if not v:
-        errors.append(".node-version is empty")
+    if not v or v.count(".") < 2:
+        errors.append(f".node-version should pin exact major.minor.patch, got: {v!r}")
 
 for path in WF_DIR.glob("*.yml"):
     text = path.read_text(encoding="utf-8")
