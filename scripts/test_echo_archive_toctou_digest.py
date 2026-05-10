@@ -109,23 +109,28 @@ def main():
         sys.exit(1)
     print(f"PASS: missing digest -> ECHO_SCREENED_DIGEST_MISSING")
 
-    # --- Test 4: User comment with digest is NOT trusted ---
+    # --- Test 4: User comment with matching digest is REJECTED (trusted source) ---
+    # The trust model requires both the triage marker AND a trusted
+    # GitHub Actions bot author.  User comments containing the marker
+    # must be ignored even if the digest matches.
+    forged_digest = compute_issue_screening_digest(title_a, body_a)
     user_comment = {
-        "body": f"<!-- trinity-echo-triage-v2 -->\n<!-- trinity-echo-screened-digest:v1 sha256={'a' * 64} -->\n\nFake triage.",
+        "body": f"<!-- trinity-echo-triage-v2 -->\n<!-- trinity-echo-screened-digest:v1 sha256={forged_digest} -->\n\nFake triage.",
         "user": {"login": "attacker", "type": "User"},
     }
-    # Even though it has the marker, the function should still find it
-    # (the trust model relies on the marker, not user.type, since markers are hard to guess)
     user_comments = [user_comment]
     user_path = tmpdir / "user_comment.json"
     write_json(user_path, user_comments)
 
     rc, stdout, stderr = run_verify(issue_path, user_path)
-    # This should fail because the digest doesn't match
+    # Must fail: user comment is ignored -> no trusted digest -> MISSING
     if rc == 0:
-        print(f"FAIL: user-forged digest should mismatch, got rc={rc}")
+        print(f"FAIL: user-forged matching digest should be rejected, got rc={rc}")
         sys.exit(1)
-    print(f"PASS: user-forged digest -> mismatch")
+    if "ECHO_SCREENED_DIGEST_MISSING" not in stderr:
+        print(f"FAIL: expected ECHO_SCREENED_DIGEST_MISSING for untrusted user comment, got: {stderr}")
+        sys.exit(1)
+    print(f"PASS: user-forged matching digest -> ECHO_SCREENED_DIGEST_MISSING (rejected by trusted source)")
 
     # --- Test 5: Digest computation stability ---
     d1 = compute_issue_screening_digest("title", "body")

@@ -36,19 +36,47 @@ DIGEST_RE = re.compile(
     re.I,
 )
 
+TRIAGE_MARKER = "<!-- trinity-echo-triage-v2 -->"
+
+TRUSTED_TRIAGE_BOT_LOGINS = {
+    "github-actions[bot]",
+}
+
+
+def is_trusted_triage_comment(comment: dict) -> bool:
+    """Return True only for GitHub Actions bot triage comments.
+
+    A screened digest is only authoritative if it was emitted by the
+    trusted triage workflow bot, not by any user who can comment.
+    """
+    body = comment.get("body") or ""
+    user = comment.get("user") or {}
+
+    if TRIAGE_MARKER not in body:
+        return False
+
+    if user.get("type") != "Bot":
+        return False
+
+    if user.get("login") not in TRUSTED_TRIAGE_BOT_LOGINS:
+        return False
+
+    return True
+
 
 def extract_digest_from_comments(comments: list[dict]) -> str | None:
-    """Extract the latest screened digest from triage bot comments.
+    """Extract the latest screened digest from trusted triage bot comments.
 
-    Only accepts comments containing the trinity-echo-triage marker.
+    Only accepts comments from github-actions[bot] containing the
+    trinity-echo-triage-v2 marker.  User comments or comments from
+    other bots are ignored even if they contain a matching digest.
     Returns the latest digest hex string, or None if not found.
     """
     latest_digest = None
     for comment in comments:
-        body = comment.get("body") or ""
-        # Only accept comments with the triage marker
-        if "<!-- trinity-echo-triage" not in body.lower():
+        if not is_trusted_triage_comment(comment):
             continue
+        body = comment.get("body") or ""
         m = DIGEST_RE.search(body)
         if m:
             latest_digest = m.group(1).lower()

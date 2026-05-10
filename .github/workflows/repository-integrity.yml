@@ -148,6 +148,9 @@ jobs:
       - name: Test Echo archive TOCTOU digest binding
         run: python3 scripts/test_echo_archive_toctou_digest.py
 
+      - name: Test Echo screened digest trusted comment source
+        run: python3 scripts/test_echo_screened_digest_trusted_comment_source.py
+
       - name: Test Echo archive Markdown escaping
         run: python3 scripts/test_echo_archive_markdown_escape.py
 
