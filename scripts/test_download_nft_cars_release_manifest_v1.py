@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
-"""Test: download-nft-cars.mjs produces trinity-release-manifest-v1 (REL-SCHEMA-001)"""
+"""Test: download-nft-cars.mjs produces real part-based RELEASE-MANIFEST.json"""
 
+import re
 import sys
 from pathlib import Path
 
@@ -13,43 +14,61 @@ def fail(msg):
     sys.exit(1)
 
 
-print("Running release manifest v1 producer tests...")
+print("Running real part-based release manifest tests...")
 
+# Required markers for real part-based manifest
 required = [
     "trinity-release-manifest-v1",
     "RELEASE-MANIFEST.json",
-    "per_nft_assets",
-    "expected_sha256",
-    "expected_size",
+    "nft-car-backup-parts",
+    "release_assets: releaseAssets",
+    "asset_name: part.name",
+    "expected_path: f.tar_path",
+    "total_car_files",
+    "auxiliary_assets",
     "does_not_prove",
 ]
 
 for token in required:
     if token not in text:
-        fail(f"download-nft-cars.mjs missing release manifest marker: {token}")
+        fail(f"missing real part-based release manifest marker: {token}")
 
-# Must upload RELEASE-MANIFEST.json as release asset
-if "RELEASE-MANIFEST.json" in text and ("uploadAsset" in text or "upload" in text.lower()):
-    print("  ✓ RELEASE-MANIFEST.json uploaded as release asset")
-else:
-    fail("RELEASE-MANIFEST.json not uploaded")
+# Must NOT contain imaginary per-NFT structure in release manifest section
+dangerous = [
+    "nft_asset_name",
+    "`nft-${contract}-${tokenId}.tar`",
+    "per_nft_assets: perNftAssets",
+    "release_assets: { parts:",
+]
 
-# Must have schema field
-if "schema:" in text and "trinity-release-manifest-v1" in text:
-    print("  ✓ schema field set to trinity-release-manifest-v1")
-else:
-    fail("Missing schema field")
+for token in dangerous:
+    if token in text:
+        fail(f"producer still contains imaginary per-NFT/parts-only structure: {token}")
 
-# Must have does_not_prove
-if "does_not_prove" in text:
-    print("  ✓ does_not_prove included")
-else:
-    fail("Missing does_not_prove")
+# Must upload RELEASE-MANIFEST.json
+if "uploadAsset(release.id, releaseManifestPath, 'RELEASE-MANIFEST.json')" not in text:
+    fail("RELEASE-MANIFEST.json not uploaded as release asset")
 
-# Must have verification_basis
-if "verification_basis" in text:
-    print("  ✓ verification_basis included")
+# Must store manifest_item in verifiedCarFiles
+if "manifest_item: verified" not in text:
+    fail("verifiedCarFiles missing manifest_item for per-part file tracking")
+
+# release_kind must be parts
+if "nft-car-backup-parts" in text:
+    print("  ✓ release_kind = nft-car-backup-parts")
 else:
-    fail("Missing verification_basis")
+    fail("release_kind must be nft-car-backup-parts")
+
+# release_assets must be array with asset_name per entry
+if "asset_name: part.name" in text:
+    print("  ✓ release_assets[] entries have asset_name")
+else:
+    fail("release_assets entries missing asset_name")
+
+# Each part.files must include txid.car paths
+if "expected_path: f.tar_path" in text:
+    print("  ✓ part files have expected_path (txid.car)")
+else:
+    fail("part files missing expected_path")
 
 print("\nDOWNLOAD_NFT_CARS_RELEASE_MANIFEST_V1_OK")

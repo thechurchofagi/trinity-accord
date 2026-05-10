@@ -398,7 +398,7 @@ async function main() {
         }
 
         manifest.push(verified);
-        verifiedCarFiles.push({ txid, path: dest });
+        verifiedCarFiles.push({ txid, path: dest, manifest_item: verified });
         done++; pass++;
         if (done % 50 === 0) process.stdout.write(`\r   ${done}/${txids.size}`);
         return;
@@ -420,7 +420,7 @@ async function main() {
 
       fs.writeFileSync(dest, buf);
       manifest.push(verified);
-      verifiedCarFiles.push({ txid, path: dest });
+      verifiedCarFiles.push({ txid, path: dest, manifest_item: verified });
 
       done++; pass++;
       if (done % 10 === 0) process.stdout.write(`\r   ${done}/${txids.size} downloaded`);
@@ -492,7 +492,16 @@ async function main() {
     fs.writeFileSync(listFile, batch.map(x => `./${path.basename(x.path)}`).join('\n'));
     execFileSync('tar', ['czf', partPath, '-C', TMP_DIR, '-T', listFile], { stdio: 'pipe' });
     fs.unlinkSync(listFile);
-    parts.push({ name: partName, path: partPath, count: batch.length });
+    parts.push({
+      name: partName,
+      path: partPath,
+      count: batch.length,
+      files: batch.map(x => ({
+        txid: x.txid,
+        tar_path: path.basename(x.path),
+        manifest_item: x.manifest_item,
+      })),
+    });
   }
 
   // Also package manifest
@@ -502,46 +511,38 @@ async function main() {
 
   console.log(`\n   ${parts.length} archives created`);
 
-  // 7. Build and write RELEASE-MANIFEST.json (trinity-release-manifest-v1)
+  // 7. Build and write RELEASE-MANIFEST.json (trinity-release-manifest-v1, part-based)
   console.log('\n📄 Building RELEASE-MANIFEST.json...');
 
-  // Group manifest items by contract+tokenId to build per-NFT entries
-  const byNft = new Map();
-  for (const item of manifest) {
-    if (!item.verified) continue;
-    const contract = item.contract || 'unknown';
-    const tokenId = String(item.token_id || 'unknown');
-    const key = `${contract}:${tokenId}`;
-    if (!byNft.has(key)) {
-      byNft.set(key, {
-        nft_asset_name: `nft-${contract}-${tokenId}.tar`,
-        contract, token_id: tokenId, files: [],
-      });
-    }
-    byNft.get(key).files.push({
-      role: item.role,
-      txid: item.txid,
-      expected_path: `nft/${item.role}.car`,
-      expected_sha256: item.expected_sha256,
-      expected_size: item.expected_size,
-      expected_root_cid: item.cid || null,
-      cid_check_required: false,
-    });
-  }
-  const perNftAssets = [...byNft.values()]
-    .sort((a, b) => a.nft_asset_name.localeCompare(b.nft_asset_name))
-    .map(e => ({ ...e, files: e.files.sort((a, b) => String(a.role).localeCompare(String(b.role))) }));
+  const releaseAssets = parts
+    .filter(p => p.name !== 'nft-cars-manifest.tar.gz')
+    .map(part => ({
+      asset_name: part.name,
+      files: part.files.map(f => ({
+        role: f.manifest_item.role,
+        contract: f.manifest_item.contract || null,
+        token_id: f.manifest_item.token_id || null,
+        txid: f.txid,
+        expected_path: f.tar_path,
+        expected_sha256: f.manifest_item.expected_sha256,
+        expected_size: f.manifest_item.expected_size,
+        expected_root_cid: f.manifest_item.cid || null,
+        cid_check_required: false,
+      })),
+    }));
+
+  const totalCarFiles = releaseAssets.reduce((sum, a) => sum + a.files.length, 0);
 
   const releaseManifest = {
     schema: 'trinity-release-manifest-v1',
-    release_kind: 'nft-car-backup',
+    release_kind: 'nft-car-backup-parts',
     verification_basis: 'expected_sha256_and_expected_size',
-    actual_nfts: perNftAssets.length,
-    total_car_files: perNftAssets.reduce((s, e) => s + e.files.length, 0),
+    actual_nfts: totalTokens,
+    total_car_files: totalCarFiles,
     contracts: contracts.length,
     source_manifest: { generator: 'scripts/download-nft-cars.mjs' },
-    release_assets: { parts: parts.map(p => p.name) },
-    per_nft_assets: perNftAssets,
+    release_assets: releaseAssets,
+    auxiliary_assets: ['nft-cars-manifest.tar.gz', 'RELEASE-MANIFEST.json'],
     does_not_prove: [
       'independent attestation',
       'on-chain ownership or tokenURI correctness',
@@ -553,7 +554,7 @@ async function main() {
 
   const releaseManifestPath = path.join(TMP_DIR, 'RELEASE-MANIFEST.json');
   fs.writeFileSync(releaseManifestPath, JSON.stringify(releaseManifest, null, 2));
-  console.log(`   ✅ RELEASE-MANIFEST.json written (${perNftAssets.length} NFTs, ${releaseManifest.total_car_files} CARs)`);
+  console.log(`   ✅ RELEASE-MANIFEST.json written (${releaseAssets.length} parts, ${totalCarFiles} CARs)`);
 
   // 8. Upload to GitHub Release
   console.log('\n📤 Uploading to GitHub Release...');

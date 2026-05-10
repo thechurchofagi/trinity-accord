@@ -106,14 +106,17 @@ function normalizeReleaseManifest(manifest) {
 }
 
 function normalizeTrinityReleaseManifestV1(m) {
-  // Support both per_nft_assets and release_assets (part-based)
+  // Part-based manifest takes priority
+  if (Array.isArray(m.release_assets)) {
+    return normalizePartBasedManifestV1(m);
+  }
+
+  // Legacy per_nft_assets (only for backward compat)
   if (Array.isArray(m.per_nft_assets)) {
     return normalizePerNftManifestV1(m);
   }
-  if (Array.isArray(m.release_assets) && typeof m.release_assets[0] === 'object' && m.release_assets[0].asset_name) {
-    return normalizePartBasedManifestV1(m);
-  }
-  throw new Error('trinity-release-manifest-v1 requires per_nft_assets or release_assets with asset_name');
+
+  throw new Error('trinity-release-manifest-v1 requires release_assets array or per_nft_assets array');
 }
 
 function normalizePerNftManifestV1(m) {
@@ -174,6 +177,7 @@ function normalizePartBasedManifestV1(m) {
     expected_asset_count: expected.length,
     expected_nft_count: m.actual_nfts ?? null,
     expected_car_count: m.total_car_files ?? expected.reduce((s, e) => s + e.files.length, 0),
+    auxiliary_assets: m.auxiliary_assets || ['RELEASE-MANIFEST.json', 'nft-cars-manifest.tar.gz'],
     does_not_prove: m.does_not_prove || [],
   };
 }
@@ -271,7 +275,7 @@ function extractFilesFromTarStrict(buf) {
     }
 
     if (size > 0 && errors.length === 0) {
-      files.push({ name: fullName, data: buf.slice(pos, pos + size) });
+      files.push({ name: normalizeTarPath(fullName), data: buf.slice(pos, pos + size) });
     }
 
     pos += Math.ceil(size / 512) * 512;
@@ -497,10 +501,13 @@ async function main() {
     }
   }
 
-  // Extra unexpected nft-* assets
+  // Extra unexpected assets (ignore auxiliary assets)
+  const auxiliaryAssets = new Set(normalized.auxiliary_assets || ['RELEASE-MANIFEST.json', 'nft-cars-manifest.tar.gz']);
   const extraAssets = [];
   for (const asset of allAssets) {
-    if (asset.name.startsWith('nft-') && !expectedNames.has(asset.name)) {
+    if (auxiliaryAssets.has(asset.name)) continue;
+    const looksVerifiable = asset.name.endsWith('.tar.gz') || asset.name.startsWith('nft-');
+    if (looksVerifiable && !expectedNames.has(asset.name)) {
       errors.push({ type: 'unexpected_release_asset', asset: asset.name });
       extraAssets.push(asset.name);
       fail++;
