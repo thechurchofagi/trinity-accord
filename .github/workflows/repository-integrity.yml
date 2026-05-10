@@ -80,6 +80,18 @@ jobs:
       - name: Test workflow dispatch input safety
         run: python3 scripts/test_workflow_dispatch_input_safety.py
 
+      - name: Test workflow dispatch write hardening
+        run: python3 scripts/test_workflow_dispatch_write_hardening.py
+
+      - name: Test Echo archive authorization boundary
+        run: python3 scripts/test_echo_human_review_archive_authorization.py
+
+      - name: Test build Echo index runs formal validator
+        run: python3 scripts/test_build_echo_index_runs_formal_validator.py
+
+      - name: Test CODEOWNERS sensitive path coverage
+        run: python3 scripts/test_codeowners_sensitive_paths.py
+
       - name: Test invalid V4 Echo records are not indexed
         run: python3 scripts/test_no_invalid_v4_echoes_indexed.py
 

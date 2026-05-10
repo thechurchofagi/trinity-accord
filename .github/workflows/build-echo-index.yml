@@ -28,8 +28,27 @@ jobs:
           python3 -m pip install --upgrade pip
           pip install jsonschema
 
+      - name: Authorize manual dispatch actor
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        env:
+          ACTOR: ${{ github.actor }}
+        run: |
+          set -euo pipefail
+          case "$ACTOR" in
+            thechurchofagi)
+              echo "Authorized workflow_dispatch actor: $ACTOR"
+              ;;
+            *)
+              echo "Unauthorized workflow_dispatch actor: $ACTOR"
+              exit 1
+              ;;
+          esac
+
       - name: Validate Echo records
         run: python3 scripts/validate_echo_records.py
+
+      - name: Validate independent attestation index
+        run: python3 scripts/validate_independent_attestation_index.py
 
       - name: Generate Echo index
         run: python3 scripts/generate_echo_index.py

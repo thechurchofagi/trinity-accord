@@ -1,0 +1,17 @@
+# Trinity Accord sensitive-path ownership
+#
+# These paths affect public trust, verification levels, formal attestation,
+# homepage status, or privileged automation. Changes should receive explicit
+# maintainer review before merge.
+
+.github/workflows/ @thechurchofagi
+api/independent-attestation-index.json @thechurchofagi
+api/independent-attestation-record-schema.v1.json @thechurchofagi
+scripts/validate_independent_attestation_index.py @thechurchofagi
+scripts/generate_public_home_status.py @thechurchofagi
+scripts/claim_gate.py @thechurchofagi
+scripts/build_verification_report_from_evidence.py @thechurchofagi
+scripts/validate_agent_submission.py @thechurchofagi
+scripts/archive_echo_issue.py @thechurchofagi
+scripts/triage_echo_issue.py @thechurchofagi
+index.md @thechurchofagi

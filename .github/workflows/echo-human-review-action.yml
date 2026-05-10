@@ -32,27 +32,36 @@ jobs:
         run: |
           set -euo pipefail
 
-          case "$COMMENT_ASSOC" in
-            OWNER|MEMBER|COLLABORATOR)
-              ;;
-            *)
-              echo "authorized=false" >> "$GITHUB_OUTPUT"
-              echo "command=none" >> "$GITHUB_OUTPUT"
-              echo "Unauthorized commenter: $COMMENT_USER ($COMMENT_ASSOC)"
-              exit 0
-              ;;
-          esac
-
           first_line="$(printf '%s\n' "$COMMENT_BODY" | sed -n '1p' | tr -d '\r')"
 
           case "$first_line" in
             "/echo archive")
-              echo "authorized=true" >> "$GITHUB_OUTPUT"
-              echo "command=archive" >> "$GITHUB_OUTPUT"
+              # Archive writes repository content — restrict to OWNER|MEMBER only
+              case "$COMMENT_ASSOC" in
+                OWNER|MEMBER)
+                  echo "authorized=true" >> "$GITHUB_OUTPUT"
+                  echo "command=archive" >> "$GITHUB_OUTPUT"
+                  ;;
+                *)
+                  echo "authorized=false" >> "$GITHUB_OUTPUT"
+                  echo "command=none" >> "$GITHUB_OUTPUT"
+                  echo "Unauthorized /echo archive commenter: $COMMENT_USER ($COMMENT_ASSOC)"
+                  ;;
+              esac
               ;;
             "/echo close")
-              echo "authorized=true" >> "$GITHUB_OUTPUT"
-              echo "command=close" >> "$GITHUB_OUTPUT"
+              # Close does not write repository — allow COLLABORATOR
+              case "$COMMENT_ASSOC" in
+                OWNER|MEMBER|COLLABORATOR)
+                  echo "authorized=true" >> "$GITHUB_OUTPUT"
+                  echo "command=close" >> "$GITHUB_OUTPUT"
+                  ;;
+                *)
+                  echo "authorized=false" >> "$GITHUB_OUTPUT"
+                  echo "command=none" >> "$GITHUB_OUTPUT"
+                  echo "Unauthorized /echo close commenter: $COMMENT_USER ($COMMENT_ASSOC)"
+                  ;;
+              esac
               ;;
             *)
               echo "authorized=true" >> "$GITHUB_OUTPUT"
