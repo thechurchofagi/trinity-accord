@@ -83,6 +83,10 @@ async function runConcurrent(tasks, limit) {
 
 // ─── Manifest schema normalization ─────────────────────────────────────────
 
+function normalizeTarPath(name) {
+  return name.replace(/^\.\//, '');
+}
+
 function normalizeReleaseManifest(manifest) {
   if (!manifest || typeof manifest !== 'object') {
     throw new Error('Release manifest must be a JSON object');
@@ -102,9 +106,17 @@ function normalizeReleaseManifest(manifest) {
 }
 
 function normalizeTrinityReleaseManifestV1(m) {
-  if (!Array.isArray(m.per_nft_assets)) {
-    throw new Error('trinity-release-manifest-v1 requires per_nft_assets array');
+  // Support both per_nft_assets and release_assets (part-based)
+  if (Array.isArray(m.per_nft_assets)) {
+    return normalizePerNftManifestV1(m);
   }
+  if (Array.isArray(m.release_assets) && typeof m.release_assets[0] === 'object' && m.release_assets[0].asset_name) {
+    return normalizePartBasedManifestV1(m);
+  }
+  throw new Error('trinity-release-manifest-v1 requires per_nft_assets or release_assets with asset_name');
+}
+
+function normalizePerNftManifestV1(m) {
   const expected = m.per_nft_assets.map(entry => {
     if (!entry.nft_asset_name) throw new Error('Missing nft_asset_name in manifest entry');
     return {
@@ -125,8 +137,42 @@ function normalizeTrinityReleaseManifestV1(m) {
   return {
     schema: m.schema,
     verification_basis: m.verification_basis || 'expected_sha256_and_expected_size',
-    expected_nft_assets: expected,
+    expected_release_assets: expected,
+    expected_asset_count: m.actual_nfts ?? expected.length,
     expected_nft_count: m.actual_nfts ?? expected.length,
+    expected_car_count: m.total_car_files ?? expected.reduce((s, e) => s + e.files.length, 0),
+    does_not_prove: m.does_not_prove || [],
+  };
+}
+
+function normalizePartBasedManifestV1(m) {
+  const expected = m.release_assets.map(asset => {
+    if (!asset.asset_name) throw new Error('Missing asset_name in release_assets entry');
+    if (!Array.isArray(asset.files)) throw new Error(`Missing files for ${asset.asset_name}`);
+    return {
+      name: asset.asset_name,
+      contract: null,
+      token_id: null,
+      files: asset.files.map(f => ({
+        role: f.role,
+        contract: f.contract || null,
+        token_id: f.token_id || null,
+        txid: f.txid || null,
+        expected_path: normalizeTarPath(f.expected_path || `${f.txid}.car`),
+        expected_sha256: (f.expected_sha256 || '').toLowerCase(),
+        expected_size: f.expected_size,
+        expected_root_cid: f.expected_root_cid || null,
+        cid_required: f.cid_check_required || false,
+      })),
+    };
+  });
+
+  return {
+    schema: m.schema,
+    verification_basis: m.verification_basis || 'expected_sha256_and_expected_size',
+    expected_release_assets: expected,
+    expected_asset_count: expected.length,
+    expected_nft_count: m.actual_nfts ?? null,
     expected_car_count: m.total_car_files ?? expected.reduce((s, e) => s + e.files.length, 0),
     does_not_prove: m.does_not_prove || [],
   };
@@ -412,7 +458,7 @@ async function main() {
   }
 
   log(`  Manifest schema: ${normalized.schema}`);
-  log(`  Expected NFTs  : ${normalized.expected_nft_count}`);
+  log(`  Expected NFTs  : ${normalized.expected_asset_count}`);
   log(`  Expected CARs  : ${normalized.expected_car_count}`);
   log('');
 
@@ -427,7 +473,7 @@ async function main() {
     releaseAssetByName.set(asset.name, asset);
   }
 
-  const expectedAssets = normalized.expected_nft_assets;
+  const expectedAssets = normalized.expected_release_assets || normalized.expected_nft_assets;
   const expectedNames = new Set(expectedAssets.map(x => x.name));
 
   // ── 4. Completeness checks ───────────────────────────────────────────
@@ -462,8 +508,8 @@ async function main() {
   }
 
   // Manifest count invariants
-  if (expectedAssets.length !== normalized.expected_nft_count) {
-    errors.push({ type: 'manifest_count_mismatch', field: 'actual_nfts', expected: normalized.expected_nft_count, actual: expectedAssets.length });
+  if (expectedAssets.length !== normalized.expected_asset_count) {
+    errors.push({ type: 'manifest_count_mismatch', field: 'expected_asset_count', expected: normalized.expected_asset_count, actual: expectedAssets.length });
     fail++;
   }
 
@@ -606,7 +652,7 @@ async function main() {
     sizePass,
     carFilesExpected: expectedCarCount,
     assetsVerified: verifiedAssetCount,
-    assetsExpected: normalized.expected_nft_count,
+    assetsExpected: normalized.expected_asset_count,
     cidCheckEnabled: cidCheck,
     metadataCidFail: metaCidFail,
   });
@@ -651,7 +697,7 @@ async function main() {
     optional_checks: cidCheck ? ['metadata root CID strict', 'media root CID audit'] : [],
 
     total_assets: allAssets.length,
-    assets_expected: normalized.expected_nft_count,
+    assets_expected: normalized.expected_asset_count,
     assets_verified: verifiedAssetCount,
     car_files_expected: expectedCarCount,
     car_files_checked: totalChecks,
@@ -686,7 +732,7 @@ async function main() {
 
   log('');
   log('═══════════════════════════════════════════════════════════');
-  log(`  ${status === 'PASS' ? '✅ PASS' : '❌ FAIL'}: ${verifiedAssetCount}/${normalized.expected_nft_count} assets verified`);
+  log(`  ${status === 'PASS' ? '✅ PASS' : '❌ FAIL'}: ${verifiedAssetCount}/${normalized.expected_asset_count} assets verified`);
   log(`  SHA-256 : ${sha256Pass}/${totalChecks} pass`);
   log(`  Size    : ${sizePass}/${totalChecks} pass`);
   log(`  Scope   : ${verificationScope}`);

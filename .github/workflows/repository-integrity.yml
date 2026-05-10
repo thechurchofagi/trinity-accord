@@ -202,6 +202,12 @@ jobs:
       - name: Test CAR parser fail-closed behavior
         run: python3 scripts/test_verify_car_parser_fail_closed.py
 
+      - name: Test NFT CAR release manifest v1 producer
+        run: python3 scripts/test_download_nft_cars_release_manifest_v1.py
+
+      - name: Test verify-release-assets consumes NFT CAR manifest
+        run: python3 scripts/test_verify_release_assets_consumes_nft_cars_manifest.py
+
       - name: Validate verify release report self-test
         run: python3 scripts/validate_verify_release_report.py --self-test
 

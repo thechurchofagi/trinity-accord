@@ -502,11 +502,73 @@ async function main() {
 
   console.log(`\n   ${parts.length} archives created`);
 
-  // 7. Upload to GitHub Release
+  // 7. Build and write RELEASE-MANIFEST.json (trinity-release-manifest-v1)
+  console.log('\n📄 Building RELEASE-MANIFEST.json...');
+
+  // Group manifest items by contract+tokenId to build per-NFT entries
+  const byNft = new Map();
+  for (const item of manifest) {
+    if (!item.verified) continue;
+    const contract = item.contract || 'unknown';
+    const tokenId = String(item.token_id || 'unknown');
+    const key = `${contract}:${tokenId}`;
+    if (!byNft.has(key)) {
+      byNft.set(key, {
+        nft_asset_name: `nft-${contract}-${tokenId}.tar`,
+        contract, token_id: tokenId, files: [],
+      });
+    }
+    byNft.get(key).files.push({
+      role: item.role,
+      txid: item.txid,
+      expected_path: `nft/${item.role}.car`,
+      expected_sha256: item.expected_sha256,
+      expected_size: item.expected_size,
+      expected_root_cid: item.cid || null,
+      cid_check_required: false,
+    });
+  }
+  const perNftAssets = [...byNft.values()]
+    .sort((a, b) => a.nft_asset_name.localeCompare(b.nft_asset_name))
+    .map(e => ({ ...e, files: e.files.sort((a, b) => String(a.role).localeCompare(String(b.role))) }));
+
+  const releaseManifest = {
+    schema: 'trinity-release-manifest-v1',
+    release_kind: 'nft-car-backup',
+    verification_basis: 'expected_sha256_and_expected_size',
+    actual_nfts: perNftAssets.length,
+    total_car_files: perNftAssets.reduce((s, e) => s + e.files.length, 0),
+    contracts: contracts.length,
+    source_manifest: { generator: 'scripts/download-nft-cars.mjs' },
+    release_assets: { parts: parts.map(p => p.name) },
+    per_nft_assets: perNftAssets,
+    does_not_prove: [
+      'independent attestation',
+      'on-chain ownership or tokenURI correctness',
+      'physical authorship or provenance',
+      'CID/root/DAG correctness unless verify-release-assets.mjs is run with --cid-check',
+      'full evidence chain verification',
+    ],
+  };
+
+  const releaseManifestPath = path.join(TMP_DIR, 'RELEASE-MANIFEST.json');
+  fs.writeFileSync(releaseManifestPath, JSON.stringify(releaseManifest, null, 2));
+  console.log(`   ✅ RELEASE-MANIFEST.json written (${perNftAssets.length} NFTs, ${releaseManifest.total_car_files} CARs)`);
+
+  // 8. Upload to GitHub Release
   console.log('\n📤 Uploading to GitHub Release...');
   const release = await ensureRelease();
 
   let uploadFail = 0;
+
+  // Upload RELEASE-MANIFEST.json first
+  try {
+    await uploadAsset(release.id, releaseManifestPath, 'RELEASE-MANIFEST.json');
+  } catch (err) {
+    uploadFail++;
+    console.error(`   ❌ Failed to upload RELEASE-MANIFEST.json: ${err.message}`);
+  }
+
   for (const part of parts) {
     try {
       await uploadAsset(release.id, part.path, part.name);
@@ -523,7 +585,7 @@ async function main() {
   console.log('\n=========================================');
   console.log(`  ✅ Done! ${pass} CARs backed up to release ${RELEASE_TAG}`);
   console.log(`  📦 ${parts.length} archives uploaded`);
-  console.log(`  📋 manifest.json included`);
+  console.log(`  📋 RELEASE-MANIFEST.json uploaded`);
   console.log('=========================================');
 }
 

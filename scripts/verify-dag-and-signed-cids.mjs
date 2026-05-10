@@ -216,13 +216,21 @@ function extractDigestFromCid(cid) {
 // CAR PARSING — full block-level verification
 // ═══════════════════════════════════════════════════════════════════════════
 
-function readVarint(data, offset) {
+function readVarintStrict(data, offset, label = 'varint') {
   let value = 0, shift = 0, pos = offset;
-  while (true) {
-    const b = data[pos]; value |= (b & 0x7f) << shift; pos++; shift += 7;
-    if (b < 0x80) break;
+  for (let i = 0; i < 10; i++) {
+    if (pos >= data.length) throw new Error(`Truncated ${label}`);
+    const b = data[pos++];
+    value += (b & 0x7f) * (2 ** shift);
+    if (!Number.isSafeInteger(value)) throw new Error(`Unsafe ${label}`);
+    if (b < 0x80) return { value, bytesRead: pos - offset };
+    shift += 7;
   }
-  return { value, bytesRead: pos - offset };
+  throw new Error(`Overlong ${label}`);
+}
+
+function readVarint(data, offset) {
+  return readVarintStrict(data, offset, 'varint');
 }
 
 function parseCidBytes(data, offset) {
@@ -232,19 +240,27 @@ function parseCidBytes(data, offset) {
 
   const version = data[pos];
   if (version === 0x12) {
+    if (pos + 34 > data.length) throw new Error('Truncated CIDv0');
     if (data[pos + 1] !== 0x20) throw new Error('Unexpected CIDv0 hash length');
     return { cid: cidv0Encode(data.slice(pos, pos + 34)), bytesRead: pos - offset + 34 };
   }
 
   let cidStart = pos;
-  while (true) { const b = data[pos]; pos++; if (b < 0x80) break; }
-  while (true) { const b = data[pos]; pos++; if (b < 0x80) break; }
-  while (true) { const b = data[pos]; pos++; if (b < 0x80) break; }
-  let mhLen = 0, shift = 0;
-  while (true) { const b = data[pos]; mhLen |= (b & 0x7f) << shift; pos++; shift += 7; if (b < 0x80) break; }
+  pos = consumeVarint(data, pos, 'CID version');
+  pos = consumeVarint(data, pos, 'CID codec');
+  pos = consumeVarint(data, pos, 'CID mh-type');
+  const mhLenResult = readVarintStrict(data, pos, 'CID mh-length');
+  pos += mhLenResult.bytesRead;
+  const mhLen = mhLenResult.value;
 
+  if (pos + mhLen > data.length) throw new Error('CID multihash digest exceeds buffer');
   const cidBytes = data.slice(cidStart, pos + mhLen);
   return { cid: base32EncodeCid(cidBytes), bytesRead: pos - offset + mhLen };
+}
+
+function consumeVarint(data, pos, label) {
+  const r = readVarintStrict(data, pos, label);
+  return pos + r.bytesRead;
 }
 
 function extractRootsFromHeader(carData, headerStart, headerEnd) {
@@ -258,32 +274,42 @@ function extractRootsFromHeader(carData, headerStart, headerEnd) {
       else if (headerBytes[cidStart] >= 0x40 && headerBytes[cidStart] < 0x58) { cidLen = headerBytes[cidStart] - 0x40; cidStart += 1; }
       else continue;
       try { roots.push(cidBytesToCid(headerBytes.slice(cidStart, cidStart + cidLen))); }
-      catch { /* skip */ }
+      catch (e) { throw new Error(`Malformed root CID in CAR header: ${e.message}`); }
     }
   }
   return roots;
 }
 
 function parseCarFull(carData) {
-  const headerLenResult = readVarint(carData, 0);
+  const headerLenResult = readVarintStrict(carData, 0, 'CAR header length');
   const headerStart = headerLenResult.bytesRead;
   const headerEnd = headerStart + headerLenResult.value;
+  if (headerEnd > carData.length) throw new Error('CAR header length exceeds buffer');
   const roots = extractRootsFromHeader(carData, headerStart, headerEnd);
 
   const blocks = new Map();
   let pos = headerEnd;
   while (pos < carData.length) {
-    const blockLenResult = readVarint(carData, pos);
+    const blockLenResult = readVarintStrict(carData, pos, 'CAR block length');
     if (blockLenResult.bytesRead + blockLenResult.value === 0) break;
     const blockStart = pos + blockLenResult.bytesRead;
     const blockEnd = blockStart + blockLenResult.value;
-    if (blockEnd > carData.length) break;
-    try {
-      const cidResult = parseCidBytes(carData, blockStart);
-      const dataStart = blockStart + cidResult.bytesRead;
-      const blockData = carData.slice(dataStart, blockEnd);
+    if (blockEnd > carData.length) {
+      throw new Error(`CAR block length exceeds buffer at offset ${blockStart}: blockEnd=${blockEnd} len=${carData.length}`);
+    }
+    const cidResult = parseCidBytes(carData, blockStart);
+    const dataStart = blockStart + cidResult.bytesRead;
+    const blockData = carData.slice(dataStart, blockEnd);
+
+    // Duplicate CID conflict detection
+    const existing = blocks.get(cidResult.cid);
+    if (existing) {
+      if (!existing.data.equals(blockData)) {
+        throw new Error(`Duplicate CID with conflicting block data: ${cidResult.cid}`);
+      }
+    } else {
       blocks.set(cidResult.cid, { data: blockData, offset: blockStart });
-    } catch { /* skip */ }
+    }
     pos = blockEnd;
   }
   return { roots, blocks };
@@ -299,7 +325,7 @@ function extractLinksFromBlock(data) {
       else if (data[cidStart] >= 0x40 && data[cidStart] < 0x58) { cidLen = data[cidStart] - 0x40; cidStart += 1; }
       else continue;
       try { links.push(cidBytesToCid(data.slice(cidStart, cidStart + cidLen))); }
-      catch { /* skip */ }
+      catch (e) { throw new Error(`Malformed CID link in block: ${e.message}`); }
     }
   }
   return links;
