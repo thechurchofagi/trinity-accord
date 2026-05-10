@@ -22,7 +22,7 @@
 import fs from 'fs';
 import path from 'path';
 import crypto from 'crypto';
-import { execSync } from 'child_process';
+import { execFileSync } from 'child_process';
 
 // ═══════════════════════════════════════════════════════════════════════════
 // CLI ARGS
@@ -833,7 +833,7 @@ function verifyFileHashesAgainstManifest(fileEntries, digestManifest) {
  */
 function parseOtsInfo(otsPath) {
   try {
-    const output = execSync(`ots info "${otsPath}" 2>&1`, { encoding: 'utf-8', timeout: 30000 });
+    const output = execFileSync('ots', ['info', otsPath], { encoding: 'utf-8', timeout: 30000, stdio: ['pipe', 'pipe', 'pipe'] }).toString();
     const attestations = [];
     const pending = [];
     const txids = [];
@@ -1922,8 +1922,8 @@ async function verifyChainD2(otsAssets) {
       detail.ots_info_parsed = false;
       detail.diagnostic_only = false;
       try {
-        verifyOutput = execSync(`ots verify "${otsPath}" -f "${tmpFilePath}" 2>&1`, {
-          encoding: 'utf-8', timeout: 120000
+        verifyOutput = execFileSync('ots', ['verify', otsPath, '-f', tmpFilePath], {
+          encoding: 'utf-8', timeout: 120000, stdio: ['pipe', 'pipe', 'pipe']
         });
         detail.ots_verify_passed = true;
         detail.ots_verify_exit_code = 0;

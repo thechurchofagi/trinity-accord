@@ -157,6 +157,12 @@ jobs:
           node --check scripts/verify-release-assets.mjs
           node --check scripts/verify-full-evidence-chain.mjs
 
+      - name: Test Node verification scripts do not use shell exec
+        run: python3 scripts/test_node_exec_no_shell_injection.py
+
+      - name: Test full evidence chain CLI injection regression
+        run: python3 scripts/test_full_evidence_chain_cli_injection_regression.py
+
       - name: Test Echo template boundary consistency
         run: python3 scripts/test_echo_template_boundary_consistency.py
 

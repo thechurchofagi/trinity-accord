@@ -15,7 +15,7 @@
 import fs from 'fs';
 import path from 'path';
 import crypto from 'crypto';
-import { execSync } from 'child_process';
+import { execFileSync } from 'child_process';
 
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 const REPO = 'thechurchofagi/trinity-accord';
@@ -341,7 +341,7 @@ async function main() {
         return 'skipped';
       }
 
-      execSync(`tar czf "${tarPath}" -C "${TMP_DIR}/cars" "${contract}_${tokenId}"`, { stdio: 'pipe' });
+      execFileSync('tar', ['czf', tarPath, '-C', `${TMP_DIR}/cars`, `${contract}_${tokenId}`], { stdio: 'pipe' });
       const result = await uploadAsset(release.id, tarPath, tarName, uploadMutex.assets);
       if (result === 'uploaded') {
         uploaded++;

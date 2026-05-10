@@ -20,7 +20,7 @@
 import fs from 'fs';
 import path from 'path';
 import crypto from 'crypto';
-import { execSync } from 'child_process';
+import { execFileSync } from 'child_process';
 
 // --------------- Config ---------------
 function parsePositiveIntEnv(name, fallback, min, max) {
@@ -333,14 +333,14 @@ async function main() {
     // Use --files-from with ./  prefix to avoid '-' filenames being parsed as options
     const listFile = path.join(TMP_DIR, `.part${partNum}.txt`);
     fs.writeFileSync(listFile, batch.map(f => `./${f}`).join('\n'));
-    execSync(`tar czf "${partPath}" -C "${TMP_DIR}" -T "${listFile}"`, { stdio: 'pipe' });
+    execFileSync('tar', ['czf', partPath, '-C', TMP_DIR, '-T', listFile], { stdio: 'pipe' });
     fs.unlinkSync(listFile);
     parts.push({ name: partName, path: partPath, count: batch.length });
   }
 
   // Also package manifest
   const manifestTar = path.join(TMP_DIR, 'nft-cars-manifest.tar.gz');
-  execSync(`tar czf "${manifestTar}" -C "${TMP_DIR}" manifest.json`, { stdio: 'pipe' });
+  execFileSync('tar', ['czf', manifestTar, '-C', TMP_DIR, 'manifest.json'], { stdio: 'pipe' });
   parts.push({ name: 'nft-cars-manifest.tar.gz', path: manifestTar, count: 1 });
 
   console.log(`\n   ${parts.length} archives created`);

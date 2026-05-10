@@ -264,7 +264,7 @@ async function main() {
   if (!ETH_RPC_URL) { err('❌ ETH_RPC_URL required'); process.exit(1); }
 
   let sourceCommit = 'unknown';
-  try { sourceCommit = require('child_process').execSync('git rev-parse HEAD', { encoding: 'utf-8' }).trim(); } catch {}
+  try { sourceCommit = require('child_process').execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf-8' }).trim(); } catch {}
 
   log('═══════════════════════════════════════════════════════════');
   log('  ETH Onchain tokenURI Read Audit');

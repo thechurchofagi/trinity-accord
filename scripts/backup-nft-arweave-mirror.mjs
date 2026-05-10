@@ -18,7 +18,7 @@
 import fs from 'fs';
 import path from 'path';
 import crypto from 'crypto';
-import { execSync } from 'child_process';
+import { execFileSync } from 'child_process';
 
 // ─── Config ────────────────────────────────────────────────────────────────
 
@@ -225,7 +225,7 @@ async function main() {
   const contractFilter = args.includes('--contract') ? args[args.indexOf('--contract') + 1] : null;
 
   let sourceCommit = 'unknown';
-  try { sourceCommit = execSync('git rev-parse HEAD', { encoding: 'utf-8' }).trim(); } catch {}
+  try { sourceCommit = execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf-8' }).trim(); } catch {}
 
   log('═══════════════════════════════════════════════════════════');
   log('  NFT Arweave → GitHub Release Mirror (v5 — backup only)');
