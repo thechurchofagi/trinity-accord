@@ -18,6 +18,8 @@ REQUIRED_FIELDS = [
     "status", "assets_expected", "assets_verified",
     "car_files_expected", "car_files_checked",
     "sha256_pass", "size_pass", "errors", "does_not_prove", "limitations",
+    "report_status", "is_current", "historical_report_only",
+    "current_status_url", "corrections_index_url",
 ]
 
 VALID_SCOPES = [
@@ -88,46 +90,52 @@ def validate_report(report):
         if "cid" not in dnp_text and "dag" not in dnp_text:
             errors.append("hash_size_only scope but does_not_prove does not mention CID/DAG")
 
-    # TA-REDTEAM-2026-012: report lifecycle validation
+    # TA-REDTEAM-2026-012: report lifecycle validation (mandatory)
     report_status = report.get("report_status")
     is_current_val = report.get("is_current")
     historical_report_only = report.get("historical_report_only")
 
-    if report_status is not None or is_current_val is not None or historical_report_only is not None:
-        # If any lifecycle field is present, validate
-        if report_status is not None and report_status not in VALID_REPORT_STATUSES:
-            errors.append(f"report_status must be one of {sorted(VALID_REPORT_STATUSES)}, got: {report_status}")
+    if report_status not in VALID_REPORT_STATUSES:
+        errors.append(f"report_status must be one of {sorted(VALID_REPORT_STATUSES)}, got: {report_status}")
 
-        # PASS reports must be current
-        if report["status"] == "PASS" and report_status is not None:
-            if report_status != "current":
-                errors.append(f"PASS report must have report_status='current', got: '{report_status}'")
-            if is_current_val is not None and is_current_val is not True:
-                errors.append("PASS report must have is_current=true")
+    # PASS reports must be current
+    if report["status"] == "PASS":
+        if report_status != "current":
+            errors.append(f"PASS report must have report_status='current', got: '{report_status}'")
+        if is_current_val is not True:
+            errors.append("PASS report must have is_current=true")
+        if historical_report_only is not False:
+            errors.append("PASS current report must have historical_report_only=false")
 
-        # Non-current reports
-        if report_status in NON_CURRENT_REPORT_STATUSES:
-            if is_current_val is not None and is_current_val is not False:
-                errors.append(f"non-current report_status '{report_status}' requires is_current=false")
-            if historical_report_only is not None and historical_report_only is not True:
-                errors.append(f"non-current report_status '{report_status}' requires historical_report_only=true")
+    # Non-current reports
+    if report_status in NON_CURRENT_REPORT_STATUSES:
+        if is_current_val is not False:
+            errors.append(f"non-current report_status '{report_status}' requires is_current=false")
+        if historical_report_only is not True:
+            errors.append(f"non-current report_status '{report_status}' requires historical_report_only=true")
 
-        # Revoked requires revocation_reason
-        if report_status == "revoked":
-            if not report.get("revocation_reason"):
-                errors.append("revoked report requires revocation_reason")
+    # URL check
+    for field in ["current_status_url", "corrections_index_url"]:
+        value = report.get(field)
+        if not isinstance(value, str) or not value.startswith("https://www.trinityaccord.org/api/corrections-index.json"):
+            errors.append(f"{field} must point to corrections-index.json")
 
-        # Superseded requires superseded_by + supersession_reason
-        if report_status == "superseded":
-            if report.get("superseded_by") is None and not report.get("supersession_reason"):
-                errors.append("superseded report requires superseded_by or supersession_reason")
-            if not report.get("supersession_reason"):
-                errors.append("superseded report requires supersession_reason")
+    # Revoked requires revocation_reason
+    if report_status == "revoked":
+        if not report.get("revocation_reason"):
+            errors.append("revoked report requires revocation_reason")
 
-        # Invalidated requires invalidation_reason
-        if report_status == "invalidated":
-            if not report.get("invalidation_reason"):
-                errors.append("invalidated report requires invalidation_reason")
+    # Superseded requires superseded_by + supersession_reason
+    if report_status == "superseded":
+        if report.get("superseded_by") is None and not report.get("supersession_reason"):
+            errors.append("superseded report requires superseded_by or supersession_reason")
+        if not report.get("supersession_reason"):
+            errors.append("superseded report requires supersession_reason")
+
+    # Invalidated requires invalidation_reason
+    if report_status == "invalidated":
+        if not report.get("invalidation_reason"):
+            errors.append("invalidated report requires invalidation_reason")
 
     return errors
 
@@ -203,11 +211,12 @@ def self_test():
     assert len(errs) == 0, f"Expected no errors: {errs}"
     print("  ✓ PASS current report accepted")
 
-    # Test 10: PASS report missing report_status (no lifecycle fields = OK)
+    # Test 10: PASS report missing report_status (lifecycle required = rejected)
     r = make_valid_report()
+    del r["report_status"]
     errs = validate_report(r)
-    assert len(errs) == 0, f"Expected no errors: {errs}"
-    print("  ✓ PASS report without lifecycle fields accepted")
+    assert any("report_status" in e for e in errs), f"Expected missing report_status: {errs}"
+    print("  ✓ PASS report missing lifecycle fields rejected")
 
     # Test 11: revoked PASS report with is_current=true rejected
     r = make_valid_report()
@@ -297,6 +306,11 @@ def make_valid_report():
             "GitHub Release asset availability is checked through GitHub API at verification time.",
         ],
         "errors": [],
+        "report_status": "current",
+        "is_current": True,
+        "historical_report_only": False,
+        "current_status_url": "https://www.trinityaccord.org/api/corrections-index.json",
+        "corrections_index_url": "https://www.trinityaccord.org/api/corrections-index.json",
     }
 
 

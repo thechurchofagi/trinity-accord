@@ -693,6 +693,12 @@ async function main() {
     full_dag_check_enabled: false,
     supported_manifest_schema: normalized.schema,
 
+    report_status: 'current',
+    is_current: true,
+    historical_report_only: false,
+    current_status_url: 'https://www.trinityaccord.org/api/corrections-index.json',
+    corrections_index_url: 'https://www.trinityaccord.org/api/corrections-index.json',
+
     required_checks: [
       'release manifest schema recognized',
       'manifest-declared asset set complete',

@@ -2279,6 +2279,13 @@ async function main() {
   const fullAudit = {
     schema: 'trinity-accord.full-evidence-chain-audit.v1',
     generated_at: new Date().toISOString(),
+
+    report_status: 'current',
+    is_current: true,
+    historical_report_only: false,
+    current_status_url: 'https://www.trinityaccord.org/api/corrections-index.json',
+    corrections_index_url: 'https://www.trinityaccord.org/api/corrections-index.json',
+
     overall_status: allRequiredChainsPass ? 'PASS' : 'FAIL',
     verification_scope: 'full_evidence_chain_required_links',
     elapsed_seconds: parseFloat(elapsed),

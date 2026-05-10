@@ -19,7 +19,10 @@
     "verification_status",
     "verifier_identity_or_role",
     "independence_class",
-    "accepted_by"
+    "accepted_by",
+    "record_lifecycle_status",
+    "is_current",
+    "historical_record_only"
   ],
   "properties": {
     "id": {
@@ -68,7 +71,7 @@
       "const": true
     },
     "counts_as_independent_attestation": {
-      "const": true
+      "type": "boolean"
     },
     "verification_status": {
       "enum": ["accepted", "formally_accepted", "accepted_independent_attestation"]
@@ -169,6 +172,87 @@
     },
     {
       "required": ["hash_if_available"]
+    }
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "record_lifecycle_status": {
+            "enum": ["current", "accepted_current"]
+          }
+        },
+        "required": ["record_lifecycle_status"]
+      },
+      "then": {
+        "required": [
+          "record_lifecycle_status",
+          "is_current",
+          "historical_record_only",
+          "counts_as_independent_attestation"
+        ],
+        "properties": {
+          "is_current": { "const": true },
+          "historical_record_only": { "const": false },
+          "counts_as_independent_attestation": { "const": true }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "record_lifecycle_status": {
+            "enum": ["revoked", "superseded", "invalidated", "withdrawn", "historical_only"]
+          }
+        },
+        "required": ["record_lifecycle_status"]
+      },
+      "then": {
+        "required": [
+          "record_lifecycle_status",
+          "is_current",
+          "historical_record_only",
+          "counts_as_independent_attestation"
+        ],
+        "properties": {
+          "is_current": { "const": false },
+          "historical_record_only": { "const": true },
+          "counts_as_independent_attestation": { "const": false }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "record_lifecycle_status": { "const": "revoked" }
+        },
+        "required": ["record_lifecycle_status"]
+      },
+      "then": {
+        "required": ["revoked_at", "revocation_reason"]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "record_lifecycle_status": { "const": "invalidated" }
+        },
+        "required": ["record_lifecycle_status"]
+      },
+      "then": {
+        "required": ["invalidated_at", "invalidation_reason"]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "record_lifecycle_status": { "const": "superseded" }
+        },
+        "required": ["record_lifecycle_status"]
+      },
+      "then": {
+        "required": ["superseded_at", "supersession_reason"]
+      }
     }
   ]
 }

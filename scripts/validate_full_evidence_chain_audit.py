@@ -61,45 +61,52 @@ def validate_report(report):
         if fullnode is True and mode != "fullnode":
             errors.append("fullnode_independent_verification=true requires mode=fullnode")
 
-    # TA-REDTEAM-2026-012: report lifecycle validation
+    # TA-REDTEAM-2026-012: report lifecycle validation (mandatory)
     report_status = report.get("report_status")
     is_current_val = report.get("is_current")
     historical_report_only = report.get("historical_report_only")
 
-    if report_status is not None or is_current_val is not None or historical_report_only is not None:
-        if report_status is not None and report_status not in VALID_REPORT_STATUSES:
-            errors.append(f"report_status must be one of {sorted(VALID_REPORT_STATUSES)}, got: {report_status}")
+    if report_status not in VALID_REPORT_STATUSES:
+        errors.append(f"report_status must be one of {sorted(VALID_REPORT_STATUSES)}, got: {report_status}")
 
-        # PASS reports must be current
-        if status == "PASS" and report_status is not None:
-            if report_status != "current":
-                errors.append(f"PASS report must have report_status='current', got: '{report_status}'")
-            if is_current_val is not None and is_current_val is not True:
-                errors.append("PASS report must have is_current=true")
+    # PASS reports must be current
+    if status == "PASS":
+        if report_status != "current":
+            errors.append(f"PASS report must have report_status='current', got: '{report_status}'")
+        if is_current_val is not True:
+            errors.append("PASS report must have is_current=true")
+        if historical_report_only is not False:
+            errors.append("PASS current report must have historical_report_only=false")
 
-        # Non-current reports
-        if report_status in NON_CURRENT_REPORT_STATUSES:
-            if is_current_val is not None and is_current_val is not False:
-                errors.append(f"non-current report_status '{report_status}' requires is_current=false")
-            if historical_report_only is not None and historical_report_only is not True:
-                errors.append(f"non-current report_status '{report_status}' requires historical_report_only=true")
+    # Non-current reports
+    if report_status in NON_CURRENT_REPORT_STATUSES:
+        if is_current_val is not False:
+            errors.append(f"non-current report_status '{report_status}' requires is_current=false")
+        if historical_report_only is not True:
+            errors.append(f"non-current report_status '{report_status}' requires historical_report_only=true")
 
-        # Revoked requires revocation_reason
-        if report_status == "revoked":
-            if not report.get("revocation_reason"):
-                errors.append("revoked report requires revocation_reason")
+    # URL check
+    for field in ["current_status_url", "corrections_index_url"]:
+        value = report.get(field)
+        if not isinstance(value, str) or not value.startswith("https://www.trinityaccord.org/api/corrections-index.json"):
+            errors.append(f"{field} must point to corrections-index.json")
 
-        # Superseded requires superseded_by + supersession_reason
-        if report_status == "superseded":
-            if report.get("superseded_by") is None and not report.get("supersession_reason"):
-                errors.append("superseded report requires superseded_by or supersession_reason")
-            if not report.get("supersession_reason"):
-                errors.append("superseded report requires supersession_reason")
+    # Revoked requires revocation_reason
+    if report_status == "revoked":
+        if not report.get("revocation_reason"):
+            errors.append("revoked report requires revocation_reason")
 
-        # Invalidated requires invalidation_reason
-        if report_status == "invalidated":
-            if not report.get("invalidation_reason"):
-                errors.append("invalidated report requires invalidation_reason")
+    # Superseded requires superseded_by + supersession_reason
+    if report_status == "superseded":
+        if report.get("superseded_by") is None and not report.get("supersession_reason"):
+            errors.append("superseded report requires superseded_by or supersession_reason")
+        if not report.get("supersession_reason"):
+            errors.append("superseded report requires supersession_reason")
+
+    # Invalidated requires invalidation_reason
+    if report_status == "invalidated":
+        if not report.get("invalidation_reason"):
+            errors.append("invalidated report requires invalidation_reason")
 
     return errors
 
@@ -131,6 +138,11 @@ def self_test():
             "ots_verification_mode": "ci-api",
             "fullnode_independent_verification": False,
         },
+        "report_status": "current",
+        "is_current": True,
+        "historical_report_only": False,
+        "current_status_url": "https://www.trinityaccord.org/api/corrections-index.json",
+        "corrections_index_url": "https://www.trinityaccord.org/api/corrections-index.json",
     }
     errs = validate_report(report)
     if not errs:
@@ -219,7 +231,15 @@ def self_test():
     else:
         print(f"  ✗ PASS current report accepted: {errs}"); failed += 1
 
-    # 11. revoked PASS report with is_current=true rejected
+    # 11. PASS report missing report_status (lifecycle required = rejected)
+    r11x = {k: v for k, v in report.items() if k != "report_status"}
+    errs = validate_report(r11x)
+    if any("report_status" in e for e in errs):
+        print("  ✓ PASS report missing lifecycle fields rejected"); passed += 1
+    else:
+        print(f"  ✗ PASS report missing lifecycle fields rejected: {errs}"); failed += 1
+
+    # 12. revoked PASS report with is_current=true rejected
     r11 = {**report, "report_status": "revoked", "is_current": True, "historical_report_only": True, "revocation_reason": "test"}
     errs = validate_report(r11)
     if any("PASS" in e and "current" in e for e in errs):
@@ -227,7 +247,7 @@ def self_test():
     else:
         print(f"  ✗ revoked PASS report with is_current=true rejected: {errs}"); failed += 1
 
-    # 12. revoked report missing revocation_reason
+    # 13. revoked report missing revocation_reason
     r12 = {**report, "overall_status": "FAIL", "errors": ["test"], "report_status": "revoked", "is_current": False, "historical_report_only": True}
     errs = validate_report(r12)
     if any("revocation_reason" in e for e in errs):

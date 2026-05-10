@@ -17,7 +17,12 @@
     "size_pass",
     "errors",
     "does_not_prove",
-    "limitations"
+    "limitations",
+    "report_status",
+    "is_current",
+    "historical_report_only",
+    "current_status_url",
+    "corrections_index_url"
   ],
   "properties": {
     "schema": { "enum": ["verify-release-report-v3"] },

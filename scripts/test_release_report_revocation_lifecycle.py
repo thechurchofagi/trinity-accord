@@ -38,9 +38,10 @@ def main():
     r["historical_report_only"] = False
     check("PASS current report accepted", r)
 
-    # 2. PASS report missing report_status (no lifecycle = OK)
+    # 2. PASS report missing report_status (lifecycle required = rejected)
     r = make_valid_report()
-    check("PASS report without lifecycle fields accepted", r)
+    del r["report_status"]
+    check("PASS report missing lifecycle fields rejected", r, "report_status")
 
     # 3. revoked PASS report with is_current=true rejected
     r = make_valid_report()
@@ -85,6 +86,18 @@ def main():
     r["is_current"] = False
     r["historical_report_only"] = False
     check("historical_report_only must be true for non-current", r, "historical_report_only")
+
+    # 8. Static source check: verify-release-assets.mjs contains lifecycle fields
+    generator_path = os.path.join(ROOT, "scripts", "verify-release-assets.mjs")
+    with open(generator_path, encoding="utf-8") as f:
+        generator_text = f.read()
+    for token in ["report_status", "is_current", "historical_report_only", "current_status_url", "corrections_index_url"]:
+        if token in generator_text:
+            print(f"  PASS: verify-release-assets.mjs contains {token}")
+            passed += 1
+        else:
+            print(f"  FAIL: verify-release-assets.mjs missing {token}")
+            failed += 1
 
     print(f"\n{'=' * 50}")
     print(f"test_release_report_revocation_lifecycle: {passed} passed, {failed} failed")
