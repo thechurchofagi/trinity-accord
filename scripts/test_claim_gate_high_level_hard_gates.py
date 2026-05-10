@@ -105,6 +105,9 @@ def test_complete_p8_can_claim_p8_and_v8():
             "level_evidence_type": "confidential_challenge",
             "witness_identity_or_role": "named forensic verifier",
             "report_id": "p8-report-001",
+            "signed_or_attributable_report": True,
+            "report_hash": "a" * 64,
+            "verifier_identity_or_role": "named forensic verifier",
             "confidential_challenge": {
                 "performed": True,
                 "raw_confidential_data_disclosed": False,
@@ -117,7 +120,10 @@ def test_complete_p8_can_claim_p8_and_v8():
     result = evaluate_obj(obj)
     assert result["allowed_component_levels"].get("physical_anchor") == "P8", \
         f"Expected P8, got {result['allowed_component_levels'].get('physical_anchor')}"
-    assert result["allowed_protocol_level"] == "V8"
+    # TA-REDTEAM-2026-001: V8 now requires core baseline (B2+D5+T3+C5) AND high path.
+    # P8 alone without baseline must NOT produce V8.
+    assert result["allowed_protocol_level"] != "V8", \
+        "P8 without baseline should not produce V8 protocol"
 
 
 def test_weak_t8_does_not_claim_t8_or_v8():
@@ -140,15 +146,19 @@ def test_complete_t8_can_claim_t8_and_v8():
             "nonpublic_boundary": True,
             "authorized": True,
             "method_class": "astronomical_ephemeris_solver",
-            "uncertainty": "±5 minutes",
+            "uncertainty_minutes": 5.0,
             "report_id": "t8-report-001",
+            "report_hash": "b" * 64,
+            "signed_or_attributable_report": True,
             "verifier_identity_or_role": "qualified astronomical reviewer"
         }]
     })
     result = evaluate_obj(obj)
     assert result["allowed_component_levels"].get("time_anchors") == "T8", \
         f"Expected T8, got {result['allowed_component_levels'].get('time_anchors')}"
-    assert result["allowed_protocol_level"] == "V8"
+    # TA-REDTEAM-2026-001: V8 now requires core baseline AND high path.
+    assert result["allowed_protocol_level"] != "V8", \
+        "T8 without baseline should not produce V8 protocol"
 
 
 def test_weak_p9_does_not_claim_p9_or_v8():
@@ -245,7 +255,10 @@ def test_p7_high_confidence_with_identity_and_report_can_claim_p7():
             "confidence": 0.91,
             "flaw_analysis_method": "feature comparison with documented rubric",
             "witness_identity_or_role": "qualified external forensic reviewer",
-            "report_id": "p7-report-001"
+            "report_id": "p7-report-001",
+            "signed_or_attributable_report": True,
+            "report_hash": "c" * 64,
+            "verifier_identity_or_role": "qualified external forensic reviewer"
         }]
     })
     result = evaluate_obj(obj)

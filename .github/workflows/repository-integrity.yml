@@ -121,6 +121,18 @@ jobs:
       - name: Test Claim Gate V4+/V5 boundaries
         run: python3 scripts/test_claim_gate_v4plus_v5_boundaries.py
 
+      - name: Test Claim Gate V8 requires core baseline
+        run: python3 scripts/test_claim_gate_v8_requires_core_baseline.py
+
+      - name: Test high component evidence does not raise protocol alone
+        run: python3 scripts/test_claim_gate_high_component_does_not_raise_protocol.py
+
+      - name: Test T8 uncertainty strict parsing
+        run: python3 scripts/test_claim_gate_t8_uncertainty_strict.py
+
+      - name: Test P7/P8 external report requirements
+        run: python3 scripts/test_claim_gate_p7_p8_external_report_requirements.py
+
       - name: Test NFT CAR backup fail-closed behavior
         run: python3 scripts/test_download_nft_cars_fail_closed.py
 

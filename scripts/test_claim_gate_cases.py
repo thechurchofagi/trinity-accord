@@ -605,21 +605,25 @@ def test_cg036():
 
 
 def test_cg037():
-    """P8 confidential no raw data — V8 via confidential challenge path"""
+    """P8 confidential no raw data — P8 component but NOT V8 without baseline (TA-REDTEAM-2026-001)"""
     physical = [{
         "level_evidence_type": "confidential_challenge",
         "witness_identity_or_role": "auditor",
         "report_id": "rpt-p8-001",
+        "signed_or_attributable_report": True,
+        "report_hash": "a" * 64,
+        "verifier_identity_or_role": "auditor",
         "confidential_challenge": {
             "performed": True,
             "raw_confidential_data_disclosed": False,
             "boundary": "no raw data disclosed",
             "package_hash": "a" * 64,
+            "verifier_identity_or_role": "auditor"
         },
     }]
     run_test("CG037", "P8 confidential no raw data",
              make_evidence_input(evidence_overrides={"physical_checks": physical}),
-             expected_protocol="V8")  # P8 confidential path now derives V8
+             expected_protocol="V1")  # TA-REDTEAM-2026-001: V8 requires core baseline + high path
 
 
 def test_cg038():

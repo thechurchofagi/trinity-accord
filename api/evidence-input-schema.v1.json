@@ -698,6 +698,10 @@
         },
         "method_class": {
           "type": "string"
+        },
+        "report_hash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
         }
       },
       "additionalProperties": false
@@ -752,6 +756,18 @@
         "report_hash": {
           "type": "string",
           "pattern": "^[a-f0-9]{64}$"
+        },
+        "signed_or_attributable_report": {
+          "type": "boolean"
+        },
+        "uncertainty_minutes": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "uncertainty_basis": {
+          "type": "string"
         }
       }
     }

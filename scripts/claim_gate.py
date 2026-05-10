@@ -47,6 +47,86 @@ FORBIDDEN_CLAIMS = [
 
 SOLICITED_FORBIDDEN = ["independent_attestation", "unsolicited_discovery", "institutional_attestation"]
 
+# --- Identity validation helpers (TA-REDTEAM-2026-001 fix) ---
+
+SELF_ASSERTED_IDENTITY_TERMS = {
+    "ai agent",
+    "agent",
+    "self",
+    "self-report",
+    "self reported",
+    "chatgpt",
+    "gpt",
+    "gpt-4",
+    "gpt-4 vision",
+    "claude",
+    "gemini",
+    "model",
+    "llm",
+    "automated agent",
+    "unknown",
+    "anonymous",
+}
+
+FORBIDDEN_UNCERTAINTY_TEXT = [
+    "about",
+    "approx",
+    "approximately",
+    "roughly",
+    "maybe",
+    "guess",
+    "intuition",
+    "by eye",
+    "not measured",
+    "probably",
+    "estimate",
+    "estimated",
+]
+
+
+def normalize_identity_text(value):
+    """Normalize identity text for comparison."""
+    return str(value or "").strip().lower()
+
+
+def is_self_asserted_identity(value):
+    """Check if identity value is self-asserted (AI/agent/unknown)."""
+    text = normalize_identity_text(value)
+    if not text:
+        return True
+    return any(term in text for term in SELF_ASSERTED_IDENTITY_TERMS)
+
+
+def has_valid_report_hash(value):
+    """Check if value is a valid SHA-256 hash."""
+    return isinstance(value, str) and SHA256_RE.match(value.lower()) is not None
+
+
+def has_external_verifier_identity(*values):
+    """Check if at least one identity value is a real external verifier (not self/AI)."""
+    for value in values:
+        text = normalize_identity_text(value)
+        if text and not is_self_asserted_identity(text):
+            return True
+    return False
+
+
+def parse_structured_uncertainty_minutes(check):
+    """Parse T8 uncertainty from structured numeric field only. Reject free text."""
+    value = check.get("uncertainty_minutes")
+    if isinstance(value, (int, float)) and not isinstance(value, bool):
+        return float(value)
+
+    # Backward compatibility: reject ambiguous text instead of parsing it.
+    text = str(check.get("uncertainty", "") or "").strip().lower()
+    if text:
+        if any(term in text for term in FORBIDDEN_UNCERTAINTY_TEXT):
+            return None
+        # Do not parse free-text uncertainty for T8.
+        return None
+
+    return None
+
 
 def is_structured_protocol_claim(claim):
     """Check if a claim is a structured protocol level claim."""
@@ -193,7 +273,12 @@ def max_by_order(levels, a, b):
 
 
 def has_p7_forensic_path(evidence):
-    """P7 requires valid confidence (>=0.80), model/tool, method, identity, and report anchor."""
+    """P7 requires valid confidence (>=0.80), model/tool, method, external attributable report,
+    valid report hash, and non-self-asserted verifier identity.
+
+    TA-REDTEAM-2026-001: Self-asserted AI identities (e.g. 'GPT-4 Vision', 'AI agent')
+    must not qualify for P7. A signed/attributable external report is required.
+    """
     for check in evidence.get("physical_checks", []):
         if check.get("level_evidence_type") != "ai_forensic":
             continue
@@ -209,25 +294,27 @@ def has_p7_forensic_path(evidence):
             str(check.get("flaw_analysis_method", "")).strip()
             or str(check.get("feature_match_method", "")).strip()
             or str(check.get("microscopy_comparison", "")).strip()
+            or str(check.get("method_class", "")).strip()
         )
 
-        has_report = bool(
-            check.get("signed_or_attributable_report") is True
-            or str(check.get("report_id", "")).strip()
+        has_report_anchor = bool(
+            str(check.get("report_id", "")).strip()
             or str(check.get("report_path", "")).strip()
         )
 
-        has_identity = bool(
-            str(check.get("witness_identity_or_role", "")).strip()
-            or str(check.get("verifier_identity_or_role", "")).strip()
+        has_external_identity = has_external_verifier_identity(
+            check.get("verifier_identity_or_role"),
+            check.get("witness_identity_or_role"),
         )
 
         if (
             str(check.get("model_or_tool", "")).strip()
             and has_valid_confidence
             and has_method
-            and has_report
-            and has_identity
+            and has_report_anchor
+            and check.get("signed_or_attributable_report") is True
+            and has_valid_report_hash(check.get("report_hash", ""))
+            and has_external_identity
         ):
             return True
 
@@ -235,13 +322,28 @@ def has_p7_forensic_path(evidence):
 
 
 def has_p8_confidential_path(evidence):
-    """P8 requires valid 64-hex package hash, non-empty boundary, verifier identity, and report id."""
+    """P8 requires valid 64-hex package hash, non-empty boundary, non-self-asserted verifier,
+    report anchor, signed/attributable report, and valid report hash.
+
+    TA-REDTEAM-2026-001: Self-asserted AI identities must not qualify for P8.
+    """
     for check in evidence.get("physical_checks", []):
         if check.get("level_evidence_type") != "confidential_challenge":
             continue
 
         conf = check.get("confidential_challenge", {})
         package_hash = conf.get("package_hash", "")
+
+        has_report_anchor = bool(
+            str(check.get("report_id", "")).strip()
+            or str(check.get("report_path", "")).strip()
+        )
+
+        has_external_identity = has_external_verifier_identity(
+            check.get("witness_identity_or_role"),
+            conf.get("verifier_identity_or_role"),
+            check.get("verifier_identity_or_role"),
+        )
 
         if (
             conf.get("performed") is True
@@ -250,14 +352,10 @@ def has_p8_confidential_path(evidence):
             and conf.get("raw_confidential_data_disclosed") is False
             and isinstance(package_hash, str)
             and SHA256_RE.match(package_hash.lower()) is not None
-            and (
-                str(check.get("witness_identity_or_role", "")).strip()
-                or str(conf.get("verifier_identity_or_role", "")).strip()
-            )
-            and (
-                str(check.get("report_id", "")).strip()
-                or str(check.get("report_path", "")).strip()
-            )
+            and has_external_identity
+            and has_report_anchor
+            and check.get("signed_or_attributable_report") is True
+            and has_valid_report_hash(check.get("report_hash", ""))
         ):
             return True
     return False
@@ -338,22 +436,27 @@ def parse_uncertainty_minutes(value):
 
 
 def has_t8_authorized_celestial_path(evidence):
-    """T8 requires allowlisted method class, parseable uncertainty <= 10 min, verifier, and report."""
+    """T8 requires allowlisted method class, STRUCTURED uncertainty <= 10 min,
+    non-self-asserted verifier, signed/attributable report, and valid report hash.
+
+    TA-REDTEAM-2026-001: Natural-language uncertainty (e.g. 'about 9 minutes by intuition')
+    must be rejected. Only structured numeric uncertainty_minutes is accepted.
+    """
     for check in evidence.get("time_anchor_checks", []):
         if check.get("anchor_type") != "star_moon_witness":
             continue
 
         method_class = str(check.get("method_class", "")).strip()
-        uncertainty_minutes = parse_uncertainty_minutes(check.get("uncertainty"))
+        uncertainty_minutes = parse_structured_uncertainty_minutes(check)
 
-        has_report = bool(
+        has_report_anchor = bool(
             str(check.get("report_id", "")).strip()
             or str(check.get("report_path", "")).strip()
         )
 
-        has_verifier = bool(
-            str(check.get("verifier_identity_or_role", "")).strip()
-            or str(check.get("witness_identity_or_role", "")).strip()
+        has_external_identity = has_external_verifier_identity(
+            check.get("verifier_identity_or_role"),
+            check.get("witness_identity_or_role"),
         )
 
         if (
@@ -362,8 +465,10 @@ def has_t8_authorized_celestial_path(evidence):
             and method_class in ALLOWED_T8_METHOD_CLASSES
             and uncertainty_minutes is not None
             and 0 <= uncertainty_minutes <= T8_MAX_UNCERTAINTY_MINUTES
-            and has_report
-            and has_verifier
+            and has_report_anchor
+            and has_external_identity
+            and check.get("signed_or_attributable_report") is True
+            and has_valid_report_hash(check.get("report_hash", ""))
         ):
             return True
 
@@ -756,12 +861,23 @@ def derive_protocol_level(evidence, requested_level, b_level, d_level, t_level, 
                 break
 
     # V8: forensic physical attestation paths
-    if (
+    # TA-REDTEAM-2026-001: V8 requires BOTH a high path (P7/P8/P9/T8) AND a core baseline.
+    # High component evidence alone must NOT raise protocol to V8.
+    has_v8_high_path = (
         has_p7_forensic_path(evidence)
         or has_p8_confidential_path(evidence)
         or has_p9_multi_party_path(evidence)
         or has_t8_authorized_celestial_path(evidence)
-    ):
+    )
+
+    has_v8_baseline = (
+        level_at_least(B_LEVELS, b_level, "B2")
+        and level_at_least(D_LEVELS, d_level, "D5")
+        and level_at_least(T_LEVELS, t_level, "T3")
+        and level_at_least(C_LEVELS, c_level, "C5")
+    )
+
+    if has_v8_high_path and has_v8_baseline:
         if level_index(PROTOCOL_LEVELS, "V8") > level_index(PROTOCOL_LEVELS, max_allowed):
             max_allowed = "V8"
 
