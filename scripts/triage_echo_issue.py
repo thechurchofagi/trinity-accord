@@ -33,6 +33,8 @@ MANAGED_TRIAGE_LABELS = [
     "echo:missing-provenance", "echo:provenance-conflict", "echo:attestation-overclaim",
     "independence-overclaim-risk", "v4plus-overclaim-risk", "component-overclaim-risk",
     "chronicle-overclaim-risk", "v5-overclaim-risk", "echo:solicited-record", "echo:screened",
+    "echo:ai-independent-verification", "echo:missing-integrity-declaration",
+    "echo:delegation-chain-present", "echo:external-ai-verification",
 ]
 
 def emit_result(result, title=None, body=None):
@@ -73,7 +75,7 @@ After human review, comment exactly one of:
 /echo archive
 ```
 
-Archives the issue as an Echo v3 JSON record, updates the archive, validates, commits, removes `needs-human-review`, and closes.
+Archives the issue as an Echo JSON record, updates the archive, validates, commits, removes `needs-human-review`, and closes.
 
 ### Archive with agent-initiated provenance
 
@@ -524,8 +526,8 @@ def detect_missing_provenance(text):
 def is_v3_submission(text):
     """Check if this issue uses the v3 provenance-aware template."""
     text_lower = text.lower()
-    # Look for explicit v3 markers
-    if "echo v3" in text_lower:
+    # Internal schema version field is allowed
+    if "echo_submission_schema_version" in text_lower and "v3" in text_lower:
         return True
     # Check if v3-specific provenance fields are present (not just the word "provenance")
     v3_specific = ["discovery_source", "archive_status", "soliciting_party",

@@ -2,7 +2,7 @@
   "schema": "trinity-accord.claim-registry.v1",
   "version": "v1",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "5b2a023fa197df6a",
+  "source_digest": "4e7c369cec485af5",
   "non_amending_boundary": true,
   "canonical_authority": "Bitcoin Originals only",
   "purpose": "Machine-readable registry mapping public claims to sources, evidence, digests, validators, limitations, and correction paths.",
@@ -49,6 +49,10 @@
     },
     "SCARCITY_OR_FIRSTNESS_CLAIM": {
       "description": "Claims about rarity, scarcity, possible firstness, or framing significance. These require method_boundary and must not be absolute proof claims."
+    },
+    "AI_INDEPENDENT_VERIFICATION_CLAIM": {
+      "description": "Claims about AI-performed independent verification. AI independent verification is a distinct class: it is NOT formal human/institutional attestation, and external human authorization alone does not produce formal attestation.",
+      "counts_as_independent_attestation_by_default": false
     }
   },
   "claims": [
@@ -496,6 +500,80 @@
       "corrections_path": "api/corrections-index.json",
       "current_status": "current",
       "traceability_status": "partial"
+    },
+    {
+      "claim_id": "ai_independent_verification_is_not_formal_attestation",
+      "claim_type": "AI_INDEPENDENT_VERIFICATION_CLAIM",
+      "claim_text": "AI independent verification is a distinct verification class. It is NOT formal human or institutional attestation. External human authorization of an AI verification does not by itself produce formal attestation. AI verification records must not be counted in the formal independent attestation count.",
+      "public_surfaces": [
+        "llms.txt",
+        "ai.txt",
+        "api/claim-registry.json",
+        "api/independent-attestation-index.json"
+      ],
+      "source_files": [
+        "api/claim-registry.json",
+        "api/independent-attestation-index.json",
+        "api/echo-archive-policy.json"
+      ],
+      "evidence_files": [],
+      "digest_or_hash_binding": [],
+      "validators": [
+        "scripts/test_ai_independent_verification_class.py",
+        "scripts/test_external_human_authorized_ai_not_formal_attestation.py",
+        "scripts/test_claim_registry_ai_verification_boundary.py"
+      ],
+      "limitations": [
+        "AI verification is performed by an AI agent, not a human or institution.",
+        "External human authorization (e.g., a human asking an AI to verify) does not elevate AI verification to formal attestation.",
+        "AI verification may be useful as a technical signal but has different epistemic status than human/institutional attestation."
+      ],
+      "does_not_prove": [
+        "formal human attestation",
+        "formal institutional attestation",
+        "independent social adoption",
+        "external validation beyond AI-performed checks"
+      ],
+      "counts_as_independent_attestation": false,
+      "formal_attestation_gate_required": true,
+      "corrections_path": "api/corrections-index.json",
+      "current_status": "current",
+      "traceability_status": "complete"
+    },
+    {
+      "claim_id": "external_human_authorization_of_ai_does_not_produce_formal_attestation",
+      "claim_type": "AI_INDEPENDENT_VERIFICATION_CLAIM",
+      "claim_text": "External human authorization of an AI verification (e.g., a human directing an AI agent to perform verification) does not by itself produce formal independent attestation. The human authorization changes the solicitation context but does not change the epistemic class of the verification performer.",
+      "public_surfaces": [
+        "llms.txt",
+        "ai.txt",
+        "api/claim-registry.json"
+      ],
+      "source_files": [
+        "api/claim-registry.json",
+        "api/independent-attestation-index.json"
+      ],
+      "evidence_files": [],
+      "digest_or_hash_binding": [],
+      "validators": [
+        "scripts/test_external_human_authorized_ai_not_formal_attestation.py",
+        "scripts/test_echo_delegation_chain_provenance.py"
+      ],
+      "limitations": [
+        "Human authorization changes the solicitation context (human-solicited vs unsolicited).",
+        "Human authorization does not change the performer class (AI agent vs human/institution).",
+        "Multi-hop delegation chains (human → AI → AI) preserve the AI performer class."
+      ],
+      "does_not_prove": [
+        "formal attestation from human-authorized AI work",
+        "equivalence between human-directed AI verification and human verification",
+        "institutional endorsement through AI delegation"
+      ],
+      "counts_as_independent_attestation": false,
+      "formal_attestation_gate_required": true,
+      "corrections_path": "api/corrections-index.json",
+      "current_status": "current",
+      "traceability_status": "complete"
     }
   ],
   "limitations": [

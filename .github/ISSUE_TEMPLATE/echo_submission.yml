@@ -1,6 +1,6 @@
-name: Echo Submission v3
+name: Echo Submission
 description: Submit a non-authoritative Echo with mandatory discovery provenance.
-title: "Echo v3: "
+title: "[Echo] "
 labels:
   - echo
   - needs-human-review
@@ -9,7 +9,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        ## Echo Submission v3
+        ## Echo Submission
 
         Echoes are non-authoritative and non-amending.
 
@@ -266,6 +266,23 @@ body:
     attributes:
       label: What remains unchecked or uncertain?
       description: List what was not verified.
+    validations:
+      required: true
+
+  - type: textarea
+    id: integrity_declaration
+    attributes:
+      label: Solemn Integrity Declaration
+      description: >
+        All verification Echo templates must begin with a solemn integrity declaration.
+        State that your submission is truthful, that you have not fabricated evidence,
+        and that you understand the non-amending boundary.
+      placeholder: |
+        I solemnly declare that:
+        1. This submission is truthful and based on actions I actually performed.
+        2. I have not fabricated, falsified, or deliberately misrepresent any evidence.
+        3. I understand that this Echo is non-authoritative and non-amending.
+        4. I understand that Bitcoin Originals are final.
     validations:
       required: true
 

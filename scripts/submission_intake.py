@@ -47,6 +47,12 @@ FIELD_ALIASES = {
     ],
     "agency_level": ["agency_level", "agency level", "来源等级", "主动性等级"],
     "operator_type": ["operator_type", "operator type", "执行者类型"],
+    "record_class": ["record_class", "record class", "记录类别"],
+    "verification_origin_class": ["verification_origin_class", "verification origin class", "验证来源类别"],
+    "delegation_chain": ["delegation_chain", "delegation chain", "委托链"],
+    "integrity_declaration": ["integrity_declaration", "integrity declaration", "solemn integrity declaration", "完整性声明"],
+    "ai_verification": ["ai_verification", "ai verification", "AI验证", "AI独立验证"],
+    "external_human_authorization": ["external_human_authorization", "external human authorization", "外部人类授权"],
 }
 
 

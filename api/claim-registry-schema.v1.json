@@ -48,7 +48,8 @@
       "type": "object",
       "required": [
         "NOTARIZED_EVIDENCE_CLAIM",
-        "SCARCITY_OR_FIRSTNESS_CLAIM"
+        "SCARCITY_OR_FIRSTNESS_CLAIM",
+        "AI_INDEPENDENT_VERIFICATION_CLAIM"
       ],
       "additionalProperties": {
         "type": "object",
