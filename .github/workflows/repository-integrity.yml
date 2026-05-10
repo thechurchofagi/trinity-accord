@@ -181,6 +181,30 @@ jobs:
       - name: Test NFT CAR size limits
         run: python3 scripts/test_download_nft_cars_size_limits.py
 
+      - name: Test release manifest schema compatibility
+        run: python3 scripts/test_verify_release_manifest_schema_compatibility.py
+
+      - name: Test release completeness gates
+        run: python3 scripts/test_verify_release_completeness_gates.py
+
+      - name: Test release TAR duplicate fail-closed
+        run: python3 scripts/test_verify_release_tar_duplicate_fail_closed.py
+
+      - name: Test release verification scope boundary
+        run: python3 scripts/test_verify_release_scope_boundary.py
+
+      - name: Test release verifier resource limits
+        run: python3 scripts/test_verify_release_resource_limits.py
+
+      - name: Test release report invariants
+        run: python3 scripts/test_verify_release_report_invariants.py
+
+      - name: Test CAR parser fail-closed behavior
+        run: python3 scripts/test_verify_car_parser_fail_closed.py
+
+      - name: Validate verify release report self-test
+        run: python3 scripts/validate_verify_release_report.py --self-test
+
       - name: Test verification rule consistency matrix
         run: python3 scripts/test_verification_rule_consistency_matrix.py
 

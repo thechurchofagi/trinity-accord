@@ -1,14 +1,16 @@
 #!/usr/bin/env node
 /**
- * verify-release-assets.mjs  (v2 — concurrent, optional CID check)
+ * verify-release-assets.mjs  (v3 — strict, manifest-driven, fail-closed)
  *
  * Downloads ALL NFT .tar assets from a GitHub Release and re-verifies:
- *   1. SHA-256 of every CAR inside the tar == RELEASE-MANIFEST.json expected_sha256
- *   2. Size of every CAR               == expected_size
- *   3. Root CID (metadata=strict, media=audit) — ONLY when --cid-check is passed
- *
- * This is a SEPARATE script from backup-nft-arweave-mirror.mjs.
- * Run it independently to verify an existing release without re-uploading.
+ *   1. Release manifest schema recognized
+ *   2. ALL manifest-declared NFT assets present (complete set proof)
+ *   3. No extra/duplicate release assets
+ *   4. TAR entries strict: no duplicates, no path traversal, no truncation
+ *   5. SHA-256 of every CAR inside the tar == expected_sha256
+ *   6. Size of every CAR == expected_size
+ *   7. Root CID (metadata=strict, media=audit) — ONLY when --cid-check is passed
+ *   8. Report includes verification_scope, does_not_prove, limitations
  *
  * Usage:
  *   GITHUB_TOKEN=xxx node scripts/verify-release-assets.mjs \
@@ -20,13 +22,37 @@
 import fs from 'fs';
 import path from 'path';
 import crypto from 'crypto';
+import { fileURLToPath } from 'url';
 
 // ─── Config ────────────────────────────────────────────────────────────────
+
+function parseBoundedInt(value, label, min, max) {
+  const n = Number(value);
+  if (!Number.isInteger(n) || n < min || n > max) {
+    throw new Error(`Invalid ${label}: ${value}. Must be integer ${min}-${max}.`);
+  }
+  return n;
+}
+
+function parseBoundedIntEnv(name, fallback, min, max) {
+  const raw = process.env[name] || String(fallback);
+  return parseBoundedInt(raw, name, min, max);
+}
 
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 const REPO = process.env.REPO || 'thechurchofagi/trinity-accord';
 const MAX_RETRIES = 3;
-const VERIFY_CONCURRENCY = Number(process.env.VERIFY_CONCURRENCY || 8);
+const VERIFY_CONCURRENCY = parseBoundedIntEnv('VERIFY_CONCURRENCY', 8, 1, 25);
+
+// ─── Resource limits ──────────────────────────────────────────────────────
+
+const MAX_RELEASE_ASSET_BYTES = parseBoundedIntEnv(
+  'MAX_RELEASE_ASSET_BYTES', 1024 * 1024 * 1024, 1, 10 * 1024 * 1024 * 1024
+);
+const MAX_TOTAL_RELEASE_BYTES = parseBoundedIntEnv(
+  'MAX_TOTAL_RELEASE_BYTES', 20 * 1024 * 1024 * 1024, 1, 200 * 1024 * 1024 * 1024
+);
+let totalDownloadedBytes = 0;
 
 // ─── Helpers ───────────────────────────────────────────────────────────────
 
@@ -55,12 +81,171 @@ async function runConcurrent(tasks, limit) {
   return results;
 }
 
-// ─── CAR parsing (root CID extraction only) ────────────────────────────────
+// ─── Manifest schema normalization ─────────────────────────────────────────
+
+function normalizeReleaseManifest(manifest) {
+  if (!manifest || typeof manifest !== 'object') {
+    throw new Error('Release manifest must be a JSON object');
+  }
+
+  // v1 explicit schema
+  if (manifest.schema === 'trinity-release-manifest-v1') {
+    return normalizeTrinityReleaseManifestV1(manifest);
+  }
+
+  // Legacy: has per_nft_assets array
+  if (Array.isArray(manifest.per_nft_assets)) {
+    return normalizeLegacyPerNftManifest(manifest);
+  }
+
+  throw new Error(`Unsupported release manifest schema: ${manifest.schema || 'missing'}`);
+}
+
+function normalizeTrinityReleaseManifestV1(m) {
+  if (!Array.isArray(m.per_nft_assets)) {
+    throw new Error('trinity-release-manifest-v1 requires per_nft_assets array');
+  }
+  const expected = m.per_nft_assets.map(entry => {
+    if (!entry.nft_asset_name) throw new Error('Missing nft_asset_name in manifest entry');
+    return {
+      name: entry.nft_asset_name,
+      contract: entry.contract || null,
+      token_id: entry.token_id || null,
+      files: (entry.files || []).map(f => ({
+        role: f.role,
+        expected_path: f.expected_path || `nft/${f.role}.car`,
+        expected_sha256: (f.expected_sha256 || '').toLowerCase(),
+        expected_size: f.expected_size,
+        expected_root_cid: f.expected_root_cid || null,
+        cid_required: f.cid_check_required || false,
+      })),
+    };
+  });
+
+  return {
+    schema: m.schema,
+    verification_basis: m.verification_basis || 'expected_sha256_and_expected_size',
+    expected_nft_assets: expected,
+    expected_nft_count: m.actual_nfts ?? expected.length,
+    expected_car_count: m.total_car_files ?? expected.reduce((s, e) => s + e.files.length, 0),
+    does_not_prove: m.does_not_prove || [],
+  };
+}
+
+function normalizeLegacyPerNftManifest(m) {
+  const expected = m.per_nft_assets.map(entry => {
+    if (!entry.nft_asset_name) throw new Error('Missing nft_asset_name in legacy manifest');
+    return {
+      name: entry.nft_asset_name,
+      contract: null,
+      token_id: null,
+      files: (entry.files || []).map(f => ({
+        role: f.role,
+        expected_path: `nft/${f.role}.car`,
+        expected_sha256: (f.expected_sha256 || '').toLowerCase(),
+        expected_size: f.expected_size,
+        expected_root_cid: f.expected_root_cid || null,
+        cid_required: false,
+      })),
+    };
+  });
+
+  return {
+    schema: 'legacy-per-nft-assets',
+    verification_basis: 'expected_sha256_and_expected_size',
+    expected_nft_assets: expected,
+    expected_nft_count: m.actual_nfts ?? expected.length,
+    expected_car_count: m.total_car_files ?? expected.reduce((s, e) => s + e.files.length, 0),
+    does_not_prove: [],
+  };
+}
+
+// ─── Strict TAR extraction ─────────────────────────────────────────────────
+
+function readTarString(header, start, len) {
+  let end = start;
+  while (end < start + len && header[end] !== 0) end++;
+  return header.slice(start, end).toString('utf-8');
+}
+
+function parseTarOctal(header, start, len) {
+  const s = readTarString(header, start, len).trim();
+  if (!/^[0-7]*$/.test(s)) throw new Error(`Invalid TAR octal: "${s}"`);
+  return s ? parseInt(s, 8) : 0;
+}
+
+function extractFilesFromTarStrict(buf) {
+  const files = [];
+  const seen = new Set();
+  const errors = [];
+  let pos = 0;
+
+  while (pos + 512 <= buf.length) {
+    const header = buf.slice(pos, pos + 512);
+    if (header.every(b => b === 0)) break;
+
+    const name = readTarString(header, 0, 100);
+    const prefix = readTarString(header, 345, 155);
+    const fullName = prefix ? `${prefix}/${name}` : name;
+    const typeflag = String.fromCharCode(header[156] || 0) || '0';
+
+    // Path safety
+    if (!fullName || fullName.includes('\0')) {
+      errors.push(`Invalid TAR name at offset ${pos}`);
+      break;
+    }
+    if (fullName.startsWith('/') || fullName.includes('..')) {
+      errors.push(`Unsafe TAR path: ${fullName}`);
+      break;
+    }
+
+    // Duplicate detection
+    if (seen.has(fullName)) {
+      errors.push(`Duplicate TAR entry: ${fullName}`);
+    }
+    seen.add(fullName);
+
+    // Only support regular files
+    if (!['0', '\0'].includes(typeflag)) {
+      errors.push(`Unsupported TAR entry type '${typeflag}' for ${fullName}`);
+      break;
+    }
+
+    const size = parseTarOctal(header, 124, 12);
+    pos += 512;
+
+    if (!Number.isSafeInteger(size) || size < 0) {
+      errors.push(`Invalid TAR size for ${fullName}`);
+      break;
+    }
+
+    if (pos + size > buf.length) {
+      errors.push(`Truncated TAR payload for ${fullName}: need ${size} bytes at offset ${pos}, only ${buf.length - pos} available`);
+      break;
+    }
+
+    if (size > 0 && errors.length === 0) {
+      files.push({ name: fullName, data: buf.slice(pos, pos + size) });
+    }
+
+    pos += Math.ceil(size / 512) * 512;
+  }
+
+  if (errors.length > 0) {
+    throw new Error(`Invalid TAR: ${errors.join('; ')}`);
+  }
+
+  return files;
+}
+
+// ─── CAR parsing (root CID extraction) ─────────────────────────────────────
 
 function parseCarHeader(data) {
   let pos = 0, shift = 0, headerLen = 0;
-  while (true) {
-    const b = data[pos]; headerLen |= (b & 0x7f) << shift; pos++; shift += 7;
+  for (let i = 0; i < 10; i++) {
+    if (pos >= data.length) throw new Error('Truncated CAR header varint');
+    const b = data[pos]; headerLen += (b & 0x7f) * (2 ** shift); pos++; shift += 7;
+    if (!Number.isSafeInteger(headerLen)) throw new Error('Unsafe CAR header varint');
     if (b < 0x80) break;
   }
   return pos + headerLen;
@@ -103,32 +288,6 @@ function extractCarRootCid(carData) {
   throw new Error('No CBOR tag(42) found in CAR header');
 }
 
-// ─── Tar extraction ────────────────────────────────────────────────────────
-
-function extractFilesFromTar(buf) {
-  const files = [];
-  let pos = 0;
-  while (pos < buf.length - 1024) {
-    const header = buf.slice(pos, pos + 512);
-    if (header.every(b => b === 0)) break;
-    let nameEnd = 0;
-    while (nameEnd < 100 && header[nameEnd] !== 0) nameEnd++;
-    const name = header.slice(0, nameEnd).toString('utf-8');
-    let sizeStr = '';
-    for (let i = 124; i < 136; i++) {
-      if (header[i] === 0 || header[i] === 32) break;
-      sizeStr += String.fromCharCode(header[i]);
-    }
-    const size = parseInt(sizeStr, 8) || 0;
-    pos += 512;
-    if (size > 0) {
-      files.push({ name, data: buf.slice(pos, pos + size) });
-      pos += Math.ceil(size / 512) * 512;
-    }
-  }
-  return files;
-}
-
 // ─── GitHub helpers ────────────────────────────────────────────────────────
 
 function ghHeaders(extra = {}) {
@@ -167,7 +326,29 @@ async function downloadAsset(assetId, retries = MAX_RETRIES) {
       `https://api.github.com/repos/${REPO}/releases/assets/${assetId}`,
       { headers: ghHeaders({ Accept: 'application/octet-stream' }) }
     );
-    if (res.ok) return Buffer.from(await res.arrayBuffer());
+    if (res.ok) {
+      // Content-Length cap
+      const len = Number(res.headers.get('content-length') || 0);
+      if (len && len > MAX_RELEASE_ASSET_BYTES) {
+        throw new Error(`Release asset too large by Content-Length: ${len} > ${MAX_RELEASE_ASSET_BYTES}`);
+      }
+
+      const ab = await res.arrayBuffer();
+      const buf = Buffer.from(ab);
+
+      // Actual size cap
+      if (buf.length > MAX_RELEASE_ASSET_BYTES) {
+        throw new Error(`Release asset too large: ${buf.length} > ${MAX_RELEASE_ASSET_BYTES}`);
+      }
+
+      // Total bytes cap
+      totalDownloadedBytes += buf.length;
+      if (totalDownloadedBytes > MAX_TOTAL_RELEASE_BYTES) {
+        throw new Error(`Total release download bytes exceed cap: ${totalDownloadedBytes} > ${MAX_TOTAL_RELEASE_BYTES}`);
+      }
+
+      return buf;
+    }
     if ((res.status >= 500 || res.status === 403 || res.status === 429) && attempt < retries) {
       await sleep(5000 * (attempt + 1));
       continue;
@@ -188,15 +369,18 @@ async function main() {
   if (!GITHUB_TOKEN) { err('❌ GITHUB_TOKEN required'); process.exit(1); }
 
   log('═══════════════════════════════════════════════════════════');
-  log('  Release Asset Re-Verification (v2 — concurrent)');
+  log('  Release Asset Re-Verification (v3 — strict, manifest-driven)');
   log('═══════════════════════════════════════════════════════════');
   log(`  Repo       : ${REPO}`);
   log(`  Release    : ${releaseTag}`);
   log(`  CID check  : ${cidCheck ? 'enabled (metadata=strict, media=audit)' : 'disabled'}`);
   log(`  Concurrency: ${concurrency}`);
+  log(`  Max asset  : ${(MAX_RELEASE_ASSET_BYTES / 1024 / 1024).toFixed(0)}MB`);
+  log(`  Max total  : ${(MAX_TOTAL_RELEASE_BYTES / 1024 / 1024 / 1024).toFixed(1)}GB`);
   log('');
 
-  // 1. Get release + manifest
+  // ── 1. Get release + manifest ────────────────────────────────────────
+
   log('📦 Fetching release...');
   const release = await getReleaseByTag(releaseTag);
   log(`  Release ID: ${release.id}`);
@@ -209,146 +393,330 @@ async function main() {
 
   log('  Downloading RELEASE-MANIFEST.json...');
   const manifestBuf = await downloadAsset(manifestAsset.id);
-  const manifest = JSON.parse(manifestBuf.toString('utf-8'));
-  log(`  Manifest: ${manifest.actual_nfts} NFTs, ${manifest.total_car_files} CARs`);
+  let rawManifest;
+  try {
+    rawManifest = JSON.parse(manifestBuf.toString('utf-8'));
+  } catch (e) {
+    err(`❌ RELEASE-MANIFEST.json is not valid JSON: ${e.message}`);
+    process.exit(1);
+  }
+
+  // ── 2. Normalize manifest (schema gate) ──────────────────────────────
+
+  let normalized;
+  try {
+    normalized = normalizeReleaseManifest(rawManifest);
+  } catch (e) {
+    err(`❌ Release manifest schema error: ${e.message}`);
+    process.exit(1);
+  }
+
+  log(`  Manifest schema: ${normalized.schema}`);
+  log(`  Expected NFTs  : ${normalized.expected_nft_count}`);
+  log(`  Expected CARs  : ${normalized.expected_car_count}`);
   log('');
 
-  // 2. Build verification tasks
-  log('🔍 Re-verifying all NFT assets...');
-  const nftAssets = allAssets.filter(a => a.name.startsWith('nft-'));
+  // ── 3. Build lookup maps ─────────────────────────────────────────────
+
+  const releaseAssetByName = new Map();
+  const duplicateAssets = [];
+  for (const asset of allAssets) {
+    if (releaseAssetByName.has(asset.name)) {
+      duplicateAssets.push(asset.name);
+    }
+    releaseAssetByName.set(asset.name, asset);
+  }
+
+  const expectedAssets = normalized.expected_nft_assets;
+  const expectedNames = new Set(expectedAssets.map(x => x.name));
+
+  // ── 4. Completeness checks ───────────────────────────────────────────
+
+  const errors = [];
+  let fail = 0;
+
+  // Duplicate release assets
+  for (const dup of duplicateAssets) {
+    errors.push({ type: 'duplicate_release_asset', asset: dup });
+    fail++;
+  }
+
+  // Missing expected assets
+  const missingAssets = [];
+  for (const expected of expectedAssets) {
+    if (!releaseAssetByName.has(expected.name)) {
+      errors.push({ type: 'missing_release_asset', asset: expected.name });
+      missingAssets.push(expected.name);
+      fail++;
+    }
+  }
+
+  // Extra unexpected nft-* assets
+  const extraAssets = [];
+  for (const asset of allAssets) {
+    if (asset.name.startsWith('nft-') && !expectedNames.has(asset.name)) {
+      errors.push({ type: 'unexpected_release_asset', asset: asset.name });
+      extraAssets.push(asset.name);
+      fail++;
+    }
+  }
+
+  // Manifest count invariants
+  if (expectedAssets.length !== normalized.expected_nft_count) {
+    errors.push({ type: 'manifest_count_mismatch', field: 'actual_nfts', expected: normalized.expected_nft_count, actual: expectedAssets.length });
+    fail++;
+  }
+
+  log('🔍 Completeness checks...');
+  log(`  Expected assets : ${expectedAssets.length}`);
+  log(`  Missing assets  : ${missingAssets.length}`);
+  log(`  Extra assets    : ${extraAssets.length}`);
+  log(`  Duplicates      : ${duplicateAssets.length}`);
+  log('');
+
+  // ── 5. Verify each expected asset ────────────────────────────────────
+
+  log('🔍 Re-verifying all expected NFT assets...');
 
   let totalChecks = 0;
   let sha256Pass = 0, sizePass = 0;
   let metaCidPass = 0, metaCidFail = 0, mediaCidPass = 0, mediaCidAudit = 0;
-  const errors = [];
-  let pass = 0, fail = 0;
+  let pass = 0;
 
-  const tasks = nftAssets.map(asset => async () => {
-    const manifestEntry = manifest.per_nft_assets?.find(m => m.nft_asset_name === asset.name);
-    if (!manifestEntry) {
-      errors.push({ asset: asset.name, error: 'not in manifest' });
-      fail++;
-      return;
-    }
-
-    try {
-      const tarBuf = await downloadAsset(asset.id);
-      const tarFiles = extractFilesFromTar(tarBuf);
-
+  const tasks = expectedAssets
+    .filter(expected => releaseAssetByName.has(expected.name))
+    .map(expected => async () => {
+      const asset = releaseAssetByName.get(expected.name);
       let assetOk = true;
-      for (const f of manifestEntry.files) {
-        totalChecks++;
-        const carName = `${f.role}.car`;
-        const tarEntry = tarFiles.find(t => t.name === `nft/${carName}`);
-        if (!tarEntry) {
-          errors.push({ asset: asset.name, role: f.role, error: 'missing in tar' });
-          assetOk = false;
-          continue;
+
+      try {
+        const tarBuf = await downloadAsset(asset.id);
+
+        // Strict TAR extraction
+        let tarFiles;
+        try {
+          tarFiles = extractFilesFromTarStrict(tarBuf);
+        } catch (e) {
+          errors.push({ asset: asset.name, type: 'tar_parse_error', error: e.message });
+          fail++;
+          return;
         }
 
-        // SHA-256
-        const hash = sha256hex(tarEntry.data);
-        if (hash !== f.expected_sha256) {
-          errors.push({ asset: asset.name, role: f.role, type: 'sha256_mismatch', expected: f.expected_sha256, actual: hash });
-          assetOk = false;
-        } else {
-          sha256Pass++;
+        // Build TAR file lookup
+        const tarFilesByName = new Map();
+        for (const f of tarFiles) {
+          if (tarFilesByName.has(f.name)) {
+            errors.push({ asset: asset.name, type: 'duplicate_tar_entry', path: f.name });
+            assetOk = false;
+          }
+          tarFilesByName.set(f.name, f);
         }
 
-        // Size
-        if (tarEntry.data.length !== f.expected_size) {
-          errors.push({ asset: asset.name, role: f.role, type: 'size_mismatch', expected: f.expected_size, actual: tarEntry.data.length });
-          assetOk = false;
-        } else {
-          sizePass++;
+        // Check for unexpected TAR entries
+        const expectedPaths = new Set(expected.files.map(f => f.expected_path));
+        for (const tarEntry of tarFiles) {
+          if (!expectedPaths.has(tarEntry.name)) {
+            errors.push({ asset: asset.name, type: 'unexpected_tar_entry', path: tarEntry.name });
+            assetOk = false;
+          }
         }
 
-        // Root CID (only when --cid-check enabled)
-        if (cidCheck) {
-          try {
-            const rootCid = extractCarRootCid(tarEntry.data);
-            if (f.role === 'metadata') {
-              if (rootCid !== f.expected_root_cid) {
-                errors.push({ asset: asset.name, role: f.role, type: 'cid_mismatch', expected: f.expected_root_cid, actual: rootCid });
+        // Verify each expected file
+        for (const f of expected.files) {
+          totalChecks++;
+          const tarEntry = tarFilesByName.get(f.expected_path);
+          if (!tarEntry) {
+            errors.push({ asset: asset.name, role: f.role, type: 'missing_tar_entry', expected_path: f.expected_path });
+            assetOk = false;
+            continue;
+          }
+
+          // SHA-256
+          const hash = sha256hex(tarEntry.data);
+          if (hash !== f.expected_sha256) {
+            errors.push({ asset: asset.name, role: f.role, type: 'sha256_mismatch', expected: f.expected_sha256, actual: hash });
+            assetOk = false;
+          } else {
+            sha256Pass++;
+          }
+
+          // Size
+          if (tarEntry.data.length !== f.expected_size) {
+            errors.push({ asset: asset.name, role: f.role, type: 'size_mismatch', expected: f.expected_size, actual: tarEntry.data.length });
+            assetOk = false;
+          } else {
+            sizePass++;
+          }
+
+          // Root CID (only when --cid-check enabled)
+          if (cidCheck) {
+            try {
+              const rootCid = extractCarRootCid(tarEntry.data);
+              if (f.role === 'metadata') {
+                if (rootCid !== f.expected_root_cid) {
+                  errors.push({ asset: asset.name, role: f.role, type: 'cid_mismatch', expected: f.expected_root_cid, actual: rootCid });
+                  metaCidFail++;
+                  assetOk = false;
+                } else {
+                  metaCidPass++;
+                }
+              } else {
+                // media: audit only
+                if (rootCid === f.expected_root_cid) mediaCidPass++;
+                else mediaCidAudit++;
+              }
+            } catch (e) {
+              if (f.role === 'metadata') {
+                errors.push({ asset: asset.name, role: f.role, type: 'cid_extract_failed', error: e.message });
                 metaCidFail++;
                 assetOk = false;
               } else {
-                metaCidPass++;
+                mediaCidAudit++;
               }
-            } else {
-              // media: audit only
-              if (rootCid === f.expected_root_cid) mediaCidPass++;
-              else mediaCidAudit++;
-            }
-          } catch (e) {
-            if (f.role === 'metadata') {
-              errors.push({ asset: asset.name, role: f.role, type: 'cid_extract_failed', error: e.message });
-              metaCidFail++;
-              assetOk = false;
-            } else {
-              mediaCidAudit++;
             }
           }
         }
+
+        if (assetOk) pass++;
+
+      } catch (e) {
+        errors.push({ asset: asset.name, error: e.message });
       }
-
-      if (assetOk) pass++;
-      else fail++;
-
-      if ((pass + fail) % 20 === 0) process.stdout.write(`\r   ${pass + fail}/${nftAssets.length}`);
-    } catch (e) {
-      errors.push({ asset: asset.name, error: e.message });
-      fail++;
-    }
-  });
+    });
 
   await runConcurrent(tasks, concurrency);
-  log(`\r   Verified: ${pass} pass, ${fail} fail / ${nftAssets.length}`);
+  const verifiedAssetCount = pass;
+  log(`\r   Verified: ${pass} pass, ${fail} fail / ${expectedAssets.length}`);
 
   if (errors.length > 0) {
     log('');
     log(`  ❌ ${errors.length} errors:`);
     for (const e of errors.slice(0, 20)) {
-      log(`    ${e.asset} [${e.role || ''}] ${e.type || e.error}`);
+      log(`    ${e.asset || ''} [${e.role || ''}] ${e.type || e.error}`);
     }
     if (errors.length > 20) log(`    ... and ${errors.length - 20} more`);
   }
 
-  // 3. Write VERIFY-RELEASE-REPORT.json
+  // ── 6. Compute status with invariants ────────────────────────────────
+
+  const expectedCarCount = normalized.expected_car_count;
+  const status = computeStatus({
+    errors,
+    sha256Pass,
+    sizePass,
+    carFilesExpected: expectedCarCount,
+    assetsVerified: verifiedAssetCount,
+    assetsExpected: normalized.expected_nft_count,
+    cidCheckEnabled: cidCheck,
+    metadataCidFail: metaCidFail,
+  });
+
+  // ── 7. Build report ──────────────────────────────────────────────────
+
+  const verificationScope = cidCheck
+    ? 'hash_size_and_metadata_cid'
+    : 'hash_size_only';
+
+  const doesNotProve = [
+    'independent attestation',
+    'on-chain ownership or tokenURI correctness',
+    'physical authorship or provenance',
+    'full DAG completeness unless full_dag_check_enabled is true',
+    'that the release contains all declared NFTs beyond what the manifest declares and the verifier checks',
+  ];
+
+  if (!cidCheck) {
+    doesNotProve.push('CID/root/DAG correctness');
+    doesNotProve.push('on-chain evidence or full evidence chain');
+  }
+
   const report = {
-    schema: 'verify-release-report-v2',
+    schema: 'verify-release-report-v3',
     release_tag: releaseTag,
     generated_at: new Date().toISOString(),
+    verification_scope: verificationScope,
+    cid_check_enabled: cidCheck,
+    full_dag_check_enabled: false,
+    supported_manifest_schema: normalized.schema,
+
+    required_checks: [
+      'release manifest schema recognized',
+      'manifest-declared asset set complete',
+      'no duplicate release assets',
+      'no extra unexpected nft-* assets',
+      'TAR entries strict and non-duplicate',
+      'expected SHA-256 matched for every expected CAR',
+      'expected size matched for every expected CAR',
+    ],
+    optional_checks: cidCheck ? ['metadata root CID strict', 'media root CID audit'] : [],
+
     total_assets: allAssets.length,
-    nft_assets_checked: nftAssets.length,
+    assets_expected: normalized.expected_nft_count,
+    assets_verified: verifiedAssetCount,
+    car_files_expected: expectedCarCount,
     car_files_checked: totalChecks,
     sha256_pass: sha256Pass,
     size_pass: sizePass,
+
     cid_check_enabled: cidCheck,
     metadata_cid_pass: cidCheck ? metaCidPass : null,
     metadata_cid_fail: cidCheck ? metaCidFail : null,
     media_cid_audit_pass: cidCheck ? mediaCidPass : null,
     media_cid_audit_warning: cidCheck ? mediaCidAudit : null,
-    status: fail === 0 ? 'PASS' : 'FAIL',
+
+    does_not_prove: doesNotProve,
+    limitations: [
+      'GitHub Release asset availability is checked through GitHub API at verification time.',
+      'Hash and size verification do not by themselves prove on-chain tokenURI correctness.',
+      'Media CID mismatches are audit warnings unless policy is changed to strict.',
+      'TAR strict mode rejects duplicate entries, symlinks, and path traversal.',
+    ],
+
+    status,
     errors: errors.slice(0, 100),
   };
+
+  // ── 8. Write report ──────────────────────────────────────────────────
 
   const reportPath = path.join(process.cwd(), 'VERIFY-RELEASE-REPORT.json');
   fs.writeFileSync(reportPath, JSON.stringify(report, null, 2));
   log(`\n  📝 VERIFY-RELEASE-REPORT.json written`);
 
+  // ── 9. Summary ───────────────────────────────────────────────────────
+
   log('');
   log('═══════════════════════════════════════════════════════════');
-  log(`  ${fail === 0 ? '✅ PASS' : '❌ FAIL'}: ${pass}/${nftAssets.length} assets verified`);
+  log(`  ${status === 'PASS' ? '✅ PASS' : '❌ FAIL'}: ${verifiedAssetCount}/${normalized.expected_nft_count} assets verified`);
   log(`  SHA-256 : ${sha256Pass}/${totalChecks} pass`);
   log(`  Size    : ${sizePass}/${totalChecks} pass`);
+  log(`  Scope   : ${verificationScope}`);
   if (cidCheck) {
     log(`  Meta CID: ${metaCidPass} pass, ${metaCidFail} fail`);
     log(`  Media CID: ${mediaCidPass} match, ${mediaCidAudit} audit-warning`);
   }
   log('═══════════════════════════════════════════════════════════');
 
-  if (fail > 0) process.exit(1);
+  if (status !== 'PASS') process.exit(1);
 }
 
-main().catch(e => { err('Fatal:', e); process.exit(1); });
+function computeStatus({ errors, sha256Pass, sizePass, carFilesExpected, assetsVerified, assetsExpected, cidCheckEnabled, metadataCidFail }) {
+  if (errors.length > 0) return 'FAIL';
+  if (assetsVerified !== assetsExpected) return 'FAIL';
+  if (sha256Pass !== carFilesExpected) return 'FAIL';
+  if (sizePass !== carFilesExpected) return 'FAIL';
+  if (cidCheckEnabled && metadataCidFail !== 0) return 'FAIL';
+  return 'PASS';
+}
+
+const isMain = process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.argv[1]);
+
+if (isMain) {
+  main().catch(e => { err('Fatal:', e); process.exit(1); });
+}
+
+export {
+  normalizeReleaseManifest,
+  extractFilesFromTarStrict,
+  computeStatus,
+  sha256hex,
+};
