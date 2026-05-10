@@ -537,3 +537,24 @@ jobs:
 
       - name: Audit recovery readiness
         run: python3 scripts/audit_recovery_readiness.py
+
+      # TA-REDTEAM-2026-017: claim traceability / claim registry
+      - name: Validate claim registry
+        run: |
+          python3 scripts/validate_claim_registry.py --self-test
+          python3 scripts/validate_claim_registry.py
+
+      - name: Test claim registry
+        run: python3 scripts/test_claim_registry.py
+
+      - name: Test public claim traceability
+        run: python3 scripts/test_public_claim_traceability.py
+
+      - name: Test notarized evidence boundary
+        run: python3 scripts/test_notarized_evidence_boundary.py
+
+      - name: Test scarcity claim methodology
+        run: python3 scripts/test_scarcity_claim_methodology.py
+
+      - name: Test claim registry public links
+        run: python3 scripts/test_claim_registry_public_links.py

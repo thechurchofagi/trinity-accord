@@ -2,7 +2,7 @@
   "schema": "trinity-accord.recovery-index.v1",
   "version": "v1",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "e7b7b2b2737ef2cd",
+  "source_digest": "2c6735ee49ae7716",
   "non_amending_boundary": true,
   "canonical_authority": "Bitcoin Originals only",
   "purpose": "Machine-readable cold-start recovery entrypoint for rebuilding repository-maintained state from canonical and mirrored materials.",
@@ -49,7 +49,8 @@
     "corrections_index": "api/corrections-index.json",
     "authority_api": "api/authority.json",
     "evidence_manifest": "api/evidence-manifest.json",
-    "hashes": "api/hashes.json"
+    "hashes": "api/hashes.json",
+    "claim_registry": "api/claim-registry.json"
   },
   "mirror_classes": {
     "github_main": "discovery_only_until_verified",
@@ -73,7 +74,8 @@
   "limitations": [
     "This recovery index is a repository-maintained mirror and does not amend the Bitcoin Originals.",
     "This index helps discover recovery materials but does not itself prove philosophical claims or independent attestation.",
-    "A stale copy of this index must be checked against source_digest and corrections-index."
+    "A stale copy of this index must be checked against source_digest and corrections-index.",
+    "Public claims should be interpreted through the claim registry and corrections-index."
   ],
   "does_not_prove": [
     "all mirrors are available",

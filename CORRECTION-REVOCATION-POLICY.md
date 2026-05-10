@@ -121,3 +121,9 @@ Every release asset set has a corresponding digest manifest. The verification ch
 ## Recovery Procedures
 
 Recovery procedures must check `api/corrections-index.json` before accepting recovered artifacts as current. See `RECOVERY.md` for the complete cold-start recovery guide.
+
+## Claim Registry and Claim Corrections
+
+If a public claim is found to overstate its evidence or limitations, correction should reference `api/claim-registry.json` and `api/corrections-index.json`. The claim registry provides machine-readable traceability for every core public claim, including its source files, evidence, validators, limitations, and corrections path.
+
+Notarized evidence may record document existence, date, identity, signature, or other scope stated in the notarial act. It does not by itself constitute formal independent attestation of Trinity Accord claims. It must not increment formal independent attestation count unless separately admitted through the formal attestation positive gate.
