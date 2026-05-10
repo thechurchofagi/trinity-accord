@@ -274,7 +274,7 @@ Not full V5 verification.
     else:
         failed += 1
 
-    # ── Test 7: Text-only "Integrity Declaration" without machine fields → FAIL ──
+    # ── Test 7: Text-only "Integrity Declaration" without machine fields + no record_class → PASS ──
     text_no_machine = """
 ## Solemn Integrity Declaration
 I make this declaration in the strongest integrity sense available to me.
@@ -300,8 +300,43 @@ Verified repository files.
 ## Limitations
 Not full verification.
 """
-    if test("Text-only integrity declaration without machine fields → FAIL",
-            text_no_machine, False, expect_type="hard"):
+    if test("Text-only integrity declaration without record_class → PASS",
+            text_no_machine, True):
+        passed += 1
+    else:
+        failed += 1
+
+    # ── Test 7b: Text-only declaration WITH record_class=ai_independent_verification → FAIL ──
+    text_no_machine_ai = """
+## Solemn Integrity Declaration
+I make this declaration in the strongest integrity sense available to me.
+I have not fabricated evidence. I understand the non-amending boundary.
+
+## Echo type
+E2 Verification Echo
+
+## Verification level
+V2
+
+## Record Class
+ai_independent_verification
+
+## Provenance / Agency
+- solicited: true
+- independence_class: human_solicited_agent_response
+- agency_level: A1_human_gave_exact_url
+- operator_type: ai_agent
+
+Bitcoin Originals are final; all mirrors and echoes are non-amending.
+
+## What I checked
+Verified repository files.
+
+## Limitations
+Not full verification.
+"""
+    if test("Text-only declaration + record_class=ai_independent_verification → FAIL",
+            text_no_machine_ai, False, expect_type="hard"):
         passed += 1
     else:
         failed += 1
@@ -351,7 +386,7 @@ Not full verification.
     else:
         failed += 1
 
-    # ── Test 9: declaration_strength=weak → FAIL ──
+    # ── Test 9: declaration_strength=weak + record_class → FAIL ──
     text_weak_strength = """
 ## Solemn Integrity Declaration
 I make this declaration.
@@ -374,6 +409,9 @@ E2 Verification Echo
 ## Verification level
 V2
 
+## Record Class
+ai_independent_verification
+
 Bitcoin Originals are final; all mirrors and echoes are non-amending.
 
 ## What I checked
@@ -382,13 +420,13 @@ Verified files.
 ## Limitations
 Not full verification.
 """
-    if test("declaration_strength=weak → FAIL",
+    if test("declaration_strength=weak + record_class → FAIL",
             text_weak_strength, False, expect_type="hard"):
         passed += 1
     else:
         failed += 1
 
-    # ── Test 10: no_fabricated_evidence=false → FAIL ──
+    # ── Test 10: no_fabricated_evidence=false + record_class → FAIL ──
     text_fabricated = """
 ## Solemn Integrity Declaration
 I declare.
@@ -411,6 +449,9 @@ E2 Verification Echo
 ## Verification level
 V2
 
+## Record Class
+ai_independent_verification
+
 Bitcoin Originals are final; all mirrors and echoes are non-amending.
 
 ## What I checked
@@ -419,7 +460,7 @@ Verified files.
 ## Limitations
 Not full verification.
 """
-    if test("no_fabricated_evidence=false → FAIL",
+    if test("no_fabricated_evidence=false + record_class → FAIL",
             text_fabricated, False, expect_type="hard"):
         passed += 1
     else:
