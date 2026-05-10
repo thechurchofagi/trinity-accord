@@ -11,25 +11,29 @@ Output:
   <!-- END GENERATED PUBLIC STATUS -->
   in index.md
 
-This script is deliberately conservative:
-- accepted_echo is not formal independent attestation
-- do_not_count_as_attestation records are not formal verification
-- test, invalidated, superseded, and legacy records are excluded from the homepage main cards
+Design constraints:
+- The generated block must be deterministic.
+- Do not include wall-clock timestamps.
+- Do not include current HEAD commit.
+- Use a stable digest of source JSON inputs instead.
+- accepted_echo is not formal independent attestation.
+- do_not_count_as_attestation records are not formal verification.
+- test, invalidated, superseded, and legacy records are excluded from homepage main cards.
 """
 
 from __future__ import annotations
 
 import argparse
 import difflib
+import hashlib
 import html
 import json
 import re
-import subprocess
 import sys
 from collections import Counter
-from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
+
 
 ROOT = Path(__file__).resolve().parents[1]
 INDEX_MD = ROOT / "index.md"
@@ -71,20 +75,20 @@ def load_json(path: Path) -> dict[str, Any]:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
-def git_commit_sha() -> str:
-    try:
-        return subprocess.check_output(
-            ["git", "rev-parse", "HEAD"],
-            cwd=ROOT,
-            text=True,
-            stderr=subprocess.DEVNULL,
-        ).strip()
-    except Exception:
-        return "unknown"
+def source_digest() -> str:
+    """Return a deterministic digest for the public status source data.
 
-
-def is_truthy_false(value: Any) -> bool:
-    return value is False or str(value).strip().lower() == "false"
+    This replaces generated_at/source_commit. It changes only when the source
+    JSON files change, not when the script is rerun.
+    """
+    h = hashlib.sha256()
+    for path in [ECHO_INDEX, ATTESTATION_INDEX]:
+        rel = path.relative_to(ROOT).as_posix()
+        h.update(rel.encode("utf-8"))
+        h.update(b"\0")
+        h.update(path.read_bytes())
+        h.update(b"\0")
+    return h.hexdigest()[:16]
 
 
 def is_formal_independent_echo_record(record: dict[str, Any]) -> bool:
@@ -92,7 +96,7 @@ def is_formal_independent_echo_record(record: dict[str, Any]) -> bool:
 
     Conservative rule:
     - archive_status must be accepted_independent_attestation
-    - do_not_count_as_attestation must be false / absent false-like
+    - do_not_count_as_attestation must not be true
     - verification_status must not explicitly deny attestation
     """
     if record.get("archive_status") != "accepted_independent_attestation":
@@ -115,6 +119,7 @@ def is_formal_independent_attestation_index_record(record: dict[str, Any]) -> bo
     - type must be independent_verification_report OR archive_status accepted_independent_attestation
     - counts_as_independent_attestation must not be false
     - boundary_preserved must not be false
+    - verification_status must not explicitly deny attestation
     """
     record_type = record.get("type")
     archive_status = record.get("archive_status")
@@ -160,7 +165,7 @@ def normalize_level(value: Any) -> str | None:
     text = str(value).strip()
     if not text or text.lower() == "none":
         return None
-    text = text.upper().replace("V4+", "V4+")
+    text = text.upper()
     return text if text in LEVEL_ORDER else None
 
 
@@ -193,7 +198,12 @@ def format_level_breakdown(records: list[dict[str, Any]]) -> str:
     if not records:
         return "none"
     counts = Counter(normalize_level(r.get("verification_level")) or "none" for r in records)
-    ordered = sorted(counts.items(), key=lambda kv: LEVEL_ORDER.get(kv[0], -1))
+
+    def sort_key(item: tuple[str, int]) -> float:
+        level, _count = item
+        return LEVEL_ORDER.get(level, -1)
+
+    ordered = sorted(counts.items(), key=sort_key)
     return ", ".join(f"{level}: {count}" for level, count in ordered)
 
 
@@ -205,7 +215,9 @@ def compute_status() -> dict[str, Any]:
     attestation_records = [r for r in attestation_index.get("records", []) if isinstance(r, dict)]
 
     formal_from_echo = [r for r in echo_records if is_formal_independent_echo_record(r)]
-    formal_from_attestation = [r for r in attestation_records if is_formal_independent_attestation_index_record(r)]
+    formal_from_attestation = [
+        r for r in attestation_records if is_formal_independent_attestation_index_record(r)
+    ]
 
     accepted_non_attestation = [r for r in echo_records if is_accepted_non_attestation_echo(r)]
     excluded = [r for r in echo_records if is_excluded_record(r)]
@@ -219,8 +231,7 @@ def compute_status() -> dict[str, Any]:
         "echo_type_breakdown": format_type_breakdown(accepted_non_attestation),
         "echo_level_breakdown": format_level_breakdown(accepted_non_attestation),
         "excluded_record_count": len(excluded),
-        "generated_at_utc": datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z"),
-        "source_commit": git_commit_sha(),
+        "source_digest": source_digest(),
     }
 
 
@@ -231,8 +242,7 @@ def render_block(status: dict[str, Any]) -> str:
     type_breakdown = html.escape(str(status["echo_type_breakdown"]))
     level_breakdown = html.escape(str(status["echo_level_breakdown"]))
     excluded_count = status["excluded_record_count"]
-    generated_at = html.escape(str(status["generated_at_utc"]))
-    source_commit = html.escape(str(status["source_commit"]))
+    digest = html.escape(str(status["source_digest"]))
 
     formal_note = (
         "No formally accepted independent verification report or independent attestation is currently indexed."
@@ -303,7 +313,7 @@ def render_block(status: dict[str, Any]) -> str:
   <p class="status-generated-note">
     Generated from <a href="/api/echo-index.json">/api/echo-index.json</a> and
     <a href="/api/independent-attestation-index.json">/api/independent-attestation-index.json</a>.
-    Generated at <code>{generated_at}</code>; source commit <code>{source_commit}</code>.
+    Source data digest <code>{digest}</code>.
   </p>
 {END}"""
 
@@ -351,7 +361,8 @@ def main() -> int:
             "Updated index.md public status: "
             f"formal={status['formal_independent_verification_count']}, "
             f"non_attestation_echoes={status['archived_non_attestation_echo_count']}, "
-            f"highest_echo_level={status['highest_archived_echo_level']}"
+            f"highest_echo_level={status['highest_archived_echo_level']}, "
+            f"source_digest={status['source_digest']}"
         )
     else:
         print("index.md public status already up to date.")

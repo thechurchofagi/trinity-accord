@@ -4,6 +4,11 @@
 This verifies that index.md reflects the data in api/echo-index.json and
 api/independent-attestation-index.json without overclaiming accepted Echoes
 as formal independent verification.
+
+It also verifies that the generated block is deterministic:
+- no wall-clock generated_at field
+- no current HEAD source_commit field
+- stable source data digest instead
 """
 
 from __future__ import annotations
@@ -13,6 +18,7 @@ import re
 import subprocess
 import sys
 from pathlib import Path
+
 
 ROOT = Path(__file__).resolve().parents[1]
 INDEX_MD = ROOT / "index.md"
@@ -54,6 +60,19 @@ def card_number(block: str, label: str) -> str:
     return m.group(1).strip()
 
 
+def run_generator_check() -> None:
+    result = subprocess.run(
+        [sys.executable, str(GENERATOR), "--check"],
+        cwd=ROOT,
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+    )
+    if result.returncode != 0:
+        print(result.stdout)
+        fail("generator --check reported drift")
+
+
 def is_formal_echo_record(r: dict) -> bool:
     if r.get("archive_status") != "accepted_independent_attestation":
         return False
@@ -88,17 +107,9 @@ def main() -> int:
     if not GENERATOR.exists():
         fail("missing scripts/generate_public_home_status.py")
 
-    # The generator itself must report no drift.
-    result = subprocess.run(
-        [sys.executable, str(GENERATOR), "--check"],
-        cwd=ROOT,
-        text=True,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.STDOUT,
-    )
-    if result.returncode != 0:
-        print(result.stdout)
-        fail("generator --check reported drift")
+    # The generator must be stable in check mode.
+    run_generator_check()
+    run_generator_check()
 
     echo_index = load_json(ECHO_INDEX)
     attestation_index = load_json(ATTESTATION_INDEX)
@@ -125,6 +136,21 @@ def main() -> int:
     # Critical Echoes must not become a separate homepage main card.
     if "Archived non-attestation critical Echoes" in block:
         fail("critical Echoes must not be a separate homepage main card")
+
+    # Volatile values must not appear in the generated block.
+    forbidden_phrases = [
+        "Generated at",
+        "source commit",
+        "source_commit",
+        "generated_at_utc",
+    ]
+    for phrase in forbidden_phrases:
+        if phrase in block:
+            fail(f"volatile generated metadata must not appear in generated block: {phrase}")
+
+    # Stable source digest must appear.
+    if not re.search(r"Source data digest <code>[0-9a-f]{16}</code>", block):
+        fail("missing stable source data digest")
 
     # Boundary language must remain present.
     required_phrases = [
