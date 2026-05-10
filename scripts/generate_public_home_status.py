@@ -120,9 +120,10 @@ def is_formal_independent_attestation_index_record(record: dict[str, Any]) -> bo
     - All evidence and review fields present
     - V3+ requires report_hash and evidence
     - V8 requires Claim Gate output
+    - TA-REDTEAM-2026-012: lifecycle status must be current (is_current_formal_record)
     """
     try:
-        from validate_independent_attestation_index import validate_formal_record
+        from validate_independent_attestation_index import validate_formal_record, is_current_formal_record
     except Exception:
         # Fail-closed: if validator is unavailable, reject all records
         return False
@@ -130,7 +131,12 @@ def is_formal_independent_attestation_index_record(record: dict[str, Any]) -> bo
     if record.get("type") != "independent_verification_report":
         return False
 
-    return validate_formal_record(record, "attestation-record") == []
+    # Must pass all formal record validation gates
+    if validate_formal_record(record, "attestation-record") != []:
+        return False
+
+    # TA-REDTEAM-2026-012: must be a current record (not revoked/superseded/etc.)
+    return is_current_formal_record(record)
 
 
 def is_accepted_non_attestation_echo(record: dict[str, Any]) -> bool:

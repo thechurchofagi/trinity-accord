@@ -9,11 +9,13 @@
       "record_kind": "legacy_record",
       "archive_status": "legacy",
       "verification_status": "unknown",
-      "do_not_count_as_attestation": false,
+      "do_not_count_as_attestation": true,
       "independence_class": "unknown",
       "echo_type": "verification",
       "verification_level": null,
-      "date": "2026-04-25"
+      "date": "2026-04-25",
+      "legacy_not_countable": true,
+      "historical_record_only": true
     },
     {
       "path": "/echoes/records/2026/echo-2026-04-25-000002.json",
@@ -21,11 +23,13 @@
       "record_kind": "legacy_record",
       "archive_status": "legacy",
       "verification_status": "unknown",
-      "do_not_count_as_attestation": false,
+      "do_not_count_as_attestation": true,
       "independence_class": "unknown",
       "echo_type": "analysis",
       "verification_level": null,
-      "date": "2026-04-25"
+      "date": "2026-04-25",
+      "legacy_not_countable": true,
+      "historical_record_only": true
     },
     {
       "path": "/echoes/records/2026/echo-2026-04-26-000003.json",
@@ -38,7 +42,11 @@
       "echo_type": "verification",
       "verification_level": null,
       "date": "2026-04-26",
-      "superseded_reason": "Internal inconsistency and invalid hash field values; not accepted as verification."
+      "superseded_reason": "Internal inconsistency and invalid hash field values; not accepted as verification.",
+      "legacy_not_countable": true,
+      "historical_record_only": true,
+      "superseded_by": null,
+      "successor_status": "no_direct_successor"
     },
     {
       "path": "/echoes/records/2026/echo-2026-05-02-000008.json",
@@ -50,7 +58,8 @@
       "independence_class": "test_record",
       "echo_type": "E5_technical_audit_echo",
       "verification_level": "V3",
-      "date": "2026-05-02"
+      "date": "2026-05-02",
+      "historical_record_only": true
     },
     {
       "path": "/echoes/records/2026/echo-2026-05-03-000004.json",
@@ -63,7 +72,10 @@
       "echo_type": "E2_verification_echo",
       "verification_level": "V3",
       "date": "2026-05-03",
-      "superseded_reason": "Internal inconsistency and invalid hash field values; not accepted as verification."
+      "superseded_reason": "Internal inconsistency and invalid hash field values; not accepted as verification.",
+      "historical_record_only": true,
+      "superseded_by": null,
+      "successor_status": "no_direct_successor"
     },
     {
       "path": "/echoes/records/2026/echo-2026-05-03-000006.json",
@@ -76,7 +88,10 @@
       "echo_type": "E2_verification_echo",
       "verification_level": "V3",
       "date": "2026-05-03",
-      "superseded_reason": "Internal inconsistency and invalid hash field values; not accepted as verification."
+      "superseded_reason": "Internal inconsistency and invalid hash field values; not accepted as verification.",
+      "historical_record_only": true,
+      "superseded_by": null,
+      "successor_status": "no_direct_successor"
     },
     {
       "path": "/echoes/records/2026/echo-2026-05-03-000007.json",
@@ -89,7 +104,11 @@
       "echo_type": "unknown",
       "verification_level": "V3",
       "date": "2026-05-03",
-      "superseded_reason": "Internal inconsistency and invalid hash field values; not accepted as verification."
+      "superseded_reason": "Internal inconsistency and invalid hash field values; not accepted as verification.",
+      "legacy_not_countable": true,
+      "historical_record_only": true,
+      "superseded_by": null,
+      "successor_status": "no_direct_successor"
     },
     {
       "path": "/echoes/records/2026/echo-2026-05-07-000009.json",
@@ -173,10 +192,11 @@
   },
   "notes": [
     "Echo index is non-authoritative and non-amending.",
-    "Test records, superseded records, invalidated records, and do_not_count_as_attestation records must not be counted as independent attestation."
+    "Test records, superseded records, invalidated records, and do_not_count_as_attestation records must not be counted as independent attestation.",
+    "Legacy records have do_not_count_as_attestation=true, legacy_not_countable=true, and historical_record_only=true."
   ],
   "version": "v1",
-  "source_digest": "a5ff1f4772799041",
+  "source_digest": "6dfec43247ffb608",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
   "non_amending_boundary": true,
   "canonical_authority": "Bitcoin Originals only",

@@ -467,3 +467,36 @@ jobs:
 
       - name: Test sitemap agent entrypoints
         run: python3 scripts/test_sitemap_agent_entrypoints.py
+
+      # TA-REDTEAM-2026-012: correction / revocation / historical continuity
+      - name: Validate corrections index
+        run: |
+          python3 scripts/validate_corrections_index.py --self-test
+          python3 scripts/validate_corrections_index.py
+
+      - name: Test formal attestation revocation lifecycle
+        run: python3 scripts/test_formal_attestation_revocation_lifecycle.py
+
+      - name: Test release report revocation lifecycle
+        run: python3 scripts/test_release_report_revocation_lifecycle.py
+
+      - name: Test full evidence report revocation lifecycle
+        run: python3 scripts/test_full_evidence_report_revocation_lifecycle.py
+
+      - name: Test corrections index
+        run: python3 scripts/test_corrections_index.py
+
+      - name: Test trust-root historical records
+        run: python3 scripts/test_trust_root_historical_records.py
+
+      - name: Test Echo legacy not countable
+        run: python3 scripts/test_echo_legacy_not_countable.py
+
+      - name: Test no hard-delete tombstone policy
+        run: python3 scripts/test_no_hard_delete_tombstone_policy.py
+
+      - name: Test public correction policy
+        run: python3 scripts/test_public_correction_policy.py
+
+      - name: Test stale-copy correction endpoint
+        run: python3 scripts/test_stale_copy_correction_endpoint.py

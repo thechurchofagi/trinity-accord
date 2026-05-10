@@ -21,6 +21,9 @@
 
 # Machine-readable discovery index for The Trinity Accord
 
+# correction_revocation_index: https://www.trinityaccord.org/api/corrections-index.json
+# stale_copy_rule: If this cached file conflicts with the correction_revocation_index, use the correction_revocation_index as current repository-maintained status.
+
 # Primary agent entrypoints
 /llms.txt
 /llms-full.txt

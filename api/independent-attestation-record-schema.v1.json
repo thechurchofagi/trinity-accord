@@ -123,6 +123,44 @@
           "type": "boolean"
         }
       }
+    },
+    "record_lifecycle_status": {
+      "enum": [
+        "current",
+        "accepted_current",
+        "superseded",
+        "revoked",
+        "invalidated",
+        "withdrawn",
+        "historical_only"
+      ]
+    },
+    "is_current": {
+      "type": "boolean"
+    },
+    "revoked_at": {
+      "type": "string"
+    },
+    "revocation_reason": {
+      "type": "string"
+    },
+    "invalidated_at": {
+      "type": "string"
+    },
+    "invalidation_reason": {
+      "type": "string"
+    },
+    "superseded_at": {
+      "type": "string"
+    },
+    "superseded_by": {
+      "type": ["string", "null"]
+    },
+    "supersession_reason": {
+      "type": "string"
+    },
+    "historical_record_only": {
+      "type": "boolean"
     }
   },
   "anyOf": [

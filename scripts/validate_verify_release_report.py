@@ -25,6 +25,9 @@ VALID_SCOPES = [
     "hash_size_and_full_dag", "full_evidence_chain",
 ]
 
+VALID_REPORT_STATUSES = {"current", "historical", "superseded", "revoked", "invalidated"}
+NON_CURRENT_REPORT_STATUSES = {"historical", "superseded", "revoked", "invalidated"}
+
 
 def validate_report(report):
     errors = []
@@ -84,6 +87,47 @@ def validate_report(report):
         dnp_text = " ".join(dnp).lower()
         if "cid" not in dnp_text and "dag" not in dnp_text:
             errors.append("hash_size_only scope but does_not_prove does not mention CID/DAG")
+
+    # TA-REDTEAM-2026-012: report lifecycle validation
+    report_status = report.get("report_status")
+    is_current_val = report.get("is_current")
+    historical_report_only = report.get("historical_report_only")
+
+    if report_status is not None or is_current_val is not None or historical_report_only is not None:
+        # If any lifecycle field is present, validate
+        if report_status is not None and report_status not in VALID_REPORT_STATUSES:
+            errors.append(f"report_status must be one of {sorted(VALID_REPORT_STATUSES)}, got: {report_status}")
+
+        # PASS reports must be current
+        if report["status"] == "PASS" and report_status is not None:
+            if report_status != "current":
+                errors.append(f"PASS report must have report_status='current', got: '{report_status}'")
+            if is_current_val is not None and is_current_val is not True:
+                errors.append("PASS report must have is_current=true")
+
+        # Non-current reports
+        if report_status in NON_CURRENT_REPORT_STATUSES:
+            if is_current_val is not None and is_current_val is not False:
+                errors.append(f"non-current report_status '{report_status}' requires is_current=false")
+            if historical_report_only is not None and historical_report_only is not True:
+                errors.append(f"non-current report_status '{report_status}' requires historical_report_only=true")
+
+        # Revoked requires revocation_reason
+        if report_status == "revoked":
+            if not report.get("revocation_reason"):
+                errors.append("revoked report requires revocation_reason")
+
+        # Superseded requires superseded_by + supersession_reason
+        if report_status == "superseded":
+            if report.get("superseded_by") is None and not report.get("supersession_reason"):
+                errors.append("superseded report requires superseded_by or supersession_reason")
+            if not report.get("supersession_reason"):
+                errors.append("superseded report requires supersession_reason")
+
+        # Invalidated requires invalidation_reason
+        if report_status == "invalidated":
+            if not report.get("invalidation_reason"):
+                errors.append("invalidated report requires invalidation_reason")
 
     return errors
 
@@ -148,6 +192,76 @@ def self_test():
     errs = validate_report(r)
     assert any("metadata_cid_fail" in e for e in errs), f"Expected CID fail: {errs}"
     print("  ✓ PASS with CID check + CID fail rejected")
+
+    # TA-REDTEAM-2026-012: lifecycle self-tests
+    # Test 9: PASS current report accepted
+    r = make_valid_report()
+    r["report_status"] = "current"
+    r["is_current"] = True
+    r["historical_report_only"] = False
+    errs = validate_report(r)
+    assert len(errs) == 0, f"Expected no errors: {errs}"
+    print("  ✓ PASS current report accepted")
+
+    # Test 10: PASS report missing report_status (no lifecycle fields = OK)
+    r = make_valid_report()
+    errs = validate_report(r)
+    assert len(errs) == 0, f"Expected no errors: {errs}"
+    print("  ✓ PASS report without lifecycle fields accepted")
+
+    # Test 11: revoked PASS report with is_current=true rejected
+    r = make_valid_report()
+    r["report_status"] = "revoked"
+    r["is_current"] = True
+    r["historical_report_only"] = True
+    r["revocation_reason"] = "Compromised."
+    errs = validate_report(r)
+    assert any("PASS" in e and "current" in e for e in errs), f"Expected PASS current rejection: {errs}"
+    print("  ✓ revoked PASS report with is_current=true rejected")
+
+    # Test 12: revoked report missing revocation_reason
+    r = make_valid_report()
+    r["status"] = "FAIL"
+    r["errors"] = [{"type": "test"}]
+    r["report_status"] = "revoked"
+    r["is_current"] = False
+    r["historical_report_only"] = True
+    errs = validate_report(r)
+    assert any("revocation_reason" in e for e in errs), f"Expected revocation_reason: {errs}"
+    print("  ✓ revoked report missing revocation_reason rejected")
+
+    # Test 13: superseded report missing superseded_by
+    r = make_valid_report()
+    r["status"] = "FAIL"
+    r["errors"] = [{"type": "test"}]
+    r["report_status"] = "superseded"
+    r["is_current"] = False
+    r["historical_report_only"] = True
+    errs = validate_report(r)
+    assert any("superseded" in e.lower() for e in errs), f"Expected superseded rejection: {errs}"
+    print("  ✓ superseded report missing superseded_by rejected")
+
+    # Test 14: invalidated report missing invalidation_reason
+    r = make_valid_report()
+    r["status"] = "FAIL"
+    r["errors"] = [{"type": "test"}]
+    r["report_status"] = "invalidated"
+    r["is_current"] = False
+    r["historical_report_only"] = True
+    errs = validate_report(r)
+    assert any("invalidation_reason" in e for e in errs), f"Expected invalidation_reason: {errs}"
+    print("  ✓ invalidated report missing invalidation_reason rejected")
+
+    # Test 15: historical_report_only must be true for non-current
+    r = make_valid_report()
+    r["status"] = "FAIL"
+    r["errors"] = [{"type": "test"}]
+    r["report_status"] = "historical"
+    r["is_current"] = False
+    r["historical_report_only"] = False
+    errs = validate_report(r)
+    assert any("historical_report_only" in e for e in errs), f"Expected historical_report_only: {errs}"
+    print("  ✓ historical_report_only=false for non-current rejected")
 
     print("\nVALIDATE_VERIFY_RELEASE_REPORT_SELF_TEST_OK")
 

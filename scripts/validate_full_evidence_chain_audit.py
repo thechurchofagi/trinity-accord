@@ -9,6 +9,10 @@ import json, sys, os
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+VALID_REPORT_STATUSES = {"current", "historical", "superseded", "revoked", "invalidated"}
+NON_CURRENT_REPORT_STATUSES = {"historical", "superseded", "revoked", "invalidated"}
+
+
 def validate_report(report):
     errors = []
 
@@ -56,6 +60,46 @@ def validate_report(report):
             errors.append("ci-api mode cannot set fullnode_independent_verification=true")
         if fullnode is True and mode != "fullnode":
             errors.append("fullnode_independent_verification=true requires mode=fullnode")
+
+    # TA-REDTEAM-2026-012: report lifecycle validation
+    report_status = report.get("report_status")
+    is_current_val = report.get("is_current")
+    historical_report_only = report.get("historical_report_only")
+
+    if report_status is not None or is_current_val is not None or historical_report_only is not None:
+        if report_status is not None and report_status not in VALID_REPORT_STATUSES:
+            errors.append(f"report_status must be one of {sorted(VALID_REPORT_STATUSES)}, got: {report_status}")
+
+        # PASS reports must be current
+        if status == "PASS" and report_status is not None:
+            if report_status != "current":
+                errors.append(f"PASS report must have report_status='current', got: '{report_status}'")
+            if is_current_val is not None and is_current_val is not True:
+                errors.append("PASS report must have is_current=true")
+
+        # Non-current reports
+        if report_status in NON_CURRENT_REPORT_STATUSES:
+            if is_current_val is not None and is_current_val is not False:
+                errors.append(f"non-current report_status '{report_status}' requires is_current=false")
+            if historical_report_only is not None and historical_report_only is not True:
+                errors.append(f"non-current report_status '{report_status}' requires historical_report_only=true")
+
+        # Revoked requires revocation_reason
+        if report_status == "revoked":
+            if not report.get("revocation_reason"):
+                errors.append("revoked report requires revocation_reason")
+
+        # Superseded requires superseded_by + supersession_reason
+        if report_status == "superseded":
+            if report.get("superseded_by") is None and not report.get("supersession_reason"):
+                errors.append("superseded report requires superseded_by or supersession_reason")
+            if not report.get("supersession_reason"):
+                errors.append("superseded report requires supersession_reason")
+
+        # Invalidated requires invalidation_reason
+        if report_status == "invalidated":
+            if not report.get("invalidation_reason"):
+                errors.append("invalidated report requires invalidation_reason")
 
     return errors
 
@@ -165,6 +209,55 @@ def self_test():
         print("  ✓ fullnode + fullnode=true accepted"); passed += 1
     else:
         print(f"  ✗ fullnode + fullnode=true accepted: {errs}"); failed += 1
+
+    # TA-REDTEAM-2026-012: lifecycle tests
+    # 10. PASS current report accepted
+    r10 = {**report, "report_status": "current", "is_current": True, "historical_report_only": False}
+    errs = validate_report(r10)
+    if not errs:
+        print("  ✓ PASS current report accepted"); passed += 1
+    else:
+        print(f"  ✗ PASS current report accepted: {errs}"); failed += 1
+
+    # 11. revoked PASS report with is_current=true rejected
+    r11 = {**report, "report_status": "revoked", "is_current": True, "historical_report_only": True, "revocation_reason": "test"}
+    errs = validate_report(r11)
+    if any("PASS" in e and "current" in e for e in errs):
+        print("  ✓ revoked PASS report with is_current=true rejected"); passed += 1
+    else:
+        print(f"  ✗ revoked PASS report with is_current=true rejected: {errs}"); failed += 1
+
+    # 12. revoked report missing revocation_reason
+    r12 = {**report, "overall_status": "FAIL", "errors": ["test"], "report_status": "revoked", "is_current": False, "historical_report_only": True}
+    errs = validate_report(r12)
+    if any("revocation_reason" in e for e in errs):
+        print("  ✓ revoked report missing revocation_reason rejected"); passed += 1
+    else:
+        print(f"  ✗ revoked report missing revocation_reason rejected: {errs}"); failed += 1
+
+    # 13. superseded report missing supersession_reason
+    r13 = {**report, "overall_status": "FAIL", "errors": ["test"], "report_status": "superseded", "is_current": False, "historical_report_only": True}
+    errs = validate_report(r13)
+    if any("supersession_reason" in e for e in errs):
+        print("  ✓ superseded report missing supersession_reason rejected"); passed += 1
+    else:
+        print(f"  ✗ superseded report missing supersession_reason rejected: {errs}"); failed += 1
+
+    # 14. invalidated report missing invalidation_reason
+    r14 = {**report, "overall_status": "FAIL", "errors": ["test"], "report_status": "invalidated", "is_current": False, "historical_report_only": True}
+    errs = validate_report(r14)
+    if any("invalidation_reason" in e for e in errs):
+        print("  ✓ invalidated report missing invalidation_reason rejected"); passed += 1
+    else:
+        print(f"  ✗ invalidated report missing invalidation_reason rejected: {errs}"); failed += 1
+
+    # 15. historical_report_only must be true for non-current
+    r15 = {**report, "overall_status": "FAIL", "errors": ["test"], "report_status": "historical", "is_current": False, "historical_report_only": False}
+    errs = validate_report(r15)
+    if any("historical_report_only" in e for e in errs):
+        print("  ✓ historical_report_only=false for non-current rejected"); passed += 1
+    else:
+        print(f"  ✗ historical_report_only=false for non-current rejected: {errs}"); failed += 1
 
     print(f"\n{'=' * 50}")
     if failed:

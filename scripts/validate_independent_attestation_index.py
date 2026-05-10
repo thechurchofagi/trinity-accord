@@ -53,9 +53,51 @@ LEVEL_ORDER = {
     "V5": 5, "V6": 6, "V7": 7, "V8": 8,
 }
 
+# TA-REDTEAM-2026-012: lifecycle status sets
+CURRENT_LIFECYCLE = {"current", "accepted_current"}
+NON_CURRENT_LIFECYCLE = {"revoked", "superseded", "invalidated", "withdrawn", "historical_only"}
+
 
 def is_sha256(value) -> bool:
     return isinstance(value, str) and SHA256_RE.fullmatch(value) is not None
+
+
+def is_current_formal_record(record: dict) -> bool:
+    """Check if a record is a current formal independent attestation.
+
+    A record is current if:
+    - record_lifecycle_status is in CURRENT_LIFECYCLE (or absent for legacy records without lifecycle)
+    - is_current is True (or absent for legacy records without lifecycle)
+    - historical_record_only is not True
+    - counts_as_independent_attestation is True
+    - verification_status is in ACCEPTED_STATUSES
+    - type is independent_verification_report
+    - boundary_preserved is True
+    """
+    lifecycle = record.get("record_lifecycle_status")
+    is_current = record.get("is_current")
+    historical = record.get("historical_record_only")
+
+    # If lifecycle fields are present, enforce them
+    if lifecycle is not None or is_current is not None or historical is not None:
+        if lifecycle not in CURRENT_LIFECYCLE:
+            return False
+        if is_current is not True:
+            return False
+        if historical is True:
+            return False
+
+    # Standard positive-gate checks
+    if record.get("type") != "independent_verification_report":
+        return False
+    if record.get("counts_as_independent_attestation") is not True:
+        return False
+    if record.get("boundary_preserved") is not True:
+        return False
+    if record.get("verification_status") not in ACCEPTED_STATUSES:
+        return False
+
+    return True
 
 
 def validate_formal_record(record: dict, path_label: str = "record") -> list[str]:
@@ -70,13 +112,24 @@ def validate_formal_record(record: dict, path_label: str = "record") -> list[str
         if not cond:
             errors.append(msg)
 
+    # ── Determine lifecycle status early ──
+    lifecycle = record.get("record_lifecycle_status")
+    is_current_val = record.get("is_current")
+    historical_val = record.get("historical_record_only")
+    is_non_current = lifecycle is not None and lifecycle in NON_CURRENT_LIFECYCLE
+
     # ── Type ──
     require(record.get("type") == "independent_verification_report",
             f"{path_label}: type must be independent_verification_report")
 
-    # ── Positive flags (must be explicitly True, not just absent) ──
-    require(record.get("counts_as_independent_attestation") is True,
-            f"{path_label}: counts_as_independent_attestation must be true")
+    # ── Positive flags (must be explicitly True for current records) ──
+    if not is_non_current:
+        require(record.get("counts_as_independent_attestation") is True,
+                f"{path_label}: counts_as_independent_attestation must be true")
+    else:
+        # Non-current records must explicitly set counts_as=False
+        require(record.get("counts_as_independent_attestation") is False,
+                f"{path_label}: non-current lifecycle '{lifecycle}' requires counts_as_independent_attestation=false")
 
     require(record.get("boundary_preserved") is True,
             f"{path_label}: boundary_preserved must be true")
@@ -144,6 +197,40 @@ def validate_formal_record(record: dict, path_label: str = "record") -> list[str
                     f"{path_label}: V8 claim_gate_result.high_path_satisfied must be true")
             require(is_sha256(cg.get("source_report_hash")) or is_sha256(cg.get("claim_gate_report_hash")),
                     f"{path_label}: V8 claim_gate_result requires source_report_hash or claim_gate_report_hash (64-hex)")
+
+    # ── TA-REDTEAM-2026-012: lifecycle validation ──
+    if lifecycle is not None or is_current_val is not None or historical_val is not None:
+        # If any lifecycle field is present, validate consistency
+        if lifecycle in NON_CURRENT_LIFECYCLE:
+            require(is_current_val is False,
+                    f"{path_label}: non-current lifecycle '{lifecycle}' requires is_current=false")
+            # counts_as check already done above
+            require(historical_val is True,
+                    f"{path_label}: non-current lifecycle '{lifecycle}' requires historical_record_only=true")
+
+        if lifecycle == "current" or lifecycle == "accepted_current":
+            require(is_current_val is True,
+                    f"{path_label}: current lifecycle '{lifecycle}' requires is_current=true")
+
+        if lifecycle == "revoked":
+            require(bool(record.get("revoked_at")),
+                    f"{path_label}: revoked requires revoked_at")
+            require(bool(record.get("revocation_reason")),
+                    f"{path_label}: revoked requires revocation_reason")
+
+        if lifecycle == "invalidated":
+            require(bool(record.get("invalidated_at")),
+                    f"{path_label}: invalidated requires invalidated_at")
+            require(bool(record.get("invalidation_reason")),
+                    f"{path_label}: invalidated requires invalidation_reason")
+
+        if lifecycle == "superseded":
+            require(bool(record.get("superseded_at")),
+                    f"{path_label}: superseded requires superseded_at")
+            require(record.get("superseded_by") is not None or bool(record.get("supersession_reason")),
+                    f"{path_label}: superseded requires superseded_by or supersession_reason")
+            require(bool(record.get("supersession_reason")),
+                    f"{path_label}: superseded requires supersession_reason")
 
     return errors
 
@@ -289,6 +376,39 @@ def run_self_test() -> bool:
     valid_v1["hash_if_available"] = "a" * 64
     del valid_v1["evidence_summary"]
     check("V1 with hash_if_available (no report_hash needed)", valid_v1, True)
+
+    # TA-REDTEAM-2026-012: lifecycle self-tests
+    # Valid current lifecycle
+    valid_current = {**valid_v3, "record_lifecycle_status": "current", "is_current": True, "historical_record_only": False}
+    check("valid current lifecycle", valid_current, True)
+
+    # Revoked record must have is_current=false
+    revoked_bad = {**valid_v3, "record_lifecycle_status": "revoked", "is_current": True, "historical_record_only": True}
+    check("revoked with is_current=true rejected", revoked_bad, False)
+
+    # Revoked missing revocation_reason
+    revoked_no_reason = {**valid_v3, "record_lifecycle_status": "revoked", "is_current": False, "historical_record_only": True,
+                         "counts_as_independent_attestation": False, "revoked_at": "2026-05-10"}
+    check("revoked missing revocation_reason", revoked_no_reason, False)
+
+    # Valid revoked
+    valid_revoked = {**valid_v3, "record_lifecycle_status": "revoked", "is_current": False,
+                     "historical_record_only": True, "counts_as_independent_attestation": False,
+                     "revoked_at": "2026-05-10", "revocation_reason": "Compromised key."}
+    check("valid revoked record", valid_revoked, True)
+
+    # Superseded missing superseded_by
+    superseded_no_by = {**valid_v3, "record_lifecycle_status": "superseded", "is_current": False,
+                        "historical_record_only": True, "counts_as_independent_attestation": False,
+                        "superseded_at": "2026-05-10"}
+    check("superseded missing superseded_by and supersession_reason", superseded_no_by, False)
+
+    # Valid superseded
+    valid_superseded = {**valid_v3, "record_lifecycle_status": "superseded", "is_current": False,
+                        "historical_record_only": True, "counts_as_independent_attestation": False,
+                        "superseded_at": "2026-05-10", "superseded_by": "record-new",
+                        "supersession_reason": "New evidence found."}
+    check("valid superseded record", valid_superseded, True)
 
     print(f"\nSelf-test: {passed} passed, {failed} failed")
     return failed == 0

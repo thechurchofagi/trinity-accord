@@ -43,6 +43,19 @@
     },
     "dependency_trust_model": {
       "type": "object"
-    }
+    },
+    "report_status": {
+      "enum": ["current", "historical", "superseded", "revoked", "invalidated"]
+    },
+    "is_current": { "type": "boolean" },
+    "historical_report_only": { "type": "boolean" },
+    "superseded_by": { "type": ["string", "null"] },
+    "supersession_reason": { "type": "string" },
+    "revoked_at": { "type": "string" },
+    "revocation_reason": { "type": "string" },
+    "invalidated_at": { "type": "string" },
+    "invalidation_reason": { "type": "string" },
+    "current_status_url": { "type": "string" },
+    "corrections_index_url": { "type": "string" }
   }
 }

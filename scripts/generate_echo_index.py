@@ -24,6 +24,10 @@ def get_date(obj, path):
     return "unknown"
 
 
+NON_CURRENT_STATUSES = {"superseded", "revoked", "invalidated", "withdrawn", "historical_only", "closed_test_record"}
+LEGACY_RECORD_KINDS = {"legacy_record"}
+
+
 records = []
 by_status = defaultdict(list)
 by_class = defaultdict(list)
@@ -49,6 +53,32 @@ for path in sorted(RECORDS_ROOT.rglob("*.json")):
     # Optional reason if invalidated/superseded.
     if obj.get("superseded_reason"):
         item["superseded_reason"] = obj["superseded_reason"]
+
+    # TA-REDTEAM-2026-012: legacy record lifecycle fields
+    is_legacy = item["record_kind"] in LEGACY_RECORD_KINDS
+    is_non_current = item["archive_status"] in NON_CURRENT_STATUSES
+
+    if is_legacy:
+        item["do_not_count_as_attestation"] = True
+        item["legacy_not_countable"] = True
+        item["historical_record_only"] = True
+
+    if is_non_current:
+        item["historical_record_only"] = True
+
+    # Superseded records: add lifecycle metadata
+    if item["archive_status"] == "superseded":
+        if "superseded_by" not in item:
+            item["superseded_by"] = obj.get("superseded_by", None)
+        if "successor_status" not in item:
+            item["successor_status"] = obj.get("successor_status", "no_direct_successor")
+        item["historical_record_only"] = True
+
+    # Preserve optional lifecycle fields from source records if present
+    for opt_field in ["superseded_by", "successor_status", "supersession_reason",
+                      "revoked_at", "revocation_reason", "invalidated_at", "invalidation_reason"]:
+        if opt_field in obj and opt_field not in item:
+            item[opt_field] = obj[opt_field]
 
     records.append(item)
     by_status[item["archive_status"]].append(rel)
@@ -79,7 +109,8 @@ out = {
     "records_by_verification_status": dict(sorted(by_verification_status.items())),
     "notes": [
         "Echo index is non-authoritative and non-amending.",
-        "Test records, superseded records, invalidated records, and do_not_count_as_attestation records must not be counted as independent attestation."
+        "Test records, superseded records, invalidated records, and do_not_count_as_attestation records must not be counted as independent attestation.",
+        "Legacy records have do_not_count_as_attestation=true, legacy_not_countable=true, and historical_record_only=true."
     ],
 }
 out.update(existing_metadata)

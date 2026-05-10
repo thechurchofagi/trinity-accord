@@ -62,7 +62,8 @@
     "/api/claim-gate-output-schema.v1.json",
     "/api/claim-gate-rules.json",
     "/api/report-builder-policy.json",
-    "/api/generated-by-schema.v1.json"
+    "/api/generated-by-schema.v1.json",
+    "/api/corrections-index.json"
   ],
   "legacy_machine": [
     "/api/echo-record-schema.v2.json"
@@ -71,7 +72,7 @@
     "/api/echo-record-schema.v2.json"
   ],
   "version": "v1",
-  "source_digest": "ad8185df86b12d69",
+  "source_digest": "ef60733e26da075a",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
   "non_amending_boundary": true,
   "canonical_authority": "Bitcoin Originals only",
