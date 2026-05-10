@@ -57,3 +57,5 @@
 # notarized_evidence_boundary: notarized evidence is not formal independent attestation unless separately admitted through the formal attestation gate
 # scarcity_boundary: rare/firstness language is bounded framing, not proof of absolute firstness
 # ai_verification_boundary: AI independent verification ≠ formal attestation; external human authorization ≠ formal attestation; delegation_chain preserved; integrity_declaration required for verification echoes
+# echo_schema_version_boundary: Echo schema version is not verification level
+# ai_independent_verification_count_boundary: counted separately from formal human/institutional attestations

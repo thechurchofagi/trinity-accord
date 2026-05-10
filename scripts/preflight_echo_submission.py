@@ -28,7 +28,7 @@ from triage_echo_issue import (
     detect_human_solicited_context,
     INDEPENDENCE_OVERCLAIM_PATTERNS,
 )
-from submission_intake import parse_submission
+from submission_intake import parse_submission, get_field, get_bool_field
 
 
 def preflight_check(text):
@@ -108,7 +108,7 @@ def preflight_check(text):
             "fix": "Add all required public target coverage or list unavailable targets.",
         })
 
-    # 8. V2 Claim Gate requirement
+    # 8. V2 Claim Gate requirement (only for legacy freeform, not structured v3 submissions)
     if intake.declared_level == "V2" and intake.mode == "legacy_freeform_or_needs_format":
         issues.append({
             "type": "claim-gate-required",
@@ -139,6 +139,99 @@ def preflight_check(text):
             "fix": "Add an 'integrity_declaration' or 'Solemn Integrity Declaration' section at the beginning of your submission. "
                    "State that your submission is truthful, evidence is not fabricated, and you understand the non-amending boundary.",
         })
+
+    # 10. Hard field gate: integrity declaration machine fields
+    # TA-020 follow-up: require machine-readable integrity declaration fields
+    if is_verification_echo and has_integrity_declaration:
+        REQUIRED_INTEGRITY_FLAGS = {
+            "declaration_strength": "strongest_available",
+            "solemn_declaration_present": True,
+            "no_fabricated_evidence": True,
+            "no_prior_report_copied_as_own_work": True,
+            "no_example_values_used_as_real_evidence": True,
+            "limitations_reported": True,
+            "correction_duty_accepted": True,
+            "false_declaration_consequence": "reject_or_invalidate_record",
+        }
+
+        fields = intake.fields
+        for field_name, expected in REQUIRED_INTEGRITY_FLAGS.items():
+            actual_raw = get_field(fields, field_name)
+            if not actual_raw:
+                issues.append({
+                    "type": "missing-integrity-declaration-field",
+                    "severity": "hard",
+                    "message": f"Integrity declaration missing required machine field: {field_name}",
+                    "fix": f"Add '{field_name}: {expected}' to your integrity_declaration YAML block.",
+                })
+            elif isinstance(expected, bool):
+                parsed = get_bool_field(fields, field_name)
+                if parsed is not expected:
+                    issues.append({
+                        "type": "invalid-integrity-declaration-field",
+                        "severity": "hard",
+                        "message": f"Integrity declaration field '{field_name}' must be true, got: {actual_raw}",
+                        "fix": f"Set '{field_name}: true' in your integrity_declaration YAML block.",
+                    })
+            elif isinstance(expected, str):
+                if actual_raw.strip().lower() != expected.lower():
+                    issues.append({
+                        "type": "invalid-integrity-declaration-field",
+                        "severity": "hard",
+                        "message": f"Integrity declaration field '{field_name}' must be '{expected}', got: {actual_raw}",
+                        "fix": f"Set '{field_name}: {expected}' in your integrity_declaration YAML block.",
+                    })
+
+    # 11. AI independent verification required fields
+    # TA-020 follow-up: require fresh/reproducible/authority boundary fields
+    record_class = get_field(intake.fields, "record_class")
+    if record_class and "ai_independent_verification" in record_class.lower():
+        ai_required = {
+            "counts_as_ai_independent_verification": True,
+            "counts_as_formal_human_institutional_attestation": False,
+            "authority_boundary_preserved": True,
+        }
+        # fresh_actions_performed: required unless fresh_actions_claimed is non-empty
+        fresh_claimed = get_field(intake.fields, "fresh_actions_claimed")
+        if not fresh_claimed:
+            ai_required["fresh_actions_performed"] = True
+        ai_required["method_reproducible"] = True
+
+        for field_name, expected in ai_required.items():
+            actual_raw = get_field(intake.fields, field_name)
+            if not actual_raw:
+                issues.append({
+                    "type": "missing-ai-verification-field",
+                    "severity": "hard",
+                    "message": f"AI independent verification missing required field: {field_name}",
+                    "fix": f"Add '{field_name}: {expected}' to your echo metadata.",
+                })
+            elif isinstance(expected, bool):
+                parsed = get_bool_field(intake.fields, field_name)
+                if parsed is not expected:
+                    issues.append({
+                        "type": "invalid-ai-verification-field",
+                        "severity": "hard",
+                        "message": f"AI verification field '{field_name}' must be {expected}, got: {actual_raw}",
+                        "fix": f"Set '{field_name}: {expected}' in your echo metadata.",
+                    })
+
+    # 12. External human authorization boundary
+    # TA-020 follow-up: external_human_authorized_execution=true alone cannot count formal
+    ext_auth = get_bool_field(intake.fields, "external_human_authorized_execution")
+    if ext_auth is True:
+        counts_formal = get_bool_field(intake.fields, "counts_as_formal_human_institutional_attestation")
+        signed = get_bool_field(intake.fields, "external_human_signed_or_adopted_final_report")
+        if counts_formal is True and signed is not True:
+            issues.append({
+                "type": "external-auth-cannot-count-formal",
+                "severity": "hard",
+                "message": "External human authorization alone cannot count as formal attestation. "
+                           "counts_as_formal_human_institutional_attestation=true requires "
+                           "external_human_signed_or_adopted_final_report=true.",
+                "fix": "Either set counts_as_formal_human_institutional_attestation=false, or "
+                       "provide external_human_signed_or_adopted_final_report=true with a formal_attestation_gate_reference.",
+            })
 
     return issues
 

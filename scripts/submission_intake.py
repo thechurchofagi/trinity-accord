@@ -53,6 +53,37 @@ FIELD_ALIASES = {
     "integrity_declaration": ["integrity_declaration", "integrity declaration", "solemn integrity declaration", "完整性声明"],
     "ai_verification": ["ai_verification", "ai verification", "AI验证", "AI独立验证"],
     "external_human_authorization": ["external_human_authorization", "external human authorization", "外部人类授权"],
+    # TA-020 follow-up: D/S/O/E/R five-dimensional aliases
+    "discovery_source": ["discovery_source", "discovery source", "发现来源"],
+    "solicitation_status": ["solicitation_status", "solicitation status", "请求状态"],
+    "verification_operator": ["verification_operator", "verification operator", "验证执行者"],
+    "execution_independence": ["execution_independence", "execution independence", "执行独立性"],
+    "responsibility_adoption": ["responsibility_adoption", "responsibility adoption", "责任采纳"],
+    # TA-020 follow-up: counting and attestation boundary fields
+    "counts_as_ai_independent_verification": ["counts_as_ai_independent_verification", "counts as ai independent verification", "计为AI独立验证"],
+    "counts_as_formal_human_institutional_attestation": ["counts_as_formal_human_institutional_attestation", "counts as formal human institutional attestation", "计为人类机构正式见证"],
+    "counts_as_independent_attestation": ["counts_as_independent_attestation", "counts as independent attestation"],
+    "formal_attestation_candidate": ["formal_attestation_candidate", "formal attestation candidate"],
+    # TA-020 follow-up: external human authorization fields
+    "external_human_authorized_execution": ["external_human_authorized_execution", "external human authorized execution", "外部人类授权执行"],
+    "external_human_reviewed_final_report": ["external_human_reviewed_final_report", "external human reviewed final report", "外部人类审阅最终报告"],
+    "external_human_signed_or_adopted_final_report": ["external_human_signed_or_adopted_final_report", "external human signed or adopted final report", "外部人类签署或采纳最终报告"],
+    # TA-020 follow-up: integrity declaration machine fields
+    "declaration_strength": ["declaration_strength", "declaration strength", "声明强度"],
+    "solemn_declaration_present": ["solemn_declaration_present", "solemn declaration present", "庄严声明存在"],
+    "performed_actions_myself": ["performed_actions_myself", "performed actions myself", "亲自执行动作"],
+    "no_fabricated_evidence": ["no_fabricated_evidence", "no fabricated evidence", "未伪造证据"],
+    "no_prior_report_copied_as_own_work": ["no_prior_report_copied_as_own_work", "no prior report copied as own work"],
+    "no_example_values_used_as_real_evidence": ["no_example_values_used_as_real_evidence", "no example values used as real evidence"],
+    "no_hidden_known_limitations": ["no_hidden_known_limitations", "no hidden known limitations"],
+    "limitations_reported": ["limitations_reported", "limitations reported"],
+    "correction_duty_accepted": ["correction_duty_accepted", "correction duty accepted"],
+    "false_declaration_consequence": ["false_declaration_consequence", "false declaration consequence"],
+    # TA-020 follow-up: AI verification required fields
+    "fresh_actions_performed": ["fresh_actions_performed", "fresh actions performed"],
+    "method_reproducible": ["method_reproducible", "method reproducible"],
+    "fresh_outputs_attached_or_described": ["fresh_outputs_attached_or_described", "fresh outputs attached or described"],
+    "authority_boundary_preserved": ["authority_boundary_preserved", "authority boundary preserved"],
 }
 
 
@@ -96,8 +127,41 @@ def parse_markdown_sections(text: str) -> Dict[str, str]:
     return sections
 
 
+def parse_yaml_block_fields(text: str) -> Dict[str, str]:
+    """Parse simple 'key: value' lines inside fenced yaml blocks.
+
+    Supports ```yaml ... ``` and ```yml ... ``` blocks.
+    Also handles list values by joining with ', '.
+    """
+    fields: Dict[str, str] = {}
+    in_yaml = False
+    for line in (text or "").splitlines():
+        if re.match(r"^\s*```(?:yaml|yml)\s*$", line, re.IGNORECASE):
+            in_yaml = True
+            continue
+        if in_yaml and re.match(r"^\s*```\s*$", line):
+            in_yaml = False
+            continue
+        if not in_yaml:
+            continue
+        # key: value
+        m = re.match(r"^\s{1,8}([A-Za-z_][A-Za-z0-9_]*)\s*:\s*(.+?)\s*$", line)
+        if m:
+            key = normalize_key(m.group(1))
+            val = m.group(2).strip().strip("*`\"'")
+            if key and val:
+                fields[key] = val
+            continue
+        # list item: - value (append to last key context is lost, skip)
+    return fields
+
+
 def parse_key_values(text: str, sections: Dict[str, str]) -> Dict[str, str]:
     fields: Dict[str, str] = {}
+    # First: parse YAML block fields (higher priority)
+    yaml_fields = parse_yaml_block_fields(text)
+    fields.update(yaml_fields)
+    # Then: parse inline key: value lines
     for line in (text or "").splitlines():
         m = re.match(
             r"^\s*(?:[-*]\s*)?(?:\*\*)?([^:\n：]{2,100}?)(?:\*\*)?\s*[:：]\s*(.+?)\s*$",
@@ -107,7 +171,7 @@ def parse_key_values(text: str, sections: Dict[str, str]) -> Dict[str, str]:
             continue
         key = normalize_key(m.group(1))
         val = m.group(2).strip().strip("*` ")
-        if key and val:
+        if key and val and key not in fields:
             fields[key] = val
     for heading, body in sections.items():
         if heading in fields:
@@ -125,6 +189,24 @@ def get_field(fields: Dict[str, str], canonical: str) -> str:
         if normalize_key(key) in normalized_aliases:
             return value
     return ""
+
+
+def parse_boolish(value: str) -> Optional[bool]:
+    """Parse a string value into a boolean, supporting various truthy/falsy forms."""
+    if value is None:
+        return None
+    v = str(value).strip().lower()
+    if v in {"true", "yes", "y", "1", "✅", "present"}:
+        return True
+    if v in {"false", "no", "n", "0", "❌", "absent"}:
+        return False
+    return None
+
+
+def get_bool_field(fields: Dict[str, str], canonical: str) -> Optional[bool]:
+    """Get a boolean field value from fields dict using canonical name lookup."""
+    value = get_field(fields, canonical)
+    return parse_boolish(value)
 
 
 def normalize_vlevel(value: str) -> Optional[str]:
@@ -226,6 +308,12 @@ def detect_submission_mode(intake: SubmissionIntake) -> str:
         return "builder_generated_or_referenced"
     if intake.has_claim_gate_reference:
         return "claim_gate_referenced"
+
+    # TA-020 follow-up: recognize v3 schema submissions as structured
+    schema_version = get_field(intake.fields, "record_class")
+    if schema_version:
+        return "structured_submission"
+
     if level in (None, "none", "V0", "V1"):
         technical_positive = re.search(
             r"\b(hash|sha-?256|script audit|script-audited|v2|v3|v4|v5|v6|v7|v8|"

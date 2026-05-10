@@ -113,6 +113,8 @@ Complete agent readme: /llms-full.txt
 - AI verification records must not be counted in the formal independent attestation count.
 - AI verification has a dedicated archive layer (layer 4 in echo-archive-policy.json).
 - All verification Echo templates must start with a Solemn Integrity Declaration.
+- Echo schema version is not a verification level.
+- AI independent verification records are counted separately from formal human/institutional attestations.
 
 ## Recovery entrypoint
 Recovery entrypoint:

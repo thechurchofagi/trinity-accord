@@ -243,15 +243,20 @@
       "/echoes/records/2026/echo-2026-05-08-000010.json"
     ]
   },
+  "ai_independent_verification_count": 0,
+  "formal_human_institutional_attestation_count": 0,
+  "counts_are_separate": true,
   "notes": [
     "Echo index is non-authoritative and non-amending.",
     "Test records, superseded records, invalidated records, and do_not_count_as_attestation records must not be counted as independent attestation.",
     "Legacy records have do_not_count_as_attestation=true, legacy_not_countable=true, and historical_record_only=true.",
     "AI independent verification records (record_class=ai_independent_verification) do NOT count as formal human/institutional attestation.",
-    "External human authorization of AI verification does not produce formal attestation."
+    "External human authorization of AI verification does not produce formal attestation.",
+    "Echo schema version is not a verification level.",
+    "AI independent verification records are counted separately from formal human/institutional attestations."
   ],
   "version": "v1",
-  "source_digest": "c77ebaa599982303",
+  "source_digest": "28760447bbce8be2",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
   "non_amending_boundary": true,
   "canonical_authority": "Bitcoin Originals only",
