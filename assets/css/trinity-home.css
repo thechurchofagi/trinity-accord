@@ -1782,3 +1782,100 @@ main .hero-intro > p.zh-para:nth-of-type(2) {
   margin-top: 0 !important;
   margin-bottom: 1.2rem !important;
 }
+
+/* ============================================================
+   PUBLIC STATUS SNAPSHOT — generated homepage status cards
+   ============================================================ */
+
+.public-status-snapshot {
+  margin: 3rem 0 4rem !important;
+}
+
+.status-card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0 1.25rem;
+}
+
+.status-card {
+  padding: 1.25rem 1.35rem;
+  border: 1px solid rgba(201, 168, 76, 0.18);
+  border-radius: 12px;
+  background:
+    linear-gradient(135deg, rgba(201, 168, 76, 0.045), rgba(255, 255, 255, 0.018)),
+    var(--bg-card);
+}
+
+.status-card .status-label,
+main .status-card .status-label {
+  font-family: var(--mono) !important;
+  font-size: 0.74rem !important;
+  line-height: 1.45 !important;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold-dim) !important;
+  margin-bottom: 0.5rem !important;
+  font-style: normal !important;
+}
+
+.status-card .status-number,
+main .status-card .status-number {
+  font-family: var(--mono) !important;
+  font-size: clamp(1.8rem, 4vw, 2.45rem) !important;
+  line-height: 1.05 !important;
+  color: var(--gold) !important;
+  margin: 0 0 0.75rem !important;
+  font-style: normal !important;
+}
+
+.status-card .status-note,
+main .status-card .status-note {
+  font-size: 0.88rem !important;
+  line-height: 1.65 !important;
+  color: #b8bfd4 !important;
+  margin-bottom: 0.55rem !important;
+}
+
+.status-card .status-note.zh,
+main .status-card .status-note.zh {
+  font-style: normal !important;
+  color: #a8b0c8 !important;
+}
+
+.status-details {
+  margin: 1.25rem 0;
+  padding: 1rem 1.15rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.status-details summary {
+  cursor: pointer;
+  font-family: var(--mono);
+  font-size: 0.86rem;
+  color: var(--gold-dim);
+}
+
+.status-generated-note,
+main .status-generated-note {
+  font-size: 0.82rem !important;
+  line-height: 1.6 !important;
+  color: #8f96ad !important;
+  margin-top: 1rem !important;
+}
+
+.status-boundary,
+.status-links,
+main .status-boundary,
+main .status-links {
+  font-size: 0.95rem !important;
+  line-height: 1.75 !important;
+}
+
+@media (max-width: 760px) {
+  .status-card-grid {
+    grid-template-columns: 1fr;
+  }
+}

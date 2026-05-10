@@ -91,6 +91,14 @@ jobs:
           python3 scripts/generate_echo_index.py
           git diff --exit-code api/echo-index.json
 
+      - name: Generate homepage public status and verify no drift
+        run: |
+          python3 scripts/generate_public_home_status.py
+          git diff --exit-code index.md
+
+      - name: Test homepage public status sync
+        run: python3 scripts/test_home_public_status_sync.py
+
       - name: Verify Echo index completeness
         run: python3 scripts/verify_echo_index_completeness.py
 

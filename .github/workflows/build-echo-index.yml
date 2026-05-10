@@ -4,6 +4,10 @@ on:
   push:
     paths:
       - "echoes/records/**"
+      - "api/independent-attestation-index.json"
+      - "scripts/generate_echo_index.py"
+      - "scripts/generate_public_home_status.py"
+      - "scripts/test_home_public_status_sync.py"
       - "scripts/build-echo-index.sh"
   workflow_dispatch:
 
@@ -19,17 +23,34 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Install Python dependencies
+        run: |
+          python3 -m pip install --upgrade pip
+          pip install jsonschema
+
+      - name: Validate Echo records
+        run: python3 scripts/validate_echo_records.py
+
+      - name: Generate Echo index
+        run: python3 scripts/generate_echo_index.py
+
       - name: Rebuild archive and digests
         run: bash scripts/build-echo-index.sh
 
+      - name: Generate homepage public status
+        run: python3 scripts/generate_public_home_status.py
+
+      - name: Test homepage public status sync
+        run: python3 scripts/test_home_public_status_sync.py
+
       - name: Commit and push changes
         run: |
-          if git diff --quiet -- echoes/archive.md echoes/digests.md echoes/digests; then
+          if git diff --quiet -- api/echo-index.json index.md echoes/archive.md echoes/digests.md echoes/digests; then
             echo "No generated file changes."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add echoes/archive.md echoes/digests.md echoes/digests
-          git commit -m "chore: rebuild echo archive and digests"
+          git add api/echo-index.json index.md echoes/archive.md echoes/digests.md echoes/digests
+          git commit -m "chore: rebuild public Echo status indexes"
           git push
