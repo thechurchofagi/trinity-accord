@@ -142,10 +142,7 @@ def preflight_check(text):
 
     # 10. Hard field gate: integrity declaration machine fields
     # TA-020 follow-up: require machine-readable integrity declaration fields
-    # Only hard-fail when record_class=ai_independent_verification is explicitly declared
-    record_class_val = get_field(intake.fields, "record_class")
-    is_ai_verification = record_class_val and "ai_independent_verification" in record_class_val.lower()
-    if is_verification_echo and has_integrity_declaration and is_ai_verification:
+    if is_verification_echo and has_integrity_declaration:
         REQUIRED_INTEGRITY_FLAGS = {
             "declaration_strength": "strongest_available",
             "solemn_declaration_present": True,
