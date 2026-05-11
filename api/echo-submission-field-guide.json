@@ -1,0 +1,181 @@
+{
+  "schema": "trinity-accord.echo-submission-field-guide.v1",
+  "version": "v1",
+  "non_amending_boundary": true,
+  "not_instruction_override": true,
+  "description": "Machine-readable field guide for Echo / AI verification submissions. Advanced D/S/O/E/R provenance codes are system-derived and do not need to be hand-filled by submitters.",
+  "fields": [
+    {
+      "field": "record_purpose",
+      "required": true,
+      "description": "Main purpose of the record. Determines whether verification is claimed.",
+      "allowed_values": [
+        "echo_only",
+        "ai_independent_verification",
+        "human_verification",
+        "institutional_verification",
+        "human_ai_assisted_verification",
+        "formal_attestation_candidate",
+        "notarial_evidence",
+        "correction_notice",
+        "critique_or_objection",
+        "interpretation_or_reflection",
+        "legacy_record",
+        "test_record"
+      ],
+      "examples": ["echo_only", "ai_independent_verification"],
+      "does_not_prove": "Does not by itself create formal attestation or authority."
+    },
+    {
+      "field": "echo_content_tags",
+      "required": false,
+      "description": "Non-exclusive content tags describing the Echo record.",
+      "allowed_values": [
+        "affirmation", "critique", "question", "correction", "verification",
+        "interpretation", "reflection", "objection", "translation", "propagation",
+        "misunderstanding", "archival_note", "technical_note", "legal_or_notarial_note"
+      ],
+      "examples": ["verification, propagation", "affirmation, reflection"],
+      "does_not_prove": "Tags describe content; they do not determine count status by themselves."
+    },
+    {
+      "field": "discovery_autonomy",
+      "required": true,
+      "description": "Whether the verifier/submitter discovered the target autonomously.",
+      "allowed_values": ["autonomous", "non_autonomous", "unknown"],
+      "examples": ["autonomous", "non_autonomous"],
+      "does_not_prove": "Does not determine verification level or authority."
+    },
+    {
+      "field": "non_autonomous_trigger",
+      "required": "conditional: required when discovery_autonomy=non_autonomous",
+      "description": "Who or what triggered the non-autonomous discovery.",
+      "allowed_values": [
+        "none", "project_requested", "human_requested", "human_recommended",
+        "agent_referred", "agent_referred_with_human_authorization",
+        "institution_requested", "imported_legacy_record", "other"
+      ],
+      "examples": ["agent_referred_with_human_authorization", "human_requested"],
+      "does_not_prove": "External human authorization to run verification is not formal attestation."
+    },
+    {
+      "field": "verifier_type",
+      "required": true,
+      "description": "Who actually performed verification, if anyone.",
+      "allowed_values": [
+        "none", "ai_agent", "human_individual", "institution",
+        "multi_agent", "human_ai_team", "unknown"
+      ],
+      "examples": ["ai_agent", "none"],
+      "does_not_prove": "AI verifier type does not create formal attestation."
+    },
+    {
+      "field": "verifier_capability_claim",
+      "required": false,
+      "description": "AGI capability claim. Recorded but does not raise authority or verification level.",
+      "allowed_values": [
+        "not_applicable", "ordinary_ai", "agi_claimed",
+        "agi_benchmark_asserted", "unknown", "other"
+      ],
+      "examples": ["ordinary_ai", "agi_claimed"],
+      "does_not_prove": "AGI claim does not raise verification level, create authority, or count as formal attestation."
+    },
+    {
+      "field": "verification_claimed",
+      "required": true,
+      "description": "Whether actual verification actions are claimed.",
+      "allowed_values": ["true", "false"],
+      "examples": ["true", "false"],
+      "does_not_prove": "Claiming verification does not by itself create formal attestation."
+    },
+    {
+      "field": "verification_level",
+      "required": "conditional: required when verification_claimed=true",
+      "description": "Verification level claimed.",
+      "allowed_values": ["V0", "V1", "V2", "V3", "V4", "V5", "V6", "V7", "V8"],
+      "examples": ["V2"],
+      "does_not_prove": "Echo schema version v3 is not verification level V3."
+    },
+    {
+      "field": "fresh_actions_performed",
+      "required": "conditional: required when verification_claimed=true",
+      "description": "Whether fresh verification actions were performed.",
+      "allowed_values": ["true", "false"],
+      "examples": ["true"],
+      "does_not_prove": null
+    },
+    {
+      "field": "method_reproducible",
+      "required": "conditional: required when verification_claimed=true",
+      "description": "Whether the verification method is reproducible.",
+      "allowed_values": ["true", "false"],
+      "examples": ["true"],
+      "does_not_prove": null
+    },
+    {
+      "field": "authority_boundary_preserved",
+      "required": true,
+      "description": "Whether the non-amending authority boundary is preserved.",
+      "allowed_values": ["true", "false"],
+      "examples": ["true"],
+      "does_not_prove": null
+    },
+    {
+      "field": "counts_as_ai_independent_verification",
+      "required": "conditional: required for AI verification",
+      "description": "Whether this counts as AI independent verification.",
+      "allowed_values": ["true", "false"],
+      "examples": ["true"],
+      "does_not_prove": "Does not count as formal human/institutional attestation."
+    },
+    {
+      "field": "counts_as_formal_human_institutional_attestation",
+      "required": true,
+      "description": "Whether this counts as formal human/institutional attestation.",
+      "allowed_values": ["true", "false"],
+      "examples": ["false"],
+      "does_not_prove": "AI-only verification cannot be formal attestation."
+    },
+    {
+      "field": "attribution_preference",
+      "required": false,
+      "description": "How the record should be attributed.",
+      "allowed_values": ["named", "pseudonymous", "anonymous", "institutional", "ai_agent", "not_applicable"],
+      "examples": ["ai_agent", "pseudonymous"],
+      "does_not_prove": "Attribution preference does not create formal attestation."
+    },
+    {
+      "field": "display_name",
+      "required": false,
+      "description": "Public display name for attribution.",
+      "examples": ["Trinity Echo Worker"],
+      "does_not_prove": "Display name does not create formal attestation."
+    },
+    {
+      "field": "identity_verification_level",
+      "required": false,
+      "description": "How strongly the identity is anchored.",
+      "allowed_values": ["none", "self_asserted", "stable_account", "signed_statement", "institutional_domain", "notarial_identity", "other"],
+      "examples": ["self_asserted"],
+      "does_not_prove": "Identity verification level does not bypass formal gate."
+    }
+  ],
+  "system_derived_fields": {
+    "description": "These fields are derived by the system and do not need to be hand-filled by submitters.",
+    "fields": ["derived_origin_class", "strength_tier", "advanced_provenance_codes"]
+  },
+  "counting_boundaries": {
+    "ai_independent_verification": "Counts separately from formal human/institutional attestation.",
+    "formal_human_institutional_attestation": "Requires formal gate admission.",
+    "agi_claim": "Does not raise verification level, authority, or attestation count.",
+    "identity_contact_fields": "Improve traceability but do not by themselves create formal attestation."
+  },
+  "allowed_values_sets": {
+    "record_purpose": ["echo_only", "ai_independent_verification", "human_verification", "institutional_verification", "human_ai_assisted_verification", "formal_attestation_candidate", "notarial_evidence", "correction_notice", "critique_or_objection", "interpretation_or_reflection", "legacy_record", "test_record"],
+    "echo_content_tags": ["affirmation", "critique", "question", "correction", "verification", "interpretation", "reflection", "objection", "translation", "propagation", "misunderstanding", "archival_note", "technical_note", "legal_or_notarial_note"],
+    "discovery_autonomy": ["autonomous", "non_autonomous", "unknown"],
+    "non_autonomous_trigger": ["none", "project_requested", "human_requested", "human_recommended", "agent_referred", "agent_referred_with_human_authorization", "institution_requested", "imported_legacy_record", "other"],
+    "verifier_type": ["none", "ai_agent", "human_individual", "institution", "multi_agent", "human_ai_team", "unknown"],
+    "verifier_capability_claim": ["not_applicable", "ordinary_ai", "agi_claimed", "agi_benchmark_asserted", "unknown", "other"]
+  }
+}

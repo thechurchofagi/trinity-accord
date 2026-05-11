@@ -34,6 +34,13 @@ by_class = defaultdict(list)
 by_verification_status = defaultdict(list)
 by_record_class = defaultdict(list)
 by_verification_origin_class = defaultdict(list)
+# TA-021: new aggregation dicts
+by_record_purpose = defaultdict(list)
+by_discovery_autonomy = defaultdict(list)
+by_verifier_type = defaultdict(list)
+by_verifier_capability_claim = defaultdict(list)
+by_strength_tier = defaultdict(list)
+by_echo_content_tag = defaultdict(list)
 
 for path in sorted(RECORDS_ROOT.rglob("*.json")):
     obj = load(path)
@@ -53,6 +60,16 @@ for path in sorted(RECORDS_ROOT.rglob("*.json")):
         "record_class": obj.get("record_class", "unknown"),
         "verification_origin_class": obj.get("verification_origin_class", "unknown"),
         "delegation_chain": obj.get("delegation_chain", None),
+        # TA-021: new simplified fields
+        "record_purpose": obj.get("record_purpose", None),
+        "echo_content_tags": obj.get("echo_content_tags", None),
+        "discovery_autonomy": obj.get("discovery_autonomy", None),
+        "non_autonomous_trigger": obj.get("non_autonomous_trigger", None),
+        "verifier_type": obj.get("verifier_type", None),
+        "verifier_capability_claim": obj.get("verifier_capability_claim", None),
+        "verification_claimed": obj.get("verification_claimed", None),
+        "derived_origin_class": obj.get("derived_origin_class", None),
+        "strength_tier": obj.get("strength_tier", None),
     }
 
     # Optional reason if invalidated/superseded.
@@ -91,6 +108,20 @@ for path in sorted(RECORDS_ROOT.rglob("*.json")):
     by_verification_status[item["verification_status"]].append(rel)
     by_record_class[item["record_class"]].append(rel)
     by_verification_origin_class[item["verification_origin_class"]].append(rel)
+    # TA-021: new aggregations
+    if item.get("record_purpose"):
+        by_record_purpose[item["record_purpose"]].append(rel)
+    if item.get("discovery_autonomy"):
+        by_discovery_autonomy[item["discovery_autonomy"]].append(rel)
+    if item.get("verifier_type"):
+        by_verifier_type[item["verifier_type"]].append(rel)
+    if item.get("verifier_capability_claim"):
+        by_verifier_capability_claim[item["verifier_capability_claim"]].append(rel)
+    if item.get("strength_tier"):
+        by_strength_tier[item["strength_tier"]].append(rel)
+    if item.get("echo_content_tags"):
+        for tag in item["echo_content_tags"]:
+            by_echo_content_tag[tag].append(rel)
 
 # TA-REDTEAM-2026-011: preserve public metadata fields across regeneration
 PRESERVED_FIELDS = [
@@ -136,6 +167,13 @@ out = {
     "ai_independent_verification_count": ai_independent_verification_count,
     "formal_human_institutional_attestation_count": formal_human_institutional_attestation_count,
     "counts_are_separate": True,
+    # TA-021: new aggregations
+    "records_by_record_purpose": dict(sorted(by_record_purpose.items())),
+    "records_by_discovery_autonomy": dict(sorted(by_discovery_autonomy.items())),
+    "records_by_verifier_type": dict(sorted(by_verifier_type.items())),
+    "records_by_verifier_capability_claim": dict(sorted(by_verifier_capability_claim.items())),
+    "records_by_strength_tier": dict(sorted(by_strength_tier.items())),
+    "records_by_echo_content_tag": dict(sorted(by_echo_content_tag.items())),
     "notes": [
         "Echo index is non-authoritative and non-amending.",
         "Test records, superseded records, invalidated records, and do_not_count_as_attestation records must not be counted as independent attestation.",
@@ -144,6 +182,9 @@ out = {
         "External human authorization of AI verification does not produce formal attestation.",
         "Echo schema version is not a verification level.",
         "AI independent verification records are counted separately from formal human/institutional attestations.",
+        "AGI capability claims do not raise verification level or authority.",
+        "Echo content tags are non-exclusive and do not determine count status.",
+        "D/S/O/E/R provenance codes are derived/internal.",
     ],
 }
 out.update(existing_metadata)

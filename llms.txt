@@ -116,6 +116,19 @@ Complete agent readme: /llms-full.txt
 - Echo schema version is not a verification level.
 - AI independent verification records are counted separately from formal human/institutional attestations.
 
+## Echo / AI Verification Field Guide
+- record_purpose: purpose of the record (echo_only, ai_independent_verification, etc.).
+- echo_content_tags: non-exclusive content tags (verification, propagation, reflection, etc.).
+- discovery_autonomy: autonomous / non_autonomous / unknown.
+- non_autonomous_trigger: required if non_autonomous (agent_referred, human_requested, etc.).
+- verifier_type: none / ai_agent / human_individual / institution / multi_agent / human_ai_team / unknown.
+- verifier_capability_claim: ordinary_ai / agi_claimed / agi_benchmark_asserted / etc.; does not raise authority or level.
+- verification_claimed: true only if actual verification actions are claimed.
+- D/S/O/E/R provenance codes are derived/internal; submitters use the simplified fields above.
+- AGI capability claims do not raise verification level, authority, or formal attestation count.
+- Identity/contact fields improve traceability but do not by themselves create formal attestation.
+- Machine-readable field guide: /api/echo-submission-field-guide.json
+
 ## Recovery entrypoint
 Recovery entrypoint:
 - Human guide: /RECOVERY.md

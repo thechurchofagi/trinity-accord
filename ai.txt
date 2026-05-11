@@ -57,3 +57,12 @@
 # notarized_evidence_boundary: notarized evidence is not formal independent attestation unless separately admitted through the formal attestation gate
 # scarcity_boundary: rare/firstness language is bounded framing, not proof of absolute firstness
 # ai_verification_boundary: AI independent verification ≠ formal attestation; external human authorization ≠ formal attestation; delegation_chain preserved; integrity_declaration required for verification echoes; echo_schema_version is not verification level; counted separately from formal attestations
+
+# TA-021 Echo Simplified Fields:
+# Echo submissions must begin with a Solemn Integrity Declaration.
+# Core Echo fields: record_purpose, echo_content_tags, discovery_autonomy, non_autonomous_trigger, verifier_type, verifier_capability_claim, verification_claimed.
+# AGI capability claims (verifier_capability_claim) do not raise verification level, authority, or formal attestation count.
+# AI verification is counted separately from human/institutional formal attestation.
+# Identity/contact fields improve traceability but do not create formal attestation.
+# D/S/O/E/R provenance codes are system-derived; submitters use simplified fields above.
+# Field guide: /api/echo-submission-field-guide.json

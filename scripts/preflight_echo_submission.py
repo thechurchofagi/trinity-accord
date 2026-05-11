@@ -108,8 +108,9 @@ def preflight_check(text):
             "fix": "Add all required public target coverage or list unavailable targets.",
         })
 
-    # 8. V2 Claim Gate requirement (only for legacy freeform, not structured v3 submissions)
-    if intake.declared_level == "V2" and intake.mode == "legacy_freeform_or_needs_format":
+    # 8. V2 Claim Gate requirement (only for legacy freeform, not structured v3 submissions or TA-021 new schema)
+    uses_new_schema = bool(get_field(intake.fields, "record_purpose"))
+    if intake.declared_level == "V2" and intake.mode == "legacy_freeform_or_needs_format" and not uses_new_schema:
         issues.append({
             "type": "claim-gate-required",
             "severity": "hard",
@@ -235,6 +236,179 @@ def preflight_check(text):
                 "fix": "Either set counts_as_formal_human_institutional_attestation=false, or "
                        "provide external_human_signed_or_adopted_final_report=true with a formal_attestation_gate_reference.",
             })
+
+    # === TA-021: New simplified submitter-facing field validation ===
+
+    # 13. Required simplified fields for all submissions
+    record_purpose = get_field(intake.fields, "record_purpose")
+    discovery_autonomy = get_field(intake.fields, "discovery_autonomy")
+    verifier_type = get_field(intake.fields, "verifier_type")
+    verification_claimed = get_bool_field(intake.fields, "verification_claimed")
+
+    # If any new field is present, validate using new schema
+    uses_new_schema = any([record_purpose, discovery_autonomy, verifier_type, verification_claimed is not None])
+
+    if uses_new_schema:
+        # Required fields
+        if not record_purpose:
+            issues.append({
+                "type": "missing-record-purpose",
+                "severity": "hard",
+                "message": "Missing required field: record_purpose",
+                "fix": "Add 'record_purpose' with one of: echo_only, ai_independent_verification, human_verification, etc.",
+            })
+
+        if not discovery_autonomy:
+            issues.append({
+                "type": "missing-discovery-autonomy",
+                "severity": "hard",
+                "message": "Missing required field: discovery_autonomy",
+                "fix": "Add 'discovery_autonomy': autonomous, non_autonomous, or unknown.",
+            })
+
+        if verifier_type is None or verifier_type == "":
+            issues.append({
+                "type": "missing-verifier-type",
+                "severity": "hard",
+                "message": "Missing required field: verifier_type",
+                "fix": "Add 'verifier_type': none, ai_agent, human_individual, institution, multi_agent, human_ai_team, or unknown.",
+            })
+
+        if verification_claimed is None:
+            issues.append({
+                "type": "missing-verification-claimed",
+                "severity": "hard",
+                "message": "Missing required field: verification_claimed",
+                "fix": "Add 'verification_claimed': true or false.",
+            })
+
+        # Conditional: non_autonomous_trigger required when non_autonomous
+        if discovery_autonomy == "non_autonomous":
+            trigger = get_field(intake.fields, "non_autonomous_trigger")
+            if not trigger or trigger == "none":
+                issues.append({
+                    "type": "missing-non-autonomous-trigger",
+                    "severity": "hard",
+                    "message": "discovery_autonomy=non_autonomous requires non_autonomous_trigger",
+                    "fix": "Add 'non_autonomous_trigger' with one of: project_requested, human_requested, agent_referred, etc.",
+                })
+
+        # Conditional: verification fields required when claimed
+        if verification_claimed is True:
+            if not get_field(intake.fields, "verification_level"):
+                issues.append({
+                    "type": "missing-verification-level",
+                    "severity": "hard",
+                    "message": "verification_claimed=true requires verification_level",
+                    "fix": "Add 'verification_level' (V0-V8).",
+                })
+
+            if get_bool_field(intake.fields, "fresh_actions_performed") is not True:
+                issues.append({
+                    "type": "missing-fresh-actions",
+                    "severity": "hard",
+                    "message": "verification_claimed=true requires fresh_actions_performed=true",
+                    "fix": "Add 'fresh_actions_performed: true'.",
+                })
+
+            if get_bool_field(intake.fields, "method_reproducible") is not True:
+                issues.append({
+                    "type": "missing-method-reproducible",
+                    "severity": "hard",
+                    "message": "verification_claimed=true requires method_reproducible=true",
+                    "fix": "Add 'method_reproducible: true'.",
+                })
+
+        # Conditional: echo_only must not claim verification
+        if record_purpose == "echo_only":
+            if verification_claimed is True:
+                issues.append({
+                    "type": "echo-only-cannot-claim-verification",
+                    "severity": "hard",
+                    "message": "record_purpose=echo_only requires verification_claimed=false",
+                    "fix": "Set 'verification_claimed: false' or change record_purpose.",
+                })
+
+            if get_bool_field(intake.fields, "counts_as_ai_independent_verification") is True:
+                issues.append({
+                    "type": "echo-only-cannot-count-ai-verification",
+                    "severity": "hard",
+                    "message": "record_purpose=echo_only requires counts_as_ai_independent_verification=false",
+                    "fix": "Set 'counts_as_ai_independent_verification: false' or change record_purpose.",
+                })
+
+        # Conditional: ai_independent_verification requirements
+        if record_purpose == "ai_independent_verification":
+            if verifier_type not in {"ai_agent", "multi_agent", "human_ai_team"}:
+                issues.append({
+                    "type": "ai-verification-requires-ai-verifier",
+                    "severity": "hard",
+                    "message": "record_purpose=ai_independent_verification requires verifier_type is ai_agent, multi_agent, or human_ai_team",
+                    "fix": "Set 'verifier_type' to ai_agent, multi_agent, or human_ai_team.",
+                })
+
+            if verification_claimed is not True:
+                issues.append({
+                    "type": "ai-verification-requires-claimed",
+                    "severity": "hard",
+                    "message": "record_purpose=ai_independent_verification requires verification_claimed=true",
+                    "fix": "Set 'verification_claimed: true'.",
+                })
+
+            if get_bool_field(intake.fields, "counts_as_ai_independent_verification") is not True:
+                issues.append({
+                    "type": "ai-verification-must-count",
+                    "severity": "hard",
+                    "message": "record_purpose=ai_independent_verification requires counts_as_ai_independent_verification=true",
+                    "fix": "Set 'counts_as_ai_independent_verification: true'.",
+                })
+
+            if get_bool_field(intake.fields, "counts_as_formal_human_institutional_attestation") is not False:
+                issues.append({
+                    "type": "ai-verification-cannot-count-formal",
+                    "severity": "hard",
+                    "message": "AI independent verification cannot count as formal human/institutional attestation",
+                    "fix": "Set 'counts_as_formal_human_institutional_attestation: false'.",
+                })
+
+        # Conditional: AGI capability boundary
+        capability_claim = get_field(intake.fields, "verifier_capability_claim")
+        if capability_claim in {"agi_claimed", "agi_benchmark_asserted"}:
+            boundary_fields = {
+                "agi_claim_does_not_raise_verification_level": True,
+                "agi_claim_does_not_create_authority": True,
+                "agi_claim_does_not_count_as_formal_attestation": True,
+            }
+            for bf, expected in boundary_fields.items():
+                if get_bool_field(intake.fields, bf) is not expected:
+                    issues.append({
+                        "type": "missing-agi-capability-boundary",
+                        "severity": "hard",
+                        "message": f"verifier_capability_claim={capability_claim} requires {bf}=true",
+                        "fix": f"Add '{bf}: true' to your verifier_capability_boundary block.",
+                    })
+
+        # 14. Integrity declaration position check for new schema
+        declaration_pos = get_field(intake.fields, "declaration_position")
+        if declaration_pos and declaration_pos != "top_of_submission":
+            issues.append({
+                "type": "integrity-declaration-not-at-top",
+                "severity": "hard",
+                "message": "Solemn Integrity Declaration must be at top_of_submission",
+                "fix": "Move the integrity declaration to the very beginning of your submission and set 'declaration_position: top_of_submission'.",
+            })
+
+        # 15. performed_claimed_actions (new canonical, with legacy alias)
+        if get_bool_field(intake.fields, "performed_claimed_actions") is not True:
+            # Check legacy alias
+            if get_bool_field(intake.fields, "performed_actions_myself") is not True:
+                if is_verification_echo:
+                    issues.append({
+                        "type": "missing-performed-claimed-actions",
+                        "severity": "hard",
+                        "message": "Integrity declaration requires performed_claimed_actions=true (or legacy performed_actions_myself=true)",
+                        "fix": "Add 'performed_claimed_actions: true' to your integrity_declaration block.",
+                    })
 
     return issues
 

@@ -84,6 +84,37 @@ FIELD_ALIASES = {
     "method_reproducible": ["method_reproducible", "method reproducible"],
     "fresh_outputs_attached_or_described": ["fresh_outputs_attached_or_described", "fresh outputs attached or described"],
     "authority_boundary_preserved": ["authority_boundary_preserved", "authority boundary preserved"],
+    # TA-021: New simplified submitter-facing fields
+    "record_purpose": ["record_purpose", "record purpose", "记录目的"],
+    "echo_content_tags": ["echo_content_tags", "echo content tags", "回响内容标签"],
+    "discovery_autonomy": ["discovery_autonomy", "discovery autonomy", "发现自主性"],
+    "non_autonomous_trigger": ["non_autonomous_trigger", "non autonomous trigger", "非自主触发来源"],
+    "verifier_type": ["verifier_type", "verifier type", "验证主体"],
+    "verifier_capability_claim": ["verifier_capability_claim", "verifier capability claim", "验证者能力声明"],
+    "verification_claimed": ["verification_claimed", "verification claimed", "是否声称验证"],
+    # TA-021: Integrity declaration - new canonical field with legacy alias
+    "performed_claimed_actions": [
+        "performed_claimed_actions", "performed claimed actions",
+        "performed_actions_myself", "performed actions myself", "亲自执行动作",
+    ],
+    "declaration_position": ["declaration_position", "declaration position", "声明位置"],
+    # TA-021: Identity / Contact / Attribution fields
+    "attribution_preference": ["attribution_preference", "attribution preference", "署名偏好"],
+    "display_name": ["display_name", "display name", "展示名"],
+    "stable_identifier": ["stable_identifier", "stable identifier", "稳定身份"],
+    "affiliation": ["affiliation", "affiliation", "所属机构"],
+    "role_or_capacity": ["role_or_capacity", "role or capacity", "角色或身份"],
+    "willing_to_be_named_publicly": ["willing_to_be_named_publicly", "willing to be named publicly"],
+    "willing_to_provide_contact": ["willing_to_provide_contact", "willing to provide contact"],
+    "public_contact": ["public_contact", "public contact", "公开联系方式"],
+    "private_contact_available_to_maintainers": ["private_contact_available_to_maintainers", "private contact available to maintainers"],
+    "contact_method": ["contact_method", "contact method", "联系方式类型"],
+    "identity_verification_level": ["identity_verification_level", "identity verification level", "身份验证等级"],
+    # TA-021: Capability boundary fields
+    "capability_claim_not_verified_by_this_record": ["capability_claim_not_verified_by_this_record"],
+    "agi_claim_does_not_raise_verification_level": ["agi_claim_does_not_raise_verification_level"],
+    "agi_claim_does_not_create_authority": ["agi_claim_does_not_create_authority"],
+    "agi_claim_does_not_count_as_formal_attestation": ["agi_claim_does_not_count_as_formal_attestation"],
 }
 
 
@@ -131,28 +162,61 @@ def parse_yaml_block_fields(text: str) -> Dict[str, str]:
     """Parse simple 'key: value' lines inside fenced yaml blocks.
 
     Supports ```yaml ... ``` and ```yml ... ``` blocks.
-    Also handles list values by joining with ', '.
+    Also handles nested blocks (identity:, integrity_declaration:, etc.)
+    and list values by joining with ', '.
     """
     fields: Dict[str, str] = {}
     in_yaml = False
+    parent_key = ""
+    last_list_key = ""
     for line in (text or "").splitlines():
         if re.match(r"^\s*```(?:yaml|yml)\s*$", line, re.IGNORECASE):
             in_yaml = True
+            parent_key = ""
+            last_list_key = ""
             continue
         if in_yaml and re.match(r"^\s*```\s*$", line):
             in_yaml = False
+            parent_key = ""
+            last_list_key = ""
             continue
         if not in_yaml:
             continue
-        # key: value
+        # Detect nested block parent (e.g., "identity:", "integrity_declaration:")
+        m_parent = re.match(r"^(\s{0,4})([A-Za-z_][A-Za-z0-9_]*)\s*:\s*$", line)
+        if m_parent:
+            parent_key = normalize_key(m_parent.group(2))
+            last_list_key = ""
+            continue
+        # key: value (with optional indentation under parent)
         m = re.match(r"^\s{1,8}([A-Za-z_][A-Za-z0-9_]*)\s*:\s*(.+?)\s*$", line)
         if m:
             key = normalize_key(m.group(1))
             val = m.group(2).strip().strip("*`\"'")
             if key and val:
+                # Store with parent prefix for nested, also store flat for lookup
+                if parent_key:
+                    fields[f"{parent_key}_{key}"] = val
                 fields[key] = val
+            last_list_key = key
             continue
-        # list item: - value (append to last key context is lost, skip)
+        # list item: - value (collect as comma-separated)
+        m_list = re.match(r"^\s*-\s+(.+?)\s*$", line)
+        if m_list:
+            list_val = m_list.group(1).strip().strip("*`\"'")
+            if list_val:
+                # Determine the key to append to
+                if parent_key:
+                    list_key = parent_key
+                elif last_list_key:
+                    list_key = last_list_key
+                else:
+                    continue
+                existing = fields.get(list_key, "")
+                if existing:
+                    fields[list_key] = f"{existing}, {list_val}"
+                else:
+                    fields[list_key] = list_val
     return fields
 
 

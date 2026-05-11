@@ -7,6 +7,8 @@ Ensures that externally-authorized AI verification submissions:
 2. Do NOT count as formal attestation
 3. Properly record delegation chain and origin class with exact expected values
 4. Pass preflight with integrity declaration (no hard/high issues)
+
+TA-021: Updated to work with both old D/S/O/E/R fields and new simplified fields.
 """
 import sys
 from pathlib import Path
@@ -17,6 +19,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 from preflight_echo_submission import preflight_check
 from triage_echo_issue import detect_independence_overclaim_scoped
 from submission_intake import parse_submission, get_field, get_bool_field
+from derive_echo_provenance import derive_provenance
 
 
 def test(label, passed, detail=""):
@@ -61,27 +64,102 @@ def main():
     else:
         failed += 1
 
-    # ── Test 3: Exact field value assertions ──
-    expected_fields = {
-        "record_class": "ai_independent_verification",
-        "verification_origin_class": "B2_external_human_authorized_ai_verification",
-        "discovery_source": "D5_agent_referred_peer_agent",
-        "verification_operator": "O2_external_ai_agent",
-        "execution_independence": "E2_fresh_actions_with_sources",
-        "responsibility_adoption": "R2_external_human_authorized_ai_only",
-        "verification_level": "V2",
-    }
+    # ── Test 3: New simplified fields present (TA-021) ──
+    record_purpose = get_field(intake.fields, "record_purpose")
+    discovery_autonomy = get_field(intake.fields, "discovery_autonomy")
+    verifier_type = get_field(intake.fields, "verifier_type")
+    verification_claimed = get_bool_field(intake.fields, "verification_claimed")
 
-    for field_name, expected_val in expected_fields.items():
-        actual = get_field(intake.fields, field_name)
-        if test(f"Field '{field_name}' == '{expected_val}'",
-                actual.lower() == expected_val.lower() if actual else False,
-                f"got='{actual}'"):
-            passed += 1
-        else:
-            failed += 1
+    if test("Field 'record_purpose' == 'ai_independent_verification'",
+            record_purpose == "ai_independent_verification",
+            f"got='{record_purpose}'"):
+        passed += 1
+    else:
+        failed += 1
 
-    # ── Test 4: Exact boolean field assertions ──
+    if test("Field 'discovery_autonomy' == 'non_autonomous'",
+            discovery_autonomy == "non_autonomous",
+            f"got='{discovery_autonomy}'"):
+        passed += 1
+    else:
+        failed += 1
+
+    if test("Field 'verifier_type' == 'ai_agent'",
+            verifier_type == "ai_agent",
+            f"got='{verifier_type}'"):
+        passed += 1
+    else:
+        failed += 1
+
+    if test("Bool field 'verification_claimed' == True",
+            verification_claimed is True,
+            f"got={verification_claimed}"):
+        passed += 1
+    else:
+        failed += 1
+
+    # ── Test 4: Derived provenance from simplified fields (TA-021) ──
+    derived = derive_provenance({
+        "record_purpose": record_purpose,
+        "discovery_autonomy": discovery_autonomy,
+        "non_autonomous_trigger": get_field(intake.fields, "non_autonomous_trigger"),
+        "verifier_type": verifier_type,
+        "verification_claimed": str(verification_claimed).lower(),
+        "external_human_authorized_execution": str(get_bool_field(intake.fields, "external_human_authorized_execution")).lower(),
+    })
+
+    if test("Derived origin_class == 'B2_external_human_authorized_ai_verification'",
+            derived["derived_origin_class"] == "B2_external_human_authorized_ai_verification",
+            f"got='{derived['derived_origin_class']}'"):
+        passed += 1
+    else:
+        failed += 1
+
+    if test("Derived strength_tier == 'B'",
+            derived["strength_tier"] == "B",
+            f"got='{derived['strength_tier']}'"):
+        passed += 1
+    else:
+        failed += 1
+
+    codes = derived["advanced_provenance_codes"]
+    if test("Derived discovery_source_code == 'D5_agent_referred_peer_agent'",
+            codes["discovery_source_code"] == "D5_agent_referred_peer_agent",
+            f"got='{codes['discovery_source_code']}'"):
+        passed += 1
+    else:
+        failed += 1
+
+    if test("Derived solicitation_status_code contains S2 and S3",
+            "S2_user_agent_referred_peer_agent" in codes["solicitation_status_code"]
+            and "S3_external_human_authorized_agent" in codes["solicitation_status_code"],
+            f"got='{codes['solicitation_status_code']}'"):
+        passed += 1
+    else:
+        failed += 1
+
+    if test("Derived verifier_operator_code == 'O2_external_ai_agent'",
+            codes["verifier_operator_code"] == "O2_external_ai_agent",
+            f"got='{codes['verifier_operator_code']}'"):
+        passed += 1
+    else:
+        failed += 1
+
+    if test("Derived execution_independence_code == 'E2_fresh_actions_with_sources'",
+            codes["execution_independence_code"] == "E2_fresh_actions_with_sources",
+            f"got='{codes['execution_independence_code']}'"):
+        passed += 1
+    else:
+        failed += 1
+
+    if test("Derived responsibility_adoption_code == 'R2_external_human_authorized_ai_only'",
+            codes["responsibility_adoption_code"] == "R2_external_human_authorized_ai_only",
+            f"got='{codes['responsibility_adoption_code']}'"):
+        passed += 1
+    else:
+        failed += 1
+
+    # ── Test 5: Exact boolean field assertions ──
     expected_bools = {
         "counts_as_ai_independent_verification": True,
         "counts_as_formal_human_institutional_attestation": False,
@@ -100,17 +178,6 @@ def main():
             passed += 1
         else:
             failed += 1
-
-    # ── Test 5: solicitation_status contains required values ──
-    sol_status = get_field(intake.fields, "solicitation_status")
-    has_s2 = "S2" in sol_status if sol_status else False
-    has_s3 = "S3" in sol_status if sol_status else False
-    if test("solicitation_status contains S2 and S3",
-            has_s2 and has_s3,
-            f"got='{sol_status}'"):
-        passed += 1
-    else:
-        failed += 1
 
     # ── Test 6: Delegation chain present ──
     chain = get_field(intake.fields, "delegation_chain")

@@ -582,8 +582,26 @@ PROVENANCE_REQUIRED_FIELDS = {
 
 
 def missing_provenance_fields(text):
-    """Check which provenance/agency fields are missing from the issue body."""
+    """Check which provenance/agency fields are missing from the issue body.
+
+    TA-021: If the new simplified schema fields are present (discovery_autonomy,
+    verifier_type, etc.), skip the old TA-020 provenance field requirements.
+    """
     text_lower = text.lower()
+
+    # Check if new TA-021 simplified schema is in use
+    new_schema_indicators = [
+        r"record_purpose\s*:",
+        r"discovery_autonomy\s*:",
+        r"verifier_type\s*:",
+        r"verification_claimed\s*:",
+    ]
+    uses_new_schema = any(
+        re.search(p, text_lower, re.IGNORECASE) for p in new_schema_indicators
+    )
+    if uses_new_schema:
+        return []  # New schema replaces old provenance fields
+
     missing = []
     for field, patterns in PROVENANCE_REQUIRED_FIELDS.items():
         if not any(re.search(p, text_lower, re.IGNORECASE) for p in patterns):

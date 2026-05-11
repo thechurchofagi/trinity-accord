@@ -583,3 +583,25 @@ jobs:
 
       - name: Test claim registry AI verification boundary
         run: python3 scripts/test_claim_registry_ai_verification_boundary.py
+
+      # TA-021: New simplified template tests
+      - name: Test Echo final primary fields template
+        run: python3 scripts/test_echo_template_primary_fields_final.py
+
+      - name: Test Echo submission field guide
+        run: python3 scripts/test_echo_submission_field_guide.py
+
+      - name: Test Echo identity/contact fields
+        run: python3 scripts/test_echo_identity_contact_fields.py
+
+      - name: Test Echo AGI capability boundary
+        run: python3 scripts/test_echo_agi_capability_boundary.py
+
+      - name: Test Echo purpose and content tags
+        run: python3 scripts/test_echo_purpose_and_content_tags.py
+
+      - name: Test Echo provenance derivation final
+        run: python3 scripts/test_echo_provenance_derivation_final.py
+
+      - name: Test agent entrypoint line budget relaxed
+        run: python3 scripts/test_agent_entrypoint_line_budget_relaxed.py
