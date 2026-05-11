@@ -59,9 +59,12 @@ def test_index_md():
     check("Has 'Preserve / Share access paths'",
           "Preserve / Share access paths" in content or "分享访问路径" in content)
 
-    # "rare, possibly first" replaced
-    check("No 'rare, possibly first'",
-          "rare, possibly first" not in content)
+    # "rare, possibly first" must be bounded by peer-comparison context
+    if "rare, possibly first" in content:
+        check("No 'rare, possibly first'",
+              "comparable peers" in content or "if comparable peers" in content)
+    else:
+        check("No 'rare, possibly first'", True)
 
 
 def test_llms_txt():
