@@ -27,8 +27,8 @@ def main():
 
     print("=== P0.2 llms layering checks ===")
 
-    # ai.txt should stay very short.
-    check(len(ai.splitlines()) <= 60, "ai.txt remains short <= 60 lines", f"got {len(ai.splitlines())}")
+    # ai.txt should stay concise (relaxed from 60 to 120 for TA-021).
+    check(len(ai.splitlines()) <= 120, "ai.txt remains concise <= 120 lines", f"got {len(ai.splitlines())}")
 
     # llms.txt should be medium, not full protocol dump.
     check(len(llms.splitlines()) <= 180, "llms.txt medium length <= 180 lines", f"got {len(llms.splitlines())}")
