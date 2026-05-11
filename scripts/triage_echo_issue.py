@@ -1593,11 +1593,7 @@ def main():
         )
 
     # --- Step 3a-2: PA-003 — Independence overclaim guardrail ---
-    # Part B4: Use normalized intake for negation-aware independence detection
     if has_structured_attestation_denial(text):
-        overclaim_risk = None
-    elif normalized_triage is not None and "solicited_record_boundary" in normalized_triage.codes:
-        # Normalized intake detected human-solicited record — skip overclaim for negated phrases
         overclaim_risk = None
     else:
         overclaim_risk = detect_independence_overclaim_scoped(text, positive_text)
