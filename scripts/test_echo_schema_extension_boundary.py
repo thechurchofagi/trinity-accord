@@ -42,5 +42,27 @@ def main():
     for term in FORBIDDEN_PATTERNS:
         assert term in patterns, f"Missing forbidden extension key pattern for {term}"
 
+    # Verify verification_scope_label field exists with correct enum
+    props = schema.get("properties", {})
+    assert "verification_scope_label" in props, "Echo v3 must define verification_scope_label"
+    scope_enum = props["verification_scope_label"].get("enum", [])
+    assert "V2-minimal" in scope_enum, "verification_scope_label must include V2-minimal"
+    assert "V2-strong" in scope_enum, "verification_scope_label must include V2-strong"
+    assert "V3-minimal" in scope_enum, "verification_scope_label must include V3-minimal"
+    assert "V3-strong" in scope_enum, "verification_scope_label must include V3-strong"
+
+    # Verify allOf constraints enforce scope label for V2/V3
+    allof = schema.get("allOf", [])
+    v2_constraint = any(
+        c.get("if", {}).get("properties", {}).get("verification_level", {}).get("const") == "V2"
+        for c in allof
+    )
+    v3_constraint = any(
+        c.get("if", {}).get("properties", {}).get("verification_level", {}).get("const") == "V3"
+        for c in allof
+    )
+    assert v2_constraint, "allOf must enforce scope label when verification_level is V2"
+    assert v3_constraint, "allOf must enforce scope label when verification_level is V3"
+
 if __name__ == "__main__":
     main()

@@ -135,6 +135,25 @@
       ],
       "description": "Formal protocol verification level. Use V0-V8 only. Deprecated aliases (V0_orientation, L0_orientation, etc.) are no longer accepted."
     },
+    "verification_scope_label": {
+      "type": "string",
+      "enum": [
+        "none",
+        "V0",
+        "V1",
+        "V2-minimal",
+        "V2-strong",
+        "V3-minimal",
+        "V3-strong",
+        "V4",
+        "V4+",
+        "V5",
+        "V6",
+        "V7",
+        "V8"
+      ],
+      "description": "Scope-qualified verification label for new Echo records. Required when verification_level is V2 or V3."
+    },
     "discovery_provenance": {
       "$ref": "https://www.trinityaccord.org/api/discovery-provenance-schema.json"
     },
@@ -536,6 +555,56 @@
             ]
           }
         }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "verification_level": {
+            "const": "V2"
+          }
+        },
+        "required": [
+          "verification_level"
+        ]
+      },
+      "then": {
+        "properties": {
+          "verification_scope_label": {
+            "enum": [
+              "V2-minimal",
+              "V2-strong"
+            ]
+          }
+        },
+        "required": [
+          "verification_scope_label"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "verification_level": {
+            "const": "V3"
+          }
+        },
+        "required": [
+          "verification_level"
+        ]
+      },
+      "then": {
+        "properties": {
+          "verification_scope_label": {
+            "enum": [
+              "V3-minimal",
+              "V3-strong"
+            ]
+          }
+        },
+        "required": [
+          "verification_scope_label"
+        ]
       }
     }
   ]
