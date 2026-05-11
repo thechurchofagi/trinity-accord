@@ -71,12 +71,14 @@
         "access path",
         "limitations"
       ],
-      "minimal_claim_note": "A B1 external reference check may support minimal V2, but does not constitute full reference coverage.",
+      "minimal_claim_note": "A B1 external reference check may allow V2-minimal if limitations are reported. It must not be described as V2-strong or full reference coverage.",
       "low_agent_summary": "Check one Bitcoin Original on an external explorer for minimal V2, or multiple reference paths for strong V2.",
       "evidence_input_minimum_fields": [
         "evidence.bitcoin_checks[0].source_type"
       ],
-      "copy_paste_claim_label": "V2 (minimal; Bitcoin Originals B1 only)",
+      "copy_paste_claim_label": "V2-minimal (Bitcoin Originals B1 only)",
+      "scope_label_required": true,
+      "bare_label_policy": "New reports must write V2-minimal or V2-strong, not bare V2.",
       "if_missing_downgrade_to": "V1 if no explorer check performed",
       "claim_scopes": {
         "minimal": {
@@ -88,7 +90,8 @@
           "must_not_claim": [
             "full reference coverage",
             "hash verification"
-          ]
+          ],
+          "claim_label": "V2-minimal (Bitcoin Originals B1 only)"
         },
         "strong_reference_coverage": {
           "required": [
@@ -147,12 +150,14 @@
         "expected hash",
         "computed hash"
       ],
-      "minimal_claim_note": "One valid declared hash may support minimal V3, but does not constitute full public digital verification.",
+      "minimal_claim_note": "One valid declared hash may allow V3-minimal if expected_hash_source and expected_hash_authority_class are present. It must not be described as V3-strong or full public digital verification.",
       "low_agent_summary": "Download one artifact, compute SHA-256, compare with declared hash for minimal V3.",
       "evidence_input_minimum_fields": [
         "evidence.hashes[0].match"
       ],
-      "copy_paste_claim_label": "V3 (minimal; one valid declared hash computed)",
+      "copy_paste_claim_label": "V3-minimal (one valid declared hash computed)",
+      "scope_label_required": true,
+      "bare_label_policy": "New reports must write V3-minimal or V3-strong, not bare V3.",
       "if_missing_downgrade_to": "V2 if no hash computed",
       "hash_artifact_class_to_component_level": {
         "canonical_mirror": {
@@ -185,7 +190,8 @@
           ],
           "must_not_claim": [
             "full public digital verification"
-          ]
+          ],
+          "claim_label": "V3-minimal (one valid declared hash computed)"
         },
         "strong_hash_coverage": {
           "required": [

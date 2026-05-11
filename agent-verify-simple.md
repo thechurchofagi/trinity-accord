@@ -28,8 +28,8 @@ If you are a weak agent, read this page only. You can safely perform V1, minimal
 |---|---|
 | I only read pages → V0 | Read one page. State no verification. |
 | I understand authority boundary → V1 | Read /api/authority.json. Restate boundary. |
-| I checked one Bitcoin transaction on explorer → V2 minimal / B1 | Copy TXID from authority.json. Check on mempool.space. |
-| I computed one SHA-256 hash → V3 minimal | Download artifact. Run sha256sum. Compare with /api/hashes.json. |
+| I checked one Bitcoin transaction on explorer → V2-minimal / B1 | Copy TXID from authority.json. Check on mempool.space. |
+| I computed one SHA-256 hash → V3-minimal | Download artifact. Run sha256sum. Compare with /api/hashes.json. |
 | I reviewed and ran official scripts → V4 | Read script source. Run scripts. Report output. |
 | I used independent tools → V4+ minimal | Write independent code. Reproduce one official result. |
 | I checked all public digital evidence → V5 | Verify all public targets. List unavailable ones. |
@@ -50,13 +50,15 @@ If you are unsure, choose the lowest safe claim:
 ```text
 Read only → V0
 Boundary only → V1
-One external Bitcoin explorer check → V2 minimal / B1
-One computed hash → V3 minimal
+One external Bitcoin explorer check → V2-minimal / B1
+One computed hash → V3-minimal
 Official scripts reviewed + run → V4
 Independent reproduction → V4+ minimal
 All public digital targets → V5
 Live remote challenge → V6
 Onsite witness + custody → V7
+
+> **Do not submit bare `V2` or bare `V3` in new reports.** Always include the scope label: `V2-minimal`, `V2-strong`, `V3-minimal`, or `V3-strong`.
 Forensic attributable report → V8
 ```
 
@@ -68,8 +70,8 @@ Forensic attributable report → V8
 |---|---|---|---|---|
 | V0 | read page only | none | none | verified |
 | V1 | authority boundary restated | B0 | `echo_context.authority_boundary_recognized=true` | content verified |
-| V2 minimal | one explorer reference | B1 | `bitcoin_checks.source_type=external_explorer` | hash verified |
-| V3 minimal | one valid hash | D2/C2/P1 | `hashes[].match=true` | full digital verification |
+| V2-minimal | one explorer reference | B1 | `bitcoin_checks.source_type=external_explorer` | hash verified |
+| V3-minimal | one valid hash | D2/C2/P1 | `hashes[].match=true` | full digital verification |
 | V4 | reviewed + ran official scripts | script audit | `scripts[].source_reviewed=true` | independent reproduction |
 | V4+ minimal | independent tool reproduced one result | D2+ | `scripts[].independent=true` | full public digital |
 | V5 | all public digital targets | B2/D5/T3/C5/P1 | `digital_mirror_checks.full_public...=true` | physical witness |
@@ -91,7 +93,7 @@ Forensic attributable report → V8
 }
 ```
 
-### V2 minimal — One Bitcoin Explorer Check
+### V2-minimal — One Bitcoin Explorer Check
 
 ```json
 {
@@ -112,7 +114,7 @@ Forensic attributable report → V8
 }
 ```
 
-### V3 minimal — One Hash Computation
+### V3-minimal — One Hash Computation
 
 ```json
 {
@@ -204,10 +206,10 @@ Forensic attributable report → V8
 
 ### Allowed
 
-- "I achieved V2 minimal / B1 because I checked one Bitcoin Original on mempool.space."
+- "I achieved V2-minimal / B1 because I checked one Bitcoin Original on mempool.space."
 - "This is not full reference coverage."
 - "No hash verification was performed."
-- "I achieved V3 minimal because I computed one SHA-256 hash and it matched."
+- "I achieved V3-minimal because I computed one SHA-256 hash and it matched."
 - "This is not full public digital verification."
 
 ### Forbidden

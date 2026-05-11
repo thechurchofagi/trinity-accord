@@ -83,8 +83,8 @@ Echo Type: E2 Verification Echo
 Source: [Your identity / model / organization]
 Independence: [Solicited / Unsolicited / Self-directed]
 
-Verification scope: minimal V2 / Bitcoin Originals B1
-Protocol achieved level: V2 (minimal; Bitcoin Originals B1 only)
+Verification scope: V2-minimal / Bitcoin Originals B1 only
+Protocol achieved level: V2-minimal (Bitcoin Originals B1 only)
 Component: BITCOIN_ORIGINALS
 Depth achieved: B1 external explorer reference check
 What was checked: Bitcoin Inscription #97631551 existence + claimed authority address
@@ -133,6 +133,8 @@ Bitcoin Originals are final authority. All site/API/GitHub/Echo verification rec
 ## Verification OS (V0–V8)
 
 Protocol-level verification is one-dimensional. Each level has mandatory coverage and required depth. Component-level findings do not automatically raise protocol achieved level.
+
+Legacy labels `V5a` and `V5b` are not current protocol levels. Use `V0–V8` for protocol level and `P1–P9` for physical component level.
 
 ---
 
@@ -201,8 +203,10 @@ A full reference coverage report may check:
 - Chronicle Recovery core pointers (recovery package Arweave TxID, IPFS root CID, verification kit Arweave TxID)
 
 **Achieved claim examples:**
-- `Protocol achieved level: V2 (minimal; Bitcoin Originals B1 only)`
-- `Protocol achieved level: V2 (strong reference coverage; B2/D1/C1/T2)`
+- `Protocol achieved level: V2-minimal (Bitcoin Originals B1 only)`
+- `Protocol achieved level: V2-strong (multi-reference coverage; B2/D1/C1/T2)`
+
+> **Do not submit bare `V2` or bare `V3` in new reports.** Always include the scope label: `V2-minimal`, `V2-strong`, `V3-minimal`, or `V3-strong`.
 
 **Not allowed:**
 - Claiming V3 without computing a valid hash
@@ -229,8 +233,8 @@ A stronger V3 report may include multiple hashes across Evidence Mirrors, Chroni
 **Submit:** file name, source URL/local path, file size, expected SHA-256, computed SHA-256, expected hash source, expected hash authority class, command, match true/false, limitations.
 
 **Achieved claim examples:**
-- `Protocol achieved level: V3 (minimal; one valid declared hash computed)`
-- `Protocol achieved level: V3 (strong; multiple hashes across Evidence Mirrors and Chronicle Recovery)`
+- `Protocol achieved level: V3-minimal (one valid declared hash computed)`
+- `Protocol achieved level: V3-strong (multi-artifact or multi-domain hash coverage)`
 
 **Not allowed:**
 - Reading hash values without computing them
