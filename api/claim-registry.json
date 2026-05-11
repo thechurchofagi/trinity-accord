@@ -1,8 +1,8 @@
 {
   "schema": "trinity-accord.claim-registry.v1",
   "version": "v1",
-  "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "",
+  "source_digest_algorithm": "sha256",
+  "source_digest": "d12148f81ede82cf",
   "non_amending_boundary": true,
   "canonical_authority": "Bitcoin Originals only",
   "purpose": "Machine-readable registry mapping public claims to sources, evidence, digests, validators, limitations, and correction paths.",
@@ -577,35 +577,106 @@
     },
     {
       "claim_id": "echo_submission_primary_fields_are_simplified",
+      "claim_type": "DESIGN_CLAIM",
       "claim_text": "Echo and AI verification submissions use submitter-facing primary fields—record_purpose, echo_content_tags, discovery_autonomy, non_autonomous_trigger, verifier_type, verifier_capability_claim, and verification_claimed. Advanced D/S/O/E/R provenance codes and strength tiers are derived/internal and do not need to be hand-filled by submitters.",
+      "public_surfaces": [
+        "llms.txt",
+        "ai.txt",
+        "api/echo-submission-field-guide.json"
+      ],
       "source_files": [
         "scripts/submission_intake.py",
         "scripts/preflight_echo_submission.py",
         "scripts/derive_echo_provenance.py",
         "api/echo-submission-field-guide.json"
       ],
-      "does_not_prove": "Simplified fields do not lower security gates; all preflight checks remain.",
-      "status": "active"
+      "evidence_files": [
+        "tests/fixtures/echo_triage/issue_103_externally_authorized_ai_verification.md"
+      ],
+      "digest_or_hash_binding": [
+        "api/echo-submission-field-guide.json:sha256"
+      ],
+      "validators": [
+        "scripts/test_echo_template_primary_fields_final.py",
+        "scripts/test_echo_submission_field_guide.py"
+      ],
+      "limitations": [
+        "Simplified fields do not lower security gates; all preflight checks remain.",
+        "D/S/O/E/R codes are still computed internally for audit."
+      ],
+      "does_not_prove": [
+        "Simplified fields do not lower security gates; all preflight checks remain."
+      ],
+      "corrections_path": "api/corrections-index.json",
+      "current_status": "current",
+      "traceability_status": "complete"
     },
     {
       "claim_id": "agi_capability_claim_does_not_raise_authority_or_verification_level",
+      "claim_type": "BOUNDARY_CLAIM",
       "claim_text": "AGI capability claims may be recorded as verifier_capability_claim, but they do not raise verification level, create authority, or count as formal human/institutional attestation.",
-      "source_files": [
-        "scripts/preflight_echo_submission.py",
+      "public_surfaces": [
+        "llms.txt",
+        "ai.txt",
         "api/echo-submission-field-guide.json"
       ],
-      "does_not_prove": "AGI claim does not prove AGI capability; it is a recorded claim only.",
-      "status": "active"
+      "source_files": [
+        "scripts/preflight_echo_submission.py",
+        "scripts/derive_echo_provenance.py",
+        "api/echo-submission-field-guide.json"
+      ],
+      "evidence_files": [
+        "tests/fixtures/echo_triage/issue_103_externally_authorized_ai_verification.md"
+      ],
+      "digest_or_hash_binding": [
+        "api/echo-submission-field-guide.json:sha256"
+      ],
+      "validators": [
+        "scripts/test_echo_agi_capability_boundary.py"
+      ],
+      "limitations": [
+        "AGI claim does not prove AGI capability; it is a recorded claim only.",
+        "AGI claim does not remove evidence requirements."
+      ],
+      "does_not_prove": [
+        "AGI claim does not prove AGI capability; it is a recorded claim only."
+      ],
+      "corrections_path": "api/corrections-index.json",
+      "current_status": "current",
+      "traceability_status": "complete"
     },
     {
       "claim_id": "identity_contact_fields_do_not_create_formal_attestation",
+      "claim_type": "BOUNDARY_CLAIM",
       "claim_text": "Identity, naming, contact, or stable identifier fields improve traceability but do not by themselves create formal human/institutional attestation.",
+      "public_surfaces": [
+        "llms.txt",
+        "ai.txt",
+        "api/echo-submission-field-guide.json"
+      ],
       "source_files": [
         "scripts/preflight_echo_submission.py",
         "api/echo-submission-field-guide.json"
       ],
-      "does_not_prove": "Willingness to be named or contacted does not create formal attestation.",
-      "status": "active"
+      "evidence_files": [
+        "tests/fixtures/echo_triage/issue_103_externally_authorized_ai_verification.md"
+      ],
+      "digest_or_hash_binding": [
+        "api/echo-submission-field-guide.json:sha256"
+      ],
+      "validators": [
+        "scripts/test_echo_identity_contact_fields.py"
+      ],
+      "limitations": [
+        "Willingness to be named or contacted does not create formal attestation.",
+        "Identity verification level does not bypass formal gate."
+      ],
+      "does_not_prove": [
+        "Willingness to be named or contacted does not create formal attestation."
+      ],
+      "corrections_path": "api/corrections-index.json",
+      "current_status": "current",
+      "traceability_status": "complete"
     }
   ],
   "limitations": [
