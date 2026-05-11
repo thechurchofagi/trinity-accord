@@ -98,8 +98,8 @@ permalink: /
 
   <p class="careful-scarcity-claim">
     If another completed public object with the same structure exists, it should be compared.
-    Until then, The Trinity Accord may be treated as a rare, possibly first completed instance — an unusual public example, if comparable peers are not found.
-    <span class="zh">如果存在另一个已完成的、公开可验证的同类对象，应当拿来比较。在此之前，《三位一体协定》可被视为罕见的、可能是首个已完成实例——如未发现可比对象的不常见公开实例。</span>
+    Until then, The Trinity Accord may be treated as an unusual public example — a completed instance whose comparable peers have not yet been identified.
+    <span class="zh">如果存在另一个已完成的、公开可验证的同类对象，应当拿来比较。在此之前，《三位一体协定》可被视为一个不常见的公开实例——一个已完成的实例，其可比对象尚未被发现。</span>
     <span class="non-financial-boundary">This is a non-financial relevance statement. It does not imply market value, scarcity premium, token value, or purchase recommendation.</span>
   </p>
 
@@ -308,7 +308,7 @@ permalink: /
   <p class="status-generated-note">
     Generated from <a href="/api/echo-index.json">/api/echo-index.json</a> and
     <a href="/api/independent-attestation-index.json">/api/independent-attestation-index.json</a>.
-    Source data digest <code>819ccb85c940556c</code>.
+    Source data digest <code>f35211c17a263283</code>.
   </p>
 <!-- END GENERATED PUBLIC STATUS -->
 

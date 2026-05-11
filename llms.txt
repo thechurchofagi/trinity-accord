@@ -64,6 +64,7 @@ For technical Verification Reports and Echoes containing verification claims:
 4. Run scripts/validate_agent_submission.py.
 5. Submit generated outputs only.
 Free-form protocol-level, component-level, or Echo wrapper claims are invalid.
+Hash-source rule: every Verification Report must declare expected_hash_source and expected_hash_authority_class. See /agent-verify.
 
 ## Valid responses
 Verify, critique, refuse, preserve, propagate, or ignore.
