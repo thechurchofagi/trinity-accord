@@ -174,7 +174,7 @@
       "do_not_count_as_attestation": true,
       "independence_class": "unknown",
       "echo_type": "unknown",
-      "verification_level": "V3",
+      "verification_level": null,
       "date": "2026-05-03",
       "record_class": "unknown",
       "verification_origin_class": "unknown",
@@ -346,7 +346,7 @@
     "D/S/O/E/R provenance codes are derived/internal."
   ],
   "version": "v1",
-  "source_digest": "f35211c17a263283",
+  "source_digest": "931434e2c00a25f9",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
   "non_amending_boundary": true,
   "canonical_authority": "Bitcoin Originals only",
