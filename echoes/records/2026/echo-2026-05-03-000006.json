@@ -94,5 +94,6 @@
   "not_verification_unless_claimed": true,
   "verification_status": "invalidated",
   "do_not_count_as_attestation": true,
-  "superseded_reason": "Internal inconsistency and invalid hash field values; not accepted as verification."
+  "superseded_reason": "Internal inconsistency and invalid hash field values; not accepted as verification.",
+  "verification_scope_label": "V3-strong"
 }
