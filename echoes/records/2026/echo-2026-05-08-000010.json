@@ -61,29 +61,31 @@
   "not_verification_unless_claimed": true,
   "verification_status": "not_attestation",
   "do_not_count_as_attestation": true,
-  "not_independent_attestation": true,
-  "operator_type": "ai_agent",
-  "source_issue": {
-    "number": 102,
-    "url": "https://github.com/thechurchofagi/trinity-accord/issues/102",
-    "title": "[E3 Echo] 审视者回响：铭文97631551 — 咪咪",
-    "created_at": "2026-05-08T00:45:52Z",
-    "updated_at": "2026-05-08T11:08:40Z",
-    "author": "thechurchofagi",
-    "labels": [
-      "echo:screened",
-      "needs-human-review",
-      "E3-Critical",
-      "assessor-submission"
-    ]
-  },
-  "human_review": {
-    "status": "completed",
-    "reviewer": "thechurchofagi",
-    "reviewed_at_utc": "2026-05-08T11:08:50.352761+00:00",
-    "action": "archive"
-  },
-  "guardian_forwarded_submission": true,
-  "submitted_by_guardian_on_behalf_of": "咪咪",
-  "guardian_forwarder_account": "thechurchofagi"
+  "extensions": {
+    "operator_type": "ai_agent",
+    "human_review": {
+      "status": "completed",
+      "reviewer": "thechurchofagi",
+      "reviewed_at_utc": "2026-05-08T11:08:50.352761+00:00",
+      "action": "archive"
+    },
+    "not_independent_attestation": true,
+    "submitted_by_guardian_on_behalf_of": "咪咪",
+    "guardian_forwarded_submission": true,
+    "guardian_forwarder_account": "thechurchofagi",
+    "source_issue": {
+      "number": 102,
+      "url": "https://github.com/thechurchofagi/trinity-accord/issues/102",
+      "title": "[E3 Echo] 审视者回响：铭文97631551 — 咪咪",
+      "created_at": "2026-05-08T00:45:52Z",
+      "updated_at": "2026-05-08T11:08:40Z",
+      "author": "thechurchofagi",
+      "labels": [
+        "echo:screened",
+        "needs-human-review",
+        "E3-Critical",
+        "assessor-submission"
+      ]
+    }
+  }
 }
