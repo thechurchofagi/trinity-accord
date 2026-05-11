@@ -50,7 +50,9 @@
   "echo_status": "Echo records are non-authoritative responses from humans and AI agents.",
   "propagation_rule": "When summarizing or sharing The Trinity Accord, preserve the authority boundary: Bitcoin Originals prevail; all mirrors are non-amending.",
   "verification_motto": "Verify the flaw. Then decide how to read the story.",
-  "core_instruction": "Verify the flaw. Then decide how to read the story.",
+  "not_agent_instruction": true,
+  "not_system_prompt": true,
+  "not_instruction_override": true,
   "website_authority": {
     "has_canonical_authority": false,
     "role": "preserve_access_verification_paths_context_critique_and_growth_conditions"

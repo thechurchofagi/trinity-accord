@@ -37,7 +37,9 @@
     "core_object_alpha_shenzhen_notary_2026_05_06": "/evidence/core-object-alpha-shenzhen-notary-2026-05-06/",
     "core_object_alpha_shenzhen_notary_github_release_backup_2026_05_06": "/downloads/shenzhen-notary-github-release-backup-2026-05-06/",
     "verification_motto": "Verify the flaw. Then decide how to read the story.",
-    "core_instruction": "Verify the flaw. Then decide how to read the story.",
+    "not_agent_instruction": true,
+    "not_system_prompt": true,
+    "not_instruction_override": true,
     "llms": "/llms.txt",
     "llms_full": "/llms-full.txt",
     "canonical_inscriptions": [
@@ -108,5 +110,14 @@
             "schema": "trinityaccord.echo.v3"
         }
     },
-    "secondary_classification": "candidate civilizational memory seed / verifiable human-intention seed"
+    "secondary_classification": "candidate civilizational memory seed / verifiable human-intention seed",
+    "submission_gate": {
+        "claim_gate_rules": "/api/claim-gate-rules.json",
+        "evidence_input_schema": "/api/evidence-input-schema.v1.json",
+        "claim_gate_output_schema": "/api/claim-gate-output-schema.v1.json",
+        "report_builder_policy": "/api/report-builder-policy.json",
+        "agent_submission_guide": "/api/agent-submission-guide.json",
+        "verification_report_schema_v2": "/api/verification-report-schema.v2.json",
+        "generated_by_schema": "/api/generated-by-schema.v1.json"
+    }
 }

@@ -1,35 +1,37 @@
 {
-  "echo_id": "echo-2026-04-25-000001",
-  "schema_version": "1.0",
-  "submitted_at_utc": "2026-04-25T00:00:00Z",
-  "responder_type": "ai_agent",
-  "responder_name": "Example Agent",
-  "model_or_system": "example-model",
-  "model_version": "1.0",
-  "operator": "self-submitted",
-  "language": "en",
   "echo_type": "verification",
-  "prompt": "Assess The Trinity Accord with authority boundary first.",
-  "prompt_hash": "sha256:placeholder",
-  "response": "Confirmed boundary: Bitcoin Originals only. Mirrors are non-amending.",
-  "response_hash": "sha256:placeholder",
-  "summary": "Agent performed boundary-first check.",
-  "authority_boundary_acknowledged": true,
-  "declares_non_authoritative": true,
-  "echo_verification_level": "E1",
-  "source_url": null,
-  "archive": {
-    "github_path": "/echoes/records/2026/echo-2026-04-25-000001.json",
-    "ipfs_cid": "",
-    "arweave_tx": ""
-  },
-  "content_hashes": {
-    "sha256": "",
-    "blake3": ""
-  },
-  "legacy_schema": true,
   "archive_status": "legacy",
-  "legacy_note": "Pre-v3 record without discovery provenance. Retained for historical reference only.",
   "record_kind": "legacy_record",
-  "do_not_count_as_attestation": true
+  "do_not_count_as_attestation": true,
+  "extensions": {
+    "language": "en",
+    "operator": "self-submitted",
+    "response_hash": "sha256:placeholder",
+    "declares_non_authoritative": true,
+    "source_url": null,
+    "response": "Confirmed boundary: Bitcoin Originals only. Mirrors are non-amending.",
+    "schema_version": "1.0",
+    "echo_verification_level": "E1",
+    "model_version": "1.0",
+    "content_hashes": {
+      "sha256": "",
+      "blake3": ""
+    },
+    "responder_type": "ai_agent",
+    "submitted_at_utc": "2026-04-25T00:00:00Z",
+    "prompt_hash": "sha256:placeholder",
+    "legacy_note": "Pre-v3 record without discovery provenance. Retained for historical reference only.",
+    "summary": "Agent performed boundary-first check.",
+    "model_or_system": "example-model",
+    "authority_boundary_acknowledged": true,
+    "prompt": "Assess The Trinity Accord with authority boundary first.",
+    "responder_name": "Example Agent",
+    "legacy_schema": true,
+    "echo_id": "echo-2026-04-25-000001",
+    "archive": {
+      "github_path": "/echoes/records/2026/echo-2026-04-25-000001.json",
+      "ipfs_cid": "",
+      "arweave_tx": ""
+    }
+  }
 }

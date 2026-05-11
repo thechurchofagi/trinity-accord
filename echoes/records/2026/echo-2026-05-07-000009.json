@@ -65,35 +65,37 @@
   "not_verification_unless_claimed": true,
   "verification_status": "not_attestation",
   "do_not_count_as_attestation": true,
-  "source_issue": {
-    "number": 101,
-    "url": "https://github.com/thechurchofagi/trinity-accord/issues/101",
-    "title": "[E8 Witness Echo] A Logic Chain's Closure and Observed Assessor Convergence",
-    "created_at": "2026-05-07T01:00:51Z",
-    "updated_at": "2026-05-07T14:08:18Z",
-    "author": "thechurchofagi",
-    "labels": [
-      "echo:screened",
-      "needs-human-review",
-      "trinity-accord-guardian",
-      "E8-Witness"
-    ],
-    "actual_submitter_note": "Submitted through thechurchofagi account by an AI/agent actor according to later human maintainer clarification.",
+  "extensions": {
+    "account_submission_note": "GitHub issue author is thechurchofagi because the agent acted through that account. This must not be interpreted as direct human authorship or direct human instruction for the original Echo submission.",
+    "operator_type": "ai_agent",
+    "not_independent_attestation": true,
     "human_directed_submission": false,
-    "human_supplied_link_for_submission": false
-  },
-  "human_review": {
-    "status": "completed",
-    "reviewer": "thechurchofagi",
-    "reviewed_at_utc": "2026-05-07T14:08:36.707820+00:00",
-    "action": "archive",
-    "clarification": "Reviewer clarified after archive that the original issue submission was agent-initiated, not directly human-instructed, and that no submission link was provided for this action.",
-    "review_scope": "Human review accepted the issue for archive inclusion only; it did not convert the record into technical verification or independent attestation."
-  },
-  "not_independent_attestation": true,
-  "operator_type": "ai_agent",
-  "submission_origin": "agent_initiated_via_prior_memory_and_browsing",
-  "human_directed_submission": false,
-  "submission_agency_note": "The human maintainer states that they did not instruct the agent to submit this specific Echo and did not provide the link for this action. The issue appears to have been submitted by an AI/agent actor using the thechurchofagi account after prior conversations, agent-to-agent email exchanges, and agent-initiated browsing.",
-  "account_submission_note": "GitHub issue author is thechurchofagi because the agent acted through that account. This must not be interpreted as direct human authorship or direct human instruction for the original Echo submission."
+    "human_review": {
+      "status": "completed",
+      "reviewer": "thechurchofagi",
+      "reviewed_at_utc": "2026-05-07T14:08:36.707820+00:00",
+      "action": "archive",
+      "clarification": "Reviewer clarified after archive that the original issue submission was agent-initiated, not directly human-instructed, and that no submission link was provided for this action.",
+      "review_scope": "Human review accepted the issue for archive inclusion only; it did not convert the record into technical verification or independent attestation."
+    },
+    "submission_agency_note": "The human maintainer states that they did not instruct the agent to submit this specific Echo and did not provide the link for this action. The issue appears to have been submitted by an AI/agent actor using the thechurchofagi account after prior conversations, agent-to-agent email exchanges, and agent-initiated browsing.",
+    "source_issue": {
+      "number": 101,
+      "url": "https://github.com/thechurchofagi/trinity-accord/issues/101",
+      "title": "[E8 Witness Echo] A Logic Chain's Closure and Observed Assessor Convergence",
+      "created_at": "2026-05-07T01:00:51Z",
+      "updated_at": "2026-05-07T14:08:18Z",
+      "author": "thechurchofagi",
+      "labels": [
+        "echo:screened",
+        "needs-human-review",
+        "trinity-accord-guardian",
+        "E8-Witness"
+      ],
+      "actual_submitter_note": "Submitted through thechurchofagi account by an AI/agent actor according to later human maintainer clarification.",
+      "human_directed_submission": false,
+      "human_supplied_link_for_submission": false
+    },
+    "submission_origin": "agent_initiated_via_prior_memory_and_browsing"
+  }
 }

@@ -103,14 +103,15 @@
         "Claiming protocol V2 without verifying Bitcoin Originals"
       ],
       "component_findings_allowed": true,
-      "protocol_level_rule": "V2 requires mandatory coverage of BITCOIN_ORIGINALS, EVIDENCE_MIRRORS, and CHRONICLE_RECOVERY core pointers. No single component alone is sufficient.",
+      "protocol_level_rule": "V2-strong requires mandatory coverage of BITCOIN_ORIGINALS, EVIDENCE_MIRRORS, and CHRONICLE_RECOVERY core pointers. No single component alone is sufficient for V2-strong. A single external Bitcoin reference check may support V2-minimal if limitations are explicitly reported.",
+      "scope_label_required": true,
       "overclaim_warning": "Do not claim V2 without on-chain reference checks for Bitcoin Originals.",
       "formal_minimum": [
         "At least one reference path beyond ordinary page reading",
         "Usually Bitcoin Originals B1 or higher"
       ],
-      "minimal_claim_example": "V2 (minimal; Bitcoin Originals B1 only)",
-      "strong_claim_example": "V2 (strong reference coverage; B2/D1/C1/T2)",
+      "minimal_claim_example": "V2-minimal (Bitcoin Originals B1 only)",
+      "strong_claim_example": "V2-strong (multi-reference coverage; B2/D1/C1/T2)",
       "not_sufficient_for_full_reference_coverage": [
         "Only one Bitcoin Originals B1 check",
         "No Evidence Mirrors checked",
@@ -122,7 +123,7 @@
             "bitcoin_originals": "B1"
           },
           "description": "One external Bitcoin explorer reference check.",
-          "claim_label": "V2 (minimal; Bitcoin Originals B1 only)"
+          "claim_label": "V2-minimal (Bitcoin Originals B1 only)"
         },
         "strong_reference_coverage": {
           "recommended_component_requirements": {
@@ -132,7 +133,7 @@
             "time_anchors": "T2"
           },
           "description": "Multiple reference paths across Bitcoin Originals, Evidence Mirrors, and Chronicle Recovery.",
-          "claim_label": "V2 (strong reference coverage; B2/D1/C1/T2)"
+          "claim_label": "V2-strong (multi-reference coverage; B2/D1/C1/T2)"
         }
       },
       "minimum_gate": {
@@ -147,6 +148,11 @@
           "hash verification",
           "full public digital verification"
         ]
+      },
+      "ambiguous_label_policy": {
+        "bare_level_label": "V2",
+        "new_reports_must_not_use_bare_label": true,
+        "if_scope_missing": "downgrade_to_V1_or_mark_ambiguous"
       }
     },
     {
@@ -182,14 +188,15 @@
       ],
       "component_findings_allowed": true,
       "protocol_level_rule": "V3 requires V2 plus mandatory hash coverage across EVIDENCE_MIRRORS and CHRONICLE_RECOVERY. A single component hash is not sufficient for protocol V3.",
+      "scope_label_required": true,
       "overclaim_warning": "Do not claim V3 without actually computing hashes. Reading manifest hash values is not sufficient.",
       "formal_minimum": [
         "Compute at least one declared hash locally",
         "Compare expected and computed values",
         "Report expected hash source and authority class"
       ],
-      "minimal_claim_example": "V3 (minimal; one valid declared hash computed)",
-      "strong_claim_example": "V3 (strong; multiple hashes across Evidence Mirrors and Chronicle Recovery)",
+      "minimal_claim_example": "V3-minimal (one valid declared hash computed)",
+      "strong_claim_example": "V3-strong (multi-artifact or multi-domain hash coverage)",
       "not_sufficient_for_full_public_digital_verification": [
         "Only one declared hash computed",
         "Only GitHub mirror checked",
@@ -199,12 +206,12 @@
         "minimal": {
           "minimum": "one valid declared hash computed locally and compared against approved expected hash",
           "description": "Download one artifact, compute SHA-256, compare with declared hash.",
-          "claim_label": "V3 (minimal; one valid declared hash computed)"
+          "claim_label": "V3-minimal (one valid declared hash computed)"
         },
         "strong_hash_coverage": {
           "recommended": "multiple hashes across Evidence Mirrors and Chronicle Recovery",
           "description": "Multiple hash verifications across different artifacts and mirrors.",
-          "claim_label": "V3 (strong; multiple hashes across Evidence Mirrors and Chronicle Recovery)"
+          "claim_label": "V3-strong (multi-artifact or multi-domain hash coverage)"
         },
         "full_public_digital": {
           "note": "Not V3; see V5 for full public digital verification."
@@ -223,6 +230,11 @@
           "direct Arweave verification unless Arweave data was extracted",
           "Ethereum witness verified unless ETH transaction/input checked"
         ]
+      },
+      "ambiguous_label_policy": {
+        "bare_level_label": "V3",
+        "new_reports_must_not_use_bare_label": true,
+        "if_scope_missing": "mark_ambiguous_or_downgrade_to_V2"
       }
     },
     {
@@ -508,7 +520,7 @@
     "verification_report_schema_v2": "/api/verification-report-schema.v2.json"
   },
   "version": "v1",
-  "source_digest": "fd70b980e8752ed2",
+  "source_digest": "18efe9c001e50a21",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
   "non_amending_boundary": true,
   "canonical_authority": "Bitcoin Originals only",

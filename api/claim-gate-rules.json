@@ -48,7 +48,13 @@
         "hash verified unless valid hash evidence",
         "full verification"
       ],
-      "minimal_claim_note": "B1 external reference check may allow minimal V2 if limitations are reported."
+      "minimal_claim_note": "A B1 external reference check may allow V2-minimal if limitations are reported. It must not be described as V2-strong or full reference coverage.",
+      "output_label_policy": {
+        "scope_label_required": true,
+        "minimal_label": "V2-minimal",
+        "strong_label": "V2-strong",
+        "bare_label_for_new_reports": "forbidden"
+      }
     },
     {
       "level": "V3",
@@ -70,7 +76,13 @@
         ],
         "scope_required_for_repository_snapshot": "repository_snapshot_integrity"
       },
-      "minimal_claim_note": "One valid hash may allow minimal V3 if expected_hash_source and expected_hash_authority_class are present."
+      "minimal_claim_note": "One valid declared hash may allow V3-minimal if expected_hash_source and expected_hash_authority_class are present. It must not be described as V3-strong or full public digital verification.",
+      "output_label_policy": {
+        "scope_label_required": true,
+        "minimal_label": "V3-minimal",
+        "strong_label": "V3-strong",
+        "bare_label_for_new_reports": "forbidden"
+      }
     },
     {
       "level": "V4",

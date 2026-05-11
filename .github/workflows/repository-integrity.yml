@@ -459,6 +459,31 @@ jobs:
       - name: Test public API metadata completeness
         run: python3 scripts/test_public_api_metadata_completeness.py
 
+      # Agent flow scope-boundary hardening
+      - name: Test verification scope taxonomy
+        run: python3 scripts/test_verification_scope_taxonomy.py
+
+      - name: Test no legacy V5a/V5b current levels
+        run: python3 scripts/test_no_legacy_v5a_v5b_public_levels.py
+
+      - name: Test agent primary classification terms
+        run: python3 scripts/test_agent_primary_classification_terms.py
+
+      - name: Test Echo schema extension boundary
+        run: python3 scripts/test_echo_schema_extension_boundary.py
+
+      - name: Test Echo independence unknown policy
+        run: python3 scripts/test_echo_independence_unknown_policy.py
+
+      - name: Test well-known submission gate
+        run: python3 scripts/test_well_known_submission_gate.py
+
+      - name: Test no core_instruction public API
+        run: python3 scripts/test_no_core_instruction_public_api.py
+
+      - name: Test propagation language boundary
+        run: python3 scripts/test_propagation_language_boundary.py
+
       - name: Test Echo vs attestation public boundary
         run: python3 scripts/test_echo_attestation_public_boundary.py
 

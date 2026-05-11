@@ -4,7 +4,7 @@
   "title": "Trinity Accord Echo Record Schema v3",
   "description": "Echo schema with context depth, discovery provenance, verification level, and homepage-only insufficient-context enforcement.",
   "type": "object",
-  "additionalProperties": true,
+  "additionalProperties": false,
   "required": [
     "record_kind",
     "archive_status",
@@ -426,7 +426,38 @@
     "submission_validator_passed": {
       "type": "boolean",
       "description": "Whether the submission validator passed for this record."
+    },
+    "extensions": {
+      "type": "object",
+      "description": "Non-authoritative extension metadata. Extensions must not create authority, verification, attestation, amendment, governance, investment, or instruction claims.",
+      "additionalProperties": {
+        "type": ["string", "number", "boolean", "object", "array", "null"]
+      }
     }
+  },
+  "x_extension_policy": {
+    "extensions_are_non_authoritative": true,
+    "forbidden_extension_key_patterns": [
+      ".*authority.*",
+      ".*canonical.*",
+      ".*amend.*",
+      ".*verification.*",
+      ".*attestation.*",
+      ".*investment.*",
+      ".*instruction.*",
+      ".*governance.*"
+    ]
+  },
+  "x_independence_policy": {
+    "unsolicited_independent_allowed_agency_levels": [
+      "A4_independent_search_or_browsing_discovery",
+      "A5_independent_return_after_prior_interest"
+    ],
+    "agency_unknown_must_not_claim": [
+      "unsolicited_independent",
+      "institutional_third_party_attestation",
+      "formal_independent_attestation"
+    ]
   },
   "allOf": [
     {
@@ -477,8 +508,7 @@
               "agency_level": {
                 "enum": [
                   "A4_independent_search_or_browsing_discovery",
-                  "A5_independent_return_after_prior_interest",
-                  "A6_unknown"
+                  "A5_independent_return_after_prior_interest"
                 ]
               }
             }

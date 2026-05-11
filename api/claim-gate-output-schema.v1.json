@@ -35,6 +35,24 @@
       "type": "string",
       "enum": ["V0", "V1", "V2", "V3", "V4", "V4+", "V5", "V6", "V7", "V8"]
     },
+    "allowed_protocol_scope_label": {
+      "type": "string",
+      "enum": [
+        "V0",
+        "V1",
+        "V2-minimal",
+        "V2-strong",
+        "V3-minimal",
+        "V3-strong",
+        "V4",
+        "V4+",
+        "V5",
+        "V6",
+        "V7",
+        "V8"
+      ],
+      "description": "Scope-qualified label for V2/V3. For other levels, matches allowed_protocol_level."
+    },
     "allowed_component_levels": {
       "type": "object",
       "properties": {
