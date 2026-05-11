@@ -1221,7 +1221,7 @@ def validate_unknown_fields(obj, path_label, record_kind):
             for m in matches:
                 ok &= check(
                     False,
-                    f"{path_label} unknown field '{k}' contains forbidden claim",
+                    f"{path_label} contains forbidden claim: {m.get('category', 'unknown')}",
                     f"match: {m['match']}, category: {m['category']}"
                 )
     return ok
