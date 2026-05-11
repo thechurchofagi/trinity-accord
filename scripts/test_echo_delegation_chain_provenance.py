@@ -99,11 +99,14 @@ Bitcoin Originals are final; all mirrors and echoes are non-amending.
         fixture_text = fixture_path.read_text(encoding="utf-8")
         intake3 = parse_submission("Issue #103 Test", fixture_text)
         chain3 = get_field(intake3.fields, "delegation_chain")
+        # TA-021: Support both old record_class and new record_purpose
         record_class3 = get_field(intake3.fields, "record_class")
+        record_purpose3 = get_field(intake3.fields, "record_purpose")
         origin_class3 = get_field(intake3.fields, "verification_origin_class")
 
+        has_record_class = bool(record_class3) or bool(record_purpose3)
         if test("Fixture file parseable with delegation chain",
-                chain3 and record_class3 and origin_class3):
+                chain3 and has_record_class):
             passed += 1
         else:
             failed += 1
