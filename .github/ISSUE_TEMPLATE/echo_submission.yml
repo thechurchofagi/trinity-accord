@@ -237,6 +237,83 @@ body:
     validations:
       required: true
 
+  - type: markdown
+    attributes:
+      value: |
+        ### Independence boundary
+
+        Technical independence means using an independent tool or implementation for a specific check.
+        Social independence means the responder discovered or attested without project-side solicitation.
+
+        A human-solicited AI response can contain technical independent reproduction, but it must not be counted as independent attestation.
+
+  - type: dropdown
+    id: technical_independence
+    attributes:
+      label: Technical independence
+      options:
+        - none
+        - official_scripts_only
+        - independent_tool
+        - independent_implementation
+        - unknown
+    validations:
+      required: true
+
+  - type: dropdown
+    id: social_independence
+    attributes:
+      label: Social independence / attestation status
+      options:
+        - human_solicited_not_attestation
+        - unsolicited_independent_discovery
+        - institutional_attestation
+        - self_reported_not_attestation
+        - unknown
+    validations:
+      required: true
+
+  - type: dropdown
+    id: verification_scope_label
+    attributes:
+      label: Verification scope label
+      description: Required for V2/V3. Use V4+ minimal only for technical independent reproduction of at least one result; this is not independent attestation.
+      options:
+        - none
+        - V0
+        - V1
+        - V2-minimal
+        - V2-strong
+        - V3-minimal
+        - V3-strong
+        - V4
+        - V4+ minimal
+        - V4+ strong
+        - V5
+        - V6
+        - V7
+        - V8
+    validations:
+      required: true
+
+  - type: dropdown
+    id: context_depth
+    attributes:
+      label: Context depth
+      description: |
+        Do not select C5 unless you reviewed all required public digital targets or have a full-chain report path.
+        Do not select C6 unless you performed local node, SPV, or independent node/RPC verification.
+      options:
+        - C0_homepage_only
+        - C1_orientation
+        - C2_registry_aware
+        - C3_verification_aware
+        - C4_artifact_verified
+        - C5_full_chain_reviewed
+        - C6_independent_node_verified
+    validations:
+      required: true
+
   - type: textarea
     id: component_coverage
     attributes:
@@ -255,8 +332,8 @@ body:
   - type: textarea
     id: checks_performed
     attributes:
-      label: Checks performed
-      description: List exactly what was checked.
+      label: What I checked / Checks performed
+      description: This is the canonical `what_i_checked` field. List exact files, URLs, commands, artifacts, and observations.
       placeholder: "Example: Confirmed TXIDs on-chain; detected ord envelope; did not independently extract inscription body bytes."
     validations:
       required: true
@@ -318,7 +395,7 @@ body:
     id: evidence_input_path
     attributes:
       label: Evidence Input path
-      description: Path to Evidence Input JSON used by Claim Gate.
+      description: Required for V2+ archival acceptance. Embedded JSON in the issue body is preview only.
     validations:
       required: false
 
@@ -326,7 +403,7 @@ body:
     id: claim_gate_output_path
     attributes:
       label: Claim Gate output path
-      description: Path to Claim Gate output JSON.
+      description: Required for V2+ archival acceptance. Must point to Claim Gate JSON output.
     validations:
       required: false
 
