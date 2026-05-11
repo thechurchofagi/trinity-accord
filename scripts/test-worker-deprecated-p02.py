@@ -24,7 +24,7 @@ def require_not_contains(text, phrase, label):
     check(phrase not in text, label, f"forbidden: {phrase}")
 
 def main():
-    path = "trinity-echo-worker/src/index.js"
+    path = "archive/deprecated/trinity-echo-worker/src/index.js"
     js = read(path)
 
     print("=== P0.2 worker deprecation checks ===")
