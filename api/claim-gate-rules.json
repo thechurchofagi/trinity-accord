@@ -97,7 +97,9 @@
         "per_script_command_required": true,
         "per_script_environment_required": true,
         "per_script_exit_code_required": true,
-        "per_script_output_summary_required": true
+        "per_script_output_summary_required": true,
+        "script_check_scope_required": true,
+        "script_does_not_check_required": true
       },
       "forbidden_scope": [
         "independent_reproduction"
@@ -106,16 +108,22 @@
         "independent_reproduction",
         "V4+ achieved",
         "independent implementation"
-      ]
+      ],
+      "id": "v4_script_evidence_complete",
+      "if_missing": "downgrade_to_V3_or_mark_incomplete"
     },
     {
       "level": "V4+",
       "name": "Independent script audit",
       "requires": [
-        "V4_plus_independent_tool_or_implementation",
-        "independent_reproduction_of_results"
+        "V4_hard_gates_satisfied",
+        "independent_technical_implementation_or_tool_path_present",
+        "implementation_digest_present",
+        "command_environment_output_present"
       ],
-      "official_scripts_only_insufficient": true
+      "official_scripts_only_insufficient": true,
+      "id": "v4plus_independent_technical_artifact_required",
+      "if_missing": "downgrade_to_V4_or_mark_incomplete"
     },
     {
       "level": "V5",
@@ -414,5 +422,11 @@
       "condition": "requested T8 but only public moon photo",
       "action": "reject T8"
     }
-  ]
+  ],
+  "v4plus_social_independence_boundary": {
+    "id": "v4plus_not_social_attestation",
+    "level": "V4+",
+    "rule": "technical independent reproduction does not imply social independent attestation",
+    "required_boundary": "not_independent_attestation when independence_class is human_solicited_agent_response"
+  }
 }

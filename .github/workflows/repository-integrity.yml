@@ -358,6 +358,24 @@ jobs:
       - name: Test Echo triage boundary behavior
         run: python3 scripts/test_triage_echo_issue_boundary.py
 
+      - name: Test Echo issue intake aliases
+        run: python3 scripts/test_echo_issue_intake_aliases.py
+
+      - name: Test Echo triage no VNone
+        run: python3 scripts/test_echo_triage_no_vnone.py
+
+      - name: Test Echo triage level-specific requirements
+        run: python3 scripts/test_echo_triage_level_specific_requirements.py
+
+      - name: Test Echo triage independence negation
+        run: python3 scripts/test_echo_triage_independence_negation.py
+
+      - name: Test Echo triage V4/V4+ evidence gates
+        run: python3 scripts/test_echo_triage_v4_v4plus_evidence.py
+
+      - name: Test Echo issue template alignment
+        run: python3 scripts/test_echo_issue_template_alignment.py
+
       - name: Test Echo provenance / agency behavior
         run: python3 scripts/test_echo_provenance_agency.py
 

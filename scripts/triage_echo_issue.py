@@ -7,6 +7,7 @@ import os
 import re
 import json
 import sys
+from dataclasses import dataclass, field
 
 try:
     from submission_intake import parse_submission, claim_gate_summary_looks_passed, claim_gate_summary_has_blocking_failure
@@ -14,6 +15,13 @@ except Exception:
     parse_submission = None
     claim_gate_summary_looks_passed = None
     claim_gate_summary_has_blocking_failure = None
+
+# Normalized intake parser (Part A)
+try:
+    from echo_issue_intake import parse_echo_issue, NormalizedEchoIssue
+    HAS_NORMALIZED_INTAKE = True
+except ImportError:
+    HAS_NORMALIZED_INTAKE = False
 
 # P0 remediation: shared safety module
 try:
@@ -137,6 +145,41 @@ def build_soft_comment(sections):
     parts.append("---")
     parts.append("This is a claim-discipline and format check, not a judgment of intent.")
     return "\n".join(parts)
+
+
+def build_level_specific_comment(level: str, codes: list) -> str:
+    """Build level-specific triage comment per Part H3."""
+    parts = []
+    if level in ("V0",):
+        parts.append("No hash, script, or Claim Gate evidence is required for V0. This is read-only orientation.")
+    elif level in ("V1",):
+        parts.append("No hash, script, or Claim Gate evidence is required for V1. This is authority-boundary recognition only.")
+    elif level in ("V2", "V3"):
+        if "missing_claim_gate_artifacts" in codes:
+            parts.append(
+                "V2+ technical claims require path-backed Claim Gate artifacts before archival acceptance.\n"
+                "Embedded Evidence Input JSON is useful for review but is not the archival source of truth."
+            )
+    elif level in ("V4",):
+        if "script_evidence_incomplete" in codes:
+            parts.append(
+                "V4 script-audited verification requires per-script command, environment, exit code, "
+                "output summary, script scope, and non-scope."
+            )
+    elif level in ("V4+",):
+        if "not_independent_attestation" in codes:
+            parts.append(
+                "Technical independent reproduction may support V4+ minimal, but it does not make this "
+                "an independent attestation if the run was human-solicited."
+            )
+        if "v4plus_path_backed_independent_artifact_required" in codes:
+            parts.append(
+                "V4+ requires path-backed independent technical artifact or implementation digest. "
+                "Inline code alone is not enough for archival V4+ acceptance."
+            )
+    if "context_depth_overclaim" in codes:
+        parts.append("Declared context depth appears higher than the evidence supports.")
+    return "\n\n".join(parts)
 
 
 # --- Config ---
@@ -1079,6 +1122,188 @@ def check_v5_full_public_digital_gate(text):
     return missing_signal_groups(text, V5_REQUIRED_SIGNALS)
 
 
+# ── Part B1: Level-specific requirements (normalized intake) ───────
+LEVEL_REQUIREMENTS = {
+    "V0": {
+        "required": ["what_i_checked", "limitations", "boundary_sentence_present"],
+        "forbidden_requirements": ["hash", "claim_gate", "script_command"],
+    },
+    "V1": {
+        "required": ["what_i_checked", "limitations", "boundary_sentence_present"],
+        "forbidden_requirements": ["hash", "claim_gate", "script_command"],
+    },
+    "V2": {
+        "required": ["what_i_checked", "limitations", "boundary_sentence_present", "verification_scope_label"],
+        "requires_claim_gate": True,
+        "claim_gate_mode": "lightweight_allowed",
+    },
+    "V3": {
+        "required": ["what_i_checked", "limitations", "boundary_sentence_present", "verification_scope_label"],
+        "requires_claim_gate": True,
+        "claim_gate_mode": "required",
+    },
+    "V4": {
+        "required": ["what_i_checked", "limitations", "boundary_sentence_present"],
+        "requires_claim_gate": True,
+        "requires_script_evidence": True,
+    },
+    "V4+": {
+        "required": ["what_i_checked", "limitations", "boundary_sentence_present"],
+        "requires_claim_gate": True,
+        "requires_script_evidence": True,
+        "requires_independent_technical_artifact": True,
+    },
+}
+
+
+@dataclass
+class TriageResult:
+    """Structured triage result from normalized intake evaluation."""
+    labels: list = field(default_factory=list)
+    codes: list = field(default_factory=list)
+    messages: list = field(default_factory=list)
+    missing_fields: list = field(default_factory=list)
+    missing_evidence: list = field(default_factory=list)
+
+
+def evaluate_echo_issue(normalized: "NormalizedEchoIssue") -> TriageResult:
+    """Evaluate a normalized Echo issue against level-specific rules.
+
+    Part B1: Level-specific requirements.
+    Part B5: Context-depth gating.
+    Part B6: Assessment-state gating.
+    Part B4: Independence negation handling.
+    """
+    result = TriageResult()
+    level = normalized.verification_level
+    scope = normalized.verification_scope_label
+
+    if not level:
+        result.codes.append("verification_level_parse_failed")
+        result.messages.append(
+            "Could not parse declared verification level. "
+            "Please provide `Verification Level: V0–V8` and, for V2/V3, `Scope Label`."
+        )
+        return result
+
+    req = LEVEL_REQUIREMENTS.get(level)
+    if not req:
+        result.codes.append("unknown_level")
+        return result
+
+    # ── Required fields ────────────────────────────────────────────
+    for field_name in req.get("required", []):
+        val = getattr(normalized, field_name, None)
+        if field_name == "boundary_sentence_present":
+            if not val:
+                result.missing_fields.append("boundary_sentence")
+                result.codes.append("missing_boundary")
+        elif field_name == "verification_scope_label":
+            if not val:
+                result.missing_fields.append("verification_scope_label")
+                result.codes.append("missing_scope_label")
+        elif not val:
+            result.missing_fields.append(field_name)
+            result.codes.append(f"missing_{field_name}")
+
+    # ── Claim Gate requirement (V2+) ───────────────────────────────
+    if req.get("requires_claim_gate"):
+        has_cg_path = bool(normalized.claim_gate_output_path)
+        has_cg_embedded = bool(normalized.evidence_input_embedded)
+        if not has_cg_path and has_cg_embedded:
+            # Only flag when embedded JSON exists but path is missing
+            result.codes.append("missing_claim_gate_artifacts")
+            result.messages.append(
+                "Embedded Evidence Input JSON was found, but V2+ submissions must reference "
+                "path-backed Claim Gate artifacts: evidence_input_path, claim_gate_output_path. "
+                "Please add repository paths or run the report builder."
+            )
+            result.labels.append("echo:needs-verification-review")
+        # Don't flag for freeform submissions without embedded JSON
+        # (they get format review from the soft issue accumulator instead)
+
+    # ── V4 script evidence ─────────────────────────────────────────
+    if req.get("requires_script_evidence"):
+        has_embedded = bool(normalized.evidence_input_embedded)
+        if has_embedded:
+            scripts = normalized.evidence_input_embedded.get("evidence", {}).get("scripts", [])
+            if scripts:
+                for s in scripts:
+                    if not s.get("command"):
+                        result.codes.append("script_evidence_incomplete")
+                        result.messages.append(
+                            "V4 script-audited verification requires per-script: command, environment, "
+                            "exit code, output summary, script scope, and non-scope."
+                        )
+                        break
+            # If scripts array is empty or missing, don't flag — it's a freeform submission
+        # Only flag script_evidence_incomplete for claim-gate-referenced or builder-generated modes
+        # Don't flag for freeform V4 submissions (they get format review instead)
+
+    # ── V4+ independent technical artifact ─────────────────────────
+    if req.get("requires_independent_technical_artifact"):
+        tech = normalized.technical_independence
+        # Only flag if the issue explicitly claims V4+ with independent reproduction language
+        body_lower = (normalized.body or "").lower()
+        claims_independent = bool(re.search(
+            r'\bindependent\s+(?:tool|implementation|code|reproduction)\b', body_lower
+        ))
+        if tech not in ("independent_tool", "independent_implementation") and claims_independent:
+            result.codes.append("v4plus_path_backed_independent_artifact_required")
+            result.messages.append(
+                "V4+ requires path-backed independent technical artifact or implementation digest. "
+                "Inline code alone is not enough for archival V4+ acceptance."
+            )
+
+    # ── Part B5: Context-depth gating ──────────────────────────────
+    ctx = normalized.context_depth
+    if ctx:
+        ctx_ok = True
+        if ctx == "C5_full_chain_reviewed":
+            # Needs full-chain report path or all public digital targets listed
+            has_full_chain = bool(normalized.claim_gate_output_path)  # simplified check
+            has_all_targets = bool(normalized.what_i_checked and len(normalized.what_i_checked) > 200)
+            if not (has_full_chain or has_all_targets):
+                ctx_ok = False
+        elif ctx == "C6_independent_node_verified":
+            # Needs local node / SPV / independent node RPC evidence
+            body_lower = (normalized.body or "").lower()
+            has_node = bool(re.search(
+                r'(local\s+node|spv|independent\s+node|bitcoin\s+core|bitcoind|rpc|'
+                r'本地节点|独立节点)', body_lower
+            ))
+            if not has_node:
+                ctx_ok = False
+        if not ctx_ok:
+            result.codes.append("context_depth_overclaim")
+            result.labels.append("context-depth-overclaim-risk")
+            result.messages.append(
+                f"Declared context depth ({ctx}) appears higher than the evidence supports."
+            )
+
+    # ── Part B6: Assessment-state gating ───────────────────────────
+    assessment = normalized.assessment_state
+    if assessment == "independent_verification_assessment":
+        social = normalized.social_independence
+        if social == "human_solicited_not_attestation":
+            result.codes.append("not_independent_attestation")
+            result.labels.append("not-independent-attestation")
+            result.messages.append(
+                "Assessment state is 'independent_verification_assessment' but the record is "
+                "human-solicited. This is technical independence only, not social independent attestation."
+            )
+
+    # ── Part B4: Solicited-record boundary ─────────────────────────
+    social = normalized.social_independence
+    if social == "human_solicited_not_attestation":
+        result.labels.append("echo:solicited-record")
+        result.codes.append("solicited_record_boundary")
+        # Do NOT add provenance-conflict for normal solicited records
+        # Only add it if there's an actual contradiction (checked elsewhere)
+
+    return result
+
+
 def main():
     # P3 remediation: support --event-json for hardened input
     import argparse
@@ -1289,6 +1514,18 @@ def main():
         emit_result(result, title, body)
         return
 
+    # --- Step 2g: Normalized intake evaluation (Part A/B) ---
+    normalized_triage = None
+    if HAS_NORMALIZED_INTAKE:
+        try:
+            normalized = parse_echo_issue(None, title, body)
+            normalized_triage = evaluate_echo_issue(normalized)
+            # Merge labels from normalized triage
+            for lbl in normalized_triage.labels:
+                add_unique(result["labels"], lbl)
+        except Exception:
+            pass  # Fall through to legacy triage
+
     # --- Step 3+: Soft issue accumulator (ST-001/ST-002) ---
     soft = {"labels": [], "sections": []}
 
@@ -1299,8 +1536,20 @@ def main():
     if not detect_verification_level(text):
         missing_fields.append("Verification level (V0–V8)")
 
-    has_checked = bool(re.search(r'what\s+(i|we)\s+checked|我检查了|已检查', text, re.IGNORECASE))
-    has_limitations = bool(re.search(r'limitations?|局限|限制', text, re.IGNORECASE))
+    # Part B3: Use normalized intake for section alias matching
+    has_checked = False
+    has_limitations = False
+    if normalized_triage is not None and HAS_NORMALIZED_INTAKE:
+        try:
+            norm = parse_echo_issue(None, title, body)
+            has_checked = bool(norm.what_i_checked)
+            has_limitations = bool(norm.limitations)
+        except Exception:
+            pass
+    if not has_checked:
+        has_checked = bool(re.search(r'what\s+(i|we)\s+checked|checks\s+performed|我检查了|已检查', text, re.IGNORECASE))
+    if not has_limitations:
+        has_limitations = bool(re.search(r'limitations?|what\s+remains\s+uncertain|uncertainties|局限|限制', text, re.IGNORECASE))
 
     if not has_checked:
         missing_fields.append("What I checked")
@@ -1369,7 +1618,15 @@ def main():
         )
 
     # --- V-level detection (moved before V0 overclaim check) ---
-    vlevel = declared_vlevel
+    # Part A: Use normalized intake for robust V-level parsing (never VNone)
+    normalized_vlevel = None
+    if HAS_NORMALIZED_INTAKE:
+        try:
+            norm_v = parse_echo_issue(None, title, body)
+            normalized_vlevel = norm_v.verification_level
+        except Exception:
+            pass
+    vlevel = declared_vlevel or normalized_vlevel
     legacy_vlevel = None
     if not vlevel and mode == "legacy_freeform_or_needs_format":
         legacy_vlevel = detect_verification_level(positive_text)
@@ -1602,6 +1859,33 @@ def main():
         return
 
     # --- Final soft issue handling ---
+    # Part H: Merge normalized triage results into soft issues
+    if normalized_triage is not None:
+        # Only merge issue-type labels, not informational ones like echo:solicited-record
+        issue_labels = {
+            "echo:needs-verification-review", "echo:needs-format",
+            "context-depth-overclaim-risk", "not-independent-attestation",
+            "independence-overclaim-risk",
+        }
+        for lbl in normalized_triage.labels:
+            if lbl in issue_labels:
+                add_unique(soft["labels"], lbl)
+        # Add level-specific comments
+        if HAS_NORMALIZED_INTAKE and normalized_triage.codes:
+            try:
+                norm_final = parse_echo_issue(None, title, body)
+                level_comment = build_level_specific_comment(
+                    norm_final.verification_level or "", normalized_triage.codes
+                )
+                if level_comment:
+                    add_soft_issue(
+                        soft,
+                        title="Level-specific guidance",
+                        body=level_comment,
+                    )
+            except Exception:
+                pass
+
     if soft["labels"]:
         add_unique(soft["labels"], "needs-human-review")
 
