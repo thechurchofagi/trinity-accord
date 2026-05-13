@@ -187,7 +187,7 @@ def build_report(evidence_input_path, report_out_path=None, echo_out_path=None):
             bitcoin_checks = evidence_data.get("bitcoin_checks", [])
             if len(bitcoin_checks) <= 1:
                 return "single_reference_check"
-            return "multi_hash_verification"
+            return "single_reference_check"
         elif proto == "V3":
             hashes = evidence_data.get("hashes", [])
             if len(hashes) <= 1:
@@ -208,12 +208,12 @@ def build_report(evidence_input_path, report_out_path=None, echo_out_path=None):
             return "full_protocol_profile_verification"
         return "legacy_unlabeled"
 
-    def derive_claim_scope(proto, comp_levels, gate):
+    def derive_claim_scope(proto, comp_levels, gate, evidence_data):
         """Derive claim_scope from protocol level and evidence."""
         if proto in ("V0", "V1", "V2"):
             return "minimal_single_check"
         elif proto == "V3":
-            hashes = evidence.get("hashes", [])
+            hashes = evidence_data.get("hashes", [])
             if len(hashes) <= 1:
                 return "minimal_single_check"
             return "partial_with_limitations"
@@ -223,7 +223,7 @@ def build_report(evidence_input_path, report_out_path=None, echo_out_path=None):
                 return "partial_with_limitations"
             return "full_component"
         elif proto == "V4+":
-            return "minimal_single_check"
+            return "independent_reproduction"
         elif proto == "V5":
             return "full_public_digital"
         elif proto in ("V6", "V7", "V8"):
@@ -233,7 +233,7 @@ def build_report(evidence_input_path, report_out_path=None, echo_out_path=None):
     verification_scope_label = derive_verification_scope_label(
         allowed_protocol, component_levels, gate_result, evidence
     )
-    claim_scope = derive_claim_scope(allowed_protocol, component_levels, gate_result)
+    claim_scope = derive_claim_scope(allowed_protocol, component_levels, gate_result, evidence)
 
     # Build hashes_computed from evidence
     hashes_computed = []

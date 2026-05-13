@@ -75,8 +75,19 @@ def main():
             "echo_type",
             "record_kind",
         ]:
-            expected = src.get(field, "unknown" if field != "do_not_count_as_attestation" else False)
-            actual = idx.get(field, "unknown" if field != "do_not_count_as_attestation" else False)
+            if field == "do_not_count_as_attestation":
+                # Match build_echo_index.py derivation logic:
+                # explicit field > derived from independence_class > counts_as_independent_attestation
+                src_val = src.get(field)
+                if src_val is None:
+                    src_val = src.get("independence_class") == "human_solicited_agent_response"
+                if src.get("counts_as_independent_attestation") is False:
+                    src_val = True
+                expected = src_val
+                actual = idx.get(field, False)
+            else:
+                expected = src.get(field, "unknown")
+                actual = idx.get(field, "unknown")
             ok &= check(
                 actual == expected,
                 f"{rel} index {field} matches source",

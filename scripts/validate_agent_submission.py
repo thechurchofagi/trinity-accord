@@ -1437,8 +1437,6 @@ def validate_with_jsonschema(obj, schema_path, path_label):
             return False
         print(f"  WARN: schema validation skipped by explicit --allow-missing-jsonschema flag")
         return True
-        print(f"  SKIP: jsonschema not available, using basic checks only")
-        return True
 
     try:
         schema = load_json(schema_path)
@@ -1881,6 +1879,7 @@ def validate_file(path):
     ok &= validate_v7_onsite_hard_gates(obj, path_label)
 
     # Rule AG: V8 forensic path
+    ok &= validate_v8_forensic_path(obj, path_label)
 
     # Rule AH: integrity boundary for verification reports
     ok &= validate_integrity_boundary(obj, path_label)
@@ -1897,17 +1896,14 @@ def validate_file(path):
     # Rule AL: verification_scope_label consistency
     ok &= validate_verification_scope_label(obj, path_label)
 
-    ok &= validate_v8_forensic_path(obj, path_label)
-
-    # P1 Remediation: Unknown fields guard (Rule AL)
+    # P1 Remediation: Unknown fields guard (Rule AM)
     ok &= validate_unknown_fields(obj, path_label, record_kind)
 
-    # P1 Remediation: Cross-field consistency (Rule AM)
+    # P1 Remediation: Cross-field consistency (Rule AN)
     ok &= validate_cross_field_consistency(obj, path_label)
 
     # Schema validation (skip for legacy records)
     archive_status = obj.get("archive_status", "")
-    record_kind = obj.get("record_kind", "")
     if archive_status not in ("legacy", "superseded") and record_kind != "legacy_record":
         schema = obj.get("schema", obj.get("schema_version", ""))
         if "echo" in schema and "v3" in schema:

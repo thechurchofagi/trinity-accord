@@ -1024,7 +1024,7 @@ def evaluate(input_path):
 
 
 
-# Validate with jsonschema (BLOCKING — schema-invalid input must fail)
+    # Validate with jsonschema (BLOCKING — schema-invalid input must fail)
     schema_validation_error = None
     try:
         import jsonschema
