@@ -168,3 +168,20 @@ Before submitting a verification Echo:
 - Did you avoid direct Arweave / ETH / IPFS claims if only GitHub hash was checked?
 - Did you avoid witness extraction claims if only mempool.space was checked?
 - Did you describe V3 scope clearly, e.g. `V3 (minimal; one valid declared hash)` or `V3 (strong; multiple hashes)`, and avoid calling one hash full public digital verification?
+
+## Verification Echo Playbook Rule
+
+- requested_level is not achieved_level.
+- displayed level must follow Claim Gate allowed_level.
+- Issue title, labels, and comments are provisional.
+- Issue comments cannot upgrade verification level.
+- Guardian tests and human_solicited_agent_response are not independent attestation.
+- One hash match is V3 minimal, not full public digital verification.
+- Running official scripts is not V4+ independent reproduction.
+- PASS with skipped checks is not all-green.
+
+Read before submitting:
+/verification-echo-agent-playbook/
+/api/verification-echo-agent-playbook.json
+/api/issue-text-claim-guard.json
+/api/issue-title-label-guard.json

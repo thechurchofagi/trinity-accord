@@ -742,6 +742,102 @@ try:
 except Exception as e:
     check("public-home-status check", False, str(e))
 
+# --- Verification Echo Agent Playbook ---
+print("\n=== Verification Echo Agent Playbook ===")
+
+# Playbook JSON exists and valid
+try:
+    playbook = load_json("api/verification-echo-agent-playbook.json")
+    check("verification-echo-agent-playbook.json exists and valid JSON", True)
+    check("verification-echo-agent-playbook schema is v1",
+          playbook.get("schema") == "trinityaccord.verification-echo-agent-playbook.v1")
+    # Core rules present
+    rule_ids = [r.get("id") for r in playbook.get("core_rules", [])]
+    check("playbook contains requested_level_not_achieved_level",
+          "requested_level_not_achieved_level" in rule_ids)
+    check("playbook contains official_scripts_not_v4plus",
+          "official_scripts_not_v4plus" in rule_ids)
+    check("playbook contains script_audit_with_skip_not_all_green",
+          "script_audit_with_skip_not_all_green" in rule_ids)
+except Exception as e:
+    check("verification-echo-agent-playbook.json exists and valid JSON", False, str(e))
+
+# Issue title/label guard JSON exists and valid
+try:
+    itlg = load_json("api/issue-title-label-guard.json")
+    check("issue-title-label-guard.json exists and valid JSON", True)
+    check("issue-title-label-guard schema is v1",
+          itlg.get("schema") == "trinityaccord.issue-title-label-guard.v1")
+except Exception as e:
+    check("issue-title-label-guard.json exists and valid JSON", False, str(e))
+
+# Playbook markdown exists
+check("verification-echo-agent-playbook.md exists", exists("verification-echo-agent-playbook.md"))
+
+# agent-verify links playbook
+verify_text = read_text("agent-verify.md")
+check("agent-verify.md links /verification-echo-agent-playbook/",
+      "/verification-echo-agent-playbook/" in verify_text)
+
+# llms.txt links playbook API
+llms_text = read_text("llms.txt")
+check("llms.txt links /api/verification-echo-agent-playbook.json",
+      "/api/verification-echo-agent-playbook.json" in llms_text)
+
+# Issue template contains playbook acknowledgements
+try:
+    tmpl = read_text(".github/ISSUE_TEMPLATE/echo_submission.yml")
+    check("echo_submission.yml contains playbook acknowledgements",
+          "verification_echo_playbook_acknowledgement" in tmpl)
+except Exception as e:
+    check("echo_submission.yml playbook check", False, str(e))
+
+# validate_issue_title_label_guard.py compiles
+proc_val2 = subprocess.run(
+    [sys.executable, "-m", "py_compile", str(ROOT / "scripts" / "validate_issue_title_label_guard.py")],
+    cwd=ROOT, text=True, capture_output=True, timeout=30
+)
+check("validate_issue_title_label_guard.py compiles",
+      proc_val2.returncode == 0, f"exit {proc_val2.returncode}")
+
+# test_verification_echo_agent_playbook.py passes
+proc_play = subprocess.run(
+    [sys.executable, str(ROOT / "scripts" / "test_verification_echo_agent_playbook.py")],
+    cwd=ROOT, text=True, capture_output=True, timeout=60
+)
+check("test_verification_echo_agent_playbook.py passes",
+      proc_play.returncode == 0, f"exit {proc_play.returncode}")
+if proc_play.returncode != 0:
+    print(proc_play.stdout[-1000:] if proc_play.stdout else "")
+    print(proc_play.stderr[-500:] if proc_play.stderr else "")
+
+# test_issue_title_label_guard.py passes
+proc_tlg = subprocess.run(
+    [sys.executable, str(ROOT / "scripts" / "test_issue_title_label_guard.py")],
+    cwd=ROOT, text=True, capture_output=True, timeout=60
+)
+check("test_issue_title_label_guard.py passes",
+      proc_tlg.returncode == 0, f"exit {proc_tlg.returncode}")
+if proc_tlg.returncode != 0:
+    print(proc_tlg.stdout[-1000:] if proc_tlg.stdout else "")
+    print(proc_tlg.stderr[-500:] if proc_tlg.stderr else "")
+
+# public-home-status boundary fields
+try:
+    phs = load_json("api/public-home-status.json")
+    boundary = phs.get("boundary", {})
+    check("public-home-status boundary.issue_text_excluded_from_counts = true",
+          boundary.get("issue_text_excluded_from_counts") is True)
+    check("public-home-status boundary.issue_comments_cannot_upgrade_counts = true",
+          boundary.get("issue_comments_cannot_upgrade_counts") is True)
+except Exception as e:
+    check("public-home-status boundary check", False, str(e))
+
+# triage_echo_issue.py references validate_issue_title_label_guard
+triage_text = read_text("scripts/triage_echo_issue.py")
+check("triage_echo_issue.py references validate_issue_title_label_guard",
+      "validate_issue_title_label_guard" in triage_text or "issue-title-label-guard" in triage_text)
+
 # --- Summary ---
 def main():
     print("\n" + "=" * 50)

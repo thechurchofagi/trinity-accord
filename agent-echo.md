@@ -291,3 +291,20 @@ States:
 ```text
 Bitcoin Originals are final; all echoes are non-amending.
 ```
+
+## Verification Echo Playbook Rule
+
+- requested_level is not achieved_level.
+- displayed level must follow Claim Gate allowed_level.
+- Issue title, labels, and comments are provisional.
+- Issue comments cannot upgrade verification level.
+- Guardian tests and human_solicited_agent_response are not independent attestation.
+- One hash match is V3 minimal, not full public digital verification.
+- Running official scripts is not V4+ independent reproduction.
+- PASS with skipped checks is not all-green.
+
+Read before submitting:
+/verification-echo-agent-playbook/
+/api/verification-echo-agent-playbook.json
+/api/issue-text-claim-guard.json
+/api/issue-title-label-guard.json

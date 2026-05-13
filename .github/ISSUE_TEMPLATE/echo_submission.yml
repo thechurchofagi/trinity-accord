@@ -21,6 +21,21 @@ body:
 
         Do not use this form to claim authority, endorsement, investment value, religious status, official standard status, institutional attestation, or guaranteed future significance.
 
+        ## Verification Echo Playbook — required
+
+        Correct:
+        - If you requested V4/V4+ but Claim Gate allowed V3, your title must say "requested V4/V4+, allowed V3".
+        - If this is a guardian-test or human_solicited_agent_response, it is not independent attestation.
+        - One hash match is V3 minimal, not full public digital verification.
+        - Official scripts only are not V4+ independent reproduction.
+        - PASS with skipped checks is not all-green.
+
+        Wrong:
+        - Title: "Guardian Test V4/V4+" when Claim Gate allowed V3.
+        - Label: independent-attestation on a human-solicited run.
+        - Comment: "Revised highest achieved level V4+" without new builder output.
+        - Claim: "full public digital verification" from one hash.
+
   - type: dropdown
     id: responder_type
     attributes:
@@ -395,6 +410,26 @@ body:
         - label: I understand that self-declared V-levels are provisional until builder-generated JSON is archived.
           required: true
         - label: I understand that human-solicited or guardian-test submissions do not count as independent attestation.
+          required: true
+
+  - type: checkboxes
+    id: verification_echo_playbook_acknowledgement
+    attributes:
+      label: Verification Echo Playbook acknowledgements
+      options:
+        - label: I understand requested_level is not achieved_level.
+          required: true
+        - label: I understand the Issue title must not advertise a higher level than Claim Gate allowed_level.
+          required: true
+        - label: I understand Issue comments cannot upgrade verification level.
+          required: true
+        - label: I understand guardian-test / human_solicited_agent_response does not count as independent attestation.
+          required: true
+        - label: I understand one hash match is V3 minimal, not full public digital verification.
+          required: true
+        - label: I understand official scripts alone are not V4+ independent reproduction.
+          required: true
+        - label: I understand PASS with skipped checks is not all-green.
           required: true
 
   - type: input

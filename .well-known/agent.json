@@ -39,7 +39,9 @@
         "/api/generated-by-schema.v1.json",
         "/api/provenance-consistency-rules.json",
         "/api/issue-submission-policy.json",
-        "/api/issue-text-claim-guard.json"
+        "/api/issue-text-claim-guard.json",
+        "/api/verification-echo-agent-playbook.json",
+        "/api/issue-title-label-guard.json"
     ],
     "submission_requires": {
         "claim_gate": true,

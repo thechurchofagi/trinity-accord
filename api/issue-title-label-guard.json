@@ -1,0 +1,63 @@
+{
+  "schema": "trinityaccord.issue-title-label-guard.v1",
+  "purpose": "Prevent Issue titles, labels, and comments from implying accepted verification levels before Claim Gate / Report Builder archival.",
+  "source_playbook": "/api/verification-echo-agent-playbook.json",
+  "requested_level_not_achieved_level": true,
+  "title_must_follow_allowed_level": true,
+  "labels_must_follow_archive_status": true,
+  "comments_cannot_upgrade_level": true,
+  "guardian_tests_auto_classified_as_test_records": true,
+  "title_guard": {
+    "displayed_level_source": "claim_gate.allowed_protocol_level",
+    "requested_level_allowed_only_if_explicitly_marked_requested": true,
+    "required_downgrade_phrases": [
+      "requested",
+      "attempted",
+      "not achieved",
+      "downgraded",
+      "allowed V3",
+      "provisional"
+    ]
+  },
+  "label_guard": {
+    "guardian_test_required_labels": [
+      "guardian-test",
+      "issue-submission-only",
+      "not-independent-attestation",
+      "not-archived",
+      "claim-gate-required"
+    ],
+    "guardian_test_forbidden_labels_unless_archived": [
+      "accepted",
+      "accepted-echo",
+      "independent-attestation",
+      "unsolicited-independent",
+      "institutional-verification",
+      "formal-verification",
+      "v4",
+      "v4+",
+      "V4 Protocol",
+      "V5",
+      "verified"
+    ],
+    "safe_requested_level_labels": [
+      "requested-v4",
+      "requested-v4-plus",
+      "claim-gate-downgraded-to-v3"
+    ]
+  },
+  "comment_guard": {
+    "upgrade_phrases": [
+      "revised highest achieved level",
+      "updated highest achieved level",
+      "upgraded",
+      "V4 Result: PASS",
+      "V4+ Result",
+      "minimal V4+",
+      "V4 strong",
+      "all scripts green",
+      "independent reproduction achieved"
+    ],
+    "required_response": "Issue comments cannot upgrade verification level. Submit Evidence Input and regenerate builder outputs."
+  }
+}

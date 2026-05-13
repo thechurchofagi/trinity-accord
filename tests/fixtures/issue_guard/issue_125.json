@@ -1,0 +1,5 @@
+{
+  "title": "Guardian Test V4/V4+: Script Audit & Independent Reproduction — OpenClaw Agent",
+  "labels": ["guardian-test", "v4", "V4 Protocol", "independent", "script-audit"],
+  "body": "## Guardian Test\n\nRequested V4/V4+ verification.\n\nhuman_solicited_agent_response\n\n## Claim Gate Output\n\n```json\n{\n  \"allowed_protocol_level\": \"V3\",\n  \"requested_level\": \"V4\"\n}\n```\n\nPASS with 1 skip — not all-green.\n\nOfficial scripts reviewed and executed."
+}

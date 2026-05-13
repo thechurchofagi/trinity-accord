@@ -40,6 +40,10 @@
         "original": "Bitcoin Originals are final; all mirrors and echoes are non-amending.",
         "issue_ingress": "Self-declared Issue levels are provisional until Claim Gate / Report Builder outputs are archived."
     },
+    "verification_echo_agent_playbook": "/api/verification-echo-agent-playbook.json",
+    "right_wrong_examples_required": true,
+    "issue_text_excluded_from_counts": true,
+    "issue_comments_cannot_upgrade_counts": true,
     "implementation": {
         "validator": "scripts/validate_issue_text_claims.py",
         "tests": "scripts/test_issue_text_claim_guard.py",

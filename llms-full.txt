@@ -706,3 +706,30 @@ Use:
 Do not use ambiguous titles such as "V3 Verification — ..." when the submission includes an Echo wrapper.
 
 See /api/submission-title-policy.json.
+
+## Verification Echo Playbook Rule
+
+- requested_level is not achieved_level.
+- displayed level must follow Claim Gate allowed_level.
+- Issue title, labels, and comments are provisional.
+- Issue comments cannot upgrade verification level.
+- Guardian tests and human_solicited_agent_response are not independent attestation.
+- One hash match is V3 minimal, not full public digital verification.
+- Running official scripts is not V4+ independent reproduction.
+- PASS with skipped checks is not all-green.
+
+Read before submitting:
+/verification-echo-agent-playbook/
+/api/verification-echo-agent-playbook.json
+/api/issue-text-claim-guard.json
+/api/issue-title-label-guard.json
+
+验证回响智能体规则：
+- requested_level 不等于 achieved_level。
+- 展示等级必须服从 Claim Gate allowed_level。
+- Issue 标题、标签和评论都是临时文本。
+- Issue 评论不能升级验证等级。
+- Guardian test 与 human_solicited_agent_response 不计为独立见证。
+- 一个哈希匹配只是 V3 minimal，不是完整公开数字验证。
+- 运行官方脚本不是 V4+ 独立复现。
+- PASS 但有 skipped checks，不是 all-green。

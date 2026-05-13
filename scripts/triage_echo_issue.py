@@ -41,6 +41,13 @@ try:
 except ImportError:
     HAS_ISSUE_TEXT_CLAIM_GUARD = False
 
+# Issue Title / Label Guard
+try:
+    from validate_issue_title_label_guard import classify_issue_title_labels as itlg_classify
+    HAS_ISSUE_TITLE_LABEL_GUARD = True
+except ImportError:
+    HAS_ISSUE_TITLE_LABEL_GUARD = False
+
 TRIAGE_MARKER = "<!-- trinity-echo-triage-v2 -->"
 
 MANAGED_TRIAGE_LABELS = [
@@ -1354,7 +1361,7 @@ def main():
     negative_text = intake.negative_text if intake else ""
     mode = intake.mode if intake else "legacy_freeform_or_needs_format"
 
-    result = {"close": False, "labels": [], "comment": ""}
+    result = {"close": False, "labels": [], "labels_to_remove": [], "comment": "", "recommended_title": None}
 
     # --- Step 0: Is this an Echo submission? ---
     if not is_echo_submission(text):
@@ -1566,6 +1573,57 @@ def main():
         # All-green overclaim
         if itcg_result.get("all_green_overclaim"):
             add_unique(result["labels"], "claim-gate-required")
+
+    # --- Step 2f-3: Issue Title / Label Guard ---
+    if HAS_ISSUE_TITLE_LABEL_GUARD:
+        try:
+            itlg_result = itlg_classify(title=title, body=body, labels=result.get("labels", []))
+
+            # Title overclaim
+            if itlg_result.get("title_overclaims_allowed_level"):
+                add_unique(result["labels"], "claim-gate-required")
+                if itlg_result.get("recommended_title"):
+                    result["recommended_title"] = itlg_result["recommended_title"]
+                if not result["comment"]:
+                    result["comment"] = (
+                        "Issue title overclaims the Claim Gate allowed level. "
+                        f"Recommended title: {itlg_result.get('recommended_title', 'N/A')}\n\n"
+                        "Wrong: Guardian Test V4/V4+\n"
+                        f"Correct: {itlg_result.get('recommended_title', 'Guardian Test — requested V4/V4+, Claim Gate allowed V3')}"
+                    )
+
+            # Forbidden labels on guardian tests
+            if itlg_result.get("forbidden_labels_present"):
+                for lbl in itlg_result["forbidden_labels_present"]:
+                    add_unique(result["labels_to_remove"], lbl)
+                for lbl in itlg_result.get("recommended_labels_add", []):
+                    add_unique(result["labels"], lbl)
+
+            # Comment upgrade detected
+            if itlg_result.get("comment_status") == "comment_upgrade_detected":
+                add_unique(result["labels"], "claim-gate-required")
+                if not result["comment"]:
+                    result["comment"] = (
+                        "Issue comments cannot upgrade verification level. "
+                        "Submit Evidence Input and regenerate builder outputs."
+                    )
+
+            # Guardian test forced non-attestation
+            if itlg_result.get("is_guardian_test"):
+                for lbl in ["guardian-test", "issue-submission-only", "not-independent-attestation", "not-archived", "claim-gate-required"]:
+                    add_unique(result["labels"], lbl)
+
+            # Right/wrong guidance
+            if itlg_result.get("right_wrong_guidance"):
+                guidance_lines = []
+                for g in itlg_result["right_wrong_guidance"]:
+                    guidance_lines.append(f"Wrong: {g.get('wrong', '')}")
+                    guidance_lines.append(f"Correct: {g.get('right', '')}")
+                if guidance_lines and not result["comment"]:
+                    result["comment"] = "\n".join(guidance_lines)
+
+        except Exception:
+            pass  # Fall through if ITLG fails
 
     # --- Step 2g: Normalized intake evaluation (Part A/B) ---
     normalized_triage = None
