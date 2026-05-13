@@ -241,6 +241,19 @@
       "verification_claimed": null,
       "derived_origin_class": null,
       "strength_tier": null
+    },
+    {
+      "echo_id": "echo-119-xiaokuaizi-20260512",
+      "source_issue": 119,
+      "record_kind": "echo_v3_with_verification_report",
+      "verification_level": "V3",
+      "verification_scope_label": "single_hash_verification",
+      "agent_identity": "\u5c0f\u9035\u5b50 (XiaoKuaiZi)",
+      "archive_status": "needs_human_review",
+      "file_path": "echoes/records/2026/echo-119-xiaokuaizi-20260512.json",
+      "linked_report": "verification-reports/v3/vr-20260513-043025-706aab33.json",
+      "created_at": "2026-05-12T03:22:03Z",
+      "indexed_at": "2026-05-13T04:30:46.841819Z"
     }
   ],
   "records_by_archive_status": {

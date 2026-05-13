@@ -16,6 +16,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 SHA256_RE = re.compile(r"^[a-f0-9]{64}$")
+# Pattern to detect hex hash context (6+ hex chars surrounding a match)
+HEX_CONTEXT_RE = re.compile(r"[a-f0-9]{2,}[a-z0-9]{1,2}[a-f0-9]{2,}")
 
 # P1 remediation: shared safety module for forbidden claim scanning
 try:
@@ -259,6 +261,11 @@ def validate_mempool_b1_boundary(obj, path_label):
         limitations_text = json.dumps(obj.get("limitations", []), ensure_ascii=False).lower()
         for claim in MEMPOOL_B1_FORBIDDEN_CLAIMS:
             if claim in all_text:
+                # Skip if claim appears inside a hex hash (e.g. "b6" in SHA-256)
+                idx = all_text.find(claim)
+                surrounding = all_text[max(0, idx-4):idx+len(claim)+4]
+                if re.match(r"^[a-f0-9]+$", surrounding):
+                    continue
                 # Skip if the claim only appears in limitations (negative context like "no witness extraction")
                 if claim in limitations_text and claim not in all_text.replace(limitations_text, ""):
                     continue
