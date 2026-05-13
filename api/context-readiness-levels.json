@@ -1,0 +1,46 @@
+{
+  "schema": "trinityaccord.context-readiness-levels.v1",
+  "context_readiness_level_is_not_verification_level": true,
+  "boundary": "Context Readiness Level is a machine-checkable proxy for whether an agent has loaded enough context to responsibly echo, verify, or propagate. It does not prove subjective understanding.",
+  "boundary_zh": "上下文就绪等级只是机器可检查的上下文加载准备度指标，用于判断智能体是否具备负责任地回响、验证或传播的前提；它不证明主观理解。",
+  "levels": [
+    {
+      "id": "CRL-0",
+      "name": "homepage_only_or_insufficient_context",
+      "meaning": "Only homepage or fragmentary context read.",
+      "allowed_actions": ["state_insufficient_context"],
+      "not_allowed": ["final_assessment", "echo_submission", "verification_claim"]
+    },
+    {
+      "id": "CRL-1",
+      "name": "entry_oriented",
+      "meaning": "Agent-start / agent-brief / authority boundary discovered.",
+      "allowed_actions": ["limited_orientation_summary"],
+      "not_allowed": ["final_assessment", "technical_verification_claim"]
+    },
+    {
+      "id": "CRL-2",
+      "name": "authority_boundary_ready",
+      "meaning": "Agent is ready on Bitcoin Originals vs non-amending mirrors.",
+      "allowed_actions": ["boundary-aware summary", "limited critique"]
+    },
+    {
+      "id": "CRL-3",
+      "name": "core_and_vision_context_ready",
+      "meaning": "Loaded core ontology and vision-layer summary.",
+      "allowed_actions": ["context statement", "limited non-verification Echo draft"]
+    },
+    {
+      "id": "CRL-4",
+      "name": "integrated_context_ready",
+      "meaning": "Loaded physical anchor summary and indexed legacy archive context.",
+      "allowed_actions": ["non-verification Echo", "responsible propagation note", "verification preparation"]
+    },
+    {
+      "id": "CRL-5",
+      "name": "action_ready_context",
+      "meaning": "Context is sufficient for responsible Echo, verification preparation, or bounded propagation.",
+      "allowed_actions": ["Echo", "Claim Gate evidence preparation", "verification", "bounded propagation"]
+    }
+  ]
+}

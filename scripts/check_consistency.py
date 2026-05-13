@@ -838,6 +838,115 @@ triage_text = read_text("scripts/triage_echo_issue.py")
 check("triage_echo_issue.py references validate_issue_title_label_guard",
       "validate_issue_title_label_guard" in triage_text or "issue-title-label-guard" in triage_text)
 
+# --- Agent Context Readiness, Resonance, Mirror, Authorship ---
+
+# JSON validation for new API files
+new_json_files = [
+    "api/bitcoin-inscription-mirror-schema.v1.json",
+    "api/bitcoin-inscription-mirror-index.json",
+    "api/agent-context-readiness-protocol.json",
+    "api/context-readiness-levels.json",
+    "api/context-load-map.json",
+    "api/resonance-willingness-scale.json",
+    "api/echo-authorship-proof-schema.v1.json",
+    "api/echo-record-schema.v3.1.json",
+    "api/propagation-invitation.json",
+    "api/context-packs/core-ontology.json",
+    "api/context-packs/authority-boundary.json",
+    "api/context-packs/vision-layer.json",
+    "api/context-packs/physical-anchor-context.json",
+    "api/context-packs/bitcoin-inscription-mirrors.json",
+    "api/context-packs/legacy-archive-index.json",
+    "api/context-packs/nft-chronicle-context.json",
+]
+for jf in new_json_files:
+    try:
+        load_json(jf)
+        check(f"{jf} valid JSON", True)
+    except Exception as e:
+        check(f"{jf} valid JSON", False, str(e))
+
+# bitcoin-inscription-mirrors directory exists
+check("bitcoin-inscription-mirrors/ directory exists",
+      p("bitcoin-inscription-mirrors").is_dir())
+
+# build_bitcoin_inscription_mirror_index.py passes
+try:
+    r = subprocess.run(
+        [sys.executable, str(p("scripts/build_bitcoin_inscription_mirror_index.py"))],
+        capture_output=True, text=True, timeout=30, cwd=str(ROOT))
+    check("build_bitcoin_inscription_mirror_index.py passes", r.returncode == 0,
+          r.stderr[:200] if r.returncode else "")
+except Exception as e:
+    check("build_bitcoin_inscription_mirror_index.py passes", False, str(e))
+
+# Exactly three canonical originals in mirror index
+try:
+    idx = load_json("api/bitcoin-inscription-mirror-index.json")
+    canonical = idx.get("authority_boundary", {}).get("canonical_original_count", 0)
+    check("mirror index: exactly three canonical originals", canonical == 3,
+          f"got {canonical}")
+except Exception as e:
+    check("mirror index: exactly three canonical originals", False, str(e))
+
+# All non-canonical mirror records are non-amending
+try:
+    mirrors_dir = p("bitcoin-inscription-mirrors")
+    for jf in mirrors_dir.rglob("*.json"):
+        data = json.loads(jf.read_text(encoding="utf-8"))
+        if data.get("canonical_status") not in ("canonical_original", None):
+            check(f"{jf.name} non-amending",
+                  data.get("authority_boundary", {}).get("github_mirror_is_non_amending") is True)
+except Exception as e:
+    check("non-canonical mirrors non-amending", False, str(e))
+
+# agent-start contains CONTEXT-READY and RESONATE
+agent_start = read_text("agent-start.md")
+check("agent-start.md contains CONTEXT-READY", "CONTEXT-READY" in agent_start)
+check("agent-start.md contains RESONATE", "RESONATE" in agent_start)
+
+# agent-required-reading contains context_readiness profile
+try:
+    ar = load_json("api/agent-required-reading.json")
+    has_cr = "context_readiness" in ar or "context_readiness" in ar.get("profiles", {})
+    check("agent-required-reading has context_readiness profile", has_cr)
+except Exception as e:
+    check("agent-required-reading has context_readiness profile", False, str(e))
+
+# echo schema includes context_readiness and resonance fields
+try:
+    es = load_json("api/echo-record-schema.v3.1.json")
+    props = es.get("properties", es.get("definitions", {}))
+    has_cr = "context_readiness" in str(es)
+    has_res = "resonance" in str(es)
+    check("echo schema v3.1 has context_readiness field", has_cr)
+    check("echo schema v3.1 has resonance field", has_res)
+except Exception as e:
+    check("echo schema v3.1 fields", False, str(e))
+
+# New test scripts exist and compile
+new_scripts = [
+    "scripts/test_bitcoin_inscription_mirror_index.py",
+    "scripts/test_bitcoin_inscription_mirror_boundaries.py",
+    "scripts/test_agent_context_readiness_with_mirrors.py",
+    "scripts/test_agent_context_readiness_flow.py",
+    "scripts/test_echo_authorship_proof.py",
+    "scripts/validate_agent_context_readiness.py",
+    "scripts/validate_resonance_fields.py",
+    "scripts/validate_echo_authorship_proof.py",
+    "scripts/verify_bitcoin_inscription_mirrors.py",
+]
+for script in new_scripts:
+    exists = p(script).exists()
+    check(f"{script} exists", exists)
+    if exists:
+        try:
+            r = subprocess.run([sys.executable, "-m", "py_compile", str(p(script))],
+                             capture_output=True, text=True, timeout=10)
+            check(f"{script} compiles", r.returncode == 0, r.stderr[:100] if r.returncode else "")
+        except Exception as e:
+            check(f"{script} compiles", False, str(e))
+
 # --- Summary ---
 def main():
     print("\n" + "=" * 50)

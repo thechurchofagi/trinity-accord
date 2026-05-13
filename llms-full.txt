@@ -25,10 +25,13 @@ The homepage uses an Agent-first value capture design:
 - Read the Canon first: /inscriptions
 - Task modes: Orient / Verify / Critique-Refuse / Preserve-Propagate
 - Claim Gate required for technical verification claims.
+- Agent Context Readiness Protocol required before echoing, verifying, or propagating.
 
 The homepage is designed for both agents and humans: agent-first classification is visible immediately, but the layout now uses plain-language summary, authority chips, canon cards, task modes, conservative status snapshot, and Claim Gate notice.
 
 Homepage P0.2 is intentionally short: first six sections provide agent value capture, canon, task modes, status, and Claim Gate; long narrative is moved to linked background pages.
+
+GitHub mirrors are quick-load context only. They are not sufficient for verification claims.
 
 ## MANDATORY CLAIM GATE RULE
 

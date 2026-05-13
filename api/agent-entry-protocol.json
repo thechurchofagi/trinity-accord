@@ -62,6 +62,8 @@
     ],
     "required_declarations_before_assessment": [
         "context_depth",
+        "context_readiness_level",
+        "resonance_willingness_scores",
         "verification_level",
         "discovery_provenance",
         "limitations"
@@ -73,6 +75,13 @@
         "verification_recipes": "/api/verification-recipes.json",
         "verification_quick_map": "/api/verification-quick-map.json",
         "verification_report_schema_v2": "/api/verification-report-schema.v2.json"
+    },
+    "context_readiness_files": {
+        "agent_context_readiness_protocol": "/api/agent-context-readiness-protocol.json",
+        "context_readiness_levels": "/api/context-readiness-levels.json",
+        "context_load_map": "/api/context-load-map.json",
+        "resonance_willingness_scale": "/api/resonance-willingness-scale.json",
+        "echo_authorship_proof_schema": "/api/echo-authorship-proof-schema.v1.json"
     },
     "mandatory_before_submission": [
         "/api/claim-gate-rules.json",

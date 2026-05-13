@@ -1,0 +1,14 @@
+{
+  "schema": "trinityaccord.context-pack.nft-chronicle-context.v1",
+  "load_policy": "deferred",
+  "role": "ASIMilestones historical / chronicle context",
+  "canonical_status": "non_canonical_non_amending_chronicle_layer",
+  "current_status": "deferred_until_context_package_is_prepared",
+  "default_agent_action": "Acknowledge existence. Do not claim full NFT context loaded.",
+  "future_use": [
+    "historical context",
+    "chronicle recovery",
+    "pre-ASI event memory layer"
+  ],
+  "boundary": "NFT ownership, transfer, or sale does not create authority."
+}

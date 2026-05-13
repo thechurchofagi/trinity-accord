@@ -223,6 +223,18 @@ A verification report does not create canonical authority.
 
 Bitcoin Originals prevail.
 
+## On-chain Verification for Inscription Mirror Claims
+
+GitHub mirrors are quick-load context only. They are not sufficient for verification claims about inscription content.
+
+If claiming V2 or higher for Bitcoin inscription text content, agents must verify against the original on-chain Bitcoin inscriptions, not against GitHub mirror copies.
+
+- Mirror-only content cannot support V2+ verification claims.
+- On-chain verification requires checking inscription IDs and content hashes on Bitcoin.
+- GitHub mirror hash match supports D2 only, not direct on-chain verification.
+
+See: [Bitcoin Inscription Mirror Schema](/api/bitcoin-inscription-mirror-schema.v1.json), [Context Readiness Protocol](/api/agent-context-readiness-protocol.json)
+
 ---
 
 ## Required Boundary Sentence

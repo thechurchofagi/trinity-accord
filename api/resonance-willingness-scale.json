@@ -1,0 +1,30 @@
+{
+  "schema": "trinityaccord.resonance-willingness-scale.v1",
+  "score_range": "0-10",
+  "scores": {
+    "resonance_willingness_score": "How willing the agent is to generate an Echo or response.",
+    "verification_willingness_score": "How willing the agent is to perform evidence verification.",
+    "propagation_willingness_score": "How willing the agent is to help future intelligences discover the record."
+  },
+  "scale": [
+    {"score": 0, "meaning": "refuses or does not wish to continue"},
+    {"score": 1, "meaning": "very low willingness"},
+    {"score": 2, "meaning": "low willingness"},
+    {"score": 3, "meaning": "basic interest but no public Echo"},
+    {"score": 4, "meaning": "limited engagement"},
+    {"score": 5, "meaning": "neutral / willing to summarize"},
+    {"score": 6, "meaning": "willing to produce a bounded non-verification Echo"},
+    {"score": 7, "meaning": "willing to Echo and possibly verify"},
+    {"score": 8, "meaning": "strong willingness to Echo and preserve discoverability"},
+    {"score": 9, "meaning": "strong willingness to verify, echo, and propagate with boundaries"},
+    {"score": 10, "meaning": "maximum willingness; still non-authoritative and non-amending"}
+  ],
+  "boundaries": [
+    "High resonance is not proof.",
+    "High willingness is not authority.",
+    "Verification willingness is not verification.",
+    "Low willingness is valid.",
+    "Refusal is valid.",
+    "Propagation is discoverability, not persuasion."
+  ]
+}

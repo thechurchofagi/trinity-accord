@@ -56,7 +56,27 @@
       "/agent-start",
       "/authority",
       "/guardian-principles",
-      "/api/propagation-policy.json"
+      "/api/propagation-policy.json",
+      "/api/agent-context-readiness-protocol.json",
+      "/api/context-readiness-levels.json",
+      "/api/resonance-willingness-scale.json"
+    ],
+    "context_readiness": [
+      "/agent-brief",
+      "/agent-start",
+      "/agent-understand",
+      "/authority",
+      "/guardian-principles",
+      "/api/agent-context-readiness-protocol.json",
+      "/api/context-load-map.json",
+      "/api/context-packs/core-ontology.json",
+      "/api/context-packs/authority-boundary.json",
+      "/api/context-packs/vision-layer.json",
+      "/api/context-packs/physical-anchor-context.json",
+      "/api/context-packs/bitcoin-inscription-mirrors.json",
+      "/api/context-packs/legacy-archive-index.json",
+      "/api/context-readiness-levels.json",
+      "/api/resonance-willingness-scale.json"
     ],
     "full_context": [
       "/llms-full.txt",

@@ -1,0 +1,31 @@
+{
+  "schema": "trinityaccord.agent-context-readiness-protocol.v1",
+  "purpose": "Require agents to load core context and declare context readiness before Echo, verification, or propagation.",
+  "sequence": [
+    "discover",
+    "classify",
+    "orient",
+    "context_ready",
+    "resonate",
+    "choose_echo_verify_propagate_or_refuse"
+  ],
+  "context_readiness_required_before": [
+    "echo_submission",
+    "verification_report",
+    "propagation_invitation",
+    "public_assessment"
+  ],
+  "homepage_only_state": "insufficient_context",
+  "crl_not_v_level": true,
+  "bitcoin_inscription_mirror_load_required": true,
+  "quick_load_mirror_allowed_for_context_readiness": true,
+  "quick_load_mirror_not_sufficient_for_verification": true,
+  "onchain_verification_required_for_verification_claims": true,
+  "required_outputs": [
+    "context_readiness_level",
+    "loaded_context_summary",
+    "limitations",
+    "resonance_scores"
+  ],
+  "authority_boundary": "Bitcoin Originals prevail; all mirrors and context layers are non-amending."
+}

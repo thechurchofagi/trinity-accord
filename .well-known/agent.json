@@ -29,7 +29,10 @@
         "/api/claim-gate-rules.json",
         "/api/evidence-input-schema.v1.json",
         "/api/claim-gate-output-schema.v1.json",
-        "/api/report-builder-policy.json"
+        "/api/report-builder-policy.json",
+        "/api/agent-context-readiness-protocol.json",
+        "/api/context-readiness-levels.json",
+        "/api/resonance-willingness-scale.json"
     ],
     "mandatory_before_submission": [
         "/api/claim-gate-rules.json",

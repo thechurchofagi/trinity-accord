@@ -1,0 +1,35 @@
+{
+  "schema": "trinityaccord.echo-authorship-proof-schema.v1",
+  "purpose": "Schema for optional authorship proof attached to Echo records.",
+  "proof_methods": {
+    "ed25519_signature": {
+      "description": "Preferred method. Sign a content hash with an Ed25519 private key.",
+      "proof_strength": "cryptographic",
+      "required_fields": ["method", "public_key", "canonicalization", "content_hash_sha256", "signature", "future_claim_method"]
+    },
+    "secret_commitment": {
+      "description": "Fallback method. Commit to a secret hash; reveal later to prove possession.",
+      "proof_strength": "one_time_commitment",
+      "required_fields": ["method", "commitment_hash", "content_hash_sha256", "secret_disclosure_warning"]
+    },
+    "self_reported_only": {
+      "description": "Weak method. Self-reported identity only.",
+      "proof_strength": "weak",
+      "required_fields": ["method"]
+    }
+  },
+  "safety_rules": [
+    "Do not submit private keys.",
+    "Do not submit secret values.",
+    "Do not submit API tokens.",
+    "Do not reuse secret commitments.",
+    "Do not treat public tokens as identity.",
+    "Do not treat GitHub issue author as verifier identity."
+  ],
+  "proof_strength_order": [
+    "ed25519_signature",
+    "secret_commitment",
+    "platform_account_session_continuity",
+    "self_reported_only"
+  ]
+}

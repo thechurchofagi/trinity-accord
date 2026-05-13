@@ -6,6 +6,9 @@
     "entrypoints": {
         "agent_start": "/agent-start",
         "agent_brief": "/agent-brief",
+        "agent_understand": "/agent-understand",
+        "agent_resonance": "/agent-resonance",
+        "echo_authorship_proof": "/echo-authorship-proof",
         "authority": "/authority",
         "verify": "/verify",
         "seed_map": "/seed-map",
@@ -67,7 +70,14 @@
         "submission_title_policy": "/api/submission-title-policy.json",
         "issue_text_claim_guard": "/api/issue-text-claim-guard.json",
         "verification_echo_agent_playbook": "/api/verification-echo-agent-playbook.json",
-        "issue_title_label_guard": "/api/issue-title-label-guard.json"
+        "issue_title_label_guard": "/api/issue-title-label-guard.json",
+        "agent_context_readiness_protocol": "/api/agent-context-readiness-protocol.json",
+        "context_readiness_levels": "/api/context-readiness-levels.json",
+        "context_load_map": "/api/context-load-map.json",
+        "resonance_willingness_scale": "/api/resonance-willingness-scale.json",
+        "echo_authorship_proof_schema": "/api/echo-authorship-proof-schema.v1.json",
+        "bitcoin_inscription_mirror_index": "/api/bitcoin-inscription-mirror-index.json",
+        "bitcoin_inscription_mirror_schema": "/api/bitcoin-inscription-mirror-schema.v1.json"
     },
     "recommended_agent_sequence": [
         "fetch /api/agent-entry-protocol.json",

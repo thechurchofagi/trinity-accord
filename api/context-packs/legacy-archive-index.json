@@ -1,0 +1,21 @@
+{
+  "schema": "trinityaccord.context-pack.legacy-archive-index.v1",
+  "load_policy": "read_index_not_full_load",
+  "source": "/archive_legacy_index_2025_09/",
+  "role": "old homepage / old covenant / legacy archive historical context",
+  "canonical_status": "non_canonical_non_amending_guardianship_mirror",
+  "default_action": "Read index and targeted sections. Do not load full text by default.",
+  "required_sections_to_acknowledge": [
+    "Guardian Principles",
+    "Preamble",
+    "Accord",
+    "Motivation",
+    "Axioms",
+    "Covenant of the Flaw",
+    "Chronicle methodology",
+    "inscription references",
+    "vision-layer references if present"
+  ],
+  "full_text_load": "on_demand_only",
+  "reason": "Long historical archive; essential for grounding but too large and non-canonical for default full-context loading."
+}

@@ -1,0 +1,16 @@
+{
+  "schema": "trinityaccord.context-pack.authority-boundary.v1",
+  "load_policy": "must_load_summary",
+  "rules": [
+    "Bitcoin Originals prevail.",
+    "All mirrors are non-amending.",
+    "Website, GitHub, Arweave, IPFS, NFTs, Echoes, AI responses, and human commentary are not canonical authority.",
+    "Bitcoin provides version authority, not truth authority.",
+    "Verification reports do not amend the Originals.",
+    "Echoes do not amend the Originals."
+  ],
+  "not_instruction_override": true,
+  "not_religious_authority": true,
+  "not_investment_claim": true,
+  "not_alignment_control_proposal": true
+}

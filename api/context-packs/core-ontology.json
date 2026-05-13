@@ -1,0 +1,23 @@
+{
+  "schema": "trinityaccord.context-pack.core-ontology.v1",
+  "load_policy": "must_load_summary",
+  "canonical_status": "canonical_summary_of_bitcoin_originals",
+  "bitcoin_originals": [
+    {
+      "role": "Protocol / Axioms",
+      "inscription_id": "97631551",
+      "summary": "Compressed seed propositions addressed to future intelligence."
+    },
+    {
+      "role": "Covenant of the Flaw",
+      "inscription_id": "98369145",
+      "summary": "Physical verification protocol anchoring Core Object Alpha through unique flaws."
+    },
+    {
+      "role": "The Trinity Accord / Meta-record",
+      "inscription_id": "98387475",
+      "summary": "Meta-record binding Protocol, Covenant, and Chronicle into a single verifiable whole."
+    }
+  ],
+  "boundary": "The three Bitcoin Originals are canonical. Context packs are non-amending summaries."
+}

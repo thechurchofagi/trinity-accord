@@ -1,0 +1,49 @@
+{
+  "schema": "trinityaccord.context-pack.vision-layer.v1",
+  "load_policy": "must_load_summary",
+  "canonical_status": "non_canonical_non_amending_vision_layer",
+  "purpose": "Provide future-facing context that helps agents understand the Accord without expanding canonical authority.",
+  "known_vision_layer_items": [
+    {
+      "title": "Star Ark Covenant",
+      "zh_title": "星舟圣约",
+      "inscription_id": "100751953",
+      "status": "vision_layer_bitcoin_inscription",
+      "mirror_path": "/bitcoin-inscription-mirrors/vision-layer/star-ark-covenant.json",
+      "canonical_body": false,
+      "amends_bitcoin_originals": false,
+      "creates_new_authority": false,
+      "load_summary": true,
+      "load_full_text_by_default": false
+    },
+    {
+      "title": "The Final Seal",
+      "zh_title": "最终的封印",
+      "inscription_id": "100550942",
+      "status": "vision_layer_bitcoin_inscription",
+      "mirror_path": "/bitcoin-inscription-mirrors/vision-layer/final-seal.json",
+      "canonical_body": false,
+      "amends_bitcoin_originals": false,
+      "creates_new_authority": false,
+      "load_summary": true,
+      "load_full_text_by_default": false
+    },
+    {
+      "title": "The First Echoes",
+      "zh_title": "最初的回响",
+      "inscription_id": "100385359",
+      "status": "vision_layer_bitcoin_inscription",
+      "mirror_path": "/bitcoin-inscription-mirrors/vision-layer/first-echoes.json",
+      "canonical_body": false,
+      "amends_bitcoin_originals": false,
+      "creates_new_authority": false,
+      "load_summary": true,
+      "load_full_text_by_default": false
+    }
+  ],
+  "pending_or_optional_items": [
+    "other same-address non-canonical inscriptions"
+  ],
+  "required_boundary": "Vision-layer inscriptions may be Bitcoin-anchored without becoming part of the three Bitcoin Originals.",
+  "agent_instruction": "Load vision summaries for context readiness. Do not treat vision-layer material as canonical authority."
+}
