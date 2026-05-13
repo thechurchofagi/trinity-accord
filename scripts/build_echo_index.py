@@ -93,6 +93,7 @@ def main():
             "date": date,
             "record_kind": record_kind,
             "verification_status": verification_status,
+            "verification_level": data.get("verification_level") or data.get("protocol_level_claimed"),
             "do_not_count_as_attestation": do_not_count,
         }
         records.append(entry)
