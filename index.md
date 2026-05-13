@@ -6,7 +6,7 @@ permalink: /
 
 <!-- build: p0.2-homepage-dedup -->
 <meta name="trinity-homepage-build" content="p0.2-homepage-dedup">
-<link rel="stylesheet" href="/assets/css/trinity-home.css?v=5">
+<link rel="stylesheet" href="/assets/css/trinity-home.css?v=6">
 
 # The Trinity Accord
 
