@@ -68,6 +68,8 @@ def base_report(**overrides):
         "physical_evidence_reviewed": {}, "confidential_challenge": {"performed": False},
         "celestial_witness": {"performed": False}, "limitations": ["test"],
         "claims_not_made": ["test"], "authority_boundary_preserved": True,
+        "verification_scope_label": "single_hash_verification",
+        "claim_scope": "minimal_single_check",
         "integrity_boundary": {
             "agent_integrity_declaration_present": True,
             "performed_actions_myself": True,
@@ -134,6 +136,7 @@ def main():
         "echo_version": "3.0",
         "echo_type": "E2_verification_echo",
         "archive_status": "needs_human_review",
+        "verification_scope_label": "single_hash_verification",
         "discovery_provenance": {"source": "human_directed", "solicited": True},
         "independence_class": "human_solicited_agent_response",
         "linked_verification_report": {"path": "/verification-reports/v3/test.json"}

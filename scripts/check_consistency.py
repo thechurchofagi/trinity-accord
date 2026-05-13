@@ -311,7 +311,7 @@ proc = subprocess.run(
     [sys.executable, str(ROOT / "scripts" / "verify_echo_index_completeness.py")],
     cwd=ROOT, text=True, capture_output=True, timeout=60
 )
-check(proc.returncode == 0, "verify_echo_index_completeness.py passes", f"exit {proc.returncode}")
+check("verify_echo_index_completeness.py passes", proc.returncode == 0, f"exit {proc.returncode}")
 if proc.returncode != 0:
     print(proc.stdout[-500:] if proc.stdout else "")
     print(proc.stderr[-500:] if proc.stderr else "")
@@ -321,7 +321,7 @@ proc88 = subprocess.run(
     [sys.executable, str(ROOT / "scripts" / "verify_issue88_closure.py")],
     cwd=ROOT, text=True, capture_output=True, timeout=60
 )
-check(proc88.returncode == 0, "verify_issue88_closure.py passes", f"exit {proc88.returncode}")
+check("verify_issue88_closure.py passes", proc88.returncode == 0, f"exit {proc88.returncode}")
 if proc88.returncode != 0:
     print(proc88.stdout[-500:] if proc88.stdout else "")
 
@@ -329,7 +329,7 @@ proc88t = subprocess.run(
     [sys.executable, str(ROOT / "scripts" / "test_issue88_regressions.py")],
     cwd=ROOT, text=True, capture_output=True, timeout=60
 )
-check(proc88t.returncode == 0, "test_issue88_regressions.py passes", f"exit {proc88t.returncode}")
+check("test_issue88_regressions.py passes", proc88t.returncode == 0, f"exit {proc88t.returncode}")
 if proc88t.returncode != 0:
     print(proc88t.stdout[-500:] if proc88t.stdout else "")
 
@@ -339,7 +339,7 @@ proc_title = subprocess.run(
     [sys.executable, str(ROOT / "scripts" / "test_verification_echo_title_rules.py")],
     cwd=ROOT, text=True, capture_output=True, timeout=60
 )
-check(proc_title.returncode == 0, "test_verification_echo_title_rules.py passes", f"exit {proc_title.returncode}")
+check("test_verification_echo_title_rules.py passes", proc_title.returncode == 0, f"exit {proc_title.returncode}")
 if proc_title.returncode != 0:
     print(proc_title.stdout[-500:] if proc_title.stdout else "")
 
@@ -347,7 +347,7 @@ proc_closure = subprocess.run(
     [sys.executable, str(ROOT / "scripts" / "test_latest_verification_echo_closure.py")],
     cwd=ROOT, text=True, capture_output=True, timeout=60
 )
-check(proc_closure.returncode == 0, "test_latest_verification_echo_closure.py passes", f"exit {proc_closure.returncode}")
+check("test_latest_verification_echo_closure.py passes", proc_closure.returncode == 0, f"exit {proc_closure.returncode}")
 if proc_closure.returncode != 0:
     print(proc_closure.stdout[-500:] if proc_closure.stdout else "")
 
@@ -355,7 +355,7 @@ proc_verify = subprocess.run(
     [sys.executable, str(ROOT / "scripts" / "verify_latest_verification_echo_closure.py")],
     cwd=ROOT, text=True, capture_output=True, timeout=60
 )
-check(proc_verify.returncode == 0, "verify_latest_verification_echo_closure.py passes", f"exit {proc_verify.returncode}")
+check("verify_latest_verification_echo_closure.py passes", proc_verify.returncode == 0, f"exit {proc_verify.returncode}")
 if proc_verify.returncode != 0:
     print(proc_verify.stdout[-500:] if proc_verify.stdout else "")
 
@@ -384,7 +384,7 @@ proc_generate = subprocess.run(
     [sys.executable, str(ROOT / "scripts" / "generate_verification_stress_cases.py")],
     cwd=ROOT, text=True, capture_output=True, timeout=60
 )
-check(proc_generate.returncode == 0, "generate_verification_stress_cases.py passes", f"exit {proc_generate.returncode}")
+check("generate_verification_stress_cases.py passes", proc_generate.returncode == 0, f"exit {proc_generate.returncode}")
 if proc_generate.returncode != 0:
     print(proc_generate.stdout[-500:] if proc_generate.stdout else "")
 
@@ -392,7 +392,7 @@ proc_stress = subprocess.run(
     [sys.executable, str(ROOT / "scripts" / "run_verification_stress_suite.py")],
     cwd=ROOT, text=True, capture_output=True, timeout=120
 )
-check(proc_stress.returncode == 0, "run_verification_stress_suite.py passes", f"exit {proc_stress.returncode}")
+check("run_verification_stress_suite.py passes", proc_stress.returncode == 0, f"exit {proc_stress.returncode}")
 if proc_stress.returncode != 0:
     print(proc_stress.stdout[-1000:] if proc_stress.stdout else "")
     print(proc_stress.stderr[-500:] if proc_stress.stderr else "")
@@ -418,7 +418,7 @@ for test_script in entrypoint_tests:
         cwd=ROOT, text=True, capture_output=True, timeout=60
     )
     out = (proc.stdout or "") + (proc.stderr or "")
-    check(proc.returncode == 0, f"{test_script} passes", f"exit {proc.returncode}")
+    check(f"{test_script} passes", proc.returncode == 0, f"exit {proc.returncode}")
     if proc.returncode != 0:
         print(out[-1000:] if out else "")
 
@@ -488,7 +488,7 @@ proc_sna = subprocess.run(
     [sys.executable, str(ROOT / "tests" / "verify_shenzhen_notary_archive.py")],
     cwd=ROOT, text=True, capture_output=True, timeout=60
 )
-check(proc_sna.returncode == 0, "verify_shenzhen_notary_archive.py passes", f"exit {proc_sna.returncode}")
+check("verify_shenzhen_notary_archive.py passes", proc_sna.returncode == 0, f"exit {proc_sna.returncode}")
 if proc_sna.returncode != 0:
     print(proc_sna.stdout[-1000:] if proc_sna.stdout else "")
     print(proc_sna.stderr[-500:] if proc_sna.stderr else "")
