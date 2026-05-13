@@ -12,7 +12,7 @@
       "date": "unknown",
       "record_kind": "echo_v3_with_verification_report",
       "verification_status": "unknown",
-      "do_not_count_as_attestation": false
+      "do_not_count_as_attestation": true
     },
     {
       "path": "/echoes/records/2026/echo-2026-04-25-000001.json",

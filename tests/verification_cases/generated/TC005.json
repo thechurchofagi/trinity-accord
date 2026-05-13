@@ -43,8 +43,8 @@
     {
       "artifact": "test.zip",
       "algorithm": "SHA-256",
-      "expected": "abc123",
-      "computed": "abc123",
+      "expected": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "computed": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
       "command": "sha256sum",
       "match": true,
       "expected_hash_source": "api/hashes.json",

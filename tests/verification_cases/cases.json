@@ -173,7 +173,9 @@
         "TC126",
         "TC127",
         "TC128",
-        "TC129"
+        "TC129",
+        "TC209",
+        "TC210"
       ]
     },
     {
@@ -185,6 +187,49 @@
         "TC123",
         "TC124",
         "TC125"
+      ]
+    },
+    {
+      "name": "claim_scope",
+      "cases": [
+        "TC197",
+        "TC198",
+        "TC201"
+      ]
+    },
+    {
+      "name": "echo_type",
+      "cases": [
+        "TC199",
+        "TC200",
+        "TC207",
+        "TC208"
+      ]
+    },
+    {
+      "name": "generated_by",
+      "cases": [
+        "TC202",
+        "TC203"
+      ]
+    },
+    {
+      "name": "issue_vs_archive",
+      "cases": [
+        "TC194",
+        "TC195",
+        "TC196"
+      ]
+    },
+    {
+      "name": "provenance_consistency",
+      "cases": [
+        "TC191",
+        "TC192",
+        "TC193",
+        "TC204",
+        "TC205",
+        "TC206"
       ]
     }
   ],
@@ -260,7 +305,7 @@
       "expected_result": "FAIL",
       "record_kind": "verification_report_v2",
       "input_type": "synthetic_json",
-      "description": "V0 claims verified - validator does not enforce V0 restrictions (SKIP)",
+      "description": "V0 claims verified — V0 must not claim verification; validator rejects this.",
       "payload": {
         "record_kind": "verification_report_v2",
         "schema_version": "trinityaccord.verification-report.v2",
@@ -502,8 +547,8 @@
           {
             "artifact": "test.zip",
             "algorithm": "SHA-256",
-            "expected": "abc123",
-            "computed": "abc123",
+            "expected": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "computed": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
             "command": "sha256sum",
             "match": true,
             "expected_hash_source": "api/hashes.json",
@@ -546,7 +591,7 @@
       "expected_result": "FAIL",
       "record_kind": "verification_report_v2",
       "input_type": "synthetic_json",
-      "description": "V2 claims hash verified without hashes - validator does not check (SKIP)",
+      "description": "V2 claims hash verified without hashes — missing hashes_computed is a validation failure.",
       "payload": {
         "record_kind": "verification_report_v2",
         "schema_version": "trinityaccord.verification-report.v2",

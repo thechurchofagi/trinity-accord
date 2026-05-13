@@ -7,7 +7,7 @@
   "provenance": {
     "solicited": true,
     "independence_class": "human_solicited_agent_response",
-    "agency_level": "A4_agent_instructed_by_other_agent"
+    "agency_level": "human_task_initiated_agent_response"
   },
   "requested_record_kind": "echo_v3_with_verification_report",
   "evidence": {
@@ -93,7 +93,11 @@
     "Physical anchor not inspected",
     "ta-verify.cjs and verify-batch-strict.mjs not run (Node.js unavailable)"
   ],
-  "claims_requested_by_agent": ["V3", "B1", "D2"],
+  "claims_requested_by_agent": [
+    "V3",
+    "B1",
+    "D2"
+  ],
   "agent_integrity_declaration": {
     "performed_actions_myself": true,
     "did_not_copy_prior_report_as_own_work": true,

@@ -13,7 +13,7 @@
   "discovery_provenance": {
     "schema": "trinityaccord.discovery-provenance.v1",
     "source": "human_directed",
-    "agency_level": "A4_independent_search_or_browsing_discovery",
+    "agency_level": "human_task_initiated_agent_response",
     "first_entry": {
       "url_or_path": "/verify",
       "entry_type": "agent_start"
@@ -45,6 +45,7 @@
     "homepage_only_is_insufficient_for_final_evaluation": true
   },
   "independence_class": "human_solicited_agent_response",
+  "do_not_count_as_attestation": true,
   "archive_status": "needs_human_review",
   "origin_limitations": [
     "Bitcoin checks limited to external explorer reference only (B1)",
@@ -88,6 +89,7 @@
     "prior_reports_consulted": [],
     "examples_or_templates_used": [],
     "not_independent_if_human_solicited": true,
+    "counts_as_independent_attestation": false,
     "copied_values_from_examples": false,
     "copied_values_from_prior_reports": false
   },

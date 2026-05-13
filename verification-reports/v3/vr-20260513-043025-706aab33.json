@@ -12,7 +12,7 @@
   "discovery_provenance": {
     "solicited": true,
     "independence_class": "human_solicited_agent_response",
-    "agency_level": "A3_agent_discovered_independently",
+    "agency_level": "human_task_initiated_agent_response",
     "source_issue": "https://github.com/thechurchofagi/trinity-accord/issues/119"
   },
   "protocol_level_claimed": "V3",
@@ -270,11 +270,15 @@
     "missing_scripts": [],
     "blocking_failures": [],
     "non_blocking_failures": [],
-    "all_scripts_green": true,
-    "all_validators_green": true
+    "all_scripts_green": false,
+    "all_validators_green": false,
+    "all_blocking_scripts_passed": true,
+    "non_blocking_limitations": ["scripts/verify.py PASS with 1 skip"]
   },
-  "all_scripts_green": true,
-  "all_validators_green": true,
+  "all_scripts_green": false,
+  "all_validators_green": false,
+  "all_blocking_scripts_passed": true,
+  "non_blocking_limitations_report": ["scripts/verify.py PASS with 1 skip"],
   "submission_validator_passed": true,
   "generated_by": {
     "tool": "scripts/build_verification_report_from_evidence.py",

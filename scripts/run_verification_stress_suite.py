@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
 """
 Run the high-intensity verification stress suite.
-Usage: python3 scripts/run_verification_stress_suite.py
+Usage: python3 scripts/run_verification_stress_suite.py [--strict]
+
+--strict:  Validate payloads as-is, do not auto-inject missing fields.
+           CI and check_consistency should use --strict.
+--compat:  (default) Auto-inject known-good fields for PASS payloads.
 """
 import json
 import sys
@@ -11,6 +15,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 CASES_PATH = ROOT / "tests" / "verification_cases" / "cases.json"
 GENERATED_DIR = ROOT / "tests" / "verification_cases" / "generated"
+
+STRICT_MODE = "--strict" in sys.argv
 
 sys.path.insert(0, str(ROOT / "scripts"))
 
@@ -123,6 +129,27 @@ def check_json_validity(case):
 def main():
     manifest = json.loads(CASES_PATH.read_text(encoding="utf-8"))
     cases = manifest.get("cases", [])
+
+    # Metadata consistency check
+    declared_count = manifest.get("case_count")
+    actual_count = len(cases)
+    if declared_count != actual_count:
+        print(f"ERROR: case_count={declared_count} but len(cases)={actual_count}")
+        return 1
+
+    # Check all category case IDs exist and every case is categorized
+    all_case_ids = {c["id"] for c in cases}
+    categorized_ids = set()
+    for cat in manifest.get("categories", []):
+        for cid in cat["cases"]:
+            if cid not in all_case_ids:
+                print(f"ERROR: category lists {cid} but it does not exist in cases")
+                return 1
+            categorized_ids.add(cid)
+    uncategorized = all_case_ids - categorized_ids
+    if uncategorized:
+        print(f"ERROR: {len(uncategorized)} cases not in any category: {sorted(uncategorized)[:10]}")
+        return 1
 
     # Generate synthetic files
     GENERATED_DIR.mkdir(parents=True, exist_ok=True)
@@ -254,8 +281,8 @@ def main():
             results["SKIP"] += 1
             continue
 
-        # Fix known issues for valid payloads that should pass
-        if expected == "PASS":
+        # Fix known issues for valid payloads that should pass (compat mode only)
+        if not STRICT_MODE and expected == "PASS":
             # Ensure required fields for valid reports
             if payload.get("record_kind") == "verification_report_v2":
                 if "report_id" not in payload:

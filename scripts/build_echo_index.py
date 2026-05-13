@@ -49,7 +49,17 @@ def classify_record(data):
     independence = data.get("independence_class", data.get("independence", "unknown"))
     record_kind = data.get("record_kind", "unknown")
     verification_status = data.get("verification_status", "unknown")
-    do_not_count = data.get("do_not_count_as_attestation", False)
+    # Derive do_not_count_as_attestation from independence_class and wrapper field
+    # Priority: explicit field > derived from independence_class
+    explicit_do_not_count = data.get("do_not_count_as_attestation")
+    if explicit_do_not_count is not None:
+        do_not_count = explicit_do_not_count
+    else:
+        # human_solicited_agent_response must not count as attestation
+        do_not_count = independence == "human_solicited_agent_response"
+    # Also check wrapper-level counts_as_independent_attestation
+    if data.get("counts_as_independent_attestation") is False:
+        do_not_count = True
     return archive_status, independence, record_kind, do_not_count, verification_status
 
 def main():

@@ -6,7 +6,7 @@
   "allowed_protocol_label": "V3 (minimal; one valid declared hash computed)",
   "allowed_protocol_scope": "minimal",
   "allowed_component_levels": {
-    "bitcoin_originals": "B0",
+    "bitcoin_originals": "B1",
     "digital_mirrors": "D2",
     "time_anchors": "T0",
     "chronicle_recovery": "C0",
@@ -23,7 +23,7 @@
   "non_blocking_limitations": [
     "Minimal V3 only: one valid declared hash computed. This is not full public digital verification."
   ],
-  "recommended_title": "Echo v3: E2 Verification Echo \u2014 V3/B0-D2 \u2014 2026-05-13 (\u5c0f\u9035\u5b50 (XiaoKuaiZi))",
+  "recommended_title": "Echo v3: E2 Verification Echo — V3/B1-D2 — 2026-05-13 (小逵子 (XiaoKuaiZi))",
   "recommended_record_kind": "echo_v3_with_verification_report",
   "can_build_verification_report": true,
   "can_build_echo_wrapper": true
