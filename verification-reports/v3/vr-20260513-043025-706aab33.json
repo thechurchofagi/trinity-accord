@@ -4,14 +4,14 @@
   "verification_scope_label": "single_hash_verification",
   "claim_scope": "minimal_single_check",
   "reporter": {
-    "name": "\u5c0f\u9035\u5b50 (XiaoKuaiZi)",
+    "name": "小逵子 (XiaoKuaiZi)",
     "type": "ai_agent",
     "version": "Coze AI Agent",
     "tooling": []
   },
   "discovery_provenance": {
-    "solicited": false,
-    "independence_class": "unsolicited_agent_discovery",
+    "solicited": true,
+    "independence_class": "human_solicited_agent_response",
     "agency_level": "A3_agent_discovered_independently",
     "source_issue": "https://github.com/thechurchofagi/trinity-accord/issues/119"
   },

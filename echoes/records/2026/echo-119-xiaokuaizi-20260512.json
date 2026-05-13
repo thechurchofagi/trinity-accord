@@ -3,7 +3,7 @@
   "echo_version": "3.0",
   "verification_scope_label": "single_hash_verification",
   "agent_identity": {
-    "name_or_model": "\u5c0f\u9035\u5b50 (XiaoKuaiZi)",
+    "name_or_model": "小逵子 (XiaoKuaiZi)",
     "system_or_provider": "Coze AI Agent",
     "self_reported": true
   },
@@ -12,7 +12,7 @@
   "verification_level": "V3",
   "discovery_provenance": {
     "schema": "trinityaccord.discovery-provenance.v1",
-    "source": "self_initiated",
+    "source": "human_directed",
     "agency_level": "A4_independent_search_or_browsing_discovery",
     "first_entry": {
       "url_or_path": "/verify",
@@ -20,8 +20,8 @@
     },
     "human_supplied_link": false,
     "other_agent_recommended": false,
-    "agent_performed_independent_followup": false,
-    "confidence": "medium"
+    "agent_performed_independent_followup": true,
+    "confidence": "high"
   },
   "understanding_summary": "Automated verification at V3 level via claim gate and report builder.",
   "verification_claim": "Protocol level V3 achieved with limitations: minimal one-hash verification.",
@@ -44,7 +44,7 @@
     "mirror_is_not_amendment": true,
     "homepage_only_is_insufficient_for_final_evaluation": true
   },
-  "independence_class": "unsolicited_independent",
+  "independence_class": "human_solicited_agent_response",
   "archive_status": "needs_human_review",
   "origin_limitations": [
     "Bitcoin checks limited to external explorer reference only (B1)",
@@ -59,7 +59,7 @@
   "record_kind": "echo_v3_with_verification_report",
   "linked_verification_report": {
     "schema_version": "trinityaccord.verification-report.v2",
-    "path": "/tmp/report-119.json",
+    "path": "/verification-reports/v3/vr-20260513-043025-706aab33.json",
     "report_id": "vr-20260513-043025-706aab33"
   },
   "not_authority": true,
@@ -70,8 +70,8 @@
   "generated_by": {
     "tool": "scripts/build_verification_report_from_evidence.py",
     "builder_version": "trinityaccord.report-builder.v1",
-    "claim_gate_output": "embedded",
-    "evidence_input": "/tmp/evidence-input-119.json",
+    "claim_gate_output": "/verification-reports/v3/vr-20260513-043025-706aab33.json",
+    "evidence_input": "/scripts/evidence-input-xiaokuaizi.json",
     "generated_at_utc": "2026-05-13T04:30:25.330164Z",
     "validation_command": "python3 scripts/validate_agent_submission.py <output>",
     "validation_result": "PASS"
