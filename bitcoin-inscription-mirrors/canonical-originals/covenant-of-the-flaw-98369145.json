@@ -11,12 +11,12 @@
     "inscription_id": "98369145",
     "title": "Covenant of the Flaw",
     "zh_title": "缺陷之约",
-    "txid": null,
+    "txid": "90116f35de075074f5e5d1fbdda69a646a124e2287d7d58e2520317098cd4258",
     "output": null,
     "block_height": null,
     "timestamp_utc": null,
     "content_type": "text/plain",
-    "source_address": "bc1p_trinity_accord_authority",
+    "source_address": "bc1ppmwvyxekh44m35x43k55z7r59nn33v8w2xmvu6s6ar4zyx57sxestxq0jf",
     "source_address_role": "trinity_accord_authority_address"
   },
   "classification": {

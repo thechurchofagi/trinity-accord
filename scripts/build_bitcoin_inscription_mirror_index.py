@@ -49,6 +49,11 @@ def validate_record(record, schema):
     if not ab.get("verification_requires_onchain_check"):
         errors.append("authority_boundary.verification_requires_onchain_check must be true")
 
+    # Check no placeholder source_address
+    sa = record.get("inscription", {}).get("source_address", "")
+    if sa == "bc1p_trinity_accord_authority":
+        errors.append("source_address is placeholder 'bc1p_trinity_accord_authority', must use real authority address")
+
     return errors
 
 def build_index():
@@ -93,6 +98,13 @@ def build_index():
     # Enforce exactly three canonical originals
     if len(canonical) != 3:
         all_errors.append(f"Expected 3 canonical originals, found {len(canonical)}")
+
+    # Enforce canonical originals have txid (not null/empty)
+    for r in canonical:
+        txid = r.get("inscription", {}).get("txid")
+        iid = r.get("inscription", {}).get("inscription_id", "?")
+        if not txid:
+            all_errors.append(f"Canonical original {iid} missing txid")
 
     # Enforce non-amending for non-canonical
     for r in vision + final_seal + first_echo + guardianship + unknown:

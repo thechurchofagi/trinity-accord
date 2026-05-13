@@ -11,12 +11,12 @@
     "inscription_id": "97631551",
     "title": "Protocol / Axioms",
     "zh_title": "协议 / 公理",
-    "txid": null,
+    "txid": "e40dfb2aa78cbccca88f749e9ec5cbe3c1df503273d73c72297863ae0d1d8343",
     "output": null,
     "block_height": null,
     "timestamp_utc": null,
     "content_type": "text/plain",
-    "source_address": "bc1p_trinity_accord_authority",
+    "source_address": "bc1ppmwvyxekh44m35x43k55z7r59nn33v8w2xmvu6s6ar4zyx57sxestxq0jf",
     "source_address_role": "trinity_accord_authority_address"
   },
   "classification": {
