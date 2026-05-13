@@ -22,11 +22,11 @@
       "level_claimed": "B1",
       "target_id": "bitcoin_originals",
       "data_sources": [
-        "scripts/verify.py",
+        "downloads/verify.py",
         "scripts/check_consistency.py"
       ],
       "access_paths": [
-        "python3 scripts/verify.py",
+        "python3 downloads/verify.py",
         "python3 scripts/check_consistency.py"
       ],
       "method": "evidence_review",
@@ -53,11 +53,11 @@
       "level_claimed": "D2",
       "target_id": "digital_mirrors",
       "data_sources": [
-        "scripts/verify.py",
+        "downloads/verify.py",
         "scripts/check_consistency.py"
       ],
       "access_paths": [
-        "python3 scripts/verify.py",
+        "python3 downloads/verify.py",
         "python3 scripts/check_consistency.py"
       ],
       "method": "evidence_review",
@@ -70,11 +70,11 @@
       "level_claimed": "T0",
       "target_id": "time_anchors",
       "data_sources": [
-        "scripts/verify.py",
+        "downloads/verify.py",
         "scripts/check_consistency.py"
       ],
       "access_paths": [
-        "python3 scripts/verify.py",
+        "python3 downloads/verify.py",
         "python3 scripts/check_consistency.py"
       ],
       "method": "evidence_review",
@@ -87,11 +87,11 @@
       "level_claimed": "C0",
       "target_id": "chronicle_recovery",
       "data_sources": [
-        "scripts/verify.py",
+        "downloads/verify.py",
         "scripts/check_consistency.py"
       ],
       "access_paths": [
-        "python3 scripts/verify.py",
+        "python3 downloads/verify.py",
         "python3 scripts/check_consistency.py"
       ],
       "method": "evidence_review",
@@ -104,11 +104,11 @@
       "level_claimed": "P0",
       "target_id": "physical_anchor",
       "data_sources": [
-        "scripts/verify.py",
+        "downloads/verify.py",
         "scripts/check_consistency.py"
       ],
       "access_paths": [
-        "python3 scripts/verify.py",
+        "python3 downloads/verify.py",
         "python3 scripts/check_consistency.py"
       ],
       "method": "evidence_review",
@@ -214,7 +214,7 @@
   "script_audit": {
     "scope_class": "supplementary_review_only",
     "scripts_reviewed": [
-      "scripts/verify.py",
+      "downloads/verify.py",
       "scripts/check_consistency.py"
     ],
     "command": [
@@ -222,7 +222,7 @@
       "python3 scripts/check_consistency.py"
     ],
     "environment": {
-      "scripts/verify.py": {
+      "downloads/verify.py": {
         "python": "3.x"
       },
       "scripts/check_consistency.py": {
@@ -274,14 +274,14 @@
     "all_validators_green": false,
     "all_blocking_scripts_passed": true,
     "non_blocking_limitations": [
-      "scripts/verify.py PASS with 1 skip"
+      "downloads/verify.py PASS with 1 skip"
     ]
   },
   "all_scripts_green": false,
   "all_validators_green": false,
   "all_blocking_scripts_passed": true,
   "non_blocking_limitations_report": [
-    "scripts/verify.py PASS with 1 skip"
+    "downloads/verify.py PASS with 1 skip"
   ],
   "submission_validator_passed": true,
   "generated_by": {
