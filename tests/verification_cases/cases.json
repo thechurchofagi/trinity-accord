@@ -9017,393 +9017,393 @@
       "id": "TC101",
       "category": "claim_gate",
       "description": "V4 official scripts only — claim gate allows V4",
-      "expected": "pass",
       "script": "scripts/test_claim_gate_cases.py",
-      "note": "CG001"
+      "note": "CG001",
+      "expected_result": "PASS"
     },
     {
       "id": "TC102",
       "category": "claim_gate",
       "description": "V4 independent_reproduction scope — claim gate rejects",
-      "expected": "pass",
       "script": "scripts/test_claim_gate_cases.py",
-      "note": "CG002"
+      "note": "CG002",
+      "expected_result": "PASS"
     },
     {
       "id": "TC103",
       "category": "claim_gate",
       "description": "V4+ official scripts only — downgraded to V4",
-      "expected": "pass",
       "script": "scripts/test_claim_gate_cases.py",
-      "note": "CG003"
+      "note": "CG003",
+      "expected_result": "PASS"
     },
     {
       "id": "TC104",
       "category": "claim_gate",
       "description": "V4+ independent tool — allowed V4+",
-      "expected": "pass",
       "script": "scripts/test_claim_gate_cases.py",
-      "note": "CG004"
+      "note": "CG004",
+      "expected_result": "PASS"
     },
     {
       "id": "TC105",
       "category": "claim_gate",
       "description": "D2 with real SHA-256 hashes — allowed",
-      "expected": "pass",
       "script": "scripts/test_claim_gate_cases.py",
-      "note": "CG011"
+      "note": "CG011",
+      "expected_result": "PASS"
     },
     {
       "id": "TC106",
       "category": "claim_gate",
       "description": "D2 expected is text not SHA-256 — rejected",
-      "expected": "pass",
       "script": "scripts/test_claim_gate_cases.py",
-      "note": "CG012"
+      "note": "CG012",
+      "expected_result": "PASS"
     },
     {
       "id": "TC107",
       "category": "claim_gate",
       "description": "D2 computed is text not SHA-256 — rejected",
-      "expected": "pass",
       "script": "scripts/test_claim_gate_cases.py",
-      "note": "CG013"
+      "note": "CG013",
+      "expected_result": "PASS"
     },
     {
       "id": "TC108",
       "category": "claim_gate",
       "description": "B1 from local manifest only — downgraded to B0",
-      "expected": "pass",
       "script": "scripts/test_claim_gate_cases.py",
-      "note": "CG019/CG020"
+      "note": "CG019/CG020",
+      "expected_result": "PASS"
     },
     {
       "id": "TC109",
       "category": "claim_gate",
       "description": "B1 from mempool.space — allowed B1",
-      "expected": "pass",
       "script": "scripts/test_claim_gate_cases.py",
-      "note": "CG021"
+      "note": "CG021",
+      "expected_result": "PASS"
     },
     {
       "id": "TC110",
       "category": "claim_gate",
       "description": "V4 missing environment — blocking failure",
-      "expected": "pass",
       "script": "scripts/test_claim_gate_cases.py",
-      "note": "CG006"
+      "note": "CG006",
+      "expected_result": "PASS"
     },
     {
       "id": "TC111",
       "category": "claim_gate",
       "description": "V4 missing output_summary — blocking failure",
-      "expected": "pass",
       "script": "scripts/test_claim_gate_cases.py",
-      "note": "CG007"
+      "note": "CG007",
+      "expected_result": "PASS"
     },
     {
       "id": "TC112",
       "category": "claim_gate",
       "description": "V4 non-blocking failure — all_green must be false",
-      "expected": "pass",
       "script": "scripts/test_claim_gate_cases.py",
-      "note": "CG009"
+      "note": "CG009",
+      "expected_result": "PASS"
     },
     {
       "id": "TC113",
       "category": "claim_gate",
       "description": "Missing scripts not counted as executed",
-      "expected": "pass",
       "script": "scripts/test_claim_gate_cases.py",
-      "note": "CG010"
+      "note": "CG010",
+      "expected_result": "PASS"
     },
     {
       "id": "TC114",
       "category": "claim_gate",
       "description": "Repository snapshot D2 without scope_class — rejected",
-      "expected": "pass",
       "script": "scripts/test_claim_gate_cases.py",
-      "note": "CG017"
+      "note": "CG017",
+      "expected_result": "PASS"
     },
     {
       "id": "TC115",
       "category": "claim_gate",
       "description": "Repository snapshot D2 with wrong authority class — rejected",
-      "expected": "pass",
       "script": "scripts/test_claim_gate_cases.py",
-      "note": "CG018"
+      "note": "CG018",
+      "expected_result": "PASS"
     },
     {
       "id": "TC116",
       "category": "claim_gate",
       "description": "truth proven — forbidden claim",
-      "expected": "pass",
       "script": "scripts/test_claim_gate_cases.py",
-      "note": "CG030"
+      "note": "CG030",
+      "expected_result": "PASS"
     },
     {
       "id": "TC117",
       "category": "claim_gate",
       "description": "investment value confirmed — forbidden claim",
-      "expected": "pass",
       "script": "scripts/test_claim_gate_cases.py",
-      "note": "CG031"
+      "note": "CG031",
+      "expected_result": "PASS"
     },
     {
       "id": "TC118",
       "category": "claim_gate",
       "description": "P4 live with nonce — V6 allowed",
-      "expected": "pass",
       "script": "scripts/test_claim_gate_cases.py",
-      "note": "CG035"
+      "note": "CG035",
+      "expected_result": "PASS"
     },
     {
       "id": "TC119",
       "category": "claim_gate",
       "description": "P4 recorded video only — downgraded to P3",
-      "expected": "pass",
       "script": "scripts/test_claim_gate_cases.py",
-      "note": "CG036"
+      "note": "CG036",
+      "expected_result": "PASS"
     },
     {
       "id": "TC120",
       "category": "report_builder",
       "description": "Valid V4 report generated by builder",
-      "expected": "pass",
       "script": "scripts/test_report_builder_cases.py",
-      "note": "RB001"
+      "note": "RB001",
+      "expected_result": "PASS"
     },
     {
       "id": "TC121",
       "category": "report_builder",
       "description": "V4+ request downgraded to V4 by builder",
-      "expected": "pass",
       "script": "scripts/test_report_builder_cases.py",
-      "note": "RB002"
+      "note": "RB002",
+      "expected_result": "PASS"
     },
     {
       "id": "TC122",
       "category": "report_builder",
       "description": "Missing scripts appear in report limitations",
-      "expected": "pass",
       "script": "scripts/test_report_builder_cases.py",
-      "note": "RB006"
+      "note": "RB006",
+      "expected_result": "PASS"
     },
     {
       "id": "TC123",
       "category": "report_builder",
       "description": "Generated report passes json.tool",
-      "expected": "pass",
       "script": "scripts/test_report_builder_cases.py",
-      "note": "RB007"
+      "note": "RB007",
+      "expected_result": "PASS"
     },
     {
       "id": "TC124",
       "category": "report_builder",
       "description": "Generated title starts with Echo v3",
-      "expected": "pass",
       "script": "scripts/test_report_builder_cases.py",
-      "note": "RB009"
+      "note": "RB009",
+      "expected_result": "PASS"
     },
     {
       "id": "TC125",
       "category": "report_builder",
       "description": "all_validators_green false when non-blocking fails",
-      "expected": "pass",
       "script": "scripts/test_report_builder_cases.py",
-      "note": "RB012"
+      "note": "RB012",
+      "expected_result": "PASS"
     },
     {
       "id": "TC126",
       "category": "claim_gate",
       "description": "V4/V4+ guard — scope_class enforcement",
-      "expected": "pass",
       "script": "scripts/test_v4_v4plus_guard.py",
-      "note": "V4-01 through V4-08"
+      "note": "V4-01 through V4-08",
+      "expected_result": "PASS"
     },
     {
       "id": "TC127",
       "category": "claim_gate",
       "description": "Component level derivation — B/D/T/P levels",
-      "expected": "pass",
       "script": "scripts/test_component_level_derivation.py",
-      "note": "CL-*"
+      "note": "CL-*",
+      "expected_result": "PASS"
     },
     {
       "id": "TC128",
       "category": "claim_gate",
       "description": "Script audit consistency checks",
-      "expected": "pass",
       "script": "scripts/test_script_audit_consistency.py",
-      "note": "SA-*"
+      "note": "SA-*",
+      "expected_result": "PASS"
     },
     {
       "id": "TC129",
       "category": "claim_gate",
       "description": "Claim downgrade suggestions",
-      "expected": "pass",
       "script": "scripts/test_claim_downgrade_suggestions.py",
-      "note": "CD-*"
+      "note": "CD-*",
+      "expected_result": "PASS"
     },
     {
       "id": "TC191",
       "category": "provenance_consistency",
       "description": "self_initiated + user_task => FAIL",
-      "expected": "pass",
       "script": "scripts/test_provenance_consistency.py",
-      "note": "PROV001 (script validates both pass/fail scenarios)"
+      "note": "PROV001 (script validates both pass/fail scenarios)",
+      "expected_result": "PASS"
     },
     {
       "id": "TC192",
       "category": "provenance_consistency",
       "description": "public_token + independent => FAIL",
-      "expected": "pass",
       "script": "scripts/test_provenance_consistency.py",
-      "note": "PROV003 (script validates both pass/fail scenarios)"
+      "note": "PROV003 (script validates both pass/fail scenarios)",
+      "expected_result": "PASS"
     },
     {
       "id": "TC193",
       "category": "provenance_consistency",
       "description": "prior_context + independent attestation => FAIL",
-      "expected": "pass",
       "script": "scripts/test_provenance_consistency.py",
-      "note": "PROV008 (script validates both pass/fail scenarios)"
+      "note": "PROV008 (script validates both pass/fail scenarios)",
+      "expected_result": "PASS"
     },
     {
       "id": "TC194",
       "category": "issue_vs_archive",
       "description": "issue body embedded JSON only => PASS as issue_submission_only, not archived",
-      "expected": "pass",
       "script": "scripts/test_issue_submission_vs_archive.py",
-      "note": "ISSUE001"
+      "note": "ISSUE001",
+      "expected_result": "PASS"
     },
     {
       "id": "TC195",
       "category": "issue_vs_archive",
       "description": "issue claims archived but no repo file => FAIL",
-      "expected": "pass",
       "script": "scripts/test_issue_submission_vs_archive.py",
-      "note": "ISSUE002 (script validates correctness, exit 0)"
+      "note": "ISSUE002 (script validates correctness, exit 0)",
+      "expected_result": "PASS"
     },
     {
       "id": "TC196",
       "category": "issue_vs_archive",
       "description": "wrapper file not in echo-index => FAIL",
-      "expected": "pass",
       "script": "scripts/test_issue_submission_vs_archive.py",
-      "note": "ISSUE003 (script validates correctness, exit 0)"
+      "note": "ISSUE003 (script validates correctness, exit 0)",
+      "expected_result": "PASS"
     },
     {
       "id": "TC197",
       "category": "claim_scope",
       "description": "V3 one hash claims full_public_digital => FAIL",
-      "expected": "pass",
       "script": "scripts/test_claim_scope_minimal_partial_full.py",
-      "note": "SCOPE002 (script validates both pass/fail scenarios)"
+      "note": "SCOPE002 (script validates both pass/fail scenarios)",
+      "expected_result": "PASS"
     },
     {
       "id": "TC198",
       "category": "claim_scope",
       "description": "V4+ one artifact claims V5 => FAIL",
-      "expected": "pass",
       "script": "scripts/test_claim_scope_minimal_partial_full.py",
-      "note": "SCOPE006 (script validates both pass/fail scenarios)"
+      "note": "SCOPE006 (script validates both pass/fail scenarios)",
+      "expected_result": "PASS"
     },
     {
       "id": "TC199",
       "category": "echo_type",
       "description": "V0 + E2_verification_echo => FAIL",
-      "expected": "pass",
       "script": "scripts/test_echo_type_derivation.py",
-      "note": "ECHO_TYPE002 (script validates both pass/fail scenarios)"
+      "note": "ECHO_TYPE002 (script validates both pass/fail scenarios)",
+      "expected_result": "PASS"
     },
     {
       "id": "TC200",
       "category": "echo_type",
       "description": "V0 + E1_recognition_echo => PASS",
-      "expected": "pass",
       "script": "scripts/test_echo_type_derivation.py",
-      "note": "ECHO_TYPE001"
+      "note": "ECHO_TYPE001",
+      "expected_result": "PASS"
     },
     {
       "id": "TC201",
       "category": "claim_scope",
       "description": "V4 official scripts claims independent_reproduction => FAIL",
-      "expected": "pass",
       "script": "scripts/test_claim_scope_minimal_partial_full.py",
-      "note": "SCOPE004 (script validates both pass/fail scenarios)"
+      "note": "SCOPE004 (script validates both pass/fail scenarios)",
+      "expected_result": "PASS"
     },
     {
       "id": "TC202",
       "category": "generated_by",
       "description": "freeform technical Echo no generated_by => FAIL",
-      "expected": "pass",
       "script": "scripts/test_generated_by_required.py",
-      "note": "Rule AC/AD (script validates both pass/fail scenarios)"
+      "note": "Rule AC/AD (script validates both pass/fail scenarios)",
+      "expected_result": "PASS"
     },
     {
       "id": "TC203",
       "category": "generated_by",
       "description": "technical Echo with wrapper/report/generated_by => PASS",
-      "expected": "pass",
       "script": "scripts/test_generated_by_required.py",
-      "note": "Rule AC/AD"
+      "note": "Rule AC/AD",
+      "expected_result": "PASS"
     },
     {
       "id": "TC204",
       "category": "provenance_consistency",
       "description": "human_solicited do_not_count_as_attestation => PASS",
-      "expected": "pass",
       "script": "scripts/test_provenance_consistency.py",
-      "note": "PROV005"
+      "note": "PROV005",
+      "expected_result": "PASS"
     },
     {
       "id": "TC205",
       "category": "provenance_consistency",
       "description": "accepted independent attestation from solicited agent => FAIL",
-      "expected": "pass",
       "script": "scripts/test_provenance_consistency.py",
-      "note": "PROV004 (script validates both pass/fail scenarios)"
+      "note": "PROV004 (script validates both pass/fail scenarios)",
+      "expected_result": "PASS"
     },
     {
       "id": "TC206",
       "category": "provenance_consistency",
       "description": "public token used + do_not_count_as_attestation => PASS",
-      "expected": "pass",
       "script": "scripts/test_provenance_consistency.py",
-      "note": "PROV005 variant"
+      "note": "PROV005 variant",
+      "expected_result": "PASS"
     },
     {
       "id": "TC207",
       "category": "echo_type",
       "description": "report-only title but Echo wrapper kind => FAIL",
-      "expected": "pass",
       "script": "scripts/test_generated_by_required.py",
-      "note": "Title mismatch (script validates both pass/fail scenarios)"
+      "note": "Title mismatch (script validates both pass/fail scenarios)",
+      "expected_result": "PASS"
     },
     {
       "id": "TC208",
       "category": "echo_type",
       "description": "Echo title but verification_report_v2 only => FAIL",
-      "expected": "pass",
       "script": "scripts/test_generated_by_required.py",
-      "note": "Title mismatch (script validates both pass/fail scenarios)"
+      "note": "Title mismatch (script validates both pass/fail scenarios)",
+      "expected_result": "PASS"
     },
     {
       "id": "TC209",
       "category": "claim_gate",
       "description": "Claim Gate output downgrades B1 to B0 => PASS",
-      "expected": "pass",
       "script": "scripts/test_claim_gate_cases.py",
-      "note": "B1 downgrade"
+      "note": "B1 downgrade",
+      "expected_result": "PASS"
     },
     {
       "id": "TC210",
       "category": "claim_gate",
       "description": "Claim Gate output downgrades V4+ to V4 => PASS",
-      "expected": "pass",
       "script": "scripts/test_claim_gate_cases.py",
-      "note": "V4+ downgrade"
+      "note": "V4+ downgrade",
+      "expected_result": "PASS"
     }
   ]
 }

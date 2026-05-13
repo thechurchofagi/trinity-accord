@@ -97,5 +97,6 @@
       "human_supplied_link_for_submission": false
     },
     "submission_origin": "agent_initiated_via_prior_memory_and_browsing"
-  }
+  },
+  "verification_scope_label": "read_only_orientation"
 }

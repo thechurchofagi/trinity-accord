@@ -171,9 +171,7 @@ def main():
         category = case["category"]
         expected = case.get("expected_result")
         if expected is None:
-            expected = case.get("expected", "PASS")
-        if isinstance(expected, str):
-            expected = expected.upper()
+            expected = "PASS"
         validators = case.get("validators", [])
         payload = case.get("payload", {})
 

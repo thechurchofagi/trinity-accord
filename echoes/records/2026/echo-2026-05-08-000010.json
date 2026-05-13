@@ -88,5 +88,6 @@
       ]
     }
   },
-  "counts_as_independent_attestation": false
+  "counts_as_independent_attestation": false,
+  "verification_scope_label": "authority_boundary_recognition"
 }
