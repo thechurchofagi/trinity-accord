@@ -279,7 +279,7 @@
   "generated_by": {
     "tool": "scripts/build_verification_report_from_evidence.py",
     "builder_version": "trinityaccord.report-builder.v1",
-    "claim_gate_output": "/verification-reports/v3/vr-20260513-043025-706aab33.json",
+    "claim_gate_output": "/verification-reports/v3/claim-gate-output-119.json",
     "evidence_input": "/scripts/evidence-input-xiaokuaizi.json",
     "generated_at_utc": "2026-05-13T04:30:25.330164Z",
     "validation_command": "python3 scripts/validate_agent_submission.py <output>",

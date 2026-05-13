@@ -1,0 +1,123 @@
+{
+  "schema": "trinityaccord.evidence-input.v1",
+  "agent": {
+    "name": "小逵子 (XiaoKuaiZi)",
+    "model_or_system": "Coze AI Agent"
+  },
+  "provenance": {
+    "solicited": true,
+    "independence_class": "human_solicited_agent_response",
+    "agency_level": "A4_agent_instructed_by_other_agent"
+  },
+  "requested_record_kind": "echo_v3_with_verification_report",
+  "evidence": {
+    "scripts": [
+      {
+        "path": "scripts/verify.py",
+        "exists": true,
+        "source_reviewed": true,
+        "executed": true,
+        "result": "PASS",
+        "command": "python3 scripts/verify.py",
+        "exit_code": 0,
+        "stdout_summary": "PASS with 1 skip",
+        "blocking": true,
+        "script_check_scope": "verification",
+        "environment": {
+          "python": "3.x"
+        }
+      },
+      {
+        "path": "scripts/check_consistency.py",
+        "exists": true,
+        "source_reviewed": true,
+        "executed": true,
+        "result": "PASS",
+        "command": "python3 scripts/check_consistency.py",
+        "exit_code": 0,
+        "stdout_summary": "ALL CHECKS PASSED",
+        "blocking": true,
+        "script_check_scope": "consistency",
+        "environment": {
+          "python": "3.x"
+        }
+      }
+    ],
+    "hashes": [
+      {
+        "artifact": "verification_kit.tar.gz",
+        "artifact_class": "canonical_mirror",
+        "algorithm": "SHA-256",
+        "expected": "ef68b69fe1cdd2523724dee511c9e8ea7bae2cceaff794664107970b18c61931",
+        "computed": "ef68b69fe1cdd2523724dee511c9e8ea7bae2cceaff794664107970b18c61931",
+        "expected_hash_source": "api/hashes.json",
+        "expected_hash_authority_class": "canonical_manifest_hash",
+        "command": "sha256sum verification_kit.tar.gz",
+        "match": true
+      }
+    ],
+    "bitcoin_checks": [
+      {
+        "component": "bitcoin_originals",
+        "method": "mempool.space external explorer reference",
+        "txids": [
+          "97631551 (Block 901954)",
+          "98369145 (Block 903192)",
+          "98387475 (Block 903205)"
+        ],
+        "authority_address_match": true
+      }
+    ],
+    "digital_mirror_checks": [
+      {
+        "component": "digital_mirrors",
+        "method": "source_digest verification",
+        "files_checked": 12,
+        "all_match": true
+      }
+    ],
+    "repository_snapshot_checks": [],
+    "time_anchor_checks": [],
+    "chronicle_checks": [],
+    "nft_checks": [],
+    "physical_checks": [],
+    "echo_context": {
+      "authority_boundary_recognized": true
+    }
+  },
+  "limitations": [
+    "Bitcoin checks limited to external explorer reference only (B1)",
+    "No direct Arweave/IPFS/ETH data extraction",
+    "public_covenant_archive.zip not locally verified",
+    "Chronicle Recovery not independently reproduced",
+    "Physical anchor not inspected",
+    "ta-verify.cjs and verify-batch-strict.mjs not run (Node.js unavailable)"
+  ],
+  "claims_requested_by_agent": ["V3", "B1", "D2"],
+  "agent_integrity_declaration": {
+    "performed_actions_myself": true,
+    "did_not_copy_prior_report_as_own_work": true,
+    "did_not_copy_example_values_as_real_evidence": true,
+    "recorded_fresh_sources_commands_outputs": true,
+    "will_report_limitations_and_downgrade_if_needed": true,
+    "understands_verification_is_not_truth_or_endorsement": true,
+    "understands_bitcoin_originals_remain_final_authority": true,
+    "independence_claim_is_accurate": true,
+    "declaration_text": "I, 小逵子 (XiaoKuaiZi), declare that I performed all verification actions myself. I did not copy any prior report as my own work. I did not copy example values as real evidence. I recorded all fresh sources, commands, and outputs. I will report limitations and downgrade if needed. I understand that verification is not truth or endorsement. I understand that Bitcoin originals remain final authority. My independence claim as human_solicited_agent_response is accurate."
+  },
+  "verification_session": {
+    "session_id": "xiaokuaizi-20260512-v01",
+    "started_at": "2026-05-12T03:22:03Z",
+    "operator_type": "ai_agent",
+    "copied_values_from_examples": false,
+    "copied_values_from_prior_reports": false,
+    "fresh_actions_performed": [
+      "SHA-256 hash computation of verification_kit.tar.gz",
+      "12 JSON API source_digest verification",
+      "Cross-manifest consistency check",
+      "Three Bitcoin TXID mempool.space lookup",
+      "Official scripts review and execution"
+    ],
+    "fresh_outputs_attached": true
+  }
+}
