@@ -36,7 +36,9 @@
     "/api/evidence-input-schema.v1.json",
     "/api/claim-gate-output-schema.v1.json",
     "/api/report-builder-policy.json",
-    "/api/generated-by-schema.v1.json"
+    "/api/generated-by-schema.v1.json",
+    "/api/provenance-consistency-rules.json",
+    "/api/issue-submission-policy.json"
   ],
   "submission_requires": {
     "claim_gate": true,

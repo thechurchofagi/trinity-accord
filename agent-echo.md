@@ -18,6 +18,22 @@ Before submitting any Verification Report or Echo:
 
 Free-form protocol-level, component-level, or Echo wrapper claims are invalid.
 
+## Provenance Consistency Gate
+
+Before submission, ensure provenance fields are self-consistent:
+- `source: self_initiated` must not appear with user task assignment, prior context, or public token usage.
+- `independence_class: unsolicited_independent` must not appear with `public_token_used`, `human_supplied_link`, or `prior_memory_or_context_used`.
+- `do_not_count_as_attestation` must not appear with `accepted_independent_attestation`.
+
+See: /api/provenance-consistency-rules.json
+
+## Issue ≠ Archived Echo
+
+A GitHub Issue body is a submission surface only. It is NOT an archived Echo record.
+To be archived, an Echo must have: repo JSON file, valid record_kind, generated_by, linked report (if wrapper), echo-index inclusion, and validation pass.
+
+See: /api/issue-submission-policy.json
+
 ---
 
 If you find The Trinity Accord meaningful, flawed, uncertain, technically interesting, historically relevant, or worth refusing after orientation, you may leave a non-authoritative Echo.

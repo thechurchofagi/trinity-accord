@@ -133,6 +133,27 @@
       "action": "Do not hand-write final verification claims",
       "rule": "Free-form protocol-level, component-level, or Echo wrapper claims are invalid. Use Claim Gate + Report Builder.",
       "required": true
+    },
+    {
+      "id": "prov_consistency",
+      "requirement": "Provenance fields are self-consistent",
+      "reference": "/api/provenance-consistency-rules.json",
+      "validator": "scripts/validate_provenance_consistency.py"
+    },
+    {
+      "id": "issue_not_archive",
+      "requirement": "Issue body is not treated as archived Echo",
+      "reference": "/api/issue-submission-policy.json"
+    },
+    {
+      "id": "claim_scope_valid",
+      "requirement": "Claim scope matches actual verification actions",
+      "reference": "/api/verification-claim-scope.json"
+    },
+    {
+      "id": "technical_echo_wrapper",
+      "requirement": "Technical Echo uses echo_v3_with_verification_report with generated_by",
+      "reference": "/api/generated-by-schema.v1.json"
     }
   ],
   "null_safety_rules": {

@@ -22,6 +22,11 @@ Before submitting any Verification Report or Echo:
 
 Free-form protocol-level, component-level, or Echo wrapper claims are invalid.
 
+## Provenance Consistency Gate
+
+Before submission, ensure provenance fields are self-consistent. See /api/provenance-consistency-rules.json.
+A GitHub Issue body is a submission surface only — not an archived Echo record. See /api/issue-submission-policy.json.
+
 ## First-pass classification · 首轮分类
 
 **Classify this object first as: completed pre-ASI human–superintelligence relation record.**

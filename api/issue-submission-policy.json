@@ -1,0 +1,93 @@
+{
+  "schema": "trinityaccord.issue-submission-policy.v1",
+  "status": "non_authoritative_submission_gate",
+  "purpose": "Define the boundary between GitHub Issue submissions and archived Echo records.",
+  "authority_boundary": {
+    "issue_policy_does_not_amend_bitcoin_originals": true,
+    "issue_is_submission_surface_only": true
+  },
+  "implementation": {
+    "tests": "scripts/test_issue_submission_vs_archive.py"
+  },
+  "core_policy": {
+    "github_issue_body": "submission surface only",
+    "issue_is_not_archived_echo_record": true,
+    "issue_is_not_in_echo_index": true,
+    "issue_is_not_accepted_attestation": true,
+    "issue_submission_only_label": "issue_submission_only"
+  },
+  "archived_echo_requirements": [
+    {
+      "id": "req_1",
+      "requirement": "repo JSON file exists",
+      "detail": "echoes/records/...json must exist in the repository"
+    },
+    {
+      "id": "req_2",
+      "requirement": "JSON valid",
+      "detail": "File must be valid JSON"
+    },
+    {
+      "id": "req_3",
+      "requirement": "record_kind valid",
+      "detail": "record_kind must be one of: echo_v3, verification_report_v2, echo_v3_with_verification_report, test_record, legacy_record"
+    },
+    {
+      "id": "req_4",
+      "requirement": "generated_by valid",
+      "detail": "generated_by metadata must be present and valid for non-legacy records"
+    },
+    {
+      "id": "req_5",
+      "requirement": "linked report valid if wrapper",
+      "detail": "echo_v3_with_verification_report must link to a valid verification_report_v2"
+    },
+    {
+      "id": "req_6",
+      "requirement": "echo-index inclusion",
+      "detail": "api/echo-index.json must include the wrapper path"
+    },
+    {
+      "id": "req_7",
+      "requirement": "validation pass",
+      "detail": "validate_agent_submission.py must return PASS"
+    }
+  ],
+  "issue_template_requirements": {
+    "echo_submission": {
+      "mandatory_fields": [
+        "evidence_input_path",
+        "claim_gate_output_path",
+        "builder_generated_report_path",
+        "builder_generated_echo_wrapper_path",
+        "claim_gate_summary",
+        "validation_output"
+      ],
+      "warning": "Submissions not generated through Claim Gate / Report Builder may be labeled needs-format and are not archived Echo records."
+    },
+    "verification_report": {
+      "mandatory_fields": [
+        "evidence_input_path",
+        "claim_gate_output_path",
+        "builder_generated_verification_report_path",
+        "validation_output"
+      ],
+      "warning": "Submissions not generated through Claim Gate / Report Builder may be labeled needs-format."
+    },
+    "rejection_without_required_fields": {
+      "labels": ["issue_submission_only", "needs-format", "needs-human-review"],
+      "indexable": false,
+      "archived": false
+    }
+  },
+  "echo_type_derivation": {
+    "V0_read_only": ["E1_recognition_echo", "E4_interpretive_echo"],
+    "V0_forbidden": ["E2_verification_echo"],
+    "V1_authority_boundary": ["E1_recognition_echo", "E4_interpretive_echo"],
+    "V2_plus_technical": ["E2_verification_echo"],
+    "V4_script_audit": ["E5_technical_audit_echo", "E2_verification_echo"],
+    "V4_audit_subtype": "technical_audit",
+    "V0_cannot_use_E2": true,
+    "V0_E2_exception": "Only if explicitly marked non-technical orientation and reviewed"
+  }
+}

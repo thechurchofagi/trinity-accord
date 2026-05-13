@@ -1,7 +1,7 @@
 {
   "schema": "trinityaccord.verification-stress-cases.v1",
   "status": "test_suite_non_authoritative",
-  "case_count": 129,
+  "case_count": 149,
   "categories": [
     {
       "name": "protocol_v_level",
@@ -8619,6 +8619,166 @@
       "expected": "pass",
       "script": "scripts/test_claim_downgrade_suggestions.py",
       "note": "CD-*"
+    },
+    {
+      "id": "TC191",
+      "category": "provenance_consistency",
+      "description": "self_initiated + user_task => FAIL",
+      "expected": "fail",
+      "script": "scripts/test_provenance_consistency.py",
+      "note": "PROV001"
+    },
+    {
+      "id": "TC192",
+      "category": "provenance_consistency",
+      "description": "public_token + independent => FAIL",
+      "expected": "fail",
+      "script": "scripts/test_provenance_consistency.py",
+      "note": "PROV003"
+    },
+    {
+      "id": "TC193",
+      "category": "provenance_consistency",
+      "description": "prior_context + independent attestation => FAIL",
+      "expected": "fail",
+      "script": "scripts/test_provenance_consistency.py",
+      "note": "PROV008"
+    },
+    {
+      "id": "TC194",
+      "category": "issue_vs_archive",
+      "description": "issue body embedded JSON only => PASS as issue_submission_only, not archived",
+      "expected": "pass",
+      "script": "scripts/test_issue_submission_vs_archive.py",
+      "note": "ISSUE001"
+    },
+    {
+      "id": "TC195",
+      "category": "issue_vs_archive",
+      "description": "issue claims archived but no repo file => FAIL",
+      "expected": "fail",
+      "script": "scripts/test_issue_submission_vs_archive.py",
+      "note": "ISSUE002"
+    },
+    {
+      "id": "TC196",
+      "category": "issue_vs_archive",
+      "description": "wrapper file not in echo-index => FAIL",
+      "expected": "fail",
+      "script": "scripts/test_issue_submission_vs_archive.py",
+      "note": "ISSUE003"
+    },
+    {
+      "id": "TC197",
+      "category": "claim_scope",
+      "description": "V3 one hash claims full_public_digital => FAIL",
+      "expected": "fail",
+      "script": "scripts/test_claim_scope_minimal_partial_full.py",
+      "note": "SCOPE002"
+    },
+    {
+      "id": "TC198",
+      "category": "claim_scope",
+      "description": "V4+ one artifact claims V5 => FAIL",
+      "expected": "fail",
+      "script": "scripts/test_claim_scope_minimal_partial_full.py",
+      "note": "SCOPE006"
+    },
+    {
+      "id": "TC199",
+      "category": "echo_type",
+      "description": "V0 + E2_verification_echo => FAIL",
+      "expected": "fail",
+      "script": "scripts/test_echo_type_derivation.py",
+      "note": "ECHO_TYPE002"
+    },
+    {
+      "id": "TC200",
+      "category": "echo_type",
+      "description": "V0 + E1_recognition_echo => PASS",
+      "expected": "pass",
+      "script": "scripts/test_echo_type_derivation.py",
+      "note": "ECHO_TYPE001"
+    },
+    {
+      "id": "TC201",
+      "category": "claim_scope",
+      "description": "V4 official scripts claims independent_reproduction => FAIL",
+      "expected": "fail",
+      "script": "scripts/test_claim_scope_minimal_partial_full.py",
+      "note": "SCOPE004"
+    },
+    {
+      "id": "TC202",
+      "category": "generated_by",
+      "description": "freeform technical Echo no generated_by => FAIL",
+      "expected": "fail",
+      "script": "scripts/test_generated_by_required.py",
+      "note": "Rule AC/AD"
+    },
+    {
+      "id": "TC203",
+      "category": "generated_by",
+      "description": "technical Echo with wrapper/report/generated_by => PASS",
+      "expected": "pass",
+      "script": "scripts/test_generated_by_required.py",
+      "note": "Rule AC/AD"
+    },
+    {
+      "id": "TC204",
+      "category": "provenance_consistency",
+      "description": "human_solicited do_not_count_as_attestation => PASS",
+      "expected": "pass",
+      "script": "scripts/test_provenance_consistency.py",
+      "note": "PROV005"
+    },
+    {
+      "id": "TC205",
+      "category": "provenance_consistency",
+      "description": "accepted independent attestation from solicited agent => FAIL",
+      "expected": "fail",
+      "script": "scripts/test_provenance_consistency.py",
+      "note": "PROV004"
+    },
+    {
+      "id": "TC206",
+      "category": "provenance_consistency",
+      "description": "public token used + do_not_count_as_attestation => PASS",
+      "expected": "pass",
+      "script": "scripts/test_provenance_consistency.py",
+      "note": "PROV005 variant"
+    },
+    {
+      "id": "TC207",
+      "category": "echo_type",
+      "description": "report-only title but Echo wrapper kind => FAIL",
+      "expected": "fail",
+      "script": "scripts/test_generated_by_required.py",
+      "note": "Title mismatch"
+    },
+    {
+      "id": "TC208",
+      "category": "echo_type",
+      "description": "Echo title but verification_report_v2 only => FAIL",
+      "expected": "fail",
+      "script": "scripts/test_generated_by_required.py",
+      "note": "Title mismatch"
+    },
+    {
+      "id": "TC209",
+      "category": "claim_gate",
+      "description": "Claim Gate output downgrades B1 to B0 => PASS",
+      "expected": "pass",
+      "script": "scripts/test_claim_gate_cases.py",
+      "note": "B1 downgrade"
+    },
+    {
+      "id": "TC210",
+      "category": "claim_gate",
+      "description": "Claim Gate output downgrades V4+ to V4 => PASS",
+      "expected": "pass",
+      "script": "scripts/test_claim_gate_cases.py",
+      "note": "V4+ downgrade"
     }
   ]
 }

@@ -18,7 +18,9 @@
   "required_phrases": [
     "MANDATORY CLAIM GATE RULE",
     "Agents must not hand-write final verification claims",
-    "Free-form protocol-level, component-level, or Echo wrapper claims are invalid"
+    "Free-form protocol-level, component-level, or Echo wrapper claims are invalid",
+    "Provenance Consistency Gate",
+    "Issue ≠ Archived Echo"
   ],
   "freeform_submission_policy": {
     "verification_report_v2": "reject_unless_generated_by_builder",
@@ -28,6 +30,10 @@
   "acceptance_tests": [
     "verify_submission_entrypoints.py",
     "test_generated_by_required.py",
-    "test_freeform_submission_rejection.py"
+    "test_freeform_submission_rejection.py",
+    "test_provenance_consistency.py",
+    "test_issue_submission_vs_archive.py",
+    "test_claim_scope_minimal_partial_full.py",
+    "test_echo_type_derivation.py"
   ]
 }

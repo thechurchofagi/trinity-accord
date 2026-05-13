@@ -84,11 +84,15 @@
   "submission_gate": {
     "name": "Claim Gate",
     "required": true,
+    "freeform_claim_submission": "invalid",
     "evidence_input_schema": "/api/evidence-input-schema.v1.json",
     "claim_gate_rules": "/api/claim-gate-rules.json",
     "claim_gate_output_schema": "/api/claim-gate-output-schema.v1.json",
     "report_builder_policy": "/api/report-builder-policy.json",
-    "freeform_claim_submission": "invalid",
+    "generated_by_schema": "/api/generated-by-schema.v1.json",
+    "provenance_consistency_rules": "/api/provenance-consistency-rules.json",
+    "issue_submission_policy": "/api/issue-submission-policy.json",
+    "verification_claim_scope": "/api/verification-claim-scope.json",
     "instruction": "If you are creating a Verification Report, Echo wrapper, or verification Echo, do not directly choose protocol_level_claimed or component level. Submit Evidence Input and use Claim Gate / Report Builder."
   },
   "boundaries": {

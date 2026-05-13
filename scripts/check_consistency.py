@@ -534,6 +534,69 @@ for required_text_path in [
     except Exception as e:
         check(f"{required_text_path} can be checked for GitHub release backup", False, str(e))
 
+# --- Issue Submission Gate Hardening ---
+print("\n=== Issue Submission Gate Hardening ===")
+
+# New API JSON files must be valid
+new_api_files = [
+    "api/provenance-consistency-rules.json",
+    "api/verification-claim-scope.json",
+    "api/issue-submission-policy.json",
+]
+for jf in new_api_files:
+    try:
+        load_json(jf)
+        check(f"JSON valid: {jf}", True)
+    except Exception as e:
+        check(f"JSON valid: {jf}", False, str(e))
+
+# agent.json must include new mandatory entries
+try:
+    agent_json = load_json(".well-known/agent.json")
+    mandatory = agent_json.get("mandatory_before_submission", [])
+    check("agent.json has provenance-consistency-rules",
+          any("provenance-consistency" in p for p in mandatory))
+    check("agent.json has issue-submission-policy",
+          any("issue-submission-policy" in p for p in mandatory))
+    sub_req = agent_json.get("submission_requires", {})
+    check("agent.json submission_requires.claim_gate", sub_req.get("claim_gate") is True)
+    check("agent.json submission_requires.freeform_claims_allowed=False",
+          sub_req.get("freeform_claims_allowed") is False)
+except Exception as e:
+    check("agent.json gate hardening", False, str(e))
+
+# agent-entry-protocol.json must have submission_gate with new refs
+try:
+    entry_proto = load_json("api/agent-entry-protocol.json")
+    gate = entry_proto.get("submission_gate", {})
+    check("agent-entry has submission_gate", bool(gate))
+    check("agent-entry submission_gate.required", gate.get("required") is True)
+    check("agent-entry has provenance_consistency_rules ref",
+          "provenance_consistency_rules" in gate)
+    check("agent-entry has issue_submission_policy ref",
+          "issue_submission_policy" in gate)
+except Exception as e:
+    check("agent-entry gate hardening", False, str(e))
+
+# New scripts must exist
+new_scripts = [
+    "scripts/validate_provenance_consistency.py",
+    "scripts/test_provenance_consistency.py",
+    "scripts/test_issue_submission_vs_archive.py",
+    "scripts/test_claim_scope_minimal_partial_full.py",
+    "scripts/test_echo_type_derivation.py",
+    "scripts/verify_issue_submission_gate_online.py",
+]
+for script in new_scripts:
+    check(f"Script exists: {script}", exists(script))
+
+# llms.txt must contain MANDATORY CLAIM GATE RULE
+try:
+    llms = read_text("llms.txt")
+    check("llms.txt has MANDATORY CLAIM GATE RULE", "MANDATORY CLAIM GATE RULE" in llms)
+except Exception as e:
+    check("llms.txt claim gate rule", False, str(e))
+
 # --- Summary ---
 def main():
     print("\n" + "=" * 50)

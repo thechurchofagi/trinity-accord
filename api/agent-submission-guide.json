@@ -121,5 +121,18 @@
     ],
     "documentation": "/docs/claim-gate",
     "generated_by_schema": "/api/generated-by-schema.v1.json"
-  }
+  },
+  "mandatory_rules": {
+    "claim_gate": true,
+    "provenance_consistency": true,
+    "issue_not_archived_echo": true,
+    "generated_by_required": true,
+    "freeform_claims_allowed": false
+  },
+  "mandatory_reading": [
+    "/api/claim-gate-rules.json",
+    "/api/provenance-consistency-rules.json",
+    "/api/issue-submission-policy.json",
+    "/api/verification-claim-scope.json"
+  ]
 }

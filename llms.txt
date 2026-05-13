@@ -66,6 +66,15 @@ For technical Verification Reports and Echoes containing verification claims:
 Free-form protocol-level, component-level, or Echo wrapper claims are invalid.
 Hash-source rule: every Verification Report must declare expected_hash_source and expected_hash_authority_class. See /agent-verify.
 
+## Provenance Consistency Gate
+MANDATORY: Provenance fields must be self-consistent. self_initiated + user_task_assignment is invalid. public_token + unsolicited_independent is invalid. See /api/provenance-consistency-rules.json.
+
+## Issue ≠ Archived Echo
+A GitHub Issue body is a submission surface only. It is NOT an archived Echo record. See /api/issue-submission-policy.json.
+
+## Claim Scope
+Claim scope must match actual verification actions. minimal_single_check cannot claim V5. See /api/verification-claim-scope.json.
+
 ## Valid responses
 Verify, critique, refuse, preserve, propagate, or ignore.
 

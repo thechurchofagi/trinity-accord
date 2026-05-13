@@ -1162,6 +1162,80 @@ def validate_generated_by(obj, path_label):
     return ok
 
 
+def validate_technical_echo_requires_wrapper(obj, path_label):
+    """Rule AD: Technical Echo must use verification_report_v2 + wrapper with generated_by."""
+    ok = True
+    record_kind = obj.get("record_kind", "")
+    echo_type = obj.get("echo_type", "")
+    archive_status = obj.get("archive_status", "")
+
+    # Legacy exception
+    if record_kind == "legacy_record" or archive_status in ("legacy", "superseded"):
+        return ok
+
+    # Only apply to Echo records, not verification_report_v2 (which has its own generated_by check)
+    if record_kind == "verification_report_v2":
+        return ok
+
+    # Non-technical echo types are exempt
+    NON_TECHNICAL = {"E1_recognition_echo", "E4_interpretive_echo", "E6_propagation_echo", "E7_refusal_echo"}
+    if echo_type in NON_TECHNICAL:
+        # But they must not claim V-level / component-level technical verification
+        if obj.get("protocol_level_claimed") or obj.get("component_findings"):
+            ok &= check(
+                False,
+                f"{path_label} non-technical echo claims technical verification",
+                f"{echo_type} must not claim protocol_level or component_findings"
+            )
+        return ok
+
+    # Technical indicators
+    TECHNICAL_FIELDS = [
+        "protocol_level_claimed", "component_findings", "hashes_computed",
+        "script_audit", "bitcoin_checks", "digital_mirror_checks"
+    ]
+    is_technical = any(obj.get(f) for f in TECHNICAL_FIELDS)
+
+    if not is_technical:
+        return ok
+
+    # Technical Echo must use echo_v3_with_verification_report
+    if record_kind != "echo_v3_with_verification_report":
+        ok &= check(
+            False,
+            f"{path_label} technical Echo missing wrapper",
+            f"Technical Echo must use record_kind=echo_v3_with_verification_report, got '{record_kind}'"
+        )
+
+    # Must have linked_verification_report
+    if not obj.get("linked_verification_report"):
+        ok &= check(
+            False,
+            f"{path_label} technical Echo missing linked_verification_report",
+            "Technical Echo must link to a verification report"
+        )
+
+    # Must have generated_by
+    if not obj.get("generated_by"):
+        ok &= check(
+            False,
+            f"{path_label} technical Echo missing generated_by",
+            "Technical Echo must have generated_by metadata"
+        )
+
+    # Must have claim_gate_output (in generated_by or top-level)
+    gb = obj.get("generated_by", {})
+    if isinstance(gb, dict) and not gb.get("claim_gate_output"):
+        if not obj.get("claim_gate_output"):
+            ok &= check(
+                False,
+                f"{path_label} technical Echo missing claim_gate_output",
+                "Technical Echo must reference claim_gate_output"
+            )
+
+    return ok
+
+
 # --- P1 Remediation: Unknown fields guard ---
 KNOWN_ECHO_FIELDS = {
     "schema", "schema_version", "echo_version", "record_kind", "archive_status",
@@ -1671,6 +1745,9 @@ def validate_file(path):
 
     # Rule AC: generated_by required for non-legacy
     ok &= validate_generated_by(obj, path_label)
+
+    # Rule AD: Technical Echo must use wrapper with generated_by
+    ok &= validate_technical_echo_requires_wrapper(obj, path_label)
 
     # Rule AD: V5a/V5b not formal levels
     ok &= validate_no_v5a_v5b(obj, path_label)
