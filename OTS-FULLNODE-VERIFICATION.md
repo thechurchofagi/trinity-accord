@@ -2,6 +2,7 @@
 layout: default
 title: "OTS Fullnode Verification"
 description: "OTS verification finalization details."
+permalink: /ots-fullnode-verification/
 ---
 
 # OTS Verification Finalization

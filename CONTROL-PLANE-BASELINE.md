@@ -1,6 +1,7 @@
 ---
 layout: default
 title: "Control Plane Baseline"
+permalink: /control-plane-baseline/
 ---
 # Trinity Accord Control-Plane Baseline
 

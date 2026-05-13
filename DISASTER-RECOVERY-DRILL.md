@@ -1,6 +1,7 @@
 ---
 layout: default
 title: "Disaster Recovery Drill"
+permalink: /disaster-recovery-drill/
 ---
 # Trinity Accord Disaster Recovery Drill
 

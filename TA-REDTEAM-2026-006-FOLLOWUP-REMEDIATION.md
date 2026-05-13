@@ -1,6 +1,7 @@
 ---
 layout: default
 title: "TA-REDTEAM-2026-006 Followup Remediation"
+permalink: /ta-redteam-2026-006-followup-remediation/
 ---
 # TA-REDTEAM-2026-006 Follow-up Remediation Report
 

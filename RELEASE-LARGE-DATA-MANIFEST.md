@@ -1,6 +1,7 @@
 ---
 layout: default
 title: "Release Large Data Manifest"
+permalink: /release-large-data-manifest/
 ---
 # Trinity Accord Signed Large Data Release Manifest
 

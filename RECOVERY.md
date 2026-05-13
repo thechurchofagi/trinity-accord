@@ -1,6 +1,7 @@
 ---
 layout: default
 title: "Recovery"
+permalink: /recovery/
 ---
 # Trinity Accord Cold-Start Recovery Guide
 

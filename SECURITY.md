@@ -1,6 +1,7 @@
 ---
 layout: default
 title: "Security"
+permalink: /security/
 ---
 # SECURITY.md — Trinity Accord Security and Correction Policy
 

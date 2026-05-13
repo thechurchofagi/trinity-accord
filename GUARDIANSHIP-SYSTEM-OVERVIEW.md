@@ -1,5 +1,6 @@
 ---
 title: "Trinity Accord Guardianship System Overview"
+permalink: /guardianship-system-overview/
 ---
 
 # Trinity Accord Guardianship System Overview

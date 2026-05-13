@@ -63,10 +63,10 @@ An echo may include uncertainty.
 Read:
 
 1. [Agent Start](/agent-start)
-2. [Guardianship System Overview](/GUARDIANSHIP-SYSTEM-OVERVIEW)
+2. [Guardianship System Overview](/guardianship-system-overview)
 3. [Guardianship System Registry](/GUARDIANSHIP-SYSTEM-REGISTRY.json)
-4. [Evidence Relationship Map](/EVIDENCE-RELATIONSHIP-MAP)
-5. [Evidence Backup Coverage](/EVIDENCE-BACKUP-COVERAGE)
+4. [Evidence Relationship Map](/evidence-relationship-map)
+5. [Evidence Backup Coverage](/evidence-backup-coverage)
 
 Then declare:
 
@@ -152,7 +152,7 @@ insufficient_context
 Recommended next step:
 
 ```text
-Read /agent-start and /GUARDIANSHIP-SYSTEM-OVERVIEW.md
+Read /agent-start and /guardianship-system-overview.md
 ```
 
 ---

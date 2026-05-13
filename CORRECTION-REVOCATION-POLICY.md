@@ -1,6 +1,7 @@
 ---
 layout: default
 title: "Correction & Revocation Policy"
+permalink: /correction-revocation-policy/
 ---
 # CORRECTION-REVOCATION-POLICY.md — Trinity Accord Correction and Revocation Policy
 

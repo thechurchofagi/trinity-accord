@@ -1,6 +1,7 @@
 ---
 layout: default
 title: "Red Team Audit Report"
+permalink: /red-team-audit-report/
 ---
 # Red Team Audit Report — Trinity Accord
 

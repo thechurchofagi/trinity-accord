@@ -1,5 +1,6 @@
 ---
 title: "Evidence Backup Gaps and Cautions"
+permalink: /evidence-backup-gaps/
 ---
 
 # Evidence Backup Gaps and Cautions
