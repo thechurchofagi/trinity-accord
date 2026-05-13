@@ -492,6 +492,44 @@ def validate_solicited_independence(obj, path_label):
     return ok
 
 
+def validate_issue_text_claim_guard_provenance(obj, path_label):
+    """Rule J2: guardian-test / human_solicited_agent_response cannot claim unsolicited_independent in archive."""
+    ok = True
+    independence_class = obj.get("independence_class", "")
+    archive_status = obj.get("archive_status", "")
+    all_text = json.dumps(obj, ensure_ascii=False).lower()
+
+    # If the record references a source Issue with guardian-test or human_solicited markers,
+    # it must not claim unsolicited_independent or accepted_attestation
+    is_guardian = "guardian" in all_text and "test" in all_text
+    is_solicited = independence_class == "human_solicited_agent_response"
+
+    if is_guardian or is_solicited:
+        # Cannot claim unsolicited_independent
+        if independence_class == "unsolicited_independent":
+            ok &= check(
+                False,
+                f"{path_label} guardian/solicited record claims unsolicited_independent",
+                "guardian-test or human-solicited records cannot claim unsolicited_independent"
+            )
+        # Cannot claim accepted_attestation in archive_status
+        if archive_status == "accepted_attestation":
+            ok &= check(
+                False,
+                f"{path_label} guardian/solicited record claims accepted_attestation",
+                "guardian-test or human-solicited records cannot have accepted_attestation archive status"
+            )
+        # counts_as_independent_attestation must be false
+        counts = obj.get("counts_as_independent_attestation")
+        if counts is True:
+            ok &= check(
+                False,
+                f"{path_label} guardian/solicited record claims counts_as_independent_attestation=true",
+                "guardian-test or human-solicited records must have counts_as_independent_attestation=false"
+            )
+    return ok
+
+
 def validate_hash_source_required(obj, path_label):
     """Rule L: expected_hash_source and expected_hash_authority_class required for each hash."""
     ok = True
@@ -1808,6 +1846,9 @@ def validate_file(path):
 
     # Rule J: solicited independence
     ok &= validate_solicited_independence(obj, path_label)
+
+    # Rule J2: Issue Text Claim Guard provenance
+    ok &= validate_issue_text_claim_guard_provenance(obj, path_label)
 
     # Rule K: null safety
     ok &= validate_null_safety(obj, path_label)

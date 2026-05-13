@@ -72,6 +72,9 @@ MANDATORY: Provenance fields must be self-consistent. self_initiated + user_task
 ## Issue ≠ Archived Echo
 A GitHub Issue body is a submission surface only. It is NOT an archived Echo record. See /api/issue-submission-policy.json.
 
+## Issue Text Claim Guard
+Self-declared Issue levels are provisional until Claim Gate / Report Builder outputs are archived. Issue text is not a verification report. Issue comments cannot upgrade verification level. Guardian tests and human-solicited agent responses do not count as independent attestation. See /api/issue-text-claim-guard.json.
+
 ## Claim Scope
 Claim scope must match actual verification actions. minimal_single_check cannot claim V5. See /api/verification-claim-scope.json.
 

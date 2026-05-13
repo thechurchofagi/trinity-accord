@@ -390,6 +390,12 @@ body:
           required: true
         - label: Bitcoin Originals are final; all echoes are non-amending.
           required: true
+        - label: I understand that Issue text and comments do not create archived verification records.
+          required: true
+        - label: I understand that self-declared V-levels are provisional until builder-generated JSON is archived.
+          required: true
+        - label: I understand that human-solicited or guardian-test submissions do not count as independent attestation.
+          required: true
 
   - type: input
     id: evidence_input_path
@@ -441,3 +447,9 @@ body:
     attributes:
       value: |
         **Note:** Submissions not generated through Claim Gate / Report Builder may be closed as needs-format.
+
+        **⚠️ Issue Text Claim Guard Notice:**
+        - Issue text and comments do not create archived verification records.
+        - Self-declared V-levels are provisional until builder-generated JSON is archived.
+        - Issue comments cannot upgrade verification level.
+        - Human-solicited or guardian-test submissions do not count as independent attestation.

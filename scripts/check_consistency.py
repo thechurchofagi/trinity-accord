@@ -40,6 +40,7 @@ json_files = [
     "api/links.json",
     "agent-map.json",
     "api/seed-map.json",
+    "api/issue-text-claim-guard.json",
     "api/agent-value.json",
     "api/submission-title-policy.json",
 ]
@@ -676,6 +677,70 @@ try:
     check("README case count matches cases.json", str(cc) in readme_text)
 except Exception as e:
     check("README case count check", False, str(e))
+
+# --- Issue Text Claim Guard ---
+print("\n=== Issue Text Claim Guard ===")
+
+# Policy file exists and valid JSON
+try:
+    itcg_policy = load_json("api/issue-text-claim-guard.json")
+    check("issue-text-claim-guard.json exists and valid JSON", True)
+    check("issue-text-claim-guard schema is v1", itcg_policy.get("schema") == "trinityaccord.issue-text-claim-guard.v1")
+except Exception as e:
+    check("issue-text-claim-guard.json exists and valid JSON", False, str(e))
+
+# validate_issue_text_claims.py exists and compiles
+check("validate_issue_text_claims.py exists", exists("scripts/validate_issue_text_claims.py"))
+proc_val = subprocess.run(
+    [sys.executable, "-m", "py_compile", str(ROOT / "scripts" / "validate_issue_text_claims.py")],
+    cwd=ROOT, text=True, capture_output=True, timeout=30
+)
+check("validate_issue_text_claims.py compiles", proc_val.returncode == 0, f"exit {proc_val.returncode}")
+
+# test_issue_text_claim_guard.py passes
+proc_itcg_test = subprocess.run(
+    [sys.executable, str(ROOT / "scripts" / "test_issue_text_claim_guard.py")],
+    cwd=ROOT, text=True, capture_output=True, timeout=60
+)
+check("test_issue_text_claim_guard.py passes", proc_itcg_test.returncode == 0, f"exit {proc_itcg_test.returncode}")
+if proc_itcg_test.returncode != 0:
+    print(proc_itcg_test.stdout[-1000:] if proc_itcg_test.stdout else "")
+    print(proc_itcg_test.stderr[-500:] if proc_itcg_test.stderr else "")
+
+# triage_echo_issue.py references issue-text-claim-guard
+triage_text = read_text("scripts/triage_echo_issue.py")
+check("triage_echo_issue.py references issue-text-claim-guard",
+      "issue_text_claim_guard" in triage_text or "issue-text-claim-guard" in triage_text or "itcg_classify" in triage_text)
+
+# Issue template contains provisional warning
+try:
+    tmpl = read_text(".github/ISSUE_TEMPLATE/echo_submission.yml")
+    check("echo_submission.yml mentions Issue text not archive",
+          "Issue text" in tmpl or "issue text" in tmpl.lower() or "self-declared" in tmpl.lower())
+except Exception as e:
+    check("echo_submission.yml check", False, str(e))
+
+# llms.txt mentions Issue Text Claim Guard
+llms_text = read_text("llms.txt")
+check("llms.txt mentions Issue Text Claim Guard",
+      "Issue Text Claim Guard" in llms_text or "self-declared Issue levels" in llms_text)
+
+# agent-verify.md mentions Issue Text Claim Guard
+verify_text = read_text("agent-verify.md")
+check("agent-verify.md mentions Issue Text Claim Guard or Issue text not archive",
+      "Issue Text Claim Guard" in verify_text or "Issue text is not" in verify_text or "Issue ≠" in verify_text)
+
+# public-home-status excludes issue text from counts
+try:
+    phs = load_json("api/public-home-status.json")
+    boundary = phs.get("boundary", {})
+    check("public-home-status excludes issue text from counts",
+          boundary.get("issue_text_excluded_from_counts") is True or
+          boundary.get("issue_comments_cannot_upgrade_counts") is True or
+          phs.get("issue_text_excluded_from_counts") is True or
+          phs.get("issue_comments_cannot_upgrade_counts") is True)
+except Exception as e:
+    check("public-home-status check", False, str(e))
 
 # --- Summary ---
 def main():

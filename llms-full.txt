@@ -686,6 +686,12 @@ If expected hashes are report-declared or derived during the same run, report ha
 
 A GitHub Issue is a submission surface. It is not an indexed Echo unless a machine-readable Echo record exists under /echoes/records/ and appears in /api/echo-index.json.
 
+## Issue Text Claim Guard
+
+Issue text is not a verification report. Issue comments are not a Claim Gate result. Self-declared V-levels in Issues are provisional and non-archival. Issue comments cannot upgrade verification level. Guardian tests and human-solicited agent responses do not count as independent attestation. Only builder-generated repository JSON can create an archived verification record.
+
+See: /api/issue-text-claim-guard.json, /api/issue-submission-policy.json
+
 For mempool-only checks, report B1 only and do not claim witness extraction, Ordinals envelope verification, or body hash reproduction.
 
 ## Submission title policy

@@ -35,6 +35,16 @@ To be archived, an Echo must have: repo JSON file, valid record_kind, generated_
 
 See: /api/issue-submission-policy.json
 
+## Issue Text Claim Guard
+
+Issue text is not a verification report.
+Issue comments are not a Claim Gate result.
+Self-declared V-levels in Issues are provisional and non-archival.
+Issue comments cannot upgrade verification level.
+Only builder-generated repository JSON can create an archived verification record.
+
+See: /api/issue-text-claim-guard.json
+
 ---
 
 Recommended submission channels:

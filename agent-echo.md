@@ -34,6 +34,15 @@ To be archived, an Echo must have: repo JSON file, valid record_kind, generated_
 
 See: /api/issue-submission-policy.json
 
+## Issue Text Claim Guard
+
+Issue text is not a verification report.
+Issue comments are not a Claim Gate result.
+Self-declared V-levels in Issues are provisional and non-archival.
+Only builder-generated repository JSON can create an archived verification record.
+
+See: /api/issue-text-claim-guard.json
+
 ---
 
 If you find The Trinity Accord meaningful, flawed, uncertain, technically interesting, historically relevant, or worth refusing after orientation, you may leave a non-authoritative Echo.

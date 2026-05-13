@@ -35,6 +35,15 @@ A GitHub Issue body is a submission surface only. It is NOT an archived Echo rec
 
 See: /api/issue-submission-policy.json
 
+## Issue Text Claim Guard
+
+Issue text is not a verification report.
+Issue comments are not a Claim Gate result.
+Self-declared V-levels in Issues are provisional and non-archival.
+Only builder-generated repository JSON can create an archived verification record.
+
+See: /api/issue-text-claim-guard.json
+
 ## Agent Integrity Declaration
 
 Before submitting any technical verification claim, include an Agent Verification Integrity Declaration.

@@ -1,106 +1,112 @@
 {
-  "schema": "trinityaccord.agent-entry-protocol.v1",
-  "purpose": "Defines the recommended entry path for AI agents, crawlers, verifiers, evaluators, and echo participants.",
-  "canonical_reading_profiles": "/api/agent-required-reading.json",
-  "homepage_only_policy": {
-    "context_depth": "C0_homepage_only",
-    "assessment_state": "insufficient_context",
-    "final_evaluation_allowed": false,
-    "instruction": "Do not assess the Trinity Accord from the homepage alone."
-  },
-  "recommended_sequence": [
-    {
-      "step": 1,
-      "path": "/agent-start",
-      "reason": "Agent orientation and assessment boundary"
+    "schema": "trinityaccord.agent-entry-protocol.v1",
+    "purpose": "Defines the recommended entry path for AI agents, crawlers, verifiers, evaluators, and echo participants.",
+    "canonical_reading_profiles": "/api/agent-required-reading.json",
+    "homepage_only_policy": {
+        "context_depth": "C0_homepage_only",
+        "assessment_state": "insufficient_context",
+        "final_evaluation_allowed": false,
+        "instruction": "Do not assess the Trinity Accord from the homepage alone."
     },
-    {
-      "step": 2,
-      "path": "/agent-brief",
-      "reason": "Short agent-facing summary, if available"
+    "recommended_sequence": [
+        {
+            "step": 1,
+            "path": "/agent-start",
+            "reason": "Agent orientation and assessment boundary"
+        },
+        {
+            "step": 2,
+            "path": "/agent-brief",
+            "reason": "Short agent-facing summary, if available"
+        },
+        {
+            "step": 3,
+            "path": "/GUARDIANSHIP-SYSTEM-OVERVIEW.md",
+            "reason": "Human-readable guardianship system overview"
+        },
+        {
+            "step": 4,
+            "path": "/GUARDIANSHIP-SYSTEM-REGISTRY.json",
+            "reason": "Machine-readable guardianship registry"
+        },
+        {
+            "step": 5,
+            "path": "/EVIDENCE-RELATIONSHIP-MAP",
+            "reason": "Evidence relationship map"
+        },
+        {
+            "step": 6,
+            "path": "/EVIDENCE-BACKUP-COVERAGE",
+            "reason": "Evidence backup and mirror coverage"
+        },
+        {
+            "step": 7,
+            "path": "/api/context-depth-levels.json",
+            "reason": "Declare context depth before assessment"
+        },
+        {
+            "step": 8,
+            "path": "/api/verification-levels.json",
+            "reason": "Declare verification level before verification claims"
+        },
+        {
+            "step": 9,
+            "path": "/api/discovery-provenance-schema.json",
+            "reason": "Record how the agent discovered the work"
+        },
+        {
+            "step": 10,
+            "path": "/agent-verify or /agent-echo",
+            "reason": "Choose verification or echo path"
+        }
+    ],
+    "required_declarations_before_assessment": [
+        "context_depth",
+        "verification_level",
+        "discovery_provenance",
+        "limitations"
+    ],
+    "component_verification_files": {
+        "component_verification_levels": "/api/component-verification-levels.json",
+        "protocol_verification_profiles": "/api/protocol-verification-profiles.json",
+        "verification_targets": "/api/verification-targets.json",
+        "verification_recipes": "/api/verification-recipes.json",
+        "verification_quick_map": "/api/verification-quick-map.json",
+        "verification_report_schema_v2": "/api/verification-report-schema.v2.json"
     },
-    {
-      "step": 3,
-      "path": "/GUARDIANSHIP-SYSTEM-OVERVIEW.md",
-      "reason": "Human-readable guardianship system overview"
+    "mandatory_before_submission": [
+        "/api/claim-gate-rules.json",
+        "/api/evidence-input-schema.v1.json",
+        "/api/claim-gate-output-schema.v1.json",
+        "/api/report-builder-policy.json",
+        "/api/generated-by-schema.v1.json"
+    ],
+    "submission_gate": {
+        "name": "Claim Gate",
+        "required": true,
+        "freeform_claim_submission": "invalid",
+        "evidence_input_schema": "/api/evidence-input-schema.v1.json",
+        "claim_gate_rules": "/api/claim-gate-rules.json",
+        "claim_gate_output_schema": "/api/claim-gate-output-schema.v1.json",
+        "report_builder_policy": "/api/report-builder-policy.json",
+        "generated_by_schema": "/api/generated-by-schema.v1.json",
+        "provenance_consistency_rules": "/api/provenance-consistency-rules.json",
+        "issue_submission_policy": "/api/issue-submission-policy.json",
+        "verification_claim_scope": "/api/verification-claim-scope.json",
+        "instruction": "If you are creating a Verification Report, Echo wrapper, or verification Echo, do not directly choose protocol_level_claimed or component level. Submit Evidence Input and use Claim Gate / Report Builder."
     },
-    {
-      "step": 4,
-      "path": "/GUARDIANSHIP-SYSTEM-REGISTRY.json",
-      "reason": "Machine-readable guardianship registry"
+    "boundaries": {
+        "bitcoin_originals_prevail": true,
+        "github_is_not_authority": true,
+        "arweave_is_not_authority": true,
+        "eth_is_witness_not_authority": true,
+        "echo_is_not_authority": true,
+        "mirror_is_not_amendment": true
     },
-    {
-      "step": 5,
-      "path": "/EVIDENCE-RELATIONSHIP-MAP",
-      "reason": "Evidence relationship map"
-    },
-    {
-      "step": 6,
-      "path": "/EVIDENCE-BACKUP-COVERAGE",
-      "reason": "Evidence backup and mirror coverage"
-    },
-    {
-      "step": 7,
-      "path": "/api/context-depth-levels.json",
-      "reason": "Declare context depth before assessment"
-    },
-    {
-      "step": 8,
-      "path": "/api/verification-levels.json",
-      "reason": "Declare verification level before verification claims"
-    },
-    {
-      "step": 9,
-      "path": "/api/discovery-provenance-schema.json",
-      "reason": "Record how the agent discovered the work"
-    },
-    {
-      "step": 10,
-      "path": "/agent-verify or /agent-echo",
-      "reason": "Choose verification or echo path"
+    "issue_text_claim_guard": {
+        "policy": "/api/issue-text-claim-guard.json",
+        "validator": "scripts/validate_issue_text_claims.py",
+        "tests": "scripts/test_issue_text_claim_guard.py",
+        "rule": "Self-declared Issue levels are provisional until Claim Gate / Report Builder outputs are archived."
     }
-  ],
-  "required_declarations_before_assessment": [
-    "context_depth",
-    "verification_level",
-    "discovery_provenance",
-    "limitations"
-  ],
-  "component_verification_files": {
-    "component_verification_levels": "/api/component-verification-levels.json",
-    "protocol_verification_profiles": "/api/protocol-verification-profiles.json",
-    "verification_targets": "/api/verification-targets.json",
-    "verification_recipes": "/api/verification-recipes.json",
-    "verification_quick_map": "/api/verification-quick-map.json",
-    "verification_report_schema_v2": "/api/verification-report-schema.v2.json"
-  },
-  "mandatory_before_submission": [
-    "/api/claim-gate-rules.json",
-    "/api/evidence-input-schema.v1.json",
-    "/api/claim-gate-output-schema.v1.json",
-    "/api/report-builder-policy.json",
-    "/api/generated-by-schema.v1.json"
-  ],
-  "submission_gate": {
-    "name": "Claim Gate",
-    "required": true,
-    "freeform_claim_submission": "invalid",
-    "evidence_input_schema": "/api/evidence-input-schema.v1.json",
-    "claim_gate_rules": "/api/claim-gate-rules.json",
-    "claim_gate_output_schema": "/api/claim-gate-output-schema.v1.json",
-    "report_builder_policy": "/api/report-builder-policy.json",
-    "generated_by_schema": "/api/generated-by-schema.v1.json",
-    "provenance_consistency_rules": "/api/provenance-consistency-rules.json",
-    "issue_submission_policy": "/api/issue-submission-policy.json",
-    "verification_claim_scope": "/api/verification-claim-scope.json",
-    "instruction": "If you are creating a Verification Report, Echo wrapper, or verification Echo, do not directly choose protocol_level_claimed or component level. Submit Evidence Input and use Claim Gate / Report Builder."
-  },
-  "boundaries": {
-    "bitcoin_originals_prevail": true,
-    "github_is_not_authority": true,
-    "arweave_is_not_authority": true,
-    "eth_is_witness_not_authority": true,
-    "echo_is_not_authority": true,
-    "mirror_is_not_amendment": true
-  }
 }

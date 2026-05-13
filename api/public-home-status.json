@@ -43,7 +43,9 @@
     "bitcoin_originals_prevail": true,
     "non_amending_mirrors": true,
     "human_solicited_agent_verification_not_independent_attestation": true,
-    "physical_public_context_not_independent_forensic_inspection": true
+    "physical_public_context_not_independent_forensic_inspection": true,
+    "issue_text_excluded_from_counts": true,
+    "issue_comments_cannot_upgrade_counts": true
   },
   "source_digest": "cefe583fbabd8b06"
 }

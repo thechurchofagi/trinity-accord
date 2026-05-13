@@ -34,6 +34,13 @@ try:
 except ImportError:
     HAS_SHARED_SAFETY = False
 
+# Issue Text Claim Guard
+try:
+    from validate_issue_text_claims import classify_issue as itcg_classify
+    HAS_ISSUE_TEXT_CLAIM_GUARD = True
+except ImportError:
+    HAS_ISSUE_TEXT_CLAIM_GUARD = False
+
 TRIAGE_MARKER = "<!-- trinity-echo-triage-v2 -->"
 
 MANAGED_TRIAGE_LABELS = [
@@ -1513,6 +1520,52 @@ def main():
         )
         emit_result(result, title, body)
         return
+
+    # --- Step 2f-2: Issue Text Claim Guard ---
+    if HAS_ISSUE_TEXT_CLAIM_GUARD:
+        itcg_result = itcg_classify(text)
+        # Guardian test: force labels and provisional warning
+        if itcg_result.get("has_guardian_test_marker"):
+            for lbl in ["guardian-test", "issue-submission-only", "not-independent-attestation", "claim-gate-required"]:
+                add_unique(result["labels"], lbl)
+            result["comment"] = (
+                "This Issue is classified as a guardian test / issue_submission_only. "
+                "It is human-solicited and does not count as independent attestation. "
+                "The V-level statements in the Issue body or comments are provisional Issue text only "
+                "and do not upgrade the accepted verification level. "
+                "To archive a verification record, submit Evidence Input and regenerate a report "
+                "through Claim Gate / Report Builder.\n\n"
+                "Self-declared Issue levels are provisional until Claim Gate / Report Builder outputs are archived."
+            )
+            # Don't close here; let remaining triage continue for label accumulation
+
+        # Provenance conflict: human-solicited claiming independent
+        if itcg_result.get("provenance_conflict"):
+            add_unique(result["labels"], "not-independent-attestation")
+            add_unique(result["labels"], "claim-gate-required")
+            if "echo:provenance-conflict" not in result["labels"]:
+                add_unique(result["labels"], "echo:provenance-conflict")
+
+        # Technical level claim without builder output
+        if itcg_result.get("requires_claim_gate") and not itcg_result.get("has_builder_output_reference"):
+            add_unique(result["labels"], "claim-gate-required")
+            add_unique(result["labels"], "issue-submission-only")
+
+        # Level upgrade language in comments
+        if itcg_result.get("has_level_upgrade_claim"):
+            add_unique(result["labels"], "claim-gate-required")
+            if not result["comment"]:
+                result["comment"] = (
+                    "This comment contains provisional level-upgrade language. "
+                    "Issue comments cannot upgrade verification level. "
+                    "To update the accepted level, submit Evidence Input and regenerate the report "
+                    "through Claim Gate / Report Builder.\n\n"
+                    "Self-declared Issue levels are provisional until Claim Gate / Report Builder outputs are archived."
+                )
+
+        # All-green overclaim
+        if itcg_result.get("all_green_overclaim"):
+            add_unique(result["labels"], "claim-gate-required")
 
     # --- Step 2g: Normalized intake evaluation (Part A/B) ---
     normalized_triage = None

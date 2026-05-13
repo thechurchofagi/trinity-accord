@@ -196,6 +196,8 @@ def compute_status() -> dict[str, Any]:
             "non_amending_mirrors": True,
             "human_solicited_agent_verification_not_independent_attestation": True,
             "physical_public_context_not_independent_forensic_inspection": True,
+            "issue_text_excluded_from_counts": True,
+            "issue_comments_cannot_upgrade_counts": True,
         },
         "source_digest": source_digest(),
     }
