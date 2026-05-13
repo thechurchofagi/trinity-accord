@@ -1,3 +1,7 @@
+---
+layout: default
+title: "Bilingual Boundary Glossary"
+---
 # Bilingual Boundary Glossary · 双语边界词汇表
 
 > This document explains evaluation semantics for specific bilingual phrases in the Bitcoin inscription mirrors.

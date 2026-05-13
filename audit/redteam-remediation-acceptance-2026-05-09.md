@@ -1,3 +1,7 @@
+---
+layout: default
+title: "Red Team Remediation Acceptance"
+---
 # Post-Redteam Remediation Acceptance Record
 
 ## Acceptance Statement

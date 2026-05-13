@@ -1,3 +1,7 @@
+---
+layout: default
+title: "Correction & Revocation Policy"
+---
 # CORRECTION-REVOCATION-POLICY.md — Trinity Accord Correction and Revocation Policy
 
 ## Purpose

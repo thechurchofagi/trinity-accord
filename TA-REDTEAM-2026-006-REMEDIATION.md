@@ -1,3 +1,7 @@
+---
+layout: default
+title: "TA-REDTEAM-2026-006 Remediation"
+---
 # TA-REDTEAM-2026-006 Remediation Report
 
 ## Summary

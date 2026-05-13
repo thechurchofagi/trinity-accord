@@ -1,3 +1,7 @@
+---
+layout: default
+title: "Release Large Data Manifest"
+---
 # Trinity Accord Signed Large Data Release Manifest
 
 Generated: 2026-05-05T02:16:21.409Z

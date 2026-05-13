@@ -1,3 +1,7 @@
+---
+layout: default
+title: "Disaster Recovery Drill"
+---
 # Trinity Accord Disaster Recovery Drill
 
 **Purpose:** Establish a periodic recovery drill process to ensure cold-start recovery materials remain complete, verifiable, and executable.

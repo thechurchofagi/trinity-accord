@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Arweave Backup Framework"
+---
+
 # Arweave Backup Framework
 
 This folder stores repository-side backups and integrity metadata for assets that are originally published to Arweave.

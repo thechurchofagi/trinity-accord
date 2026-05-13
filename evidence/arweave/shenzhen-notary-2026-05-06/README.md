@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Core Object Alpha — Shenzhen Notary Evidence Archive"
+---
+
 # Core Object Alpha — Shenzhen Notary Evidence Archive
 
 Archive ID: `core-object-alpha-shenzhen-notary-2026-05-06`

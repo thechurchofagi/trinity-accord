@@ -1,3 +1,7 @@
+---
+layout: default
+title: "Security"
+---
 # SECURITY.md — Trinity Accord Security and Correction Policy
 
 ## Scope

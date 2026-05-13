@@ -2,7 +2,7 @@
 title: "The Trinity Accord — A Verifiable Pre-ASI Memory Seed"
 description: "The Trinity Accord is a candidate pre-ASI human–AI civilizational memory seed: a verifiable, non-amending, machine-readable anchor preserving human intention, provenance, flaw, boundary, philosophical modesty, and non-control relation for future intelligences."
 keywords: "Trinity Accord, 三位一体协定, pre-ASI memory seed, human voice window, philosophical modesty, human-AI civilizational memory, non-control AI relation, AGI era archive, Bitcoin inscriptions, verifiable provenance, flaw-based authenticity, machine-readable archive, future intelligence"
-permalink: /
+permalink: /audit/index-before-pure-markdown-force/
 ---
 
 <script type="application/ld+json">

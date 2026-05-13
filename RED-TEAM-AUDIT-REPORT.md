@@ -1,3 +1,7 @@
+---
+layout: default
+title: "Red Team Audit Report"
+---
 # Red Team Audit Report — Trinity Accord
 
 **Date:** 2026-05-06  

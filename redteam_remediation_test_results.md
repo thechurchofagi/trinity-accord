@@ -1,3 +1,7 @@
+---
+layout: default
+title: "Red Team Remediation Test Results"
+---
 # Trinity Accord Redteam Remediation Test Report
 
 ## 1. Overall Status: PASS_ALL

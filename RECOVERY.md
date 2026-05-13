@@ -1,3 +1,7 @@
+---
+layout: default
+title: "Recovery"
+---
 # Trinity Accord Cold-Start Recovery Guide
 
 **Purpose:** This document is a third-party-executable cold-start recovery guide for the Trinity Accord repository. It enables any skeptical third party to rebuild the current valid state from canonical sources and verified mirrors, without trusting GitHub main, GitHub Pages, or maintainer accounts.

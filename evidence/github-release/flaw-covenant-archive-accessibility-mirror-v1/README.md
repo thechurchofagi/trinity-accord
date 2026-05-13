@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Flaw Covenant Archive Accessibility Mirror v1"
+---
+
 # Flaw Covenant Archive Accessibility Mirror v1
 
 ## Purpose

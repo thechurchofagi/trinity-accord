@@ -1,3 +1,7 @@
+---
+layout: default
+title: "TA-REDTEAM-2026-006 Followup Remediation"
+---
 # TA-REDTEAM-2026-006 Follow-up Remediation Report
 
 ## Summary

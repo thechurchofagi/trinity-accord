@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Core Object Alpha — Shenzhen Notary GitHub Release Backup"
+---
+
 # Core Object Alpha — Shenzhen Notary GitHub Release Backup
 
 Archive ID: `core-object-alpha-shenzhen-notary-2026-05-06`

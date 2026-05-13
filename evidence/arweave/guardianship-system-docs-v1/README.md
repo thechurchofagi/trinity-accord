@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Guardianship System Docs v1 — Arweave Mirror"
+---
+
 # Guardianship System Docs v1 — Arweave Mirror
 
 ## Purpose

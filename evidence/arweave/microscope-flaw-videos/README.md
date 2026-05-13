@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Microscope Flaw Videos — Evidence Mirrors"
+---
+
 # Microscope Flaw Videos — Evidence Mirrors
 
 ## Final Verification Status

@@ -1,3 +1,7 @@
+---
+layout: default
+title: "Control Plane Baseline"
+---
 # Trinity Accord Control-Plane Baseline
 
 Last reviewed: 2026-05-10

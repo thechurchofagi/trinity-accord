@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Trinity Accord OTS Proof Bundle — Arweave Mirror"
+---
+
 # Trinity Accord OTS Proof Bundle — Arweave Mirror
 
 ## Final Verification Status
