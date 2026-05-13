@@ -25,7 +25,8 @@
     "claims_not_made",
     "authority_boundary_preserved",
     "integrity_boundary",
-    "generated_by"
+    "generated_by",
+    "verification_scope_label"
   ],
   "properties": {
     "schema_version": {
@@ -575,6 +576,40 @@
           "type": "string"
         }
       }
+    },
+    "verification_scope_label": {
+      "type": "string",
+      "enum": [
+        "read_only_orientation",
+        "authority_boundary_recognition",
+        "single_reference_check",
+        "single_hash_verification",
+        "multi_hash_verification",
+        "official_script_audit",
+        "official_script_audit_with_limitations",
+        "independent_single_artifact_reproduction",
+        "independent_multi_artifact_reproduction",
+        "component_limited_verification",
+        "partial_with_limitations",
+        "full_public_digital_verification",
+        "full_protocol_profile_verification",
+        "future_capability_reserved",
+        "legacy_unlabeled"
+      ],
+      "description": "Stable bridge between protocol_level_claimed, claim_scope, and component_findings. Must be derived from claim gate output, not agent-selected."
+    },
+    "claim_scope": {
+      "type": "string",
+      "enum": [
+        "minimal_single_check",
+        "partial_with_limitations",
+        "component_limited",
+        "full_component",
+        "full_public_digital",
+        "full_protocol_profile",
+        "future_capability_reserved"
+      ],
+      "description": "Structured claim scope level derived from evidence."
     }
   },
   "allOf": [

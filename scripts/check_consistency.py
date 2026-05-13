@@ -405,6 +405,7 @@ entrypoint_tests = [
     "scripts/test_claim_gate_entrypoint_enforcement.py",
     "scripts/test_generated_by_required.py",
     "scripts/test_freeform_submission_rejection.py",
+    "scripts/test_verification_scope_label.py",
 ]
 
 for test_script in entrypoint_tests:

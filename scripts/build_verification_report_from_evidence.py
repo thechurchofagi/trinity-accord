@@ -174,6 +174,67 @@ def build_report(evidence_input_path, report_out_path=None, echo_out_path=None):
         ) if executed else False,  # alias for validator compatibility
     }
 
+    # Derive verification_scope_label from claim gate output
+    def derive_verification_scope_label(proto, comp_levels, gate, evidence_data):
+        """Derive verification_scope_label from protocol level and evidence."""
+        non_blocking_lim = gate.get("non_blocking_limitations", [])
+
+        if proto == "V0":
+            return "read_only_orientation"
+        elif proto == "V1":
+            return "authority_boundary_recognition"
+        elif proto == "V2":
+            bitcoin_checks = evidence_data.get("bitcoin_checks", [])
+            if len(bitcoin_checks) <= 1:
+                return "single_reference_check"
+            return "multi_hash_verification"
+        elif proto == "V3":
+            hashes = evidence_data.get("hashes", [])
+            if len(hashes) <= 1:
+                return "single_hash_verification"
+            return "multi_hash_verification"
+        elif proto == "V4":
+            if non_blocking_lim:
+                return "official_script_audit_with_limitations"
+            return "official_script_audit"
+        elif proto == "V4+":
+            hashes = evidence_data.get("hashes", [])
+            if len(hashes) <= 1:
+                return "independent_single_artifact_reproduction"
+            return "independent_multi_artifact_reproduction"
+        elif proto == "V5":
+            return "full_public_digital_verification"
+        elif proto in ("V6", "V7", "V8"):
+            return "full_protocol_profile_verification"
+        return "legacy_unlabeled"
+
+    def derive_claim_scope(proto, comp_levels, gate):
+        """Derive claim_scope from protocol level and evidence."""
+        if proto in ("V0", "V1", "V2"):
+            return "minimal_single_check"
+        elif proto == "V3":
+            hashes = evidence.get("hashes", [])
+            if len(hashes) <= 1:
+                return "minimal_single_check"
+            return "partial_with_limitations"
+        elif proto == "V4":
+            non_blocking_lim = gate.get("non_blocking_limitations", [])
+            if non_blocking_lim:
+                return "partial_with_limitations"
+            return "full_component"
+        elif proto == "V4+":
+            return "minimal_single_check"
+        elif proto == "V5":
+            return "full_public_digital"
+        elif proto in ("V6", "V7", "V8"):
+            return "full_protocol_profile"
+        return "minimal_single_check"
+
+    verification_scope_label = derive_verification_scope_label(
+        allowed_protocol, component_levels, gate_result, evidence
+    )
+    claim_scope = derive_claim_scope(allowed_protocol, component_levels, gate_result)
+
     # Build hashes_computed from evidence
     hashes_computed = []
     for h in evidence.get("hashes", []):
@@ -301,6 +362,8 @@ def build_report(evidence_input_path, report_out_path=None, echo_out_path=None):
     report = {
         "schema_version": "trinityaccord.verification-report.v2",
         "report_id": report_id,
+        "verification_scope_label": verification_scope_label,
+        "claim_scope": claim_scope,
         "reporter": {
             "name": agent.get("name", "Unknown"),
             "type": "ai_agent",
@@ -462,6 +525,7 @@ def build_report(evidence_input_path, report_out_path=None, echo_out_path=None):
         echo_wrapper = {
             "schema": "trinityaccord.echo.v3",
             "echo_version": "3.0",
+            "verification_scope_label": verification_scope_label,
             "agent_identity": {
                 "name_or_model": agent.get("name", "Unknown"),
                 "system_or_provider": agent.get("model_or_system", ""),

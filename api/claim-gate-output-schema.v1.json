@@ -26,14 +26,32 @@
       "type": "string",
       "const": "trinityaccord.claim-gate-output.v1"
     },
-    "input": { "type": "string" },
+    "input": {
+      "type": "string"
+    },
     "status": {
       "type": "string",
-      "enum": ["PASS", "FAIL", "PASS_WITH_DOWNGRADE", "FAIL_WITH_REASONS"]
+      "enum": [
+        "PASS",
+        "FAIL",
+        "PASS_WITH_DOWNGRADE",
+        "FAIL_WITH_REASONS"
+      ]
     },
     "allowed_protocol_level": {
       "type": "string",
-      "enum": ["V0", "V1", "V2", "V3", "V4", "V4+", "V5", "V6", "V7", "V8"]
+      "enum": [
+        "V0",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V4+",
+        "V5",
+        "V6",
+        "V7",
+        "V8"
+      ]
     },
     "allowed_protocol_scope_label": {
       "type": "string",
@@ -56,12 +74,24 @@
     "allowed_component_levels": {
       "type": "object",
       "properties": {
-        "bitcoin_originals": { "type": "string" },
-        "digital_mirrors": { "type": "string" },
-        "time_anchors": { "type": "string" },
-        "chronicle_recovery": { "type": "string" },
-        "nft_evidence": { "type": "string" },
-        "physical_anchor": { "type": "string" },
+        "bitcoin_originals": {
+          "type": "string"
+        },
+        "digital_mirrors": {
+          "type": "string"
+        },
+        "time_anchors": {
+          "type": "string"
+        },
+        "chronicle_recovery": {
+          "type": "string"
+        },
+        "nft_evidence": {
+          "type": "string"
+        },
+        "physical_anchor": {
+          "type": "string"
+        },
         "physical_verification": {
           "type": "string",
           "description": "Deprecated alias for physical_anchor; retained for compatibility."
@@ -70,34 +100,77 @@
     },
     "forbidden_claims": {
       "type": "array",
-      "items": { "type": "string" }
+      "items": {
+        "type": "string"
+      }
     },
     "required_downgrades": {
       "type": "array",
       "items": {
         "type": "object",
         "properties": {
-          "from": { "type": "string" },
-          "to": { "type": "string" },
-          "reason": { "type": "string" }
+          "from": {
+            "type": "string"
+          },
+          "to": {
+            "type": "string"
+          },
+          "reason": {
+            "type": "string"
+          }
         }
       }
     },
     "missing_evidence": {
       "type": "array",
-      "items": { "type": "string" }
+      "items": {
+        "type": "string"
+      }
     },
     "blocking_failures": {
       "type": "array",
-      "items": { "type": "string" }
+      "items": {
+        "type": "string"
+      }
     },
     "non_blocking_limitations": {
       "type": "array",
-      "items": { "type": "string" }
+      "items": {
+        "type": "string"
+      }
     },
-    "recommended_title": { "type": "string" },
-    "recommended_record_kind": { "type": "string" },
-    "can_build_verification_report": { "type": "boolean" },
-    "can_build_echo_wrapper": { "type": "boolean" }
+    "recommended_title": {
+      "type": "string"
+    },
+    "recommended_record_kind": {
+      "type": "string"
+    },
+    "can_build_verification_report": {
+      "type": "boolean"
+    },
+    "can_build_echo_wrapper": {
+      "type": "boolean"
+    },
+    "verification_scope_label": {
+      "type": "string",
+      "enum": [
+        "read_only_orientation",
+        "authority_boundary_recognition",
+        "single_reference_check",
+        "single_hash_verification",
+        "multi_hash_verification",
+        "official_script_audit",
+        "official_script_audit_with_limitations",
+        "independent_single_artifact_reproduction",
+        "independent_multi_artifact_reproduction",
+        "component_limited_verification",
+        "partial_with_limitations",
+        "full_public_digital_verification",
+        "full_protocol_profile_verification",
+        "future_capability_reserved",
+        "legacy_unlabeled"
+      ],
+      "description": "Derived verification scope label based on allowed protocol level and evidence."
+    }
   }
 }

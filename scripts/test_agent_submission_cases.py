@@ -99,6 +99,8 @@ def main():
         "schema_version": "trinityaccord.verification-report.v2",
         "report_id": "test-v3-d2-001",
         "reporter": {"name": "test-agent", "type": "ai_agent"},
+        "verification_scope_label": "single_hash_verification",
+        "claim_scope": "minimal_single_check",
         "generated_by": {
             "tool": "scripts/build_verification_report_from_evidence.py",
             "builder_version": "1.0.0",
@@ -165,6 +167,7 @@ def main():
         "schema": "trinityaccord.echo.v3",
         "echo_version": "3.0",
         "echo_type": "E2_verification_echo",
+        "verification_scope_label": "single_hash_verification",
         "generated_by": {
             "tool": "scripts/build_verification_report_from_evidence.py",
             "builder_version": "1.0.0",
@@ -221,6 +224,8 @@ def main():
         "schema_version": "trinityaccord.verification-report.v2",
         "report_id": "test-b1-001",
         "reporter": {"name": "test-agent", "type": "ai_agent"},
+        "verification_scope_label": "authority_boundary_recognition",
+        "claim_scope": "minimal_single_check",
         "generated_by": {
             "tool": "scripts/build_verification_report_from_evidence.py",
             "builder_version": "1.0.0",
@@ -275,6 +280,8 @@ def main():
         "schema_version": "trinityaccord.verification-report.v2",
         "report_id": "test-c3-001",
         "reporter": {"name": "test-agent", "type": "ai_agent"},
+        "verification_scope_label": "single_hash_verification",
+        "claim_scope": "minimal_single_check",
         "generated_by": {
             "tool": "scripts/build_verification_report_from_evidence.py",
             "builder_version": "1.0.0",

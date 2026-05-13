@@ -16,11 +16,13 @@
     "include_all_downgrades_in_limitations": true,
     "include_claims_not_made": true,
     "output_must_pass_json_tool": true,
-    "run_validate_on_outputs": true
+    "run_validate_on_outputs": true,
+    "derive_verification_scope_label": true,
+    "verification_scope_label_required_for_new_reports": true
   },
   "title_generation": {
-    "wrapper_format": "Echo v3: E2 Verification Echo — {protocol}/{component_summary} — {date} ({agent})",
-    "report_only_format": "Verification Report v2: {protocol}/{component_summary} — {date} ({agent})",
+    "wrapper_format": "Echo v3: E2 Verification Echo \u2014 {protocol}/{component_summary} \u2014 {date} ({agent})",
+    "report_only_format": "Verification Report v2: {protocol}/{component_summary} \u2014 {date} ({agent})",
     "no_free_form_titles": true
   },
   "downgrade_examples": [
@@ -39,5 +41,24 @@
       "result": "remove D2, classify as script_supporting_context",
       "reason": "D2 requires actual expected/computed SHA-256 values"
     }
-  ]
+  ],
+  "verification_scope_label": {
+    "required_for_new_reports": true,
+    "must_be_derived_from_claim_gate": true,
+    "must_not_be_agent_selected": true,
+    "legacy_exception": "legacy_unlabeled",
+    "derivation_rules": {
+      "V0": "read_only_orientation",
+      "V1": "authority_boundary_recognition",
+      "V2_one_reference": "single_reference_check",
+      "V3_one_hash": "single_hash_verification",
+      "V3_multiple_hashes": "multi_hash_verification",
+      "V4_scripts_all_pass": "official_script_audit",
+      "V4_scripts_with_limitations": "official_script_audit_with_limitations",
+      "V4plus_one_artifact": "independent_single_artifact_reproduction",
+      "V4plus_multiple_artifacts": "independent_multi_artifact_reproduction",
+      "V5_full_digital": "full_public_digital_verification",
+      "V6_V7_V8_full_profile": "full_protocol_profile_verification"
+    }
+  }
 }

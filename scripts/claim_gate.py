@@ -1283,6 +1283,36 @@ def evaluate(input_path):
             protocol_scope = "minimal"
             protocol_label = "V4+ (minimal independent reproduction)"
 
+    # Derive verification_scope_label
+    def _derive_scope_label(proto, comp_levels, non_blocking):
+        if proto == "V0":
+            return "read_only_orientation"
+        elif proto == "V1":
+            return "authority_boundary_recognition"
+        elif proto == "V2":
+            return "single_reference_check"
+        elif proto == "V3":
+            hashes = evidence.get("hashes", [])
+            if len(hashes) <= 1:
+                return "single_hash_verification"
+            return "multi_hash_verification"
+        elif proto == "V4":
+            if non_blocking:
+                return "official_script_audit_with_limitations"
+            return "official_script_audit"
+        elif proto == "V4+":
+            hashes = evidence.get("hashes", [])
+            if len(hashes) <= 1:
+                return "independent_single_artifact_reproduction"
+            return "independent_multi_artifact_reproduction"
+        elif proto == "V5":
+            return "full_public_digital_verification"
+        elif proto in ("V6", "V7", "V8"):
+            return "full_protocol_profile_verification"
+        return "legacy_unlabeled"
+
+    scope_label = _derive_scope_label(allowed_protocol, component_levels, all_non_blocking)
+
     result = {
         "schema": "trinityaccord.claim-gate-output.v1",
         "input": str(input_path),
@@ -1291,6 +1321,7 @@ def evaluate(input_path):
         "allowed_protocol_label": protocol_label,
         "allowed_protocol_scope": protocol_scope,
         "allowed_component_levels": component_levels,
+        "verification_scope_label": scope_label,
         "authority_boundary_recognized": authority_boundary_recognized,
         "forbidden_claims": forbidden,
         "required_downgrades": downgrades,

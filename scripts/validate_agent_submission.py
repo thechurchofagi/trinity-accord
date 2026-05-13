@@ -1645,6 +1645,121 @@ def validate_no_placeholders_in_submission(obj, path_label):
     
     return ok
 
+
+# --- Rule AL: verification_scope_label validation ---
+VALID_SCOPE_LABELS = {
+    "read_only_orientation",
+    "authority_boundary_recognition",
+    "single_reference_check",
+    "single_hash_verification",
+    "multi_hash_verification",
+    "official_script_audit",
+    "official_script_audit_with_limitations",
+    "independent_single_artifact_reproduction",
+    "independent_multi_artifact_reproduction",
+    "component_limited_verification",
+    "partial_with_limitations",
+    "full_public_digital_verification",
+    "full_protocol_profile_verification",
+    "future_capability_reserved",
+    "legacy_unlabeled",
+}
+
+# Protocol level -> allowed scope labels
+SCOPE_LABEL_BY_PROTOCOL = {
+    "V0": {"read_only_orientation"},
+    "V1": {"authority_boundary_recognition"},
+    "V2": {"single_reference_check", "single_hash_verification", "multi_hash_verification",
+            "component_limited_verification", "partial_with_limitations"},
+    "V3": {"single_hash_verification", "multi_hash_verification",
+            "component_limited_verification", "partial_with_limitations"},
+    "V4": {"official_script_audit", "official_script_audit_with_limitations",
+            "component_limited_verification", "partial_with_limitations"},
+    "V4+": {"independent_single_artifact_reproduction", "independent_multi_artifact_reproduction",
+             "component_limited_verification", "partial_with_limitations"},
+    "V5": {"full_public_digital_verification", "full_protocol_profile_verification"},
+    "V6": {"full_protocol_profile_verification", "future_capability_reserved"},
+    "V7": {"full_protocol_profile_verification", "future_capability_reserved"},
+    "V8": {"full_protocol_profile_verification", "future_capability_reserved"},
+}
+
+
+def validate_verification_scope_label(obj, path_label):
+    """Rule AL: verification_scope_label consistency checks."""
+    ok = True
+    record_kind = obj.get("record_kind", "")
+    archive_status = obj.get("archive_status", "")
+
+    # Legacy exception
+    if record_kind == "legacy_record" or archive_status in ("legacy", "superseded"):
+        return ok
+
+    scope_label = obj.get("verification_scope_label")
+    protocol_level = obj.get("protocol_level_claimed", obj.get("verification_level", ""))
+
+    # Required for non-legacy verification_report_v2 and echo_v3_with_verification_report
+    if record_kind in ("verification_report_v2", "echo_v3_with_verification_report"):
+        if not scope_label:
+            ok &= check(
+                False,
+                f"{path_label} missing verification_scope_label",
+                f"Non-legacy {record_kind} requires verification_scope_label"
+            )
+            return ok
+
+    # If present, must be valid enum value
+    if scope_label and scope_label not in VALID_SCOPE_LABELS:
+        ok &= check(
+            False,
+            f"{path_label} invalid verification_scope_label",
+            f"'{scope_label}' not in valid scope labels"
+        )
+        return ok
+
+    # Protocol/label consistency
+    if scope_label and protocol_level:
+        allowed_labels = SCOPE_LABEL_BY_PROTOCOL.get(protocol_level, set())
+        if allowed_labels and scope_label not in allowed_labels:
+            ok &= check(
+                False,
+                f"{path_label} verification_scope_label inconsistent with protocol level",
+                f"protocol_level={protocol_level} does not allow scope_label='{scope_label}', allowed: {sorted(allowed_labels)}"
+            )
+
+    # V4 with non-blocking failures cannot claim official_script_audit (must use with_limitations)
+    if scope_label == "official_script_audit" and protocol_level == "V4":
+        script_audit = obj.get("script_audit", {})
+        if isinstance(script_audit, dict):
+            non_blocking = script_audit.get("non_blocking_failures", [])
+            if non_blocking:
+                ok &= check(
+                    False,
+                    f"{path_label} official_script_audit with non-blocking failures",
+                    "V4 with non-blocking failures must use official_script_audit_with_limitations"
+                )
+
+    # Label/claim_scope consistency
+    claim_scope = obj.get("claim_scope", "")
+    if scope_label and claim_scope:
+        if claim_scope == "minimal_single_check" and scope_label in ("full_public_digital_verification", "full_protocol_profile_verification"):
+            ok &= check(
+                False,
+                f"{path_label} claim_scope minimal_single_check cannot use {scope_label}",
+                "minimal_single_check cannot claim full verification"
+            )
+
+    # Wrapper/report label match for echo_v3_with_verification_report
+    if record_kind == "echo_v3_with_verification_report":
+        linked = obj.get("linked_verification_report", {})
+        # Can't check match without the linked report, but log if missing
+        if not linked:
+            ok &= check(
+                False,
+                f"{path_label} echo wrapper missing linked_verification_report"
+            )
+
+    return ok
+
 def validate_file(path):
     """Validate a single submission file."""
     path_label = str(Path(path).relative_to(ROOT) if Path(path).is_relative_to(ROOT) else path)
@@ -1771,6 +1886,9 @@ def validate_file(path):
 
     # Rule AK: no placeholders in submissions
     ok &= validate_no_placeholders_in_submission(obj, path_label)
+
+    # Rule AL: verification_scope_label consistency
+    ok &= validate_verification_scope_label(obj, path_label)
 
     ok &= validate_v8_forensic_path(obj, path_label)
 
