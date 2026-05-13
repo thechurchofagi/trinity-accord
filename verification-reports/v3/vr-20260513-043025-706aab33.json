@@ -127,11 +127,11 @@
     "incompatible_claims": []
   },
   "data_sources_used": [
-    "scripts/verify.py",
+    "downloads/verify.py",
     "scripts/check_consistency.py"
   ],
   "access_paths_used": [
-    "python3 scripts/verify.py",
+    "python3 downloads/verify.py",
     "python3 scripts/check_consistency.py"
   ],
   "fallbacks_used": [
@@ -218,7 +218,7 @@
       "scripts/check_consistency.py"
     ],
     "command": [
-      "python3 scripts/verify.py",
+      "python3 downloads/verify.py",
       "python3 scripts/check_consistency.py"
     ],
     "environment": {
@@ -237,12 +237,12 @@
     "scripts_executed": 2,
     "scripts": [
       {
-        "path": "scripts/verify.py",
+        "path": "downloads/verify.py",
         "exists": true,
         "source_reviewed": true,
         "script_check_scope": "verification",
         "executed": true,
-        "command": "python3 scripts/verify.py",
+        "command": "python3 downloads/verify.py",
         "environment": {
           "python": "3.x"
         },
@@ -273,12 +273,16 @@
     "all_scripts_green": false,
     "all_validators_green": false,
     "all_blocking_scripts_passed": true,
-    "non_blocking_limitations": ["scripts/verify.py PASS with 1 skip"]
+    "non_blocking_limitations": [
+      "scripts/verify.py PASS with 1 skip"
+    ]
   },
   "all_scripts_green": false,
   "all_validators_green": false,
   "all_blocking_scripts_passed": true,
-  "non_blocking_limitations_report": ["scripts/verify.py PASS with 1 skip"],
+  "non_blocking_limitations_report": [
+    "scripts/verify.py PASS with 1 skip"
+  ],
   "submission_validator_passed": true,
   "generated_by": {
     "tool": "scripts/build_verification_report_from_evidence.py",

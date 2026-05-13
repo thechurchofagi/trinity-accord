@@ -100,8 +100,8 @@ def test_ac1():
     evidence_input = make_evidence_input(
         evidence_overrides={
             "scripts": [{
-                "path": "scripts/verify.py", "exists": True, "source_reviewed": True,
-                "executed": True, "command": "python3 scripts/verify.py",
+                "path": "downloads/verify.py", "exists": True, "source_reviewed": True,
+                "executed": True, "command": "python3 downloads/verify.py",
                 "environment": {"python": "3.x"}, "exit_code": 0,
                 "stdout_summary": "ALL PASS", "blocking": True, "result": "PASS",
                 "official": True, "script_check_scope": "hash verification",

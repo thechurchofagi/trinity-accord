@@ -87,5 +87,6 @@
         "assessor-submission"
       ]
     }
-  }
+  },
+  "counts_as_independent_attestation": false
 }

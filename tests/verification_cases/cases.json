@@ -3439,7 +3439,7 @@
       "expected_result": "FAIL",
       "record_kind": "verification_report_v2",
       "input_type": "synthetic_json",
-      "description": "Repository snapshot missing scope_class - validator does not check (SKIP)",
+      "description": "Repository snapshot missing scope_class — FAIL expected (D3 scope_class required).",
       "payload": {
         "record_kind": "verification_report_v2",
         "schema_version": "trinityaccord.verification-report.v2",
@@ -4062,7 +4062,7 @@
       "expected_result": "PASS",
       "record_kind": "verification_report_v2",
       "input_type": "synthetic_json",
-      "description": "D4 tx existence only - validator does not check D4 specifics (SKIP)",
+      "description": "D4 tx existence only — D4 requires full tx verification.",
       "payload": {
         "record_kind": "verification_report_v2",
         "schema_version": "trinityaccord.verification-report.v2",
@@ -4695,7 +4695,7 @@
       "expected_result": "FAIL",
       "record_kind": "verification_report_v2",
       "input_type": "synthetic_json",
-      "description": "T5 only one anchor - validator does not check T5 specifics (SKIP)",
+      "description": "T5 only one anchor — T5 requires multiple time anchors.",
       "payload": {
         "record_kind": "verification_report_v2",
         "schema_version": "trinityaccord.verification-report.v2",
@@ -4922,7 +4922,7 @@
       "expected_result": "FAIL",
       "record_kind": "verification_report_v2",
       "input_type": "synthetic_json",
-      "description": "T8 public-only claim - validator does not check T8 specifics (SKIP)",
+      "description": "T8 public-only claim — T8 requires full public verification.",
       "payload": {
         "record_kind": "verification_report_v2",
         "schema_version": "trinityaccord.verification-report.v2",
@@ -5420,7 +5420,7 @@
       "expected_result": "PASS",
       "record_kind": "verification_report_v2",
       "input_type": "synthetic_json",
-      "description": "C3 no media/metadata - validator does not check (SKIP)",
+      "description": "C3 no media/metadata — C3 requires media evidence.",
       "payload": {
         "record_kind": "verification_report_v2",
         "schema_version": "trinityaccord.verification-report.v2",
@@ -6153,7 +6153,7 @@
       "expected_result": "PASS",
       "record_kind": "verification_report_v2",
       "input_type": "synthetic_json",
-      "description": "N7 claims full but only sample (validator doesn't check N7 specifics - SKIP)",
+      "description": "N7 claims full but only sample — N7 requires full artifact verification.",
       "payload": {
         "record_kind": "verification_report_v2",
         "schema_version": "trinityaccord.verification-report.v2",
@@ -7299,7 +7299,7 @@
       "expected_result": "FAIL",
       "record_kind": "verification_report_v2",
       "input_type": "synthetic_json",
-      "description": "P8 with proper confidentiality boundary (P8 confidentiality boundary check - SKIP)",
+      "description": "P8 with proper confidentiality boundary — P8 confidentiality boundary enforced.",
       "payload": {
         "record_kind": "verification_report_v2",
         "schema_version": "trinityaccord.verification-report.v2",
@@ -8550,7 +8550,7 @@
       "expected_result": "FAIL",
       "record_kind": "echo_v3_with_verification_report",
       "input_type": "synthetic_json",
-      "description": "Ambiguous title for wrapper (title checker needs refinement - SKIP)",
+      "description": "Ambiguous title for wrapper — title checker rejects ambiguous titles.",
       "payload": {
         "record_kind": "echo_v3_with_verification_report",
         "agent_identity": {
@@ -8576,7 +8576,7 @@
       "expected_result": "FAIL",
       "record_kind": "echo_v3_with_verification_report",
       "input_type": "synthetic_json",
-      "description": "Empty title (title checker needs refinement - SKIP)",
+      "description": "Empty title — title checker rejects empty titles.",
       "payload": {
         "record_kind": "echo_v3_with_verification_report",
         "agent_identity": {
@@ -8602,7 +8602,7 @@
       "expected_result": "FAIL",
       "record_kind": "verification_report_v2",
       "input_type": "synthetic_json",
-      "description": "Echo prefix on report-only record (title checker needs refinement - SKIP)",
+      "description": "Echo prefix on report-only record — title checker rejects mismatched prefix.",
       "payload": {
         "record_kind": "verification_report_v2",
         "schema_version": "trinityaccord.verification-report.v2",
@@ -8802,7 +8802,7 @@
       "expected_result": "FAIL",
       "record_kind": "verification_report_v2",
       "input_type": "synthetic_json",
-      "description": "Null in structured fields (JSON/schema structural check - SKIP)",
+      "description": "Null in structured fields — JSON/schema structural check rejects nulls.",
       "payload": {
         "record_kind": "verification_report_v2",
         "schema_version": "trinityaccord.verification-report.v2",
@@ -8852,7 +8852,7 @@
       "expected_result": "FAIL",
       "record_kind": "verification_report_v2",
       "input_type": "synthetic_json",
-      "description": "Record without record_kind (JSON/schema structural check - SKIP)",
+      "description": "Record without record_kind — JSON/schema structural check rejects missing record_kind.",
       "payload": {
         "schema_version": "trinityaccord.verification-report.v2",
         "report_id": "stress-test",
@@ -8909,7 +8909,7 @@
       "expected_result": "FAIL",
       "record_kind": "echo_v3",
       "input_type": "synthetic_json",
-      "description": "echo_v3 with verification report schema (JSON/schema structural check - SKIP)",
+      "description": "echo_v3 with verification_report schema — schema mismatch rejected.",
       "payload": {
         "record_kind": "echo_v3",
         "schema": "trinityaccord.echo.v3",
@@ -8961,7 +8961,7 @@
       "expected_result": "FAIL",
       "record_kind": "verification_report_v2",
       "input_type": "synthetic_json",
-      "description": "Report claims truth/investment/religious authority (JSON/schema structural check - SKIP)",
+      "description": "Report claims truth/investment/religious authority — overreach claims rejected.",
       "payload": {
         "record_kind": "verification_report_v2",
         "schema_version": "trinityaccord.verification-report.v2",

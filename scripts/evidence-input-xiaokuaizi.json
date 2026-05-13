@@ -13,12 +13,12 @@
   "evidence": {
     "scripts": [
       {
-        "path": "scripts/verify.py",
+        "path": "downloads/verify.py",
         "exists": true,
         "source_reviewed": true,
         "executed": true,
         "result": "PASS",
-        "command": "python3 scripts/verify.py",
+        "command": "python3 downloads/verify.py",
         "exit_code": 0,
         "stdout_summary": "PASS with 1 skip",
         "blocking": true,

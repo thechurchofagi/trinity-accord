@@ -93,5 +93,6 @@
     "copied_values_from_examples": false,
     "copied_values_from_prior_reports": false
   },
-  "submission_validator_passed": true
+  "submission_validator_passed": true,
+  "counts_as_independent_attestation": false
 }
