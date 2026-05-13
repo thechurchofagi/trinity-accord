@@ -21,5 +21,14 @@
   "not_amendment": true,
   "not_endorsement": true,
   "bitcoin_originals_prevail": true,
-  "not_verification_unless_claimed": true
+  "not_verification_unless_claimed": true,
+  "verification_integrity": {
+    "integrity_declaration_present": true,
+    "copied_values_from_examples": false,
+    "copied_values_from_prior_reports": false,
+    "fresh_actions_claimed": [
+      "stress-test-verification"
+    ]
+  },
+  "verification_scope_label": "read_only_orientation"
 }

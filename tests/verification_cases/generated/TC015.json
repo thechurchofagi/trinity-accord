@@ -99,8 +99,8 @@
     {
       "artifact": "test.zip",
       "algorithm": "SHA-256",
-      "expected": "abc123",
-      "computed": "abc123",
+      "expected": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "computed": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
       "command": "sha256sum",
       "match": true,
       "expected_hash_source": "api/hashes.json",
@@ -145,5 +145,15 @@
     "generated_at_utc": "2026-05-03T12:00:00Z",
     "validation_command": "python3 scripts/validate_agent_submission.py report.json",
     "validation_result": "PASS"
-  }
+  },
+  "integrity_boundary": {
+    "agent_integrity_declaration_present": true,
+    "copied_values_from_examples": false,
+    "copied_values_from_prior_reports": false,
+    "fresh_actions_claimed": [
+      "stress-test-verification"
+    ],
+    "fresh_outputs_attached": true
+  },
+  "verification_scope_label": "full_public_digital_verification"
 }

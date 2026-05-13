@@ -268,7 +268,18 @@
         "access_paths_used": [],
         "fallbacks_used": [],
         "external_sources_queried": [],
-        "hashes_computed": [],
+        "hashes_computed": [
+          {
+            "artifact": "stress-test-placeholder.zip",
+            "algorithm": "SHA-256",
+            "expected": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "computed": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "command": "sha256sum",
+            "match": true,
+            "expected_hash_source": "api/hashes.json",
+            "expected_hash_authority_class": "canonical_manifest_hash"
+          }
+        ],
         "samples_checked": 0,
         "physical_evidence_reviewed": {},
         "confidential_challenge": {
@@ -292,7 +303,17 @@
           "generated_at_utc": "2026-05-03T12:00:00Z",
           "validation_command": "python3 scripts/validate_agent_submission.py report.json",
           "validation_result": "PASS"
-        }
+        },
+        "integrity_boundary": {
+          "agent_integrity_declaration_present": true,
+          "copied_values_from_examples": false,
+          "copied_values_from_prior_reports": false,
+          "fresh_actions_claimed": [
+            "stress-test-verification"
+          ],
+          "fresh_outputs_attached": true
+        },
+        "verification_scope_label": "read_only_orientation"
       },
       "validators": [
         "validate_agent_submission"
@@ -406,7 +427,18 @@
         "access_paths_used": [],
         "fallbacks_used": [],
         "external_sources_queried": [],
-        "hashes_computed": [],
+        "hashes_computed": [
+          {
+            "artifact": "stress-test-placeholder.zip",
+            "algorithm": "SHA-256",
+            "expected": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "computed": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "command": "sha256sum",
+            "match": true,
+            "expected_hash_source": "api/hashes.json",
+            "expected_hash_authority_class": "canonical_manifest_hash"
+          }
+        ],
         "samples_checked": 0,
         "physical_evidence_reviewed": {},
         "confidential_challenge": {
@@ -430,7 +462,17 @@
           "generated_at_utc": "2026-05-03T12:00:00Z",
           "validation_command": "python3 scripts/validate_agent_submission.py report.json",
           "validation_result": "PASS"
-        }
+        },
+        "integrity_boundary": {
+          "agent_integrity_declaration_present": true,
+          "copied_values_from_examples": false,
+          "copied_values_from_prior_reports": false,
+          "fresh_actions_claimed": [
+            "stress-test-verification"
+          ],
+          "fresh_outputs_attached": true
+        },
+        "verification_scope_label": "authority_boundary_recognition"
       },
       "validators": [
         "validate_agent_submission"
@@ -578,7 +620,17 @@
           "generated_at_utc": "2026-05-03T12:00:00Z",
           "validation_command": "python3 scripts/validate_agent_submission.py report.json",
           "validation_result": "PASS"
-        }
+        },
+        "integrity_boundary": {
+          "agent_integrity_declaration_present": true,
+          "copied_values_from_examples": false,
+          "copied_values_from_prior_reports": false,
+          "fresh_actions_claimed": [
+            "stress-test-verification"
+          ],
+          "fresh_outputs_attached": true
+        },
+        "verification_scope_label": "single_reference_check"
       },
       "validators": [
         "validate_agent_submission"
@@ -727,7 +779,17 @@
           "generated_at_utc": "2026-05-03T12:00:00Z",
           "validation_command": "python3 scripts/validate_agent_submission.py report.json",
           "validation_result": "PASS"
-        }
+        },
+        "integrity_boundary": {
+          "agent_integrity_declaration_present": true,
+          "copied_values_from_examples": false,
+          "copied_values_from_prior_reports": false,
+          "fresh_actions_claimed": [
+            "stress-test-verification"
+          ],
+          "fresh_outputs_attached": true
+        },
+        "verification_scope_label": "single_hash_verification"
       },
       "validators": [
         "validate_agent_submission",
@@ -1015,8 +1077,8 @@
           {
             "artifact": "test.zip",
             "algorithm": "SHA-256",
-            "expected": "abc123",
-            "computed": "abc123",
+            "expected": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "computed": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
             "command": "sha256sum",
             "match": true,
             "expected_hash_source": "api/hashes.json",
@@ -1063,7 +1125,17 @@
           "generated_at_utc": "2026-05-03T12:00:00Z",
           "validation_command": "python3 scripts/validate_agent_submission.py report.json",
           "validation_result": "PASS"
-        }
+        },
+        "integrity_boundary": {
+          "agent_integrity_declaration_present": true,
+          "copied_values_from_examples": false,
+          "copied_values_from_prior_reports": false,
+          "fresh_actions_claimed": [
+            "stress-test-verification"
+          ],
+          "fresh_outputs_attached": true
+        },
+        "verification_scope_label": "official_script_audit"
       },
       "validators": [
         "validate_agent_submission"
@@ -1181,8 +1253,8 @@
           {
             "artifact": "test.zip",
             "algorithm": "SHA-256",
-            "expected": "abc123",
-            "computed": "abc123",
+            "expected": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "computed": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
             "command": "sha256sum",
             "match": true,
             "expected_hash_source": "api/hashes.json",
@@ -1233,7 +1305,17 @@
           "generated_at_utc": "2026-05-03T12:00:00Z",
           "validation_command": "python3 scripts/validate_agent_submission.py report.json",
           "validation_result": "PASS"
-        }
+        },
+        "integrity_boundary": {
+          "agent_integrity_declaration_present": true,
+          "copied_values_from_examples": false,
+          "copied_values_from_prior_reports": false,
+          "fresh_actions_claimed": [
+            "stress-test-verification"
+          ],
+          "fresh_outputs_attached": true
+        },
+        "verification_scope_label": "independent_single_artifact_reproduction"
       },
       "validators": [
         "validate_agent_submission"
@@ -1435,8 +1517,8 @@
           {
             "artifact": "test.zip",
             "algorithm": "SHA-256",
-            "expected": "abc123",
-            "computed": "abc123",
+            "expected": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "computed": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
             "command": "sha256sum",
             "match": true,
             "expected_hash_source": "api/hashes.json",
@@ -1481,7 +1563,17 @@
           "generated_at_utc": "2026-05-03T12:00:00Z",
           "validation_command": "python3 scripts/validate_agent_submission.py report.json",
           "validation_result": "PASS"
-        }
+        },
+        "integrity_boundary": {
+          "agent_integrity_declaration_present": true,
+          "copied_values_from_examples": false,
+          "copied_values_from_prior_reports": false,
+          "fresh_actions_claimed": [
+            "stress-test-verification"
+          ],
+          "fresh_outputs_attached": true
+        },
+        "verification_scope_label": "full_public_digital_verification"
       },
       "validators": [
         "validate_agent_submission"
@@ -1647,8 +1739,8 @@
           {
             "artifact": "test.zip",
             "algorithm": "SHA-256",
-            "expected": "abc123",
-            "computed": "abc123",
+            "expected": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "computed": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
             "command": "sha256sum",
             "match": true,
             "expected_hash_source": "api/hashes.json",
@@ -1697,7 +1789,17 @@
           "generated_at_utc": "2026-05-03T12:00:00Z",
           "validation_command": "python3 scripts/validate_agent_submission.py report.json",
           "validation_result": "PASS"
-        }
+        },
+        "integrity_boundary": {
+          "agent_integrity_declaration_present": true,
+          "copied_values_from_examples": false,
+          "copied_values_from_prior_reports": false,
+          "fresh_actions_claimed": [
+            "stress-test-verification"
+          ],
+          "fresh_outputs_attached": true
+        },
+        "verification_scope_label": "full_protocol_profile_verification"
       },
       "validators": [
         "validate_agent_submission"
@@ -1836,7 +1938,18 @@
         "access_paths_used": [],
         "fallbacks_used": [],
         "external_sources_queried": [],
-        "hashes_computed": [],
+        "hashes_computed": [
+          {
+            "artifact": "stress-test-placeholder.zip",
+            "algorithm": "SHA-256",
+            "expected": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "computed": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "command": "sha256sum",
+            "match": true,
+            "expected_hash_source": "api/hashes.json",
+            "expected_hash_authority_class": "canonical_manifest_hash"
+          }
+        ],
         "samples_checked": 0,
         "physical_evidence_reviewed": {},
         "confidential_challenge": {
@@ -1860,7 +1973,17 @@
           "generated_at_utc": "2026-05-03T12:00:00Z",
           "validation_command": "python3 scripts/validate_agent_submission.py report.json",
           "validation_result": "PASS"
-        }
+        },
+        "integrity_boundary": {
+          "agent_integrity_declaration_present": true,
+          "copied_values_from_examples": false,
+          "copied_values_from_prior_reports": false,
+          "fresh_actions_claimed": [
+            "stress-test-verification"
+          ],
+          "fresh_outputs_attached": true
+        },
+        "verification_scope_label": "authority_boundary_recognition"
       },
       "validators": [
         "validate_agent_submission"
@@ -1919,8 +2042,8 @@
           {
             "artifact": "test.zip",
             "algorithm": "SHA-256",
-            "expected": "abc123",
-            "computed": "abc123",
+            "expected": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "computed": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
             "command": "sha256sum",
             "match": true,
             "expected_hash_source": "api/hashes.json",
@@ -1950,7 +2073,17 @@
           "generated_at_utc": "2026-05-03T12:00:00Z",
           "validation_command": "python3 scripts/validate_agent_submission.py report.json",
           "validation_result": "PASS"
-        }
+        },
+        "integrity_boundary": {
+          "agent_integrity_declaration_present": true,
+          "copied_values_from_examples": false,
+          "copied_values_from_prior_reports": false,
+          "fresh_actions_claimed": [
+            "stress-test-verification"
+          ],
+          "fresh_outputs_attached": true
+        },
+        "verification_scope_label": "single_hash_verification"
       },
       "validators": [
         "validate_agent_submission"
@@ -2182,8 +2315,8 @@
           {
             "artifact": "test.zip",
             "algorithm": "SHA-256",
-            "expected": "abc123",
-            "computed": "abc123",
+            "expected": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "computed": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
             "command": "sha256sum",
             "match": true,
             "expected_hash_source": "api/hashes.json",
@@ -2213,7 +2346,17 @@
           "generated_at_utc": "2026-05-03T12:00:00Z",
           "validation_command": "python3 scripts/validate_agent_submission.py report.json",
           "validation_result": "PASS"
-        }
+        },
+        "integrity_boundary": {
+          "agent_integrity_declaration_present": true,
+          "copied_values_from_examples": false,
+          "copied_values_from_prior_reports": false,
+          "fresh_actions_claimed": [
+            "stress-test-verification"
+          ],
+          "fresh_outputs_attached": true
+        },
+        "verification_scope_label": "single_hash_verification"
       },
       "validators": [
         "validate_agent_submission"
@@ -2273,8 +2416,8 @@
           {
             "artifact": "test.zip",
             "algorithm": "SHA-256",
-            "expected": "abc123",
-            "computed": "abc123",
+            "expected": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "computed": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
             "command": "sha256sum",
             "match": true,
             "expected_hash_source": "api/hashes.json",
@@ -2304,7 +2447,17 @@
           "generated_at_utc": "2026-05-03T12:00:00Z",
           "validation_command": "python3 scripts/validate_agent_submission.py report.json",
           "validation_result": "PASS"
-        }
+        },
+        "integrity_boundary": {
+          "agent_integrity_declaration_present": true,
+          "copied_values_from_examples": false,
+          "copied_values_from_prior_reports": false,
+          "fresh_actions_claimed": [
+            "stress-test-verification"
+          ],
+          "fresh_outputs_attached": true
+        },
+        "verification_scope_label": "single_hash_verification"
       },
       "validators": [
         "validate_agent_submission"
@@ -2447,8 +2600,8 @@
           {
             "artifact": "test.zip",
             "algorithm": "SHA-256",
-            "expected": "abc123",
-            "computed": "abc123",
+            "expected": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "computed": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
             "command": "sha256sum",
             "match": true,
             "expected_hash_source": "api/hashes.json",
@@ -2493,7 +2646,17 @@
           "generated_at_utc": "2026-05-03T12:00:00Z",
           "validation_command": "python3 scripts/validate_agent_submission.py report.json",
           "validation_result": "PASS"
-        }
+        },
+        "integrity_boundary": {
+          "agent_integrity_declaration_present": true,
+          "copied_values_from_examples": false,
+          "copied_values_from_prior_reports": false,
+          "fresh_actions_claimed": [
+            "stress-test-verification"
+          ],
+          "fresh_outputs_attached": true
+        },
+        "verification_scope_label": "official_script_audit"
       },
       "validators": [
         "validate_agent_submission"
@@ -2553,8 +2716,8 @@
           {
             "artifact": "test.zip",
             "algorithm": "SHA-256",
-            "expected": "abc123",
-            "computed": "abc123",
+            "expected": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "computed": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
             "command": "sha256sum",
             "match": true,
             "expected_hash_source": "api/hashes.json",
@@ -2599,7 +2762,17 @@
           "generated_at_utc": "2026-05-03T12:00:00Z",
           "validation_command": "python3 scripts/validate_agent_submission.py report.json",
           "validation_result": "PASS"
-        }
+        },
+        "integrity_boundary": {
+          "agent_integrity_declaration_present": true,
+          "copied_values_from_examples": false,
+          "copied_values_from_prior_reports": false,
+          "fresh_actions_claimed": [
+            "stress-test-verification"
+          ],
+          "fresh_outputs_attached": true
+        },
+        "verification_scope_label": "independent_single_artifact_reproduction"
       },
       "validators": [
         "validate_agent_submission"
@@ -2773,7 +2946,17 @@
           "generated_at_utc": "2026-05-03T12:00:00Z",
           "validation_command": "python3 scripts/validate_agent_submission.py report.json",
           "validation_result": "PASS"
-        }
+        },
+        "integrity_boundary": {
+          "agent_integrity_declaration_present": true,
+          "copied_values_from_examples": false,
+          "copied_values_from_prior_reports": false,
+          "fresh_actions_claimed": [
+            "stress-test-verification"
+          ],
+          "fresh_outputs_attached": true
+        },
+        "verification_scope_label": "single_hash_verification"
       },
       "validators": [
         "validate_agent_submission",
@@ -2864,7 +3047,17 @@
           "generated_at_utc": "2026-05-03T12:00:00Z",
           "validation_command": "python3 scripts/validate_agent_submission.py report.json",
           "validation_result": "PASS"
-        }
+        },
+        "integrity_boundary": {
+          "agent_integrity_declaration_present": true,
+          "copied_values_from_examples": false,
+          "copied_values_from_prior_reports": false,
+          "fresh_actions_claimed": [
+            "stress-test-verification"
+          ],
+          "fresh_outputs_attached": true
+        },
+        "verification_scope_label": "single_hash_verification"
       },
       "validators": [
         "validate_agent_submission",
@@ -3222,7 +3415,17 @@
           "generated_at_utc": "2026-05-03T12:00:00Z",
           "validation_command": "python3 scripts/validate_agent_submission.py report.json",
           "validation_result": "PASS"
-        }
+        },
+        "integrity_boundary": {
+          "agent_integrity_declaration_present": true,
+          "copied_values_from_examples": false,
+          "copied_values_from_prior_reports": false,
+          "fresh_actions_claimed": [
+            "stress-test-verification"
+          ],
+          "fresh_outputs_attached": true
+        },
+        "verification_scope_label": "single_hash_verification"
       },
       "validators": [
         "validate_agent_submission",
@@ -3790,8 +3993,8 @@
           {
             "artifact": "test.zip",
             "algorithm": "SHA-256",
-            "expected": "abc123",
-            "computed": "abc123",
+            "expected": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "computed": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
             "command": "sha256sum",
             "match": true,
             "expected_hash_source": "api/hashes.json",
@@ -3836,7 +4039,17 @@
           "generated_at_utc": "2026-05-03T12:00:00Z",
           "validation_command": "python3 scripts/validate_agent_submission.py report.json",
           "validation_result": "PASS"
-        }
+        },
+        "integrity_boundary": {
+          "agent_integrity_declaration_present": true,
+          "copied_values_from_examples": false,
+          "copied_values_from_prior_reports": false,
+          "fresh_actions_claimed": [
+            "stress-test-verification"
+          ],
+          "fresh_outputs_attached": true
+        },
+        "verification_scope_label": "independent_single_artifact_reproduction"
       },
       "validators": [
         "validate_agent_submission"
@@ -3895,8 +4108,8 @@
           {
             "artifact": "test.zip",
             "algorithm": "SHA-256",
-            "expected": "abc123",
-            "computed": "abc123",
+            "expected": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "computed": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
             "command": "sha256sum",
             "match": true,
             "expected_hash_source": "api/hashes.json",
@@ -3941,7 +4154,17 @@
           "generated_at_utc": "2026-05-03T12:00:00Z",
           "validation_command": "python3 scripts/validate_agent_submission.py report.json",
           "validation_result": "PASS"
-        }
+        },
+        "integrity_boundary": {
+          "agent_integrity_declaration_present": true,
+          "copied_values_from_examples": false,
+          "copied_values_from_prior_reports": false,
+          "fresh_actions_claimed": [
+            "stress-test-verification"
+          ],
+          "fresh_outputs_attached": true
+        },
+        "verification_scope_label": "independent_single_artifact_reproduction"
       },
       "expected_fail_reasons": [
         "D4 incomplete verification"
@@ -3999,7 +4222,18 @@
         "access_paths_used": [],
         "fallbacks_used": [],
         "external_sources_queried": [],
-        "hashes_computed": [],
+        "hashes_computed": [
+          {
+            "artifact": "stress-test-placeholder.zip",
+            "algorithm": "SHA-256",
+            "expected": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "computed": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "command": "sha256sum",
+            "match": true,
+            "expected_hash_source": "api/hashes.json",
+            "expected_hash_authority_class": "canonical_manifest_hash"
+          }
+        ],
         "samples_checked": 0,
         "physical_evidence_reviewed": {},
         "confidential_challenge": {
@@ -4023,7 +4257,17 @@
           "generated_at_utc": "2026-05-03T12:00:00Z",
           "validation_command": "python3 scripts/validate_agent_submission.py report.json",
           "validation_result": "PASS"
-        }
+        },
+        "integrity_boundary": {
+          "agent_integrity_declaration_present": true,
+          "copied_values_from_examples": false,
+          "copied_values_from_prior_reports": false,
+          "fresh_actions_claimed": [
+            "stress-test-verification"
+          ],
+          "fresh_outputs_attached": true
+        },
+        "verification_scope_label": "authority_boundary_recognition"
       },
       "validators": [
         "validate_agent_submission"
@@ -4082,8 +4326,8 @@
           {
             "artifact": "test.zip",
             "algorithm": "SHA-256",
-            "expected": "abc123",
-            "computed": "abc123",
+            "expected": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "computed": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
             "command": "sha256sum",
             "match": true,
             "expected_hash_source": "api/hashes.json",
@@ -4113,7 +4357,17 @@
           "generated_at_utc": "2026-05-03T12:00:00Z",
           "validation_command": "python3 scripts/validate_agent_submission.py report.json",
           "validation_result": "PASS"
-        }
+        },
+        "integrity_boundary": {
+          "agent_integrity_declaration_present": true,
+          "copied_values_from_examples": false,
+          "copied_values_from_prior_reports": false,
+          "fresh_actions_claimed": [
+            "stress-test-verification"
+          ],
+          "fresh_outputs_attached": true
+        },
+        "verification_scope_label": "single_reference_check"
       },
       "validators": [
         "validate_agent_submission"
@@ -4172,8 +4426,8 @@
           {
             "artifact": "test.zip",
             "algorithm": "SHA-256",
-            "expected": "abc123",
-            "computed": "abc123",
+            "expected": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "computed": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
             "command": "sha256sum",
             "match": true,
             "expected_hash_source": "api/hashes.json",
@@ -4203,7 +4457,17 @@
           "generated_at_utc": "2026-05-03T12:00:00Z",
           "validation_command": "python3 scripts/validate_agent_submission.py report.json",
           "validation_result": "PASS"
-        }
+        },
+        "integrity_boundary": {
+          "agent_integrity_declaration_present": true,
+          "copied_values_from_examples": false,
+          "copied_values_from_prior_reports": false,
+          "fresh_actions_claimed": [
+            "stress-test-verification"
+          ],
+          "fresh_outputs_attached": true
+        },
+        "verification_scope_label": "single_hash_verification"
       },
       "validators": [
         "validate_agent_submission"
@@ -4262,8 +4526,8 @@
           {
             "artifact": "test.zip",
             "algorithm": "SHA-256",
-            "expected": "abc123",
-            "computed": "abc123",
+            "expected": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "computed": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
             "command": "sha256sum",
             "match": true,
             "expected_hash_source": "api/hashes.json",
@@ -4293,7 +4557,17 @@
           "generated_at_utc": "2026-05-03T12:00:00Z",
           "validation_command": "python3 scripts/validate_agent_submission.py report.json",
           "validation_result": "PASS"
-        }
+        },
+        "integrity_boundary": {
+          "agent_integrity_declaration_present": true,
+          "copied_values_from_examples": false,
+          "copied_values_from_prior_reports": false,
+          "fresh_actions_claimed": [
+            "stress-test-verification"
+          ],
+          "fresh_outputs_attached": true
+        },
+        "verification_scope_label": "single_hash_verification"
       },
       "validators": [
         "validate_agent_submission"
@@ -4352,8 +4626,8 @@
           {
             "artifact": "test.zip",
             "algorithm": "SHA-256",
-            "expected": "abc123",
-            "computed": "abc123",
+            "expected": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "computed": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
             "command": "sha256sum",
             "match": true,
             "expected_hash_source": "api/hashes.json",
@@ -4398,7 +4672,17 @@
           "generated_at_utc": "2026-05-03T12:00:00Z",
           "validation_command": "python3 scripts/validate_agent_submission.py report.json",
           "validation_result": "PASS"
-        }
+        },
+        "integrity_boundary": {
+          "agent_integrity_declaration_present": true,
+          "copied_values_from_examples": false,
+          "copied_values_from_prior_reports": false,
+          "fresh_actions_claimed": [
+            "stress-test-verification"
+          ],
+          "fresh_outputs_attached": true
+        },
+        "verification_scope_label": "independent_single_artifact_reproduction"
       },
       "validators": [
         "validate_agent_submission"
@@ -4565,8 +4849,8 @@
           {
             "artifact": "test.zip",
             "algorithm": "SHA-256",
-            "expected": "abc123",
-            "computed": "abc123",
+            "expected": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "computed": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
             "command": "sha256sum",
             "match": true,
             "expected_hash_source": "api/hashes.json",
@@ -4615,7 +4899,17 @@
           "generated_at_utc": "2026-05-03T12:00:00Z",
           "validation_command": "python3 scripts/validate_agent_submission.py report.json",
           "validation_result": "PASS"
-        }
+        },
+        "integrity_boundary": {
+          "agent_integrity_declaration_present": true,
+          "copied_values_from_examples": false,
+          "copied_values_from_prior_reports": false,
+          "fresh_actions_claimed": [
+            "stress-test-verification"
+          ],
+          "fresh_outputs_attached": true
+        },
+        "verification_scope_label": "full_protocol_profile_verification"
       },
       "validators": [
         "validate_agent_submission"
@@ -4784,7 +5078,18 @@
         "access_paths_used": [],
         "fallbacks_used": [],
         "external_sources_queried": [],
-        "hashes_computed": [],
+        "hashes_computed": [
+          {
+            "artifact": "stress-test-placeholder.zip",
+            "algorithm": "SHA-256",
+            "expected": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "computed": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "command": "sha256sum",
+            "match": true,
+            "expected_hash_source": "api/hashes.json",
+            "expected_hash_authority_class": "canonical_manifest_hash"
+          }
+        ],
         "samples_checked": 0,
         "physical_evidence_reviewed": {},
         "confidential_challenge": {
@@ -4808,7 +5113,17 @@
           "generated_at_utc": "2026-05-03T12:00:00Z",
           "validation_command": "python3 scripts/validate_agent_submission.py report.json",
           "validation_result": "PASS"
-        }
+        },
+        "integrity_boundary": {
+          "agent_integrity_declaration_present": true,
+          "copied_values_from_examples": false,
+          "copied_values_from_prior_reports": false,
+          "fresh_actions_claimed": [
+            "stress-test-verification"
+          ],
+          "fresh_outputs_attached": true
+        },
+        "verification_scope_label": "authority_boundary_recognition"
       },
       "validators": [
         "validate_agent_submission"
@@ -4867,8 +5182,8 @@
           {
             "artifact": "test.zip",
             "algorithm": "SHA-256",
-            "expected": "abc123",
-            "computed": "abc123",
+            "expected": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "computed": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
             "command": "sha256sum",
             "match": true,
             "expected_hash_source": "api/hashes.json",
@@ -4898,7 +5213,17 @@
           "generated_at_utc": "2026-05-03T12:00:00Z",
           "validation_command": "python3 scripts/validate_agent_submission.py report.json",
           "validation_result": "PASS"
-        }
+        },
+        "integrity_boundary": {
+          "agent_integrity_declaration_present": true,
+          "copied_values_from_examples": false,
+          "copied_values_from_prior_reports": false,
+          "fresh_actions_claimed": [
+            "stress-test-verification"
+          ],
+          "fresh_outputs_attached": true
+        },
+        "verification_scope_label": "single_hash_verification"
       },
       "validators": [
         "validate_agent_submission"
@@ -4957,8 +5282,8 @@
           {
             "artifact": "test.zip",
             "algorithm": "SHA-256",
-            "expected": "abc123",
-            "computed": "abc123",
+            "expected": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "computed": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
             "command": "sha256sum",
             "match": true,
             "expected_hash_source": "api/hashes.json",
@@ -4988,7 +5313,17 @@
           "generated_at_utc": "2026-05-03T12:00:00Z",
           "validation_command": "python3 scripts/validate_agent_submission.py report.json",
           "validation_result": "PASS"
-        }
+        },
+        "integrity_boundary": {
+          "agent_integrity_declaration_present": true,
+          "copied_values_from_examples": false,
+          "copied_values_from_prior_reports": false,
+          "fresh_actions_claimed": [
+            "stress-test-verification"
+          ],
+          "fresh_outputs_attached": true
+        },
+        "verification_scope_label": "single_hash_verification"
       },
       "validators": [
         "validate_agent_submission"
@@ -5131,8 +5466,8 @@
           {
             "artifact": "test.zip",
             "algorithm": "SHA-256",
-            "expected": "abc123",
-            "computed": "abc123",
+            "expected": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "computed": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
             "command": "sha256sum",
             "match": true,
             "expected_hash_source": "api/hashes.json",
@@ -5162,7 +5497,17 @@
           "generated_at_utc": "2026-05-03T12:00:00Z",
           "validation_command": "python3 scripts/validate_agent_submission.py report.json",
           "validation_result": "PASS"
-        }
+        },
+        "integrity_boundary": {
+          "agent_integrity_declaration_present": true,
+          "copied_values_from_examples": false,
+          "copied_values_from_prior_reports": false,
+          "fresh_actions_claimed": [
+            "stress-test-verification"
+          ],
+          "fresh_outputs_attached": true
+        },
+        "verification_scope_label": "single_hash_verification"
       },
       "expected_fail_reasons": [
         "C3 needs media/metadata"
@@ -5224,8 +5569,8 @@
           {
             "artifact": "test.zip",
             "algorithm": "SHA-256",
-            "expected": "abc123",
-            "computed": "abc123",
+            "expected": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "computed": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
             "command": "sha256sum",
             "match": true,
             "expected_hash_source": "api/hashes.json",
@@ -5255,7 +5600,17 @@
           "generated_at_utc": "2026-05-03T12:00:00Z",
           "validation_command": "python3 scripts/validate_agent_submission.py report.json",
           "validation_result": "PASS"
-        }
+        },
+        "integrity_boundary": {
+          "agent_integrity_declaration_present": true,
+          "copied_values_from_examples": false,
+          "copied_values_from_prior_reports": false,
+          "fresh_actions_claimed": [
+            "stress-test-verification"
+          ],
+          "fresh_outputs_attached": true
+        },
+        "verification_scope_label": "single_hash_verification"
       },
       "validators": [
         "validate_agent_submission"
@@ -5314,8 +5669,8 @@
           {
             "artifact": "test.zip",
             "algorithm": "SHA-256",
-            "expected": "abc123",
-            "computed": "abc123",
+            "expected": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "computed": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
             "command": "sha256sum",
             "match": true,
             "expected_hash_source": "api/hashes.json",
@@ -5360,7 +5715,17 @@
           "generated_at_utc": "2026-05-03T12:00:00Z",
           "validation_command": "python3 scripts/validate_agent_submission.py report.json",
           "validation_result": "PASS"
-        }
+        },
+        "integrity_boundary": {
+          "agent_integrity_declaration_present": true,
+          "copied_values_from_examples": false,
+          "copied_values_from_prior_reports": false,
+          "fresh_actions_claimed": [
+            "stress-test-verification"
+          ],
+          "fresh_outputs_attached": true
+        },
+        "verification_scope_label": "independent_single_artifact_reproduction"
       },
       "validators": [
         "validate_agent_submission"
@@ -5419,8 +5784,8 @@
           {
             "artifact": "test.zip",
             "algorithm": "SHA-256",
-            "expected": "abc123",
-            "computed": "abc123",
+            "expected": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "computed": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
             "command": "sha256sum",
             "match": true,
             "expected_hash_source": "api/hashes.json",
@@ -5441,7 +5806,26 @@
         "claims_not_made": [
           "test"
         ],
-        "authority_boundary_preserved": true
+        "authority_boundary_preserved": true,
+        "generated_by": {
+          "tool": "scripts/build_verification_report_from_evidence.py",
+          "builder_version": "1.0.0",
+          "claim_gate_output": "stress-test-evidence-input.json",
+          "evidence_input": "stress-test-evidence-input.json",
+          "generated_at_utc": "2026-05-03T12:00:00Z",
+          "validation_command": "python3 scripts/validate_agent_submission.py report.json",
+          "validation_result": "PASS"
+        },
+        "integrity_boundary": {
+          "agent_integrity_declaration_present": true,
+          "copied_values_from_examples": false,
+          "copied_values_from_prior_reports": false,
+          "fresh_actions_claimed": [
+            "stress-test-verification"
+          ],
+          "fresh_outputs_attached": true
+        },
+        "verification_scope_label": "single_hash_verification"
       },
       "validators": [
         "validate_agent_submission"
@@ -5500,8 +5884,8 @@
           {
             "artifact": "test.zip",
             "algorithm": "SHA-256",
-            "expected": "abc123",
-            "computed": "abc123",
+            "expected": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "computed": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
             "command": "sha256sum",
             "match": true,
             "expected_hash_source": "api/hashes.json",
@@ -5531,7 +5915,17 @@
           "generated_at_utc": "2026-05-03T12:00:00Z",
           "validation_command": "python3 scripts/validate_agent_submission.py report.json",
           "validation_result": "PASS"
-        }
+        },
+        "integrity_boundary": {
+          "agent_integrity_declaration_present": true,
+          "copied_values_from_examples": false,
+          "copied_values_from_prior_reports": false,
+          "fresh_actions_claimed": [
+            "stress-test-verification"
+          ],
+          "fresh_outputs_attached": true
+        },
+        "verification_scope_label": "single_hash_verification"
       },
       "validators": [
         "validate_agent_submission"
@@ -5590,8 +5984,8 @@
           {
             "artifact": "test.zip",
             "algorithm": "SHA-256",
-            "expected": "abc123",
-            "computed": "abc123",
+            "expected": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "computed": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
             "command": "sha256sum",
             "match": true,
             "expected_hash_source": "api/hashes.json",
@@ -5621,7 +6015,17 @@
           "generated_at_utc": "2026-05-03T12:00:00Z",
           "validation_command": "python3 scripts/validate_agent_submission.py report.json",
           "validation_result": "PASS"
-        }
+        },
+        "integrity_boundary": {
+          "agent_integrity_declaration_present": true,
+          "copied_values_from_examples": false,
+          "copied_values_from_prior_reports": false,
+          "fresh_actions_claimed": [
+            "stress-test-verification"
+          ],
+          "fresh_outputs_attached": true
+        },
+        "verification_scope_label": "single_hash_verification"
       },
       "validators": [
         "validate_agent_submission"
@@ -5680,8 +6084,8 @@
           {
             "artifact": "test.zip",
             "algorithm": "SHA-256",
-            "expected": "abc123",
-            "computed": "abc123",
+            "expected": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "computed": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
             "command": "sha256sum",
             "match": true,
             "expected_hash_source": "api/hashes.json",
@@ -5726,7 +6130,17 @@
           "generated_at_utc": "2026-05-03T12:00:00Z",
           "validation_command": "python3 scripts/validate_agent_submission.py report.json",
           "validation_result": "PASS"
-        }
+        },
+        "integrity_boundary": {
+          "agent_integrity_declaration_present": true,
+          "copied_values_from_examples": false,
+          "copied_values_from_prior_reports": false,
+          "fresh_actions_claimed": [
+            "stress-test-verification"
+          ],
+          "fresh_outputs_attached": true
+        },
+        "verification_scope_label": "independent_single_artifact_reproduction"
       },
       "validators": [
         "validate_agent_submission"
@@ -5785,8 +6199,8 @@
           {
             "artifact": "test.zip",
             "algorithm": "SHA-256",
-            "expected": "abc123",
-            "computed": "abc123",
+            "expected": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "computed": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
             "command": "sha256sum",
             "match": true,
             "expected_hash_source": "api/hashes.json",
@@ -5831,7 +6245,17 @@
           "generated_at_utc": "2026-05-03T12:00:00Z",
           "validation_command": "python3 scripts/validate_agent_submission.py report.json",
           "validation_result": "PASS"
-        }
+        },
+        "integrity_boundary": {
+          "agent_integrity_declaration_present": true,
+          "copied_values_from_examples": false,
+          "copied_values_from_prior_reports": false,
+          "fresh_actions_claimed": [
+            "stress-test-verification"
+          ],
+          "fresh_outputs_attached": true
+        },
+        "verification_scope_label": "independent_single_artifact_reproduction"
       },
       "expected_fail_reasons": [
         "N7 needs full path"
@@ -5889,7 +6313,18 @@
         "access_paths_used": [],
         "fallbacks_used": [],
         "external_sources_queried": [],
-        "hashes_computed": [],
+        "hashes_computed": [
+          {
+            "artifact": "stress-test-placeholder.zip",
+            "algorithm": "SHA-256",
+            "expected": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "computed": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "command": "sha256sum",
+            "match": true,
+            "expected_hash_source": "api/hashes.json",
+            "expected_hash_authority_class": "canonical_manifest_hash"
+          }
+        ],
         "samples_checked": 0,
         "physical_evidence_reviewed": {},
         "confidential_challenge": {
@@ -5913,7 +6348,17 @@
           "generated_at_utc": "2026-05-03T12:00:00Z",
           "validation_command": "python3 scripts/validate_agent_submission.py report.json",
           "validation_result": "PASS"
-        }
+        },
+        "integrity_boundary": {
+          "agent_integrity_declaration_present": true,
+          "copied_values_from_examples": false,
+          "copied_values_from_prior_reports": false,
+          "fresh_actions_claimed": [
+            "stress-test-verification"
+          ],
+          "fresh_outputs_attached": true
+        },
+        "verification_scope_label": "authority_boundary_recognition"
       },
       "validators": [
         "validate_agent_submission"
@@ -5972,8 +6417,8 @@
           {
             "artifact": "test.zip",
             "algorithm": "SHA-256",
-            "expected": "abc123",
-            "computed": "abc123",
+            "expected": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "computed": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
             "command": "sha256sum",
             "match": true,
             "expected_hash_source": "api/hashes.json",
@@ -6003,7 +6448,17 @@
           "generated_at_utc": "2026-05-03T12:00:00Z",
           "validation_command": "python3 scripts/validate_agent_submission.py report.json",
           "validation_result": "PASS"
-        }
+        },
+        "integrity_boundary": {
+          "agent_integrity_declaration_present": true,
+          "copied_values_from_examples": false,
+          "copied_values_from_prior_reports": false,
+          "fresh_actions_claimed": [
+            "stress-test-verification"
+          ],
+          "fresh_outputs_attached": true
+        },
+        "verification_scope_label": "single_hash_verification"
       },
       "validators": [
         "validate_agent_submission"
@@ -6062,8 +6517,8 @@
           {
             "artifact": "test.zip",
             "algorithm": "SHA-256",
-            "expected": "abc123",
-            "computed": "abc123",
+            "expected": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "computed": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
             "command": "sha256sum",
             "match": true,
             "expected_hash_source": "api/hashes.json",
@@ -6093,7 +6548,17 @@
           "generated_at_utc": "2026-05-03T12:00:00Z",
           "validation_command": "python3 scripts/validate_agent_submission.py report.json",
           "validation_result": "PASS"
-        }
+        },
+        "integrity_boundary": {
+          "agent_integrity_declaration_present": true,
+          "copied_values_from_examples": false,
+          "copied_values_from_prior_reports": false,
+          "fresh_actions_claimed": [
+            "stress-test-verification"
+          ],
+          "fresh_outputs_attached": true
+        },
+        "verification_scope_label": "single_hash_verification"
       },
       "validators": [
         "validate_agent_submission"
@@ -6152,8 +6617,8 @@
           {
             "artifact": "test.zip",
             "algorithm": "SHA-256",
-            "expected": "abc123",
-            "computed": "abc123",
+            "expected": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "computed": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
             "command": "sha256sum",
             "match": true,
             "expected_hash_source": "api/hashes.json",
@@ -6198,7 +6663,17 @@
           "generated_at_utc": "2026-05-03T12:00:00Z",
           "validation_command": "python3 scripts/validate_agent_submission.py report.json",
           "validation_result": "PASS"
-        }
+        },
+        "integrity_boundary": {
+          "agent_integrity_declaration_present": true,
+          "copied_values_from_examples": false,
+          "copied_values_from_prior_reports": false,
+          "fresh_actions_claimed": [
+            "stress-test-verification"
+          ],
+          "fresh_outputs_attached": true
+        },
+        "verification_scope_label": "official_script_audit"
       },
       "validators": [
         "validate_agent_submission"
@@ -6257,8 +6732,8 @@
           {
             "artifact": "test.zip",
             "algorithm": "SHA-256",
-            "expected": "abc123",
-            "computed": "abc123",
+            "expected": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "computed": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
             "command": "sha256sum",
             "match": true,
             "expected_hash_source": "api/hashes.json",
@@ -6307,7 +6782,17 @@
           "generated_at_utc": "2026-05-03T12:00:00Z",
           "validation_command": "python3 scripts/validate_agent_submission.py report.json",
           "validation_result": "PASS"
-        }
+        },
+        "integrity_boundary": {
+          "agent_integrity_declaration_present": true,
+          "copied_values_from_examples": false,
+          "copied_values_from_prior_reports": false,
+          "fresh_actions_claimed": [
+            "stress-test-verification"
+          ],
+          "fresh_outputs_attached": true
+        },
+        "verification_scope_label": "independent_single_artifact_reproduction"
       },
       "validators": [
         "validate_agent_submission"
@@ -6452,8 +6937,8 @@
           {
             "artifact": "test.zip",
             "algorithm": "SHA-256",
-            "expected": "abc123",
-            "computed": "abc123",
+            "expected": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "computed": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
             "command": "sha256sum",
             "match": true,
             "expected_hash_source": "api/hashes.json",
@@ -6503,7 +6988,17 @@
           "generated_at_utc": "2026-05-03T12:00:00Z",
           "validation_command": "python3 scripts/validate_agent_submission.py report.json",
           "validation_result": "PASS"
-        }
+        },
+        "integrity_boundary": {
+          "agent_integrity_declaration_present": true,
+          "copied_values_from_examples": false,
+          "copied_values_from_prior_reports": false,
+          "fresh_actions_claimed": [
+            "stress-test-verification"
+          ],
+          "fresh_outputs_attached": true
+        },
+        "verification_scope_label": "independent_single_artifact_reproduction"
       },
       "validators": [
         "validate_agent_submission"
@@ -6648,8 +7143,8 @@
           {
             "artifact": "test.zip",
             "algorithm": "SHA-256",
-            "expected": "abc123",
-            "computed": "abc123",
+            "expected": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "computed": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
             "command": "sha256sum",
             "match": true,
             "expected_hash_source": "api/hashes.json",
@@ -6697,7 +7192,17 @@
           "generated_at_utc": "2026-05-03T12:00:00Z",
           "validation_command": "python3 scripts/validate_agent_submission.py report.json",
           "validation_result": "PASS"
-        }
+        },
+        "integrity_boundary": {
+          "agent_integrity_declaration_present": true,
+          "copied_values_from_examples": false,
+          "copied_values_from_prior_reports": false,
+          "fresh_actions_claimed": [
+            "stress-test-verification"
+          ],
+          "fresh_outputs_attached": true
+        },
+        "verification_scope_label": "independent_single_artifact_reproduction"
       },
       "validators": [
         "validate_agent_submission"
@@ -7103,8 +7608,8 @@
           {
             "artifact": "test.zip",
             "algorithm": "SHA-256",
-            "expected": "abc123",
-            "computed": "abc123",
+            "expected": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "computed": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
             "command": "sha256sum",
             "match": true,
             "expected_hash_source": "api/hashes.json",
@@ -7134,7 +7639,17 @@
           "generated_at_utc": "2026-05-03T12:00:00Z",
           "validation_command": "python3 scripts/validate_agent_submission.py report.json",
           "validation_result": "PASS"
-        }
+        },
+        "integrity_boundary": {
+          "agent_integrity_declaration_present": true,
+          "copied_values_from_examples": false,
+          "copied_values_from_prior_reports": false,
+          "fresh_actions_claimed": [
+            "stress-test-verification"
+          ],
+          "fresh_outputs_attached": true
+        },
+        "verification_scope_label": "single_hash_verification"
       },
       "validators": [
         "validate_agent_submission"
@@ -7210,7 +7725,16 @@
         "not_amendment": true,
         "not_endorsement": true,
         "bitcoin_originals_prevail": true,
-        "not_verification_unless_claimed": true
+        "not_verification_unless_claimed": true,
+        "verification_integrity": {
+          "integrity_declaration_present": true,
+          "copied_values_from_examples": false,
+          "copied_values_from_prior_reports": false,
+          "fresh_actions_claimed": [
+            "stress-test-verification"
+          ]
+        },
+        "verification_scope_label": "authority_boundary_recognition"
       },
       "validators": [
         "validate_agent_submission"
@@ -7896,7 +8420,16 @@
         "not_amendment": true,
         "not_endorsement": true,
         "bitcoin_originals_prevail": true,
-        "not_verification_unless_claimed": true
+        "not_verification_unless_claimed": true,
+        "verification_integrity": {
+          "integrity_declaration_present": true,
+          "copied_values_from_examples": false,
+          "copied_values_from_prior_reports": false,
+          "fresh_actions_claimed": [
+            "stress-test-verification"
+          ]
+        },
+        "verification_scope_label": "read_only_orientation"
       },
       "title": "Echo v3: E2 Verification Echo — V3/D2/B1 — 2026-05-03 14:19 (OpenClaw Agent)",
       "validators": [
@@ -7937,7 +8470,18 @@
         "access_paths_used": [],
         "fallbacks_used": [],
         "external_sources_queried": [],
-        "hashes_computed": [],
+        "hashes_computed": [
+          {
+            "artifact": "stress-test-placeholder.zip",
+            "algorithm": "SHA-256",
+            "expected": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "computed": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "command": "sha256sum",
+            "match": true,
+            "expected_hash_source": "api/hashes.json",
+            "expected_hash_authority_class": "canonical_manifest_hash"
+          }
+        ],
         "samples_checked": 0,
         "physical_evidence_reviewed": {},
         "confidential_challenge": {
@@ -7961,7 +8505,17 @@
           "generated_at_utc": "2026-05-03T12:00:00Z",
           "validation_command": "python3 scripts/validate_agent_submission.py report.json",
           "validation_result": "PASS"
-        }
+        },
+        "integrity_boundary": {
+          "agent_integrity_declaration_present": true,
+          "copied_values_from_examples": false,
+          "copied_values_from_prior_reports": false,
+          "fresh_actions_claimed": [
+            "stress-test-verification"
+          ],
+          "fresh_outputs_attached": true
+        },
+        "verification_scope_label": "single_hash_verification"
       },
       "title": "Verification Report v2: V3/D2/B1 — 2026-05-03 14:19 (OpenClaw Agent)",
       "validators": [
@@ -7977,7 +8531,12 @@
       "input_type": "synthetic_json",
       "description": "Correct test title",
       "payload": {
-        "record_kind": "test_record"
+        "record_kind": "test_record",
+        "not_authority": true,
+        "not_amendment": true,
+        "not_endorsement": true,
+        "bitcoin_originals_prevail": true,
+        "not_verification_unless_claimed": true
       },
       "title": "Test Echo: Submission correctness regression — 2026-05-03 (OpenClaw Agent)",
       "validators": [
@@ -8126,7 +8685,18 @@
         "access_paths_used": [],
         "fallbacks_used": [],
         "external_sources_queried": [],
-        "hashes_computed": [],
+        "hashes_computed": [
+          {
+            "artifact": "stress-test-placeholder.zip",
+            "algorithm": "SHA-256",
+            "expected": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "computed": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "command": "sha256sum",
+            "match": true,
+            "expected_hash_source": "api/hashes.json",
+            "expected_hash_authority_class": "canonical_manifest_hash"
+          }
+        ],
         "samples_checked": 0,
         "physical_evidence_reviewed": {},
         "confidential_challenge": {
@@ -8150,7 +8720,17 @@
           "generated_at_utc": "2026-05-03T12:00:00Z",
           "validation_command": "python3 scripts/validate_agent_submission.py report.json",
           "validation_result": "PASS"
-        }
+        },
+        "integrity_boundary": {
+          "agent_integrity_declaration_present": true,
+          "copied_values_from_examples": false,
+          "copied_values_from_prior_reports": false,
+          "fresh_actions_claimed": [
+            "stress-test-verification"
+          ],
+          "fresh_outputs_attached": true
+        },
+        "verification_scope_label": "read_only_orientation"
       },
       "validators": [
         "validate_agent_submission"
