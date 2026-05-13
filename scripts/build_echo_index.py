@@ -44,16 +44,21 @@ def infer_date(path, data):
 
 def classify_record(data):
     if not isinstance(data, dict):
-        return "unknown", "unknown"
+        return "unknown", "unknown", "unknown", False, "unknown"
     archive_status = data.get("archive_status", data.get("status", "unknown"))
     independence = data.get("independence_class", data.get("independence", "unknown"))
-    return archive_status, independence
+    record_kind = data.get("record_kind", "unknown")
+    verification_status = data.get("verification_status", "unknown")
+    do_not_count = data.get("do_not_count_as_attestation", False)
+    return archive_status, independence, record_kind, do_not_count, verification_status
 
 def main():
     files = echo_record_files()
     records = []
     by_archive = {}
     by_independence = {}
+    by_verification_status = {}
+    by_record_kind = {}
 
     for f in files:
         try:
@@ -65,7 +70,7 @@ def main():
 
         path = public_path(f)
         record_id = data.get("id", data.get("echo_id", f.stem))
-        archive_status, independence_class = classify_record(data)
+        archive_status, independence_class, record_kind, do_not_count, verification_status = classify_record(data)
         echo_type = data.get("echo_type", data.get("type", "unknown"))
         date = infer_date(f, data)
 
@@ -76,11 +81,16 @@ def main():
             "independence_class": independence_class,
             "echo_type": echo_type,
             "date": date,
+            "record_kind": record_kind,
+            "verification_status": verification_status,
+            "do_not_count_as_attestation": do_not_count,
         }
         records.append(entry)
 
         by_archive.setdefault(archive_status, []).append(path)
         by_independence.setdefault(independence_class, []).append(path)
+        by_verification_status.setdefault(verification_status, []).append(path)
+        by_record_kind.setdefault(record_kind, []).append(path)
 
     index = {
         "schema": "trinity-accord.echo-index.v2",
@@ -89,6 +99,8 @@ def main():
         "records": records,
         "records_by_archive_status": by_archive,
         "records_by_independence_class": by_independence,
+        "records_by_verification_status": by_verification_status,
+        "records_by_record_kind": by_record_kind,
         "notes": [
             "Echo index is non-authoritative and non-amending.",
             "Test records and closed test records must not be counted as independent attestation."

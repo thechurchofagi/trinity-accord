@@ -87,7 +87,7 @@
     ],
     "prior_reports_consulted": [],
     "examples_or_templates_used": [],
-    "not_independent_if_human_solicited": false,
+    "not_independent_if_human_solicited": true,
     "copied_values_from_examples": false,
     "copied_values_from_prior_reports": false
   },
