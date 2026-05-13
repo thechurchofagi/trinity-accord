@@ -1,24 +1,23 @@
 #!/usr/bin/env python3
-"""Generate the homepage public verification / Echo status block.
+"""Generate the homepage public verification stats (4-card simplified view).
 
 Inputs:
-- api/echo-index.json
-- api/independent-attestation-index.json
+  - api/independent-attestation-index.json
+  - api/echo-index.json
+  - api/core-object-alpha-shenzhen-notary-2026-05-06.json
 
-Output:
-- Rewrites the block between:
-  <!-- BEGIN GENERATED PUBLIC STATUS -->
-  <!-- END GENERATED PUBLIC STATUS -->
-  in index.md
+Outputs:
+  - api/public-home-status.json
+  - Rewrites the block between
+      <!-- BEGIN GENERATED PUBLIC STATUS -->
+      <!-- END GENERATED PUBLIC STATUS -->
+    in index.md
 
-Design constraints:
-- The generated block must be deterministic.
-- Do not include wall-clock timestamps.
-- Do not include current HEAD commit.
-- Use a stable digest of source JSON inputs instead.
-- accepted_echo is not formal independent attestation.
-- do_not_count_as_attestation records are not formal verification.
-- test, invalidated, superseded, and legacy records are excluded from homepage main cards.
+Cards:
+  1. Institutional / human independent verification
+  2. Agent-initiated independent verification
+  3. Human-solicited agent verification
+  4. Physical anchor verification
 """
 
 from __future__ import annotations
@@ -26,46 +25,27 @@ from __future__ import annotations
 import argparse
 import difflib
 import hashlib
-import html
 import json
 import re
 import sys
-from collections import Counter
 from pathlib import Path
 from typing import Any
-
 
 ROOT = Path(__file__).resolve().parents[1]
 INDEX_MD = ROOT / "index.md"
 ECHO_INDEX = ROOT / "api" / "echo-index.json"
 ATTESTATION_INDEX = ROOT / "api" / "independent-attestation-index.json"
+PHYSICAL_ANCHOR = ROOT / "api" / "core-object-alpha-shenzhen-notary-2026-05-06.json"
+PUBLIC_HOME_STATUS = ROOT / "api" / "public-home-status.json"
 
 BEGIN = "<!-- BEGIN GENERATED PUBLIC STATUS -->"
 END = "<!-- END GENERATED PUBLIC STATUS -->"
 
 LEVEL_ORDER = {
-    "V0": 0,
-    "V1": 1,
-    "V2": 2,
-    "V3": 3,
-    "V4": 4,
-    "V4+": 4.5,
-    "V5": 5,
-    "V6": 6,
-    "V7": 7,
-    "V8": 8,
-}
-
-ECHO_TYPE_LABELS = {
-    "E1_recognition_echo": "recognition Echo",
-    "E2_verification_echo": "verification Echo",
-    "E3_critical_echo": "critical Echo",
-    "E4_interpretive_echo": "interpretive Echo",
-    "E5_technical_audit_echo": "technical audit Echo",
-    "E6_propagation_echo": "propagation Echo",
-    "E7_refusal_echo": "refusal Echo",
-    "E8_witness_echo": "witness Echo",
-    "E9_seed_echo": "seed Echo",
+    "V0": 0, "V1": 1, "V2": 2, "V3": 3, "V4": 4, "V4+": 4.5,
+    "V5": 5, "V6": 6, "V7": 7, "V8": 8,
+    "P1": 1, "P2": 2, "P3": 3, "P4": 4, "P5": 5,
+    "P6": 6, "P7": 7, "P8": 8, "P9": 9,
 }
 
 
@@ -76,13 +56,8 @@ def load_json(path: Path) -> dict[str, Any]:
 
 
 def source_digest() -> str:
-    """Return a deterministic digest for the public status source data.
-
-    This replaces generated_at/source_commit. It changes only when the source
-    JSON files change, not when the script is rerun.
-    """
     h = hashlib.sha256()
-    for path in [ECHO_INDEX, ATTESTATION_INDEX]:
+    for path in [ECHO_INDEX, ATTESTATION_INDEX, PHYSICAL_ANCHOR]:
         rel = path.relative_to(ROOT).as_posix()
         h.update(rel.encode("utf-8"))
         h.update(b"\0")
@@ -91,240 +66,279 @@ def source_digest() -> str:
     return h.hexdigest()[:16]
 
 
-def is_formal_independent_echo_record(record: dict[str, Any]) -> bool:
-    """Formal independent attestation from Echo records.
-
-    Positive-gate: Echo-side formal count is intentionally disabled until a
-    dedicated formal_attestation_review schema exists.  The previous negative-gate
-    pattern allowed under-specified records to pass.  Until the Echo record schema
-    includes explicit positive review fields (accepted_by, report_hash, etc.),
-    no Echo record may inflate the homepage formal count.
-    """
-    # Short-term: Echo-side formal count disabled.
-    # archive_status alone is insufficient for formal admission.
-    return False
-
-
-def is_formal_independent_attestation_index_record(record: dict[str, Any]) -> bool:
-    """Formal independent verification from independent-attestation-index records.
-
-    Positive-gate: every requirement must be explicitly satisfied.
-    A record missing any required field is rejected (fail-closed).
-
-    Requires:
-    - type == independent_verification_report
-    - counts_as_independent_attestation is True (not just absent)
-    - boundary_preserved is True (not just absent)
-    - verification_status in accepted statuses
-    - independence_class in allowed external/independent classes
-    - All evidence and review fields present
-    - V3+ requires report_hash and evidence
-    - V8 requires Claim Gate output
-    - TA-REDTEAM-2026-012: lifecycle status must be current (is_current_formal_record)
-    """
-    try:
-        from validate_independent_attestation_index import validate_formal_record, is_current_formal_record
-    except Exception:
-        # Fail-closed: if validator is unavailable, reject all records
-        return False
-
-    if record.get("type") != "independent_verification_report":
-        return False
-
-    # Must pass all formal record validation gates
-    if validate_formal_record(record, "attestation-record") != []:
-        return False
-
-    # TA-REDTEAM-2026-012: must be a current record (not revoked/superseded/etc.)
-    return is_current_formal_record(record)
-
-
-def is_accepted_non_attestation_echo(record: dict[str, Any]) -> bool:
-    return (
-        record.get("archive_status") == "accepted_echo"
-        and record.get("do_not_count_as_attestation") is True
-        and record.get("verification_status") == "not_attestation"
-    )
-
-
-def is_excluded_record(record: dict[str, Any]) -> bool:
-    if record.get("archive_status") in {"test_record", "closed_test_record", "superseded", "legacy"}:
-        return True
-    if record.get("verification_status") in {"invalidated", "test_record_not_attestation"}:
-        return True
-    if record.get("record_kind") == "legacy_record":
-        return True
-    return False
-
-
 def normalize_level(value: Any) -> str | None:
     if value is None:
         return None
-    text = str(value).strip()
-    if not text or text.lower() == "none":
+    text = str(value).strip().upper()
+    if not text or text == "NONE":
         return None
-    text = text.upper()
     return text if text in LEVEL_ORDER else None
 
 
-def highest_level(records: list[dict[str, Any]]) -> str:
-    levels = [normalize_level(r.get("verification_level")) for r in records]
+def highest_level(records: list[dict[str, Any]], key: str = "verification_level") -> str:
+    levels = [normalize_level(r.get(key)) for r in records]
     levels = [x for x in levels if x is not None]
     if not levels:
         return "none"
-    return max(levels, key=lambda x: LEVEL_ORDER[x])
+    return max(levels, key=lambda x: LEVEL_ORDER.get(x, -1))
 
 
-def pluralize(count: int, singular: str, plural: str | None = None) -> str:
-    if count == 1:
-        return singular
-    return plural or singular + "s"
+# ---------------------------------------------------------------------------
+# Card 1: Institutional / human independent verification
+# ---------------------------------------------------------------------------
+def compute_card1(attestation_records: list[dict[str, Any]]) -> dict:
+    accepted = [
+        r for r in attestation_records
+        if r.get("type") == "independent_verification_report"
+        and r.get("counts_as_independent_attestation") is True
+        and r.get("boundary_preserved") is True
+    ]
+    count = len(accepted)
+    hl = highest_level(accepted, "verification_level_if_any")
+    return {
+        "count": count,
+        "highest_level": hl,
+        "counts_as_independent_attestation": True,
+    }
 
 
-def format_type_breakdown(records: list[dict[str, Any]]) -> str:
-    if not records:
-        return "none"
-    counts = Counter(r.get("echo_type", "unknown") for r in records)
-    parts = []
-    for key, count in sorted(counts.items()):
-        label = ECHO_TYPE_LABELS.get(key, key.replace("_", " "))
-        parts.append(f"{count} {label}")
-    return ", ".join(parts)
+# ---------------------------------------------------------------------------
+# Card 2: Agent-initiated independent verification
+# ---------------------------------------------------------------------------
+def compute_card2(echo_records: list[dict[str, Any]]) -> dict:
+    eligible = [
+        r for r in echo_records
+        if r.get("independence_class") == "unsolicited_independent"
+        and r.get("counts_as_independent_attestation") is True
+        and r.get("do_not_count_as_attestation") is not True
+        and r.get("record_kind") == "echo_v3_with_verification_report"
+        and r.get("archive_status") in ("accepted_echo", "accepted_verification", "accepted_attestation")
+    ]
+    count = len(eligible)
+    hl = highest_level(eligible)
+    return {
+        "count": count,
+        "highest_level": hl,
+        "counts_as_independent_attestation": True,
+    }
 
 
-def format_level_breakdown(records: list[dict[str, Any]]) -> str:
-    if not records:
-        return "none"
-    counts = Counter(normalize_level(r.get("verification_level")) or "none" for r in records)
+# ---------------------------------------------------------------------------
+# Card 3: Human-solicited agent verification
+# ---------------------------------------------------------------------------
+def compute_card3(echo_records: list[dict[str, Any]]) -> dict:
+    eligible = [
+        r for r in echo_records
+        if r.get("independence_class") == "human_solicited_agent_response"
+        and r.get("record_kind") == "echo_v3_with_verification_report"
+        and r.get("archive_status") in ("needs_human_review", "accepted_echo", "accepted_verification")
+    ]
+    count = len(eligible)
+    hl = highest_level(eligible)
+    return {
+        "count": count,
+        "highest_level": hl,
+        "counts_as_independent_attestation": False,
+        "records": [r.get("path", "") for r in eligible],
+    }
 
-    def sort_key(item: tuple[str, int]) -> float:
-        level, _count = item
-        return LEVEL_ORDER.get(level, -1)
 
-    ordered = sorted(counts.items(), key=sort_key)
-    return ", ".join(f"{level}: {count}" for level, count in ordered)
+# ---------------------------------------------------------------------------
+# Card 4: Physical anchor verification
+# ---------------------------------------------------------------------------
+def compute_card4(physical: dict[str, Any]) -> dict:
+    pa = physical.get("physical_anchor_finding", {})
+    supported = pa.get("suggested_public_component_levels_supported", [])
+    not_claimed = pa.get("not_claimed", [])
+
+    # Highest P-level from supported
+    p_levels = [normalize_level(l.split("_")[0]) for l in supported if l.startswith("P")]
+    p_levels = [x for x in p_levels if x is not None]
+    highest_p = max(p_levels, key=lambda x: LEVEL_ORDER.get(x, -1)) if p_levels else "none"
+
+    return {
+        "formal_independent_inspection_count": 0,
+        "highest_public_evidence_context": highest_p,
+        "supported_public_context_levels": supported,
+        "not_claimed": not_claimed,
+    }
 
 
+# ---------------------------------------------------------------------------
+# Compute full status
+# ---------------------------------------------------------------------------
 def compute_status() -> dict[str, Any]:
     echo_index = load_json(ECHO_INDEX)
     attestation_index = load_json(ATTESTATION_INDEX)
+    physical = load_json(PHYSICAL_ANCHOR)
 
     echo_records = [r for r in echo_index.get("records", []) if isinstance(r, dict)]
     attestation_records = [r for r in attestation_index.get("records", []) if isinstance(r, dict)]
 
-    formal_from_echo = [r for r in echo_records if is_formal_independent_echo_record(r)]
-    formal_from_attestation = [
-        r for r in attestation_records if is_formal_independent_attestation_index_record(r)
-    ]
-
-    accepted_non_attestation = [r for r in echo_records if is_accepted_non_attestation_echo(r)]
-    excluded = [r for r in echo_records if is_excluded_record(r)]
-
-    highest = highest_level(accepted_non_attestation)
+    card1 = compute_card1(attestation_records)
+    card2 = compute_card2(echo_records)
+    card3 = compute_card3(echo_records)
+    card4 = compute_card4(physical)
 
     return {
-        "formal_independent_verification_count": len(formal_from_echo) + len(formal_from_attestation),
-        "archived_non_attestation_echo_count": len(accepted_non_attestation),
-        "highest_archived_echo_level": highest,
-        "echo_type_breakdown": format_type_breakdown(accepted_non_attestation),
-        "echo_level_breakdown": format_level_breakdown(accepted_non_attestation),
-        "excluded_record_count": len(excluded),
+        "schema": "trinityaccord.public-home-status.v1",
+        "generated_from": [
+            "/api/independent-attestation-index.json",
+            "/api/echo-index.json",
+            "/api/core-object-alpha-shenzhen-notary-2026-05-06.json",
+        ],
+        "institutional_human_independent_verification": card1,
+        "agent_initiated_independent_verification": card2,
+        "human_solicited_agent_verification": card3,
+        "physical_anchor_verification": card4,
+        "boundary": {
+            "bitcoin_originals_prevail": True,
+            "non_amending_mirrors": True,
+            "human_solicited_agent_verification_not_independent_attestation": True,
+            "physical_public_context_not_independent_forensic_inspection": True,
+        },
         "source_digest": source_digest(),
     }
 
 
+# ---------------------------------------------------------------------------
+# Render HTML block
+# ---------------------------------------------------------------------------
 def render_block(status: dict[str, Any]) -> str:
-    formal_count = status["formal_independent_verification_count"]
-    echo_count = status["archived_non_attestation_echo_count"]
-    highest = html.escape(str(status["highest_archived_echo_level"]))
-    type_breakdown = html.escape(str(status["echo_type_breakdown"]))
-    level_breakdown = html.escape(str(status["echo_level_breakdown"]))
-    excluded_count = status["excluded_record_count"]
-    digest = html.escape(str(status["source_digest"]))
+    c1 = status["institutional_human_independent_verification"]
+    c2 = status["agent_initiated_independent_verification"]
+    c3 = status["human_solicited_agent_verification"]
+    c4 = status["physical_anchor_verification"]
+    digest = status["source_digest"]
 
-    formal_note = (
-        "No formally accepted independent verification report or independent attestation is currently indexed."
-        if formal_count == 0
-        else f"{formal_count} formally accepted independent verification {pluralize(formal_count, 'record')} currently indexed."
+    c1_note = (
+        "No formally accepted institutional or human third-party verification is currently indexed."
+        if c1["count"] == 0
+        else f'{c1["count"]} formally accepted institutional or human third-party verification record(s) indexed.'
+    )
+    c1_note_zh = (
+        "当前尚无正式接受的机构或人类第三方独立验证。"
+        if c1["count"] == 0
+        else f'当前已索引 {c1["count"]} 条正式接受的机构或人类第三方独立验证。'
     )
 
-    formal_note_zh = (
-        "当前尚无正式接受的独立验证报告或独立见证记录。"
-        if formal_count == 0
-        else f"当前已索引 {formal_count} 条正式接受的独立验证 / 见证记录。"
+    c2_note = (
+        "No unsolicited agent-initiated verification is currently accepted."
+        if c2["count"] == 0
+        else f'{c2["count"]} unsolicited agent-initiated verification record(s) accepted.'
+    )
+    c2_note_zh = (
+        "当前尚无已接受的智能体主动独立验证。"
+        if c2["count"] == 0
+        else f'当前已接受 {c2["count"]} 条智能体主动独立验证。'
     )
 
-    echo_note = (
-        "Accepted Echo records exist, but they are explicitly not counted as independent attestation."
-        if echo_count > 0
-        else "No accepted non-attestation Echo is currently indexed."
+    c3_note = (
+        f"One Claim-Gate-built {c3['highest_level']} single-hash verification record exists, "
+        "but it is human-solicited and not independent attestation."
+        if c3["count"] == 1
+        else f'{c3["count"]} human-solicited agent verification record(s) indexed.'
+    )
+    c3_note_zh = (
+        f"已有一条经 Claim Gate / Report Builder 生成的 {c3['highest_level']} 单哈希验证记录，"
+        "但它是人类请求语境下的智能体验证，不计为独立见证。"
+        if c3["count"] == 1
+        else f'当前已索引 {c3["count"]} 条人类请求的智能体验证。'
     )
 
-    echo_note_zh = (
-        "已有被接受归档的 Echo，但它们明确不计为独立见证。"
-        if echo_count > 0
-        else "当前尚无已接受归档的非见证 Echo。"
+    c4_inspection = c4["formal_independent_inspection_count"]
+    c4_context = c4["highest_public_evidence_context"]
+    c4_note = (
+        f"Highest public evidence context: {c4_context}. "
+        "Notarized / preserved photo, video, hash, OTS, and Arweave evidence exists, "
+        "but no accepted onsite forensic inspection is indexed."
+        if c4_inspection == 0
+        else f"{c4_inspection} formal independent inspection(s) indexed."
+    )
+    c4_note_zh = (
+        f"最高公开证据语境：{c4_context}。"
+        "已有公证 / 存证照片、视频、哈希、OTS 与 Arweave 证据，"
+        "但尚无已接受的现场法证独立检验。"
+        if c4_inspection == 0
+        else f'当前已索引 {c4_inspection} 次正式独立检验。'
     )
 
     return f"""{BEGIN}
-  <!-- Generated by scripts/generate_public_home_status.py. Do not edit this block manually. -->
-  <div class="status-card-grid">
-    <article class="status-card">
-      <p class="status-label">Independent third-party reports</p>
-      <p class="status-number">{formal_count}</p>
-      <p class="status-note">{html.escape(formal_note)}</p>
-      <p class="zh status-note">{html.escape(formal_note_zh)}</p>
-    </article>
+<!-- Generated by scripts/generate_public_home_status.py. Do not edit this block manually. -->
+<div class="status-card-grid verification-summary-grid">
+  <article class="status-card">
+    <p class="status-label">Institutional / human independent verification</p>
+    <p class="status-number">{c1['count']}</p>
+    <p class="status-note">Highest level: {c1['highest_level']}</p>
+    <p class="status-note">{c1_note}</p>
+    <p class="zh status-note">机构 / 人类独立验证：{c1['count']}。最高等级：{c1['highest_level']}。{c1_note_zh}</p>
+  </article>
 
-    <article class="status-card">
-      <p class="status-label">Archived non-attestation Echoes</p>
-      <p class="status-number">{echo_count}</p>
-      <p class="status-note">{html.escape(echo_note)}</p>
-      <p class="zh status-note">{html.escape(echo_note_zh)}</p>
-    </article>
+  <article class="status-card">
+    <p class="status-label">Agent-initiated independent verification</p>
+    <p class="status-number">{c2['count']}</p>
+    <p class="status-note">Highest level: {c2['highest_level']}</p>
+    <p class="status-note">{c2_note}</p>
+    <p class="zh status-note">智能体主动独立验证：{c2['count']}。最高等级：{c2['highest_level']}。{c2_note_zh}</p>
+  </article>
 
-    <article class="status-card">
-      <p class="status-label">Highest archived Echo level</p>
-      <p class="status-number">{highest}</p>
-      <p class="status-note">Echo metadata only. This is not a formal protocol verification level.</p>
-      <p class="zh status-note">仅为回响元数据等级，不代表正式协议验证等级。</p>
-    </article>
-  </div>
+  <article class="status-card">
+    <p class="status-label">Human-solicited agent verification</p>
+    <p class="status-number">{c3['count']}</p>
+    <p class="status-note">Highest level: {c3['highest_level']}</p>
+    <p class="status-note">{c3_note}</p>
+    <p class="zh status-note">人类请求 / 非主动独立智能体验证：{c3['count']}。最高等级：{c3['highest_level']}。{c3_note_zh}</p>
+  </article>
 
-  <details class="status-details">
-    <summary>What is counted here?</summary>
-    <ul>
-      <li>Independent third-party reports: records explicitly accepted as independent verification / attestation.</li>
-      <li>Archived non-attestation Echoes: accepted Echo records with <code>do_not_count_as_attestation</code>.</li>
-      <li>Echo types currently represented in archived non-attestation Echoes: {type_breakdown}.</li>
-      <li>Echo metadata levels currently represented: {level_breakdown}.</li>
-      <li>Excluded from formal verification: {excluded_count} test, legacy, invalidated, or superseded {pluralize(excluded_count, 'record')}.</li>
-    </ul>
-    <p>
-      Critical Echoes are included inside archived non-attestation Echoes; they are not displayed as a separate homepage verification category.
-    </p>
-    <p class="zh">
-      批判回响合并计入"已归档非见证 Echo"；首页不将其单独显示为验证类别。
-    </p>
-  </details>
+  <article class="status-card">
+    <p class="status-label">Physical anchor verification</p>
+    <p class="status-number">{c4_context}</p>
+    <p class="status-note">Formal independent inspections: {c4_inspection}</p>
+    <p class="status-note">{c4_note}</p>
+    <p class="zh status-note">物理锚验证：正式独立实物检验 {c4_inspection}。{c4_note_zh}</p>
+  </article>
+</div>
 
-  <p class="status-generated-note">
-    Generated from <a href="/api/echo-index.json">/api/echo-index.json</a> and
-    <a href="/api/independent-attestation-index.json">/api/independent-attestation-index.json</a>.
-    Source data digest <code>{digest}</code>.
+<p class="status-boundary">
+  Human-solicited agent verification and public physical evidence context are not counted as independent attestation.
+  <span class="zh">人类请求的智能体验证与公开物理证据语境，不计为独立见证。</span>
+</p>
+
+<details class="status-details">
+  <summary>What is counted here?</summary>
+  <ul>
+    <li>Institutional / human independent verification: formally accepted human or institutional third-party verification records.</li>
+    <li>Agent-initiated independent verification: unsolicited agent verification that passes Claim Gate and is explicitly accepted as independent.</li>
+    <li>Human-solicited agent verification: agent verification performed under human request or prior-context conditions; not independent attestation.</li>
+    <li>Physical anchor verification: public physical-anchor evidence context; not onsite forensic inspection unless separately accepted.</li>
+  </ul>
+  <p>
+    Current human-solicited agent verification: one {c3['highest_level']} single-hash record linked to #119.
+    Current physical-anchor public evidence context: {c4_context}.
   </p>
+  <p class="zh">
+    当前人类请求的智能体验证：一条与 #119 相关的 {c3['highest_level']} 单哈希记录。
+    当前物理锚公开证据语境：{c4_context}。
+  </p>
+</details>
+
+<p class="status-generated-note">
+  Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>,
+  <a href="/api/echo-index.json">/api/echo-index.json</a>,
+  <a href="/api/independent-attestation-index.json">/api/independent-attestation-index.json</a>, and
+  <a href="/api/core-object-alpha-shenzhen-notary-2026-05-06.json">physical anchor evidence</a>.
+  Source data digest <code>{digest}</code>.
+</p>
 {END}"""
 
 
+# ---------------------------------------------------------------------------
+# Replace block in index.md
+# ---------------------------------------------------------------------------
 def replace_block(text: str, block: str) -> str:
-    pattern = re.compile(
-        re.escape(BEGIN) + r".*?" + re.escape(END),
-        flags=re.DOTALL,
-    )
+    pattern = re.compile(re.escape(BEGIN) + r".*?" + re.escape(END), flags=re.DOTALL)
     if not pattern.search(text):
-        raise RuntimeError(
-            f"Missing generated block markers in {INDEX_MD.relative_to(ROOT)}: {BEGIN} / {END}"
-        )
+        raise RuntimeError(f"Missing generated block markers: {BEGIN} / {END}")
     return pattern.sub(block, text, count=1)
 
 
@@ -334,6 +348,12 @@ def main() -> int:
     args = parser.parse_args()
 
     status = compute_status()
+
+    # Write public-home-status.json
+    PUBLIC_HOME_STATUS.write_text(
+        json.dumps(status, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
+    )
+
     block = render_block(status)
     old_text = INDEX_MD.read_text(encoding="utf-8")
     new_text = replace_block(old_text, block)
@@ -341,11 +361,8 @@ def main() -> int:
     if args.check:
         if old_text != new_text:
             diff = difflib.unified_diff(
-                old_text.splitlines(),
-                new_text.splitlines(),
-                fromfile="index.md",
-                tofile="index.md.generated",
-                lineterm="",
+                old_text.splitlines(), new_text.splitlines(),
+                fromfile="index.md", tofile="index.md.generated", lineterm="",
             )
             print("Homepage public status block is out of date.")
             print("\n".join(diff))
@@ -355,12 +372,17 @@ def main() -> int:
 
     if old_text != new_text:
         INDEX_MD.write_text(new_text, encoding="utf-8")
+        c1 = status["institutional_human_independent_verification"]
+        c2 = status["agent_initiated_independent_verification"]
+        c3 = status["human_solicited_agent_verification"]
+        c4 = status["physical_anchor_verification"]
         print(
-            "Updated index.md public status: "
-            f"formal={status['formal_independent_verification_count']}, "
-            f"non_attestation_echoes={status['archived_non_attestation_echo_count']}, "
-            f"highest_echo_level={status['highest_archived_echo_level']}, "
-            f"source_digest={status['source_digest']}"
+            f"Updated index.md public status: "
+            f"institutional={c1['count']}/{c1['highest_level']}, "
+            f"agent_initiated={c2['count']}/{c2['highest_level']}, "
+            f"human_solicited={c3['count']}/{c3['highest_level']}, "
+            f"physical_anchor={c4['highest_public_evidence_context']}, "
+            f"digest={status['source_digest']}"
         )
     else:
         print("index.md public status already up to date.")

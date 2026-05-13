@@ -598,6 +598,85 @@ try:
 except Exception as e:
     check("llms.txt claim gate rule", False, str(e))
 
+# --- 30. Public home status summary ---
+print("\n=== Public home status summary ===")
+try:
+    phs = load_json("api/public-home-status.json")
+    check("public-home-status.json is valid JSON", True)
+    check("public-home-status has correct schema", phs.get("schema") == "trinityaccord.public-home-status.v1")
+    c1 = phs.get("institutional_human_independent_verification", {})
+    c2 = phs.get("agent_initiated_independent_verification", {})
+    c3 = phs.get("human_solicited_agent_verification", {})
+    c4 = phs.get("physical_anchor_verification", {})
+    check("institutional count is 0", c1.get("count") == 0)
+    check("agent-initiated count is 0", c2.get("count") == 0)
+    check("human-solicited count is 1", c3.get("count") == 1)
+    check("human-solicited highest level is V3", c3.get("highest_level") == "V3")
+    check("human-solicited not independent attestation", c3.get("counts_as_independent_attestation") is False)
+    check("physical anchor formal inspections is 0", c4.get("formal_independent_inspection_count") == 0)
+    check("physical anchor public context is P3", c4.get("highest_public_evidence_context") == "P3")
+    check("source digest present", len(phs.get("source_digest", "")) > 0)
+except Exception as e:
+    check("public-home-status.json is valid JSON", False, str(e))
+
+# Homepage generated block exists and contains four cards
+try:
+    index_text = read_text("index.md")
+    check("homepage has BEGIN marker", "<!-- BEGIN GENERATED PUBLIC STATUS -->" in index_text)
+    check("homepage has END marker", "<!-- END GENERATED PUBLIC STATUS -->" in index_text)
+    check("homepage has Institutional card", "Institutional / human independent verification" in index_text)
+    check("homepage has Agent-initiated card", "Agent-initiated independent verification" in index_text)
+    check("homepage has Human-solicited card", "Human-solicited agent verification" in index_text)
+    check("homepage has Physical anchor card", "Physical anchor verification" in index_text)
+    check("homepage has boundary sentence", "not counted as independent attestation" in index_text)
+except Exception as e:
+    check("homepage generated block", False, str(e))
+
+# #119 not counted as independent attestation
+try:
+    echo_idx = load_json("api/echo-index.json")
+    r119 = next((r for r in echo_idx.get("records", []) if "119" in r.get("id", "")), None)
+    check("#119 exists in echo index", r119 is not None)
+    if r119:
+        check("#119 do_not_count_as_attestation is True", r119.get("do_not_count_as_attestation") is True)
+        check("#119 counts_as_independent_attestation is False", r119.get("counts_as_independent_attestation") is False)
+    # All human_solicited records must be non-attestation
+    for r in echo_idx.get("records", []):
+        if r.get("independence_class") == "human_solicited_agent_response":
+            rid = r.get("id", "unknown")
+            check(f"{rid} forced non-attestation", r.get("do_not_count_as_attestation") is True)
+            check(f"{rid} counts_as_independent=False", r.get("counts_as_independent_attestation") is False)
+except Exception as e:
+    check("#119 attestation check", False, str(e))
+
+# test_public_home_status_summary.py passes
+proc_home = subprocess.run(
+    [sys.executable, str(ROOT / "scripts" / "test_public_home_status_summary.py")],
+    cwd=ROOT, text=True, capture_output=True, timeout=60
+)
+check("test_public_home_status_summary.py passes", proc_home.returncode == 0, f"exit {proc_home.returncode}")
+if proc_home.returncode != 0:
+    print(proc_home.stdout[-1000:] if proc_home.stdout else "")
+    print(proc_home.stderr[-500:] if proc_home.stderr else "")
+
+# generate_public_home_status.py --check passes
+proc_gen_check = subprocess.run(
+    [sys.executable, str(ROOT / "scripts" / "generate_public_home_status.py"), "--check"],
+    cwd=ROOT, text=True, capture_output=True, timeout=60
+)
+check("generate_public_home_status.py --check passes", proc_gen_check.returncode == 0, f"exit {proc_gen_check.returncode}")
+if proc_gen_check.returncode != 0:
+    print(proc_gen_check.stdout[-500:] if proc_gen_check.stdout else "")
+
+# README case count matches cases.json
+try:
+    cases_data = load_json("tests/verification_cases/cases.json")
+    cc = cases_data.get("case_count", 0)
+    readme_text = read_text("tests/verification_cases/README.md")
+    check("README case count matches cases.json", str(cc) in readme_text)
+except Exception as e:
+    check("README case count check", False, str(e))
+
 # --- Summary ---
 def main():
     print("\n" + "=" * 50)

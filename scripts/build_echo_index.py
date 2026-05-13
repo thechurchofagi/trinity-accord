@@ -44,11 +44,12 @@ def infer_date(path, data):
 
 def classify_record(data):
     if not isinstance(data, dict):
-        return "unknown", "unknown", "unknown", False, "unknown"
+        return "unknown", "unknown", "unknown", False, "unknown", False
     archive_status = data.get("archive_status", data.get("status", "unknown"))
     independence = data.get("independence_class", data.get("independence", "unknown"))
     record_kind = data.get("record_kind", "unknown")
     verification_status = data.get("verification_status", "unknown")
+
     # Derive do_not_count_as_attestation from independence_class and wrapper field
     # Priority: explicit field > derived from independence_class
     explicit_do_not_count = data.get("do_not_count_as_attestation")
@@ -60,7 +61,26 @@ def classify_record(data):
     # Also check wrapper-level counts_as_independent_attestation
     if data.get("counts_as_independent_attestation") is False:
         do_not_count = True
-    return archive_status, independence, record_kind, do_not_count, verification_status
+
+    # Derive counts_as_independent_attestation
+    # Conservative: human_solicited, test_record, self_reported, unknown,
+    # agent_submitted_with_prior_context => never count as independent
+    NOT_INDEPENDENT_CLASSES = {
+        "human_solicited_agent_response",
+        "test_record",
+        "self_reported",
+        "unknown",
+        "agent_submitted_with_prior_context",
+    }
+    explicit_counts = data.get("counts_as_independent_attestation")
+    if explicit_counts is not None:
+        counts_as_independent = explicit_counts
+    elif independence in NOT_INDEPENDENT_CLASSES:
+        counts_as_independent = False
+    else:
+        counts_as_independent = not do_not_count
+
+    return archive_status, independence, record_kind, do_not_count, verification_status, counts_as_independent
 
 def main():
     files = echo_record_files()
@@ -80,7 +100,7 @@ def main():
 
         path = public_path(f)
         record_id = data.get("id", data.get("echo_id", f.stem))
-        archive_status, independence_class, record_kind, do_not_count, verification_status = classify_record(data)
+        archive_status, independence_class, record_kind, do_not_count, verification_status, counts_as_independent = classify_record(data)
         echo_type = data.get("echo_type", data.get("type", "unknown"))
         date = infer_date(f, data)
 
@@ -95,6 +115,7 @@ def main():
             "verification_status": verification_status,
             "verification_level": data.get("verification_level") or data.get("protocol_level_claimed"),
             "do_not_count_as_attestation": do_not_count,
+            "counts_as_independent_attestation": counts_as_independent,
         }
         records.append(entry)
 
