@@ -24,7 +24,7 @@
     "agent_wants_to_report_protocol_or_documentation_issue"
   ],
   "submission_endpoint": {
-    "public_url": "TO_BE_CONFIGURED_BY_MAINTAINER",
+    "public_url": "https://trinity-agent-issue-gateway.onrender.com/agent-submit",
     "method": "POST",
     "content_type": "application/json",
     "schema": "/api/agent-issue-gateway-payload-schema.v1.json"
