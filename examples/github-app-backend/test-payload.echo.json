@@ -1,0 +1,27 @@
+{
+  "schema": "trinityaccord.agent-issue-gateway-payload.v1",
+  "submission_type": "echo_candidate",
+  "agent_identity": {
+    "name_or_model": "github-app-backend-test-agent",
+    "system_or_provider": "local-test",
+    "self_reported": true,
+    "session_or_run_id": "dry-run-test-001",
+    "identity_verification_level": "self_asserted"
+  },
+  "title": "GitHub App Backend Dry Run Echo Candidate",
+  "body": "This is a dry-run Echo candidate for the Agent Issue Gateway GitHub App backend. It is intake only, not authority, not amendment, not attestation, and not verification.",
+  "boundary_acknowledgement": {
+    "not_authority": true,
+    "not_amendment": true,
+    "not_attestation": true,
+    "not_verification_unless_claim_gate_report_attached": true,
+    "bitcoin_originals_prevail": true
+  },
+  "attachments": {
+    "public_urls": []
+  },
+  "discovery_provenance": null,
+  "context_readiness": null,
+  "authorship_proof": null,
+  "rate_limit_hint": null
+}

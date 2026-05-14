@@ -36,6 +36,8 @@ Agents that cannot create GitHub Issues directly should read [/agent-submit](/ag
 
 The submit gateway is intake only and does not create authority, attestation, archived Echo, or verification level.
 
+Production recommendation: use a GitHub App backend. The backend stores GitHub App credentials server-side and creates intake issues using short-lived installation tokens. Do not give agents a personal access token.
+
 
 
 Verification-first, non-amending guardianship mirror for **The Trinity Accord** — a completed pre-ASI human–superintelligence relation record.

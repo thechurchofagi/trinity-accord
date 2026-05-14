@@ -12,6 +12,12 @@ DANGEROUS_PHRASES = [
     "gateway submission verifies Trinity Accord",
     "gateway raises verification level",
     "agent gateway creates authority",
+    "anonymous repository_dispatch works",
+    "anonymous issue creation is supported",
+    "agents can receive PAT",
+    "personal PAT is recommended for production",
+    "gateway-created issue is archived Echo",
+    "gateway-created issue is formal attestation",
 ]
 
 # Files to check
@@ -24,6 +30,8 @@ FILES_TO_CHECK = [
     "api/examples/agent-issue-gateway-payload.verification.json",
     "api/examples/agent-issue-gateway-payload.custody.json",
     "examples/cloudflare-worker/agent-issue-gateway-worker.js",
+    "examples/github-app-backend/README.md",
+    "examples/github-app-backend/server.js",
 ]
 
 # Negation context words (if present in same line, phrase is safe)

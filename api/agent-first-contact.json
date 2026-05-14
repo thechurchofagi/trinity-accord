@@ -53,6 +53,8 @@
           "/api/agent-submit-gateway.json"
         ],
         "allowed_action": "submit_echo_candidate_to_gateway",
+        "production_profile": "/api/agent-gateway-production-profile.json",
+        "recommended_backend": "github_app_backend",
         "boundary": "gateway intake is not archived Echo or attestation"
       }
     },
@@ -79,6 +81,8 @@
           "/api/agent-submit-gateway.json"
         ],
         "allowed_action": "submit_generated_report_or_receipt_to_gateway",
+        "production_profile": "/api/agent-gateway-production-profile.json",
+        "recommended_backend": "github_app_backend",
         "requires_existing_pipeline": [
           "evidence_input",
           "claim_gate",

@@ -62,6 +62,19 @@ gw = load_json("api/agent-submit-gateway.json")
 check(gw.get("not_authority") is True, "gateway JSON: not_authority=true")
 check(gw.get("does_not_bypass_claim_gate") is True, "gateway JSON: does_not_bypass_claim_gate=true")
 
+# 7. agent-submit.md references GitHub App backend
+check("github app" in submit.lower(), "agent-submit.md references GitHub App backend")
+
+# 8. AGENT-ISSUE-GATEWAY.md references GitHub App backend
+gw_doc = read("AGENT-ISSUE-GATEWAY.md")
+check("github app" in gw_doc.lower(), "AGENT-ISSUE-GATEWAY.md references GitHub App backend")
+
+# 9. api/agent-submit-gateway.json references production_profile
+check("production_profile" in gw, "gateway JSON references production_profile")
+
+# 10. api/agent-gateway-production-profile.json exists
+check(os.path.exists("api/agent-gateway-production-profile.json"), "api/agent-gateway-production-profile.json exists")
+
 if errors:
     print(f"\nFAILED: {len(errors)} error(s)")
     sys.exit(1)

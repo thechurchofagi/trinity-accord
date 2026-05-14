@@ -1,4 +1,7 @@
-// Example only. Do not commit secrets.
+// Transitional example only.
+// Production recommendation is GitHub App backend; see examples/github-app-backend.
+// Do not use a personal PAT for long-term production.
+// Do not commit secrets.
 // Configure GITHUB_TOKEN / GitHub App secret in platform secret storage.
 
 export default {

@@ -1,0 +1,17 @@
+{
+  "name": "trinityaccord-agent-issue-gateway-github-app-backend",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Example GitHub App backend for Trinity Accord Agent Issue Gateway. Example only; do not commit secrets.",
+  "scripts": {
+    "start": "node server.js",
+    "test:dry": "DRY_RUN=true node server.js --self-test"
+  },
+  "dependencies": {
+    "@octokit/app": "15.1.6",
+    "@octokit/rest": "21.0.2",
+    "ajv": "8.17.1",
+    "express": "4.21.2"
+  }
+}

@@ -97,5 +97,17 @@
     "is_not_archived_echo": true,
     "is_not_attestation": true,
     "does_not_bypass_validation": true
+  },
+  "gateway_created_issues": {
+    "status": "issue_submission_surface_only",
+    "created_by": "agent_issue_gateway_or_github_app",
+    "not_archived_echo": true,
+    "not_attestation": true,
+    "requires_normal_triage": true,
+    "requires_validation_for_any_verification_claim": true,
+    "recommended_labels": [
+      "agent-gateway-intake",
+      "needs-triage"
+    ]
   }
 }

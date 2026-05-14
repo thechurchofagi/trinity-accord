@@ -54,12 +54,33 @@
     ],
     "must_not_handwrite_final_claim": true
   },
+  "production_profile": {
+    "recommended_backend": "github_app_backend",
+    "profile": "/api/agent-gateway-production-profile.json",
+    "why": "GitHub App installation tokens are short-lived and limited to app permissions. This avoids giving agents personal tokens or repository credentials.",
+    "runtime_is_separate_from_trust_model": true,
+    "runtime_options": [
+      "node_express_server",
+      "vercel_function",
+      "netlify_function",
+      "cloudflare_worker",
+      "self_hosted_server"
+    ]
+  },
+  "not_supported_directly_by_github": [
+    "anonymous_issue_creation",
+    "anonymous_repository_dispatch",
+    "unauthenticated_workflow_trigger"
+  ],
   "expected_gateway_behavior": [
     "validate_payload_schema",
     "rate_limit",
     "sanitize_markdown",
     "reject_secrets",
     "create_github_issue_or_intake_record",
+    "generate_github_app_installation_token_server_side",
+    "never_expose_github_app_private_key",
+    "never_expose_installation_token_to_agent",
     "label_as_agent-gateway-intake",
     "do_not_mark_as_archived_echo",
     "do_not_mark_as_attestation"

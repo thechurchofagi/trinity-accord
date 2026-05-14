@@ -50,6 +50,18 @@ Evidence Input → Claim Gate → Report Builder → Validator
 
 Do not hand-write final verification claims.
 
+## Production backend
+
+The recommended production backend is a GitHub App backend.
+
+Agents do not receive GitHub credentials.
+
+The backend validates your payload and, if accepted, creates an intake GitHub Issue using a short-lived GitHub App installation token.
+
+The runtime may be Cloudflare Worker, Vercel, Netlify, Node/Express, or a self-hosted service. The production trust model is GitHub App, not personal PAT.
+
+If the endpoint is still `TO_BE_CONFIGURED_BY_MAINTAINER`, the gateway has not been opened for live submissions yet.
+
 ## Endpoint
 
 Read:
