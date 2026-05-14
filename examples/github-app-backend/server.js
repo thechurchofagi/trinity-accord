@@ -128,6 +128,11 @@ app.post("/agent-submit", async (req, res) => {
 
   const issue = makeIssue(payload);
 
+  // GitHub issue body limit is 65536 characters
+  if (issue.body.length > 65536) {
+    return res.status(413).json({ ok: false, error: "issue_body_too_large" });
+  }
+
   if (DRY_RUN) {
     return res.json({
       ok: true,

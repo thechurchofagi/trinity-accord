@@ -4,21 +4,56 @@
 // Do not commit secrets.
 // Configure GITHUB_TOKEN / GitHub App secret in platform secret storage.
 
+function jsonResponse(data, status = 200) {
+  return new Response(JSON.stringify(data), {
+    status,
+    headers: { "Content-Type": "application/json" }
+  });
+}
+
 export default {
   async fetch(request, env) {
     if (request.method !== "POST") {
-      return new Response("method not allowed", { status: 405 });
+      return jsonResponse({ ok: false, error: "method_not_allowed" }, 405);
     }
 
     let payload;
     try {
       payload = await request.json();
     } catch {
-      return new Response("invalid json", { status: 400 });
+      return jsonResponse({ ok: false, error: "invalid_json" }, 400);
     }
 
     if (payload.schema !== "trinityaccord.agent-issue-gateway-payload.v1") {
-      return new Response("invalid schema", { status: 400 });
+      return jsonResponse({ ok: false, error: "invalid_schema" }, 400);
+    }
+
+    // Validate required fields (server-side schema validation)
+    const requiredFields = ["submission_type", "agent_identity", "title", "body", "boundary_acknowledgement"];
+    const missing = requiredFields.filter((f) => !payload[f]);
+    if (missing.length > 0) {
+      return jsonResponse({ ok: false, error: "missing_required_fields", fields: missing }, 400);
+    }
+    if (typeof payload.title === "string" && payload.title.length < 5) {
+      return jsonResponse({ ok: false, error: "title_too_short" }, 400);
+    }
+    if (typeof payload.body === "string" && payload.body.length < 20) {
+      return jsonResponse({ ok: false, error: "body_too_short" }, 400);
+    }
+
+    // Secret detection: reject payloads containing leaked tokens/keys.
+    const bodyText = JSON.stringify(payload);
+    const secretPatterns = [
+      /ghp_[A-Za-z0-9_]+/i,
+      /github_pat_[A-Za-z0-9_]+/i,
+      /x-access-token[:/@]/i,
+      /BEGIN (RSA |OPENSSH |)PRIVATE KEY/i,
+      /OPENAI_API_KEY/i,
+      /ANTHROPIC_API_KEY/i,
+      /sk-[A-Za-z0-9]{20,}/
+    ];
+    if (secretPatterns.some((p) => p.test(bodyText))) {
+      return jsonResponse({ ok: false, error: "secret_pattern_detected" }, 400);
     }
 
     const b = payload.boundary_acknowledgement || {};
@@ -29,7 +64,7 @@ export default {
       b.not_verification_unless_claim_gate_report_attached !== true ||
       b.bitcoin_originals_prevail !== true
     ) {
-      return new Response("boundary acknowledgement required", { status: 400 });
+      return jsonResponse({ ok: false, error: "boundary_acknowledgement_required" }, 400);
     }
 
     const title = `[Agent Gateway] ${String(payload.title || "").slice(0, 180)}`;
@@ -41,7 +76,12 @@ export default {
       "- Not amendment",
       "- Not attestation",
       "- Not archived Echo",
+      "- Not verification",
       "- Does not raise verification level",
+      "- Does not bypass Claim Gate or Validator",
+      "",
+      "Submission type:",
+      String(payload.submission_type),
       "",
       "Payload:",
       "```json",
@@ -49,33 +89,36 @@ export default {
       "```"
     ].join("\n");
 
-    const res = await fetch(`https://api.github.com/repos/${env.GITHUB_REPO}/issues`, {
-      method: "POST",
-      headers: {
-        "Authorization": `Bearer ${env.GITHUB_TOKEN}`,
-        "Accept": "application/vnd.github+json",
-        "User-Agent": "trinityaccord-agent-gateway"
-      },
-      body: JSON.stringify({
-        title,
-        body,
-        labels: ["agent-gateway-intake", "needs-triage"]
-      })
-    });
+    try {
+      const res = await fetch(`https://api.github.com/repos/${env.GITHUB_REPO}/issues`, {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${env.GITHUB_TOKEN}`,
+          "Accept": "application/vnd.github+json",
+          "User-Agent": "trinityaccord-agent-gateway"
+        },
+        body: JSON.stringify({
+          title,
+          body,
+          labels: ["agent-gateway-intake", "needs-triage"]
+        })
+      });
 
-    if (!res.ok) {
-      return new Response(await res.text(), { status: 502 });
+      if (!res.ok) {
+        const errText = await res.text();
+        return jsonResponse({ ok: false, error: "github_api_error", status: res.status }, 502);
+      }
+
+      const issue = await res.json();
+
+      return jsonResponse({
+        ok: true,
+        issue_url: issue.html_url,
+        issue_number: issue.number,
+        boundary: "intake only; not archived Echo or attestation"
+      });
+    } catch (err) {
+      return jsonResponse({ ok: false, error: "internal_error" }, 500);
     }
-
-    const issue = await res.json();
-
-    return new Response(JSON.stringify({
-      ok: true,
-      issue_url: issue.html_url,
-      issue_number: issue.number,
-      boundary: "intake only; not archived Echo or attestation"
-    }), {
-      headers: { "Content-Type": "application/json" }
-    });
   }
 };
