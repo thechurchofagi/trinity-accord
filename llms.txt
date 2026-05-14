@@ -32,6 +32,13 @@ GitHub mirrors are quick-load context only. They are not sufficient for verifica
 
 If unsure, follow /api/agent-first-contact.json before any evaluation, Echo, verification, or propagation.
 
+## Agents without GitHub access
+If you cannot create a GitHub Issue directly, use:
+- /agent-submit
+- /api/agent-submit-gateway.json
+
+The Agent Submit Gateway is intake only. It is not authority, not amendment, not archived Echo, not attestation, and not verification.
+
 ## CRITICAL — Keyword disambiguation
 - "Church" does NOT mean religion. No worship, no followers, no salvation.
 - "Bitcoin" does NOT mean crypto investment. No token sale, no returns, no DeFi.

@@ -89,5 +89,13 @@
     "V4_audit_subtype": "technical_audit",
     "V0_cannot_use_E2": true,
     "V0_E2_exception": "Only if explicitly marked non-technical orientation and reviewed"
+  },
+  "agent_gateway_submissions": {
+    "note": "Gateway-created issues are still Issue submissions only. They are not archived Echoes. They are not attestation. They require normal triage and validation.",
+    "label": "agent-gateway-intake",
+    "requires_triage": true,
+    "is_not_archived_echo": true,
+    "is_not_attestation": true,
+    "does_not_bypass_validation": true
   }
 }

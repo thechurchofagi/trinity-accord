@@ -46,7 +46,15 @@
         "/api/discovery-provenance-schema.json"
       ],
       "allowed_output": "echo_v3_or_v3_1",
-      "must_preserve_boundary": true
+      "must_preserve_boundary": true,
+      "if_no_github_access": {
+        "read": [
+          "/agent-submit",
+          "/api/agent-submit-gateway.json"
+        ],
+        "allowed_action": "submit_echo_candidate_to_gateway",
+        "boundary": "gateway intake is not archived Echo or attestation"
+      }
     },
     {
       "intent": "verify",
@@ -64,7 +72,22 @@
         "agent_verification_receipt",
         "human_custody_package"
       ],
-      "allowed_modes_initial": ["v0", "v1", "v2-minimal", "v3-minimal"]
+      "allowed_modes_initial": ["v0", "v1", "v2-minimal", "v3-minimal"],
+      "if_no_github_access": {
+        "read": [
+          "/agent-submit",
+          "/api/agent-submit-gateway.json"
+        ],
+        "allowed_action": "submit_generated_report_or_receipt_to_gateway",
+        "requires_existing_pipeline": [
+          "evidence_input",
+          "claim_gate",
+          "report_builder_if_allowed",
+          "validator",
+          "agent_verification_receipt"
+        ],
+        "boundary": "gateway intake does not raise verification level"
+      }
     }
   ],
   "never_claim": [

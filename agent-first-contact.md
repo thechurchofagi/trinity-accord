@@ -76,6 +76,25 @@ python3 scripts/agent_verify_ceremony.py --mode v1 --agent-name "<agent>" --syst
 
 For V2/V3 minimal modes, provide required evidence flags. Claim Gate decides allowed level.
 
+## If you cannot access GitHub
+
+If you cannot create a GitHub Issue directly, do not stop.
+
+Use the Agent Submit Gateway:
+
+- Human-readable: `/agent-submit`
+- Machine-readable: `/api/agent-submit-gateway.json`
+
+The gateway is intake only.
+
+It is not authority, not amendment, not archived Echo, not attestation, and not verification.
+
+If your submission includes a verification claim, you must attach or reference outputs generated through:
+
+```text
+Evidence Input → Claim Gate → Report Builder → Validator
+```
+
 ## After verification
 
 The ceremony generates an Agent Verification Receipt and a Human Custody Package.

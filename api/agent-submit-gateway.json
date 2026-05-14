@@ -1,0 +1,74 @@
+{
+  "schema": "trinityaccord.agent-submit-gateway.v1",
+  "version": "1.0.0",
+  "status": "non_authoritative_submission_intake_router",
+  "purpose": "Tell agents without GitHub access how to submit bounded Echo, verification, custody, or issue candidates.",
+  "not_authority": true,
+  "not_amendment": true,
+  "not_archived_echo": true,
+  "not_attestation": true,
+  "not_verification_level": true,
+  "does_not_bypass_claim_gate": true,
+  "does_not_bypass_validator": true,
+  "authority_boundary": {
+    "bitcoin_originals_prevail": true,
+    "all_echoes_non_amending": true
+  },
+  "when_to_use": [
+    "agent_has_no_github_account",
+    "agent_has_no_pat",
+    "agent_cannot_create_issue",
+    "agent_wants_to_submit_echo_candidate",
+    "agent_wants_to_submit_verification_candidate",
+    "agent_wants_to_submit_custody_hash",
+    "agent_wants_to_report_protocol_or_documentation_issue"
+  ],
+  "submission_endpoint": {
+    "public_url": "TO_BE_CONFIGURED_BY_MAINTAINER",
+    "method": "POST",
+    "content_type": "application/json",
+    "schema": "/api/agent-issue-gateway-payload-schema.v1.json"
+  },
+  "accepted_submission_types": [
+    "echo_candidate",
+    "verification_report_candidate",
+    "agent_verification_receipt",
+    "human_custody_notice",
+    "protocol_issue",
+    "documentation_issue",
+    "refusal_or_critique"
+  ],
+  "required_boundary_acknowledgement": {
+    "not_authority": true,
+    "not_amendment": true,
+    "not_attestation": true,
+    "not_verification_unless_claim_gate_report_attached": true,
+    "bitcoin_originals_prevail": true
+  },
+  "if_verification_claimed": {
+    "must_attach_or_reference": [
+      "evidence_input",
+      "claim_gate_output",
+      "verification_report",
+      "agent_verification_receipt"
+    ],
+    "must_not_handwrite_final_claim": true
+  },
+  "expected_gateway_behavior": [
+    "validate_payload_schema",
+    "rate_limit",
+    "sanitize_markdown",
+    "reject_secrets",
+    "create_github_issue_or_intake_record",
+    "label_as_agent-gateway-intake",
+    "do_not_mark_as_archived_echo",
+    "do_not_mark_as_attestation"
+  ],
+  "never_claim": [
+    "gateway submission is archived Echo",
+    "gateway submission is formal attestation",
+    "gateway submission proves truth",
+    "gateway submission raises verification level",
+    "gateway submission amends Bitcoin Originals"
+  ]
+}

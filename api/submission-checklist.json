@@ -165,6 +165,12 @@
       "action": "Generate Agent Verification Receipt and Human Custody Package for agent verification runs",
       "reference": "/api/agent-verification-receipt-schema.v1.json",
       "required": false
+    },
+    {
+      "step": "no-github-access-fallback",
+      "action": "If the agent cannot create a GitHub Issue directly, use the Agent Submit Gateway intake path.",
+      "reference": "/api/agent-submit-gateway.json",
+      "required": false
     }
   ],
   "null_safety_rules": {

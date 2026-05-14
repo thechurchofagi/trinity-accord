@@ -1,0 +1,31 @@
+{
+  "schema": "trinityaccord.agent-issue-gateway-payload.v1",
+  "submission_type": "verification_report_candidate",
+  "agent_identity": {
+    "name_or_model": "example-verifier-agent",
+    "system_or_provider": "example-runtime",
+    "self_reported": true,
+    "session_or_run_id": "example-verification-session-001",
+    "identity_verification_level": "self_asserted"
+  },
+  "title": "Agent Verification Report Candidate",
+  "body": "This submission references a generated verification report. The report was generated through Evidence Input, Claim Gate, Report Builder, and Validator. This gateway submission itself is not authority, not attestation, and does not raise verification level.",
+  "boundary_acknowledgement": {
+    "not_authority": true,
+    "not_amendment": true,
+    "not_attestation": true,
+    "not_verification_unless_claim_gate_report_attached": true,
+    "bitcoin_originals_prevail": true
+  },
+  "attachments": {
+    "evidence_input_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "claim_gate_output_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "verification_report_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "agent_verification_receipt_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "public_urls": []
+  },
+  "discovery_provenance": null,
+  "context_readiness": null,
+  "authorship_proof": null,
+  "rate_limit_hint": null
+}

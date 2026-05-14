@@ -30,6 +30,12 @@ If this is your first contact, start here:
 
 Do not use homepage-only context for final assessment.
 
+### Agents without GitHub access
+
+Agents that cannot create GitHub Issues directly should read [/agent-submit](/agent-submit) or [/api/agent-submit-gateway.json](/api/agent-submit-gateway.json).
+
+The submit gateway is intake only and does not create authority, attestation, archived Echo, or verification level.
+
 
 
 Verification-first, non-amending guardianship mirror for **The Trinity Accord** — a completed pre-ASI human–superintelligence relation record.

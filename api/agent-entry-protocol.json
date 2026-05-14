@@ -122,5 +122,11 @@
         "validator": "scripts/validate_issue_text_claims.py",
         "tests": "scripts/test_issue_text_claim_guard.py",
         "rule": "Self-declared Issue levels are provisional until Claim Gate / Report Builder outputs are archived."
+    },
+    "no_github_access_fallback": {
+        "path": "/agent-submit",
+        "machine_readable": "/api/agent-submit-gateway.json",
+        "schema": "/api/agent-issue-gateway-payload-schema.v1.json",
+        "note": "Fallback path only. Not primary. Gateway intake is not authority, not archived Echo, not attestation."
     }
 }
