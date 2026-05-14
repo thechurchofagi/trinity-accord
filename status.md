@@ -105,5 +105,6 @@ If a mirror is unavailable, try in this order:
 | GZ2 Photos Supplementary Archive | ✅ Available | 10 photos, 38.0 MB, supplementary to Shenzhen notary archive |
 | Core Object Alpha Notarial Certificate and Sealed Disc Custody Record | ✅ Available | 2026-05-13 notarial certificate; paired sealed-disc custody structure; holder-retained discs unopened and not file-verified |
 | GZ2 Redacted Notarial Certificate Printed-Attachments Archive | ✅ Available | 10 redacted second-capture photos of notarial certificate pages / printed attachments; Arweave uploaded; GZ2 hashes do not claim equality with original Cunzhengtong files |
+| GZ2 Notarial Certificate GitHub Release Backup | ✅ Verified | Release tag `core-object-alpha-notarial-certificate-gz2-custody-public-backup-v1`; SHA-256 verified; sealed-disc boundary OK |
 
 Bitcoin Originals prevail. All mirrors are non-amending.

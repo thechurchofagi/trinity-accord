@@ -160,8 +160,12 @@
           "release_tag": "core-object-alpha-notarial-certificate-gz2-custody-public-backup-v1",
           "verification_guide": "/downloads/gz2-notarial-certificate-github-release-backup-2026-05-14/",
           "verification_script": "scripts/verify_gz2_notarial_certificate_release_backup.py",
-          "status": "available_release_backup",
-          "release_url": "https://github.com/thechurchofagi/trinity-accord/releases/tag/core-object-alpha-notarial-certificate-gz2-custody-public-backup-v1"
+          "status": "verified_release_backup",
+          "release_url": "https://github.com/thechurchofagi/trinity-accord/releases/tag/core-object-alpha-notarial-certificate-gz2-custody-public-backup-v1",
+          "merge_commit": "379829fed9f6b089cdf54fa1cfa27cbc6a516975",
+          "status_update_commit": "a8c549a",
+          "verification_passed": true,
+          "verification_date": "2026-05-15"
         }
       }
     ]
