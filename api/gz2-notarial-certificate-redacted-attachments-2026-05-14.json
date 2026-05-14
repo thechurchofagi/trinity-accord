@@ -1,0 +1,107 @@
+{
+  "schema": "trinityaccord.public-evidence-archive.v1",
+  "archive_id": "gz2-notarial-certificate-redacted-attachments-2026-05-14",
+  "title": "GZ2 — Redacted Second-Capture Photos of Notarial Certificate and Printed Attachments",
+  "date": "2026-05-14",
+  "component": "PHYSICAL_ANCHOR",
+  "status": "available_arweave_uploaded",
+  "role": "non_amending_public_visual_mirror",
+  "authority_boundary": {
+    "canonical_authority": "three_bitcoin_inscriptions_only",
+    "bitcoin_originals_prevail": true,
+    "archive_role": "public redacted second-capture mirror of notarial-certificate materials",
+    "does_not": [
+      "amend_bitcoin_originals",
+      "replace_original_cunzhengtong_electronic_files",
+      "prove_file_hash_equality_with_original_photos_or_videos",
+      "prove_sealed_disc_contents",
+      "prove_disc_to_disc_content_equality",
+      "prove_hash_equality_between_disc_contents_and_cunzhengtong_or_arweave_records",
+      "disclose_confidential_flaw_challenge_data"
+    ],
+    "statement": "Bitcoin Originals prevail. GZ2 is a non-amending public visual mirror of selected notarial-certificate pages and printed attachment images."
+  },
+  "source_material": {
+    "type": "redacted_second_capture_photos_of_paper_notarial_certificate_and_printed_attachment_pages",
+    "original_notarial_certificate_number": "(2026)深证字第36024号",
+    "issuing_office": "广东省深圳市深圳公证处",
+    "notarial_matter": "保全证据",
+    "certificate_date": "2026-05-13",
+    "includes": [
+      "notarial certificate text pages",
+      "selected printed color object images",
+      "selected printed flaw images",
+      "visible continuous notary-office seal marks",
+      "one photographed sealed-disc exterior if identified"
+    ],
+    "continuous_notary_seal_visible": true
+  },
+  "relationship_to_original_electronic_evidence": {
+    "related_original_session_archive_id": "core-object-alpha-shenzhen-notary-2026-05-06",
+    "related_original_session_date": "2026-05-06",
+    "visual_correspondence_expected": true,
+    "file_hash_equality_expected": false,
+    "reason_hashes_differ": [
+      "second mobile-phone capture",
+      "printed-paper intermediate",
+      "different angle",
+      "different lighting",
+      "camera processing",
+      "cropping and perspective differences"
+    ]
+  },
+  "arweave": {
+    "wallet_address": "r1EdzCQ9E7CaAOEywI5netR6EcSopNOa08oi2Coz68s",
+    "photo_count": 10,
+    "photo_txids": [
+      "JMNk8Cyr5D3LKSMtFwfvru8KS3T8lntU1-966yHDMkU",
+      "pkZNQ2HNgwezaBVSJexhzFo8uKN3sACk27Szh9VL9i0",
+      "TpSI_5ih9RE6_4u0eIDk8tSXgwA0aUmA14bC7pcLvBU",
+      "EBlUZUcRUIO9BSWlwmHq5myO1KRboDfRanK6JFITfVE",
+      "q9ZHU18X3yLt10NTDZCBNhR3Vv30LWq23GZQtN4V784",
+      "aLjb-P6kdovgaI317ixs2NKroc7rvohIHKNKQsSeeUk",
+      "spm32RmLDUKgiqDmu_lBBlAhQ7lBjei9xJxdHbmmj4E",
+      "B7_m-7wnOx2puYvZgwCnz3UIsYSRZD8wPEIuAV0LCIk",
+      "1amAcAg2C7ZPQc7nqOmg6vepj9SSSOiz9Prmx7H_nu8",
+      "lEcu1iwHepGwRAeIXf_AyE8WhXxTzFJ77tmjXYNRCDw"
+    ],
+    "manifest_json_txid": "q7PqnOEqiINGLiIBuSA6QxYrn4VfHoghfZ-dpGfq23o",
+    "ots_proof_txid": "EUOOb3uicpNF1bIOb6fulO4zMzyp3Lu-pcBmethEuMM",
+    "ots_info_txid": "ZOMNc-VFTDqw7n7fP5xf9K-8uFDEWsjTr5k_AE21eQM",
+    "manifest_sha256_txid": "Dwuj8UrJu6IZWJ-4fqW-DF9V-f7mKmqylfnzbFf0SSQ",
+    "evidence_hashes_txid": "0eetYZn00NOB1wnLf7HrwlCp8sRyUZzv-mkJJp3DmsA",
+    "photo_upload_results_txid": "hMiBedCreJIsyGtpT__75KUdv4fO3l_z7MNgdPvFC40",
+    "timestamp_anchor_upload_results_txid": "ldwBdkm5uTSIfma9kJ1oZg_IKQueT8u1L7NY9eyi9Nk",
+    "final_evidence_hashes_txid": "gKv6rd-UJhh5imfrU4Et1d9XAVGMBzqfw5OBe6t16SU"
+  },
+  "sealed_disc_photo": {
+    "reported_included": true,
+    "identified_txid": null,
+    "identification_status": "pending_visual_identification",
+    "note": "Do not fill identified_txid unless the sealed-disc photo is positively identified among the 10 GZ2 images."
+  },
+  "timestamping": {
+    "method": "OpenTimestamps",
+    "target": "manifest.json",
+    "proof_file": "manifest.json.ots",
+    "status": "upgraded_complete_by_holder_report",
+    "local_bitcoin_core_verification": "not_performed_by_holder_at_time_of_report"
+  },
+  "verification_boundary": {
+    "supports": [
+      "public visual inspection of redacted notarial-certificate pages",
+      "public visual inspection of printed attachment images",
+      "evidence that object/flaw images appear on notarized printed attachment pages",
+      "existence of continuous notary-office seal marks on photographed pages",
+      "Arweave availability of GZ2 second-capture photos",
+      "Bitcoin timestamping of the GZ2 manifest through OpenTimestamps"
+    ],
+    "does_not_support": [
+      "SHA-256 equality with original Cunzhengtong photos",
+      "SHA-256 equality with original Cunzhengtong videos",
+      "file-level verification of sealed-disc contents",
+      "disc-to-disc content equality",
+      "replacement of the original 2026-05-06 evidence archive"
+    ]
+  }
+}

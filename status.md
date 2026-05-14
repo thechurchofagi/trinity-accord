@@ -94,6 +94,7 @@ If a mirror is unavailable, try in this order:
 - Google sitemap: 2026-04-26
 - Core Object Alpha Shenzhen notary evidence archive (core-object-alpha-shenzhen-notary-2026-05-06): 2026-05-06; Arweave acceptance PASS; 157/157 checked TX confirmed; OTS Bitcoin block 948161.
 - GZ2 Photos supplementary archive (gz2-photos-2026-05-14): 2026-05-14; 10 files, 38.0 MB; all TX confirmed.
+- GZ2 redacted notarial-certificate printed-attachments archive: 2026-05-14; 10 second-capture photos; Arweave uploaded; GZ2 manifest timestamped with OpenTimestamps; sealed-disc contents not opened or file-verified.
 
 ## Physical-anchor evidence archive
 
@@ -102,5 +103,7 @@ If a mirror is unavailable, try in this order:
 | Core Object Alpha Shenzhen Notary Evidence Archive | ✅ PASS | Arweave manifest `_dAaH...BAZE`, 157/157 checked TX confirmed, OTS Bitcoin block 948161 |
 | Core Object Alpha Shenzhen Notary GitHub Release Backup | ✅ PASS | Release tag `core-object-alpha-shenzhen-notary-arweave-backup-v1`, payload verified against Arweave archive index |
 | GZ2 Photos Supplementary Archive | ✅ Available | 10 photos, 38.0 MB, supplementary to Shenzhen notary archive |
+| Core Object Alpha Notarial Certificate and Sealed Disc Custody Record | ✅ Available | 2026-05-13 notarial certificate; paired sealed-disc custody structure; holder-retained discs unopened and not file-verified |
+| GZ2 Redacted Notarial Certificate Printed-Attachments Archive | ✅ Available | 10 redacted second-capture photos of notarial certificate pages / printed attachments; Arweave uploaded; GZ2 hashes do not claim equality with original Cunzhengtong files |
 
 Bitcoin Originals prevail. All mirrors are non-amending.
