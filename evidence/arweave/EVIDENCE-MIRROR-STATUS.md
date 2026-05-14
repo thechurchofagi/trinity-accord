@@ -1,51 +1,67 @@
 ---
 layout: default
 title: "Evidence Mirror Status"
-description: "Status of evidence mirrors for The Trinity Accord."
 ---
 
-# Trinity Accord — Evidence Mirror Status
+# Evidence Mirror Status
 
-## Final Status Summary
+Last updated: 2026-05-14
 
-```
-NFT Release mirror: PASS
-Full Evidence Chain: PASS
-OTS finalization: PASS
+## Active Arweave Evidence Archives
 
-Flaw Covenant video Arweave mirror: Verified
-Flaw Covenant video GitHub Release mirror: PASS
-OTS proof bundle Arweave mirror: Verified
-OTS proof bundle GitHub Release mirror: PASS
+| Archive ID | Date | Files | Size | Status | Verification |
+|------------|------|-------|------|--------|--------------|
+| `core-object-alpha-shenzhen-notary-2026-05-06` | 2026-05-06 | 153 | 112.6 MB | ✅ PASS | 157/157 TX confirmed, OTS block 948161 |
+| `gz2-photos-2026-05-14` | 2026-05-14 | 10 | 38.0 MB | ✅ Available | All TX confirmed |
 
-Remaining limitation:
-OTS has not yet been verified through local Bitcoin Core / pruned-node RPC.
-```
+## Combined Timeline
 
-## Evidence Mirror Layers
+### 2026-05-06: Shenzhen Notary Evidence Archive
 
-### Flaw Covenant Videos
+**Purpose:** Primary evidence preservation under Shenzhen notary supervision
 
-- Arweave raw mirror: Verified
-- GitHub Release mirror: PASS
-- Release: flaw-covenant-video-mirror-v1
-- Assets: 5/5
+**Contents:**
+- Notarial certificate (cover, registration, body)
+- 10 notarial attachment photos
+- 2 electronic data preservation certificates
+- 4 microscope videos (.avi)
+- 76 metadata/index files
+- SHA-256 checksums
+- OTS proofs (Bitcoin block 948161)
 
-The video SHA-256 digests were prior Bitcoin / OTS anchored. The Arweave uploads are new raw availability mirrors of already-anchored files. The GitHub Release is a verified mirror of the Arweave payloads.
+**Key TXIDs:**
+- Manifest: `_dAaH_ltZGdMaRAYNjXydjf1YkvoASWxmHes4hsBAZE`
+- Certificate 1: `KpswQssQpWihQZJ-y4WPjasqo5XNcjypyczaEs4Ebxw`
+- Certificate 2: `FUU-qqYlBttt14g1pyGuBawhrQR-jV5jJ5hOMWaWzDk`
 
-### OTS Proof Bundle
+**Verification guide:** `/downloads/shenzhen-notary-arweave-2026-05-06/`
 
-- Arweave bundle mirror: Verified
-- GitHub Release mirror: PASS
-- Release: ots-proof-bundle-mirror-v1
-- Assets: 4/4
+---
 
-The OTS proof bundle is now mirrored on Arweave and GitHub Release. The Arweave payload was verified by SHA-256 and size. The GitHub Release assets were downloaded back and verified. The internal OTS bundle checksums passed.
+### 2026-05-14: GZ2 Photos Supplementary Archive
 
-This strengthens long-term availability of OTS proof artifacts, but does not by itself constitute local Bitcoin Core / pruned-node independent OTS verification.
+**Purpose:** Additional photographic evidence preservation
 
-The bundle preserves OTS proof artifacts and related verification records. Client-level OTS verification still requires the original timestamped files, including digest-manifest.json / digest-manifest.csv, from the repository or another verified mirror.
+**Contents:**
+- 10 JPEG photographs
+- Source: Desktop folder `gz2`
+
+**Verification guide:** `/evidence/arweave/gz2-photos-2026-05-14/`
+
+## Arweave Wallet
+
+All uploads signed by: `r1EdzCQ9E7CaAOEywI5netR6EcSopNOa08oi2Coz68s`
+
+## Storage Policy
+
+- Arweave: permanent, immutable primary storage
+- GitHub Release: availability mirror for large payloads
+- GitHub repository: manifest and verification metadata only
 
 ## Boundary
 
-All GitHub Releases listed here are verified availability mirrors. They are not canonical authority. They are not evidence amendments. They do not replace Bitcoin / OTS / digest-manifest evidence.
+All Arweave archives are non-amending guardianship evidence. Bitcoin Originals prevail in case of conflict.
+
+---
+
+*Last verified: 2026-05-14*

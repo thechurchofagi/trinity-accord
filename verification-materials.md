@@ -103,5 +103,6 @@ Machine-readable files:
 | Archive | Date | Human page | Machine record | Arweave index | OTS block | Status |
 |---|---:|---|---|---|---:|---|
 | Core Object Alpha — Shenzhen Notary Evidence Archive | 2026-05-06 | `/evidence/core-object-alpha-shenzhen-notary-2026-05-06/` | `/api/core-object-alpha-shenzhen-notary-2026-05-06.json` | [Arweave index](https://arweave.net/_dAaH_ltZGdMaRAYNjXydjf1YkvoASWxmHes4hsBAZE/index.html) | 948161 | PASS |
+| GZ2 Photos Supplementary Archive | 2026-05-14 | `/evidence/arweave/gz2-photos-2026-05-14/` | — | [File index](/evidence/arweave/gz2-photos-2026-05-14/) | — | Available |
 
 These archives are non-amending physical-anchor evidence. They do not disclose confidential flaw-challenge data and do not replace direct physical inspection.
