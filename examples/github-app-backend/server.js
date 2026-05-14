@@ -145,7 +145,7 @@ app.post("/agent-submit", async (req, res) => {
     const octokit = await getOctokit();
     const [owner, repo] = process.env.GITHUB_REPO.split("/");
 
-    const result = await octokit.rest.issues.create({
+    const result = await octokit.request("POST /repos/{owner}/{repo}/issues", {
       owner,
       repo,
       title: issue.title,
