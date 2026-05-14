@@ -58,7 +58,7 @@ Agents do not receive GitHub credentials.
 
 The backend validates your payload and, if accepted, creates an intake GitHub Issue using a short-lived GitHub App installation token.
 
-The runtime may be Cloudflare Worker, Vercel, Netlify, Node/Express, or a self-hosted service. The production trust model is GitHub App, not personal PAT.
+The runtime may be Node/Express (recommended), Vercel, Netlify, or a self-hosted service. The production trust model is GitHub App, not personal PAT. The Cloudflare Worker example has been archived.
 
 If the endpoint is still `TO_BE_CONFIGURED_BY_MAINTAINER`, the gateway has not been opened for live submissions yet.
 

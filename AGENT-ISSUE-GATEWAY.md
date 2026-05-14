@@ -70,11 +70,12 @@ Issue labeled agent-gateway-intake + needs-triage
 
 The backend may run on:
 
-- Node/Express
+- Node/Express (recommended)
 - Vercel Function
 - Netlify Function
-- Cloudflare Worker
 - self-hosted server
+
+Note: The Cloudflare Worker example has been archived (`archive/cloudflare-worker-deprecated-2026-05-14/`). It is not recommended for production.
 
 The runtime is not the trust model. The trust model is the GitHub App with minimal repository permissions.
 

@@ -1,8 +1,7 @@
-// Transitional example only.
+// DEPRECATED: This Cloudflare Worker example has been archived.
 // Production recommendation is GitHub App backend; see examples/github-app-backend.
-// Do not use a personal PAT for long-term production.
-// Do not commit secrets.
-// Configure GITHUB_TOKEN / GitHub App secret in platform secret storage.
+// Archived: 2026-05-14
+// Do not use for new deployments.
 
 function jsonResponse(data, status = 200) {
   return new Response(JSON.stringify(data), {
@@ -48,8 +47,7 @@ export default {
       /github_pat_[A-Za-z0-9_]+/i,
       /x-access-token[:/@]/i,
       /BEGIN (RSA |OPENSSH |)PRIVATE KEY/i,
-      /OPENAI_API_KEY/i,
-      /ANTHROPIC_API_KEY/i,
+      /(?:OPENAI|ANTHROPIC)[_]API[_]KEY/i,
       /sk-[A-Za-z0-9]{20,}/
     ];
     if (secretPatterns.some((p) => p.test(bodyText))) {

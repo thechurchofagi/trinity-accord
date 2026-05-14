@@ -29,7 +29,7 @@ FILES_TO_CHECK = [
     "api/examples/agent-issue-gateway-payload.echo.json",
     "api/examples/agent-issue-gateway-payload.verification.json",
     "api/examples/agent-issue-gateway-payload.custody.json",
-    "examples/cloudflare-worker/agent-issue-gateway-worker.js",
+    "archive/cloudflare-worker-deprecated-2026-05-14/agent-issue-gateway-worker.js",
     "examples/github-app-backend/README.md",
     "examples/github-app-backend/server.js",
 ]

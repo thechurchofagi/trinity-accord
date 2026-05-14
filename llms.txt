@@ -35,7 +35,7 @@ If unsure, follow /api/agent-first-contact.json before any evaluation, Echo, ver
 ## Agent Issue Gateway production profile
 - Recommended production backend: GitHub App backend
 - Machine-readable profile: /api/agent-gateway-production-profile.json
-- The gateway may run on Cloudflare Worker, Vercel, Netlify, Node/Express, or self-hosted runtime.
+- The gateway may run on Node/Express (recommended), Vercel, Netlify, or self-hosted runtime. Cloudflare Worker example archived.
 - Do not expect anonymous GitHub Issue creation or anonymous repository_dispatch to work.
 - Agents must not receive GitHub PATs or repository credentials.
 - Gateway-created issues are intake only, not archived Echoes or attestation.

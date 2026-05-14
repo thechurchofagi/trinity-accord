@@ -63,7 +63,6 @@
       "node_express_server",
       "vercel_function",
       "netlify_function",
-      "cloudflare_worker",
       "self_hosted_server"
     ]
   },
