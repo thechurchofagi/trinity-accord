@@ -141,24 +141,33 @@ app.post("/agent-submit", async (req, res) => {
     });
   }
 
-  const octokit = await getOctokit();
-  const [owner, repo] = process.env.GITHUB_REPO.split("/");
+  try {
+    const octokit = await getOctokit();
+    const [owner, repo] = process.env.GITHUB_REPO.split("/");
 
-  const result = await octokit.rest.issues.create({
-    owner,
-    repo,
-    title: issue.title,
-    body: issue.body,
-    labels: ["agent-gateway-intake", "needs-triage"]
-  });
+    const result = await octokit.rest.issues.create({
+      owner,
+      repo,
+      title: issue.title,
+      body: issue.body,
+      labels: ["agent-gateway-intake", "needs-triage"]
+    });
 
-  return res.json({
-    ok: true,
-    dry_run: false,
-    issue_url: result.data.html_url,
-    issue_number: result.data.number,
-    boundary: "intake only; not archived Echo or attestation"
-  });
+    return res.json({
+      ok: true,
+      dry_run: false,
+      issue_url: result.data.html_url,
+      issue_number: result.data.number,
+      boundary: "intake only; not archived Echo or attestation"
+    });
+  } catch (err) {
+    console.error("agent-submit error:", err.message);
+    return res.status(500).json({
+      ok: false,
+      error: "internal_error",
+      message: err.message
+    });
+  }
 });
 
 if (process.argv.includes("--self-test")) {
