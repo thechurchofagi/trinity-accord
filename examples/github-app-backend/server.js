@@ -2,7 +2,7 @@ import express from "express";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import Ajv from "ajv";
+import Ajv from "ajv/dist/2020.js";
 import { App } from "@octokit/app";
 
 const __filename = fileURLToPath(import.meta.url);
