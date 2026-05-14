@@ -1,0 +1,62 @@
+{
+  "schema": "trinityaccord.notarial-certificate-sealed-disc-custody.v1",
+  "record_id": "core-object-alpha-notarial-certificate-sealed-disc-custody-2026-05-13",
+  "notarial_certificate": {
+    "certificate_number": "(2026)深证字第36024号",
+    "issuing_office": "广东省深圳市深圳公证处",
+    "certificate_date": "2026-05-13",
+    "notarial_matter": "保全证据"
+  },
+  "issuance_structure": {
+    "holder_statement": "The notarial certificate package was made in three corresponding sets. One set is retained by the Shenzhen Notary Office, and two sets were delivered to the holder. Each delivered set includes the notarial certificate and its paired sealed disc.",
+    "total_corresponding_sets_reported": 3,
+    "retained_by_notary_office": 1,
+    "delivered_to_holder": 2,
+    "each_set_includes": [
+      "notarial certificate",
+      "paired sealed disc"
+    ]
+  },
+  "holder_retained_sealed_discs": {
+    "count": 2,
+    "sealed": true,
+    "opened": false,
+    "content_accessed": false,
+    "iso_image_created": false,
+    "file_level_hashes_computed": false,
+    "disc_to_disc_comparison_performed": false,
+    "content_hash_compared_to_cunzhengtong": false,
+    "content_hash_compared_to_arweave": false
+  },
+  "public_photo_record": {
+    "one_holder_retained_disc_photographed": true,
+    "included_in_gz2_public_archive": true,
+    "identified_gz2_photo_txid": null,
+    "identification_status": "pending_visual_identification",
+    "note": "The public GZ2 archive includes a photograph of one sealed disc as part of the redacted notarial-certificate photo supplement, but this record must not identify a TXID until visually confirmed."
+  },
+  "verification_boundary": {
+    "supports": [
+      "existence of holder-retained sealed disc material as photographed",
+      "custody relationship between the notarial certificate and paired sealed disc",
+      "holder-reported issuance structure: one set retained by notary office, two sets delivered to holder",
+      "future possibility of witnessed disc-content verification"
+    ],
+    "does_not_yet_support": [
+      "file-level verification of disc contents",
+      "disc-to-disc content equality",
+      "hash equality between disc contents and Cunzhengtong records",
+      "hash equality between disc contents and Arweave records"
+    ]
+  },
+  "future_verification_protocol_if_opened": [
+    "open under video recording or third-party witness",
+    "create ISO image of each disc",
+    "compute SHA-256 of each ISO",
+    "list all files",
+    "compute SHA-256 for each file",
+    "compare against Cunzhengtong certificate hashes and original preservation records",
+    "create OpenTimestamps proof for the disc-content manifest",
+    "upload the disc-content manifest and verification report to Arweave and GitHub Release"
+  ]
+}

@@ -173,3 +173,29 @@ The 2026-05-06 Core Object Alpha Shenzhen notary evidence archive is a direct Ar
 - Confirmed OK: `157`
 
 This is a non-amending physical-anchor evidence archive.
+
+## GZ2 Notarial Certificate Printed-Attachments Archive
+
+GZ2 is a redacted public second-capture archive of selected notarial certificate pages and printed attachment images.
+
+Verification rules:
+
+- Verify GZ2 file hashes only against the GZ2 manifest.
+- Do not compare GZ2 hashes against original Cunzhengtong photo/video hashes as equality is not expected.
+- Treat GZ2 as a public visual mirror of printed notarial materials.
+- Treat sealed discs as unopened custody materials unless a future witnessed disc-content verification record is published.
+
+Machine record:
+
+```text
+/api/gz2-notarial-certificate-redacted-attachments-2026-05-14.json
+```
+
+## Sealed-Disc Custody Record
+
+The sealed-disc custody record documents the holder-reported issuance structure and current custody state of the paired notarial-certificate sealed discs.
+
+- Record: `evidence/notarial-certificate-2026-05-13/sealed-disc-custody-record.json`
+- Status: holder-retained discs unopened; no file-level verification performed.
+
+This record does not claim disc-content verification. It documents custody relationship and future verification protocol only.

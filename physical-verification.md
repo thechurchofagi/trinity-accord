@@ -84,3 +84,17 @@ A public evidence archive exists for a Shenzhen notary evidence preservation ses
 This archive includes exterior photographs, microscope flaw photographs, flaw videos under different lighting, electronic data preservation certificates, SHA-256 records, OTS proofs, and Arweave upload/acceptance records.
 
 Boundary: this archive is supporting evidence only. It does not replace onsite inspection, confidential flaw challenge, or multi-party forensic attestation.
+
+## Public notarial-certificate supplement: GZ2, 2026-05-14
+
+A public redacted second-capture photo archive exists for selected pages of the 2026-05-13 notarial certificate and its printed attachment pages.
+
+- Human page: `/evidence/gz2-notarial-certificate-redacted-attachments-2026-05-14/`
+- Machine record: `/api/gz2-notarial-certificate-redacted-attachments-2026-05-14.json`
+- Related custody record: `evidence/notarial-certificate-2026-05-13/sealed-disc-custody-record.json`
+
+GZ2 consists of mobile-phone photographs of paper certificate pages and printed attachment images. The pages show continuous notary-office seal marks and include printed object/flaw images.
+
+GZ2 is visually related to the 2026-05-06 original evidence, but it is not a file-level duplicate of the original Cunzhengtong electronic files. Its hashes are expected to differ from the original electronic photos and videos.
+
+The paired sealed discs remain unopened according to the holder. No disc-content extraction, ISO imaging, file-level hashing, or disc-to-disc comparison has been performed.
