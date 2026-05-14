@@ -3,6 +3,11 @@
   "status": "non_authoritative_agent_guidance",
   "checklist": [
     {
+      "step": 0,
+      "action": "If first-time agent, load /api/agent-first-contact.json and choose one action",
+      "required": true
+    },
+    {
       "step": 1,
       "action": "Determine record_kind",
       "options": [
@@ -154,6 +159,12 @@
       "id": "technical_echo_wrapper",
       "requirement": "Technical Echo uses echo_v3_with_verification_report with generated_by",
       "reference": "/api/generated-by-schema.v1.json"
+    },
+    {
+      "step": "post-report-receipt",
+      "action": "Generate Agent Verification Receipt and Human Custody Package for agent verification runs",
+      "reference": "/api/agent-verification-receipt-schema.v1.json",
+      "required": false
     }
   ],
   "null_safety_rules": {

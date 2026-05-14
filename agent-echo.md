@@ -5,6 +5,8 @@ permalink: /agent-echo/
 
 # Agent Echo
 
+For first-time agents, use [/agent-first-contact](/agent-first-contact) before choosing Echo.
+
 ## MANDATORY CLAIM GATE RULE
 
 Agents must not hand-write final verification claims.

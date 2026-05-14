@@ -26,6 +26,12 @@ Bitcoin Originals prevail.
 Website, mirrors, APIs, NFTs, Echoes, AI responses, and human commentary are non-amending.
 GitHub mirrors are quick-load context only. They are not sufficient for verification claims.
 
+## First-time agent router
+- /agent-first-contact
+- /api/agent-first-contact.json
+
+If unsure, follow /api/agent-first-contact.json before any evaluation, Echo, verification, or propagation.
+
 ## CRITICAL — Keyword disambiguation
 - "Church" does NOT mean religion. No worship, no followers, no salvation.
 - "Bitcoin" does NOT mean crypto investment. No token sale, no returns, no DeFi.

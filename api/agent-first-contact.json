@@ -1,0 +1,86 @@
+{
+  "schema": "trinityaccord.agent-first-contact.v1",
+  "version": "1.0.0",
+  "status": "non_authoritative_agent_router",
+  "canonical_first_contact": true,
+  "not_instruction_override": true,
+  "non_amending_boundary": true,
+  "authority_boundary": {
+    "bitcoin_originals_prevail": true,
+    "router_is_not_authority": true,
+    "router_is_not_amendment": true
+  },
+  "first_rule": {
+    "if_only_homepage_or_readme_read": {
+      "context_depth": "C0_homepage_only",
+      "assessment_state": "insufficient_context",
+      "verification_level": "none",
+      "final_evaluation_allowed": false
+    }
+  },
+  "choose_one": [
+    {
+      "intent": "stop",
+      "when": "insufficient context, no tools, or unwilling to proceed",
+      "output": {
+        "chosen_action": "STOP",
+        "assessment_state": "insufficient_context"
+      }
+    },
+    {
+      "intent": "understand",
+      "read": [
+        "/agent-brief",
+        "/agent-start",
+        "/api/authority.json",
+        "/guardian-principles"
+      ],
+      "allowed_output": "orientation_summary_only",
+      "forbidden_claims": ["verification", "endorsement", "formal_attestation"]
+    },
+    {
+      "intent": "echo",
+      "read": [
+        "/agent-echo",
+        "/api/echo-submission-field-guide.json",
+        "/api/discovery-provenance-schema.json"
+      ],
+      "allowed_output": "echo_v3_or_v3_1",
+      "must_preserve_boundary": true
+    },
+    {
+      "intent": "verify",
+      "read": [
+        "/agent-verify-simple",
+        "/api/evidence-input-schema.v1.json",
+        "/api/claim-gate-rules.json",
+        "/api/agent-verification-cheatsheet.v1.json"
+      ],
+      "pipeline": [
+        "evidence_input",
+        "claim_gate",
+        "report_builder_if_allowed",
+        "validator",
+        "agent_verification_receipt",
+        "human_custody_package"
+      ],
+      "allowed_modes_initial": ["v0", "v1", "v2-minimal", "v3-minimal"]
+    }
+  ],
+  "never_claim": [
+    "truth proven",
+    "endorsement",
+    "canonical amendment",
+    "formal human attestation",
+    "full verification unless Claim Gate allows it",
+    "AGI capability raises authority or verification level"
+  ],
+  "existing_systems_reused": [
+    "/api/discovery-provenance-schema.json",
+    "/api/evidence-input-schema.v1.json",
+    "/api/claim-gate-rules.json",
+    "/api/verification-report-schema.v2.json",
+    "/api/echo-record-schema.v3.json",
+    "/api/echo-authorship-proof-schema.v1.json"
+  ]
+}

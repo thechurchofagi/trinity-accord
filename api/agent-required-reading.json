@@ -2,6 +2,12 @@
   "schema": "trinityaccord.agent-required-reading.v1",
   "purpose": "Canonical required reading profiles for AI agents. All entry-point files (llms.txt, agent-start.md, agent-entry-protocol.json) reference this file as the single source of truth for reading paths.",
   "profiles": {
+    "first_contact": [
+      "/agent-first-contact",
+      "/api/agent-first-contact.json",
+      "/agent-brief",
+      "/api/authority.json"
+    ],
     "orientation": [
       "/agent-brief",
       "/agent-start",

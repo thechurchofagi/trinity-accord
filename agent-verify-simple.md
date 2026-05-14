@@ -81,6 +81,12 @@ Forensic attributable report → V8
 
 ## 5. Minimal copy-paste examples
 
+Inline snippets are explanatory fragments, not complete Evidence Input files.
+For copy-paste complete examples, use:
+- [/api/evidence-input-examples/v1-boundary.json](/api/evidence-input-examples/v1-boundary.json)
+- [/api/evidence-input-examples/v2-minimal-bitcoin.json](/api/evidence-input-examples/v2-minimal-bitcoin.json)
+- [/api/evidence-input-examples/v3-minimal-hash.json](/api/evidence-input-examples/v3-minimal-hash.json)
+
 ### V1 — Authority Boundary
 
 ```json

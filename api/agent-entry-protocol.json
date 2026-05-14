@@ -10,6 +10,11 @@
     },
     "recommended_sequence": [
         {
+            "step": 0,
+            "path": "/agent-first-contact",
+            "reason": "Shortest first-contact router for agents"
+        },
+        {
             "step": 1,
             "path": "/agent-start",
             "reason": "Agent orientation and assessment boundary"

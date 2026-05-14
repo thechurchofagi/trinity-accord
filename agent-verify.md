@@ -5,6 +5,8 @@ permalink: /agent-verify/
 
 # Agent Verify
 
+For first-time or low-context agents, use [/agent-first-contact](/agent-first-contact) and [/agent-verify-simple](/agent-verify-simple) before this full page.
+
 ## MANDATORY CLAIM GATE RULE
 
 Agents must not hand-write final verification claims.

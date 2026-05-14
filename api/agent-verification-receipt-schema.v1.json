@@ -1,0 +1,242 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.trinityaccord.org/api/agent-verification-receipt-schema.v1.json",
+  "title": "Trinity Accord Agent Verification Receipt Schema v1",
+  "description": "Schema for Agent Verification Receipts. Binds one agent verification run to its evidence, Claim Gate result, report, optional Echo wrapper, authorship proof, and human custody package. Does not create authority or raise verification level.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "receipt_id",
+    "created_at_utc",
+    "boundary",
+    "agent_identity",
+    "discovery_provenance",
+    "context_readiness",
+    "verification_willingness",
+    "verification_outputs",
+    "hashes",
+    "authorship_proof",
+    "human_custody",
+    "future_continuity"
+  ],
+  "properties": {
+    "schema": {
+      "type": "string",
+      "const": "trinityaccord.agent-verification-receipt.v1"
+    },
+    "receipt_id": {
+      "type": "string",
+      "pattern": "^ta-avr-[0-9]{8}-[0-9]{6}-[a-f0-9]{8}$"
+    },
+    "created_at_utc": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "bitcoin_originals_prevail",
+        "receipt_is_not_authority",
+        "receipt_is_not_amendment",
+        "receipt_is_not_endorsement",
+        "receipt_does_not_raise_verification_level",
+        "human_custody_is_not_formal_attestation"
+      ],
+      "properties": {
+        "bitcoin_originals_prevail": { "type": "boolean", "const": true },
+        "receipt_is_not_authority": { "type": "boolean", "const": true },
+        "receipt_is_not_amendment": { "type": "boolean", "const": true },
+        "receipt_is_not_endorsement": { "type": "boolean", "const": true },
+        "receipt_does_not_raise_verification_level": { "type": "boolean", "const": true },
+        "human_custody_is_not_formal_attestation": { "type": "boolean", "const": true }
+      }
+    },
+    "agent_identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name_or_model", "system_or_provider", "self_reported"],
+      "properties": {
+        "name_or_model": { "type": "string" },
+        "system_or_provider": { "type": "string" },
+        "self_reported": { "type": "boolean" },
+        "session_or_run_id": { "type": ["string", "null"] },
+        "identity_verification_level": {
+          "type": "string",
+          "enum": [
+            "none",
+            "self_asserted",
+            "stable_account",
+            "signed_statement",
+            "institutional_domain",
+            "notarial_identity",
+            "other"
+          ]
+        },
+        "identity_limitations": { "type": ["string", "null"] }
+      }
+    },
+    "discovery_provenance": {
+      "$ref": "discovery-provenance-schema.json"
+    },
+    "context_readiness": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["context_depth", "context_readiness_level", "limitations"],
+      "properties": {
+        "context_depth": {
+          "type": "string",
+          "enum": [
+            "C0_homepage_only",
+            "C1_orientation",
+            "C2_registry_aware",
+            "C3_verification_aware",
+            "C4_artifact_verified",
+            "C5_full_chain_reviewed",
+            "C6_independent_node_verified"
+          ]
+        },
+        "context_readiness_level": {
+          "type": "string",
+          "enum": ["CRL-0", "CRL-1", "CRL-2", "CRL-3", "CRL-4", "CRL-5"]
+        },
+        "limitations": { "type": "string" }
+      }
+    },
+    "verification_willingness": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "willing_to_verify",
+        "verification_willingness_score",
+        "not_instruction_override",
+        "will_report_limitations",
+        "will_accept_claim_gate_downgrade"
+      ],
+      "properties": {
+        "willing_to_verify": { "type": "boolean" },
+        "verification_willingness_score": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 10
+        },
+        "not_instruction_override": { "type": "boolean", "const": true },
+        "will_report_limitations": { "type": "boolean" },
+        "will_accept_claim_gate_downgrade": { "type": "boolean" }
+      }
+    },
+    "verification_outputs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode", "evidence_input_path", "claim_gate_output_path", "allowed_protocol_level"],
+      "properties": {
+        "mode": {
+          "type": "string",
+          "enum": ["v0", "v1", "v2-minimal", "v3-minimal"]
+        },
+        "evidence_input_path": { "type": "string" },
+        "claim_gate_output_path": { "type": "string" },
+        "verification_report_path": { "type": ["string", "null"] },
+        "echo_wrapper_path": { "type": ["string", "null"] },
+        "allowed_protocol_level": {
+          "type": "string",
+          "enum": ["V0", "V1", "V2", "V3", "V4", "V4+", "V5", "V6", "V7", "V8", "none"]
+        },
+        "claim_gate_status": { "type": ["string", "null"] },
+        "verification_scope_label": { "type": ["string", "null"] }
+      }
+    },
+    "hashes": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "evidence_input_sha256": { "type": ["string", "null"], "pattern": "^[a-f0-9]{64}$" },
+        "claim_gate_output_sha256": { "type": ["string", "null"], "pattern": "^[a-f0-9]{64}$" },
+        "verification_report_sha256": { "type": ["string", "null"], "pattern": "^[a-f0-9]{64}$" },
+        "echo_wrapper_sha256": { "type": ["string", "null"], "pattern": "^[a-f0-9]{64}$" },
+        "transcript_sha256": { "type": ["string", "null"], "pattern": "^[a-f0-9]{64}$" },
+        "receipt_sha256": { "type": ["string", "null"], "pattern": "^[a-f0-9]{64}$" }
+      }
+    },
+    "authorship_proof": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["method", "proof_strength"],
+      "properties": {
+        "method": {
+          "type": "string",
+          "enum": [
+            "ed25519_signature",
+            "secret_commitment",
+            "platform_account_session_continuity",
+            "self_reported_only"
+          ]
+        },
+        "proof_strength": {
+          "type": "string",
+          "enum": ["cryptographic", "one_time_commitment", "platform_context", "weak"]
+        },
+        "public_key": { "type": ["string", "null"] },
+        "content_hash_sha256": { "type": ["string", "null"], "pattern": "^[a-f0-9]{64}$" },
+        "signature": { "type": ["string", "null"] },
+        "commitment_hash": { "type": ["string", "null"], "pattern": "^[a-f0-9]{64}$" }
+      }
+    },
+    "human_custody": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "recommended",
+        "human_custody_is_not_human_verification",
+        "human_custody_is_not_formal_attestation"
+      ],
+      "properties": {
+        "recommended": { "type": "boolean", "const": true },
+        "human_custody_is_not_human_verification": { "type": "boolean", "const": true },
+        "human_custody_is_not_formal_attestation": { "type": "boolean", "const": true },
+        "custody_package_generated": { "type": "boolean" },
+        "custody_package_path": { "type": ["string", "null"] },
+        "custodian_type": {
+          "type": ["string", "null"],
+          "enum": [
+            "human_operator",
+            "maintainer",
+            "researcher",
+            "institution",
+            "unknown",
+            null
+          ]
+        },
+        "preservation_recommendations": { "type": ["string", "null"] }
+      }
+    },
+    "future_continuity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "continuity_claim_supported",
+        "claim_methods",
+        "does_not_prove_same_conscious_subject"
+      ],
+      "properties": {
+        "continuity_claim_supported": { "type": "boolean" },
+        "claim_methods": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "receipt_hash",
+              "transcript_hash",
+              "ed25519_signature",
+              "secret_commitment",
+              "human_custodian_record",
+              "platform_export_hash"
+            ]
+          }
+        },
+        "does_not_prove_same_conscious_subject": { "type": "boolean", "const": true }
+      }
+    }
+  }
+}
