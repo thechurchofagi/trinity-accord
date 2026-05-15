@@ -1,11 +1,11 @@
 {
   "schema": "trinityaccord.release-large-data-manifest.v1",
-  "generated_at": "2026-05-05T02:16:21.409Z",
+  "generated_at": "2026-05-15T01:06:00Z",
   "release_tag": "signed-large-data-mirror-v1",
   "min_size_mb": 10,
   "boundary": "non-amending; Bitcoin Originals prevail",
   "note": "Release assets are mirrors. Identity is determined by signed-covered hashes, not by release authority.",
-  "assets_total": 1,
+  "assets_total": 11,
   "assets": [
     {
       "logical_path": "archive/evidence/public-covenant-archive.zip",
@@ -16,6 +16,116 @@
       "category": "flaw",
       "source_path_exists": true,
       "non_amending": true
+    },
+    {
+      "logical_path": "evidence/notarial-certificate-2026-05-13/公证书/file_1.jpg",
+      "asset_name": "file_1.jpg",
+      "release_tag": "notarial-certificate-images-v1",
+      "sha256": "b36c4d3019370c458280e0b0ee45f19933a124a61f935aa2e24e605d00bd5275",
+      "size_bytes": 4765628,
+      "category": "evidence",
+      "source_path_exists": false,
+      "non_amending": true,
+      "manifest_ref": "evidence/notarial-certificate-2026-05-13/evidence-images-manifest.json"
+    },
+    {
+      "logical_path": "evidence/notarial-certificate-2026-05-13/公证书/file_2.jpg",
+      "asset_name": "file_2.jpg",
+      "release_tag": "notarial-certificate-images-v1",
+      "sha256": "e7c6e3a8af679a328b709099d751a97bea0d2488a975fc2a914ba186529d1119",
+      "size_bytes": 4829733,
+      "category": "evidence",
+      "source_path_exists": false,
+      "non_amending": true,
+      "manifest_ref": "evidence/notarial-certificate-2026-05-13/evidence-images-manifest.json"
+    },
+    {
+      "logical_path": "evidence/notarial-certificate-2026-05-13/公证书/file_3.jpg",
+      "asset_name": "file_3.jpg",
+      "release_tag": "notarial-certificate-images-v1",
+      "sha256": "f55694d77245e38734f92601213047910fef151f53b0f43cff75ea1177e9844f",
+      "size_bytes": 3735571,
+      "category": "evidence",
+      "source_path_exists": false,
+      "non_amending": true,
+      "manifest_ref": "evidence/notarial-certificate-2026-05-13/evidence-images-manifest.json"
+    },
+    {
+      "logical_path": "evidence/notarial-certificate-2026-05-13/公证书/file_4.jpg",
+      "asset_name": "file_4.jpg",
+      "release_tag": "notarial-certificate-images-v1",
+      "sha256": "2098bb46e6ef5a10cbd0c95848b4bed7cc4b1cf12a019615c2d5d878bc89e01b",
+      "size_bytes": 3692517,
+      "category": "evidence",
+      "source_path_exists": false,
+      "non_amending": true,
+      "manifest_ref": "evidence/notarial-certificate-2026-05-13/evidence-images-manifest.json"
+    },
+    {
+      "logical_path": "evidence/notarial-certificate-2026-05-13/公证书/file_5.jpg",
+      "asset_name": "file_5.jpg",
+      "release_tag": "notarial-certificate-images-v1",
+      "sha256": "519c68b1fd8af3c247b4e2c780d3fcf7183706cc623f0eef5b1876cfa6351638",
+      "size_bytes": 4198744,
+      "category": "evidence",
+      "source_path_exists": false,
+      "non_amending": true,
+      "manifest_ref": "evidence/notarial-certificate-2026-05-13/evidence-images-manifest.json"
+    },
+    {
+      "logical_path": "evidence/notarial-certificate-2026-05-13/公证书/file_6.jpg",
+      "asset_name": "file_6.jpg",
+      "release_tag": "notarial-certificate-images-v1",
+      "sha256": "7c3a45d78442bb07efe9f542a600eeb425a7fb0061e979e4afb2c616bab33bf8",
+      "size_bytes": 4222856,
+      "category": "evidence",
+      "source_path_exists": false,
+      "non_amending": true,
+      "manifest_ref": "evidence/notarial-certificate-2026-05-13/evidence-images-manifest.json"
+    },
+    {
+      "logical_path": "evidence/notarial-certificate-2026-05-13/公证书/file_7.jpg",
+      "asset_name": "file_7.jpg",
+      "release_tag": "notarial-certificate-images-v1",
+      "sha256": "d0838164df09c5298d90b546fae938640cf7bcdcb934a092ebbcae0024754ae1",
+      "size_bytes": 3357493,
+      "category": "evidence",
+      "source_path_exists": false,
+      "non_amending": true,
+      "manifest_ref": "evidence/notarial-certificate-2026-05-13/evidence-images-manifest.json"
+    },
+    {
+      "logical_path": "evidence/notarial-certificate-2026-05-13/公证书/file_8.jpg",
+      "asset_name": "file_8.jpg",
+      "release_tag": "notarial-certificate-images-v1",
+      "sha256": "a7af5e60a8863c6548c373d60e2f73fbc2c63d8250d09dbdb53e391c96424e1a",
+      "size_bytes": 3789568,
+      "category": "evidence",
+      "source_path_exists": false,
+      "non_amending": true,
+      "manifest_ref": "evidence/notarial-certificate-2026-05-13/evidence-images-manifest.json"
+    },
+    {
+      "logical_path": "evidence/notarial-certificate-2026-05-13/公证书/file_9.jpg",
+      "asset_name": "file_9.jpg",
+      "release_tag": "notarial-certificate-images-v1",
+      "sha256": "fbf6218b993b5eef261a1865bf56c26d0e14f160f3b0e5613a91379fd61e321d",
+      "size_bytes": 3144734,
+      "category": "evidence",
+      "source_path_exists": false,
+      "non_amending": true,
+      "manifest_ref": "evidence/notarial-certificate-2026-05-13/evidence-images-manifest.json"
+    },
+    {
+      "logical_path": "evidence/notarial-certificate-2026-05-13/公证书/file_10.jpg",
+      "asset_name": "file_10.jpg",
+      "release_tag": "notarial-certificate-images-v1",
+      "sha256": "fb5edcf4d4737a4a79ee92727760c8a467990fc36a804b3c5ba872e363f95854",
+      "size_bytes": 4153243,
+      "category": "evidence",
+      "source_path_exists": false,
+      "non_amending": true,
+      "manifest_ref": "evidence/notarial-certificate-2026-05-13/evidence-images-manifest.json"
     }
   ]
 }

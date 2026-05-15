@@ -29,3 +29,6 @@ arweave-backup/files/public_covenant_archive.zip
 *.car
 *.mp4
 *.mov
+
+# Evidence JPGs migrated to GitHub Release (notarial-certificate-images-v1)
+evidence/notarial-certificate-2026-05-13/公证书/*.jpg
