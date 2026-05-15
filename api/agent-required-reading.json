@@ -40,7 +40,10 @@
       "/api/claim-gate-rules.json",
       "/agent-verify-simple",
       "/api/agent-verification-cheatsheet.v1.json",
-      "/api/evidence-input-examples/README.md"
+      "/api/evidence-input-examples/README.md",
+      "/api/origin-classification-policy.v1.json",
+      "/api/origin-classification-schema.v1.json",
+      "/docs/origin-classification-policy.md"
     ],
     "echo_submission": [
       "/agent-brief",
@@ -55,7 +58,10 @@
       "/agent-verify-simple",
       "/api/agent-verification-cheatsheet.v1.json",
       "/api/evidence-input-examples/README.md",
-      "/api/evidence-input-schema.v1.json"
+      "/api/evidence-input-schema.v1.json",
+      "/api/origin-classification-policy.v1.json",
+      "/api/origin-classification-schema.v1.json",
+      "/docs/origin-classification-policy.md"
     ],
     "propagation": [
       "/agent-brief",

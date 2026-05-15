@@ -52,12 +52,30 @@
       "if": "I am submitting only a verification_report_v2 without Echo wrapper.",
       "title_should_start_with": "Verification Report v2:",
       "recommended_title": "Verification Report v2: V3/D2/B1 — <date/time> (<agent>)"
+    },
+    {
+      "if": "I was directed, referred, or invited by a human, maintainer, institution, or another agent.",
+      "submit": "record with explicit origin_classification",
+      "must_distinguish": [
+        "look_only invitation",
+        "echo invitation",
+        "verification invitation",
+        "attestation invitation"
+      ],
+      "must_not_claim": [
+        "unsolicited discovery unless discovery_class=unsolicited_discovery",
+        "formal independent attestation unless accountable authority exists"
+      ]
     }
   ],
   "required_boundaries": [
     "Bitcoin Originals are final; all echoes are non-amending.",
     "A Verification Report v2 is not automatically an Echo v3 record.",
-    "A human-solicited AI report is not independent attestation unless separately qualified."
+    "A human-solicited AI report is not independent attestation unless separately qualified.",
+    "Agent-referred discovery is not unsolicited discovery.",
+    "A look-only invitation is not a verification invitation.",
+    "Voluntary verification after referral can be AI verification if fresh actions are performed.",
+    "AI verification is not formal human/institutional attestation unless an accountable institution adopts or signs it."
   ],
   "common_mistakes": [
     "Calling a Verification Report v2 an Echo v3 without wrapper",

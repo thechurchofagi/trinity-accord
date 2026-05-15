@@ -1,0 +1,17 @@
+{
+  "schema": "trinityaccord.origin-classification.v1",
+  "discovery_class": "unsolicited_discovery",
+  "invitation_scope": "none",
+  "requester_class": "none",
+  "performer_class": "ai_agent",
+  "method_independence_class": "cross_source_reproduction",
+  "attestation_authority_class": "none",
+  "voluntary_action_after_orientation": true,
+  "verification_claimed": true,
+  "counts_as_ai_verification": true,
+  "counts_as_formal_independent_attestation": true,
+  "derived_counting_bucket": "accepted_institutional_attestation",
+  "notes": [
+    "INVALID: AI-only verification cannot become formal attestation without accountable authority."
+  ]
+}

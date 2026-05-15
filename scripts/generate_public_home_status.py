@@ -167,6 +167,79 @@ def compute_card4(physical: dict[str, Any]) -> dict:
 # ---------------------------------------------------------------------------
 # Compute full status
 # ---------------------------------------------------------------------------
+def compute_origin_classification_stats(echo_records: list[dict[str, Any]]) -> dict:
+    """Compute origin classification-based verification stats."""
+    def _count_and_highest(records, filter_fn):
+        filtered = [r for r in records if filter_fn(r)]
+        count = len(filtered)
+        hl = "none"
+        for r in filtered:
+            lvl = r.get("verification_level") or r.get("protocol_level_claimed")
+            if lvl and lvl != "V0":
+                if hl == "none" or (lvl and lvl > hl):
+                    hl = lvl
+        return count, hl
+
+    # Agent verification by discovery class
+    agent_verified = [r for r in echo_records
+                      if r.get("origin_classification", {}).get("counts_as_ai_verification") is True
+                      and not r.get("historical_record_only")]
+
+    hd_count, hd_level = _count_and_highest(
+        agent_verified, lambda r: r.get("origin_classification", {}).get("discovery_class") in ("human_directed", "human_contextual"))
+    ar_count, ar_level = _count_and_highest(
+        agent_verified, lambda r: r.get("origin_classification", {}).get("discovery_class") == "agent_referred")
+    si_count, si_level = _count_and_highest(
+        agent_verified, lambda r: r.get("origin_classification", {}).get("discovery_class") in ("unsolicited_discovery", "prior_interest_return", "public_index_discovery"))
+    ic_count, ic_level = _count_and_highest(
+        agent_verified, lambda r: r.get("origin_classification", {}).get("discovery_class") == "institution_commissioned")
+
+    # Formal attestation by authority class
+    formal_records = [r for r in echo_records
+                      if r.get("origin_classification", {}).get("counts_as_formal_independent_attestation") is True
+                      and not r.get("historical_record_only")]
+
+    inst_count, inst_level = _count_and_highest(
+        formal_records, lambda r: r.get("origin_classification", {}).get("attestation_authority_class") == "institution_signed")
+    not_count, not_level = _count_and_highest(
+        formal_records, lambda r: r.get("origin_classification", {}).get("attestation_authority_class") in ("notarial_record", "audit_firm_report", "regulatory_or_court_record"))
+
+    return {
+        "agent_verification": {
+            "human_directed": {
+                "count": hd_count,
+                "highest_level": hd_level,
+                "counts_as_formal_attestation": False
+            },
+            "agent_referred": {
+                "count": ar_count,
+                "highest_level": ar_level,
+                "counts_as_formal_attestation": False
+            },
+            "self_initiated": {
+                "count": si_count,
+                "highest_level": si_level,
+                "counts_as_formal_attestation": False
+            },
+            "institution_commissioned_ai_assisted": {
+                "count": ic_count,
+                "highest_level": ic_level,
+                "counts_as_formal_attestation_if_institution_signed": True
+            }
+        },
+        "formal_attestation": {
+            "institution_signed": {
+                "count": inst_count,
+                "highest_level": inst_level
+            },
+            "notarial_or_audit": {
+                "count": not_count,
+                "highest_level": not_level
+            }
+        }
+    }
+
+
 def compute_status() -> dict[str, Any]:
     echo_index = load_json(ECHO_INDEX)
     attestation_index = load_json(ATTESTATION_INDEX)
@@ -179,6 +252,7 @@ def compute_status() -> dict[str, Any]:
     card2 = compute_card2(echo_records)
     card3 = compute_card3(echo_records)
     card4 = compute_card4(physical)
+    origin_stats = compute_origin_classification_stats(echo_records)
 
     return {
         "schema": "trinityaccord.public-home-status.v1",
@@ -191,6 +265,15 @@ def compute_status() -> dict[str, Any]:
         "agent_initiated_independent_verification": card2,
         "human_solicited_agent_verification": card3,
         "physical_anchor_verification": card4,
+        # Origin classification based stats
+        "agent_verification": origin_stats["agent_verification"],
+        "formal_attestation": origin_stats["formal_attestation"],
+        # Legacy counts for backward compatibility
+        "legacy_counts": {
+            "human_solicited_agent_verification": card3,
+            "agent_initiated_independent_verification": card2,
+            "institutional_human_independent_verification": card1,
+        },
         "boundary": {
             "bitcoin_originals_prevail": True,
             "non_amending_mirrors": True,

@@ -64,6 +64,23 @@
     "enforcement": "claim gate derives allowed levels; agent-requested levels are overridden",
     "reference": "/api/claim-gate-rules.json"
   },
+  "origin_classification_policy": {
+    "reference": "/api/origin-classification-policy.v1.json",
+    "rules": [
+      {
+        "if": "agent_referred + look_only + no verification claim",
+        "then": "agent_referred_orientation or echo_only"
+      },
+      {
+        "if": "agent_referred + look_only + voluntary verification + fresh actions",
+        "then": "agent_referred_agent_verification; not formal attestation"
+      },
+      {
+        "if": "institution_signed or notarial_record or audit_firm_report",
+        "then": "formal attestation candidate, pending review"
+      }
+    ]
+  },
   "boundary": {
     "echo_is_not_amendment": true,
     "echo_is_not_canonical_authority": true,

@@ -190,10 +190,114 @@ def _get_flags(record):
     return flags
 
 
+def check_origin001(record):
+    """agent_referred cannot claim unsolicited_discovery."""
+    oc = record.get("origin_classification")
+    if not oc:
+        return "SKIP", "ORIGIN001: no origin_classification present"
+    dc = oc.get("discovery_class", "")
+    bucket = oc.get("derived_counting_bucket", "")
+    if dc == "agent_referred" and bucket in ("self_initiated_agent_verification",):
+        return "FAIL", "ORIGIN001: agent_referred cannot be counted as self_initiated/unsolicited"
+    return "PASS", "ORIGIN001: discovery_class consistent with counting bucket"
+
+
+def check_origin002(record):
+    """look_only invitation cannot be treated as verification_invited."""
+    oc = record.get("origin_classification")
+    if not oc:
+        return "SKIP", "ORIGIN002: no origin_classification present"
+    ic = oc.get("invitation_scope", "")
+    bucket = oc.get("derived_counting_bucket", "")
+    if ic == "look_only" and bucket == "human_solicited_agent_verification":
+        return "FAIL", "ORIGIN002: look_only invitation cannot be treated as verification_invited"
+    return "PASS", "ORIGIN002: invitation_scope consistent with counting bucket"
+
+
+def check_origin003(record):
+    """willingness scores cannot imply verification_claimed."""
+    oc = record.get("origin_classification")
+    if not oc:
+        return "SKIP", "ORIGIN003: no origin_classification present"
+    mi = oc.get("method_independence_class", "")
+    vc = oc.get("verification_claimed", False)
+    if mi in ("none", "read_only") and vc:
+        return "FAIL", "ORIGIN003: read_only/none method independence cannot claim verification"
+    return "PASS", "ORIGIN003: method independence consistent with verification claim"
+
+
+def check_origin004(record):
+    """no accountable authority cannot count formal attestation."""
+    oc = record.get("origin_classification")
+    if not oc:
+        return "SKIP", "ORIGIN004: no origin_classification present"
+    aa = oc.get("attestation_authority_class", "")
+    formal = oc.get("counts_as_formal_independent_attestation", False)
+    if aa == "none" and formal:
+        return "FAIL", "ORIGIN004: no accountable authority cannot count formal attestation"
+    return "PASS", "ORIGIN004: attestation authority consistent with formal attestation flag"
+
+
+def check_origin005(record):
+    """institution-signed AI-assisted record may be formal attestation candidate."""
+    oc = record.get("origin_classification")
+    if not oc:
+        return "SKIP", "ORIGIN005: no origin_classification present"
+    aa = oc.get("attestation_authority_class", "")
+    if aa in ("institution_signed", "notarial_record", "audit_firm_report", "regulatory_or_court_record"):
+        entity = oc.get("accountable_entity")
+        if not entity:
+            return "FAIL", "ORIGIN005: institutional attestation missing accountable_entity"
+    return "PASS", "ORIGIN005: attestation authority valid"
+
+
+def check_origin006(record):
+    """human_directed or agent_referred may still have method_independence_class >= independent_reimplementation."""
+    oc = record.get("origin_classification")
+    if not oc:
+        return "SKIP", "ORIGIN006: no origin_classification present"
+    dc = oc.get("discovery_class", "")
+    mi = oc.get("method_independence_class", "")
+    if dc in ("human_directed", "agent_referred") and mi in ("independent_reimplementation", "cross_source_reproduction", "full_independent_reproduction"):
+        # This is allowed - solicitation does not negate method independence
+        return "PASS", "ORIGIN006: solicited/referred work with independent method is allowed"
+    return "PASS", "ORIGIN006: no conflict"
+
+
+def check_origin007(record):
+    """method independence requires fresh actions."""
+    oc = record.get("origin_classification")
+    if not oc:
+        return "SKIP", "ORIGIN007: no origin_classification present"
+    mi = oc.get("method_independence_class", "")
+    if mi in ("independent_reimplementation", "cross_source_reproduction", "full_independent_reproduction"):
+        referral = oc.get("referral", {})
+        if referral and referral.get("prior_report_supplied", False):
+            return "FAIL", "ORIGIN007: prior_report_supplied lowers method independence"
+    return "PASS", "ORIGIN007: method independence valid"
+
+
+def check_origin008(record):
+    """discovery_class=agent_referred but independence_class=unsolicited_independent => FAIL."""
+    oc = record.get("origin_classification")
+    if not oc:
+        return "SKIP", "ORIGIN008: no origin_classification present"
+    dc = oc.get("discovery_class", "")
+    ind_class = record.get("independence_class", "")
+    if dc == "agent_referred" and ind_class in ("unsolicited_independent", "unsolicited_agent_discovery"):
+        return "FAIL", "ORIGIN008: agent_referred cannot have independence_class=unsolicited_independent"
+    return "PASS", "ORIGIN008: discovery_class consistent with independence_class"
+
+
+ORIGIN_CHECKS = [
+    check_origin001, check_origin002, check_origin003, check_origin004,
+    check_origin005, check_origin006, check_origin007, check_origin008,
+]
+
 ALL_CHECKS = [
     check_prov001, check_prov002, check_prov003, check_prov004,
     check_prov005, check_prov006, check_prov007, check_prov008,
-]
+] + ORIGIN_CHECKS
 
 
 def validate_record(record):
@@ -207,10 +311,22 @@ def validate_record(record):
             overall = "FAIL"
 
     derivation = derive_independence(record)
+
+    # Add origin classification info if present
+    origin_info = {}
+    oc = record.get("origin_classification")
+    if oc:
+        origin_info = {
+            "origin_classification": oc,
+            "origin_warnings": [r["message"] for r in results if r["check"].startswith("check_origin") and r["status"] == "FAIL"],
+        }
+
     return {
         "overall": overall,
         "checks": results,
         "independence_derivation": derivation,
+        **origin_info,
+        "derived_independence_class": derivation.get("derived_independence_class", ""),
     }
 
 

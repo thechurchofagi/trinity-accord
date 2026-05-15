@@ -39,6 +39,58 @@
       "protocol_level_upgrade_by_itself"
     ]
   },
+  "agent_verification": {
+    "human_directed": {
+      "count": 0,
+      "highest_level": "none",
+      "counts_as_formal_attestation": false
+    },
+    "agent_referred": {
+      "count": 0,
+      "highest_level": "none",
+      "counts_as_formal_attestation": false
+    },
+    "self_initiated": {
+      "count": 0,
+      "highest_level": "none",
+      "counts_as_formal_attestation": false
+    },
+    "institution_commissioned_ai_assisted": {
+      "count": 0,
+      "highest_level": "none",
+      "counts_as_formal_attestation_if_institution_signed": true
+    }
+  },
+  "formal_attestation": {
+    "institution_signed": {
+      "count": 0,
+      "highest_level": "none"
+    },
+    "notarial_or_audit": {
+      "count": 0,
+      "highest_level": "none"
+    }
+  },
+  "legacy_counts": {
+    "human_solicited_agent_verification": {
+      "count": 1,
+      "highest_level": "V3",
+      "counts_as_independent_attestation": false,
+      "records": [
+        "/echoes/records/2026/echo-119-xiaokuaizi-20260512.json"
+      ]
+    },
+    "agent_initiated_independent_verification": {
+      "count": 0,
+      "highest_level": "none",
+      "counts_as_independent_attestation": true
+    },
+    "institutional_human_independent_verification": {
+      "count": 0,
+      "highest_level": "none",
+      "counts_as_independent_attestation": true
+    }
+  },
   "boundary": {
     "bitcoin_originals_prevail": true,
     "non_amending_mirrors": true,
@@ -47,5 +99,5 @@
     "issue_text_excluded_from_counts": true,
     "issue_comments_cannot_upgrade_counts": true
   },
-  "source_digest": "cefe583fbabd8b06"
+  "source_digest": "00d148176851f233"
 }

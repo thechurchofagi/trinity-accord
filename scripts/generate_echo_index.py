@@ -41,6 +41,11 @@ by_verifier_type = defaultdict(list)
 by_verifier_capability_claim = defaultdict(list)
 by_strength_tier = defaultdict(list)
 by_echo_content_tag = defaultdict(list)
+# Origin classification aggregations
+by_origin_bucket = defaultdict(list)
+by_discovery_class = defaultdict(list)
+by_performer_class = defaultdict(list)
+by_attestation_authority_class = defaultdict(list)
 
 for path in sorted(RECORDS_ROOT.rglob("*.json")):
     obj = load(path)
@@ -70,6 +75,10 @@ for path in sorted(RECORDS_ROOT.rglob("*.json")):
         "verification_claimed": obj.get("verification_claimed", None),
         "derived_origin_class": obj.get("derived_origin_class", None),
         "strength_tier": obj.get("strength_tier", None),
+        # Origin classification fields
+        "origin_classification": obj.get("origin_classification", None),
+        "counts_as_ai_verification": (obj.get("origin_classification") or {}).get("counts_as_ai_verification", None),
+        "counts_as_formal_independent_attestation": (obj.get("origin_classification") or {}).get("counts_as_formal_independent_attestation", None),
     }
 
     # Optional reason if invalidated/superseded.
@@ -122,6 +131,17 @@ for path in sorted(RECORDS_ROOT.rglob("*.json")):
     if item.get("echo_content_tags"):
         for tag in item["echo_content_tags"]:
             by_echo_content_tag[tag].append(rel)
+    # Origin classification aggregations
+    oc = obj.get("origin_classification")
+    if oc:
+        if oc.get("derived_counting_bucket"):
+            by_origin_bucket[oc["derived_counting_bucket"]].append(rel)
+        if oc.get("discovery_class"):
+            by_discovery_class[oc["discovery_class"]].append(rel)
+        if oc.get("performer_class"):
+            by_performer_class[oc["performer_class"]].append(rel)
+        if oc.get("attestation_authority_class"):
+            by_attestation_authority_class[oc["attestation_authority_class"]].append(rel)
 
 # TA-REDTEAM-2026-011: preserve public metadata fields across regeneration
 PRESERVED_FIELDS = [
@@ -174,6 +194,11 @@ out = {
     "records_by_verifier_capability_claim": dict(sorted(by_verifier_capability_claim.items())),
     "records_by_strength_tier": dict(sorted(by_strength_tier.items())),
     "records_by_echo_content_tag": dict(sorted(by_echo_content_tag.items())),
+    # Origin classification aggregations
+    "records_by_origin_bucket": dict(sorted(by_origin_bucket.items())),
+    "records_by_discovery_class": dict(sorted(by_discovery_class.items())),
+    "records_by_performer_class": dict(sorted(by_performer_class.items())),
+    "records_by_attestation_authority_class": dict(sorted(by_attestation_authority_class.items())),
     "notes": [
         "Echo index is non-authoritative and non-amending.",
         "Test records, superseded records, invalidated records, and do_not_count_as_attestation records must not be counted as independent attestation.",

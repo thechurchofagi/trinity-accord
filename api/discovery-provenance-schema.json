@@ -115,6 +115,70 @@
         "medium",
         "high"
       ]
+    },
+    "referral": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "default": null,
+      "properties": {
+        "referred_by_agent": {
+          "type": "boolean",
+          "default": false
+        },
+        "referring_agent": {
+          "type": ["string", "null"],
+          "default": null
+        },
+        "invitation_scope": {
+          "type": "string",
+          "enum": [
+            "none",
+            "look_only",
+            "orientation_only",
+            "echo_invited",
+            "verification_invited",
+            "propagation_invited",
+            "attestation_invited",
+            "unknown"
+          ],
+          "default": "unknown"
+        },
+        "expected_conclusion_supplied": {
+          "type": "boolean",
+          "default": false
+        },
+        "expected_hashes_supplied": {
+          "type": "boolean",
+          "default": false
+        },
+        "prior_report_supplied": {
+          "type": "boolean",
+          "default": false
+        },
+        "notes": {
+          "type": "string",
+          "default": ""
+        }
+      }
+    },
+    "x_origin_classification_notes": {
+      "type": "object",
+      "additionalProperties": false,
+      "default": {},
+      "properties": {
+        "agent_recommended_with_look_only": {
+          "type": "string",
+          "default": "Agent referral with look_only invitation is not unsolicited discovery, but it is also not verification invitation."
+        },
+        "voluntary_action_after_referral": {
+          "type": "string",
+          "default": "An agent may voluntarily echo or verify after referral. That can count as AI verification if fresh actions are performed, but not as strict unsolicited discovery."
+        },
+        "willingness_boundary": {
+          "type": "string",
+          "default": "Resonance and willingness scores do not prove verification, authority, or attestation."
+        }
+      }
     }
   }
 }

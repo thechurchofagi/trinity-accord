@@ -1803,6 +1803,74 @@ def validate_verification_scope_label(obj, path_label):
 
     return ok
 
+def validate_origin_classification(obj, path_label):
+    """Rule AO: origin classification consistency checks."""
+    ok = True
+    oc = obj.get("origin_classification")
+    if not oc:
+        # Legacy records without origin_classification pass with warning
+        return ok
+
+    discovery_class = oc.get("discovery_class", "")
+    invitation_scope = oc.get("invitation_scope", "")
+    requester_class = oc.get("requester_class", "")
+    attestation_authority = oc.get("attestation_authority_class", "")
+    bucket = oc.get("derived_counting_bucket", "")
+    formal = oc.get("counts_as_formal_independent_attestation", False)
+    independence_class = obj.get("independence_class", "")
+
+    # ORIGIN001: agent_referred cannot claim unsolicited_discovery
+    if discovery_class == "agent_referred" and bucket in ("self_initiated_agent_verification",):
+        ok &= check(
+            False,
+            f"{path_label} ORIGIN001: agent_referred counted as self_initiated",
+            "agent_referred cannot be counted as self_initiated/unsolicited"
+        )
+
+    # ORIGIN002: look_only cannot be treated as verification_invited
+    if invitation_scope == "look_only" and bucket == "human_solicited_agent_verification":
+        ok &= check(
+            False,
+            f"{path_label} ORIGIN002: look_only treated as verification_invited",
+            "look_only invitation cannot be treated as verification_invited"
+        )
+
+    # ORIGIN004: no accountable authority -> no formal attestation
+    if attestation_authority == "none" and formal:
+        ok &= check(
+            False,
+            f"{path_label} ORIGIN004: no authority claims formal attestation",
+            "no accountable authority cannot count formal attestation"
+        )
+
+    # ORIGIN005: institutional attestation requires accountable entity
+    if attestation_authority in ("institution_signed", "notarial_record", "audit_firm_report", "regulatory_or_court_record"):
+        entity = oc.get("accountable_entity")
+        if not entity:
+            ok &= check(
+                False,
+                f"{path_label} ORIGIN005: institutional attestation missing accountable_entity",
+                "institutional attestation requires accountable_entity"
+            )
+
+    # ORIGIN008: agent_referred cannot have independence_class=unsolicited_independent
+    if discovery_class == "agent_referred" and independence_class in ("unsolicited_independent", "unsolicited_agent_discovery"):
+        ok &= check(
+            False,
+            f"{path_label} ORIGIN008: agent_referred with unsolicited_independent",
+            "agent_referred cannot have independence_class=unsolicited_independent"
+        )
+
+    # New records should have origin_classification
+    archive_status = obj.get("archive_status", "")
+    record_kind = obj.get("record_kind", "")
+    if archive_status not in ("legacy", "superseded") and record_kind not in ("legacy_record",):
+        if not oc:
+            print(f"  WARNING: {path_label} new record missing origin_classification (recommended)")
+
+    return ok
+
+
 def validate_file(path):
     """Validate a single submission file."""
     path_label = str(Path(path).relative_to(ROOT) if Path(path).is_relative_to(ROOT) else path)
@@ -1936,6 +2004,9 @@ def validate_file(path):
 
     # Rule AL: verification_scope_label consistency
     ok &= validate_verification_scope_label(obj, path_label)
+
+    # Rule AO: origin classification consistency
+    ok &= validate_origin_classification(obj, path_label)
 
     # P1 Remediation: Unknown fields guard (Rule AM)
     ok &= validate_unknown_fields(obj, path_label, record_kind)
