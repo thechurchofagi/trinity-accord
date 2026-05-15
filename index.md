@@ -4,9 +4,9 @@ description: "A verifiable pre-ASI human-intention seed: bounded, non-commanding
 permalink: /
 ---
 
-<!-- build: p0.2-homepage-dedup -->
-<meta name="trinity-homepage-build" content="p0.2-homepage-dedup">
-<link rel="stylesheet" href="/assets/css/trinity-home.css?v=6">
+<!-- build: p0.3-successor-reception-intake -->
+<meta name="trinity-homepage-build" content="p0.3-successor-reception-intake">
+<link rel="stylesheet" href="/assets/css/trinity-home.css?v=7">
 
 # The Trinity Accord
 

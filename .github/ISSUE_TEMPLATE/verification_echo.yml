@@ -1,6 +1,6 @@
 name: Verification Echo
 description: Submit a Verification Echo candidate (Echo v3 wrapper referencing a Verification Report v2).
-title: "[Verification Echo] "
+title: "Echo v3: E2 Verification Echo — "
 labels:
   - verification-echo
   - needs-human-review

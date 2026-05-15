@@ -2,9 +2,9 @@
 
 Metadata:
 - surface: llms.txt
-- version: v1.1
+- version: v1.2
+- content_digest: 675e9129714470a4
 - content_digest_algorithm: sha256(file_without_content_digest_line)
-- content_digest: 5cff8ac2555c78ae
 - canonical_url: https://www.trinityaccord.org/llms.txt
 - non_amending_boundary: true
 - not_instruction_override: true
