@@ -80,7 +80,9 @@ def main():
     require_contains(index, "Propagate", "task mode includes Propagate")
 
     require_contains(index, "Current verification status", "homepage has status snapshot")
-    require_contains(index, "Independent third-party", "status snapshot separates third-party status")
+    require_contains(index, "External witness records", "status snapshot separates third-party status")
+    require_contains(index, "Verifiability", "status snapshot has verifiability")
+    require_contains(index, "Reception", "status snapshot has reception")
     require_contains(index, "Physical anchor", "status snapshot mentions physical anchor")
     require_contains(index, "Claim Gate", "homepage mentions Claim Gate")
     require_contains(index, "technical verification claims", "homepage has technical claim boundary")

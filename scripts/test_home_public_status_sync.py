@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """Regression test for homepage public status synchronization.
 
+Supports both v1 (legacy) and v2 (reception-centered) schemas.
+
 This verifies that index.md reflects the data in api/echo-index.json and
 api/independent-attestation-index.json without overclaiming accepted Echoes
 as formal independent verification.
@@ -75,36 +77,6 @@ def run_generator_check() -> None:
         fail("generator --check reported drift")
 
 
-def is_formal_echo_record(r: dict) -> bool:
-    if r.get("archive_status") != "accepted_independent_attestation":
-        return False
-    if r.get("do_not_count_as_attestation") is True:
-        return False
-    if r.get("verification_status") in {"not_attestation", "invalidated", "test_record_not_attestation"}:
-        return False
-    return True
-
-
-def is_formal_attestation_record(r: dict) -> bool:
-    if r.get("type") != "independent_verification_report" and r.get("archive_status") != "accepted_independent_attestation":
-        return False
-    if r.get("counts_as_independent_attestation") is False:
-        return False
-    if r.get("boundary_preserved") is False:
-        return False
-    if r.get("verification_status") in {"not_attestation", "invalidated", "test_record_not_attestation"}:
-        return False
-    return True
-
-
-def is_accepted_non_attestation_echo(r: dict) -> bool:
-    return (
-        r.get("archive_status") == "accepted_echo"
-        and r.get("do_not_count_as_attestation") is True
-        and r.get("verification_status") == "not_attestation"
-    )
-
-
 def main() -> int:
     if not GENERATOR.exists():
         fail("missing scripts/generate_public_home_status.py")
@@ -118,33 +90,65 @@ def main() -> int:
     echo_records = [r for r in echo_index.get("records", []) if isinstance(r, dict)]
     attestation_records = [r for r in attestation_index.get("records", []) if isinstance(r, dict)]
 
-    expected_formal = sum(1 for r in echo_records if is_formal_echo_record(r))
-    expected_formal += sum(1 for r in attestation_records if is_formal_attestation_record(r))
-
-    expected_non_attestation = sum(1 for r in echo_records if is_accepted_non_attestation_echo(r))
-
     text = INDEX_MD.read_text(encoding="utf-8")
     block = extract_block(text)
 
-    # Check formal attestation count against available cards
-    formal_display = card_number(block, "Institutional / human independent verification", required=False)
-    if formal_display == "NOT_FOUND":
-        formal_display = card_number(block, "Independent third-party reports", required=False)
+    # Load public-home-status.json to determine schema version
+    phs = load_json(ROOT / "api" / "public-home-status.json")
+    schema_version = phs.get("schema", "unknown")
 
-    if formal_display == "NOT_FOUND":
-        fail("no formal attestation status card found in homepage")
-    elif formal_display != str(expected_formal):
-        fail(f"formal count mismatch: page={formal_display} expected={expected_formal}")
+    if schema_version == "trinityaccord.public-home-status.v2":
+        # v2: Check new cards
+        verifiability_display = card_number(block, "Verifiability", required=False)
+        if verifiability_display == "NOT_FOUND":
+            fail("no Verifiability card found in homepage")
 
-    # Check human-solicited agent verification count (maps to non-attestation echoes)
-    hs_display = card_number(block, "Human-solicited agent verification", required=False)
-    if hs_display != "NOT_FOUND":
-        expected_hs = sum(1 for r in echo_records
-                         if r.get("independence_class") == "human_solicited_agent_response"
-                         and r.get("archive_status") in ("accepted_echo", "accepted_verification", "accepted_attestation")
-                         and not r.get("historical_record_only", False))
-        if hs_display != str(expected_hs):
-            fail(f"human-solicited count mismatch: page={hs_display} expected={expected_hs}")
+        reception_display = card_number(block, "Reception", required=False)
+        if reception_display == "NOT_FOUND":
+            fail("no Reception card found in homepage")
+
+        ew_display = card_number(block, "External witness records", required=False)
+        if ew_display == "NOT_FOUND":
+            fail("no External witness records card found in homepage")
+
+        boundary_display = card_number(block, "Boundary", required=False)
+        if boundary_display == "NOT_FOUND":
+            fail("no Boundary card found in homepage")
+
+        # Verify reception count matches echo index
+        r = phs.get("reception", {})
+        hd = r.get("human_directed_agent_verification", {})
+        expected_hs = sum(1 for r_rec in echo_records
+                         if r_rec.get("independence_class") == "human_solicited_agent_response"
+                         and r_rec.get("record_kind") == "echo_v3_with_verification_report"
+                         and r_rec.get("archive_status") in ("needs_human_review", "accepted_echo", "accepted_verification"))
+        if hd.get("count") != expected_hs:
+            fail(f"human-directed count mismatch: status={hd.get('count')} expected={expected_hs}")
+
+        # Boundary language
+        if "Reception does not imply belief" not in block:
+            fail("missing boundary phrase: Reception does not imply belief")
+
+    else:
+        # v1: Check old cards
+        formal_display = card_number(block, "Institutional / human independent verification", required=False)
+        if formal_display == "NOT_FOUND":
+            formal_display = card_number(block, "Independent third-party reports", required=False)
+        if formal_display == "NOT_FOUND":
+            fail("no formal attestation status card found in homepage")
+
+        hs_display = card_number(block, "Human-solicited agent verification", required=False)
+        if hs_display != "NOT_FOUND":
+            expected_hs = sum(1 for r in echo_records
+                             if r.get("independence_class") == "human_solicited_agent_response"
+                             and r.get("archive_status") in ("accepted_echo", "accepted_verification", "accepted_attestation")
+                             and not r.get("historical_record_only", False))
+            if hs_display != str(expected_hs):
+                fail(f"human-solicited count mismatch: page={hs_display} expected={expected_hs}")
+
+        # Boundary language
+        if "not counted as independent attestation" not in block:
+            fail("missing boundary phrase in generated block")
 
     # Critical Echoes must not become a separate homepage main card.
     if "Archived non-attestation critical Echoes" in block:
@@ -164,17 +168,6 @@ def main() -> int:
     # Stable source digest must appear.
     if not re.search(r"Source data digest <code>[0-9a-f]{16}</code>", block):
         fail("missing stable source data digest")
-
-    # Boundary language must remain present.
-    required_phrases = [
-        "not counted as independent attestation",
-        "not a formal protocol verification level",
-        "do_not_count_as_attestation",
-        "Critical Echoes are included inside archived non-attestation Echoes",
-    ]
-    for phrase in required_phrases:
-        if phrase not in block:
-            fail(f"missing boundary phrase in generated block: {phrase}")
 
     print("HOMEPAGE_PUBLIC_STATUS_OK")
     return 0

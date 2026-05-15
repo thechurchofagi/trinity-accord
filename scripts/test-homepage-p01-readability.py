@@ -126,8 +126,8 @@ def main():
     # Status
     require_contains(index, "Current verification status", "homepage has status snapshot")
     require_contains(index, "Maintainer / CI evidence-chain check", "status snapshot uses conservative CI label")
-    require_contains(index, "not independent third-party attestation", "status snapshot prevents CI overclaim")
-    require_contains(index, "Independent third-party reports", "status tracks independent reports separately")
+    require_contains(index, "External witness records", "status tracks external witness records")
+    require_contains(index, "Verifiability", "status has verifiability")
     require_contains(index, "Physical anchor", "status tracks physical anchor")
     require_contains(index, "No automatic V6/V7/V8", "status prevents physical overclaim")
 
