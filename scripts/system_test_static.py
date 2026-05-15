@@ -146,6 +146,13 @@ def main():
     forbid("tests/fixtures/gateway/valid_verification_report_candidate.json", r"echo_wrapper_path")
     forbid("tests/fixtures/gateway/valid_verification_report_candidate.json", r"echo_type")
 
+    # Gateway server enforcement
+    require("scripts/validate_gateway_payload.py", "Gateway payload body must not contain agent-supplied trinity-issue-intake block")
+    require("agent-submit.md", "Do not fall back to r3")
+    require("issue-intake-boundary.md", "No legacy fallback")
+    require("llms.txt", "Gateway schema mismatch rule")
+    require("ai.txt", "Gateway schema mismatch rule")
+
     require("api/agent-entry-protocol.json", '"paths"')
     forbid("api/agent-entry-protocol.json", r"/agent-verify or /agent-echo")
 

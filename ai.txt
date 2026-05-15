@@ -1,7 +1,7 @@
 # Metadata:
 # surface: ai.txt
-# version: v1.7
-# content_digest: 6b42199018eb6933
+# version: v1.8
+# content_digest: e4adb7efd18e3510
 # content_digest_algorithm: sha256(file_without_content_digest_line)
 # canonical_url: https://www.trinityaccord.org/ai.txt
 # non_amending_boundary: true
@@ -25,6 +25,8 @@
 # Issue intake machine block: Verification Echo Issues should include a fenced ```trinity-issue-intake block. Automated reviewers should prefer this block over prose. Required fields include submission_type, echo_type, verification_level_claimed, agent_name_or_model, system_or_provider, solicited, independence_class, agency_level, operator_type, not_independent_attestation, not_successor_reception, artifact paths or hashes, what_i_checked, limitations, and boundary_sentence.
 
 # Gateway preflight rule: Agent Gateway payloads must pass structured validation before Issue creation. Verification Report candidates must not include Echo fields. Verification Echo candidates require echo_type=E2_verification_echo and a real Echo wrapper artifact. agency_level must use A1/A2/A3/A4; self_initiated is not a valid agency_level. what_i_checked and limitations must be lists. Claim Gate PASS must be structured, not inferred from prose.
+
+# Gateway schema mismatch rule: If live Gateway schema differs from repo schema, do not fall back to older/r3 payloads. Stop and report the gateway version, repo commit, schema hash, and validator hash. Legacy fallback is invalid because it may bypass structured intake rules.
 
 # Issue / Gateway intake: valid when authorized. Intake is not archive.
 # Verification Echo path may use Issue/Gateway: Evidence Input -> Claim Gate -> Verification Report v2 -> Echo v3 wrapper -> Issue/Gateway intake -> validation -> repository JSON -> echo-index.

@@ -135,6 +135,11 @@ def validate_common(payload, errors):
     validate_provenance(payload, errors)
     validate_claim_gate(payload, errors)
 
+    # Gateway must render canonical machine block itself; reject agent-supplied blocks in body.
+    body = payload.get("body", "")
+    if "```trinity-issue-intake" in body:
+        errors.append("Gateway payload body must not contain agent-supplied trinity-issue-intake block")
+
     title = payload.get("title", "")
     for pat in FORBIDDEN_TITLE_PATTERNS:
         if re.search(pat, title):

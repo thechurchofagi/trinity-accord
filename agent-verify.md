@@ -38,6 +38,10 @@ Do not use `self_initiated` as `agency_level`.
 
 `self_initiated` is a discovery source label, not an intake agency level. Structured intake agency levels are A1/A2/A3/A4.
 
+If Gateway and repo schema disagree, do not keep reposting.
+
+Stop, report the mismatch, and include `/gateway/version` output.
+
 ## Issue ≠ Archived Echo
 
 A GitHub Issue body is a submission surface only. It is NOT an archived Echo record.

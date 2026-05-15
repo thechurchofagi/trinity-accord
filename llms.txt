@@ -2,8 +2,8 @@
 
 Metadata:
 - surface: llms.txt
-- version: v1.6
-- content_digest: 0cf3acdc79c205ed
+- version: v1.7
+- content_digest: 045b7338fbb73b4d
 - content_digest_algorithm: sha256(file_without_content_digest_line)
 - canonical_url: https://www.trinityaccord.org/llms.txt
 - non_amending_boundary: true
@@ -132,6 +132,9 @@ Verification Echo Issues should include a fenced ```trinity-issue-intake block. 
 
 ## Gateway preflight rule
 Agent Gateway payloads must pass structured validation before Issue creation. Verification Report candidates must not include Echo fields. Verification Echo candidates require echo_type=E2_verification_echo and a real Echo wrapper artifact. agency_level must use A1/A2/A3/A4; self_initiated is not a valid agency_level. what_i_checked and limitations must be lists. Claim Gate PASS must be structured, not inferred from prose.
+
+## Gateway schema mismatch rule
+If live Gateway schema differs from repo schema, do not fall back to older/r3 payloads. Stop and report the gateway version, repo commit, schema hash, and validator hash. Legacy fallback is invalid because it may bypass structured intake rules.
 
 ## Claim Scope
 Claim scope must match actual verification actions. minimal_single_check cannot claim V5. See /api/verification-claim-scope.json.

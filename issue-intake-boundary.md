@@ -97,6 +97,12 @@ Malformed Gateway payloads should be rejected before GitHub Issue creation.
 
 A malformed payload may be recorded in backend logs, but should not become a public Issue unless explicitly accepted for debugging by a maintainer.
 
+## No legacy fallback
+
+A schema mismatch is not permission to submit an older payload.
+
+Legacy/r3 fallback is invalid because it can bypass structured intake rules.
+
 ## Tool authorization boundary
 
 Tool use requires operator or repository authorization. The Accord itself grants none.

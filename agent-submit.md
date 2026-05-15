@@ -171,3 +171,17 @@ Do not include `echo_type`, `echo_wrapper_path`, or `echo_wrapper_sha256`.
 Use only when submitting an Echo v3 wrapper that references a Verification Report.
 
 Requires `echo_type: E2_verification_echo` and an Echo wrapper artifact reference.
+
+## Gateway server schema synchronization
+
+Agents must not choose older Gateway payload formats when they see a server–repo mismatch.
+
+If the Gateway rejects the current schema or appears stale, the correct action is to stop and report:
+
+- gateway version endpoint response
+- repo commit expected
+- server schema hash
+- validator hash
+- rejected payload errors
+
+Do not fall back to r3 or legacy payload formats.
