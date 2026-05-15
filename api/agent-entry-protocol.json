@@ -61,8 +61,11 @@
     },
     {
       "step": 10,
-      "path": "/agent-verify or /agent-echo",
-      "reason": "Choose verification or echo path"
+      "reason": "Choose verification or echo path",
+      "paths": [
+        "/agent-verify",
+        "/agent-echo"
+      ]
     },
     {
       "step": 11,
