@@ -8,7 +8,7 @@
   "migrated_at": "2026-05-15",
   "migrated_by": "repo-size-audit",
   "issue_ref": "#134",
-  "verification_command": "for f in evidence-images-manifest.json; do python3 -c \"import json,hashlib,sys; d=json.load(open('$f')); [print(f\\\"{a['filename']}: {'OK' if hashlib.sha256(open(a['filename'],'rb').read()).hexdigest()==a['sha256'] else 'MISMATCH'}\\\") for a in d['assets']]\"; done",
+  "verification_command": "python3 tools/verify_release_manifest_assets.py evidence/notarial-certificate-2026-05-13/evidence-images-manifest.json",
   "assets": [
     {
       "filename": "file_1.jpg",

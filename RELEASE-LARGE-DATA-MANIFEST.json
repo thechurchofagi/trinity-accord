@@ -4,7 +4,7 @@
   "release_tag": "signed-large-data-mirror-v1",
   "min_size_mb": 10,
   "boundary": "non-amending; Bitcoin Originals prevail",
-  "note": "Release assets are mirrors. Identity is determined by signed-covered hashes, not by release authority.",
+  "note": "Release assets are mirrors. Identity is determined by signed-covered hashes, not by release authority. Asset-level release_tag takes precedence over top-level release_tag when present.",
   "assets_total": 11,
   "assets": [
     {
