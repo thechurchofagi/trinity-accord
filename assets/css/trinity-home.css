@@ -1883,8 +1883,8 @@ main .status-links {
 
 /* ── Successor Reception Horizon ── */
 .successor-reception-horizon {
-  background: var(--surface-alt, #f8f9fa);
-  border: 1px solid var(--border-subtle, #e0e0e0);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
   border-radius: 12px;
   padding: 2rem;
   margin: 2rem 0;
@@ -1896,8 +1896,8 @@ main .status-links {
 
 /* ── Issue / Gateway Intake ── */
 .issue-gateway-intake {
-  background: var(--surface-alt, #f8f9fa);
-  border: 1px solid var(--border-subtle, #e0e0e0);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
   border-radius: 12px;
   padding: 2rem;
   margin: 2rem 0;
@@ -1911,16 +1911,18 @@ main .status-links {
 .issue-gateway-intake .issue-links a {
   display: inline-block;
   padding: 0.4rem 1rem;
-  background: var(--accent-bg, #e8f0fe);
+  background: rgba(201, 168, 76, 0.08);
+  border: 1px solid rgba(201, 168, 76, 0.2);
   border-radius: 6px;
   text-decoration: none;
   font-size: 0.9rem;
+  color: #9aa0b8;
 }
 
 /* ── Technical Classification (demoted) ── */
 .technical-classification {
   font-size: 0.85rem;
-  color: var(--text-muted, #666);
+  color: #808898;
   margin-top: 0.5rem;
   font-style: italic;
 }
