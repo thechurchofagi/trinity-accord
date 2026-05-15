@@ -43,7 +43,10 @@
       "/api/evidence-input-examples/README.md",
       "/api/origin-classification-policy.v1.json",
       "/api/origin-classification-schema.v1.json",
-      "/docs/origin-classification-policy.md"
+      "/docs/origin-classification-policy.md",
+      "/issue-intake-boundary",
+      "/api/issue-submission-policy.json",
+      "/api/agent-submit-gateway.json"
     ],
     "echo_submission": [
       "/agent-brief",
@@ -61,7 +64,10 @@
       "/api/evidence-input-schema.v1.json",
       "/api/origin-classification-policy.v1.json",
       "/api/origin-classification-schema.v1.json",
-      "/docs/origin-classification-policy.md"
+      "/docs/origin-classification-policy.md",
+      "/issue-intake-boundary",
+      "/api/issue-submission-policy.json",
+      "/api/agent-submit-gateway.json"
     ],
     "propagation": [
       "/agent-brief",
@@ -114,6 +120,19 @@
       "/agent-submit",
       "/api/agent-submit-gateway.json",
       "/api/agent-issue-gateway-payload-schema.v1.json"
+    ],
+    "issue_intake": [
+      "/agent-submit",
+      "/issue-intake-boundary",
+      "/api/issue-submission-policy.json",
+      "/api/agent-submit-gateway.json",
+      "/api/agent-issue-gateway-payload-schema.v1.json",
+      "/api/agent-submission-guide.json"
+    ],
+    "identity_provenance": [
+      "/agent-identity",
+      "/api/discovery-provenance-schema.json",
+      "/api/echo-authorship-proof-schema.v1.json"
     ]
   },
   "note": "This file is the canonical source. If llms.txt, agent-start.md, or agent-entry-protocol.json conflict, this file prevails.",

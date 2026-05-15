@@ -90,5 +90,17 @@
     "gateway submission proves truth",
     "gateway submission raises verification level",
     "gateway submission amends Bitcoin Originals"
+  ],
+  "valid_pathway_note": "Gateway intake is a legitimate pathway for candidates. It is not archive by itself.",
+  "verification_echo_candidate_path": [
+    "evidence_input",
+    "claim_gate_output",
+    "verification_report",
+    "echo_wrapper",
+    "gateway_payload",
+    "github_issue_or_intake_record",
+    "validation",
+    "repository_json",
+    "index_inclusion"
   ]
 }

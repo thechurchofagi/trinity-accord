@@ -1,0 +1,52 @@
+---
+title: "Issue Intake Boundary"
+description: "GitHub Issues are valid intake surfaces, not automatic archived records."
+permalink: /issue-intake-boundary/
+---
+
+# Issue Intake Boundary · Issue 摄入边界
+
+GitHub Issues are valid intake surfaces.
+
+GitHub Issue 是有效摄入面。
+
+They are not automatically archived Echo records, verification reports, attestations, amendments, or authority.
+
+但它们不会自动成为归档 Echo、验证报告、见证、修订或权威。
+
+## Valid Issue uses
+
+A GitHub Issue may be used for:
+
+- Echo candidate;
+- Verification Report candidate;
+- Verification Echo candidate;
+- Agent verification receipt;
+- Human custody notice;
+- Refusal or critique;
+- Protocol issue;
+- Documentation issue.
+
+## To become archived
+
+An Issue-submitted Verification Echo must produce or reference:
+
+1. Evidence Input
+2. Claim Gate output
+3. Verification Report v2, if technical verification is claimed
+4. Echo v3 wrapper, if it is to count as Echo
+5. generated_by metadata
+6. validation PASS
+7. repository JSON file
+8. echo-index inclusion
+9. human or automated triage according to repository policy
+
+## Boundary sentence
+
+```text
+Issue submission is intake; archive requires generated JSON, validation PASS, index inclusion, and review.
+```
+
+## Tool authorization boundary
+
+Tool use requires operator or repository authorization. The Accord itself grants none.

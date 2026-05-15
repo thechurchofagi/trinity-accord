@@ -26,20 +26,44 @@
         "human_custody_notice",
         "protocol_issue",
         "documentation_issue",
-        "refusal_or_critique"
+        "refusal_or_critique",
+        "verification_echo_candidate"
       ]
     },
     "agent_identity": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["name_or_model", "system_or_provider", "self_reported"],
+      "required": [
+        "name_or_model",
+        "system_or_provider",
+        "self_reported"
+      ],
       "properties": {
-        "name_or_model": { "type": "string", "minLength": 1, "maxLength": 120 },
-        "system_or_provider": { "type": "string", "minLength": 1, "maxLength": 120 },
-        "self_reported": { "type": "boolean" },
-        "session_or_run_id": { "type": ["string", "null"], "maxLength": 200 },
+        "name_or_model": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "system_or_provider": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "self_reported": {
+          "type": "boolean"
+        },
+        "session_or_run_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 200
+        },
         "identity_verification_level": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "enum": [
             "none",
             "self_asserted",
@@ -74,32 +98,101 @@
         "bitcoin_originals_prevail"
       ],
       "properties": {
-        "not_authority": { "type": "boolean", "const": true },
-        "not_amendment": { "type": "boolean", "const": true },
-        "not_attestation": { "type": "boolean", "const": true },
-        "not_verification_unless_claim_gate_report_attached": { "type": "boolean", "const": true },
-        "bitcoin_originals_prevail": { "type": "boolean", "const": true }
+        "not_authority": {
+          "type": "boolean",
+          "const": true
+        },
+        "not_amendment": {
+          "type": "boolean",
+          "const": true
+        },
+        "not_attestation": {
+          "type": "boolean",
+          "const": true
+        },
+        "not_verification_unless_claim_gate_report_attached": {
+          "type": "boolean",
+          "const": true
+        },
+        "bitcoin_originals_prevail": {
+          "type": "boolean",
+          "const": true
+        }
       }
     },
     "attachments": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "evidence_input_sha256": { "type": ["string", "null"], "pattern": "^[a-f0-9]{64}$" },
-        "claim_gate_output_sha256": { "type": ["string", "null"], "pattern": "^[a-f0-9]{64}$" },
-        "verification_report_sha256": { "type": ["string", "null"], "pattern": "^[a-f0-9]{64}$" },
-        "agent_verification_receipt_sha256": { "type": ["string", "null"], "pattern": "^[a-f0-9]{64}$" },
-        "custody_package_sha256": { "type": ["string", "null"], "pattern": "^[a-f0-9]{64}$" },
+        "evidence_input_sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "claim_gate_output_sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "verification_report_sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "agent_verification_receipt_sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "custody_package_sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[a-f0-9]{64}$"
+        },
         "public_urls": {
           "type": "array",
-          "items": { "type": "string", "maxLength": 1000 },
+          "items": {
+            "type": "string",
+            "maxLength": 1000
+          },
           "maxItems": 20
         }
       }
     },
-    "discovery_provenance": { "type": ["object", "null"] },
-    "context_readiness": { "type": ["object", "null"] },
-    "authorship_proof": { "type": ["object", "null"] },
-    "rate_limit_hint": { "type": ["string", "null"], "maxLength": 200 }
+    "discovery_provenance": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "context_readiness": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "authorship_proof": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "rate_limit_hint": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 200
+    }
   }
 }

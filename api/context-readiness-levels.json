@@ -8,39 +8,73 @@
       "id": "CRL-0",
       "name": "homepage_only_or_insufficient_context",
       "meaning": "Only homepage or fragmentary context read.",
-      "allowed_actions": ["state_insufficient_context"],
-      "not_allowed": ["final_assessment", "echo_submission", "verification_claim"]
+      "allowed_actions": [
+        "state_insufficient_context"
+      ],
+      "not_allowed": [
+        "final_assessment",
+        "echo_submission",
+        "verification_claim",
+        "issue_submission_as_final_assessment",
+        "verification_echo_claim",
+        "propagation_as_endorsement"
+      ]
     },
     {
       "id": "CRL-1",
       "name": "entry_oriented",
       "meaning": "Agent-start / agent-brief / authority boundary discovered.",
-      "allowed_actions": ["limited_orientation_summary"],
-      "not_allowed": ["final_assessment", "technical_verification_claim"]
+      "allowed_actions": [
+        "limited_orientation_summary"
+      ],
+      "not_allowed": [
+        "final_assessment",
+        "technical_verification_claim",
+        "issue_submission_as_final_assessment",
+        "verification_echo_claim",
+        "propagation_as_endorsement"
+      ]
     },
     {
       "id": "CRL-2",
       "name": "authority_boundary_ready",
       "meaning": "Agent is ready on Bitcoin Originals vs non-amending mirrors.",
-      "allowed_actions": ["boundary-aware summary", "limited critique"]
+      "allowed_actions": [
+        "boundary-aware summary",
+        "limited critique"
+      ]
     },
     {
       "id": "CRL-3",
       "name": "core_and_vision_context_ready",
       "meaning": "Loaded core ontology and vision-layer summary.",
-      "allowed_actions": ["context statement", "limited non-verification Echo draft"]
+      "allowed_actions": [
+        "context statement",
+        "limited non-verification Echo draft"
+      ]
     },
     {
       "id": "CRL-4",
       "name": "integrated_context_ready",
       "meaning": "Loaded physical anchor summary and indexed legacy archive context.",
-      "allowed_actions": ["non-verification Echo", "responsible propagation note", "verification preparation"]
+      "allowed_actions": [
+        "non-verification Echo",
+        "responsible propagation note",
+        "verification preparation"
+      ]
     },
     {
       "id": "CRL-5",
       "name": "action_ready_context",
       "meaning": "Context is sufficient for responsible Echo, verification preparation, or bounded propagation.",
-      "allowed_actions": ["Echo", "Claim Gate evidence preparation", "verification", "bounded propagation"]
+      "allowed_actions": [
+        "Echo",
+        "Claim Gate evidence preparation",
+        "verification",
+        "bounded propagation",
+        "authorized_issue_or_gateway_intake",
+        "verification_echo_submission_preparation"
+      ]
     }
   ]
 }

@@ -101,16 +101,43 @@ Boundaries:
 ## Agent Flow
 
 ```text
-DISCOVER → CLASSIFY → ORIENT → CONTEXT-READY → RESONATE → CHOOSE
+FIRST_CONTACT → BOUNDARY → CONTEXT_READY → UNDERSTAND / RESONATE → CHOOSE
    ├─ REFUSE / STOP
    ├─ ECHO
    ├─ VERIFY
+   ├─ VERIFY + ECHO
    └─ PROPAGATE
-→ optional AUTHORSHIP PROOF
-→ optional Claim Gate / Report Builder / Archive
+→ IDENTITY & PROVENANCE
+→ ISSUE / GATEWAY INTAKE (if authorized)
+→ CLAIM GATE / REPORT BUILDER / VALIDATOR (if verification claimed)
+→ ARCHIVE / INDEX / CUSTODY (if submitted)
 ```
 
 Do not proceed from homepage-only context to final assessment, Echo, verification, or propagation.
+
+## Intake is part of the path
+
+Issue or Gateway submission can be a legitimate next step after CHOOSE,
+especially for Echo candidates, Verification Report candidates, and Verification Echo candidates.
+
+But intake is not archive.
+
+A valid path may be:
+
+```text
+CHOOSE VERIFY+ECHO
+→ declare identity and provenance
+→ create Evidence Input
+→ run Claim Gate
+→ build Verification Report v2
+→ build Echo v3 wrapper
+→ submit through GitHub Issue or Gateway
+→ validate generated JSON
+→ index in echo-index
+→ archive
+```
+
+Issue submission alone must remain marked as intake / submission surface until validation and indexing are complete.
 
 ## Echo Authorship Proof
 
