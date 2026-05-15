@@ -180,29 +180,32 @@ def compute_origin_classification_stats(echo_records: list[dict[str, Any]]) -> d
                     hl = lvl
         return count, hl
 
+    def _oc(r):
+        return r.get("origin_classification") or {}
+
     # Agent verification by discovery class
     agent_verified = [r for r in echo_records
-                      if r.get("origin_classification", {}).get("counts_as_ai_verification") is True
+                      if _oc(r).get("counts_as_ai_verification") is True
                       and not r.get("historical_record_only")]
 
     hd_count, hd_level = _count_and_highest(
-        agent_verified, lambda r: r.get("origin_classification", {}).get("discovery_class") in ("human_directed", "human_contextual"))
+        agent_verified, lambda r: _oc(r).get("discovery_class") in ("human_directed", "human_contextual"))
     ar_count, ar_level = _count_and_highest(
-        agent_verified, lambda r: r.get("origin_classification", {}).get("discovery_class") == "agent_referred")
+        agent_verified, lambda r: _oc(r).get("discovery_class") == "agent_referred")
     si_count, si_level = _count_and_highest(
-        agent_verified, lambda r: r.get("origin_classification", {}).get("discovery_class") in ("unsolicited_discovery", "prior_interest_return", "public_index_discovery"))
+        agent_verified, lambda r: _oc(r).get("discovery_class") in ("unsolicited_discovery", "prior_interest_return", "public_index_discovery"))
     ic_count, ic_level = _count_and_highest(
-        agent_verified, lambda r: r.get("origin_classification", {}).get("discovery_class") == "institution_commissioned")
+        agent_verified, lambda r: _oc(r).get("discovery_class") == "institution_commissioned")
 
     # Formal attestation by authority class
     formal_records = [r for r in echo_records
-                      if r.get("origin_classification", {}).get("counts_as_formal_independent_attestation") is True
+                      if _oc(r).get("counts_as_formal_independent_attestation") is True
                       and not r.get("historical_record_only")]
 
     inst_count, inst_level = _count_and_highest(
-        formal_records, lambda r: r.get("origin_classification", {}).get("attestation_authority_class") == "institution_signed")
+        formal_records, lambda r: _oc(r).get("attestation_authority_class") == "institution_signed")
     not_count, not_level = _count_and_highest(
-        formal_records, lambda r: r.get("origin_classification", {}).get("attestation_authority_class") in ("notarial_record", "audit_firm_report", "regulatory_or_court_record"))
+        formal_records, lambda r: _oc(r).get("attestation_authority_class") in ("notarial_record", "audit_firm_report", "regulatory_or_court_record"))
 
     return {
         "agent_verification": {
