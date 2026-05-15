@@ -35,6 +35,8 @@ def base_report():
         "reporter": {"name": "Test", "type": "ai_agent"},
         "discovery_provenance": {"solicited": True},
         "protocol_level_claimed": "V8",
+        "verification_scope_label": "full_protocol_profile_verification",
+        "claim_scope": "full_protocol_profile",
         "component_findings": [
             {
                 "component": "physical_anchor",
