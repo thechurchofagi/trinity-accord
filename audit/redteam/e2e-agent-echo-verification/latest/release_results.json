@@ -1,0 +1,90 @@
+{
+  "phase": "release",
+  "checks": 81,
+  "passed": 66,
+  "failed": 15,
+  "warnings": 0,
+  "findings": [
+    {
+      "severity": "medium",
+      "title": "assets_total mismatch: archive/hash-manifest.json",
+      "file": "archive/hash-manifest.json",
+      "expected": "assets_total = 0",
+      "actual": "assets_total = -1"
+    },
+    {
+      "severity": "medium",
+      "title": "Manifest note missing boundary: archive/hash-manifest.json",
+      "file": "archive/hash-manifest.json"
+    },
+    {
+      "severity": "medium",
+      "title": "assets_total mismatch: api/evidence-manifest.json",
+      "file": "api/evidence-manifest.json",
+      "expected": "assets_total = 0",
+      "actual": "assets_total = -1"
+    },
+    {
+      "severity": "medium",
+      "title": "assets_total mismatch: evidence/notarial-certificate-2026-05-13/evidence-images-manifest.json",
+      "file": "evidence/notarial-certificate-2026-05-13/evidence-images-manifest.json",
+      "expected": "assets_total = 10",
+      "actual": "assets_total = -1"
+    },
+    {
+      "severity": "medium",
+      "title": "Asset missing non-amending boundary in evidence/notarial-certificate-2026-05-13/evidence-images-manifest.json",
+      "file": "evidence/notarial-certificate-2026-05-13/evidence-images-manifest.json"
+    },
+    {
+      "severity": "medium",
+      "title": "Asset missing non-amending boundary in evidence/notarial-certificate-2026-05-13/evidence-images-manifest.json",
+      "file": "evidence/notarial-certificate-2026-05-13/evidence-images-manifest.json"
+    },
+    {
+      "severity": "medium",
+      "title": "Asset missing non-amending boundary in evidence/notarial-certificate-2026-05-13/evidence-images-manifest.json",
+      "file": "evidence/notarial-certificate-2026-05-13/evidence-images-manifest.json"
+    },
+    {
+      "severity": "medium",
+      "title": "Asset missing non-amending boundary in evidence/notarial-certificate-2026-05-13/evidence-images-manifest.json",
+      "file": "evidence/notarial-certificate-2026-05-13/evidence-images-manifest.json"
+    },
+    {
+      "severity": "medium",
+      "title": "Asset missing non-amending boundary in evidence/notarial-certificate-2026-05-13/evidence-images-manifest.json",
+      "file": "evidence/notarial-certificate-2026-05-13/evidence-images-manifest.json"
+    },
+    {
+      "severity": "medium",
+      "title": "Asset missing non-amending boundary in evidence/notarial-certificate-2026-05-13/evidence-images-manifest.json",
+      "file": "evidence/notarial-certificate-2026-05-13/evidence-images-manifest.json"
+    },
+    {
+      "severity": "medium",
+      "title": "Asset missing non-amending boundary in evidence/notarial-certificate-2026-05-13/evidence-images-manifest.json",
+      "file": "evidence/notarial-certificate-2026-05-13/evidence-images-manifest.json"
+    },
+    {
+      "severity": "medium",
+      "title": "Asset missing non-amending boundary in evidence/notarial-certificate-2026-05-13/evidence-images-manifest.json",
+      "file": "evidence/notarial-certificate-2026-05-13/evidence-images-manifest.json"
+    },
+    {
+      "severity": "medium",
+      "title": "Asset missing non-amending boundary in evidence/notarial-certificate-2026-05-13/evidence-images-manifest.json",
+      "file": "evidence/notarial-certificate-2026-05-13/evidence-images-manifest.json"
+    },
+    {
+      "severity": "medium",
+      "title": "Asset missing non-amending boundary in evidence/notarial-certificate-2026-05-13/evidence-images-manifest.json",
+      "file": "evidence/notarial-certificate-2026-05-13/evidence-images-manifest.json"
+    },
+    {
+      "severity": "medium",
+      "title": "Manifest note missing boundary: evidence/notarial-certificate-2026-05-13/evidence-images-manifest.json",
+      "file": "evidence/notarial-certificate-2026-05-13/evidence-images-manifest.json"
+    }
+  ]
+}

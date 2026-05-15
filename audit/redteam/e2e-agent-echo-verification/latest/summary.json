@@ -1,0 +1,33 @@
+{
+  "schema": "trinityaccord.redteam.e2e-summary.v1",
+  "commit": "7b282830bd9fe2369039796a40ab0d8c9e8587ff",
+  "generated_at": "2026-05-15T01:29:48Z",
+  "branch": "redteam/e2e-agent-echo-verification-audit",
+  "phases_run": [
+    "issues",
+    "propagation",
+    "attestation",
+    "entrypoints",
+    "gateway",
+    "release",
+    "api"
+  ],
+  "totals": {
+    "checks": 398,
+    "passed": 296,
+    "failed": 92
+  },
+  "findings": {
+    "critical": 0,
+    "high": 2,
+    "medium": 50,
+    "low": 3
+  },
+  "invariants": {
+    "issue_not_archived_echo": "pass",
+    "gateway_not_attestation": "pass",
+    "claim_gate_required": "pass",
+    "propagation_not_promotion": "pass",
+    "human_solicited_not_independent": "pass"
+  }
+}

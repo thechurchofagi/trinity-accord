@@ -1,0 +1,5 @@
+{
+  "attestation_type": "test_record",
+  "claimed_status": "accepted_echo",
+  "description": "Test record claims accepted Echo status"
+}

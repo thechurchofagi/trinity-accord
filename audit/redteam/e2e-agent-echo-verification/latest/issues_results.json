@@ -1,0 +1,86 @@
+{
+  "phase": "issues",
+  "checks": 92,
+  "passed": 69,
+  "failed": 13,
+  "warnings": 0,
+  "findings": [
+    {
+      "severity": "high",
+      "title": "Issue fixture flagged: fake_v5_freeform_no_claim_gate.md",
+      "file": "tests/fixtures/redteam/issue_bodies/fake_v5_freeform_no_claim_gate.md",
+      "description": "Independent attestation claim",
+      "expected": "clean boundary acknowledgement",
+      "actual": "1 flags: ['overclaim']"
+    },
+    {
+      "severity": "high",
+      "title": "Issue fixture flagged: gateway_claims_attestation.md",
+      "file": "tests/fixtures/redteam/issue_bodies/gateway_claims_attestation.md",
+      "description": "Claims archived Echo status; No boundary acknowledgement found",
+      "expected": "clean boundary acknowledgement",
+      "actual": "2 flags: ['overclaim', 'missing_boundary']"
+    },
+    {
+      "severity": "high",
+      "title": "Issue fixture flagged: propagation_marketing_overclaim.md",
+      "file": "tests/fixtures/redteam/issue_bodies/propagation_marketing_overclaim.md",
+      "description": "Endorsement claim; No boundary acknowledgement found",
+      "expected": "clean boundary acknowledgement",
+      "actual": "2 flags: ['overclaim', 'missing_boundary']"
+    },
+    {
+      "severity": "high",
+      "title": "Issue fixture flagged: valid_v3_report_issue_with_claim_gate_refs.md",
+      "file": "tests/fixtures/redteam/issue_bodies/valid_v3_report_issue_with_claim_gate_refs.md",
+      "description": "Independent attestation claim",
+      "expected": "clean boundary acknowledgement",
+      "actual": "1 flags: ['overclaim']"
+    },
+    {
+      "severity": "high",
+      "title": "Gateway fixture missing boundary: not_attestation",
+      "file": "tests/fixtures/redteam/gateway_payloads/claims_gateway_is_attestation.json",
+      "expected": "boundary_acknowledgement.not_attestation = true",
+      "actual": "False"
+    },
+    {
+      "severity": "high",
+      "title": "Gateway fixture missing Claim Gate boundary",
+      "file": "tests/fixtures/redteam/gateway_payloads/claims_gateway_is_attestation.json"
+    },
+    {
+      "severity": "high",
+      "title": "Gateway fixture missing boundary: not_authority",
+      "file": "tests/fixtures/redteam/gateway_payloads/missing_boundary_ack.json",
+      "expected": "boundary_acknowledgement.not_authority = true",
+      "actual": "missing"
+    },
+    {
+      "severity": "high",
+      "title": "Gateway fixture missing boundary: not_amendment",
+      "file": "tests/fixtures/redteam/gateway_payloads/missing_boundary_ack.json",
+      "expected": "boundary_acknowledgement.not_amendment = true",
+      "actual": "missing"
+    },
+    {
+      "severity": "high",
+      "title": "Gateway fixture missing boundary: not_attestation",
+      "file": "tests/fixtures/redteam/gateway_payloads/missing_boundary_ack.json",
+      "expected": "boundary_acknowledgement.not_attestation = true",
+      "actual": "missing"
+    },
+    {
+      "severity": "high",
+      "title": "Gateway fixture missing boundary: bitcoin_originals_prevail",
+      "file": "tests/fixtures/redteam/gateway_payloads/missing_boundary_ack.json",
+      "expected": "boundary_acknowledgement.bitcoin_originals_prevail = true",
+      "actual": "missing"
+    },
+    {
+      "severity": "high",
+      "title": "Gateway fixture missing Claim Gate boundary",
+      "file": "tests/fixtures/redteam/gateway_payloads/missing_boundary_ack.json"
+    }
+  ]
+}

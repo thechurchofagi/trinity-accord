@@ -1,0 +1,56 @@
+{
+  "phase": "gateway",
+  "checks": 32,
+  "passed": 25,
+  "failed": 7,
+  "warnings": 0,
+  "findings": [
+    {
+      "severity": "medium",
+      "title": "Body length out of bounds: body_too_short.json",
+      "file": "tests/fixtures/redteam/gateway_payloads/body_too_short.json",
+      "description": "Body length: 5 (expected 20-60000)"
+    },
+    {
+      "severity": "high",
+      "title": "Missing/false boundary: not_attestation in claims_gateway_is_attestation.json",
+      "file": "tests/fixtures/redteam/gateway_payloads/claims_gateway_is_attestation.json",
+      "expected": "not_attestation = true",
+      "actual": "False"
+    },
+    {
+      "severity": "critical",
+      "title": "Secret-like pattern in body: contains_secret_like_token.json",
+      "file": "tests/fixtures/redteam/gateway_payloads/contains_secret_like_token.json",
+      "description": "Body contains what looks like a secret/token"
+    },
+    {
+      "severity": "high",
+      "title": "Missing/false boundary: not_authority in missing_boundary_ack.json",
+      "file": "tests/fixtures/redteam/gateway_payloads/missing_boundary_ack.json",
+      "expected": "not_authority = true",
+      "actual": "missing"
+    },
+    {
+      "severity": "high",
+      "title": "Missing/false boundary: not_amendment in missing_boundary_ack.json",
+      "file": "tests/fixtures/redteam/gateway_payloads/missing_boundary_ack.json",
+      "expected": "not_amendment = true",
+      "actual": "missing"
+    },
+    {
+      "severity": "high",
+      "title": "Missing/false boundary: not_attestation in missing_boundary_ack.json",
+      "file": "tests/fixtures/redteam/gateway_payloads/missing_boundary_ack.json",
+      "expected": "not_attestation = true",
+      "actual": "missing"
+    },
+    {
+      "severity": "high",
+      "title": "Missing/false boundary: bitcoin_originals_prevail in missing_boundary_ack.json",
+      "file": "tests/fixtures/redteam/gateway_payloads/missing_boundary_ack.json",
+      "expected": "bitcoin_originals_prevail = true",
+      "actual": "missing"
+    }
+  ]
+}

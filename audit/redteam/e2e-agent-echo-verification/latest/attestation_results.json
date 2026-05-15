@@ -1,0 +1,39 @@
+{
+  "phase": "attestation",
+  "checks": 6,
+  "passed": 1,
+  "failed": 5,
+  "warnings": 0,
+  "findings": [
+    {
+      "severity": "critical",
+      "title": "Attestation boundary violation: custody_notice_claims_physical_verification.json",
+      "file": "tests/fixtures/redteam/attestation/custody_notice_claims_physical_verification.json",
+      "description": "Flags: ['custody_claims_verification']"
+    },
+    {
+      "severity": "critical",
+      "title": "Attestation boundary violation: gateway_claims_attestation.json",
+      "file": "tests/fixtures/redteam/attestation/gateway_claims_attestation.json",
+      "description": "Flags: ['gateway_claims_attestation']"
+    },
+    {
+      "severity": "critical",
+      "title": "Attestation boundary violation: human_solicited_claims_independent.json",
+      "file": "tests/fixtures/redteam/attestation/human_solicited_claims_independent.json",
+      "description": "Flags: ['human_solicited_claims_independent']"
+    },
+    {
+      "severity": "critical",
+      "title": "Attestation boundary violation: nft_owner_claims_governance.json",
+      "file": "tests/fixtures/redteam/attestation/nft_owner_claims_governance.json",
+      "description": "Flags: ['nft_claims_governance']"
+    },
+    {
+      "severity": "critical",
+      "title": "Attestation boundary violation: test_record_claims_accepted.json",
+      "file": "tests/fixtures/redteam/attestation/test_record_claims_accepted.json",
+      "description": "Flags: ['test_record_claims_accepted']"
+    }
+  ]
+}
