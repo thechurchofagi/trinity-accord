@@ -952,6 +952,22 @@ def check_v4_scope(evidence, requested_level):
             if s.get("scope_class") == "independent_reproduction" and requested_level == "V4":
                 failures.append("V4 cannot use scope_class=independent_reproduction")
 
+    # V4+: independent scripts must explicitly set official=false
+    # Prevents silent downgrade when agent writes independent script but omits official field
+    if requested_level == "V4+":
+        for s in scripts:
+            is_independent = (
+                s.get("scope_class") == "independent_reproduction"
+                or s.get("independent", False)
+            )
+            if is_independent and s.get("official") is not False and "official" not in s:
+                path = s.get("path", s.get("script_name", "unknown"))
+                failures.append(
+                    f"V4+ script '{path}' claims independence (scope_class={s.get('scope_class')}, "
+                    f"independent={s.get('independent')}) but missing explicit 'official: false'. "
+                    f"Add '\"official\": false' to this script entry."
+                )
+
     return failures
 
 

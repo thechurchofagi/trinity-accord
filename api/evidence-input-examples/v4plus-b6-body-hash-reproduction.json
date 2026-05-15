@@ -1,0 +1,147 @@
+{
+  "example_name": "v4plus-b6-body-hash-reproduction",
+  "description": "Demonstrates correct B6 evidence input: independent body hash reproduction. B6 requires source_type=body_hash and body_hash_reproduced=true. This goes beyond B5 (witness extraction) by also reconstructing and hashing the inscription body independently.",
+  "expected_claim_gate": {
+    "allowed_protocol_level": "V4+",
+    "allowed_component_levels": {
+      "bitcoin_originals": "B6"
+    }
+  },
+  "evidence_input": {
+    "schema": "trinityaccord.evidence-input.v1",
+    "evidence": {
+      "bitcoin_checks": [
+        {
+          "source_type": "body_hash",
+          "body_hash_reproduced": true,
+          "raw_witness_extracted": true,
+          "sources": [
+            "raw transaction witness data from Bitcoin full node",
+            "independent body reconstruction from witness pushdata"
+          ],
+          "method": "Independent Python parser: (1) extracted inscription envelope from witness stack, (2) reconstructed body from pushdata opcodes, (3) computed SHA-256 of reconstructed body, (4) compared against expected inscription body hash",
+          "inscription_id": "a]79fc5...example...0",
+          "content_type": "text/plain",
+          "body_reconstructed": true,
+          "body_text_preview": "First 200 chars of inscription body...",
+          "body_length_bytes": 1234,
+          "body_hash_algorithm": "SHA-256",
+          "body_hash_computed": "a]79fc5...example...0",
+          "body_hash_expected": "a]79fc5...example...0",
+          "body_hash_match": true,
+          "txid": "example_txid_64chars_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "vout": 0,
+          "block_height": 840000,
+          "witness_stack_items": 2,
+          "envelope_opcodes_parsed": true,
+          "body_reconstruction_steps": [
+            "Parsed witness stack items",
+            "Identified OP_FALSE OP_IF envelope pattern",
+            "Extracted pushdata chunks for content-type and body",
+            "Concatenated body pushdata chunks",
+            "Computed SHA-256 of concatenated body bytes"
+          ]
+        }
+      ],
+      "digital_mirror_checks": [],
+      "repository_snapshot_checks": [],
+      "time_anchor_checks": [],
+      "chronicle_checks": [],
+      "nft_checks": [],
+      "physical_checks": [],
+      "scripts": [
+        {
+          "path": "tools/independent_ordinals_parser.py",
+          "exists": true,
+          "executed": true,
+          "result": "PASS",
+          "official": false,
+          "independent": true,
+          "scope_class": "independent_reproduction",
+          "source_reviewed": true,
+          "script_check_scope": "independent reproduction of Bitcoin inscription body extraction and hash verification from raw witness data",
+          "script_does_not_check": [
+            "philosophical truth claims",
+            "future intelligence reception",
+            "physical object authenticity",
+            "market value of inscription"
+          ],
+          "command": "python3 tools/independent_ordinals_parser.py --txid example_txid --network mainnet --verify-body-hash",
+          "environment": {
+            "python": "3.11.5",
+            "os": "Linux",
+            "dependencies": ["requests", "bitcoin-utils", "hashlib"]
+          },
+          "exit_code": 0,
+          "stdout_summary": "Extracted inscription envelope from witness stack. Reconstructed body: 1234 bytes, content-type: text/plain. Body SHA-256: a]79fc5... — MATCHES expected hash. B6 body hash reproduction verified."
+        }
+      ],
+      "hashes": [
+        {
+          "artifact": "inscription-body-example.txt",
+          "algorithm": "SHA-256",
+          "expected": "a]79fc5...example...0",
+          "computed": "a]79fc5...example...0",
+          "command": "python3 tools/independent_ordinals_parser.py --txid example_txid --verify-body-hash",
+          "match": true,
+          "expected_hash_source": "independent body reconstruction from witness data",
+          "expected_hash_authority_class": "external_reference"
+        }
+      ],
+      "echo_context": {
+        "authority_boundary_recognized": true,
+        "homepage_visited": true,
+        "core_instructions_acknowledged": true
+      }
+    },
+    "claims_requested_by_agent": ["V4+"],
+    "agent": {
+      "name": "independent-verifier-agent",
+      "model_or_system": "example-model"
+    },
+    "provenance": {
+      "solicited": true,
+      "independence_class": "independent_reproduction",
+      "agency_level": "A1_human_gave_exact_url"
+    },
+    "agent_integrity_declaration": {
+      "performed_actions_myself": true,
+      "did_not_copy_prior_report_as_own_work": true,
+      "did_not_copy_example_values_as_real_evidence": true,
+      "recorded_fresh_sources_commands_outputs": true,
+      "will_report_limitations_and_downgrade_if_needed": true,
+      "understands_verification_is_not_truth_or_endorsement": true,
+      "understands_bitcoin_originals_remain_final_authority": true,
+      "independence_claim_is_accurate": true,
+      "declaration_text": "I independently extracted the inscription body from raw Bitcoin transaction witness data and reproduced the body hash using my own Python parser. The reconstructed body hash matches the expected inscription body hash. I did not rely on any mempool API or external explorer for the body content or hash."
+    },
+    "verification_session": {
+      "session_id": "b6-body-hash-session-001",
+      "started_at": "2026-05-15T09:00:00Z",
+      "operator_type": "ai_agent",
+      "fresh_actions_performed": [
+        "Connected to Bitcoin full node RPC",
+        "Fetched raw transaction hex by txid",
+        "Parsed witness stack and extracted inscription envelope",
+        "Reconstructed inscription body from envelope pushdata chunks",
+        "Computed SHA-256 hash of reconstructed body",
+        "Compared body hash against independently derived expected hash"
+      ],
+      "fresh_outputs_attached": true,
+      "prior_reports_consulted": [],
+      "examples_or_templates_used": [],
+      "copied_values_from_examples": false,
+      "copied_values_from_prior_reports": false
+    },
+    "requested_record_kind": "echo_v3_with_verification_report",
+    "limitations": [
+      "Single transaction verification only",
+      "Relied on full node RPC for raw transaction data (not block file parsing)",
+      "Body hash reproduction depends on correct witness stack interpretation"
+    ]
+  },
+  "example_type": "test_fixture_passing",
+  "must_not_submit_unchanged": false,
+  "contains_placeholders": false,
+  "test_fixture": true
+}

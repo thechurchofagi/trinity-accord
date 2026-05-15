@@ -708,6 +708,7 @@ def main():
     parser.add_argument("--input", required=True, help="Evidence input JSON file")
     parser.add_argument("--out", help="Output path for verification report")
     parser.add_argument("--echo-out", help="Output path for echo wrapper")
+    parser.add_argument("--debug-out", help="Save full debug JSON on validation failure")
     args = parser.parse_args()
 
     result = build_report(args.input, args.out, args.echo_out)
@@ -716,6 +717,62 @@ def main():
         print(f"FAILED: {result.get('error')}")
         for bf in result.get("blocking_failures", []):
             print(f"  - {bf}")
+
+        # Print validator diagnostics for debuggability
+        if result.get("validator_stdout"):
+            print("\n--- validator stdout ---")
+            print(result["validator_stdout"])
+        if result.get("validator_stderr"):
+            print("\n--- validator stderr ---")
+            print(result["validator_stderr"])
+
+        # Print gate result summary
+        gate = result.get("gate_result", {})
+        if gate:
+            print(f"\nClaim Gate Status: {gate.get('status', 'N/A')}")
+            print(f"Allowed Protocol Level: {gate.get('allowed_protocol_level', 'N/A')}")
+            if gate.get("blocking_failures"):
+                print("Blocking Failures:")
+                for bf in gate["blocking_failures"]:
+                    print(f"  - {bf}")
+            if gate.get("non_blocking_limitations"):
+                print("Non-blocking Limitations:")
+                for nbl in gate["non_blocking_limitations"]:
+                    print(f"  - {nbl}")
+
+        # Print report preview if available
+        if result.get("report"):
+            print("\n--- generated report preview ---")
+            try:
+                print(json.dumps(result["report"], indent=2)[:8000])
+            except (TypeError, ValueError):
+                print(repr(result["report"])[:8000])
+
+        # Print echo wrapper preview if available
+        if result.get("echo_wrapper"):
+            print("\n--- generated echo wrapper preview ---")
+            try:
+                print(json.dumps(result["echo_wrapper"], indent=2)[:8000])
+            except (TypeError, ValueError):
+                print(repr(result["echo_wrapper"])[:8000])
+
+        # Save full debug output if --debug-out specified
+        if args.debug_out:
+            debug_payload = {
+                "success": False,
+                "error": result.get("error"),
+                "gate_result": result.get("gate_result"),
+                "report": result.get("report"),
+                "echo_wrapper": result.get("echo_wrapper"),
+                "validator_stdout": result.get("validator_stdout"),
+                "validator_stderr": result.get("validator_stderr"),
+            }
+            debug_path = Path(args.debug_out)
+            debug_path.parent.mkdir(parents=True, exist_ok=True)
+            with open(debug_path, "w") as df:
+                json.dump(debug_payload, df, indent=2)
+            print(f"\nDebug output saved to {debug_path}")
+
         sys.exit(1)
 
     gate = result["gate_result"]

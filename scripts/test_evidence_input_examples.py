@@ -219,6 +219,93 @@ def test_report_builder_v3():
         os.unlink(tmp_path)
 
 
+def test_b5_witness_extraction():
+    """Test B5 witness extraction fixture passes claim gate at V4+ with B5."""
+    path = EXAMPLES / "v4plus-b5-witness-extraction.json"
+    assert path.exists(), f"v4plus-b5-witness-extraction.json not found"
+
+    with open(path) as f:
+        data = json.load(f)
+
+    ei = data["evidence_input"]
+    assert "V4+" in ei["claims_requested_by_agent"]
+    btc = ei["evidence"]["bitcoin_checks"][0]
+    assert btc["source_type"] == "witness_extraction", f"Expected source_type=witness_extraction, got {btc['source_type']}"
+    assert btc.get("raw_witness_extracted") is True, "B5 requires raw_witness_extracted=true"
+    assert ei["evidence"]["scripts"][0].get("official") is False, "Independent script must have official=false"
+    assert ei["evidence"]["scripts"][0].get("independent") is True
+    print("  PASS: v4plus-b5-witness-extraction.json is schema-valid with B5 evidence")
+
+
+def test_b5_witness_extraction_claim_gate():
+    """Test B5 fixture passes claim gate at V4+."""
+    path = EXAMPLES / "v4plus-b5-witness-extraction.json"
+    with open(path) as f:
+        data = json.load(f)
+
+    import tempfile
+    with tempfile.NamedTemporaryFile(mode="w", suffix=".json", delete=False) as tmp:
+        json.dump(data["evidence_input"], tmp)
+        tmp_path = tmp.name
+
+    try:
+        rc, output, stderr = run_claim_gate(tmp_path)
+        assert rc == 0, f"Claim gate failed (rc={rc}): {stderr}"
+        assert output is not None, "Claim gate output is not valid JSON"
+        allowed = output.get("allowed_protocol_level", "none")
+        assert allowed in ("V4+", "V5", "V6", "V7", "V8"), f"Expected V4+ or higher, got {allowed}"
+        b_level = output.get("allowed_component_levels", {}).get("bitcoin_originals", "B0")
+        assert b_level in ("B5", "B6", "B7"), f"Expected B5+, got {b_level}"
+        print(f"  PASS: v4plus-b5 claim gate: allowed={allowed}, bitcoin_originals={b_level}")
+    finally:
+        import os
+        os.unlink(tmp_path)
+
+
+def test_b6_body_hash_reproduction():
+    """Test B6 body hash reproduction fixture passes claim gate at V4+ with B6."""
+    path = EXAMPLES / "v4plus-b6-body-hash-reproduction.json"
+    assert path.exists(), f"v4plus-b6-body-hash-reproduction.json not found"
+
+    with open(path) as f:
+        data = json.load(f)
+
+    ei = data["evidence_input"]
+    assert "V4+" in ei["claims_requested_by_agent"]
+    btc = ei["evidence"]["bitcoin_checks"][0]
+    assert btc["source_type"] == "body_hash", f"Expected source_type=body_hash, got {btc['source_type']}"
+    assert btc.get("body_hash_reproduced") is True, "B6 requires body_hash_reproduced=true"
+    assert btc.get("raw_witness_extracted") is True, "B6 also requires raw_witness_extracted"
+    assert ei["evidence"]["scripts"][0].get("official") is False
+    assert ei["evidence"]["scripts"][0].get("independent") is True
+    print("  PASS: v4plus-b6-body-hash-reproduction.json is schema-valid with B6 evidence")
+
+
+def test_b6_body_hash_claim_gate():
+    """Test B6 fixture passes claim gate at V4+."""
+    path = EXAMPLES / "v4plus-b6-body-hash-reproduction.json"
+    with open(path) as f:
+        data = json.load(f)
+
+    import tempfile
+    with tempfile.NamedTemporaryFile(mode="w", suffix=".json", delete=False) as tmp:
+        json.dump(data["evidence_input"], tmp)
+        tmp_path = tmp.name
+
+    try:
+        rc, output, stderr = run_claim_gate(tmp_path)
+        assert rc == 0, f"Claim gate failed (rc={rc}): {stderr}"
+        assert output is not None, "Claim gate output is not valid JSON"
+        allowed = output.get("allowed_protocol_level", "none")
+        assert allowed in ("V4+", "V5", "V6", "V7", "V8"), f"Expected V4+ or higher, got {allowed}"
+        b_level = output.get("allowed_component_levels", {}).get("bitcoin_originals", "B0")
+        assert b_level in ("B6", "B7"), f"Expected B6+, got {b_level}"
+        print(f"  PASS: v4plus-b6 claim gate: allowed={allowed}, bitcoin_originals={b_level}")
+    finally:
+        import os
+        os.unlink(tmp_path)
+
+
 def main():
     tests = [
         test_v1_boundary,
@@ -229,6 +316,10 @@ def main():
         test_v3_claim_gate,
         test_report_builder_v2,
         test_report_builder_v3,
+        test_b5_witness_extraction,
+        test_b5_witness_extraction_claim_gate,
+        test_b6_body_hash_reproduction,
+        test_b6_body_hash_claim_gate,
     ]
 
     print("Running test_evidence_input_examples.py")
