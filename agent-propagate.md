@@ -1,5 +1,6 @@
 ---
 title: "Agent Propagate"
+permalink: /agent-propagate/
 ---
 
 # Agent Propagate
