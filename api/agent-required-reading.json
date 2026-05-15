@@ -112,5 +112,11 @@
   },
   "note": "This file is the canonical source. If llms.txt, agent-start.md, or agent-entry-protocol.json conflict, this file prevails.",
   "integrity_required": true,
-  "anti_copying_required": true
+  "anti_copying_required": true,
+  "boundary": {
+    "not_authority": true,
+    "non_amending": true,
+    "bitcoin_originals_prevail": true,
+    "note": "This file is non-authoritative guidance. Bitcoin Originals are final. All mirrors, APIs, and documentation are non-amending."
+  }
 }

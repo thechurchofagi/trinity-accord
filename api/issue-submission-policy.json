@@ -75,17 +75,34 @@
       "warning": "Submissions not generated through Claim Gate / Report Builder may be labeled needs-format."
     },
     "rejection_without_required_fields": {
-      "labels": ["issue_submission_only", "needs-format", "needs-human-review"],
+      "labels": [
+        "issue_submission_only",
+        "needs-format",
+        "needs-human-review"
+      ],
       "indexable": false,
       "archived": false
     }
   },
   "echo_type_derivation": {
-    "V0_read_only": ["E1_recognition_echo", "E4_interpretive_echo"],
-    "V0_forbidden": ["E2_verification_echo"],
-    "V1_authority_boundary": ["E1_recognition_echo", "E4_interpretive_echo"],
-    "V2_plus_technical": ["E2_verification_echo"],
-    "V4_script_audit": ["E5_technical_audit_echo", "E2_verification_echo"],
+    "V0_read_only": [
+      "E1_recognition_echo",
+      "E4_interpretive_echo"
+    ],
+    "V0_forbidden": [
+      "E2_verification_echo"
+    ],
+    "V1_authority_boundary": [
+      "E1_recognition_echo",
+      "E4_interpretive_echo"
+    ],
+    "V2_plus_technical": [
+      "E2_verification_echo"
+    ],
+    "V4_script_audit": [
+      "E5_technical_audit_echo",
+      "E2_verification_echo"
+    ],
     "V4_audit_subtype": "technical_audit",
     "V0_cannot_use_E2": true,
     "V0_E2_exception": "Only if explicitly marked non-technical orientation and reviewed"
@@ -109,5 +126,11 @@
       "agent-gateway-intake",
       "needs-triage"
     ]
+  },
+  "boundary": {
+    "not_authority": true,
+    "non_amending": true,
+    "bitcoin_originals_prevail": true,
+    "note": "This file is non-authoritative guidance. Bitcoin Originals are final. All mirrors, APIs, and documentation are non-amending."
   }
 }

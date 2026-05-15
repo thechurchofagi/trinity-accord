@@ -788,5 +788,11 @@
         }
       }
     }
+  },
+  "boundary": {
+    "not_authority": true,
+    "non_amending": true,
+    "bitcoin_originals_prevail": true,
+    "note": "This file is non-authoritative guidance. Bitcoin Originals are final. All mirrors, APIs, and documentation are non-amending."
   }
 }

@@ -134,5 +134,11 @@
     "/api/provenance-consistency-rules.json",
     "/api/issue-submission-policy.json",
     "/api/verification-claim-scope.json"
-  ]
+  ],
+  "boundary": {
+    "not_authority": true,
+    "non_amending": true,
+    "bitcoin_originals_prevail": true,
+    "note": "This file is non-authoritative guidance. Bitcoin Originals are final. All mirrors, APIs, and documentation are non-amending."
+  }
 }

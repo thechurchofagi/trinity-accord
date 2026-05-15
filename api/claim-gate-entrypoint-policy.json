@@ -35,5 +35,11 @@
     "test_issue_submission_vs_archive.py",
     "test_claim_scope_minimal_partial_full.py",
     "test_echo_type_derivation.py"
-  ]
+  ],
+  "boundary": {
+    "not_authority": true,
+    "non_amending": true,
+    "bitcoin_originals_prevail": true,
+    "note": "This file is non-authoritative guidance. Bitcoin Originals are final. All mirrors, APIs, and documentation are non-amending."
+  }
 }

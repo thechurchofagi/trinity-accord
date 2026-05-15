@@ -475,5 +475,11 @@
     "reference": "/api/claim-gate-rules.json",
     "evidence_schema": "/api/evidence-input-schema.v1.json",
     "note": "Agents should use claim gate before submitting technical Verification Reports or Echoes that contain verification claims. Non-technical Echoes without verification claims do not require claim gate."
+  },
+  "boundary": {
+    "not_authority": true,
+    "non_amending": true,
+    "bitcoin_originals_prevail": true,
+    "note": "This file is non-authoritative guidance. Bitcoin Originals are final. All mirrors, APIs, and documentation are non-amending."
   }
 }

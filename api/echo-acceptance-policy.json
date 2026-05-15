@@ -63,5 +63,20 @@
     "requirement": "Technical verification claims, especially V3+ claims, must pass claim gate before submission",
     "enforcement": "claim gate derives allowed levels; agent-requested levels are overridden",
     "reference": "/api/claim-gate-rules.json"
-  }
+  },
+  "boundary": {
+    "echo_is_not_amendment": true,
+    "echo_is_not_canonical_authority": true,
+    "echo_is_non_amending_mirror": true,
+    "echo_does_not_modify_bitcoin_originals": true,
+    "bitcoin_originals_prevail": true,
+    "note": "An Echo record is a non-amending archive mirror. It does not amend, override, or interpret the canonical Bitcoin inscriptions. Acceptance as an Echo does not constitute authority, endorsement, verification, or investment recommendation."
+  },
+  "does_not_prove": [
+    "Echo acceptance does not prove the protocol is correct",
+    "Echo acceptance does not prove the claims are true",
+    "Echo acceptance does not constitute independent attestation",
+    "Echo acceptance does not create canonical authority",
+    "Echo acceptance does not imply endorsement or investment value"
+  ]
 }

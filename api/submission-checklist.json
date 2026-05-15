@@ -178,5 +178,11 @@
     "physical_evidence_reviewed.flaw_analysis_method": "Use \"not_performed\"; never null",
     "protocol_profile_check": "Use object with defaults; never null",
     "confidential_challenge": "Use {\"performed\": false, \"result\": \"not_performed\"}; never null"
+  },
+  "boundary": {
+    "not_authority": true,
+    "non_amending": true,
+    "bitcoin_originals_prevail": true,
+    "note": "This file is non-authoritative guidance. Bitcoin Originals are final. All mirrors, APIs, and documentation are non-amending."
   }
 }

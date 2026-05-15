@@ -428,5 +428,11 @@
     "level": "V4+",
     "rule": "technical independent reproduction does not imply social independent attestation",
     "required_boundary": "not_independent_attestation when independence_class is human_solicited_agent_response"
+  },
+  "boundary": {
+    "not_authority": true,
+    "non_amending": true,
+    "bitcoin_originals_prevail": true,
+    "note": "This file is non-authoritative guidance. Bitcoin Originals are final. All mirrors, APIs, and documentation are non-amending."
   }
 }

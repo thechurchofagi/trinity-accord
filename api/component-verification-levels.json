@@ -229,8 +229,12 @@
         ],
         "evidence_input_fields": {
           "bitcoin_checks[].source_type": "external_explorer",
-          "bitcoin_checks[].sources": ["mempool.space"],
-          "bitcoin_checks[].txids_checked": ["<txid>"]
+          "bitcoin_checks[].sources": [
+            "mempool.space"
+          ],
+          "bitcoin_checks[].txids_checked": [
+            "<txid>"
+          ]
         },
         "example_claim": "Bitcoin Original TXID confirmed on external explorer.",
         "downgrade_if_missing": "B0 if only /api/authority.json was read"
@@ -877,7 +881,7 @@
         "data_sources": [
           "all NFTs in collection"
         ],
-        "method": "reproduce full tokenURI\u2192metadata\u2192media path for all tokens",
+        "method": "reproduce full tokenURI→metadata→media path for all tokens",
         "allowed_claims": [
           "full NFT path reproduction confirmed"
         ],
@@ -1004,7 +1008,9 @@
         ],
         "evidence_input_fields": {
           "physical_checks[].level_evidence_type": "onsite",
-          "physical_checks[].custody_log": {"present": true},
+          "physical_checks[].custody_log": {
+            "present": true
+          },
           "physical_checks[].fresh_capture": true,
           "physical_checks[].touch_or_handling": true
         },
@@ -1174,5 +1180,11 @@
     "required_for": "technical verification claims, especially V3+ component claims",
     "reference": "/api/claim-gate-rules.json",
     "note": "Component levels are derived by claim gate from evidence, not self-assigned by agents."
+  },
+  "boundary": {
+    "not_authority": true,
+    "non_amending": true,
+    "bitcoin_originals_prevail": true,
+    "note": "This file is non-authoritative guidance. Bitcoin Originals are final. All mirrors, APIs, and documentation are non-amending."
   }
 }
