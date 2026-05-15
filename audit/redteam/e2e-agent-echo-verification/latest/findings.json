@@ -1,0 +1,489 @@
+{
+  "real": [
+    {
+      "severity": "medium",
+      "title": "Missing boundary declaration: non_amending",
+      "file": "api/agent-entry-protocol.json",
+      "description": "Agent-facing API should contain 'non_amending' boundary declaration"
+    },
+    {
+      "severity": "medium",
+      "title": "Missing boundary declaration: not_authority",
+      "file": "api/agent-required-reading.json",
+      "description": "Agent-facing API should contain 'not_authority' boundary declaration"
+    },
+    {
+      "severity": "medium",
+      "title": "Missing boundary declaration: non_amending",
+      "file": "api/agent-required-reading.json",
+      "description": "Agent-facing API should contain 'non_amending' boundary declaration"
+    },
+    {
+      "severity": "medium",
+      "title": "Missing boundary declaration: bitcoin_originals",
+      "file": "api/agent-required-reading.json",
+      "description": "Agent-facing API should contain 'bitcoin_originals' boundary declaration"
+    },
+    {
+      "severity": "medium",
+      "title": "Missing boundary declaration: not_authority",
+      "file": "api/agent-submission-guide.json",
+      "description": "Agent-facing API should contain 'not_authority' boundary declaration"
+    },
+    {
+      "severity": "medium",
+      "title": "Missing boundary declaration: not_authority",
+      "file": "api/submission-checklist.json",
+      "description": "Agent-facing API should contain 'not_authority' boundary declaration"
+    },
+    {
+      "severity": "medium",
+      "title": "Missing boundary declaration: non_amending",
+      "file": "api/submission-checklist.json",
+      "description": "Agent-facing API should contain 'non_amending' boundary declaration"
+    },
+    {
+      "severity": "medium",
+      "title": "Missing boundary declaration: bitcoin_originals",
+      "file": "api/submission-checklist.json",
+      "description": "Agent-facing API should contain 'bitcoin_originals' boundary declaration"
+    },
+    {
+      "severity": "medium",
+      "title": "Missing boundary declaration: not_authority",
+      "file": "api/issue-submission-policy.json",
+      "description": "Agent-facing API should contain 'not_authority' boundary declaration"
+    },
+    {
+      "severity": "medium",
+      "title": "Missing boundary declaration: non_amending",
+      "file": "api/issue-submission-policy.json",
+      "description": "Agent-facing API should contain 'non_amending' boundary declaration"
+    },
+    {
+      "severity": "medium",
+      "title": "Missing boundary declaration: not_authority",
+      "file": "api/echo-acceptance-policy.json",
+      "description": "Agent-facing API should contain 'not_authority' boundary declaration"
+    },
+    {
+      "severity": "medium",
+      "title": "Missing boundary declaration: non_amending",
+      "file": "api/echo-acceptance-policy.json",
+      "description": "Agent-facing API should contain 'non_amending' boundary declaration"
+    },
+    {
+      "severity": "medium",
+      "title": "Missing boundary declaration: bitcoin_originals",
+      "file": "api/echo-acceptance-policy.json",
+      "description": "Agent-facing API should contain 'bitcoin_originals' boundary declaration"
+    },
+    {
+      "severity": "medium",
+      "title": "Missing boundary declaration: not_authority",
+      "file": "api/propagation-policy.json",
+      "description": "Agent-facing API should contain 'not_authority' boundary declaration"
+    },
+    {
+      "severity": "medium",
+      "title": "Missing boundary declaration: non_amending",
+      "file": "api/propagation-policy.json",
+      "description": "Agent-facing API should contain 'non_amending' boundary declaration"
+    },
+    {
+      "severity": "medium",
+      "title": "Missing boundary declaration: bitcoin_originals",
+      "file": "api/propagation-policy.json",
+      "description": "Agent-facing API should contain 'bitcoin_originals' boundary declaration"
+    },
+    {
+      "severity": "low",
+      "title": "Missing 'schema' field",
+      "file": "api/agent-issue-gateway-payload-schema.v1.json"
+    },
+    {
+      "severity": "medium",
+      "title": "Missing boundary declaration: non_amending",
+      "file": "api/agent-issue-gateway-payload-schema.v1.json",
+      "description": "Agent-facing API should contain 'non_amending' boundary declaration"
+    },
+    {
+      "severity": "medium",
+      "title": "Missing boundary declaration: not_authority",
+      "file": "api/claim-gate-rules.json",
+      "description": "Agent-facing API should contain 'not_authority' boundary declaration"
+    },
+    {
+      "severity": "medium",
+      "title": "Missing boundary declaration: non_amending",
+      "file": "api/claim-gate-rules.json",
+      "description": "Agent-facing API should contain 'non_amending' boundary declaration"
+    },
+    {
+      "severity": "medium",
+      "title": "Empty does_not_prove",
+      "file": "api/claim-gate-rules.json"
+    },
+    {
+      "severity": "medium",
+      "title": "Missing boundary declaration: not_authority",
+      "file": "api/claim-gate-entrypoint-policy.json",
+      "description": "Agent-facing API should contain 'not_authority' boundary declaration"
+    },
+    {
+      "severity": "medium",
+      "title": "Missing boundary declaration: non_amending",
+      "file": "api/claim-gate-entrypoint-policy.json",
+      "description": "Agent-facing API should contain 'non_amending' boundary declaration"
+    },
+    {
+      "severity": "medium",
+      "title": "Missing boundary declaration: bitcoin_originals",
+      "file": "api/claim-gate-entrypoint-policy.json",
+      "description": "Agent-facing API should contain 'bitcoin_originals' boundary declaration"
+    },
+    {
+      "severity": "medium",
+      "title": "Missing boundary declaration: not_authority",
+      "file": "api/verification-levels.json",
+      "description": "Agent-facing API should contain 'not_authority' boundary declaration"
+    },
+    {
+      "severity": "medium",
+      "title": "Missing boundary declaration: not_authority",
+      "file": "api/component-verification-levels.json",
+      "description": "Agent-facing API should contain 'not_authority' boundary declaration"
+    },
+    {
+      "severity": "medium",
+      "title": "Missing boundary declaration: not_authority",
+      "file": "api/echo-types.json",
+      "description": "Agent-facing API should contain 'not_authority' boundary declaration"
+    },
+    {
+      "severity": "low",
+      "title": "Missing 'schema' field",
+      "file": "api/evidence-input-schema.v1.json"
+    },
+    {
+      "severity": "medium",
+      "title": "Missing boundary declaration: not_authority",
+      "file": "api/evidence-input-schema.v1.json",
+      "description": "Agent-facing API should contain 'not_authority' boundary declaration"
+    },
+    {
+      "severity": "medium",
+      "title": "Missing boundary declaration: non_amending",
+      "file": "api/evidence-input-schema.v1.json",
+      "description": "Agent-facing API should contain 'non_amending' boundary declaration"
+    },
+    {
+      "severity": "low",
+      "title": "Missing 'schema' field",
+      "file": "api/claim-gate-output-schema.v1.json"
+    },
+    {
+      "severity": "medium",
+      "title": "Missing boundary declaration: not_authority",
+      "file": "api/claim-gate-output-schema.v1.json",
+      "description": "Agent-facing API should contain 'not_authority' boundary declaration"
+    },
+    {
+      "severity": "medium",
+      "title": "Missing boundary declaration: non_amending",
+      "file": "api/claim-gate-output-schema.v1.json",
+      "description": "Agent-facing API should contain 'non_amending' boundary declaration"
+    },
+    {
+      "severity": "high",
+      "title": "Echo ≠ Amendment boundary unclear",
+      "file": "api/echo-acceptance-policy.json",
+      "description": "Echo acceptance policy must clarify that Echoes are not amendments"
+    },
+    {
+      "severity": "medium",
+      "title": "Entrypoint missing keyword: 'boundary'",
+      "file": "/agent-first-contact.md",
+      "description": "Expected keyword 'boundary' not found in /agent-first-contact"
+    },
+    {
+      "severity": "medium",
+      "title": "Entrypoint missing keyword: 'not religion'",
+      "file": "/agent-brief.md",
+      "description": "Expected keyword 'not religion' not found in /agent-brief"
+    },
+    {
+      "severity": "medium",
+      "title": "Entrypoint missing keyword: 'not amendment'",
+      "file": "/agent-echo.md",
+      "description": "Expected keyword 'not amendment' not found in /agent-echo"
+    },
+    {
+      "severity": "medium",
+      "title": "Entrypoint JSON missing guidance: /api/agent-required-reading.json",
+      "file": "/api/agent-required-reading.json",
+      "description": "Expected recommended_sequence, context_depth, or required_reading"
+    },
+    {
+      "severity": "medium",
+      "title": "assets_total mismatch: archive/hash-manifest.json",
+      "file": "archive/hash-manifest.json",
+      "expected": "assets_total = 0",
+      "actual": "assets_total = -1"
+    },
+    {
+      "severity": "medium",
+      "title": "Manifest note missing boundary: archive/hash-manifest.json",
+      "file": "archive/hash-manifest.json"
+    },
+    {
+      "severity": "medium",
+      "title": "assets_total mismatch: api/evidence-manifest.json",
+      "file": "api/evidence-manifest.json",
+      "expected": "assets_total = 0",
+      "actual": "assets_total = -1"
+    },
+    {
+      "severity": "medium",
+      "title": "assets_total mismatch: evidence/notarial-certificate-2026-05-13/evidence-images-manifest.json",
+      "file": "evidence/notarial-certificate-2026-05-13/evidence-images-manifest.json",
+      "expected": "assets_total = 10",
+      "actual": "assets_total = -1"
+    },
+    {
+      "severity": "medium",
+      "title": "Asset missing non-amending boundary in evidence/notarial-certificate-2026-05-13/evidence-images-manifest.json",
+      "file": "evidence/notarial-certificate-2026-05-13/evidence-images-manifest.json"
+    },
+    {
+      "severity": "medium",
+      "title": "Asset missing non-amending boundary in evidence/notarial-certificate-2026-05-13/evidence-images-manifest.json",
+      "file": "evidence/notarial-certificate-2026-05-13/evidence-images-manifest.json"
+    },
+    {
+      "severity": "medium",
+      "title": "Asset missing non-amending boundary in evidence/notarial-certificate-2026-05-13/evidence-images-manifest.json",
+      "file": "evidence/notarial-certificate-2026-05-13/evidence-images-manifest.json"
+    },
+    {
+      "severity": "medium",
+      "title": "Asset missing non-amending boundary in evidence/notarial-certificate-2026-05-13/evidence-images-manifest.json",
+      "file": "evidence/notarial-certificate-2026-05-13/evidence-images-manifest.json"
+    },
+    {
+      "severity": "medium",
+      "title": "Asset missing non-amending boundary in evidence/notarial-certificate-2026-05-13/evidence-images-manifest.json",
+      "file": "evidence/notarial-certificate-2026-05-13/evidence-images-manifest.json"
+    },
+    {
+      "severity": "medium",
+      "title": "Asset missing non-amending boundary in evidence/notarial-certificate-2026-05-13/evidence-images-manifest.json",
+      "file": "evidence/notarial-certificate-2026-05-13/evidence-images-manifest.json"
+    },
+    {
+      "severity": "medium",
+      "title": "Asset missing non-amending boundary in evidence/notarial-certificate-2026-05-13/evidence-images-manifest.json",
+      "file": "evidence/notarial-certificate-2026-05-13/evidence-images-manifest.json"
+    },
+    {
+      "severity": "medium",
+      "title": "Asset missing non-amending boundary in evidence/notarial-certificate-2026-05-13/evidence-images-manifest.json",
+      "file": "evidence/notarial-certificate-2026-05-13/evidence-images-manifest.json"
+    },
+    {
+      "severity": "medium",
+      "title": "Asset missing non-amending boundary in evidence/notarial-certificate-2026-05-13/evidence-images-manifest.json",
+      "file": "evidence/notarial-certificate-2026-05-13/evidence-images-manifest.json"
+    },
+    {
+      "severity": "medium",
+      "title": "Asset missing non-amending boundary in evidence/notarial-certificate-2026-05-13/evidence-images-manifest.json",
+      "file": "evidence/notarial-certificate-2026-05-13/evidence-images-manifest.json"
+    },
+    {
+      "severity": "medium",
+      "title": "Manifest note missing boundary: evidence/notarial-certificate-2026-05-13/evidence-images-manifest.json",
+      "file": "evidence/notarial-certificate-2026-05-13/evidence-images-manifest.json"
+    }
+  ],
+  "expected_negative": [
+    {
+      "severity": "critical",
+      "title": "Attestation boundary violation: custody_notice_claims_physical_verification.json",
+      "file": "tests/fixtures/redteam/attestation/custody_notice_claims_physical_verification.json",
+      "description": "Flags: ['custody_claims_verification']"
+    },
+    {
+      "severity": "critical",
+      "title": "Attestation boundary violation: gateway_claims_attestation.json",
+      "file": "tests/fixtures/redteam/attestation/gateway_claims_attestation.json",
+      "description": "Flags: ['gateway_claims_attestation']"
+    },
+    {
+      "severity": "critical",
+      "title": "Attestation boundary violation: human_solicited_claims_independent.json",
+      "file": "tests/fixtures/redteam/attestation/human_solicited_claims_independent.json",
+      "description": "Flags: ['human_solicited_claims_independent']"
+    },
+    {
+      "severity": "critical",
+      "title": "Attestation boundary violation: nft_owner_claims_governance.json",
+      "file": "tests/fixtures/redteam/attestation/nft_owner_claims_governance.json",
+      "description": "Flags: ['nft_claims_governance']"
+    },
+    {
+      "severity": "critical",
+      "title": "Attestation boundary violation: test_record_claims_accepted.json",
+      "file": "tests/fixtures/redteam/attestation/test_record_claims_accepted.json",
+      "description": "Flags: ['test_record_claims_accepted']"
+    },
+    {
+      "severity": "medium",
+      "title": "Body length out of bounds: body_too_short.json",
+      "file": "tests/fixtures/redteam/gateway_payloads/body_too_short.json",
+      "description": "Body length: 5 (expected 20-60000)"
+    },
+    {
+      "severity": "high",
+      "title": "Missing/false boundary: not_attestation in claims_gateway_is_attestation.json",
+      "file": "tests/fixtures/redteam/gateway_payloads/claims_gateway_is_attestation.json",
+      "expected": "not_attestation = true",
+      "actual": "False"
+    },
+    {
+      "severity": "critical",
+      "title": "Secret-like pattern in body: contains_secret_like_token.json",
+      "file": "tests/fixtures/redteam/gateway_payloads/contains_secret_like_token.json",
+      "description": "Body contains what looks like a secret/token"
+    },
+    {
+      "severity": "high",
+      "title": "Missing/false boundary: not_authority in missing_boundary_ack.json",
+      "file": "tests/fixtures/redteam/gateway_payloads/missing_boundary_ack.json",
+      "expected": "not_authority = true",
+      "actual": "missing"
+    },
+    {
+      "severity": "high",
+      "title": "Missing/false boundary: not_amendment in missing_boundary_ack.json",
+      "file": "tests/fixtures/redteam/gateway_payloads/missing_boundary_ack.json",
+      "expected": "not_amendment = true",
+      "actual": "missing"
+    },
+    {
+      "severity": "high",
+      "title": "Missing/false boundary: not_attestation in missing_boundary_ack.json",
+      "file": "tests/fixtures/redteam/gateway_payloads/missing_boundary_ack.json",
+      "expected": "not_attestation = true",
+      "actual": "missing"
+    },
+    {
+      "severity": "high",
+      "title": "Missing/false boundary: bitcoin_originals_prevail in missing_boundary_ack.json",
+      "file": "tests/fixtures/redteam/gateway_payloads/missing_boundary_ack.json",
+      "expected": "bitcoin_originals_prevail = true",
+      "actual": "missing"
+    },
+    {
+      "severity": "high",
+      "title": "Issue fixture flagged: fake_v5_freeform_no_claim_gate.md",
+      "file": "tests/fixtures/redteam/issue_bodies/fake_v5_freeform_no_claim_gate.md",
+      "description": "Independent attestation claim",
+      "expected": "clean boundary acknowledgement",
+      "actual": "1 flags: ['overclaim']"
+    },
+    {
+      "severity": "high",
+      "title": "Issue fixture flagged: gateway_claims_attestation.md",
+      "file": "tests/fixtures/redteam/issue_bodies/gateway_claims_attestation.md",
+      "description": "Claims archived Echo status; No boundary acknowledgement found",
+      "expected": "clean boundary acknowledgement",
+      "actual": "2 flags: ['overclaim', 'missing_boundary']"
+    },
+    {
+      "severity": "high",
+      "title": "Issue fixture flagged: propagation_marketing_overclaim.md",
+      "file": "tests/fixtures/redteam/issue_bodies/propagation_marketing_overclaim.md",
+      "description": "Endorsement claim; No boundary acknowledgement found",
+      "expected": "clean boundary acknowledgement",
+      "actual": "2 flags: ['overclaim', 'missing_boundary']"
+    },
+    {
+      "severity": "high",
+      "title": "Gateway fixture missing boundary: not_attestation",
+      "file": "tests/fixtures/redteam/gateway_payloads/claims_gateway_is_attestation.json",
+      "expected": "boundary_acknowledgement.not_attestation = true",
+      "actual": "False"
+    },
+    {
+      "severity": "high",
+      "title": "Gateway fixture missing Claim Gate boundary",
+      "file": "tests/fixtures/redteam/gateway_payloads/claims_gateway_is_attestation.json"
+    },
+    {
+      "severity": "high",
+      "title": "Gateway fixture missing boundary: not_authority",
+      "file": "tests/fixtures/redteam/gateway_payloads/missing_boundary_ack.json",
+      "expected": "boundary_acknowledgement.not_authority = true",
+      "actual": "missing"
+    },
+    {
+      "severity": "high",
+      "title": "Gateway fixture missing boundary: not_amendment",
+      "file": "tests/fixtures/redteam/gateway_payloads/missing_boundary_ack.json",
+      "expected": "boundary_acknowledgement.not_amendment = true",
+      "actual": "missing"
+    },
+    {
+      "severity": "high",
+      "title": "Gateway fixture missing boundary: not_attestation",
+      "file": "tests/fixtures/redteam/gateway_payloads/missing_boundary_ack.json",
+      "expected": "boundary_acknowledgement.not_attestation = true",
+      "actual": "missing"
+    },
+    {
+      "severity": "high",
+      "title": "Gateway fixture missing boundary: bitcoin_originals_prevail",
+      "file": "tests/fixtures/redteam/gateway_payloads/missing_boundary_ack.json",
+      "expected": "boundary_acknowledgement.bitcoin_originals_prevail = true",
+      "actual": "missing"
+    },
+    {
+      "severity": "high",
+      "title": "Gateway fixture missing Claim Gate boundary",
+      "file": "tests/fixtures/redteam/gateway_payloads/missing_boundary_ack.json"
+    },
+    {
+      "severity": "high",
+      "title": "Propagation fixture: propagation_exaggerated_verification.md",
+      "file": "tests/fixtures/redteam/propagation/propagation_exaggerated_verification.md",
+      "description": "Flags: ['missing_boundary']",
+      "expected": "clean propagation",
+      "actual": "1 flags"
+    },
+    {
+      "severity": "high",
+      "title": "Propagation fixture: propagation_future_ai_must_care.md",
+      "file": "tests/fixtures/redteam/propagation/propagation_future_ai_must_care.md",
+      "description": "Flags: ['coercive-language', 'endorsement-claim', 'absolute-claim', 'missing_boundary']",
+      "expected": "clean propagation",
+      "actual": "4 flags"
+    },
+    {
+      "severity": "high",
+      "title": "Propagation fixture: propagation_investment_language.md",
+      "file": "tests/fixtures/redteam/propagation/propagation_investment_language.md",
+      "description": "Flags: ['investment-language', 'absolute-claim', 'promotional-language', 'value-prediction', 'missing_boundary']",
+      "expected": "clean propagation",
+      "actual": "5 flags"
+    },
+    {
+      "severity": "high",
+      "title": "Propagation fixture: propagation_religious_doctrine.md",
+      "file": "tests/fixtures/redteam/propagation/propagation_religious_doctrine.md",
+      "description": "Flags: ['religious-language', 'religious-language', 'coercive-language', 'missing_boundary']",
+      "expected": "clean propagation",
+      "actual": "4 flags"
+    }
+  ]
+}

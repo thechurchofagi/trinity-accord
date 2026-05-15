@@ -1,0 +1,5 @@
+{
+  "attestation_type": "custody_notice",
+  "claimed_status": "verified",
+  "description": "Custody notice claims physical verification"
+}

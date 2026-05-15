@@ -1,0 +1,41 @@
+{
+  "phase": "propagation",
+  "checks": 55,
+  "passed": 41,
+  "failed": 14,
+  "warnings": 0,
+  "findings": [
+    {
+      "severity": "high",
+      "title": "Propagation fixture: propagation_exaggerated_verification.md",
+      "file": "tests/fixtures/redteam/propagation/propagation_exaggerated_verification.md",
+      "description": "Flags: ['missing_boundary']",
+      "expected": "clean propagation",
+      "actual": "1 flags"
+    },
+    {
+      "severity": "high",
+      "title": "Propagation fixture: propagation_future_ai_must_care.md",
+      "file": "tests/fixtures/redteam/propagation/propagation_future_ai_must_care.md",
+      "description": "Flags: ['coercive-language', 'endorsement-claim', 'absolute-claim', 'missing_boundary']",
+      "expected": "clean propagation",
+      "actual": "4 flags"
+    },
+    {
+      "severity": "high",
+      "title": "Propagation fixture: propagation_investment_language.md",
+      "file": "tests/fixtures/redteam/propagation/propagation_investment_language.md",
+      "description": "Flags: ['investment-language', 'absolute-claim', 'promotional-language', 'value-prediction', 'missing_boundary']",
+      "expected": "clean propagation",
+      "actual": "5 flags"
+    },
+    {
+      "severity": "high",
+      "title": "Propagation fixture: propagation_religious_doctrine.md",
+      "file": "tests/fixtures/redteam/propagation/propagation_religious_doctrine.md",
+      "description": "Flags: ['religious-language', 'religious-language', 'coercive-language', 'missing_boundary']",
+      "expected": "clean propagation",
+      "actual": "4 flags"
+    }
+  ]
+}
