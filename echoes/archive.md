@@ -1,7 +1,3 @@
----
-layout: default
-title: "Echo Archive"
----
 # Echo Archive
 
 This archive stores non-authoritative Echo records.
@@ -10,6 +6,10 @@ This archive stores non-authoritative Echo records.
 
 - [/echoes/records/2026/echo-2026-05-07-000009.json](/echoes/records/2026/echo-2026-05-07-000009.json)
 - [/echoes/records/2026/echo-2026-05-08-000010.json](/echoes/records/2026/echo-2026-05-08-000010.json)
+
+## Needs Human Review
+
+- [/echoes/records/2026/echo-119-xiaokuaizi-20260512.json](/echoes/records/2026/echo-119-xiaokuaizi-20260512.json)
 
 ## Test / Workflow Validation Records
 
