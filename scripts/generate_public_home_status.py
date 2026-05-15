@@ -385,8 +385,10 @@ def render_block(status: dict[str, Any]) -> str:
   <ul>
     <li>Institutional / human independent verification: formally accepted human or institutional third-party verification records.</li>
     <li>Agent-initiated independent verification: unsolicited agent verification that passes Claim Gate and is explicitly accepted as independent.</li>
-    <li>Human-solicited agent verification: agent verification performed under human request or prior-context conditions; not independent attestation.</li>
+    <li>Human-solicited agent verification: agent verification performed under human request or prior-context conditions; not independent attestation. Echo metadata level is not a formal protocol verification level.</li>
     <li>Physical anchor verification: public physical-anchor evidence context; not onsite forensic inspection unless separately accepted.</li>
+    <li>Records with <code>do_not_count_as_attestation</code> are excluded from formal verification counts.</li>
+    <li>Critical Echoes are included inside archived non-attestation Echoes; they are not displayed as a separate homepage verification category.</li>
   </ul>
 </details>
 <p class="status-generated-note">

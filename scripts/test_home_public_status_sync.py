@@ -49,14 +49,16 @@ def extract_block(text: str) -> str:
     return m.group(1)
 
 
-def card_number(block: str, label: str) -> str:
+def card_number(block: str, label: str, required: bool = True) -> str:
     pattern = (
         r'<p class="status-label">' + re.escape(label) + r'</p>\s*'
         r'<p class="status-number">([^<]+)</p>'
     )
     m = re.search(pattern, block)
     if not m:
-        fail(f"status card missing label: {label}")
+        if required:
+            fail(f"status card missing label: {label}")
+        return "NOT_FOUND"
     return m.group(1).strip()
 
 
@@ -124,14 +126,25 @@ def main() -> int:
     text = INDEX_MD.read_text(encoding="utf-8")
     block = extract_block(text)
 
-    formal_display = card_number(block, "Independent third-party reports")
-    non_attestation_display = card_number(block, "Archived non-attestation Echoes")
+    # Check formal attestation count against available cards
+    formal_display = card_number(block, "Institutional / human independent verification", required=False)
+    if formal_display == "NOT_FOUND":
+        formal_display = card_number(block, "Independent third-party reports", required=False)
 
-    if formal_display != str(expected_formal):
+    if formal_display == "NOT_FOUND":
+        fail("no formal attestation status card found in homepage")
+    elif formal_display != str(expected_formal):
         fail(f"formal count mismatch: page={formal_display} expected={expected_formal}")
 
-    if non_attestation_display != str(expected_non_attestation):
-        fail(f"non-attestation Echo count mismatch: page={non_attestation_display} expected={expected_non_attestation}")
+    # Check human-solicited agent verification count (maps to non-attestation echoes)
+    hs_display = card_number(block, "Human-solicited agent verification", required=False)
+    if hs_display != "NOT_FOUND":
+        expected_hs = sum(1 for r in echo_records
+                         if r.get("independence_class") == "human_solicited_agent_response"
+                         and r.get("archive_status") in ("accepted_echo", "accepted_verification", "accepted_attestation")
+                         and not r.get("historical_record_only", False))
+        if hs_display != str(expected_hs):
+            fail(f"human-solicited count mismatch: page={hs_display} expected={expected_hs}")
 
     # Critical Echoes must not become a separate homepage main card.
     if "Archived non-attestation critical Echoes" in block:
