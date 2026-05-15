@@ -84,10 +84,10 @@
   <url><loc>https://www.trinityaccord.org/downloads/arweave-bundle-verification/</loc></url>
   <url><loc>https://www.trinityaccord.org/evidence-backup-coverage/</loc></url>
   <url><loc>https://www.trinityaccord.org/evidence-relationship-map/</loc></url>
-  <url><loc>https://www.trinityaccord.org/EVIDENCE-BACKUP-GAPS/</loc></url>
-  <url><loc>https://www.trinityaccord.org/OTS-FULLNODE-VERIFICATION/</loc></url>
+  <url><loc>https://www.trinityaccord.org/evidence-backup-gaps/</loc></url>
+  <url><loc>https://www.trinityaccord.org/ots-fullnode-verification/</loc></url>
   <url><loc>https://www.trinityaccord.org/guardianship-system-overview/</loc></url>
-  <url><loc>https://www.trinityaccord.org/NFT-BACKUP-PROVENANCE/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-backup-provenance/</loc></url>
   <url><loc>https://www.trinityaccord.org/docs/claim-gate/</loc></url>
   <url><loc>https://www.trinityaccord.org/docs/quickstart-verification/</loc></url>
   <url><loc>https://www.trinityaccord.org/docs/report-builder/</loc></url>
@@ -101,6 +101,6 @@
   <url><loc>https://www.trinityaccord.org/api/corrections-index.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/claim-registry.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/recovery-index.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/RECOVERY.md</loc></url>
-  <url><loc>https://www.trinityaccord.org/DISASTER-RECOVERY-DRILL.md</loc></url>
+  <url><loc>https://www.trinityaccord.org/recovery</loc></url>
+  <url><loc>https://www.trinityaccord.org/disaster-recovery-drill</loc></url>
 </urlset>

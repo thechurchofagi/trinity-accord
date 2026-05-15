@@ -25,8 +25,8 @@
     "/evidence/core-object-alpha-shenzhen-notary-2026-05-06",
     "/downloads/shenzhen-notary-arweave-2026-05-06",
     "/downloads/shenzhen-notary-github-release-backup-2026-05-06",
-    "/RECOVERY",
-    "/DISASTER-RECOVERY-DRILL"
+    "/recovery",
+    "/disaster-recovery-drill"
   ],
   "machine": [
     "/api/authority.json",

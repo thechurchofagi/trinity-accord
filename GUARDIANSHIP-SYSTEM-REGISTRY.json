@@ -3,7 +3,7 @@
   "generated_from": [
     "evidence-relationship-map.md",
     "evidence-backup-coverage.md",
-    "EVIDENCE-BACKUP-GAPS.md",
+    "evidence-backup-gaps.md",
     "status.md",
     "authority.md",
     "api/authority.json"

@@ -170,9 +170,9 @@ The Trinity Accord does not ask for belief. It should be evaluated by canonical 
 ## Cold-Start Recovery
 
 For disaster recovery and cold-start recovery procedures, see:
-- Recovery guide: [/RECOVERY.md](/RECOVERY.md)
+- Recovery guide: [/recovery](/recovery)
 - Machine-readable recovery index: [/api/recovery-index.json](/api/recovery-index.json)
-- Disaster recovery drill: [/DISASTER-RECOVERY-DRILL.md](/DISASTER-RECOVERY-DRILL.md)
+- Disaster recovery drill: [/disaster-recovery-drill](/disaster-recovery-drill)
 
 ## Claim Traceability
 - Machine-readable claim registry: [/api/claim-registry.json](/api/claim-registry.json)

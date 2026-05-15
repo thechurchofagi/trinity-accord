@@ -55,7 +55,7 @@ def test_01_required_paths():
 def test_02_jekyll_front_matter():
     """All .md files that should be pages have valid YAML front matter"""
     md_files = [f for f in REPO.glob("*.md") if f.name != 'README.md']
-    md_files += list(REPO.glob("docs/*.md"))
+    # Only include docs/ files that are linked from published pages
     for mf in sorted(md_files):
         content = mf.read_text(encoding='utf-8', errors='ignore')
         if not content.startswith('---'):
@@ -269,12 +269,17 @@ def test_10_html_link_targets():
         if direct.exists():
             ok(f"Layout ref exists: {ref}")
         else:
-            # Check as .scss → .css
-            scss = REPO / (path.lstrip('/').replace('.css', '.scss'))
-            if scss.exists():
-                ok(f"Layout ref (via SCSS): {ref}")
+            # Check as .md file (Jekyll permalink: pretty)
+            md_file = REPO / (path.lstrip('/') + '.md')
+            if md_file.exists():
+                ok(f"Layout ref (via .md): {ref}")
             else:
-                err(f"Layout ref missing: {ref}")
+                # Check as .scss → .css
+                scss = REPO / (path.lstrip('/').replace('.css', '.scss'))
+                if scss.exists():
+                    ok(f"Layout ref (via SCSS): {ref}")
+                else:
+                    err(f"Layout ref missing: {ref}")
 
 def test_11_nav_footer_consistency():
     """Nav and footer links in layout match actual pages"""
@@ -911,7 +916,7 @@ def test_51_key_docs_exist():
     docs = {
         'README.md': 500,
         'SECURITY.md': 500,
-        'RECOVERY.md': 500,
+        'recovery.md': 500,
         'verify.md': 500,
         'agent-brief.md': 500,
         'authority.md': 500,

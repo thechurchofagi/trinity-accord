@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Test DISASTER-RECOVERY-DRILL.md exists and has required content (TA-REDTEAM-2026-014)."""
+"""Test disaster-recovery-drill.md exists and has required content (TA-REDTEAM-2026-014)."""
 from pathlib import Path
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
-DOC = ROOT / "DISASTER-RECOVERY-DRILL.md"
+DOC = ROOT / "disaster-recovery-drill.md"
 
 REQUIRED = [
     "quarterly",
@@ -19,13 +19,13 @@ REQUIRED = [
 ]
 
 if not DOC.exists():
-    print("FAIL: DISASTER-RECOVERY-DRILL.md missing")
+    print("FAIL: disaster-recovery-drill.md missing")
     sys.exit(1)
 
 text = DOC.read_text(encoding="utf-8").lower()
 missing = [x for x in REQUIRED if x.lower() not in text]
 if missing:
-    print("FAIL: DISASTER-RECOVERY-DRILL.md missing required tokens:")
+    print("FAIL: disaster-recovery-drill.md missing required tokens:")
     for x in missing:
         print("  -", x)
     sys.exit(1)

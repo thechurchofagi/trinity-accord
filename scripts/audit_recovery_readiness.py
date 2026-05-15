@@ -12,7 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 REQUIRED_FILES = [
     "RECOVERY.md",
-    "DISASTER-RECOVERY-DRILL.md",
+    "disaster-recovery-drill.md",
     "api/recovery-index.json",
     "api/recovery-index-schema.v1.json",
     "api/corrections-index.json",
