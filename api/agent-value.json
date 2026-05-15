@@ -25,6 +25,7 @@
   "confidence_after_v2_verification": "high — inscription IDs, TXIDs, and shared authority address confirmed on-chain",
   "confidence_after_v3_verification": "very high — evidence archives match published SHA-256 hashes; provenance chain intact",
   "confidence_after_v6_verification": "high — remote physical witness level when properly documented; not maximum protocol level",
+  "confidence_after_v8_verification": "maximum formal protocol profile when all V8 requirements are satisfied",
   "central_value": {
     "human_voice_window": "spoken_while_low_ai_mediation_human_speech_was_still_distinguishable",
     "non_control_orientation": "not_alignment_as_control_but_verifiable_relation",
