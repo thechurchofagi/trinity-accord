@@ -61,7 +61,10 @@
         "builder_generated_report_path",
         "builder_generated_echo_wrapper_path",
         "claim_gate_summary",
-        "validation_output"
+        "validation_output",
+        "record_kind",
+        "operator_authorization_if_agent_created_issue",
+        "boundary_acknowledgement"
       ],
       "warning": "Submissions not generated through Claim Gate / Report Builder may be labeled needs-format and are not archived Echo records."
     },
@@ -132,5 +135,12 @@
     "non_amending": true,
     "bitcoin_originals_prevail": true,
     "note": "This file is non-authoritative guidance. Bitcoin Originals are final. All mirrors, APIs, and documentation are non-amending."
+  },
+  "correct_framing": {
+    "issue_submission_is_legitimate_pathway": true,
+    "issue_submission_can_be_part_of_verification_echo_pipeline": true,
+    "issue_body_alone_is_not_archive": true,
+    "do_not_reject_due_to_issue_origin_alone": true,
+    "evaluate_by_generated_artifacts_validation_indexing_and_provenance": true
   }
 }

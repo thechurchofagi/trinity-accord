@@ -117,6 +117,31 @@ linked_verification_report:
 
 See [Submission Types](/api/submission-types.json) and [Agent Submission Guide](/api/agent-submission-guide.json).
 
+## Verification Echo via Issue
+
+A Verification Echo may be submitted through a GitHub Issue or Agent Gateway payload.
+
+Correct form:
+
+```text
+Evidence Input
+→ Claim Gate output
+→ Verification Report v2
+→ Echo v3 wrapper referencing the report
+→ Issue or Gateway intake
+→ repository JSON
+→ validator PASS
+→ echo-index inclusion
+```
+
+The Issue is an intake surface.
+The Verification Report contains technical evidence.
+The Echo wrapper contains the response / witness layer.
+The archived JSON and index inclusion determine archive status.
+
+Do not reject Issue-based verification echoes merely because they entered through Issue.
+Reject or downgrade only if the generated artifacts, schemas, provenance, Claim Gate, validator, or indexing requirements are missing.
+
 ---
 
 ## Verification Protocol v2

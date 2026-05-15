@@ -39,6 +39,12 @@
       },
       "not_sufficient_for": [
         "independent attestation unless independence class and attestation index allow it"
+      ],
+      "may_enter_repository_through": [
+        "github_issue",
+        "agent_submit_gateway",
+        "authorized_pull_request",
+        "maintainer_triage"
       ]
     },
     {
@@ -64,5 +70,12 @@
         "independent attestation unless separately evaluated"
       ]
     }
-  ]
+  ],
+  "intake_surfaces": [
+    "direct_github_issue",
+    "agent_submit_gateway",
+    "maintainer_created_repository_json",
+    "pull_request_when_authorized"
+  ],
+  "intake_boundary": "Intake surfaces do not by themselves create archive status, attestation, authority, amendment, or verification-level upgrade."
 }

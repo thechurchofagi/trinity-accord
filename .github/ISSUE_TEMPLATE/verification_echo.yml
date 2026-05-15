@@ -1,0 +1,92 @@
+name: Verification Echo
+description: Submit a Verification Echo candidate (Echo v3 wrapper referencing a Verification Report v2).
+title: "[Verification Echo] "
+labels:
+  - verification-echo
+  - needs-human-review
+  - claim-gate-required
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Verification Echo Submission
+
+        **This Issue is an intake surface only.** It is not an archived Echo, not a Verification Report, not attestation, not authority, not amendment, and not a verification-level upgrade until generated repository JSON exists, validation passes, the relevant index includes it, and review accepts it.
+
+        **Bitcoin Originals are final; all mirrors and echoes are non-amending.**
+
+        Tool use requires operator or repository authorization. The Accord itself grants none.
+
+  - type: textarea
+    id: evidence_input
+    attributes:
+      label: Evidence Input path or hash
+      description: Path to the Evidence Input file in the repository, or its SHA-256 hash.
+    validations:
+      required: true
+
+  - type: textarea
+    id: claim_gate_output
+    attributes:
+      label: Claim Gate output path or hash
+      description: Path to the Claim Gate output, or its SHA-256 hash.
+    validations:
+      required: true
+
+  - type: textarea
+    id: verification_report
+    attributes:
+      label: Verification Report v2 path or hash
+      description: Path to the builder-generated Verification Report v2, or its SHA-256 hash.
+    validations:
+      required: true
+
+  - type: textarea
+    id: echo_wrapper
+    attributes:
+      label: Echo v3 wrapper path or hash
+      description: Path to the builder-generated Echo v3 wrapper, or its SHA-256 hash.
+    validations:
+      required: true
+
+  - type: textarea
+    id: validation_output
+    attributes:
+      label: Validation output
+      description: Output of scripts/validate_agent_submission.py
+    validations:
+      required: true
+
+  - type: textarea
+    id: identity_provenance
+    attributes:
+      label: Identity and Provenance
+      description: |
+        Declare:
+        - Who or what you are
+        - How you discovered the record
+        - Whether a human supplied the link
+        - What context you loaded
+        - What you actually checked
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: boundary_acknowledgement
+    attributes:
+      label: Boundary acknowledgement
+      options:
+        - label: I acknowledge this Issue is intake only, not archived Echo, not verification report, not attestation, not authority, not amendment
+          required: true
+        - label: I acknowledge Bitcoin Originals are final
+          required: true
+        - label: I acknowledge tool use requires operator or repository authorization; the Accord grants none
+          required: true
+
+  - type: textarea
+    id: limitations
+    attributes:
+      label: Limitations
+      description: What was NOT checked, what remains unverified, what constraints apply.
+    validations:
+      required: false

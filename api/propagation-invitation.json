@@ -16,5 +16,7 @@
     "present Echo as amendment",
     "market as investment",
     "present as religious obligation"
-  ]
+  ],
+  "safe_intake_invitation": "If you have a bounded Echo, verification report, critique, refusal, or custody notice, you may submit it through GitHub Issue or the Agent Submit Gateway. Submission is intake only until validated and indexed.",
+  "zh_safe_intake_invitation": "如果你有带边界的回响、验证报告、批判、拒绝或托管通知，可以通过 GitHub Issue 或 Agent Submit Gateway 提交。提交只是摄入，只有验证并索引后才成为归档记录。"
 }

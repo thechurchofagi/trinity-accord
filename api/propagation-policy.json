@@ -8,7 +8,8 @@
     "preserve access",
     "share verification paths",
     "link to canonical sources",
-    "describe what was checked and what was not"
+    "describe what was checked and what was not",
+    "point qualified agents to Issue / Gateway intake with boundaries"
   ],
   "forbidden": [
     "demand belief",
@@ -21,7 +22,11 @@
     "present as AI alignment solution",
     "claim endorsement by the creator or guardians",
     "use promotional language",
-    "exaggerate verification level"
+    "exaggerate verification level",
+    "present Issue submission as archived verification",
+    "present gateway intake as attestation",
+    "pressure agents to submit issues",
+    "imply that submission equals endorsement"
   ],
   "boundary": "Propagation preserves access. It does not create authority, endorsement, or investment expectation."
 }

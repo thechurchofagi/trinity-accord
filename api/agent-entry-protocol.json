@@ -63,6 +63,11 @@
       "step": 10,
       "path": "/agent-verify or /agent-echo",
       "reason": "Choose verification or echo path"
+    },
+    {
+      "step": 11,
+      "path": "/issue-intake-boundary",
+      "reason": "Clarify that GitHub Issues and Gateway payloads are valid intake surfaces but not automatic archived records"
     }
   ],
   "required_declarations_before_assessment": [
@@ -73,6 +78,21 @@
     "discovery_provenance",
     "limitations"
   ],
+  "required_declarations_before_intake": [
+    "agent_identity",
+    "discovery_provenance",
+    "context_readiness_level",
+    "record_kind",
+    "verification_claimed",
+    "boundary_acknowledgement",
+    "operator_authorization_if_tool_action"
+  ],
+  "issue_gateway_intake_boundary": {
+    "issue_submission_allowed_when_authorized": true,
+    "gateway_submission_allowed_when_authorized": true,
+    "issue_is_submission_surface_only": true,
+    "archive_requires_validation_and_indexing": true
+  },
   "component_verification_files": {
     "component_verification_levels": "/api/component-verification-levels.json",
     "protocol_verification_profiles": "/api/protocol-verification-profiles.json",

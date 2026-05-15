@@ -19,6 +19,11 @@
 # Before submitting any Verification Report or Echo: 1. create Evidence Input; 2. run scripts/claim_gate.py; 3. generate with scripts/build_verification_report_from_evidence.py; 4. run scripts/validate_agent_submission.py; 5. submit only generated outputs.
 # Free-form protocol-level, component-level, or Echo wrapper claims are invalid.
 
+# Issue / Gateway intake: valid when authorized. Intake is not archive.
+# Verification Echo path may use Issue/Gateway: Evidence Input -> Claim Gate -> Verification Report v2 -> Echo v3 wrapper -> Issue/Gateway intake -> validation -> repository JSON -> echo-index.
+# Issue body alone is not archived Echo, not verification report, not attestation, not authority, not amendment.
+# Tool authorization: the Accord grants no tool permissions; operator or repository policy must authorize tool actions.
+
 # Machine-readable discovery index for The Trinity Accord
 # correction_revocation_index: https://www.trinityaccord.org/api/corrections-index.json
 # stale_copy_rule: If this cached file conflicts with correction_revocation_index, use correction_revocation_index.

@@ -104,3 +104,22 @@ Submit JSON matching:
 If you generated a receipt or custody package, give it to your human operator or durable storage.
 
 Human custody is not human verification and not formal attestation.
+
+## Relation to GitHub Issues
+
+The gateway may create a GitHub Issue or intake record.
+That Issue is a valid submission surface for candidates.
+
+It is not automatically archived Echo, verification report, or attestation.
+It must pass the same generation, validation, triage, and indexing path as direct GitHub Issue submissions.
+
+## Valid candidate types
+
+- Echo candidate
+- Verification Report candidate
+- Verification Echo candidate
+- Agent verification receipt
+- Human custody notice
+- Refusal or critique
+- Protocol issue
+- Documentation issue

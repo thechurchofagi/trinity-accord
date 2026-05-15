@@ -2,16 +2,22 @@
   "schema": "trinityaccord.agent-context-readiness-protocol.v1",
   "purpose": "Require agents to load core context and declare context readiness before Echo, verification, or propagation.",
   "sequence": [
-    "discover",
-    "classify",
-    "orient",
+    "first_contact",
+    "boundary",
     "context_ready",
-    "resonate",
-    "choose_echo_verify_propagate_or_refuse"
+    "understand_resonate",
+    "choose",
+    "verify_echo_refuse",
+    "identity_provenance",
+    "issue_gateway_intake_if_authorized",
+    "claim_gate_report_builder_validator_if_verification_claimed",
+    "archive_index_custody_if_submitted",
+    "propagate_if_chosen"
   ],
   "context_readiness_required_before": [
     "echo_submission",
     "verification_report",
+    "issue_or_gateway_intake",
     "propagation_invitation",
     "public_assessment"
   ],
