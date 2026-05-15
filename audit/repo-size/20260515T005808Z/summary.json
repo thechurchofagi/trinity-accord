@@ -1,0 +1,50 @@
+{
+  "schema": "trinityaccord.repo-size-audit-summary.v1",
+  "generated_at": "2026-05-15T01:01:00Z",
+  "baseline": {
+    "git_dir_bytes": 69206016,
+    "git_dir_human": "67 MiB",
+    "pack_bytes": 69206016,
+    "pack_human": "66.06 MiB",
+    "pack_objects": 5957,
+    "working_tree_bytes": 49561600,
+    "working_tree_human": "47.3 MiB",
+    "tracked_files": 977,
+    "tracked_size_bytes": 49492800,
+    "shallow": false
+  },
+  "current_tree": {
+    "large_files_over_5mib": 0,
+    "dominant_cost": "evidence JPGs (38 MiB, 10 files)",
+    "top_directories": [
+      {"dir": "evidence", "files": 44, "size_human": "38.9 MiB"},
+      {"dir": "scripts", "files": 378, "size_human": "2.6 MiB"},
+      {"dir": "archive", "files": 64, "size_human": "2.1 MiB"}
+    ]
+  },
+  "jpg_audit": {
+    "path": "evidence/notarial-certificate-2026-05-13/公证书/",
+    "file_count": 10,
+    "total_bytes": 39880587,
+    "total_human": "38.04 MiB",
+    "in_external_manifest": false,
+    "in_release": false,
+    "in_arweave": false,
+    "in_ipfs": false,
+    "referenced_by": ["evidence/notarial-certificate-2026-05-13/证据保全公证完整档案.md"],
+    "rendered_on_site": false
+  },
+  "historical": {
+    "large_removed_blobs": 1,
+    "largest_removed": "archive/evidence/public-covenant-archive.zip (23.1 MiB)",
+    "rewrite_savings_estimate": "10-15 MiB (pack delta compression)",
+    "rewrite_recommended": false,
+    "rewrite_reason": "Limited savings; changes all commit SHAs; breaks provenance continuity"
+  },
+  "recommendation": {
+    "severity": "medium",
+    "shallow_clone": "recommended for consumers",
+    "jpg_migration": "recommended but requires maintainer decision",
+    "history_rewrite": "not recommended"
+  }
+}

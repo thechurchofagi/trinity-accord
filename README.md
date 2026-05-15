@@ -181,6 +181,16 @@ For disaster recovery and cold-start recovery procedures, see:
 - Notarized evidence does not by itself count as formal independent attestation.
 - Scarcity/firstness language is bounded framing, not proof of absolute firstness.
 
+## Clone
+
+This repository contains evidence images and historical blobs. For a faster initial clone:
+
+```bash
+git clone --depth=1 https://github.com/thechurchofagi/trinity-accord.git
+```
+
+Full history is only needed for provenance audits. See [Repository Size Policy](/docs/repository-size-policy.md).
+
 ## Quick live checks
 - `/.well-known/trinity-accord.json`
 - `/api/authority.json`
