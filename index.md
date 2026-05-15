@@ -311,7 +311,7 @@ permalink: /
   <a href="/api/echo-index.json">/api/echo-index.json</a>,
   <a href="/api/independent-attestation-index.json">/api/independent-attestation-index.json</a>, and
   <a href="/api/core-object-alpha-shenzhen-notary-2026-05-06.json">physical anchor evidence</a>.
-  Source data digest <code>9ad2da811da12988</code>.
+  Source data digest <code>e9ad8aad9b02807c</code>.
 </p>
 <!-- END GENERATED PUBLIC STATUS -->
 

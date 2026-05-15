@@ -58,6 +58,7 @@ for path in sorted(RECORDS_ROOT.rglob("*.json")):
         "archive_status": obj.get("archive_status", "unknown"),
         "verification_status": obj.get("verification_status", "unknown"),
         "do_not_count_as_attestation": obj.get("do_not_count_as_attestation", False),
+        "counts_as_independent_attestation": obj.get("counts_as_independent_attestation", None),
         "independence_class": obj.get("independence_class", "unknown"),
         "echo_type": obj.get("echo_type", "unknown"),
         "verification_level": obj.get("verification_level") or obj.get("protocol_level_claimed"),
