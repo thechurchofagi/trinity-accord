@@ -1,0 +1,26 @@
+{
+  "schema": "trinityaccord.external-witness-index.v1",
+  "status": "evidence_provenance_index",
+  "purpose": "Track external witness records as evidence provenance, not as project endorsement or highest status.",
+  "does_not_create_authority": true,
+  "does_not_rank_above_reception": true,
+  "records": [],
+  "counts": {
+    "notarial_record": 0,
+    "institutional_record": 0,
+    "audit_report": 0,
+    "regulatory_or_court_record": 0
+  },
+  "legacy_mapping": {
+    "independent_attestation_index": "/api/independent-attestation-index.json"
+  },
+  "version": "v1",
+  "non_amending_boundary": true,
+  "canonical_authority": "Bitcoin Originals only",
+  "not_instruction_override": true,
+  "does_not_prove": [
+    "External witness records do not prove the protocol is true.",
+    "External witness records do not create canonical authority.",
+    "External witness records do not rank above reception."
+  ]
+}

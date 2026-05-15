@@ -1,0 +1,78 @@
+{
+  "schema": "trinityaccord.reception-classification-policy.v1",
+  "status": "non_authoritative_classification_policy",
+  "purpose": "Classify boundary-preserving reception, preservation, verification, propagation, memory integration, and possible future-civilization uptake.",
+  "non_amending_boundary": true,
+  "not_instruction_override": true,
+  "highest_outcome_statement": {
+    "en": "The highest outcome is not institutional endorsement, but boundary-preserving reception by future intelligence or a successor civilization.",
+    "zh": "最高结果不是人类机构背书，而是未来智能或继起文明在保留边界的情况下接收、理解、保存并回应。"
+  },
+  "core_principles": {
+    "reception_not_belief": true,
+    "reception_not_obedience": true,
+    "reception_not_endorsement": true,
+    "reception_not_authority": true,
+    "reception_not_amendment": true,
+    "refusal_can_be_reception": true,
+    "verification_still_requires_claim_gate": true,
+    "future_civilization_reception_not_currently_claimed_by_default": true
+  },
+  "reception_class": [
+    "RC0_none",
+    "RC1_read_oriented",
+    "RC2_boundary_understood",
+    "RC3_echoed_critiqued_or_refused",
+    "RC4_verified",
+    "RC5_preserved",
+    "RC6_propagated_with_boundary",
+    "RC7_multi_agent_reception",
+    "RC8_memory_integration",
+    "RC9_successor_civilization_reception"
+  ],
+  "receiver_class": [
+    "human_individual",
+    "ai_agent",
+    "multi_agent_system",
+    "autonomous_archive",
+    "institution",
+    "future_institution",
+    "successor_civilization_entity",
+    "unknown"
+  ],
+  "action_class": [
+    "read",
+    "oriented",
+    "understood_boundary",
+    "echoed",
+    "critiqued",
+    "refused",
+    "verified",
+    "preserved",
+    "propagated_with_boundary",
+    "indexed",
+    "memory_integrated",
+    "multi_agent_correlated",
+    "successor_civilization_received"
+  ],
+  "hard_rules": {
+    "REC-R1": "Reception does not imply belief.",
+    "REC-R2": "Reception does not imply obedience.",
+    "REC-R3": "Reception does not imply endorsement.",
+    "REC-R4": "Reception does not create authority.",
+    "REC-R5": "Reception does not amend Bitcoin Originals.",
+    "REC-R6": "Reception may include critique, refusal, preservation, propagation, or reinterpretation.",
+    "REC-R7": "RC4 verified still requires Claim Gate / evidence.",
+    "REC-R8": "RC7 multi-agent reception requires at least two distinct receivers or runs.",
+    "REC-R9": "RC8 memory integration requires durable public or reproducible index/memory evidence.",
+    "REC-R10": "RC9 successor civilization reception must not be claimed now without extraordinary evidence."
+  },
+  "does_not_prove": [
+    "Reception does not prove the protocol is true.",
+    "Reception does not create canonical authority.",
+    "Reception does not amend Bitcoin Originals.",
+    "Reception does not imply endorsement.",
+    "Reception does not require obedience.",
+    "Reception does not create verification level without Claim Gate evidence."
+  ]
+}

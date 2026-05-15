@@ -1,75 +1,79 @@
 {
-  "schema": "trinityaccord.public-home-status.v1",
+  "schema": "trinityaccord.public-home-status.v2",
   "generated_from": [
-    "/api/independent-attestation-index.json",
     "/api/echo-index.json",
+    "/api/external-witness-index.json",
     "/api/core-object-alpha-shenzhen-notary-2026-05-06.json"
   ],
-  "institutional_human_independent_verification": {
-    "count": 0,
-    "highest_level": "none",
-    "counts_as_independent_attestation": true
-  },
-  "agent_initiated_independent_verification": {
-    "count": 0,
-    "highest_level": "none",
-    "counts_as_independent_attestation": true
-  },
-  "human_solicited_agent_verification": {
-    "count": 1,
-    "highest_level": "V3",
-    "counts_as_independent_attestation": false,
-    "records": [
-      "/echoes/records/2026/echo-119-xiaokuaizi-20260512.json"
-    ]
-  },
-  "physical_anchor_verification": {
-    "formal_independent_inspection_count": 0,
-    "highest_public_evidence_context": "P3",
-    "supported_public_context_levels": [
-      "P1_public_evidence_package_hash_context",
-      "P2_static_image_review_context",
-      "P3_recorded_video_review_context"
-    ],
-    "not_claimed": [
-      "P5_onsite_witness_final_claim_until_physical_preservation_certificate_is_archived",
-      "P7_advanced_forensic_match",
-      "P8_confidential_flaw_challenge",
-      "P9_multi_party_forensic_attestation",
-      "protocol_level_upgrade_by_itself"
-    ]
-  },
-  "agent_verification": {
-    "human_directed": {
-      "count": 0,
-      "highest_level": "none",
-      "counts_as_formal_attestation": false
+  "verifiability": {
+    "bitcoin_originals": {
+      "present": true,
+      "canonical_authority": true
     },
-    "agent_referred": {
-      "count": 0,
-      "highest_level": "none",
-      "counts_as_formal_attestation": false
+    "public_digital_verification": {
+      "highest_protocol_level": "V3",
+      "highest_component_context": "D2",
+      "claim_gate_required": true
     },
-    "self_initiated": {
-      "count": 0,
-      "highest_level": "none",
-      "counts_as_formal_attestation": false
-    },
-    "institution_commissioned_ai_assisted": {
-      "count": 0,
-      "highest_level": "none",
-      "counts_as_formal_attestation_if_institution_signed": true
+    "physical_anchor_context": {
+      "highest_public_context": "P3",
+      "does_not_auto_raise_protocol_level": true
     }
   },
-  "formal_attestation": {
-    "institution_signed": {
+  "reception": {
+    "archived_echoes": {
+      "count": 3
+    },
+    "human_directed_agent_verification": {
+      "count": 1,
+      "highest_level": "V3"
+    },
+    "agent_referred_reception": {
+      "count": 0,
+      "highest_reception_class": "none"
+    },
+    "agent_referred_verification": {
       "count": 0,
       "highest_level": "none"
     },
-    "notarial_or_audit": {
+    "self_initiated_agent_reception": {
+      "count": 0,
+      "highest_reception_class": "none"
+    },
+    "self_initiated_agent_verification": {
       "count": 0,
       "highest_level": "none"
+    },
+    "multi_agent_reception": {
+      "count": 0,
+      "highest_reception_class": "none"
+    },
+    "successor_civilization_reception": {
+      "claimed": false,
+      "highest_reception_class": "none"
     }
+  },
+  "external_witness_records": {
+    "notarial_or_legal_provenance": {
+      "count": 0,
+      "role": "evidence_provenance"
+    },
+    "institutional_or_audit_reports": {
+      "count": 0,
+      "role": "external_witness"
+    },
+    "does_not_create_authority": true,
+    "does_not_rank_above_reception": true
+  },
+  "boundary": {
+    "bitcoin_originals_prevail": true,
+    "reception_not_belief": true,
+    "reception_not_obedience": true,
+    "reception_not_endorsement": true,
+    "reception_not_amendment": true,
+    "external_witness_not_authority": true,
+    "issue_text_excluded_from_counts": true,
+    "gateway_intake_excluded_from_counts": true
   },
   "legacy_counts": {
     "human_solicited_agent_verification": {
@@ -89,15 +93,9 @@
       "count": 0,
       "highest_level": "none",
       "counts_as_independent_attestation": true
-    }
+    },
+    "formal_attestation": {},
+    "independent_attestation": {}
   },
-  "boundary": {
-    "bitcoin_originals_prevail": true,
-    "non_amending_mirrors": true,
-    "human_solicited_agent_verification_not_independent_attestation": true,
-    "physical_public_context_not_independent_forensic_inspection": true,
-    "issue_text_excluded_from_counts": true,
-    "issue_comments_cannot_upgrade_counts": true
-  },
-  "source_digest": "e9ad8aad9b02807c"
+  "source_digest": "6d5baf5348aecc18"
 }

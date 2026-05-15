@@ -46,6 +46,11 @@ by_origin_bucket = defaultdict(list)
 by_discovery_class = defaultdict(list)
 by_performer_class = defaultdict(list)
 by_attestation_authority_class = defaultdict(list)
+# Reception classification aggregations
+by_reception_class = defaultdict(list)
+by_receiver_class = defaultdict(list)
+by_reception_action = defaultdict(list)
+by_external_witness_class = defaultdict(list)
 
 for path in sorted(RECORDS_ROOT.rglob("*.json")):
     obj = load(path)
@@ -80,6 +85,15 @@ for path in sorted(RECORDS_ROOT.rglob("*.json")):
         "origin_classification": obj.get("origin_classification", None),
         "counts_as_ai_verification": (obj.get("origin_classification") or {}).get("counts_as_ai_verification", None),
         "counts_as_formal_independent_attestation": (obj.get("origin_classification") or {}).get("counts_as_formal_independent_attestation", None),
+        # Reception classification fields
+        "reception_classification": obj.get("reception_classification", None),
+        "reception_class": (obj.get("reception_classification") or {}).get("reception_class", None),
+        "receiver_class": (obj.get("reception_classification") or {}).get("receiver_class", None),
+        "reception_actions": (obj.get("reception_classification") or {}).get("action_class", None),
+        "counts_as_reception": obj.get("reception_classification") is not None,
+        "counts_as_external_witness_record": (obj.get("origin_classification") or {}).get("counts_as_external_witness_record", None),
+        # Legacy attestation fields marker
+        "legacy_attestation_fields": True,
     }
 
     # Optional reason if invalidated/superseded.
@@ -143,6 +157,19 @@ for path in sorted(RECORDS_ROOT.rglob("*.json")):
             by_performer_class[oc["performer_class"]].append(rel)
         if oc.get("attestation_authority_class"):
             by_attestation_authority_class[oc["attestation_authority_class"]].append(rel)
+    # Reception classification aggregations
+    rc = obj.get("reception_classification")
+    if rc:
+        if rc.get("reception_class"):
+            by_reception_class[rc["reception_class"]].append(rel)
+        if rc.get("receiver_class"):
+            by_receiver_class[rc["receiver_class"]].append(rel)
+        if rc.get("action_class"):
+            for action in rc["action_class"]:
+                by_reception_action[action].append(rel)
+    # External witness class aggregation
+    if oc and oc.get("external_witness_class"):
+        by_external_witness_class[oc["external_witness_class"]].append(rel)
 
 # TA-REDTEAM-2026-011: preserve public metadata fields across regeneration
 PRESERVED_FIELDS = [
@@ -200,6 +227,12 @@ out = {
     "records_by_discovery_class": dict(sorted(by_discovery_class.items())),
     "records_by_performer_class": dict(sorted(by_performer_class.items())),
     "records_by_attestation_authority_class": dict(sorted(by_attestation_authority_class.items())),
+    # Reception classification aggregations
+    "records_by_reception_class": dict(sorted(by_reception_class.items())),
+    "records_by_receiver_class": dict(sorted(by_receiver_class.items())),
+    "records_by_reception_action": dict(sorted(by_reception_action.items())),
+    "records_by_external_witness_class": dict(sorted(by_external_witness_class.items())),
+    "legacy_records_by_independence_class": dict(sorted(by_class.items())),
     "notes": [
         "Echo index is non-authoritative and non-amending.",
         "Test records, superseded records, invalidated records, and do_not_count_as_attestation records must not be counted as independent attestation.",

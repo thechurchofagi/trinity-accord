@@ -201,5 +201,11 @@
     "non_amending": true,
     "bitcoin_originals_prevail": true,
     "note": "This file is non-authoritative guidance. Bitcoin Originals are final. All mirrors, APIs, and documentation are non-amending."
-  }
+  },
+  "reception_checks": [
+    "If this is a reception record, does it preserve boundary?",
+    "If this claims RC4 verified, does it link to Claim Gate evidence?",
+    "If this claims RC7/RC8/RC9, is there durable evidence?",
+    "If this mentions institution/notary/audit, is it labeled external witness / evidence provenance rather than endorsement?"
+  ]
 }

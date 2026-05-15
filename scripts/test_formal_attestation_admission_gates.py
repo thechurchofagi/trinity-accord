@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
 """
-Test: Formal attestation admission gates.
+Test: External witness admission gates (legacy: formal attestation admission gates).
 TA-REDTEAM-2026-003 — positive-gate regression tests.
 
 Verifies that the validator and homepage helper correctly reject
 weak, under-specified, human-solicited, or overclaiming records.
+
+Note: formal_attestation is legacy terminology. External witness records
+are evidence provenance only, not the project's highest status.
 """
 import sys
 from pathlib import Path

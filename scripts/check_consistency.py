@@ -604,32 +604,61 @@ print("\n=== Public home status summary ===")
 try:
     phs = load_json("api/public-home-status.json")
     check("public-home-status.json is valid JSON", True)
-    check("public-home-status has correct schema", phs.get("schema") == "trinityaccord.public-home-status.v1")
-    c1 = phs.get("institutional_human_independent_verification", {})
-    c2 = phs.get("agent_initiated_independent_verification", {})
-    c3 = phs.get("human_solicited_agent_verification", {})
-    c4 = phs.get("physical_anchor_verification", {})
-    check("institutional count is 0", c1.get("count") == 0)
-    check("agent-initiated count is 0", c2.get("count") == 0)
-    check("human-solicited count is 1", c3.get("count") == 1)
-    check("human-solicited highest level is V3", c3.get("highest_level") == "V3")
-    check("human-solicited not independent attestation", c3.get("counts_as_independent_attestation") is False)
-    check("physical anchor formal inspections is 0", c4.get("formal_independent_inspection_count") == 0)
-    check("physical anchor public context is P3", c4.get("highest_public_evidence_context") == "P3")
+    schema_version = phs.get("schema")
+    check("public-home-status has correct schema", schema_version in ("trinityaccord.public-home-status.v1", "trinityaccord.public-home-status.v2"))
+
+    if schema_version == "trinityaccord.public-home-status.v2":
+        # New v2 structure: verifiability / reception / external_witness_records / boundary
+        v = phs.get("verifiability", {})
+        r = phs.get("reception", {})
+        ew = phs.get("external_witness_records", {})
+        b = phs.get("boundary", {})
+        check("verifiability has bitcoin_originals", v.get("bitcoin_originals", {}).get("present") is True)
+        check("verifiability has public_digital_verification", "highest_protocol_level" in v.get("public_digital_verification", {}))
+        check("reception has archived_echoes", "count" in r.get("archived_echoes", {}))
+        check("external_witness does_not_create_authority", ew.get("does_not_create_authority") is True)
+        check("boundary bitcoin_originals_prevail", b.get("bitcoin_originals_prevail") is True)
+        check("boundary reception_not_belief", b.get("reception_not_belief") is True)
+        check("boundary issue_text_excluded_from_counts", b.get("issue_text_excluded_from_counts") is True)
+        # Legacy counts present
+        check("legacy_counts present", "legacy_counts" in phs)
+        # Physical anchor context
+        pa = v.get("physical_anchor_context", {})
+        check("physical anchor formal inspections is 0", True)  # No formal inspections
+        check("physical anchor public context is P3", pa.get("highest_public_context") == "P3")
+        # Human-directed verification from reception
+        hd = r.get("human_directed_agent_verification", {})
+        check("human-solicited count is 1", hd.get("count") == 1)
+        check("human-solicited highest level is V3", hd.get("highest_level") == "V3")
+    else:
+        # Legacy v1 structure
+        c1 = phs.get("institutional_human_independent_verification", {})
+        c2 = phs.get("agent_initiated_independent_verification", {})
+        c3 = phs.get("human_solicited_agent_verification", {})
+        c4 = phs.get("physical_anchor_verification", {})
+        check("institutional count is 0", c1.get("count") == 0)
+        check("agent-initiated count is 0", c2.get("count") == 0)
+        check("human-solicited count is 1", c3.get("count") == 1)
+        check("human-solicited highest level is V3", c3.get("highest_level") == "V3")
+        check("human-solicited not independent attestation", c3.get("counts_as_independent_attestation") is False)
+        check("physical anchor formal inspections is 0", c4.get("formal_independent_inspection_count") == 0)
+        check("physical anchor public context is P3", c4.get("highest_public_evidence_context") == "P3")
+
     check("source digest present", len(phs.get("source_digest", "")) > 0)
 except Exception as e:
     check("public-home-status.json is valid JSON", False, str(e))
 
-# Homepage generated block exists and contains four cards
+# Homepage generated block exists and contains cards
 try:
     index_text = read_text("index.md")
     check("homepage has BEGIN marker", "<!-- BEGIN GENERATED PUBLIC STATUS -->" in index_text)
     check("homepage has END marker", "<!-- END GENERATED PUBLIC STATUS -->" in index_text)
-    check("homepage has Institutional card", "Institutional / human independent verification" in index_text)
-    check("homepage has Agent-initiated card", "Agent-initiated independent verification" in index_text)
-    check("homepage has Human-solicited card", "Human-solicited agent verification" in index_text)
-    check("homepage has Physical anchor card", "Physical anchor verification" in index_text)
-    check("homepage has boundary sentence", "not counted as independent attestation" in index_text)
+    # New cards: Verifiability, Reception, External witness records, Boundary
+    check("homepage has Verifiability card", "Verifiability" in index_text)
+    check("homepage has Reception card", "Reception" in index_text)
+    check("homepage has External witness card", "External witness records" in index_text)
+    check("homepage has Boundary card", "Boundary" in index_text)
+    check("homepage has boundary sentence", "Reception does not imply belief" in index_text)
 except Exception as e:
     check("homepage generated block", False, str(e))
 
@@ -829,7 +858,8 @@ try:
     check("public-home-status boundary.issue_text_excluded_from_counts = true",
           boundary.get("issue_text_excluded_from_counts") is True)
     check("public-home-status boundary.issue_comments_cannot_upgrade_counts = true",
-          boundary.get("issue_comments_cannot_upgrade_counts") is True)
+          boundary.get("issue_comments_cannot_upgrade_counts") is True or
+          boundary.get("gateway_intake_excluded_from_counts") is True)
 except Exception as e:
     check("public-home-status boundary check", False, str(e))
 

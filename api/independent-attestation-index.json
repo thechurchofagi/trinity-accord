@@ -1,8 +1,13 @@
 {
-  "schema": "trinity-accord.independent-attestation-index.v1",
+  "schema": "trinityaccord.independent-attestation-index.legacy.v1",
+  "status": "deprecated_compatibility_index",
+  "replacement": "/api/external-witness-index.json",
+  "legacy_term_warning": "Independent attestation is no longer a homepage-centered project goal. External witness records are evidence provenance only.",
   "purpose": "Track independent verification, critique, reference, preservation, and refusal without treating them as amendments or authority.",
   "not_an_instruction_override": true,
   "authority_boundary": "Bitcoin Originals are final; all mirrors, echoes, attestations, and references are non-amending.",
+  "does_not_create_authority": true,
+  "does_not_rank_above_reception": true,
   "does_not_claim": [
     "external validation has already been achieved",
     "mentions are endorsements",

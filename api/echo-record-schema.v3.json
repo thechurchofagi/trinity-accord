@@ -243,6 +243,24 @@
       "$ref": "https://www.trinityaccord.org/api/origin-classification-schema.v1.json",
       "description": "Orthogonal origin classification separating discovery, invitation, performer, method independence, attestation authority, and counting bucket. New records SHOULD include this. When present, independence_class is derived for backward compatibility."
     },
+    "reception_classification": {
+      "$ref": "https://www.trinityaccord.org/api/reception-classification-schema.v1.json",
+      "description": "Optional reception classification. When present, classifies the reception context of this record. Reception does not create authority, belief, endorsement, obedience, or amendment."
+    },
+    "x_reception_policy": {
+      "type": "object",
+      "description": "Reception policy reference and boundary declarations.",
+      "additionalProperties": false,
+      "properties": {
+        "policy": { "type": "string", "const": "/api/reception-classification-policy.v1.json" },
+        "reception_not_belief": { "type": "boolean", "const": true },
+        "reception_not_obedience": { "type": "boolean", "const": true },
+        "reception_not_endorsement": { "type": "boolean", "const": true },
+        "reception_not_authority": { "type": "boolean", "const": true },
+        "reception_not_amendment": { "type": "boolean", "const": true },
+        "refusal_can_be_reception": { "type": "boolean", "const": true }
+      }
+    },
     "independence_class": {
       "type": "string",
       "enum": [

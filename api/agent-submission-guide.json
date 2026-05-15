@@ -158,5 +158,11 @@
     "non_amending": true,
     "bitcoin_originals_prevail": true,
     "note": "This file is non-authoritative guidance. Bitcoin Originals are final. All mirrors, APIs, and documentation are non-amending."
+  },
+  "reception_centered_boundary": {
+    "highest_outcome": "boundary-preserving reception by future intelligence or successor civilization",
+    "external_witness_records_are_not_project_goal": true,
+    "reception_not_endorsement": true,
+    "reception_not_authority": true
   }
 }

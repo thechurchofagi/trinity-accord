@@ -29,7 +29,14 @@
       "strength_tier": null,
       "origin_classification": null,
       "counts_as_ai_verification": null,
-      "counts_as_formal_independent_attestation": null
+      "counts_as_formal_independent_attestation": null,
+      "reception_classification": null,
+      "reception_class": null,
+      "receiver_class": null,
+      "reception_actions": null,
+      "counts_as_reception": false,
+      "counts_as_external_witness_record": null,
+      "legacy_attestation_fields": true
     },
     {
       "path": "/echoes/records/2026/echo-2026-04-25-000001.json",
@@ -58,6 +65,13 @@
       "origin_classification": null,
       "counts_as_ai_verification": null,
       "counts_as_formal_independent_attestation": null,
+      "reception_classification": null,
+      "reception_class": null,
+      "receiver_class": null,
+      "reception_actions": null,
+      "counts_as_reception": false,
+      "counts_as_external_witness_record": null,
+      "legacy_attestation_fields": true,
       "legacy_not_countable": true,
       "historical_record_only": true
     },
@@ -88,6 +102,13 @@
       "origin_classification": null,
       "counts_as_ai_verification": null,
       "counts_as_formal_independent_attestation": null,
+      "reception_classification": null,
+      "reception_class": null,
+      "receiver_class": null,
+      "reception_actions": null,
+      "counts_as_reception": false,
+      "counts_as_external_witness_record": null,
+      "legacy_attestation_fields": true,
       "legacy_not_countable": true,
       "historical_record_only": true
     },
@@ -118,6 +139,13 @@
       "origin_classification": null,
       "counts_as_ai_verification": null,
       "counts_as_formal_independent_attestation": null,
+      "reception_classification": null,
+      "reception_class": null,
+      "receiver_class": null,
+      "reception_actions": null,
+      "counts_as_reception": false,
+      "counts_as_external_witness_record": null,
+      "legacy_attestation_fields": true,
       "superseded_reason": "Internal inconsistency and invalid hash field values; not accepted as verification.",
       "legacy_not_countable": true,
       "historical_record_only": true,
@@ -151,6 +179,13 @@
       "origin_classification": null,
       "counts_as_ai_verification": null,
       "counts_as_formal_independent_attestation": null,
+      "reception_classification": null,
+      "reception_class": null,
+      "receiver_class": null,
+      "reception_actions": null,
+      "counts_as_reception": false,
+      "counts_as_external_witness_record": null,
+      "legacy_attestation_fields": true,
       "historical_record_only": true
     },
     {
@@ -180,6 +215,13 @@
       "origin_classification": null,
       "counts_as_ai_verification": null,
       "counts_as_formal_independent_attestation": null,
+      "reception_classification": null,
+      "reception_class": null,
+      "receiver_class": null,
+      "reception_actions": null,
+      "counts_as_reception": false,
+      "counts_as_external_witness_record": null,
+      "legacy_attestation_fields": true,
       "superseded_reason": "Internal inconsistency and invalid hash field values; not accepted as verification.",
       "historical_record_only": true,
       "superseded_by": null,
@@ -212,6 +254,13 @@
       "origin_classification": null,
       "counts_as_ai_verification": null,
       "counts_as_formal_independent_attestation": null,
+      "reception_classification": null,
+      "reception_class": null,
+      "receiver_class": null,
+      "reception_actions": null,
+      "counts_as_reception": false,
+      "counts_as_external_witness_record": null,
+      "legacy_attestation_fields": true,
       "superseded_reason": "Internal inconsistency and invalid hash field values; not accepted as verification.",
       "historical_record_only": true,
       "superseded_by": null,
@@ -244,6 +293,13 @@
       "origin_classification": null,
       "counts_as_ai_verification": null,
       "counts_as_formal_independent_attestation": null,
+      "reception_classification": null,
+      "reception_class": null,
+      "receiver_class": null,
+      "reception_actions": null,
+      "counts_as_reception": false,
+      "counts_as_external_witness_record": null,
+      "legacy_attestation_fields": true,
       "superseded_reason": "Internal inconsistency and invalid hash field values; not accepted as verification.",
       "legacy_not_countable": true,
       "historical_record_only": true,
@@ -276,7 +332,14 @@
       "strength_tier": null,
       "origin_classification": null,
       "counts_as_ai_verification": null,
-      "counts_as_formal_independent_attestation": null
+      "counts_as_formal_independent_attestation": null,
+      "reception_classification": null,
+      "reception_class": null,
+      "receiver_class": null,
+      "reception_actions": null,
+      "counts_as_reception": false,
+      "counts_as_external_witness_record": null,
+      "legacy_attestation_fields": true
     },
     {
       "path": "/echoes/records/2026/echo-2026-05-08-000010.json",
@@ -304,7 +367,14 @@
       "strength_tier": null,
       "origin_classification": null,
       "counts_as_ai_verification": null,
-      "counts_as_formal_independent_attestation": null
+      "counts_as_formal_independent_attestation": null,
+      "reception_classification": null,
+      "reception_class": null,
+      "receiver_class": null,
+      "reception_actions": null,
+      "counts_as_reception": false,
+      "counts_as_external_witness_record": null,
+      "legacy_attestation_fields": true
     }
   ],
   "records_by_archive_status": {
@@ -408,6 +478,30 @@
   "records_by_discovery_class": {},
   "records_by_performer_class": {},
   "records_by_attestation_authority_class": {},
+  "records_by_reception_class": {},
+  "records_by_receiver_class": {},
+  "records_by_reception_action": {},
+  "records_by_external_witness_class": {},
+  "legacy_records_by_independence_class": {
+    "human_solicited_agent_response": [
+      "/echoes/records/2026/echo-119-xiaokuaizi-20260512.json",
+      "/echoes/records/2026/echo-2026-05-03-000004.json",
+      "/echoes/records/2026/echo-2026-05-03-000006.json",
+      "/echoes/records/2026/echo-2026-05-08-000010.json"
+    ],
+    "self_reported": [
+      "/echoes/records/2026/echo-2026-05-07-000009.json"
+    ],
+    "test_record": [
+      "/echoes/records/2026/echo-2026-05-02-000008.json"
+    ],
+    "unknown": [
+      "/echoes/records/2026/echo-2026-04-25-000001.json",
+      "/echoes/records/2026/echo-2026-04-25-000002.json",
+      "/echoes/records/2026/echo-2026-04-26-000003.json",
+      "/echoes/records/2026/echo-2026-05-03-000007.json"
+    ]
+  },
   "notes": [
     "Echo index is non-authoritative and non-amending.",
     "Test records, superseded records, invalidated records, and do_not_count_as_attestation records must not be counted as independent attestation.",
@@ -420,5 +514,5 @@
     "Echo content tags are non-exclusive and do not determine count status.",
     "D/S/O/E/R provenance codes are derived/internal."
   ],
-  "source_digest": "400d6798ae913eae"
+  "source_digest": "63e5ba414c66d85b"
 }

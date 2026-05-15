@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.trinityaccord.org/api/external-witness-index-schema.v1.json",
+  "title": "Trinity Accord External Witness Index Schema v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "status", "does_not_create_authority", "does_not_rank_above_reception", "records", "counts"],
+  "properties": {
+    "schema": {
+      "type": "string",
+      "const": "trinityaccord.external-witness-index.v1"
+    },
+    "status": {
+      "type": "string",
+      "const": "evidence_provenance_index"
+    },
+    "purpose": { "type": "string" },
+    "does_not_create_authority": { "type": "boolean", "const": true },
+    "does_not_rank_above_reception": { "type": "boolean", "const": true },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "type", "source", "date", "boundary_preserved"],
+        "properties": {
+          "id": { "type": "string" },
+          "type": {
+            "type": "string",
+            "enum": ["notarial_record", "institutional_record", "audit_report", "regulatory_or_court_record"]
+          },
+          "source": { "type": "string" },
+          "date": { "type": "string" },
+          "summary": { "type": "string" },
+          "url_or_archive": { "type": ["string", "null"] },
+          "hash_if_available": { "type": ["string", "null"] },
+          "boundary_preserved": { "type": "boolean" },
+          "verification_level_if_any": { "type": ["string", "null"] },
+          "limitations": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "counts": {
+      "type": "object",
+      "properties": {
+        "notarial_record": { "type": "integer", "minimum": 0 },
+        "institutional_record": { "type": "integer", "minimum": 0 },
+        "audit_report": { "type": "integer", "minimum": 0 },
+        "regulatory_or_court_record": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "legacy_mapping": { "type": "object" },
+    "version": { "type": "string" },
+    "non_amending_boundary": { "type": "boolean" },
+    "canonical_authority": { "type": "string" },
+    "not_instruction_override": { "type": "boolean" },
+    "does_not_prove": { "type": "array", "items": { "type": "string" } }
+  }
+}

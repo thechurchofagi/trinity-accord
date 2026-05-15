@@ -614,6 +614,10 @@
         "future_capability_reserved"
       ],
       "description": "Structured claim scope level derived from evidence."
+    },
+    "reception_classification": {
+      "$ref": "https://www.trinityaccord.org/api/reception-classification-schema.v1.json",
+      "description": "Optional reception classification. A verification report may also record reception context, but reception does not create the verification level. Verification level remains evidence-derived."
     }
   },
   "allOf": [

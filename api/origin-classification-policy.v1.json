@@ -1,7 +1,7 @@
 {
   "schema": "trinityaccord.origin-classification-policy.v1",
   "status": "non_authoritative_classification_policy",
-  "purpose": "Separate discovery, invitation, performer, method independence, attestation authority, and public counting buckets for Echo, verification, and attestation records.",
+  "purpose": "Separate discovery, invitation, performer, method independence, external witness provenance, and public counting buckets for Echo, verification, and reception records.",
   "non_amending_boundary": true,
   "not_instruction_override": true,
   "authority_boundary": {
@@ -16,16 +16,25 @@
     "agent_referral_is_not_unsolicited": true,
     "look_only_invitation_is_not_verification_invitation": true,
     "willingness_is_not_verification": true,
-    "formal_attestation_requires_accountable_entity": true,
-    "institutional_attestation_may_be_ai_assisted": true,
+    "formal_attestation_requires_accountable_entity": false,
+    "institutional_attestation_may_be_ai_assisted": false,
+    "external_witness_records_are_evidence_provenance": true,
+    "external_witness_does_not_create_authority": true,
+    "external_witness_does_not_rank_above_reception": true,
     "verification_level_derived_by_claim_gate": true
   },
   "does_not_prove": [
     "Origin classification does not prove the protocol is true",
     "Origin classification does not amend Bitcoin Originals",
     "Origin classification does not create verification level",
-    "Origin classification does not create formal attestation without accountable authority"
+    "Origin classification does not create formal attestation without accountable authority",
+    "External witness records are evidence provenance, not project authority"
   ],
+  "legacy_attestation_terms": {
+    "status": "deprecated_compatibility_terms",
+    "replacement": "external_witness_records / evidence_provenance",
+    "do_not_use_as_project_goal": true
+  },
   "discovery_class": {
     "description": "How the record subject first encountered Trinity Accord.",
     "allowed_values": [
@@ -94,7 +103,7 @@
     ]
   },
   "attestation_authority_class": {
-    "description": "Who bears accountability for the attestation.",
+    "description": "Legacy compatibility field. Prefer external_witness_class. This field does not define the project's highest outcome.",
     "allowed_values": [
       "none",
       "self_reported",
@@ -107,6 +116,20 @@
       "regulatory_or_court_record"
     ]
   },
+  "external_witness_class": {
+    "description": "External witness records as evidence provenance, not as project authority.",
+    "allowed_values": [
+      "none",
+      "self_reported",
+      "stable_account",
+      "signed_agent_run",
+      "maintainer_archived",
+      "institutional_record",
+      "notarial_record",
+      "audit_report",
+      "regulatory_or_court_record"
+    ]
+  },
   "derived_counting_bucket": {
     "description": "System-derived bucket for public counting. Must not be freely chosen by submitter.",
     "allowed_values": [
@@ -114,13 +137,12 @@
       "gateway_intake_only",
       "echo_only",
       "agent_referred_orientation",
-      "human_solicited_agent_verification",
+      "human_directed_agent_verification",
       "agent_referred_agent_verification",
       "self_initiated_agent_verification",
       "institution_commissioned_ai_verification",
-      "institutional_attestation_candidate",
-      "accepted_institutional_attestation",
-      "notarial_or_audit_attestation",
+      "external_witness_record",
+      "notarial_or_legal_provenance",
       "maintainer_test_record",
       "legacy_or_unknown",
       "rejected_or_superseded"

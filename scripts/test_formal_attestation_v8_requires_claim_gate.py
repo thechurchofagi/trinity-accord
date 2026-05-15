@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
 """
-Test: V8 formal attestation requires Claim Gate output.
+Test: V8 external witness requires Claim Gate output (legacy: V8 formal attestation).
 TA-REDTEAM-2026-003 — V8-specific admission gate tests.
+
+Note: formal_attestation is legacy terminology. External witness records
+are evidence provenance only.
 """
 import sys
 from pathlib import Path

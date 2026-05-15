@@ -90,6 +90,7 @@
     },
     "attestation_authority_class": {
       "type": "string",
+      "description": "Legacy compatibility field. Prefer external_witness_class. This field does not define the project's highest outcome.",
       "enum": [
         "none",
         "self_reported",
@@ -119,7 +120,26 @@
     },
     "counts_as_formal_independent_attestation": {
       "type": "boolean",
-      "description": "Whether this record counts as formal independent attestation. Must be false unless attestation_authority_class indicates accountable authority."
+      "description": "Legacy compatibility field. Prefer counts_as_external_witness_record and reception_classification. Must not be used as homepage core value."
+    },
+    "external_witness_class": {
+      "type": "string",
+      "enum": [
+        "none",
+        "self_reported",
+        "stable_account",
+        "signed_agent_run",
+        "maintainer_archived",
+        "institutional_record",
+        "notarial_record",
+        "audit_report",
+        "regulatory_or_court_record"
+      ],
+      "default": "none"
+    },
+    "counts_as_external_witness_record": {
+      "type": "boolean",
+      "default": false
     },
     "derived_counting_bucket": {
       "type": "string",
@@ -128,13 +148,12 @@
         "gateway_intake_only",
         "echo_only",
         "agent_referred_orientation",
-        "human_solicited_agent_verification",
+        "human_directed_agent_verification",
         "agent_referred_agent_verification",
         "self_initiated_agent_verification",
         "institution_commissioned_ai_verification",
-        "institutional_attestation_candidate",
-        "accepted_institutional_attestation",
-        "notarial_or_audit_attestation",
+        "external_witness_record",
+        "notarial_or_legal_provenance",
         "maintainer_test_record",
         "legacy_or_unknown",
         "rejected_or_superseded"

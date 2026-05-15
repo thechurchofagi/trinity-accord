@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
 """
-Test: Formal attestation Echo record gates.
+Test: External witness Echo record gates (legacy: formal attestation Echo record gates).
 TA-REDTEAM-2026-003 — ensures Echo-side formal count is properly gated.
 
 Echo-side formal count is intentionally disabled until a dedicated
-formal_attestation_review schema exists.  archive_status alone is
+external_witness_review schema exists.  archive_status alone is
 insufficient for formal admission.
+
+Note: formal_attestation is legacy terminology. External witness records
+are evidence provenance only, not the project's highest status.
 """
 import sys
 from pathlib import Path

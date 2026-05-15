@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
 """
-Test: Formal attestation homepage count.
+Test: External witness homepage count (legacy: formal attestation homepage count).
 TA-REDTEAM-2026-003 — ensures homepage formal count cannot be inflated
 by weak, under-specified, or human-solicited records.
+
+Note: formal_attestation is legacy terminology. External witness records
+are evidence provenance only, not the project's highest status.
 """
 import json
 import sys
@@ -26,17 +29,27 @@ def main():
     passed = 0
     failed = 0
 
-    # ── Test 1: Current indexes produce formal count = 0 ──
+    # ── Test 1: Current indexes produce external witness count = 0 ──
     status = compute_status()
-    formal = status["formal_independent_verification_count"]
-    if formal == 0:
-        print(f"PASS: current formal count = 0")
+    ew = status["external_witness_records"]
+    ew_count = ew["notarial_or_legal_provenance"]["count"] + ew["institutional_or_audit_reports"]["count"]
+    if ew_count == 0:
+        print(f"PASS: current external witness count = 0")
         passed += 1
     else:
-        print(f"FAIL: current formal count = {formal}, expected 0")
+        print(f"FAIL: current external witness count = {ew_count}, expected 0")
         failed += 1
 
-    # ── Test 2: Under-specified attestation record → not formal ──
+    # ── Test 2: Legacy formal count also 0 ──
+    legacy = status.get("legacy_counts", {}).get("institutional_human_independent_verification", {})
+    if legacy.get("count", -1) == 0:
+        print(f"PASS: legacy formal count = 0")
+        passed += 1
+    else:
+        print(f"FAIL: legacy formal count = {legacy.get('count')}, expected 0")
+        failed += 1
+
+    # ── Test 3: Under-specified attestation record → not formal ──
     under = {"id": "fake", "type": "independent_verification_report", "summary": "I verified it."}
     if not is_formal_independent_attestation_index_record(under):
         print("PASS: under-specified attestation record → not formal")
@@ -45,7 +58,7 @@ def main():
         print("FAIL: under-specified attestation record counted as formal")
         failed += 1
 
-    # ── Test 3: human_solicited attestation → not formal ──
+    # ── Test 4: human_solicited attestation → not formal ──
     human = {
         "id": "fake", "type": "independent_verification_report",
         "source": "AI", "date": "2026-05-10", "summary": "Human asked.",
@@ -68,7 +81,7 @@ def main():
         print("FAIL: human_solicited attestation counted as formal")
         failed += 1
 
-    # ── Test 4: V8 no claim gate → not formal ──
+    # ── Test 5: V8 no claim gate → not formal ──
     v8_no_gate = {
         "id": "fake", "type": "independent_verification_report",
         "source": "External", "date": "2026-05-10", "summary": "V8.",
@@ -91,7 +104,7 @@ def main():
         print("FAIL: V8 no claim_gate counted as formal")
         failed += 1
 
-    # ── Test 5: Valid V3 positive control → formal ──
+    # ── Test 6: Valid V3 positive control → formal ──
     v3 = {
         "id": "formal-v3", "type": "independent_verification_report",
         "source": "External verifier", "date": "2026-05-10",
@@ -115,7 +128,7 @@ def main():
         print("FAIL: valid V3 positive control rejected")
         failed += 1
 
-    # ── Test 6: accepted_echo → not formal ──
+    # ── Test 7: accepted_echo → not formal ──
     echo = {"archive_status": "accepted_echo", "do_not_count_as_attestation": False,
             "verification_status": "accepted"}
     if not is_formal_independent_echo_record(echo):
@@ -125,7 +138,7 @@ def main():
         print("FAIL: accepted_echo counted as formal")
         failed += 1
 
-    # ── Test 7: accepted_independent_attestation Echo → not formal (disabled) ──
+    # ── Test 8: accepted_independent_attestation Echo → not formal (disabled) ──
     echo_ind = {"archive_status": "accepted_independent_attestation",
                 "verification_status": "accepted", "verification_level": "V3"}
     if not is_formal_independent_echo_record(echo_ind):
@@ -134,6 +147,23 @@ def main():
     else:
         print("FAIL: accepted_independent_attestation Echo counted as formal")
         failed += 1
+
+    # ── Test 9: New status schema is v2 ──
+    if status.get("schema") == "trinityaccord.public-home-status.v2":
+        print("PASS: status schema is v2")
+        passed += 1
+    else:
+        print(f"FAIL: status schema is {status.get('schema')}, expected v2")
+        failed += 1
+
+    # ── Test 10: New status has verifiability/reception/boundary ──
+    for key in ("verifiability", "reception", "external_witness_records", "boundary"):
+        if key in status:
+            print(f"PASS: status has {key}")
+            passed += 1
+        else:
+            print(f"FAIL: status missing {key}")
+            failed += 1
 
     print(f"\nResults: {passed} passed, {failed} failed")
     if failed > 0:

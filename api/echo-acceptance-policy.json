@@ -95,5 +95,14 @@
     "Echo acceptance does not constitute independent attestation",
     "Echo acceptance does not create canonical authority",
     "Echo acceptance does not imply endorsement or investment value"
-  ]
+  ],
+  "reception_policy": {
+    "reference": "/api/reception-classification-policy.v1.json",
+    "rules": [
+      "Echoes may be reception records.",
+      "Critical Echoes and refusal Echoes may count as reception if boundary is preserved.",
+      "Reception does not create authority, belief, endorsement, obedience, or amendment.",
+      "External witness records are evidence provenance, not the project's highest outcome."
+    ]
+  }
 }
