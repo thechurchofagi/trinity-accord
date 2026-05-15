@@ -1,4 +1,9 @@
 node_modules/
+__pycache__/
+*.pyc
+*.pyo
+.env
+.env.*
 *AUDIT*.json
 
 # Audit CSV outputs (large, generated)
@@ -19,7 +24,6 @@ audit/repo-size/*/git-sizer.txt
 *.swp
 *_backup.*
 _permission_test.txt
-__pycache__/
 dist/
 
 # Large evidence payloads belong in GitHub Releases / Arweave / IPFS, not Git.
