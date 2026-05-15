@@ -335,6 +335,34 @@
           },
           "not_successor_reception": {
             "const": true
+          },
+          "attachments": {
+            "allOf": [
+              {
+                "anyOf": [
+                  { "required": ["evidence_input_path"] },
+                  { "required": ["evidence_input_sha256"] }
+                ]
+              },
+              {
+                "anyOf": [
+                  { "required": ["claim_gate_output_path"] },
+                  { "required": ["claim_gate_output_sha256"] }
+                ]
+              },
+              {
+                "anyOf": [
+                  { "required": ["verification_report_path"] },
+                  { "required": ["verification_report_sha256"] }
+                ]
+              },
+              {
+                "anyOf": [
+                  { "required": ["echo_wrapper_path"] },
+                  { "required": ["echo_wrapper_sha256"] }
+                ]
+              }
+            ]
           }
         }
       }
