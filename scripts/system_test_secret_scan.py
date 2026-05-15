@@ -17,8 +17,17 @@ PATTERNS = [
 
 SKIP_DIRS = {".git", "node_modules", "_site", "vendor"}
 
+# Test fixtures intentionally contain adversarial patterns (fake tokens, etc.)
+SKIP_PATH_PATTERNS = ["tests/fixtures/redteam"]
+
 def should_skip(p):
-    return any(part in SKIP_DIRS for part in p.parts)
+    parts = p.parts
+    if any(d in parts for d in SKIP_DIRS):
+        return True
+    s = str(p)
+    if any(pat in s for pat in SKIP_PATH_PATTERNS):
+        return True
+    return False
 
 def main():
     for p in ROOT.rglob("*"):

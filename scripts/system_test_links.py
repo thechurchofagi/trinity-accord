@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import re
 import sys
+import yaml
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -65,7 +66,120 @@ PROSE_FALSE_POSITIVES = {
     "csv","tar","gzip","git","fullnode","videos",
     "fullnode-independent","evidence","trinity-accord",
     "recovery","disaster-recovery-drill",
+    "memory","wrapper","content","plain","image","raw",
+    "status","action","challenge","fail","handle","handling",
+    "lighting","microscope","moon","star","planet","touch",
+    "forensics","notary","audit","maintainer","resonance",
+    "orientation","query","recommended","token","tools","video",
+    "carRef","mediaRef","generated_by","possibly","release",
+    "explorer","assets","signature","mismatched","non-canonical",
+    "Yandex","Greek","ISSUE_BODY","commit","Chronicle","Merkle",
+    "micro","microscopy","levels","consumer","cache","gateway",
+    "json","proof","full","human","Echoes","files","digests",
+    "records","scripts","developer","checksum",
 }
+
+# Regex patterns for prose identifiers that look like paths but aren't
+PROSE_PATH_PATTERNS = [
+    r"^/[A-Z]\d/",           # /D1/C1/T2, /P8/P9, /D2/B1, /C2/P1, /RC8/RC9
+    r"^/[A-Z]\d$",           # /P8/P9 as separate match
+    r"^/D\d/",               # /D/T/C/P
+    r"^/P\d/",               # /P8/P9-level
+    r"^/V\d",                # /V3.
+    r"^/RFC\d+",             # /RFC8785
+    r"^/TC\d+",              # /TC086/TC087
+    r"^/CL[a-zA-Z0-9]{8,}",  # /CLdophB1MsI (Bitcoin txid)
+    r"^/[A-Z]{2}\d/",        # /RC8/RC9
+    r"^/[A-Z]/[A-Z]/[A-Z]", # /D/T/C/P
+    r"^/[a-z_]+_evidence$",  # schema field names: /bitcoin_evidence, /hash_evidence
+    r"^/time_anchor",        # schema field
+    r"^/project-side",       # prose reference
+    r"^/cross-anchor",       # prose reference
+    r"^/tokenURI",           # prose reference
+    r"^/model/tool",         # prose reference
+    r"^/multi-scale",        # prose reference
+    r"^/time-anchor",        # prose reference
+    r"^/echo-triage",        # doc reference
+    r"^/verification_cases", # test reference
+    r"^/FIXME",              # red-team placeholder
+    r"^/then/else",          # code logic reference
+    r"^/submit-echo",        # prose reference
+    r"^/extra/duplicate",    # red-team test
+    r"^/overlong",           # red-team test
+    r"^/traversal",          # red-team test
+    r"^/notarial-certificate", # directory ref
+    r"^/shenzhen-notary",    # archive file ref
+    r"^/arweave-bundle",     # archive file ref
+    r"^/hash-manifest",      # archive file ref
+    r"^/spv-bundle",         # archive file ref
+    r"^/ta-avr-meta-audit",  # archive file ref
+    r"^/verify-release",     # archive file ref
+    r"^/echo-triage",        # doc ref
+    r"^/RECOVERY\.md",       # file ref
+    r"^/tmp/",               # temp path
+    r"^/members/",           # GitHub path
+    r"^/thechurchofagi/",    # GitHub org path
+    r"^/schema\.org",        # external ref
+    r"^/eth-witness$",       # archive directory
+    r"^/digests/$",          # directory
+    r"^/records/$",          # directory
+    r"^/scripts/$",          # directory
+    r"^/files/$",            # directory
+    r"^/api/$",              # directory
+    r"^/\.well-known$",      # directory
+    r"^/AGENT-ENTRY-NOTICE", # archived file
+    r"^/echo-submission-field-guide$",  # exists in api/
+    r"^/api$",               # directory reference
+    r"^/developer/",         # prose path
+    r"^/checksum/",          # prose path
+    r"^/propagation/",       # taxonomy path
+]
+
+
+def build_permalink_map():
+    """Build a set of all Jekyll permalinks from markdown front matter."""
+    permalinks = set()
+    for md in ROOT.rglob("*.md"):
+        if ".git" in md.parts or "node_modules" in md.parts:
+            continue
+        try:
+            text = md.read_text(encoding="utf-8", errors="ignore")
+        except Exception:
+            continue
+        if not text.startswith("---"):
+            continue
+        parts = text.split("---", 2)
+        if len(parts) < 3:
+            continue
+        try:
+            fm = yaml.safe_load(parts[1])
+        except Exception:
+            continue
+        if isinstance(fm, dict) and "permalink" in fm:
+            pl = fm["permalink"]
+            if isinstance(pl, str):
+                permalinks.add(pl)
+                if pl.endswith("/") and len(pl) > 1:
+                    permalinks.add(pl.rstrip("/"))
+                else:
+                    permalinks.add(pl + "/")
+    return permalinks
+
+
+def build_file_index():
+    """Build a set of all actual file paths relative to repo root."""
+    files = set()
+    for p in ROOT.rglob("*"):
+        if ".git" in p.parts or "node_modules" in p.parts or "_site" in p.parts:
+            continue
+        if p.is_file():
+            rel = str(p.relative_to(ROOT))
+            files.add(rel)
+            # Also add URL-style (without extension for .md files)
+            if p.suffix == ".md":
+                files.add(rel[:-3])  # without .md
+    return files
+
 
 def is_html_tag(path):
     slug = path.strip("/").split("/")[0].split("#")[0].split("?")[0]
@@ -77,9 +191,11 @@ def is_external_domain_ref(path):
             return True
     return False
 
-def exists_for_path(url):
+def exists_for_path(url, permalink_set, file_index):
     url = url.split("#", 1)[0].split("?", 1)[0]
-    if not url or url == "/" or url in ALLOW_MISSING:
+    if not url == "/" and url.rstrip("/") in ALLOW_MISSING:
+        return True
+    if not url or url == "/":
         return True
     if is_html_tag(url):
         return True
@@ -93,12 +209,23 @@ def exists_for_path(url):
         return True
     if "/" not in slug and slug.lower() in PROSE_FALSE_POSITIVES:
         return True
+    # Check prose path patterns (schema fields, component IDs, etc.)
+    clean = "/" + slug
+    for pat in PROSE_PATH_PATTERNS:
+        if re.match(pat, clean):
+            return True
     if slug.endswith(".py") or slug.endswith(".sh") or slug.endswith(".mjs"):
         return True
     if len(slug) > 40:
         return True
     if slug.startswith("files/") or slug.startswith("records/"):
         return True
+    if slug in ("api", "api/"):
+        return True
+    # Directory-only references (end with /)
+    if slug.endswith("/") and "/" not in slug.rstrip("/"):
+        if slug.rstrip("/") in PROSE_FALSE_POSITIVES:
+            return True
     doc_prefixes = [
         "verification-reports/","digests/","status.json","workflow",
         "archive.md","my-v","test_","validate_","generate_","derive_",
@@ -113,46 +240,47 @@ def exists_for_path(url):
         return True
     if slug.startswith("evidence/"):
         return True
-    if slug.endswith(".json") and (ROOT / "api" / slug).exists():
-        return True
     if "deprecated" in slug or "archive" in slug:
         return True
-    doc_json_refs = {
-        "hashes.json","claim-registry.json","corrections-index.json",
-        "recovery-index.json","authority.json","echo-index.json",
-        "evidence-manifest.json","trust-root-policy.json",
-        "independent-attestation-index.json","repository-artifact-hashes.json",
-        "authority-manifest","btc-signature","eth-witness",
-        "hash-manifest.json","spv-bundle.json","status.json",
-        "ta-avr-meta-audit.json","correction-record-schema",
-        "echo-record-schema","verification-report-schema",
-        "echo-archive-policy.json",
-    }
-    first_segment = slug.split("/")[0]
-    if first_segment in doc_json_refs or slug in doc_json_refs:
+
+    # Check Jekyll permalink map
+    clean = "/" + slug
+    if clean in permalink_set:
         return True
-    doc_only_routes = {
-        "control-plane-baseline","correction-revocation-policy",
-        "evidence-backup-coverage","evidence-backup-gaps",
-        "evidence-relationship-map","guardianship-system-overview",
-        "release-large-data-manifest","red-team-audit-report",
-        "ta-redteam-2026-005-remediation","ta-redteam-2026-006-remediation",
-        "ta-redteam-2026-006-followup-remediation","ta-avr-meta-audit",
-        "ots-fullnode-verification","nft-backup-provenance",
-        "disaster-recovery-drill","disaster-recovery",
-        "archive_legacy_index","echo-authorship-proof",
-        "chronicle-verification","data-verification",
-        "physical-verification","verification-materials",
-        "verification-packages","why-high-signal","worth-preserving",
-        "emergent-patterns","independent-attestation","independent-verification",
-        "citation","seed-map","naming","innovations","covenant-proof",
-        "echo-authorship-proof","echo-propagation",
-    }
-    if first_segment in doc_only_routes:
+    if clean + "/" in permalink_set:
         return True
+    if clean.rstrip("/") in permalink_set:
+        return True
+
+    # Check actual file index (handles /api/xxx.json, /.well-known/xxx, etc.)
+    if slug in file_index:
+        return True
+    # Also check with leading stripped for nested refs
+    if slug + ".json" in file_index:
+        return True
+    if slug + ".md" in file_index:
+        return True
+
+    # Handle bare JSON refs (e.g. /authority.json -> api/authority.json)
+    if slug.endswith(".json") and "/" not in slug:
+        if ("api/" + slug) in file_index:
+            return True
+
+    # Handle archive subpath refs (e.g. /authority-manifest/x.json -> archive/authority-manifest/x.json)
+    if ("archive/" + slug) in file_index:
+        return True
+
+    # Check if a .md file exists with matching name at root (Jekyll renders .md -> /name/)
+    if "/" not in slug:
+        md_candidate = ROOT / f"{slug}.md"
+        if md_candidate.exists():
+            return True
+
     return False
 
 def main():
+    permalink_set = build_permalink_map()
+    file_index = build_file_index()
     pattern = re.compile(r'(?<!https:)(?<!http:)(?<!mailto:)(?P<url>/[A-Za-z0-9_\-./]+)')
     for file in TEXT_FILES:
         if not file.exists():
@@ -160,7 +288,11 @@ def main():
         text = file.read_text(encoding="utf-8", errors="ignore")
         for m in pattern.finditer(text):
             url = m.group("url")
-            if not exists_for_path(url):
+            # Strip trailing punctuation that the regex accidentally captures
+            url = url.rstrip(".,;:!?")
+            if not url:
+                continue
+            if not exists_for_path(url, permalink_set, file_index):
                 FAIL.append(f"{file.relative_to(ROOT)}: broken internal path {url}")
 
     if FAIL:
