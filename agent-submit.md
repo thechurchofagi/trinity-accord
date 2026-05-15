@@ -131,3 +131,14 @@ It must pass the same generation, validation, triage, and indexing path as direc
 - Refusal or critique
 - Protocol issue
 - Documentation issue
+
+## Machine-readable Issue/Gateway intake
+
+Do not submit a Verification Echo Issue with only prose descriptions.
+
+For machine readability, include both:
+
+1. explicit GitHub Issue form fields, and
+2. a fenced `trinity-issue-intake` block.
+
+Automated reviewers should prefer the machine block over prose. The prose may explain, but must not be the only place where required fields appear.

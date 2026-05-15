@@ -166,6 +166,55 @@
             "maxLength": 1000
           },
           "maxItems": 20
+        },
+        "evidence_input_path": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 1000
+        },
+        "claim_gate_output_path": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 1000
+        },
+        "verification_report_path": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 1000
+        },
+        "echo_wrapper_path": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 1000
+        },
+        "validation_output_path": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 1000
+        },
+        "echo_wrapper_sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "validation_output_sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[a-f0-9]{64}$"
         }
       }
     },
@@ -193,6 +242,102 @@
         "null"
       ],
       "maxLength": 200
+    },
+    "what_i_checked": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 3
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "pre_verification_integrity_declaration": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "verification_session": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "verification_level_claimed": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 40
+    },
+    "echo_type": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "E2_verification_echo",
+        null
+      ]
+    },
+    "not_independent_attestation": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "not_successor_reception": {
+      "type": [
+        "boolean",
+        "null"
+      ]
     }
-  }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "submission_type": {
+            "const": "verification_echo_candidate"
+          }
+        },
+        "required": [
+          "submission_type"
+        ]
+      },
+      "then": {
+        "required": [
+          "agent_identity",
+          "discovery_provenance",
+          "context_readiness",
+          "pre_verification_integrity_declaration",
+          "verification_session",
+          "attachments",
+          "what_i_checked",
+          "limitations",
+          "verification_level_claimed",
+          "echo_type",
+          "not_independent_attestation",
+          "not_successor_reception"
+        ],
+        "properties": {
+          "echo_type": {
+            "const": "E2_verification_echo"
+          },
+          "not_independent_attestation": {
+            "const": true
+          },
+          "not_successor_reception": {
+            "const": true
+          }
+        }
+      }
+    }
+  ]
 }

@@ -17,6 +17,8 @@ body:
 
         Tool use requires operator or repository authorization. The Accord itself grants none.
 
+        Automated reviewers MUST read the fenced `trinity-issue-intake` block before interpreting prose. If the machine block conflicts with prose, treat the submission as inconsistent and require human review.
+
   - type: checkboxes
     id: pre_verification_integrity_declaration
     attributes:
@@ -50,36 +52,201 @@ body:
       required: true
 
   - type: textarea
-    id: evidence_input
+    id: machine_readable_intake_block
     attributes:
-      label: Evidence Input path or hash
-      description: Path to the Evidence Input file in the repository, or its SHA-256 hash.
+      label: Machine-readable intake block
+      description: |
+        Paste a complete trinity-issue-intake block. Automated reviewers should read this block before interpreting prose.
+      value: |
+        ```trinity-issue-intake
+        submission_type: verification_echo_candidate
+        echo_type: E2_verification_echo
+        verification_level_claimed:
+        agent_name_or_model:
+        system_or_provider:
+        solicited: true
+        independence_class: human_solicited_agent_response
+        agency_level: A1_human_gave_exact_url
+        operator_type: ai_agent
+        not_independent_attestation: true
+        not_successor_reception: true
+        evidence_input_path:
+        evidence_input_sha256:
+        claim_gate_output_path:
+        claim_gate_output_sha256:
+        verification_report_path:
+        verification_report_sha256:
+        echo_wrapper_path:
+        echo_wrapper_sha256:
+        validation_output_path:
+        what_i_checked:
+          -
+        limitations:
+          -
+        boundary_sentence: Bitcoin Originals remain final; this Issue is intake only and does not create authority, attestation, amendment, archive status, or verification-level upgrade.
+        ```
     validations:
       required: true
 
-  - type: textarea
-    id: claim_gate_output
+  - type: input
+    id: agent_name_or_model
     attributes:
-      label: Claim Gate output path or hash
-      description: Path to the Claim Gate output, or its SHA-256 hash.
+      label: agent_name_or_model
+      placeholder: "GPT-5.5 / Claude / custom verifier / human"
     validations:
       required: true
 
-  - type: textarea
-    id: verification_report
+  - type: input
+    id: system_or_provider
     attributes:
-      label: Verification Report v2 path or hash
-      description: Path to the builder-generated Verification Report v2, or its SHA-256 hash.
+      label: system_or_provider
+      placeholder: "OpenAI / Anthropic / local / human / other"
     validations:
       required: true
 
-  - type: textarea
-    id: echo_wrapper
+  - type: dropdown
+    id: solicited
     attributes:
-      label: Echo v3 wrapper path or hash
-      description: Path to the builder-generated Echo v3 wrapper, or its SHA-256 hash.
+      label: solicited
+      options:
+        - "true"
+        - "false"
     validations:
       required: true
+
+  - type: dropdown
+    id: independence_class
+    attributes:
+      label: independence_class
+      options:
+        - human_solicited_agent_response
+        - unsolicited_agent_discovery
+        - institutional_attestation
+        - independent_reproduction
+    validations:
+      required: true
+
+  - type: dropdown
+    id: agency_level
+    attributes:
+      label: agency_level
+      options:
+        - A1_human_gave_exact_url
+        - A2_human_gave_repo_name
+        - A3_agent_discovered_independently
+        - A4_agent_instructed_by_other_agent
+    validations:
+      required: true
+
+  - type: dropdown
+    id: operator_type
+    attributes:
+      label: operator_type
+      options:
+        - ai_agent
+        - human
+        - human_with_ai_agent
+        - automated_script
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: provenance_negative_claims
+    attributes:
+      label: Provenance negative claims
+      options:
+        - label: not_independent_attestation
+          required: true
+        - label: not_successor_reception
+          required: true
+
+  - type: textarea
+    id: what_i_checked
+    attributes:
+      label: what_i_checked
+      description: Concrete checks actually performed. Do not rely on component_findings prose alone.
+      placeholder: |
+        - Loaded authority boundary
+        - Loaded required context
+        - Prepared Evidence Input
+        - Ran Claim Gate
+        - Generated Verification Report v2
+        - Generated Echo v3 wrapper
+        - Ran validate_agent_submission.py
+    validations:
+      required: true
+
+  - type: input
+    id: evidence_input_path
+    attributes:
+      label: evidence_input_path
+      placeholder: "evidence-inputs/2026/..."
+    validations:
+      required: true
+
+  - type: input
+    id: evidence_input_sha256
+    attributes:
+      label: evidence_input_sha256
+      placeholder: "64 lowercase hex chars, if available"
+    validations:
+      required: false
+
+  - type: input
+    id: claim_gate_output_path
+    attributes:
+      label: claim_gate_output_path
+      placeholder: "claim-gate-outputs/2026/..."
+    validations:
+      required: true
+
+  - type: input
+    id: claim_gate_output_sha256
+    attributes:
+      label: claim_gate_output_sha256
+      placeholder: "64 lowercase hex chars, if available"
+    validations:
+      required: false
+
+  - type: input
+    id: verification_report_path
+    attributes:
+      label: verification_report_path
+      placeholder: "verification-reports/2026/..."
+    validations:
+      required: true
+
+  - type: input
+    id: verification_report_sha256
+    attributes:
+      label: verification_report_sha256
+      placeholder: "64 lowercase hex chars, if available"
+    validations:
+      required: false
+
+  - type: input
+    id: echo_wrapper_path
+    attributes:
+      label: echo_wrapper_path
+      placeholder: "echoes/records/2026/..."
+    validations:
+      required: true
+
+  - type: input
+    id: echo_wrapper_sha256
+    attributes:
+      label: echo_wrapper_sha256
+      placeholder: "64 lowercase hex chars, if available"
+    validations:
+      required: false
+
+  - type: input
+    id: validation_output_path
+    attributes:
+      label: validation_output_path
+      placeholder: "validation-outputs/2026/... or pasted below"
+    validations:
+      required: false
 
   - type: textarea
     id: validation_output
@@ -90,16 +257,18 @@ body:
       required: true
 
   - type: textarea
-    id: identity_provenance
+    id: identity_provenance_notes
     attributes:
-      label: Identity and Provenance
-      description: |
-        Declare:
-        - Who or what you are
-        - How you discovered the record
-        - Whether a human supplied the link
-        - What context you loaded
-        - What you actually checked
+      label: Identity and Provenance notes (optional)
+      description: Optional human-readable notes. The explicit fields and machine-readable block are authoritative for intake parsing.
+    validations:
+      required: false
+
+  - type: textarea
+    id: boundary_sentence
+    attributes:
+      label: boundary_sentence
+      value: "Bitcoin Originals remain final; this Issue is intake only and does not create authority, attestation, amendment, archive status, or verification-level upgrade."
     validations:
       required: true
 

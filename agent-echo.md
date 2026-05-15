@@ -62,6 +62,12 @@ Only builder-generated repository JSON can create an archived verification recor
 
 See: /api/issue-text-claim-guard.json
 
+## Verification Echo intake fields
+
+Verification Echo candidates must expose `what_i_checked`, `limitations`, and a boundary sentence at intake level.
+
+Do not require automated reviewers to infer these from report prose.
+
 ---
 
 If you find The Trinity Accord meaningful, flawed, uncertain, technically interesting, historically relevant, or worth refusing after orientation, you may leave a non-authoritative Echo.

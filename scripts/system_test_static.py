@@ -69,6 +69,16 @@ def main():
     require(".github/ISSUE_TEMPLATE/verification_echo.yml", 'title: "Echo v3: E2 Verification Echo — "')
     require(".github/ISSUE_TEMPLATE/verification_echo.yml", "This Issue is an intake surface only")
     require(".github/ISSUE_TEMPLATE/verification_echo.yml", "Pre-verification Integrity Declaration")
+    require(".github/ISSUE_TEMPLATE/verification_echo.yml", "machine_readable_intake_block")
+    require(".github/ISSUE_TEMPLATE/verification_echo.yml", "trinity-issue-intake")
+    require(".github/ISSUE_TEMPLATE/verification_echo.yml", "what_i_checked")
+    require(".github/ISSUE_TEMPLATE/verification_echo.yml", "agency_level")
+    require(".github/ISSUE_TEMPLATE/verification_echo.yml", "independence_class")
+    require(".github/ISSUE_TEMPLATE/verification_echo.yml", "operator_type")
+    require(".github/ISSUE_TEMPLATE/verification_echo.yml", "evidence_input_path")
+    require(".github/ISSUE_TEMPLATE/verification_echo.yml", "claim_gate_output_path")
+    require(".github/ISSUE_TEMPLATE/verification_echo.yml", "verification_report_path")
+    require(".github/ISSUE_TEMPLATE/verification_echo.yml", "echo_wrapper_path")
 
     require("agent-verify.md", "Pre-verification Integrity Declaration")
     require("agent-verify.md", "No verification claim may be made before this declaration")
@@ -80,6 +90,27 @@ def main():
 
     require("llms.txt", "Issue / Gateway intake")
     require("ai.txt", "Issue / Gateway intake")
+
+    require("api/agent-issue-gateway-payload-schema.v1.json", "what_i_checked")
+    require("api/agent-issue-gateway-payload-schema.v1.json", "evidence_input_path")
+    require("api/agent-issue-gateway-payload-schema.v1.json", "claim_gate_output_path")
+    require("api/agent-issue-gateway-payload-schema.v1.json", "verification_report_path")
+    require("api/agent-issue-gateway-payload-schema.v1.json", "echo_wrapper_path")
+
+    require("api/issue-intake-machine-block-schema.v1.json", "trinity")
+    require("scripts/validate_issue_intake_body.py", "ISSUE INTAKE BODY VALIDATION PASS")
+
+    require("issue-intake-boundary.md", "trinity-issue-intake")
+    require("agent-submit.md", "trinity-issue-intake")
+    require("agent-verify.md", "what_i_checked")
+    require("agent-echo.md", "what_i_checked")
+    require("llms.txt", "Issue intake machine block")
+    require("ai.txt", "Issue intake machine block")
+
+    forbid(".github/ISSUE_TEMPLATE/verification_echo.yml", r"Evidence Input path or hash")
+    forbid(".github/ISSUE_TEMPLATE/verification_echo.yml", r"Claim Gate output path or hash")
+    forbid(".github/ISSUE_TEMPLATE/verification_echo.yml", r"Verification Report v2 path or hash")
+    forbid(".github/ISSUE_TEMPLATE/verification_echo.yml", r"Echo v3 wrapper path or hash")
 
     require("api/agent-entry-protocol.json", '"paths"')
     forbid("api/agent-entry-protocol.json", r"/agent-verify or /agent-echo")

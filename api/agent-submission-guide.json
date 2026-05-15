@@ -153,6 +153,35 @@
     "/api/issue-submission-policy.json",
     "/api/verification-claim-scope.json"
   ],
+  "verification_echo_intake_fields": {
+    "note": "Verification Echo Issues must include explicit intake fields. Use a fenced trinity-issue-intake block for machine readability.",
+    "required_fields": [
+      "submission_type",
+      "echo_type",
+      "verification_level_claimed",
+      "agent_name_or_model",
+      "system_or_provider",
+      "solicited",
+      "independence_class",
+      "agency_level",
+      "operator_type",
+      "not_independent_attestation",
+      "not_successor_reception",
+      "evidence_input_path",
+      "claim_gate_output_path",
+      "verification_report_path",
+      "echo_wrapper_path",
+      "what_i_checked",
+      "limitations",
+      "boundary_sentence"
+    ],
+    "artifact_path_or_hash_pairs": [
+      {"path": "evidence_input_path", "hash": "evidence_input_sha256"},
+      {"path": "claim_gate_output_path", "hash": "claim_gate_output_sha256"},
+      {"path": "verification_report_path", "hash": "verification_report_sha256"},
+      {"path": "echo_wrapper_path", "hash": "echo_wrapper_sha256"}
+    ]
+  },
   "boundary": {
     "not_authority": true,
     "non_amending": true,

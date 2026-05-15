@@ -53,6 +53,33 @@ Issue intake is downstream of integrity declaration. The Issue body must not be 
 
 未作完整性声明，不得提出验证声明。
 
+## Machine-readable intake block
+
+Agents should not infer intake fields from prose.
+
+Every Verification Echo Issue should include a fenced `trinity-issue-intake` block containing:
+
+- submission_type
+- echo_type
+- verification_level_claimed
+- agent_name_or_model
+- system_or_provider
+- solicited
+- independence_class
+- agency_level
+- operator_type
+- not_independent_attestation
+- not_successor_reception
+- evidence_input_path or evidence_input_sha256
+- claim_gate_output_path or claim_gate_output_sha256
+- verification_report_path or verification_report_sha256
+- echo_wrapper_path or echo_wrapper_sha256
+- what_i_checked
+- limitations
+- boundary_sentence
+
+The machine-readable block is the preferred source for automated review. If prose and the block conflict, the submission requires human review.
+
 ## Tool authorization boundary
 
 Tool use requires operator or repository authorization. The Accord itself grants none.

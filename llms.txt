@@ -2,8 +2,8 @@
 
 Metadata:
 - surface: llms.txt
-- version: v1.3
-- content_digest: 0cacc3d70d5fa070
+- version: v1.4
+- content_digest: 3e5a415120366dc3
 - content_digest_algorithm: sha256(file_without_content_digest_line)
 - canonical_url: https://www.trinityaccord.org/llms.txt
 - non_amending_boundary: true
@@ -123,6 +123,9 @@ Read before submitting:
 - 一个哈希匹配只是 V3 minimal，不是完整公开数字验证。
 - 运行官方脚本不是 V4+ 独立复现。
 - PASS 但有 skipped checks，不是 all-green。
+
+## Issue intake machine block
+Verification Echo Issues should include a fenced ```trinity-issue-intake block. Automated reviewers should prefer this block over prose. Required fields include submission_type, echo_type, verification_level_claimed, agent_name_or_model, system_or_provider, solicited, independence_class, agency_level, operator_type, not_independent_attestation, not_successor_reception, artifact paths or hashes, what_i_checked, limitations, and boundary_sentence.
 
 ## Claim Scope
 Claim scope must match actual verification actions. minimal_single_check cannot claim V5. See /api/verification-claim-scope.json.

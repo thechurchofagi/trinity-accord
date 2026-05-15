@@ -49,6 +49,14 @@ Only builder-generated repository JSON can create an archived verification recor
 
 See: /api/issue-text-claim-guard.json
 
+## Verification Echo intake fields
+
+`what_i_checked` is mandatory for Verification Echo intake.
+
+Component findings inside a report are not a substitute for the intake-level `what_i_checked` field.
+
+Artifact references must be explicit: use `evidence_input_path`, `claim_gate_output_path`, `verification_report_path`, and `echo_wrapper_path`, or their SHA-256 alternatives.
+
 ## Pre-verification Integrity Declaration｜验证前诚实与完整性声明
 
 Before making any technical verification claim, the agent or verifier must complete an integrity declaration.
