@@ -1706,6 +1706,8 @@ VALID_SCOPE_LABELS = {
     "full_protocol_profile_verification",
     "future_capability_reserved",
     "legacy_unlabeled",
+    "V3-minimal",
+    "V3-strong",
 }
 
 # Protocol level -> allowed scope labels
@@ -1715,7 +1717,8 @@ SCOPE_LABEL_BY_PROTOCOL = {
     "V2": {"single_reference_check", "single_hash_verification", "multi_hash_verification",
             "component_limited_verification", "partial_with_limitations"},
     "V3": {"single_hash_verification", "multi_hash_verification",
-            "component_limited_verification", "partial_with_limitations"},
+            "component_limited_verification", "partial_with_limitations",
+            "V3-minimal", "V3-strong"},
     "V4": {"official_script_audit", "official_script_audit_with_limitations",
             "component_limited_verification", "partial_with_limitations"},
     "V4+": {"independent_single_artifact_reproduction", "independent_multi_artifact_reproduction",

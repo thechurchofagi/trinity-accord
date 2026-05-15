@@ -152,7 +152,9 @@
         "full_public_digital_verification",
         "full_protocol_profile_verification",
         "future_capability_reserved",
-        "legacy_unlabeled"
+        "legacy_unlabeled",
+        "V3-minimal",
+        "V3-strong"
       ],
       "description": "Scope-qualified verification label. Required for echo_v3_with_verification_report records. Must match linked report's verification_scope_label."
     },
@@ -279,6 +281,10 @@
       },
       "minItems": 1
     },
+    "counts_as_independent_attestation": {
+      "type": "boolean",
+      "description": "Legacy compatibility field. When origin_classification is present, this is derived from counts_as_formal_independent_attestation."
+    },
     "component_findings": {
       "type": "object",
       "additionalProperties": {
@@ -332,11 +338,26 @@
           "type": "string",
           "const": "/api/origin-classification-policy.v1.json"
         },
-        "agent_referred_is_not_unsolicited": { "type": "boolean", "const": true },
-        "look_only_invitation_is_not_verification_invitation": { "type": "boolean", "const": true },
-        "voluntary_verification_after_referral_allowed": { "type": "boolean", "const": true },
-        "method_independence_separate_from_discovery": { "type": "boolean", "const": true },
-        "formal_attestation_requires_accountable_authority": { "type": "boolean", "const": true }
+        "agent_referred_is_not_unsolicited": {
+          "type": "boolean",
+          "const": true
+        },
+        "look_only_invitation_is_not_verification_invitation": {
+          "type": "boolean",
+          "const": true
+        },
+        "voluntary_verification_after_referral_allowed": {
+          "type": "boolean",
+          "const": true
+        },
+        "method_independence_separate_from_discovery": {
+          "type": "boolean",
+          "const": true
+        },
+        "formal_attestation_requires_accountable_authority": {
+          "type": "boolean",
+          "const": true
+        }
       }
     },
     "record_kind": {
@@ -703,7 +724,9 @@
               "single_hash_verification",
               "multi_hash_verification",
               "component_limited_verification",
-              "partial_with_limitations"
+              "partial_with_limitations",
+              "V3-minimal",
+              "V3-strong"
             ]
           }
         },

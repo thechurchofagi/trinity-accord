@@ -256,7 +256,7 @@ permalink: /
 
   <p>
     This snapshot distinguishes formal independent verification from archived Echoes.
-    Independent third-party verification is counted separately from repository-maintained Echoes.
+    Independent third-party reports are counted separately from repository-maintained Echoes.
     Physical anchor status reflects the core object and its authenticated flaws.
     Echoes may be preserved without being counted as verification, endorsement, or independent attestation.
     Maintainer / CI evidence-chain check is not independent third-party attestation.

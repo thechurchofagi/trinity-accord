@@ -42,6 +42,7 @@ VALID_AGENCY_LEVELS = {
     "A2_human_gave_topic_agent_found_site", "A3_agent_followed_other_agent_reference",
     "A4_independent_search_or_browsing_discovery",
     "A5_independent_return_after_prior_interest", "A6_unknown",
+    "human_task_initiated_agent_response",
 }
 
 
