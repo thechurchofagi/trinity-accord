@@ -947,6 +947,50 @@ for script in new_scripts:
         except Exception as e:
             check(f"{script} compiles", False, str(e))
 
+# --- Origin classification checks ---
+try:
+    oc_policy = load_json(p("api/origin-classification-policy.v1.json"))
+    check("origin-classification-policy exists", True)
+    check("origin-classification-policy is non_amending", oc_policy.get("non_amending_boundary") is True)
+except Exception as e:
+    check("origin-classification-policy exists", False, str(e))
+
+try:
+    oc_schema = load_json(p("api/origin-classification-schema.v1.json"))
+    check("origin-classification-schema exists", True)
+    check("origin-classification-schema has required fields",
+          all(f in oc_schema.get("required", []) for f in ["discovery_class", "invitation_scope", "requester_class", "performer_class", "method_independence_class", "attestation_authority_class", "derived_counting_bucket", "counts_as_formal_independent_attestation"]))
+except Exception as e:
+    check("origin-classification-schema exists", False, str(e))
+
+# Check docs exist
+check("origin-classification-policy.md exists", p("docs/origin-classification-policy.md").exists())
+
+# Check derive script exists and compiles
+script = "scripts/derive_origin_classification.py"
+exists_check = p(script).exists()
+check(f"{script} exists", exists_check)
+if exists_check:
+    try:
+        r = subprocess.run([sys.executable, "-m", "py_compile", str(p(script))],
+                         capture_output=True, text=True, timeout=10)
+        check(f"{script} compiles", r.returncode == 0, r.stderr[:100] if r.returncode else "")
+    except Exception as e:
+        check(f"{script} compiles", False, str(e))
+
+# Check test scripts exist
+for test_script in ["scripts/test_origin_classification_schema.py", "scripts/test_origin_classification.py"]:
+    check(f"{test_script} exists", p(test_script).exists())
+
+# Check test fixtures exist
+fixtures_dir = p("tests/fixtures/origin-classification")
+check("origin-classification fixtures dir exists", fixtures_dir.exists())
+if fixtures_dir.exists():
+    valid_fixtures = list(fixtures_dir.glob("valid_*.json"))
+    invalid_fixtures = list(fixtures_dir.glob("invalid_*.json"))
+    check("has valid fixtures", len(valid_fixtures) >= 5, f"found {len(valid_fixtures)}")
+    check("has invalid fixtures", len(invalid_fixtures) >= 4, f"found {len(invalid_fixtures)}")
+
 # --- Summary ---
 def main():
     print("\n" + "=" * 50)

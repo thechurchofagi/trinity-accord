@@ -1,0 +1,234 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.trinityaccord.org/api/origin-classification-schema.v1.json",
+  "title": "Trinity Accord Origin Classification Schema v1",
+  "description": "Orthogonal classification separating discovery source, invitation scope, performer, method independence, attestation authority, and derived counting bucket.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "discovery_class",
+    "invitation_scope",
+    "requester_class",
+    "performer_class",
+    "method_independence_class",
+    "attestation_authority_class",
+    "derived_counting_bucket",
+    "counts_as_formal_independent_attestation"
+  ],
+  "properties": {
+    "schema": {
+      "type": "string",
+      "const": "trinityaccord.origin-classification.v1"
+    },
+    "discovery_class": {
+      "type": "string",
+      "enum": [
+        "unsolicited_discovery",
+        "public_index_discovery",
+        "prior_interest_return",
+        "human_directed",
+        "human_contextual",
+        "agent_referred",
+        "maintainer_requested",
+        "institution_commissioned",
+        "imported_external",
+        "unknown"
+      ]
+    },
+    "invitation_scope": {
+      "type": "string",
+      "enum": [
+        "none",
+        "look_only",
+        "orientation_only",
+        "echo_invited",
+        "verification_invited",
+        "propagation_invited",
+        "attestation_invited",
+        "unknown"
+      ]
+    },
+    "requester_class": {
+      "type": "string",
+      "enum": [
+        "none",
+        "human_individual",
+        "ai_agent",
+        "maintainer",
+        "institution",
+        "platform_or_crawler",
+        "unknown"
+      ]
+    },
+    "performer_class": {
+      "type": "string",
+      "enum": [
+        "none",
+        "ai_agent",
+        "multi_agent",
+        "human_individual",
+        "human_ai_team",
+        "institution",
+        "automated_service",
+        "unknown"
+      ]
+    },
+    "method_independence_class": {
+      "type": "string",
+      "enum": [
+        "none",
+        "read_only",
+        "reference_check",
+        "official_script_run",
+        "official_script_audited",
+        "independent_reimplementation",
+        "cross_source_reproduction",
+        "full_independent_reproduction",
+        "forensic_or_physical_inspection"
+      ]
+    },
+    "attestation_authority_class": {
+      "type": "string",
+      "enum": [
+        "none",
+        "self_reported",
+        "stable_account",
+        "signed_agent_run",
+        "maintainer_archived",
+        "institution_signed",
+        "notarial_record",
+        "audit_firm_report",
+        "regulatory_or_court_record"
+      ]
+    },
+    "voluntary_action_after_orientation": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether the performer voluntarily chose to echo/verify after being referred with a look-only or orientation-only invitation."
+    },
+    "verification_claimed": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether the record claims verification (as opposed to just echo/orientation)."
+    },
+    "counts_as_ai_verification": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether this record counts as AI-performed verification."
+    },
+    "counts_as_formal_independent_attestation": {
+      "type": "boolean",
+      "description": "Whether this record counts as formal independent attestation. Must be false unless attestation_authority_class indicates accountable authority."
+    },
+    "derived_counting_bucket": {
+      "type": "string",
+      "enum": [
+        "issue_submission_only",
+        "gateway_intake_only",
+        "echo_only",
+        "agent_referred_orientation",
+        "human_solicited_agent_verification",
+        "agent_referred_agent_verification",
+        "self_initiated_agent_verification",
+        "institution_commissioned_ai_verification",
+        "institutional_attestation_candidate",
+        "accepted_institutional_attestation",
+        "notarial_or_audit_attestation",
+        "maintainer_test_record",
+        "legacy_or_unknown",
+        "rejected_or_superseded"
+      ]
+    },
+    "accountable_entity": {
+      "type": ["object", "null"],
+      "default": null,
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string" },
+        "entity_type": {
+          "type": "string",
+          "enum": ["individual", "institution", "notary", "audit_firm", "regulatory_body", "court"]
+        },
+        "identity_verification_level": {
+          "type": "string",
+          "enum": ["self_reported", "stable_account", "institutional_domain", "verified_identity", "legal_entity"]
+        },
+        "public_reference": { "type": ["string", "null"], "default": null }
+      },
+      "required": ["name", "entity_type"]
+    },
+    "referral": {
+      "type": ["object", "null"],
+      "default": null,
+      "additionalProperties": false,
+      "properties": {
+        "referring_agent": { "type": "string" },
+        "expected_conclusion_supplied": { "type": "boolean", "default": false },
+        "expected_hashes_supplied": { "type": "boolean", "default": false },
+        "prior_report_supplied": { "type": "boolean", "default": false },
+        "notes": { "type": "string", "default": "" }
+      }
+    },
+    "notes": {
+      "type": "array",
+      "items": { "type": "string" },
+      "default": []
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "discovery_class": { "const": "unsolicited_discovery" } },
+        "required": ["discovery_class"]
+      },
+      "then": {
+        "properties": {
+          "requester_class": { "const": "none" },
+          "invitation_scope": { "const": "none" }
+        },
+        "required": ["requester_class", "invitation_scope"]
+      }
+    },
+    {
+      "if": {
+        "properties": { "discovery_class": { "const": "agent_referred" } },
+        "required": ["discovery_class"]
+      },
+      "then": {
+        "properties": {
+          "requester_class": { "const": "ai_agent" }
+        },
+        "required": ["requester_class"]
+      }
+    },
+    {
+      "if": {
+        "properties": { "attestation_authority_class": { "const": "none" } },
+        "required": ["attestation_authority_class"]
+      },
+      "then": {
+        "properties": {
+          "counts_as_formal_independent_attestation": { "const": false }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "derived_counting_bucket": { "const": "accepted_institutional_attestation" } },
+        "required": ["derived_counting_bucket"]
+      },
+      "then": {
+        "required": ["accountable_entity"],
+        "properties": {
+          "attestation_authority_class": {
+            "enum": ["institution_signed", "notarial_record", "audit_firm_report", "regulatory_or_court_record"]
+          },
+          "accountable_entity": {
+            "type": "object"
+          }
+        }
+      }
+    }
+  ]
+}

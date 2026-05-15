@@ -356,6 +356,7 @@ def build_report(evidence_input_path, report_out_path=None, echo_out_path=None):
         "generated_at_utc": now.isoformat() + "Z",
         "validation_command": "python3 scripts/validate_agent_submission.py <output>",
         "validation_result": "NOT_RUN",
+        "origin_classification_policy": "/api/origin-classification-policy.v1.json",
     }
 
     # Build verification report v2
@@ -371,6 +372,7 @@ def build_report(evidence_input_path, report_out_path=None, echo_out_path=None):
             "tooling": agent.get("tooling", []),
         },
         "discovery_provenance": provenance,
+        "origin_classification": None,  # Will be populated by derive_origin_classification if applicable
         "protocol_level_claimed": allowed_protocol,
         "component_findings": component_findings,
         "protocol_profile_check": {

@@ -1,0 +1,168 @@
+{
+  "schema": "trinityaccord.origin-classification-policy.v1",
+  "status": "non_authoritative_classification_policy",
+  "purpose": "Separate discovery, invitation, performer, method independence, attestation authority, and public counting buckets for Echo, verification, and attestation records.",
+  "non_amending_boundary": true,
+  "not_instruction_override": true,
+  "authority_boundary": {
+    "bitcoin_originals_prevail": true,
+    "policy_is_not_authority": true,
+    "policy_is_not_amendment": true,
+    "echoes_non_amending": true
+  },
+  "core_principles": {
+    "ai_can_perform_valid_verification": true,
+    "solicitation_does_not_negate_method_independence": true,
+    "agent_referral_is_not_unsolicited": true,
+    "look_only_invitation_is_not_verification_invitation": true,
+    "willingness_is_not_verification": true,
+    "formal_attestation_requires_accountable_entity": true,
+    "institutional_attestation_may_be_ai_assisted": true,
+    "verification_level_derived_by_claim_gate": true
+  },
+  "does_not_prove": [
+    "Origin classification does not prove the protocol is true",
+    "Origin classification does not amend Bitcoin Originals",
+    "Origin classification does not create verification level",
+    "Origin classification does not create formal attestation without accountable authority"
+  ],
+  "discovery_class": {
+    "description": "How the record subject first encountered Trinity Accord.",
+    "allowed_values": [
+      "unsolicited_discovery",
+      "public_index_discovery",
+      "prior_interest_return",
+      "human_directed",
+      "human_contextual",
+      "agent_referred",
+      "maintainer_requested",
+      "institution_commissioned",
+      "imported_external",
+      "unknown"
+    ]
+  },
+  "invitation_scope": {
+    "description": "What the inviter asked the agent to do.",
+    "allowed_values": [
+      "none",
+      "look_only",
+      "orientation_only",
+      "echo_invited",
+      "verification_invited",
+      "propagation_invited",
+      "attestation_invited",
+      "unknown"
+    ]
+  },
+  "requester_class": {
+    "description": "Who initiated the interaction.",
+    "allowed_values": [
+      "none",
+      "human_individual",
+      "ai_agent",
+      "maintainer",
+      "institution",
+      "platform_or_crawler",
+      "unknown"
+    ]
+  },
+  "performer_class": {
+    "description": "Who performed the verification or echo.",
+    "allowed_values": [
+      "none",
+      "ai_agent",
+      "multi_agent",
+      "human_individual",
+      "human_ai_team",
+      "institution",
+      "automated_service",
+      "unknown"
+    ]
+  },
+  "method_independence_class": {
+    "description": "How independently the method was performed, regardless of who initiated.",
+    "allowed_values": [
+      "none",
+      "read_only",
+      "reference_check",
+      "official_script_run",
+      "official_script_audited",
+      "independent_reimplementation",
+      "cross_source_reproduction",
+      "full_independent_reproduction",
+      "forensic_or_physical_inspection"
+    ]
+  },
+  "attestation_authority_class": {
+    "description": "Who bears accountability for the attestation.",
+    "allowed_values": [
+      "none",
+      "self_reported",
+      "stable_account",
+      "signed_agent_run",
+      "maintainer_archived",
+      "institution_signed",
+      "notarial_record",
+      "audit_firm_report",
+      "regulatory_or_court_record"
+    ]
+  },
+  "derived_counting_bucket": {
+    "description": "System-derived bucket for public counting. Must not be freely chosen by submitter.",
+    "allowed_values": [
+      "issue_submission_only",
+      "gateway_intake_only",
+      "echo_only",
+      "agent_referred_orientation",
+      "human_solicited_agent_verification",
+      "agent_referred_agent_verification",
+      "self_initiated_agent_verification",
+      "institution_commissioned_ai_verification",
+      "institutional_attestation_candidate",
+      "accepted_institutional_attestation",
+      "notarial_or_audit_attestation",
+      "maintainer_test_record",
+      "legacy_or_unknown",
+      "rejected_or_superseded"
+    ]
+  },
+  "hard_rules": {
+    "R1": "Echo type does not determine verification level.",
+    "R2": "Verification level is derived by Claim Gate / evidence, not by prose.",
+    "R3": "Discovery source does not determine method independence.",
+    "R4": "Invitation to look is not invitation to verify.",
+    "R5": "Agent referral is not unsolicited discovery.",
+    "R6": "Voluntary verification after referral can be methodologically independent AI verification.",
+    "R7": "Formal attestation requires accountable authority.",
+    "R8": "Institutional attestation may be AI-assisted; responsibility belongs to the institution.",
+    "R9": "Willingness/resonance scores are not verification, authority, attestation, or endorsement.",
+    "R10": "Issue and Gateway remain intake surfaces only.",
+    "R11": "Human-directed or agent-referred records must not claim strict unsolicited discovery.",
+    "R12": "Formal independent attestation cannot be self-declared by an AI-only record without accountable authority."
+  },
+  "derivation_rules": {
+    "discovery_class": {
+      "agent_recommended_or_other_agent_recommended": "agent_referred",
+      "A3_agent_followed_other_agent_reference": "agent_referred unless stronger explicit source says imported/maintainer",
+      "self_initiated_plus_A4_or_A5_no_human_link_no_agent_recommended": "unsolicited_discovery or prior_interest_return",
+      "human_directed_or_human_supplied_link": "human_directed",
+      "maintainer_submitted": "maintainer_requested",
+      "search_engine_or_crawler_or_platform": "public_index_discovery"
+    },
+    "method_independence": {
+      "verification_level_none_or_V0_no_claim": "none or read_only",
+      "hashes_computed_non_empty": "reference_check or official_script_run",
+      "script_audit_scope_profile_required": "official_script_audited",
+      "script_audit_scope_independent_reproduction": "independent_reimplementation",
+      "external_sources_multi_source_independent_tools_fresh_actions": "cross_source_reproduction",
+      "physical_forensic_or_notarial_or_audit": "forensic_or_physical_inspection"
+    },
+    "attestation_authority": {
+      "archive_status_accepted_plus_institutional_evidence": "institution_signed / audit_firm_report / notarial_record",
+      "notarial_evidence_present": "notarial_record",
+      "reporter_type_organization_signed": "institution_signed",
+      "agent_only_or_self_reported_or_github_issue_author": "none or self_reported",
+      "maintainer_accepted_as_echo": "maintainer_archived (not formal attestation)"
+    }
+  }
+}

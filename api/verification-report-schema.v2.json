@@ -71,6 +71,10 @@
       "type": "object",
       "description": "How the reporter discovered the Trinity Accord"
     },
+    "origin_classification": {
+      "$ref": "https://www.trinityaccord.org/api/origin-classification-schema.v1.json",
+      "description": "Origin classification separates how the report was initiated from how independently the method was performed. Human-directed or agent-referred verification may still be methodologically independent if fresh reproducible actions were performed."
+    },
     "protocol_level_claimed": {
       "type": "string",
       "enum": [

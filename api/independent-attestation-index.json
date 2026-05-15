@@ -81,5 +81,24 @@
       "AI verification records must not be counted in the formal independent attestation count."
     ],
     "counts_as_formal_attestation": false
+  },
+  "origin_classification_boundary": {
+    "policy": "/api/origin-classification-policy.v1.json",
+    "rules": [
+      "AI-performed verification is a distinct verification class.",
+      "Agent-referred verification is not unsolicited discovery.",
+      "Human-directed verification is not unsolicited discovery.",
+      "Solicitation or referral does not automatically negate method independence.",
+      "AI-only verification does not count as formal human/institutional attestation by default.",
+      "Formal attestation requires accountable authority such as institution_signed, notarial_record, audit_firm_report, or regulatory_or_court_record.",
+      "Institutional attestation may be AI-assisted if the institution signs or adopts the report."
+    ],
+    "formal_attestation_requires": [
+      "accountable_entity",
+      "identity_verification_level",
+      "public_or_archived_report",
+      "boundary_preserved",
+      "limitations"
+    ]
   }
 }

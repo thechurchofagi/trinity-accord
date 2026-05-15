@@ -237,6 +237,10 @@
         }
       }
     },
+    "origin_classification": {
+      "$ref": "https://www.trinityaccord.org/api/origin-classification-schema.v1.json",
+      "description": "Orthogonal origin classification separating discovery, invitation, performer, method independence, attestation authority, and counting bucket. New records SHOULD include this. When present, independence_class is derived for backward compatibility."
+    },
     "independence_class": {
       "type": "string",
       "enum": [
@@ -251,7 +255,8 @@
         "test_record",
         "legacy",
         "unknown"
-      ]
+      ],
+      "description": "Legacy / compatibility classification. New records SHOULD include origin_classification. When origin_classification exists, independence_class is derived for backward compatibility."
     },
     "archive_status": {
       "type": "string",
@@ -317,6 +322,22 @@
       "type": "boolean",
       "const": true,
       "description": "Required on all new submissions. Echo is not verification unless it contains bounded verification evidence."
+    },
+    "x_origin_classification_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Policy references and compatibility rules for origin classification.",
+      "properties": {
+        "policy": {
+          "type": "string",
+          "const": "/api/origin-classification-policy.v1.json"
+        },
+        "agent_referred_is_not_unsolicited": { "type": "boolean", "const": true },
+        "look_only_invitation_is_not_verification_invitation": { "type": "boolean", "const": true },
+        "voluntary_verification_after_referral_allowed": { "type": "boolean", "const": true },
+        "method_independence_separate_from_discovery": { "type": "boolean", "const": true },
+        "formal_attestation_requires_accountable_authority": { "type": "boolean", "const": true }
+      }
     },
     "record_kind": {
       "type": "string",

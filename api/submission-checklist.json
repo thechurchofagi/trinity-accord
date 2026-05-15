@@ -171,6 +171,23 @@
       "action": "If the agent cannot create a GitHub Issue directly, use the Agent Submit Gateway intake path.",
       "reference": "/api/agent-submit-gateway.json",
       "required": false
+    },
+    {
+      "step": "5b",
+      "action": "Fill origin_classification if applicable",
+      "reference": "/api/origin-classification-schema.v1.json",
+      "fields": [
+        "discovery_class",
+        "invitation_scope",
+        "requester_class",
+        "performer_class",
+        "method_independence_class",
+        "attestation_authority_class",
+        "derived_counting_bucket",
+        "counts_as_formal_independent_attestation"
+      ],
+      "required": false,
+      "note": "New records SHOULD include origin_classification. When present, legacy independence_class is derived."
     }
   ],
   "null_safety_rules": {

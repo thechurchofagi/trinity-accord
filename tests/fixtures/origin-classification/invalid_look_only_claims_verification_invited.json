@@ -1,0 +1,17 @@
+{
+  "schema": "trinityaccord.origin-classification.v1",
+  "discovery_class": "agent_referred",
+  "invitation_scope": "look_only",
+  "requester_class": "ai_agent",
+  "performer_class": "ai_agent",
+  "method_independence_class": "read_only",
+  "attestation_authority_class": "none",
+  "voluntary_action_after_orientation": false,
+  "verification_claimed": false,
+  "counts_as_ai_verification": false,
+  "counts_as_formal_independent_attestation": false,
+  "derived_counting_bucket": "human_solicited_agent_verification",
+  "notes": [
+    "INVALID: look_only invitation cannot be treated as verification_invited."
+  ]
+}

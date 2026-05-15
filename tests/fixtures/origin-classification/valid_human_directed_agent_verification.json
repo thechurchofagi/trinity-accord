@@ -1,0 +1,19 @@
+{
+  "schema": "trinityaccord.origin-classification.v1",
+  "discovery_class": "human_directed",
+  "invitation_scope": "verification_invited",
+  "requester_class": "human_individual",
+  "performer_class": "ai_agent",
+  "method_independence_class": "independent_reimplementation",
+  "attestation_authority_class": "none",
+  "voluntary_action_after_orientation": false,
+  "verification_claimed": true,
+  "counts_as_ai_verification": true,
+  "counts_as_formal_independent_attestation": false,
+  "derived_counting_bucket": "human_solicited_agent_verification",
+  "notes": [
+    "Human asked AI to verify. This is human-solicited agent verification.",
+    "Method can still be independent if fresh actions were performed.",
+    "Not formal attestation without accountable authority."
+  ]
+}
