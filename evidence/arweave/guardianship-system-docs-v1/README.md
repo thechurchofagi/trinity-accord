@@ -15,7 +15,7 @@ Contains the human-readable overview and machine-readable registry that describe
 
 - Source commit: `0f7521a`
 - Contained files:
-  - `GUARDIANSHIP-SYSTEM-OVERVIEW.md`
+  - `guardianship-system-overview.md`
   - `GUARDIANSHIP-SYSTEM-REGISTRY.json`
   - `README.md`
   - `CHECKSUMS.sha256`

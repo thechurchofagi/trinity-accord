@@ -1,8 +1,8 @@
 {
   "schema": "trinityaccord.guardianship-system.v1",
   "generated_from": [
-    "EVIDENCE-RELATIONSHIP-MAP.md",
-    "EVIDENCE-BACKUP-COVERAGE.md",
+    "evidence-relationship-map.md",
+    "evidence-backup-coverage.md",
     "EVIDENCE-BACKUP-GAPS.md",
     "status.md",
     "authority.md",

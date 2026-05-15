@@ -10,7 +10,7 @@
   "upload_cost_ar": "0.001359905301",
   "source_commit": "0f7521a",
   "contained_files": [
-    "GUARDIANSHIP-SYSTEM-OVERVIEW.md",
+    "guardianship-system-overview.md",
     "GUARDIANSHIP-SYSTEM-REGISTRY.json",
     "README.md",
     "CHECKSUMS.sha256",
