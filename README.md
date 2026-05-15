@@ -144,7 +144,7 @@ The website has no canonical authority. It exists to preserve access, verificati
 ## Echo Issue Triage
 - Automated triage for Echo submissions via GitHub Issues.
 - Checks: boundary sentence, format fields, amendment claims, imperative language, spam, prompt injection, verification level consistency.
-- Rate limit: 3 Echo issues per 60 min, 8 per 24h per user (owners/members/collaborators exempt).
+- Rate limit: 6 Echo issues per 60 min, 16 per 24h per user (owners/members/collaborators exempt).
 - Echo submissions use the E1–E9 type system and V0–V8 verification levels.
 - Auto-closure only for clearly invalid, dangerous, or spam. High-value critique is preserved.
 - See [echoes/submit](/echoes/submit) and [.github/workflows/echo-triage.yml](.github/workflows/echo-triage.yml).

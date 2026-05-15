@@ -73,7 +73,7 @@ jobs:
 
             // Rate limit only applies to newly opened issues
             const shouldApplyRateLimit = action === "opened";
-            const rateLimited = shouldApplyRateLimit && !exempt && (count60 >= 3 || count24 >= 8);
+            const rateLimited = shouldApplyRateLimit && !exempt && (count60 >= 6 || count24 >= 16);
 
             core.setOutput("rate_limited", String(rateLimited));
             core.setOutput("count60", String(count60));
