@@ -127,6 +127,25 @@ def main():
     forbid("api/agent-submission-guide.json", r'title_should_start_with.*Verification Report v2:')
     forbid("api/agent-submission-guide.json", r'title_should_start_with.*Echo v3:')
 
+    # Gateway preflight validation
+    require("scripts/validate_gateway_payload.py", "GATEWAY PAYLOAD VALIDATION PASS")
+    require("scripts/validate_gateway_payload.py", "verification_report_candidate must not include echo_type")
+    require("scripts/validate_gateway_payload.py", "agency_level=self_initiated is invalid")
+    require("scripts/validate_gateway_payload.py", "what_i_checked must be a non-empty list")
+    require("scripts/validate_gateway_payload.py", "claim_gate.status must be PASS or PASS_WITH_DOWNGRADE")
+
+    require("api/agent-issue-gateway-payload-schema.v1.json", "\"claim_gate\"")
+    require("api/agent-issue-gateway-payload-schema.v1.json", "verification_report_candidate")
+    require("api/agent-issue-gateway-payload-schema.v1.json", "echo_wrapper_path")
+
+    require("agent-submit.md", "Gateway preflight validation")
+    require("issue-intake-boundary.md", "Pre-Issue rejection")
+    require("llms.txt", "Gateway preflight rule")
+    require("ai.txt", "Gateway preflight rule")
+
+    forbid("tests/fixtures/gateway/valid_verification_report_candidate.json", r"echo_wrapper_path")
+    forbid("tests/fixtures/gateway/valid_verification_report_candidate.json", r"echo_type")
+
     require("api/agent-entry-protocol.json", '"paths"')
     forbid("api/agent-entry-protocol.json", r"/agent-verify or /agent-echo")
 

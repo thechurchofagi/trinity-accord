@@ -1,4 +1,13 @@
 #!/usr/bin/env python3
+"""Issue intake body linter.
+
+Validates the trinity-issue-intake fenced block inside GitHub Issue bodies.
+Supports both YAML-like and JSON block formats.
+
+Usage:
+    python3 scripts/validate_issue_intake_body.py issue-body.md
+"""
+import json
 import re
 import sys
 from pathlib import Path
@@ -26,7 +35,6 @@ ALLOWED_OPERATOR = {
 
 REQUIRED = [
     "submission_type",
-    "echo_type",
     "verification_level_claimed",
     "agent_name_or_model",
     "system_or_provider",
@@ -41,22 +49,21 @@ REQUIRED = [
     "boundary_sentence",
 ]
 
-PAIRS = [
+REPORT_PAIRS = [
     ("evidence_input_path", "evidence_input_sha256"),
     ("claim_gate_output_path", "claim_gate_output_sha256"),
     ("verification_report_path", "verification_report_sha256"),
+]
+
+ECHO_PAIRS = REPORT_PAIRS + [
     ("echo_wrapper_path", "echo_wrapper_sha256"),
 ]
 
 SHA256_RE = re.compile(r"^[a-f0-9]{64}$")
 
 
-def parse_block(text):
-    m = re.search(r"```trinity-issue-intake\s*(.*?)```", text, re.S)
-    if not m:
-        raise ValueError("Missing fenced ```trinity-issue-intake block")
-
-    raw = m.group(1)
+def parse_yaml_like_block(raw):
+    """Parse YAML-like trinity-issue-intake block."""
     data = {}
     current_list = None
 
@@ -78,10 +85,7 @@ def parse_block(text):
             if val == "":
                 if key in ("what_i_checked", "limitations"):
                     data[key] = []
-                    current_list = key
-                else:
-                    data[key] = ""
-                    current_list = None
+                current_list = key
             else:
                 low = val.lower()
                 if low == "true":
@@ -92,6 +96,30 @@ def parse_block(text):
                 current_list = None
 
     return data
+
+
+def parse_json_block(raw):
+    """Parse JSON trinity-issue-intake block."""
+    return json.loads(raw)
+
+
+def parse_block(text):
+    """Extract and parse trinity-issue-intake fenced block. Supports YAML-like and JSON."""
+    m = re.search(r"```trinity-issue-intake\s*(.*?)```", text, re.S)
+    if not m:
+        raise ValueError("Missing fenced ```trinity-issue-intake block")
+
+    raw = m.group(1).strip()
+
+    # Try JSON first
+    if raw.startswith("{"):
+        try:
+            return parse_json_block(raw)
+        except json.JSONDecodeError:
+            pass  # Fall through to YAML-like
+
+    # YAML-like fallback
+    return parse_yaml_like_block(raw)
 
 
 def fail(msgs):
@@ -118,19 +146,38 @@ def main():
         if k not in data or data[k] in ("", [], None):
             errors.append(f"missing required field: {k}")
 
-    for a, b in PAIRS:
-        if not data.get(a) and not data.get(b):
-            errors.append(f"missing artifact reference: {a} or {b}")
+    # Submission-type-specific rules
+    st = data.get("submission_type")
+
+    if st == "verification_report_candidate":
+        # Report candidates: echo fields forbidden
+        if data.get("echo_type"):
+            errors.append("verification_report_candidate must not include echo_type")
+        if data.get("echo_wrapper_path") or data.get("echo_wrapper_sha256"):
+            errors.append("verification_report_candidate must not include echo_wrapper fields")
+
+        # echo_type not in required list for report candidates
+        for path_key, hash_key in REPORT_PAIRS:
+            if not data.get(path_key) and not data.get(hash_key):
+                errors.append(f"missing artifact reference: {path_key} or {hash_key}")
+
+    elif st == "verification_echo_candidate":
+        # Echo candidates: echo_type required, all 4 pairs required
+        if data.get("echo_type") != "E2_verification_echo":
+            errors.append("echo_type must be E2_verification_echo")
+
+        for path_key, hash_key in ECHO_PAIRS:
+            if not data.get(path_key) and not data.get(hash_key):
+                errors.append(f"missing artifact reference: {path_key} or {hash_key}")
+
+    else:
+        errors.append(f"unsupported submission_type: {st}")
 
     for key in ["evidence_input_sha256", "claim_gate_output_sha256", "verification_report_sha256", "echo_wrapper_sha256"]:
         val = data.get(key)
         if val and not SHA256_RE.match(str(val)):
             errors.append(f"invalid sha256 field: {key}")
 
-    if data.get("submission_type") != "verification_echo_candidate":
-        errors.append("submission_type must be verification_echo_candidate")
-    if data.get("echo_type") != "E2_verification_echo":
-        errors.append("echo_type must be E2_verification_echo")
     if data.get("agency_level") not in ALLOWED_AGENCY:
         errors.append(f"invalid agency_level: {data.get('agency_level')}")
     if data.get("independence_class") not in ALLOWED_INDEPENDENCE:

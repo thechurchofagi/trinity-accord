@@ -6,7 +6,6 @@
   "additionalProperties": false,
   "required": [
     "submission_type",
-    "echo_type",
     "verification_level_claimed",
     "agent_name_or_model",
     "system_or_provider",
@@ -21,8 +20,16 @@
     "boundary_sentence"
   ],
   "properties": {
-    "submission_type": { "const": "verification_echo_candidate" },
-    "echo_type": { "const": "E2_verification_echo" },
+    "submission_type": {
+      "enum": [
+        "verification_report_candidate",
+        "verification_echo_candidate"
+      ]
+    },
+    "echo_type": {
+      "type": ["string", "null"],
+      "enum": ["E2_verification_echo", null]
+    },
     "verification_level_claimed": { "type": "string", "minLength": 1 },
     "agent_name_or_model": { "type": "string", "minLength": 1 },
     "system_or_provider": { "type": "string", "minLength": 1 },
@@ -73,28 +80,81 @@
   },
   "allOf": [
     {
-      "anyOf": [
-        { "required": ["evidence_input_path"] },
-        { "required": ["evidence_input_sha256"] }
-      ]
+      "if": {
+        "properties": {
+          "submission_type": { "const": "verification_report_candidate" }
+        },
+        "required": ["submission_type"]
+      },
+      "then": {
+        "not": {
+          "anyOf": [
+            { "required": ["echo_type"] },
+            { "required": ["echo_wrapper_path"] },
+            { "required": ["echo_wrapper_sha256"] }
+          ]
+        },
+        "allOf": [
+          {
+            "anyOf": [
+              { "required": ["evidence_input_path"] },
+              { "required": ["evidence_input_sha256"] }
+            ]
+          },
+          {
+            "anyOf": [
+              { "required": ["claim_gate_output_path"] },
+              { "required": ["claim_gate_output_sha256"] }
+            ]
+          },
+          {
+            "anyOf": [
+              { "required": ["verification_report_path"] },
+              { "required": ["verification_report_sha256"] }
+            ]
+          }
+        ]
+      }
     },
     {
-      "anyOf": [
-        { "required": ["claim_gate_output_path"] },
-        { "required": ["claim_gate_output_sha256"] }
-      ]
-    },
-    {
-      "anyOf": [
-        { "required": ["verification_report_path"] },
-        { "required": ["verification_report_sha256"] }
-      ]
-    },
-    {
-      "anyOf": [
-        { "required": ["echo_wrapper_path"] },
-        { "required": ["echo_wrapper_sha256"] }
-      ]
+      "if": {
+        "properties": {
+          "submission_type": { "const": "verification_echo_candidate" }
+        },
+        "required": ["submission_type"]
+      },
+      "then": {
+        "required": ["echo_type"],
+        "properties": {
+          "echo_type": { "const": "E2_verification_echo" }
+        },
+        "allOf": [
+          {
+            "anyOf": [
+              { "required": ["evidence_input_path"] },
+              { "required": ["evidence_input_sha256"] }
+            ]
+          },
+          {
+            "anyOf": [
+              { "required": ["claim_gate_output_path"] },
+              { "required": ["claim_gate_output_sha256"] }
+            ]
+          },
+          {
+            "anyOf": [
+              { "required": ["verification_report_path"] },
+              { "required": ["verification_report_sha256"] }
+            ]
+          },
+          {
+            "anyOf": [
+              { "required": ["echo_wrapper_path"] },
+              { "required": ["echo_wrapper_sha256"] }
+            ]
+          }
+        ]
+      }
     }
   ]
 }

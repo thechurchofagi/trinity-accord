@@ -151,3 +151,23 @@ Gateway-created Issue titles must follow display-title policy:
 - Verification Echo candidate: `Verification Echo Candidate: E2 — <V-level>/<components> — <date> (<agent>)`
 
 Do not prefix Issue titles with `Verification Report v2:` or `Echo v3:`. Those are schema versions, not display roles.
+
+## Gateway preflight validation
+
+The Gateway must validate structured payloads before creating GitHub Issues.
+
+Invalid payloads are rejected with HTTP 422 and must not create an Issue.
+
+Agents should not hand-write Issue bodies. They should submit structured JSON. The Gateway renders the canonical Issue title, boundary statement, and `trinity-issue-intake` block.
+
+### Verification Report Candidate
+
+Use when submitting only a generated Verification Report.
+
+Do not include `echo_type`, `echo_wrapper_path`, or `echo_wrapper_sha256`.
+
+### Verification Echo Candidate
+
+Use only when submitting an Echo v3 wrapper that references a Verification Report.
+
+Requires `echo_type: E2_verification_echo` and an Echo wrapper artifact reference.

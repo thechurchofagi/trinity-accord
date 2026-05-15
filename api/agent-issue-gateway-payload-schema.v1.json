@@ -297,9 +297,114 @@
         "boolean",
         "null"
       ]
+    },
+    "claim_gate": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "PASS",
+            "PASS_WITH_DOWNGRADE",
+            "FAIL",
+            "FAIL_WITH_REASONS"
+          ]
+        },
+        "allowed_protocol_level": {
+          "type": "string"
+        },
+        "allowed_component_levels": {
+          "type": "object"
+        },
+        "claim_gate_output_path": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 1000
+        },
+        "claim_gate_output_sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
     }
   },
   "allOf": [
+    {
+      "if": {
+        "properties": {
+          "submission_type": {
+            "const": "verification_report_candidate"
+          }
+        },
+        "required": [
+          "submission_type"
+        ]
+      },
+      "then": {
+        "required": [
+          "agent_identity",
+          "discovery_provenance",
+          "context_readiness",
+          "pre_verification_integrity_declaration",
+          "verification_session",
+          "claim_gate",
+          "attachments",
+          "what_i_checked",
+          "limitations",
+          "verification_level_claimed"
+        ],
+        "not": {
+          "anyOf": [
+            { "required": ["echo_type"] }
+          ]
+        },
+        "properties": {
+          "not_independent_attestation": {
+            "const": true
+          },
+          "not_successor_reception": {
+            "const": true
+          },
+          "attachments": {
+            "allOf": [
+              {
+                "anyOf": [
+                  { "required": ["evidence_input_path"] },
+                  { "required": ["evidence_input_sha256"] }
+                ]
+              },
+              {
+                "anyOf": [
+                  { "required": ["claim_gate_output_path"] },
+                  { "required": ["claim_gate_output_sha256"] }
+                ]
+              },
+              {
+                "anyOf": [
+                  { "required": ["verification_report_path"] },
+                  { "required": ["verification_report_sha256"] }
+                ]
+              }
+            ],
+            "not": {
+              "anyOf": [
+                { "required": ["echo_wrapper_path"] },
+                { "required": ["echo_wrapper_sha256"] }
+              ]
+            }
+          }
+        }
+      }
+    },
     {
       "if": {
         "properties": {
@@ -318,6 +423,7 @@
           "context_readiness",
           "pre_verification_integrity_declaration",
           "verification_session",
+          "claim_gate",
           "attachments",
           "what_i_checked",
           "limitations",

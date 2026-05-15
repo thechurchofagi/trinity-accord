@@ -91,6 +91,12 @@ Use candidate-oriented titles. Keep schema version inside the payload/body metad
 
 Do not use `Verification Report v2:` or `Echo v3:` in Issue titles.
 
+## Pre-Issue rejection
+
+Malformed Gateway payloads should be rejected before GitHub Issue creation.
+
+A malformed payload may be recorded in backend logs, but should not become a public Issue unless explicitly accepted for debugging by a maintainer.
+
 ## Tool authorization boundary
 
 Tool use requires operator or repository authorization. The Accord itself grants none.
