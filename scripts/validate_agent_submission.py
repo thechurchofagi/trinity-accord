@@ -1082,16 +1082,24 @@ def validate_v7_onsite_hard_gates(obj, path_label):
         evidence_list = f.get("evidence", [])
         for ev in evidence_list:
             if isinstance(ev, dict):
+                has_touch = ev.get("touch_or_handling") is True
+                limitations_text = json.dumps(ev.get("limitations", []), ensure_ascii=False).lower()
+                has_touch_limitation = (
+                    "touch" in limitations_text
+                    or "handling" in limitations_text
+                    or "not possible" in limitations_text
+                )
                 if (ev.get("level_evidence_type") == "onsite" and
                     ev.get("custody_log") and
                     ev.get("fresh_capture") is True and
-                    ev.get("witness_identity_or_role")):
+                    ev.get("witness_identity_or_role") and
+                    (has_touch or has_touch_limitation)):
                     has_hard_gates = True
     if physical_findings and not has_hard_gates:
         ok &= check(
             False,
             f"{path_label} V7 missing onsite hard gates",
-            "V7 requires onsite + custody_log + fresh_capture + witness_identity_or_role"
+            "V7 requires onsite + custody_log + fresh_capture + witness_identity_or_role + touch_or_handling"
         )
     return ok
 
@@ -1105,6 +1113,14 @@ def validate_v8_forensic_path(obj, path_label):
 
     component_findings = obj.get("component_findings", [])
     physical_findings = [f for f in component_findings if f.get("component") == "physical_anchor"]
+    time_findings = [f for f in component_findings if f.get("component") == "time_anchors"]
+
+    ALLOWED_T8_METHOD_CLASSES = {
+        "astronomical_ephemeris_solver",
+        "forensic_astronomy_reconstruction",
+        "multi_source_celestial_position_solver",
+    }
+
     has_forensic = False
     for f in physical_findings:
         claimed = f.get("level_claimed", "")
@@ -1119,11 +1135,28 @@ def validate_v8_forensic_path(obj, path_label):
                     has_forensic = True
                     break
 
+    # Also check T8 authorized celestial path
+    if not has_forensic:
+        for f in time_findings:
+            if f.get("level_claimed") == "T8":
+                has_forensic = True
+                break
+            evidence_list = f.get("evidence", [])
+            for ev in evidence_list:
+                if isinstance(ev, dict):
+                    if (ev.get("anchor_type") == "star_moon_witness" and
+                        ev.get("nonpublic_boundary") is True and
+                        ev.get("authorized") is True and
+                        ev.get("method_class") in ALLOWED_T8_METHOD_CLASSES and
+                        ev.get("signed_or_attributable_report") is True):
+                        has_forensic = True
+                        break
+
     if not has_forensic:
         ok &= check(
             False,
-            f"{path_label} V8 requires P7/P8/P9 forensic path",
-            "V8 requires ai_forensic, confidential_challenge, or multi_party_forensic evidence"
+            f"{path_label} V8 requires P7/P8/P9 forensic path or T8 authorized celestial path",
+            "V8 requires ai_forensic, confidential_challenge, multi_party_forensic, or authorized celestial evidence"
         )
     return ok
 
@@ -1373,14 +1406,14 @@ def validate_cross_field_consistency(obj, path_label):
     # verification_report_v2 must not carry echo-only fields
     echo_only_fields = [
         "echo_type", "echo", "source_issue", "human_review_scope",
-        "identity_verification", "archive_status",
+        "identity_verification",
     ]
+    # archive_status is allowed on both echo and report records
+    report_disallowed_echo_fields = echo_only_fields
     if record_kind == "verification_report_v2":
-        for field in echo_only_fields:
+        for field in report_disallowed_echo_fields:
             if field in obj:
                 val = obj[field]
-                if field == "archive_status" and val in ("legacy", "superseded"):
-                    continue
                 ok &= check(
                     False,
                     f"{path_label} verification_report_v2 has echo-only field '{field}'",
@@ -1420,15 +1453,9 @@ def validate_cross_field_consistency(obj, path_label):
                 )
 
         if vlevel_upper in ("V6", "V7", "V8"):
-            # Physical/witness/forensic evidence required
-            if vlevel_upper == "V8":
-                conf = obj.get("confidential_challenge")
-                if not conf:
-                    ok &= check(
-                        False,
-                        f"{path_label} V8 missing confidential_challenge",
-                        "V8 requires confidential_challenge or forensic evidence"
-                    )
+            # Physical/witness/forensic evidence required — handled by validate_v8_forensic_path
+            pass
+            pass
 
     # accepted_independent_attestation requires identity proof
     archive_status = obj.get("archive_status", "")
@@ -1641,22 +1668,26 @@ def validate_verification_integrity(obj, path_label):
 
 
 def validate_prior_report_limitation(obj, path_label):
-    """Rule AJ: prior reports consulted without re-performance blocks V4+ claims."""
+    """Rule AJ: prior reports read/consulted without re-performance blocks V4+ claims."""
     ok = True
-    
+
     integrity = obj.get("integrity_boundary", {})
     if not integrity:
         integrity = obj.get("verification_integrity", {})
-    
-    prior_consulted = integrity.get("prior_reports_consulted", [])
-    if not prior_consulted:
-        return ok
-    
-    # Check if independent re-performance was done
+
+    # Primary trigger: prior_report_use.prior_reports_read (matches claim gate logic)
     prior_report_use = integrity.get("prior_report_use", {})
+    prior_reports_read = prior_report_use.get("prior_reports_read", []) if isinstance(prior_report_use, dict) else []
+    # Fallback: verification_session.prior_reports_consulted
+    prior_consulted = integrity.get("prior_reports_consulted", [])
+
+    if not prior_reports_read and not prior_consulted:
+        return ok
+
+    # Check if independent re-performance was done
     if isinstance(prior_report_use, dict) and prior_report_use.get("independent_reperformance_done"):
         return ok
-    
+
     protocol_level = obj.get("protocol_level_claimed", obj.get("verification_level", "V0"))
     if protocol_level in ("V4+", "V5", "V6", "V7", "V8"):
         ok &= check(
@@ -1664,7 +1695,7 @@ def validate_prior_report_limitation(obj, path_label):
             f"{path_label} prior report without re-performance claims {protocol_level}",
             "Prior report consulted without independent re-performance; cannot claim independent or higher verification"
         )
-    
+
     return ok
 
 

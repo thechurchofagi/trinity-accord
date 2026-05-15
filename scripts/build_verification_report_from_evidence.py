@@ -402,7 +402,7 @@ def build_report(evidence_input_path, report_out_path=None, echo_out_path=None):
         "hashes_computed": hashes_computed,
         "samples_checked": sum(
             c.get("samples_recovered", 0) for c in evidence.get("chronicle_checks", [])
-        ) or len(evidence.get("chronicle_checks", [])),
+        ),
         "physical_evidence_reviewed": {
             "images_reviewed": [p.get("image", "") for p in evidence.get("physical_checks", []) if p.get("image")],
             "videos_reviewed": [p.get("video", "") for p in evidence.get("physical_checks", []) if p.get("video")],
@@ -498,7 +498,7 @@ def build_report(evidence_input_path, report_out_path=None, echo_out_path=None):
                     and component_levels.get("chronicle_recovery", "C0") in ("C0",)):
                 context_depth = "C3_verification_aware"
             else:
-                context_depth = "C3_verification_aware"
+                context_depth = "C4_artifact_verified"
         elif allowed_protocol == "V3":
             context_depth = "C4_artifact_verified"
         elif allowed_protocol in ("V4", "V4+"):

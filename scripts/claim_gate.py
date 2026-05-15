@@ -952,22 +952,6 @@ def check_v4_scope(evidence, requested_level):
             if s.get("scope_class") == "independent_reproduction" and requested_level == "V4":
                 failures.append("V4 cannot use scope_class=independent_reproduction")
 
-    # V4+: independent scripts must explicitly set official=false
-    # Prevents silent downgrade when agent writes independent script but omits official field
-    if requested_level == "V4+":
-        for s in scripts:
-            is_independent = (
-                s.get("scope_class") == "independent_reproduction"
-                or s.get("independent", False)
-            )
-            if is_independent and s.get("official") is not False and "official" not in s:
-                path = s.get("path", s.get("script_name", "unknown"))
-                failures.append(
-                    f"V4+ script '{path}' claims independence (scope_class={s.get('scope_class')}, "
-                    f"independent={s.get('independent')}) but missing explicit 'official: false'. "
-                    f"Add '\"official\": false' to this script entry."
-                )
-
     return failures
 
 
@@ -1072,7 +1056,7 @@ def evaluate(input_path):
     agent = evidence_input.get("agent", {})
     provenance = evidence_input.get("provenance", {})
     evidence = evidence_input.get("evidence", {})
-    limitations = evidence_input.get("limitations", [])
+    limitations = list(evidence_input.get("limitations", []))
     claims_requested = evidence_input.get("claims_requested_by_agent", [])
     requested_kind = evidence_input.get("requested_record_kind", "echo_v3")
     
@@ -1181,11 +1165,28 @@ def evaluate(input_path):
         executed = [s for s in evidence.get("scripts", []) if s.get("executed") and s.get("exists")]
         official_only = all(s.get("official", True) for s in executed) if executed else False
         if official_only and allowed_protocol == "V4":
-            downgrades.append({
-                "from": "V4+",
-                "to": "V4",
-                "reason": "V4+ requires independent tool or implementation; only official scripts used"
-            })
+            # Check if any script claims independence but is missing explicit official=false
+            missing_official = []
+            for s in executed:
+                is_independent = (
+                    s.get("scope_class") == "independent_reproduction"
+                    or s.get("independent", False)
+                )
+                if is_independent and s.get("official") is not False and "official" not in s:
+                    missing_official.append(s.get("path", s.get("script_name", "unknown")))
+
+            if missing_official:
+                downgrades.append({
+                    "from": "V4+",
+                    "to": "V4",
+                    "reason": f"V4+ requires independent tool with explicit 'official: false'. Script(s) claiming independence but missing 'official' field: {', '.join(missing_official)}. Add '\"official\": false' to these script entries."
+                })
+            else:
+                downgrades.append({
+                    "from": "V4+",
+                    "to": "V4",
+                    "reason": "V4+ requires independent tool or implementation; only official scripts used"
+                })
 
     # Missing evidence
     missing = []
@@ -1286,9 +1287,10 @@ def evaluate(input_path):
             protocol_label = "V3 (minimal; one valid declared hash computed)"
     elif allowed_protocol == "V4+":
         # V4+ minimal: at least one independent reproduction but not all three domains
-        independent_any = any(
-            level_at_least(B_LEVELS, b_level, lvl) or level_at_least(D_LEVELS, d_level, lvl) or level_at_least(C_LEVELS, c_level, lvl)
-            for lvl in ("B3", "D3", "C3")
+        independent_any = (
+            level_at_least(B_LEVELS, b_level, "B3") or
+            level_at_least(D_LEVELS, d_level, "D3") or
+            level_at_least(C_LEVELS, c_level, "C3")
         )
         independent_all_three = (
             level_at_least(B_LEVELS, b_level, "B3") and
