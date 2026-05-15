@@ -269,41 +269,32 @@ permalink: /
   <article class="status-card">
     <p class="status-label">Institutional / human independent verification</p>
     <p class="status-number">0</p>
-    <p class="status-note">Highest level: none</p>
-    <p class="status-note">No formally accepted institutional or human third-party verification is currently indexed.</p>
-    <p class="zh status-note">机构 / 人类独立验证：0。最高等级：none。当前尚无正式接受的机构或人类第三方独立验证。</p>
+    <p class="status-note">Highest level: none. No formally accepted institutional or human third-party verification is currently indexed.</p>
+    <p class="zh status-note">当前尚无正式接受的机构或人类第三方独立验证。</p>
   </article>
-
   <article class="status-card">
     <p class="status-label">Agent-initiated independent verification</p>
     <p class="status-number">0</p>
-    <p class="status-note">Highest level: none</p>
-    <p class="status-note">No unsolicited agent-initiated verification is currently accepted.</p>
-    <p class="zh status-note">智能体主动独立验证：0。最高等级：none。当前尚无已接受的智能体主动独立验证。</p>
+    <p class="status-note">Highest level: none. No unsolicited agent-initiated verification is currently accepted.</p>
+    <p class="zh status-note">当前尚无已接受的智能体主动独立验证。</p>
   </article>
-
   <article class="status-card">
     <p class="status-label">Human-solicited agent verification</p>
     <p class="status-number">1</p>
-    <p class="status-note">Highest level: V3</p>
-    <p class="status-note">One Claim-Gate-built V3 single-hash verification record exists, but it is human-solicited and not independent attestation.</p>
-    <p class="zh status-note">人类请求 / 非主动独立智能体验证：1。最高等级：V3。已有一条经 Claim Gate / Report Builder 生成的 V3 单哈希验证记录，但它是人类请求语境下的智能体验证，不计为独立见证。</p>
+    <p class="status-note">Highest level: V3. One Claim-Gate-built V3 single-hash verification record exists, but it is human-solicited and not independent attestation.</p>
+    <p class="zh status-note">已有一条经 Claim Gate / Report Builder 生成的 V3 单哈希验证记录，但它是人类请求语境下的智能体验证，不计为独立见证。</p>
   </article>
-
   <article class="status-card">
     <p class="status-label">Physical anchor verification</p>
     <p class="status-number">P3</p>
-    <p class="status-note">Formal independent inspections: 0</p>
-    <p class="status-note">Highest public evidence context: P3. Notarized / preserved photo, video, hash, OTS, and Arweave evidence exists, but no accepted onsite forensic inspection is indexed.</p>
-    <p class="zh status-note">物理锚验证：正式独立实物检验 0。最高公开证据语境：P3。已有公证 / 存证照片、视频、哈希、OTS 与 Arweave 证据，但尚无已接受的现场法证独立检验。</p>
+    <p class="status-note">Formal independent inspections: 0. Highest public evidence context: P3. Notarized / preserved photo, video, hash, OTS, and Arweave evidence exists, but no accepted onsite forensic inspection is indexed.</p>
+    <p class="zh status-note">最高公开证据语境：P3。已有公证 / 存证照片、视频、哈希、OTS 与 Arweave 证据，但尚无已接受的现场法证独立检验。</p>
   </article>
 </div>
-
 <p class="status-boundary">
   Human-solicited agent verification and public physical evidence context are not counted as independent attestation.
   <span class="zh">人类请求的智能体验证与公开物理证据语境，不计为独立见证。</span>
 </p>
-
 <details class="status-details">
   <summary>What is counted here?</summary>
   <ul>
@@ -312,16 +303,7 @@ permalink: /
     <li>Human-solicited agent verification: agent verification performed under human request or prior-context conditions; not independent attestation.</li>
     <li>Physical anchor verification: public physical-anchor evidence context; not onsite forensic inspection unless separately accepted.</li>
   </ul>
-  <p>
-    Current human-solicited agent verification: one V3 single-hash record linked to #119.
-    Current physical-anchor public evidence context: P3.
-  </p>
-  <p class="zh">
-    当前人类请求的智能体验证：一条与 #119 相关的 V3 单哈希记录。
-    当前物理锚公开证据语境：P3。
-  </p>
 </details>
-
 <p class="status-generated-note">
   Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>,
   <a href="/api/echo-index.json">/api/echo-index.json</a>,

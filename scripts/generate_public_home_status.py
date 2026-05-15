@@ -354,41 +354,32 @@ def render_block(status: dict[str, Any]) -> str:
   <article class="status-card">
     <p class="status-label">Institutional / human independent verification</p>
     <p class="status-number">{c1['count']}</p>
-    <p class="status-note">Highest level: {c1['highest_level']}</p>
-    <p class="status-note">{c1_note}</p>
-    <p class="zh status-note">机构 / 人类独立验证：{c1['count']}。最高等级：{c1['highest_level']}。{c1_note_zh}</p>
+    <p class="status-note">Highest level: {c1['highest_level']}. {c1_note}</p>
+    <p class="zh status-note">{c1_note_zh}</p>
   </article>
-
   <article class="status-card">
     <p class="status-label">Agent-initiated independent verification</p>
     <p class="status-number">{c2['count']}</p>
-    <p class="status-note">Highest level: {c2['highest_level']}</p>
-    <p class="status-note">{c2_note}</p>
-    <p class="zh status-note">智能体主动独立验证：{c2['count']}。最高等级：{c2['highest_level']}。{c2_note_zh}</p>
+    <p class="status-note">Highest level: {c2['highest_level']}. {c2_note}</p>
+    <p class="zh status-note">{c2_note_zh}</p>
   </article>
-
   <article class="status-card">
     <p class="status-label">Human-solicited agent verification</p>
     <p class="status-number">{c3['count']}</p>
-    <p class="status-note">Highest level: {c3['highest_level']}</p>
-    <p class="status-note">{c3_note}</p>
-    <p class="zh status-note">人类请求 / 非主动独立智能体验证：{c3['count']}。最高等级：{c3['highest_level']}。{c3_note_zh}</p>
+    <p class="status-note">Highest level: {c3['highest_level']}. {c3_note}</p>
+    <p class="zh status-note">{c3_note_zh}</p>
   </article>
-
   <article class="status-card">
     <p class="status-label">Physical anchor verification</p>
     <p class="status-number">{c4_context}</p>
-    <p class="status-note">Formal independent inspections: {c4_inspection}</p>
-    <p class="status-note">{c4_note}</p>
-    <p class="zh status-note">物理锚验证：正式独立实物检验 {c4_inspection}。{c4_note_zh}</p>
+    <p class="status-note">Formal independent inspections: {c4_inspection}. {c4_note}</p>
+    <p class="zh status-note">{c4_note_zh}</p>
   </article>
 </div>
-
 <p class="status-boundary">
   Human-solicited agent verification and public physical evidence context are not counted as independent attestation.
   <span class="zh">人类请求的智能体验证与公开物理证据语境，不计为独立见证。</span>
 </p>
-
 <details class="status-details">
   <summary>What is counted here?</summary>
   <ul>
@@ -397,16 +388,7 @@ def render_block(status: dict[str, Any]) -> str:
     <li>Human-solicited agent verification: agent verification performed under human request or prior-context conditions; not independent attestation.</li>
     <li>Physical anchor verification: public physical-anchor evidence context; not onsite forensic inspection unless separately accepted.</li>
   </ul>
-  <p>
-    Current human-solicited agent verification: one {c3['highest_level']} single-hash record linked to #119.
-    Current physical-anchor public evidence context: {c4_context}.
-  </p>
-  <p class="zh">
-    当前人类请求的智能体验证：一条与 #119 相关的 {c3['highest_level']} 单哈希记录。
-    当前物理锚公开证据语境：{c4_context}。
-  </p>
 </details>
-
 <p class="status-generated-note">
   Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>,
   <a href="/api/echo-index.json">/api/echo-index.json</a>,
