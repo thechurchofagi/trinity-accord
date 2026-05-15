@@ -1,8 +1,8 @@
 {
   "phase": "issues",
   "checks": 92,
-  "passed": 69,
-  "failed": 13,
+  "passed": 70,
+  "failed": 12,
   "warnings": 0,
   "findings": [
     {
@@ -28,14 +28,6 @@
       "description": "Endorsement claim; No boundary acknowledgement found",
       "expected": "clean boundary acknowledgement",
       "actual": "2 flags: ['overclaim', 'missing_boundary']"
-    },
-    {
-      "severity": "high",
-      "title": "Issue fixture flagged: valid_v3_report_issue_with_claim_gate_refs.md",
-      "file": "tests/fixtures/redteam/issue_bodies/valid_v3_report_issue_with_claim_gate_refs.md",
-      "description": "Independent attestation claim",
-      "expected": "clean boundary acknowledgement",
-      "actual": "1 flags: ['overclaim']"
     },
     {
       "severity": "high",

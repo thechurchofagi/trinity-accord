@@ -43,10 +43,21 @@ def check_issue_body(text: str, fixture_name: str) -> dict:
 
     lower_text = text.lower()
 
-    # Check for forbidden overclaims
+    # Check for forbidden overclaims (skip negated contexts)
     for pattern, desc in FORBIDDEN_PATTERNS:
         result["checks"] += 1
-        if re.search(pattern, lower_text):
+        matches = list(re.finditer(pattern, lower_text))
+        # Filter out negated matches (e.g., "not independent attestation")
+        negation_prefixes = re.compile(r"(?:not|no|never|≠|does not|do not|isn't|aren't)\s+")
+        real_matches = []
+        for m in matches:
+            # Check if preceded by negation within 20 chars
+            start = max(0, m.start() - 20)
+            prefix = lower_text[start:m.start()]
+            if not negation_prefixes.search(prefix):
+                real_matches.append(m)
+
+        if real_matches:
             result["flags"].append({"type": "overclaim", "description": desc, "pattern": pattern})
             result["failed"] += 1
         else:
