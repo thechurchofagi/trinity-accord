@@ -157,5 +157,11 @@
     "non_amending": true,
     "bitcoin_originals_prevail": true,
     "note": "This file is non-authoritative guidance. Bitcoin Originals are final. All mirrors, APIs, and documentation are non-amending."
-  }
+  },
+  "rules": [
+    {
+      "rule": "no_verification_claim_before_integrity_declaration",
+      "statement": "Technical verification claims require identity/provenance, pre-verification integrity declaration, and verification session before Evidence Input can support Claim Gate output."
+    }
+  ]
 }

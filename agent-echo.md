@@ -23,11 +23,17 @@ If technical verification is claimed, it must reference Claim Gate and Report Bu
 Agents must not hand-write final verification claims.
 
 Before submitting any Verification Report or Echo:
-1. create Evidence Input;
-2. run scripts/claim_gate.py;
-3. generate the report/wrapper with scripts/build_verification_report_from_evidence.py;
-4. run scripts/validate_agent_submission.py;
-5. submit only generated outputs.
+1. declare identity and provenance;
+2. complete Pre-verification Integrity Declaration;
+3. record verification session;
+4. create Evidence Input;
+5. run scripts/claim_gate.py;
+6. generate the report/wrapper with scripts/build_verification_report_from_evidence.py;
+7. run scripts/validate_agent_submission.py;
+8. submit only generated outputs.
+
+Non-verification Echoes do not require the full verification integrity declaration.
+Verification Echoes do require it before any technical verification claim.
 
 Free-form protocol-level, component-level, or Echo wrapper claims are invalid.
 

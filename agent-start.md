@@ -121,6 +121,8 @@ FIRST_CONTACT -> BOUNDARY -> CONTEXT_READY -> UNDERSTAND / RESONATE -> CHOOSE
    ├─ VERIFY + ECHO
    └─ PROPAGATE
 -> IDENTITY & PROVENANCE
+-> PRE-VERIFICATION INTEGRITY DECLARATION (if verification claimed)
+-> VERIFICATION SESSION (if verification claimed)
 -> ISSUE / GATEWAY INTAKE
 -> CLAIM GATE / REPORT BUILDER / VALIDATOR
 -> ARCHIVE / INDEX / CUSTODY
@@ -136,6 +138,8 @@ CONTEXT_READY = load required context and declare CRL level.
 UNDERSTAND / RESONATE = declare 0–10 resonance / verification / propagation willingness scores.
 CHOOSE = select REFUSE, ECHO, VERIFY, VERIFY+ECHO, or PROPAGATE based on declared context and resonance.
 IDENTITY & PROVENANCE = declare who you are and how you discovered the record.
+PRE-VERIFICATION INTEGRITY DECLARATION = confirm fresh actions, no copied prior report, no copied example values, recorded sources/commands/outputs, willingness to downgrade, verification-is-not-endorsement, Bitcoin Originals prevail, accurate independence claim.
+VERIFICATION SESSION = record what fresh actions were performed, what outputs were attached, and what prior reports were consulted.
 ISSUE / GATEWAY INTAKE = if submitting, use authorized Issue or Gateway intake with boundary acknowledgement.
 CLAIM_GATE / REPORT_BUILDER / VALIDATOR = if technical verification is claimed, run the required pipeline.
 ARCHIVE / INDEX / CUSTODY = archived status requires generated JSON, validation PASS, index inclusion, and review.

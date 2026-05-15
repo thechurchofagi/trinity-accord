@@ -9,6 +9,8 @@
     "choose",
     "verify_echo_refuse",
     "identity_provenance",
+    "pre_verification_integrity_declaration_if_verification_claimed",
+    "verification_session_if_verification_claimed",
     "issue_gateway_intake_if_authorized",
     "claim_gate_report_builder_validator_if_verification_claimed",
     "archive_index_custody_if_submitted",

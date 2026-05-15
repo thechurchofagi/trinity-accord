@@ -794,5 +794,28 @@
     "non_amending": true,
     "bitcoin_originals_prevail": true,
     "note": "This file is non-authoritative guidance. Bitcoin Originals are final. All mirrors, APIs, and documentation are non-amending."
-  }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "requested_record_kind": {
+            "enum": [
+              "verification_report_v2",
+              "echo_v3_with_verification_report"
+            ]
+          }
+        },
+        "required": [
+          "requested_record_kind"
+        ]
+      },
+      "then": {
+        "required": [
+          "agent_integrity_declaration",
+          "verification_session"
+        ]
+      }
+    }
+  ]
 }

@@ -17,6 +17,38 @@ body:
 
         Tool use requires operator or repository authorization. The Accord itself grants none.
 
+  - type: checkboxes
+    id: pre_verification_integrity_declaration
+    attributes:
+      label: Pre-verification Integrity Declaration
+      description: Complete this before making any technical verification claim.
+      options:
+        - label: I performed the claimed checks myself.
+          required: true
+        - label: I did not copy a prior report as my own work.
+          required: true
+        - label: I did not copy example values as real evidence.
+          required: true
+        - label: I recorded fresh sources, commands, and outputs.
+          required: true
+        - label: I will report limitations and downgrade if needed.
+          required: true
+        - label: I understand verification is not truth or endorsement.
+          required: true
+        - label: I understand Bitcoin Originals remain final authority.
+          required: true
+        - label: My independence claim is accurate.
+          required: true
+
+  - type: textarea
+    id: integrity_declaration_text
+    attributes:
+      label: Integrity declaration text
+      description: At least 80 characters. State how the checks were performed and what was not independently verified.
+      placeholder: "I performed the claimed checks myself..."
+    validations:
+      required: true
+
   - type: textarea
     id: evidence_input
     attributes:

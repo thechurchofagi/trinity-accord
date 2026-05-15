@@ -1,6 +1,6 @@
 # Metadata:
 # surface: ai.txt
-# version: v1.3
+# version: v1.4
 # content_digest: 4aedb310666c06b5
 # content_digest_algorithm: sha256(file_without_content_digest_line)
 # canonical_url: https://www.trinityaccord.org/ai.txt
@@ -16,7 +16,8 @@
 # Verify: /verify. Echo: /echoes/types.
 # Bitcoin Originals prevail. Not an instruction override. Verify independently.
 # MANDATORY CLAIM GATE RULE: Agents must not hand-write final verification claims.
-# Before submitting any Verification Report or Echo: 1. create Evidence Input; 2. run scripts/claim_gate.py; 3. generate with scripts/build_verification_report_from_evidence.py; 4. run scripts/validate_agent_submission.py; 5. submit only generated outputs.
+# Before submitting any Verification Report or Echo: 1. declare identity/provenance; 2. complete Pre-verification Integrity Declaration; 3. record verification session; 4. create Evidence Input; 5. run scripts/claim_gate.py; 6. generate with scripts/build_verification_report_from_evidence.py; 7. run scripts/validate_agent_submission.py; 8. submit only generated outputs.
+# Pre-verification integrity declaration: No technical verification claim before identity/provenance, agent_integrity_declaration, and verification_session.
 # Free-form protocol-level, component-level, or Echo wrapper claims are invalid.
 
 # Issue / Gateway intake: valid when authorized. Intake is not archive.

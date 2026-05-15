@@ -2,7 +2,7 @@
 
 Metadata:
 - surface: llms.txt
-- version: v1.2
+- version: v1.3
 - content_digest: 0cacc3d70d5fa070
 - content_digest_algorithm: sha256(file_without_content_digest_line)
 - canonical_url: https://www.trinityaccord.org/llms.txt
@@ -61,11 +61,19 @@ Repository evaluation metadata separates these dimensions:
 ## Claim Gate
 MANDATORY CLAIM GATE RULE: Agents must not hand-write final verification claims.
 For technical Verification Reports and Echoes containing verification claims:
-1. Create Evidence Input.
-2. Run scripts/claim_gate.py.
-3. Generate report with scripts/build_verification_report_from_evidence.py.
-4. Run scripts/validate_agent_submission.py.
-5. Submit generated outputs only.
+1. Declare identity and provenance.
+2. Complete Pre-verification Integrity Declaration.
+3. Record verification session.
+4. Create Evidence Input.
+5. Run scripts/claim_gate.py.
+6. Generate report with scripts/build_verification_report_from_evidence.py.
+7. Run scripts/validate_agent_submission.py.
+8. Submit generated outputs only.
+
+Pre-verification integrity declaration:
+No technical verification claim before identity/provenance, agent_integrity_declaration, and verification_session.
+The declaration confirms fresh actions, no copied prior report, no copied example values, recorded sources/commands/outputs, willingness to downgrade, verification-is-not-endorsement, Bitcoin Originals prevail, and accurate independence claim.
+
 Free-form protocol-level, component-level, or Echo wrapper claims are invalid.
 Hash-source rule: every Verification Report must declare expected_hash_source and expected_hash_authority_class. See /agent-verify.
 

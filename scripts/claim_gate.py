@@ -1080,7 +1080,7 @@ def evaluate(input_path):
     if technical_claim_requested(evidence_input):
         if not has_valid_integrity_declaration(evidence_input):
             return fail_claim_gate(
-                "Technical verification claim requires valid agent_integrity_declaration",
+                "Pre-verification integrity declaration is required before any technical verification claim.",
                 ["Missing or invalid agent_integrity_declaration. All boolean fields must be true and declaration_text must be at least 80 characters."],
                 requested_kind
             )
@@ -1088,7 +1088,7 @@ def evaluate(input_path):
         valid_session, session_error = has_valid_verification_session(evidence_input)
         if not valid_session:
             return fail_claim_gate(
-                f"Technical verification claim requires valid verification_session: {session_error}",
+                "Verification session is required after integrity declaration and before Evidence Input / Claim Gate can support a technical verification claim.",
                 [f"Invalid verification_session: {session_error}"],
                 requested_kind
             )

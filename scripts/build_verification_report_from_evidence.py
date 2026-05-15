@@ -714,7 +714,15 @@ def main():
     result = build_report(args.input, args.out, args.echo_out)
 
     if not result["success"]:
-        print(f"FAILED: {result.get('error')}")
+        error_msg = result.get("error", "")
+        print(f"FAILED: {error_msg}")
+
+        # Specific message for integrity declaration failures
+        if "integrity" in error_msg.lower() or "integrity_declaration" in str(result.get("gate_result", {}).get("blocking_failures", [])):
+            print("No Verification Report or Echo wrapper was generated.")
+            print("Complete agent_integrity_declaration and verification_session first.")
+            print("Do not manually construct final report JSON — use the builder pipeline.")
+
         for bf in result.get("blocking_failures", []):
             print(f"  - {bf}")
 
@@ -761,6 +769,9 @@ def main():
             debug_payload = {
                 "success": False,
                 "error": result.get("error"),
+                "integrity_declaration_present": result.get("integrity_declaration_present", False),
+                "verification_session_present": result.get("verification_session_present", False),
+                "claim_gate_status": result.get("gate_result", {}).get("status", "N/A"),
                 "gate_result": result.get("gate_result"),
                 "report": result.get("report"),
                 "echo_wrapper": result.get("echo_wrapper"),

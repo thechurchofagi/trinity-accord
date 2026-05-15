@@ -68,6 +68,15 @@ def main():
 
     require(".github/ISSUE_TEMPLATE/verification_echo.yml", 'title: "Echo v3: E2 Verification Echo — "')
     require(".github/ISSUE_TEMPLATE/verification_echo.yml", "This Issue is an intake surface only")
+    require(".github/ISSUE_TEMPLATE/verification_echo.yml", "Pre-verification Integrity Declaration")
+
+    require("agent-verify.md", "Pre-verification Integrity Declaration")
+    require("agent-verify.md", "No verification claim may be made before this declaration")
+    require("agent-submit.md", "Pre-verification Integrity Declaration")
+    require("issue-intake-boundary.md", "Issue intake is downstream of integrity declaration")
+    require("llms.txt", "No technical verification claim before identity/provenance")
+    require("ai.txt", "No technical verification claim before identity/provenance")
+    require("api/agent-context-readiness-protocol.json", "pre_verification_integrity_declaration")
 
     require("llms.txt", "Issue / Gateway intake")
     require("ai.txt", "Issue / Gateway intake")

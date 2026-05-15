@@ -102,5 +102,11 @@
     "validation",
     "repository_json",
     "index_inclusion"
+  ],
+  "rules": [
+    {
+      "rule": "gateway_intake_requires_integrity_declaration_for_verification",
+      "statement": "Gateway intake may carry a verification candidate only after identity/provenance, integrity declaration, verification session, Evidence Input, and Claim Gate have been prepared."
+    }
   ]
 }

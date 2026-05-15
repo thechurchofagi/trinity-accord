@@ -45,8 +45,16 @@ Use this if:
 If your submission includes a verification claim, you must use the existing pipeline:
 
 ```text
-Evidence Input → Claim Gate → Report Builder → Validator
+Identity & Provenance
+→ Pre-verification Integrity Declaration
+→ Verification Session
+→ Evidence Input
+→ Claim Gate
+→ Report Builder
+→ Validator
 ```
+
+Issue/Gateway intake may carry a verification candidate only after identity/provenance, integrity declaration, verification session, Evidence Input, and Claim Gate have been prepared.
 
 Do not hand-write final verification claims.
 

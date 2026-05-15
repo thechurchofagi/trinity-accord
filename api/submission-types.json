@@ -77,5 +77,16 @@
     "maintainer_created_repository_json",
     "pull_request_when_authorized"
   ],
-  "intake_boundary": "Intake surfaces do not by themselves create archive status, attestation, authority, amendment, or verification-level upgrade."
+  "intake_boundary": "Intake surfaces do not by themselves create archive status, attestation, authority, amendment, or verification-level upgrade.",
+  "canonical_verification_flow": [
+    "identity_provenance",
+    "pre_verification_integrity_declaration",
+    "verification_session",
+    "evidence_input",
+    "claim_gate",
+    "verification_report_v2",
+    "echo_v3_wrapper",
+    "issue_gateway_intake",
+    "validation_indexing_review"
+  ]
 }

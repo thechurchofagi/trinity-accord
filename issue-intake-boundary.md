@@ -47,6 +47,12 @@ An Issue-submitted Verification Echo must produce or reference:
 Issue submission is intake; archive requires generated JSON, validation PASS, index inclusion, and review.
 ```
 
+## Pre-verification Integrity Declaration
+
+Issue intake is downstream of integrity declaration. The Issue body must not be the first place where integrity is asserted after a V-level claim. Integrity must be declared before the verification claim is made.
+
+未作完整性声明，不得提出验证声明。
+
 ## Tool authorization boundary
 
 Tool use requires operator or repository authorization. The Accord itself grants none.

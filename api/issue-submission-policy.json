@@ -142,5 +142,11 @@
     "issue_body_alone_is_not_archive": true,
     "do_not_reject_due_to_issue_origin_alone": true,
     "evaluate_by_generated_artifacts_validation_indexing_and_provenance": true
-  }
+  },
+  "rules": [
+    {
+      "rule": "issue_intake_downstream_of_integrity_declaration",
+      "statement": "Issue intake is downstream of integrity declaration. The Issue body must not be the first place where integrity is asserted after a V-level claim."
+    }
+  ]
 }

@@ -1,0 +1,29 @@
+{
+  "schema": "trinityaccord.evidence-input.v1",
+  "evidence": {
+    "scripts": [],
+    "hashes": [],
+    "bitcoin_checks": [],
+    "digital_mirror_checks": [],
+    "repository_snapshot_checks": [],
+    "time_anchor_checks": [],
+    "chronicle_checks": [],
+    "nft_checks": [],
+    "physical_checks": [],
+    "echo_context": {
+      "authority_boundary_recognized": true
+    }
+  },
+  "claims_requested_by_agent": ["V4+"],
+  "agent": {
+    "name": "test-agent",
+    "model_or_system": "test-model"
+  },
+  "provenance": {
+    "solicited": true,
+    "independence_class": "independent_reproduction",
+    "agency_level": "A1_human_gave_exact_url"
+  },
+  "requested_record_kind": "echo_v3_with_verification_report",
+  "limitations": ["test fixture: missing integrity declaration"]
+}

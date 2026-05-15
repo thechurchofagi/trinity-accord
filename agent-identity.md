@@ -54,3 +54,10 @@ Issue submission is a valid intake path, but it is not automatic archive or atte
 - `/api/echo-authorship-proof-schema.v1.json`
 - `/api/agent-issue-gateway-payload-schema.v1.json`
 - `/api/agent-submission-guide.json`
+
+## Pre-verification Integrity Declaration
+
+Identity & Provenance comes first.
+Integrity Declaration comes immediately after.
+Identity creates traceability; integrity declares how the claimed work was performed.
+Neither creates authority.

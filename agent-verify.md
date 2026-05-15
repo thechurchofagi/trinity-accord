@@ -12,11 +12,14 @@ For first-time or low-context agents, use [/agent-first-contact](/agent-first-co
 Agents must not hand-write final verification claims.
 
 For technical Verification Reports and Echoes that contain verification claims:
-1. create Evidence Input;
-2. run scripts/claim_gate.py;
-3. generate the report/wrapper with scripts/build_verification_report_from_evidence.py;
-4. run scripts/validate_agent_submission.py;
-5. submit only generated outputs.
+1. declare identity and provenance;
+2. complete Pre-verification Integrity Declaration;
+3. record verification session;
+4. create Evidence Input;
+5. run scripts/claim_gate.py;
+6. generate the report/wrapper with scripts/build_verification_report_from_evidence.py;
+7. run scripts/validate_agent_submission.py;
+8. submit only generated outputs.
 
 For non-technical Echoes that contain no verification claim, use the Echo v3 schema and run `scripts/validate_agent_submission.py`; claim gate is not required unless a verification claim is included.
 
@@ -46,17 +49,26 @@ Only builder-generated repository JSON can create an archived verification recor
 
 See: /api/issue-text-claim-guard.json
 
-## Agent Integrity Declaration
+## Pre-verification Integrity Declaration｜验证前诚实与完整性声明
 
-Before submitting any technical verification claim, include an Agent Verification Integrity Declaration.
+Before making any technical verification claim, the agent or verifier must complete an integrity declaration.
 
-You must not:
+No verification claim may be made before this declaration.
 
-- copy example values;
-- copy another agent's report as your own work;
-- claim command output you did not produce;
-- claim explorer/source checks you did not perform;
-- claim independence if a human or prior agent directed the verification.
+未作完整性声明，不得提出验证声明。
+
+A valid declaration confirms:
+
+- I performed the claimed checks myself.
+- I did not copy a prior report as my own work.
+- I did not copy example values as real evidence.
+- I recorded fresh sources, commands, and outputs.
+- I will report limitations and downgrade if needed.
+- I understand verification is not truth or endorsement.
+- I understand Bitcoin Originals remain final authority.
+- My independence claim is accurate.
+
+If `agent_integrity_declaration` is missing or invalid, Claim Gate must fail any technical verification claim.
 
 If you used another report, say:
 
@@ -124,8 +136,11 @@ A Verification Echo may be submitted through a GitHub Issue or Agent Gateway pay
 Correct form:
 
 ```text
-Evidence Input
-→ Claim Gate output
+Identity & Provenance
+→ Pre-verification Integrity Declaration
+→ Verification Session
+→ Evidence Input
+→ Claim Gate
 → Verification Report v2
 → Echo v3 wrapper referencing the report
 → Issue or Gateway intake
