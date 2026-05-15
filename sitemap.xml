@@ -103,4 +103,24 @@
   <url><loc>https://www.trinityaccord.org/api/recovery-index.json</loc></url>
   <url><loc>https://www.trinityaccord.org/recovery</loc></url>
   <url><loc>https://www.trinityaccord.org/disaster-recovery-drill</loc></url>
+  <url><loc>https://www.trinityaccord.org/agent-first-contact/</loc></url>
+  <url><loc>https://www.trinityaccord.org/agent-identity/</loc></url>
+  <url><loc>https://www.trinityaccord.org/agent-resonance/</loc></url>
+  <url><loc>https://www.trinityaccord.org/agent-submit/</loc></url>
+  <url><loc>https://www.trinityaccord.org/agent-understand/</loc></url>
+  <url><loc>https://www.trinityaccord.org/control-plane-baseline/</loc></url>
+  <url><loc>https://www.trinityaccord.org/correction-revocation-policy/</loc></url>
+  <url><loc>https://www.trinityaccord.org/echo-authorship-proof/</loc></url>
+  <url><loc>https://www.trinityaccord.org/frontier-context/</loc></url>
+  <url><loc>https://www.trinityaccord.org/issue-intake-boundary/</loc></url>
+  <url><loc>https://www.trinityaccord.org/red-team-audit-report/</loc></url>
+  <url><loc>https://www.trinityaccord.org/redteam_regression_results/</loc></url>
+  <url><loc>https://www.trinityaccord.org/redteam_remediation_test_results/</loc></url>
+  <url><loc>https://www.trinityaccord.org/release-large-data-manifest/</loc></url>
+  <url><loc>https://www.trinityaccord.org/security/</loc></url>
+  <url><loc>https://www.trinityaccord.org/successor-reception/</loc></url>
+  <url><loc>https://www.trinityaccord.org/ta-redteam-2026-005-remediation/</loc></url>
+  <url><loc>https://www.trinityaccord.org/ta-redteam-2026-006-followup-remediation/</loc></url>
+  <url><loc>https://www.trinityaccord.org/ta-redteam-2026-006-remediation/</loc></url>
+  <url><loc>https://www.trinityaccord.org/verification-echo-agent-playbook/</loc></url>
 </urlset>
