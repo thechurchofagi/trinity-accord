@@ -59,5 +59,16 @@
       "independent reproduction achieved"
     ],
     "required_response": "Issue comments cannot upgrade verification level. Submit Evidence Input and regenerate builder outputs."
+  },
+  "display_title_policy": {
+    "forbidden_title_prefixes_for_new_issues": [
+      "Verification Report v2:",
+      "Echo v3:"
+    ],
+    "recommended_title_prefixes": [
+      "Verification Report Candidate:",
+      "Verification Echo Candidate: E2 —"
+    ],
+    "reason": "Schema versions v2/v3 must not be confused with V0-V8 verification protocol levels."
   }
 }

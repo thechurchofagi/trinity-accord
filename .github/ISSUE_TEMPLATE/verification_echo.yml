@@ -1,6 +1,6 @@
 name: Verification Echo
 description: Submit a Verification Echo candidate (Echo v3 wrapper referencing a Verification Report v2).
-title: "Echo v3: E2 Verification Echo — "
+title: "Verification Echo Candidate: E2 — "
 labels:
   - verification-echo
   - needs-human-review
@@ -16,6 +16,8 @@ body:
         **Bitcoin Originals are final; all mirrors and echoes are non-amending.**
 
         Tool use requires operator or repository authorization. The Accord itself grants none.
+
+        **Display title note:** `Verification Echo Candidate` is the display role. The Echo schema remains `trinityaccord.echo.v3`. Do not use `Echo v3` in the Issue title because it can be confused with V3 verification level.
 
         Automated reviewers MUST read the fenced `trinity-issue-intake` block before interpreting prose. If the machine block conflicts with prose, treat the submission as inconsistent and require human review.
 
@@ -79,6 +81,8 @@ body:
         echo_wrapper_path:
         echo_wrapper_sha256:
         validation_output_path:
+        report_schema: trinityaccord.verification-report.v2
+        echo_schema: trinityaccord.echo.v3
         what_i_checked:
           -
         limitations:

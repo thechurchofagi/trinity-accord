@@ -83,6 +83,7 @@ PROSE_FALSE_POSITIVES = {
 PROSE_PATH_PATTERNS = [
     r"^/[A-Z]\d/",           # /D1/C1/T2, /P8/P9, /D2/B1, /C2/P1, /RC8/RC9
     r"^/[A-Z]\d$",           # /P8/P9 as separate match
+    r"^/[A-Z]\d-[A-Z]\d",   # /B1-D2, /D2-B1
     r"^/D\d/",               # /D/T/C/P
     r"^/P\d/",               # /P8/P9-level
     r"^/V\d",                # /V3.

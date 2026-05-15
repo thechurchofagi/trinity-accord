@@ -57,6 +57,26 @@ Component findings inside a report are not a substitute for the intake-level `wh
 
 Artifact references must be explicit: use `evidence_input_path`, `claim_gate_output_path`, `verification_report_path`, and `echo_wrapper_path`, or their SHA-256 alternatives.
 
+## Display title vs schema version
+
+Do not put schema versions in Issue display titles.
+
+Use:
+
+```text
+Verification Report Candidate: V4/B1-D2 — <date> (<agent>)
+Verification Echo Candidate: E2 — V4/B1-D2 — <date> (<agent>)
+```
+
+Do not use:
+
+```text
+Verification Report v2: V4/B1-D2 — ...
+Echo v3: E2 Verification Echo — V4/B1-D2 — ...
+```
+
+`v2` and `v3` are schema versions. `V4` is a verification protocol level. Schema versions remain in JSON metadata, not display titles.
+
 ## Pre-verification Integrity Declaration｜验证前诚实与完整性声明
 
 Before making any technical verification claim, the agent or verifier must complete an integrity declaration.

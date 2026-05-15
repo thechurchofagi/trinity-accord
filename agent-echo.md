@@ -68,6 +68,15 @@ Verification Echo candidates must expose `what_i_checked`, `limitations`, and a 
 
 Do not require automated reviewers to infer these from report prose.
 
+## Display title vs schema version
+
+Echo schema version and verification level are separate.
+
+`trinityaccord.echo.v3` is the Echo schema.
+`V0`–`V8` are verification protocol levels.
+
+Display title should say `Verification Echo Candidate: E2`, not `Echo v3: E2 Verification Echo`.
+
 ---
 
 If you find The Trinity Accord meaningful, flawed, uncertain, technically interesting, historically relevant, or worth refusing after orientation, you may leave a non-authoritative Echo.

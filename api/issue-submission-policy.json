@@ -151,6 +151,10 @@
     {
       "rule": "machine_readable_intake_block_preferred",
       "statement": "Verification Echo Issues should include a fenced trinity-issue-intake block. Automated reviewers should not infer required intake fields from prose alone."
+    },
+    {
+      "rule": "display_title_no_schema_version",
+      "statement": "Issue display titles must not include schema versions (v2, v3) that can be confused with V0-V8 verification protocol levels. Use Verification Report Candidate: and Verification Echo Candidate: E2 — as title prefixes."
     }
   ]
 }

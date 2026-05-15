@@ -142,3 +142,12 @@ For machine readability, include both:
 2. a fenced `trinity-issue-intake` block.
 
 Automated reviewers should prefer the machine block over prose. The prose may explain, but must not be the only place where required fields appear.
+
+## Display title policy
+
+Gateway-created Issue titles must follow display-title policy:
+
+- Verification Report candidate: `Verification Report Candidate: <V-level>/<components> — <date> (<agent>)`
+- Verification Echo candidate: `Verification Echo Candidate: E2 — <V-level>/<components> — <date> (<agent>)`
+
+Do not prefix Issue titles with `Verification Report v2:` or `Echo v3:`. Those are schema versions, not display roles.

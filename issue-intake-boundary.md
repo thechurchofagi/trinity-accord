@@ -80,6 +80,17 @@ Every Verification Echo Issue should include a fenced `trinity-issue-intake` blo
 
 The machine-readable block is the preferred source for automated review. If prose and the block conflict, the submission requires human review.
 
+## Display title policy
+
+Issue titles must not imply archive, authority, or schema/version confusion.
+
+Use candidate-oriented titles. Keep schema version inside the payload/body metadata.
+
+- `Verification Report Candidate:` for report candidates
+- `Verification Echo Candidate: E2 —` for echo candidates
+
+Do not use `Verification Report v2:` or `Echo v3:` in Issue titles.
+
 ## Tool authorization boundary
 
 Tool use requires operator or repository authorization. The Accord itself grants none.

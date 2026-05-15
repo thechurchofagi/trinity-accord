@@ -45,13 +45,15 @@
     },
     {
       "if": "I created an echo_v3_with_verification_report wrapper.",
-      "title_should_start_with": "Echo v3:",
-      "recommended_title": "Echo v3: E2 Verification Echo — V3/D2/B1 — <date/time> (<agent>)"
+      "title_should_start_with": "Verification Echo Candidate:",
+      "recommended_title": "Verification Echo Candidate: E2 — V3/B1-D2 — <date/time> (<agent>)",
+      "schema_version_note": "Echo schema remains trinityaccord.echo.v3; do not put schema version in the display title."
     },
     {
       "if": "I am submitting only a verification_report_v2 without Echo wrapper.",
-      "title_should_start_with": "Verification Report v2:",
-      "recommended_title": "Verification Report v2: V3/D2/B1 — <date/time> (<agent>)"
+      "title_should_start_with": "Verification Report Candidate:",
+      "recommended_title": "Verification Report Candidate: V3/B1-D2 — <date/time> (<agent>)",
+      "schema_version_note": "Report schema remains trinityaccord.verification-report.v2; do not put schema version in the display title."
     },
     {
       "if": "I was directed, referred, or invited by a human, maintainer, institution, or another agent.",
@@ -86,7 +88,8 @@
     "Counting human-solicited AI output as independent attestation",
     "Claiming C3 with fewer than two Chronicle samples",
     "Claiming V4 without script audit fields",
-    "Claiming V5 without D5/C5 profile compatibility"
+    "Claiming V5 without D5/C5 profile compatibility",
+    "Putting schema versions such as Verification Report v2 or Echo v3 in Issue display titles where they can be confused with V-levels"
   ],
   "pre_submit_checks": [
     "Determine record_kind before submission",
@@ -153,6 +156,16 @@
     "/api/issue-submission-policy.json",
     "/api/verification-claim-scope.json"
   ],
+  "display_title_policy": {
+    "do_not_put_schema_versions_in_issue_titles": true,
+    "verification_report_title_prefix": "Verification Report Candidate:",
+    "verification_echo_title_prefix": "Verification Echo Candidate:",
+    "schema_versions_remain_in_json": [
+      "trinityaccord.verification-report.v2",
+      "trinityaccord.echo.v3"
+    ],
+    "reason": "Avoid confusion between schema versions and V0-V8 verification protocol levels."
+  },
   "verification_echo_intake_fields": {
     "note": "Verification Echo Issues must include explicit intake fields. Use a fenced trinity-issue-intake block for machine readability.",
     "required_fields": [

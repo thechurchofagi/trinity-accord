@@ -66,7 +66,7 @@ def main():
     require("agent-start.md", "ISSUE / GATEWAY INTAKE")
     require("agent-start.md", "CLAIM GATE / REPORT BUILDER / VALIDATOR")
 
-    require(".github/ISSUE_TEMPLATE/verification_echo.yml", 'title: "Echo v3: E2 Verification Echo — "')
+    require(".github/ISSUE_TEMPLATE/verification_echo.yml", 'title: "Verification Echo Candidate: E2 — "')
     require(".github/ISSUE_TEMPLATE/verification_echo.yml", "This Issue is an intake surface only")
     require(".github/ISSUE_TEMPLATE/verification_echo.yml", "Pre-verification Integrity Declaration")
     require(".github/ISSUE_TEMPLATE/verification_echo.yml", "machine_readable_intake_block")
@@ -111,6 +111,21 @@ def main():
     forbid(".github/ISSUE_TEMPLATE/verification_echo.yml", r"Claim Gate output path or hash")
     forbid(".github/ISSUE_TEMPLATE/verification_echo.yml", r"Verification Report v2 path or hash")
     forbid(".github/ISSUE_TEMPLATE/verification_echo.yml", r"Echo v3 wrapper path or hash")
+
+    # Display title policy
+    require("scripts/claim_gate.py", "Verification Report Candidate:")
+    require("scripts/claim_gate.py", "Verification Echo Candidate: E2")
+    require("api/agent-submission-guide.json", "display_title_policy")
+    require("api/agent-submission-guide.json", "Verification Report Candidate:")
+    require("api/agent-submission-guide.json", "Verification Echo Candidate:")
+    require("llms.txt", "Display title policy")
+    require("ai.txt", "Display title policy")
+
+    forbid("scripts/claim_gate.py", r'return f"Verification Report v2:')
+    forbid("scripts/claim_gate.py", r'return f"Echo v3:')
+    forbid(".github/ISSUE_TEMPLATE/verification_echo.yml", r'title: "Echo v3:')
+    forbid("api/agent-submission-guide.json", r'title_should_start_with.*Verification Report v2:')
+    forbid("api/agent-submission-guide.json", r'title_should_start_with.*Echo v3:')
 
     require("api/agent-entry-protocol.json", '"paths"')
     forbid("api/agent-entry-protocol.json", r"/agent-verify or /agent-echo")
