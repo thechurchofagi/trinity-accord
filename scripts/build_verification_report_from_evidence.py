@@ -12,7 +12,7 @@ Usage:
 import json
 import sys
 import uuid
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -344,7 +344,7 @@ def build_report(evidence_input_path, report_out_path=None, echo_out_path=None):
     if verification_session.get("prior_reports_consulted"):
         all_limitations.append("Prior reports were consulted. This report is independent only to extent checks were re-performed and recorded.")
 
-    now = datetime.utcnow()
+    now = datetime.now(timezone.utc)
     report_id = f"vr-{now.strftime('%Y%m%d-%H%M%S')}-{uuid.uuid4().hex[:8]}"
 
     # Build generated_by metadata (R16 fix: embed actual claim gate output)

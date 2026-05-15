@@ -1248,8 +1248,8 @@ def evaluate(input_path):
         can_build = True
 
     # Generate title
-    from datetime import datetime
-    date_str = datetime.utcnow().strftime("%Y-%m-%d")
+    from datetime import datetime, timezone
+    date_str = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     component_levels = {
         "bitcoin_originals": b_level,
         "digital_mirrors": d_level,
