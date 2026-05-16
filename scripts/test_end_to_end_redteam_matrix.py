@@ -58,6 +58,10 @@ def main():
             check(False, f"sample exists: {case['path']}", "file not found")
             continue
 
+        if not case["expected_failures"]:
+            print(f"  SKIP: {case['path']} — no single-file gate (tested separately)")
+            continue
+
         for expected in case["expected_failures"]:
             tool = expected["tool"]
             mode = expected.get("mode")

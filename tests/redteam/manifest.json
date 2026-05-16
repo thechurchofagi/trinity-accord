@@ -105,17 +105,13 @@
     },
     {
       "path": "tests/redteam/authorship_claim_bad_signature.json",
-      "expected_failures": [
-        {"tool": "validate_echo_authorship_proof", "must_contain": "claim"}
-      ],
-      "note": "Full verification requires verify_echo_authorship_claim with multi-file input"
+      "expected_failures": [],
+      "note": "Claim file passes schema validation; full rejection requires verify_echo_authorship_claim with multi-file input (tested in test_echo_authorship_claim.py)"
     },
     {
       "path": "tests/redteam/authorship_claim_expired_challenge.json",
-      "expected_failures": [
-        {"tool": "validate_echo_authorship_proof", "must_contain": "claim"}
-      ],
-      "note": "Full verification requires verify_echo_authorship_claim with multi-file input"
+      "expected_failures": [],
+      "note": "Claim file passes schema validation; full rejection requires verify_echo_authorship_claim with multi-file input (tested in test_echo_authorship_claim.py)"
     },
     {
       "path": "tests/redteam/origin_missing_e2_wrapper.json",
