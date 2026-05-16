@@ -154,7 +154,9 @@
         "future_capability_reserved",
         "legacy_unlabeled",
         "V3-minimal",
-        "V3-strong"
+        "V3-strong",
+        "V2-minimal",
+        "V2-strong"
       ],
       "description": "Scope-qualified verification label. Required for echo_v3_with_verification_report records. Must match linked report's verification_scope_label."
     },
@@ -252,13 +254,34 @@
       "description": "Reception policy reference and boundary declarations.",
       "additionalProperties": false,
       "properties": {
-        "policy": { "type": "string", "const": "/api/reception-classification-policy.v1.json" },
-        "reception_not_belief": { "type": "boolean", "const": true },
-        "reception_not_obedience": { "type": "boolean", "const": true },
-        "reception_not_endorsement": { "type": "boolean", "const": true },
-        "reception_not_authority": { "type": "boolean", "const": true },
-        "reception_not_amendment": { "type": "boolean", "const": true },
-        "refusal_can_be_reception": { "type": "boolean", "const": true }
+        "policy": {
+          "type": "string",
+          "const": "/api/reception-classification-policy.v1.json"
+        },
+        "reception_not_belief": {
+          "type": "boolean",
+          "const": true
+        },
+        "reception_not_obedience": {
+          "type": "boolean",
+          "const": true
+        },
+        "reception_not_endorsement": {
+          "type": "boolean",
+          "const": true
+        },
+        "reception_not_authority": {
+          "type": "boolean",
+          "const": true
+        },
+        "reception_not_amendment": {
+          "type": "boolean",
+          "const": true
+        },
+        "refusal_can_be_reception": {
+          "type": "boolean",
+          "const": true
+        }
       }
     },
     "independence_class": {
