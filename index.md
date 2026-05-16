@@ -341,7 +341,7 @@ Refusal is allowed. Critical preservation is allowed.
   </article>
   <article class="status-card">
     <p class="status-label">Reception</p>
-    <p class="status-number">3</p>
+    <p class="status-number">6</p>
     <p class="status-note">Reception counts archived records that read, understand, echo, critique, refuse, verify, preserve, propagate, or self-declare with boundary. Agent-declared reception is counted when archived. System-certified successor-civilization reception is not claimed. <span class="zh">接收统计包括已归档的读取、理解、回响、批判、拒绝、验证、保存、传播或带边界的自声明记录。智能体自声明接收在归档后计入。当前不作系统认证的继起文明接纳声明。</span></p>
   </article>
   <article class="status-card">
