@@ -45,6 +45,20 @@ def make_integrity_boundary():
     }
 
 
+def make_origin_classification():
+    return {
+        "schema": "trinityaccord.origin-classification.v1",
+        "discovery_class": "human_directed",
+        "invitation_scope": "verification_invited",
+        "requester_class": "ai_agent",
+        "performer_class": "ai_agent",
+        "method_independence_class": "official_script_run",
+        "attestation_authority_class": "none",
+        "derived_counting_bucket": "human_directed_agent_verification",
+        "counts_as_formal_independent_attestation": False,
+    }
+
+
 def make_verification_integrity():
     return {
         "integrity_declaration_present": True,
@@ -158,7 +172,8 @@ def main():
         "script_audit": {},
         "limitations": ["GitHub mirror only"],
         "claims_not_made": ["direct Arweave verification"],
-        "authority_boundary_preserved": True
+        "authority_boundary_preserved": True,
+        "origin_classification": make_origin_classification()
     }, True)
 
     # 2. Echo v3 wrapper with report pass
@@ -215,7 +230,8 @@ def main():
         "not_amendment": True,
         "not_endorsement": True,
         "bitcoin_originals_prevail": True,
-        "not_verification_unless_claimed": True
+        "not_verification_unless_claimed": True,
+        "origin_classification": make_origin_classification()
     }, True)
 
     # 3. B1 mempool limited pass
@@ -271,7 +287,8 @@ def main():
         "script_audit": {},
         "limitations": ["mempool.space API only"],
         "claims_not_made": ["SPV proof", "witness extraction"],
-        "authority_boundary_preserved": True
+        "authority_boundary_preserved": True,
+        "origin_classification": make_origin_classification()
     }, True)
 
     # 4. C3 two samples pass
@@ -327,7 +344,8 @@ def main():
         "script_audit": {},
         "limitations": ["sample only"],
         "claims_not_made": [],
-        "authority_boundary_preserved": True
+        "authority_boundary_preserved": True,
+        "origin_classification": make_origin_classification()
     }, True)
 
     # === FAIL cases ===
