@@ -27,7 +27,8 @@
           "sources": ["https://ordinals.com/inscription/97631551"],
           "inscription_ids_checked": ["97631551"],
           "confirmed": true,
-          "method": "public_ordinals_explorer_lookup"
+          "method": "public_ordinals_explorer_lookup",
+          "authority_boundary_recognized": true
         }
       ],
       "digital_mirror_checks": [],
