@@ -235,9 +235,11 @@ def validate_report_candidate(payload, errors):
         validate_agent_declared_archive(payload, errors)
         return
 
-    # Detect V0-V5 agents using wrong strict path
+    # Detect V0-V5 agents using wrong strict path (but not intake-only)
     level = get_declared_level(payload)
-    if level in V0_V5:
+    requested_kind = payload.get("requested_archive_kind")
+    record_intent = payload.get("record_intent")
+    if level in V0_V5 and requested_kind not in ("none", None) and record_intent != "intake_only":
         errors.append(
             f"WRONG_ARCHIVE_PATH_FOR_V0_V5: You are using the strict evidence archive path. "
             f"For V0-V5, use requested_archive_kind=agent_declared_verification_archive. "

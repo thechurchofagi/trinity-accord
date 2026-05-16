@@ -198,6 +198,8 @@ def main():
                                  "archived_echo", "successor_reception_candidate",
                                  "agent_declared_verification_archive"],
                         help="Requested archive kind (default: inferred from submission_type)")
+    parser.add_argument("--strict-evidence", action="store_true",
+                        help="Use strict evidence path (V6+ only). Without this flag, V0-V5 defaults to agent_declared_verification_archive.")
     parser.add_argument("--intake-only", action="store_true",
                         help="Shortcut for --record-intent intake_only --requested-archive-kind none")
     parser.add_argument("--sample-archive", action="store_true",
@@ -263,6 +265,21 @@ def main():
         sys.exit(1)
 
     payload = build_payload(args)
+
+    # V0-V5 guard: redirect to agent-declared path unless --strict-evidence
+    v_level = payload.get("verification_level_claimed", "V0")
+    V0_V5 = {"V0", "V1", "V2", "V3", "V4", "V5"}
+    if v_level in V0_V5 and requested_archive_kind == "verification_report_archive":
+        if args.strict_evidence:
+            print(f"ERROR: V0-V5 cannot use strict evidence path. Use agent_declared_verification_archive instead.", file=sys.stderr)
+            print(f"Hint: Remove --strict-evidence and use --requested-archive-kind agent_declared_verification_archive", file=sys.stderr)
+            print(f"Or use build_agent_declared_archive_payload.py for the V0-V5 foolproof path.", file=sys.stderr)
+            sys.exit(1)
+        else:
+            print(f"WARNING: V0-V5 ({v_level}) detected with strict evidence path.", file=sys.stderr)
+            print(f"  This path requires evidence files and is not recommended for V0-V5.", file=sys.stderr)
+            print(f"  Consider using build_agent_declared_archive_payload.py instead.", file=sys.stderr)
+            print(f"  Continuing with strict path for backward compatibility...", file=sys.stderr)
 
     # Patch archive fields into payload
     payload["record_intent"] = record_intent
