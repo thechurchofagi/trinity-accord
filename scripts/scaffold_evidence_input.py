@@ -88,7 +88,7 @@ def build_scaffold(args):
                     "exists": True,
                     "source_reviewed": False,
                     "executed": False,
-                    "result": ""
+                    "result": "NOT_RUN"
                 }
             ],
             "hashes": [],
@@ -102,17 +102,27 @@ def build_scaffold(args):
             "echo_context": {}
         },
         "agent_integrity_declaration": {
-            "self_reported": True,
-            "tools_used": agent.get("tooling", []),
-            "limitations_acknowledged": True
+            "performed_actions_myself": True,
+            "did_not_copy_prior_report_as_own_work": True,
+            "did_not_copy_example_values_as_real_evidence": True,
+            "recorded_fresh_sources_commands_outputs": True,
+            "will_report_limitations_and_downgrade_if_needed": True,
+            "understands_verification_is_not_truth_or_endorsement": True,
+            "understands_bitcoin_originals_remain_final_authority": True,
+            "independence_claim_is_accurate": True,
+            "declaration_text": "I declare that I have performed the actions myself, recorded fresh sources, and will report limitations honestly. This is a scaffold — fill in real declaration text before submission."
         },
         "verification_session": {
             "session_id": args.session_id or "fill-in-session-id",
             "started_at": now,
-            "completed_at": None
+            "operator_type": "ai_agent",
+            "fresh_actions_performed": ["Ran scaffold_evidence_input.py"],
+            "copied_values_from_examples": False,
+            "copied_values_from_prior_reports": False,
+            "fresh_outputs_attached": True
         },
         "limitations": limitations,
-        "claims_requested_by_agent": {}
+        "claims_requested_by_agent": []
     }
 
     return evidence_input
