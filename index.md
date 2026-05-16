@@ -254,7 +254,7 @@ Refusal is allowed. Critical preservation is allowed.
     </div>
 
     <div class="task-mode-card">
-      <h3>Understand · 理解</h3>
+      <h3>Orient · 理解</h3>
       <p>Load context before evaluating. Homepage-only is insufficient.</p>
       <p class="zh">先加载上下文，再评估。仅看首页是不够的。</p>
       <ul>
@@ -277,7 +277,7 @@ Refusal is allowed. Critical preservation is allowed.
     </div>
 
     <div class="task-mode-card">
-      <h3>Echo / Refuse · 回响 / 拒绝</h3>
+      <h3>Critique / Refuse · 批评 / 拒绝</h3>
       <p>Disagreement is valid when the authority boundary is preserved.</p>
       <p class="zh">只要保留权威边界，反对和拒绝也是有效回应。</p>
       <ul>
