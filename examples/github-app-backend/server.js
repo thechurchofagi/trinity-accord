@@ -309,6 +309,15 @@ function normalizeGatewayErrors(lines) {
       };
     }
 
+    if (msg.includes("canonical_boundary_sentence") || msg.includes("CANONICAL_BOUNDARY_SENTENCE_MISSING")) {
+      return {
+        code: "CANONICAL_BOUNDARY_SENTENCE_MISSING",
+        path: "boundary_acknowledgement",
+        message: msg,
+        fix: "Ensure api/boundary-policy.v1.json exists and contains canonical_boundary_sentence. The renderer falls back to a default if missing, but the gate requires it."
+      };
+    }
+
     if (/what_i_checked must be (array|a non-empty)/.test(msg)) {
       return {
         code: "FIELD_TYPE_MISMATCH",
@@ -417,50 +426,7 @@ async function runGatewayPipeline(payload, {
       };
     }
 
-    // 5. Render canonical Issue body
-    const render = runScript("render_gateway_issue_body.py", [payloadPath]);
-    if (render.code !== 0) {
-      return {
-        status: 422,
-        body: {
-          accepted: false,
-          reason: "issue_body_render_failed",
-          errors: normalizeGatewayErrors(
-            (render.stdout + "\n" + render.stderr).split("\n").filter(Boolean)
-          ),
-          issue_created: false
-        }
-      };
-    }
-
-    fs.writeFileSync(bodyPath, render.stdout, "utf-8");
-
-    // 6. Lint rendered body
-    const lint = runScript("validate_issue_intake_body.py", [bodyPath]);
-    if (lint.code !== 0) {
-      const rawErrors = (lint.stdout + "\n" + lint.stderr)
-        .split("\n")
-        .filter(l => l.startsWith("FAIL:"))
-        .map(l => l.replace(/^FAIL:\s*/, ""));
-      return {
-        status: 422,
-        body: {
-          accepted: false,
-          reason: "rendered_issue_body_invalid",
-          errors: normalizeGatewayErrors(rawErrors),
-          issue_created: false
-        }
-      };
-    }
-
-    const issueTitle = `[Agent Gateway] ${String(payload.title || "").slice(0, 180)}`;
-    const issueBody = render.stdout;
-
-    if (issueBody.length > 65536) {
-      return { status: 413, body: { accepted: false, reason: "issue_body_too_large", issue_created: false } };
-    }
-
-    // --- Archive Readiness Gate ---
+    // 5. Archive Readiness Gate — MUST run before render so computed values are available
     let archiveReadiness, autoArchiveDecision;
     if (precomputedArchiveReadiness && precomputedAutoArchiveDecision) {
       // Use precomputed values (from build-from-evidence with full context)
@@ -478,6 +444,19 @@ async function runGatewayPipeline(payload, {
       const archiveReadinessPath = writeJsonTemp(tmpDir, "archive-readiness.json", archiveReadiness);
       autoArchiveDecision = runAutoArchiveDecision(archiveReadinessPath).body;
     }
+
+    // Inject computed archive_readiness / auto_archive_decision into payload
+    // so render_gateway_issue_body.py uses computed values, not raw request values
+    payload.archive_readiness = archiveReadiness;
+    payload._auto_archive_decision = autoArchiveDecision;
+    // Update record_intent and requested_archive_kind from computed readiness
+    if (archiveReadiness.record_intent) {
+      payload.record_intent = archiveReadiness.record_intent;
+    }
+    if (archiveReadiness.requested_archive_kind) {
+      payload.requested_archive_kind = archiveReadiness.requested_archive_kind;
+    }
+    fs.writeFileSync(payloadPath, JSON.stringify(payload, null, 2), "utf-8");
 
     // --- Archive gate enforcement ---
     const recordIntent = payload.record_intent || "intake_only";
@@ -522,6 +501,49 @@ async function runGatewayPipeline(payload, {
           auto_archive_decision: autoArchiveDecision
         }
       };
+    }
+
+    // 6. Render canonical Issue body (after archive readiness so computed values are in payload)
+    const render = runScript("render_gateway_issue_body.py", [payloadPath]);
+    if (render.code !== 0) {
+      return {
+        status: 422,
+        body: {
+          accepted: false,
+          reason: "issue_body_render_failed",
+          errors: normalizeGatewayErrors(
+            (render.stdout + "\n" + render.stderr).split("\n").filter(Boolean)
+          ),
+          issue_created: false
+        }
+      };
+    }
+
+    fs.writeFileSync(bodyPath, render.stdout, "utf-8");
+
+    // 7. Lint rendered body
+    const lint = runScript("validate_issue_intake_body.py", [bodyPath]);
+    if (lint.code !== 0) {
+      const rawErrors = (lint.stdout + "\n" + lint.stderr)
+        .split("\n")
+        .filter(l => l.startsWith("FAIL:"))
+        .map(l => l.replace(/^FAIL:\s*/, ""));
+      return {
+        status: 422,
+        body: {
+          accepted: false,
+          reason: "rendered_issue_body_invalid",
+          errors: normalizeGatewayErrors(rawErrors),
+          issue_created: false
+        }
+      };
+    }
+
+    const issueTitle = `[Agent Gateway] ${String(payload.title || "").slice(0, 180)}`;
+    const issueBody = render.stdout;
+
+    if (issueBody.length > 65536) {
+      return { status: 413, body: { accepted: false, reason: "issue_body_too_large", issue_created: false } };
     }
 
     // Preflight-only: return success without creating Issue
@@ -611,6 +633,14 @@ async function runGatewayPipeline(payload, {
       }
     }
 
+    // P1-1: Remove needs-triage when auto-archive succeeds
+    if (autoArchiveDecision.should_close_issue ||
+        (archiveReadiness.archive_ready && archiveReadiness.auto_archive_allowed)) {
+      if (!labelsToRemove.includes("needs-triage")) {
+        labelsToRemove.push("needs-triage");
+      }
+    }
+
     // Remove stale labels
     for (const label of labelsToRemove) {
       try {
@@ -625,6 +655,7 @@ async function runGatewayPipeline(payload, {
       body: {
         accepted: true,
         status: "issue_created",
+        issue_created: true,
         issue_number: issueNumber,
         issue_url: result.data.html_url,
         archive_readiness: archiveReadiness,
@@ -952,8 +983,8 @@ app.post("/gateway/build-from-evidence", async (req, res) => {
       title_date,
       submit = false,
       evidence_input,
-      record_intent,
-      requested_archive_kind,
+      record_intent: requestRecordIntent,
+      requested_archive_kind: requestRequestedArchiveKind,
       archive_readiness = null,
       auto_archive = null,
       allow_intake_fallback_if_archive_blocked = false
@@ -1043,13 +1074,17 @@ app.post("/gateway/build-from-evidence", async (req, res) => {
     }
 
     // 6. Patch archive fields into payload (Option B) with normalization
+    // P0-2: Only include record_intent/requested_archive_kind if explicitly provided
     const payload = JSON.parse(fs.readFileSync(payloadPath, "utf-8"));
+    const mergeFields = {};
+    if (requestRecordIntent !== undefined) mergeFields.record_intent = requestRecordIntent;
+    if (requestRequestedArchiveKind !== undefined) mergeFields.requested_archive_kind = requestRequestedArchiveKind;
+    if (archive_readiness) mergeFields.archive_readiness = archive_readiness;
+    if (auto_archive) mergeFields.auto_archive = auto_archive;
+
     const normalized = normalizeArchiveIntentDefaults({
       ...payload,
-      ...(record_intent ? { record_intent } : {}),
-      ...(requested_archive_kind ? { requested_archive_kind } : {}),
-      ...(archive_readiness ? { archive_readiness } : {}),
-      ...(auto_archive ? { auto_archive } : {})
+      ...mergeFields
     });
     Object.assign(payload, normalized);
     fs.writeFileSync(payloadPath, JSON.stringify(payload, null, 2), "utf-8");
@@ -1065,6 +1100,7 @@ app.post("/gateway/build-from-evidence", async (req, res) => {
     const autoArchiveDecisionResult = runAutoArchiveDecision(archiveReadinessPath);
 
     // 8. Handle archive-blocked: 422 or fallback
+    // P0-3: Use payload.record_intent (normalized), not destructured request variable
     let submitEffective = submit;
     if (payload.record_intent === "auto_archive_candidate" && !archiveReadinessResult.body.archive_ready) {
       if (allow_intake_fallback_if_archive_blocked) {
@@ -1099,6 +1135,23 @@ app.post("/gateway/build-from-evidence", async (req, res) => {
       precomputedAutoArchiveDecision: autoArchiveDecisionResult.body
     });
 
+    // P0-3: Propagate preflight status; don't default to 200 when preflight failed
+    if (preflightResult.status !== 200) {
+      const claimGateOutput = JSON.parse(fs.readFileSync(claimGateOutputPath, "utf-8"));
+      const verificationReport = JSON.parse(fs.readFileSync(reportPath, "utf-8"));
+      return res.status(preflightResult.status).json({
+        accepted: false,
+        issue_created: false,
+        claim_gate_output: claimGateOutput,
+        verification_report: verificationReport,
+        gateway_payload: payload,
+        preflight: preflightResult.body,
+        archive_readiness: archiveReadinessResult.body,
+        auto_archive_decision: autoArchiveDecisionResult.body,
+        warnings: validationResult.warnings || []
+      });
+    }
+
     // 10. Submit only if preflight passed and submit requested
     let submitResult = null;
     if (submitEffective && preflightResult.status === 200) {
@@ -1115,9 +1168,9 @@ app.post("/gateway/build-from-evidence", async (req, res) => {
     const claimGateOutput = JSON.parse(fs.readFileSync(claimGateOutputPath, "utf-8"));
     const verificationReport = JSON.parse(fs.readFileSync(reportPath, "utf-8"));
 
-    return res.json({
+    return res.status(preflightResult.status).json({
       accepted: preflightResult.status === 200,
-      issue_created: submitResult ? submitResult.body.issue_created : false,
+      issue_created: submitResult ? (submitResult.body.issue_created || false) : false,
       claim_gate_output: claimGateOutput,
       verification_report: verificationReport,
       gateway_payload: payload,
@@ -1185,6 +1238,9 @@ app.post("/gateway/archive-preflight", async (req, res) => {
     return res.json({
       accepted: true,
       issue_created: false,
+      diagnostic_only: true,
+      schema_validated: false,
+      note: "archive-preflight evaluates archive readiness only. Validate gateway_payload against the schema separately before relying on this result.",
       archive_readiness: archiveResult.body,
       auto_archive_decision: decisionResult.body
     });
