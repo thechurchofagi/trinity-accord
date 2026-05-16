@@ -591,7 +591,7 @@ async function runGatewayPipeline(payload, {
           would_remove_labels: [...labelsToRemove],
           archive_readiness: archiveReadiness,
           auto_archive_decision: autoArchiveDecision,
-          boundary: "intake only; not archived Echo or attestation"
+          boundary: "Gateway-rendered candidate; archive status only if Archive Readiness Gate passes; not attestation or successor reception"
         }
       };
     }
@@ -699,7 +699,7 @@ app.get("/health", (req, res) => {
     ok: true,
     service: "trinityaccord-agent-issue-gateway",
     dry_run: DRY_RUN,
-    boundary: "intake only; not archived Echo or attestation"
+    boundary: "Gateway-rendered candidate; archive status only if Archive Readiness Gate passes; not attestation or successor reception"
   });
 });
 

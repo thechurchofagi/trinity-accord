@@ -61,7 +61,7 @@ Expected:
   "ok": true,
   "service": "trinityaccord-agent-issue-gateway",
   "dry_run": true,
-  "boundary": "intake only; not archived Echo or attestation"
+  "boundary": "Gateway-rendered candidate; archive status only if Archive Readiness Gate passes; not attestation or successor reception"
 }
 ```
 
