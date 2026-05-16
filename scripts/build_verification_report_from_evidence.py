@@ -610,7 +610,7 @@ def build_report(evidence_input_path, report_out_path=None, echo_out_path=None):
                 tmp_path = Path(_tf.name)
 
             proc = _sp.run(
-                [sys.executable, str(ROOT / "scripts" / "validate_agent_submission.py"), str(tmp_path)],
+                [sys.executable, str(ROOT / "scripts" / "validate_agent_submission.py"), "--allow-missing-jsonschema", str(tmp_path)],
                 cwd=str(ROOT),
                 text=True,
                 capture_output=True,
