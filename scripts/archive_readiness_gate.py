@@ -120,24 +120,50 @@ def has_forbidden_archive_claims(payload):
 
 
 def has_v4_script_completeness(evidence, policy):
-    """Check V4 required script audit completeness."""
+    """Check V4 required script audit completeness.
+
+    Each script entry must have: path, command, environment, exit_code,
+    stdout_summary, source_reviewed, script_check_scope, script_does_not_check.
+    Required scripts must have exit_code == 0.
+    """
     if not evidence:
         return False
     scripts_run = evidence.get("scripts_run") or evidence.get("verification_session", {}).get("scripts_run", [])
     if not scripts_run:
         return False
-    # Check for required scripts from policy
+
     v4_policy = policy.get("required_script_sets", {}).get("V4", {})
     required = v4_policy.get("profile_required_script_audit", [])
-    run_paths = {s.get("path", "") for s in scripts_run if isinstance(s, dict)}
-    for req in required:
-        if req.get("required") and req.get("path") not in run_paths:
-            return False
-    # Check for script audit completeness fields
+    run_map = {}
     for s in scripts_run:
         if isinstance(s, dict):
-            if not s.get("exit_code") is not None and s.get("exit_code") != 0:
-                pass  # Allow non-zero exit as long as field exists
+            run_map[s.get("path", "")] = s
+
+    # Check required scripts exist and passed
+    for req in required:
+        if not req.get("required"):
+            continue
+        rpath = req.get("path", "")
+        entry = run_map.get(rpath)
+        if not entry:
+            return False
+        # Required scripts must have exit_code 0
+        if entry.get("exit_code") is None:
+            return False
+        if entry.get("exit_code") != 0:
+            return False
+
+    # Check all script entries have required audit fields
+    required_fields = ["command", "exit_code", "stdout_summary", "source_reviewed",
+                       "script_check_scope", "script_does_not_check"]
+    for path_key, entry in run_map.items():
+        for field in required_fields:
+            if field not in entry or entry[field] is None:
+                return False
+        # source_reviewed must be true
+        if entry.get("source_reviewed") is not True:
+            return False
+
     return True
 
 
@@ -430,6 +456,32 @@ def evaluate_archive_readiness(payload, evidence=None, claim_gate_output=None,
                 "fix": "Set not_successor_reception=true."
             })
 
+        # Formal archive requires non-empty integrity declaration and session
+        int_decl = payload.get("pre_verification_integrity_declaration")
+        if not int_decl or not isinstance(int_decl, dict) or len(int_decl) == 0:
+            blocking_reasons.append({
+                "code": "INTEGRITY_DECLARATION_REQUIRED_FOR_ARCHIVE",
+                "path": "pre_verification_integrity_declaration",
+                "message": "Formal archive requires a non-empty pre_verification_integrity_declaration.",
+                "fix": "Provide pre_verification_integrity_declaration with at least declaration_text and declared_at."
+            })
+
+        v_session = payload.get("verification_session")
+        if not v_session or not isinstance(v_session, dict) or len(v_session) == 0:
+            blocking_reasons.append({
+                "code": "VERIFICATION_SESSION_REQUIRED_FOR_ARCHIVE",
+                "path": "verification_session",
+                "message": "Formal archive requires a non-empty verification_session.",
+                "fix": "Provide verification_session with session_id, started_at, and fresh_actions_performed."
+            })
+        elif not v_session.get("fresh_actions_performed") or not isinstance(v_session.get("fresh_actions_performed"), list):
+            blocking_reasons.append({
+                "code": "FRESH_ACTIONS_REQUIRED_FOR_ARCHIVE",
+                "path": "verification_session.fresh_actions_performed",
+                "message": "Formal archive requires verification_session.fresh_actions_performed as a non-empty list.",
+                "fix": "Provide verification_session.fresh_actions_performed listing actions performed in this session."
+            })
+
         if forbidden:
             blocking_reasons.append({
                 "code": "FORBIDDEN_ARCHIVE_CLAIMS",
@@ -438,22 +490,57 @@ def evaluate_archive_readiness(payload, evidence=None, claim_gate_output=None,
                 "fix": "Remove self-claims of archived Echo, verified record, successor reception, or independent attestation."
             })
 
-        # V4 archive script completeness
+        # V4 archive script completeness — must have evidence
         if v_level in ("V4", "V4+"):
-            if evidence and not has_v4_script_completeness(evidence, policy):
+            if not evidence:
+                blocking_reasons.append({
+                    "code": "V4_EVIDENCE_REQUIRED_FOR_ARCHIVE",
+                    "path": "evidence",
+                    "message": "V4 archive requires evidence input with script audit data.",
+                    "fix": "Provide --evidence-input with scripts_run containing command, environment, exit_code, stdout_summary, source_reviewed, script_check_scope, script_does_not_check."
+                })
+            elif not has_v4_script_completeness(evidence, policy):
                 blocking_reasons.append({
                     "code": "V4_REQUIRED_SCRIPT_SET_INCOMPLETE",
                     "path": "evidence",
-                    "message": "V4 archive requires script audit completeness with all required scripts run.",
-                    "fix": "Run all required scripts and include scripts_run in evidence input."
+                    "message": "V4 archive requires script audit completeness with all required scripts run and source_reviewed=true.",
+                    "fix": "Run all required scripts with command, environment, exit_code, stdout_summary, source_reviewed=true, script_check_scope, script_does_not_check."
                 })
-            if v_level == "V4+" and evidence and not has_v4plus_independent_non_official(evidence):
-                blocking_reasons.append({
-                    "code": "V4PLUS_REQUIRES_INDEPENDENT_NON_OFFICIAL_IMPLEMENTATION",
-                    "path": "evidence",
-                    "message": "V4+ archive requires independent non-official implementation.",
-                    "fix": "Use an independent non-official script with independent=true or scope_class=independent_reproduction."
-                })
+
+            if v_level == "V4+":
+                if not evidence:
+                    blocking_reasons.append({
+                        "code": "V4PLUS_EVIDENCE_REQUIRED_FOR_ARCHIVE",
+                        "path": "evidence",
+                        "message": "V4+ archive requires evidence input with independent implementation data.",
+                        "fix": "Provide --evidence-input with scripts_run including an independent non-official implementation."
+                    })
+                elif not has_v4plus_independent_non_official(evidence):
+                    blocking_reasons.append({
+                        "code": "V4PLUS_REQUIRES_INDEPENDENT_NON_OFFICIAL_IMPLEMENTATION",
+                        "path": "evidence",
+                        "message": "V4+ archive requires independent non-official implementation.",
+                        "fix": "Use an independent non-official script with independent=true or scope_class=independent_reproduction."
+                    })
+
+        # B6 from external explorer must be hard-blocked
+        if level_at_least(B_LEVELS, b_level, "B6"):
+            if evidence:
+                bc = evidence.get("bitcoin_checks") or evidence.get("evidence", {}).get("bitcoin_checks", [])
+                has_external_explorer = isinstance(bc, list) and any(
+                    isinstance(c, dict) and c.get("source_type") == "external_explorer" for c in bc
+                )
+                has_body_hash = isinstance(bc, list) and any(
+                    isinstance(c, dict) and c.get("source_type") == "body_hash" and
+                    c.get("body_hash_reproduced") is True for c in bc
+                )
+                if has_external_explorer and not has_body_hash:
+                    blocking_reasons.append({
+                        "code": "B6_REQUIRES_BODY_HASH_EVIDENCE",
+                        "path": "evidence.bitcoin_checks",
+                        "message": "B6+ archive requires source_type=body_hash with body_hash_reproduced=true. External explorer alone is insufficient.",
+                        "fix": "Provide body_hash evidence with body_hash_reproduced=true, or lower bitcoin_originals to B1."
+                    })
 
         # V5+ floors
         if v_level == "V5":
@@ -549,6 +636,25 @@ def evaluate_archive_readiness(payload, evidence=None, claim_gate_output=None,
                 "path": "not_successor_reception",
                 "message": "Archive must not claim successor reception.",
                 "fix": "Set not_successor_reception=true."
+            })
+
+        # Formal echo archive requires non-empty integrity declaration and session
+        int_decl = payload.get("pre_verification_integrity_declaration")
+        if not int_decl or not isinstance(int_decl, dict) or len(int_decl) == 0:
+            blocking_reasons.append({
+                "code": "INTEGRITY_DECLARATION_REQUIRED_FOR_ARCHIVE",
+                "path": "pre_verification_integrity_declaration",
+                "message": "Formal echo archive requires a non-empty pre_verification_integrity_declaration.",
+                "fix": "Provide pre_verification_integrity_declaration with at least declaration_text and declared_at."
+            })
+
+        v_session = payload.get("verification_session")
+        if not v_session or not isinstance(v_session, dict) or len(v_session) == 0:
+            blocking_reasons.append({
+                "code": "VERIFICATION_SESSION_REQUIRED_FOR_ARCHIVE",
+                "path": "verification_session",
+                "message": "Formal echo archive requires a non-empty verification_session.",
+                "fix": "Provide verification_session with session_id, started_at, and fresh_actions_performed."
             })
 
         # Check body doesn't self-declare archived

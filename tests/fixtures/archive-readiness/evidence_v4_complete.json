@@ -1,0 +1,46 @@
+{
+  "schema": "trinityaccord.evidence-input.v1",
+  "agent_integrity_declaration": {
+    "declaration_text": "I declare this verification is performed fresh.",
+    "declared_at": "2026-05-16T00:00:00Z"
+  },
+  "verification_session": {
+    "session_id": "test-v4-session",
+    "started_at": "2026-05-16T00:00:00Z",
+    "fresh_actions_performed": ["claim_gate", "build_verification_report"],
+    "fresh_outputs_attached": true
+  },
+  "evidence": {
+    "bitcoin_checks": [
+      {
+        "source_type": "external_explorer",
+        "txid": "abc123",
+        "block_height": 800000,
+        "valid_hash": true
+      }
+    ]
+  },
+  "scripts_run": [
+    {
+      "path": "downloads/verify.py",
+      "command": "python3 downloads/verify.py",
+      "environment": "python3.12",
+      "exit_code": 0,
+      "stdout_summary": "Verification passed",
+      "source_reviewed": true,
+      "script_check_scope": "full verification",
+      "script_does_not_check": "physical evidence"
+    },
+    {
+      "path": "scripts/check_consistency.py",
+      "command": "python3 scripts/check_consistency.py",
+      "environment": "python3.12",
+      "exit_code": 0,
+      "stdout_summary": "Consistency check passed",
+      "source_reviewed": true,
+      "script_check_scope": "data consistency",
+      "script_does_not_check": "external verification"
+    }
+  ],
+  "claims_requested_by_agent": ["V4", "B1", "D2"]
+}

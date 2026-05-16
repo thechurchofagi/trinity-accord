@@ -1,0 +1,25 @@
+{
+  "schema": "trinityaccord.evidence-input.v1",
+  "agent_integrity_declaration": {
+    "declaration_text": "I declare this verification is performed fresh.",
+    "declared_at": "2026-05-16T00:00:00Z"
+  },
+  "verification_session": {
+    "session_id": "test-b6-session",
+    "started_at": "2026-05-16T00:00:00Z",
+    "fresh_actions_performed": ["claim_gate"],
+    "fresh_outputs_attached": true
+  },
+  "evidence": {
+    "bitcoin_checks": [
+      {
+        "source_type": "external_explorer",
+        "txid": "abc123",
+        "block_height": 800000,
+        "valid_hash": true
+      }
+    ]
+  },
+  "scripts_run": [],
+  "claims_requested_by_agent": ["V4", "B6"]
+}

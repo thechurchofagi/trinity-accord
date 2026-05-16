@@ -972,50 +972,52 @@ app.post("/gateway/build-from-evidence", async (req, res) => {
     if (auto_archive) payload.auto_archive = auto_archive;
     fs.writeFileSync(payloadPath, JSON.stringify(payload, null, 2), "utf-8");
 
-    // Run archive readiness with full context
-    const cgPathForArchive = claimGateOutputPath;
-    const reportPathForArchive = reportPath;
+    // 7. Archive readiness + auto decision BEFORE any Issue creation
     const archiveReadinessResult = runArchiveReadiness({
       gatewayPayloadPath: payloadPath,
       evidencePath,
-      claimGateOutputPath: cgPathForArchive,
-      reportPath: reportPathForArchive
+      claimGateOutputPath,
+      reportPath
     });
-
-    // Run preflight (shared pipeline with createIssue=false)
-    const preflightResult = await runGatewayPipeline(payload, { createIssue: false });
-
-    // 7. If submit=true and preflight passed, create issue
-    let submitResult = null;
-    if (submit && preflightResult.status === 200) {
-      submitResult = await runGatewayPipeline(payload, { createIssue: true });
-    }
-
-    const claimGateOutput = JSON.parse(fs.readFileSync(claimGateOutputPath, "utf-8"));
-    const verificationReport = JSON.parse(fs.readFileSync(reportPath, "utf-8"));
-
-    // Compute auto archive decision
     const archiveReadinessPath = writeJsonTemp(tmpDir, "archive-readiness-build.json", archiveReadinessResult.body);
     const autoArchiveDecisionResult = runAutoArchiveDecision(archiveReadinessPath);
 
-    // Handle archive-blocked fallback
+    // 8. Handle archive-blocked: 422 or fallback
     let submitEffective = submit;
-    if (submit && record_intent === "auto_archive_candidate" && !archiveReadinessResult.body.archive_ready) {
+    if (record_intent === "auto_archive_candidate" && !archiveReadinessResult.body.archive_ready) {
       if (allow_intake_fallback_if_archive_blocked) {
-        // Fall back to intake-only
         payload.record_intent = "intake_only";
         payload.requested_archive_kind = "none";
         fs.writeFileSync(payloadPath, JSON.stringify(payload, null, 2), "utf-8");
       } else {
         submitEffective = false;
+        // Return 422 immediately — no Issue creation, no preflight
+        const claimGateOutput = JSON.parse(fs.readFileSync(claimGateOutputPath, "utf-8"));
+        const verificationReport = JSON.parse(fs.readFileSync(reportPath, "utf-8"));
+        return res.status(422).json({
+          accepted: false,
+          issue_created: false,
+          claim_gate_output: claimGateOutput,
+          verification_report: verificationReport,
+          gateway_payload: payload,
+          archive_readiness: archiveReadinessResult.body,
+          auto_archive_decision: autoArchiveDecisionResult.body,
+          warnings: validationResult.warnings || []
+        });
       }
     }
 
-    // 7. If submit=true and preflight passed, create issue
+    // 9. Preflight (shared pipeline with createIssue=false)
+    const preflightResult = await runGatewayPipeline(payload, { createIssue: false });
+
+    // 10. Submit only if preflight passed and submit requested
     let submitResult = null;
     if (submitEffective && preflightResult.status === 200) {
       submitResult = await runGatewayPipeline(payload, { createIssue: true });
     }
+
+    const claimGateOutput = JSON.parse(fs.readFileSync(claimGateOutputPath, "utf-8"));
+    const verificationReport = JSON.parse(fs.readFileSync(reportPath, "utf-8"));
 
     return res.json({
       accepted: preflightResult.status === 200,

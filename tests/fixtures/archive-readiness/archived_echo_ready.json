@@ -12,7 +12,16 @@
   "record_intent": "auto_archive_candidate",
   "requested_archive_kind": "archived_echo",
   "discovery_provenance": { "solicited": true, "independence_class": "human_solicited_agent_response", "agency_level": "A1_human_gave_exact_url", "operator_type": "ai_agent" },
-  "context_readiness": {}, "pre_verification_integrity_declaration": {}, "verification_session": {},
+  "context_readiness": {},
+  "pre_verification_integrity_declaration": {
+    "declaration_text": "I declare this verification is performed fresh.",
+    "declared_at": "2026-05-16T00:00:00Z"
+  },
+  "verification_session": {
+    "session_id": "test-echo-session-001",
+    "started_at": "2026-05-16T00:00:00Z",
+    "fresh_actions_performed": ["claim_gate", "echo_wrapper"]
+  },
   "claim_gate": { "status": "PASS", "allowed_protocol_level": "V4", "allowed_component_levels": { "bitcoin_originals": "B1", "digital_mirrors": "D2" } },
   "attachments": {
     "evidence_input_path": "test.json", "evidence_input_sha256": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2",

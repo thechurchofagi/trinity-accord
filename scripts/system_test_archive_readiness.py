@@ -16,12 +16,18 @@ PASS_COUNT = 0
 FAIL_COUNT = 0
 
 
-def run_gate(fixture_name):
+def run_gate(fixture_name, evidence_name=None, cg_name=None, report_name=None):
     """Run archive_readiness_gate.py on a fixture and return (exit_code, output)."""
     fixture_path = FIXTURES / fixture_name
+    args = [sys.executable, str(GATE), "--gateway-payload", str(fixture_path), "--json"]
+    if evidence_name:
+        args.extend(["--evidence-input", str(FIXTURES / evidence_name)])
+    if cg_name:
+        args.extend(["--claim-gate-output", str(FIXTURES / cg_name)])
+    if report_name:
+        args.extend(["--verification-report", str(FIXTURES / report_name)])
     result = subprocess.run(
-        [sys.executable, str(GATE), "--gateway-payload", str(fixture_path), "--json"],
-        capture_output=True, text=True, timeout=30, cwd=str(ROOT)
+        args, capture_output=True, text=True, timeout=30, cwd=str(ROOT)
     )
     try:
         output = json.loads(result.stdout)
@@ -95,7 +101,8 @@ def test_external_sample_ready():
 
 def test_verification_report_ready():
     print("Test 4: verification_report_archive B1-D2 ready")
-    code, out = run_gate("verification_report_archive_b1_d2_ready.json")
+    code, out = run_gate("verification_report_archive_b1_d2_ready.json",
+                         evidence_name="evidence_v4_complete.json")
     assert_eq(code, 0, "exit code")
     assert_eq(out.get("archive_ready"), True, "archive_ready")
     assert_eq(out.get("auto_archive_action"), "auto_archive_verification_report", "auto_archive_action")
@@ -158,23 +165,41 @@ def test_successor_reception():
 def test_v4_missing_scripts():
     print("Test 11: V4 archive missing required scripts")
     code, out = run_gate("v4_archive_missing_required_scripts.json")
-    # This may pass or fail depending on whether the evidence has scripts_run
-    # The key is that it should block if scripts are missing
-    assert_eq(out.get("requested_archive_kind"), "verification_report_archive", "archive_kind")
+    assert_eq(code, 1, "exit code")
+    assert_eq(out.get("archive_ready"), False, "archive_ready")
+    blocking_codes = [br.get("code") for br in out.get("blocking_reasons", [])]
+    assert_true(
+        "V4_REQUIRED_SCRIPT_SET_INCOMPLETE" in blocking_codes or
+        "V4_EVIDENCE_REQUIRED_FOR_ARCHIVE" in blocking_codes,
+        "blocking reason (V4_REQUIRED_SCRIPT_SET_INCOMPLETE or V4_EVIDENCE_REQUIRED_FOR_ARCHIVE)"
+    )
 
 
 def test_v4plus_official_only():
     print("Test 12: V4+ official-only blocked")
     code, out = run_gate("v4plus_official_only_blocked.json")
-    # V4+ should block if no independent implementation
-    assert_eq(out.get("requested_archive_kind"), "verification_report_archive", "archive_kind")
+    assert_eq(code, 1, "exit code")
+    assert_eq(out.get("archive_ready"), False, "archive_ready")
+    blocking_codes = [br.get("code") for br in out.get("blocking_reasons", [])]
+    assert_true(
+        "V4PLUS_REQUIRES_INDEPENDENT_NON_OFFICIAL_IMPLEMENTATION" in blocking_codes or
+        "V4PLUS_EVIDENCE_REQUIRED_FOR_ARCHIVE" in blocking_codes,
+        "blocking reason (V4PLUS_REQUIRES_INDEPENDENT_NON_OFFICIAL_IMPLEMENTATION or V4PLUS_EVIDENCE_REQUIRED_FOR_ARCHIVE)"
+    )
 
 
 def test_b6_explorer():
     print("Test 13: B6 from external_explorer blocked")
-    code, out = run_gate("external_explorer_b6_archive_blocked.json")
-    # B6 from explorer should be blocked at archive level
-    assert_eq(out.get("requested_archive_kind"), "verification_report_archive", "archive_kind")
+    code, out = run_gate("external_explorer_b6_archive_blocked.json",
+                         evidence_name="evidence_b6_explorer.json")
+    assert_eq(code, 1, "exit code")
+    assert_eq(out.get("archive_ready"), False, "archive_ready")
+    blocking_codes = [br.get("code") for br in out.get("blocking_reasons", [])]
+    assert_true(
+        "B6_REQUIRES_BODY_HASH_EVIDENCE" in blocking_codes or
+        "BITCOIN_LEVEL_BELOW_ARCHIVE_FLOOR" in blocking_codes,
+        "blocking reason (B6_REQUIRES_BODY_HASH_EVIDENCE or BITCOIN_LEVEL_BELOW_ARCHIVE_FLOOR)"
+    )
 
 
 def test_decision_no_human_review():
@@ -207,7 +232,9 @@ def test_decision_labels():
     print("Test 15: auto_archive_decision labels correct")
     gate_result = subprocess.run(
         [sys.executable, str(GATE), "--gateway-payload",
-         str(FIXTURES / "verification_report_archive_b1_d2_ready.json"), "--json"],
+         str(FIXTURES / "verification_report_archive_b1_d2_ready.json"),
+         "--evidence-input", str(FIXTURES / "evidence_v4_complete.json"),
+         "--json"],
         capture_output=True, text=True, timeout=30, cwd=str(ROOT)
     )
     readiness = json.loads(gate_result.stdout)

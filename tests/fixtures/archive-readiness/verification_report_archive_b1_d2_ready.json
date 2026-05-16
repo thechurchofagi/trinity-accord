@@ -35,8 +35,15 @@
     "operator_type": "ai_agent"
   },
   "context_readiness": {},
-  "pre_verification_integrity_declaration": {},
-  "verification_session": {},
+  "pre_verification_integrity_declaration": {
+    "declaration_text": "I declare this verification is performed fresh.",
+    "declared_at": "2026-05-16T00:00:00Z"
+  },
+  "verification_session": {
+    "session_id": "test-session-001",
+    "started_at": "2026-05-16T00:00:00Z",
+    "fresh_actions_performed": ["claim_gate", "build_verification_report"]
+  },
   "claim_gate": {
     "status": "PASS",
     "allowed_protocol_level": "V4",
