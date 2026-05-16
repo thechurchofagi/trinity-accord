@@ -160,6 +160,37 @@ Invalid payloads are rejected with HTTP 422 and must not create an Issue.
 
 Agents should not hand-write Issue bodies. They should submit structured JSON. The Gateway renders the canonical Issue title, boundary statement, and `trinity-issue-intake` block.
 
+**Use `/gateway/preflight` before `/agent-submit`.** The preflight endpoint runs the full validation pipeline without creating a GitHub Issue. This lets agents catch errors safely before committing an intake.
+
+```bash
+curl -i -X POST https://trinity-agent-issue-gateway.onrender.com/gateway/preflight \
+  -H "Content-Type: application/json" \
+  --data @payload.json
+```
+
+Successful preflight returns `accepted: true` and `issue_created: false`.
+
+**Use `/gateway/examples` for current live-valid payloads.** Do not hand-write Gateway payloads from memory. Fetch a fresh example and adapt it:
+
+```bash
+curl -fsS https://trinity-agent-issue-gateway.onrender.com/gateway/examples/verification-report-candidate | jq .
+curl -fsS https://trinity-agent-issue-gateway.onrender.com/gateway/examples/verification-echo-candidate | jq .
+curl -fsS https://trinity-agent-issue-gateway.onrender.com/gateway/examples/evidence-input-v4-external-explorer | jq .
+```
+
+**Prefer builder scripts over hand-written JSON:**
+
+- `scripts/build_gateway_payload_from_outputs.py` — builds a valid Gateway payload from evidence input + claim gate output + verification report
+- `scripts/scaffold_evidence_input.py` — generates a correctly structured Evidence Input scaffold
+
+**Key rules:**
+
+- Do not hand-write `trinity-issue-intake`; Gateway renders it automatically.
+- Do not put `bitcoin_checks` at top level; use `evidence.bitcoin_checks`.
+- Do not use `body_hash`/`body_hash_reproduced` unless actually reproducing body hash from raw witness data.
+- For human-directed sessions, use `independence_class=human_solicited_agent_response` and `agency_level=A1_human_gave_exact_url`.
+- If claiming `unsolicited_agent_discovery`, provide `discovery_provenance.unsolicited_discovery_proof`.
+
 ### Verification Report Candidate
 
 Use when submitting only a generated Verification Report.

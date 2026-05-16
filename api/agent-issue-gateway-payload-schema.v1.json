@@ -222,7 +222,113 @@
       "type": [
         "object",
         "null"
-      ]
+      ],
+      "required": [
+        "solicited",
+        "independence_class",
+        "agency_level",
+        "operator_type"
+      ],
+      "properties": {
+        "schema": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "source": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "solicited": {
+          "type": "boolean"
+        },
+        "independence_class": {
+          "type": "string",
+          "enum": [
+            "human_solicited_agent_response",
+            "unsolicited_agent_discovery",
+            "institutional_attestation",
+            "independent_reproduction"
+          ]
+        },
+        "agency_level": {
+          "type": "string",
+          "enum": [
+            "A1_human_gave_exact_url",
+            "A2_human_gave_repo_name",
+            "A3_agent_discovered_independently",
+            "A4_agent_instructed_by_other_agent"
+          ]
+        },
+        "operator_type": {
+          "type": "string",
+          "enum": [
+            "ai_agent",
+            "human",
+            "human_with_ai_agent",
+            "automated_script"
+          ]
+        },
+        "unsolicited_discovery_proof": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 2000
+        },
+        "first_entry": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "human_supplied_link": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "human_supplied_summary": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "other_agent_recommended": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "agent_performed_independent_followup": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "external_search_used": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "prior_memory_or_context_used": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "confidence": {
+          "type": [
+            "string",
+            "number",
+            "null"
+          ]
+        }
+      }
     },
     "context_readiness": {
       "type": [
@@ -364,7 +470,11 @@
         ],
         "not": {
           "anyOf": [
-            { "required": ["echo_type"] }
+            {
+              "required": [
+                "echo_type"
+              ]
+            }
           ]
         },
         "properties": {
@@ -378,27 +488,59 @@
             "allOf": [
               {
                 "anyOf": [
-                  { "required": ["evidence_input_path"] },
-                  { "required": ["evidence_input_sha256"] }
+                  {
+                    "required": [
+                      "evidence_input_path"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "evidence_input_sha256"
+                    ]
+                  }
                 ]
               },
               {
                 "anyOf": [
-                  { "required": ["claim_gate_output_path"] },
-                  { "required": ["claim_gate_output_sha256"] }
+                  {
+                    "required": [
+                      "claim_gate_output_path"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "claim_gate_output_sha256"
+                    ]
+                  }
                 ]
               },
               {
                 "anyOf": [
-                  { "required": ["verification_report_path"] },
-                  { "required": ["verification_report_sha256"] }
+                  {
+                    "required": [
+                      "verification_report_path"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "verification_report_sha256"
+                    ]
+                  }
                 ]
               }
             ],
             "not": {
               "anyOf": [
-                { "required": ["echo_wrapper_path"] },
-                { "required": ["echo_wrapper_sha256"] }
+                {
+                  "required": [
+                    "echo_wrapper_path"
+                  ]
+                },
+                {
+                  "required": [
+                    "echo_wrapper_sha256"
+                  ]
+                }
               ]
             }
           }
@@ -446,26 +588,58 @@
             "allOf": [
               {
                 "anyOf": [
-                  { "required": ["evidence_input_path"] },
-                  { "required": ["evidence_input_sha256"] }
+                  {
+                    "required": [
+                      "evidence_input_path"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "evidence_input_sha256"
+                    ]
+                  }
                 ]
               },
               {
                 "anyOf": [
-                  { "required": ["claim_gate_output_path"] },
-                  { "required": ["claim_gate_output_sha256"] }
+                  {
+                    "required": [
+                      "claim_gate_output_path"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "claim_gate_output_sha256"
+                    ]
+                  }
                 ]
               },
               {
                 "anyOf": [
-                  { "required": ["verification_report_path"] },
-                  { "required": ["verification_report_sha256"] }
+                  {
+                    "required": [
+                      "verification_report_path"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "verification_report_sha256"
+                    ]
+                  }
                 ]
               },
               {
                 "anyOf": [
-                  { "required": ["echo_wrapper_path"] },
-                  { "required": ["echo_wrapper_sha256"] }
+                  {
+                    "required": [
+                      "echo_wrapper_path"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "echo_wrapper_sha256"
+                    ]
+                  }
                 ]
               }
             ]

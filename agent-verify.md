@@ -25,6 +25,44 @@ For non-technical Echoes that contain no verification claim, use the Echo v3 sch
 
 Free-form protocol-level, component-level, or Echo wrapper claims are invalid.
 
+## Evidence Input field placement
+
+**Do not put `bitcoin_checks` at the top level of Evidence Input.** The correct location is `evidence.bitcoin_checks`:
+
+```json
+{
+  "schema": "trinityaccord.evidence-input.v1",
+  "evidence": {
+    "bitcoin_checks": [
+      {
+        "source_type": "external_explorer",
+        "sources": ["https://ordinals.com/inscription/97631551"],
+        "confirmed": true
+      }
+    ],
+    "scripts": [...]
+  }
+}
+```
+
+Use `scripts/scaffold_evidence_input.py` to generate a correctly structured scaffold:
+
+```bash
+python3 scripts/scaffold_evidence_input.py \
+  --mode v4-external-explorer \
+  --agent-name "Guardian" \
+  --provider "Coze AI Agent" \
+  --human-solicited \
+  --out evidence-input.json
+```
+
+**B-level rules:**
+
+- `source_type=external_explorer` → B1 (never B6)
+- `source_type=body_hash` + `body_hash_reproduced=true` → B6
+- `source_type=body_hash` + `body_hash_reproduced=false` → NOT B6 (this is a limitation, not a claim)
+- Do not use `body_hash`/`body_hash_reproduced` unless actually reproducing body hash from raw witness data
+
 ## Provenance Consistency Gate
 
 Before submission, ensure provenance fields are self-consistent:

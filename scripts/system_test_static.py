@@ -146,6 +146,31 @@ def main():
     forbid("tests/fixtures/gateway/valid_verification_report_candidate.json", r"echo_wrapper_path")
     forbid("tests/fixtures/gateway/valid_verification_report_candidate.json", r"echo_type")
 
+    # Task #3: /gateway/preflight endpoint
+    require("examples/github-app-backend/server.js", "/gateway/preflight")
+    require("examples/github-app-backend/server.js", "runGatewayPipeline")
+
+    # Task #4: /gateway/examples endpoints
+    require("examples/github-app-backend/server.js", "/gateway/examples/verification-report-candidate")
+    require("examples/github-app-backend/server.js", "/gateway/examples/verification-echo-candidate")
+    require("examples/github-app-backend/server.js", "/gateway/examples/evidence-input-v4-external-explorer")
+    require("examples/github-app-backend/server.js", "normalizeGatewayErrors")
+
+    # Task #6: discovery_provenance explicit schema
+    require("api/agent-issue-gateway-payload-schema.v1.json", "\"unsolicited_discovery_proof\"")
+    require("api/agent-issue-gateway-payload-schema.v1.json", "\"solicited\"")
+    require("api/agent-issue-gateway-payload-schema.v1.json", "\"independence_class\"")
+
+    # Task #7: render_gateway_issue_body.py uses discovery_provenance.solicited
+    require("scripts/render_gateway_issue_body.py", "prov.get(\"solicited\")")
+
+    # Task #12: Docs tell agents to use /gateway/preflight and examples
+    require("agent-submit.md", "/gateway/preflight")
+    require("agent-submit.md", "/gateway/examples")
+    require("agent-verify.md", "evidence.bitcoin_checks")
+    require("llms.txt", "Use `/gateway/preflight` before `/agent-submit`")
+    require("ai.txt", "Use /gateway/preflight before /agent-submit")
+
     # Gateway server enforcement
     require("scripts/validate_gateway_payload.py", "Gateway payload body must not contain agent-supplied trinity-issue-intake block")
     require("agent-submit.md", "Do not fall back to r3")

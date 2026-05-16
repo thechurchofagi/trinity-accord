@@ -66,7 +66,11 @@ def render_machine_block(payload):
     lines.append(f"verification_level_claimed: {payload.get('verification_level_claimed', 'N/A')}")
     lines.append(f"agent_name_or_model: {identity.get('name_or_model', 'N/A')}")
     lines.append(f"system_or_provider: {identity.get('system_or_provider', 'N/A')}")
-    lines.append(f"solicited: {str(prov.get('independence_class', '') == 'human_solicited_agent_response').lower()}")
+    # Prefer explicit discovery_provenance.solicited when provided
+    solicited = prov.get("solicited")
+    if solicited is None:
+        solicited = prov.get("independence_class", "") == "human_solicited_agent_response"
+    lines.append(f"solicited: {str(bool(solicited)).lower()}")
     lines.append(f"independence_class: {prov.get('independence_class', 'N/A')}")
     lines.append(f"agency_level: {prov.get('agency_level', 'N/A')}")
     lines.append(f"operator_type: {prov.get('operator_type', 'N/A')}")
