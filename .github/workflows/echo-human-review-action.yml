@@ -159,7 +159,7 @@ jobs:
           PY
           )"
 
-          python3 scripts/validate_agent_submission.py "$record_path"
+          python3 scripts/validate_agent_submission.py --mode ci "$record_path"
           python3 scripts/check_consistency.py
 
           git config user.name "github-actions[bot]"

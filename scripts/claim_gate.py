@@ -14,13 +14,10 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
-PROTOCOL_LEVELS = ["V0", "V1", "V2", "V3", "V4", "V4+", "V5", "V6", "V7", "V8"]
-B_LEVELS = ["B0", "B1", "B2", "B3", "B4", "B5", "B6", "B7"]
-D_LEVELS = ["D0", "D1", "D2", "D3", "D4", "D5", "D6", "D7"]
-T_LEVELS = ["T0", "T1", "T2", "T3", "T4", "T5", "T6", "T7", "T8"]
-C_LEVELS = ["C0", "C1", "C2", "C3", "C3R", "C4", "C5", "C6", "C7"]
-N_LEVELS = ["N0", "N1", "N2", "N3", "N4", "N5", "N6", "N7"]
-P_LEVELS = ["P0", "P1", "P2", "P3", "P4", "P5", "P6", "P7", "P8", "P9"]
+from protocol_terms import (
+    PROTOCOL_LEVELS, B_LEVELS, D_LEVELS, T_LEVELS, C_LEVELS, N_LEVELS, P_LEVELS,
+    level_index, level_at_least, max_by_order,
+)
 
 SHA256_RE = re.compile(r'^[a-f0-9]{64}$')
 
@@ -259,19 +256,6 @@ def fail_claim_gate(error, failures, requested_kind="echo_v3"):
 
 
 
-def level_index(levels, val):
-    """Return index of val in levels list, or -1 if not found."""
-    try:
-        return levels.index(val)
-    except ValueError:
-        return -1
-
-
-def max_by_order(levels, a, b):
-    """Return the higher of two level values according to the levels list."""
-    return b if level_index(levels, b) > level_index(levels, a) else a
-
-
 def has_p7_forensic_path(evidence):
     """P7 requires valid confidence (>=0.80), model/tool, method, external attributable report,
     valid report hash, and non-self-asserted verifier identity.
@@ -473,11 +457,6 @@ def has_t8_authorized_celestial_path(evidence):
             return True
 
     return False
-
-
-def level_at_least(levels, claimed, minimum):
-    """Check if claimed level is at least minimum."""
-    return level_index(levels, claimed) >= level_index(levels, minimum)
 
 
 def derive_b_level(evidence):

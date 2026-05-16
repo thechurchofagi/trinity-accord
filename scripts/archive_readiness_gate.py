@@ -24,36 +24,15 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
-# --- Level ordering ---
-
-PROTOCOL_LEVELS = ["V0", "V1", "V2", "V3", "V4", "V4+", "V5", "V6", "V7", "V8"]
-B_LEVELS = ["B0", "B1", "B2", "B3", "B4", "B5", "B6", "B7"]
-D_LEVELS = ["D0", "D1", "D2", "D3", "D4", "D5", "D6", "D7"]
-T_LEVELS = ["T0", "T1", "T2", "T3", "T4", "T5", "T6", "T7", "T8"]
-C_LEVELS = ["C0", "C1", "C2", "C3", "C3R", "C4", "C5", "C6", "C7"]
-N_LEVELS = ["N0", "N1", "N2", "N3", "N4", "N5", "N6", "N7"]
-P_LEVELS = ["P0", "P1", "P2", "P3", "P4", "P5", "P6", "P7", "P8", "P9"]
+from protocol_terms import (
+    PROTOCOL_LEVELS, B_LEVELS, D_LEVELS, T_LEVELS, C_LEVELS, N_LEVELS, P_LEVELS,
+    level_index, level_at_least,
+)
 
 ALL_LEVEL_MAPS = {
     "B": B_LEVELS, "D": D_LEVELS, "T": T_LEVELS,
     "C": C_LEVELS, "N": N_LEVELS, "P": P_LEVELS,
 }
-
-
-def level_index(levels, value):
-    """Return index of value in levels list, or -1 if not found."""
-    if not value:
-        return -1
-    return levels.index(value) if value in levels else -1
-
-
-def level_at_least(levels, value, floor):
-    """Check if value is at or above floor in the levels list."""
-    vi = level_index(levels, value)
-    fi = level_index(levels, floor)
-    if vi < 0 or fi < 0:
-        return False
-    return vi >= fi
 
 
 def load_json(path):

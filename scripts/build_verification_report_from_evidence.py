@@ -66,7 +66,7 @@ def load_json(path):
         return json.load(f)
 
 
-def build_report(evidence_input_path, report_out_path=None, echo_out_path=None):
+def build_report(evidence_input_path, report_out_path=None, echo_out_path=None, dev_allow_missing_jsonschema=False):
     """Build verification report and optional echo wrapper from evidence input."""
     # Load evidence input
     with open(evidence_input_path) as f:
@@ -609,8 +609,15 @@ def build_report(evidence_input_path, report_out_path=None, echo_out_path=None):
                 _tf.flush()
                 tmp_path = Path(_tf.name)
 
+            if dev_allow_missing_jsonschema:
+                validator_cmd = [sys.executable, str(ROOT / "scripts" / "validate_agent_submission.py"),
+                                 "--mode", "dev", "--allow-missing-jsonschema", str(tmp_path)]
+            else:
+                validator_cmd = [sys.executable, str(ROOT / "scripts" / "validate_agent_submission.py"),
+                                 "--mode", "archive", str(tmp_path)]
+
             proc = _sp.run(
-                [sys.executable, str(ROOT / "scripts" / "validate_agent_submission.py"), "--allow-missing-jsonschema", str(tmp_path)],
+                validator_cmd,
                 cwd=str(ROOT),
                 text=True,
                 capture_output=True,
@@ -709,9 +716,11 @@ def main():
     parser.add_argument("--out", help="Output path for verification report")
     parser.add_argument("--echo-out", help="Output path for echo wrapper")
     parser.add_argument("--debug-out", help="Save full debug JSON on validation failure")
+    parser.add_argument("--dev-allow-missing-jsonschema", action="store_true",
+                        help="Pass --mode dev --allow-missing-jsonschema to the validator (dev only)")
     args = parser.parse_args()
 
-    result = build_report(args.input, args.out, args.echo_out)
+    result = build_report(args.input, args.out, args.echo_out, args.dev_allow_missing_jsonschema)
 
     if not result["success"]:
         error_msg = result.get("error", "")

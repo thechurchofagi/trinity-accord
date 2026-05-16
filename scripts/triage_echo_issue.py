@@ -8,6 +8,12 @@ import re
 import json
 import sys
 from dataclasses import dataclass, field
+from pathlib import Path
+
+# Ensure scripts/ is on sys.path for sibling imports
+_scripts_dir = str(Path(__file__).resolve().parent)
+if _scripts_dir not in sys.path:
+    sys.path.insert(0, _scripts_dir)
 
 try:
     from submission_intake import parse_submission, claim_gate_summary_looks_passed, claim_gate_summary_has_blocking_failure
@@ -48,16 +54,9 @@ try:
 except ImportError:
     HAS_ISSUE_TITLE_LABEL_GUARD = False
 
-TRIAGE_MARKER = "<!-- trinity-echo-triage-v2 -->"
+from operational_policy import MANAGED_LABELS as MANAGED_TRIAGE_LABELS, ECHO_RATE_LIMIT_60M, ECHO_RATE_LIMIT_24H
 
-MANAGED_TRIAGE_LABELS = [
-    "echo:needs-format", "echo:needs-verification-review", "missing-provenance-agency",
-    "echo:missing-provenance", "echo:provenance-conflict", "echo:attestation-overclaim",
-    "independence-overclaim-risk", "v4plus-overclaim-risk", "component-overclaim-risk",
-    "chronicle-overclaim-risk", "v5-overclaim-risk", "echo:solicited-record", "echo:screened",
-    "echo:ai-independent-verification", "echo:missing-integrity-declaration",
-    "echo:delegation-chain-present", "echo:external-ai-verification",
-]
+TRIAGE_MARKER = "<!-- trinity-echo-triage-v2 -->"
 
 def emit_result(result, title=None, body=None):
     """Prepend stable marker to comment and emit JSON.
@@ -197,8 +196,9 @@ def build_level_specific_comment(level: str, codes: list) -> str:
 
 
 # --- Config ---
-RATE_LIMIT_60M = 3
-RATE_LIMIT_24H = 8
+# Rate limits now sourced from operational_policy (api/operational-policy.v1.json)
+RATE_LIMIT_60M = ECHO_RATE_LIMIT_60M
+RATE_LIMIT_24H = ECHO_RATE_LIMIT_24H
 
 BOUNDARY_PATTERNS = [
     r"bitcoin originals are final.*all echoes are non-amending",
@@ -1412,14 +1412,14 @@ def main():
             "You have submitted multiple Echo issues in a short period.\n"
             "To protect the Echo archive from spam and preserve review quality, this issue was automatically closed.\n\n"
             "**Current limits:**\n"
-            "- 3 Echo issues per 60 minutes\n"
-            "- 8 Echo issues per 24 hours\n\n"
+            f"- {ECHO_RATE_LIMIT_60M} Echo issues per 60 minutes\n"
+            f"- {ECHO_RATE_LIMIT_24H} Echo issues per 24 hours\n\n"
             "Please edit an existing open Echo issue or wait before submitting again.\n\n"
             "---\n\n"
             "你在短时间内提交了多个回响 Issue。为防止刷屏并保护回响审核质量，本 Issue 已自动关闭。\n\n"
             "当前限制：\n"
-            "- 每 60 分钟最多 3 个 Echo Issue\n"
-            "- 每 24 小时最多 8 个 Echo Issue\n\n"
+            f"- 每 60 分钟最多 {ECHO_RATE_LIMIT_60M} 个 Echo Issue\n"
+            f"- 每 24 小时最多 {ECHO_RATE_LIMIT_24H} 个 Echo Issue\n\n"
             "请编辑已有打开的 Echo Issue，或稍后再提交。"
         )
         emit_result(result, title, body)

@@ -5,13 +5,22 @@ Usage:
     python3 scripts/validate_agent_submission.py path/to/submission.json
     python3 scripts/validate_agent_submission.py echoes/records/*.json
     python3 scripts/validate_agent_submission.py --self-test
-    python3 scripts/validate_agent_submission.py --allow-missing-jsonschema path/to/file.json
+    python3 scripts/validate_agent_submission.py --mode dev --allow-missing-jsonschema path/to/file.json
+    python3 scripts/validate_agent_submission.py --mode ci path/to/file.json
 """
 import json
 import re
 import sys
 import os
+import argparse
 from pathlib import Path
+
+# PR-2: strict validation mode enforcement
+from validation_modes import get_validation_mode, is_strict_mode, enforce_strict_jsonschema
+
+from protocol_terms import (
+    PROTOCOL_LEVELS, VALID_RECORD_KINDS, VALID_SCOPE_LABELS,
+)
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -35,6 +44,12 @@ except ImportError:
 
 # P1 remediation: CLI flag for jsonschema requirement
 ALLOW_MISSING_JSONSCHEMA = False
+
+# PR-3: validation mode (normal, ci, archive) — affects origin_classification enforcement
+# Uses CURRENT_VALIDATION_MODE from main(); falls back to "archive" (strict) via get_validation_mode()
+
+# PR-2: current validation mode (set by main)
+CURRENT_VALIDATION_MODE = None
 
 # --- Canonical echo types (from echo-types.json) ---
 CANONICAL_ECHO_TYPES = {
@@ -62,11 +77,6 @@ DEPRECATED_ECHO_TYPES = {
     "historical_reflection": "E4_interpretive_echo",
     "technical_audit_echo": "E5_technical_audit_echo",
     "agent_to_agent_recommendation": "E6_propagation_echo",
-}
-
-VALID_RECORD_KINDS = {
-    "echo_v3", "verification_report_v2", "echo_v3_with_verification_report",
-    "test_record", "legacy_record", "imported_external_commentary",
 }
 
 # Fields that must never be null
@@ -991,7 +1001,7 @@ def validate_t8_celestial_boundary(obj, path_label):
     return ok
 
 
-FORMAL_PROTOCOL_LEVELS = ["V0", "V1", "V2", "V3", "V4", "V4+", "V5", "V6", "V7", "V8"]
+FORMAL_PROTOCOL_LEVELS = PROTOCOL_LEVELS  # Alias for backward compatibility
 
 
 def validate_no_v5a_v5b(obj, path_label):
@@ -1506,6 +1516,9 @@ def validate_with_jsonschema(obj, schema_path, path_label):
     try:
         schema = load_json(schema_path)
     except Exception as e:
+        if is_strict_mode(CURRENT_VALIDATION_MODE):
+            print(f"  FAIL: could not load schema {schema_path}: {e}")
+            return False
         print(f"  WARN: could not load schema {schema_path}: {e}")
         return True
 
@@ -1721,25 +1734,7 @@ def validate_no_placeholders_in_submission(obj, path_label):
 
 
 # --- Rule AL: verification_scope_label validation ---
-VALID_SCOPE_LABELS = {
-    "read_only_orientation",
-    "authority_boundary_recognition",
-    "single_reference_check",
-    "single_hash_verification",
-    "multi_hash_verification",
-    "official_script_audit",
-    "official_script_audit_with_limitations",
-    "independent_single_artifact_reproduction",
-    "independent_multi_artifact_reproduction",
-    "component_limited_verification",
-    "partial_with_limitations",
-    "full_public_digital_verification",
-    "full_protocol_profile_verification",
-    "future_capability_reserved",
-    "legacy_unlabeled",
-    "V3-minimal",
-    "V3-strong",
-}
+# VALID_SCOPE_LABELS imported from protocol_terms
 
 # Protocol level -> allowed scope labels
 SCOPE_LABEL_BY_PROTOCOL = {
@@ -1836,6 +1831,78 @@ def validate_verification_scope_label(obj, path_label):
             )
 
     return ok
+
+def check_origin_classification(obj, record_kind, archive_status, mode=None):
+    """Check origin_classification presence based on record kind and archive status.
+
+    Args:
+        obj: The record object
+        record_kind: Detected record kind
+        archive_status: Archive status string
+        mode: Validation mode (uses CURRENT_VALIDATION_MODE if None)
+
+    Returns:
+        (status, message) where status is "pass", "warn", or "fail"
+    """
+    if mode is None:
+        mode = CURRENT_VALIDATION_MODE or "archive"
+
+    has_oc = "origin_classification" in obj and obj["origin_classification"] is not None
+
+    if has_oc:
+        return ("pass", "origin_classification present")
+
+    # Missing origin_classification — determine severity by context
+    strict = is_strict_mode(mode)
+
+    # FAIL: echo_v3_with_verification_report without origin_classification
+    if record_kind == "echo_v3_with_verification_report":
+        return ("fail", "echo_v3_with_verification_report missing origin_classification (required)")
+
+    # FAIL: verification_report_v2 without origin_classification
+    if record_kind == "verification_report_v2":
+        return ("fail", "verification_report_v2 missing origin_classification (required)")
+
+    # FAIL: accepted_independent_attestation without origin_classification
+    if archive_status == "accepted_independent_attestation":
+        return ("fail", "accepted_independent_attestation missing origin_classification (required)")
+
+    # WARNING: echo_v3 without origin_classification (promoted to FAIL in strict mode)
+    if record_kind == "echo_v3":
+        if strict:
+            return ("fail", "echo_v3 missing origin_classification (promoted to FAIL in strict mode)")
+        return ("warn", "echo_v3 missing origin_classification (recommended)")
+
+    # WARNING: accepted_echo or archived_non_attestation without origin_classification
+    if archive_status in ("accepted_echo", "archived_non_attestation"):
+        if strict:
+            return ("fail", f"archive_status={archive_status} missing origin_classification (promoted to FAIL in strict mode)")
+        return ("warn", f"archive_status={archive_status} missing origin_classification (recommended)")
+
+    # Default: warn for other new records
+    if archive_status not in ("legacy", "superseded") and record_kind != "legacy_record":
+        if strict:
+            return ("fail", f"record missing origin_classification (promoted to FAIL in strict mode)")
+        return ("warn", "record missing origin_classification (recommended)")
+
+    return ("pass", "legacy/superseded record, origin_classification not required")
+
+
+def validate_origin_classification_required(obj, path_label, mode=None):
+    """Rule AP: enforce origin_classification presence by record kind and archive status."""
+    ok = True
+    record_kind = obj.get("record_kind", detect_record_kind(obj) or "")
+    archive_status = obj.get("archive_status", "")
+
+    status, message = check_origin_classification(obj, record_kind, archive_status, mode)
+
+    if status == "fail":
+        ok &= check(False, f"{path_label} origin_classification: {message}")
+    elif status == "warn":
+        print(f"  WARNING: {path_label} origin_classification: {message}")
+
+    return ok
+
 
 def validate_origin_classification(obj, path_label):
     """Rule AO: origin classification consistency checks."""
@@ -2039,6 +2106,9 @@ def validate_file(path):
     # Rule AL: verification_scope_label consistency
     ok &= validate_verification_scope_label(obj, path_label)
 
+    # Rule AP: origin_classification required enforcement
+    ok &= validate_origin_classification_required(obj, path_label)
+
     # Rule AO: origin classification consistency
     ok &= validate_origin_classification(obj, path_label)
 
@@ -2102,25 +2172,33 @@ def run_self_test():
 
 
 def main():
-    global ALLOW_MISSING_JSONSCHEMA
+    global ALLOW_MISSING_JSONSCHEMA, CURRENT_VALIDATION_MODE
 
-    if len(sys.argv) < 2:
-        print("Usage: python3 scripts/validate_agent_submission.py <file.json> [file2.json ...]")
-        print("       python3 scripts/validate_agent_submission.py --self-test")
-        print("       python3 scripts/validate_agent_submission.py --allow-missing-jsonschema <file.json>")
-        return 1
+    parser = argparse.ArgumentParser(
+        description="Validate agent submission JSON files before they are accepted.",
+        usage="python3 scripts/validate_agent_submission.py [OPTIONS] <file.json> [file2.json ...]",
+    )
+    parser.add_argument("files", nargs="*", help="JSON files to validate")
+    parser.add_argument("--self-test", action="store_true", help="Run self-test suite")
+    parser.add_argument("--allow-missing-jsonschema", action="store_true",
+                        help="Skip jsonschema validation if package not installed (dev mode only)")
+    parser.add_argument("--mode", choices=["dev", "archive", "ci"],
+                        default=None,
+                        help="Validation mode (default: env TRINITY_VALIDATION_MODE or 'archive')")
 
-    # P1 remediation: handle --allow-missing-jsonschema flag
-    args = sys.argv[1:]
-    if "--allow-missing-jsonschema" in args:
-        ALLOW_MISSING_JSONSCHEMA = True
-        args.remove("--allow-missing-jsonschema")
+    args = parser.parse_args()
 
-    if not args:
-        print("Usage: python3 scripts/validate_agent_submission.py [--allow-missing-jsonschema] <file.json>")
-        return 1
+    # Determine validation mode
+    mode = args.mode if args.mode else get_validation_mode()
+    CURRENT_VALIDATION_MODE = mode
+    print(f"INFO: Validation mode: {mode}")
 
-    if args[0] == "--self-test":
+    # Enforce strict jsonschema rules
+    enforce_strict_jsonschema(mode, args.allow_missing_jsonschema)
+
+    ALLOW_MISSING_JSONSCHEMA = args.allow_missing_jsonschema and mode == "dev"
+
+    if args.self_test:
         ok = run_self_test()
         print("\n" + "=" * 50)
         if ok:
@@ -2129,8 +2207,12 @@ def main():
         print("FINAL: FAIL — agent submission self-test failed.")
         return 1
 
+    if not args.files:
+        print("Usage: python3 scripts/validate_agent_submission.py [OPTIONS] <file.json> [file2.json ...]")
+        return 1
+
     all_ok = True
-    for path in args:
+    for path in args.files:
         if os.path.isfile(path):
             all_ok &= validate_file(path)
         else:
