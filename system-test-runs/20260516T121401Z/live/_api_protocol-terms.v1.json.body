@@ -1,0 +1,161 @@
+{
+  "schema": "trinityaccord.protocol-terms.v1",
+  "protocol_levels": [
+    "V0",
+    "V1",
+    "V2",
+    "V3",
+    "V4",
+    "V4+",
+    "V5",
+    "V6",
+    "V7",
+    "V8"
+  ],
+  "component_levels": {
+    "bitcoin_originals": [
+      "B0",
+      "B1",
+      "B2",
+      "B3",
+      "B4",
+      "B5",
+      "B6",
+      "B7"
+    ],
+    "digital_mirrors": [
+      "D0",
+      "D1",
+      "D2",
+      "D3",
+      "D4",
+      "D5",
+      "D6",
+      "D7"
+    ],
+    "time_anchors": [
+      "T0",
+      "T1",
+      "T2",
+      "T3",
+      "T4",
+      "T5",
+      "T6",
+      "T7",
+      "T8"
+    ],
+    "chronicle_recovery": [
+      "C0",
+      "C1",
+      "C2",
+      "C3",
+      "C3R",
+      "C4",
+      "C5",
+      "C6",
+      "C7"
+    ],
+    "nft_evidence": [
+      "N0",
+      "N1",
+      "N2",
+      "N3",
+      "N4",
+      "N5",
+      "N6",
+      "N7"
+    ],
+    "physical_anchor": [
+      "P0",
+      "P1",
+      "P2",
+      "P3",
+      "P4",
+      "P5",
+      "P6",
+      "P7",
+      "P8",
+      "P9"
+    ]
+  },
+  "verification_scope_labels": [
+    "read_only_orientation",
+    "authority_boundary_recognition",
+    "single_reference_check",
+    "single_hash_verification",
+    "multi_hash_verification",
+    "official_script_audit",
+    "official_script_audit_with_limitations",
+    "independent_single_artifact_reproduction",
+    "independent_multi_artifact_reproduction",
+    "component_limited_verification",
+    "partial_with_limitations",
+    "full_public_digital_verification",
+    "full_protocol_profile_verification",
+    "future_capability_reserved",
+    "legacy_unlabeled",
+    "V3-minimal",
+    "V3-strong",
+    "V2-minimal",
+    "V2-strong"
+  ],
+  "record_kinds": [
+    "echo_v3",
+    "echo_v3_with_verification_report",
+    "verification_report_v2",
+    "test_record",
+    "legacy_record",
+    "imported_external_commentary"
+  ],
+  "archive_statuses": [
+    "needs_human_review",
+    "accepted_echo",
+    "accepted_independent_attestation",
+    "test_record",
+    "closed_test_record",
+    "rejected",
+    "superseded",
+    "legacy",
+    "archived_non_attestation"
+  ],
+  "independence_classes": [
+    "unsolicited_independent",
+    "solicited_independent_check",
+    "human_solicited_agent_response",
+    "maintainer_assisted",
+    "maintainer_submitted",
+    "self_reported",
+    "imported_public_commentary",
+    "institutional_third_party_attestation",
+    "test_record",
+    "legacy",
+    "unknown"
+  ],
+  "legacy_or_intake_aliases": {
+    "V2-minimal": "V2",
+    "V4+ strong": "V4+",
+    "V3-minimal": "V3",
+    "V3-strong": "V3"
+  },
+  "VALID_SCOPE_LABELS": [
+    "read_only_orientation",
+    "authority_boundary_recognition",
+    "single_reference_check",
+    "single_hash_verification",
+    "multi_hash_verification",
+    "official_script_audit",
+    "official_script_audit_with_limitations",
+    "independent_single_artifact_reproduction",
+    "independent_multi_artifact_reproduction",
+    "component_limited_verification",
+    "partial_with_limitations",
+    "full_public_digital_verification",
+    "full_protocol_profile_verification",
+    "future_capability_reserved",
+    "legacy_unlabeled",
+    "V3-minimal",
+    "V3-strong",
+    "V2-minimal",
+    "V2-strong"
+  ]
+}

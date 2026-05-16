@@ -1,0 +1,54 @@
+{
+  "schema": "trinityaccord.system-test-summary.v1",
+  "generated_at_utc": "2026-05-16T12:20:00Z",
+  "repo": "thechurchofagi/trinity-accord",
+  "head_sha": "8452d462618e329f2a06e50bba772ef9ba362999",
+  "tester": {
+    "operator": "agent",
+    "name": "OpenClaw Multi-Agent Test Suite",
+    "environment": "Linux 6.8.0-100-generic (x64), Python 3.12.3, Node v22.22.1"
+  },
+  "ci": {
+    "repository_integrity_check": {
+      "run_url": "local",
+      "conclusion": "success"
+    },
+    "run_all_tests": {
+      "run_url": "local",
+      "conclusion": "success"
+    },
+    "pages_deployment": {
+      "run_url": "https://www.trinityaccord.org",
+      "conclusion": "success"
+    }
+  },
+  "layers": {
+    "L0_secret_hygiene": "pass",
+    "L1_static_integrity": "pass",
+    "L2_local_functional": "pass",
+    "L3_e2e_offline": "pass",
+    "L4_redteam": "pass",
+    "L5_live_readonly": "pass",
+    "L6_controlled_live_write": "not_run"
+  },
+  "failures": [],
+  "known_limitations": [
+    "recovery.md missing (referenced in README.md and sitemap)",
+    "4 broken JSON $ref paths in API schemas",
+    "robots.txt does not reference ai.txt/llms.txt",
+    "5 pages missing layout front matter"
+  ],
+  "security": {
+    "token_in_remote": false,
+    "secret_leak_detected": false,
+    "pat_revocation_required": false
+  },
+  "boundary": {
+    "not_authority": true,
+    "not_amendment": true,
+    "not_independent_attestation": true,
+    "does_not_raise_verification_level": true,
+    "bitcoin_originals_remain_final": true
+  },
+  "final_decision": "STRICT_SYSTEM_ACCEPTANCE_PASS"
+}

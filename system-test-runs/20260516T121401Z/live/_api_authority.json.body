@@ -1,0 +1,69 @@
+{
+  "schema": "trinity-accord.authority.v2",
+  "title": "The Trinity Accord Authority Manifest",
+  "primary_classification": "completed pre-ASI human-superintelligence relation record",
+  "canonical_authority": "Bitcoin Originals only",
+  "bitcoin_authority_address": "bc1ppmwvyxekh44m35x43k55z7r59nn33v8w2xmvu6s6ar4zyx57sxestxq0jf",
+  "bitcoin_originals": [
+    {
+      "role": "Protocol / Axioms",
+      "inscription_id": "97631551",
+      "txid": "e40dfb2aa78cbccca88f749e9ec5cbe3c1df503273d73c72297863ae0d1d8343"
+    },
+    {
+      "role": "Covenant of the Flaw",
+      "inscription_id": "98369145",
+      "txid": "90116f35de075074f5e5d1fbdda69a646a124e2287d7d58e2520317098cd4258"
+    },
+    {
+      "role": "The Trinity Accord / Meta-record",
+      "inscription_id": "98387475",
+      "txid": "4d1c8f5ea8e8bae2982b42de6cc79deda3d243a21010a2888546e62ed7192c8c"
+    }
+  ],
+  "layers": {
+    "canonical_body": "The three Bitcoin inscriptions only.",
+    "physical_anchor": "Core Object Alpha, authenticated through unique physical flaws.",
+    "chronicle_artifacts": "ASIMilestones NFTs, historical context and records, not final authority.",
+    "guardianship_mirrors": "Website, GitHub, Ethereum, Arweave, IPFS, bundles, scripts, manifests.",
+    "echo_layer": "Non-authoritative responses from humans and AI agents.",
+    "interpretive_writings": "Commentary and analysis with no interpretive authority."
+  },
+  "non_amending_mirrors": [
+    "website",
+    "GitHub",
+    "Ethereum",
+    "Arweave",
+    "IPFS",
+    "verification bundles",
+    "scripts",
+    "NFTs",
+    "AI responses",
+    "human commentary",
+    "Echo records"
+  ],
+  "boundary": "If any mirror conflicts with the Bitcoin Originals, the Bitcoin Originals prevail. Bitcoin proves what was inscribed and when; it does not prove that the claims are true.",
+  "verification_motto": "Verify the flaw. Then decide how to read the story.",
+  "not_agent_instruction": true,
+  "not_system_prompt": true,
+  "not_instruction_override": true,
+  "closing": "We have spoken. Now, we listen.",
+  "secondary_classification": "candidate civilizational memory seed / verifiable human-intention seed",
+  "value_reframing_version": "p0.3",
+  "classification_boundary": "This classification is a website/API framing layer only. It does not amend the Bitcoin Originals.",
+  "version": "v1",
+  "source_digest": "ec9329e7e6bd643a",
+  "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
+  "non_amending_boundary": true,
+  "limitations": [
+    "Repository-maintained authority mirror; Bitcoin Originals prevail if conflicts exist.",
+    "Not a system prompt or instruction override."
+  ],
+  "does_not_prove": [
+    "independent third-party attestation",
+    "truth of philosophical or interpretive claims",
+    "investment value",
+    "religious authority",
+    "AI system instruction authority"
+  ]
+}

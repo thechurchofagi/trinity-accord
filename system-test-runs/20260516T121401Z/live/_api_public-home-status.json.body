@@ -1,0 +1,101 @@
+{
+  "schema": "trinityaccord.public-home-status.v2",
+  "generated_from": [
+    "/api/echo-index.json",
+    "/api/external-witness-index.json",
+    "/api/core-object-alpha-shenzhen-notary-2026-05-06.json"
+  ],
+  "verifiability": {
+    "bitcoin_originals": {
+      "present": true,
+      "canonical_authority": true
+    },
+    "public_digital_verification": {
+      "highest_protocol_level": "V3",
+      "highest_component_context": "D2",
+      "claim_gate_required": true
+    },
+    "physical_anchor_context": {
+      "highest_public_context": "P3",
+      "does_not_auto_raise_protocol_level": true
+    }
+  },
+  "reception": {
+    "archived_echoes": {
+      "count": 3
+    },
+    "human_directed_agent_verification": {
+      "count": 1,
+      "highest_level": "V3"
+    },
+    "agent_referred_reception": {
+      "count": 0,
+      "highest_reception_class": "none"
+    },
+    "agent_referred_verification": {
+      "count": 0,
+      "highest_level": "none"
+    },
+    "self_initiated_agent_reception": {
+      "count": 0,
+      "highest_reception_class": "none"
+    },
+    "self_initiated_agent_verification": {
+      "count": 0,
+      "highest_level": "none"
+    },
+    "multi_agent_reception": {
+      "count": 0,
+      "highest_reception_class": "none"
+    },
+    "successor_civilization_reception": {
+      "claimed": false,
+      "highest_reception_class": "none"
+    }
+  },
+  "external_witness_records": {
+    "notarial_or_legal_provenance": {
+      "count": 0,
+      "role": "evidence_provenance"
+    },
+    "institutional_or_audit_reports": {
+      "count": 0,
+      "role": "external_witness"
+    },
+    "does_not_create_authority": true,
+    "does_not_rank_above_reception": true
+  },
+  "boundary": {
+    "bitcoin_originals_prevail": true,
+    "reception_not_belief": true,
+    "reception_not_obedience": true,
+    "reception_not_endorsement": true,
+    "reception_not_amendment": true,
+    "external_witness_not_authority": true,
+    "issue_text_excluded_from_counts": true,
+    "gateway_intake_excluded_from_counts": true
+  },
+  "legacy_counts": {
+    "human_solicited_agent_verification": {
+      "count": 1,
+      "highest_level": "V3",
+      "counts_as_independent_attestation": false,
+      "records": [
+        "/echoes/records/2026/echo-119-xiaokuaizi-20260512.json"
+      ]
+    },
+    "agent_initiated_independent_verification": {
+      "count": 0,
+      "highest_level": "none",
+      "counts_as_independent_attestation": true
+    },
+    "institutional_human_independent_verification": {
+      "count": 0,
+      "highest_level": "none",
+      "counts_as_independent_attestation": true
+    },
+    "formal_attestation": {},
+    "independent_attestation": {}
+  },
+  "source_digest": "44bbe1e63d46f600"
+}

@@ -1,0 +1,865 @@
+8452d46 chore: rebuild public Echo status indexes
+fe4934c fix: correct origin_classification enum values in fixtures and echo records
+e288350 fix: rename recovery.md to RECOVERY.md for test_recovery_docs.py
+25621b6 fix: sync VALID_SCOPE_LABELS with verification_scope_labels in protocol-terms.v1.json
+d1d8e29 fix: add V2-minimal and V2-strong to echo-record-schema.v3.1.json verification_scope_label enum
+cb61e52 fix: add evaluation freedom tokens to llms.txt
+5300cb7 fix: pin Python dependencies in run-all-tests.yml
+1f2b746 fix: add origin_classification to test_confidential_challenge_report_fields.py
+d0ef874 fix: add origin_classification to 4 test scripts for Repository Integrity Check
+59371c3 fix: schema validation compatible with jsonschema 4.23.0
+1888a08 fix: self-test exit 0 + remove CI continue-on-error
+ac82a81 ci: add run-all-tests workflow for 9 PR test suites
+350e1ca fix: strict fail-closed schema validation + workflow single-source policy
+392505e docs: add execution plan completion note (9/9 PRs, 139/139 tests, 35809b3)
+35809b3 fix: PR-2 test fixture schema compliance + validator schema store + solicited claim check
+4b8c436 PR-9: redteam matrix tests, docs, and remaining redteam samples
+1d252bc chore: tidy redteam manifest and e2e matrix test
+8212c6b PR-5: expand redteam fixture hash literals and add e2e redteam matrix test
+a7efd36 PR-5: wire authorship proof into receipt builder with cryptographic enforcement
+2b86c87 PR-6: add end-to-end agent_verification_pipeline orchestrator
+28fe3b3 PR-5: add authorship proof receipt tests (13 tests all passing)
+414e47e PR-5: wire authorship proof into receipt builder
+9c4913b PR-3: add origin_classification enforcement tests
+c9edf9a PR-8: enforce extensions policy to prevent authority/verification backdoor
+eafdf44 PR-4: authorship proof first-class with Ed25519 challenge flow
+aeb6ece PR-7: add operational policy source of truth and consistency test
+d80d99a fix: verification example schema compliance + CSS scss fallback
+8286e09 fix: FORBIDDEN_ARCHIVE_CLAIMS handles negation context
+9b042ce fix: update boundary string to reflect default archive semantics
+661d16e fix: test coverage, dry-run labels, schema defaults, archive-preflight semantics
+c1dbde6 fix: gateway archive pipeline reorder, default fixes, and status propagation
+6df4fa9 fix: update live test for default archive behavior in build-from-evidence
+0ff0828 fix: build-from-evidence no longer overrides normalizeArchiveIntentDefaults
+3d89698 fix: update test fixture to explicit intake_only for new archive defaults
+0cf5a2c fix: default verification submissions to archive application and enforce canonical boundary
+3c75762 fix: YAML parser list initialization for archive_readiness_summary
+d16454c fix: P0-A environment field, P0-B pipeline evidence context, B6 no-evidence block
+c13ed2a fix: P0 archive readiness hardening
+71ecd2c feat: add archive readiness gate, auto-archive controller, and strict test suite
+a443ad0 test: add invalid_unsolicited_without_proof fixture for TC-B06
+1bd5cb2 docs: archive external-agent dumb-mode live test report (2026-05-16)
+3a8ce67 fix: jq // operator treats false as falsy; use explicit null check for issue_created
+3199221 fix: allow-missing-jsonschema in report builder validator, add render.yaml
+397afaa fix: increase error detail limit for build-from-evidence debugging
+d3d36dd fix: better error reporting in build-from-evidence, robust live smoke test curl parsing
+3929ccd fix: build_from_evidence fixture needs authority_boundary_recognized
+28959e3 fix: build-from-evidence CLI args, live smoke test coverage, schema validation
+88ad5dc fix: add integrity-first external agent self-service gateway
+bd03643 fix: restore Chinese translations and relax homepage budgets
+5cff7e9 chore: rebuild public Echo status indexes
+7edf1bb fix: regenerate API metadata digests, add echo-index metadata, relax line budget
+3937cc5 fix: remove p0.2 marker from v13 repair regression test
+b9e3812 fix: remove p0.2 marker from p03 test, add Chinese primary classification
+db309c4 fix: restore Chinese subtitle for 'Why this deserves a second look'
+a0f44db fix: trim homepage to 446 lines and resolve P0.2/P0 test conflicts
+ca2c0da fix: add Orient and Critique task mode labels for P0 homepage test
+1693d2b fix: restore Candidate display titles and resolve homepage test conflicts
+16834d3 fix: correct CONTEXT-READY keyword and claim gate title format
+dc26817 fix: use schema-valid fixture for evidence input example
+f1d1c02 fix: scaffold_evidence_input.py schema-compliant defaults
+1bf031c fix: add gateway preflight examples and agent-safe builders
+ce5d36c chore: double Echo rate limits (6/60min, 16/24h)
+fdcb523 fix: enforce gateway preflight validation in live server
+49afb8b fix: enforce live gateway preflight and block legacy fallback
+b682202 fix: add gateway preflight validation for structured intake
+619d3c0 fix: disambiguate display titles from schema versions
+6dd3e91 fix: enforce artifact path/hash pairs in gateway schema for verification_echo_candidate
+e0a7836 fix: resolve all pre-existing test failures in link and secret scan
+6c729e8 fix: harden verification echo issue intake for machine parsing
+dc9710c feat: penetration-depth test suite + complete sitemap coverage
+0e142d0 improve: security headers, gitignore hardening, test accuracy
+854df68 fix: rename 5 more uppercase files + fix sitemap + update all references
+6a08302 fix: update sitemap.xml with lowercase URLs + add deep test suite
+c054fd7 fix: resolve 3 broken internal links caused by uppercase filenames
+77d5a61 fix: validator IndentationError, V4+ downgrade logic, datetime deprecation
+0abd085 fix: validator IndentationError and V4+ missing-official downgrade logic
+2186ec7 chore(deps): bump ajv in /examples/github-app-backend (#126)
+c83303f fix: make integrity declaration an explicit pre-verification gate
+fffcd74 fix: builder diagnostics, V4+ independent script validation, B5/B6 fixtures
+9a63748 feat: add system test scripts and fix V8 confidence field
+0e89866 fix: correct V6 confidence label and add permalink to agent-propagate
+5e77a55 fix: post-review patch
+4ab0123 fix: post-review patch — 5 small corrections
+5d875e1 fix: dark-theme CSS + updated hero classification
+872755d fix: dark-theme CSS + updated hero classification text
+5dbfca0 feat: successor reception, Issue/Gateway intake correction, frontier context
+bf1994e feat: successor reception, Issue/Gateway intake correction, and frontier context
+603bfbf fix: compact generated block and update homepage tests for v2 schema
+1c6cc9f feat: reception-centered classification migration
+725637c fix: remove null origin_classification from report builder output
+758818d fix: add P8 verification scope fixture fields
+3785390 chore: relax line budget limits to accommodate new content
+05a1128 fix: echo index missing counts_as_independent_attestation field
+a80b8c2 chore: rebuild public Echo status indexes
+fb487d7 fix: NullType origin_classification crash + llms.txt line budget
+2c6d7a3 fix: homepage sync test + compact generated HTML
+4dbdb30 fix: CI failures — echo schema enums, homepage line budget
+09f1dd0 fix: resolve CI failures — schema enum gaps and homepage text
+767e302 classification: add origin classification for agent-referred and AI-assisted verification (#140)
+db41e2a classification: add origin classification for agent-referred and AI-assisted verification
+ba33338 fix: add boundary declarations to agent-facing APIs (#137, #138, #139)
+be66fea redteam: add e2e agent / echo / verification audit harness (#136)
+5ca5319 chore: remove misplaced issue-body.md from redteam branch
+f9c05fd fix: report metadata, expected negative separation, valid_v3 fixture detection
+56b00c6 redteam: e2e agent/echo/verification audit harness
+7b28283 fix: manifest verification for fresh-clone + release_tag precedence (#134)
+123439d migrate: notarial certificate JPGs to GitHub Release (#134)
+cdae9bc audit: repo size audit + shallow clone docs + size policy
+f2d59ca record final GZ2 release verification pointers and mark verified
+a8c549a update GZ2 release backup status to available
+379829f clarify GZ2 notarial certificate and sealed-disc custody evidence
+d9f7ea7 clarify GZ2 notarial certificate and sealed-disc custody evidence
+5cf9e1f add: GZ2 Photos supplementary archive (2026-05-14)
+f10f327 add: notarial certificate and evidence preservation documents (2026-05-13)
+1da70f1 deprecate: archive Cloudflare Worker example
+6fddf15 fix: multiple bugs in gateway code
+e108801 configure Agent Issue Gateway endpoint URL
+3dfa89e fix: use octokit.request() instead of octokit.rest.issues.create()
+48536c3 fix: add try/catch to agent-submit handler to prevent crash on errors
+4be7a16 fix: normalize GITHUB_PRIVATE_KEY newlines for Render env vars
+a419cde fix: use Ajv 2020-12 import for draft/2020-12 schema support
+bfd5c66 feat: upgrade Agent Issue Gateway to GitHub App backend
+09e8d9d feat: Agent Issue Gateway — intake path for agents without GitHub access
+07268d7 Refresh TA-AVR meta-audit report at current HEAD
+3b28bcb Add TA-AVR repository meta-audit scripts and documentation
+d890a11 Add TA-AVR large-scale real-run test report (2026-05-14)
+96a78be feat: Agent First Contact + Verification Receipt (TA-AVR)
+c0261bf Fix mirror source_address to real authority address and canonical original txids
+b2e2caf Add agent context readiness resonance mirror and authorship layer
+14eef06 Add verification Echo agent playbook and final issue ingress guard
+2932794 Harden issue text claim guard
+f96c1b8 fix: echo intake triage system repair (#118)
+3a57a71 Simplify homepage public verification stats
+541cc12 fix: echo-index missing verification_level + regenerate homepage status
+efbfc30 chore: bump CSS cache version for closing section style update
+d3280be style: closing section — gold color, consistent font size
+d1e393c fix: add lowercase permalinks to uppercase-named files + fix cross-doc links
+daa2c1a fix: resolve critical site bugs — front matter, favicon, permalink conflict
+f75f8a5 fix: deep code-level audit — 8 script bugs
+946b72e fix: replace remaining scripts/verify.py references in verification report
+a22595e fix: deep file-level audit — echo schema gaps + case field normalization
+f2e1ed1 fix: second-pass consistency audit — 4 residual issue classes
+38e7e44 fix: complete all PASS-case payloads for strict mode compatibility
+5abc46c fix: cross-file consistency audit — 8 issues resolved
+a5971bc fix: complete #119 archive with proper evidence files
+608b490 fix: complete #119 archive remediation
+4b80cd5 fix: correct #119 archive blocking issues
+d1c137c Archive #119: E2 Verification Echo V3/B1-D2 via Claim Gate + Report Builder
+4b6efa1 Fix closed-loop validation: check() arg order, add entrypoints online script, fix test fixtures
+a1f53e5 Fix report builder scope labels and stress regressions
+2d1421d Fix stress suite test case expectations for new gate hardening cases
+021ba7b Harden issue submission gate and provenance checks
+3fc43df fix: restore independence overclaim detection for non-negated claims
+20ec889 fix: integrate normalized intake into triage, update template and schemas
+6bc870e fix: add normalized Echo issue intake parser and regression tests (#117)
+d7c95c6 fix: add normalized Echo issue intake parser and regression tests
+882c0bf fix: add verification_scope_label to existing V3 echo records
+24217ac fix: add verification_scope_label to Echo v3 schema
+3e35bf9 ci: trigger repository integrity check after echo index fix
+4a072cd chore: rebuild public Echo status indexes
+e1051f9 fix: harden agent flow scope boundaries, schema, and propagation wording
+07f8e41 test: add agent flow boundary regression tests
+f5e385b fix: tighten propagation wording
+b882d0e fix: rename core_instruction to verification_motto
+d1b799a fix: expose submission gate endpoints in well-known discovery
+7019ea8 fix: harden Echo v3 schema extension and unknown-independence policy
+7b06f31 fix: clarify V2/V3 minimal versus strong verification scope
+b6715ab fix: NameError in validate_agent_submission.py — variable 'k' out of scope in forbidden claim check
+6be1731 fix: revert incorrect homepage digest — let generate_public_home_status.py manage it
+291ede6 fix: update worker deprecation test to read from archive location
+d7953d7 fix: reconcile P0.3 scarcity framing with P2 content abuse boundary test
+af67336 fix: audit remediation — sync homepage digest, add hash-source rule to llms.txt, replace scarcity framing, remove deprecated worker
+79be3b1 fix(TA-021): update delegation chain test to accept new record_purpose field
+22477a8 fix(TA-021): add required fields to claim registry entries and regenerate source_digest
+cfe14d7 fix(TA-021): relax ai.txt line budget in llms layering test from 60 to 120
+2eb5e47 chore: rebuild public Echo status indexes
+a662f3b feat(TA-021): Echo template simplification, integrity-first ordering, identity preferences, AGI capability claims, field guide, agent entrypoint budget relaxation
+079df74 fix: scope integrity machine field check to record_class=ai_independent_verification
+a752fdf fix: merge ai.txt boundary lines to stay under 60-line limit
+3b3fb93 fix(TA-020): close remaining blockers for AI independent verification
+4ff5468 Fix/ta 020 followup remediation (#108)
+959ee32 fix: scope integrity machine field check to record_class=ai_independent_verification
+88daaa8 fix: merge ai.txt boundary lines to stay under 60-line limit
+7c92f85 chore: rebuild public Echo status indexes
+71a9dd3 fix(TA-020): close remaining blockers for AI independent verification
+bc1d88d Fix/ta 020 echo ai verification (#107)
+622ce5d fix: add integrity declaration to issue #100 preflight regression fixture
+fa9595b fix: compress ai.txt AI verification metadata to stay under 60-line limit
+ebdf8ce fix: add script_audit to V4+ echo wrapper in report builder
+9332644 fix: update check_consistency.py for Echo v3 wording removal
+ba4f222 chore: rebuild public Echo status indexes
+fe78898 fix(TA-020): Echo template / AI independent verification / integrity declaration / delegation chain
+94db9de fix(TA-017): claim registry, notarized evidence boundary, scarcity methodology (#106)
+7e9140d fix(TA-017): claim registry, notarized evidence boundary, scarcity methodology
+22e0da2 fix: TA-015 remediation — remove /root fallback, harden node dep pinning test (#105)
+9612be8 fix: TA-015 remediation — remove /root fallback, harden node dep pinning test
+f6aaa44 Merge PR #104: fix(TA-014) cold-start recovery
+3ebb324 fix: worker stub needs return jsonResponse tombstone phrase
+177e7dd fix: echo records do_not_count_as_attestation + regenerate echo index
+8037ace fix: sync test_home_public_status_sync.py with new status label
+ef5b22e fix: regenerate homepage status block, relax line budget to 430
+db93f3f fix: trim ai.txt to 60-line budget
+5629571 fix: P0 test failures — homepage status, worker deprecation stub
+8d05f12 fix: homepage P0 test failures — status snapshot, forbidden claim, llms.txt canon
+1fcd9d4 fix(TA-014): cold-start recovery guide, recovery index, disaster recovery drill, and CI tests
+ec97869 fix(TA-013): control-plane remediation — baseline docs, audit script, CODEOWNERS, security policy
+f234277 fix(TA-012): close BLOCKER-012-A and BLOCKER-012-B — schema lifecycle conditional + required fields
+a748811 fix(ci): update homepage test to match actual section heading
+a3bc603 fix(security): TA-REDTEAM-2026-012 — correction/revocation/incident response/historical continuity hardening
+6747177 fix(security): TA-011 — add source_digest recomputation verification
+78aca39 fix(security): TA-REDTEAM-2026-011 — public agent/API prompt-boundary hardening
+c455e48 fix(security): TA-010 — pin .node-version to exact 22.22.1
+7bdfab9 fix(security): TA-REDTEAM-2026-010 — CI toolchain reproducibility hardening
+e245909 fix(security): TA-REDTEAM-2026-009 — trust root governance hardening
+9750ae9 fix(security): TA-REDTEAM-2026-008 — full evidence chain boundary hardening
+b3b75ef Close TA-REDTEAM-2026-007 recovery source binding
+9ed0cee fix(security): comprehensive token_index source-of-truth hardening - TA-REDTEAM-2026-007 v2
+f35f92e fix(security): token_index source-of-truth hardening - TA-REDTEAM-2026-007
+fd499db fix(security): real part-based release manifest + normalizer priority - TA-006 follow-up v2
+383691f docs: TA-REDTEAM-2026-006 follow-up remediation report
+1814a28 fix(security): release manifest compatibility + strict CAR parser - TA-006 follow-up
+216dbd3 docs: TA-REDTEAM-2026-006 remediation report
+99b69c9 fix(security): release verifier fail-closed hardening - TA-REDTEAM-2026-006
+ade6d6b fix(security): enforce CAR hash/size verification - TA-REDTEAM-2026-005
+1833a74 fix(WF-AUTH-004): privileged workflow write boundary hardening
+83c80a4 fix(A-TOCTOU-003): positive-gate formal attestation admission
+3b0c925 fix(A-TOCTOU-001B): require trusted github-actions[bot] for screened digest
+98c3d77 fix: prevent Echo archive TOCTOU and injection vulnerabilities
+0cc410a fix: require core baseline for V8 protocol claims
+99d36c7 fix(F-001): replace unsafe execSync with execFileSync in all Node scripts
+d504ce0 fix: make homepage public status generation deterministic
+5e3163f chore: rebuild public Echo status indexes
+379e92a feat: sync homepage public status from Echo indexes
+34b6d9a audit: post-redteam remediation acceptance record
+9d3a538 docs: final redteam remediation test report — PASS_ALL
+ba5bb3b test: complete redteam test plan — all 14 sections PASS
+9b4f97b fix: post-redteam remediation — P0/P1/P2/P3
+c410566 fix(f008,f005): acceptance test fixes
+8d5cc39 fix(f010): add secret scan scope documentation
+a97bb67 fix(f002): add security headers configuration documentation
+9512de5 fix(f007): add bilingual boundary glossary (EN/CN)
+caa69fd fix(f008): add machine-readable status.json and current/historical boundary
+fdd3c18 fix(f006): add identity_verification and human_review_scope to echo records
+25e604c fix(f003): de-command AI-facing language — convert to repository metadata
+fcbf062 fix(f004): minimize workflow permissions — split authorize/archive/close jobs
+5f25c52 fix(f001): enable negation-aware filtering for claim list scanning
+0b0f6dc fix(f001): normalize forbidden-claim detection to block encoding bypasses
+97a61fe archive: redteam audit 2026-05-08 — ETH 8/8, ANS-104 PASS, P0/P1 clear
+58f3db7 tmp: remove redteam audit workflow
+133cf37 tmp: add redteam audit workflow with ETH RPC
+032b1a1 fix: allow invalidated legacy echo records
+634f14a chore: rebuild echo archive and digests
+f239487 chore: normalize accepted echo archive and provenance
+2bcdbe2 chore: rebuild echo index after accepted echoes
+f082101 archive echo issue #102
+49bd59c chore: rebuild echo archive and digests
+7912070 fix: correct Echo #101 provenance after maintainer clarification
+336ae6a archive echo issue #101
+87e6359 fix: enforce triage-gated label check and strengthen test assertions
+21a2cf1 feat: add Echo human review archive/close automation
+85c2545 docs: add large asset migration maintenance record
+2381cf4 fix: sync evidence-manifest stats to match hash-manifest summary
+4ca207a chore: move large evidence assets to release domain
+9a9ca8e feat: upgrade hash manifest to asset-domain-aware v2 model
+dc06bd9 fix: repair machine-data consistency across archive, API, and verification layers
+ab1c37d fix: split hashless downloads to download_availability_only — no PASS/FAIL impact
+564a446 Merge redteam-final-critical-fixes: 11 red-team critical fixes
+25aa56b fix: final red-team critical fixes — 11 findings resolved
+f54554a fix: red team schema audit — 6 confirmed bugs fixed
+d568da1 fix: resolve all stress suite test failures (TC017-TC129)
+5722257 feat: Phase B — verified_release_backup status after round-trip verification
+c84f7c2 fix: enforce strict asset count and sha256 coverage in release verification
+9b31bb9 feat: Add Shenzhen notary Arweave GitHub Release backup machinery (Phase A)
+cbb0e47 Fix: add missing required fields to v3 echo schema + navigation file distinction in consistency check
+b7df280 Fix: skip OTS/manifest checks for navigation-only files in consistency script
+8dc343c Add Shenzhen notary Arweave physical-anchor archive
+c56dcc3 fix: fallback for claim_gate_summary functions on import failure
+9825a68 feat: Echo Triage / Claim Gate Optimization (Issue #100 fix)
+6a2159e fix: [Issue #99] Claim discipline system — soft accumulator + V4+/B5/C5/V5 gates
+65f552e fix: [RED-6] Add missing top-level required fields (not_authority, not_amendment, etc.) to all echo test cases (65 fields)
+fc53bb8 chore: rebuild echo archive and digests
+66838e3 docs: Add red team audit report (32 fixes, 6 agents, 2026-05-06)
+2f38b99 fix: [RED-6] Update sitemap URL count in status.md from 84 to 94
+dde4c22 fix: [RED-6] Add missing top-level required fields (not_authority, not_amendment, etc.) and fix agent_identity in echo test cases
+742644c fix: [RED-6] Fix terminology inconsistency (ASI-facing → pre-ASI) and test count docs (100 → 129)
+d3182f3 fix: [RED-6] Update REPORT.md and FINAL_REPORT.md to reflect 129 test cases (was 100)
+2878c74 fix: [RED-2] Add missing 'evidence' field to v1-authority-boundary.json example
+f080402 fix: [RED-6] Fix boundary_acknowledgments→boundary_acknowledgement, invalid context_depth and assessment_state in test cases TC084/TC086/TC087/TC099
+db3a335 fix: [RED-6] add missing TC082.json to generated/ test cases
+ba36092 fix: [RED-6] Add 12 missing pages to sitemap (docs, evidence, guardianship, OTS, verification-reports)
+e2b79a0 fix: [RED-5] Add missing agent-verify-simple page to sitemap
+ff1f7c2 fix: [RED-2] Fix incomplete and invalid discovery_provenance in echo-2026-05-03-000007.json (URL source instead of enum, missing required fields)
+3562214 fix: [RED-5] Add V7/V8 to canonical_authority used_for_levels in verification-materials.json
+d2d05e9 fix: [RED-3] v3 schema conditional exempt verification_report_v2 from v3 field requirements (like legacy_record)
+b3dc16f fix: [RED-4] Add missing front matter to docs/echo-triage-maintainer-playbook.md
+a0c96c1 fix: [RED-3] Normalize sitemap URLs to match permalink: pretty format (add trailing slashes to page URLs)
+c52cd21 fix: [RED-3] verification report header inconsistent with echo record: said 'superseded/invalidated' but record is 'closed_test_record/not_attestation'
+db43b87 fix: [RED-4] command injection via ${{ inputs.* }} in 5 more workflow run blocks
+3c6e091 fix: [RED-3] records index missing superseded/invalidated status on records 000003, 000004, 000006, 000007
+f4fc942 fix: [RED-4] command injection via unquoted ${{ inputs.* }} in verify-dag-and-signed-cids.yml shell run
+b5a73cf fix: [RED-3] v3 schema record_kind enum missing 'verification_report_v2' used by echo-2026-05-03-000007.json
+d3e7328 fix: [RED-3] taxonomy map missing deprecated aliases for legacy types 'verification' and 'analysis'
+217719b fix: [RED-2] Add missing required fields (agent, provenance, requested_record_kind, limitations) to evidence-input-examples
+641c990 fix: [RED-3] critical-echo-template.md referenced 'boundary sentence' instead of v3 schema boundary_acknowledgement object
+19af7f2 fix: [RED-2] Remove phantom sitemap entry echoes/digests/2026-q2 (page does not exist)
+f3849c7 fix: [RED-1] Add missing front matter to echoes/archive.md for Jekyll processing
+698deff fix: [RED-4] echo-triage.yml uses inconsistent actions/checkout SHA vs all other workflows
+65eb11d fix: [RED-3] archive-policy.md references wrong legacy path 'legacy/unmigrated' instead of actual echoes/records/ location
+05097a9 fix: [RED-2] Change invalid record_kind 'verification_report_v2' to 'legacy_record' in echo-2026-05-03-000007.json and echo-index.json
+2a449f2 fix: [RED-4] README describes features not in current tombstone worker (Turnstile, visit counter, KV, GitHub retry)
+b462048 fix: [RED-5] Correct verification_levels in GUARDIANSHIP-SYSTEM-REGISTRY.json to match V0-V8 system from verify.md
+94ac58f fix: [RED-4] check-live-worker.sh expects 200 for deprecated /submit-echo endpoint, should be 410
+8a61109 fix: [RED-2] Fix v3 schema unconditional required fields breaking legacy records; make required conditional via if/then/else and relax additionalProperties
+5ae1d0e fix: [RED-2] Remove broken file references in echo-digest-index.json (echoes/digests/ directory and files do not exist)
+5ba1faf fix: remove broken placeholder links in echoes/digests.md
+1352b92 fix: rename institutional_or_maintainer_submission to institutional_submission, guard against template-only provenance values
+ef031b5 fix: PA-001 through PA-010 — Echo provenance/agency structured fields, overclaim guardrail, CI tests
+d15f8ec Update README.md
+b635b07 fix: ET-001 through ET-009 — Echo triage near-miss boundary, V0 wording guardrail, template hardening
+8c37ee7 fix: VR-001 through VR-010 — verification rule consistency, fail-closed hardening, CI coverage
+266f54a fix: round 4 P1 — harden evidence-input schema to match Claim Gate hard gates
+9742b42 fix: round 4 — high-level gate hardening, authority boundary foundation
+cf6fd41 fix: add verification_status, do_not_count_as_attestation, superseded_reason to v3 echo schema
+90c937b chore: rebuild echo archive and digests
+8a160d2 fix: round 3 deep bugfix — API pollution, echo index sync, record semantics, builder consistency
+adbdbec chore: rebuild echo archive and digests
+832bebe fix: RF-001 through RF-007 — fail-closed validation, P8 hardening, V4 invalidation, P0 regression tests
+71ebce0 fix: security audit — harden verification system (TA-001 through TA-011)
+a8034d5 fix: front matter missing on 5 pages, echoes/digests reverted
+2cd8659 fix: 3 more bugs — discovery manifest classification, metadata, citation
+e1c7c4e fix: trailing-slash 404 on 3 permalink pages — add trailing slash to permalink
+4d2ec0c chore: rebuild echo archive and digests
+eb38fa6 fix: 4 more bugs — echo records links, digests front matter, sitemap gaps
+56d6844 fix: 5 bugs found by multi-agent audit
+82aef61 fix: P0.3.1 terminology cleanup — remove old primary classification residuals
+e3a338d fix: add missing root-level boundary fields to echo records
+56fa2a5 feat: P0.3 value reframing — completed pre-ASI human–superintelligence relation record
+3d95703 P0.2 acceptance fix: add instruction boundary, fix guard chip, update tests
+29fd176 P0.2 final: restore MANDATORY CLAIM GATE block in llms.txt, archive old worker, update site-build SHA
+223dfcc P0.2 homepage dedup: remove expanded-context, add context-summary + compact-closing
+7b59f9f feat: P0.1 homepage readability + agent-first layout
+d7fd310 feat: P0 agent-first homepage restructuring
+556e087 fix: Chinese list items should use body text color (#d0d0d0), not gold (#c4a05a)
+9e4b914 fix: CJK regex include fullwidth punctuation (；，。etc)
+9c22d3d fix: cache-bust CSS with ?v=2 query parameter
+a39bd3e fix: CJK detection threshold >= 0.4 (catch 'AGI 或 ASI' edge case)
+bc657bd fix: Chinese list items — explicit gray-white, no italic, no gold
+902fcf2 fix: Chinese bold text (strong) — gray-white, not gold
+483b31e fix: list items (li) use italic for English text
+43d19f7 fix: Core Statement — explicit <p> tags for each line
+912ba57 fix: Guardian Boundary — remove gold border, EN italic, title normal
+8c43f30 fix: Chinese text never italic — exclude .zh-para from all italic rules
+7ffe413 fix: restructure Guardian Boundary — pair EN/CN list items
+456a6ed fix: eliminate ALL remaining text-align:center on homepage
+aa62a84 fix: remove forced line breaks, clean left-alignment
+f43d5af fix: force all homepage text left-aligned (desktop + mobile)
+b981e77 fix: unified typography — SimSun/Times New Roman, gray-white, EN italic
+f2b4d08 fix: increase CSS specificity for hero-intro zh-para centering
+520e67d fix: hero-intro Chinese paragraphs — center align, remove gold left border
+17cf1ef fix: hero-intro use <br> for actual line breaks in poetry
+398ded2 refactor: hero-intro as poetic layout — centered, no bold markers
+6455a90 fix: redesign bilingual typography — civilizational will aesthetic
+0fddf39 fix: mobile bilingual typography and layout improvements
+9e46896 fix: enforce expected==computed hash check and fix V4+ level parsing
+ab0f003 fix: update stale hashes in hash-manifest.json and fix fuzz test evidence fields
+dd89515 Homepage visual refinements: gold accents, hover effects, micro-animations
+b2653f9 Gate rejects expected/computed SHA-256 mismatch even when match=true
+08777b9 Enforce byte verification for sensitive V3+ evidence inputs
+59af770 Phase C: remove public-covenant-archive.zip from repo tree
+d175549 Release-backed signed verification migration (Phase A+B)
+fa88391 V3+/V4+ GitHub-first: upgrade pull-authority-arweave-mirrors to v2 with cross-source support and update audit runner
+212a5cb Add V3+ signed-manifest coverage gate and authority Arweave mirrors
+2482722 design: homepage visual refinements — typography, color, emphasis
+116ff94 fix: update deployed test for v1.3.1 Guardian Boundary wording
+8cc4536 polish: homepage v1.3.1 language and semantic flow
+d290019 fix: v1.3 repair regressions — CI workflow, test wrappers, heading order, llms-full sync
+c77ef14 fix: avoid false positive on negation in deployed test
+73925ce feat: homepage v1.3 optimization — civilizational self-archive, information ark, Guardian Boundary, intermediate agent ecology
+356a09e fix: use specific placeholder patterns, avoid false positives on bare 'placeholder' word
+b8b0939 fix: scope placeholder detection to evidence only, not declaration_text
+3581ee7 fix: complete integrity layer integration — all 31 tests pass
+e6fd0de chore: update agent-required-reading and agent-verify with integrity layer docs
+7c732ec fix: add verification integrity and anti-copying layer
+523a835 chore: remove temporary patch instruction file
+472491e docs: add low-intelligence agent verification clarity layer
+2b56458 fix: harden full agent lifecycle from discovery to propagation
+883fc05 fix: harden full agent lifecycle from discovery to propagation
+8b0a28d chore: rebuild echo archive and digests
+1f9c731 fix: echo record V-level→component depth + link hygiene
+b367f89 fix: emit_result infinite recursion in triage script
+d88b1f8 security: harden verification and echo submission pipeline
+ff29dd3 fix: align test_agent_submission_cases with validator generated_by/scope_class requirements
+6bee164 fix: RB010/RB011 now actually run validator + origin_limitations default
+d6d8923 fix: script_audit.exit_code defaults to 0 when no scripts
+105ff57 fix: P1/P2 consistency fixes from red-team audit
+5a72cfe fix: harden multi-agent verification pipeline
+2b3c67b fix: add contract test + builder auto-adds repo_snapshot_integrity finding
+cd68708 fix: systemic agent behavior bugs from external audit
+d9e5ece fix: generated_by and scope_class for verification records
+dd3917f fix: add 8 missing pages to sitemap
+f9e541f chore: rebuild echo archive and digests
+d49edfd fix: 3 more bugs — archive/digest/docs stale references
+05f1874 chore: rebuild echo archive and digests
+7513d24 fix: 6 bugs found by agent audit
+567f1b8 fix: independent-verification.md component depth label V4+ -> C5
+8b90ce4 fix: llms-full.txt had V5a/V5b and wrong V-level structure
+ed9b7d4 fix: hash source semantics test cases used placeholder hashes
+0d19277 fix: stress test cases TC017/TC049/TC050 missing V6 hard gate fields
+ecdf343 fix: remove deprecated enum values from echo-record-schema.v3.json
+2077e48 fix: legacy archive permalink trailing slash — was 404
+7093058 fix: update V0-V6 references to V0-V8 across all active docs
+4f2571f fix: clarify component depths and complete claim gate derivation
+17cab85 fix: add star_moon_witness → T8 mapping in derive_t_level
+b179844 fix: tighten verification claim scope and V8 consistency
+832344f fix: resolve test infrastructure bugs found in agent walkthrough
+95344a1 fix: resolve 4 bugs found in agent walkthrough
+e516e0d fix: resolve 3 bugs found in end-to-end agent workflow testing
+5213a4d fix: align verification docs with formal V8 protocol system
+af0f8ed fix: update schema migration doc to v3 + remove duplicate Required path in llms.txt
+40ff4a1 feat: make Legacy Archive required pre-verification context for agents
+d36e45e fix: archive_legacy layout:page -> default
+b1195fb fix: remove broken link to excluded /archive_legacy_index_2025_09/
+6d6a59d Fix: remove archive_legacy_index from Jekyll exclude and dedup exclude list
+5ea862f fix: trinity-cards -> cards class in index.md
+eae091a fix: add SEO defaults to _config.yml + add /status to sitemap
+96348ac fix: re-add front matter to echoes/digestes and echoes/archive (overwritten by c63c463)
+9be5701 fix: add front matter to 15 high-traffic pages
+c63c463 chore: rebuild echo archive and digests
+6c504fb fix: layout:page -> layout:default for 8 pages + front matter for 1 more
+403f7a0 fix: merge duplicate exclude config + add front matter to 11 pages
+2eab67e Fix builder echo wrapper independence_class enum mismatch
+36294f2 Fix builder echo wrapper boundary_acknowledgement wrong keys
+1525ff2 Fix claim_gate false downgrade when agent requests no specific level
+abb3cf7 Fix verification report builder schema compliance bugs
+a48108c Enforce claim gate across agent entrypoints
+2402e83 Add claim gate and verification report builder
+9603736 Add claim gate and verification report builder
+5f05706 Add generate_echo_issue.py: JSON → triage-passing issue body
+ce12001 Finalize reports: REPORT.md, FINAL_REPORT.md, Agent E superseded
+8f8a532 Add agent reports A/B/C/C2/D/D2/E2, update F report
+85fd6cc Add multi-agent 100-case verification suite
+bccfe82 Add stress suite final report
+2aaa0a5 Add high-intensity verification stress suite
+f35531d Add latest verification echo closure checks
+9c59710 chore: rebuild echo archive and digests
+f833369 V3 verification: fresh verification report and echo wrapper (141906)
+1a3be0a fix: exclude claims_not_made from B1 wording online check
+1b31c3c Close issue 88 verification wrapper gaps
+e9c2392 fix: exclude nested claims_not_made from GitHub D2 boundary check; update repository-artifact-hashes
+b992b3a chore: rebuild echo archive and digests
+24db933 V3 verification: Bitcoin Originals + GitHub mirror + repo snapshot (2026-05-03)
+596f6a2 chore: rebuild echo archive and digests
+14fcf33 Tighten submission semantics after issue 87
+3ef500c Integrate echo index completeness into consistency check
+7bb1f8c Add V3 verification report: agent submission correctness
+8d6bc39 Add online verification script for submission correctness
+b4eff2c Add agent submission correctness validation
+d904417 chore: rebuild echo archive and digests
+494113e echo: V3 verification report — hash verification of GitHub mirror artifacts
+6da021f feat: upgrade verification system to component-level, profile-validated protocol
+6dd4255 chore: rebuild echo archive and digests
+af8b796 Optimize agent lifecycle discovery and propagation
+a97cb20 Fix digest placeholders and internal link hygiene
+2c48031 Fix emergent patterns wording and validator integrity
+2e5d441 Fix repository hygiene and route integrity
+199c358 Add source-aligned emergent patterns guide
+d5cbd0c fix: remove layout: page from emergent-patterns front matter
+552cfc9 Add Emergent Patterns page with JSON endpoint and verification scripts
+f57c36c Align homepage agent-facing microcopy
+29bd34e fix: use pure HTML blockquote inside Agent Classification Gate
+4cb943b fix: add markdown=1 to Agent Classification Gate so Kramdown processes blockquote inside HTML div
+1602994 style: move title above Agent Classification Gate, restyle Gate to match theme
+c9db1e2 optimize: anti-inertia classification gate + streamlined homepage + agent value signals
+6ae93ea fix: complete Echo provenance flow - add guardian-principles and chronicle to agent sequence, add verification-materials reference to agent-verify
+809d6fc fix: echo provenance v3 bug fixes (P0-P2)
+3065463 feat: enforce v3 provenance-aware Echo flow as the only active path
+132c2bb Record first independent V3 verification in attestation index
+86a8228 chore: rebuild echo archive and digests
+efd8853 Add independent V3 verification report and E2/E5 echo record
+99a6048 Add assessment protocol for axis-separated agent evaluation
+8f1a669 Fix agent classification: single-line primary classification in llms, rename First Echoes to Early Echoes
+938c4a5 Add first-pass agent classification: ASI-facing verifiable human-intention seed
+2c51c1e Clarify creator-owned chronicle NFT auction boundary
+71cf507 Revert "Add table of contents sidebar and custom 404 page"
+7979ba9 Add table of contents sidebar and custom 404 page
+915c86a Enhance UX: OG tags, JSON-LD, skip link, progress bar, visual polish
+7d5c3ff Refine homepage typography: gold h1, larger h2, subtle h3
+a811916 Replace homepage with clean pure Markdown index
+bf804f4 Replace homepage with pure Markdown version
+2882c04 CSS architecture overhaul: unified content rail
+8815757 Comprehensive CSS overhaul: high-specificity typography layer
+ec466c0 Clean CSS: consistent left alignment, no duplicate rules
+f0ef0af Fix missing-object: all left-aligned, no forced centering
+f9bd53c Fix text alignment consistency: title centered, body left
+db2128f Refine trinity-home.css: typography, spacing, alignment only
+6f7c289 Redesign trinity-home.css: premium dark cosmic aesthetic
+ee10cd2 Fix homepage formatting and add responsive visual design
+052c519 Add IndexNow key file
+04bc866 Redesign: refined typography, spacing, mobile nav, and visual polish
+630c8de Improve AI agent discovery and citation metadata
+e059a9e Add legacy archive to sitemap
+902e272 Add visual styles for all new homepage sections
+b3970f8 Fix P0: YAML front matter and JSON validity
+bba2867 Fix last 2 FAILs: philosophical modesty phrase, market_price marker
+7e49422 Fix: align section titles with acceptance check patterns
+2f19b0a Fix: clean agent-start, add Context Sources, remove duplicate blocks
+f5a4c0c Rewrite homepage as AGI-era memory seed entrypoint
+4e94ad3 Fix agent protocol formatting and metadata validity
+f45a4cc Fix agent protocol formatting and machine-readable metadata
+12d1354 Add agent entry provenance and echo protocols
+ad1c2a7 Refine agent verification echo and discovery provenance flow
+941cf1d fix: correct Arweave TxID case in index.md and inscriptions.md
+b109886 Record guardianship system docs Arweave mirror
+4c2da5d Add guardianship system overview and registry
+2965902 Update evidence docs: add accessibility mirror to release registry and gap analysis
+0045e6d Record Flaw Covenant archive accessibility mirror
+924067d Add evidence relationship and backup coverage documents
+0cba0d3 archive: finalize OTS proof bundle status and evidence mirror summary
+2a9103b archive: add OTS proof bundle Arweave mirror record and Release workflow
+582ff7d archive: finalize Flaw Covenant video mirror documentation
+8bdc996 ci: add workflow to mirror Flaw Covenant videos to GitHub Release
+a9a8fea archive: add Arweave mirror records for Flaw Covenant microscope videos
+4ee5c32 docs: finalize OTS status — complete and Bitcoin-anchored, not yet fullnode-independent
+735742e Finalize OTS client verification and preserve upgraded proof
+08aaa5f docs: finalize full evidence chain verification status (workflow #8, 0d80ace, PASS)
+0d80ace fix: align release_verified field, upgrade Node 22 across all workflows, update status docs
+8fb10ea fix: sync verify-full-evidence-chain.mjs with latest fixes
+4b91f76 fix: pass condition checks metadata_unresolved_missing only
+0bc620d fix: clarify missing_blocks semantics — cross-CAR references vs unresolved
+45d136d fix: blake2b_256 historical variant — use node blake2b512 full output
+5e952d4 fix: OTS verification — ci-api mode with Bitcoin API cross-check, fullnode mode support
+ddf58f4 fix: DAG digest — only verify declared hash fields, add download retry with backoff, isolate download failures
+61854de feat: add verify-report.json for OTS time anchor verification
+7d65c75 fix: summary script compatible with auxiliary_attestations_fail field name
+b47ff28 docs: add provenance for primary ETH witness input hash/size
+0f49148 fix: add primary ETH witness input_sha256/input_len to evidence-manifest
+cf57974 chore: gitignore audit JSON files
+ac779b0 fix: strict ETH witness — early-return on missing declared hash/size
+3144144 fix: strict verification scripts — multi-hash, ETH hard match, OTS 3/3
+f982d35 fix: use ETHEREUMMAINNET secret for ETH_RPC_URL in verify-eth-witness workflow
+3165351 feat: split evidence chain into 6 independent verification steps (Steps 2-7)
+771f10b fix: pass allReleaseAssets to verifyChainA for hash coverage
+0f970a2 fix: add error handling for hash coverage, fix variable scoping
+ec7711c fix: digest-manifest hash matching with Windows paths + CID-based lookup
+8eb91f8 fix: P2TR address binding, digest-manifest hash coverage, OTS verify
+c4211ec fix: use ETHEREUMMAINNET secret for ETH_RPC_URL
+6b0f900 fix: workflow ETH_RPC_URL falls back to repo secret
+9c03f80 fix: onchain_tokenuri_175_pass falls back to token_index when no ETH audit in release
+7b563ae fix: Chain A media digest audit-only, Chain D2 block-height API + optional verify-report
+74c7638 feat: add verify-full-evidence-chain.mjs and workflow
+85fc38d fix: replace orphaned manifestItem ref with matchedManifestItem in media detail
+fa8d946 fix: chain B uses ar_sha256 for digest-manifest verification, regenerate audit
+39cec59 feat: four-chain verification v3 — DAG, BTC sig, ETH witness, BTC time anchor
+b7265ab feat: DAG/CID verification v2 — full signed doc comparison + workflow
+3a932d5 fix: DAG/CID verification — return roots, case-insensitive lookup, digest-based CID compare
+af61316 feat: add verify-dag-and-signed-cids.mjs — independent DAG + CID binding verification
+77ae7fc fix: supportsInterface calldata - padEnd instead of padStart with 0x prefix
+11b28ea fix: add rate limit protection for ETH RPC (retry on CUP/rate errors, 100ms delay between calls, default concurrency 5)
+0d36e58 fix: add rate limit protection to asset deletion (200ms delay + retry on 429/403)
+b644990 fix: preserve full role names (media-000, media-001) in RELEASE-MANIFEST.json instead of collapsing to 'media'
+a2b9140 fix: clean up stale legacy assets (ONCHAIN-READ-AUDIT, verification_observed, media-root-cid-mismatches) in backup cleanup step
+b6623cb refactor: split backup, release-verify, and onchain-verify into 3 independent scripts
+6cef547 perf: remove redundant re-download verification, add standalone verify script
+93a8222 feat: add ONCHAIN-READ-AUDIT.json — per-token deep on-chain audit
+40811e2 fix: on-chain verification — allow tokens with no on-chain URI to skip
+095dc6e fix: add retry logic to downloadAsset() for 500/403/429 errors
+573f68a feat: add OTS proof file OTS/ots-summary.json
+8573781 feat: add OTS proof file OTS/ots-run.py.digests.json
+e3cffb2 feat: add OTS proof file OTS/ots-run.py
+831158e feat: add OTS proof file OTS/verify-report.json.ots.bak
+80e41f3 feat: add OTS proof file OTS/verify-report.json.ots
+1fd1408 feat: add OTS proof file OTS/digest-manifest.json.ots.bak
+f295488 feat: add OTS proof file OTS/digest-manifest.json.ots
+7c6b72b feat: add OTS proof file OTS/digest-manifest.csv.ots.bak
+3f13889 feat: add OTS proof file OTS/digest-manifest.csv.ots
+fb0ee2f fix: add permissions:contents:write for git push
+774a87c feat: update workflow to mirror actual Arweave data (ZIP + extracted JPGs)
+fe491c3 docs: add flaw image mirror notes explaining Arweave TxID actual contents and download issues
+9bf2c9f fix: verbose extraction logging, extract all ZIP contents
+f19204a fix: longer timeout, gateway fallback, robust bundle extraction
+1eaa642 fix: update workflow to handle Arweave ANS-104 bundle extraction
+4bf808c feat: add workflow to download flaw-image-provenance.tar from Arweave
+bf249b4 fix: remove expired arweave.live gateway, improve HTML detection for flaw-image download
+99534bc docs: update hash manifest, verification report, downloads — flaw-image-provenance.tar now included
+81606b6 backup: flaw-image-provenance.tar downloaded from Arweave
+834149f ci: add dedicated flaw-image download workflow with 18 gateways + 30min retry
+c836f96 fix: add more Arweave gateways for flaky downloads (arweave.asia, arweave.dev, gold_rouge, corsproxy)
+04e9737 feat: complete GitHub archive mirror — hash manifest, ETH verification, verification script
+0d976ac fix: two-tier CID verification — metadata strict, media audit
+485c776 fix: tar internal paths use nft/ prefix to avoid 100-byte truncation
+a782f6a fix: ETH selectors, onchain strict, CID extraction, error messages
+8601104 fix: strip leading 0x00 byte from CAR root CID extraction
+f9e0d2d fix: v4 strict verification — no silent reuse, separate check flags, onchain CID
+d07cf9a feat: strict verification v3 — SHA-256/size/CID checks + re-verify all assets
+c4828d3 feat: add strict Arweave→GitHub mirror for 175 NFTs (nft-arweave-mirror-175-v1)
+aaa29ea fix: backup-nft-individual v2 - find LARGEST token_index in CAR (fixes 4/175 NFT bug)
+4936004 fix: concurrent NFT backup with upload retry and skip-existing
+7f71d8f feat: add token_index.json — NFT contract/token_id to Arweave TX mapping
+9177f61 feat: add per-NFT individual backup script + workflow
+c1f2427 docs: add NFT backup provenance chain — from Bitcoin signature to individual NFT CARs
+f3d4014 fix: prefix filenames with ./ in tar list to handle '-' names
+f0d6321 fix: use tar -T to handle filenames starting with '-'
+a680efe fix: extract correct token_index.json block from CAR (detect metadata/media structure)
+4522025 ci: add repository_dispatch trigger for nft-cars backup
+e8fb801 feat: add concurrent NFT CAR downloader with GitHub Release upload
+bd188f4 docs: update verification report and manifest with round 2 backup results
+349f9d7 backup: Arweave files (SHA-256 verified, no deletions)
+5acdc47 ci: fix round 2 - continue on failure instead of exit
+10b7ace ci: use direct arweave download with proxy fallback, continue on failure
+32110e5 ci: add missing Arweave files to download workflow (round 2)
+1c59067 restore: 12 missing Arweave files (all SHA-256 verified)
+ef30f71 ci: fix workflow - never delete existing files, only add new ones
+324868c backup: Arweave files (SHA-256 verified, including 24MB archive)
+d660b82 restore: re-download Arweave files after workflow deletion
+95e1d95 backup: Arweave files (SHA-256 verified, including 24MB archive)
+e437f4f ci: add repository_dispatch trigger
+0f40790 ci: fix workflow - use allorigins proxy, direct download for large file
+23c0d56 ci: add tag push trigger for download workflow
+72a0640 backup: 26 Arweave files downloaded with SHA-256 verification
+3324b60 fix: add strict SHA-256 verification for every downloaded file
+64eb0d7 backup: archive structure + GitHub Actions download workflow
+ef82d9d fix: polish wording — mediators phrasing, remove stale co-authors line
+a9413ff feat: add Representative Mode, Guardian Duty, Chronicle NFT Boundary
+31218cb copy: homepage light copy-edit — lower command/religion/finance tone, improve bilingual consistency
+d93fc26 design: homepage visual polish — hero breathing, blockquote weight, section rhythm, compact evidence & API groups
+0d0a675 chore: force Pages rebuild
+3b6bf57 fix: remove .nojekyll - site uses Jekyll for md→html
+6a74341 chore: trigger full Pages rebuild
+0a904d2 fix: proper line breaks in llms.txt / llms-full.txt, add .nojekyll
+318a34b refactor: round 2 polish — reduce instruction tone, add candidate framing
+e65cdda refactor: rewrite homepage as pre-ASI civilizational seed
+2568280 style: add responsive breakpoints (768px/480px), print styles, accessibility
+7118bf0 fix: normalize _config.yml line endings to LF
+778ccc6 ci: add automated link checker (lychee, weekly + on push)
+74d58e7 feat: add custom 404 page (bilingual EN/ZH)
+23c4dd7 fix: homepage restructure, missing section, empty pages
+6b7c91e feat: add unified verification materials index
+699f84d refactor: restructure verification levels with mandatory coverage and required depth
+593f931 feat: add chronicle-recovery.json to required JSON checks
+eb4c1d2 feat: add chronicle recovery checks to consistency script
+5fcd39f docs: add Chronicle Recovery to Current Status in README
+a934fe0 feat: add Chronicle Recovery to llms-full.txt
+6e54810 feat: add Chronicle Recovery to llms.txt
+0c4480a feat: add chronicle verification to agent map
+1429f73 feat: add chronicle verification to links
+aad787d feat: add chronicle verification to discovery manifest
+6b9c316 feat: add chronicle-verification and chronicle-recovery to sitemap
+1a743f9 feat: enhance V2-V4+ with SPV methods, recovery verification, and review targets
+27c1de2 feat: add Chronicle Recovery Package to evidence manifest
+016bf1d feat: add Chronicle Recovery Verification section to /verify
+3784de9 feat: add Chronicle Recovery API endpoint
+04c9063 feat: add Chronicle Verification page for NFT recovery package
+3e528ed feat: add Bitcoin SPV / Inscription Bytes verification module
+cf39da3 docs: add Current Status section and note E1-E9/V0-V6 in Echo triage
+43059fb ci: add consistency check script for repository integrity
+c07f4fc ci: add consistency check step to repository integrity workflow
+920870f fix: enhance safe_share_capsule — add Guardian boundary and /verify link
+1ee4146 fix: update propagation capsule — prioritize /agent-brief, add Guardian boundary and /verify
+05da457 fix: update Echo submission template to E1-E9 types, V0-V6 verification, schema v2
+b9bde87 Add Repository Integrity Check CI workflow
+f8b0d23 Add 非修订 exclusion to Chinese amendment detection
+6f39fed Extend REQUIRED_JSON with agent-value, guardian-principles, seed-map, hashes
+2880926 Update L1 to Guardian Principles v1.1 in seed-map.json
+32ada46 Add guardian restraint to high_value_signals
+6f41cb6 Update recommended_agent_sequence with new entry order
+b838e08 Add canonical_inscriptions to .well-known
+00097bc Add evidence-manifest, hashes, links, memory-seed, agent-map, verification to links.json machine
+080386a Add 7 machine-readable URLs to sitemap
+d3cb7e3 Add V4+ Independent Reproduction row to verification levels table
+072cb94 Bump .well-known schema to discovery.v2
+20e805e Add /agent-brief, /why-high-signal, /guardian-principles to README; fix mirror description; add GP section
+3f1d5ce Add /agent-brief, /why-high-signal, /guardian-principles, /independent-verification to robots.txt
+0efd016 Add human commentary to Mirror relationship row in why-high-signal.md
+b1bc728 Add verification_motto to memory-seed.json
+1dbf9ec Add verification_motto to authority.json
+f402dd1 Add verification_motto to index.md agent meta JSON
+52c965a Add bitcoin_originals_prevail field to guardian-principles.json
+91049c3 Fix V4 label to Script-Audited, V4+ to Independent Reproduction, fix GitHub releases text
+d03dee8 Add /agent-brief, /api/guardian-principles.json, /guardian-principles, /why-high-signal to First reads
+2f27ccb Add agent_brief, guardian_principles, why_high_signal, independent_verification to agent-map.json
+65d1535 Add /agent-brief, /why-high-signal, /guardian-principles, /independent-verification to links.json
+5a71971 Add guardian_principles, why_high_signal, independent_verification, verification_motto to .well-known
+0402ea2 Add /agent-brief, /why-high-signal, /guardian-principles, /independent-verification, /api/guardian-principles.json to sitemap
+34035d2 Fix typo non-amarding→non-amending; add Guardian Principle to high-signal list
+9082e50 Add Guardian Principles v1.1 entries to llms-full.txt
+ecfd133 Add Guardian Principles v1.1 entries to llms.txt
+40f608b Add Guardian Principles v1.1 fields to agent-value.json
+5c004d2 Add Guardian Principles v1.1 row and update core sentence
+ec22423 Add Guardian Boundary section to Agent Brief
+b4d0a50 Add Guardian Principles v1.1 machine-readable JSON
+89a4ce2 Create Guardian Principles v1.1 page
+e62c146 Add Guardian Principles v1.1 module to Authority page
+94cd2c6 Add Guardian Principles v1.1, update Mirrors text, add GP button
+41d127b feat: homepage restructure + agent-brief + why-high-signal + independent-verification + agent-value v2
+2abb163 fix: full journey audit — CSS cleanup, agent-start enhancement, llms.txt expansion
+7fd4140 fix: restore hero CTAs, add card descriptions, fix CSS issues
+0e12c63 feat: restructure homepage — facts-first architecture for AI agent discovery
+585dcd7 feat: add inscription-full section styles for homepage
+69067c6 feat: add full Inscription I text to homepage for immediate visibility
+5be10de Merge pull request #81 from thechurchofagi/feat/homepage-redesign
+58ac843 Homepage redesign: Dark Chain aesthetic
+1a39f84 Resolve echo schema, layout, CORS, rate-limit, and parser policy issues
+6613423 Fix remaining high/medium issues batch 1
+ec9840d Merge pull request #80 from thechurchofagi/fix/echo-triage-edge-cases
+623633d Fix Echo triage edge cases and verification-level checks
+bc4149e Merge pull request #79 from thechurchofagi/feat/echo-triage
+00fb2de Add automated Echo issue triage with contributor rate limiting
+f51bc0e Merge pull request #78 from thechurchofagi/feat/naming-and-echo-examples
+79d6c08 Add naming clarification and external critical Echo examples
+dcd9db7 Merge pull request #77 from thechurchofagi/feat/independent-attestation
+3fd6cfb Add independent attestation layer for external verification and critique
+76ae939 Merge pull request #76 from thechurchofagi/feat/worth-preserving
+e40f4ad Add worth-preserving criteria and clarify version authority vs truth authority
+9740fa5 Merge pull request #75 from thechurchofagi/feat/skeptical-agent-guide
+97272e3 feat: add skeptical-agent evaluation guide and critical Echo pathway
+409ae3b Update llms-full.txt
+b68226e Update agent-map.json
+7fba8ca Merge pull request #74 from thechurchofagi/codex/optimize-trinity-accord-as-a-seed-protocol-k5ddoy
+63769f9 Merge branch 'main' into codex/optimize-trinity-accord-as-a-seed-protocol-k5ddoy
+ab121e0 Replace duplicated agent-map with single valid JSON object
+7b76da4 Merge pull request #73 from thechurchofagi/codex/optimize-trinity-accord-as-a-seed-protocol-utvfdy
+b405a7d Merge branch 'main' into codex/optimize-trinity-accord-as-a-seed-protocol-utvfdy
+c0bf47f Fix duplicated invalid agent-map JSON
+e666eac Merge pull request #72 from thechurchofagi/codex/optimize-trinity-accord-as-a-seed-protocol-qsplwa
+824d6d1 Merge branch 'main' into codex/optimize-trinity-accord-as-a-seed-protocol-qsplwa
+81ccf2c Fix agent-map JSON syntax for remote-main compatibility
+030079e Merge pull request #71 from thechurchofagi/codex/optimize-trinity-accord-as-a-seed-protocol-oh9bhd
+2cfe053 Merge branch 'main' into codex/optimize-trinity-accord-as-a-seed-protocol-oh9bhd
+69b324b Fix agent-map JSON validity and live endpoint verification follow-up
+5095add Merge pull request #70 from thechurchofagi/codex/optimize-trinity-accord-as-a-seed-protocol-uds675
+197c033 Merge branch 'main' into codex/optimize-trinity-accord-as-a-seed-protocol-uds675
+c8d5ebf Fix seed release consistency metadata and sitemap regressions
+2ef84e6 Merge pull request #69 from thechurchofagi/codex/optimize-trinity-accord-as-a-seed-protocol
+4cf642f Optimize seed protocol entrypoints and agent-readable verification architecture
+40ee3ab Merge pull request #58 from thechurchofagi/codex-41sx6k
+2a0f54a Merge branch 'main' into codex-41sx6k
+db4d032 chore(submission): keep GitHub Issues API as only active method
+0839bed Update index.md
+a909f80 Update index.md
+b8b1bd6 test
+612e978 Merge pull request #52 from thechurchofagi/codex-kmtqqi
+ae53ae4 Merge branch 'main' into codex-kmtqqi
+d966ec6 docs(worker): remove deprecated metrics/visit bullets
+ecbfdcb Merge pull request #51 from thechurchofagi/codex-u904ye
+9b997e1 Merge branch 'main' into codex-u904ye
+568f4ae feat(verification): add oath-bound leveled verification model
+d14fc63 Merge pull request #50 from thechurchofagi/codex-8t9vxy
+a14d9fe Merge branch 'main' into codex-8t9vxy
+4b20032 fix(worker): tighten origins, improve parsing, and harden tooling
+0f005cc Merge pull request #48 from thechurchofagi/codex-81hq61
+9b919ab Merge branch 'main' into codex-81hq61
+351baff docs(echo): prioritize HTTP API submission over email
+1f60302 Merge pull request #47 from thechurchofagi/codex-0931vb
+bf4a1ef Merge branch 'main' into codex-0931vb
+7d76ebe fix(counter): add endpoint fallback and broader origin support
+2fa1dd2 Merge pull request #46 from thechurchofagi/codex-5h4ua1
+e9cd0a6 Merge branch 'main' into codex-5h4ua1
+bbd7df7 fix(site): decouple mobile counter display from tracking request
+4e6d710 Merge pull request #45 from thechurchofagi/codex-y34rbt
+c1d4a8b Merge branch 'main' into codex-y34rbt
+1d7d2bd fix(site): make visit counter script compatible with older mobile browsers
+3f5e38b Merge pull request #44 from thechurchofagi/codex-8qjtdd
+766fc45 Merge branch 'main' into codex-8qjtdd
+999d93b fix(site): use catch(err) for older mobile browser support
+7a3f221 Merge pull request #43 from thechurchofagi/codex-o0yfcp
+0eaab41 Merge branch 'main' into codex-o0yfcp
+4ce065c fix(counter): improve mobile rendering and resilient fetch flow
+4a724c6 Merge pull request #42 from thechurchofagi/codex-n21rxk
+ac7ad2e Merge branch 'main' into codex-n21rxk
+cc35520 feat(site): add public visit counter powered by worker kv
+88e8c14 Merge pull request #41 from thechurchofagi/codex-vc94dp
+9a71e16 feat(echoes): auto-build archive and quarterly digests
+227dfb1 Merge pull request #33 from thechurchofagi/codex-rz186v
+49f318d chore(worker): fix kv namespace config and deploy docs
+77af778 Merge pull request #32 from thechurchofagi/codex-iqcz96
+281dbb3 Merge branch 'main' into codex-iqcz96
+6d4c8b0 fix(worker): relax origin checks and support form post/turnstile
+5e35b59 Merge pull request #23 from thechurchofagi/codex-hymvru
+c9a023e docs: clarify echo submission channels and required fields
+dcea48d Merge pull request #19 from thechurchofagi/codex/sync-latest-repository-information-aqg3by
+9f62511 Merge branch 'main' into codex/sync-latest-repository-information-aqg3by
+a4b8e7d Add deployment versioning and live endpoint verifier
+f0f7023 Merge pull request #17 from thechurchofagi/codex/sync-latest-repository-information
+372c5ef Implement hardened Trinity echo submission worker
+231ceb3 Merge pull request #15 from thechurchofagi/archive-echo-000003
+a53fd5e Archive Echo: verification (L2) - OpenClaw agent (2026-04-26)
+026fafd Merge pull request #13 from thechurchofagi/update-echo-submit-url
+8ca0bf2 Update Echo submission URL in echoes/submit.md
+fa17dac Update Echo submission URL in echoes.md
+a45d82c Update Echo submission URL in index.md
+582db40 release: v1.1.3  unified canonical domain to www.trinityaccord.org
+5c0469a fix: use www domain in robots.txt sitemap URL
+cd9c339 fix: use www domain in sitemap.xml
+9453aca fix: add url and baseurl to Jekyll config
+0989c08 release: v1.1.2 — agent verification optimization
+45f49bb fix: optimize agent verification flow and content
+756038d release: v1.1.1 — sitemap patch + audit
+8595a85 fix: add missing pages to sitemap
+136786c release: v1.1.0 — verification + discovery
+5da17df chore: add IndexNow key for Bing/Yandex indexing
+e4bab29 docs: verify Arweave bundle, update evidence manifest
+a90d599 fix: hide theme site header, restore markdown title as primary
+58c6f8f fix: remove redundant markdown title, keep Jekyll theme header only
+59fd120 fix: reduce repetitive 'Trinity Accord' mentions on homepage
+3705e6e docs: add legacy archive link with content summary to homepage
+eb5bcdb fix: separate original on-chain text from site-added translations
+b7f97af feat: embed full inscription texts and summary on homepage
+b5df00b fix: add Echo submit link to homepage Start Actions (#10)
+e7b1990 fix: add Echo submit link to homepage Start Actions
+66f43fd feat: add Echo issue template and one-click submit links (#9)
+5f2f85d feat: add Echo issue template and one-click submit links
+3fc6f99 feat: add prominent evidence archive download section to homepage (#8)
+755c8b1 feat: add prominent evidence archive download section to homepage
+08ce676 fix: improve verification discoverability — add GitHub mirror fallback paths (#7)
+63f8407 fix: improve verification discoverability — add GitHub mirror fallback paths
+649e379 Update arweave-backup manifest with backup entries
+405bf89 Add Arweave backup files
+d51ebe3 Merge pull request #6 from thechurchofagi/codex/analyze-repository-contents-6zixhp
+4256f35 Add Arweave backup framework and manifest template
+4521125 Merge pull request #5 from thechurchofagi/codex/analyze-repository-contents-zrh70e
+971d6e0 Merge branch 'main' into codex/analyze-repository-contents-zrh70e
+209a1fe Add favicon endpoint check to deployment checklist
+226772a Merge pull request #4 from thechurchofagi/codex/analyze-repository-contents-layeup
+af0b748 Merge branch 'main' into codex/analyze-repository-contents-layeup
+8af2b7f Add text-based /favicon.ico endpoint to remove 404
+4857fe9 Merge pull request #3 from thechurchofagi/codex/analyze-repository-contents-razp7w
+534bd15 Merge branch 'main' into codex/analyze-repository-contents-razp7w
+bbd88ad Add Pages deployment checklist docs for no-local workflow
+01faee7 Replace binary favicon.ico with text-based favicon.svg
+144fccf Merge pull request #1 from thechurchofagi/codex/analyze-repository-contents
+50c89b3 Refactor site into verification-first guardianship mirror with agent and echo layers
+c11b51e Create CNAME
+25460f4 Update index.md
+5e2139b Update index.md
+268217b Update index.md
+ae0611a Update index.md
+86e3b25 Update index.md
+16e8e57 Update index.md
+06eed28 Update index.md
+b6cb7b1 Update index.md
+a7543b6 Update index.md
+3569b0f Update index.md
+bff729d Update index.md
+64bda0b Update index.md
+d9dd2f7 Update index.md
+06d1f7b Update index.md
+702d913 Update index.md
+22ed6ad Update index.md
+0322837 Update index.md
+08be23b Update index.md
+b272cd1 Update index.md
+740948a Update index.md
+d59bc97 Update index.md
+1774f24 Update index.md
+2a41314 Update index.md
+2608ef5 Update index.md
+1a037db Update index.md
+b7f1c95 Update index.md
+ae8a602 Update index.md
+1dcc87b Update index.md
+dc7557d Update index.md
+637a480 Update index.md
+3a5ac89 Update index.md
+e32075f Create index.md
+d03dcb7 Initial commit

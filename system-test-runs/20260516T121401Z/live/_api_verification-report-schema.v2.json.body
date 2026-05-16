@@ -1,0 +1,942 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.trinityaccord.org/api/verification-report-schema.v2.json",
+  "title": "Trinity Accord Verification Report Schema v2",
+  "description": "Schema for component-level, protocol-profile-validated verification reports.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "report_id",
+    "reporter",
+    "discovery_provenance",
+    "protocol_level_claimed",
+    "component_findings",
+    "protocol_profile_check",
+    "data_sources_used",
+    "access_paths_used",
+    "fallbacks_used",
+    "external_sources_queried",
+    "hashes_computed",
+    "samples_checked",
+    "physical_evidence_reviewed",
+    "confidential_challenge",
+    "celestial_witness",
+    "limitations",
+    "claims_not_made",
+    "authority_boundary_preserved",
+    "integrity_boundary",
+    "generated_by",
+    "verification_scope_label"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "trinityaccord.verification-report.v2"
+    },
+    "report_id": {
+      "type": "string",
+      "description": "Unique identifier for this report"
+    },
+    "reporter": {
+      "type": "object",
+      "required": [
+        "name",
+        "type"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "ai_agent",
+            "human",
+            "organization",
+            "hybrid"
+          ]
+        },
+        "version": {
+          "type": "string"
+        },
+        "tooling": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "discovery_provenance": {
+      "type": "object",
+      "description": "How the reporter discovered the Trinity Accord"
+    },
+    "origin_classification": {
+      "$ref": "https://www.trinityaccord.org/api/origin-classification-schema.v1.json",
+      "description": "Origin classification separates how the report was initiated from how independently the method was performed. Human-directed or agent-referred verification may still be methodologically independent if fresh reproducible actions were performed."
+    },
+    "protocol_level_claimed": {
+      "type": "string",
+      "enum": [
+        "V0",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V4+",
+        "V5",
+        "V6",
+        "V7",
+        "V8"
+      ]
+    },
+    "component_findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "component",
+          "level_claimed",
+          "target_id",
+          "data_sources",
+          "access_paths",
+          "method",
+          "evidence",
+          "limitations",
+          "claims_not_made"
+        ],
+        "properties": {
+          "component": {
+            "type": "string",
+            "enum": [
+              "bitcoin_originals",
+              "digital_mirrors",
+              "time_anchors",
+              "chronicle_recovery",
+              "nft_evidence",
+              "physical_anchor",
+              "echo_attestation"
+            ]
+          },
+          "level_claimed": {
+            "type": "string",
+            "pattern": "^[BDTCNPE][0-9R+]+$"
+          },
+          "target_id": {
+            "type": "string"
+          },
+          "data_sources": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "access_paths": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "method": {
+            "type": "string"
+          },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "limitations": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "claims_not_made": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "scope_class": {
+            "type": "string",
+            "enum": [
+              "canonical_mirror_integrity",
+              "repository_snapshot_integrity",
+              "chain_reference_check",
+              "chronicle_recovery",
+              "physical_public_evidence",
+              "physical_witness",
+              "echo_provenance"
+            ],
+            "description": "Scope class for this component finding"
+          }
+        }
+      }
+    },
+    "protocol_profile_check": {
+      "type": "object",
+      "required": [
+        "profile_source",
+        "hard_gates_satisfied",
+        "minimum_components_satisfied",
+        "recommended_components_satisfied",
+        "underreported_items",
+        "incompatible_claims"
+      ],
+      "properties": {
+        "profile_source": {
+          "type": "string",
+          "const": "/api/protocol-verification-profiles.json"
+        },
+        "hard_gates_satisfied": {
+          "type": "boolean"
+        },
+        "minimum_components_satisfied": {
+          "type": "boolean"
+        },
+        "recommended_components_satisfied": {
+          "type": "string",
+          "enum": [
+            "true",
+            "partial",
+            "false"
+          ]
+        },
+        "underreported_items": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "incompatible_claims": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "data_sources_used": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "access_paths_used": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "fallbacks_used": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Fallback paths used (e.g., GitHub mirror instead of direct Arweave)"
+    },
+    "external_sources_queried": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "hashes_computed": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "artifact",
+          "algorithm",
+          "expected",
+          "computed",
+          "command",
+          "match"
+        ],
+        "properties": {
+          "artifact": {
+            "type": "string"
+          },
+          "algorithm": {
+            "type": "string"
+          },
+          "expected": {
+            "type": "string"
+          },
+          "computed": {
+            "type": "string"
+          },
+          "command": {
+            "type": "string"
+          },
+          "match": {
+            "type": "boolean"
+          },
+          "expected_hash_source": {
+            "type": "string",
+            "description": "Where the expected hash came from (e.g., api/hashes.json, report-declared, derived during run)"
+          },
+          "expected_hash_authority_class": {
+            "type": "string",
+            "enum": [
+              "canonical_manifest_hash",
+              "repository_manifest_hash",
+              "report_declared_snapshot_hash",
+              "external_tool_observed_hash",
+              "derived_during_this_run",
+              "unknown"
+            ],
+            "description": "Authority class of the expected hash source"
+          }
+        }
+      }
+    },
+    "samples_checked": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Number of samples checked (for Chronicle sample recovery)"
+    },
+    "physical_evidence_reviewed": {
+      "type": "object",
+      "properties": {
+        "images_reviewed": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "videos_reviewed": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "live_witness": {
+          "type": "boolean"
+        },
+        "onsite_witness": {
+          "type": "boolean"
+        },
+        "custody_log": {
+          "type": "boolean"
+        },
+        "flaw_analysis_method": {
+          "type": "string"
+        },
+        "nonce_challenge": {
+          "type": "boolean"
+        },
+        "requested_action_angle_lighting": {
+          "type": "boolean"
+        },
+        "witness_identity_or_role": {
+          "type": "string"
+        },
+        "fresh_capture": {
+          "type": "boolean"
+        },
+        "touch_or_handling": {
+          "type": "boolean"
+        },
+        "touch_or_handling_limitation": {
+          "type": "string"
+        },
+        "notarial_evidence": {
+          "type": "object",
+          "properties": {
+            "notarial_certificate_number": {
+              "type": "string"
+            },
+            "notary_office": {
+              "type": "string"
+            },
+            "notarial_date": {
+              "type": "string"
+            },
+            "notarial_certificate_hash": {
+              "type": "string"
+            },
+            "notarial_photos_in_certificate": {
+              "type": "boolean"
+            },
+            "microscope_images_in_certificate": {
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    },
+    "confidential_challenge": {
+      "type": "object",
+      "properties": {
+        "performed": {
+          "type": "boolean"
+        },
+        "trigger_reason": {
+          "type": "string"
+        },
+        "result": {
+          "type": "string",
+          "enum": [
+            "pass",
+            "fail",
+            "inconclusive",
+            "not_performed"
+          ]
+        },
+        "package_hash": {
+          "type": "string"
+        },
+        "confidentiality_boundary": {
+          "type": "string"
+        }
+      }
+    },
+    "celestial_witness": {
+      "type": "object",
+      "properties": {
+        "performed": {
+          "type": "boolean"
+        },
+        "method_class": {
+          "type": "string"
+        },
+        "time_window": {
+          "type": "string"
+        },
+        "uncertainty": {
+          "type": "string"
+        },
+        "result": {
+          "type": "string",
+          "enum": [
+            "pass",
+            "fail",
+            "inconclusive",
+            "not_performed"
+          ]
+        },
+        "non_public_data_disclosed": {
+          "type": "boolean"
+        }
+      }
+    },
+    "script_audit": {
+      "type": "object",
+      "properties": {
+        "scope_class": {
+          "type": "string",
+          "enum": [
+            "not_performed",
+            "supplementary_review_only",
+            "profile_required_script_audit",
+            "independent_reproduction"
+          ],
+          "description": "Scope class of script audit. V3 allows only not_performed or supplementary_review_only."
+        },
+        "scripts_reviewed": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "command": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "environment": {
+          "type": "object",
+          "properties": {
+            "os": {
+              "type": "string"
+            },
+            "python": {
+              "type": "string"
+            },
+            "shell": {
+              "type": "string"
+            },
+            "node": {
+              "type": "string"
+            }
+          }
+        },
+        "exit_code": {
+          "type": "integer"
+        },
+        "output_summary": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "not_verified_by_script": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "claims_not_made": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "authority_boundary_preserved": {
+      "type": "boolean",
+      "const": true,
+      "description": "Must be true. If false, the report is invalid."
+    },
+    "generated_by": {
+      "$ref": "#/$defs/generated_by"
+    },
+    "claim_gate_output": {
+      "type": "object",
+      "description": "Output from claim gate evaluation, if report was generated via claim gate",
+      "properties": {
+        "status": {
+          "type": "string"
+        },
+        "allowed_protocol_level": {
+          "type": "string"
+        },
+        "required_downgrades": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "blocking_failures": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "non_blocking_limitations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "integrity_boundary": {
+      "type": "object",
+      "properties": {
+        "agent_integrity_declaration_present": {
+          "type": "boolean"
+        },
+        "performed_actions_myself": {
+          "type": "boolean"
+        },
+        "did_not_copy_prior_report_as_own_work": {
+          "type": "boolean"
+        },
+        "did_not_copy_example_values_as_real_evidence": {
+          "type": "boolean"
+        },
+        "fresh_actions_claimed": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "prior_reports_consulted": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "examples_or_templates_used": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "copied_values_from_examples": {
+          "type": "boolean"
+        },
+        "copied_values_from_prior_reports": {
+          "type": "boolean"
+        },
+        "fresh_outputs_attached": {
+          "type": "boolean"
+        },
+        "prior_report_use": {
+          "type": "object"
+        },
+        "copying_warning": {
+          "type": "string"
+        }
+      }
+    },
+    "verification_scope_label": {
+      "type": "string",
+      "enum": [
+        "read_only_orientation",
+        "authority_boundary_recognition",
+        "single_reference_check",
+        "single_hash_verification",
+        "multi_hash_verification",
+        "official_script_audit",
+        "official_script_audit_with_limitations",
+        "independent_single_artifact_reproduction",
+        "independent_multi_artifact_reproduction",
+        "component_limited_verification",
+        "partial_with_limitations",
+        "full_public_digital_verification",
+        "full_protocol_profile_verification",
+        "future_capability_reserved",
+        "legacy_unlabeled"
+      ],
+      "description": "Stable bridge between protocol_level_claimed, claim_scope, and component_findings. Must be derived from claim gate output, not agent-selected."
+    },
+    "claim_scope": {
+      "type": "string",
+      "enum": [
+        "minimal_single_check",
+        "partial_with_limitations",
+        "component_limited",
+        "full_component",
+        "full_public_digital",
+        "full_protocol_profile",
+        "future_capability_reserved"
+      ],
+      "description": "Structured claim scope level derived from evidence."
+    },
+    "reception_classification": {
+      "$ref": "https://www.trinityaccord.org/api/reception-classification-schema.v1.json",
+      "description": "Optional reception classification. A verification report may also record reception context, but reception does not create the verification level. Verification level remains evidence-derived."
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "protocol_level_claimed": {
+            "const": "V3"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "hashes_computed": {
+            "minItems": 1
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "protocol_level_claimed": {
+            "const": "V4"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "script_audit"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "protocol_level_claimed": {
+            "const": "V5"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "component_findings": {
+            "allOf": [
+              {
+                "contains": {
+                  "properties": {
+                    "component": {
+                      "const": "bitcoin_originals"
+                    },
+                    "level_claimed": {
+                      "pattern": "^B[2-7]"
+                    }
+                  },
+                  "required": [
+                    "component",
+                    "level_claimed"
+                  ]
+                }
+              },
+              {
+                "contains": {
+                  "properties": {
+                    "component": {
+                      "const": "digital_mirrors"
+                    },
+                    "level_claimed": {
+                      "pattern": "^D[5-7]"
+                    }
+                  },
+                  "required": [
+                    "component",
+                    "level_claimed"
+                  ]
+                }
+              },
+              {
+                "contains": {
+                  "properties": {
+                    "component": {
+                      "const": "time_anchors"
+                    },
+                    "level_claimed": {
+                      "pattern": "^T[3-8]"
+                    }
+                  },
+                  "required": [
+                    "component",
+                    "level_claimed"
+                  ]
+                }
+              },
+              {
+                "contains": {
+                  "properties": {
+                    "component": {
+                      "const": "chronicle_recovery"
+                    },
+                    "level_claimed": {
+                      "pattern": "^C[5-7]"
+                    }
+                  },
+                  "required": [
+                    "component",
+                    "level_claimed"
+                  ]
+                }
+              },
+              {
+                "contains": {
+                  "properties": {
+                    "component": {
+                      "const": "physical_anchor"
+                    },
+                    "level_claimed": {
+                      "pattern": "^P[1-9]"
+                    }
+                  },
+                  "required": [
+                    "component",
+                    "level_claimed"
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "protocol_level_claimed": {
+            "const": "V6"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "physical_evidence_reviewed": {
+            "properties": {
+              "live_witness": {
+                "const": true
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "protocol_level_claimed": {
+            "const": "V7"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "physical_evidence_reviewed": {
+            "properties": {
+              "onsite_witness": {
+                "const": true
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "protocol_level_claimed": {
+            "enum": [
+              "V8"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "component_findings": {
+            "contains": {
+              "properties": {
+                "component": {
+                  "const": "physical_anchor"
+                },
+                "level_claimed": {
+                  "pattern": "^P[789]"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "protocol_level_claimed": {
+            "const": "V4+"
+          }
+        },
+        "required": [
+          "protocol_level_claimed"
+        ]
+      },
+      "then": {
+        "required": [
+          "script_audit"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "protocol_level_claimed": {
+            "const": "V5"
+          }
+        },
+        "required": [
+          "protocol_level_claimed"
+        ]
+      },
+      "then": {
+        "required": []
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "protocol_level_claimed": {
+            "const": "V6"
+          }
+        },
+        "required": [
+          "protocol_level_claimed"
+        ]
+      },
+      "then": {
+        "required": []
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "protocol_level_claimed": {
+            "const": "V7"
+          }
+        },
+        "required": [
+          "protocol_level_claimed"
+        ]
+      },
+      "then": {
+        "required": []
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "protocol_level_claimed": {
+            "const": "V8"
+          }
+        },
+        "required": [
+          "protocol_level_claimed"
+        ]
+      },
+      "then": {
+        "required": []
+      }
+    }
+  ],
+  "$defs": {
+    "generated_by": {
+      "type": "object",
+      "required": [
+        "tool",
+        "builder_version",
+        "claim_gate_output",
+        "evidence_input",
+        "generated_at_utc",
+        "validation_command",
+        "validation_result"
+      ],
+      "properties": {
+        "tool": {
+          "type": "string",
+          "enum": [
+            "scripts/build_verification_report_from_evidence.py"
+          ]
+        },
+        "builder_version": {
+          "type": "string"
+        },
+        "claim_gate_output": {
+          "type": "string"
+        },
+        "evidence_input": {
+          "type": "string"
+        },
+        "generated_at_utc": {
+          "type": "string"
+        },
+        "validation_command": {
+          "type": "string"
+        },
+        "validation_result": {
+          "type": "string",
+          "enum": [
+            "NOT_RUN",
+            "PASS",
+            "FAIL"
+          ]
+        }
+      },
+      "additionalProperties": true
+    }
+  }
+}
