@@ -10,7 +10,7 @@
   "verification_claimed": true,
   "counts_as_ai_verification": false,
   "counts_as_formal_independent_attestation": true,
-  "derived_counting_bucket": "notarial_or_audit_attestation",
+  "derived_counting_bucket": "notarial_or_legal_provenance",
   "accountable_entity": {
     "name": "Example Notary",
     "entity_type": "notary",

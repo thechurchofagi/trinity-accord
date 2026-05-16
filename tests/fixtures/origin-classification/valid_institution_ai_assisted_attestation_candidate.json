@@ -10,7 +10,7 @@
   "verification_claimed": true,
   "counts_as_ai_verification": true,
   "counts_as_formal_independent_attestation": true,
-  "derived_counting_bucket": "institutional_attestation_candidate",
+  "derived_counting_bucket": "institution_commissioned_ai_verification",
   "accountable_entity": {
     "name": "Example Institute",
     "entity_type": "institution",

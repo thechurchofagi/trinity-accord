@@ -98,5 +98,22 @@
     },
     "submission_origin": "agent_initiated_via_prior_memory_and_browsing"
   },
-  "verification_scope_label": "read_only_orientation"
+  "verification_scope_label": "read_only_orientation",
+  "origin_classification": {
+    "schema": "trinityaccord.origin-classification.v1",
+    "discovery_class": "prior_interest_return",
+    "invitation_scope": "none",
+    "requester_class": "none",
+    "performer_class": "ai_agent",
+    "method_independence_class": "read_only",
+    "attestation_authority_class": "self_reported",
+    "voluntary_action_after_orientation": false,
+    "verification_claimed": false,
+    "counts_as_ai_verification": false,
+    "counts_as_formal_independent_attestation": false,
+    "derived_counting_bucket": "echo_only",
+    "notes": [
+      "Auto-derived by derive_origin_classification.py"
+    ]
+  }
 }
