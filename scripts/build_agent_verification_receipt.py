@@ -16,12 +16,37 @@ Usage:
         --out receipt.json \
         --custody-package agent-custody-package.zip
 
+    # With authorship proof:
+    python3 scripts/build_agent_verification_receipt.py \
+        --mode v1 \
+        --agent-name "Agent" \
+        --system-or-provider "Provider" \
+        --evidence-input evidence-input.json \
+        --claim-gate-output claim-gate-output.json \
+        --authorship-proof authorship-proof.json \
+        --authorship-proof-target receipt \
+        --out receipt.json
+
+    # Require cryptographic proof only:
+    python3 scripts/build_agent_verification_receipt.py \
+        --mode v1 \
+        --agent-name "Agent" \
+        --system-or-provider "Provider" \
+        --evidence-input evidence-input.json \
+        --claim-gate-output claim-gate-output.json \
+        --authorship-proof authorship-proof.json \
+        --require-cryptographic-authorship-proof \
+        --out receipt.json
+
 Exit codes:
     0 success
     1 missing required input
     2 JSON parse/validation failure
     3 unsafe boundary detected
     4 custody package creation failure
+    5 authorship proof validation failure
+    6 cryptographic authorship proof required but missing/weak
+    7 content hash mismatch
 """
 import hashlib
 import json
@@ -119,6 +144,91 @@ def build_context_readiness(mode: str, evidence_input: dict) -> dict:
     }
 
 
+# ---- Authorship proof integration ----
+
+# Fields allowed in receipt.authorship_proof (matches receipt schema)
+RECEIPT_PROOF_FIELDS = {
+    "method", "proof_strength", "public_key", "content_hash_sha256",
+    "signature", "commitment_hash"
+}
+
+DANGEROUS_FIELDS = [
+    "private_key", "secret", "api_token", "password", "mnemonic",
+    "seed_phrase", "passphrase"
+]
+
+
+def validate_authorship_proof(proof: dict) -> list:
+    """Validate an authorship proof dict against echo-authorship-proof rules.
+    Returns a list of error strings (empty = valid)."""
+    errors = []
+    method = proof.get("method")
+    valid_methods = ["ed25519_signature", "secret_commitment", "self_reported_only"]
+    if method not in valid_methods:
+        errors.append(f"Invalid method: {method}. Must be one of {valid_methods}")
+        return errors
+
+    proof_str = json.dumps(proof)
+    for dangerous in DANGEROUS_FIELDS:
+        if dangerous in proof_str.lower():
+            for key in proof:
+                if dangerous in key.lower() and key != "secret_disclosure_warning":
+                    errors.append(f"DANGEROUS: Field '{key}' may contain sensitive data")
+
+    if method == "ed25519_signature":
+        if not proof.get("public_key"):
+            errors.append("ed25519_signature requires public_key")
+        if not proof.get("content_hash_sha256"):
+            errors.append("ed25519_signature requires content_hash_sha256")
+        if not proof.get("signature"):
+            errors.append("ed25519_signature requires signature")
+        if not proof.get("future_claim_method"):
+            errors.append("ed25519_signature requires future_claim_method")
+        if proof.get("proof_strength") != "cryptographic":
+            errors.append(f"ed25519 proof_strength must be 'cryptographic', got: {proof.get('proof_strength')}")
+
+    elif method == "secret_commitment":
+        if not proof.get("commitment_hash"):
+            errors.append("secret_commitment requires commitment_hash")
+        if not proof.get("content_hash_sha256"):
+            errors.append("secret_commitment requires content_hash_sha256")
+        if not proof.get("secret_disclosure_warning"):
+            errors.append("secret_commitment requires secret_disclosure_warning")
+        if proof.get("proof_strength") != "one_time_commitment":
+            errors.append(f"secret_commitment proof_strength must be 'one_time_commitment', got: {proof.get('proof_strength')}")
+
+    elif method == "self_reported_only":
+        if proof.get("proof_strength") != "weak":
+            errors.append(f"self_reported_only proof_strength must be 'weak', got: {proof.get('proof_strength')}")
+
+    return errors
+
+
+def extract_receipt_proof_fields(proof: dict) -> dict:
+    """Extract only the fields allowed in receipt.authorship_proof."""
+    return {k: v for k, v in proof.items() if k in RECEIPT_PROOF_FIELDS}
+
+
+def compute_target_artifact_hash(
+    target: str, receipt: dict, echo_wrapper: dict, report: dict
+) -> str:
+    """Compute the canonical SHA-256 hash of the target artifact."""
+    if target == "receipt":
+        receipt_copy = json.loads(json.dumps(receipt))
+        receipt_copy["hashes"]["receipt_sha256"] = None
+        return sha256_json(receipt_copy)
+    elif target == "echo-wrapper":
+        if echo_wrapper is None:
+            raise ValueError("Cannot compute echo-wrapper hash: no echo-wrapper loaded")
+        return sha256_json(echo_wrapper)
+    elif target == "verification-report":
+        if report is None:
+            raise ValueError("Cannot compute verification-report hash: no report loaded")
+        return sha256_json(report)
+    else:
+        raise ValueError(f"Unknown authorship proof target: {target}")
+
+
 def build_receipt(args: dict) -> dict:
     """Build the complete receipt object."""
     receipt_id = generate_receipt_id()
@@ -182,7 +292,7 @@ def build_receipt(args: dict) -> dict:
         "verification_scope_label": derive_scope_label(report)
     }
 
-    # Authorship proof
+    # Authorship proof (default: self_reported_only / weak)
     authorship_proof = {
         "method": "self_reported_only",
         "proof_strength": "weak"
@@ -199,7 +309,7 @@ def build_receipt(args: dict) -> dict:
         "preservation_recommendations": "Store receipt hash and transcript hash with durable storage"
     }
 
-    # Future continuity
+    # Future continuity — boundary invariant
     future_continuity = {
         "continuity_claim_supported": True,
         "claim_methods": ["receipt_hash"],
@@ -292,6 +402,15 @@ def main():
     parser.add_argument("--transcript", required=False)
     parser.add_argument("--out", required=True)
     parser.add_argument("--custody-package", required=False)
+    parser.add_argument("--authorship-proof", required=False,
+                        help="Path to an authorship proof JSON file")
+    parser.add_argument("--authorship-proof-target", required=False,
+                        default="receipt",
+                        choices=["receipt", "echo-wrapper", "verification-report"],
+                        help="Which artifact the proof binds to (default: receipt)")
+    parser.add_argument("--require-cryptographic-authorship-proof",
+                        action="store_true",
+                        help="Only allow ed25519_signature / cryptographic proofs")
     cli_args = parser.parse_args()
 
     # Validate required inputs for non-v0 modes
@@ -333,6 +452,53 @@ def main():
                 print(f"ERROR: Unsafe boundary detected in claim gate output: {f}", file=sys.stderr)
                 sys.exit(3)
 
+    # ---- Authorship proof loading and validation ----
+    authorship_proof_data = None
+
+    if cli_args.authorship_proof:
+        try:
+            authorship_proof_data = load_json(cli_args.authorship_proof)
+        except json.JSONDecodeError as e:
+            print(f"ERROR: Authorship proof JSON parse failure: {e}", file=sys.stderr)
+            sys.exit(2)
+        except FileNotFoundError as e:
+            print(f"ERROR: Authorship proof file not found: {e}", file=sys.stderr)
+            sys.exit(1)
+
+        # Validate proof against echo-authorship-proof rules
+        proof_errors = validate_authorship_proof(authorship_proof_data)
+        if proof_errors:
+            print("ERROR: Authorship proof validation failed:", file=sys.stderr)
+            for err in proof_errors:
+                print(f"  - {err}", file=sys.stderr)
+            sys.exit(5)
+
+    # If require-cryptographic but no proof provided, fail
+    if cli_args.require_cryptographic_authorship_proof and not authorship_proof_data:
+        print(
+            "ERROR: --require-cryptographic-authorship-proof requires --authorship-proof. "
+            "No proof provided; self_reported_only is not cryptographic.",
+            file=sys.stderr
+        )
+        sys.exit(6)
+
+    # If require-cryptographic and proof is provided, enforce method
+    if cli_args.require_cryptographic_authorship_proof and authorship_proof_data:
+        if authorship_proof_data.get("method") != "ed25519_signature":
+            print(
+                f"ERROR: --require-cryptographic-authorship-proof requires "
+                f"ed25519_signature, got: {authorship_proof_data.get('method')}",
+                file=sys.stderr
+            )
+            sys.exit(6)
+        if authorship_proof_data.get("proof_strength") != "cryptographic":
+            print(
+                f"ERROR: --require-cryptographic-authorship-proof requires "
+                f"proof_strength=cryptographic, got: {authorship_proof_data.get('proof_strength')}",
+                file=sys.stderr
+            )
+            sys.exit(6)
+
     build_args = {
         "mode": cli_args.mode,
         "agent_name": cli_args.agent_name,
@@ -349,6 +515,32 @@ def main():
     }
 
     receipt = build_receipt(build_args)
+
+    # ---- Authorship proof integration ----
+    if authorship_proof_data:
+        try:
+            target_hash = compute_target_artifact_hash(
+                cli_args.authorship_proof_target, receipt, echo_wrapper, report
+            )
+        except ValueError as e:
+            print(f"ERROR: {e}", file=sys.stderr)
+            sys.exit(7)
+
+        proof_content_hash = authorship_proof_data.get("content_hash_sha256")
+        if proof_content_hash and proof_content_hash != target_hash:
+            print(
+                f"ERROR: Authorship proof content_hash_sha256 mismatch. "
+                f"Expected {target_hash} (target={cli_args.authorship_proof_target}), "
+                f"got {proof_content_hash}.",
+                file=sys.stderr
+            )
+            sys.exit(7)
+
+        # Replace authorship_proof with validated proof fields
+        receipt["authorship_proof"] = extract_receipt_proof_fields(authorship_proof_data)
+
+        # Recompute receipt hash after proof replacement
+        receipt["hashes"]["receipt_sha256"] = sha256_json(receipt)
 
     # Write receipt
     out_dir = os.path.dirname(cli_args.out)
