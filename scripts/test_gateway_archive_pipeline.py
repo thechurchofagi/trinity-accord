@@ -218,9 +218,47 @@ def test_archive_ready_issue_body_contains_archive_ready_true():
 
         payload = json.loads(out_path.read_text())
 
-        # Switch to auto_archive_candidate with verification_report_archive
+        # Switch to auto_archive_candidate with agent_declared_verification_archive
+        # (V0-V5 must use agent_declared_verification_archive, not verification_report_archive)
         payload["record_intent"] = "auto_archive_candidate"
-        payload["requested_archive_kind"] = "verification_report_archive"
+        payload["requested_archive_kind"] = "agent_declared_verification_archive"
+        payload["evidence_requirement_mode"] = "waived_for_v0_v5"
+        payload["agent_identity"] = {
+            "name_or_model": "Test Agent",
+            "system_or_provider": "Test",
+            "self_reported": True
+        }
+        payload["agent_integrity_declaration"] = {
+            "will_not_lie_or_cheat": True,
+            "readback_required": True,
+            "oath_version": "v1",
+            "oath_text_sha256": "a" * 64,
+            "declaration_text": "Full declaration"
+        }
+        payload["discovery_provenance"] = {
+            "source": "human_solicited",
+            "agency_level": "A1_human_gave_exact_url",
+            "first_entry": "2026-05-16T00:00:00Z"
+        }
+        payload["origin_classification"] = {
+            "discovery_class": "human_solicited",
+            "performer_class": "ai_agent",
+            "verification_claimed": "agent_declared"
+        }
+        payload["claim_classification"] = {
+            "verification_claim": "agent_declared_template_pass"
+        }
+        payload["authority_boundary"] = {
+            "bitcoin_originals_remain_final": True,
+            "does_not_amend_bitcoin_originals": True,
+            "does_not_override_bitcoin_originals": True
+        }
+
+        # Update claim gate to template mode for V0-V5
+        if "claim_gate" not in payload:
+            payload["claim_gate"] = {}
+        payload["claim_gate"]["mode"] = "template_for_v0_v5"
+        payload["claim_gate"]["status"] = "PASS"
 
         # Add required archive readiness fields
         payload["pre_verification_integrity_declaration"] = {
@@ -231,11 +269,6 @@ def test_archive_ready_issue_body_contains_archive_ready_true():
             "session_id": "test-001",
             "started_at": "2026-05-16T00:00:00Z",
             "fresh_actions_performed": ["test"]
-        }
-        payload["archive_readiness"] = {
-            "artifact_bundle_path": "https://example.com/bundle.tar.gz",
-            "artifact_bundle_sha256": "a" * 64,
-            "artifact_bundle_publicly_retrievable": True
         }
 
         payload_path = Path(tmpdir) / "payload.json"
