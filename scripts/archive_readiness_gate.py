@@ -18,6 +18,7 @@ Usage:
 """
 import argparse
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -148,11 +149,53 @@ FORBIDDEN_ARCHIVE_CLAIMS = [
     "independent attestation",
 ]
 
+# Negation patterns that reverse meaning — "not independent attestation" is OK
+_NEGATION_PREFIXES = re.compile(
+    r'\b(?:not|no|never|isn\'t|aren\'t|wasn\'t|weren\'t|doesn\'t|don\'t|didn\'t|cannot|can\'t|won\'t)\s+',
+    re.IGNORECASE
+)
+
+
+def _text_contains_unnegated_claim(text, claim):
+    """Check if text contains an unnegated instance of claim.
+
+    Returns True only if at least one occurrence of `claim` in `text`
+    is NOT preceded by a negation word. This prevents false positives
+    on phrases like "not independent attestation" or "this is not
+    successor reception".
+    """
+    for m in re.finditer(re.escape(claim), text, re.IGNORECASE):
+        start = m.start()
+        # Look at up to 30 chars before the match for a negation prefix
+        prefix_window = text[max(0, start - 30):start]
+        if _NEGATION_PREFIXES.search(prefix_window):
+            # Check that the negation actually applies to this claim
+            # by verifying the last negation prefix ends close to the claim
+            neg_match = list(_NEGATION_PREFIXES.finditer(prefix_window))
+            if neg_match:
+                last_neg = neg_match[-1]
+                # Negation must end within 5 chars of claim start (allowing "not " → 4 chars)
+                gap = start - (max(0, start - 30) + last_neg.end())
+                if gap <= 5:
+                    continue  # This occurrence is negated, skip
+        # Found an unnegated occurrence
+        return True
+    return False
+
 
 def has_forbidden_archive_claims(payload):
-    """Check if body/title contain forbidden self-claims."""
-    text = (payload.get("body", "") + " " + payload.get("title", "")).lower()
-    return [c for c in FORBIDDEN_ARCHIVE_CLAIMS if c in text]
+    """Check if body/title contain unnegated forbidden self-claims.
+
+    Phrases like "not independent attestation" or "this is not successor reception"
+    are allowed because they express boundary acknowledgement, not self-claims.
+    Machine fields (not_independent_attestation, not_successor_reception) are
+    trusted separately and are not affected by this text scan.
+    """
+    text = (payload.get("body", "") + " " + payload.get("title", "")).strip()
+    if not text:
+        return []
+    return [c for c in FORBIDDEN_ARCHIVE_CLAIMS
+            if _text_contains_unnegated_claim(text, c)]
 
 
 def has_v4_script_completeness(evidence, policy):

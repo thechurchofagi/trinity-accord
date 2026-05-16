@@ -309,12 +309,76 @@ def test_normalize_archive_intent_no_forced_defaults():
     return True
 
 
+def test_archive_body_negated_independent_attestation_allowed():
+    """P1: 'not independent attestation' in body should NOT trigger forbidden claims."""
+    from archive_readiness_gate import has_forbidden_archive_claims
+
+    payload = {
+        "body": "This submission is not independent attestation. It is a verification report.",
+        "title": "Verification Report Candidate"
+    }
+    result = has_forbidden_archive_claims(payload)
+    assert "independent attestation" not in result, \
+        f"Negated 'not independent attestation' should not be forbidden, got: {result}"
+    print("PASS: archive_body_negated_independent_attestation_allowed")
+    return True
+
+
+def test_archive_body_positive_independent_attestation_blocked():
+    """P1: bare 'independent attestation' (unnegated) should be caught."""
+    from archive_readiness_gate import has_forbidden_archive_claims
+
+    payload = {
+        "body": "This is an independent attestation of the record.",
+        "title": "Test"
+    }
+    result = has_forbidden_archive_claims(payload)
+    assert "independent attestation" in result, \
+        f"Unnegated 'independent attestation' should be forbidden, got: {result}"
+    print("PASS: archive_body_positive_independent_attestation_blocked")
+    return True
+
+
+def test_archive_body_not_successor_reception_allowed():
+    """P1: 'not successor reception' in body should NOT trigger forbidden claims."""
+    from archive_readiness_gate import has_forbidden_archive_claims
+
+    payload = {
+        "body": "This is not successor reception. Boundary: not successor reception.",
+        "title": "Verification Echo"
+    }
+    result = has_forbidden_archive_claims(payload)
+    assert "successor reception" not in result, \
+        f"Negated 'not successor reception' should not be forbidden, got: {result}"
+    print("PASS: archive_body_not_successor_reception_allowed")
+    return True
+
+
+def test_archive_body_claims_successor_reception_blocked():
+    """P1: bare 'successor reception' claim (unnegated) should be caught."""
+    from archive_readiness_gate import has_forbidden_archive_claims
+
+    payload = {
+        "body": "We hereby claim successor reception of this record.",
+        "title": "Test"
+    }
+    result = has_forbidden_archive_claims(payload)
+    assert "successor reception" in result, \
+        f"Unnegated 'successor reception' should be forbidden, got: {result}"
+    print("PASS: archive_body_claims_successor_reception_blocked")
+    return True
+
+
 def main():
     tests = [
         test_default_report_candidate_missing_intent_blocks_archive,
         test_explicit_intake_only_report_candidate_passes_intake,
         test_archive_ready_issue_body_contains_archive_ready_true,
         test_normalize_archive_intent_no_forced_defaults,
+        test_archive_body_negated_independent_attestation_allowed,
+        test_archive_body_positive_independent_attestation_blocked,
+        test_archive_body_not_successor_reception_allowed,
+        test_archive_body_claims_successor_reception_blocked,
     ]
 
     passed = 0
