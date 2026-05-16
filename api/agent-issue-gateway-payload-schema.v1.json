@@ -308,8 +308,16 @@
           "enum": [
             "PASS",
             "PASS_WITH_DOWNGRADE",
+            "PASS_WITH_WARNINGS",
             "FAIL",
             "FAIL_WITH_REASONS"
+          ]
+        },
+        "mode": {
+          "type": "string",
+          "enum": [
+            "strict_evidence",
+            "template_for_v0_v5"
           ]
         },
         "allowed_protocol_level": {
@@ -642,7 +650,17 @@
         },
         "required": [
           "submission_type"
-        ]
+        ],
+        "not": {
+          "properties": {
+            "requested_archive_kind": {
+              "const": "agent_declared_verification_archive"
+            }
+          },
+          "required": [
+            "requested_archive_kind"
+          ]
+        }
       },
       "then": {
         "required": [
@@ -852,6 +870,7 @@
           "agent_identity",
           "agent_declared_protocol_level",
           "evidence_requirement_mode",
+          "record_intent",
           "claim_gate",
           "agent_integrity_declaration",
           "discovery_provenance",
@@ -861,7 +880,18 @@
           "counts_toward_home",
           "what_i_checked",
           "limitations"
-        ]
+        ],
+        "properties": {
+          "record_intent": {
+            "const": "auto_archive_candidate"
+          },
+          "evidence_requirement_mode": {
+            "const": "waived_for_v0_v5"
+          },
+          "agent_declared_protocol_level": {
+            "enum": ["V0", "V1", "V2", "V3", "V4", "V5"]
+          }
+        }
       }
     }
   ]

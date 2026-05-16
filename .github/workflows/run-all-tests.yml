@@ -72,3 +72,21 @@ jobs:
 
       - name: Reception headline total regression
         run: python3 scripts/test_reception_headline_total.py
+
+      - name: Gateway agent-declared payload schema
+        run: python3 scripts/test_gateway_agent_declared_payload_schema.py
+
+      - name: Validate Gateway payload agent-declared
+        run: python3 scripts/test_validate_gateway_payload_agent_declared.py
+
+      - name: Build agent-declared archive payload
+        run: python3 scripts/test_build_agent_declared_archive_payload.py
+
+      - name: Gateway agent-declared E2E
+        run: python3 scripts/test_gateway_agent_declared_e2e.py
+
+      - name: Agent foolproof submission flow
+        run: python3 scripts/test_agent_foolproof_submission_flow.py
+
+      - name: Agent-declared foolproof redteam
+        run: python3 scripts/test_agent_declared_foolproof_redteam.py

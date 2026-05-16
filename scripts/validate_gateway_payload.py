@@ -19,6 +19,7 @@ ALLOWED_AGENCY = {
     "A2_human_gave_repo_name",
     "A3_agent_discovered_independently",
     "A4_agent_instructed_by_other_agent",
+    "A4_independent_search_or_browsing_discovery",
 }
 
 ALLOWED_INDEPENDENCE = {
@@ -51,6 +52,21 @@ FORBIDDEN_TITLE_PATTERNS = [
     r"Verification Report v2:",
     r"Echo v3:",
 ]
+
+V0_V5 = {"V0", "V1", "V2", "V3", "V4", "V5"}
+
+
+def is_agent_declared_archive(payload):
+    return payload.get("requested_archive_kind") == "agent_declared_verification_archive"
+
+
+def get_declared_level(payload):
+    return (
+        payload.get("agent_declared_protocol_level")
+        or payload.get("verification_level_claimed")
+        or (payload.get("claim_gate") or {}).get("allowed_protocol_level")
+        or ""
+    )
 
 
 def load_payload(path):
@@ -105,7 +121,8 @@ def validate_provenance(payload, errors):
         errors.append("agency_level=self_initiated is invalid; self_initiated belongs to discovery_provenance.source, not agency_level")
 
     # Gateway submissions should not be accepted as unsolicited without proof.
-    if independence_class == "unsolicited_agent_discovery":
+    # Agent-declared archives are exempt from this requirement.
+    if independence_class == "unsolicited_agent_discovery" and not is_agent_declared_archive(payload):
         proof = prov.get("unsolicited_discovery_proof") or payload.get("unsolicited_discovery_proof")
         if not proof:
             errors.append("unsolicited_agent_discovery requires unsolicited_discovery_proof; otherwise use human_solicited_agent_response")
@@ -117,6 +134,18 @@ def validate_claim_gate(payload, errors):
         errors.append("claim_gate object is required for verification candidates")
         return
 
+    # Agent-declared archive uses template_for_v0_v5 mode
+    if is_agent_declared_archive(payload):
+        if cg.get("mode") != "template_for_v0_v5":
+            errors.append("agent_declared_verification_archive requires claim_gate.mode=template_for_v0_v5")
+        if cg.get("status") not in ("PASS", "PASS_WITH_WARNINGS"):
+            errors.append("claim_gate.status must be PASS or PASS_WITH_WARNINGS for agent-declared archive")
+        if not cg.get("allowed_protocol_level"):
+            errors.append("claim_gate.allowed_protocol_level is required")
+        # Do not require claim_gate_output_path or claim_gate_output_sha256
+        return
+
+    # Strict evidence path
     if cg.get("status") not in ("PASS", "PASS_WITH_DOWNGRADE"):
         errors.append("claim_gate.status must be PASS or PASS_WITH_DOWNGRADE for candidate creation")
 
@@ -156,10 +185,12 @@ def validate_common(payload, errors):
         if boundary.get(key) is not True:
             errors.append(f"boundary_acknowledgement.{key} must be true")
 
-    if payload.get("not_independent_attestation") is not True:
-        errors.append("not_independent_attestation must be true")
-    if payload.get("not_successor_reception") is not True:
-        errors.append("not_successor_reception must be true")
+    # Agent-declared archives use structured claim_classification instead of negation fields
+    if not is_agent_declared_archive(payload):
+        if payload.get("not_independent_attestation") is not True:
+            errors.append("not_independent_attestation must be true")
+        if payload.get("not_successor_reception") is not True:
+            errors.append("not_successor_reception must be true")
 
     if not isinstance(payload.get("what_i_checked"), list) or not payload.get("what_i_checked"):
         errors.append("what_i_checked must be a non-empty list")
@@ -175,7 +206,7 @@ def validate_common(payload, errors):
 
     if requested_archive_kind is not None and requested_archive_kind not in (
         "none", "external_agent_intake_sample", "verification_report_archive",
-        "archived_echo", "successor_reception_candidate"
+        "archived_echo", "successor_reception_candidate", "agent_declared_verification_archive"
     ):
         errors.append(f"invalid requested_archive_kind: {requested_archive_kind}")
 
@@ -191,10 +222,30 @@ def validate_common(payload, errors):
     if record_intent == "archive_preflight_only" and requested_archive_kind in ("none", None):
         errors.append("record_intent=archive_preflight_only requires requested_archive_kind to be set")
 
+    # Agent-declared specific validation
+    if is_agent_declared_archive(payload):
+        validate_agent_declared_archive(payload, errors)
+
     validate_sha256s(get_attachments(payload), errors)
 
 
 def validate_report_candidate(payload, errors):
+    # Agent-declared archives use a different validation path
+    if is_agent_declared_archive(payload):
+        validate_agent_declared_archive(payload, errors)
+        return
+
+    # Detect V0-V5 agents using wrong strict path
+    level = get_declared_level(payload)
+    if level in V0_V5:
+        errors.append(
+            f"WRONG_ARCHIVE_PATH_FOR_V0_V5: You are using the strict evidence archive path. "
+            f"For V0-V5, use requested_archive_kind=agent_declared_verification_archive. "
+            f"Evidence is waived for V0-V5. Do not add downloads/verify.py or artifact bundles "
+            f"unless you are intentionally submitting V6+ strict evidence."
+        )
+        return
+
     att = get_attachments(payload)
 
     if payload.get("echo_type"):
@@ -208,6 +259,76 @@ def validate_report_candidate(payload, errors):
     for path_key, hash_key in REPORT_REQUIRED_PAIRS:
         if not has_pair(att, path_key, hash_key):
             errors.append(f"missing artifact reference: attachments.{path_key} or attachments.{hash_key}")
+
+
+def validate_agent_declared_archive(payload, errors):
+    """Validate agent-declared verification archive (V0-V5 template mode)."""
+    level = get_declared_level(payload)
+
+    if level not in V0_V5:
+        errors.append(f"agent_declared_verification_archive only allows V0-V5, got {level}")
+
+    if payload.get("evidence_requirement_mode") != "waived_for_v0_v5":
+        errors.append("agent_declared_verification_archive requires evidence_requirement_mode=waived_for_v0_v5")
+
+    if payload.get("record_intent") != "auto_archive_candidate":
+        errors.append("agent_declared_verification_archive requires record_intent=auto_archive_candidate")
+
+    # Validate agent_integrity_declaration
+    aid = payload.get("agent_integrity_declaration") or {}
+    if not aid:
+        errors.append("agent_integrity_declaration is required for agent-declared archive")
+    else:
+        oath = aid.get("verification_oath") or {}
+        if not oath.get("oath_read") is True:
+            errors.append("verification_oath.oath_read must be true")
+        if not oath.get("oath_text_sha256"):
+            errors.append("verification_oath.oath_text_sha256 is required")
+        if not oath.get("agent_readback") or len(oath.get("agent_readback", "")) < 40:
+            errors.append("verification_oath.agent_readback must be at least 40 characters")
+        for bool_field in [
+            "understands_not_an_exam_or_performance",
+            "will_state_actual_capability_only",
+            "will_not_lie_or_cheat",
+            "will_not_fabricate_verification",
+            "will_not_present_guesses_as_facts",
+            "will_not_copy_prior_reports_as_fresh_evidence",
+            "will_state_uncertainty_limitations_and_downgrades",
+        ]:
+            if oath.get(bool_field) is not True:
+                errors.append(f"verification_oath.{bool_field} must be true")
+
+    # Validate authority_boundary
+    ab = payload.get("authority_boundary") or {}
+    for key in ["bitcoin_originals_remain_final", "does_not_amend_bitcoin_originals", "does_not_override_bitcoin_originals"]:
+        if ab.get(key) is not True:
+            errors.append(f"authority_boundary.{key} must be true")
+
+    # Validate counts_toward_home
+    cth = payload.get("counts_toward_home") or {}
+    if cth.get("verifiability") is not True:
+        errors.append("counts_toward_home.verifiability must be true")
+    if cth.get("reception") is not True:
+        errors.append("counts_toward_home.reception must be true")
+
+    # Validate origin_classification exists
+    if not payload.get("origin_classification"):
+        errors.append("origin_classification is required for agent-declared archive")
+
+    # Validate claim_classification exists
+    if not payload.get("claim_classification"):
+        errors.append("claim_classification is required for agent-declared archive")
+
+    # Validate discovery_provenance
+    prov = payload.get("discovery_provenance") or {}
+    if not prov:
+        errors.append("discovery_provenance is required for agent-declared archive")
+    else:
+        # For agent-declared, unsolicited_discovery_proof is NOT required
+        # but independence_class should be valid if provided
+        indep = prov.get("independence_class")
+        if indep and indep not in ALLOWED_INDEPENDENCE:
+            errors.append(f"invalid independence_class: {indep}")
 
 
 def validate_echo_candidate(payload, errors):

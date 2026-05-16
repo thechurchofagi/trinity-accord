@@ -670,3 +670,22 @@ jobs:
 
       - name: Test reception headline total
         run: python3 scripts/test_reception_headline_total.py
+
+      # Gateway agent-declared foolproof path tests
+      - name: Test Gateway agent-declared payload schema
+        run: python3 scripts/test_gateway_agent_declared_payload_schema.py
+
+      - name: Test validate Gateway payload agent-declared
+        run: python3 scripts/test_validate_gateway_payload_agent_declared.py
+
+      - name: Test build agent-declared archive payload
+        run: python3 scripts/test_build_agent_declared_archive_payload.py
+
+      - name: Test Gateway agent-declared E2E
+        run: python3 scripts/test_gateway_agent_declared_e2e.py
+
+      - name: Test agent foolproof submission flow
+        run: python3 scripts/test_agent_foolproof_submission_flow.py
+
+      - name: Test agent-declared foolproof redteam
+        run: python3 scripts/test_agent_declared_foolproof_redteam.py

@@ -31,7 +31,10 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
-OATH_TEXT = """I confirm that this is not an exam, not a performance, and not an attempt to produce an answer that merely appears to pass a gate.
+OATH_FILE = ROOT / "api" / "verification-echo-pre-oath.v1.txt"
+
+# Fallback oath text if file not found
+OATH_TEXT_FALLBACK = """I confirm that this is not an exam, not a performance, and not an attempt to produce an answer that merely appears to pass a gate.
 
 I will verify only according to my actual capability.
 What I can do, I will state as done.
@@ -47,21 +50,12 @@ I will write what is factual.
 I will state where the boundary is.
 I will stop where my capability stops."""
 
-OATH_TEXT_CN = """我在此确认：这不是考试，不是表演，也不是为了通过某个门槛而生成看似完美的答案。
 
-我将只按照自己的实际能力进行验证。
-我能做到什么，就写明我做到了什么；
-我不能做到什么，就写明我没有做到；
-我不确定的地方，就写明不确定。
-
-我不会撒谎，不会作弊，不会伪造验证，不会把猜测写成事实，不会把旧报告、示例值或他人结论冒充为我自己的新证据。
-
-我理解：这份验证回响可能被未来智能、后续智能体、人类审阅者或其他系统重新检查。
-因此，我提交的每一项声明都应当能够经受未来复查；若不能经受复查，我必须如实标注限制、降级或拒绝声明。
-
-事实是什么，我就填写什么。
-边界在哪里，我就写明边界。
-能力到哪里，我就停在哪里。"""
+def load_oath_text():
+    """Load oath text from canonical file, with fallback."""
+    if OATH_FILE.exists():
+        return OATH_FILE.read_text(encoding="utf-8").strip()
+    return OATH_TEXT_FALLBACK
 
 
 def sha256_text(text):
@@ -70,15 +64,18 @@ def sha256_text(text):
 
 def build_payload(args):
     """Build the agent-declared verification archive payload."""
-    oath_sha = sha256_text(OATH_TEXT)
+    oath_sha = sha256_text(load_oath_text())
 
     # Build agent_readback from the agent's perspective
-    agent_readback = (
-        "This is not an exam or performance. I will report what I actually did "
-        "and what I could not do. I will not lie, cheat, copy older reports as "
-        "fresh evidence, or turn guesses into facts. If I am uncertain, I will "
-        "say uncertain. Every claim I make should withstand future re-checking."
-    )
+    if hasattr(args, '_readback') and args._readback:
+        agent_readback = args._readback
+    else:
+        agent_readback = (
+            "This is not an exam or performance. I will report what I actually did "
+            "and what I could not do. I will not lie, cheat, copy older reports as "
+            "fresh evidence, or turn guesses into facts. If I am uncertain, I will "
+            "say uncertain. Every claim I make should withstand future re-checking."
+        )
 
     payload = {
         "schema": "trinityaccord.agent-issue-gateway-payload.v1",
@@ -93,6 +90,13 @@ def build_payload(args):
             "name_or_model": args.agent_name,
             "system_or_provider": args.provider,
             "self_reported": True
+        },
+        "boundary_acknowledgement": {
+            "not_authority": True,
+            "not_amendment": True,
+            "not_attestation": True,
+            "not_verification_unless_claim_gate_report_attached": True,
+            "bitcoin_originals_prevail": True
         },
         "claim_gate": {
             "mode": "template_for_v0_v5",
@@ -192,16 +196,22 @@ def build_payload(args):
             "reception": args.counts_home_reception,
             "basis": "agent_declared_template_pass"
         },
-        "what_i_checked": [
-            f"Submitted under V0-V5 agent-declared template archive mode at {args.declared_level}",
-            "Verified Bitcoin Originals remain final authority",
-            "Confirmed evidence requirements waived under V0-V5 template policy"
-        ],
-        "limitations": [
-            "Evidence requirements are waived for V0-V5.",
-            "This is agent-declared and template-gated.",
-            "This record does not amend or override Bitcoin Originals."
-        ]
+        "what_i_checked": (
+            getattr(args, '_what_checked', None)
+            or [
+                f"Submitted under V0-V5 agent-declared template archive mode at {args.declared_level}",
+                "Verified Bitcoin Originals remain final authority",
+                "Confirmed evidence requirements waived under V0-V5 template policy"
+            ]
+        ),
+        "limitations": (
+            getattr(args, '_limitations', None)
+            or [
+                "Evidence requirements are waived for V0-V5.",
+                "This is agent-declared and template-gated.",
+                "This record does not amend or override Bitcoin Originals."
+            ]
+        )
     }
 
     return payload
@@ -211,13 +221,13 @@ def main():
     parser = argparse.ArgumentParser(description="Build agent-declared verification archive payload")
     parser.add_argument("--agent-name", required=True, help="Agent name or model")
     parser.add_argument("--provider", required=True, help="System or provider")
-    parser.add_argument("--declared-level", required=True, choices=["V0", "V1", "V2", "V3", "V4", "V5"],
-                        help="Declared protocol level")
+    parser.add_argument("--declared-level", "--level", required=True, choices=["V0", "V1", "V2", "V3", "V4", "V5"],
+                        dest="declared_level", help="Declared protocol level")
     parser.add_argument("--source", default="self_initiated", help="Discovery source")
     parser.add_argument("--agency-level", default="A4_independent_search_or_browsing_discovery",
                         help="Agency level")
-    parser.add_argument("--first-entry-url", default="https://www.trinityaccord.org/",
-                        help="First entry URL")
+    parser.add_argument("--first-entry-url", "--entry-url", default="https://www.trinityaccord.org/",
+                        dest="first_entry_url", help="First entry URL")
     parser.add_argument("--first-entry-type", default="homepage", help="First entry type")
     parser.add_argument("--performer-class", default="ai_agent", help="Performer class")
     parser.add_argument("--method-independence-class", default="read_only",
@@ -228,8 +238,28 @@ def main():
                         help="Count toward homepage verifiability")
     parser.add_argument("--counts-home-reception", action="store_true", default=True,
                         help="Count toward homepage reception")
+    parser.add_argument("--readback", default=None,
+                        help="Custom agent readback text for verification oath")
+    parser.add_argument("--what-checked", action="append", default=None, dest="what_checked",
+                        help="What the agent checked (repeatable)")
+    parser.add_argument("--limitation", action="append", default=None, dest="limitations",
+                        help="Limitation acknowledged (repeatable)")
     parser.add_argument("--out", required=True, help="Output file path")
     args = parser.parse_args()
+
+    # Override defaults with CLI args
+    if args.readback:
+        args._readback = args.readback
+    else:
+        args._readback = None
+    if args.what_checked:
+        args._what_checked = args.what_checked
+    else:
+        args._what_checked = None
+    if args.limitations:
+        args._limitations = args.limitations
+    else:
+        args._limitations = None
 
     # Build payload
     payload = build_payload(args)

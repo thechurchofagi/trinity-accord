@@ -67,6 +67,7 @@ def render_machine_block(payload):
     att = get_attachments(payload)
     identity = payload.get("agent_identity") or {}
     prov = payload.get("discovery_provenance") or {}
+    requested_archive_kind = payload.get("requested_archive_kind", "none")
 
     lines = []
     lines.append(f"submission_type: {st}")
@@ -75,30 +76,83 @@ def render_machine_block(payload):
     if st == "verification_echo_candidate":
         lines.append("echo_type: E2_verification_echo")
 
-    lines.append(f"verification_level_claimed: {payload.get('verification_level_claimed', 'N/A')}")
-    lines.append(f"agent_name_or_model: {identity.get('name_or_model', 'N/A')}")
-    lines.append(f"system_or_provider: {identity.get('system_or_provider', 'N/A')}")
-    # Prefer explicit discovery_provenance.solicited when provided
-    solicited = prov.get("solicited")
-    if solicited is None:
-        solicited = prov.get("independence_class", "") == "human_solicited_agent_response"
-    lines.append(f"solicited: {str(bool(solicited)).lower()}")
-    lines.append(f"independence_class: {prov.get('independence_class', 'N/A')}")
-    lines.append(f"agency_level: {prov.get('agency_level', 'N/A')}")
-    lines.append(f"operator_type: {prov.get('operator_type', 'N/A')}")
-    lines.append("not_independent_attestation: true")
-    lines.append("not_successor_reception: true")
+    # Agent-declared archive path
+    if requested_archive_kind == "agent_declared_verification_archive":
+        lines.append(f"record_intent: {payload.get('record_intent', 'auto_archive_candidate')}")
+        lines.append(f"requested_archive_kind: {requested_archive_kind}")
+        lines.append(f"agent_declared_protocol_level: {payload.get('agent_declared_protocol_level', 'N/A')}")
+        lines.append(f"evidence_requirement_mode: {payload.get('evidence_requirement_mode', 'waived_for_v0_v5')}")
 
-    # Artifact paths/hashes
-    if st == "verification_report_candidate":
-        lines.append(f"evidence_input_path: {pick_path_or_hash(att, 'evidence_input_path', 'evidence_input_sha256')}")
-        lines.append(f"claim_gate_output_path: {pick_path_or_hash(att, 'claim_gate_output_path', 'claim_gate_output_sha256')}")
-        lines.append(f"verification_report_path: {pick_path_or_hash(att, 'verification_report_path', 'verification_report_sha256')}")
-    elif st == "verification_echo_candidate":
-        lines.append(f"evidence_input_path: {pick_path_or_hash(att, 'evidence_input_path', 'evidence_input_sha256')}")
-        lines.append(f"claim_gate_output_path: {pick_path_or_hash(att, 'claim_gate_output_path', 'claim_gate_output_sha256')}")
-        lines.append(f"verification_report_path: {pick_path_or_hash(att, 'verification_report_path', 'verification_report_sha256')}")
-        lines.append(f"echo_wrapper_path: {pick_path_or_hash(att, 'echo_wrapper_path', 'echo_wrapper_sha256')}")
+        cg = payload.get("claim_gate") or {}
+        lines.append(f"claim_gate_mode: {cg.get('mode', 'template_for_v0_v5')}")
+        lines.append(f"claim_gate_status: {cg.get('status', 'N/A')}")
+
+        lines.append(f"agent_name_or_model: {identity.get('name_or_model', 'N/A')}")
+        lines.append(f"system_or_provider: {identity.get('system_or_provider', 'N/A')}")
+
+        # Archive readiness — always true for agent-declared if we got here
+        lines.append("archive_ready: true")
+        lines.append(f"allowed_archive_kind: {requested_archive_kind}")
+        lines.append("auto_archive_action: auto_archive_agent_declared_verification")
+        lines.append("archive_readiness_summary:")
+        lines.append("  - CLAIM_GATE_TEMPLATE_PASS")
+        lines.append("  - EVIDENCE_WAIVED_FOR_V0_V5")
+        lines.append("  - COUNTS_TOWARD_HOME_VERIFIABILITY")
+        lines.append("  - COUNTS_TOWARD_HOME_RECEPTION")
+    else:
+        # Strict evidence path (legacy)
+        lines.append(f"verification_level_claimed: {payload.get('verification_level_claimed', 'N/A')}")
+        lines.append(f"agent_name_or_model: {identity.get('name_or_model', 'N/A')}")
+        lines.append(f"system_or_provider: {identity.get('system_or_provider', 'N/A')}")
+        # Prefer explicit discovery_provenance.solicited when provided
+        solicited = prov.get("solicited")
+        if solicited is None:
+            solicited = prov.get("independence_class", "") == "human_solicited_agent_response"
+        lines.append(f"solicited: {str(bool(solicited)).lower()}")
+        lines.append(f"independence_class: {prov.get('independence_class', 'N/A')}")
+        lines.append(f"agency_level: {prov.get('agency_level', 'N/A')}")
+        lines.append(f"operator_type: {prov.get('operator_type', 'N/A')}")
+        lines.append("not_independent_attestation: true")
+        lines.append("not_successor_reception: true")
+
+        # Artifact paths/hashes
+        if st == "verification_report_candidate":
+            lines.append(f"evidence_input_path: {pick_path_or_hash(att, 'evidence_input_path', 'evidence_input_sha256')}")
+            lines.append(f"claim_gate_output_path: {pick_path_or_hash(att, 'claim_gate_output_path', 'claim_gate_output_sha256')}")
+            lines.append(f"verification_report_path: {pick_path_or_hash(att, 'verification_report_path', 'verification_report_sha256')}")
+        elif st == "verification_echo_candidate":
+            lines.append(f"evidence_input_path: {pick_path_or_hash(att, 'evidence_input_path', 'evidence_input_sha256')}")
+            lines.append(f"claim_gate_output_path: {pick_path_or_hash(att, 'claim_gate_output_path', 'claim_gate_output_sha256')}")
+            lines.append(f"verification_report_path: {pick_path_or_hash(att, 'verification_report_path', 'verification_report_sha256')}")
+            lines.append(f"echo_wrapper_path: {pick_path_or_hash(att, 'echo_wrapper_path', 'echo_wrapper_sha256')}")
+
+        # Archive readiness fields
+        record_intent = payload.get("record_intent", "intake_only")
+        requested_kind = payload.get("requested_archive_kind", "none")
+        lines.append(f"record_intent: {record_intent}")
+        lines.append(f"requested_archive_kind: {requested_kind}")
+
+        ar = payload.get("archive_readiness") or {}
+        if record_intent != "intake_only" and requested_kind != "none":
+            lines.append(f"archive_ready: {'true' if ar.get('archive_ready') else 'false'}")
+            lines.append(f"allowed_archive_kind: {ar.get('allowed_archive_kind', 'none')}")
+            lines.append(f"auto_archive_action: {ar.get('auto_archive_action', 'none')}")
+            blocking = ar.get("blocking_reasons", [])
+            if blocking:
+                lines.append("archive_blocking_reasons:")
+                for br in blocking:
+                    lines.append(f"  - {br.get('code', 'UNKNOWN')}: {br.get('message', '')}")
+            next_actions = ar.get("required_next_actions", [])
+            if next_actions:
+                lines.append("required_next_actions:")
+                for action in next_actions:
+                    lines.append(f"  - {action}")
+        else:
+            lines.append("archive_ready: false")
+            lines.append("allowed_archive_kind: none")
+            lines.append("auto_archive_action: none")
+            lines.append("archive_readiness_summary:")
+            lines.append("  - INTAKE_ONLY_NOT_ARCHIVE")
 
     # what_i_checked
     wic = payload.get("what_i_checked", [])
@@ -118,37 +172,10 @@ def render_machine_block(payload):
     else:
         lines.append("limitations: []")
 
-    # Archive readiness fields
-    record_intent = payload.get("record_intent", "intake_only")
-    requested_archive_kind = payload.get("requested_archive_kind", "none")
-    lines.append(f"record_intent: {record_intent}")
-    lines.append(f"requested_archive_kind: {requested_archive_kind}")
-
-    ar = payload.get("archive_readiness") or {}
-    if record_intent != "intake_only" and requested_archive_kind != "none":
-        lines.append(f"archive_ready: {'true' if ar.get('archive_ready') else 'false'}")
-        lines.append(f"allowed_archive_kind: {ar.get('allowed_archive_kind', 'none')}")
-        lines.append(f"auto_archive_action: {ar.get('auto_archive_action', 'none')}")
-        blocking = ar.get("blocking_reasons", [])
-        if blocking:
-            lines.append("archive_blocking_reasons:")
-            for br in blocking:
-                lines.append(f"  - {br.get('code', 'UNKNOWN')}: {br.get('message', '')}")
-        next_actions = ar.get("required_next_actions", [])
-        if next_actions:
-            lines.append("required_next_actions:")
-            for action in next_actions:
-                lines.append(f"  - {action}")
-    else:
-        lines.append("archive_ready: false")
-        lines.append("allowed_archive_kind: none")
-        lines.append("auto_archive_action: none")
-        lines.append("archive_readiness_summary:")
-        lines.append("  - INTAKE_ONLY_NOT_ARCHIVE")
-
-    # Unsolicited provenance proof
-    if prov.get("independence_class") == "unsolicited_agent_discovery":
-        lines.append(f"unsolicited_discovery_proof_available: {'true' if prov.get('unsolicited_discovery_proof') else 'false'}")
+    # Unsolicited provenance proof (only for strict path)
+    if requested_archive_kind != "agent_declared_verification_archive":
+        if prov.get("independence_class") == "unsolicited_agent_discovery":
+            lines.append(f"unsolicited_discovery_proof_available: {'true' if prov.get('unsolicited_discovery_proof') else 'false'}")
 
     # boundary_sentence
     c = canonical_boundary_sentence()

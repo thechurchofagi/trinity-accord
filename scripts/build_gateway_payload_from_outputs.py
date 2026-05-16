@@ -195,7 +195,8 @@ def main():
                         help="Record intent (default: auto_archive_candidate for verification submissions)")
     parser.add_argument("--requested-archive-kind", default=None,
                         choices=["none", "external_agent_intake_sample", "verification_report_archive",
-                                 "archived_echo", "successor_reception_candidate"],
+                                 "archived_echo", "successor_reception_candidate",
+                                 "agent_declared_verification_archive"],
                         help="Requested archive kind (default: inferred from submission_type)")
     parser.add_argument("--intake-only", action="store_true",
                         help="Shortcut for --record-intent intake_only --requested-archive-kind none")
