@@ -51,6 +51,51 @@
       "auto_archive_allowed": false,
       "gateway_rejected": true,
       "reason": "Successor reception is not claimable through Agent Gateway."
+    },
+    "agent_declared_verification_archive": {
+      "formal_verification": false,
+      "allowed_protocol_levels": [
+        "V0",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5"
+      ],
+      "exclusive_for_protocol_levels": [
+        "V0",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5"
+      ],
+      "claim_gate_required": true,
+      "claim_gate_mode": "template_for_v0_v5",
+      "claim_gate_pass_required": true,
+      "evidence_required": false,
+      "artifact_bundle_required": false,
+      "hash_evidence_required": false,
+      "public_url_required": false,
+      "script_audit_required": false,
+      "component_floors_required": false,
+      "provenance_proof_required_for_unsolicited": false,
+      "requires_agent_identity": true,
+      "requires_integrity_declaration": true,
+      "requires_discovery_provenance": true,
+      "requires_origin_classification": true,
+      "requires_authority_boundary": true,
+      "counts_toward_home_verifiability": true,
+      "counts_toward_home_reception": true,
+      "auto_archive_allowed": true,
+      "auto_labels": [
+        "archive:agent-declared-verification",
+        "agent-declared",
+        "claim-gate-template-pass",
+        "evidence-waived-v0-v5"
+      ],
+      "auto_close_issue": true,
+      "close_reason": "completed"
     }
   },
   "required_script_sets": {
@@ -133,5 +178,10 @@
         "chronicle_recovery": "C5"
       }
     }
+  },
+  "v0_v5_single_mode_rule": {
+    "description": "For new records claiming V0-V5, agent_declared_verification_archive is the only allowed archive kind.",
+    "enforced": true,
+    "blocking_code": "V0_V5_MUST_USE_AGENT_DECLARED_ARCHIVE"
   }
 }
