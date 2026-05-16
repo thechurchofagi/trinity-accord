@@ -255,6 +255,12 @@ def main():
     # (the word appears in blocking messages which is correct)
     forbid("examples/github-app-backend/server.js", r"needs-human-review")
 
+    # --- Gateway archive pipeline regression tests (P0-4 / P1-1) ---
+    require("scripts/test_gateway_archive_pipeline.py", "default_report_candidate_missing_intent_blocks_archive")
+    require("scripts/test_gateway_archive_pipeline.py", "explicit_intake_only_report_candidate_passes_intake")
+    require("scripts/test_gateway_archive_pipeline.py", "archive_ready_issue_body_contains_archive_ready_true")
+    require("scripts/test_gateway_archive_pipeline.py", "normalize_archive_intent_no_forced_defaults")
+
     for p in (ROOT / "api").rglob("*.json"):
         json_file(str(p.relative_to(ROOT)))
 

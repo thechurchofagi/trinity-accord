@@ -93,6 +93,9 @@ jobs:
       - name: Test Echo archive authorization boundary
         run: python3 scripts/test_echo_human_review_archive_authorization.py
 
+      - name: Test gateway archive pipeline (P0-1/P0-2/P0-3/P0-4)
+        run: python3 scripts/test_gateway_archive_pipeline.py
+
       - name: Test build Echo index runs formal validator
         run: python3 scripts/test_build_echo_index_runs_formal_validator.py
 

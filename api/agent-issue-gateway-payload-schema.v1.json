@@ -453,7 +453,8 @@
         "archive_preflight_only",
         null
       ],
-      "default": "auto_archive_candidate"
+      "default": "auto_archive_candidate",
+      "description": "Record intent. Gateway infers from submission_type when not provided: verification submissions default to auto_archive_candidate, others default to intake_only."
     },
     "requested_archive_kind": {
       "type": [
@@ -468,7 +469,7 @@
         "successor_reception_candidate",
         null
       ],
-      "default": "none"
+      "description": "Requested archive kind. Gateway infers from submission_type when not provided: verification_report_candidate -> verification_report_archive, verification_echo_candidate -> archived_echo, others -> none. Explicit intake_only requires none."
     },
     "archive_readiness": {
       "type": [

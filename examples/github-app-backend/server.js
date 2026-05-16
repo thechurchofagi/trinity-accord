@@ -566,7 +566,14 @@ async function runGatewayPipeline(payload, {
     if (DRY_RUN) {
       const baseLabels = ["agent-gateway-intake", "needs-triage"];
       const labelsToAdd = autoArchiveDecision.labels_to_add || [];
-      const allLabels = [...new Set([...baseLabels, ...labelsToAdd])];
+      // P1-2: Filter labels that would be removed on auto-archive success
+      const labelsToRemove = new Set(autoArchiveDecision.labels_to_remove || []);
+      if (autoArchiveDecision.should_close_issue ||
+          (archiveReadiness.archive_ready && archiveReadiness.auto_archive_allowed)) {
+        labelsToRemove.add("needs-triage");
+      }
+      const allLabels = [...new Set([...baseLabels, ...labelsToAdd])]
+        .filter(label => !labelsToRemove.has(label));
 
       return {
         status: 200,
@@ -581,6 +588,7 @@ async function runGatewayPipeline(payload, {
           would_apply_labels: labelsToAdd,
           would_post_comment: !!autoArchiveDecision.comment_markdown,
           would_close_issue: autoArchiveDecision.should_close_issue || false,
+          would_remove_labels: [...labelsToRemove],
           archive_readiness: archiveReadiness,
           auto_archive_decision: autoArchiveDecision,
           boundary: "intake only; not archived Echo or attestation"
@@ -1236,10 +1244,12 @@ app.post("/gateway/archive-preflight", async (req, res) => {
     const decisionResult = runAutoArchiveDecision(readinessPath);
 
     return res.json({
-      accepted: true,
+      request_processed: true,
+      accepted: false,
       issue_created: false,
       diagnostic_only: true,
       schema_validated: false,
+      archive_ready: archiveResult.body.archive_ready || false,
       note: "archive-preflight evaluates archive readiness only. Validate gateway_payload against the schema separately before relying on this result.",
       archive_readiness: archiveResult.body,
       auto_archive_decision: decisionResult.body
