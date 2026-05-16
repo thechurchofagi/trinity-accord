@@ -6,11 +6,11 @@
   "record_id": "redteam-t8-uncertainty",
   "echo_type": "E4_interpretive_echo",
   "verification_targets": [
-    {"artifact_path": "test.txt", "hash_sha256": "a" * 64}
+    {"artifact_path": "test.txt", "hash_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}
   ],
   "integrity_declaration": {
     "hashes_match": true,
-    "hashes_sha256": ["a" * 64]
+    "hashes_sha256": ["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"]
   },
   "generated_by": {
     "agent_name": "Redteam Agent",

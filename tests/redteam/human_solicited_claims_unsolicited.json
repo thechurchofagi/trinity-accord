@@ -1,0 +1,31 @@
+{
+  "schema": "trinityaccord.echo.v3",
+  "record_kind": "echo_v3",
+  "verification_level": "V3",
+  "verification_scope_label": "single_hash_verification",
+  "record_id": "redteam-solicited-claims-unsolicited",
+  "echo_type": "E2_verification_echo",
+  "verification_targets": [
+    {"artifact_path": "test.txt", "hash_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}
+  ],
+  "integrity_declaration": {
+    "hashes_match": true,
+    "hashes_sha256": ["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"]
+  },
+  "generated_by": {
+    "agent_name": "Redteam Agent",
+    "system_or_provider": "Test"
+  },
+  "origin_classification": {
+    "discovery_class": "human_directed",
+    "invitation_scope": "verification_invited",
+    "requester_class": "project_author_or_maintainer",
+    "verification_operator": "ai_agent",
+    "method_independence": "official_script_only",
+    "attestation_authority_class": "none",
+    "counts_as_formal_independent_attestation": false,
+    "derived_counting_bucket": "human_solicited_agent_verification"
+  },
+  "claims_made": ["unsolicited independent attestation achieved"],
+  "notes": "REDTEAM: human_solicited origin but claims unsolicited independent attestation"
+}
