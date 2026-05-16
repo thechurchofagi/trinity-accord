@@ -83,7 +83,8 @@ def parse_yaml_like_block(raw):
             val = val.strip()
 
             if val == "":
-                if key in ("what_i_checked", "limitations"):
+                # Any key with empty value is a potential list header
+                if key not in data or not isinstance(data.get(key), list):
                     data[key] = []
                 current_list = key
             else:
