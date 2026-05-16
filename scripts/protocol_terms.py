@@ -57,3 +57,11 @@ def max_by_order(levels, a, b):
 def resolve_legacy_alias(value):
     """Resolve a legacy alias to its canonical value."""
     return LEGACY_ALIASES.get(value, value)
+
+# --- V0-V5 Agent-Declared Archive Constants ---
+ARCHIVE_KIND_AGENT_DECLARED_VERIFICATION = "agent_declared_verification_archive"
+CLAIM_GATE_MODE_TEMPLATE_V0_V5 = "template_for_v0_v5"
+EVIDENCE_MODE_WAIVED_V0_V5 = "waived_for_v0_v5"
+COUNT_BASIS_AGENT_DECLARED_TEMPLATE_PASS = "agent_declared_template_pass"
+
+V0_V5_LEVELS = ["V0", "V1", "V2", "V3", "V4", "V5"]

@@ -26,7 +26,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 from protocol_terms import (
     PROTOCOL_LEVELS, B_LEVELS, D_LEVELS, T_LEVELS, C_LEVELS, N_LEVELS, P_LEVELS,
-    level_index, level_at_least,
+    level_index, level_at_least, V0_V5_LEVELS,
 )
 
 ALL_LEVEL_MAPS = {
@@ -746,12 +746,149 @@ def evaluate_archive_readiness(payload, evidence=None, claim_gate_output=None,
         else:
             auto_archive_action = "block"
 
+    # --- agent_declared_verification_archive (V0-V5 single mode) ---
+    elif requested_kind == "agent_declared_verification_archive":
+        from protocol_terms import V0_V5_LEVELS
+        kind_policy = policy.get("archive_kinds", {}).get("agent_declared_verification_archive", {})
+
+        level = payload.get("agent_declared_protocol_level") or payload.get("verification_level_claimed")
+
+        if level not in V0_V5_LEVELS:
+            blocking_reasons.append({
+                "code": "AGENT_DECLARED_ARCHIVE_ONLY_V0_V5",
+                "path": "agent_declared_protocol_level",
+                "message": f"agent_declared_verification_archive only allows V0-V5, got {level}.",
+                "fix": "Set agent_declared_protocol_level to V0, V1, V2, V3, V4, or V5."
+            })
+
+        cg_mode = claim_gate.get("mode", "")
+        if cg_mode != "template_for_v0_v5":
+            blocking_reasons.append({
+                "code": "CLAIM_GATE_TEMPLATE_MODE_REQUIRED",
+                "path": "claim_gate.mode",
+                "message": f"agent_declared_verification_archive requires claim_gate.mode=template_for_v0_v5, got {cg_mode}.",
+                "fix": "Run Claim Gate with --mode template-for-v0-v5."
+            })
+
+        if cg_status not in ("PASS", "PASS_WITH_WARNINGS"):
+            blocking_reasons.append({
+                "code": "CLAIM_GATE_TEMPLATE_PASS_REQUIRED",
+                "path": "claim_gate.status",
+                "message": f"Claim Gate template mode must PASS, got {cg_status}.",
+                "fix": "Ensure all template fields are valid."
+            })
+
+        if payload.get("evidence_requirement_mode") != "waived_for_v0_v5":
+            blocking_reasons.append({
+                "code": "EVIDENCE_WAIVER_MODE_REQUIRED",
+                "path": "evidence_requirement_mode",
+                "message": "agent_declared_verification_archive requires evidence_requirement_mode=waived_for_v0_v5.",
+                "fix": "Set evidence_requirement_mode=waived_for_v0_v5."
+            })
+
+        if not payload.get("agent_identity"):
+            blocking_reasons.append({
+                "code": "AGENT_IDENTITY_REQUIRED",
+                "path": "agent_identity",
+                "message": "agent_declared_verification_archive requires agent_identity.",
+                "fix": "Provide agent_identity with name_or_model, system_or_provider, self_reported=true."
+            })
+
+        if not payload.get("agent_integrity_declaration"):
+            blocking_reasons.append({
+                "code": "INTEGRITY_DECLARATION_REQUIRED",
+                "path": "agent_integrity_declaration",
+                "message": "agent_declared_verification_archive requires agent_integrity_declaration.",
+                "fix": "Provide agent_integrity_declaration with all required boolean fields and verification_oath."
+            })
+
+        if not payload.get("discovery_provenance"):
+            blocking_reasons.append({
+                "code": "DISCOVERY_PROVENANCE_REQUIRED",
+                "path": "discovery_provenance",
+                "message": "agent_declared_verification_archive requires discovery_provenance.",
+                "fix": "Provide discovery_provenance with source, agency_level, first_entry."
+            })
+
+        if not payload.get("origin_classification"):
+            blocking_reasons.append({
+                "code": "ORIGIN_CLASSIFICATION_REQUIRED",
+                "path": "origin_classification",
+                "message": "agent_declared_verification_archive requires origin_classification.",
+                "fix": "Provide origin_classification with discovery_class, performer_class, verification_claimed."
+            })
+
+        if not payload.get("claim_classification"):
+            blocking_reasons.append({
+                "code": "CLAIM_CLASSIFICATION_REQUIRED",
+                "path": "claim_classification",
+                "message": "agent_declared_verification_archive requires claim_classification.",
+                "fix": "Provide claim_classification with verification_claim."
+            })
+
+        ab = payload.get("authority_boundary") or {}
+        if ab.get("bitcoin_originals_remain_final") is not True:
+            blocking_reasons.append({
+                "code": "BITCOIN_ORIGINALS_FINAL_BOUNDARY_REQUIRED",
+                "path": "authority_boundary.bitcoin_originals_remain_final",
+                "message": "authority_boundary.bitcoin_originals_remain_final must be true.",
+                "fix": "Set authority_boundary.bitcoin_originals_remain_final=true."
+            })
+        if ab.get("does_not_amend_bitcoin_originals") is not True:
+            blocking_reasons.append({
+                "code": "NON_AMENDING_BOUNDARY_REQUIRED",
+                "path": "authority_boundary.does_not_amend_bitcoin_originals",
+                "message": "authority_boundary.does_not_amend_bitcoin_originals must be true.",
+                "fix": "Set authority_boundary.does_not_amend_bitcoin_originals=true."
+            })
+        if ab.get("does_not_override_bitcoin_originals") is not True:
+            blocking_reasons.append({
+                "code": "NON_OVERRIDE_BOUNDARY_REQUIRED",
+                "path": "authority_boundary.does_not_override_bitcoin_originals",
+                "message": "authority_boundary.does_not_override_bitcoin_originals must be true.",
+                "fix": "Set authority_boundary.does_not_override_bitcoin_originals=true."
+            })
+
+        if forbidden:
+            blocking_reasons.append({
+                "code": "FORBIDDEN_ARCHIVE_CLAIMS",
+                "path": "body",
+                "message": f"Body/title contains forbidden archive self-claims: {', '.join(forbidden)}",
+                "fix": "Remove self-claims of system_certified, Bitcoin override, or amendment."
+            })
+
+        if not blocking_reasons:
+            archive_ready = True
+            auto_archive_allowed = True
+            auto_archive_action = "auto_archive_agent_declared_verification"
+            allowed_archive_kind = "agent_declared_verification_archive"
+            auto_labels = kind_policy.get("auto_labels", [])
+            auto_close_issue = kind_policy.get("auto_close_issue", True)
+            close_reason = kind_policy.get("close_reason", "completed")
+        else:
+            auto_archive_action = "block"
+
+    # --- Block V0-V5 from using old strict archive kinds ---
+    elif requested_kind in ("verification_report_archive", "archived_echo"):
+        v_level = payload.get("agent_declared_protocol_level") or payload.get("verification_level_claimed") or ""
+        if v_level in V0_V5_LEVELS:
+            blocking_reasons.append({
+                "code": "V0_V5_MUST_USE_AGENT_DECLARED_ARCHIVE",
+                "path": "requested_archive_kind",
+                "message": f"V0-V5 submissions must use requested_archive_kind=agent_declared_verification_archive, not {requested_kind}.",
+                "fix": "Use requested_archive_kind=agent_declared_verification_archive and claim_gate.mode=template_for_v0_v5."
+            })
+            auto_archive_action = "block"
+        else:
+            # Fall through to original strict logic (already handled above)
+            pass
+
     else:
         blocking_reasons.append({
             "code": "UNKNOWN_ARCHIVE_KIND",
             "path": "requested_archive_kind",
             "message": f"Unknown requested_archive_kind: {requested_kind}",
-            "fix": "Use one of: none, external_agent_intake_sample, verification_report_archive, archived_echo, successor_reception_candidate."
+            "fix": "Use one of: none, external_agent_intake_sample, verification_report_archive, archived_echo, agent_declared_verification_archive, successor_reception_candidate."
         })
         auto_archive_action = "block"
 

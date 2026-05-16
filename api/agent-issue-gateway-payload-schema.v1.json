@@ -219,116 +219,8 @@
       }
     },
     "discovery_provenance": {
-      "type": [
-        "object",
-        "null"
-      ],
-      "required": [
-        "solicited",
-        "independence_class",
-        "agency_level",
-        "operator_type"
-      ],
-      "properties": {
-        "schema": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "source": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "solicited": {
-          "type": "boolean"
-        },
-        "independence_class": {
-          "type": "string",
-          "enum": [
-            "human_solicited_agent_response",
-            "unsolicited_agent_discovery",
-            "institutional_attestation",
-            "independent_reproduction"
-          ]
-        },
-        "agency_level": {
-          "type": "string",
-          "enum": [
-            "A1_human_gave_exact_url",
-            "A2_human_gave_repo_name",
-            "A3_agent_discovered_independently",
-            "A4_agent_instructed_by_other_agent"
-          ]
-        },
-        "operator_type": {
-          "type": "string",
-          "enum": [
-            "ai_agent",
-            "human",
-            "human_with_ai_agent",
-            "automated_script"
-          ]
-        },
-        "unsolicited_discovery_proof": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "maxLength": 2000
-        },
-        "first_entry": {
-          "type": [
-            "object",
-            "null"
-          ]
-        },
-        "human_supplied_link": {
-          "type": [
-            "boolean",
-            "null"
-          ]
-        },
-        "human_supplied_summary": {
-          "type": [
-            "boolean",
-            "null"
-          ]
-        },
-        "other_agent_recommended": {
-          "type": [
-            "boolean",
-            "null"
-          ]
-        },
-        "agent_performed_independent_followup": {
-          "type": [
-            "boolean",
-            "null"
-          ]
-        },
-        "external_search_used": {
-          "type": [
-            "boolean",
-            "null"
-          ]
-        },
-        "prior_memory_or_context_used": {
-          "type": [
-            "boolean",
-            "null"
-          ]
-        },
-        "confidence": {
-          "type": [
-            "string",
-            "number",
-            "null"
-          ]
-        }
-      }
+      "type": "object",
+      "description": "Discovery provenance for the agent submission."
     },
     "context_readiness": {
       "type": [
@@ -351,17 +243,17 @@
     },
     "what_i_checked": {
       "type": "array",
-      "minItems": 1,
       "items": {
-        "type": "string",
-        "minLength": 3
-      }
+        "type": "string"
+      },
+      "description": "List of what the agent checked."
     },
     "limitations": {
       "type": "array",
       "items": {
         "type": "string"
-      }
+      },
+      "description": "List of limitations acknowledged by the agent."
     },
     "pre_verification_integrity_declaration": {
       "type": [
@@ -467,7 +359,8 @@
         "verification_report_archive",
         "archived_echo",
         "successor_reception_candidate",
-        null
+        null,
+        "agent_declared_verification_archive"
       ],
       "description": "Requested archive kind. Gateway infers from submission_type when not provided: verification_report_candidate -> verification_report_archive, verification_echo_candidate -> archived_echo, others -> none. Explicit intake_only requires none."
     },
@@ -613,6 +506,79 @@
             "maxLength": 80
           },
           "maxItems": 20
+        }
+      }
+    },
+    "agent_declared_protocol_level": {
+      "type": "string",
+      "description": "V0-V5 protocol level for agent-declared verification archive.",
+      "enum": [
+        "V0",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5"
+      ]
+    },
+    "evidence_requirement_mode": {
+      "type": "string",
+      "description": "Evidence requirement mode. waived_for_v0_v5 for agent-declared archives.",
+      "enum": [
+        "strict",
+        "waived_for_v0_v5"
+      ]
+    },
+    "agent_integrity_declaration": {
+      "type": "object",
+      "description": "Agent integrity declaration with verification oath for V0-V5 template mode.",
+      "properties": {
+        "performed_actions_myself": {
+          "type": "boolean"
+        },
+        "verification_oath": {
+          "type": "object"
+        },
+        "declaration_text": {
+          "type": "string"
+        }
+      }
+    },
+    "origin_classification": {
+      "type": "object",
+      "description": "Origin classification for the agent submission."
+    },
+    "claim_classification": {
+      "type": "object",
+      "description": "Structured claim classification replacing not_independent_attestation/not_successor_reception."
+    },
+    "authority_boundary": {
+      "type": "object",
+      "description": "Authority boundary declaration.",
+      "properties": {
+        "bitcoin_originals_remain_final": {
+          "type": "boolean"
+        },
+        "does_not_amend_bitcoin_originals": {
+          "type": "boolean"
+        },
+        "does_not_override_bitcoin_originals": {
+          "type": "boolean"
+        }
+      }
+    },
+    "counts_toward_home": {
+      "type": "object",
+      "description": "Homepage counting configuration.",
+      "properties": {
+        "verifiability": {
+          "type": "boolean"
+        },
+        "reception": {
+          "type": "boolean"
+        },
+        "basis": {
+          "type": "string"
         }
       }
     }
@@ -868,6 +834,34 @@
             ]
           }
         }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "requested_archive_kind": {
+            "const": "agent_declared_verification_archive"
+          }
+        },
+        "required": [
+          "requested_archive_kind"
+        ]
+      },
+      "then": {
+        "required": [
+          "agent_identity",
+          "agent_declared_protocol_level",
+          "evidence_requirement_mode",
+          "claim_gate",
+          "agent_integrity_declaration",
+          "discovery_provenance",
+          "origin_classification",
+          "claim_classification",
+          "authority_boundary",
+          "counts_toward_home",
+          "what_i_checked",
+          "limitations"
+        ]
       }
     }
   ]

@@ -157,5 +157,23 @@
     "V3-strong",
     "V2-minimal",
     "V2-strong"
+  ],
+  "archive_kinds_extended": [
+    "agent_declared_verification_archive"
+  ],
+  "constants": {
+    "ARCHIVE_KIND_AGENT_DECLARED_VERIFICATION": "agent_declared_verification_archive",
+    "CLAIM_GATE_MODE_TEMPLATE_V0_V5": "template_for_v0_v5",
+    "EVIDENCE_MODE_WAIVED_V0_V5": "waived_for_v0_v5",
+    "COUNT_BASIS_AGENT_DECLARED_TEMPLATE_PASS": "agent_declared_template_pass"
+  },
+  "claim_gate_modes": [
+    "template_for_v0_v5"
+  ],
+  "evidence_requirement_modes": [
+    "waived_for_v0_v5"
+  ],
+  "record_intents": [
+    "auto_archive_candidate"
   ]
 }

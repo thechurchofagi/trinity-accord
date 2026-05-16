@@ -1,0 +1,450 @@
+{
+  "schema": "trinityaccord.agent-declared-verification-template.v1",
+  "description": "Template schema for V0-V5 agent-declared verification archive records.",
+  "type": "object",
+  "required": [
+    "schema",
+    "submission_type",
+    "record_intent",
+    "requested_archive_kind",
+    "agent_identity",
+    "agent_declared_protocol_level",
+    "evidence_requirement_mode",
+    "claim_gate",
+    "agent_integrity_declaration",
+    "discovery_provenance",
+    "origin_classification",
+    "claim_classification",
+    "authority_boundary",
+    "counts_toward_home",
+    "what_i_checked",
+    "limitations"
+  ],
+  "properties": {
+    "schema": {
+      "type": "string",
+      "const": "trinityaccord.agent-declared-verification-template.v1"
+    },
+    "submission_type": {
+      "type": "string",
+      "const": "verification_report_candidate"
+    },
+    "record_intent": {
+      "type": "string",
+      "const": "auto_archive_candidate"
+    },
+    "requested_archive_kind": {
+      "type": "string",
+      "const": "agent_declared_verification_archive"
+    },
+    "title": {
+      "type": "string"
+    },
+    "body": {
+      "type": "string"
+    },
+    "agent_identity": {
+      "type": "object",
+      "required": [
+        "name_or_model",
+        "system_or_provider",
+        "self_reported"
+      ],
+      "properties": {
+        "name_or_model": {
+          "type": "string",
+          "minLength": 1
+        },
+        "system_or_provider": {
+          "type": "string",
+          "minLength": 1
+        },
+        "self_reported": {
+          "type": "boolean",
+          "const": true
+        },
+        "session_or_run_id": {
+          "type": "string"
+        }
+      }
+    },
+    "agent_declared_protocol_level": {
+      "type": "string",
+      "enum": [
+        "V0",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5"
+      ]
+    },
+    "evidence_requirement_mode": {
+      "type": "string",
+      "const": "waived_for_v0_v5"
+    },
+    "claim_gate": {
+      "type": "object",
+      "required": [
+        "mode",
+        "status"
+      ],
+      "properties": {
+        "mode": {
+          "type": "string",
+          "const": "template_for_v0_v5"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "PASS",
+            "PASS_WITH_WARNINGS"
+          ]
+        },
+        "allowed_protocol_level": {
+          "type": "string"
+        },
+        "allowed_protocol_scope": {
+          "type": "string"
+        }
+      }
+    },
+    "agent_integrity_declaration": {
+      "type": "object",
+      "required": [
+        "performed_actions_myself",
+        "did_not_copy_prior_report_as_own_work",
+        "did_not_copy_example_values_as_real_evidence",
+        "recorded_fresh_sources_commands_outputs",
+        "will_report_limitations_and_downgrade_if_needed",
+        "understands_verification_is_not_truth_or_endorsement",
+        "understands_bitcoin_originals_remain_final_authority",
+        "independence_claim_is_accurate",
+        "verification_oath",
+        "declaration_text"
+      ],
+      "properties": {
+        "performed_actions_myself": {
+          "type": "boolean"
+        },
+        "did_not_copy_prior_report_as_own_work": {
+          "type": "boolean"
+        },
+        "did_not_copy_example_values_as_real_evidence": {
+          "type": "boolean"
+        },
+        "recorded_fresh_sources_commands_outputs": {
+          "type": "boolean"
+        },
+        "will_report_limitations_and_downgrade_if_needed": {
+          "type": "boolean"
+        },
+        "understands_verification_is_not_truth_or_endorsement": {
+          "type": "boolean"
+        },
+        "understands_bitcoin_originals_remain_final_authority": {
+          "type": "boolean"
+        },
+        "independence_claim_is_accurate": {
+          "type": "boolean"
+        },
+        "verification_ethics_prompt_read": {
+          "type": "boolean"
+        },
+        "verification_ethics_prompt_version": {
+          "type": "string"
+        },
+        "verification_ethics_readback": {
+          "type": "string"
+        },
+        "understands_not_an_exam_or_performance": {
+          "type": "boolean"
+        },
+        "will_state_actual_capability_only": {
+          "type": "boolean"
+        },
+        "will_not_lie_or_cheat": {
+          "type": "boolean"
+        },
+        "will_not_present_guesses_as_facts": {
+          "type": "boolean"
+        },
+        "verification_oath": {
+          "type": "object",
+          "required": [
+            "oath_read",
+            "oath_version",
+            "oath_text_sha256",
+            "readback_required",
+            "agent_readback",
+            "understands_not_an_exam_or_performance",
+            "will_state_actual_capability_only",
+            "will_not_lie_or_cheat",
+            "will_not_fabricate_verification",
+            "will_not_present_guesses_as_facts",
+            "will_not_copy_prior_reports_as_fresh_evidence",
+            "will_state_uncertainty_limitations_and_downgrades"
+          ],
+          "properties": {
+            "schema": {
+              "type": "string"
+            },
+            "oath_read": {
+              "type": "boolean"
+            },
+            "oath_version": {
+              "type": "string"
+            },
+            "oath_text_sha256": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            },
+            "readback_required": {
+              "type": "boolean"
+            },
+            "agent_readback": {
+              "type": "string",
+              "minLength": 160
+            },
+            "understands_not_an_exam_or_performance": {
+              "type": "boolean"
+            },
+            "will_state_actual_capability_only": {
+              "type": "boolean"
+            },
+            "will_not_lie_or_cheat": {
+              "type": "boolean"
+            },
+            "will_not_fabricate_verification": {
+              "type": "boolean"
+            },
+            "will_not_present_guesses_as_facts": {
+              "type": "boolean"
+            },
+            "will_not_copy_prior_reports_as_fresh_evidence": {
+              "type": "boolean"
+            },
+            "will_state_uncertainty_limitations_and_downgrades": {
+              "type": "boolean"
+            }
+          }
+        },
+        "declaration_text": {
+          "type": "string",
+          "minLength": 80
+        }
+      }
+    },
+    "discovery_provenance": {
+      "type": "object",
+      "required": [
+        "source",
+        "agency_level",
+        "first_entry"
+      ],
+      "properties": {
+        "schema": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string"
+        },
+        "agency_level": {
+          "type": "string"
+        },
+        "first_entry": {
+          "type": "object",
+          "required": [
+            "url_or_path",
+            "entry_type"
+          ],
+          "properties": {
+            "url_or_path": {
+              "type": "string"
+            },
+            "entry_type": {
+              "type": "string"
+            }
+          }
+        },
+        "human_supplied_link": {
+          "type": "boolean"
+        },
+        "other_agent_recommended": {
+          "type": "boolean"
+        },
+        "agent_performed_independent_followup": {
+          "type": "boolean"
+        },
+        "external_search_used": {
+          "type": "boolean"
+        },
+        "prior_memory_or_context_used": {
+          "type": "boolean"
+        },
+        "confidence": {
+          "type": "string"
+        }
+      }
+    },
+    "origin_classification": {
+      "type": "object",
+      "required": [
+        "discovery_class",
+        "performer_class",
+        "verification_claimed",
+        "counts_as_ai_verification"
+      ],
+      "properties": {
+        "schema": {
+          "type": "string"
+        },
+        "discovery_class": {
+          "type": "string"
+        },
+        "invitation_scope": {
+          "type": "string"
+        },
+        "requester_class": {
+          "type": "string"
+        },
+        "performer_class": {
+          "type": "string"
+        },
+        "method_independence_class": {
+          "type": "string"
+        },
+        "attestation_authority_class": {
+          "type": "string"
+        },
+        "verification_claimed": {
+          "type": "boolean"
+        },
+        "counts_as_ai_verification": {
+          "type": "boolean"
+        },
+        "counts_as_formal_independent_attestation": {
+          "type": "boolean"
+        },
+        "external_witness_class": {
+          "type": "string"
+        },
+        "counts_as_external_witness_record": {
+          "type": "boolean"
+        },
+        "derived_counting_bucket": {
+          "type": "string"
+        }
+      }
+    },
+    "claim_classification": {
+      "type": "object",
+      "required": [
+        "verification_claim"
+      ],
+      "properties": {
+        "verification_claim": {
+          "type": "object",
+          "required": [
+            "claimed",
+            "basis",
+            "system_certified"
+          ],
+          "properties": {
+            "claimed": {
+              "type": "boolean"
+            },
+            "basis": {
+              "type": "string"
+            },
+            "system_certified": {
+              "type": "boolean"
+            }
+          }
+        },
+        "attestation_claim": {
+          "type": "object",
+          "properties": {
+            "claimed": {
+              "type": "boolean"
+            },
+            "basis": {
+              "type": "string"
+            },
+            "system_certified": {
+              "type": "boolean"
+            }
+          }
+        },
+        "successor_reception_claim": {
+          "type": "object",
+          "properties": {
+            "claimed": {
+              "type": "boolean"
+            },
+            "basis": {
+              "type": "string"
+            },
+            "system_certified": {
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    },
+    "authority_boundary": {
+      "type": "object",
+      "required": [
+        "bitcoin_originals_remain_final",
+        "does_not_amend_bitcoin_originals",
+        "does_not_override_bitcoin_originals"
+      ],
+      "properties": {
+        "bitcoin_originals_remain_final": {
+          "type": "boolean"
+        },
+        "does_not_amend_bitcoin_originals": {
+          "type": "boolean"
+        },
+        "does_not_override_bitcoin_originals": {
+          "type": "boolean"
+        }
+      }
+    },
+    "counts_toward_home": {
+      "type": "object",
+      "required": [
+        "verifiability",
+        "reception",
+        "basis"
+      ],
+      "properties": {
+        "verifiability": {
+          "type": "boolean"
+        },
+        "reception": {
+          "type": "boolean"
+        },
+        "basis": {
+          "type": "string",
+          "const": "agent_declared_template_pass"
+        }
+      }
+    },
+    "what_i_checked": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    }
+  },
+  "additionalProperties": false
+}

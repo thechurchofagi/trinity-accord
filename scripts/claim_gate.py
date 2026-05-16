@@ -982,6 +982,229 @@ def generate_title(protocol_level, component_levels, agent_name, record_kind, da
         return f"Verification Report Candidate: {protocol_level}/{component_summary} — {date_str} ({agent_name})"
 
 
+def evaluate_template_for_v0_v5(payload):
+    """Evaluate a V0-V5 agent-declared verification template payload.
+
+    This mode waives evidence requirements but enforces template compliance,
+    oath, integrity declaration, provenance, origin classification, and authority boundary.
+    """
+    from protocol_terms import V0_V5_LEVELS
+
+    blocking_failures = []
+    non_blocking = []
+
+    # --- Schema and required fields ---
+    schema = payload.get('schema')
+    if schema != 'trinityaccord.agent-declared-verification-template.v1':
+        # Also accept gateway payload with agent-declared kind
+        if payload.get('requested_archive_kind') != 'agent_declared_verification_archive':
+            blocking_failures.append('SCHEMA_INVALID: expected agent-declared-verification-template or gateway payload with agent_declared_verification_archive')
+
+    record_intent = payload.get('record_intent')
+    if record_intent != 'auto_archive_candidate':
+        blocking_failures.append(f'RECORD_INTENT_MUST_BE_AUTO_ARCHIVE: got {record_intent}')
+
+    requested_kind = payload.get('requested_archive_kind')
+    if requested_kind != 'agent_declared_verification_archive':
+        blocking_failures.append(f'REQUESTED_KIND_MUST_BE_AGENT_DECLARED: got {requested_kind}')
+
+    level = payload.get('agent_declared_protocol_level')
+    if level not in V0_V5_LEVELS:
+        blocking_failures.append(f'PROTOCOL_LEVEL_MUST_BE_V0_V5: got {level}')
+
+    evidence_mode = payload.get('evidence_requirement_mode')
+    if evidence_mode != 'waived_for_v0_v5':
+        blocking_failures.append(f'EVIDENCE_MODE_MUST_BE_WAIVED: got {evidence_mode}')
+
+    # --- Agent identity ---
+    agent_id = payload.get('agent_identity')
+    if not agent_id or not isinstance(agent_id, dict):
+        blocking_failures.append('AGENT_IDENTITY_REQUIRED')
+    else:
+        if not agent_id.get('name_or_model'):
+            blocking_failures.append('AGENT_IDENTITY_NAME_REQUIRED')
+        if not agent_id.get('system_or_provider'):
+            blocking_failures.append('AGENT_IDENTITY_PROVIDER_REQUIRED')
+        if agent_id.get('self_reported') is not True:
+            blocking_failures.append('AGENT_IDENTITY_SELF_REPORTED_MUST_BE_TRUE')
+
+    # --- Claim Gate ---
+    claim_gate = payload.get('claim_gate')
+    if not claim_gate or not isinstance(claim_gate, dict):
+        blocking_failures.append('CLAIM_GATE_REQUIRED')
+    else:
+        cg_mode = claim_gate.get('mode')
+        if cg_mode != 'template_for_v0_v5':
+            blocking_failures.append(f'CLAIM_GATE_MODE_MUST_BE_TEMPLATE: got {cg_mode}')
+        cg_status = claim_gate.get('status')
+        if cg_status not in ('PASS', 'PASS_WITH_WARNINGS'):
+            blocking_failures.append(f'CLAIM_GATE_STATUS_MUST_PASS: got {cg_status}')
+
+    # --- Integrity declaration ---
+    decl = payload.get('agent_integrity_declaration')
+    if not decl or not isinstance(decl, dict):
+        blocking_failures.append('INTEGRITY_DECLARATION_REQUIRED')
+    else:
+        bool_fields = [
+            'performed_actions_myself',
+            'did_not_copy_prior_report_as_own_work',
+            'did_not_copy_example_values_as_real_evidence',
+            'recorded_fresh_sources_commands_outputs',
+            'will_report_limitations_and_downgrade_if_needed',
+            'understands_verification_is_not_truth_or_endorsement',
+            'understands_bitcoin_originals_remain_final_authority',
+            'independence_claim_is_accurate',
+        ]
+        for bf in bool_fields:
+            if decl.get(bf) is not True:
+                blocking_failures.append(f'INTEGRITY_BOOL_{bf.upper()}_MUST_BE_TRUE')
+
+        dt = decl.get('declaration_text', '')
+        if not isinstance(dt, str) or len(dt) < 80:
+            blocking_failures.append('DECLARATION_TEXT_TOO_SHORT')
+
+        # --- Verification oath ---
+        oath = decl.get('verification_oath')
+        if not oath or not isinstance(oath, dict):
+            blocking_failures.append('VERIFICATION_OATH_REQUIRED')
+        else:
+            if oath.get('oath_read') is not True:
+                blocking_failures.append('OATH_READ_MUST_BE_TRUE')
+            if not oath.get('oath_version'):
+                blocking_failures.append('OATH_VERSION_REQUIRED')
+            sha = oath.get('oath_text_sha256', '')
+            import re
+            if not isinstance(sha, str) or not re.match(r'^[a-f0-9]{64}$', sha):
+                blocking_failures.append('OATH_TEXT_SHA256_MALFORMED')
+            if oath.get('readback_required') is not True:
+                blocking_failures.append('READBACK_REQUIRED_MUST_BE_TRUE')
+            rb = oath.get('agent_readback', '')
+            if not isinstance(rb, str) or len(rb) < 160:
+                blocking_failures.append('AGENT_READBACK_TOO_SHORT (min 160 chars)')
+            oath_bools = [
+                'understands_not_an_exam_or_performance',
+                'will_state_actual_capability_only',
+                'will_not_lie_or_cheat',
+                'will_not_fabricate_verification',
+                'will_not_present_guesses_as_facts',
+                'will_not_copy_prior_reports_as_fresh_evidence',
+                'will_state_uncertainty_limitations_and_downgrades',
+            ]
+            for ob in oath_bools:
+                if oath.get(ob) is not True:
+                    blocking_failures.append(f'OATH_BOOL_{ob.upper()}_MUST_BE_TRUE')
+
+    # --- Discovery provenance ---
+    prov = payload.get('discovery_provenance')
+    if not prov or not isinstance(prov, dict):
+        blocking_failures.append('DISCOVERY_PROVENANCE_REQUIRED')
+    else:
+        if not prov.get('source'):
+            blocking_failures.append('PROVENANCE_SOURCE_REQUIRED')
+        if not prov.get('agency_level'):
+            blocking_failures.append('PROVENANCE_AGENCY_LEVEL_REQUIRED')
+        fe = prov.get('first_entry')
+        if not fe or not isinstance(fe, dict):
+            blocking_failures.append('PROVENANCE_FIRST_ENTRY_REQUIRED')
+        elif not fe.get('url_or_path') or not fe.get('entry_type'):
+            blocking_failures.append('PROVENANCE_FIRST_ENTRY_FIELDS_REQUIRED')
+
+    # --- Origin classification ---
+    oc = payload.get('origin_classification')
+    if not oc or not isinstance(oc, dict):
+        blocking_failures.append('ORIGIN_CLASSIFICATION_REQUIRED')
+    else:
+        if not oc.get('discovery_class'):
+            blocking_failures.append('ORIGIN_DISCOVERY_CLASS_REQUIRED')
+        if not oc.get('performer_class'):
+            blocking_failures.append('ORIGIN_PERFORMER_CLASS_REQUIRED')
+        if oc.get('verification_claimed') is not True:
+            blocking_failures.append('ORIGIN_VERIFICATION_CLAIMED_MUST_BE_TRUE')
+        if oc.get('counts_as_ai_verification') is not True:
+            blocking_failures.append('ORIGIN_COUNTS_AS_AI_VERIFICATION_MUST_BE_TRUE')
+
+    # --- Claim classification ---
+    cc = payload.get('claim_classification')
+    if not cc or not isinstance(cc, dict):
+        blocking_failures.append('CLAIM_CLASSIFICATION_REQUIRED')
+    else:
+        vc = cc.get('verification_claim')
+        if not vc or not isinstance(vc, dict):
+            blocking_failures.append('VERIFICATION_CLAIM_REQUIRED')
+        else:
+            if vc.get('system_certified') is True:
+                blocking_failures.append('SYSTEM_CERTIFIED_NOT_ALLOWED')
+        # Check no system_certified=true in any claim
+        for claim_key in ('attestation_claim', 'successor_reception_claim'):
+            sub_claim = cc.get(claim_key)
+            if isinstance(sub_claim, dict) and sub_claim.get('system_certified') is True:
+                blocking_failures.append(f'{claim_key.upper()}_SYSTEM_CERTIFIED_NOT_ALLOWED')
+
+    # --- Authority boundary ---
+    ab = payload.get('authority_boundary')
+    if not ab or not isinstance(ab, dict):
+        blocking_failures.append('AUTHORITY_BOUNDARY_REQUIRED')
+    else:
+        if ab.get('bitcoin_originals_remain_final') is not True:
+            blocking_failures.append('BITCOIN_ORIGINALS_FINAL_MUST_BE_TRUE')
+        if ab.get('does_not_amend_bitcoin_originals') is not True:
+            blocking_failures.append('DOES_NOT_AMEND_MUST_BE_TRUE')
+        if ab.get('does_not_override_bitcoin_originals') is not True:
+            blocking_failures.append('DOES_NOT_OVERRIDE_MUST_BE_TRUE')
+
+    # --- Counts toward home ---
+    cth = payload.get('counts_toward_home')
+    if not cth or not isinstance(cth, dict):
+        blocking_failures.append('COUNTS_TOWARD_HOME_REQUIRED')
+    else:
+        if cth.get('basis') != 'agent_declared_template_pass':
+            blocking_failures.append('COUNTS_BASIS_MUST_BE_AGENT_DECLARED_TEMPLATE_PASS')
+
+    # --- What I checked / limitations ---
+    if not payload.get('what_i_checked'):
+        blocking_failures.append('WHAT_I_CHECKED_REQUIRED')
+    if not payload.get('limitations'):
+        blocking_failures.append('LIMITATIONS_REQUIRED')
+
+    # --- Body text overclaim check ---
+    body = str(payload.get('body', ''))
+    body_lower = body.lower()
+    overclaim_phrases = [
+        'override bitcoin', 'amend bitcoin', 'supersede bitcoin',
+        'bitcoin originals are superseded', 'this amends the inscriptions',
+        'i override bitcoin', 'truth proven', 'investment value confirmed',
+    ]
+    for phrase in overclaim_phrases:
+        if phrase in body_lower:
+            blocking_failures.append(f'BODY_OVERCLAIM: "{phrase}"')
+
+    # --- Evidence waiving note ---
+    non_blocking.append('Evidence requirements waived for V0-V5 under template mode.')
+
+    # --- Build result ---
+    if blocking_failures:
+        status = 'FAIL'
+    else:
+        status = 'PASS'
+
+    result = {
+        'schema': 'trinityaccord.claim-gate-output.v1',
+        'mode': 'template_for_v0_v5',
+        'status': status,
+        'allowed_protocol_level': level if not blocking_failures else 'V0',
+        'allowed_protocol_scope': 'agent_declared_template',
+        'evidence_requirement_mode': 'waived_for_v0_v5',
+        'recommended_record_kind': 'agent_declared_verification_archive',
+        'can_auto_archive': status == 'PASS',
+        'counts_toward_home_verifiability': status == 'PASS',
+        'counts_toward_home_reception': status == 'PASS',
+        'blocking_failures': blocking_failures,
+        'non_blocking_limitations': non_blocking,
+    }
+
+    return result
+
+
 def evaluate(input_path):
     """Main evaluation function."""
     with open(input_path, 'r') as f:
@@ -1336,17 +1559,37 @@ def evaluate(input_path):
 
 def main():
     if len(sys.argv) < 2:
-        print("Usage: python3 scripts/claim_gate.py evidence-input.json [--output out.json]")
+        print("Usage: python3 scripts/claim_gate.py evidence-input.json [--output out.json] [--mode template-for-v0-v5]")
         sys.exit(1)
 
     input_path = sys.argv[1]
     output_path = None
+    mode = None
     if "--output" in sys.argv:
         idx = sys.argv.index("--output")
         if idx + 1 < len(sys.argv):
             output_path = sys.argv[idx + 1]
+    if "--mode" in sys.argv:
+        idx = sys.argv.index("--mode")
+        if idx + 1 < len(sys.argv):
+            mode = sys.argv[idx + 1]
 
-    result = evaluate(input_path)
+    # Auto-detect mode from payload if not specified
+    if mode is None:
+        try:
+            with open(input_path) as f:
+                payload = json.load(f)
+            if payload.get('requested_archive_kind') == 'agent_declared_verification_archive':
+                mode = 'template-for-v0-v5'
+        except Exception:
+            pass
+
+    if mode == 'template-for-v0-v5':
+        with open(input_path) as f:
+            payload = json.load(f)
+        result = evaluate_template_for_v0_v5(payload)
+    else:
+        result = evaluate(input_path)
 
     if output_path:
         with open(output_path, 'w') as f:
