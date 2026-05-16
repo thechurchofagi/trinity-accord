@@ -57,7 +57,7 @@ def make_minimal_evidence():
     }
 
 
-def make_claim_gate(v_level="V3", b_level="B1", status="PASS"):
+def make_claim_gate(v_level="V6", b_level="B1", status="PASS"):
     return {
         "claim_gate": {
             "status": status,
