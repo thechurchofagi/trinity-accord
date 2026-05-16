@@ -268,7 +268,8 @@ def test_css_references():
         local = css_ref.lstrip('/')
         if '?' in local:
             local = local.split('?')[0]
-        if (REPO / local).exists():
+        # Jekyll compiles .scss to .css at build time, so check both
+        if (REPO / local).exists() or (REPO / local.replace('.css', '.scss')).exists():
             ok(f"CSS file exists: {css_ref}")
         else:
             err(f"CSS file missing: {css_ref}")
