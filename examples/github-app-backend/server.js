@@ -69,6 +69,44 @@ function fileSha256(filePath) {
   }
 }
 
+// --- Archive Readiness Helpers ---
+
+function writeJsonTemp(tmpDir, filename, obj) {
+  const p = path.join(tmpDir, filename);
+  fs.writeFileSync(p, JSON.stringify(obj, null, 2), "utf-8");
+  return p;
+}
+
+function parseScriptJson(result) {
+  try {
+    return JSON.parse(result.stdout);
+  } catch {
+    return {
+      parse_error: true,
+      stdout: result.stdout,
+      stderr: result.stderr,
+      code: result.code
+    };
+  }
+}
+
+function runArchiveReadiness({ gatewayPayloadPath, evidencePath, claimGateOutputPath, reportPath }) {
+  const args = ["--gateway-payload", gatewayPayloadPath, "--json"];
+  if (evidencePath) args.push("--evidence-input", evidencePath);
+  if (claimGateOutputPath) args.push("--claim-gate-output", claimGateOutputPath);
+  if (reportPath) args.push("--verification-report", reportPath);
+  const result = runScript("archive_readiness_gate.py", args);
+  return { code: result.code, body: parseScriptJson(result), raw: result };
+}
+
+function runAutoArchiveDecision(archiveReadinessPath) {
+  const result = runScript("auto_archive_decision.py", [
+    "--archive-readiness", archiveReadinessPath,
+    "--json"
+  ]);
+  return { code: result.code, body: parseScriptJson(result), raw: result };
+}
+
 async function getOctokit() {
   const repo = process.env.GITHUB_REPO;
   const appId = process.env.GITHUB_APP_ID;
@@ -365,6 +403,64 @@ async function runGatewayPipeline(payload, { createIssue }) {
       return { status: 413, body: { accepted: false, reason: "issue_body_too_large", issue_created: false } };
     }
 
+    // --- Archive Readiness Gate ---
+    const archiveReadinessResult = runArchiveReadiness({
+      gatewayPayloadPath: payloadPath,
+      evidencePath: null,
+      claimGateOutputPath: null,
+      reportPath: null
+    });
+    const archiveReadiness = archiveReadinessResult.body;
+
+    // Write archive readiness to temp for auto_archive_decision
+    const archiveReadinessPath = writeJsonTemp(tmpDir, "archive-readiness.json", archiveReadiness);
+    const autoArchiveDecision = runAutoArchiveDecision(archiveReadinessPath).body;
+
+    // --- Archive gate enforcement ---
+    const recordIntent = payload.record_intent || "intake_only";
+    const requestedKind = payload.requested_archive_kind || "none";
+
+    // Block successor_reception_candidate
+    if (requestedKind === "successor_reception_candidate") {
+      return {
+        status: 422,
+        body: {
+          accepted: false,
+          reason: "successor_reception_not_gateway_claimable",
+          archive_readiness: archiveReadiness,
+          auto_archive_decision: autoArchiveDecision,
+          issue_created: false
+        }
+      };
+    }
+
+    // Block auto_archive_candidate when not archive-ready
+    if (recordIntent === "auto_archive_candidate" && !archiveReadiness.archive_ready) {
+      return {
+        status: 422,
+        body: {
+          accepted: false,
+          reason: "archive_not_ready",
+          archive_readiness: archiveReadiness,
+          auto_archive_decision: autoArchiveDecision,
+          issue_created: false
+        }
+      };
+    }
+
+    // archive_preflight_only: never create Issue
+    if (recordIntent === "archive_preflight_only") {
+      return {
+        status: 200,
+        body: {
+          accepted: true,
+          issue_created: false,
+          archive_readiness: archiveReadiness,
+          auto_archive_decision: autoArchiveDecision
+        }
+      };
+    }
+
     // Preflight-only: return success without creating Issue
     if (!createIssue) {
       return {
@@ -374,13 +470,19 @@ async function runGatewayPipeline(payload, { createIssue }) {
           preflight: "pass",
           issue_created: false,
           rendered_title: issueTitle,
-          rendered_body_preview: issueBody.slice(0, 1000)
+          rendered_body_preview: issueBody.slice(0, 1000),
+          archive_readiness: archiveReadiness,
+          auto_archive_decision: autoArchiveDecision
         }
       };
     }
 
     // DRY_RUN mode
     if (DRY_RUN) {
+      const baseLabels = ["agent-gateway-intake", "needs-triage"];
+      const labelsToAdd = autoArchiveDecision.labels_to_add || [];
+      const allLabels = [...new Set([...baseLabels, ...labelsToAdd])];
+
       return {
         status: 200,
         body: {
@@ -388,9 +490,14 @@ async function runGatewayPipeline(payload, { createIssue }) {
           dry_run: true,
           would_create_issue: {
             title: issueTitle,
-            labels: ["agent-gateway-intake", "needs-triage"],
+            labels: allLabels,
             body_preview: issueBody.slice(0, 1000)
           },
+          would_apply_labels: labelsToAdd,
+          would_post_comment: !!autoArchiveDecision.comment_markdown,
+          would_close_issue: autoArchiveDecision.should_close_issue || false,
+          archive_readiness: archiveReadiness,
+          auto_archive_decision: autoArchiveDecision,
           boundary: "intake only; not archived Echo or attestation"
         }
       };
@@ -399,22 +506,66 @@ async function runGatewayPipeline(payload, { createIssue }) {
     // 7. Create GitHub Issue
     const octokit = await getOctokit();
     const [owner, repo] = process.env.GITHUB_REPO.split("/");
+    const baseLabels = ["agent-gateway-intake", "needs-triage"];
+    const labelsToAdd = autoArchiveDecision.labels_to_add || [];
+    const labelsToRemove = autoArchiveDecision.labels_to_remove || [];
+    const allLabels = [...new Set([...baseLabels, ...labelsToAdd])];
 
     const result = await octokit.request("POST /repos/{owner}/{repo}/issues", {
       owner,
       repo,
       title: issueTitle,
       body: issueBody,
-      labels: ["agent-gateway-intake", "needs-triage"]
+      labels: allLabels
     });
+
+    const issueNumber = result.data.number;
+
+    // Post archive decision comment if configured
+    if (autoArchiveDecision.comment_markdown &&
+        (payload.auto_archive || {}).post_decision_comment !== false) {
+      try {
+        await octokit.request("POST /repos/{owner}/{repo}/issues/{issue_number}/comments", {
+          owner, repo, issue_number: issueNumber,
+          body: autoArchiveDecision.comment_markdown
+        });
+      } catch (commentErr) {
+        console.error("Failed to post archive decision comment:", commentErr.message);
+      }
+    }
+
+    // Close issue if archive decision says so
+    if (autoArchiveDecision.should_close_issue &&
+        (payload.auto_archive || {}).close_issue_when_archived !== false) {
+      try {
+        await octokit.request("PATCH /repos/{owner}/{repo}/issues/{issue_number}", {
+          owner, repo, issue_number: issueNumber,
+          state: "closed",
+          state_reason: autoArchiveDecision.close_reason || "completed"
+        });
+      } catch (closeErr) {
+        console.error("Failed to close archived issue:", closeErr.message);
+      }
+    }
+
+    // Remove stale labels
+    for (const label of labelsToRemove) {
+      try {
+        await octokit.request("DELETE /repos/{owner}/{repo}/issues/{issue_number}/labels/{name}", {
+          owner, repo, issue_number: issueNumber, name: label
+        });
+      } catch {}
+    }
 
     return {
       status: 201,
       body: {
         accepted: true,
         status: "issue_created",
-        issue_number: result.data.number,
+        issue_number: issueNumber,
         issue_url: result.data.html_url,
+        archive_readiness: archiveReadiness,
+        auto_archive_decision: autoArchiveDecision,
         gateway_version: {
           repo_commit: execFileSync("git", ["rev-parse", "--short", "HEAD"], {
             cwd: root, encoding: "utf-8", timeout: 5000
@@ -573,6 +724,14 @@ app.get("/gateway/capabilities", (req, res) => {
       "SUCCESSOR_RECEPTION_NOT_CLAIMABLE",
       "INDEPENDENT_ATTESTATION_NOT_CLAIMABLE"
     ],
+    archive_readiness: {
+      supported_record_intents: ["intake_only", "auto_archive_candidate", "archive_preflight_only"],
+      supported_archive_kinds: ["none", "external_agent_intake_sample", "verification_report_archive", "archived_echo"],
+      not_allowed_through_gateway: ["successor_reception_candidate"],
+      default_record_intent: "intake_only",
+      default_requested_archive_kind: "none",
+      intake_is_not_archive: "Creating a Gateway Issue means the candidate entered intake. It does not mean it is archived, verified, attested, or received by a successor civilization."
+    },
     endpoints: {
       version: "/gateway/version",
       capabilities: "/gateway/capabilities",
@@ -584,6 +743,7 @@ app.get("/gateway/capabilities", (req, res) => {
       lint_evidence: "/gateway/lint-evidence",
       build_from_evidence: "/gateway/build-from-evidence",
       preflight: "/gateway/preflight",
+      archive_preflight: "/gateway/archive-preflight",
       submit: "/agent-submit"
     }
   });
@@ -713,7 +873,12 @@ app.post("/gateway/build-from-evidence", async (req, res) => {
       human_solicited = true,
       title_date,
       submit = false,
-      evidence_input
+      evidence_input,
+      record_intent = "intake_only",
+      requested_archive_kind = "none",
+      archive_readiness = null,
+      auto_archive = null,
+      allow_intake_fallback_if_archive_blocked = false
     } = req.body;
 
     if (!evidence_input || typeof evidence_input !== "object") {
@@ -799,8 +964,25 @@ app.post("/gateway/build-from-evidence", async (req, res) => {
       });
     }
 
-    // 6. Run preflight (shared pipeline with createIssue=false)
+    // 6. Patch archive fields into payload (Option B)
     const payload = JSON.parse(fs.readFileSync(payloadPath, "utf-8"));
+    payload.record_intent = record_intent || "intake_only";
+    payload.requested_archive_kind = requested_archive_kind || "none";
+    if (archive_readiness) payload.archive_readiness = archive_readiness;
+    if (auto_archive) payload.auto_archive = auto_archive;
+    fs.writeFileSync(payloadPath, JSON.stringify(payload, null, 2), "utf-8");
+
+    // Run archive readiness with full context
+    const cgPathForArchive = claimGateOutputPath;
+    const reportPathForArchive = reportPath;
+    const archiveReadinessResult = runArchiveReadiness({
+      gatewayPayloadPath: payloadPath,
+      evidencePath,
+      claimGateOutputPath: cgPathForArchive,
+      reportPath: reportPathForArchive
+    });
+
+    // Run preflight (shared pipeline with createIssue=false)
     const preflightResult = await runGatewayPipeline(payload, { createIssue: false });
 
     // 7. If submit=true and preflight passed, create issue
@@ -812,6 +994,29 @@ app.post("/gateway/build-from-evidence", async (req, res) => {
     const claimGateOutput = JSON.parse(fs.readFileSync(claimGateOutputPath, "utf-8"));
     const verificationReport = JSON.parse(fs.readFileSync(reportPath, "utf-8"));
 
+    // Compute auto archive decision
+    const archiveReadinessPath = writeJsonTemp(tmpDir, "archive-readiness-build.json", archiveReadinessResult.body);
+    const autoArchiveDecisionResult = runAutoArchiveDecision(archiveReadinessPath);
+
+    // Handle archive-blocked fallback
+    let submitEffective = submit;
+    if (submit && record_intent === "auto_archive_candidate" && !archiveReadinessResult.body.archive_ready) {
+      if (allow_intake_fallback_if_archive_blocked) {
+        // Fall back to intake-only
+        payload.record_intent = "intake_only";
+        payload.requested_archive_kind = "none";
+        fs.writeFileSync(payloadPath, JSON.stringify(payload, null, 2), "utf-8");
+      } else {
+        submitEffective = false;
+      }
+    }
+
+    // 7. If submit=true and preflight passed, create issue
+    let submitResult = null;
+    if (submitEffective && preflightResult.status === 200) {
+      submitResult = await runGatewayPipeline(payload, { createIssue: true });
+    }
+
     return res.json({
       accepted: preflightResult.status === 200,
       issue_created: submitResult ? submitResult.body.issue_created : false,
@@ -819,8 +1024,10 @@ app.post("/gateway/build-from-evidence", async (req, res) => {
       verification_report: verificationReport,
       gateway_payload: payload,
       preflight: preflightResult.body,
+      archive_readiness: archiveReadinessResult.body,
+      auto_archive_decision: autoArchiveDecisionResult.body,
       ...(submitResult ? { submit: submitResult.body } : {}),
-      next_steps: submit ? [] : [
+      next_steps: submitEffective ? [] : [
         "Review gateway_payload.",
         "POST gateway_payload to /gateway/preflight.",
         "Only if accepted:true, POST gateway_payload to /agent-submit."
@@ -834,6 +1041,61 @@ app.post("/gateway/build-from-evidence", async (req, res) => {
       issue_created: false,
       errors: [{ code: "INTERNAL_ERROR", message: err.message }],
       warnings: []
+    });
+  } finally {
+    try { fs.rmSync(tmpDir, { recursive: true, force: true }); } catch {}
+  }
+});
+
+// --- POST /gateway/archive-preflight ---
+app.post("/gateway/archive-preflight", async (req, res) => {
+  const tmpDir = fs.mkdtempSync(path.join(tmpdir(), "gateway-archive-preflight-"));
+  try {
+    const {
+      gateway_payload,
+      evidence_input,
+      claim_gate_output,
+      verification_report
+    } = req.body;
+
+    if (!gateway_payload || typeof gateway_payload !== "object") {
+      return res.status(422).json({
+        accepted: false,
+        issue_created: false,
+        errors: [{ code: "GATEWAY_PAYLOAD_MISSING", message: "Request must include gateway_payload object." }]
+      });
+    }
+
+    // Save objects to temp files
+    const payloadPath = writeJsonTemp(tmpDir, "payload.json", gateway_payload);
+    const evidencePath = evidence_input ? writeJsonTemp(tmpDir, "evidence-input.json", evidence_input) : null;
+    const cgPath = claim_gate_output ? writeJsonTemp(tmpDir, "claim-gate-output.json", claim_gate_output) : null;
+    const reportPath = verification_report ? writeJsonTemp(tmpDir, "verification-report.json", verification_report) : null;
+
+    // Run archive readiness gate
+    const archiveResult = runArchiveReadiness({
+      gatewayPayloadPath: payloadPath,
+      evidencePath,
+      claimGateOutputPath: cgPath,
+      reportPath
+    });
+
+    // Write readiness output for auto_archive_decision
+    const readinessPath = writeJsonTemp(tmpDir, "archive-readiness.json", archiveResult.body);
+    const decisionResult = runAutoArchiveDecision(readinessPath);
+
+    return res.json({
+      accepted: true,
+      issue_created: false,
+      archive_readiness: archiveResult.body,
+      auto_archive_decision: decisionResult.body
+    });
+  } catch (err) {
+    console.error("archive-preflight error:", err.message);
+    return res.status(500).json({
+      accepted: false,
+      issue_created: false,
+      errors: [{ code: "INTERNAL_ERROR", message: err.message }]
     });
   } finally {
     try { fs.rmSync(tmpDir, { recursive: true, force: true }); } catch {}

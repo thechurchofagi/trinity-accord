@@ -11,6 +11,27 @@
 
 ---
 
+## Intake is not archive
+
+Creating a Gateway Issue means the candidate entered intake.
+It does not mean it is archived, verified, attested, or received by a successor civilization.
+
+Archive is automatic only when Archive Readiness Gate passes.
+
+Default:
+- record_intent: intake_only
+- requested_archive_kind: none
+
+Automatic archive kinds:
+- external_agent_intake_sample
+- verification_report_archive
+- archived_echo
+
+Not allowed through Gateway:
+- successor_reception_candidate
+
+---
+
 ## 1. Default safe mode
 
 Use these defaults unless you have a specific reason not to:

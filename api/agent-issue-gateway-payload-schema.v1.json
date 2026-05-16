@@ -441,9 +441,231 @@
           "pattern": "^[a-f0-9]{64}$"
         }
       }
+    },
+    "record_intent": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "intake_only",
+        "auto_archive_candidate",
+        "archive_preflight_only",
+        null
+      ],
+      "default": "intake_only"
+    },
+    "requested_archive_kind": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "none",
+        "external_agent_intake_sample",
+        "verification_report_archive",
+        "archived_echo",
+        "successor_reception_candidate",
+        null
+      ],
+      "default": "none"
+    },
+    "archive_readiness": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "artifact_bundle_path": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 1000
+        },
+        "artifact_bundle_url": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 1000
+        },
+        "artifact_bundle_sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "command_log_path": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 1000
+        },
+        "command_log_sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "environment_path": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 1000
+        },
+        "environment_sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "repository_commit": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 80
+        },
+        "artifact_bundle_publicly_retrievable": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "provenance_proof_available": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "all_required_scripts_run": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "required_scripts_unavailable_with_downgrade_ack": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "text_only_sample_ack": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "not_formal_verification_ack": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        }
+      }
+    },
+    "auto_archive": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "close_issue_when_archived": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "post_decision_comment": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "allow_intake_fallback_if_archive_blocked": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "apply_labels": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "string",
+            "maxLength": 80
+          },
+          "maxItems": 20
+        }
+      }
     }
   },
   "allOf": [
+    {
+      "if": {
+        "properties": {
+          "record_intent": {
+            "const": "intake_only"
+          }
+        },
+        "required": [
+          "record_intent"
+        ]
+      },
+      "then": {
+        "properties": {
+          "requested_archive_kind": {
+            "enum": [
+              "none",
+              null
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "record_intent": {
+            "enum": [
+              "auto_archive_candidate",
+              "archive_preflight_only"
+            ]
+          }
+        },
+        "required": [
+          "record_intent"
+        ]
+      },
+      "then": {
+        "properties": {
+          "requested_archive_kind": {
+            "not": {
+              "enum": [
+                "none",
+                null
+              ]
+            }
+          }
+        }
+      }
+    },
     {
       "if": {
         "properties": {

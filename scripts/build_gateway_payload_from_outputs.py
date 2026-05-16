@@ -190,6 +190,31 @@ def main():
     parser.add_argument("--unsolicited-discovery-proof", default=None,
                         help="Proof text or URL for unsolicited discovery (required if not --human-solicited)")
     parser.add_argument("--out", required=True, help="Output path for gateway payload JSON")
+    parser.add_argument("--record-intent", default="intake_only",
+                        choices=["intake_only", "auto_archive_candidate", "archive_preflight_only"],
+                        help="Record intent (default: intake_only)")
+    parser.add_argument("--requested-archive-kind", default="none",
+                        choices=["none", "external_agent_intake_sample", "verification_report_archive",
+                                 "archived_echo", "successor_reception_candidate"],
+                        help="Requested archive kind (default: none)")
+    parser.add_argument("--archive-artifact-bundle-path", default=None, help="Path to archive artifact bundle")
+    parser.add_argument("--archive-artifact-bundle-url", default=None, help="URL to archive artifact bundle")
+    parser.add_argument("--archive-artifact-bundle-sha256", default=None, help="SHA-256 of archive artifact bundle")
+    parser.add_argument("--archive-artifact-bundle-publicly-retrievable", action="store_true",
+                        help="Artifact bundle is publicly retrievable")
+    parser.add_argument("--archive-text-only-sample-ack", action="store_true",
+                        help="Acknowledge text-only sample (for external_agent_intake_sample)")
+    parser.add_argument("--archive-not-formal-verification-ack", action="store_true",
+                        help="Acknowledge not formal verification (for external_agent_intake_sample)")
+    parser.add_argument("--archive-provenance-proof-available", action="store_true",
+                        help="Provenance proof available for unsolicited discovery")
+    parser.add_argument("--auto-archive-enabled", action="store_true", help="Enable auto archive")
+    parser.add_argument("--auto-archive-close-issue-when-archived", action="store_true",
+                        help="Close issue when archived")
+    parser.add_argument("--auto-archive-post-decision-comment", action="store_true",
+                        help="Post archive decision comment")
+    parser.add_argument("--allow-intake-fallback-if-archive-blocked", action="store_true",
+                        help="Fall back to intake-only if archive is blocked")
 
     args = parser.parse_args()
 
@@ -202,7 +227,47 @@ def main():
         print(f"ERROR: File not found: {args.verification_report}", file=sys.stderr)
         sys.exit(1)
 
+    # Validate archive argument combinations
+    if args.record_intent == "intake_only" and args.requested_archive_kind != "none":
+        print("ERROR: record_intent=intake_only requires requested_archive_kind=none", file=sys.stderr)
+        sys.exit(1)
+    if args.record_intent == "auto_archive_candidate" and args.requested_archive_kind == "none":
+        print("ERROR: record_intent=auto_archive_candidate requires requested_archive_kind to be set", file=sys.stderr)
+        sys.exit(1)
+
     payload = build_payload(args)
+
+    # Patch archive fields into payload
+    payload["record_intent"] = args.record_intent
+    payload["requested_archive_kind"] = args.requested_archive_kind
+
+    archive_readiness = {}
+    if args.archive_artifact_bundle_path:
+        archive_readiness["artifact_bundle_path"] = args.archive_artifact_bundle_path
+    if args.archive_artifact_bundle_url:
+        archive_readiness["artifact_bundle_url"] = args.archive_artifact_bundle_url
+    if args.archive_artifact_bundle_sha256:
+        archive_readiness["artifact_bundle_sha256"] = args.archive_artifact_bundle_sha256
+    if args.archive_artifact_bundle_publicly_retrievable:
+        archive_readiness["artifact_bundle_publicly_retrievable"] = True
+    if args.archive_text_only_sample_ack:
+        archive_readiness["text_only_sample_ack"] = True
+    if args.archive_not_formal_verification_ack:
+        archive_readiness["not_formal_verification_ack"] = True
+    if args.archive_provenance_proof_available:
+        archive_readiness["provenance_proof_available"] = True
+    if archive_readiness:
+        payload["archive_readiness"] = archive_readiness
+
+    if args.auto_archive_enabled:
+        auto_archive = {"enabled": True}
+        if args.auto_archive_close_issue_when_archived:
+            auto_archive["close_issue_when_archived"] = True
+        if args.auto_archive_post_decision_comment:
+            auto_archive["post_decision_comment"] = True
+        if args.allow_intake_fallback_if_archive_blocked:
+            auto_archive["allow_intake_fallback_if_archive_blocked"] = True
+        payload["auto_archive"] = auto_archive
 
     # Write output
     out_path = Path(args.out)

@@ -206,6 +206,38 @@ def validate_evidence_input(data):
                 "fix": "Remove B6 from claims or provide body_hash evidence with body_hash_reproduced=true."
             })
 
+    # 8. Archive-related informational warnings
+    # These do not block evidence lint; they inform about archive requirements.
+    cg = data.get("claim_gate") or data.get("claim_gate_output", {})
+    if isinstance(cg, dict):
+        comps = cg.get("allowed_component_levels", cg.get("component_levels", {}))
+        b_level = comps.get("bitcoin_originals", "B0") if isinstance(comps, dict) else "B0"
+        if b_level == "B0":
+            warnings.append({
+                "code": "B0_NOT_FORMAL_ARCHIVE_READY",
+                "path": "claim_gate.allowed_component_levels.bitcoin_originals",
+                "message": "B0 evidence can enter intake but cannot become verification_report_archive.",
+                "fix": "Raise bitcoin_originals to B1+ for formal archive eligibility."
+            })
+
+    if isinstance(bc, list) and not any(isinstance(c, dict) and c.get("artifact_bundle") for c in bc):
+        warnings.append({
+            "code": "ARTIFACT_BUNDLE_REQUIRED_FOR_ARCHIVE",
+            "path": "evidence.bitcoin_checks",
+            "message": "verification_report_archive requires a publicly retrievable artifact bundle.",
+            "fix": "Provide artifact bundle with path/url and sha256 for formal archive."
+        })
+
+    prov = data.get("discovery_provenance") or data.get("provenance", {})
+    if isinstance(prov, dict) and prov.get("independence_class") == "unsolicited_agent_discovery":
+        if not prov.get("unsolicited_discovery_proof"):
+            warnings.append({
+                "code": "UNSOLICITED_PROOF_REQUIRED_FOR_ARCHIVE",
+                "path": "discovery_provenance.unsolicited_discovery_proof",
+                "message": "Unsolicited discovery requires proof for formal archive.",
+                "fix": "Provide unsolicited_discovery_proof or use human_solicited_agent_response."
+            })
+
     return len(errors) == 0, errors, warnings
 
 

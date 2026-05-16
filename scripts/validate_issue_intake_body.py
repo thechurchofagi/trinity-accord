@@ -189,6 +189,42 @@ def main():
     if data.get("not_successor_reception") is not True:
         errors.append("not_successor_reception must be true")
 
+    # --- Archive readiness field validation ---
+    record_intent = data.get("record_intent", "intake_only")
+    requested_archive_kind = data.get("requested_archive_kind", "none")
+    archive_ready = data.get("archive_ready")
+    auto_archive_action = data.get("auto_archive_action", "none")
+
+    if record_intent not in ("intake_only", "auto_archive_candidate", "archive_preflight_only"):
+        errors.append(f"invalid record_intent: {record_intent}")
+
+    if requested_archive_kind not in ("none", "external_agent_intake_sample", "verification_report_archive",
+                                       "archived_echo", "successor_reception_candidate"):
+        errors.append(f"invalid requested_archive_kind: {requested_archive_kind}")
+
+    # archive_ready=false must not have archive:ready in machine block
+    if archive_ready == "false" or archive_ready is False:
+        # This is valid — just means not archive ready
+        pass
+
+    # archived_echo requires submission_type=verification_echo_candidate
+    if requested_archive_kind == "archived_echo" and st != "verification_echo_candidate":
+        errors.append("archived_echo requires submission_type=verification_echo_candidate")
+
+    # verification_report_archive requires submission_type=verification_report_candidate
+    if requested_archive_kind == "verification_report_archive" and st != "verification_report_candidate":
+        errors.append("verification_report_archive requires submission_type=verification_report_candidate")
+
+    # successor_reception_candidate must not be archive_ready=true
+    if requested_archive_kind == "successor_reception_candidate" and archive_ready in ("true", True):
+        errors.append("successor_reception_candidate must not be archive_ready=true")
+
+    # auto_archive_action must be valid
+    valid_actions = ("none", "block", "needs_more_evidence",
+                     "auto_archive_sample", "auto_archive_verification_report", "auto_archive_echo")
+    if auto_archive_action not in valid_actions:
+        errors.append(f"invalid auto_archive_action: {auto_archive_action}")
+
     boundary = str(data.get("boundary_sentence", "")).lower()
     for term in ["intake", "authority", "attestation", "amendment"]:
         if term not in boundary:

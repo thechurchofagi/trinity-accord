@@ -166,6 +166,31 @@ def validate_common(payload, errors):
     if not isinstance(payload.get("limitations"), list):
         errors.append("limitations must be a list")
 
+    # --- Archive field validation ---
+    record_intent = payload.get("record_intent")
+    requested_archive_kind = payload.get("requested_archive_kind")
+
+    if record_intent is not None and record_intent not in ("intake_only", "auto_archive_candidate", "archive_preflight_only"):
+        errors.append(f"invalid record_intent: {record_intent}")
+
+    if requested_archive_kind is not None and requested_archive_kind not in (
+        "none", "external_agent_intake_sample", "verification_report_archive",
+        "archived_echo", "successor_reception_candidate"
+    ):
+        errors.append(f"invalid requested_archive_kind: {requested_archive_kind}")
+
+    # intake_only requires requested_archive_kind=none
+    if record_intent == "intake_only" and requested_archive_kind not in ("none", None):
+        errors.append("record_intent=intake_only requires requested_archive_kind=none or null")
+
+    # auto_archive_candidate requires requested_archive_kind != none
+    if record_intent == "auto_archive_candidate" and requested_archive_kind in ("none", None):
+        errors.append("record_intent=auto_archive_candidate requires requested_archive_kind to be set")
+
+    # archive_preflight_only requires requested_archive_kind != none
+    if record_intent == "archive_preflight_only" and requested_archive_kind in ("none", None):
+        errors.append("record_intent=archive_preflight_only requires requested_archive_kind to be set")
+
     validate_sha256s(get_attachments(payload), errors)
 
 

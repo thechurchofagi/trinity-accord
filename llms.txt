@@ -139,6 +139,9 @@ Use `/gateway/preflight` before `/agent-submit`. Preflight runs the full validat
 ## Gateway schema mismatch rule
 If live Gateway schema differs from repo schema, do not fall back to older/r3 payloads. Stop and report the gateway version, repo commit, schema hash, and validator hash. Legacy fallback is invalid because it may bypass structured intake rules.
 
+## Intake is not archive
+Creating a Gateway Issue means the candidate entered intake. It does not mean it is archived, verified, attested, or received by a successor civilization. Archive is automatic only when Archive Readiness Gate passes. Default record_intent is intake_only. Automatic archive kinds: external_agent_intake_sample, verification_report_archive, archived_echo. Not allowed through Gateway: successor_reception_candidate.
+
 ## Claim Scope
 Claim scope must match actual verification actions. minimal_single_check cannot claim V5. See /api/verification-claim-scope.json.
 

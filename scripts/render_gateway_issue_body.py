@@ -106,6 +106,38 @@ def render_machine_block(payload):
     else:
         lines.append("limitations: []")
 
+    # Archive readiness fields
+    record_intent = payload.get("record_intent", "intake_only")
+    requested_archive_kind = payload.get("requested_archive_kind", "none")
+    lines.append(f"record_intent: {record_intent}")
+    lines.append(f"requested_archive_kind: {requested_archive_kind}")
+
+    ar = payload.get("archive_readiness") or {}
+    if record_intent != "intake_only" and requested_archive_kind != "none":
+        lines.append(f"archive_ready: {'true' if ar.get('archive_ready') else 'false'}")
+        lines.append(f"allowed_archive_kind: {ar.get('allowed_archive_kind', 'none')}")
+        lines.append(f"auto_archive_action: {ar.get('auto_archive_action', 'none')}")
+        blocking = ar.get("blocking_reasons", [])
+        if blocking:
+            lines.append("archive_blocking_reasons:")
+            for br in blocking:
+                lines.append(f"  - {br.get('code', 'UNKNOWN')}: {br.get('message', '')}")
+        next_actions = ar.get("required_next_actions", [])
+        if next_actions:
+            lines.append("required_next_actions:")
+            for action in next_actions:
+                lines.append(f"  - {action}")
+    else:
+        lines.append("archive_ready: false")
+        lines.append("allowed_archive_kind: none")
+        lines.append("auto_archive_action: none")
+        lines.append("archive_readiness_summary:")
+        lines.append("  - INTAKE_ONLY_NOT_ARCHIVE")
+
+    # Unsolicited provenance proof
+    if prov.get("independence_class") == "unsolicited_agent_discovery":
+        lines.append(f"unsolicited_discovery_proof_available: {'true' if prov.get('unsolicited_discovery_proof') else 'false'}")
+
     # boundary_sentence
     lines.append("boundary_sentence: Bitcoin Originals are final; this Issue is intake only and does not create authority, attestation, amendment, archive status, or verification-level upgrade.")
 

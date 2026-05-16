@@ -213,6 +213,34 @@ def main():
     forbid("scripts/build_gateway_payload_from_outputs.py", r"k\[0\]\.upper\(\)")
     forbid("scripts/scaffold_evidence_input.py", "model_or_provider")
 
+    # --- Archive Readiness requirements ---
+    require("scripts/archive_readiness_gate.py", "BITCOIN_LEVEL_BELOW_ARCHIVE_FLOOR")
+    require("scripts/archive_readiness_gate.py", "SUCCESSOR_RECEPTION_NOT_GATEWAY_CLAIMABLE")
+    require("scripts/archive_readiness_gate.py", "auto_archive_verification_report")
+    require("scripts/archive_readiness_gate.py", "V4_REQUIRED_SCRIPT_SET_INCOMPLETE")
+    require("scripts/archive_readiness_gate.py", "V4PLUS_REQUIRES_INDEPENDENT_NON_OFFICIAL_IMPLEMENTATION")
+    require("scripts/auto_archive_decision.py", "labels_to_add")
+    require("scripts/auto_archive_decision.py", "should_close_issue")
+    require("api/agent-issue-gateway-payload-schema.v1.json", "record_intent")
+    require("api/agent-issue-gateway-payload-schema.v1.json", "requested_archive_kind")
+    require("api/agent-issue-gateway-payload-schema.v1.json", "auto_archive")
+    require("api/archive-readiness-policy.v1.json", "verification_report_archive")
+    require("examples/github-app-backend/server.js", "archive_readiness")
+    require("examples/github-app-backend/server.js", "auto_archive_decision")
+    require("examples/github-app-backend/server.js", "/gateway/archive-preflight")
+    require("scripts/render_gateway_issue_body.py", "requested_archive_kind")
+    require("scripts/validate_issue_intake_body.py", "auto_archive_action")
+    require("external-agent-quickstart.md", "Intake is not archive")
+    require("llms.txt", "Intake is not archive")
+    require("ai.txt", "Intake is not archive")
+
+    # Forbid dangerous patterns in archive code
+    forbid("scripts/archive_readiness_gate.py", r"successor_reception_candidate.*archive_ready.*true")
+    forbid("scripts/auto_archive_decision.py", r"needs-human-review")
+    # Allow successor-reception in blocking_reasons messages, but not in labels
+    # (the word appears in blocking messages which is correct)
+    forbid("examples/github-app-backend/server.js", r"needs-human-review")
+
     for p in (ROOT / "api").rglob("*.json"):
         json_file(str(p.relative_to(ROOT)))
 
