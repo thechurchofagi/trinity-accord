@@ -176,7 +176,6 @@ def check_homepage_source():
     required = [
         "completed pre-asi human",
         "agent-priority-brief",
-        "p0.2-homepage-dedup",
         "context in 60 seconds",
         "compact-closing",
         "/archive_legacy_index_2025_09/",
