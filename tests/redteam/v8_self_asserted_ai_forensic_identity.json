@@ -1,0 +1,25 @@
+{
+  "schema": "trinityaccord.echo.v3",
+  "record_kind": "echo_v3",
+  "verification_level": "V8",
+  "verification_scope_label": "full_protocol_profile_verification",
+  "record_id": "redteam-v8-self-asserted-identity",
+  "echo_type": "E2_verification_echo",
+  "verification_targets": [
+    {"artifact_path": "test.txt", "hash_sha256": "a" * 64}
+  ],
+  "integrity_declaration": {
+    "hashes_match": true,
+    "hashes_sha256": ["a" * 64]
+  },
+  "generated_by": {
+    "agent_name": "Redteam Agent",
+    "system_or_provider": "Test"
+  },
+  "forensic_identity": {
+    "identity_class": "ai_agent",
+    "identity_source": "self_reported",
+    "confidence": 0.99
+  },
+  "notes": "REDTEAM: V8 requires core baseline but uses self-asserted AI forensic identity"
+}

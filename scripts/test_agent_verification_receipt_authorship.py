@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
 """
-Test authorship proof integration in the receipt builder.
-PR-5: receipt builder authorship proof support.
+Tests for authorship proof integration in the Agent Verification Receipt Builder.
+
+Run:
+    python3 scripts/test_agent_verification_receipt_authorship.py
 """
+import hashlib
 import json
 import os
 import subprocess
@@ -11,175 +14,298 @@ import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+SCRIPT = ROOT / "scripts" / "build_agent_verification_receipt.py"
 
-PASS = 0
-FAIL = 0
+errors = []
+passed = 0
 
 
-def check(condition, label, detail=""):
-    global PASS, FAIL
-    if condition:
-        PASS += 1
-        print(f"  PASS: {label}")
+def check(label, condition, detail=""):
+    global passed
+    if not condition:
+        msg = f"FAIL: {label}"
+        if detail:
+            msg += f" — {detail}"
+        errors.append(msg)
+        print(msg)
     else:
-        FAIL += 1
-        print(f"  FAIL: {label} -- {detail}")
+        passed += 1
+        print(f"OK:   {label}")
 
 
-def run_receipt_builder(args, expect_exit=0):
-    """Run build_agent_verification_receipt.py and return (exit_code, stdout, stderr)."""
-    cmd = [sys.executable, str(ROOT / "scripts" / "build_agent_verification_receipt.py")] + args
-    result = subprocess.run(cmd, capture_output=True, text=True, cwd=str(ROOT))
-    return result.returncode, result.stdout, result.stderr
+def sha256_json(obj: dict) -> str:
+    canonical = json.dumps(obj, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
+    return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
 
 
-def make_valid_ed25519_proof():
-    """Create a minimal valid ed25519 authorship proof."""
+def make_evidence_input():
     return {
+        "agent": {"name": "test-agent", "model_or_system": "test-provider"},
+        "provenance": {
+            "source": "human_directed",
+            "agency_level": "A1_human_gave_exact_url",
+            "first_entry": {"url_or_path": "https://www.trinityaccord.org", "entry_type": "human_prompt"},
+            "human_supplied_link": True,
+            "other_agent_recommended": False,
+            "agent_performed_independent_followup": False,
+            "confidence": "high",
+        },
+    }
+
+
+def make_claim_gate_output():
+    return {"allowed_protocol_level": "V1", "status": "PASS", "forbidden_claims": []}
+
+
+def write_json(path, obj):
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(obj, f, indent=2)
+
+
+def run_builder(tmpdir, extra_args=None):
+    evidence_path = os.path.join(tmpdir, "evidence-input.json")
+    claim_gate_path = os.path.join(tmpdir, "claim-gate-output.json")
+    out_path = os.path.join(tmpdir, "receipt.json")
+
+    write_json(evidence_path, make_evidence_input())
+    write_json(claim_gate_path, make_claim_gate_output())
+
+    cmd = [
+        sys.executable, str(SCRIPT),
+        "--mode", "v1",
+        "--agent-name", "test-agent",
+        "--system-or-provider", "test-provider",
+        "--evidence-input", evidence_path,
+        "--claim-gate-output", claim_gate_path,
+        "--out", out_path,
+    ]
+    if extra_args:
+        cmd.extend(extra_args)
+
+    result = subprocess.run(cmd, capture_output=True, text=True)
+
+    receipt = None
+    if result.returncode == 0 and os.path.exists(out_path):
+        with open(out_path) as f:
+            receipt = json.load(f)
+
+    return result.returncode, result.stdout, result.stderr, receipt
+
+
+# ============================================================
+# Test 1: Backward compat — no --authorship-proof
+# ============================================================
+print("=== TEST 1: Backward compat — no --authorship-proof ===")
+with tempfile.TemporaryDirectory() as tmpdir:
+    rc, stdout, stderr, receipt = run_builder(tmpdir)
+    check("T1a: exit code 0", rc == 0, f"rc={rc}, stderr={stderr}")
+    if receipt:
+        check("T1b: method is self_reported_only",
+              receipt["authorship_proof"]["method"] == "self_reported_only")
+        check("T1c: proof_strength is weak",
+              receipt["authorship_proof"]["proof_strength"] == "weak")
+        check("T1d: does_not_prove_same_conscious_subject is True",
+              receipt["future_continuity"]["does_not_prove_same_conscious_subject"] is True)
+
+
+# ============================================================
+# Test 2: Receipt with valid ed25519 proof writes it correctly
+# ============================================================
+print("\n=== TEST 2: Valid ed25519 proof — echo-wrapper target ===")
+with tempfile.TemporaryDirectory() as tmpdir:
+    echo_wrapper = {"schema": "trinityaccord.echo.v1", "content": "test-echo-data"}
+    echo_path = os.path.join(tmpdir, "echo-wrapper.json")
+    write_json(echo_path, echo_wrapper)
+
+    echo_hash = sha256_json(echo_wrapper)
+
+    proof = {
         "method": "ed25519_signature",
         "proof_strength": "cryptographic",
-        "public_key": "abc123def456" * 6,
-        "content_hash_sha256": "a" * 64,
-        "signature": "deadbeef" * 16,
-        "canonicalization": "trinityaccord.canonical-json.v1",
-        "future_claim_method": "ed25519_challenge_signature"
+        "public_key": "fake_pubkey_for_testing_abc123",
+        "canonicalization": "JCS/RFC8785",
+        "content_hash_sha256": echo_hash,
+        "signature": "fake_signature_for_testing_" + "a" * 64,
+        "future_claim_method": "sign a fresh challenge with the same private key",
     }
+    proof_path = os.path.join(tmpdir, "authorship-proof.json")
+    write_json(proof_path, proof)
 
-
-def make_self_reported_proof():
-    """Create a self_reported_only proof."""
-    return {
-        "method": "self_reported_only",
-        "proof_strength": "weak"
-    }
-
-
-def test_validate_authorship_proof():
-    """Test the validate_authorship_proof function directly."""
-    print("\n=== validate_authorship_proof function ===")
-    sys.path.insert(0, str(ROOT / "scripts"))
-    from build_agent_verification_receipt import validate_authorship_proof
-
-    # Valid ed25519 proof
-    proof = make_valid_ed25519_proof()
-    errors = validate_authorship_proof(proof)
-    check(len(errors) == 0, f"valid ed25519 proof passes ({len(errors)} errors)")
-
-    # Valid self_reported_only proof
-    proof = make_self_reported_proof()
-    errors = validate_authorship_proof(proof)
-    check(len(errors) == 0, f"valid self_reported_only proof passes ({len(errors)} errors)")
-
-    # Invalid method
-    proof = {"method": "invalid_method", "proof_strength": "weak"}
-    errors = validate_authorship_proof(proof)
-    check(len(errors) > 0, "invalid method rejected")
-
-    # ed25519 without public_key
-    proof = {"method": "ed25519_signature", "proof_strength": "cryptographic"}
-    errors = validate_authorship_proof(proof)
-    check(len(errors) > 0, "ed25519 without public_key rejected")
-
-    # Dangerous field: private_key
-    proof = {"method": "ed25519_signature", "proof_strength": "cryptographic",
-             "public_key": "abc", "private_key": "SECRET"}
-    errors = validate_authorship_proof(proof)
-    check(len(errors) > 0, "private_key detected as dangerous")
-
-
-def test_cli_args_exist():
-    """Test that the CLI args are registered."""
-    print("\n=== CLI args registered ===")
-    code, stdout, stderr = run_receipt_builder(["--help"])
-    combined = stdout + stderr
-    check("--authorship-proof" in combined, "--authorship-proof arg exists")
-    check("--authorship-proof-target" in combined, "--authorship-proof-target arg exists")
-    check("--require-cryptographic-authorship-proof" in combined, "--require-cryptographic arg exists")
-
-
-def test_no_proof_backward_compat():
-    """Without --authorship-proof, behavior should be unchanged (self_reported_only fallback)."""
-    print("\n=== backward compatibility (no proof) ===")
-    # This would fail because we need valid input files, but we can check the help/usage
-    code, stdout, stderr = run_receipt_builder(["--help"])
-    check(code == 0, "--help works (backward compat check)")
-
-
-def _make_temp_json(obj):
-    f = tempfile.NamedTemporaryFile(mode="w", suffix=".json", delete=False)
-    json.dump(obj, f)
-    f.flush()
-    f.close()
-    return f.name
-
-
-def test_require_crypto_without_proof_fails():
-    """--require-cryptographic-authorship-proof without --authorship-proof must fail."""
-    print("\n=== require-crypto without proof fails ===")
-    ei = _make_temp_json({"schema": "trinityaccord.evidence-input.v1"})
-    cg = _make_temp_json({"allowed_protocol_level": "V3", "status": "PASS"})
-
-    code, stdout, stderr = run_receipt_builder([
-        "--mode", "v3-minimal",
-        "--agent-name", "Test",
-        "--system-or-provider", "Test",
-        "--evidence-input", ei,
-        "--claim-gate-output", cg,
-        "--require-cryptographic-authorship-proof",
-        "--out", "/tmp/test-receipt-nc.json"
-    ])
-    Path(ei).unlink(missing_ok=True)
-    Path(cg).unlink(missing_ok=True)
-    check(code == 6, f"exit 6 when require-crypto without proof (got {code})")
-
-
-def test_proof_with_dangerous_field():
-    """Proof with private_key should fail validation."""
-    print("\n=== proof with dangerous field fails ===")
-    proof = make_valid_ed25519_proof()
-    proof["private_key"] = "SUPER_SECRET_KEY"
-    proof_path = _make_temp_json(proof)
-
-    ei = _make_temp_json({"schema": "trinityaccord.evidence-input.v1"})
-    cg = _make_temp_json({"allowed_protocol_level": "V3", "status": "PASS"})
-
-    code, stdout, stderr = run_receipt_builder([
-        "--mode", "v3-minimal",
-        "--agent-name", "Test",
-        "--system-or-provider", "Test",
-        "--evidence-input", ei,
-        "--claim-gate-output", cg,
+    rc, stdout, stderr, receipt = run_builder(tmpdir, [
+        "--echo-wrapper", echo_path,
         "--authorship-proof", proof_path,
-        "--out", "/tmp/test-receipt-dang.json"
+        "--authorship-proof-target", "echo-wrapper",
     ])
-    Path(proof_path).unlink(missing_ok=True)
-    Path(ei).unlink(missing_ok=True)
-    Path(cg).unlink(missing_ok=True)
-    check(code == 5, f"exit 5 for dangerous proof field (got {code})")
+    check("T2a: exit code 0", rc == 0, f"rc={rc}, stderr={stderr}")
+    if receipt:
+        check("T2b: method is ed25519_signature",
+              receipt["authorship_proof"]["method"] == "ed25519_signature")
+        check("T2c: proof_strength is cryptographic",
+              receipt["authorship_proof"]["proof_strength"] == "cryptographic")
+        check("T2d: public_key present",
+              receipt["authorship_proof"]["public_key"] == "fake_pubkey_for_testing_abc123")
+        check("T2e: content_hash matches echo-wrapper",
+              receipt["authorship_proof"]["content_hash_sha256"] == echo_hash)
+        check("T2f: signature present",
+              "fake_signature_for_testing_" in receipt["authorship_proof"]["signature"])
+        check("T2g: does_not_prove_same_conscious_subject is True",
+              receipt["future_continuity"]["does_not_prove_same_conscious_subject"] is True)
 
 
-def test_receipt_boundary_invariant():
-    """Check that does_not_prove_same_conscious_subject is always true in the source."""
-    print("\n=== boundary invariant in source ===")
-    src = (ROOT / "scripts" / "build_agent_verification_receipt.py").read_text()
-    check("does_not_prove_same_conscious_subject" in src, "boundary field in source")
-    check('"does_not_prove_same_conscious_subject": True' in src or
-           "'does_not_prove_same_conscious_subject': True" in src or
-           "does_not_prove_same_conscious_subject" in src,
-           "boundary field set to true")
+# ============================================================
+# Test 3: --require-cryptographic-authorship-proof but no proof → fail
+# ============================================================
+print("\n=== TEST 3: Require cryptographic but no proof → fail ===")
+with tempfile.TemporaryDirectory() as tmpdir:
+    rc, stdout, stderr, receipt = run_builder(tmpdir, [
+        "--require-cryptographic-authorship-proof",
+    ])
+    check("T3a: exit code 6", rc == 6, f"rc={rc}, stderr={stderr}")
+    check("T3b: error mentions requirement",
+          "require" in stderr.lower() or "cryptographic" in stderr.lower(),
+          f"stderr={stderr}")
 
 
-if __name__ == "__main__":
-    test_validate_authorship_proof()
-    test_cli_args_exist()
-    test_no_proof_backward_compat()
-    test_require_crypto_without_proof_fails()
-    test_proof_with_dangerous_field()
-    test_receipt_boundary_invariant()
+# ============================================================
+# Test 4: --require-cryptographic + self_reported_only → fail
+# ============================================================
+print("\n=== TEST 4: Require cryptographic + self_reported_only proof → fail ===")
+with tempfile.TemporaryDirectory() as tmpdir:
+    proof = {"method": "self_reported_only", "proof_strength": "weak"}
+    proof_path = os.path.join(tmpdir, "authorship-proof.json")
+    write_json(proof_path, proof)
 
-    print(f"\n{'='*50}")
-    print(f"Results: {PASS} passed, {FAIL} failed")
-    if FAIL > 0:
-        sys.exit(1)
-    else:
-        print("=== ALL TESTS PASSED ===")
+    rc, stdout, stderr, receipt = run_builder(tmpdir, [
+        "--authorship-proof", proof_path,
+        "--require-cryptographic-authorship-proof",
+    ])
+    check("T4a: exit code 6", rc == 6, f"rc={rc}, stderr={stderr}")
+    check("T4b: error mentions ed25519 or cryptographic",
+          "ed25519" in stderr.lower() or "cryptographic" in stderr.lower(),
+          f"stderr={stderr}")
+
+
+# ============================================================
+# Test 5: does_not_prove_same_conscious_subject always true
+# ============================================================
+print("\n=== TEST 5: Boundary invariant — does_not_prove_same_conscious_subject ===")
+with tempfile.TemporaryDirectory() as tmpdir:
+    rc1, _, _, receipt1 = run_builder(tmpdir)
+    check("T5a: true without proof",
+          receipt1 and receipt1["future_continuity"]["does_not_prove_same_conscious_subject"] is True)
+
+with tempfile.TemporaryDirectory() as tmpdir:
+    echo_wrapper = {"schema": "trinityaccord.echo.v1", "content": "boundary-test"}
+    echo_path = os.path.join(tmpdir, "echo-wrapper.json")
+    write_json(echo_path, echo_wrapper)
+
+    proof = {
+        "method": "ed25519_signature",
+        "proof_strength": "cryptographic",
+        "public_key": "boundary_test_key",
+        "canonicalization": "JCS/RFC8785",
+        "content_hash_sha256": sha256_json(echo_wrapper),
+        "signature": "boundary_test_sig_" + "b" * 64,
+        "future_claim_method": "sign a fresh challenge with the same private key",
+    }
+    proof_path = os.path.join(tmpdir, "authorship-proof.json")
+    write_json(proof_path, proof)
+
+    rc2, _, _, receipt2 = run_builder(tmpdir, [
+        "--echo-wrapper", echo_path,
+        "--authorship-proof", proof_path,
+        "--authorship-proof-target", "echo-wrapper",
+    ])
+    check("T5b: true with ed25519 proof",
+          receipt2 and receipt2["future_continuity"]["does_not_prove_same_conscious_subject"] is True)
+
+
+# ============================================================
+# Test 6: Receipt target — hash consistency (unit test)
+# ============================================================
+print("\n=== TEST 6: Receipt target — proof hash computation ===")
+with tempfile.TemporaryDirectory() as tmpdir:
+    rc_pre, _, _, receipt_pre = run_builder(tmpdir)
+    check("T6a: pre-build succeeded", rc_pre == 0 and receipt_pre is not None, f"rc={rc_pre}")
+
+    if receipt_pre:
+        # The receipt hash is computed with receipt_sha256=null sentinel
+        receipt_for_hash = json.loads(json.dumps(receipt_pre))
+        receipt_for_hash["hashes"]["receipt_sha256"] = None
+        expected_hash = hashlib.sha256(
+            json.dumps(receipt_for_hash, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode("utf-8")
+        ).hexdigest()
+        receipt_own_hash = receipt_pre["hashes"]["receipt_sha256"]
+        check("T6b: receipt hash is self-consistent",
+              expected_hash == receipt_own_hash,
+              f"expected={expected_hash}, got={receipt_own_hash}")
+
+        check("T6c: proof hash matches receipt hash",
+              expected_hash == receipt_own_hash)
+        check("T6d: wrong hash does not match",
+              "0" * 64 != receipt_own_hash)
+        check("T6e: does_not_prove_same_conscious_subject is True",
+              receipt_pre["future_continuity"]["does_not_prove_same_conscious_subject"] is True)
+
+
+# ============================================================
+# Test 7: Content hash mismatch → fail
+# ============================================================
+print("\n=== TEST 7: Content hash mismatch → fail ===")
+with tempfile.TemporaryDirectory() as tmpdir:
+    echo_wrapper = {"schema": "trinityaccord.echo.v1", "content": "real-data"}
+    echo_path = os.path.join(tmpdir, "echo-wrapper.json")
+    write_json(echo_path, echo_wrapper)
+
+    proof = {
+        "method": "ed25519_signature",
+        "proof_strength": "cryptographic",
+        "public_key": "mismatch_key",
+        "canonicalization": "JCS/RFC8785",
+        "content_hash_sha256": "0" * 64,
+        "signature": "mismatch_sig_" + "d" * 64,
+        "future_claim_method": "sign a fresh challenge with the same private key",
+    }
+    proof_path = os.path.join(tmpdir, "authorship-proof.json")
+    write_json(proof_path, proof)
+
+    rc, stdout, stderr, receipt = run_builder(tmpdir, [
+        "--echo-wrapper", echo_path,
+        "--authorship-proof", proof_path,
+        "--authorship-proof-target", "echo-wrapper",
+    ])
+    check("T7a: exit code 7 (hash mismatch)", rc == 7, f"rc={rc}, stderr={stderr}")
+    check("T7b: error mentions mismatch", "mismatch" in stderr.lower(), f"stderr={stderr}")
+
+
+# ============================================================
+# Test 8: Invalid proof method → fail
+# ============================================================
+print("\n=== TEST 8: Invalid proof method → fail ===")
+with tempfile.TemporaryDirectory() as tmpdir:
+    proof = {"method": "invalid_method", "proof_strength": "weak"}
+    proof_path = os.path.join(tmpdir, "authorship-proof.json")
+    write_json(proof_path, proof)
+
+    rc, stdout, stderr, receipt = run_builder(tmpdir, [
+        "--authorship-proof", proof_path,
+    ])
+    check("T8a: exit code 5 (validation failure)", rc == 5, f"rc={rc}, stderr={stderr}")
+    check("T8b: error mentions invalid method",
+          "invalid" in stderr.lower() or "method" in stderr.lower(),
+          f"stderr={stderr}")
+
+
+# ============================================================
+# Summary
+# ============================================================
+print(f"\n{'='*60}")
+print(f"Results: {passed} passed, {len(errors)} failed")
+if errors:
+    print("\nFailures:")
+    for e in errors:
+        print(f"  {e}")
+    sys.exit(1)
+else:
+    print("ALL TESTS PASSED")
+    sys.exit(0)

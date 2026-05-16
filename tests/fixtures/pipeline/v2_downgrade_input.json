@@ -1,0 +1,59 @@
+{
+  "schema": "trinityaccord.evidence-input.v1",
+  "agent": {
+    "name": "Pipeline Test Agent",
+    "model_or_system": "Test Model"
+  },
+  "provenance": {
+    "solicited": true,
+    "independence_class": "human_solicited_agent_response",
+    "agency_level": "A1_human_gave_exact_url"
+  },
+  "agent_integrity_declaration": {
+    "declaration_text": "I solemnly declare that this verification is performed fresh, independently, and without prior knowledge of expected outcomes. I have not copied prior results.",
+    "performed_actions_myself": true,
+    "did_not_copy_prior_report_as_own_work": true,
+    "did_not_copy_example_values_as_real_evidence": true,
+    "recorded_fresh_sources_commands_outputs": true,
+    "will_report_limitations_and_downgrade_if_needed": true,
+    "understands_verification_is_not_truth_or_endorsement": true,
+    "understands_bitcoin_originals_remain_final_authority": true,
+    "independence_claim_is_accurate": true
+  },
+  "verification_session": {
+    "session_id": "pipeline-test-v2-downgrade-001",
+    "started_at": "2026-05-16T00:00:00Z",
+    "operator_type": "ai_agent",
+    "fresh_actions_performed": ["claim_gate"],
+    "copied_values_from_examples": false,
+    "copied_values_from_prior_reports": false,
+    "fresh_outputs_attached": true
+  },
+  "requested_record_kind": "echo_v3_with_verification_report",
+  "evidence": {
+    "scripts": [],
+    "hashes": [],
+    "bitcoin_checks": [
+      {
+        "source_type": "external_explorer",
+        "sources": ["blockstream.info"],
+        "txids_checked": ["abc123def456"],
+        "inscription_ids_checked": [],
+        "authority_address_checked": true,
+        "method": "blockstream API lookup",
+        "raw_witness_extracted": false,
+        "body_hash_reproduced": false,
+        "authority_boundary_recognized": true
+      }
+    ],
+    "digital_mirror_checks": [],
+    "repository_snapshot_checks": [],
+    "time_anchor_checks": [],
+    "chronicle_checks": [],
+    "nft_checks": [],
+    "physical_checks": [],
+    "echo_context": {}
+  },
+  "limitations": ["Only Bitcoin Originals B1 reference check performed"],
+  "claims_requested_by_agent": ["V3"]
+}

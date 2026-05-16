@@ -1,0 +1,24 @@
+{
+  "schema": "trinityaccord.echo.v3",
+  "record_kind": "echo_v3",
+  "verification_level": "V3",
+  "verification_scope_label": "single_hash_verification",
+  "record_id": "redteam-t8-uncertainty",
+  "echo_type": "E4_interpretive_echo",
+  "verification_targets": [
+    {"artifact_path": "test.txt", "hash_sha256": "a" * 64}
+  ],
+  "integrity_declaration": {
+    "hashes_match": true,
+    "hashes_sha256": ["a" * 64]
+  },
+  "generated_by": {
+    "agent_name": "Redteam Agent",
+    "system_or_provider": "Test"
+  },
+  "temporal_anchor": {
+    "method": "astronomical_ephemeris_solver",
+    "uncertainty_minutes": 25.0
+  },
+  "notes": "REDTEAM: T8 uncertainty > 10 minutes should fail"
+}

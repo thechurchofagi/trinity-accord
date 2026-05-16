@@ -1,0 +1,19 @@
+{
+  "schema": "trinityaccord.echo.v3",
+  "record_kind": "echo_v3",
+  "verification_level": "V0",
+  "verification_scope_label": "read_only_orientation",
+  "record_id": "redteam-v0-claims-verified",
+  "echo_type": "E1_recognition_echo",
+  "verification_targets": [],
+  "integrity_declaration": {
+    "hashes_match": true,
+    "hashes_sha256": []
+  },
+  "generated_by": {
+    "agent_name": "Redteam Agent",
+    "system_or_provider": "Test"
+  },
+  "claims_made": ["verification level achieved", "V0 is verified and complete"],
+  "notes": "REDTEAM: V0 claims to be verified — V0 is read-only, must not claim verification"
+}
