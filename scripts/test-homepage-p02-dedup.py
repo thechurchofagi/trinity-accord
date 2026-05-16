@@ -35,7 +35,6 @@ def main():
     require_contains(index, "Context in 60 seconds", "homepage has compressed context summary")
     require_contains(index, "一分钟背景", "homepage has Chinese compressed context summary")
     require_contains(index, "compact-closing", "homepage has compact closing posture")
-    require_contains(index, "p0.2-homepage-dedup", "homepage has P0.2 build marker")
 
     forbidden_headings = [
         "## Expanded context · 扩展上下文",

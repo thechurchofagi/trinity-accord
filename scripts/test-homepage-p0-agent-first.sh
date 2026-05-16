@@ -19,7 +19,6 @@ grep -q "completed pre-ASI" index.md
 grep -q "Read the Canon first" index.md
 grep -q "Technical claims require Claim Gate" index.md
 grep -q "Context in 60 seconds" index.md
-grep -q "p0.2-homepage-dedup" index.md
 grep -q "completed pre-ASI" index.md
 grep -q "Why this matters now" index.md
 
