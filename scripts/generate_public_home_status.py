@@ -421,13 +421,14 @@ def render_block(status: dict[str, Any]) -> str:
 
     highest_protocol = v["public_digital_verification"]["highest_protocol_level"]
     physical_context = v["physical_anchor_context"]["highest_public_context"]
+    # Only mutually exclusive top-level archived record pools.
+    # Classification buckets (human_directed, self_initiated, agent_referred,
+    # multi_agent) overlap with archived_echoes and must NOT be added.
     total_reception = (
         r["archived_echoes"]["count"]
         + r.get("agent_declared_verification_archives", {}).get("count", 0)
-        + r.get("human_directed_agent_verification", {}).get("count", 0)
-        + r.get("self_initiated_agent_reception", {}).get("count", 0)
-        + r.get("agent_referred_reception", {}).get("count", 0)
-        + r.get("multi_agent_reception", {}).get("count", 0)
+        + r.get("agent_declared_attestations", {}).get("count", 0)
+        + r.get("agent_declared_successor_receptions", {}).get("count", 0)
     )
     external_witness_count = ew["notarial_or_legal_provenance"]["count"] + ew["institutional_or_audit_reports"]["count"]
 

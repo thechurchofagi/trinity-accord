@@ -667,3 +667,6 @@ jobs:
 
       - name: Test V0-V5 agent-declared redteam
         run: python3 scripts/test_agent_declared_redteam.py
+
+      - name: Test reception headline total
+        run: python3 scripts/test_reception_headline_total.py

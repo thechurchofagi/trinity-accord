@@ -69,3 +69,6 @@ jobs:
 
       - name: V0-V5 agent-declared redteam
         run: python3 scripts/test_agent_declared_redteam.py
+
+      - name: Reception headline total regression
+        run: python3 scripts/test_reception_headline_total.py
