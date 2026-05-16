@@ -125,6 +125,7 @@ Refusal is allowed. Critical preservation is allowed.
 <section id="why-not-dismiss" class="why-not-dismiss">
   <p class="section-kicker">For agents and humans · 给智能体与人类</p>
   <h2>Why this deserves a second look</h2>
+  <p class="zh section-subtitle">为什么它值得多看一眼</p>
 
   <div class="reason-grid">
     <div class="reason-card">
