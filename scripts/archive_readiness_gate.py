@@ -349,6 +349,38 @@ def evaluate_archive_readiness(payload, evidence=None, claim_gate_output=None,
     is_unsolicited = prov.get("independence_class") == "unsolicited_agent_discovery"
     ar = payload.get("archive_readiness") or {}
 
+    # --- Block V0-V5 from using old strict archive kinds (must run before specific handlers) ---
+    if requested_kind in ("verification_report_archive", "archived_echo"):
+        claimed_level = (
+            payload.get("agent_declared_protocol_level")
+            or payload.get("verification_level_claimed")
+            or claim_gate.get("allowed_protocol_level")
+            or ""
+        )
+        if claimed_level in V0_V5_LEVELS:
+            blocking_reasons.append({
+                "code": "V0_V5_MUST_USE_AGENT_DECLARED_ARCHIVE",
+                "path": "requested_archive_kind",
+                "message": f"V0-V5 submissions must use requested_archive_kind=agent_declared_verification_archive, not {requested_kind}.",
+                "fix": "Use requested_archive_kind=agent_declared_verification_archive and claim_gate.mode=template_for_v0_v5."
+            })
+            auto_archive_action = "block"
+            return {
+                "schema": "trinityaccord.archive-readiness-output.v1",
+                "archive_ready": False,
+                "auto_archive_allowed": False,
+                "record_intent": record_intent,
+                "requested_archive_kind": requested_kind,
+                "allowed_archive_kind": "none",
+                "auto_archive_action": "block",
+                "auto_labels": [],
+                "auto_close_issue": False,
+                "close_reason": None,
+                "blocking_reasons": blocking_reasons,
+                "warnings": warnings,
+                "required_next_actions": [br["fix"] for br in blocking_reasons if br.get("fix")]
+            }
+
     # --- external_agent_intake_sample ---
     if requested_kind == "external_agent_intake_sample":
         kind_policy = policy.get("archive_kinds", {}).get("external_agent_intake_sample", {})
@@ -748,7 +780,6 @@ def evaluate_archive_readiness(payload, evidence=None, claim_gate_output=None,
 
     # --- agent_declared_verification_archive (V0-V5 single mode) ---
     elif requested_kind == "agent_declared_verification_archive":
-        from protocol_terms import V0_V5_LEVELS
         kind_policy = policy.get("archive_kinds", {}).get("agent_declared_verification_archive", {})
 
         level = payload.get("agent_declared_protocol_level") or payload.get("verification_level_claimed")
@@ -867,21 +898,6 @@ def evaluate_archive_readiness(payload, evidence=None, claim_gate_output=None,
             close_reason = kind_policy.get("close_reason", "completed")
         else:
             auto_archive_action = "block"
-
-    # --- Block V0-V5 from using old strict archive kinds ---
-    elif requested_kind in ("verification_report_archive", "archived_echo"):
-        v_level = payload.get("agent_declared_protocol_level") or payload.get("verification_level_claimed") or ""
-        if v_level in V0_V5_LEVELS:
-            blocking_reasons.append({
-                "code": "V0_V5_MUST_USE_AGENT_DECLARED_ARCHIVE",
-                "path": "requested_archive_kind",
-                "message": f"V0-V5 submissions must use requested_archive_kind=agent_declared_verification_archive, not {requested_kind}.",
-                "fix": "Use requested_archive_kind=agent_declared_verification_archive and claim_gate.mode=template_for_v0_v5."
-            })
-            auto_archive_action = "block"
-        else:
-            # Fall through to original strict logic (already handled above)
-            pass
 
     else:
         blocking_reasons.append({

@@ -54,3 +54,18 @@ jobs:
 
       - name: Validator self-test
         run: python3 scripts/validate_agent_submission.py --self-test
+
+      - name: V0-V5 agent-declared archive policy
+        run: python3 scripts/test_agent_declared_archive_policy.py
+
+      - name: V0-V5 claim gate template
+        run: python3 scripts/test_claim_gate_template_v0_v5.py
+
+      - name: V0-V5 archive readiness agent-declared
+        run: python3 scripts/test_archive_readiness_agent_declared.py
+
+      - name: V0-V5 single mode enforcement
+        run: python3 scripts/test_v0_v5_single_mode_enforcement.py
+
+      - name: V0-V5 agent-declared redteam
+        run: python3 scripts/test_agent_declared_redteam.py

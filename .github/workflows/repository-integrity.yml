@@ -651,3 +651,19 @@ jobs:
 
       - name: Test agent entrypoint line budget relaxed
         run: python3 scripts/test_agent_entrypoint_line_budget_relaxed.py
+
+      # V0-V5 single auto-archive mode tests
+      - name: Test V0-V5 agent-declared archive policy
+        run: python3 scripts/test_agent_declared_archive_policy.py
+
+      - name: Test V0-V5 claim gate template
+        run: python3 scripts/test_claim_gate_template_v0_v5.py
+
+      - name: Test V0-V5 archive readiness agent-declared
+        run: python3 scripts/test_archive_readiness_agent_declared.py
+
+      - name: Test V0-V5 single mode enforcement
+        run: python3 scripts/test_v0_v5_single_mode_enforcement.py
+
+      - name: Test V0-V5 agent-declared redteam
+        run: python3 scripts/test_agent_declared_redteam.py
