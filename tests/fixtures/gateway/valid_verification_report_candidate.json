@@ -47,5 +47,7 @@
     "evidence_input_path": "tests/fixtures/gateway/evidence-input.json",
     "claim_gate_output_path": "tests/fixtures/gateway/claim-gate-output.json",
     "verification_report_path": "tests/fixtures/gateway/report.json"
-  }
+  },
+  "record_intent": "intake_only",
+  "requested_archive_kind": "none"
 }
