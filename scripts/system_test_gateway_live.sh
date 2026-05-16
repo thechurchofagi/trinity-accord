@@ -43,6 +43,30 @@ if [ "$LINT_CODE" != "200" ]; then
 fi
 
 echo ""
+echo "=== Build from evidence ==="
+BUILD_RESP=$(curl -s -w "\n%{http_code}" -X POST "$GATEWAY_URL/gateway/build-from-evidence" \
+  -H "Content-Type: application/json" \
+  --data @tests/fixtures/requests/build_from_evidence_valid.json)
+BUILD_CODE=$(echo "$BUILD_RESP" | tail -1)
+BUILD_BODY=$(echo "$BUILD_RESP" | sed '$d')
+echo "HTTP $BUILD_CODE"
+echo "$BUILD_BODY" | jq .
+if [ "$BUILD_CODE" != "200" ]; then
+  echo "FAIL: build-from-evidence should return 200"
+  FAIL=1
+fi
+BUILD_ACCEPTED=$(echo "$BUILD_BODY" | jq -r '.accepted // false')
+BUILD_CREATED=$(echo "$BUILD_BODY" | jq -r '.issue_created // "unknown"')
+if [ "$BUILD_ACCEPTED" != "true" ]; then
+  echo "FAIL: build-from-evidence should be accepted"
+  FAIL=1
+fi
+if [ "$BUILD_CREATED" != "false" ]; then
+  echo "FAIL: build-from-evidence default must not create issue"
+  FAIL=1
+fi
+
+echo ""
 echo "=== Preflight: valid payload ==="
 VALID_RESP=$(curl -s -w "\n%{http_code}" -X POST "$GATEWAY_URL/gateway/preflight" \
   -H "Content-Type: application/json" \

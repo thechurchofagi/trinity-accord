@@ -20,6 +20,24 @@ def validate_evidence_input(data):
     errors = []
     warnings = []
 
+    # 0. JSON Schema validation (when jsonschema available)
+    try:
+        import jsonschema
+        schema_path = ROOT / "api" / "evidence-input-schema.v1.json"
+        if schema_path.exists():
+            schema = json.loads(schema_path.read_text(encoding="utf-8"))
+            validator = jsonschema.Draft202012Validator(schema)
+            for e in sorted(validator.iter_errors(data), key=lambda x: list(x.path)):
+                loc = ".".join(str(p) for p in e.path) or "<root>"
+                errors.append({
+                    "code": "EVIDENCE_SCHEMA_VALIDATION_FAILED",
+                    "path": loc,
+                    "message": e.message,
+                    "fix": "Use /gateway/examples/evidence-input-b1-external-explorer as the schema-valid scaffold."
+                })
+    except ImportError:
+        pass
+
     # 1. Top-level bitcoin_checks is forbidden
     if "bitcoin_checks" in data:
         errors.append({

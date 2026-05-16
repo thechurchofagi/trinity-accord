@@ -762,8 +762,7 @@ app.post("/gateway/build-from-evidence", async (req, res) => {
     // 4. Build verification report
     const reportPath = path.join(tmpDir, "verification-report.json");
     const report = runScript("build_verification_report_from_evidence.py", [
-      "--evidence-input", evidencePath,
-      "--claim-gate-output", claimGateOutputPath,
+      "--input", evidencePath,
       "--out", reportPath
     ]);
     if (report.code !== 0) {
