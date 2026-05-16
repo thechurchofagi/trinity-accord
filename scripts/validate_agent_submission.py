@@ -1575,6 +1575,9 @@ def validate_with_jsonschema(obj, schema_path, path_label):
             return False
         return True
     except Exception as e:
+        if is_strict_mode(CURRENT_VALIDATION_MODE):
+            print(f"  FAIL: schema validation error in {CURRENT_VALIDATION_MODE} mode: {e}")
+            return False
         print(f"  WARN: schema validation error: {e}")
         return True
 

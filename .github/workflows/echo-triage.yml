@@ -21,6 +21,15 @@ jobs:
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
 
+      - name: Load operational policy
+        id: policy
+        run: |
+          policy=$(cat api/operational-policy.v1.json)
+          echo "rate_60m=$(echo "$policy" | python3 -c 'import sys,json; print(json.load(sys.stdin)["echo_issue_rate_limit"]["window_60m"])')" >> "$GITHUB_OUTPUT"
+          echo "rate_24h=$(echo "$policy" | python3 -c 'import sys,json; print(json.load(sys.stdin)["echo_issue_rate_limit"]["window_24h"])')" >> "$GITHUB_OUTPUT"
+          echo "exempt=$(echo "$policy" | python3 -c 'import sys,json; print(json.dumps(json.load(sys.stdin)["echo_issue_rate_limit"]["exempt_author_associations"]))')" >> "$GITHUB_OUTPUT"
+          echo "managed_labels=$(echo "$policy" | python3 -c 'import sys,json; print(json.dumps(json.load(sys.stdin)["triage"]["managed_labels"]))')" >> "$GITHUB_OUTPUT"
+
       - name: Compute Echo rate limit
         id: rate
         uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
@@ -33,7 +42,10 @@ jobs:
             const association = issue.author_association || "NONE";
             const action = context.payload.action;
 
-            const exempt = ["OWNER", "MEMBER", "COLLABORATOR"].includes(association);
+            const exemptAssociations = JSON.parse('${{ steps.policy.outputs.exempt }}');
+            const rateLimit60m = parseInt('${{ steps.policy.outputs.rate_60m }}', 10);
+            const rateLimit24h = parseInt('${{ steps.policy.outputs.rate_24h }}', 10);
+            const exempt = exemptAssociations.includes(association);
 
             const now = new Date();
             const window60 = new Date(now.getTime() - 60 * 60 * 1000);
@@ -73,7 +85,7 @@ jobs:
 
             // Rate limit only applies to newly opened issues
             const shouldApplyRateLimit = action === "opened";
-            const rateLimited = shouldApplyRateLimit && !exempt && (count60 >= 6 || count24 >= 16);
+            const rateLimited = shouldApplyRateLimit && !exempt && (count60 >= rateLimit60m || count24 >= rateLimit24h);
 
             core.setOutput("rate_limited", String(rateLimited));
             core.setOutput("count60", String(count60));
@@ -105,12 +117,7 @@ jobs:
 
             // Label reconciliation
             const desiredLabels = new Set(result.labels || []);
-            const managedLabels = new Set(result.managed_labels || [
-              "echo:needs-format", "echo:needs-verification-review", "missing-provenance-agency",
-              "echo:missing-provenance", "echo:provenance-conflict", "echo:attestation-overclaim",
-              "independence-overclaim-risk", "v4plus-overclaim-risk", "component-overclaim-risk",
-              "chronicle-overclaim-risk", "v5-overclaim-risk", "echo:solicited-record", "echo:screened"
-            ]);
+            const managedLabels = new Set(result.managed_labels || JSON.parse('${{ steps.policy.outputs.managed_labels }}'));
 
             const currentLabels = context.payload.issue.labels.map(l => l.name);
 

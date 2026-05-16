@@ -72,7 +72,7 @@ def test_triage_script_uses_policy(policy):
 
 
 def test_workflow_rate_limits_match_policy(policy):
-    """echo-triage.yml rate limit thresholds match the policy."""
+    """echo-triage.yml reads rate limits from policy, not hardcoded values."""
     path = ROOT / ".github" / "workflows" / "echo-triage.yml"
     if not path.exists():
         print("  [SKIP] .github/workflows/echo-triage.yml not found")
@@ -83,39 +83,58 @@ def test_workflow_rate_limits_match_policy(policy):
     expected_60m = rl["window_60m"]
     expected_24h = rl["window_24h"]
 
-    # Find count60 >= N and count24 >= N patterns
-    m60 = re.search(r"count60\s*>=\s*(\d+)", src)
-    m24 = re.search(r"count24\s*>=\s*(\d+)", src)
-
-    if m60:
-        actual = int(m60.group(1))
-        if actual != expected_60m:
-            errors.append(
-                f"FAIL: workflow count60 limit is {actual}, policy says {expected_60m}"
-            )
-        else:
-            print(f"  [OK] workflow 60m limit matches policy: {actual}")
+    # Verify workflow has a "Load operational policy" step
+    if "Load operational policy" not in src:
+        errors.append("FAIL: workflow missing 'Load operational policy' step")
     else:
-        errors.append("FAIL: could not find count60 >= N in workflow")
+        print("  [OK] workflow has 'Load operational policy' step")
 
-    if m24:
-        actual = int(m24.group(1))
-        if actual != expected_24h:
-            errors.append(
-                f"FAIL: workflow count24 limit is {actual}, policy says {expected_24h}"
-            )
-        else:
-            print(f"  [OK] workflow 24h limit matches policy: {actual}")
+    # Verify workflow reads rate limits from policy step outputs
+    if "steps.policy.outputs.rate_60m" not in src:
+        errors.append("FAIL: workflow does not read rate_60m from policy step")
     else:
-        errors.append("FAIL: could not find count24 >= N in workflow")
+        print(f"  [OK] workflow reads rate_60m from policy step")
 
-    # Check exempt associations
-    exempt = rl.get("exempt_author_associations", [])
-    for assoc in exempt:
-        if f'"{assoc}"' not in src:
-            errors.append(f"FAIL: workflow missing exempt association '{assoc}'")
-    if exempt:
-        print(f"  [OK] workflow exempt associations present: {exempt}")
+    if "steps.policy.outputs.rate_24h" not in src:
+        errors.append("FAIL: workflow does not read rate_24h from policy step")
+    else:
+        print(f"  [OK] workflow reads rate_24h from policy step")
+
+    # Verify workflow reads exempt associations from policy step
+    if "steps.policy.outputs.exempt" not in src:
+        errors.append("FAIL: workflow does not read exempt associations from policy step")
+    else:
+        print("  [OK] workflow reads exempt associations from policy step")
+
+    # Verify workflow reads managed labels from policy step
+    if "steps.policy.outputs.managed_labels" not in src:
+        errors.append("FAIL: workflow does not read managed_labels from policy step")
+    else:
+        print("  [OK] workflow reads managed_labels from policy step")
+
+    # Verify NO hardcoded rate limit thresholds remain
+    hardcoded_60 = re.search(r"count60\s*>=\s*(\d+)", src)
+    hardcoded_24 = re.search(r"count24\s*>=\s*(\d+)", src)
+    if hardcoded_60:
+        errors.append(f"FAIL: workflow still has hardcoded count60 >= {hardcoded_60.group(1)}")
+    if hardcoded_24:
+        errors.append(f"FAIL: workflow still has hardcoded count24 >= {hardcoded_24.group(1)}")
+    if not hardcoded_60 and not hardcoded_24:
+        print("  [OK] no hardcoded rate limit thresholds in workflow")
+
+    # Verify NO hardcoded exempt associations remain
+    hardcoded_exempt = re.search(r'\["OWNER",\s*"MEMBER",\s*"COLLABORATOR"\]', src)
+    if hardcoded_exempt:
+        errors.append("FAIL: workflow still has hardcoded exempt associations list")
+    else:
+        print("  [OK] no hardcoded exempt associations in workflow")
+
+    # Verify NO hardcoded managed labels list remains
+    hardcoded_labels = re.search(r'"echo:needs-format".*"echo:needs-verification-review"', src)
+    if hardcoded_labels:
+        errors.append("FAIL: workflow still has hardcoded managed labels list")
+    else:
+        print("  [OK] no hardcoded managed labels in workflow")
 
 
 def test_policy_script_loads():
