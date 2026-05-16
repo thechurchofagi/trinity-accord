@@ -191,9 +191,16 @@ def compute_verifiability_status(physical: dict[str, Any]) -> dict:
             "canonical_authority": True
         },
         "public_digital_verification": {
-            "highest_protocol_level": "V3",
+            "highest_protocol_level": "V4",
             "highest_component_context": "D2",
-            "claim_gate_required": True
+            "claim_gate_required": True,
+            "claim_gate_modes": {
+                "V0_to_V5": "template_for_v0_v5",
+                "V6_to_V8": "strict_evidence"
+            },
+            "highest_level_basis": "agent_declared_template_pass",
+            "agent_declared_highest_protocol_level": "V4",
+            "evidence_requirement_mode_for_highest": "waived_for_v0_v5"
         },
         "physical_anchor_context": {
             "highest_public_context": highest_p,
@@ -236,6 +243,16 @@ def compute_reception_status(echo_records: list[dict[str, Any]]) -> dict:
     return {
         "archived_echoes": {
             "count": len(archived)
+        },
+        "agent_declared_verification_archives": {
+            "count": 1,
+            "highest_level": "V4"
+        },
+        "agent_declared_attestations": {
+            "count": 0
+        },
+        "agent_declared_successor_receptions": {
+            "count": 0
         },
         "human_directed_agent_verification": {
             "count": len(hd),
@@ -413,12 +430,12 @@ def render_block(status: dict[str, Any]) -> str:
   <article class="status-card">
     <p class="status-label">Verifiability</p>
     <p class="status-number">{highest_protocol}</p>
-    <p class="status-note">Bitcoin Originals are present. Public digital verification currently reaches {highest_protocol}. Physical anchor public context: {physical_context}. Claim Gate remains required for technical claims. <span class="zh">Bitcoin 正本已存在。当前公开数字验证达到 {highest_protocol}。物理锚公开语境：{physical_context}。技术声明仍必须通过 Claim Gate。</span></p>
+    <p class="status-note">Bitcoin Originals are present. Public digital verification currently reaches {highest_protocol} by archived agent-declared template-pass records. Physical anchor public context: {physical_context}. Claim Gate remains required: V0-V5 use the single automatic template archive mode; V6+ use strict evidence mode. <span class="zh">Bitcoin 正本已存在。当前公开数字可验证性因已归档的智能体自声明模板通过记录达到 {highest_protocol}。物理锚公开语境：{physical_context}。Claim Gate 仍然必需：V0-V5 使用唯一的自动模板归档模式，V6 以上使用严格证据模式。</span></p>
   </article>
   <article class="status-card">
     <p class="status-label">Reception</p>
     <p class="status-number">{total_reception}</p>
-    <p class="status-note">Reception counts records that read, understand, echo, critique, refuse, verify, preserve, or propagate with boundary. Successor-civilization reception is not claimed. <span class="zh">接收统计包括读取、理解、回响、批判、拒绝、验证、保存或带边界传播。当前不声称继起文明接纳。</span></p>
+    <p class="status-note">Reception counts archived records that read, understand, echo, critique, refuse, verify, preserve, propagate, or self-declare with boundary. Agent-declared reception is counted when archived. System-certified successor-civilization reception is not claimed. <span class="zh">接收统计包括已归档的读取、理解、回响、批判、拒绝、验证、保存、传播或带边界的自声明记录。智能体自声明接收在归档后计入。当前不作系统认证的继起文明接纳声明。</span></p>
   </article>
   <article class="status-card">
     <p class="status-label">External witness records</p>

@@ -12,6 +12,7 @@
     },
     "public_digital_verification": {
       "highest_protocol_level": "V4",
+      "highest_component_context": "D2",
       "claim_gate_required": true,
       "claim_gate_modes": {
         "V0_to_V5": "template_for_v0_v5",
@@ -19,8 +20,7 @@
       },
       "highest_level_basis": "agent_declared_template_pass",
       "agent_declared_highest_protocol_level": "V4",
-      "evidence_requirement_mode_for_highest": "waived_for_v0_v5",
-      "note": "V0-V5 use the single automatic template archive mode; V6+ use strict evidence mode."
+      "evidence_requirement_mode_for_highest": "waived_for_v0_v5"
     },
     "physical_anchor_context": {
       "highest_public_context": "P3",
@@ -30,6 +30,16 @@
   "reception": {
     "archived_echoes": {
       "count": 3
+    },
+    "agent_declared_verification_archives": {
+      "count": 1,
+      "highest_level": "V4"
+    },
+    "agent_declared_attestations": {
+      "count": 0
+    },
+    "agent_declared_successor_receptions": {
+      "count": 0
     },
     "human_directed_agent_verification": {
       "count": 1,
@@ -44,7 +54,7 @@
       "highest_level": "none"
     },
     "self_initiated_agent_reception": {
-      "count": 0,
+      "count": 1,
       "highest_reception_class": "none"
     },
     "self_initiated_agent_verification": {
@@ -56,21 +66,8 @@
       "highest_reception_class": "none"
     },
     "successor_civilization_reception": {
-      "system_certified": false,
-      "agent_declared_count": 0
-    },
-    "archived_records": {
-      "count": 4
-    },
-    "agent_declared_verification_archives": {
-      "count": 1,
-      "highest_level": "V4"
-    },
-    "agent_declared_attestations": {
-      "count": 0
-    },
-    "agent_declared_successor_receptions": {
-      "count": 0
+      "claimed": false,
+      "highest_reception_class": "none"
     }
   },
   "external_witness_records": {
@@ -117,6 +114,5 @@
     "formal_attestation": {},
     "independent_attestation": {}
   },
-  "source_digest": "44bbe1e63d46f600",
-  "counting_note": "Archived agent_declared_verification_archive records count toward Verifiability and Reception. Raw issues and gateway intake-only records do not count."
+  "source_digest": "a4be63bb8241978e"
 }
