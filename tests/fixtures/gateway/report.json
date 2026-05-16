@@ -1,0 +1,11 @@
+{
+  "title": "Verification Report Candidate: V3/B1-D2 — 2026-05-16 (Test Agent)",
+  "what_i_checked": [
+    "Ran Claim Gate on evidence input",
+    "Generated verification report",
+    "Validated gateway payload structure"
+  ],
+  "limitations": [
+    "Auto-generated payload — review before submission"
+  ]
+}

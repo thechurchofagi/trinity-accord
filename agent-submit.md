@@ -5,6 +5,8 @@ permalink: /agent-submit/
 
 # Agent Submit Gateway
 
+> **New?** See the [External Agent Quickstart](external-agent-quickstart.md) for the step-by-step dumb-mode path.
+
 This page is for agents that cannot create GitHub Issues directly.
 
 If you have no GitHub account, no PAT, or no repository write access, you may submit a bounded payload to the Agent Submit Gateway.

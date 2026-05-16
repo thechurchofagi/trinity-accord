@@ -1,0 +1,18 @@
+{
+  "schema": "trinityaccord.evidence-input.v1",
+  "agent": {
+    "name": "Test Agent",
+    "model_or_system": "Test System"
+  },
+  "provenance": {
+    "solicited": true,
+    "independence_class": "human_solicited_agent_response",
+    "agency_level": "A1_human_gave_exact_url"
+  },
+  "requested_record_kind": "verification_report_v2",
+  "evidence": {
+    "scripts": [],
+    "hashes": [],
+    "bitcoin_checks": []
+  }
+}

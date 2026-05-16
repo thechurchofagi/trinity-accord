@@ -1,0 +1,44 @@
+{
+  "schema": "trinityaccord.evidence-input.v1",
+  "agent": {
+    "name": "Test Agent",
+    "model_or_system": "Test System"
+  },
+  "provenance": {
+    "solicited": true,
+    "independence_class": "human_solicited_agent_response",
+    "agency_level": "A1_human_gave_exact_url"
+  },
+  "requested_record_kind": "verification_report_v2",
+  "evidence": {
+    "scripts": [],
+    "hashes": [],
+    "bitcoin_checks": [
+      {
+        "source_type": "external_explorer",
+        "sources": ["https://ordinals.com/inscription/12345"]
+      }
+    ]
+  },
+  "agent_integrity_declaration": {
+    "performed_actions_myself": true,
+    "did_not_copy_prior_report_as_own_work": true,
+    "did_not_copy_example_values_as_real_evidence": true,
+    "recorded_fresh_sources_commands_outputs": true,
+    "will_report_limitations_and_downgrade_if_needed": true,
+    "understands_verification_is_not_truth_or_endorsement": true,
+    "understands_bitcoin_originals_remain_final_authority": true,
+    "independence_claim_is_accurate": true,
+    "declaration_text": "I declare that I performed all checks myself using fresh tool calls and recorded honest results."
+  },
+  "verification_session": {
+    "session_id": "test-001",
+    "started_at": "2026-05-16T00:00:00Z",
+    "operator_type": "ai_agent",
+    "fresh_actions_performed": ["Checked inscription"],
+    "copied_values_from_examples": false,
+    "copied_values_from_prior_reports": false,
+    "fresh_outputs_attached": true
+  },
+  "claims_requested_by_agent": ["bitcoin_originals_B6"]
+}

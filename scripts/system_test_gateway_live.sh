@@ -10,10 +10,37 @@ echo "=== Gateway version ==="
 curl -fsS "$GATEWAY_URL/gateway/version" | jq . || { echo "FAIL: version"; FAIL=1; }
 
 echo ""
+echo "=== Gateway capabilities ==="
+curl -fsS "$GATEWAY_URL/gateway/capabilities" | jq . || { echo "FAIL: capabilities"; FAIL=1; }
+
+echo ""
 echo "=== Gateway examples ==="
 curl -fsS "$GATEWAY_URL/gateway/examples/verification-report-candidate" | jq . || { echo "FAIL: report example"; FAIL=1; }
 curl -fsS "$GATEWAY_URL/gateway/examples/verification-echo-candidate" | jq . || { echo "FAIL: echo example"; FAIL=1; }
-curl -fsS "$GATEWAY_URL/gateway/examples/evidence-input-v4-external-explorer" | jq . || { echo "FAIL: evidence example"; FAIL=1; }
+curl -fsS "$GATEWAY_URL/gateway/examples/evidence-input-b1-external-explorer" | jq . || { echo "FAIL: b1 evidence example"; FAIL=1; }
+
+echo ""
+echo "=== Evidence input v4 alias (deprecated) ==="
+V4_RESP=$(curl -s "$GATEWAY_URL/gateway/examples/evidence-input-v4-external-explorer")
+V4_DEPRECATED=$(echo "$V4_RESP" | jq -r '.deprecated_alias // false')
+if [ "$V4_DEPRECATED" != "true" ]; then
+  echo "FAIL: v4 endpoint should return deprecated_alias=true"
+  FAIL=1
+fi
+
+echo ""
+echo "=== Lint evidence (valid) ==="
+LINT_RESP=$(curl -s -w "\n%{http_code}" -X POST "$GATEWAY_URL/gateway/lint-evidence" \
+  -H "Content-Type: application/json" \
+  --data @tests/fixtures/evidence-input/valid_v4_external_explorer_example.json)
+LINT_CODE=$(echo "$LINT_RESP" | tail -1)
+LINT_BODY=$(echo "$LINT_RESP" | sed '$d')
+echo "HTTP $LINT_CODE"
+echo "$LINT_BODY" | jq .
+if [ "$LINT_CODE" != "200" ]; then
+  echo "FAIL: valid evidence lint should return 200"
+  FAIL=1
+fi
 
 echo ""
 echo "=== Preflight: valid payload ==="

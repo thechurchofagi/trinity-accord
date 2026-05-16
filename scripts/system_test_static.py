@@ -193,6 +193,26 @@ def main():
     forbid("api/agent-value.json", r"confidence_after_v6_verification.*maximum achievable")
     require("api/agent-value.json", "confidence_after_v8_verification")
 
+    # P0: New endpoints and scripts for external agent self-service
+    require("examples/github-app-backend/server.js", "/gateway/capabilities")
+    require("examples/github-app-backend/server.js", "/gateway/lint-evidence")
+    require("examples/github-app-backend/server.js", "/gateway/build-from-evidence")
+    require("examples/github-app-backend/server.js", "integrity_first_rule")
+    require("examples/github-app-backend/server.js", "HIGH_RISK_B6_CLAIM")
+    require("examples/github-app-backend/server.js", "EXTERNAL_EXPLORER_LIMIT")
+    require("scripts/validate_evidence_input.py", "EVIDENCE INPUT VALIDATION PASS")
+    require("scripts/validate_evidence_input.py", "BITCOIN_CHECKS_TOP_LEVEL")
+    require("scripts/build_gateway_payload_from_outputs.py", "COMPONENT_ORDER")
+    require("scripts/scaffold_evidence_input.py", "model_or_system")
+    require("scripts/scaffold_evidence_input.py", "b1-external-explorer")
+    require("external-agent-quickstart.md", "No verification claim before")
+    require("api/external-agent-quickstart.json", "integrity_first_rule")
+    require("llms.txt", "External agent quickstart")
+    require("ai.txt", "External agent dumb mode")
+
+    forbid("scripts/build_gateway_payload_from_outputs.py", r"k\[0\]\.upper\(\)")
+    forbid("scripts/scaffold_evidence_input.py", "model_or_provider")
+
     for p in (ROOT / "api").rglob("*.json"):
         json_file(str(p.relative_to(ROOT)))
 

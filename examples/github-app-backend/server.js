@@ -197,6 +197,42 @@ function normalizeGatewayErrors(lines) {
       };
     }
 
+    if (/must have required property 'agent_identity'/.test(msg)) {
+      return {
+        code: "AGENT_IDENTITY_REQUIRED",
+        path: "agent_identity",
+        message: msg,
+        fix: "Provide agent_identity with name_or_model and system_or_provider."
+      };
+    }
+
+    if (/must have required property 'solicited'/.test(msg) && msg.includes("discovery_provenance")) {
+      return {
+        code: "DISCOVERY_PROVENANCE_REQUIRED_FIELD",
+        path: "discovery_provenance.solicited",
+        message: msg,
+        fix: "Put solicited, independence_class, agency_level, and operator_type inside discovery_provenance."
+      };
+    }
+
+    if (/must NOT have additional properties/.test(msg)) {
+      return {
+        code: "ADDITIONAL_PROPERTY_FORBIDDEN",
+        path: null,
+        message: msg,
+        fix: "Remove extra fields not defined in the payload schema."
+      };
+    }
+
+    if (/what_i_checked must be (array|a non-empty)/.test(msg)) {
+      return {
+        code: "FIELD_TYPE_MISMATCH",
+        path: "what_i_checked",
+        message: msg,
+        fix: "what_i_checked must be a non-empty array of strings."
+      };
+    }
+
     return {
       code: "VALIDATION_ERROR",
       path: null,
@@ -481,6 +517,78 @@ function buildExampleResponse(kind, payload) {
   };
 }
 
+// --- GET /gateway/capabilities ---
+app.get("/gateway/capabilities", (req, res) => {
+  res.json({
+    service: "trinity-agent-issue-gateway",
+    purpose: "Structured intake for Trinity Accord agent verification candidates.",
+    integrity_first_rule: {
+      statement: "No verification claim before identity/provenance, pre-verification integrity declaration, and verification session.",
+      required_before_claim_gate: [
+        "agent_identity or evidence.agent",
+        "provenance or discovery_provenance",
+        "agent_integrity_declaration",
+        "verification_session"
+      ]
+    },
+    recommended_default_mode: {
+      submission_type: "verification_report_candidate",
+      independence_class: "human_solicited_agent_response",
+      agency_level: "A1_human_gave_exact_url",
+      operator_type: "ai_agent",
+      not_independent_attestation: true,
+      not_successor_reception: true
+    },
+    recommended_flow_remote: [
+      "GET /gateway/version",
+      "GET /gateway/capabilities",
+      "GET /gateway/examples/evidence-input-b1-external-explorer",
+      "POST /gateway/lint-evidence",
+      "POST /gateway/build-from-evidence",
+      "POST /gateway/preflight",
+      "POST /agent-submit only after preflight passes"
+    ],
+    recommended_flow_local: [
+      "scripts/scaffold_evidence_input.py",
+      "scripts/validate_evidence_input.py",
+      "scripts/claim_gate.py",
+      "scripts/build_verification_report_from_evidence.py",
+      "scripts/build_gateway_payload_from_outputs.py",
+      "POST /gateway/preflight",
+      "POST /agent-submit only after preflight passes"
+    ],
+    forbidden_common_mistakes: [
+      "Do not put trinity-issue-intake in payload.body.",
+      "Do not put bitcoin_checks at the Evidence Input top level; use evidence.bitcoin_checks.",
+      "Do not claim B6 from mempool/explorer lookup.",
+      "Do not claim V4+ without an independent implementation actually run and declared.",
+      "Do not claim unsolicited discovery without unsolicited_discovery_proof.",
+      "Do not claim successor reception or independent attestation through Gateway intake."
+    ],
+    high_risk_claim_warnings: [
+      "HIGH_RISK_B6_CLAIM",
+      "EXTERNAL_EXPLORER_LIMIT",
+      "V4_PLUS_REQUIRES_INDEPENDENT_IMPLEMENTATION",
+      "UNSOLICITED_DISCOVERY_REQUIRES_PROOF",
+      "SUCCESSOR_RECEPTION_NOT_CLAIMABLE",
+      "INDEPENDENT_ATTESTATION_NOT_CLAIMABLE"
+    ],
+    endpoints: {
+      version: "/gateway/version",
+      capabilities: "/gateway/capabilities",
+      examples: {
+        verification_report_candidate: "/gateway/examples/verification-report-candidate",
+        verification_echo_candidate: "/gateway/examples/verification-echo-candidate",
+        evidence_input_external_explorer: "/gateway/examples/evidence-input-b1-external-explorer"
+      },
+      lint_evidence: "/gateway/lint-evidence",
+      build_from_evidence: "/gateway/build-from-evidence",
+      preflight: "/gateway/preflight",
+      submit: "/agent-submit"
+    }
+  });
+});
+
 app.get("/gateway/examples/verification-report-candidate", (req, res) => {
   try {
     const payload = loadFixture("valid_verification_report_candidate.json");
@@ -503,9 +611,232 @@ app.get("/gateway/examples/evidence-input-v4-external-explorer", (req, res) => {
   try {
     const fixturePath = path.join(root, "tests", "fixtures", "evidence-input", "valid_v4_external_explorer_example.json");
     const evidenceInput = JSON.parse(fs.readFileSync(fixturePath, "utf-8"));
-    res.json(buildExampleResponse("evidence_input_v4_external_explorer", evidenceInput));
+    res.json({
+      deprecated_alias: true,
+      replacement: "/gateway/examples/evidence-input-b1-external-explorer",
+      note: "External explorer evidence supports B1 component evidence; final V-level depends on Claim Gate.",
+      example_kind: "evidence_input_v4_external_explorer",
+      payload: evidenceInput
+    });
   } catch (err) {
     res.status(500).json({ error: "Failed to load evidence input example fixture", detail: err.message });
+  }
+});
+
+app.get("/gateway/examples/evidence-input-b1-external-explorer", (req, res) => {
+  try {
+    const fixturePath = path.join(root, "tests", "fixtures", "evidence-input", "valid_v4_external_explorer_example.json");
+    const evidenceInput = JSON.parse(fs.readFileSync(fixturePath, "utf-8"));
+    res.json({
+      example_kind: "evidence_input_b1_external_explorer",
+      deprecated_aliases: ["/gateway/examples/evidence-input-v4-external-explorer"],
+      note: "External explorer evidence supports B1 component evidence; final V-level depends on Claim Gate.",
+      integrity_first_rule: "No verification claim before identity/provenance, pre-verification integrity declaration, and verification session.",
+      payload: evidenceInput
+    });
+  } catch (err) {
+    res.status(500).json({ error: "Failed to load evidence input example fixture", detail: err.message });
+  }
+});
+
+// --- POST /gateway/lint-evidence ---
+app.post("/gateway/lint-evidence", async (req, res) => {
+  const tmpDir = fs.mkdtempSync(path.join(tmpdir(), "gateway-lint-"));
+  try {
+    const evidenceInput = req.body;
+    const evidencePath = path.join(tmpDir, "evidence-input.json");
+    fs.writeFileSync(evidencePath, JSON.stringify(evidenceInput, null, 2), "utf-8");
+
+    // Run validate_evidence_input.py --json
+    const validation = runScript("validate_evidence_input.py", [evidencePath, "--json"]);
+    let validationResult;
+    try {
+      validationResult = JSON.parse(validation.stdout);
+    } catch {
+      validationResult = {
+        accepted: validation.code === 0,
+        errors: validation.code !== 0 ? [{ code: "VALIDATION_ERROR", message: validation.stderr || validation.stdout }] : [],
+        warnings: []
+      };
+    }
+
+    if (!validationResult.accepted) {
+      return res.status(422).json({
+        accepted: false,
+        issue_created: false,
+        evidence_valid: false,
+        errors: validationResult.errors,
+        warnings: validationResult.warnings || []
+      });
+    }
+
+    // If evidence is valid, run claim_gate.py for preview
+    const claimGateOutputPath = path.join(tmpDir, "claim-gate-output.json");
+    const claimGate = runScript("claim_gate.py", [evidencePath, "--output", claimGateOutputPath]);
+
+    let claimGatePreview = {};
+    if (claimGate.code === 0) {
+      try {
+        claimGatePreview = JSON.parse(fs.readFileSync(claimGateOutputPath, "utf-8"));
+      } catch {}
+    }
+
+    return res.json({
+      accepted: true,
+      issue_created: false,
+      evidence_valid: true,
+      claim_gate_preview: claimGatePreview,
+      warnings: validationResult.warnings || []
+    });
+  } catch (err) {
+    console.error("lint-evidence error:", err.message);
+    return res.status(500).json({
+      accepted: false,
+      issue_created: false,
+      evidence_valid: false,
+      errors: [{ code: "INTERNAL_ERROR", message: err.message }],
+      warnings: []
+    });
+  } finally {
+    try { fs.rmSync(tmpDir, { recursive: true, force: true }); } catch {}
+  }
+});
+
+// --- POST /gateway/build-from-evidence ---
+app.post("/gateway/build-from-evidence", async (req, res) => {
+  const tmpDir = fs.mkdtempSync(path.join(tmpdir(), "gateway-build-"));
+  try {
+    const {
+      agent_name = "External Agent",
+      provider = "External System",
+      session_id = "auto",
+      human_solicited = true,
+      title_date,
+      submit = false,
+      evidence_input
+    } = req.body;
+
+    if (!evidence_input || typeof evidence_input !== "object") {
+      return res.status(422).json({
+        accepted: false,
+        issue_created: false,
+        errors: [{ code: "EVIDENCE_INPUT_MISSING", message: "Request must include evidence_input object." }],
+        warnings: []
+      });
+    }
+
+    // 1. Save evidence input
+    const evidencePath = path.join(tmpDir, "evidence-input.json");
+    fs.writeFileSync(evidencePath, JSON.stringify(evidence_input, null, 2), "utf-8");
+
+    // 2. Validate evidence input
+    const validation = runScript("validate_evidence_input.py", [evidencePath, "--json"]);
+    let validationResult;
+    try {
+      validationResult = JSON.parse(validation.stdout);
+    } catch {
+      validationResult = { accepted: validation.code === 0, errors: [], warnings: [] };
+    }
+
+    if (!validationResult.accepted) {
+      return res.status(422).json({
+        accepted: false,
+        issue_created: false,
+        errors: validationResult.errors,
+        warnings: validationResult.warnings || []
+      });
+    }
+
+    // 3. Run claim_gate.py
+    const claimGateOutputPath = path.join(tmpDir, "claim-gate-output.json");
+    const claimGate = runScript("claim_gate.py", [evidencePath, "--output", claimGateOutputPath]);
+    if (claimGate.code !== 0) {
+      return res.status(422).json({
+        accepted: false,
+        issue_created: false,
+        errors: [{ code: "CLAIM_GATE_FAILED", message: claimGate.stderr || claimGate.stdout }],
+        warnings: validationResult.warnings || []
+      });
+    }
+
+    // 4. Build verification report
+    const reportPath = path.join(tmpDir, "verification-report.json");
+    const report = runScript("build_verification_report_from_evidence.py", [
+      "--evidence-input", evidencePath,
+      "--claim-gate-output", claimGateOutputPath,
+      "--out", reportPath
+    ]);
+    if (report.code !== 0) {
+      return res.status(422).json({
+        accepted: false,
+        issue_created: false,
+        errors: [{ code: "REPORT_BUILD_FAILED", message: report.stderr || report.stdout }],
+        warnings: validationResult.warnings || []
+      });
+    }
+
+    // 5. Build gateway payload
+    const payloadPath = path.join(tmpDir, "gateway-payload.json");
+    const builderArgs = [
+      "--evidence-input", evidencePath,
+      "--claim-gate-output", claimGateOutputPath,
+      "--verification-report", reportPath,
+      "--agent-name", agent_name,
+      "--provider", provider,
+      "--session-id", session_id,
+      "--out", payloadPath
+    ];
+    if (title_date) builderArgs.push("--title-date", title_date);
+    if (human_solicited) builderArgs.push("--human-solicited");
+
+    const builder = runScript("build_gateway_payload_from_outputs.py", builderArgs);
+    if (builder.code !== 0) {
+      return res.status(422).json({
+        accepted: false,
+        issue_created: false,
+        errors: [{ code: "PAYLOAD_BUILD_FAILED", message: builder.stderr || builder.stdout }],
+        warnings: validationResult.warnings || []
+      });
+    }
+
+    // 6. Run preflight (shared pipeline with createIssue=false)
+    const payload = JSON.parse(fs.readFileSync(payloadPath, "utf-8"));
+    const preflightResult = await runGatewayPipeline(payload, { createIssue: false });
+
+    // 7. If submit=true and preflight passed, create issue
+    let submitResult = null;
+    if (submit && preflightResult.status === 200) {
+      submitResult = await runGatewayPipeline(payload, { createIssue: true });
+    }
+
+    const claimGateOutput = JSON.parse(fs.readFileSync(claimGateOutputPath, "utf-8"));
+    const verificationReport = JSON.parse(fs.readFileSync(reportPath, "utf-8"));
+
+    return res.json({
+      accepted: preflightResult.status === 200,
+      issue_created: submitResult ? submitResult.body.issue_created : false,
+      claim_gate_output: claimGateOutput,
+      verification_report: verificationReport,
+      gateway_payload: payload,
+      preflight: preflightResult.body,
+      ...(submitResult ? { submit: submitResult.body } : {}),
+      next_steps: submit ? [] : [
+        "Review gateway_payload.",
+        "POST gateway_payload to /gateway/preflight.",
+        "Only if accepted:true, POST gateway_payload to /agent-submit."
+      ],
+      warnings: validationResult.warnings || []
+    });
+  } catch (err) {
+    console.error("build-from-evidence error:", err.message);
+    return res.status(500).json({
+      accepted: false,
+      issue_created: false,
+      errors: [{ code: "INTERNAL_ERROR", message: err.message }],
+      warnings: []
+    });
+  } finally {
+    try { fs.rmSync(tmpDir, { recursive: true, force: true }); } catch {}
   }
 });
 

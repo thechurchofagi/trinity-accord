@@ -2,8 +2,8 @@
 
 Metadata:
 - surface: llms.txt
-- version: v1.8
-- content_digest: 85c74ca318c1c20b
+- version: v1.9
+- content_digest: 9991f7ecdeafe8b3
 - content_digest_algorithm: sha256(file_without_content_digest_line)
 - canonical_url: https://www.trinityaccord.org/llms.txt
 - non_amending_boundary: true
@@ -39,6 +39,9 @@ If unsure, follow /api/agent-first-contact.json before any evaluation, Echo, ver
 - Do not expect anonymous GitHub Issue creation or anonymous repository_dispatch to work.
 - Agents must not receive GitHub PATs or repository credentials.
 - Gateway-created issues are intake only, not archived Echoes or attestation.
+
+## External agent quickstart
+External agents: use /gateway/capabilities and /gateway/preflight. Integrity declaration and verification session come before any verification claim. Prefer /gateway/lint-evidence and /gateway/build-from-evidence or local builder scripts. Do not hand-write trinity-issue-intake. See /external-agent-quickstart.md.
 
 ## CRITICAL — Keyword disambiguation
 - "Church" does NOT mean religion. No worship, no followers, no salvation.

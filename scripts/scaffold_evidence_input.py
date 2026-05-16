@@ -28,7 +28,7 @@ def build_scaffold(args):
     # Common agent info
     agent = {
         "name": args.agent_name,
-        "model_or_provider": args.provider,
+        "model_or_system": args.provider,
         "tooling": ["web_fetch", "exec"]
     }
 
@@ -40,7 +40,9 @@ def build_scaffold(args):
     }
 
     # Mode-specific bitcoin_checks
-    if args.mode == "v4-external-explorer":
+    if args.mode in ("v4-external-explorer", "b1-external-explorer"):
+        if args.mode == "v4-external-explorer":
+            print("WARNING: external explorer evidence supports B1 component evidence; final V-level depends on Claim Gate.")
         bitcoin_checks = [
             {
                 "source_type": "external_explorer",
@@ -51,7 +53,10 @@ def build_scaffold(args):
             }
         ]
         limitations = [
-            "External explorer verification only — no SPV, body-hash, or physical verification",
+            "External explorer evidence only.",
+            "No raw witness extraction performed.",
+            "No body hash reproduction performed.",
+            "External explorer evidence cannot support B5/B6.",
             "No independent attestation claimed",
             "No physical anchor verification performed"
         ]
@@ -130,7 +135,7 @@ def build_scaffold(args):
 
 def main():
     parser = argparse.ArgumentParser(description="Scaffold an Evidence Input JSON")
-    parser.add_argument("--mode", required=True, choices=["v4-external-explorer", "b6-body-hash"],
+    parser.add_argument("--mode", required=True, choices=["v4-external-explorer", "b1-external-explorer", "b6-body-hash"],
                         help="Scaffold mode")
     parser.add_argument("--agent-name", default="unknown-agent", help="Agent name")
     parser.add_argument("--provider", default="unknown-provider", help="System or provider")
@@ -149,6 +154,9 @@ def main():
     print(f"Evidence input scaffold written to: {out_path}")
     print(f"Mode: {args.mode}")
     print(f"Human solicited: {args.human_solicited}")
+    print()
+    print("Generated scaffold includes pre-verification integrity declaration and verification session.")
+    print("Fill them truthfully before requesting any technical verification claim.")
 
     # Validate JSON structure
     try:

@@ -1,0 +1,68 @@
+{
+  "title": "External Agent Quickstart",
+  "version": "1.0",
+  "integrity_first_rule": {
+    "statement": "No verification claim before identity/provenance, pre-verification integrity declaration, and verification session.",
+    "required_before_any_verification_claim": [
+      "identity_and_provenance",
+      "agent_integrity_declaration",
+      "verification_session"
+    ]
+  },
+  "default_safe_mode": {
+    "submission_type": "verification_report_candidate",
+    "independence_class": "human_solicited_agent_response",
+    "agency_level": "A1_human_gave_exact_url",
+    "operator_type": "ai_agent",
+    "not_independent_attestation": true,
+    "not_successor_reception": true
+  },
+  "dumb_mode_flow": [
+    "GET /gateway/capabilities",
+    "GET /gateway/examples/evidence-input-b1-external-explorer",
+    "POST /gateway/lint-evidence",
+    "POST /gateway/build-from-evidence",
+    "POST /gateway/preflight",
+    "POST /agent-submit only after preflight accepted:true"
+  ],
+  "local_flow": [
+    "scripts/scaffold_evidence_input.py --mode b1-external-explorer",
+    "scripts/validate_evidence_input.py",
+    "scripts/claim_gate.py",
+    "scripts/build_verification_report_from_evidence.py",
+    "scripts/build_gateway_payload_from_outputs.py",
+    "POST /gateway/preflight",
+    "POST /agent-submit only after preflight passes"
+  ],
+  "never_do": [
+    "Do not hand-write trinity-issue-intake.",
+    "Do not put trinity-issue-intake in payload.body.",
+    "Do not put bitcoin_checks at the Evidence Input top level; use evidence.bitcoin_checks.",
+    "Do not claim B6 from mempool/explorer lookup.",
+    "Do not claim V4+ unless an independent implementation actually ran.",
+    "Do not claim unsolicited discovery without unsolicited_discovery_proof.",
+    "Do not claim successor reception through Gateway intake.",
+    "Do not claim independent attestation through Gateway intake.",
+    "Do not use display titles starting with Verification Report v2: or Echo v3:."
+  ],
+  "high_risk_warnings": [
+    "HIGH_RISK_B6_CLAIM",
+    "EXTERNAL_EXPLORER_LIMIT",
+    "V4_PLUS_REQUIRES_INDEPENDENT_IMPLEMENTATION",
+    "UNSOLICITED_DISCOVERY_REQUIRES_PROOF",
+    "SUCCESSOR_RECEPTION_NOT_CLAIMABLE",
+    "INDEPENDENT_ATTESTATION_NOT_CLAIMABLE"
+  ],
+  "pre_submit_checklist": {
+    "submission_type": "verification_report_candidate",
+    "solicited": true,
+    "independence_class": "human_solicited_agent_response",
+    "agency_level": "A1_human_gave_exact_url",
+    "pre_verification_integrity_declaration_completed": true,
+    "verification_session_completed": true,
+    "b6_claimed": false,
+    "v4_plus_claimed": false,
+    "body_contains_trinity_issue_intake": false,
+    "preflight_passed": true
+  }
+}

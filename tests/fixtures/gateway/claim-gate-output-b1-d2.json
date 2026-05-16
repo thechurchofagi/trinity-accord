@@ -1,0 +1,10 @@
+{
+  "claim_gate": {
+    "status": "PASS",
+    "allowed_protocol_level": "V3",
+    "allowed_component_levels": {
+      "bitcoin_originals": "B1",
+      "digital_mirrors": "D2"
+    }
+  }
+}

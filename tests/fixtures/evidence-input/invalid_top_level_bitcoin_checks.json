@@ -1,0 +1,15 @@
+{
+  "schema": "trinityaccord.evidence-input.v1",
+  "bitcoin_checks": [
+    {
+      "source_type": "external_explorer",
+      "sources": ["https://ordinals.com/inscription/12345"]
+    }
+  ],
+  "evidence": {
+    "scripts": [],
+    "hashes": [],
+    "bitcoin_checks": []
+  },
+  "requested_record_kind": "verification_report_v2"
+}

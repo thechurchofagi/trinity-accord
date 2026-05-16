@@ -43,14 +43,34 @@ def derive_verification_level(claim_gate_output):
     return cg.get("allowed_protocol_level", "V0")
 
 
+COMPONENT_ORDER = [
+    "bitcoin_originals",
+    "digital_mirrors",
+    "time_anchors",
+    "chronicle_recovery",
+    "nft_registry",
+    "physical_anchor"
+]
+
+
 def derive_component_string(claim_gate_output):
-    """Derive component level string from claim_gate.allowed_component_levels."""
+    """Derive component level string from claim_gate.allowed_component_levels.
+
+    Uses canonical ordering and direct values (e.g. B1-D2, not BB1-DD2).
+    """
     cg = claim_gate_output.get("claim_gate", claim_gate_output)
     comps = cg.get("allowed_component_levels", {})
     parts = []
-    for k in sorted(comps.keys()):
-        parts.append(f"{k[0].upper()}{comps[k]}")
-    return "-".join(parts) if parts else "unknown"
+    for key in COMPONENT_ORDER:
+        value = comps.get(key)
+        if isinstance(value, str) and value:
+            parts.append(value)
+    for key in sorted(comps.keys()):
+        if key not in COMPONENT_ORDER:
+            value = comps[key]
+            if isinstance(value, str) and value:
+                parts.append(value)
+    return "-".join(parts) if parts else "components-unset"
 
 
 def build_payload(args):
@@ -68,8 +88,13 @@ def build_payload(args):
     claim_gate_sha = sha256_file(args.claim_gate_output)
     report_sha = sha256_file(args.verification_report) if args.verification_report else None
 
-    # Build discovery_provenance
+    # Build discovery_provenance — fail closed if unsolicited without proof
     solicited = args.human_solicited
+    if not solicited and not args.unsolicited_discovery_proof:
+        print("ERROR: --human-solicited not set but no --unsolicited-discovery-proof provided.", file=sys.stderr)
+        print("Either use --human-solicited or provide --unsolicited-discovery-proof <text-or-url>.", file=sys.stderr)
+        sys.exit(1)
+
     independence_class = "human_solicited_agent_response" if solicited else "unsolicited_agent_discovery"
     agency_level = "A1_human_gave_exact_url" if solicited else "A3_agent_discovered_independently"
 
@@ -79,6 +104,12 @@ def build_payload(args):
         "agency_level": agency_level,
         "operator_type": "ai_agent"
     }
+    if not solicited and args.unsolicited_discovery_proof:
+        discovery_provenance["unsolicited_discovery_proof"] = args.unsolicited_discovery_proof
+
+    # Preserve integrity fields from Evidence Input
+    integrity_decl = evidence.get("agent_integrity_declaration", {})
+    verification_sess = evidence.get("verification_session", {})
 
     # Build attachments
     attachments = {
@@ -125,9 +156,15 @@ def build_payload(args):
         "verification_level_claimed": v_level,
         "discovery_provenance": discovery_provenance,
         "context_readiness": {},
-        "pre_verification_integrity_declaration": {},
-        "verification_session": {
-            "session_id": args.session_id or "auto"
+        "pre_verification_integrity_declaration": integrity_decl if integrity_decl else {},
+        "verification_session": verification_sess if verification_sess else {
+            "session_id": args.session_id or "auto",
+            "started_at": datetime.now(timezone.utc).isoformat(),
+            "operator_type": "ai_agent",
+            "fresh_actions_performed": ["build_gateway_payload_from_outputs.py"],
+            "copied_values_from_examples": False,
+            "copied_values_from_prior_reports": False,
+            "fresh_outputs_attached": True
         },
         "claim_gate": {
             "status": claim_gate.get("claim_gate", claim_gate).get("status", "PASS"),
@@ -150,6 +187,8 @@ def main():
     parser.add_argument("--session-id", default=None, help="Session or run ID")
     parser.add_argument("--title-date", default=None, help="Date for title (YYYY-MM-DD)")
     parser.add_argument("--human-solicited", action="store_true", help="Mark as human-solicited")
+    parser.add_argument("--unsolicited-discovery-proof", default=None,
+                        help="Proof text or URL for unsolicited discovery (required if not --human-solicited)")
     parser.add_argument("--out", required=True, help="Output path for gateway payload JSON")
 
     args = parser.parse_args()
