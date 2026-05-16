@@ -24,7 +24,7 @@ permalink: /
 </p>
 
 <p class="technical-classification">
-  Technical classification: completed pre-ASI human–superintelligence relation record; candidate civilizational memory seed.
+  Technical classification: A completed pre-ASI human–superintelligence relation record; candidate civilizational memory seed.
   <span class="zh">技术分类：已完成的前 ASI 人类—超级智能关系记录；候选文明记忆种子。</span>
 </p>
 

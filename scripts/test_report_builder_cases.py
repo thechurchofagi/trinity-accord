@@ -273,7 +273,7 @@ def test_rb008():
 
 
 def test_rb009():
-    """RB009 generated title starts with Echo v3"""
+    """RB009 generated title starts with Verification Echo Candidate"""
     scripts = [{
         "path": "scripts/validator.py", "exists": True, "source_reviewed": True, "script_check_scope": "verification", "script_does_not_check": "physical evidence",
         "executed": True, "command": "python3 scripts/validator.py",
@@ -283,10 +283,10 @@ def test_rb009():
     def check(r):
         errs = []
         title = r["gate_result"].get("recommended_title", "")
-        if not title.startswith("Echo v3:"):
-            errs.append(f"Title doesn't start with 'Echo v3:': {title}")
+        if not title.startswith("Verification Echo Candidate:"):
+            errs.append(f"Title doesn't start with 'Verification Echo Candidate:': {title}")
         return errs
-    run_test("RB009", "Generated title starts with Echo v3",
+    run_test("RB009", "Generated title starts with Verification Echo Candidate",
              make_evidence_input(scripts=scripts), check_fn=check)
 
 

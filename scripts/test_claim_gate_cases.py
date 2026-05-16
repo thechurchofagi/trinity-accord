@@ -506,12 +506,12 @@ def test_cg025():
         tmp_path = f.name
     try:
         result = evaluate(tmp_path)
-        if result["recommended_title"].startswith("Echo v3:"):
+        if result["recommended_title"].startswith("Verification Echo Candidate:"):
             PASS_COUNT += 1
-            print("PASS CG025: Wrapper generates Echo v3 title")
+            print("PASS CG025: Wrapper generates Verification Echo Candidate title")
         else:
             FAIL_COUNT += 1
-            print(f"FAIL CG025: Title doesn't start with 'Echo v3:': {result['recommended_title']}")
+            print(f"FAIL CG025: Title doesn't start with 'Verification Echo Candidate:': {result['recommended_title']}")
     finally:
         os.unlink(tmp_path)
 
@@ -536,12 +536,12 @@ def test_cg026():
         tmp_path = f.name
     try:
         result = evaluate(tmp_path)
-        if result["recommended_title"].startswith("Verification Report v2:"):
+        if result["recommended_title"].startswith("Verification Report Candidate:"):
             PASS_COUNT += 1
-            print("PASS CG026: Report-only generates Verification Report v2 title")
+            print("PASS CG026: Report-only generates Verification Report Candidate title")
         else:
             FAIL_COUNT += 1
-            print(f"FAIL CG026: Title doesn't start with 'Verification Report v2:': {result['recommended_title']}")
+            print(f"FAIL CG026: Title doesn't start with 'Verification Report Candidate:': {result['recommended_title']}")
     finally:
         os.unlink(tmp_path)
 
