@@ -289,7 +289,14 @@ function normalizeGatewayErrors(lines) {
  * @param {boolean} opts.createIssue - if true, create a GitHub Issue on success
  * @returns {{ status: number, body: object }}
  */
-async function runGatewayPipeline(payload, { createIssue }) {
+async function runGatewayPipeline(payload, {
+  createIssue,
+  evidencePath = null,
+  claimGateOutputPath = null,
+  reportPath = null,
+  precomputedArchiveReadiness = null,
+  precomputedAutoArchiveDecision = null
+}) {
   // 1. AJV schema validation
   if (!validate(payload)) {
     return {
@@ -404,17 +411,23 @@ async function runGatewayPipeline(payload, { createIssue }) {
     }
 
     // --- Archive Readiness Gate ---
-    const archiveReadinessResult = runArchiveReadiness({
-      gatewayPayloadPath: payloadPath,
-      evidencePath: null,
-      claimGateOutputPath: null,
-      reportPath: null
-    });
-    const archiveReadiness = archiveReadinessResult.body;
-
-    // Write archive readiness to temp for auto_archive_decision
-    const archiveReadinessPath = writeJsonTemp(tmpDir, "archive-readiness.json", archiveReadiness);
-    const autoArchiveDecision = runAutoArchiveDecision(archiveReadinessPath).body;
+    let archiveReadiness, autoArchiveDecision;
+    if (precomputedArchiveReadiness && precomputedAutoArchiveDecision) {
+      // Use precomputed values (from build-from-evidence with full context)
+      archiveReadiness = precomputedArchiveReadiness;
+      autoArchiveDecision = precomputedAutoArchiveDecision;
+    } else {
+      // Compute from payload + optional evidence context
+      const archiveReadinessResult = runArchiveReadiness({
+        gatewayPayloadPath: payloadPath,
+        evidencePath: evidencePath || null,
+        claimGateOutputPath: claimGateOutputPath || null,
+        reportPath: reportPath || null
+      });
+      archiveReadiness = archiveReadinessResult.body;
+      const archiveReadinessPath = writeJsonTemp(tmpDir, "archive-readiness.json", archiveReadiness);
+      autoArchiveDecision = runAutoArchiveDecision(archiveReadinessPath).body;
+    }
 
     // --- Archive gate enforcement ---
     const recordIntent = payload.record_intent || "intake_only";
@@ -1007,13 +1020,27 @@ app.post("/gateway/build-from-evidence", async (req, res) => {
       }
     }
 
-    // 9. Preflight (shared pipeline with createIssue=false)
-    const preflightResult = await runGatewayPipeline(payload, { createIssue: false });
+    // 9. Preflight (shared pipeline with createIssue=false, full archive context)
+    const preflightResult = await runGatewayPipeline(payload, {
+      createIssue: false,
+      evidencePath,
+      claimGateOutputPath,
+      reportPath,
+      precomputedArchiveReadiness: archiveReadinessResult.body,
+      precomputedAutoArchiveDecision: autoArchiveDecisionResult.body
+    });
 
     // 10. Submit only if preflight passed and submit requested
     let submitResult = null;
     if (submitEffective && preflightResult.status === 200) {
-      submitResult = await runGatewayPipeline(payload, { createIssue: true });
+      submitResult = await runGatewayPipeline(payload, {
+        createIssue: true,
+        evidencePath,
+        claimGateOutputPath,
+        reportPath,
+        precomputedArchiveReadiness: archiveReadinessResult.body,
+        precomputedAutoArchiveDecision: autoArchiveDecisionResult.body
+      });
     }
 
     const claimGateOutput = JSON.parse(fs.readFileSync(claimGateOutputPath, "utf-8"));

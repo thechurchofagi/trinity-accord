@@ -202,6 +202,25 @@ def test_b6_explorer():
     )
 
 
+def test_b6_no_evidence():
+    print("Test 13b: B6 without evidence blocked")
+    code, out = run_gate("external_explorer_b6_no_evidence.json")
+    assert_eq(code, 1, "exit code")
+    assert_eq(out.get("archive_ready"), False, "archive_ready")
+    blocking_codes = [br.get("code") for br in out.get("blocking_reasons", [])]
+    assert_in("B6_BODY_HASH_EVIDENCE_REQUIRED", blocking_codes, "blocking reason")
+
+
+def test_v4_missing_environment():
+    print("Test 11b: V4 archive script missing environment field")
+    code, out = run_gate("v4_archive_missing_environment.json",
+                         evidence_name="evidence_v4_missing_env.json")
+    assert_eq(code, 1, "exit code")
+    assert_eq(out.get("archive_ready"), False, "archive_ready")
+    blocking_codes = [br.get("code") for br in out.get("blocking_reasons", [])]
+    assert_in("V4_REQUIRED_SCRIPT_SET_INCOMPLETE", blocking_codes, "blocking reason")
+
+
 def test_decision_no_human_review():
     print("Test 14: auto_archive_decision never returns needs-human-review")
     # Run auto_archive_decision on a ready fixture
@@ -268,6 +287,8 @@ def main():
     test_v4_missing_scripts()
     test_v4plus_official_only()
     test_b6_explorer()
+    test_b6_no_evidence()
+    test_v4_missing_environment()
     test_decision_no_human_review()
     test_decision_labels()
 

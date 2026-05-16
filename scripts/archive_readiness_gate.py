@@ -154,8 +154,8 @@ def has_v4_script_completeness(evidence, policy):
             return False
 
     # Check all script entries have required audit fields
-    required_fields = ["command", "exit_code", "stdout_summary", "source_reviewed",
-                       "script_check_scope", "script_does_not_check"]
+    required_fields = ["command", "environment", "exit_code", "stdout_summary",
+                       "source_reviewed", "script_check_scope", "script_does_not_check"]
     for path_key, entry in run_map.items():
         for field in required_fields:
             if field not in entry or entry[field] is None:
@@ -525,7 +525,14 @@ def evaluate_archive_readiness(payload, evidence=None, claim_gate_output=None,
 
         # B6 from external explorer must be hard-blocked
         if level_at_least(B_LEVELS, b_level, "B6"):
-            if evidence:
+            if not evidence:
+                blocking_reasons.append({
+                    "code": "B6_BODY_HASH_EVIDENCE_REQUIRED",
+                    "path": "evidence",
+                    "message": "B6+ archive requires evidence input with body_hash verification.",
+                    "fix": "Provide --evidence-input with bitcoin_checks containing source_type=body_hash and body_hash_reproduced=true."
+                })
+            else:
                 bc = evidence.get("bitcoin_checks") or evidence.get("evidence", {}).get("bitcoin_checks", [])
                 has_external_explorer = isinstance(bc, list) and any(
                     isinstance(c, dict) and c.get("source_type") == "external_explorer" for c in bc

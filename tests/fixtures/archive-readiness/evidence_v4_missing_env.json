@@ -1,0 +1,39 @@
+{
+  "schema": "trinityaccord.evidence-input.v1",
+  "agent_integrity_declaration": {
+    "declaration_text": "Fresh.",
+    "declared_at": "2026-05-16T00:00:00Z"
+  },
+  "verification_session": {
+    "session_id": "test-missing-env",
+    "started_at": "2026-05-16T00:00:00Z",
+    "fresh_actions_performed": ["claim_gate"],
+    "fresh_outputs_attached": true
+  },
+  "evidence": {
+    "bitcoin_checks": [
+      { "source_type": "external_explorer", "txid": "abc123", "valid_hash": true }
+    ]
+  },
+  "scripts_run": [
+    {
+      "path": "downloads/verify.py",
+      "command": "python3 downloads/verify.py",
+      "exit_code": 0,
+      "stdout_summary": "OK",
+      "source_reviewed": true,
+      "script_check_scope": "full",
+      "script_does_not_check": "physical"
+    },
+    {
+      "path": "scripts/check_consistency.py",
+      "command": "python3 scripts/check_consistency.py",
+      "exit_code": 0,
+      "stdout_summary": "OK",
+      "source_reviewed": true,
+      "script_check_scope": "consistency",
+      "script_does_not_check": "external"
+    }
+  ],
+  "claims_requested_by_agent": ["V4", "B1", "D2"]
+}
