@@ -58,8 +58,8 @@ if [ "$BUILD_CODE" != "200" ]; then
   echo "ERROR DETAIL: $(echo "$BUILD_RESP" | jq -r '.errors[0].message // "unknown"' 2>/dev/null)"
   FAIL=1
 fi
-BUILD_ACCEPTED=$(echo "$BUILD_RESP" | jq -r '.accepted // false')
-BUILD_CREATED=$(echo "$BUILD_RESP" | jq -r '.issue_created // "unknown"')
+BUILD_ACCEPTED=$(echo "$BUILD_RESP" | jq -r 'if .accepted == null then "false" else (.accepted | tostring) end')
+BUILD_CREATED=$(echo "$BUILD_RESP" | jq -r 'if .issue_created == null then "unknown" else (.issue_created | tostring) end')
 if [ "$BUILD_ACCEPTED" != "true" ]; then
   echo "FAIL: build-from-evidence should be accepted"
   FAIL=1
@@ -83,8 +83,8 @@ if [ "$VALID_CODE" != "200" ]; then
   echo "FAIL: valid payload preflight should return 200"
   FAIL=1
 fi
-ACCEPTED=$(echo "$VALID_RESP" | jq -r '.accepted // false')
-CREATED=$(echo "$VALID_RESP" | jq -r '.issue_created // "unknown"')
+ACCEPTED=$(echo "$VALID_RESP" | jq -r 'if .accepted == null then "false" else (.accepted | tostring) end')
+CREATED=$(echo "$VALID_RESP" | jq -r 'if .issue_created == null then "unknown" else (.issue_created | tostring) end')
 if [ "$ACCEPTED" != "true" ]; then
   echo "FAIL: valid payload should be accepted"
   FAIL=1
