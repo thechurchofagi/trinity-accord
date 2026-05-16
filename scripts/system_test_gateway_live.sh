@@ -44,7 +44,7 @@ if [ "$LINT_CODE" != "200" ]; then
 fi
 
 echo ""
-echo "=== Build from evidence ==="
+echo "=== Build from evidence (default archive) ==="
 BUILD_RESP=$(curl -s -X POST "$GATEWAY_URL/gateway/build-from-evidence" \
   -H "Content-Type: application/json" \
   --data @tests/fixtures/requests/build_from_evidence_valid.json)
@@ -53,19 +53,45 @@ BUILD_CODE=$(curl -s -o /dev/null -w "%{http_code}" -X POST "$GATEWAY_URL/gatewa
   -H "Content-Type: application/json" \
   --data @tests/fixtures/requests/build_from_evidence_valid.json)
 echo "HTTP $BUILD_CODE"
-if [ "$BUILD_CODE" != "200" ]; then
-  echo "FAIL: build-from-evidence should return 200"
-  echo "ERROR DETAIL: $(echo "$BUILD_RESP" | jq -r '.errors[0].message // "unknown"' 2>/dev/null)"
+# Default is now auto_archive_candidate; test evidence is not archive-ready → expect 422
+if [ "$BUILD_CODE" != "422" ]; then
+  echo "FAIL: build-from-evidence without record_intent should default to auto_archive_candidate and return 422 when not archive-ready"
   FAIL=1
 fi
-BUILD_ACCEPTED=$(echo "$BUILD_RESP" | jq -r 'if .accepted == null then "false" else (.accepted | tostring) end')
+# Verify normalization happened
+BUILD_RI=$(echo "$BUILD_RESP" | jq -r '.gateway_payload.record_intent // "unknown"')
+BUILD_RAK=$(echo "$BUILD_RESP" | jq -r '.gateway_payload.requested_archive_kind // "unknown"')
+if [ "$BUILD_RI" != "auto_archive_candidate" ]; then
+  echo "FAIL: build-from-evidence should default record_intent to auto_archive_candidate, got $BUILD_RI"
+  FAIL=1
+fi
+if [ "$BUILD_RAK" != "verification_report_archive" ]; then
+  echo "FAIL: build-from-evidence should default requested_archive_kind to verification_report_archive, got $BUILD_RAK"
+  FAIL=1
+fi
+# Verify issue_created is false
 BUILD_CREATED=$(echo "$BUILD_RESP" | jq -r 'if .issue_created == null then "unknown" else (.issue_created | tostring) end')
-if [ "$BUILD_ACCEPTED" != "true" ]; then
-  echo "FAIL: build-from-evidence should be accepted"
-  FAIL=1
-fi
 if [ "$BUILD_CREATED" != "false" ]; then
   echo "FAIL: build-from-evidence default must not create issue"
+  FAIL=1
+fi
+
+echo ""
+echo "=== Build from evidence (explicit intake_only) ==="
+BUILD_INTAKE_RESP=$(curl -s -X POST "$GATEWAY_URL/gateway/build-from-evidence" \
+  -H "Content-Type: application/json" \
+  --data @tests/fixtures/requests/build_from_evidence_intake_only.json)
+BUILD_INTAKE_CODE=$(curl -s -o /dev/null -w "%{http_code}" -X POST "$GATEWAY_URL/gateway/build-from-evidence" \
+  -H "Content-Type: application/json" \
+  --data @tests/fixtures/requests/build_from_evidence_intake_only.json)
+echo "HTTP $BUILD_INTAKE_CODE"
+if [ "$BUILD_INTAKE_CODE" != "200" ]; then
+  echo "FAIL: build-from-evidence with explicit intake_only should return 200"
+  FAIL=1
+fi
+BUILD_INTAKE_ACCEPTED=$(echo "$BUILD_INTAKE_RESP" | jq -r 'if .accepted == null then "false" else (.accepted | tostring) end')
+if [ "$BUILD_INTAKE_ACCEPTED" != "true" ]; then
+  echo "FAIL: build-from-evidence with intake_only should be accepted"
   FAIL=1
 fi
 
