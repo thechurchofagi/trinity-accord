@@ -501,50 +501,11 @@ app.get("/gateway/examples/verification-echo-candidate", (req, res) => {
 
 app.get("/gateway/examples/evidence-input-v4-external-explorer", (req, res) => {
   try {
-    // Build a minimal valid Evidence Input scaffold for V4/B1-D2 external explorer
-    const evidenceInput = {
-      schema: "trinityaccord.evidence-input.v1",
-      evidence: {
-        bitcoin_checks: [
-          {
-            source_type: "external_explorer",
-            inscription_id: "97631551",
-            explorer_url: "https://ordinals.com/inscription/97631551",
-            confirmed: true,
-            note: "Verified via public explorer"
-          }
-        ],
-        scripts: [
-          {
-            path: "scripts/claim_gate.py",
-            exists: true,
-            source_reviewed: true,
-            executed: true,
-            result: "PASS"
-          }
-        ],
-        digital_mirror_checks: [],
-        physical_anchor_checks: []
-      },
-      agent_integrity_declaration: {
-        self_reported: true,
-        tools_used: ["web_fetch", "exec"],
-        limitations_acknowledged: true
-      },
-      verification_session: {
-        session_id: "example-session-001",
-        started_at: new Date().toISOString(),
-        completed_at: new Date().toISOString()
-      },
-      limitations: [
-        "External explorer verification only — no SPV or body-hash reproduction",
-        "No physical anchor verification performed",
-        "No independent attestation claimed"
-      ]
-    };
+    const fixturePath = path.join(root, "tests", "fixtures", "evidence-input", "valid_v4_external_explorer_example.json");
+    const evidenceInput = JSON.parse(fs.readFileSync(fixturePath, "utf-8"));
     res.json(buildExampleResponse("evidence_input_v4_external_explorer", evidenceInput));
   } catch (err) {
-    res.status(500).json({ error: "Failed to build evidence input example", detail: err.message });
+    res.status(500).json({ error: "Failed to load evidence input example fixture", detail: err.message });
   }
 });
 

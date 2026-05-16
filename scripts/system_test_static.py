@@ -156,6 +156,12 @@ def main():
     require("examples/github-app-backend/server.js", "/gateway/examples/evidence-input-v4-external-explorer")
     require("examples/github-app-backend/server.js", "normalizeGatewayErrors")
 
+    # Evidence input example fixture must exist and be schema-valid
+    require("tests/fixtures/evidence-input/valid_v4_external_explorer_example.json", "\"schema\": \"trinityaccord.evidence-input.v1\"")
+    require("tests/fixtures/evidence-input/valid_v4_external_explorer_example.json", "\"agent_integrity_declaration\"")
+    require("tests/fixtures/evidence-input/valid_v4_external_explorer_example.json", "\"verification_session\"")
+    require("tests/fixtures/evidence-input/valid_v4_external_explorer_example.json", "\"bitcoin_checks\"")
+
     # Task #6: discovery_provenance explicit schema
     require("api/agent-issue-gateway-payload-schema.v1.json", "\"unsolicited_discovery_proof\"")
     require("api/agent-issue-gateway-payload-schema.v1.json", "\"solicited\"")

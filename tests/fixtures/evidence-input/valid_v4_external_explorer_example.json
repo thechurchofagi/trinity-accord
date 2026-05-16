@@ -1,0 +1,153 @@
+{
+  "schema": "trinityaccord.evidence-input.v1",
+  "agent": {
+    "name": "Trinity Accord Gateway Example Agent",
+    "model_or_system": "OpenClaw / MiMo v2.5 Pro",
+    "tooling": ["web_fetch", "exec", "mimo_web_search"]
+  },
+  "provenance": {
+    "solicited": true,
+    "independence_class": "human_solicited_agent_response",
+    "agency_level": "A1_human_gave_exact_url"
+  },
+  "requested_record_kind": "verification_report_v2",
+  "evidence": {
+    "scripts": [
+      {
+        "path": "scripts/claim_gate.py",
+        "exists": true,
+        "source_reviewed": true,
+        "executed": true,
+        "result": "PASS",
+        "command": "python3 scripts/claim_gate.py evidence-input.json",
+        "environment": {
+          "os": "Linux",
+          "python": "3.x",
+          "cwd": "/root/.openclaw/workspace/trinity-accord"
+        },
+        "exit_code": 0,
+        "stdout_summary": "PASS — allowed_protocol_level=V4, bitcoin_originals=B1",
+        "stderr_summary": "",
+        "blocking": false,
+        "official": true,
+        "independent": false,
+        "language": "python",
+        "purpose": "Derive allowed verification and component levels from structured evidence"
+      },
+      {
+        "path": "scripts/render_gateway_issue_body.py",
+        "exists": true,
+        "source_reviewed": true,
+        "executed": true,
+        "result": "PASS",
+        "command": "python3 scripts/render_gateway_issue_body.py payload.json",
+        "environment": {
+          "os": "Linux",
+          "python": "3.x",
+          "cwd": "/root/.openclaw/workspace/trinity-accord"
+        },
+        "exit_code": 0,
+        "stdout_summary": "Rendered trinity-issue-intake block with correct fields",
+        "stderr_summary": "",
+        "blocking": false,
+        "official": true,
+        "independent": false,
+        "language": "python",
+        "purpose": "Render canonical GitHub Issue body from validated Gateway payload"
+      }
+    ],
+    "hashes": [
+      {
+        "artifact": "api/agent-issue-gateway-payload-schema.v1.json",
+        "artifact_class": "repository_snapshot",
+        "algorithm": "sha256",
+        "expected": "bed9ae78a5f14478627771b6f19ca7a470dd497d9432b21bcea6a05827ee4b2f",
+        "computed": "bed9ae78a5f14478627771b6f19ca7a470dd497d9432b21bcea6a05827ee4b2f",
+        "expected_hash_source": "computed at verification time",
+        "expected_hash_authority_class": "repository_manifest_hash",
+        "scope_class": "repository_snapshot_integrity",
+        "match": true
+      }
+    ],
+    "bitcoin_checks": [
+      {
+        "source_type": "external_explorer",
+        "sources": [
+          "https://ordinals.com/inscription/97631551",
+          "https://ordinals.com/inscription/98369145",
+          "https://ordinals.com/inscription/98387475"
+        ],
+        "inscription_ids_checked": ["97631551", "98369145", "98387475"],
+        "authority_address_checked": true,
+        "method": "public_ordinals_explorer_lookup",
+        "raw_witness_extracted": false,
+        "body_hash_reproduced": false,
+        "authority_boundary_recognized": true
+      }
+    ],
+    "digital_mirror_checks": [
+      {
+        "mirror_url": "https://www.trinityaccord.org",
+        "canonical_url_match": true,
+        "non_amending_boundary_stated": true,
+        "note": "Website is a non-amending access and verification mirror"
+      }
+    ],
+    "repository_snapshot_checks": [
+      {
+        "repo": "thechurchofagi/trinity-accord",
+        "commit": "HEAD",
+        "branch": "main",
+        "scripts_present": true,
+        "schemas_present": true,
+        "scope_class": "repository_snapshot_integrity",
+        "note": "Repository contains all required scripts and schemas"
+      }
+    ],
+    "time_anchor_checks": [],
+    "chronicle_checks": [],
+    "nft_checks": [],
+    "physical_checks": [],
+    "echo_context": {
+      "echo_type": "none_for_this_example",
+      "note": "This is an evidence input example, not an echo submission"
+    }
+  },
+  "agent_integrity_declaration": {
+    "performed_actions_myself": true,
+    "did_not_copy_prior_report_as_own_work": true,
+    "did_not_copy_example_values_as_real_evidence": true,
+    "recorded_fresh_sources_commands_outputs": true,
+    "will_report_limitations_and_downgrade_if_needed": true,
+    "understands_verification_is_not_truth_or_endorsement": true,
+    "understands_bitcoin_originals_remain_final_authority": true,
+    "independence_claim_is_accurate": true,
+    "declaration_text": "I declare that I performed all checks myself using fresh tool calls. I did not copy example values or prior reports as real evidence. I recorded fresh command outputs. I will report limitations and accept downgrades. I understand verification is not truth or endorsement, and that Bitcoin Originals remain final authority. My independence and provenance claims are accurate."
+  },
+  "verification_session": {
+    "session_id": "example-v4-external-explorer-001",
+    "started_at": "2026-05-16T00:00:00Z",
+    "operator_type": "ai_agent",
+    "fresh_actions_performed": [
+      "Fetched ordinals.com for inscription 97631551",
+      "Fetched ordinals.com for inscription 98369145",
+      "Fetched ordinals.com for inscription 98387475",
+      "Read repository scripts and schemas",
+      "Ran claim_gate.py on this evidence input"
+    ],
+    "copied_values_from_examples": false,
+    "copied_values_from_prior_reports": false,
+    "fresh_outputs_attached": true
+  },
+  "limitations": [
+    "External explorer verification only — no SPV, body-hash, or local node verification",
+    "No physical anchor verification performed",
+    "No independent third-party attestation claimed",
+    "Bitcoin inscription content verified via public explorer, not raw witness extraction",
+    "This is an example scaffold for agent reference — replace with real evidence before submission"
+  ],
+  "claims_requested_by_agent": [
+    "bitcoin_originals_B1",
+    "digital_mirrors_D2"
+  ]
+}
