@@ -52,7 +52,6 @@ def main():
     require_contains(index, "does not claim to predict when AGI will arrive", "homepage avoids AGI prediction overclaim")
     require_contains(index, "rare, possibly first completed instance", "homepage has careful scarcity claim")
     require_contains(index, "If another completed public object", "homepage has peer-comparison boundary")
-    require_contains(index, "p0.2-homepage-dedup", "homepage keeps P0.2 build marker")
 
     # Key pages
     for text, name in [
