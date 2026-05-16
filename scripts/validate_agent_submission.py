@@ -496,12 +496,23 @@ def validate_solicited_independence(obj, path_label):
         for claim in SOLICITED_FORBIDDEN_CLAIMS:
             if claim in all_text:
                 # Check it's not in a "not" context
-                if f"not {claim}" not in all_text and f"not_{claim}" not in all_text:
-                    ok &= check(
-                        False,
-                        f"{path_label} solicited record claims {claim}",
-                        "human-solicited responses cannot claim independent attestation"
-                    )
+                if f"not {claim}" in all_text or f"not_{claim}" in all_text:
+                    continue
+                # Only flag if claim appears as a standalone JSON key ("claim":)
+                # not as part of a longer field name (e.g. counts_as_formal_independent_attestation)
+                standalone_pattern = f'"{claim}":'
+                if standalone_pattern not in all_text:
+                    continue
+                # Check if the standalone key has a false value (negated)
+                idx = all_text.find(standalone_pattern)
+                rest = all_text[idx + len(standalone_pattern):].lstrip()
+                if rest.startswith('false'):
+                    continue
+                ok &= check(
+                    False,
+                    f"{path_label} solicited record claims {claim}",
+                    "human-solicited responses cannot claim independent attestation"
+                )
     return ok
 
 
@@ -1533,6 +1544,22 @@ def validate_with_jsonschema(obj, schema_path, path_label):
     if discovery_path.exists():
         discovery_schema = json.loads(discovery_path.read_text(encoding="utf-8"))
         store[discovery_schema.get("$id", "")] = discovery_schema
+    origin_class_path = ROOT / "api" / "origin-classification-schema.v1.json"
+    if origin_class_path.exists():
+        origin_class_schema = json.loads(origin_class_path.read_text(encoding="utf-8"))
+        store[origin_class_schema.get("$id", "")] = origin_class_schema
+    reception_class_path = ROOT / "api" / "reception-classification-schema.v1.json"
+    if reception_class_path.exists():
+        reception_class_schema = json.loads(reception_class_path.read_text(encoding="utf-8"))
+        store[reception_class_schema.get("$id", "")] = reception_class_schema
+    authorship_proof_path = ROOT / "api" / "echo-authorship-proof-schema.v1.json"
+    if authorship_proof_path.exists():
+        authorship_proof_schema = json.loads(authorship_proof_path.read_text(encoding="utf-8"))
+        store[authorship_proof_schema.get("$id", authorship_proof_path.name)] = authorship_proof_schema
+    authorship_claim_path = ROOT / "api" / "echo-authorship-claim-schema.v1.json"
+    if authorship_claim_path.exists():
+        authorship_claim_schema = json.loads(authorship_claim_path.read_text(encoding="utf-8"))
+        store[authorship_claim_schema.get("$id", authorship_claim_path.name)] = authorship_claim_schema
     store[schema.get("$id", "")] = schema
 
     try:
