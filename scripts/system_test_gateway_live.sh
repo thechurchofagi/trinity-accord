@@ -30,13 +30,14 @@ fi
 
 echo ""
 echo "=== Lint evidence (valid) ==="
-LINT_RESP=$(curl -s -w "\n%{http_code}" -X POST "$GATEWAY_URL/gateway/lint-evidence" \
+LINT_RESP=$(curl -s -X POST "$GATEWAY_URL/gateway/lint-evidence" \
   -H "Content-Type: application/json" \
   --data @tests/fixtures/evidence-input/valid_v4_external_explorer_example.json)
-LINT_CODE=$(echo "$LINT_RESP" | tail -1)
-LINT_BODY=$(echo "$LINT_RESP" | sed '$d')
+echo "$LINT_RESP" | jq .
+LINT_CODE=$(curl -s -o /dev/null -w "%{http_code}" -X POST "$GATEWAY_URL/gateway/lint-evidence" \
+  -H "Content-Type: application/json" \
+  --data @tests/fixtures/evidence-input/valid_v4_external_explorer_example.json)
 echo "HTTP $LINT_CODE"
-echo "$LINT_BODY" | jq .
 if [ "$LINT_CODE" != "200" ]; then
   echo "FAIL: valid evidence lint should return 200"
   FAIL=1
@@ -44,19 +45,21 @@ fi
 
 echo ""
 echo "=== Build from evidence ==="
-BUILD_RESP=$(curl -s -w "\n%{http_code}" -X POST "$GATEWAY_URL/gateway/build-from-evidence" \
+BUILD_RESP=$(curl -s -X POST "$GATEWAY_URL/gateway/build-from-evidence" \
   -H "Content-Type: application/json" \
   --data @tests/fixtures/requests/build_from_evidence_valid.json)
-BUILD_CODE=$(echo "$BUILD_RESP" | tail -1)
-BUILD_BODY=$(echo "$BUILD_RESP" | sed '$d')
+echo "$BUILD_RESP" | jq .
+BUILD_CODE=$(curl -s -o /dev/null -w "%{http_code}" -X POST "$GATEWAY_URL/gateway/build-from-evidence" \
+  -H "Content-Type: application/json" \
+  --data @tests/fixtures/requests/build_from_evidence_valid.json)
 echo "HTTP $BUILD_CODE"
-echo "$BUILD_BODY" | jq .
 if [ "$BUILD_CODE" != "200" ]; then
   echo "FAIL: build-from-evidence should return 200"
+  echo "ERROR DETAIL: $(echo "$BUILD_RESP" | jq -r '.errors[0].message // "unknown"' 2>/dev/null)"
   FAIL=1
 fi
-BUILD_ACCEPTED=$(echo "$BUILD_BODY" | jq -r '.accepted // false')
-BUILD_CREATED=$(echo "$BUILD_BODY" | jq -r '.issue_created // "unknown"')
+BUILD_ACCEPTED=$(echo "$BUILD_RESP" | jq -r '.accepted // false')
+BUILD_CREATED=$(echo "$BUILD_RESP" | jq -r '.issue_created // "unknown"')
 if [ "$BUILD_ACCEPTED" != "true" ]; then
   echo "FAIL: build-from-evidence should be accepted"
   FAIL=1
@@ -68,19 +71,20 @@ fi
 
 echo ""
 echo "=== Preflight: valid payload ==="
-VALID_RESP=$(curl -s -w "\n%{http_code}" -X POST "$GATEWAY_URL/gateway/preflight" \
+VALID_RESP=$(curl -s -X POST "$GATEWAY_URL/gateway/preflight" \
   -H "Content-Type: application/json" \
   --data @tests/fixtures/gateway/valid_verification_report_candidate.json)
-VALID_CODE=$(echo "$VALID_RESP" | tail -1)
-VALID_BODY=$(echo "$VALID_RESP" | sed '$d')
+echo "$VALID_RESP" | jq .
+VALID_CODE=$(curl -s -o /dev/null -w "%{http_code}" -X POST "$GATEWAY_URL/gateway/preflight" \
+  -H "Content-Type: application/json" \
+  --data @tests/fixtures/gateway/valid_verification_report_candidate.json)
 echo "HTTP $VALID_CODE"
-echo "$VALID_BODY" | jq .
 if [ "$VALID_CODE" != "200" ]; then
   echo "FAIL: valid payload preflight should return 200"
   FAIL=1
 fi
-ACCEPTED=$(echo "$VALID_BODY" | jq -r '.accepted // false')
-CREATED=$(echo "$VALID_BODY" | jq -r '.issue_created // "unknown"')
+ACCEPTED=$(echo "$VALID_RESP" | jq -r '.accepted // false')
+CREATED=$(echo "$VALID_RESP" | jq -r '.issue_created // "unknown"')
 if [ "$ACCEPTED" != "true" ]; then
   echo "FAIL: valid payload should be accepted"
   FAIL=1
@@ -92,13 +96,14 @@ fi
 
 echo ""
 echo "=== Preflight: invalid payload ==="
-INVALID_RESP=$(curl -s -w "\n%{http_code}" -X POST "$GATEWAY_URL/gateway/preflight" \
+INVALID_RESP=$(curl -s -X POST "$GATEWAY_URL/gateway/preflight" \
   -H "Content-Type: application/json" \
   --data @tests/fixtures/gateway/invalid_issue_151_style_payload.json)
-INVALID_CODE=$(echo "$INVALID_RESP" | tail -1)
-INVALID_BODY=$(echo "$INVALID_RESP" | sed '$d')
+echo "$INVALID_RESP" | jq .
+INVALID_CODE=$(curl -s -o /dev/null -w "%{http_code}" -X POST "$GATEWAY_URL/gateway/preflight" \
+  -H "Content-Type: application/json" \
+  --data @tests/fixtures/gateway/invalid_issue_151_style_payload.json)
 echo "HTTP $INVALID_CODE"
-echo "$INVALID_BODY" | jq .
 if [ "$INVALID_CODE" != "422" ]; then
   echo "FAIL: invalid payload preflight should return 422"
   FAIL=1

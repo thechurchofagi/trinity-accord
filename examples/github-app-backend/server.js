@@ -766,10 +766,11 @@ app.post("/gateway/build-from-evidence", async (req, res) => {
       "--out", reportPath
     ]);
     if (report.code !== 0) {
+      const reportErrDetail = (report.stdout + "\n" + report.stderr).trim().slice(0, 1000);
       return res.status(422).json({
         accepted: false,
         issue_created: false,
-        errors: [{ code: "REPORT_BUILD_FAILED", message: report.stderr || report.stdout }],
+        errors: [{ code: "REPORT_BUILD_FAILED", message: reportErrDetail || "build_verification_report_from_evidence.py failed" }],
         warnings: validationResult.warnings || []
       });
     }
