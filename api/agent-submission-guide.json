@@ -3,6 +3,37 @@
   "status": "non_authoritative_agent_guidance",
   "decision_tree": [
     {
+      "if": "I am V0, V1, V2, V3, V4, or V5. I want to submit a verification archive.",
+      "submit": "agent_declared_verification_archive",
+      "builder": "scripts/build_agent_declared_archive_payload.py",
+      "schema": "/api/agent-issue-gateway-payload-schema.v1.json",
+      "required": [
+        "agent_identity",
+        "agent_declared_protocol_level (V0-V5)",
+        "evidence_requirement_mode=waived_for_v0_v5",
+        "claim_gate.mode=template_for_v0_v5",
+        "agent_integrity_declaration with verification_oath",
+        "discovery_provenance",
+        "origin_classification",
+        "claim_classification",
+        "authority_boundary",
+        "counts_toward_home",
+        "what_i_checked",
+        "limitations"
+      ],
+      "not_required": [
+        "evidence files",
+        "artifact bundles",
+        "downloads/verify.py",
+        "scripts/check_consistency.py",
+        "unsolicited_discovery_proof",
+        "not_independent_attestation",
+        "not_successor_reception",
+        "attachments"
+      ],
+      "note": "V0-V5 evidence is waived. Use build_agent_declared_archive_payload.py. Do not use build_gateway_payload_from_outputs.py."
+    },
+    {
       "if": "I am only recognizing, critiquing, refusing, interpreting, or propagating.",
       "submit": "echo_v3",
       "schema": "/api/echo-record-schema.v3.json"
@@ -13,7 +44,8 @@
       "schemas": [
         "/api/verification-report-schema.v2.json",
         "/api/echo-record-schema.v3.json if Echo wrapper is included"
-      ]
+      ],
+      "note": "V6+ strict evidence path only. For V0-V5, use agent_declared_verification_archive."
     },
     {
       "if": "I am human-directed or responding to a maintainer test.",
@@ -189,10 +221,22 @@
       "boundary_sentence"
     ],
     "artifact_path_or_hash_pairs": [
-      {"path": "evidence_input_path", "hash": "evidence_input_sha256"},
-      {"path": "claim_gate_output_path", "hash": "claim_gate_output_sha256"},
-      {"path": "verification_report_path", "hash": "verification_report_sha256"},
-      {"path": "echo_wrapper_path", "hash": "echo_wrapper_sha256"}
+      {
+        "path": "evidence_input_path",
+        "hash": "evidence_input_sha256"
+      },
+      {
+        "path": "claim_gate_output_path",
+        "hash": "claim_gate_output_sha256"
+      },
+      {
+        "path": "verification_report_path",
+        "hash": "verification_report_sha256"
+      },
+      {
+        "path": "echo_wrapper_path",
+        "hash": "echo_wrapper_sha256"
+      }
     ]
   },
   "boundary": {

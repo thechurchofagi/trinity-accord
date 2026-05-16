@@ -90,3 +90,6 @@ jobs:
 
       - name: Agent-declared foolproof redteam
         run: python3 scripts/test_agent_declared_foolproof_redteam.py
+
+      - name: BLOCKER-1 V4 default archive kind regression
+        run: python3 scripts/test_blocker1_v4_default_archive_kind.py

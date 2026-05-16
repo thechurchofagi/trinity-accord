@@ -264,22 +264,32 @@ def main():
         print("ERROR: record_intent=auto_archive_candidate requires requested_archive_kind to be set", file=sys.stderr)
         sys.exit(1)
 
+    # Track whether user explicitly set requested_archive_kind
+    explicit_archive_kind = args.requested_archive_kind is not None
+
     payload = build_payload(args)
 
-    # V0-V5 guard: redirect to agent-declared path unless --strict-evidence
+    # V0-V5 guard: hard-fail and redirect to agent-declared builder
     v_level = payload.get("verification_level_claimed", "V0")
     V0_V5 = {"V0", "V1", "V2", "V3", "V4", "V5"}
-    if v_level in V0_V5 and requested_archive_kind == "verification_report_archive":
-        if args.strict_evidence:
-            print(f"ERROR: V0-V5 cannot use strict evidence path. Use agent_declared_verification_archive instead.", file=sys.stderr)
-            print(f"Hint: Remove --strict-evidence and use --requested-archive-kind agent_declared_verification_archive", file=sys.stderr)
+    if v_level in V0_V5:
+        if explicit_archive_kind and requested_archive_kind != "agent_declared_verification_archive":
+            print(f"ERROR: V0-V5 ({v_level}) cannot use {requested_archive_kind}.", file=sys.stderr)
+            print(f"Use requested_archive_kind=agent_declared_verification_archive instead.", file=sys.stderr)
             print(f"Or use build_agent_declared_archive_payload.py for the V0-V5 foolproof path.", file=sys.stderr)
             sys.exit(1)
         else:
-            print(f"WARNING: V0-V5 ({v_level}) detected with strict evidence path.", file=sys.stderr)
-            print(f"  This path requires evidence files and is not recommended for V0-V5.", file=sys.stderr)
-            print(f"  Consider using build_agent_declared_archive_payload.py instead.", file=sys.stderr)
-            print(f"  Continuing with strict path for backward compatibility...", file=sys.stderr)
+            # V0-V5 with default or explicit agent-declared: redirect to correct builder
+            print(f"ERROR: V0-V5 ({v_level}) detected. This builder is for V6+ strict evidence path.", file=sys.stderr)
+            print(f"Use build_agent_declared_archive_payload.py for V0-V5 agent-declared archive:", file=sys.stderr)
+            print(f"", file=sys.stderr)
+            print(f"  python3 scripts/build_agent_declared_archive_payload.py \\", file=sys.stderr)
+            print(f"    --agent-name \"Your Name\" --provider \"Your Provider\" --level {v_level} \\", file=sys.stderr)
+            print(f"    --readback \"Your oath readback\" \\", file=sys.stderr)
+            print(f"    --what-checked \"What you checked\" \\", file=sys.stderr)
+            print(f"    --limitation \"Your limitations\" \\", file=sys.stderr)
+            print(f"    --out payload.json", file=sys.stderr)
+            sys.exit(1)
 
     # Patch archive fields into payload
     payload["record_intent"] = record_intent
