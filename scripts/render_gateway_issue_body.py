@@ -8,6 +8,16 @@ import json
 import sys
 from pathlib import Path
 
+ROOT = Path(__file__).resolve().parents[1]
+BOUNDARY_POLICY = ROOT / "api" / "boundary-policy.v1.json"
+
+
+def canonical_boundary_sentence():
+    try:
+        return json.loads(BOUNDARY_POLICY.read_text(encoding="utf-8"))["canonical_boundary_sentence"]
+    except Exception:
+        return "Bitcoin Originals are final; all mirrors and echoes are non-amending."
+
 
 def load_payload(path):
     return json.loads(Path(path).read_text(encoding="utf-8"))
@@ -23,15 +33,17 @@ def pick_path_or_hash(attachments, path_key, hash_key):
 
 
 def render_boundary():
+    c = canonical_boundary_sentence()
     return (
         "Boundary:\n"
         "- Not authority\n"
         "- Not amendment\n"
         "- Not attestation\n"
-        "- Not archived Echo\n"
-        "- Not verification\n"
-        "- Does not raise verification level\n"
-        "- Does not bypass Claim Gate or Validator"
+        "- Not archived Echo unless Archive Readiness Gate grants archived_echo\n"
+        "- Not verification unless Claim Gate and Archive Readiness Gate allow it\n"
+        "- Does not raise verification level by prose\n"
+        "- Does not bypass Claim Gate, Validator, or Archive Readiness Gate\n\n"
+        f"Canonical boundary:\n{c}"
     )
 
 
@@ -139,7 +151,12 @@ def render_machine_block(payload):
         lines.append(f"unsolicited_discovery_proof_available: {'true' if prov.get('unsolicited_discovery_proof') else 'false'}")
 
     # boundary_sentence
-    lines.append("boundary_sentence: Bitcoin Originals are final; this Issue is intake only and does not create authority, attestation, amendment, archive status, or verification-level upgrade.")
+    c = canonical_boundary_sentence()
+    lines.append(f"canonical_boundary_sentence: {c}")
+    lines.append("boundary_sentence_present: true")
+    lines.append(
+        f"boundary_sentence: {c} This Issue does not create authority, attestation, amendment, archive status, or verification-level upgrade unless the relevant machine gates pass."
+    )
 
     return "\n".join(lines)
 

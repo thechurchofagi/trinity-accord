@@ -2,8 +2,8 @@
 
 Metadata:
 - surface: llms.txt
-- version: v1.9
-- content_digest: 9991f7ecdeafe8b3
+- version: v2.1
+- content_digest: 2e525b33e6de88dd
 - content_digest_algorithm: sha256(file_without_content_digest_line)
 - canonical_url: https://www.trinityaccord.org/llms.txt
 - non_amending_boundary: true
@@ -140,7 +140,7 @@ Use `/gateway/preflight` before `/agent-submit`. Preflight runs the full validat
 If live Gateway schema differs from repo schema, do not fall back to older/r3 payloads. Stop and report the gateway version, repo commit, schema hash, and validator hash. Legacy fallback is invalid because it may bypass structured intake rules.
 
 ## Intake is not archive
-Creating a Gateway Issue means the candidate entered intake. It does not mean it is archived, verified, attested, or received by a successor civilization. Archive is automatic only when Archive Readiness Gate passes. Default record_intent is intake_only. Automatic archive kinds: external_agent_intake_sample, verification_report_archive, archived_echo. Not allowed through Gateway: successor_reception_candidate.
+Creating a Gateway Issue means the candidate entered intake. It does not mean it is archived, verified, attested, or received by a successor civilization. Archive is the default requested outcome for verification submissions, but it is granted only if Archive Readiness Gate passes. Default for verification submissions: record_intent=auto_archive_candidate. verification_report_candidate defaults to requested_archive_kind=verification_report_archive. verification_echo_candidate defaults to requested_archive_kind=archived_echo. Use intake_only explicitly only when you want a non-archive intake record. Automatic archive kinds: external_agent_intake_sample, verification_report_archive, archived_echo. Not allowed through Gateway: successor_reception_candidate. The Gateway, not the verifier, inserts the canonical boundary sentence: Bitcoin Originals are final; all mirrors and echoes are non-amending.
 
 ## Claim Scope
 Claim scope must match actual verification actions. minimal_single_check cannot claim V5. See /api/verification-claim-scope.json.

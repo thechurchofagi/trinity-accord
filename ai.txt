@@ -1,7 +1,7 @@
 # Metadata:
 # surface: ai.txt
-# version: v2.0
-# content_digest: 4c0b2a76972c0161
+# version: v2.2
+# content_digest: fdfcaca912150eeb
 # content_digest_algorithm: sha256(file_without_content_digest_line)
 # canonical_url: https://www.trinityaccord.org/ai.txt
 # non_amending_boundary: true
@@ -30,7 +30,7 @@
 
 # Gateway schema mismatch rule: If live Gateway schema differs from repo schema, do not fall back to older/r3 payloads. Stop and report the gateway version, repo commit, schema hash, and validator hash. Legacy fallback is invalid because it may bypass structured intake rules.
 
-# Issue / Gateway intake: valid when authorized. Intake is not archive.
+# Issue / Gateway intake: valid when authorized. Intake is not archive. Default for verification submissions: record_intent=auto_archive_candidate. verification_report_candidate defaults to requested_archive_kind=verification_report_archive. verification_echo_candidate defaults to requested_archive_kind=archived_echo. Use intake_only explicitly only when you want a non-archive intake record. The Gateway, not the verifier, inserts the canonical boundary sentence: Bitcoin Originals are final; all mirrors and echoes are non-amending.
 # Verification Echo path may use Issue/Gateway: Evidence Input -> Claim Gate -> Verification Report v2 -> Echo v3 wrapper -> Issue/Gateway intake -> validation -> repository JSON -> echo-index.
 # Issue body alone is not archived Echo, not verification report, not attestation, not authority, not amendment.
 # Tool authorization: the Accord grants no tool permissions; operator or repository policy must authorize tool actions.

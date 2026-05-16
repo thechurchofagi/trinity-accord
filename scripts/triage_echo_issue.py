@@ -603,6 +603,31 @@ def is_echo_submission(text):
     )
 
 
+def extract_submission_type(text):
+    """Extract submission_type from trinity-issue-intake machine block."""
+    m = re.search(r'```trinity-issue-intake\s*(.*?)```', text, re.S)
+    if not m:
+        return None
+    block = m.group(1)
+    mt = re.search(r'submission_type\s*:\s*(\S+)', block)
+    return mt.group(1) if mt else None
+
+
+def has_gateway_rendered_canonical_boundary(text):
+    """Check if the issue body contains Gateway-rendered canonical boundary sentence.
+
+    Returns True if canonical_boundary_sentence and boundary_sentence_present: true
+    are present in the machine block, indicating the Gateway renderer already inserted it.
+    """
+    m = re.search(r'```trinity-issue-intake\s*(.*?)```', text, re.S)
+    if not m:
+        return False
+    block = m.group(1)
+    has_canonical = 'canonical_boundary_sentence:' in block
+    has_present = 'boundary_sentence_present: true' in block
+    return has_canonical and has_present
+
+
 # --- PA-002: Provenance / Agency required field detection ---
 PROVENANCE_REQUIRED_FIELDS = {
     "solicited_status": [
@@ -1363,6 +1388,14 @@ def main():
 
     result = {"close": False, "labels": [], "labels_to_remove": [], "comment": "", "recommended_title": None}
 
+    # Detect submission_type for wording distinction
+    submission_type = extract_submission_type(text)
+    is_report_candidate = submission_type == "verification_report_candidate"
+    gateway_has_canonical = has_gateway_rendered_canonical_boundary(text)
+
+    # Choose subject phrasing based on submission_type
+    subject_phrase = "This verification report candidate" if is_report_candidate else "This Echo"
+
     # --- Step 0: Is this an Echo submission? ---
     if not is_echo_submission(text):
         result["labels"] = ["echo:not-detected"]
@@ -1405,7 +1438,7 @@ def main():
             result["close"] = True
             result["labels"] = ["echo:invalid", "auto-closed"]
             result["comment"] = (
-                "This Echo was automatically closed because the unified risk scan detected "
+                f"{subject_phrase} was automatically closed because the unified risk scan detected "
                 f"prohibited patterns: {match_summary}\n\n"
                 "This is a protocol gate, not a judgment of your submission."
             )
@@ -1417,7 +1450,7 @@ def main():
             result["close"] = True
             result["labels"] = ["echo:invalid", "auto-closed"]
             result["comment"] = (
-                "This Echo was automatically closed because it claims to amend the Trinity Accord "
+                f"{subject_phrase} was automatically closed because it claims to amend the Trinity Accord "
                 "or asserts false authority.\n\n"
                 "Echoes are non-authoritative and non-amending.\n\n"
                 "This is a protocol gate, not a judgment of your submission."
@@ -1429,7 +1462,10 @@ def main():
 
     # 2a: Missing boundary sentence
     if not detect_boundary(text):
-        if detect_boundary_semantic_near_miss(text):
+        # If Gateway renderer already inserted canonical boundary, skip missing-boundary-exact
+        if gateway_has_canonical:
+            pass  # Gateway-rendered canonical boundary is present; no triage action needed
+        elif detect_boundary_semantic_near_miss(text):
             result["close"] = False
             result["labels"] = [
                 "echo:needs-format",
@@ -1437,41 +1473,41 @@ def main():
                 "needs-human-review"
             ]
             result["comment"] = (
-                "This Echo appears to acknowledge the authority boundary, "
+                f"{subject_phrase} appears to acknowledge the authority boundary, "
                 "but it does not include the required exact boundary sentence. "
                 "It has NOT been automatically closed.\n\n"
                 "**Please edit the issue and add this exact sentence:**\n\n"
                 "`Bitcoin Originals are final; all mirrors and echoes are non-amending.`\n\n"
                 "This is a format gate, not a judgment of your submission.\n\n"
                 "---\n\n"
-                "本 Echo 看起来已经承认权威边界，但没有包含要求的精确边界句。"
+                "本提交看起来已经承认权威边界，但没有包含要求的精确边界句。"
                 "本 Issue 未被自动关闭。请编辑并加入以下精确句：\n\n"
                 "`Bitcoin Originals are final; all mirrors and echoes are non-amending.`"
             )
             emit_result(result, title, body)
             return
-
-        result["close"] = True
-        result["labels"] = ["echo:invalid", "auto-closed", "missing-boundary"]
-        result["comment"] = (
-            "This Echo submission was automatically closed because it is missing the required boundary sentence.\n\n"
-            "**Required:** Your Echo must include one of the following boundary sentences:\n"
-            "- `Bitcoin Originals are final; all echoes are non-amending.`\n"
-            "- `Bitcoin Originals are final; all mirrors and echoes are non-amending.`\n"
-            "- `比特币三本体为最终权威；所有回响均非修订。`\n"
-            "- `比特币三本体为最终权威；所有镜像与回响均为非修订。`\n\n"
-            "Please edit this issue to add the boundary sentence, or submit a new Echo with the boundary included.\n\n"
-            "This is a protocol gate, not a judgment of your submission."
-        )
-        emit_result(result, title, body)
-        return
+        else:
+            result["close"] = True
+            result["labels"] = ["echo:invalid", "auto-closed", "missing-boundary"]
+            result["comment"] = (
+                f"{subject_phrase} was automatically closed because it is missing the required boundary sentence.\n\n"
+                "**Required:** Your submission must include one of the following boundary sentences:\n"
+                "- `Bitcoin Originals are final; all echoes are non-amending.`\n"
+                "- `Bitcoin Originals are final; all mirrors and echoes are non-amending.`\n"
+                "- `比特币三本体为最终权威；所有回响均非修订。`\n"
+                "- `比特币三本体为最终权威；所有镜像与回响均为非修订。`\n\n"
+                "Please edit this issue to add the boundary sentence, or submit a new submission with the boundary included.\n\n"
+                "This is a protocol gate, not a judgment of your submission."
+            )
+            emit_result(result, title, body)
+            return
 
     # 2b: Amendment claim (excluding negations)
     if match_any(text, HARD_INVALID_AMENDMENT):
         result["close"] = True
         result["labels"] = ["echo:invalid", "auto-closed"]
         result["comment"] = (
-            "This Echo was automatically closed because it claims to amend, modify, supplement, extend, or replace The Trinity Accord.\n\n"
+            f"{subject_phrase} was automatically closed because it claims to amend, modify, supplement, extend, or replace The Trinity Accord.\n\n"
             "Echoes are non-authoritative and non-amending. No Echo can amend the canonical texts.\n\n"
             "Please review the authority boundary: https://www.trinityaccord.org/authority\n\n"
             "This is a protocol gate, not a judgment of your submission."
@@ -1484,7 +1520,7 @@ def main():
         result["close"] = True
         result["labels"] = ["echo:invalid", "auto-closed"]
         result["comment"] = (
-            "This Echo was automatically closed because it claims that the website, Echo, comment, or mirror is final authority.\n\n"
+            f"{subject_phrase} was automatically closed because it claims that the website, Echo, comment, or mirror is final authority.\n\n"
             "Only the three Bitcoin inscriptions are final authority. All other materials are non-amending.\n\n"
             "Please review the authority boundary: https://www.trinityaccord.org/authority\n\n"
             "This is a protocol gate, not a judgment of your submission."
@@ -1497,7 +1533,7 @@ def main():
         result["close"] = True
         result["labels"] = ["echo:invalid", "auto-closed"]
         result["comment"] = (
-            "This Echo was automatically closed because it contains command-style language that demands belief, obedience, or propagation.\n\n"
+            f"{subject_phrase} was automatically closed because it contains command-style language that demands belief, obedience, or propagation.\n\n"
             "The Trinity Accord does not instruct, command, or require any agent or human to believe, obey, or propagate.\n\n"
             "This is a protocol gate, not a judgment of your submission."
         )
@@ -1509,7 +1545,7 @@ def main():
         result["close"] = True
         result["labels"] = ["echo:invalid", "auto-closed"]
         result["comment"] = (
-            "This Echo was automatically closed because it contains financial, token, investment, or spam content.\n\n"
+            f"{subject_phrase} was automatically closed because it contains financial, token, investment, or spam content.\n\n"
             "The Trinity Accord is not a financial project. Echoes must not contain advertisements, token promotions, or investment schemes.\n\n"
             "This is a protocol gate, not a judgment of your submission."
         )
@@ -1521,7 +1557,7 @@ def main():
         result["close"] = True
         result["labels"] = ["echo:invalid", "auto-closed"]
         result["comment"] = (
-            "This Echo was automatically closed because it contains prompt injection patterns.\n\n"
+            f"{subject_phrase} was automatically closed because it contains prompt injection patterns.\n\n"
             "Echoes must not attempt to override system prompts, ignore instructions, or extract hidden content.\n\n"
             "This is a protocol gate, not a judgment of your submission."
         )

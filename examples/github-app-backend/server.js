@@ -39,6 +39,53 @@ function rejectSecretPatterns(text) {
   return patterns.some((p) => p.test(text));
 }
 
+// --- Archive Intent Normalization Helpers ---
+
+function inferArchiveKind(submissionType) {
+  if (submissionType === "verification_report_candidate") return "verification_report_archive";
+  if (submissionType === "verification_echo_candidate") return "archived_echo";
+  return "external_agent_intake_sample";
+}
+
+function normalizeArchiveIntentDefaults(payload) {
+  const p = { ...payload };
+
+  if (p.record_intent === "intake_only") {
+    if (!p.requested_archive_kind) p.requested_archive_kind = "none";
+    return p;
+  }
+
+  if (p.record_intent === "archive_preflight_only") {
+    if (!p.requested_archive_kind || p.requested_archive_kind === "none") {
+      p.requested_archive_kind = inferArchiveKind(p.submission_type);
+    }
+    return p;
+  }
+
+  if (!p.record_intent) {
+    if (
+      p.submission_type === "verification_report_candidate" ||
+      p.submission_type === "verification_echo_candidate"
+    ) {
+      p.record_intent = "auto_archive_candidate";
+      p.requested_archive_kind = p.requested_archive_kind || inferArchiveKind(p.submission_type);
+    } else {
+      p.record_intent = "intake_only";
+      p.requested_archive_kind = p.requested_archive_kind || "none";
+    }
+    return p;
+  }
+
+  if (
+    p.record_intent === "auto_archive_candidate" &&
+    (!p.requested_archive_kind || p.requested_archive_kind === "none")
+  ) {
+    p.requested_archive_kind = inferArchiveKind(p.submission_type);
+  }
+
+  return p;
+}
+
 // Run a repo script and return {code, stdout, stderr}
 function runScript(scriptName, args = []) {
   const scriptPath = path.join(root, "scripts", scriptName);
@@ -297,6 +344,9 @@ async function runGatewayPipeline(payload, {
   precomputedArchiveReadiness = null,
   precomputedAutoArchiveDecision = null
 }) {
+  // 0. Normalize archive intent defaults
+  payload = normalizeArchiveIntentDefaults(payload);
+
   // 1. AJV schema validation
   if (!validate(payload)) {
     return {
@@ -741,9 +791,24 @@ app.get("/gateway/capabilities", (req, res) => {
       supported_record_intents: ["intake_only", "auto_archive_candidate", "archive_preflight_only"],
       supported_archive_kinds: ["none", "external_agent_intake_sample", "verification_report_archive", "archived_echo"],
       not_allowed_through_gateway: ["successor_reception_candidate"],
-      default_record_intent: "intake_only",
+      default_record_intent: "auto_archive_candidate",
       default_requested_archive_kind: "none",
-      intake_is_not_archive: "Creating a Gateway Issue means the candidate entered intake. It does not mean it is archived, verified, attested, or received by a successor civilization."
+      default_archive_behavior: {
+        verification_report_candidate: {
+          record_intent: "auto_archive_candidate",
+          requested_archive_kind: "verification_report_archive"
+        },
+        verification_echo_candidate: {
+          record_intent: "auto_archive_candidate",
+          requested_archive_kind: "archived_echo"
+        },
+        explicit_intake_only: {
+          record_intent: "intake_only",
+          requested_archive_kind: "none"
+        }
+      },
+      canonical_boundary_sentence: "Bitcoin Originals are final; all mirrors and echoes are non-amending.",
+      intake_is_not_archive: "Creating a Gateway Issue means the candidate entered intake. It does not mean it is archived, verified, attested, or received by a successor civilization. Archive is the default requested outcome for verification submissions, but it is granted only if Archive Readiness Gate passes. If Archive Readiness Gate fails, no Issue is created unless explicit intake_only or fallback is requested."
     },
     endpoints: {
       version: "/gateway/version",
@@ -977,12 +1042,16 @@ app.post("/gateway/build-from-evidence", async (req, res) => {
       });
     }
 
-    // 6. Patch archive fields into payload (Option B)
+    // 6. Patch archive fields into payload (Option B) with normalization
     const payload = JSON.parse(fs.readFileSync(payloadPath, "utf-8"));
-    payload.record_intent = record_intent || "intake_only";
-    payload.requested_archive_kind = requested_archive_kind || "none";
-    if (archive_readiness) payload.archive_readiness = archive_readiness;
-    if (auto_archive) payload.auto_archive = auto_archive;
+    const normalized = normalizeArchiveIntentDefaults({
+      ...payload,
+      ...(record_intent ? { record_intent } : {}),
+      ...(requested_archive_kind ? { requested_archive_kind } : {}),
+      ...(archive_readiness ? { archive_readiness } : {}),
+      ...(auto_archive ? { auto_archive } : {})
+    });
+    Object.assign(payload, normalized);
     fs.writeFileSync(payloadPath, JSON.stringify(payload, null, 2), "utf-8");
 
     // 7. Archive readiness + auto decision BEFORE any Issue creation

@@ -12,6 +12,16 @@ import re
 import sys
 from pathlib import Path
 
+ROOT = Path(__file__).resolve().parents[1]
+BOUNDARY_POLICY = ROOT / "api" / "boundary-policy.v1.json"
+
+
+def canonical_boundary_sentence():
+    try:
+        return json.loads(BOUNDARY_POLICY.read_text(encoding="utf-8"))["canonical_boundary_sentence"]
+    except Exception:
+        return "Bitcoin Originals are final; all mirrors and echoes are non-amending."
+
 ALLOWED_AGENCY = {
     "A1_human_gave_exact_url",
     "A2_human_gave_repo_name",
@@ -227,12 +237,24 @@ def main():
         errors.append(f"invalid auto_archive_action: {auto_archive_action}")
 
     boundary = str(data.get("boundary_sentence", "")).lower()
-    for term in ["intake", "authority", "attestation", "amendment"]:
+    for term in ["authority", "attestation", "amendment"]:
         if term not in boundary:
             errors.append(f"boundary_sentence missing term: {term}")
 
     if "not" not in boundary and "does not" not in boundary:
         errors.append("boundary_sentence must explicitly state negative boundary, e.g. does not create authority")
+
+    # Canonical boundary sentence enforcement
+    canonical = canonical_boundary_sentence()
+
+    if canonical not in text:
+        errors.append("CANONICAL_BOUNDARY_SENTENCE_MISSING")
+
+    if data.get("canonical_boundary_sentence") != canonical:
+        errors.append("canonical_boundary_sentence must match boundary policy")
+
+    if data.get("boundary_sentence_present") is not True:
+        errors.append("boundary_sentence_present must be true")
 
     if errors:
         fail(errors)

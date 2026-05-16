@@ -453,7 +453,7 @@
         "archive_preflight_only",
         null
       ],
-      "default": "intake_only"
+      "default": "auto_archive_candidate"
     },
     "requested_archive_kind": {
       "type": [

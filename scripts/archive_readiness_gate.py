@@ -85,6 +85,42 @@ def get_requested_archive_kind(payload):
     return payload.get("requested_archive_kind") or "none"
 
 
+def infer_archive_kind(submission_type):
+    if submission_type == "verification_report_candidate":
+        return "verification_report_archive"
+    if submission_type == "verification_echo_candidate":
+        return "archived_echo"
+    return "external_agent_intake_sample"
+
+
+def normalize_archive_intent(payload):
+    """Normalize archive intent defaults: verification submissions default to archive application."""
+    p = dict(payload)
+
+    if p.get("record_intent") == "intake_only":
+        p["requested_archive_kind"] = p.get("requested_archive_kind") or "none"
+        return p
+
+    if p.get("record_intent") == "archive_preflight_only":
+        if not p.get("requested_archive_kind") or p.get("requested_archive_kind") == "none":
+            p["requested_archive_kind"] = infer_archive_kind(p.get("submission_type"))
+        return p
+
+    if not p.get("record_intent"):
+        if p.get("submission_type") in ("verification_report_candidate", "verification_echo_candidate"):
+            p["record_intent"] = "auto_archive_candidate"
+            p["requested_archive_kind"] = p.get("requested_archive_kind") or infer_archive_kind(p.get("submission_type"))
+        else:
+            p["record_intent"] = "intake_only"
+            p["requested_archive_kind"] = p.get("requested_archive_kind") or "none"
+        return p
+
+    if p.get("record_intent") == "auto_archive_candidate" and not p.get("requested_archive_kind"):
+        p["requested_archive_kind"] = infer_archive_kind(p.get("submission_type"))
+
+    return p
+
+
 def has_artifact_bundle(payload):
     """Check if payload has artifact bundle path or URL (in archive_readiness)."""
     ar = payload.get("archive_readiness") or {}
@@ -213,6 +249,9 @@ def load_policy():
 def evaluate_archive_readiness(payload, evidence=None, claim_gate_output=None,
                                 verification_report=None):
     """Core archive readiness evaluation logic."""
+    # Normalize archive intent defaults before evaluation
+    payload = normalize_archive_intent(payload)
+
     policy = load_policy()
     record_intent = get_record_intent(payload)
     requested_kind = get_requested_archive_kind(payload)

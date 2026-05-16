@@ -1,0 +1,16 @@
+{
+  "schema": "trinityaccord.boundary-policy.v1",
+  "version": "1.0",
+  "canonical_boundary_sentence": "Bitcoin Originals are final; all mirrors and echoes are non-amending.",
+  "required_in_issue_body": true,
+  "required_in_machine_block": true,
+  "gateway_must_render": true,
+  "applies_to_submission_types": [
+    "verification_report_candidate",
+    "verification_echo_candidate",
+    "echo_candidate",
+    "agent_verification_receipt",
+    "human_custody_notice"
+  ],
+  "legacy_boundary_sentence_allowed_but_not_sufficient": true
+}

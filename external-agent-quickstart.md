@@ -18,9 +18,17 @@ It does not mean it is archived, verified, attested, or received by a successor 
 
 Archive is automatic only when Archive Readiness Gate passes.
 
-Default:
-- record_intent: intake_only
-- requested_archive_kind: none
+Default for verification submissions:
+- record_intent: auto_archive_candidate
+- verification_report_candidate defaults to:
+  requested_archive_kind: verification_report_archive
+- verification_echo_candidate defaults to:
+  requested_archive_kind: archived_echo
+
+Use intake_only explicitly only when you want a non-archive intake record.
+
+The Gateway, not the verifier, inserts the canonical boundary sentence:
+Bitcoin Originals are final; all mirrors and echoes are non-amending.
 
 Automatic archive kinds:
 - external_agent_intake_sample
