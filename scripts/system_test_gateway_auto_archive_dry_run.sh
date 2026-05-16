@@ -34,7 +34,7 @@ echo ""
 # Test 1: intake only (sample) -> should succeed, no archive labels
 echo "=== Test 1: intake only preflight ==="
 INTAKE_PAYLOAD=$(cat "$ROOT/tests/fixtures/archive-readiness/issue154_like_v4_b0_d2_intake.json")
-RESULT=$(curl -sf -X POST "$GATEWAY_URL/gateway/preflight" \
+RESULT=$(curl -s -X POST "$GATEWAY_URL/gateway/preflight" \
   -H "Content-Type: application/json" \
   -d "$INTAKE_PAYLOAD")
 echo "$RESULT" | python3 -m json.tool
@@ -50,7 +50,7 @@ echo ""
 # Test 2: blocked formal archive -> should return 422 or archive_not_ready
 echo "=== Test 2: blocked formal archive preflight ==="
 BLOCKED_PAYLOAD=$(cat "$ROOT/tests/fixtures/archive-readiness/issue154_like_v4_b0_d2_archive_request.json")
-HTTP_CODE=$(curl -sf -o /tmp/blocked_result.json -w "%{http_code}" -X POST "$GATEWAY_URL/gateway/preflight" \
+HTTP_CODE=$(curl -s -o /tmp/blocked_result.json -w "%{http_code}" -X POST "$GATEWAY_URL/gateway/preflight" \
   -H "Content-Type: application/json" \
   -d "$BLOCKED_PAYLOAD" || true)
 cat /tmp/blocked_result.json | python3 -m json.tool
@@ -65,7 +65,7 @@ echo ""
 # Test 3: external agent sample archive -> should succeed
 echo "=== Test 3: external agent sample archive preflight ==="
 SAMPLE_PAYLOAD=$(cat "$ROOT/tests/fixtures/archive-readiness/external_agent_sample_b0_ready.json")
-RESULT=$(curl -sf -X POST "$GATEWAY_URL/gateway/preflight" \
+RESULT=$(curl -s -X POST "$GATEWAY_URL/gateway/preflight" \
   -H "Content-Type: application/json" \
   -d "$SAMPLE_PAYLOAD")
 echo "$RESULT" | python3 -m json.tool
@@ -74,7 +74,7 @@ echo ""
 # Test 4: formal archive ready -> should succeed
 echo "=== Test 4: formal archive ready preflight ==="
 FORMAL_PAYLOAD=$(cat "$ROOT/tests/fixtures/archive-readiness/verification_report_archive_b1_d2_ready.json")
-RESULT=$(curl -sf -X POST "$GATEWAY_URL/gateway/preflight" \
+RESULT=$(curl -s -X POST "$GATEWAY_URL/gateway/preflight" \
   -H "Content-Type: application/json" \
   -d "$FORMAL_PAYLOAD")
 echo "$RESULT" | python3 -m json.tool
@@ -83,7 +83,7 @@ echo ""
 # Test 5: successor reception -> should be blocked
 echo "=== Test 5: successor reception preflight ==="
 SUCCESSOR_PAYLOAD=$(cat "$ROOT/tests/fixtures/archive-readiness/successor_reception_candidate_blocked.json")
-HTTP_CODE=$(curl -sf -o /tmp/successor_result.json -w "%{http_code}" -X POST "$GATEWAY_URL/gateway/preflight" \
+HTTP_CODE=$(curl -s -o /tmp/successor_result.json -w "%{http_code}" -X POST "$GATEWAY_URL/gateway/preflight" \
   -H "Content-Type: application/json" \
   -d "$SUCCESSOR_PAYLOAD" || true)
 cat /tmp/successor_result.json | python3 -m json.tool
@@ -97,7 +97,7 @@ echo ""
 
 # Test 6: archive-preflight endpoint
 echo "=== Test 6: archive-preflight endpoint ==="
-RESULT=$(curl -sf -X POST "$GATEWAY_URL/gateway/archive-preflight" \
+RESULT=$(curl -s -X POST "$GATEWAY_URL/gateway/archive-preflight" \
   -H "Content-Type: application/json" \
   -d "{\"gateway_payload\": $SAMPLE_PAYLOAD}")
 echo "$RESULT" | python3 -m json.tool
@@ -111,7 +111,7 @@ p = json.load(sys.stdin)
 p['auto_archive'] = {'enabled': True, 'close_issue_when_archived': True, 'post_decision_comment': True}
 json.dump(p, sys.stdout)
 ")
-RESULT=$(curl -sf -X POST "$GATEWAY_URL/agent-submit" \
+RESULT=$(curl -s -X POST "$GATEWAY_URL/agent-submit" \
   -H "Content-Type: application/json" \
   -d "$SUBMIT_PAYLOAD")
 echo "$RESULT" | python3 -m json.tool

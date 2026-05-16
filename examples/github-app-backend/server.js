@@ -952,8 +952,8 @@ app.post("/gateway/build-from-evidence", async (req, res) => {
       title_date,
       submit = false,
       evidence_input,
-      record_intent = "intake_only",
-      requested_archive_kind = "none",
+      record_intent,
+      requested_archive_kind,
       archive_readiness = null,
       auto_archive = null,
       allow_intake_fallback_if_archive_blocked = false
@@ -1066,7 +1066,7 @@ app.post("/gateway/build-from-evidence", async (req, res) => {
 
     // 8. Handle archive-blocked: 422 or fallback
     let submitEffective = submit;
-    if (record_intent === "auto_archive_candidate" && !archiveReadinessResult.body.archive_ready) {
+    if (payload.record_intent === "auto_archive_candidate" && !archiveReadinessResult.body.archive_ready) {
       if (allow_intake_fallback_if_archive_blocked) {
         payload.record_intent = "intake_only";
         payload.requested_archive_kind = "none";
