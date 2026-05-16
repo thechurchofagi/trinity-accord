@@ -998,9 +998,9 @@ def generate_title(protocol_level, component_levels, agent_name, record_kind, da
     component_summary = f"B{b.lstrip('B')}-D{d.lstrip('D')}"
 
     if "echo" in record_kind:
-        return f"Verification Echo Candidate: E2 — {protocol_level}/{component_summary} — {date_str} ({agent_name})"
+        return f"Echo v3: E2 — {protocol_level}/{component_summary} — {date_str} ({agent_name})"
     else:
-        return f"Verification Report Candidate: {protocol_level}/{component_summary} — {date_str} ({agent_name})"
+        return f"Verification Report v2: {protocol_level}/{component_summary} — {date_str} ({agent_name})"
 
 
 def evaluate(input_path):
