@@ -766,7 +766,7 @@ app.post("/gateway/build-from-evidence", async (req, res) => {
       "--out", reportPath
     ]);
     if (report.code !== 0) {
-      const reportErrDetail = (report.stdout + "\n" + report.stderr).trim().slice(0, 1000);
+      const reportErrDetail = (report.stdout + "\n" + report.stderr).trim().slice(0, 5000);
       return res.status(422).json({
         accepted: false,
         issue_created: false,
