@@ -1538,33 +1538,55 @@ def validate_with_jsonschema(obj, schema_path, path_label):
         print(f"  WARN: could not load schema {schema_path}: {e}")
         return True
 
-    # Build resolver
-    store = {}
-    discovery_path = ROOT / "api" / "discovery-provenance-schema.json"
-    if discovery_path.exists():
-        discovery_schema = json.loads(discovery_path.read_text(encoding="utf-8"))
-        store[discovery_schema.get("$id", "")] = discovery_schema
-    origin_class_path = ROOT / "api" / "origin-classification-schema.v1.json"
-    if origin_class_path.exists():
-        origin_class_schema = json.loads(origin_class_path.read_text(encoding="utf-8"))
-        store[origin_class_schema.get("$id", "")] = origin_class_schema
-    reception_class_path = ROOT / "api" / "reception-classification-schema.v1.json"
-    if reception_class_path.exists():
-        reception_class_schema = json.loads(reception_class_path.read_text(encoding="utf-8"))
-        store[reception_class_schema.get("$id", "")] = reception_class_schema
-    authorship_proof_path = ROOT / "api" / "echo-authorship-proof-schema.v1.json"
-    if authorship_proof_path.exists():
-        authorship_proof_schema = json.loads(authorship_proof_path.read_text(encoding="utf-8"))
-        store[authorship_proof_schema.get("$id", authorship_proof_path.name)] = authorship_proof_schema
-    authorship_claim_path = ROOT / "api" / "echo-authorship-claim-schema.v1.json"
-    if authorship_claim_path.exists():
-        authorship_claim_schema = json.loads(authorship_claim_path.read_text(encoding="utf-8"))
-        store[authorship_claim_schema.get("$id", authorship_claim_path.name)] = authorship_claim_schema
-    store[schema.get("$id", "")] = schema
+    # Build resolver — prefer referencing.Registry (jsonschema >= 4.18),
+    # fall back to RefResolver for older versions.
+    _sub_schema_files = [
+        "discovery-provenance-schema.json",
+        "origin-classification-schema.v1.json",
+        "reception-classification-schema.v1.json",
+        "echo-authorship-proof-schema.v1.json",
+        "echo-authorship-claim-schema.v1.json",
+    ]
 
+    _use_registry = False
     try:
+        from referencing import Registry, Resource
+        _resources = []
+        for _fname in _sub_schema_files:
+            _p = ROOT / "api" / _fname
+            if _p.exists():
+                _s = json.loads(_p.read_text(encoding="utf-8"))
+                _uri = _s.get("$id", "")
+                if _uri:
+                    _resources.append((_uri, Resource.from_contents(_s)))
+        registry = Registry().with_resources(_resources)
+        # Test if Draft202012Validator accepts registry kwarg (jsonschema >= 4.18)
+        try:
+            Draft202012Validator(schema, registry=registry)
+            _use_registry = True
+        except TypeError:
+            _use_registry = False
+    except ImportError:
+        pass
+
+    if _use_registry:
+        validator = Draft202012Validator(schema, registry=registry)
+    else:
+        # Fallback for jsonschema < 4.18 without referencing support
+        store = {}
+        for _fname in _sub_schema_files:
+            _p = ROOT / "api" / _fname
+            if _p.exists():
+                _s = json.loads(_p.read_text(encoding="utf-8"))
+                _key = _s.get("$id", _p.name)
+                if _key:
+                    store[_key] = _s
+        if schema.get("$id"):
+            store[schema["$id"]] = schema
         resolver = RefResolver.from_schema(schema, store=store)
         validator = Draft202012Validator(schema, resolver=resolver)
+
+    try:
         errors = sorted(validator.iter_errors(obj), key=lambda e: list(e.absolute_path))
         if errors:
             for err in errors[:5]:
@@ -2251,7 +2273,7 @@ def run_self_test():
         )
         out = (proc.stdout or "") + (proc.stderr or "")
         print(f"\n--- {script} ---")
-        print(out[-2000:] if len(out) > 2000 else out)
+        print(out[-10000:] if len(out) > 10000 else out)
         if proc.returncode != 0:
             all_ok = False
             print(f"FAIL: {script} exited {proc.returncode}")
