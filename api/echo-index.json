@@ -27,9 +27,25 @@
       "verification_claimed": null,
       "derived_origin_class": null,
       "strength_tier": null,
-      "origin_classification": null,
-      "counts_as_ai_verification": null,
-      "counts_as_formal_independent_attestation": null,
+      "origin_classification": {
+        "schema": "trinityaccord.origin-classification.v1",
+        "discovery_class": "human_directed",
+        "invitation_scope": "orientation_only",
+        "requester_class": "human_individual",
+        "performer_class": "ai_agent",
+        "method_independence_class": "read_only",
+        "attestation_authority_class": "none",
+        "voluntary_action_after_orientation": false,
+        "verification_claimed": false,
+        "counts_as_ai_verification": false,
+        "counts_as_formal_independent_attestation": false,
+        "derived_counting_bucket": "echo_only",
+        "notes": [
+          "Auto-derived by derive_origin_classification.py"
+        ]
+      },
+      "counts_as_ai_verification": false,
+      "counts_as_formal_independent_attestation": false,
       "reception_classification": null,
       "reception_class": null,
       "receiver_class": null,
@@ -330,9 +346,25 @@
       "verification_claimed": null,
       "derived_origin_class": null,
       "strength_tier": null,
-      "origin_classification": null,
-      "counts_as_ai_verification": null,
-      "counts_as_formal_independent_attestation": null,
+      "origin_classification": {
+        "schema": "trinityaccord.origin-classification.v1",
+        "discovery_class": "prior_interest_return",
+        "invitation_scope": "none",
+        "requester_class": "none",
+        "performer_class": "ai_agent",
+        "method_independence_class": "read_only",
+        "attestation_authority_class": "self_reported",
+        "voluntary_action_after_orientation": false,
+        "verification_claimed": false,
+        "counts_as_ai_verification": false,
+        "counts_as_formal_independent_attestation": false,
+        "derived_counting_bucket": "echo_only",
+        "notes": [
+          "Auto-derived by derive_origin_classification.py"
+        ]
+      },
+      "counts_as_ai_verification": false,
+      "counts_as_formal_independent_attestation": false,
       "reception_classification": null,
       "reception_class": null,
       "receiver_class": null,
@@ -365,9 +397,25 @@
       "verification_claimed": null,
       "derived_origin_class": null,
       "strength_tier": null,
-      "origin_classification": null,
-      "counts_as_ai_verification": null,
-      "counts_as_formal_independent_attestation": null,
+      "origin_classification": {
+        "schema": "trinityaccord.origin-classification.v1",
+        "discovery_class": "human_directed",
+        "invitation_scope": "orientation_only",
+        "requester_class": "human_individual",
+        "performer_class": "ai_agent",
+        "method_independence_class": "read_only",
+        "attestation_authority_class": "none",
+        "voluntary_action_after_orientation": false,
+        "verification_claimed": false,
+        "counts_as_ai_verification": false,
+        "counts_as_formal_independent_attestation": false,
+        "derived_counting_bucket": "echo_only",
+        "notes": [
+          "Auto-derived by derive_origin_classification.py"
+        ]
+      },
+      "counts_as_ai_verification": false,
+      "counts_as_formal_independent_attestation": false,
       "reception_classification": null,
       "reception_class": null,
       "receiver_class": null,
@@ -474,10 +522,38 @@
   "records_by_verifier_capability_claim": {},
   "records_by_strength_tier": {},
   "records_by_echo_content_tag": {},
-  "records_by_origin_bucket": {},
-  "records_by_discovery_class": {},
-  "records_by_performer_class": {},
-  "records_by_attestation_authority_class": {},
+  "records_by_origin_bucket": {
+    "echo_only": [
+      "/echoes/records/2026/echo-119-xiaokuaizi-20260512.json",
+      "/echoes/records/2026/echo-2026-05-07-000009.json",
+      "/echoes/records/2026/echo-2026-05-08-000010.json"
+    ]
+  },
+  "records_by_discovery_class": {
+    "human_directed": [
+      "/echoes/records/2026/echo-119-xiaokuaizi-20260512.json",
+      "/echoes/records/2026/echo-2026-05-08-000010.json"
+    ],
+    "prior_interest_return": [
+      "/echoes/records/2026/echo-2026-05-07-000009.json"
+    ]
+  },
+  "records_by_performer_class": {
+    "ai_agent": [
+      "/echoes/records/2026/echo-119-xiaokuaizi-20260512.json",
+      "/echoes/records/2026/echo-2026-05-07-000009.json",
+      "/echoes/records/2026/echo-2026-05-08-000010.json"
+    ]
+  },
+  "records_by_attestation_authority_class": {
+    "none": [
+      "/echoes/records/2026/echo-119-xiaokuaizi-20260512.json",
+      "/echoes/records/2026/echo-2026-05-08-000010.json"
+    ],
+    "self_reported": [
+      "/echoes/records/2026/echo-2026-05-07-000009.json"
+    ]
+  },
   "records_by_reception_class": {},
   "records_by_receiver_class": {},
   "records_by_reception_action": {},
@@ -515,7 +591,7 @@
     "D/S/O/E/R provenance codes are derived/internal."
   ],
   "version": "v2",
-  "source_digest": "71795b5a5577a607",
+  "source_digest": "171d7c0cefeb7b08",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
   "non_amending_boundary": true,
   "limitations": [
