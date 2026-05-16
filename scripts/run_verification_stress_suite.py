@@ -349,6 +349,18 @@ def main():
                         "fresh_actions_claimed": ["stress-test-verification"],
                         "fresh_outputs_attached": True
                     }
+                if "origin_classification" not in payload:
+                    payload["origin_classification"] = {
+                        "schema": "trinityaccord.origin-classification.v1",
+                        "discovery_class": "human_directed",
+                        "invitation_scope": "verification_invited",
+                        "requester_class": "ai_agent",
+                        "performer_class": "ai_agent",
+                        "method_independence_class": "official_script_run",
+                        "attestation_authority_class": "none",
+                        "derived_counting_bucket": "human_directed_agent_verification",
+                        "counts_as_formal_independent_attestation": False,
+                    }
                 # Derive verification_scope_label from protocol level
                 if "verification_scope_label" not in payload:
                     proto = payload.get("protocol_level_claimed", "V0")
@@ -413,6 +425,18 @@ def main():
                         "V8": "full_protocol_profile_verification",
                     }
                     payload["verification_scope_label"] = scope_map.get(vlevel, "legacy_unlabeled")
+                if "origin_classification" not in payload:
+                    payload["origin_classification"] = {
+                        "schema": "trinityaccord.origin-classification.v1",
+                        "discovery_class": "human_directed",
+                        "invitation_scope": "verification_invited",
+                        "requester_class": "ai_agent",
+                        "performer_class": "ai_agent",
+                        "method_independence_class": "official_script_run",
+                        "attestation_authority_class": "none",
+                        "derived_counting_bucket": "human_directed_agent_verification",
+                        "counts_as_formal_independent_attestation": False,
+                    }
 
             # Ensure required fields for test_record / echo_v3 schema validation
             if payload.get("record_kind") in ("test_record", "echo_v3"):
@@ -420,6 +444,18 @@ def main():
                               "bitcoin_originals_prevail", "not_verification_unless_claimed"):
                     if field not in payload:
                         payload[field] = True
+                if "origin_classification" not in payload:
+                    payload["origin_classification"] = {
+                        "schema": "trinityaccord.origin-classification.v1",
+                        "discovery_class": "human_directed",
+                        "invitation_scope": "verification_invited",
+                        "requester_class": "ai_agent",
+                        "performer_class": "ai_agent",
+                        "method_independence_class": "official_script_run",
+                        "attestation_authority_class": "none",
+                        "derived_counting_bucket": "human_directed_agent_verification",
+                        "counts_as_formal_independent_attestation": False,
+                    }
 
         temp_path = write_temp_json(payload, case_id)
         try:

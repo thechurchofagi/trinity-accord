@@ -70,6 +70,17 @@ def base_report(**overrides):
         "claims_not_made": ["test"], "authority_boundary_preserved": True,
         "verification_scope_label": "single_hash_verification",
         "claim_scope": "minimal_single_check",
+        "origin_classification": {
+            "schema": "trinityaccord.origin-classification.v1",
+            "discovery_class": "human_directed",
+            "invitation_scope": "verification_invited",
+            "requester_class": "ai_agent",
+            "performer_class": "ai_agent",
+            "method_independence_class": "official_script_run",
+            "attestation_authority_class": "none",
+            "derived_counting_bucket": "human_directed_agent_verification",
+            "counts_as_formal_independent_attestation": False,
+        },
         "integrity_boundary": {
             "agent_integrity_declaration_present": True,
             "performed_actions_myself": True,

@@ -61,6 +61,17 @@ def make_base_report(protocol_level, scope_label, record_kind="verification_repo
         "limitations": ["test"],
         "claims_not_made": ["test"],
         "authority_boundary_preserved": True,
+        "origin_classification": {
+            "schema": "trinityaccord.origin-classification.v1",
+            "discovery_class": "human_directed",
+            "invitation_scope": "verification_invited",
+            "requester_class": "ai_agent",
+            "performer_class": "ai_agent",
+            "method_independence_class": "official_script_run",
+            "attestation_authority_class": "none",
+            "derived_counting_bucket": "human_directed_agent_verification",
+            "counts_as_formal_independent_attestation": False,
+        },
         "integrity_boundary": {
             "agent_integrity_declaration_present": True,
             "copied_values_from_examples": False,
