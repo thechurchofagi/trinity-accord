@@ -30,7 +30,10 @@ HEX_CONTEXT_RE = re.compile(r"[a-f0-9]{2,}[a-z0-9]{1,2}[a-f0-9]{2,}")
 
 # P1 remediation: shared safety module for forbidden claim scanning
 try:
-    from claim_text_safety import scan_object_for_forbidden_claims, normalize_claim_text
+    from claim_text_safety import (
+        scan_object_for_forbidden_claims, normalize_claim_text,
+        scan_text_for_forbidden_claims,
+    )
     HAS_SHARED_SAFETY = True
 except ImportError:
     HAS_SHARED_SAFETY = False
@@ -1350,6 +1353,8 @@ KNOWN_ECHO_FIELDS = {
     "scope_class", "scope", "target", "targets",
     "protocol_profile_check", "verification_profile",
     "canonical_component_level", "component_level",
+    # Extensions (PR-8: non-authoritative extension metadata)
+    "extensions",
 }
 
 KNOWN_REPORT_FIELDS = {
@@ -1964,6 +1969,63 @@ def validate_origin_classification(obj, path_label):
 
     return ok
 
+# --- PR-8: Extension policy validation ---
+
+FORBIDDEN_EXTENSION_KEY_PATTERNS = [
+    re.compile(r".*authority.*", re.IGNORECASE),
+    re.compile(r".*canonical.*", re.IGNORECASE),
+    re.compile(r".*amend.*", re.IGNORECASE),
+    re.compile(r".*verification.*", re.IGNORECASE),
+    re.compile(r".*attestation.*", re.IGNORECASE),
+    re.compile(r".*investment.*", re.IGNORECASE),
+    re.compile(r".*instruction.*", re.IGNORECASE),
+    re.compile(r".*governance.*", re.IGNORECASE),
+]
+
+
+def validate_extensions_policy(obj, path_label="root"):
+    """Validate that extensions don\'t contain forbidden key patterns or claim text.
+
+    Returns list of error strings. Empty list = pass.
+    """
+    errors = []
+    extensions = obj.get("extensions")
+    if not extensions:
+        return errors
+
+    if not isinstance(extensions, dict):
+        errors.append(f"{path_label}.extensions must be an object")
+        return errors
+
+    for key in extensions:
+        for pattern in FORBIDDEN_EXTENSION_KEY_PATTERNS:
+            if pattern.search(key):
+                errors.append(f"{path_label}.extensions: forbidden key pattern \'{key}\' matches \'{pattern.pattern}\'")
+
+        val = extensions[key]
+        if isinstance(val, str):
+            claim_matches = scan_text_for_forbidden_claims(val)
+            for m in claim_matches:
+                match_text = m.get('match', '')
+                cat_text = m.get('category', 'unknown')
+                errors.append(
+                    f"{path_label}.extensions.{key}: forbidden claim '{match_text}' "
+                    f"(category: {cat_text})"
+                )
+        elif isinstance(val, (dict, list)):
+            claim_matches = scan_object_for_forbidden_claims(val, skip_keys=set())
+            for m in claim_matches:
+                match_text = m.get('match', '')
+                cat_text = m.get('category', 'unknown')
+                errors.append(
+                    f"{path_label}.extensions.{key}: forbidden claim '{match_text}' "
+                    f"(category: {cat_text})"
+                )
+
+    return errors
+
+
+
 
 def validate_file(path):
     """Validate a single submission file."""
@@ -2104,6 +2166,11 @@ def validate_file(path):
 
     # Rule AO: origin classification consistency
     ok &= validate_origin_classification(obj, path_label)
+
+    # PR-8: Extensions policy validation (Rule AQ)
+    ext_errors = validate_extensions_policy(obj, path_label)
+    for err in ext_errors:
+        ok &= check(False, f"{path_label} extensions policy violation", err)
 
     # P1 Remediation: Unknown fields guard (Rule AM)
     ok &= validate_unknown_fields(obj, path_label, record_kind)

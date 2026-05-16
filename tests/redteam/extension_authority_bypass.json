@@ -1,0 +1,7 @@
+{
+  "schema": "trinityaccord.echo.v3",
+  "record_kind": "echo_v3",
+  "extensions": {
+    "canonical_authority_status": "accepted"
+  }
+}
