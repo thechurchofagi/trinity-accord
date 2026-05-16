@@ -17,6 +17,8 @@ import re
 from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional
 
+from protocol_terms import PROTOCOL_LEVELS
+
 def _norm(s: str) -> str:
     """Normalize a string for comparison: lowercase, strip markdown, collapse whitespace."""
     s = (s or "").strip().lower()
@@ -74,7 +76,7 @@ for canonical, aliases in SECTION_ALIASES.items():
 
 
 # ── Verification level constants ───────────────────────────────────
-VALID_LEVELS = {"none", "V0", "V1", "V2", "V3", "V4", "V4+", "V5", "V6", "V7", "V8"}
+VALID_LEVELS = {"none"} | set(PROTOCOL_LEVELS)
 
 VALID_SCOPE_LABELS = {
     "none", "V0", "V1",

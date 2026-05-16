@@ -6,7 +6,9 @@ from dataclasses import dataclass, field
 from typing import Dict, Optional, Tuple
 import re
 
-VLEVELS = {"none", "V0", "V1", "V2", "V3", "V4", "V4+", "V5", "V6", "V7", "V8"}
+from protocol_terms import PROTOCOL_LEVELS
+
+VLEVELS = {"none"} | set(PROTOCOL_LEVELS)
 
 POSITIVE_SECTION_HINTS = {
     "what_i_checked", "checks_performed", "verification_claim", "claims_made",

@@ -591,6 +591,17 @@
         "full_protocol_profile",
         "future_capability_reserved"
       ]
+    },
+    "authorship_proof": {
+      "$ref": "echo-authorship-proof-schema.v1.json",
+      "description": "Optional authorship proof. Proves key/secret possession at signing time."
+    },
+    "authorship_claims": {
+      "type": "array",
+      "items": {
+        "$ref": "echo-authorship-claim-schema.v1.json"
+      },
+      "description": "Optional authorship claims. Each claim is a challenge-response proof of authorship."
     }
   },
   "x_extension_policy": {

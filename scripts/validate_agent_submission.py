@@ -1962,13 +1962,6 @@ def validate_origin_classification(obj, path_label):
             "agent_referred cannot have independence_class=unsolicited_independent"
         )
 
-    # New records should have origin_classification
-    archive_status = obj.get("archive_status", "")
-    record_kind = obj.get("record_kind", "")
-    if archive_status not in ("legacy", "superseded") and record_kind not in ("legacy_record",):
-        if not oc:
-            print(f"  WARNING: {path_label} new record missing origin_classification (recommended)")
-
     return ok
 
 

@@ -1,0 +1,10 @@
+{
+  "method": "ed25519_signature",
+  "proof_strength": "cryptographic",
+  "public_key": "BASE64_PUBLIC_KEY_HERE",
+  "canonicalization": "trinityaccord.canonical-json.v1",
+  "content_hash_sha256": "aabbccdd001122334455667788990011aabbccdd001122334455667788990011",
+  "signature": "BASE64_SIGNATURE_HERE",
+  "future_claim_method": "ed25519_challenge_signature",
+  "private_key": "THIS_IS_A_PRIVATE_KEY_AND_MUST_NOT_BE_ACCEPTED"
+}

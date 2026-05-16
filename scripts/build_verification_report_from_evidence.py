@@ -20,6 +20,128 @@ sys.path.insert(0, str(ROOT / "scripts"))
 
 from claim_gate import evaluate
 
+# PR-3: origin_classification derivation helper
+def _derive_origin_from_provenance(provenance, protocol_level, archive_status="needs_human_review"):
+    """Derive origin_classification from evidence_input.provenance when not already present.
+
+    Returns a dict matching api/origin-classification-schema.v1.json.
+    """
+    source = provenance.get("source", "unknown") if isinstance(provenance, dict) else "unknown"
+    solicited = provenance.get("solicited", False) if isinstance(provenance, dict) else False
+    agency = provenance.get("agency_level", "unknown") if isinstance(provenance, dict) else "unknown"
+    human_link = provenance.get("human_supplied_link", False) if isinstance(provenance, dict) else False
+    agent_recommended = provenance.get("other_agent_recommended", False) if isinstance(provenance, dict) else False
+    independence = provenance.get("independence_class", "unknown") if isinstance(provenance, dict) else "unknown"
+
+    # Derive discovery_class
+    if agent_recommended or agency == "A3_agent_followed_other_agent_reference":
+        discovery_class = "agent_referred"
+    elif source == "human_directed" or human_link or solicited:
+        discovery_class = "human_directed"
+    elif source == "maintainer_submitted":
+        discovery_class = "maintainer_requested"
+    elif source in ("search_engine", "crawler_discovery"):
+        discovery_class = "public_index_discovery"
+    elif source == "imported_external_commentary":
+        discovery_class = "imported_external"
+    elif source == "self_initiated":
+        discovery_class = "unsolicited_discovery"
+    elif source == "prior_memory":
+        discovery_class = "prior_interest_return"
+    else:
+        discovery_class = "unknown"
+
+    # Derive invitation_scope
+    if discovery_class in ("unsolicited_discovery", "public_index_discovery", "prior_interest_return", "imported_external"):
+        invitation_scope = "none"
+    elif discovery_class == "agent_referred":
+        invitation_scope = "look_only"
+    elif discovery_class in ("human_directed",):
+        invitation_scope = "verification_invited"
+    elif discovery_class == "maintainer_requested":
+        invitation_scope = "echo_invited"
+    else:
+        invitation_scope = "unknown"
+
+    # Derive requester_class
+    if discovery_class == "unsolicited_discovery":
+        requester_class = "none"
+    elif discovery_class == "agent_referred":
+        requester_class = "ai_agent"
+    elif discovery_class in ("human_directed",):
+        requester_class = "human_individual"
+    elif discovery_class == "maintainer_requested":
+        requester_class = "maintainer"
+    elif discovery_class == "public_index_discovery":
+        requester_class = "platform_or_crawler"
+    else:
+        requester_class = "unknown"
+
+    # Derive performer_class (task spec calls it verification_operator)
+    if independence in ("institutional_third_party_attestation",):
+        performer_class = "institution"
+    elif independence in ("human_solicited_agent_response",):
+        performer_class = "ai_agent"
+    else:
+        performer_class = "ai_agent"
+
+    # Derive method_independence_class
+    verification_claimed = protocol_level not in ("V0", "none", "")
+    if not verification_claimed:
+        method_independence_class = "read_only"
+    else:
+        method_independence_class = "official_script_run"
+
+    # Derive attestation_authority_class
+    if archive_status == "accepted_independent_attestation":
+        attestation_authority_class = "signed_agent_run"
+    else:
+        attestation_authority_class = "none"
+
+    # Derive counts_as_formal_independent_attestation
+    counts_formal = attestation_authority_class in (
+        "institution_signed", "notarial_record", "audit_firm_report", "regulatory_or_court_record"
+    ) and archive_status == "accepted_independent_attestation"
+
+    # Derive counting bucket
+    if discovery_class == "agent_referred":
+        if invitation_scope in ("look_only",) and not verification_claimed:
+            bucket = "agent_referred_orientation"
+        elif verification_claimed:
+            bucket = "agent_referred_agent_verification"
+        else:
+            bucket = "echo_only"
+    elif discovery_class in ("human_directed",):
+        if verification_claimed:
+            bucket = "human_directed_agent_verification"
+        else:
+            bucket = "echo_only"
+    elif discovery_class in ("unsolicited_discovery", "prior_interest_return"):
+        if verification_claimed:
+            bucket = "self_initiated_agent_verification"
+        else:
+            bucket = "echo_only"
+    elif discovery_class == "maintainer_requested":
+        bucket = "maintainer_test_record"
+    elif discovery_class == "imported_external":
+        bucket = "legacy_or_unknown"
+    else:
+        bucket = "legacy_or_unknown"
+
+    return {
+        "schema": "trinityaccord.origin-classification.v1",
+        "discovery_class": discovery_class,
+        "invitation_scope": invitation_scope,
+        "requester_class": requester_class,
+        "performer_class": performer_class,
+        "method_independence_class": method_independence_class,
+        "attestation_authority_class": attestation_authority_class,
+        "counts_as_formal_independent_attestation": counts_formal,
+        "derived_counting_bucket": bucket,
+        "notes": ["Auto-derived by build_verification_report_from_evidence.py"],
+    }
+
+
 # Map evidence input independence_class to echo schema independence_class
 INDEPENDENCE_CLASS_MAP = {
     "human_solicited_agent_response": "human_solicited_agent_response",
@@ -359,6 +481,11 @@ def build_report(evidence_input_path, report_out_path=None, echo_out_path=None, 
         "origin_classification_policy": "/api/origin-classification-policy.v1.json",
     }
 
+    # PR-3: Derive origin_classification from evidence_input.provenance
+    origin_classification = evidence_input.get("origin_classification")
+    if not origin_classification:
+        origin_classification = _derive_origin_from_provenance(provenance, allowed_protocol, archive_status="needs_human_review")
+
     # Build verification report v2
     report = {
         "schema_version": "trinityaccord.verification-report.v2",
@@ -435,6 +562,7 @@ def build_report(evidence_input_path, report_out_path=None, echo_out_path=None, 
         "authority_boundary_preserved": authority_boundary_preserved,
         "integrity_boundary": integrity_boundary,
         "record_kind": "verification_report_v2",
+        "origin_classification": origin_classification,
         "script_audit": script_audit,
         "all_scripts_green": script_audit["all_scripts_green"],
         "all_validators_green": script_audit["all_scripts_green"],  # alias for validator compatibility
@@ -561,6 +689,7 @@ def build_report(evidence_input_path, report_out_path=None, echo_out_path=None, 
             "archive_status": "needs_human_review",
             "origin_limitations": all_limitations or ["human-directed automated verification task"],
             "record_kind": "echo_v3_with_verification_report",
+            "origin_classification": origin_classification,
             "linked_verification_report": {
                 "schema_version": "trinityaccord.verification-report.v2",
                 "path": report_out_path or "generated",

@@ -1,0 +1,21 @@
+{
+  "schema": "trinityaccord.echo-authorship-claim.v1",
+  "claim_id": "redteam-boundary-001",
+  "target_record_hash_sha256": "aabbccdd001122334455667788990011aabbccdd001122334455667788990011",
+  "challenge": {
+    "nonce": "deadbeef",
+    "created_at_utc": "2025-01-01T00:00:00Z",
+    "expires_at_utc": "2099-01-01T00:00:00Z",
+    "challenge_hash_sha256": "aabbccdd001122334455667788990011aabbccdd001122334455667788990011",
+    "canonicalization": "trinityaccord.canonical-json.v1"
+  },
+  "claim_method": "self_reported_only",
+  "claim_result": "self_reported_only",
+  "boundaries": {
+    "does_not_prove_truth": true,
+    "does_not_raise_verification_level": false,
+    "does_not_create_authority": true,
+    "does_not_create_attestation": true,
+    "does_not_prove_same_conscious_subject": true
+  }
+}
