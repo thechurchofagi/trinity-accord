@@ -514,5 +514,19 @@
     "Echo content tags are non-exclusive and do not determine count status.",
     "D/S/O/E/R provenance codes are derived/internal."
   ],
-  "source_digest": "63e5ba414c66d85b"
+  "source_digest": "71795b5a5577a607",
+  "version": "v2",
+  "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
+  "non_amending_boundary": true,
+  "limitations": [
+    "Echo index is a registry of submitted Echo records, not a verification authority.",
+    "Archive status depends on human review and validation pipeline, not index inclusion alone.",
+    "Echo records do not create authority or amend the canonical layer."
+  ],
+  "does_not_prove": [
+    "independent third-party attestation",
+    "truth of philosophical or interpretive claims",
+    "investment or financial value",
+    "religious or authority status"
+  ]
 }

@@ -520,7 +520,7 @@
     "verification_report_schema_v2": "/api/verification-report-schema.v2.json"
   },
   "version": "v1",
-  "source_digest": "18efe9c001e50a21",
+  "source_digest": "47be5eb3007e0d94",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
   "non_amending_boundary": true,
   "canonical_authority": "Bitcoin Originals only",
