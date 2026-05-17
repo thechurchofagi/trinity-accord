@@ -152,6 +152,15 @@ jobs:
       - name: Test agent-declared oath rendering
         run: python3 scripts/test_agent_declared_oath_rendering.py
 
+      - name: Test agent-declared oath schema strictness
+        run: python3 scripts/test_agent_declared_oath_schema.py
+
+      - name: Test agent-declared index oath fields
+        run: python3 scripts/test_agent_declared_index_oath_fields.py
+
+      - name: Test Issue 168 has no canonical oath
+        run: python3 scripts/test_issue168_has_no_canonical_oath.py
+
       - name: Test Render API only archive policy
         run: python3 scripts/test_render_api_only_archive_policy.py
 

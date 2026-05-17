@@ -199,11 +199,13 @@
     },
     "verification_oath_present": {
       "type": "boolean",
-      "description": "Whether verification oath object is present in payload."
+      "const": true,
+      "description": "Whether verification oath object is present in payload. Must be true."
     },
     "oath_read": {
       "type": "boolean",
-      "description": "Whether agent confirmed reading the oath."
+      "const": true,
+      "description": "Whether agent confirmed reading the oath. Must be true."
     },
     "oath_version": {
       "type": "string",
@@ -217,16 +219,18 @@
     },
     "readback_required": {
       "type": "boolean",
-      "description": "Whether readback of oath is required."
+      "const": true,
+      "description": "Whether readback of oath is required. Must be true."
     },
     "agent_readback_present": {
       "type": "boolean",
-      "description": "Whether agent provided a readback of the oath."
+      "const": true,
+      "description": "Whether agent provided a readback of the oath. Must be true."
     },
     "agent_readback_char_count": {
       "type": "integer",
-      "minimum": 0,
-      "description": "Character count of the agent readback."
+      "minimum": 160,
+      "description": "Character count of the agent readback. Minimum 160."
     },
     "agent_readback_sha256": {
       "type": "string",

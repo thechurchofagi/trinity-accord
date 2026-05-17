@@ -97,6 +97,14 @@ def run_gh(args: list[str]) -> str:
     return result.stdout
 
 
+def parse_int(value, default=0):
+    """Safely parse an integer value, returning default on failure."""
+    try:
+        return int(value)
+    except (TypeError, ValueError):
+        return default
+
+
 def parse_intake_block(body: str) -> dict[str, str] | None:
     """Extract key-value pairs from a trinity-issue-intake code block."""
     if not body:
@@ -161,6 +169,7 @@ def build_index(issues: list[dict], repo: str = "", include_test: bool = False) 
     """Build the index from parsed issue data."""
     records = []
     skipped_direct = []
+    skipped_missing_oath_summary = []
 
     for issue in issues:
         body = issue.get("body", "")
@@ -249,13 +258,41 @@ def build_index(issues: list[dict], repo: str = "", include_test: bool = False) 
 
         # Oath summary fields
         oath_present = parse_bool(intake.get("verification_oath_present"))
+        is_post_effective = is_after_effective_date(created_at)
+
         if oath_present is True:
-            record["verification_oath_present"] = True
-            record["oath_version"] = intake.get("oath_version", "")
-            record["oath_text_sha256"] = intake.get("oath_text_sha256", "")
-            record["agent_readback_char_count"] = int(intake.get("agent_readback_char_count", 0))
-            record["agent_readback_sha256"] = intake.get("agent_readback_sha256", "")
+            count = parse_int(intake.get("agent_readback_char_count"))
+            oath_sha256 = intake.get("oath_text_sha256", "")
+            readback_sha256 = intake.get("agent_readback_sha256", "")
+            valid_hashes = (
+                bool(re.match(r"^[a-f0-9]{64}$", oath_sha256))
+                and bool(re.match(r"^[a-f0-9]{64}$", readback_sha256))
+            )
+            if count < 160 or not valid_hashes:
+                if is_post_effective:
+                    skipped_missing_oath_summary.append(issue["number"])
+                    print(
+                        f"SKIP_MISSING_OATH_SUMMARY issue #{issue['number']}: "
+                        f"oath present but incomplete (count={count}, valid_hashes={valid_hashes})",
+                        file=sys.stderr,
+                    )
+                    continue
+                record["legacy_oath_summary_missing"] = True
+            else:
+                record["verification_oath_present"] = True
+                record["oath_version"] = intake.get("oath_version", "")
+                record["oath_text_sha256"] = oath_sha256
+                record["agent_readback_char_count"] = count
+                record["agent_readback_sha256"] = readback_sha256
         else:
+            if is_post_effective:
+                skipped_missing_oath_summary.append(issue["number"])
+                print(
+                    f"SKIP_MISSING_OATH_SUMMARY issue #{issue['number']}: "
+                    f"no oath summary after effective date",
+                    file=sys.stderr,
+                )
+                continue
             record["legacy_oath_summary_missing"] = True
 
         records.append(record)
@@ -277,6 +314,7 @@ def build_index(issues: list[dict], repo: str = "", include_test: bool = False) 
         "rebuild_timestamp": datetime.now(timezone.utc).isoformat(),
         "render_api_only_effective_at": RENDER_API_ONLY_EFFECTIVE_AT,
         "skipped_direct_issue_archive_attempts": skipped_direct,
+        "skipped_missing_oath_summary": skipped_missing_oath_summary,
         "records": records,
     }
 
