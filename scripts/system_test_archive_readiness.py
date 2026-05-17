@@ -239,7 +239,7 @@ def test_decision_no_human_review():
         capture_output=True, text=True, timeout=30, cwd=str(ROOT)
     )
     decision = json.loads(decision_result.stdout)
-    assert_true("needs-human-review" not in json.dumps(decision), "no needs-human-review")
+    assert_true("needs-human-review" not in decision.get("labels_to_add", []), "no needs-human-review in labels_to_add")
     assert_not_in("successor-reception", decision.get("labels_to_add", []), "no successor-reception labels")
     assert_not_in("independent-attestation", decision.get("labels_to_add", []), "no independent-attestation labels")
 

@@ -29,10 +29,34 @@ Archive kind: `{requested_archive_kind}`
 Archive ready: `{archive_ready}`
 
 This automated decision is based on:
-- Claim Gate output
+- Claim Gate {claim_gate_summary}
 - Archive Readiness Gate
-- Artifact bundle references
+{decision_basis_md}- Boundary acknowledgements
+
+This record remains:
+- not authority
+- not amendment
+- not independent attestation
+- not successor reception
+"""
+
+COMMENT_TEMPLATE_READY_V0_V5 = """\
+<!-- trinity-auto-archive-decision:v1 sha256={decision_sha256} -->
+
+### Automated Archive Decision
+
+Result: `{action}`
+
+Archive kind: `{requested_archive_kind}`
+
+Archive ready: `{archive_ready}`
+
+This automated decision is based on:
+- Claim Gate template_for_v0_v5 PASS
+- Archive Readiness Gate
+- Verification oath / integrity declaration
 - Boundary acknowledgements
+- Evidence waived for V0–V5
 
 This record remains:
 - not authority
@@ -94,16 +118,34 @@ def build_decision(readiness):
             "archive:blocked",
             "needs-artifacts",
             "needs-provenance-proof",
-            "needs-level-downgrade"
+            "needs-level-downgrade",
+            "needs-human-review"
         ]
 
         decision_sha = compute_decision_sha256(readiness)
-        comment_markdown = COMMENT_TEMPLATE_READY.format(
-            decision_sha256=decision_sha,
-            action=action,
-            requested_archive_kind=requested_kind,
-            archive_ready=str(archive_ready).lower()
-        )
+
+        # Use V0-V5 specific template for agent-declared archives
+        if requested_kind == "agent_declared_verification_archive":
+            comment_markdown = COMMENT_TEMPLATE_READY_V0_V5.format(
+                decision_sha256=decision_sha,
+                action=action,
+                requested_archive_kind=requested_kind,
+                archive_ready=str(archive_ready).lower()
+            )
+        else:
+            # Strict evidence path
+            cg = readiness.get("claim_gate", {})
+            cg_summary = cg.get("mode", "strict") + " " + cg.get("status", "PASS")
+            has_artifacts = bool(readiness.get("evidence_input_present") or readiness.get("artifact_bundle_present"))
+            basis_lines = "- Artifact bundle references\n" if has_artifacts else ""
+            comment_markdown = COMMENT_TEMPLATE_READY.format(
+                decision_sha256=decision_sha,
+                action=action,
+                requested_archive_kind=requested_kind,
+                archive_ready=str(archive_ready).lower(),
+                claim_gate_summary=cg_summary,
+                decision_basis_md=basis_lines
+            )
 
     elif not archive_ready and record_intent == "auto_archive_candidate":
         # Blocked archive — do not create issue
