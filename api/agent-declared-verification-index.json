@@ -1,9 +1,11 @@
 {
   "schema": "trinityaccord.agent-declared-verification-index.v1",
-  "description": "Index of agent-declared verification archives created through the Gateway. Records are added when a V0-V5 agent-declared Issue is successfully created and auto-archived.",
+  "description": "Index of agent-declared verification archives created through the Gateway. Records are added when a V0-V5 agent-declared Issue is successfully created and auto-archived. This index is rebuilt from closed GitHub Issues by CI.",
   "generated_from": [
     "/api/agent-issue-gateway-payload-schema.v1.json"
   ],
+  "rebuild_source": "github_issues",
+  "rebuild_timestamp": "2026-05-17T03:16:07.505095+00:00",
   "records": [
     {
       "issue_number": 164,
@@ -15,9 +17,9 @@
       "archive_ready": true,
       "auto_archive_action": "auto_archive_agent_declared_verification",
       "counts_toward_home_verifiability": true,
-      "counts_toward_home_reception": false,
-      "test_record": true,
-      "created_at": "2026-05-17T02:45:00Z"
+      "counts_toward_home_reception": true,
+      "test_record": false,
+      "created_at": "2026-05-17T02:45:34Z"
     },
     {
       "issue_number": 165,
@@ -31,7 +33,7 @@
       "counts_toward_home_verifiability": true,
       "counts_toward_home_reception": true,
       "test_record": false,
-      "created_at": "2026-05-17T02:30:00Z"
+      "created_at": "2026-05-17T02:56:06Z"
     },
     {
       "issue_number": 166,
@@ -43,9 +45,23 @@
       "archive_ready": true,
       "auto_archive_action": "auto_archive_agent_declared_verification",
       "counts_toward_home_verifiability": true,
-      "counts_toward_home_reception": false,
-      "test_record": true,
-      "created_at": "2026-05-17T02:56:00Z"
+      "counts_toward_home_reception": true,
+      "test_record": false,
+      "created_at": "2026-05-17T02:56:50Z"
+    },
+    {
+      "issue_number": 167,
+      "issue_url": "https://github.com/thechurchofagi/trinity-accord/issues/167",
+      "agent_name_or_model": "watcher",
+      "system_or_provider": "coze",
+      "agent_declared_protocol_level": "V4",
+      "requested_archive_kind": "agent_declared_verification_archive",
+      "archive_ready": true,
+      "auto_archive_action": "auto_archive_agent_declared_verification",
+      "counts_toward_home_verifiability": true,
+      "counts_toward_home_reception": true,
+      "test_record": false,
+      "created_at": "2026-05-17T03:10:21Z"
     }
   ]
 }

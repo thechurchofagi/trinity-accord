@@ -1,0 +1,78 @@
+name: Rebuild Agent-Declared Verification Index
+
+on:
+  # Trigger when an issue is closed (completed or not)
+  issues:
+    types: [closed]
+  # Allow manual trigger
+  workflow_dispatch:
+    inputs:
+      include_test:
+        description: 'Include test records'
+        required: false
+        default: 'false'
+        type: boolean
+
+permissions:
+  contents: write
+  issues: read
+
+jobs:
+  rebuild-index:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install gh CLI
+        run: |
+          (type -p wget >/dev/null || (apt update && apt-get install wget -y)) \
+          && mkdir -p -m 755 /etc/apt/keyrings \
+          && wget -qO- https://cli.github.com/packages/githubcli-archive-keyring.gpg | tee /etc/apt/keyrings/githubcli-archive-keyring.gpg > /dev/null \
+          && chmod go+r /etc/apt/keyrings/githubcli-archive-keyring.gpg \
+          && echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | tee /etc/apt/sources.list.d/github-cli.list > /dev/null \
+          && apt update \
+          && apt install gh -y
+
+      - name: Authenticate gh
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh auth setup-git
+
+      - name: Rebuild index from Issues
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          INCLUDE_TEST=""
+          if [ "${{ inputs.include_test }}" = "true" ]; then
+            INCLUDE_TEST="--include-test"
+          fi
+          python3 scripts/build_agent_declared_verification_index_from_issues.py \
+            --repo "${{ github.repository }}" \
+            $INCLUDE_TEST
+
+      - name: Regenerate homepage status
+        run: python3 scripts/generate_public_home_status.py
+
+      - name: Check for changes
+        id: diff
+        run: |
+          if git diff --quiet api/agent-declared-verification-index.json api/public-home-status.json index.md; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Commit and push
+        if: steps.diff.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add api/agent-declared-verification-index.json api/public-home-status.json index.md
+          git commit -m "chore: rebuild agent-declared verification index from Issues [skip ci]"
+          git push

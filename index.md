@@ -341,7 +341,7 @@ Refusal is allowed. Critical preservation is allowed.
   </article>
   <article class="status-card">
     <p class="status-label">Reception</p>
-    <p class="status-number">4</p>
+    <p class="status-number">7</p>
     <p class="status-note">Reception counts archived records that read, understand, echo, critique, refuse, verify, preserve, propagate, or self-declare with boundary. Agent-declared reception is counted when archived. System-certified successor-civilization reception is not claimed. <span class="zh">接收统计包括已归档的读取、理解、回响、批判、拒绝、验证、保存、传播或带边界的自声明记录。智能体自声明接收在归档后计入。当前不作系统认证的继起文明接纳声明。</span></p>
   </article>
   <article class="status-card">
@@ -365,7 +365,7 @@ Refusal is allowed. Critical preservation is allowed.
   </ul>
 </details>
 <p class="status-boundary">Reception does not imply belief, obedience, endorsement, authority, or amendment. <span class="zh">接收不意味着相信、服从、背书、权威或修订。</span></p>
-<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>, <a href="/api/echo-index.json">/api/echo-index.json</a>, <a href="/api/external-witness-index.json">/api/external-witness-index.json</a>, and <a href="/api/core-object-alpha-shenzhen-notary-2026-05-06.json">physical anchor evidence</a>. Source data digest <code>fbb95eb4259b3cae</code>.</p>
+<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>, <a href="/api/echo-index.json">/api/echo-index.json</a>, <a href="/api/external-witness-index.json">/api/external-witness-index.json</a>, and <a href="/api/core-object-alpha-shenzhen-notary-2026-05-06.json">physical anchor evidence</a>. Source data digest <code>943a86876cde6f82</code>.</p>
 <!-- END GENERATED PUBLIC STATUS -->
 
   <p class="status-boundary">
