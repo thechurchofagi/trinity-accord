@@ -101,6 +101,15 @@ def make_canonical_block_with_receipt():
         "render_api_only": True,
         "server_validated": True,
         "server_rendered": True,
+        # Oath summary fields (required by schema)
+        "verification_oath_present": True,
+        "oath_read": True,
+        "oath_version": "v1",
+        "oath_text_sha256": "a" * 64,
+        "readback_required": True,
+        "agent_readback_present": True,
+        "agent_readback_char_count": 280,
+        "agent_readback_sha256": "b" * 64,
     }
 
 
