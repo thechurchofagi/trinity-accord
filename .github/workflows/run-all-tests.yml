@@ -73,6 +73,21 @@ jobs:
       - name: Reception headline total regression
         run: python3 scripts/test_reception_headline_total.py
 
+      - name: Test reception initiation classification
+        run: python3 scripts/test_reception_initiation_classification.py
+
+      - name: Test reception initiation builder consistency
+        run: python3 scripts/test_reception_initiation_builder_consistency.py
+
+      - name: Test reception initiation production render
+        run: python3 scripts/test_reception_initiation_production_render.py
+
+      - name: Test public home reception breakdown invariant
+        run: python3 scripts/test_public_home_reception_breakdown_invariant.py
+
+      - name: Test agent-declared index initiation breakdown
+        run: python3 scripts/test_agent_declared_index_initiation_breakdown.py
+
       - name: Gateway agent-declared payload schema
         run: python3 scripts/test_gateway_agent_declared_payload_schema.py
 

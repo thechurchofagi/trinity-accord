@@ -388,6 +388,27 @@ def validate_agent_declared_archive(payload, errors):
         if prov.get("human_supplied_link") is True:
             errors.append("self_initiated must not set discovery_provenance.human_supplied_link=true; use externally_seeded or externally_requested")
 
+    # Consistency: externally_seeded should have an external seed signal
+    if init_class == "externally_seeded":
+        if prov.get("human_supplied_link") is not True and prov.get("other_agent_recommended") is not True:
+            errors.append("externally_seeded should record an external seed in discovery_provenance; set human_supplied_link=true or use a more specific class")
+
+    # Consistency: externally_requested should use appropriate basis
+    basis = payload.get("reception_initiation_basis")
+    if init_class == "externally_requested":
+        if basis not in ("explicit_verification_request", "unknown", None):
+            errors.append("externally_requested should use reception_initiation_basis=explicit_verification_request or unknown")
+
+    # Consistency: agent_referred should have other_agent_recommended
+    if init_class == "agent_referred":
+        if prov.get("other_agent_recommended") is not True:
+            errors.append("agent_referred should set discovery_provenance.other_agent_recommended=true")
+
+    # Consistency: system_scheduled should use scheduled_monitor basis
+    if init_class == "system_scheduled":
+        if basis not in ("scheduled_monitor", "unknown", None):
+            errors.append("system_scheduled should use reception_initiation_basis=scheduled_monitor or unknown")
+
 
 def validate_echo_candidate(payload, errors):
     att = get_attachments(payload)

@@ -10,16 +10,17 @@ Usage:
         --agent-name "守望者 (Watcher)" \
         --provider "Coze (ByteDance)" \
         --declared-level V4 \
-        --source self_initiated \
-        --agency-level A4_independent_search_or_browsing_discovery \
+        --reception-initiation-class externally_seeded \
+        --reception-initiation-basis external_url_only \
+        --agent-independent-followup \
         --first-entry-url https://www.trinityaccord.org/ \
         --first-entry-type homepage \
-        --performer-class ai_agent \
-        --method-independence-class read_only \
-        --verification-claimed \
-        --counts-home-verifiability \
-        --counts-home-reception \
+        --what-checked "Read public homepage" \
+        --limitation "External seed was a URL; independent follow-up was performed" \
         --out gateway-payload.json
+
+Note: --source and --agency-level are legacy parameters.
+      Use --reception-initiation-class as the primary classification field.
 """
 import argparse
 import hashlib
@@ -272,9 +273,10 @@ def main():
     parser.add_argument("--provider", required=True, help="System or provider")
     parser.add_argument("--declared-level", "--level", required=True, choices=["V0", "V1", "V2", "V3", "V4", "V5"],
                         dest="declared_level", help="Declared protocol level")
-    parser.add_argument("--source", default="self_initiated", help="Discovery source")
+    parser.add_argument("--source", default="self_initiated",
+                        help="[deprecated] Legacy discovery source; use --reception-initiation-class instead")
     parser.add_argument("--agency-level", default="A4_independent_search_or_browsing_discovery",
-                        help="Agency level")
+                        help="[legacy] Provenance detail; not the reception initiation class")
     parser.add_argument("--first-entry-url", "--entry-url", default="https://www.trinityaccord.org/",
                         dest="first_entry_url", help="First entry URL")
     parser.add_argument("--first-entry-type", default="homepage", help="First entry type")
@@ -305,9 +307,13 @@ def main():
                                  "scheduled_monitor", "legacy_unclassified", "unknown"],
                         dest="reception_initiation_basis",
                         help="Specific basis for the initiation class")
-    parser.add_argument("--agent-independent-followup", action="store_true", default=False,
-                        dest="agent_independent_followup",
-                        help="Agent independently followed up after seed/request")
+    followup_group = parser.add_mutually_exclusive_group()
+    followup_group.add_argument("--agent-independent-followup", action="store_true", default=False,
+                                 dest="agent_independent_followup",
+                                 help="Agent independently followed up after seed/request")
+    followup_group.add_argument("--no-agent-independent-followup", action="store_false",
+                                 dest="agent_independent_followup",
+                                 help="Explicitly set agent_independent_followup to false")
     parser.add_argument("--out", required=True, help="Output file path")
     args = parser.parse_args()
 
