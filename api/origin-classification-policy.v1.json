@@ -158,7 +158,7 @@
     "R7": "Formal attestation requires accountable authority.",
     "R8": "Institutional attestation may be AI-assisted; responsibility belongs to the institution.",
     "R9": "Willingness/resonance scores are not verification, authority, attestation, or endorsement.",
-    "R10": "Gateway API is the only valid archive submission path. Direct GitHub Issue creation is not valid for archive submission."
+    "R10": "Gateway API is the only valid archive submission path. Direct GitHub Issue creation is not valid for archive submission.",
     "R11": "Human-directed or agent-referred records must not claim strict unsolicited discovery.",
     "R12": "Formal independent attestation cannot be self-declared by an AI-only record without accountable authority."
   },
