@@ -119,7 +119,7 @@
     "Claiming witness extraction from explorer API without parsing witness",
     "Counting human-solicited AI output as independent attestation",
     "Claiming C3 with fewer than two Chronicle samples",
-    "Claiming V4 without script audit fields",
+    "Claiming strict-evidence V4 without script audit fields. V0–V5 agent-declared archive does not require script audit.",
     "Claiming V5 without D5/C5 profile compatibility",
     "Putting schema versions such as Verification Report v2 or Echo v3 in Issue display titles where they can be confused with V-levels"
   ],
@@ -163,7 +163,7 @@
     "invalid": "Free-form protocol-level, component-level, or Echo wrapper claims are invalid."
   },
   "claim_gate": {
-    "required_for": "technical verification claims, especially V3+ claims",
+    "required_for": "V0–V5 agent-declared archives require template_for_v0_v5 Claim Gate. V6+ strict evidence verification requires strict evidence Claim Gate.",
     "evidence_input_schema": "/api/evidence-input-schema.v1.json",
     "claim_gate_rules": "/api/claim-gate-rules.json",
     "claim_gate_output_schema": "/api/claim-gate-output-schema.v1.json",
@@ -200,6 +200,7 @@
   },
   "verification_echo_intake_fields": {
     "note": "Verification Echo Issues must include explicit intake fields. Use a fenced trinity-issue-intake block for machine readability.",
+    "scope": "V6+ strict verification echo only; not required for V0-V5 agent_declared_verification_archive",
     "required_fields": [
       "submission_type",
       "echo_type",
@@ -238,6 +239,25 @@
         "hash": "echo_wrapper_sha256"
       }
     ]
+  },
+  "v0_v5_agent_declared_rules": {
+    "default_path": true,
+    "requested_archive_kind": "agent_declared_verification_archive",
+    "claim_gate_mode": "template_for_v0_v5",
+    "evidence_requirement_mode": "waived_for_v0_v5",
+    "evidence_files_required": false,
+    "script_audit_required": false,
+    "artifact_bundle_required": false,
+    "unsolicited_discovery_proof_required": false,
+    "not_independent_attestation_required": false,
+    "not_successor_reception_required": false,
+    "builder": "scripts/build_agent_declared_archive_payload.py"
+  },
+  "v6_plus_strict_evidence_rules": {
+    "claim_gate_mode": "strict_evidence",
+    "evidence_files_required": true,
+    "script_audit_required": true,
+    "builder": "scripts/build_gateway_payload_from_outputs.py"
   },
   "boundary": {
     "not_authority": true,

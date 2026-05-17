@@ -217,11 +217,10 @@ def main():
     p["title"] = "Agent-Declared Verification Archive: V6 — Watcher"
     check(test_fail("V6 agent-declared payload", p))
 
-    # Missing verification_oath — schema allows this (agent_integrity_declaration is object type)
-    # but the validator catches it. Schema test expects PASS.
+    # Missing verification_oath — schema now requires this (agent_integrity_declaration requires verification_oath)
     p = make_valid_agent_declared()
     del p["agent_integrity_declaration"]["verification_oath"]
-    check(test_pass("Missing verification_oath (schema allows, validator catches)", p))
+    check(test_fail("Missing verification_oath (schema rejects)", p))
 
     # Missing authority_boundary
     p = make_valid_agent_declared()

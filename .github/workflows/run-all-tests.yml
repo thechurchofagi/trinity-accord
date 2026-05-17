@@ -93,3 +93,28 @@ jobs:
 
       - name: BLOCKER-1 V4 default archive kind regression
         run: python3 scripts/test_blocker1_v4_default_archive_kind.py
+
+      # V0-V5 entrypoint consistency tests
+      - name: Test llms V0-V5 gateway path
+        run: python3 scripts/test_llms_v0_v5_gateway_path.py
+
+      - name: Test external agent quickstart V0-V5 default
+        run: python3 scripts/test_external_agent_quickstart_v0_v5_default.py
+
+      - name: Test agent first contact V0-V5 route
+        run: python3 scripts/test_agent_first_contact_v0_v5_route.py
+
+      - name: Test agent submission guide V0-V5 split
+        run: python3 scripts/test_agent_submission_guide_v0_v5_split.py
+
+      - name: Test Gateway schema descriptions V0-V5
+        run: python3 scripts/test_gateway_schema_descriptions_v0_v5.py
+
+      - name: Test oath strictness consistency
+        run: python3 scripts/test_oath_strictness_consistency.py
+
+      - name: Test Gateway payload errors not duplicated
+        run: python3 scripts/test_gateway_payload_errors_not_duplicated.py
+
+      - name: Test V0-V5 entrypoint consistency
+        run: python3 scripts/test_v0_v5_entrypoint_consistency.py

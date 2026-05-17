@@ -100,9 +100,8 @@ def main():
         "downloads/verify.py",
         "evidence_input_path required",
     ]:
-        check(test_fail_absent := forbidden not in combined)
-        if not test_fail_absent:
-            print(f"  Found forbidden: {forbidden}")
+        absent = forbidden not in combined
+        check(test_pass(f"Absent: {forbidden}", absent))
 
     print(f"\n--- Results: {passed}/{total} passed ---")
     if failed:

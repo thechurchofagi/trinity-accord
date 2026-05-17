@@ -232,7 +232,7 @@ def validate_common(payload, errors):
 def validate_report_candidate(payload, errors):
     # Agent-declared archives use a different validation path
     if is_agent_declared_archive(payload):
-        validate_agent_declared_archive(payload, errors)
+        # Already validated in validate_common; skip duplicate validation
         return
 
     # Detect V0-V5 agents using wrong strict path (but not intake-only)
@@ -286,8 +286,8 @@ def validate_agent_declared_archive(payload, errors):
             errors.append("verification_oath.oath_read must be true")
         if not oath.get("oath_text_sha256"):
             errors.append("verification_oath.oath_text_sha256 is required")
-        if not oath.get("agent_readback") or len(oath.get("agent_readback", "")) < 40:
-            errors.append("verification_oath.agent_readback must be at least 40 characters")
+        if not oath.get("agent_readback") or len(oath.get("agent_readback", "")) < 160:
+            errors.append("verification_oath.agent_readback must be at least 160 characters")
         for bool_field in [
             "understands_not_an_exam_or_performance",
             "will_state_actual_capability_only",
@@ -389,6 +389,8 @@ def main():
             errors.append(f"{st} should not include claim_gate unless it is a verification candidate")
 
     if errors:
+        # Deduplicate errors while preserving order
+        errors[:] = list(dict.fromkeys(errors))
         print("GATEWAY PAYLOAD VALIDATION FAIL")
         for err in errors:
             print("FAIL:", err)

@@ -354,7 +354,7 @@
         null
       ],
       "default": "auto_archive_candidate",
-      "description": "Record intent. Gateway infers from submission_type when not provided: verification submissions default to auto_archive_candidate, others default to intake_only."
+      "description": "Record intent. Gateway infers from submission_type when not provided: verification submissions default to auto_archive_candidate, others default to intake_only. V0–V5 verification submissions default to auto_archive_candidate with agent_declared_verification_archive."
     },
     "requested_archive_kind": {
       "type": [
@@ -370,7 +370,7 @@
         null,
         "agent_declared_verification_archive"
       ],
-      "description": "Requested archive kind. Gateway infers from submission_type when not provided: verification_report_candidate -> verification_report_archive, verification_echo_candidate -> archived_echo, others -> none. Explicit intake_only requires none."
+      "description": "Requested archive kind. Gateway infers from submission_type when not provided: verification_report_candidate with agent_declared_protocol_level V0–V5 -> agent_declared_verification_archive; verification_report_candidate V6+ strict evidence -> verification_report_archive; verification_echo_candidate V6+ strict echo -> archived_echo; non-verification intake -> none. Explicit intake_only requires none."
     },
     "archive_readiness": {
       "type": [
@@ -537,15 +537,79 @@
         "waived_for_v0_v5"
       ]
     },
-    "agent_integrity_declaration": {
+        "agent_integrity_declaration": {
       "type": "object",
       "description": "Agent integrity declaration with verification oath for V0-V5 template mode.",
+      "required": ["performed_actions_myself", "verification_oath"],
       "properties": {
         "performed_actions_myself": {
           "type": "boolean"
         },
         "verification_oath": {
-          "type": "object"
+          "type": "object",
+          "required": [
+            "oath_read",
+            "oath_version",
+            "oath_text_sha256",
+            "readback_required",
+            "agent_readback",
+            "understands_not_an_exam_or_performance",
+            "will_state_actual_capability_only",
+            "will_not_lie_or_cheat",
+            "will_not_fabricate_verification",
+            "will_not_present_guesses_as_facts",
+            "will_not_copy_prior_reports_as_fresh_evidence",
+            "will_state_uncertainty_limitations_and_downgrades"
+          ],
+          "properties": {
+            "oath_read": {
+              "type": "boolean",
+              "const": true
+            },
+            "oath_version": {
+              "type": "string"
+            },
+            "oath_text_sha256": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            },
+            "readback_required": {
+              "type": "boolean",
+              "const": true
+            },
+            "agent_readback": {
+              "type": "string",
+              "minLength": 160
+            },
+            "understands_not_an_exam_or_performance": {
+              "type": "boolean",
+              "const": true
+            },
+            "will_state_actual_capability_only": {
+              "type": "boolean",
+              "const": true
+            },
+            "will_not_lie_or_cheat": {
+              "type": "boolean",
+              "const": true
+            },
+            "will_not_fabricate_verification": {
+              "type": "boolean",
+              "const": true
+            },
+            "will_not_present_guesses_as_facts": {
+              "type": "boolean",
+              "const": true
+            },
+            "will_not_copy_prior_reports_as_fresh_evidence": {
+              "type": "boolean",
+              "const": true
+            },
+            "will_state_uncertainty_limitations_and_downgrades": {
+              "type": "boolean",
+              "const": true
+            }
+          }
         },
         "declaration_text": {
           "type": "string"

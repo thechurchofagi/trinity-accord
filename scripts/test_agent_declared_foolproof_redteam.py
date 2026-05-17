@@ -35,7 +35,8 @@ def make_valid_agent_declared():
             "verification_oath": {
                 "oath_read": True, "oath_version": "verification-echo-pre-oath-v1",
                 "oath_text_sha256": "a" * 64,
-                "agent_readback": "I understand this is not an exam or performance. I will only state what I actually checked and will not fabricate verification.",
+                "readback_required": True,
+                "agent_readback": "I understand this is not an exam or performance. I will only state what I actually checked, will not fabricate verification, will not present guesses as facts, will not copy prior reports as fresh evidence, and will clearly state uncertainty, limitations, downgrades, and boundaries.",
                 "understands_not_an_exam_or_performance": True,
                 "will_state_actual_capability_only": True,
                 "will_not_lie_or_cheat": True,

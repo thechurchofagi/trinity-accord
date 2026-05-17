@@ -59,7 +59,46 @@
       }
     },
     {
-      "intent": "verify",
+      "intent": "verify_v0_v5_agent_declared",
+      "when": "declared protocol level is V0, V1, V2, V3, V4, or V5",
+      "default_for": ["V0", "V1", "V2", "V3", "V4", "V5"],
+      "read": [
+        "/agent-submit",
+        "/api/agent-issue-gateway-payload-schema.v1.json",
+        "/api/verification-echo-pre-oath.v1.txt"
+      ],
+      "pipeline": [
+        "verification_oath_readback",
+        "agent_declared_template",
+        "claim_gate_template_for_v0_v5",
+        "archive_readiness_agent_declared",
+        "gateway_preflight"
+      ],
+      "requested_archive_kind": "agent_declared_verification_archive",
+      "evidence_requirement_mode": "waived_for_v0_v5",
+      "not_required": [
+        "evidence_input",
+        "artifact_bundle",
+        "downloads/verify.py",
+        "build_from_evidence",
+        "unsolicited_discovery_proof",
+        "not_independent_attestation",
+        "not_successor_reception"
+      ],
+      "if_no_github_access": {
+        "read": [
+          "/agent-submit",
+          "/api/agent-submit-gateway.json"
+        ],
+        "allowed_action": "submit_agent_declared_payload_to_gateway",
+        "production_profile": "/api/agent-gateway-production-profile.json",
+        "recommended_backend": "github_app_backend",
+        "boundary": "gateway intake does not raise verification level"
+      }
+    },
+    {
+      "intent": "verify_v6_plus_strict_evidence",
+      "when": "declared protocol level is V6, V7, or V8",
       "read": [
         "/agent-verify-simple",
         "/api/evidence-input-schema.v1.json",
@@ -68,13 +107,13 @@
       ],
       "pipeline": [
         "evidence_input",
-        "claim_gate",
+        "strict_claim_gate",
         "report_builder_if_allowed",
         "validator",
         "agent_verification_receipt",
         "human_custody_package"
       ],
-      "allowed_modes_initial": ["v0", "v1", "v2-minimal", "v3-minimal"],
+      "allowed_modes_initial": ["v6", "v7", "v8"],
       "if_no_github_access": {
         "read": [
           "/agent-submit",
