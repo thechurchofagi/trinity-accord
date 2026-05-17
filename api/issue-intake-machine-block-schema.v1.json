@@ -412,7 +412,7 @@
             ]
           },
           "created_by_gateway": {
-            "const": true
+            "type": "boolean"
           },
           "gateway_service": {
             "type": "string",
@@ -427,13 +427,13 @@
             "minLength": 7
           },
           "render_api_only": {
-            "const": true
+            "type": "boolean"
           },
           "server_validated": {
-            "const": true
+            "type": "boolean"
           },
           "server_rendered": {
-            "const": true
+            "type": "boolean"
           }
         },
         "not": {
