@@ -139,7 +139,10 @@ def make_valid_agent_declared():
         "limitations": [
             "Evidence requirements are waived for V0-V5 template mode",
             "This is agent-declared and does not amend or override Bitcoin Originals"
-        ]
+        ],
+        "reception_initiation_class": "self_initiated",
+        "reception_initiation_basis": "agent_discovered_publicly",
+        "agent_independent_followup": True
     }
 
 
