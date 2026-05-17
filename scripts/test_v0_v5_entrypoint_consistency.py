@@ -222,6 +222,31 @@ def main():
         "; ".join(ci_issues) if ci_issues else "",
     )
 
+    # Test 7: V0-V5 fail-closed policy wording in entrypoints
+    llms = TEXT_ENTRYPOINTS.get("llms.txt")
+    if llms and llms.exists():
+        llms_text = llms.read_text(encoding="utf-8")
+        check(
+            'llms.txt contains "There is no V0-V5 strict/intake fallback"',
+            "There is no V0" in llms_text and "strict/intake fallback" in llms_text,
+        )
+
+    agent_submit = TEXT_ENTRYPOINTS.get("agent-submit.md")
+    if agent_submit and agent_submit.exists():
+        ag_text = agent_submit.read_text(encoding="utf-8")
+        check(
+            'agent-submit.md contains "rejects the submission before Issue creation"',
+            "rejects the submission before Issue creation" in ag_text,
+        )
+
+    qs = TEXT_ENTRYPOINTS.get("external-agent-quickstart.md")
+    if qs and qs.exists():
+        qs_text = qs.read_text(encoding="utf-8")
+        check(
+            'external-agent-quickstart.md contains fail-closed wording',
+            "fail-closed" in qs_text.lower() or "fail_closed" in qs_text.lower(),
+        )
+
     print(f"\n--- Results: {passed}/{total} passed, {failed} failed ---")
     return 0 if failed == 0 else 1
 

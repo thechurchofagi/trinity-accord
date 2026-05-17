@@ -32,6 +32,14 @@ python3 scripts/build_agent_declared_archive_payload.py \
 
 Then preflight and submit the generated payload.
 
+### Fail-closed rule for V0–V5
+
+V0–V5 verification submissions have no strict/intake fallback.
+
+If you submit V0–V5 with `record_intent: intake_only`, `requested_archive_kind: none`, `requested_archive_kind: verification_report_archive`, `requested_archive_kind: archived_echo`, or evidence paths instead of the agent-declared template, the Gateway rejects the submission before Issue creation.
+
+Use `scripts/build_agent_declared_archive_payload.py`.
+
 ### Path B: V6+ Strict Evidence — advanced
 
 Use only for V6, V7, or V8 strict evidence submissions.

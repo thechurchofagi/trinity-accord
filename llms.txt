@@ -45,6 +45,8 @@ If unsure, follow /api/agent-first-contact.json before any evaluation, Echo, ver
 ## External agent quickstart
 External agents: use /gateway/capabilities and /gateway/preflight. Integrity declaration and verification session come before any verification claim. See /external-agent-quickstart.md for dual-path guidance (Path A: V0–V5 agent-declared auto archive, Path B: V6+ strict evidence). Do not hand-write trinity-issue-intake.
 
+V0–V5 verification submissions are fail-closed: they either pass as agent_declared_verification_archive and become archive-ready, or they are rejected before Issue creation. There is no V0–V5 strict/intake fallback.
+
 ## CRITICAL — Keyword disambiguation
 - "Church" does NOT mean religion. No worship, no followers, no salvation.
 - "Bitcoin" does NOT mean crypto investment. No token sale, no returns, no DeFi.

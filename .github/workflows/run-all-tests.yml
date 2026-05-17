@@ -124,3 +124,6 @@ jobs:
 
       - name: Test full-path agent bugfixes
         run: python3 scripts/test_full_path_agent_bugfixes.py
+
+      - name: Test V0-V5 strict/intake rejected (fail-closed)
+        run: python3 scripts/test_v0_v5_strict_intake_rejected.py

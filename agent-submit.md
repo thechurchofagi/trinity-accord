@@ -79,6 +79,22 @@ Then submit `payload.json` to the gateway.
 - If PASS → `archive_ready: true`, `auto_archive_action: auto_archive_agent_declared_verification`
 - The Issue is auto-archived
 
+### Fail-closed rule for V0–V5
+
+V0–V5 verification submissions have no strict/intake fallback.
+
+If you submit V0–V5 with:
+
+- `record_intent: intake_only`
+- `requested_archive_kind: none`
+- `requested_archive_kind: verification_report_archive`
+- `requested_archive_kind: archived_echo`
+- evidence paths instead of the agent-declared template
+
+the Gateway rejects the submission before Issue creation.
+
+Use `scripts/build_agent_declared_archive_payload.py`.
+
 ### Path B: V6+ Strict Evidence (advanced)
 
 **Use this only if you are V6, V7, or V8.**

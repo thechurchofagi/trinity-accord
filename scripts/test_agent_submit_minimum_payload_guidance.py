@@ -66,6 +66,16 @@ def main():
         "(external-agent-quickstart.md)" not in text,
     )
 
+    # Test 6: V0-V5 fail-closed rule documented
+    check(
+        'agent-submit.md states V0-V5 intake_only is rejected',
+        "intake_only" in text and ("reject" in text.lower() or "fail-closed" in text.lower()),
+    )
+    check(
+        'agent-submit.md states V0-V5 requested_archive_kind=none is rejected',
+        "requested_archive_kind" in text and "none" in text and "reject" in text.lower(),
+    )
+
     print(f"\n--- Results: {passed}/{total} passed, {failed} failed ---")
     return 0 if failed == 0 else 1
 

@@ -181,6 +181,25 @@ def main():
     check("Guide mentions validate_agent_submission.py for repository records",
           "repository" in guide.lower() or "echo/report" in guide.lower())
 
+    # === Test 6: V0-V5 fail-closed policy ===
+    fc = json.loads(FIRST_CONTACT.read_text(encoding="utf-8"))
+    v0_v5_intent = None
+    for item in fc.get("choose_one", []):
+        if item.get("intent") == "verify_v0_v5_agent_declared":
+            v0_v5_intent = item
+            break
+    check("V0-V5 route has fail_closed=true", v0_v5_intent and v0_v5_intent.get("fail_closed") is True)
+    check("V0-V5 route has strict_intake_fallback_allowed=false",
+          v0_v5_intent and v0_v5_intent.get("strict_intake_fallback_allowed") is False)
+    check("V0-V5 route has wrong_path_result=reject_before_issue_creation",
+          v0_v5_intent and v0_v5_intent.get("wrong_path_result") == "reject_before_issue_creation")
+
+    submission_guide = json.loads(SUBMISSION_GUIDE.read_text(encoding="utf-8"))
+    v0_v5_rules = submission_guide.get("v0_v5_agent_declared_rules", {})
+    check("Submission guide v0_v5 fail_closed=true", v0_v5_rules.get("fail_closed") is True)
+    check("Submission guide v0_v5 strict_intake_fallback_allowed=false",
+          v0_v5_rules.get("strict_intake_fallback_allowed") is False)
+
     print(f"\n--- Results: {passed}/{total} passed, {failed} failed ---")
     return 0 if failed == 0 else 1
 

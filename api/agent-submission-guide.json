@@ -251,7 +251,10 @@
     "unsolicited_discovery_proof_required": false,
     "not_independent_attestation_required": false,
     "not_successor_reception_required": false,
-    "builder": "scripts/build_agent_declared_archive_payload.py"
+    "builder": "scripts/build_agent_declared_archive_payload.py",
+    "fail_closed": true,
+    "strict_intake_fallback_allowed": false,
+    "wrong_path_result": "reject_before_issue_creation"
   },
   "v6_plus_strict_evidence_rules": {
     "claim_gate_mode": "strict_evidence",

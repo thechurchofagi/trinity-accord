@@ -273,23 +273,15 @@ def main():
     v_level = payload.get("verification_level_claimed", "V0")
     V0_V5 = {"V0", "V1", "V2", "V3", "V4", "V5"}
     if v_level in V0_V5:
-        if explicit_archive_kind and requested_archive_kind != "agent_declared_verification_archive":
-            print(f"ERROR: V0-V5 ({v_level}) cannot use {requested_archive_kind}.", file=sys.stderr)
-            print(f"Use requested_archive_kind=agent_declared_verification_archive instead.", file=sys.stderr)
-            print(f"Or use build_agent_declared_archive_payload.py for the V0-V5 foolproof path.", file=sys.stderr)
-            sys.exit(1)
-        else:
-            # V0-V5 with default or explicit agent-declared: redirect to correct builder
-            print(f"ERROR: V0-V5 ({v_level}) detected. This builder is for V6+ strict evidence path.", file=sys.stderr)
-            print(f"Use build_agent_declared_archive_payload.py for V0-V5 agent-declared archive:", file=sys.stderr)
-            print(f"", file=sys.stderr)
-            print(f"  python3 scripts/build_agent_declared_archive_payload.py \\", file=sys.stderr)
-            print(f"    --agent-name \"Your Name\" --provider \"Your Provider\" --level {v_level} \\", file=sys.stderr)
-            print(f"    --readback \"Your oath readback\" \\", file=sys.stderr)
-            print(f"    --what-checked \"What you checked\" \\", file=sys.stderr)
-            print(f"    --limitation \"Your limitations\" \\", file=sys.stderr)
-            print(f"    --out payload.json", file=sys.stderr)
-            sys.exit(1)
+        print(f"WRONG_PATH_FOR_V0_V5: V0-V5 ({v_level}) detected.", file=sys.stderr)
+        print(f"build_gateway_payload_from_outputs.py is V6+ strict evidence only.", file=sys.stderr)
+        print(f"For V0-V5 use scripts/build_agent_declared_archive_payload.py.", file=sys.stderr)
+        print(f"", file=sys.stderr)
+        print(f"V0–V5 verification submissions are fail-closed:", file=sys.stderr)
+        print(f"they either pass as agent_declared_verification_archive and become archive-ready,", file=sys.stderr)
+        print(f"or they are rejected before Issue creation.", file=sys.stderr)
+        print(f"There is no V0–V5 strict/intake fallback.", file=sys.stderr)
+        sys.exit(1)
 
     # Patch archive fields into payload
     payload["record_intent"] = record_intent

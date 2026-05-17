@@ -55,6 +55,14 @@ FORBIDDEN_TITLE_PATTERNS = [
 
 V0_V5 = {"V0", "V1", "V2", "V3", "V4", "V5"}
 
+# V0-V5 fail-closed policy
+from gateway_v0_v5_policy import (  # noqa: E402
+    V0_V5_WRONG_PATH_ERROR,
+    is_agent_declared_archive,
+    is_valid_v0_v5_agent_declared_path,
+    should_reject_v0_v5_wrong_path,
+)
+
 
 def is_agent_declared_archive(payload):
     return payload.get("requested_archive_kind") == "agent_declared_verification_archive"
@@ -405,6 +413,15 @@ def main():
         sys.exit(1)
 
     validate_jsonschema(payload, errors)
+
+    # V0-V5 fail-closed: reject wrong path early, before strict checks generate noise
+    if should_reject_v0_v5_wrong_path(payload):
+        errors.append(V0_V5_WRONG_PATH_ERROR)
+        print("GATEWAY PAYLOAD VALIDATION FAIL")
+        for err in errors:
+            print("FAIL:", err)
+        sys.exit(1)
+
     validate_common(payload, errors)
 
     st = payload.get("submission_type")

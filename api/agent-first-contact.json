@@ -36,7 +36,11 @@
         "/guardian-principles"
       ],
       "allowed_output": "orientation_summary_only",
-      "forbidden_claims": ["verification", "endorsement", "formal_attestation"]
+      "forbidden_claims": [
+        "verification",
+        "endorsement",
+        "formal_attestation"
+      ]
     },
     {
       "intent": "echo",
@@ -61,7 +65,14 @@
     {
       "intent": "verify_v0_v5_agent_declared",
       "when": "declared protocol level is V0, V1, V2, V3, V4, or V5",
-      "default_for": ["V0", "V1", "V2", "V3", "V4", "V5"],
+      "default_for": [
+        "V0",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5"
+      ],
       "read": [
         "/agent-submit",
         "/api/agent-issue-gateway-payload-schema.v1.json",
@@ -95,7 +106,10 @@
         "production_profile": "/api/agent-gateway-production-profile.json",
         "recommended_backend": "github_app_backend",
         "boundary": "gateway intake does not raise verification level"
-      }
+      },
+      "fail_closed": true,
+      "strict_intake_fallback_allowed": false,
+      "wrong_path_result": "reject_before_issue_creation"
     },
     {
       "intent": "verify_v6_plus_strict_evidence",
@@ -114,7 +128,11 @@
         "agent_verification_receipt",
         "human_custody_package"
       ],
-      "allowed_modes_initial": ["v6", "v7", "v8"],
+      "allowed_modes_initial": [
+        "v6",
+        "v7",
+        "v8"
+      ],
       "if_no_github_access": {
         "read": [
           "/agent-submit",

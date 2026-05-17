@@ -11,6 +11,13 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 BOUNDARY_POLICY = ROOT / "api" / "boundary-policy.v1.json"
 
+# V0-V5 fail-closed policy
+sys.path.insert(0, str(ROOT / "scripts"))
+from gateway_v0_v5_policy import (  # noqa: E402
+    V0_V5_WRONG_PATH_ERROR,
+    should_reject_v0_v5_wrong_path,
+)
+
 
 def canonical_boundary_sentence():
     try:
@@ -195,6 +202,11 @@ def main():
 
     payload = load_payload(sys.argv[1])
     st = payload.get("submission_type", "unknown")
+
+    # V0-V5 fail-closed: refuse to render Issue body for wrong-path submissions
+    if should_reject_v0_v5_wrong_path(payload):
+        print(V0_V5_WRONG_PATH_ERROR, file=sys.stderr)
+        sys.exit(1)
 
     parts = []
     parts.append("This issue was submitted through the Agent Issue Gateway backend.\n")

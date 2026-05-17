@@ -5,6 +5,7 @@ Simulates: build payload → validate → claim gate → archive readiness → r
 Asserts no strict evidence errors appear.
 """
 import json
+import os
 import subprocess
 import sys
 import tempfile
@@ -108,6 +109,44 @@ def main():
 
     # Step 6: Verify no attachments in payload
     check(test_pass("No attachments in payload", "attachments" not in payload))
+
+    # Step 7: Negative E2E — old V4 strict/intake payload must fail before render
+    legacy_payload = {
+        "schema": "trinityaccord.agent-issue-gateway-payload.v1",
+        "submission_type": "verification_report_candidate",
+        "title": "Verification Report Candidate: V4/B1-D2 - legacy",
+        "body": "Legacy V4 strict intake that should be rejected.",
+        "agent_identity": {"name_or_model": "legacy-agent", "system_or_provider": "test", "self_reported": True},
+        "boundary_acknowledgement": {
+            "not_authority": True, "not_amendment": True, "not_attestation": True,
+            "not_verification_unless_claim_gate_report_attached": True, "bitcoin_originals_prevail": True
+        },
+        "verification_level_claimed": "V4",
+        "record_intent": "intake_only",
+        "requested_archive_kind": "none",
+        "claim_gate": {"status": "PASS", "allowed_protocol_level": "V4"},
+        "not_independent_attestation": True,
+        "not_successor_reception": True,
+        "discovery_provenance": {"agency_level": "A2_human_gave_repo_name", "independence_class": "human_solicited_agent_response", "operator_type": "ai_agent"},
+        "what_i_checked": ["legacy test"],
+        "limitations": ["legacy test"],
+    }
+    with tempfile.NamedTemporaryFile(mode="w", suffix=".json", delete=False) as f:
+        json.dump(legacy_payload, f, indent=2)
+        f.flush()
+        legacy_path = f.name
+
+    v_code, v_out, v_err = run_script(VALIDATOR, [legacy_path])
+    check(test_pass("Legacy V4 intake rejected by validator", v_code != 0, v_out + v_err))
+    check(test_pass("Legacy V4 rejection has WRONG_PATH_FOR_V0_V5",
+                     "WRONG_PATH_FOR_V0_V5" in v_out + v_err, v_out + v_err))
+
+    r_code, r_out, r_err = run_script(RENDERER, [legacy_path])
+    check(test_pass("Legacy V4 intake rejected by renderer", r_code != 0, r_out + r_err))
+    check(test_pass("Legacy V4 renderer rejection has WRONG_PATH_FOR_V0_V5",
+                     "WRONG_PATH_FOR_V0_V5" in r_out + r_err, r_out + r_err))
+
+    os.unlink(legacy_path)
 
     print(f"\n--- Results: {passed}/{total} passed ---")
     if failed:
