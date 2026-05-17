@@ -70,7 +70,7 @@
     {
       "step": 11,
       "path": "/issue-intake-boundary",
-      "reason": "Clarify that GitHub Issues and Gateway payloads are valid intake surfaces but not automatic archived records"
+      "reason": "Clarify that Gateway API is the only valid archive submission path; direct GitHub Issue creation is not valid for archive submission"
     }
   ],
   "required_declarations_before_assessment": [

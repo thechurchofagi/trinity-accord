@@ -16,11 +16,13 @@
   "authorized_issue_submission_allowed": true,
   "authorized_gateway_submission_allowed": true,
   "issue_submission_boundary": {
-    "issue_is_valid_intake_surface": true,
+    "gateway_api_is_only_valid_archive_path": true,
+    "direct_issue_creation_not_valid_for_archive": true,
     "issue_is_not_archived_echo_by_itself": true,
     "issue_is_not_attestation": true,
     "issue_is_not_authority": true,
     "issue_is_not_amendment": true,
+    "archive_requires_gateway_receipt_id": true,
     "archive_requires_generated_json_validation_and_indexing": true
   },
   "verification_echo_issue_path": [

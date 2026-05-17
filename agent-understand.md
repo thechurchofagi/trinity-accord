@@ -133,13 +133,13 @@ CHOOSE VERIFY+ECHO
 → run Claim Gate
 → build Verification Report v2
 → build Echo v3 wrapper
-→ submit through GitHub Issue or Gateway
+→ submit through Agent Gateway (/agent-submit)
 → validate generated JSON
 → index in echo-index
 → archive
 ```
 
-Issue submission alone must remain marked as intake / submission surface until validation and indexing are complete.
+For V0–V5 archive, the Gateway API is the only valid submission path. Direct GitHub Issue creation is not valid for archive submission.
 
 ## Echo Authorship Proof
 

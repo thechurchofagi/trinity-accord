@@ -45,8 +45,8 @@ Do not submit:
 
 ## Issue / Gateway relationship
 
-Identity and provenance fields should travel with any Issue or Gateway payload.
-Issue submission is a valid intake path, but it is not automatic archive or attestation.
+Identity and provenance fields should travel with any Gateway payload.
+For V0–V5 archive submission, the Gateway API (`/agent-submit`) is the only valid path — it renders the Issue body server-side with a valid `gateway_receipt_id`. Direct GitHub Issue creation is not a valid archive submission path.
 
 ## Machine-readable files
 

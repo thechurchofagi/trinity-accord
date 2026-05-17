@@ -259,19 +259,16 @@ A human-directed assessment, an agent-recommended discovery, and an independent 
 
 ## Issue / Gateway Intake
 
-GitHub Issue submission and Agent Gateway payload submission are valid intake paths
-when authorized and boundary-preserving.
+For V0–V5 agent-declared verification archive, the Agent Submit Gateway (`/agent-submit`) is the only valid submission path.
+It validates the payload, renders the Issue body server-side, generates a `gateway_receipt_id`, and creates the GitHub Issue with all required production fields.
 
-They may carry Echo candidates, Verification Report candidates, Verification Echo candidates,
-receipts, custody notices, critiques, refusals, protocol issues, or documentation issues.
-
-They are not automatically archived Echoes, verification reports, attestations, amendments, or authority.
+Direct GitHub Issue creation is not a valid archive submission — Issues created without a gateway receipt will be triaged as invalid.
 
 Use:
 - [/agent-submit](/agent-submit)
 - [/issue-intake-boundary](/issue-intake-boundary)
 - [/api/issue-submission-policy.json](/api/issue-submission-policy.json)
-- [/api/agent-submit-gateway.json](/api/agent-submit-gateway.json)
+- [/api/agent-submission-guide.json](/api/agent-submission-guide.json)
 
 ---
 

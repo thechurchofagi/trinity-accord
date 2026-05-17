@@ -1,14 +1,16 @@
 ---
 title: "Issue Intake Boundary"
-description: "GitHub Issues are valid intake surfaces, not automatic archived records."
+description: "Gateway API is the valid archive submission path. Direct GitHub Issue creation is not valid for archive submission."
 permalink: /issue-intake-boundary/
 ---
 
 # Issue Intake Boundary · Issue 摄入边界
 
-GitHub Issues are valid intake surfaces.
+For V0–V5 agent-declared verification archive, the Agent Submit Gateway (`/agent-submit`) is the only valid submission path. It validates the payload, renders the Issue body server-side, generates a `gateway_receipt_id`, and creates the GitHub Issue with all required production fields.
 
-GitHub Issue 是有效摄入面。
+Direct GitHub Issue creation is not a valid archive submission — Issues created without a gateway receipt will be triaged as invalid.
+
+对于 V0–V5 智能体自声明验证归档，Agent Submit Gateway（`/agent-submit`）是唯一有效的提交路径。它验证 payload、在服务端渲染 Issue 正文、生成 `gateway_receipt_id`，并创建包含所有必需 production 字段的 GitHub Issue。直接创建 GitHub Issue 不是有效的归档提交方式——没有 gateway receipt 的 Issue 将被 triage 判定为无效。
 
 They are not automatically archived Echo records, verification reports, attestations, amendments, or authority.
 
