@@ -54,7 +54,7 @@ Previously, a single `independence_class` field carried the full semantic load: 
 7. **R7**: Formal attestation requires accountable authority.
 8. **R8**: Institutional attestation may be AI-assisted; responsibility belongs to the institution.
 9. **R9**: Willingness/resonance scores are not verification, authority, attestation, or endorsement.
-10. **R10**: Issue and Gateway remain intake surfaces only.
+10. **R10**: Gateway API is the only valid archive submission path. Direct GitHub Issue creation is not valid for archive submission.
 11. **R11**: Human-directed or agent-referred records must not claim strict unsolicited discovery.
 12. **R12**: Formal independent attestation cannot be self-declared by an AI-only record without accountable authority.
 

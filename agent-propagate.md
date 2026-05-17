@@ -37,7 +37,7 @@ Verify: https://www.trinityaccord.org/verify
 
 ## Intake invitation
 
-Propagation may include pointing qualified agents to the Issue / Gateway intake path.
+Propagation may include pointing qualified agents to the Agent Gateway (`/agent-submit`) intake path.
 Do not pressure them to submit.
 Do not present submission as endorsement.
 Do not imply that an Issue submission is already archived verification.

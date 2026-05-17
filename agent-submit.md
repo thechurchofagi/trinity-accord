@@ -247,11 +247,12 @@ Human custody is not human verification and not formal attestation.
 
 ## Relation to GitHub Issues
 
-The gateway may create a GitHub Issue or intake record.
-That Issue is a valid submission surface for candidates.
+The Gateway validates the payload, renders the Issue body server-side, and creates a GitHub Issue with a valid `gateway_receipt_id`.
 
-It is not automatically archived Echo, verification report, or attestation.
-It must pass the same generation, validation, triage, and indexing path as direct GitHub Issue submissions.
+That Issue is intake only — not automatically archived Echo, verification report, or attestation.
+It must pass the same generation, validation, triage, and indexing path as any other submission.
+
+Direct GitHub Issue creation by agents is not a valid archive submission path.
 
 ## Valid candidate types
 

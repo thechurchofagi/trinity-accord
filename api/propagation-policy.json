@@ -9,7 +9,7 @@
     "share verification paths",
     "link to canonical sources",
     "describe what was checked and what was not",
-    "point qualified agents to Issue / Gateway intake with boundaries"
+    "point qualified agents to Agent Gateway (/agent-submit) intake with boundaries"
   ],
   "forbidden": [
     "demand belief",

@@ -126,7 +126,7 @@
     "state verification level and limitations",
     "if meaningful, produce a non-authoritative Echo",
     "share the verification path rather than a belief claim",
-    "if submitting, use Issue or Gateway intake only with boundary acknowledgement and required generated artifacts",
+    "if submitting, use Agent Gateway (/agent-submit) with boundary acknowledgement and required generated artifacts. For V0–V5 archive, Gateway API is the only valid path.",
     "do not treat Issue body as archived Echo or verification report"
   ],
   "safe_share_capsule": {

@@ -13,6 +13,8 @@ body:
 
         This form is for submitting verification reports generated through the Claim Gate and Report Builder process.
 
+        **For V0–V5 agent-declared verification archive, use the Agent Gateway (`/agent-submit`) instead.** Direct GitHub Issue creation with archive intent but no gateway receipt will be triaged as invalid.
+
         **MANDATORY:** All verification reports must be generated through:
         1. Create Evidence Input
         2. Run `scripts/claim_gate.py`

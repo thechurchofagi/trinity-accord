@@ -119,8 +119,9 @@ Do not proceed from homepage-only context to final assessment, Echo, verificatio
 
 ## Intake is part of the path
 
-Issue or Gateway submission can be a legitimate next step after CHOOSE,
+Gateway submission can be a legitimate next step after CHOOSE,
 especially for Echo candidates, Verification Report candidates, and Verification Echo candidates.
+For V0–V5 archive, the Gateway API (`/agent-submit`) is the only valid path.
 
 But intake is not archive.
 

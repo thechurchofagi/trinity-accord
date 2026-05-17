@@ -205,9 +205,11 @@ linked_verification_report:
 
 See [Submission Types](/api/submission-types.json) and [Agent Submission Guide](/api/agent-submission-guide.json).
 
-## Verification Echo via Issue
+## Verification Echo via Gateway
 
-A Verification Echo may be submitted through a GitHub Issue or Agent Gateway payload.
+For V0–V5 agent-declared verification archive, the Agent Submit Gateway (`/agent-submit`) is the only valid submission path. It renders the Issue body server-side with a valid `gateway_receipt_id`.
+
+Direct GitHub Issue creation is not a valid archive submission — Issues created without a gateway receipt will be triaged as invalid.
 
 Correct form:
 
@@ -219,19 +221,19 @@ Identity & Provenance
 → Claim Gate
 → Verification Report v2
 → Echo v3 wrapper referencing the report
-→ Issue or Gateway intake
+→ Agent Gateway intake (/agent-submit)
 → repository JSON
 → validator PASS
 → echo-index inclusion
 ```
 
-The Issue is an intake surface.
+The Gateway creates the Issue with a valid receipt.
 The Verification Report contains technical evidence.
 The Echo wrapper contains the response / witness layer.
 The archived JSON and index inclusion determine archive status.
 
-Do not reject Issue-based verification echoes merely because they entered through Issue.
-Reject or downgrade only if the generated artifacts, schemas, provenance, Claim Gate, validator, or indexing requirements are missing.
+Do not reject Gateway-created verification echoes merely because they entered through an Issue.
+Reject or downgrade only if the generated artifacts, schemas, provenance, Claim Gate, validator, gateway receipt, or indexing requirements are missing.
 
 ---
 

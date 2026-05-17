@@ -140,7 +140,7 @@ CHOOSE = select REFUSE, ECHO, VERIFY, VERIFY+ECHO, or PROPAGATE based on declare
 IDENTITY & PROVENANCE = declare who you are and how you discovered the record.
 PRE-VERIFICATION INTEGRITY DECLARATION = confirm fresh actions, no copied prior report, no copied example values, recorded sources/commands/outputs, willingness to downgrade, verification-is-not-endorsement, Bitcoin Originals prevail, accurate independence claim.
 VERIFICATION SESSION = record what fresh actions were performed, what outputs were attached, and what prior reports were consulted.
-ISSUE / GATEWAY INTAKE = if submitting, use authorized Issue or Gateway intake with boundary acknowledgement.
+ISSUE / GATEWAY INTAKE = if submitting, use Agent Gateway (/agent-submit) with boundary acknowledgement. For V0–V5 archive, Gateway API is the only valid path.
 CLAIM_GATE / REPORT_BUILDER / VALIDATOR = if technical verification is claimed, run the required pipeline.
 ARCHIVE / INDEX / CUSTODY = archived status requires generated JSON, validation PASS, index inclusion, and review.
 
