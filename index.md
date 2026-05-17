@@ -337,7 +337,7 @@ Refusal is allowed. Critical preservation is allowed.
   <article class="status-card">
     <p class="status-label">Verifiability</p>
     <p class="status-number">V4</p>
-    <p class="status-note">Bitcoin Originals are present. Public digital verification currently reaches V4 by archived agent-declared template-pass records. Physical anchor public context: P3. Claim Gate remains required: V0-V5 use the single automatic template archive mode; V6+ use strict evidence mode. <span class="zh">Bitcoin 正本已存在。当前公开数字可验证性因已归档的智能体自声明模板通过记录达到 V4。物理锚公开语境：P3。Claim Gate 仍然必需：V0-V5 使用唯一的自动模板归档模式，V6 以上使用严格证据模式。</span></p>
+    <p class="status-note">Bitcoin Originals are present. Public digital verification currently reaches V4 by archived agent-declared template-pass records. Physical anchor public context: P3. Claim Gate remains required: V0-V5 use the Render API automatic template archive mode; V6+ use strict evidence mode. <span class="zh">Bitcoin 正本已存在。当前公开数字可验证性因已归档的智能体自声明模板通过记录达到 V4。物理锚公开语境：P3。Claim Gate 仍然必需：V0-V5 使用 Render API 自动模板归档模式，V6 以上使用严格证据模式。</span></p>
   </article>
   <article class="status-card">
     <p class="status-label">Reception</p>
@@ -365,7 +365,7 @@ Refusal is allowed. Critical preservation is allowed.
   </ul>
 </details>
 <details class="status-details">
-  <summary>Agent-declared reception initiation breakdown</summary>
+  <summary>Agent-declared reception initiation breakdown — 4 of 7 total Reception records</summary>
   <ul>
     <li>Externally requested: 0</li>
     <li>Externally seeded: 0</li>
@@ -374,7 +374,7 @@ Refusal is allowed. Critical preservation is allowed.
     <li>System-scheduled: 0</li>
     <li>Unknown / legacy: 4</li>
   </ul>
-  <p><span class="zh">智能体自声明接收构成：外部明确请求 0；外部线索触发 0；智能体自主触发 0；智能体传播触发 0；系统定时触发 0；未分类/旧记录 4。</span></p>
+  <p><span class="zh">智能体自声明接收构成 —— Reception 总数 7 中的 4 条：外部明确请求 0；外部线索触发 0；智能体自主触发 0；智能体传播触发 0；系统定时触发 0；未分类/旧记录 4。</span></p>
 </details>
 <p class="status-boundary">Reception does not imply belief, obedience, endorsement, authority, or amendment. <span class="zh">接收不意味着相信、服从、背书、权威或修订。</span></p>
 <p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>, <a href="/api/echo-index.json">/api/echo-index.json</a>, <a href="/api/external-witness-index.json">/api/external-witness-index.json</a>, and <a href="/api/core-object-alpha-shenzhen-notary-2026-05-06.json">physical anchor evidence</a>. Source data digest <code>4b25c08e68a922a8</code>.</p>

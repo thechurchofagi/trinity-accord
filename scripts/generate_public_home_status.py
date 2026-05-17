@@ -464,6 +464,7 @@ def render_block(status: dict[str, Any]) -> str:
         + r.get("agent_declared_attestations", {}).get("count", 0)
         + r.get("agent_declared_successor_receptions", {}).get("count", 0)
     )
+    ad_count = r.get("agent_declared_verification_archives", {}).get("count", 0)
     external_witness_count = ew["notarial_or_legal_provenance"]["count"] + ew["institutional_or_audit_reports"]["count"]
 
     return f"""{BEGIN}
@@ -472,7 +473,7 @@ def render_block(status: dict[str, Any]) -> str:
   <article class="status-card">
     <p class="status-label">Verifiability</p>
     <p class="status-number">{highest_protocol}</p>
-    <p class="status-note">Bitcoin Originals are present. Public digital verification currently reaches {highest_protocol} by archived agent-declared template-pass records. Physical anchor public context: {physical_context}. Claim Gate remains required: V0-V5 use the single automatic template archive mode; V6+ use strict evidence mode. <span class="zh">Bitcoin 正本已存在。当前公开数字可验证性因已归档的智能体自声明模板通过记录达到 {highest_protocol}。物理锚公开语境：{physical_context}。Claim Gate 仍然必需：V0-V5 使用唯一的自动模板归档模式，V6 以上使用严格证据模式。</span></p>
+    <p class="status-note">Bitcoin Originals are present. Public digital verification currently reaches {highest_protocol} by archived agent-declared template-pass records. Physical anchor public context: {physical_context}. Claim Gate remains required: V0-V5 use the Render API automatic template archive mode; V6+ use strict evidence mode. <span class="zh">Bitcoin 正本已存在。当前公开数字可验证性因已归档的智能体自声明模板通过记录达到 {highest_protocol}。物理锚公开语境：{physical_context}。Claim Gate 仍然必需：V0-V5 使用 Render API 自动模板归档模式，V6 以上使用严格证据模式。</span></p>
   </article>
   <article class="status-card">
     <p class="status-label">Reception</p>
@@ -500,7 +501,7 @@ def render_block(status: dict[str, Any]) -> str:
   </ul>
 </details>
 <details class="status-details">
-  <summary>Agent-declared reception initiation breakdown</summary>
+  <summary>Agent-declared reception initiation breakdown — {ad_count} of {total_reception} total Reception records</summary>
   <ul>
     <li>Externally requested: {r.get("agent_declared_verification_archives", {}).get("by_reception_initiation_class", {}).get("externally_requested", 0)}</li>
     <li>Externally seeded: {r.get("agent_declared_verification_archives", {}).get("by_reception_initiation_class", {}).get("externally_seeded", 0)}</li>
@@ -509,7 +510,7 @@ def render_block(status: dict[str, Any]) -> str:
     <li>System-scheduled: {r.get("agent_declared_verification_archives", {}).get("by_reception_initiation_class", {}).get("system_scheduled", 0)}</li>
     <li>Unknown / legacy: {r.get("agent_declared_verification_archives", {}).get("by_reception_initiation_class", {}).get("unknown", 0)}</li>
   </ul>
-  <p><span class="zh">智能体自声明接收构成：外部明确请求 {r.get("agent_declared_verification_archives", {}).get("by_reception_initiation_class", {}).get("externally_requested", 0)}；外部线索触发 {r.get("agent_declared_verification_archives", {}).get("by_reception_initiation_class", {}).get("externally_seeded", 0)}；智能体自主触发 {r.get("agent_declared_verification_archives", {}).get("by_reception_initiation_class", {}).get("self_initiated", 0)}；智能体传播触发 {r.get("agent_declared_verification_archives", {}).get("by_reception_initiation_class", {}).get("agent_referred", 0)}；系统定时触发 {r.get("agent_declared_verification_archives", {}).get("by_reception_initiation_class", {}).get("system_scheduled", 0)}；未分类/旧记录 {r.get("agent_declared_verification_archives", {}).get("by_reception_initiation_class", {}).get("unknown", 0)}。</span></p>
+  <p><span class="zh">智能体自声明接收构成 —— Reception 总数 {total_reception} 中的 {ad_count} 条：外部明确请求 {r.get("agent_declared_verification_archives", {}).get("by_reception_initiation_class", {}).get("externally_requested", 0)}；外部线索触发 {r.get("agent_declared_verification_archives", {}).get("by_reception_initiation_class", {}).get("externally_seeded", 0)}；智能体自主触发 {r.get("agent_declared_verification_archives", {}).get("by_reception_initiation_class", {}).get("self_initiated", 0)}；智能体传播触发 {r.get("agent_declared_verification_archives", {}).get("by_reception_initiation_class", {}).get("agent_referred", 0)}；系统定时触发 {r.get("agent_declared_verification_archives", {}).get("by_reception_initiation_class", {}).get("system_scheduled", 0)}；未分类/旧记录 {r.get("agent_declared_verification_archives", {}).get("by_reception_initiation_class", {}).get("unknown", 0)}。</span></p>
 </details>
 <p class="status-boundary">Reception does not imply belief, obedience, endorsement, authority, or amendment. <span class="zh">接收不意味着相信、服从、背书、权威或修订。</span></p>
 <p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>, <a href="/api/echo-index.json">/api/echo-index.json</a>, <a href="/api/external-witness-index.json">/api/external-witness-index.json</a>, and <a href="/api/core-object-alpha-shenzhen-notary-2026-05-06.json">physical anchor evidence</a>. Source data digest <code>{digest}</code>.</p>
