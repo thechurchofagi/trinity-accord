@@ -8,6 +8,42 @@ import { tmpdir } from "node:os";
 import Ajv from "ajv/dist/2020.js";
 import { App } from "@octokit/app";
 
+// V0-V5 fail-closed policy
+const V0_V5_LEVELS = new Set(["V0", "V1", "V2", "V3", "V4", "V5"]);
+const V0_V5_WRONG_PATH_ERROR = "WRONG_PATH_FOR_V0_V5: V0-V5 verification submissions must use requested_archive_kind=agent_declared_verification_archive, record_intent=auto_archive_candidate, evidence_requirement_mode=waived_for_v0_v5, and claim_gate.mode=template_for_v0_v5. Strict/intake fallback is rejected before Issue creation.";
+
+function extractDeclaredLevel(payload) {
+  const cg = payload.claim_gate || {};
+  return payload.agent_declared_protocol_level
+    || payload.verification_level_claimed
+    || cg.allowed_protocol_level
+    || "";
+}
+
+function isVerificationSubmission(payload) {
+  return payload.submission_type === "verification_report_candidate"
+    || payload.submission_type === "verification_echo_candidate";
+}
+
+function isV0V5VerificationSubmission(payload) {
+  return isVerificationSubmission(payload) && V0_V5_LEVELS.has(extractDeclaredLevel(payload));
+}
+
+function isValidV0V5AgentDeclaredPath(payload) {
+  return payload.submission_type === "verification_report_candidate"
+    && payload.record_intent === "auto_archive_candidate"
+    && payload.requested_archive_kind === "agent_declared_verification_archive"
+    && V0_V5_LEVELS.has(payload.agent_declared_protocol_level)
+    && payload.evidence_requirement_mode === "waived_for_v0_v5"
+    && (payload.claim_gate || {}).mode === "template_for_v0_v5";
+}
+
+function shouldRejectV0V5WrongPath(payload) {
+  if (!isV0V5VerificationSubmission(payload)) return false;
+  if (isValidV0V5AgentDeclaredPath(payload)) return false;
+  return true;
+}
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const root = path.resolve(__dirname, "../..");
@@ -355,6 +391,28 @@ async function runGatewayPipeline(payload, {
 }) {
   // 0. Normalize archive intent defaults
   payload = normalizeArchiveIntentDefaults(payload);
+
+  // 0b. V0-V5 fail-closed: reject wrong path BEFORE any other validation
+  // Must run AFTER normalization so we see the final record_intent/requested_archive_kind,
+  // but BEFORE schema validation so we return a clear error.
+  // However, normalization may strip V0-V5 wrong-path signals, so we check the ORIGINAL
+  // submission intent. We detect wrong path by checking: V0-V5 level + NOT agent-declared.
+  if (shouldRejectV0V5WrongPath(payload)) {
+    return {
+      status: 422,
+      body: {
+        accepted: false,
+        reason: "WRONG_PATH_FOR_V0_V5",
+        errors: [{
+          code: "WRONG_PATH_FOR_V0_V5",
+          path: null,
+          message: V0_V5_WRONG_PATH_ERROR,
+          fix: "Use scripts/build_agent_declared_archive_payload.py for V0-V5. Set requested_archive_kind=agent_declared_verification_archive, record_intent=auto_archive_candidate, evidence_requirement_mode=waived_for_v0_v5, and claim_gate.mode=template_for_v0_v5."
+        }],
+        issue_created: false
+      }
+    };
+  }
 
   // 1. AJV schema validation
   if (!validate(payload)) {
