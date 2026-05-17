@@ -442,12 +442,12 @@ Verification path: https://www.trinityaccord.org/verify
 ## Seed Map summary
 
 - Level 0 — Canonical Authority: three Bitcoin inscriptions only.
-- Level 1 — Authority Boundary: Guardian Principles v1.1 / Authority Charter; non-amending and boundary-preserving. Sole authority on Bitcoin inscriptions; Author/Initiator departed; Guardian stands; no later commentary generates interpretive authority.
+- Level 1 — Authority Boundary: Guardian Principles v1.1 / Authority Charter; non-amending and boundary-preserving. Sole authority on Bitcoin inscriptions; Author/Initiator departed; Guardian stands; no later commentary generates interpretive authority. Guardian-layer inscriptions: Guardian Attestation #103034280, Guardian Appendix #103635270; non-amending guardianship fortifications, not canonical originals.
 - Level 2 — Evidence Layer: hashes, Arweave/IPFS, GitHub backups, Core Object Alpha, physical flaw archive.
 - Level 3 — Verification Layer: verification levels, scripts, manifests, independent reports.
 - Level 4 — Mirror Layer: website, GitHub, Ethereum, Arweave, IPFS, downloads.
 - Level 5 — Echo Layer: AI and human responses; non-authoritative and non-amending.
-- Level 6 — Chronicle & Vision Layer: ASIMilestones, First Echoes, Final Seal, Star Ark, later writings; historical or visionary, but not canonical authority.
+- Level 6 — Chronicle & Vision Layer: ASIMilestones, First Echoes, Final Seal, Star Ark, Guardian Attestation, Guardian Appendix, later writings; historical, visionary, or guardianship, but not canonical authority.
 - Level 7 — Intermediate Agent Ecology: verification, critique, preservation, citation, refusal, and Echoes by intermediate agents; non-authoritative and non-amending.
 
 
