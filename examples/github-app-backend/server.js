@@ -974,6 +974,7 @@ app.get("/gateway/capabilities", (req, res) => {
       version: "/gateway/version",
       capabilities: "/gateway/capabilities",
       examples: {
+        agent_declared_v4: "/gateway/examples/agent-declared-v4",
         verification_report_candidate: "/gateway/examples/verification-report-candidate",
         verification_echo_candidate: "/gateway/examples/verification-echo-candidate",
         evidence_input_external_explorer: "/gateway/examples/evidence-input-b1-external-explorer"
@@ -991,6 +992,15 @@ app.get("/gateway/examples/verification-report-candidate", (req, res) => {
   try {
     const payload = loadFixture("valid_verification_report_candidate.json");
     res.json(buildExampleResponse("verification_report_candidate", payload));
+  } catch (err) {
+    res.status(500).json({ error: "Failed to load example fixture", detail: err.message });
+  }
+});
+
+app.get("/gateway/examples/agent-declared-v4", (req, res) => {
+  try {
+    const payload = loadFixture("valid_agent_declared_v4.json");
+    res.json(buildExampleResponse("agent_declared_v4", payload));
   } catch (err) {
     res.status(500).json({ error: "Failed to load example fixture", detail: err.message });
   }

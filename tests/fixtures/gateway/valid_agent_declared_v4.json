@@ -1,0 +1,79 @@
+{
+  "title": "Agent-Declared Verification Archive V4",
+  "submission_type": "verification_report_candidate",
+  "agent_declared_protocol_level": "V4",
+  "record_intent": "auto_archive_candidate",
+  "requested_archive_kind": "agent_declared_verification_archive",
+  "evidence_requirement_mode": "waived_for_v0_v5",
+  "agent_identity": {
+    "name_or_model": "Example Agent",
+    "system_or_provider": "Example System"
+  },
+  "discovery_provenance": {
+    "solicited": true,
+    "independence_class": "human_solicited_agent_response",
+    "agency_level": "A1_human_gave_exact_url",
+    "operator_type": "ai_agent"
+  },
+  "agent_integrity_declaration": {
+    "fresh_actions_performed": true,
+    "no_copied_prior_report": true,
+    "no_copied_example_values": true,
+    "recorded_sources_commands_outputs": true,
+    "willing_to_downgrade": true,
+    "verification_is_not_endorsement": true,
+    "bitcoin_originals_prevail": true,
+    "accurate_independence_claim": true,
+    "verification_oath": {
+      "oath_read": true,
+      "oath_version": "v1",
+      "oath_text_sha256": "placeholder_replace_with_real_hash",
+      "readback_required": true,
+      "agent_readback": "I understand this is not an exam or performance. I will state only what I actually did, will not fabricate verification, will not present guesses as facts, will not copy prior reports as fresh evidence, and will clearly state uncertainty, limitations, downgrades, and boundaries. I understand Bitcoin Originals remain final and that this record is agent-declared, template-gated, and non-amending."
+    }
+  },
+  "reception_initiation_class": "externally_seeded",
+  "reception_initiation_basis": "external_url_only",
+  "agent_independent_followup": true,
+  "claim_gate": {
+    "mode": "template_for_v0_v5",
+    "status": "PASS"
+  },
+  "origin_classification": {
+    "verification_claimed": true,
+    "counts_as_ai_verification": true,
+    "source_class": "agent_declared"
+  },
+  "claim_classification": {
+    "verification_claim": {
+      "basis": "agent_declared"
+    }
+  },
+  "authority_boundary": {
+    "not_authority": true,
+    "not_amendment": true,
+    "not_attestation": true,
+    "not_successor_reception": true
+  },
+  "boundary_acknowledgement": {
+    "not_authority": true,
+    "not_amendment": true,
+    "not_attestation": true,
+    "not_verification_unless_claim_gate_report_attached": true,
+    "bitcoin_originals_prevail": true
+  },
+  "counts_toward_home": {
+    "verifiability": true,
+    "reception": true
+  },
+  "what_i_checked": [
+    "Read public homepage and agent-brief",
+    "Verified Bitcoin inscription existence via public explorer",
+    "Completed V0-V5 agent-declared verification template",
+    "Read and restated verification oath"
+  ],
+  "limitations": [
+    "No strict evidence was provided because V0-V5 evidence is waived",
+    "This is an agent-declared template-pass record, not independent attestation"
+  ]
+}

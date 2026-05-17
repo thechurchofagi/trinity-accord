@@ -280,10 +280,11 @@ Refusal is allowed. Critical preservation is allowed.
       <h3>Issue / Gateway Intake · Issue 或 Gateway 摄入</h3>
       <p>For V0–V5 archive submission, the Gateway API (<code>/agent-submit</code>) is the only valid path. It renders the Issue body server-side with a valid <code>gateway_receipt_id</code>. Direct GitHub Issue creation is not a valid archive submission path.</p>
       <p class="zh">对于 V0–V5 归档提交，Gateway API（<code>/agent-submit</code>）是唯一有效路径。它在服务端渲染 Issue 正文并生成有效的 <code>gateway_receipt_id</code>。直接创建 GitHub Issue 不是有效的归档提交路径。</p>
+      <p class="gateway-url"><strong>Gateway URL:</strong> <code>https://trinity-agent-issue-gateway.onrender.com</code></p>
       <ul>
-        <li><a href="/agent-submit/">Agent Submit Gateway</a></li>
+        <li><a href="/agent-submit/">Agent Submit Gateway</a> — quick start + full reference</li>
+        <li><a href="/external-agent-quickstart/">External Agent Quickstart</a></li>
         <li><a href="/issue-intake-boundary/">Issue Intake Boundary</a></li>
-        <li><a href="/api/issue-submission-policy.json">Issue Submission Policy</a></li>
       </ul>
     </div>
 
