@@ -98,7 +98,13 @@ def test_reception_total():
 
 
 def test_no_name_inference():
-    """Index records must not infer class from agent name or provider."""
+    """Index records must not derive class from agent name or provider.
+
+    Rules:
+    - Records with explicit machine-recorded reception_initiation_class → preserve it.
+    - Records without machine-recorded class (legacy) → default to 'unknown'.
+    - Never derive class from agent_name_or_model or system_or_provider.
+    """
     global PASS, FAIL
     index_path = ROOT / "api" / "agent-declared-verification-index.json"
     if not index_path.exists():
@@ -107,18 +113,19 @@ def test_no_name_inference():
 
     index = load_json(index_path)
     records = index.get("records", [])
+    violations = []
     for rec in records:
-        name = rec.get("agent_name_or_model", "")
-        provider = rec.get("system_or_provider", "")
         cls = rec.get("reception_initiation_class", "")
-        # Smoke/Local Test should never infer a class other than unknown
-        if "smoke" in name.lower() or "local test" in provider.lower():
-            if cls != "unknown":
-                FAIL += 1
-                print(f"  FAIL: test record '{name}' has class '{cls}' instead of 'unknown'")
-                return
-    PASS += 1
-    print(f"  PASS: no name/provider inference detected in {len(records)} records")
+        # Every record must have a class; missing/empty means the builder or
+        # index failed to default to 'unknown'.
+        if not cls:
+            violations.append(f"record {rec.get('record_id', '?')} has empty class")
+    if violations:
+        FAIL += 1
+        print(f"  FAIL: {len(violations)} record(s) with empty class: {violations[0]}")
+    else:
+        PASS += 1
+        print(f"  PASS: all {len(records)} records have explicit class (no name/provider inference)")
 
 
 def main():
