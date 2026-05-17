@@ -271,7 +271,7 @@ def main():
     parser = argparse.ArgumentParser(description="Build agent-declared verification archive payload")
     parser.add_argument("--agent-name", required=True, help="Agent name or model")
     parser.add_argument("--provider", required=True, help="System or provider")
-    parser.add_argument("--declared-level", "--level", required=True, choices=["V0", "V1", "V2", "V3", "V4", "V5"],
+    parser.add_argument("--declared-level", "--level", required=True, choices=["V0", "V1", "V2", "V3", "V4", "V4+", "V5"],
                         dest="declared_level", help="Declared protocol level")
     parser.add_argument("--source", default="self_initiated",
                         help="[deprecated] Legacy discovery source; use --reception-initiation-class instead")

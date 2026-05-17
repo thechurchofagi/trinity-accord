@@ -271,7 +271,7 @@ def main():
 
     # V0-V5 guard: hard-fail and redirect to agent-declared builder
     v_level = payload.get("verification_level_claimed", "V0")
-    V0_V5 = {"V0", "V1", "V2", "V3", "V4", "V5"}
+    V0_V5 = {"V0", "V1", "V2", "V3", "V4", "V4+", "V5"}
     if v_level in V0_V5:
         print(f"WRONG_PATH_FOR_V0_V5: V0-V5 ({v_level}) detected.", file=sys.stderr)
         print(f"build_gateway_payload_from_outputs.py is V6+ strict evidence only.", file=sys.stderr)

@@ -12,8 +12,8 @@ def test_policy_contains_agent_declared():
     kinds = policy.get("archive_kinds", {})
     assert "agent_declared_verification_archive" in kinds, "Missing agent_declared_verification_archive in archive_kinds"
     ad = kinds["agent_declared_verification_archive"]
-    assert ad["allowed_protocol_levels"] == ["V0", "V1", "V2", "V3", "V4", "V5"]
-    assert ad["exclusive_for_protocol_levels"] == ["V0", "V1", "V2", "V3", "V4", "V5"]
+    assert ad["allowed_protocol_levels"] == ["V0", "V1", "V2", "V3", "V4", "V4+", "V5"]
+    assert ad["exclusive_for_protocol_levels"] == ["V0", "V1", "V2", "V3", "V4", "V4+", "V5"]
     assert ad["evidence_required"] is False
     assert ad["artifact_bundle_required"] is False
     assert ad["hash_evidence_required"] is False

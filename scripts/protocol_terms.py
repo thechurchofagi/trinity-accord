@@ -64,4 +64,4 @@ CLAIM_GATE_MODE_TEMPLATE_V0_V5 = "template_for_v0_v5"
 EVIDENCE_MODE_WAIVED_V0_V5 = "waived_for_v0_v5"
 COUNT_BASIS_AGENT_DECLARED_TEMPLATE_PASS = "agent_declared_template_pass"
 
-V0_V5_LEVELS = ["V0", "V1", "V2", "V3", "V4", "V5"]
+V0_V5_LEVELS = ["V0", "V1", "V2", "V3", "V4", "V4+", "V5"]

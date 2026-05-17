@@ -295,7 +295,7 @@ def main():
             errors.append("agent_readback_char_count must be >= 160")
 
         # Enum validation
-        VALID_PROTOCOL_LEVELS = {"V0", "V1", "V2", "V3", "V4", "V5"}
+        VALID_PROTOCOL_LEVELS = {"V0", "V1", "V2", "V3", "V4", "V4+", "V5"}
         level = data.get("agent_declared_protocol_level")
         if level is not None and level not in VALID_PROTOCOL_LEVELS:
             errors.append(

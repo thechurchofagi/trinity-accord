@@ -60,6 +60,7 @@
         "V2",
         "V3",
         "V4",
+        "V4+",
         "V5"
       ],
       "exclusive_for_protocol_levels": [
@@ -68,6 +69,7 @@
         "V2",
         "V3",
         "V4",
+        "V4+",
         "V5"
       ],
       "claim_gate_required": true,

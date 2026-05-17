@@ -8,7 +8,7 @@ There is no V0–V5 strict/intake fallback.
 """
 import re
 
-V0_V5_LEVELS = {"V0", "V1", "V2", "V3", "V4", "V5"}
+V0_V5_LEVELS = {"V0", "V1", "V2", "V3", "V4", "V4+", "V5"}
 
 # Canonical gateway receipt ID pattern: gar-YYYYMMDDTHHMMSSZ-xxxxxx
 GATEWAY_RECEIPT_ID_PATTERN = re.compile(r"^gar-[A-Za-z0-9T._:-]{16,}$")

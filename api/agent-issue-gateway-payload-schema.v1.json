@@ -519,13 +519,14 @@
     },
     "agent_declared_protocol_level": {
       "type": "string",
-      "description": "V0-V5 protocol level for agent-declared verification archive.",
+      "description": "V0-V5 protocol level for agent-declared verification archive. V4+ requires independent tool reproduction.",
       "enum": [
         "V0",
         "V1",
         "V2",
         "V3",
         "V4",
+        "V4+",
         "V5"
       ]
     },
@@ -1001,6 +1002,7 @@
               "V2",
               "V3",
               "V4",
+              "V4+",
               "V5"
             ]
           },

@@ -53,7 +53,7 @@ FORBIDDEN_TITLE_PATTERNS = [
     r"Echo v3:",
 ]
 
-V0_V5 = {"V0", "V1", "V2", "V3", "V4", "V5"}
+V0_V5 = {"V0", "V1", "V2", "V3", "V4", "V4+", "V5"}
 
 # V0-V5 fail-closed policy
 from gateway_v0_v5_policy import (  # noqa: E402
