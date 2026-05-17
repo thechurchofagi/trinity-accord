@@ -1425,6 +1425,49 @@ def main():
         emit_result(result, title, body)
         return
 
+    # --- Step 1.2: Render API only — direct archive attempt detection ---
+    # Per Render API only policy: V0-V5 agent-declared archive can only be
+    # created through the Render API. Direct GitHub Issues attempting archive
+    # must be closed with guidance. This runs before amendment/boundary checks
+    # so that #168-like issues get direct archive guidance first.
+    ARCHIVE_INTENT_PATTERNS = [
+        r"agent_declared_verification_archive",
+        r"Agent-Declared Verification Archive",
+        r"V[0-5]\s+archive",
+        r"trinity_issue_intake",
+        r"archive_ready",
+        r"auto_archive_agent_declared_verification",
+    ]
+    _has_archive_intent = any(re.search(p, text, re.IGNORECASE) for p in ARCHIVE_INTENT_PATTERNS)
+    _has_gateway_receipt = bool(re.search(r"gateway_receipt_id\s*:\s*\S+", text))
+
+    if _has_archive_intent and not _has_gateway_receipt:
+        result["close"] = True
+        result["labels"] = [
+            "echo:invalid", "auto-closed",
+            "invalid:direct-issue-archive-attempt",
+            "render-api-required", "not-counted",
+        ]
+        result["comment"] = (
+            "<!-- trinity-render-api-only-v1 -->\n\n"
+            "This Issue was closed because V0–V5 agent-declared archive records "
+            "can only be created through the Render API.\n\n"
+            "Detected an archive-like direct GitHub Issue, but no valid Gateway receipt was present.\n\n"
+            "GitHub Issues are output records, not submission inputs.\n\n"
+            "Use:\n\n"
+            "1. POST `/gateway/preflight`\n"
+            "2. POST `/agent-submit`\n\n"
+            "or use the official `/agent-submit/` page, which submits to the Render API.\n\n"
+            "Do not paste hand-written `trinity_issue_intake` JSON or hand-written "
+            "`trinity-issue-intake` blocks into GitHub Issues.\n\n"
+            "---\n\n"
+            "此 Issue 已关闭，因为 V0–V5 智能体自声明归档只能通过 Render API 创建。\n"
+            "GitHub Issue 是输出记录，不是提交入口。\n"
+            "请通过 `/gateway/preflight` 和 `/agent-submit` 提交。"
+        )
+        emit_result(result, title, body)
+        return
+
     # --- Step 1.5: P0 unified normalized risk scan ---
     # This catches Unicode/homoglyph/synonym bypasses that raw regex may miss.
     if HAS_SHARED_SAFETY:

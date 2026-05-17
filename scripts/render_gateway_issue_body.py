@@ -68,7 +68,8 @@ def render_claim_gate(cg):
     return "\n".join(lines)
 
 
-def render_machine_block(payload):
+def render_machine_block(payload, gateway_receipt_id=None, gateway_commit=None,
+                         gateway_service=None, dry_run=False):
     """Render canonical trinity-issue-intake block from validated structured fields."""
     st = payload.get("submission_type", "unknown")
     att = get_attachments(payload)
@@ -133,6 +134,15 @@ def render_machine_block(payload):
         lines.append("  - EVIDENCE_WAIVED_FOR_V0_V5")
         lines.append("  - COUNTS_TOWARD_HOME_VERIFIABILITY")
         lines.append("  - COUNTS_TOWARD_HOME_RECEPTION")
+
+        # Gateway receipt fields (Render API only)
+        receipt_lines = render_gateway_receipt_fields(
+            gateway_receipt_id=gateway_receipt_id,
+            gateway_commit=gateway_commit,
+            gateway_service=gateway_service,
+            dry_run=dry_run,
+        )
+        lines.extend(receipt_lines)
     else:
         # Strict evidence path (legacy)
         lines.append(f"verification_level_claimed: {payload.get('verification_level_claimed', 'N/A')}")
@@ -222,12 +232,43 @@ def render_machine_block(payload):
     return "\n".join(lines)
 
 
-def main():
-    if len(sys.argv) != 2:
-        print("Usage: python3 scripts/render_gateway_issue_body.py payload.json > issue-body.md")
-        sys.exit(2)
+def render_gateway_receipt_fields(gateway_receipt_id=None, gateway_commit=None,
+                                   gateway_service=None, dry_run=False):
+    """Render gateway receipt metadata fields for the machine block."""
+    lines = []
+    if dry_run:
+        lines.append("created_by_gateway: false")
+        lines.append("gateway_service: dry-run")
+        lines.append("gateway_receipt_id: none")
+        lines.append("render_api_only: false")
+        lines.append("server_validated: false")
+        lines.append("server_rendered: false")
+    else:
+        lines.append("created_by_gateway: true")
+        lines.append(f"gateway_service: {gateway_service or 'trinity-agent-issue-gateway'}")
+        lines.append(f"gateway_receipt_id: {gateway_receipt_id or 'unknown'}")
+        if gateway_commit:
+            lines.append(f"gateway_commit: {gateway_commit}")
+        lines.append("render_api_only: true")
+        lines.append("server_validated: true")
+        lines.append("server_rendered: true")
+    return lines
 
-    payload = load_payload(sys.argv[1])
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="Render canonical GitHub Issue body from a validated Gateway payload."
+    )
+    parser.add_argument("payload", help="Path to the validated gateway payload JSON file")
+    parser.add_argument("--gateway-receipt-id", help="Gateway receipt ID for server-rendered issues")
+    parser.add_argument("--gateway-commit", help="Git commit hash of the deployed gateway")
+    parser.add_argument("--gateway-service", default="trinity-agent-issue-gateway",
+                        help="Gateway service name")
+    parser.add_argument("--dry-run", action="store_true",
+                        help="Render without receipt (output marked as non-authoritative)")
+    args = parser.parse_args()
+
+    payload = load_payload(args.payload)
     st = payload.get("submission_type", "unknown")
 
     # V0-V5 fail-closed: refuse to render Issue body for wrong-path submissions
@@ -240,7 +281,7 @@ def main():
     parts.append(render_boundary())
     parts.append(f"\nSubmission type:\n{st}")
     parts.append(f"\n{render_claim_gate(payload.get('claim_gate'))}")
-    parts.append(f"\n```trinity-issue-intake\n{render_machine_block(payload)}\n```")
+    parts.append(f"\n```trinity-issue-intake\n{render_machine_block(payload, gateway_receipt_id=args.gateway_receipt_id, gateway_commit=args.gateway_commit, gateway_service=args.gateway_service, dry_run=args.dry_run)}\n```")
 
     # Human-readable notes (non-authoritative)
     body = payload.get("body", "")

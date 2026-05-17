@@ -76,6 +76,12 @@ AGENT_DECLARED_REQUIRED = [
     "what_i_checked",
     "limitations",
     "boundary_sentence",
+    "created_by_gateway",
+    "gateway_service",
+    "gateway_receipt_id",
+    "render_api_only",
+    "server_validated",
+    "server_rendered",
 ]
 
 STRICT_REQUIRED = [
@@ -236,6 +242,10 @@ def main():
             "authority_boundary_present": True,
             "counts_toward_home_verifiability": True,
             "counts_toward_home_reception": True,
+            "created_by_gateway": True,
+            "render_api_only": True,
+            "server_validated": True,
+            "server_rendered": True,
         }
         for k, expected in AGENT_DECLARED_EXPECTED.items():
             actual = data.get(k)
@@ -243,6 +253,15 @@ def main():
                 errors.append(
                     f"agent-declared field {k}: expected {expected!r}, got {actual!r}"
                 )
+
+        # Gateway receipt validation
+        gateway_receipt_id = data.get("gateway_receipt_id")
+        if not gateway_receipt_id or len(str(gateway_receipt_id).strip()) < 8:
+            errors.append("gateway_receipt_id is required and must be at least 8 characters")
+
+        gateway_service = data.get("gateway_service")
+        if not gateway_service or not str(gateway_service).strip():
+            errors.append("gateway_service is required for agent-declared archive")
 
         # Enum validation
         VALID_PROTOCOL_LEVELS = {"V0", "V1", "V2", "V3", "V4", "V5"}

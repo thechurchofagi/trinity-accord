@@ -29,6 +29,13 @@ INTAKE_FIELDS = [
     "requested_archive_kind",
     "archive_ready",
     "auto_archive_action",
+    "created_by_gateway",
+    "gateway_service",
+    "gateway_receipt_id",
+    "gateway_commit",
+    "render_api_only",
+    "server_validated",
+    "server_rendered",
 ]
 
 # Additional fields we want to preserve if present
@@ -43,7 +50,17 @@ EXTRA_FIELDS = [
     "reception_initiation_class",
     "reception_initiation_basis",
     "agent_independent_followup",
+    "created_by_gateway",
+    "gateway_service",
+    "gateway_receipt_id",
+    "gateway_commit",
+    "render_api_only",
+    "server_validated",
+    "server_rendered",
 ]
+
+# Render API only policy effective date
+RENDER_API_ONLY_EFFECTIVE_AT = "2026-05-17T00:00:00Z"
 
 # Label patterns that indicate test records
 TEST_LABEL_PATTERNS = ["test-record", "test_record", "smoke-test"]
@@ -107,9 +124,23 @@ def fetch_issues(repo: str | None, limit: int = 200) -> list[dict]:
     return json.loads(output)
 
 
+def is_after_effective_date(created_at: str) -> bool:
+    """Check if an issue was created after the Render API only effective date."""
+    if not created_at:
+        return True  # Conservative: treat unknown dates as after
+    try:
+        from datetime import datetime, timezone
+        effective = datetime.fromisoformat(RENDER_API_ONLY_EFFECTIVE_AT.replace("Z", "+00:00"))
+        created = datetime.fromisoformat(created_at.replace("Z", "+00:00"))
+        return created >= effective
+    except Exception:
+        return True
+
+
 def build_index(issues: list[dict], repo: str = "", include_test: bool = False) -> dict:
     """Build the index from parsed issue data."""
     records = []
+    skipped_direct = []
 
     for issue in issues:
         body = issue.get("body", "")
@@ -127,6 +158,22 @@ def build_index(issues: list[dict], repo: str = "", include_test: bool = False) 
 
         # Filter: must be auto_archive action
         if intake.get("auto_archive_action") != "auto_archive_agent_declared_verification":
+            continue
+
+        # Render API only filter: after effective date, require gateway receipt
+        created_at = issue.get("createdAt", "")
+        has_gateway_receipt = (
+            parse_bool(intake.get("created_by_gateway")) is True
+            and intake.get("gateway_receipt_id") not in (None, "", "none")
+        )
+
+        if is_after_effective_date(created_at) and not has_gateway_receipt:
+            skipped_direct.append(issue["number"])
+            print(
+                f"SKIP_DIRECT_ISSUE_ARCHIVE_ATTEMPT issue #{issue['number']}: "
+                f"no gateway receipt after effective date",
+                file=sys.stderr,
+            )
             continue
 
         # Determine if this is a test record
@@ -169,6 +216,19 @@ def build_index(issues: list[dict], repo: str = "", include_test: bool = False) 
             "agent_independent_followup": parse_bool(intake.get("agent_independent_followup")),
             "created_at": issue.get("createdAt", ""),
         }
+
+        # Gateway receipt fields (for Render API created records)
+        if has_gateway_receipt:
+            record["created_by_gateway"] = True
+            record["gateway_receipt_id"] = intake.get("gateway_receipt_id", "")
+            record["render_api_only"] = True
+            if intake.get("gateway_commit"):
+                record["gateway_commit"] = intake["gateway_commit"]
+            if intake.get("gateway_service"):
+                record["gateway_service"] = intake["gateway_service"]
+        else:
+            # Legacy pre-effective record
+            record["legacy_pre_render_api_only"] = True
         records.append(record)
 
     # Sort by issue number
@@ -186,6 +246,8 @@ def build_index(issues: list[dict], repo: str = "", include_test: bool = False) 
         ],
         "rebuild_source": "github_issues",
         "rebuild_timestamp": datetime.now(timezone.utc).isoformat(),
+        "render_api_only_effective_at": RENDER_API_ONLY_EFFECTIVE_AT,
+        "skipped_direct_issue_archive_attempts": skipped_direct,
         "records": records,
     }
 
