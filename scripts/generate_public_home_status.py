@@ -32,6 +32,7 @@ INDEX_MD = ROOT / "index.md"
 ECHO_INDEX = ROOT / "api" / "echo-index.json"
 EXTERNAL_WITNESS_INDEX = ROOT / "api" / "external-witness-index.json"
 ATTESTATION_INDEX = ROOT / "api" / "independent-attestation-index.json"
+AGENT_DECLARED_INDEX = ROOT / "api" / "agent-declared-verification-index.json"
 PHYSICAL_ANCHOR = ROOT / "api" / "core-object-alpha-shenzhen-notary-2026-05-06.json"
 PUBLIC_HOME_STATUS = ROOT / "api" / "public-home-status.json"
 
@@ -142,11 +143,12 @@ def load_json(path: Path) -> dict[str, Any]:
 
 def source_digest() -> str:
     h = hashlib.sha256()
-    for path in [ECHO_INDEX, EXTERNAL_WITNESS_INDEX, PHYSICAL_ANCHOR]:
+    for path in [ECHO_INDEX, EXTERNAL_WITNESS_INDEX, PHYSICAL_ANCHOR, AGENT_DECLARED_INDEX]:
         rel = path.relative_to(ROOT).as_posix()
         h.update(rel.encode("utf-8"))
         h.update(b"\0")
-        h.update(path.read_bytes())
+        if path.exists():
+            h.update(path.read_bytes())
         h.update(b"\0")
     return h.hexdigest()[:16]
 
@@ -212,9 +214,25 @@ def compute_verifiability_status(physical: dict[str, Any]) -> dict:
 # ---------------------------------------------------------------------------
 # Reception
 # ---------------------------------------------------------------------------
-def compute_reception_status(echo_records: list[dict[str, Any]]) -> dict:
+def compute_reception_status(echo_records: list[dict[str, Any]], agent_declared_records: list[dict[str, Any]]) -> dict:
     # Count archived echoes
     archived = [r for r in echo_records if r.get("archive_status") in ("accepted_echo", "accepted_verification", "accepted_attestation", "needs_human_review")]
+
+    # Agent-declared verification archives (from index, excluding test records for reception)
+    ad_reception = [
+        r for r in agent_declared_records
+        if r.get("archive_ready") is True
+        and r.get("requested_archive_kind") == "agent_declared_verification_archive"
+        and r.get("counts_toward_home_reception") is True
+        and r.get("test_record") is not True
+    ]
+    ad_verifiability = [
+        r for r in agent_declared_records
+        if r.get("archive_ready") is True
+        and r.get("requested_archive_kind") == "agent_declared_verification_archive"
+        and r.get("counts_toward_home_verifiability") is True
+        and r.get("test_record") is not True
+    ]
 
     # Human-directed agent verification
     hd = [r for r in echo_records
@@ -245,8 +263,9 @@ def compute_reception_status(echo_records: list[dict[str, Any]]) -> dict:
             "count": len(archived)
         },
         "agent_declared_verification_archives": {
-            "count": 1,
-            "highest_level": "V4"
+            "count": len(ad_reception),
+            "highest_level": highest_level(ad_reception, "agent_declared_protocol_level"),
+            "verifiability_count": len(ad_verifiability)
         },
         "agent_declared_attestations": {
             "count": 0
@@ -393,15 +412,25 @@ def compute_status() -> dict[str, Any]:
         attestation_index = load_json(ATTESTATION_INDEX)
         attestation_records = [r for r in attestation_index.get("test_records", []) if isinstance(r, dict)]
 
+    # Load agent-declared verification index
+    agent_declared_records = []
+    if AGENT_DECLARED_INDEX.exists():
+        ad_index = load_json(AGENT_DECLARED_INDEX)
+        agent_declared_records = [r for r in ad_index.get("records", []) if isinstance(r, dict)]
+
+    generated_from = [
+        "/api/echo-index.json",
+        "/api/external-witness-index.json",
+        "/api/core-object-alpha-shenzhen-notary-2026-05-06.json",
+    ]
+    if AGENT_DECLARED_INDEX.exists():
+        generated_from.append("/api/agent-declared-verification-index.json")
+
     return {
         "schema": "trinityaccord.public-home-status.v2",
-        "generated_from": [
-            "/api/echo-index.json",
-            "/api/external-witness-index.json",
-            "/api/core-object-alpha-shenzhen-notary-2026-05-06.json",
-        ],
+        "generated_from": generated_from,
         "verifiability": compute_verifiability_status(physical),
-        "reception": compute_reception_status(echo_records),
+        "reception": compute_reception_status(echo_records, agent_declared_records),
         "external_witness_records": compute_external_witness_status(echo_records),
         "boundary": compute_boundary_status(),
         "legacy_counts": compute_legacy_counts(echo_records, attestation_records),
@@ -512,10 +541,18 @@ def main() -> int:
         INDEX_MD.write_text(new_text, encoding="utf-8")
         v = status["verifiability"]
         r = status["reception"]
+        total_reception = (
+            r["archived_echoes"]["count"]
+            + r.get("agent_declared_verification_archives", {}).get("count", 0)
+            + r.get("agent_declared_attestations", {}).get("count", 0)
+            + r.get("agent_declared_successor_receptions", {}).get("count", 0)
+        )
         print(
             f"Updated index.md public status: "
             f"verifiability={v['public_digital_verification']['highest_protocol_level']}, "
-            f"reception_count={r['archived_echoes']['count']}, "
+            f"reception_total={total_reception} "
+            f"(echoes={r['archived_echoes']['count']}, "
+            f"agent_declared={r.get('agent_declared_verification_archives', {}).get('count', 0)}), "
             f"digest={status['source_digest']}"
         )
     else:

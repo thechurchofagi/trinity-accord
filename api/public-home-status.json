@@ -3,7 +3,8 @@
   "generated_from": [
     "/api/echo-index.json",
     "/api/external-witness-index.json",
-    "/api/core-object-alpha-shenzhen-notary-2026-05-06.json"
+    "/api/core-object-alpha-shenzhen-notary-2026-05-06.json",
+    "/api/agent-declared-verification-index.json"
   ],
   "verifiability": {
     "bitcoin_originals": {
@@ -33,7 +34,8 @@
     },
     "agent_declared_verification_archives": {
       "count": 1,
-      "highest_level": "V4"
+      "highest_level": "V4",
+      "verifiability_count": 1
     },
     "agent_declared_attestations": {
       "count": 0
@@ -114,5 +116,5 @@
     "formal_attestation": {},
     "independent_attestation": {}
   },
-  "source_digest": "a4be63bb8241978e"
+  "source_digest": "fbb95eb4259b3cae"
 }
