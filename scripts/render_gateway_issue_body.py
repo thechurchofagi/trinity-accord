@@ -238,10 +238,18 @@ INVALID_RECEIPT_VALUES = {"", "unknown", "none", "null", "n/a", "undefined"}
 
 
 def validate_receipt_id(receipt_id):
-    """Return True if receipt_id is a valid non-placeholder value."""
-    if not receipt_id:
+    """Return True if receipt_id matches the canonical gateway receipt pattern.
+
+    Pattern: gar-<alphanumeric/T/./_/:/- with at least 16 chars after prefix>
+    Rejects empty, placeholder, and malformed receipt IDs.
+    """
+    if not receipt_id or not isinstance(receipt_id, str):
         return False
-    return receipt_id.strip().lower() not in INVALID_RECEIPT_VALUES
+    stripped = receipt_id.strip()
+    if stripped.lower() in INVALID_RECEIPT_VALUES:
+        return False
+    import re
+    return bool(re.match(r"^gar-[A-Za-z0-9T._:-]{16,}$", stripped))
 
 
 def render_gateway_receipt_fields(gateway_receipt_id=None, gateway_commit=None,

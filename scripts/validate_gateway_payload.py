@@ -64,10 +64,6 @@ from gateway_v0_v5_policy import (  # noqa: E402
 )
 
 
-def is_agent_declared_archive(payload):
-    return payload.get("requested_archive_kind") == "agent_declared_verification_archive"
-
-
 def get_declared_level(payload):
     return (
         payload.get("agent_declared_protocol_level")

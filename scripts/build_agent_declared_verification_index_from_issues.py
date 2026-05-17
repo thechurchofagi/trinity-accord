@@ -18,6 +18,13 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
+# Shared receipt policy — single source of truth
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from gateway_v0_v5_policy import (
+    RENDER_API_ONLY_EFFECTIVE_AT,
+    is_valid_gateway_receipt_block,
+)
+
 ROOT = Path(__file__).resolve().parents[1]
 INDEX_PATH = ROOT / "api" / "agent-declared-verification-index.json"
 
@@ -58,9 +65,6 @@ EXTRA_FIELDS = [
     "server_validated",
     "server_rendered",
 ]
-
-# Render API only policy effective date
-RENDER_API_ONLY_EFFECTIVE_AT = "2026-05-17T05:30:00Z"
 
 # Label patterns that indicate test records
 TEST_LABEL_PATTERNS = ["test-record", "test_record", "smoke-test"]
@@ -160,12 +164,9 @@ def build_index(issues: list[dict], repo: str = "", include_test: bool = False) 
         if intake.get("auto_archive_action") != "auto_archive_agent_declared_verification":
             continue
 
-        # Render API only filter: after effective date, require gateway receipt
+        # Render API only filter: after effective date, require valid gateway receipt
         created_at = issue.get("createdAt", "")
-        has_gateway_receipt = (
-            parse_bool(intake.get("created_by_gateway")) is True
-            and intake.get("gateway_receipt_id") not in (None, "", "none")
-        )
+        has_gateway_receipt = is_valid_gateway_receipt_block(intake)
 
         if is_after_effective_date(created_at) and not has_gateway_receipt:
             skipped_direct.append(issue["number"])

@@ -254,10 +254,11 @@ def main():
                     f"agent-declared field {k}: expected {expected!r}, got {actual!r}"
                 )
 
-        # Gateway receipt validation
+        # Gateway receipt validation (strict pattern)
         gateway_receipt_id = data.get("gateway_receipt_id")
-        if not gateway_receipt_id or len(str(gateway_receipt_id).strip()) < 8:
-            errors.append("gateway_receipt_id is required and must be at least 8 characters")
+        import re as _re
+        if not gateway_receipt_id or not _re.match(r"^gar-[A-Za-z0-9T._:-]{16,}$", str(gateway_receipt_id).strip()):
+            errors.append("gateway_receipt_id is required and must match pattern gar-<16+ alphanumeric chars>")
 
         gateway_service = data.get("gateway_service")
         if not gateway_service or not str(gateway_service).strip():

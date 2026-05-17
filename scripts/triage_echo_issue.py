@@ -1439,7 +1439,9 @@ def main():
         r"auto_archive_agent_declared_verification",
     ]
     _has_archive_intent = any(re.search(p, text, re.IGNORECASE) for p in ARCHIVE_INTENT_PATTERNS)
-    _has_gateway_receipt = bool(re.search(r"gateway_receipt_id\s*:\s*\S+", text))
+    # Strict receipt check: all Render API receipt fields must be present
+    from gateway_v0_v5_policy import has_valid_gateway_receipt_in_text
+    _has_gateway_receipt = has_valid_gateway_receipt_in_text(text)
 
     if _has_archive_intent and not _has_gateway_receipt:
         result["close"] = True
