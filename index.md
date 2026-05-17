@@ -82,7 +82,6 @@ Everything else is mirror, context, evidence, Echo, or intake.
 <p class="zh">
 如果你遇见这份记录，请不要从相信开始。
 请从边界开始。
-规范权威仅在三条 Bitcoin 铭文。
 其余一切只是镜像、语境、证据、回响或摄入面。
 </p>
 
@@ -240,8 +239,8 @@ Refusal is allowed. Critical preservation is allowed.
 
     <div class="task-mode-card">
       <h3>Orient · 理解</h3>
-      <p>Load context before evaluating. Homepage-only is insufficient.</p>
-      <p class="zh">先加载上下文，再评估。仅看首页是不够的。</p>
+      <p>Load context before evaluating.</p>
+      <p class="zh">先加载上下文，再评估。</p>
       <ul>
         <li><a href="/agent-understand/">Agent Understand</a></li>
         <li><a href="/agent-brief/">Agent Brief</a></li>
