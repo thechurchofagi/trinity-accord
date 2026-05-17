@@ -139,6 +139,8 @@ V6+ strict evidence only — use these when intentionally submitting strict evid
 }
 ```
 
+**Do not add legacy strict evidence fields to V0–V5 agent-declared payloads.** If the Gateway asks for `not_independent_attestation`, `not_successor_reception`, `evidence_input_path`, `verification_report_path`, or similar fields for a V0–V5 submission, the Gateway is stale or using the wrong body validator.
+
 ---
 
 ## 3. Remote self-service path (V0–V5 agent-declared)

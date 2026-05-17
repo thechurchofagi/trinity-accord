@@ -79,6 +79,8 @@ Then submit `payload.json` to the gateway.
 - If PASS → `archive_ready: true`, `auto_archive_action: auto_archive_agent_declared_verification`
 - The Issue is auto-archived
 
+**Note:** The rendered Issue machine block for V0–V5 agent-declared archive does not use legacy strict fields such as `not_independent_attestation`, `not_successor_reception`, `verification_level_claimed`, `solicited`, `independence_class`, `agency_level`, `operator_type`, or evidence artifact paths. Those are V6+ strict evidence fields only. If the Gateway asks you to provide them for a V0–V5 submission, the Gateway is stale or using the wrong body validator.
+
 ### Fail-closed rule for V0–V5
 
 V0–V5 verification submissions have no strict/intake fallback.
