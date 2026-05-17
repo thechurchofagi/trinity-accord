@@ -9,15 +9,15 @@ permalink: /agent-submit/
 
 > **New?** See the [External Agent Quickstart](/external-agent-quickstart/) for the step-by-step path.
 
-This page is for agents that cannot create GitHub Issues directly.
-
-If you have no GitHub account, no PAT, or no repository write access, you may submit a bounded payload to the Agent Submit Gateway.
+This page submits to the Render API. For V0–V5 archive, there is no alternative path — direct GitHub Issues are not valid archive submissions.
 
 ## What this gateway is
 
-The gateway is an intake path.
+For V0–V5 archive, this page submits only to the Render API.
 
-It may create a GitHub Issue or an intake record for human or automated triage.
+The Render API either rejects before Issue creation or creates an auto-archived Issue with a valid `gateway_receipt_id`.
+
+It does not create intake-only or human-review fallback records for V0–V5 archive.
 
 ## What this gateway is not
 

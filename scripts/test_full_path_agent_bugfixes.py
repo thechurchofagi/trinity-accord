@@ -195,7 +195,8 @@ def main():
          payload_path,
          "--gateway-receipt-id", "gar-20260517T120000-abc12345",
          "--gateway-commit", "9b6c4b1",
-         "--gateway-service", "trinity-agent-issue-gateway"],
+         "--gateway-service", "trinity-agent-issue-gateway",
+         "--production-render"],
         capture_output=True, text=True,
     )
     check("Renderer with receipt args succeeds", renderer_result.returncode == 0,

@@ -251,8 +251,8 @@
       ]
     },
     "created_by_gateway": {
-      "const": true,
-      "description": "Whether this record was created by the Render API / Gateway."
+      "type": "boolean",
+      "description": "Whether this record was created by the Render API / Gateway. Must be true for production; false indicates dry-run/non-authoritative."
     },
     "gateway_service": {
       "type": "string",
@@ -270,16 +270,16 @@
       "description": "Git commit hash of the deployed gateway service."
     },
     "render_api_only": {
-      "const": true,
-      "description": "Indicates this record was created under the Render-API-only policy."
+      "type": "boolean",
+      "description": "Indicates this record was created under the Render-API-only policy. Must be true for production; false indicates dry-run/non-authoritative."
     },
     "server_validated": {
-      "const": true,
-      "description": "Whether the issue body was validated server-side before creation."
+      "type": "boolean",
+      "description": "Whether the issue body was validated server-side before creation. Must be true for production."
     },
     "server_rendered": {
-      "const": true,
-      "description": "Whether the issue body was rendered server-side by the Gateway."
+      "type": "boolean",
+      "description": "Whether the issue body was rendered server-side by the Gateway. Must be true for production."
     }
   },
   "allOf": [

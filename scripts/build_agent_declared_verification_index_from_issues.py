@@ -60,7 +60,7 @@ EXTRA_FIELDS = [
 ]
 
 # Render API only policy effective date
-RENDER_API_ONLY_EFFECTIVE_AT = "2026-05-17T00:00:00Z"
+RENDER_API_ONLY_EFFECTIVE_AT = "2026-05-17T05:30:00Z"
 
 # Label patterns that indicate test records
 TEST_LABEL_PATTERNS = ["test-record", "test_record", "smoke-test"]

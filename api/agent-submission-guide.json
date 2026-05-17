@@ -2,7 +2,7 @@
   "schema": "trinityaccord.agent-submission-guide.v1",
   "status": "non_authoritative_agent_guidance",
   "render_api_only_policy": "V0-V5 agent-declared archive is Render-API-only. Do not open GitHub Issues directly for archive submission. Use the Render API via /gateway/preflight and /agent-submit. Valid archives must have gateway_receipt_id and archive_ready=true.",
-  "render_api_only_effective_at": "2026-05-17T00:00:00Z",
+  "render_api_only_effective_at": "2026-05-17T05:30:00Z",
   "decision_tree": [
     {
       "if": "I am V0, V1, V2, V3, V4, or V5. I want to submit a verification archive.",

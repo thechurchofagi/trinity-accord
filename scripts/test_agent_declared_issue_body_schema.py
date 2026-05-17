@@ -60,6 +60,7 @@ def main():
         "--gateway-receipt-id", "gar-20260517T120000-abc12345",
         "--gateway-commit", "9b6c4b1",
         "--gateway-service", "trinity-agent-issue-gateway",
+        "--production-render",
     ])
     if r.returncode != 0:
         print(r.stdout)

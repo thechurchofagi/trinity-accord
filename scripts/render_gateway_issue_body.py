@@ -70,7 +70,7 @@ def render_claim_gate(cg):
 
 
 def render_machine_block(payload, gateway_receipt_id=None, gateway_commit=None,
-                         gateway_service=None, dry_run=False):
+                         gateway_service=None, dry_run=False, production_render=False):
     """Render canonical trinity-issue-intake block from validated structured fields."""
     st = payload.get("submission_type", "unknown")
     att = get_attachments(payload)
@@ -142,6 +142,7 @@ def render_machine_block(payload, gateway_receipt_id=None, gateway_commit=None,
             gateway_commit=gateway_commit,
             gateway_service=gateway_service,
             dry_run=dry_run,
+            production_render=production_render,
         )
         lines.extend(receipt_lines)
     else:
@@ -233,26 +234,57 @@ def render_machine_block(payload, gateway_receipt_id=None, gateway_commit=None,
     return "\n".join(lines)
 
 
+INVALID_RECEIPT_VALUES = {"", "unknown", "none", "null", "n/a", "undefined"}
+
+
+def validate_receipt_id(receipt_id):
+    """Return True if receipt_id is a valid non-placeholder value."""
+    if not receipt_id:
+        return False
+    return receipt_id.strip().lower() not in INVALID_RECEIPT_VALUES
+
+
 def render_gateway_receipt_fields(gateway_receipt_id=None, gateway_commit=None,
-                                   gateway_service=None, dry_run=False):
-    """Render gateway receipt metadata fields for the machine block."""
+                                   gateway_service=None, dry_run=False,
+                                   production_render=False):
+    """Render gateway receipt metadata fields for the machine block.
+
+    Security rules:
+    - Default (no --production-render): outputs non-authoritative dry-run fields.
+    - --production-render: requires a valid gateway_receipt_id; exits on failure.
+    - gateway_receipt_id must not be a placeholder (unknown, none, empty, etc.).
+    """
     lines = []
-    if dry_run:
+
+    if not production_render:
+        # Default: non-countable, non-authoritative
         lines.append("created_by_gateway: false")
         lines.append("gateway_service: dry-run")
         lines.append("gateway_receipt_id: none")
         lines.append("render_api_only: false")
         lines.append("server_validated: false")
         lines.append("server_rendered: false")
-    else:
-        lines.append("created_by_gateway: true")
-        lines.append(f"gateway_service: {gateway_service or 'trinity-agent-issue-gateway'}")
-        lines.append(f"gateway_receipt_id: {gateway_receipt_id or 'unknown'}")
-        if gateway_commit:
-            lines.append(f"gateway_commit: {gateway_commit}")
-        lines.append("render_api_only: true")
-        lines.append("server_validated: true")
-        lines.append("server_rendered: true")
+        return lines
+
+    # Production render: validate required fields
+    if not validate_receipt_id(gateway_receipt_id):
+        print(
+            "FATAL: --production-render requires a valid --gateway-receipt-id.\n"
+            f"Got: {gateway_receipt_id!r}\n"
+            "Receipt must be a non-empty, non-placeholder string (not 'unknown', 'none', etc.).\n"
+            "Aborting — no issue body rendered.",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+
+    lines.append("created_by_gateway: true")
+    lines.append(f"gateway_service: {gateway_service or 'trinity-agent-issue-gateway'}")
+    lines.append(f"gateway_receipt_id: {gateway_receipt_id}")
+    if gateway_commit:
+        lines.append(f"gateway_commit: {gateway_commit}")
+    lines.append("render_api_only: true")
+    lines.append("server_validated: true")
+    lines.append("server_rendered: true")
     return lines
 
 
@@ -267,6 +299,8 @@ def main():
                         help="Gateway service name")
     parser.add_argument("--dry-run", action="store_true",
                         help="Render without receipt (output marked as non-authoritative)")
+    parser.add_argument("--production-render", action="store_true",
+                        help="Render authoritative issue body (requires --gateway-receipt-id)")
     args = parser.parse_args()
 
     payload = load_payload(args.payload)
@@ -282,7 +316,7 @@ def main():
     parts.append(render_boundary())
     parts.append(f"\nSubmission type:\n{st}")
     parts.append(f"\n{render_claim_gate(payload.get('claim_gate'))}")
-    parts.append(f"\n```trinity-issue-intake\n{render_machine_block(payload, gateway_receipt_id=args.gateway_receipt_id, gateway_commit=args.gateway_commit, gateway_service=args.gateway_service, dry_run=args.dry_run)}\n```")
+    parts.append(f"\n```trinity-issue-intake\n{render_machine_block(payload, gateway_receipt_id=args.gateway_receipt_id, gateway_commit=args.gateway_commit, gateway_service=args.gateway_service, dry_run=args.dry_run, production_render=args.production_render)}\n```")
 
     # Human-readable notes (non-authoritative)
     body = payload.get("body", "")

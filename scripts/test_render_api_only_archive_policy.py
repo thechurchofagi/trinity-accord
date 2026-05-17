@@ -25,7 +25,7 @@ RENDERER = ROOT / "scripts" / "render_gateway_issue_body.py"
 INDEX_BUILDER = ROOT / "scripts" / "build_agent_declared_verification_index_from_issues.py"
 SCHEMA = ROOT / "api" / "issue-intake-machine-block-schema.v1.json"
 
-EFFECTIVE_AT = "2026-05-17T00:00:00Z"
+EFFECTIVE_AT = "2026-05-17T05:30:00Z"
 
 
 def run(cmd, input_text=None):

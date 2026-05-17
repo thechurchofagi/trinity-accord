@@ -22,7 +22,7 @@ ROOT = Path(__file__).resolve().parents[1]
 INDEX_BUILDER = ROOT / "scripts" / "build_agent_declared_verification_index_from_issues.py"
 INDEX_PATH = ROOT / "api" / "agent-declared-verification-index.json"
 
-EFFECTIVE_AT = "2026-05-17T00:00:00Z"
+EFFECTIVE_AT = "2026-05-17T05:30:00Z"
 
 
 def run(cmd, input_text=None):
