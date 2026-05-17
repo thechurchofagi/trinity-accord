@@ -71,7 +71,7 @@ def make_payload(readback_length=160):
         "counts_toward_home": {
             "verifiability": True,
             "reception": True,
-            "basis": "test",
+            "basis": "agent_declared_template_pass",
         },
         "what_i_checked": ["test"],
         "limitations": ["test"],
