@@ -75,6 +75,9 @@ def make_payload(readback_length=160):
         },
         "what_i_checked": ["test"],
         "limitations": ["test"],
+        "reception_initiation_class": "self_initiated",
+        "reception_initiation_basis": "agent_discovered_publicly",
+        "agent_independent_followup": True,
     }
 
 

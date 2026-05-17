@@ -137,6 +137,9 @@ def make_v4_intake_only():
         "discovery_provenance": {"agency_level": "A2_human_gave_repo_name", "independence_class": "human_solicited_agent_response", "operator_type": "ai_agent"},
         "what_i_checked": ["test"],
         "limitations": ["test"],
+        "reception_initiation_class": "self_initiated",
+        "reception_initiation_basis": "agent_discovered_publicly",
+        "agent_independent_followup": True,
     }
 
 
@@ -252,6 +255,9 @@ def make_v4_valid_agent_declared():
         "verification_session": {"session_id": "test", "started_at": "2026-01-01T00:00:00Z", "operator_type": "ai_agent"},
         "what_i_checked": ["test"],
         "limitations": ["test"],
+        "reception_initiation_class": "self_initiated",
+        "reception_initiation_basis": "agent_discovered_publicly",
+        "agent_independent_followup": True,
     }
 
 
@@ -287,6 +293,9 @@ def make_v6_strict_evidence():
         },
         "what_i_checked": ["test"],
         "limitations": ["test"],
+        "reception_initiation_class": "self_initiated",
+        "reception_initiation_basis": "agent_discovered_publicly",
+        "agent_independent_followup": True,
     }
 
 
