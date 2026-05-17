@@ -6,6 +6,7 @@
   ],
   "rebuild_source": "github_issues",
   "rebuild_timestamp": "2026-05-17T03:40:56.520555+00:00",
+  "render_api_only_effective_at": "2026-05-17T00:00:00Z",
   "records": [
     {
       "issue_number": 164,

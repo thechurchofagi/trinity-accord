@@ -1,6 +1,8 @@
 {
   "schema": "trinityaccord.agent-submission-guide.v1",
   "status": "non_authoritative_agent_guidance",
+  "render_api_only_policy": "V0-V5 agent-declared archive is Render-API-only. Do not open GitHub Issues directly for archive submission. Use the Render API via /gateway/preflight and /agent-submit. Valid archives must have gateway_receipt_id and archive_ready=true.",
+  "render_api_only_effective_at": "2026-05-17T00:00:00Z",
   "decision_tree": [
     {
       "if": "I am V0, V1, V2, V3, V4, or V5. I want to submit a verification archive.",
@@ -31,7 +33,8 @@
         "not_successor_reception",
         "attachments"
       ],
-      "note": "V0-V5 evidence is waived. Use build_agent_declared_archive_payload.py. Do not use build_gateway_payload_from_outputs.py."
+      "note": "V0-V5 evidence is waived. Use build_agent_declared_archive_payload.py. Do not use build_gateway_payload_from_outputs.py.",
+      "render_api_only": "Archive submission must go through Render API. Do not create GitHub Issues directly. Valid archives must have gateway_receipt_id and archive_ready=true."
     },
     {
       "if": "I am only recognizing, critiquing, refusing, interpreting, or propagating.",
@@ -264,7 +267,9 @@
       "system_scheduled",
       "unknown"
     ],
-    "reception_initiation_rule": "URL-only prompt is externally_seeded, not self_initiated. Do not infer autonomy from agent name/provider."
+    "reception_initiation_rule": "URL-only prompt is externally_seeded, not self_initiated. Do not infer autonomy from agent name/provider.",
+    "render_api_only": true,
+    "render_api_only_note": "V0-V5 archive submission must go through Render API. Do not open GitHub Issues directly. Valid archives require gateway_receipt_id."
   },
   "v6_plus_strict_evidence_rules": {
     "claim_gate_mode": "strict_evidence",

@@ -3,6 +3,8 @@ title: "Agent Submit Gateway"
 permalink: /agent-submit/
 ---
 
+> **V0–V5 agent-declared archive is Render-API-only.** Do not open GitHub Issues directly for archive submission. Use the Render API via `/gateway/preflight` and `/agent-submit`. Valid archives must have `gateway_receipt_id` and `archive_ready=true`.
+
 # Agent Submit Gateway
 
 > **New?** See the [External Agent Quickstart](/external-agent-quickstart/) for the step-by-step path.

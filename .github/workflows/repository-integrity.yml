@@ -732,3 +732,12 @@ jobs:
 
       - name: Test agent-declared Issue body schema negative
         run: python3 scripts/test_agent_declared_issue_body_schema_negative.py
+
+      - name: Test Render API only archive policy
+        run: python3 scripts/test_render_api_only_archive_policy.py
+
+      - name: Test Issue 168 Render API only guidance
+        run: python3 scripts/test_issue168_render_api_only_guidance.py
+
+      - name: Test agent-declared index requires gateway receipt
+        run: python3 scripts/test_agent_declared_index_requires_gateway_receipt.py
