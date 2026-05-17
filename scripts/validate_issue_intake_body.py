@@ -45,6 +45,40 @@ ALLOWED_OPERATOR = {
 
 REQUIRED = [
     "submission_type",
+    "agent_name_or_model",
+    "system_or_provider",
+    "what_i_checked",
+    "limitations",
+    "boundary_sentence",
+]
+
+AGENT_DECLARED_REQUIRED = [
+    "submission_type",
+    "agent_name_or_model",
+    "system_or_provider",
+    "record_intent",
+    "requested_archive_kind",
+    "agent_declared_protocol_level",
+    "evidence_requirement_mode",
+    "claim_gate_mode",
+    "claim_gate_status",
+    "archive_ready",
+    "allowed_archive_kind",
+    "auto_archive_action",
+    "agent_integrity_declaration_present",
+    "discovery_provenance_present",
+    "origin_classification_present",
+    "claim_classification_present",
+    "authority_boundary_present",
+    "counts_toward_home_verifiability",
+    "counts_toward_home_reception",
+    "what_i_checked",
+    "limitations",
+    "boundary_sentence",
+]
+
+STRICT_REQUIRED = [
+    "submission_type",
     "verification_level_claimed",
     "agent_name_or_model",
     "system_or_provider",
@@ -58,6 +92,22 @@ REQUIRED = [
     "limitations",
     "boundary_sentence",
 ]
+
+AGENT_DECLARED_FORBIDDEN = {
+    "verification_level_claimed",
+    "solicited",
+    "independence_class",
+    "agency_level",
+    "operator_type",
+    "not_independent_attestation",
+    "not_successor_reception",
+    "evidence_input_path",
+    "evidence_input_sha256",
+    "claim_gate_output_path",
+    "claim_gate_output_sha256",
+    "verification_report_path",
+    "verification_report_sha256",
+}
 
 REPORT_PAIRS = [
     ("evidence_input_path", "evidence_input_sha256"),
@@ -157,6 +207,22 @@ def main():
         if k not in data or data[k] in ("", [], None):
             errors.append(f"missing required field: {k}")
 
+    is_agent_declared = data.get("requested_archive_kind") == "agent_declared_verification_archive"
+
+    if is_agent_declared:
+        # Agent-declared archive: use agent-declared required set, forbid legacy fields
+        for k in AGENT_DECLARED_REQUIRED:
+            if k not in data or data[k] in ("", [], None):
+                errors.append(f"missing agent-declared required field: {k}")
+        for k in AGENT_DECLARED_FORBIDDEN:
+            if k in data:
+                errors.append(f"forbidden legacy field in agent-declared block: {k}")
+    else:
+        # Strict/legacy path: require strict fields
+        for k in STRICT_REQUIRED:
+            if k not in data or data[k] in ("", [], None):
+                errors.append(f"missing required field: {k}")
+
     # Submission-type-specific rules
     st = data.get("submission_type")
 
@@ -167,10 +233,11 @@ def main():
         if data.get("echo_wrapper_path") or data.get("echo_wrapper_sha256"):
             errors.append("verification_report_candidate must not include echo_wrapper fields")
 
-        # echo_type not in required list for report candidates
-        for path_key, hash_key in REPORT_PAIRS:
-            if not data.get(path_key) and not data.get(hash_key):
-                errors.append(f"missing artifact reference: {path_key} or {hash_key}")
+        # Artifact refs only required for strict path (not agent-declared)
+        if not is_agent_declared:
+            for path_key, hash_key in REPORT_PAIRS:
+                if not data.get(path_key) and not data.get(hash_key):
+                    errors.append(f"missing artifact reference: {path_key} or {hash_key}")
 
     elif st == "verification_echo_candidate":
         # Echo candidates: echo_type required, all 4 pairs required
@@ -189,16 +256,18 @@ def main():
         if val and not SHA256_RE.match(str(val)):
             errors.append(f"invalid sha256 field: {key}")
 
-    if data.get("agency_level") not in ALLOWED_AGENCY:
-        errors.append(f"invalid agency_level: {data.get('agency_level')}")
-    if data.get("independence_class") not in ALLOWED_INDEPENDENCE:
-        errors.append(f"invalid independence_class: {data.get('independence_class')}")
-    if data.get("operator_type") not in ALLOWED_OPERATOR:
-        errors.append(f"invalid operator_type: {data.get('operator_type')}")
-    if data.get("not_independent_attestation") is not True:
-        errors.append("not_independent_attestation must be true")
-    if data.get("not_successor_reception") is not True:
-        errors.append("not_successor_reception must be true")
+    # Legacy strict field validation (skip for agent-declared)
+    if not is_agent_declared:
+        if data.get("agency_level") not in ALLOWED_AGENCY:
+            errors.append(f"invalid agency_level: {data.get('agency_level')}")
+        if data.get("independence_class") not in ALLOWED_INDEPENDENCE:
+            errors.append(f"invalid independence_class: {data.get('independence_class')}")
+        if data.get("operator_type") not in ALLOWED_OPERATOR:
+            errors.append(f"invalid operator_type: {data.get('operator_type')}")
+        if data.get("not_independent_attestation") is not True:
+            errors.append("not_independent_attestation must be true")
+        if data.get("not_successor_reception") is not True:
+            errors.append("not_successor_reception must be true")
 
     # --- Archive readiness field validation ---
     record_intent = data.get("record_intent", "intake_only")
@@ -209,8 +278,11 @@ def main():
     if record_intent not in ("intake_only", "auto_archive_candidate", "archive_preflight_only"):
         errors.append(f"invalid record_intent: {record_intent}")
 
-    if requested_archive_kind not in ("none", "external_agent_intake_sample", "verification_report_archive",
-                                       "archived_echo", "successor_reception_candidate"):
+    valid_archive_kinds = (
+        "none", "external_agent_intake_sample", "verification_report_archive",
+        "archived_echo", "successor_reception_candidate", "agent_declared_verification_archive"
+    )
+    if requested_archive_kind not in valid_archive_kinds:
         errors.append(f"invalid requested_archive_kind: {requested_archive_kind}")
 
     # archive_ready=false must not have archive:ready in machine block
@@ -231,8 +303,11 @@ def main():
         errors.append("successor_reception_candidate must not be archive_ready=true")
 
     # auto_archive_action must be valid
-    valid_actions = ("none", "block", "needs_more_evidence",
-                     "auto_archive_sample", "auto_archive_verification_report", "auto_archive_echo")
+    valid_actions = (
+        "none", "block", "needs_more_evidence",
+        "auto_archive_sample", "auto_archive_verification_report", "auto_archive_echo",
+        "auto_archive_agent_declared_verification"
+    )
     if auto_archive_action not in valid_actions:
         errors.append(f"invalid auto_archive_action: {auto_archive_action}")
 

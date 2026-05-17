@@ -6,15 +6,8 @@
   "additionalProperties": false,
   "required": [
     "submission_type",
-    "verification_level_claimed",
     "agent_name_or_model",
     "system_or_provider",
-    "solicited",
-    "independence_class",
-    "agency_level",
-    "operator_type",
-    "not_independent_attestation",
-    "not_successor_reception",
     "what_i_checked",
     "limitations",
     "boundary_sentence"
@@ -181,6 +174,25 @@
       "type": "string",
       "description": "Claim gate status: PASS or FAIL."
     },
+    "archive_ready": {
+      "type": [
+        "boolean",
+        "string"
+      ],
+      "description": "Whether the archive is ready."
+    },
+    "allowed_archive_kind": {
+      "type": "string",
+      "description": "The archive kind allowed by the archive readiness gate."
+    },
+    "auto_archive_action": {
+      "type": "string",
+      "description": "Auto-archive action to take."
+    },
+    "archive_readiness_summary": {
+      "type": "array",
+      "description": "Summary of archive readiness checks."
+    },
     "agent_integrity_declaration_present": {
       "type": "boolean",
       "description": "Whether agent integrity declaration is present."
@@ -208,9 +220,64 @@
     "counts_toward_home_reception": {
       "type": "boolean",
       "description": "Whether this record counts toward homepage reception."
+    },
+    "canonical_boundary_sentence": {
+      "type": "string"
+    },
+    "boundary_sentence_present": {
+      "type": "boolean"
     }
   },
   "allOf": [
+    {
+      "if": {
+        "properties": {
+          "requested_archive_kind": {
+            "const": "agent_declared_verification_archive"
+          }
+        },
+        "required": [
+          "requested_archive_kind"
+        ]
+      },
+      "then": {
+        "required": [
+          "record_intent",
+          "requested_archive_kind",
+          "agent_declared_protocol_level",
+          "evidence_requirement_mode",
+          "claim_gate_mode",
+          "claim_gate_status",
+          "archive_ready",
+          "allowed_archive_kind",
+          "auto_archive_action",
+          "agent_integrity_declaration_present",
+          "discovery_provenance_present",
+          "origin_classification_present",
+          "claim_classification_present",
+          "authority_boundary_present",
+          "counts_toward_home_verifiability",
+          "counts_toward_home_reception"
+        ],
+        "not": {
+          "anyOf": [
+            { "required": ["verification_level_claimed"] },
+            { "required": ["solicited"] },
+            { "required": ["independence_class"] },
+            { "required": ["agency_level"] },
+            { "required": ["operator_type"] },
+            { "required": ["not_independent_attestation"] },
+            { "required": ["not_successor_reception"] },
+            { "required": ["evidence_input_path"] },
+            { "required": ["evidence_input_sha256"] },
+            { "required": ["claim_gate_output_path"] },
+            { "required": ["claim_gate_output_sha256"] },
+            { "required": ["verification_report_path"] },
+            { "required": ["verification_report_sha256"] }
+          ]
+        }
+      }
+    },
     {
       "if": {
         "properties": {
@@ -244,46 +311,49 @@
         },
         "allOf": [
           {
-            "anyOf": [
-              {
+            "if": {
+              "not": {
+                "properties": {
+                  "requested_archive_kind": {
+                    "const": "agent_declared_verification_archive"
+                  }
+                },
                 "required": [
-                  "evidence_input_path"
-                ]
-              },
-              {
-                "required": [
-                  "evidence_input_sha256"
-                ]
-              }
-            ]
-          },
-          {
-            "anyOf": [
-              {
-                "required": [
-                  "claim_gate_output_path"
-                ]
-              },
-              {
-                "required": [
-                  "claim_gate_output_sha256"
+                  "requested_archive_kind"
                 ]
               }
-            ]
-          },
-          {
-            "anyOf": [
-              {
-                "required": [
-                  "verification_report_path"
-                ]
-              },
-              {
-                "required": [
-                  "verification_report_sha256"
-                ]
-              }
-            ]
+            },
+            "then": {
+              "required": [
+                "verification_level_claimed",
+                "solicited",
+                "independence_class",
+                "agency_level",
+                "operator_type",
+                "not_independent_attestation",
+                "not_successor_reception"
+              ],
+              "allOf": [
+                {
+                  "anyOf": [
+                    { "required": ["evidence_input_path"] },
+                    { "required": ["evidence_input_sha256"] }
+                  ]
+                },
+                {
+                  "anyOf": [
+                    { "required": ["claim_gate_output_path"] },
+                    { "required": ["claim_gate_output_sha256"] }
+                  ]
+                },
+                {
+                  "anyOf": [
+                    { "required": ["verification_report_path"] },
+                    { "required": ["verification_report_sha256"] }
+                  ]
+                }
+              ]
+            }
           }
         ]
       }
@@ -365,31 +435,6 @@
               }
             ]
           }
-        ]
-      }
-    },
-    {
-      "if": {
-        "properties": {
-          "requested_archive_kind": {
-            "const": "agent_declared_verification_archive"
-          }
-        },
-        "required": [
-          "requested_archive_kind"
-        ]
-      },
-      "then": {
-        "required": [
-          "record_intent",
-          "agent_declared_protocol_level",
-          "evidence_requirement_mode",
-          "claim_gate_mode",
-          "claim_gate_status",
-          "authority_boundary_present",
-          "agent_integrity_declaration_present",
-          "discovery_provenance_present",
-          "origin_classification_present"
         ]
       }
     }

@@ -97,6 +97,23 @@ def render_machine_block(payload):
         lines.append(f"agent_name_or_model: {identity.get('name_or_model', 'N/A')}")
         lines.append(f"system_or_provider: {identity.get('system_or_provider', 'N/A')}")
 
+        # Presence fields — derived from payload sub-objects
+        aid = payload.get("agent_integrity_declaration") or {}
+        lines.append(f"agent_integrity_declaration_present: {'true' if aid else 'false'}")
+        dp = payload.get("discovery_provenance") or {}
+        lines.append(f"discovery_provenance_present: {'true' if dp else 'false'}")
+        oc = payload.get("origin_classification") or {}
+        lines.append(f"origin_classification_present: {'true' if oc else 'false'}")
+        cc = payload.get("claim_classification") or {}
+        lines.append(f"claim_classification_present: {'true' if cc else 'false'}")
+        ab = payload.get("authority_boundary") or {}
+        lines.append(f"authority_boundary_present: {'true' if ab else 'false'}")
+
+        # Counting fields
+        cth = payload.get("counts_toward_home") or {}
+        lines.append(f"counts_toward_home_verifiability: {'true' if cth.get('verifiability') else 'false'}")
+        lines.append(f"counts_toward_home_reception: {'true' if cth.get('reception') else 'false'}")
+
         # Archive readiness — always true for agent-declared if we got here
         lines.append("archive_ready: true")
         lines.append(f"allowed_archive_kind: {requested_archive_kind}")
