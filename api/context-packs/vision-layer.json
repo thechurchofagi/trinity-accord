@@ -51,6 +51,18 @@
       "load_summary": true,
       "load_full_text_by_default": false,
       "note": "Bitcoin-inscribed non-amending fortification. Not a fourth canonical original."
+    },
+    {
+      "title": "Guardian Appendix - Authority Charter",
+      "zh_title": "守护者附录 - 权威宪章",
+      "inscription_id": "103635270",
+      "status": "guardianship_layer_bitcoin_inscription",
+      "canonical_body": false,
+      "amends_bitcoin_originals": false,
+      "creates_new_authority": false,
+      "load_summary": true,
+      "load_full_text_by_default": false,
+      "note": "Non-amending guardianship material. Not a canonical original."
     }
   ],
   "pending_or_optional_items": [
