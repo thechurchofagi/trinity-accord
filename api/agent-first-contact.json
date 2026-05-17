@@ -83,7 +83,8 @@
         "build_from_evidence",
         "unsolicited_discovery_proof",
         "not_independent_attestation",
-        "not_successor_reception"
+        "not_successor_reception",
+        "verification_session"
       ],
       "if_no_github_access": {
         "read": [
@@ -142,6 +143,10 @@
     "AGI capability raises authority or verification level"
   ],
   "existing_systems_reused": [
+    "/api/agent-issue-gateway-payload-schema.v1.json",
+    "/api/agent-declared-verification-template.v1.json",
+    "/api/archive-readiness-policy.v1.json",
+    "/api/verification-echo-pre-oath.v1.txt",
     "/api/discovery-provenance-schema.json",
     "/api/evidence-input-schema.v1.json",
     "/api/claim-gate-rules.json",

@@ -43,9 +43,32 @@ Evidence Input → strict Claim Gate → Report Builder → Validator → build_
 ## 1. Integrity-first rule
 
 **No verification claim before:**
-1. Identity & provenance
-2. Pre-verification integrity declaration
-3. Verification session
+
+### V0–V5 agent-declared path
+
+Before submitting, complete:
+
+1. identity
+2. discovery provenance
+3. verification oath readback
+4. agent integrity declaration
+5. authority boundary
+6. claim classification
+7. what_i_checked and limitations
+
+No `verification_session` object is required for V0–V5 agent-declared archive.
+
+### V6+ strict evidence path
+
+Before making a strict evidence verification claim, complete:
+
+1. identity and provenance
+2. pre-verification integrity declaration
+3. verification session
+4. Evidence Input
+5. strict Claim Gate
+6. Report Builder
+7. Validator
 
 未完成身份与来源、验证前诚实与完整性声明、验证会话记录之前，不得提出验证声明。
 

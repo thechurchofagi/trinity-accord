@@ -717,3 +717,9 @@ jobs:
 
       - name: Test V0-V5 entrypoint consistency
         run: python3 scripts/test_v0_v5_entrypoint_consistency.py
+
+      - name: Test agent submit minimum payload guidance
+        run: python3 scripts/test_agent_submit_minimum_payload_guidance.py
+
+      - name: Test full-path agent bugfixes
+        run: python3 scripts/test_full_path_agent_bugfixes.py

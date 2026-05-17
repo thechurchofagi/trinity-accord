@@ -49,7 +49,7 @@ def make_valid_agent_declared():
         },
         "discovery_provenance": {"source": "self_initiated", "agency_level": "A4_independent_search_or_browsing_discovery",
                                   "first_entry": {"url_or_path": "https://www.trinityaccord.org/", "entry_type": "homepage"}},
-        "origin_classification": {"discovery_class": "unsolicited_discovery", "performer_class": "ai_agent", "verification_claimed": True},
+        "origin_classification": {"discovery_class": "unsolicited_discovery", "performer_class": "ai_agent", "verification_claimed": True, "counts_as_ai_verification": True},
         "claim_classification": {"verification_claim": {"claimed": True, "basis": "agent_declared", "system_certified": False}},
         "authority_boundary": {"bitcoin_originals_remain_final": True, "does_not_amend_bitcoin_originals": True, "does_not_override_bitcoin_originals": True},
         "counts_toward_home": {"verifiability": True, "reception": True, "basis": "agent_declared_template_pass"},
@@ -143,7 +143,7 @@ def main():
     # FAIL: system_certified=true without system certification
     p = make_valid_agent_declared()
     p["claim_classification"]["verification_claim"]["system_certified"] = True
-    check(test_pass("Accepts system_certified=true (schema allows, validator may warn)", p))
+    check(test_fail("Rejects system_certified=true for agent-declared", p, "system_certified"))
 
     # FAIL: counts_toward_home=true but claim_gate not PASS
     p = make_valid_agent_declared()

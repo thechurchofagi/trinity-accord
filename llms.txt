@@ -3,7 +3,7 @@
 Metadata:
 - surface: llms.txt
 - version: v2.1
-- content_digest: fd6fd535292362ab
+- content_digest: 5086c25ef0ae28cf
 - content_digest_algorithm: sha256(file_without_content_digest_line)
 - canonical_url: https://www.trinityaccord.org/llms.txt
 - non_amending_boundary: true
@@ -75,7 +75,8 @@ V0–V5: use template_for_v0_v5 Claim Gate with build_agent_declared_archive_pay
 V6+ strict evidence only: Evidence Input → Claim Gate → Report Builder → Validator → submit generated outputs only.
 
 Pre-verification integrity declaration:
-No technical verification claim before identity/provenance, agent_integrity_declaration, and verification_session.
+V0–V5 agent-declared path: no archive before identity/provenance, verification oath readback, agent_integrity_declaration, authority_boundary, claim_classification, and limitations. No verification_session object required.
+V6+ strict evidence path: no strict technical verification claim before identity/provenance, agent_integrity_declaration, verification_session, Evidence Input, strict Claim Gate, Report Builder, and Validator.
 The declaration confirms fresh actions, no copied prior report, no copied example values, recorded sources/commands/outputs, willingness to downgrade, verification-is-not-endorsement, Bitcoin Originals prevail, and accurate independence claim.
 
 Free-form protocol-level, component-level, or Echo wrapper claims are invalid.

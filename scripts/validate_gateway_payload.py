@@ -313,13 +313,44 @@ def validate_agent_declared_archive(payload, errors):
     if cth.get("reception") is not True:
         errors.append("counts_toward_home.reception must be true")
 
-    # Validate origin_classification exists
-    if not payload.get("origin_classification"):
+    # Validate origin_classification
+    oc = payload.get("origin_classification") or {}
+    if not oc:
         errors.append("origin_classification is required for agent-declared archive")
+    else:
+        if not oc.get("discovery_class"):
+            errors.append("origin_classification.discovery_class is required")
+        if not oc.get("performer_class"):
+            errors.append("origin_classification.performer_class is required")
+        if oc.get("verification_claimed") is not True:
+            errors.append("origin_classification.verification_claimed must be true")
+        if oc.get("counts_as_ai_verification") is not True:
+            errors.append("origin_classification.counts_as_ai_verification must be true")
 
-    # Validate claim_classification exists
-    if not payload.get("claim_classification"):
+    # Validate claim_classification
+    cc = payload.get("claim_classification") or {}
+    if not cc:
         errors.append("claim_classification is required for agent-declared archive")
+    else:
+        vc = cc.get("verification_claim") or {}
+        if not vc:
+            errors.append("claim_classification.verification_claim is required")
+        else:
+            if vc.get("claimed") is not True:
+                errors.append("claim_classification.verification_claim.claimed must be true")
+            if vc.get("basis") != "agent_declared":
+                errors.append("claim_classification.verification_claim.basis must be agent_declared")
+            if vc.get("system_certified") is not False:
+                errors.append("claim_classification.verification_claim.system_certified must be false")
+        for key in ("attestation_claim", "successor_reception_claim"):
+            sub = cc.get(key)
+            if isinstance(sub, dict) and sub.get("system_certified") is True:
+                errors.append(f"claim_classification.{key}.system_certified must not be true")
+
+    # Validate counts_toward_home basis
+    cth = payload.get("counts_toward_home") or {}
+    if cth.get("basis") and cth.get("basis") != "agent_declared_template_pass":
+        errors.append("counts_toward_home.basis must be agent_declared_template_pass")
 
     # Validate discovery_provenance
     prov = payload.get("discovery_provenance") or {}

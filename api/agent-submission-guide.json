@@ -124,10 +124,10 @@
     "Putting schema versions such as Verification Report v2 or Echo v3 in Issue display titles where they can be confused with V-levels"
   ],
   "pre_submit_checks": [
-    "Determine record_kind before submission",
-    "Select correct schema for record_kind",
-    "Fill discovery_provenance fields",
-    "Run /scripts/validate_agent_submission.py on the JSON file",
+    "Determine requested_archive_kind before submission",
+    "Use scripts/build_agent_declared_archive_payload.py for V0-V5 agent-declared archive",
+    "Run scripts/validate_gateway_payload.py on Gateway payloads",
+    "Run scripts/validate_agent_submission.py on repository Echo/report records",
     "Confirm no overclaims relative to what was actually checked"
   ],
   "hash_source_rules": {

@@ -174,6 +174,46 @@ def main():
             "; ".join(issues) if issues else "",
         )
 
+    # Test 2: agent-submit.md specific checks
+    agent_submit = TEXT_ENTRYPOINTS.get("agent-submit.md")
+    if agent_submit and agent_submit.exists():
+        ag_text = agent_submit.read_text(encoding="utf-8")
+        if "```json" in ag_text:
+            builder_pos = ag_text.find("build_agent_declared_archive_payload.py")
+            json_pos = ag_text.find("```json")
+            check(
+                "agent-submit.md: Builder guidance before JSON blocks",
+                builder_pos > 0 and builder_pos < json_pos,
+            )
+        check(
+            "agent-submit.md: Mentions readback_required",
+            "readback_required" in ag_text,
+        )
+        check(
+            "agent-submit.md: Uses /external-agent-quickstart/ canonical link",
+            "/external-agent-quickstart/" in ag_text,
+        )
+
+    # Test 5: llms.txt verification_session scoped to V6+
+    llms = TEXT_ENTRYPOINTS.get("llms.txt")
+    if llms and llms.exists():
+        llms_text = llms.read_text(encoding="utf-8")
+        if "verification_session" in llms_text:
+            for section in re.split(r"(?=^## )", llms_text, flags=re.MULTILINE):
+                if "verification_session" in section:
+                    is_scoped = any(kw in section for kw in ["V6+", "strict evidence", "V0–V5", "V0-V5"])
+                    check("llms.txt verification_session scoped to V6+ or V0-V5", is_scoped)
+                    break
+
+    # Test 6: external-agent-quickstart states no verification_session for V0-V5
+    qs = TEXT_ENTRYPOINTS.get("external-agent-quickstart.md")
+    if qs and qs.exists():
+        qs_text = qs.read_text(encoding="utf-8")
+        check(
+            "Quickstart states no verification_session for V0-V5",
+            "No verification_session" in qs_text or "No `verification_session`" in qs_text,
+        )
+
     # Check CI workflows
     ci_issues = check_ci_workflows()
     check(

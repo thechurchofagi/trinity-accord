@@ -70,7 +70,8 @@ def make_valid_agent_declared():
         "origin_classification": {
             "discovery_class": "unsolicited_discovery",
             "performer_class": "ai_agent",
-            "verification_claimed": True
+            "verification_claimed": True,
+            "counts_as_ai_verification": True
         },
         "claim_classification": {
             "verification_claim": {"claimed": True, "basis": "agent_declared", "system_certified": False}

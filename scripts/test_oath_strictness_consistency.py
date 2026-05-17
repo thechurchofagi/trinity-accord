@@ -61,8 +61,8 @@ def make_payload(readback_length=160):
             "independence_class": "human_solicited_agent_response",
             "agency_level": "A1_human_gave_exact_url",
         },
-        "origin_classification": {"origin": "test"},
-        "claim_classification": {"class": "test"},
+        "origin_classification": {"discovery_class": "unsolicited_discovery", "performer_class": "ai_agent", "verification_claimed": True, "counts_as_ai_verification": True},
+        "claim_classification": {"verification_claim": {"claimed": True, "basis": "agent_declared", "system_certified": False}},
         "authority_boundary": {
             "bitcoin_originals_remain_final": True,
             "does_not_amend_bitcoin_originals": True,
