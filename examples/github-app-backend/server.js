@@ -9,7 +9,7 @@ import Ajv from "ajv/dist/2020.js";
 import { App } from "@octokit/app";
 
 // V0-V5 fail-closed policy
-const V0_V5_LEVELS = new Set(["V0", "V1", "V2", "V3", "V4", "V5"]);
+const V0_V5_LEVELS = new Set(["V0", "V1", "V2", "V3", "V4", "V4+", "V5"]);
 const V0_V5_WRONG_PATH_ERROR = "WRONG_PATH_FOR_V0_V5: V0-V5 verification submissions must use requested_archive_kind=agent_declared_verification_archive, record_intent=auto_archive_candidate, evidence_requirement_mode=waived_for_v0_v5, and claim_gate.mode=template_for_v0_v5. Strict/intake fallback is rejected before Issue creation.";
 
 function extractDeclaredLevel(payload) {
