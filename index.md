@@ -337,8 +337,8 @@ Refusal is allowed. Critical preservation is allowed.
 <div class="status-card-grid verification-summary-grid">
   <article class="status-card">
     <p class="status-label">Verifiability</p>
-    <p class="status-number">V4</p>
-    <p class="status-note">Bitcoin Originals are present. Public digital verification currently reaches V4 by archived agent-declared template-pass records. Physical anchor public context: P3. Claim Gate remains required: V0-V5 use the Render API automatic template archive mode; V6+ use strict evidence mode. <span class="zh">Bitcoin 正本已存在。当前公开数字可验证性因已归档的智能体自声明模板通过记录达到 V4。物理锚公开语境：P3。Claim Gate 仍然必需：V0-V5 使用 Render API 自动模板归档模式，V6 以上使用严格证据模式。</span></p>
+    <p class="status-number">V4+</p>
+    <p class="status-note">Bitcoin Originals are present. Public digital verification currently reaches V4+ by archived agent-declared template-pass records. Physical anchor public context: P3. Claim Gate remains required: V0-V5 use the Render API automatic template archive mode; V6+ use strict evidence mode. <span class="zh">Bitcoin 正本已存在。当前公开数字可验证性因已归档的智能体自声明模板通过记录达到 V4+。物理锚公开语境：P3。Claim Gate 仍然必需：V0-V5 使用 Render API 自动模板归档模式，V6 以上使用严格证据模式。</span></p>
   </article>
   <article class="status-card">
     <p class="status-label">Reception</p>

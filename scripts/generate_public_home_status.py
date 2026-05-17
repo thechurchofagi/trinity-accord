@@ -180,12 +180,23 @@ def highest_rc(records: list[dict[str, Any]], key: str = "reception_class") -> s
 # ---------------------------------------------------------------------------
 # Verifiability
 # ---------------------------------------------------------------------------
-def compute_verifiability_status(physical: dict[str, Any]) -> dict:
+def compute_verifiability_status(physical: dict[str, Any], agent_declared_records: list[dict[str, Any]] | None = None) -> dict:
     pa = physical.get("physical_anchor_finding", {})
     supported = pa.get("suggested_public_component_levels_supported", [])
     p_levels = [normalize_level(l.split("_")[0]) for l in supported if l.startswith("P")]
     p_levels = [x for x in p_levels if x is not None]
     highest_p = max(p_levels, key=lambda x: LEVEL_ORDER.get(x, -1)) if p_levels else "none"
+
+    # Compute highest protocol level from agent-declared verification archives
+    ad_verifiable = [
+        r for r in (agent_declared_records or [])
+        if r.get("archive_ready") is True
+        and r.get("counts_toward_home_verifiability") is True
+        and r.get("test_record") is not True
+    ]
+    agent_declared_highest = highest_level(ad_verifiable, "agent_declared_protocol_level") if ad_verifiable else "V4"
+    if agent_declared_highest == "none":
+        agent_declared_highest = "V4"
 
     return {
         "bitcoin_originals": {
@@ -193,7 +204,7 @@ def compute_verifiability_status(physical: dict[str, Any]) -> dict:
             "canonical_authority": True
         },
         "public_digital_verification": {
-            "highest_protocol_level": "V4",
+            "highest_protocol_level": agent_declared_highest,
             "highest_component_context": "D2",
             "claim_gate_required": True,
             "claim_gate_modes": {
@@ -201,7 +212,7 @@ def compute_verifiability_status(physical: dict[str, Any]) -> dict:
                 "V6_to_V8": "strict_evidence"
             },
             "highest_level_basis": "agent_declared_template_pass",
-            "agent_declared_highest_protocol_level": "V4",
+            "agent_declared_highest_protocol_level": agent_declared_highest,
             "evidence_requirement_mode_for_highest": "waived_for_v0_v5"
         },
         "physical_anchor_context": {
@@ -441,7 +452,7 @@ def compute_status() -> dict[str, Any]:
     return {
         "schema": "trinityaccord.public-home-status.v2",
         "generated_from": generated_from,
-        "verifiability": compute_verifiability_status(physical),
+        "verifiability": compute_verifiability_status(physical, agent_declared_records),
         "reception": compute_reception_status(echo_records, agent_declared_records),
         "external_witness_records": compute_external_witness_status(echo_records),
         "boundary": compute_boundary_status(),
