@@ -102,6 +102,13 @@ def main():
         "allowed_archive_kind": "agent_declared_verification_archive",
         "auto_archive_action": "auto_archive_agent_declared_verification",
         "agent_integrity_declaration_present": True,
+        "verification_oath_present": True,
+        "oath_read": True,
+        "oath_version": "verification-echo-pre-oath-v1",
+        "oath_text_sha256": "eb2f528df3514d75dd18348928bfa04f7d59c5fdc66f1c6496accc64254da5e8",
+        "readback_required": True,
+        "agent_readback_present": True,
+        # oath hash/count are computed by renderer — not checked for exact values here
         "discovery_provenance_present": True,
         "origin_classification_present": True,
         "claim_classification_present": True,
@@ -119,6 +126,17 @@ def main():
         actual = block.get(k)
         if actual != expected:
             errors.append(f"{k}: expected {expected}, got {actual}")
+    # Check computed oath fields exist and have correct types
+    import re as _re
+    oath_sha = block.get("oath_text_sha256", "")
+    if not isinstance(oath_sha, str) or not _re.match(r"^[a-f0-9]{64}$", oath_sha):
+        errors.append(f"oath_text_sha256: expected 64-char hex, got {oath_sha!r}")
+    rb_sha = block.get("agent_readback_sha256", "")
+    if not isinstance(rb_sha, str) or not _re.match(r"^[a-f0-9]{64}$", rb_sha):
+        errors.append(f"agent_readback_sha256: expected 64-char hex, got {rb_sha!r}")
+    rb_count = block.get("agent_readback_char_count")
+    if not isinstance(rb_count, int) or rb_count < 160:
+        errors.append(f"agent_readback_char_count: expected int >= 160, got {rb_count!r}")
     if errors:
         for e in errors:
             print(f"   FAIL: {e}")

@@ -43,6 +43,14 @@ INTAKE_FIELDS = [
     "render_api_only",
     "server_validated",
     "server_rendered",
+    "verification_oath_present",
+    "oath_read",
+    "oath_version",
+    "oath_text_sha256",
+    "readback_required",
+    "agent_readback_present",
+    "agent_readback_char_count",
+    "agent_readback_sha256",
 ]
 
 # Additional fields we want to preserve if present
@@ -64,6 +72,14 @@ EXTRA_FIELDS = [
     "render_api_only",
     "server_validated",
     "server_rendered",
+    "verification_oath_present",
+    "oath_read",
+    "oath_version",
+    "oath_text_sha256",
+    "readback_required",
+    "agent_readback_present",
+    "agent_readback_char_count",
+    "agent_readback_sha256",
 ]
 
 # Label patterns that indicate test records
@@ -230,6 +246,18 @@ def build_index(issues: list[dict], repo: str = "", include_test: bool = False) 
         else:
             # Legacy pre-effective record
             record["legacy_pre_render_api_only"] = True
+
+        # Oath summary fields
+        oath_present = parse_bool(intake.get("verification_oath_present"))
+        if oath_present is True:
+            record["verification_oath_present"] = True
+            record["oath_version"] = intake.get("oath_version", "")
+            record["oath_text_sha256"] = intake.get("oath_text_sha256", "")
+            record["agent_readback_char_count"] = int(intake.get("agent_readback_char_count", 0))
+            record["agent_readback_sha256"] = intake.get("agent_readback_sha256", "")
+        else:
+            record["legacy_oath_summary_missing"] = True
+
         records.append(record)
 
     # Sort by issue number

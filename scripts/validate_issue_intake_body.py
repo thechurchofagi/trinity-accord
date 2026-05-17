@@ -66,6 +66,14 @@ AGENT_DECLARED_REQUIRED = [
     "allowed_archive_kind",
     "auto_archive_action",
     "agent_integrity_declaration_present",
+    "verification_oath_present",
+    "oath_read",
+    "oath_version",
+    "oath_text_sha256",
+    "readback_required",
+    "agent_readback_present",
+    "agent_readback_char_count",
+    "agent_readback_sha256",
     "discovery_provenance_present",
     "origin_classification_present",
     "claim_classification_present",
@@ -236,6 +244,10 @@ def main():
             "allowed_archive_kind": "agent_declared_verification_archive",
             "auto_archive_action": "auto_archive_agent_declared_verification",
             "agent_integrity_declaration_present": True,
+            "verification_oath_present": True,
+            "oath_read": True,
+            "readback_required": True,
+            "agent_readback_present": True,
             "discovery_provenance_present": True,
             "origin_classification_present": True,
             "claim_classification_present": True,
@@ -263,6 +275,24 @@ def main():
         gateway_service = data.get("gateway_service")
         if not gateway_service or not str(gateway_service).strip():
             errors.append("gateway_service is required for agent-declared archive")
+
+        # Oath summary validation
+        hex64 = _re.compile(r"^[a-f0-9]{64}$")
+        oath_sha = data.get("oath_text_sha256")
+        if not isinstance(oath_sha, str) or not hex64.match(oath_sha):
+            errors.append("oath_text_sha256 must be a 64-char lowercase hex string")
+
+        rb_sha = data.get("agent_readback_sha256")
+        if not isinstance(rb_sha, str) or not hex64.match(rb_sha):
+            errors.append("agent_readback_sha256 must be a 64-char lowercase hex string")
+
+        rb_count = data.get("agent_readback_char_count")
+        try:
+            rb_count_int = int(rb_count)
+        except (TypeError, ValueError):
+            rb_count_int = 0
+        if rb_count_int < 160:
+            errors.append("agent_readback_char_count must be >= 160")
 
         # Enum validation
         VALID_PROTOCOL_LEVELS = {"V0", "V1", "V2", "V3", "V4", "V5"}

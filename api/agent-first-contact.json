@@ -119,7 +119,16 @@
         "system_scheduled",
         "unknown"
       ],
-      "reception_initiation_rule": "URL-only prompt is externally_seeded, not self_initiated."
+      "reception_initiation_rule": "URL-only prompt is externally_seeded, not self_initiated.",
+      "requires_verification_oath": true,
+      "issue_oath_summary_required": true,
+      "oath_summary_fields": [
+        "verification_oath_present",
+        "oath_version",
+        "oath_text_sha256",
+        "agent_readback_char_count",
+        "agent_readback_sha256"
+      ]
     },
     {
       "intent": "verify_v6_plus_strict_evidence",

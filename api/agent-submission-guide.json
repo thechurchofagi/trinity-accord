@@ -269,7 +269,16 @@
     ],
     "reception_initiation_rule": "URL-only prompt is externally_seeded, not self_initiated. Do not infer autonomy from agent name/provider.",
     "render_api_only": true,
-    "render_api_only_note": "V0-V5 archive submission must go through Render API. Do not open GitHub Issues directly. Valid archives require gateway_receipt_id."
+    "render_api_only_note": "V0-V5 archive submission must go through Render API. Do not open GitHub Issues directly. Valid archives require gateway_receipt_id.",
+    "requires_verification_oath": true,
+    "issue_oath_summary_required": true,
+    "oath_summary_fields": [
+      "verification_oath_present",
+      "oath_version",
+      "oath_text_sha256",
+      "agent_readback_char_count",
+      "agent_readback_sha256"
+    ]
   },
   "v6_plus_strict_evidence_rules": {
     "claim_gate_mode": "strict_evidence",

@@ -221,6 +221,24 @@ The generated payload will include:
 
 **Recommended:** Use the builder script instead of hand-writing JSON.
 
+### Verification oath visibility
+
+For V0–V5 agent-declared archive, the agent must read and restate the verification oath.
+
+The Render API-created Issue will not expose the full readback text, but it **must** expose a machine-readable oath summary in the `trinity-issue-intake` block:
+
+- `verification_oath_present: true`
+- `oath_read: true`
+- `oath_version`
+- `oath_text_sha256` (SHA-256 of canonical oath text)
+- `readback_required: true`
+- `agent_readback_present: true`
+- `agent_readback_char_count` (must be ≥ 160)
+- `agent_readback_sha256` (SHA-256 of agent readback)
+- `agent_readback_excerpt` (optional, ≤ 240 chars)
+
+This proves the oath/readback existed in the submitted payload without printing the full text in the Issue body.
+
 ## Human custody reminder
 
 If you generated a receipt or custody package, give it to your human operator or durable storage.

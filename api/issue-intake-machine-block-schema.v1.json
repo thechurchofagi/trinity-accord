@@ -197,6 +197,47 @@
       "type": "boolean",
       "description": "Whether agent integrity declaration is present."
     },
+    "verification_oath_present": {
+      "type": "boolean",
+      "description": "Whether verification oath object is present in payload."
+    },
+    "oath_read": {
+      "type": "boolean",
+      "description": "Whether agent confirmed reading the oath."
+    },
+    "oath_version": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Version identifier of the oath text."
+    },
+    "oath_text_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$",
+      "description": "SHA-256 hash of the canonical oath text."
+    },
+    "readback_required": {
+      "type": "boolean",
+      "description": "Whether readback of oath is required."
+    },
+    "agent_readback_present": {
+      "type": "boolean",
+      "description": "Whether agent provided a readback of the oath."
+    },
+    "agent_readback_char_count": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Character count of the agent readback."
+    },
+    "agent_readback_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$",
+      "description": "SHA-256 hash of the agent readback text."
+    },
+    "agent_readback_excerpt": {
+      "type": "string",
+      "maxLength": 260,
+      "description": "Short excerpt of the agent readback (single-line, YAML-safe)."
+    },
     "discovery_provenance_present": {
       "type": "boolean",
       "description": "Whether discovery provenance is present."
@@ -308,6 +349,14 @@
           "auto_archive_action",
           "archive_readiness_summary",
           "agent_integrity_declaration_present",
+          "verification_oath_present",
+          "oath_read",
+          "oath_version",
+          "oath_text_sha256",
+          "readback_required",
+          "agent_readback_present",
+          "agent_readback_char_count",
+          "agent_readback_sha256",
           "discovery_provenance_present",
           "origin_classification_present",
           "claim_classification_present",

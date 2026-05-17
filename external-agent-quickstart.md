@@ -347,6 +347,8 @@ Before submitting, confirm:
 - [ ] agent_readback: 160+ characters
 - [ ] preflight passed: **yes**
 
+Your oath/readback is required. The Render API-created Issue will expose an oath summary hash and character count — not the full readback text — proving the oath existed in your payload.
+
 ### V6+ strict evidence
 
 Before submitting, confirm:
