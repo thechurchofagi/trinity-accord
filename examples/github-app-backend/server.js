@@ -562,7 +562,23 @@ async function runGatewayPipeline(payload, {
     }
 
     // 6. Render canonical Issue body (after archive readiness so computed values are in payload)
-    const render = runScript("render_gateway_issue_body.py", [payloadPath]);
+    // Generate gateway receipt ID and get deployed commit for production render
+    const gatewayReceiptId = `gar-${Date.now()}-${createHash("sha256").update(JSON.stringify(payload)).digest("hex").slice(0, 16)}`;
+    let gatewayCommit = "unknown";
+    try {
+      gatewayCommit = execFileSync("git", ["rev-parse", "--short", "HEAD"], {
+        cwd: root, encoding: "utf-8", timeout: 5000
+      }).trim();
+    } catch {}
+
+    const renderArgs = [payloadPath];
+    if (createIssue && !DRY_RUN) {
+      renderArgs.push("--production-render");
+      renderArgs.push("--gateway-receipt-id", gatewayReceiptId);
+      renderArgs.push("--gateway-commit", gatewayCommit);
+      renderArgs.push("--gateway-service", "trinity-agent-issue-gateway");
+    }
+    const render = runScript("render_gateway_issue_body.py", renderArgs);
     if (render.code !== 0) {
       return {
         status: 422,
@@ -578,6 +594,38 @@ async function runGatewayPipeline(payload, {
     }
 
     fs.writeFileSync(bodyPath, render.stdout, "utf-8");
+
+    // 6b. Production render self-test: verify required gateway receipt fields are present
+    if (createIssue && !DRY_RUN) {
+      const requiredFields = [
+        "created_by_gateway: true",
+        "render_api_only: true",
+        "server_validated: true",
+        "server_rendered: true",
+        "gateway_receipt_id: gar-",
+        "verification_oath_present: true",
+        "agent_readback_sha256:",
+        "reception_initiation_class:"
+      ];
+      const renderedBody = render.stdout;
+      const missingFields = requiredFields.filter(f => !renderedBody.includes(f));
+      if (missingFields.length > 0) {
+        console.error("PRODUCTION RENDER SELF-TEST FAILED — missing fields:", missingFields);
+        return {
+          status: 500,
+          body: {
+            accepted: false,
+            reason: "production_render_self_test_failed",
+            errors: missingFields.map(f => ({
+              code: "MISSING_PRODUCTION_FIELD",
+              message: `Rendered body missing required field: ${f}`,
+              fix: "Gateway renderer did not produce production-grade output. Check --production-render flag and gateway receipt generation."
+            })),
+            issue_created: false
+          }
+        };
+      }
+    }
 
     // 7. Lint rendered body
     const lint = runScript("validate_issue_intake_body.py", [bodyPath]);
@@ -724,6 +772,7 @@ async function runGatewayPipeline(payload, {
         issue_created: true,
         issue_number: issueNumber,
         issue_url: result.data.html_url,
+        gateway_receipt_id: gatewayReceiptId,
         archive_readiness: archiveReadiness,
         auto_archive_decision: autoArchiveDecision,
         gateway_version: {
@@ -753,10 +802,22 @@ async function runGatewayPipeline(payload, {
 // --- Routes ---
 
 app.get("/health", (req, res) => {
+  let repoCommit = "unknown";
+  try {
+    repoCommit = execFileSync("git", ["rev-parse", "--short", "HEAD"], {
+      cwd: root, encoding: "utf-8", timeout: 5000
+    }).trim();
+  } catch {}
+
   res.json({
     ok: true,
-    service: "trinityaccord-agent-issue-gateway",
+    service: "trinity-agent-issue-gateway",
+    gateway_commit: repoCommit,
     dry_run: DRY_RUN,
+    renderer_supports_production_render: true,
+    render_api_only_effective_at: "2026-05-17T05:30:00Z",
+    requires_gateway_receipt: true,
+    requires_oath_summary: true,
     boundary: "Gateway-rendered candidate; archive status only if Archive Readiness Gate passes; not attestation or successor reception"
   });
 });
@@ -780,6 +841,8 @@ app.get("/gateway/version", (req, res) => {
     repo: "thechurchofagi/trinity-accord",
     repo_commit: repoCommit,
     deployed_at: new Date().toISOString(),
+    production_render_enabled: true,
+    render_api_only_effective_at: "2026-05-17T05:30:00Z",
     payload_schema: "trinityaccord.agent-issue-gateway-payload.v1",
     payload_schema_file: "api/agent-issue-gateway-payload-schema.v1.json",
     payload_schema_sha256: schemaSha,
