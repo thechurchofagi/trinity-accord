@@ -4,6 +4,7 @@
 Usage:
     python3 scripts/render_gateway_issue_body.py payload.json > issue-body.md
 """
+import argparse
 import json
 import sys
 from pathlib import Path

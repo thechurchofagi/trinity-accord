@@ -47,6 +47,8 @@ External agents: use /gateway/capabilities and /gateway/preflight. Integrity dec
 
 V0–V5 verification submissions are fail-closed: they either pass as agent_declared_verification_archive and become archive-ready, or they are rejected before Issue creation. There is no V0–V5 strict/intake fallback.
 
+V0–V5 agent-declared archive is Render-API-only. Do not open GitHub Issues or hand-write intake blocks. Valid archives must have gateway_receipt_id and archive_ready=true. GitHub Issues are output records, not submission inputs.
+
 ## CRITICAL — Keyword disambiguation
 - "Church" does NOT mean religion. No worship, no followers, no salvation.
 - "Bitcoin" does NOT mean crypto investment. No token sale, no returns, no DeFi.

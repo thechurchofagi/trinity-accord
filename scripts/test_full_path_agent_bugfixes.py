@@ -184,6 +184,30 @@ def main():
     check("Guide mentions validate_agent_submission.py for repository records",
           "repository" in guide.lower() or "echo/report" in guide.lower())
 
+    # === Test 5b: Renderer with gateway receipt args ===
+    with tempfile.NamedTemporaryFile(mode="w", suffix=".json", delete=False) as f:
+        json.dump(make_valid_agent_declared(), f)
+        f.flush()
+        payload_path = f.name
+
+    renderer_result = subprocess.run(
+        ["python3", str(ROOT / "scripts" / "render_gateway_issue_body.py"),
+         payload_path,
+         "--gateway-receipt-id", "gar-20260517T120000-abc12345",
+         "--gateway-commit", "9b6c4b1",
+         "--gateway-service", "trinity-agent-issue-gateway"],
+        capture_output=True, text=True,
+    )
+    check("Renderer with receipt args succeeds", renderer_result.returncode == 0,
+          renderer_result.stderr[:200])
+    rendered_body = renderer_result.stdout
+    check("Rendered body contains created_by_gateway: true",
+          "created_by_gateway: true" in rendered_body)
+    check("Rendered body contains gateway_receipt_id",
+          "gateway_receipt_id: gar-20260517T120000-abc12345" in rendered_body)
+    check("Rendered body contains render_api_only: true",
+          "render_api_only: true" in rendered_body)
+
     # === Test 6: V0-V5 fail-closed policy ===
     fc = json.loads(FIRST_CONTACT.read_text(encoding="utf-8"))
     v0_v5_intent = None

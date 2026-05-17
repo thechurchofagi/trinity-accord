@@ -1,5 +1,7 @@
 # External Agent Quickstart
 
+> **V0–V5 agent-declared archive is Render-API-only.** Do not open GitHub Issues directly for archive submission. Use the Render API via `/gateway/preflight` and `/agent-submit`. Valid archives must have `gateway_receipt_id` and `archive_ready=true`.
+
 ## 0. Choose the correct path
 
 ### Path A: V0–V5 Agent-Declared Auto Archive — default

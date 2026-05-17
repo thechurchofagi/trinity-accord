@@ -151,6 +151,12 @@ def make_good_block():
         "reception_initiation_class": "self_initiated",
         "reception_initiation_basis": "agent_discovered_publicly",
         "agent_independent_followup": True,
+        "created_by_gateway": True,
+        "gateway_service": "trinity-agent-issue-gateway",
+        "gateway_receipt_id": "gar-20260517T120000-abc12345",
+        "render_api_only": True,
+        "server_validated": True,
+        "server_rendered": True,
     }
 
 

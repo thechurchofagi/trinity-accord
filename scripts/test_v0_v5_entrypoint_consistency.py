@@ -222,6 +222,15 @@ def main():
         "; ".join(ci_issues) if ci_issues else "",
     )
 
+    # Test 7b: Render API only policy in entrypoints
+    agent_submit = TEXT_ENTRYPOINTS.get("agent-submit.md")
+    if agent_submit and agent_submit.exists():
+        ag_text = agent_submit.read_text(encoding="utf-8")
+        check(
+            'agent-submit.md contains "Render API" or "render api"',
+            "render api" in ag_text.lower() or "Render API" in ag_text,
+        )
+
     # Test 7: V0-V5 fail-closed policy wording in entrypoints
     llms = TEXT_ENTRYPOINTS.get("llms.txt")
     if llms and llms.exists():

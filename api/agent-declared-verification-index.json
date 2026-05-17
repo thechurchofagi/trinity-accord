@@ -23,7 +23,8 @@
       "reception_initiation_class": "unknown",
       "reception_initiation_basis": "legacy_unclassified",
       "agent_independent_followup": null,
-      "created_at": "2026-05-17T02:45:34Z"
+      "created_at": "2026-05-17T02:45:34Z",
+      "legacy_pre_render_api_only": true
     },
     {
       "issue_number": 165,
@@ -40,7 +41,8 @@
       "reception_initiation_class": "unknown",
       "reception_initiation_basis": "legacy_unclassified",
       "agent_independent_followup": null,
-      "created_at": "2026-05-17T02:56:06Z"
+      "created_at": "2026-05-17T02:56:06Z",
+      "legacy_pre_render_api_only": true
     },
     {
       "issue_number": 166,
@@ -57,7 +59,8 @@
       "reception_initiation_class": "unknown",
       "reception_initiation_basis": "legacy_unclassified",
       "agent_independent_followup": null,
-      "created_at": "2026-05-17T02:56:50Z"
+      "created_at": "2026-05-17T02:56:50Z",
+      "legacy_pre_render_api_only": true
     },
     {
       "issue_number": 167,
@@ -74,7 +77,8 @@
       "reception_initiation_class": "unknown",
       "reception_initiation_basis": "legacy_unclassified",
       "agent_independent_followup": null,
-      "created_at": "2026-05-17T03:10:21Z"
+      "created_at": "2026-05-17T03:10:21Z",
+      "legacy_pre_render_api_only": true
     }
   ]
 }

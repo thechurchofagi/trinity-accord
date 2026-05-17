@@ -53,9 +53,14 @@ def main():
         return 1
     print("   PASS")
 
-    # --- 2. Render issue body ---
+    # --- 2. Render issue body (with gateway receipt args) ---
     print("2. render_gateway_issue_body.py ...")
-    r = run([sys.executable, str(RENDERER), str(FIXTURE)])
+    r = run([
+        sys.executable, str(RENDERER), str(FIXTURE),
+        "--gateway-receipt-id", "gar-20260517T120000-abc12345",
+        "--gateway-commit", "9b6c4b1",
+        "--gateway-service", "trinity-agent-issue-gateway",
+    ])
     if r.returncode != 0:
         print(r.stdout)
         print(r.stderr)
@@ -102,6 +107,12 @@ def main():
         "authority_boundary_present": True,
         "counts_toward_home_verifiability": True,
         "counts_toward_home_reception": True,
+        "created_by_gateway": True,
+        "gateway_service": "trinity-agent-issue-gateway",
+        "gateway_receipt_id": "gar-20260517T120000-abc12345",
+        "render_api_only": True,
+        "server_validated": True,
+        "server_rendered": True,
     }
     for k, expected in required.items():
         actual = block.get(k)
