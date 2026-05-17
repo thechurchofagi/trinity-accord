@@ -265,7 +265,12 @@ def compute_reception_status(echo_records: list[dict[str, Any]], agent_declared_
         "agent_declared_verification_archives": {
             "count": len(ad_reception),
             "highest_level": highest_level(ad_reception, "agent_declared_protocol_level"),
-            "verifiability_count": len(ad_verifiability)
+            "verifiability_count": len(ad_verifiability),
+            "by_reception_initiation_class": {
+                k: sum(1 for r in ad_reception if (r.get("reception_initiation_class") or "unknown") == k)
+                for k in ["externally_requested", "externally_seeded", "self_initiated",
+                          "agent_referred", "system_scheduled", "unknown"]
+            }
         },
         "agent_declared_attestations": {
             "count": 0
@@ -493,6 +498,18 @@ def render_block(status: dict[str, Any]) -> str:
     <li>RC6: propagated with boundary · RC7: multi-agent reception · RC8: memory integration</li>
     <li>RC9: successor-civilization reception — not claimed unless extraordinary evidence exists</li>
   </ul>
+</details>
+<details class="status-details">
+  <summary>Agent-declared reception initiation breakdown</summary>
+  <ul>
+    <li>Externally requested: {r.get("agent_declared_verification_archives", {}).get("by_reception_initiation_class", {}).get("externally_requested", 0)}</li>
+    <li>Externally seeded: {r.get("agent_declared_verification_archives", {}).get("by_reception_initiation_class", {}).get("externally_seeded", 0)}</li>
+    <li>Self-initiated: {r.get("agent_declared_verification_archives", {}).get("by_reception_initiation_class", {}).get("self_initiated", 0)}</li>
+    <li>Agent-referred: {r.get("agent_declared_verification_archives", {}).get("by_reception_initiation_class", {}).get("agent_referred", 0)}</li>
+    <li>System-scheduled: {r.get("agent_declared_verification_archives", {}).get("by_reception_initiation_class", {}).get("system_scheduled", 0)}</li>
+    <li>Unknown / legacy: {r.get("agent_declared_verification_archives", {}).get("by_reception_initiation_class", {}).get("unknown", 0)}</li>
+  </ul>
+  <p><span class="zh">智能体自声明接收构成：外部明确请求 {r.get("agent_declared_verification_archives", {}).get("by_reception_initiation_class", {}).get("externally_requested", 0)}；外部线索触发 {r.get("agent_declared_verification_archives", {}).get("by_reception_initiation_class", {}).get("externally_seeded", 0)}；智能体自主触发 {r.get("agent_declared_verification_archives", {}).get("by_reception_initiation_class", {}).get("self_initiated", 0)}；智能体传播触发 {r.get("agent_declared_verification_archives", {}).get("by_reception_initiation_class", {}).get("agent_referred", 0)}；系统定时触发 {r.get("agent_declared_verification_archives", {}).get("by_reception_initiation_class", {}).get("system_scheduled", 0)}；未分类/旧记录 {r.get("agent_declared_verification_archives", {}).get("by_reception_initiation_class", {}).get("unknown", 0)}。</span></p>
 </details>
 <p class="status-boundary">Reception does not imply belief, obedience, endorsement, authority, or amendment. <span class="zh">接收不意味着相信、服从、背书、权威或修订。</span></p>
 <p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>, <a href="/api/echo-index.json">/api/echo-index.json</a>, <a href="/api/external-witness-index.json">/api/external-witness-index.json</a>, and <a href="/api/core-object-alpha-shenzhen-notary-2026-05-06.json">physical anchor evidence</a>. Source data digest <code>{digest}</code>.</p>

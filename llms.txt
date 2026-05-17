@@ -73,7 +73,7 @@ Path B — V6+ Strict Evidence. Required: Evidence Input, strict Claim Gate, Rep
 
 ## Claim Gate
 MANDATORY CLAIM GATE RULE: Agents must not hand-write final verification claims.
-V0–V5: use template_for_v0_v5 Claim Gate with build_agent_declared_archive_payload.py. Evidence waived (evidence_requirement_mode=waived_for_v0_v5).
+V0–V5: use template_for_v0_v5 Claim Gate with build_agent_declared_archive_payload.py. Evidence waived (evidence_requirement_mode=waived_for_v0_v5). V0–V5 records must state reception_initiation_class. A URL-only prompt is externally_seeded, not self_initiated. Explicit verification request is externally_requested. Do not infer autonomy from agent name/provider.
 V6+ strict evidence only: Evidence Input → Claim Gate → Report Builder → Validator → submit generated outputs only.
 
 Pre-verification integrity declaration:

@@ -1,0 +1,6 @@
+{
+  "schema": "trinityaccord.agent-declared-verification-initiation-overrides.v1",
+  "description": "Manual overrides for reception_initiation_class on historical records. Each override must include a basis_note explaining the evidence.",
+  "rule": "No override without basis_note. No guessing from agent name or provider.",
+  "overrides": []
+}

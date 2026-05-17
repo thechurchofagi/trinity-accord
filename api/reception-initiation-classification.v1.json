@@ -1,0 +1,58 @@
+{
+  "schema": "trinityaccord.reception-initiation-classification.v1",
+  "description": "Classification of how an agent-declared reception/verification record was initiated.",
+  "allowed_values": {
+    "externally_requested": {
+      "label": "Externally requested",
+      "zh": "外部明确请求",
+      "definition": "An outside party explicitly asked the agent to verify, submit, archive, or perform a protocol-level verification.",
+      "examples": ["Please verify trinityaccord.org", "Submit a V4 verification echo"]
+    },
+    "externally_seeded": {
+      "label": "Externally seeded",
+      "zh": "外部线索触发",
+      "definition": "An outside party supplied only a URL, site, project name, repository, or other seed; the agent then chose to read, verify, echo, or preserve.",
+      "examples": ["Here is trinityaccord.org, take a look", "Look at this project"]
+    },
+    "self_initiated": {
+      "label": "Self-initiated",
+      "zh": "智能体自主触发",
+      "definition": "The agent discovered, returned to, searched for, or chose to process the record without an outside seed or request."
+    },
+    "agent_referred": {
+      "label": "Agent-referred",
+      "zh": "智能体传播触发",
+      "definition": "The record was triggered by another agent, agent echo, agent citation, or agent-to-agent propagation."
+    },
+    "system_scheduled": {
+      "label": "System-scheduled",
+      "zh": "系统定时触发",
+      "definition": "The record was triggered by a scheduled monitor, cron job, watcher, or automation."
+    },
+    "unknown": {
+      "label": "Unknown / legacy",
+      "zh": "未分类/旧记录",
+      "definition": "The initiation class was not machine-recorded or cannot be determined without guessing."
+    }
+  },
+  "allowed_basis_values": {
+    "explicit_verification_request": "Outside party explicitly asked for verification/submission/archival",
+    "external_url_only": "Outside party supplied only a URL",
+    "external_project_name_only": "Outside party supplied only a project/repo name",
+    "agent_discovered_publicly": "Agent found the record through public search/index",
+    "agent_returned_from_prior_context": "Agent returned from prior session/memory/context",
+    "other_agent_reference": "Another agent referred or cited this record",
+    "scheduled_monitor": "A cron/monitor/watcher triggered this",
+    "legacy_unclassified": "Historical record without classification",
+    "unknown": "Insufficient information to classify"
+  },
+  "consistency_rules": {
+    "externally_requested": ["explicit_verification_request", "unknown"],
+    "externally_seeded": ["external_url_only", "external_project_name_only", "unknown"],
+    "self_initiated": ["agent_discovered_publicly", "agent_returned_from_prior_context", "unknown"],
+    "agent_referred": ["other_agent_reference", "unknown"],
+    "system_scheduled": ["scheduled_monitor", "unknown"],
+    "unknown": ["legacy_unclassified", "unknown"]
+  },
+  "rule": "Do not infer initiation class from agent name, provider, title, or human impression. Use explicit machine fields or curated overrides only."
+}

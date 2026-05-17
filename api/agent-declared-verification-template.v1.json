@@ -18,7 +18,8 @@
     "authority_boundary",
     "counts_toward_home",
     "what_i_checked",
-    "limitations"
+    "limitations",
+    "reception_initiation_class"
   ],
   "properties": {
     "schema": {
@@ -444,6 +445,44 @@
         "type": "string"
       },
       "minItems": 1
+    },
+    "reception_initiation_class": {
+      "type": "string",
+      "enum": [
+        "externally_requested",
+        "externally_seeded",
+        "self_initiated",
+        "agent_referred",
+        "system_scheduled",
+        "unknown"
+      ],
+      "description": "How this reception was initiated. If an outside party merely supplied a URL/site/project but did not explicitly request verification, use externally_seeded, not self_initiated. Use self_initiated only when no outside seed/request caused the reception."
+    },
+    "reception_initiation_basis": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "explicit_verification_request",
+        "external_url_only",
+        "external_project_name_only",
+        "agent_discovered_publicly",
+        "agent_returned_from_prior_context",
+        "other_agent_reference",
+        "scheduled_monitor",
+        "legacy_unclassified",
+        "unknown",
+        null
+      ],
+      "description": "Specific basis for the initiation class."
+    },
+    "agent_independent_followup": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "description": "Whether the agent independently followed up after the initiating seed/request."
     }
   },
   "additionalProperties": false

@@ -114,6 +114,16 @@ def render_machine_block(payload):
         lines.append(f"counts_toward_home_verifiability: {'true' if cth.get('verifiability') else 'false'}")
         lines.append(f"counts_toward_home_reception: {'true' if cth.get('reception') else 'false'}")
 
+        # Reception initiation classification
+        init_class = payload.get("reception_initiation_class", "unknown")
+        lines.append(f"reception_initiation_class: {init_class}")
+        init_basis = payload.get("reception_initiation_basis")
+        if init_basis:
+            lines.append(f"reception_initiation_basis: {init_basis}")
+        followup = payload.get("agent_independent_followup")
+        if followup is not None:
+            lines.append(f"agent_independent_followup: {'true' if followup else 'false'}")
+
         # Archive readiness — always true for agent-declared if we got here
         lines.append("archive_ready: true")
         lines.append(f"allowed_archive_kind: {requested_archive_kind}")

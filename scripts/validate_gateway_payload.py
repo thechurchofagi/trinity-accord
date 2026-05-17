@@ -371,6 +371,23 @@ def validate_agent_declared_archive(payload, errors):
         if indep and indep not in ALLOWED_INDEPENDENCE:
             errors.append(f"invalid independence_class: {indep}")
 
+    # Validate reception_initiation_class
+    ALLOWED_RECEPTION_INITIATION = {
+        "externally_requested", "externally_seeded", "self_initiated",
+        "agent_referred", "system_scheduled", "unknown"
+    }
+    init_class = payload.get("reception_initiation_class")
+    if not init_class or init_class not in ALLOWED_RECEPTION_INITIATION:
+        errors.append(
+            "reception_initiation_class is required for agent-declared archive "
+            "and must be one of: " + ", ".join(sorted(ALLOWED_RECEPTION_INITIATION))
+        )
+
+    # Consistency: self_initiated must not have human_supplied_link=true
+    if init_class == "self_initiated":
+        if prov.get("human_supplied_link") is True:
+            errors.append("self_initiated must not set discovery_provenance.human_supplied_link=true; use externally_seeded or externally_requested")
+
 
 def validate_echo_candidate(payload, errors):
     att = get_attachments(payload)

@@ -118,5 +118,8 @@
   ],
   "limitations": [
     "Evidence waived"
-  ]
+  ],
+  "reception_initiation_class": "unknown",
+  "reception_initiation_basis": "legacy_unclassified",
+  "agent_independent_followup": null
 }

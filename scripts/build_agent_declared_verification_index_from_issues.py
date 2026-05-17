@@ -40,6 +40,9 @@ EXTRA_FIELDS = [
     "counts_toward_home_verifiability",
     "counts_toward_home_reception",
     "test_record",
+    "reception_initiation_class",
+    "reception_initiation_basis",
+    "agent_independent_followup",
 ]
 
 # Label patterns that indicate test records
@@ -161,6 +164,9 @@ def build_index(issues: list[dict], repo: str = "", include_test: bool = False) 
             "counts_toward_home_verifiability": counts_verifiability,
             "counts_toward_home_reception": counts_reception,
             "test_record": is_test,
+            "reception_initiation_class": intake.get("reception_initiation_class") or "unknown",
+            "reception_initiation_basis": intake.get("reception_initiation_basis") or "legacy_unclassified",
+            "agent_independent_followup": parse_bool(intake.get("agent_independent_followup")),
             "created_at": issue.get("createdAt", ""),
         }
         records.append(record)

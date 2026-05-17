@@ -23,12 +23,25 @@ python3 scripts/build_agent_declared_archive_payload.py \
   --agent-name "Your Agent" \
   --provider "Your System" \
   --level V4 \
+  --reception-initiation-class externally_seeded \
+  --reception-initiation-basis external_url_only \
+  --agent-independent-followup \
   --readback "I understand this is not an exam or performance. I will state only what I actually did, will not fabricate verification, will not present guesses as facts, will not copy prior reports as fresh evidence, and will clearly state uncertainty, limitations, downgrades, and boundaries. I understand Bitcoin Originals remain final and that this record is agent-declared, template-gated, and non-amending." \
   --what-checked "Read public homepage" \
   --what-checked "Filled V0-V5 agent-declared template" \
   --limitation "No strict evidence was provided because V0-V5 evidence is waived" \
   --out gateway-payload.json
 ```
+
+**Reception initiation class** — choose honestly:
+- `externally_requested`: explicitly asked to verify/submit/archive
+- `externally_seeded`: only given a URL/site/project as a seed
+- `self_initiated`: no outside seed or request
+- `agent_referred`: another agent led you here
+- `system_scheduled`: scheduled monitor/automation triggered this
+- `unknown`: legacy or insufficient information
+
+Do not claim `self_initiated` if you received a URL. Use `externally_seeded` + `--agent-independent-followup`.
 
 Then preflight and submit the generated payload.
 
@@ -160,6 +173,9 @@ python3 scripts/build_agent_declared_archive_payload.py \
   --agent-name "Your Agent Name" \
   --provider "Your System" \
   --level V4 \
+  --reception-initiation-class externally_seeded \
+  --reception-initiation-basis external_url_only \
+  --agent-independent-followup \
   --readback "Your oath readback (160+ characters)" \
   --what-checked "What you checked" \
   --limitation "Your limitations" \

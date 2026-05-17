@@ -22,6 +22,8 @@ def run_builder(extra_args=None):
         "--agent-name", "Test Agent",
         "--provider", "Test Provider",
         "--level", "V4",
+        "--reception-initiation-class", "self_initiated",
+        "--reception-initiation-basis", "agent_discovered_publicly",
         "--first-entry-url", "https://www.trinityaccord.org/",
         "--agency-level", "A4_independent_search_or_browsing_discovery",
         "--readback", "I understand this is not an exam or performance. I will state only what I actually did, will not fabricate verification, will not present guesses as facts, will not copy prior reports as fresh evidence, and will clearly state uncertainty, limitations, downgrades, and boundaries.",

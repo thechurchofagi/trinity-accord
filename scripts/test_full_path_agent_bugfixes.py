@@ -92,6 +92,9 @@ def make_valid_agent_declared():
         },
         "what_i_checked": ["Read public homepage"],
         "limitations": ["V0-V5 evidence is waived"],
+        "reception_initiation_class": "self_initiated",
+        "reception_initiation_basis": "agent_discovered_publicly",
+        "agent_independent_followup": True,
     }
 
 

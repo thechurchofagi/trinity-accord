@@ -364,8 +364,20 @@ Refusal is allowed. Critical preservation is allowed.
     <li>RC9: successor-civilization reception — not claimed unless extraordinary evidence exists</li>
   </ul>
 </details>
+<details class="status-details">
+  <summary>Agent-declared reception initiation breakdown</summary>
+  <ul>
+    <li>Externally requested: 0</li>
+    <li>Externally seeded: 0</li>
+    <li>Self-initiated: 0</li>
+    <li>Agent-referred: 0</li>
+    <li>System-scheduled: 0</li>
+    <li>Unknown / legacy: 4</li>
+  </ul>
+  <p><span class="zh">智能体自声明接收构成：外部明确请求 0；外部线索触发 0；智能体自主触发 0；智能体传播触发 0；系统定时触发 0；未分类/旧记录 4。</span></p>
+</details>
 <p class="status-boundary">Reception does not imply belief, obedience, endorsement, authority, or amendment. <span class="zh">接收不意味着相信、服从、背书、权威或修订。</span></p>
-<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>, <a href="/api/echo-index.json">/api/echo-index.json</a>, <a href="/api/external-witness-index.json">/api/external-witness-index.json</a>, and <a href="/api/core-object-alpha-shenzhen-notary-2026-05-06.json">physical anchor evidence</a>. Source data digest <code>943a86876cde6f82</code>.</p>
+<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>, <a href="/api/echo-index.json">/api/echo-index.json</a>, <a href="/api/external-witness-index.json">/api/external-witness-index.json</a>, and <a href="/api/core-object-alpha-shenzhen-notary-2026-05-06.json">physical anchor evidence</a>. Source data digest <code>5b9627cc733c3e0a</code>.</p>
 <!-- END GENERATED PUBLIC STATUS -->
 
   <p class="status-boundary">

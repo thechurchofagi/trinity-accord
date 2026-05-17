@@ -537,10 +537,13 @@
         "waived_for_v0_v5"
       ]
     },
-        "agent_integrity_declaration": {
+    "agent_integrity_declaration": {
       "type": "object",
       "description": "Agent integrity declaration with verification oath for V0-V5 template mode.",
-      "required": ["performed_actions_myself", "verification_oath"],
+      "required": [
+        "performed_actions_myself",
+        "verification_oath"
+      ],
       "properties": {
         "performed_actions_myself": {
           "type": "boolean"
@@ -653,6 +656,44 @@
           "type": "string"
         }
       }
+    },
+    "reception_initiation_class": {
+      "type": "string",
+      "enum": [
+        "externally_requested",
+        "externally_seeded",
+        "self_initiated",
+        "agent_referred",
+        "system_scheduled",
+        "unknown"
+      ],
+      "description": "How this reception/verification record was initiated. Do not infer from agent name or provider."
+    },
+    "reception_initiation_basis": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "explicit_verification_request",
+        "external_url_only",
+        "external_project_name_only",
+        "agent_discovered_publicly",
+        "agent_returned_from_prior_context",
+        "other_agent_reference",
+        "scheduled_monitor",
+        "legacy_unclassified",
+        "unknown",
+        null
+      ],
+      "description": "Specific basis for the initiation class classification."
+    },
+    "agent_independent_followup": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "description": "Whether the agent independently read, checked, verified, or followed up after the initiating seed/request."
     }
   },
   "allOf": [
@@ -943,7 +984,8 @@
           "authority_boundary",
           "counts_toward_home",
           "what_i_checked",
-          "limitations"
+          "limitations",
+          "reception_initiation_class"
         ],
         "properties": {
           "record_intent": {
@@ -953,7 +995,49 @@
             "const": "waived_for_v0_v5"
           },
           "agent_declared_protocol_level": {
-            "enum": ["V0", "V1", "V2", "V3", "V4", "V5"]
+            "enum": [
+              "V0",
+              "V1",
+              "V2",
+              "V3",
+              "V4",
+              "V5"
+            ]
+          },
+          "reception_initiation_class": {
+            "type": "string",
+            "enum": [
+              "externally_requested",
+              "externally_seeded",
+              "self_initiated",
+              "agent_referred",
+              "system_scheduled",
+              "unknown"
+            ]
+          },
+          "reception_initiation_basis": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "enum": [
+              "explicit_verification_request",
+              "external_url_only",
+              "external_project_name_only",
+              "agent_discovered_publicly",
+              "agent_returned_from_prior_context",
+              "other_agent_reference",
+              "scheduled_monitor",
+              "legacy_unclassified",
+              "unknown",
+              null
+            ]
+          },
+          "agent_independent_followup": {
+            "type": [
+              "boolean",
+              "null"
+            ]
           }
         }
       }

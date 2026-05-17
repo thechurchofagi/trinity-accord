@@ -109,7 +109,17 @@
       },
       "fail_closed": true,
       "strict_intake_fallback_allowed": false,
-      "wrong_path_result": "reject_before_issue_creation"
+      "wrong_path_result": "reject_before_issue_creation",
+      "requires_reception_initiation_class": true,
+      "reception_initiation_class_values": [
+        "externally_requested",
+        "externally_seeded",
+        "self_initiated",
+        "agent_referred",
+        "system_scheduled",
+        "unknown"
+      ],
+      "reception_initiation_rule": "URL-only prompt is externally_seeded, not self_initiated."
     },
     {
       "intent": "verify_v6_plus_strict_evidence",

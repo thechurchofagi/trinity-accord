@@ -83,7 +83,10 @@ def make_valid_agent_declared():
         },
         "counts_toward_home": {"verifiability": True, "reception": True, "basis": "agent_declared_template_pass"},
         "what_i_checked": ["Read homepage", "Filled V0-V5 template"],
-        "limitations": ["Evidence waived for V0-V5"]
+        "limitations": ["Evidence waived for V0-V5"],
+        "reception_initiation_class": "self_initiated",
+        "reception_initiation_basis": "agent_discovered_publicly",
+        "agent_independent_followup": True
     }
 
 

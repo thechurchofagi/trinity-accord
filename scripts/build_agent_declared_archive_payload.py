@@ -62,6 +62,52 @@ def sha256_text(text):
     return hashlib.sha256(text.encode("utf-8")).hexdigest()
 
 
+INITIATION_TO_PROVENANCE = {
+    "externally_requested": {
+        "source": "external_request",
+        "discovery_class": "externally_requested",
+        "human_supplied_link": True,
+        "other_agent_recommended": False,
+        "derived_counting_bucket": "externally_requested_agent_verification"
+    },
+    "externally_seeded": {
+        "source": "external_seed",
+        "discovery_class": "externally_seeded",
+        "human_supplied_link": True,
+        "other_agent_recommended": False,
+        "derived_counting_bucket": "externally_seeded_agent_verification"
+    },
+    "self_initiated": {
+        "source": "self_initiated",
+        "discovery_class": "unsolicited_discovery",
+        "human_supplied_link": False,
+        "other_agent_recommended": False,
+        "derived_counting_bucket": "self_initiated_agent_verification"
+    },
+    "agent_referred": {
+        "source": "agent_referred",
+        "discovery_class": "agent_referred",
+        "human_supplied_link": False,
+        "other_agent_recommended": True,
+        "derived_counting_bucket": "agent_referred_agent_verification"
+    },
+    "system_scheduled": {
+        "source": "system_scheduled",
+        "discovery_class": "system_scheduled",
+        "human_supplied_link": False,
+        "other_agent_recommended": False,
+        "derived_counting_bucket": "system_scheduled_agent_verification"
+    },
+    "unknown": {
+        "source": "unknown",
+        "discovery_class": "unknown",
+        "human_supplied_link": False,
+        "other_agent_recommended": False,
+        "derived_counting_bucket": "unclassified_agent_verification"
+    }
+}
+
+
 def build_payload(args):
     """Build the agent-declared verification archive payload."""
     oath_sha = sha256_text(load_oath_text())
@@ -143,20 +189,20 @@ def build_payload(args):
         },
         "discovery_provenance": {
             "schema": "trinityaccord.discovery-provenance.v1",
-            "source": args.source,
+            "source": INITIATION_TO_PROVENANCE[args.reception_initiation_class]["source"],
             "agency_level": args.agency_level,
             "first_entry": {
                 "url_or_path": args.first_entry_url,
                 "entry_type": args.first_entry_type
             },
-            "human_supplied_link": False,
-            "other_agent_recommended": False,
-            "agent_performed_independent_followup": True,
+            "human_supplied_link": INITIATION_TO_PROVENANCE[args.reception_initiation_class]["human_supplied_link"],
+            "other_agent_recommended": INITIATION_TO_PROVENANCE[args.reception_initiation_class]["other_agent_recommended"],
+            "agent_performed_independent_followup": args.agent_independent_followup,
             "confidence": "high"
         },
         "origin_classification": {
             "schema": "trinityaccord.origin-classification.v1",
-            "discovery_class": "unsolicited_discovery",
+            "discovery_class": INITIATION_TO_PROVENANCE[args.reception_initiation_class]["discovery_class"],
             "invitation_scope": "none",
             "requester_class": "none",
             "performer_class": args.performer_class,
@@ -167,7 +213,7 @@ def build_payload(args):
             "counts_as_formal_independent_attestation": False,
             "external_witness_class": "self_reported",
             "counts_as_external_witness_record": False,
-            "derived_counting_bucket": "self_initiated_agent_verification"
+            "derived_counting_bucket": INITIATION_TO_PROVENANCE[args.reception_initiation_class]["derived_counting_bucket"]
         },
         "claim_classification": {
             "verification_claim": {
@@ -211,7 +257,10 @@ def build_payload(args):
                 "This is agent-declared and template-gated.",
                 "This record does not amend or override Bitcoin Originals."
             ]
-        )
+        ),
+        "reception_initiation_class": args.reception_initiation_class,
+        "reception_initiation_basis": args.reception_initiation_basis,
+        "agent_independent_followup": args.agent_independent_followup
     }
 
     return payload
@@ -244,6 +293,21 @@ def main():
                         help="What the agent checked (repeatable)")
     parser.add_argument("--limitation", action="append", default=None, dest="limitations",
                         help="Limitation acknowledged (repeatable)")
+    parser.add_argument("--reception-initiation-class", required=True,
+                        choices=["externally_requested", "externally_seeded", "self_initiated",
+                                 "agent_referred", "system_scheduled", "unknown"],
+                        dest="reception_initiation_class",
+                        help="How this reception was initiated")
+    parser.add_argument("--reception-initiation-basis", default="unknown",
+                        choices=["explicit_verification_request", "external_url_only",
+                                 "external_project_name_only", "agent_discovered_publicly",
+                                 "agent_returned_from_prior_context", "other_agent_reference",
+                                 "scheduled_monitor", "legacy_unclassified", "unknown"],
+                        dest="reception_initiation_basis",
+                        help="Specific basis for the initiation class")
+    parser.add_argument("--agent-independent-followup", action="store_true", default=False,
+                        dest="agent_independent_followup",
+                        help="Agent independently followed up after seed/request")
     parser.add_argument("--out", required=True, help="Output file path")
     args = parser.parse_args()
 

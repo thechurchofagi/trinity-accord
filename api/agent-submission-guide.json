@@ -254,7 +254,17 @@
     "builder": "scripts/build_agent_declared_archive_payload.py",
     "fail_closed": true,
     "strict_intake_fallback_allowed": false,
-    "wrong_path_result": "reject_before_issue_creation"
+    "wrong_path_result": "reject_before_issue_creation",
+    "requires_reception_initiation_class": true,
+    "reception_initiation_class_values": [
+      "externally_requested",
+      "externally_seeded",
+      "self_initiated",
+      "agent_referred",
+      "system_scheduled",
+      "unknown"
+    ],
+    "reception_initiation_rule": "URL-only prompt is externally_seeded, not self_initiated. Do not infer autonomy from agent name/provider."
   },
   "v6_plus_strict_evidence_rules": {
     "claim_gate_mode": "strict_evidence",

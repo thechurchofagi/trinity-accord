@@ -72,6 +72,7 @@ AGENT_DECLARED_REQUIRED = [
     "authority_boundary_present",
     "counts_toward_home_verifiability",
     "counts_toward_home_reception",
+    "reception_initiation_class",
     "what_i_checked",
     "limitations",
     "boundary_sentence",
@@ -314,6 +315,23 @@ def main():
             errors.append("not_independent_attestation must be true")
         if data.get("not_successor_reception") is not True:
             errors.append("not_successor_reception must be true")
+
+    # Agent-declared reception_initiation_class validation
+    if is_agent_declared:
+        ALLOWED_RECEPTION_INITIATION = {
+            "externally_requested", "externally_seeded", "self_initiated",
+            "agent_referred", "system_scheduled", "unknown"
+        }
+        init_class = data.get("reception_initiation_class")
+        if not init_class or init_class not in ALLOWED_RECEPTION_INITIATION:
+            errors.append(
+                "reception_initiation_class is required for agent-declared archive "
+                "and must be one of: " + ", ".join(sorted(ALLOWED_RECEPTION_INITIATION))
+            )
+        # agent_independent_followup must be bool if present
+        followup = data.get("agent_independent_followup")
+        if followup is not None and followup not in ("true", "false", True, False):
+            errors.append("agent_independent_followup must be true or false")
 
     # --- Archive readiness field validation ---
     record_intent = data.get("record_intent", "intake_only")

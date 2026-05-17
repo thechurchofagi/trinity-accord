@@ -64,6 +64,8 @@ def main():
         "--agent-name", "E2E Agent",
         "--provider", "E2E Test",
         "--level", "V4",
+        "--reception-initiation-class", "self_initiated",
+        "--reception-initiation-basis", "agent_discovered_publicly",
         "--first-entry-url", "https://www.trinityaccord.org/",
         "--readback", "I understand this is not an exam or performance. I will state only what I actually did, will not fabricate verification, will not present guesses as facts, will not copy prior reports as fresh evidence, and will clearly state uncertainty, limitations, downgrades, and boundaries.",
         "--what-checked", "Read homepage",

@@ -148,6 +148,9 @@ def make_good_block():
         "canonical_boundary_sentence": "Bitcoin Originals are final; all mirrors and echoes are non-amending.",
         "boundary_sentence_present": True,
         "boundary_sentence": "Bitcoin Originals are final; all mirrors and echoes are non-amending. This Issue does not create authority, attestation, amendment, archive status, or verification-level upgrade unless the relevant machine gates pass.",
+        "reception_initiation_class": "self_initiated",
+        "reception_initiation_basis": "agent_discovered_publicly",
+        "agent_independent_followup": True,
     }
 
 
