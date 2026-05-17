@@ -35,7 +35,7 @@ def run(cmd, input_text=None):
 
 
 def make_issue_with_receipt(issue_number, created_at):
-    """Case 1: archive_ready=true + gateway receipt."""
+    """Case 1: archive_ready=true + gateway receipt + oath summary."""
     return {
         "number": issue_number,
         "title": f"Agent-Declared Verification Archive: V4 — Test #{issue_number}",
@@ -52,12 +52,23 @@ def make_issue_with_receipt(issue_number, created_at):
             "claim_gate_mode: template_for_v0_v5\n"
             "claim_gate_status: PASS\n"
             "agent_integrity_declaration_present: true\n"
+            "verification_oath_present: true\n"
+            "oath_read: true\n"
+            "oath_version: verification-echo-pre-oath-v1\n"
+            "oath_text_sha256: eb2f528df3514d75dd18348928bfa04f7d59c5fdc66f1c6496accc64254da5e8\n"
+            "readback_required: true\n"
+            "agent_readback_present: true\n"
+            "agent_readback_char_count: 280\n"
+            "agent_readback_sha256: 98585029a6e72551fc7b8ef5a0e0d6fa4f14a7c98ded3fea02f801de6d23214f\n"
             "discovery_provenance_present: true\n"
             "origin_classification_present: true\n"
             "claim_classification_present: true\n"
             "authority_boundary_present: true\n"
             "counts_toward_home_verifiability: true\n"
             "counts_toward_home_reception: true\n"
+            "reception_initiation_class: externally_requested\n"
+            "reception_initiation_basis: explicit_verification_request\n"
+            "agent_independent_followup: true\n"
             "what_i_checked:\n"
             "  - Read homepage\n"
             "limitations:\n"
@@ -285,6 +296,10 @@ def main():
         check(
             "Record has render_api_only=true",
             record_200.get("render_api_only") is True,
+        )
+        check(
+            "Record has verification_oath_present=true",
+            record_200.get("verification_oath_present") is True,
         )
 
     # --- Case 2: archive_ready=true + no receipt + after effective → excluded ---
