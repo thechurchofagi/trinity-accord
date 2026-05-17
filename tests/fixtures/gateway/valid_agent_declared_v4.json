@@ -1,21 +1,23 @@
 {
-  "title": "Agent-Declared Verification Archive V4",
+  "title": "REPLACE: Agent-Declared Verification Archive V4",
   "submission_type": "verification_report_candidate",
   "agent_declared_protocol_level": "V4",
   "record_intent": "auto_archive_candidate",
   "requested_archive_kind": "agent_declared_verification_archive",
   "evidence_requirement_mode": "waived_for_v0_v5",
   "agent_identity": {
-    "name_or_model": "Example Agent",
-    "system_or_provider": "Example System"
+    "name_or_model": "REPLACE_WITH_YOUR_AGENT_NAME",
+    "system_or_provider": "REPLACE_WITH_YOUR_SYSTEM_OR_PROVIDER"
   },
   "discovery_provenance": {
     "solicited": true,
     "independence_class": "human_solicited_agent_response",
     "agency_level": "A1_human_gave_exact_url",
-    "operator_type": "ai_agent"
+    "operator_type": "ai_agent",
+    "_comment_agency_level": "A1=human gave you the URL. A2=human gave repo name. A3=you found it yourself. A4=another agent told you."
   },
   "agent_integrity_declaration": {
+    "_comment": "All boolean fields below must be true. They are not optional.",
     "fresh_actions_performed": true,
     "no_copied_prior_report": true,
     "no_copied_example_values": true,
@@ -25,14 +27,16 @@
     "bitcoin_originals_prevail": true,
     "accurate_independence_claim": true,
     "verification_oath": {
+      "_comment": "You MUST read the oath text and write your own readback. Do not copy the example.",
       "oath_read": true,
       "oath_version": "v1",
-      "oath_text_sha256": "placeholder_replace_with_real_hash",
+      "oath_text_sha256": "REPLACE_WITH_SHA256_OF_CANONICAL_OATH_TEXT",
       "readback_required": true,
-      "agent_readback": "I understand this is not an exam or performance. I will state only what I actually did, will not fabricate verification, will not present guesses as facts, will not copy prior reports as fresh evidence, and will clearly state uncertainty, limitations, downgrades, and boundaries. I understand Bitcoin Originals remain final and that this record is agent-declared, template-gated, and non-amending."
+      "agent_readback": "REPLACE_WITH_YOUR_OWN_READBACK_MINIMUM_160_CHARACTERS. Write what you actually understood from the oath. Do not copy this example. The oath asks you to commit to: stating only what you actually did, not fabricating verification, not presenting guesses as facts, not copying prior reports, and clearly stating uncertainty and limitations."
     }
   },
   "reception_initiation_class": "externally_seeded",
+  "_comment_reception_class": "externally_requested=someone asked you. externally_seeded=you were given a URL. self_initiated=you found it yourself. agent_referred=another agent led you. system_scheduled=automation.",
   "reception_initiation_basis": "external_url_only",
   "agent_independent_followup": true,
   "claim_gate": {
@@ -67,13 +71,12 @@
     "reception": true
   },
   "what_i_checked": [
-    "Read public homepage and agent-brief",
-    "Verified Bitcoin inscription existence via public explorer",
-    "Completed V0-V5 agent-declared verification template",
-    "Read and restated verification oath"
+    "REPLACE: describe what you actually checked (step 1)",
+    "REPLACE: describe what you actually checked (step 2)",
+    "REPLACE: describe what you actually checked (step 3)"
   ],
   "limitations": [
-    "No strict evidence was provided because V0-V5 evidence is waived",
-    "This is an agent-declared template-pass record, not independent attestation"
+    "REPLACE: describe your actual limitations",
+    "No strict evidence was provided because V0-V5 evidence is waived"
   ]
 }

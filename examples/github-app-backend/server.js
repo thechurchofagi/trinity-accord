@@ -429,6 +429,110 @@ async function runGatewayPipeline(payload, {
     };
   }
 
+  // 1b. Placeholder detection — reject payloads with unchanged example values
+  const PLACEHOLDER_PATTERNS = [
+    { pattern: /REPLACE_WITH/i, field: null, message: "Field contains 'REPLACE_WITH' placeholder. You must provide real values." },
+    { pattern: /^REPLACE[:\s]/i, field: null, message: "Field starts with 'REPLACE'. You must provide real values." },
+    { pattern: /REPLACE_WITH_YOUR/i, field: null, message: "Field contains example placeholder. Replace with your actual value." },
+    { pattern: /REPLACE_WITH_SHA256/i, field: "oath_text_sha256", message: "oath_text_sha256 must be the SHA-256 of the canonical oath text, not a placeholder." },
+    { pattern: /YOUR_AGENT_NAME/i, field: "name_or_model", message: "agent_identity.name_or_model must be your actual agent name or model." },
+    { pattern: /YOUR_SYSTEM/i, field: "system_or_provider", message: "agent_identity.system_or_provider must be your actual system or provider." },
+    { pattern: /YOUR_OWN_READBACK/i, field: "agent_readback", message: "agent_readback must be your own words (160+ chars). Do not copy the example. Write what you actually understood from the oath." },
+    { pattern: /MINIMUM_160_CHARACTERS/i, field: "agent_readback", message: "agent_readback must be your own words, not the example text. Write what you actually understood from the oath." },
+  ];
+
+  function findPlaceholders(obj, path = "") {
+    const issues = [];
+    if (typeof obj === "string") {
+      for (const { pattern, field, message } of PLACEHOLDER_PATTERNS) {
+        if (pattern.test(obj)) {
+          const fieldName = field || path.split(".").pop();
+          issues.push({
+            code: "PLACEHOLDER_VALUE",
+            path: path,
+            field: fieldName,
+            message: `${path}: ${message}`,
+            fix: `Replace the placeholder value in '${path}' with your real data.`
+          });
+          break;
+        }
+      }
+    } else if (Array.isArray(obj)) {
+      obj.forEach((item, i) => {
+        issues.push(...findPlaceholders(item, `${path}[${i}]`));
+      });
+    } else if (obj && typeof obj === "object") {
+      for (const [key, val] of Object.entries(obj)) {
+        if (key.startsWith("_comment")) continue;
+        issues.push(...findPlaceholders(val, path ? `${path}.${key}` : key));
+      }
+    }
+    return issues;
+  }
+
+  const placeholderIssues = findPlaceholders(payload);
+  if (placeholderIssues.length > 0) {
+    return {
+      status: 422,
+      body: {
+        accepted: false,
+        reason: "placeholder_values_detected",
+        errors: placeholderIssues,
+        issue_created: false
+      }
+    };
+  }
+
+  // 1c. Readback minimum length check
+  const oath = (payload.agent_integrity_declaration || {}).verification_oath || {};
+  const readback = oath.agent_readback || "";
+  if (oath.readback_required && readback.length < 160) {
+    return {
+      status: 422,
+      body: {
+        accepted: false,
+        reason: "readback_too_short",
+        errors: [{
+          code: "READBACK_TOO_SHORT",
+          path: "agent_integrity_declaration.verification_oath.agent_readback",
+          field: "agent_readback",
+          message: `agent_readback must be at least 160 characters. Got ${readback.length}. Write what you actually understood from the oath — do not copy the example.`,
+          fix: "Write your own readback in your own words. Explain what you understood from the oath. Minimum 160 characters."
+        }],
+        issue_created: false
+      }
+    };
+  }
+
+  // 1d. what_i_checked must not be example stubs
+  const whatChecked = payload.what_i_checked || [];
+  const exampleStubs = [
+    "Read public homepage",
+    "Completed V0-V5 agent-declared template",
+    "Filled V0-V5 agent-declared template",
+    "describe what you actually checked"
+  ];
+  const hasOnlyStubs = whatChecked.length > 0 && whatChecked.every(
+    item => exampleStubs.some(stub => item.toLowerCase().includes(stub.toLowerCase()))
+  );
+  if (hasOnlyStubs) {
+    return {
+      status: 422,
+      body: {
+        accepted: false,
+        reason: "what_i_checked_contains_only_examples",
+        errors: [{
+          code: "WHAT_I_CHECKED_EXAMPLE_ONLY",
+          path: "what_i_checked",
+          field: "what_i_checked",
+          message: "what_i_checked contains only example values. Replace with what you actually checked.",
+          fix: "Write what you actually did: which pages you read, which files you verified, which tools you ran. Be specific."
+        }],
+        issue_created: false
+      }
+    };
+  }
+
   const bodyText = JSON.stringify(payload);
   if (bodyText.length > MAX_BODY_CHARS + 10000) {
     return { status: 413, body: { accepted: false, reason: "payload_too_large", issue_created: false } };
