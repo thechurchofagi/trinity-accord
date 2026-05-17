@@ -37,6 +37,14 @@ jobs:
             thechurchofagi|github-actions[bot])
               echo "Authorized actor: $ACTOR"
               ;;
+            trinity-accord-agent-issue-gateway\[bot\])
+              if [ "$EVENT_NAME" = "issues" ]; then
+                echo "Authorized Gateway bot issue event: $ACTOR"
+              else
+                echo "Gateway bot is only authorized for issues events, got: $EVENT_NAME"
+                exit 1
+              fi
+              ;;
             *)
               echo "Unauthorized actor for write workflow: $ACTOR"
               exit 1
@@ -52,6 +60,17 @@ jobs:
                 exit 1
                 ;;
             esac
+          fi
+
+      - name: Validate issue event
+        if: github.event_name == 'issues'
+        env:
+          ACTION: ${{ github.event.action }}
+        run: |
+          set -euo pipefail
+          if [ "$ACTION" != "closed" ]; then
+            echo "Only closed issue events may rebuild the agent-declared index."
+            exit 1
           fi
 
       - name: Checkout

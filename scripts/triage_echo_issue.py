@@ -1470,6 +1470,32 @@ def main():
         emit_result(result, title, body)
         return
 
+    # --- Step 1.4: Receipt-bearing Gateway auto archive early exit ---
+    # Valid Gateway archives are server-validated and server-rendered.
+    # They should not be triaged as regular Echoes.
+    try:
+        from gateway_v0_v5_policy import has_valid_gateway_receipt_in_text
+        _is_valid_gw_archive = (
+            has_valid_gateway_receipt_in_text(text)
+            and "archive_ready: true" in text
+            and "auto_archive_agent_declared_verification" in text
+            and "verification_oath_present: true" in text
+        )
+    except Exception:
+        _is_valid_gw_archive = False
+
+    if _is_valid_gw_archive:
+        result["close"] = False
+        result["labels"] = ["echo:screened"]
+        result["comment"] = (
+            "<!-- trinity-receipt-bearing-archive-v1 -->\n\n"
+            "This is a receipt-bearing Gateway auto archive. "
+            "It has been server-validated and server-rendered. "
+            "No human review triage label is needed."
+        )
+        emit_result(result, title, body)
+        return
+
     # --- Step 1.5: P0 unified normalized risk scan ---
     # This catches Unicode/homoglyph/synonym bypasses that raw regex may miss.
     if HAS_SHARED_SAFETY:
