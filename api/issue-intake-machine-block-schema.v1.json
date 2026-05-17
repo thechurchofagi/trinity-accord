@@ -242,6 +242,7 @@
       },
       "then": {
         "required": [
+          "submission_type",
           "record_intent",
           "requested_archive_kind",
           "agent_declared_protocol_level",
@@ -251,6 +252,7 @@
           "archive_ready",
           "allowed_archive_kind",
           "auto_archive_action",
+          "archive_readiness_summary",
           "agent_integrity_declaration_present",
           "discovery_provenance_present",
           "origin_classification_present",
@@ -259,6 +261,26 @@
           "counts_toward_home_verifiability",
           "counts_toward_home_reception"
         ],
+        "properties": {
+          "submission_type": { "const": "verification_report_candidate" },
+          "record_intent": { "const": "auto_archive_candidate" },
+          "requested_archive_kind": { "const": "agent_declared_verification_archive" },
+          "agent_declared_protocol_level": { "enum": ["V0", "V1", "V2", "V3", "V4", "V5"] },
+          "evidence_requirement_mode": { "const": "waived_for_v0_v5" },
+          "claim_gate_mode": { "const": "template_for_v0_v5" },
+          "claim_gate_status": { "enum": ["PASS", "PASS_WITH_WARNINGS"] },
+          "archive_ready": { "const": true },
+          "allowed_archive_kind": { "const": "agent_declared_verification_archive" },
+          "auto_archive_action": { "const": "auto_archive_agent_declared_verification" },
+          "archive_readiness_summary": { "type": "array", "minItems": 1 },
+          "agent_integrity_declaration_present": { "const": true },
+          "discovery_provenance_present": { "const": true },
+          "origin_classification_present": { "const": true },
+          "claim_classification_present": { "const": true },
+          "authority_boundary_present": { "const": true },
+          "counts_toward_home_verifiability": { "const": true },
+          "counts_toward_home_reception": { "const": true }
+        },
         "not": {
           "anyOf": [
             { "required": ["verification_level_claimed"] },

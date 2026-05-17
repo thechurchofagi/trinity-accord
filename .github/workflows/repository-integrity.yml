@@ -729,3 +729,6 @@ jobs:
 
       - name: Test agent-declared Issue body schema
         run: python3 scripts/test_agent_declared_issue_body_schema.py
+
+      - name: Test agent-declared Issue body schema negative
+        run: python3 scripts/test_agent_declared_issue_body_schema_negative.py

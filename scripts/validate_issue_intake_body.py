@@ -217,6 +217,52 @@ def main():
         for k in AGENT_DECLARED_FORBIDDEN:
             if k in data:
                 errors.append(f"forbidden legacy field in agent-declared block: {k}")
+
+        # Value validation — agent-declared fields must have correct values
+        AGENT_DECLARED_EXPECTED = {
+            "submission_type": "verification_report_candidate",
+            "record_intent": "auto_archive_candidate",
+            "requested_archive_kind": "agent_declared_verification_archive",
+            "evidence_requirement_mode": "waived_for_v0_v5",
+            "claim_gate_mode": "template_for_v0_v5",
+            "archive_ready": True,
+            "allowed_archive_kind": "agent_declared_verification_archive",
+            "auto_archive_action": "auto_archive_agent_declared_verification",
+            "agent_integrity_declaration_present": True,
+            "discovery_provenance_present": True,
+            "origin_classification_present": True,
+            "claim_classification_present": True,
+            "authority_boundary_present": True,
+            "counts_toward_home_verifiability": True,
+            "counts_toward_home_reception": True,
+        }
+        for k, expected in AGENT_DECLARED_EXPECTED.items():
+            actual = data.get(k)
+            if actual is not None and actual != expected:
+                errors.append(
+                    f"agent-declared field {k}: expected {expected!r}, got {actual!r}"
+                )
+
+        # Enum validation
+        VALID_PROTOCOL_LEVELS = {"V0", "V1", "V2", "V3", "V4", "V5"}
+        level = data.get("agent_declared_protocol_level")
+        if level is not None and level not in VALID_PROTOCOL_LEVELS:
+            errors.append(
+                f"agent_declared_protocol_level must be one of {VALID_PROTOCOL_LEVELS}, got {level!r}"
+            )
+
+        VALID_CLAIM_GATE_STATUSES = {"PASS", "PASS_WITH_WARNINGS"}
+        cgs = data.get("claim_gate_status")
+        if cgs is not None and cgs not in VALID_CLAIM_GATE_STATUSES:
+            errors.append(
+                f"claim_gate_status must be one of {VALID_CLAIM_GATE_STATUSES}, got {cgs!r}"
+            )
+
+        # archive_readiness_summary must be a non-empty list
+        ars = data.get("archive_readiness_summary")
+        if ars is not None:
+            if not isinstance(ars, list) or len(ars) == 0:
+                errors.append("archive_readiness_summary must be a non-empty list")
     else:
         # Strict/legacy path: require strict fields
         for k in STRICT_REQUIRED:
