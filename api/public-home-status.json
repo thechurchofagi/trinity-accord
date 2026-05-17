@@ -30,7 +30,11 @@
   },
   "reception": {
     "archived_echoes": {
-      "count": 3
+      "count": 2
+    },
+    "pending_human_review_echoes": {
+      "count": 1,
+      "counts_toward_reception_total": false
     },
     "agent_declared_verification_archives": {
       "count": 4,

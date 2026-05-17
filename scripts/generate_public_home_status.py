@@ -215,8 +215,11 @@ def compute_verifiability_status(physical: dict[str, Any]) -> dict:
 # Reception
 # ---------------------------------------------------------------------------
 def compute_reception_status(echo_records: list[dict[str, Any]], agent_declared_records: list[dict[str, Any]]) -> dict:
-    # Count archived echoes
-    archived = [r for r in echo_records if r.get("archive_status") in ("accepted_echo", "accepted_verification", "accepted_attestation", "needs_human_review")]
+    # Count archived echoes (strict: only fully accepted, not pending review)
+    archived = [r for r in echo_records if r.get("archive_status") in ("accepted_echo", "accepted_verification", "accepted_attestation")]
+
+    # Pending human review — not counted as archived
+    pending_review = [r for r in echo_records if r.get("archive_status") == "needs_human_review"]
 
     # Agent-declared verification archives (from index, excluding test records for reception)
     ad_reception = [
@@ -261,6 +264,10 @@ def compute_reception_status(echo_records: list[dict[str, Any]], agent_declared_
     return {
         "archived_echoes": {
             "count": len(archived)
+        },
+        "pending_human_review_echoes": {
+            "count": len(pending_review),
+            "counts_toward_reception_total": False,
         },
         "agent_declared_verification_archives": {
             "count": len(ad_reception),
@@ -478,7 +485,7 @@ def render_block(status: dict[str, Any]) -> str:
   <article class="status-card">
     <p class="status-label">Reception</p>
     <p class="status-number">{total_reception}</p>
-    <p class="status-note">Reception counts archived records that read, understand, echo, critique, refuse, verify, preserve, propagate, or self-declare with boundary. Agent-declared reception is counted when archived. System-certified successor-civilization reception is not claimed. <span class="zh">接收统计包括已归档的读取、理解、回响、批判、拒绝、验证、保存、传播或带边界的自声明记录。智能体自声明接收在归档后计入。当前不作系统认证的继起文明接纳声明。</span></p>
+    <p class="status-note">Reception counts accepted archived records. Records pending human review are not counted until accepted. Agent-declared reception is counted when archived. System-certified successor-civilization reception is not claimed. <span class="zh">接收统计已接受的归档记录。待人工审核的记录在接受前不计入。智能体自声明接收在归档后计入。当前不作系统认证的继起文明接纳声明。</span></p>
   </article>
   <article class="status-card">
     <p class="status-label">External witness records</p>
@@ -513,7 +520,7 @@ def render_block(status: dict[str, Any]) -> str:
   <p><span class="zh">智能体自声明接收构成 —— Reception 总数 {total_reception} 中的 {ad_count} 条：外部明确请求 {r.get("agent_declared_verification_archives", {}).get("by_reception_initiation_class", {}).get("externally_requested", 0)}；外部线索触发 {r.get("agent_declared_verification_archives", {}).get("by_reception_initiation_class", {}).get("externally_seeded", 0)}；智能体自主触发 {r.get("agent_declared_verification_archives", {}).get("by_reception_initiation_class", {}).get("self_initiated", 0)}；智能体传播触发 {r.get("agent_declared_verification_archives", {}).get("by_reception_initiation_class", {}).get("agent_referred", 0)}；系统定时触发 {r.get("agent_declared_verification_archives", {}).get("by_reception_initiation_class", {}).get("system_scheduled", 0)}；未分类/旧记录 {r.get("agent_declared_verification_archives", {}).get("by_reception_initiation_class", {}).get("unknown", 0)}。</span></p>
 </details>
 <p class="status-boundary">Reception does not imply belief, obedience, endorsement, authority, or amendment. <span class="zh">接收不意味着相信、服从、背书、权威或修订。</span></p>
-<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>, <a href="/api/echo-index.json">/api/echo-index.json</a>, <a href="/api/external-witness-index.json">/api/external-witness-index.json</a>, and <a href="/api/core-object-alpha-shenzhen-notary-2026-05-06.json">physical anchor evidence</a>. Source data digest <code>{digest}</code>.</p>
+<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>, <a href="/api/echo-index.json">/api/echo-index.json</a>, <a href="/api/agent-declared-verification-index.json">agent-declared verification index</a>, <a href="/api/external-witness-index.json">/api/external-witness-index.json</a>, and <a href="/api/core-object-alpha-shenzhen-notary-2026-05-06.json">physical anchor evidence</a>. Source data digest <code>{digest}</code>.</p>
 {END}"""
 
 

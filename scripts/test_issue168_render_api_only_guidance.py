@@ -21,7 +21,9 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
-EFFECTIVE_AT = "2026-05-17T00:00:00Z"
+# Use shared policy constant — single source of truth
+sys.path.insert(0, str(ROOT / "scripts"))
+from gateway_v0_v5_policy import RENDER_API_ONLY_EFFECTIVE_AT as EFFECTIVE_AT
 
 
 def make_issue168_fixture():
@@ -71,8 +73,8 @@ def make_issue168_fixture():
         ),
         "state": "closed",
         "state_reason": "not_planned",
-        "createdAt": "2026-05-17T04:00:00Z",
-        "closedAt": "2026-05-17T04:05:00Z",
+        "createdAt": "2026-05-17T06:00:00Z",
+        "closedAt": "2026-05-17T06:05:00Z",
         "labels": [],
         "url": "https://github.com/thechurchofagi/trinity-accord/issues/168",
     }
@@ -81,23 +83,28 @@ def make_issue168_fixture():
 def detect_direct_archive_attempt(issue):
     """Detect if an Issue should trigger DIRECT_ARCHIVE_ATTEMPT_REQUIRES_RENDER_API.
 
+    Uses the same strict receipt validation as the real triage_echo_issue.py.
     Returns (triggered: bool, reason: str).
     """
+    from gateway_v0_v5_policy import has_valid_gateway_receipt_in_text
+
     body = issue.get("body", "")
     created_at = issue.get("createdAt", "")
 
     # Check archive intent
-    has_archive_intent = "requested_archive_kind: agent_declared_verification_archive" in body
+    ARCHIVE_INTENT_PATTERNS = [
+        r"requested_archive_kind:\s*agent_declared_verification_archive",
+        r"agent_declared_verification_archive",
+        r"auto_archive_agent_declared_verification",
+    ]
+    has_archive_intent = any(re.search(p, body, re.IGNORECASE) for p in ARCHIVE_INTENT_PATTERNS)
     if not has_archive_intent:
         return False, "no archive intent"
 
-    # Check for gateway receipt
-    has_gateway_receipt = (
-        "created_by_gateway: true" in body
-        and re.search(r"gateway_receipt_id: gar-", body) is not None
-    )
+    # Strict receipt check — same as production triage
+    has_gateway_receipt = has_valid_gateway_receipt_in_text(body)
     if has_gateway_receipt:
-        return False, "has gateway receipt"
+        return False, "has valid gateway receipt"
 
     # Check if after effective date
     try:
@@ -108,7 +115,7 @@ def detect_direct_archive_attempt(issue):
     except Exception:
         pass
 
-    return True, "direct archive attempt without gateway receipt"
+    return True, "direct archive attempt without valid gateway receipt"
 
 
 def generate_triage_comment(issue_number, reason):
@@ -158,15 +165,17 @@ def check_comment_not_amendment_only(comment):
     return has_render_api_guidance and has_submit_guidance
 
 
-def check_not_counted_in_index(issue, effective_at= EFFECTIVE_AT):
-    """Verify this issue would NOT be counted in the index."""
+def check_not_counted_in_index(issue, effective_at=EFFECTIVE_AT):
+    """Verify this issue would NOT be counted in the index.
+
+    Uses the same strict receipt validation as production code.
+    """
+    from gateway_v0_v5_policy import has_valid_gateway_receipt_in_text
+
     body = issue.get("body", "")
     created_at = issue.get("createdAt", "")
 
-    has_gateway_receipt = (
-        "created_by_gateway: true" in body
-        and re.search(r"gateway_receipt_id: gar-", body) is not None
-    )
+    has_gateway_receipt = has_valid_gateway_receipt_in_text(body)
 
     try:
         effective = datetime.fromisoformat(effective_at.replace("Z", "+00:00"))
@@ -177,7 +186,7 @@ def check_not_counted_in_index(issue, effective_at= EFFECTIVE_AT):
 
     # After effective date without receipt → excluded
     if after_effective and not has_gateway_receipt:
-        return True, "excluded: no gateway receipt after effective date"
+        return True, "excluded: no valid gateway receipt after effective date"
     return False, "would be included"
 
 
@@ -212,8 +221,8 @@ def main():
         f"reason: {reason}",
     )
     check(
-        "Reason is 'direct archive attempt without gateway receipt'",
-        reason == "direct archive attempt without gateway receipt",
+        "Reason is 'direct archive attempt without valid gateway receipt'",
+        reason == "direct archive attempt without valid gateway receipt",
         f"got: {reason}",
     )
 
