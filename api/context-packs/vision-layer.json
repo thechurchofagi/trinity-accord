@@ -39,6 +39,18 @@
       "creates_new_authority": false,
       "load_summary": true,
       "load_full_text_by_default": false
+    },
+    {
+      "title": "The Guardian's Attestation to the Covenant of the Flaw",
+      "zh_title": "守护者对瑕疵之约的证明",
+      "inscription_id": "103034280",
+      "status": "guardianship_layer_bitcoin_inscription",
+      "canonical_body": false,
+      "amends_bitcoin_originals": false,
+      "creates_new_authority": false,
+      "load_summary": true,
+      "load_full_text_by_default": false,
+      "note": "Bitcoin-inscribed non-amending fortification. Not a fourth canonical original."
     }
   ],
   "pending_or_optional_items": [

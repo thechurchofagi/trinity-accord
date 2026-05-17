@@ -318,10 +318,10 @@
         "verification_requires_onchain_check": true
       },
       "inscription": {
-        "inscription_id": null,
-        "title": "Guardian Attestation",
-        "zh_title": "守护者证明",
-        "txid": null,
+        "inscription_id": "103034280",
+        "title": "The Guardian's Attestation to the Covenant of the Flaw",
+        "zh_title": "守护者对瑕疵之约的证明",
+        "txid": "128aabfa3077efc832d30e6e2a96848a96896bbdbf4a7667912f55d25dcb6687",
         "output": null,
         "block_height": null,
         "timestamp_utc": null,
