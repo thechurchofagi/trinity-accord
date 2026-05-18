@@ -372,6 +372,16 @@ function normalizeGatewayErrors(lines) {
   });
 }
 
+
+function isWrappedGatewayPayload(payload) {
+  return (
+    payload &&
+    typeof payload === "object" &&
+    !Array.isArray(payload) &&
+    Object.prototype.hasOwnProperty.call(payload, "gateway_payload")
+  );
+}
+
 // --- Shared Gateway Pipeline (Task #3) ---
 
 /**
@@ -389,11 +399,8 @@ async function runGatewayPipeline(payload, {
   precomputedArchiveReadiness = null,
   precomputedAutoArchiveDecision = null
 }) {
-  // 0. Normalize archive intent defaults
-  payload = normalizeArchiveIntentDefaults(payload);
-
-  // 0a. Wrapper detection: reject gateway_payload wrapper
-  if (payload && typeof payload === "object" && payload.gateway_payload && Object.keys(payload).length <= 2) {
+  // 0. Wrapper detection must run before any normalization.
+  if (isWrappedGatewayPayload(payload)) {
     return {
       status: 422,
       body: {
@@ -403,14 +410,17 @@ async function runGatewayPipeline(payload, {
           code: "WRAPPED_PAYLOAD_NOT_ALLOWED",
           path: "gateway_payload",
           message: "Submit the raw gateway payload JSON object. Do not wrap it in gateway_payload.",
-          fix: "Run scripts/build_agent_declared_archive_payload.py and POST the generated raw JSON."
+          fix: "Run scripts/build_agent_declared_archive_payload.py and POST the generated raw JSON object. If using the example endpoint, use /gateway/examples/agent-declared-v4/raw or extract .payload."
         }],
         issue_created: false
       }
     };
   }
 
-  // 0b. V0-V5 fail-closed: reject wrong path BEFORE any other validation
+  // 1. Normalize archive intent defaults only after wrapper rejection.
+  payload = normalizeArchiveIntentDefaults(payload);
+
+  // 1b. V0-V5 fail-closed: reject wrong path BEFORE any other validation
   // Must run AFTER normalization so we see the final record_intent/requested_archive_kind,
   // but BEFORE schema validation so we return a clear error.
   // However, normalization may strip V0-V5 wrong-path signals, so we check the ORIGINAL
@@ -1013,6 +1023,17 @@ function buildExampleResponse(kind, payload) {
   };
 }
 
+
+// --- Raw example endpoint: returns only the payload object ---
+app.get("/gateway/examples/agent-declared-v4/raw", (req, res) => {
+  try {
+    const payload = loadFixture("valid_agent_declared_v4.json");
+    res.json(payload);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to load raw example fixture", detail: err.message });
+  }
+});
+
 // --- GET /gateway/capabilities ---
 app.get("/gateway/capabilities", (req, res) => {
   res.json({
@@ -1068,6 +1089,7 @@ app.get("/gateway/capabilities", (req, res) => {
       "POST /gateway/preflight",
       "POST /agent-submit only after preflight passes"
     ],
+    preflight_endpoint_rule: "For V0/V1/V2/V3/V4/V4+/V5 agent-declared archive, /gateway/preflight is canonical. /gateway/archive-preflight is legacy/alias only and must not be used by new agents.",
     forbidden_common_mistakes: [
       "Do not put trinity-issue-intake in payload.body.",
       "Do not put bitcoin_checks at the Evidence Input top level; use evidence.bitcoin_checks.",
@@ -1114,13 +1136,14 @@ app.get("/gateway/capabilities", (req, res) => {
         }
       },
       canonical_boundary_sentence: "Bitcoin Originals are final; all mirrors and echoes are non-amending.",
-      intake_is_not_archive: "Creating a Gateway Issue means the candidate entered intake. It does not mean it is archived, verified, attested, or received by a successor civilization. Archive is the default requested outcome for verification submissions, but it is granted only if Archive Readiness Gate passes. If Archive Readiness Gate fails, no Issue is created unless explicit intake_only or fallback is requested."
+      intake_is_not_archive: "For non-archive general intake, Gateway-created issues are intake only. For V0/V1/V2/V3/V4/V4+/V5 agent-declared archive, the Render API creates a server-rendered archive-ready Issue only after validation and archive readiness pass."
     },
     endpoints: {
       version: "/gateway/version",
       capabilities: "/gateway/capabilities",
       examples: {
         agent_declared_v4: "/gateway/examples/agent-declared-v4",
+        agent_declared_v4_raw: "/gateway/examples/agent-declared-v4/raw",
         verification_report_candidate: "/gateway/examples/verification-report-candidate",
         verification_echo_candidate: "/gateway/examples/verification-echo-candidate",
         evidence_input_external_explorer: "/gateway/examples/evidence-input-b1-external-explorer"
@@ -1128,7 +1151,7 @@ app.get("/gateway/capabilities", (req, res) => {
       lint_evidence: "/gateway/lint-evidence",
       build_from_evidence: "/gateway/build-from-evidence",
       preflight: "/gateway/preflight",
-      archive_preflight: "/gateway/archive-preflight",
+      archive_preflight: { status: "legacy_alias", canonical: "/gateway/preflight", do_not_use_for_new_v0_v5_submissions: true },
       submit: "/agent-submit"
     }
   });

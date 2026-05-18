@@ -15,14 +15,22 @@ def test():
     print("\n--- agent-submit.md ---")
     c = rf("agent-submit.md")
     check("Fallback" in c or "fallback" in c, "has fallback section")
+    check("/gateway/examples/agent-declared-v4/raw" in c, "uses raw example endpoint")
+
     print("\n--- external-agent-quickstart.md ---")
     c = rf("external-agent-quickstart.md")
     check("Fallback" in c or "fallback" in c, "has fallback section")
+    check("/gateway/examples/agent-declared-v4/raw" in c, "uses raw example endpoint")
+    check("fallback, not the preferred path" in c or "fallback" in c.lower(), "describes as fallback")
+
     print("\n--- api/agent-submit-gateway.json ---")
     d = json.loads(rf("api/agent-submit-gateway.json"))
-    check(d.get("v0_v5_archive_submission",{}).get("example_template_is_fallback_only") is True, "example_template_is_fallback_only=true")
+    check(d.get("v0_v5_archive_submission",{}).get("example_template_is_fallback_only") is True,
+          "example_template_is_fallback_only=true")
+
     print("\n--- server.js ---")
-    check("example_template_is_fallback_only" in rf("examples/github-app-backend/server.js"), "server has example_template_is_fallback_only")
+    s = rf("examples/github-app-backend/server.js")
+    check("example_template_is_fallback_only" in s, "server has example_template_is_fallback_only")
 
 if __name__ == "__main__":
     test()

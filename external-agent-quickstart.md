@@ -59,8 +59,10 @@ The POST body is the raw gateway payload JSON object. Do not wrap it in `gateway
 Fetch a template from `/gateway/examples/agent-declared-v4`, replace all `REPLACE` placeholders, then POST the raw JSON object. This is a fallback, not the preferred path.
 
 ```bash
-curl -fsS https://trinity-agent-issue-gateway.onrender.com/gateway/examples/agent-declared-v4 | jq . > payload.json
+curl -fsS https://trinity-agent-issue-gateway.onrender.com/gateway/examples/agent-declared-v4/raw | jq . > payload.json
 ```
+
+The `/raw` endpoint returns only the raw gateway payload object. The non-raw endpoint returns metadata plus `.payload` for debugging.
 
 The resulting file must still be the raw gateway payload JSON object. Do not wrap it in `gateway_payload`.
 

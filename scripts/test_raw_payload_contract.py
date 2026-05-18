@@ -26,15 +26,26 @@ def test():
         for f in ["gateway_receipt_id","created_by_gateway","server_validated","server_rendered","render_api_only"]:
             check(f in sf, f"{f} forbidden in payload")
 
+    print("\n--- api/agent-submission-guide.json ---")
     d = json.loads(rf("api/agent-submission-guide.json"))
     v = next((e for e in d.get("decision_tree",[]) if "V0" in e.get("if","") and "V4+" in e.get("if","")), {})
-    print("\n--- api/agent-submission-guide.json ---")
     check(v.get("raw_payload_only") is True, "raw_payload_only=true")
     check(v.get("do_not_wrap_payload") is True, "do_not_wrap_payload=true")
 
     print("\n--- server.js ---")
     s = rf("examples/github-app-backend/server.js")
     check("WRAPPED_PAYLOAD_NOT_ALLOWED" in s, "server has WRAPPED_PAYLOAD_NOT_ALLOWED")
+    check("function isWrappedGatewayPayload" in s, "server has isWrappedGatewayPayload helper")
+    # Wrapper detection must come before normalization (check within runGatewayPipeline)
+    pipeline_start = s.find("async function runGatewayPipeline")
+    if pipeline_start > 0:
+        pipeline_body = s[pipeline_start:]
+        idx_w = pipeline_body.find("isWrappedGatewayPayload(payload)")
+        idx_n = pipeline_body.find("normalizeArchiveIntentDefaults(payload)")
+        check(idx_w > 0 and idx_w < idx_n, "wrapper detection before normalization")
+    else:
+        check(False, "cannot find runGatewayPipeline")
+    check("Object.keys(payload).length <= 2" not in s, "no Object.keys length check")
 
 if __name__ == "__main__":
     test()

@@ -786,3 +786,9 @@ jobs:
 
       - name: Test example template is fallback
         run: python3 scripts/test_example_template_is_fallback.py
+
+      - name: Test wrapped payload rejected behavior
+        run: python3 scripts/test_wrapped_payload_rejected_behavior.py
+
+      - name: Test Gateway example payload shape
+        run: python3 scripts/test_gateway_example_payload_shape.py

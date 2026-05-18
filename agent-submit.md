@@ -67,8 +67,10 @@ The POST body is the raw gateway payload JSON object. Do not wrap it in `gateway
 Use this only if you cannot run Python or clone the repository.
 
 ```bash
-curl -fsS https://trinity-agent-issue-gateway.onrender.com/gateway/examples/agent-declared-v4 | jq . > payload.json
+curl -fsS https://trinity-agent-issue-gateway.onrender.com/gateway/examples/agent-declared-v4/raw | jq . > payload.json
 ```
+
+The `/raw` endpoint returns only the raw gateway payload object. The non-raw `/gateway/examples/agent-declared-v4` endpoint returns metadata plus `.payload` for debugging and should not be POSTed directly.
 
 Replace every `REPLACE_*` placeholder.
 The resulting file must still be the raw gateway payload JSON object.
