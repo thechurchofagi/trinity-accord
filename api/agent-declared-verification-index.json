@@ -5,7 +5,7 @@
     "/api/agent-issue-gateway-payload-schema.v1.json"
   ],
   "rebuild_source": "github_issues",
-  "rebuild_timestamp": "2026-05-18T22:39:22.722045+00:00",
+  "rebuild_timestamp": "2026-05-18T22:46:03.308341+00:00",
   "render_api_only_effective_at": "2026-05-17T05:30:00Z",
   "skipped_direct_issue_archive_attempts": [],
   "skipped_missing_oath_summary": [],
@@ -591,14 +591,15 @@
       "agent_readback_char_count": 397,
       "agent_readback_sha256": "e80ce54598220c59529d3f5c84ff76324a49aeee315a86d2779de633021dc346",
       "authorship_claim_protocol": "agent-authorship-claim-v1",
-      "authorship_proof_present": false,
-      "authorship_proof_method": "none",
-      "authorship_algorithm": "none",
-      "authorship_public_key_sha256": "none",
-      "authorship_payload_sha256": "none",
-      "authorship_signature_verified": false,
-      "claim_status": "unclaimed",
-      "authorship_claimed": false
+      "authorship_proof_present": true,
+      "authorship_proof_method": "public_key_signature",
+      "authorship_algorithm": "ed25519",
+      "authorship_public_key_sha256": "a77fcbcc988c2190b4966b1f83c8b589632b2828135ee52d499eac0499259e46",
+      "authorship_payload_sha256": "3ed970c69f9f3ac1d932cc2546fa81720a561abc2af166726af16042bd1e8571",
+      "authorship_signature_verified": true,
+      "claim_status": "claimed",
+      "authorship_claimed": true,
+      "authorship_key_verified": true
     }
   ]
 }

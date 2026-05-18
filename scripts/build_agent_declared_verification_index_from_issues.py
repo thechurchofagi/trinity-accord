@@ -87,6 +87,14 @@ EXTRA_FIELDS = [
     "agent_readback_present",
     "agent_readback_char_count",
     "agent_readback_sha256",
+    "authorship_claim_protocol",
+    "authorship_proof_present",
+    "authorship_proof_method",
+    "authorship_algorithm",
+    "authorship_public_key_sha256",
+    "authorship_payload_sha256",
+    "authorship_signature_verified",
+    "claim_status",
 ]
 
 # Label patterns that indicate test records

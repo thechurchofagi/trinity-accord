@@ -3,7 +3,7 @@ name: Rebuild Agent-Declared Verification Index
 on:
   # Trigger when an issue is closed (completed or not)
   issues:
-    types: [closed]
+    types: [closed, labeled]
   # Allow manual trigger
   workflow_dispatch:
     inputs:
@@ -61,12 +61,27 @@ jobs:
         if: github.event_name == 'issues'
         env:
           ACTION: ${{ github.event.action }}
+          LABEL_NAME: ${{ github.event.label.name }}
         run: |
           set -euo pipefail
-          if [ "$ACTION" != "closed" ]; then
-            echo "Only closed issue events may rebuild the agent-declared index."
-            exit 1
+          if [ "$ACTION" = "closed" ]; then
+            echo "Issue closed — rebuilding index."
+            exit 0
           fi
+          if [ "$ACTION" = "labeled" ]; then
+            case "$LABEL_NAME" in
+              authorship:claimed|authorship:key-verified)
+                echo "Authorship label '$LABEL_NAME' added — rebuilding index."
+                exit 0
+                ;;
+              *)
+                echo "Label '$LABEL_NAME' is not an authorship label — skipping rebuild."
+                exit 1
+                ;;
+            esac
+          fi
+          echo "Unsupported issue action: $ACTION — only closed and authorship labeled events may rebuild the agent-declared index."
+          exit 1
 
       - name: Checkout
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
