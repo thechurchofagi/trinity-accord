@@ -822,3 +822,12 @@ jobs:
 
       - name: Test pure echo guidance
         run: python3 scripts/test_agent_submit_pure_echo_guidance.py
+
+      - name: Test authorship claim endpoint runtime safety
+        run: python3 scripts/test_authorship_claim_endpoint_runtime_safety.py
+
+      - name: Test authorship claim message helpers
+        run: python3 scripts/test_authorship_claim_message_helpers.py
+
+      - name: Test V4 plus machine schema regression
+        run: python3 scripts/test_v4_plus_machine_schema_regression.py

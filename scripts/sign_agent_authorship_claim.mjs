@@ -12,7 +12,7 @@ const messagePath = arg("--message");
 const privateKeyPath = arg("--private-key");
 const outPath = arg("--out");
 
-const message = readFileSync(messagePath, "utf8");
+const message = readFileSync(messagePath, "utf8").trimEnd();
 const privateKeyPem = readFileSync(privateKeyPath, "utf8");
 const sig = sign(null, Buffer.from(message, "utf8"), privateKeyPem).toString("base64");
 

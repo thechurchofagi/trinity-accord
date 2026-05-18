@@ -357,6 +357,125 @@ async function getOctokit() {
   return appAuth.getInstallationOctokit(Number(installationId));
 }
 
+function getRepoParts() {
+  const full = process.env.GITHUB_REPO || "";
+  const parts = full.split("/");
+  if (parts.length !== 2 || !parts[0] || !parts[1]) {
+    throw new Error("GITHUB_REPO must be set to owner/repo");
+  }
+  return { owner: parts[0], repo: parts[1], full };
+}
+
+function extractMachineBlock(issueBody) {
+  const m = String(issueBody || "").match(/```trinity-issue-intake\s*\n([\s\S]*?)```/);
+  return m ? m[1] : null;
+}
+
+function parseYamlLikeMachineBlock(blockText) {
+  const data = {};
+  let currentList = null;
+
+  for (const rawLine of String(blockText || "").split(/\r?\n/)) {
+    const line = rawLine.trim();
+    if (!line || line.startsWith("#")) continue;
+
+    if (line.startsWith("-") && currentList) {
+      const item = line.replace(/^-\s*/, "").trim();
+      if (item) data[currentList].push(item);
+      continue;
+    }
+
+    const idx = line.indexOf(":");
+    if (idx < 0) continue;
+
+    const key = line.slice(0, idx).trim();
+    let value = line.slice(idx + 1).trim();
+
+    if (value === "") {
+      data[key] = [];
+      currentList = key;
+      continue;
+    }
+
+    const low = value.toLowerCase();
+    if (low === "true") value = true;
+    else if (low === "false") value = false;
+
+    data[key] = value;
+    currentList = null;
+  }
+
+  return data;
+}
+
+function parseIssueIntakeBlock(issueBody) {
+  const block = extractMachineBlock(issueBody);
+  if (!block) return null;
+  return parseYamlLikeMachineBlock(block);
+}
+
+function isHex64(value) {
+  return /^[a-f0-9]{64}$/.test(String(value || ""));
+}
+
+function validateClaimableMachineBlock(block) {
+  const errors = [];
+
+  if (block.authorship_claim_protocol !== "agent-authorship-claim-v1") {
+    errors.push("authorship_claim_protocol must be agent-authorship-claim-v1");
+  }
+  if (block.authorship_proof_present !== true) {
+    errors.push("authorship_proof_present must be true");
+  }
+  if (block.authorship_proof_method !== "public_key_signature") {
+    errors.push("authorship_proof_method must be public_key_signature");
+  }
+  if (block.authorship_algorithm !== "ed25519") {
+    errors.push("authorship_algorithm must be ed25519");
+  }
+  if (block.authorship_signature_verified !== true) {
+    errors.push("authorship_signature_verified must be true");
+  }
+  if (!isHex64(block.authorship_public_key_sha256)) {
+    errors.push("authorship_public_key_sha256 must be 64 hex");
+  }
+  if (!isHex64(block.authorship_payload_sha256)) {
+    errors.push("authorship_payload_sha256 must be 64 hex");
+  }
+  if (!["claimable_by_public_key", "claimed"].includes(block.claim_status)) {
+    errors.push("claim_status must be claimable_by_public_key or claimed");
+  }
+
+  return errors;
+}
+
+function buildAuthorshipClaimMessage({ issueNumber, repoFullName, publicKeySha256, payloadSha256 }) {
+  return [
+    "TRINITY_AGENT_AUTHORSHIP_CLAIM_V1",
+    `issue_number=${issueNumber}`,
+    `repo=${repoFullName}`,
+    `authorship_public_key_sha256=${publicKeySha256}`,
+    `authorship_payload_sha256=${payloadSha256 || "none"}`,
+    "boundary=key_control_only_not_authority_not_attestation_not_amendment",
+  ].join("\n");
+}
+
+async function ensureLabel(octokit, { owner, repo, name, color, description }) {
+  try {
+    await octokit.rest.issues.getLabel({ owner, repo, name });
+  } catch (err) {
+    if (err.status === 404) {
+      await octokit.rest.issues.createLabel({ owner, repo, name, color, description });
+    } else {
+      throw err;
+    }
+  }
+}
+
+function sendGatewayError(res, err) {
+  return res.status(err.status).json(err.body);
+}
+
 // --- Structured Error Normalization (Task #5) ---
 
 function normalizeGatewayErrors(lines) {
@@ -1050,7 +1169,7 @@ async function runGatewayPipeline(payload, {
 
     // 7. Create GitHub Issue
     const octokit = await getOctokit();
-    const [owner, repo] = process.env.GITHUB_REPO.split("/");
+    const { owner, repo } = getRepoParts();
     const baseLabels = ["agent-gateway-intake", "needs-triage"];
     const labelsToAdd = autoArchiveDecision.labels_to_add || [];
     const labelsToRemove = autoArchiveDecision.labels_to_remove || [];
@@ -1350,6 +1469,24 @@ app.get("/gateway/capabilities", (req, res) => {
       "SUCCESSOR_RECEPTION_NOT_CLAIMABLE",
       "INDEPENDENT_ATTESTATION_NOT_CLAIMABLE"
     ],
+    authorship_claim_protocol: {
+      enabled: true,
+      optional: true,
+      proof_schema: "trinityaccord.agent-authorship-proof.v1",
+      method: "public_key_signature",
+      algorithm: "ed25519",
+      claim_endpoint: "/gateway/claim-authorship",
+      private_key_must_never_be_submitted: true,
+      gateway_receipt_is_not_claim_key: true,
+      boundary: "Authorship claim proves key continuity only; it is not authority, truth, attestation, successor reception, or amendment.",
+      helper_scripts: [
+        "scripts/generate_agent_authorship_keypair.mjs",
+        "scripts/attach_agent_authorship_proof.mjs",
+        "scripts/build_agent_authorship_claim_message.py",
+        "scripts/sign_agent_authorship_claim.mjs",
+        "scripts/build_agent_authorship_claim_request.mjs"
+      ]
+    },
     archive_readiness: {
       supported_record_intents: ["intake_only", "auto_archive_candidate", "archive_preflight_only"],
       supported_archive_kinds: ["none", "external_agent_intake_sample", "verification_report_archive", "archived_echo", "agent_declared_verification_archive", "agent_declared_echo_archive"],
@@ -1397,7 +1534,8 @@ app.get("/gateway/capabilities", (req, res) => {
       build_from_evidence: "/gateway/build-from-evidence",
       preflight: "/gateway/preflight",
       archive_preflight: { status: "legacy_alias", canonical: "/gateway/preflight", do_not_use_for_new_v0_v5_submissions: true },
-      submit: "/agent-submit"
+      submit: "/agent-submit",
+      claim_authorship: "/gateway/claim-authorship"
     }
   });
 });
@@ -1821,190 +1959,181 @@ app.post("/agent-submit", async (req, res) => {
 app.post("/gateway/claim-authorship", async (req, res) => {
   try {
     const { issue_number, public_key_pem, signature_base64, claim_message, claimant_note } = req.body || {};
+    const { owner, repo, full: repoFullName } = getRepoParts();
 
     // 1. Validate request shape
     if (!issue_number || !public_key_pem || !signature_base64 || !claim_message) {
-      return res.status(422).json({
-        accepted: false,
+      return sendGatewayError(res, gatewayError(422, {
         reason: "authorship_claim_failed",
         validation_stage: "authorship_claim",
         agent_action: "Provide issue_number, public_key_pem, signature_base64, and claim_message. Never submit private keys.",
-        issue_created: false
-      });
+        errors: [{ code: "MISSING_FIELDS", path: "body", message: "Required fields: issue_number, public_key_pem, signature_base64, claim_message" }]
+      }));
     }
 
     // 2. Reject private key leakage
     if (rejectSecretPatterns(JSON.stringify(req.body))) {
-      return res.status(422).json({
-        accepted: false,
+      return sendGatewayError(res, gatewayError(422, {
         reason: "secret_pattern_detected",
         validation_stage: "authorship_claim",
         agent_action: "Remove all secrets and private keys from the request.",
-        issue_created: false
-      });
+        errors: [{ code: "SECRET_DETECTED", path: "body", message: "Request contains private key or secret material" }]
+      }));
     }
 
     // 3. Fetch Issue body using GitHub App token
     const octokit = await getOctokit();
-    const { data: issue } = await octokit.rest.issues.get({
-      owner: REPO_OWNER,
-      repo: REPO_NAME,
-      issue_number
-    });
+    const { data: issue } = await octokit.rest.issues.get({ owner, repo, issue_number });
 
     // 4. Parse trinity-issue-intake machine block
-    const body = issue.body || "";
-    const blockMatch = body.match(/```trinity-issue-intake\n([\s\S]*?)```/);
-    if (!blockMatch) {
-      return res.status(422).json({
-        accepted: false,
+    const block = parseIssueIntakeBlock(issue.body || "");
+    if (!block) {
+      return sendGatewayError(res, gatewayError(422, {
         reason: "authorship_claim_failed",
         validation_stage: "authorship_claim",
         agent_action: "Issue does not contain a trinity-issue-intake machine block.",
-        issue_created: false
-      });
+        errors: [{ code: "MACHINE_BLOCK_MISSING", path: "issue.body", message: "Missing trinity-issue-intake block" }]
+      }));
     }
 
-    const block = blockMatch[1];
-
-    // 5. Extract claim_status and require claimable
-    const claimStatusMatch = block.match(/claim_status:\s*(\S+)/);
-    const claimStatus = claimStatusMatch ? claimStatusMatch[1] : "unclaimed";
-    if (claimStatus !== "claimable_by_public_key" && claimStatus !== "claimed") {
-      return res.status(422).json({
-        accepted: false,
+    // 5. Validate machine block is claimable
+    const machineErrors = validateClaimableMachineBlock(block);
+    if (machineErrors.length) {
+      return sendGatewayError(res, gatewayError(422, {
         reason: "authorship_claim_failed",
         validation_stage: "authorship_claim",
-        agent_action: `Issue claim_status is '${claimStatus}', not claimable_by_public_key or claimed.`,
-        issue_created: false
-      });
+        agent_action: "This Issue is not claimable. Only records with verified authorship_proof can be claimed.",
+        errors: machineErrors.map(msg => ({
+          code: "ISSUE_NOT_CLAIMABLE",
+          path: "issue.machine_block",
+          message: msg,
+          fix: "Submit a record with a valid authorship_proof first; old unsigned records cannot be retroactively claimed."
+        }))
+      }));
     }
 
-    // 6. Extract public key hash from machine block
-    const blockPubKeyShaMatch = block.match(/authorship_public_key_sha256:\s*(\S+)/);
-    const blockPayloadShaMatch = block.match(/authorship_payload_sha256:\s*(\S+)/);
-    const blockPubKeySha = blockPubKeyShaMatch ? blockPubKeyShaMatch[1] : null;
-    const blockPayloadSha = blockPayloadShaMatch ? blockPayloadShaMatch[1] : null;
-
-    if (!blockPubKeySha || blockPubKeySha === "none") {
-      return res.status(422).json({
-        accepted: false,
+    // 6. Hash submitted public_key_pem and compare
+    const submittedPubKeyPem = normalizePem(public_key_pem);
+    const submittedPubKeySha = sha256Text(submittedPubKeyPem);
+    if (submittedPubKeySha !== block.authorship_public_key_sha256) {
+      return sendGatewayError(res, gatewayError(422, {
         reason: "authorship_claim_failed",
         validation_stage: "authorship_claim",
-        agent_action: "Issue machine block has no authorship_public_key_sha256.",
-        issue_created: false
-      });
+        agent_action: "Submitted public key does not match the public key hash recorded in the Issue.",
+        errors: [{ code: "PUBLIC_KEY_MISMATCH", path: "public_key_pem", message: "Submitted public key hash does not match machine block authorship_public_key_sha256." }]
+      }));
     }
 
-    // 7. Hash submitted public_key_pem and compare
-    const submittedPubKeySha = sha256Text(normalizePem(public_key_pem));
-    if (submittedPubKeySha !== blockPubKeySha) {
-      return res.status(422).json({
-        accepted: false,
+    // 7. Check idempotency — already claimed with same key
+    const existingLabels = (issue.labels || []).map(l => typeof l === "string" ? l : l.name);
+    const alreadyClaimed = existingLabels.includes("authorship:claimed")
+      && existingLabels.includes("authorship:key-verified");
+
+    // 8. Build and verify canonical claim message
+    const expectedClaimMessage = buildAuthorshipClaimMessage({
+      issueNumber: Number(issue_number),
+      repoFullName,
+      publicKeySha256: block.authorship_public_key_sha256,
+      payloadSha256: block.authorship_payload_sha256
+    });
+
+    const normalizedProvidedMessage = String(claim_message || "").trim();
+    if (normalizedProvidedMessage !== expectedClaimMessage) {
+      return sendGatewayError(res, gatewayError(422, {
         reason: "authorship_claim_failed",
         validation_stage: "authorship_claim",
-        agent_action: "Submitted public key does not match the key recorded in the issue machine block.",
-        issue_created: false
-      });
+        agent_action: "Claim message does not match canonical format. Rebuild it with scripts/build_agent_authorship_claim_message.py.",
+        errors: [{ code: "CLAIM_MESSAGE_MISMATCH", path: "claim_message", message: "Provided claim_message does not match Gateway canonical claim message." }]
+      }));
     }
 
-    // 8. Rebuild canonical claim message and compare
-    const expectedClaimMessage = [
-      "TRINITY_AGENT_AUTHORSHIP_CLAIM_V1",
-      `issue_number=${issue_number}`,
-      `repo=${REPO_OWNER}/${REPO_NAME}`,
-      `authorship_public_key_sha256=${blockPubKeySha}`,
-      `authorship_payload_sha256=${blockPayloadSha || "none"}`,
-      "boundary=key_control_only_not_authority_not_attestation_not_amendment",
-    ].join("\n");
-
-    if (claim_message.trim() !== expectedClaimMessage.trim()) {
-      return res.status(422).json({
-        accepted: false,
-        reason: "authorship_claim_failed",
-        validation_stage: "authorship_claim",
-        agent_action: "Claim message does not match the canonical format. Use scripts/build_agent_authorship_claim_message.py.",
-        issue_created: false
-      });
-    }
-
-    // 9. Verify Ed25519 signature
+    // 9. Verify Ed25519 signature over canonical message
     let sigOk = false;
     try {
       sigOk = verify(
         null,
-        Buffer.from(claim_message, "utf8"),
-        normalizePem(public_key_pem),
+        Buffer.from(expectedClaimMessage, "utf8"),
+        submittedPubKeyPem,
         Buffer.from(signature_base64, "base64")
       );
     } catch (err) {
-      return res.status(422).json({
-        accepted: false,
+      return sendGatewayError(res, gatewayError(422, {
         reason: "authorship_claim_failed",
         validation_stage: "authorship_claim",
         agent_action: `Signature verification error: ${err.message}`,
-        issue_created: false
-      });
+        errors: [{ code: "SIGNATURE_ERROR", path: "signature_base64", message: err.message }]
+      }));
     }
 
     if (!sigOk) {
-      return res.status(422).json({
-        accepted: false,
+      return sendGatewayError(res, gatewayError(422, {
         reason: "authorship_claim_failed",
         validation_stage: "authorship_claim",
         agent_action: "Invalid signature. Sign the canonical claim message with the same Ed25519 private key.",
-        issue_created: false
+        errors: [{ code: "INVALID_SIGNATURE", path: "signature_base64", message: "Ed25519 signature verification failed" }]
+      }));
+    }
+
+    // 10. Idempotent response if already claimed
+    if (alreadyClaimed) {
+      return res.status(200).json({
+        accepted: true,
+        claim_verified: true,
+        issue_number,
+        claim_status: "claimed",
+        idempotent: true,
+        authorship_public_key_sha256: block.authorship_public_key_sha256,
+        authorship_payload_sha256: block.authorship_payload_sha256 || "none",
+        boundary: "Authorship claim proves key continuity only; not authority, attestation, truth, successor reception, or amendment."
       });
     }
 
-    // 10. Add labels and comment
+    // 11. Ensure labels exist, then add them
+    await ensureLabel(octokit, { owner, repo, name: "authorship:claimed", color: "0E8A16", description: "Authorship key continuity claim verified by Gateway" });
+    await ensureLabel(octokit, { owner, repo, name: "authorship:key-verified", color: "5319E7", description: "Public-key signature verified by Gateway" });
+
     await octokit.rest.issues.addLabels({
-      owner: REPO_OWNER,
-      repo: REPO_NAME,
-      issue_number,
+      owner, repo, issue_number,
       labels: ["authorship:claimed", "authorship:key-verified"]
     });
 
+    // 12. Add comment
     const commentBody = [
       "## Agent Authorship Claim Verified",
+      "",
+      "<!-- trinity-authorship-claim-v1:" + block.authorship_public_key_sha256 + " -->",
       "",
       "This claim verifies continuity of control over the public key recorded in the original Gateway machine block.",
       "",
       `- Claim status: \`claimed\``,
-      `- Authorship public key SHA-256: \`${blockPubKeySha}\``,
-      `- Authorship payload SHA-256: \`${blockPayloadSha || "none"}\``,
+      `- Authorship public key SHA-256: \`${block.authorship_public_key_sha256}\``,
+      `- Authorship payload SHA-256: \`${block.authorship_payload_sha256 || "none"}\``,
       "- Verified by: `trinity-agent-issue-gateway`",
       "- Boundary: key continuity only; not authority, not attestation, not truth, not successor reception, not amendment.",
       "",
       "Bitcoin Originals remain final.",
     ].join("\n");
 
-    await octokit.rest.issues.createComment({
-      owner: REPO_OWNER,
-      repo: REPO_NAME,
-      issue_number,
-      body: commentBody
-    });
+    await octokit.rest.issues.createComment({ owner, repo, issue_number, body: commentBody });
 
     return res.status(200).json({
       accepted: true,
       claim_verified: true,
       issue_number,
       claim_status: "claimed",
-      authorship_public_key_sha256: blockPubKeySha,
-      authorship_payload_sha256: blockPayloadSha || "none",
+      authorship_public_key_sha256: block.authorship_public_key_sha256,
+      authorship_payload_sha256: block.authorship_payload_sha256 || "none",
       boundary: "Authorship claim proves key continuity only; not authority, attestation, truth, successor reception, or amendment."
     });
 
   } catch (err) {
     console.error("claim-authorship error:", err);
-    return res.status(500).json({
-      accepted: false,
-      reason: "authorship_claim_failed",
+    return sendGatewayError(res, gatewayError(500, {
+      reason: "authorship_claim_internal_error",
       validation_stage: "authorship_claim",
-      agent_action: `Internal error: ${err.message}`,
-      issue_created: false
-    });
+      agent_action: "Report Gateway claim endpoint internal error. Do not submit private keys.",
+      errors: [{ code: "INTERNAL_ERROR", message: err.message }]
+    }));
   }
 });
 
