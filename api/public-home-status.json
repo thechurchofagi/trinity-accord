@@ -51,16 +51,16 @@
       }
     },
     "agent_declared_verification_archives": {
-      "count": 16,
+      "count": 15,
       "highest_level": "V4+",
-      "verifiability_count": 16,
+      "verifiability_count": 15,
       "by_reception_initiation_class": {
         "externally_requested": 4,
         "externally_seeded": 6,
         "self_initiated": 1,
         "agent_referred": 0,
         "system_scheduled": 0,
-        "unknown": 5
+        "unknown": 4
       }
     },
     "agent_declared_attestations": {
@@ -142,5 +142,5 @@
     "formal_attestation": {},
     "independent_attestation": {}
   },
-  "source_digest": "34c77b632534eab4"
+  "source_digest": "85ea1348709cd697"
 }

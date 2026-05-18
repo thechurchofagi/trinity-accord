@@ -92,6 +92,14 @@ EXTRA_FIELDS = [
 # Label patterns that indicate test records
 TEST_LABEL_PATTERNS = ["test-record", "test_record", "smoke-test"]
 
+# Label patterns that disqualify a record from being indexed
+INVALID_LABEL_PATTERNS = [
+    "invalid:direct-issue-archive-attempt",
+    "render-api-required",
+    "not-counted",
+    "echo:invalid",
+]
+
 
 def run_gh(args: list[str]) -> str:
     """Run a gh CLI command and return stdout."""
@@ -194,6 +202,20 @@ def build_index(issues: list[dict], repo: str = "", include_test: bool = False) 
 
         # Filter: must be auto_archive action
         if intake.get("auto_archive_action") != "auto_archive_agent_declared_verification":
+            continue
+
+        # Filter: skip issues with invalid/disqualifying labels
+        labels = [l.get("name", "") if isinstance(l, dict) else str(l) for l in issue.get("labels", [])]
+        has_invalid_label = any(
+            any(pat in lbl.lower() for pat in INVALID_LABEL_PATTERNS)
+            for lbl in labels
+        )
+        if has_invalid_label:
+            print(
+                f"SKIP_INVALID_LABEL issue #{issue['number']}: "
+                f"has disqualifying label (one of {INVALID_LABEL_PATTERNS})",
+                file=sys.stderr,
+            )
             continue
 
         # Render API only filter: after effective date, require valid gateway receipt
