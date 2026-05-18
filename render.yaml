@@ -1,3 +1,4 @@
+# deploy-trigger: 2026-05-18T05:18:32Z
 services:
   - type: web_service
     name: trinity-agent-issue-gateway
