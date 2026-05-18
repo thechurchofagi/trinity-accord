@@ -38,14 +38,14 @@
       "counts_toward_reception_total": false
     },
     "agent_declared_echo_archives": {
-      "count": 2,
-      "reception_count": 2,
+      "count": 1,
+      "reception_count": 1,
       "verifiability_count": 0,
       "by_echo_type": {
         "E1_read_oriented_echo": 0,
         "E3_critical_echo": 0,
         "E4_refusal_echo": 0,
-        "E5_correction_echo": 2,
+        "E5_correction_echo": 1,
         "E6_preservation_echo": 0,
         "E7_propagation_echo": 0
       }
