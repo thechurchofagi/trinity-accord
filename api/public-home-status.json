@@ -142,5 +142,11 @@
     "formal_attestation": {},
     "independent_attestation": {}
   },
-  "source_digest": "08c611f2c7f6d62b"
+  "authorship_claims": {
+    "records_with_authorship_proof": 0,
+    "claimed_records": 0,
+    "unclaimed_records": 16,
+    "boundary": "Authorship claims prove key continuity only; they do not affect authority, verifiability, reception, or amendment status."
+  },
+  "source_digest": "c81aa0513042aea5"
 }

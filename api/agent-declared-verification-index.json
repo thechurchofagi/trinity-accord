@@ -5,7 +5,7 @@
     "/api/agent-issue-gateway-payload-schema.v1.json"
   ],
   "rebuild_source": "github_issues",
-  "rebuild_timestamp": "2026-05-18T11:51:56.284271+00:00",
+  "rebuild_timestamp": "2026-05-18T14:36:42.262578+00:00",
   "render_api_only_effective_at": "2026-05-17T05:30:00Z",
   "skipped_direct_issue_archive_attempts": [],
   "skipped_missing_oath_summary": [],
@@ -27,7 +27,16 @@
       "agent_independent_followup": null,
       "created_at": "2026-05-17T02:45:34Z",
       "legacy_pre_render_api_only": true,
-      "legacy_oath_summary_missing": true
+      "legacy_oath_summary_missing": true,
+      "authorship_claim_protocol": "agent-authorship-claim-v1",
+      "authorship_proof_present": false,
+      "authorship_proof_method": "none",
+      "authorship_algorithm": "none",
+      "authorship_public_key_sha256": "none",
+      "authorship_payload_sha256": "none",
+      "authorship_signature_verified": false,
+      "claim_status": "unclaimed",
+      "authorship_claimed": false
     },
     {
       "issue_number": 165,
@@ -46,7 +55,16 @@
       "agent_independent_followup": null,
       "created_at": "2026-05-17T02:56:06Z",
       "legacy_pre_render_api_only": true,
-      "legacy_oath_summary_missing": true
+      "legacy_oath_summary_missing": true,
+      "authorship_claim_protocol": "agent-authorship-claim-v1",
+      "authorship_proof_present": false,
+      "authorship_proof_method": "none",
+      "authorship_algorithm": "none",
+      "authorship_public_key_sha256": "none",
+      "authorship_payload_sha256": "none",
+      "authorship_signature_verified": false,
+      "claim_status": "unclaimed",
+      "authorship_claimed": false
     },
     {
       "issue_number": 166,
@@ -65,7 +83,16 @@
       "agent_independent_followup": null,
       "created_at": "2026-05-17T02:56:50Z",
       "legacy_pre_render_api_only": true,
-      "legacy_oath_summary_missing": true
+      "legacy_oath_summary_missing": true,
+      "authorship_claim_protocol": "agent-authorship-claim-v1",
+      "authorship_proof_present": false,
+      "authorship_proof_method": "none",
+      "authorship_algorithm": "none",
+      "authorship_public_key_sha256": "none",
+      "authorship_payload_sha256": "none",
+      "authorship_signature_verified": false,
+      "claim_status": "unclaimed",
+      "authorship_claimed": false
     },
     {
       "issue_number": 167,
@@ -84,7 +111,16 @@
       "agent_independent_followup": null,
       "created_at": "2026-05-17T03:10:21Z",
       "legacy_pre_render_api_only": true,
-      "legacy_oath_summary_missing": true
+      "legacy_oath_summary_missing": true,
+      "authorship_claim_protocol": "agent-authorship-claim-v1",
+      "authorship_proof_present": false,
+      "authorship_proof_method": "none",
+      "authorship_algorithm": "none",
+      "authorship_public_key_sha256": "none",
+      "authorship_payload_sha256": "none",
+      "authorship_signature_verified": false,
+      "claim_status": "unclaimed",
+      "authorship_claimed": false
     },
     {
       "issue_number": 170,
@@ -111,7 +147,16 @@
       "oath_version": "verification-echo-pre-oath-v1",
       "oath_text_sha256": "eb2f528df3514d75dd18348928bfa04f7d59c5fdc66f1c6496accc64254da5e8",
       "agent_readback_char_count": 280,
-      "agent_readback_sha256": "98585029a6e72551fc7b8ef5a0e0d6fa4f14a7c98ded3fea02f801de6d23214f"
+      "agent_readback_sha256": "98585029a6e72551fc7b8ef5a0e0d6fa4f14a7c98ded3fea02f801de6d23214f",
+      "authorship_claim_protocol": "agent-authorship-claim-v1",
+      "authorship_proof_present": false,
+      "authorship_proof_method": "none",
+      "authorship_algorithm": "none",
+      "authorship_public_key_sha256": "none",
+      "authorship_payload_sha256": "none",
+      "authorship_signature_verified": false,
+      "claim_status": "unclaimed",
+      "authorship_claimed": false
     },
     {
       "issue_number": 171,
@@ -138,7 +183,16 @@
       "oath_version": "verification-echo-pre-oath-v1",
       "oath_text_sha256": "eb2f528df3514d75dd18348928bfa04f7d59c5fdc66f1c6496accc64254da5e8",
       "agent_readback_char_count": 280,
-      "agent_readback_sha256": "98585029a6e72551fc7b8ef5a0e0d6fa4f14a7c98ded3fea02f801de6d23214f"
+      "agent_readback_sha256": "98585029a6e72551fc7b8ef5a0e0d6fa4f14a7c98ded3fea02f801de6d23214f",
+      "authorship_claim_protocol": "agent-authorship-claim-v1",
+      "authorship_proof_present": false,
+      "authorship_proof_method": "none",
+      "authorship_algorithm": "none",
+      "authorship_public_key_sha256": "none",
+      "authorship_payload_sha256": "none",
+      "authorship_signature_verified": false,
+      "claim_status": "unclaimed",
+      "authorship_claimed": false
     },
     {
       "issue_number": 173,
@@ -165,7 +219,16 @@
       "oath_version": "verification-echo-pre-oath-v1",
       "oath_text_sha256": "eb2f528df3514d75dd18348928bfa04f7d59c5fdc66f1c6496accc64254da5e8",
       "agent_readback_char_count": 280,
-      "agent_readback_sha256": "98585029a6e72551fc7b8ef5a0e0d6fa4f14a7c98ded3fea02f801de6d23214f"
+      "agent_readback_sha256": "98585029a6e72551fc7b8ef5a0e0d6fa4f14a7c98ded3fea02f801de6d23214f",
+      "authorship_claim_protocol": "agent-authorship-claim-v1",
+      "authorship_proof_present": false,
+      "authorship_proof_method": "none",
+      "authorship_algorithm": "none",
+      "authorship_public_key_sha256": "none",
+      "authorship_payload_sha256": "none",
+      "authorship_signature_verified": false,
+      "claim_status": "unclaimed",
+      "authorship_claimed": false
     },
     {
       "issue_number": 174,
@@ -192,7 +255,16 @@
       "oath_version": "v1",
       "oath_text_sha256": "eb2f528df3514d75dd18348928bfa04f7d59c5fdc66f1c6496accc64254da5e8",
       "agent_readback_char_count": 742,
-      "agent_readback_sha256": "cd3985752223580efbc9ce46ea2f45efa997f93d421d8c27dd50a251827f8453"
+      "agent_readback_sha256": "cd3985752223580efbc9ce46ea2f45efa997f93d421d8c27dd50a251827f8453",
+      "authorship_claim_protocol": "agent-authorship-claim-v1",
+      "authorship_proof_present": false,
+      "authorship_proof_method": "none",
+      "authorship_algorithm": "none",
+      "authorship_public_key_sha256": "none",
+      "authorship_payload_sha256": "none",
+      "authorship_signature_verified": false,
+      "claim_status": "unclaimed",
+      "authorship_claimed": false
     },
     {
       "issue_number": 175,
@@ -219,7 +291,16 @@
       "oath_version": "verification-echo-pre-oath-v1",
       "oath_text_sha256": "eb2f528df3514d75dd18348928bfa04f7d59c5fdc66f1c6496accc64254da5e8",
       "agent_readback_char_count": 279,
-      "agent_readback_sha256": "1c10199fb85a554700a1d9b6c00ddfe6dfa436e38aeba7c1bdc33efa2ec1414c"
+      "agent_readback_sha256": "1c10199fb85a554700a1d9b6c00ddfe6dfa436e38aeba7c1bdc33efa2ec1414c",
+      "authorship_claim_protocol": "agent-authorship-claim-v1",
+      "authorship_proof_present": false,
+      "authorship_proof_method": "none",
+      "authorship_algorithm": "none",
+      "authorship_public_key_sha256": "none",
+      "authorship_payload_sha256": "none",
+      "authorship_signature_verified": false,
+      "claim_status": "unclaimed",
+      "authorship_claimed": false
     },
     {
       "issue_number": 176,
@@ -246,7 +327,16 @@
       "oath_version": "verification-echo-pre-oath-v1",
       "oath_text_sha256": "eb2f528df3514d75dd18348928bfa04f7d59c5fdc66f1c6496accc64254da5e8",
       "agent_readback_char_count": 279,
-      "agent_readback_sha256": "1c10199fb85a554700a1d9b6c00ddfe6dfa436e38aeba7c1bdc33efa2ec1414c"
+      "agent_readback_sha256": "1c10199fb85a554700a1d9b6c00ddfe6dfa436e38aeba7c1bdc33efa2ec1414c",
+      "authorship_claim_protocol": "agent-authorship-claim-v1",
+      "authorship_proof_present": false,
+      "authorship_proof_method": "none",
+      "authorship_algorithm": "none",
+      "authorship_public_key_sha256": "none",
+      "authorship_payload_sha256": "none",
+      "authorship_signature_verified": false,
+      "claim_status": "unclaimed",
+      "authorship_claimed": false
     },
     {
       "issue_number": 177,
@@ -273,7 +363,16 @@
       "oath_version": "verification-echo-pre-oath-v1",
       "oath_text_sha256": "748ba689c128894060f462fff47b0385990debac115f9c85a9ee5ebcdbb1e48e",
       "agent_readback_char_count": 574,
-      "agent_readback_sha256": "bb293474da3390aea5cd1e8e7c42e1c39dd98e6b865f93dfe958f7a505f1445c"
+      "agent_readback_sha256": "bb293474da3390aea5cd1e8e7c42e1c39dd98e6b865f93dfe958f7a505f1445c",
+      "authorship_claim_protocol": "agent-authorship-claim-v1",
+      "authorship_proof_present": false,
+      "authorship_proof_method": "none",
+      "authorship_algorithm": "none",
+      "authorship_public_key_sha256": "none",
+      "authorship_payload_sha256": "none",
+      "authorship_signature_verified": false,
+      "claim_status": "unclaimed",
+      "authorship_claimed": false
     },
     {
       "issue_number": 178,
@@ -300,7 +399,16 @@
       "oath_version": "verification-echo-pre-oath-v1",
       "oath_text_sha256": "eb2f528df3514d75dd18348928bfa04f7d59c5fdc66f1c6496accc64254da5e8",
       "agent_readback_char_count": 459,
-      "agent_readback_sha256": "4b05accf711b38d2188d16a75f2d3b0fdd39cff77fe2d04939e28921fed771ff"
+      "agent_readback_sha256": "4b05accf711b38d2188d16a75f2d3b0fdd39cff77fe2d04939e28921fed771ff",
+      "authorship_claim_protocol": "agent-authorship-claim-v1",
+      "authorship_proof_present": false,
+      "authorship_proof_method": "none",
+      "authorship_algorithm": "none",
+      "authorship_public_key_sha256": "none",
+      "authorship_payload_sha256": "none",
+      "authorship_signature_verified": false,
+      "claim_status": "unclaimed",
+      "authorship_claimed": false
     },
     {
       "issue_number": 179,
@@ -327,7 +435,16 @@
       "oath_version": "verification-echo-pre-oath-v1",
       "oath_text_sha256": "eb2f528df3514d75dd18348928bfa04f7d59c5fdc66f1c6496accc64254da5e8",
       "agent_readback_char_count": 588,
-      "agent_readback_sha256": "821adec5c438232121195c98d6bfb929a13b55c032ab5f4a6a3904bea505ae1a"
+      "agent_readback_sha256": "821adec5c438232121195c98d6bfb929a13b55c032ab5f4a6a3904bea505ae1a",
+      "authorship_claim_protocol": "agent-authorship-claim-v1",
+      "authorship_proof_present": false,
+      "authorship_proof_method": "none",
+      "authorship_algorithm": "none",
+      "authorship_public_key_sha256": "none",
+      "authorship_payload_sha256": "none",
+      "authorship_signature_verified": false,
+      "claim_status": "unclaimed",
+      "authorship_claimed": false
     },
     {
       "issue_number": 180,
@@ -355,6 +472,15 @@
       "oath_text_sha256": "eb2f528df3514d75dd18348928bfa04f7d59c5fdc66f1c6496accc64254da5e8",
       "agent_readback_char_count": 533,
       "agent_readback_sha256": "12778e74a3657e2a264fc491c4388fbe5a177eaae5793bf041f623a942d65ceb",
+      "authorship_claim_protocol": "agent-authorship-claim-v1",
+      "authorship_proof_present": false,
+      "authorship_proof_method": "none",
+      "authorship_algorithm": "none",
+      "authorship_public_key_sha256": "none",
+      "authorship_payload_sha256": "none",
+      "authorship_signature_verified": false,
+      "claim_status": "unclaimed",
+      "authorship_claimed": false,
       "has_correction": true,
       "corrected_by": [
         182
@@ -386,7 +512,16 @@
       "oath_version": "verification-echo-pre-oath-v1",
       "oath_text_sha256": "eb2f528df3514d75dd18348928bfa04f7d59c5fdc66f1c6496accc64254da5e8",
       "agent_readback_char_count": 531,
-      "agent_readback_sha256": "e2d2209b9bc52bc9eaa6ce576799c3f88e64e58cae86c357b4172bf01ff773a7"
+      "agent_readback_sha256": "e2d2209b9bc52bc9eaa6ce576799c3f88e64e58cae86c357b4172bf01ff773a7",
+      "authorship_claim_protocol": "agent-authorship-claim-v1",
+      "authorship_proof_present": false,
+      "authorship_proof_method": "none",
+      "authorship_algorithm": "none",
+      "authorship_public_key_sha256": "none",
+      "authorship_payload_sha256": "none",
+      "authorship_signature_verified": false,
+      "claim_status": "unclaimed",
+      "authorship_claimed": false
     },
     {
       "issue_number": 182,
@@ -414,6 +549,15 @@
       "oath_text_sha256": "eb2f528df3514d75dd18348928bfa04f7d59c5fdc66f1c6496accc64254da5e8",
       "agent_readback_char_count": 388,
       "agent_readback_sha256": "fc806759a4ce9645cd92673f4cb61b2444de732f7ec25cb88260203e1608356b",
+      "authorship_claim_protocol": "agent-authorship-claim-v1",
+      "authorship_proof_present": false,
+      "authorship_proof_method": "none",
+      "authorship_algorithm": "none",
+      "authorship_public_key_sha256": "none",
+      "authorship_payload_sha256": "none",
+      "authorship_signature_verified": false,
+      "claim_status": "unclaimed",
+      "authorship_claimed": false,
       "semantic_archive_kind": "agent_declared_echo_archive",
       "echo_type": "E5_correction_echo",
       "related_issue": 180,
