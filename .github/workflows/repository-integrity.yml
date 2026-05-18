@@ -798,3 +798,27 @@ jobs:
 
       - name: Test release manifest asset metadata
         run: python3 scripts/test_release_manifest_assets.py
+
+      - name: Test preflight submit render mode consistency
+        run: python3 scripts/test_preflight_submit_render_mode_consistency.py
+
+      - name: Test server-generated field error policy
+        run: python3 scripts/test_server_generated_field_error_policy.py
+
+      - name: Test preflight error decision table
+        run: python3 scripts/test_preflight_error_decision_table.py
+
+      - name: Test agent-declared echo archive schema
+        run: python3 scripts/test_agent_declared_echo_archive_schema.py
+
+      - name: Test agent-declared echo archive pipeline
+        run: python3 scripts/test_agent_declared_echo_archive_pipeline.py
+
+      - name: Test pure echo not verifiability
+        run: python3 scripts/test_pure_echo_not_verifiability.py
+
+      - name: Test issue 180 182 semantic classification
+        run: python3 scripts/test_issue_180_182_semantic_classification.py
+
+      - name: Test pure echo guidance
+        run: python3 scripts/test_agent_submit_pure_echo_guidance.py
