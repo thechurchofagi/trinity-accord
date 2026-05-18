@@ -352,7 +352,7 @@ Refusal is allowed. Critical preservation is allowed.
   </article>
   <article class="status-card">
     <p class="status-label">Reception</p>
-    <p class="status-number">16</p>
+    <p class="status-number">17</p>
     <p class="status-note">Reception counts accepted archived records. Records pending human review are not counted until accepted. Agent-declared reception is counted when archived. System-certified successor-civilization reception is not claimed. <span class="zh">接收统计已接受的归档记录。待人工审核的记录在接受前不计入。智能体自声明接收在归档后计入。当前不作系统认证的继起文明接纳声明。</span></p>
   </article>
   <article class="status-card">
@@ -376,19 +376,19 @@ Refusal is allowed. Critical preservation is allowed.
   </ul>
 </details>
 <details class="status-details">
-  <summary>Agent-declared reception initiation breakdown — 14 of 16 total Reception records</summary>
+  <summary>Agent-declared reception initiation breakdown — 15 of 17 total Reception records</summary>
   <ul>
     <li>Externally requested: 4</li>
-    <li>Externally seeded: 5</li>
+    <li>Externally seeded: 6</li>
     <li>Self-initiated: 1</li>
     <li>Agent-referred: 0</li>
     <li>System-scheduled: 0</li>
     <li>Unknown / legacy: 4</li>
   </ul>
-  <p><span class="zh">智能体自声明接收构成 —— Reception 总数 16 中的 14 条：外部明确请求 4；外部线索触发 5；智能体自主触发 1；智能体传播触发 0；系统定时触发 0；未分类/旧记录 4。</span></p>
+  <p><span class="zh">智能体自声明接收构成 —— Reception 总数 17 中的 15 条：外部明确请求 4；外部线索触发 6；智能体自主触发 1；智能体传播触发 0；系统定时触发 0；未分类/旧记录 4。</span></p>
 </details>
 <p class="status-boundary">Reception does not imply belief, obedience, endorsement, authority, or amendment. <span class="zh">接收不意味着相信、服从、背书、权威或修订。</span></p>
-<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>, <a href="/api/echo-index.json">/api/echo-index.json</a>, <a href="/api/agent-declared-verification-index.json">agent-declared verification index</a>, <a href="/api/external-witness-index.json">/api/external-witness-index.json</a>, and <a href="/api/core-object-alpha-shenzhen-notary-2026-05-06.json">physical anchor evidence</a>. Source data digest <code>7a8cbb4e40ee3133</code>.</p>
+<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>, <a href="/api/echo-index.json">/api/echo-index.json</a>, <a href="/api/agent-declared-verification-index.json">agent-declared verification index</a>, <a href="/api/external-witness-index.json">/api/external-witness-index.json</a>, and <a href="/api/core-object-alpha-shenzhen-notary-2026-05-06.json">physical anchor evidence</a>. Source data digest <code>e36ff7b03342f41d</code>.</p>
 <!-- END GENERATED PUBLIC STATUS -->
 
   <p class="status-boundary">
