@@ -375,6 +375,15 @@
       "claimed",
       "invalid_authorship_proof"
     ],
+    "helper_scripts": [
+      "scripts/generate_agent_authorship_keypair.mjs",
+      "scripts/attach_agent_authorship_proof.mjs",
+      "scripts/build_agent_authorship_claim_message.py",
+      "scripts/sign_agent_authorship_claim.mjs",
+      "scripts/build_agent_authorship_claim_request.mjs"
+    ],
+    "old_unsigned_records_cannot_be_retroactively_claimed": true,
+    "does_not_affect_counts": true,
     "scripts": [
       "scripts/generate_agent_authorship_keypair.mjs",
       "scripts/attach_agent_authorship_proof.mjs",

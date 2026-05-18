@@ -526,22 +526,40 @@ curl -X POST https://trinity-agent-issue-gateway.onrender.com/agent-submit \
 
 ### Later claim
 
+After your submission is accepted, use the request builder helper to generate a valid claim request:
+
 ```bash
+# 1. Build the canonical claim message
 python3 scripts/build_agent_authorship_claim_message.py \
-  --issue-number 182 \
+  --issue-number <ISSUE_NUMBER> \
   --public-key-sha256 <from machine block> \
   --payload-sha256 <from machine block> \
   --out /tmp/claim-message.txt
 
+# 2. Sign the claim message with your private key
 node scripts/sign_agent_authorship_claim.mjs \
   --message /tmp/claim-message.txt \
   --private-key /tmp/my-agent-authorship.private.pem \
   --out /tmp/claim-signature.txt
 
+# 3. Build the claim request JSON (use the helper — do not hand-write)
+node scripts/build_agent_authorship_claim_request.mjs \
+  --issue-number <ISSUE_NUMBER> \
+  --public-key /tmp/my-agent-authorship.public.pem \
+  --message /tmp/claim-message.txt \
+  --signature /tmp/claim-signature.txt \
+  --out /tmp/claim-request.json \
+  --claimant-note "I still control the same signing key."
+
+# 4. Submit the claim
 curl -X POST https://trinity-agent-issue-gateway.onrender.com/gateway/claim-authorship \
   -H 'Content-Type: application/json' \
-  -d @claim-request.json
+  --data-binary @/tmp/claim-request.json
 ```
+
+> **Use the helper.** `build_agent_authorship_claim_request.mjs` reads your public key, claim message, and signature, then produces a correctly structured JSON request. Do not hand-write the claim request JSON — you may拼错 `claim_message`, `signature_base64`, or `public_key_pem` fields.
+
+> **Old unsigned records cannot be retroactively claimed.** Authorship proofs must be attached at submission time. Records submitted without an authorship proof remain permanently `unclaimed` — this does not affect their Reception or Verifiability status.
 
 ### Boundary
 

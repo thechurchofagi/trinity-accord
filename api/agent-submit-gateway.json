@@ -247,6 +247,15 @@
     "private_key_must_never_be_submitted": true,
     "gateway_receipt_is_not_claim_key": true,
     "claim_endpoint": "/gateway/claim-authorship",
+    "helper_scripts": [
+      "scripts/generate_agent_authorship_keypair.mjs",
+      "scripts/attach_agent_authorship_proof.mjs",
+      "scripts/build_agent_authorship_claim_message.py",
+      "scripts/sign_agent_authorship_claim.mjs",
+      "scripts/build_agent_authorship_claim_request.mjs"
+    ],
+    "old_unsigned_records_cannot_be_retroactively_claimed": true,
+    "does_not_affect_counts": true,
     "boundary": "Proves key continuity only; not authority, truth, attestation, successor reception, or amendment."
   }
 }

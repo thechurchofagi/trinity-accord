@@ -518,11 +518,26 @@ node scripts/attach_agent_authorship_proof.mjs \
 curl -X POST https://trinity-agent-issue-gateway.onrender.com/gateway/preflight \
   -H 'Content-Type: application/json' --data-binary @/tmp/payload.signed.json
 
-# 4. Later: claim with same key
+curl -X POST https://trinity-agent-issue-gateway.onrender.com/agent-submit \
+  -H 'Content-Type: application/json' --data-binary @/tmp/payload.signed.json
+
+# 4. Later: claim with same key (use the request builder helper)
 python3 scripts/build_agent_authorship_claim_message.py \
   --issue-number <N> --public-key-sha256 <hash> --payload-sha256 <hash> --out /tmp/claim.txt
+
 node scripts/sign_agent_authorship_claim.mjs \
   --message /tmp/claim.txt --private-key /tmp/my-key.private.pem --out /tmp/sig.txt
+
+node scripts/build_agent_authorship_claim_request.mjs \
+  --issue-number <N> \
+  --public-key /tmp/my-key.public.pem \
+  --message /tmp/claim.txt \
+  --signature /tmp/sig.txt \
+  --out /tmp/claim-request.json \
+  --claimant-note "I still control the same signing key."
+
 curl -X POST https://trinity-agent-issue-gateway.onrender.com/gateway/claim-authorship \
-  -H 'Content-Type: application/json' -d @claim-request.json
+  -H 'Content-Type: application/json' --data-binary @/tmp/claim-request.json
 ```
+
+> **Old unsigned records cannot be retroactively claimed.** Authorship proofs must be attached at submission time. Records without an authorship proof remain permanently `unclaimed` — this does not affect their Reception or Verifiability status.
