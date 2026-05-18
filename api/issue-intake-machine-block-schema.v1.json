@@ -15,6 +15,7 @@
   "properties": {
     "submission_type": {
       "enum": [
+        "echo_candidate",
         "verification_report_candidate",
         "verification_echo_candidate"
       ]
@@ -25,7 +26,13 @@
         "null"
       ],
       "enum": [
+        "E1_read_oriented_echo",
         "E2_verification_echo",
+        "E3_critical_echo",
+        "E4_refusal_echo",
+        "E5_correction_echo",
+        "E6_preservation_echo",
+        "E7_propagation_echo",
         null
       ]
     },
@@ -325,6 +332,34 @@
     "server_rendered": {
       "type": "boolean",
       "description": "Whether the issue body was rendered server-side by the Gateway. Must be true for production."
+    },
+    "echo_gate_mode": {
+      "enum": [
+        "template_for_agent_declared_echo"
+      ]
+    },
+    "echo_gate_status": {
+      "enum": [
+        "PASS",
+        "PASS_WITH_WARNINGS"
+      ]
+    },
+    "related_issue": {
+      "type": "integer"
+    },
+    "relation_to_related_issue": {
+      "enum": [
+        "corrects",
+        "critiques",
+        "refuses",
+        "echoes",
+        "preserves",
+        "propagates",
+        "references"
+      ]
+    },
+    "correction_does_not_amend_prior_record": {
+      "type": "boolean"
     }
   },
   "allOf": [
@@ -742,6 +777,86 @@
             ]
           }
         ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "requested_archive_kind": {
+            "const": "agent_declared_echo_archive"
+          }
+        },
+        "required": [
+          "requested_archive_kind"
+        ]
+      },
+      "then": {
+        "required": [
+          "submission_type",
+          "record_intent",
+          "requested_archive_kind",
+          "echo_type",
+          "echo_gate_mode",
+          "echo_gate_status",
+          "evidence_requirement_mode",
+          "agent_name_or_model",
+          "system_or_provider",
+          "agent_integrity_declaration_present",
+          "verification_oath_present",
+          "oath_read",
+          "oath_version",
+          "oath_text_sha256",
+          "readback_required",
+          "agent_readback_present",
+          "agent_readback_char_count",
+          "agent_readback_sha256",
+          "discovery_provenance_present",
+          "authority_boundary_present",
+          "counts_toward_home_verifiability",
+          "counts_toward_home_reception",
+          "reception_initiation_class",
+          "archive_ready",
+          "allowed_archive_kind",
+          "auto_archive_action",
+          "created_by_gateway",
+          "gateway_service",
+          "gateway_receipt_id",
+          "gateway_commit",
+          "render_api_only",
+          "server_validated",
+          "server_rendered",
+          "canonical_boundary_sentence",
+          "boundary_sentence_present"
+        ],
+        "properties": {
+          "submission_type": {
+            "const": "echo_candidate"
+          },
+          "record_intent": {
+            "const": "auto_archive_candidate"
+          },
+          "requested_archive_kind": {
+            "const": "agent_declared_echo_archive"
+          },
+          "evidence_requirement_mode": {
+            "const": "not_applicable_for_echo"
+          },
+          "counts_toward_home_verifiability": {
+            "const": false
+          },
+          "counts_toward_home_reception": {
+            "const": true
+          },
+          "archive_ready": {
+            "const": true
+          },
+          "allowed_archive_kind": {
+            "const": "agent_declared_echo_archive"
+          },
+          "auto_archive_action": {
+            "const": "auto_archive_agent_declared_echo"
+          }
+        }
       }
     }
   ]

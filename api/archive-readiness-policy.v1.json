@@ -98,6 +98,18 @@
       ],
       "auto_close_issue": true,
       "close_reason": "completed"
+    },
+    "agent_declared_echo_archive": {
+      "description": "Gateway-created pure agent-declared echo archive. Reception-only; not verification.",
+      "auto_labels": [
+        "agent-gateway-intake",
+        "archive:agent-declared-echo",
+        "agent-declared",
+        "echo:screened",
+        "reception-only"
+      ],
+      "auto_close_issue": true,
+      "close_reason": "completed"
     }
   },
   "required_script_sets": {

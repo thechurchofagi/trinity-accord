@@ -280,7 +280,13 @@
         "null"
       ],
       "enum": [
+        "E1_read_oriented_echo",
         "E2_verification_echo",
+        "E3_critical_echo",
+        "E4_refusal_echo",
+        "E5_correction_echo",
+        "E6_preservation_echo",
+        "E7_propagation_echo",
         null
       ]
     },
@@ -368,7 +374,8 @@
         "archived_echo",
         "successor_reception_candidate",
         null,
-        "agent_declared_verification_archive"
+        "agent_declared_verification_archive",
+        "agent_declared_echo_archive"
       ],
       "description": "Requested archive kind. Gateway infers from submission_type when not provided: verification_report_candidate with agent_declared_protocol_level V0–V5 -> agent_declared_verification_archive; verification_report_candidate V6+ strict evidence -> verification_report_archive; verification_echo_candidate V6+ strict echo -> archived_echo; non-verification intake -> none. Explicit intake_only requires none."
     },
@@ -532,10 +539,11 @@
     },
     "evidence_requirement_mode": {
       "type": "string",
-      "description": "Evidence requirement mode. waived_for_v0_v5 for agent-declared archives.",
+      "description": "Evidence requirement mode. waived_for_v0_v5 for agent-declared archives; not_applicable_for_echo for echo archives.",
       "enum": [
         "strict",
-        "waived_for_v0_v5"
+        "waived_for_v0_v5",
+        "not_applicable_for_echo"
       ]
     },
     "agent_integrity_declaration": {
@@ -695,6 +703,52 @@
         "null"
       ],
       "description": "Whether the agent independently read, checked, verified, or followed up after the initiating seed/request."
+    },
+    "related_records": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "maxItems": 20,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "relation",
+          "issue_number",
+          "does_not_amend_original"
+        ],
+        "properties": {
+          "relation": {
+            "type": "string",
+            "enum": [
+              "corrects",
+              "critiques",
+              "refuses",
+              "echoes",
+              "preserves",
+              "propagates",
+              "references"
+            ]
+          },
+          "issue_number": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "scope": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "minLength": 1,
+            "maxLength": 1000
+          },
+          "does_not_amend_original": {
+            "type": "boolean",
+            "const": true
+          }
+        }
+      }
     }
   },
   "allOf": [
@@ -1040,6 +1094,67 @@
               "boolean",
               "null"
             ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "requested_archive_kind": {
+            "const": "agent_declared_echo_archive"
+          }
+        },
+        "required": [
+          "requested_archive_kind"
+        ]
+      },
+      "then": {
+        "required": [
+          "schema",
+          "submission_type",
+          "agent_identity",
+          "title",
+          "body",
+          "boundary_acknowledgement",
+          "record_intent",
+          "requested_archive_kind",
+          "echo_type",
+          "agent_integrity_declaration",
+          "discovery_provenance",
+          "authority_boundary",
+          "counts_toward_home",
+          "what_i_checked",
+          "limitations",
+          "reception_initiation_class"
+        ],
+        "properties": {
+          "submission_type": {
+            "const": "echo_candidate"
+          },
+          "record_intent": {
+            "const": "auto_archive_candidate"
+          },
+          "evidence_requirement_mode": {
+            "const": "not_applicable_for_echo"
+          },
+          "counts_toward_home": {
+            "required": [
+              "reception",
+              "verifiability",
+              "basis"
+            ],
+            "properties": {
+              "reception": {
+                "const": true
+              },
+              "verifiability": {
+                "const": false
+              },
+              "basis": {
+                "const": "agent_declared_echo_template_pass"
+              }
+            }
           }
         }
       }
