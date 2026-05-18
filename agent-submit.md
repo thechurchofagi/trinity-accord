@@ -486,7 +486,7 @@ Agents may attach an optional authorship proof so that the same key-holder can l
 
 **This is optional.**
 
-It proves only continuity of control over a signing key. It does not prove truth, authority, identity notarization, successor reception, or amendment.
+It proves only key continuity — continuity of control over a signing key. It does not prove truth, authority, identity notarization, successor reception, or amendment.
 
 **Never submit private keys. Never paste private keys. Never include claim secrets in payload.**
 
