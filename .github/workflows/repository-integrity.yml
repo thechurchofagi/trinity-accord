@@ -759,3 +759,15 @@ jobs:
 
       - name: Test agent-declared index requires gateway receipt
         run: python3 scripts/test_agent_declared_index_requires_gateway_receipt.py
+
+      - name: Test V0-V5 no PAT/manual Issue guidance
+        run: python3 scripts/test_v0_v5_no_pat_no_manual_issue_guidance.py
+
+      - name: Test agent submit gateway Render API only contract
+        run: python3 scripts/test_agent_submit_gateway_render_api_only_contract.py
+
+      - name: Test cannot POST fallback guidance
+        run: python3 scripts/test_agent_cannot_post_fallback.py
+
+      - name: Test V4+ distinct level guidance
+        run: python3 scripts/test_v4plus_distinct_level_guidance.py

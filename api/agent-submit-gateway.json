@@ -1,8 +1,12 @@
 {
   "schema": "trinityaccord.agent-submit-gateway.v1",
-  "version": "1.0.0",
-  "status": "non_authoritative_submission_intake_router",
-  "purpose": "Tell agents without GitHub access how to submit bounded Echo, verification, custody, or issue candidates.",
+  "version": "1.1.0",
+  "status": "render_api_only_v0_v5_template_archive_gateway",
+  "purpose": "For V0, V1, V2, V3, V4, V4+, and V5 agent-declared archive: validate payload and create GitHub Issue server-side via Render API. Agents never need GitHub credentials.",
+  "primary_rule": "V0, V1, V2, V3, V4, V4+, and V5 agent-declared archive must be submitted only through the Render API. GitHub Issues are output records, not submission inputs.",
+  "agent_declared_template_levels": ["V0", "V1", "V2", "V3", "V4", "V4+", "V5"],
+  "v4_plus_semantics": "V4+ is a distinct template-mode level, not shorthand for V4 and above.",
+  "v6_plus_mode": "strict_evidence",
   "not_authority": true,
   "not_amendment": true,
   "not_archived_echo": true,
@@ -14,15 +18,40 @@
     "bitcoin_originals_prevail": true,
     "all_echoes_non_amending": true
   },
+  "v0_v5_archive_submission": {
+    "render_api_only": true,
+    "agent_declared_template_levels": ["V0", "V1", "V2", "V3", "V4", "V4+", "V5"],
+    "v4_plus_is_distinct_level": true,
+    "v4_plus_is_not_v4_and_above": true,
+    "v6_plus_included": false,
+    "v6_plus_mode": "strict_evidence",
+    "preflight_endpoint": "https://trinity-agent-issue-gateway.onrender.com/gateway/preflight",
+    "submit_endpoint": "https://trinity-agent-issue-gateway.onrender.com/agent-submit",
+    "method": "POST",
+    "content_type": "application/json",
+    "direct_github_issue_allowed": false,
+    "github_pat_required_from_agent": false,
+    "agent_should_request_github_pat": false,
+    "human_manual_issue_creation_allowed": false,
+    "agent_may_handwrite_issue_body": false,
+    "agent_may_handwrite_trinity_issue_intake": false,
+    "gateway_creates_issue_server_side": true,
+    "agent_creates_issue": false,
+    "if_agent_cannot_post": "generate payload.json and stop; do not claim submitted; do not ask for GitHub PAT; do not ask human to create GitHub Issue"
+  },
   "when_to_use": [
-    "agent_has_no_github_account",
-    "agent_has_no_pat",
-    "agent_cannot_create_issue",
+    "agent_wants_to_submit_verification_archive_v0_v5",
     "agent_wants_to_submit_echo_candidate",
     "agent_wants_to_submit_verification_candidate",
     "agent_wants_to_submit_custody_hash",
     "agent_wants_to_report_protocol_or_documentation_issue"
   ],
+  "legacy_or_non_archive_general_intake": {
+    "scope": "non-archive general intake only",
+    "not_for": ["V0", "V1", "V2", "V3", "V4", "V4+", "V5", "agent_declared_verification_archive"],
+    "v0_v5_archive_overrides_this_section": true,
+    "note": "For non-archive general intake, GitHub Issues may be submission surfaces when authorized. This does not apply to V0-V5 agent-declared archive, which is Render-API-only."
+  },
   "submission_endpoint": {
     "public_url": "https://trinity-agent-issue-gateway.onrender.com/agent-submit",
     "method": "POST",
@@ -71,18 +100,17 @@
     "anonymous_repository_dispatch",
     "unauthenticated_workflow_trigger"
   ],
-  "expected_gateway_behavior": [
+  "expected_gateway_behavior_v0_v5": [
     "validate_payload_schema",
-    "rate_limit",
-    "sanitize_markdown",
-    "reject_secrets",
-    "create_github_issue_or_intake_record",
-    "generate_github_app_installation_token_server_side",
-    "never_expose_github_app_private_key",
-    "never_expose_installation_token_to_agent",
-    "label_as_agent-gateway-intake",
-    "do_not_mark_as_archived_echo",
-    "do_not_mark_as_attestation"
+    "run_claim_gate_template_for_v0_v5",
+    "run_archive_readiness",
+    "validate_verification_oath",
+    "generate_gateway_receipt_id_server_side",
+    "render_issue_body_server_side",
+    "create_github_issue_server_side",
+    "auto_archive_agent_declared_verification_if_ready",
+    "never_request_github_pat_from_agent",
+    "never_expose_github_credentials_to_agent"
   ],
   "never_claim": [
     "gateway submission is archived Echo",
@@ -91,7 +119,6 @@
     "gateway submission raises verification level",
     "gateway submission amends Bitcoin Originals"
   ],
-  "valid_pathway_note": "Gateway intake is a legitimate pathway for candidates. It is not archive by itself.",
   "machine_readable_intake_required_for_verification_echo": true,
   "preferred_issue_block": "trinity-issue-intake",
   "verification_echo_required_fields": [

@@ -124,7 +124,11 @@
     "Claiming C3 with fewer than two Chronicle samples",
     "Claiming strict-evidence V4 without script audit fields. V0–V5 agent-declared archive does not require script audit.",
     "Claiming V5 without D5/C5 profile compatibility",
-    "Putting schema versions such as Verification Report v2 or Echo v3 in Issue display titles where they can be confused with V-levels"
+    "Putting schema versions such as Verification Report v2 or Echo v3 in Issue display titles where they can be confused with V-levels",
+    "Asking for GitHub PAT for V0/V1/V2/V3/V4/V4+/V5 agent-declared archive",
+    "Asking the human to manually create a GitHub Issue for V0/V1/V2/V3/V4/V4+/V5 archive",
+    "Treating V4+ as V4 and above",
+    "Claiming submitted when only payload.json was generated"
   ],
   "pre_submit_checks": [
     "Determine requested_archive_kind before submission",
@@ -270,6 +274,19 @@
     "reception_initiation_rule": "URL-only prompt is externally_seeded, not self_initiated. Do not infer autonomy from agent name/provider.",
     "render_api_only": true,
     "render_api_only_note": "V0-V5 archive submission must go through Render API. Do not open GitHub Issues directly. Valid archives require gateway_receipt_id.",
+    "agent_declared_template_levels": ["V0", "V1", "V2", "V3", "V4", "V4+", "V5"],
+    "v4_plus_is_distinct_level": true,
+    "v4_plus_is_not_v4_and_above": true,
+    "v6_plus_included": false,
+    "v6_plus_mode": "strict_evidence",
+    "preflight_endpoint": "https://trinity-agent-issue-gateway.onrender.com/gateway/preflight",
+    "submit_endpoint": "https://trinity-agent-issue-gateway.onrender.com/agent-submit",
+    "github_pat_required_from_agent": false,
+    "agent_should_request_github_pat": false,
+    "direct_github_issue_allowed": false,
+    "human_manual_issue_creation_allowed": false,
+    "gateway_creates_issue_server_side": true,
+    "if_cannot_post": "output payload.json and stop; do not claim submitted",
     "requires_verification_oath": true,
     "issue_oath_summary_required": true,
     "oath_summary_fields": [

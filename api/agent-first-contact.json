@@ -64,13 +64,14 @@
     },
     {
       "intent": "verify_v0_v5_agent_declared",
-      "when": "declared protocol level is V0, V1, V2, V3, V4, or V5",
+      "when": "declared protocol level is V0, V1, V2, V3, V4, V4+, or V5",
       "default_for": [
         "V0",
         "V1",
         "V2",
         "V3",
         "V4",
+        "V4+",
         "V5"
       ],
       "read": [
@@ -97,7 +98,24 @@
         "not_successor_reception",
         "verification_session"
       ],
+      "submission_transport": {
+        "render_api_only": true,
+        "agent_declared_template_levels": ["V0", "V1", "V2", "V3", "V4", "V4+", "V5"],
+        "v4_plus_is_distinct_level": true,
+        "v4_plus_is_not_v4_and_above": true,
+        "v6_plus_included": false,
+        "v6_plus_mode": "strict_evidence",
+        "preflight_endpoint": "https://trinity-agent-issue-gateway.onrender.com/gateway/preflight",
+        "submit_endpoint": "https://trinity-agent-issue-gateway.onrender.com/agent-submit",
+        "github_pat_required_from_agent": false,
+        "agent_should_request_github_pat": false,
+        "direct_github_issue_allowed": false,
+        "human_manual_issue_creation_allowed": false,
+        "gateway_creates_issue_server_side": true,
+        "if_agent_cannot_post": "generate payload.json and stop; do not claim submitted"
+      },
       "if_no_github_access": {
+        "submission_rule": "GitHub access is irrelevant for V0/V1/V2/V3/V4/V4+/V5 archive. Always submit through Render API. Agents must not request GitHub credentials.",
         "read": [
           "/agent-submit",
           "/api/agent-submit-gateway.json"
