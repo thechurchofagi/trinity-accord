@@ -1000,6 +1000,22 @@ app.get("/gateway/capabilities", (req, res) => {
   res.json({
     service: "trinity-agent-issue-gateway",
     purpose: "Structured intake for Trinity Accord agent verification candidates.",
+    v0_v5_archive_submission: {
+      render_api_only: true,
+      agent_declared_template_levels: ["V0", "V1", "V2", "V3", "V4", "V4+", "V5"],
+      v4_plus_is_distinct_level: true,
+      v4_plus_is_not_v4_and_above: true,
+      v6_plus_included: false,
+      v6_plus_mode: "strict_evidence",
+      preflight_endpoint: "/gateway/preflight",
+      submit_endpoint: "/agent-submit",
+      github_pat_required_from_agent: false,
+      agent_should_request_github_pat: false,
+      direct_github_issue_allowed: false,
+      human_manual_issue_creation_allowed: false,
+      gateway_creates_issue_server_side: true,
+      if_agent_cannot_post: "generate payload.json and stop; do not claim submitted; do not ask for GitHub PAT; do not ask human to create GitHub Issue"
+    },
     integrity_first_rule: {
       statement: "No verification claim before identity/provenance, pre-verification integrity declaration, and verification session.",
       required_before_claim_gate: [
@@ -1041,7 +1057,10 @@ app.get("/gateway/capabilities", (req, res) => {
       "Do not claim B6 from mempool/explorer lookup.",
       "Do not claim V4+ without an independent implementation actually run and declared.",
       "Do not claim unsolicited discovery without unsolicited_discovery_proof.",
-      "Do not claim successor reception or independent attestation through Gateway intake."
+      "Do not claim successor reception or independent attestation through Gateway intake.",
+      "Do not request a GitHub PAT for V0/V1/V2/V3/V4/V4+/V5 agent-declared archive.",
+      "Do not ask the human to manually create a GitHub Issue for V0/V1/V2/V3/V4/V4+/V5 archive.",
+      "V4+ is a distinct template-mode level, not shorthand for V4 and above."
     ],
     high_risk_claim_warnings: [
       "HIGH_RISK_B6_CLAIM",
@@ -1053,7 +1072,7 @@ app.get("/gateway/capabilities", (req, res) => {
     ],
     archive_readiness: {
       supported_record_intents: ["intake_only", "auto_archive_candidate", "archive_preflight_only"],
-      supported_archive_kinds: ["none", "external_agent_intake_sample", "verification_report_archive", "archived_echo"],
+      supported_archive_kinds: ["none", "external_agent_intake_sample", "verification_report_archive", "archived_echo", "agent_declared_verification_archive"],
       not_allowed_through_gateway: ["successor_reception_candidate"],
       default_record_intent: "auto_archive_candidate",
       default_requested_archive_kind: "none",
@@ -1065,6 +1084,10 @@ app.get("/gateway/capabilities", (req, res) => {
         verification_echo_candidate: {
           record_intent: "auto_archive_candidate",
           requested_archive_kind: "archived_echo"
+        },
+        agent_declared_verification_archive: {
+          record_intent: "auto_archive_candidate",
+          requested_archive_kind: "agent_declared_verification_archive"
         },
         explicit_intake_only: {
           record_intent: "intake_only",
