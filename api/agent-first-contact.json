@@ -80,11 +80,12 @@
         "/api/verification-echo-pre-oath.v1.txt"
       ],
       "pipeline": [
+        "run_scripts_build_agent_declared_archive_payload_py",
         "verification_oath_readback",
-        "agent_declared_template",
         "claim_gate_template_for_v0_v5",
         "archive_readiness_agent_declared",
-        "gateway_preflight"
+        "post_raw_payload_to_gateway_preflight",
+        "post_same_raw_payload_to_agent_submit"
       ],
       "requested_archive_kind": "agent_declared_verification_archive",
       "evidence_requirement_mode": "waived_for_v0_v5",
@@ -100,7 +101,15 @@
       ],
       "submission_transport": {
         "render_api_only": true,
-        "agent_declared_template_levels": ["V0", "V1", "V2", "V3", "V4", "V4+", "V5"],
+        "agent_declared_template_levels": [
+          "V0",
+          "V1",
+          "V2",
+          "V3",
+          "V4",
+          "V4+",
+          "V5"
+        ],
         "v4_plus_is_distinct_level": true,
         "v4_plus_is_not_v4_and_above": true,
         "v6_plus_included": false,
@@ -146,6 +155,24 @@
         "oath_text_sha256",
         "agent_readback_char_count",
         "agent_readback_sha256"
+      ],
+      "canonical_builder": "scripts/build_agent_declared_archive_payload.py",
+      "raw_payload_only": true,
+      "do_not_wrap_payload": true,
+      "forbidden_wrappers": [
+        "gateway_payload"
+      ],
+      "forbidden_v0_v5_builders": [
+        "build_from_evidence",
+        "scripts/build_gateway_payload_from_outputs.py",
+        "downloads/verify.py"
+      ],
+      "server_generated_fields_not_allowed_in_payload": [
+        "gateway_receipt_id",
+        "created_by_gateway",
+        "server_validated",
+        "server_rendered",
+        "render_api_only"
       ]
     },
     {

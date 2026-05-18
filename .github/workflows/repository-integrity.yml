@@ -774,3 +774,15 @@ jobs:
 
       - name: Test agent submit legacy Issue fields scoped
         run: python3 scripts/test_agent_submit_legacy_issue_fields_scoped.py
+
+      - name: Test builder-first guidance
+        run: python3 scripts/test_builder_first_guidance.py
+
+      - name: Test raw payload contract
+        run: python3 scripts/test_raw_payload_contract.py
+
+      - name: Test single preflight endpoint contract
+        run: python3 scripts/test_single_preflight_endpoint_contract.py
+
+      - name: Test example template is fallback
+        run: python3 scripts/test_example_template_is_fallback.py

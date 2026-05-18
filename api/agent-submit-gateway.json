@@ -53,7 +53,28 @@
     "agent_may_handwrite_trinity_issue_intake": false,
     "gateway_creates_issue_server_side": true,
     "agent_creates_issue": false,
-    "if_agent_cannot_post": "generate payload.json and stop; do not claim submitted; do not ask for GitHub PAT; do not ask human to create GitHub Issue"
+    "if_agent_cannot_post": "generate payload.json and stop; do not claim submitted; do not ask for GitHub PAT; do not ask human to create GitHub Issue",
+    "canonical_builder": "scripts/build_agent_declared_archive_payload.py",
+    "builder_first_default": true,
+    "example_template_is_fallback_only": true,
+    "raw_payload_only": true,
+    "do_not_wrap_payload": true,
+    "forbidden_wrappers": [
+      "gateway_payload"
+    ],
+    "server_generated_fields_not_allowed_in_payload": [
+      "gateway_receipt_id",
+      "created_by_gateway",
+      "server_validated",
+      "server_rendered",
+      "render_api_only"
+    ],
+    "forbidden_v0_v5_paths": [
+      "build_from_evidence",
+      "scripts/build_gateway_payload_from_outputs.py",
+      "downloads/verify.py",
+      "direct_github_issue"
+    ]
   },
   "when_to_use": [
     "agent_wants_to_submit_verification_archive_v0_v5",

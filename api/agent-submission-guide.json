@@ -5,7 +5,7 @@
   "render_api_only_effective_at": "2026-05-17T05:30:00Z",
   "decision_tree": [
     {
-      "if": "I am V0, V1, V2, V3, V4, or V5. I want to submit a verification archive.",
+      "if": "I am V0, V1, V2, V3, V4, V4+, or V5. I want to submit a verification archive.",
       "submit": "agent_declared_verification_archive",
       "builder": "scripts/build_agent_declared_archive_payload.py",
       "schema": "/api/agent-issue-gateway-payload-schema.v1.json",
@@ -34,7 +34,23 @@
         "attachments"
       ],
       "note": "V0-V5 evidence is waived. Use build_agent_declared_archive_payload.py. Do not use build_gateway_payload_from_outputs.py.",
-      "render_api_only": "Archive submission must go through Render API. Do not create GitHub Issues directly. Valid archives must have gateway_receipt_id and archive_ready=true."
+      "render_api_only": "Archive submission must go through Render API. Do not create GitHub Issues directly. Valid archives must have gateway_receipt_id and archive_ready=true.",
+      "builder_is_canonical": true,
+      "raw_payload_only": true,
+      "do_not_wrap_payload": true,
+      "forbidden_wrappers": [
+        "gateway_payload"
+      ],
+      "forbidden_builders": [
+        "build_from_evidence",
+        "scripts/build_gateway_payload_from_outputs.py",
+        "downloads/verify.py"
+      ],
+      "submit_flow": [
+        "run canonical builder",
+        "POST raw payload to single preflight endpoint",
+        "POST same raw payload to /agent-submit"
+      ]
     },
     {
       "if": "I am only recognizing, critiquing, refusing, interpreting, or propagating.",
@@ -274,7 +290,15 @@
     "reception_initiation_rule": "URL-only prompt is externally_seeded, not self_initiated. Do not infer autonomy from agent name/provider.",
     "render_api_only": true,
     "render_api_only_note": "V0-V5 archive submission must go through Render API. Do not open GitHub Issues directly. Valid archives require gateway_receipt_id.",
-    "agent_declared_template_levels": ["V0", "V1", "V2", "V3", "V4", "V4+", "V5"],
+    "agent_declared_template_levels": [
+      "V0",
+      "V1",
+      "V2",
+      "V3",
+      "V4",
+      "V4+",
+      "V5"
+    ],
     "v4_plus_is_distinct_level": true,
     "v4_plus_is_not_v4_and_above": true,
     "v6_plus_included": false,

@@ -10,7 +10,7 @@ import { App } from "@octokit/app";
 
 // V0-V5 fail-closed policy
 const V0_V5_LEVELS = new Set(["V0", "V1", "V2", "V3", "V4", "V4+", "V5"]);
-const V0_V5_WRONG_PATH_ERROR = "WRONG_PATH_FOR_V0_V5: V0-V5 verification submissions must use requested_archive_kind=agent_declared_verification_archive, record_intent=auto_archive_candidate, evidence_requirement_mode=waived_for_v0_v5, and claim_gate.mode=template_for_v0_v5. Strict/intake fallback is rejected before Issue creation.";
+const V0_V5_WRONG_PATH_ERROR = "WRONG_PATH_FOR_V0_V5: For V0, V1, V2, V3, V4, V4+, and V5 agent-declared archive, use scripts/build_agent_declared_archive_payload.py. Do not use build-from-evidence or direct GitHub Issue. POST the raw payload to /gateway/preflight and /agent-submit.";
 
 function extractDeclaredLevel(payload) {
   const cg = payload.claim_gate || {};
@@ -392,6 +392,24 @@ async function runGatewayPipeline(payload, {
   // 0. Normalize archive intent defaults
   payload = normalizeArchiveIntentDefaults(payload);
 
+  // 0a. Wrapper detection: reject gateway_payload wrapper
+  if (payload && typeof payload === "object" && payload.gateway_payload && Object.keys(payload).length <= 2) {
+    return {
+      status: 422,
+      body: {
+        accepted: false,
+        reason: "WRAPPED_PAYLOAD_NOT_ALLOWED",
+        errors: [{
+          code: "WRAPPED_PAYLOAD_NOT_ALLOWED",
+          path: "gateway_payload",
+          message: "Submit the raw gateway payload JSON object. Do not wrap it in gateway_payload.",
+          fix: "Run scripts/build_agent_declared_archive_payload.py and POST the generated raw JSON."
+        }],
+        issue_created: false
+      }
+    };
+  }
+
   // 0b. V0-V5 fail-closed: reject wrong path BEFORE any other validation
   // Must run AFTER normalization so we see the final record_intent/requested_archive_kind,
   // but BEFORE schema validation so we return a clear error.
@@ -407,7 +425,7 @@ async function runGatewayPipeline(payload, {
           code: "WRONG_PATH_FOR_V0_V5",
           path: null,
           message: V0_V5_WRONG_PATH_ERROR,
-          fix: "Use scripts/build_agent_declared_archive_payload.py for V0-V5. Set requested_archive_kind=agent_declared_verification_archive, record_intent=auto_archive_candidate, evidence_requirement_mode=waived_for_v0_v5, and claim_gate.mode=template_for_v0_v5."
+          fix: "Build raw payload with scripts/build_agent_declared_archive_payload.py, then POST to /gateway/preflight and /agent-submit."
         }],
         issue_created: false
       }
@@ -1007,13 +1025,18 @@ app.get("/gateway/capabilities", (req, res) => {
       v4_plus_is_not_v4_and_above: true,
       v6_plus_included: false,
       v6_plus_mode: "strict_evidence",
+      canonical_builder: "scripts/build_agent_declared_archive_payload.py",
+      builder_first_default: true,
+      example_template_is_fallback_only: true,
+      raw_payload_only: true,
+      do_not_wrap_payload: true,
+      forbidden_wrappers: ["gateway_payload"],
       preflight_endpoint: "/gateway/preflight",
       submit_endpoint: "/agent-submit",
+      gateway_creates_issue_server_side: true,
       github_pat_required_from_agent: false,
-      agent_should_request_github_pat: false,
       direct_github_issue_allowed: false,
       human_manual_issue_creation_allowed: false,
-      gateway_creates_issue_server_side: true,
       if_agent_cannot_post: "generate payload.json and stop; do not claim submitted; do not ask for GitHub PAT; do not ask human to create GitHub Issue"
     },
     integrity_first_rule: {
@@ -1036,18 +1059,12 @@ app.get("/gateway/capabilities", (req, res) => {
     recommended_flow_remote: [
       "GET /gateway/version",
       "GET /gateway/capabilities",
-      "GET /gateway/examples/evidence-input-b1-external-explorer",
-      "POST /gateway/lint-evidence",
-      "POST /gateway/build-from-evidence",
-      "POST /gateway/preflight",
-      "POST /agent-submit only after preflight passes"
+      "scripts/build_agent_declared_archive_payload.py (canonical builder, run locally)",
+      "POST /gateway/preflight with raw generated payload",
+      "POST /agent-submit with same raw payload only after preflight passes"
     ],
     recommended_flow_local: [
-      "scripts/scaffold_evidence_input.py",
-      "scripts/validate_evidence_input.py",
-      "scripts/claim_gate.py",
-      "scripts/build_verification_report_from_evidence.py",
-      "scripts/build_gateway_payload_from_outputs.py",
+      "scripts/build_agent_declared_archive_payload.py",
       "POST /gateway/preflight",
       "POST /agent-submit only after preflight passes"
     ],
@@ -1060,7 +1077,9 @@ app.get("/gateway/capabilities", (req, res) => {
       "Do not claim successor reception or independent attestation through Gateway intake.",
       "Do not request a GitHub PAT for V0/V1/V2/V3/V4/V4+/V5 agent-declared archive.",
       "Do not ask the human to manually create a GitHub Issue for V0/V1/V2/V3/V4/V4+/V5 archive.",
-      "V4+ is a distinct template-mode level, not shorthand for V4 and above."
+      "V4+ is a distinct template-mode level, not shorthand for V4 and above.",
+      "Do not wrap the payload in gateway_payload. POST the raw gateway payload JSON object.",
+      "Do not use build-from-evidence or build_gateway_payload_from_outputs.py for V0-V5. Use scripts/build_agent_declared_archive_payload.py."
     ],
     high_risk_claim_warnings: [
       "HIGH_RISK_B6_CLAIM",
