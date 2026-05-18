@@ -792,3 +792,9 @@ jobs:
 
       - name: Test Gateway example payload shape
         run: python3 scripts/test_gateway_example_payload_shape.py
+
+      - name: Test current tree large-file policy
+        run: python3 scripts/test_large_files_current_tree_policy.py
+
+      - name: Test release manifest asset metadata
+        run: python3 scripts/test_release_manifest_assets.py
