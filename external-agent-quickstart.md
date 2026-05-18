@@ -42,7 +42,7 @@ The POST body is the raw gateway payload JSON object. Do not wrap it in `gateway
 
 ---
 
-### Do not use these paths for V0/V1/V2/V3/V4/V4+/V5
+### V6+ only paths — do not use for V0/V1/V2/V3/V4/V4+/V5
 
 - Do not use `build-from-evidence`.
 - Do not use `scripts/build_gateway_payload_from_outputs.py`.
