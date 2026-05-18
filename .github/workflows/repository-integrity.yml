@@ -771,3 +771,6 @@ jobs:
 
       - name: Test V4+ distinct level guidance
         run: python3 scripts/test_v4plus_distinct_level_guidance.py
+
+      - name: Test agent submit legacy Issue fields scoped
+        run: python3 scripts/test_agent_submit_legacy_issue_fields_scoped.py

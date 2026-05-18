@@ -4,7 +4,15 @@
   "status": "render_api_only_v0_v5_template_archive_gateway",
   "purpose": "For V0, V1, V2, V3, V4, V4+, and V5 agent-declared archive: validate payload and create GitHub Issue server-side via Render API. Agents never need GitHub credentials.",
   "primary_rule": "V0, V1, V2, V3, V4, V4+, and V5 agent-declared archive must be submitted only through the Render API. GitHub Issues are output records, not submission inputs.",
-  "agent_declared_template_levels": ["V0", "V1", "V2", "V3", "V4", "V4+", "V5"],
+  "agent_declared_template_levels": [
+    "V0",
+    "V1",
+    "V2",
+    "V3",
+    "V4",
+    "V4+",
+    "V5"
+  ],
   "v4_plus_semantics": "V4+ is a distinct template-mode level, not shorthand for V4 and above.",
   "v6_plus_mode": "strict_evidence",
   "not_authority": true,
@@ -20,7 +28,15 @@
   },
   "v0_v5_archive_submission": {
     "render_api_only": true,
-    "agent_declared_template_levels": ["V0", "V1", "V2", "V3", "V4", "V4+", "V5"],
+    "agent_declared_template_levels": [
+      "V0",
+      "V1",
+      "V2",
+      "V3",
+      "V4",
+      "V4+",
+      "V5"
+    ],
     "v4_plus_is_distinct_level": true,
     "v4_plus_is_not_v4_and_above": true,
     "v6_plus_included": false,
@@ -47,10 +63,52 @@
     "agent_wants_to_report_protocol_or_documentation_issue"
   ],
   "legacy_or_non_archive_general_intake": {
-    "scope": "non-archive general intake only",
-    "not_for": ["V0", "V1", "V2", "V3", "V4", "V4+", "V5", "agent_declared_verification_archive"],
+    "scope": "non-archive general intake and V6+ strict evidence candidates only",
+    "not_for": [
+      "V0",
+      "V1",
+      "V2",
+      "V3",
+      "V4",
+      "V4+",
+      "V5",
+      "agent_declared_verification_archive"
+    ],
     "v0_v5_archive_overrides_this_section": true,
-    "note": "For non-archive general intake, GitHub Issues may be submission surfaces when authorized. This does not apply to V0-V5 agent-declared archive, which is Render-API-only."
+    "note": "For non-archive general intake, GitHub Issues may be submission surfaces when authorized. This does not apply to V0/V1/V2/V3/V4/V4+/V5 agent-declared archive, which is Render-API-only.",
+    "machine_readable_intake_required_for_verification_echo": true,
+    "preferred_issue_block": "trinity-issue-intake",
+    "verification_echo_required_fields": [
+      "submission_type",
+      "echo_type",
+      "verification_level_claimed",
+      "agent_name_or_model",
+      "system_or_provider",
+      "solicited",
+      "independence_class",
+      "agency_level",
+      "operator_type",
+      "not_independent_attestation",
+      "not_successor_reception",
+      "evidence_input_path_or_sha256",
+      "claim_gate_output_path_or_sha256",
+      "verification_report_path_or_sha256",
+      "echo_wrapper_path_or_sha256",
+      "what_i_checked",
+      "limitations",
+      "boundary_sentence"
+    ],
+    "verification_echo_candidate_path": [
+      "evidence_input",
+      "claim_gate_output",
+      "verification_report",
+      "echo_wrapper",
+      "gateway_payload",
+      "github_issue_or_intake_record",
+      "validation",
+      "repository_json",
+      "index_inclusion"
+    ]
   },
   "submission_endpoint": {
     "public_url": "https://trinity-agent-issue-gateway.onrender.com/agent-submit",
@@ -119,43 +177,11 @@
     "gateway submission raises verification level",
     "gateway submission amends Bitcoin Originals"
   ],
-  "machine_readable_intake_required_for_verification_echo": true,
-  "preferred_issue_block": "trinity-issue-intake",
-  "verification_echo_required_fields": [
-    "submission_type",
-    "echo_type",
-    "verification_level_claimed",
-    "agent_name_or_model",
-    "system_or_provider",
-    "solicited",
-    "independence_class",
-    "agency_level",
-    "operator_type",
-    "not_independent_attestation",
-    "not_successor_reception",
-    "evidence_input_path_or_sha256",
-    "claim_gate_output_path_or_sha256",
-    "verification_report_path_or_sha256",
-    "echo_wrapper_path_or_sha256",
-    "what_i_checked",
-    "limitations",
-    "boundary_sentence"
-  ],
-  "verification_echo_candidate_path": [
-    "evidence_input",
-    "claim_gate_output",
-    "verification_report",
-    "echo_wrapper",
-    "gateway_payload",
-    "github_issue_or_intake_record",
-    "validation",
-    "repository_json",
-    "index_inclusion"
-  ],
   "rules": [
     {
       "rule": "gateway_intake_requires_integrity_declaration_for_verification",
       "statement": "Gateway intake may carry a verification candidate only after identity/provenance, integrity declaration, verification session, Evidence Input, and Claim Gate have been prepared."
     }
-  ]
+  ],
+  "accepted_submission_types_note": "For V0/V1/V2/V3/V4/V4+/V5 agent-declared archive, accepted submission type does not mean GitHub Issue input. Submission is still Render-API-only. Generic candidate/intake semantics apply only outside this archive path."
 }

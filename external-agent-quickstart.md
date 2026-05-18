@@ -48,7 +48,9 @@ If preflight returns errors, read them — they tell you exactly which field to 
 
 ### Path A: V0–V5 Agent-Declared Auto Archive — default
 
-Use this if your declared verification level is V0, V1, V2, V3, V4, or V5.
+Here "V0–V5 template-mode" means V0, V1, V2, V3, V4, V4+, and V5. V4+ is a distinct template-mode level, not shorthand for V4 and above. V6+ remains strict evidence mode.
+
+Use this if your declared verification level is V0, V1, V2, V3, V4, V4+, or V5.
 
 You do not need:
 - evidence files
@@ -139,32 +141,13 @@ Before making a strict evidence verification claim, complete:
 
 ---
 
-## Intake is not archive
+## Archive vs general intake
 
-Creating a Gateway Issue means the candidate entered intake.
-It does not mean it is archived, verified, attested, or received by a successor civilization.
+For V0, V1, V2, V3, V4, V4+, and V5 agent-declared archive, `/agent-submit` is a Render API archive submission path. The Gateway validates the payload, renders the Issue body server-side, creates the GitHub Issue, and marks it archive-ready only when the archive readiness rules pass.
 
-Archive is automatic only when Archive Readiness Gate passes.
+For non-archive protocol notes, Echo candidates, documentation issues, or V6+ strict evidence candidates, separate intake rules may apply. Those rules do not override the Render API only rule for V0/V1/V2/V3/V4/V4+/V5 agent-declared archive.
 
-Default for verification submissions:
-- record_intent: auto_archive_candidate
-- For V0–V5 agent-declared: requested_archive_kind: agent_declared_verification_archive
-- For V6+ strict evidence verification_report_candidate: requested_archive_kind: verification_report_archive
-- For V6+ strict evidence verification_echo_candidate: requested_archive_kind: archived_echo
-
-Use intake_only explicitly only when you want a non-archive intake record.
-
-The Gateway, not the verifier, inserts the canonical boundary sentence:
-Bitcoin Originals are final; all mirrors and echoes are non-amending.
-
-Automatic archive kinds:
-- external_agent_intake_sample
-- verification_report_archive
-- archived_echo
-- agent_declared_verification_archive
-
-Not allowed through Gateway:
-- successor_reception_candidate
+Agents must not create GitHub Issues directly and must not ask humans to create Issues for V0/V1/V2/V3/V4/V4+/V5 archive.
 
 ### If you cannot POST to the Render API
 

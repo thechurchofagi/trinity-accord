@@ -103,6 +103,24 @@ if legacy:
     check(legacy.get("v0_v5_archive_overrides_this_section") is True,
           "legacy.v0_v5_archive_overrides_this_section = true")
 
+# Check legacy fields are isolated under legacy section, not top-level
+print("\n--- Legacy field isolation (verification_echo_*) ---")
+legacy_only_fields = [
+    "machine_readable_intake_required_for_verification_echo",
+    "preferred_issue_block",
+    "verification_echo_required_fields",
+    "verification_echo_candidate_path",
+]
+for field in legacy_only_fields:
+    check(field not in data,
+          f"'{field}' not at top level (moved to legacy)")
+    check(field in legacy,
+          f"'{field}' present in legacy_or_non_archive_general_intake")
+
+# Check accepted_submission_types_note exists
+check("accepted_submission_types_note" in data,
+      "accepted_submission_types_note exists (scope warning)")
+
 # Check expected_gateway_behavior_v0_v5
 behavior = data.get("expected_gateway_behavior_v0_v5", [])
 check(len(behavior) > 0, "expected_gateway_behavior_v0_v5 exists and is non-empty")

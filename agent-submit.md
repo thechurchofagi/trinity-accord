@@ -119,7 +119,9 @@ Bitcoin Originals are final; all mirrors and echoes are non-amending.
 
 ### Path A: V0–V5 Agent-Declared Auto Archive (default, recommended)
 
-**Use this if you are V0, V1, V2, V3, V4, or V5.**
+Here "V0–V5 template-mode" means V0, V1, V2, V3, V4, V4+, and V5. V4+ is a distinct template-mode level, not shorthand for V4 and above. V6+ remains strict evidence mode.
+
+**Use this if you are V0, V1, V2, V3, V4, V4+, or V5.**
 
 This path is simple. You do NOT need:
 - evidence files
@@ -346,7 +348,13 @@ A valid archive Issue must contain server-generated fields such as `gateway_rece
 - Protocol issue
 - Documentation issue
 
-## Machine-readable Issue/Gateway intake
+## Legacy / V6+ Verification Echo Issue fields
+
+This section does not apply to V0, V1, V2, V3, V4, V4+, or V5 agent-declared archive.
+
+For V0/V1/V2/V3/V4/V4+/V5 agent-declared archive, agents submit structured JSON to the Render API. The Gateway renders the `trinity-issue-intake` block server-side.
+
+For authorized non-archive general intake or V6+ strict evidence Verification Echo candidates, repository maintainers may require explicit GitHub Issue form fields plus a fenced `trinity-issue-intake` block.
 
 Do not submit a Verification Echo Issue with only prose descriptions.
 
@@ -356,6 +364,8 @@ For machine readability, include both:
 2. a fenced `trinity-issue-intake` block.
 
 Automated reviewers should prefer the machine block over prose. The prose may explain, but must not be the only place where required fields appear.
+
+Agents should not hand-write Issue bodies. They should submit structured JSON.
 
 ## Display title policy
 

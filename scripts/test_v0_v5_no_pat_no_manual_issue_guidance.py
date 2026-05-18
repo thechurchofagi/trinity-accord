@@ -128,10 +128,18 @@ print("\n--- Markdown-specific checks ---")
 agent_submit = read_file("agent-submit.md")
 check(has_cannot_post_fallback(agent_submit),
       "agent-submit.md has cannot-POST fallback guidance")
+check("Legacy / V6+ Verification Echo Issue fields" in agent_submit,
+      "agent-submit.md has scoped legacy Issue fields heading")
+check("This section does not apply to V0" in agent_submit,
+      "agent-submit.md scopes legacy section away from V0-V5")
 
 ext_quickstart = read_file("external-agent-quickstart.md")
 check(has_cannot_post_fallback(ext_quickstart),
       "external-agent-quickstart.md has cannot-POST fallback guidance")
+check("Creating a Gateway Issue means the candidate entered intake" not in ext_quickstart,
+      "external-agent-quickstart.md no longer has unscoped intake wording")
+check("Gateway validates the payload" in ext_quickstart,
+      "external-agent-quickstart.md describes Gateway server-side creation")
 
 
 # Specific checks for JSON files

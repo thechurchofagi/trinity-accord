@@ -109,6 +109,32 @@ for fpath in files_to_check:
             check(True, f"{fpath} does not list {level} as a valid level")
 
 
+# Specific checks for external-agent-quickstart.md
+print("\n--- external-agent-quickstart.md V4+ explicit checks ---")
+ext_qs = read_file("external-agent-quickstart.md")
+if ext_qs:
+    check("V0, V1, V2, V3, V4, V4+, or V5" in ext_qs,
+          "external-agent-quickstart.md Path A includes V4+ in level list")
+    check("V0, V1, V2, V3, V4, or V5" not in ext_qs.replace("V4+", ""),
+          "external-agent-quickstart.md does not have V0-V5 list without V4+")
+    check("V4+ is a distinct" in ext_qs,
+          "external-agent-quickstart.md says V4+ is distinct")
+    check("V6+ remains strict evidence" in ext_qs,
+          "external-agent-quickstart.md says V6+ remains strict evidence")
+    check("Creating a Gateway Issue means the candidate entered intake" not in ext_qs,
+          "external-agent-quickstart.md no longer has unscoped intake wording")
+
+# Specific checks for agent-submit.md
+print("\n--- agent-submit.md V4+ explicit checks ---")
+agent_submit = read_file("agent-submit.md")
+if agent_submit:
+    check("V0, V1, V2, V3, V4, V4+, or V5" in agent_submit or "V4+" in agent_submit,
+          "agent-submit.md includes V4+")
+    check("Legacy / V6+ Verification Echo Issue fields" in agent_submit,
+          "agent-submit.md has scoped legacy Issue fields heading")
+    check("This section does not apply to V0" in agent_submit,
+          "agent-submit.md scopes legacy section away from V0-V5")
+
 # JSON-specific checks
 print("\n--- JSON level enum checks ---")
 
