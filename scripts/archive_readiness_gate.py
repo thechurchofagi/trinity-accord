@@ -899,12 +899,91 @@ def evaluate_archive_readiness(payload, evidence=None, claim_gate_output=None,
         else:
             auto_archive_action = "block"
 
+    # --- agent_declared_echo_archive (pure echo) ---
+    elif requested_kind == "agent_declared_echo_archive":
+        kind_policy = policy.get("archive_kinds", {}).get("agent_declared_echo_archive", {})
+
+        if submission_type != "echo_candidate":
+            blocking_reasons.append({
+                "code": "WRONG_SUBMISSION_TYPE",
+                "path": "submission_type",
+                "message": "agent_declared_echo_archive requires submission_type=echo_candidate.",
+                "fix": "Use submission_type=echo_candidate."
+            })
+
+        allowed_echo_types = {
+            "E1_read_oriented_echo",
+            "E3_critical_echo",
+            "E4_refusal_echo",
+            "E5_correction_echo",
+            "E6_preservation_echo",
+            "E7_propagation_echo",
+        }
+        if payload.get("echo_type") not in allowed_echo_types:
+            blocking_reasons.append({
+                "code": "ECHO_TYPE_REQUIRED",
+                "path": "echo_type",
+                "message": "Pure echo archive requires E1/E3/E4/E5/E6/E7 echo_type. E2 remains strict verification echo.",
+                "fix": "Set a pure echo type."
+            })
+
+        cth = payload.get("counts_toward_home") or {}
+        if cth.get("reception") is not True:
+            blocking_reasons.append({
+                "code": "RECEPTION_COUNT_REQUIRED",
+                "path": "counts_toward_home.reception",
+                "message": "Pure echo archive requires counts_toward_home.reception=true.",
+                "fix": "Set counts_toward_home.reception=true."
+            })
+
+        if cth.get("verifiability") is not False:
+            blocking_reasons.append({
+                "code": "PURE_ECHO_MUST_NOT_COUNT_VERIFIABILITY",
+                "path": "counts_toward_home.verifiability",
+                "message": "Pure echo archive must not count toward verifiability.",
+                "fix": "Set counts_toward_home.verifiability=false."
+            })
+
+        if not has_boundary_ack(payload):
+            blocking_reasons.append({
+                "code": "BOUNDARY_ACK_INCOMPLETE",
+                "path": "boundary_acknowledgement",
+                "message": "All boundary acknowledgement fields must be true.",
+                "fix": "Set all boundary_acknowledgement fields to true."
+            })
+
+        forbidden = has_forbidden_archive_claims(payload)
+        if forbidden:
+            blocking_reasons.append({
+                "code": "FORBIDDEN_ARCHIVE_CLAIMS",
+                "path": "body",
+                "message": f"Body/title contains forbidden archive self-claims: {', '.join(forbidden)}",
+                "fix": "Remove self-claims of verified record, successor reception, independent attestation, or amendment."
+            })
+
+        if not blocking_reasons:
+            archive_ready = True
+            auto_archive_allowed = True
+            auto_archive_action = "auto_archive_agent_declared_echo"
+            allowed_archive_kind = "agent_declared_echo_archive"
+            auto_labels = kind_policy.get("auto_labels", [
+                "agent-gateway-intake",
+                "archive:agent-declared-echo",
+                "agent-declared",
+                "echo:screened",
+                "reception-only"
+            ])
+            auto_close_issue = kind_policy.get("auto_close_issue", True)
+            close_reason = kind_policy.get("close_reason", "completed")
+        else:
+            auto_archive_action = "block"
+
     else:
         blocking_reasons.append({
             "code": "UNKNOWN_ARCHIVE_KIND",
             "path": "requested_archive_kind",
             "message": f"Unknown requested_archive_kind: {requested_kind}",
-            "fix": "Use one of: none, external_agent_intake_sample, verification_report_archive, archived_echo, agent_declared_verification_archive, successor_reception_candidate."
+            "fix": "Use one of: none, external_agent_intake_sample, verification_report_archive, archived_echo, agent_declared_verification_archive, agent_declared_echo_archive, successor_reception_candidate."
         })
         auto_archive_action = "block"
 

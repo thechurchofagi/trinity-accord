@@ -35,6 +35,27 @@ from gateway_v0_v5_policy import (  # noqa: E402
 )
 
 
+def is_agent_declared_echo_archive(payload):
+    return payload.get("requested_archive_kind") == "agent_declared_echo_archive"
+
+
+def render_issue_title(payload):
+    """Generate issue title from payload, with special handling for pure echo."""
+    identity = payload.get("agent_identity") or {}
+    requested_archive_kind = payload.get("requested_archive_kind", "none")
+    title = payload.get("title", "")
+    short_title = title[:80] if title else ""
+
+    if requested_archive_kind == "agent_declared_echo_archive":
+        echo_type = payload.get("echo_type", "")
+        if echo_type == "E5_correction_echo":
+            return f"[Agent Gateway] Correction Echo: {identity.get('name_or_model', 'Agent')} — {short_title}"
+        else:
+            return f"[Agent Gateway] Agent-Declared Echo Archive: {echo_type} — {short_title}"
+
+    return title
+
+
 def canonical_boundary_sentence():
     try:
         return json.loads(BOUNDARY_POLICY.read_text(encoding="utf-8"))["canonical_boundary_sentence"]
@@ -175,6 +196,27 @@ def render_machine_block(payload, gateway_receipt_id=None, gateway_commit=None,
             production_render=production_render,
         )
         lines.extend(receipt_lines)
+    elif requested_archive_kind == "agent_declared_echo_archive":
+        lines.append(f"record_intent: {payload.get('record_intent', 'auto_archive_candidate')}")
+        lines.append("requested_archive_kind: agent_declared_echo_archive")
+        lines.append(f"echo_type: {payload.get('echo_type', 'N/A')}")
+        lines.append("echo_gate_mode: template_for_agent_declared_echo")
+        lines.append("echo_gate_status: PASS")
+        lines.append("evidence_requirement_mode: not_applicable_for_echo")
+        lines.append(f"agent_name_or_model: {identity.get('name_or_model', 'N/A')}")
+        lines.append(f"system_or_provider: {identity.get('system_or_provider', 'N/A')}")
+        lines.append("counts_toward_home_verifiability: false")
+        lines.append("counts_toward_home_reception: true")
+        lines.append("archive_ready: true")
+        lines.append("allowed_archive_kind: agent_declared_echo_archive")
+        lines.append("auto_archive_action: auto_archive_agent_declared_echo")
+        # related records
+        related = payload.get("related_records") or []
+        if related:
+            first = related[0]
+            lines.append(f"related_issue: {first.get('issue_number', 'N/A')}")
+            lines.append(f"relation_to_related_issue: {first.get('relation', 'N/A')}")
+            lines.append(f"correction_does_not_amend_prior_record: {'true' if first.get('does_not_amend_original') else 'false'}")
     else:
         # Strict evidence path (legacy)
         lines.append(f"verification_level_claimed: {payload.get('verification_level_claimed', 'N/A')}")
@@ -249,7 +291,7 @@ def render_machine_block(payload, gateway_receipt_id=None, gateway_commit=None,
         lines.append("limitations: []")
 
     # Unsolicited provenance proof (only for strict path)
-    if requested_archive_kind != "agent_declared_verification_archive":
+    if requested_archive_kind not in ("agent_declared_verification_archive", "agent_declared_echo_archive"):
         if prov.get("independence_class") == "unsolicited_agent_discovery":
             lines.append(f"unsolicited_discovery_proof_available: {'true' if prov.get('unsolicited_discovery_proof') else 'false'}")
 
@@ -350,6 +392,8 @@ def main():
         sys.exit(1)
 
     parts = []
+    rendered_title = render_issue_title(payload)
+    parts.append(f"# {rendered_title}\n")
     parts.append("This issue was submitted through the Agent Issue Gateway backend.\n")
     parts.append(render_boundary())
     parts.append(f"\nSubmission type:\n{st}")

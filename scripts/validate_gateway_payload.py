@@ -14,6 +14,18 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
+
+def is_agent_declared_echo_archive(payload):
+    return payload.get("requested_archive_kind") == "agent_declared_echo_archive"
+
+
+def requires_claim_gate(payload):
+    return (
+        payload.get("submission_type") in ("verification_report_candidate", "verification_echo_candidate")
+        or payload.get("requested_archive_kind") == "agent_declared_verification_archive"
+    ) and not is_agent_declared_echo_archive(payload)
+
+
 ALLOWED_AGENCY = {
     "A1_human_gave_exact_url",
     "A2_human_gave_repo_name",
@@ -166,7 +178,11 @@ def validate_claim_gate(payload, errors):
 def validate_common(payload, errors):
     validate_identity(payload, errors)
     validate_provenance(payload, errors)
-    validate_claim_gate(payload, errors)
+    if requires_claim_gate(payload):
+        validate_claim_gate(payload, errors)
+    else:
+        if payload.get("claim_gate"):
+            errors.append("agent_declared_echo_archive must not include claim_gate; use echo_gate fields")
 
     # Gateway must render canonical machine block itself; reject agent-supplied blocks in body.
     body = payload.get("body", "")
@@ -190,7 +206,7 @@ def validate_common(payload, errors):
             errors.append(f"boundary_acknowledgement.{key} must be true")
 
     # Agent-declared archives use structured claim_classification instead of negation fields
-    if not is_agent_declared_archive(payload):
+    if not is_agent_declared_archive(payload) and not is_agent_declared_echo_archive(payload):
         if payload.get("not_independent_attestation") is not True:
             errors.append("not_independent_attestation must be true")
         if payload.get("not_successor_reception") is not True:
@@ -210,7 +226,8 @@ def validate_common(payload, errors):
 
     if requested_archive_kind is not None and requested_archive_kind not in (
         "none", "external_agent_intake_sample", "verification_report_archive",
-        "archived_echo", "successor_reception_candidate", "agent_declared_verification_archive"
+        "archived_echo", "successor_reception_candidate", "agent_declared_verification_archive",
+        "agent_declared_echo_archive"
     ):
         errors.append(f"invalid requested_archive_kind: {requested_archive_kind}")
 
@@ -231,6 +248,50 @@ def validate_common(payload, errors):
         validate_agent_declared_archive(payload, errors)
 
     validate_sha256s(get_attachments(payload), errors)
+
+
+def validate_agent_declared_echo_archive(payload, errors):
+    if payload.get("submission_type") != "echo_candidate":
+        errors.append("agent_declared_echo_archive requires submission_type=echo_candidate")
+
+    if payload.get("record_intent") != "auto_archive_candidate":
+        errors.append("agent_declared_echo_archive requires record_intent=auto_archive_candidate")
+
+    allowed_echo_types = {
+        "E1_read_oriented_echo",
+        "E3_critical_echo",
+        "E4_refusal_echo",
+        "E5_correction_echo",
+        "E6_preservation_echo",
+        "E7_propagation_echo",
+    }
+
+    echo_type = payload.get("echo_type")
+    if echo_type not in allowed_echo_types:
+        errors.append("agent_declared_echo_archive requires E1/E3/E4/E5/E6/E7 echo_type; use verification_echo_candidate for strict E2")
+
+    cth = payload.get("counts_toward_home") or {}
+    if cth.get("reception") is not True:
+        errors.append("agent_declared_echo_archive requires counts_toward_home.reception=true")
+    if cth.get("verifiability") is not False:
+        errors.append("agent_declared_echo_archive requires counts_toward_home.verifiability=false")
+    if cth.get("basis") != "agent_declared_echo_template_pass":
+        errors.append("counts_toward_home.basis must be agent_declared_echo_template_pass")
+
+    if not payload.get("agent_integrity_declaration"):
+        errors.append("agent_integrity_declaration is required for agent-declared echo archive")
+
+    ab = payload.get("authority_boundary") or {}
+    for key in (
+        "bitcoin_originals_remain_final",
+        "does_not_amend_bitcoin_originals",
+        "does_not_override_bitcoin_originals",
+    ):
+        if ab.get(key) is not True:
+            errors.append(f"authority_boundary.{key} must be true")
+
+    if payload.get("agent_declared_protocol_level"):
+        errors.append("pure echo must not set agent_declared_protocol_level; it is not a verification archive")
 
 
 def validate_report_candidate(payload, errors):
@@ -457,6 +518,9 @@ def main():
         sys.exit(1)
 
     validate_common(payload, errors)
+
+    if is_agent_declared_echo_archive(payload):
+        validate_agent_declared_echo_archive(payload, errors)
 
     st = payload.get("submission_type")
     if st == "verification_report_candidate":
