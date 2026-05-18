@@ -237,5 +237,16 @@
       "gateway_commit"
     ],
     "if_preflight_mentions_server_fields": "Do not modify payload. Rebuild once with canonical builder; if repeated, stop and report Gateway internal render/lint mismatch. Do not skip preflight."
+  },
+  "authorship_claim_protocol": {
+    "enabled": true,
+    "optional": true,
+    "schema": "trinityaccord.agent-authorship-proof.v1",
+    "method": "public_key_signature",
+    "algorithm": "ed25519",
+    "private_key_must_never_be_submitted": true,
+    "gateway_receipt_is_not_claim_key": true,
+    "claim_endpoint": "/gateway/claim-authorship",
+    "boundary": "Proves key continuity only; not authority, truth, attestation, successor reception, or amendment."
   }
 }

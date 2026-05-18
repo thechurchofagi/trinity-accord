@@ -324,6 +324,25 @@ def build_index(issues: list[dict], repo: str = "", include_test: bool = False) 
                 continue
             record["legacy_oath_summary_missing"] = True
 
+        # Authorship claim fields
+        record["authorship_claim_protocol"] = intake.get("authorship_claim_protocol", "agent-authorship-claim-v1")
+        record["authorship_proof_present"] = parse_bool(intake.get("authorship_proof_present")) is True
+        record["authorship_proof_method"] = intake.get("authorship_proof_method", "none")
+        record["authorship_algorithm"] = intake.get("authorship_algorithm", "none")
+        record["authorship_public_key_sha256"] = intake.get("authorship_public_key_sha256", "none")
+        record["authorship_payload_sha256"] = intake.get("authorship_payload_sha256", "none")
+        record["authorship_signature_verified"] = parse_bool(intake.get("authorship_signature_verified")) is True
+        claim_status = intake.get("claim_status", "unclaimed")
+        record["claim_status"] = claim_status
+        record["authorship_claimed"] = claim_status == "claimed"
+
+        # Check labels for authorship claim status
+        if "authorship:claimed" in labels:
+            record["claim_status"] = "claimed"
+            record["authorship_claimed"] = True
+        if "authorship:key-verified" in labels:
+            record["authorship_key_verified"] = True
+
         # Apply semantic overrides from agent-declared-archive-overrides.json
         override = overrides.get(str(issue["number"]))
         if override:

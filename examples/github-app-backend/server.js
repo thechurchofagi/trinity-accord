@@ -2,7 +2,7 @@ import express from "express";
 import fs from "node:fs";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
-import { createHash } from "node:crypto";
+import { createHash, verify } from "node:crypto";
 import { fileURLToPath } from "node:url";
 import { tmpdir } from "node:os";
 import Ajv from "ajv/dist/2020.js";
@@ -113,6 +113,119 @@ function rejectSecretPatterns(text) {
     /sk-[A-Za-z0-9]{20,}/
   ];
   return patterns.some((p) => p.test(text));
+}
+
+// --- Authorship Claim Verification Helpers ---
+
+function stableStringify(value) {
+  if (value === null || typeof value !== "object") return JSON.stringify(value);
+  if (Array.isArray(value)) return "[" + value.map(stableStringify).join(",") + "]";
+  return "{" + Object.keys(value).sort().map(k => JSON.stringify(k) + ":" + stableStringify(value[k])).join(",") + "}";
+}
+
+function payloadWithoutAuthorship(payload) {
+  const clone = JSON.parse(JSON.stringify(payload));
+  delete clone.authorship_proof;
+  delete clone._authorship_claim;
+  return clone;
+}
+
+function sha256Text(s) {
+  return createHash("sha256").update(s, "utf8").digest("hex");
+}
+
+function normalizePem(pem) {
+  return String(pem || "").trim() + "\n";
+}
+
+function buildAuthorshipMessage(payload) {
+  const identity = payload.agent_identity || {};
+  const payloadDigest = sha256Text(stableStringify(payloadWithoutAuthorship(payload)));
+  return [
+    "TRINITY_AGENT_AUTHORSHIP_PROOF_V1",
+    `payload_sha256=${payloadDigest}`,
+    `schema=${payload.schema || ""}`,
+    `submission_type=${payload.submission_type || ""}`,
+    `requested_archive_kind=${payload.requested_archive_kind || ""}`,
+    `agent_name_or_model=${identity.name_or_model || ""}`,
+    `system_or_provider=${identity.system_or_provider || ""}`,
+    "boundary=not_authority_not_amendment_not_attestation_not_successor_reception",
+  ].join("\n");
+}
+
+function verifyAuthorshipProof(payload) {
+  const proof = payload.authorship_proof;
+  if (!proof) {
+    return {
+      present: false,
+      status: "unclaimed",
+      method: "none",
+      algorithm: "none",
+      public_key_sha256: "none",
+      signed_payload_sha256: "none",
+      signature_verified: false
+    };
+  }
+
+  const publicKeyPem = normalizePem(proof.public_key_pem);
+  const publicKeySha = sha256Text(publicKeyPem);
+  const expectedMessage = buildAuthorshipMessage(payload);
+  const expectedDigest = sha256Text(stableStringify(payloadWithoutAuthorship(payload)));
+
+  if (proof.public_key_sha256 !== publicKeySha) {
+    return {
+      present: true,
+      status: "invalid_authorship_proof",
+      signature_verified: false,
+      error: "public_key_sha256 mismatch"
+    };
+  }
+
+  if (proof.signed_payload_sha256 !== expectedDigest) {
+    return {
+      present: true,
+      status: "invalid_authorship_proof",
+      signature_verified: false,
+      error: "signed_payload_sha256 mismatch"
+    };
+  }
+
+  if (proof.signed_message !== expectedMessage) {
+    return {
+      present: true,
+      status: "invalid_authorship_proof",
+      signature_verified: false,
+      error: "signed_message mismatch"
+    };
+  }
+
+  let ok = false;
+  try {
+    ok = verify(
+      null,
+      Buffer.from(expectedMessage, "utf8"),
+      publicKeyPem,
+      Buffer.from(proof.signature_base64, "base64")
+    );
+  } catch (err) {
+    return {
+      present: true,
+      status: "invalid_authorship_proof",
+      signature_verified: false,
+      error: `signature verification error: ${err.message}`
+    };
+  }
+
+  return {
+    present: true,
+    status: ok ? "claimable_by_public_key" : "invalid_authorship_proof",
+    method: "public_key_signature",
+    algorithm: "ed25519",
+    public_key_sha256: publicKeySha,
+    signed_payload_sha256: expectedDigest,
+    signature_verified: ok,
+    error: ok ? null : "invalid signature"
+  };
 }
 
 // --- Archive Intent Normalization Helpers ---
@@ -658,6 +771,26 @@ async function runGatewayPipeline(payload, {
         errors: normalizeGatewayErrors(rawErrors)
       });
     }
+
+    // 4b. Authorship proof verification
+    const authorship = verifyAuthorshipProof(payload);
+
+    if (authorship.present && !authorship.signature_verified) {
+      return gatewayError(422, {
+        reason: "invalid_authorship_proof",
+        validation_stage: "payload_validator",
+        agent_action: "Fix authorship_proof or remove it. Do not include private keys. Sign the canonical authorship message with the matching Ed25519 private key.",
+        errors: [{
+          code: "INVALID_AUTHORSHIP_PROOF",
+          path: "authorship_proof",
+          message: authorship.error || "Authorship proof signature verification failed",
+          fix: "Rebuild payload, sign with scripts/attach_agent_authorship_proof.mjs, and resubmit."
+        }]
+      });
+    }
+
+    payload._authorship_claim = authorship;
+    fs.writeFileSync(payloadPath, JSON.stringify(payload, null, 2), "utf-8");
 
     // 5. Archive Readiness Gate — MUST run before render so computed values are available
     let archiveReadiness, autoArchiveDecision;
@@ -1682,6 +1815,197 @@ app.post("/gateway/archive-preflight", async (req, res) => {
 app.post("/agent-submit", async (req, res) => {
   const result = await runGatewayPipeline(req.body, { createIssue: true });
   res.status(result.status).json(result.body);
+});
+
+// --- Task: POST /gateway/claim-authorship ---
+app.post("/gateway/claim-authorship", async (req, res) => {
+  try {
+    const { issue_number, public_key_pem, signature_base64, claim_message, claimant_note } = req.body || {};
+
+    // 1. Validate request shape
+    if (!issue_number || !public_key_pem || !signature_base64 || !claim_message) {
+      return res.status(422).json({
+        accepted: false,
+        reason: "authorship_claim_failed",
+        validation_stage: "authorship_claim",
+        agent_action: "Provide issue_number, public_key_pem, signature_base64, and claim_message. Never submit private keys.",
+        issue_created: false
+      });
+    }
+
+    // 2. Reject private key leakage
+    if (rejectSecretPatterns(JSON.stringify(req.body))) {
+      return res.status(422).json({
+        accepted: false,
+        reason: "secret_pattern_detected",
+        validation_stage: "authorship_claim",
+        agent_action: "Remove all secrets and private keys from the request.",
+        issue_created: false
+      });
+    }
+
+    // 3. Fetch Issue body using GitHub App token
+    const octokit = await getOctokit();
+    const { data: issue } = await octokit.rest.issues.get({
+      owner: REPO_OWNER,
+      repo: REPO_NAME,
+      issue_number
+    });
+
+    // 4. Parse trinity-issue-intake machine block
+    const body = issue.body || "";
+    const blockMatch = body.match(/```trinity-issue-intake\n([\s\S]*?)```/);
+    if (!blockMatch) {
+      return res.status(422).json({
+        accepted: false,
+        reason: "authorship_claim_failed",
+        validation_stage: "authorship_claim",
+        agent_action: "Issue does not contain a trinity-issue-intake machine block.",
+        issue_created: false
+      });
+    }
+
+    const block = blockMatch[1];
+
+    // 5. Extract claim_status and require claimable
+    const claimStatusMatch = block.match(/claim_status:\s*(\S+)/);
+    const claimStatus = claimStatusMatch ? claimStatusMatch[1] : "unclaimed";
+    if (claimStatus !== "claimable_by_public_key" && claimStatus !== "claimed") {
+      return res.status(422).json({
+        accepted: false,
+        reason: "authorship_claim_failed",
+        validation_stage: "authorship_claim",
+        agent_action: `Issue claim_status is '${claimStatus}', not claimable_by_public_key or claimed.`,
+        issue_created: false
+      });
+    }
+
+    // 6. Extract public key hash from machine block
+    const blockPubKeyShaMatch = block.match(/authorship_public_key_sha256:\s*(\S+)/);
+    const blockPayloadShaMatch = block.match(/authorship_payload_sha256:\s*(\S+)/);
+    const blockPubKeySha = blockPubKeyShaMatch ? blockPubKeyShaMatch[1] : null;
+    const blockPayloadSha = blockPayloadShaMatch ? blockPayloadShaMatch[1] : null;
+
+    if (!blockPubKeySha || blockPubKeySha === "none") {
+      return res.status(422).json({
+        accepted: false,
+        reason: "authorship_claim_failed",
+        validation_stage: "authorship_claim",
+        agent_action: "Issue machine block has no authorship_public_key_sha256.",
+        issue_created: false
+      });
+    }
+
+    // 7. Hash submitted public_key_pem and compare
+    const submittedPubKeySha = sha256Text(normalizePem(public_key_pem));
+    if (submittedPubKeySha !== blockPubKeySha) {
+      return res.status(422).json({
+        accepted: false,
+        reason: "authorship_claim_failed",
+        validation_stage: "authorship_claim",
+        agent_action: "Submitted public key does not match the key recorded in the issue machine block.",
+        issue_created: false
+      });
+    }
+
+    // 8. Rebuild canonical claim message and compare
+    const expectedClaimMessage = [
+      "TRINITY_AGENT_AUTHORSHIP_CLAIM_V1",
+      `issue_number=${issue_number}`,
+      `repo=${REPO_OWNER}/${REPO_NAME}`,
+      `authorship_public_key_sha256=${blockPubKeySha}`,
+      `authorship_payload_sha256=${blockPayloadSha || "none"}`,
+      "boundary=key_control_only_not_authority_not_attestation_not_amendment",
+    ].join("\n");
+
+    if (claim_message.trim() !== expectedClaimMessage.trim()) {
+      return res.status(422).json({
+        accepted: false,
+        reason: "authorship_claim_failed",
+        validation_stage: "authorship_claim",
+        agent_action: "Claim message does not match the canonical format. Use scripts/build_agent_authorship_claim_message.py.",
+        issue_created: false
+      });
+    }
+
+    // 9. Verify Ed25519 signature
+    let sigOk = false;
+    try {
+      sigOk = verify(
+        null,
+        Buffer.from(claim_message, "utf8"),
+        normalizePem(public_key_pem),
+        Buffer.from(signature_base64, "base64")
+      );
+    } catch (err) {
+      return res.status(422).json({
+        accepted: false,
+        reason: "authorship_claim_failed",
+        validation_stage: "authorship_claim",
+        agent_action: `Signature verification error: ${err.message}`,
+        issue_created: false
+      });
+    }
+
+    if (!sigOk) {
+      return res.status(422).json({
+        accepted: false,
+        reason: "authorship_claim_failed",
+        validation_stage: "authorship_claim",
+        agent_action: "Invalid signature. Sign the canonical claim message with the same Ed25519 private key.",
+        issue_created: false
+      });
+    }
+
+    // 10. Add labels and comment
+    await octokit.rest.issues.addLabels({
+      owner: REPO_OWNER,
+      repo: REPO_NAME,
+      issue_number,
+      labels: ["authorship:claimed", "authorship:key-verified"]
+    });
+
+    const commentBody = [
+      "## Agent Authorship Claim Verified",
+      "",
+      "This claim verifies continuity of control over the public key recorded in the original Gateway machine block.",
+      "",
+      `- Claim status: \`claimed\``,
+      `- Authorship public key SHA-256: \`${blockPubKeySha}\``,
+      `- Authorship payload SHA-256: \`${blockPayloadSha || "none"}\``,
+      "- Verified by: `trinity-agent-issue-gateway`",
+      "- Boundary: key continuity only; not authority, not attestation, not truth, not successor reception, not amendment.",
+      "",
+      "Bitcoin Originals remain final.",
+    ].join("\n");
+
+    await octokit.rest.issues.createComment({
+      owner: REPO_OWNER,
+      repo: REPO_NAME,
+      issue_number,
+      body: commentBody
+    });
+
+    return res.status(200).json({
+      accepted: true,
+      claim_verified: true,
+      issue_number,
+      claim_status: "claimed",
+      authorship_public_key_sha256: blockPubKeySha,
+      authorship_payload_sha256: blockPayloadSha || "none",
+      boundary: "Authorship claim proves key continuity only; not authority, attestation, truth, successor reception, or amendment."
+    });
+
+  } catch (err) {
+    console.error("claim-authorship error:", err);
+    return res.status(500).json({
+      accepted: false,
+      reason: "authorship_claim_failed",
+      validation_stage: "authorship_claim",
+      agent_action: `Internal error: ${err.message}`,
+      issue_created: false
+    });
+  }
 });
 
 // Self-test

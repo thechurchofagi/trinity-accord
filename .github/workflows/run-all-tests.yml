@@ -232,3 +232,24 @@ jobs:
 
       - name: Test pure echo guidance
         run: python3 scripts/test_agent_submit_pure_echo_guidance.py
+
+      - name: Test authorship proof schema
+        run: python3 scripts/test_authorship_proof_schema.py
+
+      - name: Test authorship proof sign verify
+        run: python3 scripts/test_authorship_proof_sign_verify.py
+
+      - name: Test authorship no private key leakage
+        run: python3 scripts/test_authorship_no_private_key_leakage.py
+
+      - name: Test authorship machine block rendering
+        run: python3 scripts/test_authorship_machine_block_rendering.py
+
+      - name: Test authorship claim endpoint contract
+        run: python3 scripts/test_authorship_claim_endpoint_contract.py
+
+      - name: Test authorship index fields
+        run: python3 scripts/test_authorship_index_fields.py
+
+      - name: Test authorship docs guidance
+        run: python3 scripts/test_authorship_docs_guidance.py

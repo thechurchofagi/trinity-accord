@@ -360,6 +360,45 @@
     },
     "correction_does_not_amend_prior_record": {
       "type": "boolean"
+    },
+    "authorship_claim_protocol": {
+      "type": "string",
+      "enum": ["agent-authorship-claim-v1"]
+    },
+    "authorship_proof_present": {
+      "type": "boolean"
+    },
+    "authorship_proof_method": {
+      "type": "string",
+      "enum": ["none", "public_key_signature"]
+    },
+    "authorship_algorithm": {
+      "type": "string",
+      "enum": ["none", "ed25519"]
+    },
+    "authorship_public_key_sha256": {
+      "type": "string"
+    },
+    "authorship_payload_sha256": {
+      "type": "string"
+    },
+    "authorship_signature_verified": {
+      "type": "boolean"
+    },
+    "claim_status": {
+      "type": "string",
+      "enum": [
+        "unclaimed",
+        "claimable_by_public_key",
+        "claimed",
+        "invalid_authorship_proof"
+      ]
+    },
+    "claim_endpoint": {
+      "type": "string"
+    },
+    "claim_boundary": {
+      "type": "string"
     }
   },
   "allOf": [
@@ -408,7 +447,14 @@
           "gateway_receipt_id",
           "render_api_only",
           "server_validated",
-          "server_rendered"
+          "server_rendered",
+          "authorship_claim_protocol",
+          "authorship_proof_present",
+          "authorship_proof_method",
+          "authorship_algorithm",
+          "authorship_signature_verified",
+          "claim_status",
+          "claim_boundary"
         ],
         "properties": {
           "submission_type": {
@@ -826,7 +872,14 @@
           "server_validated",
           "server_rendered",
           "canonical_boundary_sentence",
-          "boundary_sentence_present"
+          "boundary_sentence_present",
+          "authorship_claim_protocol",
+          "authorship_proof_present",
+          "authorship_proof_method",
+          "authorship_algorithm",
+          "authorship_signature_verified",
+          "claim_status",
+          "claim_boundary"
         ],
         "properties": {
           "submission_type": {

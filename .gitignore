@@ -1,38 +1,5 @@
-node_modules/
-__pycache__/
-*.pyc
-*.pyo
-.env
-.env.*
-*AUDIT*.json
 
-# Audit CSV outputs (large, generated)
-audit/repo-size/*/current_tracked_files.csv
-audit/repo-size/*/current_top_files.csv
-audit/repo-size/*/current_dir_summary.csv
-audit/repo-size/*/current_ext_summary.csv
-audit/repo-size/*/history_top_blobs.csv
-audit/repo-size/*/history_large_removed_blobs.csv
-audit/repo-size/*/release_asset_matches.csv
-audit/repo-size/*/baseline.json
-audit/repo-size/*/recommendations.json
-audit/repo-size/*/git-sizer.txt
-
-# Local temporary / backup files
-*.bak
-*.tmp
-*.swp
-*_backup.*
-_permission_test.txt
-dist/
-
-# Large evidence payloads belong in GitHub Releases / Arweave / IPFS, not Git.
-archive/evidence/flaw-archive-bundle.zip
-archive/evidence/flaw-images/指纹/
-arweave-backup/files/public_covenant_archive.zip
-*.car
-*.mp4
-*.mov
-
-# Evidence JPGs migrated to GitHub Release (notarial-certificate-images-v1)
-evidence/notarial-certificate-2026-05-13/公证书/*.jpg
+# Authorship keys - never commit private keys
+*.private.pem
+*.authorship.private.pem
+agent-authorship-key.private.pem

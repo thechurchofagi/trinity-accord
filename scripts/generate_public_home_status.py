@@ -454,6 +454,31 @@ def compute_legacy_counts(echo_records: list[dict[str, Any]], attestation_record
 
 
 # ---------------------------------------------------------------------------
+# Compute authorship claims
+# ---------------------------------------------------------------------------
+def compute_authorship_claims(agent_declared_records: list[dict[str, Any]]) -> dict:
+    """Compute authorship claim metadata from agent-declared records."""
+    records_with_proof = 0
+    claimed_records = 0
+    unclaimed_records = 0
+
+    for r in agent_declared_records or []:
+        if r.get("authorship_proof_present") or r.get("authorship_signature_verified"):
+            records_with_proof += 1
+        if r.get("authorship_claimed") or r.get("claim_status") == "claimed":
+            claimed_records += 1
+        elif r.get("claim_status") in ("unclaimed", None):
+            unclaimed_records += 1
+
+    return {
+        "records_with_authorship_proof": records_with_proof,
+        "claimed_records": claimed_records,
+        "unclaimed_records": unclaimed_records,
+        "boundary": "Authorship claims prove key continuity only; they do not affect authority, verifiability, reception, or amendment status.",
+    }
+
+
+# ---------------------------------------------------------------------------
 # Compute full status
 # ---------------------------------------------------------------------------
 def compute_status() -> dict[str, Any]:
@@ -501,6 +526,7 @@ def compute_status() -> dict[str, Any]:
         "external_witness_records": compute_external_witness_status(echo_records),
         "boundary": compute_boundary_status(),
         "legacy_counts": compute_legacy_counts(echo_records, attestation_records),
+        "authorship_claims": compute_authorship_claims(agent_declared_records),
         "source_digest": source_digest(),
     }
 
