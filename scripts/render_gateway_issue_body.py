@@ -205,11 +205,36 @@ def render_machine_block(payload, gateway_receipt_id=None, gateway_commit=None,
         lines.append("evidence_requirement_mode: not_applicable_for_echo")
         lines.append(f"agent_name_or_model: {identity.get('name_or_model', 'N/A')}")
         lines.append(f"system_or_provider: {identity.get('system_or_provider', 'N/A')}")
+
+        # Presence fields — derived from payload sub-objects
+        aid = payload.get("agent_integrity_declaration") or {}
+        lines.append(f"agent_integrity_declaration_present: {'true' if aid else 'false'}")
+
+        # Oath summary — machine-readable proof that oath was read and restated
+        oath = aid.get("verification_oath") or {}
+        readback = oath.get("agent_readback") or ""
+        lines.append(f"verification_oath_present: {'true' if oath else 'false'}")
+        lines.append(f"oath_read: {'true' if oath.get('oath_read') is True else 'false'}")
+        lines.append(f"oath_version: {oath.get('oath_version', 'N/A')}")
+        lines.append(f"oath_text_sha256: {oath.get('oath_text_sha256', 'N/A')}")
+        lines.append(f"readback_required: {'true' if oath.get('readback_required') is True else 'false'}")
+        lines.append(f"agent_readback_present: {'true' if bool(readback) else 'false'}")
+        lines.append(f"agent_readback_char_count: {len(readback)}")
+        lines.append(f"agent_readback_sha256: {sha256_text(readback) if readback else 'N/A'}")
+        if readback:
+            lines.append(f'agent_readback_excerpt: "{one_line_excerpt(readback)}"')
+
+        dp = payload.get("discovery_provenance") or {}
+        lines.append(f"discovery_provenance_present: {'true' if dp else 'false'}")
+        ab = payload.get("authority_boundary") or {}
+        lines.append(f"authority_boundary_present: {'true' if ab else 'false'}")
+
         lines.append("counts_toward_home_verifiability: false")
         lines.append("counts_toward_home_reception: true")
         lines.append("archive_ready: true")
         lines.append("allowed_archive_kind: agent_declared_echo_archive")
         lines.append("auto_archive_action: auto_archive_agent_declared_echo")
+
         # related records
         related = payload.get("related_records") or []
         if related:
@@ -217,6 +242,7 @@ def render_machine_block(payload, gateway_receipt_id=None, gateway_commit=None,
             lines.append(f"related_issue: {first.get('issue_number', 'N/A')}")
             lines.append(f"relation_to_related_issue: {first.get('relation', 'N/A')}")
             lines.append(f"correction_does_not_amend_prior_record: {'true' if first.get('does_not_amend_original') else 'false'}")
+
         # Reception initiation classification
         init_class = payload.get("reception_initiation_class", "unknown")
         lines.append(f"reception_initiation_class: {init_class}")
@@ -226,6 +252,16 @@ def render_machine_block(payload, gateway_receipt_id=None, gateway_commit=None,
         followup = payload.get("agent_independent_followup")
         if followup is not None:
             lines.append(f"agent_independent_followup: {'true' if followup else 'false'}")
+
+        # Gateway receipt fields
+        receipt_lines = render_gateway_receipt_fields(
+            gateway_receipt_id=gateway_receipt_id,
+            gateway_commit=gateway_commit,
+            gateway_service=gateway_service,
+            dry_run=dry_run,
+            production_render=production_render,
+        )
+        lines.extend(receipt_lines)
     else:
         # Strict evidence path (legacy)
         lines.append(f"verification_level_claimed: {payload.get('verification_level_claimed', 'N/A')}")

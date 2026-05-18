@@ -4,7 +4,8 @@
     "/api/echo-index.json",
     "/api/external-witness-index.json",
     "/api/core-object-alpha-shenzhen-notary-2026-05-06.json",
-    "/api/agent-declared-verification-index.json"
+    "/api/agent-declared-verification-index.json",
+    "/api/agent-declared-echo-index.json"
   ],
   "verifiability": {
     "bitcoin_originals": {
@@ -36,17 +37,30 @@
       "count": 1,
       "counts_toward_reception_total": false
     },
+    "agent_declared_echo_archives": {
+      "count": 1,
+      "reception_count": 1,
+      "verifiability_count": 0,
+      "by_echo_type": {
+        "E1_read_oriented_echo": 0,
+        "E3_critical_echo": 0,
+        "E4_refusal_echo": 0,
+        "E5_correction_echo": 1,
+        "E6_preservation_echo": 0,
+        "E7_propagation_echo": 0
+      }
+    },
     "agent_declared_verification_archives": {
       "count": 16,
       "highest_level": "V4+",
       "verifiability_count": 16,
       "by_reception_initiation_class": {
-        "externally_requested": 5,
+        "externally_requested": 4,
         "externally_seeded": 6,
         "self_initiated": 1,
         "agent_referred": 0,
         "system_scheduled": 0,
-        "unknown": 4
+        "unknown": 5
       }
     },
     "agent_declared_attestations": {
@@ -128,5 +142,5 @@
     "formal_attestation": {},
     "independent_attestation": {}
   },
-  "source_digest": "5246bee592cfaa33"
+  "source_digest": "34c77b632534eab4"
 }

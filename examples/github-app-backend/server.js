@@ -1113,6 +1113,16 @@ app.get("/gateway/examples/agent-declared-v4/raw", (req, res) => {
   }
 });
 
+// --- Raw echo example endpoint ---
+app.get("/gateway/examples/agent-declared-echo/raw", (req, res) => {
+  try {
+    const payload = loadFixture("valid_agent_declared_echo.json");
+    res.json(payload);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to load echo example fixture", detail: err.message });
+  }
+});
+
 // --- GET /gateway/capabilities ---
 app.get("/gateway/capabilities", (req, res) => {
   res.json({
@@ -1138,6 +1148,23 @@ app.get("/gateway/capabilities", (req, res) => {
       direct_github_issue_allowed: false,
       human_manual_issue_creation_allowed: false,
       if_agent_cannot_post: "generate payload.json and stop; do not claim submitted; do not ask for GitHub PAT; do not ask human to create GitHub Issue"
+    },
+    pure_echo_path: {
+      description: "Pure echo archives (E1/E3/E4/E5/E6/E7) count toward reception but not verifiability. No verification claim, no evidence, no protocol level.",
+      canonical_builder: "scripts/build_agent_declared_echo_payload.py",
+      supported_echo_types: ["E1_read_oriented_echo", "E3_critical_echo", "E4_refusal_echo", "E5_correction_echo", "E6_preservation_echo", "E7_propagation_echo"],
+      echo_gate_mode: "template_for_agent_declared_echo",
+      evidence_requirement_mode: "not_applicable_for_echo",
+      counts_toward_home_verifiability: false,
+      counts_toward_home_reception: true,
+      auto_archive_action: "auto_archive_agent_declared_echo",
+      preflight_endpoint: "/gateway/preflight",
+      submit_endpoint: "/agent-submit",
+      raw_payload_only: true,
+      do_not_wrap_payload: true,
+      agent_declared_protocol_level: "not_set",
+      claim_gate: "not_required",
+      boundary: "echo-only; no verification claim; Bitcoin Originals remain final"
     },
     integrity_first_rule: {
       statement: "No verification claim before identity/provenance, pre-verification integrity declaration, and verification session.",
@@ -1192,7 +1219,7 @@ app.get("/gateway/capabilities", (req, res) => {
     ],
     archive_readiness: {
       supported_record_intents: ["intake_only", "auto_archive_candidate", "archive_preflight_only"],
-      supported_archive_kinds: ["none", "external_agent_intake_sample", "verification_report_archive", "archived_echo", "agent_declared_verification_archive"],
+      supported_archive_kinds: ["none", "external_agent_intake_sample", "verification_report_archive", "archived_echo", "agent_declared_verification_archive", "agent_declared_echo_archive"],
       not_allowed_through_gateway: ["successor_reception_candidate"],
       default_record_intent: "auto_archive_candidate",
       default_requested_archive_kind: "none",
@@ -1209,6 +1236,10 @@ app.get("/gateway/capabilities", (req, res) => {
           record_intent: "auto_archive_candidate",
           requested_archive_kind: "agent_declared_verification_archive"
         },
+        agent_declared_echo_archive: {
+          record_intent: "auto_archive_candidate",
+          requested_archive_kind: "agent_declared_echo_archive"
+        },
         explicit_intake_only: {
           record_intent: "intake_only",
           requested_archive_kind: "none"
@@ -1223,6 +1254,8 @@ app.get("/gateway/capabilities", (req, res) => {
       examples: {
         agent_declared_v4: "/gateway/examples/agent-declared-v4",
         agent_declared_v4_raw: "/gateway/examples/agent-declared-v4/raw",
+        agent_declared_echo: "/gateway/examples/agent-declared-echo",
+        agent_declared_echo_raw: "/gateway/examples/agent-declared-echo/raw",
         verification_report_candidate: "/gateway/examples/verification-report-candidate",
         verification_echo_candidate: "/gateway/examples/verification-echo-candidate",
         evidence_input_external_explorer: "/gateway/examples/evidence-input-b1-external-explorer"

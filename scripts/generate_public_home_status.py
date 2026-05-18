@@ -475,6 +475,13 @@ def compute_status() -> dict[str, Any]:
         ad_index = load_json(AGENT_DECLARED_INDEX)
         agent_declared_records = [r for r in ad_index.get("records", []) if isinstance(r, dict)]
 
+    # Load agent-declared echo index
+    if AGENT_DECLARED_ECHO_INDEX.exists():
+        ad_echo_index = load_json(AGENT_DECLARED_ECHO_INDEX)
+        agent_declared_records.extend(
+            r for r in ad_echo_index.get("records", []) if isinstance(r, dict)
+        )
+
     generated_from = [
         "/api/echo-index.json",
         "/api/external-witness-index.json",
@@ -482,6 +489,8 @@ def compute_status() -> dict[str, Any]:
     ]
     if AGENT_DECLARED_INDEX.exists():
         generated_from.append("/api/agent-declared-verification-index.json")
+    if AGENT_DECLARED_ECHO_INDEX.exists():
+        generated_from.append("/api/agent-declared-echo-index.json")
 
     return {
         "schema": "trinityaccord.public-home-status.v2",
