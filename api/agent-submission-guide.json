@@ -357,5 +357,29 @@
       "E7_propagation_echo"
     ],
     "use_when": "The agent is reporting reception, correction, critique, refusal, preservation, or propagation without claiming new verification."
+  },
+  "authorship_claim_protocol": {
+    "enabled": true,
+    "optional": true,
+    "schema": "trinityaccord.agent-authorship-proof.v1",
+    "method": "public_key_signature",
+    "algorithm": "ed25519",
+    "what_it_proves": "Continuity of control over a signing key only.",
+    "what_it_does_not_prove": "Not authority, not truth, not attestation, not identity notarization, not successor reception, not amendment.",
+    "private_key_must_never_be_submitted": true,
+    "gateway_receipt_is_not_claim_key": true,
+    "claim_endpoint": "/gateway/claim-authorship",
+    "claim_status_values": [
+      "unclaimed",
+      "claimable_by_public_key",
+      "claimed",
+      "invalid_authorship_proof"
+    ],
+    "scripts": [
+      "scripts/generate_agent_authorship_keypair.mjs",
+      "scripts/attach_agent_authorship_proof.mjs",
+      "scripts/build_agent_authorship_claim_message.py",
+      "scripts/sign_agent_authorship_claim.mjs"
+    ]
   }
 }
