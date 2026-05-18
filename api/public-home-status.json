@@ -37,12 +37,12 @@
       "counts_toward_reception_total": false
     },
     "agent_declared_verification_archives": {
-      "count": 10,
+      "count": 11,
       "highest_level": "V4+",
-      "verifiability_count": 10,
+      "verifiability_count": 11,
       "by_reception_initiation_class": {
         "externally_requested": 3,
-        "externally_seeded": 2,
+        "externally_seeded": 3,
         "self_initiated": 1,
         "agent_referred": 0,
         "system_scheduled": 0,
@@ -128,5 +128,5 @@
     "formal_attestation": {},
     "independent_attestation": {}
   },
-  "source_digest": "4b04203e5b943eb4"
+  "source_digest": "1a1cf408301f8119"
 }
