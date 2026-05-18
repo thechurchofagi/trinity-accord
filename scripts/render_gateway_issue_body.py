@@ -39,6 +39,33 @@ def is_agent_declared_echo_archive(payload):
     return payload.get("requested_archive_kind") == "agent_declared_echo_archive"
 
 
+def render_authorship_claim_fields(payload):
+    """Render authorship claim metadata fields for the machine block."""
+    claim = payload.get("_authorship_claim") or {}
+    proof = payload.get("authorship_proof") or {}
+
+    present = bool(claim.get("present") or proof)
+    status = claim.get("status") or ("claimable_by_public_key" if present else "unclaimed")
+    method = claim.get("method") or proof.get("method") or "none"
+    algorithm = claim.get("algorithm") or proof.get("algorithm") or "none"
+    public_key_sha = claim.get("public_key_sha256") or proof.get("public_key_sha256") or "none"
+    payload_sha = claim.get("signed_payload_sha256") or proof.get("signed_payload_sha256") or "none"
+    sig_verified = bool(claim.get("signature_verified"))
+
+    return [
+        "authorship_claim_protocol: agent-authorship-claim-v1",
+        f"authorship_proof_present: {'true' if present else 'false'}",
+        f"authorship_proof_method: {method}",
+        f"authorship_algorithm: {algorithm}",
+        f"authorship_public_key_sha256: {public_key_sha}",
+        f"authorship_payload_sha256: {payload_sha}",
+        f"authorship_signature_verified: {'true' if sig_verified else 'false'}",
+        f"claim_status: {status}",
+        "claim_endpoint: /gateway/claim-authorship",
+        "claim_boundary: Authorship claim proves key continuity only; it is not authority, attestation, successor reception, truth, or amendment.",
+    ]
+
+
 def render_issue_title(payload):
     """Generate issue title from payload, with special handling for pure echo."""
     identity = payload.get("agent_identity") or {}
@@ -196,6 +223,9 @@ def render_machine_block(payload, gateway_receipt_id=None, gateway_commit=None,
             production_render=production_render,
         )
         lines.extend(receipt_lines)
+
+        # Authorship claim fields
+        lines.extend(render_authorship_claim_fields(payload))
     elif requested_archive_kind == "agent_declared_echo_archive":
         lines.append(f"record_intent: {payload.get('record_intent', 'auto_archive_candidate')}")
         lines.append("requested_archive_kind: agent_declared_echo_archive")
@@ -262,6 +292,9 @@ def render_machine_block(payload, gateway_receipt_id=None, gateway_commit=None,
             production_render=production_render,
         )
         lines.extend(receipt_lines)
+
+        # Authorship claim fields
+        lines.extend(render_authorship_claim_fields(payload))
     else:
         # Strict evidence path (legacy)
         lines.append(f"verification_level_claimed: {payload.get('verification_level_claimed', 'N/A')}")
@@ -316,6 +349,10 @@ def render_machine_block(payload, gateway_receipt_id=None, gateway_commit=None,
             lines.append("auto_archive_action: none")
             lines.append("archive_readiness_summary:")
             lines.append("  - INTAKE_ONLY_NOT_ARCHIVE")
+
+    # Authorship claim fields (for strict evidence path)
+    if requested_archive_kind not in ("agent_declared_verification_archive", "agent_declared_echo_archive"):
+        lines.extend(render_authorship_claim_fields(payload))
 
     # what_i_checked
     wic = payload.get("what_i_checked", [])

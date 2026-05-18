@@ -67,6 +67,12 @@ FORBIDDEN_TITLE_PATTERNS = [
 
 V0_V5 = {"V0", "V1", "V2", "V3", "V4", "V4+", "V5"}
 
+PRIVATE_KEY_MARKERS = [
+    "-----BEGIN PRIVATE KEY-----",
+    "-----BEGIN OPENSSH PRIVATE KEY-----",
+    "PRIVATE KEY",
+]
+
 # V0-V5 fail-closed policy
 from gateway_v0_v5_policy import (  # noqa: E402
     V0_V5_WRONG_PATH_ERROR,
@@ -103,6 +109,62 @@ def validate_sha256s(attachments, errors):
         if key.endswith("_sha256") and value not in (None, ""):
             if not SHA256_RE.match(str(value)):
                 errors.append(f"{key} must be 64 lowercase hex characters")
+
+
+def validate_authorship_proof(payload, errors):
+    """Validate authorship_proof shape and reject private key leakage."""
+    proof = payload.get("authorship_proof")
+    if proof in (None, ""):
+        return
+
+    if not isinstance(proof, dict):
+        errors.append("authorship_proof must be object or null")
+        return
+
+    forbidden_keys = {"private_key", "private_key_pem", "secret", "token", "claim_secret"}
+    for key in proof:
+        if key in forbidden_keys:
+            errors.append(f"authorship_proof must not contain {key}")
+
+    proof_text = json.dumps(proof, ensure_ascii=False)
+    for marker in PRIVATE_KEY_MARKERS:
+        if marker in proof_text:
+            errors.append("authorship_proof must not contain private key material")
+
+    required = [
+        "schema",
+        "method",
+        "algorithm",
+        "public_key_pem",
+        "public_key_sha256",
+        "signed_payload_sha256",
+        "signature_base64",
+        "signed_message",
+    ]
+    for key in required:
+        if not proof.get(key):
+            errors.append(f"authorship_proof.{key} is required")
+
+    if proof.get("schema") != "trinityaccord.agent-authorship-proof.v1":
+        errors.append("authorship_proof.schema must be trinityaccord.agent-authorship-proof.v1")
+
+    if proof.get("method") != "public_key_signature":
+        errors.append("authorship_proof.method must be public_key_signature")
+
+    if proof.get("algorithm") != "ed25519":
+        errors.append("authorship_proof.algorithm must be ed25519")
+
+    public_key_pem = proof.get("public_key_pem") or ""
+    if "-----BEGIN PUBLIC KEY-----" not in public_key_pem or "-----END PUBLIC KEY-----" not in public_key_pem:
+        errors.append("authorship_proof.public_key_pem must be PEM public key")
+
+    for key in ("public_key_sha256", "signed_payload_sha256"):
+        value = proof.get(key) or ""
+        if not re.fullmatch(r"[a-f0-9]{64}", value):
+            errors.append(f"authorship_proof.{key} must be 64 lowercase hex")
+
+    if len(proof.get("signature_base64") or "") < 40:
+        errors.append("authorship_proof.signature_base64 is too short")
 
 
 def validate_identity(payload, errors):
@@ -178,6 +240,7 @@ def validate_claim_gate(payload, errors):
 def validate_common(payload, errors):
     validate_identity(payload, errors)
     validate_provenance(payload, errors)
+    validate_authorship_proof(payload, errors)
     if requires_claim_gate(payload):
         validate_claim_gate(payload, errors)
     else:

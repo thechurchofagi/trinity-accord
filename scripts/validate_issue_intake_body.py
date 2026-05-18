@@ -246,6 +246,55 @@ def fail(msgs):
     sys.exit(1)
 
 
+AUTHORSHIP_REQUIRED_COMMON = [
+    "authorship_claim_protocol",
+    "authorship_proof_present",
+    "authorship_proof_method",
+    "authorship_algorithm",
+    "authorship_signature_verified",
+    "claim_status",
+    "claim_boundary",
+]
+
+
+def validate_authorship_machine_fields(block, errors):
+    """Validate authorship claim fields in the machine block."""
+    for key in AUTHORSHIP_REQUIRED_COMMON:
+        if key not in block:
+            errors.append(f"missing authorship field: {key}")
+
+    if block.get("authorship_claim_protocol") != "agent-authorship-claim-v1":
+        errors.append("authorship_claim_protocol must be agent-authorship-claim-v1")
+
+    present = block.get("authorship_proof_present")
+    sig_verified = block.get("authorship_signature_verified")
+    status = block.get("claim_status")
+
+    if present is True:
+        if block.get("authorship_proof_method") != "public_key_signature":
+            errors.append("authorship_proof_method must be public_key_signature when proof is present")
+        if block.get("authorship_algorithm") != "ed25519":
+            errors.append("authorship_algorithm must be ed25519 when proof is present")
+        hex64 = re.compile(r"^[a-f0-9]{64}$")
+        if not hex64.match(str(block.get("authorship_public_key_sha256", ""))):
+            errors.append("authorship_public_key_sha256 must be 64 hex when proof is present")
+        if not hex64.match(str(block.get("authorship_payload_sha256", ""))):
+            errors.append("authorship_payload_sha256 must be 64 hex when proof is present")
+        if sig_verified is not True:
+            errors.append("authorship_signature_verified must be true when proof is present")
+        if status not in ("claimable_by_public_key", "claimed"):
+            errors.append("claim_status must be claimable_by_public_key or claimed when proof is present")
+    elif present is False or present is None:
+        if block.get("authorship_proof_method") not in ("none", None):
+            errors.append("authorship_proof_method must be none when proof is absent")
+        if block.get("authorship_algorithm") not in ("none", None):
+            errors.append("authorship_algorithm must be none when proof is absent")
+        if sig_verified not in (False, None):
+            errors.append("authorship_signature_verified must be false when proof is absent")
+        if status not in ("unclaimed", None):
+            errors.append("claim_status must be unclaimed when proof is absent")
+
+
 def main():
     if len(sys.argv) != 2:
         print("Usage: python3 scripts/validate_issue_intake_body.py issue-body.md")
@@ -356,6 +405,9 @@ def main():
         if ars is not None:
             if not isinstance(ars, list) or len(ars) == 0:
                 errors.append("archive_readiness_summary must be a non-empty list")
+
+        # Authorship claim fields validation
+        validate_authorship_machine_fields(data, errors)
     elif is_echo_archive:
         # Echo archive: use echo-specific required set
         for k in ECHO_AGENT_DECLARED_REQUIRED:
@@ -417,6 +469,9 @@ def main():
         echo_type = data.get("echo_type")
         if echo_type is not None and echo_type not in VALID_ECHO_TYPES:
             errors.append(f"echo_type must be one of {VALID_ECHO_TYPES}, got {echo_type!r}")
+
+        # Authorship claim fields validation
+        validate_authorship_machine_fields(data, errors)
     else:
         # Strict/legacy path: require strict fields
         for k in STRICT_REQUIRED:
