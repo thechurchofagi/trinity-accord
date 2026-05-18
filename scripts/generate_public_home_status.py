@@ -33,6 +33,7 @@ ECHO_INDEX = ROOT / "api" / "echo-index.json"
 EXTERNAL_WITNESS_INDEX = ROOT / "api" / "external-witness-index.json"
 ATTESTATION_INDEX = ROOT / "api" / "independent-attestation-index.json"
 AGENT_DECLARED_INDEX = ROOT / "api" / "agent-declared-verification-index.json"
+AGENT_DECLARED_ECHO_INDEX = ROOT / "api" / "agent-declared-echo-index.json"
 PHYSICAL_ANCHOR = ROOT / "api" / "core-object-alpha-shenzhen-notary-2026-05-06.json"
 PUBLIC_HOME_STATUS = ROOT / "api" / "public-home-status.json"
 
@@ -188,11 +189,13 @@ def compute_verifiability_status(physical: dict[str, Any], agent_declared_record
     highest_p = max(p_levels, key=lambda x: LEVEL_ORDER.get(x, -1)) if p_levels else "none"
 
     # Compute highest protocol level from agent-declared verification archives
+    # Exclude echo archives (semantic_archive_kind == "agent_declared_echo_archive")
     ad_verifiable = [
         r for r in (agent_declared_records or [])
         if r.get("archive_ready") is True
         and r.get("counts_toward_home_verifiability") is True
         and r.get("test_record") is not True
+        and r.get("semantic_archive_kind") != "agent_declared_echo_archive"
     ]
     agent_declared_highest = highest_level(ad_verifiable, "agent_declared_protocol_level") if ad_verifiable else "V4"
     if agent_declared_highest == "none":
@@ -232,11 +235,35 @@ def compute_reception_status(echo_records: list[dict[str, Any]], agent_declared_
     # Pending human review — not counted as archived
     pending_review = [r for r in echo_records if r.get("archive_status") == "needs_human_review"]
 
+    # Agent-declared echo archives (reclassified via semantic overrides)
+    ad_echo_archives = [
+        r for r in agent_declared_records
+        if r.get("semantic_archive_kind") == "agent_declared_echo_archive"
+        and r.get("counts_toward_home_reception") is True
+        and r.get("test_record") is not True
+    ]
+    echo_archive_count = len(ad_echo_archives)
+
+    # Count by echo type
+    echo_type_counts = {
+        "E1_read_oriented_echo": 0,
+        "E3_critical_echo": 0,
+        "E4_refusal_echo": 0,
+        "E5_correction_echo": 0,
+        "E6_preservation_echo": 0,
+        "E7_propagation_echo": 0,
+    }
+    for r in ad_echo_archives:
+        et = r.get("echo_type", "")
+        if et in echo_type_counts:
+            echo_type_counts[et] += 1
+
     # Agent-declared verification archives (from index, excluding test records for reception)
     ad_reception = [
         r for r in agent_declared_records
         if r.get("archive_ready") is True
         and r.get("requested_archive_kind") == "agent_declared_verification_archive"
+        and r.get("semantic_archive_kind") != "agent_declared_echo_archive"
         and r.get("counts_toward_home_reception") is True
         and r.get("test_record") is not True
     ]
@@ -244,6 +271,7 @@ def compute_reception_status(echo_records: list[dict[str, Any]], agent_declared_
         r for r in agent_declared_records
         if r.get("archive_ready") is True
         and r.get("requested_archive_kind") == "agent_declared_verification_archive"
+        and r.get("semantic_archive_kind") != "agent_declared_echo_archive"
         and r.get("counts_toward_home_verifiability") is True
         and r.get("test_record") is not True
     ]
@@ -279,6 +307,12 @@ def compute_reception_status(echo_records: list[dict[str, Any]], agent_declared_
         "pending_human_review_echoes": {
             "count": len(pending_review),
             "counts_toward_reception_total": False,
+        },
+        "agent_declared_echo_archives": {
+            "count": echo_archive_count,
+            "reception_count": echo_archive_count,
+            "verifiability_count": 0,
+            "by_echo_type": echo_type_counts,
         },
         "agent_declared_verification_archives": {
             "count": len(ad_reception),
@@ -478,6 +512,7 @@ def render_block(status: dict[str, Any]) -> str:
     # multi_agent) overlap with archived_echoes and must NOT be added.
     total_reception = (
         r["archived_echoes"]["count"]
+        + r.get("agent_declared_echo_archives", {}).get("count", 0)
         + r.get("agent_declared_verification_archives", {}).get("count", 0)
         + r.get("agent_declared_attestations", {}).get("count", 0)
         + r.get("agent_declared_successor_receptions", {}).get("count", 0)
@@ -579,6 +614,7 @@ def main() -> int:
         r = status["reception"]
         total_reception = (
             r["archived_echoes"]["count"]
+            + r.get("agent_declared_echo_archives", {}).get("count", 0)
             + r.get("agent_declared_verification_archives", {}).get("count", 0)
             + r.get("agent_declared_attestations", {}).get("count", 0)
             + r.get("agent_declared_successor_receptions", {}).get("count", 0)

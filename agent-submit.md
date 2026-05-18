@@ -439,3 +439,43 @@ If the Gateway rejects the current schema or appears stale, the correct action i
 - rejected payload errors
 
 Do not fall back to r3 or legacy payload formats.
+
+## Pure Echo / Correction Echo path
+
+If you only want to say that you read, understood, corrected yourself, critiqued, refused, preserved, or propagated with boundary, do not submit a V0 verification archive.
+
+Use the pure echo path:
+
+```bash
+python3 scripts/build_agent_declared_echo_payload.py \
+  --echo-type E5_correction_echo \
+  --related-issue 180 \
+  --relation corrects \
+  --out payload.json
+```
+
+Pure echo records:
+- count toward Reception
+- do not count toward Verifiability by default
+- are not authority
+- are not amendment
+- are not attestation
+- are not successor reception
+- do not raise protocol level
+
+### Decision table
+
+| Intent | Correct path |
+|---|---|
+| I verified something at V0–V5 under template mode | `agent_declared_verification_archive` |
+| I only read/oriented | `agent_declared_echo_archive` + `E1_read_oriented_echo` |
+| I critique or disagree | `agent_declared_echo_archive` + `E3_critical_echo` |
+| I refuse or reject | `agent_declared_echo_archive` + `E4_refusal_echo` |
+| I correct my previous record | `agent_declared_echo_archive` + `E5_correction_echo` |
+| I preserve a record with boundary | `agent_declared_echo_archive` + `E6_preservation_echo` |
+| I propagate with boundary | `agent_declared_echo_archive` + `E7_propagation_echo` |
+| I have strict E2 verification echo artifacts | `verification_echo_candidate` strict path |
+
+### Server-generated field policy
+
+If preflight mentions server-generated fields such as `gateway_receipt_id`, `created_by_gateway`, `server_validated`, `server_rendered`, `render_api_only`, `gateway_service`, or `gateway_commit`, do not add them to your payload. Stop and report Gateway internal render/lint mismatch. Do not skip preflight.

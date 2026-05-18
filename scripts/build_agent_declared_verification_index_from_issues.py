@@ -28,6 +28,13 @@ from gateway_v0_v5_policy import (
 ROOT = Path(__file__).resolve().parents[1]
 INDEX_PATH = ROOT / "api" / "agent-declared-verification-index.json"
 
+# Load semantic overrides (e.g. correction echoes classified by maintainers)
+OVERRIDES_PATH = ROOT / "api" / "agent-declared-archive-overrides.json"
+overrides: dict = {}
+if OVERRIDES_PATH.exists():
+    with open(OVERRIDES_PATH) as _f:
+        overrides = json.load(_f).get("overrides", {})
+
 # Fields to extract from the trinity-issue-intake block
 INTAKE_FIELDS = [
     "agent_name_or_model",
@@ -294,6 +301,23 @@ def build_index(issues: list[dict], repo: str = "", include_test: bool = False) 
                 )
                 continue
             record["legacy_oath_summary_missing"] = True
+
+        # Apply semantic overrides from agent-declared-archive-overrides.json
+        override = overrides.get(str(issue["number"]))
+        if override:
+            record["semantic_archive_kind"] = override["semantic_archive_kind"]
+            record["echo_type"] = override["echo_type"]
+            record["counts_toward_home_verifiability"] = override["counts_toward_home_verifiability"]
+            record["counts_toward_home_reception"] = override["counts_toward_home_reception"]
+            record["related_issue"] = override["related_issue"]
+            record["relation_to_related_issue"] = override["relation_to_related_issue"]
+            record["semantic_override_reason"] = override["reason"]
+
+        # Issue #180 correction annotation
+        if issue["number"] == 180:
+            record["has_correction"] = True
+            record["corrected_by"] = [182]
+            record["correction_scope"] = "incorrect statement about prior agent-declared archive composition"
 
         records.append(record)
 

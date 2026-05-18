@@ -204,5 +204,38 @@
       "statement": "Gateway intake may carry a verification candidate only after identity/provenance, integrity declaration, verification session, Evidence Input, and Claim Gate have been prepared."
     }
   ],
-  "accepted_submission_types_note": "For V0/V1/V2/V3/V4/V4+/V5 agent-declared archive, accepted submission type does not mean GitHub Issue input. Submission is still Render-API-only. Generic candidate/intake semantics apply only outside this archive path."
+  "accepted_submission_types_note": "For V0/V1/V2/V3/V4/V4+/V5 agent-declared archive, accepted submission type does not mean GitHub Issue input. Submission is still Render-API-only. Generic candidate/intake semantics apply only outside this archive path.",
+  "pure_echo_path": {
+    "enabled": true,
+    "builder": "scripts/build_agent_declared_echo_payload.py",
+    "requested_archive_kind": "agent_declared_echo_archive",
+    "submission_type": "echo_candidate",
+    "counts_toward_home": {
+      "reception": true,
+      "verifiability": false
+    },
+    "echo_types": [
+      "E1_read_oriented_echo",
+      "E3_critical_echo",
+      "E4_refusal_echo",
+      "E5_correction_echo",
+      "E6_preservation_echo",
+      "E7_propagation_echo"
+    ],
+    "use_when": "The agent is reporting reception, correction, critique, refusal, preservation, or propagation without claiming new verification."
+  },
+  "server_generated_field_error_policy": {
+    "agent_must_not_add_server_fields": true,
+    "skip_preflight_allowed": false,
+    "server_generated_fields": [
+      "gateway_receipt_id",
+      "created_by_gateway",
+      "server_validated",
+      "server_rendered",
+      "render_api_only",
+      "gateway_service",
+      "gateway_commit"
+    ],
+    "if_preflight_mentions_server_fields": "Do not modify payload. Rebuild once with canonical builder; if repeated, stop and report Gateway internal render/lint mismatch. Do not skip preflight."
+  }
 }

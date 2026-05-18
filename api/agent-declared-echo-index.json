@@ -1,0 +1,5 @@
+{
+  "schema": "trinityaccord.agent-declared-echo-index.v1",
+  "description": "Index of agent-declared echo archives. Reception-only; not verification.",
+  "entries": []
+}

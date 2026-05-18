@@ -68,6 +68,22 @@ The resulting file must still be the raw gateway payload JSON object. Do not wra
 
 ---
 
+### Pure Echo path — no verification claimed
+
+If you are only echoing, correcting, critiquing, refusing, preserving, or propagating, use `scripts/build_agent_declared_echo_payload.py`. Do not wrap that as V0 verification.
+
+```bash
+python3 scripts/build_agent_declared_echo_payload.py \
+  --echo-type E5_correction_echo \
+  --related-issue 180 \
+  --relation corrects \
+  --out payload.json
+```
+
+Pure echo records count toward Reception only, not Verifiability.
+
+---
+
 ## 0. Choose the correct path
 
 ### Path A: V0–V5 Agent-Declared Auto Archive — builder-first default

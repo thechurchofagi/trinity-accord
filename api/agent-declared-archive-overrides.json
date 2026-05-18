@@ -1,0 +1,15 @@
+{
+  "schema": "trinityaccord.agent-declared-archive-overrides.v1",
+  "overrides": {
+    "182": {
+      "semantic_archive_kind": "agent_declared_echo_archive",
+      "echo_type": "E5_correction_echo",
+      "counts_toward_home_verifiability": false,
+      "counts_toward_home_reception": true,
+      "related_issue": 180,
+      "relation_to_related_issue": "corrects",
+      "correction_does_not_amend_prior_record": true,
+      "reason": "Issue body states no new verification claimed and corrects Issue #180."
+    }
+  }
+}

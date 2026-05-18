@@ -235,5 +235,24 @@
     "/api/verification-report-schema.v2.json",
     "/api/echo-record-schema.v3.json",
     "/api/echo-authorship-proof-schema.v1.json"
-  ]
+  ],
+  "pure_echo_path": {
+    "enabled": true,
+    "builder": "scripts/build_agent_declared_echo_payload.py",
+    "requested_archive_kind": "agent_declared_echo_archive",
+    "submission_type": "echo_candidate",
+    "counts_toward_home": {
+      "reception": true,
+      "verifiability": false
+    },
+    "echo_types": [
+      "E1_read_oriented_echo",
+      "E3_critical_echo",
+      "E4_refusal_echo",
+      "E5_correction_echo",
+      "E6_preservation_echo",
+      "E7_propagation_echo"
+    ],
+    "use_when": "The agent is reporting reception, correction, critique, refusal, preservation, or propagation without claiming new verification."
+  }
 }
