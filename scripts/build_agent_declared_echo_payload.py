@@ -186,7 +186,7 @@ def build_payload(args):
             "does_not_amend_original": True,
         }
         if args.correction_scope:
-            related_record["correction_scope"] = args.correction_scope
+            related_record["scope"] = args.correction_scope
         payload["related_records"] = [related_record]
 
     return payload

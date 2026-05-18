@@ -92,6 +92,26 @@ AGENT_DECLARED_REQUIRED = [
     "server_rendered",
 ]
 
+ECHO_AGENT_DECLARED_REQUIRED = [
+    "submission_type",
+    "agent_name_or_model",
+    "system_or_provider",
+    "record_intent",
+    "requested_archive_kind",
+    "echo_type",
+    "evidence_requirement_mode",
+    "echo_gate_mode",
+    "echo_gate_status",
+    "archive_ready",
+    "allowed_archive_kind",
+    "auto_archive_action",
+    "counts_toward_home_verifiability",
+    "counts_toward_home_reception",
+    "what_i_checked",
+    "limitations",
+    "boundary_sentence",
+]
+
 STRICT_REQUIRED = [
     "submission_type",
     "verification_level_claimed",
@@ -223,6 +243,7 @@ def main():
             errors.append(f"missing required field: {k}")
 
     is_agent_declared = data.get("requested_archive_kind") == "agent_declared_verification_archive"
+    is_echo_archive = data.get("requested_archive_kind") == "agent_declared_echo_archive"
 
     if is_agent_declared:
         # Agent-declared archive: use agent-declared required set, forbid legacy fields
@@ -314,6 +335,67 @@ def main():
         if ars is not None:
             if not isinstance(ars, list) or len(ars) == 0:
                 errors.append("archive_readiness_summary must be a non-empty list")
+    elif is_echo_archive:
+        # Echo archive: use echo-specific required set
+        for k in ECHO_AGENT_DECLARED_REQUIRED:
+            if k not in data or data[k] in ("", [], None):
+                errors.append(f"missing echo archive required field: {k}")
+
+        # Value validation — echo fields must have correct values
+        ECHO_EXPECTED = {
+            "submission_type": "echo_candidate",
+            "record_intent": "auto_archive_candidate",
+            "requested_archive_kind": "agent_declared_echo_archive",
+            "evidence_requirement_mode": "not_applicable_for_echo",
+            "archive_ready": True,
+            "allowed_archive_kind": "agent_declared_echo_archive",
+            "auto_archive_action": "auto_archive_agent_declared_echo",
+            "counts_toward_home_verifiability": False,
+            "counts_toward_home_reception": True,
+        }
+        for k, expected in ECHO_EXPECTED.items():
+            actual = data.get(k)
+            if actual is not None and actual != expected:
+                errors.append(
+                    f"echo archive field {k}: expected {expected!r}, got {actual!r}"
+                )
+
+        # Forbidden fields for echo archive
+        ECHO_FORBIDDEN = {
+            "agent_declared_protocol_level",
+            "claim_gate_mode",
+            "claim_gate_status",
+            "verification_level_claimed",
+            "solicited",
+            "independence_class",
+            "agency_level",
+            "operator_type",
+            "not_independent_attestation",
+            "not_successor_reception",
+        }
+        for k in ECHO_FORBIDDEN:
+            if k in data:
+                errors.append(f"forbidden field in echo archive block: {k}")
+
+        # Echo gate validation
+        VALID_ECHO_GATE_MODES = {"template_for_agent_declared_echo"}
+        egm = data.get("echo_gate_mode")
+        if egm is not None and egm not in VALID_ECHO_GATE_MODES:
+            errors.append(f"echo_gate_mode must be one of {VALID_ECHO_GATE_MODES}, got {egm!r}")
+
+        VALID_ECHO_GATE_STATUSES = {"PASS", "PASS_WITH_WARNINGS"}
+        egs = data.get("echo_gate_status")
+        if egs is not None and egs not in VALID_ECHO_GATE_STATUSES:
+            errors.append(f"echo_gate_status must be one of {VALID_ECHO_GATE_STATUSES}, got {egs!r}")
+
+        # Echo type validation
+        VALID_ECHO_TYPES = {
+            "E1_read_oriented_echo", "E3_critical_echo", "E4_refusal_echo",
+            "E5_correction_echo", "E6_preservation_echo", "E7_propagation_echo",
+        }
+        echo_type = data.get("echo_type")
+        if echo_type is not None and echo_type not in VALID_ECHO_TYPES:
+            errors.append(f"echo_type must be one of {VALID_ECHO_TYPES}, got {echo_type!r}")
     else:
         # Strict/legacy path: require strict fields
         for k in STRICT_REQUIRED:
@@ -345,6 +427,10 @@ def main():
             if not data.get(path_key) and not data.get(hash_key):
                 errors.append(f"missing artifact reference: {path_key} or {hash_key}")
 
+    elif st == "echo_candidate":
+        # Agent-declared echo candidates: already validated above
+        pass
+
     else:
         errors.append(f"unsupported submission_type: {st}")
 
@@ -353,8 +439,8 @@ def main():
         if val and not SHA256_RE.match(str(val)):
             errors.append(f"invalid sha256 field: {key}")
 
-    # Legacy strict field validation (skip for agent-declared)
-    if not is_agent_declared:
+    # Legacy strict field validation (skip for agent-declared and echo archives)
+    if not is_agent_declared and not is_echo_archive:
         if data.get("agency_level") not in ALLOWED_AGENCY:
             errors.append(f"invalid agency_level: {data.get('agency_level')}")
         if data.get("independence_class") not in ALLOWED_INDEPENDENCE:
@@ -367,7 +453,7 @@ def main():
             errors.append("not_successor_reception must be true")
 
     # Agent-declared reception_initiation_class validation
-    if is_agent_declared:
+    if is_agent_declared or is_echo_archive:
         ALLOWED_RECEPTION_INITIATION = {
             "externally_requested", "externally_seeded", "self_initiated",
             "agent_referred", "system_scheduled", "unknown"
@@ -394,7 +480,8 @@ def main():
 
     valid_archive_kinds = (
         "none", "external_agent_intake_sample", "verification_report_archive",
-        "archived_echo", "successor_reception_candidate", "agent_declared_verification_archive"
+        "archived_echo", "successor_reception_candidate", "agent_declared_verification_archive",
+        "agent_declared_echo_archive"
     )
     if requested_archive_kind not in valid_archive_kinds:
         errors.append(f"invalid requested_archive_kind: {requested_archive_kind}")
@@ -420,7 +507,7 @@ def main():
     valid_actions = (
         "none", "block", "needs_more_evidence",
         "auto_archive_sample", "auto_archive_verification_report", "auto_archive_echo",
-        "auto_archive_agent_declared_verification"
+        "auto_archive_agent_declared_verification", "auto_archive_agent_declared_echo"
     )
     if auto_archive_action not in valid_actions:
         errors.append(f"invalid auto_archive_action: {auto_archive_action}")

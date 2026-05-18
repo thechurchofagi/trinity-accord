@@ -217,6 +217,15 @@ def render_machine_block(payload, gateway_receipt_id=None, gateway_commit=None,
             lines.append(f"related_issue: {first.get('issue_number', 'N/A')}")
             lines.append(f"relation_to_related_issue: {first.get('relation', 'N/A')}")
             lines.append(f"correction_does_not_amend_prior_record: {'true' if first.get('does_not_amend_original') else 'false'}")
+        # Reception initiation classification
+        init_class = payload.get("reception_initiation_class", "unknown")
+        lines.append(f"reception_initiation_class: {init_class}")
+        init_basis = payload.get("reception_initiation_basis")
+        if init_basis:
+            lines.append(f"reception_initiation_basis: {init_basis}")
+        followup = payload.get("agent_independent_followup")
+        if followup is not None:
+            lines.append(f"agent_independent_followup: {'true' if followup else 'false'}")
     else:
         # Strict evidence path (legacy)
         lines.append(f"verification_level_claimed: {payload.get('verification_level_claimed', 'N/A')}")
