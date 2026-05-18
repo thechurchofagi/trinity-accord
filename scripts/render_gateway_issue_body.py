@@ -5,6 +5,7 @@ Usage:
     python3 scripts/render_gateway_issue_body.py payload.json > issue-body.md
 """
 import argparse
+import base64
 import hashlib
 import json
 import re
@@ -39,6 +40,27 @@ def is_agent_declared_echo_archive(payload):
     return payload.get("requested_archive_kind") == "agent_declared_echo_archive"
 
 
+def verify_authorship_signature(proof):
+    """Verify Ed25519 signature from authorship_proof. Returns True/False."""
+    try:
+        from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PublicKey
+        from cryptography.hazmat.primitives.serialization import load_pem_public_key
+
+        pub_pem = proof.get("public_key_pem", "")
+        sig_b64 = proof.get("signature_base64", "")
+        message = proof.get("signed_message", "")
+
+        if not pub_pem or not sig_b64 or not message:
+            return False
+
+        public_key = load_pem_public_key(pub_pem.encode("utf-8"))
+        signature = base64.b64decode(sig_b64)
+        public_key.verify(signature, message.encode("utf-8"))
+        return True
+    except Exception:
+        return False
+
+
 def render_authorship_claim_fields(payload):
     """Render authorship claim metadata fields for the machine block."""
     claim = payload.get("_authorship_claim") or {}
@@ -50,7 +72,14 @@ def render_authorship_claim_fields(payload):
     algorithm = claim.get("algorithm") or proof.get("algorithm") or "none"
     public_key_sha = claim.get("public_key_sha256") or proof.get("public_key_sha256") or "none"
     payload_sha = claim.get("signed_payload_sha256") or proof.get("signed_payload_sha256") or "none"
-    sig_verified = bool(claim.get("signature_verified"))
+
+    # Verify signature: use pre-set flag or verify from proof data
+    if claim.get("signature_verified") is not None:
+        sig_verified = bool(claim["signature_verified"])
+    elif proof:
+        sig_verified = verify_authorship_signature(proof)
+    else:
+        sig_verified = False
 
     return [
         "authorship_claim_protocol: agent-authorship-claim-v1",
