@@ -144,7 +144,7 @@ def load_json(path: Path) -> dict[str, Any]:
 
 def source_digest() -> str:
     h = hashlib.sha256()
-    for path in [ECHO_INDEX, EXTERNAL_WITNESS_INDEX, PHYSICAL_ANCHOR, AGENT_DECLARED_INDEX]:
+    for path in [ECHO_INDEX, EXTERNAL_WITNESS_INDEX, PHYSICAL_ANCHOR, AGENT_DECLARED_INDEX, AGENT_DECLARED_ECHO_INDEX]:
         rel = path.relative_to(ROOT).as_posix()
         h.update(rel.encode("utf-8"))
         h.update(b"\0")
