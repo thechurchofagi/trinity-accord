@@ -462,10 +462,10 @@ function buildAuthorshipClaimMessage({ issueNumber, repoFullName, publicKeySha25
 
 async function ensureLabel(octokit, { owner, repo, name, color, description }) {
   try {
-    await octokit.rest.issues.getLabel({ owner, repo, name });
+    await octokit.request("GET /repos/{owner}/{repo}/labels/{name}", { owner, repo, name });
   } catch (err) {
     if (err.status === 404) {
-      await octokit.rest.issues.createLabel({ owner, repo, name, color, description });
+      await octokit.request("POST /repos/{owner}/{repo}/labels", { owner, repo, name, color, description });
     } else {
       throw err;
     }
@@ -1983,7 +1983,7 @@ app.post("/gateway/claim-authorship", async (req, res) => {
 
     // 3. Fetch Issue body using GitHub App token
     const octokit = await getOctokit();
-    const { data: issue } = await octokit.rest.issues.get({ owner, repo, issue_number });
+    const { data: issue } = await octokit.request("GET /repos/{owner}/{repo}/issues/{issue_number}", { owner, repo, issue_number });
 
     // 4. Parse trinity-issue-intake machine block
     const block = parseIssueIntakeBlock(issue.body || "");
@@ -2092,7 +2092,7 @@ app.post("/gateway/claim-authorship", async (req, res) => {
     await ensureLabel(octokit, { owner, repo, name: "authorship:claimed", color: "0E8A16", description: "Authorship key continuity claim verified by Gateway" });
     await ensureLabel(octokit, { owner, repo, name: "authorship:key-verified", color: "5319E7", description: "Public-key signature verified by Gateway" });
 
-    await octokit.rest.issues.addLabels({
+    await octokit.request("POST /repos/{owner}/{repo}/issues/{issue_number}/labels", {
       owner, repo, issue_number,
       labels: ["authorship:claimed", "authorship:key-verified"]
     });
@@ -2114,7 +2114,9 @@ app.post("/gateway/claim-authorship", async (req, res) => {
       "Bitcoin Originals remain final.",
     ].join("\n");
 
-    await octokit.rest.issues.createComment({ owner, repo, issue_number, body: commentBody });
+    await octokit.request("POST /repos/{owner}/{repo}/issues/{issue_number}/comments", {
+      owner, repo, issue_number, body: commentBody
+    });
 
     return res.status(200).json({
       accepted: true,

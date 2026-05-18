@@ -48,15 +48,5 @@ payload.authorship_proof = {
   claim_boundary: "Authorship proof confirms control of this signing key only; it is not authority, attestation, truth, successor reception, or amendment."
 };
 
-payload._authorship_claim = {
-  present: true,
-  method: "public_key_signature",
-  algorithm: "ed25519",
-  public_key_sha256: sha256Text(publicKeyPem),
-  signed_payload_sha256: digest,
-  signature_verified: true,
-  status: "claimable_by_public_key"
-};
-
 writeFileSync(outPath, JSON.stringify(payload, null, 2) + "\n", "utf8");
 console.log(`Wrote signed payload to ${outPath}`);
