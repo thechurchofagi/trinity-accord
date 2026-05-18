@@ -475,12 +475,13 @@ def compute_status() -> dict[str, Any]:
         ad_index = load_json(AGENT_DECLARED_INDEX)
         agent_declared_records = [r for r in ad_index.get("records", []) if isinstance(r, dict)]
 
-    # Load agent-declared echo index
+    # Load agent-declared echo index (deduplicate by issue_number to avoid double-counting)
     if AGENT_DECLARED_ECHO_INDEX.exists():
         ad_echo_index = load_json(AGENT_DECLARED_ECHO_INDEX)
-        agent_declared_records.extend(
-            r for r in ad_echo_index.get("records", []) if isinstance(r, dict)
-        )
+        existing_issue_numbers = {r.get("issue_number") for r in agent_declared_records}
+        for r in ad_echo_index.get("records", []):
+            if isinstance(r, dict) and r.get("issue_number") not in existing_issue_numbers:
+                agent_declared_records.append(r)
 
     generated_from = [
         "/api/echo-index.json",
