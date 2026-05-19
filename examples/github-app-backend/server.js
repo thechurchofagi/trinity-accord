@@ -878,6 +878,14 @@ async function runGatewayPipeline(payload, {
     fs.writeFileSync(payloadPath, JSON.stringify(payload, null, 2), "utf-8");
 
     const preflight = runScript("validate_gateway_payload.py", [payloadPath]);
+
+    // Extract WARN lines from validator output (even on success)
+    const validatorWarnings = (preflight.stdout + "\n" + preflight.stderr)
+      .split("\n")
+      .filter(l => l.startsWith("WARN:"))
+      .map(l => l.replace(/^WARN:\s*/, ""))
+      .filter(w => w && !w.startsWith("Warnings do not block"));
+
     if (preflight.code !== 0) {
       const rawErrors = (preflight.stdout + "\n" + preflight.stderr)
         .split("\n")
@@ -1116,19 +1124,25 @@ async function runGatewayPipeline(payload, {
 
     // Preflight-only: return success without creating Issue
     if (!createIssue) {
+      const responseBody = {
+        accepted: true,
+        preflight: "pass",
+        issue_created: false,
+        preflight_receipt_id: gatewayReceiptId,
+        receipt_scope: "preflight_preview_only",
+        rendered_title: issueTitle,
+        rendered_body_preview: issueBody.slice(0, 1000),
+        archive_readiness: archiveReadiness,
+        auto_archive_decision: autoArchiveDecision
+      };
+      // Include structured level selection warnings if present
+      if (validatorWarnings.length > 0) {
+        responseBody.level_selection_warnings = validatorWarnings;
+        responseBody.warnings_block_archive = false;
+      }
       return {
         status: 200,
-        body: {
-          accepted: true,
-          preflight: "pass",
-          issue_created: false,
-          preflight_receipt_id: gatewayReceiptId,
-          receipt_scope: "preflight_preview_only",
-          rendered_title: issueTitle,
-          rendered_body_preview: issueBody.slice(0, 1000),
-          archive_readiness: archiveReadiness,
-          auto_archive_decision: autoArchiveDecision
-        }
+        body: responseBody
       };
     }
 
@@ -1145,26 +1159,28 @@ async function runGatewayPipeline(payload, {
       const allLabels = [...new Set([...baseLabels, ...labelsToAdd])]
         .filter(label => !labelsToRemove.has(label));
 
-      return {
-        status: 200,
-        body: {
-          accepted: true,
-          dry_run: true,
-          preflight_equivalent: "pass",
-          would_create_issue: {
-            title: issueTitle,
-            labels: allLabels,
-            body_preview: issueBody.slice(0, 1000)
-          },
-          would_apply_labels: labelsToAdd,
-          would_post_comment: !!autoArchiveDecision.comment_markdown,
-          would_close_issue: autoArchiveDecision.should_close_issue || false,
-          would_remove_labels: [...labelsToRemove],
-          archive_readiness: archiveReadiness,
-          auto_archive_decision: autoArchiveDecision,
-          boundary: "Gateway-rendered candidate; archive status only if Archive Readiness Gate passes; not attestation or successor reception"
-        }
+      const dryRunBody = {
+        accepted: true,
+        dry_run: true,
+        preflight_equivalent: "pass",
+        would_create_issue: {
+          title: issueTitle,
+          labels: allLabels,
+          body_preview: issueBody.slice(0, 1000)
+        },
+        would_apply_labels: labelsToAdd,
+        would_post_comment: !!autoArchiveDecision.comment_markdown,
+        would_close_issue: autoArchiveDecision.should_close_issue || false,
+        would_remove_labels: [...labelsToRemove],
+        archive_readiness: archiveReadiness,
+        auto_archive_decision: autoArchiveDecision,
+        boundary: "Gateway-rendered candidate; archive status only if Archive Readiness Gate passes; not attestation or successor reception"
       };
+      if (validatorWarnings.length > 0) {
+        dryRunBody.level_selection_warnings = validatorWarnings;
+        dryRunBody.warnings_block_archive = false;
+      }
+      return { status: 200, body: dryRunBody };
     }
 
     // 7. Create GitHub Issue
