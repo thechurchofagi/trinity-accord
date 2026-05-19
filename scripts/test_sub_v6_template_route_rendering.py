@@ -89,13 +89,28 @@ def render_body(payload_dict):
 
 print("\n=== V4 rendering ===")
 body = render_body(make_v4_payload())
-check("Sub-V6 Template Route" in body or "sub_v6_template_route: true" in body, "rendered V4 body contains Sub-V6 Template Route")
+
+# Human-readable section must show Sub-V6 Template Route, not generic Claim Gate
+check("Sub-V6 Template Route:" in body, "rendered V4 body has 'Sub-V6 Template Route:' section header")
 check("route_id: sub_v6_agent_declared_template_archive" in body, "rendered V4 body contains route_id")
 check("declared_level_source: agent_oath_template_declaration" in body, "rendered V4 body contains declared_level_source")
 check("evidence_chain_required: false" in body, "rendered V4 body contains evidence_chain_required: false")
 check("strict_evidence_required: false" in body, "rendered V4 body contains strict_evidence_required: false")
 check("strict_evidence_used_for_level: false" in body, "rendered V4 body contains strict_evidence_used_for_level: false")
 check("PASS_WITH_DOWNGRADE" not in body, "rendered V4 body does not contain PASS_WITH_DOWNGRADE")
+
+# Critical: generic Claim Gate section must NOT appear for sub-V6
+# The human-readable section should be "Sub-V6 Template Route:", not "Claim Gate:"
+# We check that "Claim Gate:" does NOT appear as a standalone section header
+# (it may appear inside machine block as claim_gate_mode, which is fine)
+import re
+# Find all occurrences of "Claim Gate:" as a line-start (section header)
+claim_gate_sections = re.findall(r"^Claim Gate:$", body, re.MULTILINE)
+check(len(claim_gate_sections) == 0, "generic 'Claim Gate:' section header is ABSENT for sub-V6")
+
+# Verify "allowed_protocol_level" does not appear as a Claim Gate line
+claim_gate_line = re.findall(r"^- allowed_protocol_level:", body, re.MULTILINE)
+check(len(claim_gate_line) == 0, "generic '- allowed_protocol_level:' line is ABSENT for sub-V6")
 
 print(f"\n{'='*50}")
 print(f"Results: {PASS} passed, {FAIL} failed")

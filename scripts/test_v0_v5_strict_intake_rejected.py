@@ -258,8 +258,6 @@ def make_v4_valid_agent_declared():
         },
         "discovery_provenance": {"agency_level": "A2_human_gave_repo_name", "independence_class": "human_solicited_agent_response", "operator_type": "ai_agent"},
         "context_readiness": {},
-        "pre_verification_integrity_declaration": {},
-        "verification_session": {"session_id": "test", "started_at": "2026-01-01T00:00:00Z", "operator_type": "ai_agent"},
         "what_i_checked": ["test"],
         "limitations": ["test"],
         "reception_initiation_class": "self_initiated",

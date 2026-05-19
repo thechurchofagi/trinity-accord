@@ -161,6 +161,26 @@ def render_claim_gate(cg):
     return "\n".join(lines)
 
 
+def render_sub_v6_template_route(payload):
+    """Render Sub-V6 Template Route section for human-readable issue body.
+
+    Replaces the generic Claim Gate section for V0-V5 agent-declared archives
+    to make it clear that the level is oath-bound template declaration,
+    not strict evidence determination.
+    """
+    cg = payload.get("claim_gate") or {}
+    lines = ["Sub-V6 Template Route:"]
+    lines.append(f"- route_id: {payload.get('route_id', 'sub_v6_agent_declared_template_archive')}")
+    lines.append(f"- mode: {cg.get('mode', 'template_for_v0_v5')}")
+    lines.append(f"- declared_protocol_level: {payload.get('agent_declared_protocol_level', 'N/A')}")
+    lines.append(f"- declared_level_source: {payload.get('declared_level_source', 'agent_oath_template_declaration')}")
+    lines.append(f"- evidence_chain_required: {'true' if payload.get('evidence_chain_required') else 'false'}")
+    lines.append(f"- strict_evidence_required: {'true' if payload.get('strict_evidence_required') else 'false'}")
+    lines.append(f"- strict_evidence_used_for_level: {'true' if payload.get('strict_evidence_used_for_level') else 'false'}")
+    lines.append(f"- status: {cg.get('status', 'N/A')}")
+    return "\n".join(lines)
+
+
 def render_machine_block(payload, gateway_receipt_id=None, gateway_commit=None,
                          gateway_service=None, dry_run=False, production_render=False):
     """Render canonical trinity-issue-intake block from validated structured fields."""
@@ -517,7 +537,15 @@ def main():
     parts.append("This issue was submitted through the Agent Issue Gateway backend.\n")
     parts.append(render_boundary())
     parts.append(f"\nSubmission type:\n{st}")
-    parts.append(f"\n{render_claim_gate(payload.get('claim_gate'))}")
+
+    # Sub-V6: render Sub-V6 Template Route instead of generic Claim Gate
+    requested_archive_kind = payload.get("requested_archive_kind", "")
+    evidence_mode = payload.get("evidence_requirement_mode", "")
+    if requested_archive_kind == "agent_declared_verification_archive" and evidence_mode == "waived_for_v0_v5":
+        parts.append(f"\n{render_sub_v6_template_route(payload)}")
+    else:
+        parts.append(f"\n{render_claim_gate(payload.get('claim_gate'))}")
+
     parts.append(f"\n```trinity-issue-intake\n{render_machine_block(payload, gateway_receipt_id=args.gateway_receipt_id, gateway_commit=args.gateway_commit, gateway_service=args.gateway_service, dry_run=args.dry_run, production_render=args.production_render)}\n```")
 
     # Human-readable notes (non-authoritative)

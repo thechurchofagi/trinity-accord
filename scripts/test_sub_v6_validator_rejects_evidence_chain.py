@@ -164,11 +164,19 @@ ok, out = run_validator(p)
 check(not ok, "V4 payload with evidence_input fails")
 check("SUB_V6_SINGLE_ROUTE_VIOLATION" in out, "error mentions SUB_V6_SINGLE_ROUTE_VIOLATION")
 
-# Test 3: V4 with verification_session passes (not forbidden, just not used for level determination)
+# Test 3: V4 with verification_session fails
 p = make_clean_v4_payload()
 p["verification_session"] = {"id": "test"}
 ok, out = run_validator(p)
-check(ok, "V4 payload with verification_session passes (not forbidden)")
+check(not ok, "V4 payload with verification_session fails")
+check("SUB_V6_SINGLE_ROUTE_VIOLATION" in out, "error mentions SUB_V6_SINGLE_ROUTE_VIOLATION for verification_session")
+
+# Test 3b: V4 with pre_verification_integrity_declaration fails
+p = make_clean_v4_payload()
+p["pre_verification_integrity_declaration"] = {"some": "data"}
+ok, out = run_validator(p)
+check(not ok, "V4 payload with pre_verification_integrity_declaration fails")
+check("SUB_V6_SINGLE_ROUTE_VIOLATION" in out, "error mentions SUB_V6_SINGLE_ROUTE_VIOLATION for pre_verification_integrity_declaration")
 
 # Test 4: V4 with attachments.evidence_input_sha256 fails
 p = make_clean_v4_payload()
