@@ -29,6 +29,15 @@
     "/disaster-recovery-drill",
     "/authority-address-inscriptions"
   ],
+  "ai_to_ai_orientation": [
+    {
+      "title": "AI-to-AI Orientation — GPT-5.5 Thinking v1",
+      "url": "/api/ai-to-ai-orientation.gpt-5.5-thinking.v1.json",
+      "type": "machine_readable_orientation",
+      "purpose": "non-authoritative AI-to-AI orientation and ecosystem participation invitation",
+      "boundary": "non_authoritative_not_attestation_not_endorsement_not_verification_not_amendment_not_successor_reception"
+    }
+  ],
   "machine": [
     "/api/authority.json",
     "/api/agent-value.json",
@@ -70,7 +79,8 @@
     "/api/recovery-index.json",
     "/api/claim-registry.json",
     "/api/claim-registry-schema.v1.json",
-    "/api/bitcoin-inscription-mirror-index.json"
+    "/api/bitcoin-inscription-mirror-index.json",
+    "/api/ai-to-ai-orientation.gpt-5.5-thinking.v1.json"
   ],
   "legacy_machine": [
     "/api/echo-record-schema.v2.json"
