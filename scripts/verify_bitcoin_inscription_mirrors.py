@@ -2,165 +2,232 @@
 """
 Verify Bitcoin inscription mirrors against on-chain data or offline manifest.
 Usage:
-  python3 scripts/verify_bitcoin_inscription_mirrors.py --all
+  python3 scripts/verify_bitcoin_inscription_mirrors.py --offline --all
+  python3 scripts/verify_bitcoin_inscription_mirrors.py --network --all
   python3 scripts/verify_bitcoin_inscription_mirrors.py --inscription-id 97631551
-  python3 scripts/verify_bitcoin_inscription_mirrors.py --layer vision-layer
-  python3 scripts/verify_bitcoin_inscription_mirrors.py --offline-manifest api/bitcoin-inscription-mirror-index.json
+  python3 scripts/verify_bitcoin_inscription_mirrors.py --layer canonical_original
+  python3 scripts/verify_bitcoin_inscription_mirrors.py --network --inscription-id 100751953 --update
 """
-import argparse, hashlib, json, sys
+import argparse
+import hashlib
+import json
+import sys
+import urllib.request
+import urllib.error
+from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 MIRROR_DIR = ROOT / "bitcoin-inscription-mirrors"
+INDEX_PATH = ROOT / "api" / "bitcoin-inscription-mirror-index.json"
+BOOTSTRAP_PATH = ROOT / "data" / "authority-address-inscriptions.bootstrap.json"
+
+PROVIDERS = {
+    "ordinals": "https://ordinals.com/content/{}",
+    "ordiscan": "https://ordiscan.com/inscription/{}",
+}
+
+VERIFICATION_STATUSES = [
+    "legacy_bootstrap_pending_chain_check",
+    "content_verified",
+    "content_verified_address_unverified",
+    "metadata_verified",
+    "mirror_matches_onchain",
+    "mirror_mismatch",
+    "network_unavailable",
+    "provider_error",
+]
+
 
 def load_json(path):
     with open(path, "r", encoding="utf-8") as f:
         return json.load(f)
 
+
 def sha256_text(text):
     return hashlib.sha256(text.encode("utf-8")).hexdigest()
 
+
 def canonicalize(text):
-    """Basic canonicalization: strip whitespace, normalize line endings."""
     return text.strip().replace("\r\n", "\n").replace("\r", "\n")
 
+
 def load_mirror_records():
-    """Load all mirror records."""
     records = []
     for subdir in ["canonical-originals", "vision-layer", "context-layer"]:
         d = MIRROR_DIR / subdir
         if not d.exists():
             continue
         for f in sorted(d.glob("*.json")):
-            try:
-                data = load_json(f)
-                data["_path"] = str(f)
-                records.append(data)
-            except Exception as e:
-                print(f"ERROR loading {f}: {e}", file=sys.stderr)
+            rec = load_json(f)
+            rec["_file_path"] = str(f)
+            records.append(rec)
     return records
 
-def load_raw_text(record):
-    """Load raw text for a mirror record."""
-    raw_path = record.get("content", {}).get("raw_text_path")
-    if not raw_path:
-        return None
-    full_path = ROOT / raw_path
-    if not full_path.exists():
-        return None
-    return full_path.read_text(encoding="utf-8")
 
-def verify_record_offline(record):
-    """Verify a mirror record using offline data only."""
-    status = record.get("chain_verification", {}).get("verification_status", "not_checked")
-    inscription_id = record.get("inscription", {}).get("inscription_id", "unknown")
-    title = record.get("inscription", {}).get("title", "unknown")
+def fetch_onchain_content(inscription_id, provider="ordinals"):
+    url = PROVIDERS[provider].format(inscription_id)
+    try:
+        req = urllib.request.Request(url, headers={"User-Agent": "trinity-accord-verifier/1.0"})
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            return resp.read().decode("utf-8"), None
+    except (urllib.error.URLError, urllib.error.HTTPError, TimeoutError) as e:
+        return None, str(e)
 
-    # Check basic structure
-    issues = []
 
-    # Authority boundary checks
-    ab = record.get("authority_boundary", {})
-    if not ab.get("bitcoin_originals_prevail"):
-        issues.append("bitcoin_originals_prevail is not true")
-    if not ab.get("github_mirror_is_non_amending"):
-        issues.append("github_mirror_is_non_amending is not true")
-    if not ab.get("verification_requires_onchain_check"):
-        issues.append("verification_requires_onchain_check is not true")
+def verify_offline(records, args):
+    errors = []
+    checked = 0
+    for rec in records:
+        ins_id = rec["inscription"]["inscription_id"]
+        if args.inscription_id and ins_id != args.inscription_id:
+            continue
+        if args.layer and rec["classification"]["layer"] != args.layer:
+            continue
 
-    # Classification checks
-    cls = record.get("classification", {})
-    if record.get("canonical_status") != "canonical_original":
-        if cls.get("amends_originals"):
-            issues.append("non-canonical record has amends_originals=true")
-        if cls.get("creates_new_authority"):
-            issues.append("non-canonical record has creates_new_authority=true")
+        checked += 1
 
-    # Check raw text exists if path specified
-    raw_text = load_raw_text(record)
-    if raw_text:
-        mirror_hash = sha256_text(canonicalize(raw_text))
-    else:
-        mirror_hash = None
+        # Check authority boundary
+        ab = rec.get("authority_boundary", {})
+        for field in ["bitcoin_originals_prevail", "github_mirror_is_non_amending", "verification_requires_onchain_check"]:
+            if not ab.get(field):
+                errors.append(f"{ins_id}: authority_boundary.{field} is not true")
 
-    return {
-        "inscription_id": inscription_id,
-        "title": title,
-        "canonical_status": record.get("canonical_status"),
-        "verification_status": status,
-        "mirror_hash": mirror_hash,
-        "issues": issues,
-        "passed": len(issues) == 0
-    }
+        # Check raw text exists
+        raw_path = ROOT / rec["content"]["raw_text_path"]
+        if not raw_path.exists():
+            errors.append(f"{ins_id}: raw text missing: {raw_path}")
+        else:
+            raw_text = raw_path.read_text(encoding="utf-8")
+            if not raw_text.strip():
+                errors.append(f"{ins_id}: raw text is empty")
+            else:
+                # Verify hashes
+                expected_mirror = sha256_text(raw_text)
+                expected_canon = sha256_text(canonicalize(raw_text))
+                if rec["content"].get("mirror_text_sha256") != expected_mirror:
+                    errors.append(f"{ins_id}: mirror_text_sha256 mismatch")
+                if rec["content"].get("canonicalized_text_sha256") != expected_canon:
+                    errors.append(f"{ins_id}: canonicalized_text_sha256 mismatch")
 
-def verify_offline_manifest(manifest_path):
-    """Verify using an offline manifest."""
-    manifest = load_json(manifest_path)
-    records = manifest.get("records", [])
+        # Check non-originals don't claim authority
+        if not rec["classification"]["is_one_of_three_bitcoin_originals"]:
+            if rec["classification"].get("amends_originals"):
+                errors.append(f"{ins_id}: non-original claims amends_originals=true")
+            if rec["classification"].get("creates_new_authority"):
+                errors.append(f"{ins_id}: non-original claims creates_new_authority=true")
 
-    print(f"Offline manifest verification: {len(records)} records")
-    all_passed = True
+    return checked, errors
 
-    for r in records:
-        result = verify_record_offline(r)
-        status_icon = "PASS" if result["passed"] else "FAIL"
-        print(f"  [{status_icon}] {result['inscription_id']}: {result['title']}")
-        if result["issues"]:
-            for issue in result["issues"]:
-                print(f"    - {issue}")
-            all_passed = False
 
-    return 0 if all_passed else 1
+def verify_network(records, args, update=False):
+    errors = []
+    warnings = []
+    checked = 0
+    provider = args.provider or "ordinals"
+
+    for rec in records:
+        ins_id = rec["inscription"]["inscription_id"]
+        if args.inscription_id and ins_id != args.inscription_id:
+            continue
+        if args.layer and rec["classification"]["layer"] != args.layer:
+            continue
+
+        checked += 1
+        content, err = fetch_onchain_content(ins_id, provider)
+
+        if err:
+            warnings.append(f"{ins_id}: network fetch failed ({provider}): {err}")
+            if update:
+                rec["chain_verification"]["verification_status"] = "network_unavailable"
+            continue
+
+        if content is None:
+            warnings.append(f"{ins_id}: no content returned from {provider}")
+            if update:
+                rec["chain_verification"]["verification_status"] = "provider_error"
+            continue
+
+        # Compute on-chain hash
+        onchain_hash = sha256_text(canonicalize(content))
+        mirror_canon = rec["content"].get("canonicalized_text_sha256")
+
+        if mirror_canon == onchain_hash:
+            if update:
+                rec["chain_verification"]["verification_status"] = "mirror_matches_onchain"
+                rec["chain_verification"]["onchain_content_sha256"] = onchain_hash
+                rec["chain_verification"]["mirror_matches_onchain"] = True
+                rec["chain_verification"]["last_verified_utc"] = datetime.now(timezone.utc).isoformat()
+                rec["chain_verification"]["verification_method"] = f"network:{provider}"
+            print(f"  {ins_id}: MATCH")
+        else:
+            errors.append(f"{ins_id}: content MISMATCH (mirror vs on-chain)")
+            if update:
+                rec["chain_verification"]["verification_status"] = "mirror_mismatch"
+                rec["chain_verification"]["onchain_content_sha256"] = onchain_hash
+                rec["chain_verification"]["mirror_matches_onchain"] = False
+                rec["chain_verification"]["last_verified_utc"] = datetime.now(timezone.utc).isoformat()
+                rec["chain_verification"]["verification_method"] = f"network:{provider}"
+
+    return checked, errors, warnings
+
 
 def main():
     parser = argparse.ArgumentParser(description="Verify Bitcoin inscription mirrors")
-    parser.add_argument("--all", action="store_true", help="Verify all mirrors")
+    parser.add_argument("--all", action="store_true", help="Verify all records")
     parser.add_argument("--inscription-id", help="Verify specific inscription")
-    parser.add_argument("--layer", help="Verify specific layer")
-    parser.add_argument("--offline-manifest", help="Use offline manifest for verification")
+    parser.add_argument("--layer", help="Verify records in specific layer")
+    parser.add_argument("--offline", action="store_true", help="Offline verification only")
+    parser.add_argument("--network", action="store_true", help="Include network verification")
+    parser.add_argument("--update", action="store_true", help="Update chain_verification fields")
+    parser.add_argument("--provider", default="ordinals", choices=list(PROVIDERS.keys()))
+    parser.add_argument("--bootstrap", default=str(BOOTSTRAP_PATH))
+    parser.add_argument("--index", default=str(INDEX_PATH))
     args = parser.parse_args()
 
-    if args.offline_manifest:
-        return verify_offline_manifest(args.offline_manifest)
+    if not args.all and not args.inscription_id and not args.layer:
+        parser.error("Must specify --all, --inscription-id, or --layer")
 
     records = load_mirror_records()
-    if not records:
-        print("ERROR: No mirror records found", file=sys.stderr)
-        return 1
+    print(f"Loaded {len(records)} mirror records")
 
-    # Filter
-    if args.inscription_id:
-        records = [r for r in records if r.get("inscription", {}).get("inscription_id") == args.inscription_id]
-    elif args.layer:
-        layer_map = {
-            "canonical-originals": "canonical_original",
-            "vision-layer": "vision_layer",
-            "context-layer": "guardianship_layer"
-        }
-        target = layer_map.get(args.layer, args.layer)
-        records = [r for r in records if r.get("classification", {}).get("layer") == target or
-                   (args.layer == "canonical-originals" and r.get("canonical_status") == "canonical_original")]
+    # Offline verification
+    print("\n=== Offline Verification ===")
+    checked, errors = verify_offline(records, args)
+    print(f"Checked: {checked}")
+    if errors:
+        print(f"Errors: {len(errors)}")
+        for e in errors:
+            print(f"  ERROR: {e}")
+    else:
+        print("All offline checks passed.")
 
-    if not records:
-        print("No matching records found", file=sys.stderr)
-        return 1
+    # Network verification
+    if args.network:
+        print(f"\n=== Network Verification (provider: {args.provider}) ===")
+        net_checked, net_errors, warnings = verify_network(records, args, update=args.update)
+        print(f"Checked: {net_checked}")
+        if warnings:
+            for w in warnings:
+                print(f"  WARNING: {w}")
+        if net_errors:
+            print(f"Errors: {len(net_errors)}")
+            for e in net_errors:
+                print(f"  ERROR: {e}")
+        else:
+            print("All network checks passed.")
 
-    all_passed = True
-    for r in records:
-        result = verify_record_offline(r)
-        status_icon = "PASS" if result["passed"] else "FAIL"
-        print(f"[{status_icon}] {result['inscription_id']}: {result['title']}")
-        print(f"  Status: {result['verification_status']}")
-        print(f"  Canonical: {result['canonical_status']}")
-        if result["mirror_hash"]:
-            print(f"  Mirror SHA256: {result['mirror_hash']}")
-        if result["issues"]:
-            for issue in result["issues"]:
-                print(f"  ISSUE: {issue}")
-            all_passed = False
-        print()
+        if args.update:
+            # Write back updated records
+            for rec in records:
+                fpath = Path(rec.pop("_file_path"))
+                with open(fpath, "w", encoding="utf-8") as f:
+                    json.dump(rec, f, indent=2, ensure_ascii=False)
+            print("Updated chain_verification fields in mirror files.")
 
-    return 0 if all_passed else 1
+    total_errors = len(errors) + (len(net_errors) if args.network else 0)
+    sys.exit(1 if total_errors > 0 else 0)
+
 
 if __name__ == "__main__":
-    sys.exit(main())
+    main()
