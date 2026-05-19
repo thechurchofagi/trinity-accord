@@ -146,7 +146,10 @@
     "records_with_authorship_proof": 1,
     "claimed_records": 1,
     "unclaimed_records": 27,
-    "boundary": "Authorship claims prove key continuity only; they do not affect authority, verifiability, reception, or amendment status."
+    "boundary": "Authorship claims prove key continuity only; they do not affect authority, verifiability, reception, or amendment status.",
+    "default_policy": "enabled_for_new_builder_generated_records",
+    "private_key_storage": "local_only",
+    "gateway_private_key_access": false
   },
   "source_digest": "059a5e29ff742830"
 }

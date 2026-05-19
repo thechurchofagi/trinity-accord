@@ -474,6 +474,9 @@ def compute_authorship_claims(agent_declared_records: list[dict[str, Any]]) -> d
         "records_with_authorship_proof": records_with_proof,
         "claimed_records": claimed_records,
         "unclaimed_records": unclaimed_records,
+        "default_policy": "enabled_for_new_builder_generated_records",
+        "private_key_storage": "local_only",
+        "gateway_private_key_access": False,
         "boundary": "Authorship claims prove key continuity only; they do not affect authority, verifiability, reception, or amendment status.",
     }
 
