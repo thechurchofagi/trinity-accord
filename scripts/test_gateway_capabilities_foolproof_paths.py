@@ -52,6 +52,24 @@ check("private_key_must_never_be_submitted" in server,
 check("does_not_affect_counts" in server,
       "authorship_proof says does_not_affect_counts")
 
+print("\n--- authorship_default_policy ---")
+check("authorship_default_policy:" in server,
+      "capabilities has authorship_default_policy")
+check("enabled_by_default: true" in server,
+      "authorship_default_policy says enabled_by_default true")
+check("gateway_never_receives_private_key: true" in server,
+      "authorship_default_policy says gateway_never_receives_private_key true")
+check("gateway_never_generates_private_key: true" in server,
+      "authorship_default_policy says gateway_never_generates_private_key true")
+check("private_key_must_remain_local: true" in server,
+      "authorship_default_policy says private_key_must_remain_local true")
+check("opt_out_flag: \"--no-authorship-proof\"" in server,
+      "authorship_default_policy says opt_out_flag --no-authorship-proof")
+
+print("\n--- per-path authorship_proof_default ---")
+check("authorship_proof_default: \"enabled_by_default_local_keypair\"" in server,
+      "major paths expose authorship_proof_default")
+
 print(f"\n--- Results: {len(errors)} errors ---")
 if errors:
     for e in errors:

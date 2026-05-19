@@ -1490,7 +1490,9 @@ app.get("/gateway/capabilities", (req, res) => {
         strict_evidence_downgrade_language_forbidden: true,
         self_selected_lower_level_allowed: true,
         self_selected_lower_level_label: "self_selected_under_oath"
-      }
+      },
+      authorship_proof_default: "enabled_by_default_local_keypair",
+      authorship_opt_out_flag: "--no-authorship-proof"
     },
     pure_echo_path: {
       description: "Pure echo archives (E1/E3/E4/E5/E6/E7) count toward reception but not verifiability. No verification claim, no evidence, no protocol level.",
@@ -1510,7 +1512,9 @@ app.get("/gateway/capabilities", (req, res) => {
       do_not_wrap_payload: true,
       agent_declared_protocol_level: "not_set",
       claim_gate: "not_required",
-      boundary: "echo-only; no verification claim; Bitcoin Originals remain final"
+      boundary: "echo-only; no verification claim; Bitcoin Originals remain final",
+      authorship_proof_default: "enabled_by_default_local_keypair",
+      authorship_opt_out_flag: "--no-authorship-proof"
     },
     verification_echo_path: {
       enabled: true,
@@ -1524,14 +1528,18 @@ app.get("/gateway/capabilities", (req, res) => {
       not_agent_declared_v0_v5_archive: true,
       not_independent_attestation: true,
       not_successor_reception: true,
-      boundary: "E2 Verification Echo references strict evidence artifacts but is not authority, amendment, endorsement, formal attestation, or proof beyond Claim Gate."
+      boundary: "E2 Verification Echo references strict evidence artifacts but is not authority, amendment, endorsement, formal attestation, or proof beyond Claim Gate.",
+      authorship_proof_default: "enabled_by_default_local_keypair",
+      authorship_opt_out_flag: "--no-authorship-proof"
     },
     strict_evidence_report_path: {
       enabled: true,
       builder: "scripts/build_gateway_payload_from_outputs.py",
       levels: ["V6", "V7", "V8"],
       requires: ["evidence_input", "claim_gate_output", "verification_report"],
-      raw_example_endpoint: "/gateway/examples/verification-report-candidate/raw"
+      raw_example_endpoint: "/gateway/examples/verification-report-candidate/raw",
+      authorship_proof_default: "enabled_by_default_local_keypair",
+      authorship_opt_out_flag: "--no-authorship-proof"
     },
     integrity_first_rule: {
       statement: "No verification claim before identity/provenance, pre-verification integrity declaration, and verification session.",
@@ -1549,6 +1557,23 @@ app.get("/gateway/capabilities", (req, res) => {
       operator_type: "ai_agent",
       not_independent_attestation: true,
       not_successor_reception: true
+    },
+    authorship_default_policy: {
+      enabled_by_default: true,
+      implementation_location: "local_builder_only",
+      gateway_never_receives_private_key: true,
+      gateway_never_generates_private_key: true,
+      private_key_must_remain_local: true,
+      default_key_algorithm: "ed25519",
+      opt_out_flag: "--no-authorship-proof",
+      explicit_key_prefix_flag: "--authorship-key-prefix",
+      boundary: "key continuity only; not authority, not attestation, not truth, not successor reception, not amendment",
+      benefits: [
+        "prevents accidental unclaimed records",
+        "enables later key-continuity claims",
+        "supports follow-up and correction continuity",
+        "does not affect authority, verification, reception, attestation, truth, or amendment"
+      ]
     },
     recommended_flow_remote: [
       "GET /gateway/version",
