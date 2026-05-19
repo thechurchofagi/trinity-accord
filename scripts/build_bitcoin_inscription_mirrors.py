@@ -193,6 +193,26 @@ def build_mirror_record(inscription_id: str, info: dict) -> dict:
     mirror_hash = sha256_text(raw_text)
     canon_hash = sha256_text(canonicalize(raw_text))
 
+    # Preserve existing chain_verification if already verified
+    chain_verification = {
+        "verification_status": "legacy_bootstrap_pending_chain_check",
+        "last_verified_utc": None,
+        "verification_method": None,
+        "onchain_content_sha256": None,
+        "mirror_matches_onchain": None,
+        "verification_script": "scripts/verify_bitcoin_inscription_mirrors.py",
+    }
+    existing_path = MIRROR_DIR / info["output_dir"] / info["output_file"]
+    if existing_path.exists():
+        try:
+            with open(existing_path, "r", encoding="utf-8") as f:
+                existing = json.load(f)
+            existing_cv = existing.get("chain_verification", {})
+            if existing_cv.get("verification_status") != "legacy_bootstrap_pending_chain_check":
+                chain_verification = existing_cv
+        except (json.JSONDecodeError, KeyError):
+            pass
+
     return {
         "schema": "trinityaccord.bitcoin-inscription-mirror.v1",
         "mirror_role": "quick_load_context_mirror",
@@ -228,15 +248,33 @@ def build_mirror_record(inscription_id: str, info: dict) -> dict:
             "summary": info["summary"],
             "agent_load_excerpt": info["agent_load_excerpt"],
         },
-        "chain_verification": {
-            "verification_status": "legacy_bootstrap_pending_chain_check",
-            "last_verified_utc": None,
-            "verification_method": None,
-            "onchain_content_sha256": None,
-            "mirror_matches_onchain": None,
-            "verification_script": "scripts/verify_bitcoin_inscription_mirrors.py",
-        },
+        "chain_verification": chain_verification,
         "limitations": info["limitations"],
+    }
+
+
+def load_existing_chain_verification(inscription_id: str, info: dict) -> dict:
+    """Load chain_verification from existing mirror JSON on disk if available."""
+    existing_path = MIRROR_DIR / info["output_dir"] / info["output_file"]
+    if existing_path.exists():
+        try:
+            with open(existing_path, "r", encoding="utf-8") as f:
+                existing = json.load(f)
+            cv = existing.get("chain_verification", {})
+            # Only preserve if it's been actually verified (not the default)
+            if cv.get("verification_status") != "legacy_bootstrap_pending_chain_check":
+                return {
+                    "verification_status": cv.get("verification_status", "legacy_bootstrap_pending_chain_check"),
+                    "last_verified_utc": cv.get("last_verified_utc"),
+                    "mirror_matches_onchain": cv.get("mirror_matches_onchain"),
+                    "onchain_content_sha256": cv.get("onchain_content_sha256"),
+                    "verification_method": cv.get("verification_method"),
+                }
+        except (json.JSONDecodeError, KeyError):
+            pass
+    return {
+        "verification_status": "legacy_bootstrap_pending_chain_check",
+        "last_verified_utc": None,
     }
 
 
@@ -245,6 +283,8 @@ def build_aggregate_index(bootstrap: dict, records: list) -> dict:
     for rec in records:
         ins_id = rec["inscription"]["inscription_id"]
         info = CLASSIFICATION_MAP[ins_id]
+        # Load chain_verification from existing individual mirror JSON on disk
+        chain_ver = load_existing_chain_verification(ins_id, info)
         index_records.append({
             "inscription_id": ins_id,
             "title": rec["inscription"]["title"],
@@ -257,10 +297,7 @@ def build_aggregate_index(bootstrap: dict, records: list) -> dict:
             "raw_text_path": f"bitcoin-inscription-mirrors/raw/{ins_id}.txt",
             "mirror_text_sha256": rec["content"]["mirror_text_sha256"],
             "canonicalized_text_sha256": rec["content"]["canonicalized_text_sha256"],
-            "chain_verification": {
-                "verification_status": "legacy_bootstrap_pending_chain_check",
-                "last_verified_utc": None,
-            },
+            "chain_verification": chain_ver,
             "agent_load_excerpt": rec["content"]["agent_load_excerpt"],
         })
 
