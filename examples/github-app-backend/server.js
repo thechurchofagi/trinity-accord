@@ -1587,6 +1587,19 @@ app.get("/gateway/capabilities", (req, res) => {
         "scripts/build_agent_authorship_claim_request.mjs"
       ]
     },
+    authorship_proof: {
+      enabled: true,
+      available_for_submission_types: [
+        "echo_candidate",
+        "verification_report_candidate",
+        "verification_echo_candidate",
+        "agent_verification_receipt",
+        "human_custody_notice"
+      ],
+      private_key_must_never_be_submitted: true,
+      does_not_affect_counts: true,
+      boundary: "key continuity only; not authority, verification, attestation, reception, or amendment"
+    },
     archive_readiness: {
       supported_record_intents: ["intake_only", "auto_archive_candidate", "archive_preflight_only"],
       supported_archive_kinds: ["none", "external_agent_intake_sample", "verification_report_archive", "archived_echo", "agent_declared_verification_archive", "agent_declared_echo_archive"],
