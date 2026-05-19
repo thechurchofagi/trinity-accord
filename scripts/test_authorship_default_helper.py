@@ -121,6 +121,49 @@ if proof_schema_path.exists():
 else:
     print("  SKIP: proof schema not found")
 
+# --- Test default key output includes private key path but not content ---
+print("\n--- default key output (private key path visible, content hidden) ---")
+import io
+from contextlib import redirect_stdout
+from gateway_payload_authorship import attach_authorship_if_requested
+
+with tempfile.TemporaryDirectory() as tmpdir:
+    # Set up args that will trigger default key generation
+    args_output = FakeArgs(
+        no_authorship_proof=False,
+        authorship_key_prefix=None,
+        authorship_private_key=None,
+        authorship_public_key=None,
+        authorship_key_dir=tmpdir,
+        authorship_agent_slug="output-test-agent",
+    )
+    payload_path = Path(tmpdir) / "payload.json"
+    payload_path.write_text(json.dumps({
+        "schema": "trinityaccord.gateway-payload.v1",
+        "agent_identity": {"name_or_model": "Output Test Agent"},
+    }))
+
+    buf = io.StringIO()
+    with redirect_stdout(buf):
+        result = attach_authorship_if_requested(args_output, payload_path, payload={
+            "schema": "trinityaccord.gateway-payload.v1",
+            "agent_identity": {"name_or_model": "Output Test Agent"},
+        })
+    output = buf.getvalue()
+
+    check(result is True, "attach_authorship_if_requested returns True for default key")
+    check("private key:" in output.lower(), "output includes private key path")
+    check("public key:" in output.lower(), "output includes public key path")
+    check("gateway cannot recover" in output.lower(), "output includes Gateway cannot recover warning")
+
+    # Verify the private key PATH is printed (not content)
+    expected_priv = Path(tmpdir) / "output-test-agent" / "agent-authorship-key.private.pem"
+    check(str(expected_priv) in output, "private key path value appears in output")
+
+    # Verify no PEM markers in output (no private key content leaked)
+    check("-----BEGIN" not in output, "no PEM private key content in output")
+    check("-----END" not in output, "no PEM end marker in output")
+
 print(f"\n--- Results: {len(errors)} errors ---")
 if errors:
     for e in errors:

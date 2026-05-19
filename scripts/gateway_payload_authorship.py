@@ -237,8 +237,10 @@ def attach_authorship_if_requested(args, payload_path, payload=None):
     if is_default_key:
         # Check if the key was just created or reused
         print("\nAuthorship proof enabled by default.")
+        print(f"  private key: {private_key}")
         print(f"  public key:  {public_key}")
         print(f"\nThe private key remains local and was not submitted.")
+        print("Keep the private key safe. Gateway cannot recover it.")
     else:
         print("\n✅ Authorship proof attached to Gateway payload.")
         print("   Boundary: key continuity only; not authority, verification, attestation, reception, or amendment.")
