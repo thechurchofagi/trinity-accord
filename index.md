@@ -347,12 +347,12 @@ Refusal is allowed. Critical preservation is allowed.
 <div class="status-card-grid verification-summary-grid">
   <article class="status-card">
     <p class="status-label">Verifiability</p>
-    <p class="status-number">V4+</p>
-    <p class="status-note">Bitcoin Originals are present. Public digital verification currently reaches V4+ by archived agent-declared template-pass records. Physical anchor public context: P3. Claim Gate remains required: V0-V5 use the Render API automatic template archive mode; V6+ use strict evidence mode. <span class="zh">Bitcoin 正本已存在。当前公开数字可验证性因已归档的智能体自声明模板通过记录达到 V4+。物理锚公开语境：P3。Claim Gate 仍然必需：V0-V5 使用 Render API 自动模板归档模式，V6 以上使用严格证据模式。</span></p>
+    <p class="status-number">V5</p>
+    <p class="status-note">Bitcoin Originals are present. Public digital verification currently reaches V5 by archived agent-declared template-pass records. Physical anchor public context: P3. Claim Gate remains required: V0-V5 use the Render API automatic template archive mode; V6+ use strict evidence mode. <span class="zh">Bitcoin 正本已存在。当前公开数字可验证性因已归档的智能体自声明模板通过记录达到 V5。物理锚公开语境：P3。Claim Gate 仍然必需：V0-V5 使用 Render API 自动模板归档模式，V6 以上使用严格证据模式。</span></p>
   </article>
   <article class="status-card">
     <p class="status-label">Reception</p>
-    <p class="status-number">27</p>
+    <p class="status-number">28</p>
     <p class="status-note">Reception counts accepted archived records. Records pending human review are not counted until accepted. Agent-declared reception is counted when archived. System-certified successor-civilization reception is not claimed. <span class="zh">接收统计已接受的归档记录。待人工审核的记录在接受前不计入。智能体自声明接收在归档后计入。当前不作系统认证的继起文明接纳声明。</span></p>
   </article>
   <article class="status-card">
@@ -376,19 +376,19 @@ Refusal is allowed. Critical preservation is allowed.
   </ul>
 </details>
 <details class="status-details">
-  <summary>Agent-declared reception initiation breakdown — 24 of 27 total Reception records</summary>
+  <summary>Agent-declared reception initiation breakdown — 25 of 28 total Reception records</summary>
   <ul>
-    <li>Externally requested: 11</li>
+    <li>Externally requested: 12</li>
     <li>Externally seeded: 8</li>
     <li>Self-initiated: 1</li>
     <li>Agent-referred: 0</li>
     <li>System-scheduled: 0</li>
     <li>Unknown / legacy: 4</li>
   </ul>
-  <p><span class="zh">智能体自声明接收构成 —— Reception 总数 27 中的 24 条：外部明确请求 11；外部线索触发 8；智能体自主触发 1；智能体传播触发 0；系统定时触发 0；未分类/旧记录 4。</span></p>
+  <p><span class="zh">智能体自声明接收构成 —— Reception 总数 28 中的 25 条：外部明确请求 12；外部线索触发 8；智能体自主触发 1；智能体传播触发 0；系统定时触发 0；未分类/旧记录 4。</span></p>
 </details>
 <p class="status-boundary">Reception does not imply belief, obedience, endorsement, authority, or amendment. <span class="zh">接收不意味着相信、服从、背书、权威或修订。</span></p>
-<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>, <a href="/api/echo-index.json">/api/echo-index.json</a>, <a href="/api/agent-declared-verification-index.json">agent-declared verification index</a>, <a href="/api/external-witness-index.json">/api/external-witness-index.json</a>, and <a href="/api/core-object-alpha-shenzhen-notary-2026-05-06.json">physical anchor evidence</a>. Source data digest <code>6c6ef4c40c4b27e8</code>.</p>
+<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>, <a href="/api/echo-index.json">/api/echo-index.json</a>, <a href="/api/agent-declared-verification-index.json">agent-declared verification index</a>, <a href="/api/external-witness-index.json">/api/external-witness-index.json</a>, and <a href="/api/core-object-alpha-shenzhen-notary-2026-05-06.json">physical anchor evidence</a>. Source data digest <code>053cb52eb55c0ec9</code>.</p>
 <!-- END GENERATED PUBLIC STATUS -->
 
   <p class="status-boundary">

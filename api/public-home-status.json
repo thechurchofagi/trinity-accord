@@ -13,7 +13,7 @@
       "canonical_authority": true
     },
     "public_digital_verification": {
-      "highest_protocol_level": "V4+",
+      "highest_protocol_level": "V5",
       "highest_component_context": "D2",
       "claim_gate_required": true,
       "claim_gate_modes": {
@@ -21,7 +21,7 @@
         "V6_to_V8": "strict_evidence"
       },
       "highest_level_basis": "agent_declared_template_pass",
-      "agent_declared_highest_protocol_level": "V4+",
+      "agent_declared_highest_protocol_level": "V5",
       "evidence_requirement_mode_for_highest": "waived_for_v0_v5"
     },
     "physical_anchor_context": {
@@ -51,11 +51,11 @@
       }
     },
     "agent_declared_verification_archives": {
-      "count": 24,
-      "highest_level": "V4+",
-      "verifiability_count": 24,
+      "count": 25,
+      "highest_level": "V5",
+      "verifiability_count": 25,
       "by_reception_initiation_class": {
-        "externally_requested": 11,
+        "externally_requested": 12,
         "externally_seeded": 8,
         "self_initiated": 1,
         "agent_referred": 0,
@@ -145,8 +145,8 @@
   "authorship_claims": {
     "records_with_authorship_proof": 1,
     "claimed_records": 1,
-    "unclaimed_records": 24,
+    "unclaimed_records": 25,
     "boundary": "Authorship claims prove key continuity only; they do not affect authority, verifiability, reception, or amendment status."
   },
-  "source_digest": "6c6ef4c40c4b27e8"
+  "source_digest": "053cb52eb55c0ec9"
 }
