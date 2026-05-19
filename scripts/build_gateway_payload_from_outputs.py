@@ -23,6 +23,9 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
+sys.path.insert(0, str(ROOT / "scripts"))
+from gateway_payload_authorship import add_authorship_arguments, attach_authorship_if_requested
+
 
 def sha256_file(path):
     """Compute SHA-256 of a file."""
@@ -222,6 +225,7 @@ def main():
                         help="Post archive decision comment")
     parser.add_argument("--allow-intake-fallback-if-archive-blocked", action="store_true",
                         help="Fall back to intake-only if archive is blocked")
+    add_authorship_arguments(parser)
 
     args = parser.parse_args()
 
@@ -321,6 +325,9 @@ def main():
     out_path.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
     print(f"Gateway payload written to: {out_path}")
+
+    # Attach authorship proof if requested
+    attach_authorship_if_requested(args, out_path)
 
     # Validate with gateway validator
     validator = ROOT / "scripts" / "validate_gateway_payload.py"
