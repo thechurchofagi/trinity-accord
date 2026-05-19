@@ -395,8 +395,6 @@ def validate_report_candidate(payload, errors):
 # Sub-V6 forbidden fields and language
 SUB_V6_FORBIDDEN_FIELDS = [
     "evidence_input",
-    "verification_session",
-    "pre_verification_integrity_declaration",
 ]
 
 SUB_V6_FORBIDDEN_ATTACHMENT_KEYS = [

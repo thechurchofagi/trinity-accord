@@ -214,6 +214,13 @@ def make_v4_valid_agent_declared():
         "record_intent": "auto_archive_candidate",
         "requested_archive_kind": "agent_declared_verification_archive",
         "evidence_requirement_mode": "waived_for_v0_v5",
+        "route_id": "sub_v6_agent_declared_template_archive",
+        "single_mandatory_route": True,
+        "declared_level_source": "agent_oath_template_declaration",
+        "evidence_chain_required": False,
+        "strict_evidence_required": False,
+        "strict_evidence_used_for_level": False,
+        "strict_evidence_path_forbidden": True,
         "claim_gate": {"mode": "template_for_v0_v5", "status": "PASS", "allowed_protocol_level": "V4"},
         "agent_integrity_declaration": {
             "performed_actions_myself": True,

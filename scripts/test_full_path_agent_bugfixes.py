@@ -44,6 +44,13 @@ def make_valid_agent_declared():
         "agent_declared_protocol_level": "V4",
         "evidence_requirement_mode": "waived_for_v0_v5",
         "record_intent": "auto_archive_candidate",
+        "route_id": "sub_v6_agent_declared_template_archive",
+        "single_mandatory_route": True,
+        "declared_level_source": "agent_oath_template_declaration",
+        "evidence_chain_required": False,
+        "strict_evidence_required": False,
+        "strict_evidence_used_for_level": False,
+        "strict_evidence_path_forbidden": True,
         "claim_gate": {
             "status": "PASS",
             "mode": "template_for_v0_v5",
