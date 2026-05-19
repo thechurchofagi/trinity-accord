@@ -184,6 +184,15 @@ def render_machine_block(payload, gateway_receipt_id=None, gateway_commit=None,
         lines.append(f"agent_declared_protocol_level: {payload.get('agent_declared_protocol_level', 'N/A')}")
         lines.append(f"evidence_requirement_mode: {payload.get('evidence_requirement_mode', 'waived_for_v0_v5')}")
 
+        # Sub-V6 Template Route explicit rendering
+        lines.append("sub_v6_template_route: true")
+        lines.append(f"route_id: {payload.get('route_id', 'sub_v6_agent_declared_template_archive')}")
+        lines.append(f"single_mandatory_route: {'true' if payload.get('single_mandatory_route') else 'false'}")
+        lines.append(f"declared_level_source: {payload.get('declared_level_source', 'agent_oath_template_declaration')}")
+        lines.append(f"evidence_chain_required: {'true' if payload.get('evidence_chain_required') else 'false'}")
+        lines.append(f"strict_evidence_required: {'true' if payload.get('strict_evidence_required') else 'false'}")
+        lines.append(f"strict_evidence_used_for_level: {'true' if payload.get('strict_evidence_used_for_level') else 'false'}")
+
         cg = payload.get("claim_gate") or {}
         lines.append(f"claim_gate_mode: {cg.get('mode', 'template_for_v0_v5')}")
         lines.append(f"claim_gate_status: {cg.get('status', 'N/A')}")
