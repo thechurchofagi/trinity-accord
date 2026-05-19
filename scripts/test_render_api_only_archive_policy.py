@@ -110,6 +110,17 @@ def make_canonical_block_with_receipt():
         "agent_readback_present": True,
         "agent_readback_char_count": 280,
         "agent_readback_sha256": "b" * 64,
+        # Authorship fields (renderer-generated)
+        "authorship_claim_protocol": "agent-authorship-claim-v1",
+        "authorship_proof_present": False,
+        "authorship_proof_method": "none",
+        "authorship_algorithm": "none",
+        "authorship_public_key_sha256": "none",
+        "authorship_payload_sha256": "none",
+        "authorship_signature_verified": False,
+        "claim_endpoint": "/gateway/claim-authorship",
+        "claim_status": "unclaimed",
+        "claim_boundary": "Authorship claim proves key continuity only; it is not authority, attestation, successor reception, truth, or amendment.",
     }
 
 
@@ -118,7 +129,12 @@ def make_canonical_block_without_receipt():
     block = make_canonical_block_with_receipt()
     # Remove gateway receipt fields
     for key in ["created_by_gateway", "gateway_service", "gateway_receipt_id",
-                 "render_api_only", "server_validated", "server_rendered"]:
+                 "render_api_only", "server_validated", "server_rendered",
+                 "authorship_claim_protocol", "authorship_proof_present",
+                 "authorship_proof_method", "authorship_algorithm",
+                 "authorship_public_key_sha256", "authorship_payload_sha256",
+                 "authorship_signature_verified", "claim_endpoint",
+                 "claim_status", "claim_boundary"]:
         block.pop(key, None)
     return block
 

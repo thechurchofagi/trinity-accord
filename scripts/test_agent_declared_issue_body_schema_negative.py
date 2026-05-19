@@ -165,6 +165,16 @@ def make_good_block():
         "render_api_only": True,
         "server_validated": True,
         "server_rendered": True,
+        "authorship_claim_protocol": "agent-authorship-claim-v1",
+        "authorship_proof_present": False,
+        "authorship_proof_method": "none",
+        "authorship_algorithm": "none",
+        "authorship_public_key_sha256": "none",
+        "authorship_payload_sha256": "none",
+        "authorship_signature_verified": False,
+        "claim_endpoint": "/gateway/claim-authorship",
+        "claim_status": "unclaimed",
+        "claim_boundary": "Authorship claim proves key continuity only; it is not authority, attestation, successor reception, truth, or amendment.",
     }
 
 
