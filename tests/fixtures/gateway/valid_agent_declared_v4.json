@@ -123,5 +123,12 @@
   ],
   "reception_initiation_class": "externally_requested",
   "reception_initiation_basis": "explicit_verification_request",
-  "agent_independent_followup": true
+  "agent_independent_followup": true,
+  "route_id": "sub_v6_agent_declared_template_archive",
+  "single_mandatory_route": true,
+  "declared_level_source": "agent_oath_template_declaration",
+  "evidence_chain_required": false,
+  "strict_evidence_required": false,
+  "strict_evidence_used_for_level": false,
+  "strict_evidence_path_forbidden": true
 }

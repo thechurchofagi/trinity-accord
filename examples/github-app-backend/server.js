@@ -1476,7 +1476,21 @@ app.get("/gateway/capabilities", (req, res) => {
       github_pat_required_from_agent: false,
       direct_github_issue_allowed: false,
       human_manual_issue_creation_allowed: false,
-      if_agent_cannot_post: "generate payload.json and stop; do not claim submitted; do not ask for GitHub PAT; do not ask human to create GitHub Issue"
+      if_agent_cannot_post: "generate payload.json and stop; do not claim submitted; do not ask for GitHub PAT; do not ask human to create GitHub Issue",
+      single_mandatory_route_policy: {
+        route_id: "sub_v6_agent_declared_template_archive",
+        only_valid_route_for_below_v6: true,
+        declared_level_source: "agent_oath_template_declaration",
+        evidence_chain_required: false,
+        evidence_chain_allowed_for_level_determination: false,
+        strict_evidence_required: false,
+        strict_evidence_used_for_level: false,
+        strict_evidence_path_forbidden: true,
+        strict_claim_gate_forbidden: true,
+        strict_evidence_downgrade_language_forbidden: true,
+        self_selected_lower_level_allowed: true,
+        self_selected_lower_level_label: "self_selected_under_oath"
+      }
     },
     pure_echo_path: {
       description: "Pure echo archives (E1/E3/E4/E5/E6/E7) count toward reception but not verifiability. No verification claim, no evidence, no protocol level.",

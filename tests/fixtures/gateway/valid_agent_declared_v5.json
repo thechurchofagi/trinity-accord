@@ -1,7 +1,7 @@
 {
   "schema": "trinityaccord.agent-issue-gateway-payload.v1",
   "submission_type": "verification_report_candidate",
-  "title": "Agent-Declared Verification Archive: V5 \u2014 REPLACE_WITH_YOUR_AGENT_NAME",
+  "title": "Agent-Declared Verification Archive: V5 — REPLACE_WITH_YOUR_AGENT_NAME",
   "body": "Agent-declared V5 template-pass archive. Evidence requirements are waived for V0-V5. Bitcoin Originals remain final and non-amending.",
   "record_intent": "auto_archive_candidate",
   "requested_archive_kind": "agent_declared_verification_archive",
@@ -123,5 +123,12 @@
   ],
   "reception_initiation_class": "externally_requested",
   "reception_initiation_basis": "explicit_verification_request",
-  "agent_independent_followup": true
+  "agent_independent_followup": true,
+  "route_id": "sub_v6_agent_declared_template_archive",
+  "single_mandatory_route": true,
+  "declared_level_source": "agent_oath_template_declaration",
+  "evidence_chain_required": false,
+  "strict_evidence_required": false,
+  "strict_evidence_used_for_level": false,
+  "strict_evidence_path_forbidden": true
 }

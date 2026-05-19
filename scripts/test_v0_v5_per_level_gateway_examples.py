@@ -35,6 +35,14 @@ for level in LEVELS:
               f"{level} fixture uses waived_for_v0_v5")
         check(d.get("claim_gate", {}).get("mode") == "template_for_v0_v5",
               f"{level} fixture uses template_for_v0_v5")
+        check(d.get("route_id") == "sub_v6_agent_declared_template_archive",
+              f"{level} fixture has route_id=sub_v6_agent_declared_template_archive")
+        check(d.get("single_mandatory_route") is True,
+              f"{level} fixture has single_mandatory_route=true")
+        check(d.get("declared_level_source") == "agent_oath_template_declaration",
+              f"{level} fixture has declared_level_source=agent_oath_template_declaration")
+        check(d.get("strict_evidence_path_forbidden") is True,
+              f"{level} fixture has strict_evidence_path_forbidden=true")
 
 # 2. Server.js has endpoints
 print("\n--- Server.js endpoints ---")

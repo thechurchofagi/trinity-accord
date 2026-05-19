@@ -34,6 +34,18 @@ for level in ["v0", "v1", "v2", "v3", "v4", "v4plus", "v5"]:
     check(f"agent_declared_{level}_raw" in server,
           f"capabilities has agent_declared_{level}_raw")
 
+print("\n--- sub-V6 single mandatory route policy ---")
+check("single_mandatory_route_policy" in server,
+      "capabilities has single_mandatory_route_policy")
+check("only_valid_route_for_below_v6" in server,
+      "capabilities says only_valid_route_for_below_v6")
+check("evidence_chain_required: false" in server or "evidence_chain_required: false," in server,
+      "capabilities says evidence_chain_required false")
+check("strict_evidence_path_forbidden: true" in server or "strict_evidence_path_forbidden: true," in server,
+      "capabilities says strict_evidence_path_forbidden true")
+check("declared_level_source: \"agent_oath_template_declaration\"" in server,
+      "capabilities says declared_level_source agent_oath_template_declaration")
+
 print("\n--- authorship_proof details ---")
 check("private_key_must_never_be_submitted" in server,
       "authorship_proof says private key must never be submitted")
