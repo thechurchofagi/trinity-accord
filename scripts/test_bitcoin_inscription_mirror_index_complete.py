@@ -66,6 +66,17 @@ for rec in records:
         if rec.get("creates_new_authority"):
             errors.append(f"{ins_id}: creates_new_authority should be false")
 
+    # Chain verification assertions
+    cv = rec.get("chain_verification", {})
+    if cv.get("verification_status") != "mirror_matches_onchain":
+        errors.append(f"{ins_id}: verification_status should be mirror_matches_onchain, got {cv.get('verification_status')}")
+    if cv.get("mirror_matches_onchain") is not True:
+        errors.append(f"{ins_id}: mirror_matches_onchain should be true")
+    if not cv.get("onchain_content_sha256"):
+        errors.append(f"{ins_id}: onchain_content_sha256 should be non-empty")
+    if not cv.get("last_verified_utc"):
+        errors.append(f"{ins_id}: last_verified_utc should be non-empty")
+
 # Source references
 source = data.get("source", {})
 if "legacy_archive" not in source:
