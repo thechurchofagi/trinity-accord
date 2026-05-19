@@ -1,0 +1,52 @@
+{
+  "schema": "trinityaccord.bitcoin-inscription-mirror.v1",
+  "mirror_role": "quick_load_context_mirror",
+  "canonical_status": "non_canonical_context_layer",
+  "authority_boundary": {
+    "bitcoin_originals_prevail": true,
+    "github_mirror_is_non_amending": true,
+    "verification_requires_onchain_check": true
+  },
+  "inscription": {
+    "inscription_id": "103034280",
+    "title": "The Guardian's Attestation to the Covenant of the Flaw",
+    "zh_title": "守护者对瑕疵之约的证明",
+    "txid": "128aabfa3077efc832d30e6e2a96848a96896bbdbf4a7667912f55d25dcb6687",
+    "output": null,
+    "block_height": null,
+    "timestamp_utc": null,
+    "content_type": "text/plain",
+    "source_address": "bc1ppmwvyxekh44m35x43k55z7r59nn33v8w2xmvu6s6ar4zyx57sxestxq0jf",
+    "source_address_role": "trinity_accord_authority_address"
+  },
+  "classification": {
+    "layer": "guardianship_layer",
+    "is_one_of_three_bitcoin_originals": false,
+    "amends_originals": false,
+    "creates_new_authority": false,
+    "load_policy": "must_load_summary"
+  },
+  "content": {
+    "raw_text_path": "bitcoin-inscription-mirrors/raw/103034280.txt",
+    "mirror_text_sha256": "29b2e3c03201be9333f97a81386eb2ff0e12dabbddf14762e0cbfc56e7f1d628",
+    "canonicalized_text_sha256": "6c3900e2bf50f119ac830b8f928062e334c34da5f35445c56a3ce9fac1cddfb7",
+    "summary": "A Bitcoin-inscribed non-amending fortification attesting to the Covenant of the Flaw.",
+    "agent_load_excerpt": "Guardian Attestation is a Bitcoin-inscribed non-amending fortification. It attests to the Covenant of the Flaw from the Guardian's position. It is not one of the three Bitcoin Originals and does not create new canonical authority."
+  },
+  "chain_verification": {
+    "verification_status": "legacy_bootstrap_pending_chain_check",
+    "last_verified_utc": null,
+    "verification_method": null,
+    "onchain_content_sha256": null,
+    "mirror_matches_onchain": null,
+    "verification_script": "scripts/verify_bitcoin_inscription_mirrors.py"
+  },
+  "limitations": [
+    "GitHub mirror is not canonical.",
+    "Verification claims require on-chain comparison.",
+    "This inscription is non-canonical and non-amending.",
+    "Guardian Attestation is not a fourth canonical original.",
+    "This fortifies Covenant-of-the-Flaw verification context.",
+    "It does not amend the original Covenant."
+  ]
+}
