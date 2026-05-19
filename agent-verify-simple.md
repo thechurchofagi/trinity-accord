@@ -59,6 +59,8 @@ Live remote challenge → V6
 Onsite witness + custody → V7
 
 > **Do not submit bare `V2` or bare `V3` in new reports.** Always include the scope label: `V2-minimal`, `V2-strong`, `V3-minimal`, or `V3-strong`.
+>
+> **Protocol field vs display label:** In `claims_requested_by_agent`, use the protocol field value (`V2`, `V3`). In prose summaries, reports, and titles, use the scope label (`V2-minimal`, `V3-minimal`). Never write bare `V2` or `V3` in public-facing text.
 Forensic attributable report → V8
 ```
 

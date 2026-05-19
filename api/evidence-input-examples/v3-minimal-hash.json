@@ -1,6 +1,8 @@
 {
   "example_name": "v3-minimal-hash",
   "description": "Complete V3 minimal hash verification. Agent computes SHA-256 of a repository artifact and verifies it matches the canonical manifest hash.",
+  "protocol_field_explanation": "claims_requested_by_agent uses 'V3' (protocol field). Display/report as 'V3-minimal'. Do not write bare 'V3' in prose summaries.",
+  "public_display_scope_label": "V3-minimal",
   "expected_claim_gate": {
     "allowed_protocol_level": "V3",
     "allowed_component_levels": {

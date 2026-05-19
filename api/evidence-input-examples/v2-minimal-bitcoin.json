@@ -1,6 +1,8 @@
 {
   "example_name": "v2-minimal-bitcoin",
   "description": "Complete V2 minimal Bitcoin evidence input. Agent verifies one Bitcoin transaction via external explorer.",
+  "protocol_field_explanation": "claims_requested_by_agent uses 'V2' (protocol field). Display/report as 'V2-minimal'. Do not write bare 'V2' in prose summaries.",
+  "public_display_scope_label": "V2-minimal",
   "expected_claim_gate": {
     "allowed_protocol_level": "V2",
     "allowed_component_levels": {
