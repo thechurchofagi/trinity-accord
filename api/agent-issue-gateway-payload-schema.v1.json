@@ -229,7 +229,10 @@
       ]
     },
     "authorship_proof": {
-      "type": ["object", "null"],
+      "type": [
+        "object",
+        "null"
+      ],
       "additionalProperties": false,
       "required": [
         "schema",
@@ -279,11 +282,17 @@
           "maxLength": 2000
         },
         "created_at": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "maxLength": 80
         },
         "claim_boundary": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "maxLength": 1000
         }
       }
@@ -803,6 +812,33 @@
           }
         }
       }
+    },
+    "route_id": {
+      "type": "string"
+    },
+    "single_mandatory_route": {
+      "type": "boolean"
+    },
+    "declared_level_source": {
+      "type": "string"
+    },
+    "evidence_chain_required": {
+      "type": "boolean"
+    },
+    "evidence_chain_allowed_for_level_determination": {
+      "type": "boolean"
+    },
+    "strict_evidence_required": {
+      "type": "boolean"
+    },
+    "strict_evidence_used_for_level": {
+      "type": "boolean"
+    },
+    "strict_evidence_path_forbidden": {
+      "type": "boolean"
+    },
+    "sub_v6_template_mode_policy": {
+      "type": "object"
     }
   },
   "allOf": [

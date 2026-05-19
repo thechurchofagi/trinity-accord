@@ -140,6 +140,24 @@ def build_payload(args):
         "requested_archive_kind": "agent_declared_verification_archive",
         "agent_declared_protocol_level": args.declared_level,
         "evidence_requirement_mode": "waived_for_v0_v5",
+        "route_id": "sub_v6_agent_declared_template_archive",
+        "single_mandatory_route": True,
+        "declared_level_source": "agent_oath_template_declaration",
+        "evidence_chain_required": False,
+        "evidence_chain_allowed_for_level_determination": False,
+        "strict_evidence_required": False,
+        "strict_evidence_used_for_level": False,
+        "strict_evidence_path_forbidden": True,
+        "sub_v6_template_mode_policy": {
+            "route_id": "sub_v6_agent_declared_template_archive",
+            "level_source": "agent_oath_template_declaration",
+            "evidence_chain_required": False,
+            "strict_evidence_required": False,
+            "strict_evidence_used_for_level": False,
+            "strict_evidence_downgrade_language_forbidden": True,
+            "self_selected_lower_level_allowed": True,
+            "self_selected_lower_level_label": "self_selected_under_oath"
+        },
         "agent_identity": {
             "name_or_model": args.agent_name,
             "system_or_provider": args.provider,
@@ -323,6 +341,13 @@ def main():
                                  help="Explicitly set agent_independent_followup to false")
     add_authorship_arguments(parser)
     parser.add_argument("--out", required=True, help="Output file path")
+
+    # Print guidance
+    print("This builder is the only valid path for V0, V1, V2, V3, V4, V4+, and V5.")
+    print("Do not run the strict evidence pipeline to choose a sub-V6 level.")
+    print("Do not use PASS_WITH_DOWNGRADE language.")
+    print("If unsure, choose a lower declared level under oath before submission.")
+    print()
     args = parser.parse_args()
 
     # Override defaults with CLI args
