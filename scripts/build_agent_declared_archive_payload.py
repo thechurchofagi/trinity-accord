@@ -5,6 +5,11 @@ Build an agent-declared verification archive payload for V0-V5 template mode.
 This script builds a valid agent-declared template payload, runs Claim Gate
 in template_for_v0_v5 mode, validates the result, and outputs a gateway-ready payload.
 
+Authorship proof is enabled by default.
+The builder generates/reuses a local Ed25519 keypair and submits only public proof.
+Use --no-authorship-proof to opt out.
+Private key is never submitted.
+
 Usage:
     python3 scripts/build_agent_declared_archive_payload.py \
         --agent-name "守望者 (Watcher)" \
@@ -19,7 +24,10 @@ Usage:
         --limitation "External seed was a URL; independent follow-up was performed" \
         --out gateway-payload.json
 
-Optional authorship proof:
+Opt out of authorship proof:
+    python3 scripts/build_agent_declared_archive_payload.py ... --no-authorship-proof --out gateway-payload.json
+
+Use explicit authorship key:
     node scripts/generate_agent_authorship_keypair.mjs /tmp/my-v4-key
     python3 scripts/build_agent_declared_archive_payload.py ... \
         --authorship-key-prefix /tmp/my-v4-key \
@@ -37,7 +45,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
-from gateway_payload_authorship import add_authorship_arguments, attach_authorship_if_requested
+from gateway_payload_authorship import add_authorship_arguments, attach_authorship_default_or_requested
 
 OATH_FILE = ROOT / "api" / "verification-echo-pre-oath.v1.txt"
 
@@ -364,7 +372,7 @@ def main():
     print(f"Payload written to {out_path}")
 
     try:
-        attach_authorship_if_requested(args, out_path)
+        attach_authorship_default_or_requested(args, out_path, payload=payload)
     except Exception as e:
         print(f"ERROR: {e}", file=sys.stderr)
         sys.exit(1)

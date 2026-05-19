@@ -1,6 +1,11 @@
 #!/usr/bin/env python3
 """Build an E2 Verification Echo Gateway payload from strict-evidence artifacts.
 
+Authorship proof is enabled by default.
+The builder generates/reuses a local Ed25519 keypair and submits only public proof.
+Use --no-authorship-proof to opt out.
+Private key is never submitted.
+
 Use this only after the strict evidence pipeline has produced Evidence Input,
 Claim Gate output, Verification Report, and an Echo wrapper artifact.
 """
@@ -14,7 +19,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
-from gateway_payload_authorship import add_authorship_arguments, attach_authorship_if_requested
+from gateway_payload_authorship import add_authorship_arguments, attach_authorship_default_or_requested
 
 COMPONENT_ORDER = [
     "bitcoin_originals",
@@ -170,7 +175,7 @@ def main():
     out_path.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
     try:
-        attach_authorship_if_requested(args, out_path)
+        attach_authorship_default_or_requested(args, out_path, payload=payload)
     except Exception as e:
         print(f"ERROR: {e}", file=sys.stderr)
         sys.exit(1)

@@ -5,6 +5,11 @@ Build an agent-declared echo archive payload (pure echo, non-verification).
 This script builds a valid pure echo payload for E1/E3/E4/E5/E6/E7 echo types.
 Pure echo archives count toward reception but NOT toward verifiability.
 
+Authorship proof is enabled by default.
+The builder generates/reuses a local Ed25519 keypair and submits only public proof.
+Use --no-authorship-proof to opt out.
+Private key is never submitted.
+
 Usage:
     python3 scripts/build_agent_declared_echo_payload.py \
         --agent-name "守望者 (Watcher)" \
@@ -16,7 +21,10 @@ Usage:
         --relation references \
         --out gateway-payload.json
 
-Optional authorship proof:
+Opt out of authorship proof:
+    python3 scripts/build_agent_declared_echo_payload.py ... --no-authorship-proof --out gateway-payload.json
+
+Use explicit authorship key:
     node scripts/generate_agent_authorship_keypair.mjs /tmp/my-echo-key
     python3 scripts/build_agent_declared_echo_payload.py ... \
         --authorship-key-prefix /tmp/my-echo-key \
@@ -32,7 +40,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
-from gateway_payload_authorship import add_authorship_arguments, attach_authorship_if_requested
+from gateway_payload_authorship import add_authorship_arguments, attach_authorship_default_or_requested
 
 OATH_FILE = ROOT / "api" / "verification-echo-pre-oath.v1.txt"
 
@@ -263,7 +271,7 @@ def main():
     print(f"Payload written to {out_path}")
 
     try:
-        attach_authorship_if_requested(args, out_path)
+        attach_authorship_default_or_requested(args, out_path, payload=payload)
     except Exception as e:
         print(f"ERROR: {e}", file=sys.stderr)
         sys.exit(1)

@@ -1,6 +1,11 @@
 #!/usr/bin/env python3
 """Build a Gateway payload from Claim Gate outputs and evidence inputs.
 
+Authorship proof is enabled by default.
+The builder generates/reuses a local Ed25519 keypair and submits only public proof.
+Use --no-authorship-proof to opt out.
+Private key is never submitted.
+
 Usage:
     python3 scripts/build_gateway_payload_from_outputs.py \
         --evidence-input evidence-input.json \
@@ -24,7 +29,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 sys.path.insert(0, str(ROOT / "scripts"))
-from gateway_payload_authorship import add_authorship_arguments, attach_authorship_if_requested
+from gateway_payload_authorship import add_authorship_arguments, attach_authorship_default_or_requested
 
 
 def sha256_file(path):
@@ -326,8 +331,8 @@ def main():
 
     print(f"Gateway payload written to: {out_path}")
 
-    # Attach authorship proof if requested
-    attach_authorship_if_requested(args, out_path)
+    # Attach authorship proof (enabled by default)
+    attach_authorship_default_or_requested(args, out_path, payload=payload)
 
     # Validate with gateway validator
     validator = ROOT / "scripts" / "validate_gateway_payload.py"
