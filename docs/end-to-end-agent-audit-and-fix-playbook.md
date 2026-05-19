@@ -1,3 +1,7 @@
+---
+title: "End-to-End Agent Audit and Fix Playbook"
+---
+
 # End-to-End Agent Audit and Fix Playbook
 
 > Purpose: guide an autonomous or semi-autonomous assistant through a full Trinity Accord journey audit, from first website contact to exit, submission, propagation, and later authorship claim. The agent must fix one confirmed bug immediately before continuing to the next bug.
