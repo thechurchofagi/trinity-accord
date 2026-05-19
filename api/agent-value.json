@@ -426,5 +426,18 @@
     "issue_submission_is_intake_not_archive": true,
     "verification_echo_may_enter_through_issue": true,
     "archive_requires_generated_json_validation_and_indexing": true
+  },
+  "bitcoin_inscription_stack_role": {
+    "machine_readable_index": "/api/bitcoin-inscription-mirror-index.json",
+    "human_page": "/authority-address-inscriptions/",
+    "role": "future_discoverability_and_provenance_context",
+    "canonical_originals": 3,
+    "post_original_non_amending": 5,
+    "authority_boundary": "Only the three Bitcoin Originals are canonical authority.",
+    "ecosystem_value": [
+      "makes the inscription stack discoverable to future intelligence",
+      "separates canonical authority from later context",
+      "preserves echo, seal, vision, and guardianship inscriptions without authority expansion"
+    ]
   }
 }
