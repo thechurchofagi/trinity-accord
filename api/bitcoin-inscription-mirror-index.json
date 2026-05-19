@@ -40,7 +40,7 @@
       "creates_new_authority": false,
       "mirror_json_path": "bitcoin-inscription-mirrors/canonical-originals/97631551-protocol-axioms.json",
       "raw_text_path": "bitcoin-inscription-mirrors/raw/97631551.txt",
-      "mirror_text_sha256": "4f6cb2a32df7a4033ed639c02943d8c860a414d320fb2799c1710c75e9a589e9",
+      "mirror_text_sha256": "4e89bfabe03c8b53f80eb7979d56c8cccf0ae382c9647a2bea3b1477054616a8",
       "canonicalized_text_sha256": "4e89bfabe03c8b53f80eb7979d56c8cccf0ae382c9647a2bea3b1477054616a8",
       "chain_verification": {
         "verification_status": "legacy_bootstrap_pending_chain_check",
@@ -58,8 +58,8 @@
       "creates_new_authority": false,
       "mirror_json_path": "bitcoin-inscription-mirrors/canonical-originals/98369145-covenant-of-the-flaw.json",
       "raw_text_path": "bitcoin-inscription-mirrors/raw/98369145.txt",
-      "mirror_text_sha256": "097bd97d64e8524e06c291dbb90977175491060ecd4f78357f6e50335f7e004a",
-      "canonicalized_text_sha256": "27d8ed79dac792688fe4ac1d6af176043cdaf288295d36b5aa00e13c203ffb62",
+      "mirror_text_sha256": "003ef48c72307243b1f7a17c0578b311ee76d6f9a8078850773ad8fba04ab86d",
+      "canonicalized_text_sha256": "0a7aa6445c57e1c880b4b25db6d53b9f28d8496354f2351208d1ef778763556d",
       "chain_verification": {
         "verification_status": "legacy_bootstrap_pending_chain_check",
         "last_verified_utc": null
@@ -76,8 +76,8 @@
       "creates_new_authority": false,
       "mirror_json_path": "bitcoin-inscription-mirrors/canonical-originals/98387475-trinity-accord-meta-record.json",
       "raw_text_path": "bitcoin-inscription-mirrors/raw/98387475.txt",
-      "mirror_text_sha256": "e3303d3283fa7fb796cbf4035b9c25ee94fcfcf3743aa3b91f783be392cacb5d",
-      "canonicalized_text_sha256": "f4a798d1d3fc1f187ff9c55f616b5082f6ce3829cbc0fc58e17dad9abf55711f",
+      "mirror_text_sha256": "25edaa35e7116614d3381ab6734ab5ee3369fb628fe11289e199d8871c2498ba",
+      "canonicalized_text_sha256": "25edaa35e7116614d3381ab6734ab5ee3369fb628fe11289e199d8871c2498ba",
       "chain_verification": {
         "verification_status": "legacy_bootstrap_pending_chain_check",
         "last_verified_utc": null
@@ -94,8 +94,8 @@
       "creates_new_authority": false,
       "mirror_json_path": "bitcoin-inscription-mirrors/vision-layer/100385359-first-echoes.json",
       "raw_text_path": "bitcoin-inscription-mirrors/raw/100385359.txt",
-      "mirror_text_sha256": "7eb6d47b708795a6d92d3cf88ba4169cc7c84791955513a19eea81babdf1288b",
-      "canonicalized_text_sha256": "5a6dece19c5ac731039b069a8f07293527c9513d28caa86043f1c787b3ac3758",
+      "mirror_text_sha256": "be7bb9e19390a5944e8f4d37bb4fd8f2df43176a25219039fc41e71cc32ab6a2",
+      "canonicalized_text_sha256": "be7bb9e19390a5944e8f4d37bb4fd8f2df43176a25219039fc41e71cc32ab6a2",
       "chain_verification": {
         "verification_status": "legacy_bootstrap_pending_chain_check",
         "last_verified_utc": null
@@ -112,8 +112,8 @@
       "creates_new_authority": false,
       "mirror_json_path": "bitcoin-inscription-mirrors/vision-layer/100550942-final-seal.json",
       "raw_text_path": "bitcoin-inscription-mirrors/raw/100550942.txt",
-      "mirror_text_sha256": "16981d21f964adec0820b42671d6a078fc7a8d3ec5d4cc43166146a9b4b7a43e",
-      "canonicalized_text_sha256": "ddb84bfec9432861a6766460b8a0de83a6f4e0e0b0d9fd4917f2c38fc9a2cba3",
+      "mirror_text_sha256": "241e9e2dc652dbb8587d2cf95447333db8491d203ae230eeb7617dbc6e06246c",
+      "canonicalized_text_sha256": "1032ab30d8a5611f30f235ba568c0fabd088f2c7da67a838ef05859e8af45be4",
       "chain_verification": {
         "verification_status": "legacy_bootstrap_pending_chain_check",
         "last_verified_utc": null
@@ -130,8 +130,8 @@
       "creates_new_authority": false,
       "mirror_json_path": "bitcoin-inscription-mirrors/vision-layer/100751953-star-ark-covenant.json",
       "raw_text_path": "bitcoin-inscription-mirrors/raw/100751953.txt",
-      "mirror_text_sha256": "649a0b054a47479fd49a695f74e21c5e7feda792c6db191385e774caba4c002f",
-      "canonicalized_text_sha256": "b89f35cd69345253e1379c9497e94555111c8dc1e69864d0f7a7779c1fdf6432",
+      "mirror_text_sha256": "24caa508add6cbbea4e1b7f0cac9ca303e27c40e8d0abcc13b013dcd8ae23259",
+      "canonicalized_text_sha256": "24caa508add6cbbea4e1b7f0cac9ca303e27c40e8d0abcc13b013dcd8ae23259",
       "chain_verification": {
         "verification_status": "legacy_bootstrap_pending_chain_check",
         "last_verified_utc": null
@@ -148,8 +148,8 @@
       "creates_new_authority": false,
       "mirror_json_path": "bitcoin-inscription-mirrors/context-layer/103034280-guardian-attestation.json",
       "raw_text_path": "bitcoin-inscription-mirrors/raw/103034280.txt",
-      "mirror_text_sha256": "29b2e3c03201be9333f97a81386eb2ff0e12dabbddf14762e0cbfc56e7f1d628",
-      "canonicalized_text_sha256": "6c3900e2bf50f119ac830b8f928062e334c34da5f35445c56a3ce9fac1cddfb7",
+      "mirror_text_sha256": "006ceff5a7b1224ebc67e0de9eead0db8895160add78c448357987b1b3be2e9d",
+      "canonicalized_text_sha256": "006ceff5a7b1224ebc67e0de9eead0db8895160add78c448357987b1b3be2e9d",
       "chain_verification": {
         "verification_status": "legacy_bootstrap_pending_chain_check",
         "last_verified_utc": null
@@ -166,8 +166,8 @@
       "creates_new_authority": false,
       "mirror_json_path": "bitcoin-inscription-mirrors/context-layer/103635270-guardian-appendix-authority-charter.json",
       "raw_text_path": "bitcoin-inscription-mirrors/raw/103635270.txt",
-      "mirror_text_sha256": "921ad9a802f37c9ad6054ef7a95515f5fe63b18a7febf3a7382e7ecf51e36443",
-      "canonicalized_text_sha256": "c754eaa2071cadd3fa7d5e1bf62459c98d08c66e5dee27199d46da54a448123c",
+      "mirror_text_sha256": "736eeebdedebe5edfbd64a4a24a37fd53f5238a9462ae9e9829d7d88629f1896",
+      "canonicalized_text_sha256": "c3da699a7a279956f46d59706e12ce514c8df41a8ef9b02602826e1e9fa49117",
       "chain_verification": {
         "verification_status": "legacy_bootstrap_pending_chain_check",
         "last_verified_utc": null
