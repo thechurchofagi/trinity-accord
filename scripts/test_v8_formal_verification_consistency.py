@@ -105,15 +105,23 @@ def test_no_stale_v5a_v5b_in_protocol_sources() -> None:
 
 
 def test_claim_gate_code_uses_v8_formal_levels() -> None:
-    text = read("scripts/claim_gate.py")
-    assert re.search(r'PROTOCOL_LEVELS\s*=\s*\[[^\]]*"V8"[^\]]*\]', text, re.S), (
-        "claim_gate.py PROTOCOL_LEVELS must contain V8."
+    # PROTOCOL_LEVELS is now loaded from api/protocol-terms.v1.json via protocol_terms.py
+    terms_text = read("api/protocol-terms.v1.json")
+    terms = json.loads(terms_text)
+    levels = terms.get("protocol_levels", [])
+    assert "V8" in levels, (
+        f"api/protocol-terms.v1.json protocol_levels must contain V8. Got: {levels}"
     )
-    assert not re.search(r'PROTOCOL_LEVELS\s*=\s*\[[^\]]*"V5a"[^\]]*\]', text, re.S), (
-        "claim_gate.py PROTOCOL_LEVELS must not contain V5a."
+    assert "V5a" not in levels, (
+        f"api/protocol-terms.v1.json protocol_levels must not contain V5a. Got: {levels}"
     )
-    assert not re.search(r'PROTOCOL_LEVELS\s*=\s*\[[^\]]*"V5b"[^\]]*\]', text, re.S), (
-        "claim_gate.py PROTOCOL_LEVELS must not contain V5b."
+    assert "V5b" not in levels, (
+        f"api/protocol-terms.v1.json protocol_levels must not contain V5b. Got: {levels}"
+    )
+    # Verify claim_gate.py imports and uses PROTOCOL_LEVELS from protocol_terms
+    claim_gate_text = read("scripts/claim_gate.py")
+    assert "from protocol_terms import" in claim_gate_text and "PROTOCOL_LEVELS" in claim_gate_text, (
+        "claim_gate.py must import PROTOCOL_LEVELS from protocol_terms"
     )
 
 
@@ -309,6 +317,7 @@ def test_claim_gate_minimal_v2_from_external_reference() -> None:
                 {
                     "source_type": "external_explorer",
                     "sources": ["mempool.space"],
+                    "authority_boundary_recognized": True,
                 }
             ]
         },
@@ -339,7 +348,12 @@ def test_claim_gate_minimal_v3_from_one_valid_hash() -> None:
                     "command": "sha256sum public_covenant_archive.zip",
                     "match": True,
                 }
-            ]
+            ],
+            "digital_mirror_checks": [
+                {
+                    "authority_boundary_recognized": True,
+                }
+            ],
         },
         claims=["V3"],
     )
@@ -359,7 +373,10 @@ def test_claim_gate_v6_from_live_remote_p4() -> None:
                     "requested_action_angle_lighting": True,
                     "witness_identity_or_role": "remote verifier",
                 }
-            ]
+            ],
+            "digital_mirror_checks": [
+                {"authority_boundary_recognized": True}
+            ],
         },
         claims=["V6"],
     )
@@ -384,7 +401,10 @@ def test_claim_gate_v7_from_onsite_p5() -> None:
                     "witness_identity_or_role": "onsite verifier",
                     "touch_or_handling": True,
                 }
-            ]
+            ],
+            "digital_mirror_checks": [
+                {"authority_boundary_recognized": True}
+            ],
         },
         claims=["V7"],
     )
