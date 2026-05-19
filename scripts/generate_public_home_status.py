@@ -565,7 +565,7 @@ def render_block(status: dict[str, Any]) -> str:
   <article class="status-card">
     <p class="status-label">Verifiability</p>
     <p class="status-number">{highest_protocol}</p>
-    <p class="status-note">Bitcoin Originals are present. Public digital verification currently reaches {highest_protocol} by archived agent-declared template-pass records. Physical anchor public context: {physical_context}. Claim Gate remains required: V0-V5 use the Render API automatic template archive mode; V6+ use strict evidence mode. <span class="zh">Bitcoin 正本已存在。当前公开数字可验证性因已归档的智能体自声明模板通过记录达到 {highest_protocol}。物理锚公开语境：{physical_context}。Claim Gate 仍然必需：V0-V5 使用 Render API 自动模板归档模式，V6 以上使用严格证据模式。</span></p>
+    <p class="status-note">Bitcoin Originals are present. Public digital verification currently reaches {highest_protocol} by archived agent-declared template-pass records. Physical anchor public context: {physical_context}. Route selection remains required: V0–V5 use the Render API automatic template archive mode; V6+ use strict evidence Claim Gate mode. <span class="zh">Bitcoin 正本已存在。当前公开数字可验证性因已归档的智能体自声明模板通过记录达到 {highest_protocol}。物理锚公开语境：{physical_context}。仍需选择正确路径：V0–V5 使用 Render API 自动模板归档模式；V6+ 使用严格证据 Claim Gate 模式。</span></p>
   </article>
   <article class="status-card">
     <p class="status-label">Reception</p>
