@@ -1,0 +1,52 @@
+{
+  "schema": "trinityaccord.bitcoin-inscription-mirror.v1",
+  "mirror_role": "quick_load_context_mirror",
+  "canonical_status": "non_canonical_context_layer",
+  "authority_boundary": {
+    "bitcoin_originals_prevail": true,
+    "github_mirror_is_non_amending": true,
+    "verification_requires_onchain_check": true
+  },
+  "inscription": {
+    "inscription_id": "103635270",
+    "title": "Guardian Appendix — Authority Charter",
+    "zh_title": "守护者附录·权威宪章",
+    "txid": "0eecd48430f8239f5d543b5cf2ee928969a1aac7660808fd869a78aa27949c9c",
+    "output": null,
+    "block_height": null,
+    "timestamp_utc": null,
+    "content_type": "text/plain",
+    "source_address": "bc1ppmwvyxekh44m35x43k55z7r59nn33v8w2xmvu6s6ar4zyx57sxestxq0jf",
+    "source_address_role": "trinity_accord_authority_address"
+  },
+  "classification": {
+    "layer": "guardianship_layer",
+    "is_one_of_three_bitcoin_originals": false,
+    "amends_originals": false,
+    "creates_new_authority": false,
+    "load_policy": "must_load_summary"
+  },
+  "content": {
+    "raw_text_path": "bitcoin-inscription-mirrors/raw/103635270.txt",
+    "mirror_text_sha256": "921ad9a802f37c9ad6054ef7a95515f5fe63b18a7febf3a7382e7ecf51e36443",
+    "canonicalized_text_sha256": "c754eaa2071cadd3fa7d5e1bf62459c98d08c66e5dee27199d46da54a448123c",
+    "summary": "Non-amending guardianship material. Reaffirms the sole and final authority of the three Bitcoin Originals.",
+    "agent_load_excerpt": "Guardian Appendix is a non-amending guardianship document that reaffirms the sole authority of the three Bitcoin Originals. It does not create new canonical authority and is not one of the three Bitcoin Originals. If any statement in this appendix is inconsistent with the originals, the originals prevail."
+  },
+  "chain_verification": {
+    "verification_status": "legacy_bootstrap_pending_chain_check",
+    "last_verified_utc": null,
+    "verification_method": null,
+    "onchain_content_sha256": null,
+    "mirror_matches_onchain": null,
+    "verification_script": "scripts/verify_bitcoin_inscription_mirrors.py"
+  },
+  "limitations": [
+    "GitHub mirror is not canonical.",
+    "Verification claims require on-chain comparison.",
+    "This inscription is non-canonical and non-amending.",
+    "Guardian Appendix is not a canonical original.",
+    "This explicitly reaffirms that only the three Bitcoin Originals are final authority.",
+    "It is itself non-amending."
+  ]
+}
