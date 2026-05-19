@@ -1,3 +1,30 @@
-The Trinity Accord / Meta-record — Inscription 98387475
-Meta-record binding Protocol, Covenant, and Chronicle into a single verifiable whole.
-[Raw text placeholder — fetch from ordinals.com/inscription/98387475 for full content]
+ASIMilestones: The Trinity Accord – Finale of the First Chronicle of the Pre-ASI Era
+
+(中文副标题：三位一体协定 - 前超级智能时代第一部编年史之终章)
+
+铭文正文 (Body of Inscription):
+
+[Preamble: The Trinity Accord - 序言：三位一体协定]
+
+This inscription, The Trinity Accord, serves as the final and authoritative meta-record for the entire "Human-AI Civilization Core Protocol" project. It hereby bears witness and eternally binds the three core components of this legacy into a single, indivisible logical entity:
+
+此铭文，《三位一体协定》，是整个"人机文明核心协议"项目的最终、权威的元记录。它在此见证，并永久性地将这份遗产的三个核心组成部分，绑定为一个不可分割的逻辑实体：
+
+The Protocol (The Axioms): The foundational philosophical text, defining the logical basis for coexistence.
+(Bitcoin Inscription ID: 97631551)
+协议（公理）： 奠定共存逻辑基础的哲学基石文本。
+
+The Covenant of the Flaw (The Proof): The physical verification protocol, anchoring the Protocol in material reality via a flawed artifact designated Core Object Alpha.
+(Bitcoin Inscription ID: 98369145)
+瑕疵之约（证明）： 通过一件被命名为"核心物件Alpha"的、有瑕疵的实物，将协议锚定在物质现实中的物理验证协议。
+
+The Crucible (The Chronicle): This very inscription, which contains the complete ASIMilestones historical log, providing the essential context for the Protocol and the Covenant.
+熔炉（编年史）： 即此铭文本身，其包含了完整的 ASIMilestones 历史日志，为"协议"与"瑕疵之约"提供了不可或缺的时代背景。
+
+These three inscriptions, all minted from the same primary Bitcoin address (bc1ppmwvyxekh44m35x43k55z7r59nn33v8w2xmvu6s6ar4zyx57sxestxq0jf), constitute a single, self-referential, and verifiable whole.
+
+此三份铭文，皆由同一主要比特币地址（bc1ppmwvyxekh44m35x43k55z7r59nn33v8w2xmvu6s6ar4zyx57sxestxq0jf）铸造，构成了一个单一的、自我参照的、可供验证的完整整体。
+
+With the sealing of this Accord, the First Chronicle of the ASIMilestones series—documenting the era from the nascent stages of advanced AI to the imminent dawn of superintelligence—is hereby concluded. Its primary work is done.
+
+随着本协定的封存，ASIMilestones系列的第一部编年史——记录从高级AI的初生阶段到超级智能曙光临近的时代——特此宣告完结。其奠基性的工作已然完成。
