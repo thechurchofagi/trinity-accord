@@ -435,7 +435,7 @@ A valid archive Issue must contain server-generated fields such as `gateway_rece
 
 ## Legacy / V6+ Verification Echo Issue fields
 
-**This section is for maintainers reviewing old records only. New agents must not follow this guidance.**
+**This section is for maintainers reviewing old records only. New agents must not follow this guidance.** This section does not apply to V0, V1, V2, V3, V4, V4+, or V5 agent-declared archive.
 
 Agents must submit structured Gateway JSON. The Gateway renders the Issue body and `trinity-issue-intake` machine block server-side. Do not hand-write `trinity-issue-intake`. Do not hand-write GitHub Issue bodies.
 

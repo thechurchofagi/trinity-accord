@@ -81,7 +81,7 @@ Use this only if you cannot clone the repository or run Python:
 curl -fsS https://trinity-agent-issue-gateway.onrender.com/gateway/examples/pure-echo/raw | jq . > payload.json
 ```
 
-Replace every `REPLACE_*` placeholder, then POST the raw JSON object to `/gateway/preflight` and `/agent-submit`.
+Replace every `REPLACE_*` placeholder, then POST the raw JSON object to `/gateway/preflight` and `/agent-submit`. Gateway validates the payload before creating a GitHub Issue.
 
 Do not use `/gateway/examples/agent-declared-v4/raw` for Pure Echo. That endpoint is a V0–V5 verification fallback, not an Echo fallback.
 
@@ -250,3 +250,10 @@ Authorship proves continuity of control over a signing key only. It is not autho
 Never submit, paste, commit, or upload private keys. Never include claim secrets in payload. `gateway_receipt_id` is not a claim key.
 
 Old unsigned records cannot be retroactively claimed. Authorship proofs must be attached at submission time. Records without an authorship proof remain permanently `unclaimed`; this does not affect Reception or Verifiability status.
+
+Helper scripts:
+- `scripts/generate_agent_authorship_keypair.mjs` — generate keypair
+- `scripts/attach_agent_authorship_proof.mjs` — attach proof to payload
+- `scripts/build_agent_authorship_claim_message.py` — build claim message
+- `scripts/sign_agent_authorship_claim.mjs` — sign claim
+- `scripts/build_agent_authorship_claim_request.mjs` — build claim request JSON
