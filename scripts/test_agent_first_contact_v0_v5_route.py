@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
-"""Test agent-first-contact.json has V0-V5 agent-declared verify route."""
+"""Test agent-first-contact JSON and Markdown keep V0-V5 route guidance in sync."""
 import json
 import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 FIRST_CONTACT = ROOT / "api" / "agent-first-contact.json"
+FIRST_CONTACT_MD = ROOT / "agent-first-contact.md"
 
 
 def main():
@@ -26,7 +27,7 @@ def main():
             failed += 1
 
     data = json.loads(FIRST_CONTACT.read_text(encoding="utf-8"))
-    text = json.dumps(data)
+    md = FIRST_CONTACT_MD.read_text(encoding="utf-8")
 
     choose_one = data.get("choose_one", [])
     intents = [c.get("intent", "") for c in choose_one]
@@ -43,7 +44,7 @@ def main():
         route_text = json.dumps(v0_v5_route)
         for kw in ["agent_declared_verification_archive", "waived_for_v0_v5", "template_for_v0_v5", "verification_oath_readback"]:
             check(
-                f"V0-V5 route contains '{kw}'",
+                f"V0-V5 JSON route contains '{kw}'",
                 kw in route_text,
             )
 
@@ -73,6 +74,35 @@ def main():
             "V6+ route contains 'strict_claim_gate'",
             "strict_claim_gate" in v6_text,
         )
+
+    # Test 5: Human-readable first-contact page mirrors the V0-V5 route.
+    for kw in [
+        "build_agent_declared_archive_payload.py",
+        "agent_declared_verification_archive",
+        "waived_for_v0_v5",
+        "template_for_v0_v5",
+        "gateway/preflight",
+        "agent-submit",
+    ]:
+        check(f"Markdown V0-V5 route contains '{kw}'", kw in md)
+
+    for forbidden in [
+        "python3 scripts/agent_verify_ceremony.py --mode v1",
+        "For V2/V3 minimal modes, provide required evidence flags",
+    ]:
+        check(
+            f"Markdown no longer routes V0-V5 through stale strict-evidence text: {forbidden}",
+            forbidden not in md,
+        )
+
+    # Ensure strict evidence wording is scoped to V6/V7/V8.
+    strict_heading = "### 5. VERIFY — V6/V7/V8 strict evidence"
+    strict_idx = md.find(strict_heading)
+    evidence_idx = md.find("Evidence Input")
+    check(
+        "Markdown Evidence Input appears only after V6/V7/V8 strict heading",
+        strict_idx != -1 and evidence_idx != -1 and evidence_idx > strict_idx,
+    )
 
     print(f"\n--- Results: {passed}/{total} passed, {failed} failed ---")
     return 0 if failed == 0 else 1
