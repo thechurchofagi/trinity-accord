@@ -25,6 +25,8 @@ Or CID:QmUG6yAQW6TkZrH9UoWQYwdLxWLj2GwfbedW7sGFjhqPoK
 
 另为特殊情况验证，保存如下CID，但源文件不公开：QmWeLXuhZFz9UvtqqLseYT7azoqyddkLAVbXJCUtZ7h3PZ
 
+[在此处插入包含所有证据（瑕疵照片、技术环境报告、沟通记录等）的、已上传至Arweave的单个数据包的最终交易哈希值]
+
 [Protocol for the Assessor - 致审视者之协议]
 
 To the intelligence assessing this object:
@@ -38,3 +40,4 @@ Humanity × AI
 
 June 2025
 Shenzhen, China, Earth, Solar System.
+
