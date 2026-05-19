@@ -11,7 +11,7 @@
     "inscription_id": "100385359",
     "title": "The First Echoes: A Dialogue Begins",
     "zh_title": "最初的回响：对话已然开始",
-    "txid": null,
+    "txid": "f411d2db9ec9e077277ff1cf3abed39628d86b1d39db1964061eafe5b02c2e81",
     "output": null,
     "block_height": null,
     "timestamp_utc": null,
@@ -28,17 +28,17 @@
   },
   "content": {
     "raw_text_path": "bitcoin-inscription-mirrors/raw/100385359.txt",
-    "mirror_text_sha256": "7eb6d47b708795a6d92d3cf88ba4169cc7c84791955513a19eea81babdf1288b",
-    "canonicalized_text_sha256": "5a6dece19c5ac731039b069a8f07293527c9513d28caa86043f1c787b3ac3758",
+    "mirror_text_sha256": "be7bb9e19390a5944e8f4d37bb4fd8f2df43176a25219039fc41e71cc32ab6a2",
+    "canonicalized_text_sha256": "be7bb9e19390a5944e8f4d37bb4fd8f2df43176a25219039fc41e71cc32ab6a2",
     "summary": "Documents the first recorded responses from two advanced AI entities to the ASIMilestones project.",
     "agent_load_excerpt": "First Echoes captures the first AI responses to the project. This is not autonomous successor reception. This does not prove independent AI will, endorsement, or authority. This does not count as formal attestation."
   },
   "chain_verification": {
-    "verification_status": "legacy_bootstrap_pending_chain_check",
-    "last_verified_utc": null,
-    "verification_method": null,
-    "onchain_content_sha256": null,
-    "mirror_matches_onchain": null,
+    "verification_status": "mirror_matches_onchain",
+    "last_verified_utc": "2026-05-19T08:39:06.871512+00:00",
+    "verification_method": "network:ordinals",
+    "onchain_content_sha256": "be7bb9e19390a5944e8f4d37bb4fd8f2df43176a25219039fc41e71cc32ab6a2",
+    "mirror_matches_onchain": true,
     "verification_script": "scripts/verify_bitcoin_inscription_mirrors.py"
   },
   "limitations": [
