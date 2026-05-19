@@ -173,7 +173,30 @@
         "server_validated",
         "server_rendered",
         "render_api_only"
-      ]
+      ],
+      "single_mandatory_route_policy": {
+        "route_id": "sub_v6_agent_declared_template_archive",
+        "applies_to_declared_protocol_levels": [
+          "V0",
+          "V1",
+          "V2",
+          "V3",
+          "V4",
+          "V4+",
+          "V5"
+        ],
+        "only_valid_route_for_below_v6": true,
+        "declared_level_source": "agent_oath_template_declaration",
+        "evidence_chain_required": false,
+        "evidence_chain_allowed_for_level_determination": false,
+        "strict_evidence_required": false,
+        "strict_evidence_used_for_level": false,
+        "strict_evidence_path_forbidden": true,
+        "strict_claim_gate_forbidden": true,
+        "strict_evidence_downgrade_language_forbidden": true,
+        "if_agent_is_uncertain": "Agent must choose the lower declared level under oath before submission and label it self_selected_under_oath, not strict_evidence_downgrade.",
+        "wrong_path_result": "reject_before_issue_creation"
+      }
     },
     {
       "intent": "verification_echo_e2",

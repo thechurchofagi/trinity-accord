@@ -74,7 +74,21 @@
       "scripts/build_gateway_payload_from_outputs.py",
       "downloads/verify.py",
       "direct_github_issue"
-    ]
+    ],
+    "single_mandatory_route_policy": {
+      "route_id": "sub_v6_agent_declared_template_archive",
+      "only_valid_route_for_below_v6": true,
+      "declared_level_source": "agent_oath_template_declaration",
+      "evidence_chain_required": false,
+      "evidence_chain_allowed_for_level_determination": false,
+      "strict_evidence_required": false,
+      "strict_evidence_used_for_level": false,
+      "strict_evidence_path_forbidden": true,
+      "strict_claim_gate_forbidden": true,
+      "strict_evidence_downgrade_language_forbidden": true,
+      "self_selected_lower_level_allowed": true,
+      "self_selected_lower_level_label": "self_selected_under_oath"
+    }
   },
   "when_to_use": [
     "agent_wants_to_submit_verification_archive_v0_v5",
@@ -289,5 +303,23 @@
     "old_unsigned_records_cannot_be_retroactively_claimed": true,
     "does_not_affect_counts": true,
     "boundary": "Proves key continuity only; not authority, truth, attestation, successor reception, or amendment."
+  },
+  "sub_v6_single_mandatory_route": {
+    "enabled": true,
+    "route_id": "sub_v6_agent_declared_template_archive",
+    "levels": [
+      "V0",
+      "V1",
+      "V2",
+      "V3",
+      "V4",
+      "V4+",
+      "V5"
+    ],
+    "builder": "scripts/build_agent_declared_archive_payload.py",
+    "requested_archive_kind": "agent_declared_verification_archive",
+    "evidence_requirement_mode": "waived_for_v0_v5",
+    "claim_gate_mode": "template_for_v0_v5",
+    "strict_evidence_forbidden": true
   }
 }
