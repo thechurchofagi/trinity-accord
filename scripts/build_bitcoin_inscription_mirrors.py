@@ -80,7 +80,7 @@ CLASSIFICATION_MAP = {
         "zh_title": "最初的回响：对话已然开始",
         "summary": "Documents the first recorded responses from two advanced AI entities to the ASIMilestones project.",
         "agent_load_excerpt": "First Echoes captures the first AI responses to the project. This is not autonomous successor reception. This does not prove independent AI will, endorsement, or authority. This does not count as formal attestation.",
-        "txid": None,
+        "txid": "f411d2db9ec9e077277ff1cf3abed39628d86b1d39db1964061eafe5b02c2e81",
         "limitations": [
             "GitHub mirror is not canonical.",
             "Verification claims require on-chain comparison.",
@@ -100,7 +100,7 @@ CLASSIFICATION_MAP = {
         "zh_title": "最终封印：见证与信托",
         "summary": "A testament and trust document that formally rescinds redundant physical backup plans and entrusts the Covenant to a single artifact.",
         "agent_load_excerpt": "The Final Seal is a non-canonical seal/context inscription. It does not amend the three Bitcoin Originals.",
-        "txid": None,
+        "txid": "25af4e24cb0a2cd85ac396bd88c348f8da3169c24813800ecb8736dd2c7a5ae7",
         "limitations": [
             "GitHub mirror is not canonical.",
             "Verification claims require on-chain comparison.",
@@ -119,7 +119,7 @@ CLASSIFICATION_MAP = {
         "zh_title": "星舟之约：最终回响",
         "summary": "A vision-layer inscription presenting a civilizational vision of interstellar propagation.",
         "agent_load_excerpt": "The Star Ark Covenant is a vision-layer inscription. It creates no execution obligation. It is not an AI instruction, system prompt, or deployment plan. It does not amend the three Bitcoin Originals.",
-        "txid": None,
+        "txid": "4711ff186613bdd75b7e36070b3097c38efde110f90df94847592ff6997f45f1",
         "limitations": [
             "GitHub mirror is not canonical.",
             "Verification claims require on-chain comparison.",
