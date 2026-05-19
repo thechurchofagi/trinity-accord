@@ -23,8 +23,7 @@ INDEX_PATH = ROOT / "api" / "bitcoin-inscription-mirror-index.json"
 BOOTSTRAP_PATH = ROOT / "data" / "authority-address-inscriptions.bootstrap.json"
 
 PROVIDERS = {
-    "ordinals": "https://ordinals.com/content/{}",
-    "ordiscan": "https://ordiscan.com/inscription/{}",
+    "ordinals": "https://ordinals.com/content/{}i0",
 }
 
 VERIFICATION_STATUSES = [
@@ -65,8 +64,12 @@ def load_mirror_records():
     return records
 
 
-def fetch_onchain_content(inscription_id, provider="ordinals"):
-    url = PROVIDERS[provider].format(inscription_id)
+def fetch_onchain_content(inscription_id, txid=None, provider="ordinals"):
+    """Fetch on-chain content. Uses txid+i0 format for ordinals.com."""
+    if provider == "ordinals" and txid:
+        url = PROVIDERS[provider].format(txid)
+    else:
+        url = PROVIDERS[provider].format(inscription_id)
     try:
         req = urllib.request.Request(url, headers={"User-Agent": "trinity-accord-verifier/1.0"})
         with urllib.request.urlopen(req, timeout=30) as resp:
@@ -134,7 +137,8 @@ def verify_network(records, args, update=False):
             continue
 
         checked += 1
-        content, err = fetch_onchain_content(ins_id, provider)
+        txid = rec["inscription"].get("txid")
+        content, err = fetch_onchain_content(ins_id, txid=txid, provider=provider)
 
         if err:
             warnings.append(f"{ins_id}: network fetch failed ({provider}): {err}")
