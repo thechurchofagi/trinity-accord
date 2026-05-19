@@ -3,4 +3,5 @@
 *.private.pem
 *.authorship.private.pem
 agent-authorship-key.private.pem
+.trinity-agent-authorship/
 __pycache__/
