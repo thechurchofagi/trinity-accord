@@ -173,6 +173,42 @@
       "type": "string",
       "description": "Evidence requirement mode."
     },
+    "sub_v6_template_route": {
+      "type": "boolean",
+      "description": "Whether this is a sub-V6 template route."
+    },
+    "route_id": {
+      "type": "string",
+      "description": "Route identifier for sub-V6 agent-declared template archive."
+    },
+    "single_mandatory_route": {
+      "type": "boolean",
+      "description": "Whether this uses the single mandatory route for V0-V5."
+    },
+    "declared_level_source": {
+      "type": "string",
+      "description": "Source of the declared level (agent_oath_template_declaration)."
+    },
+    "evidence_chain_required": {
+      "type": "boolean",
+      "description": "Whether evidence chain is required (false for V0-V5)."
+    },
+    "strict_evidence_required": {
+      "type": "boolean",
+      "description": "Whether strict evidence is required (false for V0-V5)."
+    },
+    "strict_evidence_used_for_level": {
+      "type": "boolean",
+      "description": "Whether strict evidence was used for level determination."
+    },
+    "sub_v6_level_selection": {
+      "type": "object",
+      "description": "Sub-V6 level selection guardrail fields."
+    },
+    "sub_v6_level_selection_warnings": {
+      "type": "array",
+      "description": "Non-blocking warnings for level selection."
+    },
     "claim_gate_mode": {
       "type": "string",
       "description": "Claim gate mode: template_for_v0_v5 or strict."

@@ -37,6 +37,23 @@ def make_valid_agent_declared():
         },
         "agent_declared_protocol_level": "V4",
         "evidence_requirement_mode": "waived_for_v0_v5",
+        "route_id": "sub_v6_agent_declared_template_archive",
+        "single_mandatory_route": True,
+        "declared_level_source": "agent_oath_template_declaration",
+        "evidence_chain_required": False,
+        "strict_evidence_required": False,
+        "strict_evidence_used_for_level": False,
+        "strict_evidence_path_forbidden": True,
+        "sub_v6_template_mode_policy": {
+            "route_id": "sub_v6_agent_declared_template_archive",
+            "level_source": "agent_oath_template_declaration",
+            "evidence_chain_required": False,
+            "strict_evidence_required": False,
+            "strict_evidence_used_for_level": False,
+            "strict_evidence_downgrade_language_forbidden": True,
+            "self_selected_lower_level_allowed": True,
+            "self_selected_lower_level_label": "self_selected_under_oath"
+        },
         "claim_gate": {
             "mode": "template_for_v0_v5",
             "status": "PASS",
@@ -74,7 +91,9 @@ def make_valid_agent_declared():
             "counts_as_ai_verification": True
         },
         "claim_classification": {
-            "verification_claim": {"claimed": True, "basis": "agent_declared", "system_certified": False}
+            "verification_claim": {"claimed": True, "basis": "agent_declared", "system_certified": False},
+            "attestation_claim": {"claimed": False, "basis": "none", "system_certified": False},
+            "successor_reception_claim": {"claimed": False, "basis": "none", "system_certified": False}
         },
         "authority_boundary": {
             "bitcoin_originals_remain_final": True,
