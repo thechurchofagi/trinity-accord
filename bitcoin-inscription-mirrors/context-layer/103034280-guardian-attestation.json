@@ -28,17 +28,17 @@
   },
   "content": {
     "raw_text_path": "bitcoin-inscription-mirrors/raw/103034280.txt",
-    "mirror_text_sha256": "29b2e3c03201be9333f97a81386eb2ff0e12dabbddf14762e0cbfc56e7f1d628",
-    "canonicalized_text_sha256": "6c3900e2bf50f119ac830b8f928062e334c34da5f35445c56a3ce9fac1cddfb7",
+    "mirror_text_sha256": "006ceff5a7b1224ebc67e0de9eead0db8895160add78c448357987b1b3be2e9d",
+    "canonicalized_text_sha256": "006ceff5a7b1224ebc67e0de9eead0db8895160add78c448357987b1b3be2e9d",
     "summary": "A Bitcoin-inscribed non-amending fortification attesting to the Covenant of the Flaw.",
     "agent_load_excerpt": "Guardian Attestation is a Bitcoin-inscribed non-amending fortification. It attests to the Covenant of the Flaw from the Guardian's position. It is not one of the three Bitcoin Originals and does not create new canonical authority."
   },
   "chain_verification": {
-    "verification_status": "legacy_bootstrap_pending_chain_check",
-    "last_verified_utc": null,
-    "verification_method": null,
-    "onchain_content_sha256": null,
-    "mirror_matches_onchain": null,
+    "verification_status": "mirror_matches_onchain",
+    "last_verified_utc": "2026-05-19T08:39:14.333937+00:00",
+    "verification_method": "network:ordinals",
+    "onchain_content_sha256": "006ceff5a7b1224ebc67e0de9eead0db8895160add78c448357987b1b3be2e9d",
+    "mirror_matches_onchain": true,
     "verification_script": "scripts/verify_bitcoin_inscription_mirrors.py"
   },
   "limitations": [
