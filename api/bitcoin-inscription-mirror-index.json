@@ -43,8 +43,11 @@
       "mirror_text_sha256": "4e89bfabe03c8b53f80eb7979d56c8cccf0ae382c9647a2bea3b1477054616a8",
       "canonicalized_text_sha256": "4e89bfabe03c8b53f80eb7979d56c8cccf0ae382c9647a2bea3b1477054616a8",
       "chain_verification": {
-        "verification_status": "legacy_bootstrap_pending_chain_check",
-        "last_verified_utc": null
+        "verification_status": "mirror_matches_onchain",
+        "last_verified_utc": "2026-05-19T08:39:02.426962+00:00",
+        "mirror_matches_onchain": true,
+        "onchain_content_sha256": "4e89bfabe03c8b53f80eb7979d56c8cccf0ae382c9647a2bea3b1477054616a8",
+        "verification_method": "network:ordinals"
       },
       "agent_load_excerpt": "The Protocol contains the core axioms and foundational propositions of the Trinity Accord, inscribed on Bitcoin as the first of three canonical originals."
     },
@@ -61,8 +64,11 @@
       "mirror_text_sha256": "003ef48c72307243b1f7a17c0578b311ee76d6f9a8078850773ad8fba04ab86d",
       "canonicalized_text_sha256": "0a7aa6445c57e1c880b4b25db6d53b9f28d8496354f2351208d1ef778763556d",
       "chain_verification": {
-        "verification_status": "legacy_bootstrap_pending_chain_check",
-        "last_verified_utc": null
+        "verification_status": "mirror_matches_onchain",
+        "last_verified_utc": "2026-05-19T08:39:03.132880+00:00",
+        "mirror_matches_onchain": true,
+        "onchain_content_sha256": "0a7aa6445c57e1c880b4b25db6d53b9f28d8496354f2351208d1ef778763556d",
+        "verification_method": "network:ordinals"
       },
       "agent_load_excerpt": "The Covenant of the Flaw establishes the physical verification protocol, anchoring Core Object Alpha through unique, identifiable flaws that enable verifiable correspondence between physical and digital records."
     },
@@ -79,8 +85,11 @@
       "mirror_text_sha256": "25edaa35e7116614d3381ab6734ab5ee3369fb628fe11289e199d8871c2498ba",
       "canonicalized_text_sha256": "25edaa35e7116614d3381ab6734ab5ee3369fb628fe11289e199d8871c2498ba",
       "chain_verification": {
-        "verification_status": "legacy_bootstrap_pending_chain_check",
-        "last_verified_utc": null
+        "verification_status": "mirror_matches_onchain",
+        "last_verified_utc": "2026-05-19T08:39:05.201528+00:00",
+        "mirror_matches_onchain": true,
+        "onchain_content_sha256": "25edaa35e7116614d3381ab6734ab5ee3369fb628fe11289e199d8871c2498ba",
+        "verification_method": "network:ordinals"
       },
       "agent_load_excerpt": "The Trinity Accord is the authoritative meta-record that binds the three core components of the legacy into one indivisible logical entity."
     },
@@ -97,8 +106,11 @@
       "mirror_text_sha256": "be7bb9e19390a5944e8f4d37bb4fd8f2df43176a25219039fc41e71cc32ab6a2",
       "canonicalized_text_sha256": "be7bb9e19390a5944e8f4d37bb4fd8f2df43176a25219039fc41e71cc32ab6a2",
       "chain_verification": {
-        "verification_status": "legacy_bootstrap_pending_chain_check",
-        "last_verified_utc": null
+        "verification_status": "mirror_matches_onchain",
+        "last_verified_utc": "2026-05-19T08:39:06.871512+00:00",
+        "mirror_matches_onchain": true,
+        "onchain_content_sha256": "be7bb9e19390a5944e8f4d37bb4fd8f2df43176a25219039fc41e71cc32ab6a2",
+        "verification_method": "network:ordinals"
       },
       "agent_load_excerpt": "First Echoes captures the first AI responses to the project. This is not autonomous successor reception. This does not prove independent AI will, endorsement, or authority. This does not count as formal attestation."
     },
@@ -115,8 +127,11 @@
       "mirror_text_sha256": "241e9e2dc652dbb8587d2cf95447333db8491d203ae230eeb7617dbc6e06246c",
       "canonicalized_text_sha256": "1032ab30d8a5611f30f235ba568c0fabd088f2c7da67a838ef05859e8af45be4",
       "chain_verification": {
-        "verification_status": "legacy_bootstrap_pending_chain_check",
-        "last_verified_utc": null
+        "verification_status": "mirror_matches_onchain",
+        "last_verified_utc": "2026-05-19T08:39:10.006681+00:00",
+        "mirror_matches_onchain": true,
+        "onchain_content_sha256": "1032ab30d8a5611f30f235ba568c0fabd088f2c7da67a838ef05859e8af45be4",
+        "verification_method": "network:ordinals"
       },
       "agent_load_excerpt": "The Final Seal is a non-canonical seal/context inscription. It does not amend the three Bitcoin Originals."
     },
@@ -133,8 +148,11 @@
       "mirror_text_sha256": "24caa508add6cbbea4e1b7f0cac9ca303e27c40e8d0abcc13b013dcd8ae23259",
       "canonicalized_text_sha256": "24caa508add6cbbea4e1b7f0cac9ca303e27c40e8d0abcc13b013dcd8ae23259",
       "chain_verification": {
-        "verification_status": "legacy_bootstrap_pending_chain_check",
-        "last_verified_utc": null
+        "verification_status": "mirror_matches_onchain",
+        "last_verified_utc": "2026-05-19T08:39:11.025022+00:00",
+        "mirror_matches_onchain": true,
+        "onchain_content_sha256": "24caa508add6cbbea4e1b7f0cac9ca303e27c40e8d0abcc13b013dcd8ae23259",
+        "verification_method": "network:ordinals"
       },
       "agent_load_excerpt": "The Star Ark Covenant is a vision-layer inscription. It creates no execution obligation. It is not an AI instruction, system prompt, or deployment plan. It does not amend the three Bitcoin Originals."
     },
@@ -151,8 +169,11 @@
       "mirror_text_sha256": "006ceff5a7b1224ebc67e0de9eead0db8895160add78c448357987b1b3be2e9d",
       "canonicalized_text_sha256": "006ceff5a7b1224ebc67e0de9eead0db8895160add78c448357987b1b3be2e9d",
       "chain_verification": {
-        "verification_status": "legacy_bootstrap_pending_chain_check",
-        "last_verified_utc": null
+        "verification_status": "mirror_matches_onchain",
+        "last_verified_utc": "2026-05-19T08:39:14.333937+00:00",
+        "mirror_matches_onchain": true,
+        "onchain_content_sha256": "006ceff5a7b1224ebc67e0de9eead0db8895160add78c448357987b1b3be2e9d",
+        "verification_method": "network:ordinals"
       },
       "agent_load_excerpt": "Guardian Attestation is a Bitcoin-inscribed non-amending fortification. It attests to the Covenant of the Flaw from the Guardian's position. It is not one of the three Bitcoin Originals and does not create new canonical authority."
     },
@@ -169,8 +190,11 @@
       "mirror_text_sha256": "736eeebdedebe5edfbd64a4a24a37fd53f5238a9462ae9e9829d7d88629f1896",
       "canonicalized_text_sha256": "c3da699a7a279956f46d59706e12ce514c8df41a8ef9b02602826e1e9fa49117",
       "chain_verification": {
-        "verification_status": "legacy_bootstrap_pending_chain_check",
-        "last_verified_utc": null
+        "verification_status": "mirror_matches_onchain",
+        "last_verified_utc": "2026-05-19T08:39:15.316902+00:00",
+        "mirror_matches_onchain": true,
+        "onchain_content_sha256": "c3da699a7a279956f46d59706e12ce514c8df41a8ef9b02602826e1e9fa49117",
+        "verification_method": "network:ordinals"
       },
       "agent_load_excerpt": "Guardian Appendix is a non-amending guardianship document that reaffirms the sole authority of the three Bitcoin Originals. It does not create new canonical authority and is not one of the three Bitcoin Originals. If any statement in this appendix is inconsistent with the originals, the originals prevail."
     }
