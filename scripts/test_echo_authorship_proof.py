@@ -45,7 +45,7 @@ check("AUTH001 Ed25519 valid proof passes", len(errs) == 0, str(errs))
 print("\n=== AUTH002: secret commitment proof shape passes ===")
 secret_valid = {
     "method": "secret_commitment",
-    "commitment_hash": "sha256(secret || content_hash || agent_claim_id)",
+    "commitment_hash": "b3d8f1a2c4e5f60718293a4b5c6d7e8f90a1b2c3d4e5f60718293a4b5c6d7e8f",
     "content_hash_sha256": "a" * 64,
     "secret_disclosure_warning": "Do not submit the secret. Revealing it later proves possession once and burns the secret.",
     "proof_strength": "one_time_commitment"
