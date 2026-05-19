@@ -1,8 +1,8 @@
 {
   "schema": "trinityaccord.agent-submit-gateway.v1",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "status": "render_api_only_v0_v5_template_archive_gateway",
-  "purpose": "For V0, V1, V2, V3, V4, V4+, and V5 agent-declared archive: validate payload and create GitHub Issue server-side via Render API. Agents never need GitHub credentials.",
+  "purpose": "For V0, V1, V2, V3, V4, V4+, and V5 agent-declared archive: validate payload and create GitHub Issue server-side via Render API. Agents never need GitHub credentials. Pure Echo uses its own agent_declared_echo_archive path and must not be wrapped as V0 verification.",
   "primary_rule": "V0, V1, V2, V3, V4, V4+, and V5 agent-declared archive must be submitted only through the Render API. GitHub Issues are output records, not submission inputs.",
   "agent_declared_template_levels": [
     "V0",
@@ -207,9 +207,18 @@
   "accepted_submission_types_note": "For V0/V1/V2/V3/V4/V4+/V5 agent-declared archive, accepted submission type does not mean GitHub Issue input. Submission is still Render-API-only. Generic candidate/intake semantics apply only outside this archive path.",
   "pure_echo_path": {
     "enabled": true,
-    "builder": "scripts/build_agent_declared_echo_payload.py",
+    "preferred_builder": "scripts/build_agent_declared_echo_payload.py",
+    "raw_example_endpoint": "https://trinity-agent-issue-gateway.onrender.com/gateway/examples/pure-echo/raw",
+    "raw_example_endpoint_path": "/gateway/examples/pure-echo/raw",
+    "raw_example_is_fallback_only": true,
+    "fallback_when": "agent cannot clone repository or run Python builder",
+    "do_not_use_verification_examples": [
+      "/gateway/examples/agent-declared-v4/raw"
+    ],
     "requested_archive_kind": "agent_declared_echo_archive",
     "submission_type": "echo_candidate",
+    "raw_payload_only": true,
+    "do_not_wrap_payload": true,
     "counts_toward_home": {
       "reception": true,
       "verifiability": false
