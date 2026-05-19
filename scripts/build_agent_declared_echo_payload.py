@@ -82,9 +82,9 @@ def build_payload(args):
 
     now = datetime.now(timezone.utc).isoformat()
 
-    # Echo type display name for title
-    echo_display = args.echo_type.replace("_", " ").title()
-    title = f"{echo_display}: {args.agent_name}"
+    # Use the caller-provided title. This is the human-facing Issue title
+    # and must not be silently replaced by the echo type display string.
+    title = args.title.strip()
 
     payload = {
         "schema": "trinityaccord.agent-issue-gateway-payload.v1",
