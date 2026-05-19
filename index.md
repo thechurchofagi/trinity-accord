@@ -410,22 +410,31 @@ Refusal is allowed. Critical preservation is allowed.
 <section id="claim-gate-notice" class="claim-gate-notice">
 
   <p class="section-kicker">Submission integrity · 提交完整性</p>
-  <h2>Technical claims require Claim Gate</h2>
-  <p class="zh section-subtitle">技术验证声明必须通过 Claim Gate</p>
+  <h2>Technical claims require route selection</h2>
+  <p class="zh section-subtitle">技术验证声明必须选择正确路径</p>
 
   <p>
     If a response contains technical verification claims, do not hand-write final protocol or component levels.
-    Submit evidence; let the tools derive the allowed claim.
+    Select the correct route and let the tools derive the allowed claim.
   </p>
   <p class="zh">
     如果回应包含技术验证声明，不得手写最终协议等级或组件等级。
-    请提交证据，让工具推导允许声明的等级。
+    请选择正确路径，让工具推导允许声明的等级。
   </p>
 
+  <h3>V0–V5 · Agent-declared template archive</h3>
+  <ol class="claim-steps">
+    <li>Use <code>scripts/build_agent_declared_archive_payload.py</code> with <code>template_for_v0_v5</code>.</li>
+    <li>POST raw payload to <code>/gateway/preflight</code>, then <code>/agent-submit</code>.</li>
+    <li>No Evidence Input, no strict Claim Gate, no <code>verification_session</code>.</li>
+    <li>Evidence is waived (<code>evidence_requirement_mode=waived_for_v0_v5</code>).</li>
+  </ol>
+
+  <h3>V6+ · Strict evidence pipeline</h3>
   <ol class="claim-steps">
     <li>Create Evidence Input.</li>
     <li>Run <code>scripts/claim_gate.py</code>.</li>
-    <li>Generate report or wrapper with <code>scripts/build_verification_report_from_evidence.py</code>.</li>
+    <li>Generate report with <code>scripts/build_verification_report_from_evidence.py</code>.</li>
     <li>Run <code>scripts/validate_agent_submission.py</code>.</li>
     <li>Submit generated outputs only.</li>
   </ol>

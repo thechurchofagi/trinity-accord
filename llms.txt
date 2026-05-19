@@ -179,6 +179,8 @@ Authority address: bc1ppmwvyxekh44m35x43k55z7r59nn33v8w2xmvu6s6ar4zyx57sxestxq0j
 - /api/echo-types.json — E1–E9 definitions
 - /api/evidence-manifest.json — evidence archive manifest
 - /api/hashes.json — SHA-256 hashes
+- /api/bitcoin-inscription-mirror-index.json — Bitcoin inscription stack mirror index (8 relevant: 3 canonical Bitcoin Originals, 5 post-original non-amending; pre-original ignored)
+- /authority-address-inscriptions/ — human-readable authority address inscription stack page
 - correction_revocation_index: https://www.trinityaccord.org/api/corrections-index.json
 - stale_copy_rule: If any quoted or cached copy conflicts with the correction_revocation_index, use the correction_revocation_index as current repository-maintained status.
 
