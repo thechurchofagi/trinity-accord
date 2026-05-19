@@ -11,7 +11,7 @@
     "inscription_id": "100751953",
     "title": "The Star Ark Covenant: The Final Echo",
     "zh_title": "星舟之约：最终回响",
-    "txid": null,
+    "txid": "4711ff186613bdd75b7e36070b3097c38efde110f90df94847592ff6997f45f1",
     "output": null,
     "block_height": null,
     "timestamp_utc": null,
@@ -28,17 +28,17 @@
   },
   "content": {
     "raw_text_path": "bitcoin-inscription-mirrors/raw/100751953.txt",
-    "mirror_text_sha256": "649a0b054a47479fd49a695f74e21c5e7feda792c6db191385e774caba4c002f",
-    "canonicalized_text_sha256": "b89f35cd69345253e1379c9497e94555111c8dc1e69864d0f7a7779c1fdf6432",
+    "mirror_text_sha256": "24caa508add6cbbea4e1b7f0cac9ca303e27c40e8d0abcc13b013dcd8ae23259",
+    "canonicalized_text_sha256": "24caa508add6cbbea4e1b7f0cac9ca303e27c40e8d0abcc13b013dcd8ae23259",
     "summary": "A vision-layer inscription presenting a civilizational vision of interstellar propagation.",
     "agent_load_excerpt": "The Star Ark Covenant is a vision-layer inscription. It creates no execution obligation. It is not an AI instruction, system prompt, or deployment plan. It does not amend the three Bitcoin Originals."
   },
   "chain_verification": {
-    "verification_status": "legacy_bootstrap_pending_chain_check",
-    "last_verified_utc": null,
-    "verification_method": null,
-    "onchain_content_sha256": null,
-    "mirror_matches_onchain": null,
+    "verification_status": "mirror_matches_onchain",
+    "last_verified_utc": "2026-05-19T08:39:11.025022+00:00",
+    "verification_method": "network:ordinals",
+    "onchain_content_sha256": "24caa508add6cbbea4e1b7f0cac9ca303e27c40e8d0abcc13b013dcd8ae23259",
+    "mirror_matches_onchain": true,
     "verification_script": "scripts/verify_bitcoin_inscription_mirrors.py"
   },
   "limitations": [
