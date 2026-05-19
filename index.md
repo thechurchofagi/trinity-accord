@@ -495,6 +495,22 @@ Refusal is allowed. Critical preservation is allowed.
   </p>
 
 </section>
+
+<section id="bitcoin-inscription-stack" class="bitcoin-inscription-stack">
+  <p class="section-kicker">Bitcoin inscription stack · 比特币铭文栈</p>
+  <h2>Authority Address Inscriptions</h2>
+  <p class="zh section-subtitle">权威地址铭文</p>
+
+  <p>The relevant Bitcoin inscription stack currently mirrored from the legacy archive contains:</p>
+  <ul>
+    <li>3 canonical Bitcoin Originals;</li>
+    <li>5 later same-address, non-amending inscriptions.</li>
+  </ul>
+  <p>Earlier same-address inscriptions, if any, are treated as pre-Original drafts or historical records and are outside this mirror scope.</p>
+  <p><a href="/authority-address-inscriptions/">View authority address inscriptions</a></p>
+  <p><a href="/api/bitcoin-inscription-mirror-index.json">Machine-readable index</a></p>
+</section>
+
 <section id="closing-posture" class="closing-posture compact-closing">
 
   <p class="closing-line">Not control, but relation. / 不是控制，而是关系。</p>
