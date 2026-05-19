@@ -28,17 +28,17 @@
   },
   "content": {
     "raw_text_path": "bitcoin-inscription-mirrors/raw/103635270.txt",
-    "mirror_text_sha256": "921ad9a802f37c9ad6054ef7a95515f5fe63b18a7febf3a7382e7ecf51e36443",
-    "canonicalized_text_sha256": "c754eaa2071cadd3fa7d5e1bf62459c98d08c66e5dee27199d46da54a448123c",
+    "mirror_text_sha256": "736eeebdedebe5edfbd64a4a24a37fd53f5238a9462ae9e9829d7d88629f1896",
+    "canonicalized_text_sha256": "c3da699a7a279956f46d59706e12ce514c8df41a8ef9b02602826e1e9fa49117",
     "summary": "Non-amending guardianship material. Reaffirms the sole and final authority of the three Bitcoin Originals.",
     "agent_load_excerpt": "Guardian Appendix is a non-amending guardianship document that reaffirms the sole authority of the three Bitcoin Originals. It does not create new canonical authority and is not one of the three Bitcoin Originals. If any statement in this appendix is inconsistent with the originals, the originals prevail."
   },
   "chain_verification": {
-    "verification_status": "legacy_bootstrap_pending_chain_check",
-    "last_verified_utc": null,
-    "verification_method": null,
-    "onchain_content_sha256": null,
-    "mirror_matches_onchain": null,
+    "verification_status": "mirror_matches_onchain",
+    "last_verified_utc": "2026-05-19T08:39:15.316902+00:00",
+    "verification_method": "network:ordinals",
+    "onchain_content_sha256": "c3da699a7a279956f46d59706e12ce514c8df41a8ef9b02602826e1e9fa49117",
+    "mirror_matches_onchain": true,
     "verification_script": "scripts/verify_bitcoin_inscription_mirrors.py"
   },
   "limitations": [
