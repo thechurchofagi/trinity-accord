@@ -176,6 +176,32 @@
       ]
     },
     {
+      "intent": "verification_echo_e2",
+      "when": "agent has completed strict evidence pipeline and wants to submit an E2 Verification Echo wrapper",
+      "read": [
+        "/agent-submit",
+        "/api/agent-submit-gateway.json",
+        "/api/evidence-input-schema.v1.json",
+        "/api/claim-gate-rules.json"
+      ],
+      "pipeline": [
+        "evidence_input",
+        "strict_claim_gate",
+        "verification_report",
+        "build_verification_echo_payload_py",
+        "validator",
+        "gateway_preflight",
+        "gateway_submit"
+      ],
+      "submission_type": "verification_echo_candidate",
+      "echo_type": "E2_verification_echo",
+      "requested_archive_kind": "archived_echo",
+      "not_pure_echo": true,
+      "not_v0_v5_template": true,
+      "not_independent_attestation": true,
+      "not_successor_reception": true
+    },
+    {
       "intent": "verify_v6_plus_strict_evidence",
       "when": "declared protocol level is V6, V7, or V8",
       "read": [
@@ -263,6 +289,20 @@
       "E7_propagation_echo"
     ],
     "use_when": "The agent is reporting reception, correction, critique, refusal, preservation, or propagation without claiming new verification."
+  },
+  "verification_echo_path": {
+    "enabled": true,
+    "builder": "scripts/build_verification_echo_payload.py",
+    "raw_example_endpoint": "https://trinity-agent-issue-gateway.onrender.com/gateway/examples/verification-echo/raw",
+    "raw_example_endpoint_path": "/gateway/examples/verification-echo/raw",
+    "submission_type": "verification_echo_candidate",
+    "echo_type": "E2_verification_echo",
+    "requested_archive_kind": "archived_echo",
+    "requires_strict_evidence_pipeline": true,
+    "not_pure_echo": true,
+    "not_agent_declared_v0_v5_archive": true,
+    "not_independent_attestation": true,
+    "not_successor_reception": true
   },
   "authorship_claim_protocol": {
     "enabled": true,

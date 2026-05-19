@@ -1365,6 +1365,72 @@ app.get("/gateway/examples/agent-declared-v4/raw", (req, res) => {
   }
 });
 
+// --- V0-V5 per-level raw example endpoints ---
+const V0_V5_LEVELS = [
+  { level: "v0", label: "V0" },
+  { level: "v1", label: "V1" },
+  { level: "v2", label: "V2" },
+  { level: "v3", label: "V3" },
+  { level: "v4plus", label: "V4+" },
+  { level: "v5", label: "V5" },
+];
+for (const { level, label } of V0_V5_LEVELS) {
+  app.get(`/gateway/examples/agent-declared-${level}/raw`, (req, res) => {
+    try {
+      const payload = loadFixture(`valid_agent_declared_${level}.json`);
+      res.json(payload);
+    } catch (err) {
+      res.status(500).json({ error: `Failed to load ${label} raw example fixture`, detail: err.message });
+    }
+  });
+  app.get(`/gateway/examples/agent-declared-${level}`, (req, res) => {
+    try {
+      const payload = loadFixture(`valid_agent_declared_${level}.json`);
+      res.json({
+        example_kind: `agent_declared_${level}`,
+        raw_endpoint: `/gateway/examples/agent-declared-${level}/raw`,
+        payload,
+        notes: [
+          `Use only for ${label} agent-declared verification archive.`,
+          "Do not use for Pure Echo or E2 Verification Echo.",
+          "Replace all REPLACE_* placeholders.",
+        ],
+      });
+    } catch (err) {
+      res.status(500).json({ error: `Failed to load ${label} example fixture`, detail: err.message });
+    }
+  });
+}
+
+// --- Verification Echo raw example endpoint (E2) ---
+app.get("/gateway/examples/verification-echo/raw", (req, res) => {
+  try {
+    const payload = loadFixture("valid_verification_echo_candidate.json");
+    res.json(payload);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to load verification echo raw example", detail: err.message });
+  }
+});
+
+app.get("/gateway/examples/verification-echo", (req, res) => {
+  try {
+    const payload = loadFixture("valid_verification_echo_candidate.json");
+    res.json({
+      example_kind: "verification_echo",
+      raw_endpoint: "/gateway/examples/verification-echo/raw",
+      payload,
+      notes: [
+        "Use only for E2 Verification Echo.",
+        "Do not use for Pure Echo.",
+        "Do not use for V0-V5 agent-declared archive.",
+        "Replace all REPLACE_* placeholders.",
+      ],
+    });
+  } catch (err) {
+    res.status(500).json({ error: "Failed to load verification echo example", detail: err.message });
+  }
+});
+
 // --- Raw echo example endpoint ---
 app.get("/gateway/examples/agent-declared-echo/raw", (req, res) => {
   try {
@@ -1430,6 +1496,27 @@ app.get("/gateway/capabilities", (req, res) => {
       agent_declared_protocol_level: "not_set",
       claim_gate: "not_required",
       boundary: "echo-only; no verification claim; Bitcoin Originals remain final"
+    },
+    verification_echo_path: {
+      enabled: true,
+      builder: "scripts/build_verification_echo_payload.py",
+      raw_example_endpoint: "/gateway/examples/verification-echo/raw",
+      submission_type: "verification_echo_candidate",
+      echo_type: "E2_verification_echo",
+      requested_archive_kind: "archived_echo",
+      requires_strict_evidence_pipeline: true,
+      not_pure_echo: true,
+      not_agent_declared_v0_v5_archive: true,
+      not_independent_attestation: true,
+      not_successor_reception: true,
+      boundary: "E2 Verification Echo references strict evidence artifacts but is not authority, amendment, endorsement, formal attestation, or proof beyond Claim Gate."
+    },
+    strict_evidence_report_path: {
+      enabled: true,
+      builder: "scripts/build_gateway_payload_from_outputs.py",
+      levels: ["V6", "V7", "V8"],
+      requires: ["evidence_input", "claim_gate_output", "verification_report"],
+      raw_example_endpoint: "/gateway/examples/verification-report-candidate/raw"
     },
     integrity_first_rule: {
       statement: "No verification claim before identity/provenance, pre-verification integrity declaration, and verification session.",
@@ -1535,13 +1622,27 @@ app.get("/gateway/capabilities", (req, res) => {
       version: "/gateway/version",
       capabilities: "/gateway/capabilities",
       examples: {
+        agent_declared_v0: "/gateway/examples/agent-declared-v0",
+        agent_declared_v0_raw: "/gateway/examples/agent-declared-v0/raw",
+        agent_declared_v1: "/gateway/examples/agent-declared-v1",
+        agent_declared_v1_raw: "/gateway/examples/agent-declared-v1/raw",
+        agent_declared_v2: "/gateway/examples/agent-declared-v2",
+        agent_declared_v2_raw: "/gateway/examples/agent-declared-v2/raw",
+        agent_declared_v3: "/gateway/examples/agent-declared-v3",
+        agent_declared_v3_raw: "/gateway/examples/agent-declared-v3/raw",
         agent_declared_v4: "/gateway/examples/agent-declared-v4",
         agent_declared_v4_raw: "/gateway/examples/agent-declared-v4/raw",
+        agent_declared_v4plus: "/gateway/examples/agent-declared-v4plus",
+        agent_declared_v4plus_raw: "/gateway/examples/agent-declared-v4plus/raw",
+        agent_declared_v5: "/gateway/examples/agent-declared-v5",
+        agent_declared_v5_raw: "/gateway/examples/agent-declared-v5/raw",
         agent_declared_echo: "/gateway/examples/agent-declared-echo",
         agent_declared_echo_raw: "/gateway/examples/agent-declared-echo/raw",
         pure_echo: "/gateway/examples/pure-echo",
         pure_echo_raw: "/gateway/examples/pure-echo/raw",
         verification_report_candidate: "/gateway/examples/verification-report-candidate",
+        verification_echo: "/gateway/examples/verification-echo",
+        verification_echo_raw: "/gateway/examples/verification-echo/raw",
         verification_echo_candidate: "/gateway/examples/verification-echo-candidate",
         evidence_input_external_explorer: "/gateway/examples/evidence-input-b1-external-explorer"
       },
@@ -1553,6 +1654,15 @@ app.get("/gateway/capabilities", (req, res) => {
       claim_authorship: "/gateway/claim-authorship"
     }
   });
+});
+
+app.get("/gateway/examples/verification-report-candidate/raw", (req, res) => {
+  try {
+    const payload = loadFixture("valid_verification_report_candidate.json");
+    res.json(payload);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to load raw verification report example", detail: err.message });
+  }
 });
 
 app.get("/gateway/examples/verification-report-candidate", (req, res) => {

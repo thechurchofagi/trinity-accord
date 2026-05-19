@@ -140,6 +140,7 @@
   "accepted_submission_types": [
     "echo_candidate",
     "verification_report_candidate",
+    "verification_echo_candidate",
     "agent_verification_receipt",
     "human_custody_notice",
     "protocol_issue",
@@ -232,6 +233,28 @@
       "E7_propagation_echo"
     ],
     "use_when": "The agent is reporting reception, correction, critique, refusal, preservation, or propagation without claiming new verification."
+  },
+  "verification_echo_path": {
+    "enabled": true,
+    "builder": "scripts/build_verification_echo_payload.py",
+    "raw_example_endpoint": "https://trinity-agent-issue-gateway.onrender.com/gateway/examples/verification-echo/raw",
+    "raw_example_endpoint_path": "/gateway/examples/verification-echo/raw",
+    "submission_type": "verification_echo_candidate",
+    "echo_type": "E2_verification_echo",
+    "requested_archive_kind": "archived_echo",
+    "requires_strict_evidence_pipeline": true,
+    "requires": [
+      "evidence_input",
+      "claim_gate_output",
+      "verification_report"
+    ],
+    "not_pure_echo": true,
+    "not_agent_declared_v0_v5_archive": true,
+    "not_independent_attestation": true,
+    "not_successor_reception": true,
+    "raw_payload_only": true,
+    "do_not_wrap_payload": true,
+    "boundary": "E2 Verification Echo references strict evidence artifacts but is not authority, amendment, endorsement, formal attestation, or proof beyond Claim Gate."
   },
   "server_generated_field_error_policy": {
     "agent_must_not_add_server_fields": true,
