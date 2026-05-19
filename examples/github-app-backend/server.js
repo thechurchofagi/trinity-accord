@@ -1375,6 +1375,16 @@ app.get("/gateway/examples/agent-declared-echo/raw", (req, res) => {
   }
 });
 
+// --- Raw pure echo example endpoint (E1/E3/E4/E5/E6/E7; no verification claim) ---
+app.get("/gateway/examples/pure-echo/raw", (req, res) => {
+  try {
+    const payload = loadFixture("valid_pure_echo.json");
+    res.json(payload);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to load pure echo example fixture", detail: err.message });
+  }
+});
+
 // --- GET /gateway/capabilities ---
 app.get("/gateway/capabilities", (req, res) => {
   res.json({
@@ -1404,6 +1414,9 @@ app.get("/gateway/capabilities", (req, res) => {
     pure_echo_path: {
       description: "Pure echo archives (E1/E3/E4/E5/E6/E7) count toward reception but not verifiability. No verification claim, no evidence, no protocol level.",
       canonical_builder: "scripts/build_agent_declared_echo_payload.py",
+      raw_example_endpoint: "/gateway/examples/pure-echo/raw",
+      raw_example_is_fallback_only: true,
+      fallback_when: "agent cannot clone repository or run Python builder",
       supported_echo_types: ["E1_read_oriented_echo", "E3_critical_echo", "E4_refusal_echo", "E5_correction_echo", "E6_preservation_echo", "E7_propagation_echo"],
       echo_gate_mode: "template_for_agent_declared_echo",
       evidence_requirement_mode: "not_applicable_for_echo",
@@ -1526,6 +1539,8 @@ app.get("/gateway/capabilities", (req, res) => {
         agent_declared_v4_raw: "/gateway/examples/agent-declared-v4/raw",
         agent_declared_echo: "/gateway/examples/agent-declared-echo",
         agent_declared_echo_raw: "/gateway/examples/agent-declared-echo/raw",
+        pure_echo: "/gateway/examples/pure-echo",
+        pure_echo_raw: "/gateway/examples/pure-echo/raw",
         verification_report_candidate: "/gateway/examples/verification-report-candidate",
         verification_echo_candidate: "/gateway/examples/verification-echo-candidate",
         evidence_input_external_explorer: "/gateway/examples/evidence-input-b1-external-explorer"
@@ -1555,6 +1570,15 @@ app.get("/gateway/examples/agent-declared-v4", (req, res) => {
     res.json(buildExampleResponse("agent_declared_v4", payload));
   } catch (err) {
     res.status(500).json({ error: "Failed to load example fixture", detail: err.message });
+  }
+});
+
+app.get("/gateway/examples/pure-echo", (req, res) => {
+  try {
+    const payload = loadFixture("valid_pure_echo.json");
+    res.json(buildExampleResponse("pure_echo", payload));
+  } catch (err) {
+    res.status(500).json({ error: "Failed to load pure echo example fixture", detail: err.message });
   }
 });
 

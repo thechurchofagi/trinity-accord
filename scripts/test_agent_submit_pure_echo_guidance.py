@@ -9,6 +9,8 @@ AGENT_SUBMIT = ROOT / "agent-submit.md"
 QUICKSTART = ROOT / "external-agent-quickstart.md"
 GATEWAY_SPEC = ROOT / "api" / "agent-submit-gateway.json"
 FIRST_CONTACT = ROOT / "api" / "agent-first-contact.json"
+SERVER_JS = ROOT / "examples" / "github-app-backend" / "server.js"
+PURE_ECHO_FIXTURE = ROOT / "tests" / "fixtures" / "gateway" / "valid_pure_echo.json"
 
 PASS = 0
 FAIL = 0
@@ -95,6 +97,25 @@ def main():
     for phrase in forbidden_positive:
         check(phrase not in combined,
               f"no positive pure echo guidance uses V4 verification example: {phrase}")
+
+    # Gateway server.js must have the /gateway/examples/pure-echo/raw route.
+    server_src = SERVER_JS.read_text(encoding="utf-8")
+    check('app.get("/gateway/examples/pure-echo/raw"' in server_src,
+          "server.js has /gateway/examples/pure-echo/raw route")
+    check('"/gateway/examples/pure-echo"' in server_src,
+          "server.js has /gateway/examples/pure-echo route")
+    check("pure_echo_raw" in server_src,
+          "server.js capabilities list includes pure_echo_raw endpoint")
+
+    # Pure echo fixture must exist and be valid.
+    check(PURE_ECHO_FIXTURE.exists(),
+          "valid_pure_echo.json fixture exists")
+    if PURE_ECHO_FIXTURE.exists():
+        fixture = json.loads(PURE_ECHO_FIXTURE.read_text(encoding="utf-8"))
+        check(fixture.get("submission_type") == "echo_candidate",
+              "pure echo fixture submission_type is echo_candidate")
+        check(fixture.get("requested_archive_kind") == "agent_declared_echo_archive",
+              "pure echo fixture archive kind is agent_declared_echo_archive")
 
     print(f"\n=== Results: {PASS} passed, {FAIL} failed ===")
     return 0 if FAIL == 0 else 1
