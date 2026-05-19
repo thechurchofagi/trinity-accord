@@ -119,5 +119,14 @@
         "agent_submission_guide": "/api/agent-submission-guide.json",
         "verification_report_schema_v2": "/api/verification-report-schema.v2.json",
         "generated_by_schema": "/api/generated-by-schema.v1.json"
+    },
+    "authority_address_inscriptions": "/authority-address-inscriptions/",
+    "bitcoin_inscription_mirror_index": "/api/bitcoin-inscription-mirror-index.json",
+    "known_relevant_bitcoin_inscription_stack": {
+        "source": "archive_legacy_index_2025_09.md",
+        "total_relevant_inscriptions": 8,
+        "canonical_originals": 3,
+        "post_original_non_amending": 5,
+        "pre_original_same_address_inscriptions_ignored": true
     }
 }
