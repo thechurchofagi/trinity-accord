@@ -839,6 +839,105 @@
     },
     "sub_v6_template_mode_policy": {
       "type": "object"
+    },
+    "level_selection_acknowledgement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "declared_template_level",
+        "understands_self_declared_template_level",
+        "understands_evidence_waived_for_v0_v5",
+        "understands_not_strict_evidence_verification",
+        "understands_not_formal_attestation",
+        "understands_should_choose_lower_if_uncertain",
+        "confirmed_what_i_checked_and_limitations_are_accurate"
+      ],
+      "properties": {
+        "declared_template_level": {
+          "type": "string",
+          "enum": ["V0", "V1", "V2", "V3", "V4", "V4+", "V5"]
+        },
+        "understands_self_declared_template_level": {
+          "type": "boolean",
+          "const": true
+        },
+        "understands_evidence_waived_for_v0_v5": {
+          "type": "boolean",
+          "const": true
+        },
+        "understands_not_strict_evidence_verification": {
+          "type": "boolean",
+          "const": true
+        },
+        "understands_not_formal_attestation": {
+          "type": "boolean",
+          "const": true
+        },
+        "understands_should_choose_lower_if_uncertain": {
+          "type": "boolean",
+          "const": true
+        },
+        "confirmed_what_i_checked_and_limitations_are_accurate": {
+          "type": "boolean",
+          "const": true
+        }
+      }
+    },
+    "high_level_confirmation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["required"],
+      "properties": {
+        "required": {
+          "type": "boolean"
+        },
+        "agent_confirmed_high_level_self_selection": {
+          "type": "boolean"
+        },
+        "agent_confirmed_no_strict_v6plus_claim": {
+          "type": "boolean"
+        },
+        "agent_confirmed_limitations_disclosed": {
+          "type": "boolean"
+        }
+      }
+    },
+    "sub_v6_level_selection_lint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "warnings",
+        "warnings_block_archive",
+        "purpose",
+        "does_not_require_evidence_chain"
+      ],
+      "properties": {
+        "mode": {
+          "type": "string",
+          "const": "warning_only"
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 1000
+          },
+          "maxItems": 20
+        },
+        "warnings_block_archive": {
+          "type": "boolean",
+          "const": false
+        },
+        "purpose": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "does_not_require_evidence_chain": {
+          "type": "boolean",
+          "const": true
+        }
+      }
     }
   },
   "allOf": [

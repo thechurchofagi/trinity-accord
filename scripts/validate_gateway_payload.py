@@ -80,6 +80,7 @@ from gateway_v0_v5_policy import (  # noqa: E402
     is_valid_v0_v5_agent_declared_path,
     should_reject_v0_v5_wrong_path,
 )
+from sub_v6_level_guardrails import collect_sub_v6_level_selection_warnings  # noqa: E402
 
 
 def get_declared_level(payload):
@@ -683,6 +684,7 @@ def main():
         sys.exit(2)
 
     errors = []
+    warnings = []
     try:
         payload = load_payload(sys.argv[1])
     except Exception as e:
@@ -725,7 +727,17 @@ def main():
             print("FAIL:", err)
         sys.exit(1)
 
-    print("GATEWAY PAYLOAD VALIDATION PASS")
+    # Collect sub-V6 level selection warnings (non-blocking)
+    warnings.extend(collect_sub_v6_level_selection_warnings(payload))
+
+    if warnings:
+        warnings[:] = list(dict.fromkeys(warnings))
+        print("GATEWAY PAYLOAD VALIDATION PASS WITH WARNINGS")
+        for warn in warnings:
+            print("WARN:", warn)
+        print("WARN: Warnings do not block V0–V5 archive creation because evidence is waived for sub-V6 template mode.")
+    else:
+        print("GATEWAY PAYLOAD VALIDATION PASS")
 
 
 if __name__ == "__main__":

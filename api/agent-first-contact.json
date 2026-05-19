@@ -196,7 +196,8 @@
         "strict_evidence_downgrade_language_forbidden": true,
         "if_agent_is_uncertain": "Agent must choose the lower declared level under oath before submission and label it self_selected_under_oath, not strict_evidence_downgrade.",
         "wrong_path_result": "reject_before_issue_creation"
-      }
+      },
+      "level_selection_note": "If uncertain, choose a lower V0–V5 template level or Pure Echo. High levels may trigger non-blocking guardrail warnings but do not require strict evidence."
     },
     {
       "intent": "verification_echo_e2",

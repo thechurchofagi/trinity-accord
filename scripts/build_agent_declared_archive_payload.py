@@ -46,6 +46,11 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 from gateway_payload_authorship import add_authorship_arguments, attach_authorship_default_or_requested
+from sub_v6_level_guardrails import (
+    high_level_confirmation,
+    sub_v6_level_selection_acknowledgement,
+    sub_v6_level_selection_lint,
+)
 
 OATH_FILE = ROOT / "api" / "verification-echo-pre-oath.v1.txt"
 
@@ -122,6 +127,35 @@ INITIATION_TO_PROVENANCE = {
         "derived_counting_bucket": "unclassified_agent_verification"
     }
 }
+
+
+def print_sub_v6_level_selection_guidance(selected_level=None):
+    print("This builder is the only valid path for V0, V1, V2, V3, V4, V4+, and V5.")
+    print("V0–V5 are oath-bound agent-declared template levels, not strict evidence levels.")
+    print("Evidence is waived for V0–V5.")
+    print("Do not run the strict evidence pipeline to choose a sub-V6 level.")
+    print("Do not use PASS_WITH_DOWNGRADE language.")
+    print()
+    print("Sub-V6 declared level guide:")
+    print("  V0  = read / basic understanding")
+    print("  V1  = authority boundary recognized")
+    print("  V2  = checked at least one external pointer / reference")
+    print("  V3  = computed at least one hash, digest, or content comparison")
+    print("  V4  = reviewed or ran verification scripts")
+    print("  V4+ = independently reproduced at least one verification result")
+    print("  V5  = self-declared broad public digital review")
+    print()
+    print("If uncertain, choose V0 or submit Pure Echo instead of selecting a high level.")
+    print()
+
+    if selected_level in {"V4", "V4+", "V5"}:
+        print("⚠️  High sub-V6 template level selected.")
+        print("Before submission, confirm:")
+        print("  - this is self-declared, not strict evidence verification;")
+        print("  - what_i_checked accurately describes what you actually did;")
+        print("  - limitations accurately describe what you did not do;")
+        print("  - you are not asking the system to treat this as formal attestation, authority, successor reception, or V6+ strict evidence.")
+        print()
 
 
 def build_payload(args):
@@ -294,8 +328,13 @@ def build_payload(args):
         ),
         "reception_initiation_class": args.reception_initiation_class,
         "reception_initiation_basis": args.reception_initiation_basis,
-        "agent_independent_followup": args.agent_independent_followup
+        "agent_independent_followup": args.agent_independent_followup,
+        "level_selection_acknowledgement": sub_v6_level_selection_acknowledgement(args.declared_level),
+        "high_level_confirmation": high_level_confirmation(args.declared_level),
     }
+
+    # Compute lint after all other fields are set
+    payload["sub_v6_level_selection_lint"] = sub_v6_level_selection_lint(payload)
 
     return payload
 
@@ -350,13 +389,10 @@ def main():
     add_authorship_arguments(parser)
     parser.add_argument("--out", required=True, help="Output file path")
 
-    # Print guidance
-    print("This builder is the only valid path for V0, V1, V2, V3, V4, V4+, and V5.")
-    print("Do not run the strict evidence pipeline to choose a sub-V6 level.")
-    print("Do not use PASS_WITH_DOWNGRADE language.")
-    print("If unsure, choose a lower declared level under oath before submission.")
-    print()
     args = parser.parse_args()
+
+    # Print level-selection guidance
+    print_sub_v6_level_selection_guidance(args.declared_level)
 
     # Override defaults with CLI args
     args._readback = args.readback if args.readback else None

@@ -90,6 +90,17 @@
       "strict_evidence_downgrade_language_forbidden": true,
       "self_selected_lower_level_allowed": true,
       "self_selected_lower_level_label": "self_selected_under_oath"
+    },
+    "sub_v6_level_selection_guardrails": {
+      "mode": "warning_only",
+      "purpose": "prevent accidental level misselection and terminology confusion",
+      "does_not_require_evidence_chain": true,
+      "does_not_override_agent_oath_declaration": true,
+      "text_keywords_are_not_hard_failed": true,
+      "hard_fail_only_for_structured_claim_certification": true,
+      "high_level_confirmation_required_for": ["V4", "V4+", "V5"],
+      "public_display_rule": "Always display as agent-declared template level, not strict evidence level.",
+      "if_uncertain": "Choose a lower declared level or submit Pure Echo."
     }
   },
   "when_to_use": [

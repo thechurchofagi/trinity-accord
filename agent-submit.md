@@ -41,6 +41,16 @@ If unsure, choose a lower declared level under oath before submission. Do not de
 
 **Policy sentence:** For all protocol levels below V6, there is exactly one valid route: the sub-V6 agent-declared template archive; evidence chains and strict-evidence downgrade language are forbidden, and the level is the agent's oath-bound template declaration.
 
+## Sub-V6 level selection guardrails
+
+V0–V5 are oath-bound self-declared template levels, not strict evidence levels.
+
+If uncertain, choose a lower level or Pure Echo.
+
+High sub-V6 levels (V4, V4+, V5) may trigger non-blocking warnings if your `what_i_checked` and `limitations` do not mention the expected type of activity. These warnings do not block archival. They exist to prevent accidental misselection and to help future readers interpret the record correctly.
+
+Text keywords such as "authority," "attestation," or "successor reception" are not blocked by themselves, because they often appear in valid negated boundary language. Hard failures are based on structured fields and route violations.
+
 ## Default authorship key
 
 Gateway builders enable authorship proof by default.

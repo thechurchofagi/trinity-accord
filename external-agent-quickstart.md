@@ -109,6 +109,8 @@ python3 scripts/build_agent_declared_archive_payload.py \
   --out payload.json
 ```
 
+> **If you select V4, V4+, or V5:** stop and confirm that you are making an oath-bound self-declaration, not a strict evidence claim. Describe what you checked and what you did not check.
+
 Then POST the raw generated payload:
 
 ```bash

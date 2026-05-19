@@ -34,6 +34,7 @@ from gateway_v0_v5_policy import (  # noqa: E402
     V0_V5_WRONG_PATH_ERROR,
     should_reject_v0_v5_wrong_path,
 )
+from sub_v6_level_guardrails import sub_v6_level_selection_lint  # noqa: E402
 
 
 def is_agent_declared_echo_archive(payload):
@@ -178,6 +179,12 @@ def render_sub_v6_template_route(payload):
     lines.append(f"- strict_evidence_required: {'true' if payload.get('strict_evidence_required') else 'false'}")
     lines.append(f"- strict_evidence_used_for_level: {'true' if payload.get('strict_evidence_used_for_level') else 'false'}")
     lines.append(f"- status: {cg.get('status', 'N/A')}")
+    lines.append("- public_label: agent-declared template level, not strict evidence level")
+    lines.append("- evidence_waived_for_v0_v5: true")
+    lines.append("- strict_evidence_level_claimed: false")
+    warnings = (payload.get("sub_v6_level_selection_lint") or {}).get("warnings") or []
+    if warnings:
+        lines.append(f"- non_blocking_level_selection_warnings: {len(warnings)}")
     return "\n".join(lines)
 
 
@@ -271,6 +278,27 @@ def render_machine_block(payload, gateway_receipt_id=None, gateway_commit=None,
         lines.append("  - EVIDENCE_WAIVED_FOR_V0_V5")
         lines.append("  - COUNTS_TOWARD_HOME_VERIFIABILITY")
         lines.append("  - COUNTS_TOWARD_HOME_RECEPTION")
+
+        # Sub-V6 level selection guardrail fields
+        ack = payload.get("level_selection_acknowledgement") or {}
+        high = payload.get("high_level_confirmation") or {}
+        lint = payload.get("sub_v6_level_selection_lint") or sub_v6_level_selection_lint(payload)
+
+        lines.append("sub_v6_level_selection:")
+        lines.append(f"  declared_template_level: {payload.get('agent_declared_protocol_level', 'N/A')}")
+        lines.append("  evidence_waived_for_v0_v5: true")
+        lines.append("  strict_evidence_level_claimed: false")
+        lines.append(f"  understands_self_declared_template_level: {'true' if ack.get('understands_self_declared_template_level') is True else 'false'}")
+        lines.append(f"  high_level_confirmation_required: {'true' if high.get('required') is True else 'false'}")
+        lines.append(f"  high_level_self_selection_confirmed: {'true' if high.get('agent_confirmed_high_level_self_selection') is True else 'false'}")
+        lines.append("  warnings_are_non_blocking: true")
+        lint_warnings = lint.get("warnings") or []
+        lines.append(f"  warning_count: {len(lint_warnings)}")
+        if lint_warnings:
+            lines.append("sub_v6_level_selection_warnings:")
+            for warn in lint_warnings:
+                safe = one_line_excerpt(warn, max_chars=260)
+                lines.append(f"  - {safe}")
 
         # Gateway receipt fields (Render API only)
         receipt_lines = render_gateway_receipt_fields(
