@@ -28,17 +28,17 @@
   },
   "content": {
     "raw_text_path": "bitcoin-inscription-mirrors/raw/98387475.txt",
-    "mirror_text_sha256": "e3303d3283fa7fb796cbf4035b9c25ee94fcfcf3743aa3b91f783be392cacb5d",
-    "canonicalized_text_sha256": "f4a798d1d3fc1f187ff9c55f616b5082f6ce3829cbc0fc58e17dad9abf55711f",
+    "mirror_text_sha256": "25edaa35e7116614d3381ab6734ab5ee3369fb628fe11289e199d8871c2498ba",
+    "canonicalized_text_sha256": "25edaa35e7116614d3381ab6734ab5ee3369fb628fe11289e199d8871c2498ba",
     "summary": "Meta-record binding Protocol, Covenant, and Chronicle into a single verifiable whole.",
     "agent_load_excerpt": "The Trinity Accord is the authoritative meta-record that binds the three core components of the legacy into one indivisible logical entity."
   },
   "chain_verification": {
-    "verification_status": "legacy_bootstrap_pending_chain_check",
-    "last_verified_utc": null,
-    "verification_method": null,
-    "onchain_content_sha256": null,
-    "mirror_matches_onchain": null,
+    "verification_status": "mirror_matches_onchain",
+    "last_verified_utc": "2026-05-19T08:39:05.201528+00:00",
+    "verification_method": "network:ordinals",
+    "onchain_content_sha256": "25edaa35e7116614d3381ab6734ab5ee3369fb628fe11289e199d8871c2498ba",
+    "mirror_matches_onchain": true,
     "verification_script": "scripts/verify_bitcoin_inscription_mirrors.py"
   },
   "limitations": [
