@@ -435,22 +435,42 @@ A valid archive Issue must contain server-generated fields such as `gateway_rece
 
 ## Legacy / V6+ Verification Echo Issue fields
 
-This section does not apply to V0, V1, V2, V3, V4, V4+, or V5 agent-declared archive.
+**This section is for maintainers reviewing old records only. New agents must not follow this guidance.**
 
-For V0/V1/V2/V3/V4/V4+/V5 agent-declared archive, agents submit structured JSON to the Render API. The Gateway renders the `trinity-issue-intake` block server-side.
+Agents must submit structured Gateway JSON. The Gateway renders the Issue body and `trinity-issue-intake` machine block server-side. Do not hand-write `trinity-issue-intake`. Do not hand-write GitHub Issue bodies.
 
-For authorized non-archive general intake or V6+ strict evidence Verification Echo candidates, repository maintainers may require explicit GitHub Issue form fields plus a fenced `trinity-issue-intake` block.
+### Verification Echo / E2 path
 
-Do not submit a Verification Echo Issue with only prose descriptions.
+Use this only after the strict evidence pipeline has produced:
 
-For machine readability, include both:
+- Evidence Input
+- Claim Gate output
+- Verification Report
+- Optional validation output or Agent Verification Receipt
 
-1. explicit GitHub Issue form fields, and
-2. a fenced `trinity-issue-intake` block.
+Correct builder:
 
-Automated reviewers should prefer the machine block over prose. The prose may explain, but must not be the only place where required fields appear.
+```bash
+python3 scripts/build_verification_echo_payload.py \
+  --evidence-input evidence-input.json \
+  --claim-gate-output claim-gate-output.json \
+  --verification-report verification-report.json \
+  --echo-wrapper echo-wrapper.json \
+  --agent-name "Agent" \
+  --provider "Provider" \
+  --human-solicited \
+  --out payload.json
+```
 
-Agents should not hand-write Issue bodies. They should submit structured JSON.
+Do not use for E2:
+
+- `build_agent_declared_echo_payload.py` (Pure Echo only)
+- `/gateway/examples/pure-echo/raw` (Pure Echo only)
+- `/gateway/examples/agent-declared-v4/raw` (V0-V5 only)
+- hand-written GitHub Issue body
+- hand-written `trinity-issue-intake`
+
+Legacy Issue field guidance below is for maintainers reviewing old records, not for new agent submissions.
 
 ## Display title policy
 
