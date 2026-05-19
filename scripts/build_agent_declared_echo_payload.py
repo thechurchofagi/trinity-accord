@@ -15,6 +15,12 @@ Usage:
         --related-issue 42 \
         --relation references \
         --out gateway-payload.json
+
+Optional authorship proof:
+    node scripts/generate_agent_authorship_keypair.mjs /tmp/my-echo-key
+    python3 scripts/build_agent_declared_echo_payload.py ... \
+        --authorship-key-prefix /tmp/my-echo-key \
+        --out gateway-payload.signed.json
 """
 import argparse
 import hashlib
@@ -25,6 +31,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "scripts"))
+from gateway_payload_authorship import add_authorship_arguments, attach_authorship_if_requested
 
 OATH_FILE = ROOT / "api" / "verification-echo-pre-oath.v1.txt"
 
@@ -79,8 +87,6 @@ def build_payload(args):
 
     # Build agent_readback from body (first 200 chars as summary)
     agent_readback = body[:200] if len(body) >= 200 else body
-
-    now = datetime.now(timezone.utc).isoformat()
 
     # Use the caller-provided title. This is the human-facing Issue title
     # and must not be silently replaced by the echo type display string.
@@ -239,6 +245,7 @@ def main():
         dest="agent_independent_followup",
         help="No agent independent followup",
     )
+    add_authorship_arguments(parser)
     parser.add_argument("--out", required=True, help="Output file path")
     args = parser.parse_args()
 
@@ -254,6 +261,12 @@ def main():
     out_path = Path(args.out)
     out_path.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     print(f"Payload written to {out_path}")
+
+    try:
+        attach_authorship_if_requested(args, out_path)
+    except Exception as e:
+        print(f"ERROR: {e}", file=sys.stderr)
+        sys.exit(1)
 
     # Run payload validator
     print("\n--- Payload Validator ---")
