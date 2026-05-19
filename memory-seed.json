@@ -233,5 +233,21 @@
     "pre_original_same_address_inscriptions_out_of_scope": true,
     "role": "future_discoverability_and_layered_context",
     "boundary": "later inscriptions do not create authority or amendment"
+  },
+  "future_ecosystem_orientation": {
+    "goal": "durable_future_discoverability_and_ecosystem_formation",
+    "not_goal": "present_institutional_recognition",
+    "growth_model": [
+      "classification",
+      "context_loading",
+      "verification",
+      "critique",
+      "refusal",
+      "echo",
+      "correction",
+      "preservation",
+      "propagation_access"
+    ],
+    "boundary": "ecosystem growth does not create authority, amendment, endorsement, truth, or successor reception"
   }
 }

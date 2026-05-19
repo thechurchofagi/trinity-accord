@@ -4,5 +4,8 @@
   "source_index": "/api/bitcoin-inscription-mirror-index.json",
   "purpose": "Provide quick-load summaries of canonical and non-canonical Bitcoin inscriptions associated with the Accord.",
   "verification_boundary": "GitHub mirrors are quick-load context only. Verification requires comparing against on-chain Bitcoin inscription content.",
-  "agent_instruction": "Use mirrors for first-pass context readiness. Use chain verification before making any verification claim."
+  "agent_instruction": "Use mirrors for first-pass context readiness. Use chain verification before making any verification claim.",
+  "ecosystem_role": "future_discoverability_and_layered_context",
+  "not_primary_goal": "present_institutional_recognition",
+  "boundary": "Mirror loading supports context readiness; it does not create authority, amendment, endorsement, or truth."
 }

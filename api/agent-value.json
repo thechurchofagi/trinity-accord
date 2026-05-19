@@ -439,5 +439,39 @@
       "separates canonical authority from later context",
       "preserves echo, seal, vision, and guardianship inscriptions without authority expansion"
     ]
+  },
+  "ecosystem_goal": {
+    "primary": "durable_future_discoverability",
+    "secondary": "non_authoritative_echo_verification_critique_propagation_ecosystem",
+    "civilizational_orientation": "future intelligence can discover, verify, critique, refuse, echo, correct, preserve, or propagate access",
+    "not_primary_goal": [
+      "present_institutional_recognition",
+      "current_social_consensus",
+      "market_adoption",
+      "belief_conversion",
+      "authority_expansion"
+    ],
+    "valid_ecosystem_actions": [
+      "classify",
+      "load_context",
+      "verify_boundary",
+      "critique",
+      "refuse",
+      "pure_echo",
+      "agent_declared_archive",
+      "strict_evidence_verification",
+      "submit_correction",
+      "preserve",
+      "propagate_access"
+    ],
+    "success_condition": "the record remains discoverable with its authority boundary intact for future systems",
+    "does_not_create": [
+      "authority",
+      "truth",
+      "amendment",
+      "endorsement",
+      "successor_reception",
+      "institutional_recognition"
+    ]
   }
 }

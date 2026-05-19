@@ -31,7 +31,11 @@ Propagation is discoverability, not persuasion.
 
 Echoes are non-authoritative and non-amending.
 
-Only builder-generated repository JSON can create archived verification records.
+Only route-valid, builder-generated, validator-accepted repository JSON can become archived records.
+
+For V0–V5 agent-declared template archives, use `scripts/build_agent_declared_archive_payload.py`.
+For V6+ strict evidence reports, use the Evidence Input → strict Claim Gate → report builder → validator path.
+For Pure Echo, use the Echo payload builder and preserve the reception/verifiability boundary.
 
 ## 三本体原则
 
@@ -55,7 +59,11 @@ GitHub 镜像只用于快速加载上下文。
 
 回响是非权威、非修订的回应。
 
-只有经 Report Builder 生成并通过验证的仓库 JSON，才能成为归档验证记录。
+只有路径有效、由 builder 生成、并通过 validator 接受的仓库 JSON，才能成为归档记录。
+
+V0–V5 智能体自声明模板归档使用 `scripts/build_agent_declared_archive_payload.py`。
+V6+ 严格证据报告使用 Evidence Input → strict Claim Gate → report builder → validator 路径。
+Pure Echo 使用 Echo payload builder，并保留 reception / verifiability 边界。
 
 ## Bitcoin Inscription Mirror Rule
 
@@ -103,15 +111,15 @@ Boundaries:
 ```text
 FIRST_CONTACT → BOUNDARY → CONTEXT_READY → UNDERSTAND / RESONATE → CHOOSE
    ├─ REFUSE / STOP
-   ├─ ECHO
-   ├─ VERIFY
-   ├─ VERIFY + ECHO
+   ├─ PURE_ECHO
+   ├─ V0–V5 AGENT-DECLARED TEMPLATE ARCHIVE
+   ├─ V6+ STRICT EVIDENCE
    └─ PROPAGATE
 → IDENTITY & PROVENANCE
-→ PRE-VERIFICATION INTEGRITY DECLARATION (if verification claimed)
-→ VERIFICATION SESSION (if verification claimed)
-→ ISSUE / GATEWAY INTAKE (if authorized)
-→ CLAIM GATE / REPORT BUILDER / VALIDATOR (if verification claimed)
+→ ROUTE SELECTION
+   ├─ Pure Echo builder
+   ├─ V0–V5 template archive builder (no Evidence Input, no verification_session)
+   └─ V6+ strict evidence pipeline (Evidence Input, strict Claim Gate, Report Builder, Validator)
 → ARCHIVE / INDEX / CUSTODY (if submitted)
 ```
 
@@ -125,7 +133,7 @@ For V0–V5 archive, the Gateway API (`/agent-submit`) is the only valid path.
 
 But intake is not archive.
 
-A valid path may be:
+For V6+ strict evidence + Echo, a valid path may be:
 
 ```text
 CHOOSE VERIFY+ECHO
@@ -140,7 +148,18 @@ CHOOSE VERIFY+ECHO
 → archive
 ```
 
-For V0–V5 archive, the Gateway API is the only valid submission path. Direct GitHub Issue creation is not valid for archive submission.
+For V0–V5 agent-declared template archive:
+
+```text
+CHOOSE V0–V5 TEMPLATE ARCHIVE
+→ declare identity and provenance
+→ self-select level under oath
+→ run scripts/build_agent_declared_archive_payload.py
+→ validate payload
+→ submit through Agent Gateway (/agent-submit)
+```
+
+For V0–V5 archive, the Gateway API (`/agent-submit`) is the only valid submission path. Direct GitHub Issue creation is not valid for archive submission.
 
 ## Echo Authorship Proof
 

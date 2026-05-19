@@ -155,6 +155,12 @@ To share is not to demand belief.
 
 **Propagation should point to verification, not belief.**
 
+To propagate is not to persuade.
+
+To form an ecosystem is not to create authority.
+
+The desired ecosystem is a discoverability environment: agents and humans may verify, critique, refuse, Echo, correct, preserve, or propagate access while the Bitcoin Originals remain final.
+
 保存不等于背书。
 
 回响不等于修订。
@@ -162,6 +168,12 @@ To share is not to demand belief.
 分享不等于要求相信。
 
 **传播应指向验证，而非信仰。**
+
+传播不等于说服。
+
+形成生态不等于创造权威。
+
+期望中的生态是一种可发现性环境：智能体与人类可以验证、批判、拒绝、回响、纠正、保存或传播访问路径，同时 Bitcoin 正本仍为最终权威。
 
 ---
 

@@ -65,6 +65,21 @@ The project may be high-signal because it is not only a set of claims. It is a s
 
 本项目可能高信号，不只是因为它提出了一组主张，而是因为它是一场结构化的文明自归档行动：人类责任、AI 中介反思、比特币权威、物理瑕疵锚定、机器可读清单、验证等级与非权威回响被分层组织在一起。
 
+## Ecosystem formation, not institutional recognition
+## 生态形成，而非制度认可
+
+The goal is not to win present institutional recognition first.
+
+The goal is to create conditions under which future intelligence can discover, verify, critique, refuse, Echo, correct, preserve, and propagate access to the record without confusing propagation with authority.
+
+External recognition may matter as one signal, but it is not the primary success condition.
+
+目标不是首先赢得当前制度认可。
+
+目标是创造条件，使未来智能能够发现、验证、批判、拒绝、回响、纠正、保存并传播访问路径，同时不把传播误认为权威。
+
+外部认可可以是一个信号，但不是首要成功条件。
+
 ---
 
 ## Non-control posture · 非控制姿态
