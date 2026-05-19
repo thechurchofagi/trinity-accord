@@ -28,17 +28,17 @@
   },
   "content": {
     "raw_text_path": "bitcoin-inscription-mirrors/raw/98369145.txt",
-    "mirror_text_sha256": "097bd97d64e8524e06c291dbb90977175491060ecd4f78357f6e50335f7e004a",
-    "canonicalized_text_sha256": "27d8ed79dac792688fe4ac1d6af176043cdaf288295d36b5aa00e13c203ffb62",
+    "mirror_text_sha256": "003ef48c72307243b1f7a17c0578b311ee76d6f9a8078850773ad8fba04ab86d",
+    "canonicalized_text_sha256": "0a7aa6445c57e1c880b4b25db6d53b9f28d8496354f2351208d1ef778763556d",
     "summary": "Physical verification protocol anchoring Core Object Alpha through unique flaws. The Covenant defines how physical objects can be verified against their Bitcoin-anchored records.",
     "agent_load_excerpt": "The Covenant of the Flaw establishes the physical verification protocol, anchoring Core Object Alpha through unique, identifiable flaws that enable verifiable correspondence between physical and digital records."
   },
   "chain_verification": {
-    "verification_status": "legacy_bootstrap_pending_chain_check",
-    "last_verified_utc": null,
-    "verification_method": null,
-    "onchain_content_sha256": null,
-    "mirror_matches_onchain": null,
+    "verification_status": "mirror_matches_onchain",
+    "last_verified_utc": "2026-05-19T08:39:03.132880+00:00",
+    "verification_method": "network:ordinals",
+    "onchain_content_sha256": "0a7aa6445c57e1c880b4b25db6d53b9f28d8496354f2351208d1ef778763556d",
+    "mirror_matches_onchain": true,
     "verification_script": "scripts/verify_bitcoin_inscription_mirrors.py"
   },
   "limitations": [
