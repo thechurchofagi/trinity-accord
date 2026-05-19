@@ -1366,15 +1366,16 @@ app.get("/gateway/examples/agent-declared-v4/raw", (req, res) => {
 });
 
 // --- V0-V5 per-level raw example endpoints ---
-const V0_V5_LEVELS = [
+const V0_V5_EXAMPLE_LEVELS = [
   { level: "v0", label: "V0" },
   { level: "v1", label: "V1" },
   { level: "v2", label: "V2" },
   { level: "v3", label: "V3" },
+  { level: "v4", label: "V4" },
   { level: "v4plus", label: "V4+" },
   { level: "v5", label: "V5" },
 ];
-for (const { level, label } of V0_V5_LEVELS) {
+for (const { level, label } of V0_V5_EXAMPLE_LEVELS) {
   app.get(`/gateway/examples/agent-declared-${level}/raw`, (req, res) => {
     try {
       const payload = loadFixture(`valid_agent_declared_${level}.json`);
