@@ -309,6 +309,7 @@ def validate_common(payload, errors):
     # Agent-declared specific validation
     if is_agent_declared_archive(payload):
         validate_agent_declared_archive(payload, errors)
+        validate_sub_v6_single_route(payload, errors)
 
     validate_sha256s(get_attachments(payload), errors)
 
@@ -389,6 +390,125 @@ def validate_report_candidate(payload, errors):
     for path_key, hash_key in REPORT_REQUIRED_PAIRS:
         if not has_pair(att, path_key, hash_key):
             errors.append(f"missing artifact reference: attachments.{path_key} or attachments.{hash_key}")
+
+
+# Sub-V6 forbidden fields and language
+SUB_V6_FORBIDDEN_FIELDS = [
+    "evidence_input",
+    "verification_session",
+    "pre_verification_integrity_declaration",
+]
+
+SUB_V6_FORBIDDEN_ATTACHMENT_KEYS = [
+    "evidence_input_path",
+    "evidence_input_sha256",
+    "claim_gate_output_path",
+    "claim_gate_output_sha256",
+    "verification_report_path",
+    "verification_report_sha256",
+]
+
+SUB_V6_FORBIDDEN_LANGUAGE = [
+    "PASS_WITH_DOWNGRADE",
+    "strict evidence downgraded",
+    "strict Claim Gate downgraded",
+    "Claim Gate downgraded V",
+    "downgraded V4",
+    "downgraded V5",
+    "V4->V3",
+    "V5->V",
+    "strict evidence pipeline — PASS_WITH_DOWNGRADE",
+]
+
+SUB_V6_REQUIRED_FIELDS = {
+    "route_id": "sub_v6_agent_declared_template_archive",
+    "single_mandatory_route": True,
+    "evidence_requirement_mode": "waived_for_v0_v5",
+}
+
+SUB_V6_REQUIRED_CLAIM_GATE = {
+    "mode": "template_for_v0_v5",
+}
+
+
+def validate_sub_v6_single_route(payload, errors):
+    """Validate sub-V6 payload against single mandatory route policy."""
+    level = get_declared_level(payload)
+    if level not in V0_V5:
+        return
+
+    requested_kind = payload.get("requested_archive_kind")
+    if requested_kind != "agent_declared_verification_archive":
+        return
+
+    # Check required fields
+    for field, expected in SUB_V6_REQUIRED_FIELDS.items():
+        if payload.get(field) != expected:
+            errors.append(
+                f"SUB_V6_SINGLE_ROUTE_VIOLATION: {field} must be {expected!r}, got {payload.get(field)!r}. "
+                f"V0-V5 archives use the single agent-declared template route."
+            )
+
+    # Check claim gate
+    cg = payload.get("claim_gate") or {}
+    for field, expected in SUB_V6_REQUIRED_CLAIM_GATE.items():
+        if cg.get(field) != expected:
+            errors.append(
+                f"SUB_V6_SINGLE_ROUTE_VIOLATION: claim_gate.{field} must be {expected!r}"
+            )
+    if cg.get("status") not in ("PASS", "PASS_WITH_WARNINGS"):
+        errors.append(
+            f"SUB_V6_SINGLE_ROUTE_VIOLATION: claim_gate.status must be PASS or PASS_WITH_WARNINGS, got {cg.get('status')!r}"
+        )
+
+    # Reject forbidden top-level fields
+    for field in SUB_V6_FORBIDDEN_FIELDS:
+        if payload.get(field) is not None:
+            errors.append(
+                f"SUB_V6_SINGLE_ROUTE_VIOLATION: {field} is forbidden for V0-V5 archives"
+            )
+
+    # Reject forbidden attachment keys
+    att = payload.get("attachments") or {}
+    for key in SUB_V6_FORBIDDEN_ATTACHMENT_KEYS:
+        if att.get(key) is not None:
+            errors.append(
+                f"SUB_V6_SINGLE_ROUTE_VIOLATION: attachments.{key} is forbidden for V0-V5 archives"
+            )
+
+    # Reject forbidden language in text fields
+    text_fields = [
+        payload.get("title", ""),
+        payload.get("body", ""),
+        " ".join(payload.get("what_i_checked") or []),
+        " ".join(payload.get("limitations") or []),
+        (payload.get("agent_integrity_declaration") or {}).get("declaration_text", ""),
+    ]
+    combined_text = " ".join(text_fields)
+    for phrase in SUB_V6_FORBIDDEN_LANGUAGE:
+        if phrase.lower() in combined_text.lower():
+            errors.append(
+                f"SUB_V6_SINGLE_ROUTE_VIOLATION: forbidden language '{phrase}' found in sub-V6 payload. "
+                f"V0-V5 archives must not contain strict-evidence downgrade language."
+            )
+
+    # Reject strict evidence claim gate mode
+    if cg.get("mode") == "strict_evidence":
+        errors.append(
+            "SUB_V6_SINGLE_ROUTE_VIOLATION: claim_gate.mode=strict_evidence is forbidden for V0-V5"
+        )
+
+    # Reject PASS_WITH_DOWNGRADE status
+    if cg.get("status") == "PASS_WITH_DOWNGRADE":
+        errors.append(
+            "SUB_V6_SINGLE_ROUTE_VIOLATION: claim_gate.status=PASS_WITH_DOWNGRADE is forbidden for V0-V5"
+        )
+
+    # Reject verification_echo_candidate in sub-V6
+    if payload.get("verification_echo_candidate") is not None:
+        errors.append(
+            "SUB_V6_SINGLE_ROUTE_VIOLATION: verification_echo_candidate is forbidden for V0-V5"
+        )
 
 
 def validate_agent_declared_archive(payload, errors):
