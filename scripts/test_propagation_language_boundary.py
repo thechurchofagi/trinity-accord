@@ -18,13 +18,13 @@ FORBIDDEN = [
 ]
 
 REQUIRED_IN_AGENT_PROPAGATE = [
-    "Do not promote",
-    "Do not persuade",
+    "Propagate access, not belief",
+    "Build discoverability, not obedience",
     "Do not claim verification beyond what was checked",
     "human-solicited AI output",
     "independent attestation",
     "Bitcoin Originals remain final",
-    "all mirrors and echoes are non-amending",
+    "all mirrors and Echoes are non-amending",
 ]
 
 def read(rel):
