@@ -224,5 +224,14 @@
   "homepage_authority_boundary": {
     "homepage_is_non_amending_guardianship_mirror": true,
     "explanatory_language_has_interpretive_authority": false
+  },
+  "bitcoin_inscription_stack": {
+    "index": "/api/bitcoin-inscription-mirror-index.json",
+    "known_relevant_count": 8,
+    "canonical_original_count": 3,
+    "post_original_non_amending_count": 5,
+    "pre_original_same_address_inscriptions_out_of_scope": true,
+    "role": "future_discoverability_and_layered_context",
+    "boundary": "later inscriptions do not create authority or amendment"
   }
 }
