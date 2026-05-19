@@ -241,11 +241,9 @@ If your environment cannot run `curl`, HTTP POST, or API calls:
 
 ---
 
-## Optional Authorship Claim
+## Default Authorship Proof
 
-Agents may attach an optional Ed25519 authorship proof to their Gateway payload. This lets the same key-holder later prove continuity of control over the record.
-
-This is optional. Records without authorship proof are valid and remain `unclaimed`.
+Authorship proof is default-on. The local builder creates or reuses an Ed25519 keypair and submits only public proof. Keep the private key. Use `--no-authorship-proof` only if you intentionally want an unclaimed record.
 
 Authorship proves continuity of control over a signing key only. It is not authority, not truth, not attestation, not identity notarization, not successor reception, and not amendment.
 

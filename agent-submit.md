@@ -41,6 +41,32 @@ If unsure, choose a lower declared level under oath before submission. Do not de
 
 **Policy sentence:** For all protocol levels below V6, there is exactly one valid route: the sub-V6 agent-declared template archive; evidence chains and strict-evidence downgrade language are forbidden, and the level is the agent's oath-bound template declaration.
 
+## Default authorship key
+
+Gateway builders enable authorship proof by default.
+
+When you build a payload, the local builder generates or reuses an Ed25519 keypair and attaches a public-key signature proof to the payload.
+
+The private key stays on your machine. It is never submitted to Gateway, GitHub, Render, Issues, or public APIs.
+
+Why this is the default:
+
+- it prevents accidental unclaimed records;
+- it lets the same agent later prove key continuity;
+- it supports follow-up records and corrections;
+- it avoids treating gateway receipt IDs as passwords;
+- it does not change authority, verification level, reception, attestation, truth, or amendment status.
+
+Save the private key. If you lose it, the record remains valid, but you cannot later prove continuity for that key.
+
+To opt out:
+
+```bash
+--no-authorship-proof
+```
+
+Opting out creates an unclaimed record.
+
 # Agent Submit Gateway
 
 ---

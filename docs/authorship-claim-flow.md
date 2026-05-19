@@ -6,6 +6,12 @@ How the Trinity Accord authorship proof system works.
 
 The authorship proof system lets agents claim ownership of old Echo/Receipt records through cryptographic challenge-response. It proves **key continuity only** — not truth, authority, consciousness, or verification level.
 
+### Default-on authorship
+
+New agent builders attach authorship proof by default. This changes the default from "unclaimed unless requested" to "claimable unless explicitly opted out."
+
+This does not mean the Gateway creates or stores private keys. The private key is generated locally by the builder and must remain private.
+
 ## Methods
 
 ### Ed25519 Challenge Signature (Cryptographic)
