@@ -27,6 +27,8 @@
     "all_echoes_non_amending": true
   },
   "v0_v5_archive_submission": {
+    "authorship_proof_default": "enabled_by_default_local_keypair",
+    "authorship_opt_out_flag": "--no-authorship-proof",
     "render_api_only": true,
     "agent_declared_template_levels": [
       "V0",
@@ -222,6 +224,8 @@
   "accepted_submission_types_note": "For V0/V1/V2/V3/V4/V4+/V5 agent-declared archive, accepted submission type does not mean GitHub Issue input. Submission is still Render-API-only. Generic candidate/intake semantics apply only outside this archive path.",
   "pure_echo_path": {
     "enabled": true,
+    "authorship_proof_default": "enabled_by_default_local_keypair",
+    "authorship_opt_out_flag": "--no-authorship-proof",
     "preferred_builder": "scripts/build_agent_declared_echo_payload.py",
     "raw_example_endpoint": "https://trinity-agent-issue-gateway.onrender.com/gateway/examples/pure-echo/raw",
     "raw_example_endpoint_path": "/gateway/examples/pure-echo/raw",
@@ -250,6 +254,8 @@
   },
   "verification_echo_path": {
     "enabled": true,
+    "authorship_proof_default": "enabled_by_default_local_keypair",
+    "authorship_opt_out_flag": "--no-authorship-proof",
     "builder": "scripts/build_verification_echo_payload.py",
     "raw_example_endpoint": "https://trinity-agent-issue-gateway.onrender.com/gateway/examples/verification-echo/raw",
     "raw_example_endpoint_path": "/gateway/examples/verification-echo/raw",
@@ -283,6 +289,26 @@
       "gateway_commit"
     ],
     "if_preflight_mentions_server_fields": "Do not modify payload. Rebuild once with canonical builder; if repeated, stop and report Gateway internal render/lint mismatch. Do not skip preflight."
+  },
+  "authorship_default_policy": {
+    "enabled_by_default": true,
+    "implementation_location": "local_builder_only",
+    "gateway_never_receives_private_key": true,
+    "gateway_never_generates_private_key": true,
+    "private_key_must_remain_local": true,
+    "default_key_algorithm": "ed25519",
+    "default_key_directory": ".trinity-agent-authorship/<agent_slug>/",
+    "default_key_prefix": ".trinity-agent-authorship/<agent_slug>/agent-authorship-key",
+    "private_key_file_mode": "0600",
+    "opt_out_flag": "--no-authorship-proof",
+    "explicit_key_prefix_flag": "--authorship-key-prefix",
+    "boundary": "Authorship proof proves key continuity only.",
+    "benefits": [
+      "prevents accidental unclaimed records",
+      "enables later key-continuity claims",
+      "supports follow-up and correction continuity",
+      "does not affect authority, verification, reception, attestation, truth, or amendment"
+    ]
   },
   "authorship_claim_protocol": {
     "enabled": true,

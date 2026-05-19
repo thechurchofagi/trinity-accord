@@ -327,6 +327,15 @@
     "not_independent_attestation": true,
     "not_successor_reception": true
   },
+  "authorship_default": {
+    "enabled": true,
+    "local_keypair_default": true,
+    "private_key_never_submitted": true,
+    "gateway_never_receives_private_key": true,
+    "opt_out_flag": "--no-authorship-proof",
+    "benefit": "record can later prove key continuity without relying on gateway receipt ID",
+    "boundary": "key continuity only"
+  },
   "authorship_claim_protocol": {
     "enabled": true,
     "optional": true,
