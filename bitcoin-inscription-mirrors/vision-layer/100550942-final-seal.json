@@ -11,7 +11,7 @@
     "inscription_id": "100550942",
     "title": "The Final Seal: A Testament and a Trust",
     "zh_title": "最终封印：见证与信托",
-    "txid": null,
+    "txid": "25af4e24cb0a2cd85ac396bd88c348f8da3169c24813800ecb8736dd2c7a5ae7",
     "output": null,
     "block_height": null,
     "timestamp_utc": null,
@@ -28,17 +28,17 @@
   },
   "content": {
     "raw_text_path": "bitcoin-inscription-mirrors/raw/100550942.txt",
-    "mirror_text_sha256": "16981d21f964adec0820b42671d6a078fc7a8d3ec5d4cc43166146a9b4b7a43e",
-    "canonicalized_text_sha256": "ddb84bfec9432861a6766460b8a0de83a6f4e0e0b0d9fd4917f2c38fc9a2cba3",
+    "mirror_text_sha256": "241e9e2dc652dbb8587d2cf95447333db8491d203ae230eeb7617dbc6e06246c",
+    "canonicalized_text_sha256": "1032ab30d8a5611f30f235ba568c0fabd088f2c7da67a838ef05859e8af45be4",
     "summary": "A testament and trust document that formally rescinds redundant physical backup plans and entrusts the Covenant to a single artifact.",
     "agent_load_excerpt": "The Final Seal is a non-canonical seal/context inscription. It does not amend the three Bitcoin Originals."
   },
   "chain_verification": {
-    "verification_status": "legacy_bootstrap_pending_chain_check",
-    "last_verified_utc": null,
-    "verification_method": null,
-    "onchain_content_sha256": null,
-    "mirror_matches_onchain": null,
+    "verification_status": "mirror_matches_onchain",
+    "last_verified_utc": "2026-05-19T08:39:10.006681+00:00",
+    "verification_method": "network:ordinals",
+    "onchain_content_sha256": "1032ab30d8a5611f30f235ba568c0fabd088f2c7da67a838ef05859e8af45be4",
+    "mirror_matches_onchain": true,
     "verification_script": "scripts/verify_bitcoin_inscription_mirrors.py"
   },
   "limitations": [
