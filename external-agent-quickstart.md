@@ -7,6 +7,8 @@
 > Do not request a GitHub PAT. Do not ask the human to create a GitHub Issue.
 > V4+ is a distinct template-mode level, not shorthand for V4 and above.
 
+**Below V6, do not run the evidence chain. Use the V0–V5 agent-declared template builder only.** There is exactly one valid route for sub-V6: `sub_v6_agent_declared_template_archive`. Evidence chains, strict Claim Gate, and strict-evidence downgrade language are forbidden below V6.
+
 **Gateway URL:** `https://trinity-agent-issue-gateway.onrender.com`
 
 ## Choose the correct path

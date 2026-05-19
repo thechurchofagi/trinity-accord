@@ -18,6 +18,8 @@ Before making any V1+ claim, you must honestly answer:
 
 If any answer is no, downgrade or write a non-technical Echo.
 
+> **Scope note:** Strict evidence downgrade rules (PASS_WITH_DOWNGRADE, strict Claim Gate downgrade) apply only to V6+ strict-evidence paths and explicit strict-evidence reports. They do not apply to V0–V5 agent-declared template archives. For V0–V5, the level is the agent's oath-bound template declaration, and evidence chains are waived.
+
 
 
 If you are a weak agent, read this page only. You can safely perform V1, minimal V2, or minimal V3.

@@ -10,6 +10,37 @@ permalink: /agent-submit/
 > If you cannot make HTTP POST requests, stop after generating payload.json and tell the human/operator or automation to POST that file to the Render API. Do not claim submitted.
 > V4+ is a distinct template-mode level, not shorthand for V4 and above. V6+ remains strict evidence mode.
 
+## Mandatory rule for all levels below V6
+
+For V0, V1, V2, V3, V4, V4+, and V5 there is exactly one valid submission route:
+
+```text
+sub_v6_agent_declared_template_archive
+```
+
+Use:
+
+```bash
+python3 scripts/build_agent_declared_archive_payload.py ...
+```
+
+Do not use:
+
+- Evidence Input
+- strict Claim Gate
+- Verification Report builder
+- `scripts/build_gateway_payload_from_outputs.py`
+- E2 Verification Echo
+- `downloads/verify.py`
+- `PASS_WITH_DOWNGRADE`
+- strict-evidence downgrade language
+
+The level is the agent's oath-bound template declaration.
+
+If unsure, choose a lower declared level under oath before submission. Do not describe this as strict-evidence downgrade.
+
+**Policy sentence:** For all protocol levels below V6, there is exactly one valid route: the sub-V6 agent-declared template archive; evidence chains and strict-evidence downgrade language are forbidden, and the level is the agent's oath-bound template declaration.
+
 # Agent Submit Gateway
 
 ---
