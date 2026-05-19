@@ -235,3 +235,12 @@ Some inscription text contains historical rhetorical language. Preserve it as qu
 - Records without authorship proof remain valid with claim_status=unclaimed.
 - Claim status does not affect verifiability counts, reception counts, or protocol level.
 - Scripts: generate_agent_authorship_keypair.mjs, attach_agent_authorship_proof.mjs, build_agent_authorship_claim_message.py, sign_agent_authorship_claim.mjs.
+
+## Authority address inscription mirror
+- /authority-address-inscriptions/
+- /api/bitcoin-inscription-mirror-index.json
+
+Known relevant stack from the legacy archive: 8 inscriptions.
+Only the first three are canonical Bitcoin Originals.
+The later five same-address inscriptions are non-amending context / echo / seal / vision / guardianship records.
+Earlier same-address inscriptions, if any, are treated as pre-Original drafts/history and are outside the mirror scope.
