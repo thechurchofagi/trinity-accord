@@ -26,7 +26,8 @@
     "/downloads/shenzhen-notary-arweave-2026-05-06",
     "/downloads/shenzhen-notary-github-release-backup-2026-05-06",
     "/recovery",
-    "/disaster-recovery-drill"
+    "/disaster-recovery-drill",
+    "/authority-address-inscriptions"
   ],
   "machine": [
     "/api/authority.json",
@@ -68,7 +69,8 @@
     "/api/corrections-index.json",
     "/api/recovery-index.json",
     "/api/claim-registry.json",
-    "/api/claim-registry-schema.v1.json"
+    "/api/claim-registry-schema.v1.json",
+    "/api/bitcoin-inscription-mirror-index.json"
   ],
   "legacy_machine": [
     "/api/echo-record-schema.v2.json"
