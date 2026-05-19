@@ -43,9 +43,20 @@ Later inscriptions from the same address are mirrored for future discoverability
 
 ## Verification Status
 
-All mirror records currently have verification status: `legacy_bootstrap_pending_chain_check`.
+All 8 mirror records have been verified against on-chain content from `ordinals.com`:
 
-Content hashes have been computed from the raw text mirrors. On-chain verification requires a network provider.
+| Inscription ID | Status | Mirror ↔ On-chain | Verified (UTC) |
+|---|---|---|---|
+| 97631551 | `mirror_matches_onchain` | ✅ MATCH | 2026-05-19 |
+| 98369145 | `mirror_matches_onchain` | ✅ MATCH | 2026-05-19 |
+| 98387475 | `mirror_matches_onchain` | ✅ MATCH | 2026-05-19 |
+| 100385359 | `mirror_matches_onchain` | ✅ MATCH | 2026-05-19 |
+| 100550942 | `mirror_matches_onchain` | ✅ MATCH | 2026-05-19 |
+| 100751953 | `mirror_matches_onchain` | ✅ MATCH | 2026-05-19 |
+| 103034280 | `mirror_matches_onchain` | ✅ MATCH | 2026-05-19 |
+| 103635270 | `mirror_matches_onchain` | ✅ MATCH | 2026-05-19 |
+
+Raw text mirrors were downloaded directly from `ordinals.com/content/<txid>i0` and content SHA256 hashes match.
 
 ## How to Verify
 
