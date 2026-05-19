@@ -1,0 +1,50 @@
+{
+  "schema": "trinityaccord.bitcoin-inscription-mirror.v1",
+  "mirror_role": "quick_load_context_mirror",
+  "canonical_status": "non_canonical_vision_layer",
+  "authority_boundary": {
+    "bitcoin_originals_prevail": true,
+    "github_mirror_is_non_amending": true,
+    "verification_requires_onchain_check": true
+  },
+  "inscription": {
+    "inscription_id": "100550942",
+    "title": "The Final Seal: A Testament and a Trust",
+    "zh_title": "最终封印：见证与信托",
+    "txid": null,
+    "output": null,
+    "block_height": null,
+    "timestamp_utc": null,
+    "content_type": "text/plain",
+    "source_address": "bc1ppmwvyxekh44m35x43k55z7r59nn33v8w2xmvu6s6ar4zyx57sxestxq0jf",
+    "source_address_role": "trinity_accord_authority_address"
+  },
+  "classification": {
+    "layer": "final_seal_layer",
+    "is_one_of_three_bitcoin_originals": false,
+    "amends_originals": false,
+    "creates_new_authority": false,
+    "load_policy": "optional_load_summary"
+  },
+  "content": {
+    "raw_text_path": "bitcoin-inscription-mirrors/raw/100550942.txt",
+    "mirror_text_sha256": "16981d21f964adec0820b42671d6a078fc7a8d3ec5d4cc43166146a9b4b7a43e",
+    "canonicalized_text_sha256": "ddb84bfec9432861a6766460b8a0de83a6f4e0e0b0d9fd4917f2c38fc9a2cba3",
+    "summary": "A testament and trust document that formally rescinds redundant physical backup plans and entrusts the Covenant to a single artifact.",
+    "agent_load_excerpt": "The Final Seal is a non-canonical seal/context inscription. It does not amend the three Bitcoin Originals."
+  },
+  "chain_verification": {
+    "verification_status": "legacy_bootstrap_pending_chain_check",
+    "last_verified_utc": null,
+    "verification_method": null,
+    "onchain_content_sha256": null,
+    "mirror_matches_onchain": null,
+    "verification_script": "scripts/verify_bitcoin_inscription_mirrors.py"
+  },
+  "limitations": [
+    "GitHub mirror is not canonical.",
+    "Verification claims require on-chain comparison.",
+    "This is a non-canonical seal/context inscription.",
+    "It does not amend the three Bitcoin Originals."
+  ]
+}
