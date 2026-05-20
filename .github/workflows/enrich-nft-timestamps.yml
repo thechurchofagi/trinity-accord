@@ -1,0 +1,176 @@
+name: Enrich NFT Mint Timestamps
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  enrich:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch ETH mint timestamps and sort
+        env:
+          ETH_RPC_URL: ${{ secrets.ETHEREUMMAINNET }}
+        run: |
+          python3 << 'PYEOF'
+          import json, urllib.request, time, os
+
+          RPC = os.environ.get("ETH_RPC_URL", "")
+          if not RPC:
+              print("ERROR: ETH_RPC_URL not set")
+              exit(1)
+
+          TRANSFER_TOPIC0 = "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef"
+          ZERO_TOPIC = "0x" + "0" * 64  # from=0x0 (mint)
+
+          with open("token_index.json") as f:
+              token_index = json.load(f)
+
+          contracts = list(token_index.keys())
+
+          def rpc_call(method, params, retries=3):
+              for attempt in range(retries):
+                  try:
+                      payload = json.dumps({"jsonrpc":"2.0","method":method,"params":params,"id":1}).encode()
+                      req = urllib.request.Request(RPC, data=payload, headers={"Content-Type":"application/json"})
+                      resp = urllib.request.urlopen(req, timeout=30)
+                      data = json.loads(resp.read())
+                      if "error" in data:
+                          raise Exception(data["error"])
+                      return data
+                  except Exception as e:
+                      if attempt < retries - 1:
+                          time.sleep(2 ** attempt)
+                      else:
+                          raise
+
+          # Get latest block
+          latest = rpc_call("eth_blockNumber", [])
+          block_num = int(latest["result"], 16)
+          print(f"Latest block: {block_num}")
+
+          # Step 1: For each contract, get mint events (Transfer from 0x0)
+          mint_map = {}  # (contract, token_id) -> block_number
+
+          for contract in contracts:
+              tokens = token_index[contract]
+              token_ids = list(tokens.keys()) if isinstance(tokens, dict) else list(tokens)
+              print(f"\nQuerying {contract} ({len(token_ids)} tokens)...")
+
+              all_logs = []
+              # Query from block 18000000 (mid-2023) to cover all NFTs
+              start_block = 18000000
+              chunk = 50000
+
+              for from_b in range(start_block, block_num + 1, chunk):
+                  to_b = min(from_b + chunk - 1, block_num)
+                  try:
+                      result = rpc_call("eth_getLogs", [{
+                          "fromBlock": hex(from_b),
+                          "toBlock": hex(to_b),
+                          "address": contract,
+                          "topics": [TRANSFER_TOPIC0, ZERO_TOPIC]
+                      }])
+                      logs = result.get("result", [])
+                      if logs:
+                          all_logs.extend(logs)
+                          print(f"  Blocks {from_b}-{to_b}: {len(logs)} mints")
+                  except Exception as e:
+                      print(f"  Blocks {from_b}-{to_b}: error - {e}")
+                  time.sleep(0.15)
+
+              print(f"  Total mint events: {len(all_logs)}")
+
+              for log in all_logs:
+                  topics = log.get("topics", [])
+                  if len(topics) >= 3:
+                      token_id = str(int(topics[2], 16))
+                      block = int(log["blockNumber"], 16)
+                      mint_map[(contract, token_id)] = block
+
+              time.sleep(0.3)
+
+          print(f"\n=== Found mint blocks for {len(mint_map)} tokens ===")
+
+          # Step 2: Get timestamps for unique blocks
+          blocks_needed = sorted(set(mint_map.values()))
+          print(f"Need timestamps for {len(blocks_needed)} unique blocks")
+
+          block_ts = {}
+          for i, block in enumerate(blocks_needed):
+              try:
+                  result = rpc_call("eth_getBlockByNumber", [hex(block), False])
+                  ts = int(result["result"]["timestamp"], 16)
+                  block_ts[block] = ts
+              except Exception as e:
+                  print(f"  Block {block}: error - {e}")
+              if i % 50 == 0 and i > 0:
+                  print(f"  {i}/{len(blocks_needed)} blocks done...")
+                  time.sleep(0.2)
+
+          print(f"Got {len(block_ts)} block timestamps")
+
+          # Step 3: Build sorted output
+          entries = []
+          for contract in contracts:
+              tokens = token_index[contract]
+              token_ids = list(tokens.keys()) if isinstance(tokens, dict) else list(tokens)
+              for tid in token_ids:
+                  block = mint_map.get((contract, tid))
+                  ts = block_ts.get(block) if block else None
+                  entries.append({
+                      "contract": contract,
+                      "token_id": tid,
+                      "block": block,
+                      "timestamp": ts,
+                      "datetime": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime(ts)) if ts else None
+                  })
+
+          # Sort by timestamp (None last)
+          entries.sort(key=lambda x: x["timestamp"] or 9999999999)
+
+          # Save timestamps
+          with open("nft-text-descriptions/eth-mint-timestamps.json", "w") as f:
+              json.dump(entries, f, indent=2, ensure_ascii=False)
+
+          # Step 4: Re-sort index.json by timestamp
+          with open("nft-text-descriptions/index.json") as f:
+              index = json.load(f)
+
+          ts_map = {(e["contract"], e["token_id"]): e for e in entries}
+          for item in index:
+              key = (item["contract"], item["token_id"])
+              if key in ts_map:
+                  item["block"] = ts_map[key]["block"]
+                  item["timestamp"] = ts_map[key]["timestamp"]
+                  item["datetime"] = ts_map[key]["datetime"]
+
+          index.sort(key=lambda x: x.get("timestamp") or 9999999999)
+
+          with open("nft-text-descriptions/index.json", "w") as f:
+              json.dump(index, f, indent=2, ensure_ascii=False)
+
+          print(f"\n=== DONE ===")
+          print(f"Total entries: {len(entries)}")
+          print(f"With timestamps: {sum(1 for e in entries if e['timestamp'])}")
+          print(f"Without timestamps: {sum(1 for e in entries if not e['timestamp'])}")
+          print(f"\nFirst 5 (earliest):")
+          for e in entries[:5]:
+              print(f"  {e['datetime']} | ...{e['token_id'][-8:]}")
+          print(f"\nLast 5 (latest):")
+          for e in entries[-5:]:
+              print(f"  {e['datetime']} | ...{e['token_id'][-8:]}")
+          PYEOF
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add nft-text-descriptions/
+          git diff --cached --quiet && echo "No changes" && exit 0
+          git commit -m "feat: enrich NFT descriptions with ETH mint timestamps and sort chronologically"
+          git push
