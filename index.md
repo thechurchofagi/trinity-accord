@@ -65,7 +65,7 @@ permalink: /
     </div>
     <div class="authority-chip">
       <span class="chip-label">Machine entry</span>
-      <span class="chip-value"><a href="/llms.txt">/llms.txt</a> · <a href="/api/context-load-map.json">/api/context-load-map.json</a></span>
+      <span class="chip-value"><a href="/llms.txt">/llms.txt</a> · <a href="/ai.txt">/ai.txt</a> · <a href="/api/context-load-map.json">/api/context-load-map.json</a></span>
     </div>
     <div class="authority-chip">
       <span class="chip-label">Authority / inscription stack</span>
