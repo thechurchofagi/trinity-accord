@@ -17,12 +17,17 @@ jobs:
           ETH_RPC_URL: ${{ secrets.ETHEREUMMAINNET }}
         run: |
           python3 << 'PYEOF'
-          import json, urllib.request, time, os
+          import json, urllib.request, time, os, datetime
 
-          RPC = os.environ.get("ETH_RPC_URL", "")
-          if not RPC:
-              print("ERROR: ETH_RPC_URL not set")
-              exit(1)
+          # Use multiple RPC endpoints with fallback
+          PRIMARY = os.environ.get("ETH_RPC_URL", "")
+          FALLBACKS = [
+              "https://ethereum-rpc.publicnode.com",
+              "https://1rpc.io/eth",
+              "https://cloudflare-eth.com",
+          ]
+          RPCS = [r for r in [PRIMARY] + FALLBACKS if r]
+          rpc_idx = 0
 
           TRANSFER_TOPIC0 = "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef"
 
@@ -31,29 +36,38 @@ jobs:
 
           contracts = list(token_index.keys())
 
-          def rpc_call(method, params, retries=3):
+          def rpc_call(method, params, retries=6):
+              global rpc_idx
               for attempt in range(retries):
+                  rpc = RPCS[rpc_idx % len(RPCS)]
                   try:
                       payload = json.dumps({"jsonrpc":"2.0","method":method,"params":params,"id":1}).encode()
-                      req = urllib.request.Request(RPC, data=payload, headers={"Content-Type":"application/json"})
+                      req = urllib.request.Request(rpc, data=payload, headers={"Content-Type":"application/json"})
                       resp = urllib.request.urlopen(req, timeout=30)
                       data = json.loads(resp.read())
                       if "error" in data:
-                          raise Exception(data["error"])
+                          raise Exception(data["error"].get("message", data["error"]))
                       return data
-                  except Exception as e:
-                      if attempt < retries - 1:
-                          time.sleep(2 ** attempt)
+                  except urllib.error.HTTPError as e:
+                      if e.code == 429:
+                          rpc_idx += 1  # rotate to next RPC
+                          wait = min(2 ** attempt, 30)
+                          print(f"  429 on {rpc.split('/')[2][:30]}, rotating RPC, wait {wait}s")
+                          time.sleep(wait)
                       else:
                           raise
+                  except Exception as e:
+                      wait = min(2 ** attempt, 30)
+                      print(f"  Error: {e}, retry {attempt+1}, wait {wait}s")
+                      time.sleep(wait)
+              raise Exception(f"All RPCs failed after {retries} retries")
 
           # Get latest block
           latest = rpc_call("eth_blockNumber", [])
           block_num = int(latest["result"], 16)
           print(f"Latest block: {block_num}")
 
-          # Step 1: For each contract, get ALL Transfer events and find earliest per token
-          # These NFTs may not use standard from=0x0 minting, so we get all transfers
+          # For each contract, query ALL Transfer events and find earliest per token
           mint_map = {}  # (contract, token_id) -> earliest_block
 
           for contract in contracts:
@@ -62,36 +76,28 @@ jobs:
               print(f"\nQuerying {contract} ({len(token_ids)} tokens)...")
 
               all_logs = []
-              # Query from block 18000000 (mid-2023) to cover all NFTs
               start_block = 18000000
               chunk = 50000
 
               for from_b in range(start_block, block_num + 1, chunk):
                   to_b = min(from_b + chunk - 1, block_num)
-                  retries = 3
-                  for attempt in range(retries):
-                      try:
-                          result = rpc_call("eth_getLogs", [{
-                              "fromBlock": hex(from_b),
-                              "toBlock": hex(to_b),
-                              "address": contract,
-                              "topics": [TRANSFER_TOPIC0]
-                          }])
-                          logs = result.get("result", [])
-                          if logs:
-                              all_logs.extend(logs)
-                              print(f"  Blocks {from_b}-{to_b}: {len(logs)} transfers")
-                          break
-                      except Exception as e:
-                          if attempt < retries - 1:
-                              time.sleep(2 ** (attempt + 1))
-                          else:
-                              print(f"  Blocks {from_b}-{to_b}: FAILED after {retries} retries - {e}")
-                  time.sleep(0.3)
+                  try:
+                      result = rpc_call("eth_getLogs", [{
+                          "fromBlock": hex(from_b),
+                          "toBlock": hex(to_b),
+                          "address": contract,
+                          "topics": [TRANSFER_TOPIC0]
+                      }])
+                      logs = result.get("result", [])
+                      if logs:
+                          all_logs.extend(logs)
+                          print(f"  Blocks {from_b}-{to_b}: {len(logs)} transfers")
+                  except Exception as e:
+                      print(f"  Blocks {from_b}-{to_b}: FAILED - {e}")
+                  time.sleep(0.5)  # gentle rate limit
 
               print(f"  Total Transfer events: {len(all_logs)}")
 
-              # For each token we care about, find the earliest Transfer
               for log in all_logs:
                   topics = log.get("topics", [])
                   if len(topics) >= 4:
@@ -104,11 +110,11 @@ jobs:
 
               matched = sum(1 for tid in token_ids if (contract, tid) in mint_map)
               print(f"  Matched {matched}/{len(token_ids)} tokens to first Transfer block")
-              time.sleep(0.5)
+              time.sleep(1)
 
           print(f"\n=== Found mint blocks for {len(mint_map)} tokens ===")
 
-          # Step 2: Get timestamps for unique blocks
+          # Get timestamps for unique blocks in batches
           blocks_needed = sorted(set(mint_map.values()))
           print(f"Need timestamps for {len(blocks_needed)} unique blocks")
 
@@ -122,11 +128,11 @@ jobs:
                   print(f"  Block {block}: error - {e}")
               if i % 50 == 0 and i > 0:
                   print(f"  {i}/{len(blocks_needed)} blocks done...")
-                  time.sleep(0.2)
+                  time.sleep(0.5)
 
           print(f"Got {len(block_ts)} block timestamps")
 
-          # Step 3: Build sorted output
+          # Build sorted output
           entries = []
           for contract in contracts:
               tokens = token_index[contract]
@@ -142,14 +148,12 @@ jobs:
                       "datetime": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime(ts)) if ts else None
                   })
 
-          # Sort by timestamp (None last)
           entries.sort(key=lambda x: x["timestamp"] or 9999999999)
 
-          # Save timestamps
           with open("nft-text-descriptions/eth-mint-timestamps.json", "w") as f:
               json.dump(entries, f, indent=2, ensure_ascii=False)
 
-          # Step 4: Re-sort index.json by timestamp
+          # Re-sort index.json
           with open("nft-text-descriptions/index.json") as f:
               index = json.load(f)
 
@@ -166,10 +170,9 @@ jobs:
           with open("nft-text-descriptions/index.json", "w") as f:
               json.dump(index, f, indent=2, ensure_ascii=False)
 
+          with_ts = sum(1 for e in entries if e['timestamp'])
           print(f"\n=== DONE ===")
-          print(f"Total entries: {len(entries)}")
-          print(f"With timestamps: {sum(1 for e in entries if e['timestamp'])}")
-          print(f"Without timestamps: {sum(1 for e in entries if not e['timestamp'])}")
+          print(f"Total: {len(entries)}, with timestamps: {with_ts}, without: {len(entries)-with_ts}")
           print(f"\nFirst 5 (earliest):")
           for e in entries[:5]:
               print(f"  {e['datetime']} | ...{e['token_id'][-8:]}")
