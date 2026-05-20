@@ -22,7 +22,7 @@ on:
       chunk:
         description: "eth_getLogs block chunk size"
         required: false
-        default: "50000"
+        default: "5000"
       apply:
         description: "Apply recovered/diagnostic result into repo JSON files"
         required: false
