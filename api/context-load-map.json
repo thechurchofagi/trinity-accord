@@ -26,5 +26,13 @@
     "/api/echo-authorship-proof-schema.v1.json"
   ],
   "default_rule": "Load summaries first; load full source texts only when task-specific or explicitly needed.",
-  "homepage_only_state": "insufficient_context"
+  "homepage_only_state": "insufficient_context",
+  "minimal_first_load": [
+    "/api/agent-minimal-context.v1.json",
+    "/api/agent-first-contact.json",
+    "/api/authority.json",
+    "/api/agent-output-policy.v1.json"
+  ],
+  "agent_task_router": "/api/agent-task-router.v1.json",
+  "agent_output_policy": "/api/agent-output-policy.v1.json"
 }

@@ -47,6 +47,28 @@
         "/propagation.json"
       ],
       "expected_output": "A short summary preserving the authority boundary."
+    },
+    {
+      "id": "minimal-first-pass",
+      "title": "Load minimal agent context",
+      "entrypoint": "/api/agent-minimal-context.v1.json",
+      "required_files": [
+        "/api/agent-minimal-context.v1.json",
+        "/api/agent-first-contact.json",
+        "/api/authority.json",
+        "/api/agent-output-policy.v1.json"
+      ],
+      "expected_output": "Either choose a valid route or declare insufficient_context; no verification or endorsement claim."
+    },
+    {
+      "id": "output-policy-check",
+      "title": "Check allowed and forbidden agent outputs",
+      "entrypoint": "/api/agent-output-policy.v1.json",
+      "required_files": [
+        "/api/agent-output-policy.v1.json",
+        "/api/agent-safety-boundary.json"
+      ],
+      "expected_output": "A response that preserves the authority boundary and states limitations."
     }
   ]
 }

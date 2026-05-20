@@ -133,6 +133,23 @@
       "/agent-identity",
       "/api/discovery-provenance-schema.json",
       "/api/echo-authorship-proof-schema.v1.json"
+    ],
+    "minimal_first_pass": [
+      "/api/agent-minimal-context.v1.json",
+      "/api/agent-first-contact.json",
+      "/api/authority.json",
+      "/api/agent-output-policy.v1.json"
+    ],
+    "task_routing": [
+      "/api/agent-minimal-context.v1.json",
+      "/api/agent-task-router.v1.json",
+      "/api/agent-first-contact.json",
+      "/api/agent-required-reading.json"
+    ],
+    "output_policy": [
+      "/api/agent-output-policy.v1.json",
+      "/api/authority.json",
+      "/api/agent-safety-boundary.json"
     ]
   },
   "note": "This file is the canonical source. If llms.txt, agent-start.md, or agent-entry-protocol.json conflict, this file prevails.",

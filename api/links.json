@@ -80,7 +80,10 @@
     "/api/claim-registry.json",
     "/api/claim-registry-schema.v1.json",
     "/api/bitcoin-inscription-mirror-index.json",
-    "/api/ai-to-ai-orientation.gpt-5.5-thinking.v1.json"
+    "/api/ai-to-ai-orientation.gpt-5.5-thinking.v1.json",
+    "/api/agent-minimal-context.v1.json",
+    "/api/agent-output-policy.v1.json",
+    "/api/agent-task-router.v1.json"
   ],
   "legacy_machine": [
     "/api/echo-record-schema.v2.json"

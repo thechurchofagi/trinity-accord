@@ -45,6 +45,19 @@
 /llms.txt
 /llms-full.txt
 
+# BEGIN AGENT-P0-MINIMAL-CONTEXT
+# Minimal first-load context for agents
+# Load /api/agent-minimal-context.v1.json before assessment when context is limited.
+# Then load /api/agent-first-contact.json, /api/authority.json, and /api/agent-output-policy.v1.json.
+# Use /api/agent-task-router.v1.json only as an intent router to existing canonical routes.
+# It does not replace /api/agent-first-contact.json.
+# If only the homepage, README, or this short router has been read:
+# - assessment_state = insufficient_context
+# - verification_state_by_this_agent = unverified_by_this_agent
+# - allowed_output = orientation_or_insufficient_context_only
+# - forbidden_claims = verification, endorsement, formal_attestation, successor_reception, authority, amendment
+# END AGENT-P0-MINIMAL-CONTEXT
+
 # Structured data
 /memory-seed.json
 /api/authority.json
