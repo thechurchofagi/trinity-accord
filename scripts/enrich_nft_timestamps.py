@@ -179,7 +179,8 @@ def log_to_record(rpcs, log, status, method, block_cache, extra=None):
 def find_erc721_mints(rpcs, contract, token_ids, start_block, end_block, chunk, block_cache):
     # ERC-721: tokenId is in topics[3], not in data
     results = {}
-    print(f"  ERC721 precise mint by topic3: {len(token_ids)} tokens")
+    total = len(token_ids)
+    print(f"  ERC721 precise mint by topic3: {total} tokens")
     for i, tid in enumerate(sorted(token_ids, key=lambda x: int(x))):
         token_topic = pad_topic_int(tid)
         found = None
@@ -194,13 +195,14 @@ def find_erc721_mints(rpcs, contract, token_ids, start_block, end_block, chunk, 
                 break
         if found:
             results[tid] = found
-        if (i + 1) % 25 == 0:
-            print(f"    ERC721 precise checked {i + 1}/{len(token_ids)}; found {len(results)}")
+        if (i + 1) % 5 == 0 or (i + 1) == total:
+            print(f"    [progress] ERC721 precise: {i + 1}/{total} checked, {len(results)} found", flush=True)
     return results
 
 def find_erc721_first_transfers(rpcs, contract, missing_token_ids, start_block, end_block, chunk, block_cache):
     results = {}
-    print(f"  ERC721 first-transfer fallback by topic3: {len(missing_token_ids)} tokens")
+    total = len(missing_token_ids)
+    print(f"  ERC721 first-transfer fallback by topic3: {total} tokens")
     for i, tid in enumerate(sorted(missing_token_ids, key=lambda x: int(x))):
         token_topic = pad_topic_int(tid)
         found = None
@@ -218,14 +220,15 @@ def find_erc721_first_transfers(rpcs, contract, missing_token_ids, start_block, 
                 break
         if found:
             results[tid] = found
-        if (i + 1) % 25 == 0:
-            print(f"    ERC721 fallback checked {i + 1}/{len(missing_token_ids)}; found {len(results)}")
+        if (i + 1) % 5 == 0 or (i + 1) == total:
+            print(f"    [progress] ERC721 fallback: {i + 1}/{total} checked, {len(results)} found", flush=True)
     return results
 
 def find_erc1155_single_mints(rpcs, contract, token_ids, start_block, end_block, chunk, block_cache):
     results = {}
     target = set(str(x) for x in token_ids)
-    print(f"  ERC1155 TransferSingle from zero scan")
+    total_chunks = max(1, (end_block - start_block) // chunk + 1)
+    print(f"  ERC1155 TransferSingle from zero scan ({total_chunks} chunks)")
     cur = start_block
     scanned = 0
     while cur <= end_block:
@@ -244,15 +247,17 @@ def find_erc1155_single_mints(rpcs, contract, token_ids, start_block, end_block,
             )
             results[tid] = earliest(results.get(tid), rec)
         scanned += 1
-        if scanned % 50 == 0:
-            print(f"    ERC1155 single progress block {to_block:,}/{end_block:,}; found {len(results)}")
+        if scanned % 10 == 0 or to_block >= end_block:
+            pct = min(100, int(scanned * 100 / total_chunks))
+            print(f"    [progress] ERC1155 single: block {to_block:,}/{end_block:,} ({pct}%), {len(results)} found", flush=True)
         cur = to_block + 1
     return results
 
 def find_erc1155_batch_mints(rpcs, contract, token_ids, start_block, end_block, chunk, block_cache):
     results = {}
     target = set(str(x) for x in token_ids)
-    print(f"  ERC1155 TransferBatch from zero scan")
+    total_chunks = max(1, (end_block - start_block) // chunk + 1)
+    print(f"  ERC1155 TransferBatch from zero scan ({total_chunks} chunks)")
     cur = start_block
     scanned = 0
     while cur <= end_block:
@@ -275,8 +280,9 @@ def find_erc1155_batch_mints(rpcs, contract, token_ids, start_block, end_block, 
                 )
                 results[tid] = earliest(results.get(tid), rec)
         scanned += 1
-        if scanned % 50 == 0:
-            print(f"    ERC1155 batch progress block {to_block:,}/{end_block:,}; found {len(results)}")
+        if scanned % 10 == 0 or to_block >= end_block:
+            pct = min(100, int(scanned * 100 / total_chunks))
+            print(f"    [progress] ERC1155 batch: block {to_block:,}/{end_block:,} ({pct}%), {len(results)} found", flush=True)
         cur = to_block + 1
     return results
 
@@ -331,9 +337,11 @@ def main():
     block_cache = {}
     results = {}
     diagnostics = []
+    run_start = time.time()
 
     for contract, token_ids in groups.items():
-        print(f"\n=== {contract} ({len(token_ids)} tokens) ===")
+        elapsed = int(time.time() - run_start)
+        print(f"\n=== {contract} ({len(token_ids)} tokens) | elapsed: {elapsed // 60}m {elapsed % 60}s ===", flush=True)
         found = {}
 
         try:
@@ -341,6 +349,9 @@ def main():
         except Exception as e:
             diagnostics.append({"contract": contract, "stage": "erc721_mint", "error": repr(e)})
             print(f"  ERC721 mint stage failed: {e}", file=sys.stderr)
+
+        elapsed = int(time.time() - run_start)
+        print(f"  [checkpoint] after ERC721 mint: {len(found)} found | elapsed: {elapsed // 60}m {elapsed % 60}s", flush=True)
 
         missing = set(token_ids) - set(found)
         try:
@@ -351,6 +362,9 @@ def main():
             diagnostics.append({"contract": contract, "stage": "erc1155_single", "error": repr(e)})
             print(f"  ERC1155 single stage failed: {e}", file=sys.stderr)
 
+        elapsed = int(time.time() - run_start)
+        print(f"  [checkpoint] after ERC1155 single: {len(found)} found | elapsed: {elapsed // 60}m {elapsed % 60}s", flush=True)
+
         missing = set(token_ids) - set(found)
         try:
             batch = find_erc1155_batch_mints(rpcs, contract, missing, args.start_block, end_block, args.chunk, block_cache)
@@ -359,6 +373,9 @@ def main():
         except Exception as e:
             diagnostics.append({"contract": contract, "stage": "erc1155_batch", "error": repr(e)})
             print(f"  ERC1155 batch stage failed: {e}", file=sys.stderr)
+
+        elapsed = int(time.time() - run_start)
+        print(f"  [checkpoint] after ERC1155 batch: {len(found)} found | elapsed: {elapsed // 60}m {elapsed % 60}s", flush=True)
 
         missing = set(token_ids) - set(found)
         try:
@@ -376,7 +393,8 @@ def main():
                 **rec,
             }
 
-        print(f"  Found {len(found)}/{len(token_ids)}")
+        elapsed = int(time.time() - run_start)
+        print(f"  Found {len(found)}/{len(token_ids)} | elapsed: {elapsed // 60}m {elapsed % 60}s", flush=True)
 
     timestamp_entries = []
     missing_entries = []
