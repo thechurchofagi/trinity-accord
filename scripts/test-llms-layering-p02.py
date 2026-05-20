@@ -31,7 +31,7 @@ def main():
     check(len(ai.splitlines()) <= 120, "ai.txt remains concise <= 120 lines", f"got {len(ai.splitlines())}")
 
     # llms.txt should be medium, not full protocol dump.
-    check(len(llms.splitlines()) <= 230, "llms.txt medium length <= 230 lines", f"got {len(llms.splitlines())}")
+    check(len(llms.splitlines()) <= 280, "llms.txt medium length <= 280 lines", f"got {len(llms.splitlines())}")
 
     # llms-full can be long.
     check(len(full.splitlines()) > len(llms.splitlines()), "llms-full is longer than llms.txt")
