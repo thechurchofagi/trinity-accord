@@ -53,13 +53,17 @@ jobs:
           if [ "${{ github.event.inputs.apply }}" = "true" ]; then
             args+=(--apply)
           fi
-          python3 scripts/diagnose_single_nft_timestamp.py "${args[@]}"
+          set +e
+          python3 scripts/diagnose_single_nft_timestamp.py "${args[@]}" 2>&1 | tee diagnosis-output.log
+          echo "Exit code: ${PIPESTATUS[0]}" >> diagnosis-output.log
+          echo "Exit code: ${PIPESTATUS[0]}"
 
       - name: Upload diagnosis artifacts
         uses: actions/upload-artifact@v4
         with:
           name: single-token-timestamp-diagnosis
           path: |
+            diagnosis-output.log
             nft-text-descriptions/single-token-timestamp-diagnosis.json
             nft-text-descriptions/eth-mint-timestamps.json
             nft-text-descriptions/missing-timestamps.json
@@ -67,6 +71,7 @@ jobs:
             nft-text-descriptions/index.json
 
       - name: Commit and push if changed
+        if: always()
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
