@@ -1,0 +1,21 @@
+{
+  "schema": "trinityaccord.single-token-timestamp-diagnosis.v1",
+  "contract": "0x019372bBee377109b8Eae66d7267f5C4EaAdBb79",
+  "token_id": "85210329807936527805363210873332413577559846505703131855064182995898737885245",
+  "scan_window": {
+    "start_block": 0,
+    "end_block": 0,
+    "mode": "skipped_no_rpc"
+  },
+  "recovered": false,
+  "recovered_record": null,
+  "interface_probes": {},
+  "token_existence_probes": [],
+  "event_attempts": [],
+  "final_status": "skipped_no_rpc_urls_configured",
+  "boundary": [
+    "Recovered timestamp, if present, is an Ethereum event block timestamp.",
+    "Token existence probes do not prove historical metadata truth.",
+    "If no standard event is found, no timestamp is fabricated."
+  ]
+}
