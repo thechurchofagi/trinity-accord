@@ -31,6 +31,8 @@ def make_payload(readback_length=160):
             "bitcoin_originals_prevail": True,
         },
         "requested_archive_kind": "agent_declared_verification_archive",
+        "route_id": "sub_v6_agent_declared_template_archive",
+        "single_mandatory_route": True,
         "agent_declared_protocol_level": "V4",
         "evidence_requirement_mode": "waived_for_v0_v5",
         "record_intent": "auto_archive_candidate",
