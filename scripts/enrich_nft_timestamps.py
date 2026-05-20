@@ -14,8 +14,62 @@ ROOT = Path(__file__).resolve().parents[1]
 PROGRESS_LOG = ROOT / "nft-text-descriptions" / "enrichment-progress.log"
 SUMMARY_FILE = os.environ.get("GITHUB_STEP_SUMMARY")
 
+# GitHub API progress push (for real-time monitoring)
+GH_TOKEN = os.environ.get("GITHUB_TOKEN") or os.environ.get("GH_TOKEN")
+GH_REPO = os.environ.get("GITHUB_REPOSITORY")  # e.g. "owner/repo"
+GH_PROGRESS_BRANCH = os.environ.get("PROGRESS_BRANCH", "enrich-progress")
+_last_push = 0
+
+def _push_progress_to_api():
+    """Push progress log to GitHub via Contents API (every 60s)."""
+    global _last_push
+    now = time.time()
+    if now - _last_push < 60:
+        return
+    _last_push = now
+    if not GH_TOKEN or not GH_REPO:
+        return
+    if not PROGRESS_LOG.exists():
+        return
+    try:
+        import base64
+        content_b64 = base64.b64encode(PROGRESS_LOG.read_bytes()).decode()
+        # Get current file SHA if exists
+        url = f"https://api.github.com/repos/{GH_REPO}/contents/nft-text-descriptions/enrichment-progress.log?ref={GH_PROGRESS_BRANCH}"
+        req = urllib.request.Request(url, headers={
+            "Accept": "application/vnd.github+json",
+            "Authorization": f"Bearer {GH_TOKEN}",
+            "User-Agent": "trinity-accord-enricher/1.0",
+        })
+        sha = None
+        try:
+            with urllib.request.urlopen(req, timeout=10) as resp:
+                sha = json.loads(resp.read()).get("sha")
+        except Exception:
+            pass
+        # Create or update
+        body = {
+            "message": "progress update",
+            "content": content_b64,
+            "branch": GH_PROGRESS_BRANCH,
+        }
+        if sha:
+            body["sha"] = sha
+        put_url = f"https://api.github.com/repos/{GH_REPO}/contents/nft-text-descriptions/enrichment-progress.log"
+        data = json.dumps(body).encode()
+        req2 = urllib.request.Request(put_url, data=data, method="PUT", headers={
+            "Accept": "application/vnd.github+json",
+            "Authorization": f"Bearer {GH_TOKEN}",
+            "Content-Type": "application/json",
+            "User-Agent": "trinity-accord-enricher/1.0",
+        })
+        with urllib.request.urlopen(req2, timeout=15) as resp:
+            pass  # success
+    except Exception as e:
+        print(f"  [api-push-warn] {e}", file=sys.stderr)
+
 def log_progress(msg: str):
-    """Write progress to stdout, log file, and GITHUB_STEP_SUMMARY."""
+    """Write progress to stdout, log file, GITHUB_STEP_SUMMARY, and push via API."""
     print(msg)
     try:
         with open(PROGRESS_LOG, "a", encoding="utf-8") as f:
@@ -28,6 +82,7 @@ def log_progress(msg: str):
                 f.write(msg + "\n")
         except Exception:
             pass
+    _push_progress_to_api()
 
 ERC721_TRANSFER_TOPIC = "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef"
 ERC1155_TRANSFER_SINGLE_TOPIC = "0xc3d58168c5ae7397731d063d5bbf3d657854427343f4c083240f7aacaa2d0f62"

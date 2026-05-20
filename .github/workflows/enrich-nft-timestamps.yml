@@ -30,37 +30,24 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Create progress branch
+        env:
+          PROGRESS_BRANCH: enrich-progress-${{ github.run_id }}
+        run: |
+          git checkout -b "$PROGRESS_BRANCH" 2>/dev/null || true
+          git push origin "$PROGRESS_BRANCH" 2>/dev/null || true
+          git checkout main
+
       - name: Enrich NFT mint timestamps
         env:
           ETH_RPC_URLS: ${{ secrets.ETH_RPC_URLS }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PROGRESS_BRANCH: enrich-progress-${{ github.run_id }}
         run: |
-          # Create progress branch
-          git checkout -b "$PROGRESS_BRANCH" 2>/dev/null || true
-
-          # Start background progress committer (every 60s)
-          (
-            while true; do
-              sleep 60
-              if [ -f nft-text-descriptions/enrichment-progress.log ]; then
-                git add nft-text-descriptions/enrichment-progress.log 2>/dev/null
-                git commit -m "progress update" --allow-empty 2>/dev/null || true
-                git push origin "$PROGRESS_BRANCH" 2>/dev/null || true
-              fi
-            done
-          ) &
-          PROGRESS_PID=$!
-
           python3 scripts/enrich_nft_timestamps.py \
             --start-block "${{ github.event.inputs.start_block }}" \
             --end-block "${{ github.event.inputs.end_block }}" \
             --chunk "${{ github.event.inputs.chunk }}"
-
-          kill $PROGRESS_PID 2>/dev/null || true
-
-          # Switch back to main for commit step
-          git checkout main
 
       - name: Upload timestamp diagnostics
         uses: actions/upload-artifact@v4
