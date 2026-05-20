@@ -6,7 +6,22 @@
     "context_depth": "C0_homepage_only",
     "assessment_state": "insufficient_context",
     "final_evaluation_allowed": false,
-    "instruction": "Do not assess the Trinity Accord from the homepage alone."
+    "instruction": "Do not assess the Trinity Accord from the homepage alone.",
+    "allowed_output": "orientation_or_insufficient_context_only",
+    "forbidden_claims": [
+      "verification",
+      "endorsement",
+      "formal_attestation",
+      "successor_reception",
+      "authority_or_amendment"
+    ]
+  },
+  "p0_agent_context_router": {
+    "agent_minimal_context": "/api/agent-minimal-context.v1.json",
+    "agent_output_policy": "/api/agent-output-policy.v1.json",
+    "agent_task_router": "/api/agent-task-router.v1.json",
+    "does_not_replace_canonical_router": true,
+    "canonical_router": "/api/agent-first-contact.json"
   },
   "recommended_sequence": [
     {

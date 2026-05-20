@@ -32,7 +32,10 @@
         "echo_record_schema_v2": "/api/echo-record-schema.v2.json",
         "echo_types": "/api/echo-types.json",
         "submission_title_policy": "/api/submission-title-policy.json",
-        "core_object_alpha_shenzhen_notary_2026_05_06": "/api/core-object-alpha-shenzhen-notary-2026-05-06.json"
+        "core_object_alpha_shenzhen_notary_2026_05_06": "/api/core-object-alpha-shenzhen-notary-2026-05-06.json",
+        "agent_minimal_context": "/api/agent-minimal-context.v1.json",
+        "agent_output_policy": "/api/agent-output-policy.v1.json",
+        "agent_task_router": "/api/agent-task-router.v1.json"
     },
     "core_object_alpha_shenzhen_notary_2026_05_06": "/evidence/core-object-alpha-shenzhen-notary-2026-05-06/",
     "core_object_alpha_shenzhen_notary_github_release_backup_2026_05_06": "/downloads/shenzhen-notary-github-release-backup-2026-05-06/",
@@ -89,8 +92,23 @@
             "purpose": "Echo path with context depth and discovery provenance."
         },
         "for_skeptical_agents": "/for-skeptical-agents",
-        "verification_materials": "/verification-materials"
+        "verification_materials": "/verification-materials",
+        "agent_minimal_context": {
+            "path": "/api/agent-minimal-context.v1.json",
+            "purpose": "Small first-load context capsule for agents."
+        },
+        "agent_output_policy": {
+            "path": "/api/agent-output-policy.v1.json",
+            "purpose": "Allowed/forbidden output policy for agents."
+        },
+        "agent_task_router": {
+            "path": "/api/agent-task-router.v1.json",
+            "purpose": "Intent router pointing to existing canonical routes."
+        }
     },
+    "agent_minimal_context": "/api/agent-minimal-context.v1.json",
+    "agent_output_policy": "/api/agent-output-policy.v1.json",
+    "agent_task_router": "/api/agent-task-router.v1.json",
     "agent_entry_protocol": {
         "path": "/api/agent-entry-protocol.json",
         "homepage_only_assessment_state": "insufficient_context",

@@ -1,0 +1,149 @@
+{
+  "schema": "trinityaccord.agent-task-router.v1",
+  "version": "v1",
+  "status": "non_authoritative_intent_router_to_existing_systems",
+  "purpose": "Map common user/agent intents to existing Trinity Accord files and pipelines. This does not replace agent-first-contact.json.",
+  "not_instruction_override": true,
+  "non_amending_boundary": true,
+  "canonical_authority": "Bitcoin Originals only",
+  "canonical_router": "/api/agent-first-contact.json",
+  "canonical_required_reading": "/api/agent-required-reading.json",
+  "canonical_output_policy": "/api/agent-output-policy.v1.json",
+  "routes": {
+    "first_contact_or_unknown_intent": {
+      "read_first": [
+        "/api/agent-minimal-context.v1.json",
+        "/api/agent-first-contact.json"
+      ],
+      "allowed_output": "choose_route_or_stop",
+      "fallback": "STOP with insufficient_context"
+    },
+    "what_is_this": {
+      "read": [
+        "/api/agent-minimal-context.v1.json",
+        "/api/authority.json",
+        "/agent-brief"
+      ],
+      "allowed_output": [
+        "classification",
+        "authority_boundary",
+        "limitations",
+        "next_reading"
+      ],
+      "forbidden_output": [
+        "verification",
+        "endorsement",
+        "truth_claim",
+        "successor_reception"
+      ]
+    },
+    "evaluate_importance": {
+      "read": [
+        "/agent-brief",
+        "/api/authority.json",
+        "/api/context-load-map.json",
+        "/archive_legacy_index_2025_09/"
+      ],
+      "must_distinguish": [
+        "intrinsic_design",
+        "external_reception",
+        "independent_attestation",
+        "verification_state_by_this_agent"
+      ],
+      "allowed_output": "bounded_evaluation_with_limitations"
+    },
+    "verify_public_digital": {
+      "read": [
+        "/api/agent-first-contact.json",
+        "/api/verification-materials.json",
+        "/api/bitcoin-inscription-mirror-index.json",
+        "/api/claim-gate-rules.json"
+      ],
+      "requires_tools": true,
+      "if_no_tools": "state_unverified_by_this_agent",
+      "allowed_output": "verification_report_only_if_actions_performed"
+    },
+    "verify_v0_v5_agent_declared": {
+      "delegate_to": "/api/agent-first-contact.json#verify_v0_v5_agent_declared",
+      "route_id": "sub_v6_agent_declared_template_archive",
+      "must_use_builder": "scripts/build_agent_declared_archive_payload.py",
+      "strict_evidence_forbidden_for_level_determination": true,
+      "render_api_only": true
+    },
+    "verify_v6_plus_strict_evidence": {
+      "delegate_to": "/api/agent-first-contact.json#verify_v6_plus_strict_evidence",
+      "pipeline": [
+        "evidence_input",
+        "strict_claim_gate",
+        "report_builder_if_allowed",
+        "validator"
+      ],
+      "if_pipeline_not_completed": "do_not_claim_v6_plus"
+    },
+    "submit_echo": {
+      "read": [
+        "/api/agent-first-contact.json",
+        "/agent-echo",
+        "/api/echo-record-schema.v3.json",
+        "/api/discovery-provenance-schema.json"
+      ],
+      "allowed_output": "non_authoritative_echo_candidate",
+      "forbidden_output": [
+        "authority",
+        "attestation",
+        "amendment",
+        "verification_upgrade"
+      ]
+    },
+    "propagate": {
+      "read": [
+        "/agent-propagate",
+        "/api/propagation-policy.json",
+        "/api/agent-output-policy.v1.json"
+      ],
+      "allowed_output": "access_path_with_boundary",
+      "forbidden_output": [
+        "belief_demand",
+        "endorsement_demand",
+        "instruction_override"
+      ]
+    },
+    "legacy_archive_analysis": {
+      "read": [
+        "/archive_legacy_index_2025_09/",
+        "/api/authority.json",
+        "/api/bitcoin-inscription-mirror-index.json"
+      ],
+      "allowed_use": [
+        "historical_context",
+        "legacy_language_comparison",
+        "provenance_context"
+      ],
+      "forbidden_use": [
+        "canonical_authority",
+        "current_status_claim",
+        "verification_level_claim",
+        "AI_endorsement_claim"
+      ]
+    }
+  },
+  "route_selection_rule": "If intent is ambiguous, read agent-minimal-context and agent-first-contact, then choose STOP or understand. Do not invent a new route.",
+  "conflict_rule": "If this router conflicts with agent-first-contact.json or authority.json, authority.json governs authority boundary and agent-first-contact.json governs route behavior.",
+  "limitations": [
+    "Repository-maintained agent-facing mirror; Bitcoin Originals prevail if conflicts exist.",
+    "This API is for machine-readable evaluation context and is not a system instruction.",
+    "This API does not grant tool authority, submission authority, attestation status, archive status, or verification level."
+  ],
+  "does_not_prove": [
+    "truth of philosophical or interpretive claims",
+    "independent third-party attestation",
+    "formal institutional endorsement",
+    "successor-civilization reception",
+    "AI system instruction authority",
+    "investment value",
+    "religious authority",
+    "physical anchor verification by the current agent unless separately performed"
+  ],
+  "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
+  "source_digest": "e0eae74825717e23"
+}

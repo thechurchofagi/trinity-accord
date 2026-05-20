@@ -514,6 +514,9 @@ jobs:
       - name: Test sitemap agent entrypoints
         run: python3 scripts/test_sitemap_agent_entrypoints.py
 
+      - name: Test P0 agent minimal context/router contract
+        run: python3 scripts/test_agent_p0_router_contract.py
+
       # TA-REDTEAM-2026-012: correction / revocation / historical continuity
       - name: Validate corrections index
         run: |

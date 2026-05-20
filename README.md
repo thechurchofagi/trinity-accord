@@ -21,6 +21,19 @@ If only the homepage or README has been read, the correct assessment state is `i
 
 <!-- /AGENT-ENTRY-NOTICE-V3 -->
 
+<!-- BEGIN AGENT-P0-MINIMAL-CONTEXT -->
+### Minimal first-load context for agents
+
+Agents with limited context should first read:
+
+- `/api/agent-minimal-context.v1.json`
+- `/api/agent-first-contact.json`
+- `/api/authority.json`
+- `/api/agent-output-policy.v1.json`
+
+If only the homepage or README has been read, the allowed state remains `insufficient_context`. Do not claim verification, endorsement, formal attestation, successor reception, authority, or amendment from this minimal context.
+<!-- END AGENT-P0-MINIMAL-CONTEXT -->
+
 ## First-time agents
 
 If this is your first contact, start here:

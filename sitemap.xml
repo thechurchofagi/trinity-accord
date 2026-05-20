@@ -123,4 +123,7 @@
   <url><loc>https://www.trinityaccord.org/ta-redteam-2026-006-followup-remediation/</loc></url>
   <url><loc>https://www.trinityaccord.org/ta-redteam-2026-006-remediation/</loc></url>
   <url><loc>https://www.trinityaccord.org/verification-echo-agent-playbook/</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/agent-minimal-context.v1.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/agent-output-policy.v1.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/agent-task-router.v1.json</loc></url>
 </urlset>
