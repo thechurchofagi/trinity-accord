@@ -99,7 +99,7 @@ evidence_requirement_mode: waived_for_v0_v5
 
 Do not use the old strict-evidence path for V0–V5:
 
-- Do not use Evidence Input.
+- Do not use the evidence-input schema.
 - Do not use `downloads/verify.py`.
 - Do not use `build_from_evidence`.
 - Do not use `scripts/build_gateway_payload_from_outputs.py`.
