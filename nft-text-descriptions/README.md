@@ -6,9 +6,19 @@
 
 ## 当前进度
 
-- **已完成**: 174 / 175
-- **剩余**: 1
+- **已完成**: 175 / 175
+- **剩余**: 0
 - **最后更新**: 2026-05-20
+
+## 边界说明
+
+本目录镜像的是 175 个 NFT metadata 中的 name + description 文字，不包含音乐和图像正文。
+
+这些文本适合作为 ASIMilestones / AGIMilestones historical chronicle context，但不等同于：
+- canonical Bitcoin Original authority
+- external factual verification
+- Arweave/CAR integrity proof
+- image or music content verification
 
 ## 数据来源
 

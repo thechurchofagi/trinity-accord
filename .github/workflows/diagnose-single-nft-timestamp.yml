@@ -1,0 +1,79 @@
+name: Diagnose Single NFT Timestamp
+
+on:
+  workflow_dispatch:
+    inputs:
+      contract:
+        description: "NFT contract address"
+        required: false
+        default: "0x019372bBee377109b8Eae66d7267f5C4EaAdBb79"
+      token_id:
+        description: "NFT token ID"
+        required: false
+        default: "85210329807936527805363210873332413577559846505703131855064182995898737885245"
+      start_block:
+        description: "Fallback ETH start block"
+        required: false
+        default: "18000000"
+      end_block:
+        description: "ETH end block or latest"
+        required: false
+        default: "latest"
+      chunk:
+        description: "eth_getLogs block chunk size"
+        required: false
+        default: "50000"
+      apply:
+        description: "Apply recovered/diagnostic result into repo JSON files"
+        required: false
+        default: "true"
+
+permissions:
+  contents: write
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Diagnose single NFT timestamp
+        env:
+          ETH_RPC_URLS: ${{ secrets.ETH_RPC_URLS }}
+        run: |
+          args=(
+            --contract "${{ github.event.inputs.contract }}"
+            --token-id "${{ github.event.inputs.token_id }}"
+            --start-block "${{ github.event.inputs.start_block }}"
+            --end-block "${{ github.event.inputs.end_block }}"
+            --chunk "${{ github.event.inputs.chunk }}"
+          )
+          if [ "${{ github.event.inputs.apply }}" = "true" ]; then
+            args+=(--apply)
+          fi
+          python3 scripts/diagnose_single_nft_timestamp.py "${args[@]}"
+
+      - name: Upload diagnosis artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: single-token-timestamp-diagnosis
+          path: |
+            nft-text-descriptions/single-token-timestamp-diagnosis.json
+            nft-text-descriptions/eth-mint-timestamps.json
+            nft-text-descriptions/missing-timestamps.json
+            nft-text-descriptions/timestamp-enrichment-report.json
+            nft-text-descriptions/index.json
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add nft-text-descriptions/single-token-timestamp-diagnosis.json \
+                  nft-text-descriptions/eth-mint-timestamps.json \
+                  nft-text-descriptions/missing-timestamps.json \
+                  nft-text-descriptions/timestamp-enrichment-report.json \
+                  nft-text-descriptions/index.json
+          git diff --cached --quiet && echo "No changes" && exit 0
+          git commit -m "fix: diagnose missing NFT timestamp"
+          git push

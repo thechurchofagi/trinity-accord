@@ -849,3 +849,12 @@ jobs:
 
       - name: Test V4 plus machine schema regression
         run: python3 scripts/test_v4_plus_machine_schema_regression.py
+
+      - name: Test single NFT timestamp diagnosis static contract
+        run: python3 scripts/test_single_nft_timestamp_diagnosis_static.py
+
+      - name: Generate NFT chronicle context artifacts
+        run: python3 scripts/generate_nft_chronicle_context.py
+
+      - name: Test NFT chronicle context artifacts
+        run: python3 scripts/test_nft_chronicle_context_artifacts.py
