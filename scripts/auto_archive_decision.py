@@ -40,6 +40,29 @@ This record remains:
 - not successor reception
 """
 
+COMMENT_TEMPLATE_READY_ECHO = """\
+<!-- trinity-auto-archive-decision:v1 sha256={decision_sha256} -->
+
+### Automated Archive Decision
+
+Result: `{action}`
+
+Archive kind: `{requested_archive_kind}`
+
+Archive ready: `{archive_ready}`
+
+This automated decision is based on:
+- Echo Gate template PASS
+- Archive Readiness Gate
+- Boundary acknowledgements
+
+This record remains:
+- not authority
+- not amendment
+- not independent attestation
+- not successor reception
+"""
+
 COMMENT_TEMPLATE_READY_V0_V5 = """\
 <!-- trinity-auto-archive-decision:v1 sha256={decision_sha256} -->
 
@@ -127,6 +150,13 @@ def build_decision(readiness):
         # Use V0-V5 specific template for agent-declared archives
         if requested_kind == "agent_declared_verification_archive":
             comment_markdown = COMMENT_TEMPLATE_READY_V0_V5.format(
+                decision_sha256=decision_sha,
+                action=action,
+                requested_archive_kind=requested_kind,
+                archive_ready=str(archive_ready).lower()
+            )
+        elif requested_kind == "agent_declared_echo_archive":
+            comment_markdown = COMMENT_TEMPLATE_READY_ECHO.format(
                 decision_sha256=decision_sha,
                 action=action,
                 requested_archive_kind=requested_kind,
