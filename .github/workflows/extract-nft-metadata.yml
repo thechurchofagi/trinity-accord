@@ -72,60 +72,65 @@ jobs:
               url = f"https://api.github.com/repos/{REPO}/releases/assets/{asset_id}"
               try:
                   resp = api_get(url, accept="application/octet-stream")
-                  chunks = []
-                  total = 0
-                  while True:
-                      chunk = resp.read(8192)
-                      if not chunk:
-                          break
-                      chunks.append(chunk)
-                      total += len(chunk)
-                      if total > 500000:
-                          break
-                  data = b"".join(chunks)
+                  data = resp.read()
               except Exception as e:
                   return (contract, token_id, f"download error: {e}")
 
-              # Parse tar
-              pos = 0
-              while pos + 512 <= len(data):
-                  header = data[pos:pos+512]
-                  if header == b'\x00' * 512:
-                      break
-                  fname = header[0:100].split(b'\x00')[0].decode('utf-8', errors='replace').strip()
-                  sz_oct = header[124:136].split(b'\x00')[0].decode('utf-8', errors='replace').strip()
-                  try:
-                      sz = int(sz_oct, 8) if sz_oct else 0
-                  except:
-                      break
-
-                  if fname.endswith('metadata.car'):
-                      car = data[pos+512:pos+512+sz]
-                      # Try to find JSON in CAR
-                      text = car.decode('utf-8', errors='replace')
-                      for needle in ['{"name":', '{"Name":', '{"NAME":', '{"description":', '{"Description":', '{"']:
-                          idx = text.find(needle)
-                          if idx >= 0:
-                              depth = 0
-                              for i in range(idx, len(text)):
-                                  if text[i] == '{': depth += 1
-                                  elif text[i] == '}':
-                                      depth -= 1
-                                      if depth == 0:
-                                          try:
-                                              obj = json.loads(text[idx:i+1])
-                                              name = obj.get("name") or obj.get("Name") or obj.get("NAME") or "Unknown"
-                                              desc = obj.get("description") or obj.get("Description") or "No description."
-                                              fname_md = f"{contract}_{token_id}.md"
-                                              md = f"# {name}\n\n**Contract**: `{contract}`\n\n**Token ID**: `{token_id}`\n\n## Description\n\n{desc}\n"
-                                              (OUT_DIR / fname_md).write_text(md, encoding="utf-8")
-                                              return (contract, token_id, name)
-                                          except:
+              # Parse tar using tarfile module (more robust than manual parsing)
+              try:
+                  with tarfile.open(fileobj=io.BytesIO(data)) as tf:
+                      for member in tf.getmembers():
+                          if not member.name.endswith('metadata.car'):
+                              continue
+                          f = tf.extractfile(member)
+                          if not f:
+                              continue
+                          car = f.read()
+                          # Try to find JSON in CAR data using multiple strategies
+                          # Strategy 1: scan for JSON start markers
+                          text = car.decode('utf-8', errors='replace')
+                          best_obj = None
+                          for needle in ['{"name":', '{"Name":', '{"NAME":', '{"description":', '{"Description":', '{"']:
+                              idx = text.find(needle)
+                              if idx < 0:
+                                  continue
+                              # Try progressively larger substrings
+                              for end_offset in range(idx + 50, min(idx + 50000, len(text)), 100):
+                                  snippet = text[idx:end_offset]
+                                  brace_count = 0
+                                  last_close = -1
+                                  for ci, ch in enumerate(snippet):
+                                      if ch == '{':
+                                          brace_count += 1
+                                      elif ch == '}':
+                                          brace_count -= 1
+                                          if brace_count == 0:
+                                              last_close = ci
                                               break
-                      return (contract, token_id, "JSON parse failed")
-                  padded = ((sz + 511) // 512) * 512
-                  pos += 512 + padded
-              return (contract, token_id, "no metadata.car")
+                                  if last_close >= 0:
+                                      try:
+                                          obj = json.loads(snippet[:last_close+1])
+                                          if "name" in obj or "Name" in obj or "NAME" in obj:
+                                              best_obj = obj
+                                              break
+                                          elif best_obj is None:
+                                              best_obj = obj
+                                      except json.JSONDecodeError:
+                                          continue
+                              if best_obj and ("name" in best_obj or "Name" in best_obj or "NAME" in best_obj):
+                                  break
+
+                          if best_obj:
+                              name = best_obj.get("name") or best_obj.get("Name") or best_obj.get("NAME") or "Unknown"
+                              desc = best_obj.get("description") or best_obj.get("Description") or "No description."
+                              fname_md = f"{contract}_{token_id}.md"
+                              md = f"# {name}\n\n**Contract**: `{contract}`\n\n**Token ID**: `{token_id}`\n\n## Description\n\n{desc}\n"
+                              (OUT_DIR / fname_md).write_text(md, encoding="utf-8")
+                              return (contract, token_id, name)
+                          return (contract, token_id, "JSON parse failed")
+                  return (contract, token_id, "no metadata.car in tar")
+              except tarfile.TarError as e:
+                  return (contract, token_id, f"tar error: {e}")
 
           success = fail = 0
           for bs in range(0, len(todo), 5):
