@@ -361,6 +361,15 @@ jobs:
       - name: Test Echo triage boundary behavior
         run: python3 scripts/test_triage_echo_issue_boundary.py
 
+      - name: Test Echo rate limit policy buckets
+        run: python3 scripts/test_echo_rate_limit_policy.py
+
+      - name: Test Echo triage Gateway rate identity
+        run: python3 scripts/test_echo_triage_gateway_rate_identity.py
+
+      - name: Test Pure Echo archive decision wording
+        run: python3 scripts/test_pure_echo_archive_decision_wording.py
+
       - name: Test Echo issue intake aliases
         run: python3 scripts/test_echo_issue_intake_aliases.py
 

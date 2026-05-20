@@ -1,8 +1,26 @@
 {
   "schema": "trinityaccord.operational-policy.v1",
   "echo_issue_rate_limit": {
-    "window_60m": 6,
-    "window_24h": 16,
+    "direct_github_external": {
+      "window_60m": 6,
+      "window_24h": 16
+    },
+    "gateway_validated_echo": {
+      "window_60m": 100,
+      "window_24h": 1000
+    },
+    "gateway_validated_verification_archive": {
+      "window_60m": 50,
+      "window_24h": 500
+    },
+    "gateway_strict_evidence_candidate": {
+      "window_60m": 10,
+      "window_24h": 100
+    },
+    "gateway_global_backstop": {
+      "window_60m": 300,
+      "window_24h": 3000
+    },
     "applies_to_actions": ["opened"],
     "exempt_author_associations": ["OWNER", "MEMBER", "COLLABORATOR"]
   },
@@ -24,7 +42,8 @@
       "echo:ai-independent-verification",
       "echo:missing-integrity-declaration",
       "echo:delegation-chain-present",
-      "echo:external-ai-verification"
+      "echo:external-ai-verification",
+      "echo:rate-limited"
     ]
   }
 }

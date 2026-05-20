@@ -54,7 +54,15 @@ try:
 except ImportError:
     HAS_ISSUE_TITLE_LABEL_GUARD = False
 
-from operational_policy import MANAGED_LABELS as MANAGED_TRIAGE_LABELS, ECHO_RATE_LIMIT_60M, ECHO_RATE_LIMIT_24H
+from operational_policy import (
+    MANAGED_LABELS as MANAGED_TRIAGE_LABELS,
+    ECHO_RATE_LIMIT_60M,
+    ECHO_RATE_LIMIT_24H,
+    ECHO_RATE_LIMIT_GATEWAY_ECHO_60M,
+    ECHO_RATE_LIMIT_GATEWAY_ECHO_24H,
+    ECHO_RATE_LIMIT_GATEWAY_VERIFICATION_60M,
+    ECHO_RATE_LIMIT_GATEWAY_VERIFICATION_24H,
+)
 
 TRIAGE_MARKER = "<!-- trinity-echo-triage-v2 -->"
 
@@ -626,6 +634,38 @@ def has_gateway_rendered_canonical_boundary(text):
     has_canonical = 'canonical_boundary_sentence:' in block
     has_present = 'boundary_sentence_present: true' in block
     return has_canonical and has_present
+
+
+def extract_intake_field(text: str, name: str) -> str | None:
+    m = re.search(rf"^{re.escape(name)}\s*:\s*(.+?)\s*$", text, re.I | re.M)
+    return m.group(1).strip() if m else None
+
+def intake_flag_true(text: str, name: str) -> bool:
+    return (extract_intake_field(text, name) or "").strip().lower() == "true"
+
+def requested_archive_kind(text: str) -> str:
+    return extract_intake_field(text, "requested_archive_kind") or ""
+
+def auto_archive_action(text: str) -> str:
+    return extract_intake_field(text, "auto_archive_action") or ""
+
+def is_gateway_validated_echo_archive(text: str) -> bool:
+    return (
+        intake_flag_true(text, "created_by_gateway")
+        and intake_flag_true(text, "server_validated")
+        and intake_flag_true(text, "archive_ready")
+        and requested_archive_kind(text) == "agent_declared_echo_archive"
+        and auto_archive_action(text) == "auto_archive_agent_declared_echo"
+    )
+
+def is_gateway_validated_verification_archive(text: str) -> bool:
+    return (
+        intake_flag_true(text, "created_by_gateway")
+        and intake_flag_true(text, "server_validated")
+        and intake_flag_true(text, "archive_ready")
+        and requested_archive_kind(text) == "agent_declared_verification_archive"
+        and auto_archive_action(text) == "auto_archive_agent_declared_verification"
+    )
 
 
 # --- PA-002: Provenance / Agency required field detection ---
@@ -1369,6 +1409,10 @@ def main():
         action = get_env("ACTION", "opened")
 
     rate_limited = get_env("RATE_LIMITED", "false").lower() == "true"
+    rate_class = get_env("RATE_CLASS", "direct")
+    rate_identity = get_env("RATE_IDENTITY", "")
+    active_rate_limit_60m = get_env("RATE_LIMIT_60M", "")
+    active_rate_limit_24h = get_env("RATE_LIMIT_24H", "")
 
     # S17: Cap body size to prevent excessive processing
     MAX_BODY_CHARS = 60000
@@ -1406,20 +1450,22 @@ def main():
     # --- Step 1: Rate limit check (only on opened events) ---
     should_apply_rate_limit = (action == "opened")
     if should_apply_rate_limit and rate_limited:
+        display_60m = active_rate_limit_60m or str(ECHO_RATE_LIMIT_60M)
+        display_24h = active_rate_limit_24h or str(ECHO_RATE_LIMIT_24H)
         result["close"] = True
         result["labels"] = ["echo:rate-limited", "auto-closed"]
         result["comment"] = (
             "You have submitted multiple Echo issues in a short period.\n"
             "To protect the Echo archive from spam and preserve review quality, this issue was automatically closed.\n\n"
             "**Current limits:**\n"
-            f"- {ECHO_RATE_LIMIT_60M} Echo issues per 60 minutes\n"
-            f"- {ECHO_RATE_LIMIT_24H} Echo issues per 24 hours\n\n"
+            f"- {display_60m} Echo issues per 60 minutes\n"
+            f"- {display_24h} Echo issues per 24 hours\n\n"
             "Please edit an existing open Echo issue or wait before submitting again.\n\n"
             "---\n\n"
             "你在短时间内提交了多个回响 Issue。为防止刷屏并保护回响审核质量，本 Issue 已自动关闭。\n\n"
             "当前限制：\n"
-            f"- 每 60 分钟最多 {ECHO_RATE_LIMIT_60M} 个 Echo Issue\n"
-            f"- 每 24 小时最多 {ECHO_RATE_LIMIT_24H} 个 Echo Issue\n\n"
+            f"- 每 60 分钟最多 {display_60m} 个 Echo Issue\n"
+            f"- 每 24 小时最多 {display_24h} 个 Echo Issue\n\n"
             "请编辑已有打开的 Echo Issue，或稍后再提交。"
         )
         emit_result(result, title, body)
@@ -1472,26 +1518,41 @@ def main():
 
     # --- Step 1.4: Receipt-bearing Gateway auto archive early exit ---
     # Valid Gateway archives are server-validated and server-rendered.
-    # They should not be triaged as regular Echoes.
+    # They should not be triaged as regular freeform Echoes.
     try:
         from gateway_v0_v5_policy import has_valid_gateway_receipt_in_text
-        _is_valid_gw_archive = (
-            has_valid_gateway_receipt_in_text(text)
-            and "archive_ready: true" in text
-            and "auto_archive_agent_declared_verification" in text
+        _has_valid_receipt = has_valid_gateway_receipt_in_text(text)
+        _is_valid_gw_verification_archive = (
+            _has_valid_receipt
+            and is_gateway_validated_verification_archive(text)
             and "verification_oath_present: true" in text
         )
+        _is_valid_gw_echo_archive = (
+            _has_valid_receipt
+            and is_gateway_validated_echo_archive(text)
+            and (
+                "agent_integrity_declaration_present: true" in text
+                or "verification_oath_present: true" in text
+            )
+        )
     except Exception:
-        _is_valid_gw_archive = False
+        _is_valid_gw_verification_archive = False
+        _is_valid_gw_echo_archive = False
 
-    if _is_valid_gw_archive:
+    if _is_valid_gw_verification_archive or _is_valid_gw_echo_archive:
         result["close"] = False
         result["labels"] = ["echo:screened"]
+        archive_kind = (
+            "agent_declared_echo_archive"
+            if _is_valid_gw_echo_archive
+            else "agent_declared_verification_archive"
+        )
         result["comment"] = (
             "<!-- trinity-receipt-bearing-archive-v1 -->\n\n"
-            "This is a receipt-bearing Gateway auto archive. "
+            f"This is a receipt-bearing Gateway auto archive candidate of kind `{archive_kind}`. "
             "It has been server-validated and server-rendered. "
-            "No human review triage label is needed."
+            "No human review triage label is needed.\n\n"
+            "This record remains non-authoritative, non-amending, and not independent attestation."
         )
         emit_result(result, title, body)
         return
