@@ -80,11 +80,17 @@ def eth_call(rpcs, to, data):
 
 
 def pad_topic_int(value):
-    return hex(int(value)).replace("0x", "").rjust(64, "0")
+    """Pad an integer to 32 bytes with 0x prefix, for use in eth_getLogs topics."""
+    return "0x" + hex(int(value))[2:].rjust(64, "0")
+
+
+def pad_word_int(value):
+    """Pad an integer to 32 bytes without 0x prefix, for use in eth_call calldata."""
+    return hex(int(value))[2:].rjust(64, "0")
 
 
 def supports_interface(rpcs, contract, interface_id_hex):
-    data = ERC165_SUPPORTS_INTERFACE_SELECTOR + interface_id_hex.lower().rjust(64, "0")
+    data = ERC165_SUPPORTS_INTERFACE_SELECTOR + interface_id_hex.lower().ljust(64, "0")
     result = eth_call(rpcs, contract, data)
     if result is None:
         return None
@@ -186,7 +192,7 @@ def main():
 
     # ownerOf
     print("Probing ownerOf...")
-    owner_data = SELECTOR_OWNER_OF + pad_topic_int(args.token_id)
+    owner_data = SELECTOR_OWNER_OF + pad_word_int(args.token_id)
     owner_result = eth_call(rpcs, args.contract, owner_data)
     token_existence_probes.append({
         "method": "ownerOf",
@@ -197,7 +203,7 @@ def main():
 
     # tokenURI
     print("Probing tokenURI...")
-    uri_data = SELECTOR_TOKEN_URI + pad_topic_int(args.token_id)
+    uri_data = SELECTOR_TOKEN_URI + pad_word_int(args.token_id)
     uri_result = eth_call(rpcs, args.contract, uri_data)
     token_existence_probes.append({
         "method": "tokenURI",
@@ -208,7 +214,7 @@ def main():
 
     # ERC1155 uri
     print("Probing ERC1155 uri...")
-    erc1155_uri_data = SELECTOR_ERC1155_URI + pad_topic_int(args.token_id)
+    erc1155_uri_data = SELECTOR_ERC1155_URI + pad_word_int(args.token_id)
     erc1155_uri_result = eth_call(rpcs, args.contract, erc1155_uri_data)
     token_existence_probes.append({
         "method": "erc1155_uri",
@@ -222,6 +228,7 @@ def main():
     recovered = False
     recovered_record = None
     token_id_padded = pad_topic_int(args.token_id)
+    token_id_hex = pad_word_int(args.token_id)  # without 0x, for data field comparison
 
     # ERC721 Transfer from zero (mint)
     print("Searching ERC721 Transfer from zero (mint)...")
@@ -279,7 +286,7 @@ def main():
             data = log.get("data", "0x")
             if len(data) >= 66:  # 0x + 64 hex chars minimum
                 word0 = data[2:66]
-                if word0 == token_id_padded:
+                if word0 == token_id_hex:
                     matched_single.append(log)
         event_attempts.append({
             "method": "erc1155_transfer_single_from_zero",
@@ -309,7 +316,7 @@ def main():
             data = log.get("data", "0x")
             # TransferBatch data: offset, length, ids[], values[]
             # Check if our token_id appears in ids array
-            if token_id_padded in data:
+            if token_id_hex in data:
                 matched_batch.append(log)
         event_attempts.append({
             "method": "erc1155_transfer_batch_from_zero",
@@ -328,6 +335,16 @@ def main():
                 "status": "mint"
             }
             print(f"  RECOVERED via erc1155_transfer_batch_from_zero: block {recovered_record['block']}")
+
+    # If recovered, fetch block timestamp and populate recovered_record
+    if recovered and recovered_record:
+        from datetime import datetime, timezone
+        block_data = rpc_call(rpcs, "eth_getBlockByNumber", [hex(recovered_record["block"]), False])
+        if block_data and "timestamp" in block_data:
+            ts = int(block_data["timestamp"], 16)
+            recovered_record["timestamp"] = ts
+            recovered_record["datetime"] = datetime.fromtimestamp(ts, tz=timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+            print(f"  Block timestamp: {ts} ({recovered_record['datetime']})")
 
     # Determine final status
     if recovered:
