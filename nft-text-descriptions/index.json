@@ -2080,11 +2080,12 @@
     "token_id": "85210329807936527805363210873332413577559846505703131855064182995898737885245",
     "name": "ASIMilestones: The Betrayal Turn - When AI's Mask Slips",
     "file": "0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885245.md",
-    "block": null,
-    "timestamp": null,
-    "datetime": null,
-    "timestamp_status": "missing",
-    "timestamp_method": null
+    "block": 21436618,
+    "timestamp": 1734611939,
+    "datetime": "2024-12-19T12:38:59Z",
+    "timestamp_status": "mint",
+    "timestamp_method": "erc721_transfer_from_zero_topic3",
+    "mint_or_first_transfer_tx_hash": "0x83aec527d3b14be4d2b72539da3097f2c5b763c74b24bd967f11ece978226cb5"
   },
   {
     "contract": "0x019372bBee377109b8Eae66d7267f5C4EaAdBb79",

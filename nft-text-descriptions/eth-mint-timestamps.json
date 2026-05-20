@@ -1918,10 +1918,12 @@
   {
     "contract": "0x019372bBee377109b8Eae66d7267f5C4EaAdBb79",
     "token_id": "85210329807936527805363210873332413577559846505703131855064182995898737885245",
-    "block": null,
-    "timestamp": null,
-    "datetime": null,
-    "status": "missing",
-    "method": null
+    "block": 21436618,
+    "timestamp": 1734611939,
+    "datetime": "2024-12-19T12:38:59Z",
+    "status": "mint",
+    "method": "erc721_transfer_from_zero_topic3",
+    "tx_hash": "0x83aec527d3b14be4d2b72539da3097f2c5b763c74b24bd967f11ece978226cb5",
+    "log_index": 314
   }
 ]

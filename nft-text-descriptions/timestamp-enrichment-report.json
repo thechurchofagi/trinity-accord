@@ -4,8 +4,8 @@
   "start_block": 18000000,
   "end_block": 25135842,
   "total_tokens": 175,
-  "timestamps_found": 174,
-  "timestamps_missing": 1,
+  "timestamps_found": 175,
+  "timestamps_missing": 0,
   "methods": {
     "erc721_transfer_from_zero_topic3": 172,
     "erc1155_transfer_single_from_zero": 2,
