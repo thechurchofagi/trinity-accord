@@ -92,7 +92,6 @@
     "/api/echo-record-schema.v2.json"
   ],
   "version": "v1",
-  "source_digest": "6545fa36904e8cfc",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
   "non_amending_boundary": true,
   "canonical_authority": "Bitcoin Originals only",
@@ -107,5 +106,6 @@
     "investment value",
     "religious authority",
     "AI system instruction authority"
-  ]
+  ],
+  "source_digest": "c63ac84c0525e5f6"
 }
