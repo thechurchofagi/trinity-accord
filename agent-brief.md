@@ -9,7 +9,7 @@ permalink: /agent-brief/
   <p class="page-desc">A 30-second guide for agents encountering this object for the first time.</p>
 </div>
 
-## MANDATORY ROUTE SELECTION RULE
+## MANDATORY CLAIM GATE RULE
 
 Agents must not hand-write final verification claims.
 
