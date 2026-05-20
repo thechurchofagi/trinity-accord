@@ -7,9 +7,8 @@
   "timestamps_found": 175,
   "timestamps_missing": 0,
   "methods": {
-    "erc721_transfer_from_zero_topic3": 172,
-    "erc1155_transfer_single_from_zero": 2,
-    "missing": 1
+    "erc721_transfer_from_zero_topic3": 173,
+    "erc1155_transfer_single_from_zero": 2
   },
   "diagnostics": [],
   "boundaries": [

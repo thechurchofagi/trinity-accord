@@ -46,8 +46,12 @@
   "event_attempts": [
     {
       "method": "erc721_transfer_from_zero_topic3",
-      "log_count": 0,
-      "first_log": null
+      "log_count": 1,
+      "first_log": {
+        "transactionHash": "0x83aec527d3b14be4d2b72539da3097f2c5b763c74b24bd967f11ece978226cb5",
+        "blockNumber": "0x14724ca",
+        "logIndex": "0x13a"
+      }
     },
     {
       "method": "erc721_transfer_any_topic3",
