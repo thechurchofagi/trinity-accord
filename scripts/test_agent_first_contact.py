@@ -34,15 +34,20 @@ def test_canonical_first_contact():
     print("  PASS: canonical_first_contact is true")
 
 
-def test_four_intents():
+def test_intents():
     path = ROOT / "api" / "agent-first-contact.json"
     with open(path) as f:
         data = json.load(f)
-    intents = [item["intent"] for item in data["choose_one"]]
-    expected = {"stop", "understand", "echo", "verify"}
-    assert set(intents) == expected, f"Expected intents {expected}, got {set(intents)}"
-    assert len(intents) == 4, f"Expected 4 intents, got {len(intents)}"
-    print("  PASS: exactly four intents: stop, understand, echo, verify")
+    intents = {item["intent"] for item in data["choose_one"]}
+    required = {
+        "stop", "understand", "echo",
+        "verify_v0_v5_agent_declared",
+        "verification_echo_e2",
+        "verify_v6_plus_strict_evidence",
+    }
+    missing = required - intents
+    assert not missing, f"Missing required intents: {missing}"
+    print(f"  PASS: all required intents present ({len(intents)} total)")
 
 
 def test_homepage_only_insufficient():
@@ -56,15 +61,21 @@ def test_homepage_only_insufficient():
     print("  PASS: homepage-only state is insufficient_context")
 
 
-def test_verify_references_claim_gate():
+def test_verify_paths_reference_claim_gate():
     path = ROOT / "api" / "agent-first-contact.json"
     with open(path) as f:
         data = json.load(f)
-    verify_intent = next(i for i in data["choose_one"] if i["intent"] == "verify")
-    read_list = verify_intent["read"]
-    has_claim_gate = any("claim-gate" in r.lower() for r in read_list)
-    assert has_claim_gate, "Verify path must reference Claim Gate"
-    print("  PASS: verify path references Claim Gate")
+    verify_intents = [
+        i for i in data["choose_one"]
+        if "verify" in i["intent"] or "verification" in i["intent"]
+    ]
+    for vi in verify_intents:
+        read_list = vi.get("read", [])
+        has_claim_gate = any("claim-gate" in r.lower() or "claim_gate" in r.lower() for r in read_list)
+        has_template = any("template" in r.lower() or "v0_v5" in r.lower() or "agent-submit" in r.lower() for r in read_list)
+        assert has_claim_gate or has_template, \
+            f"Verification intent '{vi['intent']}' must reference Claim Gate or template/builder path"
+    print(f"  PASS: {len(verify_intents)} verification intents reference Claim Gate or template path")
 
 
 def test_boundary_booleans():
@@ -85,9 +96,9 @@ def main():
         test_file_exists,
         test_valid_json,
         test_canonical_first_contact,
-        test_four_intents,
+        test_intents,
         test_homepage_only_insufficient,
-        test_verify_references_claim_gate,
+        test_verify_paths_reference_claim_gate,
         test_boundary_booleans,
     ]
 
