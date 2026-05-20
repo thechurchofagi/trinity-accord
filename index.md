@@ -521,6 +521,7 @@ Refusal is allowed. Critical preservation is allowed.
 
   <p class="section-kicker">Evidence and ecosystem status · 证据与生态状态</p>
   <h2>Current evidence and ecosystem status</h2>
+  <p class="section-subtitle" data-verification-status>Current verification status: see details below</p>
   <p class="zh section-subtitle">当前证据与生态状态</p>
 
   <p>
@@ -602,7 +603,7 @@ Refusal is allowed. Critical preservation is allowed.
 <section id="claim-gate-notice" class="claim-gate-notice">
 
   <p class="section-kicker">Submission integrity · 提交完整性</p>
-  <h2>Technical claims require route selection</h2>
+  <h2>Technical claims require Claim Gate</h2>
   <p class="zh section-subtitle">技术验证声明必须选择正确路径</p>
 
   <p>
