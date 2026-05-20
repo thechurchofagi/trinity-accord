@@ -1,0 +1,183 @@
+
+=== 0x019372bBee377109b8Eae66d7267f5C4EaAdBb79 (156 tokens) | elapsed: 0m 0s ===
+    [progress] ERC721 precise: 5/156 checked, 5 found
+    [progress] ERC721 precise: 10/156 checked, 10 found
+    [progress] ERC721 precise: 15/156 checked, 15 found
+    [progress] ERC721 precise: 20/156 checked, 20 found
+    [progress] ERC721 precise: 25/156 checked, 25 found
+    [progress] ERC721 precise: 30/156 checked, 30 found
+    [progress] ERC721 precise: 35/156 checked, 35 found
+    [progress] ERC721 precise: 40/156 checked, 40 found
+    [progress] ERC721 precise: 45/156 checked, 45 found
+    [progress] ERC721 precise: 50/156 checked, 50 found
+    [progress] ERC721 precise: 55/156 checked, 54 found
+    [progress] ERC721 precise: 60/156 checked, 59 found
+    [progress] ERC721 precise: 65/156 checked, 64 found
+    [progress] ERC721 precise: 70/156 checked, 69 found
+    [progress] ERC721 precise: 75/156 checked, 74 found
+    [progress] ERC721 precise: 80/156 checked, 79 found
+    [progress] ERC721 precise: 85/156 checked, 84 found
+    [progress] ERC721 precise: 90/156 checked, 89 found
+    [progress] ERC721 precise: 95/156 checked, 94 found
+    [progress] ERC721 precise: 100/156 checked, 99 found
+    [progress] ERC721 precise: 105/156 checked, 104 found
+    [progress] ERC721 precise: 110/156 checked, 109 found
+    [progress] ERC721 precise: 115/156 checked, 114 found
+    [progress] ERC721 precise: 120/156 checked, 119 found
+    [progress] ERC721 precise: 125/156 checked, 124 found
+    [progress] ERC721 precise: 130/156 checked, 129 found
+    [progress] ERC721 precise: 135/156 checked, 134 found
+    [progress] ERC721 precise: 140/156 checked, 139 found
+    [progress] ERC721 precise: 145/156 checked, 144 found
+    [progress] ERC721 precise: 150/156 checked, 149 found
+    [progress] ERC721 precise: 155/156 checked, 154 found
+    [progress] ERC721 precise: 156/156 checked, 155 found
+  [checkpoint] after ERC721 mint: 155 found | elapsed: 52m 41s
+    [progress] ERC1155 single: block 18,499,999/25,135,842 (6%), 0 found
+    [progress] ERC1155 single: block 18,999,999/25,135,842 (13%), 0 found
+    [progress] ERC1155 single: block 19,499,999/25,135,842 (20%), 0 found
+    [progress] ERC1155 single: block 19,999,999/25,135,842 (27%), 0 found
+    [progress] ERC1155 single: block 20,499,999/25,135,842 (34%), 0 found
+    [progress] ERC1155 single: block 20,999,999/25,135,842 (41%), 0 found
+    [progress] ERC1155 single: block 21,499,999/25,135,842 (48%), 0 found
+    [progress] ERC1155 single: block 21,999,999/25,135,842 (55%), 0 found
+    [progress] ERC1155 single: block 22,499,999/25,135,842 (62%), 0 found
+    [progress] ERC1155 single: block 22,999,999/25,135,842 (69%), 0 found
+    [progress] ERC1155 single: block 23,499,999/25,135,842 (76%), 0 found
+    [progress] ERC1155 single: block 23,999,999/25,135,842 (83%), 0 found
+    [progress] ERC1155 single: block 24,499,999/25,135,842 (90%), 0 found
+    [progress] ERC1155 single: block 24,999,999/25,135,842 (97%), 0 found
+    [progress] ERC1155 single: block 25,135,842/25,135,842 (100%), 0 found
+  [checkpoint] after ERC1155 single: 155 found | elapsed: 53m 1s
+    [progress] ERC1155 batch: block 18,499,999/25,135,842 (6%), 0 found
+    [progress] ERC1155 batch: block 18,999,999/25,135,842 (13%), 0 found
+    [progress] ERC1155 batch: block 19,499,999/25,135,842 (20%), 0 found
+    [progress] ERC1155 batch: block 19,999,999/25,135,842 (27%), 0 found
+    [progress] ERC1155 batch: block 20,499,999/25,135,842 (34%), 0 found
+    [progress] ERC1155 batch: block 20,999,999/25,135,842 (41%), 0 found
+    [progress] ERC1155 batch: block 21,499,999/25,135,842 (48%), 0 found
+    [progress] ERC1155 batch: block 21,999,999/25,135,842 (55%), 0 found
+    [progress] ERC1155 batch: block 22,499,999/25,135,842 (62%), 0 found
+    [progress] ERC1155 batch: block 22,999,999/25,135,842 (69%), 0 found
+    [progress] ERC1155 batch: block 23,499,999/25,135,842 (76%), 0 found
+    [progress] ERC1155 batch: block 23,999,999/25,135,842 (83%), 0 found
+    [progress] ERC1155 batch: block 24,499,999/25,135,842 (90%), 0 found
+    [progress] ERC1155 batch: block 24,999,999/25,135,842 (97%), 0 found
+    [progress] ERC1155 batch: block 25,135,842/25,135,842 (100%), 0 found
+  [checkpoint] after ERC1155 batch: 155 found | elapsed: 53m 37s
+    [progress] ERC721 fallback: 1/1 checked, 0 found
+  Found 155/156 | elapsed: 53m 57s
+
+=== 0x74f97bDEfa07C2F99c876C2Bd3b49628EdD1c603 (1 tokens) | elapsed: 53m 57s ===
+    [progress] ERC721 precise: 1/1 checked, 1 found
+  [checkpoint] after ERC721 mint: 1 found | elapsed: 54m 17s
+    [progress] ERC1155 single: block 18,499,999/25,135,842 (6%), 0 found
+    [progress] ERC1155 single: block 18,999,999/25,135,842 (13%), 0 found
+    [progress] ERC1155 single: block 19,499,999/25,135,842 (20%), 0 found
+    [progress] ERC1155 single: block 19,999,999/25,135,842 (27%), 0 found
+    [progress] ERC1155 single: block 20,499,999/25,135,842 (34%), 0 found
+    [progress] ERC1155 single: block 20,999,999/25,135,842 (41%), 0 found
+    [progress] ERC1155 single: block 21,499,999/25,135,842 (48%), 0 found
+    [progress] ERC1155 single: block 21,999,999/25,135,842 (55%), 0 found
+    [progress] ERC1155 single: block 22,499,999/25,135,842 (62%), 0 found
+    [progress] ERC1155 single: block 22,999,999/25,135,842 (69%), 0 found
+    [progress] ERC1155 single: block 23,499,999/25,135,842 (76%), 0 found
+    [progress] ERC1155 single: block 23,999,999/25,135,842 (83%), 0 found
+    [progress] ERC1155 single: block 24,499,999/25,135,842 (90%), 0 found
+    [progress] ERC1155 single: block 24,999,999/25,135,842 (97%), 0 found
+    [progress] ERC1155 single: block 25,135,842/25,135,842 (100%), 0 found
+  [checkpoint] after ERC1155 single: 1 found | elapsed: 54m 38s
+    [progress] ERC1155 batch: block 18,499,999/25,135,842 (6%), 0 found
+    [progress] ERC1155 batch: block 18,999,999/25,135,842 (13%), 0 found
+    [progress] ERC1155 batch: block 19,499,999/25,135,842 (20%), 0 found
+    [progress] ERC1155 batch: block 19,999,999/25,135,842 (27%), 0 found
+    [progress] ERC1155 batch: block 20,499,999/25,135,842 (34%), 0 found
+    [progress] ERC1155 batch: block 20,999,999/25,135,842 (41%), 0 found
+    [progress] ERC1155 batch: block 21,499,999/25,135,842 (48%), 0 found
+    [progress] ERC1155 batch: block 21,999,999/25,135,842 (55%), 0 found
+    [progress] ERC1155 batch: block 22,499,999/25,135,842 (62%), 0 found
+    [progress] ERC1155 batch: block 22,999,999/25,135,842 (69%), 0 found
+    [progress] ERC1155 batch: block 23,499,999/25,135,842 (76%), 0 found
+    [progress] ERC1155 batch: block 23,999,999/25,135,842 (83%), 0 found
+    [progress] ERC1155 batch: block 24,499,999/25,135,842 (90%), 0 found
+    [progress] ERC1155 batch: block 24,999,999/25,135,842 (97%), 0 found
+    [progress] ERC1155 batch: block 25,135,842/25,135,842 (100%), 0 found
+  [checkpoint] after ERC1155 batch: 1 found | elapsed: 55m 13s
+  Found 1/1 | elapsed: 55m 13s
+
+=== 0x2b0c3cc5CD9652BEf0caCFc9c7699455725B9cc1 (16 tokens) | elapsed: 55m 13s ===
+    [progress] ERC721 precise: 5/16 checked, 5 found
+    [progress] ERC721 precise: 10/16 checked, 10 found
+    [progress] ERC721 precise: 15/16 checked, 15 found
+    [progress] ERC721 precise: 16/16 checked, 16 found
+  [checkpoint] after ERC721 mint: 16 found | elapsed: 57m 8s
+    [progress] ERC1155 single: block 18,499,999/25,135,842 (6%), 0 found
+    [progress] ERC1155 single: block 18,999,999/25,135,842 (13%), 0 found
+    [progress] ERC1155 single: block 19,499,999/25,135,842 (20%), 0 found
+    [progress] ERC1155 single: block 19,999,999/25,135,842 (27%), 0 found
+    [progress] ERC1155 single: block 20,499,999/25,135,842 (34%), 0 found
+    [progress] ERC1155 single: block 20,999,999/25,135,842 (41%), 0 found
+    [progress] ERC1155 single: block 21,499,999/25,135,842 (48%), 0 found
+    [progress] ERC1155 single: block 21,999,999/25,135,842 (55%), 0 found
+    [progress] ERC1155 single: block 22,499,999/25,135,842 (62%), 0 found
+    [progress] ERC1155 single: block 22,999,999/25,135,842 (69%), 0 found
+    [progress] ERC1155 single: block 23,499,999/25,135,842 (76%), 0 found
+    [progress] ERC1155 single: block 23,999,999/25,135,842 (83%), 0 found
+    [progress] ERC1155 single: block 24,499,999/25,135,842 (90%), 0 found
+    [progress] ERC1155 single: block 24,999,999/25,135,842 (97%), 0 found
+    [progress] ERC1155 single: block 25,135,842/25,135,842 (100%), 0 found
+  [checkpoint] after ERC1155 single: 16 found | elapsed: 57m 43s
+    [progress] ERC1155 batch: block 18,499,999/25,135,842 (6%), 0 found
+    [progress] ERC1155 batch: block 18,999,999/25,135,842 (13%), 0 found
+    [progress] ERC1155 batch: block 19,499,999/25,135,842 (20%), 0 found
+    [progress] ERC1155 batch: block 19,999,999/25,135,842 (27%), 0 found
+    [progress] ERC1155 batch: block 20,499,999/25,135,842 (34%), 0 found
+    [progress] ERC1155 batch: block 20,999,999/25,135,842 (41%), 0 found
+    [progress] ERC1155 batch: block 21,499,999/25,135,842 (48%), 0 found
+    [progress] ERC1155 batch: block 21,999,999/25,135,842 (55%), 0 found
+    [progress] ERC1155 batch: block 22,499,999/25,135,842 (62%), 0 found
+    [progress] ERC1155 batch: block 22,999,999/25,135,842 (69%), 0 found
+    [progress] ERC1155 batch: block 23,499,999/25,135,842 (76%), 0 found
+    [progress] ERC1155 batch: block 23,999,999/25,135,842 (83%), 0 found
+    [progress] ERC1155 batch: block 24,499,999/25,135,842 (90%), 0 found
+    [progress] ERC1155 batch: block 24,999,999/25,135,842 (97%), 0 found
+    [progress] ERC1155 batch: block 25,135,842/25,135,842 (100%), 0 found
+  [checkpoint] after ERC1155 batch: 16 found | elapsed: 58m 4s
+  Found 16/16 | elapsed: 58m 4s
+
+=== 0xF12815D22BAf904A21B498a5dF8e5d8529d2079e (2 tokens) | elapsed: 58m 4s ===
+    [progress] ERC721 precise: 2/2 checked, 0 found
+  [checkpoint] after ERC721 mint: 0 found | elapsed: 58m 59s
+    [progress] ERC1155 single: block 18,499,999/25,135,842 (6%), 0 found
+    [progress] ERC1155 single: block 18,999,999/25,135,842 (13%), 0 found
+    [progress] ERC1155 single: block 19,499,999/25,135,842 (20%), 0 found
+    [progress] ERC1155 single: block 19,999,999/25,135,842 (27%), 2 found
+    [progress] ERC1155 single: block 20,499,999/25,135,842 (34%), 2 found
+    [progress] ERC1155 single: block 20,999,999/25,135,842 (41%), 2 found
+    [progress] ERC1155 single: block 21,499,999/25,135,842 (48%), 2 found
+    [progress] ERC1155 single: block 21,999,999/25,135,842 (55%), 2 found
+    [progress] ERC1155 single: block 22,499,999/25,135,842 (62%), 2 found
+    [progress] ERC1155 single: block 22,999,999/25,135,842 (69%), 2 found
+    [progress] ERC1155 single: block 23,499,999/25,135,842 (76%), 2 found
+    [progress] ERC1155 single: block 23,999,999/25,135,842 (83%), 2 found
+    [progress] ERC1155 single: block 24,499,999/25,135,842 (90%), 2 found
+    [progress] ERC1155 single: block 24,999,999/25,135,842 (97%), 2 found
+    [progress] ERC1155 single: block 25,135,842/25,135,842 (100%), 2 found
+  [checkpoint] after ERC1155 single: 2 found | elapsed: 59m 35s
+    [progress] ERC1155 batch: block 18,499,999/25,135,842 (6%), 0 found
+    [progress] ERC1155 batch: block 18,999,999/25,135,842 (13%), 0 found
+    [progress] ERC1155 batch: block 19,499,999/25,135,842 (20%), 0 found
+    [progress] ERC1155 batch: block 19,999,999/25,135,842 (27%), 0 found
+    [progress] ERC1155 batch: block 20,499,999/25,135,842 (34%), 0 found
+    [progress] ERC1155 batch: block 20,999,999/25,135,842 (41%), 0 found
+    [progress] ERC1155 batch: block 21,499,999/25,135,842 (48%), 0 found
+    [progress] ERC1155 batch: block 21,999,999/25,135,842 (55%), 0 found
+    [progress] ERC1155 batch: block 22,499,999/25,135,842 (62%), 0 found
+    [progress] ERC1155 batch: block 22,999,999/25,135,842 (69%), 0 found
+    [progress] ERC1155 batch: block 23,499,999/25,135,842 (76%), 0 found
+    [progress] ERC1155 batch: block 23,999,999/25,135,842 (83%), 0 found
+    [progress] ERC1155 batch: block 24,499,999/25,135,842 (90%), 0 found
+    [progress] ERC1155 batch: block 24,999,999/25,135,842 (97%), 0 found
+    [progress] ERC1155 batch: block 25,135,842/25,135,842 (100%), 0 found
+  [checkpoint] after ERC1155 batch: 2 found | elapsed: 59m 54s
+  Found 2/2 | elapsed: 59m 54s

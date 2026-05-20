@@ -1,0 +1,14 @@
+[
+  {
+    "contract": "0x019372bBee377109b8Eae66d7267f5C4EaAdBb79",
+    "token_id": "85210329807936527805363210873332413577559846505703131855064182995898737885245",
+    "status": "missing",
+    "checked_event_types": [
+      "erc721_transfer_from_zero_topic3",
+      "erc1155_transfer_single_from_zero",
+      "erc1155_transfer_batch_from_zero",
+      "erc721_transfer_any_topic3"
+    ],
+    "reason": "no matching event found in scanned range"
+  }
+]

@@ -1,0 +1,20 @@
+{
+  "schema": "trinityaccord.nft-timestamp-enrichment-report.v1",
+  "generated_at_utc": "2026-05-20T11:26:57Z",
+  "start_block": 18000000,
+  "end_block": 25135842,
+  "total_tokens": 175,
+  "timestamps_found": 174,
+  "timestamps_missing": 1,
+  "methods": {
+    "erc721_transfer_from_zero_topic3": 172,
+    "erc1155_transfer_single_from_zero": 2,
+    "missing": 1
+  },
+  "diagnostics": [],
+  "boundaries": [
+    "Timestamp is derived from matching Ethereum event block timestamp.",
+    "ERC721 fallback first_transfer_not_zero_mint is not guaranteed to be mint.",
+    "This does not verify NFT metadata content, Arweave CAR content, or historical description accuracy."
+  ]
+}
