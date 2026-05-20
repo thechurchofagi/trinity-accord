@@ -26,14 +26,23 @@ def test_policy_json_loads():
         if key not in policy:
             errors.append(f"FAIL: policy missing key '{key}'")
     rl = policy.get("echo_issue_rate_limit", {})
-    for k in ("window_60m", "window_24h"):
-        if k not in rl:
-            errors.append(f"FAIL: echo_issue_rate_limit missing '{k}'")
     labels = policy.get("triage", {}).get("managed_labels", [])
     if not labels:
         errors.append("FAIL: triage.managed_labels is empty")
-    print(f"  [OK] policy JSON loads: {len(labels)} managed labels, "
-          f"rate limits 60m={rl.get('window_60m')} 24h={rl.get('window_24h')}")
+    # Support both flat and bucketed rate limit structures
+    if "direct_github_external" in rl:
+        direct = rl["direct_github_external"]
+        for k in ("window_60m", "window_24h"):
+            if k not in direct:
+                errors.append(f"FAIL: direct_github_external missing '{k}'")
+        print(f"  [OK] policy JSON loads: {len(labels)} managed labels, "
+              f"direct rate limits 60m={direct.get('window_60m')} 24h={direct.get('window_24h')}")
+    else:
+        for k in ("window_60m", "window_24h"):
+            if k not in rl:
+                errors.append(f"FAIL: echo_issue_rate_limit missing '{k}'")
+        print(f"  [OK] policy JSON loads: {len(labels)} managed labels, "
+              f"rate limits 60m={rl.get('window_60m')} 24h={rl.get('window_24h')}")
     return policy
 
 
@@ -80,8 +89,13 @@ def test_workflow_rate_limits_match_policy(policy):
     src = path.read_text()
 
     rl = policy["echo_issue_rate_limit"]
-    expected_60m = rl["window_60m"]
-    expected_24h = rl["window_24h"]
+    # Support both flat and bucketed structures
+    if "direct_github_external" in rl:
+        expected_60m = rl["direct_github_external"]["window_60m"]
+        expected_24h = rl["direct_github_external"]["window_24h"]
+    else:
+        expected_60m = rl["window_60m"]
+        expected_24h = rl["window_24h"]
 
     # Verify workflow has a "Load operational policy" step
     if "Load operational policy" not in src:
@@ -90,15 +104,22 @@ def test_workflow_rate_limits_match_policy(policy):
         print("  [OK] workflow has 'Load operational policy' step")
 
     # Verify workflow reads rate limits from policy step outputs
-    if "steps.policy.outputs.rate_60m" not in src:
-        errors.append("FAIL: workflow does not read rate_60m from policy step")
+    # New bucketed workflow uses direct_60m/direct_24h; old flat uses rate_60m/rate_24h
+    has_direct = "steps.policy.outputs.direct_60m" in src
+    has_rate = "steps.policy.outputs.rate_60m" in src
+    if not has_direct and not has_rate:
+        errors.append("FAIL: workflow does not read rate limits from policy step")
     else:
-        print(f"  [OK] workflow reads rate_60m from policy step")
+        key = "direct_60m" if has_direct else "rate_60m"
+        print(f"  [OK] workflow reads {key} from policy step")
 
-    if "steps.policy.outputs.rate_24h" not in src:
-        errors.append("FAIL: workflow does not read rate_24h from policy step")
+    has_direct_24 = "steps.policy.outputs.direct_24h" in src
+    has_rate_24 = "steps.policy.outputs.rate_24h" in src
+    if not has_direct_24 and not has_rate_24:
+        errors.append("FAIL: workflow does not read 24h rate limit from policy step")
     else:
-        print(f"  [OK] workflow reads rate_24h from policy step")
+        key = "direct_24h" if has_direct_24 else "rate_24h"
+        print(f"  [OK] workflow reads {key} from policy step")
 
     # Verify workflow reads exempt associations from policy step
     if "steps.policy.outputs.exempt" not in src:
