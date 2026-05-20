@@ -16,7 +16,7 @@ SUMMARY_FILE = os.environ.get("GITHUB_STEP_SUMMARY")
 
 def log_progress(msg: str):
     """Write progress to stdout, log file, and GITHUB_STEP_SUMMARY."""
-    print(msg, flush=True)
+    print(msg)
     try:
         with open(PROGRESS_LOG, "a", encoding="utf-8") as f:
             f.write(msg + "\n")
@@ -215,7 +215,7 @@ def find_erc721_mints(rpcs, contract, token_ids, start_block, end_block, chunk, 
         if found:
             results[tid] = found
         if (i + 1) % 5 == 0 or (i + 1) == total:
-            log_progress(f"    [progress] ERC721 precise: {i + 1}/{total} checked, {len(results)} found", flush=True)
+            log_progress(f"    [progress] ERC721 precise: {i + 1}/{total} checked, {len(results)} found")
     return results
 
 def find_erc721_first_transfers(rpcs, contract, missing_token_ids, start_block, end_block, chunk, block_cache):
@@ -240,7 +240,7 @@ def find_erc721_first_transfers(rpcs, contract, missing_token_ids, start_block, 
         if found:
             results[tid] = found
         if (i + 1) % 5 == 0 or (i + 1) == total:
-            log_progress(f"    [progress] ERC721 fallback: {i + 1}/{total} checked, {len(results)} found", flush=True)
+            log_progress(f"    [progress] ERC721 fallback: {i + 1}/{total} checked, {len(results)} found")
     return results
 
 def find_erc1155_single_mints(rpcs, contract, token_ids, start_block, end_block, chunk, block_cache):
@@ -268,7 +268,7 @@ def find_erc1155_single_mints(rpcs, contract, token_ids, start_block, end_block,
         scanned += 1
         if scanned % 10 == 0 or to_block >= end_block:
             pct = min(100, int(scanned * 100 / total_chunks))
-            log_progress(f"    [progress] ERC1155 single: block {to_block:,}/{end_block:,} ({pct}%), {len(results)} found", flush=True)
+            log_progress(f"    [progress] ERC1155 single: block {to_block:,}/{end_block:,} ({pct}%), {len(results)} found")
         cur = to_block + 1
     return results
 
@@ -301,7 +301,7 @@ def find_erc1155_batch_mints(rpcs, contract, token_ids, start_block, end_block, 
         scanned += 1
         if scanned % 10 == 0 or to_block >= end_block:
             pct = min(100, int(scanned * 100 / total_chunks))
-            log_progress(f"    [progress] ERC1155 batch: block {to_block:,}/{end_block:,} ({pct}%), {len(results)} found", flush=True)
+            log_progress(f"    [progress] ERC1155 batch: block {to_block:,}/{end_block:,} ({pct}%), {len(results)} found")
         cur = to_block + 1
     return results
 
@@ -360,7 +360,7 @@ def main():
 
     for contract, token_ids in groups.items():
         elapsed = int(time.time() - run_start)
-        log_progress(f"\n=== {contract} ({len(token_ids)} tokens) | elapsed: {elapsed // 60}m {elapsed % 60}s ===", flush=True)
+        log_progress(f"\n=== {contract} ({len(token_ids)} tokens) | elapsed: {elapsed // 60}m {elapsed % 60}s ===")
         found = {}
 
         try:
@@ -370,7 +370,7 @@ def main():
             print(f"  ERC721 mint stage failed: {e}", file=sys.stderr)
 
         elapsed = int(time.time() - run_start)
-        log_progress(f"  [checkpoint] after ERC721 mint: {len(found)} found | elapsed: {elapsed // 60}m {elapsed % 60}s", flush=True)
+        log_progress(f"  [checkpoint] after ERC721 mint: {len(found)} found | elapsed: {elapsed // 60}m {elapsed % 60}s")
 
         missing = set(token_ids) - set(found)
         try:
@@ -382,7 +382,7 @@ def main():
             print(f"  ERC1155 single stage failed: {e}", file=sys.stderr)
 
         elapsed = int(time.time() - run_start)
-        log_progress(f"  [checkpoint] after ERC1155 single: {len(found)} found | elapsed: {elapsed // 60}m {elapsed % 60}s", flush=True)
+        log_progress(f"  [checkpoint] after ERC1155 single: {len(found)} found | elapsed: {elapsed // 60}m {elapsed % 60}s")
 
         missing = set(token_ids) - set(found)
         try:
@@ -394,7 +394,7 @@ def main():
             print(f"  ERC1155 batch stage failed: {e}", file=sys.stderr)
 
         elapsed = int(time.time() - run_start)
-        log_progress(f"  [checkpoint] after ERC1155 batch: {len(found)} found | elapsed: {elapsed // 60}m {elapsed % 60}s", flush=True)
+        log_progress(f"  [checkpoint] after ERC1155 batch: {len(found)} found | elapsed: {elapsed // 60}m {elapsed % 60}s")
 
         missing = set(token_ids) - set(found)
         try:
@@ -413,7 +413,7 @@ def main():
             }
 
         elapsed = int(time.time() - run_start)
-        log_progress(f"  Found {len(found)}/{len(token_ids)} | elapsed: {elapsed // 60}m {elapsed % 60}s", flush=True)
+        log_progress(f"  Found {len(found)}/{len(token_ids)} | elapsed: {elapsed // 60}m {elapsed % 60}s")
 
     timestamp_entries = []
     missing_entries = []
