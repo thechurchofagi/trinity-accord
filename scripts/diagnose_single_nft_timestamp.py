@@ -4,6 +4,7 @@ import argparse
 import json
 import os
 import sys
+import time
 import urllib.request
 from pathlib import Path
 
@@ -48,25 +49,29 @@ def get_rpcs():
     return list(DEFAULT_RPCS)
 
 
-def rpc_call(rpcs, method, params):
-    """Call ETH JSON-RPC with fallback across multiple endpoints."""
+def rpc_call(rpcs, method, params, retries=6, sleep_base=1.0):
+    """Call ETH JSON-RPC with retries and exponential backoff."""
     payload = json.dumps({"jsonrpc": "2.0", "method": method, "params": params, "id": 1}).encode()
-    for rpc in rpcs:
+    last_error = None
+    for attempt in range(retries):
+        url = rpcs[attempt % len(rpcs)]
         try:
             req = urllib.request.Request(
-                rpc,
+                url,
                 data=payload,
-                headers={"Content-Type": "application/json"},
+                headers={"Content-Type": "application/json", "User-Agent": "trinity-accord-diagnosis/1.0"},
                 method="POST",
             )
-            with urllib.request.urlopen(req, timeout=30) as resp:
+            with urllib.request.urlopen(req, timeout=45) as resp:
                 data = json.loads(resp.read())
-                if "result" in data:
-                    return data["result"]
-                if "error" in data:
-                    print(f"  RPC error from {rpc}: {data['error']}", file=sys.stderr)
+            if "result" in data and data["result"] is not None:
+                return data["result"]
+            last_error = data.get("error") or data
         except Exception as e:
-            print(f"  RPC call failed for {rpc}: {e}", file=sys.stderr)
+            last_error = repr(e)
+        wait = sleep_base * (2 ** min(attempt, 4))
+        print(f"  RPC retry {attempt + 1}/{retries} for {method}: {last_error}; sleeping {wait:.1f}s", file=sys.stderr)
+        time.sleep(wait)
     return None
 
 
@@ -116,7 +121,7 @@ def get_block_number(rpcs):
     return None
 
 
-def get_logs_chunked(rpcs, address, topics, from_block, to_block, chunk_size=50000):
+def get_logs_chunked(rpcs, address, topics, from_block, to_block, chunk_size=5000):
     """Get logs in chunks to avoid RPC limits."""
     all_logs = []
     start = from_block
@@ -141,32 +146,14 @@ def main():
     parser.add_argument("--token-id", default=DEFAULT_TOKEN_ID)
     parser.add_argument("--start-block", type=int, default=18000000)
     parser.add_argument("--end-block", default="latest")
-    parser.add_argument("--chunk", type=int, default=50000)
+    parser.add_argument("--chunk", type=int, default=5000)
     parser.add_argument("--apply", action="store_true")
     args = parser.parse_args()
 
     rpcs = get_rpcs()
     if not rpcs:
-        print("ETH_RPC_URLS not set. Skipping on-chain diagnosis.")
-        print("Set ETH_RPC_URLS env var (comma-separated) to enable.")
-        DIAGNOSIS_OUT.write_text(json.dumps({
-            "schema": "trinityaccord.single-token-timestamp-diagnosis.v1",
-            "contract": args.contract,
-            "token_id": args.token_id,
-            "scan_window": {"start_block": 0, "end_block": 0, "mode": "skipped_no_rpc"},
-            "recovered": False,
-            "recovered_record": None,
-            "interface_probes": {},
-            "token_existence_probes": [],
-            "event_attempts": [],
-            "final_status": "skipped_no_rpc_urls_configured",
-            "boundary": [
-                "Recovered timestamp, if present, is an Ethereum event block timestamp.",
-                "Token existence probes do not prove historical metadata truth.",
-                "If no standard event is found, no timestamp is fabricated."
-            ]
-        }, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-        return 0
+        print("No RPC endpoints available. Set ETH_RPC_URLS or ETHEREUMMAINNET env var.")
+        return 1
 
     index = json.loads(INDEX.read_text(encoding="utf-8"))
 
