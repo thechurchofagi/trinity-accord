@@ -1,0 +1,163 @@
+name: Extract NFT Text Descriptions
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Extract NFT metadata from release tars
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python3 << 'PYEOF'
+          import json, os, re, time, tarfile, io, hashlib
+          from pathlib import Path
+          from concurrent.futures import ThreadPoolExecutor, as_completed
+          import requests
+
+          REPO = os.environ.get("GITHUB_REPOSITORY", "thechurchofagi/trinity-accord")
+          TOKEN = os.environ.get("GH_TOKEN", "")
+          RELEASE_TAG = "nft-arweave-mirror-175-v1"
+          OUT_DIR = Path("nft-text-descriptions")
+          INDEX_PATH = OUT_DIR / "index.json"
+          TOKEN_INDEX_PATH = Path("token_index.json")
+
+          headers = {"Authorization": f"Bearer {TOKEN}", "Accept": "application/vnd.github+json"}
+
+          # Load token index
+          with open(TOKEN_INDEX_PATH) as f:
+              token_index = json.load(f)
+
+          # Load existing index
+          if INDEX_PATH.exists():
+              with open(INDEX_PATH) as f:
+                  index = json.load(f)
+              done = {(e["contract"], e["token_id"]) for e in index}
+          else:
+              index = []
+              done = set()
+
+          # Get release assets
+          print(f"Fetching release assets for {RELEASE_TAG}...")
+          resp = requests.get(f"https://api.github.com/repos/{REPO}/releases/tags/{RELEASE_TAG}", headers=headers)
+          asset_map = {a["name"]: a["id"] for a in resp.json().get("assets", [])}
+          print(f"Found {len(asset_map)} release assets")
+
+          # Build todo list
+          todo = []
+          for contract, tokens in token_index.items():
+              for token_id in tokens:
+                  if (contract, token_id) not in done:
+                      asset_name = f"nft-{contract.lower()}-{token_id}.tar"
+                      if asset_name in asset_map:
+                          todo.append((contract, token_id, asset_map[asset_name]))
+
+          print(f"Done: {len(done)}, Todo: {len(todo)}")
+
+          def extract_one(contract, token_id, asset_id):
+              """Download tar, extract metadata.car, parse JSON."""
+              url = f"https://api.github.com/repos/{REPO}/releases/assets/{asset_id}"
+              try:
+                  resp = requests.get(url, headers={**headers, "Accept": "application/octet-stream"},
+                                     stream=True, timeout=120)
+                  # Stream download, collect first 200KB (metadata.car is always first and small)
+                  chunks = []
+                  total = 0
+                  for chunk in resp.iter_content(8192):
+                      chunks.append(chunk)
+                      total += len(chunk)
+                      if total > 200000:  # 200KB enough for metadata.car
+                          break
+                  data = b"".join(chunks)
+              except Exception as e:
+                  return (contract, token_id, f"download error: {e}")
+
+              # Parse tar manually
+              pos = 0
+              while pos + 512 <= len(data):
+                  header = data[pos:pos+512]
+                  if header == b'\x00' * 512:
+                      break
+                  filename = header[0:100].split(b'\x00')[0].decode('utf-8', errors='replace').strip()
+                  size_octal = header[124:136].split(b'\x00')[0].decode('utf-8', errors='replace').strip()
+                  try:
+                      size = int(size_octal, 8) if size_octal else 0
+                  except ValueError:
+                      break
+
+                  if filename.endswith('metadata.car'):
+                      car_data = data[pos+512:pos+512+size]
+                      text = car_data.decode('utf-8', errors='replace')
+                      idx = text.find('{"name":')
+                      if idx == -1: idx = text.find('{"')
+                      if idx >= 0:
+                          depth = 0
+                          for i in range(idx, len(text)):
+                              if text[i] == '{': depth += 1
+                              elif text[i] == '}':
+                                  depth -= 1
+                                  if depth == 0:
+                                      try:
+                                          obj = json.loads(text[idx:i+1])
+                                          name = obj.get("name", "Unknown")
+                                          desc = obj.get("description", "No description.")
+                                          fname = f"{contract}_{token_id}.md"
+                                          md = f"# {name}\n\n**Contract**: `{contract}`\n\n**Token ID**: `{token_id}`\n\n## Description\n\n{desc}\n"
+                                          (OUT_DIR / fname).write_text(md, encoding="utf-8")
+                                          return (contract, token_id, name)
+                                      except:
+                                          return (contract, token_id, "JSON parse failed")
+                      return (contract, token_id, "no JSON in CAR")
+                  padded = ((size + 511) // 512) * 512
+                  pos += 512 + padded
+              return (contract, token_id, "no metadata.car found")
+
+          # Process in batches
+          success = fail = 0
+          for bs in range(0, len(todo), 8):
+              batch = todo[bs:bs+8]
+              print(f"Batch {bs//8+1} ({bs+1}-{bs+len(batch)}/{len(todo)})...")
+              with ThreadPoolExecutor(max_workers=8) as ex:
+                  futs = {ex.submit(extract_one, c, t, a): (c, t) for c, t, a in batch}
+                  for fut in as_completed(futs):
+                      contract, token_id, result = fut.result()
+                      if result.startswith(("download", "JSON", "no ")):
+                          fail += 1
+                          print(f"  FAIL {token_id[-8:]}: {result}")
+                      else:
+                          success += 1
+                          index.append({"contract":contract,"token_id":token_id,"name":result.strip(),"file":f"{contract}_{token_id}.md"})
+                          print(f"  OK {token_id[-8:]}: {result[:50]}")
+              with open(INDEX_PATH, "w") as f:
+                  json.dump(index, f, indent=2, ensure_ascii=False)
+
+          # Update README
+          readme = (OUT_DIR / "README.md").read_text()
+          remaining = 175 - len(index)
+          readme = re.sub(r'- \*\*已完成\*\*: \d+ / \d+', f'- **已完成**: {len(index)} / 175', readme)
+          readme = re.sub(r'- \*\*剩余\*\*: \d+', f'- **剩余**: {remaining}', readme)
+          readme = re.sub(r'- \*\*最后更新\*\*: [\d-]+', f'- **最后更新**: {time.strftime("%Y-%m-%d")}', readme)
+          (OUT_DIR / "README.md").write_text(readme, encoding="utf-8")
+
+          print(f"\n=== DONE === Success: {success}, Failed: {fail}, Total: {len(index)}/175")
+          PYEOF
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add nft-text-descriptions/
+          git diff --cached --quiet && echo "No changes" && exit 0
+          COUNT=$(ls nft-text-descriptions/*.md 2>/dev/null | wc -l)
+          git commit -m "feat: extract NFT text descriptions ($COUNT/175)"
+          git push
