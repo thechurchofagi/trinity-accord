@@ -25,7 +25,6 @@ jobs:
               exit(1)
 
           TRANSFER_TOPIC0 = "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef"
-          ZERO_TOPIC = "0x" + "0" * 64  # from=0x0 (mint)
 
           with open("token_index.json") as f:
               token_index = json.load(f)
@@ -53,12 +52,13 @@ jobs:
           block_num = int(latest["result"], 16)
           print(f"Latest block: {block_num}")
 
-          # Step 1: For each contract, get mint events (Transfer from 0x0)
-          mint_map = {}  # (contract, token_id) -> block_number
+          # Step 1: For each contract, get ALL Transfer events and find earliest per token
+          # These NFTs may not use standard from=0x0 minting, so we get all transfers
+          mint_map = {}  # (contract, token_id) -> earliest_block
 
           for contract in contracts:
               tokens = token_index[contract]
-              token_ids = list(tokens.keys()) if isinstance(tokens, dict) else list(tokens)
+              token_ids = set(tokens.keys()) if isinstance(tokens, dict) else set(tokens)
               print(f"\nQuerying {contract} ({len(token_ids)} tokens)...")
 
               all_logs = []
@@ -68,31 +68,43 @@ jobs:
 
               for from_b in range(start_block, block_num + 1, chunk):
                   to_b = min(from_b + chunk - 1, block_num)
-                  try:
-                      result = rpc_call("eth_getLogs", [{
-                          "fromBlock": hex(from_b),
-                          "toBlock": hex(to_b),
-                          "address": contract,
-                          "topics": [TRANSFER_TOPIC0, ZERO_TOPIC]
-                      }])
-                      logs = result.get("result", [])
-                      if logs:
-                          all_logs.extend(logs)
-                          print(f"  Blocks {from_b}-{to_b}: {len(logs)} mints")
-                  except Exception as e:
-                      print(f"  Blocks {from_b}-{to_b}: error - {e}")
-                  time.sleep(0.15)
+                  retries = 3
+                  for attempt in range(retries):
+                      try:
+                          result = rpc_call("eth_getLogs", [{
+                              "fromBlock": hex(from_b),
+                              "toBlock": hex(to_b),
+                              "address": contract,
+                              "topics": [TRANSFER_TOPIC0]
+                          }])
+                          logs = result.get("result", [])
+                          if logs:
+                              all_logs.extend(logs)
+                              print(f"  Blocks {from_b}-{to_b}: {len(logs)} transfers")
+                          break
+                      except Exception as e:
+                          if attempt < retries - 1:
+                              time.sleep(2 ** (attempt + 1))
+                          else:
+                              print(f"  Blocks {from_b}-{to_b}: FAILED after {retries} retries - {e}")
+                  time.sleep(0.3)
 
-              print(f"  Total mint events: {len(all_logs)}")
+              print(f"  Total Transfer events: {len(all_logs)}")
 
+              # For each token we care about, find the earliest Transfer
               for log in all_logs:
                   topics = log.get("topics", [])
-                  if len(topics) >= 3:
-                      token_id = str(int(topics[2], 16))
-                      block = int(log["blockNumber"], 16)
-                      mint_map[(contract, token_id)] = block
+                  if len(topics) >= 4:
+                      token_id = str(int(topics[3], 16))
+                      if token_id in token_ids:
+                          block = int(log["blockNumber"], 16)
+                          key = (contract, token_id)
+                          if key not in mint_map or block < mint_map[key]:
+                              mint_map[key] = block
 
-              time.sleep(0.3)
+              matched = sum(1 for tid in token_ids if (contract, tid) in mint_map)
+              print(f"  Matched {matched}/{len(token_ids)} tokens to first Transfer block")
+              time.sleep(0.5)
 
           print(f"\n=== Found mint blocks for {len(mint_map)} tokens ===")
 
