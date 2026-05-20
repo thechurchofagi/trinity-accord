@@ -19,7 +19,7 @@ jobs:
           python3 << 'PYEOF'
           import json, time, datetime, urllib.request, urllib.error, os
 
-          ETHERSCAN_API = "https://api.etherscan.io/v2/api?chainid=1"
+          ETHERSCAN_API = "https://api.etherscan.io/v2/api"
           API_KEY = os.environ.get("ETHERSCAN_KEY", "")
           ZERO_TOPIC = "0x0000000000000000000000000000000000000000000000000000000000000000"
           TRANSFER_TOPIC = "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef"
@@ -28,6 +28,7 @@ jobs:
               token_index = json.load(f)
 
           def etherscan_get(params, retries=5):
+              params["chainid"] = "1"
               if API_KEY:
                   params["apikey"] = API_KEY
               query = "&".join(f"{k}={v}" for k, v in params.items())
