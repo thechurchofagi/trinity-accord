@@ -95,4 +95,4 @@ def markdown_escape_text(value: str) -> str:
     # Escape Markdown control characters
     for ch in ["\\", "[", "]", "(", ")", "`", "*", "_", "{", "}", "<", ">", "#", "|"]:
         value = value.replace(ch, "\\" + ch)
-    return value[:300]
+    return value

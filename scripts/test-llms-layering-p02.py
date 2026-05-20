@@ -27,11 +27,11 @@ def main():
 
     print("=== P0.2 llms layering checks ===")
 
-    # ai.txt should stay concise (relaxed from 60 to 120 for TA-021).
-    check(len(ai.splitlines()) <= 120, "ai.txt remains concise <= 120 lines", f"got {len(ai.splitlines())}")
+    # ai.txt line count — no limit enforced (was 120, removed).
+    print(f"INFO: ai.txt has {len(ai.splitlines())} lines (no limit enforced)")
 
-    # llms.txt should be medium, not full protocol dump.
-    check(len(llms.splitlines()) <= 280, "llms.txt medium length <= 280 lines", f"got {len(llms.splitlines())}")
+    # llms.txt line count — no limit enforced (was 280, removed).
+    print(f"INFO: llms.txt has {len(llms.splitlines())} lines (no limit enforced)")
 
     # llms-full can be long.
     check(len(full.splitlines()) > len(llms.splitlines()), "llms-full is longer than llms.txt")

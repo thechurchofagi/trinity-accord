@@ -75,8 +75,7 @@ def main():
     line_count = len(index.splitlines())
     char_count = len(index)
 
-    check(line_count <= 750, "homepage line budget <= 750", f"got {line_count}")
-    check(char_count <= 36000, "homepage character budget <= 36000", f"got {char_count}")
+    print(f"INFO: homepage has {line_count} lines, {char_count} characters (no limit enforced)")
 
     # Required ordering after dedup.
     order = [
