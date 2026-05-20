@@ -2,163 +2,62 @@ name: Enrich NFT Mint Timestamps
 
 on:
   workflow_dispatch:
+    inputs:
+      start_block:
+        description: "ETH start block for log scan"
+        required: false
+        default: "18000000"
+      end_block:
+        description: "ETH end block or latest"
+        required: false
+        default: "latest"
+      chunk:
+        description: "eth_getLogs block chunk size"
+        required: false
+        default: "50000"
+      commit_changes:
+        description: "Commit generated timestamp files"
+        required: false
+        default: "true"
 
 permissions:
   contents: write
 
 jobs:
   enrich:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
+
     steps:
       - uses: actions/checkout@v4
 
-      - name: Fetch ETH mint timestamps via public RPC eth_getLogs
+      - name: Enrich NFT mint timestamps
+        env:
+          ETH_RPC_URLS: ${{ secrets.ETH_RPC_URLS }}
         run: |
-          python3 << 'PYEOF'
-          import json, time, datetime, urllib.request
+          python3 scripts/enrich_nft_timestamps.py \
+            --start-block "${{ github.event.inputs.start_block }}" \
+            --end-block "${{ github.event.inputs.end_block }}" \
+            --chunk "${{ github.event.inputs.chunk }}"
 
-          RPCS = [
-              "https://rpc.ankr.com/eth",
-              "https://ethereum-rpc.publicnode.com",
-              "https://cloudflare-eth.com",
-              "https://1rpc.io/eth",
-          ]
-          TRANSFER_TOPIC = "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef"
-          ZERO_TOPIC = "0x0000000000000000000000000000000000000000000000000000000000000000"
-          CHUNK = 50000
-
-          with open("token_index.json") as f:
-              token_index = json.load(f)
-
-          rpc_idx = 0
-          def rpc(method, params, retries=6):
-              global rpc_idx
-              payload = json.dumps({"jsonrpc":"2.0","id":1,"method":method,"params":params}).encode()
-              for i in range(retries):
-                  url = RPCS[rpc_idx % len(RPCS)]
-                  req = urllib.request.Request(url, data=payload,
-                      headers={"Content-Type":"application/json","User-Agent":"trinity-accord/1.0"})
-                  try:
-                      with urllib.request.urlopen(req, timeout=30) as r:
-                          d = json.loads(r.read())
-                      if "result" in d and d["result"] is not None:
-                          return d["result"]
-                      if "error" in d:
-                          print(f"    RPC error ({url}): {d['error']}")
-                          rpc_idx += 1
-                          time.sleep(1)
-                          continue
-                  except Exception as e:
-                      print(f"    {url} failed: {e}")
-                      rpc_idx += 1
-                      time.sleep(2)
-              return None
-
-          # Test connectivity
-          test = rpc("eth_blockNumber", [])
-          if not test:
-              print("ERROR: All RPC endpoints failed!")
-              exit(1)
-          latest = int(test, 16)
-          print(f"Latest block: {latest:,}")
-
-          ts_cache = {}
-          def block_ts(n):
-              if n in ts_cache: return ts_cache[n]
-              blk = rpc("eth_getBlockByNumber", [hex(n), False])
-              ts = int(blk["timestamp"],16) if blk else None
-              ts_cache[n] = ts
-              time.sleep(0.1)
-              return ts
-
-          mint_map = {}
-
-          for contract in token_index:
-              tokens = token_index[contract]
-              token_ids = set(tokens.keys()) if isinstance(tokens, dict) else set(str(t) for t in tokens)
-              cl = contract.lower()
-              print(f"\n{'='*50}\n{contract} ({len(token_ids)} tokens)")
-
-              cur = 0
-              found = 0
-              chunk_count = 0
-              while cur <= latest:
-                  end = min(cur + CHUNK - 1, latest)
-                  logs = rpc("eth_getLogs", [{
-                      "address": contract,
-                      "topics": [TRANSFER_TOPIC, ZERO_TOPIC],
-                      "fromBlock": hex(cur),
-                      "toBlock": hex(end)
-                  }])
-                  if logs:
-                      for lg in logs:
-                          tid_hex = lg.get("data","0x")
-                          if tid_hex in ("0x",""): continue
-                          try: tid = str(int(tid_hex,16))
-                          except: continue
-                          if tid not in token_ids: continue
-                          bn = int(lg["blockNumber"],16)
-                          key = (cl, tid)
-                          if key not in mint_map or bn < mint_map[key]["block"]:
-                              ts = block_ts(bn)
-                              mint_map[key] = {"block":bn,"timestamp":ts,
-                                  "datetime":datetime.datetime.utcfromtimestamp(ts).strftime("%Y-%m-%dT%H:%M:%SZ") if ts else None}
-                              found += 1
-                  cur = end + 1
-                  chunk_count += 1
-                  if chunk_count % 20 == 0:
-                      pct = min(100, (cur / max(1,latest)) * 100)
-                      print(f"  progress: {pct:.0f}% | mints: {found}")
-                  time.sleep(0.1)
-
-              print(f"  Done: {found}/{len(token_ids)} matched")
-
-          print(f"\n{'='*50}\nTotal timestamps: {len(mint_map)}")
-
-          entries = []
-          for contract in token_index:
-              tokens = token_index[contract]
-              tids = list(tokens.keys()) if isinstance(tokens, dict) else list(str(t) for t in tokens)
-              cl = contract.lower()
-              for tid in tids:
-                  info = mint_map.get((cl,tid),{})
-                  entries.append({"contract":contract,"token_id":tid,
-                      "block":info.get("block"),"timestamp":info.get("timestamp"),"datetime":info.get("datetime")})
-          entries.sort(key=lambda x: x["timestamp"] or 9999999999)
-
-          with open("nft-text-descriptions/eth-mint-timestamps.json","w") as f:
-              json.dump(entries, f, indent=2, ensure_ascii=False)
-
-          with open("nft-text-descriptions/index.json") as f:
-              index = json.load(f)
-          ts_map = {(e["contract"].lower(),e["token_id"]):e for e in entries}
-          for item in index:
-              k = (item["contract"].lower(),item["token_id"])
-              if k in ts_map:
-                  for fld in ("block","timestamp","datetime"):
-                      item[fld] = ts_map[k][fld]
-          index.sort(key=lambda x: x.get("timestamp") or 9999999999)
-          with open("nft-text-descriptions/index.json","w") as f:
-              json.dump(index, f, indent=2, ensure_ascii=False)
-
-          wt = sum(1 for e in entries if e["timestamp"])
-          print(f"\nTotal: {len(entries)}, with ts: {wt}, without: {len(entries)-wt}")
-          if wt:
-              d=[e for e in entries if e["datetime"]]
-              print("Earliest 5:")
-              for e in d[:5]: print(f"  {e['datetime']} blk={e['block']} ...{e['token_id'][-8:]}")
-              print("Latest 5:")
-              for e in d[-5:]: print(f"  {e['datetime']} blk={e['block']} ...{e['token_id'][-8:]}")
-          if not wt:
-              print("⚠️  No timestamps found!")
-              exit(1)
-          PYEOF
+      - name: Upload timestamp diagnostics
+        uses: actions/upload-artifact@v4
+        with:
+          name: nft-timestamp-enrichment
+          path: |
+            nft-text-descriptions/eth-mint-timestamps.json
+            nft-text-descriptions/missing-timestamps.json
+            nft-text-descriptions/timestamp-enrichment-report.json
+            nft-text-descriptions/index.json
 
       - name: Commit and push
+        if: ${{ github.event.inputs.commit_changes == 'true' }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add nft-text-descriptions/
+          git add nft-text-descriptions/eth-mint-timestamps.json \
+                  nft-text-descriptions/missing-timestamps.json \
+                  nft-text-descriptions/timestamp-enrichment-report.json \
+                  nft-text-descriptions/index.json
           git diff --cached --quiet && echo "No changes" && exit 0
-          git commit -m "feat: enrich NFT descriptions with ETH mint timestamps and sort chronologically"
+          git commit -m "feat: enrich NFT descriptions with ETH mint timestamps"
           git push

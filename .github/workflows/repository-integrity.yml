@@ -246,6 +246,12 @@ jobs:
       - name: Test root CID boundary
         run: python3 scripts/test_download_nft_cars_root_cid_boundary.py
 
+      - name: Test NFT timestamp enrichment workflow
+        run: python3 scripts/test_enrich_nft_timestamps_static.py
+
+      - name: Test NFT text description mirror integrity
+        run: python3 scripts/test_nft_text_description_mirror_integrity.py
+
       - name: Test TA-007 comprehensive regressions
         run: python3 scripts/test_ta_redteam_2026_007_regressions.py
 
