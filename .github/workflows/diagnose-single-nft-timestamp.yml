@@ -40,7 +40,7 @@ jobs:
 
       - name: Diagnose single NFT timestamp
         env:
-          ETH_RPC_URLS: ${{ secrets.ETHEREUMMAINNET }}
+          ETH_RPC_URLS: ${{ secrets.ETH_RPC_URLS }}
         run: |
           args=(
             --contract "${{ github.event.inputs.contract }}"
