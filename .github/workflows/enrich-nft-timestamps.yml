@@ -17,44 +17,58 @@ jobs:
           python3 << 'PYEOF'
           import json, time, datetime, urllib.request
 
-          RPC_URL = "https://eth.llamarpc.com"
+          RPCS = [
+              "https://rpc.ankr.com/eth",
+              "https://ethereum-rpc.publicnode.com",
+              "https://cloudflare-eth.com",
+              "https://1rpc.io/eth",
+          ]
           TRANSFER_TOPIC = "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef"
           ZERO_TOPIC = "0x0000000000000000000000000000000000000000000000000000000000000000"
-          CHUNK = 100000  # blocks per request
+          CHUNK = 50000
 
           with open("token_index.json") as f:
               token_index = json.load(f)
 
-          def rpc(method, params, retries=5):
+          rpc_idx = 0
+          def rpc(method, params, retries=6):
+              global rpc_idx
               payload = json.dumps({"jsonrpc":"2.0","id":1,"method":method,"params":params}).encode()
-              req = urllib.request.Request(RPC_URL, data=payload, headers={"Content-Type":"application/json"})
               for i in range(retries):
+                  url = RPCS[rpc_idx % len(RPCS)]
+                  req = urllib.request.Request(url, data=payload,
+                      headers={"Content-Type":"application/json","User-Agent":"trinity-accord/1.0"})
                   try:
                       with urllib.request.urlopen(req, timeout=30) as r:
                           d = json.loads(r.read())
-                      if "result" in d:
+                      if "result" in d and d["result"] is not None:
                           return d["result"]
                       if "error" in d:
-                          if "limit" in str(d["error"]).lower():
-                              time.sleep(2*(2**i)); continue
-                          print(f"    RPC error: {d['error']}")
-                          return None
+                          print(f"    RPC error ({url}): {d['error']}")
+                          rpc_idx += 1
+                          time.sleep(1)
+                          continue
                   except Exception as e:
-                      print(f"    Retry {i+1}: {e}")
-                      time.sleep(2*(2**i))
+                      print(f"    {url} failed: {e}")
+                      rpc_idx += 1
+                      time.sleep(2)
               return None
 
-          latest = int(rpc("eth_blockNumber", []), 16)
+          # Test connectivity
+          test = rpc("eth_blockNumber", [])
+          if not test:
+              print("ERROR: All RPC endpoints failed!")
+              exit(1)
+          latest = int(test, 16)
           print(f"Latest block: {latest:,}")
 
-          # Get block timestamp with cache
           ts_cache = {}
           def block_ts(n):
               if n in ts_cache: return ts_cache[n]
               blk = rpc("eth_getBlockByNumber", [hex(n), False])
               ts = int(blk["timestamp"],16) if blk else None
               ts_cache[n] = ts
-              time.sleep(0.12)
+              time.sleep(0.1)
               return ts
 
           mint_map = {}
@@ -65,9 +79,9 @@ jobs:
               cl = contract.lower()
               print(f"\n{'='*50}\n{contract} ({len(token_ids)} tokens)")
 
-              # Query Transfer from=0x0 (mints) in chunks
               cur = 0
               found = 0
+              chunk_count = 0
               while cur <= latest:
                   end = min(cur + CHUNK - 1, latest)
                   logs = rpc("eth_getLogs", [{
@@ -84,7 +98,6 @@ jobs:
                           except: continue
                           if tid not in token_ids: continue
                           bn = int(lg["blockNumber"],16)
-                          txh = lg.get("transactionHash","")
                           key = (cl, tid)
                           if key not in mint_map or bn < mint_map[key]["block"]:
                               ts = block_ts(bn)
@@ -92,12 +105,16 @@ jobs:
                                   "datetime":datetime.datetime.utcfromtimestamp(ts).strftime("%Y-%m-%dT%H:%M:%SZ") if ts else None}
                               found += 1
                   cur = end + 1
-                  time.sleep(0.12)
+                  chunk_count += 1
+                  if chunk_count % 20 == 0:
+                      pct = min(100, (cur / max(1,latest)) * 100)
+                      print(f"  progress: {pct:.0f}% | mints: {found}")
+                  time.sleep(0.1)
 
-              print(f"  Matched: {found}/{len(token_ids)}")
+              print(f"  Done: {found}/{len(token_ids)} matched")
 
-          # Build outputs
           print(f"\n{'='*50}\nTotal timestamps: {len(mint_map)}")
+
           entries = []
           for contract in token_index:
               tokens = token_index[contract]
@@ -107,7 +124,6 @@ jobs:
                   info = mint_map.get((cl,tid),{})
                   entries.append({"contract":contract,"token_id":tid,
                       "block":info.get("block"),"timestamp":info.get("timestamp"),"datetime":info.get("datetime")})
-
           entries.sort(key=lambda x: x["timestamp"] or 9999999999)
 
           with open("nft-text-descriptions/eth-mint-timestamps.json","w") as f:
@@ -119,7 +135,8 @@ jobs:
           for item in index:
               k = (item["contract"].lower(),item["token_id"])
               if k in ts_map:
-                  item["block"]=ts_map[k]["block"]; item["timestamp"]=ts_map[k]["timestamp"]; item["datetime"]=ts_map[k]["datetime"]
+                  for fld in ("block","timestamp","datetime"):
+                      item[fld] = ts_map[k][fld]
           index.sort(key=lambda x: x.get("timestamp") or 9999999999)
           with open("nft-text-descriptions/index.json","w") as f:
               json.dump(index, f, indent=2, ensure_ascii=False)
