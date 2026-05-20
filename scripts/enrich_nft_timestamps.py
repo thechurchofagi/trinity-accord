@@ -10,6 +10,25 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
+# Progress log file — also written to GITHUB_STEP_SUMMARY if available
+PROGRESS_LOG = ROOT / "nft-text-descriptions" / "enrichment-progress.log"
+SUMMARY_FILE = os.environ.get("GITHUB_STEP_SUMMARY")
+
+def log_progress(msg: str):
+    """Write progress to stdout, log file, and GITHUB_STEP_SUMMARY."""
+    print(msg, flush=True)
+    try:
+        with open(PROGRESS_LOG, "a", encoding="utf-8") as f:
+            f.write(msg + "\n")
+    except Exception:
+        pass
+    if SUMMARY_FILE:
+        try:
+            with open(SUMMARY_FILE, "a", encoding="utf-8") as f:
+                f.write(msg + "\n")
+        except Exception:
+            pass
+
 ERC721_TRANSFER_TOPIC = "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef"
 ERC1155_TRANSFER_SINGLE_TOPIC = "0xc3d58168c5ae7397731d063d5bbf3d657854427343f4c083240f7aacaa2d0f62"
 ERC1155_TRANSFER_BATCH_TOPIC = "0x4a39dc06d4c0dbc64b70af90fd698a233a518aa5d07e595d983b8c0526c8f7fb"
@@ -196,7 +215,7 @@ def find_erc721_mints(rpcs, contract, token_ids, start_block, end_block, chunk, 
         if found:
             results[tid] = found
         if (i + 1) % 5 == 0 or (i + 1) == total:
-            print(f"    [progress] ERC721 precise: {i + 1}/{total} checked, {len(results)} found", flush=True)
+            log_progress(f"    [progress] ERC721 precise: {i + 1}/{total} checked, {len(results)} found", flush=True)
     return results
 
 def find_erc721_first_transfers(rpcs, contract, missing_token_ids, start_block, end_block, chunk, block_cache):
@@ -221,7 +240,7 @@ def find_erc721_first_transfers(rpcs, contract, missing_token_ids, start_block, 
         if found:
             results[tid] = found
         if (i + 1) % 5 == 0 or (i + 1) == total:
-            print(f"    [progress] ERC721 fallback: {i + 1}/{total} checked, {len(results)} found", flush=True)
+            log_progress(f"    [progress] ERC721 fallback: {i + 1}/{total} checked, {len(results)} found", flush=True)
     return results
 
 def find_erc1155_single_mints(rpcs, contract, token_ids, start_block, end_block, chunk, block_cache):
@@ -249,7 +268,7 @@ def find_erc1155_single_mints(rpcs, contract, token_ids, start_block, end_block,
         scanned += 1
         if scanned % 10 == 0 or to_block >= end_block:
             pct = min(100, int(scanned * 100 / total_chunks))
-            print(f"    [progress] ERC1155 single: block {to_block:,}/{end_block:,} ({pct}%), {len(results)} found", flush=True)
+            log_progress(f"    [progress] ERC1155 single: block {to_block:,}/{end_block:,} ({pct}%), {len(results)} found", flush=True)
         cur = to_block + 1
     return results
 
@@ -282,7 +301,7 @@ def find_erc1155_batch_mints(rpcs, contract, token_ids, start_block, end_block, 
         scanned += 1
         if scanned % 10 == 0 or to_block >= end_block:
             pct = min(100, int(scanned * 100 / total_chunks))
-            print(f"    [progress] ERC1155 batch: block {to_block:,}/{end_block:,} ({pct}%), {len(results)} found", flush=True)
+            log_progress(f"    [progress] ERC1155 batch: block {to_block:,}/{end_block:,} ({pct}%), {len(results)} found", flush=True)
         cur = to_block + 1
     return results
 
@@ -341,7 +360,7 @@ def main():
 
     for contract, token_ids in groups.items():
         elapsed = int(time.time() - run_start)
-        print(f"\n=== {contract} ({len(token_ids)} tokens) | elapsed: {elapsed // 60}m {elapsed % 60}s ===", flush=True)
+        log_progress(f"\n=== {contract} ({len(token_ids)} tokens) | elapsed: {elapsed // 60}m {elapsed % 60}s ===", flush=True)
         found = {}
 
         try:
@@ -351,7 +370,7 @@ def main():
             print(f"  ERC721 mint stage failed: {e}", file=sys.stderr)
 
         elapsed = int(time.time() - run_start)
-        print(f"  [checkpoint] after ERC721 mint: {len(found)} found | elapsed: {elapsed // 60}m {elapsed % 60}s", flush=True)
+        log_progress(f"  [checkpoint] after ERC721 mint: {len(found)} found | elapsed: {elapsed // 60}m {elapsed % 60}s", flush=True)
 
         missing = set(token_ids) - set(found)
         try:
@@ -363,7 +382,7 @@ def main():
             print(f"  ERC1155 single stage failed: {e}", file=sys.stderr)
 
         elapsed = int(time.time() - run_start)
-        print(f"  [checkpoint] after ERC1155 single: {len(found)} found | elapsed: {elapsed // 60}m {elapsed % 60}s", flush=True)
+        log_progress(f"  [checkpoint] after ERC1155 single: {len(found)} found | elapsed: {elapsed // 60}m {elapsed % 60}s", flush=True)
 
         missing = set(token_ids) - set(found)
         try:
@@ -375,7 +394,7 @@ def main():
             print(f"  ERC1155 batch stage failed: {e}", file=sys.stderr)
 
         elapsed = int(time.time() - run_start)
-        print(f"  [checkpoint] after ERC1155 batch: {len(found)} found | elapsed: {elapsed // 60}m {elapsed % 60}s", flush=True)
+        log_progress(f"  [checkpoint] after ERC1155 batch: {len(found)} found | elapsed: {elapsed // 60}m {elapsed % 60}s", flush=True)
 
         missing = set(token_ids) - set(found)
         try:
@@ -394,7 +413,7 @@ def main():
             }
 
         elapsed = int(time.time() - run_start)
-        print(f"  Found {len(found)}/{len(token_ids)} | elapsed: {elapsed // 60}m {elapsed % 60}s", flush=True)
+        log_progress(f"  Found {len(found)}/{len(token_ids)} | elapsed: {elapsed // 60}m {elapsed % 60}s", flush=True)
 
     timestamp_entries = []
     missing_entries = []

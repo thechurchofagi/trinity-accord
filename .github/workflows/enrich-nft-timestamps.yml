@@ -48,6 +48,7 @@ jobs:
             nft-text-descriptions/missing-timestamps.json
             nft-text-descriptions/timestamp-enrichment-report.json
             nft-text-descriptions/index.json
+            nft-text-descriptions/enrichment-progress.log
 
       - name: Commit and push
         if: ${{ github.event.inputs.commit_changes == 'true' }}
