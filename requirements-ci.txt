@@ -5,4 +5,4 @@ referencing==0.35.1
 rpds-py==0.20.0
 PyYAML==6.0.1
 opentimestamps-client==0.7.2
-cryptography==44.0.3
+cryptography==46.0.7
