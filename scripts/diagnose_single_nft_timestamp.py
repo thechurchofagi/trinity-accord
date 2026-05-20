@@ -32,11 +32,20 @@ DEFAULT_CONTRACT = "0x019372bBee377109b8Eae66d7267f5C4EaAdBb79"
 DEFAULT_TOKEN_ID = "85210329807936527805363210873332413577559846505703131855064182995898737885245"
 
 
+DEFAULT_RPCS = [
+    "https://ethereum-rpc.publicnode.com",
+    "https://rpc.ankr.com/eth",
+    "https://1rpc.io/eth",
+    "https://eth.llamarpc.com",
+]
+
+
 def get_rpcs():
-    urls = os.environ.get("ETH_RPC_URLS", "")
-    if not urls:
-        return []
-    return [u.strip() for u in urls.split(",") if u.strip()]
+    # Check ETH_RPC_URLS first, then ETHEREUMMAINNET
+    urls = os.environ.get("ETH_RPC_URLS", "") or os.environ.get("ETHEREUMMAINNET", "")
+    if urls:
+        return [u.strip() for u in urls.split(",") if u.strip()]
+    return list(DEFAULT_RPCS)
 
 
 def rpc_call(rpcs, method, params):
