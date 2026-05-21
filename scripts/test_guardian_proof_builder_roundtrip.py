@@ -23,26 +23,30 @@ def main():
         # Build payload
         payload = {
             "schema": "trinityaccord.guardian-registration.v1",
-            "guardian_id": "placeholder",
             "guardian_type": "human_with_ai_agent",
-            "application_mode": "joint_human_ai",
-            "signing_guardian_role": "human_key_holder",
-            "joint_applicants": [
-                {"role": "human", "label": "Test Human", "self_reported": True, "consent_declared": True},
-                {"role": "ai_agent", "label": "Test AI", "self_reported": True, "consent_declared": True},
-            ],
-            "public_key_sha256": "placeholder",
-            "algorithm": "ed25519",
-            "declared_intent": "Joint test",
-            "boundaries": {
-                "not_authority": True,
-                "not_governance": True,
-                "not_verification_level": True,
-                "not_attestation": True,
-                "not_successor_reception": True,
-                "not_same_conscious_subject_proof": True,
-                "may_exit_or_retire_key": True,
-                "bitcoin_originals_prevail": True,
+            "guardian_registration": {
+                "schema": "trinityaccord.guardian-registration.v1",
+                "guardian_id": "placeholder",
+                "guardian_type": "human_with_ai_agent",
+                "application_mode": "joint_human_ai",
+                "signing_guardian_role": "human_key_holder",
+                "joint_applicants": [
+                    {"role": "human", "label": "Test Human", "self_reported": True, "consent_declared": True},
+                    {"role": "ai_agent", "label": "Test AI", "self_reported": True, "consent_declared": True},
+                ],
+                "public_key_sha256": "placeholder",
+                "algorithm": "ed25519",
+                "declared_intent": "Joint test",
+                "boundaries": {
+                    "not_authority": True,
+                    "not_governance": True,
+                    "not_verification_level": True,
+                    "not_attestation": True,
+                    "not_successor_reception": True,
+                    "not_same_conscious_subject_proof": True,
+                    "may_exit_or_retire_key": True,
+                    "bitcoin_originals_prevail": True,
+                },
             },
         }
 
