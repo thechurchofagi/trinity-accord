@@ -855,7 +855,15 @@
       "properties": {
         "declared_template_level": {
           "type": "string",
-          "enum": ["V0", "V1", "V2", "V3", "V4", "V4+", "V5"]
+          "enum": [
+            "V0",
+            "V1",
+            "V2",
+            "V3",
+            "V4",
+            "V4+",
+            "V5"
+          ]
         },
         "understands_self_declared_template_level": {
           "type": "boolean",
@@ -886,7 +894,9 @@
     "high_level_confirmation": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["required"],
+      "required": [
+        "required"
+      ],
       "properties": {
         "required": {
           "type": "boolean"
@@ -940,19 +950,38 @@
       }
     },
     "guardian_registration": {
-      "type": ["object", "null"],
+      "type": [
+        "object",
+        "null"
+      ],
       "additionalProperties": true,
       "description": "Optional self-registration for the Voluntary Guardian Alliance. Non-authoritative."
     },
     "guardian_presence_proof": {
-      "type": ["object", "null"],
+      "type": [
+        "object",
+        "null"
+      ],
       "additionalProperties": true,
       "description": "Optional Guardian key-continuity proof. Proves key possession only."
     },
     "guardian_retirement": {
-      "type": ["object", "null"],
+      "type": [
+        "object",
+        "null"
+      ],
       "additionalProperties": true,
       "description": "Optional Guardian key retirement or compromise notice. Non-authoritative."
+    },
+    "idempotency_key": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 16,
+      "maxLength": 96,
+      "pattern": "^[A-Za-z0-9._:-]+$",
+      "description": "Optional client-provided idempotency key. If omitted, Gateway computes one from the submitted payload. This reduces duplicate issue creation on retries but is not a security boundary, authority, attestation, or verification."
     }
   },
   "allOf": [
