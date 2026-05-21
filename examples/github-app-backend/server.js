@@ -2,7 +2,7 @@ import express from "express";
 import fs from "node:fs";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
-import { createHash, verify } from "node:crypto";
+import { createHash, verify, randomBytes } from "node:crypto";
 import { fileURLToPath } from "node:url";
 import { tmpdir } from "node:os";
 import Ajv from "ajv/dist/2020.js";
@@ -15,6 +15,9 @@ function gatewayError(status, {
   agent_action,
   errors = [],
   issue_created = false,
+  retryable = false,
+  request_id = null,
+  idempotency_key = null,
   extra = {}
 }) {
   return {
@@ -26,6 +29,10 @@ function gatewayError(status, {
       agent_action,
       errors,
       issue_created,
+      retryable,
+      request_id,
+      idempotency_key,
+      timestamp: new Date().toISOString(),
       skip_preflight_allowed: false,
       ...extra
     }
@@ -90,7 +97,12 @@ const root = path.resolve(__dirname, "../..");
 
 const PORT = Number(process.env.PORT || 8787);
 const DRY_RUN = String(process.env.DRY_RUN || "true").toLowerCase() === "true";
+const CANARY_MODE = String(process.env.GATEWAY_CANARY_MODE || "false").toLowerCase() === "true";
+const READINESS_GITHUB_CHECK = String(process.env.GATEWAY_READINESS_GITHUB_CHECK || "false").toLowerCase() === "true";
+const IDEMPOTENCY_ENABLED = String(process.env.GATEWAY_IDEMPOTENCY_ENABLED || "true").toLowerCase() !== "false";
 const MAX_BODY_CHARS = Number(process.env.MAX_BODY_CHARS || 60000);
+const SERVICE_NAME = "trinity-agent-issue-gateway";
+const IDEMPOTENCY_MARKER_PREFIX = "trinity-gateway-idempotency";
 
 const schemaPath = path.join(root, "api", "agent-issue-gateway-payload-schema.v1.json");
 const schema = JSON.parse(fs.readFileSync(schemaPath, "utf8"));
@@ -100,6 +112,14 @@ const validate = ajv.compile(schema);
 
 const app = express();
 app.use(express.json({ limit: "256kb" }));
+
+app.use((req, res, next) => {
+  const inbound = req.get("x-request-id") || req.get("x-correlation-id");
+  const generated = `gwreq-${Date.now()}-${randomBytes(8).toString("hex")}`;
+  req.gatewayRequestId = String(inbound || generated).slice(0, 120);
+  res.set("x-request-id", req.gatewayRequestId);
+  next();
+});
 
 // Secret detection
 function rejectSecretPatterns(text) {
@@ -135,6 +155,56 @@ function payloadWithoutAuthorship(payload) {
 
 function sha256Text(s) {
   return createHash("sha256").update(s, "utf8").digest("hex");
+}
+
+function payloadForIdempotency(payload) {
+  const clone = JSON.parse(JSON.stringify(payload || {}));
+  delete clone.idempotency_key;
+  delete clone._authorship_claim;
+  delete clone._guardian_status;
+  delete clone.guardian_verification_result;
+  delete clone.archive_readiness;
+  delete clone._auto_archive_decision;
+  return clone;
+}
+
+function computeIdempotencyKey(payload) {
+  const provided = String((payload || {}).idempotency_key || "").trim();
+  if (provided) return provided;
+  return `gwid_${sha256Text(stableStringify(payloadForIdempotency(payload))).slice(0, 48)}`;
+}
+
+function idempotencyMarker(key) {
+  return `<!-- ${IDEMPOTENCY_MARKER_PREFIX}:${key} -->`;
+}
+
+async function findExistingIssueByIdempotency(octokit, { owner, repo, key }) {
+  if (!IDEMPOTENCY_ENABLED || !key) return null;
+
+  const marker = idempotencyMarker(key);
+  const q = `repo:${owner}/${repo} "${marker}" in:body`;
+
+  try {
+    const resp = await octokit.request("GET /search/issues", { q, per_page: 1 });
+    const item = (resp.data.items || [])[0];
+    if (!item) return null;
+
+    return {
+      issue_number: item.number,
+      issue_url: item.html_url,
+      state: item.state,
+      idempotency_key: key,
+      idempotency_scope: "best_effort_github_issue_search"
+    };
+  } catch (err) {
+    return {
+      search_error: true,
+      status: err.status || null,
+      message: err.message,
+      idempotency_key: key,
+      idempotency_scope: "best_effort_github_issue_search"
+    };
+  }
 }
 
 function normalizePem(pem) {
@@ -721,6 +791,12 @@ async function ensureLabel(octokit, { owner, repo, name, color, description }) {
   }
 }
 
+function withRequestId(req, result) {
+  if (!result || !result.body) return result;
+  if (!result.body.request_id) result.body.request_id = req.gatewayRequestId || null;
+  return result;
+}
+
 function sendGatewayError(res, err) {
   return res.status(err.status).json(err.body);
 }
@@ -946,6 +1022,11 @@ async function runGatewayPipeline(payload, {
 
   // 1. Normalize archive intent defaults only after wrapper rejection.
   payload = normalizeArchiveIntentDefaults(payload);
+
+  const idempotencyKey = computeIdempotencyKey(payload);
+  if (!payload.idempotency_key) {
+    payload.idempotency_key = idempotencyKey;
+  }
 
   // 1b. V0-V5 fail-closed: reject wrong path BEFORE any other validation
   // Must run AFTER normalization so we see the final record_intent/requested_archive_kind,
@@ -1383,7 +1464,8 @@ async function runGatewayPipeline(payload, {
     }
 
     const issueTitle = `[Agent Gateway] ${String(payload.title || "").slice(0, 180)}`;
-    const issueBody = render.stdout;
+    const lintableIssueBody = render.stdout;
+    const issueBody = `${lintableIssueBody}\n\n${idempotencyMarker(idempotencyKey)}\n`;
 
     if (issueBody.length > 65536) {
       return gatewayError(413, {
@@ -1410,7 +1492,9 @@ async function runGatewayPipeline(payload, {
         rendered_body_preview: issueBody.slice(0, 1000),
         archive_readiness: archiveReadiness,
         auto_archive_decision: autoArchiveDecision,
-        guardian_verification_result: payload._guardian_status
+        guardian_verification_result: payload._guardian_status,
+        idempotency_key: idempotencyKey,
+        idempotency_scope: "computed_preview_only",
       };
       // Include structured level selection warnings if present
       if (validatorWarnings.length > 0) {
@@ -1423,8 +1507,8 @@ async function runGatewayPipeline(payload, {
       };
     }
 
-    // DRY_RUN mode
-    if (DRY_RUN) {
+    // DRY_RUN or CANARY mode — full validation/render/lint completed, but no GitHub write.
+    if (DRY_RUN || CANARY_MODE) {
       const baseLabels = ["agent-gateway-intake", "needs-triage"];
       const labelsToAdd = autoArchiveDecision.labels_to_add || [];
       // P1-2: Filter labels that would be removed on auto-archive success
@@ -1452,7 +1536,11 @@ async function runGatewayPipeline(payload, {
         archive_readiness: archiveReadiness,
         auto_archive_decision: autoArchiveDecision,
         guardian_verification_result: payload._guardian_status,
-        boundary: "Gateway-rendered candidate; archive status only if Archive Readiness Gate passes; not attestation or successor reception"
+        boundary: "Gateway-rendered candidate; archive status only if Archive Readiness Gate passes; not attestation or successor reception",
+        canary_mode: CANARY_MODE,
+        write_blocked_by_canary: CANARY_MODE && createIssue,
+        idempotency_key: idempotencyKey,
+        idempotency_scope: DRY_RUN ? "dry_run_no_write" : "canary_no_write",
       };
       if (validatorWarnings.length > 0) {
         dryRunBody.level_selection_warnings = validatorWarnings;
@@ -1468,6 +1556,47 @@ async function runGatewayPipeline(payload, {
     const labelsToAdd = autoArchiveDecision.labels_to_add || [];
     const labelsToRemove = autoArchiveDecision.labels_to_remove || [];
     const allLabels = [...new Set([...baseLabels, ...labelsToAdd])];
+
+    const productionWarnings = [];
+
+    if (IDEMPOTENCY_ENABLED) {
+      const idempotencyLookup = await findExistingIssueByIdempotency(octokit, {
+        owner,
+        repo,
+        key: idempotencyKey
+      });
+
+      if (idempotencyLookup && !idempotencyLookup.search_error && idempotencyLookup.issue_number) {
+        return {
+          status: 200,
+          body: {
+            accepted: true,
+            status: "existing_issue_returned",
+            idempotent: true,
+            issue_created: false,
+            issue_number: idempotencyLookup.issue_number,
+            issue_url: idempotencyLookup.issue_url,
+            idempotency_key: idempotencyKey,
+            idempotency_scope: "best_effort_github_issue_search",
+            archive_readiness: archiveReadiness,
+            auto_archive_decision: autoArchiveDecision,
+            guardian_verification_result: payload._guardian_status,
+            boundary: "Idempotency returns an existing Gateway issue; not authority, not attestation, not successor reception."
+          }
+        };
+      }
+
+      if (idempotencyLookup?.search_error) {
+        productionWarnings.push({
+          code: "IDEMPOTENCY_SEARCH_FAILED",
+          stage: "github_issue_search",
+          retryable: true,
+          status: idempotencyLookup.status,
+          message: idempotencyLookup.message,
+          boundary: "Issue creation may proceed; duplicate protection is best-effort only."
+        });
+      }
+    }
 
     const result = await octokit.request("POST /repos/{owner}/{repo}/issues", {
       owner,
@@ -1489,6 +1618,12 @@ async function runGatewayPipeline(payload, {
         });
       } catch (commentErr) {
         console.error("Failed to post archive decision comment:", commentErr.message);
+        productionWarnings.push({
+          code: "ARCHIVE_DECISION_COMMENT_FAILED",
+          stage: "github_comment_create",
+          retryable: true,
+          message: commentErr.message
+        });
       }
     }
 
@@ -1503,6 +1638,12 @@ async function runGatewayPipeline(payload, {
         });
       } catch (closeErr) {
         console.error("Failed to close archived issue:", closeErr.message);
+        productionWarnings.push({
+          code: "ISSUE_CLOSE_FAILED",
+          stage: "github_issue_close",
+          retryable: true,
+          message: closeErr.message
+        });
       }
     }
 
@@ -1520,7 +1661,15 @@ async function runGatewayPipeline(payload, {
         await octokit.request("DELETE /repos/{owner}/{repo}/issues/{issue_number}/labels/{name}", {
           owner, repo, issue_number: issueNumber, name: label
         });
-      } catch {}
+      } catch (labelErr) {
+        productionWarnings.push({
+          code: "LABEL_REMOVE_FAILED",
+          stage: "github_label_remove",
+          retryable: true,
+          label,
+          message: labelErr.message
+        });
+      }
     }
 
     return {
@@ -1535,6 +1684,13 @@ async function runGatewayPipeline(payload, {
         gateway_receipt_id: gatewayReceiptId,
         archive_readiness: archiveReadiness,
         auto_archive_decision: autoArchiveDecision,
+        idempotency_key: idempotencyKey,
+        idempotency_scope: "best_effort_github_issue_search",
+        guardian_verification_result: payload._guardian_status,
+        warnings: [
+          ...(validatorWarnings || []).map(w => ({ code: "VALIDATOR_WARNING", message: w })),
+          ...productionWarnings
+        ],
         gateway_version: {
           repo_commit: execFileSync("git", ["rev-parse", "--short", "HEAD"], {
             cwd: root, encoding: "utf-8", timeout: 5000
@@ -1548,12 +1704,132 @@ async function runGatewayPipeline(payload, {
     return gatewayError(500, {
       reason: "internal_error",
       validation_stage: "internal",
-      agent_action: "This is a Gateway internal error. Do not modify payload. Report this error.",
-      errors: [err.message]
+      agent_action: "This is a Gateway internal error. Do not modify payload. Retry once with the same idempotency_key if retryable; otherwise report request_id and error code.",
+      retryable: true,
+      idempotency_key: typeof idempotencyKey !== "undefined" ? idempotencyKey : null,
+      errors: [{
+        code: "GATEWAY_INTERNAL_ERROR",
+        stage: "internal",
+        retryable: true,
+        message: err.message
+      }]
     });
   } finally {
     try { fs.rmSync(tmpDir, { recursive: true, force: true }); } catch {}
   }
+}
+
+function getRepoCommit(short = true) {
+  try {
+    return execFileSync("git", ["rev-parse", short ? "--short" : "HEAD"], {
+      cwd: root,
+      encoding: "utf-8",
+      timeout: 5000
+    }).trim();
+  } catch {
+    return "unknown";
+  }
+}
+
+function fileExistsReadable(filePath) {
+  try {
+    fs.accessSync(filePath, fs.constants.R_OK);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+function envPresent(name) {
+  return Boolean(String(process.env[name] || "").trim());
+}
+
+function collectLocalReadinessChecks() {
+  const checks = [];
+  const add = (name, ok, extra = {}) => checks.push({ name, ok: Boolean(ok), ...extra });
+
+  add("repo_root_readable", fileExistsReadable(root), { path: root });
+  add("payload_schema_readable", fileExistsReadable(schemaPath), { path: "api/agent-issue-gateway-payload-schema.v1.json" });
+  add("gateway_validator_readable", fileExistsReadable(path.join(root, "scripts", "validate_gateway_payload.py")));
+  add("issue_renderer_readable", fileExistsReadable(path.join(root, "scripts", "render_gateway_issue_body.py")));
+  add("issue_linter_readable", fileExistsReadable(path.join(root, "scripts", "validate_issue_intake_body.py")));
+  add("guardian_registry_readable", fileExistsReadable(path.join(root, "api", "guardian-registry.json")));
+
+  if (!DRY_RUN && !CANARY_MODE) {
+    add("github_repo_env_present", envPresent("GITHUB_REPO"));
+    add("github_app_id_env_present", envPresent("GITHUB_APP_ID"));
+    add("github_installation_id_env_present", envPresent("GITHUB_INSTALLATION_ID"));
+    add("github_private_key_env_present", envPresent("GITHUB_PRIVATE_KEY"));
+  } else {
+    add("github_env_required_for_writes", true, {
+      skipped: true,
+      reason: "DRY_RUN or GATEWAY_CANARY_MODE is enabled"
+    });
+  }
+
+  return checks;
+}
+
+async function collectGitHubReadinessChecks() {
+  const checks = [];
+  const add = (name, ok, extra = {}) => checks.push({ name, ok: Boolean(ok), ...extra });
+
+  if (!READINESS_GITHUB_CHECK) {
+    add("github_api_check", true, {
+      skipped: true,
+      reason: "GATEWAY_READINESS_GITHUB_CHECK=false"
+    });
+    return checks;
+  }
+
+  try {
+    const octokit = await getOctokit();
+    const { owner, repo, full } = getRepoParts();
+
+    const repoResp = await octokit.request("GET /repos/{owner}/{repo}", { owner, repo });
+    add("github_repo_accessible", true, { repo: full, private: repoResp.data.private });
+
+    await octokit.request("GET /repos/{owner}/{repo}/contents/{path}", {
+      owner,
+      repo,
+      path: "api/guardian-registry.json",
+      ref: "main"
+    });
+    add("github_can_read_guardian_registry", true);
+
+    add("github_write_check", true, {
+      skipped: true,
+      reason: "readiness does not create issues or comments"
+    });
+  } catch (err) {
+    add("github_api_check", false, {
+      status: err.status || null,
+      message: err.message
+    });
+  }
+
+  return checks;
+}
+
+async function readinessHandler(req, res) {
+  const localChecks = collectLocalReadinessChecks();
+  const githubChecks = await collectGitHubReadinessChecks();
+  const checks = [...localChecks, ...githubChecks];
+  const ok = checks.every(c => c.ok);
+
+  res.status(ok ? 200 : 503).json({
+    ok,
+    service: SERVICE_NAME,
+    gateway_commit: getRepoCommit(false),
+    dry_run: DRY_RUN,
+    canary_mode: CANARY_MODE,
+    readiness_github_check: READINESS_GITHUB_CHECK,
+    idempotency_enabled: IDEMPOTENCY_ENABLED,
+    checks,
+    request_id: req.gatewayRequestId,
+    timestamp: new Date().toISOString(),
+    boundary: "readiness only; not verification, not attestation, not successor reception"
+  });
 }
 
 // --- Routes ---
@@ -1578,6 +1854,22 @@ app.get("/health", (req, res) => {
     boundary: "Gateway-rendered candidate; archive status only if Archive Readiness Gate passes; not attestation or successor reception"
   });
 });
+
+app.get("/healthz", (req, res) => {
+  res.json({
+    ok: true,
+    service: SERVICE_NAME,
+    gateway_commit: getRepoCommit(true),
+    dry_run: DRY_RUN,
+    canary_mode: CANARY_MODE,
+    timestamp: new Date().toISOString(),
+    request_id: req.gatewayRequestId,
+    boundary: "liveness only; not readiness, not authority, not attestation"
+  });
+});
+
+app.get("/readiness", readinessHandler);
+app.get("/gateway/readiness", readinessHandler);
 
 app.get("/gateway/version", (req, res) => {
   let repoCommit = "unknown";
@@ -1614,13 +1906,18 @@ app.get("/gateway/version", (req, res) => {
     rejects_report_candidate_with_echo_fields: true,
     rejects_body_machine_block: true,
     rejects_legacy_r3_fallback: true,
-    fail_closed_on_version_mismatch: true
+    fail_closed_on_version_mismatch: true,
+    dry_run: DRY_RUN,
+    canary_mode: CANARY_MODE,
+    readiness_endpoint: "/readiness",
+    gateway_readiness_endpoint: "/gateway/readiness",
+    idempotency_enabled: IDEMPOTENCY_ENABLED,
   });
 });
 
 // --- Task #3: POST /gateway/preflight ---
 app.post("/gateway/preflight", async (req, res) => {
-  const result = await runGatewayPipeline(req.body, { createIssue: false });
+  const result = withRequestId(req, await runGatewayPipeline(req.body, { createIssue: false }));
   res.status(result.status).json(result.body);
 });
 
@@ -1751,6 +2048,16 @@ app.get("/gateway/capabilities", (req, res) => {
   res.json({
     service: "trinity-agent-issue-gateway",
     purpose: "Structured intake for Trinity Accord agent verification candidates.",
+    production_readiness: {
+      healthz: "/healthz",
+      readiness: "/readiness",
+      gateway_readiness: "/gateway/readiness",
+      preflight_required_before_submit: true,
+      canary_mode_supported: true,
+      idempotency_supported: true,
+      idempotency_scope: "best_effort_github_issue_search",
+      boundary: "operational readiness only; not authority, attestation, verification, successor reception, or amendment"
+    },
     v0_v5_archive_submission: {
       render_api_only: true,
       agent_declared_template_levels: ["V0", "V1", "V2", "V3", "V4", "V4+", "V5"],
@@ -2432,7 +2739,7 @@ app.post("/gateway/archive-preflight", async (req, res) => {
 
 // --- POST /agent-submit (uses shared pipeline) ---
 app.post("/agent-submit", async (req, res) => {
-  const result = await runGatewayPipeline(req.body, { createIssue: true });
+  const result = withRequestId(req, await runGatewayPipeline(req.body, { createIssue: true }));
   res.status(result.status).json(result.body);
 });
 
