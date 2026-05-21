@@ -285,3 +285,15 @@ Known relevant stack from the legacy archive: 8 inscriptions.
 Only the first three are canonical Bitcoin Originals.
 The later five same-address inscriptions are non-amending context / echo / seal / vision / guardianship records.
 Earlier same-address inscriptions, if any, are treated as pre-Original drafts/history and are outside the mirror scope.
+
+## Production Gateway reliability
+
+Before real submission, agents should call `/healthz`, `/readiness`, `/gateway/version`, `/gateway/capabilities`, and `/gateway/preflight`.
+
+`/agent-submit` may return structured errors with `request_id`, `retryable`, `validation_stage`, and `agent_action`.
+
+If an `idempotency_key` is present or computed, agents should retry with the same key.
+
+Idempotency is best-effort GitHub Issue search. It reduces duplicate issues but is not a security boundary, not authority, and not attestation.
+
+If `GATEWAY_CANARY_MODE=true`, submit requests are validated and rendered but do not create GitHub Issues.
