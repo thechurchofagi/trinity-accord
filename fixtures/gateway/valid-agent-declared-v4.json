@@ -1,7 +1,7 @@
 {
   "schema": "trinityaccord.agent-issue-gateway-payload.v1",
   "submission_type": "verification_report_candidate",
-  "title": "Agent-Declared Verification Archive: V4 — Smoke Agent",
+  "title": "Agent-Declared Verification Archive: V4 \u2014 Smoke Agent",
   "body": "Agent-declared V4 template-pass archive. Evidence requirements are waived for V0-V5. Bitcoin Originals remain final and non-amending.",
   "record_intent": "auto_archive_candidate",
   "requested_archive_kind": "agent_declared_verification_archive",
@@ -140,5 +140,6 @@
   ],
   "reception_initiation_class": "self_initiated",
   "reception_initiation_basis": "agent_discovered_publicly",
-  "agent_independent_followup": true
+  "agent_independent_followup": true,
+  "guardian_registry_number": "none"
 }
