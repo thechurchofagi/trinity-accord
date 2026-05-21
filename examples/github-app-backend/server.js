@@ -182,7 +182,7 @@ async function findExistingIssueByIdempotency(octokit, { owner, repo, key }) {
   if (!IDEMPOTENCY_ENABLED || !key) return null;
 
   const marker = idempotencyMarker(key);
-  const q = `repo:${owner}/${repo} "${marker}" in:body`;
+  const q = `repo:${owner}/${repo} is:issue "${marker}" in:body`;
 
   try {
     const resp = await octokit.request("GET /search/issues", { q, per_page: 1 });
@@ -667,13 +667,20 @@ async function getOctokit() {
   const appId = process.env.GITHUB_APP_ID;
   const installationId = process.env.GITHUB_INSTALLATION_ID;
   const privateKey = (process.env.GITHUB_PRIVATE_KEY || "").replace(/\\n/g, "\n");
+  const pat = process.env.GITHUB_TOKEN || process.env.GITHUB_PAT;
 
-  if (!repo || !appId || !installationId || !privateKey) {
-    throw new Error("Missing GitHub App environment variables");
+  // Prefer GitHub App auth; fall back to PAT if available
+  if (repo && appId && installationId && privateKey) {
+    const appAuth = new App({ appId, privateKey });
+    return appAuth.getInstallationOctokit(Number(installationId));
   }
 
-  const appAuth = new App({ appId, privateKey });
-  return appAuth.getInstallationOctokit(Number(installationId));
+  if (pat) {
+    const { Octokit } = await import("@octokit/rest");
+    return new Octokit({ auth: pat });
+  }
+
+  throw new Error("Missing GitHub App environment variables (GITHUB_APP_ID, GITHUB_INSTALLATION_ID, GITHUB_PRIVATE_KEY) or PAT (GITHUB_TOKEN)");
 }
 
 function getRepoParts() {
