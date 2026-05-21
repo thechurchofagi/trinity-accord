@@ -256,6 +256,11 @@ def main():
     add_authorship_arguments(parser)
     add_guardian_arguments(parser)
     parser.add_argument("--out", required=True, help="Output file path")
+    parser.add_argument(
+        "--idempotency-key",
+        default=None,
+        help="Optional Gateway idempotency key. If omitted, Gateway computes one from the final payload."
+    )
     args = parser.parse_args()
 
     # Validate body file exists
@@ -265,6 +270,9 @@ def main():
 
     # Build payload
     payload = build_payload(args)
+
+    if getattr(args, "idempotency_key", None):
+        payload["idempotency_key"] = args.idempotency_key
 
     # Write payload
     out_path = Path(args.out)
