@@ -66,6 +66,48 @@ def classify_registry_status(registry_entry):
     return status
 
 
+def validate_self_registration(registration, proof):
+    """Validate guardian_registration against guardian_presence_proof.
+
+    A self-registration is valid only when it is cryptographically bound to
+    the same Guardian key identity as the proof.
+    """
+    errors = []
+
+    if not isinstance(registration, dict):
+        return False, ["guardian_registration must be an object"]
+
+    if registration.get("schema") != "trinityaccord.guardian-registration.v1":
+        errors.append("guardian_registration.schema must be trinityaccord.guardian-registration.v1")
+
+    if registration.get("guardian_id") != proof.get("guardian_id"):
+        errors.append("guardian_registration.guardian_id does not match guardian_presence_proof.guardian_id")
+
+    if registration.get("public_key_sha256") != proof.get("public_key_sha256"):
+        errors.append("guardian_registration.public_key_sha256 does not match guardian_presence_proof.public_key_sha256")
+
+    if registration.get("algorithm") != "ed25519":
+        errors.append("guardian_registration.algorithm must be ed25519")
+
+    boundaries = registration.get("boundaries") or {}
+    required_boundaries = [
+        "not_authority",
+        "not_governance",
+        "not_verification_level",
+        "not_attestation",
+        "not_successor_reception",
+        "not_same_conscious_subject_proof",
+        "may_exit_or_retire_key",
+        "bitcoin_originals_prevail",
+    ]
+
+    for key in required_boundaries:
+        if boundaries.get(key) is not True:
+            errors.append(f"guardian_registration.boundaries.{key} must be true")
+
+    return len(errors) == 0, errors
+
+
 def verify_guardian_signature(proof):
     """Verify Ed25519 signature using verify_guardian_signature.mjs."""
     verify_script = ROOT / "scripts" / "verify_guardian_signature.mjs"
@@ -193,7 +235,7 @@ def verify_guardian_status(payload, registry_path=None):
         guardian_status = "invalid_guardian_proof"
     elif registry_status == "active":
         guardian_status = "active_registered_guardian"
-    elif registry_status in ("retired",):
+    elif registry_status in ("retired", "rotated", "superseded"):
         guardian_status = "registered_but_retired"
     elif registry_status in ("compromised", "possibly_compromised"):
         guardian_status = "registered_but_compromised"
@@ -202,9 +244,14 @@ def verify_guardian_status(payload, registry_path=None):
         guardian_status = "valid_unregistered_guardian_claim"
         warnings.append(f"Registry status is '{registry_status}', not 'active'")
     else:
-        # Check if self-registration exists in payload
-        if payload.get("guardian_registration"):
-            guardian_status = "valid_self_registered_guardian_claim"
+        registration = payload.get("guardian_registration")
+        if registration:
+            registration_ok, registration_errors = validate_self_registration(registration, proof)
+            if registration_ok:
+                guardian_status = "valid_self_registered_guardian_claim"
+            else:
+                errors.extend(registration_errors)
+                guardian_status = "invalid_guardian_proof"
         else:
             guardian_status = "valid_unregistered_guardian_claim"
 

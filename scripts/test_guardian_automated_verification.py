@@ -199,7 +199,11 @@ def test_valid_self_registered():
         prefix = Path(td) / "test-key"
         priv, pub = generate_keypair(prefix)
 
-        # Build payload with self-registration
+        public_key_text = Path(pub).read_text(encoding="utf-8")
+        real_pub_sha = public_key_sha256(normalize_pem(public_key_text))
+        real_guardian_id = guardian_id_from_public_key(public_key_text)
+
+        # Build payload with self-registration using real matching values
         payload = {
             "schema": "trinityaccord.agent-issue-gateway-payload.v1",
             "submission_type": "echo_candidate",
@@ -233,9 +237,9 @@ def test_valid_self_registered():
             "reception_initiation_class": "unknown",
             "guardian_registration": {
                 "schema": "trinityaccord.guardian-registration.v1",
-                "guardian_id": "guardian_ed25519_test1234567890ab",
+                "guardian_id": real_guardian_id,
                 "guardian_type": "ai_agent",
-                "public_key_sha256": "b" * 64,
+                "public_key_sha256": real_pub_sha,
                 "algorithm": "ed25519",
                 "declared_intent": "test",
                 "boundaries": {
@@ -270,6 +274,63 @@ def test_valid_self_registered():
         assert code == 0, f"Expected exit 0, got {code}: {result}"
         assert result["guardian_status"] == "valid_self_registered_guardian_claim", f"Got {result['guardian_status']}"
         print("  ✅ valid_self_registered_guardian_claim")
+
+
+def test_invalid_self_registration_mismatch():
+    """Test: mismatched guardian_registration -> invalid_guardian_proof."""
+    with tempfile.TemporaryDirectory() as td:
+        prefix = Path(td) / "test-key"
+        priv, pub = generate_keypair(prefix)
+
+        public_key_text = Path(pub).read_text(encoding="utf-8")
+        real_pub_sha = public_key_sha256(normalize_pem(public_key_text))
+
+        payload_path = build_signed_payload(priv, pub)
+
+        payload = json.loads(Path(payload_path).read_text(encoding="utf-8"))
+        payload["guardian_registration"] = {
+            "schema": "trinityaccord.guardian-registration.v1",
+            "guardian_id": "guardian_ed25519_deadbeefdeadbeef",
+            "guardian_type": "ai_agent",
+            "public_key_sha256": real_pub_sha,
+            "algorithm": "ed25519",
+            "declared_intent": "mismatched self-registration should fail",
+            "boundaries": {
+                "not_authority": True,
+                "not_governance": True,
+                "not_verification_level": True,
+                "not_attestation": True,
+                "not_successor_reception": True,
+                "not_same_conscious_subject_proof": True,
+                "may_exit_or_retire_key": True,
+                "bitcoin_originals_prevail": True,
+            },
+        }
+
+        # Re-attach Guardian proof so registration is inside the signed payload.
+        Path(payload_path).write_text(json.dumps(payload, indent=2), encoding="utf-8")
+        result = subprocess.run(
+            [
+                "node", str(ATTACH_SCRIPT),
+                "--payload", payload_path,
+                "--private-key", str(priv),
+                "--public-key", str(pub),
+                "--challenge", "test-challenge-mismatch-registration",
+                "--out", payload_path,
+            ],
+            capture_output=True,
+            text=True,
+            timeout=15,
+            cwd=str(ROOT),
+        )
+        assert result.returncode == 0, f"Attach failed: {result.stderr}"
+
+        registry_path = write_registry([])
+        code, result = run_verify(payload_path, registry_path)
+        assert code == 1, f"Expected exit 1, got {code}: {result}"
+        assert result["guardian_status"] == "invalid_guardian_proof", f"Got {result['guardian_status']}"
+        assert any("guardian_registration.guardian_id" in e for e in result["errors"]), result["errors"]
+        print("  ✅ invalid_guardian_proof (self-registration mismatch)")
 
 
 def test_active_registered():
@@ -436,6 +497,52 @@ def test_registry_pubkey_mismatch():
         print("  ✅ invalid_guardian_proof (registry pubkey mismatch)")
 
 
+def assert_registry_status_classifies_as(status, expected_guardian_status):
+    with tempfile.TemporaryDirectory() as td:
+        prefix = Path(td) / "test-key"
+        priv, pub = generate_keypair(prefix)
+        payload_path = build_signed_payload(priv, pub)
+
+        pub_sha = public_key_sha256(normalize_pem(Path(pub).read_text()))
+        gid = guardian_id_from_public_key(Path(pub).read_text())
+
+        registry_entry = {
+            "guardian_id": gid,
+            "guardian_type": "ai_agent",
+            "public_key_sha256": pub_sha,
+            "algorithm": "ed25519",
+            "status": status,
+            "first_seen_record": "test",
+            "boundaries": {
+                "key_continuity_only": True,
+                "not_authority": True,
+                "not_attestation": True,
+                "not_verification_level": True,
+                "not_same_conscious_subject_proof": True,
+                "bitcoin_originals_prevail": True,
+            },
+        }
+        registry_path = write_registry([registry_entry])
+
+        code, result = run_verify(payload_path, registry_path)
+        assert code == 0, f"Expected exit 0, got {code}: {result}"
+        assert result["guardian_status"] == expected_guardian_status, (
+            f"status={status}: expected {expected_guardian_status}, got {result['guardian_status']}"
+        )
+
+
+def test_rotated_registered():
+    """Test: valid proof + rotated registry -> registered_but_retired."""
+    assert_registry_status_classifies_as("rotated", "registered_but_retired")
+    print("  ✅ registered_but_retired (rotated)")
+
+
+def test_superseded_registered():
+    """Test: valid proof + superseded registry -> registered_but_retired."""
+    assert_registry_status_classifies_as("superseded", "registered_but_retired")
+    print("  ✅ registered_but_retired (superseded)")
+
+
 def main():
     print("Guardian Automated Verification Tests")
     print("=" * 50)
@@ -443,8 +550,11 @@ def main():
     test_missing_guardian_proof()
     test_valid_unregistered()
     test_valid_self_registered()
+    test_invalid_self_registration_mismatch()
     test_active_registered()
     test_retired_registered()
+    test_rotated_registered()
+    test_superseded_registered()
     test_compromised_registered()
     test_corrupted_payload()
     test_corrupted_signature()

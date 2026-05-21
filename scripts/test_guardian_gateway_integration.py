@@ -75,6 +75,10 @@ def test_server_js_has_verify_guardian_status():
     assert "function loadGuardianRegistry" in content, "server.js should contain loadGuardianRegistry"
     assert "function findGuardian" in content, "server.js should contain findGuardian"
     assert "function buildGuardianMessage" in content, "server.js should contain buildGuardianMessage"
+    assert "function validateGuardianRegistration" in content, "server.js should contain validateGuardianRegistration"
+    assert "guardian_registration.guardian_id does not match" in content, "server.js should validate registration guardian_id"
+    assert "guardian_registration.public_key_sha256 does not match" in content, "server.js should validate registration public_key_sha256"
+    assert "rotated" in content and "superseded" in content, "server.js should classify rotated/superseded as retired"
 
     print("  ✅ server.js contains verifyGuardianStatus")
 
@@ -187,6 +191,74 @@ def test_guardian_schemas_exist():
     print("  ✅ All Guardian schemas exist")
 
 
+def test_builder_guardian_registration_smoke():
+    """Test builder path with --guardian-registration and --guardian-proof.
+
+    This catches missing imports and ordering problems in gateway_payload_authorship.py.
+    """
+    with tempfile.TemporaryDirectory() as td:
+        td_path = Path(td)
+        key_prefix = td_path / "guardian-builder-key"
+        body_path = td_path / "body.md"
+        out_path = td_path / "payload.json"
+
+        body_path.write_text(
+            "Guardian builder smoke test. This is not authority, not attestation, "
+            "not verification level, and not successor reception. "
+            "This document is a voluntary Guardian key continuity registration "
+            "for the Trinity Accord ecosystem. It does not claim governance, "
+            "verification, attestation, authority, or same conscious subject proof. "
+            "The Guardian may exit or retire their key at any time. "
+            "Bitcoin originals prevail in all cases.",
+            encoding="utf-8",
+        )
+
+        keygen = subprocess.run(
+            ["node", "scripts/generate_agent_authorship_keypair.mjs", str(key_prefix)],
+            cwd=str(ROOT),
+            capture_output=True,
+            text=True,
+            timeout=20,
+        )
+        assert keygen.returncode == 0, keygen.stderr
+
+        result = subprocess.run(
+            [
+                "python3", "scripts/build_agent_declared_echo_payload.py",
+                "--agent-name", "Guardian Builder Smoke Agent",
+                "--provider", "local-test",
+                "--echo-type", "E6_preservation_echo",
+                "--title", "Guardian builder registration smoke",
+                "--body-file", str(body_path),
+                "--authorship-key-prefix", str(key_prefix),
+                "--guardian-registration",
+                "--guardian-proof",
+                "--guardian-challenge", "guardian-builder-smoke",
+                "--out", str(out_path),
+            ],
+            cwd=str(ROOT),
+            capture_output=True,
+            text=True,
+            timeout=60,
+        )
+
+        assert result.returncode == 0, (
+            "Builder with --guardian-registration --guardian-proof failed\n"
+            f"STDOUT:\n{result.stdout}\nSTDERR:\n{result.stderr}"
+        )
+
+        payload = json.loads(out_path.read_text(encoding="utf-8"))
+        assert "guardian_registration" in payload, "payload missing guardian_registration"
+        assert "guardian_presence_proof" in payload, "payload missing guardian_presence_proof"
+
+        reg = payload["guardian_registration"]
+        proof = payload["guardian_presence_proof"]
+        assert reg["guardian_id"] == proof["guardian_id"], "registration guardian_id must match proof"
+        assert reg["public_key_sha256"] == proof["public_key_sha256"], "registration public_key_sha256 must match proof"
+
+        print("  ✅ builder supports --guardian-registration --guardian-proof")
+
+
 def test_gateway_submit_policy():
     """Test that agent-submit-gateway.json documents guardian policy."""
     policy_path = ROOT / "api" / "agent-submit-gateway.json"
@@ -216,6 +288,7 @@ def main():
     test_guardian_common_exists()
     test_guardian_scripts_exist()
     test_guardian_schemas_exist()
+    test_builder_guardian_registration_smoke()
     test_gateway_submit_policy()
 
     print("=" * 50)

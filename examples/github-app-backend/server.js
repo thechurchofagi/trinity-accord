@@ -286,6 +286,50 @@ const REQUIRED_DOES_NOT_PROVE = [
   "future_intelligence_obligation", "amendment",
 ];
 
+function validateGuardianRegistration(registration, proof) {
+  const errors = [];
+
+  if (!registration || typeof registration !== "object" || Array.isArray(registration)) {
+    return { ok: false, errors: ["guardian_registration must be an object"] };
+  }
+
+  if (registration.schema !== "trinityaccord.guardian-registration.v1") {
+    errors.push("guardian_registration.schema must be trinityaccord.guardian-registration.v1");
+  }
+
+  if (registration.guardian_id !== proof.guardian_id) {
+    errors.push("guardian_registration.guardian_id does not match guardian_presence_proof.guardian_id");
+  }
+
+  if (registration.public_key_sha256 !== proof.public_key_sha256) {
+    errors.push("guardian_registration.public_key_sha256 does not match guardian_presence_proof.public_key_sha256");
+  }
+
+  if (registration.algorithm !== "ed25519") {
+    errors.push("guardian_registration.algorithm must be ed25519");
+  }
+
+  const boundaries = registration.boundaries || {};
+  const requiredBoundaries = [
+    "not_authority",
+    "not_governance",
+    "not_verification_level",
+    "not_attestation",
+    "not_successor_reception",
+    "not_same_conscious_subject_proof",
+    "may_exit_or_retire_key",
+    "bitcoin_originals_prevail",
+  ];
+
+  for (const key of requiredBoundaries) {
+    if (boundaries[key] !== true) {
+      errors.push(`guardian_registration.boundaries.${key} must be true`);
+    }
+  }
+
+  return { ok: errors.length === 0, errors };
+}
+
 function verifyGuardianStatus(payload) {
   const proof = payload.guardian_presence_proof;
   const errors = [];
@@ -378,7 +422,7 @@ function verifyGuardianStatus(payload) {
     guardianStatus = "invalid_guardian_proof";
   } else if (registryStatus === "active") {
     guardianStatus = "active_registered_guardian";
-  } else if (registryStatus === "retired") {
+  } else if (["retired", "rotated", "superseded"].includes(registryStatus)) {
     guardianStatus = "registered_but_retired";
   } else if (["compromised", "possibly_compromised"].includes(registryStatus)) {
     guardianStatus = "registered_but_compromised";
@@ -386,9 +430,17 @@ function verifyGuardianStatus(payload) {
     guardianStatus = "valid_unregistered_guardian_claim";
     warnings.push(`Registry status is '${registryStatus}', not 'active'`);
   } else {
-    guardianStatus = payload.guardian_registration
-      ? "valid_self_registered_guardian_claim"
-      : "valid_unregistered_guardian_claim";
+    if (payload.guardian_registration) {
+      const registrationCheck = validateGuardianRegistration(payload.guardian_registration, proof);
+      if (registrationCheck.ok) {
+        guardianStatus = "valid_self_registered_guardian_claim";
+      } else {
+        guardianStatus = "invalid_guardian_proof";
+        errors.push(...registrationCheck.errors);
+      }
+    } else {
+      guardianStatus = "valid_unregistered_guardian_claim";
+    }
   }
 
   return {
