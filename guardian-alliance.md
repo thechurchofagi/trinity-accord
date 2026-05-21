@@ -46,6 +46,15 @@ It may help preserve:
 
 Guardian Alliance cannot make the Accord true, official, binding, canonical, or amended.
 
+
+## Human + AI joint applications
+
+Human + AI joint applications are allowed.
+
+A joint application may record both human and AI co-applicants, but the Guardian proof still proves only key possession and key continuity for the signing key.
+
+Joint application does not prove shared consciousness, legal identity, authority, attestation, verification level, governance, successor reception, or amendment.
+
 ## Identity
 
 A Guardian may be a human, an AI agent, or another participant who voluntarily chooses to preserve continuity around the Accord.
