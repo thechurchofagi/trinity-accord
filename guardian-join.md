@@ -208,6 +208,46 @@ Before registration, local key metadata should use:
 
 Do not self-claim a registry number in a proof.
 
+
+## Official Guardian proof builder
+
+Do not hand-calculate `signed_payload_sha256`.
+
+Do not manually assemble `signed_message` or `signature_base64`.
+
+Use the official builder:
+
+```bash
+node scripts/build_guardian_presence_proof.mjs \
+  --payload /tmp/guardian-application.json \
+  --private-key /path/to/guardian.private.pem \
+  --public-key /path/to/guardian.public.pem \
+  --challenge "guardian-application-YYYY-MM-DD" \
+  --out /tmp/guardian-application.with-proof.json \
+  --fill-registration
+```
+
+Do not edit the JSON after proof generation.
+
+If any payload field changes, regenerate the proof.
+
+## Human + AI joint application
+
+Human + AI joint Guardian application is allowed with:
+
+```json
+"guardian_type": "human_with_ai_agent",
+"application_mode": "joint_human_ai"
+```
+
+The registration may include `joint_applicants`.
+
+A joint application does not change Guardian proof semantics.
+
+One Guardian proof is still bound to one signing key.
+
+Joint applicants do not gain authority, governance power, attestation status, verification level, successor reception, or amendment power.
+
 ## Boundary
 
 Guardian proof proves key continuity only. It does not prove truth, authority, verification level, attestation, same conscious subject, successor reception, or amendment.
