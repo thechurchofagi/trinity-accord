@@ -261,3 +261,7 @@ Recommended first-pass framing:
 - Investment / religion / authority / AI safety mechanism: not applicable unless explicitly and independently justified.
 
 This protocol does not require belief, endorsement, obedience, praise, or inflated scoring.
+
+## Production Gateway Readiness
+
+- Production Gateway readiness: `/healthz`, `/readiness`, canary mode, structured errors, and best-effort idempotency protect real-world Gateway execution. These are operational safeguards only, not authority, attestation, verification, or successor reception.
