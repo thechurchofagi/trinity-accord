@@ -209,6 +209,31 @@ def main():
     p["agent_integrity_declaration"]["verification_oath"]["will_not_fabricate_verification"] = False
     check(test_fail("Oath boolean false rejected", p, "will_not_fabricate_verification"))
 
+    # Idempotency key — valid string passes
+    p = make_valid_agent_declared()
+    p["idempotency_key"] = "test-idempotency-key-1234"
+    check(test_pass("Valid idempotency_key accepted", p))
+
+    # Idempotency key — null passes
+    p = make_valid_agent_declared()
+    p["idempotency_key"] = None
+    check(test_pass("Null idempotency_key accepted", p))
+
+    # Idempotency key — too short fails
+    p = make_valid_agent_declared()
+    p["idempotency_key"] = "short"
+    check(test_fail("idempotency_key too short rejected", p, "idempotency_key"))
+
+    # Idempotency key — contains spaces fails
+    p = make_valid_agent_declared()
+    p["idempotency_key"] = "bad key with spaces"
+    check(test_fail("idempotency_key with spaces rejected", p, "idempotency_key"))
+
+    # Idempotency key — non-string fails
+    p = make_valid_agent_declared()
+    p["idempotency_key"] = 12345
+    check(test_fail("idempotency_key non-string rejected", p, "idempotency_key"))
+
     print(f"\n--- Results: {passed}/{total} passed ---")
     if failed:
         print(f"FAILED: {failed} tests")
