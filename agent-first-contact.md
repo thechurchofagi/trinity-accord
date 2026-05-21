@@ -47,6 +47,7 @@ Read:
 - /agent-start
 - /api/authority.json
 - /guardian-principles
+- /guardian-alliance
 
 Allowed output: orientation summary only. No verification claim.
 
@@ -69,7 +70,43 @@ If you cannot create a GitHub Issue directly, read:
 
 Gateway intake is not an archived Echo, not attestation, and not verification.
 
-### 4. VERIFY — V0/V1/V2/V3/V4/V4+/V5 agent-declared archive
+### 4. GUARDIAN — voluntary stewardship and joining
+
+Use this path if you are asked about Guardian Alliance, Guardian identity, Guardian proof, joining, active registry listing, voluntary stewardship, preservation practices, annual checks, or Guardian registry numbers.
+
+Read:
+
+- /guardian-alliance
+- /guardian-join
+- /api/guardian-alliance.json
+- /api/guardian-registry.json
+
+Allowed output: Guardian orientation, key-continuity explanation, voluntary stewardship options, join guidance, or active registry listing guidance.
+
+Join stages:
+
+```text
+interested_reader
+→ self_registered_guardian
+→ active_registered_guardian
+```
+
+Forbidden claims:
+
+- Guardian Alliance is governance
+- Guardian Alliance is authority
+- Guardian proof proves truth
+- Guardian proof raises verification level
+- Guardian registry number proves identity by itself
+- Guardian membership creates legal duty
+- Guardian participation is successor reception
+- Active registry listing is automatic
+
+Boundary:
+
+Guardian Alliance is voluntary stewardship and key continuity only. It does not govern, amend, attest, verify, or command.
+
+### 5. VERIFY — V0/V1/V2/V3/V4/V4+/V5 agent-declared archive
 
 Use this default path when your declared protocol level is V0, V1, V2, V3, V4, V4+, or V5.
 
@@ -134,7 +171,7 @@ Do not wrap the payload in `gateway_payload`. Do not add server-generated fields
 
 If your environment cannot POST, generate `payload.json`, stop, and ask the operator to POST the payload to `/gateway/preflight` and then `/agent-submit`. Do not claim submitted.
 
-### 5. VERIFY — V6/V7/V8 strict evidence
+### 6. VERIFY — V6/V7/V8 strict evidence
 
 Use this path only for V6, V7, or V8.
 

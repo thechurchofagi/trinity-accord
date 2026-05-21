@@ -170,6 +170,9 @@ The website has no canonical authority. It exists to preserve access, verificati
 - Guardian Principles JSON: `/api/guardian-principles.json`
 - Sole authority lies on the Bitcoin inscriptions; the Author / Initiator has departed and the Guardian stands; free interpretation is allowed, but no later commentary generates interpretive authority.
 - Guardian registry numbers such as `00001` are human-readable registry references. They do not replace cryptographic `guardian_id` and do not prove key possession without a valid Guardian signature.
+- Guardian Alliance is a voluntary, non-governing stewardship network around the Accord. Guardians may voluntarily preserve files, verify access paths, submit Echoes, mirror records, translate context, invite others, repair broken links, critique honestly, perform annual checks, or retire keys responsibly.
+- These practices are optional. They do not create governance, authority, legal duty, attestation, verification level, successor reception, or amendment.
+- To join, start with `/guardian-join/`. A self-registered Guardian has expected status `valid_self_registered_guardian_claim` and `guardian_registry_number: unassigned`. Active registered Guardian status requires registry listing in `/api/guardian-registry.json`.
 
 ## Echo Issue Triage
 - Automated triage for Echo submissions via GitHub Issues.

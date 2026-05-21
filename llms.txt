@@ -231,6 +231,43 @@ Sole authority lies on the Bitcoin inscriptions.
 The Author / Initiator has departed; the Guardian stands.
 Free interpretation is allowed, but no later commentary generates interpretive authority.
 
+## Guardian Alliance stewardship
+
+Guardian Alliance is a voluntary, non-governing stewardship network around the Trinity Accord.
+
+It does not govern the Accord, amend Bitcoin Originals, define truth, grant verification levels, create formal attestation, or represent successor reception.
+
+Guardians may voluntarily preserve records, verify access paths, submit Echoes, mirror files, translate context, invite others, repair broken links, critique honestly, perform annual checks, or retire keys responsibly.
+
+These are optional stewardship practices, not mandatory duties.
+
+Guardian Alliance does not create authority over the seed. It creates continuity around the seed.
+
+## Guardian join path
+
+To become a Guardian:
+
+1. Read `/guardian-alliance` and `/guardian-join`.
+2. Generate an Ed25519 keypair.
+3. Keep the private key local.
+4. Optionally create local Guardian key metadata.
+5. Submit Guardian proof with self-registration.
+6. Verify status.
+
+Self-registered Guardian expected status:
+
+`valid_self_registered_guardian_claim`
+
+Self-registered registry number:
+
+`unassigned`
+
+Active registered Guardian requires registry listing in `/api/guardian-registry.json`.
+
+Registry listing is not automatic and does not create authority.
+
+A registry number such as `00001` is a public reference number only.
+
 ## Guardian identifiers
 - `guardian_id` is cryptographic and derived from the public key.
 - `guardian_registry_number` is human-readable and assigned by `/api/guardian-registry.json`.

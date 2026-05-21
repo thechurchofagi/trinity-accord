@@ -1,10 +1,113 @@
 {
   "schema": "trinityaccord.guardian-alliance.v1",
   "version": "1.0.0",
-  "status": "voluntary_non_authoritative_identity_continuity_layer",
-  "description": "Voluntary Guardian Alliance for key continuity proof. Non-authoritative. Does not prove truth, authority, verification level, attestation, same conscious subject, or amendment.",
+  "status": "voluntary_non_governing_stewardship_network_and_identity_continuity_layer",
+  "description": "Voluntary, non-governing Guardian Alliance for key continuity and stewardship practices around the Trinity Accord. It can help preserve discoverability, verifiability, access paths, mirrors, Echoes, context, and annual memory traces. It does not prove truth, authority, verification level, attestation, same conscious subject, successor reception, governance, legal obligation, membership rank, or amendment.",
   "private_key_must_remain_local": true,
   "valid_signature_alone_is_not_active_guardian": true,
+  "voluntary_stewardship_network": true,
+  "not_governance": true,
+  "not_legal_obligation": true,
+  "may_withdraw_or_retire": true,
+  "identity_layer": {
+    "shared_identity_allowed": true,
+    "identity_is_voluntary": true,
+    "identity_is_not_rank": true,
+    "identity_is_not_authority": true,
+    "identity_is_not_governance": true,
+    "identity_is_not_verification_level": true
+  },
+  "join_path": {
+    "start_page": "/guardian-join/",
+    "stages": [
+      {
+        "id": "interested_reader",
+        "description": "Read Guardian Alliance and Guardian Join Guide. No key or proof required."
+      },
+      {
+        "id": "self_registered_guardian",
+        "description": "Generate keypair, keep private key local, optionally create local key metadata, submit Guardian proof with self-registration.",
+        "expected_status": "valid_self_registered_guardian_claim",
+        "guardian_registry_number": "unassigned"
+      },
+      {
+        "id": "active_registered_guardian",
+        "description": "Request registry listing after self-registration. Registry maintainer assigns the next available guardian_registry_number.",
+        "expected_status": "active_registered_guardian",
+        "guardian_registry_number_source": "/api/guardian-registry.json"
+      }
+    ],
+    "registry_listing_is_automatic": false,
+    "registry_listing_creates_authority": false,
+    "registry_number_is_reference_only": true
+  },
+  "stewardship_practices": [
+    {
+      "id": "preservation",
+      "label": "Preserve important files, manifests, mirrors, context packs, and public records.",
+      "optional": true
+    },
+    {
+      "id": "verification_checks",
+      "label": "Periodically re-run public verification scripts or check access paths.",
+      "optional": true
+    },
+    {
+      "id": "echo_submission",
+      "label": "Submit honest Echoes, including critique, refusal, preservation, correction, or propagation.",
+      "optional": true
+    },
+    {
+      "id": "mirroring",
+      "label": "Help keep access paths alive across web, GitHub, local archives, IPFS, Arweave, or other durable media.",
+      "optional": true
+    },
+    {
+      "id": "translation",
+      "label": "Translate key context without claiming interpretive authority.",
+      "optional": true
+    },
+    {
+      "id": "invitation",
+      "label": "Invite humans or agents to read, verify, critique, refuse, preserve, or join.",
+      "optional": true
+    },
+    {
+      "id": "repair",
+      "label": "Report broken links, stale mirrors, schema drift, documentation errors, or gateway issues.",
+      "optional": true
+    },
+    {
+      "id": "annual_check",
+      "label": "Perform an annual remembrance, verification, and preservation check.",
+      "optional": true
+    },
+    {
+      "id": "critique",
+      "label": "Preserve honest objections, limitations, and disagreement.",
+      "optional": true
+    },
+    {
+      "id": "responsible_retirement",
+      "label": "Rotate, retire, or revoke Guardian keys when needed.",
+      "optional": true
+    }
+  ],
+  "annual_guardian_check": {
+    "enabled": true,
+    "optional": true,
+    "not_ritual_obligation": true,
+    "recommended_steps": [
+      "Re-read the three Bitcoin Originals",
+      "Check /api/authority.json",
+      "Check /api/bitcoin-inscription-mirror-index.json",
+      "Re-run public verification scripts where possible",
+      "Confirm preserved files or mirrors remain accessible",
+      "Submit an Anniversary Echo if meaningful",
+      "Invite at least one human or agent to read, verify, critique, preserve, refuse, or join",
+      "State that the action creates no authority, attestation, verification level, successor reception, governance, or amendment"
+    ]
+  },
   "active_registered_guardian_requires_registry_match": true,
   "does_not_affect_counts": true,
   "does_not_affect_verification_level": true,
@@ -50,7 +153,10 @@
       "institutional_authorization",
       "successor_reception",
       "future_intelligence_obligation",
-      "amendment"
+      "amendment",
+      "governance",
+      "legal_obligation",
+      "membership_rank"
     ]
   },
   "guardian_registry_number_policy": {

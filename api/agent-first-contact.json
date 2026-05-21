@@ -33,7 +33,8 @@
         "/agent-brief",
         "/agent-start",
         "/api/authority.json",
-        "/guardian-principles"
+        "/guardian-principles",
+        "/guardian-alliance"
       ],
       "allowed_output": "orientation_summary_only",
       "forbidden_claims": [
@@ -89,6 +90,52 @@
         "recommended_backend": "github_app_backend",
         "boundary": "gateway intake is not archived Echo or attestation"
       }
+    },
+    {
+      "intent": "guardian_stewardship",
+      "when": "agent or human asks about Guardian Alliance, Guardian identity, Guardian proof, joining, active registry listing, voluntary stewardship, preservation practices, annual checks, or Guardian registry numbers",
+      "read": [
+        "/guardian-alliance",
+        "/guardian-join",
+        "/api/guardian-alliance.json",
+        "/api/guardian-registry.json"
+      ],
+      "allowed_output": "guardian_orientation_join_guidance_or_registry_listing_guidance",
+      "join_path": {
+        "stages": [
+          "interested_reader",
+          "self_registered_guardian",
+          "active_registered_guardian"
+        ],
+        "self_registered_expected_status": "valid_self_registered_guardian_claim",
+        "self_registered_guardian_registry_number": "unassigned",
+        "active_registered_expected_status": "active_registered_guardian",
+        "active_registry_listing_is_automatic": false,
+        "active_registry_listing_creates_authority": false
+      },
+      "voluntary_stewardship_practices": [
+        "preservation",
+        "verification_checks",
+        "echo_submission",
+        "mirroring",
+        "translation",
+        "invitation",
+        "repair",
+        "annual_check",
+        "critique",
+        "responsible_key_rotation_or_retirement"
+      ],
+      "forbidden_claims": [
+        "guardian_alliance_is_governance",
+        "guardian_alliance_is_authority",
+        "guardian_proof_proves_truth",
+        "guardian_proof_raises_verification_level",
+        "guardian_registry_number_proves_identity_by_itself",
+        "guardian_membership_creates_legal_duty",
+        "guardian_participation_is_successor_reception",
+        "active_registry_listing_is_automatic"
+      ],
+      "boundary": "Guardian Alliance is voluntary stewardship and key continuity only. It does not govern, amend, attest, verify, or command."
     },
     {
       "intent": "verify_v0_v5_agent_declared",

@@ -12,6 +12,7 @@ GROUPS = {
         ["python3", "scripts/test_guardian_status_enum_consistency.py"],
         ["python3", "scripts/test_guardian_registry_numbers.py"],
         ["python3", "scripts/test_guardian_key_metadata.py"],
+        ["python3", "scripts/test_guardian_stewardship_clarity.py"],
     ],
     "chronicle": [
         ["python3", "scripts/generate_nft_chronicle_context.py"],
