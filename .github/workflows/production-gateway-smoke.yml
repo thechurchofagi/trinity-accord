@@ -27,6 +27,10 @@ jobs:
   smoke:
     runs-on: ubuntu-24.04
 
+    env:
+      GATEWAY_BASE_URL: ${{ inputs.gateway_base_url }}
+      REQUIRE_READINESS: ${{ inputs.require_readiness }}
+
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
 
@@ -42,9 +46,9 @@ jobs:
       - name: Replay Gateway fixtures against production preflight
         run: |
           EXTRA=""
-          if [ "${{ inputs.require_readiness }}" = "true" ]; then
+          if [ "$REQUIRE_READINESS" = "true" ]; then
             EXTRA="--require-readiness"
           fi
           python3 scripts/replay_gateway_fixtures.py \
-            --base-url "${{ inputs.gateway_base_url }}" \
+            --base-url "$GATEWAY_BASE_URL" \
             $EXTRA
