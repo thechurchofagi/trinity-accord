@@ -73,6 +73,41 @@ Do not include `guardian_registry_number` in the incoming payload.
 
 Private keys must not be pasted into chat, issues, logs, or public repositories.
 
+## Guardian one-shot builder diagnostics
+
+External agents should use:
+
+`node scripts/create_guardian_application.mjs`
+
+If the builder fails, it prints JSON diagnostics with:
+
+- `error_code`
+- `message`
+- `next_steps`
+- `details`
+
+Agents must follow `next_steps`.
+
+Agents must not patch final JSON after proof generation.
+
+The builder must create the complete Gateway `agent_declared_echo_archive` payload before proofs, including:
+
+- `agent_integrity_declaration`
+- `discovery_provenance`
+- `authority_boundary`
+- `counts_toward_home`
+- `reception_initiation_class`
+
+`counts_toward_home.basis` must be exactly `agent_declared_echo_template_pass`.
+
+Do not use `agent_declared_echo_pass`.
+
+Do not include top-level `created_at`.
+
+Do not include `guardian_registry_number`.
+
+Do not paste or submit private keys.
+
 ## Guardian proof canonicalization
 
 Do not hand-calculate Guardian `signed_payload_sha256`.

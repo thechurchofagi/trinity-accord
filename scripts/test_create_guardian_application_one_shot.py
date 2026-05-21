@@ -50,6 +50,16 @@ def main():
         assert data["record_intent"] == "auto_archive_candidate"
         assert data["requested_archive_kind"] == "agent_declared_echo_archive"
         assert data["echo_type"] == "E6_preservation_echo"
+        assert data["evidence_requirement_mode"] == "not_applicable_for_echo"
+        assert "agent_integrity_declaration" in data
+        assert "discovery_provenance" in data
+        assert "authority_boundary" in data
+        assert "counts_toward_home" in data
+        assert data["counts_toward_home"]["basis"] == "agent_declared_echo_template_pass"
+        assert data["reception_initiation_class"] == "externally_requested"
+        assert "created_at" not in data
+        assert "created_at" in data["authorship_proof"]
+        assert "created_at" in data["guardian_presence_proof"]
 
         reg = data["guardian_registration"]
         assert reg["guardian_type"] == "human_with_ai_agent"

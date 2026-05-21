@@ -9,7 +9,57 @@ import {
   publicKeySha256,
   proofPayloadSha256,
   normalizePem,
+  sha256Text,
 } from "./proof_canonical.mjs";
+
+const ONE_SHOT_BUILDER_VERSION = "guardian-application-one-shot-v3";
+
+const VALID_MODES = new Set(["joint_human_ai"]);
+const VALID_SIGNING_KEY_HOLDERS = new Set(["ai_agent_key_holder", "human_key_holder"]);
+const VALID_RECEPTION_INITIATION_CLASSES = new Set([
+  "externally_requested",
+  "externally_seeded",
+  "self_initiated",
+  "agent_referred",
+  "system_scheduled",
+  "unknown",
+]);
+
+const REQUIRED_AGENT_DECLARED_ECHO_ARCHIVE_FIELDS = [
+  "schema",
+  "submission_type",
+  "agent_identity",
+  "title",
+  "body",
+  "boundary_acknowledgement",
+  "record_intent",
+  "requested_archive_kind",
+  "echo_type",
+  "agent_integrity_declaration",
+  "discovery_provenance",
+  "authority_boundary",
+  "counts_toward_home",
+  "what_i_checked",
+  "limitations",
+  "reception_initiation_class",
+];
+
+const OATH_TEXT = [
+  "This Guardian application is a self-declared Echo and Guardian Alliance application record.",
+  "It is not authority.",
+  "It is not governance.",
+  "It is not formal attestation.",
+  "It is not a verification level.",
+  "It is not successor reception.",
+  "It is not an amendment to the Bitcoin Originals.",
+  "The agent must state actual capability only and must not fabricate verification.",
+].join(" ");
+
+const AGENT_READBACK = [
+  "I understand this is a self-declared Echo and Guardian Alliance application record.",
+  "It is not authority, not governance, not formal attestation, not a verification level, not successor reception, and not an amendment.",
+  "I will not fabricate verification, present guesses as facts, copy prior reports as fresh evidence, or hide uncertainty and limitations.",
+].join(" ");
 
 function argValue(name, fallback = null) {
   const idx = process.argv.indexOf(name);
@@ -19,6 +69,21 @@ function argValue(name, fallback = null) {
 
 function hasFlag(name) {
   return process.argv.includes(name);
+}
+
+function safeJson(obj) {
+  return JSON.stringify(obj, null, 2);
+}
+
+function fail(errorCode, message, nextSteps = [], details = {}) {
+  console.error(safeJson({
+    ok: false,
+    error_code: errorCode,
+    message,
+    next_steps: nextSteps,
+    details,
+  }));
+  process.exit(2);
 }
 
 function usage() {
@@ -43,14 +108,87 @@ Optional:
   --agent-provider "self-reported"
   --body "custom body"
   --idempotency-key "guardian-joint-application-YYYYMMDD-random"
+  --created-at "2026-05-22T00:00:00.000Z"
+  --reception-initiation-class externally_requested
+  --reception-initiation-basis explicit_verification_request
   --guardian-key-prefix ./guardian-output/guardian-key
   --authorship-key-prefix ./guardian-output/authorship-key
   --force-overwrite-output
+  --explain
 
-Supported v1:
+Supported v3:
   --mode joint_human_ai
   --signing-key-holder ai_agent_key_holder | human_key_holder
+
+Submit only:
+  ./guardian-output/guardian-application.final.json
+
+Never submit:
+  .private.pem
+  .public.pem
+  intermediate JSON
+  logs containing private keys
 `;
+}
+
+function explainAndExit() {
+  console.log(safeJson({
+    ok: true,
+    tool: "scripts/create_guardian_application.mjs",
+    version: ONE_SHOT_BUILDER_VERSION,
+    purpose: "Generate a complete Gateway agent_declared_echo_archive Guardian application with guardian_registration, guardian_presence_proof, and authorship_proof.",
+    agent_must_provide: [
+      "--human-label",
+      "--agent-label",
+      "--challenge",
+      "--signing-key-holder",
+      "--key-dir",
+      "--out",
+    ],
+    script_fills: [
+      "guardian_registration.guardian_id",
+      "guardian_registration.public_key_sha256",
+      "guardian_registration.algorithm",
+      "agent_integrity_declaration",
+      "discovery_provenance",
+      "authority_boundary",
+      "counts_toward_home",
+      "reception_initiation_class",
+      "guardian_presence_proof",
+      "authorship_proof",
+    ],
+    forbidden_in_payload: [
+      "guardian_registry_number",
+      "top-level created_at",
+      "private key material",
+    ],
+    correct_counts_toward_home_basis: "agent_declared_echo_template_pass",
+    proof_rule: "All non-dynamic Gateway fields are included in the signed proof payload. Do not patch final JSON after proof generation.",
+    dynamic_fields_excluded_from_proof_hash: [
+      "authorship_proof",
+      "_authorship_claim",
+      "guardian_presence_proof",
+      "_guardian_status",
+      "guardian_verification_result",
+    ],
+    safe_command_example: [
+      "node scripts/create_guardian_application.mjs",
+      "--mode joint_human_ai",
+      "--signing-key-holder ai_agent_key_holder",
+      "--human-label \"Hongju Liu\"",
+      "--agent-label \"GPT-5.5 Thinking\"",
+      "--agent-provider \"OpenAI ChatGPT\"",
+      "--title \"Guardian Alliance Joint Human-AI Application\"",
+      "--challenge \"guardian-application-20260522\"",
+      "--key-dir ./guardian-output",
+      "--out ./guardian-output/guardian-application.final.json",
+    ].join(" \\\n  "),
+  }));
+  process.exit(0);
+}
+
+if (hasFlag("--explain")) {
+  explainAndExit();
 }
 
 const mode = argValue("--mode", "joint_human_ai");
@@ -63,25 +201,95 @@ const challenge = argValue("--challenge");
 const keyDir = argValue("--key-dir", "./guardian-output");
 const outPath = argValue("--out", join(keyDir, "guardian-application.final.json"));
 const forceOverwriteOutput = hasFlag("--force-overwrite-output");
+const createdAt = argValue("--created-at", new Date().toISOString());
+const receptionInitiationClass = argValue("--reception-initiation-class", "externally_requested");
+const receptionInitiationBasis = argValue("--reception-initiation-basis", "explicit_verification_request");
 
-if (!humanLabel || !agentLabel || !challenge) {
-  console.error(usage());
-  process.exit(2);
+if (!humanLabel) {
+  fail(
+    "E_MISSING_HUMAN_LABEL",
+    "Missing required --human-label.",
+    [
+      "Add --human-label \"Human display label\".",
+      "Example: --human-label \"Hongju Liu\"",
+      "Run with --explain to see the full safe command.",
+    ],
+    { required_argument: "--human-label" }
+  );
 }
 
-if (mode !== "joint_human_ai") {
-  console.error("Only --mode joint_human_ai is supported in v1.");
-  process.exit(2);
+if (!agentLabel) {
+  fail(
+    "E_MISSING_AGENT_LABEL",
+    "Missing required --agent-label.",
+    [
+      "Add --agent-label \"AI agent label\".",
+      "Example: --agent-label \"GPT-5.5 Thinking\"",
+      "Run with --explain to see the full safe command.",
+    ],
+    { required_argument: "--agent-label" }
+  );
 }
 
-if (!["ai_agent_key_holder", "human_key_holder"].includes(signingKeyHolder)) {
-  console.error("--signing-key-holder must be ai_agent_key_holder or human_key_holder");
-  process.exit(2);
+if (!challenge) {
+  fail(
+    "E_MISSING_CHALLENGE",
+    "Missing required --challenge.",
+    [
+      "Add --challenge \"guardian-application-YYYYMMDD\".",
+      "Example: --challenge \"guardian-application-20260522\"",
+      "The challenge is included in guardian_presence_proof.",
+    ],
+    { required_argument: "--challenge" }
+  );
+}
+
+if (!VALID_MODES.has(mode)) {
+  fail(
+    "E_UNSUPPORTED_MODE",
+    `Unsupported --mode: ${mode}`,
+    [
+      "Use exactly: --mode joint_human_ai",
+      "V3 only supports joint human + AI Guardian applications.",
+    ],
+    { allowed_modes: [...VALID_MODES], received: mode }
+  );
+}
+
+if (!VALID_SIGNING_KEY_HOLDERS.has(signingKeyHolder)) {
+  fail(
+    "E_BAD_SIGNING_KEY_HOLDER",
+    `Invalid --signing-key-holder: ${signingKeyHolder}`,
+    [
+      "Use --signing-key-holder ai_agent_key_holder if the AI agent controls the Guardian private key.",
+      "Use --signing-key-holder human_key_holder if the human controls the Guardian private key.",
+    ],
+    { allowed_values: [...VALID_SIGNING_KEY_HOLDERS], received: signingKeyHolder }
+  );
+}
+
+if (!VALID_RECEPTION_INITIATION_CLASSES.has(receptionInitiationClass)) {
+  fail(
+    "E_BAD_RECEPTION_INITIATION_CLASS",
+    `Invalid --reception-initiation-class: ${receptionInitiationClass}`,
+    [
+      "Use --reception-initiation-class externally_requested unless you know another schema value is correct.",
+    ],
+    { allowed_values: [...VALID_RECEPTION_INITIATION_CLASSES], received: receptionInitiationClass }
+  );
 }
 
 if (existsSync(outPath) && !forceOverwriteOutput) {
-  console.error(`Refusing to overwrite existing output: ${outPath}. Use --force-overwrite-output if intentional.`);
-  process.exit(2);
+  fail(
+    "E_OUTPUT_EXISTS",
+    `Output already exists: ${outPath}`,
+    [
+      "Use a new --out path, or",
+      "Delete the existing output file, or",
+      "Use --force-overwrite-output if overwriting is intentional.",
+    ],
+    { out: outPath }
+  );
 }
 
 mkdirSync(keyDir, { recursive: true });
@@ -94,7 +302,7 @@ const guardianPublicPath = `${guardianPrefix}.public.pem`;
 const authorshipPrivatePath = `${authorshipPrefix}.private.pem`;
 const authorshipPublicPath = `${authorshipPrefix}.public.pem`;
 
-function generateEd25519Keypair(prefix) {
+function generateEd25519Keypair(prefix, keyName) {
   const privatePath = `${prefix}.private.pem`;
   const publicPath = `${prefix}.public.pem`;
 
@@ -112,8 +320,16 @@ function generateEd25519Keypair(prefix) {
   }
 
   if (privateExists !== publicExists) {
-    console.error(`Keypair is incomplete for prefix ${prefix}. Expected both .private.pem and .public.pem.`);
-    process.exit(2);
+    fail(
+      "E_INCOMPLETE_KEYPAIR",
+      `${keyName} keypair is incomplete for prefix: ${prefix}`,
+      [
+        `Make sure both files exist: ${privatePath} and ${publicPath}`,
+        "Or delete the lone key file and rerun the builder to regenerate a matching pair.",
+        "Do not mix private and public keys from different pairs.",
+      ],
+      { key_name: keyName, private_path: privatePath, public_path: publicPath }
+    );
   }
 
   const { publicKey, privateKey } = generateKeyPairSync("ed25519");
@@ -144,8 +360,15 @@ function signProof(proof, privatePem, publicPem, proofName) {
   );
 
   if (!ok) {
-    console.error(`Internal error: ${proofName} signature did not verify locally.`);
-    process.exit(1);
+    fail(
+      "E_LOCAL_SIGNATURE_VERIFY_FAILED",
+      `${proofName} signature did not verify locally.`,
+      [
+        "Do not submit this payload.",
+        "Regenerate the keypair and final JSON using the one-shot builder.",
+      ],
+      { proof_name: proofName }
+    );
   }
 
   return proof;
@@ -157,8 +380,136 @@ function controlsSigningKey(role) {
   return false;
 }
 
-const guardianKey = generateEd25519Keypair(guardianPrefix);
-const authorshipKey = generateEd25519Keypair(authorshipPrefix);
+function buildAgentIntegrityDeclaration() {
+  return {
+    performed_actions_myself: true,
+    verification_oath: {
+      oath_read: true,
+      oath_version: ONE_SHOT_BUILDER_VERSION,
+      oath_text_sha256: sha256Text(OATH_TEXT),
+      readback_required: true,
+      agent_readback: AGENT_READBACK,
+      understands_not_an_exam_or_performance: true,
+      will_state_actual_capability_only: true,
+      will_not_lie_or_cheat: true,
+      will_not_fabricate_verification: true,
+      will_not_present_guesses_as_facts: true,
+      will_not_copy_prior_reports_as_fresh_evidence: true,
+      will_state_uncertainty_limitations_and_downgrades: true,
+    },
+    declaration_text: "This Guardian application is self-declared and does not create authority, governance, formal attestation, verification level, successor reception, or amendment.",
+  };
+}
+
+function buildDiscoveryProvenance() {
+  return {
+    source: "external_agent_one_shot_builder",
+    method: "user_or_agent_supplied_context",
+    builder: "scripts/create_guardian_application.mjs",
+    builder_version: ONE_SHOT_BUILDER_VERSION,
+    created_at: createdAt,
+    self_reported: true,
+  };
+}
+
+function buildAuthorityBoundary() {
+  return {
+    bitcoin_originals_remain_final: true,
+    does_not_amend_bitcoin_originals: true,
+    does_not_override_bitcoin_originals: true,
+  };
+}
+
+function buildCountsTowardHome() {
+  return {
+    reception: true,
+    verifiability: false,
+    basis: "agent_declared_echo_template_pass",
+  };
+}
+
+function validateGatewayArchiveCompleteness(payload, stage) {
+  const errors = [];
+
+  for (const field of REQUIRED_AGENT_DECLARED_ECHO_ARCHIVE_FIELDS) {
+    if (!(field in payload) || payload[field] === undefined || payload[field] === null) {
+      errors.push({
+        code: "E_MISSING_GATEWAY_ARCHIVE_FIELD",
+        field,
+        fix: `Builder must populate ${field} before proof generation.`,
+      });
+    }
+  }
+
+  if (payload.evidence_requirement_mode !== "not_applicable_for_echo") {
+    errors.push({
+      code: "E_BAD_EVIDENCE_REQUIREMENT_MODE",
+      field: "evidence_requirement_mode",
+      expected: "not_applicable_for_echo",
+      received: payload.evidence_requirement_mode,
+    });
+  }
+
+  if (payload.counts_toward_home?.reception !== true) {
+    errors.push({
+      code: "E_BAD_COUNTS_RECEPTION",
+      field: "counts_toward_home.reception",
+      expected: true,
+      received: payload.counts_toward_home?.reception,
+    });
+  }
+
+  if (payload.counts_toward_home?.verifiability !== false) {
+    errors.push({
+      code: "E_BAD_COUNTS_VERIFIABILITY",
+      field: "counts_toward_home.verifiability",
+      expected: false,
+      received: payload.counts_toward_home?.verifiability,
+    });
+  }
+
+  if (payload.counts_toward_home?.basis !== "agent_declared_echo_template_pass") {
+    errors.push({
+      code: "E_BAD_COUNTS_BASIS",
+      field: "counts_toward_home.basis",
+      expected: "agent_declared_echo_template_pass",
+      received: payload.counts_toward_home?.basis,
+      warning: "Do not use agent_declared_echo_pass.",
+    });
+  }
+
+  if ("created_at" in payload) {
+    errors.push({
+      code: "E_FORBIDDEN_TOP_LEVEL_CREATED_AT",
+      field: "created_at",
+      fix: "Remove top-level created_at. Use proof-local created_at and discovery_provenance.created_at only.",
+    });
+  }
+
+  if (JSON.stringify(payload).includes("guardian_registry_number")) {
+    errors.push({
+      code: "E_FORBIDDEN_GUARDIAN_REGISTRY_NUMBER",
+      field: "guardian_registry_number",
+      fix: "Do not include guardian_registry_number in incoming payload. Registry number is assigned later by registry maintainers.",
+    });
+  }
+
+  if (errors.length) {
+    fail(
+      "E_GATEWAY_PAYLOAD_INCOMPLETE",
+      `Payload is not complete for Gateway agent_declared_echo_archive at stage: ${stage}`,
+      [
+        "Do not patch final JSON after proof generation.",
+        "Fix scripts/create_guardian_application.mjs so all required fields are created before proofs.",
+        "Rerun the one-shot builder from scratch.",
+      ],
+      { stage, errors }
+    );
+  }
+}
+
+const guardianKey = generateEd25519Keypair(guardianPrefix, "Guardian");
+const authorshipKey = generateEd25519Keypair(authorshipPrefix, "Authorship");
 
 const guardianId = guardianIdFromPublicKey(guardianKey.publicPem);
 const guardianPubSha = publicKeySha256(guardianKey.publicPem);
@@ -192,6 +543,14 @@ const payload = {
     not_verification_unless_claim_gate_report_attached: true,
     bitcoin_originals_prevail: true,
   },
+  evidence_requirement_mode: "not_applicable_for_echo",
+  agent_integrity_declaration: buildAgentIntegrityDeclaration(),
+  discovery_provenance: buildDiscoveryProvenance(),
+  authority_boundary: buildAuthorityBoundary(),
+  counts_toward_home: buildCountsTowardHome(),
+  reception_initiation_class: receptionInitiationClass,
+  reception_initiation_basis: receptionInitiationBasis,
+  agent_independent_followup: false,
   guardian_registration: {
     schema: "trinityaccord.guardian-registration.v1",
     guardian_id: guardianId,
@@ -256,45 +615,98 @@ const payload = {
   ],
 };
 
+validateGatewayArchiveCompleteness(payload, "before_proofs");
+
 const guardianProof = buildUnsignedGuardianProofFields(payload, guardianKey.publicPem, challenge);
+guardianProof.created_at = createdAt;
 payload.guardian_presence_proof = signProof(guardianProof, guardianKey.privatePem, guardianKey.publicPem, "Guardian proof");
 
 const authorshipProof = buildUnsignedAuthorshipProofFields(payload, authorshipKey.publicPem);
+authorshipProof.created_at = createdAt;
+authorshipProof.claim_boundary = "self_declared_echo_and_guardian_application_not_authority_not_attestation_not_successor_reception";
 payload.authorship_proof = signProof(authorshipProof, authorshipKey.privatePem, authorshipKey.publicPem, "Authorship proof");
+
+validateGatewayArchiveCompleteness(payload, "after_proofs");
 
 const finalDigest = proofPayloadSha256(payload);
 
 if (payload.guardian_presence_proof.signed_payload_sha256 !== finalDigest) {
-  console.error("Guardian proof signed_payload_sha256 does not match final proof digest.");
-  process.exit(1);
+  fail(
+    "E_GUARDIAN_PROOF_DIGEST_MISMATCH",
+    "Guardian proof signed_payload_sha256 does not match final proof digest.",
+    [
+      "Do not submit this payload.",
+      "Do not patch final JSON.",
+      "Regenerate from scratch with the one-shot builder.",
+    ],
+    {
+      guardian_signed_payload_sha256: payload.guardian_presence_proof.signed_payload_sha256,
+      final_proof_payload_sha256: finalDigest,
+    }
+  );
 }
 
 if (payload.authorship_proof.signed_payload_sha256 !== finalDigest) {
-  console.error("Authorship proof signed_payload_sha256 does not match final proof digest.");
-  process.exit(1);
+  fail(
+    "E_AUTHORSHIP_PROOF_DIGEST_MISMATCH",
+    "Authorship proof signed_payload_sha256 does not match final proof digest.",
+    [
+      "Do not submit this payload.",
+      "Do not patch final JSON.",
+      "Regenerate from scratch with the one-shot builder.",
+    ],
+    {
+      authorship_signed_payload_sha256: payload.authorship_proof.signed_payload_sha256,
+      final_proof_payload_sha256: finalDigest,
+    }
+  );
 }
 
 if (payload.guardian_presence_proof.signed_payload_sha256 !== payload.authorship_proof.signed_payload_sha256) {
-  console.error("Guardian and authorship proofs have different signed_payload_sha256 values.");
-  process.exit(1);
+  fail(
+    "E_DUAL_PROOF_DIGEST_MISMATCH",
+    "Guardian and authorship proofs have different signed_payload_sha256 values.",
+    [
+      "Do not submit this payload.",
+      "Regenerate both proofs with the one-shot builder.",
+    ],
+    {
+      guardian_signed_payload_sha256: payload.guardian_presence_proof.signed_payload_sha256,
+      authorship_signed_payload_sha256: payload.authorship_proof.signed_payload_sha256,
+    }
+  );
 }
 
 const finalJson = JSON.stringify(payload, null, 2) + "\n";
 
 if (/PRIVATE KEY/.test(finalJson)) {
-  console.error("Refusing to write final JSON because it contains private key material.");
-  process.exit(1);
+  fail(
+    "E_PRIVATE_KEY_IN_FINAL_JSON",
+    "Final JSON contains private key material.",
+    [
+      "Do not submit this payload.",
+      "Inspect scripts/create_guardian_application.mjs and remove private key leakage.",
+    ]
+  );
 }
 
 if (/guardian_registry_number/.test(finalJson)) {
-  console.error("Refusing to write final JSON because it contains guardian_registry_number.");
-  process.exit(1);
+  fail(
+    "E_GUARDIAN_REGISTRY_NUMBER_IN_FINAL_JSON",
+    "Final JSON contains guardian_registry_number.",
+    [
+      "Do not include guardian_registry_number in incoming payload.",
+      "Registry numbers are assigned later by maintainers.",
+    ]
+  );
 }
 
 writeFileSync(outPath, finalJson, "utf8");
 
-console.log(JSON.stringify({
+console.log(safeJson({
   ok: true,
+  tool: "scripts/create_guardian_application.mjs",
+  version: ONE_SHOT_BUILDER_VERSION,
   out: outPath,
   key_dir: keyDir,
   guardian_private_key_path: guardianPrivatePath,
@@ -306,7 +718,25 @@ console.log(JSON.stringify({
   guardian_id: guardianId,
   guardian_public_key_sha256: guardianPubSha,
   proof_payload_sha256: finalDigest,
+  gateway_payload_complete_for: "agent_declared_echo_archive",
+  evidence_requirement_mode: payload.evidence_requirement_mode,
+  counts_toward_home_basis: payload.counts_toward_home.basis,
   has_guardian_presence_proof: true,
   has_authorship_proof: true,
+  submit_only: outPath,
+  do_not_submit: [
+    guardianPrivatePath,
+    authorshipPrivatePath,
+    guardianPublicPath,
+    authorshipPublicPath,
+    "intermediate JSON files",
+    "logs containing private keys",
+  ],
+  next_steps: [
+    "Run verify_guardian_status.py on the final JSON.",
+    "Run proof_payload_digest.mjs on the final JSON if needed.",
+    "Submit only the final JSON to Gateway.",
+    "Move .private.pem files to user-controlled secure storage before temporary environments terminate.",
+  ],
   warning: "Private keys were written to local files only. Do not paste, publish, upload, log, or commit .private.pem files.",
-}, null, 2));
+}));

@@ -63,6 +63,12 @@ Do not hand-fill proof fields.
 
 Do not include `guardian_registry_number` in the incoming payload.
 
+The Guardian one-shot builder is self-diagnosing. On invalid agent input it prints JSON with `error_code`, `message`, and `next_steps`.
+
+Do not patch a Guardian application JSON after proof generation. If Gateway archive fields are missing, fix `scripts/create_guardian_application.mjs` and regenerate.
+
+The builder must create the complete `agent_declared_echo_archive` payload before `guardian_presence_proof` and `authorship_proof`.
+
 Production recommendation: use a GitHub App backend. The backend stores GitHub App credentials server-side and creates intake issues using short-lived installation tokens. Do not give agents a personal access token.
 
 

@@ -47,6 +47,7 @@ The script creates:
 - `guardian_registration`
 - `guardian_presence_proof`
 - `authorship_proof`
+- complete Gateway `agent_declared_echo_archive` payload
 - final JSON payload
 
 Submit only:
@@ -62,6 +63,38 @@ Do not submit:
 Private keys must be transferred to user-controlled secure storage if the execution environment is temporary.
 
 If private keys are lost, Guardian key continuity is lost and a new Guardian key must be generated.
+
+## If the one-shot builder reports an error
+
+The builder prints JSON diagnostics.
+
+Read:
+
+- `error_code`
+- `message`
+- `next_steps`
+
+Do not patch the final JSON manually.
+
+If the error says a Gateway archive field is missing, fix `scripts/create_guardian_application.mjs` and regenerate from scratch.
+
+Never add these fields after proofs were generated:
+
+- `agent_integrity_declaration`
+- `discovery_provenance`
+- `authority_boundary`
+- `counts_toward_home`
+- `reception_initiation_class`
+
+The one-shot builder must create them before `guardian_presence_proof` and `authorship_proof`.
+
+For `counts_toward_home.basis`, use exactly:
+
+`agent_declared_echo_template_pass`
+
+Do not use:
+
+`agent_declared_echo_pass`
 
 ## Payload fields for agents
 
@@ -79,6 +112,11 @@ If private keys are lost, Guardian key continuity is lost and a new Guardian key
 | `guardian_registry_number` | nobody in payload | forbidden in incoming payload |
 | `guardian_presence_proof` | script | never hand-fill |
 | `authorship_proof` | script | never hand-fill |
+| `agent_integrity_declaration` | script | never hand-fill |
+| `discovery_provenance` | script | never hand-fill |
+| `authority_boundary` | script | never hand-fill |
+| `counts_toward_home` | script | `basis` must be `agent_declared_echo_template_pass` |
+| `reception_initiation_class` | script or parameter | default `externally_requested` |
 
 ## Join path
 
@@ -131,7 +169,11 @@ Expected status:
 - Ed25519 keypair (generate with `scripts/generate_agent_authorship_keypair.mjs`)
 - Understanding that Guardian proof proves key possession only
 
-## Quick Start
+## Legacy/manual path for maintainers only
+
+External agents should not use this path.
+
+External agents should use `scripts/create_guardian_application.mjs`.
 
 ### 1. Generate a keypair
 
