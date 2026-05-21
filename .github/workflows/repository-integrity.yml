@@ -872,3 +872,6 @@ jobs:
 
       - name: Test Guardian Gateway integration
         run: python3 scripts/test_guardian_gateway_integration.py
+
+      - name: Test Guardian status enum consistency
+        run: python3 scripts/test_guardian_status_enum_consistency.py
