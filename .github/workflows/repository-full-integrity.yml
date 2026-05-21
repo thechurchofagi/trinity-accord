@@ -724,6 +724,9 @@ jobs:
       - name: Test Gateway payload errors not duplicated
         run: python3 scripts/test_gateway_payload_errors_not_duplicated.py
 
+      - name: Test production readiness contract
+        run: python3 scripts/test_production_readiness_contract.py
+
       - name: Test V0-V5 entrypoint consistency
         run: python3 scripts/test_v0_v5_entrypoint_consistency.py
 
