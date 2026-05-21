@@ -76,7 +76,7 @@ jobs:
                 ;;
               *)
                 echo "Label '$LABEL_NAME' is not an authorship label — skipping rebuild."
-                exit 1
+                exit 0
                 ;;
             esac
           fi
