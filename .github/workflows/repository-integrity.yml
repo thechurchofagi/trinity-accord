@@ -557,13 +557,36 @@ jobs:
           python3 scripts/validate_public_api_metadata.py
 
       # ── Guardian / Chronicle fast guards ────────────────────────────
+      - name: Detect changed paths
+        id: changes
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            BASE="${{ github.event.pull_request.base.sha }}"
+          else
+            BASE="${{ github.event.before }}"
+          fi
+          if [[ -z "$BASE" || "$BASE" == "0000000000000000000000000000000000000000" ]]; then
+            BASE="$(git rev-parse HEAD~1)"
+          fi
+          git diff --name-only "$BASE" "${{ github.sha }}" | tee changed-files.txt
+
+          if grep -E '^(nft-text-descriptions/|scripts/generate_nft_chronicle_context.py|scripts/generate_chronicle_music_canonical.py|chronicle.*\.md|api/context-|api/context-packs/)' changed-files.txt >/dev/null; then
+            echo "chronicle=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "chronicle=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Generate NFT chronicle context artifacts
+        if: steps.changes.outputs.chronicle == 'true' || github.ref == 'refs/heads/main'
         run: python3 scripts/generate_nft_chronicle_context.py
 
       - name: Test NFT chronicle context artifacts
         run: python3 scripts/test_nft_chronicle_context_artifacts.py
 
       - name: Generate Chronicle music canonical index
+        if: steps.changes.outputs.chronicle == 'true' || github.ref == 'refs/heads/main'
         run: |
           python3 scripts/generate_chronicle_music_canonical.py
           git diff --exit-code nft-text-descriptions/chronicle-music-canonical.json
