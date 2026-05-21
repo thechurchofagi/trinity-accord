@@ -96,7 +96,7 @@ def main():
         )
 
     # Ensure strict evidence wording is scoped to V6/V7/V8.
-    strict_heading = "### 5. VERIFY — V6/V7/V8 strict evidence"
+    strict_heading = "### 6. VERIFY — V6/V7/V8 strict evidence"
     strict_idx = md.find(strict_heading)
     evidence_idx = md.find("Evidence Input")
     check(
