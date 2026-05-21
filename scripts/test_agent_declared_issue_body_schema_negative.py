@@ -175,6 +175,20 @@ def make_good_block():
         "claim_endpoint": "/gateway/claim-authorship",
         "claim_status": "unclaimed",
         "claim_boundary": "Authorship claim proves key continuity only; it is not authority, attestation, successor reception, truth, or amendment.",
+        "guardian_protocol": "guardian-alliance-v1",
+        "guardian_proof_present": False,
+        "guardian_status": "not_checked",
+        "guardian_id": "none",
+        "guardian_signature_valid": False,
+        "guardian_registry_status": "not_checked",
+        "guardian_payload_hash_matches": False,
+        "guardian_id_matches_public_key": False,
+        "guardian_key_continuity_only": True,
+        "guardian_not_authority": True,
+        "guardian_not_attestation": True,
+        "guardian_not_verification_level": True,
+        "guardian_not_same_conscious_subject": True,
+        "guardian_boundary": "Guardian proof proves key possession only — not authority, attestation, verification level, same conscious subject, successor reception, or amendment.",
     }
 
 
@@ -274,6 +288,20 @@ def main():
         "verification_report_path": "/tmp/report.json",
         "canonical_boundary_sentence": "Bitcoin Originals are final; all mirrors and echoes are non-amending.",
         "boundary_sentence_present": True,
+        "guardian_protocol": "guardian-alliance-v1",
+        "guardian_proof_present": False,
+        "guardian_status": "not_checked",
+        "guardian_id": "none",
+        "guardian_signature_valid": False,
+        "guardian_registry_status": "not_checked",
+        "guardian_payload_hash_matches": False,
+        "guardian_id_matches_public_key": False,
+        "guardian_key_continuity_only": True,
+        "guardian_not_authority": True,
+        "guardian_not_attestation": True,
+        "guardian_not_verification_level": True,
+        "guardian_not_same_conscious_subject": True,
+        "guardian_boundary": "Guardian proof proves key possession only — not authority, attestation, verification level, same conscious subject, successor reception, or amendment.",
     }
     schema_accepts(strict_block, "clean strict V6 block")
 
