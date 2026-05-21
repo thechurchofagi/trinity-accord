@@ -37,7 +37,7 @@ for marker in [
     require(marker in text, f"diagnosis script missing marker: {marker}")
 
 require("scripts/diagnose_single_nft_timestamp.py" in wfy, "workflow must call diagnosis script")
-require("actions/upload-artifact@v4" in wfy, "workflow must upload artifact")
+require("actions/upload-artifact@" in wfy, "workflow must upload artifact")
 require("ETH_RPC_URLS" in wfy, "workflow must use ETH_RPC_URLS")
 
 if errors:

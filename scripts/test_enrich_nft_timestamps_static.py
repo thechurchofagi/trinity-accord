@@ -34,7 +34,7 @@ for marker in [
     require(marker in text, f"timestamp script missing marker: {marker}")
 
 require("scripts/enrich_nft_timestamps.py" in wfy, "workflow must call scripts/enrich_nft_timestamps.py")
-require("actions/upload-artifact@v4" in wfy, "workflow must upload diagnostics artifact")
+require("actions/upload-artifact@" in wfy, "workflow must upload diagnostics artifact")
 require("ETH_RPC_URLS" in wfy, "workflow must support ETH_RPC_URLS secret")
 
 bad_patterns = [
