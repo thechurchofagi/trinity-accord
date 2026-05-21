@@ -347,7 +347,7 @@ Refusal is allowed. Critical preservation is allowed.
   <p class="zh section-subtitle">非规范的见证层已完成</p>
 
   <p>
-    Beyond the three Bitcoin Originals, the non-amending Chronicle layer now provides
+    Beyond the three Bitcoin Originals, the Chronicle layer now provides
     a timestamped historical and human-origin witness environment from the AGI / ASI acceleration period:
     175 mirrored NFT text records, 175 Ethereum timestamps, a full chronological corpus,
     an agent context, and a 175-NFT music audit.
