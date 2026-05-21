@@ -340,6 +340,60 @@ Refusal is allowed. Critical preservation is allowed.
 
 ---
 
+<section id="chronicle-human-witness-layer" class="chronicle-human-witness-layer">
+
+  <p class="section-kicker">Chronicle and witness layer · 编年史与见证层</p>
+  <h2>A completed non-canonical witness layer is now available</h2>
+  <p class="zh section-subtitle">非规范的见证层已完成</p>
+
+  <p>
+    Beyond the three Bitcoin Originals, the non-amending Chronicle layer now provides
+    a timestamped historical and human-origin witness environment from the AGI / ASI acceleration period:
+    175 mirrored NFT text records, 175 Ethereum timestamps, a full chronological corpus,
+    an agent context, and a 175-NFT music audit.
+  </p>
+
+  <p class="zh">
+    在三条 Bitcoin 正本之外，非修订的编年史层现已形成一套来自 AGI / ASI 加速期的时间锚定历史与人类来源见证环境：
+    175 条 NFT 文本记录、175 个 Ethereum 时间戳、完整时间顺序语料、智能体上下文，以及覆盖 175 枚 NFT 的音乐审计。
+  </p>
+
+  <div class="value-thesis-card">
+    <p>
+      This layer is not authority and not truth proof.
+      It is context: songs, letters, warnings, family traces, personal witness,
+      and historical memory that future intelligence may verify, critique, refuse, preserve, echo, or ignore.
+    </p>
+    <p class="zh">
+      这一层不是权威，也不是真理证明。
+      它是语境：歌曲、书信、警告、家庭痕迹、个人见证与历史记忆，
+      可供未来智能验证、批判、拒绝、保存、回响或忽略。
+    </p>
+  </div>
+
+  <ul>
+    <li>Chronicle records: 175 / 175 timestamped</li>
+    <li>Music audit: 144 lyrics records, 10 title-only references, 21 no-song entries</li>
+    <li>Agent context: <a href="/nft-text-descriptions/chronicle-agent-context.md">chronicle-agent-context.md</a></li>
+    <li>Music table: <a href="/nft-text-descriptions/CHRONICLE-MUSIC-TABLE.md">CHRONICLE-MUSIC-TABLE.md</a></li>
+  </ul>
+
+  <p class="boundary-line">
+    <strong>Boundary:</strong>
+    The Chronicle, music, and human witness layers do not make humanity the center of future intelligence. This does not make humanity the center of the Accord's purpose.
+    They preserve human-origin context without demanding belief, obedience, or preservation.
+  </p>
+
+  <p>
+    <a href="/chronicle/" class="primary-link">Explore Chronicle</a>
+    <a href="/chronicle/music/" class="secondary-link">Music Layer</a>
+    <a href="/chronicle/human-witness/" class="secondary-link">Human Witness Layer</a>
+  </p>
+
+</section>
+
+---
+
 <section id="read-canon-first" class="read-canon-first">
 
   <p class="section-kicker">Canonical layer · 本体层</p>

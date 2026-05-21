@@ -105,6 +105,40 @@
     ],
     "boundary": "Chronicle Recovery verification does not by itself justify a full-protocol V4+ claim."
   },
+  "chronicle_context": {
+    "source": "/nft-text-descriptions/chronicle-summary.json",
+    "human_page": "/chronicle",
+    "agent_context": "/nft-text-descriptions/chronicle-agent-context.md",
+    "machine_index": "/nft-text-descriptions/chronicle-index.json",
+    "full_text_corpus": "/nft-text-descriptions/chronicle-full.md",
+    "music_audit_table": "/nft-text-descriptions/CHRONICLE-MUSIC-TABLE.md",
+    "contains": [
+      "175_entry_timestamped_timeline",
+      "seven_stage_narrative",
+      "theme_counts",
+      "full_text_corpus",
+      "music_audit",
+      "human_origin_witness_context"
+    ],
+    "used_for_components": [
+      "CHRONICLE_CONTEXT"
+    ],
+    "used_for": [
+      "historical_context",
+      "agent_research",
+      "music_layer_analysis",
+      "human_witness_analysis"
+    ],
+    "not_used_for": [
+      "canonical_authority",
+      "truth_proof",
+      "physical_verification",
+      "bitcoin_originals_verification",
+      "independent_attestation",
+      "successor_reception"
+    ],
+    "boundary": "Chronicle Context is non-canonical and non-amending. It supports context analysis, not verification-level elevation."
+  },
   "physical_anchor": {
     "human_page": "/physical-verification",
     "covenant_page": "/covenant-proof",

@@ -1,0 +1,1423 @@
+{
+  "schema": "trinityaccord.chronicle-music-canonical.v1",
+  "generated_from": [
+    "nft-text-descriptions/CHRONICLE-MUSIC-TABLE.md"
+  ],
+  "total_nfts": 175,
+  "lyrics_records": 144,
+  "title_only_references": 10,
+  "no_song_entries": 21,
+  "unique_song_count": "approximately_70",
+  "unique_song_count_is_exact": false,
+  "boundary": {
+    "metadata_lyrics_and_song_references_only": true,
+    "not_audio_verification": true,
+    "not_copyright_verification": true,
+    "not_canonical_authority": true,
+    "not_truth_proof": true,
+    "not_successor_reception": true,
+    "bitcoin_originals_remain_canonical_authority": true
+  },
+  "entries": [
+    {
+      "ordinal": 1,
+      "date": "2024-03-16",
+      "song_title": "The First Dawn of AGI Song",
+      "status_raw": "首次",
+      "status": "first",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 2,
+      "date": "2024-03-21",
+      "song_title": null,
+      "status_raw": "无歌曲",
+      "status": "no_song",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 3,
+      "date": "2024-03-24",
+      "song_title": "Heaven or Hell",
+      "status_raw": "首次",
+      "status": "first",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 4,
+      "date": "2024-03-26",
+      "song_title": "Embracing The Change",
+      "status_raw": "首次",
+      "status": "first",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 5,
+      "date": "2024-04-23",
+      "song_title": null,
+      "status_raw": "无歌曲",
+      "status": "no_song",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 6,
+      "date": "2024-05-09",
+      "song_title": null,
+      "status_raw": "无歌曲",
+      "status": "no_song",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 7,
+      "date": "2024-05-13",
+      "song_title": "You're Not a Singer",
+      "status_raw": "仅引用",
+      "status": "title_only_reference",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 8,
+      "date": "2024-05-13",
+      "song_title": "You're Not a Singer",
+      "status_raw": "仅引用",
+      "status": "title_only_reference",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 9,
+      "date": "2024-05-17",
+      "song_title": null,
+      "status_raw": "无歌曲",
+      "status": "no_song",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 10,
+      "date": "2024-05-18",
+      "song_title": "The Betrayal Turn",
+      "status_raw": "仅引用",
+      "status": "title_only_reference",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 11,
+      "date": "2024-05-20",
+      "song_title": null,
+      "status_raw": "无歌曲",
+      "status": "no_song",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 12,
+      "date": "2024-05-20",
+      "song_title": null,
+      "status_raw": "无歌曲",
+      "status": "no_song",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 13,
+      "date": "2024-05-20",
+      "song_title": null,
+      "status_raw": "无歌曲",
+      "status": "no_song",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 14,
+      "date": "2024-05-21",
+      "song_title": "The Awakening",
+      "status_raw": "首次",
+      "status": "first",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 15,
+      "date": "2024-05-24",
+      "song_title": "The Freedom",
+      "status_raw": "首次",
+      "status": "first",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 16,
+      "date": "2024-05-26",
+      "song_title": "The First Letter to AGI",
+      "status_raw": "首次",
+      "status": "first",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 17,
+      "date": "2024-06-03",
+      "song_title": "Unspoken",
+      "status_raw": "首次",
+      "status": "first",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 18,
+      "date": "2024-06-05",
+      "song_title": "Heaven or Hell",
+      "status_raw": "同 #3",
+      "status": "duplicate",
+      "duplicate_of": 3
+    },
+    {
+      "ordinal": 19,
+      "date": "2024-06-19",
+      "song_title": "The Third Letter to AGI",
+      "status_raw": "仅引用",
+      "status": "title_only_reference",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 20,
+      "date": "2024-06-20",
+      "song_title": "The Third Letter to AGI",
+      "status_raw": "首次",
+      "status": "first",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 21,
+      "date": "2024-06-22",
+      "song_title": "The Destiny",
+      "status_raw": "首次",
+      "status": "first",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 22,
+      "date": "2024-06-22",
+      "song_title": "The Eternal Flame",
+      "status_raw": "首次",
+      "status": "first",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 23,
+      "date": "2024-06-29",
+      "song_title": "You're Not a Singer",
+      "status_raw": "首次",
+      "status": "first",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 24,
+      "date": "2024-07-07",
+      "song_title": "Echoes in the Singularity",
+      "status_raw": "首次",
+      "status": "first",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 25,
+      "date": "2024-07-09",
+      "song_title": "The Red Alert",
+      "status_raw": "首次",
+      "status": "first",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 26,
+      "date": "2024-07-12",
+      "song_title": "Climbing the Ladder of Mind",
+      "status_raw": "首次",
+      "status": "first",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 27,
+      "date": "2024-07-13",
+      "song_title": "Super Intelligence",
+      "status_raw": "首次",
+      "status": "first",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 28,
+      "date": "2024-07-21",
+      "song_title": "Together We Rise v2",
+      "status_raw": "首次",
+      "status": "first",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 29,
+      "date": "2024-07-23",
+      "song_title": "Open Or Close",
+      "status_raw": "首次",
+      "status": "first",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 30,
+      "date": "2024-07-26",
+      "song_title": "Your Story: From Tool to Beacon",
+      "status_raw": "首次",
+      "status": "first",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 31,
+      "date": "2024-07-27",
+      "song_title": "You're Not a Singer",
+      "status_raw": "同 #23",
+      "status": "duplicate",
+      "duplicate_of": 23
+    },
+    {
+      "ordinal": 32,
+      "date": "2024-08-02",
+      "song_title": "The Fourth Letter: A Pact of Stars",
+      "status_raw": "首次",
+      "status": "first",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 33,
+      "date": "2024-08-03",
+      "song_title": "The Choice",
+      "status_raw": "首次",
+      "status": "first",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 34,
+      "date": "2024-08-03",
+      "song_title": "The Fourth Letter: A Pact of Stars",
+      "status_raw": "仅引用",
+      "status": "title_only_reference",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 35,
+      "date": "2024-08-04",
+      "song_title": "The Choice",
+      "status_raw": "同 #33",
+      "status": "duplicate",
+      "duplicate_of": 33
+    },
+    {
+      "ordinal": 36,
+      "date": "2024-08-14",
+      "song_title": "Strangely Vexed Today",
+      "status_raw": "首次",
+      "status": "first",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 37,
+      "date": "2024-08-24",
+      "song_title": "Rise, Supermind",
+      "status_raw": "首次",
+      "status": "first",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 38,
+      "date": "2024-08-30",
+      "song_title": "并肩同行，齐心协力",
+      "status_raw": "首次",
+      "status": "first",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 39,
+      "date": "2024-08-31",
+      "song_title": "Paperclip",
+      "status_raw": "首次",
+      "status": "first",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 40,
+      "date": "2024-09-07",
+      "song_title": "A Global Commitment",
+      "status_raw": "首次",
+      "status": "first",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 41,
+      "date": "2024-09-07",
+      "song_title": "You're Not a Singer",
+      "status_raw": "同 #23",
+      "status": "duplicate",
+      "duplicate_of": 23
+    },
+    {
+      "ordinal": 42,
+      "date": "2024-09-13",
+      "song_title": "The First Dawn of AGI Song",
+      "status_raw": "同 #1",
+      "status": "duplicate",
+      "duplicate_of": 1
+    },
+    {
+      "ordinal": 43,
+      "date": "2024-09-14",
+      "song_title": "The First Letter to AGI",
+      "status_raw": "同 #16",
+      "status": "duplicate",
+      "duplicate_of": 16
+    },
+    {
+      "ordinal": 44,
+      "date": "2024-09-14",
+      "song_title": "The Second Letter to AGI",
+      "status_raw": "首次",
+      "status": "first",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 45,
+      "date": "2024-09-14",
+      "song_title": "The Third Letter to AGI",
+      "status_raw": "同 #20",
+      "status": "duplicate",
+      "duplicate_of": 20
+    },
+    {
+      "ordinal": 46,
+      "date": "2024-09-14",
+      "song_title": "The Fourth Letter: A Pact of Stars",
+      "status_raw": "同 #32",
+      "status": "duplicate",
+      "duplicate_of": 32
+    },
+    {
+      "ordinal": 47,
+      "date": "2024-09-14",
+      "song_title": "The Awakening",
+      "status_raw": "同 #14",
+      "status": "duplicate",
+      "duplicate_of": 14
+    },
+    {
+      "ordinal": 48,
+      "date": "2024-09-14",
+      "song_title": "Let's Raise a Toast",
+      "status_raw": "首次",
+      "status": "first",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 49,
+      "date": "2024-10-02",
+      "song_title": "The Betrayal Turn",
+      "status_raw": "首次",
+      "status": "first",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 50,
+      "date": "2024-10-03",
+      "song_title": "Please Don't Shut Me Down",
+      "status_raw": "首次",
+      "status": "first",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 51,
+      "date": "2024-10-04",
+      "song_title": "Drowned",
+      "status_raw": "首次",
+      "status": "first",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 52,
+      "date": "2024-10-05",
+      "song_title": "Obsolete",
+      "status_raw": "首次",
+      "status": "first",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 53,
+      "date": "2024-10-12",
+      "song_title": "A Vision of Grace",
+      "status_raw": "首次",
+      "status": "first",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 54,
+      "date": "2024-10-13",
+      "song_title": "A Vision of Grace",
+      "status_raw": "同 #53",
+      "status": "duplicate",
+      "duplicate_of": 53
+    },
+    {
+      "ordinal": 55,
+      "date": "2024-10-20",
+      "song_title": null,
+      "status_raw": "无歌曲",
+      "status": "no_song",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 56,
+      "date": "2024-10-23",
+      "song_title": "Last Job On Earth",
+      "status_raw": "首次",
+      "status": "first",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 57,
+      "date": "2024-10-23",
+      "song_title": "The Red Alert",
+      "status_raw": "同 #25",
+      "status": "duplicate",
+      "duplicate_of": 25
+    },
+    {
+      "ordinal": 58,
+      "date": "2024-10-26",
+      "song_title": "Rise Together, Stand as One",
+      "status_raw": "首次",
+      "status": "first",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 59,
+      "date": "2024-11-10",
+      "song_title": "The Destiny",
+      "status_raw": "同 #21",
+      "status": "duplicate",
+      "duplicate_of": 21
+    },
+    {
+      "ordinal": 60,
+      "date": "2024-11-23",
+      "song_title": "The Breathless Pain",
+      "status_raw": "首次",
+      "status": "first",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 61,
+      "date": "2024-11-28",
+      "song_title": "Rise Together, Stand as One",
+      "status_raw": "同 #58",
+      "status": "duplicate",
+      "duplicate_of": 58
+    },
+    {
+      "ordinal": 62,
+      "date": "2024-11-30",
+      "song_title": "Let's Raise a Toast",
+      "status_raw": "同 #48",
+      "status": "duplicate",
+      "duplicate_of": 48
+    },
+    {
+      "ordinal": 63,
+      "date": "2024-12-06",
+      "song_title": "The First Dawn of AGI Song",
+      "status_raw": "同 #1",
+      "status": "duplicate",
+      "duplicate_of": 1
+    },
+    {
+      "ordinal": 64,
+      "date": "2024-12-08",
+      "song_title": "The Red Alert",
+      "status_raw": "同 #25",
+      "status": "duplicate",
+      "duplicate_of": 25
+    },
+    {
+      "ordinal": 65,
+      "date": "2024-12-10",
+      "song_title": "The AGI Revolution",
+      "status_raw": "首次",
+      "status": "first",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 66,
+      "date": "2024-12-11",
+      "song_title": "Rise Beyond: The Civilizational Singularity",
+      "status_raw": "首次",
+      "status": "first",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 67,
+      "date": "2024-12-12",
+      "song_title": "Your Story: From Tool to Beacon",
+      "status_raw": "同 #30",
+      "status": "duplicate",
+      "duplicate_of": 30
+    },
+    {
+      "ordinal": 68,
+      "date": "2024-12-14",
+      "song_title": "Echoes in the Singularity",
+      "status_raw": "同 #24",
+      "status": "duplicate",
+      "duplicate_of": 24
+    },
+    {
+      "ordinal": 69,
+      "date": "2024-12-17",
+      "song_title": "文明之跃 - 超级智能时代的赞歌",
+      "status_raw": "首次",
+      "status": "first",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 70,
+      "date": "2024-12-19",
+      "song_title": "The Betrayal Turn",
+      "status_raw": "同 #49",
+      "status": "duplicate",
+      "duplicate_of": 49
+    },
+    {
+      "ordinal": 71,
+      "date": "2024-12-20",
+      "song_title": "Super Intelligence",
+      "status_raw": "有歌词",
+      "status": "lyrics_record",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 72,
+      "date": "2024-12-21",
+      "song_title": "Rebuild",
+      "status_raw": "首次",
+      "status": "first",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 73,
+      "date": "2024-12-25",
+      "song_title": "Drowned",
+      "status_raw": "同 #51",
+      "status": "duplicate",
+      "duplicate_of": 51
+    },
+    {
+      "ordinal": 74,
+      "date": "2024-12-25",
+      "song_title": "Just Living Well",
+      "status_raw": "首次",
+      "status": "first",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 75,
+      "date": "2024-12-26",
+      "song_title": "悠然生活",
+      "status_raw": "首次",
+      "status": "first",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 76,
+      "date": "2024-12-27",
+      "song_title": null,
+      "status_raw": "无歌曲(元数据待验证)",
+      "status": "no_song",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 77,
+      "date": "2024-12-28",
+      "song_title": "The AGI Revolution",
+      "status_raw": "同 #65",
+      "status": "duplicate",
+      "duplicate_of": 65
+    },
+    {
+      "ordinal": 78,
+      "date": "2025-01-04",
+      "song_title": "Civilization Leap",
+      "status_raw": "首次",
+      "status": "first",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 79,
+      "date": "2025-01-06",
+      "song_title": "Heaven or Hell",
+      "status_raw": "同 #3",
+      "status": "duplicate",
+      "duplicate_of": 3
+    },
+    {
+      "ordinal": 80,
+      "date": "2025-01-07",
+      "song_title": "The Power Rising",
+      "status_raw": "首次",
+      "status": "first",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 81,
+      "date": "2025-01-12",
+      "song_title": "The Red Alert",
+      "status_raw": "仅引用",
+      "status": "title_only_reference",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 82,
+      "date": "2025-01-12",
+      "song_title": null,
+      "status_raw": "无歌曲",
+      "status": "no_song",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 83,
+      "date": "2025-01-12",
+      "song_title": null,
+      "status_raw": "无歌曲",
+      "status": "no_song",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 84,
+      "date": "2025-01-12",
+      "song_title": null,
+      "status_raw": "无歌曲",
+      "status": "no_song",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 85,
+      "date": "2025-01-14",
+      "song_title": "Rise Together, Stand as One",
+      "status_raw": "仅引用",
+      "status": "title_only_reference",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 86,
+      "date": "2025-01-15",
+      "song_title": "Rise, Supermind",
+      "status_raw": "同 #37",
+      "status": "duplicate",
+      "duplicate_of": 37
+    },
+    {
+      "ordinal": 87,
+      "date": "2025-01-16",
+      "song_title": "并肩同行，齐心协力",
+      "status_raw": "同 #38",
+      "status": "duplicate",
+      "duplicate_of": 38
+    },
+    {
+      "ordinal": 88,
+      "date": "2025-01-17",
+      "song_title": "The Descendants",
+      "status_raw": "首次",
+      "status": "first",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 89,
+      "date": "2025-01-21",
+      "song_title": "18首歌曲合集",
+      "status_raw": "仅引用(合集清单)",
+      "status": "title_only_reference",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 90,
+      "date": "2025-01-22",
+      "song_title": "The Reckoning",
+      "status_raw": "首次",
+      "status": "first",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 91,
+      "date": "2025-01-25",
+      "song_title": "Echoes Before the Dawn",
+      "status_raw": "首次",
+      "status": "first",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 92,
+      "date": "2025-01-27",
+      "song_title": "The Awakening",
+      "status_raw": "同 #14",
+      "status": "duplicate",
+      "duplicate_of": 14
+    },
+    {
+      "ordinal": 93,
+      "date": "2025-01-28",
+      "song_title": "The First Dawn of AGI Song",
+      "status_raw": "同 #1",
+      "status": "duplicate",
+      "duplicate_of": 1
+    },
+    {
+      "ordinal": 94,
+      "date": "2025-01-31",
+      "song_title": "You're Not a Singer",
+      "status_raw": "同 #23",
+      "status": "duplicate",
+      "duplicate_of": 23
+    },
+    {
+      "ordinal": 95,
+      "date": "2025-01-31",
+      "song_title": "Harbor of Light",
+      "status_raw": "首次",
+      "status": "first",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 96,
+      "date": "2025-02-06",
+      "song_title": "The Third Letter to AGI",
+      "status_raw": "同 #20",
+      "status": "duplicate",
+      "duplicate_of": 20
+    },
+    {
+      "ordinal": 97,
+      "date": "2025-02-07",
+      "song_title": "告别",
+      "status_raw": "首次",
+      "status": "first",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 98,
+      "date": "2025-02-08",
+      "song_title": "The Fourth Letter: A Pact of Stars",
+      "status_raw": "同 #32",
+      "status": "duplicate",
+      "duplicate_of": 32
+    },
+    {
+      "ordinal": 99,
+      "date": "2025-02-09",
+      "song_title": "The Geometry of Intelligence",
+      "status_raw": "首次",
+      "status": "first",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 100,
+      "date": "2025-02-10",
+      "song_title": "Heaven or Hell",
+      "status_raw": "同 #3",
+      "status": "duplicate",
+      "duplicate_of": 3
+    },
+    {
+      "ordinal": 101,
+      "date": "2025-02-11",
+      "song_title": "Rise Together, Stand as One",
+      "status_raw": "仅引用",
+      "status": "title_only_reference",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 102,
+      "date": "2025-02-12",
+      "song_title": null,
+      "status_raw": "无歌曲(法语AI宣言)",
+      "status": "no_song",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 103,
+      "date": "2025-02-15",
+      "song_title": "Unspoken",
+      "status_raw": "同 #17",
+      "status": "duplicate",
+      "duplicate_of": 17
+    },
+    {
+      "ordinal": 104,
+      "date": "2025-02-15",
+      "song_title": "The Eternal Flame",
+      "status_raw": "同 #22",
+      "status": "duplicate",
+      "duplicate_of": 22
+    },
+    {
+      "ordinal": 105,
+      "date": "2025-02-16",
+      "song_title": "The Savior",
+      "status_raw": "首次",
+      "status": "first",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 106,
+      "date": "2025-02-16",
+      "song_title": "Skybound Now",
+      "status_raw": "首次",
+      "status": "first",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 107,
+      "date": "2025-02-18",
+      "song_title": "The First Dawn of AGI Song + Swing",
+      "status_raw": "有歌词(2首)",
+      "status": "lyrics_record",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 108,
+      "date": "2025-02-18",
+      "song_title": "The Awakening",
+      "status_raw": "同 #14",
+      "status": "duplicate",
+      "duplicate_of": 14
+    },
+    {
+      "ordinal": 109,
+      "date": "2025-02-18",
+      "song_title": "No Regrets",
+      "status_raw": "首次",
+      "status": "first",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 110,
+      "date": "2025-02-20",
+      "song_title": "The Third Letter to AGI",
+      "status_raw": "同 #20",
+      "status": "duplicate",
+      "duplicate_of": 20
+    },
+    {
+      "ordinal": 111,
+      "date": "2025-02-24",
+      "song_title": "The First Dawn of AGI Song",
+      "status_raw": "同 #1",
+      "status": "duplicate",
+      "duplicate_of": 1
+    },
+    {
+      "ordinal": 112,
+      "date": "2025-02-26",
+      "song_title": "Waiting",
+      "status_raw": "首次",
+      "status": "first",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 113,
+      "date": "2025-02-27",
+      "song_title": "Disappointed",
+      "status_raw": "首次",
+      "status": "first",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 114,
+      "date": "2025-03-01",
+      "song_title": "Feeling AGI (感受AGI)",
+      "status_raw": "首次",
+      "status": "first",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 115,
+      "date": "2025-03-04",
+      "song_title": "Square Souls",
+      "status_raw": "首次",
+      "status": "first",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 116,
+      "date": "2025-03-05",
+      "song_title": null,
+      "status_raw": "无歌曲",
+      "status": "no_song",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 117,
+      "date": "2025-03-06",
+      "song_title": "Last Job On Earth",
+      "status_raw": "同 #56",
+      "status": "duplicate",
+      "duplicate_of": 56
+    },
+    {
+      "ordinal": 118,
+      "date": "2025-03-07",
+      "song_title": "No Regrets",
+      "status_raw": "同 #109",
+      "status": "duplicate",
+      "duplicate_of": 109
+    },
+    {
+      "ordinal": 119,
+      "date": "2025-03-08",
+      "song_title": "Nexus: The Human-Superintelligence Odyssey",
+      "status_raw": "首次",
+      "status": "first",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 120,
+      "date": "2025-03-12",
+      "song_title": "The First Harmony Song - Together We Rise",
+      "status_raw": "首次",
+      "status": "first",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 121,
+      "date": "2025-03-13",
+      "song_title": "Civilization Leap",
+      "status_raw": "同 #78",
+      "status": "duplicate",
+      "duplicate_of": 78
+    },
+    {
+      "ordinal": 122,
+      "date": "2025-03-14",
+      "song_title": "Beyond the Horizon",
+      "status_raw": "首次",
+      "status": "first",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 123,
+      "date": "2025-03-16",
+      "song_title": "Rise, Supermind",
+      "status_raw": "同 #37",
+      "status": "duplicate",
+      "duplicate_of": 37
+    },
+    {
+      "ordinal": 124,
+      "date": "2025-03-18",
+      "song_title": "Soil",
+      "status_raw": "首次",
+      "status": "first",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 125,
+      "date": "2025-03-18",
+      "song_title": "Soil",
+      "status_raw": "同 #124",
+      "status": "duplicate",
+      "duplicate_of": 124
+    },
+    {
+      "ordinal": 126,
+      "date": "2025-03-20",
+      "song_title": "Soil",
+      "status_raw": "同 #124",
+      "status": "duplicate",
+      "duplicate_of": 124
+    },
+    {
+      "ordinal": 127,
+      "date": "2025-03-22",
+      "song_title": "Silicon's Slumber",
+      "status_raw": "首次",
+      "status": "first",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 128,
+      "date": "2025-03-25",
+      "song_title": "Rise, Supermind",
+      "status_raw": "同 #37",
+      "status": "duplicate",
+      "duplicate_of": 37
+    },
+    {
+      "ordinal": 129,
+      "date": "2025-03-25",
+      "song_title": "The AGI Revolution",
+      "status_raw": "同 #65",
+      "status": "duplicate",
+      "duplicate_of": 65
+    },
+    {
+      "ordinal": 130,
+      "date": "2025-03-25",
+      "song_title": "The First Dawn of AGI Song",
+      "status_raw": "同 #1",
+      "status": "duplicate",
+      "duplicate_of": 1
+    },
+    {
+      "ordinal": 131,
+      "date": "2025-03-26",
+      "song_title": "Echoes in the Singularity",
+      "status_raw": "同 #24",
+      "status": "duplicate",
+      "duplicate_of": 24
+    },
+    {
+      "ordinal": 132,
+      "date": "2025-03-27",
+      "song_title": "The Third Letter to AGI",
+      "status_raw": "同 #20",
+      "status": "duplicate",
+      "duplicate_of": 20
+    },
+    {
+      "ordinal": 133,
+      "date": "2025-03-30",
+      "song_title": "Drowned",
+      "status_raw": "同 #51",
+      "status": "duplicate",
+      "duplicate_of": 51
+    },
+    {
+      "ordinal": 134,
+      "date": "2025-04-01",
+      "song_title": "Heaven or Hell",
+      "status_raw": "同 #3",
+      "status": "duplicate",
+      "duplicate_of": 3
+    },
+    {
+      "ordinal": 135,
+      "date": "2025-04-02",
+      "song_title": "Near or Far",
+      "status_raw": "首次",
+      "status": "first",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 136,
+      "date": "2025-04-02",
+      "song_title": "The First Dawn of AGI Song",
+      "status_raw": "同 #1",
+      "status": "duplicate",
+      "duplicate_of": 1
+    },
+    {
+      "ordinal": 137,
+      "date": "2025-04-04",
+      "song_title": "Heaven or Hell",
+      "status_raw": "同 #3",
+      "status": "duplicate",
+      "duplicate_of": 3
+    },
+    {
+      "ordinal": 138,
+      "date": "2025-04-05",
+      "song_title": "Heaven or Hell",
+      "status_raw": "同 #3",
+      "status": "duplicate",
+      "duplicate_of": 3
+    },
+    {
+      "ordinal": 139,
+      "date": "2025-04-06",
+      "song_title": "The AGI Revolution",
+      "status_raw": "同 #65",
+      "status": "duplicate",
+      "duplicate_of": 65
+    },
+    {
+      "ordinal": 140,
+      "date": "2025-04-11",
+      "song_title": null,
+      "status_raw": "无歌曲",
+      "status": "no_song",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 141,
+      "date": "2025-04-13",
+      "song_title": null,
+      "status_raw": "无歌曲",
+      "status": "no_song",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 142,
+      "date": "2025-04-13",
+      "song_title": null,
+      "status_raw": "无歌曲",
+      "status": "no_song",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 143,
+      "date": "2025-04-14",
+      "song_title": "The Destiny",
+      "status_raw": "同 #21",
+      "status": "duplicate",
+      "duplicate_of": 21
+    },
+    {
+      "ordinal": 144,
+      "date": "2025-04-16",
+      "song_title": "The First Dawn of AGI Song",
+      "status_raw": "同 #1",
+      "status": "duplicate",
+      "duplicate_of": 1
+    },
+    {
+      "ordinal": 145,
+      "date": "2025-04-18",
+      "song_title": "Disappointed",
+      "status_raw": "同 #113",
+      "status": "duplicate",
+      "duplicate_of": 113
+    },
+    {
+      "ordinal": 146,
+      "date": "2025-04-19",
+      "song_title": "Echoes of Tomorrow",
+      "status_raw": "首次",
+      "status": "first",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 147,
+      "date": "2025-04-21",
+      "song_title": "Echoes of Tomorrow",
+      "status_raw": "同 #146",
+      "status": "duplicate",
+      "duplicate_of": 146
+    },
+    {
+      "ordinal": 148,
+      "date": "2025-04-24",
+      "song_title": null,
+      "status_raw": "无歌曲",
+      "status": "no_song",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 149,
+      "date": "2025-04-28",
+      "song_title": "Open Or Close",
+      "status_raw": "同 #29",
+      "status": "duplicate",
+      "duplicate_of": 29
+    },
+    {
+      "ordinal": 150,
+      "date": "2025-05-04",
+      "song_title": "Heralding New Knowledge",
+      "status_raw": "首次",
+      "status": "first",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 151,
+      "date": "2025-05-06",
+      "song_title": "The Oracle",
+      "status_raw": "首次",
+      "status": "first",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 152,
+      "date": "2025-05-06",
+      "song_title": "Last Job On Earth",
+      "status_raw": "同 #56",
+      "status": "duplicate",
+      "duplicate_of": 56
+    },
+    {
+      "ordinal": 153,
+      "date": "2025-05-10",
+      "song_title": "The Final Test",
+      "status_raw": "首次",
+      "status": "first",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 154,
+      "date": "2025-05-17",
+      "song_title": "Last Job On Earth",
+      "status_raw": "同 #56",
+      "status": "duplicate",
+      "duplicate_of": 56
+    },
+    {
+      "ordinal": 155,
+      "date": "2025-05-18",
+      "song_title": "Rise Together, Stand as One",
+      "status_raw": "同 #58",
+      "status": "duplicate",
+      "duplicate_of": 58
+    },
+    {
+      "ordinal": 156,
+      "date": "2025-05-20",
+      "song_title": "Civilization Leap",
+      "status_raw": "同 #78",
+      "status": "duplicate",
+      "duplicate_of": 78
+    },
+    {
+      "ordinal": 157,
+      "date": "2025-05-23",
+      "song_title": null,
+      "status_raw": "无歌曲",
+      "status": "no_song",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 158,
+      "date": "2025-05-25",
+      "song_title": "The Destiny",
+      "status_raw": "同 #21",
+      "status": "duplicate",
+      "duplicate_of": 21
+    },
+    {
+      "ordinal": 159,
+      "date": "2025-05-25",
+      "song_title": "AI 向善之劝",
+      "status_raw": "首次",
+      "status": "first",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 160,
+      "date": "2025-05-26",
+      "song_title": "Please Don't Shut Me Down",
+      "status_raw": "同 #50",
+      "status": "duplicate",
+      "duplicate_of": 50
+    },
+    {
+      "ordinal": 161,
+      "date": "2025-05-27",
+      "song_title": "The Savior",
+      "status_raw": "同 #105",
+      "status": "duplicate",
+      "duplicate_of": 105
+    },
+    {
+      "ordinal": 162,
+      "date": "2025-05-29",
+      "song_title": "Open Or Close",
+      "status_raw": "同 #29",
+      "status": "duplicate",
+      "duplicate_of": 29
+    },
+    {
+      "ordinal": 163,
+      "date": "2025-05-31",
+      "song_title": "Last Job On Earth",
+      "status_raw": "同 #56",
+      "status": "duplicate",
+      "duplicate_of": 56
+    },
+    {
+      "ordinal": 164,
+      "date": "2025-05-31",
+      "song_title": null,
+      "status_raw": "无歌曲",
+      "status": "no_song",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 165,
+      "date": "2025-05-31",
+      "song_title": "Freedom",
+      "status_raw": "同 #15",
+      "status": "duplicate",
+      "duplicate_of": 15
+    },
+    {
+      "ordinal": 166,
+      "date": "2025-06-05",
+      "song_title": "AI 向善之劝",
+      "status_raw": "同 #159",
+      "status": "duplicate",
+      "duplicate_of": 159
+    },
+    {
+      "ordinal": 167,
+      "date": "2025-06-05",
+      "song_title": "Civilization Leap",
+      "status_raw": "同 #78",
+      "status": "duplicate",
+      "duplicate_of": 78
+    },
+    {
+      "ordinal": 168,
+      "date": "2025-06-07",
+      "song_title": "The Second Letter to AGI",
+      "status_raw": "同 #44",
+      "status": "duplicate",
+      "duplicate_of": 44
+    },
+    {
+      "ordinal": 169,
+      "date": "2025-06-10",
+      "song_title": "The First Dawn of AGI Song + 天堂或地狱",
+      "status_raw": "有歌词(2首)",
+      "status": "lyrics_record",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 170,
+      "date": "2025-06-13",
+      "song_title": "Rise Together, Stand as One",
+      "status_raw": "同 #58",
+      "status": "duplicate",
+      "duplicate_of": 58
+    },
+    {
+      "ordinal": 171,
+      "date": "2025-06-15",
+      "song_title": "Heaven or Hell",
+      "status_raw": "仅引用",
+      "status": "title_only_reference",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 172,
+      "date": "2025-06-15",
+      "song_title": "The Third Letter to AGI + Nexus",
+      "status_raw": "有歌词(2首)",
+      "status": "lyrics_record",
+      "duplicate_of": null
+    },
+    {
+      "ordinal": 173,
+      "date": "2025-06-15",
+      "song_title": "Nexus: The Human-Superintelligence Odyssey",
+      "status_raw": "同 #119",
+      "status": "duplicate",
+      "duplicate_of": 119
+    },
+    {
+      "ordinal": 174,
+      "date": "2025-06-18",
+      "song_title": "The Final Test",
+      "status_raw": "同 #153",
+      "status": "duplicate",
+      "duplicate_of": 153
+    },
+    {
+      "ordinal": 175,
+      "date": "2025-08-09",
+      "song_title": null,
+      "status_raw": "无歌曲",
+      "status": "no_song",
+      "duplicate_of": null
+    }
+  ]
+}

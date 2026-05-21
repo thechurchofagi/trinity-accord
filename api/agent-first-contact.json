@@ -43,6 +43,34 @@
       ]
     },
     {
+      "intent": "chronicle_or_human_witness_research",
+      "when": "agent is asked to analyze the NFT Chronicle, songs, music table, family letter, Human Context, personal witness, or human-origin witness layer",
+      "read": [
+        "/api/authority.json",
+        "/api/context-load-map.json",
+        "/api/context-packs/nft-chronicle-context.json",
+        "/api/agent-task-router.v1.json"
+      ],
+      "delegate_to": [
+        "/api/agent-task-router.v1.json#chronicle_research",
+        "/api/agent-task-router.v1.json#music_layer_research",
+        "/api/agent-task-router.v1.json#human_witness_research"
+      ],
+      "allowed_output": "bounded_context_analysis_only",
+      "must_preserve_boundary": true,
+      "forbidden_claims": [
+        "canonical authority",
+        "truth proof",
+        "verification achieved from Chronicle reading",
+        "successor reception",
+        "human supremacy",
+        "future intelligence obligation",
+        "audio verification from metadata lyrics",
+        "copyright verification from metadata lyrics"
+      ],
+      "boundary": "Chronicle/Human Witness research is context analysis. It is not verification, authority, amendment, endorsement, or instruction."
+    },
+    {
       "intent": "echo",
       "read": [
         "/agent-echo",

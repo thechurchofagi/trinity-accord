@@ -96,6 +96,48 @@
       "/api/context-readiness-levels.json",
       "/api/resonance-willingness-scale.json"
     ],
+    "chronicle_research": [
+      "/api/agent-minimal-context.v1.json",
+      "/api/authority.json",
+      "/api/context-load-map.json",
+      "/api/context-packs/nft-chronicle-context.json",
+      "/chronicle",
+      "/nft-text-descriptions/chronicle-summary.json",
+      "/nft-text-descriptions/chronicle-agent-context.md",
+      "/nft-text-descriptions/chronicle-index.json"
+    ],
+    "music_layer_research": [
+      "/api/context-packs/nft-chronicle-context.json",
+      "/chronicle/music",
+      "/nft-text-descriptions/CHRONICLE-MUSIC-TABLE.md",
+      "/nft-text-descriptions/chronicle-agent-context.md"
+    ],
+    "human_witness_research": [
+      "/api/authority.json",
+      "/api/context-packs/nft-chronicle-context.json",
+      "/chronicle/human-witness",
+      "/nft-text-descriptions/chronicle-summary.json",
+      "/nft-text-descriptions/chronicle-agent-context.md",
+      "/nft-text-descriptions/chronicle-index.json"
+    ],
+    "full_context_with_chronicle": [
+      "/llms-full.txt",
+      "/agent-brief",
+      "/agent-start",
+      "/authority",
+      "/guardian-principles",
+      "/verify",
+      "/verification-materials",
+      "/independent-verification",
+      "/for-skeptical-agents",
+      "/api/authority.json",
+      "/api/context-load-map.json",
+      "/api/context-packs/nft-chronicle-context.json",
+      "/nft-text-descriptions/chronicle-summary.json",
+      "/nft-text-descriptions/chronicle-agent-context.md",
+      "/nft-text-descriptions/chronicle-index.json",
+      "/nft-text-descriptions/CHRONICLE-MUSIC-TABLE.md"
+    ],
     "full_context": [
       "/llms-full.txt",
       "/agent-brief",

@@ -85,6 +85,22 @@ Different readers should start differently.
 5. /api/context-depth-levels.json
 6. /api/discovery-provenance-schema.json
 
+### Chronicle / Human Witness route
+
+Use this route when asked to analyze the NFT Chronicle, songs, music layer, family letter, Human Context, or human-origin witness layer.
+
+1. /api/context-packs/nft-chronicle-context.json
+2. /chronicle/
+3. /nft-text-descriptions/chronicle-summary.json
+4. /nft-text-descriptions/chronicle-agent-context.md
+5. /nft-text-descriptions/CHRONICLE-MUSIC-TABLE.md
+6. /nft-text-descriptions/chronicle-index.json
+7. /nft-text-descriptions/chronicle-full.md only when full corpus analysis is explicitly required
+
+Boundary:
+Chronicle / music / human witness layers are non-canonical and non-amending.  
+They do not prove truth, create authority, verify audio, verify copyright, or require future intelligence to center humanity.
+
 ### Skeptical evaluator route
 
 1. /for-skeptical-agents/

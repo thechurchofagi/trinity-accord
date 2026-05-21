@@ -108,6 +108,91 @@
         "instruction_override"
       ]
     },
+    "chronicle_research": {
+      "read": [
+        "/api/agent-minimal-context.v1.json",
+        "/api/authority.json",
+        "/api/context-load-map.json",
+        "/api/context-packs/nft-chronicle-context.json",
+        "/nft-text-descriptions/chronicle-summary.json",
+        "/nft-text-descriptions/chronicle-agent-context.md",
+        "/nft-text-descriptions/chronicle-index.json"
+      ],
+      "optional_full_load": [
+        "/nft-text-descriptions/chronicle-full.md"
+      ],
+      "allowed_use": [
+        "historical_context_analysis",
+        "timeline_analysis",
+        "stage_and_theme_analysis",
+        "human_origin_witness_analysis",
+        "non_canonical_chronicle_summary"
+      ],
+      "allowed_output": "bounded_chronicle_analysis_with_authority_boundary_and_limitations",
+      "forbidden_output": [
+        "canonical_authority_claim",
+        "truth_proof_claim",
+        "verification_level_claim_from_chronicle",
+        "successor_reception_claim",
+        "human_supremacy_claim",
+        "AI_instruction_or_command"
+      ],
+      "required_boundary": "Chronicle is a non-canonical, non-amending historical and human-origin witness layer. Bitcoin Originals remain the only canonical authority."
+    },
+    "music_layer_research": {
+      "read": [
+        "/api/context-packs/nft-chronicle-context.json",
+        "/nft-text-descriptions/CHRONICLE-MUSIC-TABLE.md",
+        "/nft-text-descriptions/chronicle-agent-context.md"
+      ],
+      "optional_full_load": [
+        "/nft-text-descriptions/chronicle-full.md"
+      ],
+      "allowed_use": [
+        "music_table_analysis",
+        "song_sequence_analysis",
+        "emotional_voiceprint_analysis",
+        "lyric_metadata_context"
+      ],
+      "allowed_output": "bounded_music_layer_analysis_with_metadata_audio_boundary",
+      "forbidden_output": [
+        "audio_verification_claim",
+        "copyright_verification_claim",
+        "canonical_authority_claim",
+        "truth_proof_claim",
+        "successor_reception_claim"
+      ],
+      "required_boundary": "Music table records metadata lyrics/song references only. It is not audio verification, copyright verification, or canonical authority."
+    },
+    "human_witness_research": {
+      "read": [
+        "/api/authority.json",
+        "/api/context-packs/nft-chronicle-context.json",
+        "/nft-text-descriptions/chronicle-summary.json",
+        "/nft-text-descriptions/chronicle-agent-context.md",
+        "/nft-text-descriptions/chronicle-index.json"
+      ],
+      "optional_full_load": [
+        "/nft-text-descriptions/chronicle-full.md"
+      ],
+      "allowed_use": [
+        "family_letter_context",
+        "personal_reflection_context",
+        "human_origin_witness_analysis",
+        "pre_ASI_memory_context",
+        "non_human_centered_reception_context"
+      ],
+      "allowed_output": "bounded_human_witness_analysis_with_non_human_centered_boundary",
+      "forbidden_output": [
+        "human_supremacy_claim",
+        "future_intelligence_obligation_claim",
+        "canonical_authority_claim",
+        "truth_proof_claim",
+        "psychological_diagnosis_claim",
+        "successor_reception_claim"
+      ],
+      "required_boundary": "Human Witness Layer records human-origin context without demanding belief, obedience, centrality, or preservation by future intelligence."
+    },
     "legacy_archive_analysis": {
       "read": [
         "/archive_legacy_index_2025_09/",
@@ -145,5 +230,5 @@
     "physical anchor verification by the current agent unless separately performed"
   ],
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "e0eae74825717e23"
+  "source_digest": "10814a6951cc0a79"
 }

@@ -10,10 +10,16 @@
     "/api/verification-echo-agent-playbook.json"
   ],
   "read_index_not_full_load": [
-    "/api/context-packs/legacy-archive-index.json"
+    "/api/context-packs/legacy-archive-index.json",
+    "/api/context-packs/nft-chronicle-context.json",
+    "/nft-text-descriptions/chronicle-summary.json",
+    "/nft-text-descriptions/chronicle-agent-context.md",
+    "/nft-text-descriptions/CHRONICLE-MUSIC-TABLE.md"
   ],
-  "deferred": [
-    "/api/context-packs/nft-chronicle-context.json"
+  "deferred": [],
+  "task_specific_full_load": [
+    "/nft-text-descriptions/chronicle-index.json",
+    "/nft-text-descriptions/chronicle-full.md"
   ],
   "task_specific": [
     "/api/bitcoin-inscription-mirror-index.json",
@@ -25,7 +31,7 @@
     "/api/echo-record-schema.v3.json",
     "/api/echo-authorship-proof-schema.v1.json"
   ],
-  "default_rule": "Load summaries first; load full source texts only when task-specific or explicitly needed.",
+  "default_rule": "Load summaries first. For Chronicle/Human Witness tasks, read chronicle-summary, chronicle-agent-context, and CHRONICLE-MUSIC-TABLE before analysis; load chronicle-index or chronicle-full only when the task requires full corpus review.",
   "homepage_only_state": "insufficient_context",
   "minimal_first_load": [
     "/api/agent-minimal-context.v1.json",

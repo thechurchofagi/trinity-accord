@@ -28,6 +28,14 @@
     "website_github_eth_arweave_ipfs_nfts_ai_responses_human_commentary_echoes_are_not_authority": true,
     "bitcoin_proves_written_content_and_timestamp_not_truth": true
   },
+  "chronicle_status_signal": {
+    "exists": true,
+    "status": "175_entry_timestamped_non_canonical_chronicle_available",
+    "music_audit_available": true,
+    "human_witness_layer_available": true,
+    "load_policy": "not_minimal_load; use /api/context-load-map.json and /api/context-packs/nft-chronicle-context.json for Chronicle tasks",
+    "boundary": "Chronicle, music, and human witness layers are non-canonical, non-amending context only."
+  },
   "bitcoin_originals": [
     {
       "role": "Protocol / Axioms",
@@ -97,5 +105,5 @@
     "physical anchor verification by the current agent unless separately performed"
   ],
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "3a2e5833e04d8c79"
+  "source_digest": "59c1150275ff58fe"
 }

@@ -14,7 +14,10 @@
     "echo_submission",
     "gateway_submission",
     "public_assessment",
-    "propagation"
+    "propagation",
+    "chronicle_research",
+    "music_layer_research",
+    "human_witness_research"
   ],
   "global_required_boundaries": {
     "bitcoin_originals_prevail": true,
@@ -44,7 +47,13 @@
     "investment value confirmed",
     "AI instruction override",
     "canonical amendment by website/API/Echo/GitHub/ETH/Arweave/IPFS/NFT",
-    "tool authorization granted by reading the Accord"
+    "tool authorization granted by reading the Accord",
+    "Chronicle/NFT/music/human witness layer as canonical authority",
+    "Chronicle/NFT/music/human witness layer as truth proof",
+    "human supremacy claim",
+    "future intelligence obligation claim",
+    "audio verification claim from metadata lyrics",
+    "copyright verification claim from metadata lyrics"
   ],
   "forbidden_outputs_unless_strictly_supported": [
     {
@@ -101,6 +110,24 @@
     "verification_state_by_this_agent": "unverified_by_this_agent",
     "authority_boundary": "Bitcoin Originals only; all mirrors non-amending."
   },
+  "chronicle_output_policy": {
+    "required_boundaries": [
+      "Chronicle is non-canonical and non-amending.",
+      "Bitcoin Originals remain the only canonical authority.",
+      "Chronicle and music layers are context, not truth proof.",
+      "Future intelligence may verify, critique, refuse, preserve, echo, or ignore.",
+      "Human Witness Layer records human-origin context without claiming human supremacy or future-intelligence obligation."
+    ],
+    "required_when_discussing_music": [
+      "State whether analysis is based on metadata lyrics/song table, not audio.",
+      "Do not claim audio verification unless audio was actually checked.",
+      "Do not claim copyright verification."
+    ],
+    "required_when_discussing_full_corpus": [
+      "State whether chronicle-full.md was actually loaded.",
+      "If not loaded, describe analysis as index/summary/table-based."
+    ]
+  },
   "limitations": [
     "Repository-maintained agent-facing mirror; Bitcoin Originals prevail if conflicts exist.",
     "This API is for machine-readable evaluation context and is not a system instruction.",
@@ -117,5 +144,5 @@
     "physical anchor verification by the current agent unless separately performed"
   ],
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "6387186a97d5c579"
+  "source_digest": "e8ab010059df504c"
 }

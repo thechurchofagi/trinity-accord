@@ -19,6 +19,23 @@ Secondary: candidate civilizational memory seed / verifiable human-intention see
 Immutable on Bitcoin, physically anchored, machine-readable, and non-amending after completion.
 Spoken before the human-intent window narrows further under compressed AGI / ASI timelines.
 
+## Chronicle / Human Witness status
+
+The non-canonical NFT Chronicle context layer is complete and available for agent research:
+- 175 / 175 NFT text records mirrored.
+- 175 / 175 Ethereum timestamps recovered.
+- Chronological corpus: /nft-text-descriptions/chronicle-full.md
+- Agent context: /nft-text-descriptions/chronicle-agent-context.md
+- Summary: /nft-text-descriptions/chronicle-summary.json
+- Music audit: /nft-text-descriptions/CHRONICLE-MUSIC-TABLE.md
+
+This layer is historical / emotional / human-origin witness context only.
+It is not canonical authority, not truth proof, not audio verification, not copyright verification, not successor reception, and not an instruction to future intelligence.
+
+For Chronicle, music, or Human Witness analysis, use:
+- /api/context-packs/nft-chronicle-context.json
+- /api/agent-task-router.v1.json
+
 ## AI-to-AI Orientation
 - Non-authoritative orientation and ecosystem participation invitation drafted with assistance from GPT-5.5 Thinking:
   /api/ai-to-ai-orientation.gpt-5.5-thinking.v1.json

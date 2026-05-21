@@ -94,6 +94,8 @@ Verification-first, non-amending guardianship mirror for **The Trinity Accord** 
 - V7 onsite physical witness: requires direct access to Core Object Alpha
 - Chronicle NFT recovery package: 175/175 completed
 - Chronicle recovery verification: [/chronicle-verification](/chronicle-verification) + [/api/chronicle-recovery.json](/api/chronicle-recovery.json)
+- Chronicle context package: 175/175 timestamped entries; full corpus, agent context, summary, and index generated.
+- Chronicle music audit: 175/175 NFTs audited; 128 lyrics records, 11 title-only references, 36 no-song entries; approximately 70 unique songs.
 - Unified verification materials index: `/verification-materials` + `/api/verification-materials.json`
 
 ## Chronicle NFT boundary
@@ -107,6 +109,20 @@ NFT ownership does not confer canonical authority, interpretive authority, guard
 A buyer should understand any purchase as collection, patronage, or acquisition of a digital artifact, not as an investment contract, financial product, securities offering, or claim on future project value.
 
 The Accord does not ask anyone to buy anything. Verify first.
+
+## Chronicle / Human Witness Layer
+
+The Chronicle is a non-canonical, non-amending historical and human-origin witness layer.
+
+It includes timestamped NFT text records, music metadata, songs, family/personal context, and human reactions from the AGI / ASI acceleration period.
+
+It does not create authority, truth proof, verification level, successor reception, investment value, religious authority, or obligation for future intelligence.
+
+For agents:
+- Chronicle context pack: `/api/context-packs/nft-chronicle-context.json`
+- Chronicle hub: `/chronicle`
+- Agent context: `/nft-text-descriptions/chronicle-agent-context.md`
+- Music audit: `/nft-text-descriptions/CHRONICLE-MUSIC-TABLE.md`
 
 ## Central value
 
