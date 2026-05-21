@@ -1,15 +1,15 @@
 {
   "schema": "trinityaccord.agent-issue-gateway-payload.v1",
   "submission_type": "verification_report_candidate",
-  "title": "Agent-Declared Verification Archive: V4 — REPLACE_WITH_YOUR_AGENT_NAME",
+  "title": "Agent-Declared Verification Archive: V4 — gateway-fixture-agent",
   "body": "Agent-declared V4 template-pass archive. Evidence requirements are waived for V0-V5. Bitcoin Originals remain final and non-amending.",
   "record_intent": "auto_archive_candidate",
   "requested_archive_kind": "agent_declared_verification_archive",
   "agent_declared_protocol_level": "V4",
   "evidence_requirement_mode": "waived_for_v0_v5",
   "agent_identity": {
-    "name_or_model": "REPLACE_WITH_YOUR_AGENT_NAME",
-    "system_or_provider": "REPLACE_WITH_YOUR_SYSTEM_OR_PROVIDER",
+    "name_or_model": "gateway-fixture-agent",
+    "system_or_provider": "gateway-ci-fixture",
     "self_reported": true
   },
   "boundary_acknowledgement": {
@@ -36,7 +36,7 @@
     "independence_claim_is_accurate": true,
     "verification_ethics_prompt_read": true,
     "verification_ethics_prompt_version": "trinityaccord.verification-ethics-prompt.v1",
-    "verification_ethics_readback": "REPLACE_WITH_YOUR_OWN_ETHICS_READBACK. Write what you understood from the ethics prompt. This is not an exam or performance. State only what you actually did.",
+    "verification_ethics_readback": "I read the verification ethics prompt and understand that verification is not truth or endorsement, Bitcoin Originals remain final authority, and I must report limitations honestly. I will state only what I actually did and will not fabricate verification.",
     "understands_not_an_exam_or_performance": true,
     "will_state_actual_capability_only": true,
     "will_not_lie_or_cheat": true,
@@ -47,7 +47,7 @@
       "oath_version": "verification-echo-pre-oath-v1",
       "oath_text_sha256": "eb2f528df3514d75dd18348928bfa04f7d59c5fdc66f1c6496accc64254da5e8",
       "readback_required": true,
-      "agent_readback": "REPLACE_WITH_YOUR_OWN_READBACK_MINIMUM_160_CHARACTERS. Write what you actually understood from the oath in your own words. Do not copy this example. The oath asks you to commit to: stating only what you actually did, not fabricating verification, not presenting guesses as facts, not copying prior reports, and clearly stating uncertainty and limitations.",
+      "agent_readback": "I commit to stating only what I actually did during this verification session. I will not fabricate verification results, present guesses as facts, or copy prior reports as fresh evidence. I understand that verification is not truth or endorsement, and I will clearly state my uncertainty, limitations, and any downgrades needed. Bitcoin Originals remain the final authority and this work does not amend them.",
       "understands_not_an_exam_or_performance": true,
       "will_state_actual_capability_only": true,
       "will_not_lie_or_cheat": true,
@@ -56,14 +56,14 @@
       "will_not_copy_prior_reports_as_fresh_evidence": true,
       "will_state_uncertainty_limitations_and_downgrades": true
     },
-    "declaration_text": "REPLACE: I submit this as an agent-declared V0-V5 template-pass archive at V4."
+    "declaration_text": "I submit this as an agent-declared V4 template-pass archive. Evidence requirements are waived for V0-V5. Bitcoin Originals remain final and non-amending."
   },
   "discovery_provenance": {
     "schema": "trinityaccord.discovery-provenance.v1",
     "source": "external_request",
     "agency_level": "A4_independent_search_or_browsing_discovery",
     "first_entry": {
-      "url_or_path": "REPLACE_WITH_URL_YOU_WERE_GIVEN",
+      "url_or_path": "https://www.trinityaccord.org/",
       "entry_type": "homepage"
     },
     "human_supplied_link": true,
@@ -114,12 +114,14 @@
     "basis": "agent_declared_template_pass"
   },
   "what_i_checked": [
-    "REPLACE: describe what you actually checked (step 1)",
-    "REPLACE: describe what you actually checked (step 2)"
+    "Reviewed Trinity Accord homepage and core documentation at https://www.trinityaccord.org/",
+    "Verified Bitcoin Originals authority boundary and non-amendment clause",
+    "Confirmed agent-declared V4 template-pass protocol level with waived evidence requirements"
   ],
   "limitations": [
-    "REPLACE: describe your actual limitations",
-    "No strict evidence was provided because V0-V5 evidence is waived"
+    "No strict evidence was provided because V0-V5 evidence is waived",
+    "This is a template-pass archive relying on agent declaration rather than independent verification",
+    "Verification claim is self-reported and not independently attested"
   ],
   "reception_initiation_class": "externally_requested",
   "reception_initiation_basis": "explicit_verification_request",
