@@ -98,7 +98,11 @@
       "does_not_override_agent_oath_declaration": true,
       "text_keywords_are_not_hard_failed": true,
       "hard_fail_only_for_structured_claim_certification": true,
-      "high_level_confirmation_required_for": ["V4", "V4+", "V5"],
+      "high_level_confirmation_required_for": [
+        "V4",
+        "V4+",
+        "V5"
+      ],
       "public_display_rule": "Always display as agent-declared template level, not strict evidence level.",
       "if_uncertain": "Choose a lower declared level or submit Pure Echo."
     }
@@ -367,8 +371,12 @@
   "guardian_alliance_policy": {
     "enabled": true,
     "optional": true,
-    "proof_modes": ["record_bound"],
-    "future_reserved_proof_modes": ["live_challenge"],
+    "proof_modes": [
+      "record_bound"
+    ],
+    "future_reserved_proof_modes": [
+      "live_challenge"
+    ],
     "active_registered_guardian_requires_registry_match": true,
     "valid_signature_alone_is_not_active_guardian": true,
     "does_not_affect_counts": true,
@@ -391,5 +399,28 @@
       "api/guardian-verification-result-schema.v1.json"
     ],
     "boundary": "Guardian proof proves key continuity only; not authority, attestation, verification level, same conscious subject, successor reception, or amendment."
+  },
+  "production_readiness_policy": {
+    "healthz_endpoint": "/healthz",
+    "readiness_endpoint": "/readiness",
+    "gateway_readiness_endpoint": "/gateway/readiness",
+    "preflight_required_before_submit": true,
+    "canary_mode_env": "GATEWAY_CANARY_MODE",
+    "dry_run_env": "DRY_RUN",
+    "idempotency": {
+      "enabled": true,
+      "field": "idempotency_key",
+      "server_computes_when_absent": true,
+      "scope": "best_effort_github_issue_search",
+      "hidden_issue_marker": "trinity-gateway-idempotency",
+      "not_a_security_boundary": true
+    },
+    "structured_errors": {
+      "include_request_id": true,
+      "include_retryable": true,
+      "include_agent_action": true,
+      "include_validation_stage": true
+    },
+    "boundary": "Production readiness proves service operability only; not authority, attestation, verification, or successor reception."
   }
 }
