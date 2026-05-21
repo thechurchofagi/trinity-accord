@@ -13,6 +13,10 @@ GROUPS = {
         ["python3", "scripts/test_guardian_registry_numbers.py"],
         ["python3", "scripts/test_guardian_key_metadata.py"],
         ["python3", "scripts/test_guardian_stewardship_clarity.py"],
+        ["python3", "scripts/test_guardian_canonicalization_parity.py"],
+        ["python3", "scripts/test_guardian_proof_builder_roundtrip.py"],
+        ["python3", "scripts/test_guardian_joint_application_schema.py"],
+
     ],
     "chronicle": [
         ["python3", "scripts/generate_nft_chronicle_context.py"],
