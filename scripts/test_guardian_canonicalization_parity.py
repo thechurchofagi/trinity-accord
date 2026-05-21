@@ -67,7 +67,7 @@ def main():
         tmp_path = f.name
 
     try:
-        script_dir = os.path.join(os.path.dirname(__file__), "guardian_payload_digest.mjs")
+        script_dir = os.path.join(os.path.dirname(__file__), "proof_payload_digest.mjs")
         result = subprocess.run(
             ["node", script_dir, "--payload", tmp_path],
             capture_output=True, text=True, timeout=10,
@@ -77,7 +77,7 @@ def main():
             sys.exit(1)
 
         node_output = json.loads(result.stdout)
-        node_hash = node_output["guardian_payload_sha256"]
+        node_hash = node_output["proof_payload_sha256"]
         node_canonical = node_output["canonical_payload"]
 
         # Compare hashes

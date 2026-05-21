@@ -6,7 +6,7 @@ import {
   guardianIdFromPublicKey,
   publicKeySha256,
   normalizePem,
-} from "./guardian_canonical.mjs";
+} from "./proof_canonical.mjs";
 
 function argValue(name) {
   const idx = process.argv.indexOf(name);

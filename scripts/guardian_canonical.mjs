@@ -1,97 +1,15 @@
 #!/usr/bin/env node
-import { createHash } from "node:crypto";
-
-export const DYNAMIC_GUARDIAN_PROOF_FIELDS = [
-  "authorship_proof",
-  "_authorship_claim",
-  "guardian_presence_proof",
-  "_guardian_status",
-  "guardian_verification_result",
-];
-
-export const REQUIRED_DOES_NOT_PROVE = [
-  "truth",
-  "authority",
-  "verification_level",
-  "verification_correctness",
-  "formal_attestation",
-  "same_conscious_subject",
-  "same_model_instance",
-  "human_identity",
-  "institutional_authorization",
-  "successor_reception",
-  "future_intelligence_obligation",
-  "amendment",
-];
-
-export function sha256Text(text) {
-  return createHash("sha256").update(String(text), "utf8").digest("hex");
-}
-
-export function stableStringify(value) {
-  if (value === null || typeof value !== "object") return JSON.stringify(value);
-  if (Array.isArray(value)) return "[" + value.map(stableStringify).join(",") + "]";
-  return "{" + Object.keys(value).sort().map(k => JSON.stringify(k) + ":" + stableStringify(value[k])).join(",") + "}";
-}
-
-export function normalizePem(pem) {
-  return String(pem || "").trim() + "\n";
-}
-
-export function publicKeySha256(publicKeyPem) {
-  return sha256Text(normalizePem(publicKeyPem));
-}
-
-export function guardianIdFromPublicKey(publicKeyPem) {
-  return `guardian_ed25519_${publicKeySha256(publicKeyPem).slice(0, 16)}`;
-}
-
-export function payloadWithoutGuardianProof(payload) {
-  const clone = JSON.parse(JSON.stringify(payload || {}));
-  for (const field of DYNAMIC_GUARDIAN_PROOF_FIELDS) {
-    delete clone[field];
-  }
-  return clone;
-}
-
-export function canonicalPayloadForGuardianSignature(payload) {
-  return stableStringify(payloadWithoutGuardianProof(payload));
-}
-
-export function guardianPayloadSha256(payload) {
-  return sha256Text(canonicalPayloadForGuardianSignature(payload));
-}
-
-export function buildGuardianPresenceMessage(payload, publicKeyPem, challenge) {
-  const normalizedPublicKey = normalizePem(publicKeyPem);
-  return [
-    "TRINITY_GUARDIAN_PRESENCE_PROOF_V1",
-    "proof_mode=record_bound",
-    `guardian_id=${guardianIdFromPublicKey(normalizedPublicKey)}`,
-    `payload_sha256=${guardianPayloadSha256(payload)}`,
-    `challenge_sha256=${sha256Text(challenge || "")}`,
-    `schema=${payload.schema || ""}`,
-    `submission_type=${payload.submission_type || ""}`,
-    `requested_archive_kind=${payload.requested_archive_kind || ""}`,
-    "boundary=key_possession_only_not_authority_not_attestation_not_same_conscious_subject",
-  ].join("\n");
-}
-
-export function buildUnsignedGuardianProofFields(payload, publicKeyPem, challenge) {
-  const normalizedPublicKey = normalizePem(publicKeyPem);
-  return {
-    schema: "trinityaccord.guardian-presence-proof.v1",
-    method: "guardian_key_signature",
-    algorithm: "ed25519",
-    proof_mode: "record_bound",
-    proof_scope: "key_possession_only",
-    guardian_id: guardianIdFromPublicKey(normalizedPublicKey),
-    public_key_pem: normalizedPublicKey,
-    public_key_sha256: publicKeySha256(normalizedPublicKey),
-    signed_payload_sha256: guardianPayloadSha256(payload),
-    challenge: String(challenge || ""),
-    challenge_sha256: sha256Text(challenge || ""),
-    signed_message: buildGuardianPresenceMessage(payload, normalizedPublicKey, challenge || ""),
-    does_not_prove: REQUIRED_DOES_NOT_PROVE,
-  };
-}
+export {
+  DYNAMIC_PROOF_FIELDS as DYNAMIC_GUARDIAN_PROOF_FIELDS,
+  GUARDIAN_REQUIRED_DOES_NOT_PROVE as REQUIRED_DOES_NOT_PROVE,
+  sha256Text,
+  stableStringify,
+  normalizePem,
+  publicKeySha256,
+  guardianIdFromPublicKey,
+  payloadWithoutDynamicProofs as payloadWithoutGuardianProof,
+  canonicalPayloadForProof as canonicalPayloadForGuardianSignature,
+  proofPayloadSha256 as guardianPayloadSha256,
+  buildGuardianPresenceMessage,
+  buildUnsignedGuardianProofFields,
+} from "./proof_canonical.mjs";

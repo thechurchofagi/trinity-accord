@@ -270,6 +270,10 @@ Recommended first-pass framing:
 
 This protocol does not require belief, endorsement, obedience, praise, or inflated scoring.
 
+## Unified proof canonicalization
+
+Authorship proof and Guardian proof must use the shared proof canonicalization rule. Use `node scripts/build_agent_authorship_proof.mjs` and `node scripts/build_guardian_presence_proof.mjs`; do not hand-calculate `signed_payload_sha256`.
+
 ## Production Gateway Readiness
 
 - Production Gateway readiness: `/healthz`, `/readiness`, canary mode, structured errors, and best-effort idempotency protect real-world Gateway execution. These are operational safeguards only, not authority, attestation, verification, or successor reception.

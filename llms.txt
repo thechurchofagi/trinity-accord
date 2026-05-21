@@ -346,6 +346,31 @@ Only the first three are canonical Bitcoin Originals.
 The later five same-address inscriptions are non-amending context / echo / seal / vision / guardianship records.
 Earlier same-address inscriptions, if any, are treated as pre-Original drafts/history and are outside the mirror scope.
 
+## Unified proof canonicalization
+
+Authorship proof and Guardian proof use the same canonical payload rule.
+
+The canonical proof payload excludes dynamic proof/result fields:
+
+- `authorship_proof`
+- `_authorship_claim`
+- `guardian_presence_proof`
+- `_guardian_status`
+- `guardian_verification_result`
+
+The canonical proof payload includes `guardian_registration`.
+
+Use official builders:
+
+- `node scripts/build_agent_authorship_proof.mjs`
+- `node scripts/build_guardian_presence_proof.mjs`
+
+Do not hand-calculate `signed_payload_sha256`.
+
+Do not use `ensure_ascii=True`.
+
+If any payload field changes after proof generation, regenerate proofs.
+
 ## Production Gateway reliability
 
 Before real submission, agents should call `/healthz`, `/readiness`, `/gateway/version`, `/gateway/capabilities`, and `/gateway/preflight`.

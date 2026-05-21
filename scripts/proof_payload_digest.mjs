@@ -14,13 +14,13 @@ function argValue(name) {
 const payloadPath = argValue("--payload");
 
 if (!payloadPath) {
-  console.error("Usage: node scripts/guardian_payload_digest.mjs --payload payload.json");
+  console.error("Usage: node scripts/proof_payload_digest.mjs --payload payload.json");
   process.exit(2);
 }
 
 const payload = JSON.parse(readFileSync(payloadPath, "utf8"));
 
 console.log(JSON.stringify({
-  guardian_payload_sha256: proofPayloadSha256(payload),
+  proof_payload_sha256: proofPayloadSha256(payload),
   canonical_payload: canonicalPayloadForProof(payload),
 }, null, 2));

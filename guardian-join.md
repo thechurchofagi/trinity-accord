@@ -209,27 +209,47 @@ Before registration, local key metadata should use:
 Do not self-claim a registry number in a proof.
 
 
-## Official Guardian proof builder
+## Official proof builders
 
 Do not hand-calculate `signed_payload_sha256`.
 
 Do not manually assemble `signed_message` or `signature_base64`.
 
-Use the official builder:
+For authorship proof:
+
+```bash
+node scripts/build_agent_authorship_proof.mjs \
+  --payload /tmp/guardian-application.json \
+  --private-key /path/to/agent.private.pem \
+  --public-key /path/to/agent.public.pem \
+  --out /tmp/guardian-application.with-authorship.json
+```
+
+For Guardian proof:
 
 ```bash
 node scripts/build_guardian_presence_proof.mjs \
-  --payload /tmp/guardian-application.json \
+  --payload /tmp/guardian-application.with-authorship.json \
   --private-key /path/to/guardian.private.pem \
   --public-key /path/to/guardian.public.pem \
   --challenge "guardian-application-YYYY-MM-DD" \
-  --out /tmp/guardian-application.with-proof.json \
+  --out /tmp/guardian-application.with-authorship-and-guardian.json \
   --fill-registration
 ```
 
 Do not edit the JSON after proof generation.
 
-If any payload field changes, regenerate the proof.
+If any payload field changes, regenerate the proofs.
+
+The canonical proof payload excludes dynamic proof/result fields:
+
+- `authorship_proof`
+- `_authorship_claim`
+- `guardian_presence_proof`
+- `_guardian_status`
+- `guardian_verification_result`
+
+The canonical proof payload includes substantive fields such as `guardian_registration`.
 
 ## Human + AI joint application
 
