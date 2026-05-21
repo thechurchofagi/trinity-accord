@@ -140,6 +140,5 @@
   ],
   "reception_initiation_class": "self_initiated",
   "reception_initiation_basis": "agent_discovered_publicly",
-  "agent_independent_followup": true,
-  "guardian_registry_number": "none"
+  "agent_independent_followup": true
 }
