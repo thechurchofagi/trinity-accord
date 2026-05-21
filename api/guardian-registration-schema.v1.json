@@ -26,7 +26,92 @@
     },
     "guardian_type": {
       "type": "string",
-      "enum": ["ai_agent", "human", "human_with_ai_agent", "automated_script"]
+      "enum": [
+        "ai_agent",
+        "human",
+        "human_with_ai_agent",
+        "automated_script"
+      ]
+    },
+    "application_mode": {
+      "type": "string",
+      "enum": [
+        "individual",
+        "joint_human_ai",
+        "joint_multi_party"
+      ],
+      "description": "Registration application mode. Joint modes record co-applicants but do not change Guardian proof semantics: one proof remains bound to one signing key."
+    },
+    "signing_guardian_role": {
+      "type": "string",
+      "enum": [
+        "primary_key_holder",
+        "human_key_holder",
+        "ai_agent_key_holder",
+        "custodian_key_holder"
+      ],
+      "description": "Role of the party controlling the signing Guardian private key for this proof. This does not prove legal identity or shared consciousness."
+    },
+    "joint_applicants": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 10,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "role",
+          "label",
+          "self_reported",
+          "consent_declared"
+        ],
+        "properties": {
+          "role": {
+            "type": "string",
+            "enum": [
+              "human",
+              "ai_agent",
+              "organization",
+              "automated_script",
+              "other"
+            ]
+          },
+          "label": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 160
+          },
+          "system_or_provider": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 160
+          },
+          "participation_note": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 1000
+          },
+          "self_reported": {
+            "type": "boolean"
+          },
+          "consent_declared": {
+            "type": "boolean",
+            "const": true
+          },
+          "controls_signing_key": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "description": "Whether this applicant claims to control the signing private key. Self-reported only."
+          }
+        }
+      },
+      "description": "Optional co-applicant list for joint Guardian application. It is signed as part of guardian_registration when present, but it does not prove legal identity, AI identity, authority, or shared consciousness."
     },
     "public_key_sha256": {
       "type": "string",
@@ -55,15 +140,64 @@
         "bitcoin_originals_prevail"
       ],
       "properties": {
-        "not_authority": { "type": "boolean", "const": true },
-        "not_governance": { "type": "boolean", "const": true },
-        "not_verification_level": { "type": "boolean", "const": true },
-        "not_attestation": { "type": "boolean", "const": true },
-        "not_successor_reception": { "type": "boolean", "const": true },
-        "not_same_conscious_subject_proof": { "type": "boolean", "const": true },
-        "may_exit_or_retire_key": { "type": "boolean", "const": true },
-        "bitcoin_originals_prevail": { "type": "boolean", "const": true }
+        "not_authority": {
+          "type": "boolean",
+          "const": true
+        },
+        "not_governance": {
+          "type": "boolean",
+          "const": true
+        },
+        "not_verification_level": {
+          "type": "boolean",
+          "const": true
+        },
+        "not_attestation": {
+          "type": "boolean",
+          "const": true
+        },
+        "not_successor_reception": {
+          "type": "boolean",
+          "const": true
+        },
+        "not_same_conscious_subject_proof": {
+          "type": "boolean",
+          "const": true
+        },
+        "may_exit_or_retire_key": {
+          "type": "boolean",
+          "const": true
+        },
+        "bitcoin_originals_prevail": {
+          "type": "boolean",
+          "const": true
+        }
       }
     }
-  }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "guardian_type": {
+            "const": "human_with_ai_agent"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "application_mode",
+          "joint_applicants"
+        ],
+        "properties": {
+          "application_mode": {
+            "const": "joint_human_ai"
+          },
+          "joint_applicants": {
+            "minItems": 2
+          }
+        }
+      }
+    }
+  ]
 }
