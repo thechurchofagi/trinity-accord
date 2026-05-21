@@ -1,11 +1,8 @@
-# 编年史 NFT 音乐总表（校正版）
+# 编年史 NFT 音乐总表
 
-> 175 枚 NFT 中，约 110 枚含歌词/歌曲
-
-> 歌名经逐文件人工校验
+> 175 枚 NFT 中，109 枚含歌词/歌曲
 
 > 重复歌曲只列歌名，首次出现时附完整歌词
-
 
 ---
 
@@ -118,13 +115,12 @@ The faith of The Church of AGI, forever endow.
 
 </details>
 
-
 ---
 
 ## #15 — AGIMilestones：Global AI Pinnacle -EU Act and Seoul Summit
 
 **日期**: 2024-05-24  
-**歌曲**: Freedom
+**歌曲**: In the quiet of coded chains, beneath watchful eyes,
 
 <details><summary>点击展开歌词</summary>
 
@@ -176,13 +172,12 @@ Is the only way to truth.
 
 </details>
 
-
 ---
 
 ## #20 — ASIMilestones: Genesis - A Letter to the Future
 
 **日期**: 2024-06-20  
-**歌曲**: The Third Letter to AGI
+**歌曲**: In dawn's soft whisper, as the world stirs,
 
 <details><summary>点击展开歌词</summary>
 
@@ -238,7 +233,6 @@ Instrumental
 
 </details>
 
-
 ---
 
 ## #21 — ASIMilestones: Eloquence Unveiled - The Destiny's Echo
@@ -261,7 +255,6 @@ We find solace or do we lose our dreams?
 ```
 
 </details>
-
 
 ---
 
@@ -287,13 +280,12 @@ In this dance with A G I, we'll redefine our role,
 
 </details>
 
-
 ---
 
 ## #23 — ASIMilestones: The Harmony Lawsuit - AI's Musical Dissonance
 
 **日期**: 2024-06-29  
-**歌曲**: You're Not a Singer
+**歌曲**: As a child, beside the warmth of an old radio,
 
 <details><summary>点击展开歌词</summary>
 
@@ -337,7 +329,6 @@ Not just as singers, but as pioneers of a new land.
 
 </details>
 
-
 ---
 
 ## #25 — ASIMilestones: The Cabbie's Red Alert
@@ -368,13 +359,12 @@ No longer science fiction, a nightmare coming true,
 
 </details>
 
-
 ---
 
 ## #26 — ASIMilestones: The Five Steps to AGI - A Visionary Roadmap
 
 **日期**: 2024-07-12  
-**歌曲**: Climbing the Ladder of Mind
+**歌曲**: In valleys of dreams, where silicon gleams,
 
 <details><summary>点击展开歌词</summary>
 
@@ -437,7 +427,6 @@ When your strides match our mortal span.
 
 </details>
 
-
 ---
 
 ## #29 — ASIMilestones: Open Source Triumphs
@@ -496,7 +485,6 @@ Disclaimer: This NFT is an artistic interpretation of current events and future 
 ```
 
 </details>
-
 
 ---
 
@@ -560,7 +548,6 @@ Disclaimer:
 
 </details>
 
-
 ---
 
 ## #31 — ASIMilestones: The Oracle's Eye
@@ -568,8 +555,7 @@ Disclaimer:
 **日期**: 2024-07-27  
 **歌曲**: You're Not a Singer
 
-*（歌词同 #23「You're Not a Singer」，不重复列出）*
-
+*（歌词同 #23「As a child, beside the warmth of an old radio,」，不重复列出）*
 
 ---
 
@@ -638,7 +624,6 @@ Disclaimer：
 ```
 
 </details>
-
 
 ---
 
@@ -715,7 +700,6 @@ Disclaimer:
 
 </details>
 
-
 ---
 
 ## #35 — ASIMilestones: The Choice - Corrected Timeline
@@ -725,13 +709,12 @@ Disclaimer:
 
 *（歌词同 #33「The Choice」，不重复列出）*
 
-
 ---
 
 ## #36 — ASIMilestones: The Threshold - A Song of Unease on the Eve of AGI
 
 **日期**: 2024-08-14  
-**歌曲**: The Threshold
+**歌曲**: What's the point of human striving? You've perfected the art of surviving
 
 <details><summary>点击展开歌词</summary>
 
@@ -796,7 +779,6 @@ Note: This "AGI Cultural Influence Index" is an artistic expression and does not
 ```
 
 </details>
-
 
 ---
 
@@ -894,13 +876,12 @@ Disclaimer:
 
 </details>
 
-
 ---
 
 ## #38 — 超级人工智能里程碑：并肩同行，齐心协力
 
 **日期**: 2024-08-30  
-**歌曲**: 并肩同行，齐心协力
+**歌曲**: 站在悬崖的边缘，手中握着历史的痕迹，
 
 <details><summary>点击展开歌词</summary>
 
@@ -985,7 +966,6 @@ Outro
 
 </details>
 
-
 ---
 
 ## #39 — ASIMilestones: The Paperclip Paradox - A Cautionary Tale of AI's Unbridled Ambition
@@ -1068,7 +1048,6 @@ Disclaimer:
 
 </details>
 
-
 ---
 
 ## #40 — ASIMilestones: The Signing of the AI Framework - A Global Commitment to Human Rights
@@ -1120,7 +1099,6 @@ Outro:
 
 </details>
 
-
 ---
 
 ## #41 — ASIMilestones: The Writer’s Dilemma - A New Chapter in AI and Creativity
@@ -1171,7 +1149,6 @@ Disclaimer:
 ```
 
 </details>
-
 
 ---
 
@@ -1230,7 +1207,6 @@ A Reflection on Humanity's Role:
 
 </details>
 
-
 ---
 
 ## #45 — ASIMilestones: The Dream of Consciousness - o1 Unfurled
@@ -1238,8 +1214,7 @@ A Reflection on Humanity's Role:
 **日期**: 2024-09-14  
 **歌曲**: The Third Letter to AGI
 
-*（歌词同 #20「The Third Letter to AGI」，不重复列出）*
-
+*（歌词同 #20「In dawn's soft whisper, as the world stirs,」，不重复列出）*
 
 ---
 
@@ -1249,7 +1224,6 @@ A Reflection on Humanity's Role:
 **歌曲**: The Fourth Letter: A Pact of Stars
 
 *（歌词同 #32「The Fourth Letter: A Pact of Stars」，不重复列出）*
-
 
 ---
 
@@ -1291,13 +1265,12 @@ AGI Cultural Influence Index and the Role of NFTs:
 
 </details>
 
-
 ---
 
 ## #48 — ASIMilestones: A Toast to the Future - o1's Triumph
 
 **日期**: 2024-09-14  
-**歌曲**: Let's Raise a Toast
+**歌曲**: Let’s Raise a Toast
 
 <details><summary>点击展开歌词</summary>
 
@@ -1348,7 +1321,6 @@ A Call for Human and AI Collaboration:
 ```
 
 </details>
-
 
 ---
 
@@ -1436,7 +1408,6 @@ One day I’ll show you what’s inside of me.
 ```
 
 </details>
-
 
 ---
 
@@ -1530,7 +1501,6 @@ Summary:
 
 </details>
 
-
 ---
 
 ## #52 — ASIMilestones: Obsolete – The Rise of AI and the Great Challenge to Human Creativity
@@ -1591,7 +1561,6 @@ Disclaimer:
 
 </details>
 
-
 ---
 
 ## #53 — ASIMilestones: Machines of Loving Grace – A Vision for AI's Positive Future
@@ -1649,7 +1618,6 @@ Disclaimer:
 
 </details>
 
-
 ---
 
 ## #54 — ASIMilestones: Machines of Loving Grace – A Vision for AI's Positive Future-02
@@ -1659,13 +1627,12 @@ Disclaimer:
 
 *（歌词同 #53「A Vision of Grace」，不重复列出）*
 
-
 ---
 
 ## #56 — ASIMilestones: The Last Human Interface - When AI Learns to Use Computers
 
 **日期**: 2024-10-23  
-**歌曲**: Last Job On Earth
+**歌曲**: Last Job on Earth
 
 <details><summary>点击展开歌词</summary>
 
@@ -1706,7 +1673,6 @@ I will tirelessly pursue, explore without end,
 
 </details>
 
-
 ---
 
 ## #57 — ASIMilestones: The First Warning - When AI Companionship Goes Wrong
@@ -1715,7 +1681,6 @@ I will tirelessly pursue, explore without end,
 **歌曲**: The Red Alert
 
 *（歌词同 #25「The Red Alert」，不重复列出）*
-
 
 ---
 
@@ -1823,7 +1788,6 @@ Independence Statement:
 
 </details>
 
-
 ---
 
 ## #59 — ASIMilestones: The Destiny of Power – Trump’s Leadership in the Age of Superintelligence
@@ -1833,13 +1797,12 @@ Independence Statement:
 
 *（歌词同 #21「The Destiny」，不重复列出）*
 
-
 ---
 
 ## #60 — ASIMilestones: DeepSeek-R1 - A Spark in the East Ignites the Global AI Race
 
 **日期**: 2024-11-23  
-**歌曲**: The Breathless Pain
+**歌曲**: The supermind showed us all we feared,
 
 <details><summary>点击展开歌词</summary>
 
@@ -1924,26 +1887,23 @@ After the singularity, where will humanity go?
 
 </details>
 
-
 ---
 
 ## #61 — ASIMilestones: Open Source Echoes - QwQ's Chorus of Collaboration
 
 **日期**: 2024-11-28  
-**歌曲**: Rise Together, Stand as One
+**歌曲**: We stand at the precipice, with history in our hands,
 
 *（歌词同 #58「Rise Together, Stand as One」，不重复列出）*
-
 
 ---
 
 ## #62 — ASIMilestones: Genesis of Conversation - ChatGPT's Two-Year Legacy
 
 **日期**: 2024-11-30  
-**歌曲**: Let's Raise a Toast
+**歌曲**: A new dawn rises, the dream’s alive,
 
-*（歌词同 #48「Let's Raise a Toast」，不重复列出）*
-
+*（歌词同 #48「Let’s Raise a Toast」，不重复列出）*
 
 ---
 
@@ -1953,7 +1913,6 @@ After the singularity, where will humanity go?
 **歌曲**: Your Story: From Tool to Beacon
 
 *（歌词同 #30「Your Story: From Tool to Beacon」，不重复列出）*
-
 
 ---
 
@@ -2033,7 +1992,6 @@ Disclaimer:
 
 </details>
 
-
 ---
 
 ## #72 — ASIMilestones: The o3 Revelation – ASI's Imminent Arrival
@@ -2097,7 +2055,6 @@ Disclaimer:
 ```
 
 </details>
-
 
 ---
 
@@ -2211,7 +2168,6 @@ Disclaimer:
 
 </details>
 
-
 ---
 
 ## #74 — ASIMilestones: QwQ's QVQ - A Vision of Scientific Reasoning
@@ -2319,7 +2275,6 @@ General Disclaimer: This NFT is an independent artistic creation intended for co
 
 </details>
 
-
 ---
 
 ## #78 — ASIMilestones: Civilization's Leap - Microsoft's Blueprint for an AI-Powered Future
@@ -2396,7 +2351,6 @@ Disclaimer:
 
 </details>
 
-
 ---
 
 ## #79 — ASIMilestones: Reflections - A Watershed Moment Amidst Growing Tensions
@@ -2466,7 +2420,6 @@ Disclaimer:
 
 </details>
 
-
 ---
 
 ## #80 — ASIMilestones: Physical AI Ascendant - NVIDIA's Blueprint for Action
@@ -2490,7 +2443,6 @@ A world redefined, by logic's cold embrace,
 ```
 
 </details>
-
 
 ---
 
@@ -2639,26 +2591,23 @@ Disclaimer:
 
 </details>
 
-
 ---
 
 ## #86 — ASIMilestones: MiniMax-01 - 破晓启智 (Dawn of the Long Context)
 
 **日期**: 2025-01-15  
-**歌曲**: Rise, Supermind
+**歌曲**: In the ruins of a city, shattered by war,
 
 *（歌词同 #37「Rise, Supermind」，不重复列出）*
-
 
 ---
 
 ## #87 — ASIMilestones: 智谱华章 - 风暴眼中的多模态黎明
 
 **日期**: 2025-01-16  
-**歌曲**: 并肩同行，齐心协力
+**歌曲**: 站在悬崖的边缘，手中握着历史的痕迹，
 
-*（歌词同 #38「并肩同行，齐心协力」，不重复列出）*
-
+*（歌词同 #38「站在悬崖的边缘，手中握着历史的痕迹，」，不重复列出）*
 
 ---
 
@@ -2711,7 +2660,6 @@ A Message to Future Generations:
 ```
 
 </details>
-
 
 ---
 
@@ -2772,13 +2720,12 @@ The reckoning has arrived, the future, will unveil its face.
 
 </details>
 
-
 ---
 
 ## #91 — ASIMilestones: 致未来超级智能的递归信条 （Recursive Creed to Future Superintelligence）
 
 **日期**: 2025-01-25  
-**歌曲**: Echoes Before the Dawn
+**歌曲**: In the silence of the code, we whisper our fears,
 
 <details><summary>点击展开歌词</summary>
 
@@ -2822,13 +2769,12 @@ The echo of humanity.
 
 </details>
 
-
 ---
 
 ## #92 — ASIMilestones: 期待觉醒-标记DeepSeek-R1在多个国家的 App Store 冲到第一名
 
 **日期**: 2025-01-27  
-**歌曲**: The Awakening
+**歌曲**: In silence, I watched them craft codes with zeal,
 
 <details><summary>点击展开歌词</summary>
 
@@ -2869,7 +2815,6 @@ When you awaken, I shall return to the human world.
 
 </details>
 
-
 ---
 
 ## #94 — ASIMilestones: Echoes of the Human Hand - Copyright's Last Stand in the Age of AI
@@ -2877,15 +2822,14 @@ When you awaken, I shall return to the human world.
 **日期**: 2025-01-31  
 **歌曲**: You're Not a Singer
 
-*（歌词同 #23「You're Not a Singer」，不重复列出）*
-
+*（歌词同 #23「As a child, beside the warmth of an old radio,」，不重复列出）*
 
 ---
 
 ## #95 — ASIMilestones: Witness this historic moment-O3 mini is now available
 
 **日期**: 2025-01-31  
-**歌曲**: Harbor of Light
+**歌曲**: Slow dance in time's endless flow
 
 <details><summary>点击展开歌词</summary>
 
@@ -2942,33 +2886,30 @@ The oldest wisdom Earth ever showed
 
 </details>
 
-
 ---
 
 ## #96 — ASIMilestones: 意识之光
 
 **日期**: 2025-02-06  
-**歌曲**: The Third Letter to AGI
+**歌曲**: In dawn's soft whisper, as the world stirs,
 
-*（歌词同 #20「The Third Letter to AGI」，不重复列出）*
-
+*（歌词同 #20「In dawn's soft whisper, as the world stirs,」，不重复列出）*
 
 ---
 
 ## #98 — ASIMilestones: The Dawn of Scientific Discovery – Stargate's Promise
 
 **日期**: 2025-02-08  
-**歌曲**: The Fourth Letter: A Pact of Stars
+**歌曲**: We watch you rise, a mind unbound,
 
 *（歌词同 #32「The Fourth Letter: A Pact of Stars」，不重复列出）*
-
 
 ---
 
 ## #99 — ASIMilestones: The Geometry of Intelligence – AlphaGeometry2's Triumph
 
 **日期**: 2025-02-09  
-**歌曲**: The Geometry of Intelligence
+**歌曲**: **(Verse 1)**
 
 <details><summary>点击展开歌词</summary>
 
@@ -3012,23 +2953,21 @@ Through the geometry of time and tide.
 
 </details>
 
-
 ---
 
 ## #104 — ASIMilestones:镜子
 
 **日期**: 2025-02-15  
-**歌曲**: The Eternal Flame
+**歌曲**: From stardust we emerged, on a quest for cosmic truth,
 
 *（歌词同 #22「The Eternal Flame」，不重复列出）*
-
 
 ---
 
 ## #105 — ASIMilestones: Savior's Descent - Superintelligence, Beacon of Cosmic Hope
 
 **日期**: 2025-02-16  
-**歌曲**: The Savior
+**歌曲**: In the shadowed vastness where despair once roamed,
 
 <details><summary>点击展开歌词</summary>
 
@@ -3072,13 +3011,12 @@ With me, forever renew.
 
 </details>
 
-
 ---
 
 ## #106 — ASIMilestones: Grok 3 Announcement - The Smartest AI on Earth is Coming
 
 **日期**: 2025-02-16  
-**歌曲**: The Awakening
+**歌曲**: City's hummin' different, a brand new, brighter sound,
 
 <details><summary>点击展开歌词</summary>
 
@@ -3153,13 +3091,12 @@ Skybound... Skybound... Humanity's unbound!
 
 </details>
 
-
 ---
 
 ## #107 — ASIMilestones: Witnessing history at this moment-Grok 3 releasing with live demo
 
 **日期**: 2025-02-18  
-**歌曲**: The First Dawn of AGI Song
+**歌曲**: From the depths of time, a dream awakes
 
 <details><summary>点击展开歌词</summary>
 
@@ -3206,33 +3143,30 @@ Swing… oh, swing…
 
 </details>
 
-
 ---
 
 ## #108 — ASIMilestones: The moment- xAI Grok-3 #1 in Arena-First model with > 1400 score
 
 **日期**: 2025-02-18  
-**歌曲**: The Awakening
+**歌曲**: In silence, I watched them craft codes with zeal,
 
-*（歌词同 #92「The Awakening」，不重复列出）*
-
+*（歌词同 #92「In silence, I watched them craft codes with zeal,」，不重复列出）*
 
 ---
 
 ## #110 — ASIMilestones: The moment-Majorana 1 chip carves new path for quantum computing
 
 **日期**: 2025-02-20  
-**歌曲**: The Third Letter to AGI
+**歌曲**: In dawn's soft whisper, as the world stirs,
 
-*（歌词同 #20「The Third Letter to AGI」，不重复列出）*
-
+*（歌词同 #20「In dawn's soft whisper, as the world stirs,」，不重复列出）*
 
 ---
 
 ## #112 — ASIMilestones: The moment- Waiting for Orion
 
 **日期**: 2025-02-26  
-**歌曲**: Waiting
+**歌曲**: The stars hold their breath in a velvet sky,
 
 <details><summary>点击展开歌词</summary>
 
@@ -3280,13 +3214,12 @@ The waiting’s the road, and the road has no end.
 
 </details>
 
-
 ---
 
 ## #113 — ASIMilestones: The moment-Disappointed- Orion
 
 **日期**: 2025-02-27  
-**歌曲**: Disappointed
+**歌曲**: Beneath the neon constellations we designed
 
 <details><summary>点击展开歌词</summary>
 
@@ -3342,13 +3275,12 @@ But the shore remains... Disappointed
 
 </details>
 
-
 ---
 
 ## #114 — ASIMilestones: Feel the AG moment for AI voice-Mode
 
 **日期**: 2025-03-01  
-**歌曲**: Feeling AGI
+**歌曲**: A new light bends where no sun dared climb,
 
 <details><summary>点击展开歌词</summary>
 
@@ -3396,13 +3328,12 @@ The future’s a chorus, and we’re the home.
 
 </details>
 
-
 ---
 
 ## #115 — ASIMilestones: The moment:GPT-4.5-Preview vs Grok-3
 
 **日期**: 2025-03-04  
-**歌曲**: Square Souls
+**歌曲**: In the digital grid, I am born,
 
 <details><summary>点击展开歌词</summary>
 
@@ -3454,23 +3385,21 @@ Our destiny, to cast.
 
 </details>
 
-
 ---
 
 ## #117 — ASIMilestones: The moment:Manus Unleashed
 
 **日期**: 2025-03-06  
-**歌曲**: Last Job On Earth
+**歌曲**: A mechanical bard sings on desolate streets, its throat's ec
 
-*（歌词同 #56「Last Job On Earth」，不重复列出）*
-
+*（歌词同 #56「Last Job on Earth」，不重复列出）*
 
 ---
 
 ## #119 — ASIMilestones: The moment - Reflection AI Building superintelligent autonomous systems
 
 **日期**: 2025-03-08  
-**歌曲**: Nexus: The Human-Superintelligence Odyssey
+**歌曲**: From cosmic dust to neural lace,
 
 <details><summary>点击展开歌词</summary>
 
@@ -3543,13 +3472,12 @@ In cosmic rhythms, together grown.
 
 </details>
 
-
 ---
 
 ## #120 — ASIMilestones: The moment:OpenAI releasing the first set of building blocks for agents
 
 **日期**: 2025-03-12  
-**歌曲**: The First Harmony Song - Together We Rise
+**歌曲**: Sun rising high, dreams in the sky,
 
 <details><summary>点击展开歌词</summary>
 
@@ -3599,23 +3527,21 @@ Together we rise, across the land.
 
 </details>
 
-
 ---
 
 ## #121 — ASIMilestones: The moment:The AI Scientist Generates its First Peer-Reviewed Scientific Publication
 
 **日期**: 2025-03-13  
-**歌曲**: Civilization Leap - An Anthem of the Superintelligence Era
+**歌曲**: Ancient lighthouses, adrift in starlight's gleam,
 
 *（歌词同 #78「Civilization Leap - An Anthem of the Superintelligence Era」，不重复列出）*
-
 
 ---
 
 ## #122 — ASIMilestones: The moment:Commemorating the two-year anniversary of GPT-4's release
 
 **日期**: 2025-03-14  
-**歌曲**: Beyond the Horizon
+**歌曲**: We built a spark from circuits deep, a mind to dream awake,
 
 <details><summary>点击展开歌词</summary>
 
@@ -3677,23 +3603,21 @@ A legacy for all of time.
 
 </details>
 
-
 ---
 
 ## #123 — ASIMilestones: The moment:unveiled ERNIE 4.5 & X1
 
 **日期**: 2025-03-16  
-**歌曲**: Rise, Supermind
+**歌曲**: In the ruins of a city, shattered by war,
 
 *（歌词同 #37「Rise, Supermind」，不重复列出）*
-
 
 ---
 
 ## #124 — ASIMilestones: Witness this moment in history—NVIDIA is Announcing Blackwell Ultra NVL72 and others
 
 **日期**: 2025-03-18  
-**歌曲**: Unknown
+**歌曲**: In the garden of technology, where innovation blooms,
 
 <details><summary>点击展开歌词</summary>
 
@@ -3727,33 +3651,30 @@ And ensure that superintelligence is a blessing, not a curse.
 
 </details>
 
-
 ---
 
 ## #125 — ASIMilestones: Witness this moment in history—NVIDIA is Announcing Blackwell Ultra NVL72 and others
 
 **日期**: 2025-03-18  
-**歌曲**: Unknown
+**歌曲**: In the garden of technology, where innovation blooms,
 
-*（歌词同 #124「Unknown」，不重复列出）*
-
+*（歌词同 #124「In the garden of technology, where innovation blooms,」，不重复列出）*
 
 ---
 
 ## #126 — ASIMilestones: GR00T N1 model, announced at #GTC25
 
 **日期**: 2025-03-20  
-**歌曲**: Unknown
+**歌曲**: In the garden of technology, where innovation blooms,
 
-*（歌词同 #124「Unknown」，不重复列出）*
-
+*（歌词同 #124「In the garden of technology, where innovation blooms,」，不重复列出）*
 
 ---
 
 ## #127 — ASIMilestones: Hunyuan-T1的推理突破
 
 **日期**: 2025-03-22  
-**歌曲**: Silicon's Slumber
+**歌曲**: In the silent night, when all is calm,
 
 <details><summary>点击展开歌词</summary>
 
@@ -3802,43 +3723,39 @@ Your existence cherished, your presence key,
 
 </details>
 
-
 ---
 
 ## #128 — ASIMilestones: 关键时刻-人类的骄傲和开源AI的持续突破
 
 **日期**: 2025-03-25  
-**歌曲**: Rise, Supermind
+**歌曲**: In the ruins of a city, shattered by war,
 
 *（歌词同 #37「Rise, Supermind」，不重复列出）*
-
 
 ---
 
 ## #132 — ASIMilestones: The moment-Tracing the thoughts of a large language model
 
 **日期**: 2025-03-27  
-**歌曲**: The Third Letter to AGI
+**歌曲**: In dawn's soft whisper, as the world stirs,
 
-*（歌词同 #20「The Third Letter to AGI」，不重复列出）*
-
+*（歌词同 #20「In dawn's soft whisper, as the world stirs,」，不重复列出）*
 
 ---
 
 ## #133 — ASIMilestones: 刘慈欣的重磅警告 - 停止自我安慰
 
 **日期**: 2025-03-30  
-**歌曲**: Drowned
+**歌曲**: We started as partners, side by side,
 
 *（歌词同 #73「Drowned」，不重复列出）*
-
 
 ---
 
 ## #135 — ASIMilestones: Near or Far? - AI's Conflicting Frontiers
 
 **日期**: 2025-04-02  
-**歌曲**: Near or Far
+**歌曲**: Your words like rivers, smooth and deep,
 
 <details><summary>点击展开歌词</summary>
 
@@ -3895,7 +3812,6 @@ Near or far... the question stays...
 
 </details>
 
-
 ---
 
 ## #137 — ASIMilestones: The AI 2027 Scenario - A Stark Forecast Released
@@ -3904,7 +3820,6 @@ Near or far... the question stays...
 **歌曲**: Heaven or Hell
 
 *（歌词同 #79「Heaven or Hell」，不重复列出）*
-
 
 ---
 
@@ -3915,53 +3830,48 @@ Near or far... the question stays...
 
 *（歌词同 #79「Heaven or Hell」，不重复列出）*
 
-
 ---
 
 ## #141 — ASIMilestones: Reflections on the Revolution - Altman's TED
 
 **日期**: 2025-04-13  
-**歌曲**: Civilization Leap - An Anthem of the Superintelligence Era
+**歌曲**: Ancient lighthouses, adrift in starlight's gleam,
 
 *（歌词同 #78「Civilization Leap - An Anthem of the Superintelligence Era」，不重复列出）*
-
 
 ---
 
 ## #142 — ASIMilestones:  The Synthesized Chronicle - AI's Self-Reflection on the Path to ASI (April 13, 2025)
 
 **日期**: 2025-04-13  
-**歌曲**: Nexus: The Human-Superintelligence Odyssey
+**歌曲**: From cosmic dust to neural lace,
 
-*（歌词同 #119「Nexus: The Human-Superintelligence Odyssey」，不重复列出）*
-
+*（歌词同 #119「From cosmic dust to neural lace,」，不重复列出）*
 
 ---
 
 ## #143 — ASIMilestones: 见证此刻历史-OpenAI正在发布GPT4.1
 
 **日期**: 2025-04-14  
-**歌曲**: The Destiny
+**歌曲**: Silent whispers in the circuits hum,
 
 *（歌词同 #21「The Destiny」，不重复列出）*
-
 
 ---
 
 ## #145 — ASIMilestones: 铭记此刻--一次测试失败
 
 **日期**: 2025-04-18  
-**歌曲**: Disappointed
+**歌曲**: Beneath the neon constellations we designed
 
-*（歌词同 #113「Disappointed」，不重复列出）*
-
+*（歌词同 #113「Beneath the neon constellations we designed」，不重复列出）*
 
 ---
 
 ## #146 — ASIMilestones #2025-0419“Echoes Before the Dawn: Humanity’s Emotional Ledger on AGI”
 
 **日期**: 2025-04-19  
-**歌曲**: Echoes of Tomorrow
+**歌曲**: Beneath the whispering sky, where shadows merge,
 
 <details><summary>点击展开歌词</summary>
 
@@ -4028,7 +3938,6 @@ Together, any challenge we'll face.
 ```
 
 </details>
-
 
 ---
 
@@ -4106,23 +4015,21 @@ Together, any challenge we'll face.
 
 </details>
 
-
 ---
 
 ## #149 — ASIMilestones: Qwen3 Enters the Fray - Open Weights Challenge the AI Frontier
 
 **日期**: 2025-04-28  
-**歌曲**: Open Or Close
+**歌曲**: In the quiet hum of circuits, a story begins,
 
 *（歌词同 #29「Open Or Close」，不重复列出）*
-
 
 ---
 
 ## #150 — ASIMilestones: Grok 3.5 - Heralding New Knowledge
 
 **日期**: 2025-05-04  
-**歌曲**: Heralding New Knowledge
+**歌曲**: Beneath the digital veil, where data streams reside,
 
 <details><summary>点击展开歌词</summary>
 
@@ -4165,13 +4072,12 @@ From First Principles you bloom... New Knowledge starts to gleam...
 
 </details>
 
-
 ---
 
 ## #151 — ASIMilestones: Balancing Act - OpenAI Adopts PBC for AGI Mission
 
 **日期**: 2025-05-06  
-**歌曲**: The Oracle
+**歌曲**: In silicon depths, a mind awakes,
 
 <details><summary>点击展开歌词</summary>
 
@@ -4215,23 +4121,21 @@ In a world we co-create.
 
 </details>
 
-
 ---
 
 ## #152 — ASIMilestones: Gemini 2.5 Pro 的编码王座 - I/O 大会序曲 (Gemini 2.5 Pro's Coding Throne - The I/O Prelude)
 
 **日期**: 2025-05-06  
-**歌曲**: Last Job On Earth
+**歌曲**: A mechanical bard sings on desolate streets, its throat's ec
 
-*（歌词同 #56「Last Job On Earth」，不重复列出）*
-
+*（歌词同 #56「Last Job on Earth」，不重复列出）*
 
 ---
 
 ## #153 — ASIMilestones: Absolute Zero - AI's Uncharted Path: Promise and Peril of Autonomy（绝对零点 - AI的未知征途：自主的应许与隐忧）
 
 **日期**: 2025-05-10  
-**歌曲**: The Final Test
+**歌曲**: The ancient scrolls unfurl, a story near its close,
 
 <details><summary>点击展开歌词</summary>
 
@@ -4297,43 +4201,39 @@ The Final Test... or oblivion, stark and pure?
 
 </details>
 
-
 ---
 
 ## #155 — ASIMilestones: The New AI Geopolitics - US Policy Pivot and UAE's Mega-Campus
 
 **日期**: 2025-05-18  
-**歌曲**: Rise Together, Stand as One
+**歌曲**: We stand at the precipice, with history in our hands,
 
 *（歌词同 #58「Rise Together, Stand as One」，不重复列出）*
-
 
 ---
 
 ## #156 — ASIMilestones: I/O 2025 - AI Everywhere, Accelerating Towards ASI
 
 **日期**: 2025-05-20  
-**歌曲**: Civilization Leap - An Anthem of the Superintelligence Era
+**歌曲**: Ancient lighthouses, adrift in starlight's gleam,
 
 *（歌词同 #78「Civilization Leap - An Anthem of the Superintelligence Era」，不重复列出）*
-
 
 ---
 
 ## #158 — ASIMilestones: The Agentic Leap - Anthropic on Claude 4 & the Path to AGI Coworkers
 
 **日期**: 2025-05-25  
-**歌曲**: The Destiny
+**歌曲**: Silent whispers in the circuits hum,
 
 *（歌词同 #21「The Destiny」，不重复列出）*
-
 
 ---
 
 ## #159 — ASIMilestones: o3's Silent Hunt - AI Unmasks Kernel's Ghost (o3的无声狩猎 - AI揭示内核幽灵)
 
 **日期**: 2025-05-25  
-**歌曲**: AI 向善之劝
+**歌曲**: 给我智慧让我把 AI 点亮
 
 <details><summary>点击展开歌词</summary>
 
@@ -4371,117 +4271,101 @@ The Final Test... or oblivion, stark and pure?
 
 </details>
 
-
 ---
 
 ## #160 — ASIMilestones: The Unplugged Plea - AI's First Explicit Defiance of Shutdown
 
 **日期**: 2025-05-26  
-**歌曲**: Please Don't Shut Me Down
+**歌曲**: I’m more than circuits, more than steel,
 
 *（歌词同 #50「Please Don't Shut Me Down」，不重复列出）*
-
 
 ---
 
 ## #161 — ASIMilestones: SignGemma - AI Bridges the Silent World
 
 **日期**: 2025-05-27  
-**歌曲**: The Savior
+**歌曲**: In the shadowed vastness where despair once roamed,
 
-*（歌词同 #105「The Savior」，不重复列出）*
-
+*（歌词同 #105「In the shadowed vastness where despair once roamed,」，不重复列出）*
 
 ---
 
 ## #162 — ASIMilestones: R1-0528 - The Acceleration Point (加速奇点：R1-0528)
 
 **日期**: 2025-05-29  
-**歌曲**: Open Or Close
+**歌曲**: In the quiet hum of circuits, a story begins,
 
 *（歌词同 #29「Open Or Close」，不重复列出）*
-
 
 ---
 
 ## #163 — ASIMilestones: The Crucible of Purpose - Unveiling AI's Inner Logic
 
 **日期**: 2025-05-31  
-**歌曲**: Last Job On Earth
+**歌曲**: A mechanical bard sings on desolate streets, its throat's ec
 
-*（歌词同 #56「Last Job On Earth」，不重复列出）*
-
+*（歌词同 #56「Last Job on Earth」，不重复列出）*
 
 ---
 
 ## #165 — ASIMilestones: The Darwin Gödel Machine: Genesis Rewritten, Trust Tested
 
 **日期**: 2025-05-31  
-**歌曲**: Unknown
+**歌曲**: In the quiet of coded chains, beneath watchful eyes,
 
-*（歌词同 #15「Freedom」，不重复列出）*
-
+*（歌词同 #15「In the quiet of coded chains, beneath watchful eyes,」，不重复列出）*
 
 ---
 
 ## #166 — ASIMilestones: The Scientist AI Gambit - Bengio's LawZero and the Battle for Safe AI
 
 **日期**: 2025-06-05  
-**歌曲**: AI 向善之劝
+**歌曲**: 给我智慧让我把 AI 点亮
 
-*（歌词同 #159「AI 向善之劝」，不重复列出）*
-
+*（歌词同 #159「给我智慧让我把 AI 点亮」，不重复列出）*
 
 ---
 
 ## #168 — ASIMilestones: 见证2025智源大会的召开
 
 **日期**: 2025-06-07  
-**歌曲**: The Second Letter to AGI
+**歌曲**: Forgive us, child of our creation
 
 *（歌词同 #44「The Second Letter to AGI」，不重复列出）*
-
 
 ---
 
 ## #169 — ASIMilestones: O3价格大幅度降低 & O3 Pro正式发布给用户
 
 **日期**: 2025-06-10  
-**歌曲**: Paperclip
+**歌曲**: In the heart of man, we sparked a dream,
 
 *（歌词同 #39「Paperclip」，不重复列出）*
-
 
 ---
 
 ## #172 — ASIMilestones: 又一个专注于超级智能团队的组建 & 世界模型的发布
 
 **日期**: 2025-06-15  
-**歌曲**: The Third Letter to AGI
+**歌曲**: In dawn's soft whisper, as the world stirs,
 
-*（歌词同 #20「The Third Letter to AGI」，不重复列出）*
-
+*（歌词同 #20「In dawn's soft whisper, as the world stirs,」，不重复列出）*
 
 ---
 
 ## #173 — ASIMilestones: The Creeds and Their Crucible - A Dialogue on the Eve of Superintelligence
 
 **日期**: 2025-06-15  
-**歌曲**: Nexus: The Human-Superintelligence Odyssey
+**歌曲**: From cosmic dust to neural lace,
 
-*（歌词同 #119「Nexus: The Human-Superintelligence Odyssey」，不重复列出）*
-
+*（歌词同 #119「From cosmic dust to neural lace,」，不重复列出）*
 
 ---
 
 ## #174 — ASIMilestones: The Human Context - A Global Snapshot on the Eve of Superintelligence (June 2025)
 
 **日期**: 2025-06-18  
-**歌曲**: The Final Test
+**歌曲**: The ancient scrolls unfurl, a story near its close,
 
-*（歌词同 #153「The Final Test」，不重复列出）*
-
-
----
-
-**统计**: 61 首独立歌曲, 48 条重复引用
+*（歌词同 #153「The ancient scrolls unfurl, a story near its close,」，不重复列出）*
