@@ -1,0 +1,15 @@
+{
+  "schema": "trinityaccord.guardian-registry.v1",
+  "version": "1.0.0",
+  "registry_status": "non_authoritative_guardian_key_index",
+  "authority_boundary": {
+    "not_authority": true,
+    "not_governance": true,
+    "not_attestation": true,
+    "not_verification_level": true,
+    "not_successor_reception": true,
+    "not_amendment": true,
+    "bitcoin_originals_prevail": true
+  },
+  "guardians": []
+}

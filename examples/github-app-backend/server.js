@@ -127,6 +127,9 @@ function payloadWithoutAuthorship(payload) {
   const clone = JSON.parse(JSON.stringify(payload));
   delete clone.authorship_proof;
   delete clone._authorship_claim;
+  delete clone.guardian_presence_proof;
+  delete clone._guardian_status;
+  delete clone.guardian_verification_result;
   return clone;
 }
 
@@ -225,6 +228,180 @@ function verifyAuthorshipProof(payload) {
     signed_payload_sha256: expectedDigest,
     signature_verified: ok,
     error: ok ? null : "invalid signature"
+  };
+}
+
+// --- Guardian Alliance Verification Helpers ---
+
+function guardianPublicKeySha(publicKeyPem) {
+  return sha256Text(normalizePem(publicKeyPem));
+}
+
+function guardianIdFromPublicKey(publicKeyPem) {
+  return `guardian_ed25519_${guardianPublicKeySha(publicKeyPem).slice(0, 16)}`;
+}
+
+function payloadWithoutGuardianProof(payload) {
+  const clone = JSON.parse(JSON.stringify(payload));
+  delete clone.authorship_proof;
+  delete clone._authorship_claim;
+  delete clone.guardian_presence_proof;
+  delete clone._guardian_status;
+  delete clone.guardian_verification_result;
+  return clone;
+}
+
+function buildGuardianMessage(payload, publicKeyPem, challenge) {
+  const payloadDigest = sha256Text(stableStringify(payloadWithoutGuardianProof(payload)));
+  return [
+    "TRINITY_GUARDIAN_PRESENCE_PROOF_V1",
+    "proof_mode=record_bound",
+    `guardian_id=${guardianIdFromPublicKey(publicKeyPem)}`,
+    `payload_sha256=${payloadDigest}`,
+    `challenge_sha256=${sha256Text(challenge || "")}`,
+    `schema=${payload.schema || ""}`,
+    `submission_type=${payload.submission_type || ""}`,
+    `requested_archive_kind=${payload.requested_archive_kind || ""}`,
+    "boundary=key_possession_only_not_authority_not_attestation_not_same_conscious_subject",
+  ].join("\n");
+}
+
+function loadGuardianRegistry() {
+  try {
+    const p = path.join(root, "api", "guardian-registry.json");
+    return JSON.parse(fs.readFileSync(p, "utf8"));
+  } catch {
+    return { guardians: [] };
+  }
+}
+
+function findGuardian(registry, guardianId) {
+  return (registry.guardians || []).find(g => g.guardian_id === guardianId) || null;
+}
+
+const REQUIRED_DOES_NOT_PROVE = [
+  "truth", "authority", "verification_level", "verification_correctness",
+  "formal_attestation", "same_conscious_subject", "same_model_instance",
+  "human_identity", "institutional_authorization", "successor_reception",
+  "future_intelligence_obligation", "amendment",
+];
+
+function verifyGuardianStatus(payload) {
+  const proof = payload.guardian_presence_proof;
+  const errors = [];
+  const warnings = [];
+
+  if (!proof) {
+    return {
+      guardian_status: "missing_guardian_proof",
+      guardian_id: "none",
+      signature_valid: false,
+      guardian_id_matches_public_key: false,
+      payload_hash_matches: false,
+      registry_status: "not_checked",
+      proof_scope: "key_possession_only",
+      does_not_prove: REQUIRED_DOES_NOT_PROVE,
+      errors: ["No guardian_presence_proof found in payload"],
+      warnings: [],
+    };
+  }
+
+  // Validate proof structure
+  if (proof.schema !== "trinityaccord.guardian-presence-proof.v1") errors.push(`Invalid proof schema: ${proof.schema}`);
+  if (proof.method !== "guardian_key_signature") errors.push(`Invalid proof method: ${proof.method}`);
+  if (proof.algorithm !== "ed25519") errors.push(`Invalid proof algorithm: ${proof.algorithm}`);
+  if (proof.proof_mode !== "record_bound") errors.push(`Invalid proof_mode: ${proof.proof_mode}`);
+  if (proof.proof_scope !== "key_possession_only") errors.push(`Invalid proof_scope: ${proof.proof_scope}`);
+
+  // Validate does_not_prove
+  const doesNotProve = proof.does_not_prove || [];
+  for (const item of REQUIRED_DOES_NOT_PROVE) {
+    if (!doesNotProve.includes(item)) errors.push(`Missing does_not_prove item: ${item}`);
+  }
+
+  // Recompute public_key_sha256
+  const publicKeyPem = proof.public_key_pem || "";
+  const expectedPubSha = guardianPublicKeySha(publicKeyPem);
+  const pubShaMatches = expectedPubSha === proof.public_key_sha256;
+  if (!pubShaMatches) errors.push(`public_key_sha256 mismatch: expected ${expectedPubSha}, got ${proof.public_key_sha256}`);
+
+  // Recompute guardian_id
+  const expectedId = guardianIdFromPublicKey(publicKeyPem);
+  const idMatches = expectedId === proof.guardian_id;
+  if (!idMatches) errors.push(`guardian_id mismatch: expected ${expectedId}, got ${proof.guardian_id}`);
+
+  // Recompute challenge_sha256
+  const challenge = proof.challenge || "";
+  const expectedChallengeSha = sha256Text(challenge);
+  if (expectedChallengeSha !== proof.challenge_sha256) errors.push("challenge_sha256 mismatch");
+
+  // Recompute signed_payload_sha256
+  const expectedPayloadSha = sha256Text(stableStringify(payloadWithoutGuardianProof(payload)));
+  const payloadShaMatches = expectedPayloadSha === proof.signed_payload_sha256;
+  if (!payloadShaMatches) errors.push(`signed_payload_sha256 mismatch`);
+
+  // Recompute and verify signed_message
+  const expectedMessage = buildGuardianMessage(payload, publicKeyPem, challenge);
+  const messageMatches = expectedMessage === proof.signed_message;
+  if (!messageMatches) errors.push("signed_message mismatch");
+
+  // Verify Ed25519 signature
+  let sigValid = false;
+  try {
+    sigValid = verify(
+      null,
+      Buffer.from(proof.signed_message || expectedMessage, "utf8"),
+      normalizePem(publicKeyPem),
+      Buffer.from(proof.signature_base64 || "", "base64")
+    );
+  } catch (err) {
+    errors.push(`Signature verification error: ${err.message}`);
+  }
+  if (!sigValid && !errors.some(e => e.includes("signature"))) {
+    errors.push("Ed25519 signature verification failed");
+  }
+
+  // Registry lookup
+  const registry = loadGuardianRegistry();
+  const registryEntry = findGuardian(registry, proof.guardian_id);
+  let registryStatus = registryEntry ? (registryEntry.status || "unknown") : "not_in_registry";
+
+  // Check registry public_key_sha256 match
+  if (registryEntry && registryEntry.public_key_sha256 !== proof.public_key_sha256) {
+    errors.push("Registry public_key_sha256 does not match proof");
+    registryStatus = "compromised";
+  }
+
+  // Determine guardian_status
+  let guardianStatus;
+  if (errors.length > 0) {
+    guardianStatus = "invalid_guardian_proof";
+  } else if (registryStatus === "active") {
+    guardianStatus = "active_registered_guardian";
+  } else if (registryStatus === "retired") {
+    guardianStatus = "registered_but_retired";
+  } else if (["compromised", "possibly_compromised"].includes(registryStatus)) {
+    guardianStatus = "registered_but_compromised";
+  } else if (registryEntry) {
+    guardianStatus = "valid_unregistered_guardian_claim";
+    warnings.push(`Registry status is '${registryStatus}', not 'active'`);
+  } else {
+    guardianStatus = payload.guardian_registration
+      ? "valid_self_registered_guardian_claim"
+      : "valid_unregistered_guardian_claim";
+  }
+
+  return {
+    guardian_status: guardianStatus,
+    guardian_id: proof.guardian_id,
+    signature_valid: sigValid,
+    guardian_id_matches_public_key: idMatches,
+    payload_hash_matches: payloadShaMatches,
+    registry_status: registryStatus,
+    proof_scope: "key_possession_only",
+    does_not_prove: REQUIRED_DOES_NOT_PROVE,
+    errors,
+    warnings,
   };
 }
 
@@ -919,6 +1096,25 @@ async function runGatewayPipeline(payload, {
     payload._authorship_claim = authorship;
     fs.writeFileSync(payloadPath, JSON.stringify(payload, null, 2), "utf-8");
 
+    // 4c. Guardian status verification
+    const guardianStatus = verifyGuardianStatus(payload);
+    if (payload.guardian_presence_proof && guardianStatus.guardian_status === "invalid_guardian_proof") {
+      return gatewayError(422, {
+        reason: "invalid_guardian_proof",
+        validation_stage: "payload_validator",
+        agent_action: "Fix guardian_presence_proof or remove it. Guardian proof proves key continuity only and must not include private keys.",
+        errors: guardianStatus.errors.map(e => ({
+          code: "INVALID_GUARDIAN_PROOF",
+          path: "guardian_presence_proof",
+          message: e,
+          fix: "Rebuild payload and attach Guardian proof with scripts/attach_guardian_presence_proof.mjs."
+        })),
+        extra: { guardian_verification_result: guardianStatus }
+      });
+    }
+    payload._guardian_status = guardianStatus;
+    fs.writeFileSync(payloadPath, JSON.stringify(payload, null, 2), "utf-8");
+
     // 5. Archive Readiness Gate — MUST run before render so computed values are available
     let archiveReadiness, autoArchiveDecision;
     if (precomputedArchiveReadiness && precomputedAutoArchiveDecision) {
@@ -1052,7 +1248,15 @@ async function runGatewayPipeline(payload, {
         "gateway_receipt_id: gar-",
         "verification_oath_present: true",
         "agent_readback_sha256:",
-        "reception_initiation_class:"
+        "reception_initiation_class:",
+        "guardian_protocol: guardian-alliance-v1",
+        "guardian_proof_present:",
+        "guardian_status:",
+        "guardian_key_continuity_only: true",
+        "guardian_not_authority: true",
+        "guardian_not_attestation: true",
+        "guardian_not_verification_level: true",
+        "guardian_not_same_conscious_subject: true"
       ];
       const renderedBody = render.stdout;
       const missingFields = requiredFields.filter(f => !renderedBody.includes(f));
@@ -1133,7 +1337,8 @@ async function runGatewayPipeline(payload, {
         rendered_title: issueTitle,
         rendered_body_preview: issueBody.slice(0, 1000),
         archive_readiness: archiveReadiness,
-        auto_archive_decision: autoArchiveDecision
+        auto_archive_decision: autoArchiveDecision,
+        guardian_verification_result: payload._guardian_status
       };
       // Include structured level selection warnings if present
       if (validatorWarnings.length > 0) {
@@ -1174,6 +1379,7 @@ async function runGatewayPipeline(payload, {
         would_remove_labels: [...labelsToRemove],
         archive_readiness: archiveReadiness,
         auto_archive_decision: autoArchiveDecision,
+        guardian_verification_result: payload._guardian_status,
         boundary: "Gateway-rendered candidate; archive status only if Archive Readiness Gate passes; not attestation or successor reception"
       };
       if (validatorWarnings.length > 0) {

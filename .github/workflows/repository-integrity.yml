@@ -866,3 +866,9 @@ jobs:
 
       - name: Test Chronicle site integration
         run: python3 scripts/test_chronicle_site_integration.py
+
+      - name: Test Guardian automated verification
+        run: python3 scripts/test_guardian_automated_verification.py
+
+      - name: Test Guardian Gateway integration
+        run: python3 scripts/test_guardian_gateway_integration.py

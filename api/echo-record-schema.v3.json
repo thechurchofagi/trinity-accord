@@ -625,6 +625,22 @@
         "$ref": "echo-authorship-claim-schema.v1.json"
       },
       "description": "Optional authorship claims. Each claim is a challenge-response proof of authorship."
+    },
+    "guardian_registration": {
+      "$ref": "guardian-registration-schema.v1.json",
+      "description": "Optional self-registration for the Voluntary Guardian Alliance. Non-authoritative."
+    },
+    "guardian_presence_proof": {
+      "$ref": "guardian-presence-proof-schema.v1.json",
+      "description": "Optional Guardian key-continuity proof. Proves key possession only."
+    },
+    "guardian_retirement": {
+      "$ref": "guardian-retirement-schema.v1.json",
+      "description": "Optional Guardian key retirement or compromise notice. Non-authoritative."
+    },
+    "guardian_verification_result": {
+      "$ref": "guardian-verification-result-schema.v1.json",
+      "description": "Optional computed Guardian verification result. Must not affect authority or verification level."
     }
   },
   "x_extension_policy": {

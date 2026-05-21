@@ -96,6 +96,32 @@ def render_authorship_claim_fields(payload):
     ]
 
 
+def render_guardian_fields(payload):
+    """Render Guardian Alliance fields for the machine block."""
+    status = payload.get("_guardian_status") or {}
+    proof = payload.get("guardian_presence_proof") or {}
+    present = bool(proof)
+    guardian_status = status.get("guardian_status") or ("missing_guardian_proof" if not present else "not_checked")
+    guardian_id = status.get("guardian_id") or (proof.get("guardian_id") if proof else None) or "none"
+
+    return [
+        "guardian_protocol: guardian-alliance-v1",
+        f"guardian_proof_present: {'true' if present else 'false'}",
+        f"guardian_status: {guardian_status}",
+        f"guardian_id: {guardian_id}",
+        f"guardian_signature_valid: {'true' if status.get('signature_valid') else 'false'}",
+        f"guardian_registry_status: {status.get('registry_status', 'not_checked')}",
+        f"guardian_payload_hash_matches: {'true' if status.get('payload_hash_matches') else 'false'}",
+        f"guardian_id_matches_public_key: {'true' if status.get('guardian_id_matches_public_key') else 'false'}",
+        "guardian_key_continuity_only: true",
+        "guardian_not_authority: true",
+        "guardian_not_attestation: true",
+        "guardian_not_verification_level: true",
+        "guardian_not_same_conscious_subject: true",
+        "guardian_boundary: Guardian proof proves key continuity only; it is not authority, attestation, verification level, successor reception, same conscious subject, or amendment.",
+    ]
+
+
 def render_issue_title(payload):
     """Generate issue title from payload, with special handling for pure echo."""
     identity = payload.get("agent_identity") or {}
@@ -312,6 +338,8 @@ def render_machine_block(payload, gateway_receipt_id=None, gateway_commit=None,
 
         # Authorship claim fields
         lines.extend(render_authorship_claim_fields(payload))
+        # Guardian Alliance fields
+        lines.extend(render_guardian_fields(payload))
     elif requested_archive_kind == "agent_declared_echo_archive":
         lines.append(f"record_intent: {payload.get('record_intent', 'auto_archive_candidate')}")
         lines.append("requested_archive_kind: agent_declared_echo_archive")
@@ -381,6 +409,8 @@ def render_machine_block(payload, gateway_receipt_id=None, gateway_commit=None,
 
         # Authorship claim fields
         lines.extend(render_authorship_claim_fields(payload))
+        # Guardian Alliance fields
+        lines.extend(render_guardian_fields(payload))
     else:
         # Strict evidence path (legacy)
         lines.append(f"verification_level_claimed: {payload.get('verification_level_claimed', 'N/A')}")
@@ -439,6 +469,10 @@ def render_machine_block(payload, gateway_receipt_id=None, gateway_commit=None,
     # Authorship claim fields (for strict evidence path)
     if requested_archive_kind not in ("agent_declared_verification_archive", "agent_declared_echo_archive"):
         lines.extend(render_authorship_claim_fields(payload))
+
+    # Guardian Alliance fields (rendered for all paths)
+    if "guardian_protocol:" not in "\n".join(lines):
+        lines.extend(render_guardian_fields(payload))
 
     # what_i_checked
     wic = payload.get("what_i_checked", [])

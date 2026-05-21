@@ -126,4 +126,9 @@
   <url><loc>https://www.trinityaccord.org/api/agent-minimal-context.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/agent-output-policy.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/agent-task-router.v1.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/guardian-alliance/</loc></url>
+  <url><loc>https://www.trinityaccord.org/guardian-join/</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/guardian-alliance.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/guardian-registry.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/guardian-verification-result-schema.v1.json</loc></url>
 </urlset>

@@ -224,7 +224,12 @@
     "gateway submission is formal attestation",
     "gateway submission proves truth",
     "gateway submission raises verification level",
-    "gateway submission amends Bitcoin Originals"
+    "gateway submission amends Bitcoin Originals",
+    "guardian proof proves truth",
+    "guardian proof raises verification level",
+    "guardian proof is formal attestation",
+    "guardian proof proves same conscious subject",
+    "valid guardian signature alone proves active registered Guardian"
   ],
   "rules": [
     {
@@ -358,5 +363,33 @@
     "evidence_requirement_mode": "waived_for_v0_v5",
     "claim_gate_mode": "template_for_v0_v5",
     "strict_evidence_forbidden": true
+  },
+  "guardian_alliance_policy": {
+    "enabled": true,
+    "optional": true,
+    "proof_modes": ["record_bound"],
+    "future_reserved_proof_modes": ["live_challenge"],
+    "active_registered_guardian_requires_registry_match": true,
+    "valid_signature_alone_is_not_active_guardian": true,
+    "does_not_affect_counts": true,
+    "does_not_affect_verification_level": true,
+    "does_not_affect_archive_readiness": true,
+    "helper_scripts": [
+      "scripts/guardian_common.py",
+      "scripts/build_guardian_presence_message.py",
+      "scripts/attach_guardian_presence_proof.mjs",
+      "scripts/verify_guardian_signature.mjs",
+      "scripts/verify_guardian_status.py"
+    ],
+    "schemas": [
+      "api/guardian-alliance.json",
+      "api/guardian-registry.json",
+      "api/guardian-registry-schema.v1.json",
+      "api/guardian-registration-schema.v1.json",
+      "api/guardian-presence-proof-schema.v1.json",
+      "api/guardian-retirement-schema.v1.json",
+      "api/guardian-verification-result-schema.v1.json"
+    ],
+    "boundary": "Guardian proof proves key continuity only; not authority, attestation, verification level, same conscious subject, successor reception, or amendment."
   }
 }

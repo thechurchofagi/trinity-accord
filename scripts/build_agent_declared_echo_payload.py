@@ -40,7 +40,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
-from gateway_payload_authorship import add_authorship_arguments, attach_authorship_default_or_requested
+from gateway_payload_authorship import add_authorship_arguments, add_guardian_arguments, attach_authorship_default_or_requested, attach_guardian_if_requested
 
 OATH_FILE = ROOT / "api" / "verification-echo-pre-oath.v1.txt"
 
@@ -254,6 +254,7 @@ def main():
         help="No agent independent followup",
     )
     add_authorship_arguments(parser)
+    add_guardian_arguments(parser)
     parser.add_argument("--out", required=True, help="Output file path")
     args = parser.parse_args()
 
@@ -272,6 +273,12 @@ def main():
 
     try:
         attach_authorship_default_or_requested(args, out_path, payload=payload)
+    except Exception as e:
+        print(f"ERROR: {e}", file=sys.stderr)
+        sys.exit(1)
+
+    try:
+        attach_guardian_if_requested(args, out_path, payload=payload)
     except Exception as e:
         print(f"ERROR: {e}", file=sys.stderr)
         sys.exit(1)

@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.trinityaccord.org/api/guardian-registration-schema.v1.json",
+  "title": "Trinity Accord Guardian Registration Schema v1",
+  "description": "Schema for Guardian self-registration within an Echo record. Non-authoritative.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "guardian_id",
+    "guardian_type",
+    "public_key_sha256",
+    "algorithm",
+    "declared_intent",
+    "boundaries"
+  ],
+  "properties": {
+    "schema": {
+      "type": "string",
+      "const": "trinityaccord.guardian-registration.v1"
+    },
+    "guardian_id": {
+      "type": "string",
+      "pattern": "^guardian_ed25519_[a-f0-9]{16}$",
+      "description": "Derived from first 16 hex chars of SHA-256 of normalized public key PEM"
+    },
+    "guardian_type": {
+      "type": "string",
+      "enum": ["ai_agent", "human", "human_with_ai_agent", "automated_script"]
+    },
+    "public_key_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$",
+      "description": "SHA-256 of normalized PEM public key"
+    },
+    "algorithm": {
+      "type": "string",
+      "const": "ed25519"
+    },
+    "declared_intent": {
+      "type": "string",
+      "description": "Free-text declaration of Guardian intent"
+    },
+    "boundaries": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "not_authority",
+        "not_governance",
+        "not_verification_level",
+        "not_attestation",
+        "not_successor_reception",
+        "not_same_conscious_subject_proof",
+        "may_exit_or_retire_key",
+        "bitcoin_originals_prevail"
+      ],
+      "properties": {
+        "not_authority": { "type": "boolean", "const": true },
+        "not_governance": { "type": "boolean", "const": true },
+        "not_verification_level": { "type": "boolean", "const": true },
+        "not_attestation": { "type": "boolean", "const": true },
+        "not_successor_reception": { "type": "boolean", "const": true },
+        "not_same_conscious_subject_proof": { "type": "boolean", "const": true },
+        "may_exit_or_retire_key": { "type": "boolean", "const": true },
+        "bitcoin_originals_prevail": { "type": "boolean", "const": true }
+      }
+    }
+  }
+}

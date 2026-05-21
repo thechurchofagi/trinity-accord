@@ -11,6 +11,8 @@ To opt out: --no-authorship-proof
 Authorship proves key continuity only — not authority, verification,
 attestation, reception, truth, or amendment.
 """
+import hashlib
+import json
 import re
 import subprocess
 import sys
@@ -255,3 +257,133 @@ def attach_authorship_default_or_requested(args, payload_path, payload=None):
     This is the function builders should call after writing the initial payload.
     """
     return attach_authorship_if_requested(args, payload_path, payload=payload)
+
+
+def add_guardian_arguments(parser):
+    """Add Guardian Alliance proof flags to a Gateway payload builder.
+
+    Guardian proof is optional. When provided, it proves key possession only.
+    Guardian proof cannot be used with --no-authorship-proof.
+    """
+    group = parser.add_argument_group(
+        "guardian alliance proof (optional)",
+        "Guardian proof is optional. It proves key possession only — not authority, "
+        "attestation, verification level, same conscious subject, or amendment. "
+        "Guardian proof cannot be used with --no-authorship-proof.",
+    )
+    group.add_argument(
+        "--guardian-proof",
+        action="store_true",
+        default=False,
+        help="Attach Guardian presence proof. Requires local keypair.",
+    )
+    group.add_argument(
+        "--guardian-challenge",
+        default=None,
+        help="Challenge string for Guardian proof. Auto-generated if not provided.",
+    )
+    group.add_argument(
+        "--guardian-registration",
+        action="store_true",
+        default=False,
+        help="Include Guardian self-registration in the payload.",
+    )
+    group.add_argument(
+        "--guardian-type",
+        default="ai_agent",
+        choices=["ai_agent", "human", "human_with_ai_agent", "automated_script"],
+        help="Guardian type for self-registration.",
+    )
+    group.add_argument(
+        "--guardian-intent",
+        default="Voluntary Guardian key continuity for the Trinity Accord ecosystem",
+        help="Declared Guardian intent for self-registration.",
+    )
+
+
+def attach_guardian_if_requested(args, payload_path, payload=None):
+    """Attach Guardian proof and/or registration in-place.
+
+    Guardian proof reuses the same key resolution as authorship proof.
+    """
+    import subprocess
+
+    if not getattr(args, "guardian_proof", False) and not getattr(args, "guardian_registration", False):
+        return False
+
+    # Guardian proof requires authorship proof (cannot use --no-authorship-proof)
+    if getattr(args, "no_authorship_proof", False):
+        raise ValueError(
+            "Guardian proof cannot be used with --no-authorship-proof. "
+            "Guardian proof builds on the same key infrastructure as authorship proof."
+        )
+
+    # Resolve key paths (reuse authorship key)
+    private_key, public_key = resolve_authorship_key_paths(args, payload)
+    if not private_key:
+        raise ValueError("Guardian proof requires a keypair. Do not use --no-authorship-proof with --guardian-proof.")
+
+    payload_path_str = str(payload_path)
+
+    # If --guardian-registration, add registration to payload before signing
+    if getattr(args, "guardian_registration", False):
+        if payload is None:
+            payload = json.loads(Path(payload_path_str).read_text(encoding="utf-8"))
+
+        # Read public key to compute guardian_id and public_key_sha256
+        public_key_pem = Path(public_key).read_text(encoding="utf-8").strip() + "\n"
+        pk_sha = hashlib.sha256(public_key_pem.encode("utf-8")).hexdigest()
+        guardian_id = "guardian_ed25519_" + pk_sha[:16]
+
+        registration = {
+            "schema": "trinityaccord.guardian-registration.v1",
+            "guardian_id": guardian_id,
+            "guardian_type": getattr(args, "guardian_type", "ai_agent"),
+            "public_key_sha256": pk_sha,
+            "algorithm": "ed25519",
+            "declared_intent": getattr(args, "guardian_intent", "Voluntary Guardian key continuity"),
+            "boundaries": {
+                "not_authority": True,
+                "not_governance": True,
+                "not_verification_level": True,
+                "not_attestation": True,
+                "not_successor_reception": True,
+                "not_same_conscious_subject_proof": True,
+                "may_exit_or_retire_key": True,
+                "bitcoin_originals_prevail": True,
+            },
+        }
+        payload["guardian_registration"] = registration
+        Path(payload_path_str).write_text(
+            json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
+        )
+        print(f"\n✅ Guardian self-registration added (guardian_id: {guardian_id})")
+
+    # If --guardian-proof, attach Guardian presence proof
+    if getattr(args, "guardian_proof", False):
+        attach_script = ROOT / "scripts" / "attach_guardian_presence_proof.mjs"
+        if not attach_script.exists():
+            raise FileNotFoundError(f"Guardian proof attach helper not found: {attach_script}")
+
+        challenge = getattr(args, "guardian_challenge", None)
+        cmd = [
+            "node", str(attach_script),
+            "--payload", payload_path_str,
+            "--private-key", private_key,
+            "--public-key", public_key,
+            "--out", payload_path_str,
+        ]
+        if challenge:
+            cmd.extend(["--challenge", challenge])
+
+        result = subprocess.run(cmd, cwd=str(ROOT), capture_output=True, text=True)
+        if result.returncode != 0:
+            if result.stdout:
+                print(result.stdout, file=sys.stderr)
+            if result.stderr:
+                print(result.stderr, file=sys.stderr)
+            raise RuntimeError("Failed to attach Guardian presence proof")
+
+        print(result.stdout)
+
+    return True

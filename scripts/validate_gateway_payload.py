@@ -168,6 +168,111 @@ def validate_authorship_proof(payload, errors):
         errors.append("authorship_proof.signature_base64 is too short")
 
 
+GUARDIAN_REQUIRED_DOES_NOT_PROVE = [
+    "truth", "authority", "verification_level", "verification_correctness",
+    "formal_attestation", "same_conscious_subject", "same_model_instance",
+    "human_identity", "institutional_authorization", "successor_reception",
+    "future_intelligence_obligation", "amendment",
+]
+
+
+def validate_guardian_fields(payload, errors):
+    """Validate Guardian Alliance fields. Safety and shape only.
+
+    Does not determine active registry status — that is done by
+    verify_guardian_status.py and server-side Gateway helper.
+    """
+    # Validate guardian_registration if present
+    reg = payload.get("guardian_registration")
+    if reg is not None and isinstance(reg, dict):
+        # Reject private key leakage
+        reg_text = json.dumps(reg, ensure_ascii=False)
+        for marker in PRIVATE_KEY_MARKERS:
+            if marker in reg_text:
+                errors.append("guardian_registration must not contain private key material")
+        forbidden_keys = {"private_key", "private_key_pem", "secret", "token"}
+        for key in reg:
+            if key in forbidden_keys:
+                errors.append(f"guardian_registration must not contain {key}")
+
+        # Validate boundaries
+        boundaries = reg.get("boundaries") or {}
+        for key in ["not_authority", "not_governance", "not_verification_level",
+                     "not_attestation", "not_successor_reception",
+                     "not_same_conscious_subject_proof", "may_exit_or_retire_key",
+                     "bitcoin_originals_prevail"]:
+            if boundaries.get(key) is not True:
+                errors.append(f"guardian_registration.boundaries.{key} must be true")
+
+        # Validate guardian_id format
+        gid = reg.get("guardian_id", "")
+        if gid and not re.match(r"^guardian_ed25519_[a-f0-9]{16}$", gid):
+            errors.append("guardian_registration.guardian_id must match guardian_ed25519_<16hex>")
+
+        # Validate public_key_sha256 format
+        pksha = reg.get("public_key_sha256", "")
+        if pksha and not re.fullmatch(r"[a-f0-9]{64}", pksha):
+            errors.append("guardian_registration.public_key_sha256 must be 64 lowercase hex")
+
+    # Validate guardian_presence_proof if present
+    proof = payload.get("guardian_presence_proof")
+    if proof is not None and isinstance(proof, dict):
+        # Reject private key leakage
+        proof_text = json.dumps(proof, ensure_ascii=False)
+        for marker in PRIVATE_KEY_MARKERS:
+            if marker in proof_text:
+                errors.append("guardian_presence_proof must not contain private key material")
+        forbidden_keys = {"private_key", "private_key_pem", "secret", "token"}
+        for key in proof:
+            if key in forbidden_keys:
+                errors.append(f"guardian_presence_proof must not contain {key}")
+
+        # Validate required fields
+        for key in ["schema", "method", "algorithm", "guardian_id", "public_key_pem",
+                     "public_key_sha256", "signed_payload_sha256", "challenge",
+                     "challenge_sha256", "signature_base64", "signed_message",
+                     "created_at", "proof_scope", "does_not_prove"]:
+            if not proof.get(key):
+                errors.append(f"guardian_presence_proof.{key} is required")
+
+        # Validate domain separator
+        if proof.get("signed_message", "").startswith("TRINITY_GUARDIAN_PRESENCE_PROOF_V1") is False:
+            errors.append("guardian_presence_proof.signed_message must start with TRINITY_GUARDIAN_PRESENCE_PROOF_V1")
+
+        # Validate guardian_id format
+        gid = proof.get("guardian_id", "")
+        if gid and not re.match(r"^guardian_ed25519_[a-f0-9]{16}$", gid):
+            errors.append("guardian_presence_proof.guardian_id must match guardian_ed25519_<16hex>")
+
+        # Validate sha256 fields
+        for key in ("public_key_sha256", "signed_payload_sha256", "challenge_sha256"):
+            value = proof.get(key) or ""
+            if value and not re.fullmatch(r"[a-f0-9]{64}", value):
+                errors.append(f"guardian_presence_proof.{key} must be 64 lowercase hex")
+
+        # Validate does_not_prove
+        does_not_prove = proof.get("does_not_prove", [])
+        for item in GUARDIAN_REQUIRED_DOES_NOT_PROVE:
+            if item not in does_not_prove:
+                errors.append(f"guardian_presence_proof.does_not_prove must include {item}")
+
+    # Validate guardian_retirement if present
+    ret = payload.get("guardian_retirement")
+    if ret is not None and isinstance(ret, dict):
+        # Reject private key leakage
+        ret_text = json.dumps(ret, ensure_ascii=False)
+        for marker in PRIVATE_KEY_MARKERS:
+            if marker in ret_text:
+                errors.append("guardian_retirement must not contain private key material")
+
+        # Validate boundaries
+        boundaries = ret.get("boundaries") or {}
+        for key in ["not_authority", "not_governance", "not_verification_level",
+                     "not_attestation", "not_successor_reception", "bitcoin_originals_prevail"]:
+            if boundaries.get(key) is not True:
+                errors.append(f"guardian_retirement.boundaries.{key} must be true")
+
+
 def validate_identity(payload, errors):
     identity = payload.get("agent_identity") or {}
     if not identity.get("name_or_model"):
@@ -242,6 +347,7 @@ def validate_common(payload, errors):
     validate_identity(payload, errors)
     validate_provenance(payload, errors)
     validate_authorship_proof(payload, errors)
+    validate_guardian_fields(payload, errors)
     if requires_claim_gate(payload):
         validate_claim_gate(payload, errors)
     else:

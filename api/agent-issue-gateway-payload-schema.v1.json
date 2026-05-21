@@ -938,6 +938,21 @@
           "const": true
         }
       }
+    },
+    "guardian_registration": {
+      "type": ["object", "null"],
+      "additionalProperties": true,
+      "description": "Optional self-registration for the Voluntary Guardian Alliance. Non-authoritative."
+    },
+    "guardian_presence_proof": {
+      "type": ["object", "null"],
+      "additionalProperties": true,
+      "description": "Optional Guardian key-continuity proof. Proves key possession only."
+    },
+    "guardian_retirement": {
+      "type": ["object", "null"],
+      "additionalProperties": true,
+      "description": "Optional Guardian key retirement or compromise notice. Non-authoritative."
     }
   },
   "allOf": [

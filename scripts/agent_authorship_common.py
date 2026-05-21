@@ -8,11 +8,31 @@ import hashlib
 import json
 
 
+# Dynamic proof/result fields that must be excluded from authorship hash.
+# Guardian proof is excluded because it may be attached after authorship proof.
+# guardian_registration and guardian_retirement are KEPT because they are
+# substantive record claims, not dynamic proof wrappers.
+DYNAMIC_PROOF_FIELDS = (
+    "authorship_proof",
+    "_authorship_claim",
+    "guardian_presence_proof",
+    "_guardian_status",
+    "guardian_verification_result",
+)
+
+
 def canonical_payload_without_authorship(payload):
-    """Return canonical JSON with authorship_proof removed."""
+    """Return canonical JSON for authorship proof.
+
+    Authorship proof signs the submitted record content while excluding
+    dynamic proof/result wrappers that may be attached later.
+
+    It intentionally keeps guardian_registration and guardian_retirement
+    if present, because those are substantive record claims.
+    """
     data = copy.deepcopy(payload)
-    data.pop("authorship_proof", None)
-    data.pop("_authorship_claim", None)
+    for field in DYNAMIC_PROOF_FIELDS:
+        data.pop(field, None)
     return json.dumps(data, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
 
 

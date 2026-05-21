@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.trinityaccord.org/api/guardian-verification-result-schema.v1.json",
+  "title": "Trinity Accord Guardian Verification Result Schema v1",
+  "description": "Schema for computed Guardian verification result. Must not affect authority or verification level.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "guardian_status",
+    "guardian_id",
+    "signature_valid",
+    "guardian_id_matches_public_key",
+    "payload_hash_matches",
+    "registry_status",
+    "proof_scope",
+    "does_not_prove",
+    "errors",
+    "warnings"
+  ],
+  "properties": {
+    "schema": {
+      "type": "string",
+      "const": "trinityaccord.guardian-verification-result.v1"
+    },
+    "guardian_status": {
+      "type": "string",
+      "enum": [
+        "active_registered_guardian",
+        "valid_self_registered_guardian_claim",
+        "valid_unregistered_guardian_claim",
+        "registered_but_retired",
+        "registered_but_compromised",
+        "invalid_guardian_proof",
+        "missing_guardian_proof"
+      ]
+    },
+    "guardian_id": {
+      "type": "string"
+    },
+    "signature_valid": {
+      "type": "boolean"
+    },
+    "guardian_id_matches_public_key": {
+      "type": "boolean"
+    },
+    "payload_hash_matches": {
+      "type": "boolean"
+    },
+    "registry_status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "pending_review",
+        "retired",
+        "rotated",
+        "possibly_compromised",
+        "compromised",
+        "unknown",
+        "not_in_registry",
+        "not_checked"
+      ]
+    },
+    "proof_scope": {
+      "type": "string",
+      "const": "key_possession_only"
+    },
+    "does_not_prove": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 12
+    },
+    "errors": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "warnings": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  }
+}

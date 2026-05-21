@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.trinityaccord.org/api/guardian-presence-proof-schema.v1.json",
+  "title": "Trinity Accord Guardian Presence Proof Schema v1",
+  "description": "Schema for Guardian key-continuity presence proof. Proves key possession only.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "proof_mode",
+    "method",
+    "algorithm",
+    "guardian_id",
+    "public_key_pem",
+    "public_key_sha256",
+    "signed_payload_sha256",
+    "challenge",
+    "challenge_sha256",
+    "signature_base64",
+    "signed_message",
+    "created_at",
+    "proof_scope",
+    "does_not_prove"
+  ],
+  "properties": {
+    "schema": {
+      "type": "string",
+      "const": "trinityaccord.guardian-presence-proof.v1"
+    },
+    "proof_mode": {
+      "type": "string",
+      "enum": ["record_bound"],
+      "description": "record_bound for V1; live_challenge reserved for future V2"
+    },
+    "method": {
+      "type": "string",
+      "const": "guardian_key_signature"
+    },
+    "algorithm": {
+      "type": "string",
+      "const": "ed25519"
+    },
+    "guardian_id": {
+      "type": "string",
+      "pattern": "^guardian_ed25519_[a-f0-9]{16}$"
+    },
+    "public_key_pem": {
+      "type": "string",
+      "minLength": 80,
+      "maxLength": 1000,
+      "pattern": "^-----BEGIN PUBLIC KEY-----[\\s\\S]+-----END PUBLIC KEY-----\\s*$"
+    },
+    "public_key_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "signed_payload_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "challenge": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 500
+    },
+    "challenge_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "signature_base64": {
+      "type": "string",
+      "minLength": 40,
+      "maxLength": 500
+    },
+    "signed_message": {
+      "type": "string",
+      "minLength": 80,
+      "maxLength": 2000
+    },
+    "created_at": {
+      "type": "string",
+      "maxLength": 80
+    },
+    "proof_scope": {
+      "type": "string",
+      "const": "key_possession_only"
+    },
+    "does_not_prove": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 12,
+      "description": "Must include all boundary declarations"
+    }
+  }
+}

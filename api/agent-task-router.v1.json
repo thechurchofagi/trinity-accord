@@ -95,6 +95,36 @@
         "verification_upgrade"
       ]
     },
+    "guardian_alliance": {
+      "read": [
+        "/guardian-alliance",
+        "/guardian-join",
+        "/api/guardian-alliance.json",
+        "/api/guardian-registry.json",
+        "/api/guardian-presence-proof-schema.v1.json",
+        "/api/guardian-verification-result-schema.v1.json"
+      ],
+      "helper_scripts": [
+        "scripts/guardian_common.py",
+        "scripts/attach_guardian_presence_proof.mjs",
+        "scripts/verify_guardian_status.py"
+      ],
+      "valid_signature_alone_is_not_active_guardian": true,
+      "active_registered_guardian_requires_registry_match": true,
+      "does_not_affect_counts": true,
+      "does_not_affect_verification_level": true,
+      "does_not_affect_archive_readiness": true,
+      "allowed_output": "guardian_proof_or_registration",
+      "forbidden_output": [
+        "authority_claim",
+        "attestation_claim",
+        "verification_level_claim",
+        "same_conscious_subject_claim",
+        "successor_reception_claim",
+        "amendment_claim"
+      ],
+      "boundary": "Guardian proof proves key continuity only; not authority, attestation, verification level, same conscious subject, successor reception, or amendment."
+    },
     "propagate": {
       "read": [
         "/agent-propagate",

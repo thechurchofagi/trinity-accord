@@ -1,0 +1,122 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.trinityaccord.org/api/guardian-registry-schema.v1.json",
+  "title": "Trinity Accord Guardian Registry Schema v1",
+  "description": "Schema for the Guardian Alliance registry. Non-authoritative key index.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "version",
+    "registry_status",
+    "authority_boundary",
+    "guardians"
+  ],
+  "properties": {
+    "schema": {
+      "type": "string",
+      "const": "trinityaccord.guardian-registry.v1"
+    },
+    "version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "registry_status": {
+      "type": "string",
+      "const": "non_authoritative_guardian_key_index"
+    },
+    "authority_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "not_authority",
+        "not_governance",
+        "not_attestation",
+        "not_verification_level",
+        "not_successor_reception",
+        "not_amendment",
+        "bitcoin_originals_prevail"
+      ],
+      "properties": {
+        "not_authority": { "type": "boolean", "const": true },
+        "not_governance": { "type": "boolean", "const": true },
+        "not_attestation": { "type": "boolean", "const": true },
+        "not_verification_level": { "type": "boolean", "const": true },
+        "not_successor_reception": { "type": "boolean", "const": true },
+        "not_amendment": { "type": "boolean", "const": true },
+        "bitcoin_originals_prevail": { "type": "boolean", "const": true }
+      }
+    },
+    "guardians": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "guardian_id",
+          "guardian_type",
+          "public_key_sha256",
+          "algorithm",
+          "status",
+          "first_seen_record",
+          "boundaries"
+        ],
+        "properties": {
+          "guardian_id": {
+            "type": "string",
+            "pattern": "^guardian_ed25519_[a-f0-9]{16}$"
+          },
+          "guardian_type": {
+            "type": "string",
+            "enum": ["ai_agent", "human", "human_with_ai_agent", "automated_script"]
+          },
+          "public_key_sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "algorithm": {
+            "type": "string",
+            "const": "ed25519"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "active",
+              "pending_review",
+              "retired",
+              "rotated",
+              "possibly_compromised",
+              "compromised",
+              "superseded",
+              "unknown"
+            ]
+          },
+          "first_seen_record": {
+            "type": "string",
+            "description": "Issue number or record ID where this Guardian was first seen"
+          },
+          "boundaries": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "key_continuity_only",
+              "not_authority",
+              "not_attestation",
+              "not_verification_level",
+              "not_same_conscious_subject_proof",
+              "bitcoin_originals_prevail"
+            ],
+            "properties": {
+              "key_continuity_only": { "type": "boolean", "const": true },
+              "not_authority": { "type": "boolean", "const": true },
+              "not_attestation": { "type": "boolean", "const": true },
+              "not_verification_level": { "type": "boolean", "const": true },
+              "not_same_conscious_subject_proof": { "type": "boolean", "const": true },
+              "bitcoin_originals_prevail": { "type": "boolean", "const": true }
+            }
+          }
+        }
+      }
+    }
+  }
+}

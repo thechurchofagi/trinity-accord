@@ -10,7 +10,21 @@
     "system_or_provider",
     "what_i_checked",
     "limitations",
-    "boundary_sentence"
+    "boundary_sentence",
+    "guardian_protocol",
+    "guardian_proof_present",
+    "guardian_status",
+    "guardian_id",
+    "guardian_signature_valid",
+    "guardian_registry_status",
+    "guardian_payload_hash_matches",
+    "guardian_id_matches_public_key",
+    "guardian_key_continuity_only",
+    "guardian_not_authority",
+    "guardian_not_attestation",
+    "guardian_not_verification_level",
+    "guardian_not_same_conscious_subject",
+    "guardian_boundary"
   ],
   "properties": {
     "submission_type": {
@@ -434,6 +448,75 @@
       "type": "string"
     },
     "claim_boundary": {
+      "type": "string"
+    },
+    "guardian_protocol": {
+      "type": "string",
+      "enum": ["guardian-alliance-v1"]
+    },
+    "guardian_proof_present": {
+      "type": "boolean"
+    },
+    "guardian_status": {
+      "type": "string",
+      "enum": [
+        "active_registered_guardian",
+        "valid_self_registered_guardian_claim",
+        "valid_unregistered_guardian_claim",
+        "registered_but_retired",
+        "registered_but_compromised",
+        "invalid_guardian_proof",
+        "missing_guardian_proof",
+        "not_checked"
+      ]
+    },
+    "guardian_id": {
+      "type": "string"
+    },
+    "guardian_signature_valid": {
+      "type": "boolean"
+    },
+    "guardian_registry_status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "pending_review",
+        "retired",
+        "rotated",
+        "possibly_compromised",
+        "compromised",
+        "unknown",
+        "not_in_registry",
+        "not_checked"
+      ]
+    },
+    "guardian_payload_hash_matches": {
+      "type": "boolean"
+    },
+    "guardian_id_matches_public_key": {
+      "type": "boolean"
+    },
+    "guardian_key_continuity_only": {
+      "type": "boolean",
+      "const": true
+    },
+    "guardian_not_authority": {
+      "type": "boolean",
+      "const": true
+    },
+    "guardian_not_attestation": {
+      "type": "boolean",
+      "const": true
+    },
+    "guardian_not_verification_level": {
+      "type": "boolean",
+      "const": true
+    },
+    "guardian_not_same_conscious_subject": {
+      "type": "boolean",
+      "const": true
+    },
+    "guardian_boundary": {
       "type": "string"
     }
   },

@@ -45,7 +45,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
-from gateway_payload_authorship import add_authorship_arguments, attach_authorship_default_or_requested
+from gateway_payload_authorship import add_authorship_arguments, add_guardian_arguments, attach_authorship_default_or_requested, attach_guardian_if_requested
 from sub_v6_level_guardrails import (
     high_level_confirmation,
     sub_v6_level_selection_acknowledgement,
@@ -387,6 +387,7 @@ def main():
                                  dest="agent_independent_followup",
                                  help="Explicitly set agent_independent_followup to false")
     add_authorship_arguments(parser)
+    add_guardian_arguments(parser)
     parser.add_argument("--out", required=True, help="Output file path")
 
     args = parser.parse_args()
@@ -413,7 +414,13 @@ def main():
         print(f"ERROR: {e}", file=sys.stderr)
         sys.exit(1)
 
-    # Reload payload after optional authorship proof attachment
+    try:
+        attach_guardian_if_requested(args, out_path, payload=payload)
+    except Exception as e:
+        print(f"ERROR: {e}", file=sys.stderr)
+        sys.exit(1)
+
+    # Reload payload after optional authorship/guardian proof attachment
     payload = json.loads(out_path.read_text(encoding="utf-8"))
 
     # Run Claim Gate validation
