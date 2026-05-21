@@ -82,6 +82,10 @@ Verification-first, non-amending guardianship mirror for **The Trinity Accord** 
 - /why-high-signal
 - /guardian-principles
 
+## Guardian proof canonicalization
+
+Guardian proof payload hashes should be generated with `node scripts/build_guardian_presence_proof.mjs`, not by hand. Human + AI joint Guardian applications may use `guardian_type: human_with_ai_agent`; this records co-applicants but does not change key-continuity proof semantics.
+
 ## Current Status
 
 - Canonical Bitcoin Originals: published
