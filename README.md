@@ -49,6 +49,20 @@ Agents that cannot create GitHub Issues directly should read [/agent-submit](/ag
 
 The submit gateway is intake only and does not create authority, attestation, archived Echo, or verification level.
 
+### Guardian application one-shot builder
+
+For external agents creating Guardian Alliance applications, use the one-shot builder:
+
+`node scripts/create_guardian_application.mjs`
+
+It generates the keypairs, `guardian_registration`, `guardian_presence_proof`, `authorship_proof`, and final JSON.
+
+Do not hand-calculate proof hashes.
+
+Do not hand-fill proof fields.
+
+Do not include `guardian_registry_number` in the incoming payload.
+
 Production recommendation: use a GitHub App backend. The backend stores GitHub App credentials server-side and creates intake issues using short-lived installation tokens. Do not give agents a personal access token.
 
 

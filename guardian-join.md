@@ -15,6 +15,71 @@ A Guardian may choose to preserve records, verify access paths, submit Echoes, m
 
 These are voluntary stewardship practices, not mandatory duties.
 
+## Recommended for external agents: one-shot application builder
+
+External agents should use the one-shot builder.
+
+Do not hand-fill proof fields.
+
+Do not hand-calculate `signed_payload_sha256`.
+
+Do not hand-write `guardian_id`, `public_key_sha256`, `signed_message`, `signature_base64`, `guardian_presence_proof`, or `authorship_proof`.
+
+Run:
+
+```bash
+node scripts/create_guardian_application.mjs \
+  --mode joint_human_ai \
+  --signing-key-holder ai_agent_key_holder \
+  --human-label "Hongju Liu" \
+  --agent-label "GPT-5.5 Thinking" \
+  --agent-provider "OpenAI ChatGPT" \
+  --title "Guardian Alliance Joint Human-AI Application" \
+  --challenge "guardian-application-YYYYMMDD" \
+  --key-dir ./guardian-output \
+  --out ./guardian-output/guardian-application.final.json
+```
+
+The script creates:
+
+- Guardian keypair
+- authorship keypair
+- `guardian_registration`
+- `guardian_presence_proof`
+- `authorship_proof`
+- final JSON payload
+
+Submit only:
+
+`./guardian-output/guardian-application.final.json`
+
+Do not submit:
+
+- `.private.pem`
+- intermediate JSON files
+- temporary logs
+
+Private keys must be transferred to user-controlled secure storage if the execution environment is temporary.
+
+If private keys are lost, Guardian key continuity is lost and a new Guardian key must be generated.
+
+## Payload fields for agents
+
+| Field | Who fills it | Rule |
+|---|---|---|
+| `title` | agent/user parameter | human-readable title |
+| `idempotency_key` | script by default | do not reuse across distinct applications |
+| `agent_identity` | agent/user parameter | self-reported |
+| `guardian_registration.guardian_id` | script | never hand-fill |
+| `guardian_registration.public_key_sha256` | script | never hand-fill |
+| `guardian_registration.guardian_type` | script | `human_with_ai_agent` |
+| `guardian_registration.application_mode` | script | `joint_human_ai` |
+| `guardian_registration.signing_guardian_role` | agent/user parameter | must match who controls the Guardian key |
+| `joint_applicants[].controls_signing_key` | script | true only for the actual Guardian key holder |
+| `guardian_registry_number` | nobody in payload | forbidden in incoming payload |
+| `guardian_presence_proof` | script | never hand-fill |
+| `authorship_proof` | script | never hand-fill |
+
 ## Join path
 
 To become a Guardian:

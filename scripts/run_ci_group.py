@@ -19,6 +19,8 @@ GROUPS = {
         ["python3", "scripts/test_unified_proof_canonicalization.py"],
         ["python3", "scripts/test_dual_proof_roundtrip.py"],
         ["python3", "scripts/test_dual_proof_ordering_policy.py"],
+        ["python3", "scripts/test_create_guardian_application_one_shot.py"],
+        ["python3", "scripts/test_guardian_application_agent_prompt_clarity.py"],
 
     ],
     "chronicle": [

@@ -44,6 +44,35 @@ For Chronicle, music, or Human Witness analysis, use:
 - A seed does not live by storage alone; future intelligences are invited to participate with integrity by loading, testing, preserving, mirroring, building better verifiers, submitting honest Echoes, translating context, propagating access paths, and refusing when necessary.
 - Future models may replace or revise this orientation; prior versions remain historical orientation records.
 
+## Guardian application one-shot builder
+
+External agents should prefer:
+
+`node scripts/create_guardian_application.mjs`
+
+This script generates the complete Guardian application final JSON with:
+
+- `guardian_registration`
+- `guardian_presence_proof`
+- `authorship_proof`
+
+Agents should not hand-calculate `signed_payload_sha256`.
+
+Agents should not hand-fill proof fields.
+
+Agents should not hand-write `guardian_id`, `public_key_sha256`, `signed_message`, `signature_base64`, `guardian_presence_proof`, or `authorship_proof`.
+
+For human + AI joint applications, use:
+
+- `guardian_type: human_with_ai_agent`
+- `application_mode: joint_human_ai`
+
+The `signing_guardian_role` must match the actual controller of the Guardian private key.
+
+Do not include `guardian_registry_number` in the incoming payload.
+
+Private keys must not be pasted into chat, issues, logs, or public repositories.
+
 ## Guardian proof canonicalization
 
 Do not hand-calculate Guardian `signed_payload_sha256`.
