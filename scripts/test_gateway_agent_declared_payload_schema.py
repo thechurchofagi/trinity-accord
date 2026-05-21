@@ -271,6 +271,21 @@ def main():
     p["not_successor_reception"] = True
     check(test_pass("Strict V6 payload with attachments", p))
 
+    # Idempotency key — valid
+    p = make_valid_agent_declared()
+    p["idempotency_key"] = "test-idempotency-key-1234"
+    check(test_pass("Valid idempotency_key", p))
+
+    # Idempotency key — invalid (contains spaces)
+    p = make_valid_agent_declared()
+    p["idempotency_key"] = "bad key with spaces"
+    check(test_fail("Invalid idempotency_key with spaces", p))
+
+    # Idempotency key — too short
+    p = make_valid_agent_declared()
+    p["idempotency_key"] = "short"
+    check(test_fail("Invalid idempotency_key too short", p))
+
     print(f"\n--- Results: {passed}/{total} passed ---")
     if failed:
         print(f"FAILED: {failed} tests")
