@@ -387,6 +387,43 @@ function validateGuardianRegistration(registration, proof) {
 
   const boundaries = registration.boundaries || {};
   const requiredBoundaries = [
+const allowedGuardianTypes = new Set(["ai_agent", "human", "human_with_ai_agent", "automated_script"]);
+if (!allowedGuardianTypes.has(registration.guardian_type)) {
+  errors.push("guardian_registration.guardian_type is invalid");
+}
+
+if (registration.guardian_type === "human_with_ai_agent") {
+  if (registration.application_mode !== "joint_human_ai") {
+    errors.push("guardian_registration.application_mode must be joint_human_ai when guardian_type is human_with_ai_agent");
+  }
+
+  const applicants = Array.isArray(registration.joint_applicants) ? registration.joint_applicants : [];
+  if (applicants.length < 2) {
+    errors.push("guardian_registration.joint_applicants must include at least human and ai_agent applicants for human_with_ai_agent");
+  }
+
+  const roles = new Set(applicants.map(a => a && a.role));
+  if (!roles.has("human")) {
+    errors.push("guardian_registration.joint_applicants must include a human applicant");
+  }
+  if (!roles.has("ai_agent")) {
+    errors.push("guardian_registration.joint_applicants must include an ai_agent applicant");
+  }
+
+  for (const [idx, applicant] of applicants.entries()) {
+    if (!applicant || typeof applicant !== "object" || Array.isArray(applicant)) {
+      errors.push();
+      continue;
+    }
+    if (applicant.consent_declared !== true) {
+      errors.push();
+    }
+    if (typeof applicant.self_reported !== "boolean") {
+      errors.push();
+    }
+  }
+}
+
     "not_authority",
     "not_governance",
     "not_verification_level",
