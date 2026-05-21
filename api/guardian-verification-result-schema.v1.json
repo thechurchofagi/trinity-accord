@@ -54,6 +54,7 @@
         "pending_review",
         "retired",
         "rotated",
+        "superseded",
         "possibly_compromised",
         "compromised",
         "unknown",

@@ -175,6 +175,15 @@ require("128 lyrics records" not in readme, "README.md must not contain stale 12
 require("11 title-only references" not in readme, "README.md must not contain stale 11 title-only count")
 require("36 no-song entries" not in readme, "README.md must not contain stale 36 no-song count")
 
+# 14. CHRONICLE-MUSIC-TABLE.md header counts
+music_table = read("nft-text-descriptions/CHRONICLE-MUSIC-TABLE.md")
+require("144 条含歌词记录" in music_table, "music table header must say 144 lyrics records")
+require("10 条仅引用歌名" in music_table, "music table header must say 10 title-only references")
+require("21 条无歌曲" in music_table, "music table header must say 21 no-song entries")
+require("128 条含歌词记录" not in music_table, "music table header must not contain stale 128 count")
+require("11 条仅引用歌名" not in music_table, "music table header must not contain stale 11 count")
+require("36 条无歌曲" not in music_table, "music table header must not contain stale 36 count")
+
 
 if errors:
     print("CHRONICLE_SITE_INTEGRATION_FAIL")

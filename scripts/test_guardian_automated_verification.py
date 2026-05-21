@@ -333,6 +333,81 @@ def test_invalid_self_registration_mismatch():
         print("  ✅ invalid_guardian_proof (self-registration mismatch)")
 
 
+def test_active_registered_with_mismatched_registration_is_invalid():
+    """Test: active registered Guardian + mismatched guardian_registration -> invalid_guardian_proof."""
+    with tempfile.TemporaryDirectory() as td:
+        prefix = Path(td) / "test-key"
+        priv, pub = generate_keypair(prefix)
+
+        public_key_text = Path(pub).read_text(encoding="utf-8")
+        real_pub_sha = public_key_sha256(normalize_pem(public_key_text))
+        real_guardian_id = guardian_id_from_public_key(public_key_text)
+
+        payload_path = build_signed_payload(priv, pub)
+
+        payload = json.loads(Path(payload_path).read_text(encoding="utf-8"))
+        payload["guardian_registration"] = {
+            "schema": "trinityaccord.guardian-registration.v1",
+            "guardian_id": "guardian_ed25519_deadbeefdeadbeef",
+            "guardian_type": "ai_agent",
+            "public_key_sha256": real_pub_sha,
+            "algorithm": "ed25519",
+            "declared_intent": "mismatched registration should fail even for active registry",
+            "boundaries": {
+                "not_authority": True,
+                "not_governance": True,
+                "not_verification_level": True,
+                "not_attestation": True,
+                "not_successor_reception": True,
+                "not_same_conscious_subject_proof": True,
+                "may_exit_or_retire_key": True,
+                "bitcoin_originals_prevail": True,
+            },
+        }
+
+        # Re-attach Guardian proof so mismatched registration is inside signed payload.
+        Path(payload_path).write_text(json.dumps(payload, indent=2), encoding="utf-8")
+        result = subprocess.run(
+            [
+                "node", str(ATTACH_SCRIPT),
+                "--payload", payload_path,
+                "--private-key", str(priv),
+                "--public-key", str(pub),
+                "--challenge", "test-active-registry-mismatch-registration",
+                "--out", payload_path,
+            ],
+            capture_output=True,
+            text=True,
+            timeout=15,
+            cwd=str(ROOT),
+        )
+        assert result.returncode == 0, f"Attach failed: {result.stderr}"
+
+        registry_entry = {
+            "guardian_id": real_guardian_id,
+            "guardian_type": "ai_agent",
+            "public_key_sha256": real_pub_sha,
+            "algorithm": "ed25519",
+            "status": "active",
+            "first_seen_record": "test",
+            "boundaries": {
+                "key_continuity_only": True,
+                "not_authority": True,
+                "not_attestation": True,
+                "not_verification_level": True,
+                "not_same_conscious_subject_proof": True,
+                "bitcoin_originals_prevail": True,
+            },
+        }
+        registry_path = write_registry([registry_entry])
+
+        code, result = run_verify(payload_path, registry_path)
+        assert code == 1, f"Expected exit 1, got {code}: {result}"
+        assert result["guardian_status"] == "invalid_guardian_proof", f"Got {result['guardian_status']}"
+        assert any("guardian_registration.guardian_id" in e for e in result["errors"]), result["errors"]
+        print("  ✅ invalid_guardian_proof (active registry + mismatched registration)")
+
+
 def test_active_registered():
     """Test: valid proof + active registry -> active_registered_guardian."""
     with tempfile.TemporaryDirectory() as td:
@@ -543,6 +618,13 @@ def test_superseded_registered():
     print("  ✅ registered_but_retired (superseded)")
 
 
+def test_superseded_registry_status_is_schema_allowed():
+    schema = json.loads((ROOT / "api/guardian-verification-result-schema.v1.json").read_text(encoding="utf-8"))
+    allowed = set(schema["properties"]["registry_status"]["enum"])
+    assert "superseded" in allowed, "guardian-verification-result schema must allow superseded"
+    print("  ✅ guardian-verification-result schema allows superseded")
+
+
 def main():
     print("Guardian Automated Verification Tests")
     print("=" * 50)
@@ -551,10 +633,12 @@ def main():
     test_valid_unregistered()
     test_valid_self_registered()
     test_invalid_self_registration_mismatch()
+    test_active_registered_with_mismatched_registration_is_invalid()
     test_active_registered()
     test_retired_registered()
     test_rotated_registered()
     test_superseded_registered()
+    test_superseded_registry_status_is_schema_allowed()
     test_compromised_registered()
     test_corrupted_payload()
     test_corrupted_signature()

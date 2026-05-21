@@ -182,6 +182,19 @@ def validate_guardian_fields(payload, errors):
     Does not determine active registry status — that is done by
     verify_guardian_status.py and server-side Gateway helper.
     """
+    # Fail-closed type checks
+    reg = payload.get("guardian_registration")
+    if reg is not None and not isinstance(reg, dict):
+        errors.append("guardian_registration must be object or null")
+
+    proof = payload.get("guardian_presence_proof")
+    if proof is not None and not isinstance(proof, dict):
+        errors.append("guardian_presence_proof must be object or null")
+
+    ret = payload.get("guardian_retirement")
+    if ret is not None and not isinstance(ret, dict):
+        errors.append("guardian_retirement must be object or null")
+
     # Validate guardian_registration if present
     reg = payload.get("guardian_registration")
     if reg is not None and isinstance(reg, dict):

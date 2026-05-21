@@ -218,6 +218,33 @@ def verify_guardian_status(payload, registry_path=None):
     if not sig_valid:
         errors.append(f"Ed25519 signature verification failed: {sig_detail}")
 
+    # Validate guardian_registration whenever present.
+    # This must happen even when the Guardian key is already registered active.
+    registration = payload.get("guardian_registration")
+    registration_present_and_valid = False
+    if registration is not None:
+        registration_ok, registration_errors = validate_self_registration(registration, proof)
+        if registration_ok:
+            registration_present_and_valid = True
+        else:
+            errors.extend(registration_errors)
+
+    # Early return if any errors accumulated so far
+    if errors:
+        return {
+            "schema": "trinityaccord.guardian-verification-result.v1",
+            "guardian_status": "invalid_guardian_proof",
+            "guardian_id": actual_guardian_id,
+            "signature_valid": sig_valid,
+            "guardian_id_matches_public_key": guardian_id_matches,
+            "payload_hash_matches": payload_sha_matches,
+            "registry_status": "not_checked",
+            "proof_scope": "key_possession_only",
+            "does_not_prove": REQUIRED_DOES_NOT_PROVE,
+            "errors": errors,
+            "warnings": warnings,
+        }
+
     # Registry lookup
     if registry_path is None:
         registry_path = ROOT / "api" / "guardian-registry.json"
@@ -240,18 +267,12 @@ def verify_guardian_status(payload, registry_path=None):
     elif registry_status in ("compromised", "possibly_compromised"):
         guardian_status = "registered_but_compromised"
     elif registry_entry:
-        # Registered but not active (pending_review, rotated, superseded, unknown)
+        # Registered but not active (pending_review, unknown)
         guardian_status = "valid_unregistered_guardian_claim"
         warnings.append(f"Registry status is '{registry_status}', not 'active'")
     else:
-        registration = payload.get("guardian_registration")
-        if registration:
-            registration_ok, registration_errors = validate_self_registration(registration, proof)
-            if registration_ok:
-                guardian_status = "valid_self_registered_guardian_claim"
-            else:
-                errors.extend(registration_errors)
-                guardian_status = "invalid_guardian_proof"
+        if registration_present_and_valid:
+            guardian_status = "valid_self_registered_guardian_claim"
         else:
             guardian_status = "valid_unregistered_guardian_claim"
 

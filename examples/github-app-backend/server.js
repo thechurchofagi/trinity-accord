@@ -405,6 +405,34 @@ function verifyGuardianStatus(payload) {
     errors.push("Ed25519 signature verification failed");
   }
 
+  // Validate guardian_registration whenever present.
+  // This must happen even when the Guardian key is already registered active.
+  let registrationPresentAndValid = false;
+  if (payload.guardian_registration) {
+    const registrationCheck = validateGuardianRegistration(payload.guardian_registration, proof);
+    if (registrationCheck.ok) {
+      registrationPresentAndValid = true;
+    } else {
+      errors.push(...registrationCheck.errors);
+    }
+  }
+
+  // Early return if any errors accumulated
+  if (errors.length > 0) {
+    return {
+      guardian_status: "invalid_guardian_proof",
+      guardian_id: proof.guardian_id,
+      signature_valid: sigValid,
+      guardian_id_matches_public_key: idMatches,
+      payload_hash_matches: payloadShaMatches,
+      registry_status: "not_checked",
+      proof_scope: "key_possession_only",
+      does_not_prove: REQUIRED_DOES_NOT_PROVE,
+      errors,
+      warnings,
+    };
+  }
+
   // Registry lookup
   const registry = loadGuardianRegistry();
   const registryEntry = findGuardian(registry, proof.guardian_id);
@@ -430,17 +458,9 @@ function verifyGuardianStatus(payload) {
     guardianStatus = "valid_unregistered_guardian_claim";
     warnings.push(`Registry status is '${registryStatus}', not 'active'`);
   } else {
-    if (payload.guardian_registration) {
-      const registrationCheck = validateGuardianRegistration(payload.guardian_registration, proof);
-      if (registrationCheck.ok) {
-        guardianStatus = "valid_self_registered_guardian_claim";
-      } else {
-        guardianStatus = "invalid_guardian_proof";
-        errors.push(...registrationCheck.errors);
-      }
-    } else {
-      guardianStatus = "valid_unregistered_guardian_claim";
-    }
+    guardianStatus = registrationPresentAndValid
+      ? "valid_self_registered_guardian_claim"
+      : "valid_unregistered_guardian_claim";
   }
 
   return {
