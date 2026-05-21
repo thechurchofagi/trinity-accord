@@ -87,7 +87,8 @@ def main():
             print(f"FAILED ({code}): {' '.join(cmd)}", file=sys.stderr)
         raise SystemExit(1)
 
-    print(f"CI_GROUP_{args.group.upper()}_OK")
+    marker = args.group.upper().replace("-", "_")
+    print(f"CI_GROUP_{marker}_OK")
 
 
 if __name__ == "__main__":

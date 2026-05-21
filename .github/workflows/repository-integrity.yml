@@ -106,9 +106,6 @@ jobs:
       - name: Test confidential challenge report fields
         run: python3 scripts/test_confidential_challenge_report_fields.py
 
-      - name: Test Echo archive authorization boundary
-        run: python3 scripts/test_echo_human_review_archive_authorization.py
-
       - name: Test gateway archive pipeline (P0-1/P0-2/P0-3/P0-4)
         run: python3 scripts/test_gateway_archive_pipeline.py
 
@@ -226,20 +223,8 @@ jobs:
       - name: Test Echo human review automation
         run: python3 scripts/test_echo_human_review_automation.py
 
-      - name: Test Echo archive TOCTOU digest binding
-        run: python3 scripts/test_echo_archive_toctou_digest.py
-
-      - name: Test Echo screened digest trusted comment source
-        run: python3 scripts/test_echo_screened_digest_trusted_comment_source.py
-
-      - name: Test Echo archive Markdown escaping
-        run: python3 scripts/test_echo_archive_markdown_escape.py
-
-      - name: Test Echo archive verification level metadata parsing
-        run: python3 scripts/test_echo_archive_verification_level_metadata.py
-
-      - name: Test Echo untrusted content marking
-        run: python3 scripts/test_echo_untrusted_content_marking.py
+      - name: Test Echo archive group
+        run: python3 scripts/run_ci_group.py echo-archive
 
       - name: Test Echo Issue #103 origin class regression
         run: python3 scripts/test_issue103_origin_class_regression.py
@@ -488,35 +473,8 @@ jobs:
       - name: Run local verification
         run: python3 downloads/verify.py
 
-      - name: Test Claim Gate high-level hard gates
-        run: python3 scripts/test_claim_gate_high_level_hard_gates.py
-
-      - name: Test authority boundary foundation
-        run: python3 scripts/test_claim_gate_authority_boundary_foundation.py
-
-      - name: Test evidence schema high-level constraints
-        run: python3 scripts/test_evidence_schema_high_level_constraints.py
-
-      - name: Test V8 semantics consistency
-        run: python3 scripts/test_v8_semantics_consistency.py
-
-      - name: Test Claim Gate V5/V6/V7 profile boundaries
-        run: python3 scripts/test_claim_gate_v5_v6_v7_profiles.py
-
-      - name: Test Claim Gate V4+/V5 boundaries
-        run: python3 scripts/test_claim_gate_v4plus_v5_boundaries.py
-
-      - name: Test Claim Gate V8 requires core baseline
-        run: python3 scripts/test_claim_gate_v8_requires_core_baseline.py
-
-      - name: Test high component evidence does not raise protocol alone
-        run: python3 scripts/test_claim_gate_high_component_does_not_raise_protocol.py
-
-      - name: Test T8 uncertainty strict parsing
-        run: python3 scripts/test_claim_gate_t8_uncertainty_strict.py
-
-      - name: Test P7/P8 external report requirements
-        run: python3 scripts/test_claim_gate_p7_p8_external_report_requirements.py
+      - name: Test Claim Gate group
+        run: python3 scripts/run_ci_group.py claim-gate
 
       - name: Test deprecated worker active src has no legacy submit logic
         run: python3 scripts/test_deprecated_worker_no_legacy_submit_logic.py
@@ -594,14 +552,8 @@ jobs:
       - name: Test Chronicle site integration
         run: python3 scripts/test_chronicle_site_integration.py
 
-      - name: Test Guardian automated verification
-        run: python3 scripts/test_guardian_automated_verification.py
-
-      - name: Test Guardian Gateway integration
-        run: python3 scripts/test_guardian_gateway_integration.py
-
-      - name: Test Guardian status enum consistency
-        run: python3 scripts/test_guardian_status_enum_consistency.py
+      - name: Test Guardian group
+        run: python3 scripts/run_ci_group.py guardian
 
       # ── Supply-chain / workflow safety fast guards ──────────────────
       - name: Test workflow dispatch input safety
@@ -619,28 +571,8 @@ jobs:
       - name: Test write workflows actor gates
         run: python3 scripts/test_write_workflows_actor_gates.py
 
-      - name: Validate authority manifest
-        run: |
-          python3 scripts/validate_authority_manifest.py --self-test
-          python3 scripts/validate_authority_manifest.py archive/authority-manifest/authority.jcs.json
-
-      - name: Validate BTC signature manifest
-        run: |
-          python3 scripts/validate_btc_signature_manifest.py --self-test
-          python3 scripts/validate_btc_signature_manifest.py archive/btc-signature/btc-signature.json
-
-      - name: Validate ETH witness manifest
-        run: |
-          python3 scripts/validate_eth_witness_manifest.py --self-test
-          python3 scripts/validate_eth_witness_manifest.py archive/eth-witness/eth-witness.json
-
-      - name: Validate trust-root policy
-        run: |
-          python3 scripts/validate_trust_root_policy.py --self-test
-          python3 scripts/validate_trust_root_policy.py archive/trust-root-policy.json
-
-      - name: Test trust-root cross-checks
-        run: python3 scripts/test_trust_root_cross_checks.py
+      - name: Test trust-root group
+        run: python3 scripts/run_ci_group.py trust-root
 
       - name: Node syntax check for verification scripts
         run: |
@@ -676,29 +608,8 @@ jobs:
       - name: Check OTS time anchor verifier syntax
         run: node --check scripts/verify-ots-time-anchor.mjs
 
-      - name: Test GitHub Actions pinning
-        run: python3 scripts/test_action_pinning.py
-
-      - name: Test runner image pinning
-        run: python3 scripts/test_runner_image_pinning.py
-
-      - name: Test Python dependency pinning
-        run: python3 scripts/test_python_dependency_pinning.py
-
-      - name: Test Node dependency pinning
-        run: python3 scripts/test_node_dependency_pinning.py
-
-      - name: Test toolchain provenance script
-        run: python3 scripts/test_toolchain_provenance.py
-
-      - name: Test write workflow toolchain provenance
-        run: python3 scripts/test_write_workflow_toolchain_provenance.py
-
-      - name: Test no remote script execution
-        run: python3 scripts/test_no_remote_script_execution.py
-
-      - name: Test system tool version recording
-        run: python3 scripts/test_system_tool_version_recording.py
+      - name: Test supply-chain group
+        run: python3 scripts/run_ci_group.py supply-chain
 
       - name: Test large asset storage policy
         run: python3 scripts/test_large_asset_storage_policy.py
