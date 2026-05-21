@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""Roundtrip test for payload containing both authorship_proof and guardian_presence_proof."""
+"""Roundtrip test for payload containing both authorship_proof and guardian_presence_proof.
+
+Uses the recommended proof ordering: Guardian --fill-registration first, authorship second.
+This ensures authorship proof signs the final guardian_registration.
+"""
 
 import json
 import subprocess
@@ -26,8 +30,8 @@ def main():
         author_key = td / "author-key"
         guardian_key = td / "guardian-key"
         payload = td / "payload.json"
-        with_author = td / "payload.with-authorship.json"
-        with_both = td / "payload.with-authorship-and-guardian.json"
+        with_guardian = td / "payload.with-guardian.json"
+        with_both = td / "payload.with-guardian-and-authorship.json"
         registry = td / "guardian-registry.json"
 
         run(["node", str(KEYGEN), str(author_key)])
@@ -98,34 +102,25 @@ def main():
             "limitations": ["Not authority", "Not attestation"]
         }
 
-        # Read guardian public key to pre-fill registration
-        guardian_pub = (guardian_key / ".." / (guardian_key.name + ".public.pem")).resolve()
-        # Generate guardian key first to get the public key
-        guardian_pub_path = str(guardian_key) + ".public.pem"
-        guardian_pub_content = Path(guardian_pub_path).read_text(encoding="utf-8").strip()
-
-        # Pre-fill guardian_registration with real guardian key info
-        import hashlib
-        pub_sha = hashlib.sha256((guardian_pub_content + "\n").encode("utf-8")).hexdigest()
-        base["guardian_registration"]["guardian_id"] = f"guardian_ed25519_{pub_sha[:16]}"
-        base["guardian_registration"]["public_key_sha256"] = pub_sha
-
         payload.write_text(json.dumps(base, indent=2, ensure_ascii=False), encoding="utf-8")
 
-        run([
-            "node", str(AUTHOR_BUILDER),
-            "--payload", str(payload),
-            "--private-key", str(author_key) + ".private.pem",
-            "--public-key", str(author_key) + ".public.pem",
-            "--out", str(with_author),
-        ])
-
+        # Step 1: Guardian proof first (--fill-registration fills guardian_registration)
         run([
             "node", str(GUARDIAN_BUILDER),
-            "--payload", str(with_author),
+            "--payload", str(payload),
             "--private-key", str(guardian_key) + ".private.pem",
             "--public-key", str(guardian_key) + ".public.pem",
             "--challenge", "dual-proof-roundtrip",
+            "--out", str(with_guardian),
+            "--fill-registration",
+        ])
+
+        # Step 2: Authorship proof second (signs the filled guardian_registration)
+        run([
+            "node", str(AUTHOR_BUILDER),
+            "--payload", str(with_guardian),
+            "--private-key", str(author_key) + ".private.pem",
+            "--public-key", str(author_key) + ".public.pem",
             "--out", str(with_both),
         ])
 
@@ -133,8 +128,9 @@ def main():
         assert "authorship_proof" in data
         assert "guardian_presence_proof" in data
 
-        # Both proofs should be over the same dynamic-proof-stripped payload.
-        assert data["authorship_proof"]["signed_payload_sha256"] == data["guardian_presence_proof"]["signed_payload_sha256"]
+        # Both proofs must be over the same dynamic-proof-stripped payload.
+        assert data["authorship_proof"]["signed_payload_sha256"] == data["guardian_presence_proof"]["signed_payload_sha256"], \
+            "signed_payload_sha256 mismatch: Guardian proof and authorship proof disagree on canonical payload"
 
         registry.write_text(json.dumps({
             "schema": "trinityaccord.guardian-registry.v1",
