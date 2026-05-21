@@ -858,3 +858,11 @@ jobs:
 
       - name: Test NFT chronicle context artifacts
         run: python3 scripts/test_nft_chronicle_context_artifacts.py
+
+      - name: Generate Chronicle music canonical index
+        run: |
+          python3 scripts/generate_chronicle_music_canonical.py
+          git diff --exit-code nft-text-descriptions/chronicle-music-canonical.json
+
+      - name: Test Chronicle site integration
+        run: python3 scripts/test_chronicle_site_integration.py

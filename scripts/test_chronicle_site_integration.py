@@ -165,6 +165,16 @@ require("chronicle context package" in readme, "README.md missing Chronicle cont
 require("chronicle music audit" in readme, "README.md missing Chronicle music audit")
 require("chronicle / human witness layer" in readme, "README.md missing Chronicle / Human Witness Layer section")
 
+# README music counts must match the current 175-NFT audit / canonical music JSON.
+require("144 lyrics records" in readme, "README.md music count must be 144 lyrics records")
+require("10 title-only references" in readme, "README.md music count must be 10 title-only references")
+require("21 no-song entries" in readme, "README.md music count must be 21 no-song entries")
+
+# Guard against stale pre-correction counts.
+require("128 lyrics records" not in readme, "README.md must not contain stale 128 lyrics count")
+require("11 title-only references" not in readme, "README.md must not contain stale 11 title-only count")
+require("36 no-song entries" not in readme, "README.md must not contain stale 36 no-song count")
+
 
 if errors:
     print("CHRONICLE_SITE_INTEGRATION_FAIL")

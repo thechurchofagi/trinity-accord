@@ -95,7 +95,7 @@ Verification-first, non-amending guardianship mirror for **The Trinity Accord** 
 - Chronicle NFT recovery package: 175/175 completed
 - Chronicle recovery verification: [/chronicle-verification](/chronicle-verification) + [/api/chronicle-recovery.json](/api/chronicle-recovery.json)
 - Chronicle context package: 175/175 timestamped entries; full corpus, agent context, summary, and index generated.
-- Chronicle music audit: 175/175 NFTs audited; 128 lyrics records, 11 title-only references, 36 no-song entries; approximately 70 unique songs.
+- Chronicle music audit: 175/175 NFTs audited; 144 lyrics records, 10 title-only references, 21 no-song entries; approximately 70 unique songs.
 - Unified verification materials index: `/verification-materials` + `/api/verification-materials.json`
 
 ## Chronicle NFT boundary
