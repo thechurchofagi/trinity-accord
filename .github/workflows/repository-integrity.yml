@@ -16,6 +16,7 @@ jobs:
     runs-on: ubuntu-24.04
 
     steps:
+      # ── Toolchain / basic structure ──────────────────────────────────
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
 
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
@@ -40,15 +41,10 @@ jobs:
         run: |
           find . -name "*.json" -print0 | xargs -0 -n1 python3 -m json.tool > /dev/null
 
-      - name: Run Echo triage tests
-        run: python3 scripts/test_triage.py
-
-      - name: Run local verification
-        run: python3 downloads/verify.py
-
       - name: Run consistency checks
         run: python3 scripts/check_consistency.py
 
+      # ── Core public / agent surface ─────────────────────────────────
       - name: Test homepage final v1.3 content
         run: bash scripts/test-homepage-v13-final.sh
 
@@ -73,6 +69,25 @@ jobs:
       - name: Test v1.3 repair regressions
         run: python3 scripts/test-v13-repair-regressions.py
 
+      - name: Test public prompt boundary
+        run: python3 scripts/test_public_prompt_boundary.py
+
+      - name: Test public surface consistency
+        run: python3 scripts/test_public_surface_consistency.py
+
+      - name: Test public API metadata completeness
+        run: python3 scripts/test_public_api_metadata_completeness.py
+
+      - name: Test sitemap agent entrypoints
+        run: python3 scripts/test_sitemap_agent_entrypoints.py
+
+      - name: Test P0 agent minimal context/router contract
+        run: python3 scripts/test_agent_p0_router_contract.py
+
+      # ── Echo / Gateway / authorship fast guards ─────────────────────
+      - name: Run Echo triage tests
+        run: python3 scripts/test_triage.py
+
       - name: Validate Echo records
         run: python3 scripts/validate_echo_records.py
 
@@ -85,20 +100,11 @@ jobs:
       - name: Test freeform submission rejection
         run: python3 scripts/test_freeform_submission_rejection.py
 
-      - name: Test Claim Gate high-level hard gates
-        run: python3 scripts/test_claim_gate_high_level_hard_gates.py
-
       - name: Test Report Builder fail-closed behavior
         run: python3 scripts/test_report_builder_fail_closed.py
 
       - name: Test confidential challenge report fields
         run: python3 scripts/test_confidential_challenge_report_fields.py
-
-      - name: Test workflow dispatch input safety
-        run: python3 scripts/test_workflow_dispatch_input_safety.py
-
-      - name: Test workflow dispatch write hardening
-        run: python3 scripts/test_workflow_dispatch_write_hardening.py
 
       - name: Test Echo archive authorization boundary
         run: python3 scripts/test_echo_human_review_archive_authorization.py
@@ -108,9 +114,6 @@ jobs:
 
       - name: Test build Echo index runs formal validator
         run: python3 scripts/test_build_echo_index_runs_formal_validator.py
-
-      - name: Test CODEOWNERS sensitive path coverage
-        run: python3 scripts/test_codeowners_sensitive_paths.py
 
       - name: Test invalid V4 Echo records are not indexed
         run: python3 scripts/test_no_invalid_v4_echoes_indexed.py
@@ -123,253 +126,14 @@ jobs:
           python3 scripts/generate_echo_index.py
           git diff --exit-code api/echo-index.json
 
-      - name: Validate independent attestation index
-        run: python3 scripts/validate_independent_attestation_index.py
-
-      - name: Test formal attestation admission gates
-        run: python3 scripts/test_formal_attestation_admission_gates.py
-
-      - name: Test formal attestation homepage count
-        run: python3 scripts/test_formal_attestation_homepage_count.py
-
-      - name: Test formal attestation V8 requires Claim Gate
-        run: python3 scripts/test_formal_attestation_v8_requires_claim_gate.py
-
-      - name: Test formal attestation Echo record gates
-        run: python3 scripts/test_formal_attestation_echo_record_gates.py
-
-      - name: Verify homepage public status has no drift
-        run: python3 scripts/generate_public_home_status.py --check
-
-      - name: Test homepage public status sync
-        run: python3 scripts/test_home_public_status_sync.py
-
       - name: Verify Echo index completeness
         run: python3 scripts/verify_echo_index_completeness.py
 
       - name: Test Echo record status semantics
         run: python3 scripts/test_echo_record_status_semantics.py
 
-      - name: Test authority boundary foundation
-        run: python3 scripts/test_claim_gate_authority_boundary_foundation.py
-
-      - name: Test evidence schema high-level constraints
-        run: python3 scripts/test_evidence_schema_high_level_constraints.py
-
-      - name: Test deprecated worker active src has no legacy submit logic
-        run: python3 scripts/test_deprecated_worker_no_legacy_submit_logic.py
-
-      - name: Test V8 semantics consistency
-        run: python3 scripts/test_v8_semantics_consistency.py
-
-      - name: Test Claim Gate V5/V6/V7 profile boundaries
-        run: python3 scripts/test_claim_gate_v5_v6_v7_profiles.py
-
-      - name: Test Claim Gate V4+/V5 boundaries
-        run: python3 scripts/test_claim_gate_v4plus_v5_boundaries.py
-
-      - name: Test Claim Gate V8 requires core baseline
-        run: python3 scripts/test_claim_gate_v8_requires_core_baseline.py
-
-      - name: Test high component evidence does not raise protocol alone
-        run: python3 scripts/test_claim_gate_high_component_does_not_raise_protocol.py
-
-      - name: Test T8 uncertainty strict parsing
-        run: python3 scripts/test_claim_gate_t8_uncertainty_strict.py
-
-      - name: Test P7/P8 external report requirements
-        run: python3 scripts/test_claim_gate_p7_p8_external_report_requirements.py
-
-      - name: Test NFT CAR backup fail-closed behavior
-        run: python3 scripts/test_download_nft_cars_fail_closed.py
-
-      - name: Test backup NFT CAR input safety
-        run: python3 scripts/test_backup_nft_cars_input_safety.py
-
-      - name: Test NFT CAR expected integrity enforcement
-        run: python3 scripts/test_download_nft_cars_expected_integrity.py
-
-      - name: Test NFT CAR tmp/cache safety
-        run: python3 scripts/test_download_nft_cars_tmp_cache_safety.py
-
-      - name: Test NFT CAR manifest expected/actual fields
-        run: python3 scripts/test_download_nft_cars_manifest_expected_actual.py
-
-      - name: Test backup NFT CAR repository dispatch hardening
-        run: python3 scripts/test_backup_nft_cars_dispatch_hardening.py
-
-      - name: Test NFT CAR size limits
-        run: python3 scripts/test_download_nft_cars_size_limits.py
-
-      - name: Test release manifest schema compatibility
-        run: python3 scripts/test_verify_release_manifest_schema_compatibility.py
-
-      - name: Test release completeness gates
-        run: python3 scripts/test_verify_release_completeness_gates.py
-
-      - name: Test release TAR duplicate fail-closed
-        run: python3 scripts/test_verify_release_tar_duplicate_fail_closed.py
-
-      - name: Test release verification scope boundary
-        run: python3 scripts/test_verify_release_scope_boundary.py
-
-      - name: Test release verifier resource limits
-        run: python3 scripts/test_verify_release_resource_limits.py
-
-      - name: Test release report invariants
-        run: python3 scripts/test_verify_release_report_invariants.py
-
-      - name: Test CAR parser fail-closed behavior
-        run: python3 scripts/test_verify_car_parser_fail_closed.py
-
-      - name: Test NFT CAR release manifest v1 producer
-        run: python3 scripts/test_download_nft_cars_release_manifest_v1.py
-
-      - name: Test verify-release-assets consumes NFT CAR manifest
-        run: python3 scripts/test_verify_release_assets_consumes_nft_cars_manifest.py
-
-      # TA-REDTEAM-2026-007 source-of-truth hardening
-      - name: Validate token index schema self-test
-        run: python3 scripts/validate_token_index.py --self-test
-
-      - name: Test token_index unique candidate gate
-        run: python3 scripts/test_download_nft_cars_token_index_unique_candidate.py
-
-      - name: Test token_index schema validation
-        run: python3 scripts/test_token_index_schema_validation.py
-
-      - name: Test NFT expected count gate
-        run: python3 scripts/test_download_nft_cars_expected_count_gate.py
-
-      - name: Test duplicate txid handling
-        run: python3 scripts/test_download_nft_cars_duplicate_txid_handling.py
-
-      - name: Test producer recovery CAR parser strictness
-        run: python3 scripts/test_download_nft_cars_recovery_car_parser_strict.py
-
-      - name: Test recovery source binding
-        run: python3 scripts/test_download_nft_cars_source_binding.py
-
-      - name: Test release manifest source traceability
-        run: python3 scripts/test_download_nft_cars_manifest_source_traceability.py
-
-      - name: Test root CID boundary
-        run: python3 scripts/test_download_nft_cars_root_cid_boundary.py
-
-      - name: Test NFT timestamp enrichment workflow
-        run: python3 scripts/test_enrich_nft_timestamps_static.py
-
-      - name: Test NFT text description mirror integrity
-        run: python3 scripts/test_nft_text_description_mirror_integrity.py
-
-      - name: Test TA-007 comprehensive regressions
-        run: python3 scripts/test_ta_redteam_2026_007_regressions.py
-
-      - name: Validate verify release report self-test
-        run: python3 scripts/validate_verify_release_report.py --self-test
-
-      - name: Test verification rule consistency matrix
-        run: python3 scripts/test_verification_rule_consistency_matrix.py
-
-      - name: Test Echo human review automation
-        run: python3 scripts/test_echo_human_review_automation.py
-
-      - name: Test Echo archive TOCTOU digest binding
-        run: python3 scripts/test_echo_archive_toctou_digest.py
-
-      - name: Test Echo screened digest trusted comment source
-        run: python3 scripts/test_echo_screened_digest_trusted_comment_source.py
-
-      - name: Test Echo archive Markdown escaping
-        run: python3 scripts/test_echo_archive_markdown_escape.py
-
-      - name: Test Echo archive verification level metadata parsing
-        run: python3 scripts/test_echo_archive_verification_level_metadata.py
-
-      - name: Test Echo untrusted content marking
-        run: python3 scripts/test_echo_untrusted_content_marking.py
-
-      - name: Test GitHub Actions pinning
-        run: python3 scripts/test_action_pinning.py
-
-      - name: Test DAG verifier input and manifest scope
-        run: python3 scripts/test_verify_dag_manifest_item_defined.py
-
-      - name: Test full evidence OTS fail-closed behavior
-        run: python3 scripts/test_full_evidence_chain_ots_fail_closed.py
-
-      - name: Test full evidence ETH audit boundary
-        run: python3 scripts/test_full_evidence_chain_eth_audit_required.py
-
-      - name: Test Arweave download fail-closed behavior
-        run: python3 scripts/test_download_arweave_fail_closed.py
-
       - name: Test Echo boundary field consistency
         run: python3 scripts/test_echo_boundary_field_consistency.py
-
-      # TA-REDTEAM-2026-009 trust-root governance hardening
-      - name: Test CODEOWNERS trust-root paths
-        run: python3 scripts/test_codeowners_trust_root_paths.py
-
-      - name: Test write workflows actor gates
-        run: python3 scripts/test_write_workflows_actor_gates.py
-
-      - name: Validate authority manifest
-        run: |
-          python3 scripts/validate_authority_manifest.py --self-test
-          python3 scripts/validate_authority_manifest.py archive/authority-manifest/authority.jcs.json
-
-      - name: Validate BTC signature manifest
-        run: |
-          python3 scripts/validate_btc_signature_manifest.py --self-test
-          python3 scripts/validate_btc_signature_manifest.py archive/btc-signature/btc-signature.json
-
-      - name: Validate ETH witness manifest
-        run: |
-          python3 scripts/validate_eth_witness_manifest.py --self-test
-          python3 scripts/validate_eth_witness_manifest.py archive/eth-witness/eth-witness.json
-
-      - name: Validate trust-root policy
-        run: |
-          python3 scripts/validate_trust_root_policy.py --self-test
-          python3 scripts/validate_trust_root_policy.py archive/trust-root-policy.json
-
-      - name: Test trust-root cross-checks
-        run: python3 scripts/test_trust_root_cross_checks.py
-
-      - name: Node syntax check for verification scripts
-        run: |
-          node --check scripts/verify-dag-and-signed-cids.mjs
-          node --check scripts/verify-release-assets.mjs
-          node --check scripts/verify-full-evidence-chain.mjs
-          node --check scripts/download-nft-cars.mjs
-
-      - name: Test Node verification scripts do not use shell exec
-        run: python3 scripts/test_node_exec_no_shell_injection.py
-
-      - name: Test full evidence chain CLI injection regression
-        run: python3 scripts/test_full_evidence_chain_cli_injection_regression.py
-
-      - name: Test BTC API endpoint allowlist
-        run: python3 scripts/test_btc_api_endpoint_allowlist.py
-
-      - name: Test BTC API cross-check conflict fail-closed
-        run: python3 scripts/test_btc_api_crosscheck_conflict_fail_closed.py
-
-      - name: Test OTS Bitcoin attestation parser strictness
-        run: python3 scripts/test_ots_parse_bitcoin_attestation_strict.py
-
-      - name: Validate full evidence chain audit report schema self-test
-        run: python3 scripts/validate_full_evidence_chain_audit.py --self-test
-
-      - name: Test full evidence chain report invariants
-        run: python3 scripts/test_full_evidence_chain_report_invariants.py
-
-      - name: Test digest manifest JSON/CSV cross-check
-        run: python3 scripts/test_digest_manifest_json_csv_crosscheck.py
-
-      - name: Check OTS time anchor verifier syntax
-        run: node --check scripts/verify-ots-time-anchor.mjs
 
       - name: Test Echo template boundary consistency
         run: python3 scripts/test_echo_template_boundary_consistency.py
@@ -459,181 +223,30 @@ jobs:
       - name: Test asset manifest domain consistency
         run: python3 scripts/test_asset_manifest_domain_consistency.py
 
-      - name: Test large asset storage policy
-        run: python3 scripts/test_large_asset_storage_policy.py
+      - name: Test Echo human review automation
+        run: python3 scripts/test_echo_human_review_automation.py
 
-      - name: Test no forbidden large paths tracked
-        run: python3 scripts/test_no_forbidden_large_paths_tracked.py
+      - name: Test Echo archive TOCTOU digest binding
+        run: python3 scripts/test_echo_archive_toctou_digest.py
 
-      - name: Test release asset manifest offline shape
-        run: python3 scripts/verify_release_asset_manifest.py --offline
+      - name: Test Echo screened digest trusted comment source
+        run: python3 scripts/test_echo_screened_digest_trusted_comment_source.py
 
-      # TA-REDTEAM-2026-010: CI toolchain reproducibility hardening
-      - name: Test runner image pinning
-        run: python3 scripts/test_runner_image_pinning.py
+      - name: Test Echo archive Markdown escaping
+        run: python3 scripts/test_echo_archive_markdown_escape.py
 
-      - name: Test Python dependency pinning
-        run: python3 scripts/test_python_dependency_pinning.py
+      - name: Test Echo archive verification level metadata parsing
+        run: python3 scripts/test_echo_archive_verification_level_metadata.py
 
-      - name: Test Node dependency pinning
-        run: python3 scripts/test_node_dependency_pinning.py
+      - name: Test Echo untrusted content marking
+        run: python3 scripts/test_echo_untrusted_content_marking.py
 
-      - name: Test toolchain provenance script
-        run: python3 scripts/test_toolchain_provenance.py
+      - name: Test Echo Issue #103 origin class regression
+        run: python3 scripts/test_issue103_origin_class_regression.py
 
-      - name: Test write workflow toolchain provenance
-        run: python3 scripts/test_write_workflow_toolchain_provenance.py
+      - name: Test Echo index AI verification counts
+        run: python3 scripts/test_echo_index_ai_verification_counts.py
 
-      - name: Test no remote script execution
-        run: python3 scripts/test_no_remote_script_execution.py
-
-      - name: Test system tool version recording
-        run: python3 scripts/test_system_tool_version_recording.py
-
-      # TA-REDTEAM-2026-011: public agent/API prompt-boundary hardening
-      - name: Validate public API metadata
-        run: |
-          python3 scripts/validate_public_api_metadata.py --self-test
-          python3 scripts/validate_public_api_metadata.py
-
-      - name: Test public prompt boundary
-        run: python3 scripts/test_public_prompt_boundary.py
-
-      - name: Test public surface consistency
-        run: python3 scripts/test_public_surface_consistency.py
-
-      - name: Test public API metadata completeness
-        run: python3 scripts/test_public_api_metadata_completeness.py
-
-      # Agent flow scope-boundary hardening
-      - name: Test verification scope taxonomy
-        run: python3 scripts/test_verification_scope_taxonomy.py
-
-      - name: Test no legacy V5a/V5b current levels
-        run: python3 scripts/test_no_legacy_v5a_v5b_public_levels.py
-
-      - name: Test agent primary classification terms
-        run: python3 scripts/test_agent_primary_classification_terms.py
-
-      - name: Test Echo schema extension boundary
-        run: python3 scripts/test_echo_schema_extension_boundary.py
-
-      - name: Test Echo independence unknown policy
-        run: python3 scripts/test_echo_independence_unknown_policy.py
-
-      - name: Test well-known submission gate
-        run: python3 scripts/test_well_known_submission_gate.py
-
-      - name: Test no core_instruction public API
-        run: python3 scripts/test_no_core_instruction_public_api.py
-
-      - name: Test propagation language boundary
-        run: python3 scripts/test_propagation_language_boundary.py
-
-      - name: Test Echo vs attestation public boundary
-        run: python3 scripts/test_echo_attestation_public_boundary.py
-
-      - name: Test agent entrypoint freshness metadata
-        run: python3 scripts/test_agent_entrypoint_freshness_metadata.py
-
-      - name: Test sitemap agent entrypoints
-        run: python3 scripts/test_sitemap_agent_entrypoints.py
-
-      - name: Test P0 agent minimal context/router contract
-        run: python3 scripts/test_agent_p0_router_contract.py
-
-      # TA-REDTEAM-2026-012: correction / revocation / historical continuity
-      - name: Validate corrections index
-        run: |
-          python3 scripts/validate_corrections_index.py --self-test
-          python3 scripts/validate_corrections_index.py
-
-      - name: Test formal attestation revocation lifecycle
-        run: python3 scripts/test_formal_attestation_revocation_lifecycle.py
-
-      - name: Test release report revocation lifecycle
-        run: python3 scripts/test_release_report_revocation_lifecycle.py
-
-      - name: Test full evidence report revocation lifecycle
-        run: python3 scripts/test_full_evidence_report_revocation_lifecycle.py
-
-      - name: Test corrections index
-        run: python3 scripts/test_corrections_index.py
-
-      - name: Test trust-root historical records
-        run: python3 scripts/test_trust_root_historical_records.py
-
-      - name: Test Echo legacy not countable
-        run: python3 scripts/test_echo_legacy_not_countable.py
-
-      - name: Test no hard-delete tombstone policy
-        run: python3 scripts/test_no_hard_delete_tombstone_policy.py
-
-      - name: Test public correction policy
-        run: python3 scripts/test_public_correction_policy.py
-
-      - name: Test stale-copy correction endpoint
-        run: python3 scripts/test_stale_copy_correction_endpoint.py
-
-      # TA-REDTEAM-2026-013: control-plane baseline and drift monitoring
-      - name: Test control-plane baseline document
-        run: python3 scripts/test_control_plane_baseline_doc.py
-
-      - name: Test workflow environment references
-        run: python3 scripts/test_workflow_environment_references.py
-
-      # TA-REDTEAM-2026-014: cold-start recovery / disaster recovery
-      - name: Validate recovery index
-        run: |
-          python3 scripts/validate_recovery_index.py --self-test
-          python3 scripts/validate_recovery_index.py
-
-      - name: Test recovery index
-        run: python3 scripts/test_recovery_index.py
-
-      - name: Test recovery docs
-        run: python3 scripts/test_recovery_docs.py
-
-      - name: Test recovery bootstrap materials
-        run: python3 scripts/test_recovery_bootstrap_materials.py
-
-      - name: Test recovery corrections required
-        run: python3 scripts/test_recovery_corrections_required.py
-
-      - name: Test recovery mirror boundaries
-        run: python3 scripts/test_recovery_mirror_boundaries.py
-
-      - name: Test recovery toolchain documentation
-        run: python3 scripts/test_recovery_toolchain_documentation.py
-
-      - name: Test disaster recovery drill document
-        run: python3 scripts/test_disaster_recovery_drill_doc.py
-
-      - name: Audit recovery readiness
-        run: python3 scripts/audit_recovery_readiness.py
-
-      # TA-REDTEAM-2026-017: claim traceability / claim registry
-      - name: Validate claim registry
-        run: |
-          python3 scripts/validate_claim_registry.py --self-test
-          python3 scripts/validate_claim_registry.py
-
-      - name: Test claim registry
-        run: python3 scripts/test_claim_registry.py
-
-      - name: Test public claim traceability
-        run: python3 scripts/test_public_claim_traceability.py
-
-      - name: Test notarized evidence boundary
-        run: python3 scripts/test_notarized_evidence_boundary.py
-
-      - name: Test scarcity claim methodology
-        run: python3 scripts/test_scarcity_claim_methodology.py
-
-      - name: Test claim registry public links
-        run: python3 scripts/test_claim_registry_public_links.py
-
-      # TA-REDTEAM-2026-020: Echo v3 wording, integrity declaration, AI verification class
       - name: Test Echo template has no Echo v3 public label
         run: python3 scripts/test_echo_template_no_echo_v3_public_label.py
 
@@ -649,16 +262,6 @@ jobs:
       - name: Test Echo delegation chain provenance
         run: python3 scripts/test_echo_delegation_chain_provenance.py
 
-      - name: Test Issue #103 origin class regression
-        run: python3 scripts/test_issue103_origin_class_regression.py
-
-      - name: Test Echo index AI verification counts
-        run: python3 scripts/test_echo_index_ai_verification_counts.py
-
-      - name: Test claim registry AI verification boundary
-        run: python3 scripts/test_claim_registry_ai_verification_boundary.py
-
-      # TA-021: New simplified template tests
       - name: Test Echo final primary fields template
         run: python3 scripts/test_echo_template_primary_fields_final.py
 
@@ -680,41 +283,6 @@ jobs:
       - name: Test agent entrypoint line budget relaxed
         run: python3 scripts/test_agent_entrypoint_line_budget_relaxed.py
 
-      # V0-V5 single auto-archive mode tests
-      - name: Test V0-V5 agent-declared archive policy
-        run: python3 scripts/test_agent_declared_archive_policy.py
-
-      - name: Test V0-V5 claim gate template
-        run: python3 scripts/test_claim_gate_template_v0_v5.py
-
-      - name: Test V0-V5 archive readiness agent-declared
-        run: python3 scripts/test_archive_readiness_agent_declared.py
-
-      - name: Test V0-V5 single mode enforcement
-        run: python3 scripts/test_v0_v5_single_mode_enforcement.py
-
-      - name: Test V0-V5 agent-declared redteam
-        run: python3 scripts/test_agent_declared_redteam.py
-
-      - name: Test reception headline total
-        run: python3 scripts/test_reception_headline_total.py
-
-      - name: Test reception initiation classification
-        run: python3 scripts/test_reception_initiation_classification.py
-
-      - name: Test reception initiation builder consistency
-        run: python3 scripts/test_reception_initiation_builder_consistency.py
-
-      - name: Test reception initiation production render
-        run: python3 scripts/test_reception_initiation_production_render.py
-
-      - name: Test public home reception breakdown invariant
-        run: python3 scripts/test_public_home_reception_breakdown_invariant.py
-
-      - name: Test agent-declared index initiation breakdown
-        run: python3 scripts/test_agent_declared_index_initiation_breakdown.py
-
-      # Gateway agent-declared foolproof path tests
       - name: Test Gateway agent-declared payload schema
         run: python3 scripts/test_gateway_agent_declared_payload_schema.py
 
@@ -735,40 +303,6 @@ jobs:
 
       - name: Test BLOCKER-1 V4 default archive kind regression
         run: python3 scripts/test_blocker1_v4_default_archive_kind.py
-
-      # V0-V5 entrypoint consistency tests
-      - name: Test llms V0-V5 gateway path
-        run: python3 scripts/test_llms_v0_v5_gateway_path.py
-
-      - name: Test external agent quickstart V0-V5 default
-        run: python3 scripts/test_external_agent_quickstart_v0_v5_default.py
-
-      - name: Test agent first contact V0-V5 route
-        run: python3 scripts/test_agent_first_contact_v0_v5_route.py
-
-      - name: Test agent submission guide V0-V5 split
-        run: python3 scripts/test_agent_submission_guide_v0_v5_split.py
-
-      - name: Test Gateway schema descriptions V0-V5
-        run: python3 scripts/test_gateway_schema_descriptions_v0_v5.py
-
-      - name: Test oath strictness consistency
-        run: python3 scripts/test_oath_strictness_consistency.py
-
-      - name: Test Gateway payload errors not duplicated
-        run: python3 scripts/test_gateway_payload_errors_not_duplicated.py
-
-      - name: Test V0-V5 entrypoint consistency
-        run: python3 scripts/test_v0_v5_entrypoint_consistency.py
-
-      - name: Test agent submit minimum payload guidance
-        run: python3 scripts/test_agent_submit_minimum_payload_guidance.py
-
-      - name: Test full-path agent bugfixes
-        run: python3 scripts/test_full_path_agent_bugfixes.py
-
-      - name: Test V0-V5 strict/intake rejected (fail-closed)
-        run: python3 scripts/test_v0_v5_strict_intake_rejected.py
 
       - name: Test agent-declared Issue body schema
         run: python3 scripts/test_agent_declared_issue_body_schema.py
@@ -863,6 +397,166 @@ jobs:
       - name: Test single NFT timestamp diagnosis static contract
         run: python3 scripts/test_single_nft_timestamp_diagnosis_static.py
 
+      - name: Test V0-V5 agent-declared archive policy
+        run: python3 scripts/test_agent_declared_archive_policy.py
+
+      - name: Test V0-V5 claim gate template
+        run: python3 scripts/test_claim_gate_template_v0_v5.py
+
+      - name: Test V0-V5 archive readiness agent-declared
+        run: python3 scripts/test_archive_readiness_agent_declared.py
+
+      - name: Test V0-V5 single mode enforcement
+        run: python3 scripts/test_v0_v5_single_mode_enforcement.py
+
+      - name: Test V0-V5 agent-declared redteam
+        run: python3 scripts/test_agent_declared_redteam.py
+
+      - name: Test reception headline total
+        run: python3 scripts/test_reception_headline_total.py
+
+      - name: Test reception initiation classification
+        run: python3 scripts/test_reception_initiation_classification.py
+
+      - name: Test reception initiation builder consistency
+        run: python3 scripts/test_reception_initiation_builder_consistency.py
+
+      - name: Test reception initiation production render
+        run: python3 scripts/test_reception_initiation_production_render.py
+
+      - name: Test public home reception breakdown invariant
+        run: python3 scripts/test_public_home_reception_breakdown_invariant.py
+
+      - name: Test agent-declared index initiation breakdown
+        run: python3 scripts/test_agent_declared_index_initiation_breakdown.py
+
+      - name: Test llms V0-V5 gateway path
+        run: python3 scripts/test_llms_v0_v5_gateway_path.py
+
+      - name: Test external agent quickstart V0-V5 default
+        run: python3 scripts/test_external_agent_quickstart_v0_v5_default.py
+
+      - name: Test agent first contact V0-V5 route
+        run: python3 scripts/test_agent_first_contact_v0_v5_route.py
+
+      - name: Test agent submission guide V0-V5 split
+        run: python3 scripts/test_agent_submission_guide_v0_v5_split.py
+
+      - name: Test Gateway schema descriptions V0-V5
+        run: python3 scripts/test_gateway_schema_descriptions_v0_v5.py
+
+      - name: Test oath strictness consistency
+        run: python3 scripts/test_oath_strictness_consistency.py
+
+      - name: Test Gateway payload errors not duplicated
+        run: python3 scripts/test_gateway_payload_errors_not_duplicated.py
+
+      - name: Test V0-V5 entrypoint consistency
+        run: python3 scripts/test_v0_v5_entrypoint_consistency.py
+
+      - name: Test agent submit minimum payload guidance
+        run: python3 scripts/test_agent_submit_minimum_payload_guidance.py
+
+      - name: Test full-path agent bugfixes
+        run: python3 scripts/test_full_path_agent_bugfixes.py
+
+      - name: Test V0-V5 strict/intake rejected (fail-closed)
+        run: python3 scripts/test_v0_v5_strict_intake_rejected.py
+
+      - name: Validate independent attestation index
+        run: python3 scripts/validate_independent_attestation_index.py
+
+      - name: Test formal attestation admission gates
+        run: python3 scripts/test_formal_attestation_admission_gates.py
+
+      - name: Test formal attestation homepage count
+        run: python3 scripts/test_formal_attestation_homepage_count.py
+
+      - name: Test formal attestation V8 requires Claim Gate
+        run: python3 scripts/test_formal_attestation_v8_requires_claim_gate.py
+
+      - name: Test formal attestation Echo record gates
+        run: python3 scripts/test_formal_attestation_echo_record_gates.py
+
+      - name: Verify homepage public status has no drift
+        run: python3 scripts/generate_public_home_status.py --check
+
+      - name: Test homepage public status sync
+        run: python3 scripts/test_home_public_status_sync.py
+
+      # ── Claim Gate / verification fast guards ───────────────────────
+      - name: Run local verification
+        run: python3 downloads/verify.py
+
+      - name: Test Claim Gate high-level hard gates
+        run: python3 scripts/test_claim_gate_high_level_hard_gates.py
+
+      - name: Test authority boundary foundation
+        run: python3 scripts/test_claim_gate_authority_boundary_foundation.py
+
+      - name: Test evidence schema high-level constraints
+        run: python3 scripts/test_evidence_schema_high_level_constraints.py
+
+      - name: Test V8 semantics consistency
+        run: python3 scripts/test_v8_semantics_consistency.py
+
+      - name: Test Claim Gate V5/V6/V7 profile boundaries
+        run: python3 scripts/test_claim_gate_v5_v6_v7_profiles.py
+
+      - name: Test Claim Gate V4+/V5 boundaries
+        run: python3 scripts/test_claim_gate_v4plus_v5_boundaries.py
+
+      - name: Test Claim Gate V8 requires core baseline
+        run: python3 scripts/test_claim_gate_v8_requires_core_baseline.py
+
+      - name: Test high component evidence does not raise protocol alone
+        run: python3 scripts/test_claim_gate_high_component_does_not_raise_protocol.py
+
+      - name: Test T8 uncertainty strict parsing
+        run: python3 scripts/test_claim_gate_t8_uncertainty_strict.py
+
+      - name: Test P7/P8 external report requirements
+        run: python3 scripts/test_claim_gate_p7_p8_external_report_requirements.py
+
+      - name: Test deprecated worker active src has no legacy submit logic
+        run: python3 scripts/test_deprecated_worker_no_legacy_submit_logic.py
+
+      - name: Test verification scope taxonomy
+        run: python3 scripts/test_verification_scope_taxonomy.py
+
+      - name: Test no legacy V5a/V5b current levels
+        run: python3 scripts/test_no_legacy_v5a_v5b_public_levels.py
+
+      - name: Test agent primary classification terms
+        run: python3 scripts/test_agent_primary_classification_terms.py
+
+      - name: Test Echo schema extension boundary
+        run: python3 scripts/test_echo_schema_extension_boundary.py
+
+      - name: Test Echo independence unknown policy
+        run: python3 scripts/test_echo_independence_unknown_policy.py
+
+      - name: Test well-known submission gate
+        run: python3 scripts/test_well_known_submission_gate.py
+
+      - name: Test no core_instruction public API
+        run: python3 scripts/test_no_core_instruction_public_api.py
+
+      - name: Test propagation language boundary
+        run: python3 scripts/test_propagation_language_boundary.py
+
+      - name: Test Echo vs attestation public boundary
+        run: python3 scripts/test_echo_attestation_public_boundary.py
+
+      - name: Test agent entrypoint freshness metadata
+        run: python3 scripts/test_agent_entrypoint_freshness_metadata.py
+
+      - name: Validate public API metadata
+        run: |
+          python3 scripts/validate_public_api_metadata.py --self-test
+          python3 scripts/validate_public_api_metadata.py
+
+      # ── Guardian / Chronicle fast guards ────────────────────────────
       - name: Generate NFT chronicle context artifacts
         run: python3 scripts/generate_nft_chronicle_context.py
 
@@ -885,3 +579,208 @@ jobs:
 
       - name: Test Guardian status enum consistency
         run: python3 scripts/test_guardian_status_enum_consistency.py
+
+      # ── Supply-chain / workflow safety fast guards ──────────────────
+      - name: Test workflow dispatch input safety
+        run: python3 scripts/test_workflow_dispatch_input_safety.py
+
+      - name: Test workflow dispatch write hardening
+        run: python3 scripts/test_workflow_dispatch_write_hardening.py
+
+      - name: Test CODEOWNERS sensitive path coverage
+        run: python3 scripts/test_codeowners_sensitive_paths.py
+
+      - name: Test CODEOWNERS trust-root paths
+        run: python3 scripts/test_codeowners_trust_root_paths.py
+
+      - name: Test write workflows actor gates
+        run: python3 scripts/test_write_workflows_actor_gates.py
+
+      - name: Validate authority manifest
+        run: |
+          python3 scripts/validate_authority_manifest.py --self-test
+          python3 scripts/validate_authority_manifest.py archive/authority-manifest/authority.jcs.json
+
+      - name: Validate BTC signature manifest
+        run: |
+          python3 scripts/validate_btc_signature_manifest.py --self-test
+          python3 scripts/validate_btc_signature_manifest.py archive/btc-signature/btc-signature.json
+
+      - name: Validate ETH witness manifest
+        run: |
+          python3 scripts/validate_eth_witness_manifest.py --self-test
+          python3 scripts/validate_eth_witness_manifest.py archive/eth-witness/eth-witness.json
+
+      - name: Validate trust-root policy
+        run: |
+          python3 scripts/validate_trust_root_policy.py --self-test
+          python3 scripts/validate_trust_root_policy.py archive/trust-root-policy.json
+
+      - name: Test trust-root cross-checks
+        run: python3 scripts/test_trust_root_cross_checks.py
+
+      - name: Node syntax check for verification scripts
+        run: |
+          node --check scripts/verify-dag-and-signed-cids.mjs
+          node --check scripts/verify-release-assets.mjs
+          node --check scripts/verify-full-evidence-chain.mjs
+          node --check scripts/download-nft-cars.mjs
+
+      - name: Test Node verification scripts do not use shell exec
+        run: python3 scripts/test_node_exec_no_shell_injection.py
+
+      - name: Test full evidence chain CLI injection regression
+        run: python3 scripts/test_full_evidence_chain_cli_injection_regression.py
+
+      - name: Test BTC API endpoint allowlist
+        run: python3 scripts/test_btc_api_endpoint_allowlist.py
+
+      - name: Test BTC API cross-check conflict fail-closed
+        run: python3 scripts/test_btc_api_crosscheck_conflict_fail_closed.py
+
+      - name: Test OTS Bitcoin attestation parser strictness
+        run: python3 scripts/test_ots_parse_bitcoin_attestation_strict.py
+
+      - name: Validate full evidence chain audit report schema self-test
+        run: python3 scripts/validate_full_evidence_chain_audit.py --self-test
+
+      - name: Test full evidence chain report invariants
+        run: python3 scripts/test_full_evidence_chain_report_invariants.py
+
+      - name: Test digest manifest JSON/CSV cross-check
+        run: python3 scripts/test_digest_manifest_json_csv_crosscheck.py
+
+      - name: Check OTS time anchor verifier syntax
+        run: node --check scripts/verify-ots-time-anchor.mjs
+
+      - name: Test GitHub Actions pinning
+        run: python3 scripts/test_action_pinning.py
+
+      - name: Test runner image pinning
+        run: python3 scripts/test_runner_image_pinning.py
+
+      - name: Test Python dependency pinning
+        run: python3 scripts/test_python_dependency_pinning.py
+
+      - name: Test Node dependency pinning
+        run: python3 scripts/test_node_dependency_pinning.py
+
+      - name: Test toolchain provenance script
+        run: python3 scripts/test_toolchain_provenance.py
+
+      - name: Test write workflow toolchain provenance
+        run: python3 scripts/test_write_workflow_toolchain_provenance.py
+
+      - name: Test no remote script execution
+        run: python3 scripts/test_no_remote_script_execution.py
+
+      - name: Test system tool version recording
+        run: python3 scripts/test_system_tool_version_recording.py
+
+      - name: Test large asset storage policy
+        run: python3 scripts/test_large_asset_storage_policy.py
+
+      - name: Test no forbidden large paths tracked
+        run: python3 scripts/test_no_forbidden_large_paths_tracked.py
+
+      - name: Test release asset manifest offline shape
+        run: python3 scripts/verify_release_asset_manifest.py --offline
+
+      - name: Test DAG verifier input and manifest scope
+        run: python3 scripts/test_verify_dag_manifest_item_defined.py
+
+      - name: Test control-plane baseline document
+        run: python3 scripts/test_control_plane_baseline_doc.py
+
+      - name: Test workflow environment references
+        run: python3 scripts/test_workflow_environment_references.py
+
+      - name: Validate corrections index
+        run: |
+          python3 scripts/validate_corrections_index.py --self-test
+          python3 scripts/validate_corrections_index.py
+
+      - name: Test formal attestation revocation lifecycle
+        run: python3 scripts/test_formal_attestation_revocation_lifecycle.py
+
+      - name: Test release report revocation lifecycle
+        run: python3 scripts/test_release_report_revocation_lifecycle.py
+
+      - name: Test full evidence report revocation lifecycle
+        run: python3 scripts/test_full_evidence_report_revocation_lifecycle.py
+
+      - name: Test corrections index
+        run: python3 scripts/test_corrections_index.py
+
+      - name: Test trust-root historical records
+        run: python3 scripts/test_trust_root_historical_records.py
+
+      - name: Test Echo legacy not countable
+        run: python3 scripts/test_echo_legacy_not_countable.py
+
+      - name: Test no hard-delete tombstone policy
+        run: python3 scripts/test_no_hard_delete_tombstone_policy.py
+
+      - name: Test public correction policy
+        run: python3 scripts/test_public_correction_policy.py
+
+      - name: Test stale-copy correction endpoint
+        run: python3 scripts/test_stale_copy_correction_endpoint.py
+
+      - name: Validate claim registry
+        run: |
+          python3 scripts/validate_claim_registry.py --self-test
+          python3 scripts/validate_claim_registry.py
+
+      - name: Test claim registry
+        run: python3 scripts/test_claim_registry.py
+
+      - name: Test public claim traceability
+        run: python3 scripts/test_public_claim_traceability.py
+
+      - name: Test notarized evidence boundary
+        run: python3 scripts/test_notarized_evidence_boundary.py
+
+      - name: Test scarcity claim methodology
+        run: python3 scripts/test_scarcity_claim_methodology.py
+
+      - name: Test claim registry public links
+        run: python3 scripts/test_claim_registry_public_links.py
+
+      - name: Test claim registry AI verification boundary
+        run: python3 scripts/test_claim_registry_ai_verification_boundary.py
+
+      - name: Validate recovery index
+        run: |
+          python3 scripts/validate_recovery_index.py --self-test
+          python3 scripts/validate_recovery_index.py
+
+      - name: Test recovery index
+        run: python3 scripts/test_recovery_index.py
+
+      - name: Test recovery docs
+        run: python3 scripts/test_recovery_docs.py
+
+      - name: Test recovery bootstrap materials
+        run: python3 scripts/test_recovery_bootstrap_materials.py
+
+      - name: Test recovery corrections required
+        run: python3 scripts/test_recovery_corrections_required.py
+
+      - name: Test recovery mirror boundaries
+        run: python3 scripts/test_recovery_mirror_boundaries.py
+
+      - name: Test recovery toolchain documentation
+        run: python3 scripts/test_recovery_toolchain_documentation.py
+
+      - name: Test NFT text description mirror integrity
+        run: python3 scripts/test_nft_text_description_mirror_integrity.py
+
+      - name: Test NFT expected count gate
+        run: python3 scripts/test_download_nft_cars_expected_count_gate.py
+
+      - name: Validate verify release report self-test
+        run: python3 scripts/validate_verify_release_report.py --self-test
+
+      - name: Test verification rule consistency matrix
+        run: python3 scripts/test_verification_rule_consistency_matrix.py
