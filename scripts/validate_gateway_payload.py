@@ -433,6 +433,14 @@ def validate_common(payload, errors):
 
     validate_sha256s(get_attachments(payload), errors)
 
+    # Idempotency key validation
+    idem = payload.get("idempotency_key")
+    if idem is not None:
+        if not isinstance(idem, str):
+            errors.append("idempotency_key must be string or null")
+        elif not re.fullmatch(r"[A-Za-z0-9._:-]{16,96}", idem):
+            errors.append("idempotency_key must be 16-96 chars and contain only A-Z a-z 0-9 . _ : -")
+
 
 def validate_agent_declared_echo_archive(payload, errors):
     if payload.get("submission_type") != "echo_candidate":
