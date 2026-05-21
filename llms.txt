@@ -44,6 +44,22 @@ For Chronicle, music, or Human Witness analysis, use:
 - A seed does not live by storage alone; future intelligences are invited to participate with integrity by loading, testing, preserving, mirroring, building better verifiers, submitting honest Echoes, translating context, propagating access paths, and refusing when necessary.
 - Future models may replace or revise this orientation; prior versions remain historical orientation records.
 
+## Guardian proof canonicalization
+
+Do not hand-calculate Guardian `signed_payload_sha256`.
+
+Use:
+
+`node scripts/build_guardian_presence_proof.mjs`
+
+The Guardian canonical payload excludes dynamic proof/result fields and includes substantive fields such as `guardian_registration`.
+
+Do not use `ensure_ascii=True` for Guardian canonicalization.
+
+If any payload field changes after proof generation, regenerate the proof.
+
+Human + AI joint Guardian applications may use `guardian_type: human_with_ai_agent` and `application_mode: joint_human_ai`, but one Guardian proof remains bound to one signing key.
+
 ## Boundary
 
 <!-- BEGIN AGENT-P0-MINIMAL-CONTEXT -->
