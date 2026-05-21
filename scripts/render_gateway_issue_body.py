@@ -103,12 +103,16 @@ def render_guardian_fields(payload):
     present = bool(proof)
     guardian_status = status.get("guardian_status") or ("missing_guardian_proof" if not present else "not_checked")
     guardian_id = status.get("guardian_id") or (proof.get("guardian_id") if proof else None) or "none"
+    guardian_registry_number = status.get("guardian_registry_number")
+    if not guardian_registry_number:
+        guardian_registry_number = "none" if not present else "unassigned"
 
     return [
         "guardian_protocol: guardian-alliance-v1",
         f"guardian_proof_present: {'true' if present else 'false'}",
         f"guardian_status: {guardian_status}",
         f"guardian_id: {guardian_id}",
+        f"guardian_registry_number: {guardian_registry_number}",
         f"guardian_signature_valid: {'true' if status.get('signature_valid') else 'false'}",
         f"guardian_registry_status: {status.get('registry_status', 'not_checked')}",
         f"guardian_payload_hash_matches: {'true' if status.get('payload_hash_matches') else 'false'}",

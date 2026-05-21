@@ -175,6 +175,7 @@ def test_missing_guardian_proof():
     code, result = run_verify(payload_path)
     assert code == 1, f"Expected exit 1, got {code}"
     assert result["guardian_status"] == "missing_guardian_proof", f"Expected missing_guardian_proof, got {result['guardian_status']}"
+    assert result["guardian_registry_number"] == "none", f"Expected none, got {result['guardian_registry_number']}"
     print("  ✅ missing_guardian_proof")
 
 
@@ -190,6 +191,7 @@ def test_valid_unregistered():
         assert code == 0, f"Expected exit 0, got {code}: {result}"
         assert result["guardian_status"] == "valid_unregistered_guardian_claim", f"Got {result['guardian_status']}"
         assert result["signature_valid"] is True
+        assert result["guardian_registry_number"] == "unassigned", f"Expected unassigned, got {result['guardian_registry_number']}"
         print("  ✅ valid_unregistered_guardian_claim")
 
 
@@ -273,6 +275,7 @@ def test_valid_self_registered():
         code, result = run_verify(payload_path, registry_path)
         assert code == 0, f"Expected exit 0, got {code}: {result}"
         assert result["guardian_status"] == "valid_self_registered_guardian_claim", f"Got {result['guardian_status']}"
+        assert result["guardian_registry_number"] == "unassigned", f"Expected unassigned, got {result['guardian_registry_number']}"
         print("  ✅ valid_self_registered_guardian_claim")
 
 
@@ -419,6 +422,7 @@ def test_active_registered():
         gid = guardian_id_from_public_key(Path(pub).read_text())
 
         registry_entry = {
+            "guardian_registry_number": "00001",
             "guardian_id": gid,
             "guardian_type": "ai_agent",
             "public_key_sha256": pub_sha,
@@ -437,6 +441,7 @@ def test_active_registered():
         assert code == 0, f"Expected exit 0, got {code}: {result}"
         assert result["guardian_status"] == "active_registered_guardian", f"Got {result['guardian_status']}"
         assert result["registry_status"] == "active"
+        assert result["guardian_registry_number"] == "00001", f"Expected 00001, got {result['guardian_registry_number']}"
         print("  ✅ active_registered_guardian")
 
 
@@ -451,6 +456,7 @@ def test_retired_registered():
         gid = guardian_id_from_public_key(Path(pub).read_text())
 
         registry_entry = {
+            "guardian_registry_number": "00001",
             "guardian_id": gid,
             "guardian_type": "ai_agent",
             "public_key_sha256": pub_sha,
@@ -468,6 +474,7 @@ def test_retired_registered():
         code, result = run_verify(payload_path, registry_path)
         assert code == 0, f"Expected exit 0, got {code}: {result}"
         assert result["guardian_status"] == "registered_but_retired", f"Got {result['guardian_status']}"
+        assert result["guardian_registry_number"] == "00001", f"Expected 00001, got {result['guardian_registry_number']}"
         print("  ✅ registered_but_retired")
 
 
@@ -482,6 +489,7 @@ def test_compromised_registered():
         gid = guardian_id_from_public_key(Path(pub).read_text())
 
         registry_entry = {
+            "guardian_registry_number": "00001",
             "guardian_id": gid,
             "guardian_type": "ai_agent",
             "public_key_sha256": pub_sha,
@@ -499,6 +507,7 @@ def test_compromised_registered():
         code, result = run_verify(payload_path, registry_path)
         assert code == 0, f"Expected exit 0, got {code}: {result}"
         assert result["guardian_status"] == "registered_but_compromised", f"Got {result['guardian_status']}"
+        assert result["guardian_registry_number"] == "00001", f"Expected 00001, got {result['guardian_registry_number']}"
         print("  ✅ registered_but_compromised")
 
 
@@ -552,6 +561,7 @@ def test_registry_pubkey_mismatch():
 
         # Registry entry with wrong public_key_sha256
         registry_entry = {
+            "guardian_registry_number": "00001",
             "guardian_id": gid,
             "guardian_type": "ai_agent",
             "public_key_sha256": "f" * 64,  # Wrong hash
@@ -569,6 +579,7 @@ def test_registry_pubkey_mismatch():
         code, result = run_verify(payload_path, registry_path)
         assert code == 1, f"Expected exit 1, got {code}"
         assert result["guardian_status"] == "invalid_guardian_proof", f"Got {result['guardian_status']}"
+        assert result["guardian_registry_number"] == "none", f"Expected none, got {result['guardian_registry_number']}"
         print("  ✅ invalid_guardian_proof (registry pubkey mismatch)")
 
 
@@ -582,6 +593,7 @@ def assert_registry_status_classifies_as(status, expected_guardian_status):
         gid = guardian_id_from_public_key(Path(pub).read_text())
 
         registry_entry = {
+            "guardian_registry_number": "00001",
             "guardian_id": gid,
             "guardian_type": "ai_agent",
             "public_key_sha256": pub_sha,
@@ -604,6 +616,7 @@ def assert_registry_status_classifies_as(status, expected_guardian_status):
         assert result["guardian_status"] == expected_guardian_status, (
             f"status={status}: expected {expected_guardian_status}, got {result['guardian_status']}"
         )
+        assert result["guardian_registry_number"] == "00001", f"Expected 00001, got {result['guardian_registry_number']}"
 
 
 def test_rotated_registered():
@@ -625,6 +638,44 @@ def test_superseded_registry_status_is_schema_allowed():
     print("  ✅ guardian-verification-result schema allows superseded")
 
 
+def test_invalid_proof_does_not_get_registry_number():
+    """Test: valid registry entry has guardian_registry_number 00001 but corrupted proof gets none."""
+    with tempfile.TemporaryDirectory() as td:
+        prefix = Path(td) / "test-key"
+        priv, pub = generate_keypair(prefix)
+        payload_path = build_signed_payload(priv, pub)
+
+        pub_sha = public_key_sha256(normalize_pem(Path(pub).read_text()))
+        gid = guardian_id_from_public_key(Path(pub).read_text())
+
+        # Corrupt the payload
+        payload = json.loads(Path(payload_path).read_text())
+        payload["title"] = "CORRUPTED"
+        Path(payload_path).write_text(json.dumps(payload, indent=2))
+
+        registry_entry = {
+            "guardian_registry_number": "00001",
+            "guardian_id": gid,
+            "guardian_type": "ai_agent",
+            "public_key_sha256": pub_sha,
+            "algorithm": "ed25519",
+            "status": "active",
+            "first_seen_record": "test",
+            "boundaries": {
+                "key_continuity_only": True, "not_authority": True, "not_attestation": True,
+                "not_verification_level": True, "not_same_conscious_subject_proof": True,
+                "bitcoin_originals_prevail": True,
+            },
+        }
+        registry_path = write_registry([registry_entry])
+
+        code, result = run_verify(payload_path, registry_path)
+        assert code == 1, f"Expected exit 1, got {code}"
+        assert result["guardian_status"] == "invalid_guardian_proof", f"Got {result['guardian_status']}"
+        assert result["guardian_registry_number"] == "none", f"Expected none, got {result['guardian_registry_number']}"
+        print("  ✅ invalid_guardian_proof (registry number not leaked)")
+
+
 def main():
     print("Guardian Automated Verification Tests")
     print("=" * 50)
@@ -643,6 +694,7 @@ def main():
     test_corrupted_payload()
     test_corrupted_signature()
     test_registry_pubkey_mismatch()
+    test_invalid_proof_does_not_get_registry_number()
 
     print("=" * 50)
     print("GUARDIAN_AUTOMATED_VERIFICATION_OK")

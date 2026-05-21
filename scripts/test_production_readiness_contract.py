@@ -52,6 +52,9 @@ def main():
 
     require("test_production_readiness_contract.py" in integrity, "repository-integrity.yml must run production readiness contract test")
 
+    require("guardian_registry_number" in server, "server.js missing guardian_registry_number")
+    require("guardianRegistryNumberFromEntry" in server, "server.js missing guardianRegistryNumberFromEntry")
+
     print("PRODUCTION_READINESS_CONTRACT_OK")
 
 

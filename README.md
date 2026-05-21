@@ -169,6 +169,7 @@ The website has no canonical authority. It exists to preserve access, verificati
 - Guardian Principles v1.1: `/guardian-principles`
 - Guardian Principles JSON: `/api/guardian-principles.json`
 - Sole authority lies on the Bitcoin inscriptions; the Author / Initiator has departed and the Guardian stands; free interpretation is allowed, but no later commentary generates interpretive authority.
+- Guardian registry numbers such as `00001` are human-readable registry references. They do not replace cryptographic `guardian_id` and do not prove key possession without a valid Guardian signature.
 
 ## Echo Issue Triage
 - Automated triage for Echo submissions via GitHub Issues.

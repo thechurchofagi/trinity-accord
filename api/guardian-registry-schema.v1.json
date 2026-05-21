@@ -53,6 +53,7 @@
         "type": "object",
         "additionalProperties": false,
         "required": [
+          "guardian_registry_number",
           "guardian_id",
           "guardian_type",
           "public_key_sha256",
@@ -62,6 +63,11 @@
           "boundaries"
         ],
         "properties": {
+          "guardian_registry_number": {
+            "type": "string",
+            "pattern": "^[0-9]{5}$",
+            "description": "Human-readable registry-assigned Guardian number such as 00001. Display/reference only; not cryptographic proof, not authority, not attestation."
+          },
           "guardian_id": {
             "type": "string",
             "pattern": "^guardian_ed25519_[a-f0-9]{16}$"

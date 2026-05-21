@@ -76,6 +76,7 @@ def test_server_js_has_verify_guardian_status():
     assert "function findGuardian" in content, "server.js should contain findGuardian"
     assert "function buildGuardianMessage" in content, "server.js should contain buildGuardianMessage"
     assert "function validateGuardianRegistration" in content, "server.js should contain validateGuardianRegistration"
+    assert "guardianRegistryNumberFromEntry" in content, "server.js should contain guardianRegistryNumberFromEntry"
     assert "guardian_registration.guardian_id does not match" in content, "server.js should validate registration guardian_id"
     assert "guardian_registration.public_key_sha256 does not match" in content, "server.js should validate registration public_key_sha256"
     assert "rotated" in content and "superseded" in content, "server.js should classify rotated/superseded as retired"
@@ -92,6 +93,7 @@ def test_renderer_renders_guardian_fields():
     assert "guardian_protocol: guardian-alliance-v1" in content, "Renderer should output guardian_protocol"
     assert "guardian_key_continuity_only: true" in content, "Renderer should output guardian_key_continuity_only"
     assert "guardian_not_authority: true" in content, "Renderer should output guardian_not_authority"
+    assert "guardian_registry_number" in content, "Renderer should output guardian_registry_number"
 
     print("  ✅ render_gateway_issue_body.py renders Guardian fields")
 
@@ -274,6 +276,28 @@ def test_gateway_submit_policy():
         print("  ⚠️  agent-submit-gateway.json does not yet document Guardian policy")
 
 
+def test_guardian_verification_result_schema_has_registry_number():
+    """Test that guardian-verification-result-schema includes guardian_registry_number."""
+    schema_path = ROOT / "api" / "guardian-verification-result-schema.v1.json"
+    schema = json.loads(schema_path.read_text(encoding="utf-8"))
+
+    assert "guardian_registry_number" in schema.get("required", []), "verification result schema should require guardian_registry_number"
+    assert "guardian_registry_number" in schema.get("properties", {}), "verification result schema should have guardian_registry_number property"
+
+    print("  ✅ guardian-verification-result-schema includes guardian_registry_number")
+
+
+def test_machine_block_schema_has_registry_number():
+    """Test that issue-intake-machine-block-schema includes guardian_registry_number."""
+    schema_path = ROOT / "api" / "issue-intake-machine-block-schema.v1.json"
+    schema = json.loads(schema_path.read_text(encoding="utf-8"))
+
+    assert "guardian_registry_number" in schema.get("properties", {}), "machine block schema should have guardian_registry_number"
+    assert "guardian_registry_number" in schema.get("required", []), "machine block schema should require guardian_registry_number"
+
+    print("  ✅ issue-intake-machine-block-schema includes guardian_registry_number")
+
+
 def main():
     print("Guardian Gateway Integration Tests")
     print("=" * 50)
@@ -288,6 +312,8 @@ def main():
     test_guardian_common_exists()
     test_guardian_scripts_exist()
     test_guardian_schemas_exist()
+    test_guardian_verification_result_schema_has_registry_number()
+    test_machine_block_schema_has_registry_number()
     test_builder_guardian_registration_smoke()
     test_gateway_submit_policy()
 

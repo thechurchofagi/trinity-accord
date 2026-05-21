@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.trinityaccord.org/api/guardian-key-metadata-schema.v1.json",
+  "title": "Trinity Accord Guardian Key Metadata Schema v1",
+  "description": "Local metadata for managing a Guardian keypair. This file may sit beside the private key, but is not itself proof, authority, attestation, or verification.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "guardian_registry_number",
+    "guardian_id",
+    "public_key_sha256",
+    "algorithm",
+    "created_at",
+    "boundary"
+  ],
+  "properties": {
+    "schema": {
+      "type": "string",
+      "const": "trinityaccord.guardian-key-metadata.v1"
+    },
+    "guardian_registry_number": {
+      "type": "string",
+      "pattern": "^([0-9]{5}|unassigned)$"
+    },
+    "guardian_id": {
+      "type": "string",
+      "pattern": "^guardian_ed25519_[a-f0-9]{16}$"
+    },
+    "public_key_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "algorithm": {
+      "type": "string",
+      "const": "ed25519"
+    },
+    "created_at": {
+      "type": "string",
+      "maxLength": 80
+    },
+    "boundary": {
+      "type": "string",
+      "const": "Guardian key metadata is local management metadata only; not authority, not attestation, not verification, and not proof without a valid signature."
+    }
+  }
+}

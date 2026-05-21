@@ -15,6 +15,7 @@
     "guardian_proof_present",
     "guardian_status",
     "guardian_id",
+    "guardian_registry_number",
     "guardian_signature_valid",
     "guardian_registry_status",
     "guardian_payload_hash_matches",
@@ -413,18 +414,26 @@
     },
     "authorship_claim_protocol": {
       "type": "string",
-      "enum": ["agent-authorship-claim-v1"]
+      "enum": [
+        "agent-authorship-claim-v1"
+      ]
     },
     "authorship_proof_present": {
       "type": "boolean"
     },
     "authorship_proof_method": {
       "type": "string",
-      "enum": ["none", "public_key_signature"]
+      "enum": [
+        "none",
+        "public_key_signature"
+      ]
     },
     "authorship_algorithm": {
       "type": "string",
-      "enum": ["none", "ed25519"]
+      "enum": [
+        "none",
+        "ed25519"
+      ]
     },
     "authorship_public_key_sha256": {
       "type": "string"
@@ -452,7 +461,9 @@
     },
     "guardian_protocol": {
       "type": "string",
-      "enum": ["guardian-alliance-v1"]
+      "enum": [
+        "guardian-alliance-v1"
+      ]
     },
     "guardian_proof_present": {
       "type": "boolean"
@@ -472,6 +483,10 @@
     },
     "guardian_id": {
       "type": "string"
+    },
+    "guardian_registry_number": {
+      "type": "string",
+      "pattern": "^([0-9]{5}|unassigned|none)$"
     },
     "guardian_signature_valid": {
       "type": "boolean"

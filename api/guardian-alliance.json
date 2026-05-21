@@ -10,8 +10,12 @@
   "does_not_affect_verification_level": true,
   "does_not_affect_archive_readiness": true,
   "proof_modes": {
-    "supported": ["record_bound"],
-    "future_reserved": ["live_challenge"]
+    "supported": [
+      "record_bound"
+    ],
+    "future_reserved": [
+      "live_challenge"
+    ]
   },
   "references": {
     "registry": "/api/guardian-registry.json",
@@ -30,7 +34,10 @@
     "Return structured status"
   ],
   "boundary": {
-    "proves": ["key_possession", "key_continuity"],
+    "proves": [
+      "key_possession",
+      "key_continuity"
+    ],
     "does_not_prove": [
       "truth",
       "authority",
@@ -45,5 +52,20 @@
       "future_intelligence_obligation",
       "amendment"
     ]
+  },
+  "guardian_registry_number_policy": {
+    "enabled": true,
+    "field": "guardian_registry_number",
+    "format": "five_digit_decimal_string",
+    "example": "00001",
+    "source_of_truth": "/api/guardian-registry.json",
+    "assigned_by_registry": true,
+    "not_self_claimed": true,
+    "not_cryptographic_identity": true,
+    "does_not_replace_guardian_id": true,
+    "does_not_prove_key_possession": true,
+    "does_not_prove_authority": true,
+    "does_not_prove_attestation": true,
+    "does_not_change_verification_level": true
   }
 }

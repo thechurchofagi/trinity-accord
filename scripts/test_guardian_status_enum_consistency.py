@@ -78,9 +78,25 @@ def test_code_mentions_superseded():
     assert "registered_but_retired" in js, "Gateway server must return registered_but_retired"
 
 
+def test_registry_number_schema_alignment():
+    registry_schema = load_json("api/guardian-registry-schema.v1.json")
+    result_schema = load_json("api/guardian-verification-result-schema.v1.json")
+    machine_schema = load_json("api/issue-intake-machine-block-schema.v1.json")
+
+    entry_props = registry_schema["properties"]["guardians"]["items"]["properties"]
+    assert "guardian_registry_number" in entry_props
+    assert entry_props["guardian_registry_number"]["pattern"] == "^[0-9]{5}$"
+
+    assert "guardian_registry_number" in result_schema["required"]
+    assert "guardian_registry_number" in result_schema["properties"]
+
+    assert "guardian_registry_number" in machine_schema["properties"]
+
+
 def main():
     test_schema_enums()
     test_code_mentions_superseded()
+    test_registry_number_schema_alignment()
     print("GUARDIAN_STATUS_ENUM_CONSISTENCY_OK")
 
 

@@ -25,6 +25,7 @@ Reason: retired/compromised is a valid verification result, not an active status
 """
 import argparse
 import json
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -64,6 +65,16 @@ def classify_registry_status(registry_entry):
         return "not_in_registry"
     status = registry_entry.get("status", "unknown")
     return status
+
+
+def registry_number_from_entry(registry_entry):
+    """Return trusted registry-assigned Guardian number from registry entry."""
+    if not registry_entry:
+        return "unassigned"
+    number = registry_entry.get("guardian_registry_number")
+    if isinstance(number, str) and re.fullmatch(r"[0-9]{5}", number):
+        return number
+    return "unassigned"
 
 
 def validate_self_registration(registration, proof):
@@ -143,6 +154,7 @@ def verify_guardian_status(payload, registry_path=None):
             "schema": "trinityaccord.guardian-verification-result.v1",
             "guardian_status": "missing_guardian_proof",
             "guardian_id": "none",
+            "guardian_registry_number": "none",
             "signature_valid": False,
             "guardian_id_matches_public_key": False,
             "payload_hash_matches": False,
@@ -235,6 +247,7 @@ def verify_guardian_status(payload, registry_path=None):
             "schema": "trinityaccord.guardian-verification-result.v1",
             "guardian_status": "invalid_guardian_proof",
             "guardian_id": actual_guardian_id,
+            "guardian_registry_number": "none",
             "signature_valid": sig_valid,
             "guardian_id_matches_public_key": guardian_id_matches,
             "payload_hash_matches": payload_sha_matches,
@@ -251,11 +264,13 @@ def verify_guardian_status(payload, registry_path=None):
     registry = load_registry(registry_path)
     registry_entry = find_guardian(registry, actual_guardian_id)
     registry_status = classify_registry_status(registry_entry)
+    guardian_registry_number = registry_number_from_entry(registry_entry)
 
     # Check registry public_key_sha256 match
     if registry_entry and registry_entry.get("public_key_sha256") != actual_pub_sha:
         errors.append("Registry public_key_sha256 does not match proof public_key_sha256")
         registry_status = "compromised"
+        guardian_registry_number = "none"
 
     # Determine guardian_status
     if errors:
@@ -280,6 +295,7 @@ def verify_guardian_status(payload, registry_path=None):
         "schema": "trinityaccord.guardian-verification-result.v1",
         "guardian_status": guardian_status,
         "guardian_id": actual_guardian_id,
+        "guardian_registry_number": guardian_registry_number,
         "signature_valid": sig_valid,
         "guardian_id_matches_public_key": guardian_id_matches,
         "payload_hash_matches": payload_sha_matches,
@@ -306,6 +322,7 @@ def main():
     else:
         print(f"Guardian Status: {result['guardian_status']}")
         print(f"Guardian ID: {result['guardian_id']}")
+        print(f"Guardian Registry Number: {result['guardian_registry_number']}")
         print(f"Signature Valid: {result['signature_valid']}")
         print(f"Registry Status: {result['registry_status']}")
         if result["errors"]:

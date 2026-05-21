@@ -78,6 +78,16 @@ curl -X POST https://your-gateway/agent-submit \
 - **Private key must remain local** — never submit, paste, upload, or commit it
 - **Valid signature alone is not active registered Guardian** — registry match is required for active status
 
+## Guardian registry number
+
+When a Guardian is registered, the registry may assign `guardian_registry_number`, such as `00001`.
+
+Before registration, local key metadata should use:
+
+`guardian_registry_number: unassigned`
+
+Do not self-claim a registry number in a proof.
+
 ## Boundary
 
 Guardian proof proves key continuity only. It does not prove truth, authority, verification level, attestation, same conscious subject, successor reception, or amendment.

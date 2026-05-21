@@ -9,6 +9,7 @@
     "schema",
     "guardian_status",
     "guardian_id",
+    "guardian_registry_number",
     "signature_valid",
     "guardian_id_matches_public_key",
     "payload_hash_matches",
@@ -37,6 +38,11 @@
     },
     "guardian_id": {
       "type": "string"
+    },
+    "guardian_registry_number": {
+      "type": "string",
+      "pattern": "^([0-9]{5}|unassigned|none)$",
+      "description": "Registry-assigned human-readable Guardian number. 'unassigned' for valid but unregistered/self-registered claims; 'none' for missing or invalid proof. Not cryptographic proof."
     },
     "signature_valid": {
       "type": "boolean"

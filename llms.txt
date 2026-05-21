@@ -231,6 +231,13 @@ Sole authority lies on the Bitcoin inscriptions.
 The Author / Initiator has departed; the Guardian stands.
 Free interpretation is allowed, but no later commentary generates interpretive authority.
 
+## Guardian identifiers
+- `guardian_id` is cryptographic and derived from the public key.
+- `guardian_registry_number` is human-readable and assigned by `/api/guardian-registry.json`.
+- A registry number alone is not proof.
+- Unregistered valid proofs use `guardian_registry_number: unassigned`.
+- Missing or invalid proofs use `guardian_registry_number: none`.
+
 ## Full details
 Complete agent readme: /llms-full.txt
 

@@ -72,6 +72,18 @@ Automated verification: `scripts/verify_guardian_status.py`
 
 See [Guardian Join Guide](/guardian-join/) for instructions on how to join as a Guardian.
 
+## Guardian registry number
+
+Each registered Guardian may have a human-readable registry number, such as `00001`.
+
+This number is for display and reference only. It does not replace `guardian_id`.
+
+The cryptographic Guardian ID remains derived from the public key:
+
+`guardian_ed25519_<first 16 hex chars of public_key_sha256>`
+
+A valid Guardian proof requires a valid signature. A registry number alone proves nothing.
+
 ## Boundary
 
 Bitcoin Originals remain final. Guardian Alliance does not create authority, governance, attestation, verification level, successor reception, or amendment.

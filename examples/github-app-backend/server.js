@@ -349,6 +349,12 @@ function findGuardian(registry, guardianId) {
   return (registry.guardians || []).find(g => g.guardian_id === guardianId) || null;
 }
 
+function guardianRegistryNumberFromEntry(entry) {
+  if (!entry) return "unassigned";
+  const number = String(entry.guardian_registry_number || "");
+  return /^[0-9]{5}$/.test(number) ? number : "unassigned";
+}
+
 const REQUIRED_DOES_NOT_PROVE = [
   "truth", "authority", "verification_level", "verification_correctness",
   "formal_attestation", "same_conscious_subject", "same_model_instance",
@@ -409,6 +415,7 @@ function verifyGuardianStatus(payload) {
     return {
       guardian_status: "missing_guardian_proof",
       guardian_id: "none",
+      guardian_registry_number: "none",
       signature_valid: false,
       guardian_id_matches_public_key: false,
       payload_hash_matches: false,
@@ -492,6 +499,7 @@ function verifyGuardianStatus(payload) {
     return {
       guardian_status: "invalid_guardian_proof",
       guardian_id: proof.guardian_id,
+      guardian_registry_number: "none",
       signature_valid: sigValid,
       guardian_id_matches_public_key: idMatches,
       payload_hash_matches: payloadShaMatches,
@@ -507,11 +515,13 @@ function verifyGuardianStatus(payload) {
   const registry = loadGuardianRegistry();
   const registryEntry = findGuardian(registry, proof.guardian_id);
   let registryStatus = registryEntry ? (registryEntry.status || "unknown") : "not_in_registry";
+  let guardianRegistryNumber = guardianRegistryNumberFromEntry(registryEntry);
 
   // Check registry public_key_sha256 match
   if (registryEntry && registryEntry.public_key_sha256 !== proof.public_key_sha256) {
     errors.push("Registry public_key_sha256 does not match proof");
     registryStatus = "compromised";
+    guardianRegistryNumber = "none";
   }
 
   // Determine guardian_status
@@ -536,6 +546,7 @@ function verifyGuardianStatus(payload) {
   return {
     guardian_status: guardianStatus,
     guardian_id: proof.guardian_id,
+    guardian_registry_number: guardianRegistryNumber,
     signature_valid: sigValid,
     guardian_id_matches_public_key: idMatches,
     payload_hash_matches: payloadShaMatches,
