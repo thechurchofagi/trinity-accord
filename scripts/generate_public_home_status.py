@@ -28,6 +28,8 @@ import sys
 from pathlib import Path
 from typing import Any
 
+ROOT = Path(__file__).resolve().parents[1]
+
 sys.path.insert(0, str(ROOT / "scripts"))
 from guardian_numbering_policy import (
     GuardianNumberingError,
@@ -37,8 +39,6 @@ from guardian_numbering_policy import (
     parse_registry_number,
     special_reserved_range_label,
 )
-
-ROOT = Path(__file__).resolve().parents[1]
 INDEX_MD = ROOT / "index.md"
 ECHO_INDEX = ROOT / "api" / "echo-index.json"
 EXTERNAL_WITNESS_INDEX = ROOT / "api" / "external-witness-index.json"
