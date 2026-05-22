@@ -568,3 +568,17 @@ New Guardian applicants still begin as:
 until a registry entry is accepted.
 
 Registry numbers are public references only. They do not create authority, governance, attestation, verification level, successor reception, amendment, or proof without a valid Guardian signature.
+
+## Guardian Stage 2 reroute rule
+
+For Guardian Active Registry Listing Request, use only:
+
+  python3 scripts/build_guardian_listing_request_payload.py
+
+Never use:
+
+  python3 scripts/build_agent_declared_echo_payload.py
+
+Never edit a signed JSON payload. If any field must change, rerun the builder.
+
+If local validate_gateway_payload.py and archive_readiness_gate.py pass but Gateway rejects counts_toward_home, treat it as stale Gateway deployment/schema. Do not switch builders.
