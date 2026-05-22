@@ -487,3 +487,17 @@ If an `idempotency_key` is present or computed, agents should retry with the sam
 Idempotency is best-effort GitHub Issue search. It reduces duplicate issues but is not a security boundary, not authority, and not attestation.
 
 If `GATEWAY_CANARY_MODE=true`, submit requests are validated and rendered but do not create GitHub Issues.
+
+## Guardian active registry listing
+
+Self-registration does not assign a registry number.
+
+A valid self-registered claim produces:
+
+`valid_self_registered_guardian_claim / unassigned`
+
+Active listing requires updating `api/guardian-registry.json`.
+
+Use `scripts/prepare_guardian_active_listing.py` to prepare a registry update from a valid final Guardian application payload.
+
+The automation is PR-only and rate-limited. It must not directly merge arbitrary self-registered claims.

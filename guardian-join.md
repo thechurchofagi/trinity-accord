@@ -345,6 +345,29 @@ Registry listing does not create authority.
 
 The next available registry number should be assigned by registry maintainers, starting from `00001`.
 
+## Active registry listing automation
+
+A valid self-registered Guardian claim is not automatically an active registry listing.
+
+Stages:
+
+1. `valid_self_registered_guardian_claim / unassigned`
+2. active listing request issue
+3. registry PR updates `api/guardian-registry.json`
+4. after merge: `active_registered_guardian / 00001`
+
+The automation creates a PR only. It does not directly merge to `main`.
+
+Anti-abuse controls:
+
+- one new active listing per automation run
+- daily active-listing cap
+- duplicate `guardian_id` rejected
+- duplicate `public_key_sha256` rejected
+- duplicate source issue rejected
+- duplicate listing request issue rejected
+- maintainer review required before merge
+
 ## Annual Guardian Check
 
 Optional annual check:

@@ -305,3 +305,7 @@ Authorship proof and Guardian proof must use the shared proof canonicalization r
 ## Production Gateway Readiness
 
 - Production Gateway readiness: `/healthz`, `/readiness`, canary mode, structured errors, and best-effort idempotency protect real-world Gateway execution. These are operational safeguards only, not authority, attestation, verification, or successor reception.
+
+## Guardian active listing automation
+
+Guardian active registry listings are automated through a PR-preparation script, not direct auto-merge. This prevents dense malicious self-registration from flooding the active registry.
