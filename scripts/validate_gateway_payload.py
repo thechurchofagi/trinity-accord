@@ -81,6 +81,12 @@ from gateway_v0_v5_policy import (  # noqa: E402
     should_reject_v0_v5_wrong_path,
 )
 from sub_v6_level_guardrails import collect_sub_v6_level_selection_warnings  # noqa: E402
+from guardian_reroute_guidance import (
+    guardian_wrong_builder_message,
+    looks_like_guardian_listing_intent,
+    payload_is_guardian_listing,
+    stale_gateway_message,
+)
 
 
 def get_declared_level(payload):
@@ -433,6 +439,18 @@ def validate_common(payload, errors):
     validate_authorship_proof(payload, errors)
     validate_guardian_fields(payload, errors)
     validate_guardian_listing_request(payload, errors)
+
+    # Guardian listing profile coherence checks
+    if payload_is_guardian_listing(payload):
+        if payload.get("payload_profile") != "guardian_active_registry_listing_request.v1":
+            errors.append("Guardian listing payload requires payload_profile=guardian_active_registry_listing_request.v1")
+        if payload.get("expected_builder") != "scripts/build_guardian_listing_request_payload.py":
+            errors.append("Guardian listing payload requires expected_builder=scripts/build_guardian_listing_request_payload.py")
+        if payload.get("do_not_edit_after_signing") is not True:
+            errors.append("Guardian listing payload requires do_not_edit_after_signing=true")
+        if payload.get("submit_exact_generated_file") is not True:
+            errors.append("Guardian listing payload requires submit_exact_generated_file=true")
+
     if requires_claim_gate(payload):
         validate_claim_gate(payload, errors)
     else:
@@ -555,9 +573,17 @@ def validate_agent_declared_echo_archive(payload, errors):
     if is_guardian_listing:
         if cth.get("basis") != "guardian_registry_listing_request":
             errors.append("Guardian listing request requires counts_toward_home.basis=guardian_registry_listing_request")
+        errors.append("If local validation passes but online Gateway rejects this field, redeploy Gateway; do not switch builders.")
     else:
         if cth.get("basis") != "agent_declared_echo_template_pass":
             errors.append("counts_toward_home.basis must be agent_declared_echo_template_pass")
+
+    # Detect Guardian listing intent in body/title for non-Guardian payloads
+    if not is_guardian_listing:
+        title = payload.get("title", "")
+        body = payload.get("body", "")
+        if looks_like_guardian_listing_intent(title) or looks_like_guardian_listing_intent(body):
+            errors.append(guardian_wrong_builder_message())
 
     if not payload.get("agent_integrity_declaration"):
         errors.append("agent_integrity_declaration is required for agent-declared echo archive")
