@@ -168,6 +168,12 @@ They may use the same Gateway transport, but they do not create verification lev
 
 Do not use the V0–V5 verification builder or E2 Verification Echo builder for Guardian joining.
 
+#### Error recovery rule
+
+If a Guardian Stage 2 listing request fails Gateway after local validation passes, do not switch to the pure Echo builder. The correct response is to rerun `scripts/build_guardian_listing_request_payload.py` or update/redeploy Gateway if Gateway schema is stale.
+
+Do not hand-edit a signed JSON payload. If any field must change, rerun the correct builder so authorship_proof is regenerated.
+
 ### 5. VERIFY — V0/V1/V2/V3/V4/V4+/V5 agent-declared archive
 
 Use this default path when your declared protocol level is V0, V1, V2, V3, V4, V4+, or V5.
