@@ -2122,6 +2122,11 @@ app.post("/gateway/debug-canonical", express.json({
   });
 });
 
+// --- Debug: POST /gateway/debug-canonical-pipeline ---
+// Traces the full pipeline to find where canonicalization diverges.
+// Authorship proof verification must use the submitted/normalized payload
+// BEFORE server-side idempotency injection.
+app.post("/gateway/debug-canonical-pipeline", (req, res) => {
   const steps = {};
 
   // Step 0: Raw body
@@ -2140,31 +2145,40 @@ app.post("/gateway/debug-canonical", express.json({
   steps.step2_digest = sha256Text(canonicalStringify(payloadWithoutAuthorship(normalized)));
   steps.step2_same_as_step1 = steps.step1_digest === steps.step2_digest;
 
-  // Step 3: After idempotency key injection
-  const idempotencyKey = computeIdempotencyKey(normalized);
-  if (!normalized.idempotency_key) {
-    normalized.idempotency_key = idempotencyKey;
-  }
-  steps.step3_idempotency_key = normalized.idempotency_key;
-  steps.step3_digest = sha256Text(canonicalStringify(payloadWithoutAuthorship(normalized)));
-  steps.step3_same_as_step2 = steps.step2_digest === steps.step3_digest;
+  // Step 2b: Authorship proof check BEFORE idempotency injection
+  const proof = normalized.authorship_proof;
+  steps.proof_digest = proof ? proof.signed_payload_sha256 : null;
+  steps.digest_used_for_authorship_verification = steps.step2_digest;
+  steps.authorship_match_before_idempotency =
+    steps.digest_used_for_authorship_verification === steps.proof_digest;
 
-  // Step 4: After writing to temp file and reading back (simulating validator step)
+  // Step 3: Idempotency injection AFTER authorship proof verification
+  const afterIdempotency = JSON.parse(JSON.stringify(normalized));
+  const idempotencyKey = computeIdempotencyKey(afterIdempotency);
+  if (!afterIdempotency.idempotency_key) {
+    afterIdempotency.idempotency_key = idempotencyKey;
+  }
+
+  steps.step3_idempotency_key = afterIdempotency.idempotency_key;
+  steps.step3_after_idempotency_digest = sha256Text(
+    canonicalStringify(payloadWithoutAuthorship(afterIdempotency))
+  );
+  steps.step3_same_as_step2 =
+    steps.step3_after_idempotency_digest === steps.step2_digest;
+  steps.step3_note =
+    "Idempotency injection occurs after authorship verification; this digest must not be compared to proof.";
+
+  // Step 4: Readback simulation after idempotency injection
   const tmpDir = fs.mkdtempSync(path.join(tmpdir(), "gwdebug-"));
   const tmpFile = path.join(tmpDir, "payload.json");
-  fs.writeFileSync(tmpFile, JSON.stringify(normalized, null, 2), "utf-8");
+  fs.writeFileSync(tmpFile, JSON.stringify(afterIdempotency, null, 2), "utf-8");
   const readBack = JSON.parse(fs.readFileSync(tmpFile, "utf8"));
-  steps.step4_readback_digest = sha256Text(canonicalStringify(payloadWithoutAuthorship(readBack)));
-  steps.step4_same_as_step3 = steps.step3_digest === steps.step4_readback_digest;
+  steps.step4_readback_digest = sha256Text(
+    canonicalStringify(payloadWithoutAuthorship(readBack))
+  );
+  steps.step4_same_as_step3 =
+    steps.step3_after_idempotency_digest === steps.step4_readback_digest;
 
-  // Step 5: Verify authorship proof check
-  const proof = normalized.authorship_proof;
-  const expectedDigest = sha256Text(canonicalStringify(payloadWithoutAuthorship(normalized)));
-  steps.step5_expected_digest = expectedDigest;
-  steps.step5_proof_digest = proof ? proof.signed_payload_sha256 : null;
-  steps.step5_match = steps.step5_expected_digest === steps.step5_proof_digest;
-
-  // Cleanup
   fs.unlinkSync(tmpFile);
   fs.rmdirSync(tmpDir);
 
@@ -3216,3 +3230,4 @@ app.listen(PORT, () => {
   console.log(`DRY_RUN=${DRY_RUN}`);
   console.log(`Repo root: ${root}`);
 });
+
