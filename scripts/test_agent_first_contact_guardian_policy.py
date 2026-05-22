@@ -38,6 +38,27 @@ def main():
     require(guardian["not_verification_echo"] is True, "Guardian path must be marked not Verification Echo")
     require(guardian["does_not_raise_verification_level"] is True, "Guardian path must not raise verification level")
 
+    # Stage 2 error_recovery must include runtime preflight guidance
+    er = join_path["stage_2_active_registry_listing"].get("error_recovery", {})
+    require(
+        "preflight_guardian_listing_payload.py" in er.get("runtime_preflight", ""),
+        "error_recovery missing runtime_preflight script"
+    )
+    caps = er.get("required_gateway_capabilities", [])
+    require(len(caps) >= 7, f"error_recovery.required_gateway_capabilities too short: {len(caps)}")
+    require(
+        "guardian_registry_listing_request" in caps,
+        "error_recovery.required_gateway_capabilities missing guardian_registry_listing_request"
+    )
+    require(
+        "authorship_canonical.trinity.agent_authorship_common.v1" in caps,
+        "error_recovery.required_gateway_capabilities missing authorship_canonical"
+    )
+    require(
+        "do_not_resign_manually" in er.get("signed_payload_sha256_mismatch_after_local_pass", ""),
+        "error_recovery missing signed_payload_sha256_mismatch_after_local_pass guidance"
+    )
+
     print("AGENT_FIRST_CONTACT_GUARDIAN_POLICY_OK")
 
 

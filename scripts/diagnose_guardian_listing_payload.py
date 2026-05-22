@@ -144,6 +144,11 @@ def main() -> int:
 
         print("\nLOCAL_STATUS: PASS")
         print(stale_gateway_message())
+        print(
+            "If online Gateway returns signed_payload_sha256 mismatch for this exact file, "
+            "treat it as AUTHORED_PAYLOAD_DIGEST_MISMATCH caused by file substitution, "
+            "post-signing edits, or stale Gateway canonicalization. Do not strip fields and re-sign."
+        )
         print("Submit this exact generated file. Do not edit it. Do not rebuild with build_agent_declared_echo_payload.py.")
         return 0
 
