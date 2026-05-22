@@ -43,6 +43,7 @@ GROUPS = {
         ["python3", "scripts/test_diagnose_guardian_listing_payload.py"],
         ["python3", "scripts/test_guardian_workflow_rebase_retry_and_comment_upsert.py"],
         ["python3", "scripts/test_guardian_workflow_dispatch_authorization.py"],
+        ["python3", "scripts/test_guardian_listing_payload_schema_acceptance.py"],
 
 
     ],
