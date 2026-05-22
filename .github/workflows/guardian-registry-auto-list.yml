@@ -66,9 +66,9 @@ jobs:
             let sourceIssue = null;
 
             if (context.eventName === "workflow_dispatch") {
-              listingIssue = parseInt(core.getInput("listing_issue"), 10);
-              const s = core.getInput("source_issue");
-              if (s) sourceIssue = parseInt(s, 10);
+              const inputs = context.payload.inputs || {};
+              listingIssue = parseInt(inputs.listing_issue, 10);
+              if (inputs.source_issue) sourceIssue = parseInt(inputs.source_issue, 10);
               core.setOutput("should_run", "true");
             } else {
               const issue = context.payload.issue;
