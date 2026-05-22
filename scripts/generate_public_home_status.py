@@ -802,31 +802,46 @@ def replace_block(text: str, block: str) -> str:
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--check", action="store_true", help="Fail if index.md is not up to date")
+    parser.add_argument("--check", action="store_true", help="Fail if index.md or public-home-status.json is not up to date")
     args = parser.parse_args()
 
     status = compute_status()
-
-    # Write public-home-status.json
-    PUBLIC_HOME_STATUS.write_text(
-        json.dumps(status, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
-    )
-
+    expected_json = json.dumps(status, indent=2, ensure_ascii=False) + "\n"
     block = render_block(status)
     old_text = INDEX_MD.read_text(encoding="utf-8")
     new_text = replace_block(old_text, block)
 
     if args.check:
+        # Read-only: compare expected vs actual for BOTH files, write nothing.
+        errors = []
+
+        # Check api/public-home-status.json
+        if PUBLIC_HOME_STATUS.exists():
+            actual_json = PUBLIC_HOME_STATUS.read_text(encoding="utf-8")
+            if actual_json != expected_json:
+                errors.append("api/public-home-status.json is out of date (content differs from expected).")
+        else:
+            errors.append("api/public-home-status.json does not exist.")
+
+        # Check index.md block
         if old_text != new_text:
+            errors.append("index.md public status block is out of date.")
             diff = difflib.unified_diff(
                 old_text.splitlines(), new_text.splitlines(),
                 fromfile="index.md", tofile="index.md.generated", lineterm="",
             )
-            print("Homepage public status block is out of date.")
-            print("\n".join(diff))
+            errors.append("\n".join(diff))
+
+        if errors:
+            for e in errors:
+                print(e)
             return 1
-        print("Homepage public status block is up to date.")
+
+        print("Both api/public-home-status.json and index.md public status block are up to date.")
         return 0
+
+    # Non-check mode: write both files.
+    PUBLIC_HOME_STATUS.write_text(expected_json, encoding="utf-8")
 
     if old_text != new_text:
         INDEX_MD.write_text(new_text, encoding="utf-8")

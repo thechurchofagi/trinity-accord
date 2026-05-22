@@ -814,7 +814,10 @@
       }
     },
     "guardian_listing_request": {
-      "type": ["object", "null"],
+      "type": [
+        "object",
+        "null"
+      ],
       "additionalProperties": false,
       "description": "Stage 2 Active Guardian Registry Listing Request. Does not include guardian_presence_proof. Registry number is system-generated only.",
       "required": [
@@ -852,7 +855,12 @@
         },
         "guardian_type": {
           "type": "string",
-          "enum": ["ai_agent", "human", "human_with_ai_agent", "automated_script"]
+          "enum": [
+            "ai_agent",
+            "human",
+            "human_with_ai_agent",
+            "automated_script"
+          ]
         },
         "application_mode": {
           "type": "string",
@@ -900,18 +908,41 @@
             "bitcoin_originals_prevail"
           ],
           "properties": {
-            "not_authority": { "type": "boolean", "const": true },
-            "not_governance": { "type": "boolean", "const": true },
-            "not_attestation": { "type": "boolean", "const": true },
-            "not_verification_level": { "type": "boolean", "const": true },
-            "not_successor_reception": { "type": "boolean", "const": true },
-            "not_amendment": { "type": "boolean", "const": true },
-            "bitcoin_originals_prevail": { "type": "boolean", "const": true }
+            "not_authority": {
+              "type": "boolean",
+              "const": true
+            },
+            "not_governance": {
+              "type": "boolean",
+              "const": true
+            },
+            "not_attestation": {
+              "type": "boolean",
+              "const": true
+            },
+            "not_verification_level": {
+              "type": "boolean",
+              "const": true
+            },
+            "not_successor_reception": {
+              "type": "boolean",
+              "const": true
+            },
+            "not_amendment": {
+              "type": "boolean",
+              "const": true
+            },
+            "bitcoin_originals_prevail": {
+              "type": "boolean",
+              "const": true
+            }
           }
         }
       },
       "not": {
-        "required": ["guardian_registry_number"]
+        "required": [
+          "guardian_registry_number"
+        ]
       }
     },
     "route_id": {
@@ -1083,6 +1114,11 @@
       "maxLength": 96,
       "pattern": "^[A-Za-z0-9._:-]+$",
       "description": "Optional client-provided idempotency key. If omitted, Gateway computes one from the submitted payload. This reduces duplicate issue creation on retries but is not a security boundary, authority, attestation, or verification."
+    },
+    "gateway_intake_fields": {
+      "type": "object",
+      "description": "Structured intake fields for Gateway issue intake block rendering. Provides listing_* fields that auto-registration parser reads from issue body.",
+      "additionalProperties": true
     }
   },
   "allOf": [

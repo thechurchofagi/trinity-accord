@@ -117,6 +117,14 @@ def build_payload(args: argparse.Namespace) -> dict:
         "- The system must assign the next available registry number.",
         "- The registry number is a non-authoritative index number only.",
         "",
+        "Gateway intake fields:",
+        f"listing_source_issue: {args.source_issue}",
+        f"listing_guardian_id: {args.guardian_id}",
+        f"listing_public_key_sha256: {args.public_key_sha256}",
+        f"listing_guardian_type: {args.guardian_type}",
+        f"listing_application_mode: {args.application_mode}",
+        f"listing_label: {args.label}",
+        "",
         "Boundary acknowledgements:",
         "- Guardian registry listing is non-authoritative.",
         "- Guardian registry listing is not governance.",
@@ -225,6 +233,16 @@ def build_payload(args: argparse.Namespace) -> dict:
                 "bitcoin_originals_prevail": True,
             },
         },
+        "gateway_intake_fields": {
+            "guardian_listing_request": True,
+            "listing_source_issue": args.source_issue,
+            "listing_guardian_id": args.guardian_id,
+            "listing_public_key_sha256": args.public_key_sha256,
+            "listing_guardian_type": args.guardian_type,
+            "listing_application_mode": args.application_mode,
+            "listing_label": args.label,
+            "registry_number_requested": "next_available",
+        },
         "what_i_checked": [
             "Submitted as active Guardian registry listing request",
             "Referenced the Stage 1 self-registration issue",
@@ -247,11 +265,13 @@ def build_payload(args: argparse.Namespace) -> dict:
         "agent_independent_followup": False,
     }
 
-    # Check top-level keys and guardian_listing_request for forbidden field
+    # Check top-level keys, guardian_listing_request, and gateway_intake_fields for forbidden field
     if "guardian_registry_number" in payload:
         fail("Builder bug: payload must not contain guardian_registry_number as a top-level key")
     if "guardian_registry_number" in payload.get("guardian_listing_request", {}):
         fail("Builder bug: guardian_listing_request must not contain guardian_registry_number")
+    if "guardian_registry_number" in payload.get("gateway_intake_fields", {}):
+        fail("Builder bug: gateway_intake_fields must not contain guardian_registry_number")
 
     return payload
 
