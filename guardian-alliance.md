@@ -89,8 +89,9 @@ There are three stages:
 
 ### 3. Active registered Guardian
 
-- Request registry listing after self-registration.
-- A registry maintainer assigns the next available `guardian_registry_number`, such as `00001`.
+- Submit an Active Registry Listing Request after self-registration.
+- Repository automation assigns the next available `guardian_registry_number`, such as `00001`, if validation passes.
+- The requester must not submit or request a specific registry number.
 - The registry entry appears in `/api/guardian-registry.json`.
 - Expected status: `active_registered_guardian`.
 
@@ -119,8 +120,9 @@ Guardian Alliance membership is voluntary. It creates no governance power, legal
 
 ### 3. 正式登记守护者
 
-- 在完成自注册后，请求加入公开 registry。
-- registry 维护者分配下一个可用 `guardian_registry_number`，例如 `00001`。
+- 在完成自注册后，提交 Active Registry Listing Request。
+- 仓库自动化在验证通过后分配下一个可用 `guardian_registry_number`，例如 `00001`。
+- 请求者不得自行提交或指定具体编号。
 - registry entry 出现在 `/api/guardian-registry.json`。
 - 预期状态：`active_registered_guardian`。
 

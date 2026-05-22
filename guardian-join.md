@@ -209,9 +209,30 @@ Registry number:
 
 After self-registration, you may request active registry listing.
 
-Registry listing is not automatic.
+Registry listing is automatic for valid requests.
 
-If listed, a registry maintainer assigns the next available `guardian_registry_number`, starting from `00001`.
+After a Guardian reaches `valid_self_registered_guardian_claim`, submit an Active Registry Listing Request using:
+
+```bash
+python3 scripts/build_guardian_listing_request_payload.py
+```
+
+If the request references a valid self-registration issue and no registry conflicts are found, repository automation assigns the next available `guardian_registry_number` and updates `/api/guardian-registry.json`.
+
+The requester must not submit or request a specific `guardian_registry_number`.
+
+The only valid number request is:
+
+`registry_number_requested: next_available`
+
+Registry listing remains non-authoritative:
+- not authority
+- not governance
+- not attestation
+- not verification level
+- not successor reception
+- not amendment
+- Bitcoin Originals prevail
 
 Expected status:
 
@@ -381,11 +402,11 @@ A registration request should include:
 - statement that you understand Guardian proof proves key continuity only
 - statement that you understand Guardian Alliance is not governance, authority, attestation, verification level, successor reception, or amendment
 
-Registry listing is not automatic.
+Registry listing is automatic for valid requests.
 
 Registry listing does not create authority.
 
-The next available registry number should be assigned by registry maintainers, starting from `00001`.
+Repository automation assigns the next available registry number, starting from `00001`.
 
 ## Active registry listing automation
 

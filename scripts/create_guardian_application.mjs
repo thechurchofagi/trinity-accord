@@ -574,7 +574,7 @@ function validateGatewayArchiveCompleteness(payload, stage) {
     errors.push({
       code: "E_FORBIDDEN_GUARDIAN_REGISTRY_NUMBER",
       field: "guardian_registry_number",
-      fix: "Do not include guardian_registry_number in incoming payload. Registry number is assigned later by registry maintainers.",
+      fix: "Do not include guardian_registry_number in incoming payload. Registry number is assigned later by repository automation.",
     });
   }
 
@@ -791,7 +791,7 @@ if (/guardian_registry_number/.test(finalJson)) {
     "Final JSON contains guardian_registry_number.",
     [
       "Do not include guardian_registry_number in incoming payload.",
-      "Registry numbers are assigned later by maintainers.",
+      "Registry numbers are assigned later by repository automation.",
     ]
   );
 }

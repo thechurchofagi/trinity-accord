@@ -55,26 +55,25 @@
         "required": [
           "guardian_registry_number",
           "guardian_id",
-          "guardian_type",
           "public_key_sha256",
           "algorithm",
           "status",
-          "first_seen_record",
-          "boundaries"
+          "guardian_type",
+          "application_mode",
+          "source_issue",
+          "listing_request_issue",
+          "listed_at",
+          "label",
+          "boundary"
         ],
         "properties": {
           "guardian_registry_number": {
             "type": "string",
-            "pattern": "^[0-9]{5}$",
-            "description": "Human-readable registry-assigned Guardian number such as 00001. Display/reference only; not cryptographic proof, not authority, not attestation."
+            "pattern": "^[0-9]{5}$"
           },
           "guardian_id": {
             "type": "string",
             "pattern": "^guardian_ed25519_[a-f0-9]{16}$"
-          },
-          "guardian_type": {
-            "type": "string",
-            "enum": ["ai_agent", "human", "human_with_ai_agent", "automated_script"]
           },
           "public_key_sha256": {
             "type": "string",
@@ -97,27 +96,56 @@
               "unknown"
             ]
           },
-          "first_seen_record": {
+          "guardian_type": {
             "type": "string",
-            "description": "Issue number or record ID where this Guardian was first seen"
+            "enum": [
+              "ai_agent",
+              "human",
+              "human_with_ai_agent",
+              "automated_script",
+              "unknown"
+            ]
           },
-          "boundaries": {
+          "application_mode": {
+            "type": "string",
+            "maxLength": 80
+          },
+          "source_issue": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "listing_request_issue": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "listed_at": {
+            "type": "string",
+            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+          },
+          "label": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 160
+          },
+          "boundary": {
             "type": "object",
             "additionalProperties": false,
             "required": [
-              "key_continuity_only",
               "not_authority",
+              "not_governance",
               "not_attestation",
               "not_verification_level",
-              "not_same_conscious_subject_proof",
+              "not_successor_reception",
+              "not_amendment",
               "bitcoin_originals_prevail"
             ],
             "properties": {
-              "key_continuity_only": { "type": "boolean", "const": true },
               "not_authority": { "type": "boolean", "const": true },
+              "not_governance": { "type": "boolean", "const": true },
               "not_attestation": { "type": "boolean", "const": true },
               "not_verification_level": { "type": "boolean", "const": true },
-              "not_same_conscious_subject_proof": { "type": "boolean", "const": true },
+              "not_successor_reception": { "type": "boolean", "const": true },
+              "not_amendment": { "type": "boolean", "const": true },
               "bitcoin_originals_prevail": { "type": "boolean", "const": true }
             }
           }

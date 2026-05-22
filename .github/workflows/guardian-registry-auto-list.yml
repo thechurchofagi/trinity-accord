@@ -1,0 +1,236 @@
+name: Guardian Registry Auto-List
+
+on:
+  issues:
+    types: [opened, edited, reopened, closed]
+  workflow_dispatch:
+    inputs:
+      listing_issue:
+        description: "Active Registry Listing Request issue number"
+        required: true
+        type: string
+      source_issue:
+        description: "Source Guardian self-registration issue number"
+        required: false
+        type: string
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+concurrency:
+  group: guardian-registry-auto-list
+  cancel-in-progress: false
+
+jobs:
+  auto-list:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+
+      - name: Determine candidate
+        id: candidate
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
+        with:
+          script: |
+            let listingIssue = null;
+            let sourceIssue = null;
+
+            if (context.eventName === "workflow_dispatch") {
+              listingIssue = parseInt(core.getInput("listing_issue"), 10);
+              const s = core.getInput("source_issue");
+              if (s) sourceIssue = parseInt(s, 10);
+            } else {
+              const issue = context.payload.issue;
+              if (!issue || issue.pull_request) {
+                core.setOutput("should_run", "false");
+                return;
+              }
+
+              const title = issue.title || "";
+              const body = issue.body || "";
+
+              const looksLikeListing =
+                /Active Registry Listing Request/i.test(title) ||
+                /Active registry listing request/i.test(body) ||
+                /guardian_listing_request/i.test(body);
+
+              if (!looksLikeListing) {
+                core.setOutput("should_run", "false");
+                return;
+              }
+
+              listingIssue = issue.number;
+
+              let m = body.match(/Source self-registration issue:\s*#?([0-9]+)/i);
+              if (!m) m = body.match(/^related_issue:\s*([0-9]+)/mi);
+              if (m) sourceIssue = parseInt(m[1], 10);
+            }
+
+            if (!listingIssue) {
+              core.setOutput("should_run", "false");
+              return;
+            }
+
+            core.setOutput("should_run", "true");
+            core.setOutput("listing_issue", String(listingIssue));
+            if (sourceIssue) core.setOutput("source_issue", String(sourceIssue));
+
+      - name: Stop if not Guardian listing request
+        if: steps.candidate.outputs.should_run != 'true'
+        run: echo "Not a Guardian listing request. Skipping."
+
+      - name: Fetch listing and source issues
+        if: steps.candidate.outputs.should_run == 'true'
+        id: fetch
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
+        with:
+          script: |
+            const fs = require("fs");
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const listingIssueNumber = parseInt("${{ steps.candidate.outputs.listing_issue }}", 10);
+
+            const listing = await github.rest.issues.get({
+              owner,
+              repo,
+              issue_number: listingIssueNumber
+            });
+
+            fs.writeFileSync("listing_issue.json", JSON.stringify(listing.data, null, 2));
+
+            let sourceIssueNumber = "${{ steps.candidate.outputs.source_issue }}";
+            if (!sourceIssueNumber) {
+              const body = listing.data.body || "";
+              let m = body.match(/Source self-registration issue:\s*#?([0-9]+)/i);
+              if (!m) m = body.match(/^related_issue:\s*([0-9]+)/mi);
+              if (m) sourceIssueNumber = m[1];
+            }
+
+            if (!sourceIssueNumber) {
+              core.setFailed("Could not determine source self-registration issue.");
+              return;
+            }
+
+            const source = await github.rest.issues.get({
+              owner,
+              repo,
+              issue_number: parseInt(sourceIssueNumber, 10)
+            });
+
+            fs.writeFileSync("source_issue.json", JSON.stringify(source.data, null, 2));
+            core.setOutput("source_issue", String(sourceIssueNumber));
+
+      - name: Auto-register Guardian
+        if: steps.candidate.outputs.should_run == 'true'
+        id: register
+        run: |
+          set -euo pipefail
+          python3 scripts/auto_register_guardian_from_gateway_issues.py \
+            --registry api/guardian-registry.json \
+            --listing-issue-json listing_issue.json \
+            --source-issue-json source_issue.json \
+            --out-registry api/guardian-registry.json \
+            --decision-out guardian-auto-registration-decision.json
+          cat guardian-auto-registration-decision.json
+
+      - name: Read decision
+        if: steps.candidate.outputs.should_run == 'true'
+        id: decision
+        run: |
+          echo "action=$(python3 -c 'import json; print(json.load(open("guardian-auto-registration-decision.json"))["action"])')" >> "$GITHUB_OUTPUT"
+          echo "ok=$(python3 -c 'import json; print(str(json.load(open("guardian-auto-registration-decision.json"))["ok"]).lower())')" >> "$GITHUB_OUTPUT"
+          echo "number=$(python3 -c 'import json; d=json.load(open("guardian-auto-registration-decision.json")); print(d.get("guardian_registry_number",""))')" >> "$GITHUB_OUTPUT"
+          echo "guardian_id=$(python3 -c 'import json; d=json.load(open("guardian-auto-registration-decision.json")); print(d.get("guardian_id",""))')" >> "$GITHUB_OUTPUT"
+
+      - name: Commit registry update
+        if: steps.candidate.outputs.should_run == 'true' && steps.decision.outputs.action == 'registered'
+        id: commit
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add api/guardian-registry.json
+          git commit -m "Auto-register Guardian ${{ steps.decision.outputs.number }}"
+          git push
+
+      - name: Comment success
+        if: steps.candidate.outputs.should_run == 'true' && steps.decision.outputs.action == 'registered'
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
+        with:
+          script: |
+            const fs = require("fs");
+            const d = JSON.parse(fs.readFileSync("guardian-auto-registration-decision.json", "utf8"));
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: parseInt("${{ steps.candidate.outputs.listing_issue }}", 10),
+              body: [
+                "<!-- trinity-guardian-auto-registration:v1 -->",
+                "",
+                "### Guardian Auto-Registration Complete",
+                "",
+                `Guardian Registry Number: \`${d.guardian_registry_number}\``,
+                "",
+                `Guardian ID: \`${d.guardian_id}\``,
+                "",
+                `Source self-registration issue: #${d.source_issue}`,
+                "",
+                `Listing request issue: #${d.listing_request_issue}`,
+                "",
+                "Boundary: this registry listing is non-authoritative, non-governing, not attestation, not a verification level, not successor reception, and not an amendment."
+              ].join("\n")
+            });
+
+      - name: Comment already registered
+        if: steps.candidate.outputs.should_run == 'true' && steps.decision.outputs.action == 'already_registered'
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
+        with:
+          script: |
+            const fs = require("fs");
+            const d = JSON.parse(fs.readFileSync("guardian-auto-registration-decision.json", "utf8"));
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: parseInt("${{ steps.candidate.outputs.listing_issue }}", 10),
+              body: [
+                "<!-- trinity-guardian-auto-registration:v1 -->",
+                "",
+                "### Guardian Already Registered",
+                "",
+                `Guardian Registry Number: \`${d.guardian_registry_number}\``,
+                "",
+                `Guardian ID: \`${d.guardian_id}\``
+              ].join("\n")
+            });
+
+      - name: Comment blocked
+        if: failure() && steps.candidate.outputs.should_run == 'true'
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
+        with:
+          script: |
+            const fs = require("fs");
+            let body = "<!-- trinity-guardian-auto-registration:v1 -->\n\n### Guardian Auto-Registration Blocked\n\nThe workflow failed before producing a decision file.\n\nNo registry number was assigned.";
+            if (fs.existsSync("guardian-auto-registration-decision.json")) {
+              const d = JSON.parse(fs.readFileSync("guardian-auto-registration-decision.json", "utf8"));
+              body = [
+                "<!-- trinity-guardian-auto-registration:v1 -->",
+                "",
+                "### Guardian Auto-Registration Blocked",
+                "",
+                `Code: \`${d.code || "unknown"}\``,
+                "",
+                d.message || "No message.",
+                "",
+                "No registry number was assigned."
+              ].join("\n");
+            }
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: parseInt("${{ steps.candidate.outputs.listing_issue }}", 10),
+              body
+            });

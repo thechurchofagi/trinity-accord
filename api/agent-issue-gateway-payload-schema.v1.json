@@ -813,6 +813,107 @@
         }
       }
     },
+    "guardian_listing_request": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "description": "Stage 2 Active Guardian Registry Listing Request. Does not include guardian_presence_proof. Registry number is system-generated only.",
+      "required": [
+        "schema",
+        "source_issue",
+        "guardian_id",
+        "public_key_sha256",
+        "guardian_type",
+        "application_mode",
+        "label",
+        "requested_status",
+        "requested_auto_registration",
+        "does_not_include_guardian_presence_proof",
+        "registry_number_requested",
+        "registry_number_must_be_system_generated",
+        "registry_number_must_not_be_self_assigned",
+        "boundaries"
+      ],
+      "properties": {
+        "schema": {
+          "type": "string",
+          "const": "trinityaccord.guardian-listing-request.v1"
+        },
+        "source_issue": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "guardian_id": {
+          "type": "string",
+          "pattern": "^guardian_ed25519_[a-f0-9]{16}$"
+        },
+        "public_key_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "guardian_type": {
+          "type": "string",
+          "enum": ["ai_agent", "human", "human_with_ai_agent", "automated_script"]
+        },
+        "application_mode": {
+          "type": "string",
+          "maxLength": 80
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        },
+        "requested_status": {
+          "type": "string",
+          "const": "active"
+        },
+        "requested_auto_registration": {
+          "type": "boolean",
+          "const": true
+        },
+        "does_not_include_guardian_presence_proof": {
+          "type": "boolean",
+          "const": true
+        },
+        "registry_number_requested": {
+          "type": "string",
+          "const": "next_available"
+        },
+        "registry_number_must_be_system_generated": {
+          "type": "boolean",
+          "const": true
+        },
+        "registry_number_must_not_be_self_assigned": {
+          "type": "boolean",
+          "const": true
+        },
+        "boundaries": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "not_authority",
+            "not_governance",
+            "not_attestation",
+            "not_verification_level",
+            "not_successor_reception",
+            "not_amendment",
+            "bitcoin_originals_prevail"
+          ],
+          "properties": {
+            "not_authority": { "type": "boolean", "const": true },
+            "not_governance": { "type": "boolean", "const": true },
+            "not_attestation": { "type": "boolean", "const": true },
+            "not_verification_level": { "type": "boolean", "const": true },
+            "not_successor_reception": { "type": "boolean", "const": true },
+            "not_amendment": { "type": "boolean", "const": true },
+            "bitcoin_originals_prevail": { "type": "boolean", "const": true }
+          }
+        }
+      },
+      "not": {
+        "required": ["guardian_registry_number"]
+      }
+    },
     "route_id": {
       "type": "string"
     },

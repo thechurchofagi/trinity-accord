@@ -356,11 +356,83 @@ def validate_claim_gate(payload, errors):
             errors.append("claim_gate output path or sha256 is required")
 
 
+def validate_guardian_listing_request(payload, errors):
+    """Validate Guardian listing request fields if present."""
+    req = payload.get("guardian_listing_request")
+    if req in (None, ""):
+        return
+
+    if not isinstance(req, dict):
+        errors.append("guardian_listing_request must be object or null")
+        return
+
+    if "guardian_registry_number" in req:
+        errors.append("guardian_listing_request must not contain guardian_registry_number; registry number is system-generated")
+
+    if req.get("schema") != "trinityaccord.guardian-listing-request.v1":
+        errors.append("guardian_listing_request.schema must be trinityaccord.guardian-listing-request.v1")
+
+    if req.get("requested_status") != "active":
+        errors.append("guardian_listing_request.requested_status must be active")
+
+    if req.get("requested_auto_registration") is not True:
+        errors.append("guardian_listing_request.requested_auto_registration must be true")
+
+    if req.get("does_not_include_guardian_presence_proof") is not True:
+        errors.append("guardian_listing_request.does_not_include_guardian_presence_proof must be true")
+
+    if req.get("registry_number_requested") != "next_available":
+        errors.append("guardian_listing_request.registry_number_requested must be next_available")
+
+    if req.get("registry_number_must_be_system_generated") is not True:
+        errors.append("guardian_listing_request.registry_number_must_be_system_generated must be true")
+
+    if req.get("registry_number_must_not_be_self_assigned") is not True:
+        errors.append("guardian_listing_request.registry_number_must_not_be_self_assigned must be true")
+
+    guardian_id = req.get("guardian_id", "")
+    public_key_sha256 = req.get("public_key_sha256", "")
+
+    if not re.fullmatch(r"guardian_ed25519_[a-f0-9]{16}", guardian_id):
+        errors.append("guardian_listing_request.guardian_id must match guardian_ed25519_<16hex>")
+
+    if not re.fullmatch(r"[a-f0-9]{64}", public_key_sha256):
+        errors.append("guardian_listing_request.public_key_sha256 must be 64 lowercase hex")
+
+    if guardian_id and public_key_sha256:
+        expected_prefix = guardian_id.replace("guardian_ed25519_", "")
+        if not public_key_sha256.startswith(expected_prefix):
+            errors.append("guardian_listing_request public_key_sha256 must start with guardian_id suffix")
+
+    if payload.get("guardian_presence_proof") is not None:
+        errors.append("Guardian listing request payload must not include guardian_presence_proof; it references a Stage 1 self-registration issue instead")
+
+    boundaries = req.get("boundaries") or {}
+    for key in [
+        "not_authority",
+        "not_governance",
+        "not_attestation",
+        "not_verification_level",
+        "not_successor_reception",
+        "not_amendment",
+        "bitcoin_originals_prevail",
+    ]:
+        if boundaries.get(key) is not True:
+            errors.append(f"guardian_listing_request.boundaries.{key} must be true")
+
+    body = payload.get("body", "")
+    for line in body.splitlines():
+        low = line.strip().lower()
+        if "guardian_registry_number" in low and "unassigned" not in low and "none" not in low:
+            errors.append("payload body must not self-assign guardian_registry_number")
+
+
 def validate_common(payload, errors):
     validate_identity(payload, errors)
     validate_provenance(payload, errors)
     validate_authorship_proof(payload, errors)
     validate_guardian_fields(payload, errors)
+    validate_guardian_listing_request(payload, errors)
     if requires_claim_gate(payload):
         validate_claim_gate(payload, errors)
     else:

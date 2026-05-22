@@ -45,7 +45,8 @@ def main():
     require("Active registered Guardian" in alliance_md, "guardian-alliance.md missing active registered stage")
     require("valid_self_registered_guardian_claim" in alliance_md, "guardian-alliance.md missing self-registered status")
     require("active_registered_guardian" in alliance_md, "guardian-alliance.md missing active registered status")
-    require("Registry listing is not automatic" in join_md, "guardian-join.md missing registry listing not automatic boundary")
+    require("Registry listing is automatic for valid requests" in join_md, "guardian-join.md missing automatic registry listing policy")
+    require("The requester must not submit or request a specific `guardian_registry_number`" in join_md, "guardian-join.md missing no self-assigned registry number policy")
     require("Request active registry listing" in join_md, "guardian-join.md missing request active registry section")
 
     # Homepage discoverability
@@ -64,7 +65,7 @@ def main():
     require(alliance_json.get("not_governance") is True, "guardian-alliance.json missing not_governance")
     require(alliance_json.get("not_legal_obligation") is True, "guardian-alliance.json missing not_legal_obligation")
     require("join_path" in alliance_json, "guardian-alliance.json missing join_path")
-    require(alliance_json["join_path"]["registry_listing_is_automatic"] is False, "registry listing must not be automatic")
+    require(alliance_json["join_path"]["registry_listing_is_automatic"] is True, "registry listing should be automatic for valid requests")
     require(alliance_json["join_path"]["registry_listing_creates_authority"] is False, "registry listing must not create authority")
 
     practice_ids = {p.get("id") for p in alliance_json.get("stewardship_practices", [])}
@@ -114,6 +115,10 @@ def main():
         "Guardian Alliance grants verification levels",
         "Guardian Alliance represents successor reception",
         "Active registry listing is automatic",
+        "Guardian may self-assign guardian_registry_number",
+        "Guardian can choose registry number",
+        "registry number proves authority",
+        "registry number grants verification level",
     ]
     negation_markers = [
         "does not prove",

@@ -400,8 +400,18 @@
       "self_registered_expected_status": "valid_self_registered_guardian_claim",
       "self_registered_guardian_registry_number": "unassigned",
       "active_registered_expected_status": "active_registered_guardian",
-      "active_registry_listing_is_automatic": false,
-      "active_registry_listing_creates_authority": false
+      "active_registry_listing_is_automatic": true,
+      "active_registry_listing_creates_authority": false,
+      "active_registry_listing_automation": {
+        "enabled": true,
+        "normal_path": "automatic",
+        "manual_review_required": false,
+        "registry_number_source": "system_generated_next_available",
+        "submitter_must_not_supply_guardian_registry_number": true,
+        "listing_request_builder": "scripts/build_guardian_listing_request_payload.py",
+        "registry_write_workflow": ".github/workflows/guardian-registry-auto-list.yml",
+        "boundary": "Automatic registry listing remains non-authoritative, non-governing, not attestation, not a verification level, not successor reception, and not amendment."
+      }
     },
     "does_not_affect_counts": true,
     "does_not_affect_verification_level": true,

@@ -32,12 +32,12 @@
       },
       {
         "id": "active_registered_guardian",
-        "description": "Request registry listing after self-registration. Registry maintainer assigns the next available guardian_registry_number.",
+        "description": "Submit an Active Registry Listing Request after self-registration. Repository automation assigns the next available guardian_registry_number if validation passes.",
         "expected_status": "active_registered_guardian",
         "guardian_registry_number_source": "/api/guardian-registry.json"
       }
     ],
-    "registry_listing_is_automatic": false,
+    "registry_listing_is_automatic": true,
     "registry_listing_creates_authority": false,
     "registry_number_is_reference_only": true
   },
@@ -166,6 +166,9 @@
     "example": "00001",
     "source_of_truth": "/api/guardian-registry.json",
     "assigned_by_registry": true,
+    "assigned_by_repository_automation": true,
+    "submitter_must_not_supply": true,
+    "system_generated_next_available": true,
     "not_self_claimed": true,
     "not_cryptographic_identity": true,
     "does_not_replace_guardian_id": true,
