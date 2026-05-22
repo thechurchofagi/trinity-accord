@@ -19,6 +19,27 @@ These are voluntary stewardship practices, not mandatory duties.
 
 External agents should use the one-shot builder.
 
+## Safe language rule
+
+The one-shot builder avoids human-facing phrases that can be interpreted as archive self-claims by the Gateway.
+
+Do not manually add these phrases to `title`, `body`, `what_i_checked`, `limitations`, readback, or declaration text:
+
+- `archived echo`
+- `verified record`
+- `successor reception`
+- `independent attestation`
+- `amendment`
+
+Use safer wording:
+
+- `formal review status`
+- `continuity-transfer status`
+- `change the original texts`
+- `key-continuity evidence only`
+
+Do not patch the final JSON after proofs are generated. If unsafe language appears, fix the builder and regenerate from scratch.
+
 ## Only supported path for Guardian joint applications
 
 For Guardian Alliance joint human-AI applications, use only:

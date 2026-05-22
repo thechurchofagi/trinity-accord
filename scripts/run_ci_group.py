@@ -22,6 +22,7 @@ GROUPS = {
         ["python3", "scripts/test_create_guardian_application_one_shot.py"],
         ["python3", "scripts/test_guardian_application_agent_prompt_clarity.py"],
         ["python3", "scripts/test_guardian_application_gateway_payload_completeness.py"],
+        ["python3", "scripts/test_guardian_one_shot_safe_language.py"],
         ["python3", "scripts/test_create_guardian_application_diagnostics.py"],
         ["python3", "scripts/test_guardian_wrong_builder_rejection.py"],
         ["python3", "scripts/test_guardian_one_shot_builder_is_only_supported_path.py"],

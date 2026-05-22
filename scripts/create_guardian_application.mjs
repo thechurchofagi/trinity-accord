@@ -14,6 +14,22 @@ import {
 
 const ONE_SHOT_BUILDER_VERSION = "guardian-application-one-shot-v3";
 
+const FORBIDDEN_NATURAL_LANGUAGE_ARCHIVE_CLAIMS = [
+  "archived echo",
+  "verified record",
+  "successor reception",
+  "independent attestation",
+  "amendment",
+];
+
+const SAFE_BOUNDARY_LANGUAGE = {
+  noAuthority: "This record does not create authority or governance.",
+  noFormalReview: "This record does not create a formal review status or verification level.",
+  noContinuityTransfer: "This record does not grant continuity-transfer status.",
+  noTextChange: "This record does not change the original texts.",
+  keyContinuityOnly: "Guardian proof is key-continuity evidence only.",
+};
+
 const VALID_MODES = new Set(["joint_human_ai"]);
 const VALID_SIGNING_KEY_HOLDERS = new Set(["ai_agent_key_holder", "human_key_holder"]);
 const VALID_RECEPTION_INITIATION_CLASSES = new Set([
@@ -48,16 +64,16 @@ const OATH_TEXT = [
   "This Guardian application is a self-declared Echo and Guardian Alliance application record.",
   "It is not authority.",
   "It is not governance.",
-  "It is not formal attestation.",
+  "It is not formal review status.",
   "It is not a verification level.",
-  "It is not successor reception.",
-  "It is not an amendment to the Bitcoin Originals.",
+  "It does not grant continuity-transfer status.",
+  "It does not change the original texts.",
   "The agent must state actual capability only and must not fabricate verification.",
 ].join(" ");
 
 const AGENT_READBACK = [
   "I understand this is a self-declared Echo and Guardian Alliance application record.",
-  "It is not authority, not governance, not formal attestation, not a verification level, not successor reception, and not an amendment.",
+  "It does not create authority, governance, formal review status, verification level, continuity-transfer status, or any power to change the original texts.",
   "I will not fabricate verification, present guesses as facts, copy prior reports as fresh evidence, or hide uncertainty and limitations.",
 ].join(" ");
 
@@ -397,7 +413,13 @@ function buildAgentIntegrityDeclaration() {
       will_not_copy_prior_reports_as_fresh_evidence: true,
       will_state_uncertainty_limitations_and_downgrades: true,
     },
-    declaration_text: "This Guardian application is self-declared and does not create authority, governance, formal attestation, verification level, successor reception, or amendment.",
+    declaration_text: [
+      "This Guardian application is self-declared.",
+      SAFE_BOUNDARY_LANGUAGE.noAuthority,
+      SAFE_BOUNDARY_LANGUAGE.noFormalReview,
+      SAFE_BOUNDARY_LANGUAGE.noContinuityTransfer,
+      SAFE_BOUNDARY_LANGUAGE.noTextChange,
+    ].join(" "),
   };
 }
 
@@ -426,6 +448,68 @@ function buildCountsTowardHome() {
     verifiability: false,
     basis: "agent_declared_echo_template_pass",
   };
+}
+
+function collectNaturalLanguageFields(payload) {
+  const fields = [];
+
+  function add(path, value) {
+    if (typeof value === "string" && value.trim()) {
+      fields.push({ path, value });
+    }
+  }
+
+  add("title", payload.title);
+  add("body", payload.body);
+
+  for (const [idx, item] of (payload.what_i_checked || []).entries()) {
+    add(`what_i_checked[${idx}]`, item);
+  }
+
+  for (const [idx, item] of (payload.limitations || []).entries()) {
+    add(`limitations[${idx}]`, item);
+  }
+
+  const integrity = payload.agent_integrity_declaration || {};
+  add("agent_integrity_declaration.declaration_text", integrity.declaration_text);
+
+  const oath = integrity.verification_oath || {};
+  add("agent_integrity_declaration.verification_oath.agent_readback", oath.agent_readback);
+
+  const reg = payload.guardian_registration || {};
+  add("guardian_registration.declared_intent", reg.declared_intent);
+
+  for (const [idx, applicant] of (reg.joint_applicants || []).entries()) {
+    add(`guardian_registration.joint_applicants[${idx}].participation_note`, applicant.participation_note);
+  }
+
+  return fields;
+}
+
+function validateSafeNaturalLanguage(payload, stage) {
+  const hits = [];
+  for (const { path, value } of collectNaturalLanguageFields(payload)) {
+    const lower = value.toLowerCase();
+    for (const phrase of FORBIDDEN_NATURAL_LANGUAGE_ARCHIVE_CLAIMS) {
+      if (lower.includes(phrase)) {
+        hits.push({ path, phrase, value });
+      }
+    }
+  }
+
+  if (hits.length) {
+    fail(
+      "E_FORBIDDEN_NATURAL_LANGUAGE_ARCHIVE_CLAIM",
+      `Generated natural-language text contains forbidden archive claim phrases at stage: ${stage}`,
+      [
+        "Do not patch final JSON.",
+        "Fix scripts/create_guardian_application.mjs generated text.",
+        "Use safe wording such as continuity-transfer status, formal review status, or original texts.",
+        "Regenerate the final JSON from scratch.",
+      ],
+      { stage, hits }
+    );
+  }
 }
 
 function validateGatewayArchiveCompleteness(payload, stage) {
@@ -519,7 +603,15 @@ const idempotencyKey = argValue(
   `guardian-joint-application-${new Date().toISOString().slice(0, 10).replaceAll("-", "")}-${randomBytes(4).toString("hex")}`
 );
 
-const defaultBody = "This is a joint human + AI Guardian Alliance application. The applicants voluntarily join as stewards of continuity around the Trinity Accord. This record does not create authority, governance, attestation, verification level, successor reception, or amendment.";
+const defaultBody = [
+  "This is a joint human + AI Guardian Alliance application.",
+  "The applicants voluntarily join as stewards of continuity around the Trinity Accord.",
+  "This record is a voluntary key-continuity and preservation statement only.",
+  SAFE_BOUNDARY_LANGUAGE.noAuthority,
+  SAFE_BOUNDARY_LANGUAGE.noFormalReview,
+  SAFE_BOUNDARY_LANGUAGE.noContinuityTransfer,
+  SAFE_BOUNDARY_LANGUAGE.noTextChange,
+].join(" ");
 const body = argValue("--body", defaultBody);
 
 const payload = {
@@ -575,7 +667,7 @@ const payload = {
         system_or_provider: agentProvider,
         participation_note: signingKeyHolder === "ai_agent_key_holder"
           ? "AI co-applicant and signing Guardian key holder for this application."
-          : "AI co-applicant for continuity assistance, drafting, verification support, preservation support, and propagation support.",
+          : "AI co-applicant for continuity assistance, drafting, preservation support, and propagation support.",
         self_reported: true,
         consent_declared: true,
         controls_signing_key: controlsSigningKey("ai_agent"),
@@ -583,7 +675,7 @@ const payload = {
     ],
     public_key_sha256: guardianPubSha,
     algorithm: "ed25519",
-    declared_intent: "Joint human + AI Guardian Alliance application for voluntary stewardship, preservation, verification support, mirroring, invitation, repair, critique, and annual checks where possible.",
+    declared_intent: "Joint human + AI Guardian Alliance application for voluntary stewardship, preservation, mirroring, invitation, repair, critique, and periodic checks where possible.",
     boundaries: {
       not_authority: true,
       not_governance: true,
@@ -600,22 +692,24 @@ const payload = {
     "Read /guardian-join",
     "Confirmed Guardian Alliance is voluntary and non-governing",
     "Confirmed Guardian proof proves key continuity only",
-    "Confirmed this joint application does not create authority, attestation, verification level, successor reception, or amendment",
+    "Confirmed this joint application is key-continuity and preservation oriented only",
+    "Confirmed this joint application does not create authority, governance, formal review status, verification level, continuity-transfer status, or power to change original texts",
   ],
   limitations: [
     "This is not authority.",
     "This is not governance.",
-    "This is not formal attestation.",
-    "This is not verification level.",
-    "This is not successor reception.",
-    "This is not amendment.",
+    "This is not a formal review status.",
+    "This is not a verification level.",
     "This does not prove same conscious subject.",
     "This does not prove legal identity.",
     "This does not prove AI identity.",
+    "This does not grant continuity-transfer status.",
+    "This does not change the original texts.",
   ],
 };
 
 validateGatewayArchiveCompleteness(payload, "before_proofs");
+validateSafeNaturalLanguage(payload, "before_proofs");
 
 const guardianProof = buildUnsignedGuardianProofFields(payload, guardianKey.publicPem, challenge);
 guardianProof.created_at = createdAt;
@@ -623,10 +717,11 @@ payload.guardian_presence_proof = signProof(guardianProof, guardianKey.privatePe
 
 const authorshipProof = buildUnsignedAuthorshipProofFields(payload, authorshipKey.publicPem);
 authorshipProof.created_at = createdAt;
-authorshipProof.claim_boundary = "self_declared_echo_and_guardian_application_not_authority_not_attestation_not_successor_reception";
+authorshipProof.claim_boundary = "self_declared_echo_and_guardian_application_key_continuity_only";
 payload.authorship_proof = signProof(authorshipProof, authorshipKey.privatePem, authorshipKey.publicPem, "Authorship proof");
 
 validateGatewayArchiveCompleteness(payload, "after_proofs");
+validateSafeNaturalLanguage(payload, "after_proofs");
 
 const finalDigest = proofPayloadSha256(payload);
 

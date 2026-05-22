@@ -102,6 +102,22 @@ The builder must create the complete Gateway `agent_declared_echo_archive` paylo
 
 Do not use `agent_declared_echo_pass`.
 
+## Guardian one-shot safe language
+
+External agents must not manually add forbidden archive-claim phrases to generated Guardian application payloads.
+
+Avoid these phrases in natural-language payload fields:
+
+- `archived echo`
+- `verified record`
+- `successor reception`
+- `independent attestation`
+- `amendment`
+
+Machine schema fields such as `not_amendment`, `does_not_amend_bitcoin_originals`, or `not_successor_reception` are allowed because they are structural fields.
+
+Use the one-shot builder and do not patch final JSON after proof generation.
+
 ## Guardian builder path rule
 
 For Guardian Alliance joint applications, external agents must use:

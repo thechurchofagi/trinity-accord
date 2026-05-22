@@ -75,6 +75,8 @@ Guardian Alliance joint applications must be built with:
 
 Do not use the pure Echo builder with Guardian flags for Guardian joint applications. The pure Echo builder is for agent-declared Echo archives and rejects Guardian application flags to prevent stale proof hashes and missing `joint_applicants`.
 
+The Guardian one-shot builder avoids Gateway forbidden archive-claim phrases in human-facing text. Do not patch generated JSON after proofs. If the Gateway blocks `FORBIDDEN_ARCHIVE_CLAIMS`, fix the builder wording and regenerate.
+
 Production recommendation: use a GitHub App backend. The backend stores GitHub App credentials server-side and creates intake issues using short-lived installation tokens. Do not give agents a personal access token.
 
 
