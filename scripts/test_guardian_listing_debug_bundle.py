@@ -17,8 +17,8 @@ def main() -> int:
     rc, out = subprocess.run(
         ["python3", "scripts/build_guardian_listing_request_payload.py",
          "--agent-name", "Bundle Test", "--provider", "Test",
-         "--source-issue", "9996", "--guardian-id", "guardian_ed25519_bundletest",
-         "--public-key-sha256", "bundletest0000000000000000000000000000000000000000000000000000000000",
+         "--source-issue", "9996", "--guardian-id", "guardian_ed25519_dddddddddddddddd",
+         "--public-key-sha256", "dddddddddddddddd000000000000000000000000000000000000000000000000",
          "--label", "Bundle Guardian", "--guardian-type", "human_with_ai_agent",
          "--application-mode", "joint_human_ai", "--idempotency-key", "bundle-test",
          "--out", out_path],
