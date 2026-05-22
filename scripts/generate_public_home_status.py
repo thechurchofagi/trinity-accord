@@ -55,6 +55,22 @@ RC_ORDER = {
     "RC6_propagated_with_boundary": 6, "RC7_multi_agent_reception": 7,
     "RC8_memory_integration": 8, "RC9_successor_civilization_reception": 9,
 }
+ALLOWED_GUARDIAN_TYPES = {
+    "human",
+    "ai_agent",
+    "human_with_ai_agent",
+    "automated_script",
+}
+
+GUARDIAN_TYPE_LABELS = {
+    "human": "Human",
+    "ai_agent": "AI Agent",
+    "human_with_ai_agent": "Human-AI joint",
+    "automated_script": "Automated script",
+    "unknown": "Unknown",
+}
+
+
 
 
 # ---------------------------------------------------------------------------
