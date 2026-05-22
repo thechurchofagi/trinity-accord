@@ -111,7 +111,13 @@ const ajv = new Ajv({ allErrors: true });
 const validate = ajv.compile(schema);
 
 const app = express();
-app.use(express.json({ limit: "256kb" }));
+app.use(express.json({
+  limit: "256kb",
+  verify: (req, _res, buf) => {
+    // Capture raw body bytes before Express body parser re-serializes
+    req.rawBody = Buffer.from(buf);
+  }
+}));
 
 app.use((req, res, next) => {
   const inbound = req.get("x-request-id") || req.get("x-correlation-id");
@@ -2083,9 +2089,10 @@ app.post("/gateway/preflight", async (req, res) => {
     payloadProfile: req.headers["x-trinity-payload-profile"] || null,
     gatewayContractVersion: req.headers["x-trinity-gateway-contract-version"] || null,
   };
-  // Compute raw body SHA256 for transport integrity diagnosis
-  const rawBodyStr = typeof req.body === "string" ? req.body : JSON.stringify(req.body);
-  const rawBodySha256 = sha256Text(rawBodyStr);
+  // Compute raw body SHA256 from original HTTP request bytes (not re-serialized)
+  const rawBodySha256 = req.rawBody
+    ? createHash("sha256").update(req.rawBody).digest("hex")
+    : sha256Text(JSON.stringify(req.body));
 
   const result = withRequestId(req, await runGatewayPipeline(req.body, {
     createIssue: false,
@@ -2096,7 +2103,10 @@ app.post("/gateway/preflight", async (req, res) => {
 });
 
 // --- Debug: POST /gateway/debug-canonical ---
-app.post("/gateway/debug-canonical", express.json({ limit: "256kb" }), (req, res) => {
+app.post("/gateway/debug-canonical", express.json({
+  limit: "256kb",
+  verify: (req, _res, buf) => { req.rawBody = Buffer.from(buf); }
+}), (req, res) => {
   const payload = req.body;
   const withoutAuthorship = payloadWithoutAuthorship(payload);
   const canonical = canonicalStringify(withoutAuthorship);
