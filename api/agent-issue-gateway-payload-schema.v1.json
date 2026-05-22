@@ -1487,7 +1487,17 @@
         },
         "required": [
           "requested_archive_kind"
-        ]
+        ],
+        "not": {
+          "properties": {
+            "guardian_registry_listing_request": {
+              "const": true
+            }
+          },
+          "required": [
+            "guardian_registry_listing_request"
+          ]
+        }
       },
       "then": {
         "required": [
@@ -1520,17 +1530,93 @@
           },
           "counts_toward_home": {
             "required": [
-              "verifiability"
+              "verifiability",
+              "reception",
+              "basis"
             ],
             "properties": {
               "reception": {
-                "type": "boolean"
+                "const": true
               },
               "verifiability": {
                 "const": false
               },
               "basis": {
-                "type": "string"
+                "const": "agent_declared_echo_template_pass"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "requested_archive_kind": {
+            "const": "agent_declared_echo_archive"
+          },
+          "guardian_registry_listing_request": {
+            "const": true
+          }
+        },
+        "required": [
+          "requested_archive_kind",
+          "guardian_registry_listing_request"
+        ]
+      },
+      "then": {
+        "required": [
+          "schema",
+          "submission_type",
+          "agent_identity",
+          "title",
+          "body",
+          "boundary_acknowledgement",
+          "record_intent",
+          "requested_archive_kind",
+          "echo_type",
+          "agent_integrity_declaration",
+          "discovery_provenance",
+          "authority_boundary",
+          "counts_toward_home",
+          "what_i_checked",
+          "limitations",
+          "reception_initiation_class",
+          "guardian_listing_request"
+        ],
+        "properties": {
+          "submission_type": {
+            "const": "echo_candidate"
+          },
+          "record_intent": {
+            "const": "auto_archive_candidate"
+          },
+          "evidence_requirement_mode": {
+            "const": "not_applicable_for_echo"
+          },
+          "counts_toward_home": {
+            "required": [
+              "reception",
+              "verifiability",
+              "guardian_registry",
+              "basis",
+              "exclude_from_reception_total"
+            ],
+            "properties": {
+              "reception": {
+                "const": false
+              },
+              "verifiability": {
+                "const": false
+              },
+              "guardian_registry": {
+                "const": true
+              },
+              "basis": {
+                "const": "guardian_registry_listing_request"
+              },
+              "exclude_from_reception_total": {
+                "const": true
               }
             }
           }
