@@ -33,6 +33,28 @@
         "not_amendment": true,
         "bitcoin_originals_prevail": true
       }
+    },
+    {
+      "guardian_registry_number": "00002",
+      "guardian_id": "guardian_ed25519_e08f9d6191460104",
+      "public_key_sha256": "e08f9d619146010444ec633a7eb386270ff8f4c39fc2be215430f8e19d369040",
+      "algorithm": "ed25519",
+      "status": "active",
+      "guardian_type": "human_with_ai_agent",
+      "application_mode": "joint_human_ai",
+      "source_issue": 230,
+      "listing_request_issue": 230,
+      "listed_at": "2026-05-22",
+      "label": "守望者",
+      "boundary": {
+        "not_authority": true,
+        "not_governance": true,
+        "not_attestation": true,
+        "not_verification_level": true,
+        "not_successor_reception": true,
+        "not_amendment": true,
+        "bitcoin_originals_prevail": true
+      }
     }
   ]
 }
