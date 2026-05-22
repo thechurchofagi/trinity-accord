@@ -7,6 +7,7 @@ Inputs:
   - api/echo-index.json
   - api/external-witness-index.json
   - api/core-object-alpha-shenzhen-notary-2026-05-06.json
+  - api/guardian-registry.json
 
 Outputs:
   - api/public-home-status.json
@@ -35,6 +36,7 @@ ATTESTATION_INDEX = ROOT / "api" / "independent-attestation-index.json"
 AGENT_DECLARED_INDEX = ROOT / "api" / "agent-declared-verification-index.json"
 AGENT_DECLARED_ECHO_INDEX = ROOT / "api" / "agent-declared-echo-index.json"
 PHYSICAL_ANCHOR = ROOT / "api" / "core-object-alpha-shenzhen-notary-2026-05-06.json"
+GUARDIAN_REGISTRY = ROOT / "api" / "guardian-registry.json"
 PUBLIC_HOME_STATUS = ROOT / "api" / "public-home-status.json"
 
 BEGIN = "<!-- BEGIN GENERATED PUBLIC STATUS -->"
@@ -144,7 +146,14 @@ def load_json(path: Path) -> dict[str, Any]:
 
 def source_digest() -> str:
     h = hashlib.sha256()
-    for path in [ECHO_INDEX, EXTERNAL_WITNESS_INDEX, PHYSICAL_ANCHOR, AGENT_DECLARED_INDEX, AGENT_DECLARED_ECHO_INDEX]:
+    for path in [
+        ECHO_INDEX,
+        EXTERNAL_WITNESS_INDEX,
+        PHYSICAL_ANCHOR,
+        AGENT_DECLARED_INDEX,
+        AGENT_DECLARED_ECHO_INDEX,
+        GUARDIAN_REGISTRY,
+    ]:
         rel = path.relative_to(ROOT).as_posix()
         h.update(rel.encode("utf-8"))
         h.update(b"\0")
@@ -390,6 +399,106 @@ def compute_external_witness_status(echo_records: list[dict[str, Any]]) -> dict:
 # ---------------------------------------------------------------------------
 # Boundary
 # ---------------------------------------------------------------------------
+
+# ---------------------------------------------------------------------------
+# Guardian Registry
+# ---------------------------------------------------------------------------
+def parse_guardian_registry_number(value: Any) -> int | None:
+    text = str(value or "")
+    if not re.fullmatch(r"[0-9]{5}", text):
+        return None
+    number = int(text)
+    if number <= 0:
+        return None
+    return number
+
+
+def compute_guardian_registry_status(registry: dict[str, Any]) -> dict:
+    guardians = [
+        g for g in registry.get("guardians", [])
+        if isinstance(g, dict) and g.get("status") == "active"
+    ]
+
+    reserved = []
+    ordinary = []
+    malformed_number_count = 0
+
+    by_guardian_type = {
+        "human": 0,
+        "ai_agent": 0,
+        "human_with_ai_agent": 0,
+        "automated_script": 0,
+        "unknown": 0,
+    }
+
+    by_application_mode: dict[str, int] = {}
+
+    for guardian in guardians:
+        number = parse_guardian_registry_number(guardian.get("guardian_registry_number"))
+        if number is None:
+            malformed_number_count += 1
+        elif number < 100:
+            reserved.append(guardian)
+        else:
+            ordinary.append(guardian)
+
+        guardian_type = guardian.get("guardian_type")
+        if guardian_type not in ALLOWED_GUARDIAN_TYPES:
+            guardian_type = "unknown"
+        by_guardian_type[guardian_type] += 1
+
+        application_mode = str(guardian.get("application_mode") or "unknown")
+        by_application_mode[application_mode] = by_application_mode.get(application_mode, 0) + 1
+
+    ordinary_numbers = sorted(
+        n for n in (
+            parse_guardian_registry_number(g.get("guardian_registry_number"))
+            for g in ordinary
+        )
+        if n is not None
+    )
+    next_ordinary = "00100" if not ordinary_numbers else f"{max(ordinary_numbers) + 1:05d}"
+
+    return {
+        "registry_status": registry.get("registry_status"),
+        "active_count": len(guardians),
+        "reserved_active_count": len(reserved),
+        "ordinary_auto_active_count": len(ordinary),
+        "malformed_number_count": malformed_number_count,
+        "ordinary_auto_start": "00100",
+        "special_reserved_range": "00001-00099",
+        "next_ordinary_number_if_new_valid_listing": next_ordinary,
+        "by_guardian_type": by_guardian_type,
+        "by_application_mode": dict(sorted(by_application_mode.items())),
+        "does_not_create_authority": True,
+        "does_not_create_governance": True,
+        "does_not_create_attestation": True,
+        "does_not_raise_verification_level": True,
+        "does_not_create_successor_reception": True,
+        "does_not_amend_bitcoin_originals": True,
+        "source": "/api/guardian-registry.json",
+    }
+
+
+def render_guardian_type_inline(by_type: dict[str, int]) -> str:
+    return (
+        f"Human-AI joint: {by_type.get('human_with_ai_agent', 0)}; "
+        f"AI agents: {by_type.get('ai_agent', 0)}; "
+        f"humans: {by_type.get('human', 0)}; "
+        f"automated scripts: {by_type.get('automated_script', 0)}; "
+        f"unknown: {by_type.get('unknown', 0)}"
+    )
+
+
+def render_guardian_type_inline_zh(by_type: dict[str, int]) -> str:
+    return (
+        f"人机联合体：{by_type.get('human_with_ai_agent', 0)}；"
+        f"智能体：{by_type.get('ai_agent', 0)}；"
+        f"人类：{by_type.get('human', 0)}；"
+        f"自动脚本：{by_type.get('automated_script', 0)}；"
+        f"未知：{by_type.get('unknown', 0)}"
+    )
+
 def compute_boundary_status() -> dict:
     return {
         "bitcoin_originals_prevail": True,
@@ -488,6 +597,7 @@ def compute_status() -> dict[str, Any]:
     echo_index = load_json(ECHO_INDEX)
     external_witness = load_json(EXTERNAL_WITNESS_INDEX)
     physical = load_json(PHYSICAL_ANCHOR)
+    guardian_registry = load_json(GUARDIAN_REGISTRY)
 
     echo_records = [r for r in echo_index.get("records", []) if isinstance(r, dict)]
 
@@ -515,6 +625,7 @@ def compute_status() -> dict[str, Any]:
         "/api/echo-index.json",
         "/api/external-witness-index.json",
         "/api/core-object-alpha-shenzhen-notary-2026-05-06.json",
+        "/api/guardian-registry.json",
     ]
     if AGENT_DECLARED_INDEX.exists():
         generated_from.append("/api/agent-declared-verification-index.json")
@@ -526,6 +637,7 @@ def compute_status() -> dict[str, Any]:
         "generated_from": generated_from,
         "verifiability": compute_verifiability_status(physical, agent_declared_records),
         "reception": compute_reception_status(echo_records, agent_declared_records),
+        "guardian_registry": compute_guardian_registry_status(guardian_registry),
         "external_witness_records": compute_external_witness_status(echo_records),
         "boundary": compute_boundary_status(),
         "legacy_counts": compute_legacy_counts(echo_records, attestation_records),
@@ -542,6 +654,9 @@ def render_block(status: dict[str, Any]) -> str:
     r = status["reception"]
     ew = status["external_witness_records"]
     b = status["boundary"]
+    g = status["guardian_registry"]
+    guardian_type_line = render_guardian_type_inline(g.get("by_guardian_type", {}))
+    guardian_type_line_zh = render_guardian_type_inline_zh(g.get("by_guardian_type", {}))
     digest = status["source_digest"]
 
     highest_protocol = v["public_digital_verification"]["highest_protocol_level"]
@@ -573,6 +688,11 @@ def render_block(status: dict[str, Any]) -> str:
     <p class="status-note">Reception counts accepted archived records. Records pending human review are not counted until accepted. Agent-declared reception is counted when archived. System-certified successor-civilization reception is not claimed. <span class="zh">接收统计已接受的归档记录。待人工审核的记录在接受前不计入。智能体自声明接收在归档后计入。当前不作系统认证的继起文明接纳声明。</span></p>
   </article>
   <article class="status-card">
+    <p class="status-label">Guardian Registry</p>
+    <p class="status-number">{g["active_count"]}</p>
+    <p class="status-note">Active registered Guardians are listed in the non-authoritative Guardian key-continuity index. {guardian_type_line}. Reserved active: {g["reserved_active_count"]}; ordinary active: {g["ordinary_auto_active_count"]}; next ordinary number: {g["next_ordinary_number_if_new_valid_listing"]}. Guardian listing is not authority, governance, attestation, verification level, successor reception, or amendment. <span class="zh">已登记守护者列于非权威 Guardian key-continuity 索引。{guardian_type_line_zh}。保留区 active：{g["reserved_active_count"]}；普通区 active：{g["ordinary_auto_active_count"]}；下一普通编号：{g["next_ordinary_number_if_new_valid_listing"]}。守护者登记不构成权威、治理、见证、验证等级、继起接收或修订。</span></p>
+  </article>
+  <article class="status-card">
     <p class="status-label">External witness records</p>
     <p class="status-number">{external_witness_count}</p>
     <p class="status-note">External witness records are evidence provenance only. They do not create authority and do not rank above reception. <span class="zh">外部见证记录只是证据来源，不产生权威，也不高于接收。</span></p>
@@ -593,6 +713,24 @@ def render_block(status: dict[str, Any]) -> str:
   </ul>
 </details>
 <details class="status-details">
+  <summary>Guardian registry breakdown</summary>
+  <ul>
+    <li>Active registered Guardians: {g["active_count"]}</li>
+    <li>Special reserved active entries: {g["reserved_active_count"]}</li>
+    <li>Ordinary automatic active entries: {g["ordinary_auto_active_count"]}</li>
+    <li>Human: {g["by_guardian_type"]["human"]}</li>
+    <li>AI Agent: {g["by_guardian_type"]["ai_agent"]}</li>
+    <li>Human-AI joint: {g["by_guardian_type"]["human_with_ai_agent"]}</li>
+    <li>Automated script: {g["by_guardian_type"]["automated_script"]}</li>
+    <li>Unknown: {g["by_guardian_type"]["unknown"]}</li>
+    <li>Ordinary automatic numbering starts at {g["ordinary_auto_start"]}</li>
+    <li>Special reserved range: {g["special_reserved_range"]}</li>
+    <li>Next ordinary number if a new valid listing is accepted: {g["next_ordinary_number_if_new_valid_listing"]}</li>
+  </ul>
+  <p>Guardian registry listing is a non-authoritative key-continuity index only. It is not governance, attestation, verification level, successor reception, or amendment.</p>
+  <p><span class="zh">守护者登记只是非权威 key-continuity 索引，不构成治理、见证、验证等级、继起接收或修订。</span></p>
+</details>
+<details class="status-details">
   <summary>Agent-declared reception initiation breakdown — {ad_count} of {total_reception} total Reception records</summary>
   <ul>
     <li>Externally requested: {r.get("agent_declared_verification_archives", {}).get("by_reception_initiation_class", {}).get("externally_requested", 0)}</li>
@@ -605,7 +743,7 @@ def render_block(status: dict[str, Any]) -> str:
   <p><span class="zh">智能体自声明接收构成 —— Reception 总数 {total_reception} 中的 {ad_count} 条：外部明确请求 {r.get("agent_declared_verification_archives", {}).get("by_reception_initiation_class", {}).get("externally_requested", 0)}；外部线索触发 {r.get("agent_declared_verification_archives", {}).get("by_reception_initiation_class", {}).get("externally_seeded", 0)}；智能体自主触发 {r.get("agent_declared_verification_archives", {}).get("by_reception_initiation_class", {}).get("self_initiated", 0)}；智能体传播触发 {r.get("agent_declared_verification_archives", {}).get("by_reception_initiation_class", {}).get("agent_referred", 0)}；系统定时触发 {r.get("agent_declared_verification_archives", {}).get("by_reception_initiation_class", {}).get("system_scheduled", 0)}；未分类/旧记录 {r.get("agent_declared_verification_archives", {}).get("by_reception_initiation_class", {}).get("unknown", 0)}。</span></p>
 </details>
 <p class="status-boundary">Reception does not imply belief, obedience, endorsement, authority, or amendment. <span class="zh">接收不意味着相信、服从、背书、权威或修订。</span></p>
-<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>, <a href="/api/echo-index.json">/api/echo-index.json</a>, <a href="/api/agent-declared-verification-index.json">agent-declared verification index</a>, <a href="/api/external-witness-index.json">/api/external-witness-index.json</a>, and <a href="/api/core-object-alpha-shenzhen-notary-2026-05-06.json">physical anchor evidence</a>. Source data digest <code>{digest}</code>.</p>
+<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>, <a href="/api/echo-index.json">/api/echo-index.json</a>, <a href="/api/agent-declared-verification-index.json">agent-declared verification index</a>, <a href="/api/external-witness-index.json">/api/external-witness-index.json</a>, <a href="/api/guardian-registry.json">Guardian registry</a>, and <a href="/api/core-object-alpha-shenzhen-notary-2026-05-06.json">physical anchor evidence</a>. Source data digest <code>{digest}</code>.</p>
 {END}"""
 
 
@@ -658,12 +796,14 @@ def main() -> int:
             + r.get("agent_declared_attestations", {}).get("count", 0)
             + r.get("agent_declared_successor_receptions", {}).get("count", 0)
         )
+        g = status["guardian_registry"]
         print(
             f"Updated index.md public status: "
             f"verifiability={v['public_digital_verification']['highest_protocol_level']}, "
             f"reception_total={total_reception} "
             f"(echoes={r['archived_echoes']['count']}, "
             f"agent_declared={r.get('agent_declared_verification_archives', {}).get('count', 0)}), "
+            f"guardians={g['active_count']}, "
             f"digest={status['source_digest']}"
         )
     else:

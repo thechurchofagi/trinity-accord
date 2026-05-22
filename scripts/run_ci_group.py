@@ -34,6 +34,7 @@ GROUPS = {
         ["python3", "scripts/test_guardian_one_shot_builder_is_only_supported_path.py"],
         ["python3", "scripts/test_agent_first_contact_guardian_policy.py"],
         ["python3", "scripts/test_guardian_docs_convergence.py"],
+        ["python3", "scripts/test_public_home_status_guardian_registry.py"],
 
     ],
     "chronicle": [
