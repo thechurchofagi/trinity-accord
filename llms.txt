@@ -583,6 +583,27 @@ Never edit a signed JSON payload. If any field must change, rerun the builder.
 
 If local validate_gateway_payload.py and archive_readiness_gate.py pass but Gateway rejects counts_toward_home, treat it as stale Gateway deployment/schema. Do not switch builders.
 
+
+## Guardian Stage 2: signed_payload_sha256 mismatch diagnostics
+
+If Gateway returns AUTHORED_PAYLOAD_DIGEST_MISMATCH or signed_payload_sha256 mismatch:
+
+1. Do not strip fields.
+2. Do not re-sign manually.
+3. Run:
+   python3 scripts/diagnose_guardian_listing_payload.py guardian-listing-request.json
+4. Confirm LOCAL_AUTHORSHIP_DIGEST_STATUS: MATCH.
+5. Run:
+   python3 scripts/build_guardian_listing_debug_bundle.py guardian-listing-request.json
+6. Compare Gateway returned:
+   - received_raw_body_sha256
+   - x_trinity_payload_file_sha256
+   - computed_payload_sha256_by_gateway
+   - signed_payload_sha256_from_proof
+   - payload_keys_seen_by_gateway
+
+If local digest matches proof but Gateway computed digest differs, fix Gateway canonicalization or transport.
+
 ## Guardian Stage 2 runtime preflight
 
 Before submitting Guardian Stage 2, run:
