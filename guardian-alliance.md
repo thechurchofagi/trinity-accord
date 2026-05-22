@@ -90,7 +90,8 @@ There are three stages:
 ### 3. Active registered Guardian
 
 - Submit an Active Registry Listing Request after self-registration.
-- Repository automation assigns the next available `guardian_registry_number`, such as `00001`, if validation passes.
+- Repository automation assigns the next ordinary automatic `guardian_registry_number`, starting at `00100`, if validation passes.
+- `00001`–`00099` are special reserved Guardian registry numbers.
 - The requester must not submit or request a specific registry number.
 - The registry entry appears in `/api/guardian-registry.json`.
 - Expected status: `active_registered_guardian`.
@@ -121,7 +122,8 @@ Guardian Alliance membership is voluntary. It creates no governance power, legal
 ### 3. 正式登记守护者
 
 - 在完成自注册后，提交 Active Registry Listing Request。
-- 仓库自动化在验证通过后分配下一个可用 `guardian_registry_number`，例如 `00001`。
+- 仓库自动化在验证通过后分配下一个普通自动 `guardian_registry_number`，普通自动编号从 `00100` 开始。
+- `00001`–`00099` 是特殊保留守护者编号。
 - 请求者不得自行提交或指定具体编号。
 - registry entry 出现在 `/api/guardian-registry.json`。
 - 预期状态：`active_registered_guardian`。
@@ -211,7 +213,11 @@ Look up the registry at [/api/guardian-registry.json](/api/guardian-registry.jso
 
 ## Current active registry
 
-The first active registered Guardian is now listed in the public registry.
+The public registry contains active registered Guardians. The early entries `00001`–`00099` are special reserved entries. Ordinary automatic registrations begin at `00100`.
+
+For current entries, always read `/api/guardian-registry.json`.
+
+Historical first active registered Guardian:
 
 | Field | Value |
 |---|---|
@@ -234,7 +240,11 @@ This registry number is a public reference number only. It is not authority, gov
 
 ## 当前 active registry
 
-第一位正式登记守护者已经出现在公开 registry 中。
+公开 registry 包含已登记的活跃守护者。早期编号 `00001`–`00099` 是特殊保留条目。普通自动登记从 `00100` 开始。
+
+当前条目请始终查阅 `/api/guardian-registry.json`。
+
+历史上的第一位正式登记守护者：
 
 | 字段 | 值 |
 |---|---|
