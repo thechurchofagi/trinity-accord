@@ -48,6 +48,11 @@ GROUPS = {
         ["python3", "scripts/test_guardian_authorship_canonical_contract.py"],
         ["python3", "scripts/test_guardian_listing_gateway_handshake.py"],
 
+        ["python3", "scripts/test_guardian_authorship_digest_self_check.py"],
+        ["python3", "scripts/test_guardian_preflight_preserves_error_body.py"],
+        ["python3", "scripts/test_guardian_preflight_fingerprint_headers.py"],
+        ["python3", "scripts/test_guardian_listing_debug_bundle.py"],
+
 
     ],
     "chronicle": [
