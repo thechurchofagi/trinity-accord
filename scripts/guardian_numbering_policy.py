@@ -177,6 +177,69 @@ def next_registry_number(registry_or_guardians: dict | list[dict], policy: dict 
     return format_registry_number(max(ordinary) + 1)
 
 
+
+
+def classify_registry_number(value: str | int, policy: dict | None = None) -> str:
+    """Classify a Guardian registry number under the active numbering policy.
+
+    Returns one of:
+    - ordinary_auto
+    - special_reserved
+    - non_reserved_below_auto_start
+    """
+    if isinstance(value, int):
+        n = value
+    else:
+        n = parse_registry_number(value)
+
+    if n >= ordinary_auto_start(policy):
+        return "ordinary_auto"
+
+    if is_reserved_number(n, policy):
+        return "special_reserved"
+
+    return "non_reserved_below_auto_start"
+
+
+def special_reserved_range_label(policy: dict | None = None) -> str:
+    ranges = reserved_ranges(policy)
+    if not ranges:
+        return ""
+    return ", ".join(f"{format_registry_number(start)}-{format_registry_number(end)}" for start, end in ranges)
+
+
+def count_ordinary_auto_listings_on_day(
+    guardians: list[dict],
+    listed_at: str,
+    policy: dict | None = None,
+) -> int:
+    """Count active ordinary-auto Guardian listings on a specific UTC date.
+
+    Special reserved entries such as 00001-00099 do not consume ordinary daily cap.
+    Malformed entries are ignored here; registry validation should catch them elsewhere.
+    """
+    count = 0
+
+    for entry in guardians:
+        if not isinstance(entry, dict):
+            continue
+        if entry.get("status") != "active":
+            continue
+        if entry.get("listed_at") != listed_at:
+            continue
+
+        number = entry.get("guardian_registry_number")
+        if not isinstance(number, str):
+            continue
+
+        try:
+            if classify_registry_number(number, policy) == "ordinary_auto":
+                count += 1
+        except GuardianNumberingError:
+            continue
+
+    return count
+
 def numbering_error_to_decision(err: GuardianNumberingError) -> dict:
     return {
         "ok": False,

@@ -34,6 +34,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 
 from guardian_numbering_policy import (
     GuardianNumberingError,
+    count_ordinary_auto_listings_on_day,
     next_registry_number as next_guardian_registry_number,
     numbering_error_to_decision,
     parse_registry_number,
@@ -224,37 +225,41 @@ def parse_listing_issue(listing_issue: dict, allow_non_bot: bool) -> tuple[dict 
         return None, decision(False, "blocked", "LISTING_NOT_ARCHIVE_READY", "Listing request must be archive_ready=true.")
 
     source_issue_no = None
-    guardian_id = None
-    public_key_sha256 = None
-    guardian_type = None
-    application_mode = None
-    label = None
+    guardian_id = fields.get("listing_guardian_id") or None
+    public_key_sha256 = fields.get("listing_public_key_sha256") or None
+    guardian_type = fields.get("listing_guardian_type") or None
+    application_mode = fields.get("listing_application_mode") or None
+    label = fields.get("listing_label") or None
 
-    if fields.get("related_issue") and fields["related_issue"].isdigit():
+    structured_source_issue = fields.get("listing_source_issue")
+    if structured_source_issue and structured_source_issue.isdigit():
+        source_issue_no = int(structured_source_issue)
+
+    if source_issue_no is None and fields.get("related_issue") and fields["related_issue"].isdigit():
         source_issue_no = int(fields["related_issue"])
 
     m = re.search(r"Source self-registration issue:\s*#?([0-9]+)", body, re.IGNORECASE)
-    if m:
+    if source_issue_no is None and m:
         source_issue_no = int(m.group(1))
 
     m = re.search(r"Guardian ID:\s*(guardian_ed25519_[a-f0-9]{16})", body)
-    if m:
+    if guardian_id is None and m:
         guardian_id = m.group(1)
 
     m = re.search(r"Public Key SHA256:\s*([a-f0-9]{64})", body)
-    if m:
+    if public_key_sha256 is None and m:
         public_key_sha256 = m.group(1)
 
     m = re.search(r"Guardian type:\s*([A-Za-z0-9_]+)", body)
-    if m:
+    if guardian_type is None and m:
         guardian_type = m.group(1)
 
     m = re.search(r"Application mode:\s*([A-Za-z0-9_]+)", body)
-    if m:
+    if application_mode is None and m:
         application_mode = m.group(1)
 
     m = re.search(r"Active registry listing request for Guardian\s+(.+?)\.", body)
-    if m:
+    if label is None and m:
         label = m.group(1).strip()
 
     if not label:
@@ -460,6 +465,34 @@ def auto_register(
                 listing_request_issue=listing["issue_number"],
                 existing=g,
             )
+
+
+    max_per_day = int((policy or {}).get("max_new_active_listings_per_utc_day", 3))
+    if max_per_day < 1:
+        return registry, decision(
+            False,
+            "blocked",
+            "BAD_DAILY_LISTING_LIMIT_POLICY",
+            "max_new_active_listings_per_utc_day must be >= 1.",
+            max_new_active_listings_per_utc_day=max_per_day,
+        )
+
+    ordinary_today = count_ordinary_auto_listings_on_day(
+        registry.get("guardians", []),
+        listed_at,
+        policy,
+    )
+
+    if ordinary_today >= max_per_day:
+        return registry, decision(
+            False,
+            "blocked",
+            "DAILY_LISTING_LIMIT",
+            "Daily ordinary Guardian listing limit reached.",
+            listed_at=listed_at,
+            existing_ordinary_active_listings_on_day=ordinary_today,
+            max_new_active_listings_per_utc_day=max_per_day,
+        )
 
     try:
         number = next_guardian_registry_number(registry, policy)

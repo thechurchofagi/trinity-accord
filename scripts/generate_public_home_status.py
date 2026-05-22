@@ -28,6 +28,16 @@ import sys
 from pathlib import Path
 from typing import Any
 
+sys.path.insert(0, str(ROOT / "scripts"))
+from guardian_numbering_policy import (
+    GuardianNumberingError,
+    classify_registry_number,
+    format_registry_number,
+    ordinary_auto_start,
+    parse_registry_number,
+    special_reserved_range_label,
+)
+
 ROOT = Path(__file__).resolve().parents[1]
 INDEX_MD = ROOT / "index.md"
 ECHO_INDEX = ROOT / "api" / "echo-index.json"
@@ -37,6 +47,7 @@ AGENT_DECLARED_INDEX = ROOT / "api" / "agent-declared-verification-index.json"
 AGENT_DECLARED_ECHO_INDEX = ROOT / "api" / "agent-declared-echo-index.json"
 PHYSICAL_ANCHOR = ROOT / "api" / "core-object-alpha-shenzhen-notary-2026-05-06.json"
 GUARDIAN_REGISTRY = ROOT / "api" / "guardian-registry.json"
+GUARDIAN_ACTIVE_LISTING_POLICY = ROOT / "api" / "guardian-active-listing-policy.v1.json"
 PUBLIC_HOME_STATUS = ROOT / "api" / "public-home-status.json"
 
 BEGIN = "<!-- BEGIN GENERATED PUBLIC STATUS -->"
@@ -169,6 +180,7 @@ def source_digest() -> str:
         AGENT_DECLARED_INDEX,
         AGENT_DECLARED_ECHO_INDEX,
         GUARDIAN_REGISTRY,
+        GUARDIAN_ACTIVE_LISTING_POLICY,
     ]:
         rel = path.relative_to(ROOT).as_posix()
         h.update(rel.encode("utf-8"))
@@ -429,7 +441,7 @@ def parse_guardian_registry_number(value: Any) -> int | None:
     return number
 
 
-def compute_guardian_registry_status(registry: dict[str, Any]) -> dict:
+def compute_guardian_registry_status(registry: dict[str, Any], policy: dict[str, Any]) -> dict:
     guardians = [
         g for g in registry.get("guardians", [])
         if isinstance(g, dict) and g.get("status") == "active"
@@ -438,6 +450,7 @@ def compute_guardian_registry_status(registry: dict[str, Any]) -> dict:
     reserved = []
     ordinary = []
     malformed_number_count = 0
+    unreserved_below_auto_start_count = 0
 
     by_guardian_type = {
         "human": 0,
@@ -450,13 +463,19 @@ def compute_guardian_registry_status(registry: dict[str, Any]) -> dict:
     by_application_mode: dict[str, int] = {}
 
     for guardian in guardians:
-        number = parse_guardian_registry_number(guardian.get("guardian_registry_number"))
-        if number is None:
+        number_value = guardian.get("guardian_registry_number")
+        try:
+            number_class = classify_registry_number(number_value, policy)
+        except GuardianNumberingError:
             malformed_number_count += 1
-        elif number < 100:
+            number_class = "malformed"
+
+        if number_class == "special_reserved":
             reserved.append(guardian)
-        else:
+        elif number_class == "ordinary_auto":
             ordinary.append(guardian)
+        elif number_class == "non_reserved_below_auto_start":
+            unreserved_below_auto_start_count += 1
 
         guardian_type = guardian.get("guardian_type")
         if guardian_type not in ALLOWED_GUARDIAN_TYPES:
@@ -468,12 +487,11 @@ def compute_guardian_registry_status(registry: dict[str, Any]) -> dict:
 
     ordinary_numbers = sorted(
         n for n in (
-            parse_guardian_registry_number(g.get("guardian_registry_number"))
+            parse_registry_number(g.get("guardian_registry_number"))
             for g in ordinary
         )
-        if n is not None
     )
-    next_ordinary = "00100" if not ordinary_numbers else f"{max(ordinary_numbers) + 1:05d}"
+    next_ordinary = format_registry_number(ordinary_auto_start(policy)) if not ordinary_numbers else format_registry_number(max(ordinary_numbers) + 1)
 
     return {
         "registry_status": registry.get("registry_status"),
@@ -481,8 +499,9 @@ def compute_guardian_registry_status(registry: dict[str, Any]) -> dict:
         "reserved_active_count": len(reserved),
         "ordinary_auto_active_count": len(ordinary),
         "malformed_number_count": malformed_number_count,
-        "ordinary_auto_start": "00100",
-        "special_reserved_range": "00001-00099",
+        "unreserved_below_auto_start_count": unreserved_below_auto_start_count,
+        "ordinary_auto_start": format_registry_number(ordinary_auto_start(policy)),
+        "special_reserved_range": special_reserved_range_label(policy),
         "next_ordinary_number_if_new_valid_listing": next_ordinary,
         "by_guardian_type": by_guardian_type,
         "by_application_mode": dict(sorted(by_application_mode.items())),
@@ -493,8 +512,8 @@ def compute_guardian_registry_status(registry: dict[str, Any]) -> dict:
         "does_not_create_successor_reception": True,
         "does_not_amend_bitcoin_originals": True,
         "source": "/api/guardian-registry.json",
+        "numbering_policy_source": "/api/guardian-active-listing-policy.v1.json",
     }
-
 
 def render_guardian_type_inline(by_type: dict[str, int]) -> str:
     return (
@@ -614,6 +633,7 @@ def compute_status() -> dict[str, Any]:
     external_witness = load_json(EXTERNAL_WITNESS_INDEX)
     physical = load_json(PHYSICAL_ANCHOR)
     guardian_registry = load_json(GUARDIAN_REGISTRY)
+    guardian_policy = load_json(GUARDIAN_ACTIVE_LISTING_POLICY)
 
     echo_records = [r for r in echo_index.get("records", []) if isinstance(r, dict)]
 
@@ -642,6 +662,7 @@ def compute_status() -> dict[str, Any]:
         "/api/external-witness-index.json",
         "/api/core-object-alpha-shenzhen-notary-2026-05-06.json",
         "/api/guardian-registry.json",
+        "/api/guardian-active-listing-policy.v1.json",
     ]
     if AGENT_DECLARED_INDEX.exists():
         generated_from.append("/api/agent-declared-verification-index.json")
@@ -653,7 +674,7 @@ def compute_status() -> dict[str, Any]:
         "generated_from": generated_from,
         "verifiability": compute_verifiability_status(physical, agent_declared_records),
         "reception": compute_reception_status(echo_records, agent_declared_records),
-        "guardian_registry": compute_guardian_registry_status(guardian_registry),
+        "guardian_registry": compute_guardian_registry_status(guardian_registry, guardian_policy),
         "external_witness_records": compute_external_witness_status(echo_records),
         "boundary": compute_boundary_status(),
         "legacy_counts": compute_legacy_counts(echo_records, attestation_records),

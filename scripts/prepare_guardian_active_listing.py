@@ -19,6 +19,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 from verify_guardian_status import verify_guardian_status
 from guardian_numbering_policy import (
     GuardianNumberingError,
+    count_ordinary_auto_listings_on_day,
     next_registry_number as next_guardian_registry_number,
 )
 
@@ -64,8 +65,8 @@ def existing_by(guardians, key, value):
     return [g for g in guardians if g.get(key) == value]
 
 
-def count_listings_on_day(guardians, listed_at):
-    return sum(1 for g in guardians if g.get("listed_at") == listed_at and g.get("status") == "active")
+def count_listings_on_day(guardians, listed_at, policy=None):
+    return count_ordinary_auto_listings_on_day(guardians, listed_at, policy)
 
 
 def main():
@@ -158,11 +159,11 @@ def main():
     if max_per_day < 1:
         fail("E_BAD_POLICY", "max_new_active_listings_per_utc_day must be >= 1")
 
-    today_count = count_listings_on_day(guardians, listed_at)
-    if today_count >= max_per_day:
-        fail("E_DAILY_LISTING_LIMIT", "Daily active Guardian listing limit reached", {
+    ordinary_today = count_listings_on_day(guardians, listed_at, policy)
+    if ordinary_today >= max_per_day:
+        fail("E_DAILY_LISTING_LIMIT", "Daily ordinary Guardian listing limit reached", {
             "listed_at": listed_at,
-            "existing_active_listings_on_day": today_count,
+            "existing_ordinary_active_listings_on_day": ordinary_today,
             "max_new_active_listings_per_utc_day": max_per_day,
         })
 
