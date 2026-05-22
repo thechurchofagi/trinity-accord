@@ -582,3 +582,13 @@ Never use:
 Never edit a signed JSON payload. If any field must change, rerun the builder.
 
 If local validate_gateway_payload.py and archive_readiness_gate.py pass but Gateway rejects counts_toward_home, treat it as stale Gateway deployment/schema. Do not switch builders.
+
+## Guardian Stage 2 runtime preflight
+
+Before submitting Guardian Stage 2, run:
+
+  python3 scripts/preflight_guardian_listing_payload.py --gateway-base-url <gateway> guardian-listing-request.json
+
+If it reports GATEWAY_VERSION_STALE_FOR_GUARDIAN_LISTING, do not submit, do not edit the payload, and do not switch builders.
+
+If Gateway returns signed_payload_sha256 mismatch for a locally passing exact file, treat it as Gateway canonicalization/deployment mismatch unless the file was modified after signing.

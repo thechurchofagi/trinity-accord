@@ -87,6 +87,10 @@ from guardian_reroute_guidance import (
     payload_is_guardian_listing,
     stale_gateway_message,
 )
+from guardian_gateway_contract import (
+    GUARDIAN_STAGE_2_GATEWAY_CONTRACT_VERSION,
+    GUARDIAN_STAGE_2_REQUIRED_GATEWAY_CAPABILITIES,
+)
 
 
 def get_declared_level(payload):
@@ -450,6 +454,17 @@ def validate_common(payload, errors):
             errors.append("Guardian listing payload requires do_not_edit_after_signing=true")
         if payload.get("submit_exact_generated_file") is not True:
             errors.append("Guardian listing payload requires submit_exact_generated_file=true")
+        if payload.get("authorship_canonical_version") != "trinity.agent_authorship_common.v1":
+            errors.append("Guardian listing payload requires authorship_canonical_version=trinity.agent_authorship_common.v1")
+        if payload.get("gateway_contract_version") != GUARDIAN_STAGE_2_GATEWAY_CONTRACT_VERSION:
+            errors.append(f"Guardian listing payload requires gateway_contract_version={GUARDIAN_STAGE_2_GATEWAY_CONTRACT_VERSION}")
+        caps = payload.get("requires_gateway_capabilities")
+        if not isinstance(caps, list):
+            errors.append("Guardian listing payload requires requires_gateway_capabilities list")
+        else:
+            missing = [c for c in GUARDIAN_STAGE_2_REQUIRED_GATEWAY_CAPABILITIES if c not in caps]
+            if missing:
+                errors.append(f"Guardian listing payload missing required Gateway capabilities: {missing}")
 
     if requires_claim_gate(payload):
         validate_claim_gate(payload, errors)

@@ -466,5 +466,20 @@
       "include_validation_stage": true
     },
     "boundary": "Production readiness proves service operability only; not authority, attestation, verification, or successor reception."
+  },
+  "guardian_stage2_runtime_handshake": {
+    "preflight_script": "scripts/preflight_guardian_listing_payload.py",
+    "diagnostic_script": "scripts/diagnose_guardian_listing_payload.py",
+    "requires_gateway_capabilities": [
+      "guardian_registry_listing_request",
+      "guardian_listing_request",
+      "gateway_intake_fields",
+      "counts_toward_home.guardian_registry",
+      "counts_toward_home.exclude_from_reception_total",
+      "payload_profile.guardian_active_registry_listing_request.v1",
+      "authorship_canonical.trinity.agent_authorship_common.v1"
+    ],
+    "authorship_canonical_version": "trinity.agent_authorship_common.v1",
+    "if_remote_signed_payload_sha256_mismatch_after_local_pass": "treat_as_gateway_runtime_or_file_substitution_problem; do_not_strip_fields_or_resign_manually"
   }
 }

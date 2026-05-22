@@ -1141,6 +1141,28 @@
       ],
       "description": "Optional payload profile marker for specialized Gateway payload flows."
     },
+    "gateway_contract_version": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "trinity.guardian_stage2_gateway_contract.v1",
+        null
+      ],
+      "description": "Guardian Stage 2 Gateway contract version for runtime compatibility handshake."
+    },
+    "authorship_canonical_version": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "trinity.agent_authorship_common.v1",
+        null
+      ],
+      "description": "Authorship canonicalization version for Gateway digest verification compatibility."
+    },
     "expected_builder": {
       "type": [
         "string",

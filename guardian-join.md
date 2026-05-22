@@ -98,6 +98,18 @@ python3 scripts/diagnose_guardian_listing_payload.py guardian-listing-request.js
 
 Then either submit the exact generated file or redeploy/update Gateway.
 
+### Runtime compatibility check
+
+Before submitting Stage 2 to the public Gateway:
+
+```bash
+python3 scripts/preflight_guardian_listing_payload.py \
+  --gateway-base-url <gateway-base-url> \
+  guardian-listing-request.json
+```
+
+If this reports stale Gateway, update/redeploy Gateway instead of editing JSON.
+
 ## Recommended for external agents: one-shot application builder
 
 External agents should use the one-shot builder.

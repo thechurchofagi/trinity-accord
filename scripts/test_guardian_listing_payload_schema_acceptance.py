@@ -20,6 +20,8 @@ ROOT = Path(__file__).resolve().parents[1]
 
 NEW_TOP_LEVEL_FIELDS = [
     "payload_profile",
+    "gateway_contract_version",
+    "authorship_canonical_version",
     "expected_builder",
     "wrong_builders",
     "do_not_edit_after_signing",

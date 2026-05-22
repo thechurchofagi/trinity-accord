@@ -49,6 +49,8 @@ def main():
         combined = diag.stdout + diag.stderr
         require(diag.returncode == 0, combined)
         require("detected_guardian_listing: True" in combined, "diagnostic did not detect Guardian listing")
+        require("gateway_contract_version: trinity.guardian_stage2_gateway_contract.v1" in combined, "diagnostic missing gateway_contract_version")
+        require("authorship_canonical_version: trinity.agent_authorship_common.v1" in combined, "diagnostic missing authorship_canonical_version")
         require("POSSIBLE_STALE_GATEWAY_DEPLOYMENT" in combined, "diagnostic missing stale gateway message")
         require("Do not edit it" in combined, "diagnostic missing no-edit instruction")
         require("Do not rebuild with build_agent_declared_echo_payload.py" in combined, "diagnostic missing wrong builder warning")

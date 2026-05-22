@@ -489,5 +489,18 @@
     "old_unsigned_records_cannot_be_retroactively_claimed": true,
     "does_not_affect_counts": true,
     "boundary": "Proves key continuity only; not authority, truth, attestation, successor reception, or amendment."
+  },
+  "guardian_stage2_runtime_preflight": {
+    "runtime_preflight": "python3 scripts/preflight_guardian_listing_payload.py --gateway-base-url <gateway> <payload>",
+    "required_gateway_capabilities": [
+      "guardian_registry_listing_request",
+      "guardian_listing_request",
+      "gateway_intake_fields",
+      "counts_toward_home.guardian_registry",
+      "counts_toward_home.exclude_from_reception_total",
+      "payload_profile.guardian_active_registry_listing_request.v1",
+      "authorship_canonical.trinity.agent_authorship_common.v1"
+    ],
+    "signed_payload_sha256_mismatch_after_local_pass": "do_not_resign_manually; check exact file and Gateway canonicalization/version"
   }
 }

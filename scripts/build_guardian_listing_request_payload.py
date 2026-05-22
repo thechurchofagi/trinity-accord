@@ -29,6 +29,15 @@ from gateway_payload_authorship import (
     attach_authorship_default_or_requested,
 )
 
+from agent_authorship_common import AUTHORSHIP_CANONICAL_VERSION
+from guardian_gateway_contract import (
+    GUARDIAN_LISTING_PAYLOAD_PROFILE,
+    GUARDIAN_STAGE_2_EXPECTED_BUILDER,
+    GUARDIAN_STAGE_2_GATEWAY_CONTRACT_VERSION,
+    GUARDIAN_STAGE_2_REQUIRED_GATEWAY_CAPABILITIES,
+    GUARDIAN_STAGE_2_WRONG_BUILDERS,
+)
+
 OATH_TEXT = """I understand this is an active Guardian registry listing request.
 
 It does not create authority, governance, attestation, verification level, successor reception, continuity-transfer status, or amendment.
@@ -156,21 +165,15 @@ def build_payload(args: argparse.Namespace) -> dict:
 
     payload = {
         "schema": "trinityaccord.agent-issue-gateway-payload.v1",
-        "payload_profile": "guardian_active_registry_listing_request.v1",
-        "expected_builder": "scripts/build_guardian_listing_request_payload.py",
-        "wrong_builders": [
-            "scripts/build_agent_declared_echo_payload.py",
-        ],
+        "payload_profile": GUARDIAN_LISTING_PAYLOAD_PROFILE,
+        "gateway_contract_version": GUARDIAN_STAGE_2_GATEWAY_CONTRACT_VERSION,
+        "authorship_canonical_version": AUTHORSHIP_CANONICAL_VERSION,
+        "expected_builder": GUARDIAN_STAGE_2_EXPECTED_BUILDER,
+        "wrong_builders": GUARDIAN_STAGE_2_WRONG_BUILDERS,
         "do_not_edit_after_signing": True,
         "submit_exact_generated_file": True,
         "if_modified_rerun_builder": True,
-        "requires_gateway_capabilities": [
-            "guardian_registry_listing_request",
-            "guardian_listing_request",
-            "gateway_intake_fields",
-            "counts_toward_home.guardian_registry",
-            "counts_toward_home.exclude_from_reception_total",
-        ],
+        "requires_gateway_capabilities": GUARDIAN_STAGE_2_REQUIRED_GATEWAY_CAPABILITIES,
         "submission_type": "echo_candidate",
         "record_intent": "auto_archive_candidate",
         "requested_archive_kind": "agent_declared_echo_archive",
@@ -267,15 +270,11 @@ def build_payload(args: argparse.Namespace) -> dict:
             },
         },
         "gateway_intake_fields": {
-            "payload_profile": "guardian_active_registry_listing_request.v1",
-            "expected_builder": "scripts/build_guardian_listing_request_payload.py",
-            "requires_gateway_capabilities": [
-                "guardian_registry_listing_request",
-                "guardian_listing_request",
-                "gateway_intake_fields",
-                "counts_toward_home.guardian_registry",
-                "counts_toward_home.exclude_from_reception_total",
-            ],
+            "payload_profile": GUARDIAN_LISTING_PAYLOAD_PROFILE,
+            "gateway_contract_version": GUARDIAN_STAGE_2_GATEWAY_CONTRACT_VERSION,
+            "authorship_canonical_version": AUTHORSHIP_CANONICAL_VERSION,
+            "expected_builder": GUARDIAN_STAGE_2_EXPECTED_BUILDER,
+            "requires_gateway_capabilities": GUARDIAN_STAGE_2_REQUIRED_GATEWAY_CAPABILITIES,
             "guardian_listing_request": True,
             "listing_source_issue": args.source_issue,
             "listing_guardian_id": args.guardian_id,
@@ -325,14 +324,18 @@ def write_submit_lock(out_path: Path) -> None:
     lock = {
         "schema": "trinityaccord.guardian-listing-submit-lock.v1",
         "payload_file": str(out_path),
-        "payload_profile": "guardian_active_registry_listing_request.v1",
-        "expected_builder": "scripts/build_guardian_listing_request_payload.py",
-        "wrong_builders": ["scripts/build_agent_declared_echo_payload.py"],
+        "payload_profile": GUARDIAN_LISTING_PAYLOAD_PROFILE,
+        "expected_builder": GUARDIAN_STAGE_2_EXPECTED_BUILDER,
+        "wrong_builders": GUARDIAN_STAGE_2_WRONG_BUILDERS,
         "signed_payload_sha256": proof.get("signed_payload_sha256"),
         "do_not_edit_after_signing": True,
         "submit_exact_generated_file": True,
         "if_modified": "Discard edited JSON and rerun scripts/build_guardian_listing_request_payload.py",
         "if_gateway_rejects_counts_toward_home_after_local_pass": "Gateway deployment/schema is stale; update Gateway rather than changing this payload.",
+        "gateway_contract_version": GUARDIAN_STAGE_2_GATEWAY_CONTRACT_VERSION,
+        "authorship_canonical_version": AUTHORSHIP_CANONICAL_VERSION,
+        "required_gateway_capabilities": GUARDIAN_STAGE_2_REQUIRED_GATEWAY_CAPABILITIES,
+        "gateway_capability_check": "Run: python3 scripts/diagnose_guardian_listing_payload.py --gateway-base-url <url> <payload>",
     }
     lock_path = out_path.with_suffix(out_path.suffix + ".submit-lock.json")
     lock_path.write_text(json.dumps(lock, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")

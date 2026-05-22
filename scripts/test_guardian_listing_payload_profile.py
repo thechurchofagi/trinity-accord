@@ -47,13 +47,19 @@ def main():
         require(payload["do_not_edit_after_signing"] is True, "missing do_not_edit_after_signing")
         require(payload["submit_exact_generated_file"] is True, "missing submit_exact_generated_file")
         require("counts_toward_home.guardian_registry" in payload["requires_gateway_capabilities"], "missing capability")
+        require(payload["gateway_contract_version"] == "trinity.guardian_stage2_gateway_contract.v1", "missing gateway_contract_version")
+        require(payload["authorship_canonical_version"] == "trinity.agent_authorship_common.v1", "missing authorship_canonical_version")
         require(payload["gateway_intake_fields"]["payload_profile"] == "guardian_active_registry_listing_request.v1", "intake missing payload_profile")
+        require(payload["gateway_intake_fields"]["gateway_contract_version"] == "trinity.guardian_stage2_gateway_contract.v1", "intake missing gateway_contract_version")
+        require(payload["gateway_intake_fields"]["authorship_canonical_version"] == "trinity.agent_authorship_common.v1", "intake missing authorship_canonical_version")
 
         lock = Path(str(out) + ".submit-lock.json")
         require(lock.exists(), "submit lock file missing")
         lock_data = json.loads(lock.read_text(encoding="utf-8"))
         require(lock_data["do_not_edit_after_signing"] is True, "lock missing do_not_edit_after_signing")
         require(lock_data["expected_builder"] == "scripts/build_guardian_listing_request_payload.py", "lock wrong expected_builder")
+        require(lock_data["gateway_contract_version"] == "trinity.guardian_stage2_gateway_contract.v1", "lock missing gateway_contract_version")
+        require(lock_data["authorship_canonical_version"] == "trinity.agent_authorship_common.v1", "lock missing authorship_canonical_version")
 
     print("GUARDIAN_LISTING_PAYLOAD_PROFILE_OK")
 

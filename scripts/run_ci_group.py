@@ -45,6 +45,9 @@ GROUPS = {
         ["python3", "scripts/test_guardian_workflow_dispatch_authorization.py"],
         ["python3", "scripts/test_guardian_listing_payload_schema_acceptance.py"],
 
+        ["python3", "scripts/test_guardian_authorship_canonical_contract.py"],
+        ["python3", "scripts/test_guardian_listing_gateway_handshake.py"],
+
 
     ],
     "chronicle": [

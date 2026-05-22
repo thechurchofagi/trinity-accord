@@ -8,17 +8,49 @@ import hashlib
 import json
 
 
-# Dynamic proof/result fields that must be excluded from authorship hash.
-# Guardian proof is excluded because it may be attached after authorship proof.
-# guardian_registration and guardian_retirement are KEPT because they are
-# substantive record claims, not dynamic proof wrappers.
-DYNAMIC_PROOF_FIELDS = (
+AUTHORSHIP_CANONICAL_VERSION = "trinity.agent_authorship_common.v1"
+
+AUTHORSHIP_CANONICAL_DYNAMIC_PROOF_FIELDS = (
     "authorship_proof",
     "_authorship_claim",
     "guardian_presence_proof",
     "_guardian_status",
     "guardian_verification_result",
 )
+
+# Dynamic proof/result fields that must be excluded from authorship hash.
+# Guardian proof is excluded because it may be attached after authorship proof.
+# guardian_registration and guardian_retirement are KEPT because they are
+# substantive record claims, not dynamic proof wrappers.
+DYNAMIC_PROOF_FIELDS = AUTHORSHIP_CANONICAL_DYNAMIC_PROOF_FIELDS
+
+
+def authorship_canonical_contract() -> dict:
+    return {
+        "authorship_canonical_version": AUTHORSHIP_CANONICAL_VERSION,
+        "canonical_json": {
+            "ensure_ascii": False,
+            "sort_keys": True,
+            "separators": [",", ":"],
+        },
+        "excluded_dynamic_fields": list(AUTHORSHIP_CANONICAL_DYNAMIC_PROOF_FIELDS),
+        "included_profile_fields": [
+            "payload_profile",
+            "expected_builder",
+            "wrong_builders",
+            "do_not_edit_after_signing",
+            "submit_exact_generated_file",
+            "if_modified_rerun_builder",
+            "requires_gateway_capabilities",
+            "gateway_contract_version",
+            "authorship_canonical_version",
+            "gateway_intake_fields",
+            "guardian_registry_listing_request",
+            "guardian_listing_request",
+            "counts_toward_home",
+        ],
+        "rule": "Do not strip or normalize non-dynamic payload fields before authorship digest verification.",
+    }
 
 
 def canonical_payload_without_authorship(payload):
