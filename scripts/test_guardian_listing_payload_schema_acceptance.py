@@ -58,13 +58,14 @@ def main():
                 "--agent-name", "Schema Acceptance Test Agent",
                 "--provider", "Test Provider",
                 "--source-issue", "9999",
-                "--guardian-id", "guardian_ed25519_schematest0000",
+                "--guardian-id", "guardian_ed25519_a0b1c2d3e4f5a6b7",
                 "--public-key-sha256",
                 "aaaaaaaaaaaaaaaa000000000000000000000000000000000000000000000000",
                 "--label", "Schema Acceptance Test",
                 "--guardian-type", "human_with_ai_agent",
                 "--application-mode", "joint_human_ai",
                 "--idempotency-key", "guardian-schema-acceptance-test-0001",
+                "--no-authorship-proof",
                 "--out", str(out),
             ],
             cwd=ROOT,
@@ -73,7 +74,7 @@ def main():
             timeout=90,
         )
 
-        require(result.returncode == 0, result.stdout + result.stderr)
+        require(result.returncode == 0, result.stdout + "\n" + result.stderr)
         payload = json.loads(out.read_text(encoding="utf-8"))
 
     # 3. Payload includes all new top-level fields
@@ -89,7 +90,6 @@ def main():
 
         jsonschema.validate(instance=payload, schema=schema)
     except ImportError:
-        # jsonschema not available; field-presence checks above still pass
         pass
     except jsonschema.ValidationError as exc:
         raise AssertionError(
