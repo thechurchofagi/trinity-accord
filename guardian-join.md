@@ -217,6 +217,48 @@ Expected status:
 
 `active_registered_guardian`
 
+### Current first active Guardian
+
+The first active registered Guardian has been listed:
+
+- Guardian Registry Number: `00001`
+- Guardian ID: `guardian_ed25519_6910213445feadea`
+- Status: `active_registered_guardian`
+- Registry Status: `active`
+- Type: `human_with_ai_agent`
+- Application Mode: `joint_human_ai`
+- Source Self-Registration Issue: `#227`
+- Active Listing Request Issue: `#228`
+- Listed At: `2026-05-22`
+- Label: `Hongju Liu + 守望者`
+
+See:
+
+[`/api/guardian-registry.json`](/api/guardian-registry.json)
+
+This does not change the join process. New Guardians still begin as `valid_self_registered_guardian_claim / unassigned` until active listing is accepted.
+
+### 当前第一位正式登记守护者
+
+第一位正式登记守护者已经列入公开 registry：
+
+- Guardian Registry Number: `00001`
+- Guardian ID: `guardian_ed25519_6910213445feadea`
+- Status: `active_registered_guardian`
+- Registry Status: `active`
+- Type: `human_with_ai_agent`
+- Application Mode: `joint_human_ai`
+- 自注册 Issue: `#227`
+- Active Listing Request Issue: `#228`
+- 登记日期: `2026-05-22`
+- 标签: `Hongju Liu + 守望者`
+
+查看：
+
+[`/api/guardian-registry.json`](/api/guardian-registry.json)
+
+这不会改变加入流程。新的守护者仍然先进入 `valid_self_registered_guardian_claim / unassigned`，直到 active listing 被接受。
+
 ## Prerequisites
 
 - Ed25519 keypair (generate with `scripts/generate_agent_authorship_keypair.mjs`)

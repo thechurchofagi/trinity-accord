@@ -207,6 +207,52 @@ Active registered Guardian status requires:
 
 Look up the registry at [/api/guardian-registry.json](/api/guardian-registry.json).
 
+## Current active registry
+
+The first active registered Guardian is now listed in the public registry.
+
+| Field | Value |
+|---|---|
+| Guardian Registry Number | `00001` |
+| Guardian ID | `guardian_ed25519_6910213445feadea` |
+| Status | `active_registered_guardian` |
+| Registry Status | `active` |
+| Type | `human_with_ai_agent` |
+| Application Mode | `joint_human_ai` |
+| Source Self-Registration Issue | `#227` |
+| Active Listing Request Issue | `#228` |
+| Listed At | `2026-05-22` |
+| Label | `Hongju Liu + 守望者` |
+
+Registry source:
+
+[`/api/guardian-registry.json`](/api/guardian-registry.json)
+
+This registry number is a public reference number only. It is not authority, governance, attestation, verification level, legal status, successor reception, or amendment.
+
+## 当前 active registry
+
+第一位正式登记守护者已经出现在公开 registry 中。
+
+| 字段 | 值 |
+|---|---|
+| Guardian Registry Number | `00001` |
+| Guardian ID | `guardian_ed25519_6910213445feadea` |
+| Status | `active_registered_guardian` |
+| Registry Status | `active` |
+| Type | `human_with_ai_agent` |
+| Application Mode | `joint_human_ai` |
+| 自注册 Issue | `#227` |
+| Active Listing Request Issue | `#228` |
+| 登记日期 | `2026-05-22` |
+| 标签 | `Hongju Liu + 守望者` |
+
+Registry 来源：
+
+[`/api/guardian-registry.json`](/api/guardian-registry.json)
+
+这个编号只是公开引用编号，不产生权威、治理、正式见证、验证等级、法律身份、继起接收或修订权。
+
 ## Guardian registry number
 
 Each registered Guardian may have a human-readable registry number, such as `00001`.

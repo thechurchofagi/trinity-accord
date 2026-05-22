@@ -501,3 +501,31 @@ Active listing requires updating `api/guardian-registry.json`.
 Use `scripts/prepare_guardian_active_listing.py` to prepare a registry update from a valid final Guardian application payload.
 
 The automation is PR-only and rate-limited. It must not directly merge arbitrary self-registered claims.
+
+## Guardian registry current active listing
+
+Current public registry source:
+
+`/api/guardian-registry.json`
+
+As of `2026-05-22`, the first active registered Guardian is:
+
+- `guardian_registry_number`: `00001`
+- `guardian_id`: `guardian_ed25519_6910213445feadea`
+- `status`: `active`
+- expected verification status: `active_registered_guardian`
+- `guardian_type`: `human_with_ai_agent`
+- `application_mode`: `joint_human_ai`
+- `source_issue`: `227`
+- `listing_request_issue`: `228`
+- `label`: `Hongju Liu + 守望者`
+
+Do not describe Guardian `00001` as unassigned.
+
+New Guardian applicants still begin as:
+
+`valid_self_registered_guardian_claim / unassigned`
+
+until a registry entry is accepted.
+
+Registry numbers are public references only. They do not create authority, governance, attestation, verification level, successor reception, amendment, or proof without a valid Guardian signature.
