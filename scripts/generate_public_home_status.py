@@ -670,7 +670,13 @@ def render_block(status: dict[str, Any]) -> str:
     r = status["reception"]
     ew = status["external_witness_records"]
     b = status["boundary"]
-    g = status["guardian_registry"]
+    g = status.get("guardian_registry", {
+        "active_count": 0, "reserved_active_count": 0, "ordinary_auto_active_count": 0,
+        "next_ordinary_number_if_new_valid_listing": "00100", "ordinary_auto_start": "00100",
+        "special_reserved_range": "00001-00099",
+        "by_guardian_type": {"human": 0, "ai_agent": 0, "human_with_ai_agent": 0, "automated_script": 0, "unknown": 0},
+        "by_application_mode": {},
+    })
     guardian_type_line = render_guardian_type_inline(g.get("by_guardian_type", {}))
     guardian_type_line_zh = render_guardian_type_inline_zh(g.get("by_guardian_type", {}))
     digest = status["source_digest"]
