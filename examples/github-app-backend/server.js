@@ -1159,10 +1159,10 @@ async function runGatewayPipeline(payload, {
   // 1. Normalize archive intent defaults only after wrapper rejection.
   payload = normalizeArchiveIntentDefaults(payload);
 
+  // NOTE: idempotency key injection is DEFERRED to after authorship proof
+  // verification. Injecting it before would mutate the payload and cause
+  // computed_payload_sha256_by_gateway to diverge from the signed digest.
   const idempotencyKey = computeIdempotencyKey(payload);
-  if (!payload.idempotency_key) {
-    payload.idempotency_key = idempotencyKey;
-  }
 
   // 1b. V0-V5 fail-closed: reject wrong path BEFORE any other validation
   // Must run AFTER normalization so we see the final record_intent/requested_archive_kind,
@@ -1410,6 +1410,12 @@ async function runGatewayPipeline(payload, {
     }
 
     payload._authorship_claim = authorship;
+
+    // NOW inject idempotency key (after authorship proof verification to preserve digest)
+    if (!payload.idempotency_key) {
+      payload.idempotency_key = idempotencyKey;
+    }
+
     fs.writeFileSync(payloadPath, JSON.stringify(payload, null, 2), "utf-8");
 
     // 4c. Guardian status verification
