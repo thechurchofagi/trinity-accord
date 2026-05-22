@@ -406,7 +406,7 @@ Registry listing is automatic for valid requests.
 
 Registry listing does not create authority.
 
-Repository automation assigns the next available registry number, starting from `00001`.
+Repository automation assigns the next available registry number. Ordinary automated listings start from `00100`; `00001`–`00099` are special reserved numbers.
 
 ## Active registry listing automation
 

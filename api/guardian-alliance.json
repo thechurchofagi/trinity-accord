@@ -160,21 +160,15 @@
     ]
   },
   "guardian_registry_number_policy": {
-    "enabled": true,
-    "field": "guardian_registry_number",
-    "format": "five_digit_decimal_string",
-    "example": "00001",
-    "source_of_truth": "/api/guardian-registry.json",
     "assigned_by_registry": true,
     "assigned_by_repository_automation": true,
     "submitter_must_not_supply": true,
     "system_generated_next_available": true,
     "not_self_claimed": true,
-    "not_cryptographic_identity": true,
-    "does_not_replace_guardian_id": true,
-    "does_not_prove_key_possession": true,
-    "does_not_prove_authority": true,
-    "does_not_prove_attestation": true,
-    "does_not_change_verification_level": true
+    "ordinary_auto_start": "00100",
+    "special_reserved_range": "00001-00099",
+    "future_ordinary_registrations_start_at": "00100",
+    "reserved_numbers_remain_valid": true,
+    "numbering_note": "00001-00099 are special reserved Guardian registry numbers. Future ordinary automatic listings start at 00100."
   }
 }

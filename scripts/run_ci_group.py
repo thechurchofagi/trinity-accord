@@ -11,6 +11,7 @@ GROUPS = {
         ["python3", "scripts/test_guardian_gateway_integration.py"],
         ["python3", "scripts/test_guardian_status_enum_consistency.py"],
         ["python3", "scripts/test_guardian_registry_numbers.py"],
+        ["python3", "scripts/test_guardian_reserved_numbering_policy.py"],
         ["python3", "scripts/test_guardian_active_listing_automation.py"],
         ["python3", "scripts/test_guardian_listing_request_builder.py"],
         ["python3", "scripts/test_guardian_auto_registration_from_gateway_issues.py"],

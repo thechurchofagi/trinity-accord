@@ -27,6 +27,19 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+ROOT = Path(__file__).resolve().parents[1]
+DEFAULT_POLICY_PATH = ROOT / "api" / "guardian-active-listing-policy.v1.json"
+
+sys.path.insert(0, str(ROOT / "scripts"))
+
+from guardian_numbering_policy import (
+    GuardianNumberingError,
+    next_registry_number as next_guardian_registry_number,
+    numbering_error_to_decision,
+    parse_registry_number,
+    validate_numbering_sequence,
+)
+
 GATEWAY_BOT_SUFFIX = "[bot]"
 GATEWAY_SERVICE = "trinity-agent-issue-gateway"
 
@@ -292,7 +305,7 @@ def parse_listing_issue(listing_issue: dict, allow_non_bot: bool) -> tuple[dict 
     }, None
 
 
-def validate_registry(registry: dict) -> dict | None:
+def validate_registry(registry: dict, policy: dict | None = None) -> dict | None:
     if registry.get("schema") != "trinityaccord.guardian-registry.v1":
         return decision(False, "blocked", "BAD_REGISTRY_SCHEMA", "Bad registry schema.")
 
@@ -301,6 +314,7 @@ def validate_registry(registry: dict) -> dict | None:
         return decision(False, "blocked", "BAD_REGISTRY_GUARDIANS", "registry.guardians must be a list.")
 
     numbers = set()
+    number_ints = []
     guardian_ids = set()
     public_keys = set()
 
@@ -311,6 +325,11 @@ def validate_registry(registry: dict) -> dict | None:
 
         if not re.fullmatch(r"[0-9]{5}", n):
             return decision(False, "blocked", "BAD_REGISTRY_NUMBER", "Invalid registry number.", number=n)
+
+        try:
+            number_ints.append(parse_registry_number(n))
+        except GuardianNumberingError as err:
+            return numbering_error_to_decision(err)
 
         if not re.fullmatch(r"guardian_ed25519_[a-f0-9]{16}", gid):
             return decision(False, "blocked", "BAD_REGISTRY_GUARDIAN_ID", "Invalid guardian_id.", guardian_id=gid)
@@ -331,20 +350,13 @@ def validate_registry(registry: dict) -> dict | None:
         guardian_ids.add(gid)
         public_keys.add(pk)
 
-    if numbers:
-        got = sorted(int(n) for n in numbers)
-        expected = list(range(1, max(got) + 1))
-        if got != expected:
-            return decision(False, "blocked", "REGISTRY_NUMBER_GAP", "Existing registry numbers must be gapless.", got=got, expected=expected)
+    try:
+        validate_numbering_sequence(sorted(number_ints), policy)
+    except GuardianNumberingError as err:
+        return numbering_error_to_decision(err)
 
     return None
 
-
-def next_registry_number(registry: dict) -> str:
-    max_n = 0
-    for g in registry.get("guardians", []):
-        max_n = max(max_n, int(g["guardian_registry_number"]))
-    return f"{max_n + 1:05d}"
 
 
 def boundary() -> dict:
@@ -359,8 +371,15 @@ def boundary() -> dict:
     }
 
 
-def auto_register(registry: dict, listing_issue: dict, source_issue: dict, listed_at: str, allow_non_bot: bool = False) -> tuple[dict, dict]:
-    err = validate_registry(registry)
+def auto_register(
+    registry: dict,
+    listing_issue: dict,
+    source_issue: dict,
+    listed_at: str,
+    allow_non_bot: bool = False,
+    policy: dict | None = None,
+) -> tuple[dict, dict]:
+    err = validate_registry(registry, policy)
     if err:
         return registry, err
 
@@ -442,7 +461,10 @@ def auto_register(registry: dict, listing_issue: dict, source_issue: dict, liste
                 existing=g,
             )
 
-    number = next_registry_number(registry)
+    try:
+        number = next_guardian_registry_number(registry, policy)
+    except GuardianNumberingError as err:
+        return registry, numbering_error_to_decision(err)
     entry = {
         "guardian_registry_number": number,
         "guardian_id": listing["guardian_id"],
@@ -461,7 +483,7 @@ def auto_register(registry: dict, listing_issue: dict, source_issue: dict, liste
     updated = json.loads(json.dumps(registry, ensure_ascii=False))
     updated["guardians"].append(entry)
 
-    err = validate_registry(updated)
+    err = validate_registry(updated, policy)
     if err:
         return registry, err
 
@@ -488,11 +510,14 @@ def main() -> None:
     parser.add_argument("--decision-out", required=True)
     parser.add_argument("--listed-at", default=None)
     parser.add_argument("--allow-non-bot-issues", action="store_true", help="Test-only escape hatch")
+    parser.add_argument("--policy", default=str(DEFAULT_POLICY_PATH))
     args = parser.parse_args()
 
     registry = load_json(args.registry)
     listing_issue = load_json(args.listing_issue_json)
     source_issue = load_json(args.source_issue_json)
+
+    policy = load_json(args.policy) if args.policy else None
 
     listed_at = args.listed_at or datetime.now(timezone.utc).date().isoformat()
 
@@ -502,6 +527,7 @@ def main() -> None:
         source_issue,
         listed_at,
         allow_non_bot=args.allow_non_bot_issues,
+        policy=policy,
     )
 
     write_json(args.decision_out, d)

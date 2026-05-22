@@ -39,10 +39,22 @@ def main():
     require(len(guardian_ids) == len(set(guardian_ids)), "duplicate guardian_id found")
     require(len(key_hashes) == len(set(key_hashes)), "duplicate public_key_sha256 found")
 
+    require("00000" not in numbers, "00000 is not a valid Guardian registry number")
+
     if numbers:
         ints = sorted(int(n) for n in numbers)
-        expected = list(range(1, max(ints) + 1))
-        require(ints == expected, f"guardian_registry_number sequence has gaps: got {ints}, expected {expected}")
+        reserved = [n for n in ints if n < 100]
+        ordinary = [n for n in ints if n >= 100]
+
+        for n in reserved:
+            require(1 <= n <= 99, f"reserved registry number out of allowed range: {n:05d}")
+
+        if ordinary:
+            expected_ordinary = list(range(100, max(ordinary) + 1))
+            require(
+                ordinary == expected_ordinary,
+                f"ordinary guardian_registry_number sequence has gaps: got {ordinary}, expected {expected_ordinary}"
+            )
 
     print("GUARDIAN_REGISTRY_NUMBERS_OK")
 

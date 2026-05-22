@@ -2,7 +2,7 @@ name: Guardian Registry Auto-List
 
 on:
   issues:
-    types: [opened, edited, reopened, closed]
+    types: [opened]
   workflow_dispatch:
     inputs:
       listing_issue:
@@ -158,6 +158,7 @@ jobs:
           set -euo pipefail
           python3 scripts/auto_register_guardian_from_gateway_issues.py \
             --registry api/guardian-registry.json \
+            --policy api/guardian-active-listing-policy.v1.json \
             --listing-issue-json listing_issue.json \
             --source-issue-json source_issue.json \
             --out-registry api/guardian-registry.json \
@@ -179,19 +180,103 @@ jobs:
           print(f"guardian_id={d.get('guardian_id', '')}")
           PY
 
-      - name: Commit registry update
+      - name: Commit registry update locally
         if: (steps.candidate.outputs.should_run == 'true' || github.event_name == 'workflow_dispatch') && steps.decision.outputs.action == 'registered'
-        id: commit
+        id: local_commit
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add api/guardian-registry.json
+          if git diff --cached --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No registry changes to commit."
+            exit 0
+          fi
           git commit -m "Auto-register Guardian ${{ steps.decision.outputs.number }}"
-          git push
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+          echo "commit_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
 
-      - name: Comment success
-        if: (steps.candidate.outputs.should_run == 'true' || github.event_name == 'workflow_dispatch') && steps.decision.outputs.action == 'registered'
+      - name: Try direct push to main
+        if: steps.local_commit.outputs.changed == 'true'
+        id: push_main
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          git push origin HEAD:main
+
+      - name: Create fallback branch when main push fails
+        if: steps.local_commit.outputs.changed == 'true' && steps.push_main.outcome != 'success'
+        id: fallback_branch
+        run: |
+          set -euo pipefail
+          BRANCH="auto/guardian-register-${{ steps.decision.outputs.number }}-${{ github.run_id }}"
+          git push origin HEAD:"$BRANCH"
+          echo "branch=$BRANCH" >> "$GITHUB_OUTPUT"
+
+      - name: Create fallback PR and request auto-merge
+        if: steps.local_commit.outputs.changed == 'true' && steps.push_main.outcome != 'success'
+        id: fallback_pr
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
+        with:
+          script: |
+            const fs = require("fs");
+            const d = JSON.parse(fs.readFileSync("guardian-auto-registration-decision.json", "utf8"));
+            const head = "${{ steps.fallback_branch.outputs.branch }}";
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+
+            const { data: pr } = await github.rest.pulls.create({
+              owner,
+              repo,
+              title: `Auto-register Guardian ${d.guardian_registry_number}`,
+              head,
+              base: "main",
+              body: [
+                "Automated Guardian registry listing.",
+                "",
+                `Guardian Registry Number: \`${d.guardian_registry_number}\``,
+                "",
+                `Guardian ID: \`${d.guardian_id}\``,
+                "",
+                `Source self-registration issue: #${d.source_issue}`,
+                "",
+                `Listing request issue: #${d.listing_request_issue}`,
+                "",
+                "Boundary: this registry listing is non-authoritative, non-governing, not attestation, not a verification level, not successor reception, and not an amendment.",
+                "",
+                "This PR was created because direct push to `main` failed or is blocked by branch protection."
+              ].join("\n"),
+              maintainer_can_modify: true
+            });
+
+            core.setOutput("pr_number", String(pr.number));
+            core.setOutput("pr_url", pr.html_url);
+
+            try {
+              await github.graphql(`
+                mutation($pullRequestId: ID!) {
+                  enablePullRequestAutoMerge(input: {
+                    pullRequestId: $pullRequestId,
+                    mergeMethod: SQUASH
+                  }) {
+                    pullRequest {
+                      number
+                      autoMergeRequest {
+                        enabledAt
+                      }
+                    }
+                  }
+                }
+              `, { pullRequestId: pr.node_id });
+              core.setOutput("auto_merge_requested", "true");
+            } catch (error) {
+              core.warning(`Auto-merge request failed: ${error.message}`);
+              core.setOutput("auto_merge_requested", "false");
+            }
+
+      - name: Comment complete after direct push
+        if: steps.local_commit.outputs.changed == 'true' && steps.push_main.outcome == 'success'
         uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
         with:
           script: |
@@ -213,6 +298,46 @@ jobs:
                 `Source self-registration issue: #${d.source_issue}`,
                 "",
                 `Listing request issue: #${d.listing_request_issue}`,
+                "",
+                `Registry commit: \`${{ steps.local_commit.outputs.commit_sha }}\``,
+                "",
+                "Boundary: this registry listing is non-authoritative, non-governing, not attestation, not a verification level, not successor reception, and not an amendment."
+              ].join("\n")
+            });
+
+      - name: Comment fallback PR created
+        if: steps.local_commit.outputs.changed == 'true' && steps.push_main.outcome != 'success'
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
+        with:
+          script: |
+            const fs = require("fs");
+            const d = JSON.parse(fs.readFileSync("guardian-auto-registration-decision.json", "utf8"));
+            const prUrl = "${{ steps.fallback_pr.outputs.pr_url }}";
+            const autoMerge = "${{ steps.fallback_pr.outputs.auto_merge_requested }}";
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: parseInt("${{ steps.candidate.outputs.listing_issue }}", 10),
+              body: [
+                "<!-- trinity-guardian-auto-registration:v1 -->",
+                "",
+                "### Guardian Auto-Registration PR Created",
+                "",
+                `Guardian Registry Number: \`${d.guardian_registry_number}\``,
+                "",
+                `Guardian ID: \`${d.guardian_id}\``,
+                "",
+                `Source self-registration issue: #${d.source_issue}`,
+                "",
+                `Listing request issue: #${d.listing_request_issue}`,
+                "",
+                `PR: ${prUrl}`,
+                "",
+                `Auto-merge requested: \`${autoMerge}\``,
+                "",
+                "Direct push to `main` did not complete, so a fallback PR was created.",
+                "",
+                "This registry entry is not final until the PR is merged into `main`.",
                 "",
                 "Boundary: this registry listing is non-authoritative, non-governing, not attestation, not a verification level, not successor reception, and not an amendment."
               ].join("\n")
@@ -240,27 +365,58 @@ jobs:
               ].join("\n")
             });
 
-      - name: Comment blocked
+      - name: Comment blocked or write failed
         if: failure() && (steps.candidate.outputs.should_run == 'true' || github.event_name == 'workflow_dispatch')
         uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
         with:
           script: |
             const fs = require("fs");
-            let body = "<!-- trinity-guardian-auto-registration:v1 -->\n\n### Guardian Auto-Registration Blocked\n\nThe workflow failed before producing a decision file.\n\nNo registry number was assigned.";
+            let body = [
+              "<!-- trinity-guardian-auto-registration:v1 -->",
+              "",
+              "### Guardian Auto-Registration Blocked",
+              "",
+              "The workflow failed before producing a decision file.",
+              "",
+              "No registry entry is final unless `/api/guardian-registry.json` contains it."
+            ].join("\n");
+
             if (fs.existsSync("guardian-auto-registration-decision.json")) {
               const d = JSON.parse(fs.readFileSync("guardian-auto-registration-decision.json", "utf8"));
-              body = [
-                "<!-- trinity-guardian-auto-registration:v1 -->",
-                "",
-                "### Guardian Auto-Registration Blocked",
-                "",
-                `Code: \`${d.code || "unknown"}\``,
-                "",
-                d.message || "No message.",
-                "",
-                "No registry number was assigned."
-              ].join("\n");
+
+              if (d.code === "REGISTERED" || d.action === "registered") {
+                body = [
+                  "<!-- trinity-guardian-auto-registration:v1 -->",
+                  "",
+                  "### Guardian Registry Write Failed After Registration Decision",
+                  "",
+                  `Decision: \`${d.code || d.action}\``,
+                  "",
+                  `Intended Guardian Registry Number: \`${d.guardian_registry_number || "unknown"}\``,
+                  "",
+                  `Guardian ID: \`${d.guardian_id || "unknown"}\``,
+                  "",
+                  "The registration decision succeeded, but the workflow failed before the registry update became final.",
+                  "",
+                  "No registry entry is final unless `/api/guardian-registry.json` contains it.",
+                  "",
+                  "Likely causes: branch protection, Actions write permissions, or push conflict."
+                ].join("\n");
+              } else {
+                body = [
+                  "<!-- trinity-guardian-auto-registration:v1 -->",
+                  "",
+                  "### Guardian Auto-Registration Blocked",
+                  "",
+                  `Code: \`${d.code || "unknown"}\``,
+                  "",
+                  d.message || "No message.",
+                  "",
+                  "No registry number was assigned."
+                ].join("\n");
+              }
             }
+
             await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,

@@ -410,7 +410,10 @@
         "submitter_must_not_supply_guardian_registry_number": true,
         "listing_request_builder": "scripts/build_guardian_listing_request_payload.py",
         "registry_write_workflow": ".github/workflows/guardian-registry-auto-list.yml",
-        "boundary": "Automatic registry listing remains non-authoritative, non-governing, not attestation, not a verification level, not successor reception, and not amendment."
+        "boundary": "Automatic registry listing remains non-authoritative, non-governing, not attestation, not a verification level, not successor reception, and not amendment.",
+        "ordinary_auto_start": "00100",
+        "special_reserved_range": "00001-00099",
+        "numbering_note": "Future ordinary automatic listings start at 00100. Existing 00001-00099 entries are special reserved and remain valid."
       }
     },
     "does_not_affect_counts": true,

@@ -17,6 +17,10 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from verify_guardian_status import verify_guardian_status
+from guardian_numbering_policy import (
+    GuardianNumberingError,
+    next_registry_number as next_guardian_registry_number,
+)
 
 
 def fail(error_code, message, details=None, exit_code=2):
@@ -55,27 +59,6 @@ def parse_date(value):
     return datetime.now(timezone.utc).date().isoformat()
 
 
-def next_registry_number(guardians):
-    numbers = []
-    for entry in guardians:
-        number = entry.get("guardian_registry_number")
-        if not isinstance(number, str) or not re.fullmatch(r"[0-9]{5}", number):
-            fail("E_BAD_EXISTING_REGISTRY_NUMBER", "Existing registry number is invalid", {"entry": entry})
-        numbers.append(int(number))
-
-    if not numbers:
-        return "00001"
-
-    got = sorted(numbers)
-    expected = list(range(1, max(got) + 1))
-    if got != expected:
-        fail("E_REGISTRY_NUMBER_GAP", "Existing registry numbers have gaps", {
-            "got": got,
-            "expected": expected,
-        })
-
-    return f"{max(got) + 1:05d}"
-
 
 def existing_by(guardians, key, value):
     return [g for g in guardians if g.get(key) == value]
@@ -106,8 +89,12 @@ def main():
     registry = load_json(args.registry)
     policy = load_json(args.policy)
 
-    if policy.get("automation_mode") != "create_pr_only":
-        fail("E_UNSUPPORTED_AUTOMATION_MODE", "Policy automation_mode must be create_pr_only")
+    if policy.get("automation_mode") not in {"create_pr_only", "auto_commit_or_pr"}:
+        fail(
+            "E_UNSUPPORTED_AUTOMATION_MODE",
+            "Policy automation_mode must be create_pr_only or auto_commit_or_pr",
+            {"automation_mode": policy.get("automation_mode")},
+        )
 
     guardians = registry.get("guardians")
     if not isinstance(guardians, list):
@@ -179,7 +166,10 @@ def main():
             "max_new_active_listings_per_utc_day": max_per_day,
         })
 
-    number = next_registry_number(guardians)
+    try:
+        number = next_guardian_registry_number(guardians, policy)
+    except GuardianNumberingError as err:
+        fail(err.code, err.message, err.details)
 
     new_entry = {
         "guardian_registry_number": number,

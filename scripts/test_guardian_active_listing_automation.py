@@ -41,14 +41,24 @@ def policy(max_per_day=3):
     return {
         "schema": "trinityaccord.guardian-active-listing-policy.v1",
         "version": "1.0.0",
-        "automation_mode": "create_pr_only",
+        "automation_mode": "auto_commit_or_pr",
         "max_new_active_listings_per_run": 1,
         "max_new_active_listings_per_utc_day": max_per_day,
         "require_valid_self_registered_claim": True,
         "require_unique_guardian_id": True,
         "require_unique_public_key_sha256": True,
         "require_unique_source_issue": True,
-        "require_unique_listing_request_issue": True
+        "require_unique_listing_request_issue": True,
+        "numbering": {
+            "format": "five_digit_zero_padded",
+            "ordinary_auto_start": "00100",
+            "special_reserved_ranges": [
+                {"start": "00001", "end": "00099", "purpose": "special_reserved_guardian_numbers"}
+            ],
+            "ordinary_auto_gapless_from": "00100",
+            "global_gapless": False,
+            "reserved_gaps_allowed": True
+        }
     }
 
 
@@ -100,12 +110,12 @@ def main():
         summary = json.loads(result.stdout)
         assert summary["ok"] is True
         assert summary["changed"] is True
-        assert summary["guardian_registry_number"] == "00001"
+        assert summary["guardian_registry_number"] == "00100"
 
         updated = json.loads(out_registry.read_text(encoding="utf-8"))
         assert len(updated["guardians"]) == 1
         entry = updated["guardians"][0]
-        assert entry["guardian_registry_number"] == "00001"
+        assert entry["guardian_registry_number"] == "00100"
         assert entry["status"] == "active"
         assert entry["source_issue"] == 227
         assert entry["listing_request_issue"] == 228
@@ -118,7 +128,7 @@ def main():
         ])
         verification = json.loads(verify.stdout)
         assert verification["guardian_status"] == "active_registered_guardian"
-        assert verification["guardian_registry_number"] == "00001"
+        assert verification["guardian_registry_number"] == "00100"
 
         duplicate = run([
             "python3", str(PREPARE),

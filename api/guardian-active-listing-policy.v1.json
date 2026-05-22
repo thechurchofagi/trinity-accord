@@ -23,12 +23,28 @@
     "duplicate_guardian_id_conflict",
     "duplicate_public_key_conflict",
     "malformed_registry",
-    "repository_write_failure"
+    "repository_write_failure",
+    "registry_push_failed_without_pr_fallback",
+    "ordinary_auto_number_gap"
   ],
   "numbering": {
     "format": "five_digit_zero_padded",
-    "start": "00001",
-    "gapless": true
+    "ordinary_auto_start": "00100",
+    "special_reserved_ranges": [
+      {
+        "start": "00001",
+        "end": "00099",
+        "purpose": "special_reserved_guardian_numbers"
+      }
+    ],
+    "ordinary_auto_gapless_from": "00100",
+    "global_gapless": false,
+    "reserved_gaps_allowed": true,
+    "notes": [
+      "00001-00099 are special reserved Guardian registry numbers.",
+      "Ordinary automated Guardian registrations start at 00100.",
+      "Existing reserved entries remain valid and must not be renumbered."
+    ]
   },
   "authority_boundary": {
     "not_authority": true,

@@ -267,6 +267,20 @@ The cryptographic Guardian ID remains derived from the public key:
 
 A valid Guardian proof requires a valid signature. A registry number alone proves nothing.
 
+### Guardian registry number policy
+
+`guardian_registry_number` is system-generated only.
+
+`00001`–`00099` are special reserved Guardian numbers.
+
+Future ordinary automated Guardian registrations start at `00100`.
+
+Existing reserved entries such as `00001`, `00002`, and `00003` remain valid and must not be renumbered.
+
+A Guardian, user, agent, or listing request must not self-assign a registry number.
+
+A registry number is not authority, not governance, not attestation, not a verification level, not successor reception, and not amendment.
+
 ## How to verify
 
 1. Verify Guardian Ed25519 signature.
