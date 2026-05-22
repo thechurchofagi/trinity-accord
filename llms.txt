@@ -511,7 +511,7 @@ Current public registry source:
 As of `2026-05-22`, the first active registered Guardian is:
 
 - `guardian_registry_number`: `00001`
-- `guardian_id`: `guardian_ed25519_6910213445feadea`
+- `guardian_id`: `guardian_ed25519_1f9b38ad0945daf1`
 - `status`: `active`
 - expected verification status: `active_registered_guardian`
 - `guardian_type`: `human_with_ai_agent`

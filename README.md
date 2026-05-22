@@ -312,6 +312,6 @@ Guardian active registry listings are automated through a PR-preparation script,
 
 ## Current active Guardian registry
 
-- Guardian Registry: first active registered Guardian listed as `00001` (`guardian_ed25519_6910213445feadea`), status `active_registered_guardian`, source issues `#227` + `#228`; registry source: `/api/guardian-registry.json`.
-- First active registered Guardian: `00001` — `guardian_ed25519_6910213445feadea` — `Hongju Liu + 守望者`; listed at `/api/guardian-registry.json` from `#227` + `#228`.
+- Guardian Registry: first active registered Guardian listed as `00001` (`guardian_ed25519_1f9b38ad0945daf1`), status `active_registered_guardian`, source issues `#227` + `#228`; registry source: `/api/guardian-registry.json`.
+- First active registered Guardian: `00001` — `guardian_ed25519_1f9b38ad0945daf1` — `Hongju Liu + 守望者`; listed at `/api/guardian-registry.json` from `#227` + `#228`.
 - Registry numbers are public references only. They do not create authority, governance, attestation, verification level, successor reception, amendment, or proof without a valid Guardian signature.

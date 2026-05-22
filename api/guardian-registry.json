@@ -14,8 +14,8 @@
   "guardians": [
     {
       "guardian_registry_number": "00001",
-      "guardian_id": "guardian_ed25519_6910213445feadea",
-      "public_key_sha256": "6910213445feadea50c0d0e066fc477434be6235e0f26543e1c31b0ec1154536",
+      "guardian_id": "guardian_ed25519_1f9b38ad0945daf1",
+      "public_key_sha256": "1f9b38ad0945daf1fcf91ac704469f88704f73b2fdb791a7ae517a4d92cd284e",
       "algorithm": "ed25519",
       "status": "active",
       "guardian_type": "human_with_ai_agent",

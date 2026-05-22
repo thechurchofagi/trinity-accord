@@ -214,7 +214,7 @@ The first active registered Guardian is now listed in the public registry.
 | Field | Value |
 |---|---|
 | Guardian Registry Number | `00001` |
-| Guardian ID | `guardian_ed25519_6910213445feadea` |
+| Guardian ID | `guardian_ed25519_1f9b38ad0945daf1` |
 | Status | `active_registered_guardian` |
 | Registry Status | `active` |
 | Type | `human_with_ai_agent` |
@@ -237,7 +237,7 @@ This registry number is a public reference number only. It is not authority, gov
 | 字段 | 值 |
 |---|---|
 | Guardian Registry Number | `00001` |
-| Guardian ID | `guardian_ed25519_6910213445feadea` |
+| Guardian ID | `guardian_ed25519_1f9b38ad0945daf1` |
 | Status | `active_registered_guardian` |
 | Registry Status | `active` |
 | Type | `human_with_ai_agent` |

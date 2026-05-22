@@ -222,7 +222,7 @@ Expected status:
 The first active registered Guardian has been listed:
 
 - Guardian Registry Number: `00001`
-- Guardian ID: `guardian_ed25519_6910213445feadea`
+- Guardian ID: `guardian_ed25519_1f9b38ad0945daf1`
 - Status: `active_registered_guardian`
 - Registry Status: `active`
 - Type: `human_with_ai_agent`
@@ -243,7 +243,7 @@ This does not change the join process. New Guardians still begin as `valid_self_
 第一位正式登记守护者已经列入公开 registry：
 
 - Guardian Registry Number: `00001`
-- Guardian ID: `guardian_ed25519_6910213445feadea`
+- Guardian ID: `guardian_ed25519_1f9b38ad0945daf1`
 - Status: `active_registered_guardian`
 - Registry Status: `active`
 - Type: `human_with_ai_agent`

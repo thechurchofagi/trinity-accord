@@ -13,7 +13,7 @@ The machine-readable registry source is:
 
 | Number | Guardian ID | Status | Type | Source |
 |---|---|---|---|---|
-| `00001` | `guardian_ed25519_6910213445feadea` | `active` | `human_with_ai_agent / joint_human_ai` | `#227` + `#228` |
+| `00001` | `guardian_ed25519_1f9b38ad0945daf1` | `active` | `human_with_ai_agent / joint_human_ai` | `#227` + `#228` |
 
 Label:
 
