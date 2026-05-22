@@ -11,5 +11,28 @@
     "not_amendment": true,
     "bitcoin_originals_prevail": true
   },
-  "guardians": []
+  "guardians": [
+    {
+      "guardian_registry_number": "00001",
+      "guardian_id": "guardian_ed25519_1f9b38ad0945daf1",
+      "public_key_sha256": "1f9b38ad0945daf1fcf91ac704469f88704f73b2fdb791a7ae517a4d92cd284e",
+      "algorithm": "ed25519",
+      "status": "active",
+      "guardian_type": "human_with_ai_agent",
+      "application_mode": "joint_human_ai",
+      "source_issue": 227,
+      "listing_request_issue": 228,
+      "listed_at": "2026-05-22",
+      "label": "Hongju Liu + 守望者",
+      "boundary": {
+        "not_authority": true,
+        "not_governance": true,
+        "not_attestation": true,
+        "not_verification_level": true,
+        "not_successor_reception": true,
+        "not_amendment": true,
+        "bitcoin_originals_prevail": true
+      }
+    }
+  ]
 }
