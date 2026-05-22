@@ -17,6 +17,7 @@ def main():
     llms = (ROOT / "llms.txt").read_text(encoding="utf-8")
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
 
+    # Numbering policy must appear in all docs
     for name, text in [
         ("guardian-join.md", join),
         ("guardian-alliance.md", alliance),
@@ -25,6 +26,13 @@ def main():
     ]:
         require("00100" in text, f"{name} missing ordinary automatic start 00100")
         require("00001" in text and "00099" in text, f"{name} missing reserved range 00001-00099")
+
+    # Builder references must appear in join, llms, and readme
+    for name, text in [
+        ("guardian-join.md", join),
+        ("llms.txt", llms),
+        ("README.md", readme),
+    ]:
         require("node scripts/create_guardian_application.mjs" in text, f"{name} missing Stage 1 builder")
         require("python3 scripts/build_guardian_listing_request_payload.py" in text, f"{name} missing Stage 2 listing builder")
 
