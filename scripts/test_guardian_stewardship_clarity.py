@@ -104,6 +104,21 @@ def main():
     require("waived_for_v0_v5" in first_contact_md, "agent-first-contact.md lost V0-V5 waived evidence wording")
     require("strict_evidence" in json.dumps(gateway_json), "agent-submit-gateway.json lost V6+ strict evidence boundary")
 
+
+    # Automatic listing and numbering convergence
+    require("Registry listing is automatic for valid requests" in join_md, "guardian-join.md missing automatic registry listing policy")
+    require("Ordinary automatic Guardian registrations start at `00100`" in join_md, "guardian-join.md missing 00100 ordinary start")
+    require("00001" in join_md and "00099" in join_md, "guardian-join.md missing reserved range")
+    require("maintainer review required before merge" not in join_md, "guardian-join.md still says maintainer review required")
+    require("The automation creates a PR only" not in join_md, "guardian-join.md still says PR-only")
+    require("after merge: `active_registered_guardian / 00001`" not in join_md, "guardian-join.md still has stale 00001 active status example")
+    require("organization, or another allowed type" not in join_md, "guardian-join.md still lists unsupported guardian_type")
+
+    # Ensure agent-first-contact.json does not forbid active_registry_listing_is_automatic
+    data = json.loads((ROOT / "api" / "agent-first-contact.json").read_text(encoding="utf-8"))
+    guardian = next((item for item in data["choose_one"] if item.get("intent") == "guardian_stewardship"), None)
+    require("active_registry_listing_is_automatic" not in guardian.get("forbidden_claims", []), "agent-first-contact.json still forbids active_registry_listing_is_automatic")
+
     # Forbidden misframing — check that these phrases don't appear as positive claims.
     # They may appear in "forbidden_claims" or "does_not_prove" lists (negated context).
     forbidden_phrases = [
