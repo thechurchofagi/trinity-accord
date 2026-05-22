@@ -3,9 +3,9 @@
 Test that build_guardian_listing_request_payload.py output
 passes Gateway JSON Schema validation.
 
-This is a regression test for the schema compatibility issue where
-Stage 2 builder added new top-level fields that were not allowed by
-additionalProperties: false in the Gateway schema.
+Regression test: Stage 2 builder added new top-level fields
+(payload_profile, expected_builder, wrong_builders, etc.) that were
+not allowed by additionalProperties: false in the Gateway schema.
 """
 
 from __future__ import annotations
@@ -19,83 +19,102 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
-def test_guardian_listing_payload_schema_acceptance():
-    """Test that guardian listing payload passes schema validation."""
-    
-    # Build payload using the actual builder
-    with tempfile.NamedTemporaryFile(mode='w', suffix='.json', delete=False) as f:
-        payload_path = f.name
-    
-    try:
-        # Run builder
-        result = subprocess.run(
-            [
-                sys.executable,
-                str(ROOT / "scripts" / "build_guardian_listing_request_payload.py"),
-                "--output", payload_path,
-                "--title", "Test Guardian Listing",
-                "--body", "Test body for schema validation",
-                "--agent-name", "test-agent",
-                "--agent-email", "test@example.com",
-            ],
-            capture_output=True,
-            text=True,
+BUILDER = ROOT / "scripts" / "build_guardian_listing_request_payload.py"
+SCHEMA_PATH = ROOT / "api" / "agent-issue-gateway-payload-schema.v1.json"
+
+NEW_TOP_LEVEL_FIELDS = [
+    "payload_profile",
+    "expected_builder",
+    "wrong_builders",
+    "do_not_edit_after_signing",
+    "submit_exact_generated_file",
+    "if_modified_rerun_builder",
+    "requires_gateway_capabilities",
+]
+
+
+def build_payload(tmp_dir: Path) -> dict:
+    """Run the builder and return the generated payload."""
+    out_path = tmp_dir / "payload.json"
+
+    result = subprocess.run(
+        [
+            sys.executable,
+            str(BUILDER),
+            "--agent-name", "schema-test-agent",
+            "--provider", "openai",
+            "--source-issue", "9999",
+            "--guardian-id", "test-guardian-00001",
+            "--public-key-sha256", "a" * 64,
+            "--label", "schema-test",
+            "--no-authorship-proof",
+            "--out", str(out_path),
+        ],
+        capture_output=True,
+        text=True,
+        cwd=str(ROOT),
+    )
+
+    if result.returncode != 0:
+        raise RuntimeError(
+            f"Builder failed (exit {result.returncode}):\n"
+            f"stdout: {result.stdout}\n"
+            f"stderr: {result.stderr}"
         )
-        
-        if result.returncode != 0:
-            print(f"FAIL: Builder failed with:\n{result.stderr}")
-            return False
-        
-        # Load built payload
-        with open(payload_path) as f:
-            payload = json.load(f)
-        
-        # Load schema
-        schema_path = ROOT / "api" / "agent-issue-gateway-payload-schema.v1.json"
-        with open(schema_path) as f:
-            schema = json.load(f)
-        
-        # Check that new top-level fields are allowed by schema
-        new_fields = [
-            "payload_profile",
-            "expected_builder", 
-            "wrong_builders",
-            "do_not_edit_after_signing",
-            "submit_exact_generated_file",
-            "if_modified_rerun_builder",
-            "requires_gateway_capabilities",
-        ]
-        
-        schema_properties = schema.get("properties", {})
-        missing_fields = [f for f in new_fields if f not in schema_properties]
-        
-        if missing_fields:
-            print(f"FAIL: Schema missing properties for fields: {missing_fields}")
-            return False
-        
-        # Check that payload contains expected fields
-        for field in new_fields:
-            if field not in payload:
-                print(f"FAIL: Payload missing expected field: {field}")
-                return False
-        
-        # Validate payload against schema using jsonschema
-        try:
-            import jsonschema
-            jsonschema.validate(instance=payload, schema=schema)
-            print("PASS: Payload validates against Gateway JSON Schema")
-            return True
-        except ImportError:
-            print("WARN: jsonschema not installed, skipping full validation")
-            print("PASS: Schema properties exist for all new fields")
-            return True
-        except jsonschema.ValidationError as e:
-            print(f"FAIL: Schema validation error: {e.message}")
-            return False
-        
-    finally:
-        Path(payload_path).unlink(missing_ok=True)
+
+    with open(out_path) as f:
+        return json.load(f)
+
+
+def test_schema_has_new_field_properties():
+    """Schema properties include all new top-level fields."""
+    with open(SCHEMA_PATH) as f:
+        schema = json.load(f)
+
+    props = schema.get("properties", {})
+    missing = [k for k in NEW_TOP_LEVEL_FIELDS if k not in props]
+    assert not missing, f"Schema missing properties: {missing}"
+
+
+def test_builder_output_has_new_fields():
+    """Builder output includes all new top-level fields."""
+    with tempfile.TemporaryDirectory() as tmp:
+        payload = build_payload(Path(tmp))
+
+    missing = [k for k in NEW_TOP_LEVEL_FIELDS if k not in payload]
+    assert not missing, f"Payload missing fields: {missing}"
+
+
+def test_builder_output_passes_schema_validation():
+    """Builder output validates against Gateway JSON Schema (no additionalProperties rejection)."""
+    import jsonschema
+
+    with open(SCHEMA_PATH) as f:
+        schema = json.load(f)
+
+    with tempfile.TemporaryDirectory() as tmp:
+        payload = build_payload(Path(tmp))
+
+    jsonschema.validate(instance=payload, schema=schema)
+
 
 if __name__ == "__main__":
-    success = test_guardian_listing_payload_schema_acceptance()
-    sys.exit(0 if success else 1)
+    failures = []
+    for name, func in [
+        ("schema_has_new_field_properties", test_schema_has_new_field_properties),
+        ("builder_output_has_new_fields", test_builder_output_has_new_fields),
+        ("builder_output_passes_schema_validation", test_builder_output_passes_schema_validation),
+    ]:
+        try:
+            func()
+            print(f"PASS: {name}")
+        except Exception as e:
+            print(f"FAIL: {name}: {e}")
+            failures.append(name)
+
+    if failures:
+        print(f"\n{len(failures)} test(s) failed: {failures}")
+        sys.exit(1)
+    else:
+        print(f"\nAll 3 tests passed.")
+        sys.exit(0)
