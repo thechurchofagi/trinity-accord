@@ -66,6 +66,8 @@ def main():
         require(cth.get("guardian_registry") is True, "counts_toward_home.guardian_registry must be true")
         require(cth.get("exclude_from_reception_total") is True, "counts_toward_home.exclude_from_reception_total must be true")
         require(payload.get("guardian_registry_listing_request") is True, "guardian_registry_listing_request must be true")
+        require(payload.get("payload_profile") == "guardian_active_registry_listing_request.v1", "missing payload profile")
+        require(payload.get("expected_builder") == "scripts/build_guardian_listing_request_payload.py", "wrong expected builder")
 
         # Validate and archive-readiness-gate the payload
         run(["python3", "scripts/validate_gateway_payload.py", str(out)])
