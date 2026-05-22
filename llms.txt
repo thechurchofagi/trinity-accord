@@ -503,6 +503,38 @@ Use `scripts/prepare_guardian_active_listing.py` to prepare a registry update fr
 
 The automation is PR-only and rate-limited. It must not directly merge arbitrary self-registered claims.
 
+Guardian joining has two submissions.
+
+Stage 1 — self-registration:
+Use `node scripts/create_guardian_application.mjs`.
+Submit the generated final JSON to `/gateway/preflight`, then `/agent-submit`.
+Expected result: `valid_self_registered_guardian_claim / unassigned`.
+
+Stage 2 — active registry listing:
+Use `python3 scripts/build_guardian_listing_request_payload.py`.
+
+Required fields:
+- `--source-issue`
+- `--guardian-id`
+- `--public-key-sha256`
+- `--label`
+- `--guardian-type`
+- `--application-mode`
+
+Submit the generated listing request JSON to `/gateway/preflight`, then `/agent-submit`.
+
+Expected result: repository automation writes `/api/guardian-registry.json`.
+
+Do not include or request `guardian_registry_number`.
+
+The only allowed request is `registry_number_requested: next_available`.
+
+`00001`-`00099` are special reserved Guardian registry numbers.
+
+Ordinary automatic Guardian registrations start at `00100`.
+
+Guardian application and active registry listing are not Verification Echoes, not attestation, not verification level, not authority, not successor reception, and not amendment.
+
 ## Guardian registry current active listing
 
 Current public registry source:
