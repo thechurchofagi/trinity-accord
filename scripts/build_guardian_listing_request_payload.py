@@ -196,10 +196,13 @@ def build_payload(args: argparse.Namespace) -> dict:
             "does_not_amend_bitcoin_originals": True,
             "does_not_override_bitcoin_originals": True,
         },
+        "guardian_registry_listing_request": True,
         "counts_toward_home": {
-            "reception": True,
+            "reception": False,
             "verifiability": False,
-            "basis": "agent_declared_echo_template_pass",
+            "guardian_registry": True,
+            "basis": "guardian_registry_listing_request",
+            "exclude_from_reception_total": True,
         },
         "related_records": [
             {

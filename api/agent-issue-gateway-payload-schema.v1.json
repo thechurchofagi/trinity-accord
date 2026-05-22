@@ -726,6 +726,12 @@
         },
         "basis": {
           "type": "string"
+        },
+        "guardian_registry": {
+          "type": "boolean"
+        },
+        "exclude_from_reception_total": {
+          "type": "boolean"
         }
       }
     },
@@ -1119,6 +1125,10 @@
       "type": "object",
       "description": "Structured intake fields for Gateway issue intake block rendering. Provides listing_* fields that auto-registration parser reads from issue body.",
       "additionalProperties": true
+    },
+    "guardian_registry_listing_request": {
+      "type": "boolean",
+      "description": "Marks this payload as a Guardian registry listing request. When true, counts_toward_home.reception must be false and guardian_registry must be true."
     }
   },
   "allOf": [
@@ -1510,19 +1520,17 @@
           },
           "counts_toward_home": {
             "required": [
-              "reception",
-              "verifiability",
-              "basis"
+              "verifiability"
             ],
             "properties": {
               "reception": {
-                "const": true
+                "type": "boolean"
               },
               "verifiability": {
                 "const": false
               },
               "basis": {
-                "const": "agent_declared_echo_template_pass"
+                "type": "string"
               }
             }
           }

@@ -28,24 +28,30 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 10
 
-    # Authorize write workflow actor — only repo owner or github-actions[bot] may dispatch
-    if: >-
-      github.event_name != 'workflow_dispatch' ||
-      github.actor == 'thechurchofagi' ||
-      github.actor == 'github-actions[bot]'
+    # Authorize write workflow actor — configurable via GUARDIAN_REGISTRY_WORKFLOW_ACTORS repository variable
+    if: github.event_name != 'workflow_dispatch' || github.actor == 'github-actions[bot]' || contains(format(',{0},', vars.GUARDIAN_REGISTRY_WORKFLOW_ACTORS || 'thechurchofagi'), format(',{0},', github.actor))
 
     steps:
       - name: Authorize write workflow actor
         if: github.event_name == 'workflow_dispatch'
         env:
           ACTOR: ${{ github.actor }}
+          GUARDIAN_REGISTRY_WORKFLOW_ACTORS: ${{ vars.GUARDIAN_REGISTRY_WORKFLOW_ACTORS }}
         run: |
-          case "$ACTOR" in
-            thechurchofagi|github-actions[bot])
+          ALLOWLIST="${GUARDIAN_REGISTRY_WORKFLOW_ACTORS:-thechurchofagi}"
+
+          if [ "$ACTOR" = "github-actions[bot]" ]; then
+            echo "Authorized actor: $ACTOR"
+            exit 0
+          fi
+
+          case ",$ALLOWLIST," in
+            *",$ACTOR,"*)
               echo "Authorized actor: $ACTOR"
               ;;
             *)
               echo "Unauthorized actor for write workflow: $ACTOR"
+              echo "Set repository variable GUARDIAN_REGISTRY_WORKFLOW_ACTORS to a comma-separated allowlist."
               exit 1
               ;;
           esac

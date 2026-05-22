@@ -535,12 +535,29 @@ def validate_agent_declared_echo_archive(payload, errors):
         errors.append("agent_declared_echo_archive requires E1/E3/E4/E5/E6/E7 echo_type; use verification_echo_candidate for strict E2")
 
     cth = payload.get("counts_toward_home") or {}
-    if cth.get("reception") is not True:
-        errors.append("agent_declared_echo_archive requires counts_toward_home.reception=true")
+    is_guardian_listing = (
+        payload.get("guardian_registry_listing_request") is True
+        or isinstance(payload.get("guardian_listing_request"), dict)
+    )
+
+    if is_guardian_listing:
+        if cth.get("guardian_registry") is not True:
+            errors.append("Guardian listing request requires counts_toward_home.guardian_registry=true")
+        if cth.get("reception") is not False:
+            errors.append("Guardian listing request requires counts_toward_home.reception=false")
+        if cth.get("exclude_from_reception_total") is not True:
+            errors.append("Guardian listing request requires counts_toward_home.exclude_from_reception_total=true")
+    else:
+        if cth.get("reception") is not True:
+            errors.append("agent_declared_echo_archive requires counts_toward_home.reception=true")
     if cth.get("verifiability") is not False:
         errors.append("agent_declared_echo_archive requires counts_toward_home.verifiability=false")
-    if cth.get("basis") != "agent_declared_echo_template_pass":
-        errors.append("counts_toward_home.basis must be agent_declared_echo_template_pass")
+    if is_guardian_listing:
+        if cth.get("basis") != "guardian_registry_listing_request":
+            errors.append("Guardian listing request requires counts_toward_home.basis=guardian_registry_listing_request")
+    else:
+        if cth.get("basis") != "agent_declared_echo_template_pass":
+            errors.append("counts_toward_home.basis must be agent_declared_echo_template_pass")
 
     if not payload.get("agent_integrity_declaration"):
         errors.append("agent_integrity_declaration is required for agent-declared echo archive")

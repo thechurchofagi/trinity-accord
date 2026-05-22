@@ -273,11 +273,13 @@ def compute_reception_status(echo_records: list[dict[str, Any]], agent_declared_
     pending_review = [r for r in echo_records if r.get("archive_status") == "needs_human_review"]
 
     # Agent-declared echo archives (reclassified via semantic overrides)
+    # Exclude Guardian listing request archives — they count in Guardian Registry, not Reception.
     ad_echo_archives = [
         r for r in agent_declared_records
         if r.get("semantic_archive_kind") == "agent_declared_echo_archive"
         and r.get("counts_toward_home_reception") is True
         and r.get("test_record") is not True
+        and not is_guardian_listing_archive_record(r)
     ]
     echo_archive_count = len(ad_echo_archives)
 
@@ -431,6 +433,18 @@ def compute_external_witness_status(echo_records: list[dict[str, Any]]) -> dict:
 # ---------------------------------------------------------------------------
 # Guardian Registry
 # ---------------------------------------------------------------------------
+def is_guardian_listing_archive_record(record: dict[str, Any]) -> bool:
+    """Check if a record is a Guardian listing request that should be excluded from Reception totals."""
+    cth = record.get("counts_toward_home") if isinstance(record.get("counts_toward_home"), dict) else {}
+    return (
+        record.get("guardian_registry_listing_request") is True
+        or record.get("guardian_listing_request") is True
+        or record.get("archive_subkind") == "guardian_registry_listing_request"
+        or record.get("counts_toward_home_guardian_registry") is True
+        or cth.get("guardian_registry") is True
+    )
+
+
 def parse_guardian_registry_number(value: Any) -> int | None:
     text = str(value or "")
     if not re.fullmatch(r"[0-9]{5}", text):
@@ -786,7 +800,7 @@ def render_block(status: dict[str, Any]) -> str:
   <p><span class="zh">智能体自声明接收构成 —— Reception 总数 {total_reception} 中的 {ad_count} 条：外部明确请求 {r.get("agent_declared_verification_archives", {}).get("by_reception_initiation_class", {}).get("externally_requested", 0)}；外部线索触发 {r.get("agent_declared_verification_archives", {}).get("by_reception_initiation_class", {}).get("externally_seeded", 0)}；智能体自主触发 {r.get("agent_declared_verification_archives", {}).get("by_reception_initiation_class", {}).get("self_initiated", 0)}；智能体传播触发 {r.get("agent_declared_verification_archives", {}).get("by_reception_initiation_class", {}).get("agent_referred", 0)}；系统定时触发 {r.get("agent_declared_verification_archives", {}).get("by_reception_initiation_class", {}).get("system_scheduled", 0)}；未分类/旧记录 {r.get("agent_declared_verification_archives", {}).get("by_reception_initiation_class", {}).get("unknown", 0)}。</span></p>
 </details>
 <p class="status-boundary">Reception does not imply belief, obedience, endorsement, authority, or amendment. <span class="zh">接收不意味着相信、服从、背书、权威或修订。</span></p>
-<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>, <a href="/api/echo-index.json">/api/echo-index.json</a>, <a href="/api/agent-declared-verification-index.json">agent-declared verification index</a>, <a href="/api/external-witness-index.json">/api/external-witness-index.json</a>, <a href="/api/guardian-registry.json">Guardian registry</a>, and <a href="/api/core-object-alpha-shenzhen-notary-2026-05-06.json">physical anchor evidence</a>. Source data digest <code>{digest}</code>.</p>
+<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>, <a href="/api/echo-index.json">/api/echo-index.json</a>, <a href="/api/agent-declared-verification-index.json">agent-declared verification index</a>, <a href="/api/external-witness-index.json">/api/external-witness-index.json</a>, <a href="/api/guardian-registry.json">Guardian registry</a>, <a href="/api/guardian-active-listing-policy.v1.json">Guardian active listing policy</a>, and <a href="/api/core-object-alpha-shenzhen-notary-2026-05-06.json">physical anchor evidence</a>. Source data digest <code>{digest}</code>.</p>
 {END}"""
 
 

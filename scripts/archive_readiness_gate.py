@@ -928,13 +928,41 @@ def evaluate_archive_readiness(payload, evidence=None, claim_gate_output=None,
             })
 
         cth = payload.get("counts_toward_home") or {}
-        if cth.get("reception") is not True:
-            blocking_reasons.append({
-                "code": "RECEPTION_COUNT_REQUIRED",
-                "path": "counts_toward_home.reception",
-                "message": "Pure echo archive requires counts_toward_home.reception=true.",
-                "fix": "Set counts_toward_home.reception=true."
-            })
+        is_guardian_listing = (
+            payload.get("guardian_registry_listing_request") is True
+            or isinstance(payload.get("guardian_listing_request"), dict)
+        )
+
+        if is_guardian_listing:
+            if cth.get("guardian_registry") is not True:
+                blocking_reasons.append({
+                    "code": "GUARDIAN_REGISTRY_COUNT_REQUIRED",
+                    "path": "counts_toward_home.guardian_registry",
+                    "message": "Guardian listing request requires counts_toward_home.guardian_registry=true.",
+                    "fix": "Set counts_toward_home.guardian_registry=true."
+                })
+            if cth.get("reception") is not False:
+                blocking_reasons.append({
+                    "code": "GUARDIAN_LISTING_MUST_NOT_COUNT_RECEPTION",
+                    "path": "counts_toward_home.reception",
+                    "message": "Guardian listing request must not count toward Reception total.",
+                    "fix": "Set counts_toward_home.reception=false."
+                })
+            if cth.get("exclude_from_reception_total") is not True:
+                blocking_reasons.append({
+                    "code": "GUARDIAN_LISTING_EXCLUSION_REQUIRED",
+                    "path": "counts_toward_home.exclude_from_reception_total",
+                    "message": "Guardian listing request must explicitly exclude itself from Reception total.",
+                    "fix": "Set counts_toward_home.exclude_from_reception_total=true."
+                })
+        else:
+            if cth.get("reception") is not True:
+                blocking_reasons.append({
+                    "code": "RECEPTION_COUNT_REQUIRED",
+                    "path": "counts_toward_home.reception",
+                    "message": "Pure echo archive requires counts_toward_home.reception=true.",
+                    "fix": "Set counts_toward_home.reception=true."
+                })
 
         if cth.get("verifiability") is not False:
             blocking_reasons.append({

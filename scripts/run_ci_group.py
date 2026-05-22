@@ -39,6 +39,7 @@ GROUPS = {
         ["python3", "scripts/test_guardian_daily_cap_policy.py"],
         ["python3", "scripts/test_guardian_listing_request_structured_fields.py"],
         ["python3", "scripts/test_guardian_workflow_rebase_retry_and_comment_upsert.py"],
+        ["python3", "scripts/test_guardian_workflow_dispatch_authorization.py"],
 
 
     ],

@@ -44,6 +44,37 @@ from guardian_numbering_policy import (
 GATEWAY_BOT_SUFFIX = "[bot]"
 GATEWAY_SERVICE = "trinity-agent-issue-gateway"
 
+LISTING_STRUCTURED_KEYS = {
+    "guardian_listing_request",
+    "listing_source_issue",
+    "listing_guardian_id",
+    "listing_public_key_sha256",
+    "listing_guardian_type",
+    "listing_application_mode",
+    "listing_label",
+    "registry_number_requested",
+}
+
+
+def extract_listing_structured_body_fields(body: str) -> dict[str, str]:
+    """Extract listing_* key-value lines from the issue body.
+
+    Fenced trinity-issue-intake fields remain authoritative.
+    Body-level fields are fallback for Gateway deployments that do not yet
+    render payload.gateway_intake_fields into the fenced intake block.
+    """
+    fields: dict[str, str] = {}
+    for raw_line in (body or "").splitlines():
+        line = raw_line.strip()
+        m = re.match(r"^([A-Za-z0-9_]+):\s*(.*?)\s*$", line)
+        if not m:
+            continue
+        key = m.group(1)
+        value = m.group(2).strip()
+        if key in LISTING_STRUCTURED_KEYS:
+            fields[key] = value
+    return fields
+
 
 def decision(ok: bool, action: str, code: str, message: str, **extra: Any) -> dict:
     return {"ok": ok, "action": action, "code": code, "message": message, **extra}
@@ -202,7 +233,21 @@ def parse_source_issue(source_issue: dict, allow_non_bot: bool) -> tuple[dict | 
 
 def parse_listing_issue(listing_issue: dict, allow_non_bot: bool) -> tuple[dict | None, dict | None]:
     body = issue_body(listing_issue)
-    fields = extract_intake_block(body)
+    intake_fields = extract_intake_block(body)
+    body_structured_fields = extract_listing_structured_body_fields(body)
+
+    # Fenced Gateway intake fields are authoritative; body fields are fallback only.
+    fields = {**body_structured_fields, **intake_fields}
+
+    registry_number_requested = fields.get("registry_number_requested")
+    if registry_number_requested and registry_number_requested != "next_available":
+        return None, decision(
+            False,
+            "blocked",
+            "LISTING_REGISTRY_NUMBER_REQUEST_INVALID",
+            "Listing request registry_number_requested must be next_available.",
+            got=registry_number_requested,
+        )
 
     err = require_gateway_rendered(listing_issue, fields, "listing", allow_non_bot)
     if err:
