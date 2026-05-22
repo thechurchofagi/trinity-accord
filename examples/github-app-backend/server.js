@@ -2095,6 +2095,20 @@ app.post("/gateway/preflight", async (req, res) => {
   res.status(result.status).json(result.body);
 });
 
+// --- Debug: POST /gateway/debug-canonical ---
+app.post("/gateway/debug-canonical", express.json({ limit: "256kb" }), (req, res) => {
+  const payload = req.body;
+  const withoutAuthorship = payloadWithoutAuthorship(payload);
+  const canonical = canonicalStringify(withoutAuthorship);
+  const digest = sha256Text(canonical);
+  res.json({
+    canonical_length: canonical.length,
+    canonical_first_500: canonical.substring(0, 500),
+    digest,
+    payload_keys: Object.keys(withoutAuthorship).sort(),
+  });
+});
+
 // --- Task #4: GET /gateway/examples ---
 
 function loadFixture(filename) {
