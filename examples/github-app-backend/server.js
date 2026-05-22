@@ -2119,6 +2119,61 @@ app.post("/gateway/debug-canonical", express.json({
   });
 });
 
+// --- Debug: POST /gateway/debug-canonical-pipeline ---
+// Traces the full pipeline to find where canonicalization diverges
+app.post("/gateway/debug-canonical-pipeline", express.json({
+  limit: "256kb",
+  verify: (req, _res, buf) => { req.rawBody = Buffer.from(buf); }
+}), (req, res) => {
+  const steps = {};
+
+  // Step 0: Raw body
+  steps.raw_body_sha256 = req.rawBody
+    ? createHash("sha256").update(req.rawBody).digest("hex")
+    : null;
+
+  // Step 1: As received by Express
+  const asParsed = req.body;
+  steps.step1_parsed_keys = Object.keys(asParsed).sort();
+  steps.step1_digest = sha256Text(canonicalStringify(payloadWithoutAuthorship(asParsed)));
+
+  // Step 2: After normalizeArchiveIntentDefaults
+  const normalized = normalizeArchiveIntentDefaults(asParsed);
+  steps.step2_normalized_keys = Object.keys(normalized).sort();
+  steps.step2_digest = sha256Text(canonicalStringify(payloadWithoutAuthorship(normalized)));
+  steps.step2_same_as_step1 = steps.step1_digest === steps.step2_digest;
+
+  // Step 3: After idempotency key injection
+  const idempotencyKey = computeIdempotencyKey(normalized);
+  if (!normalized.idempotency_key) {
+    normalized.idempotency_key = idempotencyKey;
+  }
+  steps.step3_idempotency_key = normalized.idempotency_key;
+  steps.step3_digest = sha256Text(canonicalStringify(payloadWithoutAuthorship(normalized)));
+  steps.step3_same_as_step2 = steps.step2_digest === steps.step3_digest;
+
+  // Step 4: After writing to temp file and reading back (simulating validator step)
+  const tmpDir = fs.mkdtempSync(path.join(tmpdir(), "gwdebug-"));
+  const tmpFile = path.join(tmpDir, "payload.json");
+  fs.writeFileSync(tmpFile, JSON.stringify(normalized, null, 2), "utf-8");
+  const readBack = JSON.parse(fs.readFileSync(tmpFile, "utf8"));
+  steps.step4_readback_digest = sha256Text(canonicalStringify(payloadWithoutAuthorship(readBack)));
+  steps.step4_same_as_step3 = steps.step3_digest === steps.step4_readback_digest;
+
+  // Step 5: Verify authorship proof check
+  const proof = normalized.authorship_proof;
+  const expectedDigest = sha256Text(canonicalStringify(payloadWithoutAuthorship(normalized)));
+  steps.step5_expected_digest = expectedDigest;
+  steps.step5_proof_digest = proof ? proof.signed_payload_sha256 : null;
+  steps.step5_match = steps.step5_expected_digest === steps.step5_proof_digest;
+
+  // Cleanup
+  fs.unlinkSync(tmpFile);
+  fs.rmdirSync(tmpDir);
+
+  res.json(steps);
+});
+
 // --- Task #4: GET /gateway/examples ---
 
 function loadFixture(filename) {
