@@ -114,7 +114,7 @@ Avoid these phrases in natural-language payload fields:
 - `independent attestation`
 - `amendment`
 
-Machine schema fields such as `not_amendment`, `does_not_amend_bitcoin_originals`, or `not_successor_reception` are allowed because they are structural fields.
+Machine schema fields using negated form (e.g. `not_amendment`, `does_not_amend_*`) are structural and allowed — they are not natural-language archive self-claims.
 
 Use the one-shot builder and do not patch final JSON after proof generation.
 
