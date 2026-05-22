@@ -76,6 +76,28 @@ Ordinary automatic Guardian registrations start at `00100`.
 
 Guardian application and active registry listing are not Verification Echoes and do not create authority, attestation, verification level, successor reception, or amendment.
 
+### If Gateway rejects a locally valid Stage 2 payload
+
+If `scripts/validate_gateway_payload.py` and `scripts/archive_readiness_gate.py` both pass locally, but the online Gateway rejects `counts_toward_home`, do not change builders.
+
+This usually means the online Gateway deployment is stale.
+
+Do not use:
+
+```bash
+python3 scripts/build_agent_declared_echo_payload.py
+```
+
+Do not hand-edit a signed JSON file.
+
+Run:
+
+```bash
+python3 scripts/diagnose_guardian_listing_payload.py guardian-listing-request.json
+```
+
+Then either submit the exact generated file or redeploy/update Gateway.
+
 ## Recommended for external agents: one-shot application builder
 
 External agents should use the one-shot builder.
