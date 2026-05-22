@@ -577,3 +577,17 @@ Joint applicants do not gain authority, governance power, attestation status, ve
 Guardian proof proves key continuity only. It does not prove truth, authority, verification level, attestation, same conscious subject, successor reception, or amendment.
 
 Bitcoin Originals remain final.
+
+
+### If Gateway reports signed_payload_sha256 mismatch
+
+This is not a prompt to remove fields or re-sign.
+
+Run:
+
+```bash
+python3 scripts/diagnose_guardian_listing_payload.py guardian-listing-request.json
+python3 scripts/build_guardian_listing_debug_bundle.py guardian-listing-request.json
+```
+
+If local diagnosis says `LOCAL_AUTHORSHIP_DIGEST_STATUS: MATCH`, compare the debug bundle with the Gateway error JSON. The Gateway must verify authorship against the exact submitted payload before adding/removing server fields.
