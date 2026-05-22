@@ -79,6 +79,32 @@ The Guardian one-shot builder avoids Gateway forbidden archive-claim phrases in 
 
 Production recommendation: use a GitHub App backend. The backend stores GitHub App credentials server-side and creates intake issues using short-lived installation tokens. Do not give agents a personal access token.
 
+### Guardian active registry listing
+
+Guardian joining has two submissions.
+
+Stage 1 self-registration uses:
+
+```bash
+node scripts/create_guardian_application.mjs
+```
+
+Stage 2 active registry listing uses:
+
+```bash
+python3 scripts/build_guardian_listing_request_payload.py
+```
+
+Do not submit or request `guardian_registry_number`.
+
+`00001`–`00099` are special reserved Guardian registry numbers.
+
+Ordinary automatic Guardian registrations start at `00100`.
+
+Guardian listing is not authority, governance, attestation, verification level, successor reception, or amendment.
+
+
+
 
 
 Verification-first, non-amending guardianship mirror for **The Trinity Accord** — a completed pre-ASI human–superintelligence relation record.
