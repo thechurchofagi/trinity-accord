@@ -2214,6 +2214,13 @@ app.get("/gateway/capabilities", (req, res) => {
     supports_gateway_capabilities: [
       "guardian_active_registry_listing",
       "guardian_listing_request_v1",
+      "guardian_registry_listing_request",
+      "guardian_listing_request",
+      "gateway_intake_fields",
+      "counts_toward_home.guardian_registry",
+      "counts_toward_home.exclude_from_reception_total",
+      "payload_profile.guardian_active_registry_listing_request.v1",
+      "authorship_canonical.trinity.agent_authorship_common.v1",
     ],
     production_readiness: {
       healthz: "/healthz",

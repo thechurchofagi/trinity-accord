@@ -71,8 +71,7 @@ def main() -> int:
     }
 
     out_path = Path(args.out) if args.out else path.with_suffix(path.suffix + ".debug-bundle.json")
-    out_path.write_text(json.dumps(bundle, indent=2, ensure_ascii=False) + "
-", encoding="utf-8")
+    out_path.write_text(json.dumps(bundle, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     print(f"Wrote debug bundle to {out_path}")
     return 0
 
