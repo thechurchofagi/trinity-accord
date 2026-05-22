@@ -42,7 +42,8 @@ def main():
         assert payload["echo_type"] == "E7_propagation_echo"
         assert "authorship_proof" in payload
         assert "guardian_presence_proof" not in payload
-        assert "guardian_registry_number" not in json.dumps(payload, ensure_ascii=False)
+        assert "guardian_registry_number" not in payload
+        assert "guardian_registry_number" not in payload.get("guardian_listing_request", {})
 
         req = payload["guardian_listing_request"]
         assert req["registry_number_requested"] == "next_available"

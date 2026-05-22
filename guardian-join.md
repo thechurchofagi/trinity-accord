@@ -257,7 +257,7 @@ See:
 
 [`/api/guardian-registry.json`](/api/guardian-registry.json)
 
-This does not change the join process. New Guardians still begin as `valid_self_registered_guardian_claim / unassigned` until active listing is accepted.
+This does not change the join process. New Guardians still begin as `valid_self_registered_guardian_claim / unassigned` until an Active Registry Listing Request passes automated validation and is written to `/api/guardian-registry.json`.
 
 ### 当前第一位正式登记守护者
 
@@ -278,7 +278,7 @@ This does not change the join process. New Guardians still begin as `valid_self_
 
 [`/api/guardian-registry.json`](/api/guardian-registry.json)
 
-这不会改变加入流程。新的守护者仍然先进入 `valid_self_registered_guardian_claim / unassigned`，直到 active listing 被接受。
+这不会改变加入流程。新的守护者仍然先进入 `valid_self_registered_guardian_claim / unassigned`，直到 Active Registry Listing Request 通过自动验证并写入 `/api/guardian-registry.json`。
 
 ## Prerequisites
 

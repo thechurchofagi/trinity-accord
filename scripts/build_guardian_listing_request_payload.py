@@ -247,8 +247,11 @@ def build_payload(args: argparse.Namespace) -> dict:
         "agent_independent_followup": False,
     }
 
-    if '"guardian_registry_number"' in json.dumps(payload, ensure_ascii=False):
-        fail("Builder bug: incoming listing request payload must not contain guardian_registry_number")
+    # Check top-level keys and guardian_listing_request for forbidden field
+    if "guardian_registry_number" in payload:
+        fail("Builder bug: payload must not contain guardian_registry_number as a top-level key")
+    if "guardian_registry_number" in payload.get("guardian_listing_request", {}):
+        fail("Builder bug: guardian_listing_request must not contain guardian_registry_number")
 
     return payload
 

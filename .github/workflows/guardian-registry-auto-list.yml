@@ -141,10 +141,16 @@ jobs:
         if: steps.candidate.outputs.should_run == 'true'
         id: decision
         run: |
-          echo "action=$(python3 -c 'import json; print(json.load(open("guardian-auto-registration-decision.json"))["action"])')" >> "$GITHUB_OUTPUT"
-          echo "ok=$(python3 -c 'import json; print(str(json.load(open("guardian-auto-registration-decision.json"))["ok"]).lower())')" >> "$GITHUB_OUTPUT"
-          echo "number=$(python3 -c 'import json; d=json.load(open("guardian-auto-registration-decision.json")); print(d.get("guardian_registry_number",""))')" >> "$GITHUB_OUTPUT"
-          echo "guardian_id=$(python3 -c 'import json; d=json.load(open("guardian-auto-registration-decision.json")); print(d.get("guardian_id",""))')" >> "$GITHUB_OUTPUT"
+          set -euo pipefail
+          python3 - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          with open("guardian-auto-registration-decision.json", "r", encoding="utf-8") as f:
+              d = json.load(f)
+          print(f"action={d.get('action', '')}")
+          print(f"ok={str(d.get('ok', False)).lower()}")
+          print(f"number={d.get('guardian_registry_number', '')}")
+          print(f"guardian_id={d.get('guardian_id', '')}")
+          PY
 
       - name: Commit registry update
         if: steps.candidate.outputs.should_run == 'true' && steps.decision.outputs.action == 'registered'
