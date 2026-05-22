@@ -1156,13 +1156,59 @@ async function runGatewayPipeline(payload, {
     });
   }
 
-  // 1. Normalize archive intent defaults only after wrapper rejection.
+  // 1. Authorship proof verification MUST run on the original submitted
+  //    payload BEFORE any normalization. normalizeArchiveIntentDefaults
+  //    creates a new object that can change the canonical digest.
+  const submittedPayload = payload;
+  const authorship = verifyAuthorshipProof(submittedPayload, rawBodySha256, headerFingerprints);
+
+  if (authorship.present && !authorship.signature_verified) {
+    if (authorship.error_code === "AUTHORED_PAYLOAD_DIGEST_MISMATCH") {
+      return gatewayError(422, {
+        reason: "invalid_authorship_proof",
+        validation_stage: "authorship_proof",
+        agent_action: authorship.agent_action || "Do not strip fields or re-sign manually. Submit exact generated file. If local digest matches proof, fix Gateway canonicalization or transport.",
+        errors: [{
+          code: "AUTHORED_PAYLOAD_DIGEST_MISMATCH",
+          path: "authorship_proof",
+          message: `signed_payload_sha256 mismatch: proof=${authorship.signed_payload_sha256_from_proof} gateway=${authorship.computed_payload_sha256_by_gateway}`,
+          fix: "Do not strip fields or re-sign manually. Submit exact generated file. If local digest matches proof, fix Gateway canonicalization or transport."
+        }],
+        extra: {
+          error_code: authorship.error_code,
+          detected_payload_profile: authorship.detected_payload_profile,
+          authorship_canonical_version_used: authorship.authorship_canonical_version_used,
+          signed_payload_sha256_from_proof: authorship.signed_payload_sha256_from_proof,
+          computed_payload_sha256_by_gateway: authorship.computed_payload_sha256_by_gateway,
+          received_raw_body_sha256: authorship.received_raw_body_sha256,
+          x_trinity_payload_file_sha256: authorship.x_trinity_payload_file_sha256,
+          x_trinity_authorship_payload_sha256: authorship.x_trinity_authorship_payload_sha256,
+          excluded_dynamic_fields_used: authorship.excluded_dynamic_fields_used,
+          payload_keys_seen_by_gateway: authorship.payload_keys_seen_by_gateway,
+          must_not_strip_before_digest: authorship.must_not_strip_before_digest
+        }
+      });
+    }
+    return gatewayError(422, {
+      reason: "invalid_authorship_proof",
+      validation_stage: "authorship_proof",
+      agent_action: "Fix authorship_proof or remove it. Do not include private keys. Sign the canonical authorship message with the matching Ed25519 private key.",
+      errors: [{
+        code: "INVALID_AUTHORSHIP_PROOF",
+        path: "authorship_proof",
+        message: authorship.error || "Authorship proof signature verification failed",
+        fix: "Rebuild payload, sign with scripts/attach_agent_authorship_proof.mjs, and resubmit."
+      }]
+    });
+  }
+
+  // 2. NOW normalize archive intent defaults (after authorship proof passes).
   payload = normalizeArchiveIntentDefaults(payload);
 
-  // NOTE: idempotency key injection is DEFERRED to after authorship proof
-  // verification. Injecting it before would mutate the payload and cause
-  // computed_payload_sha256_by_gateway to diverge from the signed digest.
   const idempotencyKey = computeIdempotencyKey(payload);
+  if (!payload.idempotency_key) {
+    payload.idempotency_key = idempotencyKey;
+  }
 
   // 1b. V0-V5 fail-closed: reject wrong path BEFORE any other validation
   // Must run AFTER normalization so we see the final record_intent/requested_archive_kind,
@@ -1365,56 +1411,7 @@ async function runGatewayPipeline(payload, {
       });
     }
 
-    // 4b. Authorship proof verification
-    const authorship = verifyAuthorshipProof(payload, rawBodySha256, headerFingerprints);
-
-    if (authorship.present && !authorship.signature_verified) {
-      // Return detailed diagnostic for AUTHORED_PAYLOAD_DIGEST_MISMATCH
-      if (authorship.error_code === "AUTHORED_PAYLOAD_DIGEST_MISMATCH") {
-        return gatewayError(422, {
-          reason: "invalid_authorship_proof",
-          validation_stage: "authorship_proof",
-          agent_action: authorship.agent_action || "Do not strip fields or re-sign manually. Submit exact generated file. If local digest matches proof, fix Gateway canonicalization or transport.",
-          errors: [{
-            code: "AUTHORED_PAYLOAD_DIGEST_MISMATCH",
-            path: "authorship_proof",
-            message: `signed_payload_sha256 mismatch: proof=${authorship.signed_payload_sha256_from_proof} gateway=${authorship.computed_payload_sha256_by_gateway}`,
-            fix: "Do not strip fields or re-sign manually. Submit exact generated file. If local digest matches proof, fix Gateway canonicalization or transport."
-          }],
-          extra: {
-            error_code: authorship.error_code,
-            detected_payload_profile: authorship.detected_payload_profile,
-            authorship_canonical_version_used: authorship.authorship_canonical_version_used,
-            signed_payload_sha256_from_proof: authorship.signed_payload_sha256_from_proof,
-            computed_payload_sha256_by_gateway: authorship.computed_payload_sha256_by_gateway,
-            received_raw_body_sha256: authorship.received_raw_body_sha256,
-            x_trinity_payload_file_sha256: authorship.x_trinity_payload_file_sha256,
-            x_trinity_authorship_payload_sha256: authorship.x_trinity_authorship_payload_sha256,
-            excluded_dynamic_fields_used: authorship.excluded_dynamic_fields_used,
-            payload_keys_seen_by_gateway: authorship.payload_keys_seen_by_gateway,
-            must_not_strip_before_digest: authorship.must_not_strip_before_digest
-          }
-        });
-      }
-      return gatewayError(422, {
-        reason: "invalid_authorship_proof",
-        validation_stage: "payload_validator",
-        agent_action: "Fix authorship_proof or remove it. Do not include private keys. Sign the canonical authorship message with the matching Ed25519 private key.",
-        errors: [{
-          code: "INVALID_AUTHORSHIP_PROOF",
-          path: "authorship_proof",
-          message: authorship.error || "Authorship proof signature verification failed",
-          fix: "Rebuild payload, sign with scripts/attach_agent_authorship_proof.mjs, and resubmit."
-        }]
-      });
-    }
-
     payload._authorship_claim = authorship;
-
-    // NOW inject idempotency key (after authorship proof verification to preserve digest)
-    if (!payload.idempotency_key) {
-      payload.idempotency_key = idempotencyKey;
-    }
 
     fs.writeFileSync(payloadPath, JSON.stringify(payload, null, 2), "utf-8");
 
