@@ -78,6 +78,39 @@ def authorship_payload_sha256(payload):
     return sha256_text(canonical_payload_without_authorship(payload))
 
 
+
+
+def sha256_bytes(data: bytes) -> str:
+    return hashlib.sha256(data).hexdigest()
+
+
+def payload_file_sha256(path) -> str:
+    with open(path, "rb") as f:
+        return sha256_bytes(f.read())
+
+
+def authorship_debug_fingerprint(payload: dict, payload_file_path: str | None = None) -> dict:
+    proof = payload.get("authorship_proof") if isinstance(payload.get("authorship_proof"), dict) else {}
+    local_digest = authorship_payload_sha256(payload)
+    proof_digest = proof.get("signed_payload_sha256")
+
+    fp = {
+        "authorship_canonical_version": AUTHORSHIP_CANONICAL_VERSION,
+        "local_authorship_payload_sha256": local_digest,
+        "authorship_proof_signed_payload_sha256": proof_digest,
+        "authorship_digest_matches_proof": proof_digest == local_digest,
+        "excluded_dynamic_fields": list(AUTHORSHIP_CANONICAL_DYNAMIC_PROOF_FIELDS),
+        "payload_profile": payload.get("payload_profile"),
+        "gateway_contract_version": payload.get("gateway_contract_version"),
+        "top_level_keys": sorted(payload.keys()),
+    }
+
+    if payload_file_path:
+        fp["payload_file_sha256"] = payload_file_sha256(payload_file_path)
+
+    return fp
+
+
 def normalize_pem(public_key_pem):
     """Strip outer whitespace and return PEM with exactly one trailing newline."""
     return public_key_pem.strip() + "\n"
