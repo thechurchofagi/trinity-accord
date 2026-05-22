@@ -439,6 +439,7 @@ def is_guardian_listing_archive_record(record: dict[str, Any]) -> bool:
     return (
         record.get("guardian_registry_listing_request") is True
         or record.get("guardian_listing_request") is True
+        or isinstance(record.get("guardian_listing_request"), dict)
         or record.get("archive_subkind") == "guardian_registry_listing_request"
         or record.get("counts_toward_home_guardian_registry") is True
         or cth.get("guardian_registry") is True
