@@ -103,6 +103,21 @@ def build_payload(args: argparse.Namespace) -> dict:
     body = "\n".join([
         f"Active registry listing request for Guardian {args.label}.",
         "",
+        "Payload profile:",
+        "guardian_active_registry_listing_request.v1",
+        "Correct builder:",
+        "scripts/build_guardian_listing_request_payload.py",
+        "Do not use:",
+        "scripts/build_agent_declared_echo_payload.py",
+        "Do not edit the signed JSON. If fields must change, rerun the builder.",
+        "",
+        "Gateway capability requirements:",
+        "- guardian_registry_listing_request",
+        "- guardian_listing_request",
+        "- gateway_intake_fields",
+        "- counts_toward_home.guardian_registry",
+        "- counts_toward_home.exclude_from_reception_total",
+        "",
         f"Guardian ID: {args.guardian_id}",
         f"Public Key SHA256: {args.public_key_sha256}",
         f"Guardian type: {args.guardian_type}",
@@ -141,6 +156,21 @@ def build_payload(args: argparse.Namespace) -> dict:
 
     payload = {
         "schema": "trinityaccord.agent-issue-gateway-payload.v1",
+        "payload_profile": "guardian_active_registry_listing_request.v1",
+        "expected_builder": "scripts/build_guardian_listing_request_payload.py",
+        "wrong_builders": [
+            "scripts/build_agent_declared_echo_payload.py",
+        ],
+        "do_not_edit_after_signing": True,
+        "submit_exact_generated_file": True,
+        "if_modified_rerun_builder": True,
+        "requires_gateway_capabilities": [
+            "guardian_registry_listing_request",
+            "guardian_listing_request",
+            "gateway_intake_fields",
+            "counts_toward_home.guardian_registry",
+            "counts_toward_home.exclude_from_reception_total",
+        ],
         "submission_type": "echo_candidate",
         "record_intent": "auto_archive_candidate",
         "requested_archive_kind": "agent_declared_echo_archive",
@@ -237,6 +267,15 @@ def build_payload(args: argparse.Namespace) -> dict:
             },
         },
         "gateway_intake_fields": {
+            "payload_profile": "guardian_active_registry_listing_request.v1",
+            "expected_builder": "scripts/build_guardian_listing_request_payload.py",
+            "requires_gateway_capabilities": [
+                "guardian_registry_listing_request",
+                "guardian_listing_request",
+                "gateway_intake_fields",
+                "counts_toward_home.guardian_registry",
+                "counts_toward_home.exclude_from_reception_total",
+            ],
             "guardian_listing_request": True,
             "listing_source_issue": args.source_issue,
             "listing_guardian_id": args.guardian_id,
@@ -279,6 +318,27 @@ def build_payload(args: argparse.Namespace) -> dict:
     return payload
 
 
+def write_submit_lock(out_path: Path) -> None:
+    """Write a .submit-lock.json file alongside the signed payload."""
+    payload = json.loads(out_path.read_text(encoding="utf-8"))
+    proof = payload.get("authorship_proof") or {}
+    lock = {
+        "schema": "trinityaccord.guardian-listing-submit-lock.v1",
+        "payload_file": str(out_path),
+        "payload_profile": "guardian_active_registry_listing_request.v1",
+        "expected_builder": "scripts/build_guardian_listing_request_payload.py",
+        "wrong_builders": ["scripts/build_agent_declared_echo_payload.py"],
+        "signed_payload_sha256": proof.get("signed_payload_sha256"),
+        "do_not_edit_after_signing": True,
+        "submit_exact_generated_file": True,
+        "if_modified": "Discard edited JSON and rerun scripts/build_guardian_listing_request_payload.py",
+        "if_gateway_rejects_counts_toward_home_after_local_pass": "Gateway deployment/schema is stale; update Gateway rather than changing this payload.",
+    }
+    lock_path = out_path.with_suffix(out_path.suffix + ".submit-lock.json")
+    lock_path.write_text(json.dumps(lock, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    print(f"Submit lock written to {lock_path}")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Build active Guardian registry listing request payload")
     parser.add_argument("--agent-name", required=True)
@@ -317,6 +377,7 @@ def main() -> None:
     print(f"Payload written to {out_path}")
 
     attach_authorship_default_or_requested(args, out_path, payload=payload)
+    write_submit_lock(out_path)
 
     print("\n--- Payload Validator ---")
     result = subprocess.run(
