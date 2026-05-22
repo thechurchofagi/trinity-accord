@@ -107,11 +107,11 @@ jobs:
             if (sourceIssue) core.setOutput("source_issue", String(sourceIssue));
 
       - name: Stop if not Guardian listing request
-        if: steps.candidate.outputs.should_run != 'true'
+        if: steps.candidate.outputs.should_run != 'true' && github.event_name != 'workflow_dispatch'
         run: echo "Not a Guardian listing request. Skipping."
 
       - name: Fetch listing and source issues
-        if: steps.candidate.outputs.should_run == 'true'
+        if: steps.candidate.outputs.should_run == 'true' || github.event_name == 'workflow_dispatch'
         id: fetch
         uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
         with:
@@ -152,7 +152,7 @@ jobs:
             core.setOutput("source_issue", String(sourceIssueNumber));
 
       - name: Auto-register Guardian
-        if: steps.candidate.outputs.should_run == 'true'
+        if: steps.candidate.outputs.should_run == 'true' || github.event_name == 'workflow_dispatch'
         id: register
         run: |
           set -euo pipefail
@@ -165,7 +165,7 @@ jobs:
           cat guardian-auto-registration-decision.json
 
       - name: Read decision
-        if: steps.candidate.outputs.should_run == 'true'
+        if: steps.candidate.outputs.should_run == 'true' || github.event_name == 'workflow_dispatch'
         id: decision
         run: |
           set -euo pipefail
@@ -180,7 +180,7 @@ jobs:
           PY
 
       - name: Commit registry update
-        if: steps.candidate.outputs.should_run == 'true' && steps.decision.outputs.action == 'registered'
+        if: (steps.candidate.outputs.should_run == 'true' || github.event_name == 'workflow_dispatch') && steps.decision.outputs.action == 'registered'
         id: commit
         run: |
           set -euo pipefail
@@ -191,7 +191,7 @@ jobs:
           git push
 
       - name: Comment success
-        if: steps.candidate.outputs.should_run == 'true' && steps.decision.outputs.action == 'registered'
+        if: (steps.candidate.outputs.should_run == 'true' || github.event_name == 'workflow_dispatch') && steps.decision.outputs.action == 'registered'
         uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
         with:
           script: |
@@ -219,7 +219,7 @@ jobs:
             });
 
       - name: Comment already registered
-        if: steps.candidate.outputs.should_run == 'true' && steps.decision.outputs.action == 'already_registered'
+        if: (steps.candidate.outputs.should_run == 'true' || github.event_name == 'workflow_dispatch') && steps.decision.outputs.action == 'already_registered'
         uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
         with:
           script: |
@@ -241,7 +241,7 @@ jobs:
             });
 
       - name: Comment blocked
-        if: failure() && steps.candidate.outputs.should_run == 'true'
+        if: failure() && (steps.candidate.outputs.should_run == 'true' || github.event_name == 'workflow_dispatch')
         uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
         with:
           script: |
