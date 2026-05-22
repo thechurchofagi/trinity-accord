@@ -143,6 +143,25 @@ function stableStringify(value) {
   return "{" + Object.keys(value).sort().map(k => JSON.stringify(k) + ":" + stableStringify(value[k])).join(",") + "}";
 }
 
+// Canonical JSON matching Python json.dumps(ensure_ascii=False, sort_keys=True, separators=(",",":"))
+// Used for authorship digest verification to ensure Gateway ↔ builder parity.
+function canonicalStringify(value) {
+  if (value === null) return "null";
+  if (typeof value === "boolean") return value ? "true" : "false";
+  if (typeof value === "number") return Object.is(value, -0) ? "-0" : String(value);
+  if (typeof value === "string") {
+    // Match Python json.dumps(ensure_ascii=False): only escape required JSON chars, keep non-ASCII as-is
+    return JSON.stringify(value).replace(/[\u0080-\uffff]/g, function (ch) {
+      return ch; // keep raw UTF-8 character (Python ensure_ascii=False behavior)
+    });
+  }
+  if (Array.isArray(value)) return "[" + value.map(canonicalStringify).join(",") + "]";
+  if (typeof value === "object") {
+    return "{" + Object.keys(value).sort().map(k => JSON.stringify(k) + ":" + canonicalStringify(value[k])).join(",") + "}";
+  }
+  return JSON.stringify(value);
+}
+
 function payloadWithoutAuthorship(payload) {
   const clone = JSON.parse(JSON.stringify(payload));
   delete clone.authorship_proof;
@@ -213,7 +232,7 @@ function normalizePem(pem) {
 
 function buildAuthorshipMessage(payload) {
   const identity = payload.agent_identity || {};
-  const payloadDigest = sha256Text(stableStringify(payloadWithoutAuthorship(payload)));
+  const payloadDigest = sha256Text(canonicalStringify(payloadWithoutAuthorship(payload)));
   return [
     "TRINITY_AGENT_AUTHORSHIP_PROOF_V1",
     `payload_sha256=${payloadDigest}`,
@@ -226,7 +245,7 @@ function buildAuthorshipMessage(payload) {
   ].join("\n");
 }
 
-function verifyAuthorshipProof(payload) {
+function verifyAuthorshipProof(payload, rawBodySha256, headerFingerprints) {
   const proof = payload.authorship_proof;
   if (!proof) {
     return {
@@ -243,7 +262,9 @@ function verifyAuthorshipProof(payload) {
   const publicKeyPem = normalizePem(proof.public_key_pem);
   const publicKeySha = sha256Text(publicKeyPem);
   const expectedMessage = buildAuthorshipMessage(payload);
-  const expectedDigest = sha256Text(stableStringify(payloadWithoutAuthorship(payload)));
+  // Use canonicalStringify (matches Python json.dumps ensure_ascii=False sort_keys=True separators=(",",":"))
+  const canonicalPayload = canonicalStringify(payloadWithoutAuthorship(payload));
+  const expectedDigest = sha256Text(canonicalPayload);
 
   if (proof.public_key_sha256 !== publicKeySha) {
     return {
@@ -259,7 +280,42 @@ function verifyAuthorshipProof(payload) {
       present: true,
       status: "invalid_authorship_proof",
       signature_verified: false,
-      error: "signed_payload_sha256 mismatch"
+      error: "signed_payload_sha256 mismatch",
+      // Detailed diagnostics for AUTHORED_PAYLOAD_DIGEST_MISMATCH
+      error_code: "AUTHORED_PAYLOAD_DIGEST_MISMATCH",
+      validation_stage: "authorship_proof",
+      detected_payload_profile: payload.payload_profile || null,
+      authorship_canonical_version_used: "trinity.agent_authorship_common.v1",
+      signed_payload_sha256_from_proof: proof.signed_payload_sha256,
+      computed_payload_sha256_by_gateway: expectedDigest,
+      received_raw_body_sha256: rawBodySha256 || null,
+      x_trinity_payload_file_sha256: (headerFingerprints && headerFingerprints.payloadFile) || null,
+      x_trinity_authorship_payload_sha256: (headerFingerprints && headerFingerprints.authorshipPayload) || null,
+      excluded_dynamic_fields_used: [
+        "authorship_proof",
+        "_authorship_claim",
+        "guardian_presence_proof",
+        "_guardian_status",
+        "guardian_verification_result"
+      ],
+      payload_keys_seen_by_gateway: Object.keys(payload).sort(),
+      must_not_strip_before_digest: [
+        "payload_profile",
+        "expected_builder",
+        "wrong_builders",
+        "do_not_edit_after_signing",
+        "submit_exact_generated_file",
+        "if_modified_rerun_builder",
+        "requires_gateway_capabilities",
+        "gateway_contract_version",
+        "authorship_canonical_version",
+        "gateway_intake_fields",
+        "guardian_registry_listing_request",
+        "guardian_listing_request",
+        "counts_toward_home",
+        "related_records"
+      ],
+      agent_action: "Do not strip fields or re-sign manually. Submit exact generated file. If local digest matches proof, fix Gateway canonicalization or transport."
     };
   }
 
@@ -1071,7 +1127,9 @@ async function runGatewayPipeline(payload, {
   claimGateOutputPath = null,
   reportPath = null,
   precomputedArchiveReadiness = null,
-  precomputedAutoArchiveDecision = null
+  precomputedAutoArchiveDecision = null,
+  rawBodySha256 = null,
+  headerFingerprints = null,
 }) {
   // 0. Wrapper detection must run before any normalization.
   if (isWrappedGatewayPayload(payload)) {
@@ -1298,9 +1356,28 @@ async function runGatewayPipeline(payload, {
     }
 
     // 4b. Authorship proof verification
-    const authorship = verifyAuthorshipProof(payload);
+    const authorship = verifyAuthorshipProof(payload, rawBodySha256, headerFingerprints);
 
     if (authorship.present && !authorship.signature_verified) {
+      // Return detailed diagnostic for AUTHORED_PAYLOAD_DIGEST_MISMATCH
+      if (authorship.error_code === "AUTHORED_PAYLOAD_DIGEST_MISMATCH") {
+        return gatewayError(422, {
+          ok: false,
+          error_code: authorship.error_code,
+          validation_stage: authorship.validation_stage,
+          detected_payload_profile: authorship.detected_payload_profile,
+          authorship_canonical_version_used: authorship.authorship_canonical_version_used,
+          signed_payload_sha256_from_proof: authorship.signed_payload_sha256_from_proof,
+          computed_payload_sha256_by_gateway: authorship.computed_payload_sha256_by_gateway,
+          received_raw_body_sha256: authorship.received_raw_body_sha256,
+          x_trinity_payload_file_sha256: authorship.x_trinity_payload_file_sha256,
+          x_trinity_authorship_payload_sha256: authorship.x_trinity_authorship_payload_sha256,
+          excluded_dynamic_fields_used: authorship.excluded_dynamic_fields_used,
+          payload_keys_seen_by_gateway: authorship.payload_keys_seen_by_gateway,
+          must_not_strip_before_digest: authorship.must_not_strip_before_digest,
+          agent_action: authorship.agent_action,
+        });
+      }
       return gatewayError(422, {
         reason: "invalid_authorship_proof",
         validation_stage: "payload_validator",
@@ -1985,7 +2062,24 @@ app.get("/gateway/version", (req, res) => {
 
 // --- Task #3: POST /gateway/preflight ---
 app.post("/gateway/preflight", async (req, res) => {
-  const result = withRequestId(req, await runGatewayPipeline(req.body, { createIssue: false }));
+  // Capture X-Trinity fingerprint headers for diagnostic correlation
+  const headerFingerprints = {
+    payloadFile: req.headers["x-trinity-payload-file-sha256"] || null,
+    authorshipPayload: req.headers["x-trinity-authorship-payload-sha256"] || null,
+    authorshipProof: req.headers["x-trinity-authorship-proof-sha256"] || null,
+    canonicalVersion: req.headers["x-trinity-authorship-canonical-version"] || null,
+    payloadProfile: req.headers["x-trinity-payload-profile"] || null,
+    gatewayContractVersion: req.headers["x-trinity-gateway-contract-version"] || null,
+  };
+  // Compute raw body SHA256 for transport integrity diagnosis
+  const rawBodyStr = typeof req.body === "string" ? req.body : JSON.stringify(req.body);
+  const rawBodySha256 = sha256Text(rawBodyStr);
+
+  const result = withRequestId(req, await runGatewayPipeline(req.body, {
+    createIssue: false,
+    rawBodySha256,
+    headerFingerprints,
+  }));
   res.status(result.status).json(result.body);
 });
 
@@ -2116,6 +2210,11 @@ app.get("/gateway/capabilities", (req, res) => {
   res.json({
     service: "trinity-agent-issue-gateway",
     purpose: "Structured intake for Trinity Accord agent verification candidates.",
+    authorship_canonical_version: "trinity.agent_authorship_common.v1",
+    supports_gateway_capabilities: [
+      "guardian_active_registry_listing",
+      "guardian_listing_request_v1",
+    ],
     production_readiness: {
       healthz: "/healthz",
       readiness: "/readiness",
