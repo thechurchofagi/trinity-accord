@@ -262,3 +262,6 @@ jobs:
 
       - name: Test authorship docs guidance
         run: python3 scripts/test_authorship_docs_guidance.py
+
+      - name: Test Guardian listing payload schema acceptance
+        run: python3 tests/test_guardian_listing_payload_schema_acceptance.py
