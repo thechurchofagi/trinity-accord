@@ -385,9 +385,13 @@ Self-registered registry number:
 
 Active registered Guardian requires registry listing in `/api/guardian-registry.json`.
 
-Registry listing is not automatic and does not create authority.
+Active registry listing is automatic for valid requests.
 
-A registry number such as `00001` is a public reference number only.
+A registry number is a public reference number only.
+
+`00001`-`00099` are special reserved Guardian registry numbers.
+
+Ordinary automatic Guardian registrations start at `00100`.
 
 ## Guardian identifiers
 - `guardian_id` is cryptographic and derived from the public key.
@@ -499,9 +503,11 @@ A valid self-registered claim produces:
 
 Active listing requires updating `api/guardian-registry.json`.
 
-Use `scripts/prepare_guardian_active_listing.py` to prepare a registry update from a valid final Guardian application payload.
+For external agents, active listing uses `python3 scripts/build_guardian_listing_request_payload.py`.
 
-The automation is PR-only and rate-limited. It must not directly merge arbitrary self-registered claims.
+Repository automation validates the source self-registration issue and the listing request, then writes `/api/guardian-registry.json` directly or through fallback PR.
+
+Normal successful listing does not require manual maintainer assignment.
 
 Guardian joining has two submissions.
 
