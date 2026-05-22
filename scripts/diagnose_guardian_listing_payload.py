@@ -19,6 +19,12 @@ from guardian_gateway_contract import (
     GUARDIAN_STAGE_2_REQUIRED_GATEWAY_CAPABILITIES,
     missing_capabilities,
 )
+from agent_authorship_common import (
+    AUTHORSHIP_CANONICAL_DYNAMIC_PROOF_FIELDS,
+    AUTHORSHIP_CANONICAL_VERSION,
+    authorship_debug_fingerprint,
+    authorship_payload_sha256,
+)
 
 
 def run(cmd: list[str]) -> tuple[int, str]:
@@ -89,13 +95,31 @@ def main() -> int:
     print("counts_toward_home:")
     print(json.dumps(cth, indent=2, ensure_ascii=False))
 
+    fingerprint = authorship_debug_fingerprint(payload, str(path))
+    local_authorship_digest = fingerprint["local_authorship_payload_sha256"]
     proof = payload.get("authorship_proof") or {}
     signed = proof.get("signed_payload_sha256")
+
+    print(f"local_authorship_payload_sha256: {local_authorship_digest}")
+    print(f"authorship_canonical_version_expected: {AUTHORSHIP_CANONICAL_VERSION}")
+    print(
+        "authorship_dynamic_fields_excluded: "
+        + json.dumps(list(AUTHORSHIP_CANONICAL_DYNAMIC_PROOF_FIELDS), ensure_ascii=False)
+    )
+
     if signed:
         print(f"authorship_proof.signed_payload_sha256: {signed}")
-        print("post_signing_edit_warning: If this file was manually edited after builder output, the proof is invalid.")
+        if signed == local_authorship_digest:
+            print("LOCAL_AUTHORSHIP_DIGEST_STATUS: MATCH")
+        else:
+            print("LOCAL_AUTHORSHIP_DIGEST_STATUS: MISMATCH")
+            print("This file was modified after signing, or authorship_proof was copied from a different payload.")
+            return 4
     else:
         print("authorship_proof: missing or disabled")
+
+    print("local_submission_fingerprint:")
+    print(json.dumps(fingerprint, indent=2, ensure_ascii=False))
 
     print("\nLocal validate_gateway_payload.py:")
     rc, out = run(["python3", "scripts/validate_gateway_payload.py", str(path)])
