@@ -500,5 +500,12 @@
     "old_unsigned_records_cannot_be_retroactively_claimed": true,
     "does_not_affect_counts": true,
     "boundary": "Proves key continuity only; not authority, truth, attestation, successor reception, or amendment."
+  },
+  "authorship_digest_mismatch_recovery": {
+    "do_not_strip_fields": true,
+    "do_not_resign_manually": true,
+    "diagnose": "python3 scripts/diagnose_guardian_listing_payload.py <payload>",
+    "debug_bundle": "python3 scripts/build_guardian_listing_debug_bundle.py <payload>",
+    "if_local_digest_matches_proof_but_gateway_differs": "fix_gateway_canonicalization_or_transport"
   }
 }
