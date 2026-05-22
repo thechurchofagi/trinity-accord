@@ -13,6 +13,20 @@ ROOT = Path(__file__).resolve().parents[1]
 
 captured_headers = {}
 
+MOCK_CAPABILITIES = {
+    "supports_gateway_capabilities": [
+        "guardian_registry_listing_request",
+        "guardian_listing_request",
+        "gateway_intake_fields",
+        "counts_toward_home.guardian_registry",
+        "counts_toward_home.exclude_from_reception_total",
+    ],
+    "supports_payload_profiles": [
+        "guardian_active_registry_listing_request.v1",
+    ],
+    "authorship_canonical_version": "trinity.agent_authorship_common.v1",
+}
+
 
 class HeaderCaptureHandler(BaseHTTPRequestHandler):
     def do_GET(self):
@@ -25,13 +39,7 @@ class HeaderCaptureHandler(BaseHTTPRequestHandler):
             self.send_response(200)
             self.send_header("Content-Type", "application/json")
             self.end_headers()
-            self.wfile.write(json.dumps({
-                "supports_gateway_capabilities": [
-                    "guardian_active_registry_listing",
-                    "guardian_listing_request_v1",
-                ],
-                "authorship_canonical_version": "trinity.agent_authorship_common.v1",
-            }).encode())
+            self.wfile.write(json.dumps(MOCK_CAPABILITIES).encode())
         else:
             self.send_response(404)
             self.end_headers()
@@ -63,11 +71,14 @@ def main() -> int:
     with tempfile.NamedTemporaryFile(suffix=".json", delete=False, mode="w") as f:
         out_path = f.name
 
+    sha = "cccccccccccccccc000000000000000000000000000000000000000000000000"
+    gid = "guardian_ed25519_" + sha[:16]
+
     rc, out = subprocess.run(
         ["python3", "scripts/build_guardian_listing_request_payload.py",
          "--agent-name", "Header Test", "--provider", "Test",
-         "--source-issue", "9997", "--guardian-id", "guardian_ed25519_headertest",
-         "--public-key-sha256", "headertest00000000000000000000000000000000000000000000000000000000",
+         "--source-issue", "9997", "--guardian-id", gid,
+         "--public-key-sha256", sha,
          "--label", "Header Guardian", "--guardian-type", "human_with_ai_agent",
          "--application-mode", "joint_human_ai", "--idempotency-key", "header-test",
          "--out", out_path],
@@ -75,6 +86,7 @@ def main() -> int:
     ).returncode
     if rc != 0:
         print("FAIL: build payload")
+        print(out)
         return 1
 
     result = subprocess.run(
