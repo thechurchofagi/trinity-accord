@@ -47,6 +47,10 @@ def main():
     )
 
     # 2. Run builder and get payload
+    #    guardian_id suffix must equal first 16 hex chars of public_key_sha256
+    sha256 = "aaaaaaaaaaaaaaaa000000000000000000000000000000000000000000000000"
+    gid = "guardian_ed25519_" + sha256[:16]
+
     with tempfile.TemporaryDirectory() as raw:
         td = Path(raw)
         out = td / "guardian-listing-request.json"
@@ -58,9 +62,8 @@ def main():
                 "--agent-name", "Schema Acceptance Test Agent",
                 "--provider", "Test Provider",
                 "--source-issue", "9999",
-                "--guardian-id", "guardian_ed25519_a0b1c2d3e4f5a6b7",
-                "--public-key-sha256",
-                "aaaaaaaaaaaaaaaa000000000000000000000000000000000000000000000000",
+                "--guardian-id", gid,
+                "--public-key-sha256", sha256,
                 "--label", "Schema Acceptance Test",
                 "--guardian-type", "human_with_ai_agent",
                 "--application-mode", "joint_human_ai",
