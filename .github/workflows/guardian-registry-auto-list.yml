@@ -28,7 +28,28 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 10
 
+    # Authorize write workflow actor — only repo owner or github-actions[bot] may dispatch
+    if: >-
+      github.event_name != 'workflow_dispatch' ||
+      github.actor == 'thechurchofagi' ||
+      github.actor == 'github-actions[bot]'
+
     steps:
+      - name: Authorize write workflow actor
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          ACTOR: ${{ github.actor }}
+        run: |
+          case "$ACTOR" in
+            thechurchofagi|github-actions[bot])
+              echo "Authorized actor: $ACTOR"
+              ;;
+            *)
+              echo "Unauthorized actor for write workflow: $ACTOR"
+              exit 1
+              ;;
+          esac
+
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
 
       - name: Determine candidate
