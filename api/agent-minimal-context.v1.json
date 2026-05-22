@@ -71,7 +71,8 @@
     "echo": "Use Echo path; Echo is non-authoritative and non-amending.",
     "verify_v0_v5_agent_declared": "Use Render API / builder template route only; evidence is waived and level is agent-declared template level, not strict evidence.",
     "verify_v6_plus_strict_evidence": "Requires Evidence Input -> strict Claim Gate -> Report Builder if allowed -> Validator.",
-    "stop": "Use when context, tools, or authorization are insufficient."
+    "stop": "Use when context, tools, or authorization are insufficient.",
+    "guardian": "Guardian joining is a two-submission flow: Stage 1 uses scripts/create_guardian_application.mjs for self-registration; Stage 2 uses scripts/build_guardian_listing_request_payload.py for active registry listing. Active listing is automatic for valid requests. Do not submit guardian_registry_number. 00001-00099 are special reserved numbers; ordinary automatic listings start at 00100. Guardian listing is not authority, attestation, verification level, successor reception, or amendment."
   },
   "no_tool_default": {
     "verification_state": "unverified_by_this_agent",
