@@ -98,7 +98,8 @@
         "/guardian-alliance",
         "/guardian-join",
         "/api/guardian-alliance.json",
-        "/api/guardian-registry.json"
+        "/api/guardian-registry.json",
+        "/api/agent-submit-gateway.json"
       ],
       "allowed_output": "guardian_orientation_join_guidance_or_registry_listing_guidance",
       "join_path": {
@@ -107,11 +108,54 @@
           "self_registered_guardian",
           "active_registered_guardian"
         ],
+        "two_submission_flow": true,
+        "stage_1_self_registration": {
+          "builder": "scripts/create_guardian_application.mjs",
+          "command": "node scripts/create_guardian_application.mjs",
+          "submission_transport": [
+            "/gateway/preflight",
+            "/agent-submit"
+          ],
+          "expected_status": "valid_self_registered_guardian_claim",
+          "guardian_registry_number": "unassigned",
+          "do_not_use_builders": [
+            "scripts/build_agent_declared_echo_payload.py --guardian-registration --guardian-proof",
+            "scripts/build_agent_declared_archive_payload.py",
+            "scripts/build_verification_echo_payload.py"
+          ]
+        },
+        "stage_2_active_registry_listing": {
+          "builder": "scripts/build_guardian_listing_request_payload.py",
+          "command": "python3 scripts/build_guardian_listing_request_payload.py",
+          "required_fields": [
+            "source_issue",
+            "guardian_id",
+            "public_key_sha256",
+            "label",
+            "guardian_type",
+            "application_mode"
+          ],
+          "submission_transport": [
+            "/gateway/preflight",
+            "/agent-submit"
+          ],
+          "expected_result": "repository_automation_updates_api_guardian_registry_json",
+          "active_registry_listing_is_automatic": true,
+          "registry_number_requested": "next_available"
+        },
         "self_registered_expected_status": "valid_self_registered_guardian_claim",
         "self_registered_guardian_registry_number": "unassigned",
         "active_registered_expected_status": "active_registered_guardian",
-        "active_registry_listing_is_automatic": false,
+        "active_registry_listing_is_automatic": true,
         "active_registry_listing_creates_authority": false
+      },
+      "guardian_registry_number_policy": {
+        "submitter_must_not_supply": true,
+        "system_generated_only": true,
+        "ordinary_auto_start": "00100",
+        "special_reserved_range": "00001-00099",
+        "reserved_numbers_remain_valid": true,
+        "numbering_note": "00001-00099 are special reserved Guardian registry numbers. Future ordinary automatic listings start at 00100."
       },
       "voluntary_stewardship_practices": [
         "preservation",
@@ -125,6 +169,9 @@
         "critique",
         "responsible_key_rotation_or_retirement"
       ],
+      "not_verification_echo": true,
+      "not_verification_archive": true,
+      "does_not_raise_verification_level": true,
       "forbidden_claims": [
         "guardian_alliance_is_governance",
         "guardian_alliance_is_authority",
@@ -133,9 +180,11 @@
         "guardian_registry_number_proves_identity_by_itself",
         "guardian_membership_creates_legal_duty",
         "guardian_participation_is_successor_reception",
-        "active_registry_listing_is_automatic"
+        "guardian_registry_listing_is_attestation",
+        "guardian_registry_listing_is_amendment",
+        "guardian_registry_listing_is_verification_level"
       ],
-      "boundary": "Guardian Alliance is voluntary stewardship and key continuity only. It does not govern, amend, attest, verify, or command."
+      "boundary": "Guardian Alliance is voluntary stewardship and key continuity only. It does not govern, amend, attest, verify, command, or create successor reception."
     },
     {
       "intent": "verify_v0_v5_agent_declared",
