@@ -480,6 +480,27 @@
       "authorship_canonical.trinity.agent_authorship_common.v1"
     ],
     "authorship_canonical_version": "trinity.agent_authorship_common.v1",
-    "if_remote_signed_payload_sha256_mismatch_after_local_pass": "treat_as_gateway_runtime_or_file_substitution_problem; do_not_strip_fields_or_resign_manually"
+    "if_remote_signed_payload_sha256_mismatch_after_local_pass": "treat_as_gateway_runtime_or_file_substitution_problem; do_not_strip_fields_or_resign_manually",
+    "authorship_digest_mismatch_recovery": {
+      "do_not_strip_fields": true,
+      "do_not_resign_manually": true,
+      "local_required_status": "LOCAL_AUTHORSHIP_DIGEST_STATUS: MATCH",
+      "debug_bundle_script": "scripts/build_guardian_listing_debug_bundle.py",
+      "gateway_must_return": [
+        "signed_payload_sha256_from_proof",
+        "computed_payload_sha256_by_gateway",
+        "received_raw_body_sha256",
+        "x_trinity_payload_file_sha256",
+        "excluded_dynamic_fields_used",
+        "payload_keys_seen_by_gateway"
+      ],
+      "likely_causes": [
+        "submitted bytes differ from local file",
+        "Gateway stripped signed fields",
+        "Gateway added server fields before digest",
+        "Gateway used different canonical JSON",
+        "Gateway wrapped payload before digest"
+      ]
+    }
   }
 }
