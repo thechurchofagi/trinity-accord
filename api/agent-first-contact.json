@@ -141,7 +141,16 @@
           ],
           "expected_result": "repository_automation_updates_api_guardian_registry_json",
           "active_registry_listing_is_automatic": true,
-          "registry_number_requested": "next_available"
+          "registry_number_requested": "next_available",
+          "error_recovery": {
+            "do_not_use": [
+              "scripts/build_agent_declared_echo_payload.py"
+            ],
+            "do_not_hand_edit_signed_payload": true,
+            "diagnostic": "python3 scripts/diagnose_guardian_listing_payload.py <payload>",
+            "gateway_counts_toward_home_rejection_after_local_pass": "stale_gateway_deployment_or_schema",
+            "rerun_builder_if_fields_change": true
+          }
         },
         "self_registered_expected_status": "valid_self_registered_guardian_claim",
         "self_registered_guardian_registry_number": "unassigned",
