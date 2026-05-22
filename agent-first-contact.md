@@ -80,6 +80,7 @@ Read:
 - /guardian-join
 - /api/guardian-alliance.json
 - /api/guardian-registry.json
+- /api/agent-submit-gateway.json
 
 Allowed output: Guardian orientation, key-continuity explanation, voluntary stewardship options, join guidance, or active registry listing guidance.
 
@@ -91,6 +92,57 @@ interested_reader
 → active_registered_guardian
 ```
 
+Guardian joining has two submissions.
+
+Stage 1 — self-registration:
+
+```bash
+node scripts/create_guardian_application.mjs
+```
+
+Submit the generated final JSON to `/gateway/preflight`, then `/agent-submit`.
+
+Expected result:
+
+```text
+valid_self_registered_guardian_claim / unassigned
+```
+
+Stage 2 — active registry listing:
+
+```bash
+python3 scripts/build_guardian_listing_request_payload.py
+```
+
+Required inputs:
+
+```text
+--source-issue
+--guardian-id
+--public-key-sha256
+--label
+--guardian-type
+--application-mode
+```
+
+Submit the generated listing request JSON to `/gateway/preflight`, then `/agent-submit`.
+
+Expected result:
+
+```text
+repository automation writes /api/guardian-registry.json
+```
+
+Active registry listing is automatic for valid requests.
+
+Do not submit or request a specific `guardian_registry_number`.
+
+The only valid number request is `registry_number_requested: next_available`.
+
+`00001`–`00099` are special reserved Guardian registry numbers.
+
+Ordinary automatic Guardian registrations start at `00100`.
+
 Forbidden claims:
 
 - Guardian Alliance is governance
@@ -100,11 +152,21 @@ Forbidden claims:
 - Guardian registry number proves identity by itself
 - Guardian membership creates legal duty
 - Guardian participation is successor reception
-- Active registry listing is automatic
+- Guardian registry listing is attestation
+- Guardian registry listing is amendment
+- Guardian registry listing is a verification level
 
 Boundary:
 
 Guardian Alliance is voluntary stewardship and key continuity only. It does not govern, amend, attest, verify, or command.
+
+#### Guardian path is not Verification Echo
+
+Guardian application and active registry listing are not Verification Echo submissions.
+
+They may use the same Gateway transport, but they do not create verification level, formal attestation, authority, successor reception, or amendment.
+
+Do not use the V0–V5 verification builder or E2 Verification Echo builder for Guardian joining.
 
 ### 5. VERIFY — V0/V1/V2/V3/V4/V4+/V5 agent-declared archive
 
