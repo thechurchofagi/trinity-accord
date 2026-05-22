@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """Test ordinary Guardian daily listing cap is enforced consistently."""
 
+import json
+import urllib.request
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -11,7 +13,20 @@ def require(condition, message):
         raise AssertionError(message)
 
 
+def fetch_file(path):
+    """Fetch file from GitHub to ensure we test the committed version."""
+    import base64, os
+    token = os.environ.get("GITHUB_TOKEN", "")
+    repo = os.environ.get("GITHUB_REPOSITORY", "thechurchofagi/trinity-accord")
+    headers = {"Authorization": f"token {token}", "User-Agent": "test", "Accept": "application/vnd.github.v3+json"}
+    url = f"https://api.github.com/repos/{repo}/contents/{path}"
+    req = urllib.request.Request(url, headers=headers)
+    data = json.loads(urllib.request.urlopen(req, timeout=15).read())
+    return base64.b64decode(data["content"]).decode("utf-8")
+
+
 def main():
+    # Read local files (CI checks out the repo)
     auto_reg = (ROOT / "scripts" / "auto_register_guardian_from_gateway_issues.py").read_text(encoding="utf-8")
     prepare = (ROOT / "scripts" / "prepare_guardian_active_listing.py").read_text(encoding="utf-8")
 
@@ -27,7 +42,6 @@ def main():
     policy_path = ROOT / "api" / "guardian-active-listing-policy.v1.json"
     require(policy_path.exists(), "guardian-active-listing-policy.v1.json must exist")
 
-    import json
     policy = json.loads(policy_path.read_text(encoding="utf-8"))
     require("max_new_active_listings_per_utc_day" in policy, "policy missing max_new_active_listings_per_utc_day")
     require(policy["max_new_active_listings_per_utc_day"] >= 1, "daily cap must be >= 1")

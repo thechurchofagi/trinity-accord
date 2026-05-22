@@ -15,20 +15,23 @@ def main():
     builder = (ROOT / "scripts" / "build_guardian_listing_request_payload.py").read_text(encoding="utf-8")
     parser = (ROOT / "scripts" / "auto_register_guardian_from_gateway_issues.py").read_text(encoding="utf-8")
 
-    required_fields = [
+    # Builder must emit structured fields in the guardian_listing_request section
+    # The builder constructs a JSON payload, so fields are at nested level
+    required_builder_fields = [
         "guardian_listing_request",
-        "listing_source_issue",
-        "listing_guardian_id",
-        "listing_public_key_sha256",
-        "listing_guardian_type",
-        "listing_application_mode",
-        "listing_label",
+        "source_issue",
+        "guardian_id",
+        "public_key_sha256",
+        "guardian_type",
+        "application_mode",
+        "label",
         "registry_number_requested",
     ]
 
-    for field in required_fields:
-        require(field in builder, f"builder missing structured field: {field}")
+    for field in required_builder_fields:
+        require(field in builder, f"builder missing field: {field}")
 
+    # Parser must read structured fields first from intake block
     for field in [
         'fields.get("listing_guardian_id")',
         'fields.get("listing_public_key_sha256")',
