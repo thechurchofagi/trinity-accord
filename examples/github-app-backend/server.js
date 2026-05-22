@@ -2125,12 +2125,6 @@ app.post("/gateway/debug-canonical", express.json({
   });
 });
 
-// --- Debug: POST /gateway/debug-canonical-pipeline ---
-// Traces the full pipeline to find where canonicalization diverges
-app.post("/gateway/debug-canonical-pipeline", express.json({
-  limit: "256kb",
-  verify: (req, _res, buf) => { req.rawBody = Buffer.from(buf); }
-}), (req, res) => {
   const steps = {};
 
   // Step 0: Raw body
