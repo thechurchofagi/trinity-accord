@@ -1,4 +1,4 @@
-# deploy-trigger: 2026-05-22T15:34:38Z — authorship-proof-order-fix
+# deploy-trigger: 2026-05-22T15:45:00Z — debug-canonical-pipeline-fix
 services:
   - type: web_service
     name: trinity-agent-issue-gateway
@@ -14,4 +14,3 @@ services:
     envVars:
       - key: PYTHON_VERSION
         value: "3.12"
-
