@@ -69,6 +69,7 @@ jobs:
               listingIssue = parseInt(core.getInput("listing_issue"), 10);
               const s = core.getInput("source_issue");
               if (s) sourceIssue = parseInt(s, 10);
+              core.setOutput("should_run", "true");
             } else {
               const issue = context.payload.issue;
               if (!issue || issue.pull_request) {
