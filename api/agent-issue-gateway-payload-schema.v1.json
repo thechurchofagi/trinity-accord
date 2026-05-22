@@ -1129,6 +1129,64 @@
     "guardian_registry_listing_request": {
       "type": "boolean",
       "description": "Marks this payload as a Guardian registry listing request. When true, counts_toward_home.reception must be false and guardian_registry must be true."
+    },
+    "payload_profile": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "guardian_active_registry_listing_request.v1",
+        null
+      ],
+      "description": "Optional payload profile marker for specialized Gateway payload flows."
+    },
+    "expected_builder": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 200
+    },
+    "wrong_builders": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": "string",
+        "maxLength": 200
+      },
+      "maxItems": 20
+    },
+    "do_not_edit_after_signing": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "submit_exact_generated_file": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "if_modified_rerun_builder": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "requires_gateway_capabilities": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": "string",
+        "maxLength": 120
+      },
+      "maxItems": 30
     }
   },
   "allOf": [
