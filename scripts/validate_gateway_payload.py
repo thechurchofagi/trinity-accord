@@ -573,7 +573,6 @@ def validate_agent_declared_echo_archive(payload, errors):
     if is_guardian_listing:
         if cth.get("basis") != "guardian_registry_listing_request":
             errors.append("Guardian listing request requires counts_toward_home.basis=guardian_registry_listing_request")
-        errors.append("If local validation passes but online Gateway rejects this field, redeploy Gateway; do not switch builders.")
     else:
         if cth.get("basis") != "agent_declared_echo_template_pass":
             errors.append("counts_toward_home.basis must be agent_declared_echo_template_pass")
