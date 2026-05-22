@@ -47,6 +47,10 @@ from gateway_payload_authorship import (
     attach_guardian_if_requested,
     reject_guardian_flags_for_echo_builder,
 )
+from guardian_reroute_guidance import (
+    guardian_wrong_builder_message,
+    looks_like_guardian_listing_intent,
+)
 
 OATH_FILE = ROOT / "api" / "verification-echo-pre-oath.v1.txt"
 
@@ -280,6 +284,14 @@ def main():
     if not Path(args.body_file).exists():
         print(f"ERROR: Body file not found: {args.body_file}", file=sys.stderr)
         sys.exit(1)
+
+    # Reject Guardian active listing intent — this is a pure Echo builder
+    title_text = args.title or ""
+    body_text = Path(args.body_file).read_text(encoding="utf-8")
+
+    if looks_like_guardian_listing_intent(title_text) or looks_like_guardian_listing_intent(body_text):
+        print("ERROR:", guardian_wrong_builder_message(), file=sys.stderr)
+        sys.exit(2)
 
     # Build payload
     payload = build_payload(args)
