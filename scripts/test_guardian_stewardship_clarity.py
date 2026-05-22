@@ -129,7 +129,6 @@ def main():
         "Guardians must perform annual checks",
         "Guardian Alliance grants verification levels",
         "Guardian Alliance represents successor reception",
-        "Active registry listing is automatic",
         "Guardian may self-assign guardian_registry_number",
         "Guardian can choose registry number",
         "registry number proves authority",
