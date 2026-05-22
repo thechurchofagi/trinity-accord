@@ -608,6 +608,46 @@ def main():
     if data.get("boundary_sentence_present") is not True:
         errors.append("boundary_sentence_present must be true")
 
+    # Oath v2 validation (optional — only validate if present)
+    if "verification_oath_honesty" in data and data.get("verification_oath_honesty") is not True:
+        errors.append("verification_oath_honesty must be true when present")
+
+    if "verification_oath_good_faith" in data and data.get("verification_oath_good_faith") is not True:
+        errors.append("verification_oath_good_faith must be true when present")
+
+    # Guardian application oath validation
+    if data.get("guardian_application_oath_present") is True:
+        for key in [
+            "guardian_application_oath_honesty",
+            "guardian_application_oath_good_faith",
+            "guardian_application_oath_anti_abuse",
+        ]:
+            if data.get(key) is not True:
+                errors.append(f"{key} must be true when guardian_application_oath_present=true")
+
+        if data.get("guardian_identity_claims_present") is not True:
+            errors.append("guardian_identity_claims_present must be true for new Guardian application oath payloads")
+
+        if not data.get("guardian_identity_boundary"):
+            errors.append("guardian_identity_boundary is required when Guardian identity claims are present")
+
+    # Guardian listing oath validation
+    if data.get("guardian_listing_oath_present") is True:
+        for key in [
+            "guardian_listing_oath_honesty",
+            "guardian_listing_oath_good_faith",
+            "guardian_listing_oath_anti_abuse",
+            "guardian_listing_oath_system_generated_number",
+        ]:
+            if data.get(key) is not True:
+                errors.append(f"{key} must be true when guardian_listing_oath_present=true")
+
+        if data.get("guardian_identity_claims_present") is not True:
+            errors.append("guardian_identity_claims_present must be true for new Guardian listing oath payloads")
+
+        if not data.get("guardian_identity_boundary"):
+            errors.append("guardian_identity_boundary is required when Guardian identity claims are present")
+
     if errors:
         fail(errors)
 

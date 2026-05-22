@@ -53,6 +53,14 @@ GROUPS = {
         ["python3", "scripts/test_guardian_preflight_fingerprint_headers.py"],
         ["python3", "scripts/test_guardian_listing_debug_bundle.py"],
 
+        ["python3", "scripts/test_verification_oath_v2.py"],
+        ["python3", "scripts/test_guardian_application_oath_and_identity.py"],
+        ["python3", "scripts/test_guardian_listing_oath_and_identity.py"],
+        ["python3", "scripts/test_guardian_daily_cap_config.py"],
+        ["python3", "scripts/test_guardian_auto_registration_identity_mismatch.py"],
+        ["python3", "scripts/test_gateway_render_oath_identity_fields.py"],
+        ["python3", "scripts/test_oath_contract_validator.py"],
+
 
     ],
     "chronicle": [

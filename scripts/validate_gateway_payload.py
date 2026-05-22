@@ -14,6 +14,15 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
+sys.path.insert(0, str(ROOT / "scripts"))
+from oath_contracts import (
+    validate_oath_contract,
+    VERIFICATION_OATH_TRUE_FIELDS,
+    GUARDIAN_APPLICATION_OATH_TRUE_FIELDS,
+    GUARDIAN_LISTING_OATH_TRUE_FIELDS,
+)
+from guardian_identity_claims import validate_guardian_identity_claims
+
 
 def is_agent_declared_echo_archive(payload):
     return payload.get("requested_archive_kind") == "agent_declared_echo_archive"
@@ -295,6 +304,25 @@ def validate_guardian_fields(payload, errors):
             if boundaries.get(key) is not True:
                 errors.append(f"guardian_retirement.boundaries.{key} must be true")
 
+    # Validate Guardian application oath if present
+    oath = payload.get("guardian_application_oath")
+    if oath is not None:
+        errors.extend(validate_oath_contract(
+            oath,
+            context="guardian_application_oath",
+            allowed_schemas={"trinityaccord.guardian-application-oath.v1"},
+            required_true=GUARDIAN_APPLICATION_OATH_TRUE_FIELDS,
+        ))
+
+    # Validate Guardian identity claims if present
+    if isinstance(reg, dict):
+        errors.extend(validate_guardian_identity_claims(
+            reg.get("identity_claims"),
+            expected_guardian_id=reg.get("guardian_id"),
+            expected_public_key_sha256=reg.get("public_key_sha256"),
+            context="guardian_registration.identity_claims",
+        ))
+
 
 def validate_identity(payload, errors):
     identity = payload.get("agent_identity") or {}
@@ -436,6 +464,64 @@ def validate_guardian_listing_request(payload, errors):
         if "guardian_registry_number" in low and "unassigned" not in low and "none" not in low:
             errors.append("payload body must not self-assign guardian_registry_number")
 
+    # Validate Guardian listing oath
+    listing_oath = payload.get("guardian_listing_oath")
+    if listing_oath is None:
+        errors.append("guardian_listing_oath is required for Guardian listing request payloads")
+    else:
+        errors.extend(validate_oath_contract(
+            listing_oath,
+            context="guardian_listing_oath",
+            allowed_schemas={"trinityaccord.guardian-listing-oath.v1"},
+            required_true=GUARDIAN_LISTING_OATH_TRUE_FIELDS,
+        ))
+
+    # Validate Guardian listing identity claims
+    errors.extend(validate_guardian_identity_claims(
+        req.get("identity_claims"),
+        expected_guardian_id=req.get("guardian_id"),
+        expected_public_key_sha256=req.get("public_key_sha256"),
+        context="guardian_listing_request.identity_claims",
+    ))
+
+    if payload.get("payload_profile") == "guardian_active_registry_listing_request.v1" and not req.get("identity_claims"):
+        errors.append("guardian_listing_request.identity_claims is required for Guardian listing requests")
+
+
+def validate_agent_integrity_oath(payload, errors):
+    """Validate verification oath v2 if present."""
+    aid = payload.get("agent_integrity_declaration") or {}
+    oath = aid.get("verification_oath")
+
+    if not isinstance(oath, dict):
+        return
+
+    legacy_required = [
+        "understands_not_an_exam_or_performance",
+        "will_state_actual_capability_only",
+        "will_not_lie_or_cheat",
+        "will_not_fabricate_verification",
+        "will_not_present_guesses_as_facts",
+        "will_not_copy_prior_reports_as_fresh_evidence",
+        "will_state_uncertainty_limitations_and_downgrades",
+    ]
+
+    required = legacy_required
+    if oath.get("oath_version") == "verification-echo-pre-oath-v2":
+        required = legacy_required + VERIFICATION_OATH_TRUE_FIELDS
+
+    errors.extend(validate_oath_contract(
+        oath,
+        context="agent_integrity_declaration.verification_oath",
+        allowed_schemas={
+            "trinityaccord.verification-oath.v1",
+            "trinityaccord.verification-oath.v2",
+            "trinityaccord.guardian-application-oath.v1",
+            "trinityaccord.guardian-listing-oath.v1",
+        },
+        required_true=required,
+    ))
+
 
 def validate_common(payload, errors):
     validate_identity(payload, errors)
@@ -443,6 +529,7 @@ def validate_common(payload, errors):
     validate_authorship_proof(payload, errors)
     validate_guardian_fields(payload, errors)
     validate_guardian_listing_request(payload, errors)
+    validate_agent_integrity_oath(payload, errors)
 
     # Guardian listing profile coherence checks
     if payload_is_guardian_listing(payload):

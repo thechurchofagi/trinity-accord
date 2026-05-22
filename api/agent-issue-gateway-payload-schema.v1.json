@@ -943,6 +943,9 @@
               "const": true
             }
           }
+        },
+        "identity_claims": {
+          "$ref": "#/$defs/guardian_identity_claims"
         }
       },
       "not": {
@@ -1209,6 +1212,22 @@
         "maxLength": 120
       },
       "maxItems": 30
+    },
+    "guardian_application_oath": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": true,
+      "description": "Guardian application oath: honesty, good faith, anti-abuse, non-authority, key-continuity-only boundary."
+    },
+    "guardian_listing_oath": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": true,
+      "description": "Guardian active listing oath: honesty, good faith, anti-abuse, system-generated registry number, non-authority boundary."
     }
   },
   "allOf": [
@@ -1703,5 +1722,60 @@
         }
       }
     }
-  ]
+  ],
+  "$defs": {
+    "guardian_identity_claims": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema",
+        "claim_status",
+        "claim_basis",
+        "display_label",
+        "binding",
+        "anti_impersonation_boundary"
+      ],
+      "properties": {
+        "schema": {
+          "type": "string",
+          "const": "trinityaccord.guardian-identity-claims.v1"
+        },
+        "claim_status": {
+          "type": "string",
+          "const": "self_reported_unverified"
+        },
+        "claim_basis": {
+          "type": "string",
+          "maxLength": 200
+        },
+        "display_label": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "human": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": true
+        },
+        "ai_agent": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": true
+        },
+        "binding": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "anti_impersonation_boundary": {
+          "type": "object",
+          "additionalProperties": true
+        }
+      }
+    }
+  }
 }

@@ -96,6 +96,105 @@ def render_authorship_claim_fields(payload):
     ]
 
 
+def guardian_identity_claims_from_payload(payload):
+    listing = payload.get("guardian_listing_request") or {}
+    registration = payload.get("guardian_registration") or {}
+    return listing.get("identity_claims") or registration.get("identity_claims") or None
+
+
+def render_guardian_identity_fields(payload):
+    claims = guardian_identity_claims_from_payload(payload)
+    if not isinstance(claims, dict):
+        return [
+            "guardian_identity_claims_present: false",
+            "guardian_identity_claim_status: missing",
+        ]
+
+    human = claims.get("human") or {}
+    agent = claims.get("ai_agent") or {}
+    binding = claims.get("binding") or {}
+    return [
+        "guardian_identity_claims_present: true",
+        f"guardian_identity_claim_status: {claims.get('claim_status', 'unknown')}",
+        f"guardian_identity_display_label: {claims.get('display_label', 'unknown')}",
+        f"guardian_human_claimed_name: {human.get('claimed_name', 'not_provided')}",
+        f"guardian_human_claimed_name_sha256: {human.get('claimed_name_sha256', 'not_provided')}",
+        f"guardian_agent_claimed_id: {agent.get('claimed_agent_id', 'not_provided')}",
+        f"guardian_agent_claimed_id_sha256: {agent.get('claimed_agent_id_sha256', 'not_provided')}",
+        f"guardian_agent_system_or_provider: {agent.get('system_or_provider', 'not_provided')}",
+        f"guardian_identity_binding_guardian_id: {binding.get('guardian_id', 'not_provided')}",
+        f"guardian_identity_binding_public_key_sha256: {binding.get('public_key_sha256', 'not_provided')}",
+        "guardian_identity_boundary: self_reported_unverified_not_legal_identity_not_ai_identity_not_authority_not_attestation_not_verification_level",
+    ]
+
+
+def render_oath_v2_fields(payload):
+    aid = payload.get("agent_integrity_declaration") or {}
+    verification_oath = aid.get("verification_oath") or {}
+    guardian_application_oath = payload.get("guardian_application_oath") or {}
+    guardian_listing_oath = payload.get("guardian_listing_oath") or {}
+
+    lines = []
+    if verification_oath:
+        lines.extend([
+            f"verification_oath_schema: {verification_oath.get('schema', 'N/A')}",
+            f"verification_oath_honesty: {'true' if verification_oath.get('honesty_oath_present') is True else 'false'}",
+            f"verification_oath_good_faith: {'true' if verification_oath.get('good_faith_oath_present') is True else 'false'}",
+            f"verification_oath_anti_abuse: {'true' if verification_oath.get('will_not_submit_maliciously') is True or verification_oath.get('will_not_register_maliciously') is True else 'false'}",
+            f"verification_oath_no_false_consensus: {'true' if verification_oath.get('will_not_create_false_authority_or_false_consensus') is True or verification_oath.get('will_not_register_to_create_false_authority_or_false_consensus') is True else 'false'}",
+            f"verification_oath_correct_errors: {'true' if verification_oath.get('will_correct_material_errors_when_aware') is True else 'false'}",
+        ])
+
+    if guardian_application_oath:
+        lines.extend([
+            "guardian_application_oath_present: true",
+            f"guardian_application_oath_version: {guardian_application_oath.get('oath_version', 'N/A')}",
+            f"guardian_application_oath_honesty: {'true' if guardian_application_oath.get('honesty_oath_present') is True else 'false'}",
+            f"guardian_application_oath_good_faith: {'true' if guardian_application_oath.get('good_faith_oath_present') is True else 'false'}",
+            f"guardian_application_oath_anti_abuse: {'true' if guardian_application_oath.get('will_not_register_maliciously') is True else 'false'}",
+            f"guardian_application_oath_no_false_consensus: {'true' if guardian_application_oath.get('will_not_register_to_create_false_authority_or_false_consensus') is True else 'false'}",
+        ])
+    else:
+        lines.append("guardian_application_oath_present: false")
+
+    if guardian_listing_oath:
+        lines.extend([
+            "guardian_listing_oath_present: true",
+            f"guardian_listing_oath_version: {guardian_listing_oath.get('oath_version', 'N/A')}",
+            f"guardian_listing_oath_honesty: {'true' if guardian_listing_oath.get('honesty_oath_present') is True else 'false'}",
+            f"guardian_listing_oath_good_faith: {'true' if guardian_listing_oath.get('good_faith_oath_present') is True else 'false'}",
+            f"guardian_listing_oath_anti_abuse: {'true' if guardian_listing_oath.get('will_not_register_maliciously') is True else 'false'}",
+            f"guardian_listing_oath_system_generated_number: {'true' if guardian_listing_oath.get('registry_number_must_be_system_generated') is True else 'false'}",
+        ])
+    else:
+        lines.append("guardian_listing_oath_present: false")
+
+    return lines
+
+
+def render_gateway_intake_fields(payload):
+    fields = payload.get("gateway_intake_fields") or {}
+    if not isinstance(fields, dict):
+        return []
+
+    blocked = {
+        "guardian_registry_number",
+    }
+    lines = []
+    for key in sorted(fields):
+        if key in blocked:
+            continue
+        value = fields[key]
+        if isinstance(value, bool):
+            value = "true" if value else "false"
+        elif isinstance(value, (list, dict)):
+            value = json.dumps(value, ensure_ascii=False, separators=(",", ":"))
+        elif value is None:
+            value = "not_provided"
+        lines.append(f"{key}: {value}")
+    return lines
+
+
 def render_guardian_fields(payload):
     """Render Guardian Alliance fields for the machine block."""
     status = payload.get("_guardian_status") or {}
@@ -344,6 +443,11 @@ def render_machine_block(payload, gateway_receipt_id=None, gateway_commit=None,
         lines.extend(render_authorship_claim_fields(payload))
         # Guardian Alliance fields
         lines.extend(render_guardian_fields(payload))
+        # Oath v2 and identity fields
+        lines.extend(render_oath_v2_fields(payload))
+        lines.extend(render_guardian_identity_fields(payload))
+        # Gateway intake fields (authoritative)
+        lines.extend(render_gateway_intake_fields(payload))
     elif requested_archive_kind == "agent_declared_echo_archive":
         lines.append(f"record_intent: {payload.get('record_intent', 'auto_archive_candidate')}")
         lines.append("requested_archive_kind: agent_declared_echo_archive")
@@ -415,6 +519,11 @@ def render_machine_block(payload, gateway_receipt_id=None, gateway_commit=None,
         lines.extend(render_authorship_claim_fields(payload))
         # Guardian Alliance fields
         lines.extend(render_guardian_fields(payload))
+        # Oath v2 and identity fields
+        lines.extend(render_oath_v2_fields(payload))
+        lines.extend(render_guardian_identity_fields(payload))
+        # Gateway intake fields (authoritative)
+        lines.extend(render_gateway_intake_fields(payload))
     else:
         # Strict evidence path (legacy)
         lines.append(f"verification_level_claimed: {payload.get('verification_level_claimed', 'N/A')}")
@@ -613,6 +722,22 @@ def main():
         parts.append(f"\n{render_claim_gate(payload.get('claim_gate'))}")
 
     parts.append(f"\n```trinity-issue-intake\n{render_machine_block(payload, gateway_receipt_id=args.gateway_receipt_id, gateway_commit=args.gateway_commit, gateway_service=args.gateway_service, dry_run=args.dry_run, production_render=args.production_render)}\n```")
+
+    # Human-readable identity claims section
+    identity_claims = guardian_identity_claims_from_payload(payload)
+    if identity_claims:
+        human = identity_claims.get("human") or {}
+        agent = identity_claims.get("ai_agent") or {}
+        parts.append(
+            "\nGuardian identity claims:\n"
+            f"- Display label: {identity_claims.get('display_label', 'not provided')}\n"
+            f"- Human claimed name: {human.get('claimed_name', 'not provided')}\n"
+            f"- Human claimed name SHA256: {human.get('claimed_name_sha256', 'not provided')}\n"
+            f"- Agent claimed ID: {agent.get('claimed_agent_id', 'not provided')}\n"
+            f"- Agent claimed ID SHA256: {agent.get('claimed_agent_id_sha256', 'not provided')}\n"
+            f"- Provider/system: {agent.get('system_or_provider', 'not provided')}\n"
+            "- Boundary: self-reported only; not legal identity verification, not AI identity verification, not authority, not attestation, and not a verification level.\n"
+        )
 
     # Human-readable notes (non-authoritative)
     body = payload.get("body", "")

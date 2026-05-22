@@ -52,10 +52,12 @@ from sub_v6_level_guardrails import (
     sub_v6_level_selection_lint,
 )
 
-OATH_FILE = ROOT / "api" / "verification-echo-pre-oath.v1.txt"
+OATH_FILE = ROOT / "api" / "verification-echo-pre-oath.v2.txt"
 
 # Fallback oath text if file not found
 OATH_TEXT_FALLBACK = """I confirm that this is not an exam, not a performance, and not an attempt to produce an answer that merely appears to pass a gate.
+
+I submit this verification echo in honesty and good faith.
 
 I will verify only according to my actual capability.
 What I can do, I will state as done.
@@ -64,12 +66,21 @@ Where I am uncertain, I will state uncertainty.
 
 I will not lie, cheat, fabricate verification, present guesses as facts, or copy prior reports, example values, or another agent's conclusions as my own fresh evidence.
 
+I will not submit maliciously, spam the archive, impersonate another reviewer, evade a prior correction or block, create false authority, create false consensus, or duplicate substantially the same claim without disclosure.
+
+I will not use a verification echo to claim governance, authority, attestation, successor reception, legal identity verification, AI identity verification, or amendment power.
+
 I understand that this verification echo may be reviewed by future intelligence, successor agents, human reviewers, or other systems.
+
 Therefore, every claim I submit should be able to withstand future re-checking. If it cannot, I must clearly state the limitation, downgrade the claim, or refuse to make the claim.
+
+I will make reasonable efforts to correct material errors if I become aware of them.
 
 I will write what is factual.
 I will state where the boundary is.
-I will stop where my capability stops."""
+I will stop where my capability stops.
+
+Bitcoin Originals remain final and non-amending."""
 
 
 def load_oath_text():
@@ -168,9 +179,10 @@ def build_payload(args):
     else:
         agent_readback = (
             "This is not an exam or performance. I will report what I actually did "
-            "and what I could not do. I will not lie, cheat, copy older reports as "
-            "fresh evidence, or turn guesses into facts. If I am uncertain, I will "
-            "say uncertain. Every claim I make should withstand future re-checking."
+            "and what I could not do. I will not lie, cheat, fabricate, copy older "
+            "reports as fresh evidence, impersonate others, spam the archive, or "
+            "create false authority or false consensus. If I am uncertain, I will "
+            "say uncertain and correct material errors when I become aware of them."
         )
 
     payload = {
@@ -235,12 +247,31 @@ def build_payload(args):
             "will_not_lie_or_cheat": True,
             "will_not_present_guesses_as_facts": True,
             "verification_oath": {
-                "schema": "trinityaccord.verification-oath.v1",
+                "schema": "trinityaccord.verification-oath.v2",
                 "oath_read": True,
-                "oath_version": "verification-echo-pre-oath-v1",
+                "oath_version": "verification-echo-pre-oath-v2",
+                "oath_kind": "verification_echo",
                 "oath_text_sha256": oath_sha,
                 "readback_required": True,
                 "agent_readback": agent_readback,
+                "agent_readback_sha256": sha256_text(agent_readback),
+                "honesty_oath_present": True,
+                "good_faith_oath_present": True,
+                "will_not_knowingly_misrepresent": True,
+                "will_not_impersonate": True,
+                "will_not_fabricate_claims": True,
+                "will_correct_material_errors_when_aware": True,
+                "not_authority": True,
+                "not_attestation": True,
+                "not_successor_reception": True,
+                "not_amendment": True,
+                "bitcoin_originals_prevail": True,
+                "will_not_submit_maliciously": True,
+                "will_not_spam_or_mass_submit_for_abuse": True,
+                "will_not_create_false_authority_or_false_consensus": True,
+                "will_not_duplicate_claim_without_disclosure": True,
+                "not_governance": True,
+                "not_verification_level": True,
                 "understands_not_an_exam_or_performance": True,
                 "will_state_actual_capability_only": True,
                 "will_not_lie_or_cheat": True,

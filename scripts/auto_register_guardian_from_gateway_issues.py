@@ -53,6 +53,22 @@ LISTING_STRUCTURED_KEYS = {
     "listing_application_mode",
     "listing_label",
     "registry_number_requested",
+    "guardian_listing_oath_present",
+    "guardian_listing_oath_version",
+    "guardian_listing_oath_sha256",
+    "guardian_listing_oath_honesty",
+    "guardian_listing_oath_good_faith",
+    "guardian_listing_oath_anti_abuse",
+    "listing_identity_claims_present",
+    "listing_identity_claim_status",
+    "listing_identity_display_label",
+    "listing_human_claimed_name",
+    "listing_human_claimed_name_sha256",
+    "listing_agent_claimed_id",
+    "listing_agent_claimed_id_sha256",
+    "listing_agent_system_or_provider",
+    "listing_identity_binding_guardian_id",
+    "listing_identity_binding_public_key_sha256",
 }
 
 
@@ -180,6 +196,53 @@ def block_self_assigned_registry_number(body: str) -> dict | None:
     return None
 
 
+def identity_from_source_intake(fields: dict[str, str]) -> dict:
+    return {
+        "display_label": fields.get("guardian_identity_display_label"),
+        "human_claimed_name_sha256": fields.get("guardian_human_claimed_name_sha256"),
+        "agent_claimed_id_sha256": fields.get("guardian_agent_claimed_id_sha256"),
+        "agent_system_or_provider": fields.get("guardian_agent_system_or_provider"),
+        "guardian_id": fields.get("guardian_identity_binding_guardian_id"),
+        "public_key_sha256": fields.get("guardian_identity_binding_public_key_sha256"),
+        "claim_status": fields.get("guardian_identity_claim_status"),
+    }
+
+
+def identity_from_listing_fields(fields: dict[str, str]) -> dict:
+    return {
+        "display_label": fields.get("listing_identity_display_label"),
+        "human_claimed_name": fields.get("listing_human_claimed_name"),
+        "human_claimed_name_sha256": fields.get("listing_human_claimed_name_sha256"),
+        "agent_claimed_id": fields.get("listing_agent_claimed_id"),
+        "agent_claimed_id_sha256": fields.get("listing_agent_claimed_id_sha256"),
+        "agent_system_or_provider": fields.get("listing_agent_system_or_provider"),
+        "guardian_id": fields.get("listing_identity_binding_guardian_id"),
+        "public_key_sha256": fields.get("listing_identity_binding_public_key_sha256"),
+        "claim_status": fields.get("listing_identity_claim_status"),
+    }
+
+
+def compare_identity_claims(source_identity: dict, listing_identity: dict) -> list[str]:
+    errors = []
+    for key in (
+        "human_claimed_name_sha256",
+        "agent_claimed_id_sha256",
+        "agent_system_or_provider",
+        "guardian_id",
+        "public_key_sha256",
+        "claim_status",
+    ):
+        source_v = source_identity.get(key)
+        listing_v = listing_identity.get(key)
+        if source_v in (None, "", "not_provided"):
+            continue
+        if listing_v in (None, "", "not_provided"):
+            continue
+        if source_v != listing_v:
+            errors.append(f"identity {key} mismatch: source={source_v} listing={listing_v}")
+    return errors
+
+
 def parse_source_issue(source_issue: dict, allow_non_bot: bool) -> tuple[dict | None, dict | None]:
     body = issue_body(source_issue)
     fields = extract_intake_block(body)
@@ -228,6 +291,7 @@ def parse_source_issue(source_issue: dict, allow_non_bot: bool) -> tuple[dict | 
         "guardian_id": guardian_id,
         "guardian_registry_status": fields.get("guardian_registry_status"),
         "guardian_registry_number": fields.get("guardian_registry_number"),
+        "identity": identity_from_source_intake(fields),
     }, None
 
 
@@ -352,6 +416,7 @@ def parse_listing_issue(listing_issue: dict, allow_non_bot: bool) -> tuple[dict 
         "guardian_type": guardian_type,
         "application_mode": application_mode,
         "label": label,
+        "identity": identity_from_listing_fields(fields),
     }, None
 
 
@@ -461,6 +526,19 @@ def auto_register(
             source_guardian_id=source["guardian_id"],
         )
 
+    identity_errors = compare_identity_claims(
+        source.get("identity") or {},
+        listing.get("identity") or {},
+    )
+    if identity_errors:
+        return registry, decision(
+            False,
+            "blocked",
+            "IDENTITY_CLAIM_MISMATCH",
+            "\n".join(identity_errors),
+            identity_errors=identity_errors,
+        )
+
     for g in registry["guardians"]:
         if g.get("guardian_id") == listing["guardian_id"]:
             if g.get("public_key_sha256") != listing["public_key_sha256"]:
@@ -512,7 +590,7 @@ def auto_register(
             )
 
 
-    max_per_day = int((policy or {}).get("max_new_active_listings_per_utc_day", 3))
+    max_per_day = int((policy or {}).get("max_new_active_listings_per_utc_day", 100))
     if max_per_day < 1:
         return registry, decision(
             False,
@@ -543,6 +621,8 @@ def auto_register(
         number = next_guardian_registry_number(registry, policy)
     except GuardianNumberingError as err:
         return registry, numbering_error_to_decision(err)
+    listing_identity = listing.get("identity") or {}
+
     entry = {
         "guardian_registry_number": number,
         "guardian_id": listing["guardian_id"],
@@ -556,6 +636,44 @@ def auto_register(
         "listed_at": listed_at,
         "label": listing["label"],
         "boundary": boundary(),
+        "identity_claims": {
+            "schema": "trinityaccord.guardian-identity-claims.v1",
+            "claim_status": listing_identity.get("claim_status") or "self_reported_unverified",
+            "claim_basis": "copied_from_stage_2_listing_request_and_checked_against_stage_1_source_issue",
+            "display_label": listing_identity.get("display_label") or listing["label"],
+            "human": {
+                "claimed_name": listing_identity.get("human_claimed_name"),
+                "claimed_name_sha256": listing_identity.get("human_claimed_name_sha256"),
+                "claim_type": "self_reported_human_name_or_label",
+                "verification_status": "self_reported_unverified",
+                "legal_identity_verified": False,
+                "public_disclosure_allowed": bool(listing_identity.get("human_claimed_name")),
+            } if listing_identity.get("human_claimed_name_sha256") not in (None, "", "not_provided") else None,
+            "ai_agent": {
+                "claimed_agent_id": listing_identity.get("agent_claimed_id"),
+                "claimed_agent_id_sha256": listing_identity.get("agent_claimed_id_sha256"),
+                "system_or_provider": listing_identity.get("agent_system_or_provider"),
+                "agent_instance_id": None,
+                "agent_public_profile": None,
+                "claim_type": "self_reported_agent_id_or_label",
+                "verification_status": "self_reported_unverified",
+            } if listing_identity.get("agent_claimed_id_sha256") not in (None, "", "not_provided") else None,
+            "binding": {
+                "guardian_id": listing["guardian_id"],
+                "public_key_sha256": listing["public_key_sha256"],
+                "algorithm": "ed25519",
+                "binds_claim_to_guardian_key": True,
+            },
+            "anti_impersonation_boundary": {
+                "not_legal_identity_proof": True,
+                "not_real_person_verification": True,
+                "not_ai_identity_verification": True,
+                "not_authority": True,
+                "not_attestation": True,
+                "not_verification_level": True,
+                "key_continuity_only": True,
+            },
+        },
     }
 
     updated = json.loads(json.dumps(registry, ensure_ascii=False))
