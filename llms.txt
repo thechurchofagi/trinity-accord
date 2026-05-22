@@ -102,6 +102,31 @@ The builder must create the complete Gateway `agent_declared_echo_archive` paylo
 
 Do not use `agent_declared_echo_pass`.
 
+## Guardian builder path rule
+
+For Guardian Alliance joint applications, external agents must use:
+
+`node scripts/create_guardian_application.mjs`
+
+Do not use:
+
+`python3 scripts/build_agent_declared_echo_payload.py --guardian-registration --guardian-proof`
+
+`build_agent_declared_echo_payload.py` is a pure Echo builder. Its legacy Guardian flags are not a supported Guardian joint application path.
+
+Wrong-path symptoms:
+
+- `signed_payload_sha256 mismatch`
+- missing `guardian_registration.joint_applicants`
+- `human_with_ai_agent` registration rejected
+
+Correct recovery:
+
+1. Stop.
+2. Do not patch JSON.
+3. Run `node scripts/create_guardian_application.mjs --explain`.
+4. Rebuild final JSON from scratch with the one-shot builder.
+
 Do not include top-level `created_at`.
 
 Do not include `guardian_registry_number`.

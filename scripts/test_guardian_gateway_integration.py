@@ -194,9 +194,10 @@ def test_guardian_schemas_exist():
 
 
 def test_builder_guardian_registration_smoke():
-    """Test builder path with --guardian-registration and --guardian-proof.
+    """Test that the pure Echo builder rejects Guardian joint application flags.
 
-    This catches missing imports and ordering problems in gateway_payload_authorship.py.
+    The pure Echo builder must fail fast when Guardian flags are passed,
+    directing agents to use scripts/create_guardian_application.mjs instead.
     """
     with tempfile.TemporaryDirectory() as td:
         td_path = Path(td)
@@ -244,21 +245,16 @@ def test_builder_guardian_registration_smoke():
             timeout=60,
         )
 
-        assert result.returncode == 0, (
-            "Builder with --guardian-registration --guardian-proof failed\n"
+        assert result.returncode == 2, (
+            "Builder with --guardian-registration --guardian-proof should fail with exit code 2\n"
             f"STDOUT:\n{result.stdout}\nSTDERR:\n{result.stderr}"
         )
 
-        payload = json.loads(out_path.read_text(encoding="utf-8"))
-        assert "guardian_registration" in payload, "payload missing guardian_registration"
-        assert "guardian_presence_proof" in payload, "payload missing guardian_presence_proof"
+        combined = result.stdout + "\n" + result.stderr
+        assert "create_guardian_application.mjs" in combined, "error must mention correct builder"
+        assert not out_path.exists(), "wrong builder must fail before writing output"
 
-        reg = payload["guardian_registration"]
-        proof = payload["guardian_presence_proof"]
-        assert reg["guardian_id"] == proof["guardian_id"], "registration guardian_id must match proof"
-        assert reg["public_key_sha256"] == proof["public_key_sha256"], "registration public_key_sha256 must match proof"
-
-        print("  ✅ builder supports --guardian-registration --guardian-proof")
+        print("  ✅ pure Echo builder correctly rejects Guardian flags")
 
 
 def test_gateway_submit_policy():

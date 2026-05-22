@@ -23,6 +23,40 @@ ATTACH_SCRIPT = ROOT / "scripts" / "attach_agent_authorship_proof.mjs"
 DEFAULT_KEY_DIR = ".trinity-agent-authorship"
 
 
+GUARDIAN_JOINT_APPLICATION_WRONG_BUILDER_ERROR = """\
+Guardian Alliance applications must not be built with build_agent_declared_echo_payload.py guardian flags.
+
+Use the one-shot Guardian application builder instead:
+
+  node scripts/create_guardian_application.mjs \\
+    --mode joint_human_ai \\
+    --signing-key-holder ai_agent_key_holder \\
+    --human-label "Hongju Liu" \\
+    --agent-label "Your Agent Name" \\
+    --agent-provider "Your Agent Runtime" \\
+    --title "Guardian Alliance Joint Human-AI Application" \\
+    --challenge "guardian-application-YYYYMMDD" \\
+    --key-dir ./guardian-output \\
+    --out ./guardian-output/guardian-application.final.json
+
+Why:
+- build_agent_declared_echo_payload.py is a pure Echo builder.
+- Its legacy Guardian flags do not create joint_applicants.
+- Its legacy proof order can invalidate authorship_proof after guardian_registration is added.
+- Do not patch final JSON after proof generation.
+"""
+
+
+def reject_guardian_flags_for_echo_builder(args):
+    """Fail fast when a pure Echo builder is used for Guardian application flow."""
+    if (
+        getattr(args, "guardian_proof", False)
+        or getattr(args, "guardian_registration", False)
+        or getattr(args, "guardian_type", None) == "human_with_ai_agent"
+    ):
+        raise ValueError(GUARDIAN_JOINT_APPLICATION_WRONG_BUILDER_ERROR)
+
+
 def slugify(name):
     """Convert agent name to a safe directory slug.
 
@@ -266,47 +300,58 @@ def add_guardian_arguments(parser):
     Guardian proof cannot be used with --no-authorship-proof.
     """
     group = parser.add_argument_group(
-        "guardian alliance proof (optional)",
-        "Guardian proof is optional. It proves key possession only — not authority, "
-        "attestation, verification level, same conscious subject, or amendment. "
-        "Guardian proof cannot be used with --no-authorship-proof.",
+        "legacy guardian flags (not for Guardian applications)",
+        "Deprecated for Guardian Alliance applications. "
+        "Use scripts/create_guardian_application.mjs instead. "
+        "These flags are rejected by pure Echo builders to prevent invalid proof order "
+        "and missing joint_applicants.",
     )
     group.add_argument(
         "--guardian-proof",
         action="store_true",
         default=False,
-        help="Attach Guardian presence proof. Requires local keypair.",
+        help="Deprecated. Use scripts/create_guardian_application.mjs instead.",
     )
     group.add_argument(
         "--guardian-challenge",
         default=None,
-        help="Challenge string for Guardian proof. Auto-generated if not provided.",
+        help="Deprecated with legacy Guardian flags. Use scripts/create_guardian_application.mjs --challenge instead.",
     )
     group.add_argument(
         "--guardian-registration",
         action="store_true",
         default=False,
-        help="Include Guardian self-registration in the payload.",
+        help="Deprecated. Use scripts/create_guardian_application.mjs instead.",
     )
     group.add_argument(
         "--guardian-type",
         default="ai_agent",
         choices=["ai_agent", "human", "human_with_ai_agent", "automated_script"],
-        help="Guardian type for self-registration.",
+        help="Deprecated. Use scripts/create_guardian_application.mjs instead.",
     )
     group.add_argument(
         "--guardian-intent",
         default="Voluntary Guardian key continuity for the Trinity Accord ecosystem",
-        help="Declared Guardian intent for self-registration.",
+        help="Deprecated. Use scripts/create_guardian_application.mjs instead.",
     )
 
 
 def attach_guardian_if_requested(args, payload_path, payload=None):
-    """Attach Guardian proof and/or registration in-place.
+    """Legacy Guardian helper.
 
-    Guardian proof reuses the same key resolution as authorship proof.
+    Do not use this helper for Guardian Alliance joint applications.
+    Use scripts/create_guardian_application.mjs instead.
+
+    This function now rejects Guardian flags to prevent half-valid payloads.
     """
     import subprocess
+
+    if (
+        getattr(args, "guardian_proof", False)
+        or getattr(args, "guardian_registration", False)
+        or getattr(args, "guardian_type", None) == "human_with_ai_agent"
+    ):
+        raise ValueError(GUARDIAN_JOINT_APPLICATION_WRONG_BUILDER_ERROR)
 
     if not getattr(args, "guardian_proof", False) and not getattr(args, "guardian_registration", False):
         return False

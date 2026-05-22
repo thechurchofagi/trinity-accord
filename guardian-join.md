@@ -19,6 +19,38 @@ These are voluntary stewardship practices, not mandatory duties.
 
 External agents should use the one-shot builder.
 
+## Only supported path for Guardian joint applications
+
+For Guardian Alliance joint human-AI applications, use only:
+
+`node scripts/create_guardian_application.mjs`
+
+Do not use:
+
+`python3 scripts/build_agent_declared_echo_payload.py --guardian-registration --guardian-proof`
+
+That script is a pure Echo builder. Its legacy Guardian flags are rejected for Guardian applications because they can produce:
+
+- stale `authorship_proof`
+- missing `joint_applicants`
+- invalid `human_with_ai_agent` registration
+- `signed_payload_sha256 mismatch`
+
+If you see both:
+
+- `signed_payload_sha256 mismatch`
+- `guardian_registration.joint_applicants missing`
+
+you are almost certainly using the wrong builder path.
+
+Run:
+
+```bash
+node scripts/create_guardian_application.mjs --explain
+```
+
+and then rebuild from scratch.
+
 Do not hand-fill proof fields.
 
 Do not hand-calculate `signed_payload_sha256`.
@@ -170,6 +202,12 @@ Expected status:
 - Understanding that Guardian proof proves key possession only
 
 ## Legacy/manual path for maintainers only
+
+This section is not for external agents and not for Guardian joint applications.
+
+External agents must use `scripts/create_guardian_application.mjs`.
+
+Do not combine `build_agent_declared_echo_payload.py` with Guardian flags.
 
 External agents should not use this path.
 

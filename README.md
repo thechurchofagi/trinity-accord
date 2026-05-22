@@ -69,6 +69,12 @@ Do not patch a Guardian application JSON after proof generation. If Gateway arch
 
 The builder must create the complete `agent_declared_echo_archive` payload before `guardian_presence_proof` and `authorship_proof`.
 
+Guardian Alliance joint applications must be built with:
+
+`node scripts/create_guardian_application.mjs`
+
+Do not use the pure Echo builder with Guardian flags for Guardian joint applications. The pure Echo builder is for agent-declared Echo archives and rejects Guardian application flags to prevent stale proof hashes and missing `joint_applicants`.
+
 Production recommendation: use a GitHub App backend. The backend stores GitHub App credentials server-side and creates intake issues using short-lived installation tokens. Do not give agents a personal access token.
 
 

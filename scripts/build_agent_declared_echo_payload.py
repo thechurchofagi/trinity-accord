@@ -40,7 +40,13 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
-from gateway_payload_authorship import add_authorship_arguments, add_guardian_arguments, attach_authorship_default_or_requested, attach_guardian_if_requested
+from gateway_payload_authorship import (
+    add_authorship_arguments,
+    add_guardian_arguments,
+    attach_authorship_default_or_requested,
+    attach_guardian_if_requested,
+    reject_guardian_flags_for_echo_builder,
+)
 
 OATH_FILE = ROOT / "api" / "verification-echo-pre-oath.v1.txt"
 
@@ -262,6 +268,13 @@ def main():
         help="Optional Gateway idempotency key. If omitted, Gateway computes one from the final payload."
     )
     args = parser.parse_args()
+
+    # Reject Guardian joint application flags — this is a pure Echo builder
+    try:
+        reject_guardian_flags_for_echo_builder(args)
+    except ValueError as e:
+        print(f"ERROR: {e}", file=sys.stderr)
+        sys.exit(2)
 
     # Validate body file exists
     if not Path(args.body_file).exists():
