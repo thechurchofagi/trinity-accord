@@ -151,8 +151,12 @@ function canonicalStringify(value) {
   if (typeof value === "number") return Object.is(value, -0) ? "-0" : String(value);
   if (typeof value === "string") {
     // Match Python json.dumps(ensure_ascii=False): only escape required JSON chars, keep non-ASCII as-is
-    return JSON.stringify(value).replace(/[\u0080-\uffff]/g, function (ch) {
-      return ch; // keep raw UTF-8 character (Python ensure_ascii=False behavior)
+    // JSON.stringify escapes non-ASCII to \uXXXX; we must decode those back to raw UTF-8
+    // Only decode \uXXXX where codepoint >= 0x80 (Python ensure_ascii=False keeps ASCII escapes like \n, \", \\)
+    return JSON.stringify(value).replace(/\\u([0-9a-fA-F]{4})/g, function (_, hex) {
+      const cp = parseInt(hex, 16);
+      if (cp < 0x80) return "\\u" + hex; // keep ASCII escapes as-is
+      return String.fromCharCode(cp);
     });
   }
   if (Array.isArray(value)) return "[" + value.map(canonicalStringify).join(",") + "]";
@@ -1362,20 +1366,28 @@ async function runGatewayPipeline(payload, {
       // Return detailed diagnostic for AUTHORED_PAYLOAD_DIGEST_MISMATCH
       if (authorship.error_code === "AUTHORED_PAYLOAD_DIGEST_MISMATCH") {
         return gatewayError(422, {
-          ok: false,
-          error_code: authorship.error_code,
-          validation_stage: authorship.validation_stage,
-          detected_payload_profile: authorship.detected_payload_profile,
-          authorship_canonical_version_used: authorship.authorship_canonical_version_used,
-          signed_payload_sha256_from_proof: authorship.signed_payload_sha256_from_proof,
-          computed_payload_sha256_by_gateway: authorship.computed_payload_sha256_by_gateway,
-          received_raw_body_sha256: authorship.received_raw_body_sha256,
-          x_trinity_payload_file_sha256: authorship.x_trinity_payload_file_sha256,
-          x_trinity_authorship_payload_sha256: authorship.x_trinity_authorship_payload_sha256,
-          excluded_dynamic_fields_used: authorship.excluded_dynamic_fields_used,
-          payload_keys_seen_by_gateway: authorship.payload_keys_seen_by_gateway,
-          must_not_strip_before_digest: authorship.must_not_strip_before_digest,
-          agent_action: authorship.agent_action,
+          reason: "invalid_authorship_proof",
+          validation_stage: "authorship_proof",
+          agent_action: authorship.agent_action || "Do not strip fields or re-sign manually. Submit exact generated file. If local digest matches proof, fix Gateway canonicalization or transport.",
+          errors: [{
+            code: "AUTHORED_PAYLOAD_DIGEST_MISMATCH",
+            path: "authorship_proof",
+            message: `signed_payload_sha256 mismatch: proof=${authorship.signed_payload_sha256_from_proof} gateway=${authorship.computed_payload_sha256_by_gateway}`,
+            fix: "Do not strip fields or re-sign manually. Submit exact generated file. If local digest matches proof, fix Gateway canonicalization or transport."
+          }],
+          extra: {
+            error_code: authorship.error_code,
+            detected_payload_profile: authorship.detected_payload_profile,
+            authorship_canonical_version_used: authorship.authorship_canonical_version_used,
+            signed_payload_sha256_from_proof: authorship.signed_payload_sha256_from_proof,
+            computed_payload_sha256_by_gateway: authorship.computed_payload_sha256_by_gateway,
+            received_raw_body_sha256: authorship.received_raw_body_sha256,
+            x_trinity_payload_file_sha256: authorship.x_trinity_payload_file_sha256,
+            x_trinity_authorship_payload_sha256: authorship.x_trinity_authorship_payload_sha256,
+            excluded_dynamic_fields_used: authorship.excluded_dynamic_fields_used,
+            payload_keys_seen_by_gateway: authorship.payload_keys_seen_by_gateway,
+            must_not_strip_before_digest: authorship.must_not_strip_before_digest
+          }
         });
       }
       return gatewayError(422, {
