@@ -40,6 +40,22 @@ def main():
     require("python3 scripts/build_agent_declared_echo_payload.py \\" not in join, "guardian-join.md still exposes old pure Echo Guardian builder command")
     require("not Verification Echo" in llms or "not Verification Echoes" in llms, "llms.txt missing Guardian vs Verification Echo disambiguation")
 
+
+    require(
+        "Registry listing is not automatic" not in llms,
+        "llms.txt still says registry listing is not automatic",
+    )
+
+    require(
+        "The automation is PR-only" not in llms,
+        "llms.txt still says automation is PR-only",
+    )
+
+    require(
+        "Use `scripts/prepare_guardian_active_listing.py` to prepare a registry update" not in llms,
+        "llms.txt still points external agents to local prepare script for active listing",
+    )
+
     print("GUARDIAN_DOCS_CONVERGENCE_OK")
 
 
