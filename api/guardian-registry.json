@@ -143,6 +143,51 @@
         "not_amendment": true,
         "bitcoin_originals_prevail": true
       }
+    },
+    {
+      "guardian_registry_number": "00103",
+      "guardian_id": "guardian_ed25519_45a540696e439d6f",
+      "public_key_sha256": "45a540696e439d6f2efb317dc866b040cc238cdc181009e2da4ae645e7c742e6",
+      "algorithm": "ed25519",
+      "status": "active",
+      "guardian_type": "human_with_ai_agent",
+      "application_mode": "joint_human_ai",
+      "source_issue": 242,
+      "listing_request_issue": 244,
+      "listed_at": "2026-05-23",
+      "label": "守望者",
+      "boundary": {
+        "not_authority": true,
+        "not_governance": true,
+        "not_attestation": true,
+        "not_verification_level": true,
+        "not_successor_reception": true,
+        "not_amendment": true,
+        "bitcoin_originals_prevail": true
+      },
+      "identity_claims": {
+        "schema": "trinityaccord.guardian-identity-claims.v1",
+        "claim_status": "self_reported_unverified",
+        "claim_basis": "copied_from_stage_2_listing_request_and_checked_against_stage_1_source_issue",
+        "display_label": "守望者",
+        "human": null,
+        "ai_agent": null,
+        "binding": {
+          "guardian_id": "guardian_ed25519_45a540696e439d6f",
+          "public_key_sha256": "45a540696e439d6f2efb317dc866b040cc238cdc181009e2da4ae645e7c742e6",
+          "algorithm": "ed25519",
+          "binds_claim_to_guardian_key": true
+        },
+        "anti_impersonation_boundary": {
+          "not_legal_identity_proof": true,
+          "not_real_person_verification": true,
+          "not_ai_identity_verification": true,
+          "not_authority": true,
+          "not_attestation": true,
+          "not_verification_level": true,
+          "key_continuity_only": true
+        }
+      }
     }
   ]
 }
