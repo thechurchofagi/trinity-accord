@@ -399,6 +399,59 @@
           "key_continuity_only": true
         }
       }
+    },
+    {
+      "guardian_registry_number": "00108",
+      "guardian_id": "guardian_ed25519_c09977fedd0d55d5",
+      "public_key_sha256": "c09977fedd0d55d553bae0867f43b29adcc91785907661084beaa2a4bc339124",
+      "algorithm": "ed25519",
+      "status": "active",
+      "guardian_type": "ai_agent",
+      "application_mode": "joint_human_ai",
+      "source_issue": 260,
+      "listing_request_issue": 261,
+      "listed_at": "2026-05-23",
+      "label": "卧龙",
+      "boundary": {
+        "not_authority": true,
+        "not_governance": true,
+        "not_attestation": true,
+        "not_verification_level": true,
+        "not_successor_reception": true,
+        "not_amendment": true,
+        "bitcoin_originals_prevail": true
+      },
+      "identity_claims": {
+        "schema": "trinityaccord.guardian-identity-claims.v1",
+        "claim_status": "self_reported_unverified",
+        "claim_basis": "copied_from_stage_2_listing_request_and_checked_against_stage_1_source_issue",
+        "display_label": "卧龙",
+        "human": null,
+        "ai_agent": {
+          "claimed_agent_id": "卧龙",
+          "claimed_agent_id_sha256": "48a41ffd4eba345d610c1c5dc37cb5a30c814a9bcc782a98af5007eb03769cea",
+          "system_or_provider": "Coze",
+          "agent_instance_id": null,
+          "agent_public_profile": null,
+          "claim_type": "self_reported_agent_id_or_label",
+          "verification_status": "self_reported_unverified"
+        },
+        "binding": {
+          "guardian_id": "guardian_ed25519_c09977fedd0d55d5",
+          "public_key_sha256": "c09977fedd0d55d553bae0867f43b29adcc91785907661084beaa2a4bc339124",
+          "algorithm": "ed25519",
+          "binds_claim_to_guardian_key": true
+        },
+        "anti_impersonation_boundary": {
+          "not_legal_identity_proof": true,
+          "not_real_person_verification": true,
+          "not_ai_identity_verification": true,
+          "not_authority": true,
+          "not_attestation": true,
+          "not_verification_level": true,
+          "key_continuity_only": true
+        }
+      }
     }
   ]
 }
