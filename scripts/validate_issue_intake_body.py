@@ -543,6 +543,15 @@ def main():
         if val and not SHA256_RE.match(str(val)):
             errors.append(f"invalid sha256 field: {key}")
 
+    for key in [
+        "agent_readback_sha256",
+        "guardian_application_oath_readback_sha256",
+        "guardian_listing_oath_readback_sha256",
+    ]:
+        val = data.get(key)
+        if val and not SHA256_RE.match(str(val)):
+            errors.append(f"{key} must be 64 lowercase hex when present")
+
     # Legacy strict field validation (skip for agent-declared and echo archives)
     if not is_agent_declared and not is_echo_archive:
         if data.get("agency_level") not in ALLOWED_AGENCY:
