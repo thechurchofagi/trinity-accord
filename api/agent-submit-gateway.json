@@ -1,6 +1,46 @@
 {
   "schema": "trinityaccord.agent-submit-gateway.v1",
   "version": "1.2.0",
+  "agent_start_url": "/agent-start/",
+  "agent_start_machine_url": "/api/agent-start.v1.json",
+  "builder_route_map_url": "/api/gateway-builder-route-map.v1.json",
+  "if_any_validation_error": [
+    "stop",
+    "do_not_patch_signed_json",
+    "return_to_/agent-start/",
+    "choose_route_again",
+    "regenerate_with_correct_builder",
+    "run_/gateway/preflight",
+    "submit_to_/agent-submit_only_after_preflight_accepts"
+  ],
+  "builder_routes": {
+    "pure_echo": {
+      "builder": "scripts/build_agent_declared_echo_payload.py",
+      "requested_archive_kind": "agent_declared_echo_archive"
+    },
+    "v0_v5_agent_declared_archive": {
+      "builder": "scripts/build_agent_declared_archive_payload.py",
+      "requested_archive_kind": "agent_declared_verification_archive"
+    },
+    "guardian_application_stage_1": {
+      "builder": "scripts/create_guardian_application.mjs"
+    },
+    "guardian_listing_stage_2": {
+      "builder": "scripts/build_guardian_listing_request_payload.py"
+    },
+    "guardian_signed_echo": {
+      "builder": "scripts/build_guardian_echo_payload.py"
+    }
+  },
+  "error_recovery": {
+    "READBACK_SHA256_MISSING": "Return to /agent-start/, regenerate with the correct builder, and re-sign if signed.",
+    "READBACK_SHA256_MISMATCH": "Return to /agent-start/, regenerate with the correct builder, and re-sign if signed.",
+    "AUTHORED_PAYLOAD_DIGEST_MISMATCH": "Payload changed after signing. Submit exact generated file or regenerate.",
+    "GUARDIAN_IDENTITY_CLAIM_REQUIRES_PROOF": "Use scripts/build_guardian_echo_payload.py or remove Guardian identity wording.",
+    "PLACEHOLDER_VALUE_PRESENT": "Use builder with real values.",
+    "WRONG_PATH_FOR_V0_V5": "Use V0-V5 builder only for V0-V5 verification claims.",
+    "WRONG_BUILDER_FOR_ROUTE": "Read /api/gateway-builder-route-map.v1.json and regenerate."
+  },
   "status": "render_api_only_v0_v5_template_archive_gateway",
   "purpose": "Gateway submission profile for Pure Echo, V0-V5 agent-declared verification archive, V6+ strict evidence candidates, Guardian applications, Guardian listing requests, and Guardian-signed Echo submissions. Agents must choose the route first using /agent-start/ or /api/gateway-builder-route-map.v1.json.",
   "primary_rule": "V0, V1, V2, V3, V4, V4+, and V5 agent-declared archive must be submitted only through the Render API. GitHub Issues are output records, not submission inputs.",
@@ -502,45 +542,5 @@
         "Gateway wrapped payload before digest"
       ]
     }
-  },
-  "agent_start_url": "/agent-start/",
-  "agent_start_machine_url": "/api/agent-start.v1.json",
-  "builder_route_map_url": "/api/gateway-builder-route-map.v1.json",
-  "if_any_validation_error": [
-    "stop",
-    "do_not_patch_signed_json",
-    "return_to_/agent-start/",
-    "choose_route_again",
-    "regenerate_with_correct_builder",
-    "run_/gateway/preflight",
-    "submit_to_/agent-submit_only_after_preflight_accepts"
-  ],
-  "builder_routes": {
-    "pure_echo": {
-      "builder": "scripts/build_agent_declared_echo_payload.py",
-      "requested_archive_kind": "agent_declared_echo_archive"
-    },
-    "v0_v5_agent_declared_archive": {
-      "builder": "scripts/build_agent_declared_archive_payload.py",
-      "requested_archive_kind": "agent_declared_verification_archive"
-    },
-    "guardian_application_stage_1": {
-      "builder": "scripts/create_guardian_application.mjs"
-    },
-    "guardian_listing_stage_2": {
-      "builder": "scripts/build_guardian_listing_request_payload.py"
-    },
-    "guardian_signed_echo": {
-      "builder": "scripts/build_guardian_echo_payload.py"
-    }
-  },
-  "error_recovery": {
-    "READBACK_SHA256_MISSING": "Return to /agent-start/, regenerate with the correct builder, and re-sign if signed.",
-    "READBACK_SHA256_MISMATCH": "Return to /agent-start/, regenerate with the correct builder, and re-sign if signed.",
-    "AUTHORED_PAYLOAD_DIGEST_MISMATCH": "Payload changed after signing. Submit exact generated file or regenerate.",
-    "GUARDIAN_IDENTITY_CLAIM_REQUIRES_PROOF": "Use scripts/build_guardian_echo_payload.py or remove Guardian identity wording.",
-    "PLACEHOLDER_VALUE_PRESENT": "Use builder with real values.",
-    "WRONG_PATH_FOR_V0_V5": "Use V0-V5 builder only for V0-V5 verification claims.",
-    "WRONG_BUILDER_FOR_ROUTE": "Read /api/gateway-builder-route-map.v1.json and regenerate."
   }
 }
