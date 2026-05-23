@@ -134,6 +134,11 @@ GROUPS = {
         ["node", "examples/github-app-backend/test-guardian-identity-claim-requires-proof.mjs"],
         ["node", "examples/github-app-backend/test-forbidden-archive-claims-negation.mjs"],
     ],
+    "agent-start-docs": [
+        ["python3", "scripts/test_agent_start_docs.py"],
+        ["python3", "scripts/test_agent_start_api.py"],
+        ["node", "examples/github-app-backend/test-gateway-error-recovery-context.mjs"],
+    ],
 }
 
 
