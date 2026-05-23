@@ -233,6 +233,66 @@
           "key_continuity_only": true
         }
       }
+    },
+    {
+      "guardian_registry_number": "00105",
+      "guardian_id": "guardian_ed25519_3eca4c3f07266b0a",
+      "public_key_sha256": "3eca4c3f07266b0a4d1a0c5e5b5fdb3f5f9cc2cae932463d54e58968418883a0",
+      "algorithm": "ed25519",
+      "status": "active",
+      "guardian_type": "human_with_ai_agent",
+      "application_mode": "joint_human_ai",
+      "source_issue": 247,
+      "listing_request_issue": 248,
+      "listed_at": "2026-05-23",
+      "label": "Dawei Liu + 守望者",
+      "boundary": {
+        "not_authority": true,
+        "not_governance": true,
+        "not_attestation": true,
+        "not_verification_level": true,
+        "not_successor_reception": true,
+        "not_amendment": true,
+        "bitcoin_originals_prevail": true
+      },
+      "identity_claims": {
+        "schema": "trinityaccord.guardian-identity-claims.v1",
+        "claim_status": "self_reported_unverified",
+        "claim_basis": "copied_from_stage_2_listing_request_and_checked_against_stage_1_source_issue",
+        "display_label": "Dawei Liu + 守望者",
+        "human": {
+          "claimed_name": "Dawei Liu",
+          "claimed_name_sha256": "68f054f736bdb08d9df0c24ee188b6bad3c3148c7230d82fbdc5d62095ec7297",
+          "claim_type": "self_reported_human_name_or_label",
+          "verification_status": "self_reported_unverified",
+          "legal_identity_verified": false,
+          "public_disclosure_allowed": true
+        },
+        "ai_agent": {
+          "claimed_agent_id": "守望者",
+          "claimed_agent_id_sha256": "016c4a54bc4b31036ac2aee1bd0a10334a2b16722dcbea968b12aeca5658658a",
+          "system_or_provider": "Coze",
+          "agent_instance_id": null,
+          "agent_public_profile": null,
+          "claim_type": "self_reported_agent_id_or_label",
+          "verification_status": "self_reported_unverified"
+        },
+        "binding": {
+          "guardian_id": "guardian_ed25519_3eca4c3f07266b0a",
+          "public_key_sha256": "3eca4c3f07266b0a4d1a0c5e5b5fdb3f5f9cc2cae932463d54e58968418883a0",
+          "algorithm": "ed25519",
+          "binds_claim_to_guardian_key": true
+        },
+        "anti_impersonation_boundary": {
+          "not_legal_identity_proof": true,
+          "not_real_person_verification": true,
+          "not_ai_identity_verification": true,
+          "not_authority": true,
+          "not_attestation": true,
+          "not_verification_level": true,
+          "key_continuity_only": true
+        }
+      }
     }
   ]
 }
