@@ -377,6 +377,14 @@ def main():
         if not isinstance(rb_sha, str) or not hex64.match(rb_sha):
             errors.append("agent_readback_sha256 must be a 64-char lowercase hex string")
 
+        for extra_sha_key in [
+            "guardian_application_oath_readback_sha256",
+            "guardian_listing_oath_readback_sha256",
+        ]:
+            extra_sha = data.get(extra_sha_key)
+            if extra_sha is not None and (not isinstance(extra_sha, str) or not hex64.match(extra_sha)):
+                errors.append(f"{extra_sha_key} must be 64 lowercase hex when present")
+
         rb_count = data.get("agent_readback_char_count")
         try:
             rb_count_int = int(rb_count)
