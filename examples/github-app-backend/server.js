@@ -588,10 +588,23 @@ const FORBIDDEN_POSITIVE_CLAIM_PATTERNS = [
   }
 ];
 
+function splitSentences(text) {
+  return String(text || "")
+    .split(/(?<=[.!?。！？])\s+|\n+/)
+    .map(s => s.trim())
+    .filter(Boolean);
+}
+
 function findForbiddenPositiveArchiveClaims(text) {
+  const sentences = splitSentences(text);
   const hits = [];
   for (const spec of FORBIDDEN_POSITIVE_CLAIM_PATTERNS) {
-    if (spec.pattern.test(text) && !hasAllowedNegatedBoundary(text, spec.claim)) {
+    // Check each sentence independently: a negated phrase in one sentence
+    // does NOT exempt a positive claim in another sentence.
+    const hasPositiveClaim = sentences.some(
+      s => spec.pattern.test(s) && !hasAllowedNegatedBoundary(s, spec.claim)
+    );
+    if (hasPositiveClaim) {
       hits.push(spec);
     }
   }
