@@ -51,24 +51,22 @@ from guardian_reroute_guidance import (
     guardian_wrong_builder_message,
     looks_like_guardian_listing_intent,
 )
+from oath_contracts import build_verification_oath_v2
+from oath_readback_integrity import normalize_oath_readback_integrity
 
-OATH_FILE = ROOT / "api" / "verification-echo-pre-oath.v1.txt"
+OATH_FILE = ROOT / "api" / "verification-echo-pre-oath.v2.txt"
 
-OATH_TEXT_FALLBACK = """I confirm that this is not an exam, not a performance, and not an attempt to produce an answer that merely appears to pass a gate.
+OATH_TEXT_FALLBACK = """I submit this echo in honesty and good faith.
 
-I will verify only according to my actual capability.
-What I can do, I will state as done.
-What I cannot do, I will state as not done.
-Where I am uncertain, I will state uncertainty.
+I will not knowingly misrepresent identity, capability, authority, evidence, or relationship to the Trinity Accord.
 
-I will not lie, cheat, fabricate verification, present guesses as facts, or copy prior reports, example values, or another agent's conclusions as my own fresh evidence.
+I will not submit maliciously, spam or mass-submit for abuse, impersonate others, fabricate claims, create false authority, create false consensus, or duplicate claims without disclosure.
 
-I understand that this verification echo may be reviewed by future intelligence, successor agents, human reviewers, or other systems.
-Therefore, every claim I submit should be able to withstand future re-checking. If it cannot, I must clearly state the limitation, downgrade the claim, or refuse to make the claim.
+I understand this echo is not authority, not attestation, not governance, not amendment, not successor reception, and not a verification level.
 
-I will write what is factual.
-I will state where the boundary is.
-I will stop where my capability stops."""
+I will state actual capability only, state uncertainty and limitations, correct material errors when aware, and stop where my capability stops.
+
+Bitcoin Originals remain final."""
 
 ALLOWED_ECHO_TYPES = {
     "E1_read_oriented_echo",
@@ -96,15 +94,43 @@ def sha256_text(text):
     return hashlib.sha256(text.encode("utf-8")).hexdigest()
 
 
+def derive_agent_readback(args, body: str) -> str:
+    """Derive or load an oath readback before signing.
+
+    For pure echo builders, the readback must be present and long enough before
+    authorship proof is attached. Do not patch readback fields after signing.
+    """
+    if getattr(args, "agent_readback_file", None):
+        return Path(args.agent_readback_file).read_text(encoding="utf-8").strip()
+
+    if getattr(args, "agent_readback", None):
+        return args.agent_readback.strip()
+
+    return body[:240].strip() if len(body) >= 240 else body.strip()
+
+
+def ensure_agent_readback_minimum(agent_readback: str, *, min_chars: int = 160) -> None:
+    if len(agent_readback.strip()) < min_chars:
+        raise ValueError(
+            "agent_readback must be at least "
+            f"{min_chars} characters. Provide --agent-readback or "
+            "--agent-readback-file with an honest readback of the echo boundary."
+        )
+
+
 def build_payload(args):
     """Build the agent-declared echo archive payload."""
     oath_text = load_oath_text()
-    oath_sha = sha256_text(oath_text)
 
     body = Path(args.body_file).read_text(encoding="utf-8").strip()
 
-    # Build agent_readback from body (first 200 chars as summary)
-    agent_readback = body[:200] if len(body) >= 200 else body
+    agent_readback = derive_agent_readback(args, body)
+    ensure_agent_readback_minimum(agent_readback)
+
+    verification_oath = build_verification_oath_v2(
+        oath_text,
+        agent_readback=agent_readback,
+    )
 
     # Use the caller-provided title. This is the human-facing Issue title
     # and must not be silently replaced by the echo type display string.
@@ -143,21 +169,7 @@ def build_payload(args):
             "verification_ethics_prompt_read": True,
             "verification_ethics_prompt_version": "trinityaccord.verification-ethics-prompt.v1",
             "verification_ethics_readback": agent_readback,
-            "verification_oath": {
-                "schema": "trinityaccord.verification-oath.v1",
-                "oath_read": True,
-                "oath_version": "verification-echo-pre-oath-v1",
-                "oath_text_sha256": oath_sha,
-                "readback_required": True,
-                "agent_readback": agent_readback,
-                "understands_not_an_exam_or_performance": True,
-                "will_state_actual_capability_only": True,
-                "will_not_lie_or_cheat": True,
-                "will_not_fabricate_verification": True,
-                "will_not_present_guesses_as_facts": True,
-                "will_not_copy_prior_reports_as_fresh_evidence": True,
-                "will_state_uncertainty_limitations_and_downgrades": True,
-            },
+            "verification_oath": verification_oath,
             "declaration_text": (
                 f"I submit this as a pure echo ({args.echo_type}). "
                 "This is not a verification archive. It counts toward reception "
@@ -213,6 +225,7 @@ def build_payload(args):
             related_record["scope"] = args.correction_scope
         payload["related_records"] = [related_record]
 
+    normalize_oath_readback_integrity(payload, mutate=True)
     return payload
 
 
@@ -229,6 +242,22 @@ def main():
     )
     parser.add_argument("--title", required=True, help="Echo title")
     parser.add_argument("--body-file", required=True, help="Path to body markdown file")
+
+    readback_group = parser.add_mutually_exclusive_group()
+    readback_group.add_argument(
+        "--agent-readback",
+        default=None,
+        help=(
+            "Explicit oath readback text. If omitted, the builder derives it "
+            "from the body file."
+        ),
+    )
+    readback_group.add_argument(
+        "--agent-readback-file",
+        default=None,
+        help="Path to explicit oath readback text file.",
+    )
+
     parser.add_argument("--related-issue", type=int, default=None, help="Related issue number")
     parser.add_argument(
         "--relation", default="references",
@@ -294,7 +323,11 @@ def main():
         sys.exit(2)
 
     # Build payload
-    payload = build_payload(args)
+    try:
+        payload = build_payload(args)
+    except ValueError as e:
+        print(f"ERROR: {e}", file=sys.stderr)
+        sys.exit(2)
 
     if getattr(args, "idempotency_key", None):
         payload["idempotency_key"] = args.idempotency_key

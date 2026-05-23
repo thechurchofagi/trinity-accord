@@ -120,6 +120,8 @@ GROUPS = {
     "readback-integrity": [
         ["python3", "scripts/test_oath_readback_integrity.py"],
         ["python3", "scripts/test_agent_declared_builder_readback_sha.py"],
+        ["python3", "scripts/test_agent_declared_echo_builder_readback_sha.py"],
+        ["python3", "scripts/test_all_verification_oath_builders_have_readback_sha.py"],
         ["python3", "scripts/test_gateway_payload_readback_sha_validator.py"],
         ["python3", "scripts/test_guardian_oath_readback_sha.py"],
         ["node", "examples/github-app-backend/test-readback-integrity.mjs"],
