@@ -223,17 +223,7 @@ def build_payload(args: argparse.Namespace) -> dict:
         "- Identity status: self_reported_unverified.",
         "- Identity claims are not legal identity verification, not AI identity verification, not authority, not attestation, and not a verification level.",
         "",
-        "Gateway intake identity fields:",
-        "listing_identity_claims_present: true",
-        f"listing_identity_claim_status: {identity_claims['claim_status']}",
-        f"listing_identity_display_label: {intake_value(identity_claims['display_label'])}",
-        f"listing_human_claimed_name: {identity_human_field(identity_claims, 'claimed_name')}",
-        f"listing_human_claimed_name_sha256: {identity_human_field(identity_claims, 'claimed_name_sha256')}",
-        f"listing_agent_claimed_id: {identity_agent_field(identity_claims, 'claimed_agent_id')}",
-        f"listing_agent_claimed_id_sha256: {identity_agent_field(identity_claims, 'claimed_agent_id_sha256')}",
-        f"listing_agent_system_or_provider: {intake_value(args.provider)}",
-        f"listing_identity_binding_guardian_id: {intake_value(args.guardian_id)}",
-        f"listing_identity_binding_public_key_sha256: {intake_value(args.public_key_sha256)}",
+        "Gateway intake identity fields are rendered by Gateway from payload.gateway_intake_fields.",
     ])
 
     payload = {

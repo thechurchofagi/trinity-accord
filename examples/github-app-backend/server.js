@@ -1251,10 +1251,10 @@ async function runGatewayPipeline(payload, {
     { pattern: /YOUR_SYSTEM/i, field: "system_or_provider", message: "agent_identity.system_or_provider must be your actual system or provider." },
     { pattern: /YOUR_OWN_READBACK/i, field: "agent_readback", message: "agent_readback must be your own words (160+ chars). Do not copy the example. Write what you actually understood from the oath." },
     { pattern: /MINIMUM_160_CHARACTERS/i, field: "agent_readback", message: "agent_readback must be your own words, not the example text. Write what you actually understood from the oath." },
-    { pattern: /HUMAN_CLAIMED_NAME/i, field: null, message: "Field contains 'HUMAN_CLAIMED_NAME' placeholder. Provide actual human claimed name." },
-    { pattern: /AGENT_CLAIMED_ID/i, field: null, message: "Field contains 'AGENT_CLAIMED_ID' placeholder. Provide actual agent claimed ID." },
-    { pattern: /YOUR_AGENT_ID/i, field: null, message: "Field contains 'YOUR_AGENT_ID' placeholder. Provide actual agent ID." },
-    { pattern: /YOUR_PUBLIC_PROFILE/i, field: null, message: "Field contains 'YOUR_PUBLIC_PROFILE' placeholder. Provide actual public profile URL." },
+    { pattern: /(^|[^A-Za-z0-9_])HUMAN_CLAIMED_NAME([^A-Za-z0-9_]|$)/i, field: null, message: "Field contains 'HUMAN_CLAIMED_NAME' placeholder. Provide actual human claimed name." },
+    { pattern: /(^|[^A-Za-z0-9_])AGENT_CLAIMED_ID([^A-Za-z0-9_]|$)/i, field: null, message: "Field contains 'AGENT_CLAIMED_ID' placeholder. Provide actual agent claimed ID." },
+    { pattern: /(^|[^A-Za-z0-9_])YOUR_AGENT_ID([^A-Za-z0-9_]|$)/i, field: null, message: "Field contains 'YOUR_AGENT_ID' placeholder. Provide actual agent ID." },
+    { pattern: /(^|[^A-Za-z0-9_])YOUR_PUBLIC_PROFILE([^A-Za-z0-9_]|$)/i, field: null, message: "Field contains 'YOUR_PUBLIC_PROFILE' placeholder. Provide actual public profile URL." },
   ];
 
   function findPlaceholders(obj, path = "") {

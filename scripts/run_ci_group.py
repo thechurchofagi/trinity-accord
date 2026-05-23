@@ -65,6 +65,7 @@ GROUPS = {
 
         ["python3", "scripts/test_guardian_listing_builder_no_null_intake_fields.py"],
         ["python3", "scripts/test_gateway_render_no_null_identity_intake_fields.py"],
+        ["node", "examples/github-app-backend/test-placeholder-detector.mjs"],
 
 
     ],
