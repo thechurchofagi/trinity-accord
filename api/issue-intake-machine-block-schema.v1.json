@@ -534,6 +534,60 @@
     },
     "guardian_boundary": {
       "type": "string"
+    },
+    "guardian_application_oath_present": {
+      "type": [
+        "string",
+        "boolean"
+      ]
+    },
+    "guardian_identity_claim_status": {
+      "type": "string"
+    },
+    "guardian_identity_claims_present": {
+      "type": [
+        "string",
+        "boolean"
+      ]
+    },
+    "guardian_listing_oath_present": {
+      "type": [
+        "string",
+        "boolean"
+      ]
+    },
+    "verification_oath_anti_abuse": {
+      "type": [
+        "string",
+        "boolean"
+      ]
+    },
+    "verification_oath_correct_errors": {
+      "type": [
+        "string",
+        "boolean"
+      ]
+    },
+    "verification_oath_good_faith": {
+      "type": [
+        "string",
+        "boolean"
+      ]
+    },
+    "verification_oath_honesty": {
+      "type": [
+        "string",
+        "boolean"
+      ]
+    },
+    "verification_oath_no_false_consensus": {
+      "type": [
+        "string",
+        "boolean"
+      ]
+    },
+    "verification_oath_schema": {
+      "type": "string"
     }
   },
   "allOf": [

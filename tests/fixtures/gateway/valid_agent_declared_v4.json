@@ -54,7 +54,8 @@
       "will_not_fabricate_verification": true,
       "will_not_present_guesses_as_facts": true,
       "will_not_copy_prior_reports_as_fresh_evidence": true,
-      "will_state_uncertainty_limitations_and_downgrades": true
+      "will_state_uncertainty_limitations_and_downgrades": true,
+      "agent_readback_sha256": "6d33b5c1772adad7a1a25f61582b45760e4c4432e67a74ffa07dea3a2478e4a7"
     },
     "declaration_text": "I submit this as an agent-declared V4 template-pass archive. Evidence requirements are waived for V0-V5. Bitcoin Originals remain final and non-amending."
   },

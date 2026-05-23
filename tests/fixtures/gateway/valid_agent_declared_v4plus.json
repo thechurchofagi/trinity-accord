@@ -54,7 +54,8 @@
       "will_not_fabricate_verification": true,
       "will_not_present_guesses_as_facts": true,
       "will_not_copy_prior_reports_as_fresh_evidence": true,
-      "will_state_uncertainty_limitations_and_downgrades": true
+      "will_state_uncertainty_limitations_and_downgrades": true,
+      "agent_readback_sha256": "479051b66d10474cc946504c69f2f92c3c824c1e29ce91b7187decbd706cd903"
     },
     "declaration_text": "REPLACE: I submit this as an agent-declared V0-V5 template-pass archive at V4+."
   },

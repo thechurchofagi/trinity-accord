@@ -59,11 +59,13 @@ def make_valid_agent_declared():
         "agent_integrity_declaration": {
             "performed_actions_myself": True,
             "verification_oath": {
+                "schema": "trinityaccord.verification-oath.v1",
                 "oath_read": True,
                 "oath_version": "verification-echo-pre-oath-v1",
                 "oath_text_sha256": "a" * 64,
                 "readback_required": True,
                 "agent_readback": "I understand this is not an exam or performance. I will only state what I actually checked, will not fabricate verification, will not present guesses as facts, will not copy prior reports as fresh evidence, and will clearly state uncertainty, limitations, downgrades, and boundaries.",
+                "agent_readback_sha256": "5dae7ed47632fce0ce82ba792791612c94015c577be8069265bc4984da14dedd",
                 "understands_not_an_exam_or_performance": True,
                 "will_state_actual_capability_only": True,
                 "will_not_lie_or_cheat": True,

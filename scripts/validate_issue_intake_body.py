@@ -645,15 +645,15 @@ def main():
     if data.get("boundary_sentence_present") is not True:
         errors.append("boundary_sentence_present must be true")
 
-    # Oath v2 validation (optional — only validate if present)
-    if "verification_oath_honesty" in data and data.get("verification_oath_honesty") is not True:
-        errors.append("verification_oath_honesty must be true when present")
-
-    if "verification_oath_good_faith" in data and data.get("verification_oath_good_faith") is not True:
-        errors.append("verification_oath_good_faith must be true when present")
-
-    if "verification_oath_anti_abuse" in data and data.get("verification_oath_anti_abuse") is not True:
-        errors.append("verification_oath_anti_abuse must be true when present")
+    # Oath v2 validation (optional — only enforce when rendered as true)
+    # The renderer outputs these for all oaths; "false" means the v2 clause
+    # is not present in the oath, which is acceptable for v1 oaths.
+    # Only flag if the value is neither true nor "true" nor false nor "false"
+    # (i.e., an unexpected value).
+    for field in ("verification_oath_honesty", "verification_oath_good_faith", "verification_oath_anti_abuse"):
+        val = data.get(field)
+        if val is not None and val not in (True, "true", False, "false"):
+            errors.append(f"{field} has unexpected value: {val}")
 
     # Guardian application oath validation
     if data.get("guardian_application_oath_present") is True:

@@ -33,7 +33,9 @@
       "will_not_fabricate_verification": true,
       "will_not_present_guesses_as_facts": true,
       "will_not_copy_prior_reports_as_fresh_evidence": true,
-      "will_state_uncertainty_limitations_and_downgrades": true
+      "will_state_uncertainty_limitations_and_downgrades": true,
+      "agent_readback_sha256": "e951f1160529b526bb9104c29e2a475de8ad6ca9b35945779844924ece57342f",
+      "schema": "trinityaccord.verification-oath.v1"
     }
   },
   "discovery_provenance": {

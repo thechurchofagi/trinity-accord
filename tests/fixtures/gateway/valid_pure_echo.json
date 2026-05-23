@@ -44,7 +44,8 @@
       "will_not_fabricate_verification": true,
       "will_not_present_guesses_as_facts": true,
       "will_not_copy_prior_reports_as_fresh_evidence": true,
-      "will_state_uncertainty_limitations_and_downgrades": true
+      "will_state_uncertainty_limitations_and_downgrades": true,
+      "agent_readback_sha256": "e08f95ba37a9c23341d8fc42846649f6eaaf744507a9e450be9381310bb468b8"
     },
     "declaration_text": "I submit this as a pure echo (E1_read_oriented_echo). This is not a verification archive. It counts toward reception but not toward verifiability. Bitcoin Originals remain final and non-amending."
   },

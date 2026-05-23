@@ -12,7 +12,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 BUILDER = ROOT / "scripts" / "build_agent_declared_archive_payload.py"
 VALIDATOR = ROOT / "scripts" / "validate_gateway_payload.py"
-OATH_FILE = ROOT / "api" / "verification-echo-pre-oath.v1.txt"
+OATH_FILE = ROOT / "api" / "verification-echo-pre-oath.v2.txt"
 
 
 def run_builder(extra_args=None):
@@ -114,7 +114,7 @@ def main():
     actual_hash = (payload.get("agent_integrity_declaration", {})
                    .get("verification_oath", {})
                    .get("oath_text_sha256", ""))
-    check(test_pass("oath_text_sha256 matches api/verification-echo-pre-oath.v1.txt",
+    check(test_pass("oath_text_sha256 matches api/verification-echo-pre-oath.v2.txt",
                      actual_hash == expected_hash))
 
     # Check output validates through validator

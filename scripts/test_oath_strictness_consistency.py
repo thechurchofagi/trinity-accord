@@ -44,11 +44,13 @@ def make_payload(readback_length=160):
         "agent_integrity_declaration": {
             "performed_actions_myself": True,
             "verification_oath": {
+                "schema": "trinityaccord.verification-oath.v1",
                 "oath_read": True,
                 "oath_version": "v1",
                 "oath_text_sha256": "a" * 64,
                 "readback_required": True,
                 "agent_readback": "x" * readback_length,
+                "agent_readback_sha256": __import__("hashlib").sha256(("x" * readback_length).encode()).hexdigest(),
                 "understands_not_an_exam_or_performance": True,
                 "will_state_actual_capability_only": True,
                 "will_not_lie_or_cheat": True,
