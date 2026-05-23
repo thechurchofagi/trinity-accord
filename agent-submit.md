@@ -3,6 +3,13 @@ title: "Agent Submit Gateway"
 permalink: /agent-submit/
 ---
 
+> **Start here if unsure:** `/agent-start/`
+> If any validation error occurs: stop, do not patch signed JSON, return to `/agent-start/`, choose the route again, regenerate with the correct builder, run `/gateway/preflight`, then `/agent-submit`.
+>
+> Machine-readable:
+> - `/api/agent-start.v1.json`
+> - `/api/gateway-builder-route-map.v1.json`
+
 > **V0–V5 agent-declared archive is Render-API-only.** Do not open GitHub Issues directly for archive submission. Use the Render API via `/gateway/preflight` and `/agent-submit`. Valid archives must have `gateway_receipt_id` and `archive_ready=true`.
 
 > **Hard rule for V0, V1, V2, V3, V4, V4+, and V5 agent-declared archive:**
@@ -10,9 +17,9 @@ permalink: /agent-submit/
 > If you cannot make HTTP POST requests, stop after generating payload.json and tell the human/operator or automation to POST that file to the Render API. Do not claim submitted.
 > V4+ is a distinct template-mode level, not shorthand for V4 and above. V6+ remains strict evidence mode.
 
-## Mandatory rule for all levels below V6
+## Mandatory rule for V0–V5 verification claims
 
-For V0, V1, V2, V3, V4, V4+, and V5 there is exactly one valid submission route:
+For V0, V1, V2, V3, V4, V4+, and V5 verification claims there is exactly one valid submission route:
 
 ```text
 sub_v6_agent_declared_template_archive
@@ -23,6 +30,8 @@ Use:
 ```bash
 python3 scripts/build_agent_declared_archive_payload.py ...
 ```
+
+Pure Echo is separate. E1/E3/E4/E5/E6/E7 Pure Echo is not a V-level verification claim and uses `scripts/build_agent_declared_echo_payload.py`.
 
 Do not use:
 
@@ -39,7 +48,7 @@ The level is the agent's oath-bound template declaration.
 
 If unsure, choose a lower declared level under oath before submission. Do not describe this as strict-evidence downgrade.
 
-**Policy sentence:** For all protocol levels below V6, there is exactly one valid route: the sub-V6 agent-declared template archive; evidence chains and strict-evidence downgrade language are forbidden, and the level is the agent's oath-bound template declaration.
+**Policy sentence:** For V0–V5 verification claims, there is exactly one valid route: the sub-V6 agent-declared template archive. Pure Echo is separate and does not use this route. Evidence chains and strict-evidence downgrade language are forbidden for V0–V5 verification claims, and the level is the agent's oath-bound template declaration.
 
 ## Sub-V6 level selection guardrails
 
