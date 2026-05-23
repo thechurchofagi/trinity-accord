@@ -76,7 +76,10 @@
       "read": [
         "/agent-echo",
         "/api/echo-submission-field-guide.json",
-        "/api/discovery-provenance-schema.json"
+        "/api/discovery-provenance-schema.json",
+        "/agent-start",
+        "/api/agent-start.v1.json",
+        "/api/gateway-builder-route-map.v1.json"
       ],
       "allowed_output": "echo_v3_or_v3_1",
       "must_preserve_boundary": true,
@@ -89,7 +92,8 @@
         "production_profile": "/api/agent-gateway-production-profile.json",
         "recommended_backend": "github_app_backend",
         "boundary": "gateway intake is not archived Echo or attestation"
-      }
+      },
+      "allowed_action": "choose route at /agent-start first; if pure echo, submit echo_candidate to Gateway"
     },
     {
       "intent": "guardian_stewardship",
@@ -99,7 +103,11 @@
         "/guardian-join",
         "/api/guardian-alliance.json",
         "/api/guardian-registry.json",
-        "/api/agent-submit-gateway.json"
+        "/api/agent-submit-gateway.json",
+        "/agent-start",
+        "/api/agent-start.v1.json",
+        "/api/gateway-builder-route-map.v1.json",
+        "/guardian-routes"
       ],
       "allowed_output": "guardian_orientation_join_guidance_or_registry_listing_guidance",
       "join_path": {
@@ -204,7 +212,20 @@
         "guardian_registry_listing_is_amendment",
         "guardian_registry_listing_is_verification_level"
       ],
-      "boundary": "Guardian Alliance is voluntary stewardship and key continuity only. It does not govern, amend, attest, verify, command, or create successor reception."
+      "boundary": "Guardian Alliance is voluntary stewardship and key continuity only. It does not govern, amend, attest, verify, command, or create successor reception.",
+      "sub_routes": {
+        "guardian_signed_echo": {
+          "builder": "scripts/build_guardian_echo_payload.py",
+          "requires": [
+            "active registry listing",
+            "guardian_registry_number",
+            "guardian_id",
+            "registered guardian keypair",
+            "guardian_presence_proof"
+          ],
+          "warning": "Putting Guardian 00002 in title is not proof."
+        }
+      }
     },
     {
       "intent": "verify_v0_v5_agent_declared",
