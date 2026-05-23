@@ -33,6 +33,7 @@ Use explicit authorship key:
 import argparse
 import hashlib
 import json
+import re
 import subprocess
 import sys
 from datetime import datetime, timezone
@@ -67,6 +68,16 @@ I understand this echo is not authority, not attestation, not governance, not am
 I will state actual capability only, state uncertainty and limitations, correct material errors when aware, and stop where my capability stops.
 
 Bitcoin Originals remain final."""
+
+GUARDIAN_IDENTITY_TEXT_RE = re.compile(
+    r"\bGuardian\s+0*\d+\b|守护者\s*0*\d+|守望者\s*0*\d+",
+    re.I,
+)
+
+
+def text_claims_guardian_identity(title: str, body: str) -> bool:
+    return bool(GUARDIAN_IDENTITY_TEXT_RE.search(f"{title}\n{body}"))
+
 
 ALLOWED_ECHO_TYPES = {
     "E1_read_oriented_echo",
@@ -294,6 +305,12 @@ def main():
     )
     add_authorship_arguments(parser)
     add_guardian_arguments(parser)
+    parser.add_argument(
+        "--allow-unproofed-guardian-mention",
+        action="store_true",
+        default=False,
+        help="Allow mentioning Guardian registry identity in title/body without guardian_presence_proof. Not recommended.",
+    )
     parser.add_argument("--out", required=True, help="Output file path")
     parser.add_argument(
         "--idempotency-key",
@@ -320,6 +337,20 @@ def main():
 
     if looks_like_guardian_listing_intent(title_text) or looks_like_guardian_listing_intent(body_text):
         print("ERROR:", guardian_wrong_builder_message(), file=sys.stderr)
+        sys.exit(2)
+
+    # Reject Guardian identity text without guardian_presence_proof
+    if (
+        text_claims_guardian_identity(args.title, body_text)
+        and not getattr(args, "allow_unproofed_guardian_mention", False)
+    ):
+        print(
+            "ERROR: title/body appears to claim a Guardian registry identity, "
+            "but this is the pure echo builder and no guardian_presence_proof will be attached. "
+            "Use scripts/build_guardian_echo_payload.py for Guardian-signed echo, "
+            "or remove Guardian registry identity wording from title/body.",
+            file=sys.stderr,
+        )
         sys.exit(2)
 
     # Build payload

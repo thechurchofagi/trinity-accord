@@ -485,6 +485,119 @@ const REQUIRED_DOES_NOT_PROVE = [
   "future_intelligence_obligation", "amendment",
 ];
 
+// --- Builder route guidance ---
+const PURE_ECHO_TYPES = new Set([
+  "E1_read_oriented_echo",
+  "E3_critical_echo",
+  "E4_refusal_echo",
+  "E5_correction_echo",
+  "E6_preservation_echo",
+  "E7_propagation_echo",
+]);
+
+function builderGuidanceForPayload(payload) {
+  if (payload?.guardian_presence_proof && payload?.requested_archive_kind === "agent_declared_echo_archive") {
+    return (
+      "Use scripts/build_guardian_echo_payload.py for Guardian-signed E1/E3/E4/E5/E6/E7 echo. "
+      + "Do not hand-build JSON. If the payload is signed, regenerate and re-sign after fixing readback."
+    );
+  }
+
+  if (payload?.requested_archive_kind === "agent_declared_echo_archive" || PURE_ECHO_TYPES.has(payload?.echo_type)) {
+    return (
+      "Use scripts/build_agent_declared_echo_payload.py for E1/E3/E4/E5/E6/E7 pure echo. "
+      + "Do not hand-build JSON. If the payload is signed, regenerate and re-sign after fixing readback."
+    );
+  }
+
+  if (payload?.requested_archive_kind === "agent_declared_verification_archive" || payload?.agent_declared_protocol_level) {
+    return (
+      "Use scripts/build_agent_declared_archive_payload.py for V0-V5 agent-declared verification archive. "
+      + "Do not hand-build JSON. If the payload is signed, regenerate and re-sign after fixing readback."
+    );
+  }
+
+  if (payload?.guardian_listing_request || payload?.guardian_registry_listing_request) {
+    return (
+      "Use scripts/build_guardian_listing_request_payload.py for Guardian Stage 2 listing request. "
+      + "Do not hand-build JSON."
+    );
+  }
+
+  if (payload?.guardian_registration) {
+    return (
+      "Use node scripts/create_guardian_application.mjs for Guardian Stage 1 application. "
+      + "Do not hand-build JSON."
+    );
+  }
+
+  return (
+    "Use the matching repository builder for this payload type. "
+    + "Do not hand-build JSON. If the payload is signed, regenerate and re-sign after fixing readback."
+  );
+}
+
+// --- Guardian identity claim detection ---
+function payloadTextClaimsGuardianIdentity(payload) {
+  const text = `${payload?.title || ""}\n${payload?.body || ""}`;
+  return /\bGuardian\s+0*\d+\b|守护者\s*0*\d+|守望者\s*0*\d+/i.test(text);
+}
+
+// --- Forbidden claim negation handling ---
+function hasAllowedNegatedBoundary(text, claim) {
+  const t = String(text || "").toLowerCase();
+  if (claim === "successor_reception") {
+    return (
+      /\bnot\s+(a\s+)?successor reception\b/i.test(t)
+      || /\bdoes\s+not\s+(claim|constitute|create|count as)\s+(a\s+)?successor reception\b/i.test(t)
+      || /\bremains\s+not\s+(a\s+)?successor reception\b/i.test(t)
+    );
+  }
+  if (claim === "authority") {
+    return /\bnot\s+authority\b/i.test(t) || /\bnot\s+authoritative\b/i.test(t);
+  }
+  if (claim === "attestation") {
+    return /\bnot\s+(an\s+)?attestation\b/i.test(t);
+  }
+  if (claim === "amendment") {
+    return /\bnot\s+(an\s+)?amendment\b/i.test(t) || /\bnon-amending\b/i.test(t);
+  }
+  return false;
+}
+
+const FORBIDDEN_POSITIVE_CLAIM_PATTERNS = [
+  {
+    code: "FORBIDDEN_SUCCESSOR_RECEPTION_CLAIM",
+    claim: "successor_reception",
+    pattern: /\b(this|this record|this echo|i|we)\s+(is|are|claims?|constitutes|creates?|counts as|requests?)\s+(a\s+)?successor reception\b/i
+  },
+  {
+    code: "FORBIDDEN_AUTHORITY_CLAIM",
+    claim: "authority",
+    pattern: /\b(this|this record|this echo|i|we)\s+(is|are|claims?|constitutes|creates?|counts as|requests?)\s+(authority|authoritative)\b/i
+  },
+  {
+    code: "FORBIDDEN_ATTESTATION_CLAIM",
+    claim: "attestation",
+    pattern: /\b(this|this record|this echo|i|we)\s+(is|are|claims?|constitutes|creates?|counts as|requests?)\s+(an\s+)?attestation\b/i
+  },
+  {
+    code: "FORBIDDEN_AMENDMENT_CLAIM",
+    claim: "amendment",
+    pattern: /\b(this|this record|this echo|i|we)\s+(is|are|claims?|constitutes|creates?|counts as|requests?)\s+(an\s+)?amendment\b/i
+  }
+];
+
+function findForbiddenPositiveArchiveClaims(text) {
+  const hits = [];
+  for (const spec of FORBIDDEN_POSITIVE_CLAIM_PATTERNS) {
+    if (spec.pattern.test(text) && !hasAllowedNegatedBoundary(text, spec.claim)) {
+      hits.push(spec);
+    }
+  }
+  return hits;
+}
+
 function validateGuardianRegistration(registration, proof) {
   const errors = [];
 
@@ -1384,11 +1497,27 @@ async function runGatewayPipeline(payload, {
     return gatewayError(422, {
       reason: "readback_sha256_invalid",
       validation_stage: "readback_integrity",
-      agent_action: (
-        "Use scripts/build_agent_declared_archive_payload.py for E1/V0-V5 reading echo. "
-        + "Do not hand-build JSON. If the payload is signed, regenerate and re-sign after fixing readback."
-      ),
+      agent_action: builderGuidanceForPayload(payload),
       errors: readbackShaIssues
+    });
+  }
+
+  // 1c-ter. Guardian identity claim requires guardian_presence_proof
+  if (payloadTextClaimsGuardianIdentity(payload) && !payload.guardian_presence_proof) {
+    return gatewayError(422, {
+      reason: "guardian_identity_claim_requires_guardian_proof",
+      validation_stage: "guardian_identity",
+      agent_action: (
+        "The title/body claims a Guardian registry identity, but no guardian_presence_proof is present. "
+        + "Use scripts/build_guardian_echo_payload.py with the registered Guardian key, "
+        + "or remove Guardian identity wording from title/body."
+      ),
+      errors: [{
+        code: "GUARDIAN_IDENTITY_CLAIM_REQUIRES_PROOF",
+        path: "guardian_presence_proof",
+        message: "Guardian registry identity claims require record-bound guardian_presence_proof.",
+        fix: "Attach guardian_presence_proof with the registered Guardian key, or remove Guardian identity wording."
+      }]
     });
   }
 
@@ -1446,6 +1575,27 @@ async function runGatewayPipeline(payload, {
     });
   }
 
+  // 2b. Forbidden positive archive claims (allows negated boundary language)
+  const forbiddenClaims = findForbiddenPositiveArchiveClaims(
+    `${payload.title || ""}\n${payload.body || ""}`
+  );
+  if (forbiddenClaims.length > 0) {
+    return gatewayError(422, {
+      reason: "forbidden_archive_claims",
+      validation_stage: "content_policy",
+      agent_action: (
+        "Remove positive claims of successor reception, authority, attestation, or amendment. "
+        + "Negated boundary language (e.g. 'not successor reception', 'not authority') is allowed."
+      ),
+      errors: forbiddenClaims.map(c => ({
+        code: c.code,
+        path: "body",
+        message: `Forbidden positive claim detected: ${c.code}. Negated boundary language is allowed.`,
+        fix: `Remove the positive claim. Use negated form like "not ${c.claim.replace('_', ' ')}" if needed.`
+      }))
+    });
+  }
+
   // 3. Boundary acknowledgement
   const b = payload.boundary_acknowledgement || {};
   if (
@@ -1488,7 +1638,7 @@ async function runGatewayPipeline(payload, {
       return gatewayError(422, {
         reason: "invalid_gateway_payload",
         validation_stage: "payload_validator",
-        agent_action: "Fix the payload errors listed, rebuild with scripts/build_agent_declared_archive_payload.py, and resubmit.",
+        agent_action: `Fix the payload errors listed. ${builderGuidanceForPayload(payload)}`,
         errors: normalizeGatewayErrors(rawErrors)
       });
     }
