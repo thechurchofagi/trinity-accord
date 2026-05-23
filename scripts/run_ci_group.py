@@ -117,6 +117,11 @@ GROUPS = {
         ["python3", "scripts/validate_trust_root_policy.py", "archive/trust-root-policy.json"],
         ["python3", "scripts/test_trust_root_cross_checks.py"],
     ],
+    "readback-integrity": [
+        ["python3", "scripts/test_oath_readback_integrity.py"],
+        ["python3", "scripts/test_agent_declared_builder_readback_sha.py"],
+        ["python3", "scripts/test_gateway_payload_readback_sha_validator.py"],
+    ],
 }
 
 

@@ -22,6 +22,7 @@ from oath_contracts import (
     GUARDIAN_LISTING_OATH_TRUE_FIELDS,
 )
 from guardian_identity_claims import validate_guardian_identity_claims
+from oath_readback_integrity import validate_oath_readback_integrity
 
 
 def is_agent_declared_echo_archive(payload):
@@ -538,6 +539,17 @@ def validate_gateway_intake_fields_no_null(payload, errors):
             )
 
 
+def validate_readback_sha256(payload, errors):
+    """Validate agent_readback_sha256 matches sha256(agent_readback)."""
+    for err in validate_oath_readback_integrity(payload):
+        code = err.get("code", "READBACK_SHA256_ERROR")
+        msg = err.get("message", "")
+        fix = err.get("fix", "")
+        expected = err.get("expected_sha256")
+        suffix = f" Expected: {expected}." if expected else ""
+        errors.append(f"{code}: {msg}{suffix} {fix}")
+
+
 def validate_common(payload, errors):
     validate_identity(payload, errors)
     validate_provenance(payload, errors)
@@ -545,6 +557,7 @@ def validate_common(payload, errors):
     validate_guardian_fields(payload, errors)
     validate_guardian_listing_request(payload, errors)
     validate_agent_integrity_oath(payload, errors)
+    validate_readback_sha256(payload, errors)
     validate_gateway_intake_fields_no_null(payload, errors)
 
     # Guardian listing profile coherence checks
@@ -896,6 +909,12 @@ def validate_agent_declared_archive(payload, errors):
             errors.append("verification_oath.oath_text_sha256 is required")
         if not oath.get("agent_readback") or len(oath.get("agent_readback", "")) < 160:
             errors.append("verification_oath.agent_readback must be at least 160 characters")
+        # Readback SHA256 guidance for E1/V0-V5
+        if not oath.get("agent_readback_sha256"):
+            errors.append(
+                "READBACK_SHA256_MISSING: verification_oath.agent_readback_sha256 is required. "
+                "Use scripts/build_agent_declared_archive_payload.py. Do not hand-build JSON."
+            )
         for bool_field in [
             "understands_not_an_exam_or_performance",
             "will_state_actual_capability_only",

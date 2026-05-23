@@ -186,6 +186,63 @@ function sha256Text(s) {
   return createHash("sha256").update(s, "utf8").digest("hex");
 }
 
+function getVerificationOath(payload) {
+  return (payload?.agent_integrity_declaration?.verification_oath) || null;
+}
+
+function validateReadbackSha256(payload) {
+  const oath = getVerificationOath(payload);
+  if (!oath || typeof oath !== "object") return [];
+
+  const readback = String(oath.agent_readback || "").trim();
+  if (!readback) return [];
+
+  const expected = sha256Text(readback);
+  const actual = oath.agent_readback_sha256;
+  const signed = !!payload?.authorship_proof?.signed_payload_sha256;
+
+  if (!actual) {
+    return [{
+      code: "READBACK_SHA256_MISSING",
+      path: "agent_integrity_declaration.verification_oath.agent_readback_sha256",
+      field: "agent_readback_sha256",
+      message: "agent_readback_sha256 is required and must equal sha256(agent_readback).",
+      expected_sha256: expected,
+      requires_resign: signed,
+      fix: signed
+        ? "This payload is signed. Re-run the correct builder or repair before signing."
+        : "Set agent_readback_sha256 to the expected_sha256 value."
+    }];
+  }
+
+  if (actual !== expected) {
+    return [{
+      code: "READBACK_SHA256_MISMATCH",
+      path: "agent_integrity_declaration.verification_oath.agent_readback_sha256",
+      field: "agent_readback_sha256",
+      message: "agent_readback_sha256 does not match sha256(agent_readback).",
+      actual_sha256: actual,
+      expected_sha256: expected,
+      requires_resign: signed,
+      fix: signed
+        ? "This payload is signed. Re-run the correct builder or repair before signing."
+        : "Replace agent_readback_sha256 with expected_sha256."
+    }];
+  }
+
+  return [];
+}
+
+function maybeRepairUnsignedReadbackSha(payload) {
+  const oath = getVerificationOath(payload);
+  if (!oath || typeof oath !== "object") return;
+  if (payload?.authorship_proof?.signed_payload_sha256) return;
+
+  const readback = String(oath.agent_readback || "").trim();
+  if (!readback) return;
+  oath.agent_readback_sha256 = sha256Text(readback);
+}
+
 function payloadForIdempotency(payload) {
   const clone = JSON.parse(JSON.stringify(payload || {}));
   delete clone.idempotency_key;
@@ -1229,6 +1286,9 @@ async function runGatewayPipeline(payload, {
     });
   }
 
+  // 0. Auto-repair unsigned readback SHA256
+  maybeRepairUnsignedReadbackSha(payload);
+
   // 1. AJV schema validation
   if (!validate(payload)) {
     return gatewayError(422, {
@@ -1315,6 +1375,20 @@ async function runGatewayPipeline(payload, {
         message: `agent_readback must be at least 160 characters. Got ${readback.length}. Write what you actually understood from the oath — do not copy the example.`,
         fix: "Write your own readback in your own words. Explain what you understood from the oath. Minimum 160 characters."
       }]
+    });
+  }
+
+  // 1c-bis. Readback SHA256 validation
+  const readbackShaIssues = validateReadbackSha256(payload);
+  if (readbackShaIssues.length > 0) {
+    return gatewayError(422, {
+      reason: "readback_sha256_invalid",
+      validation_stage: "readback_integrity",
+      agent_action: (
+        "Use scripts/build_agent_declared_archive_payload.py for E1/V0-V5 reading echo. "
+        + "Do not hand-build JSON. If the payload is signed, regenerate and re-sign after fixing readback."
+      ),
+      errors: readbackShaIssues
     });
   }
 

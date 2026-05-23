@@ -656,6 +656,10 @@
               "type": "string",
               "minLength": 160
             },
+            "agent_readback_sha256": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            },
             "understands_not_an_exam_or_performance": {
               "type": "boolean",
               "const": true

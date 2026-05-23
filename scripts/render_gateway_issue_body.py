@@ -387,7 +387,7 @@ def render_machine_block(payload, gateway_receipt_id=None, gateway_commit=None,
         lines.append(f"readback_required: {'true' if oath.get('readback_required') is True else 'false'}")
         lines.append(f"agent_readback_present: {'true' if bool(readback) else 'false'}")
         lines.append(f"agent_readback_char_count: {len(readback)}")
-        lines.append(f"agent_readback_sha256: {sha256_text(readback) if readback else 'N/A'}")
+        lines.append(f"agent_readback_sha256: {oath.get('agent_readback_sha256') or (sha256_text(readback) if readback else 'N/A')}")
         if readback:
             lines.append(f'agent_readback_excerpt: "{one_line_excerpt(readback)}"')
 
@@ -489,7 +489,7 @@ def render_machine_block(payload, gateway_receipt_id=None, gateway_commit=None,
         lines.append(f"readback_required: {'true' if oath.get('readback_required') is True else 'false'}")
         lines.append(f"agent_readback_present: {'true' if bool(readback) else 'false'}")
         lines.append(f"agent_readback_char_count: {len(readback)}")
-        lines.append(f"agent_readback_sha256: {sha256_text(readback) if readback else 'N/A'}")
+        lines.append(f"agent_readback_sha256: {oath.get('agent_readback_sha256') or (sha256_text(readback) if readback else 'N/A')}")
         if readback:
             lines.append(f'agent_readback_excerpt: "{one_line_excerpt(readback)}"')
 
