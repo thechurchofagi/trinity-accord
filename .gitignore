@@ -5,3 +5,4 @@
 agent-authorship-key.private.pem
 .trinity-agent-authorship/
 __pycache__/
+guardian-output/

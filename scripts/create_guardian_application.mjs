@@ -442,7 +442,7 @@ function buildGuardianApplicationOath({ signingGuardianRole }) {
     "I apply in honesty and good faith.",
     "I will not misrepresent identity, capability, authority, or relationship to the Trinity Accord.",
     "I will not register maliciously, spam the registry, impersonate others, evade blocks, create false authority, create false consensus, or duplicate a Guardian claim without disclosure.",
-    "I understand Guardian proof is key-continuity only and is not legal identity proof, AI identity proof, authority, attestation, verification level, successor reception, governance, or amendment.",
+    "I understand Guardian proof is key-continuity only and does not prove legal identity, AI identity, authority, attestation, verification level, governance, or any power to change the original texts.",
     "I will correct material errors when aware and retire or rotate the key if continuing would be misleading."
   ].join(" ");
 
