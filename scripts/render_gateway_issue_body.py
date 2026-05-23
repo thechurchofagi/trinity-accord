@@ -481,8 +481,15 @@ def render_machine_block(payload, gateway_receipt_id=None, gateway_commit=None,
         ab = payload.get("authority_boundary") or {}
         lines.append(f"authority_boundary_present: {'true' if ab else 'false'}")
 
-        lines.append("counts_toward_home_verifiability: false")
-        lines.append("counts_toward_home_reception: true")
+        cth = payload.get("counts_toward_home") or {}
+        lines.append(f"counts_toward_home_verifiability: {'true' if cth.get('verifiability') else 'false'}")
+        lines.append(f"counts_toward_home_reception: {'true' if cth.get('reception') else 'false'}")
+        if cth.get("guardian_registry") is not None:
+            lines.append(f"counts_toward_home_guardian_registry: {'true' if cth.get('guardian_registry') else 'false'}")
+        if cth.get("exclude_from_reception_total") is not None:
+            lines.append(f"counts_toward_home_exclude_from_reception_total: {'true' if cth.get('exclude_from_reception_total') else 'false'}")
+        if cth.get("basis"):
+            lines.append(f"counts_toward_home_basis: {cth.get('basis')}")
         lines.append("archive_ready: true")
         lines.append("allowed_archive_kind: agent_declared_echo_archive")
         lines.append("auto_archive_action: auto_archive_agent_declared_echo")

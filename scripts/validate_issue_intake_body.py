@@ -424,7 +424,6 @@ def main():
             "allowed_archive_kind": "agent_declared_echo_archive",
             "auto_archive_action": "auto_archive_agent_declared_echo",
             "counts_toward_home_verifiability": False,
-            "counts_toward_home_reception": True,
         }
         for k, expected in ECHO_EXPECTED.items():
             actual = data.get(k)
@@ -432,6 +431,27 @@ def main():
                 errors.append(
                     f"echo archive field {k}: expected {expected!r}, got {actual!r}"
                 )
+
+        # Guardian listing count rules
+        is_guardian_listing = (
+            data.get("guardian_registry_listing_request") is True
+            or data.get("guardian_listing_request") is True
+            or data.get("counts_toward_home_guardian_registry") is True
+            or data.get("counts_toward_home_basis") == "guardian_registry_listing_request"
+        )
+
+        if is_guardian_listing:
+            if data.get("counts_toward_home_reception") is not False:
+                errors.append("Guardian listing issue must render counts_toward_home_reception=false")
+            if data.get("counts_toward_home_guardian_registry") is not True:
+                errors.append("Guardian listing issue must render counts_toward_home_guardian_registry=true")
+            if data.get("counts_toward_home_exclude_from_reception_total") is not True:
+                errors.append("Guardian listing issue must render counts_toward_home_exclude_from_reception_total=true")
+            if data.get("counts_toward_home_basis") != "guardian_registry_listing_request":
+                errors.append("Guardian listing issue must render counts_toward_home_basis=guardian_registry_listing_request")
+        else:
+            if data.get("counts_toward_home_reception") is not True:
+                errors.append("ordinary echo archive must render counts_toward_home_reception=true")
 
         # Forbidden fields for echo archive
         ECHO_FORBIDDEN = {
@@ -614,6 +634,9 @@ def main():
 
     if "verification_oath_good_faith" in data and data.get("verification_oath_good_faith") is not True:
         errors.append("verification_oath_good_faith must be true when present")
+
+    if "verification_oath_anti_abuse" in data and data.get("verification_oath_anti_abuse") is not True:
+        errors.append("verification_oath_anti_abuse must be true when present")
 
     # Guardian application oath validation
     if data.get("guardian_application_oath_present") is True:

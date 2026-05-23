@@ -59,6 +59,8 @@ GROUPS = {
         ["python3", "scripts/test_guardian_daily_cap_config.py"],
         ["python3", "scripts/test_guardian_auto_registration_identity_mismatch.py"],
         ["python3", "scripts/test_gateway_render_oath_identity_fields.py"],
+        ["python3", "scripts/test_guardian_listing_renderer_excludes_reception_total.py"],
+        ["python3", "scripts/test_echo_archive_renderer_counts_reception.py"],
         ["python3", "scripts/test_oath_contract_validator.py"],
 
 
