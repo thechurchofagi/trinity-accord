@@ -667,7 +667,7 @@ def auto_register(
                 "verification_status": "self_reported_unverified",
                 "legal_identity_verified": False,
                 "public_disclosure_allowed": bool(listing_identity.get("human_claimed_name")),
-            } if listing_identity.get("human_claimed_name_sha256") not in (None, "", "not_provided") else None,
+            } if not is_missing_value(listing_identity.get("human_claimed_name_sha256")) else None,
             "ai_agent": {
                 "claimed_agent_id": clean_optional_identity_value(listing_identity.get("agent_claimed_id")),
                 "claimed_agent_id_sha256": clean_optional_identity_value(listing_identity.get("agent_claimed_id_sha256")),
@@ -676,7 +676,7 @@ def auto_register(
                 "agent_public_profile": None,
                 "claim_type": "self_reported_agent_id_or_label",
                 "verification_status": "self_reported_unverified",
-            } if listing_identity.get("agent_claimed_id_sha256") not in (None, "", "not_provided") else None,
+            } if not is_missing_value(listing_identity.get("agent_claimed_id_sha256")) else None,
             "binding": {
                 "guardian_id": listing["guardian_id"],
                 "public_key_sha256": listing["public_key_sha256"],
