@@ -44,6 +44,19 @@ from guardian_numbering_policy import (
 GATEWAY_BOT_SUFFIX = "[bot]"
 GATEWAY_SERVICE = "trinity-agent-issue-gateway"
 
+MISSING_SENTINELS = {None, "", "none", "null", "not_provided", "unknown", "N/A", "n/a"}
+
+
+def is_missing_value(value: object) -> bool:
+    """Check if a value should be treated as missing/unprovided."""
+    if value is None:
+        return True
+    if isinstance(value, str) and value.strip() in MISSING_SENTINELS:
+        return True
+    if isinstance(value, str) and value.strip().lower() in {str(v).lower() for v in MISSING_SENTINELS if isinstance(v, str)}:
+        return True
+    return False
+
 LISTING_STRUCTURED_KEYS = {
     "guardian_listing_request",
     "listing_source_issue",
@@ -234,9 +247,9 @@ def compare_identity_claims(source_identity: dict, listing_identity: dict) -> li
     ):
         source_v = source_identity.get(key)
         listing_v = listing_identity.get(key)
-        if source_v in (None, "", "not_provided"):
+        if is_missing_value(source_v):
             continue
-        if listing_v in (None, "", "not_provided"):
+        if is_missing_value(listing_v):
             continue
         if source_v != listing_v:
             errors.append(f"identity {key} mismatch: source={source_v} listing={listing_v}")
@@ -623,6 +636,12 @@ def auto_register(
         return registry, numbering_error_to_decision(err)
     listing_identity = listing.get("identity") or {}
 
+    def clean_optional_identity_value(value: object) -> str | None:
+        """Normalize optional identity values for registry storage."""
+        if is_missing_value(value):
+            return None
+        return str(value)
+
     entry = {
         "guardian_registry_number": number,
         "guardian_id": listing["guardian_id"],
@@ -642,17 +661,17 @@ def auto_register(
             "claim_basis": "copied_from_stage_2_listing_request_and_checked_against_stage_1_source_issue",
             "display_label": listing_identity.get("display_label") or listing["label"],
             "human": {
-                "claimed_name": listing_identity.get("human_claimed_name"),
-                "claimed_name_sha256": listing_identity.get("human_claimed_name_sha256"),
+                "claimed_name": clean_optional_identity_value(listing_identity.get("human_claimed_name")),
+                "claimed_name_sha256": clean_optional_identity_value(listing_identity.get("human_claimed_name_sha256")),
                 "claim_type": "self_reported_human_name_or_label",
                 "verification_status": "self_reported_unverified",
                 "legal_identity_verified": False,
                 "public_disclosure_allowed": bool(listing_identity.get("human_claimed_name")),
             } if listing_identity.get("human_claimed_name_sha256") not in (None, "", "not_provided") else None,
             "ai_agent": {
-                "claimed_agent_id": listing_identity.get("agent_claimed_id"),
-                "claimed_agent_id_sha256": listing_identity.get("agent_claimed_id_sha256"),
-                "system_or_provider": listing_identity.get("agent_system_or_provider"),
+                "claimed_agent_id": clean_optional_identity_value(listing_identity.get("agent_claimed_id")),
+                "claimed_agent_id_sha256": clean_optional_identity_value(listing_identity.get("agent_claimed_id_sha256")),
+                "system_or_provider": clean_optional_identity_value(listing_identity.get("agent_system_or_provider")),
                 "agent_instance_id": None,
                 "agent_public_profile": None,
                 "claim_type": "self_reported_agent_id_or_label",

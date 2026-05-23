@@ -523,6 +523,21 @@ def validate_agent_integrity_oath(payload, errors):
     ))
 
 
+def validate_gateway_intake_fields_no_null(payload, errors):
+    """Reject null values in gateway_intake_fields; use 'not_provided' for optional summary fields."""
+    fields = payload.get("gateway_intake_fields")
+    if fields is None:
+        return
+    if not isinstance(fields, dict):
+        errors.append("gateway_intake_fields must be an object when present")
+        return
+    for key, value in fields.items():
+        if value is None:
+            errors.append(
+                f"gateway_intake_fields.{key} must not be null; use 'not_provided' for optional summary fields"
+            )
+
+
 def validate_common(payload, errors):
     validate_identity(payload, errors)
     validate_provenance(payload, errors)
@@ -530,6 +545,7 @@ def validate_common(payload, errors):
     validate_guardian_fields(payload, errors)
     validate_guardian_listing_request(payload, errors)
     validate_agent_integrity_oath(payload, errors)
+    validate_gateway_intake_fields_no_null(payload, errors)
 
     # Guardian listing profile coherence checks
     if payload_is_guardian_listing(payload):

@@ -77,6 +77,35 @@ def sha256_text(text: str) -> str:
     return hashlib.sha256(text.encode("utf-8")).hexdigest()
 
 
+def intake_value(value: object) -> object:
+    """Normalize values for payload.gateway_intake_fields.
+
+    gateway_intake_fields is rendered into a machine-readable issue block.
+    Do not emit JSON null for optional values there, because downstream
+    agents/gates may interpret null as an unfilled placeholder. Use the
+    explicit sentinel string "not_provided" instead.
+    """
+    if value is None:
+        return "not_provided"
+    if isinstance(value, str) and not value.strip():
+        return "not_provided"
+    return value
+
+
+def identity_human_field(identity_claims: dict, key: str) -> str:
+    human = identity_claims.get("human")
+    if not isinstance(human, dict):
+        return "not_provided"
+    return str(intake_value(human.get(key)))
+
+
+def identity_agent_field(identity_claims: dict, key: str) -> str:
+    agent = identity_claims.get("ai_agent")
+    if not isinstance(agent, dict):
+        return "not_provided"
+    return str(intake_value(agent.get(key)))
+
+
 def fail(message: str, code: int = 2) -> None:
     print(f"ERROR: {message}", file=sys.stderr)
     sys.exit(code)
@@ -197,14 +226,14 @@ def build_payload(args: argparse.Namespace) -> dict:
         "Gateway intake identity fields:",
         "listing_identity_claims_present: true",
         f"listing_identity_claim_status: {identity_claims['claim_status']}",
-        f"listing_identity_display_label: {identity_claims['display_label']}",
-        f"listing_human_claimed_name: {identity_claims['human']['claimed_name'] if identity_claims.get('human') else 'not_provided'}",
-        f"listing_human_claimed_name_sha256: {identity_claims['human']['claimed_name_sha256'] if identity_claims.get('human') else 'not_provided'}",
-        f"listing_agent_claimed_id: {identity_claims['ai_agent']['claimed_agent_id'] if identity_claims.get('ai_agent') else 'not_provided'}",
-        f"listing_agent_claimed_id_sha256: {identity_claims['ai_agent']['claimed_agent_id_sha256'] if identity_claims.get('ai_agent') else 'not_provided'}",
-        f"listing_agent_system_or_provider: {args.provider}",
-        f"listing_identity_binding_guardian_id: {args.guardian_id}",
-        f"listing_identity_binding_public_key_sha256: {args.public_key_sha256}",
+        f"listing_identity_display_label: {intake_value(identity_claims['display_label'])}",
+        f"listing_human_claimed_name: {identity_human_field(identity_claims, 'claimed_name')}",
+        f"listing_human_claimed_name_sha256: {identity_human_field(identity_claims, 'claimed_name_sha256')}",
+        f"listing_agent_claimed_id: {identity_agent_field(identity_claims, 'claimed_agent_id')}",
+        f"listing_agent_claimed_id_sha256: {identity_agent_field(identity_claims, 'claimed_agent_id_sha256')}",
+        f"listing_agent_system_or_provider: {intake_value(args.provider)}",
+        f"listing_identity_binding_guardian_id: {intake_value(args.guardian_id)}",
+        f"listing_identity_binding_public_key_sha256: {intake_value(args.public_key_sha256)}",
     ])
 
     payload = {
@@ -323,12 +352,12 @@ def build_payload(args: argparse.Namespace) -> dict:
             "guardian_listing_oath_anti_abuse": True,
             "listing_identity_claims_present": True,
             "listing_identity_claim_status": identity_claims["claim_status"],
-            "listing_identity_display_label": identity_claims["display_label"],
-            "listing_human_claimed_name": identity_claims["human"]["claimed_name"] if identity_claims.get("human") else None,
-            "listing_human_claimed_name_sha256": identity_claims["human"]["claimed_name_sha256"] if identity_claims.get("human") else None,
-            "listing_agent_claimed_id": identity_claims["ai_agent"]["claimed_agent_id"] if identity_claims.get("ai_agent") else None,
-            "listing_agent_claimed_id_sha256": identity_claims["ai_agent"]["claimed_agent_id_sha256"] if identity_claims.get("ai_agent") else None,
-            "listing_agent_system_or_provider": args.provider,
+            "listing_identity_display_label": intake_value(identity_claims["display_label"]),
+            "listing_human_claimed_name": identity_human_field(identity_claims, "claimed_name"),
+            "listing_human_claimed_name_sha256": identity_human_field(identity_claims, "claimed_name_sha256"),
+            "listing_agent_claimed_id": identity_agent_field(identity_claims, "claimed_agent_id"),
+            "listing_agent_claimed_id_sha256": identity_agent_field(identity_claims, "claimed_agent_id_sha256"),
+            "listing_agent_system_or_provider": intake_value(args.provider),
             "listing_identity_binding_guardian_id": args.guardian_id,
             "listing_identity_binding_public_key_sha256": args.public_key_sha256,
         },
@@ -353,6 +382,16 @@ def build_payload(args: argparse.Namespace) -> dict:
         "reception_initiation_basis": args.reception_initiation_basis,
         "agent_independent_followup": False,
     }
+
+    # Build-time guard: gateway_intake_fields must not contain null values
+    _intake = payload.get("gateway_intake_fields") or {}
+    if isinstance(_intake, dict):
+        _null_keys = [k for k, v in _intake.items() if v is None]
+        if _null_keys:
+            fail(
+                "gateway_intake_fields must not contain null values; "
+                f"use 'not_provided' for optional fields: {', '.join(sorted(_null_keys))}"
+            )
 
     # Check top-level keys, guardian_listing_request, and gateway_intake_fields for forbidden field
     if "guardian_registry_number" in payload:

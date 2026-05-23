@@ -63,6 +63,9 @@ GROUPS = {
         ["python3", "scripts/test_echo_archive_renderer_counts_reception.py"],
         ["python3", "scripts/test_oath_contract_validator.py"],
 
+        ["python3", "scripts/test_guardian_listing_builder_no_null_intake_fields.py"],
+        ["python3", "scripts/test_gateway_render_no_null_identity_intake_fields.py"],
+
 
     ],
     "chronicle": [

@@ -110,20 +110,35 @@ def render_guardian_identity_fields(payload):
             "guardian_identity_claim_status: missing",
         ]
 
-    human = claims.get("human") or {}
+    def display_value(value):
+        if value is None:
+            return "not_provided"
+        if isinstance(value, str) and not value.strip():
+            return "not_provided"
+        return str(value)
+
+    human = claims.get("human")
     agent = claims.get("ai_agent") or {}
     binding = claims.get("binding") or {}
+
+    if isinstance(human, dict):
+        human_name = display_value(human.get("claimed_name"))
+        human_sha = display_value(human.get("claimed_name_sha256"))
+    else:
+        human_name = "not_provided"
+        human_sha = "not_provided"
+
     return [
         "guardian_identity_claims_present: true",
         f"guardian_identity_claim_status: {claims.get('claim_status', 'unknown')}",
-        f"guardian_identity_display_label: {claims.get('display_label', 'unknown')}",
-        f"guardian_human_claimed_name: {human.get('claimed_name', 'not_provided')}",
-        f"guardian_human_claimed_name_sha256: {human.get('claimed_name_sha256', 'not_provided')}",
-        f"guardian_agent_claimed_id: {agent.get('claimed_agent_id', 'not_provided')}",
-        f"guardian_agent_claimed_id_sha256: {agent.get('claimed_agent_id_sha256', 'not_provided')}",
-        f"guardian_agent_system_or_provider: {agent.get('system_or_provider', 'not_provided')}",
-        f"guardian_identity_binding_guardian_id: {binding.get('guardian_id', 'not_provided')}",
-        f"guardian_identity_binding_public_key_sha256: {binding.get('public_key_sha256', 'not_provided')}",
+        f"guardian_identity_display_label: {display_value(claims.get('display_label'))}",
+        f"guardian_human_claimed_name: {human_name}",
+        f"guardian_human_claimed_name_sha256: {human_sha}",
+        f"guardian_agent_claimed_id: {display_value(agent.get('claimed_agent_id'))}",
+        f"guardian_agent_claimed_id_sha256: {display_value(agent.get('claimed_agent_id_sha256'))}",
+        f"guardian_agent_system_or_provider: {display_value(agent.get('system_or_provider'))}",
+        f"guardian_identity_binding_guardian_id: {display_value(binding.get('guardian_id'))}",
+        f"guardian_identity_binding_public_key_sha256: {display_value(binding.get('public_key_sha256'))}",
         "guardian_identity_boundary: self_reported_unverified_not_legal_identity_not_ai_identity_not_authority_not_attestation_not_verification_level",
     ]
 
@@ -190,6 +205,8 @@ def render_gateway_intake_fields(payload):
         elif isinstance(value, (list, dict)):
             value = json.dumps(value, ensure_ascii=False, separators=(",", ":"))
         elif value is None:
+            value = "not_provided"
+        elif isinstance(value, str) and not value.strip():
             value = "not_provided"
         lines.append(f"{key}: {value}")
     return lines

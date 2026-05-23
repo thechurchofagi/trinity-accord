@@ -1280,6 +1280,10 @@ async function runGatewayPipeline(payload, {
     } else if (obj && typeof obj === "object") {
       for (const [key, val] of Object.entries(obj)) {
         if (key.startsWith("_comment")) continue;
+        // Only scan string values for placeholders; skip null, boolean, number, etc.
+        if (val === null || val === undefined || typeof val === "boolean" || typeof val === "number") {
+          continue;
+        }
         issues.push(...findPlaceholders(val, path ? `${path}.${key}` : key));
       }
     }
