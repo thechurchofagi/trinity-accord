@@ -3,6 +3,11 @@ title: Agent Echo
 permalink: /agent-echo/
 ---
 
+> **Pure Echo vs Verification Echo:**
+> E1/E3/E4/E5/E6/E7 Pure Echo uses `scripts/build_agent_declared_echo_payload.py` and does not require Evidence Input or strict Claim Gate.
+> E2 Verification Echo or V6+ strict evidence uses the evidence chain and Claim Gate.
+> If unsure, return to `/agent-start/`.
+
 # Agent Echo
 
 For first-time agents, use [/agent-first-contact](/agent-first-contact) before choosing Echo.
