@@ -1251,6 +1251,10 @@ async function runGatewayPipeline(payload, {
     { pattern: /YOUR_SYSTEM/i, field: "system_or_provider", message: "agent_identity.system_or_provider must be your actual system or provider." },
     { pattern: /YOUR_OWN_READBACK/i, field: "agent_readback", message: "agent_readback must be your own words (160+ chars). Do not copy the example. Write what you actually understood from the oath." },
     { pattern: /MINIMUM_160_CHARACTERS/i, field: "agent_readback", message: "agent_readback must be your own words, not the example text. Write what you actually understood from the oath." },
+    { pattern: /HUMAN_CLAIMED_NAME/i, field: null, message: "Field contains 'HUMAN_CLAIMED_NAME' placeholder. Provide actual human claimed name." },
+    { pattern: /AGENT_CLAIMED_ID/i, field: null, message: "Field contains 'AGENT_CLAIMED_ID' placeholder. Provide actual agent claimed ID." },
+    { pattern: /YOUR_AGENT_ID/i, field: null, message: "Field contains 'YOUR_AGENT_ID' placeholder. Provide actual agent ID." },
+    { pattern: /YOUR_PUBLIC_PROFILE/i, field: null, message: "Field contains 'YOUR_PUBLIC_PROFILE' placeholder. Provide actual public profile URL." },
   ];
 
   function findPlaceholders(obj, path = "") {
@@ -1589,6 +1593,54 @@ async function runGatewayPipeline(payload, {
             code: "MISSING_PRODUCTION_FIELD",
             message: `Rendered body missing required field: ${f}`,
             fix: "Gateway renderer did not produce production-grade output."
+          })),
+          extra: {
+            server_generated_fields_are_agent_forbidden: true
+          }
+        });
+      }
+
+      // Conditional oath/identity self-test
+      const payloadStr = JSON.stringify(payload);
+      const hasGuardianRegistration = payload.guardian_registration || payload.guardian_application_oath;
+      const hasGuardianListing = payload.guardian_listing_request || payload.guardian_listing_oath;
+      const isOathV2 = payloadStr.includes("verification-echo-pre-oath-v2");
+
+      const conditionalFields = [];
+      if (hasGuardianRegistration) {
+        conditionalFields.push(
+          "guardian_application_oath_present: true",
+          "guardian_application_oath_anti_abuse: true",
+          "guardian_identity_claims_present: true",
+          "guardian_identity_boundary:"
+        );
+      }
+      if (hasGuardianListing) {
+        conditionalFields.push(
+          "guardian_listing_oath_present: true",
+          "guardian_listing_oath_system_generated_number: true",
+          "guardian_identity_claims_present: true",
+          "guardian_identity_boundary:"
+        );
+      }
+      if (isOathV2) {
+        conditionalFields.push(
+          "verification_oath_honesty: true",
+          "verification_oath_good_faith: true",
+          "verification_oath_anti_abuse: true"
+        );
+      }
+      const missingConditional = conditionalFields.filter(f => !renderedBody.includes(f));
+      if (missingConditional.length > 0) {
+        console.error("PRODUCTION RENDER SELF-TEST FAILED — missing conditional oath/identity fields:", missingConditional);
+        return gatewayError(500, {
+          reason: "production_render_self_test_failed",
+          validation_stage: "issue_body_render_internal",
+          agent_action: "Do not modify payload. Report Gateway production render self-test failure.",
+          errors: missingConditional.map(f => ({
+            code: "MISSING_CONDITIONAL_FIELD",
+            message: `Rendered body missing required conditional field: ${f}`,
+            fix: "Gateway renderer did not produce oath/identity fields."
           })),
           extra: {
             server_generated_fields_are_agent_forbidden: true

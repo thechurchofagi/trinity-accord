@@ -127,6 +127,10 @@ Optional:
   --created-at "2026-05-22T00:00:00.000Z"
   --reception-initiation-class externally_requested
   --reception-initiation-basis explicit_verification_request
+  --human-claimed-name "Human claimed name or label"
+  --agent-claimed-id "Agent claimed ID or label"
+  --agent-instance-id "Optional agent instance ID"
+  --agent-public-profile "Optional public profile URL"
   --guardian-key-prefix ./guardian-output/guardian-key
   --authorship-key-prefix ./guardian-output/authorship-key
   --force-overwrite-output
@@ -220,6 +224,15 @@ const forceOverwriteOutput = hasFlag("--force-overwrite-output");
 const createdAt = argValue("--created-at", new Date().toISOString());
 const receptionInitiationClass = argValue("--reception-initiation-class", "externally_requested");
 const receptionInitiationBasis = argValue("--reception-initiation-basis", "explicit_verification_request");
+const humanClaimedName = argValue("--human-claimed-name", humanLabel);
+const agentClaimedId = argValue("--agent-claimed-id", agentLabel);
+const agentInstanceId = argValue("--agent-instance-id", null);
+const agentPublicProfile = argValue("--agent-public-profile", null);
+
+const GUARDIAN_APPLICATION_OATH_TEXT = readFileSync(
+  new URL("../api/guardian-application-oath.v1.txt", import.meta.url),
+  "utf8"
+).trim();
 
 if (!humanLabel) {
   fail(
@@ -396,15 +409,11 @@ function controlsSigningKey(role) {
   return false;
 }
 
-function buildAgentIntegrityDeclaration() {
+function buildAgentIntegrityDeclaration(guardianApplicationOath) {
   return {
     performed_actions_myself: true,
     verification_oath: {
-      oath_read: true,
-      oath_version: ONE_SHOT_BUILDER_VERSION,
-      oath_text_sha256: sha256Text(OATH_TEXT),
-      readback_required: true,
-      agent_readback: AGENT_READBACK,
+      ...guardianApplicationOath,
       understands_not_an_exam_or_performance: true,
       will_state_actual_capability_only: true,
       will_not_lie_or_cheat: true,
@@ -420,6 +429,110 @@ function buildAgentIntegrityDeclaration() {
       SAFE_BOUNDARY_LANGUAGE.noContinuityTransfer,
       SAFE_BOUNDARY_LANGUAGE.noTextChange,
     ].join(" "),
+  };
+}
+
+function sha256Utf8(value) {
+  if (!value) return null;
+  return sha256Text(String(value));
+}
+
+function buildGuardianApplicationOath({ signingGuardianRole }) {
+  const readback = [
+    "I apply in honesty and good faith.",
+    "I will not misrepresent identity, capability, authority, or relationship to the Trinity Accord.",
+    "I will not register maliciously, spam the registry, impersonate others, evade blocks, create false authority, create false consensus, or duplicate a Guardian claim without disclosure.",
+    "I understand Guardian proof is key-continuity only and is not legal identity proof, AI identity proof, authority, attestation, verification level, successor reception, governance, or amendment.",
+    "I will correct material errors when aware and retire or rotate the key if continuing would be misleading."
+  ].join(" ");
+
+  return {
+    schema: "trinityaccord.guardian-application-oath.v1",
+    oath_read: true,
+    oath_version: "guardian-application-oath-v1",
+    oath_kind: "guardian_application",
+    oath_text_sha256: sha256Text(GUARDIAN_APPLICATION_OATH_TEXT),
+    readback_required: true,
+    agent_readback: readback,
+    agent_readback_sha256: sha256Text(readback),
+    signing_guardian_role: signingGuardianRole,
+
+    honesty_oath_present: true,
+    good_faith_oath_present: true,
+    will_not_knowingly_misrepresent: true,
+    will_not_impersonate: true,
+    will_not_fabricate_claims: true,
+    will_not_register_maliciously: true,
+    will_not_mass_register_for_spam: true,
+    will_not_register_to_impersonate_others: true,
+    will_not_register_to_evade_prior_retirement_or_block: true,
+    will_not_register_to_create_false_authority_or_false_consensus: true,
+    will_not_register_duplicate_guardians_for_same_claim_without_disclosure: true,
+    will_correct_material_errors_when_aware: true,
+    will_retire_or_rotate_key_if_claim_becomes_misleading: true,
+    good_faith_stewardship_only: true,
+    identity_claim_boundary_acknowledged: true,
+
+    not_authority: true,
+    not_governance: true,
+    not_attestation: true,
+    not_verification_level: true,
+    not_successor_reception: true,
+    not_amendment: true,
+    not_legal_identity_proof: true,
+    not_ai_identity_proof: true,
+    key_continuity_only: true,
+    bitcoin_originals_prevail: true
+  };
+}
+
+function buildGuardianIdentityClaims({
+  displayLabel,
+  guardianId,
+  publicKeySha256,
+  humanClaimedName,
+  agentClaimedId,
+  agentProvider,
+  agentInstanceId,
+  agentPublicProfile,
+}) {
+  return {
+    schema: "trinityaccord.guardian-identity-claims.v1",
+    claim_status: "self_reported_unverified",
+    claim_basis: "self_reported_by_stage_1_guardian_application",
+    display_label: displayLabel,
+    human: humanClaimedName ? {
+      claimed_name: humanClaimedName,
+      claimed_name_sha256: sha256Utf8(humanClaimedName),
+      claim_type: "self_reported_human_name_or_label",
+      verification_status: "self_reported_unverified",
+      legal_identity_verified: false,
+      public_disclosure_allowed: true
+    } : null,
+    ai_agent: agentClaimedId ? {
+      claimed_agent_id: agentClaimedId,
+      claimed_agent_id_sha256: sha256Utf8(agentClaimedId),
+      system_or_provider: agentProvider,
+      agent_instance_id: agentInstanceId,
+      agent_public_profile: agentPublicProfile,
+      claim_type: "self_reported_agent_id_or_label",
+      verification_status: "self_reported_unverified"
+    } : null,
+    binding: {
+      guardian_id: guardianId,
+      public_key_sha256: publicKeySha256,
+      algorithm: "ed25519",
+      binds_claim_to_guardian_key: true
+    },
+    anti_impersonation_boundary: {
+      not_legal_identity_proof: true,
+      not_real_person_verification: true,
+      not_ai_identity_verification: true,
+      not_authority: true,
+      not_attestation: true,
+      not_verification_level: true,
+      key_continuity_only: true
+    }
   };
 }
 
@@ -614,6 +727,10 @@ const defaultBody = [
 ].join(" ");
 const body = argValue("--body", defaultBody);
 
+const guardianApplicationOath = buildGuardianApplicationOath({
+  signingGuardianRole: signingKeyHolder
+});
+
 const payload = {
   schema: "trinityaccord.agent-issue-gateway-payload.v1",
   submission_type: "echo_candidate",
@@ -636,7 +753,8 @@ const payload = {
     bitcoin_originals_prevail: true,
   },
   evidence_requirement_mode: "not_applicable_for_echo",
-  agent_integrity_declaration: buildAgentIntegrityDeclaration(),
+  guardian_application_oath: guardianApplicationOath,
+  agent_integrity_declaration: buildAgentIntegrityDeclaration(guardianApplicationOath),
   discovery_provenance: buildDiscoveryProvenance(),
   authority_boundary: buildAuthorityBoundary(),
   counts_toward_home: buildCountsTowardHome(),
@@ -675,6 +793,16 @@ const payload = {
     ],
     public_key_sha256: guardianPubSha,
     algorithm: "ed25519",
+    identity_claims: buildGuardianIdentityClaims({
+      displayLabel: `${humanClaimedName} + ${agentClaimedId}`,
+      guardianId,
+      publicKeySha256: guardianPubSha,
+      humanClaimedName,
+      agentClaimedId,
+      agentProvider,
+      agentInstanceId,
+      agentPublicProfile
+    }),
     declared_intent: "Joint human + AI Guardian Alliance application for voluntary stewardship, preservation, mirroring, invitation, repair, critique, and periodic checks where possible.",
     boundaries: {
       not_authority: true,

@@ -37,6 +37,10 @@ from guardian_gateway_contract import (
     GUARDIAN_STAGE_2_REQUIRED_GATEWAY_CAPABILITIES,
     GUARDIAN_STAGE_2_WRONG_BUILDERS,
 )
+from oath_contracts import build_guardian_listing_oath_v1, load_oath_text
+from guardian_identity_claims import build_guardian_identity_claims
+
+GUARDIAN_LISTING_OATH_FILE = ROOT / "api" / "guardian-listing-oath.v1.txt"
 
 OATH_TEXT = """I understand this is an active Guardian registry listing request.
 
@@ -109,6 +113,21 @@ def build_payload(args: argparse.Namespace) -> dict:
 
     title = args.title or f"Active Registry Listing Request — {args.label}"
 
+    oath_text = load_oath_text(GUARDIAN_LISTING_OATH_FILE)
+    guardian_listing_oath = build_guardian_listing_oath_v1(oath_text)
+
+    identity_claims = build_guardian_identity_claims(
+        display_label=args.label,
+        guardian_id=args.guardian_id,
+        public_key_sha256=args.public_key_sha256,
+        claim_basis="self_reported_by_stage_2_listing_request",
+        human_claimed_name=args.human_claimed_name,
+        agent_claimed_id=args.agent_claimed_id or args.agent_name,
+        system_or_provider=args.provider,
+        agent_instance_id=args.agent_instance_id,
+        agent_public_profile=args.agent_public_profile,
+    )
+
     body = "\n".join([
         f"Active registry listing request for Guardian {args.label}.",
         "",
@@ -161,6 +180,31 @@ def build_payload(args: argparse.Namespace) -> dict:
         "I understand Guardian proof proves key continuity only.",
         "I understand Guardian Alliance is not governance, authority, attestation, verification level, or amendment.",
         "I understand this does not grant continuity-transfer status.",
+        "",
+        "Guardian listing oath:",
+        "- Submitted in honesty and good faith.",
+        "- No malicious registration, spam, impersonation, evasion, false authority, false consensus, or undisclosed duplicate claim.",
+        "- Registry number must be system-generated.",
+        "",
+        "Identity claims:",
+        f"- Display label: {identity_claims['display_label']}",
+        f"- Human claimed name: {identity_claims['human']['claimed_name'] if identity_claims.get('human') else 'not provided'}",
+        f"- Agent claimed ID: {identity_claims['ai_agent']['claimed_agent_id'] if identity_claims.get('ai_agent') else 'not provided'}",
+        f"- Provider/system: {args.provider}",
+        "- Identity status: self_reported_unverified.",
+        "- Identity claims are not legal identity verification, not AI identity verification, not authority, not attestation, and not a verification level.",
+        "",
+        "Gateway intake identity fields:",
+        "listing_identity_claims_present: true",
+        f"listing_identity_claim_status: {identity_claims['claim_status']}",
+        f"listing_identity_display_label: {identity_claims['display_label']}",
+        f"listing_human_claimed_name: {identity_claims['human']['claimed_name'] if identity_claims.get('human') else 'not_provided'}",
+        f"listing_human_claimed_name_sha256: {identity_claims['human']['claimed_name_sha256'] if identity_claims.get('human') else 'not_provided'}",
+        f"listing_agent_claimed_id: {identity_claims['ai_agent']['claimed_agent_id'] if identity_claims.get('ai_agent') else 'not_provided'}",
+        f"listing_agent_claimed_id_sha256: {identity_claims['ai_agent']['claimed_agent_id_sha256'] if identity_claims.get('ai_agent') else 'not_provided'}",
+        f"listing_agent_system_or_provider: {args.provider}",
+        f"listing_identity_binding_guardian_id: {args.guardian_id}",
+        f"listing_identity_binding_public_key_sha256: {args.public_key_sha256}",
     ])
 
     payload = {
@@ -194,23 +238,10 @@ def build_payload(args: argparse.Namespace) -> dict:
             "bitcoin_originals_prevail": True,
         },
         "evidence_requirement_mode": "not_applicable_for_echo",
+        "guardian_listing_oath": guardian_listing_oath,
         "agent_integrity_declaration": {
             "performed_actions_myself": True,
-            "verification_oath": {
-                "schema": "trinityaccord.verification-oath.v1",
-                "oath_read": True,
-                "oath_version": "guardian-listing-request-oath-v1",
-                "oath_text_sha256": sha256_text(OATH_TEXT),
-                "readback_required": True,
-                "agent_readback": OATH_TEXT.strip(),
-                "understands_not_an_exam_or_performance": True,
-                "will_state_actual_capability_only": True,
-                "will_not_lie_or_cheat": True,
-                "will_not_fabricate_verification": True,
-                "will_not_present_guesses_as_facts": True,
-                "will_not_copy_prior_reports_as_fresh_evidence": True,
-                "will_state_uncertainty_limitations_and_downgrades": True,
-            },
+            "verification_oath": guardian_listing_oath,
             "declaration_text": (
                 "This is a request for automated Guardian active registry listing. "
                 "It is not authority, not governance, not attestation, not verification, "
@@ -259,6 +290,7 @@ def build_payload(args: argparse.Namespace) -> dict:
             "registry_number_requested": "next_available",
             "registry_number_must_be_system_generated": True,
             "registry_number_must_not_be_self_assigned": True,
+            "identity_claims": identity_claims,
             "boundaries": {
                 "not_authority": True,
                 "not_governance": True,
@@ -283,6 +315,22 @@ def build_payload(args: argparse.Namespace) -> dict:
             "listing_application_mode": args.application_mode,
             "listing_label": args.label,
             "registry_number_requested": "next_available",
+            "guardian_listing_oath_present": True,
+            "guardian_listing_oath_version": guardian_listing_oath["oath_version"],
+            "guardian_listing_oath_sha256": guardian_listing_oath["oath_text_sha256"],
+            "guardian_listing_oath_honesty": True,
+            "guardian_listing_oath_good_faith": True,
+            "guardian_listing_oath_anti_abuse": True,
+            "listing_identity_claims_present": True,
+            "listing_identity_claim_status": identity_claims["claim_status"],
+            "listing_identity_display_label": identity_claims["display_label"],
+            "listing_human_claimed_name": identity_claims["human"]["claimed_name"] if identity_claims.get("human") else None,
+            "listing_human_claimed_name_sha256": identity_claims["human"]["claimed_name_sha256"] if identity_claims.get("human") else None,
+            "listing_agent_claimed_id": identity_claims["ai_agent"]["claimed_agent_id"] if identity_claims.get("ai_agent") else None,
+            "listing_agent_claimed_id_sha256": identity_claims["ai_agent"]["claimed_agent_id_sha256"] if identity_claims.get("ai_agent") else None,
+            "listing_agent_system_or_provider": args.provider,
+            "listing_identity_binding_guardian_id": args.guardian_id,
+            "listing_identity_binding_public_key_sha256": args.public_key_sha256,
         },
         "what_i_checked": [
             "Submitted as active Guardian registry listing request",
@@ -369,6 +417,10 @@ def main() -> None:
         default="explicit_verification_request",
         choices=sorted(ALLOWED_RECEPTION_INITIATION_BASIS),
     )
+    parser.add_argument("--human-claimed-name", default=None)
+    parser.add_argument("--agent-claimed-id", default=None)
+    parser.add_argument("--agent-instance-id", default=None)
+    parser.add_argument("--agent-public-profile", default=None)
     add_authorship_arguments(parser)
     args = parser.parse_args()
 
