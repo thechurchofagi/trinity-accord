@@ -78,16 +78,17 @@ def main() -> int:
     sha = "bbbbbbbbbbbbbbbb000000000000000000000000000000000000000000000000"
     gid = "guardian_ed25519_" + sha[:16]
 
-    rc, out = subprocess.run(
+    build_result = subprocess.run(
         ["python3", "scripts/build_guardian_listing_request_payload.py",
          "--agent-name", "Error Body Test", "--provider", "Test",
          "--source-issue", "9998", "--guardian-id", gid,
          "--public-key-sha256", sha,
          "--label", "Error Body Guardian", "--guardian-type", "human_with_ai_agent",
-         "--application-mode", "joint_human_ai", "--idempotency-key", "error-body-test",
+         "--application-mode", "joint_human_ai", "--idempotency-key", "error-body-test-key-20260523",
          "--out", out_path],
         cwd=str(ROOT), text=True, capture_output=True, timeout=120
-    ).returncode
+    )
+    rc, out = build_result.returncode, build_result.stdout
     if rc != 0:
         print("FAIL: build payload")
         print(out)

@@ -74,16 +74,17 @@ def main() -> int:
     sha = "cccccccccccccccc000000000000000000000000000000000000000000000000"
     gid = "guardian_ed25519_" + sha[:16]
 
-    rc, out = subprocess.run(
+    build_result = subprocess.run(
         ["python3", "scripts/build_guardian_listing_request_payload.py",
          "--agent-name", "Header Test", "--provider", "Test",
          "--source-issue", "9997", "--guardian-id", gid,
          "--public-key-sha256", sha,
          "--label", "Header Guardian", "--guardian-type", "human_with_ai_agent",
-         "--application-mode", "joint_human_ai", "--idempotency-key", "header-test",
+         "--application-mode", "joint_human_ai", "--idempotency-key", "header-test-key-20260523",
          "--out", out_path],
         cwd=str(ROOT), text=True, capture_output=True, timeout=120
-    ).returncode
+    )
+    rc, out = build_result.returncode, build_result.stdout
     if rc != 0:
         print("FAIL: build payload")
         print(out)
@@ -107,7 +108,9 @@ def main() -> int:
         "X-Trinity-Payload-Profile",
         "X-Trinity-Gateway-Contract-Version",
     ]
-    missing = [h for h in required_headers if h not in captured_headers]
+    # HTTP headers are case-insensitive; compare lowercased
+    captured_lower = {k.lower(): v for k, v in captured_headers.items()}
+    missing = [h for h in required_headers if h.lower() not in captured_lower]
     if not missing:
         print("PASS: all fingerprint headers sent")
         print(f"Headers: {json.dumps(captured_headers, indent=2)}")

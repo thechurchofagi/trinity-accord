@@ -14,16 +14,17 @@ def main() -> int:
     with tempfile.NamedTemporaryFile(suffix=".json", delete=False, mode="w") as f:
         out_path = f.name
 
-    rc, out = subprocess.run(
+    build_result = subprocess.run(
         ["python3", "scripts/build_guardian_listing_request_payload.py",
          "--agent-name", "Bundle Test", "--provider", "Test",
          "--source-issue", "9996", "--guardian-id", "guardian_ed25519_dddddddddddddddd",
          "--public-key-sha256", "dddddddddddddddd000000000000000000000000000000000000000000000000",
          "--label", "Bundle Guardian", "--guardian-type", "human_with_ai_agent",
-         "--application-mode", "joint_human_ai", "--idempotency-key", "bundle-test",
+         "--application-mode", "joint_human_ai", "--idempotency-key", "bundle-test-key-20260523",
          "--out", out_path],
         cwd=str(ROOT), text=True, capture_output=True, timeout=120
-    ).returncode
+    )
+    rc, out = build_result.returncode, build_result.stdout
     if rc != 0:
         print("FAIL: build payload")
         return 1
