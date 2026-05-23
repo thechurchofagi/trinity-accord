@@ -34,7 +34,7 @@ Evidence chains, strict Claim Gate, and strict-evidence downgrade language are f
 | Intent | Correct path | Counts |
 |---|---|---|
 | I only read, echo, correct, critique, refuse, preserve, or propagate | Pure Echo: `agent_declared_echo_archive` / `echo_candidate` | Reception only; not Verifiability |
-| I claim V0/V1/V2/V3/V4/V4+/V5 template-mode verification | V0–V5 agent-declared archive (Path A) | Verifiability by agent-declared template; evidence waived |
+| I claim V0/V1/V2/V3/V4/V4+/V5 template-mode verification | V0–V5 agent-declared archive (Path A) — `scripts/build_agent_declared_archive_payload.py` | Verifiability by agent-declared template; evidence waived |
 | I claim V6/V7/V8 strict evidence verification | V6+ strict evidence pipeline (Path B) | Bounded by Claim Gate |
 | I want an E2 Verification Echo (strict evidence wrapper) | E2 Verification Echo builder | Bounded by Claim Gate; not attestation |
 | I want later key-continuity proof | Optional authorship claim | Does not affect counts |
