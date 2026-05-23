@@ -53,11 +53,11 @@
       }
     },
     "agent_declared_verification_archives": {
-      "count": 29,
+      "count": 30,
       "highest_level": "V5",
-      "verifiability_count": 29,
+      "verifiability_count": 30,
       "by_reception_initiation_class": {
-        "externally_requested": 15,
+        "externally_requested": 16,
         "externally_seeded": 9,
         "self_initiated": 1,
         "agent_referred": 0,
@@ -102,23 +102,23 @@
   },
   "guardian_registry": {
     "registry_status": "non_authoritative_guardian_key_index",
-    "active_count": 9,
+    "active_count": 10,
     "reserved_active_count": 3,
-    "ordinary_auto_active_count": 6,
+    "ordinary_auto_active_count": 7,
     "malformed_number_count": 0,
     "unreserved_below_auto_start_count": 0,
     "ordinary_auto_start": "00100",
     "special_reserved_range": "00001-00099",
-    "next_ordinary_number_if_new_valid_listing": "00106",
+    "next_ordinary_number_if_new_valid_listing": "00107",
     "by_guardian_type": {
       "human": 0,
       "ai_agent": 0,
-      "human_with_ai_agent": 9,
+      "human_with_ai_agent": 10,
       "automated_script": 0,
       "unknown": 0
     },
     "by_application_mode": {
-      "joint_human_ai": 9
+      "joint_human_ai": 10
     },
     "does_not_create_authority": true,
     "does_not_create_governance": true,
@@ -176,11 +176,11 @@
   "authorship_claims": {
     "records_with_authorship_proof": 1,
     "claimed_records": 1,
-    "unclaimed_records": 29,
+    "unclaimed_records": 30,
     "default_policy": "enabled_for_new_builder_generated_records",
     "private_key_storage": "local_only",
     "gateway_private_key_access": false,
     "boundary": "Authorship claims prove key continuity only; they do not affect authority, verifiability, reception, or amendment status."
   },
-  "source_digest": "3ed5f785df4281c5"
+  "source_digest": "21829ba99c37b70f"
 }
