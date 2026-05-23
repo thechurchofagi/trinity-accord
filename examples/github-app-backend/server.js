@@ -42,8 +42,10 @@ function gatewayError(status, {
   retryable = false,
   request_id = null,
   idempotency_key = null,
+  payload = null,
   extra = {}
 }) {
+  const workflowId = payload ? workflowIdForPayload(payload) : (extra.workflow_id || null);
   return {
     status,
     body: {
@@ -52,6 +54,12 @@ function gatewayError(status, {
       validation_stage,
       agent_action,
       ...recoveryContext(),
+      workflow_id: workflowId,
+      next_document: workflowId ? workflowDocumentForId(workflowId) : WORKFLOW_MANUAL,
+      workflow_manual: WORKFLOW_MANUAL,
+      workflow_manual_machine: WORKFLOW_MANUAL_MACHINE,
+      artifact_custody: ARTIFACT_CUSTODY,
+      save_for_debugging: saveForDebuggingList(),
       errors,
       issue_created,
       retryable,
@@ -568,6 +576,53 @@ function builderGuidanceForPayload(payload) {
     "Use the matching repository builder for this payload type. "
     + "Do not hand-build JSON. If the payload is signed, regenerate and re-sign after fixing readback."
   );
+}
+
+function workflowIdForPayload(payload) {
+  if (payload?.guardian_presence_proof && payload?.requested_archive_kind === "agent_declared_echo_archive") {
+    return "guardian_signed_echo";
+  }
+  if (payload?.guardian_listing_request || payload?.guardian_registry_listing_request) {
+    return "guardian_listing_stage_2";
+  }
+  if (payload?.guardian_registration) {
+    return "guardian_application_stage_1";
+  }
+  if (payload?.requested_archive_kind === "agent_declared_verification_archive" || payload?.agent_declared_protocol_level) {
+    return "v0_v5_agent_declared_archive";
+  }
+  if (payload?.requested_archive_kind === "agent_declared_echo_archive" || PURE_ECHO_TYPES.has(payload?.echo_type)) {
+    return "pure_echo";
+  }
+  return "unknown";
+}
+
+function workflowDocumentForId(workflowId) {
+  const map = {
+    pure_echo: "https://www.trinityaccord.org/gateway-workflows/#workflow-pure-echo",
+    v0_v5_agent_declared_archive: "https://www.trinityaccord.org/gateway-workflows/#workflow-v0-v5-agent-declared-archive",
+    v6_plus_strict_evidence: "https://www.trinityaccord.org/gateway-workflows/#workflow-v6-plus-strict-evidence",
+    e2_verification_echo: "https://www.trinityaccord.org/gateway-workflows/#workflow-e2-verification-echo",
+    guardian_application_stage_1: "https://www.trinityaccord.org/gateway-workflows/#workflow-guardian-stage-1-application",
+    guardian_listing_stage_2: "https://www.trinityaccord.org/gateway-workflows/#workflow-guardian-stage-2-listing",
+    guardian_signed_echo: "https://www.trinityaccord.org/gateway-workflows/#workflow-guardian-signed-echo"
+  };
+  return map[workflowId] || WORKFLOW_MANUAL;
+}
+
+function saveForDebuggingList() {
+  return [
+    "builder command",
+    "source body file",
+    "readback file or readback text",
+    "generated payload.json",
+    "payload file sha256",
+    "public key file if used",
+    "preflight response JSON",
+    "submit response JSON if any",
+    "issue URL if created",
+    "debug bundle if generated"
+  ];
 }
 
 // --- Guardian identity claim detection ---
@@ -1323,7 +1378,12 @@ function normalizeGatewayErrors(lines) {
       code: "VALIDATION_ERROR",
       path: null,
       message: msg,
-      fix: "If this refers to raw payload fields, rebuild with scripts/build_agent_declared_archive_payload.py and POST the raw JSON to /gateway/preflight. If this refers to gateway_receipt_id, created_by_gateway, server_validated, server_rendered, render_api_only, gateway_service, or gateway_commit, do not add those fields; report a Gateway internal render error."
+      fix: (
+        "If this refers to raw payload fields, return to /agent-start/, choose the route again, "
+        + "read /gateway-workflows/, regenerate with the matching builder, and POST raw JSON to /gateway/preflight. "
+        + "If this refers to gateway_receipt_id, created_by_gateway, server_validated, server_rendered, render_api_only, "
+        + "gateway_service, or gateway_commit, do not add those fields; report a Gateway internal render error."
+      )
     };
   });
 }
@@ -1383,13 +1443,14 @@ async function runGatewayPipeline(payload, {
       return gatewayError(422, {
         reason: "invalid_authorship_proof",
         validation_stage: "authorship_proof",
-        agent_action: authorship.agent_action || "Do not strip fields or re-sign manually. Submit exact generated file. If local digest matches proof, fix Gateway canonicalization or transport.",
+        agent_action: authorship.agent_action || "Do not strip fields or re-sign manually. Submit the exact generated file. If the payload changed after signing, return to /agent-start/ and regenerate with the correct builder.",
         errors: [{
           code: "AUTHORED_PAYLOAD_DIGEST_MISMATCH",
           path: "authorship_proof",
           message: `signed_payload_sha256 mismatch: proof=${authorship.signed_payload_sha256_from_proof} gateway=${authorship.computed_payload_sha256_by_gateway}`,
           fix: "Do not strip fields or re-sign manually. Submit exact generated file. If local digest matches proof, fix Gateway canonicalization or transport."
         }],
+        payload: submittedPayload,
         extra: {
           error_code: authorship.error_code,
           detected_payload_profile: authorship.detected_payload_profile,
@@ -1414,7 +1475,8 @@ async function runGatewayPipeline(payload, {
         path: "authorship_proof",
         message: authorship.error || "Authorship proof signature verification failed",
         fix: "Rebuild payload, sign with scripts/attach_agent_authorship_proof.mjs, and resubmit."
-      }]
+      }],
+      payload: submittedPayload
     });
   }
 
@@ -1442,6 +1504,7 @@ async function runGatewayPipeline(payload, {
         message: V0_V5_WRONG_PATH_ERROR,
         fix: "Build raw payload with scripts/build_agent_declared_archive_payload.py, then POST to /gateway/preflight and /agent-submit."
       }]
+        payload,
     });
   }
 
@@ -1457,6 +1520,7 @@ async function runGatewayPipeline(payload, {
       errors: normalizeGatewayErrors(
         (validate.errors || []).map(e => `${e.instancePath || "/"}: ${e.message}`)
       )
+        payload,
     });
   }
 
@@ -1516,6 +1580,7 @@ async function runGatewayPipeline(payload, {
       validation_stage: "placeholder",
       agent_action: "Replace all placeholder values with real data, then resubmit.",
       errors: placeholderIssues
+        payload,
     });
   }
 
@@ -1534,6 +1599,7 @@ async function runGatewayPipeline(payload, {
         message: `agent_readback must be at least 160 characters. Got ${readback.length}. Write what you actually understood from the oath — do not copy the example.`,
         fix: "Write your own readback in your own words. Explain what you understood from the oath. Minimum 160 characters."
       }]
+        payload,
     });
   }
 
@@ -1545,6 +1611,7 @@ async function runGatewayPipeline(payload, {
       validation_stage: "readback_integrity",
       agent_action: builderGuidanceForPayload(payload),
       errors: readbackShaIssues
+        payload,
     });
   }
 
@@ -1564,6 +1631,7 @@ async function runGatewayPipeline(payload, {
         message: "Guardian registry identity claims require record-bound guardian_presence_proof.",
         fix: "Attach guardian_presence_proof with the registered Guardian key, or remove Guardian identity wording."
       }]
+        payload,
     });
   }
 
@@ -1590,6 +1658,7 @@ async function runGatewayPipeline(payload, {
         message: "what_i_checked contains only example values. Replace with what you actually checked.",
         fix: "Write what you actually did: which pages you read, which files you verified, which tools you ran. Be specific."
       }]
+        payload,
     });
   }
 
@@ -1604,6 +1673,7 @@ async function runGatewayPipeline(payload, {
         message: `Payload exceeds ${MAX_BODY_CHARS + 10000} characters.`,
         fix: "Reduce payload size by removing unnecessary fields."
       }]
+        payload,
     });
   }
 
@@ -1618,6 +1688,7 @@ async function runGatewayPipeline(payload, {
         message: "Payload contains patterns matching secrets (API keys, tokens, private keys).",
         fix: "Remove all secrets from the payload. Never include API keys, tokens, or private keys."
       }]
+        payload,
     });
   }
 
@@ -1639,6 +1710,7 @@ async function runGatewayPipeline(payload, {
         message: `Forbidden positive claim detected: ${c.code}. Negated boundary language is allowed.`,
         fix: `Remove the positive claim. Use negated form like "not ${c.claim.replace('_', ' ')}" if needed.`
       }))
+        payload,
     });
   }
 
@@ -1656,6 +1728,7 @@ async function runGatewayPipeline(payload, {
       validation_stage: "raw_payload",
       agent_action: "Set all boundary_acknowledgement fields to true.",
       errors: normalizeGatewayErrors(["boundary_acknowledgement fields must all be true"])
+        payload,
     });
   }
 
@@ -1686,6 +1759,7 @@ async function runGatewayPipeline(payload, {
         validation_stage: "payload_validator",
         agent_action: `Fix the payload errors listed. ${builderGuidanceForPayload(payload)}`,
         errors: normalizeGatewayErrors(rawErrors)
+        payload,
       });
     }
 
@@ -1707,6 +1781,7 @@ async function runGatewayPipeline(payload, {
           fix: "Rebuild payload and attach Guardian proof with scripts/attach_guardian_presence_proof.mjs."
         })),
         extra: { guardian_verification_result: guardianStatus }
+        payload,
       });
     }
     payload._guardian_status = guardianStatus;
@@ -1763,6 +1838,7 @@ async function runGatewayPipeline(payload, {
           archive_readiness: archiveReadiness,
           auto_archive_decision: autoArchiveDecision
         }
+        payload,
       });
     }
 
@@ -1781,6 +1857,7 @@ async function runGatewayPipeline(payload, {
           archive_readiness: archiveReadiness,
           auto_archive_decision: autoArchiveDecision
         }
+        payload,
       });
     }
 
@@ -1830,6 +1907,7 @@ async function runGatewayPipeline(payload, {
         errors: normalizeGatewayErrors(
           (render.stdout + "\n" + render.stderr).split("\n").filter(Boolean)
         )
+        payload,
       });
     }
 
@@ -1871,6 +1949,7 @@ async function runGatewayPipeline(payload, {
           extra: {
             server_generated_fields_are_agent_forbidden: true
           }
+        payload,
         });
       }
 
@@ -1919,6 +1998,7 @@ async function runGatewayPipeline(payload, {
           extra: {
             server_generated_fields_are_agent_forbidden: true
           }
+        payload,
         });
       }
     }
@@ -1944,6 +2024,7 @@ async function runGatewayPipeline(payload, {
             server_generated_fields_are_agent_forbidden: true,
             retry_with_builder_once: true
           }
+        payload,
         });
       }
 
@@ -1952,6 +2033,7 @@ async function runGatewayPipeline(payload, {
         validation_stage: "issue_body_lint_internal",
         agent_action: "Do not modify payload unless the error explicitly names raw payload fields. Report this Gateway renderer/linter error.",
         errors: normalized
+        payload,
       });
     }
 
@@ -1969,6 +2051,7 @@ async function runGatewayPipeline(payload, {
           message: `Rendered issue body is ${issueBody.length} characters, exceeding the 65536 limit.`,
           fix: "Reduce payload content size. The Gateway renderer produced an Issue body too large for GitHub."
         }]
+        payload,
       });
     }
 
@@ -2205,6 +2288,7 @@ async function runGatewayPipeline(payload, {
         retryable: true,
         message: err.message
       }]
+        payload,
     });
   } finally {
     try { fs.rmSync(tmpDir, { recursive: true, force: true }); } catch {}

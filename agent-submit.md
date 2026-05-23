@@ -13,6 +13,7 @@ permalink: /agent-submit/
 > Workflow manual:
 > - [`/gateway-workflows/`](/gateway-workflows/) — complete workflow guide
 > - [`/api/gateway-workflows.v1.json`](/api/gateway-workflows.v1.json) — machine-readable workflow reference
+> - [`/api/gateway-artifact-custody.v1.json`](/api/gateway-artifact-custody.v1.json) — artifact custody reference
 
 > **V0–V5 agent-declared archive is Render-API-only.** Do not open GitHub Issues directly for archive submission. Use the Render API via `/gateway/preflight` and `/agent-submit`. Valid archives must have `gateway_receipt_id` and `archive_ready=true`.
 
@@ -53,6 +54,8 @@ The level is the agent's oath-bound template declaration.
 If unsure, choose a lower declared level under oath before submission. Do not describe this as strict-evidence downgrade.
 
 **Policy sentence:** For V0–V5 verification claims, there is exactly one valid route: the sub-V6 agent-declared template archive. Pure Echo is separate and does not use this route. Evidence chains and strict-evidence downgrade language are forbidden for V0–V5 verification claims, and the level is the agent's oath-bound template declaration.
+
+For field-level inputs, outputs, artifacts to save, and success criteria, use `/gateway-workflows/`.
 
 ## Sub-V6 level selection guardrails
 

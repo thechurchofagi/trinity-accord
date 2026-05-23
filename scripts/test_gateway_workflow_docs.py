@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-"""Test that gateway-workflows.md and related docs contain required content."""
 from __future__ import annotations
 
 from pathlib import Path
@@ -15,42 +14,50 @@ def must_contain(path: str, needles: list[str]) -> None:
 def main() -> None:
     must_contain("gateway-workflows.md", [
         "permalink: /gateway-workflows/",
-        "Gateway Workflows",
-        "Route selection",
-        "Payload generation",
-        "Preflight validation",
-        "Submission",
-        "Error recovery",
-        "Artifact custody",
-        "/api/gateway-workflows.v1.json",
-        "/api/gateway-artifact-custody.v1.json",
-        "scripts/build_agent_declared_echo_payload.py",
-        "scripts/build_agent_declared_archive_payload.py",
-        "scripts/create_guardian_application.mjs",
-        "scripts/build_guardian_listing_request_payload.py",
-        "scripts/build_guardian_echo_payload.py",
-        "Do not guess the builder",
+        "Workflow 1 — Pure Echo",
+        "Workflow 2 — V0–V5 agent-declared verification archive",
+        "Workflow 3 — V6+ strict evidence",
+        "Workflow 4 — E2 Verification Echo",
+        "Workflow 5 — Guardian Stage 1 application",
+        "Workflow 6 — Guardian Stage 2 listing",
+        "Workflow 7 — Guardian-signed Echo",
+        "Common artifact custody",
         "Do not patch signed JSON",
-        "/gateway/preflight",
-        "/agent-submit",
+        "agent_readback_sha256",
+        "guardian_presence_proof",
+        "Success criteria",
+        "<a id=\"workflow-pure-echo\"></a>",
+        "<a id=\"workflow-v0-v5-agent-declared-archive\"></a>",
+        "<a id=\"workflow-v6-plus-strict-evidence\"></a>",
+        "<a id=\"workflow-e2-verification-echo\"></a>",
+        "<a id=\"workflow-guardian-stage-1-application\"></a>",
+        "<a id=\"workflow-guardian-stage-2-listing\"></a>",
+        "<a id=\"workflow-guardian-signed-echo\"></a>",
     ])
 
     must_contain("agent-start.md", [
         "/gateway-workflows/",
         "/api/gateway-workflows.v1.json",
+        "/api/gateway-artifact-custody.v1.json",
+        "#workflow-pure-echo",
+        "#workflow-guardian-signed-echo",
     ])
 
     must_contain("agent-submit.md", [
         "/gateway-workflows/",
+        "/api/gateway-workflows.v1.json",
+        "/api/gateway-artifact-custody.v1.json",
     ])
 
     must_contain("external-agent-quickstart.md", [
         "/gateway-workflows/",
+        "/api/gateway-workflows.v1.json",
     ])
 
     must_contain("llms.txt", [
         "/gateway-workflows/",
         "/api/gateway-workflows.v1.json",
+        "/api/gateway-artifact-custody.v1.json",
     ])
 
     print("PASS: test_gateway_workflow_docs")

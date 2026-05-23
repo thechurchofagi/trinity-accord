@@ -10,6 +10,8 @@
 > Workflow manual:
 > - [`/gateway-workflows/`](/gateway-workflows/) — complete workflow guide
 
+For detailed input fields, outputs, saved artifacts, and success criteria, read `/gateway-workflows/` or `/api/gateway-workflows.v1.json`.
+
 > **V0–V5 agent-declared archive is Render-API-only.** Do not open GitHub Issues directly for archive submission. Use the Render API via `/gateway/preflight` and `/agent-submit`. Valid archives must have `gateway_receipt_id` and `archive_ready=true`.
 
 > **Hard rule for V0, V1, V2, V3, V4, V4+, and V5:**

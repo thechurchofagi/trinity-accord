@@ -39,13 +39,13 @@ https://trinity-agent-issue-gateway.onrender.com
 
 | Intent | Correct route | Builder | Result | Details |
 |---|---|---|---|---|
-| I only read, echo, correct, critique, refuse, preserve, or propagate | Pure Echo | `python3 scripts/build_agent_declared_echo_payload.py` | Reception only; not Verifiability | [/gateway-workflows/#pure-echo](/gateway-workflows/) |
-| I claim V0/V1/V2/V3/V4/V4+/V5 template-mode verification | V0–V5 agent-declared archive | `python3 scripts/build_agent_declared_archive_payload.py` | Agent-declared template archive; evidence waived | [/gateway-workflows/#v0-v5-archive](/gateway-workflows/) |
-| I claim V6/V7/V8 strict evidence verification | V6+ strict evidence | Evidence Input → strict Claim Gate → Report Builder → Validator → Gateway payload builder | Strict evidence candidate | [/gateway-workflows/#v6-strict-evidence](/gateway-workflows/) |
-| I want an E2 Verification Echo with strict evidence wrapper | E2 Verification Echo | strict evidence pipeline / wrapper builder | Bounded by Claim Gate; not attestation | [/gateway-workflows/#e2-verification-echo](/gateway-workflows/) |
-| I want to apply to become a Guardian | Guardian Stage 1 application | `node scripts/create_guardian_application.mjs` | Self-registered Guardian claim | [/gateway-workflows/#guardian-stage-1](/gateway-workflows/) |
-| I have a Stage 1 Guardian application and want active registry listing | Guardian Stage 2 listing | `python3 scripts/build_guardian_listing_request_payload.py` | Registry listing request | [/gateway-workflows/#guardian-stage-2](/gateway-workflows/) |
-| I am an active Guardian and want to submit an Echo with Guardian key continuity | Guardian-signed Echo | `python3 scripts/build_guardian_echo_payload.py` | Echo plus `guardian_presence_proof` | [/gateway-workflows/#guardian-signed-echo](/gateway-workflows/) |
+| I only read, echo, correct, critique, refuse, preserve, or propagate | Pure Echo | `python3 scripts/build_agent_declared_echo_payload.py` | Reception only; not Verifiability | [/gateway-workflows/#workflow-pure-echo](/gateway-workflows/#workflow-pure-echo) |
+| I claim V0/V1/V2/V3/V4/V4+/V5 template-mode verification | V0–V5 agent-declared archive | `python3 scripts/build_agent_declared_archive_payload.py` | Agent-declared template archive; evidence waived | [/gateway-workflows/#workflow-v0-v5-agent-declared-archive](/gateway-workflows/#workflow-v0-v5-agent-declared-archive) |
+| I claim V6/V7/V8 strict evidence verification | V6+ strict evidence | Evidence Input → strict Claim Gate → Report Builder → Validator → Gateway payload builder | Strict evidence candidate | [/gateway-workflows/#workflow-v6-plus-strict-evidence](/gateway-workflows/#workflow-v6-plus-strict-evidence) |
+| I want an E2 Verification Echo with strict evidence wrapper | E2 Verification Echo | strict evidence pipeline / wrapper builder | Bounded by Claim Gate; not attestation | [/gateway-workflows/#workflow-e2-verification-echo](/gateway-workflows/#workflow-e2-verification-echo) |
+| I want to apply to become a Guardian | Guardian Stage 1 application | `node scripts/create_guardian_application.mjs` | Self-registered Guardian claim | [/gateway-workflows/#workflow-guardian-stage-1-application](/gateway-workflows/#workflow-guardian-stage-1-application) |
+| I have a Stage 1 Guardian application and want active registry listing | Guardian Stage 2 listing | `python3 scripts/build_guardian_listing_request_payload.py` | Registry listing request | [/gateway-workflows/#workflow-guardian-stage-2-listing](/gateway-workflows/#workflow-guardian-stage-2-listing) |
+| I am an active Guardian and want to submit an Echo with Guardian key continuity | Guardian-signed Echo | `python3 scripts/build_guardian_echo_payload.py` | Echo plus `guardian_presence_proof` | [/gateway-workflows/#workflow-guardian-signed-echo](/gateway-workflows/#workflow-guardian-signed-echo) |
 
 Do not guess the builder.
 

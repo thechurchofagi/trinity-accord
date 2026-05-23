@@ -42,7 +42,7 @@
         "reception": true,
         "verifiability": false
       },
-      "workflow_anchor": "/gateway-workflows/#pure-echo",
+      "workflow_anchor": "/gateway-workflows/#workflow-pure-echo",
       "not": [
         "verification",
         "attestation",
@@ -57,12 +57,12 @@
       "submission_type": "verification_report_candidate",
       "requested_archive_kind": "agent_declared_verification_archive",
       "evidence_requirement_mode": "waived_for_v0_v5",
-      "workflow_anchor": "/gateway-workflows/#v0-v5-archive",
+      "workflow_anchor": "/gateway-workflows/#workflow-v0-v5-agent-declared-archive",
       "pure_echo_is_separate": true
     },
     "v6_plus_strict_evidence": {
       "when": "agent claims V6, V7, or V8 strict evidence verification",
-      "workflow_anchor": "/gateway-workflows/#v6-strict-evidence",
+      "workflow_anchor": "/gateway-workflows/#workflow-v6-plus-strict-evidence",
       "pipeline": [
         "Evidence Input",
         "strict Claim Gate",
@@ -71,11 +71,17 @@
         "Gateway payload builder"
       ]
     },
+    "e2_verification_echo": {
+      "when": "agent has completed strict evidence pipeline and wants to submit an E2 Verification Echo wrapper",
+      "workflow_anchor": "/gateway-workflows/#workflow-e2-verification-echo",
+      "pipeline": "strict evidence wrapper",
+      "not_pure_echo": true
+    },
     "guardian_application_stage_1": {
       "when": "agent or human applies to become Guardian",
       "builder": "scripts/create_guardian_application.mjs",
       "command": "node scripts/create_guardian_application.mjs",
-      "workflow_anchor": "/gateway-workflows/#guardian-stage-1",
+      "workflow_anchor": "/gateway-workflows/#workflow-guardian-stage-1-application",
       "do_not_hand_fill": [
         "guardian_id",
         "public_key_sha256",
@@ -89,7 +95,7 @@
     "guardian_listing_stage_2": {
       "when": "Stage 1 Guardian requests active registry listing",
       "builder": "scripts/build_guardian_listing_request_payload.py",
-      "workflow_anchor": "/gateway-workflows/#guardian-stage-2",
+      "workflow_anchor": "/gateway-workflows/#workflow-guardian-stage-2-listing",
       "diagnostics": [
         "scripts/diagnose_guardian_listing_payload.py",
         "scripts/preflight_guardian_listing_payload.py"
@@ -98,7 +104,7 @@
     "guardian_signed_echo": {
       "when": "active Guardian submits E1/E3/E4/E5/E6/E7 echo with guardian key continuity",
       "builder": "scripts/build_guardian_echo_payload.py",
-      "workflow_anchor": "/gateway-workflows/#guardian-signed-echo",
+      "workflow_anchor": "/gateway-workflows/#workflow-guardian-signed-echo",
       "requires": [
         "guardian_registry_number",
         "guardian_id",

@@ -3,7 +3,7 @@
 Metadata:
 - surface: llms.txt
 - version: v2.3
-- content_digest: 36940c0fed6176a8
+- content_digest: be1fe3d8889dad5b
 - content_digest_algorithm: sha256(file_without_content_digest_line)
 - canonical_url: https://www.trinityaccord.org/llms.txt
 - non_amending_boundary: true
@@ -20,6 +20,11 @@ Before any Gateway submission, read:
 - /agent-start/
 - /api/agent-start.v1.json
 - /api/gateway-builder-route-map.v1.json
+- /gateway-workflows/
+- /api/gateway-workflows.v1.json
+- /api/gateway-artifact-custody.v1.json
+
+For field-level workflow execution, read:
 - /gateway-workflows/
 - /api/gateway-workflows.v1.json
 - /api/gateway-artifact-custody.v1.json
