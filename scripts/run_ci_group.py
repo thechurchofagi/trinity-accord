@@ -66,7 +66,7 @@ GROUPS = {
         ["python3", "scripts/test_guardian_listing_builder_no_null_intake_fields.py"],
         ["python3", "scripts/test_gateway_render_no_null_identity_intake_fields.py"],
         ["node", "examples/github-app-backend/test-placeholder-detector.mjs"],
-
+        ["python3", "scripts/test_guardian_oath_readback_sha.py"],
 
     ],
     "chronicle": [
@@ -121,6 +121,8 @@ GROUPS = {
         ["python3", "scripts/test_oath_readback_integrity.py"],
         ["python3", "scripts/test_agent_declared_builder_readback_sha.py"],
         ["python3", "scripts/test_gateway_payload_readback_sha_validator.py"],
+        ["python3", "scripts/test_guardian_oath_readback_sha.py"],
+        ["node", "examples/github-app-backend/test-readback-integrity.mjs"],
     ],
 }
 

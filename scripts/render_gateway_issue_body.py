@@ -151,6 +151,7 @@ def render_oath_v2_fields(payload):
 
     lines = []
     if verification_oath:
+        readback = verification_oath.get("agent_readback") or ""
         lines.extend([
             f"verification_oath_schema: {verification_oath.get('schema', 'N/A')}",
             f"verification_oath_honesty: {'true' if verification_oath.get('honesty_oath_present') is True else 'false'}",
@@ -158,9 +159,11 @@ def render_oath_v2_fields(payload):
             f"verification_oath_anti_abuse: {'true' if verification_oath.get('will_not_submit_maliciously') is True or verification_oath.get('will_not_register_maliciously') is True else 'false'}",
             f"verification_oath_no_false_consensus: {'true' if verification_oath.get('will_not_create_false_authority_or_false_consensus') is True or verification_oath.get('will_not_register_to_create_false_authority_or_false_consensus') is True else 'false'}",
             f"verification_oath_correct_errors: {'true' if verification_oath.get('will_correct_material_errors_when_aware') is True else 'false'}",
+            f"agent_readback_sha256: {verification_oath.get('agent_readback_sha256') or (sha256_text(readback) if readback else 'N/A')}",
         ])
 
     if guardian_application_oath:
+        ga_readback = guardian_application_oath.get("agent_readback") or ""
         lines.extend([
             "guardian_application_oath_present: true",
             f"guardian_application_oath_version: {guardian_application_oath.get('oath_version', 'N/A')}",
@@ -168,11 +171,13 @@ def render_oath_v2_fields(payload):
             f"guardian_application_oath_good_faith: {'true' if guardian_application_oath.get('good_faith_oath_present') is True else 'false'}",
             f"guardian_application_oath_anti_abuse: {'true' if guardian_application_oath.get('will_not_register_maliciously') is True else 'false'}",
             f"guardian_application_oath_no_false_consensus: {'true' if guardian_application_oath.get('will_not_register_to_create_false_authority_or_false_consensus') is True else 'false'}",
+            f"guardian_application_oath_readback_sha256: {guardian_application_oath.get('agent_readback_sha256') or (sha256_text(ga_readback) if ga_readback else 'N/A')}",
         ])
     else:
         lines.append("guardian_application_oath_present: false")
 
     if guardian_listing_oath:
+        gl_readback = guardian_listing_oath.get("agent_readback") or ""
         lines.extend([
             "guardian_listing_oath_present: true",
             f"guardian_listing_oath_version: {guardian_listing_oath.get('oath_version', 'N/A')}",
@@ -180,6 +185,7 @@ def render_oath_v2_fields(payload):
             f"guardian_listing_oath_good_faith: {'true' if guardian_listing_oath.get('good_faith_oath_present') is True else 'false'}",
             f"guardian_listing_oath_anti_abuse: {'true' if guardian_listing_oath.get('will_not_register_maliciously') is True else 'false'}",
             f"guardian_listing_oath_system_generated_number: {'true' if guardian_listing_oath.get('registry_number_must_be_system_generated') is True else 'false'}",
+            f"guardian_listing_oath_readback_sha256: {guardian_listing_oath.get('agent_readback_sha256') or (sha256_text(gl_readback) if gl_readback else 'N/A')}",
         ])
     else:
         lines.append("guardian_listing_oath_present: false")
