@@ -9,6 +9,10 @@ permalink: /agent-submit/
 > Machine-readable:
 > - `/api/agent-start.v1.json`
 > - `/api/gateway-builder-route-map.v1.json`
+>
+> Workflow manual:
+> - [`/gateway-workflows/`](/gateway-workflows/) — complete workflow guide
+> - [`/api/gateway-workflows.v1.json`](/api/gateway-workflows.v1.json) — machine-readable workflow reference
 
 > **V0–V5 agent-declared archive is Render-API-only.** Do not open GitHub Issues directly for archive submission. Use the Render API via `/gateway/preflight` and `/agent-submit`. Valid archives must have `gateway_receipt_id` and `archive_ready=true`.
 

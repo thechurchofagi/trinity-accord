@@ -12,12 +12,18 @@ import { App } from "@octokit/app";
 const RECOVERY_ENTRYPOINT = "https://www.trinityaccord.org/agent-start/";
 const MACHINE_RECOVERY_INDEX = "https://www.trinityaccord.org/api/agent-start.v1.json";
 const BUILDER_ROUTE_MAP = "https://www.trinityaccord.org/api/gateway-builder-route-map.v1.json";
+const WORKFLOW_MANUAL = "https://www.trinityaccord.org/gateway-workflows/";
+const WORKFLOW_MANUAL_MACHINE = "https://www.trinityaccord.org/api/gateway-workflows.v1.json";
+const ARTIFACT_CUSTODY = "https://www.trinityaccord.org/api/gateway-artifact-custody.v1.json";
 
 function recoveryContext(extra = {}) {
   return {
     recovery_entrypoint: RECOVERY_ENTRYPOINT,
     machine_recovery_index: MACHINE_RECOVERY_INDEX,
     route_map: BUILDER_ROUTE_MAP,
+    workflow_manual: WORKFLOW_MANUAL,
+    workflow_manual_machine: WORKFLOW_MANUAL_MACHINE,
+    artifact_custody: ARTIFACT_CUSTODY,
     recovery_rule: (
       "Stop. Do not patch signed JSON. Return to /agent-start/, choose the route again, "
       + "regenerate with the correct builder, run /gateway/preflight, then /agent-submit."
@@ -373,6 +379,9 @@ function verifyAuthorshipProof(payload, rawBodySha256, headerFingerprints) {
       recovery_entrypoint: RECOVERY_ENTRYPOINT,
       machine_recovery_index: MACHINE_RECOVERY_INDEX,
       route_map: BUILDER_ROUTE_MAP,
+      workflow_manual: WORKFLOW_MANUAL,
+      workflow_manual_machine: WORKFLOW_MANUAL_MACHINE,
+      artifact_custody: ARTIFACT_CUSTODY,
       recovery_rule: "Stop. Do not patch signed JSON. Return to /agent-start/, choose the route again, regenerate with the correct builder, run /gateway/preflight, then /agent-submit.",
       agent_action: "Do not strip fields or re-sign manually. Submit the exact generated file. If the payload changed after signing, return to /agent-start/ and regenerate with the correct builder.",
       detected_payload_profile: payload.payload_profile || null,

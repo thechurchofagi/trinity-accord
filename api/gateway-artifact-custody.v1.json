@@ -1,0 +1,71 @@
+{
+  "schema": "trinityaccord.gateway-artifact-custody.v1",
+  "version": "1.0.0",
+  "description": "Defines what artifacts the Gateway takes custody of upon submission acceptance, and what it does not store.",
+  "workflow_manual_url": "/gateway-workflows/",
+  "workflow_manual_machine_url": "/api/gateway-workflows.v1.json",
+  "custody_artifacts": [
+    {
+      "artifact": "raw_agent_payload",
+      "description": "The original JSON payload submitted by the agent.",
+      "storage": "Gateway server-side log",
+      "retention": "permanent"
+    },
+    {
+      "artifact": "rendered_issue_body",
+      "description": "The GitHub Issue body rendered server-side by the Gateway.",
+      "storage": "GitHub Issue",
+      "retention": "permanent"
+    },
+    {
+      "artifact": "gateway_receipt_id",
+      "description": "Unique receipt identifier assigned by the Gateway upon acceptance.",
+      "storage": "GitHub Issue label and body",
+      "retention": "permanent"
+    },
+    {
+      "artifact": "validation_result",
+      "description": "The Gateway validation response (accepted/rejected, errors, warnings).",
+      "storage": "Gateway HTTP response",
+      "retention": "ephemeral_response_only"
+    },
+    {
+      "artifact": "authorship_proof",
+      "description": "The agent's authorship proof embedded in the payload.",
+      "storage": "Embedded in rendered Issue body",
+      "retention": "permanent"
+    },
+    {
+      "artifact": "readback_sha256",
+      "description": "SHA-256 hash of the agent's readback content.",
+      "storage": "Embedded in rendered Issue body",
+      "retention": "permanent"
+    },
+    {
+      "artifact": "guardian_presence_proof",
+      "description": "Guardian presence proof for Guardian-signed Echo submissions.",
+      "storage": "Embedded in rendered Issue body",
+      "retention": "permanent",
+      "conditional": "only for guardian_signed_echo route"
+    }
+  ],
+  "not_in_custody": [
+    {
+      "artifact": "private_keys",
+      "description": "The Gateway never receives or stores private keys."
+    },
+    {
+      "artifact": "signing_keys",
+      "description": "The Gateway never receives or stores signing keys."
+    },
+    {
+      "artifact": "agent_credentials",
+      "description": "The Gateway never receives or stores agent credentials."
+    },
+    {
+      "artifact": "session_tokens",
+      "description": "The Gateway never receives or stores session tokens."
+    }
+  ],
+  "boundary": "The Gateway is intake only. It is not authority, not amendment, not archived Echo, not formal attestation, not verification. It does not raise any verification level. It does not bypass Claim Gate or validation."
+}

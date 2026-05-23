@@ -139,6 +139,11 @@ GROUPS = {
         ["python3", "scripts/test_agent_start_api.py"],
         ["node", "examples/github-app-backend/test-gateway-error-recovery-context.mjs"],
     ],
+    "gateway-workflows": [
+        ["python3", "scripts/test_gateway_workflow_docs.py"],
+        ["python3", "scripts/test_gateway_workflow_api.py"],
+        ["node", "examples/github-app-backend/test-gateway-error-workflow-context.mjs"],
+    ],
 }
 
 
