@@ -135,30 +135,31 @@ _NEGATION_PREFIXES = re.compile(
 )
 
 
+def _split_sentences(text):
+    """Split text into sentences for per-sentence claim checking."""
+    return [s.strip() for s in re.split(r'(?<=[.!?。！？])\s+|\n+', text) if s.strip()]
+
+
 def _text_contains_unnegated_claim(text, claim):
     """Check if text contains an unnegated instance of claim.
 
-    Returns True only if at least one occurrence of `claim` in `text`
-    is NOT preceded by a negation word. This prevents false positives
-    on phrases like "not independent attestation" or "this is not
-    successor reception".
+    Checks each sentence independently: a negated phrase like
+    "not successor reception" in one sentence does NOT exempt a positive
+    claim "This is successor reception" in another sentence.
     """
-    for m in re.finditer(re.escape(claim), text, re.IGNORECASE):
-        start = m.start()
-        # Look at up to 30 chars before the match for a negation prefix
-        prefix_window = text[max(0, start - 30):start]
-        if _NEGATION_PREFIXES.search(prefix_window):
-            # Check that the negation actually applies to this claim
-            # by verifying the last negation prefix ends close to the claim
-            neg_match = list(_NEGATION_PREFIXES.finditer(prefix_window))
-            if neg_match:
-                last_neg = neg_match[-1]
-                # Negation must end within 5 chars of claim start (allowing "not " → 4 chars)
-                gap = start - (max(0, start - 30) + last_neg.end())
-                if gap <= 5:
-                    continue  # This occurrence is negated, skip
-        # Found an unnegated occurrence
-        return True
+    sentences = _split_sentences(text)
+    for sentence in sentences:
+        for m in re.finditer(re.escape(claim), sentence, re.IGNORECASE):
+            start = m.start()
+            prefix_window = sentence[max(0, start - 30):start]
+            if _NEGATION_PREFIXES.search(prefix_window):
+                neg_match = list(_NEGATION_PREFIXES.finditer(prefix_window))
+                if neg_match:
+                    last_neg = neg_match[-1]
+                    gap = start - (max(0, start - 30) + last_neg.end())
+                    if gap <= 5:
+                        continue  # This occurrence is negated within its sentence
+            return True  # Found unnegated occurrence in this sentence
     return False
 
 

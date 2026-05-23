@@ -117,6 +117,7 @@ def main() -> int:
         "--body-file", args.body_file,
         "--authorship-private-key", private_key,
         "--authorship-public-key", public_key,
+        "--allow-unproofed-guardian-mention",
         "--out", str(base_payload),
     ]
 
@@ -158,7 +159,7 @@ def main() -> int:
 
     # Local validation.
     run([sys.executable, str(ROOT / "scripts" / "validate_gateway_payload.py"), str(signed_payload)])
-    run([sys.executable, str(ROOT / "scripts" / "archive_readiness_gate.py"), str(signed_payload)])
+    run([sys.executable, str(ROOT / "scripts" / "archive_readiness_gate.py"), "--gateway-payload", str(signed_payload)])
 
     print(f"Guardian-signed echo payload written to {signed_payload}")
     print(f"guardian_registry_number: {args.guardian_registry_number}")

@@ -130,6 +130,7 @@ GROUPS = {
         ["python3", "scripts/test_gateway_builder_route_map.py"],
         ["python3", "scripts/test_gateway_builder_route_advisor.py"],
         ["python3", "scripts/test_pure_echo_builder_rejects_unproofed_guardian_identity.py"],
+        ["python3", "scripts/test_guardian_echo_builder_smoke.py"],
         ["node", "examples/github-app-backend/test-guardian-identity-claim-requires-proof.mjs"],
         ["node", "examples/github-app-backend/test-forbidden-archive-claims-negation.mjs"],
     ],
