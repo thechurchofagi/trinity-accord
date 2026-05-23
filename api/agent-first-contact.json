@@ -10,6 +10,13 @@
     "router_is_not_authority": true,
     "router_is_not_amendment": true
   },
+  "gateway_submission_origin": {
+    "human_url": "/agent-start/",
+    "machine_url": "/api/agent-start.v1.json",
+    "route_map_url": "/api/gateway-builder-route-map.v1.json",
+    "must_choose_route_before_submission": true,
+    "if_error": "stop; do not patch signed JSON; return to /agent-start/; choose route again; regenerate"
+  },
   "first_rule": {
     "if_only_homepage_or_readme_read": {
       "context_depth": "C0_homepage_only",
@@ -528,12 +535,5 @@
     "diagnose": "python3 scripts/diagnose_guardian_listing_payload.py <payload>",
     "debug_bundle": "python3 scripts/build_guardian_listing_debug_bundle.py <payload>",
     "if_local_digest_matches_proof_but_gateway_differs": "fix_gateway_canonicalization_or_transport"
-  },
-  "gateway_submission_origin": {
-    "human_url": "/agent-start/",
-    "machine_url": "/api/agent-start.v1.json",
-    "route_map_url": "/api/gateway-builder-route-map.v1.json",
-    "must_choose_route_before_submission": true,
-    "if_error": "stop; do not patch signed JSON; return to /agent-start/; choose route again; regenerate"
   }
 }
