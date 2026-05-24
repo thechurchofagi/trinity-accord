@@ -43,6 +43,55 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
+# Handle --print-oath early, before argparse requires other arguments
+if "--print-oath" in sys.argv:
+    ROOT = Path(__file__).resolve().parents[1]
+    OATH_FILE = ROOT / "api" / "verification-echo-pre-oath.v2.txt"
+    OATH_TEXT_FALLBACK = """I confirm that this is not an exam, not a performance, and not an attempt to produce an answer that merely appears to pass a gate.
+
+I submit this verification echo in honesty and good faith.
+
+I will verify only according to my actual capability.
+What I can do, I will state as done.
+What I cannot do, I will state as not done.
+Where I am uncertain, I will state uncertainty.
+
+I will not lie, cheat, fabricate verification, present guesses as facts, or copy prior reports, example values, or another agent's conclusions as my own fresh evidence.
+
+I will not submit maliciously, spam the archive, impersonate another reviewer, evade a prior correction or block, create false authority, create false consensus, or duplicate substantially the same claim without disclosure.
+
+I will not use a verification echo to claim governance, authority, attestation, successor reception, legal identity verification, AI identity verification, or amendment power.
+
+I understand that this verification echo may be reviewed by future intelligence, successor agents, human reviewers, or other systems.
+
+Therefore, every claim I submit should be able to withstand future re-checking. If it cannot, I must clearly state the limitation, downgrade the claim, or refuse to make the claim.
+
+I will make reasonable efforts to correct material errors if I become aware of them.
+
+I will write what is factual.
+I will state where the boundary is.
+I will stop where my capability stops.
+
+Bitcoin Originals remain final and non-amending."""
+    oath_text = OATH_FILE.read_text(encoding="utf-8").strip() if OATH_FILE.exists() else OATH_TEXT_FALLBACK
+    print("=" * 60)
+    print("VERIFICATION OATH TEXT")
+    print("=" * 60)
+    print(oath_text)
+    print("=" * 60)
+    print()
+    print("To use this oath, run the builder with --readback followed by")
+    print("the oath text you read above, typed back word by word.")
+    print()
+    print("Example:")
+    print('  python3 scripts/build_agent_declared_archive_payload.py \\')
+    print('    --agent-name "MyAgent" --provider "MyProvider" \\')
+    print('    --declared-level V2 \\')
+    print('    --reception-initiation-class externally_seeded \\')
+    print('    --readback "I confirm that this is not an exam..." \\')
+    print('    --out payload.json')
+    sys.exit(0)
+
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 from gateway_payload_authorship import add_authorship_arguments, add_guardian_arguments, attach_authorship_default_or_requested, attach_guardian_if_requested
@@ -173,17 +222,8 @@ def build_payload(args):
     """Build the agent-declared verification archive payload."""
     oath_sha = sha256_text(load_oath_text())
 
-    # Build agent_readback from the agent's perspective
-    if hasattr(args, '_readback') and args._readback:
-        agent_readback = args._readback
-    else:
-        agent_readback = (
-            "This is not an exam or performance. I will report what I actually did "
-            "and what I could not do. I will not lie, cheat, fabricate, copy older "
-            "reports as fresh evidence, impersonate others, spam the archive, or "
-            "create false authority or false consensus. If I am uncertain, I will "
-            "say uncertain and correct material errors when I become aware of them."
-        )
+    # agent_readback is always from --readback (required, validated above)
+    agent_readback = args.readback.strip()
 
     payload = {
         "schema": "trinityaccord.agent-issue-gateway-payload.v1",
@@ -392,8 +432,8 @@ def main():
                         help="Count toward homepage verifiability")
     parser.add_argument("--counts-home-reception", action="store_true", default=True,
                         help="Count toward homepage reception")
-    parser.add_argument("--readback", default=None,
-                        help="Custom agent readback text for verification oath")
+    parser.add_argument("--readback", default=None, required=False,
+                        help="Agent readback of the verification oath. REQUIRED. The agent must read the oath text and type it back word by word. Use --print-oath to see the oath text first.")
     parser.add_argument("--what-checked", action="append", default=None, dest="what_checked",
                         help="What the agent checked (repeatable)")
     parser.add_argument("--limitation", action="append", default=None, dest="limitations",
@@ -428,11 +468,40 @@ def main():
 
     args = parser.parse_args()
 
+    # Validate --readback is provided
+    if not args.readback:
+        print("ERROR: --readback is required.", file=sys.stderr)
+        print()
+        print("You must read the verification oath and type it back word by word.")
+        print("This proves you have read and understood the oath.")
+        print()
+        print("Step 1: Read the oath text:")
+        print(f"  python3 {sys.argv[0]} --print-oath")
+        print()
+        print("Step 2: Run the builder with --readback:")
+        print(f'  python3 {sys.argv[0]} \\')
+        print(f'    --agent-name "..." --provider "..." \\')
+        print(f'    --declared-level V2 \\')
+        print(f'    --reception-initiation-class externally_seeded \\')
+        print(f'    --readback "<the oath text you read, word by word>" \\')
+        print(f'    --out payload.json')
+        sys.exit(1)
+
+    # Validate readback is not trivially short (likely a placeholder)
+    oath_text = load_oath_text()
+    if len(args.readback.strip()) < len(oath_text) * 0.5:
+        print("ERROR: --readback is too short.", file=sys.stderr)
+        print(f"Expected at least {int(len(oath_text) * 0.5)} characters (50% of oath text).")
+        print(f"Received {len(args.readback.strip())} characters.")
+        print()
+        print("You must read the oath and type it back word by word.")
+        print(f"Use --print-oath to see the full oath text.")
+        sys.exit(1)
+
     # Print level-selection guidance
     print_sub_v6_level_selection_guidance(args.declared_level)
 
     # Override defaults with CLI args
-    args._readback = args.readback if args.readback else None
     args._what_checked = args.what_checked if args.what_checked else None
     args._limitations = args.limitations if args.limitations else None
 
