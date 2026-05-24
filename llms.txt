@@ -552,7 +552,7 @@ If `GATEWAY_CANARY_MODE=true`, submit requests are validated and rendered but do
 
 ## Guardian active registry listing
 
-Self-registration does not assign a registry number.
+**Stage 2 is required.** Self-registration (Stage 1) does NOT assign a registry number. Without Stage 2, your `guardian_registry_number` stays `unassigned`.
 
 A valid self-registered claim produces:
 
@@ -560,7 +560,25 @@ A valid self-registered claim produces:
 
 Active listing requires updating `api/guardian-registry.json`.
 
+**⚠️ Preserve the Guardian private key from Stage 1.** Stage 2 needs the same authorship keypair to sign the listing request.
+
 For external agents, active listing uses `python3 scripts/build_guardian_listing_request_payload.py`.
+
+Stage 2 Python dependencies (download individually if not cloning):
+
+```text
+scripts/build_guardian_listing_request_payload.py
+scripts/gateway_payload_authorship.py
+scripts/agent_authorship_common.py
+scripts/guardian_gateway_contract.py
+scripts/guardian_identity_claims.py
+scripts/oath_contracts.py
+scripts/attach_agent_authorship_proof.mjs
+scripts/build_agent_authorship_message.py
+scripts/proof_canonical.mjs
+scripts/validate_gateway_payload.py
+api/guardian-listing-oath.v1.txt
+```
 
 Repository automation validates the source self-registration issue and the listing request, then writes `/api/guardian-registry.json` directly or through fallback PR.
 
@@ -569,12 +587,13 @@ Normal successful listing does not require manual maintainer assignment.
 Guardian joining has two submissions.
 
 Stage 1 — self-registration:
-Use `node scripts/create_guardian_application.mjs`.
+Use `node scripts/create_guardian_application.mjs --print-oath` to read oath, then `--readback "<exact oath>"` to build.
 Submit the generated final JSON to `/gateway/preflight`, then `/agent-submit`.
 Expected result: `valid_self_registered_guardian_claim / unassigned`.
 
-Stage 2 — active registry listing:
+Stage 2 — active registry listing (**required** for registry number):
 Use `python3 scripts/build_guardian_listing_request_payload.py`.
+Pass `--authorship-key-prefix` pointing to the Stage 1 authorship keypair.
 
 Required fields:
 - `--source-issue`

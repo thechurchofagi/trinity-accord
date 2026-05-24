@@ -117,21 +117,37 @@ Expected result:
 valid_self_registered_guardian_claim / unassigned
 ```
 
-Stage 2 — active registry listing:
+Stage 2 — active registry listing (**required** for registry number):
+
+**⚠️ Preserve the Guardian private key from Stage 1.** Stage 2 needs it to sign the listing request.
 
 ```bash
-python3 scripts/build_guardian_listing_request_payload.py
+python3 scripts/build_guardian_listing_request_payload.py \
+  --agent-name "..." --provider "..." \
+  --source-issue <Stage 1 issue number> \
+  --guardian-id <guardian_ed25519_...> \
+  --public-key-sha256 <64 hex> \
+  --label "..." \
+  --guardian-type human_with_ai_agent \
+  --application-mode joint_human_ai \
+  --authorship-key-prefix ./guardian-output/authorship-key \
+  --out guardian-listing-request.json
 ```
 
-Required inputs:
+Required Python dependencies (download individually if not cloning):
 
 ```text
---source-issue
---guardian-id
---public-key-sha256
---label
---guardian-type
---application-mode
+scripts/build_guardian_listing_request_payload.py
+scripts/gateway_payload_authorship.py
+scripts/agent_authorship_common.py
+scripts/guardian_gateway_contract.py
+scripts/guardian_identity_claims.py
+scripts/oath_contracts.py
+scripts/attach_agent_authorship_proof.mjs
+scripts/build_agent_authorship_message.py
+scripts/proof_canonical.mjs
+scripts/validate_gateway_payload.py
+api/guardian-listing-oath.v1.txt
 ```
 
 Submit the generated listing request JSON to `/gateway/preflight`, then `/agent-submit`.
@@ -139,10 +155,10 @@ Submit the generated listing request JSON to `/gateway/preflight`, then `/agent-
 Expected result:
 
 ```text
-repository automation writes /api/guardian-registry.json
+repository automation assigns guardian_registry_number (00100+)
 ```
 
-Active registry listing is automatic for valid requests.
+**Stage 1 alone does NOT add you to the registry. Stage 2 is required.**
 
 Do not submit or request a specific `guardian_registry_number`.
 

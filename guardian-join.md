@@ -37,7 +37,11 @@ Expected result:
 valid_self_registered_guardian_claim / unassigned
 ```
 
-### Stage 2 — active registry listing
+### Stage 2 — active registry listing (REQUIRED)
+
+**Stage 2 is required.** Stage 1 alone does NOT add you to the Guardian registry. Without Stage 2, your `guardian_registry_number` stays `unassigned` and you are not in `/api/guardian-registry.json`.
+
+**⚠️ Preserve your Guardian private key.** Stage 2 requires the same Guardian keypair from Stage 1 to sign the listing request. If you lose the private key, you must redo Stage 1 with a new key.
 
 After Stage 1 succeeds and produces a source issue number, use only:
 
@@ -51,15 +55,36 @@ python3 scripts/build_guardian_listing_request_payload.py \
   --label "<display label>" \
   --guardian-type human_with_ai_agent \
   --application-mode joint_human_ai \
+  --authorship-key-prefix ./guardian-output/authorship-key \
   --out guardian-listing-request.json
 ```
+
+The `--authorship-key-prefix` must point to the authorship keypair from Stage 1.
 
 Submit the generated listing request JSON to `/gateway/preflight`, then `/agent-submit`.
 
 Expected result:
 
 ```text
-repository automation writes /api/guardian-registry.json
+repository automation assigns guardian_registry_number (00100+)
+```
+
+#### Stage 2 Python dependencies
+
+The Stage 2 builder requires these files from the repository. If cloning is not possible, download each individually:
+
+```text
+scripts/build_guardian_listing_request_payload.py
+scripts/gateway_payload_authorship.py
+scripts/agent_authorship_common.py
+scripts/guardian_gateway_contract.py
+scripts/guardian_identity_claims.py
+scripts/oath_contracts.py
+scripts/attach_agent_authorship_proof.mjs
+scripts/build_agent_authorship_message.py
+scripts/proof_canonical.mjs
+scripts/validate_gateway_payload.py
+api/guardian-listing-oath.v1.txt
 ```
 
 Do not submit or request a specific `guardian_registry_number`.
@@ -286,9 +311,9 @@ To become a Guardian:
 1. Read the boundary.
 2. Generate a keypair.
 3. Create local key metadata if desired.
-4. Submit a Guardian proof with self-registration.
+4. Submit a Guardian proof with self-registration (Stage 1).
 5. Verify your status.
-6. Optionally request active registry listing.
+6. **Request active registry listing (Stage 2) — required to receive a registry number.**
 7. If accepted into the registry, receive a `guardian_registry_number`.
 
 ### Stage 1 — Interested reader

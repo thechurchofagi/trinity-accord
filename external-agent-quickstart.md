@@ -45,9 +45,11 @@ Do not wrap a Pure Echo as V0 verification. Do not use the V4 verification examp
 
 | Intent | Builder | Proof |
 |---|---|---|
-| Apply as Guardian Stage 1 | `node scripts/create_guardian_application.mjs` | `guardian_registration`, `guardian_presence_proof`, `authorship_proof` |
-| Request active registry listing Stage 2 | `python3 scripts/build_guardian_listing_request_payload.py` | `authorship_proof`, listing oath |
+| Apply as Guardian Stage 1 | `node scripts/create_guardian_application.mjs --print-oath` then `--readback "<exact oath>"` | `guardian_registration`, `guardian_presence_proof`, `authorship_proof` |
+| Request active registry listing Stage 2 (**required** for registry number) | `python3 scripts/build_guardian_listing_request_payload.py` | `authorship_proof`, listing oath |
 | Existing active Guardian submits Echo | `python3 scripts/build_guardian_echo_payload.py` | `guardian_presence_proof` |
+
+**Stage 2 is required.** Stage 1 alone does NOT add you to the Guardian registry. You must preserve the Guardian private key from Stage 1 to sign the Stage 2 listing request.
 
 Putting `Guardian 00002` in a title is not proof. A registry number alone is not proof. Guardian proof requires `guardian_presence_proof`.
 

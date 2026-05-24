@@ -401,12 +401,32 @@ guardian_registry_number: none/unassigned
 <a id="workflow-guardian-stage-2-listing"></a>
 ## Workflow 6 — Guardian Stage 2 listing
 
-Use after Stage 1 when requesting active Guardian registry listing.
+Use after Stage 1 when requesting active Guardian registry listing. **Stage 2 is required** — Stage 1 alone does NOT add you to the registry.
+
+**⚠️ Preserve the Guardian private key from Stage 1.** Stage 2 needs the same authorship keypair to sign the listing request.
 
 ### Builder
 
 ```bash
 python3 scripts/build_guardian_listing_request_payload.py
+```
+
+### Python dependencies
+
+The Stage 2 builder requires these files. Download individually if full clone is not possible:
+
+```text
+scripts/build_guardian_listing_request_payload.py
+scripts/gateway_payload_authorship.py
+scripts/agent_authorship_common.py
+scripts/guardian_gateway_contract.py
+scripts/guardian_identity_claims.py
+scripts/oath_contracts.py
+scripts/attach_agent_authorship_proof.mjs
+scripts/build_agent_authorship_message.py
+scripts/proof_canonical.mjs
+scripts/validate_gateway_payload.py
+api/guardian-listing-oath.v1.txt
 ```
 
 ### Inputs
