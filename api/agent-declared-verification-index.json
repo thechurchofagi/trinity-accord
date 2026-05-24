@@ -5,7 +5,7 @@
     "/api/agent-issue-gateway-payload-schema.v1.json"
   ],
   "rebuild_source": "github_issues",
-  "rebuild_timestamp": "2026-05-24T11:25:23.771464+00:00",
+  "rebuild_timestamp": "2026-05-24T12:18:41.977083+00:00",
   "render_api_only_effective_at": "2026-05-17T05:30:00Z",
   "skipped_direct_issue_archive_attempts": [],
   "skipped_missing_oath_summary": [],
