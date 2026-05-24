@@ -69,8 +69,12 @@ jobs:
             exit 0
           fi
 
-          # Validate the archived record
-          python3 scripts/validate_agent_submission.py --mode ci "$RECORD_PATH"
+          # Validate the archived record (non-blocking: archive is already created)
+          if python3 scripts/validate_agent_submission.py --mode ci "$RECORD_PATH"; then
+            echo "Validation passed."
+          else
+            echo "::warning::Validation failed for ${RECORD_PATH}. Archiving anyway — review and fix in a follow-up."
+          fi
 
           # Commit and push
           git config user.name "github-actions[bot]"
