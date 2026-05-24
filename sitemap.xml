@@ -55,12 +55,14 @@
   <url><loc>https://www.trinityaccord.org/api/claim-registry.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/classification-boundaries.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/component-verification-levels.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/context-depth-declaration.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/context-depth-levels.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/context-load-map.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/context-readiness-levels.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/core-object-alpha-shenzhen-notary-2026-05-06.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/correction-record-schema.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/corrections-index.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/crl-to-context-depth-mapping.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/discovery-provenance-schema.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/echo-acceptance-policy.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/echo-archive-policy.json</loc></url>
@@ -87,6 +89,7 @@
   <url><loc>https://www.trinityaccord.org/api/full-evidence-chain-audit-schema.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/gateway-artifact-custody.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/gateway-builder-route-map.v1.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/gateway-config.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/gateway-workflows.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/generated-by-schema.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/guardian-active-listing-policy.v1.json</loc></url>

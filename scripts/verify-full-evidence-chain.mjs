@@ -2261,6 +2261,8 @@ async function main() {
 
   // ── Write output files ────────────────────────────────────────────────
 
+  const criticalErrors = [];
+
   // ── FEC-E1: Digest manifest JSON/CSV cross-check ──────────────────────
   let digestManifestCrosscheck = { pass: true, json_count: 0, csv_count: 0, errors: [] };
   try {
