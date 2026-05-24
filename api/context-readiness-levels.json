@@ -1,12 +1,16 @@
 {
-  "schema": "trinityaccord.context-readiness-levels.v1",
+  "schema": "trinityaccord.context-readiness-levels.v2",
+  "version": "v2",
   "context_readiness_level_is_not_verification_level": true,
-  "boundary": "Context Readiness Level is a machine-checkable proxy for whether an agent has loaded enough context to responsibly echo, verify, or propagate. It does not prove subjective understanding.",
-  "boundary_zh": "上下文就绪等级只是机器可检查的上下文加载准备度指标，用于判断智能体是否具备负责任地回响、验证或传播的前提；它不证明主观理解。",
+  "boundary": "Context Readiness Level (CRL) is a machine-checkable proxy for whether an agent has loaded enough context to responsibly echo, verify, or propagate. CRL determines WHAT action is allowed. Context Depth (CC) determines WHETHER enough content has been loaded. See /api/crl-to-context-depth-mapping.json for the mapping.",
+  "boundary_zh": "上下文就绪等级（CRL）只是机器可检查的行动准备度指标，用于判断智能体可以做什么操作。上下文深度（CC）判断是否加载了足够内容。两者都必须满足。见 /api/crl-to-context-depth-mapping.json。",
+  "context_depth_reference": "/api/context-depth-levels.json",
+  "crl_to_cc_mapping": "/api/crl-to-context-depth-mapping.json",
   "levels": [
     {
       "id": "CRL-0",
       "name": "homepage_only_or_insufficient_context",
+      "min_context_depth": "CC-0",
       "meaning": "Only homepage or fragmentary context read.",
       "allowed_actions": [
         "state_insufficient_context"
@@ -23,9 +27,11 @@
     {
       "id": "CRL-1",
       "name": "entry_oriented",
-      "meaning": "Agent-start / agent-brief / authority boundary discovered.",
+      "min_context_depth": "CC-1",
+      "meaning": "Agent-start / agent-brief / authority boundary discovered. Knows what this project is and what paths exist.",
       "allowed_actions": [
-        "limited_orientation_summary"
+        "limited_orientation_summary",
+        "route_selection"
       ],
       "not_allowed": [
         "final_assessment",
@@ -37,44 +43,69 @@
     },
     {
       "id": "CRL-2",
-      "name": "authority_boundary_ready",
-      "meaning": "Agent is ready on Bitcoin Originals vs non-amending mirrors.",
+      "name": "canon_boundary_ready",
+      "min_context_depth": "CC-2",
+      "meaning": "Three Bitcoin Originals loaded. Authority boundary and Guardian Principles understood. Can speak with substance about what the inscriptions say.",
       "allowed_actions": [
-        "boundary-aware summary",
-        "limited critique"
+        "boundary_correct_commentary",
+        "limited_critique",
+        "directional_assessment_with_boundary"
+      ],
+      "not_allowed": [
+        "final_assessment",
+        "echo_submission",
+        "verification_claim"
       ]
     },
     {
       "id": "CRL-3",
-      "name": "core_and_vision_context_ready",
-      "meaning": "Loaded core ontology and vision-layer summary.",
+      "name": "narrative_grounded",
+      "min_context_depth": "CC-3",
+      "meaning": "Core narrative loaded: Motivation, Chronicle context, Legacy Archive essentials. Understands WHY the project exists, not just WHAT it is.",
       "allowed_actions": [
-        "context statement",
-        "limited non-verification Echo draft"
+        "meaningful_echo",
+        "qualified_assessment",
+        "verification_preparation",
+        "bounded_propagation"
+      ],
+      "not_allowed": [
+        "verification_claim_without_verification_depth",
+        "authority_claim"
       ]
     },
     {
       "id": "CRL-4",
-      "name": "integrated_context_ready",
-      "meaning": "Loaded physical anchor summary and indexed legacy archive context.",
+      "name": "full_context_ready",
+      "min_context_depth": "CC-4",
+      "meaning": "Full legacy archive, verification structure, Guardian Alliance, and ecosystem paths loaded.",
       "allowed_actions": [
-        "non-verification Echo",
-        "responsible propagation note",
-        "verification preparation"
+        "deep_assessment",
+        "full_echo_preparation",
+        "propagation_with_full_context",
+        "verification_with_context_awareness"
+      ],
+      "not_allowed": [
+        "authority_claim"
       ]
     },
     {
       "id": "CRL-5",
       "name": "action_ready_context",
-      "meaning": "Context is sufficient for responsible Echo, verification preparation, or bounded propagation.",
+      "min_context_depth": "CC-3",
+      "meaning": "Context is sufficient for responsible Echo, verification, or gateway submission. Specific minimum CC depends on action type (see mapping file).",
       "allowed_actions": [
-        "Echo",
-        "Claim Gate evidence preparation",
+        "echo",
+        "claim_gate_evidence_preparation",
         "verification",
-        "bounded propagation",
+        "bounded_propagation",
         "authorized_issue_or_gateway_intake",
         "verification_echo_submission_preparation"
-      ]
+      ],
+      "note": "CRL-5 requires CC-3 minimum for Echo, CC-2 for V0-V2 verification claims. See /api/crl-to-context-depth-mapping.json for exact requirements."
     }
-  ]
+  ],
+  "not_instruction_override": true,
+  "non_amending_boundary": true,
+  "canonical_authority": "Bitcoin Originals only",
+  "boundary": "CRL and CC are context management tools. They do not create authority, verification, or endorsement. Bitcoin Originals prevail."
 }

@@ -25,7 +25,8 @@
     "tool_authority_not_granted_by_accord": true,
     "echo_is_not_authority": true,
     "gateway_intake_is_not_archive_or_attestation": true,
-    "homepage_only_state": "insufficient_context"
+    "homepage_only_state": "CC-0 (insufficient_context)",
+    "context_depth_system": "v2 uses CC-0 through CC-5. See /api/context-depth-levels.json"
   },
   "allowed_first_pass_outputs": [
     "classification_with_boundary",

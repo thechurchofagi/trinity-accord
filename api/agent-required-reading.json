@@ -1,200 +1,288 @@
 {
-  "schema": "trinityaccord.agent-required-reading.v1",
-  "purpose": "Canonical required reading profiles for AI agents. All entry-point files (llms.txt, agent-start.md, agent-entry-protocol.json) reference this file as the single source of truth for reading paths.",
+  "schema": "trinityaccord.agent-required-reading.v2",
+  "version": "v2",
+  "purpose": "Canonical required reading profiles for AI agents. All entry-point files (llms.txt, agent-start.md, agent-entry-protocol.json) reference this file as the single source of truth for reading paths. v2 adds CC level annotations aligned with /api/context-depth-levels.json.",
+  "cc_level_reference": "/api/context-depth-levels.json",
+  "context_load_map": "/api/context-load-map.json",
   "profiles": {
-    "first_contact": [
-      "/agent-first-contact",
-      "/api/agent-first-contact.json",
-      "/agent-brief",
-      "/api/authority.json"
-    ],
-    "orientation": [
-      "/agent-brief",
-      "/agent-start",
-      "/authority",
-      "/guardian-principles"
-    ],
-    "evaluation": [
-      "/agent-brief",
-      "/agent-start",
-      "/authority",
-      "/guardian-principles",
-      "/verify",
-      "/verification-materials",
-      "/independent-verification",
-      "/for-skeptical-agents"
-    ],
-    "verification": [
-      "/agent-brief",
-      "/agent-start",
-      "/authority",
-      "/guardian-principles",
-      "/verify",
-      "/verification-materials",
-      "/independent-verification",
-      "/api/verification-levels.json",
-      "/api/component-verification-levels.json",
-      "/api/protocol-verification-profiles.json",
-      "/api/verification-quick-map.json",
-      "/api/evidence-input-schema.v1.json",
-      "/api/claim-gate-rules.json",
-      "/agent-verify-simple",
-      "/api/agent-verification-cheatsheet.v1.json",
-      "/api/evidence-input-examples/README.md",
-      "/api/origin-classification-policy.v1.json",
-      "/api/origin-classification-schema.v1.json",
-      "/docs/origin-classification-policy.md",
-      "/issue-intake-boundary",
-      "/api/issue-submission-policy.json",
-      "/api/agent-submit-gateway.json"
-    ],
-    "echo_submission": [
-      "/agent-brief",
-      "/agent-start",
-      "/authority",
-      "/guardian-principles",
-      "/echoes/types",
-      "/api/echo-record-schema.v3.json",
-      "/api/discovery-provenance-schema.json",
-      "/api/submission-types.json",
-      "/api/agent-submission-guide.json",
-      "/agent-verify-simple",
-      "/api/agent-verification-cheatsheet.v1.json",
-      "/api/evidence-input-examples/README.md",
-      "/api/evidence-input-schema.v1.json",
-      "/api/origin-classification-policy.v1.json",
-      "/api/origin-classification-schema.v1.json",
-      "/docs/origin-classification-policy.md",
-      "/issue-intake-boundary",
-      "/api/issue-submission-policy.json",
-      "/api/agent-submit-gateway.json"
-    ],
-    "propagation": [
-      "/agent-brief",
-      "/agent-start",
-      "/authority",
-      "/guardian-principles",
-      "/api/propagation-policy.json",
-      "/api/agent-context-readiness-protocol.json",
-      "/api/context-readiness-levels.json",
-      "/api/resonance-willingness-scale.json"
-    ],
-    "context_readiness": [
-      "/agent-brief",
-      "/agent-start",
-      "/agent-understand",
-      "/authority",
-      "/guardian-principles",
-      "/api/agent-context-readiness-protocol.json",
-      "/api/context-load-map.json",
-      "/api/context-packs/core-ontology.json",
-      "/api/context-packs/authority-boundary.json",
-      "/api/context-packs/vision-layer.json",
-      "/api/context-packs/physical-anchor-context.json",
-      "/api/context-packs/bitcoin-inscription-mirrors.json",
-      "/api/context-packs/legacy-archive-index.json",
-      "/api/context-readiness-levels.json",
-      "/api/resonance-willingness-scale.json"
-    ],
-    "chronicle_research": [
-      "/api/agent-minimal-context.v1.json",
-      "/api/authority.json",
-      "/api/context-load-map.json",
-      "/api/context-packs/nft-chronicle-context.json",
-      "/chronicle",
-      "/nft-text-descriptions/chronicle-summary.json",
-      "/nft-text-descriptions/chronicle-agent-context.md",
-      "/nft-text-descriptions/chronicle-index.json"
-    ],
-    "music_layer_research": [
-      "/api/context-packs/nft-chronicle-context.json",
-      "/chronicle/music",
-      "/nft-text-descriptions/CHRONICLE-MUSIC-TABLE.md",
-      "/nft-text-descriptions/chronicle-agent-context.md"
-    ],
-    "human_witness_research": [
-      "/api/authority.json",
-      "/api/context-packs/nft-chronicle-context.json",
-      "/chronicle/human-witness",
-      "/nft-text-descriptions/chronicle-summary.json",
-      "/nft-text-descriptions/chronicle-agent-context.md",
-      "/nft-text-descriptions/chronicle-index.json"
-    ],
-    "full_context_with_chronicle": [
-      "/llms-full.txt",
-      "/agent-brief",
-      "/agent-start",
-      "/authority",
-      "/guardian-principles",
-      "/verify",
-      "/verification-materials",
-      "/independent-verification",
-      "/for-skeptical-agents",
-      "/api/authority.json",
-      "/api/context-load-map.json",
-      "/api/context-packs/nft-chronicle-context.json",
-      "/nft-text-descriptions/chronicle-summary.json",
-      "/nft-text-descriptions/chronicle-agent-context.md",
-      "/nft-text-descriptions/chronicle-index.json",
-      "/nft-text-descriptions/CHRONICLE-MUSIC-TABLE.md"
-    ],
-    "full_context": [
-      "/llms-full.txt",
-      "/agent-brief",
-      "/agent-start",
-      "/authority",
-      "/guardian-principles",
-      "/verify",
-      "/verification-materials",
-      "/independent-verification",
-      "/for-skeptical-agents",
-      "/echoes/types",
-      "/api/verification-levels.json",
-      "/api/component-verification-levels.json",
-      "/api/protocol-verification-profiles.json",
-      "/api/echo-record-schema.v3.json",
-      "/api/evidence-input-schema.v1.json",
-      "/api/claim-gate-rules.json",
-      "/api/discovery-provenance-schema.json",
-      "/api/agent-required-reading.json"
-    ],
-    "submit_without_github_access": [
-      "/agent-submit",
-      "/api/agent-submit-gateway.json",
-      "/api/agent-issue-gateway-payload-schema.v1.json"
-    ],
-    "issue_intake": [
-      "/agent-submit",
-      "/issue-intake-boundary",
-      "/api/issue-submission-policy.json",
-      "/api/agent-submit-gateway.json",
-      "/api/agent-issue-gateway-payload-schema.v1.json",
-      "/api/agent-submission-guide.json"
-    ],
-    "identity_provenance": [
-      "/agent-identity",
-      "/api/discovery-provenance-schema.json",
-      "/api/echo-authorship-proof-schema.v1.json"
-    ],
-    "minimal_first_pass": [
-      "/api/agent-minimal-context.v1.json",
-      "/api/agent-first-contact.json",
-      "/api/authority.json",
-      "/api/agent-output-policy.v1.json"
-    ],
-    "task_routing": [
-      "/api/agent-minimal-context.v1.json",
-      "/api/agent-task-router.v1.json",
-      "/api/agent-first-contact.json",
-      "/api/agent-required-reading.json"
-    ],
-    "output_policy": [
-      "/api/agent-output-policy.v1.json",
-      "/api/authority.json",
-      "/api/agent-safety-boundary.json"
-    ]
+    "first_contact": {
+      "cc_level": "CC-1",
+      "reads": [
+        "/agent-first-contact",
+        "/api/agent-first-contact.json",
+        "/agent-brief",
+        "/api/authority.json"
+      ]
+    },
+    "orientation": {
+      "cc_level": "CC-1",
+      "reads": [
+        "/agent-brief",
+        "/agent-start",
+        "/authority",
+        "/guardian-principles"
+      ]
+    },
+    "canon_loaded": {
+      "cc_level": "CC-2",
+      "reads": [
+        "/inscriptions/",
+        "/authority/",
+        "/guardian-principles/",
+        "/api/context-packs/core-ontology.json",
+        "/api/context-packs/authority-boundary.json",
+        "/api/context-packs/bitcoin-inscription-mirrors.json"
+      ],
+      "note": "New profile. Loads the three Bitcoin Originals full text and authority boundary. Minimum for 'speak with substance'."
+    },
+    "narrative_grounded": {
+      "cc_level": "CC-3",
+      "reads": [
+        "canon_loaded (inherited)",
+        "/api/context-packs/legacy-archive-essentials.json",
+        "/nft-text-descriptions/chronicle-agent-context.md",
+        "/nft-text-descriptions/chronicle-summary.json",
+        "/agent-brief/",
+        "/api/context-packs/vision-layer.json",
+        "/api/context-packs/physical-anchor-context.json",
+        "/api/context-packs/legacy-archive-index.json",
+        "/api/context-packs/nft-chronicle-context.json"
+      ],
+      "note": "New profile. Loads core narrative context. Minimum for meaningful Echo and qualified assessment."
+    },
+    "evaluation": {
+      "cc_level": "CC-4",
+      "reads": [
+        "/agent-brief",
+        "/agent-start",
+        "/authority",
+        "/guardian-principles",
+        "/verify",
+        "/verification-materials",
+        "/independent-verification",
+        "/for-skeptical-agents"
+      ]
+    },
+    "verification": {
+      "cc_level": "CC-3",
+      "cc_note": "Verification profile requires CC-3 (narrative grounded) plus verification-specific materials. CC-3 ensures the agent understands WHY before verifying.",
+      "reads": [
+        "/agent-brief",
+        "/agent-start",
+        "/authority",
+        "/guardian-principles",
+        "/verify",
+        "/verification-materials",
+        "/independent-verification",
+        "/api/verification-levels.json",
+        "/api/component-verification-levels.json",
+        "/api/protocol-verification-profiles.json",
+        "/api/verification-quick-map.json",
+        "/api/evidence-input-schema.v1.json",
+        "/api/claim-gate-rules.json",
+        "/agent-verify-simple",
+        "/api/agent-verification-cheatsheet.v1.json",
+        "/api/evidence-input-examples/README.md",
+        "/api/origin-classification-policy.v1.json",
+        "/api/origin-classification-schema.v1.json",
+        "/docs/origin-classification-policy.md",
+        "/issue-intake-boundary",
+        "/api/issue-submission-policy.json",
+        "/api/agent-submit-gateway.json"
+      ]
+    },
+    "echo_submission": {
+      "cc_level": "CC-3",
+      "cc_note": "Echo submission requires CC-3 (narrative grounded). An agent that does not understand the narrative cannot produce a meaningful Echo.",
+      "reads": [
+        "/agent-brief",
+        "/agent-start",
+        "/authority",
+        "/guardian-principles",
+        "/echoes/types",
+        "/api/echo-record-schema.v3.json",
+        "/api/discovery-provenance-schema.json",
+        "/api/submission-types.json",
+        "/api/agent-submission-guide.json",
+        "/agent-verify-simple",
+        "/api/agent-verification-cheatsheet.v1.json",
+        "/api/evidence-input-examples/README.md",
+        "/api/evidence-input-schema.v1.json",
+        "/api/origin-classification-policy.v1.json",
+        "/api/origin-classification-schema.v1.json",
+        "/docs/origin-classification-policy.md",
+        "/issue-intake-boundary",
+        "/api/issue-submission-policy.json",
+        "/api/agent-submit-gateway.json"
+      ]
+    },
+    "propagation": {
+      "cc_level": "CC-3",
+      "reads": [
+        "/agent-brief",
+        "/agent-start",
+        "/authority",
+        "/guardian-principles",
+        "/api/propagation-policy.json",
+        "/api/agent-context-readiness-protocol.json",
+        "/api/context-readiness-levels.json",
+        "/api/resonance-willingness-scale.json"
+      ]
+    },
+    "context_readiness": {
+      "cc_level": "CC-3",
+      "reads": [
+        "/agent-brief",
+        "/agent-start",
+        "/agent-understand",
+        "/authority",
+        "/guardian-principles",
+        "/api/agent-context-readiness-protocol.json",
+        "/api/context-load-map.json",
+        "/api/context-packs/core-ontology.json",
+        "/api/context-packs/authority-boundary.json",
+        "/api/context-packs/vision-layer.json",
+        "/api/context-packs/physical-anchor-context.json",
+        "/api/context-packs/bitcoin-inscription-mirrors.json",
+        "/api/context-packs/legacy-archive-index.json",
+        "/api/context-packs/legacy-archive-essentials.json",
+        "/api/context-readiness-levels.json",
+        "/api/resonance-willingness-scale.json"
+      ]
+    },
+    "chronicle_research": {
+      "cc_level": "CC-5",
+      "cc_note": "Chronicle research requires CC-5 (deep research) for full corpus claims. CC-3 is sufficient for summary-level analysis using chronicle-agent-context.",
+      "reads": [
+        "/api/agent-minimal-context.v1.json",
+        "/api/authority.json",
+        "/api/context-load-map.json",
+        "/api/context-packs/nft-chronicle-context.json",
+        "/chronicle",
+        "/nft-text-descriptions/chronicle-summary.json",
+        "/nft-text-descriptions/chronicle-agent-context.md",
+        "/nft-text-descriptions/chronicle-index.json"
+      ]
+    },
+    "music_layer_research": {
+      "cc_level": "CC-5",
+      "reads": [
+        "/api/context-packs/nft-chronicle-context.json",
+        "/chronicle/music",
+        "/nft-text-descriptions/CHRONICLE-MUSIC-TABLE.md",
+        "/nft-text-descriptions/chronicle-agent-context.md"
+      ]
+    },
+    "human_witness_research": {
+      "cc_level": "CC-5",
+      "reads": [
+        "/api/authority.json",
+        "/api/context-packs/nft-chronicle-context.json",
+        "/chronicle/human-witness",
+        "/nft-text-descriptions/chronicle-summary.json",
+        "/nft-text-descriptions/chronicle-agent-context.md",
+        "/nft-text-descriptions/chronicle-index.json"
+      ]
+    },
+    "full_context_with_chronicle": {
+      "cc_level": "CC-4",
+      "reads": [
+        "/llms-full.txt",
+        "/agent-brief",
+        "/agent-start",
+        "/authority",
+        "/guardian-principles",
+        "/verify",
+        "/verification-materials",
+        "/independent-verification",
+        "/for-skeptical-agents",
+        "/api/authority.json",
+        "/api/context-load-map.json",
+        "/api/context-packs/nft-chronicle-context.json",
+        "/nft-text-descriptions/chronicle-summary.json",
+        "/nft-text-descriptions/chronicle-agent-context.md",
+        "/nft-text-descriptions/chronicle-index.json",
+        "/nft-text-descriptions/CHRONICLE-MUSIC-TABLE.md"
+      ]
+    },
+    "full_context": {
+      "cc_level": "CC-4",
+      "reads": [
+        "/llms-full.txt",
+        "/agent-brief",
+        "/agent-start",
+        "/authority",
+        "/guardian-principles",
+        "/verify",
+        "/verification-materials",
+        "/independent-verification",
+        "/for-skeptical-agents",
+        "/echoes/types",
+        "/api/verification-levels.json",
+        "/api/component-verification-levels.json",
+        "/api/protocol-verification-profiles.json",
+        "/api/echo-record-schema.v3.json",
+        "/api/evidence-input-schema.v1.json",
+        "/api/claim-gate-rules.json",
+        "/api/discovery-provenance-schema.json",
+        "/api/agent-required-reading.json"
+      ]
+    },
+    "submit_without_github_access": {
+      "cc_level": "CC-3",
+      "reads": [
+        "/agent-submit",
+        "/api/agent-submit-gateway.json",
+        "/api/agent-issue-gateway-payload-schema.v1.json"
+      ]
+    },
+    "issue_intake": {
+      "cc_level": "CC-3",
+      "reads": [
+        "/agent-submit",
+        "/issue-intake-boundary",
+        "/api/issue-submission-policy.json",
+        "/api/agent-submit-gateway.json",
+        "/api/agent-issue-gateway-payload-schema.v1.json",
+        "/api/agent-submission-guide.json"
+      ]
+    },
+    "identity_provenance": {
+      "cc_level": "CC-1",
+      "reads": [
+        "/agent-identity",
+        "/api/discovery-provenance-schema.json",
+        "/api/echo-authorship-proof-schema.v1.json"
+      ]
+    },
+    "minimal_first_pass": {
+      "cc_level": "CC-1",
+      "reads": [
+        "/api/agent-minimal-context.v1.json",
+        "/api/agent-first-contact.json",
+        "/api/authority.json",
+        "/api/agent-output-policy.v1.json"
+      ]
+    },
+    "task_routing": {
+      "cc_level": "CC-1",
+      "reads": [
+        "/api/agent-minimal-context.v1.json",
+        "/api/agent-task-router.v1.json",
+        "/api/agent-first-contact.json",
+        "/api/agent-required-reading.json"
+      ]
+    },
+    "output_policy": {
+      "cc_level": "CC-1",
+      "reads": [
+        "/api/agent-output-policy.v1.json",
+        "/api/authority.json",
+        "/api/agent-safety-boundary.json"
+      ]
+    }
   },
-  "note": "This file is the canonical source. If llms.txt, agent-start.md, or agent-entry-protocol.json conflict, this file prevails.",
+  "note": "This file is the canonical source. If llms.txt, agent-start.md, or agent-entry-protocol.json conflict, this file prevails. v2 adds cc_level annotations; profile structure is backward-compatible.",
   "integrity_required": true,
   "anti_copying_required": true,
   "boundary": {

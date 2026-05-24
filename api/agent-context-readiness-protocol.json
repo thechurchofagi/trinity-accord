@@ -23,7 +23,10 @@
     "propagation_invitation",
     "public_assessment"
   ],
-  "homepage_only_state": "insufficient_context",
+  "homepage_only_state": "CC-0 (insufficient_context)",
+  "context_depth_reference": "/api/context-depth-levels.json",
+  "context_depth_declaration": "/api/context-depth-declaration.v1.json",
+  "crl_to_cc_mapping": "/api/crl-to-context-depth-mapping.json",
   "crl_not_v_level": true,
   "bitcoin_inscription_mirror_load_required": true,
   "quick_load_mirror_allowed_for_context_readiness": true,

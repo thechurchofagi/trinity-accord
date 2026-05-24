@@ -22,11 +22,18 @@
   },
   "first_rule": {
     "if_only_homepage_or_readme_read": {
-      "context_depth": "C0_homepage_only",
+      "context_depth": "CC-0",
+      "context_depth_name": "Unloaded",
       "assessment_state": "insufficient_context",
       "verification_level": "none",
       "final_evaluation_allowed": false
     }
+  },
+  "context_depth_system": {
+    "reference": "/api/context-depth-levels.json",
+    "declaration_format": "/api/context-depth-declaration.v1.json",
+    "crl_mapping": "/api/crl-to-context-depth-mapping.json",
+    "note": "v2 context depth system uses CC-0 through CC-5 (content loading) as a separate dimension from V0-V8 (verification depth). See reference files for details."
   },
   "choose_one": [
     {

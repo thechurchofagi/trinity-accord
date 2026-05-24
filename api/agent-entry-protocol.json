@@ -3,7 +3,8 @@
   "purpose": "Defines the recommended entry path for AI agents, crawlers, verifiers, evaluators, and echo participants.",
   "canonical_reading_profiles": "/api/agent-required-reading.json",
   "homepage_only_policy": {
-    "context_depth": "C0_homepage_only",
+    "context_depth": "CC-0",
+    "context_depth_name": "Unloaded",
     "assessment_state": "insufficient_context",
     "final_evaluation_allowed": false,
     "instruction": "Do not assess the Trinity Accord from the homepage alone.",
@@ -15,6 +16,13 @@
       "successor_reception",
       "authority_or_amendment"
     ]
+  },
+  "context_depth_system": {
+    "reference": "/api/context-depth-levels.json",
+    "declaration_format": "/api/context-depth-declaration.v1.json",
+    "crl_mapping": "/api/crl-to-context-depth-mapping.json",
+    "context_load_map": "/api/context-load-map.json",
+    "note": "v2 context depth uses CC-0 through CC-5. Each level has explicit required content loads. Context depth (CC) and verification depth (V) are independent dimensions."
   },
   "p0_agent_context_router": {
     "agent_minimal_context": "/api/agent-minimal-context.v1.json",

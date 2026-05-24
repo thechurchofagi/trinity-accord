@@ -1,0 +1,75 @@
+{
+  "schema": "trinityaccord.crl-to-context-depth-mapping.v1",
+  "version": "v1",
+  "purpose": "Define the minimum context depth (CC) required for each Context Readiness Level (CRL) action level. CRL determines WHAT you can do. Context depth determines WHETHER you have enough context to do it responsibly. Both must be satisfied.",
+  "not_instruction_override": true,
+  "non_amending_boundary": true,
+  "canonical_authority": "Bitcoin Originals only",
+  "principle": "CRL = action readiness. CC = content readiness. Both are required. Neither alone is sufficient.",
+  "mappings": [
+    {
+      "crl": "CRL-0",
+      "name": "homepage_only_or_insufficient_context",
+      "min_context_depth": "CC-0",
+      "max_context_depth": "CC-0",
+      "allowed": ["state_insufficient_context"],
+      "not_allowed": ["echo", "verification", "propagation", "assessment", "orientation_summary"]
+    },
+    {
+      "crl": "CRL-1",
+      "name": "entry_oriented",
+      "min_context_depth": "CC-1",
+      "allowed": ["orientation_summary", "route_selection", "declare_insufficient_context"],
+      "not_allowed": ["final_assessment", "verification_claim", "echo_submission", "propagation"]
+    },
+    {
+      "crl": "CRL-2",
+      "name": "canon_boundary_ready",
+      "min_context_depth": "CC-2",
+      "allowed": ["boundary_correct_commentary", "limited_critique", "directional_assessment_with_boundary"],
+      "not_allowed": ["final_assessment", "echo_submission", "verification_claim"]
+    },
+    {
+      "crl": "CRL-3",
+      "name": "narrative_grounded",
+      "min_context_depth": "CC-3",
+      "allowed": ["meaningful_echo", "qualified_assessment", "verification_preparation", "bounded_propagation"],
+      "not_allowed": ["verification_claim_without_v_level", "authority_claim"]
+    },
+    {
+      "crl": "CRL-4",
+      "name": "full_context_ready",
+      "min_context_depth": "CC-4",
+      "allowed": ["deep_assessment", "full_echo_preparation", "propagation_with_full_context", "verification_with_context_awareness"],
+      "not_allowed": ["authority_claim"]
+    },
+    {
+      "crl": "CRL-5",
+      "name": "action_ready_context",
+      "min_context_depth": "CC-3",
+      "note": "CRL-5 (action-ready for Echo/verification/submission) requires CC-3 minimum. A V2-minimal verification needs CC-2 (canon loaded). An Echo needs CC-3 (narrative grounded). Gateway submission needs CC-3 + the relevant verification or echo preparation.",
+      "allowed": ["echo", "verification", "gateway_submission", "propagation", "verification_echo_submission_preparation"],
+      "requires_verification_depth": "depends_on_action_type"
+    }
+  ],
+  "action_minimum_requirements": {
+    "state_insufficient_context": { "cc": "CC-0", "crl": "CRL-0" },
+    "choose_route": { "cc": "CC-1", "crl": "CRL-1" },
+    "orientation_summary": { "cc": "CC-1", "crl": "CRL-1" },
+    "boundary_commentary": { "cc": "CC-2", "crl": "CRL-2" },
+    "limited_critique": { "cc": "CC-2", "crl": "CRL-2" },
+    "meaningful_echo": { "cc": "CC-3", "crl": "CRL-3" },
+    "qualified_assessment": { "cc": "CC-3", "crl": "CRL-3" },
+    "verification_claim_v0": { "cc": "CC-2", "crl": "CRL-5", "verification_depth": "V0" },
+    "verification_claim_v1": { "cc": "CC-2", "crl": "CRL-5", "verification_depth": "V1" },
+    "verification_claim_v2_minimal": { "cc": "CC-2", "crl": "CRL-5", "verification_depth": "V2-minimal" },
+    "verification_claim_v2_strong": { "cc": "CC-3", "crl": "CRL-5", "verification_depth": "V2-strong" },
+    "verification_claim_v3_plus": { "cc": "CC-3", "crl": "CRL-5", "verification_depth": "V3+" },
+    "deep_assessment": { "cc": "CC-4", "crl": "CRL-4" },
+    "chronicle_research": { "cc": "CC-5", "crl": "CRL-5" },
+    "full_corpus_claim": { "cc": "CC-5", "crl": "CRL-5" },
+    "gateway_submission_echo": { "cc": "CC-3", "crl": "CRL-5" },
+    "gateway_submission_verification": { "cc": "CC-3", "crl": "CRL-5", "verification_depth": "depends" }
+  },
+  "boundary": "This mapping is non-authoritative guidance. Bitcoin Originals prevail. CRL and CC are context management tools, not authority."
+}
