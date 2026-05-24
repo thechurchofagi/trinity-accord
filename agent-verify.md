@@ -299,7 +299,8 @@ Use:
 - [/api/discovery-provenance-schema.json](/api/discovery-provenance-schema.json)
 - [/api/verification-levels.json](/api/verification-levels.json)
 
-If context depth is `C0_homepage_only`, do not claim a final evaluation.
+If context depth is `CC-0` (Unloaded), do not claim a final evaluation.
+See /api/context-depth-levels.json for the v2 context depth system.
 
 ---
 

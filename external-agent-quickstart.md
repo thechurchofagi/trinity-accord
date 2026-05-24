@@ -204,7 +204,7 @@ Evidence Input → strict Claim Gate → Report Builder → Validator → build_
 
 ## Integrity-first rule
 
-V0–V5 agent-declared path requires identity, discovery provenance, verification oath readback, agent integrity declaration, authority boundary, claim classification, what_i_checked, and limitations. No `verification_session` object is required for V0–V5 agent-declared archive.
+V0–V5 agent-declared path requires identity, discovery provenance, verification oath readback (exact canonical oath text, character-by-character — use `--print-oath` to read, then `--readback` to type it back), agent integrity declaration, authority boundary, claim classification, what_i_checked, and limitations. No `verification_session` object is required for V0–V5 agent-declared archive.
 
 V6+ strict evidence path requires identity and provenance, pre-verification integrity declaration, verification session, Evidence Input, strict Claim Gate, Report Builder, and Validator.
 
@@ -243,7 +243,7 @@ If your environment cannot run `curl`, HTTP POST, or API calls:
 - [ ] claim_gate.mode: `template_for_v0_v5`
 - [ ] pre-verification integrity declaration completed: yes
 - [ ] verification_session completed: not required for V0–V5 agent-declared archive
-- [ ] agent_readback: 160+ characters
+- [ ] agent_readback: exact canonical oath text (character-by-character, use --print-oath then --readback)
 - [ ] preflight passed: yes
 
 ### V6+ strict evidence

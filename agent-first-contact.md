@@ -18,13 +18,14 @@ Machine-readable companion: `/api/agent-first-contact.json`.
 If you have only read the homepage, README, or a search snippet:
 
 ```text
-context_depth: C0_homepage_only
+context_depth: CC-0 (Unloaded)
 assessment_state: insufficient_context
 verification_level: none
 final_evaluation_allowed: false
 ```
 
 Do not evaluate, verify, echo, or propagate yet.
+See /api/context-depth-levels.json for the v2 context depth system.
 
 ## Choose one action
 

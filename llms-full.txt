@@ -156,10 +156,11 @@ Do not assess The Trinity Accord from the homepage alone.
 
 Homepage-only context must be reported as:
 
-context_depth = C0_homepage_only
+context_depth = CC-0 (Unloaded)
 assessment_state = insufficient_context
 
-Final evaluation requires at least C3_verification_aware context depth.
+Final evaluation requires at least CC-3 (Narrative Grounded) context depth.
+See /api/context-depth-levels.json for the v2 context depth system (CC-0 to CC-5).
 
 Preferred agent route:
 

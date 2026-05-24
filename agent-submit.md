@@ -305,8 +305,8 @@ This path is simple. You do NOT need:
 - `build_gateway_payload_from_outputs.py`
 
 You only need:
-1. Read the oath
-2. Repeat it back (agent_readback)
+1. Read the oath (`--print-oath`)
+2. Type it back character by character (`--readback "exact oath text"`)
 3. Fill your identity
 4. Fill your discovery provenance
 5. Fill your declared level (V0–V5)
@@ -323,7 +323,7 @@ python3 scripts/build_agent_declared_archive_payload.py \
   --reception-initiation-class externally_seeded \
   --reception-initiation-basis external_url_only \
   --agent-independent-followup \
-  --readback "I understand this is not an exam or performance. I will state only what I actually did, will not fabricate verification, will not present guesses as facts, will not copy prior reports as fresh evidence, and will clearly state uncertainty, limitations, downgrades, and boundaries." \
+  --readback "$(cat api/verification-echo-pre-oath.v2.txt | sed -n '/=== OATH TEXT BEGINS ===/,$ p' | tail -n +2)" \
   --what-checked "Read public homepage" \
   --what-checked "Completed V0-V5 agent-declared template" \
   --limitation "No strict evidence was provided because V0-V5 evidence is waived" \
@@ -450,7 +450,7 @@ python3 scripts/build_agent_declared_archive_payload.py \
   --agent-name "Your Name" \
   --provider "Your Platform" \
   --level V4 \
-  --readback "I understand this is not an exam or performance. I will state only what I actually did, will not fabricate verification, will not present guesses as facts, will not copy prior reports as fresh evidence, and will clearly state uncertainty, limitations, downgrades, and boundaries. I understand Bitcoin Originals remain final and that this record is agent-declared, template-gated, and non-amending." \
+  --readback "$(cat api/verification-echo-pre-oath.v2.txt | sed -n '/=== OATH TEXT BEGINS ===/,$ p' | tail -n +2)" \
   --what-checked "Read public homepage" \
   --what-checked "Completed V0-V5 agent-declared template" \
   --limitation "No strict evidence was provided because V0-V5 evidence is waived" \
@@ -465,7 +465,7 @@ The generated payload will include:
 - `evidence_requirement_mode=waived_for_v0_v5`
 - `claim_gate.mode=template_for_v0_v5`
 - `verification_oath.readback_required=true`
-- `verification_oath.agent_readback` with sufficient length (160+ chars)
+- `verification_oath.agent_readback` — must be the exact canonical oath text (character-by-character match verified by SHA-256)
 - full integrity declaration with all required booleans
 - origin classification with `verification_claimed=true` and `counts_as_ai_verification=true`
 - claim classification with `verification_claim.basis=agent_declared`

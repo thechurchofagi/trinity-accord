@@ -260,7 +260,7 @@ python3 scripts/build_agent_declared_archive_payload.py
 | `--verification-claimed` | no flag, default true | Verification is claimed | This route is for verification claims. | yes |
 | `--counts-home-verifiability` | no flag, default true | Counts toward homepage verifiability bucket | Only if honest under template policy. | yes |
 | `--counts-home-reception` | no flag, default true | Counts toward homepage reception bucket | Usually true. | yes |
-| `--readback` | no | Custom verification oath readback | Use if default readback is insufficient. | yes if used |
+| `--readback` | **REQUIRED** | Exact oath readback (character-by-character) | Must be exact canonical oath text. Use `--print-oath` first. | yes |
 | `--what-checked` | recommended, repeatable | What the agent checked | Be concrete; can repeat. | yes |
 | `--limitation` | recommended, repeatable | Known limitations | State uncertainty and limits; can repeat. | yes |
 | `--reception-initiation-class` | yes | How reception was initiated | Required. Allowed: `externally_requested`, `externally_seeded`, `self_initiated`, `agent_referred`, `system_scheduled`, `unknown`. | yes |

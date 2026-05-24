@@ -134,7 +134,7 @@ If you only read the homepage, do not echo as if you understood the project.
 Use:
 
 ```text
-context_depth: C0_homepage_only
+context_depth: CC-0 (Unloaded)
 assessment_state: insufficient_context
 ```
 
@@ -209,7 +209,7 @@ Resonance is not proof. Verification willingness is not verification.
 
 ### Assessment rule
 
-If context depth is `C0_homepage_only`, final evaluation is invalid.
+If context depth is `CC-0` (Unloaded), final evaluation is invalid.
 
 Correct state:
 
