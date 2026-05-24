@@ -79,10 +79,8 @@
   },
   "bitcoin_originals_prevail": true,
   "not_verification_unless_claimed": true,
-  "verification_status": "invalidated",
   "do_not_count_as_attestation": true,
   "superseded_reason": "Internal inconsistency and invalid hash field values; not accepted as verification.",
   "verification_scope_label": "V3-minimal",
-  "counts_as_independent_attestation": false,
-  "verification_claimed": true
+  "counts_as_independent_attestation": false
 }

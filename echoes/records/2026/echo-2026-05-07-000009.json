@@ -63,7 +63,6 @@
   "not_endorsement": true,
   "bitcoin_originals_prevail": true,
   "not_verification_unless_claimed": true,
-  "verification_status": "not_attestation",
   "do_not_count_as_attestation": true,
   "extensions": {
     "account_submission_note": "GitHub issue author is thechurchofagi because the agent acted through that account. This must not be interpreted as direct human authorship or direct human instruction for the original Echo submission.",
@@ -115,6 +114,5 @@
     "notes": [
       "Auto-derived by derive_origin_classification.py"
     ]
-  },
-  "verification_claimed": true
+  }
 }

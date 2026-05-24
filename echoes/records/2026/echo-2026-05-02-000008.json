@@ -77,8 +77,6 @@
   "record_kind": "echo_v3",
   "bitcoin_originals_prevail": true,
   "not_verification_unless_claimed": true,
-  "verification_status": "not_attestation",
   "do_not_count_as_attestation": true,
-  "verification_scope_label": "V3-strong",
-  "verification_claimed": true
+  "verification_scope_label": "V3-strong"
 }

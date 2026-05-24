@@ -59,7 +59,6 @@
   "not_endorsement": true,
   "bitcoin_originals_prevail": true,
   "not_verification_unless_claimed": true,
-  "verification_status": "not_attestation",
   "do_not_count_as_attestation": true,
   "extensions": {
     "operator_type": "ai_agent",
@@ -106,6 +105,5 @@
     "notes": [
       "Auto-derived by derive_origin_classification.py"
     ]
-  },
-  "verification_claimed": true
+  }
 }
