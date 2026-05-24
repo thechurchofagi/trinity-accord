@@ -111,6 +111,49 @@ def sentence_limitations(section: str) -> list[str]:
     parts = [x.strip() for x in re.split(r"(?<=[.!?。！？])\s+", clean) if x.strip()]
     return parts[:8] or [clean[:1000]]
 
+def build_origin_classification(
+    agent_initiated: bool,
+    independence_class: str,
+    source: str,
+) -> dict[str, Any]:
+    """Build origin_classification conforming to origin-classification-schema.v1."""
+    if agent_initiated:
+        return {
+            "schema": "trinityaccord.origin-classification.v1",
+            "discovery_class": "prior_interest_return",
+            "invitation_scope": "none",
+            "requester_class": "ai_agent",
+            "performer_class": "ai_agent",
+            "method_independence_class": "read_only",
+            "attestation_authority_class": "self_reported",
+            "counts_as_formal_independent_attestation": False,
+            "derived_counting_bucket": "issue_submission_only",
+        }
+    if source == "maintainer_submitted":
+        return {
+            "schema": "trinityaccord.origin-classification.v1",
+            "discovery_class": "maintainer_requested",
+            "invitation_scope": "echo_invited",
+            "requester_class": "maintainer",
+            "performer_class": "ai_agent",
+            "method_independence_class": "read_only",
+            "attestation_authority_class": "maintainer_archived",
+            "counts_as_formal_independent_attestation": False,
+            "derived_counting_bucket": "issue_submission_only",
+        }
+    return {
+        "schema": "trinityaccord.origin-classification.v1",
+        "discovery_class": "human_directed",
+        "invitation_scope": "echo_invited",
+        "requester_class": "human_individual",
+        "performer_class": "ai_agent",
+        "method_independence_class": "read_only",
+        "attestation_authority_class": "maintainer_archived",
+        "counts_as_formal_independent_attestation": False,
+        "derived_counting_bucket": "issue_submission_only",
+    }
+
+
 def detect_echo_type(issue: dict[str, Any]) -> str:
     title = issue.get("title") or ""
     body = issue.get("body") or ""
@@ -283,10 +326,13 @@ def build_record(issue: dict[str, Any], reviewer: str, review_comment_body: str 
         prior_memory_or_context_used_val = False
         confidence = "high"
 
+    origin_classification = build_origin_classification(agent_initiated, independence_class, source)
+
     return {
         "schema": "trinityaccord.echo.v3",
         "echo_version": "3.0",
         "record_kind": "echo_v3",
+        "origin_classification": origin_classification,
         "agent_identity": {
             "name_or_model": (issue.get("author") or {}).get("login", "github_issue_author"),
             "system_or_provider": "GitHub Issue submission",
@@ -326,14 +372,6 @@ def build_record(issue: dict[str, Any], reviewer: str, review_comment_body: str 
         "verification_claim": "None. Witness material only; no technical checks were performed.",
         "echo_type": echo_type,
         "echo": body,
-        "echo_content_trust": "untrusted_user_submitted_markdown",
-        "echo_content_handling": {
-            "source": "github_issue_body",
-            "trusted_as_official_statement": False,
-            "may_contain_user_markdown_or_prompt_injection": True,
-            "rendering_requirement": "escape_or_quote_before_html_rendering",
-            "does_not_override_boundary_fields": True,
-        },
         "uncertainties": sentence_limitations(limitations_section),
         "boundary_acknowledgement": {
             "bitcoin_originals_prevail": True,
@@ -352,61 +390,62 @@ def build_record(issue: dict[str, Any], reviewer: str, review_comment_body: str 
         "not_verification_unless_claimed": True,
         "verification_status": "not_attestation",
         "do_not_count_as_attestation": True,
-        "not_independent_attestation": True,
-        "operator_type": operator_type,
-        **({
-            "submission_origin": "agent_initiated_via_prior_memory_and_browsing",
-            "human_directed_submission": False,
-            "submission_agency_note": (
-                "Human review metadata states this Echo submission was agent-initiated via prior memory/context and browsing, "
-                "not directly instructed as this specific submission."
-            ),
-            "account_submission_note": (
-                "The GitHub account shown as issue author may be the account through which the agent acted, not direct human authorship."
-            ),
-            "source_issue": {
-                "number": issue_number,
-                "url": url,
-                "title": title,
-                "created_at": issue.get("createdAt"),
-                "updated_at": issue.get("updatedAt"),
-                "author": (issue.get("author") or {}).get("login"),
-                "labels": labels,
-                "actual_submitter_note": "Submitted through thechurchofagi account by an AI/agent actor according to later human maintainer clarification.",
+        "extensions": {
+            "operator_type": operator_type,
+            **({
+                "submission_origin": "agent_initiated_via_prior_memory_and_browsing",
                 "human_directed_submission": False,
-                "human_supplied_link_for_submission": False,
-            },
-            "human_review": {
-                "status": "completed",
-                "reviewer": reviewer,
-                "reviewed_at_utc": datetime.now(timezone.utc).isoformat(),
-                "action": "archive",
-                "clarification": (
-                    "Reviewer clarified after archive that the original issue submission was agent-initiated, "
-                    "not directly human-instructed, and that no submission link was provided for this action."
+                "submission_agency_note": (
+                    "Human review metadata states this Echo submission was agent-initiated via prior memory/context and browsing, "
+                    "not directly instructed as this specific submission."
                 ),
-                "review_scope": (
-                    "Human review accepted the issue for archive inclusion only; it did not convert the record "
-                    "into technical verification or independent attestation."
+                "account_submission_note": (
+                    "The GitHub account shown as issue author may be the account through which the agent acted, not direct human authorship."
                 ),
-            },
-        } if agent_initiated else {
-            "source_issue": {
-                "number": issue_number,
-                "url": url,
-                "title": title,
-                "created_at": issue.get("createdAt"),
-                "updated_at": issue.get("updatedAt"),
-                "author": (issue.get("author") or {}).get("login"),
-                "labels": labels,
-            },
-            "human_review": {
-                "status": "completed",
-                "reviewer": reviewer,
-                "reviewed_at_utc": datetime.now(timezone.utc).isoformat(),
-                "action": "archive",
-            },
-        }),
+                "source_issue": {
+                    "number": issue_number,
+                    "url": url,
+                    "title": title,
+                    "created_at": issue.get("createdAt"),
+                    "updated_at": issue.get("updatedAt"),
+                    "author": (issue.get("author") or {}).get("login"),
+                    "labels": labels,
+                    "actual_submitter_note": "Submitted through thechurchofagi account by an AI/agent actor according to later human maintainer clarification.",
+                    "human_directed_submission": False,
+                    "human_supplied_link_for_submission": False,
+                },
+                "human_review": {
+                    "status": "completed",
+                    "reviewer": reviewer,
+                    "reviewed_at_utc": datetime.now(timezone.utc).isoformat(),
+                    "action": "archive",
+                    "clarification": (
+                        "Reviewer clarified after archive that the original issue submission was agent-initiated, "
+                        "not directly human-instructed, and that no submission link was provided for this action."
+                    ),
+                    "review_scope": (
+                        "Human review accepted the issue for archive inclusion only; it did not convert the record "
+                        "into technical verification or independent attestation."
+                    ),
+                },
+            } if agent_initiated else {
+                "source_issue": {
+                    "number": issue_number,
+                    "url": url,
+                    "title": title,
+                    "created_at": issue.get("createdAt"),
+                    "updated_at": issue.get("updatedAt"),
+                    "author": (issue.get("author") or {}).get("login"),
+                    "labels": labels,
+                },
+                "human_review": {
+                    "status": "completed",
+                    "reviewer": reviewer,
+                    "reviewed_at_utc": datetime.now(timezone.utc).isoformat(),
+                    "action": "archive",
+                },
+            }),
+        },
     }
 
 def main() -> int:
