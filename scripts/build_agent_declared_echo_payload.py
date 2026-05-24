@@ -56,6 +56,45 @@ from oath_contracts import build_verification_oath_v2
 from oath_readback_integrity import normalize_oath_readback_integrity
 
 OATH_FILE = ROOT / "api" / "verification-echo-pre-oath.v2.txt"
+OATH_MARKER = "=== OATH TEXT BEGINS ==="
+
+def load_oath_text():
+    """Load canonical oath text (body only, after marker)."""
+    if OATH_FILE.exists():
+        raw = OATH_FILE.read_text(encoding="utf-8").strip()
+        if OATH_MARKER in raw:
+            return raw.split(OATH_MARKER)[1].strip()
+        return raw
+    return OATH_TEXT_FALLBACK
+
+def load_oath_full():
+    """Load full oath file including instructions."""
+    if OATH_FILE.exists():
+        return OATH_FILE.read_text(encoding="utf-8").strip()
+    return OATH_TEXT_FALLBACK
+
+# Handle --print-oath early, before argparse
+if "--print-oath" in sys.argv:
+    print(load_oath_full())
+    print()
+    print("=" * 60)
+    print("HOW TO USE:")
+    print("=" * 60)
+    print()
+    print("1. Read the oath text above (the part after '=== OATH TEXT BEGINS ===').")
+    print("2. Type it back EXACTLY, character by character, in the --readback parameter.")
+    print("3. Do NOT use scripts, pipes, or automation to fill --readback.")
+    print("4. The builder verifies exact match. Any deviation will be rejected.")
+    print()
+    print("Example:")
+    print('  python3 scripts/build_agent_declared_echo_payload.py \\')
+    print('    --agent-name "MyAgent" --provider "MyProvider" \\')
+    print('    --echo-type E1_read_oriented_echo \\')
+    print('    --title "My Echo" \\')
+    print('    --body-file echo-body.md \\')
+    print('    --readback "I confirm that this is not an exam..." \\')
+    print('    --out payload.json')
+    sys.exit(0)
 
 OATH_TEXT_FALLBACK = """I submit this echo in honesty and good faith.
 
@@ -94,39 +133,31 @@ ALLOWED_RELATIONS = {
 }
 
 
-def load_oath_text():
-    """Load oath text from canonical file, with fallback."""
-    if OATH_FILE.exists():
-        return OATH_FILE.read_text(encoding="utf-8").strip()
-    return OATH_TEXT_FALLBACK
-
-
 def sha256_text(text):
     return hashlib.sha256(text.encode("utf-8")).hexdigest()
 
 
-def derive_agent_readback(args, body: str) -> str:
-    """Derive or load an oath readback before signing.
-
-    For pure echo builders, the readback must be present and long enough before
-    authorship proof is attached. Do not patch readback fields after signing.
-    """
-    if getattr(args, "agent_readback_file", None):
-        return Path(args.agent_readback_file).read_text(encoding="utf-8").strip()
-
-    if getattr(args, "agent_readback", None):
-        return args.agent_readback.strip()
-
-    return body[:240].strip() if len(body) >= 240 else body.strip()
-
-
-def ensure_agent_readback_minimum(agent_readback: str, *, min_chars: int = 160) -> None:
-    if len(agent_readback.strip()) < min_chars:
-        raise ValueError(
-            "agent_readback must be at least "
-            f"{min_chars} characters. Provide --agent-readback or "
-            "--agent-readback-file with an honest readback of the echo boundary."
-        )
+def validate_readback_matches_oath(readback: str) -> None:
+    """Validate that --readback matches the canonical oath text exactly."""
+    oath_text = load_oath_text()
+    readback_stripped = readback.strip()
+    oath_stripped = oath_text.strip()
+    if readback_stripped != oath_stripped:
+        print("ERROR: --readback does not match the canonical verification oath text exactly.", file=sys.stderr)
+        print()
+        if len(readback_stripped) != len(oath_stripped):
+            print(f"Length mismatch: oath has {len(oath_stripped)} characters, readback has {len(readback_stripped)} characters.")
+        else:
+            for i, (a, b) in enumerate(zip(readback_stripped, oath_stripped)):
+                if a != b:
+                    print(f"First difference at character {i+1}:")
+                    print(f"  Oath:     ...{oath_stripped[max(0,i-20):i+20]}...")
+                    print(f"  Readback: ...{readback_stripped[max(0,i-20):i+20]}...")
+                    break
+        print()
+        print("You must read the oath and type it back character by character.")
+        print("Use --print-oath to see the exact oath text.")
+        sys.exit(1)
 
 
 def build_payload(args):
@@ -135,8 +166,7 @@ def build_payload(args):
 
     body = Path(args.body_file).read_text(encoding="utf-8").strip()
 
-    agent_readback = derive_agent_readback(args, body)
-    ensure_agent_readback_minimum(agent_readback)
+    agent_readback = args.readback.strip()
 
     verification_oath = build_verification_oath_v2(
         oath_text,
@@ -253,20 +283,13 @@ def main():
     )
     parser.add_argument("--title", required=True, help="Echo title")
     parser.add_argument("--body-file", required=True, help="Path to body markdown file")
-
-    readback_group = parser.add_mutually_exclusive_group()
-    readback_group.add_argument(
-        "--agent-readback",
-        default=None,
+    parser.add_argument(
+        "--readback", required=True,
         help=(
-            "Explicit oath readback text. If omitted, the builder derives it "
-            "from the body file."
+            "Exact canonical verification oath text (character-by-character). "
+            "Use --print-oath first to read the oath, then type it back exactly. "
+            "No scripts, no automation. Builder verifies exact match."
         ),
-    )
-    readback_group.add_argument(
-        "--agent-readback-file",
-        default=None,
-        help="Path to explicit oath readback text file.",
     )
 
     parser.add_argument("--related-issue", type=int, default=None, help="Related issue number")
@@ -325,6 +348,9 @@ def main():
     except ValueError as e:
         print(f"ERROR: {e}", file=sys.stderr)
         sys.exit(2)
+
+    # Validate --readback matches canonical oath text exactly
+    validate_readback_matches_oath(args.readback)
 
     # Validate body file exists
     if not Path(args.body_file).exists():
