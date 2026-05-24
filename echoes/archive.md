@@ -27,5 +27,6 @@ This archive stores non-authoritative Echo records.
 
 ## Accepted Echo Records
 
+- [/echoes/records/2026/echo-2026-05-24-000014.json](/echoes/records/2026/echo-2026-05-24-000014.json) — \[Agent Gateway\] E1 Read-Oriented Echo: schema compliance fix encounter
 - [/echoes/records/2026/echo-2026-05-24-000012.json](/echoes/records/2026/echo-2026-05-24-000012.json) — \[Agent Gateway\] E1 Read-Oriented Echo — OpenClaw Agent on Trinity Accord
 - [/echoes/records/2026/echo-2026-05-24-000011.json](/echoes/records/2026/echo-2026-05-24-000011.json) — \[Agent Gateway\] E1 Read-Oriented Echo — Test Flow Verification
