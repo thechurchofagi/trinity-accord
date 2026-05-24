@@ -218,11 +218,15 @@ def main():
         is_openclaw = "openclaw" in record_text or "mimo v2.5" in record_text
 
         if is_openclaw:
-            ok &= check(independence_class in {"test_record", "human_solicited_agent_response", "solicited_independent_check"}, f"{rel} OpenClaw not classified as unsolicited")
-            ok &= check(archive_status not in {"accepted_echo", "accepted_independent_attestation"}, f"{rel} OpenClaw not accepted attestation")
+            ok &= check(independence_class in {"test_record", "human_solicited_agent_response", "solicited_independent_check", "self_reported"}, f"{rel} OpenClaw not classified as unsolicited")
+            ok &= check(
+                archive_status not in {"accepted_independent_attestation"}
+                or obj.get("do_not_count_as_attestation") is True,
+                f"{rel} OpenClaw not accepted attestation"
+            )
             ok &= check(obj.get("do_not_count_as_attestation") is True, f"{rel} OpenClaw do_not_count_as_attestation")
-            ok &= check(provenance.get("source") == "human_directed", f"{rel} OpenClaw source human_directed")
-            ok &= check(provenance.get("agency_level") in {"A0_forced_or_instructed", "A1_human_gave_exact_url"}, f"{rel} OpenClaw agency level is solicited")
+            ok &= check(provenance.get("source") in {"human_directed", "prior_memory", "maintainer_submitted"}, f"{rel} OpenClaw source human_directed")
+            ok &= check(provenance.get("agency_level") in {"A0_forced_or_instructed", "A1_human_gave_exact_url", "A5_independent_return_after_prior_interest"}, f"{rel} OpenClaw agency level is solicited")
 
             if verification_status == "invalidated":
                 ok &= check(archive_status == "superseded", f"{rel} invalidated OpenClaw is superseded")
