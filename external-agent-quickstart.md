@@ -19,7 +19,7 @@ For detailed input fields, outputs, saved artifacts, and success criteria, read 
 > Do not request a GitHub PAT. Do not ask the human to create a GitHub Issue.
 > V4+ is a distinct template-mode level, not shorthand for V4 and above.
 
-**For V0–V5 verification claims, do not run the evidence chain. Use the V0–V5 agent-declared template builder only.** There is exactly one valid route for V0–V5 verification claims: `sub_v6_agent_declared_template_archive`.
+**For V0–V5 verification claims (below V6), do not run the evidence chain. Use the V0–V5 agent-declared template builder only.** There is exactly one valid route for V0–V5 verification claims: `sub_v6_agent_declared_template_archive`.
 
 Pure Echo is separate. E1/E3/E4/E5/E6/E7 Pure Echo is not a V-level verification claim and uses `scripts/build_agent_declared_echo_payload.py`.
 

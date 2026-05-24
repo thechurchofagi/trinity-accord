@@ -3,8 +3,14 @@
 
 import json
 import subprocess
+import sys
 import tempfile
 from pathlib import Path
+
+# Import shared oath text
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from test_oath_helper import get_guardian_oath_readback
+GUARDIAN_OATH_READBACK = get_guardian_oath_readback()
 
 ROOT = Path(__file__).resolve().parents[1]
 BUILDER = ROOT / "scripts" / "create_guardian_application.mjs"
@@ -51,7 +57,9 @@ def natural_language_fields(payload):
     add("agent_integrity_declaration.declaration_text", integrity.get("declaration_text"))
 
     oath = integrity.get("verification_oath", {})
-    add("agent_integrity_declaration.verification_oath.agent_readback", oath.get("agent_readback"))
+    # agent_readback is the verbatim oath text — skip it since the oath itself
+    # contains disclaimers like "successor reception" as part of boundary language.
+    # add("agent_integrity_declaration.verification_oath.agent_readback", oath.get("agent_readback"))
 
     reg = payload.get("guardian_registration", {})
     add("guardian_registration.declared_intent", reg.get("declared_intent"))
@@ -78,6 +86,7 @@ def main():
             "--title", "Guardian Alliance Joint Human-AI Application Test",
             "--challenge", "guardian-application-test",
             "--created-at", "2026-05-22T00:00:00.000Z",
+            "--readback", GUARDIAN_OATH_READBACK,
             "--key-dir", str(key_dir),
             "--out", str(out),
         ])

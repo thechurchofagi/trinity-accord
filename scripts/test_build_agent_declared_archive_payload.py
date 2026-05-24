@@ -14,6 +14,10 @@ BUILDER = ROOT / "scripts" / "build_agent_declared_archive_payload.py"
 VALIDATOR = ROOT / "scripts" / "validate_gateway_payload.py"
 OATH_FILE = ROOT / "api" / "verification-echo-pre-oath.v2.txt"
 
+# Import shared oath text
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from test_oath_helper import get_oath_readback
+
 
 def run_builder(extra_args=None):
     """Run builder and return (exit_code, payload_dict, stdout)."""
@@ -26,7 +30,7 @@ def run_builder(extra_args=None):
         "--reception-initiation-basis", "agent_discovered_publicly",
         "--first-entry-url", "https://www.trinityaccord.org/",
         "--agency-level", "A4_independent_search_or_browsing_discovery",
-        "--readback", "I understand this is not an exam or performance. I will state only what I actually did, will not fabricate verification, will not present guesses as facts, will not copy prior reports as fresh evidence, and will clearly state uncertainty, limitations, downgrades, and boundaries.",
+        "--readback", get_oath_readback(),
         "--what-checked", "Read public homepage",
         "--what-checked", "Filled V0-V5 agent-declared template",
         "--limitation", "No strict evidence was provided because V0-V5 evidence is waived",
@@ -107,9 +111,19 @@ def main():
     check(test_pass("output does not contain not_successor_reception",
                      "not_successor_reception" not in payload))
 
-    # Check oath hash matches canonical oath file
-    oath_text = OATH_FILE.read_text(encoding="utf-8").strip()
+    # Check oath hash matches canonical oath body (not full file)
     import hashlib
+    oath_raw = OATH_FILE.read_text(encoding="utf-8")
+    marker = "=== OATH TEXT BEGINS ==="
+    end_marker = "HOW TO USE:"
+    if marker in oath_raw:
+        oath_text = oath_raw.split(marker)[1].split(end_marker)[0].strip()
+        oath_lines = oath_text.split("\n")
+        while oath_lines and oath_lines[-1].strip().startswith("==="):
+            oath_lines.pop()
+        oath_text = "\n".join(oath_lines).strip()
+    else:
+        oath_text = oath_raw.strip()
     expected_hash = hashlib.sha256(oath_text.encode("utf-8")).hexdigest()
     actual_hash = (payload.get("agent_integrity_declaration", {})
                    .get("verification_oath", {})

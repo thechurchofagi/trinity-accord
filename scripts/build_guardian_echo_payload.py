@@ -122,9 +122,9 @@ def main() -> int:
     ]
 
     if args.agent_readback:
-        cmd.extend(["--agent-readback", args.agent_readback])
+        cmd.extend(["--readback", args.agent_readback])
     if args.agent_readback_file:
-        cmd.extend(["--agent-readback-file", args.agent_readback_file])
+        cmd.extend(["--readback-file", args.agent_readback_file])
     if args.related_issue is not None:
         cmd.extend(["--related-issue", str(args.related_issue)])
     if args.idempotency_key:

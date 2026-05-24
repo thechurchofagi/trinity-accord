@@ -3,8 +3,13 @@
 
 import json
 import subprocess
+import sys
 import tempfile
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from test_oath_helper import get_guardian_oath_readback
+GUARDIAN_OATH_READBACK = get_guardian_oath_readback()
 
 ROOT = Path(__file__).resolve().parents[1]
 BUILDER = ROOT / "scripts" / "create_guardian_application.mjs"
@@ -52,6 +57,7 @@ def main():
 
     missing_human = run_expect_fail([
         "node", str(BUILDER),
+        "--readback", GUARDIAN_OATH_READBACK,
         "--agent-label", "Test Agent",
         "--challenge", "guardian-application-test",
     ])
@@ -60,6 +66,7 @@ def main():
 
     bad_mode = run_expect_fail([
         "node", str(BUILDER),
+        "--readback", GUARDIAN_OATH_READBACK,
         "--mode", "wrong_mode",
         "--human-label", "Test Human",
         "--agent-label", "Test Agent",
@@ -70,6 +77,7 @@ def main():
 
     bad_holder = run_expect_fail([
         "node", str(BUILDER),
+        "--readback", GUARDIAN_OATH_READBACK,
         "--signing-key-holder", "robot",
         "--human-label", "Test Human",
         "--agent-label", "Test Agent",
@@ -87,6 +95,7 @@ def main():
 
         incomplete = run_expect_fail([
             "node", str(BUILDER),
+            "--readback", GUARDIAN_OATH_READBACK,
             "--human-label", "Test Human",
             "--agent-label", "Test Agent",
             "--challenge", "guardian-application-test",

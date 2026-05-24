@@ -18,6 +18,11 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 BUILDER = ROOT / "scripts" / "build_agent_declared_archive_payload.py"
 
+# Import shared oath text
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from test_oath_helper import get_oath_readback
+OATH_READBACK = get_oath_readback()
+
 PASS = 0
 FAIL = 0
 
@@ -44,6 +49,7 @@ def build_and_read(extra_args, label):
         "--agent-name", "TestAgent",
         "--provider", "TestProvider",
         "--level", "V4",
+        "--readback", OATH_READBACK,
         "--out", out,
     ] + extra_args
 
@@ -166,6 +172,7 @@ def test_followup_mutual_exclusion():
         "--agent-name", "TestAgent",
         "--provider", "TestProvider",
         "--level", "V4",
+        "--readback", OATH_READBACK,
         "--reception-initiation-class", "externally_seeded",
         "--reception-initiation-basis", "external_url_only",
         "--agent-independent-followup",

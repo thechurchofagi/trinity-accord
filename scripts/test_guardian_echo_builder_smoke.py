@@ -17,6 +17,11 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
+# Import shared oath text
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from test_oath_helper import get_oath_readback
+OATH_READBACK = get_oath_readback()
+
 
 def generate_test_keypair(tmp: Path) -> tuple[Path, Path]:
     """Generate a temporary Ed25519 keypair using openssl."""
@@ -97,6 +102,7 @@ def main() -> None:
             "--echo-type", "E1_read_oriented_echo",
             "--title", "E1 Read-Oriented Echo — Guardian 00099",
             "--body-file", str(body),
+            "--agent-readback", OATH_READBACK,
             "--registry-path", str(registry),
             "--out", str(out),
         ],

@@ -3,11 +3,17 @@
 
 import json
 import subprocess
+import sys
 import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 BUILDER = ROOT / "scripts" / "create_guardian_application.mjs"
+
+# Import shared oath text
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from test_oath_helper import get_guardian_oath_readback
+GUARDIAN_OATH_READBACK = get_guardian_oath_readback()
 DIGEST = ROOT / "scripts" / "proof_payload_digest.mjs"
 
 REQUIRED_AGENT_DECLARED_ECHO_ARCHIVE_FIELDS = [
@@ -58,6 +64,7 @@ def main():
             "--title", "Guardian Alliance Joint Human-AI Application Test",
             "--challenge", "guardian-application-test",
             "--created-at", "2026-05-22T00:00:00.000Z",
+            "--readback", GUARDIAN_OATH_READBACK,
             "--key-dir", str(key_dir),
             "--out", str(out),
         ])

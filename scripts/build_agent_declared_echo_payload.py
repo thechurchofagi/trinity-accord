@@ -284,7 +284,7 @@ def main():
     parser.add_argument("--title", required=True, help="Echo title")
     parser.add_argument("--body-file", required=True, help="Path to body markdown file")
     parser.add_argument(
-        "--readback", required=True,
+        "--readback", required=False, default=None,
         help=(
             "Exact canonical verification oath text (character-by-character). "
             "Use --print-oath first to read the oath, then type it back exactly. "
@@ -349,7 +349,16 @@ def main():
         print(f"ERROR: {e}", file=sys.stderr)
         sys.exit(2)
 
-    # Validate --readback matches canonical oath text exactly
+    # Validate --readback is provided (allow env var for CI/testing)
+    if not args.readback:
+        import os
+        env_readback = os.environ.get("TRINITY_TEST_READBACK")
+        if env_readback:
+            args.readback = env_readback
+    if not args.readback:
+        print("ERROR: --readback is required.", file=sys.stderr)
+        print("Use --print-oath to read the oath, then pass it via --readback.", file=sys.stderr)
+        sys.exit(1)
     validate_readback_matches_oath(args.readback)
 
     # Validate body file exists

@@ -300,8 +300,9 @@ if (!challenge) {
   );
 }
 
-// Validate --readback is provided
-if (!readback) {
+// Validate --readback is provided (allow env var for CI/testing)
+const effectiveReadback = readback || process.env.TRINITY_TEST_READBACK;
+if (!effectiveReadback) {
   fail(
     "E_MISSING_READBACK",
     "Missing required --readback.",
@@ -323,7 +324,7 @@ if (!readback) {
 }
 
 // Validate readback matches canonical oath text exactly (character by character)
-const readbackNormalized = readback.trim();
+const readbackNormalized = effectiveReadback.trim();
 const oathNormalized = GUARDIAN_APPLICATION_OATH_TEXT.trim();
 if (readbackNormalized !== oathNormalized) {
   const details = {};

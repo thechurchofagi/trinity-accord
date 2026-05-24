@@ -40,8 +40,10 @@ def test_negated_keywords_pass_validation():
         "agent_integrity_declaration": {
             "performed_actions_myself": True,
             "verification_oath": {
+                "schema": "trinityaccord.verification-oath.v2",
                 "oath_read": True, "oath_version": "v1", "oath_text_sha256": "a" * 64,
                 "readback_required": True, "agent_readback": "x" * 160,
+                "agent_readback_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
                 "understands_not_an_exam_or_performance": True, "will_state_actual_capability_only": True,
                 "will_not_lie_or_cheat": True, "will_not_fabricate_verification": True,
                 "will_not_present_guesses_as_facts": True, "will_not_copy_prior_reports_as_fresh_evidence": True,

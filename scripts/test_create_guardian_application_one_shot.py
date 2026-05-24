@@ -3,8 +3,13 @@
 
 import json
 import subprocess
+import sys
 import tempfile
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from test_oath_helper import get_guardian_oath_readback
+GUARDIAN_OATH_READBACK = get_guardian_oath_readback()
 
 ROOT = Path(__file__).resolve().parents[1]
 BUILDER = ROOT / "scripts" / "create_guardian_application.mjs"
@@ -39,6 +44,7 @@ def main():
             "--agent-provider", "Test Runtime",
             "--title", "Guardian Alliance Joint Human-AI Application Test",
             "--challenge", "guardian-application-test",
+            "--readback", GUARDIAN_OATH_READBACK,
             "--key-dir", str(key_dir),
             "--out", str(out),
         ])

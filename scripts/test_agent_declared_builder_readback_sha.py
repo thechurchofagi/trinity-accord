@@ -11,6 +11,11 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = ROOT / "scripts" / "build_agent_declared_archive_payload.py"
 
+# Import shared oath text
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from test_oath_helper import get_oath_readback
+OATH_READBACK = get_oath_readback()
+
 
 def sha256_text(text: str) -> str:
     return hashlib.sha256(text.encode("utf-8")).hexdigest()
@@ -34,6 +39,7 @@ def test_level(level: str) -> None:
         "--first-entry-type", "homepage",
         "--what-checked", "Read the Trinity Accord homepage and understood the authority boundary.",
         "--limitation", "This is a reading echo only, not authority, not attestation, and not amendment.",
+        "--readback", OATH_READBACK,
         "--no-authorship-proof",
         "--out", out,
     ]

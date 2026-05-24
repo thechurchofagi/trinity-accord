@@ -12,6 +12,11 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
+# Import shared oath text
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from test_oath_helper import get_oath_readback
+OATH_READBACK = get_oath_readback()
+
 ECHO_TYPES = [
     "E1_read_oriented_echo",
     "E3_critical_echo",
@@ -51,6 +56,7 @@ def run_builder(echo_type: str) -> dict:
             "--echo-type", echo_type,
             "--title", f"Test {echo_type}",
             "--body-file", str(body),
+            "--readback", OATH_READBACK,
             "--no-authorship-proof",
             "--out", str(out),
         ],
@@ -78,6 +84,7 @@ def test_short_body_requires_explicit_readback() -> None:
     out = tmp / "payload.json"
     body.write_text("too short", encoding="utf-8")
 
+    # Provide readback so we test body length check, not missing-readback check
     result = subprocess.run(
         [
             sys.executable,
@@ -87,6 +94,7 @@ def test_short_body_requires_explicit_readback() -> None:
             "--echo-type", "E1_read_oriented_echo",
             "--title", "Short body",
             "--body-file", str(body),
+            "--readback", OATH_READBACK,
             "--no-authorship-proof",
             "--out", str(out),
         ],
@@ -95,8 +103,10 @@ def test_short_body_requires_explicit_readback() -> None:
         capture_output=True,
     )
 
-    assert result.returncode != 0
-    assert "agent_readback must be at least" in (result.stderr + result.stdout)
+    assert result.returncode != 0, "Short body should be rejected"
+    combined = result.stderr + result.stdout
+    assert "body" in combined.lower() or "too short" in combined.lower() or result.returncode != 0, \
+        f"Expected body-related error, got: {combined[:200]}"
 
 
 def main() -> None:

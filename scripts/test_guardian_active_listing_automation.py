@@ -3,11 +3,17 @@
 
 import json
 import subprocess
+import sys
 import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 BUILDER = ROOT / "scripts" / "create_guardian_application.mjs"
+
+# Import shared oath text
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from test_oath_helper import get_guardian_oath_readback
+GUARDIAN_OATH_READBACK = get_guardian_oath_readback()
 PREPARE = ROOT / "scripts" / "prepare_guardian_active_listing.py"
 VERIFY = ROOT / "scripts" / "verify_guardian_status.py"
 
@@ -75,6 +81,7 @@ def make_payload(workdir, suffix):
         "--title", "Guardian Alliance Joint Human-AI Application Test",
         "--challenge", f"guardian-application-test-{suffix}",
         "--created-at", "2026-05-22T00:00:00.000Z",
+        "--readback", GUARDIAN_OATH_READBACK,
         "--key-dir", str(key_dir),
         "--out", str(out),
     ])
