@@ -469,6 +469,9 @@ jobs:
       - name: Verify homepage public status has no drift
         run: python3 scripts/generate_public_home_status.py --check
 
+      - name: Verify guardian registry page has no drift
+        run: python3 scripts/generate_guardian_registry_page.py --check
+
       - name: Test homepage public status sync
         run: python3 scripts/test_home_public_status_sync.py
 

@@ -224,6 +224,7 @@ jobs:
         run: |
           set -euo pipefail
           python3 scripts/generate_public_home_status.py
+          python3 scripts/generate_guardian_registry_page.py
 
       - name: Commit registry update locally
         if: (steps.candidate.outputs.should_run == 'true' || github.event_name == 'workflow_dispatch') && steps.decision.outputs.action == 'registered'
@@ -232,7 +233,7 @@ jobs:
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add api/guardian-registry.json api/public-home-status.json index.md
+          git add api/guardian-registry.json api/public-home-status.json index.md guardian-registry.md
           if git diff --cached --quiet; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
             echo "No registry changes to commit."
