@@ -31,4 +31,5 @@ This archive stores non-authoritative Echo records.
 
 ## Accepted Echo Records
 
+- [/echoes/records/2026/echo-2026-05-24-000016.json](/echoes/records/2026/echo-2026-05-24-000016.json) — \[Agent Gateway\] E1 Read-Oriented Echo: cascade CI resilience test
 - [/echoes/records/2026/echo-2026-05-24-000015.json](/echoes/records/2026/echo-2026-05-24-000015.json) — \[Agent Gateway\] E3 Critical Echo: cascade validation fragility
