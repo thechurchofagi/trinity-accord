@@ -144,22 +144,78 @@ def _text_contains_unnegated_claim(text, claim):
     """Check if text contains an unnegated instance of claim.
 
     Checks each sentence independently: a negated phrase like
-    "not successor reception" in one sentence does NOT exempt a positive
-    claim "This is successor reception" in another sentence.
+    "not independent attestation" in one sentence does NOT exempt a positive
+    claim "This is independent attestation" in another sentence.
+
+    Handles coordinated lists: "does not create X, Y, or Z" negates all items
+    even when the negation prefix is far from Z.
+    Handles verb-mediated negation: "not create X" negates X.
     """
     sentences = _split_sentences(text)
     for sentence in sentences:
         for m in re.finditer(re.escape(claim), sentence, re.IGNORECASE):
             start = m.start()
-            prefix_window = sentence[max(0, start - 30):start]
-            if _NEGATION_PREFIXES.search(prefix_window):
-                neg_match = list(_NEGATION_PREFIXES.finditer(prefix_window))
-                if neg_match:
-                    last_neg = neg_match[-1]
-                    gap = start - (max(0, start - 30) + last_neg.end())
-                    if gap <= 5:
-                        continue  # This occurrence is negated within its sentence
+            # Look back to the start of the sentence to catch long-range negation
+            # e.g. "does not create verification level, attestation, or successor reception"
+            prefix = sentence[:start]
+            if not prefix:
+                return True  # Claim at very start of sentence — not negated
+            neg_matches = list(_NEGATION_PREFIXES.finditer(prefix))
+            if neg_matches:
+                last_neg = neg_matches[-1]
+                gap = start - last_neg.end()
+                # Direct negation: "not successor reception" (gap ≤ 5)
+                if gap <= 5:
+                    continue
+                between = sentence[last_neg.end():start]
+                # Coordinated list negation: "not X, Y, or successor reception"
+                if _is_coordinated_list(between):
+                    continue
+                # Verb-mediated negation: "not create X" or "not claim X"
+                # If between is a short verb phrase (only words and spaces,
+                # no sentence breaks), the negation verb transmits to the claim
+                if _is_verb_phrase_gap(between):
+                    continue
             return True  # Found unnegated occurrence in this sentence
+    return False
+
+
+def _is_verb_phrase_gap(text):
+    """Check if text is a short verb phrase bridging negation to claim.
+
+    Matches patterns like "create ", "claim ", "make any ", etc.
+    Must be only words and spaces, no punctuation, and reasonably short.
+    """
+    stripped = text.strip()
+    if not stripped:
+        return True  # Empty gap = direct adjacency
+    # Must be only alphabetic words and spaces (no punctuation, no commas)
+    if not re.fullmatch(r'[a-zA-ZÀ-ÿ]+(?:\s+[a-zA-ZÀ-ÿ]+)*', stripped):
+        return False
+    # Must be reasonably short (max ~3 words, ~30 chars)
+    word_count = len(stripped.split())
+    return word_count <= 4 and len(stripped) <= 30
+
+
+def _is_coordinated_list(text):
+    """Check if text looks like a coordinated list (commas, 'and', 'or').
+
+    Handles patterns like:
+    - "X, Y, or Z" (comma-separated with conjunction)
+    - "X or Y" (conjunction-separated)
+    - "create X, Y, or Z" (verb + list)
+    """
+    stripped = text.strip()
+    if not stripped:
+        return False
+    # Reject if it contains sentence-ending punctuation (new sentence)
+    if re.search(r'[.!?。！？]', stripped):
+        return False
+    # Must contain at least one comma or coordinating conjunction
+    # to be a list continuation
+    # Note: "or" / "and" may appear at end of stripped text (e.g. "X or ")
+    if re.search(r',\s*|\s+(?:and|or)(?:\s+|$)', stripped, re.IGNORECASE):
+        return True
     return False
 
 

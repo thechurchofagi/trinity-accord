@@ -2386,13 +2386,17 @@ async function runGatewayPipeline(payload, {
       }
     }
 
-    // Remove stale labels
+    // Remove stale labels (skip gracefully if label doesn't exist on issue)
     for (const label of labelsToRemove) {
       try {
         await octokit.request("DELETE /repos/{owner}/{repo}/issues/{issue_number}/labels/{name}", {
           owner, repo, issue_number: issueNumber, name: label
         });
       } catch (labelErr) {
+        // 404 = label not on this issue (already removed or never applied) — not an error
+        if (labelErr.status === 404) {
+          continue;
+        }
         productionWarnings.push({
           code: "LABEL_REMOVE_FAILED",
           stage: "github_label_remove",
