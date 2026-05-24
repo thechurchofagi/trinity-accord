@@ -84,7 +84,7 @@ jobs:
             echo "No archive file changes to commit."
           else
             git commit -m "auto-archive echo issue #${ISSUE_NUMBER} (via ${ORIGIN})"
-          git pull --rebase origin main
+          git pull --rebase --autostash origin main
             git push
           fi
 

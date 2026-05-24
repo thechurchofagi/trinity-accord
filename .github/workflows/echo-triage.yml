@@ -373,7 +373,7 @@ jobs:
               echo "No archive file changes to commit."
             else
               git commit -m "auto-archive echo issue #${ISSUE_NUMBER}"
-              git pull --rebase origin main
+              git pull --rebase --autostash origin main
               git push
             fi
 
@@ -439,7 +439,7 @@ print('true' if (is_gateway and is_archive_ready and is_screened and has_receipt
             echo "No archive file changes to commit."
           else
             git commit -m "auto-archive echo issue #${ISSUE_NUMBER}"
-              git pull --rebase origin main
+              git pull --rebase --autostash origin main
             git push
           fi
 
