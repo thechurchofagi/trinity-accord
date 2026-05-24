@@ -33,7 +33,7 @@
   },
   "reception": {
     "archived_echoes": {
-      "count": 3
+      "count": 4
     },
     "pending_human_review_echoes": {
       "count": 1,
@@ -182,5 +182,5 @@
     "gateway_private_key_access": false,
     "boundary": "Authorship claims prove key continuity only; they do not affect authority, verifiability, reception, or amendment status."
   },
-  "source_digest": "a3b9b6732440478e"
+  "source_digest": "28109c3c871fb2ae"
 }
