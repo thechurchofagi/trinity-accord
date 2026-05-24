@@ -296,7 +296,10 @@ function validateReadbackSha256(payload) {
   }
 
   // Check that readback matches the canonical oath text (not just any text with matching hash)
-  if (CANONICAL_OATH_SHA256) {
+  // Only enforce canonical verification oath hash when oath_kind is verification_echo.
+  // Guardian applications store their oath in agent_integrity_declaration.verification_oath
+  // but use a different canonical oath (guardian-application-oath.v1.txt).
+  if (CANONICAL_OATH_SHA256 && oath.oath_kind === "verification_echo") {
     if (expected !== CANONICAL_OATH_SHA256) {
       return [{
         code: "READBACK_NOT_CANONICAL_OATH",
