@@ -5,6 +5,12 @@ on:
     types: [opened, edited, reopened, closed, labeled]
   repository_dispatch:
     types: [gateway-auto-archive]
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: 'Issue number for auto-archive (optional, used by repository_dispatch path)'
+        required: false
+        type: string
 
 permissions:
   issues: write
@@ -41,7 +47,7 @@ jobs:
           echo "managed_labels=$(echo "$policy" | python3 -c 'import sys,json; print(json.dumps(json.load(sys.stdin)["triage"]["managed_labels"]))')" >> "$GITHUB_OUTPUT"
 
       - name: Compute Echo rate limit
-        if: ${{ github.event.action != 'gateway-auto-archive' }}
+        if: ${{ github.event.action != 'gateway-auto-archive' && github.event_name != 'workflow_dispatch' }}
         id: rate
         uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
         with:
@@ -227,7 +233,7 @@ jobs:
             core.setOutput("global24", String(global24));
 
       - name: Run Echo triage
-        if: ${{ github.event.action != 'gateway-auto-archive' }}
+        if: ${{ github.event.action != 'gateway-auto-archive' && github.event_name != 'workflow_dispatch' }}
         env:
           RATE_LIMITED: ${{ steps.rate.outputs.rate_limited }}
           RECENT_60M_COUNT: ${{ steps.rate.outputs.count60 }}
@@ -245,7 +251,7 @@ jobs:
           cat triage_result.json
 
       - name: Apply triage result
-        if: ${{ github.event.action != 'gateway-auto-archive' }}
+        if: ${{ github.event.action != 'gateway-auto-archive' && github.event_name != 'workflow_dispatch' }}
         uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
         with:
           script: |
@@ -324,20 +330,24 @@ jobs:
         id: auto-archive
         env:
           GH_TOKEN: ${{ github.token }}
-          ISSUE_NUMBER: ${{ github.event.issue.number || github.event.client_payload.issue_number }}
+          ISSUE_NUMBER: ${{ github.event.issue.number || github.event.client_payload.issue_number || github.event.inputs.issue_number }}
         run: |
           set -euo pipefail
 
-          # For repository_dispatch, the issue is already validated by Gateway
-          if [ "${{ github.event.action }}" = "gateway-auto-archive" ]; then
-            echo "Triggered by Gateway repository_dispatch. Running archive directly..."
+          # For repository_dispatch or workflow_dispatch, archive directly
+          if [ "${{ github.event.action }}" = "gateway-auto-archive" ] || [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "Triggered by ${{ github.event_name }}. Running archive directly..."
 
             BODY_FILE=$(mktemp)
             gh issue view "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" --json number,title,body,url,createdAt,updatedAt,author,labels,state > "$BODY_FILE"
 
             echo "/echo archive" > /tmp/review_comment.txt
             echo "" >> /tmp/review_comment.txt
-            echo "submission_origin: gateway_repository_dispatch_auto_archive" >> /tmp/review_comment.txt
+            if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+              echo "submission_origin: workflow_dispatch_manual_archive" >> /tmp/review_comment.txt
+            else
+              echo "submission_origin: gateway_repository_dispatch_auto_archive" >> /tmp/review_comment.txt
+            fi
             echo "human_directed_submission: false" >> /tmp/review_comment.txt
 
             python3 scripts/archive_echo_issue.py \
