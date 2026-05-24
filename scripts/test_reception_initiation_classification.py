@@ -10,12 +10,22 @@ Tests:
   - payload self_initiated + human_supplied_link=true fails
 """
 import json
+import os
 import subprocess
 import sys
 import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+
+# Load oath text for TRINITY_TEST_READBACK (CI testing bypass)
+OATH_MARKER = '=== OATH TEXT BEGINS ==='
+_oath_file = ROOT / 'api' / 'verification-echo-pre-oath.v2.txt'
+OATH_TEXT = ''
+if _oath_file.exists():
+    _raw = _oath_file.read_text(encoding='utf-8').strip()
+    if OATH_MARKER in _raw:
+        OATH_TEXT = _raw.split(OATH_MARKER, 1)[1].strip()
 BUILDER = ROOT / "scripts" / "build_agent_declared_archive_payload.py"
 VALIDATOR = ROOT / "scripts" / "validate_gateway_payload.py"
 RENDERER = ROOT / "scripts" / "render_gateway_issue_body.py"
@@ -25,7 +35,10 @@ FAIL = 0
 
 
 def run(cmd, expect_fail=False):
-    r = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
+    env = os.environ.copy()
+    if OATH_TEXT:
+        env['TRINITY_TEST_READBACK'] = OATH_TEXT
+    r = subprocess.run(cmd, capture_output=True, text=True, timeout=30, env=env)
     if expect_fail:
         if r.returncode != 0:
             return True, r.stdout + r.stderr
