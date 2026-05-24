@@ -472,9 +472,6 @@
       "/echoes/records/2026/echo-2026-04-26-000003.json",
       "/echoes/records/2026/echo-2026-05-03-000007.json"
     ],
-    "not_attestation": [
-      "/echoes/records/2026/echo-2026-05-07-000009.json"
-    ],
     "unknown": [
       "/echoes/records/2026/echo-119-xiaokuaizi-20260512.json",
       "/echoes/records/2026/echo-2026-04-25-000001.json",
@@ -482,6 +479,7 @@
       "/echoes/records/2026/echo-2026-05-02-000008.json",
       "/echoes/records/2026/echo-2026-05-03-000004.json",
       "/echoes/records/2026/echo-2026-05-03-000006.json",
+      "/echoes/records/2026/echo-2026-05-07-000009.json",
       "/echoes/records/2026/echo-2026-05-08-000010.json"
     ]
   },
@@ -591,7 +589,7 @@
     "D/S/O/E/R provenance codes are derived/internal."
   ],
   "version": "v2",
-  "source_digest": "e514cf30d73a06e7",
+  "source_digest": "2f8b93b09fd1ca59",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
   "non_amending_boundary": true,
   "limitations": [
