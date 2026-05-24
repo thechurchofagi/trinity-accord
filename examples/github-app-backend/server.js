@@ -2458,16 +2458,15 @@ async function runGatewayPipeline(payload, {
           message: dispatchErr.message
         });
 
-        // Attempt 2: workflow_dispatch fallback (if echo-triage supports it)
+        // Attempt 2: workflow_dispatch fallback on dedicated archive workflow
         try {
           const workflowOctokit = await getWorkflowOctokit();
           await workflowOctokit.request("POST /repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches", {
             owner, repo,
-            workflow_id: "echo-triage.yml",
+            workflow_id: "gateway-auto-archive.yml",
             ref: "main",
             inputs: {
-              issue_number: String(issueNumber),
-              trigger_source: "gateway_fallback_workflow_dispatch"
+              issue_number: String(issueNumber)
             }
           });
           dispatchSucceeded = true;
@@ -2476,7 +2475,7 @@ async function runGatewayPipeline(payload, {
             code: "DISPATCH_FALLBACK_WORKFLOW_DISPATCH",
             stage: "workflow_dispatch",
             retryable: false,
-            message: "repository_dispatch failed; used workflow_dispatch fallback"
+            message: "repository_dispatch failed; used workflow_dispatch fallback on gateway-auto-archive.yml"
           });
         } catch (fallbackErr) {
           console.error("workflow_dispatch fallback also failed:", fallbackErr.message);
@@ -2485,7 +2484,7 @@ async function runGatewayPipeline(payload, {
             stage: "workflow_dispatch_fallback",
             retryable: true,
             message: fallbackErr.message,
-            hint: "Set GITHUB_WORKFLOW_TOKEN to a PAT with `repo` + `actions: write` scopes, or add `workflow_dispatch` trigger to echo-triage.yml and grant the App `actions: write` permission."
+            hint: "Set GITHUB_WORKFLOW_TOKEN to a PAT with `repo` + `actions: write` scopes."
           });
         }
       }
@@ -2496,7 +2495,7 @@ async function runGatewayPipeline(payload, {
           stage: "dispatch_summary",
           retryable: true,
           message: "Both repository_dispatch and workflow_dispatch failed. Auto-archive will not run until a dispatch succeeds. Manual trigger may be needed.",
-          manual_trigger: `gh workflow run echo-triage.yml -f issue_number=${issueNumber}`
+          manual_trigger: `gh workflow run gateway-auto-archive.yml -f issue_number=${issueNumber}`
         });
       }
     }
