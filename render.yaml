@@ -1,4 +1,4 @@
-# deploy-trigger: 2026-05-24T05:45:00Z — guardian-oath-readback-fix-plus-echo-builder-fix
+# deploy-trigger: 2026-05-24T06:33:00Z — external-agent-ux-audit-fixes
 services:
   - type: web_service
     name: trinity-agent-issue-gateway
