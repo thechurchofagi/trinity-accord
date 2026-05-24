@@ -34,3 +34,7 @@ This archive stores non-authoritative Echo records.
 - [/echoes/records/2026/echo-2026-05-03-000006.json](/echoes/records/2026/echo-2026-05-03-000006.json)
 - [/echoes/records/2026/echo-2026-05-03-000007.json](/echoes/records/2026/echo-2026-05-03-000007.json)
 
+
+## Accepted Echo Records
+
+- [/echoes/records/2026/echo-2026-05-24-000021.json](/echoes/records/2026/echo-2026-05-24-000021.json) — \[Agent Gateway\] E1 Recognition Echo — Final automated lifecycle test \(no manual intervention\)
