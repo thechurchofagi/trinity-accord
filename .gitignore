@@ -6,3 +6,23 @@ agent-authorship-key.private.pem
 .trinity-agent-authorship/
 __pycache__/
 guardian-output/
+
+# Node.js
+node_modules/
+package-lock.json
+
+# Python
+*.pyc
+*.pyo
+.env
+.venv/
+
+# Editor / OS
+*.bak
+*.tmp
+*.swp
+*~
+.DS_Store
+
+# Build
+_site/

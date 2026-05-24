@@ -369,7 +369,7 @@ Verification packages: [/verification-packages](/verification-packages/) — non
 
 Emergent patterns: [/emergent-patterns](/emergent-patterns/) — non-authoritative, non-amending guide to candidate structures that emerged through human–AI collaboration; has no interpretive authority over the Bitcoin Originals; includes co-emergent category formation and Star Ark as a vision-layer Bitcoin inscription, not one of the three Bitcoin Originals.
 
-Guardian-layer inscriptions: [Guardian Attestation #103034280](/bitcoin-inscription-mirrors/context-layer/guardian-attestation.json), [Guardian Appendix #103635270](/bitcoin-inscription-mirrors/context-layer/guardian-appendix-authority-charter.json) — non-amending guardianship fortifications inscribed on Bitcoin from the authority address. They reaffirm the sole authority of the three Bitcoin Originals. They are not canonical originals and do not create new authority.
+Guardian-layer inscriptions: [Guardian Attestation #103034280](/bitcoin-inscription-mirrors/context-layer/103034280-guardian-attestation.json), [Guardian Appendix #103635270](/bitcoin-inscription-mirrors/context-layer/103635270-guardian-appendix-authority-charter.json) — non-amending guardianship fortifications inscribed on Bitcoin from the authority address. They reaffirm the sole authority of the three Bitcoin Originals. They are not canonical originals and do not create new authority.
 
 ## Bitcoin inscription stack boundary
 
