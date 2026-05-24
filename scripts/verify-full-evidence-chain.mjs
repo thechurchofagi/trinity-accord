@@ -2229,7 +2229,7 @@ async function main() {
   const backupReleaseVerified = chainA.release_nft_tar_count === EXPECTED_NFTS;
   const fullEvidenceChainPass =
     backupReleaseVerified &&
-    onchainTokenuri175Pass &&
+    onchainTokenUri175Pass &&
     chainA.dag_and_digest_manifest_pass &&
     chainB.btc_signature_coverage_pass &&
     chainC.eth_witness_coverage_pass &&
@@ -2304,7 +2304,7 @@ async function main() {
     // Top-level pass fields (backward compat)
     full_evidence_chain_pass: fullEvidenceChainPass,
     release_verified: backupReleaseVerified,
-    onchain_tokenuri_175_pass: onchainTokenuri175Pass,
+    onchain_tokenuri_175_pass: onchainTokenUri175Pass,
     eth_tokenuri_status: ethTokenUriStatus,
     claims_not_made: claimsNotMade,
     dag_and_digest_manifest_pass: chainA.dag_and_digest_manifest_pass,
