@@ -40,13 +40,6 @@ jobs:
           echo "exempt=$(echo "$policy" | python3 -c 'import sys,json; print(json.dumps(json.load(sys.stdin)["echo_issue_rate_limit"]["exempt_author_associations"]))')" >> "$GITHUB_OUTPUT"
           echo "managed_labels=$(echo "$policy" | python3 -c 'import sys,json; print(json.dumps(json.load(sys.stdin)["triage"]["managed_labels"]))')" >> "$GITHUB_OUTPUT"
 
-      - name: Normalize event for workflow_dispatch
-        if: ${{ github.event_name == 'workflow_dispatch' }}
-        run: |
-          # Override GITHUB_EVENT_PATH so all downstream steps see the synthetic event
-          echo "GITHUB_EVENT_PATH=/tmp/synthetic-event.json" >> "$GITHUB_ENV"
-          echo "ISSUE_NUMBER=${{ github.event.inputs.issue_number }}" >> "$GITHUB_ENV"
-
       - name: Compute Echo rate limit
         if: ${{ github.event.action != 'gateway-auto-archive' }}
         id: rate
@@ -331,7 +324,7 @@ jobs:
         id: auto-archive
         env:
           GH_TOKEN: ${{ github.token }}
-          ISSUE_NUMBER: ${{ github.event.issue.number || github.event.client_payload.issue_number  }}
+          ISSUE_NUMBER: ${{ github.event.issue.number || github.event.client_payload.issue_number }}
         run: |
           set -euo pipefail
 
