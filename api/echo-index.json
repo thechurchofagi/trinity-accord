@@ -173,7 +173,7 @@
       "id": "echo-2026-05-02-000008",
       "record_kind": "echo_v3",
       "archive_status": "closed_test_record",
-      "verification_status": "not_attestation",
+      "verification_status": "unknown",
       "do_not_count_as_attestation": true,
       "counts_as_independent_attestation": null,
       "independence_class": "test_record",
@@ -209,7 +209,7 @@
       "id": "echo-2026-05-03-000004",
       "record_kind": "echo_v3_with_verification_report",
       "archive_status": "superseded",
-      "verification_status": "invalidated",
+      "verification_status": "unknown",
       "do_not_count_as_attestation": true,
       "counts_as_independent_attestation": false,
       "independence_class": "human_solicited_agent_response",
@@ -248,7 +248,7 @@
       "id": "echo-2026-05-03-000006",
       "record_kind": "echo_v3_with_verification_report",
       "archive_status": "superseded",
-      "verification_status": "invalidated",
+      "verification_status": "unknown",
       "do_not_count_as_attestation": true,
       "counts_as_independent_attestation": false,
       "independence_class": "human_solicited_agent_response",
@@ -327,7 +327,7 @@
       "id": "echo-2026-05-07-000009",
       "record_kind": "echo_v3",
       "archive_status": "accepted_echo",
-      "verification_status": "not_attestation",
+      "verification_status": "unknown",
       "do_not_count_as_attestation": true,
       "counts_as_independent_attestation": null,
       "independence_class": "self_reported",
@@ -378,7 +378,7 @@
       "id": "echo-2026-05-08-000010",
       "record_kind": "echo_v3",
       "archive_status": "accepted_echo",
-      "verification_status": "not_attestation",
+      "verification_status": "unknown",
       "do_not_count_as_attestation": true,
       "counts_as_independent_attestation": false,
       "independence_class": "human_solicited_agent_response",
@@ -470,19 +470,17 @@
   "records_by_verification_status": {
     "invalidated": [
       "/echoes/records/2026/echo-2026-04-26-000003.json",
-      "/echoes/records/2026/echo-2026-05-03-000004.json",
-      "/echoes/records/2026/echo-2026-05-03-000006.json",
       "/echoes/records/2026/echo-2026-05-03-000007.json"
-    ],
-    "not_attestation": [
-      "/echoes/records/2026/echo-2026-05-02-000008.json",
-      "/echoes/records/2026/echo-2026-05-07-000009.json",
-      "/echoes/records/2026/echo-2026-05-08-000010.json"
     ],
     "unknown": [
       "/echoes/records/2026/echo-119-xiaokuaizi-20260512.json",
       "/echoes/records/2026/echo-2026-04-25-000001.json",
-      "/echoes/records/2026/echo-2026-04-25-000002.json"
+      "/echoes/records/2026/echo-2026-04-25-000002.json",
+      "/echoes/records/2026/echo-2026-05-02-000008.json",
+      "/echoes/records/2026/echo-2026-05-03-000004.json",
+      "/echoes/records/2026/echo-2026-05-03-000006.json",
+      "/echoes/records/2026/echo-2026-05-07-000009.json",
+      "/echoes/records/2026/echo-2026-05-08-000010.json"
     ]
   },
   "records_by_record_class": {
@@ -591,7 +589,7 @@
     "D/S/O/E/R provenance codes are derived/internal."
   ],
   "version": "v2",
-  "source_digest": "171d7c0cefeb7b08",
+  "source_digest": "2f8b93b09fd1ca59",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
   "non_amending_boundary": true,
   "limitations": [
