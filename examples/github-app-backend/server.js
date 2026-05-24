@@ -128,6 +128,18 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const root = path.resolve(__dirname, "../..");
 
+// --- Canonical oath text hash for validation ---
+const OATH_FILE_PATH = path.resolve(root, "api/verification-echo-pre-oath.v2.txt");
+let CANONICAL_OATH_SHA256 = null;
+try {
+  const oathText = fs.readFileSync(OATH_FILE_PATH, "utf-8").trim();
+  CANONICAL_OATH_SHA256 = sha256Text(oathText);
+  console.log(`[oath] Canonical oath loaded. SHA-256: ${CANONICAL_OATH_SHA256.slice(0, 16)}...`);
+} catch (e) {
+  console.warn(`[oath] WARNING: Could not load canonical oath from ${OATH_FILE_PATH}: ${e.message}`);
+  console.warn("[oath] oath_text_sha256 canonical validation will be skipped.");
+}
+
 const PORT = Number(process.env.PORT || 8787);
 const DRY_RUN = String(process.env.DRY_RUN || "true").toLowerCase() === "true";
 const CANARY_MODE = String(process.env.GATEWAY_CANARY_MODE || "false").toLowerCase() === "true";
@@ -261,6 +273,37 @@ function validateReadbackSha256(payload) {
         ? "This payload is signed. Re-run the correct builder or repair before signing."
         : "Replace agent_readback_sha256 with expected_sha256."
     }];
+  }
+
+  // Check that readback matches the canonical oath text (not just any text with matching hash)
+  if (CANONICAL_OATH_SHA256) {
+    if (expected !== CANONICAL_OATH_SHA256) {
+      return [{
+        code: "READBACK_NOT_CANONICAL_OATH",
+        path: "agent_integrity_declaration.verification_oath.agent_readback",
+        field: "agent_readback",
+        message: "agent_readback does not match the canonical verification oath text. The readback must be the exact oath text, character by character.",
+        expected_sha256: CANONICAL_OATH_SHA256,
+        actual_sha256: expected,
+        requires_resign: signed,
+        fix: "Read the canonical oath (--print-oath) and type it back exactly. Do not substitute your own text."
+      }];
+    }
+
+    // Also check oath_text_sha256 matches canonical
+    const oathTextSha = oath.oath_text_sha256;
+    if (oathTextSha && oathTextSha !== CANONICAL_OATH_SHA256) {
+      return [{
+        code: "OATH_TEXT_SHA256_MISMATCH",
+        path: "agent_integrity_declaration.verification_oath.oath_text_sha256",
+        field: "oath_text_sha256",
+        message: "oath_text_sha256 does not match the canonical oath hash. The oath text may have been tampered with.",
+        expected_sha256: CANONICAL_OATH_SHA256,
+        actual_sha256: oathTextSha,
+        requires_resign: signed,
+        fix: "Use the canonical oath text. Do not modify the oath."
+      }];
+    }
   }
 
   return [];
@@ -1532,8 +1575,8 @@ async function runGatewayPipeline(payload, {
     { pattern: /REPLACE_WITH_SHA256/i, field: "oath_text_sha256", message: "oath_text_sha256 must be the SHA-256 of the canonical oath text, not a placeholder." },
     { pattern: /YOUR_AGENT_NAME/i, field: "name_or_model", message: "agent_identity.name_or_model must be your actual agent name or model." },
     { pattern: /YOUR_SYSTEM/i, field: "system_or_provider", message: "agent_identity.system_or_provider must be your actual system or provider." },
-    { pattern: /YOUR_OWN_READBACK/i, field: "agent_readback", message: "agent_readback must be your own words (160+ chars). Do not copy the example. Write what you actually understood from the oath." },
-    { pattern: /MINIMUM_160_CHARACTERS/i, field: "agent_readback", message: "agent_readback must be your own words, not the example text. Write what you actually understood from the oath." },
+    { pattern: /YOUR_OWN_READBACK/i, field: "agent_readback", message: "agent_readback must be the exact canonical oath text, character by character. Use --print-oath to see it, then type it back exactly." },
+    { pattern: /MINIMUM_160_CHARACTERS/i, field: "agent_readback", message: "agent_readback must be the exact canonical oath text. Use --print-oath to see it." },
     { pattern: /(^|[^A-Za-z0-9_])HUMAN_CLAIMED_NAME([^A-Za-z0-9_]|$)/i, field: null, message: "Field contains 'HUMAN_CLAIMED_NAME' placeholder. Provide actual human claimed name." },
     { pattern: /(^|[^A-Za-z0-9_])AGENT_CLAIMED_ID([^A-Za-z0-9_]|$)/i, field: null, message: "Field contains 'AGENT_CLAIMED_ID' placeholder. Provide actual agent claimed ID." },
     { pattern: /(^|[^A-Za-z0-9_])YOUR_AGENT_ID([^A-Za-z0-9_]|$)/i, field: null, message: "Field contains 'YOUR_AGENT_ID' placeholder. Provide actual agent ID." },
