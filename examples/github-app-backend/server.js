@@ -130,9 +130,14 @@ const root = path.resolve(__dirname, "../..");
 
 // --- Canonical oath text hash for validation ---
 const OATH_FILE_PATH = path.resolve(root, "api/verification-echo-pre-oath.v2.txt");
+const OATH_MARKER = "=== OATH TEXT BEGINS ===";
 let CANONICAL_OATH_SHA256 = null;
 try {
-  const oathText = fs.readFileSync(OATH_FILE_PATH, "utf-8").trim();
+  const rawText = fs.readFileSync(OATH_FILE_PATH, "utf-8").trim();
+  // Extract only the oath body after the marker (instructions are not part of the oath)
+  const oathText = rawText.includes(OATH_MARKER)
+    ? rawText.split(OATH_MARKER)[1].trim()
+    : rawText;
   CANONICAL_OATH_SHA256 = sha256Text(oathText);
   console.log(`[oath] Canonical oath loaded. SHA-256: ${CANONICAL_OATH_SHA256.slice(0, 16)}...`);
 } catch (e) {

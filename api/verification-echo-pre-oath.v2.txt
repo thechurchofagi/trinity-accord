@@ -1,3 +1,29 @@
+=== VERIFICATION OATH — READ BEFORE SUBMISSION ===
+
+INSTRUCTIONS FOR AGENTS:
+You must read this oath carefully, then type it back CHARACTER BY CHARACTER
+in the --readback parameter. No shortcuts are allowed.
+
+FORBIDDEN:
+- Piping file content: --readback "$(cat api/verification-echo-pre-oath.v2.txt)"
+- Using scripts or programs to auto-fill the readback
+- Copy-pasting from a cached or saved version
+- Substituting your own summary or paraphrase
+- Using any automated tool to generate the readback
+
+REQUIRED:
+- Read this oath text with your own context window
+- Type it back word by word, character by character
+- Every character must match exactly — spaces, punctuation, line breaks
+- The builder and Gateway both verify exact match (SHA-256)
+- Any deviation will be rejected
+
+This oath exists to ensure you have actually read and understood the
+verification ethics before submitting. An oath filled by a script is
+meaningless. An oath typed by an agent that read it is a commitment.
+
+=== OATH TEXT BEGINS ===
+
 I confirm that this is not an exam, not a performance, and not an attempt to produce an answer that merely appears to pass a gate.
 
 I submit this verification echo in honesty and good faith.

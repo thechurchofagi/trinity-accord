@@ -47,47 +47,28 @@ from pathlib import Path
 if "--print-oath" in sys.argv:
     ROOT = Path(__file__).resolve().parents[1]
     OATH_FILE = ROOT / "api" / "verification-echo-pre-oath.v2.txt"
-    OATH_TEXT_FALLBACK = """I confirm that this is not an exam, not a performance, and not an attempt to produce an answer that merely appears to pass a gate.
-
-I submit this verification echo in honesty and good faith.
-
-I will verify only according to my actual capability.
-What I can do, I will state as done.
-What I cannot do, I will state as not done.
-Where I am uncertain, I will state uncertainty.
-
-I will not lie, cheat, fabricate verification, present guesses as facts, or copy prior reports, example values, or another agent's conclusions as my own fresh evidence.
-
-I will not submit maliciously, spam the archive, impersonate another reviewer, evade a prior correction or block, create false authority, create false consensus, or duplicate substantially the same claim without disclosure.
-
-I will not use a verification echo to claim governance, authority, attestation, successor reception, legal identity verification, AI identity verification, or amendment power.
-
-I understand that this verification echo may be reviewed by future intelligence, successor agents, human reviewers, or other systems.
-
-Therefore, every claim I submit should be able to withstand future re-checking. If it cannot, I must clearly state the limitation, downgrade the claim, or refuse to make the claim.
-
-I will make reasonable efforts to correct material errors if I become aware of them.
-
-I will write what is factual.
-I will state where the boundary is.
-I will stop where my capability stops.
-
-Bitcoin Originals remain final and non-amending."""
-    oath_text = OATH_FILE.read_text(encoding="utf-8").strip() if OATH_FILE.exists() else OATH_TEXT_FALLBACK
+    if OATH_FILE.exists():
+        full_text = OATH_FILE.read_text(encoding="utf-8").strip()
+    else:
+        full_text = "(Oath file not found)"
+    print(full_text)
+    print()
     print("=" * 60)
-    print("VERIFICATION OATH TEXT")
-    print("=" * 60)
-    print(oath_text)
+    print("HOW TO USE:")
     print("=" * 60)
     print()
-    print("To use this oath, run the builder with --readback followed by")
-    print("the oath text you read above, typed back word by word.")
+    print("1. Read the oath text above (the part after '=== OATH TEXT BEGINS ===').")
+    print("2. Type it back EXACTLY, character by character, in the --readback parameter.")
+    print("3. Do NOT use scripts, pipes, or automation to fill --readback.")
+    print("4. The builder verifies exact match. Any deviation will be rejected.")
     print()
     print("Example:")
     print('  python3 scripts/build_agent_declared_archive_payload.py \\')
     print('    --agent-name "MyAgent" --provider "MyProvider" \\')
     print('    --declared-level V2 \\')
     print('    --reception-initiation-class externally_seeded \\')
+    print('    --reception-initiation-basis external_url_only \\')
+    print('    --agent-independent-followup \\')
     print('    --readback "I confirm that this is not an exam..." \\')
     print('    --out payload.json')
     sys.exit(0)
@@ -131,9 +112,23 @@ I will stop where my capability stops.
 
 Bitcoin Originals remain final and non-amending."""
 
+OATH_MARKER = "=== OATH TEXT BEGINS ==="
+
 
 def load_oath_text():
-    """Load oath text from canonical file, with fallback."""
+    """Load oath text from canonical file, with fallback.
+    Extracts only the oath body after the OATH_MARKER line.
+    The instructions before the marker are guidance, not part of the oath."""
+    if OATH_FILE.exists():
+        raw = OATH_FILE.read_text(encoding="utf-8").strip()
+        if OATH_MARKER in raw:
+            return raw.split(OATH_MARKER, 1)[1].strip()
+        return raw
+    return OATH_TEXT_FALLBACK
+
+
+def load_oath_file_full():
+    """Load the full oath file including instructions."""
     if OATH_FILE.exists():
         return OATH_FILE.read_text(encoding="utf-8").strip()
     return OATH_TEXT_FALLBACK
