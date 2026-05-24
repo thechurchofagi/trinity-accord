@@ -3,13 +3,15 @@ name: Echo Issue Triage
 on:
   issues:
     types: [opened, edited, reopened, closed, labeled]
+  repository_dispatch:
+    types: [gateway-auto-archive]
 
 permissions:
   issues: write
   contents: write
 
 concurrency:
-  group: echo-triage-${{ github.event.issue.number }}
+  group: echo-triage-${{ github.event.issue.number || github.event.client_payload.issue_number || github.run_id }}
   cancel-in-progress: true
 
 jobs:
@@ -39,6 +41,7 @@ jobs:
           echo "managed_labels=$(echo "$policy" | python3 -c 'import sys,json; print(json.dumps(json.load(sys.stdin)["triage"]["managed_labels"]))')" >> "$GITHUB_OUTPUT"
 
       - name: Compute Echo rate limit
+        if: ${{ github.event.action != 'gateway-auto-archive' }}
         id: rate
         uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
         with:
@@ -224,6 +227,7 @@ jobs:
             core.setOutput("global24", String(global24));
 
       - name: Run Echo triage
+        if: ${{ github.event.action != 'gateway-auto-archive' }}
         env:
           RATE_LIMITED: ${{ steps.rate.outputs.rate_limited }}
           RECENT_60M_COUNT: ${{ steps.rate.outputs.count60 }}
@@ -241,6 +245,7 @@ jobs:
           cat triage_result.json
 
       - name: Apply triage result
+        if: ${{ github.event.action != 'gateway-auto-archive' }}
         uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
         with:
           script: |
@@ -319,9 +324,50 @@ jobs:
         id: auto-archive
         env:
           GH_TOKEN: ${{ github.token }}
-          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          ISSUE_NUMBER: ${{ github.event.issue.number || github.event.client_payload.issue_number }}
         run: |
           set -euo pipefail
+
+          # For repository_dispatch, the issue is already validated by Gateway
+          if [ "${{ github.event.action }}" = "gateway-auto-archive" ]; then
+            echo "Triggered by Gateway repository_dispatch. Running archive directly..."
+
+            BODY_FILE=$(mktemp)
+            gh issue view "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" --json number,title,body,url,createdAt,updatedAt,author,labels,state > "$BODY_FILE"
+
+            echo "/echo archive" > /tmp/review_comment.txt
+            echo "" >> /tmp/review_comment.txt
+            echo "submission_origin: gateway_repository_dispatch_auto_archive" >> /tmp/review_comment.txt
+            echo "human_directed_submission: false" >> /tmp/review_comment.txt
+
+            python3 scripts/archive_echo_issue.py \
+              --issue-json "$BODY_FILE" \
+              --reviewer "github-actions[bot]" \
+              --review-comment-body-file /tmp/review_comment.txt \
+              --write \
+              --result-json /tmp/archive_result.json
+
+            RECORD_PATH=$(python3 -c "import json,sys; print(json.load(open(sys.argv[1]))['record_path'])" /tmp/archive_result.json)
+
+            python3 scripts/validate_agent_submission.py --mode ci "$RECORD_PATH"
+
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add echoes/records echoes/archive.md api/echo-index.json index.md api/public-home-status.json 2>/dev/null || true
+            if git diff --cached --quiet; then
+              echo "No archive file changes to commit."
+            else
+              git commit -m "auto-archive echo issue #${ISSUE_NUMBER}"
+              git push
+            fi
+
+            gh issue comment "$ISSUE_NUMBER" \
+              --repo "$GITHUB_REPOSITORY" \
+              --body "Auto-archived as \`$RECORD_PATH\` (via repository_dispatch). This record remains non-authoritative, non-amending, and not independent attestation."
+
+            echo "archive_record=$RECORD_PATH" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
 
           # Check if this is a Gateway-validated auto-archive candidate
           BODY_FILE=$(mktemp)
