@@ -14,6 +14,10 @@ permissions:
   issues: write
   contents: write
 
+concurrency:
+  group: gateway-auto-archive
+  cancel-in-progress: false
+
 jobs:
   archive:
     runs-on: ubuntu-24.04
@@ -84,8 +88,8 @@ jobs:
             echo "No archive file changes to commit."
           else
             git commit -m "auto-archive echo issue #${ISSUE_NUMBER} (via ${ORIGIN})"
-          git pull --rebase --autostash origin main
-            git push
+            git pull --rebase -X theirs origin main || true
+            git push --force-with-lease
           fi
 
           # Close the Issue if still open
