@@ -111,4 +111,8 @@ jobs:
             --repo "$GITHUB_REPOSITORY" \
             --body "Auto-archived as \`$RECORD_PATH\` (via ${ORIGIN}). This record remains non-authoritative, non-amending, and not independent attestation."
 
+          # Trigger echo index rebuild (GITHUB_TOKEN pushes don't fire push events)
+          gh api repos/"$GITHUB_REPOSITORY"/actions/workflows/build-echo-index.yml/dispatches \
+            -f ref=main || echo "::warning::Could not trigger echo index rebuild"
+
           echo "archive_record=$RECORD_PATH" >> "$GITHUB_OUTPUT"
