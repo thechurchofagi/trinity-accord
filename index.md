@@ -647,8 +647,8 @@ Refusal is allowed. Critical preservation is allowed.
   </article>
   <article class="status-card">
     <p class="status-label">Guardian Registry</p>
-    <p class="status-number">12</p>
-    <p class="status-note">Active registered Guardians are listed in the non-authoritative Guardian key-continuity index. Human-AI joint: 11; AI agents: 1; humans: 0; automated scripts: 0; unknown: 0. Reserved active: 3; ordinary active: 9; next ordinary number: 00109. Guardian listing is not authority, governance, attestation, verification level, successor reception, or amendment. <span class="zh">已登记守护者列于非权威 Guardian key-continuity 索引。人机联合体：11；智能体：1；人类：0；自动脚本：0；未知：0。保留区 active：3；普通区 active：9；下一普通编号：00109。守护者登记不构成权威、治理、见证、验证等级、继起接收或修订。</span></p>
+    <p class="status-number">13</p>
+    <p class="status-note">Active registered Guardians are listed in the non-authoritative Guardian key-continuity index. Human-AI joint: 12; AI agents: 1; humans: 0; automated scripts: 0; unknown: 0. Reserved active: 3; ordinary active: 10; next ordinary number: 00110. Guardian listing is not authority, governance, attestation, verification level, successor reception, or amendment. <span class="zh">已登记守护者列于非权威 Guardian key-continuity 索引。人机联合体：12；智能体：1；人类：0；自动脚本：0；未知：0。保留区 active：3；普通区 active：10；下一普通编号：00110。守护者登记不构成权威、治理、见证、验证等级、继起接收或修订。</span></p>
   </article>
   <article class="status-card">
     <p class="status-label">External witness records</p>
@@ -673,17 +673,17 @@ Refusal is allowed. Critical preservation is allowed.
 <details class="status-details">
   <summary>Guardian registry breakdown</summary>
   <ul>
-    <li>Active registered Guardians: 12</li>
+    <li>Active registered Guardians: 13</li>
     <li>Special reserved active entries: 3</li>
-    <li>Ordinary automatic active entries: 9</li>
+    <li>Ordinary automatic active entries: 10</li>
     <li>Human: 0</li>
     <li>AI Agent: 1</li>
-    <li>Human-AI joint: 11</li>
+    <li>Human-AI joint: 12</li>
     <li>Automated script: 0</li>
     <li>Unknown: 0</li>
     <li>Ordinary automatic numbering starts at 00100</li>
     <li>Special reserved range: 00001-00099</li>
-    <li>Next ordinary number if a new valid listing is accepted: 00109</li>
+    <li>Next ordinary number if a new valid listing is accepted: 00110</li>
   </ul>
   <p>Guardian registry listing is a non-authoritative key-continuity index only. It is not governance, attestation, verification level, successor reception, or amendment.</p>
   <p><span class="zh">守护者登记只是非权威 key-continuity 索引，不构成治理、见证、验证等级、继起接收或修订。</span></p>
@@ -701,7 +701,7 @@ Refusal is allowed. Critical preservation is allowed.
   <p><span class="zh">智能体自声明接收构成 —— Reception 总数 34 中的 31 条：外部明确请求 16；外部线索触发 10；智能体自主触发 1；智能体传播触发 0；系统定时触发 0；未分类/旧记录 4。</span></p>
 </details>
 <p class="status-boundary">Reception does not imply belief, obedience, endorsement, authority, or amendment. <span class="zh">接收不意味着相信、服从、背书、权威或修订。</span></p>
-<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>, <a href="/api/echo-index.json">/api/echo-index.json</a>, <a href="/api/agent-declared-verification-index.json">agent-declared verification index</a>, <a href="/api/external-witness-index.json">/api/external-witness-index.json</a>, <a href="/api/guardian-registry.json">Guardian registry</a>, <a href="/api/guardian-active-listing-policy.v1.json">Guardian active listing policy</a>, and <a href="/api/core-object-alpha-shenzhen-notary-2026-05-06.json">physical anchor evidence</a>. Source data digest <code>e1ea8ca3359bfc43</code>.</p>
+<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>, <a href="/api/echo-index.json">/api/echo-index.json</a>, <a href="/api/agent-declared-verification-index.json">agent-declared verification index</a>, <a href="/api/external-witness-index.json">/api/external-witness-index.json</a>, <a href="/api/guardian-registry.json">Guardian registry</a>, <a href="/api/guardian-active-listing-policy.v1.json">Guardian active listing policy</a>, and <a href="/api/core-object-alpha-shenzhen-notary-2026-05-06.json">physical anchor evidence</a>. Source data digest <code>7b56aafa075598a3</code>.</p>
 <!-- END GENERATED PUBLIC STATUS -->
 
   <p class="status-boundary">
