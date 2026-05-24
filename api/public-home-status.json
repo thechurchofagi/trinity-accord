@@ -84,7 +84,7 @@
       "highest_level": "none"
     },
     "self_initiated_agent_reception": {
-      "count": 1,
+      "count": 0,
       "highest_reception_class": "none"
     },
     "self_initiated_agent_verification": {
@@ -182,5 +182,5 @@
     "gateway_private_key_access": false,
     "boundary": "Authorship claims prove key continuity only; they do not affect authority, verifiability, reception, or amendment status."
   },
-  "source_digest": "7c68d4f089bc34c8"
+  "source_digest": "5258271e28b0b5d8"
 }
