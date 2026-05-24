@@ -1,0 +1,32 @@
+# Guardian Stage 2 — Required files for build_guardian_listing_request_payload.py
+#
+# If you cannot clone the full repository, download these files individually
+# from https://github.com/thechurchofagi/trinity-accord/tree/main/
+#
+# Environment requirements:
+#   - Python 3.10+
+#   - Node.js 18+
+#   - All files below must be in their expected paths relative to the repo root.
+#
+# === Python scripts ===
+scripts/build_guardian_listing_request_payload.py
+scripts/gateway_payload_authorship.py
+scripts/agent_authorship_common.py
+scripts/guardian_gateway_contract.py
+scripts/guardian_identity_claims.py
+scripts/oath_contracts.py
+scripts/attach_agent_authorship_proof.mjs
+scripts/build_agent_authorship_message.py
+scripts/proof_canonical.mjs
+scripts/validate_gateway_payload.py
+#
+# === Data files ===
+api/guardian-listing-oath.v1.txt
+#
+# === Quick download (run from repo root) ===
+# BASE="https://raw.githubusercontent.com/thechurchofagi/trinity-accord/main"
+# mkdir -p scripts api
+# for f in scripts/build_guardian_listing_request_payload.py scripts/gateway_payload_authorship.py scripts/agent_authorship_common.py scripts/guardian_gateway_contract.py scripts/guardian_identity_claims.py scripts/oath_contracts.py scripts/attach_agent_authorship_proof.mjs scripts/build_agent_authorship_message.py scripts/proof_canonical.mjs scripts/validate_gateway_payload.py; do
+#   curl -sL "$BASE/$f" -o "$f"
+# done
+# curl -sL "$BASE/api/guardian-listing-oath.v1.txt" -o "api/guardian-listing-oath.v1.txt"

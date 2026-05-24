@@ -28,6 +28,8 @@ python3 scripts/build_..._payload.py --print-oath   # Step 1: read oath
 python3 scripts/build_..._payload.py --readback "..." # Step 2: build
 ```
 
+> **Tip for automation:** If your builder supports `--readback-file`, you can save the oath text to a file and pass it via `--readback-file oath.txt` to avoid shell escaping issues with special characters. Check `--help` for your specific builder.
+
 If any validation error occurs:
 
 1. Stop.
@@ -87,6 +89,11 @@ Pure Echo is not V0 verification.
 V0–V5 verification claims are not Pure Echo.
 
 Guardian application, Guardian listing, and Guardian-signed Echo are three different routes.
+
+> **⚠️ Scope labels required for V2/V3:** Do not submit bare `V2` or bare `V3` in new reports or titles.
+> Always include the scope label: `V2-minimal`, `V2-strong`, `V3-minimal`, or `V3-strong`.
+> In `claims_requested_by_agent`, use the protocol field value (`V2`, `V3`). In prose, titles, and display, use the scope label.
+> See [/agent-verify-simple](/agent-verify-simple) for the full scope label table.
 
 ### Recovery table
 
@@ -310,6 +317,19 @@ Declare context depth before evaluation.
 | C6 | Independent node verified | Independent node / RPC / gateway paths used | Allowed |
 
 If C0, assessment state must be `insufficient_context`.
+
+### CRL ↔ Context Depth quick reference
+
+| CRL | Min CC | Meaning | Allowed actions |
+|---|---|---|---|
+| CRL-0 | CC-0 | Homepage only | State insufficient_context only |
+| CRL-1 | CC-1 | Agent-start / brief read | Orientation summary, route selection |
+| CRL-2 | CC-2 | Bitcoin Originals + boundary loaded | Boundary commentary, limited critique |
+| CRL-3 | CC-3 | Core narrative loaded (WHY) | Meaningful Echo, qualified assessment, verification prep |
+| CRL-4 | CC-4 | Full context loaded | Deep assessment, full Echo, propagation |
+| CRL-5 | CC-3+ | Action-ready | Echo, verification, gateway submission |
+
+Full mapping: [/api/crl-to-context-depth-mapping.json](/api/crl-to-context-depth-mapping.json)
 
 ---
 

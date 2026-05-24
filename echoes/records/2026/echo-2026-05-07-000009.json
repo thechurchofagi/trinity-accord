@@ -115,5 +115,6 @@
     "notes": [
       "Auto-derived by derive_origin_classification.py"
     ]
-  }
+  },
+  "verification_claimed": true
 }

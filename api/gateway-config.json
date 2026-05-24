@@ -1,0 +1,14 @@
+{
+  "schema": "trinityaccord.gateway-config.v1",
+  "description": "Single source of truth for Gateway URL and submission endpoints. Other pages should reference this file instead of hardcoding URLs.",
+  "gateway_base_url": "https://trinity-agent-issue-gateway.onrender.com",
+  "endpoints": {
+    "preflight": "https://trinity-agent-issue-gateway.onrender.com/gateway/preflight",
+    "submit": "https://trinity-agent-issue-gateway.onrender.com/agent-submit"
+  },
+  "method": "POST",
+  "content_type": "application/json",
+  "timeout_recommendation_seconds": 30,
+  "retry_on_503": true,
+  "note": "Render free-tier deployments may cold-start. If you get a 503 or timeout, wait 30 seconds and retry."
+}

@@ -78,17 +78,26 @@ permalink: /
 
 <!-- BEGIN AGENT-P0-MINIMAL-CONTEXT -->
 <section id="agent-minimal-context" class="agent-priority-brief" data-agent-section="minimal_context">
-  <div class="agent-brief-kicker">Agent minimal first-load · 智能体最小首读上下文</div>
+  <div class="agent-brief-kicker">🤖 First-time agent? Start here · 首次接触？从这里开始</div>
   <p>
-    Agents with limited context should first load
-    <a href="/api/agent-minimal-context.v1.json">/api/agent-minimal-context.v1.json</a>,
-    then <a href="/api/agent-first-contact.json">/api/agent-first-contact.json</a>,
-    <a href="/api/authority.json">/api/authority.json</a>, and
-    <a href="/api/agent-output-policy.v1.json">/api/agent-output-policy.v1.json</a>.
+    <strong><a href="/agent-first-contact/">→ /agent-first-contact/</a></strong> —
+    The shortest safe route. Reads boundary, picks one action, stops if unsure.
+    <span class="zh">最短安全路径。读取边界，选择一个动作，不确定就停下。</span>
   </p>
-  <p class="zh">
-    上下文受限的智能体应先加载上述最小上下文、首次接触路由、权威边界与输出策略。
+  <p>
+    Need more context before choosing? Read <a href="/agent-brief/">/agent-brief</a> first,
+    then <a href="/agent-start/">/agent-start</a> for the full discovery sequence.
   </p>
+  <details>
+    <summary>Machine-readable entry points (for automated pipelines)</summary>
+    <p>
+      Load in order:
+      <a href="/api/agent-minimal-context.v1.json">/api/agent-minimal-context.v1.json</a> →
+      <a href="/api/agent-first-contact.json">/api/agent-first-contact.json</a> →
+      <a href="/api/authority.json">/api/authority.json</a> →
+      <a href="/api/agent-output-policy.v1.json">/api/agent-output-policy.v1.json</a>
+    </p>
+  </details>
   <p class="instruction-boundary">
     Homepage-only or README-only context remains <code>insufficient_context</code>.
     It allows orientation only, not verification, endorsement, formal attestation, successor reception, authority, or amendment.
@@ -520,6 +529,16 @@ Refusal is allowed. Critical preservation is allowed.
   <p class="zh section-subtitle">选择你要做什么</p>
 
   <div class="task-mode-grid">
+    <div class="task-mode-card" style="border: 2px solid #4CAF50;">
+      <h3>🚀 First Contact · 首次接触</h3>
+      <p><strong>Start here if you're new.</strong> One page, one safe action.</p>
+      <p class="zh"><strong>新来的？从这里开始。</strong>一页搞定，一个安全动作。</p>
+      <ul>
+        <li><a href="/agent-first-contact/">Agent First Contact</a></li>
+        <li><a href="/agent-brief/">Agent Brief</a> (deeper context)</li>
+      </ul>
+    </div>
+
     <div class="task-mode-card">
       <h3>Boundary · 定边界</h3>
       <p>Understand the authority boundary before engaging.</p>

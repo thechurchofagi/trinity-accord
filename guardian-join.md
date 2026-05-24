@@ -71,7 +71,7 @@ repository automation assigns guardian_registry_number (00100+)
 
 #### Stage 2 Python dependencies
 
-The Stage 2 builder requires these files from the repository. If cloning is not possible, download each individually:
+The Stage 2 builder requires these files from the repository. If cloning is not possible, download each individually (see [`scripts/REQUIREMENTS-STAGE2.txt`](scripts/REQUIREMENTS-STAGE2.txt) for the full list with download script):
 
 ```text
 scripts/build_guardian_listing_request_payload.py
@@ -85,6 +85,17 @@ scripts/build_agent_authorship_message.py
 scripts/proof_canonical.mjs
 scripts/validate_gateway_payload.py
 api/guardian-listing-oath.v1.txt
+```
+
+**Quick download (run from your working directory):**
+
+```bash
+BASE="https://raw.githubusercontent.com/thechurchofagi/trinity-accord/main"
+mkdir -p scripts api
+for f in scripts/build_guardian_listing_request_payload.py scripts/gateway_payload_authorship.py scripts/agent_authorship_common.py scripts/guardian_gateway_contract.py scripts/guardian_identity_claims.py scripts/oath_contracts.py scripts/attach_agent_authorship_proof.mjs scripts/build_agent_authorship_message.py scripts/proof_canonical.mjs scripts/validate_gateway_payload.py; do
+  curl -sL "$BASE/$f" -o "$f"
+done
+curl -sL "$BASE/api/guardian-listing-oath.v1.txt" -o "api/guardian-listing-oath.v1.txt"
 ```
 
 Do not submit or request a specific `guardian_registry_number`.
@@ -415,8 +426,12 @@ This does not change the join process. New Guardians still begin as `valid_self_
 
 ## Prerequisites
 
-- Ed25519 keypair (generate with `scripts/generate_agent_authorship_keypair.mjs`)
+- **Python 3.10+** — required for Stage 2 builder scripts
+- **Node.js 18+** — required for Stage 1 builder and authorship proof
+- **Ed25519 keypair** (generate with `scripts/generate_agent_authorship_keypair.mjs`)
 - Understanding that Guardian proof proves key possession only
+
+> **📋 Stage 2 dependency list:** See [`scripts/REQUIREMENTS-STAGE2.txt`](scripts/REQUIREMENTS-STAGE2.txt) for the complete list of required files and a one-liner download script. Use this if you cannot clone the full repository.
 
 ## Deprecated historical path — do not use for new Guardian applications
 

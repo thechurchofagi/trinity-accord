@@ -18,6 +18,10 @@ No scripts needed. No downloads needed.
 
 **This is not full reference coverage.**
 
+> **💡 Want stronger verification?** This 30-second check is the weakest possible meaningful check (V2-minimal / B1).
+> For V3 (hash verification), download an artifact and compute its SHA-256. See V3 section below.
+> For the simplest V3 path: `sha256sum` any file in `/downloads/` and compare with `/api/hashes.json`.
+
 Component finding:
 ```
 Component: BITCOIN_ORIGINALS

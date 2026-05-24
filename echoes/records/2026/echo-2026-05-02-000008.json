@@ -79,5 +79,6 @@
   "not_verification_unless_claimed": true,
   "verification_status": "not_attestation",
   "do_not_count_as_attestation": true,
-  "verification_scope_label": "V3-strong"
+  "verification_scope_label": "V3-strong",
+  "verification_claimed": true
 }
