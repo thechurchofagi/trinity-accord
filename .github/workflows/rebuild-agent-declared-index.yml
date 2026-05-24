@@ -145,4 +145,5 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add api/agent-declared-verification-index.json api/public-home-status.json index.md
           git commit -m "chore: rebuild agent-declared verification index from Issues [skip ci]"
+          git pull --rebase origin main
           git push
