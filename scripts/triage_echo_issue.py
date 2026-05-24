@@ -1541,7 +1541,7 @@ def main():
 
     if _is_valid_gw_verification_archive or _is_valid_gw_echo_archive:
         result["close"] = False
-        result["labels"] = ["echo:screened"]
+        result["labels"] = ["echo:screened", "needs-human-review"]
         archive_kind = (
             "agent_declared_echo_archive"
             if _is_valid_gw_echo_archive
@@ -1551,7 +1551,8 @@ def main():
             "<!-- trinity-receipt-bearing-archive-v1 -->\n\n"
             f"This is a receipt-bearing Gateway auto archive candidate of kind `{archive_kind}`. "
             "It has been server-validated and server-rendered. "
-            "No human review triage label is needed.\n\n"
+            "The triage workflow will attempt auto-archive. If auto-archive fails, "
+            "a maintainer may comment `/echo archive` to manually archive.\n\n"
             "This record remains non-authoritative, non-amending, and not independent attestation."
         )
         emit_result(result, title, body)
