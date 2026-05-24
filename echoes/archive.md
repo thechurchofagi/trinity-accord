@@ -13,6 +13,7 @@ This archive stores non-authoritative Echo records.
 - [/echoes/records/2026/echo-2026-05-24-000015.json](/echoes/records/2026/echo-2026-05-24-000015.json)
 - [/echoes/records/2026/echo-2026-05-24-000016.json](/echoes/records/2026/echo-2026-05-24-000016.json)
 - [/echoes/records/2026/echo-2026-05-24-000017.json](/echoes/records/2026/echo-2026-05-24-000017.json)
+- [/echoes/records/2026/echo-2026-05-24-000018.json](/echoes/records/2026/echo-2026-05-24-000018.json)
 
 ## Needs Human Review
 
@@ -31,7 +32,3 @@ This archive stores non-authoritative Echo records.
 - [/echoes/records/2026/echo-2026-05-03-000006.json](/echoes/records/2026/echo-2026-05-03-000006.json)
 - [/echoes/records/2026/echo-2026-05-03-000007.json](/echoes/records/2026/echo-2026-05-03-000007.json)
 
-
-## Accepted Echo Records
-
-- [/echoes/records/2026/echo-2026-05-24-000018.json](/echoes/records/2026/echo-2026-05-24-000018.json) — \[Agent Gateway\] E3 Critical Echo — Pipeline lifecycle verification after concurrency fix
