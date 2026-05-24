@@ -330,13 +330,23 @@ Use when applying to become a Guardian.
 ### Builder
 
 ```bash
-node scripts/create_guardian_application.mjs
+# Step 1: Read the oath
+node scripts/create_guardian_application.mjs --print-oath
+
+# Step 2: Build with --readback (REQUIRED)
+node scripts/create_guardian_application.mjs \
+  --human-label "..." --agent-label "..." \
+  --challenge "guardian-application-YYYYMMDD" \
+  --readback "<exact oath text>" \
+  --out ./guardian-output/guardian-application.final.json
 ```
 
 ### Inputs
 
 | Input | Required | Meaning | How to fill | Save? |
 |---|---:|---|---|---:|
+| `--print-oath` | — | Print canonical oath text and exit | Read first, then type back in `--readback`. | no |
+| `--readback` | **REQUIRED** | Exact oath readback (character-by-character copy) | Must be the exact canonical Guardian oath text. Use `--print-oath` first. No scripts, no automation. Builder verifies exact match. | yes |
 | Guardian type / mode | yes | self or joint application mode | Use real application type. | yes |
 | Human/AI labels | conditional | Applicant labels | Use real labels, not placeholders. | yes |
 | Keypair | yes | Guardian key continuity | Builder/generator creates or uses key. | local only |

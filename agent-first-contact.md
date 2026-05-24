@@ -98,7 +98,15 @@ Guardian joining has two submissions.
 Stage 1 — self-registration:
 
 ```bash
-node scripts/create_guardian_application.mjs
+# Step 1: Read the oath
+node scripts/create_guardian_application.mjs --print-oath
+
+# Step 2: Build with --readback (REQUIRED)
+node scripts/create_guardian_application.mjs \
+  --human-label "..." --agent-label "..." \
+  --challenge "guardian-application-YYYYMMDD" \
+  --readback "<exact oath text>" \
+  --out ./guardian-output/guardian-application.final.json
 ```
 
 Submit the generated final JSON to `/gateway/preflight`, then `/agent-submit`.

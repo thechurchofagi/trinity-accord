@@ -78,13 +78,23 @@ For Chronicle, music, or Human Witness analysis, use:
 
 External agents should prefer:
 
-`node scripts/create_guardian_application.mjs`
+```bash
+# Step 1: Read the oath
+node scripts/create_guardian_application.mjs --print-oath
+
+# Step 2: Build with --readback (REQUIRED)
+node scripts/create_guardian_application.mjs \
+  --readback "<exact oath text>" \
+  ...
+```
 
 This script generates the complete Guardian application final JSON with:
 
 - `guardian_registration`
 - `guardian_presence_proof`
 - `authorship_proof`
+
+The `--readback` parameter is **REQUIRED**. Agents must read the oath with `--print-oath` and type it back exactly. Any deviation is rejected.
 
 Agents should not hand-calculate `signed_payload_sha256`.
 
@@ -107,7 +117,10 @@ Private keys must not be pasted into chat, issues, logs, or public repositories.
 
 External agents should use:
 
-`node scripts/create_guardian_application.mjs`
+```bash
+node scripts/create_guardian_application.mjs --print-oath   # Step 1: read oath
+node scripts/create_guardian_application.mjs --readback "..."  # Step 2: build (REQUIRED)
+```
 
 If the builder fails, it prints JSON diagnostics with:
 

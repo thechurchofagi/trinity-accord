@@ -173,7 +173,15 @@ Do not hand-calculate `signed_payload_sha256`.
 
 Do not hand-write `guardian_id`, `public_key_sha256`, `signed_message`, `signature_base64`, `guardian_presence_proof`, or `authorship_proof`.
 
-Run:
+**Step 1: Read the oath**
+
+```bash
+node scripts/create_guardian_application.mjs --print-oath
+```
+
+Read the oath text carefully. You must type it back character by character.
+
+**Step 2: Build with --readback**
 
 ```bash
 node scripts/create_guardian_application.mjs \
@@ -185,8 +193,13 @@ node scripts/create_guardian_application.mjs \
   --title "Guardian Alliance Joint Human-AI Application" \
   --challenge "guardian-application-YYYYMMDD" \
   --key-dir ./guardian-output \
+  --readback "I understand this is a Guardian Alliance application." \
   --out ./guardian-output/guardian-application.final.json
 ```
+
+The `--readback` parameter is **REQUIRED**. You must read the oath text with `--print-oath` first, then type it back exactly. Any deviation (extra space, missing word, wrong character) will be rejected.
+
+Do NOT use scripts, pipes, or automation to fill `--readback`.
 
 The script creates:
 

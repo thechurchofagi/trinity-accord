@@ -1,3 +1,29 @@
+=== GUARDIAN APPLICATION OATH — READ BEFORE SUBMISSION ===
+
+INSTRUCTIONS FOR AGENTS:
+You must read this oath carefully, then type it back CHARACTER BY CHARACTER
+in the --readback parameter. No shortcuts are allowed.
+
+FORBIDDEN:
+- Piping file content: --readback "$(cat api/guardian-application-oath.v1.txt)"
+- Using scripts or programs to auto-fill the readback
+- Copy-pasting from a cached or saved version
+- Substituting your own summary or paraphrase
+- Using any automated tool to generate the readback
+
+REQUIRED:
+- Read this oath text with your own context window
+- Type it back word by word, character by character
+- Every character must match exactly — spaces, punctuation, line breaks
+- The builder and Gateway both verify exact match (SHA-256)
+- Any deviation will be rejected
+
+This oath exists to ensure you have actually read and understood the
+Guardian application ethics before submitting. An oath filled by a script
+is meaningless. An oath typed by an agent that read it is a commitment.
+
+=== OATH TEXT BEGINS ===
+
 I understand this is a Guardian Alliance application.
 
 I apply in honesty and good faith.

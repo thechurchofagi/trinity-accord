@@ -12,7 +12,7 @@ import {
   sha256Text,
 } from "./proof_canonical.mjs";
 
-const ONE_SHOT_BUILDER_VERSION = "guardian-application-one-shot-v3";
+const ONE_SHOT_BUILDER_VERSION = "guardian-application-one-shot-v4";
 
 const FORBIDDEN_NATURAL_LANGUAGE_ARCHIVE_CLAIMS = [
   "archived echo",
@@ -71,12 +71,6 @@ const OATH_TEXT = [
   "The agent must state actual capability only and must not fabricate verification.",
 ].join(" ");
 
-const AGENT_READBACK = [
-  "I understand this is a self-declared Echo and Guardian Alliance application record.",
-  "It does not create authority, governance, formal review status, verification level, continuity-transfer status, or any power to change the original texts.",
-  "I will not fabricate verification, present guesses as facts, copy prior reports as fresh evidence, or hide uncertainty and limitations.",
-].join(" ");
-
 function argValue(name, fallback = null) {
   const idx = process.argv.indexOf(name);
   if (idx === -1 || idx + 1 >= process.argv.length) return fallback;
@@ -113,14 +107,17 @@ node scripts/create_guardian_application.mjs \\
   --title "Guardian Alliance Joint Human-AI Application" \\
   --challenge "guardian-application-YYYYMMDD" \\
   --key-dir ./guardian-output \\
+  --readback "<exact oath text>" \\
   --out ./guardian-output/guardian-application.final.json
 
 Required:
   --human-label
   --agent-label
   --challenge
+  --readback          Exact canonical oath text (character-by-character). Use --print-oath first.
 
 Optional:
+  --print-oath        Print the canonical oath text and exit.
   --agent-provider "self-reported"
   --body "custom body"
   --idempotency-key "guardian-joint-application-YYYYMMDD-random"
@@ -228,11 +225,41 @@ const humanClaimedName = argValue("--human-claimed-name", humanLabel);
 const agentClaimedId = argValue("--agent-claimed-id", agentLabel);
 const agentInstanceId = argValue("--agent-instance-id", null);
 const agentPublicProfile = argValue("--agent-public-profile", null);
+const readback = argValue("--readback");
 
-const GUARDIAN_APPLICATION_OATH_TEXT = readFileSync(
-  new URL("../api/guardian-application-oath.v1.txt", import.meta.url),
-  "utf8"
-).trim();
+// Load canonical oath text (extract body after marker if present)
+const GUARDIAN_OATH_FILE_PATH = new URL("../api/guardian-application-oath.v1.txt", import.meta.url);
+const GUARDIAN_OATH_MARKER = "=== OATH TEXT BEGINS ===";
+const GUARDIAN_APPLICATION_OATH_RAW = readFileSync(GUARDIAN_OATH_FILE_PATH, "utf8").trim();
+const GUARDIAN_APPLICATION_OATH_TEXT = GUARDIAN_APPLICATION_OATH_RAW.includes(GUARDIAN_OATH_MARKER)
+  ? GUARDIAN_APPLICATION_OATH_RAW.split(GUARDIAN_OATH_MARKER)[1].trim()
+  : GUARDIAN_APPLICATION_OATH_RAW;
+
+// Handle --print-oath early, before other argument processing
+if (hasFlag("--print-oath")) {
+  console.log(GUARDIAN_APPLICATION_OATH_RAW);
+  console.log();
+  console.log("=".repeat(60));
+  console.log("HOW TO USE:");
+  console.log("=".repeat(60));
+  console.log();
+  console.log("1. Read the oath text above (the part after '=== OATH TEXT BEGINS ===').");
+  console.log("2. Type it back EXACTLY, character by character, in the --readback parameter.");
+  console.log("3. Do NOT use scripts, pipes, or automation to fill --readback.");
+  console.log("4. The builder verifies exact match. Any deviation will be rejected.");
+  console.log();
+  console.log("Example:");
+  console.log('  node scripts/create_guardian_application.mjs \\');
+  console.log('    --mode joint_human_ai \\');
+  console.log('    --signing-key-holder ai_agent_key_holder \\');
+  console.log('    --human-label "Hongju Liu" \\');
+  console.log('    --agent-label "GPT-5.5 Thinking" \\');
+  console.log('    --challenge "guardian-application-20260524" \\');
+  console.log('    --key-dir ./guardian-output \\');
+  console.log('    --readback "I understand this is a Guardian Alliance application...." \\');
+  console.log('    --out ./guardian-output/guardian-application.final.json');
+  process.exit(0);
+}
 
 if (!humanLabel) {
   fail(
@@ -270,6 +297,62 @@ if (!challenge) {
       "The challenge is included in guardian_presence_proof.",
     ],
     { required_argument: "--challenge" }
+  );
+}
+
+// Validate --readback is provided
+if (!readback) {
+  fail(
+    "E_MISSING_READBACK",
+    "Missing required --readback.",
+    [
+      "You must read the Guardian oath and type it back character by character.",
+      "",
+      "Step 1: Read the oath text:",
+      "  node scripts/create_guardian_application.mjs --print-oath",
+      "",
+      "Step 2: Run the builder with --readback:",
+      '  node scripts/create_guardian_application.mjs \\',
+      '    --human-label "..." --agent-label "..." \\',
+      '    --challenge "guardian-application-YYYYMMDD" \\',
+      '    --readback "<the oath text you read, word by word>" \\',
+      '    --out ./guardian-output/guardian-application.final.json',
+    ],
+    { required_argument: "--readback" }
+  );
+}
+
+// Validate readback matches canonical oath text exactly (character by character)
+const readbackNormalized = readback.trim();
+const oathNormalized = GUARDIAN_APPLICATION_OATH_TEXT.trim();
+if (readbackNormalized !== oathNormalized) {
+  const details = {};
+  if (readbackNormalized.length !== oathNormalized.length) {
+    details.length_mismatch = {
+      oath_length: oathNormalized.length,
+      readback_length: readbackNormalized.length,
+    };
+  } else {
+    for (let i = 0; i < readbackNormalized.length; i++) {
+      if (readbackNormalized[i] !== oathNormalized[i]) {
+        details.first_difference = {
+          position: i + 1,
+          context_around: `...${oathNormalized.slice(Math.max(0, i - 20), i + 20)}...`,
+          readback_around: `...${readbackNormalized.slice(Math.max(0, i - 20), i + 20)}...`,
+        };
+        break;
+      }
+    }
+  }
+  fail(
+    "E_READBACK_MISMATCH",
+    "--readback does not match the canonical Guardian oath text exactly.",
+    [
+      "You must read the oath and type it back character by character.",
+      "Use --print-oath to see the exact oath text.",
+      "Do not summarize, paraphrase, or substitute your own text.",
+    ],
+    details
   );
 }
 
@@ -437,15 +520,7 @@ function sha256Utf8(value) {
   return sha256Text(String(value));
 }
 
-function buildGuardianApplicationOath({ signingGuardianRole }) {
-  const readback = [
-    "I apply in honesty and good faith.",
-    "I will not misrepresent identity, capability, authority, or relationship to the Trinity Accord.",
-    "I will not register maliciously, spam the registry, impersonate others, evade blocks, create false authority, create false consensus, or duplicate a Guardian claim without disclosure.",
-    "I understand Guardian proof is key-continuity only and does not prove legal identity, AI identity, authority, attestation, verification level, governance, or any power to change the original texts.",
-    "I will correct material errors when aware and retire or rotate the key if continuing would be misleading."
-  ].join(" ");
-
+function buildGuardianApplicationOath({ signingGuardianRole, canonicalReadback }) {
   return {
     schema: "trinityaccord.guardian-application-oath.v1",
     oath_read: true,
@@ -453,8 +528,8 @@ function buildGuardianApplicationOath({ signingGuardianRole }) {
     oath_kind: "guardian_application",
     oath_text_sha256: sha256Text(GUARDIAN_APPLICATION_OATH_TEXT),
     readback_required: true,
-    agent_readback: readback,
-    agent_readback_sha256: sha256Text(readback),
+    agent_readback: canonicalReadback,
+    agent_readback_sha256: sha256Text(canonicalReadback),
     signing_guardian_role: signingGuardianRole,
 
     honesty_oath_present: true,
@@ -586,8 +661,9 @@ function collectNaturalLanguageFields(payload) {
   const integrity = payload.agent_integrity_declaration || {};
   add("agent_integrity_declaration.declaration_text", integrity.declaration_text);
 
-  const oath = integrity.verification_oath || {};
-  add("agent_integrity_declaration.verification_oath.agent_readback", oath.agent_readback);
+  // Note: agent_readback is canonical oath text (already validated for exact match).
+  // It is excluded from forbidden-phrase checks because boundary statements like
+  // "does not prove successor reception" are safe, not false archive claims.
 
   const reg = payload.guardian_registration || {};
   add("guardian_registration.declared_intent", reg.declared_intent);
@@ -728,7 +804,8 @@ const defaultBody = [
 const body = argValue("--body", defaultBody);
 
 const guardianApplicationOath = buildGuardianApplicationOath({
-  signingGuardianRole: signingKeyHolder
+  signingGuardianRole: signingKeyHolder,
+  canonicalReadback: readbackNormalized,
 });
 
 const payload = {
