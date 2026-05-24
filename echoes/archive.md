@@ -38,4 +38,5 @@ This archive stores non-authoritative Echo records.
 
 ## Accepted Echo Records
 
+- [/echoes/records/2026/echo-2026-05-24-000023.json](/echoes/records/2026/echo-2026-05-24-000023.json) — \[Agent Gateway\] E1 Recognition Echo — Final E2E validation
 - [/echoes/records/2026/echo-2026-05-24-000022.json](/echoes/records/2026/echo-2026-05-24-000022.json) — \[Agent Gateway\] E1 Recognition Echo — Final pipeline validation \(fully automated\)
