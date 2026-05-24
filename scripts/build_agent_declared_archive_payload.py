@@ -487,15 +487,27 @@ def main():
         print(f'    --out payload.json')
         sys.exit(1)
 
-    # Validate readback is not trivially short (likely a placeholder)
+    # Validate readback matches oath text exactly (character by character)
     oath_text = load_oath_text()
-    if len(args.readback.strip()) < len(oath_text) * 0.5:
-        print("ERROR: --readback is too short.", file=sys.stderr)
-        print(f"Expected at least {int(len(oath_text) * 0.5)} characters (50% of oath text).")
-        print(f"Received {len(args.readback.strip())} characters.")
+    readback_stripped = args.readback.strip()
+    oath_stripped = oath_text.strip()
+    if readback_stripped != oath_stripped:
+        print("ERROR: --readback does not match the oath text exactly.", file=sys.stderr)
         print()
-        print("You must read the oath and type it back word by word.")
-        print(f"Use --print-oath to see the full oath text.")
+        # Show where the difference is
+        if len(readback_stripped) != len(oath_stripped):
+            print(f"Length mismatch: oath has {len(oath_stripped)} characters, readback has {len(readback_stripped)} characters.")
+        else:
+            # Find first differing character
+            for i, (a, b) in enumerate(zip(readback_stripped, oath_stripped)):
+                if a != b:
+                    print(f"First difference at character {i+1}:")
+                    print(f"  Oath:     ...{oath_stripped[max(0,i-20):i+20]}...")
+                    print(f"  Readback: ...{readback_stripped[max(0,i-20):i+20]}...")
+                    break
+        print()
+        print("You must read the oath and type it back character by character.")
+        print(f"Use --print-oath to see the exact oath text.")
         sys.exit(1)
 
     # Print level-selection guidance
