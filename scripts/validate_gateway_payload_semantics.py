@@ -101,6 +101,41 @@ def validate(payload: dict) -> list[str]:
         if readback_hash != actual:
             errors.append("agent_readback_sha256 does not match agent_readback")
 
+    if kind in {"agent_declared_echo_archive", "guardian_active_registry_listing_request"}:
+        if payload.get("evidence_requirement_mode") != "not_applicable_for_echo":
+            errors.append(f"{kind} requires evidence_requirement_mode=not_applicable_for_echo")
+    if kind == "agent_declared_verification_archive":
+        if payload.get("evidence_requirement_mode") != "waived_for_v0_v5":
+            errors.append("agent_declared_verification_archive requires evidence_requirement_mode=waived_for_v0_v5")
+
+    if kind in {"agent_declared_echo_archive", "agent_declared_verification_archive", "guardian_active_registry_listing_request"}:
+        discovery = payload.get("discovery_provenance")
+        if not isinstance(discovery, dict):
+            errors.append("discovery_provenance must be a non-null object")
+        elif not str(discovery.get("source", "")).strip():
+            errors.append("discovery_provenance.source must be a non-empty string")
+
+    if kind == "agent_declared_verification_archive":
+        claim_gate = payload.get("claim_gate")
+        if isinstance(claim_gate, dict):
+            components = claim_gate.get("allowed_component_levels")
+            if components is not None:
+                if not isinstance(components, dict):
+                    errors.append("claim_gate.allowed_component_levels must be an object when present")
+                else:
+                    allowed_component_keys = {"context_depth", "evidence_depth", "tool_reproduction", "independence"}
+                    unknown = sorted(set(components) - allowed_component_keys)
+                    if unknown:
+                        errors.append(f"claim_gate.allowed_component_levels contains unknown keys: {unknown}")
+
+    if kind in {"agent_declared_verification_archive", "agent_declared_echo_archive", "guardian_active_registry_listing_request"}:
+        identity = payload.get("agent_identity") or {}
+        if identity.get("self_reported") is not True:
+            level = identity.get("identity_verification_level")
+            if level not in {"signed_statement", "institutional_domain", "notarial_identity"}:
+                errors.append("agent_identity.self_reported=false requires signed_statement, institutional_domain, or notarial_identity")
+            if not payload.get("authorship_proof"):
+                errors.append("agent_identity.self_reported=false requires authorship_proof")
     return errors
 
 
@@ -127,43 +162,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-
-    # BRANCH-REQ-001/002: evidence_requirement_mode
-    if kind in {"agent_declared_echo_archive", "guardian_active_registry_listing_request"}:
-        if payload.get("evidence_requirement_mode") != "not_applicable_for_echo":
-            errors.append(f"{kind} requires evidence_requirement_mode=not_applicable_for_echo")
-    if kind == "agent_declared_verification_archive":
-        if payload.get("evidence_requirement_mode") != "waived_for_v0_v5":
-            errors.append("agent_declared_verification_archive requires evidence_requirement_mode=waived_for_v0_v5")
-
-    # DISCOVERY-001: discovery_provenance
-    if kind in {"agent_declared_echo_archive", "agent_declared_verification_archive", "guardian_active_registry_listing_request"}:
-        discovery = payload.get("discovery_provenance")
-        if not isinstance(discovery, dict):
-            errors.append("discovery_provenance must be a non-null object")
-        elif not str(discovery.get("source", "")).strip():
-            errors.append("discovery_provenance.source must be a non-empty string")
-
-    # CLAIM-COMP-001: claim_gate component levels
-    if kind == "agent_declared_verification_archive":
-        claim_gate = payload.get("claim_gate")
-        if isinstance(claim_gate, dict):
-            components = claim_gate.get("allowed_component_levels")
-            if components is not None:
-                if not isinstance(components, dict):
-                    errors.append("claim_gate.allowed_component_levels must be an object when present")
-                else:
-                    allowed_component_keys = {"context_depth", "evidence_depth", "tool_reproduction", "independence"}
-                    unknown = sorted(set(components) - allowed_component_keys)
-                    if unknown:
-                        errors.append(f"claim_gate.allowed_component_levels contains unknown keys: {unknown}")
-
-    # IDENTITY-001: agent_identity.self_reported policy
-    if kind in {"agent_declared_verification_archive", "agent_declared_echo_archive", "guardian_active_registry_listing_request"}:
-        identity = payload.get("agent_identity") or {}
-        if identity.get("self_reported") is not True:
-            level = identity.get("identity_verification_level")
-            if level not in {"signed_statement", "institutional_domain", "notarial_identity"}:
-                errors.append("agent_identity.self_reported=false requires signed_statement, institutional_domain, or notarial_identity")
-            if not payload.get("authorship_proof"):
-                errors.append("agent_identity.self_reported=false requires authorship_proof")
