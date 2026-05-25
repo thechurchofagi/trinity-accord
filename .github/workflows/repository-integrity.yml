@@ -580,6 +580,18 @@ jobs:
       - name: Test write workflows actor gates
         run: python3 scripts/test_write_workflows_actor_gates.py
 
+      - name: Test Gateway auto archive fail-closed gate
+        run: python3 scripts/test_gateway_auto_archive_workflow_fail_closed.py
+
+      - name: Test Echo archive global concurrency
+        run: python3 scripts/test_echo_archive_global_concurrency.py
+
+      - name: Test Gateway auto archive push failure hard-fails
+        run: python3 scripts/test_gateway_auto_archive_push_failure_hard_fails.py
+
+      - name: Test Gateway auto archive already archived recovery
+        run: python3 scripts/test_gateway_auto_archive_already_archived_recovery.py
+
       - name: Test trust-root group
         run: python3 scripts/run_ci_group.py trust-root
 

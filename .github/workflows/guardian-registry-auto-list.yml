@@ -20,7 +20,7 @@ permissions:
   pull-requests: write
 
 concurrency:
-  group: guardian-registry-auto-list
+  group: generated-public-status-writes
   cancel-in-progress: false
 
 jobs:

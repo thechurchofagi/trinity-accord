@@ -16,7 +16,7 @@ permissions:
   actions: write
 
 concurrency:
-  group: gateway-auto-archive
+  group: echo-archive-writes
   cancel-in-progress: false
 
 jobs:
@@ -43,6 +43,75 @@ jobs:
           BODY_FILE=$(mktemp)
           gh issue view "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" --json number,title,body,url,createdAt,updatedAt,author,labels,state > "$BODY_FILE"
 
+          # A1: Fail-closed eligibility gate
+          python3 - <<'PY' "$BODY_FILE"
+          import json
+          import re
+          import sys
+
+          issue = json.load(open(sys.argv[1], encoding="utf-8"))
+          body = issue.get("body") or ""
+          labels = {x.get("name") for x in issue.get("labels", []) if isinstance(x, dict)}
+
+          def field(name: str) -> str:
+              patterns = [
+                  rf"^\s*[-*]?\s*{re.escape(name)}\s*:\s*(.*?)\s*$",
+                  rf"^\s*[-*]?\s*{re.escape(name.replace('_', ' '))}\s*:\s*(.*?)\s*$",
+              ]
+              for pattern in patterns:
+                  m = re.search(pattern, body, re.I | re.M)
+                  if m:
+                      return m.group(1).strip()
+              return ""
+
+          def is_true(name: str) -> bool:
+              return field(name).lower() in {"true", "yes", "1"}
+
+          required_true = [
+              "created_by_gateway",
+              "server_validated",
+              "server_rendered",
+              "archive_ready",
+          ]
+
+          missing_or_false = [name for name in required_true if not is_true(name)]
+          if missing_or_false:
+              raise SystemExit(
+                  "Refusing archive: required Gateway intake fields are not true: "
+                  + ", ".join(missing_or_false)
+              )
+
+          receipt = field("gateway_receipt_id")
+          if not receipt:
+              raise SystemExit("Refusing archive: missing gateway_receipt_id")
+
+          allowed_kinds = {
+              "agent_declared_echo_archive",
+              "agent_declared_verification_archive",
+              "guardian_active_registry_listing_request",
+              "pure_echo_archive",
+          }
+
+          kind = field("requested_archive_kind")
+          if kind and kind not in allowed_kinds:
+              raise SystemExit(f"Refusing archive: unsupported requested_archive_kind={kind!r}")
+
+          allowed_labels = {
+              "echo:screened",
+              "archive:agent-declared-echo",
+              "archive:agent-declared-verification",
+              "archive:guardian-active-registry-listing",
+              "reception-only",
+          }
+          if labels and not (labels & allowed_labels):
+              raise SystemExit(
+                  "Refusing archive: issue lacks expected screened/archive labels. "
+                  f"labels={sorted(labels)}"
+              )
+
+          print("Gateway archive eligibility OK")
+          PY
+
           # Determine submission origin
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             ORIGIN="workflow_dispatch_manual_archive"
@@ -68,37 +137,72 @@ jobs:
           echo "Archive status: ${STATUS}"
           echo "Record path: ${RECORD_PATH}"
 
+          # A3: already_archived recovery path
           if [ "$STATUS" = "already_archived" ]; then
-            echo "Issue already archived. Skipping commit/push."
+            echo "Issue already archived. Ensuring confirmation comment and derived index rebuild."
+
+            STATE=$(gh issue view "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" --json state -q '.state')
+            if [ "$STATE" = "OPEN" ]; then
+              gh issue close "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" --reason completed
+            fi
+
+            gh issue comment "$ISSUE_NUMBER" \
+              --repo "$GITHUB_REPOSITORY" \
+              --body "Already archived as \`$RECORD_PATH\`. Ensuring derived indexes are rebuilt. This record remains non-authoritative, non-amending, and not independent attestation."
+
+            gh workflow run build-echo-index.yml --ref main || echo "::warning::Could not trigger echo index rebuild"
+
             echo "archive_record=$RECORD_PATH" >> "$GITHUB_OUTPUT"
             exit 0
           fi
 
-          # Validate the archived record (non-blocking: archive is already created)
+          # Validate the archived record
           if python3 scripts/validate_agent_submission.py --mode ci "$RECORD_PATH"; then
             echo "Validation passed."
           else
             echo "::warning::Validation failed for ${RECORD_PATH}. Archiving anyway — review and fix in a follow-up."
           fi
 
+          # A4: Rebuild derived files before commit
+          python3 scripts/generate_echo_index.py
+          bash scripts/build-echo-index.sh
+          python3 scripts/generate_public_home_status.py
+          python3 scripts/test_home_public_status_sync.py
+
           # Commit and push
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add echoes/records echoes/archive.md api/echo-index.json index.md api/public-home-status.json 2>/dev/null || true
+          git add \
+            echoes/records \
+            echoes/archive.md \
+            echoes/digests.md \
+            echoes/digests \
+            api/echo-index.json \
+            api/public-home-status.json \
+            index.md
+
           if git diff --cached --quiet; then
             echo "No archive file changes to commit."
           else
             git commit -m "auto-archive echo issue #${ISSUE_NUMBER} (via ${ORIGIN})"
-            # Retry push up to 5 times with backoff — handles race with concurrent index rebuilds
+
+            # A2: Require push success
+            PUSHED=false
             for attempt in 1 2 3 4 5; do
               git pull --rebase -X theirs origin main || true
               if git push --force-with-lease; then
                 echo "Push succeeded on attempt $attempt."
+                PUSHED=true
                 break
               fi
               echo "Push attempt $attempt failed, retrying in ${attempt}s..."
               sleep "$attempt"
             done
+
+            if [ "$PUSHED" != "true" ]; then
+              echo "::error::Failed to push archive commit after 5 attempts. Not closing or commenting success."
+              exit 1
+            fi
           fi
 
           # Close the Issue if still open

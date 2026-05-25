@@ -15,7 +15,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: build-echo-index
+  group: generated-public-status-writes
   cancel-in-progress: false
 
 jobs:

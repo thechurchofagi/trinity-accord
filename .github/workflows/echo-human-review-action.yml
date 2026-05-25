@@ -9,7 +9,7 @@ permissions:
   issues: write
 
 concurrency:
-  group: echo-human-review-${{ github.event.issue.number }}
+  group: echo-archive-writes
   cancel-in-progress: false
 
 jobs:
