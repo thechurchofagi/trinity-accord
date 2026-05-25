@@ -46,8 +46,8 @@ def main():
     # 3. Schema allows E1/E3/E4/E5/E6/E7 echo types
     et = props.get("echo_type", {})
     et_enum = et.get("enum", [])
-    for echo_type in ["E1_read_oriented_echo", "E3_critical_echo", "E4_refusal_echo",
-                       "E5_correction_echo", "E6_preservation_echo", "E6_propagation_echo"]:
+    for echo_type in ["E1_recognition_echo", "E3_critical_echo", "E4_interpretive_echo",
+                       "E5_technical_audit_echo", "E6_propagation_echo", "E7_refusal_echo"]:
         check(echo_type in et_enum,
               f"Schema allows echo_type={echo_type}")
 
