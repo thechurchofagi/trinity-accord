@@ -9,6 +9,9 @@ from pathlib import Path
 import jsonschema
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "scripts"))
+from validate_gateway_payload_semantics import validate as semantic_validate
+
 schema = json.loads((ROOT / "api" / "agent-issue-gateway-payload-schema.v1.json").read_text(encoding="utf-8"))
 
 READBACK = (
@@ -58,6 +61,17 @@ def verification_payload() -> dict:
             }
         },
         "discovery_provenance": {"source": "fixture"},
+        "origin_classification": {
+            "discovery_class": "human_solicited",
+            "performer_class": "ai_agent",
+            "verification_claimed": True,
+            "counts_as_ai_verification": True,
+        },
+        "claim_classification": {
+            "verification_claim": {"claimed": True, "basis": "agent_declared", "system_certified": False},
+            "attestation_claim": {"claimed": False, "system_certified": False},
+            "successor_reception_claim": {"claimed": False, "system_certified": False},
+        },
         "authority_boundary": {
             "bitcoin_originals_remain_final": True,
             "does_not_amend_bitcoin_originals": True,
@@ -97,34 +111,43 @@ def verification_payload() -> dict:
         }
     }
 
-def expect_pass(payload, label):
+def expect_schema_pass(payload, label):
     try:
         jsonschema.validate(payload, schema)
     except jsonschema.ValidationError as e:
-        print(f"FAIL: expected pass for {label}: {e.message}")
+        print(f"FAIL: expected schema pass for {label}: {e.message}")
         sys.exit(1)
 
-def expect_fail(payload, label):
-    try:
-        jsonschema.validate(payload, schema)
-    except jsonschema.ValidationError:
-        return
-    print(f"FAIL: expected schema rejection for {label}")
-    sys.exit(1)
+def expect_semantic_fail(payload, label, fragment):
+    errors = semantic_validate(payload)
+    if not any(fragment in e for e in errors):
+        print(f"FAIL: expected semantic error for {label}: {fragment}")
+        print(f"  Got: {errors}")
+        sys.exit(1)
 
 good = verification_payload()
-expect_pass(good, "valid current V0-V5 allowed_component_levels fixture")
+expect_schema_pass(good, "valid current V0-V5 allowed_component_levels fixture")
 
+# Unknown key — semantic validator rejects
 unknown = copy.deepcopy(good)
 unknown["claim_gate"]["allowed_component_levels"]["mystery_key"] = "X1"
-expect_fail(unknown, "allowed_component_levels with unknown key")
+expect_schema_pass(unknown, "unknown key passes schema")
+expect_semantic_fail(unknown, "unknown key rejected by semantic validator", "unknown keys")
 
+# Invalid enum value — semantic validator rejects
 bad_val = copy.deepcopy(good)
 bad_val["claim_gate"]["allowed_component_levels"]["context_depth"] = "D99"
-expect_fail(bad_val, "allowed_component_levels with invalid enum value")
+expect_schema_pass(bad_val, "invalid value passes schema")
+expect_semantic_fail(bad_val, "invalid value rejected by semantic validator", "invalid value")
 
+# Non-object type — schema rejects
 bad_type = copy.deepcopy(good)
 bad_type["claim_gate"]["allowed_component_levels"] = "not-an-object"
-expect_fail(bad_type, "allowed_component_levels with non-object value")
+try:
+    jsonschema.validate(bad_type, schema)
+    print("FAIL: expected schema rejection for non-object allowed_component_levels")
+    sys.exit(1)
+except jsonschema.ValidationError:
+    pass
 
 print("PASS: claim_gate.allowed_component_levels constraints enforced")
