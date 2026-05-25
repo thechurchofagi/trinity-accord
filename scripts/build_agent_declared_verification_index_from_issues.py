@@ -28,6 +28,9 @@ from gateway_v0_v5_policy import (
 ROOT = Path(__file__).resolve().parents[1]
 INDEX_PATH = ROOT / "api" / "agent-declared-verification-index.json"
 
+# Shared echo taxonomy — single source of truth
+from protocol_echo_types import allowed_canonical_echo_types
+
 # Load semantic overrides (e.g. correction echoes classified by maintainers)
 OVERRIDES_PATH = ROOT / "api" / "agent-declared-archive-overrides.json"
 overrides: dict = {}
@@ -107,6 +110,71 @@ INVALID_LABEL_PATTERNS = [
     "not-counted",
     "echo:invalid",
 ]
+
+# Semantic override validation constants
+VALID_SEMANTIC_ARCHIVE_KINDS = {
+    "agent_declared_echo_archive",
+    "agent_declared_verification_archive",
+}
+
+VALID_OVERRIDE_RELATIONS = {
+    "corrects",
+    "supersedes",
+    "clarifies",
+    "references",
+}
+
+VALID_SEMANTIC_FUNCTIONS = {
+    "correction",
+    "clarification",
+    "classification_override",
+}
+
+
+def validate_override(issue_number: int, override: dict) -> None:
+    """Validate maintainer semantic override before applying it."""
+    if not isinstance(override, dict):
+        raise SystemExit(f"Invalid override for issue #{issue_number}: override must be object")
+
+    semantic_kind = override.get("semantic_archive_kind")
+    if semantic_kind not in VALID_SEMANTIC_ARCHIVE_KINDS:
+        raise SystemExit(
+            f"Invalid override for issue #{issue_number}: "
+            f"semantic_archive_kind={semantic_kind!r}"
+        )
+
+    echo_type = override.get("echo_type")
+    if semantic_kind == "agent_declared_echo_archive":
+        if echo_type not in allowed_canonical_echo_types():
+            raise SystemExit(
+                f"Invalid override for issue #{issue_number}: "
+                f"non-canonical echo_type={echo_type!r}"
+            )
+
+    for key in ["counts_toward_home_verifiability", "counts_toward_home_reception"]:
+        if not isinstance(override.get(key), bool):
+            raise SystemExit(
+                f"Invalid override for issue #{issue_number}: {key} must be boolean"
+            )
+
+    if "related_issue" in override and not isinstance(override.get("related_issue"), int):
+        raise SystemExit(
+            f"Invalid override for issue #{issue_number}: related_issue must be int"
+        )
+
+    relation = override.get("relation_to_related_issue")
+    if relation is not None and relation not in VALID_OVERRIDE_RELATIONS:
+        raise SystemExit(
+            f"Invalid override for issue #{issue_number}: "
+            f"relation_to_related_issue={relation!r}"
+        )
+
+    semantic_function = override.get("semantic_function")
+    if semantic_function is not None and semantic_function not in VALID_SEMANTIC_FUNCTIONS:
+        raise SystemExit(
+            f"Invalid override for issue #{issue_number}: "
+            f"semantic_function={semantic_function!r}"
+        )
 
 
 def run_gh(args: list[str]) -> str:
@@ -382,13 +450,20 @@ def build_index(issues: list[dict], repo: str = "", include_test: bool = False) 
         # Apply semantic overrides from agent-declared-archive-overrides.json
         override = overrides.get(str(issue["number"]))
         if override:
+            validate_override(issue["number"], override)
             record["semantic_archive_kind"] = override["semantic_archive_kind"]
-            record["echo_type"] = override["echo_type"]
+            record["echo_type"] = override.get("echo_type")
             record["counts_toward_home_verifiability"] = override["counts_toward_home_verifiability"]
             record["counts_toward_home_reception"] = override["counts_toward_home_reception"]
-            record["related_issue"] = override["related_issue"]
-            record["relation_to_related_issue"] = override["relation_to_related_issue"]
-            record["semantic_override_reason"] = override["reason"]
+            if "related_issue" in override:
+                record["related_issue"] = override["related_issue"]
+            if "relation_to_related_issue" in override:
+                record["relation_to_related_issue"] = override["relation_to_related_issue"]
+            if "semantic_function" in override:
+                record["semantic_function"] = override["semantic_function"]
+            if "correction_does_not_amend_prior_record" in override:
+                record["correction_does_not_amend_prior_record"] = override["correction_does_not_amend_prior_record"]
+            record["semantic_override_reason"] = override.get("reason", "")
 
         # Issue #180 correction annotation
         if issue["number"] == 180:
@@ -401,19 +476,32 @@ def build_index(issues: list[dict], repo: str = "", include_test: bool = False) 
     # Sort by issue number
     records.sort(key=lambda r: r["issue_number"])
 
+    # Compute override summary
+    applied_overrides = sorted(
+        int(r["issue_number"])
+        for r in records
+        if r.get("semantic_override_reason")
+    )
+
     return {
         "schema": "trinityaccord.agent-declared-verification-index.v1",
         "description": (
-            "Index of agent-declared verification archives created through the Gateway. "
-            "Records are added when a V0-V5 agent-declared Issue is successfully created and auto-archived. "
+            "Index rebuilt from Gateway-created closed Issues. "
+            "It primarily contains agent-declared verification archives, but may include "
+            "maintainer-classified semantic Echo archives via /api/agent-declared-archive-overrides.json. "
             "This index is rebuilt from closed GitHub Issues by CI."
         ),
         "generated_from": [
-            "/api/agent-issue-gateway-payload-schema.v1.json"
+            "github_issues:closed",
+            "/api/agent-issue-gateway-payload-schema.v1.json",
+            "/api/agent-declared-archive-overrides.json",
+            "scripts/gateway_v0_v5_policy.py",
         ],
         "rebuild_source": "github_issues",
         "rebuild_timestamp": datetime.now(timezone.utc).isoformat(),
         "render_api_only_effective_at": RENDER_API_ONLY_EFFECTIVE_AT,
+        "override_count": len(applied_overrides),
+        "overrides_applied": applied_overrides,
         "skipped_direct_issue_archive_attempts": skipped_direct,
         "skipped_missing_oath_summary": skipped_missing_oath_summary,
         "records": records,
