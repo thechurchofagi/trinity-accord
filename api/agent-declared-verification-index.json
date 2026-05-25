@@ -2,10 +2,13 @@
   "schema": "trinityaccord.agent-declared-verification-index.v1",
   "description": "Index of agent-declared verification archives created through the Gateway. Records are added when a V0-V5 agent-declared Issue is successfully created and auto-archived. This index is rebuilt from closed GitHub Issues by CI.",
   "generated_from": [
-    "/api/agent-issue-gateway-payload-schema.v1.json"
+    "github_issues:closed",
+    "/api/agent-issue-gateway-payload-schema.v1.json",
+    "/api/agent-declared-archive-overrides.json",
+    "scripts/gateway_v0_v5_policy.py"
   ],
   "rebuild_source": "github_issues",
-  "rebuild_timestamp": "2026-05-25T01:34:44.275666+00:00",
+  "rebuild_timestamp": "2026-05-25T06:23:25.119125+00:00",
   "render_api_only_effective_at": "2026-05-17T05:30:00Z",
   "skipped_direct_issue_archive_attempts": [],
   "skipped_missing_oath_summary": [],
@@ -559,10 +562,11 @@
       "claim_status": "unclaimed",
       "authorship_claimed": false,
       "semantic_archive_kind": "agent_declared_echo_archive",
-      "echo_type": "E5_correction_echo",
+      "echo_type": "E5_technical_audit_echo",
       "related_issue": 180,
       "relation_to_related_issue": "corrects",
-      "semantic_override_reason": "Issue body states no new verification claimed and corrects Issue #180."
+      "semantic_override_reason": "Issue body states no new verification claimed and corrects Issue #180.",
+      "semantic_function": "correction"
     },
     {
       "issue_number": 185,
@@ -1285,5 +1289,9 @@
       "claim_status": "claimable_by_public_key",
       "authorship_claimed": false
     }
+  ],
+  "override_count": 1,
+  "overrides_applied": [
+    182
   ]
 }

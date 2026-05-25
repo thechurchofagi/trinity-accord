@@ -47,7 +47,7 @@
         "E2_verification_echo": 0,
         "E3_critical_echo": 0,
         "E4_interpretive_echo": 0,
-        "E5_technical_audit_echo": 0,
+        "E5_technical_audit_echo": 1,
         "E6_propagation_echo": 0,
         "E7_refusal_echo": 0,
         "E8_witness_echo": 0,
@@ -185,5 +185,5 @@
     "gateway_private_key_access": false,
     "boundary": "Authorship claims prove key continuity only; they do not affect authority, verifiability, reception, or amendment status."
   },
-  "source_digest": "1ac728776d24ba92"
+  "source_digest": "eb4b35710eda7711"
 }
