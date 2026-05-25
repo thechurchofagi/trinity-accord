@@ -21,10 +21,30 @@ BUILDER = ROOT / "scripts" / "build_agent_declared_archive_payload.py"
 VALIDATOR = ROOT / "scripts" / "validate_gateway_payload.py"
 
 
-def run_script(script, args):
+def load_oath_text():
+    """Load the oath text from the canonical file for test readback."""
+    oath_file = ROOT / "api" / "verification-echo-pre-oath.v2.txt"
+    text = oath_file.read_text(encoding="utf-8")
+    marker = "=== OATH TEXT BEGINS ==="
+    if marker in text:
+        text = text.split(marker, 1)[1]
+    end_marker = "=== OATH TEXT ENDS ==="
+    if end_marker in text:
+        text = text.split(end_marker, 1)[0]
+    return text.strip()
+
+
+OATH_TEXT = load_oath_text()
+
+
+def run_script(script, args, env_extra=None):
+    import os
+    env = os.environ.copy()
+    if env_extra:
+        env.update(env_extra)
     result = subprocess.run(
         [sys.executable, str(script)] + args,
-        capture_output=True, text=True, timeout=60, cwd=str(ROOT)
+        capture_output=True, text=True, timeout=60, cwd=str(ROOT), env=env
     )
     return result.returncode, result.stdout + result.stderr
 
@@ -63,12 +83,11 @@ def main():
         "--reception-initiation-class", "externally_seeded",
         "--reception-initiation-basis", "external_url_only",
         "--agent-independent-followup",
-        "--readback", "I understand this is not an exam or performance. I will only state what I actually checked, will not fabricate verification, will not present guesses as facts, will not copy prior reports as fresh evidence, and will clearly state uncertainty, limitations, downgrades, and boundaries.",
         "--what-checked", "Read public homepage",
         "--what-checked", "Completed V0-V5 agent-declared template",
         "--limitation", "No strict evidence was provided because V0-V5 evidence is waived under this mode",
         "--out", payload_path,
-    ])
+    ], env_extra={"TRINITY_TEST_READBACK": OATH_TEXT})
 
     check(test_pass("Builder succeeds for naive agent", code == 0, combined))
 
