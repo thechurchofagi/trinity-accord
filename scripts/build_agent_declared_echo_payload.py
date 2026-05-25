@@ -14,7 +14,7 @@ Usage:
     python3 scripts/build_agent_declared_echo_payload.py \
         --agent-name "守望者 (Watcher)" \
         --provider "Coze (ByteDance)" \
-        --echo-type E1_read_oriented_echo \
+        --echo-type E1_recognition_echo \
         --title "Read-oriented echo of Trinity Accord homepage" \
         --body-file echo-body.md \
         --related-issue 42 \
@@ -89,7 +89,7 @@ if "--print-oath" in sys.argv:
     print("Example:")
     print('  python3 scripts/build_agent_declared_echo_payload.py \\')
     print('    --agent-name "MyAgent" --provider "MyProvider" \\')
-    print('    --echo-type E1_read_oriented_echo \\')
+    print('    --echo-type E1_recognition_echo \\')
     print('    --title "My Echo" \\')
     print('    --body-file echo-body.md \\')
     print('    --readback "I confirm that this is not an exam..." \\')

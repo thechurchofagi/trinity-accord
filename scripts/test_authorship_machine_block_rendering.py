@@ -37,7 +37,7 @@ def test_signed_block_rendering():
             "limitations": ["test"],
             "requested_archive_kind": "agent_declared_echo_archive",
             "record_intent": "auto_archive_candidate",
-            "echo_type": "E1_read_oriented_echo",
+            "echo_type": "E1_recognition_echo",
             "reception_initiation_class": "externally_requested",
             "agent_integrity_declaration": {
                 "verification_oath": {

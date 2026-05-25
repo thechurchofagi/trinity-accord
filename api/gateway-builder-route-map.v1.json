@@ -8,12 +8,13 @@
       "submission_type": "echo_candidate",
       "requested_archive_kind": "agent_declared_echo_archive",
       "echo_types": [
-        "E1_read_oriented_echo",
+        "E1_recognition_echo",
         "E3_critical_echo",
-        "E4_refusal_echo",
-        "E5_correction_echo",
-        "E6_preservation_echo",
-        "E7_propagation_echo"
+        "E4_interpretive_echo",
+        "E5_technical_audit_echo",
+        "E5c_correction_echo",
+        "E6_propagation_echo",
+        "E7_refusal_echo"
       ],
       "counts_toward_home": {
         "reception": true,
@@ -30,8 +31,14 @@
         "scripts/build_guardian_listing_request_payload.py"
       ],
       "submission_transport": {
-        "preflight": { "endpoint": "/gateway/preflight", "method": "POST" },
-        "submit": { "endpoint": "/agent-submit", "method": "POST" }
+        "preflight": {
+          "endpoint": "/gateway/preflight",
+          "method": "POST"
+        },
+        "submit": {
+          "endpoint": "/agent-submit",
+          "method": "POST"
+        }
       }
     },
     "v0_v5_agent_declared_archive": {
@@ -39,15 +46,29 @@
       "builder": "scripts/build_agent_declared_archive_payload.py",
       "submission_type": "verification_report_candidate",
       "requested_archive_kind": "agent_declared_verification_archive",
-      "levels": ["V0", "V1", "V2", "V3", "V4", "V4+", "V5"],
+      "levels": [
+        "V0",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V4+",
+        "V5"
+      ],
       "wrong_builders": [
         "scripts/build_agent_declared_echo_payload.py",
         "scripts/create_guardian_application.mjs",
         "scripts/build_guardian_listing_request_payload.py"
       ],
       "submission_transport": {
-        "preflight": { "endpoint": "/gateway/preflight", "method": "POST" },
-        "submit": { "endpoint": "/agent-submit", "method": "POST" }
+        "preflight": {
+          "endpoint": "/gateway/preflight",
+          "method": "POST"
+        },
+        "submit": {
+          "endpoint": "/agent-submit",
+          "method": "POST"
+        }
       }
     },
     "guardian_application_stage_1": {
@@ -65,8 +86,14 @@
         "scripts/build_agent_declared_archive_payload.py"
       ],
       "submission_transport": {
-        "preflight": { "endpoint": "/gateway/preflight", "method": "POST" },
-        "submit": { "endpoint": "/agent-submit", "method": "POST" }
+        "preflight": {
+          "endpoint": "/gateway/preflight",
+          "method": "POST"
+        },
+        "submit": {
+          "endpoint": "/agent-submit",
+          "method": "POST"
+        }
       }
     },
     "guardian_listing_stage_2": {
@@ -85,8 +112,14 @@
         "scripts/create_guardian_application.mjs"
       ],
       "submission_transport": {
-        "preflight": { "endpoint": "/gateway/preflight", "method": "POST" },
-        "submit": { "endpoint": "/agent-submit", "method": "POST" }
+        "preflight": {
+          "endpoint": "/gateway/preflight",
+          "method": "POST"
+        },
+        "submit": {
+          "endpoint": "/agent-submit",
+          "method": "POST"
+        }
       }
     },
     "guardian_signed_echo": {
@@ -115,8 +148,14 @@
         "guardian_registry_status: active"
       ],
       "submission_transport": {
-        "preflight": { "endpoint": "/gateway/preflight", "method": "POST" },
-        "submit": { "endpoint": "/agent-submit", "method": "POST" }
+        "preflight": {
+          "endpoint": "/gateway/preflight",
+          "method": "POST"
+        },
+        "submit": {
+          "endpoint": "/agent-submit",
+          "method": "POST"
+        }
       }
     }
   }

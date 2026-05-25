@@ -11,7 +11,7 @@ def main() -> None:
     routes = m["routes"]
 
     assert routes["pure_echo"]["builder"] == "scripts/build_agent_declared_echo_payload.py"
-    assert "E1_read_oriented_echo" in routes["pure_echo"]["echo_types"]
+    assert "E1_recognition_echo" in routes["pure_echo"]["echo_types"]
 
     assert routes["v0_v5_agent_declared_archive"]["builder"] == "scripts/build_agent_declared_archive_payload.py"
     assert "V0" in routes["v0_v5_agent_declared_archive"]["levels"]
