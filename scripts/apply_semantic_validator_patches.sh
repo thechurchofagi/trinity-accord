@@ -4,6 +4,9 @@
 # 在仓库根目录运行: bash scripts/apply_semantic_validator_patches.sh
 # ============================================================
 set -euo pipefail
+
+echo "WARNING: This script is a best-effort patch helper, not a verification tool."
+echo "Run repository-integrity and behavior tests before treating changes as complete."
 cd "$(git rev-parse --show-toplevel)"
 
 SV="scripts/validate_gateway_payload_semantics.py"
