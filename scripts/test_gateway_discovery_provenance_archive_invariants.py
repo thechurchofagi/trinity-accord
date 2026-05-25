@@ -157,6 +157,13 @@ def guardian_payload() -> dict:
     })
     return p
 
+def expect_pass(payload, label):
+    try:
+        jsonschema.validate(payload, schema)
+    except jsonschema.ValidationError as e:
+        print(f"FAIL: expected pass for {label}: {e.message}")
+        sys.exit(1)
+
 def expect_fail(payload, label):
     try:
         jsonschema.validate(payload, schema)
@@ -171,11 +178,14 @@ for factory, name in [
     (verification_payload, "agent_declared_verification_archive"),
     (guardian_payload, "guardian listing"),
 ]:
-    null_disc = copy.deepcopy(factory())
+    good = factory()
+    expect_pass(good, f"valid {name} baseline")
+
+    null_disc = copy.deepcopy(good)
     null_disc["discovery_provenance"] = None
     expect_fail(null_disc, f"{name} with discovery_provenance=null")
 
-    empty_disc = copy.deepcopy(factory())
+    empty_disc = copy.deepcopy(good)
     empty_disc["discovery_provenance"] = {}
     expect_fail(empty_disc, f"{name} with discovery_provenance={{}}")
 
