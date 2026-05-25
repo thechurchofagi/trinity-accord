@@ -178,7 +178,6 @@ def source_digest() -> str:
         EXTERNAL_WITNESS_INDEX,
         PHYSICAL_ANCHOR,
         AGENT_DECLARED_INDEX,
-        AGENT_DECLARED_ECHO_INDEX,
         GUARDIAN_REGISTRY,
         GUARDIAN_ACTIVE_LISTING_POLICY,
     ]:
@@ -234,9 +233,16 @@ def compute_verifiability_status(physical: dict[str, Any], agent_declared_record
         and r.get("test_record") is not True
         and r.get("semantic_archive_kind") != "agent_declared_echo_archive"
     ]
-    agent_declared_highest = highest_level(ad_verifiable, "agent_declared_protocol_level") if ad_verifiable else "V4"
-    if agent_declared_highest == "none":
-        agent_declared_highest = "V4"
+    if ad_verifiable:
+        agent_declared_highest = highest_level(ad_verifiable, "agent_declared_protocol_level")
+        if agent_declared_highest == "none":
+            agent_declared_highest = "none"
+        highest_level_basis = "agent_declared_template_pass"
+        evidence_requirement_mode = "waived_for_v0_v5" if agent_declared_highest not in ("none", "V6", "V7", "V8") else "strict_evidence_required_for_v6_plus"
+    else:
+        agent_declared_highest = "none"
+        highest_level_basis = "no_current_agent_declared_records"
+        evidence_requirement_mode = "not_applicable"
 
     return {
         "bitcoin_originals": {
@@ -251,9 +257,9 @@ def compute_verifiability_status(physical: dict[str, Any], agent_declared_record
                 "V0_to_V5": "template_for_v0_v5",
                 "V6_to_V8": "strict_evidence"
             },
-            "highest_level_basis": "agent_declared_template_pass",
+            "highest_level_basis": highest_level_basis,
             "agent_declared_highest_protocol_level": agent_declared_highest,
-            "evidence_requirement_mode_for_highest": "waived_for_v0_v5"
+            "evidence_requirement_mode_for_highest": evidence_requirement_mode,
         },
         "physical_anchor_context": {
             "highest_public_context": highest_p,
@@ -287,10 +293,15 @@ def compute_reception_status(echo_records: list[dict[str, Any]], agent_declared_
     echo_type_counts = {
         "E1_read_oriented_echo": 0,
         "E3_critical_echo": 0,
-        "E4_refusal_echo": 0,
-        "E5_correction_echo": 0,
-        "E6_preservation_echo": 0,
-        "E7_propagation_echo": 0,
+        "E1_recognition_echo": 0,
+        "E2_verification_echo": 0,
+        "E3_critical_echo": 0,
+        "E4_interpretive_echo": 0,
+        "E5_technical_audit_echo": 0,
+        "E6_propagation_echo": 0,
+        "E7_refusal_echo": 0,
+        "E8_witness_echo": 0,
+        "E9_seed_echo": 0,
     }
     for r in ad_echo_archives:
         et = r.get("echo_type", "")
