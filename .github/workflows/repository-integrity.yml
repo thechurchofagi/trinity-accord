@@ -906,3 +906,9 @@ jobs:
         run: python3 scripts/test_echo_triage_receipt_fields_only_from_intake_block.py
       - name: Verify agent-declared verification index has no drift
         run: python3 scripts/build_agent_declared_verification_index_from_issues.py --repo thechurchofagi/trinity-accord --check
+      - name: Test run_all fail-closed
+        run: python3 scripts/test_run_all_fail_closed.py
+      - name: Test agent-declared index builder check mode
+        run: python3 scripts/test_agent_declared_index_builder_has_check_mode.py
+      - name: Test apply scripts are not verification tools
+        run: python3 scripts/test_apply_scripts_not_verification_tools.py
