@@ -258,7 +258,7 @@ def make_v4_valid_agent_declared():
             "attestation_claim": {"claimed": False, "system_certified": False},
             "successor_reception_claim": {"claimed": False, "system_certified": False},
         },
-        "discovery_provenance": {"agency_level": "A2_human_gave_repo_name", "independence_class": "human_solicited_agent_response", "operator_type": "ai_agent"},
+        "discovery_provenance": {"source": "human_gave_repo_name", "agency_level": "A2_human_gave_repo_name", "independence_class": "human_solicited_agent_response", "operator_type": "ai_agent"},
         "context_readiness": {},
         "what_i_checked": ["test"],
         "limitations": ["test"],
