@@ -1529,5 +1529,19 @@
     "Echo content tags are non-exclusive and do not determine count status.",
     "D/S/O/E/R provenance codes are derived/internal."
   ],
-  "source_digest": "57669c2782d6c7ee"
+  "version": "v1",
+  "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
+  "non_amending_boundary": true,
+  "limitations": [
+    "Echo index is a derived aggregation, not a canonical source of truth.",
+    "Record counts may lag behind actual Issue state.",
+    "Does not verify or attest to any record."
+  ],
+  "does_not_prove": [
+    "Does not prove verification level.",
+    "Does not prove independent attestation.",
+    "Does not prove successor reception.",
+    "Does not amend Bitcoin Originals."
+  ],
+  "source_digest": "b2574663caeb2ada"
 }

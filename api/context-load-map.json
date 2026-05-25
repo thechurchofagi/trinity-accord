@@ -94,14 +94,46 @@
     "full_corpus_claim": "CC-5"
   },
   "context_packs_inventory": {
-    "core-ontology.json": { "size": "852B", "cc_level": "CC-2", "content": "Three Bitcoin Originals role summaries" },
-    "authority-boundary.json": { "size": "617B", "cc_level": "CC-2", "content": "Authority boundary rules" },
-    "bitcoin-inscription-mirrors.json": { "size": "837B", "cc_level": "CC-2", "content": "Inscription mirror loading guidance" },
-    "vision-layer.json": { "size": "2.9KB", "cc_level": "CC-3", "content": "Vision-layer inscription summaries (Star Ark, Final Seal, First Echoes, Guardian inscriptions)" },
-    "physical-anchor-context.json": { "size": "776B", "cc_level": "CC-3", "content": "Core Object Alpha physical anchor status" },
-    "legacy-archive-index.json": { "size": "830B", "cc_level": "CC-3", "content": "Legacy archive section index" },
-    "nft-chronicle-context.json": { "size": "4.8KB", "cc_level": "CC-3", "content": "NFT Chronicle full index and status" },
-    "legacy-archive-essentials.json": { "size": "~12KB", "cc_level": "CC-3", "content": "Structured extract of essential legacy archive sections" }
+    "core-ontology.json": {
+      "size": "852B",
+      "cc_level": "CC-2",
+      "content": "Three Bitcoin Originals role summaries"
+    },
+    "authority-boundary.json": {
+      "size": "617B",
+      "cc_level": "CC-2",
+      "content": "Authority boundary rules"
+    },
+    "bitcoin-inscription-mirrors.json": {
+      "size": "837B",
+      "cc_level": "CC-2",
+      "content": "Inscription mirror loading guidance"
+    },
+    "vision-layer.json": {
+      "size": "2.9KB",
+      "cc_level": "CC-3",
+      "content": "Vision-layer inscription summaries (Star Ark, Final Seal, First Echoes, Guardian inscriptions)"
+    },
+    "physical-anchor-context.json": {
+      "size": "776B",
+      "cc_level": "CC-3",
+      "content": "Core Object Alpha physical anchor status"
+    },
+    "legacy-archive-index.json": {
+      "size": "830B",
+      "cc_level": "CC-3",
+      "content": "Legacy archive section index"
+    },
+    "nft-chronicle-context.json": {
+      "size": "4.8KB",
+      "cc_level": "CC-3",
+      "content": "NFT Chronicle full index and status"
+    },
+    "legacy-archive-essentials.json": {
+      "size": "~12KB",
+      "cc_level": "CC-3",
+      "content": "Structured extract of essential legacy archive sections"
+    }
   },
   "default_rule": "Load the minimum CC level required for your intended action. Do not load higher levels unless the task requires it. Use context-packs for lightweight summaries; load full pages only when deeper context is needed.",
   "agent_task_router": "/api/agent-task-router.v1.json",
@@ -109,5 +141,11 @@
   "context_depth_levels": "/api/context-depth-levels.json",
   "context_depth_declaration": "/api/context-depth-declaration.v1.json",
   "crl_to_context_depth_mapping": "/api/crl-to-context-depth-mapping.json",
-  "boundary": "This file is non-authoritative guidance. Bitcoin Originals prevail. Context loading does not create authority, verification, or endorsement."
+  "boundary": "This file is non-authoritative guidance. Bitcoin Originals prevail. Context loading does not create authority, verification, or endorsement.",
+  "minimal_first_load": [
+    "/api/agent-minimal-context.v1.json",
+    "/api/agent-first-contact.json",
+    "/api/authority.json",
+    "/api/agent-output-policy.v1.json"
+  ]
 }
