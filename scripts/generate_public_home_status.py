@@ -299,10 +299,25 @@ def compute_reception_status(echo_records: list[dict[str, Any]], agent_declared_
 
     # Count by echo type — generated from canonical taxonomy
     echo_type_counts = {name: 0 for name in sorted(allowed_canonical_echo_types())}
+    unknown_echo_types: list[dict[str, Any]] = []
+
     for r in ad_echo_archives:
         et = r.get("echo_type", "")
         if et in echo_type_counts:
             echo_type_counts[et] += 1
+        else:
+            unknown_echo_types.append({
+                "issue_number": r.get("issue_number"),
+                "issue_url": r.get("issue_url"),
+                "echo_type": et,
+                "semantic_archive_kind": r.get("semantic_archive_kind"),
+            })
+
+    if unknown_echo_types:
+        raise RuntimeError(
+            "Unknown non-canonical echo_type values in agent-declared Echo archives: "
+            + json.dumps(unknown_echo_types, ensure_ascii=False)
+        )
 
     # Agent-declared verification archives (from index, excluding test records for reception)
     ad_reception = [
