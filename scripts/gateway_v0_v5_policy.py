@@ -132,16 +132,13 @@ def is_valid_gateway_receipt_block(intake):
 
 
 def has_valid_gateway_receipt_in_text(text):
-    """Strict check for valid gateway receipt fields in raw issue body text.
+    """Deprecated. Do not use.
 
-    Used by triage to detect whether an Issue has a real Render API receipt,
-    not just a hand-written gateway_receipt_id line.
+    Receipt validity must be checked by parsing exactly one trinity-issue-intake
+    block with gateway_intake.parse_intake_block() and then calling
+    is_valid_gateway_receipt_block(fields).
     """
-    return (
-        bool(re.search(r"created_by_gateway\s*:\s*true", text, re.IGNORECASE))
-        and bool(re.search(r"render_api_only\s*:\s*true", text, re.IGNORECASE))
-        and bool(re.search(r"server_validated\s*:\s*true", text, re.IGNORECASE))
-        and bool(re.search(r"server_rendered\s*:\s*true", text, re.IGNORECASE))
-        and bool(re.search(r"gateway_service\s*:\s*trinity-agent-issue-gateway", text, re.IGNORECASE))
-        and bool(re.search(r"gateway_receipt_id\s*:\s*gar-[A-Za-z0-9T._:-]{16,}", text, re.IGNORECASE))
+    raise RuntimeError(
+        "has_valid_gateway_receipt_in_text is deprecated; "
+        "use gateway_intake.parse_intake_block + is_valid_gateway_receipt_block"
     )

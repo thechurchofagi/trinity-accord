@@ -86,7 +86,8 @@ def detect_direct_archive_attempt(issue):
     Uses the same strict receipt validation as the real triage_echo_issue.py.
     Returns (triggered: bool, reason: str).
     """
-    from gateway_v0_v5_policy import has_valid_gateway_receipt_in_text
+    from gateway_intake import parse_intake_block
+    from gateway_v0_v5_policy import is_valid_gateway_receipt_block
 
     body = issue.get("body", "")
     created_at = issue.get("createdAt", "")
@@ -102,7 +103,11 @@ def detect_direct_archive_attempt(issue):
         return False, "no archive intent"
 
     # Strict receipt check — same as production triage
-    has_gateway_receipt = has_valid_gateway_receipt_in_text(body)
+    try:
+        _intake_fields = parse_intake_block(body, required=False)
+        has_gateway_receipt = is_valid_gateway_receipt_block(_intake_fields) if _intake_fields else False
+    except Exception:
+        has_gateway_receipt = False
     if has_gateway_receipt:
         return False, "has valid gateway receipt"
 
@@ -170,12 +175,17 @@ def check_not_counted_in_index(issue, effective_at=EFFECTIVE_AT):
 
     Uses the same strict receipt validation as production code.
     """
-    from gateway_v0_v5_policy import has_valid_gateway_receipt_in_text
+    from gateway_intake import parse_intake_block
+    from gateway_v0_v5_policy import is_valid_gateway_receipt_block
 
     body = issue.get("body", "")
     created_at = issue.get("createdAt", "")
 
-    has_gateway_receipt = has_valid_gateway_receipt_in_text(body)
+    try:
+        _intake_fields = parse_intake_block(body, required=False)
+        has_gateway_receipt = is_valid_gateway_receipt_block(_intake_fields) if _intake_fields else False
+    except Exception:
+        has_gateway_receipt = False
 
     try:
         effective = datetime.fromisoformat(effective_at.replace("Z", "+00:00"))

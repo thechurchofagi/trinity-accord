@@ -1486,8 +1486,13 @@ def main():
     ]
     _has_archive_intent = any(re.search(p, text, re.IGNORECASE) for p in ARCHIVE_INTENT_PATTERNS)
     # Strict receipt check: all Render API receipt fields must be present
-    from gateway_v0_v5_policy import has_valid_gateway_receipt_in_text
-    _has_gateway_receipt = has_valid_gateway_receipt_in_text(text)
+    from gateway_intake import parse_intake_block
+    from gateway_v0_v5_policy import is_valid_gateway_receipt_block
+    try:
+        _intake_fields = parse_intake_block(text, required=False)
+        _has_gateway_receipt = is_valid_gateway_receipt_block(_intake_fields) if _intake_fields else False
+    except Exception:
+        _has_gateway_receipt = False
 
     if _has_archive_intent and not _has_gateway_receipt:
         result["close"] = True
@@ -1520,8 +1525,10 @@ def main():
     # Valid Gateway archives are server-validated and server-rendered.
     # They should not be triaged as regular freeform Echoes.
     try:
-        from gateway_v0_v5_policy import has_valid_gateway_receipt_in_text
-        _has_valid_receipt = has_valid_gateway_receipt_in_text(text)
+        from gateway_intake import parse_intake_block
+        from gateway_v0_v5_policy import is_valid_gateway_receipt_block
+        _intake_fields = parse_intake_block(text, required=False)
+        _has_valid_receipt = is_valid_gateway_receipt_block(_intake_fields) if _intake_fields else False
         _is_valid_gw_verification_archive = (
             _has_valid_receipt
             and is_gateway_validated_verification_archive(text)
