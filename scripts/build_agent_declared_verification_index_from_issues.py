@@ -550,6 +550,7 @@ def build_index(issues: list[dict], repo: str = "", include_test: bool = False) 
         try:
             intake = parse_intake_block(body)
         except IntakeParseError as e:
+            skipped_invalid_intake.append({"issue_number": issue.get("number"), "reason": str(e)})
             print(f"SKIP_INVALID_INTAKE issue #{issue.get('number')}: {e}", file=sys.stderr)
             continue
         if not intake:
@@ -559,6 +560,7 @@ def build_index(issues: list[dict], repo: str = "", include_test: bool = False) 
             _process_issue(issue, intake, repo, include_test, overrides, records,
                            skipped_direct, skipped_missing_oath_summary)
         except BoolParseError as e:
+            skipped_invalid_intake.append({"issue_number": issue.get("number"), "reason": str(e)})
             print(f"SKIP_INVALID_INTAKE issue #{issue.get('number')}: {e}", file=sys.stderr)
             continue
 
