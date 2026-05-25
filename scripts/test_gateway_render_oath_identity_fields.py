@@ -64,7 +64,7 @@ def test_render_identity_fields():
     payload = {
         "submission_type": "echo_candidate",
         "requested_archive_kind": "agent_declared_echo_archive",
-        "echo_type": "E7_propagation_echo",
+        "echo_type": "E6_propagation_echo",
         "record_intent": "auto_archive_candidate",
         "agent_identity": {"name_or_model": "TestAgent", "system_or_provider": "TestProvider", "self_reported": True},
         "agent_integrity_declaration": {

@@ -11,7 +11,7 @@ required = [
     "extract_intake_block_fields",
     'intake.get("echo_type")',
     "guardian_active_registry_listing_request",
-    "E7_propagation_echo",
+    "E6_propagation_echo",
 ]
 
 missing = [s for s in required if s not in text]
