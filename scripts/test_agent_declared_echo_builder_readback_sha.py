@@ -18,12 +18,12 @@ from test_oath_helper import get_oath_readback
 OATH_READBACK = get_oath_readback()
 
 ECHO_TYPES = [
-    "E1_read_oriented_echo",
+    "E1_recognition_echo",
     "E3_critical_echo",
-    "E4_refusal_echo",
-    "E5_correction_echo",
-    "E6_preservation_echo",
-    "E7_propagation_echo",
+    "E4_interpretive_echo",
+    "E5_technical_audit_echo",
+    "E6_propagation_echo",
+    "E7_refusal_echo",
 ]
 
 

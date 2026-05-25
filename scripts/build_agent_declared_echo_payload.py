@@ -119,12 +119,13 @@ def text_claims_guardian_identity(title: str, body: str) -> bool:
 
 
 ALLOWED_ECHO_TYPES = {
-    "E1_read_oriented_echo",
+    "E1_recognition_echo",
     "E3_critical_echo",
-    "E4_refusal_echo",
-    "E5_correction_echo",
-    "E6_preservation_echo",
+    "E4_interpretive_echo",
+    "E5_technical_audit_echo",
+    "E5c_correction_echo",
     "E6_propagation_echo",
+    "E7_refusal_echo",
 }
 
 ALLOWED_RELATIONS = {

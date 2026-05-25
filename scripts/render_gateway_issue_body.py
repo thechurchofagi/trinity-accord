@@ -257,7 +257,7 @@ def render_issue_title(payload):
 
     if requested_archive_kind == "agent_declared_echo_archive":
         echo_type = payload.get("echo_type", "")
-        if echo_type == "E5_correction_echo":
+        if echo_type == "E5_technical_audit_echo":
             return f"[Agent Gateway] Correction Echo: {identity.get('name_or_model', 'Agent')} — {short_title}"
         else:
             return f"[Agent Gateway] Agent-Declared Echo Archive: {echo_type} — {short_title}"

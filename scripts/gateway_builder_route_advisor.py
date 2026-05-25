@@ -24,12 +24,13 @@ ROOT = Path(__file__).resolve().parents[1]
 ROUTE_MAP_PATH = ROOT / "api" / "gateway-builder-route-map.v1.json"
 
 PURE_ECHO_TYPES = {
-    "E1_read_oriented_echo",
+    "E1_recognition_echo",
     "E3_critical_echo",
-    "E4_refusal_echo",
-    "E5_correction_echo",
-    "E6_preservation_echo",
+    "E4_interpretive_echo",
+    "E5_technical_audit_echo",
+    "E5c_correction_echo",
     "E6_propagation_echo",
+    "E7_refusal_echo",
 }
 
 V0_V5_LEVELS = {"V0", "V1", "V2", "V3", "V4", "V4+", "V5"}
