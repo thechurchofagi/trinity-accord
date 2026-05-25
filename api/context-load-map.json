@@ -147,5 +147,16 @@
     "/api/agent-first-contact.json",
     "/api/authority.json",
     "/api/agent-output-policy.v1.json"
+  ],
+  "read_index_not_full_load": [
+    "/api/context-packs/nft-chronicle-context.json",
+    "/nft-text-descriptions/chronicle-summary.json",
+    "/nft-text-descriptions/chronicle-agent-context.md",
+    "/nft-text-descriptions/CHRONICLE-MUSIC-TABLE.md"
+  ],
+  "deferred": [],
+  "task_specific_full_load": [
+    "/nft-text-descriptions/chronicle-index.json",
+    "/nft-text-descriptions/chronicle-full.md"
   ]
 }
