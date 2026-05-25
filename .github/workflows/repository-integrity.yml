@@ -598,6 +598,30 @@ jobs:
       - name: Test Guardian workflow parses listing_source_issue
         run: python3 scripts/test_guardian_workflow_parses_listing_source_issue.py
 
+      - name: Test gateway archive validation hard-fails
+        run: python3 scripts/test_gateway_auto_archive_validation_hard_fails.py
+
+      - name: Test archive script requires Gateway flag
+        run: python3 scripts/test_archive_echo_issue_requires_gateway_flag.py
+
+      - name: Test gateway archive requires staged change
+        run: python3 scripts/test_gateway_archive_requires_staged_change.py
+
+      - name: Test rebase regenerates generated state
+        run: python3 scripts/test_rebase_regenerates_generated_state.py
+
+      - name: Test agent-declared echo index not stale input
+        run: python3 scripts/test_agent_declared_echo_index_not_stale_input.py
+
+      - name: Test external witness index used in public status
+        run: python3 scripts/test_external_witness_index_used_in_public_status.py
+
+      - name: Test validate_echo_records does not fail open
+        run: python3 scripts/test_validate_echo_records_no_fail_open.py
+
+      - name: Test archive Echo type uses explicit intake
+        run: python3 scripts/test_archive_echo_issue_prefers_explicit_echo_type.py
+
       - name: Test trust-root group
         run: python3 scripts/run_ci_group.py trust-root
 
