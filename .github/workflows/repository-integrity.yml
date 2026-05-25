@@ -640,6 +640,27 @@ jobs:
       - name: Test rebase regenerates generated state
         run: python3 scripts/test_rebase_regenerates_generated_state.py
 
+      - name: Test public status Echo buckets match taxonomy
+        run: python3 scripts/test_public_status_echo_buckets_match_taxonomy.py
+
+      - name: Test public status no hidden digest inputs
+        run: python3 scripts/test_public_status_no_hidden_digest_inputs.py
+
+      - name: Test public status no default V4 without records
+        run: python3 scripts/test_public_status_no_default_v4_without_records.py
+
+      - name: Test agent-map current lifecycle preference
+        run: python3 scripts/test_agent_map_prefers_current_lifecycle_state.py
+
+      - name: Test public status declared inputs match source digest
+        run: python3 scripts/test_public_status_declared_inputs_match_source_digest.py
+
+      - name: Test external witness fixture
+        run: python3 scripts/test_external_witness_status_fixture.py
+
+      - name: Test Echo taxonomy single source
+        run: python3 scripts/test_echo_taxonomy_single_source.py
+
       - name: Test trust-root group
         run: python3 scripts/run_ci_group.py trust-root
 
