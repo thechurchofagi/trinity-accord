@@ -1530,6 +1530,7 @@
     "D/S/O/E/R provenance codes are derived/internal."
   ],
   "version": "v1",
+  "source_digest": "b2574663caeb2ada",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
   "non_amending_boundary": true,
   "limitations": [
@@ -1542,6 +1543,5 @@
     "Does not prove independent attestation.",
     "Does not prove successor reception.",
     "Does not amend Bitcoin Originals."
-  ],
-  "source_digest": "b2574663caeb2ada"
+  ]
 }
