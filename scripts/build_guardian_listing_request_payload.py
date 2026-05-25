@@ -240,7 +240,7 @@ def build_payload(args: argparse.Namespace) -> dict:
         "submission_type": "echo_candidate",
         "record_intent": "auto_archive_candidate",
         "requested_archive_kind": "guardian_active_registry_listing_request",
-        "echo_type": "E7_propagation_echo",
+        "echo_type": "E6_propagation_echo",
         "title": title,
         "body": body,
         "idempotency_key": args.idempotency_key,

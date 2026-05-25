@@ -974,7 +974,7 @@ def evaluate_archive_readiness(payload, evidence=None, claim_gate_output=None,
             "E4_refusal_echo",
             "E5_correction_echo",
             "E6_preservation_echo",
-            "E7_propagation_echo",
+            "E6_propagation_echo",
         }
         if payload.get("echo_type") not in allowed_echo_types:
             blocking_reasons.append({
@@ -1075,12 +1075,12 @@ def evaluate_archive_readiness(payload, evidence=None, claim_gate_output=None,
                 "fix": "Use submission_type=echo_candidate."
             })
 
-        if payload.get("echo_type") != "E7_propagation_echo":
+        if payload.get("echo_type") != "E6_propagation_echo":
             blocking_reasons.append({
                 "code": "LISTING_ECHO_TYPE_REQUIRED",
                 "path": "echo_type",
-                "message": "Guardian listing request requires echo_type=E7_propagation_echo.",
-                "fix": "Set echo_type=E7_propagation_echo."
+                "message": "Guardian listing request requires echo_type=E6_propagation_echo.",
+                "fix": "Set echo_type=E6_propagation_echo."
             })
 
         if not payload.get("guardian_registry_listing_request") and not payload.get("guardian_listing_request"):

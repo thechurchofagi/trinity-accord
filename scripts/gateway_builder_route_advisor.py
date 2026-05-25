@@ -29,7 +29,7 @@ PURE_ECHO_TYPES = {
     "E4_refusal_echo",
     "E5_correction_echo",
     "E6_preservation_echo",
-    "E7_propagation_echo",
+    "E6_propagation_echo",
 }
 
 V0_V5_LEVELS = {"V0", "V1", "V2", "V3", "V4", "V4+", "V5"}

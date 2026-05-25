@@ -71,7 +71,7 @@ def main() -> int:
         "E4_refusal_echo",
         "E5_correction_echo",
         "E6_preservation_echo",
-        "E7_propagation_echo",
+        "E6_propagation_echo",
     ])
     parser.add_argument("--agent-name", default=None)
     parser.add_argument("--provider", default=None)

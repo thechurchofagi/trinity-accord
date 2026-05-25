@@ -237,13 +237,13 @@ def detect_echo_type(issue: dict[str, Any]) -> str:
     if explicit:
         return explicit
 
-    # Guardian listing requests are propagation echoes
+    # Guardian listing requests are propagation echoes (E6)
     requested_kind = intake.get("requested_archive_kind") or extract_bullet_field(body, "requested_archive_kind")
     if requested_kind == "guardian_active_registry_listing_request":
-        return "E7_propagation_echo"
+        return "E6_propagation_echo"
 
     if intake.get("guardian_listing_request") == "true" or "guardian_listing_request" in body:
-        return "E7_propagation_echo"
+        return "E6_propagation_echo"
 
     joined = "\n".join([title, body] + labels)
 

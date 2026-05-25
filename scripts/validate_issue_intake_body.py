@@ -492,7 +492,7 @@ def main():
         # Echo type validation
         VALID_ECHO_TYPES = {
             "E1_read_oriented_echo", "E3_critical_echo", "E4_refusal_echo",
-            "E5_correction_echo", "E6_preservation_echo", "E7_propagation_echo",
+            "E5_correction_echo", "E6_preservation_echo", "E6_propagation_echo",
         }
         echo_type = data.get("echo_type")
         if echo_type is not None and echo_type not in VALID_ECHO_TYPES:

@@ -680,7 +680,7 @@ def validate_agent_declared_echo_archive(payload, errors):
         "E4_refusal_echo",
         "E5_correction_echo",
         "E6_preservation_echo",
-        "E7_propagation_echo",
+        "E6_propagation_echo",
     }
 
     echo_type = payload.get("echo_type")
@@ -743,8 +743,8 @@ def validate_guardian_active_listing_archive_kind(payload, errors):
     if payload.get("record_intent") != "auto_archive_candidate":
         errors.append("guardian_active_registry_listing_request requires record_intent=auto_archive_candidate")
 
-    if payload.get("echo_type") != "E7_propagation_echo":
-        errors.append("guardian_active_registry_listing_request requires echo_type=E7_propagation_echo")
+    if payload.get("echo_type") != "E6_propagation_echo":
+        errors.append("guardian_active_registry_listing_request requires echo_type=E6_propagation_echo")
 
     if not payload.get("guardian_registry_listing_request") and not payload.get("guardian_listing_request"):
         errors.append("guardian_active_registry_listing_request requires guardian_registry_listing_request=true")
