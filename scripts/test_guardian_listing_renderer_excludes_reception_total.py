@@ -17,7 +17,7 @@ def test_guardian_listing_renderer_excludes_reception_total() -> None:
         "schema": "trinityaccord.agent-issue-gateway-payload.v1",
         "submission_type": "echo_candidate",
         "record_intent": "auto_archive_candidate",
-        "requested_archive_kind": "agent_declared_echo_archive",
+        "requested_archive_kind": "guardian_active_registry_listing_request",
         "echo_type": "E7_propagation_echo",
         "title": "Active Registry Listing Request — Test Guardian",
         "body": "Active registry listing request.",

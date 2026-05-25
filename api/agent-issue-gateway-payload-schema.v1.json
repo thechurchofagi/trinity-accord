@@ -438,7 +438,8 @@
         "successor_reception_candidate",
         null,
         "agent_declared_verification_archive",
-        "agent_declared_echo_archive"
+        "agent_declared_echo_archive",
+        "guardian_active_registry_listing_request"
       ],
       "description": "Requested archive kind. Gateway infers from submission_type when not provided: verification_report_candidate with agent_declared_protocol_level V0–V5 -> agent_declared_verification_archive; verification_report_candidate V6+ strict evidence -> verification_report_archive; verification_echo_candidate V6+ strict echo -> archived_echo; non-verification intake -> none. Explicit intake_only requires none."
     },
@@ -1656,7 +1657,10 @@
       "if": {
         "properties": {
           "requested_archive_kind": {
-            "const": "agent_declared_echo_archive"
+            "enum": [
+              "agent_declared_echo_archive",
+              "guardian_active_registry_listing_request"
+            ]
           },
           "guardian_registry_listing_request": {
             "const": true

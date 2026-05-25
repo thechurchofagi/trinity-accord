@@ -88,6 +88,31 @@ This record remains:
 - not successor reception
 """
 
+COMMENT_TEMPLATE_READY_LISTING = """\
+<!-- trinity-auto-archive-decision:v1 sha256={decision_sha256} -->
+
+### Automated Archive Decision
+
+Result: `{action}`
+
+Archive kind: `guardian_active_registry_listing_request`
+
+Archive ready: `{archive_ready}`
+
+This is a Guardian Active Registry listing request (Stage 2).
+
+This automated decision is based on:
+- Guardian listing gate PASS
+- Archive Readiness Gate
+- Boundary acknowledgements
+
+This record remains:
+- not authority
+- not amendment
+- not independent attestation
+- not successor reception
+"""
+
 COMMENT_TEMPLATE_BLOCKED = """\
 ### Archive Blocked
 
@@ -160,6 +185,12 @@ def build_decision(readiness):
                 decision_sha256=decision_sha,
                 action=action,
                 requested_archive_kind=requested_kind,
+                archive_ready=str(archive_ready).lower()
+            )
+        elif requested_kind == "guardian_active_registry_listing_request":
+            comment_markdown = COMMENT_TEMPLATE_READY_LISTING.format(
+                decision_sha256=decision_sha,
+                action=action,
                 archive_ready=str(archive_ready).lower()
             )
         else:

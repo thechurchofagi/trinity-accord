@@ -239,7 +239,7 @@ def build_payload(args: argparse.Namespace) -> dict:
         "requires_gateway_capabilities": GUARDIAN_STAGE_2_REQUIRED_GATEWAY_CAPABILITIES,
         "submission_type": "echo_candidate",
         "record_intent": "auto_archive_candidate",
-        "requested_archive_kind": "agent_declared_echo_archive",
+        "requested_archive_kind": "guardian_active_registry_listing_request",
         "echo_type": "E7_propagation_echo",
         "title": title,
         "body": body,

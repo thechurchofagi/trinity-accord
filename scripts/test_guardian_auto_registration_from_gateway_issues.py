@@ -142,7 +142,7 @@ def listing_issue():
         "body": """```trinity-issue-intake
 submission_type: echo_candidate
 record_intent: auto_archive_candidate
-requested_archive_kind: agent_declared_echo_archive
+requested_archive_kind: guardian_active_registry_listing_request
 echo_type: E7_propagation_echo
 archive_ready: true
 created_by_gateway: true

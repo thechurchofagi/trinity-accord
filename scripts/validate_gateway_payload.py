@@ -29,6 +29,10 @@ def is_agent_declared_echo_archive(payload):
     return payload.get("requested_archive_kind") == "agent_declared_echo_archive"
 
 
+def is_guardian_listing_request(payload):
+    return payload.get("requested_archive_kind") == "guardian_active_registry_listing_request"
+
+
 def requires_claim_gate(payload):
     return (
         payload.get("submission_type") in ("verification_report_candidate", "verification_echo_candidate")
@@ -610,7 +614,7 @@ def validate_common(payload, errors):
             errors.append(f"boundary_acknowledgement.{key} must be true")
 
     # Agent-declared archives use structured claim_classification instead of negation fields
-    if not is_agent_declared_archive(payload) and not is_agent_declared_echo_archive(payload):
+    if not is_agent_declared_archive(payload) and not is_agent_declared_echo_archive(payload) and not is_guardian_listing_request(payload):
         if payload.get("not_independent_attestation") is not True:
             errors.append("not_independent_attestation must be true")
         if payload.get("not_successor_reception") is not True:
@@ -631,7 +635,7 @@ def validate_common(payload, errors):
     if requested_archive_kind is not None and requested_archive_kind not in (
         "none", "external_agent_intake_sample", "verification_report_archive",
         "archived_echo", "successor_reception_candidate", "agent_declared_verification_archive",
-        "agent_declared_echo_archive"
+        "agent_declared_echo_archive", "guardian_active_registry_listing_request"
     ):
         errors.append(f"invalid requested_archive_kind: {requested_archive_kind}")
 
@@ -729,6 +733,45 @@ def validate_agent_declared_echo_archive(payload, errors):
 
     if payload.get("agent_declared_protocol_level"):
         errors.append("pure echo must not set agent_declared_protocol_level; it is not a verification archive")
+
+
+def validate_guardian_active_listing_archive_kind(payload, errors):
+    """Validate guardian_active_registry_listing_request archive kind."""
+    if payload.get("submission_type") != "echo_candidate":
+        errors.append("guardian_active_registry_listing_request requires submission_type=echo_candidate")
+
+    if payload.get("record_intent") != "auto_archive_candidate":
+        errors.append("guardian_active_registry_listing_request requires record_intent=auto_archive_candidate")
+
+    if payload.get("echo_type") != "E7_propagation_echo":
+        errors.append("guardian_active_registry_listing_request requires echo_type=E7_propagation_echo")
+
+    if not payload.get("guardian_registry_listing_request") and not payload.get("guardian_listing_request"):
+        errors.append("guardian_active_registry_listing_request requires guardian_registry_listing_request=true")
+
+    cth = payload.get("counts_toward_home") or {}
+    if cth.get("guardian_registry") is not True:
+        errors.append("Guardian listing request requires counts_toward_home.guardian_registry=true")
+    if cth.get("reception") is not False:
+        errors.append("Guardian listing request requires counts_toward_home.reception=false")
+    if cth.get("exclude_from_reception_total") is not True:
+        errors.append("Guardian listing request requires counts_toward_home.exclude_from_reception_total=true")
+    if cth.get("verifiability") is not False:
+        errors.append("Guardian listing request requires counts_toward_home.verifiability=false")
+    if cth.get("basis") != "guardian_registry_listing_request":
+        errors.append("Guardian listing request requires counts_toward_home.basis=guardian_registry_listing_request")
+
+    if not payload.get("agent_integrity_declaration"):
+        errors.append("agent_integrity_declaration is required for guardian listing request")
+
+    ab = payload.get("authority_boundary") or {}
+    for key in (
+        "bitcoin_originals_remain_final",
+        "does_not_amend_bitcoin_originals",
+        "does_not_override_bitcoin_originals",
+    ):
+        if ab.get(key) is not True:
+            errors.append(f"authority_boundary.{key} must be true")
 
 
 def validate_report_candidate(payload, errors):
@@ -1084,6 +1127,9 @@ def main():
 
     if is_agent_declared_echo_archive(payload):
         validate_agent_declared_echo_archive(payload, errors)
+
+    if is_guardian_listing_request(payload):
+        validate_guardian_active_listing_archive_kind(payload, errors)
 
     st = payload.get("submission_type")
     if st == "verification_report_candidate":

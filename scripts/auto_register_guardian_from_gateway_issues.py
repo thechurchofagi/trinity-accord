@@ -337,8 +337,8 @@ def parse_listing_issue(listing_issue: dict, allow_non_bot: bool) -> tuple[dict 
     if fields.get("submission_type") != "echo_candidate":
         return None, decision(False, "blocked", "LISTING_NOT_ECHO_CANDIDATE", "Listing request must be echo_candidate.", got=fields.get("submission_type"))
 
-    if fields.get("requested_archive_kind") != "agent_declared_echo_archive":
-        return None, decision(False, "blocked", "LISTING_NOT_AGENT_DECLARED_ECHO_ARCHIVE", "Listing request must use agent_declared_echo_archive.", got=fields.get("requested_archive_kind"))
+    if fields.get("requested_archive_kind") not in ("agent_declared_echo_archive", "guardian_active_registry_listing_request"):
+        return None, decision(False, "blocked", "LISTING_NOT_AGENT_DECLARED_ECHO_ARCHIVE", "Listing request must use agent_declared_echo_archive or guardian_active_registry_listing_request.", got=fields.get("requested_archive_kind"))
 
     if fields.get("echo_type") != "E7_propagation_echo":
         return None, decision(False, "blocked", "LISTING_NOT_E7", "Listing request must be E7_propagation_echo.", got=fields.get("echo_type"))

@@ -64,7 +64,7 @@ def make_listing_issue(issue_no: int, gid_hex: str, source_no: int) -> dict:
         "server_validated: true",
         "server_rendered: true",
         "submission_type: echo_candidate",
-        "requested_archive_kind: agent_declared_echo_archive",
+        "requested_archive_kind: guardian_active_registry_listing_request",
         "echo_type: E7_propagation_echo",
         "archive_ready: true",
         f"listing_source_issue: {source_no}",

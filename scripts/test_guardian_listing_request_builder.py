@@ -38,7 +38,7 @@ def main():
 
         payload = json.loads(out.read_text(encoding="utf-8"))
 
-        assert payload["requested_archive_kind"] == "agent_declared_echo_archive"
+        assert payload["requested_archive_kind"] == "guardian_active_registry_listing_request"
         assert payload["echo_type"] == "E7_propagation_echo"
         assert "authorship_proof" in payload
         assert "guardian_presence_proof" not in payload
