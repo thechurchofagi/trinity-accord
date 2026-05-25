@@ -98,5 +98,6 @@
     "attestation_authority_class": "maintainer_archived",
     "counts_as_formal_independent_attestation": false,
     "derived_counting_bucket": "issue_submission_only"
-  }
+  },
+  "counts_as_independent_attestation": false
 }
