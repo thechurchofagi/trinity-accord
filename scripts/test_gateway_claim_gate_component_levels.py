@@ -128,17 +128,25 @@ def expect_semantic_fail(payload, label, fragment):
 good = verification_payload()
 expect_schema_pass(good, "valid current V0-V5 allowed_component_levels fixture")
 
-# Unknown key — semantic validator rejects
+# Unknown key — schema rejects (additionalProperties: false in allOf[4].then)
 unknown = copy.deepcopy(good)
 unknown["claim_gate"]["allowed_component_levels"]["mystery_key"] = "X1"
-expect_schema_pass(unknown, "unknown key passes schema")
-expect_semantic_fail(unknown, "unknown key rejected by semantic validator", "unknown keys")
+try:
+    jsonschema.validate(unknown, schema)
+    print("FAIL: expected schema rejection for unknown key in allowed_component_levels")
+    sys.exit(1)
+except jsonschema.ValidationError:
+    pass
 
-# Invalid enum value — semantic validator rejects
+# Invalid enum value — schema rejects (enum in allOf[4].then)
 bad_val = copy.deepcopy(good)
 bad_val["claim_gate"]["allowed_component_levels"]["context_depth"] = "D99"
-expect_schema_pass(bad_val, "invalid value passes schema")
-expect_semantic_fail(bad_val, "invalid value rejected by semantic validator", "invalid value")
+try:
+    jsonschema.validate(bad_val, schema)
+    print("FAIL: expected schema rejection for invalid component level value")
+    sys.exit(1)
+except jsonschema.ValidationError:
+    pass
 
 # Non-object type — schema rejects
 bad_type = copy.deepcopy(good)

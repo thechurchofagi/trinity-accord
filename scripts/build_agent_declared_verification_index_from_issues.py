@@ -109,6 +109,7 @@ EXTRA_FIELDS = [
     "authorship_payload_sha256",
     "authorship_signature_verified",
     "claim_status",
+    "echo_type",
 ]
 
 # Label patterns that indicate test records

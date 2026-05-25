@@ -23,7 +23,7 @@ for frag in required_fragments:
         print(f"FAIL: echo-triage.yml strict receipt classifier missing: {frag}")
         ok = False
 
-m = re.search(r"function\s+isGatewayCreated\s*\([^)]*\)\s*\{(?P<body>.*?)\}", workflow, re.S)
+m = re.search(r"function\s+isGatewayCreated\s*\([^)]*\)\s*\{(?P<body>.+?)\n\s*\}", workflow, re.S)
 if not m:
     print("FAIL: could not find isGatewayCreated function in echo-triage.yml")
     sys.exit(1)

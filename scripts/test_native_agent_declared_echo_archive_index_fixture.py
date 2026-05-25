@@ -17,8 +17,8 @@ auto_archive_action: auto_archive_agent_declared_echo
 created_by_gateway: true
 server_validated: true
 server_rendered: true
-gateway_receipt_id: gar-fixture-echo
-gateway_service: trinity-render-api
+gateway_receipt_id: gar-fixture-echo-archive-001
+gateway_service: trinity-agent-issue-gateway
 render_api_only: true
 verification_oath_present: true
 oath_version: trinity-agent-integrity-oath.v1
