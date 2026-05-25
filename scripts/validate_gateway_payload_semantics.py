@@ -134,8 +134,9 @@ def validate(payload: dict) -> list[str]:
             level = identity.get("identity_verification_level")
             if level not in {"signed_statement", "institutional_domain", "notarial_identity"}:
                 errors.append("agent_identity.self_reported=false requires signed_statement, institutional_domain, or notarial_identity")
-            if not payload.get("authorship_proof"):
-                errors.append("agent_identity.self_reported=false requires authorship_proof")
+            proof = payload.get("authorship_proof")
+                if not isinstance(proof, dict) or not proof:
+                    errors.append("agent_identity.self_reported=false requires non-empty authorship_proof object")
     return errors
 
 
