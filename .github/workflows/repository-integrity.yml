@@ -658,6 +658,21 @@ jobs:
       - name: Test Echo taxonomy single source
         run: python3 scripts/test_echo_taxonomy_single_source.py
 
+      - name: Test agent-declared Echo archive bucket sum
+        run: python3 scripts/test_public_status_echo_bucket_counts_sum.py
+
+      - name: Test public status rejects noncanonical Echo override
+        run: python3 scripts/test_public_status_rejects_noncanonical_echo_override.py
+
+      - name: Test agent-declared archive overrides canonical Echo types
+        run: python3 scripts/test_agent_declared_archive_overrides_validate_canonical_echo_type.py
+
+      - name: Test agent-declared index declares override inputs
+        run: python3 scripts/test_agent_declared_index_generated_from_overrides.py
+
+      - name: Test Echo taxonomy consumers use single source
+        run: python3 scripts/test_echo_taxonomy_consumers_use_single_source.py
+
       - name: Test agent-declared archive close invariant
         run: python3 scripts/test_agent_declared_archive_close_invariant.py
 
