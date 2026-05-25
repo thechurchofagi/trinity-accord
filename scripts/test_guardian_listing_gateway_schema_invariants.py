@@ -40,7 +40,7 @@ BASE = {
             "oath_text_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
             "readback_required": True,
             "agent_readback": "I understand this is a Guardian listing request and not authority, governance, attestation, verification level, successor reception, or amendment. The registry number is system generated.",
-            "agent_readback_sha256": "abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+            "agent_readback_sha256": "590d6acdb3d32a2c72d9a9d75ad060eac9a0de1161140928198a947d13c3f706",
             "understands_not_an_exam_or_performance": True,
             "will_state_actual_capability_only": True,
             "will_not_lie_or_cheat": True,

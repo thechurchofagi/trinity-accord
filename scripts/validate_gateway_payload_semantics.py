@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Semantic validation for Gateway payloads beyond JSON Schema."""
 import argparse
+import hashlib
 import json
 import sys
 from pathlib import Path
@@ -11,6 +12,7 @@ def validate(payload: dict) -> list[str]:
 
     kind = payload.get("requested_archive_kind")
 
+    # --- Level consistency ---
     if kind == "agent_declared_verification_archive":
         declared = payload.get("agent_declared_protocol_level")
         ack = (payload.get("level_selection_acknowledgement") or {}).get("declared_template_level")
@@ -20,6 +22,25 @@ def validate(payload: dict) -> list[str]:
                 "level_selection_acknowledgement.declared_template_level"
             )
 
+        # Claim Gate validation
+        claim_gate = payload.get("claim_gate")
+        if not isinstance(claim_gate, dict):
+            errors.append("agent_declared_verification_archive requires non-null claim_gate object")
+        else:
+            allowed_statuses = {"PASS", "PASS_WITH_WARNINGS", "PASS_WITH_DOWNGRADE"}
+            if claim_gate.get("status") not in allowed_statuses:
+                errors.append(
+                    "agent_declared_verification_archive requires claim_gate.status to be "
+                    "PASS/PASS_WITH_WARNINGS/PASS_WITH_DOWNGRADE"
+                )
+            if claim_gate.get("mode") != "template_for_v0_v5":
+                errors.append(
+                    "agent_declared_verification_archive requires claim_gate.mode=template_for_v0_v5"
+                )
+            if claim_gate.get("allowed_protocol_level") != declared:
+                errors.append("claim_gate.allowed_protocol_level must equal agent_declared_protocol_level")
+
+    # --- Echo archive constraints ---
     if kind == "agent_declared_echo_archive":
         if payload.get("agent_declared_protocol_level"):
             errors.append("agent_declared_echo_archive must not claim agent_declared_protocol_level")
@@ -31,13 +52,54 @@ def validate(payload: dict) -> list[str]:
         if counts.get("reception") is not True:
             errors.append("agent_declared_echo_archive counts_toward_home.reception must be true")
 
+    # --- Guardian listing constraints ---
     if payload.get("guardian_registry_listing_request") is True:
         if kind != "guardian_active_registry_listing_request":
-            errors.append("guardian_registry_listing_request requires requested_archive_kind=guardian_active_registry_listing_request")
+            errors.append(
+                "guardian_registry_listing_request requires "
+                "requested_archive_kind=guardian_active_registry_listing_request"
+            )
         if payload.get("echo_type") != "E6_propagation_echo":
             errors.append("guardian_registry_listing_request requires echo_type=E6_propagation_echo")
         if payload.get("guardian_presence_proof") is not None:
             errors.append("guardian_registry_listing_request must not include guardian_presence_proof")
+
+    # --- Authority boundary content ---
+    archive_kinds_requiring_boundary = {
+        "agent_declared_verification_archive",
+        "agent_declared_echo_archive",
+        "guardian_active_registry_listing_request",
+    }
+
+    if kind in archive_kinds_requiring_boundary:
+        boundary = payload.get("authority_boundary")
+        if not isinstance(boundary, dict):
+            errors.append("authority_boundary must be a non-null object")
+        else:
+            for key in [
+                "bitcoin_originals_remain_final",
+                "does_not_amend_bitcoin_originals",
+                "does_not_override_bitcoin_originals",
+            ]:
+                if boundary.get(key) is not True:
+                    errors.append(f"authority_boundary.{key} must be true")
+
+        # Non-empty content arrays
+        for key in ["what_i_checked", "limitations"]:
+            items = payload.get(key)
+            if not isinstance(items, list) or not items:
+                errors.append(f"{key} must contain at least one non-empty item")
+            elif any(not isinstance(x, str) or not x.strip() for x in items):
+                errors.append(f"{key} must contain only non-empty strings")
+
+    # --- Readback hash verification ---
+    oath = ((payload.get("agent_integrity_declaration") or {}).get("verification_oath") or {})
+    readback = oath.get("agent_readback")
+    readback_hash = oath.get("agent_readback_sha256")
+    if readback is not None and readback_hash is not None:
+        actual = hashlib.sha256(readback.encode("utf-8")).hexdigest()
+        if readback_hash != actual:
+            errors.append("agent_readback_sha256 does not match agent_readback")
 
     return errors
 

@@ -207,36 +207,73 @@ def parse_int(value, default=0):
         return default
 
 
+class IntakeParseError(ValueError):
+    pass
+
+
+class BoolParseError(ValueError):
+    pass
+
+
 def parse_intake_block(body: str) -> dict[str, str] | None:
-    """Extract key-value pairs from a trinity-issue-intake code block."""
+    """Extract key-value pairs from exactly one trinity-issue-intake code block.
+
+    Returns None if no block exists.
+    Raises IntakeParseError if multiple blocks or duplicate keys are present.
+    """
     if not body:
         return None
-    match = re.search(r"```trinity-issue-intake\s*\n(.*?)```", body, re.DOTALL)
-    if not match:
-        return None
 
-    block = match.group(1)
+    matches = re.findall(r"```trinity-issue-intake\s*\n(.*?)```", body, re.DOTALL)
+    if not matches:
+        return None
+    if len(matches) > 1:
+        raise IntakeParseError(f"multiple trinity-issue-intake blocks found: {len(matches)}")
+
+    block = matches[0]
     result = {}
-    for line in block.strip().splitlines():
-        line = line.strip()
+    seen = set()
+
+    allowed_fields = set(INTAKE_FIELDS + EXTRA_FIELDS)
+
+    for line_no, raw_line in enumerate(block.strip().splitlines(), start=1):
+        line = raw_line.strip()
         if not line or line.startswith("#"):
             continue
-        # Skip list items (lines starting with -)
         if line.startswith("-"):
             continue
-        if ":" in line:
-            key, _, value = line.partition(":")
-            key = key.strip()
-            value = value.strip()
-            if key in (INTAKE_FIELDS + EXTRA_FIELDS):
-                result[key] = value
+        if ":" not in line:
+            continue
+
+        key, _, value = line.partition(":")
+        key = key.strip()
+        value = value.strip()
+
+        if key not in allowed_fields:
+            continue
+
+        if key in seen:
+            raise IntakeParseError(f"duplicate intake key {key!r} at line {line_no}")
+
+        seen.add(key)
+        result[key] = value
+
     return result if result else None
 
 
-def parse_bool(value: str | None) -> bool | None:
+def parse_bool(value: str | None, *, field: str = "unknown", issue_number: int | None = None) -> bool | None:
+    """Strict boolean parser for intake fields."""
     if value is None:
         return None
-    return value.lower() in ("true", "1", "yes")
+
+    v = value.strip().lower()
+    if v in {"true", "1", "yes"}:
+        return True
+    if v in {"false", "0", "no"}:
+        return False
+
+    issue = f" issue #{issue_number}" if issue_number is not None else ""
+    raise BoolParseError(f"Invalid boolean{issue}: {field}={value!r}")
 
 
 def fetch_issues(repo: str | None, limit: int = 10000) -> list[dict]:
@@ -295,6 +332,212 @@ def is_after_effective_date(created_at: str) -> bool:
         return True
 
 
+def _process_issue(issue, intake, repo, include_test, overrides, records,
+                   skipped_direct, skipped_missing_oath_summary):
+    """Process a single issue. May raise BoolParseError. Uses continue for skips."""
+    # Filter: must be agent_declared_verification_archive or agent_declared_echo_archive
+    requested_kind = intake.get("requested_archive_kind")
+
+    allowed_index_kinds = {
+        "agent_declared_verification_archive",
+        "agent_declared_echo_archive",
+    }
+
+    if requested_kind not in allowed_index_kinds:
+        return
+
+    # Filter: must be archive_ready=true
+    if parse_bool(intake.get("archive_ready"), field="archive_ready", issue_number=issue["number"]) is not True:
+        return
+
+    # Filter: must be correct auto_archive action for the kind
+    expected_actions = {
+        "agent_declared_verification_archive": "auto_archive_agent_declared_verification",
+        "agent_declared_echo_archive": "auto_archive_agent_declared_echo",
+    }
+    expected_action = expected_actions.get(requested_kind)
+    if expected_action and intake.get("auto_archive_action") != expected_action:
+        return
+
+    # Filter: skip issues with invalid/disqualifying labels
+    labels = [l.get("name", "") if isinstance(l, dict) else str(l) for l in issue.get("labels", [])]
+    has_invalid_label = any(
+        any(pat in lbl.lower() for pat in INVALID_LABEL_PATTERNS)
+        for lbl in labels
+    )
+    if has_invalid_label:
+        print(
+            f"SKIP_INVALID_LABEL issue #{issue['number']}: "
+            f"has disqualifying label (one of {INVALID_LABEL_PATTERNS})",
+            file=sys.stderr,
+        )
+        return
+
+    # Render API only filter: after effective date, require valid gateway receipt
+    created_at = issue.get("createdAt", "")
+    has_gateway_receipt = is_valid_gateway_receipt_block(intake)
+
+    if is_after_effective_date(created_at) and not has_gateway_receipt:
+        skipped_direct.append(issue["number"])
+        print(
+            f"SKIP_DIRECT_ISSUE_ARCHIVE_ATTEMPT issue #{issue['number']}: "
+            f"no gateway receipt after effective date",
+            file=sys.stderr,
+        )
+        return
+
+    # Determine if this is a test record
+    is_test_label = any(
+        any(pat in lbl.lower() for pat in TEST_LABEL_PATTERNS)
+        for lbl in labels
+    )
+    is_test_intake = parse_bool(intake.get("test_record"), field="test_record", issue_number=issue["number"]) is True
+    is_test = is_test_label or is_test_intake
+
+    if is_test and not include_test:
+        return
+
+    # Build counts flags - default based on test status
+    counts_verifiability = parse_bool(intake.get("counts_toward_home_verifiability"), field="counts_toward_home_verifiability", issue_number=issue["number"])
+    counts_reception = parse_bool(intake.get("counts_toward_home_reception"), field="counts_toward_home_reception", issue_number=issue["number"])
+
+    if counts_verifiability is None:
+        counts_verifiability = not is_test
+    if counts_reception is None:
+        counts_reception = not is_test
+
+    record = {
+        "issue_number": issue["number"],
+        "issue_url": issue.get("url", f"https://github.com/{repo}/issues/{issue['number']}"),
+        "agent_name_or_model": intake.get("agent_name_or_model", "unknown"),
+        "system_or_provider": intake.get("system_or_provider", "unknown"),
+        "agent_declared_protocol_level": intake.get("agent_declared_protocol_level", "V4"),
+        "requested_archive_kind": requested_kind,
+        "archive_ready": True,
+        "auto_archive_action": expected_action or intake.get("auto_archive_action", ""),
+        "counts_toward_home_verifiability": counts_verifiability,
+        "counts_toward_home_reception": counts_reception,
+        "test_record": is_test,
+        "reception_initiation_class": intake.get("reception_initiation_class") or "unknown",
+        "reception_initiation_basis": intake.get("reception_initiation_basis") or "legacy_unclassified",
+        "agent_independent_followup": parse_bool(intake.get("agent_independent_followup"), field="agent_independent_followup", issue_number=issue["number"]),
+        "created_at": issue.get("createdAt", ""),
+    }
+
+    # Native echo archive-specific normalization
+    is_native_echo_archive = requested_kind == "agent_declared_echo_archive"
+    if is_native_echo_archive:
+        record["semantic_archive_kind"] = "agent_declared_echo_archive"
+        record["echo_type"] = intake.get("echo_type")
+        record["counts_toward_home_verifiability"] = False
+        if parse_bool(intake.get("counts_toward_home_reception"), field="counts_toward_home_reception", issue_number=issue["number"]) is None:
+            record["counts_toward_home_reception"] = not is_test
+
+    # Gateway receipt fields
+    if has_gateway_receipt:
+        record["created_by_gateway"] = True
+        record["gateway_receipt_id"] = intake.get("gateway_receipt_id", "")
+        record["render_api_only"] = True
+        if intake.get("gateway_commit"):
+            record["gateway_commit"] = intake["gateway_commit"]
+        if intake.get("gateway_service"):
+            record["gateway_service"] = intake["gateway_service"]
+    else:
+        record["legacy_pre_render_api_only"] = True
+
+    # Oath summary fields
+    oath_present = parse_bool(intake.get("verification_oath_present"), field="verification_oath_present", issue_number=issue["number"])
+    is_post_effective = is_after_effective_date(created_at)
+
+    if oath_present is True:
+        count = parse_int(intake.get("agent_readback_char_count"))
+        oath_sha256 = intake.get("oath_text_sha256", "")
+        readback_sha256 = intake.get("agent_readback_sha256", "")
+        valid_hashes = (
+            bool(re.match(r"^[a-f0-9]{64}$", oath_sha256))
+            and bool(re.match(r"^[a-f0-9]{64}$", readback_sha256))
+        )
+        if count < 160 or not valid_hashes:
+            if is_post_effective:
+                skipped_missing_oath_summary.append(issue["number"])
+                print(
+                    f"SKIP_MISSING_OATH_SUMMARY issue #{issue['number']}: "
+                    f"oath present but incomplete (count={count}, valid_hashes={valid_hashes})",
+                    file=sys.stderr,
+                )
+                return
+            record["legacy_oath_summary_missing"] = True
+        else:
+            record["verification_oath_present"] = True
+            record["oath_version"] = intake.get("oath_version", "")
+            record["oath_text_sha256"] = oath_sha256
+            record["agent_readback_char_count"] = count
+            record["agent_readback_sha256"] = readback_sha256
+    else:
+        if is_post_effective:
+            skipped_missing_oath_summary.append(issue["number"])
+            print(
+                f"SKIP_MISSING_OATH_SUMMARY issue #{issue['number']}: "
+                f"no oath summary after effective date",
+                file=sys.stderr,
+            )
+            return
+        record["legacy_oath_summary_missing"] = True
+
+    # Authorship claim fields
+    record["authorship_claim_protocol"] = intake.get("authorship_claim_protocol", "agent-authorship-claim-v1")
+
+    # Validate native echo archive canonical type
+    if is_native_echo_archive:
+        echo_type = record.get("echo_type")
+        if echo_type not in allowed_canonical_echo_types():
+            raise SystemExit(
+                f"Invalid native agent_declared_echo_archive issue #{issue['number']}: "
+                f"non-canonical echo_type={echo_type!r}"
+            )
+    record["authorship_proof_present"] = parse_bool(intake.get("authorship_proof_present"), field="authorship_proof_present", issue_number=issue["number"]) is True
+    record["authorship_proof_method"] = intake.get("authorship_proof_method", "none")
+    record["authorship_algorithm"] = intake.get("authorship_algorithm", "none")
+    record["authorship_public_key_sha256"] = intake.get("authorship_public_key_sha256", "none")
+    record["authorship_payload_sha256"] = intake.get("authorship_payload_sha256", "none")
+    record["authorship_signature_verified"] = parse_bool(intake.get("authorship_signature_verified"), field="authorship_signature_verified", issue_number=issue["number"]) is True
+    claim_status = intake.get("claim_status", "unclaimed")
+    record["claim_status"] = claim_status
+    record["authorship_claimed"] = claim_status == "claimed"
+
+    if "authorship:claimed" in labels:
+        record["claim_status"] = "claimed"
+        record["authorship_claimed"] = True
+    if "authorship:key-verified" in labels:
+        record["authorship_key_verified"] = True
+
+    # Apply semantic overrides
+    override = overrides.get(str(issue["number"]))
+    if override:
+        validate_override(issue["number"], override)
+        record["semantic_archive_kind"] = override["semantic_archive_kind"]
+        record["echo_type"] = override.get("echo_type")
+        record["counts_toward_home_verifiability"] = override["counts_toward_home_verifiability"]
+        record["counts_toward_home_reception"] = override["counts_toward_home_reception"]
+        if "related_issue" in override:
+            record["related_issue"] = override["related_issue"]
+        if "relation_to_related_issue" in override:
+            record["relation_to_related_issue"] = override["relation_to_related_issue"]
+        if "semantic_function" in override:
+            record["semantic_function"] = override["semantic_function"]
+        if "correction_does_not_amend_prior_record" in override:
+            record["correction_does_not_amend_prior_record"] = override["correction_does_not_amend_prior_record"]
+        record["semantic_override_reason"] = override.get("reason", "")
+
+    # Issue #180 correction annotation
+    if issue["number"] == 180:
+        record["has_correction"] = True
+        record["corrected_by"] = [182]
+        record["correction_scope"] = "incorrect statement about prior agent-declared archive composition"
+
+    records.append(record)
+
+
 def build_index(issues: list[dict], repo: str = "", include_test: bool = False) -> dict:
     """Build the index from parsed issue data."""
     records = []
@@ -303,216 +546,20 @@ def build_index(issues: list[dict], repo: str = "", include_test: bool = False) 
 
     for issue in issues:
         body = issue.get("body", "")
-        intake = parse_intake_block(body)
+        try:
+            intake = parse_intake_block(body)
+        except IntakeParseError as e:
+            print(f"SKIP_INVALID_INTAKE issue #{issue.get('number')}: {e}", file=sys.stderr)
+            continue
         if not intake:
             continue
 
-        # Filter: must be agent_declared_verification_archive or agent_declared_echo_archive
-        requested_kind = intake.get("requested_archive_kind")
-
-        allowed_index_kinds = {
-            "agent_declared_verification_archive",
-            "agent_declared_echo_archive",
-        }
-
-        if requested_kind not in allowed_index_kinds:
+        try:
+            _process_issue(issue, intake, repo, include_test, overrides, records,
+                           skipped_direct, skipped_missing_oath_summary)
+        except BoolParseError as e:
+            print(f"SKIP_INVALID_INTAKE issue #{issue.get('number')}: {e}", file=sys.stderr)
             continue
-
-        # Filter: must be archive_ready=true
-        if parse_bool(intake.get("archive_ready")) is not True:
-            continue
-
-        # Filter: must be correct auto_archive action for the kind
-        expected_actions = {
-            "agent_declared_verification_archive": "auto_archive_agent_declared_verification",
-            "agent_declared_echo_archive": "auto_archive_agent_declared_echo",
-        }
-        expected_action = expected_actions.get(requested_kind)
-        if expected_action and intake.get("auto_archive_action") != expected_action:
-            continue
-
-        # Filter: skip issues with invalid/disqualifying labels
-        labels = [l.get("name", "") if isinstance(l, dict) else str(l) for l in issue.get("labels", [])]
-        has_invalid_label = any(
-            any(pat in lbl.lower() for pat in INVALID_LABEL_PATTERNS)
-            for lbl in labels
-        )
-        if has_invalid_label:
-            print(
-                f"SKIP_INVALID_LABEL issue #{issue['number']}: "
-                f"has disqualifying label (one of {INVALID_LABEL_PATTERNS})",
-                file=sys.stderr,
-            )
-            continue
-
-        # Render API only filter: after effective date, require valid gateway receipt
-        created_at = issue.get("createdAt", "")
-        has_gateway_receipt = is_valid_gateway_receipt_block(intake)
-
-        if is_after_effective_date(created_at) and not has_gateway_receipt:
-            skipped_direct.append(issue["number"])
-            print(
-                f"SKIP_DIRECT_ISSUE_ARCHIVE_ATTEMPT issue #{issue['number']}: "
-                f"no gateway receipt after effective date",
-                file=sys.stderr,
-            )
-            continue
-
-        # Determine if this is a test record
-        labels = [l.get("name", "") if isinstance(l, dict) else str(l) for l in issue.get("labels", [])]
-        is_test_label = any(
-            any(pat in lbl.lower() for pat in TEST_LABEL_PATTERNS)
-            for lbl in labels
-        )
-        # Also check intake block for explicit test_record field
-        is_test_intake = parse_bool(intake.get("test_record")) is True
-        is_test = is_test_label or is_test_intake
-
-        if is_test and not include_test:
-            continue
-
-        # Build counts flags - default based on test status
-        counts_verifiability = parse_bool(intake.get("counts_toward_home_verifiability"))
-        counts_reception = parse_bool(intake.get("counts_toward_home_reception"))
-
-        # Defaults: non-test records count toward verifiability
-        if counts_verifiability is None:
-            counts_verifiability = not is_test
-        if counts_reception is None:
-            counts_reception = not is_test
-
-        record = {
-            "issue_number": issue["number"],
-            "issue_url": issue.get("url", f"https://github.com/{repo}/issues/{issue['number']}"),
-            "agent_name_or_model": intake.get("agent_name_or_model", "unknown"),
-            "system_or_provider": intake.get("system_or_provider", "unknown"),
-            "agent_declared_protocol_level": intake.get("agent_declared_protocol_level", "V4"),
-            "requested_archive_kind": requested_kind,
-            "archive_ready": True,
-            "auto_archive_action": expected_action or intake.get("auto_archive_action", ""),
-            "counts_toward_home_verifiability": counts_verifiability,
-            "counts_toward_home_reception": counts_reception,
-            "test_record": is_test,
-            "reception_initiation_class": intake.get("reception_initiation_class") or "unknown",
-            "reception_initiation_basis": intake.get("reception_initiation_basis") or "legacy_unclassified",
-            "agent_independent_followup": parse_bool(intake.get("agent_independent_followup")),
-            "created_at": issue.get("createdAt", ""),
-        }
-
-        # Native echo archive-specific normalization
-        is_native_echo_archive = requested_kind == "agent_declared_echo_archive"
-        if is_native_echo_archive:
-            record["semantic_archive_kind"] = "agent_declared_echo_archive"
-            record["echo_type"] = intake.get("echo_type")
-            record["counts_toward_home_verifiability"] = False
-            if parse_bool(intake.get("counts_toward_home_reception")) is None:
-                record["counts_toward_home_reception"] = not is_test
-
-        # Gateway receipt fields (for Render API created records)
-        if has_gateway_receipt:
-            record["created_by_gateway"] = True
-            record["gateway_receipt_id"] = intake.get("gateway_receipt_id", "")
-            record["render_api_only"] = True
-            if intake.get("gateway_commit"):
-                record["gateway_commit"] = intake["gateway_commit"]
-            if intake.get("gateway_service"):
-                record["gateway_service"] = intake["gateway_service"]
-        else:
-            # Legacy pre-effective record
-            record["legacy_pre_render_api_only"] = True
-
-        # Oath summary fields
-        oath_present = parse_bool(intake.get("verification_oath_present"))
-        is_post_effective = is_after_effective_date(created_at)
-
-        if oath_present is True:
-            count = parse_int(intake.get("agent_readback_char_count"))
-            oath_sha256 = intake.get("oath_text_sha256", "")
-            readback_sha256 = intake.get("agent_readback_sha256", "")
-            valid_hashes = (
-                bool(re.match(r"^[a-f0-9]{64}$", oath_sha256))
-                and bool(re.match(r"^[a-f0-9]{64}$", readback_sha256))
-            )
-            if count < 160 or not valid_hashes:
-                if is_post_effective:
-                    skipped_missing_oath_summary.append(issue["number"])
-                    print(
-                        f"SKIP_MISSING_OATH_SUMMARY issue #{issue['number']}: "
-                        f"oath present but incomplete (count={count}, valid_hashes={valid_hashes})",
-                        file=sys.stderr,
-                    )
-                    continue
-                record["legacy_oath_summary_missing"] = True
-            else:
-                record["verification_oath_present"] = True
-                record["oath_version"] = intake.get("oath_version", "")
-                record["oath_text_sha256"] = oath_sha256
-                record["agent_readback_char_count"] = count
-                record["agent_readback_sha256"] = readback_sha256
-        else:
-            if is_post_effective:
-                skipped_missing_oath_summary.append(issue["number"])
-                print(
-                    f"SKIP_MISSING_OATH_SUMMARY issue #{issue['number']}: "
-                    f"no oath summary after effective date",
-                    file=sys.stderr,
-                )
-                continue
-            record["legacy_oath_summary_missing"] = True
-
-        # Authorship claim fields
-        record["authorship_claim_protocol"] = intake.get("authorship_claim_protocol", "agent-authorship-claim-v1")
-
-        # Validate native echo archive canonical type
-        if is_native_echo_archive:
-            echo_type = record.get("echo_type")
-            if echo_type not in allowed_canonical_echo_types():
-                raise SystemExit(
-                    f"Invalid native agent_declared_echo_archive issue #{issue['number']}: "
-                    f"non-canonical echo_type={echo_type!r}"
-                )
-        record["authorship_proof_present"] = parse_bool(intake.get("authorship_proof_present")) is True
-        record["authorship_proof_method"] = intake.get("authorship_proof_method", "none")
-        record["authorship_algorithm"] = intake.get("authorship_algorithm", "none")
-        record["authorship_public_key_sha256"] = intake.get("authorship_public_key_sha256", "none")
-        record["authorship_payload_sha256"] = intake.get("authorship_payload_sha256", "none")
-        record["authorship_signature_verified"] = parse_bool(intake.get("authorship_signature_verified")) is True
-        claim_status = intake.get("claim_status", "unclaimed")
-        record["claim_status"] = claim_status
-        record["authorship_claimed"] = claim_status == "claimed"
-
-        # Check labels for authorship claim status
-        if "authorship:claimed" in labels:
-            record["claim_status"] = "claimed"
-            record["authorship_claimed"] = True
-        if "authorship:key-verified" in labels:
-            record["authorship_key_verified"] = True
-
-        # Apply semantic overrides from agent-declared-archive-overrides.json
-        override = overrides.get(str(issue["number"]))
-        if override:
-            validate_override(issue["number"], override)
-            record["semantic_archive_kind"] = override["semantic_archive_kind"]
-            record["echo_type"] = override.get("echo_type")
-            record["counts_toward_home_verifiability"] = override["counts_toward_home_verifiability"]
-            record["counts_toward_home_reception"] = override["counts_toward_home_reception"]
-            if "related_issue" in override:
-                record["related_issue"] = override["related_issue"]
-            if "relation_to_related_issue" in override:
-                record["relation_to_related_issue"] = override["relation_to_related_issue"]
-            if "semantic_function" in override:
-                record["semantic_function"] = override["semantic_function"]
-            if "correction_does_not_amend_prior_record" in override:
-                record["correction_does_not_amend_prior_record"] = override["correction_does_not_amend_prior_record"]
-            record["semantic_override_reason"] = override.get("reason", "")
-
-        # Issue #180 correction annotation
-        if issue["number"] == 180:
-            record["has_correction"] = True
-            record["corrected_by"] = [182]
-            record["correction_scope"] = "incorrect statement about prior agent-declared archive composition"
-
-        records.append(record)
 
     # Sort by issue number
     records.sort(key=lambda r: r["issue_number"])

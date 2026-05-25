@@ -39,7 +39,7 @@ BASE = {
             "oath_text_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
             "readback_required": True,
             "agent_readback": "I confirm this is a non-authoritative Echo archive candidate and I state only what I actually checked. I understand this is not authority, attestation, verification, successor reception, or amendment.",
-            "agent_readback_sha256": "abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+            "agent_readback_sha256": "77cff905149e04aee43451ebd0a53dfe8023f9c689b454bd5d2941bef8bcc0d2",
             "understands_not_an_exam_or_performance": True,
             "will_state_actual_capability_only": True,
             "will_not_lie_or_cheat": True,

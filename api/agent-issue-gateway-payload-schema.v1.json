@@ -306,15 +306,21 @@
     },
     "what_i_checked": {
       "type": "array",
+      "minItems": 1,
       "items": {
-        "type": "string"
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 1000
       },
       "description": "List of what the agent checked."
     },
     "limitations": {
       "type": "array",
+      "minItems": 1,
       "items": {
-        "type": "string"
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 1000
       },
       "description": "List of limitations acknowledged by the agent."
     },
@@ -712,15 +718,24 @@
     "authority_boundary": {
       "type": "object",
       "description": "Authority boundary declaration.",
+      "additionalProperties": false,
+      "required": [
+        "bitcoin_originals_remain_final",
+        "does_not_amend_bitcoin_originals",
+        "does_not_override_bitcoin_originals"
+      ],
       "properties": {
         "bitcoin_originals_remain_final": {
-          "type": "boolean"
+          "type": "boolean",
+          "const": true
         },
         "does_not_amend_bitcoin_originals": {
-          "type": "boolean"
+          "type": "boolean",
+          "const": true
         },
         "does_not_override_bitcoin_originals": {
-          "type": "boolean"
+          "type": "boolean",
+          "const": true
         }
       }
     },
@@ -1583,6 +1598,41 @@
               "boolean",
               "null"
             ]
+          },
+          "claim_gate": {
+            "type": "object",
+            "additionalProperties": true,
+            "required": [
+              "status",
+              "mode",
+              "allowed_protocol_level"
+            ],
+            "properties": {
+              "status": {
+                "type": "string",
+                "enum": [
+                  "PASS",
+                  "PASS_WITH_WARNINGS",
+                  "PASS_WITH_DOWNGRADE"
+                ]
+              },
+              "mode": {
+                "type": "string",
+                "const": "template_for_v0_v5"
+              },
+              "allowed_protocol_level": {
+                "type": "string",
+                "enum": [
+                  "V0",
+                  "V1",
+                  "V2",
+                  "V3",
+                  "V4",
+                  "V4+",
+                  "V5"
+                ]
+              }
+            }
           }
         }
       }

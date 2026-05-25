@@ -700,6 +700,24 @@ jobs:
       - name: Test agent-declared Echo archive Gateway schema
         run: python3 scripts/test_agent_declared_echo_archive_gateway_schema.py
 
+      - name: Test Gateway authority boundary schema invariants
+        run: python3 scripts/test_gateway_authority_boundary_schema_invariants.py
+
+      - name: Test Gateway Claim Gate semantic invariants
+        run: python3 scripts/test_gateway_claim_gate_semantic_invariants.py
+
+      - name: Test Gateway checked and limitations content invariants
+        run: python3 scripts/test_gateway_checked_limitations_content_invariants.py
+
+      - name: Test Gateway readback hash semantics
+        run: python3 scripts/test_gateway_readback_hash_semantics.py
+
+      - name: Test agent-declared intake block parser hardening
+        run: python3 scripts/test_agent_declared_intake_block_parser_hardening.py
+
+      - name: Test agent-declared intake boolean parser
+        run: python3 scripts/test_agent_declared_intake_bool_parser.py
+
       - name: Test discovery manifests lifecycle links
         run: python3 scripts/check_discovery_manifest_lifecycle_links.py
 
