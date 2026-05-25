@@ -8,7 +8,7 @@
     "scripts/gateway_v0_v5_policy.py"
   ],
   "rebuild_source": "github_issues",
-  "rebuild_timestamp": "2026-05-25T14:35:53.905379+00:00",
+  "rebuild_timestamp": "2026-05-25T14:57:48.600748+00:00",
   "render_api_only_effective_at": "2026-05-17T05:30:00Z",
   "override_count": 1,
   "overrides_applied": [
@@ -23,171 +23,7 @@
   "skipped_missing_oath_summary": [],
   "skipped_invalid_intake": [
     {
-      "issue_number": 295,
-      "reason": "duplicate intake key 'agent_readback_sha256' at line 74"
-    },
-    {
-      "issue_number": 294,
-      "reason": "duplicate intake key 'agent_readback_sha256' at line 69"
-    },
-    {
-      "issue_number": 293,
-      "reason": "duplicate intake key 'agent_readback_sha256' at line 91"
-    },
-    {
-      "issue_number": 292,
-      "reason": "duplicate intake key 'agent_readback_sha256' at line 69"
-    },
-    {
-      "issue_number": 291,
-      "reason": "duplicate intake key 'agent_readback_sha256' at line 69"
-    },
-    {
-      "issue_number": 290,
-      "reason": "duplicate intake key 'agent_readback_sha256' at line 69"
-    },
-    {
-      "issue_number": 289,
-      "reason": "duplicate intake key 'agent_readback_sha256' at line 69"
-    },
-    {
-      "issue_number": 288,
-      "reason": "duplicate intake key 'agent_readback_sha256' at line 69"
-    },
-    {
-      "issue_number": 287,
-      "reason": "duplicate intake key 'agent_readback_sha256' at line 69"
-    },
-    {
-      "issue_number": 286,
-      "reason": "duplicate intake key 'agent_readback_sha256' at line 69"
-    },
-    {
-      "issue_number": 285,
-      "reason": "duplicate intake key 'agent_readback_sha256' at line 69"
-    },
-    {
-      "issue_number": 284,
-      "reason": "duplicate intake key 'agent_readback_sha256' at line 69"
-    },
-    {
-      "issue_number": 283,
-      "reason": "duplicate intake key 'agent_readback_sha256' at line 69"
-    },
-    {
-      "issue_number": 281,
-      "reason": "duplicate intake key 'agent_readback_sha256' at line 69"
-    },
-    {
-      "issue_number": 278,
-      "reason": "duplicate intake key 'agent_readback_sha256' at line 69"
-    },
-    {
-      "issue_number": 277,
-      "reason": "duplicate intake key 'agent_readback_sha256' at line 69"
-    },
-    {
-      "issue_number": 276,
-      "reason": "duplicate intake key 'agent_readback_sha256' at line 69"
-    },
-    {
-      "issue_number": 275,
-      "reason": "duplicate intake key 'agent_readback_sha256' at line 74"
-    },
-    {
-      "issue_number": 274,
-      "reason": "duplicate intake key 'agent_readback_sha256' at line 69"
-    },
-    {
-      "issue_number": 273,
-      "reason": "duplicate intake key 'agent_readback_sha256' at line 69"
-    },
-    {
-      "issue_number": 272,
-      "reason": "duplicate intake key 'agent_readback_sha256' at line 93"
-    },
-    {
-      "issue_number": 271,
-      "reason": "duplicate intake key 'agent_readback_sha256' at line 91"
-    },
-    {
-      "issue_number": 270,
-      "reason": "duplicate intake key 'agent_readback_sha256' at line 91"
-    },
-    {
-      "issue_number": 269,
-      "reason": "duplicate intake key 'agent_readback_sha256' at line 69"
-    },
-    {
-      "issue_number": 268,
-      "reason": "duplicate intake key 'agent_readback_sha256' at line 69"
-    },
-    {
-      "issue_number": 267,
-      "reason": "duplicate intake key 'agent_readback_sha256' at line 69"
-    },
-    {
-      "issue_number": 266,
-      "reason": "duplicate intake key 'agent_readback_sha256' at line 74"
-    },
-    {
-      "issue_number": 265,
-      "reason": "duplicate intake key 'agent_readback_sha256' at line 74"
-    },
-    {
-      "issue_number": 264,
-      "reason": "duplicate intake key 'agent_readback_sha256' at line 69"
-    },
-    {
-      "issue_number": 263,
-      "reason": "duplicate intake key 'agent_readback_sha256' at line 69"
-    },
-    {
-      "issue_number": 262,
-      "reason": "duplicate intake key 'agent_readback_sha256' at line 91"
-    },
-    {
-      "issue_number": 261,
-      "reason": "duplicate intake key 'agent_readback_sha256' at line 74"
-    },
-    {
-      "issue_number": 260,
-      "reason": "duplicate intake key 'agent_readback_sha256' at line 69"
-    },
-    {
-      "issue_number": 259,
-      "reason": "duplicate intake key 'agent_readback_sha256' at line 69"
-    },
-    {
-      "issue_number": 258,
-      "reason": "duplicate intake key 'agent_readback_sha256' at line 74"
-    },
-    {
-      "issue_number": 257,
-      "reason": "duplicate intake key 'agent_readback_sha256' at line 69"
-    },
-    {
-      "issue_number": 256,
-      "reason": "duplicate intake key 'agent_readback_sha256' at line 93"
-    },
-    {
-      "issue_number": 255,
-      "reason": "duplicate intake key 'agent_readback_sha256' at line 74"
-    },
-    {
-      "issue_number": 254,
-      "reason": "duplicate intake key 'agent_readback_sha256' at line 69"
-    },
-    {
-      "issue_number": 253,
-      "reason": "duplicate intake key 'agent_readback_sha256' at line 69"
-    },
-    {
-      "issue_number": 252,
-      "reason": "duplicate intake key 'agent_readback_sha256' at line 69"
-    },
-    {
-      "issue_number": 251,
+      "issue_number": 249,
       "reason": "duplicate intake key 'agent_readback_sha256' at line 69"
     },
     {
@@ -195,8 +31,172 @@
       "reason": "duplicate intake key 'agent_readback_sha256' at line 69"
     },
     {
-      "issue_number": 249,
+      "issue_number": 251,
       "reason": "duplicate intake key 'agent_readback_sha256' at line 69"
+    },
+    {
+      "issue_number": 252,
+      "reason": "duplicate intake key 'agent_readback_sha256' at line 69"
+    },
+    {
+      "issue_number": 253,
+      "reason": "duplicate intake key 'agent_readback_sha256' at line 69"
+    },
+    {
+      "issue_number": 254,
+      "reason": "duplicate intake key 'agent_readback_sha256' at line 69"
+    },
+    {
+      "issue_number": 255,
+      "reason": "duplicate intake key 'agent_readback_sha256' at line 74"
+    },
+    {
+      "issue_number": 256,
+      "reason": "duplicate intake key 'agent_readback_sha256' at line 93"
+    },
+    {
+      "issue_number": 257,
+      "reason": "duplicate intake key 'agent_readback_sha256' at line 69"
+    },
+    {
+      "issue_number": 258,
+      "reason": "duplicate intake key 'agent_readback_sha256' at line 74"
+    },
+    {
+      "issue_number": 259,
+      "reason": "duplicate intake key 'agent_readback_sha256' at line 69"
+    },
+    {
+      "issue_number": 260,
+      "reason": "duplicate intake key 'agent_readback_sha256' at line 69"
+    },
+    {
+      "issue_number": 261,
+      "reason": "duplicate intake key 'agent_readback_sha256' at line 74"
+    },
+    {
+      "issue_number": 262,
+      "reason": "duplicate intake key 'agent_readback_sha256' at line 91"
+    },
+    {
+      "issue_number": 263,
+      "reason": "duplicate intake key 'agent_readback_sha256' at line 69"
+    },
+    {
+      "issue_number": 264,
+      "reason": "duplicate intake key 'agent_readback_sha256' at line 69"
+    },
+    {
+      "issue_number": 265,
+      "reason": "duplicate intake key 'agent_readback_sha256' at line 74"
+    },
+    {
+      "issue_number": 266,
+      "reason": "duplicate intake key 'agent_readback_sha256' at line 74"
+    },
+    {
+      "issue_number": 267,
+      "reason": "duplicate intake key 'agent_readback_sha256' at line 69"
+    },
+    {
+      "issue_number": 268,
+      "reason": "duplicate intake key 'agent_readback_sha256' at line 69"
+    },
+    {
+      "issue_number": 269,
+      "reason": "duplicate intake key 'agent_readback_sha256' at line 69"
+    },
+    {
+      "issue_number": 270,
+      "reason": "duplicate intake key 'agent_readback_sha256' at line 91"
+    },
+    {
+      "issue_number": 271,
+      "reason": "duplicate intake key 'agent_readback_sha256' at line 91"
+    },
+    {
+      "issue_number": 272,
+      "reason": "duplicate intake key 'agent_readback_sha256' at line 93"
+    },
+    {
+      "issue_number": 273,
+      "reason": "duplicate intake key 'agent_readback_sha256' at line 69"
+    },
+    {
+      "issue_number": 274,
+      "reason": "duplicate intake key 'agent_readback_sha256' at line 69"
+    },
+    {
+      "issue_number": 275,
+      "reason": "duplicate intake key 'agent_readback_sha256' at line 74"
+    },
+    {
+      "issue_number": 276,
+      "reason": "duplicate intake key 'agent_readback_sha256' at line 69"
+    },
+    {
+      "issue_number": 277,
+      "reason": "duplicate intake key 'agent_readback_sha256' at line 69"
+    },
+    {
+      "issue_number": 278,
+      "reason": "duplicate intake key 'agent_readback_sha256' at line 69"
+    },
+    {
+      "issue_number": 281,
+      "reason": "duplicate intake key 'agent_readback_sha256' at line 69"
+    },
+    {
+      "issue_number": 283,
+      "reason": "duplicate intake key 'agent_readback_sha256' at line 69"
+    },
+    {
+      "issue_number": 284,
+      "reason": "duplicate intake key 'agent_readback_sha256' at line 69"
+    },
+    {
+      "issue_number": 285,
+      "reason": "duplicate intake key 'agent_readback_sha256' at line 69"
+    },
+    {
+      "issue_number": 286,
+      "reason": "duplicate intake key 'agent_readback_sha256' at line 69"
+    },
+    {
+      "issue_number": 287,
+      "reason": "duplicate intake key 'agent_readback_sha256' at line 69"
+    },
+    {
+      "issue_number": 288,
+      "reason": "duplicate intake key 'agent_readback_sha256' at line 69"
+    },
+    {
+      "issue_number": 289,
+      "reason": "duplicate intake key 'agent_readback_sha256' at line 69"
+    },
+    {
+      "issue_number": 290,
+      "reason": "duplicate intake key 'agent_readback_sha256' at line 69"
+    },
+    {
+      "issue_number": 291,
+      "reason": "duplicate intake key 'agent_readback_sha256' at line 69"
+    },
+    {
+      "issue_number": 292,
+      "reason": "duplicate intake key 'agent_readback_sha256' at line 69"
+    },
+    {
+      "issue_number": 293,
+      "reason": "duplicate intake key 'agent_readback_sha256' at line 91"
+    },
+    {
+      "issue_number": 294,
+      "reason": "duplicate intake key 'agent_readback_sha256' at line 69"
+    },
+    {
+      "issue_number": 295,
+      "reason": "duplicate intake key 'agent_readback_sha256' at line 74"
     }
   ],
   "records": [

@@ -512,6 +512,7 @@ def build_index(issues: list[dict], repo: str = "", include_test: bool = False) 
 
     # Sort by issue number
     records.sort(key=lambda r: r["issue_number"])
+    skipped_invalid_intake.sort(key=lambda s: s.get("issue_number", 0))
 
     # Compute override summary
     applied_overrides = sorted(
