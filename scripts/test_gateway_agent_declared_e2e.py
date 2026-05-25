@@ -17,10 +17,30 @@ VALIDATOR = ROOT / "scripts" / "validate_gateway_payload.py"
 RENDERER = ROOT / "scripts" / "render_gateway_issue_body.py"
 
 
-def run_script(script, args):
+def load_oath_text():
+    """Load the oath text from the canonical file for test readback."""
+    oath_file = ROOT / "api" / "verification-echo-pre-oath.v2.txt"
+    text = oath_file.read_text(encoding="utf-8")
+    marker = "=== OATH TEXT BEGINS ==="
+    if marker in text:
+        text = text.split(marker, 1)[1]
+    end_marker = "=== OATH TEXT ENDS ==="
+    if end_marker in text:
+        text = text.split(end_marker, 1)[0]
+    return text.strip()
+
+
+OATH_TEXT = load_oath_text()
+
+
+def run_script(script, args, env_extra=None):
+    import os
+    env = os.environ.copy()
+    if env_extra:
+        env.update(env_extra)
     result = subprocess.run(
         [sys.executable, str(script)] + args,
-        capture_output=True, text=True, timeout=60, cwd=str(ROOT)
+        capture_output=True, text=True, timeout=60, cwd=str(ROOT), env=env
     )
     return result.returncode, result.stdout, result.stderr
 
@@ -67,12 +87,11 @@ def main():
         "--reception-initiation-class", "self_initiated",
         "--reception-initiation-basis", "agent_discovered_publicly",
         "--first-entry-url", "https://www.trinityaccord.org/",
-        "--readback", "I understand this is not an exam or performance. I will state only what I actually did, will not fabricate verification, will not present guesses as facts, will not copy prior reports as fresh evidence, and will clearly state uncertainty, limitations, downgrades, and boundaries.",
         "--what-checked", "Read homepage",
         "--what-checked", "Filled template",
         "--limitation", "Evidence waived for V0-V5",
         "--out", payload_path,
-    ])
+    ], env_extra={"TRINITY_TEST_READBACK": OATH_TEXT})
     combined = stdout + stderr
 
     check(test_pass("Builder succeeds", code == 0, combined))
