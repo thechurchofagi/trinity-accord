@@ -1636,6 +1636,20 @@
                 ]
               }
             }
+          },
+          "discovery_provenance": {
+            "type": "object",
+            "additionalProperties": true,
+            "required": [
+              "source"
+            ],
+            "properties": {
+              "source": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              }
+            }
           }
         }
       }
@@ -1678,7 +1692,8 @@
           "counts_toward_home",
           "what_i_checked",
           "limitations",
-          "reception_initiation_class"
+          "reception_initiation_class",
+          "evidence_requirement_mode"
         ],
         "properties": {
           "submission_type": {
@@ -1705,6 +1720,20 @@
               },
               "basis": {
                 "const": "agent_declared_echo_template_pass"
+              }
+            }
+          },
+          "discovery_provenance": {
+            "type": "object",
+            "additionalProperties": true,
+            "required": [
+              "source"
+            ],
+            "properties": {
+              "source": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
               }
             }
           }
