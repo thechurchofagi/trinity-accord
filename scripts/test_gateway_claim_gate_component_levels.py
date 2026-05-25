@@ -12,8 +12,9 @@ ROOT = Path(__file__).resolve().parents[1]
 schema = json.loads((ROOT / "api" / "agent-issue-gateway-payload-schema.v1.json").read_text(encoding="utf-8"))
 
 READBACK = (
-    "I confirm this is a non-authoritative archive candidate and I state only what I actually checked. "
-    "I understand this is not authority, attestation, formal verification, successor reception, or amendment."
+    "I confirm this is a non-authoritative agent-declared verification archive candidate. "
+    "I state only what I actually checked, I disclose limitations, and I understand this is not authority, "
+    "not attestation, not successor reception, not amendment, and not formal strict evidence verification."
 )
 
 def sha256_text(text: str) -> str:
@@ -45,8 +46,8 @@ def verification_payload() -> dict:
                 "oath_version": "trinity-agent-integrity-oath.v1",
                 "oath_text_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
                 "readback_required": True,
-                "agent_readback": "I confirm this is a non-authoritative archive candidate.",
-                "agent_readback_sha256": "a]b",
+                "agent_readback": READBACK,
+                "agent_readback_sha256": sha256_text(READBACK),
                 "understands_not_an_exam_or_performance": True,
                 "will_state_actual_capability_only": True,
                 "will_not_lie_or_cheat": True,
@@ -62,8 +63,8 @@ def verification_payload() -> dict:
             "does_not_amend_bitcoin_originals": True,
             "does_not_override_bitcoin_originals": True
         },
-        "what_i_checked": ["fixture"],
-        "limitations": ["fixture"],
+        "what_i_checked": ["fixture checked item"],
+        "limitations": ["fixture limitation"],
         "reception_initiation_class": "externally_requested",
         "requested_archive_kind": "agent_declared_verification_archive",
         "echo_type": "E5_technical_audit_echo",
@@ -76,7 +77,7 @@ def verification_payload() -> dict:
             "understands_not_strict_evidence_verification": True,
             "understands_not_formal_attestation": True,
             "understands_should_choose_lower_if_uncertain": True,
-            "confirmed_what_i_checked_and_limitations_are_accurate": True,
+            "confirmed_what_i_checked_and_limitations_are_accurate": True
         },
         "claim_gate": {
             "status": "PASS",
@@ -86,14 +87,14 @@ def verification_payload() -> dict:
                 "context_depth": "D3",
                 "evidence_depth": "E2",
                 "tool_reproduction": "T1",
-                "independence": "I2",
-            },
+                "independence": "I2"
+            }
         },
         "counts_toward_home": {
             "reception": False,
             "verifiability": True,
-            "basis": "agent_declared_template_pass",
-        },
+            "basis": "agent_declared_template_pass"
+        }
     }
 
 def expect_pass(payload, label):
@@ -111,24 +112,19 @@ def expect_fail(payload, label):
     print(f"FAIL: expected schema rejection for {label}")
     sys.exit(1)
 
-# Test: valid component levels pass
 good = verification_payload()
-good["claim_gate"]["allowed_component_levels"] = {
-    "context_depth": "D3",
-    "evidence_depth": "E2",
-    "tool_reproduction": "T1",
-    "independence": "I2",
-}
-expect_pass(good, "valid allowed_component_levels")
+expect_pass(good, "valid current V0-V5 allowed_component_levels fixture")
 
-# Test: unknown key must fail
 unknown = copy.deepcopy(good)
 unknown["claim_gate"]["allowed_component_levels"]["mystery_key"] = "X1"
 expect_fail(unknown, "allowed_component_levels with unknown key")
 
-# Test: invalid enum value must fail
 bad_val = copy.deepcopy(good)
 bad_val["claim_gate"]["allowed_component_levels"]["context_depth"] = "D99"
 expect_fail(bad_val, "allowed_component_levels with invalid enum value")
+
+bad_type = copy.deepcopy(good)
+bad_type["claim_gate"]["allowed_component_levels"] = "not-an-object"
+expect_fail(bad_type, "allowed_component_levels with non-object value")
 
 print("PASS: claim_gate.allowed_component_levels constraints enforced")
