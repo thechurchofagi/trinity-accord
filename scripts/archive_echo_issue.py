@@ -1,11 +1,19 @@
 #!/usr/bin/env python3
 """Archive a screened GitHub Echo issue as an Echo v3 JSON record.
 
-This script is conservative:
-- It only runs after an explicit human review command.
-- It does not claim technical verification.
-- It does not create independent attestation.
-- It preserves the issue body as witness/source text.
+This script supports two archive modes:
+
+1. Human-review archive mode:
+   - Called after an explicit human review command.
+   - Does not claim technical verification.
+   - Does not create independent attestation.
+
+2. Gateway-validated auto archive mode:
+   - Called by gateway-auto-archive.yml with --require-gateway-validated.
+   - Refuses to archive unless Gateway intake fields are present and archive-ready.
+   - Still does not create independent attestation or amend authority.
+
+In all modes the issue body is preserved as witness/source text.
 """
 
 from __future__ import annotations
