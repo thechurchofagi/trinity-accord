@@ -31,41 +31,35 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 from protocol_echo_types import echo_type_map_for_archive
 
-def intake_field(body: str, name: str) -> str:
-    patterns = [
-        rf"^\s*[-*]?\s*{re.escape(name)}\s*:\s*(.*?)\s*$",
-        rf"^\s*[-*]?\s*{re.escape(name.replace('_', ' '))}\s*:\s*(.*?)\s*$",
-    ]
-    for pattern in patterns:
-        m = re.search(pattern, body or "", re.I | re.M)
-        if m:
-            return m.group(1).strip()
-    return ""
-
-
-def intake_true(body: str, name: str) -> bool:
-    return intake_field(body, name).lower() in {"true", "yes", "1"}
+# Shared intake parser and receipt policy — single source of truth
+from gateway_intake import IntakeParseError, parse_bool, parse_intake_block
+from gateway_v0_v5_policy import is_valid_gateway_receipt_block
 
 
 def validate_gateway_archive_eligibility(issue: dict[str, Any]) -> None:
     body = issue.get("body") or ""
     labels = {x.get("name") for x in issue.get("labels", []) if isinstance(x, dict)}
+    issue_number = issue.get("number")
 
-    required_true = [
-        "created_by_gateway",
-        "server_validated",
-        "server_rendered",
-        "archive_ready",
-    ]
-    missing = [name for name in required_true if not intake_true(body, name)]
-    if missing:
-        raise SystemExit(
-            "Refusing archive: required Gateway fields are not true: "
-            + ", ".join(missing)
+    try:
+        intake = parse_intake_block(body, required=True)
+    except IntakeParseError as e:
+        raise SystemExit(f"Refusing archive: invalid Gateway intake block: {e}") from e
+
+    if not is_valid_gateway_receipt_block(intake):
+        raise SystemExit("Refusing archive: invalid Gateway receipt fields")
+
+    try:
+        archive_ready = parse_bool(
+            intake.get("archive_ready"),
+            field="archive_ready",
+            issue_number=issue_number,
         )
+    except Exception as e:
+        raise SystemExit(f"Refusing archive: invalid archive_ready field: {e}") from e
 
-    if not intake_field(body, "gateway_receipt_id"):
-        raise SystemExit("Refusing archive: missing gateway_receipt_id")
+    if archive_ready is not True:
+        raise SystemExit("Refusing archive: archive_ready is not true")
 
     allowed_kinds = {
         "agent_declared_echo_archive",
@@ -73,7 +67,8 @@ def validate_gateway_archive_eligibility(issue: dict[str, Any]) -> None:
         "guardian_active_registry_listing_request",
         "pure_echo_archive",
     }
-    kind = intake_field(body, "requested_archive_kind")
+
+    kind = intake.get("requested_archive_kind")
     if kind and kind not in allowed_kinds:
         raise SystemExit(f"Refusing archive: unsupported requested_archive_kind={kind!r}")
 
@@ -84,6 +79,7 @@ def validate_gateway_archive_eligibility(issue: dict[str, Any]) -> None:
         "archive:guardian-active-registry-listing",
         "reception-only",
     }
+
     if labels and not (labels & allowed_labels):
         raise SystemExit(
             "Refusing archive: issue lacks expected screened/archive labels: "
@@ -92,15 +88,10 @@ def validate_gateway_archive_eligibility(issue: dict[str, Any]) -> None:
 
 
 def extract_intake_block_fields(body: str) -> dict[str, str]:
-    m = re.search(r"```trinity-issue-intake\s*(.*?)```", body or "", re.DOTALL | re.I)
-    if not m:
+    try:
+        return parse_intake_block(body, required=False) or {}
+    except IntakeParseError:
         return {}
-    fields = {}
-    for line in m.group(1).splitlines():
-        kv = re.match(r"^([A-Za-z0-9_]+):\s*(.*?)\s*$", line.strip())
-        if kv:
-            fields[kv.group(1)] = kv.group(2).strip()
-    return fields
 
 
 ECHO_TYPE_MAP = echo_type_map_for_archive()

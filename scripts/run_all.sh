@@ -47,7 +47,10 @@ for t in \
   scripts/test_gateway_agent_identity_archive_policy.py \
   scripts/test_gateway_semantic_validator_no_dead_code.py \
   scripts/test_gateway_fixtures_use_current_v0_v5_shape.py \
-  scripts/test_echo_triage_receipt_fields_only_from_intake_block.py; do
+  scripts/test_echo_triage_receipt_fields_only_from_intake_block.py \
+  scripts/test_archive_echo_issue_gateway_intake_strict.py \
+  scripts/test_gateway_auto_archive_uses_shared_eligibility.py \
+  scripts/test_agent_declared_index_generated_metadata_current.py; do
   if [ -f "$t" ]; then
     run_required "$t" python3 "$t"
   fi
