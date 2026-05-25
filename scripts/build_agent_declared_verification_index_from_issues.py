@@ -432,10 +432,12 @@ def _process_issue(issue, intake, repo, include_test, overrides, records,
     if is_native_echo_archive:
         echo_type = record.get("echo_type")
         if echo_type not in allowed_canonical_echo_types():
-            raise SystemExit(
-                f"Invalid native agent_declared_echo_archive issue #{issue['number']}: "
-                f"non-canonical echo_type={echo_type!r}"
+            print(
+                f"SKIP_NON_CANONICAL_ECHO_TYPE issue #{issue['number']}: "
+                f"non-canonical echo_type={echo_type!r}",
+                file=sys.stderr,
             )
+            return
     record["authorship_proof_present"] = parse_bool(intake.get("authorship_proof_present"), field="authorship_proof_present", issue_number=issue["number"]) is True
     record["authorship_proof_method"] = intake.get("authorship_proof_method", "none")
     record["authorship_algorithm"] = intake.get("authorship_algorithm", "none")
