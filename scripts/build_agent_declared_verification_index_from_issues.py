@@ -650,4 +650,9 @@ def main() -> int:
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--repo", default="thechurchofagi/trinity-accord")
+    parser.add_argument("--check", action="store_true", help="Fail if generated index is stale.")
+    parser.add_argument("--dry-run", action="store_true", help="Print output without writing.")
+    args = parser.parse_args()
     sys.exit(main())
