@@ -20,6 +20,78 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 
+def intake_field(body: str, name: str) -> str:
+    patterns = [
+        rf"^\s*[-*]?\s*{re.escape(name)}\s*:\s*(.*?)\s*$",
+        rf"^\s*[-*]?\s*{re.escape(name.replace('_', ' '))}\s*:\s*(.*?)\s*$",
+    ]
+    for pattern in patterns:
+        m = re.search(pattern, body or "", re.I | re.M)
+        if m:
+            return m.group(1).strip()
+    return ""
+
+
+def intake_true(body: str, name: str) -> bool:
+    return intake_field(body, name).lower() in {"true", "yes", "1"}
+
+
+def validate_gateway_archive_eligibility(issue: dict[str, Any]) -> None:
+    body = issue.get("body") or ""
+    labels = {x.get("name") for x in issue.get("labels", []) if isinstance(x, dict)}
+
+    required_true = [
+        "created_by_gateway",
+        "server_validated",
+        "server_rendered",
+        "archive_ready",
+    ]
+    missing = [name for name in required_true if not intake_true(body, name)]
+    if missing:
+        raise SystemExit(
+            "Refusing archive: required Gateway fields are not true: "
+            + ", ".join(missing)
+        )
+
+    if not intake_field(body, "gateway_receipt_id"):
+        raise SystemExit("Refusing archive: missing gateway_receipt_id")
+
+    allowed_kinds = {
+        "agent_declared_echo_archive",
+        "agent_declared_verification_archive",
+        "guardian_active_registry_listing_request",
+        "pure_echo_archive",
+    }
+    kind = intake_field(body, "requested_archive_kind")
+    if kind and kind not in allowed_kinds:
+        raise SystemExit(f"Refusing archive: unsupported requested_archive_kind={kind!r}")
+
+    allowed_labels = {
+        "echo:screened",
+        "archive:agent-declared-echo",
+        "archive:agent-declared-verification",
+        "archive:guardian-active-registry-listing",
+        "reception-only",
+    }
+    if labels and not (labels & allowed_labels):
+        raise SystemExit(
+            "Refusing archive: issue lacks expected screened/archive labels: "
+            + ", ".join(sorted(labels))
+        )
+
+
+def extract_intake_block_fields(body: str) -> dict[str, str]:
+    m = re.search(r"```trinity-issue-intake\s*(.*?)```", body or "", re.DOTALL | re.I)
+    if not m:
+        return {}
+    fields = {}
+    for line in m.group(1).splitlines():
+        kv = re.match(r"^([A-Za-z0-9_]+):\s*(.*?)\s*$", line.strip())
+        if kv:
+            fields[kv.group(1)] = kv.group(2).strip()
+    return fields
+
+
 ECHO_TYPE_MAP = {
     "E1": "E1_recognition_echo",
     "E2": "E2_verification_echo",
@@ -158,6 +230,21 @@ def detect_echo_type(issue: dict[str, Any]) -> str:
     title = issue.get("title") or ""
     body = issue.get("body") or ""
     labels = [x.get("name", "") for x in issue.get("labels", [])]
+
+    # Prefer explicit intake echo_type from trinity-issue-intake block
+    intake = extract_intake_block_fields(body)
+    explicit = intake.get("echo_type") or extract_bullet_field(body, "echo_type")
+    if explicit:
+        return explicit
+
+    # Guardian listing requests are propagation echoes
+    requested_kind = intake.get("requested_archive_kind") or extract_bullet_field(body, "requested_archive_kind")
+    if requested_kind == "guardian_active_registry_listing_request":
+        return "E7_propagation_echo"
+
+    if intake.get("guardian_listing_request") == "true" or "guardian_listing_request" in body:
+        return "E7_propagation_echo"
+
     joined = "\n".join([title, body] + labels)
 
     if "E8-Witness" in labels or re.search(r"\bE8\b", joined, re.I) or re.search(r"witness echo", joined, re.I):
@@ -463,9 +550,14 @@ def main() -> int:
     ap.add_argument("--write", action="store_true")
     ap.add_argument("--result-json", default="")
     ap.add_argument("--review-comment-body-file", default="")
+    ap.add_argument("--require-gateway-validated", action="store_true", help="Refuse to archive unless issue body contains Gateway-created/server-validated/archive-ready fields.")
     args = ap.parse_args()
 
     issue = json.loads(Path(args.issue_json).read_text(encoding="utf-8"))
+
+    if args.require_gateway_validated:
+        validate_gateway_archive_eligibility(issue)
+
     issue_number = int(issue["number"])
 
     review_comment_body = ""
