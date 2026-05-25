@@ -69,19 +69,19 @@ jobs:
             const window24 = new Date(now.getTime() - 24 * 60 * 60 * 1000);
 
             function intakeBlock(body) {
-  const text = body || "";
-  const matches = [...text.matchAll(/```trinity-issue-intake\s*\n([\s\S]*?)```/g)];
-  if (matches.length !== 1) return "";
-  return matches[0][1] || "";
-}
+              const text = body || "";
+              const matches = [...text.matchAll(/```trinity-issue-intake\s*\n([\s\S]*?)```/g)];
+              if (matches.length !== 1) return "";
+              return matches[0][1] || "";
+            }
 
-function intakeField(body, name) {
-  const block = intakeBlock(body);
-  if (!block) return "";
-  const re = new RegExp("^" + name + ":\s*(.+)$", "mi");
-  const m = block.match(re);
-  return m ? m[1].trim() : "";
-}
+            function intakeField(body, name) {
+              const block = intakeBlock(body);
+              if (!block) return "";
+              const re = new RegExp("^" + name + ":\\s*(.+)$", "mi");
+              const m = block.match(re);
+              return m ? m[1].trim() : "";
+            }
 
             function hasMachineFlag(body, name, value = "true") {
               const got = intakeField(body, name).toLowerCase();
@@ -89,17 +89,17 @@ function intakeField(body, name) {
             }
 
             function isGatewayCreated(body) {
-  const receiptId = intakeField(body, "gateway_receipt_id");
-  const service = intakeField(body, "gateway_service");
-  const receiptPattern = /^gar-[A-Za-z0-9T._:-]{16,}$/;
+              const receiptId = intakeField(body, "gateway_receipt_id");
+              const service = intakeField(body, "gateway_service");
+              const receiptPattern = /^gar-[A-Za-z0-9T._:-]{16,}$/;
 
-  return hasMachineFlag(body, "created_by_gateway", "true") &&
-         hasMachineFlag(body, "render_api_only", "true") &&
-         hasMachineFlag(body, "server_validated", "true") &&
-         hasMachineFlag(body, "server_rendered", "true") &&
-         service === "trinity-agent-issue-gateway" &&
-         receiptPattern.test(receiptId);
-}
+              return hasMachineFlag(body, "created_by_gateway", "true") &&
+                     hasMachineFlag(body, "render_api_only", "true") &&
+                     hasMachineFlag(body, "server_validated", "true") &&
+                     hasMachineFlag(body, "server_rendered", "true") &&
+                     service === "trinity-agent-issue-gateway" &&
+                     receiptPattern.test(receiptId);
+            }
 
             function requestedArchiveKind(body) {
               return intakeField(body, "requested_archive_kind");
