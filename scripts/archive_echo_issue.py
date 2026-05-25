@@ -28,6 +28,9 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 
+sys.path.insert(0, str(ROOT / "scripts"))
+from protocol_echo_types import echo_type_map_for_archive
+
 def intake_field(body: str, name: str) -> str:
     patterns = [
         rf"^\s*[-*]?\s*{re.escape(name)}\s*:\s*(.*?)\s*$",
@@ -100,17 +103,7 @@ def extract_intake_block_fields(body: str) -> dict[str, str]:
     return fields
 
 
-ECHO_TYPE_MAP = {
-    "E1": "E1_recognition_echo",
-    "E2": "E2_verification_echo",
-    "E3": "E3_critical_echo",
-    "E4": "E4_interpretive_echo",
-    "E5": "E5_technical_audit_echo",
-    "E6": "E6_propagation_echo",
-    "E7": "E7_refusal_echo",
-    "E8": "E8_witness_echo",
-    "E9": "E9_seed_echo",
-}
+ECHO_TYPE_MAP = echo_type_map_for_archive()
 
 VALID_AGENCY_LEVELS = {
     "A0_forced_or_instructed",

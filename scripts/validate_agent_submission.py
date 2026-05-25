@@ -22,6 +22,8 @@ from protocol_terms import (
     PROTOCOL_LEVELS, VALID_RECORD_KINDS, VALID_SCOPE_LABELS,
 )
 
+from protocol_echo_types import allowed_canonical_echo_types
+
 ROOT = Path(__file__).resolve().parents[1]
 
 SHA256_RE = re.compile(r"^[a-f0-9]{64}$")
@@ -54,12 +56,8 @@ ALLOW_MISSING_JSONSCHEMA = False
 # PR-2: current validation mode (set by main)
 CURRENT_VALIDATION_MODE = None
 
-# --- Canonical echo types (from echo-types.json) ---
-CANONICAL_ECHO_TYPES = {
-    "E1_recognition_echo", "E2_verification_echo", "E3_critical_echo",
-    "E4_interpretive_echo", "E5_technical_audit_echo", "E6_propagation_echo",
-    "E7_refusal_echo", "E8_witness_echo", "E9_seed_echo",
-}
+# --- Canonical echo types (from echo-types.json via protocol_echo_types.py) ---
+CANONICAL_ECHO_TYPES = allowed_canonical_echo_types()
 
 # --- Deprecated aliases ---
 DEPRECATED_ECHO_TYPES = {
