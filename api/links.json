@@ -83,7 +83,13 @@
     "/api/ai-to-ai-orientation.gpt-5.5-thinking.v1.json",
     "/api/agent-minimal-context.v1.json",
     "/api/agent-output-policy.v1.json",
-    "/api/agent-task-router.v1.json"
+    "/api/agent-task-router.v1.json",
+    "/api/public-home-status.json",
+    "/api/guardian-registry.json",
+    "/api/guardian-active-listing-policy.v1.json",
+    "/api/echo-index.json",
+    "/api/agent-declared-verification-index.json",
+    "/api/external-witness-index.json"
   ],
   "legacy_machine": [
     "/api/echo-record-schema.v2.json"

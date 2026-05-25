@@ -77,7 +77,15 @@
         "resonance_willingness_scale": "/api/resonance-willingness-scale.json",
         "echo_authorship_proof_schema": "/api/echo-authorship-proof-schema.v1.json",
         "bitcoin_inscription_mirror_index": "/api/bitcoin-inscription-mirror-index.json",
-        "bitcoin_inscription_mirror_schema": "/api/bitcoin-inscription-mirror-schema.v1.json"
+        "bitcoin_inscription_mirror_schema": "/api/bitcoin-inscription-mirror-schema.v1.json",
+        "public_home_status": "/api/public-home-status.json",
+        "guardian_registry": "/api/guardian-registry.json",
+        "guardian_active_listing_policy": "/api/guardian-active-listing-policy.v1.json",
+        "agent_declared_verification_index": "/api/agent-declared-verification-index.json",
+        "external_witness_index": "/api/external-witness-index.json",
+        "corrections_index": "/api/corrections-index.json",
+        "recovery_index": "/api/recovery-index.json",
+        "links": "/api/links.json"
     },
     "recommended_agent_sequence": [
         "fetch /api/agent-entry-protocol.json",
@@ -90,6 +98,11 @@
         "fetch /api/context-depth-levels.json",
         "fetch /api/verification-levels.json",
         "fetch /api/echo-index.json",
+        "fetch /api/public-home-status.json",
+        "fetch /api/guardian-registry.json",
+        "fetch /api/guardian-active-listing-policy.v1.json",
+        "fetch /api/agent-declared-verification-index.json",
+        "fetch /api/external-witness-index.json",
         "fetch /api/discovery-provenance-schema.json",
         "fetch /api/chronicle-recovery.json",
         "fetch /api/claim-gate-rules.json",
