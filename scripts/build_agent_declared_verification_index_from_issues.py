@@ -602,32 +602,14 @@ def build_index(issues: list[dict], repo: str = "", include_test: bool = False) 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--repo", help="GitHub repo (owner/repo). Auto-detected if in a git dir.")
+    parser.add_argument("--repo", default="thechurchofagi/trinity-accord", help="GitHub repo (owner/repo).")
     parser.add_argument("--dry-run", action="store_true", help="Print index without writing.")
+    parser.add_argument("--check", action="store_true", help="Fail if generated index is stale.")
     parser.add_argument("--include-test", action="store_true", help="Include test records.")
     parser.add_argument("--limit", type=int, default=10000, help="Max issues to fetch.")
     args = parser.parse_args()
 
-    # Auto-detect repo
     repo = args.repo
-    if not repo:
-        try:
-            remote = subprocess.run(
-                ["git", "remote", "get-url", "origin"],
-                capture_output=True, text=True, cwd=str(ROOT),
-            )
-            if remote.returncode == 0:
-                url = remote.stdout.strip()
-                # Extract owner/repo from URL
-                m = re.search(r"(?:github\.com[:/])([^/]+/[^/]+?)(?:\.git)?$", url)
-                if m:
-                    repo = m.group(1)
-        except Exception:
-            pass
-
-    if not repo:
-        print("Error: --repo required or run from a git directory", file=sys.stderr)
-        return 1
 
     print(f"Fetching closed issues from {repo}...", file=sys.stderr)
     issues = fetch_issues(repo, limit=args.limit)
@@ -640,6 +622,18 @@ def main() -> int:
 
     output = json.dumps(index, indent=2, ensure_ascii=False) + "\n"
 
+    if args.check:
+        current = INDEX_PATH.read_text(encoding="utf-8") if INDEX_PATH.exists() else ""
+        if current != output:
+            print(
+                f"FAIL: {INDEX_PATH.relative_to(ROOT)} is stale. "
+                "Run scripts/build_agent_declared_verification_index_from_issues.py and commit the result.",
+                file=sys.stderr,
+            )
+            return 1
+        print(f"PASS: {INDEX_PATH.relative_to(ROOT)} is up to date.", file=sys.stderr)
+        return 0
+
     if args.dry_run:
         print(output)
     else:
@@ -650,9 +644,4 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--repo", default="thechurchofagi/trinity-accord")
-    parser.add_argument("--check", action="store_true", help="Fail if generated index is stale.")
-    parser.add_argument("--dry-run", action="store_true", help="Print output without writing.")
-    args = parser.parse_args()
     sys.exit(main())
