@@ -46,7 +46,8 @@ ok = True
 for f in files:
     p = ROOT / f
     if not p.exists():
-        print(f"SKIP: {f} not found")
+        print(f"FAIL: required discovery manifest missing: {f}")
+        ok = False
         continue
     strings = collect_strings(load(p))
     missing = sorted(REQUIRED - strings)
