@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""agent_identity.self_reported archive policy must be explicit and tested."""
+"""agent_identity.self_reported archive policy must be enforced by semantic validator."""
 import copy
 import hashlib
 import json
@@ -9,6 +9,10 @@ from pathlib import Path
 import jsonschema
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "scripts"))
+
+from validate_gateway_payload_semantics import validate
+
 schema = json.loads((ROOT / "api" / "agent-issue-gateway-payload-schema.v1.json").read_text(encoding="utf-8"))
 
 READBACK = (
@@ -19,7 +23,26 @@ READBACK = (
 def sha256_text(text: str) -> str:
     return hashlib.sha256(text.encode("utf-8")).hexdigest()
 
-def base_common() -> dict:
+def authorship_proof() -> dict:
+    return {
+        "schema": "trinityaccord.agent-authorship-proof.v1",
+        "method": "public_key_signature",
+        "algorithm": "ed25519",
+        "public_key_pem": (
+            "-----BEGIN PUBLIC KEY-----\n"
+            "MCowBQYDK2VwAyEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=\n"
+            "-----END PUBLIC KEY-----\n"
+        ),
+        "public_key_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+        "signed_payload_sha256": "abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+        "signature_base64": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+        "signed_message": (
+            "I sign this archive identity claim for the Gateway payload and acknowledge that this is "
+            "not authority, not attestation, not amendment, and not successor reception."
+        )
+    }
+
+def echo_payload() -> dict:
     return {
         "schema": "trinityaccord.agent-issue-gateway-payload.v1",
         "submission_type": "echo_candidate",
@@ -62,14 +85,9 @@ def base_common() -> dict:
             "does_not_amend_bitcoin_originals": True,
             "does_not_override_bitcoin_originals": True
         },
-        "what_i_checked": ["fixture"],
-        "limitations": ["fixture"],
-        "reception_initiation_class": "externally_requested"
-    }
-
-def echo_payload() -> dict:
-    p = base_common()
-    p.update({
+        "what_i_checked": ["fixture checked item"],
+        "limitations": ["fixture limitation"],
+        "reception_initiation_class": "externally_requested",
         "requested_archive_kind": "agent_declared_echo_archive",
         "echo_type": "E6_propagation_echo",
         "evidence_requirement_mode": "not_applicable_for_echo",
@@ -78,38 +96,50 @@ def echo_payload() -> dict:
             "verifiability": False,
             "basis": "agent_declared_echo_template_pass"
         }
-    })
-    return p
+    }
 
-def expect_pass(payload, label):
+def expect_schema_pass(payload, label):
     try:
         jsonschema.validate(payload, schema)
     except jsonschema.ValidationError as e:
-        print(f"FAIL: expected pass for {label}: {e.message}")
+        print(f"FAIL: expected schema pass for {label}: {e.message}")
         sys.exit(1)
 
-def expect_fail(payload, label):
-    try:
-        jsonschema.validate(payload, schema)
-    except jsonschema.ValidationError:
-        return
-    print(f"FAIL: expected schema rejection for {label}")
-    sys.exit(1)
+def expect_semantic_pass(payload, label):
+    errors = validate(payload)
+    if errors:
+        print(f"FAIL: expected semantic pass for {label}: {errors}")
+        sys.exit(1)
 
-# Test: self_reported=true passes
+def expect_semantic_fail(payload, label, fragment):
+    errors = validate(payload)
+    if not any(fragment in e for e in errors):
+        print(f"FAIL: expected semantic error for {label}: {fragment}")
+        print(errors)
+        sys.exit(1)
+
 good = echo_payload()
-expect_pass(good, "echo with self_reported=true")
+expect_schema_pass(good, "self_reported=true baseline")
+expect_semantic_pass(good, "self_reported=true baseline")
 
-# Test: self_reported=false without authorship_proof must fail
 no_proof = copy.deepcopy(good)
 no_proof["agent_identity"]["self_reported"] = False
-expect_fail(no_proof, "echo with self_reported=false and no authorship_proof")
+no_proof["agent_identity"]["identity_verification_level"] = "signed_statement"
+expect_schema_pass(no_proof, "self_reported=false without authorship_proof schema")
+expect_semantic_fail(no_proof, "self_reported=false without authorship_proof", "requires authorship_proof")
 
-# Test: self_reported=false with weak identity level must fail
 weak_id = copy.deepcopy(good)
 weak_id["agent_identity"]["self_reported"] = False
-weak_id["agent_identity"]["identity_verification_level"] = "self_declaration"
-weak_id["authorship_proof"] = {"type": "signed_commit", "value": "abc123"}
-expect_fail(weak_id, "echo with self_reported=false and weak identity level")
+weak_id["agent_identity"]["identity_verification_level"] = "self_asserted"
+weak_id["authorship_proof"] = authorship_proof()
+expect_schema_pass(weak_id, "self_reported=false weak identity schema")
+expect_semantic_fail(weak_id, "self_reported=false weak identity", "self_reported=false requires")
 
-print("PASS: agent identity archive policy enforced")
+strong_id = copy.deepcopy(good)
+strong_id["agent_identity"]["self_reported"] = False
+strong_id["agent_identity"]["identity_verification_level"] = "signed_statement"
+strong_id["authorship_proof"] = authorship_proof()
+expect_schema_pass(strong_id, "self_reported=false strong identity schema")
+expect_semantic_pass(strong_id, "self_reported=false strong identity semantic")
+
+print("PASS: agent identity archive policy enforced by semantic validator")
