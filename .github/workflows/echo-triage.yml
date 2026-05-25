@@ -3,26 +3,18 @@ name: Echo Issue Triage
 on:
   issues:
     types: [opened, edited, reopened, closed, labeled]
-  repository_dispatch:
-    types: [gateway-auto-archive]
-  workflow_dispatch:
-    inputs:
-      issue_number:
-        description: 'Issue number for auto-archive (optional, used by repository_dispatch path)'
-        required: false
-        type: string
 
 permissions:
   issues: write
-  contents: write
+  contents: read
 
 concurrency:
-  group: echo-triage-${{ github.event.issue.number || github.event.client_payload.issue_number || github.run_id }}
+  group: echo-triage-${{ github.event.issue.number }}
   cancel-in-progress: false
 
 jobs:
   triage:
-    if: ${{ github.event_name != 'push' && (github.event_name == 'repository_dispatch' || !github.event.issue.pull_request) }}
+    if: ${{ !github.event.issue.pull_request }}
     runs-on: ubuntu-24.04
     timeout-minutes: 5
 
@@ -47,7 +39,6 @@ jobs:
           echo "managed_labels=$(echo "$policy" | python3 -c 'import sys,json; print(json.dumps(json.load(sys.stdin)["triage"]["managed_labels"]))')" >> "$GITHUB_OUTPUT"
 
       - name: Compute Echo rate limit
-        if: ${{ github.event.action != 'gateway-auto-archive' && github.event_name != 'workflow_dispatch' }}
         id: rate
         uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
         with:
@@ -233,7 +224,6 @@ jobs:
             core.setOutput("global24", String(global24));
 
       - name: Run Echo triage
-        if: ${{ github.event.action != 'gateway-auto-archive' && github.event_name != 'workflow_dispatch' }}
         env:
           RATE_LIMITED: ${{ steps.rate.outputs.rate_limited }}
           RECENT_60M_COUNT: ${{ steps.rate.outputs.count60 }}
@@ -251,7 +241,6 @@ jobs:
           cat triage_result.json
 
       - name: Apply triage result
-        if: ${{ github.event.action != 'gateway-auto-archive' && github.event_name != 'workflow_dispatch' }}
         uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
         with:
           script: |
@@ -325,133 +314,4 @@ jobs:
               });
             }
 
-      - name: Auto-archive Gateway-validated Echo
-        if: ${{ success() }}
-        id: auto-archive
-        env:
-          GH_TOKEN: ${{ github.token }}
-          ISSUE_NUMBER: ${{ github.event.issue.number || github.event.client_payload.issue_number || github.event.inputs.issue_number }}
-        run: |
-          set -euo pipefail
 
-          # For repository_dispatch or workflow_dispatch, archive directly
-          if [ "${{ github.event.action }}" = "gateway-auto-archive" ] || [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            echo "Triggered by ${{ github.event_name }}. Running archive directly..."
-
-            BODY_FILE=$(mktemp)
-            gh issue view "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" --json number,title,body,url,createdAt,updatedAt,author,labels,state > "$BODY_FILE"
-
-            echo "/echo archive" > /tmp/review_comment.txt
-            echo "" >> /tmp/review_comment.txt
-            if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-              echo "submission_origin: workflow_dispatch_manual_archive" >> /tmp/review_comment.txt
-            else
-              echo "submission_origin: gateway_repository_dispatch_auto_archive" >> /tmp/review_comment.txt
-            fi
-            echo "human_directed_submission: false" >> /tmp/review_comment.txt
-
-            python3 scripts/archive_echo_issue.py \
-              --issue-json "$BODY_FILE" \
-              --reviewer "github-actions[bot]" \
-              --review-comment-body-file /tmp/review_comment.txt \
-              --write \
-              --result-json /tmp/archive_result.json
-
-            RECORD_PATH=$(python3 -c "import json,sys; print(json.load(open(sys.argv[1]))['record_path'])" /tmp/archive_result.json)
-
-            # Validate the archived record (non-blocking: archive is already created)
-            if python3 scripts/validate_agent_submission.py --mode ci "$RECORD_PATH"; then
-              echo "Validation passed."
-            else
-              echo "::warning::Validation failed for ${RECORD_PATH}. Archiving anyway — review and fix in a follow-up."
-            fi
-
-            git config user.name "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add echoes/records echoes/archive.md api/echo-index.json index.md api/public-home-status.json 2>/dev/null || true
-            if git diff --cached --quiet; then
-              echo "No archive file changes to commit."
-            else
-              git commit -m "auto-archive echo issue #${ISSUE_NUMBER}"
-              git pull --rebase --autostash origin main
-              git push
-            fi
-
-            gh issue comment "$ISSUE_NUMBER" \
-              --repo "$GITHUB_REPOSITORY" \
-              --body "Auto-archived as \`$RECORD_PATH\` (via repository_dispatch). This record remains non-authoritative, non-amending, and not independent attestation."
-
-            echo "archive_record=$RECORD_PATH" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-
-          # Check if this is a Gateway-validated auto-archive candidate
-          BODY_FILE=$(mktemp)
-          gh issue view "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" --json number,title,body,url,createdAt,updatedAt,author,labels,state > "$BODY_FILE"
-
-          IS_AUTO=$(python3 -c "
-import json, sys
-issue = json.load(open(sys.argv[1], encoding='utf-8'))
-body = issue.get('body') or ''
-labels = {x['name'] for x in issue.get('labels', [])}
-is_gateway = 'created_by_gateway: true' in body and 'server_validated: true' in body
-is_archive_ready = 'archive_ready: true' in body
-is_screened = 'echo:screened' in labels
-has_receipt = 'gateway_receipt_id:' in body
-print('true' if (is_gateway and is_archive_ready and is_screened and has_receipt) else 'false')
-" "$BODY_FILE")
-
-          if [ "$IS_AUTO" != "true" ]; then
-            echo "Not a Gateway-validated auto-archive candidate. Skipping."
-            exit 0
-          fi
-
-          echo "Gateway-validated auto-archive candidate detected. Running archive script..."
-
-          # Create review comment body for the archive script
-          echo "/echo archive" > /tmp/review_comment.txt
-          echo "" >> /tmp/review_comment.txt
-          echo "submission_origin: agent_initiated_via_gateway_auto_archive" >> /tmp/review_comment.txt
-          echo "human_directed_submission: false" >> /tmp/review_comment.txt
-
-          # Run the archive script
-          python3 scripts/archive_echo_issue.py \
-            --issue-json "$BODY_FILE" \
-            --reviewer "github-actions[bot]" \
-            --review-comment-body-file /tmp/review_comment.txt \
-            --write \
-            --result-json /tmp/archive_result.json
-
-          RECORD_PATH=$(python3 -c "import json,sys; print(json.load(open(sys.argv[1]))['record_path'])" /tmp/archive_result.json)
-
-          # Validate the archived record (non-blocking: archive is already created)
-          if python3 scripts/validate_agent_submission.py --mode ci "$RECORD_PATH"; then
-            echo "Validation passed."
-          else
-            echo "::warning::Validation failed for ${RECORD_PATH}. Archiving anyway — review and fix in a follow-up."
-          fi
-
-          # Commit and push
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add echoes/records echoes/archive.md api/echo-index.json index.md api/public-home-status.json 2>/dev/null || true
-          if git diff --cached --quiet; then
-            echo "No archive file changes to commit."
-          else
-            git commit -m "auto-archive echo issue #${ISSUE_NUMBER}"
-              git pull --rebase --autostash origin main
-            git push
-          fi
-
-          # Close the Issue if still open
-          STATE=$(gh issue view "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" --json state -q '.state')
-          if [ "$STATE" = "OPEN" ]; then
-            gh issue close "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" --reason completed
-          fi
-
-          # Post confirmation comment
-          gh issue comment "$ISSUE_NUMBER" \
-            --repo "$GITHUB_REPOSITORY" \
-            --body "Auto-archived as \`$RECORD_PATH\`. This record remains non-authoritative, non-amending, and not independent attestation."
-
-          echo "archive_record=$RECORD_PATH" >> "$GITHUB_OUTPUT"
