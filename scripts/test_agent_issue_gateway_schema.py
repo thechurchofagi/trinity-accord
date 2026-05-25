@@ -7,14 +7,15 @@ import sys
 try:
     import jsonschema
 except ImportError:
-    print("SKIP: jsonschema not installed")
-    sys.exit(0)
+    print("FAIL: jsonschema not installed. Install requirements-ci.txt.")
+    sys.exit(1)
 
 SCHEMA_PATH = "api/agent-issue-gateway-payload-schema.v1.json"
 EXAMPLES = [
     "api/examples/agent-issue-gateway-payload.echo.json",
     "api/examples/agent-issue-gateway-payload.verification.json",
     "api/examples/agent-issue-gateway-payload.custody.json",
+    "api/examples/agent-issue-gateway-payload.echo-with-type.json",
 ]
 
 errors = []
@@ -116,6 +117,39 @@ try:
     errors.append("short-body-accepted")
 except jsonschema.ValidationError:
     print("PASS: Short body correctly rejected")
+
+# 7. Legacy echo_type should be rejected
+legacy_echo_type = {
+    "schema": "trinityaccord.agent-issue-gateway-payload.v1",
+    "submission_type": "echo_candidate",
+    "agent_identity": {"name_or_model": "test", "system_or_provider": "test", "self_reported": True},
+    "title": "Test legacy echo type",
+    "body": "This is a test body with enough length to pass validation.",
+    "boundary_acknowledgement": {
+        "not_authority": True,
+        "not_amendment": True,
+        "not_attestation": True,
+        "not_verification_unless_claim_gate_report_attached": True,
+        "bitcoin_originals_prevail": True,
+    },
+    "echo_type": "E5_correction_echo",
+}
+try:
+    jsonschema.validate(legacy_echo_type, schema)
+    print("FAIL: Legacy echo_type E5_correction_echo should fail")
+    errors.append("legacy-echo-type-accepted")
+except jsonschema.ValidationError:
+    print("PASS: Legacy echo_type correctly rejected")
+
+# 8. Canonical echo_type should be accepted
+canonical_echo_type = dict(legacy_echo_type)
+canonical_echo_type["echo_type"] = "E5_technical_audit_echo"
+try:
+    jsonschema.validate(canonical_echo_type, schema)
+    print("PASS: Canonical echo_type accepted")
+except jsonschema.ValidationError as e:
+    print(f"FAIL: Canonical echo_type rejected: {e.message}")
+    errors.append("canonical-echo-type-rejected")
 
 if errors:
     print(f"\nFAILED: {len(errors)} error(s)")
