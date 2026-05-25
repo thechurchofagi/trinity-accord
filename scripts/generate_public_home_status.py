@@ -681,12 +681,9 @@ def compute_status() -> dict[str, Any]:
         agent_declared_records = [r for r in ad_index.get("records", []) if isinstance(r, dict)]
 
     # Load agent-declared echo index (deduplicate by issue_number to avoid double-counting)
-    if AGENT_DECLARED_ECHO_INDEX.exists():
-        ad_echo_index = load_json(AGENT_DECLARED_ECHO_INDEX)
-        existing_issue_numbers = {r.get("issue_number") for r in agent_declared_records}
-        for r in ad_echo_index.get("records", []):
-            if isinstance(r, dict) and r.get("issue_number") not in existing_issue_numbers:
-                agent_declared_records.append(r)
+    # DEEP-IDX-002: agent-declared-echo-index is deprecated as a live input;
+    # echo archives are now tracked via agent-declared-verification-index with semantic overrides.
+    # Kept as legacy file only; no longer merged into agent_declared_records.
 
     generated_from = [
         "/api/echo-index.json",
@@ -697,8 +694,7 @@ def compute_status() -> dict[str, Any]:
     ]
     if AGENT_DECLARED_INDEX.exists():
         generated_from.append("/api/agent-declared-verification-index.json")
-    if AGENT_DECLARED_ECHO_INDEX.exists():
-        generated_from.append("/api/agent-declared-echo-index.json")
+    # DEEP-IDX-002: agent-declared-echo-index removed from live inputs (deprecated)
 
     return {
         "schema": "trinityaccord.public-home-status.v2",
