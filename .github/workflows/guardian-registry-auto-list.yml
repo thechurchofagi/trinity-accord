@@ -356,7 +356,12 @@ jobs:
                 "",
                 "Boundary: this registry listing is non-authoritative, non-governing, not attestation, not a verification level, not successor reception, and not an amendment.",
                 "",
-                "This PR was created because direct push to `main` failed or is blocked by branch protection."
+                "This PR was created because direct push to `main` failed or is blocked by branch protection.",
+                "",
+                "Generated files in this PR must be rechecked against main before merge:",
+                "- python3 scripts/generate_public_home_status.py --check",
+                "- python3 scripts/generate_guardian_registry_page.py --check",
+                "- python3 scripts/check_consistency.py"
               ].join("\n"),
               maintainer_can_modify: true
             });
