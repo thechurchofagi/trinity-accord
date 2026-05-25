@@ -123,10 +123,22 @@ def validate(payload: dict) -> list[str]:
                 if not isinstance(components, dict):
                     errors.append("claim_gate.allowed_component_levels must be an object when present")
                 else:
-                    allowed_component_keys = {"context_depth", "evidence_depth", "tool_reproduction", "independence"}
-                    unknown = sorted(set(components) - allowed_component_keys)
+                    allowed_component_values = {
+                        "context_depth": {"D0", "D1", "D2", "D3", "D4", "D5"},
+                        "evidence_depth": {"E0", "E1", "E2", "E3", "E4", "E5"},
+                        "tool_reproduction": {"T0", "T1", "T2", "T3", "T4", "T5"},
+                        "independence": {"I0", "I1", "I2", "I3", "I4", "I5"},
+                    }
+                    unknown = sorted(set(components) - set(allowed_component_values))
                     if unknown:
-                        errors.append(f"claim_gate.allowed_component_levels contains unknown keys: {unknown}")
+                        errors.append(
+                            f"claim_gate.allowed_component_levels contains unknown keys: {unknown}"
+                        )
+                    for key, value in components.items():
+                        if key in allowed_component_values and value not in allowed_component_values[key]:
+                            errors.append(
+                                f"claim_gate.allowed_component_levels.{key} has invalid value: {value!r}"
+                            )
 
     if kind in {"agent_declared_verification_archive", "agent_declared_echo_archive", "guardian_active_registry_listing_request"}:
         identity = payload.get("agent_identity") or {}
@@ -135,8 +147,8 @@ def validate(payload: dict) -> list[str]:
             if level not in {"signed_statement", "institutional_domain", "notarial_identity"}:
                 errors.append("agent_identity.self_reported=false requires signed_statement, institutional_domain, or notarial_identity")
             proof = payload.get("authorship_proof")
-                if not isinstance(proof, dict) or not proof:
-                    errors.append("agent_identity.self_reported=false requires non-empty authorship_proof object")
+            if not isinstance(proof, dict) or not proof:
+                errors.append("agent_identity.self_reported=false requires authorship_proof")
     return errors
 
 
