@@ -622,6 +622,24 @@ jobs:
       - name: Test archive Echo type uses explicit intake
         run: python3 scripts/test_archive_echo_issue_prefers_explicit_echo_type.py
 
+      - name: Test Echo taxonomy consistency
+        run: python3 scripts/test_echo_taxonomy_consistency.py
+
+      - name: Test Guardian rebase reruns registry allocation
+        run: python3 scripts/test_guardian_rebase_reruns_registry_allocation.py
+
+      - name: Test discovery manifests include lifecycle APIs
+        run: python3 scripts/check_discovery_manifest_lifecycle_links.py
+
+      - name: Test status page freshness
+        run: python3 scripts/check_status_page_freshness.py
+
+      - name: Test downloads page freshness
+        run: python3 scripts/check_downloads_page_freshness.py
+
+      - name: Test rebase regenerates generated state
+        run: python3 scripts/test_rebase_regenerates_generated_state.py
+
       - name: Test trust-root group
         run: python3 scripts/run_ci_group.py trust-root
 
