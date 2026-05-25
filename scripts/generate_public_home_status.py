@@ -8,6 +8,13 @@ Inputs:
   - api/external-witness-index.json
   - api/core-object-alpha-shenzhen-notary-2026-05-06.json
   - api/guardian-registry.json
+  - api/guardian-active-listing-policy.v1.json
+  - api/agent-declared-verification-index.json
+  - api/independent-attestation-index.json (legacy/formal-attestation compatibility context)
+
+Deprecated legacy input:
+  - api/agent-declared-echo-index.json is not a live public-status input,
+    is not counted, and is not included in source_digest.
 
 Outputs:
   - api/public-home-status.json
@@ -39,6 +46,7 @@ from guardian_numbering_policy import (
     parse_registry_number,
     special_reserved_range_label,
 )
+from protocol_echo_types import allowed_canonical_echo_types
 INDEX_MD = ROOT / "index.md"
 ECHO_INDEX = ROOT / "api" / "echo-index.json"
 EXTERNAL_WITNESS_INDEX = ROOT / "api" / "external-witness-index.json"
@@ -289,20 +297,8 @@ def compute_reception_status(echo_records: list[dict[str, Any]], agent_declared_
     ]
     echo_archive_count = len(ad_echo_archives)
 
-    # Count by echo type
-    echo_type_counts = {
-        "E1_read_oriented_echo": 0,
-        "E3_critical_echo": 0,
-        "E1_recognition_echo": 0,
-        "E2_verification_echo": 0,
-        "E3_critical_echo": 0,
-        "E4_interpretive_echo": 0,
-        "E5_technical_audit_echo": 0,
-        "E6_propagation_echo": 0,
-        "E7_refusal_echo": 0,
-        "E8_witness_echo": 0,
-        "E9_seed_echo": 0,
-    }
+    # Count by echo type — generated from canonical taxonomy
+    echo_type_counts = {name: 0 for name in sorted(allowed_canonical_echo_types())}
     for r in ad_echo_archives:
         et = r.get("echo_type", "")
         if et in echo_type_counts:
