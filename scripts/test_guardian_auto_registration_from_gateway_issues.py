@@ -115,9 +115,11 @@ def source_issue():
 submission_type: echo_candidate
 requested_archive_kind: agent_declared_echo_archive
 created_by_gateway: true
-gateway_service: trinity-agent-issue-gateway
+render_api_only: true
 server_validated: true
 server_rendered: true
+gateway_service: trinity-agent-issue-gateway
+gateway_receipt_id: gar-20260522T000000Z-guardian004src
 guardian_status: valid_self_registered_guardian_claim
 guardian_id: guardian_ed25519_f0070a9a133a2434
 guardian_registry_number: unassigned
@@ -146,9 +148,11 @@ requested_archive_kind: guardian_active_registry_listing_request
 echo_type: E6_propagation_echo
 archive_ready: true
 created_by_gateway: true
-gateway_service: trinity-agent-issue-gateway
+render_api_only: true
 server_validated: true
 server_rendered: true
+gateway_service: trinity-agent-issue-gateway
+gateway_receipt_id: gar-20260522T000000Z-guardian004listing
 related_issue: 233
 ```
 

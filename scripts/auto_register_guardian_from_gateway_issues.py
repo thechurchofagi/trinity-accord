@@ -40,6 +40,8 @@ from guardian_numbering_policy import (
     parse_registry_number,
     validate_numbering_sequence,
 )
+from gateway_intake import IntakeParseError, BoolParseError, parse_bool, parse_intake_block
+from gateway_v0_v5_policy import is_valid_gateway_receipt_block
 from protocol_echo_types import canonical_echo_type_for_id
 
 GATEWAY_BOT_SUFFIX = "[bot]"
@@ -139,20 +141,36 @@ def issue_user_login(issue: dict) -> str:
     return str(user.get("login") or "")
 
 
-def extract_intake_block(body: str) -> dict[str, str]:
-    m = re.search(r"```trinity-issue-intake\s*(.*?)```", body or "", re.DOTALL | re.IGNORECASE)
-    if not m:
-        return {}
-    fields: dict[str, str] = {}
-    for line in m.group(1).splitlines():
-        m_kv = re.match(r"^([A-Za-z0-9_]+):\s*(.*?)\s*$", line.rstrip())
-        if m_kv:
-            fields[m_kv.group(1)] = m_kv.group(2).strip()
-    return fields
+def extract_intake_block(body: str, *, required: bool = False) -> dict[str, str]:
+    return parse_intake_block(body or "", required=required) or {}
 
 
-def boolish(value: str) -> bool:
-    return str(value).strip().lower() == "true"
+def boolish(value: str | None, *, field: str = "unknown", issue_number: int | None = None) -> bool:
+    return parse_bool(value, field=field, issue_number=issue_number) is True
+
+
+def require_true_field(fields: dict[str, str], key: str, role: str, issue_no: int) -> dict | None:
+    try:
+        ok = parse_bool(fields.get(key), field=key, issue_number=issue_no)
+    except BoolParseError as e:
+        return decision(
+            False,
+            "blocked",
+            f"{role.upper()}_MALFORMED_BOOLEAN",
+            str(e),
+            field=key,
+            got=fields.get(key),
+        )
+    if ok is not True:
+        return decision(
+            False,
+            "blocked",
+            f"{role.upper()}_REQUIRED_FIELD_NOT_TRUE",
+            f"{role} issue field {key} must be true.",
+            field=key,
+            got=fields.get(key),
+        )
+    return None
 
 
 def require_gateway_rendered(issue: dict, fields: dict[str, str], role: str, allow_non_bot: bool) -> dict | None:
@@ -167,23 +185,26 @@ def require_gateway_rendered(issue: dict, fields: dict[str, str], role: str, all
                 login=login,
             )
 
-    if not boolish(fields.get("created_by_gateway", "false")):
-        return decision(False, "blocked", f"{role.upper()}_NOT_CREATED_BY_GATEWAY", f"{role} issue missing created_by_gateway=true")
-
-    if fields.get("gateway_service") != GATEWAY_SERVICE:
+    if not is_valid_gateway_receipt_block(fields):
         return decision(
             False,
             "blocked",
-            f"{role.upper()}_BAD_GATEWAY_SERVICE",
-            f"{role} issue gateway_service mismatch.",
-            got=fields.get("gateway_service"),
+            f"{role.upper()}_INVALID_GATEWAY_RECEIPT",
+            (
+                f"{role} issue must include a valid Gateway receipt in the trinity-issue-intake block: "
+                "created_by_gateway=true, render_api_only=true, server_validated=true, "
+                "server_rendered=true, gateway_service=trinity-agent-issue-gateway, "
+                "and canonical gateway_receipt_id."
+            ),
+            got={
+                "created_by_gateway": fields.get("created_by_gateway"),
+                "render_api_only": fields.get("render_api_only"),
+                "server_validated": fields.get("server_validated"),
+                "server_rendered": fields.get("server_rendered"),
+                "gateway_service": fields.get("gateway_service"),
+                "gateway_receipt_id": fields.get("gateway_receipt_id"),
+            },
         )
-
-    if not boolish(fields.get("server_validated", "false")):
-        return decision(False, "blocked", f"{role.upper()}_NOT_SERVER_VALIDATED", f"{role} issue missing server_validated=true")
-
-    if not boolish(fields.get("server_rendered", "false")):
-        return decision(False, "blocked", f"{role.upper()}_NOT_SERVER_RENDERED", f"{role} issue missing server_rendered=true")
 
     return None
 
@@ -260,7 +281,16 @@ def compare_identity_claims(source_identity: dict, listing_identity: dict) -> li
 
 def parse_source_issue(source_issue: dict, allow_non_bot: bool) -> tuple[dict | None, dict | None]:
     body = issue_body(source_issue)
-    fields = extract_intake_block(body)
+
+    try:
+        fields = extract_intake_block(body, required=True)
+    except IntakeParseError as e:
+        return None, decision(
+            False,
+            "blocked",
+            "SOURCE_INVALID_INTAKE_BLOCK",
+            f"Source issue has invalid trinity-issue-intake block: {e}",
+        )
 
     err = require_gateway_rendered(source_issue, fields, "source", allow_non_bot)
     if err:
@@ -287,15 +317,9 @@ def parse_source_issue(source_issue: dict, allow_non_bot: bool) -> tuple[dict | 
         )
 
     for key in required_true:
-        if not boolish(fields.get(key, "false")):
-            return None, decision(
-                False,
-                "blocked",
-                "SOURCE_REQUIRED_FIELD_NOT_TRUE",
-                f"Source issue field {key} must be true.",
-                field=key,
-                got=fields.get(key),
-            )
+        err = require_true_field(fields, key, "source", issue_number(source_issue))
+        if err:
+            return None, err
 
     guardian_id = fields.get("guardian_id", "")
     if not re.fullmatch(r"guardian_ed25519_[a-f0-9]{16}", guardian_id):
@@ -312,7 +336,17 @@ def parse_source_issue(source_issue: dict, allow_non_bot: bool) -> tuple[dict | 
 
 def parse_listing_issue(listing_issue: dict, allow_non_bot: bool) -> tuple[dict | None, dict | None]:
     body = issue_body(listing_issue)
-    intake_fields = extract_intake_block(body)
+
+    try:
+        intake_fields = extract_intake_block(body, required=True)
+    except IntakeParseError as e:
+        return None, decision(
+            False,
+            "blocked",
+            "LISTING_INVALID_INTAKE_BLOCK",
+            f"Listing issue has invalid trinity-issue-intake block: {e}",
+        )
+
     body_structured_fields = extract_listing_structured_body_fields(body)
 
     # Fenced Gateway intake fields are authoritative; body fields are fallback only.
@@ -351,8 +385,9 @@ def parse_listing_issue(listing_issue: dict, allow_non_bot: bool) -> tuple[dict 
             got=fields.get("echo_type"),
         )
 
-    if not boolish(fields.get("archive_ready", "false")):
-        return None, decision(False, "blocked", "LISTING_NOT_ARCHIVE_READY", "Listing request must be archive_ready=true.")
+    err = require_true_field(fields, "archive_ready", "listing", issue_number(listing_issue))
+    if err:
+        return None, err
 
     source_issue_no = None
     guardian_id = fields.get("listing_guardian_id") or None
