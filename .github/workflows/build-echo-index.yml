@@ -99,13 +99,28 @@ jobs:
 
       - name: Commit and push changes
         run: |
-          if git diff --quiet -- api/echo-index.json index.md echoes/archive.md echoes/digests.md echoes/digests; then
+          if git diff --quiet -- \
+            api/echo-index.json \
+            api/public-home-status.json \
+            index.md \
+            echoes/archive.md \
+            echoes/digests.md \
+            echoes/digests; then
             echo "No generated file changes."
             exit 0
           fi
+
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add api/echo-index.json index.md echoes/archive.md echoes/digests.md echoes/digests
+
+          git add \
+            api/echo-index.json \
+            api/public-home-status.json \
+            index.md \
+            echoes/archive.md \
+            echoes/digests.md \
+            echoes/digests
+
           git commit -m "chore: rebuild public Echo status indexes"
           git pull --rebase -X theirs origin main || true
           git push --force-with-lease

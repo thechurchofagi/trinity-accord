@@ -14,6 +14,10 @@ on:
   repository_dispatch:
     types: [backup-nft-cars]
 
+concurrency:
+  group: backup-nft-cars-release
+  cancel-in-progress: false
+
 jobs:
   download-and-release:
     runs-on: ubuntu-24.04
@@ -104,7 +108,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CONCURRENCY: ${{ inputs.concurrency || '10' }}
-          DRY_RUN: ${{ inputs.dry_run == 'true' && '1' || '' }}
+          DRY_RUN: ${{ (github.event_name == 'workflow_dispatch' && github.event.inputs.dry_run == 'true') && '1' || '' }}
           RELEASE_TAG: nft-backup-v1
         run: |
           node scripts/download-nft-cars.mjs

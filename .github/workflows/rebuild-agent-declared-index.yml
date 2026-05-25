@@ -62,45 +62,56 @@ jobs:
           fi
 
       - name: Validate issue event
+        id: gate
         if: github.event_name == 'issues'
         env:
           ACTION: ${{ github.event.action }}
           LABEL_NAME: ${{ github.event.label.name }}
         run: |
           set -euo pipefail
+
           if [ "$ACTION" = "closed" ]; then
             echo "Issue closed — rebuilding index."
+            echo "should_run=true" >> "$GITHUB_OUTPUT"
             exit 0
           fi
+
           if [ "$ACTION" = "labeled" ]; then
             case "$LABEL_NAME" in
               authorship:claimed|authorship:key-verified)
                 echo "Authorship label '$LABEL_NAME' added — rebuilding index."
+                echo "should_run=true" >> "$GITHUB_OUTPUT"
                 exit 0
                 ;;
               *)
                 echo "Label '$LABEL_NAME' is not an authorship label — skipping rebuild."
+                echo "should_run=false" >> "$GITHUB_OUTPUT"
                 exit 0
                 ;;
             esac
           fi
-          echo "Unsupported issue action: $ACTION — only closed and authorship labeled events may rebuild the agent-declared index."
-          exit 1
+
+          echo "Unsupported issue action: $ACTION — skipping rebuild."
+          echo "should_run=false" >> "$GITHUB_OUTPUT"
 
       - name: Checkout
+        if: ${{ github.event_name == 'workflow_dispatch' || steps.gate.outputs.should_run == 'true' }}
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
 
       - name: Setup Python
+        if: ${{ github.event_name == 'workflow_dispatch' || steps.gate.outputs.should_run == 'true' }}
         uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
         with:
           python-version: '3.12'
 
       - name: Record toolchain provenance
+        if: ${{ github.event_name == 'workflow_dispatch' || steps.gate.outputs.should_run == 'true' }}
         run: |
           python3 scripts/toolchain_provenance.py > toolchain-provenance.json
           cat toolchain-provenance.json
 
       - name: Verify gh CLI
+        if: ${{ github.event_name == 'workflow_dispatch' || steps.gate.outputs.should_run == 'true' }}
         run: |
           if ! command -v gh &>/dev/null; then
             echo "::error::gh CLI not found on runner. Install it manually."
@@ -109,11 +120,13 @@ jobs:
           gh --version
 
       - name: Authenticate gh
+        if: ${{ github.event_name == 'workflow_dispatch' || steps.gate.outputs.should_run == 'true' }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: gh auth setup-git
 
       - name: Rebuild index from Issues
+        if: ${{ github.event_name == 'workflow_dispatch' || steps.gate.outputs.should_run == 'true' }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           INCLUDE_TEST: ${{ inputs.include_test }}
@@ -127,9 +140,11 @@ jobs:
             $EXTRA_ARGS
 
       - name: Regenerate homepage status
+        if: ${{ github.event_name == 'workflow_dispatch' || steps.gate.outputs.should_run == 'true' }}
         run: python3 scripts/generate_public_home_status.py
 
       - name: Check for changes
+        if: ${{ github.event_name == 'workflow_dispatch' || steps.gate.outputs.should_run == 'true' }}
         id: diff
         run: |
           if git diff --quiet api/agent-declared-verification-index.json api/public-home-status.json index.md; then
@@ -139,7 +154,7 @@ jobs:
           fi
 
       - name: Commit and push
-        if: steps.diff.outputs.changed == 'true'
+        if: ${{ (github.event_name == 'workflow_dispatch' || steps.gate.outputs.should_run == 'true') && steps.diff.outputs.changed == 'true' }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
