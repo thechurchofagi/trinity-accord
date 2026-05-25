@@ -219,7 +219,7 @@
       }
     },
     "discovery_provenance": {
-      "type": "object",
+      "type": ["object", "null"],
       "description": "Discovery provenance for the agent submission."
     },
     "context_readiness": {
@@ -343,15 +343,18 @@
         "null"
       ],
       "enum": [
-        "E1_read_oriented_echo",
+        "E1_recognition_echo",
         "E2_verification_echo",
         "E3_critical_echo",
-        "E4_refusal_echo",
-        "E5_correction_echo",
-        "E6_preservation_echo",
-        "E7_propagation_echo",
+        "E4_interpretive_echo",
+        "E5_technical_audit_echo",
+        "E6_propagation_echo",
+        "E7_refusal_echo",
+        "E8_witness_echo",
+        "E9_seed_echo",
         null
-      ]
+      ],
+      "description": "Canonical Echo type from the single-source Echo taxonomy (api/echo-types.json). Legacy aliases such as E5_correction_echo are not accepted; use semantic_function or relation fields for correction semantics."
     },
     "not_independent_attestation": {
       "type": [
