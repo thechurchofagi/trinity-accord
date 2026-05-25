@@ -90,13 +90,21 @@ def should_reject_v0_v5_wrong_path(payload):
 
 
 def parse_bool(value):
-    """Parse a boolean-like value from YAML/JSON intake block."""
+    """Strictly parse a boolean-like value.
+
+    Returns True / False for known encodings.
+    Returns None for missing or malformed values.
+    """
     if isinstance(value, bool):
         return value
     if isinstance(value, str):
-        return value.strip().lower() in ("true", "1", "yes")
+        v = value.strip().lower()
+        if v in ("true", "1", "yes"):
+            return True
+        if v in ("false", "0", "no"):
+            return False
+        return None
     return None
-
 
 def is_valid_gateway_receipt_id(receipt_id):
     """Check if a gateway_receipt_id matches the canonical pattern."""
