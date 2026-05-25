@@ -68,11 +68,20 @@ jobs:
             const window60 = new Date(now.getTime() - 60 * 60 * 1000);
             const window24 = new Date(now.getTime() - 24 * 60 * 60 * 1000);
 
-            function intakeField(body, name) {
-              const re = new RegExp(`^${name}:\\s*(.+)$`, "mi");
-              const m = (body || "").match(re);
-              return m ? m[1].trim() : "";
-            }
+            function intakeBlock(body) {
+  const text = body || "";
+  const matches = [...text.matchAll(/```trinity-issue-intake\s*\n([\s\S]*?)```/g)];
+  if (matches.length !== 1) return "";
+  return matches[0][1] || "";
+}
+
+function intakeField(body, name) {
+  const block = intakeBlock(body);
+  if (!block) return "";
+  const re = new RegExp("^" + name + ":\s*(.+)$", "mi");
+  const m = block.match(re);
+  return m ? m[1].trim() : "";
+}
 
             function hasMachineFlag(body, name, value = "true") {
               const got = intakeField(body, name).toLowerCase();
