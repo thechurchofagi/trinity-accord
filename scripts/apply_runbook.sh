@@ -4,6 +4,9 @@
 # 在仓库根目录运行: bash scripts/apply_runbook.sh
 # ============================================================
 set -euo pipefail
+
+echo "WARNING: This script is a best-effort patch helper, not a verification tool."
+echo "Run repository-integrity and behavior tests before treating changes as complete."
 cd "$(git rev-parse --show-toplevel)"
 
 echo "=== PART A: Require evidence_requirement_mode in schema branches ==="
