@@ -565,6 +565,24 @@ jobs:
       - name: Test Guardian group
         run: python3 scripts/run_ci_group.py guardian
 
+      - name: Test Gateway intake Guardian fields
+        run: python3 scripts/test_gateway_intake_guardian_fields.py
+
+      - name: Test Guardian auto-register uses shared intake
+        run: python3 scripts/test_guardian_auto_register_uses_shared_intake.py
+
+      - name: Test Guardian auto-register intake strictness
+        run: python3 scripts/test_guardian_auto_register_intake_strictness.py
+
+      - name: Test Guardian auto-register listing E6 behavior
+        run: python3 scripts/test_guardian_auto_register_listing_e6_behavior.py
+
+      - name: Test no raw-text Gateway receipt checker usage
+        run: python3 scripts/test_no_raw_text_gateway_receipt_checker_usage.py
+
+      - name: Test Guardian Stage 1 E6 semantics documented
+        run: python3 scripts/test_guardian_stage1_e6_semantics_documented.py
+
       # ── Supply-chain / workflow safety fast guards ──────────────────
       - name: Test workflow dispatch input safety
         run: python3 scripts/test_workflow_dispatch_input_safety.py
