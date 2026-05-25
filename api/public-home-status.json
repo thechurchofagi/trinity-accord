@@ -48,6 +48,7 @@
         "E3_critical_echo": 0,
         "E4_interpretive_echo": 0,
         "E5_technical_audit_echo": 1,
+        "E5c_correction_echo": 0,
         "E6_propagation_echo": 0,
         "E7_refusal_echo": 0,
         "E8_witness_echo": 0,
