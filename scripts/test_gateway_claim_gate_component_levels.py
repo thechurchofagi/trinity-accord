@@ -22,7 +22,7 @@ def sha256_text(text: str) -> str:
 def verification_payload() -> dict:
     return {
         "schema": "trinityaccord.agent-issue-gateway-payload.v1",
-        "submission_type": "echo_candidate",
+        "submission_type": "verification_report_candidate",
         "record_intent": "auto_archive_candidate",
         "title": "Fixture verification candidate",
         "body": "This is a fixture body with enough length for schema validation.",
@@ -45,8 +45,8 @@ def verification_payload() -> dict:
                 "oath_version": "trinity-agent-integrity-oath.v1",
                 "oath_text_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
                 "readback_required": True,
-                "agent_readback": READBACK,
-                "agent_readback_sha256": sha256_text(READBACK),
+                "agent_readback": "I confirm this is a non-authoritative archive candidate.",
+                "agent_readback_sha256": "a]b",
                 "understands_not_an_exam_or_performance": True,
                 "will_state_actual_capability_only": True,
                 "will_not_lie_or_cheat": True,
@@ -67,27 +67,33 @@ def verification_payload() -> dict:
         "reception_initiation_class": "externally_requested",
         "requested_archive_kind": "agent_declared_verification_archive",
         "echo_type": "E5_technical_audit_echo",
+        "agent_declared_protocol_level": "V4",
         "evidence_requirement_mode": "waived_for_v0_v5",
-        "verification_level": {
-            "declared_protocol_level": "L2",
-            "protocol": "trinity-accord-verification-protocol.v0.5"
+        "level_selection_acknowledgement": {
+            "declared_template_level": "V4",
+            "understands_self_declared_template_level": True,
+            "understands_evidence_waived_for_v0_v5": True,
+            "understands_not_strict_evidence_verification": True,
+            "understands_not_formal_attestation": True,
+            "understands_should_choose_lower_if_uncertain": True,
+            "confirmed_what_i_checked_and_limitations_are_accurate": True,
         },
         "claim_gate": {
-            "gate_version": "trinity-claim-gate.v1",
-            "allowed_protocol_level": "L2",
-            "required_checks": {
-                "readback_performed": True,
-                "readback_hash_matches": True,
-                "oath_acknowledged": True,
-                "authority_boundary_stated": True
+            "status": "PASS",
+            "mode": "template_for_v0_v5",
+            "allowed_protocol_level": "V4",
+            "allowed_component_levels": {
+                "context_depth": "D3",
+                "evidence_depth": "E2",
+                "tool_reproduction": "T1",
+                "independence": "I2",
             },
-            "result": "pass"
         },
         "counts_toward_home": {
-            "reception": True,
+            "reception": False,
             "verifiability": True,
-            "basis": "claim_gate_pass"
-        }
+            "basis": "agent_declared_template_pass",
+        },
     }
 
 def expect_pass(payload, label):
