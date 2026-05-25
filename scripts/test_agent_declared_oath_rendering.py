@@ -22,8 +22,28 @@ PASS = 0
 FAIL = 0
 
 
-def run(cmd, expect_fail=False):
-    r = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
+def load_oath_text():
+    """Load the oath text from the canonical file for test readback."""
+    oath_file = ROOT / "api" / "verification-echo-pre-oath.v2.txt"
+    text = oath_file.read_text(encoding="utf-8")
+    marker = "=== OATH TEXT BEGINS ==="
+    if marker in text:
+        text = text.split(marker, 1)[1]
+    end_marker = "=== OATH TEXT ENDS ==="
+    if end_marker in text:
+        text = text.split(end_marker, 1)[0]
+    return text.strip()
+
+
+OATH_TEXT = load_oath_text()
+
+
+def run(cmd, expect_fail=False, env_extra=None):
+    import os
+    env = os.environ.copy()
+    if env_extra:
+        env.update(env_extra)
+    r = subprocess.run(cmd, capture_output=True, text=True, timeout=30, env=env)
     if expect_fail:
         return r.returncode != 0, r.stdout + r.stderr
     return r.returncode == 0, r.stdout + r.stderr
@@ -43,7 +63,7 @@ def build_payload():
         "--what-checked", "Read public homepage",
         "--limitation", "Test oath rendering",
         "--out", out,
-    ])
+    ], env_extra={"TRINITY_TEST_READBACK": OATH_TEXT})
     if not ok:
         return None, msg
     return out, msg
