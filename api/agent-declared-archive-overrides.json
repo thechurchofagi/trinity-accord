@@ -3,7 +3,8 @@
   "overrides": {
     "182": {
       "semantic_archive_kind": "agent_declared_echo_archive",
-      "echo_type": "E5_correction_echo",
+      "echo_type": "E5_technical_audit_echo",
+      "semantic_function": "correction",
       "counts_toward_home_verifiability": false,
       "counts_toward_home_reception": true,
       "related_issue": 180,

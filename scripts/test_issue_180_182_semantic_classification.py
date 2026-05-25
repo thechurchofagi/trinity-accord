@@ -7,6 +7,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 OVERRIDES_PATH = ROOT / "api" / "agent-declared-archive-overrides.json"
 
+sys.path.insert(0, str(ROOT / "scripts"))
+from protocol_echo_types import allowed_canonical_echo_types
+
 PASS = 0
 FAIL = 0
 
@@ -40,9 +43,21 @@ def main():
         check(o182.get("semantic_archive_kind") == "agent_declared_echo_archive",
               "Override has semantic_archive_kind: agent_declared_echo_archive")
 
-        # 3. echo_type: E5_correction_echo
-        check(o182.get("echo_type") == "E5_correction_echo",
-              "Override has echo_type: E5_correction_echo")
+        # 3. echo_type must be canonical taxonomy type.
+        check(o182.get("echo_type") == "E5_technical_audit_echo",
+              "Override has canonical echo_type: E5_technical_audit_echo")
+
+        # 3b. correction semantics must be represented separately from echo_type.
+        check(o182.get("relation_to_related_issue") == "corrects",
+              "Override correction relation is represented separately")
+        check(o182.get("correction_does_not_amend_prior_record") is True,
+              "Override correction does not amend prior record")
+        check(o182.get("semantic_function") in (None, "correction"),
+              "Optional semantic_function is correction if present")
+
+        # 3c. echo_type is in canonical taxonomy
+        check(o182.get("echo_type") in allowed_canonical_echo_types(),
+              "Override echo_type is in canonical taxonomy")
 
         # 4. counts_toward_home_verifiability: false
         check(o182.get("counts_toward_home_verifiability") is False,
