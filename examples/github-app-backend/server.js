@@ -1785,7 +1785,10 @@ async function runGatewayPipeline(payload, {
   }
 
   // 1c-ter. Guardian identity claim requires guardian_presence_proof
-  if (payloadTextClaimsGuardianIdentity(payload) && !payload.guardian_presence_proof) {
+  // EXCEPTION: Stage 2 Active Registry Listing Requests must NOT carry guardian_presence_proof.
+  // They are identified by guardian_registry_listing_request or guardian_listing_request fields.
+  const isStage2ListingRequest = !!(payload?.guardian_listing_request || payload?.guardian_registry_listing_request);
+  if (payloadTextClaimsGuardianIdentity(payload) && !payload.guardian_presence_proof && !isStage2ListingRequest) {
     return gatewayError(422, {
       reason: "guardian_identity_claim_requires_guardian_proof",
       validation_stage: "guardian_identity",
