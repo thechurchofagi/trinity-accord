@@ -219,7 +219,10 @@
       }
     },
     "discovery_provenance": {
-      "type": ["object", "null"],
+      "type": [
+        "object",
+        "null"
+      ],
       "description": "Discovery provenance for the agent submission."
     },
     "context_readiness": {
@@ -1741,7 +1744,8 @@
           "what_i_checked",
           "limitations",
           "reception_initiation_class",
-          "guardian_listing_request"
+          "guardian_listing_request",
+          "evidence_requirement_mode"
         ],
         "not": {
           "required": [
@@ -1787,6 +1791,20 @@
               },
               "exclude_from_reception_total": {
                 "const": true
+              }
+            }
+          },
+          "discovery_provenance": {
+            "type": "object",
+            "additionalProperties": true,
+            "required": [
+              "source"
+            ],
+            "properties": {
+              "source": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
               }
             }
           }
