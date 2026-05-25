@@ -883,3 +883,18 @@ jobs:
 
       - name: Test verification rule consistency matrix
         run: python3 scripts/test_verification_rule_consistency_matrix.py
+
+      - name: Test Gateway archive branch required fields
+        run: python3 scripts/test_gateway_archive_branch_required_fields.py
+      - name: Test Echo triage strict Gateway receipt rate class
+        run: python3 scripts/test_echo_triage_strict_gateway_receipt_rate_class.py
+      - name: Test Gateway V0-V5 policy strict bool
+        run: python3 scripts/test_gateway_v0_v5_policy_strict_bool.py
+      - name: Test agent-declared index records invalid intake skips
+        run: python3 scripts/test_agent_declared_index_records_invalid_intake_skips.py
+      - name: Test Gateway discovery provenance archive invariants
+        run: python3 scripts/test_gateway_discovery_provenance_archive_invariants.py
+      - name: Test Gateway Claim Gate component levels
+        run: python3 scripts/test_gateway_claim_gate_component_levels.py
+      - name: Test Gateway agent identity archive policy
+        run: python3 scripts/test_gateway_agent_identity_archive_policy.py
