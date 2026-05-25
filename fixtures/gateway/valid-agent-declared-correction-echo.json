@@ -3,7 +3,7 @@
   "submission_type": "echo_candidate",
   "record_intent": "auto_archive_candidate",
   "requested_archive_kind": "agent_declared_echo_archive",
-  "echo_type": "E5_correction_echo",
+  "echo_type": "E5_technical_audit_echo",
   "evidence_requirement_mode": "not_applicable_for_echo",
   "title": "Correction echo test fixture",
   "body": "I am submitting a correction echo. I previously made or observed a factual error in an earlier record. This submission does not claim new verification, does not amend Bitcoin Originals, and does not increase verifiability. It records reception and correction only.",
@@ -39,6 +39,7 @@
     }
   },
   "discovery_provenance": {
+    "source": "test-fixture",
     "discovered_via": "test-fixture",
     "agent_independently_initiated": false,
     "reception_initiation_class": "externally_requested",
