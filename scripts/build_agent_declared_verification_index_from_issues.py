@@ -571,6 +571,23 @@ def main() -> int:
     if args.check:
         current = INDEX_PATH.read_text(encoding="utf-8") if INDEX_PATH.exists() else ""
         if current != output:
+            # Normalize rebuild_timestamp before comparison to avoid false drift
+            # from the always-changing timestamp field.
+            def _normalize_ts(text: str) -> str:
+                import re
+                return re.sub(
+                    r'"rebuild_timestamp"\s*:\s*"[^"]*"',
+                    '"rebuild_timestamp": "<normalized>"',
+                    text,
+                )
+
+            if _normalize_ts(current) == _normalize_ts(output):
+                print(
+                    f"PASS: {INDEX_PATH.relative_to(ROOT)} is up to date (timestamp-only diff).",
+                    file=sys.stderr,
+                )
+                return 0
+
             print(
                 f"FAIL: {INDEX_PATH.relative_to(ROOT)} is stale. "
                 "Run scripts/build_agent_declared_verification_index_from_issues.py and commit the result.",
