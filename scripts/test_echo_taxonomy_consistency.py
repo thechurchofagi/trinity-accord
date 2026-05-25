@@ -19,6 +19,7 @@ expected = {
     "E3": "critical",
     "E4": "interpretive",
     "E5": "technical-audit",
+    "E5c": "correction",
     "E6": "propagation",
     "E7": "refusal",
     "E8": "witness",
