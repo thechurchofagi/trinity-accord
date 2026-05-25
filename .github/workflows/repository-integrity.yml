@@ -898,3 +898,11 @@ jobs:
         run: python3 scripts/test_gateway_claim_gate_component_levels.py
       - name: Test Gateway agent identity archive policy
         run: python3 scripts/test_gateway_agent_identity_archive_policy.py
+      - name: Test Gateway semantic validator has no dead code
+        run: python3 scripts/test_gateway_semantic_validator_no_dead_code.py
+      - name: Test Gateway hardening fixtures use current V0-V5 shape
+        run: python3 scripts/test_gateway_fixtures_use_current_v0_v5_shape.py
+      - name: Test Echo triage receipt fields only from intake block
+        run: python3 scripts/test_echo_triage_receipt_fields_only_from_intake_block.py
+      - name: Verify agent-declared verification index has no drift
+        run: python3 scripts/build_agent_declared_verification_index_from_issues.py --repo thechurchofagi/trinity-accord --check
