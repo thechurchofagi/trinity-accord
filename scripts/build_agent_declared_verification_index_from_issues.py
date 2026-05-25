@@ -543,6 +543,7 @@ def build_index(issues: list[dict], repo: str = "", include_test: bool = False) 
     records = []
     skipped_direct = []
     skipped_missing_oath_summary = []
+    skipped_invalid_intake = []
 
     for issue in issues:
         body = issue.get("body", "")
@@ -592,6 +593,7 @@ def build_index(issues: list[dict], repo: str = "", include_test: bool = False) 
         "overrides_applied": applied_overrides,
         "skipped_direct_issue_archive_attempts": skipped_direct,
         "skipped_missing_oath_summary": skipped_missing_oath_summary,
+        "skipped_invalid_intake": skipped_invalid_intake,
         "records": records,
     }
 
