@@ -84,29 +84,35 @@ def echo_payload() -> dict:
 def verification_payload() -> dict:
     p = base_common()
     p.update({
+        "submission_type": "verification_report_candidate",
         "requested_archive_kind": "agent_declared_verification_archive",
-        "echo_type": "E5_technical_audit_echo",
+        "agent_declared_protocol_level": "V4",
         "evidence_requirement_mode": "waived_for_v0_v5",
-        "verification_level": {
-            "declared_protocol_level": "L2",
-            "protocol": "trinity-accord-verification-protocol.v0.5"
+        "level_selection_acknowledgement": {
+            "declared_template_level": "V4",
+            "understands_self_declared_template_level": True,
+            "understands_evidence_waived_for_v0_v5": True,
+            "understands_not_strict_evidence_verification": True,
+            "understands_not_formal_attestation": True,
+            "understands_should_choose_lower_if_uncertain": True,
+            "confirmed_what_i_checked_and_limitations_are_accurate": True,
         },
         "claim_gate": {
-            "gate_version": "trinity-claim-gate.v1",
-            "allowed_protocol_level": "L2",
-            "required_checks": {
-                "readback_performed": True,
-                "readback_hash_matches": True,
-                "oath_acknowledged": True,
-                "authority_boundary_stated": True
+            "status": "PASS",
+            "mode": "template_for_v0_v5",
+            "allowed_protocol_level": "V4",
+            "allowed_component_levels": {
+                "context_depth": "D3",
+                "evidence_depth": "E2",
+                "tool_reproduction": "T1",
+                "independence": "I2",
             },
-            "result": "pass"
         },
         "counts_toward_home": {
-            "reception": True,
+            "reception": False,
             "verifiability": True,
-            "basis": "claim_gate_pass"
-        }
+            "basis": "agent_declared_template_pass",
+        },
     })
     return p
 
