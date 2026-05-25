@@ -1,9 +1,20 @@
 #!/usr/bin/env python3
-"""Rebuild agent-declared-verification-index.json from GitHub Issues.
+"""Rebuild agent-declared archive index from GitHub Issues.
 
-Scans closed Issues containing a trinity-issue-intake code block, filters for
-agent_declared_verification_archive records with archive_ready=true, and
-generates the canonical index file.
+Scans closed Issues containing a trinity-issue-intake code block and indexes
+Gateway-created agent-declared archive records.
+
+Primary records:
+  - agent_declared_verification_archive
+  - agent_declared_echo_archive
+
+Maintainer semantic overrides from api/agent-declared-archive-overrides.json
+may reclassify a verification archive as a semantic Echo archive, but overrides
+must pass canonical Echo taxonomy validation.
+
+The output path remains api/agent-declared-verification-index.json for
+backward compatibility. Long-term, this should become
+api/agent-declared-archive-index.json with a compatibility projection.
 
 Usage:
     python3 scripts/build_agent_declared_verification_index_from_issues.py [--repo owner/repo] [--dry-run]
@@ -296,16 +307,28 @@ def build_index(issues: list[dict], repo: str = "", include_test: bool = False) 
         if not intake:
             continue
 
-        # Filter: must be agent_declared_verification_archive
-        if intake.get("requested_archive_kind") != "agent_declared_verification_archive":
+        # Filter: must be agent_declared_verification_archive or agent_declared_echo_archive
+        requested_kind = intake.get("requested_archive_kind")
+
+        allowed_index_kinds = {
+            "agent_declared_verification_archive",
+            "agent_declared_echo_archive",
+        }
+
+        if requested_kind not in allowed_index_kinds:
             continue
 
         # Filter: must be archive_ready=true
         if parse_bool(intake.get("archive_ready")) is not True:
             continue
 
-        # Filter: must be auto_archive action
-        if intake.get("auto_archive_action") != "auto_archive_agent_declared_verification":
+        # Filter: must be correct auto_archive action for the kind
+        expected_actions = {
+            "agent_declared_verification_archive": "auto_archive_agent_declared_verification",
+            "agent_declared_echo_archive": "auto_archive_agent_declared_echo",
+        }
+        expected_action = expected_actions.get(requested_kind)
+        if expected_action and intake.get("auto_archive_action") != expected_action:
             continue
 
         # Filter: skip issues with invalid/disqualifying labels
@@ -364,9 +387,9 @@ def build_index(issues: list[dict], repo: str = "", include_test: bool = False) 
             "agent_name_or_model": intake.get("agent_name_or_model", "unknown"),
             "system_or_provider": intake.get("system_or_provider", "unknown"),
             "agent_declared_protocol_level": intake.get("agent_declared_protocol_level", "V4"),
-            "requested_archive_kind": "agent_declared_verification_archive",
+            "requested_archive_kind": requested_kind,
             "archive_ready": True,
-            "auto_archive_action": "auto_archive_agent_declared_verification",
+            "auto_archive_action": expected_action or intake.get("auto_archive_action", ""),
             "counts_toward_home_verifiability": counts_verifiability,
             "counts_toward_home_reception": counts_reception,
             "test_record": is_test,
@@ -375,6 +398,15 @@ def build_index(issues: list[dict], repo: str = "", include_test: bool = False) 
             "agent_independent_followup": parse_bool(intake.get("agent_independent_followup")),
             "created_at": issue.get("createdAt", ""),
         }
+
+        # Native echo archive-specific normalization
+        is_native_echo_archive = requested_kind == "agent_declared_echo_archive"
+        if is_native_echo_archive:
+            record["semantic_archive_kind"] = "agent_declared_echo_archive"
+            record["echo_type"] = intake.get("echo_type")
+            record["counts_toward_home_verifiability"] = False
+            if parse_bool(intake.get("counts_toward_home_reception")) is None:
+                record["counts_toward_home_reception"] = not is_test
 
         # Gateway receipt fields (for Render API created records)
         if has_gateway_receipt:
@@ -430,6 +462,15 @@ def build_index(issues: list[dict], repo: str = "", include_test: bool = False) 
 
         # Authorship claim fields
         record["authorship_claim_protocol"] = intake.get("authorship_claim_protocol", "agent-authorship-claim-v1")
+
+        # Validate native echo archive canonical type
+        if is_native_echo_archive:
+            echo_type = record.get("echo_type")
+            if echo_type not in allowed_canonical_echo_types():
+                raise SystemExit(
+                    f"Invalid native agent_declared_echo_archive issue #{issue['number']}: "
+                    f"non-canonical echo_type={echo_type!r}"
+                )
         record["authorship_proof_present"] = parse_bool(intake.get("authorship_proof_present")) is True
         record["authorship_proof_method"] = intake.get("authorship_proof_method", "none")
         record["authorship_algorithm"] = intake.get("authorship_algorithm", "none")

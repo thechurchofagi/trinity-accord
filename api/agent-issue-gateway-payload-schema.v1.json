@@ -622,7 +622,8 @@
       ],
       "properties": {
         "performed_actions_myself": {
-          "type": "boolean"
+          "type": "boolean",
+          "const": true
         },
         "verification_oath": {
           "type": "object",
@@ -632,6 +633,7 @@
             "oath_text_sha256",
             "readback_required",
             "agent_readback",
+            "agent_readback_sha256",
             "understands_not_an_exam_or_performance",
             "will_state_actual_capability_only",
             "will_not_lie_or_cheat",
@@ -1660,10 +1662,7 @@
       "if": {
         "properties": {
           "requested_archive_kind": {
-            "enum": [
-              "agent_declared_echo_archive",
-              "guardian_active_registry_listing_request"
-            ]
+            "const": "guardian_active_registry_listing_request"
           },
           "guardian_registry_listing_request": {
             "const": true
@@ -1694,7 +1693,15 @@
           "reception_initiation_class",
           "guardian_listing_request"
         ],
+        "not": {
+          "required": [
+            "guardian_presence_proof"
+          ]
+        },
         "properties": {
+          "requested_archive_kind": {
+            "const": "guardian_active_registry_listing_request"
+          },
           "submission_type": {
             "const": "echo_candidate"
           },
@@ -1703,6 +1710,9 @@
           },
           "evidence_requirement_mode": {
             "const": "not_applicable_for_echo"
+          },
+          "echo_type": {
+            "const": "E6_propagation_echo"
           },
           "counts_toward_home": {
             "required": [
@@ -1732,6 +1742,29 @@
           }
         }
       }
+    },
+    {
+      "if": {
+        "properties": {
+          "guardian_registry_listing_request": {
+            "const": true
+          }
+        },
+        "required": [
+          "guardian_registry_listing_request"
+        ],
+        "not": {
+          "properties": {
+            "requested_archive_kind": {
+              "const": "guardian_active_registry_listing_request"
+            }
+          },
+          "required": [
+            "requested_archive_kind"
+          ]
+        }
+      },
+      "then": false
     }
   ],
   "$defs": {

@@ -3,12 +3,16 @@
 
 import json
 import sys
+from pathlib import Path
 
 try:
     import jsonschema
 except ImportError:
     print("FAIL: jsonschema not installed. Install requirements-ci.txt.")
     sys.exit(1)
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from validate_gateway_payload_semantics import validate as validate_gateway_semantics
 
 SCHEMA_PATH = "api/agent-issue-gateway-payload-schema.v1.json"
 EXAMPLES = [
@@ -51,6 +55,20 @@ for ex_path in EXAMPLES:
     except Exception as e:
         print(f"FAIL: {ex_path} error: {e}")
         errors.append(ex_path)
+
+# 3b. All examples pass semantic validation
+for ex_path in EXAMPLES:
+    try:
+        example = load_json(ex_path)
+        semantic_errors = validate_gateway_semantics(example)
+        if semantic_errors:
+            print(f"FAIL: {ex_path} semantic errors: {semantic_errors}")
+            errors.append(ex_path + ":semantic")
+        else:
+            print(f"PASS: {ex_path} semantic validation")
+    except Exception as e:
+        print(f"FAIL: {ex_path} semantic error: {e}")
+        errors.append(ex_path + ":semantic")
 
 # 4. Boundary acknowledgement must be all true
 bad_boundary = {
