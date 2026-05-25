@@ -160,8 +160,8 @@ def parse_bool(value: str | None) -> bool | None:
     return value.lower() in ("true", "1", "yes")
 
 
-def fetch_issues(repo: str | None, limit: int = 200) -> list[dict]:
-    """Fetch closed issues via gh CLI."""
+def fetch_issues(repo: str | None, limit: int = 10000) -> list[dict]:
+    """Fetch closed issues via gh CLI with pagination."""
     args = [
         "issue", "list",
         "--state", "closed",
@@ -397,7 +397,7 @@ def main() -> int:
     parser.add_argument("--repo", help="GitHub repo (owner/repo). Auto-detected if in a git dir.")
     parser.add_argument("--dry-run", action="store_true", help="Print index without writing.")
     parser.add_argument("--include-test", action="store_true", help="Include test records.")
-    parser.add_argument("--limit", type=int, default=200, help="Max issues to fetch.")
+    parser.add_argument("--limit", type=int, default=10000, help="Max issues to fetch.")
     args = parser.parse_args()
 
     # Auto-detect repo

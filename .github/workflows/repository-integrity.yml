@@ -592,6 +592,12 @@ jobs:
       - name: Test Gateway auto archive already archived recovery
         run: python3 scripts/test_gateway_auto_archive_already_archived_recovery.py
 
+      - name: Test agent-declared index fetch limit
+        run: python3 scripts/test_agent_declared_index_issue_fetch_limit.py
+
+      - name: Test Guardian workflow parses listing_source_issue
+        run: python3 scripts/test_guardian_workflow_parses_listing_source_issue.py
+
       - name: Test trust-root group
         run: python3 scripts/run_ci_group.py trust-root
 

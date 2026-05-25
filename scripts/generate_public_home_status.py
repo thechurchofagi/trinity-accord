@@ -403,24 +403,40 @@ def compute_reception_status(echo_records: list[dict[str, Any]], agent_declared_
 # ---------------------------------------------------------------------------
 # External witness records
 # ---------------------------------------------------------------------------
-def compute_external_witness_status(echo_records: list[dict[str, Any]]) -> dict:
+def compute_external_witness_status(echo_records: list[dict[str, Any]], external_witness_index: dict[str, Any] | None = None) -> dict:
+    external_witness_index = external_witness_index or {}
+    counts = external_witness_index.get("counts") or {}
+    indexed_records = external_witness_index.get("records") or []
+
     # Count records with external witness characteristics from echo records
     ext_records = [r for r in echo_records
                    if (r.get("origin_classification") or {}).get("counts_as_external_witness_record") is True
                    or (r.get("origin_classification") or {}).get("attestation_authority_class") in ("notarial_record", "audit_firm_report", "regulatory_or_court_record")]
 
-    notarial = [r for r in ext_records
+    notarial_from_echo = [r for r in ext_records
                 if (r.get("origin_classification") or {}).get("attestation_authority_class") in ("notarial_record", "audit_firm_report", "regulatory_or_court_record")]
+
+    notarial_count = (
+        int(counts.get("notarial_record", 0) or 0)
+        + int(counts.get("regulatory_or_court_record", 0) or 0)
+        + len(notarial_from_echo)
+    )
+    institutional_count = (
+        int(counts.get("institutional_record", 0) or 0)
+        + int(counts.get("audit_report", 0) or 0)
+        + max(0, len(ext_records) - len(notarial_from_echo))
+    )
 
     return {
         "notarial_or_legal_provenance": {
-            "count": len(notarial),
+            "count": notarial_count,
             "role": "evidence_provenance"
         },
         "institutional_or_audit_reports": {
-            "count": max(0, len(ext_records) - len(notarial)),
+            "count": institutional_count,
             "role": "external_witness"
         },
+        "external_witness_index_record_count": len(indexed_records),
         "does_not_create_authority": True,
         "does_not_rank_above_reception": True
     }
@@ -690,7 +706,7 @@ def compute_status() -> dict[str, Any]:
         "verifiability": compute_verifiability_status(physical, agent_declared_records),
         "reception": compute_reception_status(echo_records, agent_declared_records),
         "guardian_registry": compute_guardian_registry_status(guardian_registry, guardian_policy),
-        "external_witness_records": compute_external_witness_status(echo_records),
+        "external_witness_records": compute_external_witness_status(echo_records, external_witness),
         "boundary": compute_boundary_status(),
         "legacy_counts": compute_legacy_counts(echo_records, attestation_records),
         "authorship_claims": compute_authorship_claims(agent_declared_records),

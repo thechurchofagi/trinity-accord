@@ -10,8 +10,8 @@ from pathlib import Path
 try:
     from jsonschema import Draft202012Validator, ValidationError, RefResolver
 except ImportError:
-    print("SKIP: jsonschema not installed — falling back to basic checks")
-    sys.exit(0)
+    print("FAIL: jsonschema not installed. Install requirements-ci.txt.")
+    sys.exit(1)
 
 ROOT = Path(__file__).resolve().parents[1]
 RECORDS_DIR = ROOT / "echoes" / "records"

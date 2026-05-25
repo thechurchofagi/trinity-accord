@@ -138,6 +138,7 @@
       "count": 0,
       "role": "external_witness"
     },
+    "external_witness_index_record_count": 0,
     "does_not_create_authority": true,
     "does_not_rank_above_reception": true
   },
