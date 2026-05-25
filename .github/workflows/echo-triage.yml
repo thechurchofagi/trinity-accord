@@ -80,9 +80,17 @@ jobs:
             }
 
             function isGatewayCreated(body) {
-              return hasMachineFlag(body, "created_by_gateway", "true") &&
-                     hasMachineFlag(body, "server_validated", "true");
-            }
+  const receiptId = intakeField(body, "gateway_receipt_id");
+  const service = intakeField(body, "gateway_service");
+  const receiptPattern = /^gar-[A-Za-z0-9T._:-]{16,}$/;
+
+  return hasMachineFlag(body, "created_by_gateway", "true") &&
+         hasMachineFlag(body, "render_api_only", "true") &&
+         hasMachineFlag(body, "server_validated", "true") &&
+         hasMachineFlag(body, "server_rendered", "true") &&
+         service === "trinity-agent-issue-gateway" &&
+         receiptPattern.test(receiptId);
+}
 
             function requestedArchiveKind(body) {
               return intakeField(body, "requested_archive_kind");
