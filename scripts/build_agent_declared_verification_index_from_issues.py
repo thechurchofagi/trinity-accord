@@ -161,18 +161,46 @@ def parse_bool(value: str | None) -> bool | None:
 
 
 def fetch_issues(repo: str | None, limit: int = 10000) -> list[dict]:
-    """Fetch closed issues via gh CLI with pagination."""
-    args = [
-        "issue", "list",
-        "--state", "closed",
-        "--limit", str(limit),
-        "--json", "number,title,body,closedAt,createdAt,url,labels",
-    ]
-    if repo:
-        args.extend(["--repo", repo])
+    """Fetch closed non-PR issues via paginated GitHub REST API."""
+    if not repo:
+        raise RuntimeError("repo is required")
 
-    output = run_gh(args)
-    return json.loads(output)
+    issues: list[dict] = []
+    page = 1
+
+    while len(issues) < limit:
+        output = run_gh([
+            "api",
+            f"repos/{repo}/issues",
+            "-f", "state=closed",
+            "-f", "per_page=100",
+            "-f", f"page={page}",
+        ])
+        batch = json.loads(output)
+        if not batch:
+            break
+
+        for item in batch:
+            if "pull_request" in item:
+                continue
+
+            labels = item.get("labels") or []
+            issues.append({
+                "number": item.get("number"),
+                "title": item.get("title") or "",
+                "body": item.get("body") or "",
+                "closedAt": item.get("closed_at") or "",
+                "createdAt": item.get("created_at") or "",
+                "url": item.get("html_url") or item.get("url") or "",
+                "labels": labels,
+            })
+
+            if len(issues) >= limit:
+                break
+
+        page += 1
+
+    return issues
 
 
 def is_after_effective_date(created_at: str) -> bool:
