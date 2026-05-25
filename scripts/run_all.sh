@@ -1,35 +1,35 @@
 #!/usr/bin/env bash
 # ============================================================
 # run_all.sh — Master script: apply all runbook fixes + run tests
-# 在仓库根目录运行: bash scripts/run_all.sh
+# FAIL-CLOSED: exits non-zero if any required step fails
 # ============================================================
 set -euo pipefail
 cd "$(git rev-parse --show-toplevel)"
 
+failures=0
+
+run_required() {
+  local label="$1"
+  shift
+  echo "  Running ${label}..."
+  if ! "$@"; then
+    echo "  FAIL: ${label}"
+    failures=$((failures + 1))
+  fi
+}
+
+run_optional() {
+  local label="$1"
+  shift
+  echo "  Running optional ${label}..."
+  if ! "$@"; then
+    echo "  WARN: optional step failed: ${label}"
+  fi
+}
+
 echo "============================================"
 echo "  Trinity Accord Gateway Hardening Runbook"
-echo "  Applying all fixes..."
 echo "============================================"
-echo ""
-
-echo "[1/5] Schema + policy auto-patches..."
-bash scripts/apply_runbook.sh
-echo ""
-
-echo "[2/5] Semantic validator patches..."
-bash scripts/apply_semantic_validator_patches.sh
-echo ""
-
-echo "[3/5] CI wiring..."
-bash scripts/apply_ci_wiring.sh
-echo ""
-
-echo "[4/5] Regenerating indexes..."
-python3 scripts/build_agent_declared_verification_index_from_issues.py --repo thechurchofagi/trinity-accord 2>&1 || echo "  (index gen may need GitHub API — skip if offline)"
-python3 scripts/generate_public_home_status.py 2>&1 || echo "  (status gen may need GitHub API — skip if offline)"
-echo ""
-
-echo "[5/5] Running all tests..."
 echo ""
 
 echo "--- Schema validation ---"
@@ -44,9 +44,13 @@ for t in \
   scripts/test_agent_declared_index_records_invalid_intake_skips.py \
   scripts/test_gateway_discovery_provenance_archive_invariants.py \
   scripts/test_gateway_claim_gate_component_levels.py \
-  scripts/test_gateway_agent_identity_archive_policy.py; do
-  echo "  Running $t..."
-  python3 "$t" 2>&1 || echo "  FAIL: $t"
+  scripts/test_gateway_agent_identity_archive_policy.py \
+  scripts/test_gateway_semantic_validator_no_dead_code.py \
+  scripts/test_gateway_fixtures_use_current_v0_v5_shape.py \
+  scripts/test_echo_triage_receipt_fields_only_from_intake_block.py; do
+  if [ -f "$t" ]; then
+    run_required "$t" python3 "$t"
+  fi
 done
 
 echo ""
@@ -62,39 +66,25 @@ for t in \
   scripts/test_agent_declared_intake_bool_parser.py \
   scripts/test_guardian_listing_gateway_schema_invariants.py; do
   if [ -f "$t" ]; then
-    echo "  Running $t..."
-    python3 "$t" 2>&1 || echo "  FAIL: $t"
-  else
-    echo "  SKIP (not found): $t"
+    run_required "$t" python3 "$t"
   fi
 done
 
 echo ""
+echo "--- Index drift check ---"
+if [ -f scripts/build_agent_declared_verification_index_from_issues.py ]; then
+  run_required "agent-declared index --check" \
+    python3 scripts/build_agent_declared_verification_index_from_issues.py --repo thechurchofagi/trinity-accord --check
+fi
+
+echo ""
+if [[ "$failures" -ne 0 ]]; then
+  echo "============================================"
+  echo "  FAILED: ${failures} required step(s) failed"
+  echo "============================================"
+  exit 1
+fi
+
 echo "============================================"
-echo "  Done! Review output above for any FAILs."
+echo "  PASS: all required steps completed"
 echo "============================================"
-echo ""
-echo "Suggested commit order:"
-echo '  git add api/agent-issue-gateway-payload-schema.v1.json scripts/validate_gateway_payload_semantics.py scripts/test_gateway_archive_branch_required_fields.py'
-echo '  git commit -m "fix: require evidence mode on archive gateway branches"'
-echo ""
-echo '  git add .github/workflows/echo-triage.yml scripts/test_echo_triage_strict_gateway_receipt_rate_class.py'
-echo '  git commit -m "fix: use strict gateway receipt classification in echo triage"'
-echo ""
-echo '  git add scripts/gateway_v0_v5_policy.py scripts/test_gateway_v0_v5_policy_strict_bool.py'
-echo '  git commit -m "fix: parse gateway receipt booleans strictly"'
-echo ""
-echo '  git add scripts/build_agent_declared_verification_index_from_issues.py scripts/test_agent_declared_index_records_invalid_intake_skips.py'
-echo '  git commit -m "fix: record invalid intake skips in agent-declared index metadata"'
-echo ""
-echo '  git add api/agent-issue-gateway-payload-schema.v1.json scripts/validate_gateway_payload_semantics.py scripts/test_gateway_discovery_provenance_archive_invariants.py'
-echo '  git commit -m "fix: require discovery provenance for archive branches"'
-echo ""
-echo '  git add api/agent-issue-gateway-payload-schema.v1.json scripts/validate_gateway_payload_semantics.py scripts/test_gateway_claim_gate_component_levels.py'
-echo '  git commit -m "fix: constrain claim gate component levels"'
-echo ""
-echo '  git add scripts/validate_gateway_payload_semantics.py scripts/test_gateway_agent_identity_archive_policy.py'
-echo '  git commit -m "fix: enforce archive agent identity policy"'
-echo ""
-echo '  git add .github/workflows/repository-integrity.yml'
-echo '  git commit -m "test: add remaining gateway risk guards"'
