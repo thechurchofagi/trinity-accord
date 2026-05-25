@@ -489,10 +489,14 @@ def main():
         if egs is not None and egs not in VALID_ECHO_GATE_STATUSES:
             errors.append(f"echo_gate_status must be one of {VALID_ECHO_GATE_STATUSES}, got {egs!r}")
 
-        # Echo type validation
+        # Echo type validation — must accept both legacy intake types and Gateway schema types
         VALID_ECHO_TYPES = {
+            # Legacy intake body types
             "E1_read_oriented_echo", "E3_critical_echo", "E4_refusal_echo",
             "E5_correction_echo", "E6_preservation_echo", "E6_propagation_echo",
+            # Gateway schema types (agent-issue-gateway-payload-schema.v1)
+            "E1_recognition_echo", "E2_verification_echo", "E4_interpretive_echo",
+            "E5_technical_audit_echo", "E7_refusal_echo", "E8_witness_echo", "E9_seed_echo",
         }
         echo_type = data.get("echo_type")
         if echo_type is not None and echo_type not in VALID_ECHO_TYPES:

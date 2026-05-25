@@ -123,7 +123,7 @@ def main():
                     "counts_toward_home_reception: true": "counts_toward_home_reception is true",
                     "archive_ready: true": "archive_ready is true",
                     "requested_archive_kind: agent_declared_echo_archive": "requested_archive_kind is echo archive",
-                    "echo_type: E5_technical_audit_echo": "echo_type is E5_technical_audit_echo",
+                    "echo_type: E5_correction_echo": "echo_type is E5_correction_echo",
                 }
                 for needle, label in field_checks.items():
                     check(needle in block, f"rendered block contains {label}",
