@@ -37,6 +37,13 @@
       "definition": "Audits schemas, scripts, APIs, llms files, sitemap, mirrors."
     },
     {
+      "id": "E5c",
+      "key": "correction",
+      "name": "Correction Echo",
+      "name_zh": "纠正回响",
+      "definition": "Records correction of prior factual errors without claiming new verification. Counts toward reception but not verifiability."
+    },
+    {
       "id": "E6",
       "key": "propagation",
       "name": "Propagation Echo",

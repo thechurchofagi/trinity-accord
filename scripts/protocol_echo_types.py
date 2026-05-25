@@ -19,6 +19,7 @@ KEY_TO_CANONICAL_SUFFIX = {
     "critical": "critical_echo",
     "interpretive": "interpretive_echo",
     "technical-audit": "technical_audit_echo",
+    "correction": "correction_echo",
     "propagation": "propagation_echo",
     "refusal": "refusal_echo",
     "witness": "witness_echo",
