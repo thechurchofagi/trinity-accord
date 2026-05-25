@@ -673,6 +673,21 @@ jobs:
       - name: Test Echo taxonomy consumers use single source
         run: python3 scripts/test_echo_taxonomy_consumers_use_single_source.py
 
+      - name: Test Gateway payload schema Echo taxonomy
+        run: python3 scripts/test_gateway_payload_schema_echo_type_matches_taxonomy.py
+
+      - name: Test Gateway issue schema
+        run: python3 scripts/test_agent_issue_gateway_schema.py
+
+      - name: Test all Echo taxonomy consumers
+        run: python3 scripts/test_echo_taxonomy_all_consumers_match_single_source.py
+
+      - name: Test discovery manifests lifecycle links
+        run: python3 scripts/check_discovery_manifest_lifecycle_links.py
+
+      - name: Test public status declared inputs
+        run: python3 scripts/test_public_status_declared_inputs_match_source_digest.py
+
       - name: Test agent-declared archive close invariant
         run: python3 scripts/test_agent_declared_archive_close_invariant.py
 
