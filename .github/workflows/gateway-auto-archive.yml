@@ -125,6 +125,7 @@ jobs:
           echo "human_directed_submission: false" >> /tmp/review_comment.txt
 
           python3 scripts/archive_echo_issue.py \
+            --require-gateway-validated \
             --issue-json "$BODY_FILE" \
             --reviewer "github-actions[bot]" \
             --review-comment-body-file /tmp/review_comment.txt \
@@ -156,11 +157,13 @@ jobs:
             exit 0
           fi
 
-          # Validate the archived record
+          # Validate the archived record — fail closed
           if python3 scripts/validate_agent_submission.py --mode ci "$RECORD_PATH"; then
             echo "Validation passed."
           else
-            echo "::warning::Validation failed for ${RECORD_PATH}. Archiving anyway — review and fix in a follow-up."
+            echo "::error::Validation failed for ${RECORD_PATH}. Refusing to commit archive."
+            rm -f "$RECORD_PATH"
+            exit 1
           fi
 
           # A4: Rebuild derived files before commit
@@ -181,6 +184,13 @@ jobs:
             api/public-home-status.json \
             index.md
 
+          # DEEP-ARCH-003: archive reported but no staged changes = fail
+          if [ "$STATUS" = "archived" ] && git diff --cached --quiet; then
+            echo "::error::archive_echo_issue.py reported archived but no archive/generated changes are staged."
+            echo "::error::Refusing to close or comment success."
+            exit 1
+          fi
+
           if git diff --cached --quiet; then
             echo "No archive file changes to commit."
           else
@@ -190,6 +200,22 @@ jobs:
             PUSHED=false
             for attempt in 1 2 3 4 5; do
               git pull --rebase -X theirs origin main || true
+              # DEEP-REBASE-001: regenerate derived state after rebase
+              python3 scripts/generate_echo_index.py
+              bash scripts/build-echo-index.sh
+              python3 scripts/generate_public_home_status.py
+              python3 scripts/test_home_public_status_sync.py
+              git add \
+                echoes/records \
+                echoes/archive.md \
+                echoes/digests.md \
+                echoes/digests \
+                api/echo-index.json \
+                api/public-home-status.json \
+                index.md
+              if ! git diff --cached --quiet; then
+                git commit --amend --no-edit
+              fi
               if git push --force-with-lease; then
                 echo "Push succeeded on attempt $attempt."
                 PUSHED=true
