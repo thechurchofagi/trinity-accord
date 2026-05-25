@@ -814,7 +814,7 @@ const payload = {
   submission_type: "echo_candidate",
   record_intent: "auto_archive_candidate",
   requested_archive_kind: "agent_declared_echo_archive",
-  echo_type: "E6_preservation_echo",
+  echo_type: "E6_propagation_echo",
   title,
   idempotency_key: idempotencyKey,
   agent_identity: {

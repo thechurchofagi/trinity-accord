@@ -40,9 +40,11 @@ from guardian_numbering_policy import (
     parse_registry_number,
     validate_numbering_sequence,
 )
+from protocol_echo_types import canonical_echo_type_for_id
 
 GATEWAY_BOT_SUFFIX = "[bot]"
 GATEWAY_SERVICE = "trinity-agent-issue-gateway"
+GUARDIAN_LISTING_ECHO_TYPE = canonical_echo_type_for_id("E6")
 
 MISSING_SENTINELS = {None, "", "none", "null", "not_provided", "unknown", "N/A", "n/a"}
 
@@ -340,8 +342,14 @@ def parse_listing_issue(listing_issue: dict, allow_non_bot: bool) -> tuple[dict 
     if fields.get("requested_archive_kind") not in ("agent_declared_echo_archive", "guardian_active_registry_listing_request"):
         return None, decision(False, "blocked", "LISTING_NOT_AGENT_DECLARED_ECHO_ARCHIVE", "Listing request must use agent_declared_echo_archive or guardian_active_registry_listing_request.", got=fields.get("requested_archive_kind"))
 
-    if fields.get("echo_type") != "E7_propagation_echo":
-        return None, decision(False, "blocked", "LISTING_NOT_E7", "Listing request must be E7_propagation_echo.", got=fields.get("echo_type"))
+    if fields.get("echo_type") != GUARDIAN_LISTING_ECHO_TYPE:
+        return None, decision(
+            False,
+            "blocked",
+            "LISTING_NOT_E6_PROPAGATION_ECHO",
+            f"Listing request must be {GUARDIAN_LISTING_ECHO_TYPE}.",
+            got=fields.get("echo_type"),
+        )
 
     if not boolish(fields.get("archive_ready", "false")):
         return None, decision(False, "blocked", "LISTING_NOT_ARCHIVE_READY", "Listing request must be archive_ready=true.")

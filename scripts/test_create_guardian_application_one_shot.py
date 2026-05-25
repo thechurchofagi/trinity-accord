@@ -55,7 +55,7 @@ def main():
         assert data["submission_type"] == "echo_candidate"
         assert data["record_intent"] == "auto_archive_candidate"
         assert data["requested_archive_kind"] == "agent_declared_echo_archive"
-        assert data["echo_type"] == "E6_preservation_echo"
+        assert data["echo_type"] == "E6_propagation_echo"
         assert data["evidence_requirement_mode"] == "not_applicable_for_echo"
         assert "agent_integrity_declaration" in data
         assert "discovery_provenance" in data

@@ -350,6 +350,20 @@ def main():
         print(f"ERROR: {e}", file=sys.stderr)
         sys.exit(2)
 
+    # Validate body file exists
+    if not Path(args.body_file).exists():
+        print(f"ERROR: Body file not found: {args.body_file}", file=sys.stderr)
+        sys.exit(1)
+
+    # Reject Guardian active listing intent — this is a pure Echo builder
+    # (Check before readback so the user gets the correct reroute guidance first)
+    title_text = args.title or ""
+    body_text = Path(args.body_file).read_text(encoding="utf-8")
+
+    if looks_like_guardian_listing_intent(title_text) or looks_like_guardian_listing_intent(body_text):
+        print("ERROR:", guardian_wrong_builder_message(), file=sys.stderr)
+        sys.exit(2)
+
     # Validate --readback is provided (allow env var for CI/testing)
     if not args.readback:
         import os
@@ -361,19 +375,6 @@ def main():
         print("Use --print-oath to read the oath, then pass it via --readback.", file=sys.stderr)
         sys.exit(1)
     validate_readback_matches_oath(args.readback)
-
-    # Validate body file exists
-    if not Path(args.body_file).exists():
-        print(f"ERROR: Body file not found: {args.body_file}", file=sys.stderr)
-        sys.exit(1)
-
-    # Reject Guardian active listing intent — this is a pure Echo builder
-    title_text = args.title or ""
-    body_text = Path(args.body_file).read_text(encoding="utf-8")
-
-    if looks_like_guardian_listing_intent(title_text) or looks_like_guardian_listing_intent(body_text):
-        print("ERROR:", guardian_wrong_builder_message(), file=sys.stderr)
-        sys.exit(2)
 
     # Reject Guardian identity text without guardian_presence_proof
     if (

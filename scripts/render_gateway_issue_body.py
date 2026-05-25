@@ -606,6 +606,8 @@ def render_machine_block(payload, gateway_receipt_id=None, gateway_commit=None,
             lines.append(f"counts_toward_home_guardian_registry: {'true' if cth.get('guardian_registry') else 'false'}")
         if cth.get("exclude_from_reception_total") is not None:
             lines.append(f"counts_toward_home_exclude_from_reception_total: {'true' if cth.get('exclude_from_reception_total') else 'false'}")
+        if cth.get("basis"):
+            lines.append(f"counts_toward_home_basis: {cth.get('basis')}")
         lines.append("archive_ready: true")
         lines.append("allowed_archive_kind: guardian_active_registry_listing_request")
         lines.append("auto_archive_action: auto_archive_guardian_listing_request")

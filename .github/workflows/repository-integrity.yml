@@ -919,3 +919,7 @@ jobs:
         run: python3 scripts/test_gateway_auto_archive_uses_shared_eligibility.py
       - name: Test agent-declared index generated metadata current
         run: python3 scripts/test_agent_declared_index_generated_metadata_current.py
+      - name: Test Guardian auto-register listing Echo type
+        run: python3 scripts/test_guardian_auto_register_listing_echo_type.py
+      - name: Test no stale E7 Guardian listing logic
+        run: python3 scripts/test_no_stale_guardian_listing_e7.py
