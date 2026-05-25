@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.agent-declared-verification-index.v1",
-  "description": "Index of agent-declared verification archives created through the Gateway. Records are added when a V0-V5 agent-declared Issue is successfully created and auto-archived. This index is rebuilt from closed GitHub Issues by CI.",
+  "description": "Index rebuilt from Gateway-created closed Issues. It primarily contains agent-declared verification archives, but may include maintainer-classified semantic Echo archives via /api/agent-declared-archive-overrides.json. This index is rebuilt from closed GitHub Issues by CI.",
   "generated_from": [
     "github_issues:closed",
     "/api/agent-issue-gateway-payload-schema.v1.json",
@@ -1293,5 +1293,6 @@
   "override_count": 1,
   "overrides_applied": [
     182
-  ]
+  ],
+  "skipped_invalid_intake": []
 }

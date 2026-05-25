@@ -51,72 +51,18 @@ jobs:
           BODY_FILE=$(mktemp)
           gh issue view "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" --json number,title,body,url,createdAt,updatedAt,author,labels,state > "$BODY_FILE"
 
-          # A1: Fail-closed eligibility gate
+          # A1: Fail-closed eligibility gate — use shared parser/policy
           python3 - <<'PY' "$BODY_FILE"
           import json
-          import re
           import sys
+          from pathlib import Path
+
+          sys.path.insert(0, str(Path("scripts").resolve()))
+
+          from archive_echo_issue import validate_gateway_archive_eligibility
 
           issue = json.load(open(sys.argv[1], encoding="utf-8"))
-          body = issue.get("body") or ""
-          labels = {x.get("name") for x in issue.get("labels", []) if isinstance(x, dict)}
-
-          def field(name: str) -> str:
-              patterns = [
-                  rf"^\s*[-*]?\s*{re.escape(name)}\s*:\s*(.*?)\s*$",
-                  rf"^\s*[-*]?\s*{re.escape(name.replace('_', ' '))}\s*:\s*(.*?)\s*$",
-              ]
-              for pattern in patterns:
-                  m = re.search(pattern, body, re.I | re.M)
-                  if m:
-                      return m.group(1).strip()
-              return ""
-
-          def is_true(name: str) -> bool:
-              return field(name).lower() in {"true", "yes", "1"}
-
-          required_true = [
-              "created_by_gateway",
-              "server_validated",
-              "server_rendered",
-              "archive_ready",
-          ]
-
-          missing_or_false = [name for name in required_true if not is_true(name)]
-          if missing_or_false:
-              raise SystemExit(
-                  "Refusing archive: required Gateway intake fields are not true: "
-                  + ", ".join(missing_or_false)
-              )
-
-          receipt = field("gateway_receipt_id")
-          if not receipt:
-              raise SystemExit("Refusing archive: missing gateway_receipt_id")
-
-          allowed_kinds = {
-              "agent_declared_echo_archive",
-              "agent_declared_verification_archive",
-              "guardian_active_registry_listing_request",
-              "pure_echo_archive",
-          }
-
-          kind = field("requested_archive_kind")
-          if kind and kind not in allowed_kinds:
-              raise SystemExit(f"Refusing archive: unsupported requested_archive_kind={kind!r}")
-
-          allowed_labels = {
-              "echo:screened",
-              "archive:agent-declared-echo",
-              "archive:agent-declared-verification",
-              "archive:guardian-active-registry-listing",
-              "reception-only",
-          }
-          if labels and not (labels & allowed_labels):
-              raise SystemExit(
-                  "Refusing archive: issue lacks expected screened/archive labels. "
-                  f"labels={sorted(labels)}"
-              )
-
+          validate_gateway_archive_eligibility(issue)
           print("Gateway archive eligibility OK")
           PY
 

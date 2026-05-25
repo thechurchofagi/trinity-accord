@@ -913,3 +913,9 @@ jobs:
         run: python3 scripts/test_agent_declared_index_builder_has_check_mode.py
       - name: Test apply scripts are not verification tools
         run: python3 scripts/test_apply_scripts_not_verification_tools.py
+      - name: Test archive Echo issue Gateway intake strictness
+        run: python3 scripts/test_archive_echo_issue_gateway_intake_strict.py
+      - name: Test Gateway auto archive uses shared eligibility
+        run: python3 scripts/test_gateway_auto_archive_uses_shared_eligibility.py
+      - name: Test agent-declared index generated metadata current
+        run: python3 scripts/test_agent_declared_index_generated_metadata_current.py

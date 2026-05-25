@@ -207,73 +207,13 @@ def parse_int(value, default=0):
         return default
 
 
-class IntakeParseError(ValueError):
-    pass
-
-
-class BoolParseError(ValueError):
-    pass
-
-
-def parse_intake_block(body: str) -> dict[str, str] | None:
-    """Extract key-value pairs from exactly one trinity-issue-intake code block.
-
-    Returns None if no block exists.
-    Raises IntakeParseError if multiple blocks or duplicate keys are present.
-    """
-    if not body:
-        return None
-
-    matches = re.findall(r"```trinity-issue-intake\s*\n(.*?)```", body, re.DOTALL)
-    if not matches:
-        return None
-    if len(matches) > 1:
-        raise IntakeParseError(f"multiple trinity-issue-intake blocks found: {len(matches)}")
-
-    block = matches[0]
-    result = {}
-    seen = set()
-
-    allowed_fields = set(INTAKE_FIELDS + EXTRA_FIELDS)
-
-    for line_no, raw_line in enumerate(block.strip().splitlines(), start=1):
-        line = raw_line.strip()
-        if not line or line.startswith("#"):
-            continue
-        if line.startswith("-"):
-            continue
-        if ":" not in line:
-            continue
-
-        key, _, value = line.partition(":")
-        key = key.strip()
-        value = value.strip()
-
-        if key not in allowed_fields:
-            continue
-
-        if key in seen:
-            raise IntakeParseError(f"duplicate intake key {key!r} at line {line_no}")
-
-        seen.add(key)
-        result[key] = value
-
-    return result if result else None
-
-
-def parse_bool(value: str | None, *, field: str = "unknown", issue_number: int | None = None) -> bool | None:
-    """Strict boolean parser for intake fields."""
-    if value is None:
-        return None
-
-    v = value.strip().lower()
-    if v in {"true", "1", "yes"}:
-        return True
-    if v in {"false", "0", "no"}:
-        return False
-
-    issue = f" issue #{issue_number}" if issue_number is not None else ""
-    raise BoolParseError(f"Invalid boolean{issue}: {field}={value!r}")
+# Shared intake parser — single source of truth
+from gateway_intake import (  # noqa: E402
+    BoolParseError,
+    IntakeParseError,
+    parse_bool,
+    parse_intake_block,
+)
 
 
 def fetch_issues(repo: str | None, limit: int = 10000) -> list[dict]:
@@ -548,7 +488,10 @@ def build_index(issues: list[dict], repo: str = "", include_test: bool = False) 
     for issue in issues:
         body = issue.get("body", "")
         try:
-            intake = parse_intake_block(body)
+            intake = parse_intake_block(
+                body,
+                allowed_fields=set(INTAKE_FIELDS + EXTRA_FIELDS),
+            )
         except IntakeParseError as e:
             skipped_invalid_intake.append({"issue_number": issue.get("number"), "reason": str(e)})
             print(f"SKIP_INVALID_INTAKE issue #{issue.get('number')}: {e}", file=sys.stderr)
