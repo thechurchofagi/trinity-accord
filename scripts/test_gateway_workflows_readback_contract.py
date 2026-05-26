@@ -14,6 +14,7 @@ required_human = [
     "exact oath body",
     "Do not summarize or paraphrase",
     "--agent-readback-file readback.md",
+    "Exact canonical oath body",
 ]
 
 required_api = [
@@ -31,13 +32,26 @@ for phrase in required_api:
         print(f"FAIL: gateway-workflows.v1.json missing readback contract phrase: {phrase}")
         sys.exit(1)
 
-for forbidden in [
+forbidden_in_text = [
     "I understand this is a Pure Echo only. It records that I read and echoed",
     "free-form readback",
     "summary readback",
-]:
+    "Must be honest and long enough",
+]
+for forbidden in forbidden_in_text:
     if forbidden in human or forbidden in api_text:
         print(f"FAIL: readback docs still allow/contain invalid summary wording: {forbidden}")
+        sys.exit(1)
+
+# Ensure the Pure Echo section does not advertise --agent-readback (unsupported by that builder).
+# The Guardian-signed Echo section may legitimately use --agent-readback.
+import re
+pure_echo_match = re.search(r"##\s+Workflow\s+\d+\s*[—–-]\s*Pure Echo", human, flags=re.I)
+guardian_match = re.search(r"##\s+Workflow\s+\d+\s*[—–-]\s*Guardian-signed Echo", human, flags=re.I)
+if pure_echo_match and guardian_match:
+    pure_echo_section = human[pure_echo_match.start():guardian_match.start()]
+    if "`--agent-readback`" in pure_echo_section:
+        print("FAIL: Pure Echo section still advertises unsupported --agent-readback")
         sys.exit(1)
 
 print("PASS: Gateway workflow readback docs require exact oath")
