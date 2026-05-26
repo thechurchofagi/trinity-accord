@@ -62,6 +62,11 @@ GROUPS = {
         ["python3", "scripts/test_agent_task_router_submit_echo_reads_workflow_manual.py"],
         ["python3", "scripts/test_agent_first_contact_echo_reads_workflow_manual.py"],
 
+        # Guardian workflow & final checklist (v13)
+        ["python3", "scripts/test_guardian_listing_stage2_workflow_cli_contract.py"],
+        ["python3", "scripts/test_guardian_signed_echo_workflow_wording.py"],
+        ["python3", "scripts/test_gateway_workflows_final_checklist_post_submit.py"],
+
         # Gateway / Guardian core
         ["python3", "scripts/test_gateway_endpoint_contracts.py"],
         ["python3", "scripts/test_gateway_payload_semantic_validator.py"],
