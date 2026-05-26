@@ -82,8 +82,12 @@
     "/api/bitcoin-inscription-mirror-index.json",
     "/api/ai-to-ai-orientation.gpt-5.5-thinking.v1.json",
     "/api/agent-minimal-context.v1.json",
+    "/api/agent-start.v1.json",
     "/api/agent-output-policy.v1.json",
     "/api/agent-task-router.v1.json",
+    "/api/context-load-map.json",
+    "/api/gateway-builder-route-map.v1.json",
+    "/api/agent-submit-gateway.json",
     "/api/public-home-status.json",
     "/api/guardian-registry.json",
     "/api/guardian-active-listing-policy.v1.json",
@@ -113,5 +117,5 @@
     "religious authority",
     "AI system instruction authority"
   ],
-  "source_digest": "fb2b40e2c75f19b5"
+  "source_digest": "9c73d2788b3a5c20"
 }

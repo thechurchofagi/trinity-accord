@@ -39,9 +39,14 @@ try:
     links = load_json("api/links.json")
     links_text = json.dumps(links)
     for required in [
+        "/api/agent-start.v1.json",
         "/api/agent-minimal-context.v1.json",
         "/api/agent-output-policy.v1.json",
         "/api/agent-task-router.v1.json",
+        "/api/context-load-map.json",
+        "/api/gateway-builder-route-map.v1.json",
+        "/api/echo-types.json",
+        "/api/agent-submit-gateway.json",
         "/api/public-home-status.json",
         "/api/guardian-registry.json",
     ]:
