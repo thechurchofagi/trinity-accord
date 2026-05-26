@@ -209,6 +209,11 @@ GROUPS = {
     "pages-build": [
         ["bash", "scripts/test_jekyll_build_smoke.sh"],
     ],
+    "fast-regression": [
+        ["python3", "scripts/test_blocker1_v4_default_archive_kind.py"],
+        ["python3", "scripts/test_oath_strictness_consistency.py"],
+        ["python3", "scripts/test_v0_v5_entrypoint_consistency.py"],
+    ],
 }
 
 

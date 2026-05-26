@@ -67,11 +67,5 @@ jobs:
       - name: Test repository integrity has no duplicate step names
         run: python3 scripts/test_repository_integrity_no_duplicate_step_names.py
 
-      - name: BLOCKER-1 V4 default archive kind regression
-        run: python3 scripts/test_blocker1_v4_default_archive_kind.py
-
-      - name: Test oath strictness consistency
-        run: python3 scripts/test_oath_strictness_consistency.py
-
-      - name: Test V0-V5 entrypoint consistency
-        run: python3 scripts/test_v0_v5_entrypoint_consistency.py
+      - name: Run fast-regression CI group
+        run: python3 scripts/run_ci_group.py fast-regression

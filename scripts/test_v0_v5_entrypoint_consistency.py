@@ -118,6 +118,10 @@ def check_ci_workflows():
         "test_oath_strictness_consistency.py",
     ]
 
+    # Load run_ci_group.py to resolve tests referenced via CI groups
+    rcg_path = ROOT / "scripts" / "run_ci_group.py"
+    rcg_text = rcg_path.read_text(encoding="utf-8") if rcg_path.exists() else ""
+
     for wf_name in ["run-all-tests.yml", "repository-integrity.yml"]:
         wf_path = ROOT / ".github" / "workflows" / wf_name
         if not wf_path.exists():
@@ -125,7 +129,37 @@ def check_ci_workflows():
             continue
         wf_text = wf_path.read_text(encoding="utf-8")
         for test in required_tests:
-            if test not in wf_text:
+            if test in wf_text:
+                continue  # directly in workflow
+            # Check if workflow calls a CI group that contains this test
+            import re
+            group_calls = re.findall(
+                r"python3\s+scripts/run_ci_group\.py\s+(\S+)", wf_text
+            )
+            found_in_group = False
+            for group_name in group_calls:
+                # Look for the group definition in run_ci_group.py
+                # Match group definition with nested brackets
+                group_start = rcg_text.find(f'"{group_name}"')
+                if group_start >= 0:
+                    bracket_start = rcg_text.find('[', group_start)
+                    if bracket_start >= 0:
+                        depth = 0
+                        bracket_end = -1
+                        for i in range(bracket_start, len(rcg_text)):
+                            if rcg_text[i] == '[':
+                                depth += 1
+                            elif rcg_text[i] == ']':
+                                depth -= 1
+                                if depth == 0:
+                                    bracket_end = i
+                                    break
+                        if bracket_end > bracket_start:
+                            group_match_text = rcg_text[bracket_start:bracket_end + 1]
+                            if test in group_match_text:
+                                found_in_group = True
+                                break
+            if not found_in_group:
                 issues.append(f"{wf_name} missing {test}")
 
     return issues
