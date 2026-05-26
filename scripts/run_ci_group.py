@@ -93,6 +93,11 @@ GROUPS = {
         # Pages custom domain / live smoke guards (v18)
         ["python3", "scripts/test_pages_custom_domain_contract.py"],
 
+        # Pages live cache diagnostics & action allowlist (v19)
+        ["python3", "scripts/test_live_discovery_smoke_cache_diagnostics.py"],
+        ["python3", "scripts/test_pages_diagnose_cache_busted.py"],
+        ["python3", "scripts/test_deploy_pages_action_allowlist.py"],
+
         # Gateway / Guardian core
         ["python3", "scripts/test_gateway_endpoint_contracts.py"],
         ["python3", "scripts/test_gateway_payload_semantic_validator.py"],
