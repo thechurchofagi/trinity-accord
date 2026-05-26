@@ -229,6 +229,7 @@ def fetch_issues(repo: str | None, limit: int = 10000) -> list[dict]:
         output = run_gh([
             "api",
             f"repos/{repo}/issues",
+            "--method", "GET",
             "-f", "state=closed",
             "-f", "per_page=100",
             "-f", f"page={page}",
