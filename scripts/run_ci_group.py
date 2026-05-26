@@ -34,7 +34,6 @@ GROUPS = {
         ["python3", "scripts/test_guardian_listing_kind_cutoff.py"],
         ["python3", "scripts/test_guardian_listing_body_fallback_cutoff.py"],
 
-        ["python3", "scripts/build_agent_declared_verification_index_from_issues.py", "--repo", "thechurchofagi/trinity-accord", "--check"],
         ["python3", "scripts/generate_public_home_status.py", "--check"],
         ["python3", "scripts/test_home_public_status_sync.py"],
     ],
@@ -118,6 +117,9 @@ GROUPS = {
         ["python3", "scripts/test_write_workflow_toolchain_provenance.py"],
         ["python3", "scripts/test_no_remote_script_execution.py"],
         ["python3", "scripts/test_system_tool_version_recording.py"],
+    ],
+    "verification-index": [
+        ["python3", "scripts/build_agent_declared_verification_index_from_issues.py", "--repo", "thechurchofagi/trinity-accord", "--check"],
     ],
     "echo-archive": [
         ["python3", "scripts/test_echo_human_review_archive_authorization.py"],
