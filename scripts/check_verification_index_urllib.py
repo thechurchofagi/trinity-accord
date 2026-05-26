@@ -41,12 +41,30 @@ def fetch_issues(repo, state="closed", limit=10000):
         })
         if not batch:
             break
-        issues.extend(batch)
+
+        for item in batch:
+            if "pull_request" in item:
+                continue
+
+            issues.append({
+                "number": item.get("number"),
+                "title": item.get("title") or "",
+                "body": item.get("body") or "",
+                "closedAt": item.get("closed_at") or "",
+                "createdAt": item.get("created_at") or "",
+                "url": item.get("html_url") or item.get("url") or "",
+                "labels": item.get("labels") or [],
+            })
+
+            if len(issues) >= limit:
+                break
+
         page += 1
         if len(batch) < 100:
             break
         if page > 100:
             break
+
     return issues
 
 
