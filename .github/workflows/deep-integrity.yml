@@ -37,9 +37,7 @@ jobs:
           node-version: "20"
 
       - name: Install Python test dependencies
-        run: |
-          python3 -m pip install --upgrade pip
-          python3 -m pip install jsonschema pyyaml
+        run: python3 -m pip install -r requirements-ci.txt
 
       - name: Run CI group
         run: python3 scripts/run_ci_group.py ${{ matrix.group }}
