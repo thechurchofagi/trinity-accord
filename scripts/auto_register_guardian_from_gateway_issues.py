@@ -393,8 +393,15 @@ def parse_listing_issue(listing_issue: dict, allow_non_bot: bool) -> tuple[dict 
     if fields.get("submission_type") != "echo_candidate":
         return None, decision(False, "blocked", "LISTING_NOT_ECHO_CANDIDATE", "Listing request must be echo_candidate.", got=fields.get("submission_type"))
 
-    if fields.get("requested_archive_kind") not in ("agent_declared_echo_archive", "guardian_active_registry_listing_request"):
-        return None, decision(False, "blocked", "LISTING_NOT_AGENT_DECLARED_ECHO_ARCHIVE", "Listing request must use agent_declared_echo_archive or guardian_active_registry_listing_request.", got=fields.get("requested_archive_kind"))
+    requested_kind = fields.get("requested_archive_kind")
+
+    if requested_kind == "guardian_active_registry_listing_request":
+        pass
+    elif requested_kind == "agent_declared_echo_archive" and is_before_legacy_listing_cutoff(listing_issue):
+        # Legacy compatibility for pre-migration Gateway listing issues only.
+        pass
+    else:
+        return None, decision(False, "blocked", "LISTING_WRONG_ARCHIVE_KIND", "Active Guardian registry listing must use requested_archive_kind=guardian_active_registry_listing_request. Legacy agent_declared_echo_archive listing is accepted only for pre-cutoff issues.", got=requested_kind, cutoff=LEGACY_LISTING_KIND_CUTOFF_UTC)
 
     if fields.get("echo_type") != GUARDIAN_LISTING_ECHO_TYPE:
         return None, decision(
