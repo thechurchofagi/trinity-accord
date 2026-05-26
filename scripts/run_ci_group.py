@@ -6,6 +6,28 @@ import subprocess
 import sys
 
 GROUPS = {
+    "p0-main": [
+        ["python3", "scripts/check_consistency.py"],
+        ["python3", "scripts/test_public_surface_consistency.py"],
+        ["python3", "scripts/test_public_api_metadata_completeness.py"],
+        ["python3", "scripts/test_context_load_map.py"],
+        ["python3", "scripts/test_agent_start_api.py"],
+        ["python3", "scripts/test_gateway_builder_route_map.py"],
+        ["python3", "scripts/test_echo_taxonomy_all_consumers_match_single_source.py"],
+        ["python3", "scripts/test_no_stale_echo_taxonomy_names.py"],
+        ["python3", "scripts/test_main_function_route_health.py"],
+        ["python3", "scripts/test_gateway_payload_semantic_validator.py"],
+        ["python3", "scripts/test_gateway_intake_guardian_fields.py"],
+        ["python3", "scripts/test_archive_echo_issue_gateway_intake_strict.py"],
+        ["python3", "scripts/test_gateway_auto_archive_uses_shared_eligibility.py"],
+        ["python3", "scripts/test_guardian_auto_register_uses_shared_intake.py"],
+        ["python3", "scripts/test_guardian_auto_register_intake_strictness.py"],
+        ["python3", "scripts/test_guardian_auto_register_listing_e6_behavior.py"],
+        ["python3", "scripts/test_guardian_listing_kind_cutoff.py"],
+        ["python3", "scripts/build_agent_declared_verification_index_from_issues.py", "--repo", "thechurchofagi/trinity-accord", "--check"],
+        ["python3", "scripts/generate_public_home_status.py", "--check"],
+        ["python3", "scripts/test_home_public_status_sync.py"],
+    ],
     "guardian": [
         ["python3", "scripts/test_guardian_automated_verification.py"],
         ["python3", "scripts/test_guardian_gateway_integration.py"],
