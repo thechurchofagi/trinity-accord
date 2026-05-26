@@ -11,6 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 CORE_JSON = [
     "api/agent-minimal-context.v1.json",
+    "api/agent-first-contact.json",
     "api/agent-output-policy.v1.json",
     "api/agent-task-router.v1.json",
     "api/agent-start.v1.json",
