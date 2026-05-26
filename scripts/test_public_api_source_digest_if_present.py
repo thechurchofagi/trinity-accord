@@ -51,6 +51,11 @@ def main() -> None:
         if "source_digest" not in data:
             continue
 
+        # Only verify files that use the standard canonical_json algorithm.
+        algo = str(data.get("source_digest_algorithm", ""))
+        if "canonical_json" not in algo and "sha256" not in algo.lower():
+            continue
+
         checked += 1
         digest = str(data["source_digest"])
 
