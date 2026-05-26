@@ -123,6 +123,11 @@ required = [
     # v18 pages custom domain / live smoke guards
     "python3 scripts/test_pages_custom_domain_contract.py",
 
+    # v19 pages live cache diagnostics & action allowlist
+    "python3 scripts/test_live_discovery_smoke_cache_diagnostics.py",
+    "python3 scripts/test_pages_diagnose_cache_busted.py",
+    "python3 scripts/test_deploy_pages_action_allowlist.py",
+
     # Generated drift
     "python3 scripts/check_verification_index_urllib.py --repo thechurchofagi/trinity-accord",
     "python3 scripts/generate_public_home_status.py --check",
