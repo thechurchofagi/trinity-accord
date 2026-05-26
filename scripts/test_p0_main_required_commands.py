@@ -64,6 +64,13 @@ required = [
     "python3 scripts/test_workflow_warning_allowlist.py",
     "python3 scripts/test_echo_triage_rate_classifier_ambiguity_guards.py",
 
+    # v9 first-contact echo taxonomy + links + prose + exit/readback
+    "python3 scripts/test_agent_first_contact_echo_types_canonical.py",
+    "python3 scripts/test_agent_facing_pure_echo_routes_canonical.py",
+    "python3 scripts/test_links_expose_first_contact_entrypoints.py",
+    "python3 scripts/test_first_contact_text_no_stale_route_guidance.py",
+    "python3 scripts/test_agent_exit_readback_policy.py",
+
     # Generated drift
     "python3 scripts/check_verification_index_urllib.py --repo thechurchofagi/trinity-accord",
     "python3 scripts/generate_public_home_status.py --check",

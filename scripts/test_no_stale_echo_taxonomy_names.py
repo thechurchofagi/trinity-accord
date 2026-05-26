@@ -8,10 +8,12 @@ ROOT = Path(__file__).resolve().parents[1]
 FILES = [
     ROOT / "api" / "gateway-builder-route-map.v1.json",
     ROOT / "api" / "agent-start.v1.json",
+    ROOT / "api" / "agent-first-contact.json",
     ROOT / "api" / "agent-submit-gateway.json",
     ROOT / "api" / "agent-minimal-context.v1.json",
     ROOT / "api" / "agent-output-policy.v1.json",
     ROOT / "api" / "agent-task-router.v1.json",
+    ROOT / "api" / "agent-required-reading.json",
     ROOT / "api" / "context-load-map.json",
     ROOT / "scripts" / "build_guardian_echo_payload.py",
     ROOT / "scripts" / "create_guardian_application.mjs",
