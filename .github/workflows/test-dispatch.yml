@@ -1,6 +1,7 @@
 name: Test Dispatch
 
 on:
+  # Only trigger via manual dispatch, not on push/PR
   workflow_dispatch:
     inputs:
       test_input:
