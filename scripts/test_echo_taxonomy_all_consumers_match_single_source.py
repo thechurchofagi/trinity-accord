@@ -62,4 +62,16 @@ for issue_number, override in overrides.items():
             print(f"FAIL: override #{issue_number} uses non-canonical echo_type={echo_type!r}")
             sys.exit(1)
 
+
+# 7. Gateway builder route map echo_types
+route_map = json.loads((ROOT / "api" / "gateway-builder-route-map.v1.json").read_text(encoding="utf-8"))
+for route_id, route in route_map.get("routes", {}).items():
+    for echo_type in route.get("echo_types", []):
+        if echo_type not in allowed:
+            print(
+                f"FAIL: gateway-builder-route-map.v1.json route {route_id!r} "
+                f"uses non-canonical echo_type={echo_type!r}"
+            )
+            sys.exit(1)
+
 print("PASS: all Echo taxonomy consumers match single source")
