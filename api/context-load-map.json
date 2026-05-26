@@ -95,41 +95,102 @@
   },
   "context_packs_inventory": {
     "core-ontology.json": {
+      "path": "/api/context-packs/core-ontology.json",
+      "public": true,
+      "required_for": [
+        "CC-1",
+        "CC-2",
+        "CC-3",
+        "CC-4",
+        "CC-5"
+      ],
       "size": "852B",
       "cc_level": "CC-2",
       "content": "Three Bitcoin Originals role summaries"
     },
     "authority-boundary.json": {
+      "path": "/api/context-packs/authority-boundary.json",
+      "public": true,
+      "required_for": [
+        "CC-1",
+        "CC-2",
+        "CC-3",
+        "CC-4",
+        "CC-5"
+      ],
       "size": "617B",
       "cc_level": "CC-2",
       "content": "Authority boundary rules"
     },
     "bitcoin-inscription-mirrors.json": {
+      "path": "/api/context-packs/bitcoin-inscription-mirrors.json",
+      "public": true,
+      "required_for": [
+        "CC-2",
+        "CC-3",
+        "CC-4",
+        "CC-5"
+      ],
       "size": "837B",
       "cc_level": "CC-2",
       "content": "Inscription mirror loading guidance"
     },
     "vision-layer.json": {
+      "path": "/api/context-packs/vision-layer.json",
+      "public": true,
+      "required_for": [
+        "CC-2",
+        "CC-3",
+        "CC-4",
+        "CC-5"
+      ],
       "size": "2.9KB",
       "cc_level": "CC-3",
       "content": "Vision-layer inscription summaries (Star Ark, Final Seal, First Echoes, Guardian inscriptions)"
     },
     "physical-anchor-context.json": {
+      "path": "/api/context-packs/physical-anchor-context.json",
+      "public": true,
+      "required_for": [
+        "CC-3",
+        "CC-4",
+        "CC-5"
+      ],
       "size": "776B",
       "cc_level": "CC-3",
       "content": "Core Object Alpha physical anchor status"
     },
     "legacy-archive-index.json": {
+      "path": "/api/context-packs/legacy-archive-index.json",
+      "public": true,
+      "required_for": [
+        "CC-3",
+        "CC-4",
+        "CC-5"
+      ],
       "size": "830B",
       "cc_level": "CC-3",
       "content": "Legacy archive section index"
     },
     "nft-chronicle-context.json": {
+      "path": "/api/context-packs/nft-chronicle-context.json",
+      "public": true,
+      "required_for": [
+        "CC-3",
+        "CC-4",
+        "CC-5"
+      ],
       "size": "4.8KB",
       "cc_level": "CC-3",
       "content": "NFT Chronicle full index and status"
     },
     "legacy-archive-essentials.json": {
+      "path": "/api/context-packs/legacy-archive-essentials.json",
+      "public": true,
+      "required_for": [
+        "CC-4",
+        "CC-5"
+      ],
       "size": "~12KB",
       "cc_level": "CC-3",
       "content": "Structured extract of essential legacy archive sections"

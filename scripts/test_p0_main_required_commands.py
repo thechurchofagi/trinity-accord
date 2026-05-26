@@ -28,13 +28,32 @@ if not p0:
 cmds = {" ".join(cmd) for cmd in p0}
 
 required = [
-    "python3 scripts/test_agent_p0_router_contract.py",
-    "python3 scripts/check_verification_index_urllib.py --repo thechurchofagi/trinity-accord",
+    # Public surface
     "python3 scripts/test_sitemap_public_sources_exist.py",
+    "python3 scripts/test_sitemap_includes_nested_api_json.py",
+    "python3 scripts/test_sitemap_permalink_matches_source.py",
+    "python3 scripts/test_public_referenced_paths_exist.py",
+    "python3 scripts/test_public_referenced_paths_core_set.py",
     "python3 scripts/test_public_api_sitemap_coverage.py",
+    "python3 scripts/test_public_api_metadata_general_not_pass.py",
+    "python3 scripts/test_public_api_metadata_tier_b_schema_required.py",
     "python3 scripts/test_public_api_metadata_completeness.py",
     "python3 scripts/test_main_pages_have_machine_counterparts.py",
+
+    # Context / agent routing
+    "python3 scripts/test_context_load_map.py",
+    "python3 scripts/test_context_pack_inventory_paths.py",
+    "python3 scripts/test_agent_p0_router_contract.py",
     "python3 scripts/test_e2_verification_echo_not_pure_echo.py",
+
+    # Consistency split guard
+    "python3 scripts/check_public_core_consistency.py",
+    "python3 scripts/test_p0_uses_public_core_consistency.py",
+
+    # Generated drift
+    "python3 scripts/check_verification_index_urllib.py --repo thechurchofagi/trinity-accord",
+    "python3 scripts/generate_public_home_status.py --check",
+    "python3 scripts/test_home_public_status_sync.py",
 ]
 
 missing = [r for r in required if r not in cmds]

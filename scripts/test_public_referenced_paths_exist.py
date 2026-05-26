@@ -17,6 +17,16 @@ CORE_JSON = [
     "api/context-load-map.json",
     "api/gateway-builder-route-map.v1.json",
     "api/public-home-status.json",
+
+    # Additional machine entrypoints / link roots.
+    "api/agent-required-reading.json",
+    "api/agent-entry-protocol.json",
+    "api/agent-tasks.json",
+    "api/links.json",
+    "api/gateway-workflows.v1.json",
+    "api/guardian-active-listing-policy.v1.json",
+    "api/external-agent-quickstart.json",
+    "api/agent-submit-gateway.json",
 ]
 
 IGNORE_PREFIXES = (
@@ -34,6 +44,11 @@ IGNORE_VALUES = {
     "Gateway workflow overview",
     "Task-specific API schemas and verification recipes",
     "/gateway/preflight",
+    "/healthz",
+    "/readiness",
+    "/chronicle/music",
+    "/chronicle/human-witness",
+    "/recovery",
 }
 
 def extract_strings(obj):

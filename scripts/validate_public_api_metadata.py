@@ -110,14 +110,27 @@ def is_route_context_status_api(rel: str) -> bool:
     return any(pat in name for pat in ROUTE_CONTEXT_STATUS_PATTERNS)
 
 
+TIER_B_SCHEMA_IDENTITY_EXEMPT: set[str] = {
+    # Keep empty if possible.
+    # Add a file only with a reason and issue/PR reference.
+}
+
 def validate_minimal_public_api(rel: str, path: Path, data: dict) -> list[str]:
     errors = []
-    # Schema identity is recommended but not enforced for legacy route/context/status APIs.
-    # Version check: skip if schema identity embeds version or file is a schema definition.
+
+    if (
+        rel not in TIER_B_SCHEMA_IDENTITY_EXEMPT
+        and "schema" not in data
+        and "$schema" not in data
+    ):
+        errors.append(f"{rel}: missing schema/$schema")
+
     schema_val = str(data.get("schema") or data.get("$schema") or "")
     has_embedded_version = bool(re.search(r"\.v\d+", schema_val))
+
     if "version" not in data and not is_schema_file(rel, data) and not has_embedded_version:
         errors.append(f"{rel}: missing version")
+
     return errors
 
 

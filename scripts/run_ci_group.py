@@ -7,19 +7,23 @@ import sys
 
 GROUPS = {
     "p0-main": [
-        # Public surface
-        ["python3", "scripts/check_consistency.py"],
+        # Public surface / sitemap / API metadata
+        ["python3", "scripts/check_public_core_consistency.py"],
         ["python3", "scripts/test_sitemap_public_sources_exist.py"],
         ["python3", "scripts/test_sitemap_includes_nested_api_json.py"],
+        ["python3", "scripts/test_sitemap_permalink_matches_source.py"],
         ["python3", "scripts/test_public_referenced_paths_exist.py"],
+        ["python3", "scripts/test_public_referenced_paths_core_set.py"],
         ["python3", "scripts/test_public_surface_consistency.py"],
         ["python3", "scripts/test_public_api_sitemap_coverage.py"],
         ["python3", "scripts/test_public_api_metadata_general_not_pass.py"],
+        ["python3", "scripts/test_public_api_metadata_tier_b_schema_required.py"],
         ["python3", "scripts/test_public_api_metadata_completeness.py"],
         ["python3", "scripts/test_main_pages_have_machine_counterparts.py"],
 
         # Context / agent routing
         ["python3", "scripts/test_context_load_map.py"],
+        ["python3", "scripts/test_context_pack_inventory_paths.py"],
         ["python3", "scripts/test_agent_start_api.py"],
         ["python3", "scripts/test_agent_start_echo_taxonomy_wording.py"],
         ["python3", "scripts/test_agent_p0_router_contract.py"],
@@ -47,8 +51,9 @@ GROUPS = {
         ["python3", "scripts/generate_public_home_status.py", "--check"],
         ["python3", "scripts/test_home_public_status_sync.py"],
 
-        # P0 group guard
+        # P0 group guards
         ["python3", "scripts/test_p0_main_required_commands.py"],
+        ["python3", "scripts/test_p0_uses_public_core_consistency.py"],
     ],
     "guardian": [
         ["python3", "scripts/test_guardian_automated_verification.py"],
@@ -191,6 +196,12 @@ GROUPS = {
         ["python3", "scripts/test_gateway_workflow_docs.py"],
         ["python3", "scripts/test_gateway_workflow_api.py"],
         ["node", "examples/github-app-backend/test-gateway-error-workflow-context.mjs"],
+    ],
+    "legacy-regressions": [
+        ["python3", "scripts/check_consistency.py"],
+    ],
+    "pages-build": [
+        ["bash", "scripts/test_jekyll_build_smoke.sh"],
     ],
 }
 

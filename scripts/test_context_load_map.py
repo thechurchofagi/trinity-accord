@@ -48,11 +48,30 @@ for pack in [
         print(f"FAIL: context_packs_inventory missing {pack}")
         sys.exit(1)
 
-# For API-hosted packs, verify real files.
-api_pack = ROOT / "api" / "context-packs" / "nft-chronicle-context.json"
-if not api_pack.exists():
-    print("FAIL: missing api/context-packs/nft-chronicle-context.json")
-    sys.exit(1)
+# Validate each context pack has path-explicit metadata.
+for pack_name, meta in inventory.items():
+    if not isinstance(meta, dict):
+        print(f"FAIL: context pack {pack_name} metadata must be object")
+        sys.exit(1)
+
+    path_value = meta.get("path")
+    if not isinstance(path_value, str) or not path_value.startswith("/"):
+        print(f"FAIL: context pack {pack_name} missing absolute public path")
+        sys.exit(1)
+
+    local = ROOT / path_value.lstrip("/")
+    if not local.exists():
+        print(f"FAIL: context pack {pack_name} path missing local artifact: {path_value}")
+        sys.exit(1)
+
+    if meta.get("public") is not True:
+        print(f"FAIL: context pack {pack_name} must declare public=true")
+        sys.exit(1)
+
+    required_for = meta.get("required_for")
+    if not isinstance(required_for, list) or not required_for:
+        print(f"FAIL: context pack {pack_name} missing non-empty required_for")
+        sys.exit(1)
 
 if obj.get("agent_task_router") != "/api/agent-task-router.v1.json":
     print("FAIL: context-load-map agent_task_router pointer mismatch")
