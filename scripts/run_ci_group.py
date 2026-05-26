@@ -8,12 +8,16 @@ import sys
 GROUPS = {
     "p0-main": [
         ["python3", "scripts/check_consistency.py"],
+        ["python3", "scripts/test_sitemap_public_sources_exist.py"],
         ["python3", "scripts/test_public_surface_consistency.py"],
+        ["python3", "scripts/test_public_api_sitemap_coverage.py"],
         ["python3", "scripts/test_public_api_metadata_completeness.py"],
+        ["python3", "scripts/test_main_pages_have_machine_counterparts.py"],
 
         ["python3", "scripts/test_agent_start_api.py"],
         ["python3", "scripts/test_agent_start_echo_taxonomy_wording.py"],
         ["python3", "scripts/test_main_function_route_health.py"],
+        ["python3", "scripts/test_e2_verification_echo_not_pure_echo.py"],
 
         ["python3", "scripts/test_gateway_builder_route_map.py"],
         ["python3", "scripts/test_echo_taxonomy_all_consumers_match_single_source.py"],
@@ -95,6 +99,7 @@ GROUPS = {
         ["python3", "scripts/test_gateway_render_no_null_identity_intake_fields.py"],
         ["node", "examples/github-app-backend/test-placeholder-detector.mjs"],
         ["python3", "scripts/test_guardian_oath_readback_sha.py"],
+        ["python3", "scripts/test_guardian_body_fallback_missing_timestamp_policy.py"],
 
     ],
     "chronicle": [

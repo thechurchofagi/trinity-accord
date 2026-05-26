@@ -8,7 +8,9 @@ Usage:
 import json
 import re
 import sys
+import xml.etree.ElementTree as ET
 from pathlib import Path
+from urllib.parse import urlparse
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
@@ -38,6 +40,63 @@ REQUIRED_FIELDS = [
 
 # Schema files are exempt from metadata requirements
 SCHEMA_EXEMPT_PATTERN = re.compile(r"schema", re.I)
+
+# Tiered API coverage
+CORE_API_FULL_METADATA = set(PUBLIC_API_REQUIRED)
+
+ROUTE_CONTEXT_STATUS_PATTERNS = [
+    "agent-start",
+    "context-load-map",
+    "gateway-builder-route-map",
+    "gateway-workflows",
+    "guardian-registry",
+    "guardian-active-listing-policy",
+    "public-home-status",
+    "agent-submit-gateway",
+    "agent-task-router",
+    "agent-context-readiness",
+    "external-agent-quickstart",
+]
+
+
+def sitemap_api_json_files() -> list[str]:
+    sitemap = ROOT / "sitemap.xml"
+    if not sitemap.exists():
+        return []
+    tree = ET.parse(sitemap)
+    ns = {"sm": "http://www.sitemaps.org/schemas/sitemap/0.9"}
+    out = []
+    for loc_el in tree.findall(".//sm:loc", ns):
+        loc = (loc_el.text or "").strip()
+        parsed = urlparse(loc)
+        if parsed.path.startswith("/api/") and parsed.path.endswith(".json"):
+            rel = parsed.path.lstrip("/")
+            out.append(rel)
+    return sorted(set(out))
+
+
+def is_schema_file(rel: str, data: dict) -> bool:
+    name = Path(rel).name.lower()
+    if "schema" in name:
+        return True
+    schema_value = str(data.get("$schema") or data.get("schema") or "").lower()
+    return "json-schema" in schema_value or "schema" in name
+
+
+def is_route_context_status_api(rel: str) -> bool:
+    name = Path(rel).name
+    return any(pat in name for pat in ROUTE_CONTEXT_STATUS_PATTERNS)
+
+
+def validate_minimal_public_api(rel: str, path: Path, data: dict) -> list[str]:
+    errors = []
+    # Schema identity is recommended but not enforced for legacy route/context/status APIs.
+    # Version check: skip if schema identity embeds version or file is a schema definition.
+    schema_val = str(data.get("schema") or data.get("$schema") or "")
+    has_embedded_version = bool(re.search(r"\.v\d+", schema_val))
+    if "version" not in data and not is_schema_file(rel, data) and not has_embedded_version:
+        errors.append(f"{rel}: missing version")
+    return errors
 
 
 def validate_file(path: Path) -> list[str]:
@@ -97,12 +156,39 @@ def validate_file(path: Path) -> list[str]:
 
 def validate_all() -> list[str]:
     errors = []
-    for rel in PUBLIC_API_REQUIRED:
+
+    all_api = sitemap_api_json_files()
+    required = sorted(set(PUBLIC_API_REQUIRED) | set(all_api))
+
+    for rel in required:
         path = ROOT / rel
         if not path.exists():
             errors.append(f"{rel}: file not found")
             continue
-        errors.extend(validate_file(path))
+
+        try:
+            data = json.loads(path.read_text(encoding="utf-8"))
+        except Exception as e:
+            errors.append(f"{rel}: JSON parse error: {e}")
+            continue
+
+        if not isinstance(data, dict):
+            errors.append(f"{rel}: not a JSON object")
+            continue
+
+        if rel in CORE_API_FULL_METADATA:
+            errors.extend(validate_file(path))
+        elif is_schema_file(rel, data):
+            # Schemas must parse and identify themselves but do not need source_digest.
+            if "schema" not in data and "$schema" not in data:
+                errors.append(f"{rel}: schema file missing schema/$schema identity")
+        elif is_route_context_status_api(rel):
+            errors.extend(validate_minimal_public_api(rel, path, data))
+        else:
+            # General public API: parse and identify.
+            # Schema identity is recommended but not enforced for legacy files.
+            pass
+
     return errors
 
 
