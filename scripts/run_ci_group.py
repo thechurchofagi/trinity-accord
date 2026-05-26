@@ -56,6 +56,12 @@ GROUPS = {
         ["python3", "scripts/test_gateway_workflow_human_cli_contract.py"],
         ["python3", "scripts/test_gateway_workflows_correction_scope_wording.py"],
 
+        # Post-submit readback contract (v12)
+        ["python3", "scripts/test_gateway_workflows_post_submit_readback_contract.py"],
+        ["python3", "scripts/test_submit_success_does_not_equal_archived_wording.py"],
+        ["python3", "scripts/test_agent_task_router_submit_echo_reads_workflow_manual.py"],
+        ["python3", "scripts/test_agent_first_contact_echo_reads_workflow_manual.py"],
+
         # Gateway / Guardian core
         ["python3", "scripts/test_gateway_endpoint_contracts.py"],
         ["python3", "scripts/test_gateway_payload_semantic_validator.py"],
