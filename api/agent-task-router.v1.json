@@ -110,8 +110,15 @@
         "/api/guardian-alliance.json",
         "/api/guardian-registry.json",
         "/api/guardian-presence-proof-schema.v1.json",
-        "/api/guardian-verification-result-schema.v1.json"
+        "/api/guardian-verification-result-schema.v1.json",
+        "/gateway-workflows/",
+        "/api/gateway-workflows.v1.json",
+        "/api/agent-submit-gateway.json",
+        "/api/agent-output-policy.v1.json"
       ],
+      "must_use_workflow_manual": "/gateway-workflows/",
+      "must_use_workflow_machine_api": "/api/gateway-workflows.v1.json",
+      "must_follow_post_submit_readback": true,
       "helper_scripts": [
         "scripts/guardian_common.py",
         "scripts/attach_guardian_presence_proof.mjs",
@@ -268,5 +275,5 @@
     "physical anchor verification by the current agent unless separately performed"
   ],
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "e9ff7e0753665f18"
+  "source_digest": "ae8b4ac562cf2259"
 }

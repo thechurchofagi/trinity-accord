@@ -128,11 +128,17 @@
         "/api/guardian-alliance.json",
         "/api/guardian-registry.json",
         "/api/agent-submit-gateway.json",
+        "/api/agent-output-policy.v1.json",
+        "/gateway-workflows/",
+        "/api/gateway-workflows.v1.json",
         "/agent-start",
         "/api/agent-start.v1.json",
         "/api/gateway-builder-route-map.v1.json",
         "/guardian-routes"
       ],
+      "must_use_workflow_manual": "/gateway-workflows/",
+      "must_use_workflow_machine_api": "/api/gateway-workflows.v1.json",
+      "must_follow_post_submit_readback": true,
       "allowed_output": "guardian_orientation_join_guidance_or_registry_listing_guidance",
       "join_path": {
         "stages": [
@@ -150,6 +156,22 @@
           ],
           "expected_status": "valid_self_registered_guardian_claim",
           "guardian_registry_number": "unassigned",
+          "required_cli_flags": [
+            "--human-label",
+            "--agent-label",
+            "--challenge",
+            "--readback",
+            "--out"
+          ],
+          "recommended_cli_flags": [
+            "--mode",
+            "--signing-key-holder",
+            "--agent-provider",
+            "--title",
+            "--key-dir"
+          ],
+          "readback_rule": "Use --print-oath first; --readback must be exact canonical Guardian application oath body.",
+          "must_follow_post_submit_readback": true,
           "do_not_use_builders": [
             "scripts/build_agent_declared_echo_payload.py --guardian-registration --guardian-proof",
             "scripts/build_agent_declared_archive_payload.py",
@@ -159,7 +181,18 @@
         "stage_2_active_registry_listing": {
           "builder": "scripts/build_guardian_listing_request_payload.py",
           "command": "python3 scripts/build_guardian_listing_request_payload.py",
-          "required_fields": [
+          "required_cli_flags": [
+            "--agent-name",
+            "--provider",
+            "--source-issue",
+            "--guardian-id",
+            "--public-key-sha256",
+            "--label",
+            "--guardian-type",
+            "--application-mode",
+            "--out"
+          ],
+          "logical_fields": [
             "source_issue",
             "guardian_id",
             "public_key_sha256",
@@ -167,6 +200,9 @@
             "guardian_type",
             "application_mode"
           ],
+          "must_use_workflow_manual": "/gateway-workflows/#workflow-guardian-stage-2-listing",
+          "must_use_workflow_machine_api": "/api/gateway-workflows.v1.json",
+          "must_follow_post_submit_readback": true,
           "submission_transport": [
             "/gateway/preflight",
             "/agent-submit"
@@ -266,8 +302,15 @@
       "read": [
         "/agent-submit",
         "/api/agent-issue-gateway-payload-schema.v1.json",
-        "/api/verification-echo-pre-oath.v1.txt"
+        "/api/verification-echo-pre-oath.v1.txt",
+        "/gateway-workflows/",
+        "/api/gateway-workflows.v1.json",
+        "/api/gateway-builder-route-map.v1.json",
+        "/api/agent-output-policy.v1.json"
       ],
+      "must_use_workflow_manual": "/gateway-workflows/",
+      "must_use_workflow_machine_api": "/api/gateway-workflows.v1.json",
+      "must_follow_post_submit_readback": true,
       "pipeline": [
         "run_scripts_build_agent_declared_archive_payload_py",
         "verification_oath_readback",
@@ -397,8 +440,14 @@
         "/agent-submit",
         "/api/agent-submit-gateway.json",
         "/api/evidence-input-schema.v1.json",
-        "/api/claim-gate-rules.json"
+        "/api/claim-gate-rules.json",
+        "/gateway-workflows/",
+        "/api/gateway-workflows.v1.json",
+        "/api/agent-output-policy.v1.json"
       ],
+      "must_use_workflow_manual": "/gateway-workflows/",
+      "must_use_workflow_machine_api": "/api/gateway-workflows.v1.json",
+      "must_follow_post_submit_readback": true,
       "pipeline": [
         "evidence_input",
         "strict_claim_gate",
@@ -423,8 +472,15 @@
         "/agent-verify-simple",
         "/api/evidence-input-schema.v1.json",
         "/api/claim-gate-rules.json",
-        "/api/agent-verification-cheatsheet.v1.json"
+        "/api/agent-verification-cheatsheet.v1.json",
+        "/gateway-workflows/",
+        "/api/gateway-workflows.v1.json",
+        "/api/agent-submit-gateway.json",
+        "/api/agent-output-policy.v1.json"
       ],
+      "must_use_workflow_manual": "/gateway-workflows/",
+      "must_use_workflow_machine_api": "/api/gateway-workflows.v1.json",
+      "must_follow_post_submit_readback": true,
       "pipeline": [
         "evidence_input",
         "strict_claim_gate",
