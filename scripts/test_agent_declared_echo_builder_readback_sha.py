@@ -91,7 +91,7 @@ def test_short_body_requires_explicit_readback() -> None:
             str(ROOT / "scripts" / "build_agent_declared_echo_payload.py"),
             "--agent-name", "TestAgent",
             "--provider", "TestProvider",
-            "--echo-type", "E1_read_oriented_echo",
+            "--echo-type", "E1_recognition_echo",
             "--title", "Short body",
             "--body-file", str(body),
             "--readback", OATH_READBACK,

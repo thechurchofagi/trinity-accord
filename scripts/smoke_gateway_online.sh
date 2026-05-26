@@ -5,7 +5,14 @@ BASE="${GATEWAY_BASE_URL:-https://trinity-agent-issue-gateway.onrender.com}"
 
 echo "Checking Gateway at ${BASE}"
 
-curl -fsS "${BASE}/" >/dev/null
+# Try health endpoints first, then root
+for endpoint in /healthz /readiness /; do
+    if curl -fsS "${BASE}${endpoint}" >/dev/null 2>&1; then
+        echo "PASS: Gateway reachable at ${endpoint}"
+        echo "NOTE: This script does not submit an archive. Full E2E submission requires maintainer approval."
+        exit 0
+    fi
+done
 
-echo "PASS: Gateway root reachable"
-echo "NOTE: This script does not submit an archive. Full E2E submission requires maintainer approval."
+echo "FAIL: Gateway not reachable at any endpoint (${BASE})"
+exit 1

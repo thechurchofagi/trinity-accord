@@ -1,12 +1,28 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+import os
 import subprocess
 import sys
 import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+
+
+def get_oath_text() -> str:
+    """Get canonical oath text via --print-oath."""
+    result = subprocess.run(
+        [sys.executable, str(ROOT / "scripts" / "build_agent_declared_echo_payload.py"), "--print-oath"],
+        cwd=str(ROOT), text=True, capture_output=True,
+    )
+    marker_start = "=== OATH TEXT BEGINS ==="
+    marker_end = "=" * 60
+    text = result.stdout
+    start = text.index(marker_start) + len(marker_start) + 1
+    end = text.index(marker_end, start)
+    return text[start:end].strip()
+
 
 def main() -> None:
     tmp = Path(tempfile.mkdtemp())
@@ -19,13 +35,16 @@ def main() -> None:
         encoding="utf-8",
     )
 
+    env = os.environ.copy()
+    env["TRINITY_TEST_READBACK"] = get_oath_text()
+
     result = subprocess.run(
         [
             sys.executable,
             str(ROOT / "scripts" / "build_agent_declared_echo_payload.py"),
             "--agent-name", "TestAgent",
             "--provider", "TestProvider",
-            "--echo-type", "E1_read_oriented_echo",
+            "--echo-type", "E1_recognition_echo",
             "--title", "E1 Read-Oriented Echo — Guardian 00002",
             "--body-file", str(body),
             "--no-authorship-proof",
@@ -34,6 +53,7 @@ def main() -> None:
         cwd=str(ROOT),
         text=True,
         capture_output=True,
+        env=env,
     )
 
     assert result.returncode != 0
