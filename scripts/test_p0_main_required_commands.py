@@ -50,6 +50,14 @@ required = [
     "python3 scripts/check_public_core_consistency.py",
     "python3 scripts/test_p0_uses_public_core_consistency.py",
 
+    # P0 group guards
+    "python3 scripts/test_deep_integrity_includes_pages_build.py",
+    "python3 scripts/test_gateway_online_smoke_workflow.py",
+    "python3 scripts/test_public_core_consistency_required_links.py",
+    "python3 scripts/test_gateway_endpoint_contracts.py",
+    "python3 scripts/test_sitemap_permalink_parser_uses_yaml.py",
+    "python3 scripts/test_generate_sitemap_docstring_recursive_api.py",
+
     # Generated drift
     "python3 scripts/check_verification_index_urllib.py --repo thechurchofagi/trinity-accord",
     "python3 scripts/generate_public_home_status.py --check",

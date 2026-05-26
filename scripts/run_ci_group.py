@@ -12,6 +12,8 @@ GROUPS = {
         ["python3", "scripts/test_sitemap_public_sources_exist.py"],
         ["python3", "scripts/test_sitemap_includes_nested_api_json.py"],
         ["python3", "scripts/test_sitemap_permalink_matches_source.py"],
+        ["python3", "scripts/test_sitemap_permalink_parser_uses_yaml.py"],
+        ["python3", "scripts/test_generate_sitemap_docstring_recursive_api.py"],
         ["python3", "scripts/test_public_referenced_paths_exist.py"],
         ["python3", "scripts/test_public_referenced_paths_core_set.py"],
         ["python3", "scripts/test_public_surface_consistency.py"],
@@ -36,6 +38,7 @@ GROUPS = {
         ["python3", "scripts/test_no_stale_echo_taxonomy_names.py"],
 
         # Gateway / Guardian core
+        ["python3", "scripts/test_gateway_endpoint_contracts.py"],
         ["python3", "scripts/test_gateway_payload_semantic_validator.py"],
         ["python3", "scripts/test_gateway_intake_guardian_fields.py"],
         ["python3", "scripts/test_archive_echo_issue_gateway_intake_strict.py"],
@@ -54,6 +57,9 @@ GROUPS = {
         # P0 group guards
         ["python3", "scripts/test_p0_main_required_commands.py"],
         ["python3", "scripts/test_p0_uses_public_core_consistency.py"],
+        ["python3", "scripts/test_deep_integrity_includes_pages_build.py"],
+        ["python3", "scripts/test_gateway_online_smoke_workflow.py"],
+        ["python3", "scripts/test_public_core_consistency_required_links.py"],
     ],
     "guardian": [
         ["python3", "scripts/test_guardian_automated_verification.py"],
