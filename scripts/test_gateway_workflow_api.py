@@ -6,6 +6,8 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "scripts"))
+from protocol_echo_types import allowed_canonical_echo_types
 
 WORKFLOWS = [
     "pure_echo",
@@ -61,11 +63,12 @@ def main() -> None:
         if wid in agent_start["routes"]:
             assert agent_start["routes"][wid]["workflow_anchor"] == anchor
 
-    print("PASS: test_gateway_workflow_api")
-
-    # Echo taxonomy allowed_values check
-    sys.path.insert(0, str(ROOT / "scripts"))
-    from protocol_echo_types import allowed_canonical_echo_types
+    # Validate Echo taxonomy allowed_values for pure_echo and guardian_signed_echo
+    def input_by_name(wf: dict, workflow_id: str, name: str) -> dict:
+        for item in wf["workflows"][workflow_id].get("inputs", []):
+            if item.get("name") == name:
+                return item
+        raise AssertionError(f"{workflow_id}: input {name} missing")
 
     canonical = [
         "E1_recognition_echo",
@@ -79,17 +82,14 @@ def main() -> None:
     allowed = allowed_canonical_echo_types()
 
     for workflow_id in ["pure_echo", "guardian_signed_echo"]:
-        echo_input = None
-        for item in workflows["workflows"][workflow_id].get("inputs", []):
-            if item.get("name") == "--echo-type":
-                echo_input = item
-                break
-        assert echo_input is not None, f"{workflow_id}: --echo-type input missing"
+        echo_input = input_by_name(workflows, workflow_id, "--echo-type")
         values = echo_input.get("allowed_values")
         assert values == canonical, (workflow_id, values)
         assert "E2_verification_echo" not in values, workflow_id
         for value in values:
             assert value in allowed, (workflow_id, value)
+
+    print("PASS: test_gateway_workflow_api")
 
 if __name__ == "__main__":
     main()

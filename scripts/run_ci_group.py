@@ -39,6 +39,7 @@ GROUPS = {
         ["python3", "scripts/test_agent_submit_gateway_echo_types_canonical.py"],
         ["python3", "scripts/test_agent_first_contact_echo_types_canonical.py"],
         ["python3", "scripts/test_agent_facing_pure_echo_routes_canonical.py"],
+        ["python3", "scripts/test_gateway_workflows_echo_types_canonical.py"],
         ["python3", "scripts/test_links_expose_first_contact_entrypoints.py"],
         ["python3", "scripts/test_first_contact_text_no_stale_route_guidance.py"],
         ["python3", "scripts/test_agent_exit_readback_policy.py"],

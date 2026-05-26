@@ -71,6 +71,9 @@ required = [
     "python3 scripts/test_first_contact_text_no_stale_route_guidance.py",
     "python3 scripts/test_agent_exit_readback_policy.py",
 
+    # v10 workflow taxonomy
+    "python3 scripts/test_gateway_workflows_echo_types_canonical.py",
+
     # source_digest broad sweep
     "python3 scripts/test_public_api_source_digest_if_present.py",
 
