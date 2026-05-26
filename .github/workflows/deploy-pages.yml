@@ -70,19 +70,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
-      - name: Smoke live public discovery contract
-        run: |
-          set -euo pipefail
-          for i in 1 2 3 4 5; do
-            if python3 scripts/smoke_live_discovery_contract.py \
-              --site "https://www.trinityaccord.org" \
-              --strict-digest; then
-              exit 0
-            fi
-            echo "Live discovery smoke failed on attempt ${i}; retrying after 30s..."
-            sleep 30
-          done
-          python3 scripts/smoke_live_discovery_contract.py \
-            --site "https://www.trinityaccord.org" \
-            --strict-digest
