@@ -6,9 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
 concurrency:
   group: pages
@@ -16,20 +14,34 @@ concurrency:
 
 jobs:
   deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          fetch-depth: 0
 
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e
+      - name: Deploy to gh-pages
+        run: |
+          set -e
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # Save current branch
+          CURRENT=$(git rev-parse --abbrev-ref HEAD)
+          
+          # Create gh-pages content from current main
+          git checkout --orphan gh-pages 2>/dev/null || git checkout gh-pages
+          git rm -rf --cached . 2>/dev/null || true
+          
+          # Add CNAME and .nojekyll
+          echo "www.trinityaccord.org" > CNAME
+          touch .nojekyll
+          
+          # Add everything
+          git add -A
+          git commit -m "deploy: update Pages from main" --allow-empty
+          git push origin gh-pages --force
+          
+          echo "Deployed to gh-pages successfully"
