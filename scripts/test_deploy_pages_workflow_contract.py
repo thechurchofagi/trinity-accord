@@ -32,6 +32,13 @@ required = [
     "_site/api/gateway-workflows.v1.json",
     "/api/gateway-workflows.v1.json",
     "gateway_workflows_json",
+    # v18 custom domain / live smoke
+    "_site/CNAME",
+    "www.trinityaccord.org",
+    "Verify deployment URL",
+    "Smoke live public discovery contract",
+    "smoke_live_discovery_contract.py",
+    "--strict-digest",
 ]
 
 for phrase in required:
