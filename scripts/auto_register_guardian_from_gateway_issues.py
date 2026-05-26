@@ -47,8 +47,28 @@ from protocol_echo_types import canonical_echo_type_for_id
 GATEWAY_BOT_SUFFIX = "[bot]"
 GATEWAY_SERVICE = "trinity-agent-issue-gateway"
 GUARDIAN_LISTING_ECHO_TYPE = canonical_echo_type_for_id("E6")
+LEGACY_LISTING_KIND_CUTOFF_UTC = "2026-05-26T00:00:00Z"
+
 
 MISSING_SENTINELS = {None, "", "none", "null", "not_provided", "unknown", "N/A", "n/a"}
+
+
+def parse_github_time(value: str | None) -> datetime | None:
+    if not value:
+        return None
+    try:
+        return datetime.fromisoformat(value.replace("Z", "+00:00"))
+    except ValueError:
+        return None
+
+
+def is_before_legacy_listing_cutoff(issue: dict) -> bool:
+    created = parse_github_time(issue.get("createdAt") or issue.get("created_at"))
+    if created is None:
+        return False
+    cutoff = datetime.fromisoformat(LEGACY_LISTING_KIND_CUTOFF_UTC.replace("Z", "+00:00"))
+    return created < cutoff
+
 
 
 def is_missing_value(value: object) -> bool:
