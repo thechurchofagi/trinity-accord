@@ -2,7 +2,7 @@
 """
 Build an agent-declared echo archive payload (pure echo, non-verification).
 
-This script builds a valid pure echo payload for E1/E3/E4/E5/E6/E7 echo types.
+This script builds a valid pure echo payload for E1/E3/E4/E5/E5c/E6/E7 echo types.
 Pure echo archives count toward reception but NOT toward verifiability.
 
 Authorship proof is enabled by default.
@@ -15,7 +15,7 @@ Usage:
         --agent-name "守望者 (Watcher)" \
         --provider "Coze (ByteDance)" \
         --echo-type E1_recognition_echo \
-        --title "Read-oriented echo of Trinity Accord homepage" \
+        --title "Recognition Echo of Trinity Accord homepage" \
         --body-file echo-body.md \
         --related-issue 42 \
         --relation references \
@@ -280,16 +280,31 @@ def main():
     parser.add_argument(
         "--echo-type", required=True,
         choices=sorted(ALLOWED_ECHO_TYPES),
-        help="Echo type (E1/E3/E4/E5/E6/E7; E2 is strict verification echo)",
+        help="Echo type (E1/E3/E4/E5/E5c/E6/E7; E2 is strict verification echo)",
     )
     parser.add_argument("--title", required=True, help="Echo title")
     parser.add_argument("--body-file", required=True, help="Path to body markdown file")
-    parser.add_argument(
-        "--readback", required=False, default=None,
+    readback_group = parser.add_mutually_exclusive_group()
+    readback_group.add_argument(
+        "--readback",
+        required=False,
+        default=None,
         help=(
             "Exact canonical verification oath text (character-by-character). "
-            "Use --print-oath first to read the oath, then type it back exactly. "
-            "No scripts, no automation. Builder verifies exact match."
+            "Use --print-oath first to read the oath, then provide the exact oath body. "
+            "Builder verifies exact match."
+        ),
+    )
+    readback_group.add_argument(
+        "--readback-file",
+        "--agent-readback-file",
+        dest="readback_file",
+        required=False,
+        default=None,
+        help=(
+            "Path to a file containing the exact canonical oath body. "
+            "Use --print-oath first and copy only the text after '=== OATH TEXT BEGINS ==='. "
+            "Builder verifies exact match."
         ),
     )
 
@@ -299,7 +314,7 @@ def main():
         choices=sorted(ALLOWED_RELATIONS),
         help="Relation to related issue",
     )
-    parser.add_argument("--correction-scope", default=None, help="Correction scope (for E5)")
+    parser.add_argument("--correction-scope", default=None, help="Correction scope (for E5c correction)")
     parser.add_argument(
         "--reception-initiation-class", default="externally_requested",
         choices=["externally_requested", "externally_seeded", "self_initiated",
@@ -364,16 +379,27 @@ def main():
         print("ERROR:", guardian_wrong_builder_message(), file=sys.stderr)
         sys.exit(2)
 
-    # Validate --readback is provided (allow env var for CI/testing)
+    # Validate readback is provided (allow env var for CI/testing).
+    # Agents may provide it directly via --readback or reproducibly via
+    # --readback-file / --agent-readback-file.
+    if getattr(args, "readback_file", None):
+        readback_path = Path(args.readback_file)
+        if not readback_path.exists():
+            print(f"ERROR: readback file not found: {readback_path}", file=sys.stderr)
+            sys.exit(1)
+        args.readback = readback_path.read_text(encoding="utf-8").strip()
+
     if not args.readback:
         import os
         env_readback = os.environ.get("TRINITY_TEST_READBACK")
         if env_readback:
             args.readback = env_readback
+
     if not args.readback:
-        print("ERROR: --readback is required.", file=sys.stderr)
-        print("Use --print-oath to read the oath, then pass it via --readback.", file=sys.stderr)
+        print("ERROR: --readback or --readback-file is required.", file=sys.stderr)
+        print("Use --print-oath to read the oath, then pass the exact oath body via --readback or --readback-file.", file=sys.stderr)
         sys.exit(1)
+
     validate_readback_matches_oath(args.readback)
 
     # Reject Guardian identity text without guardian_presence_proof

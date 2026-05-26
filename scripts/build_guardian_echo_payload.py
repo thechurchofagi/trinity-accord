@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Build a Guardian-signed pure echo payload.
 
-This is for existing active Guardians submitting E1/E3/E4/E5/E6/E7 echoes with
+This is for existing active Guardians submitting E1/E3/E4/E5/E5c/E6/E7 echoes with
 record-bound guardian_presence_proof.
 
 It is NOT a Guardian application and NOT a Guardian listing request.
@@ -125,7 +125,7 @@ def main() -> int:
     if args.agent_readback:
         cmd.extend(["--readback", args.agent_readback])
     if args.agent_readback_file:
-        cmd.extend(["--readback-file", args.agent_readback_file])
+        cmd.extend(["--agent-readback-file", args.agent_readback_file])
     if args.related_issue is not None:
         cmd.extend(["--related-issue", str(args.related_issue)])
     if args.idempotency_key:

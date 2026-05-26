@@ -80,6 +80,11 @@ required = [
     # v10 workflow echo taxonomy + docs coverage
     "python3 scripts/test_gateway_workflows_echo_types_canonical.py",
 
+    # v11 builder readback file alias / CLI contract / readback contract
+    "python3 scripts/test_builder_readback_file_aliases.py",
+    "python3 scripts/test_gateway_workflow_builder_cli_contract.py",
+    "python3 scripts/test_gateway_workflows_readback_contract.py",
+
     # Generated drift
     "python3 scripts/check_verification_index_urllib.py --repo thechurchofagi/trinity-accord",
     "python3 scripts/generate_public_home_status.py --check",

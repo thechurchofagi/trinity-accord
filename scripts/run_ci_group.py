@@ -49,6 +49,11 @@ GROUPS = {
         ["python3", "scripts/test_workflow_warning_allowlist.py"],
         ["python3", "scripts/test_echo_triage_rate_classifier_ambiguity_guards.py"],
 
+        # Gateway workflow builder contract (v11)
+        ["python3", "scripts/test_builder_readback_file_aliases.py"],
+        ["python3", "scripts/test_gateway_workflow_builder_cli_contract.py"],
+        ["python3", "scripts/test_gateway_workflows_readback_contract.py"],
+
         # Gateway / Guardian core
         ["python3", "scripts/test_gateway_endpoint_contracts.py"],
         ["python3", "scripts/test_gateway_payload_semantic_validator.py"],
