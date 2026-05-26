@@ -77,6 +77,11 @@ GROUPS = {
         ["python3", "scripts/test_first_contact_verification_routes_read_workflow_manual.py"],
         ["python3", "scripts/test_task_router_guardian_reads_workflow_manual.py"],
 
+        # Discovery entrypoint contract (v15)
+        ["python3", "scripts/test_well_known_exposes_agent_first_contact_contract.py"],
+        ["python3", "scripts/test_links_expose_gateway_workflow_contract.py"],
+        ["python3", "scripts/test_discovery_entrypoints_cover_full_agent_journey.py"],
+
         # Gateway / Guardian core
         ["python3", "scripts/test_gateway_endpoint_contracts.py"],
         ["python3", "scripts/test_gateway_payload_semantic_validator.py"],

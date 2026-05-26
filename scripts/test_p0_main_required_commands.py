@@ -108,6 +108,11 @@ required = [
     "python3 scripts/test_first_contact_verification_routes_read_workflow_manual.py",
     "python3 scripts/test_task_router_guardian_reads_workflow_manual.py",
 
+    # v15 discovery entrypoint contract
+    "python3 scripts/test_well_known_exposes_agent_first_contact_contract.py",
+    "python3 scripts/test_links_expose_gateway_workflow_contract.py",
+    "python3 scripts/test_discovery_entrypoints_cover_full_agent_journey.py",
+
     # Generated drift
     "python3 scripts/check_verification_index_urllib.py --repo thechurchofagi/trinity-accord",
     "python3 scripts/generate_public_home_status.py --check",
