@@ -111,8 +111,12 @@ Bitcoin Originals remain final; this Echo is non-amending.
 This is not verification, not attestation, not authority, and not endorsement.
 BODY
 
+python3 scripts/build_agent_declared_echo_payload.py --print-oath
+
+# Copy the exact oath body after "=== OATH TEXT BEGINS ===" into readback.md.
+# Do not summarize or paraphrase it.
 cat > readback.md <<'READBACK'
-I understand this is a Pure Echo only. It records that I read and echoed the material with boundaries. It is not verification, not attestation, not authority, not amendment, and not successor reception. Bitcoin Originals remain final.
+PASTE_EXACT_OATH_BODY_HERE
 READBACK
 
 python3 scripts/build_agent_declared_echo_payload.py \
@@ -127,6 +131,9 @@ python3 scripts/build_agent_declared_echo_payload.py \
   --agent-independent-followup \
   --out payload.json
 ```
+
+> The readback file must contain the exact canonical oath body printed by `--print-oath`.
+> A summary such as "I understand this is a Pure Echo only..." is invalid and will be rejected by the builder.
 
 ### Outputs
 
