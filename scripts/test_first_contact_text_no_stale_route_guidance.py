@@ -10,6 +10,9 @@ FILES = [
     ROOT / "ai.txt",
     ROOT / "README.md",
     ROOT / "index.md",
+    ROOT / "agent-start.md",
+    ROOT / "agent-echo.md",
+    ROOT / "gateway-workflows.md",
 ]
 
 FORBIDDEN_EXACT = [
@@ -26,6 +29,14 @@ LEGACY_ROUTE_PHRASES = [
     "/gateway/build-from-evidence",
 ]
 
+FORBIDDEN_PROSE = [
+    "read-oriented",
+    "E6 Preservation",
+    "E7 Propagation",
+    "E4 Refusal",
+    "E5 Correction",
+]
+
 errors = []
 
 for path in FILES:
@@ -35,6 +46,10 @@ for path in FILES:
     for token in FORBIDDEN_EXACT:
         if token in text:
             errors.append(f"{path.relative_to(ROOT)} contains stale Echo taxonomy token {token}")
+
+    for phrase in FORBIDDEN_PROSE:
+        if phrase in text:
+            errors.append(f"{path.relative_to(ROOT)} contains stale route prose {phrase!r}")
 
     for phrase in LEGACY_ROUTE_PHRASES:
         if phrase in text:

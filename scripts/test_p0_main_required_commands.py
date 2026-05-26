@@ -74,6 +74,9 @@ required = [
     # source_digest broad sweep
     "python3 scripts/test_public_api_source_digest_if_present.py",
 
+    # v10 workflow echo taxonomy + docs coverage
+    "python3 scripts/test_gateway_workflows_echo_types_canonical.py",
+
     # Generated drift
     "python3 scripts/check_verification_index_urllib.py --repo thechurchofagi/trinity-accord",
     "python3 scripts/generate_public_home_status.py --check",

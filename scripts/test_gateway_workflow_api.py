@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -61,6 +62,34 @@ def main() -> None:
             assert agent_start["routes"][wid]["workflow_anchor"] == anchor
 
     print("PASS: test_gateway_workflow_api")
+
+    # Echo taxonomy allowed_values check
+    sys.path.insert(0, str(ROOT / "scripts"))
+    from protocol_echo_types import allowed_canonical_echo_types
+
+    canonical = [
+        "E1_recognition_echo",
+        "E3_critical_echo",
+        "E4_interpretive_echo",
+        "E5_technical_audit_echo",
+        "E5c_correction_echo",
+        "E6_propagation_echo",
+        "E7_refusal_echo",
+    ]
+    allowed = allowed_canonical_echo_types()
+
+    for workflow_id in ["pure_echo", "guardian_signed_echo"]:
+        echo_input = None
+        for item in workflows["workflows"][workflow_id].get("inputs", []):
+            if item.get("name") == "--echo-type":
+                echo_input = item
+                break
+        assert echo_input is not None, f"{workflow_id}: --echo-type input missing"
+        values = echo_input.get("allowed_values")
+        assert values == canonical, (workflow_id, values)
+        assert "E2_verification_echo" not in values, workflow_id
+        for value in values:
+            assert value in allowed, (workflow_id, value)
 
 if __name__ == "__main__":
     main()

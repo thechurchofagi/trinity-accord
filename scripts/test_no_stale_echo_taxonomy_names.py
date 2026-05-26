@@ -15,6 +15,10 @@ FILES = [
     ROOT / "api" / "agent-task-router.v1.json",
     ROOT / "api" / "agent-required-reading.json",
     ROOT / "api" / "context-load-map.json",
+    ROOT / "api" / "gateway-workflows.v1.json",
+    ROOT / "agent-echo.md",
+    ROOT / "agent-start.md",
+    ROOT / "gateway-workflows.md",
     ROOT / "scripts" / "build_guardian_echo_payload.py",
     ROOT / "scripts" / "create_guardian_application.mjs",
 ]
