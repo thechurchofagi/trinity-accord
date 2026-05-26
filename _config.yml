@@ -12,6 +12,13 @@ exclude:
   - node_modules/
   - _site/
   - vendor/
+  - scripts/
+  - fixtures/
+  - examples/
+  - bitcoin-inscription-mirrors/
+  - arweave-backup/
+  - data/
+  - audit-results/
   - Gemfile
   - Gemfile.lock
   - README.md
@@ -21,6 +28,9 @@ exclude:
   - trinity-echo-worker/
   - .env
   - .env.*
+  - "*.py"
+  - "*.mjs"
+  - "*.sh"
 
 # Keep markdown URLs path-like (e.g. /verify)
 permalink: pretty
@@ -39,4 +49,4 @@ timezone: "Asia/Shanghai"
 title: ""
 name: ""
 
-# rebuild trigger 5
+# rebuild trigger 6
