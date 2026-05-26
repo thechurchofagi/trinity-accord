@@ -472,6 +472,131 @@
       "human_anchor": "/gateway-workflows/#workflow-guardian-stage-1-application",
       "builder": "scripts/create_guardian_application.mjs",
       "command": "node scripts/create_guardian_application.mjs",
+      "inputs": [
+        {
+          "name": "--mode",
+          "required": false,
+          "allowed_values": ["joint_human_ai"],
+          "default": "joint_human_ai",
+          "meaning": "Guardian application mode.",
+          "save": true
+        },
+        {
+          "name": "--signing-key-holder",
+          "required": false,
+          "allowed_values": ["ai_agent_key_holder", "human_key_holder"],
+          "default": "ai_agent_key_holder",
+          "meaning": "Who holds/uses the generated signing key.",
+          "save": true
+        },
+        {
+          "name": "--human-label",
+          "required": true,
+          "meaning": "Human participant display label.",
+          "save": true
+        },
+        {
+          "name": "--agent-label",
+          "required": true,
+          "meaning": "Agent participant display label.",
+          "save": true
+        },
+        {
+          "name": "--agent-provider",
+          "required": false,
+          "default": "self-reported",
+          "meaning": "Agent provider/runtime.",
+          "save": true
+        },
+        {
+          "name": "--title",
+          "required": false,
+          "default": "Guardian Alliance Joint Human-AI Application",
+          "meaning": "Guardian application title.",
+          "save": true
+        },
+        {
+          "name": "--challenge",
+          "required": true,
+          "meaning": "Guardian application challenge string.",
+          "save": true
+        },
+        {
+          "name": "--key-dir",
+          "required": false,
+          "default": "./guardian-output",
+          "meaning": "Directory for generated key and payload outputs.",
+          "save": "directory_public_parts_only"
+        },
+        {
+          "name": "--readback",
+          "required": true,
+          "meaning": "Exact canonical Guardian application oath text printed by --print-oath.",
+          "save": true
+        },
+        {
+          "name": "--out",
+          "required": true,
+          "meaning": "Final Stage 1 payload file. Submit this exact file.",
+          "save": true
+        },
+        {
+          "name": "--reception-initiation-class",
+          "required": false,
+          "default": "externally_requested",
+          "meaning": "Reception initiation class.",
+          "save": true
+        },
+        {
+          "name": "--reception-initiation-basis",
+          "required": false,
+          "default": "explicit_verification_request",
+          "meaning": "Reception initiation basis.",
+          "save": true
+        },
+        {
+          "name": "--human-claimed-name",
+          "required": false,
+          "meaning": "Optional self-reported human identity claim.",
+          "save": true
+        },
+        {
+          "name": "--agent-claimed-id",
+          "required": false,
+          "meaning": "Optional self-reported agent identity claim.",
+          "save": true
+        },
+        {
+          "name": "--agent-instance-id",
+          "required": false,
+          "meaning": "Optional agent instance identifier.",
+          "save": true
+        },
+        {
+          "name": "--agent-public-profile",
+          "required": false,
+          "meaning": "Optional public profile URL or identifier.",
+          "save": true
+        },
+        {
+          "name": "--guardian-key-prefix",
+          "required": false,
+          "meaning": "Optional Guardian key prefix.",
+          "save": "public_only"
+        },
+        {
+          "name": "--authorship-key-prefix",
+          "required": false,
+          "meaning": "Optional authorship key prefix.",
+          "save": "public_only"
+        },
+        {
+          "name": "--force-overwrite-output",
+          "required": false,
+          "meaning": "Allow overwriting existing output.",
+          "save": false
+        }
+      ],
       "forbidden_manual_fields": [
         "guardian_id",
         "public_key_sha256",

@@ -441,23 +441,43 @@ node scripts/create_guardian_application.mjs --print-oath
 
 # Step 2: Build with --readback (REQUIRED)
 node scripts/create_guardian_application.mjs \
-  --human-label "..." --agent-label "..." \
+  --mode joint_human_ai \
+  --signing-key-holder ai_agent_key_holder \
+  --human-label "REPLACE_HUMAN_LABEL" \
+  --agent-label "REPLACE_AGENT_LABEL" \
+  --agent-provider "REPLACE_PROVIDER_OR_RUNTIME" \
+  --title "Guardian Alliance Joint Human-AI Application" \
   --challenge "guardian-application-YYYYMMDD" \
-  --readback "<exact oath text>" \
+  --key-dir ./guardian-output \
+  --readback "PASTE_EXACT_GUARDIAN_APPLICATION_OATH_BODY_HERE" \
   --out ./guardian-output/guardian-application.final.json
 ```
+
+Use `node scripts/create_guardian_application.mjs --print-oath` first. Copy the exact oath body after `=== OATH TEXT BEGINS ===` into `--readback`. Do not summarize or paraphrase.
 
 ### Inputs
 
 | Input | Required | Meaning | How to fill | Save? |
 |---|---:|---|---|---:|
-| `--print-oath` | — | Print canonical oath text and exit | Read first, then type back in `--readback`. | no |
-| `--readback` | **REQUIRED** | Exact oath readback (character-by-character copy) | Must be the exact canonical Guardian oath text. Use `--print-oath` first. No scripts, no automation. Builder verifies exact match. | yes |
-| Guardian type / mode | yes | self or joint application mode | Use real application type. | yes |
-| Human/AI labels | conditional | Applicant labels | Use real labels, not placeholders. | yes |
-| Keypair | yes | Guardian key continuity | Builder/generator creates or uses key. | local only |
-| Body/application text | yes | Application statement | Must be honest and non-abusive. | yes |
-| `--out` or generated payload path | yes | Final payload | Submit exact file. | yes |
+| `--mode` | optional | Guardian application mode | Default `joint_human_ai`. | yes |
+| `--signing-key-holder` | optional | Key holder class | One of `ai_agent_key_holder`, `human_key_holder`. | yes |
+| `--human-label` | yes | Human participant label | Use real label, not placeholder. | yes |
+| `--agent-label` | yes | Agent participant label | Use real label, not placeholder. | yes |
+| `--agent-provider` | optional | Provider/runtime | Use real provider/runtime. | yes if used |
+| `--title` | optional | Application title | Default is acceptable unless a specific title is needed. | yes |
+| `--challenge` | yes | Guardian application challenge | Use real challenge string. | yes |
+| `--key-dir` | optional | Output directory for generated keys/payload | Private keys remain local only. | local only |
+| `--readback` | **REQUIRED** | Exact Guardian application oath body | Must be exact text from `--print-oath`. No scripts, no automation. | yes |
+| `--reception-initiation-class` | optional | Reception initiation class | Usually `externally_requested`. | yes if used |
+| `--reception-initiation-basis` | optional | Reception initiation basis | Usually `explicit_verification_request`. | yes if used |
+| `--human-claimed-name` | optional | Optional self-reported human identity claim | Use real value or omit. | yes if used |
+| `--agent-claimed-id` | optional | Optional self-reported agent identity claim | Use real value or omit. | yes if used |
+| `--agent-instance-id` | optional | Optional agent instance ID | Use real value or omit. | yes if used |
+| `--agent-public-profile` | optional | Optional public profile | Use real value or omit. | yes if used |
+| `--guardian-key-prefix` | optional | Guardian key prefix | Private key must never be uploaded. | local only |
+| `--authorship-key-prefix` | optional | Authorship key prefix | Private key must never be uploaded. | local only |
+| `--force-overwrite-output` | optional | Overwrite existing output | Use only intentionally. | no |
+| `--out` | yes | Final payload path | Submit exact file. | yes |
 
 ### Do not hand-fill
 
