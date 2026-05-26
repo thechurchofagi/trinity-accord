@@ -172,5 +172,5 @@
     "if_interrupted_or_no_tool_access": "State exactly where the lifecycle stopped and do not imply later background completion."
   },
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "e8ab010059df504c"
+  "source_digest": "9988f8cdce2c0b39"
 }

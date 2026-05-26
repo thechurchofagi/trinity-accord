@@ -42,6 +42,7 @@ GROUPS = {
         ["python3", "scripts/test_links_expose_first_contact_entrypoints.py"],
         ["python3", "scripts/test_first_contact_text_no_stale_route_guidance.py"],
         ["python3", "scripts/test_agent_exit_readback_policy.py"],
+        ["python3", "scripts/test_public_api_source_digest_if_present.py"],
         ["python3", "scripts/test_write_workflows_no_fail_open_rebase.py"],
         ["python3", "scripts/test_workflow_warning_allowlist.py"],
         ["python3", "scripts/test_echo_triage_rate_classifier_ambiguity_guards.py"],

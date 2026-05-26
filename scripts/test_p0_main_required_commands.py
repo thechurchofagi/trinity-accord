@@ -71,6 +71,9 @@ required = [
     "python3 scripts/test_first_contact_text_no_stale_route_guidance.py",
     "python3 scripts/test_agent_exit_readback_policy.py",
 
+    # source_digest broad sweep
+    "python3 scripts/test_public_api_source_digest_if_present.py",
+
     # Generated drift
     "python3 scripts/check_verification_index_urllib.py --repo thechurchofagi/trinity-accord",
     "python3 scripts/generate_public_home_status.py --check",

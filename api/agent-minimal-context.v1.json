@@ -113,5 +113,5 @@
     "physical anchor verification by the current agent unless separately performed"
   ],
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "59c1150275ff58fe"
+  "source_digest": "4af3b5349fb7a039"
 }
