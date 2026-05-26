@@ -89,6 +89,30 @@ def main() -> None:
         for value in values:
             assert value in allowed, (workflow_id, value)
 
+    # CLI contract: all advertised builder flags should exist in builder --help.
+    # This catches docs/API drift such as --agent-readback-file without builder support.
+    import subprocess
+
+    def builder_help(script: str) -> str:
+        result = subprocess.run(
+            [sys.executable, script, "--help"],
+            cwd=str(ROOT),
+            text=True,
+            capture_output=True,
+        )
+        assert result.returncode == 0, (script, result.stdout, result.stderr)
+        return result.stdout + result.stderr
+
+    for workflow_id, builder in {
+        "pure_echo": "scripts/build_agent_declared_echo_payload.py",
+        "guardian_signed_echo": "scripts/build_guardian_echo_payload.py",
+    }.items():
+        help_text = builder_help(builder)
+        for item in workflows["workflows"][workflow_id].get("inputs", []):
+            name = item.get("name")
+            if isinstance(name, str) and name.startswith("--"):
+                assert name in help_text, (workflow_id, builder, name)
+
     print("PASS: test_gateway_workflow_api")
 
 if __name__ == "__main__":
