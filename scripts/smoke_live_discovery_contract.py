@@ -128,6 +128,11 @@ def main() -> int:
     print(f"Fetching live well-known: {well_known_url}")
     live_well_known = fetch_json(well_known_url, args.timeout)
 
+    # Print live metadata for diagnostics
+    print(f"Live links source_digest: {live_links.get('source_digest')!r}")
+    print(f"Live links version: {live_links.get('version')!r}")
+    print(f"Live well-known site: {live_well_known.get('site')!r}")
+
     machine = set(live_links.get("machine", []))
     key_pages = set(live_links.get("key_pages", []))
     key_pages_norm = {norm(p) for p in key_pages}
@@ -173,7 +178,9 @@ def main() -> int:
         repo_digest = repo_links.get("source_digest")
         if live_digest != repo_digest:
             errors.append(
-                f"live links.json source_digest mismatch: live={live_digest!r}, repo={repo_digest!r}"
+                "live links.json source_digest mismatch: "
+                f"live={live_digest!r}, repo={repo_digest!r}; "
+                "this usually means Pages/CDN/custom-domain is serving an older artifact"
             )
 
     if errors:
