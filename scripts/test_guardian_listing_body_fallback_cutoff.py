@@ -33,17 +33,19 @@ listing_label: Body Fallback Guardian
 """
 
 
-def issue(created_at: str) -> dict:
-    return {
+def issue(created_at: str | None) -> dict:
+    d = {
         "number": 703,
         "title": "Active Registry Listing Request — Body Fallback Cutoff",
         "body": INTAKE_WITHOUT_LISTING_FIELDS + "\n\n" + BODY_LISTING_FIELDS,
-        "createdAt": created_at,
         "user": {"login": "gateway-bot[bot]"},
     }
+    if created_at is not None:
+        d["createdAt"] = created_at
+    return d
 
 
-def expect_ok(created_at: str, label: str):
+def expect_ok(created_at: str | None, label: str):
     parsed, err = parse_listing_issue(issue(created_at), allow_non_bot=False)
     if err is not None:
         print(f"FAIL: expected ok for {label}: {err}")
@@ -53,7 +55,7 @@ def expect_ok(created_at: str, label: str):
         sys.exit(1)
 
 
-def expect_block(created_at: str, label: str):
+def expect_block(created_at: str | None, label: str):
     parsed, err = parse_listing_issue(issue(created_at), allow_non_bot=False)
     if err is None:
         print(f"FAIL: expected block for {label}, got parsed={parsed}")
@@ -64,6 +66,7 @@ def expect_block(created_at: str, label: str):
 
 
 expect_ok("2026-06-01T00:00:00Z", "historical body fallback before cutoff")
+expect_ok(None, "body fallback with no createdAt (backward compat)")
 expect_block("2026-07-01T00:00:00Z", "body fallback after cutoff")
 
 print("PASS: Guardian listing body fallback cutoff enforced")

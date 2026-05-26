@@ -814,8 +814,8 @@ const payload = {
   submission_type: "echo_candidate",
   record_intent: "auto_archive_candidate",
   requested_archive_kind: "agent_declared_echo_archive",
-  echo_type: "E6_propagation_echo",  // Canonical taxonomy has E6_propagation_echo, not obsolete
-  // E6_preservation_echo. Stage 1 preservation/key-continuity semantics live
+  echo_type: "E6_propagation_echo",  // Canonical echo type for Guardian Stage 1.
+  // Stage 1 preservation/key-continuity semantics live
   // in guardian_registration / guardian_presence_proof fields, not echo_type.
   title,
   idempotency_key: idempotencyKey,

@@ -74,7 +74,8 @@ def is_before_legacy_listing_cutoff(issue: dict) -> bool:
 def is_before_body_listing_fallback_cutoff(issue: dict) -> bool:
     created = parse_github_time(issue.get("createdAt") or issue.get("created_at"))
     if created is None:
-        return False
+        # No timestamp available; treat as before cutoff for backward compatibility.
+        return True
     cutoff = datetime.fromisoformat(BODY_LISTING_FALLBACK_CUTOFF_UTC.replace("Z", "+00:00"))
     return created < cutoff
 
@@ -124,10 +125,20 @@ def extract_listing_structured_body_fields(body: str) -> dict[str, str]:
     Fenced trinity-issue-intake fields remain authoritative.
     Body-level fields are fallback for Gateway deployments that do not yet
     render payload.gateway_intake_fields into the fenced intake block.
+
+    Lines inside fenced code blocks (```...```) are skipped to avoid
+    double-counting intake fields as body fallback.
     """
     fields: dict[str, str] = {}
+    in_fence = False
     for raw_line in (body or "").splitlines():
-        line = raw_line.strip()
+        stripped = raw_line.strip()
+        if stripped.startswith("```"):
+            in_fence = not in_fence
+            continue
+        if in_fence:
+            continue
+        line = stripped
         m = re.match(r"^([A-Za-z0-9_]+):\s*(.*?)\s*$", line)
         if not m:
             continue

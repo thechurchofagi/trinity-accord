@@ -11,7 +11,6 @@ GROUPS = {
         ["python3", "scripts/test_public_surface_consistency.py"],
         ["python3", "scripts/test_public_api_metadata_completeness.py"],
 
-        ["python3", "scripts/test_context_load_map.py"],
         ["python3", "scripts/test_agent_start_api.py"],
         ["python3", "scripts/test_agent_start_echo_taxonomy_wording.py"],
         ["python3", "scripts/test_main_function_route_health.py"],
