@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
   pages: write
   id-token: write
 
@@ -16,33 +16,20 @@ concurrency:
 
 jobs:
   deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
-      - name: Deploy to gh-pages
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          
-          # Create orphan gh-pages branch
-          git checkout --orphan gh-pages
-          
-          # Remove files not needed for the site (keep everything that should be served)
-          git rm -rf --cached . 2>/dev/null || true
-          git add -A
-          
-          # Add CNAME for custom domain
-          echo "www.trinityaccord.org" > CNAME
-          touch .nojekyll
-          git add CNAME .nojekyll
-          git add -A
-          
-          git commit -m "deploy: update GitHub Pages site"
-          git push origin gh-pages --force
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e
