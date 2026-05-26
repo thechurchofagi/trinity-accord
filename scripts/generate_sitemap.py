@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """Generate sitemap.xml from actual repository content.
 
-Reads all Markdown pages with front matter permalinks, API JSON files,
+Reads all Markdown pages with front matter permalinks, API JSON files recursively,
 and special root files to produce a complete sitemap.
 
 Inputs:
   - All .md files with front matter (permalink)
-  - api/*.json files
+  - api/**/*.json files
   - Root special files (llms.txt, ai.txt, etc.)
 
 Outputs:

@@ -8,6 +8,11 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 from urllib.parse import urlparse
 
+try:
+    import yaml
+except ImportError:
+    yaml = None
+
 ROOT = Path(__file__).resolve().parents[1]
 SITEMAP = ROOT / "sitemap.xml"
 
@@ -18,8 +23,18 @@ def read_front_matter(path: Path) -> dict[str, str]:
     m = FRONT.match(text)
     if not m:
         return {}
+
+    fm_text = m.group(1)
+
+    if yaml is not None:
+        try:
+            data = yaml.safe_load(fm_text) or {}
+        except Exception:
+            return {}
+        return data if isinstance(data, dict) else {}
+
     out = {}
-    for line in m.group(1).splitlines():
+    for line in fm_text.splitlines():
         if ":" not in line:
             continue
         k, v = line.split(":", 1)
