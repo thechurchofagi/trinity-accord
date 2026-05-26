@@ -7,35 +7,48 @@ import sys
 
 GROUPS = {
     "p0-main": [
+        # Public surface
         ["python3", "scripts/check_consistency.py"],
         ["python3", "scripts/test_sitemap_public_sources_exist.py"],
+        ["python3", "scripts/test_sitemap_includes_nested_api_json.py"],
+        ["python3", "scripts/test_public_referenced_paths_exist.py"],
         ["python3", "scripts/test_public_surface_consistency.py"],
         ["python3", "scripts/test_public_api_sitemap_coverage.py"],
+        ["python3", "scripts/test_public_api_metadata_general_not_pass.py"],
         ["python3", "scripts/test_public_api_metadata_completeness.py"],
         ["python3", "scripts/test_main_pages_have_machine_counterparts.py"],
 
+        # Context / agent routing
+        ["python3", "scripts/test_context_load_map.py"],
         ["python3", "scripts/test_agent_start_api.py"],
         ["python3", "scripts/test_agent_start_echo_taxonomy_wording.py"],
+        ["python3", "scripts/test_agent_p0_router_contract.py"],
         ["python3", "scripts/test_main_function_route_health.py"],
         ["python3", "scripts/test_e2_verification_echo_not_pure_echo.py"],
 
+        # Route/taxonomy
         ["python3", "scripts/test_gateway_builder_route_map.py"],
         ["python3", "scripts/test_echo_taxonomy_all_consumers_match_single_source.py"],
         ["python3", "scripts/test_no_stale_echo_taxonomy_names.py"],
 
+        # Gateway / Guardian core
         ["python3", "scripts/test_gateway_payload_semantic_validator.py"],
         ["python3", "scripts/test_gateway_intake_guardian_fields.py"],
         ["python3", "scripts/test_archive_echo_issue_gateway_intake_strict.py"],
         ["python3", "scripts/test_gateway_auto_archive_uses_shared_eligibility.py"],
-
         ["python3", "scripts/test_guardian_auto_register_uses_shared_intake.py"],
         ["python3", "scripts/test_guardian_auto_register_intake_strictness.py"],
         ["python3", "scripts/test_guardian_auto_register_listing_e6_behavior.py"],
         ["python3", "scripts/test_guardian_listing_kind_cutoff.py"],
         ["python3", "scripts/test_guardian_listing_body_fallback_cutoff.py"],
 
+        # Generated drift
+        ["python3", "scripts/check_verification_index_urllib.py", "--repo", "thechurchofagi/trinity-accord"],
         ["python3", "scripts/generate_public_home_status.py", "--check"],
         ["python3", "scripts/test_home_public_status_sync.py"],
+
+        # P0 group guard
+        ["python3", "scripts/test_p0_main_required_commands.py"],
     ],
     "guardian": [
         ["python3", "scripts/test_guardian_automated_verification.py"],

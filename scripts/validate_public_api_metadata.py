@@ -46,17 +46,39 @@ CORE_API_FULL_METADATA = set(PUBLIC_API_REQUIRED)
 
 ROUTE_CONTEXT_STATUS_PATTERNS = [
     "agent-start",
+    "agent-minimal-context",
+    "agent-output-policy",
+    "agent-task-router",
+    "agent-first-contact",
+    "agent-required-reading",
+    "agent-entry-protocol",
+    "agent-tasks",
     "context-load-map",
+    "context-depth",
+    "context-pack",
     "gateway-builder-route-map",
     "gateway-workflows",
+    "gateway-artifact-custody",
     "guardian-registry",
     "guardian-active-listing-policy",
+    "guardian-alliance",
     "public-home-status",
     "agent-submit-gateway",
-    "agent-task-router",
     "agent-context-readiness",
     "external-agent-quickstart",
+    "archive-readiness-policy",
 ]
+
+# Intentionally exempt from schema identity enforcement (document reason).
+LEGACY_PUBLIC_API_SCHEMA_IDENTITY_EXEMPT: set[str] = set()
+
+# Evidence input examples are test fixtures/templates, not public API endpoints.
+import os as _os
+for _root, _dirs, _files in _os.walk(ROOT / "api" / "evidence-input-examples"):
+    for _f in _files:
+        if _f.endswith(".json"):
+            _rel = str(Path(_root).relative_to(ROOT) / _f)
+            LEGACY_PUBLIC_API_SCHEMA_IDENTITY_EXEMPT.add(_rel)
 
 
 def sitemap_api_json_files() -> list[str]:
@@ -185,9 +207,8 @@ def validate_all() -> list[str]:
         elif is_route_context_status_api(rel):
             errors.extend(validate_minimal_public_api(rel, path, data))
         else:
-            # General public API: parse and identify.
-            # Schema identity is recommended but not enforced for legacy files.
-            pass
+            if rel not in LEGACY_PUBLIC_API_SCHEMA_IDENTITY_EXEMPT and "schema" not in data and "$schema" not in data:
+                errors.append(f"{rel}: public API missing schema/$schema identity")
 
     return errors
 

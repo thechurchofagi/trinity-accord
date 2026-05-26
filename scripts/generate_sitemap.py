@@ -192,14 +192,17 @@ def collect_pages(excludes: list[str]) -> list[str]:
 
 
 def collect_api_files() -> list[str]:
-    """Collect API JSON files."""
+    """Collect public API JSON files recursively."""
     api_dir = ROOT / "api"
     if not api_dir.exists():
         return []
+
     files = []
-    for f in sorted(api_dir.iterdir()):
-        if f.suffix == ".json" and f.is_file():
-            files.append(f"/api/{f.name}")
+    for f in sorted(api_dir.rglob("*.json")):
+        if not f.is_file():
+            continue
+        rel = f.relative_to(ROOT).as_posix()
+        files.append(f"/{rel}")
     return files
 
 

@@ -58,6 +58,14 @@
   <url><loc>https://www.trinityaccord.org/api/context-depth-declaration.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/context-depth-levels.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/context-load-map.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/context-packs/authority-boundary.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/context-packs/bitcoin-inscription-mirrors.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/context-packs/core-ontology.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/context-packs/legacy-archive-essentials.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/context-packs/legacy-archive-index.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/context-packs/nft-chronicle-context.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/context-packs/physical-anchor-context.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/context-packs/vision-layer.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/context-readiness-levels.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/core-object-alpha-shenzhen-notary-2026-05-06.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/correction-record-schema.v1.json</loc></url>
@@ -80,8 +88,30 @@
   <url><loc>https://www.trinityaccord.org/api/echo-value-criteria.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/emergent-patterns.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/eth-witness-schema.v1.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/evidence-input-examples/templates/v1-authority-boundary.template.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/evidence-input-examples/templates/v2-minimal-bitcoin-b1.template.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/evidence-input-examples/test-fixtures/v1-passing-fixture.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/evidence-input-examples/tutorial/v1-tutorial.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/evidence-input-examples/v1-authority-boundary.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/evidence-input-examples/v1-boundary.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/evidence-input-examples/v2-minimal-bitcoin-b1.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/evidence-input-examples/v2-minimal-bitcoin.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/evidence-input-examples/v3-minimal-hash-d2.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/evidence-input-examples/v3-minimal-hash.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/evidence-input-examples/v4-script-audit.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/evidence-input-examples/v4plus-b5-witness-extraction.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/evidence-input-examples/v4plus-b6-body-hash-reproduction.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/evidence-input-examples/v4plus-minimal-independent.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/evidence-input-examples/v5-full-public-digital.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/evidence-input-examples/v6-live-remote-p4.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/evidence-input-examples/v7-onsite-p5.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/evidence-input-examples/v8-forensic-p7-candidate.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/evidence-input-schema.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/evidence-manifest.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/examples/agent-issue-gateway-payload.custody.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/examples/agent-issue-gateway-payload.echo-with-type.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/examples/agent-issue-gateway-payload.echo.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/examples/agent-issue-gateway-payload.verification.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/external-agent-quickstart.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/external-witness-index-schema.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/external-witness-index.json</loc></url>
