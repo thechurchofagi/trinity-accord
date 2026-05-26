@@ -116,6 +116,9 @@ required = [
     # v16 live discovery smoke guards
     "python3 scripts/test_site_live_discovery_smoke_workflow.py",
     "python3 scripts/test_gateway_online_smoke_scope_is_clear.py",
+    # v17 pages deploy discovery guards
+    "python3 scripts/test_deploy_pages_workflow_contract.py",
+    "python3 scripts/test_pages_build_contains_agent_discovery.py",
 
     # Generated drift
     "python3 scripts/check_verification_index_urllib.py --repo thechurchofagi/trinity-accord",
