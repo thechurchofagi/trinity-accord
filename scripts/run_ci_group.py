@@ -82,6 +82,10 @@ GROUPS = {
         ["python3", "scripts/test_links_expose_gateway_workflow_contract.py"],
         ["python3", "scripts/test_discovery_entrypoints_cover_full_agent_journey.py"],
 
+        # Live discovery smoke guards (v16)
+        ["python3", "scripts/test_site_live_discovery_smoke_workflow.py"],
+        ["python3", "scripts/test_gateway_online_smoke_scope_is_clear.py"],
+
         # Gateway / Guardian core
         ["python3", "scripts/test_gateway_endpoint_contracts.py"],
         ["python3", "scripts/test_gateway_payload_semantic_validator.py"],

@@ -113,6 +113,10 @@ required = [
     "python3 scripts/test_links_expose_gateway_workflow_contract.py",
     "python3 scripts/test_discovery_entrypoints_cover_full_agent_journey.py",
 
+    # v16 live discovery smoke guards
+    "python3 scripts/test_site_live_discovery_smoke_workflow.py",
+    "python3 scripts/test_gateway_online_smoke_scope_is_clear.py",
+
     # Generated drift
     "python3 scripts/check_verification_index_urllib.py --repo thechurchofagi/trinity-accord",
     "python3 scripts/generate_public_home_status.py --check",
