@@ -185,7 +185,11 @@ jobs:
             echo "No archive or generated file changes to commit."
           else
             git commit -m "archive echo issue #${ISSUE_NUMBER}"
-            git pull --rebase -X theirs origin main || true
+            if ! git pull --rebase -X theirs origin main; then
+              echo "::error::Failed to rebase onto origin/main. Refusing to continue."
+              git status --short
+              exit 1
+            fi
             git push --force-with-lease
           fi
 

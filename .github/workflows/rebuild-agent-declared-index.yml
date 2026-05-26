@@ -161,7 +161,11 @@ jobs:
           git add api/agent-declared-verification-index.json api/public-home-status.json index.md
           git commit -m "chore: rebuild agent-declared verification index from Issues [skip ci]"
           # DEEP-REBASE-001: regenerate after rebase
-          git pull --rebase -X theirs origin main || true
+          if ! git pull --rebase -X theirs origin main; then
+            echo "::error::Failed to rebase onto origin/main. Refusing to continue."
+            git status --short
+            exit 1
+          fi
           python3 scripts/generate_public_home_status.py
           python3 scripts/test_home_public_status_sync.py
           git add api/agent-declared-verification-index.json api/public-home-status.json index.md

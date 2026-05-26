@@ -122,5 +122,29 @@ jobs:
             echoes/digests
 
           git commit -m "chore: rebuild public Echo status indexes"
-          git pull --rebase -X theirs origin main || true
+
+          if ! git pull --rebase -X theirs origin main; then
+            echo "::error::Failed to rebase generated Echo index changes onto origin/main."
+            git status --short
+            exit 1
+          fi
+
+          # Regenerate after rebase before push.
+          python3 scripts/generate_echo_index.py
+          bash scripts/build-echo-index.sh
+          python3 scripts/generate_public_home_status.py
+          python3 scripts/test_home_public_status_sync.py
+
+          git add \
+            api/echo-index.json \
+            api/public-home-status.json \
+            index.md \
+            echoes/archive.md \
+            echoes/digests.md \
+            echoes/digests
+
+          if ! git diff --cached --quiet; then
+            git commit --amend --no-edit
+          fi
+
           git push --force-with-lease

@@ -156,7 +156,11 @@ jobs:
             # A2: Require push success
             PUSHED=false
             for attempt in 1 2 3 4 5; do
-              git pull --rebase -X theirs origin main || true
+              if ! git pull --rebase -X theirs origin main; then
+                echo "::error::Failed to rebase onto origin/main. Refusing to continue archive write workflow."
+                git status --short
+                exit 1
+              fi
               # DEEP-REBASE-001: regenerate derived state after rebase
               python3 scripts/generate_echo_index.py
               bash scripts/build-echo-index.sh

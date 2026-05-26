@@ -57,7 +57,9 @@ jobs:
           PROGRESS_BRANCH: enrich-progress-${{ github.run_id }}
         run: |
           git checkout -b "$PROGRESS_BRANCH" 2>/dev/null || true
-          git push origin "$PROGRESS_BRANCH" 2>/dev/null || true
+          if ! git push origin "$PROGRESS_BRANCH" 2>/dev/null; then
+            echo "::warning::Could not push progress branch $PROGRESS_BRANCH"
+          fi
           git checkout main
 
       - name: Enrich NFT mint timestamps
@@ -101,4 +103,6 @@ jobs:
         env:
           PROGRESS_BRANCH: enrich-progress-${{ github.run_id }}
         run: |
-          git push origin --delete "$PROGRESS_BRANCH" 2>/dev/null || true
+          if ! git push origin --delete "$PROGRESS_BRANCH" 2>/dev/null; then
+            echo "::warning::Could not delete progress branch $PROGRESS_BRANCH (non-critical)"
+          fi
