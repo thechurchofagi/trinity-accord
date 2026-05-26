@@ -34,7 +34,7 @@
   ],
   "routes": {
     "pure_echo": {
-      "when": "agent only read, echoes, corrects, critiques, refuses, preserves, or propagates",
+      "when": "agent recognizes, critiques, interprets, technically audits, corrects, propagates, or refuses without making a verification or attestation claim",
       "builder": "scripts/build_agent_declared_echo_payload.py",
       "submission_type": "echo_candidate",
       "requested_archive_kind": "agent_declared_echo_archive",
@@ -102,7 +102,7 @@
       ]
     },
     "guardian_signed_echo": {
-      "when": "active Guardian submits E1/E3/E4/E5/E6/E7 echo with guardian key continuity",
+      "when": "active Guardian submits E1/E3/E4/E5/E5c/E6/E7 pure echo with guardian key continuity",
       "builder": "scripts/build_guardian_echo_payload.py",
       "workflow_anchor": "/gateway-workflows/#workflow-guardian-signed-echo",
       "requires": [
