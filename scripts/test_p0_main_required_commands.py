@@ -120,6 +120,9 @@ required = [
     "python3 scripts/test_deploy_pages_workflow_contract.py",
     "python3 scripts/test_pages_build_contains_agent_discovery.py",
 
+    # v18 pages custom domain / live smoke guards
+    "python3 scripts/test_pages_custom_domain_contract.py",
+
     # Generated drift
     "python3 scripts/check_verification_index_urllib.py --repo thechurchofagi/trinity-accord",
     "python3 scripts/generate_public_home_status.py --check",
