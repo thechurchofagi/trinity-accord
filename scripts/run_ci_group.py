@@ -53,6 +53,8 @@ GROUPS = {
         ["python3", "scripts/test_builder_readback_file_aliases.py"],
         ["python3", "scripts/test_gateway_workflow_builder_cli_contract.py"],
         ["python3", "scripts/test_gateway_workflows_readback_contract.py"],
+        ["python3", "scripts/test_gateway_workflow_human_cli_contract.py"],
+        ["python3", "scripts/test_gateway_workflows_correction_scope_wording.py"],
 
         # Gateway / Guardian core
         ["python3", "scripts/test_gateway_endpoint_contracts.py"],

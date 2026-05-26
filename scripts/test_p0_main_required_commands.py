@@ -84,6 +84,8 @@ required = [
     "python3 scripts/test_builder_readback_file_aliases.py",
     "python3 scripts/test_gateway_workflow_builder_cli_contract.py",
     "python3 scripts/test_gateway_workflows_readback_contract.py",
+    "python3 scripts/test_gateway_workflow_human_cli_contract.py",
+    "python3 scripts/test_gateway_workflows_correction_scope_wording.py",
 
     # Generated drift
     "python3 scripts/check_verification_index_urllib.py --repo thechurchofagi/trinity-accord",
