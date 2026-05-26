@@ -99,6 +99,15 @@ required = [
     "python3 scripts/test_gateway_workflows_final_checklist_post_submit.py",
     "python3 scripts/test_gateway_workflow_tables_are_contiguous.py",
 
+    # v14 non-echo route workflow contract
+    "python3 scripts/test_guardian_stage1_workflow_cli_contract.py",
+    "python3 scripts/test_gateway_workflows_stage1_inputs_contract.py",
+    "python3 scripts/test_first_contact_guardian_reads_workflow_manual.py",
+    "python3 scripts/test_first_contact_guardian_stage1_cli_contract.py",
+    "python3 scripts/test_first_contact_guardian_stage2_uses_cli_flags.py",
+    "python3 scripts/test_first_contact_verification_routes_read_workflow_manual.py",
+    "python3 scripts/test_task_router_guardian_reads_workflow_manual.py",
+
     # Generated drift
     "python3 scripts/check_verification_index_urllib.py --repo thechurchofagi/trinity-accord",
     "python3 scripts/generate_public_home_status.py --check",
