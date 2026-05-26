@@ -58,6 +58,12 @@ required = [
     "python3 scripts/test_sitemap_permalink_parser_uses_yaml.py",
     "python3 scripts/test_generate_sitemap_docstring_recursive_api.py",
 
+    # v8 source audit fixes
+    "python3 scripts/test_agent_submit_gateway_echo_types_canonical.py",
+    "python3 scripts/test_write_workflows_no_fail_open_rebase.py",
+    "python3 scripts/test_workflow_warning_allowlist.py",
+    "python3 scripts/test_echo_triage_rate_classifier_ambiguity_guards.py",
+
     # Generated drift
     "python3 scripts/check_verification_index_urllib.py --repo thechurchofagi/trinity-accord",
     "python3 scripts/generate_public_home_status.py --check",

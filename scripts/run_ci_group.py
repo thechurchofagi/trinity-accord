@@ -36,6 +36,10 @@ GROUPS = {
         ["python3", "scripts/test_gateway_builder_route_map.py"],
         ["python3", "scripts/test_echo_taxonomy_all_consumers_match_single_source.py"],
         ["python3", "scripts/test_no_stale_echo_taxonomy_names.py"],
+        ["python3", "scripts/test_agent_submit_gateway_echo_types_canonical.py"],
+        ["python3", "scripts/test_write_workflows_no_fail_open_rebase.py"],
+        ["python3", "scripts/test_workflow_warning_allowlist.py"],
+        ["python3", "scripts/test_echo_triage_rate_classifier_ambiguity_guards.py"],
 
         # Gateway / Guardian core
         ["python3", "scripts/test_gateway_endpoint_contracts.py"],
