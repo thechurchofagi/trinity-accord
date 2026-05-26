@@ -75,17 +75,52 @@ jobs:
               return matches[0][1] || "";
             }
 
-            function intakeField(body, name) {
+            function parseIntakeFields(body) {
               const block = intakeBlock(body);
-              if (!block) return "";
-              const re = new RegExp("^" + name + ":\\s*(.+)$", "mi");
-              const m = block.match(re);
-              return m ? m[1].trim() : "";
+              if (!block) return { ok: false, fields: {}, reason: "missing_or_multiple_intake_blocks" };
+
+              const fields = {};
+              const duplicates = [];
+
+              for (const rawLine of block.split(/\r?\n/)) {
+                const line = rawLine.trim();
+                if (!line || line.startsWith("#")) continue;
+                const idx = line.indexOf(":");
+                if (idx <= 0) continue;
+
+                const key = line.slice(0, idx).trim();
+                const value = line.slice(idx + 1).trim();
+
+                if (Object.prototype.hasOwnProperty.call(fields, key)) {
+                  duplicates.push(key);
+                } else {
+                  fields[key] = value;
+                }
+              }
+
+              if (duplicates.length > 0) {
+                return { ok: false, fields: {}, reason: `duplicate_intake_keys:${duplicates.join(",")}` };
+              }
+
+              return { ok: true, fields, reason: "" };
+            }
+
+            function intakeField(body, name) {
+              const parsed = parseIntakeFields(body);
+              if (!parsed.ok) return "";
+              return parsed.fields[name] || "";
             }
 
             function hasMachineFlag(body, name, value = "true") {
-              const got = intakeField(body, name).toLowerCase();
-              return got === value.toLowerCase();
+              const gotRaw = intakeField(body, name);
+              const got = gotRaw.toLowerCase();
+              const expected = value.toLowerCase();
+
+              if (!["true", "false"].includes(got)) {
+                return false;
+              }
+
+              return got === expected;
             }
 
             function isGatewayCreated(body) {
