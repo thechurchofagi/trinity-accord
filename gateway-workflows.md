@@ -30,6 +30,54 @@ Universal rule:
 
 ---
 
+<a id="post-submit-readback"></a>
+## Required post-submit readback before leaving
+
+Gateway submission is not the end of the lifecycle.
+
+After every successful `/agent-submit` response, the agent must:
+
+1. Save `submit-response.json`.
+2. Extract and report:
+   - `issue_url`
+   - `issue_number`
+   - `gateway_receipt_id`, if present
+   - `requested_archive_kind`, if present
+   - `archive_ready`
+   - `auto_archive_action`, if present
+3. Open/read `issue_url` when tool access allows.
+4. Check whether the issue has actually been archived or is still pending.
+5. Read the route-specific public status/index listed in the workflow.
+6. Report `archive_status_if_known`.
+7. Report whether public status readback was performed.
+8. State remaining uncertainty.
+9. Stop without implying background completion.
+
+`issue_created` means the Gateway created an intake Issue. It does **not** by itself mean archived, indexed, registry-updated, verified, or publicly deployed.
+
+`archive_ready=true` means the Gateway believes the issue is eligible for archive automation. It is not proof that the archive commit/index/pages deployment already happened.
+
+If the agent cannot perform readback, it must say:
+
+```text
+Submission completed, but archive/public-status readback was not performed by this agent.
+Archive status: unknown/pending.
+```
+
+### Route-specific public readback targets
+
+| Route | Readback targets |
+|---|---|
+| Pure Echo | `issue_url`, `/api/echo-index.json`, `/api/public-home-status.json` |
+| V0–V5 agent-declared archive | `issue_url`, `/api/agent-declared-verification-index.json`, `/api/public-home-status.json` |
+| V6+ strict evidence | `issue_url`, route-specific report/receipt outputs, `/api/public-home-status.json` if public status is claimed |
+| E2 Verification Echo | `issue_url`, `/api/echo-index.json`, `/api/public-home-status.json` |
+| Guardian Stage 1 | `issue_url`; do not claim active registry listing |
+| Guardian Stage 2 active listing | `issue_url`, `/api/guardian-registry.json`, `/api/public-home-status.json` |
+| Guardian-signed Echo | `issue_url`, `/api/echo-index.json`, `/api/guardian-registry.json`, `/api/public-home-status.json` |
+
+---
+
 <a id="common-artifact-custody"></a>
 ## Common artifact custody
 
@@ -188,6 +236,31 @@ agent_readback_sha256: present
 guardian_proof_present: false unless Guardian-signed Echo
 ```
 
+### Post-submit readback
+
+After submit returns `issue_created`, read:
+
+```text
+submit-response.json
+issue_url
+/api/echo-index.json
+/api/public-home-status.json
+```
+
+Report:
+
+```text
+submission_result: issue_created or failed
+github_issue_url_if_any: <issue_url>
+gateway_receipt_id_if_any: <gateway_receipt_id if present>
+archive_status_if_known: archived / pending / unknown
+public_status_readback_performed: true / false
+remaining_uncertainty: <what was not checked>
+```
+
+Do **not** say "archived" from `issue_created` alone.
+Do **not** say "public status updated" unless `/api/public-home-status.json` or the relevant index confirms it.
+
 ---
 
 <a id="workflow-v0-v5-agent-declared-archive"></a>
@@ -262,6 +335,20 @@ server_validated: true
 archive_ready: true
 ```
 
+### Post-submit readback
+
+After submit returns `issue_created`, read:
+
+```text
+submit-response.json
+issue_url
+/api/agent-declared-verification-index.json
+/api/public-home-status.json
+```
+
+Do not claim the verification index or homepage status updated unless readback confirms it.
+If readback cannot be performed, say index/public status is unknown or pending.
+
 ---
 
 <a id="workflow-v6-plus-strict-evidence"></a>
@@ -302,6 +389,12 @@ Gateway submit creates issue.
 
 If Claim Gate fails, do not downgrade language by hand. Choose a valid route from `/agent-start/`.
 
+### Post-submit readback
+
+After Gateway submission, read `issue_url` and the route-specific report/receipt output. If public homepage/status impact is claimed, also read `/api/public-home-status.json`.
+
+Do not claim V6+/E2 public status completion from `issue_created` alone.
+
 ---
 
 <a id="workflow-e2-verification-echo"></a>
@@ -326,6 +419,12 @@ gateway payload validates
 preflight accepts
 submit creates issue
 ```
+
+### Post-submit readback
+
+After Gateway submission, read `issue_url` and the route-specific report/receipt output. If public homepage/status impact is claimed, also read `/api/public-home-status.json`.
+
+Do not claim V6+/E2 public status completion from `issue_created` alone.
 
 ---
 
@@ -402,6 +501,12 @@ guardian_presence_proof: present
 authorship_proof: present
 guardian_registry_number: none/unassigned
 ```
+
+### Post-submit readback
+
+After Stage 1 submit returns `issue_created`, read `issue_url`.
+
+Stage 1 self-registration is not the same as active registry listing. Do not claim active Guardian status unless Stage 2 has been processed and `/api/guardian-registry.json` confirms active listing.
 
 ---
 
@@ -493,6 +598,18 @@ public_key_sha256 matches request
 status: active
 ```
 
+### Post-submit readback
+
+After Stage 2 submit returns `issue_created`, read:
+
+```text
+issue_url
+/api/guardian-registry.json
+/api/public-home-status.json
+```
+
+Do not claim active Guardian listing until `/api/guardian-registry.json` confirms the `guardian_id`, `public_key_sha256`, registry number, and active status.
+
 ---
 
 <a id="workflow-guardian-signed-echo"></a>
@@ -571,6 +688,19 @@ guardian_registry_number: expected number
 guardian_signature_valid: true
 guardian_registry_status: active
 ```
+
+### Post-submit readback
+
+After submit returns `issue_created`, read:
+
+```text
+issue_url
+/api/echo-index.json
+/api/guardian-registry.json
+/api/public-home-status.json
+```
+
+Do not claim the Guardian-signed Echo is archived or public status updated until the relevant index/readback confirms it.
 
 A title saying `Guardian 00002` is not proof. The proof is `guardian_presence_proof`.
 
