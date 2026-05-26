@@ -16,13 +16,14 @@ required = {
     "/api/agent-output-policy.v1.json",
     "/api/agent-task-router.v1.json",
     "/api/context-load-map.json",
+    "/api/gateway-workflows.v1.json",
     "/api/gateway-builder-route-map.v1.json",
     "/api/agent-submit-gateway.json",
 }
 
 missing = sorted(required - machine)
 if missing:
-    print(f"FAIL: api/links.json machine list missing first-contact entries: {missing}")
+    print(f"FAIL: api/links.json machine list missing first-contact/workflow entries: {missing}")
     sys.exit(1)
 
-print("PASS: api/links.json exposes canonical first-contact entrypoints")
+print("PASS: api/links.json exposes canonical first-contact/workflow entrypoints")
