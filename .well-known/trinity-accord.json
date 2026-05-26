@@ -34,8 +34,13 @@
         "submission_title_policy": "/api/submission-title-policy.json",
         "core_object_alpha_shenzhen_notary_2026_05_06": "/api/core-object-alpha-shenzhen-notary-2026-05-06.json",
         "agent_minimal_context": "/api/agent-minimal-context.v1.json",
+        "agent_first_contact": "/api/agent-first-contact.json",
+        "agent_required_reading": "/api/agent-required-reading.json",
         "agent_output_policy": "/api/agent-output-policy.v1.json",
         "agent_task_router": "/api/agent-task-router.v1.json",
+        "gateway_workflows": "/api/gateway-workflows.v1.json",
+        "agent_submit_gateway": "/api/agent-submit-gateway.json",
+        "gateway_builder_route_map": "/api/gateway-builder-route-map.v1.json",
         "public_home_status": "/api/public-home-status.json",
         "guardian_registry": "/api/guardian-registry.json",
         "guardian_active_listing_policy": "/api/guardian-active-listing-policy.v1.json",
@@ -113,11 +118,43 @@
         "agent_task_router": {
             "path": "/api/agent-task-router.v1.json",
             "purpose": "Intent router pointing to existing canonical routes."
+        },
+        "agent_first_contact": {
+            "path": "/api/agent-first-contact.json",
+            "source_file": "api/agent-first-contact.json",
+            "purpose": "Canonical first-contact router for agents; routes agents into current workflow/readback contracts."
+        },
+        "agent_required_reading": {
+            "path": "/api/agent-required-reading.json",
+            "source_file": "api/agent-required-reading.json",
+            "purpose": "Required-reading manifest for agent profiles and route-specific loading."
+        },
+        "gateway_workflows": {
+            "path": "/gateway-workflows/",
+            "machine_path": "/api/gateway-workflows.v1.json",
+            "source_file": "gateway-workflows.md",
+            "purpose": "Gateway workflow manual and machine contract, including post-submit readback and final exit checklist."
+        },
+        "agent_submit_gateway": {
+            "path": "/api/agent-submit-gateway.json",
+            "source_file": "api/agent-submit-gateway.json",
+            "purpose": "Gateway submission contract and route-specific submission guidance."
+        },
+        "gateway_builder_route_map": {
+            "path": "/api/gateway-builder-route-map.v1.json",
+            "source_file": "api/gateway-builder-route-map.v1.json",
+            "purpose": "Builder route map for choosing the correct payload builder."
         }
     },
     "agent_minimal_context": "/api/agent-minimal-context.v1.json",
+    "agent_first_contact": "/api/agent-first-contact.json",
+    "agent_required_reading": "/api/agent-required-reading.json",
     "agent_output_policy": "/api/agent-output-policy.v1.json",
     "agent_task_router": "/api/agent-task-router.v1.json",
+    "gateway_workflows": "/gateway-workflows/",
+    "gateway_workflows_json": "/api/gateway-workflows.v1.json",
+    "agent_submit_gateway": "/api/agent-submit-gateway.json",
+    "gateway_builder_route_map": "/api/gateway-builder-route-map.v1.json",
     "agent_entry_protocol": {
         "path": "/api/agent-entry-protocol.json",
         "homepage_only_assessment_state": "insufficient_context",
