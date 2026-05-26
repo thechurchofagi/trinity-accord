@@ -924,6 +924,8 @@ jobs:
       - name: Test Echo triage receipt fields only from intake block
         run: python3 scripts/test_echo_triage_receipt_fields_only_from_intake_block.py
       - name: Verify agent-declared verification index has no drift
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: python3 scripts/build_agent_declared_verification_index_from_issues.py --repo thechurchofagi/trinity-accord --check
       - name: Test run_all fail-closed
         run: python3 scripts/test_run_all_fail_closed.py
