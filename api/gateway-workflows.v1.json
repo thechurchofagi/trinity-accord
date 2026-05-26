@@ -521,39 +521,93 @@
       ],
       "inputs": [
         {
-          "name": "source_issue",
+          "name": "--agent-name",
           "required": true,
-          "meaning": "Stage 1 issue number or URL",
+          "meaning": "Agent or submitter display name.",
           "save": true
         },
         {
-          "name": "guardian_id",
+          "name": "--provider",
           "required": true,
-          "meaning": "Guardian ID from Stage 1",
+          "meaning": "Provider/runtime or submitting system.",
           "save": true
         },
         {
-          "name": "public_key_sha256",
+          "name": "--source-issue",
           "required": true,
-          "meaning": "Public key fingerprint from Stage 1",
+          "meaning": "Stage 1 self-registration issue number.",
           "save": true
         },
         {
-          "name": "label",
+          "name": "--guardian-id",
           "required": true,
-          "meaning": "Registry display label",
+          "meaning": "Guardian ID from Stage 1 proof/application.",
           "save": true
         },
         {
-          "name": "guardian_type",
+          "name": "--public-key-sha256",
           "required": true,
-          "meaning": "Guardian type",
+          "meaning": "Public key fingerprint from Stage 1.",
           "save": true
         },
         {
-          "name": "application_mode",
+          "name": "--label",
           "required": true,
-          "meaning": "Application mode",
+          "meaning": "Registry display label.",
+          "save": true
+        },
+        {
+          "name": "--guardian-type",
+          "required": true,
+          "allowed_values": [
+            "ai_agent",
+            "human",
+            "human_with_ai_agent",
+            "automated_script"
+          ],
+          "meaning": "Guardian type.",
+          "save": true
+        },
+        {
+          "name": "--application-mode",
+          "required": true,
+          "meaning": "Application mode, such as joint_human_ai.",
+          "save": true
+        },
+        {
+          "name": "--human-claimed-name",
+          "required": false,
+          "meaning": "Optional self-reported human identity claim.",
+          "save": true
+        },
+        {
+          "name": "--agent-claimed-id",
+          "required": false,
+          "meaning": "Optional self-reported agent identity claim.",
+          "save": true
+        },
+        {
+          "name": "--agent-instance-id",
+          "required": false,
+          "meaning": "Optional agent instance identifier.",
+          "save": true
+        },
+        {
+          "name": "--agent-public-profile",
+          "required": false,
+          "meaning": "Optional public profile URL or identifier.",
+          "save": true
+        },
+        {
+          "name": "--idempotency-key",
+          "required": false,
+          "meaning": "Optional Gateway idempotency key. Usually omit.",
+          "save": true
+        },
+        {
+          "name": "--out",
+          "required": true,
+          "meaning": "Generated listing payload file. Submit this exact file.",
           "save": true
         }
       ],
