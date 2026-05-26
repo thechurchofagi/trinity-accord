@@ -1,0 +1,235 @@
+{
+  "schema": "trinityaccord.verification-claim-scope.v1",
+  "status": "non_authoritative_submission_gate",
+  "purpose": "Define structured claim scope levels to prevent overclaiming in verification submissions.",
+  "authority_boundary": {
+    "claim_scope_does_not_amend_bitcoin_originals": true,
+    "claim_scope_limits_claim_discipline_only": true
+  },
+  "implementation": {
+    "tests": "scripts/test_claim_scope_minimal_partial_full.py"
+  },
+  "claim_scope_values": [
+    {
+      "scope": "minimal_single_check",
+      "description": "A single verification action: one hash check, one explorer lookup, one script run.",
+      "allowed_protocol_levels": [
+        "V0",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V4+"
+      ],
+      "notes": "Must not claim V5 or higher. Must report limitations."
+    },
+    {
+      "scope": "partial_with_limitations",
+      "description": "Multiple checks but with known gaps or limitations.",
+      "allowed_protocol_levels": [
+        "V0",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V4+"
+      ],
+      "notes": "Must list what is not checked. Must not claim full coverage."
+    },
+    {
+      "scope": "component_limited",
+      "description": "Verification covers one or a few components but not full profile.",
+      "allowed_protocol_levels": [
+        "V0",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V4+"
+      ],
+      "notes": "Component levels declared individually. Must not claim V5."
+    },
+    {
+      "scope": "full_component",
+      "description": "Complete verification of a single component (e.g., all B-level targets).",
+      "allowed_protocol_levels": [
+        "V0",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V4+",
+        "V5"
+      ],
+      "notes": "May claim V5 for that component only if all targets are covered."
+    },
+    {
+      "scope": "full_public_digital",
+      "description": "Full public digital profile: all B, D, T, C, P components at required levels.",
+      "allowed_protocol_levels": [
+        "V0",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V4+",
+        "V5",
+        "V6",
+        "V7",
+        "V8"
+      ],
+      "notes": "Required for V5+ claims. All components must be verified."
+    },
+    {
+      "scope": "full_protocol_profile",
+      "description": "Complete protocol verification including external attestations.",
+      "allowed_protocol_levels": [
+        "V0",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V4+",
+        "V5",
+        "V6",
+        "V7",
+        "V8"
+      ],
+      "notes": "Highest scope. Requires institutional or multi-source verification."
+    },
+    {
+      "scope": "future_capability_reserved",
+      "description": "Placeholder for capabilities not yet implemented.",
+      "allowed_protocol_levels": [],
+      "notes": "Cannot be used for current submissions."
+    }
+  ],
+  "scope_derivation_rules": [
+    {
+      "id": "SCOPE001",
+      "condition": "one hash only",
+      "derived_scope": "minimal_single_check",
+      "allowed_levels": [
+        "V3"
+      ]
+    },
+    {
+      "id": "SCOPE002",
+      "condition": "one Bitcoin explorer only",
+      "derived_scope": "minimal_single_check",
+      "allowed_levels": [
+        "V2"
+      ]
+    },
+    {
+      "id": "SCOPE003",
+      "condition": "official scripts only",
+      "derived_scope": "partial_with_limitations",
+      "profile": "V4 official-script",
+      "notes": "V4 official-script profile, not V4+"
+    },
+    {
+      "id": "SCOPE004",
+      "condition": "independent tool one artifact",
+      "derived_scope": "minimal_single_check",
+      "allowed_levels": [
+        "V4+"
+      ],
+      "notes": "V4+ minimal_single_check, not V5"
+    },
+    {
+      "id": "SCOPE005",
+      "condition": "D2 + C3 only",
+      "derived_scope": "component_limited",
+      "notes": "Not V5 \u2014 requires full B/D/T/C/P profile"
+    },
+    {
+      "id": "SCOPE006",
+      "condition": "full B/D/T/C/P profile",
+      "derived_scope": "full_public_digital",
+      "allowed_levels": [
+        "V5"
+      ],
+      "notes": "V5 requires full public digital profile"
+    }
+  ],
+  "overclaim_rejection_rules": [
+    {
+      "id": "OVERCLAIM001",
+      "condition": "minimal_single_check claims full_public_digital",
+      "result": "FAIL",
+      "reason": "Single check cannot claim full public digital scope."
+    },
+    {
+      "id": "OVERCLAIM002",
+      "condition": "V4 official-script claims V4+",
+      "result": "FAIL",
+      "reason": "V4+ requires independent tool or implementation."
+    },
+    {
+      "id": "OVERCLAIM003",
+      "condition": "V4+ one artifact claims V5",
+      "result": "FAIL",
+      "reason": "V5 requires full public digital profile."
+    },
+    {
+      "id": "OVERCLAIM004",
+      "condition": "D2 + C3 claims V5",
+      "result": "FAIL",
+      "reason": "V5 requires all B/D/T/C/P components."
+    }
+  ],
+  "verification_scope_label_derivation": {
+    "description": "How to derive verification_scope_label from protocol level and evidence",
+    "mappings": [
+      {
+        "condition": "protocol_level = V0",
+        "label": "read_only_orientation"
+      },
+      {
+        "condition": "protocol_level = V1",
+        "label": "authority_boundary_recognition"
+      },
+      {
+        "condition": "V2 with one explorer/API reference",
+        "label": "single_reference_check"
+      },
+      {
+        "condition": "V3 with one valid hash",
+        "label": "single_hash_verification"
+      },
+      {
+        "condition": "V3 with multiple valid hashes",
+        "label": "multi_hash_verification"
+      },
+      {
+        "condition": "V4 official scripts all blocking PASS",
+        "label": "official_script_audit"
+      },
+      {
+        "condition": "V4 official scripts plus non-blocking limitations",
+        "label": "official_script_audit_with_limitations"
+      },
+      {
+        "condition": "V4+ one independent artifact reproduction",
+        "label": "independent_single_artifact_reproduction"
+      },
+      {
+        "condition": "V4+ multiple independent artifacts",
+        "label": "independent_multi_artifact_reproduction"
+      },
+      {
+        "condition": "V5 full public digital profile",
+        "label": "full_public_digital_verification"
+      },
+      {
+        "condition": "V6/V7/V8 full profile",
+        "label": "full_protocol_profile_verification"
+      },
+      {
+        "condition": "legacy record",
+        "label": "legacy_unlabeled"
+      }
+    ]
+  }
+}

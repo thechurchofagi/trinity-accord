@@ -1,0 +1,63 @@
+./tools/redteam/gateway_audit.py:98:            secret_patterns = [r"ghp_[a-zA-Z0-9]{36}", r"github_pat_", r"sk-[a-zA-Z0-9]{20,}", r"Bearer [a-zA-Z0-9]{20,}"]
+./archive/cloudflare-worker-deprecated-2026-05-14/agent-issue-gateway-worker.js:46:      /ghp_[A-Za-z0-9_]+/i,
+./archive/cloudflare-worker-deprecated-2026-05-14/agent-issue-gateway-worker.js:47:      /github_pat_[A-Za-z0-9_]+/i,
+./examples/github-app-backend/server.js:31:    /ghp_[A-Za-z0-9_]+/i,
+./examples/github-app-backend/server.js:32:    /github_pat_[A-Za-z0-9_]+/i,
+./system-test-runs/20260516T121401Z/security/token-scan.txt:1:./tools/redteam/gateway_audit.py:98:            secret_patterns = [r"ghp_[a-zA-Z0-9]{36}", r"github_pat_", r"sk-[a-zA-Z0-9]{20,}", r"Bearer [a-zA-Z0-9]{20,}"]
+./system-test-runs/20260516T121401Z/security/token-scan.txt:2:./archive/cloudflare-worker-deprecated-2026-05-14/agent-issue-gateway-worker.js:46:      /ghp_[A-Za-z0-9_]+/i,
+./system-test-runs/20260516T121401Z/security/token-scan.txt:3:./archive/cloudflare-worker-deprecated-2026-05-14/agent-issue-gateway-worker.js:47:      /github_pat_[A-Za-z0-9_]+/i,
+./system-test-runs/20260516T121401Z/security/token-scan.txt:30:./examples/github-app-backend/server.js:31:    /ghp_[A-Za-z0-9_]+/i,
+./system-test-runs/20260516T121401Z/security/token-scan.txt:31:./examples/github-app-backend/server.js:32:    /github_pat_[A-Za-z0-9_]+/i,
+./system-test-runs/20260516T121401Z/security/token-scan.txt:33:./scripts/system_test_deep.py:468:        (r'(?i)github_pat_[a-zA-Z0-9]{20,}', 'GitHub PAT'),
+./system-test-runs/20260516T121401Z/security/token-scan.txt:34:./scripts/system_test_deep.py:470:        (r'(?i)ghp_[a-zA-Z0-9]{36}', 'GitHub token'),
+./system-test-runs/20260516T121401Z/security/token-scan.txt:35:./scripts/test_ta_avr_secret_hygiene.py:19:    (r"ghp_[A-Za-z0-9_]{20,}", "GitHub personal access token"),
+./system-test-runs/20260516T121401Z/security/token-scan.txt:36:./scripts/test_ta_avr_secret_hygiene.py:20:    (r"github_pat_[A-Za-z0-9_]{20,}", "GitHub fine-grained PAT"),
+./system-test-runs/20260516T121401Z/security/token-scan.txt:38:./scripts/test_ta_avr_secret_hygiene.py:36:    "github_pat_",
+./system-test-runs/20260516T121401Z/security/token-scan.txt:39:./scripts/test_ta_avr_secret_hygiene.py:37:    "ghp_",
+./system-test-runs/20260516T121401Z/security/token-scan.txt:40:./scripts/test_ta_avr_secret_hygiene.py:107:            (r"ghp_", "GitHub PAT"),
+./system-test-runs/20260516T121401Z/security/token-scan.txt:41:./scripts/test_ta_avr_secret_hygiene.py:108:            (r"github_pat_", "GitHub fine-grained PAT"),
+./system-test-runs/20260516T121401Z/security/token-scan.txt:44:./scripts/system_test_comprehensive.py:375:        (r'(?i)github_pat_[a-zA-Z0-9]{20,}', 'GitHub PAT'),
+./system-test-runs/20260516T121401Z/security/token-scan.txt:45:./scripts/system_test_secret_scan.py:10:    r"ghp_[A-Za-z0-9_]{20,}",
+./system-test-runs/20260516T121401Z/security/token-scan.txt:46:./scripts/system_test_secret_scan.py:11:    r"github_pat_[A-Za-z0-9_]+",
+./system-test-runs/20260516T121401Z/security/token-scan.txt:47:./tests/fixtures/redteam/gateway_payloads/contains_secret_like_token.json:9:  "body": "This payload contains a fake token: ghp_1234567890abcdef1234567890abcdef1234 for testing secret detection. Not a real token.",
+./system-test-runs/20260516T121401Z/security/token-scan.txt:48:./tests/test_redteam_issue_vs_archive.py:99:        has_secret = bool(re.search(r"ghp_[a-zA-Z0-9]{36}|github_pat_", body))
+./api/agent-gateway-production-profile.json:43:    "do_not_store_private_key_in_repository",
+./api/agent-submit-gateway.json:81:    "never_expose_github_app_private_key",
+./api/agent-safety-boundary.json:38:    "do_not_submit_private_keys": true,
+./api/agent-safety-boundary.json:39:    "do_not_submit_secret_values": true,
+./api/agent-safety-boundary.json:40:    "do_not_submit_api_tokens": true,
+./api/agent-safety-boundary.json:41:    "do_not_expose_github_app_private_key": true,
+./scripts/system_test_deep.py:467:        (r'(?i)(secret|password|passwd|pwd)\s*[:=]\s*["\'][^"\']{4,}', 'Secret'),
+./scripts/system_test_deep.py:468:        (r'(?i)github_pat_[a-zA-Z0-9]{20,}', 'GitHub PAT'),
+./scripts/system_test_deep.py:470:        (r'(?i)ghp_[a-zA-Z0-9]{36}', 'GitHub token'),
+./scripts/validate_echo_authorship_proof.py:13:DANGEROUS_FIELDS = ["private_key", "secret", "api_token", "password", "mnemonic", "seed_phrase", "passphrase"]
+./scripts/validate_echo_authorship_proof.py:165:    for d in ["private_key", "secret_value", "api_token", "password", "mnemonic", "seed_phrase"]:
+./scripts/verify_echo_authorship_claim.py:190:    DANGEROUS = ["private_key", "secret_value", "api_token", "password", "mnemonic", "seed_phrase"]
+./scripts/test_ta_avr_secret_hygiene.py:19:    (r"ghp_[A-Za-z0-9_]{20,}", "GitHub personal access token"),
+./scripts/test_ta_avr_secret_hygiene.py:20:    (r"github_pat_[A-Za-z0-9_]{20,}", "GitHub fine-grained PAT"),
+./scripts/test_ta_avr_secret_hygiene.py:36:    "github_pat_",
+./scripts/test_ta_avr_secret_hygiene.py:37:    "ghp_",
+./scripts/test_ta_avr_secret_hygiene.py:107:            (r"ghp_", "GitHub PAT"),
+./scripts/test_ta_avr_secret_hygiene.py:108:            (r"github_pat_", "GitHub fine-grained PAT"),
+./scripts/test_ta_avr_secret_hygiene.py:142:def test_no_private_keys():
+./scripts/test_ta_avr_secret_hygiene.py:179:        ("no_private_keys", test_no_private_keys),
+./scripts/build_agent_verification_receipt.py:156:    "private_key", "secret", "api_token", "password", "mnemonic",
+./scripts/build_agent_verification_receipt.py:157:    "seed_phrase", "passphrase"
+./scripts/test_echo_authorship_proof.py:70:    "private_key": "supersecretkey",
+./scripts/system_test_comprehensive.py:373:        (r'(?i)(secret|password|passwd|pwd)\s*[:=]\s*["\'][^"\']{4,}', 'Secret/Password'),
+./scripts/system_test_comprehensive.py:375:        (r'(?i)github_pat_[a-zA-Z0-9]{20,}', 'GitHub PAT'),
+./scripts/system_test_secret_scan.py:10:    r"ghp_[A-Za-z0-9_]{20,}",
+./scripts/system_test_secret_scan.py:11:    r"github_pat_[A-Za-z0-9_]+",
+./scripts/test_echo_authorship_claim.py:150:        private_key = Ed25519PrivateKey.generate()
+./scripts/test_echo_authorship_claim.py:151:        public_key = private_key.public_key()
+./scripts/test_echo_authorship_claim.py:155:        signature = private_key.sign(challenge_hash.encode("utf-8"))
+./scripts/test_echo_authorship_claim.py:293:def test_redteam_private_key_leak():
+./scripts/test_echo_authorship_claim.py:296:        str(REDTEAM / "authorship_private_key_leak.json"),
+./scripts/test_echo_authorship_claim.py:352:        private_key = Ed25519PrivateKey.generate()
+./scripts/test_echo_authorship_claim.py:353:        public_key = private_key.public_key()
+./scripts/test_echo_authorship_claim.py:357:        wrong_sig = private_key.sign(b"wrong_message")
+./scripts/test_echo_authorship_claim.py:476:    test("Private key leak (must fail)", test_redteam_private_key_leak)
+./tests/fixtures/redteam/gateway_payloads/contains_secret_like_token.json:9:  "body": "This payload contains a fake token: ghp_1234567890abcdef1234567890abcdef1234 for testing secret detection. Not a real token.",
+./tests/redteam/authorship_private_key_leak.json:9:  "private_key": "THIS_IS_A_PRIVATE_KEY_AND_MUST_NOT_BE_ACCEPTED"
+./tests/redteam/manifest.json:89:      "path": "tests/redteam/authorship_private_key_leak.json",
+./tests/test_redteam_issue_vs_archive.py:99:        has_secret = bool(re.search(r"ghp_[a-zA-Z0-9]{36}|github_pat_", body))

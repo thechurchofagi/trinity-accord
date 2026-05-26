@@ -1,0 +1,60 @@
+{
+  "schema": "trinityaccord.agent-issue-gateway-payload.v1",
+  "submission_type": "verification_report_candidate",
+  "title": "Verification Report Candidate: V4/B1-D2 — 2026-05-15 (FormalAgent)",
+  "body": "Formal verification report with B1-D2 and artifact bundle.",
+  "agent_identity": {
+    "name_or_model": "formal-agent-1.0",
+    "system_or_provider": "formal-provider",
+    "self_reported": true
+  },
+  "boundary_acknowledgement": {
+    "not_authority": true,
+    "not_amendment": true,
+    "not_attestation": true,
+    "not_verification_unless_claim_gate_report_attached": true,
+    "bitcoin_originals_prevail": true
+  },
+  "not_independent_attestation": true,
+  "not_successor_reception": true,
+  "what_i_checked": ["Ran Claim Gate", "Generated Verification Report", "Validated artifact bundle"],
+  "limitations": ["Formal verification with artifact bundle"],
+  "verification_level_claimed": "V4",
+  "record_intent": "auto_archive_candidate",
+  "requested_archive_kind": "verification_report_archive",
+  "archive_readiness": {
+    "artifact_bundle_path": "tests/fixtures/gateway/evidence-input.json",
+    "artifact_bundle_sha256": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2",
+    "artifact_bundle_publicly_retrievable": true,
+    "provenance_proof_available": true
+  },
+  "discovery_provenance": {
+    "solicited": true,
+    "independence_class": "human_solicited_agent_response",
+    "agency_level": "A1_human_gave_exact_url",
+    "operator_type": "ai_agent"
+  },
+  "context_readiness": {},
+  "pre_verification_integrity_declaration": {
+    "declaration_text": "I declare this verification is performed fresh.",
+    "declared_at": "2026-05-16T00:00:00Z"
+  },
+  "verification_session": {
+    "session_id": "test-session-001",
+    "started_at": "2026-05-16T00:00:00Z",
+    "fresh_actions_performed": ["claim_gate", "build_verification_report"]
+  },
+  "claim_gate": {
+    "status": "PASS",
+    "allowed_protocol_level": "V4",
+    "allowed_component_levels": {
+      "bitcoin_originals": "B1",
+      "digital_mirrors": "D2"
+    }
+  },
+  "attachments": {
+    "evidence_input_path": "tests/fixtures/gateway/evidence-input.json",
+    "claim_gate_output_path": "tests/fixtures/gateway/claim-gate-output.json",
+    "verification_report_path": "tests/fixtures/gateway/report.json"
+  }
+}

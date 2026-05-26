@@ -1,0 +1,53 @@
+{
+  "schema": "trinityaccord.evidence-input.v1",
+  "agent": {
+    "name": "test-agent",
+    "model_or_system": "test-system",
+    "tooling": [
+      "exec"
+    ]
+  },
+  "provenance": {
+    "solicited": true,
+    "independence_class": "human_solicited_agent_response",
+    "agency_level": "A1_human_gave_exact_url"
+  },
+  "requested_record_kind": "test_record",
+  "evidence": {
+    "scripts": [
+      {
+        "path": "scripts/claim_gate.py",
+        "exists": true,
+        "source_reviewed": true,
+        "executed": true,
+        "result": "PASS"
+      }
+    ],
+    "hashes": [],
+    "bitcoin_checks": [
+      {
+        "source_type": "body_hash",
+        "sources": [
+          "https://ordinals.com/inscription/97631551"
+        ],
+        "inscription_id": "97631551",
+        "body_hash_reproduced": false,
+        "note": "Attempted body hash reproduction but could not verify"
+      }
+    ],
+    "digital_mirror_checks": [],
+    "repository_snapshot_checks": [],
+    "time_anchor_checks": [],
+    "chronicle_checks": [],
+    "nft_checks": [],
+    "physical_checks": [],
+    "echo_context": {}
+  },
+  "limitations": [
+    "Body hash reproduction failed — cannot claim B6",
+    "No SPV, local node, or physical verification performed"
+  ],
+  "claims_requested_by_agent": [
+    "bitcoin_originals_B1"
+  ]
+}

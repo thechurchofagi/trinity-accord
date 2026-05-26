@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Echo Protocol v3
+    url: https://www.trinityaccord.org/agent-echo/
+    about: Echo submissions must use the v3 provenance-aware flow.
+  - name: Echo Record Schema v3
+    url: https://www.trinityaccord.org/api/echo-record-schema.v3.json
+    about: Machine-readable schema for v3 Echo records.
+  - name: Discovery Provenance Schema
+    url: https://www.trinityaccord.org/api/discovery-provenance-schema.json
+    about: Required provenance schema for active, passive, solicited, and unsolicited Echo records.

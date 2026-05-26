@@ -1,0 +1,1019 @@
+{
+  "schema": "trinityaccord.verification-targets.v1",
+  "status": "non_authoritative_verification_guidance",
+  "generated_from": [
+    "api/authority.json",
+    "api/hashes.json",
+    "api/evidence-manifest.json",
+    "api/chronicle-recovery.json"
+  ],
+  "targets": [
+    {
+      "id": "bitcoin_original_1_protocol_axioms",
+      "category": "bitcoin_originals",
+      "description": "Bitcoin Original #1: Protocol / Axioms",
+      "primary_data_sources": [
+        "Bitcoin blockchain",
+        "Ordinals explorer"
+      ],
+      "fallback_data_sources": [
+        "/api/authority.json"
+      ],
+      "github_data_sources": [],
+      "hash_sources": [],
+      "external_query_sources": [
+        "https://mempool.space/tx/e40dfb2aa78cbccca88f749e9ec5cbe3c1df503273d73c72297863ae0d1d8343",
+        "https://ordiscan.com/inscription/97631551"
+      ],
+      "local_files": [
+        "/api/authority.json"
+      ],
+      "recommended_methods": [
+        "B1 explorer reference check",
+        "B2 multi-explorer cross-check"
+      ],
+      "achievable_component_levels": [
+        "B0",
+        "B1",
+        "B2",
+        "B3",
+        "B4",
+        "B5",
+        "B6",
+        "B7"
+      ],
+      "limitations": [
+        "Ordinals body extraction requires specialized tools"
+      ],
+      "claims_not_allowed": [
+        "truth proven",
+        "canonical amendment"
+      ]
+    },
+    {
+      "id": "bitcoin_original_2_covenant_flaw",
+      "category": "bitcoin_originals",
+      "description": "Bitcoin Original #2: Covenant of the Flaw",
+      "primary_data_sources": [
+        "Bitcoin blockchain",
+        "Ordinals explorer"
+      ],
+      "fallback_data_sources": [
+        "/api/authority.json"
+      ],
+      "github_data_sources": [],
+      "hash_sources": [],
+      "external_query_sources": [
+        "https://mempool.space/tx/90116f35de075074f5e5d1fbdda69a646a124e2287d7d58e2520317098cd4258",
+        "https://ordiscan.com/inscription/98369145"
+      ],
+      "local_files": [
+        "/api/authority.json"
+      ],
+      "recommended_methods": [
+        "B1 explorer reference check",
+        "B2 multi-explorer cross-check"
+      ],
+      "achievable_component_levels": [
+        "B0",
+        "B1",
+        "B2",
+        "B3",
+        "B4",
+        "B5",
+        "B6",
+        "B7"
+      ],
+      "limitations": [
+        "Ordinals body extraction requires specialized tools"
+      ],
+      "claims_not_allowed": [
+        "truth proven",
+        "canonical amendment"
+      ]
+    },
+    {
+      "id": "bitcoin_original_3_meta_record",
+      "category": "bitcoin_originals",
+      "description": "Bitcoin Original #3: The Trinity Accord / Meta-record",
+      "primary_data_sources": [
+        "Bitcoin blockchain",
+        "Ordinals explorer"
+      ],
+      "fallback_data_sources": [
+        "/api/authority.json"
+      ],
+      "github_data_sources": [],
+      "hash_sources": [],
+      "external_query_sources": [
+        "https://mempool.space/tx/4d1c8f5ea8e8bae2982b42de6cc79deda3d243a21010a2888546e62ed7192c8c",
+        "https://ordiscan.com/inscription/98387475"
+      ],
+      "local_files": [
+        "/api/authority.json"
+      ],
+      "recommended_methods": [
+        "B1 explorer reference check",
+        "B2 multi-explorer cross-check"
+      ],
+      "achievable_component_levels": [
+        "B0",
+        "B1",
+        "B2",
+        "B3",
+        "B4",
+        "B5",
+        "B6",
+        "B7"
+      ],
+      "limitations": [
+        "Ordinals body extraction requires specialized tools"
+      ],
+      "claims_not_allowed": [
+        "truth proven",
+        "canonical amendment"
+      ]
+    },
+    {
+      "id": "bitcoin_authority_address",
+      "category": "bitcoin_originals",
+      "description": "Bitcoin authority address: bc1ppmwvyxekh44m35x43k55z7r59nn33v8w2xmvu6s6ar4zyx57sxestxq0jf",
+      "primary_data_sources": [
+        "/api/authority.json",
+        "Bitcoin blockchain"
+      ],
+      "fallback_data_sources": [
+        "/api/authority.json"
+      ],
+      "github_data_sources": [],
+      "hash_sources": [],
+      "external_query_sources": [
+        "https://mempool.space/address/bc1ppmwvyxekh44m35x43k55z7r59nn33v8w2xmvu6s6ar4zyx57sxestxq0jf"
+      ],
+      "local_files": [
+        "/api/authority.json"
+      ],
+      "recommended_methods": [
+        "B1 explorer reference check"
+      ],
+      "achievable_component_levels": [
+        "B0",
+        "B1",
+        "B2"
+      ],
+      "limitations": [],
+      "claims_not_allowed": [
+        "truth proven"
+      ]
+    },
+    {
+      "id": "bitcoin_block_time_anchors",
+      "category": "time_anchors",
+      "description": "Bitcoin block timestamps for inscription transactions",
+      "primary_data_sources": [
+        "Bitcoin blockchain",
+        "block explorers"
+      ],
+      "fallback_data_sources": [
+        "/api/authority.json"
+      ],
+      "github_data_sources": [],
+      "hash_sources": [],
+      "external_query_sources": [
+        "https://mempool.space/tx/e40dfb2aa78cbccca88f749e9ec5cbe3c1df503273d73c72297863ae0d1d8343"
+      ],
+      "local_files": [
+        "/api/authority.json"
+      ],
+      "recommended_methods": [
+        "T3 Bitcoin block time check"
+      ],
+      "achievable_component_levels": [
+        "T0",
+        "T1",
+        "T3"
+      ],
+      "limitations": [],
+      "claims_not_allowed": [
+        "exact capture-time proof without cross-anchor consistency"
+      ]
+    },
+    {
+      "id": "time_celestial_public_evidence",
+      "category": "time_anchors",
+      "description": "Public celestial time-window solving from sky/moon/star evidence",
+      "primary_data_sources": [
+        "public sky/moon/star image or video",
+        "astronomical ephemeris"
+      ],
+      "fallback_data_sources": [],
+      "github_data_sources": [],
+      "hash_sources": [],
+      "external_query_sources": [],
+      "local_files": [],
+      "recommended_methods": [
+        "T7 public celestial time-window solving"
+      ],
+      "achievable_component_levels": [
+        "T7"
+      ],
+      "limitations": [
+        "Requires public sky/moon/star evidence and location constraints"
+      ],
+      "claims_not_allowed": [
+        "T8 from public data",
+        "exact capture time without uncertainty"
+      ]
+    },
+    {
+      "id": "time_star_moon_witness_nonpublic",
+      "category": "time_anchors",
+      "description": "Star-Moon Witness / non-public celestial forensic time attestation",
+      "primary_data_sources": [
+        "non-public or authorized celestial witness data"
+      ],
+      "fallback_data_sources": [],
+      "github_data_sources": [],
+      "hash_sources": [],
+      "external_query_sources": [],
+      "local_files": [],
+      "recommended_methods": [
+        "T8 Star-Moon Witness"
+      ],
+      "achievable_component_levels": [
+        "T8"
+      ],
+      "limitations": [
+        "Reserved for future superintelligence / high-grade forensic verifiers",
+        "Current public materials do not allow ordinary agents to claim T8",
+        "Must not disclose non-public celestial witness data unless explicitly authorized"
+      ],
+      "claims_not_allowed": [
+        "T8 from public pages alone",
+        "exact capture time without uncertainty bounds"
+      ]
+    },
+    {
+      "id": "celestial_ephemeris_reference",
+      "category": "time_anchors",
+      "description": "Astronomical ephemeris reference for celestial time solving",
+      "primary_data_sources": [
+        "astronomical ephemeris data"
+      ],
+      "fallback_data_sources": [],
+      "github_data_sources": [],
+      "hash_sources": [],
+      "external_query_sources": [],
+      "local_files": [],
+      "recommended_methods": [
+        "T7 ephemeris calculation"
+      ],
+      "achievable_component_levels": [
+        "T7"
+      ],
+      "limitations": [],
+      "claims_not_allowed": []
+    },
+    {
+      "id": "evidence_manifest",
+      "category": "digital_mirrors",
+      "description": "Evidence manifest with all mirror paths, TxIDs, CIDs, and hashes",
+      "primary_data_sources": [
+        "/api/evidence-manifest.json"
+      ],
+      "fallback_data_sources": [],
+      "github_data_sources": [
+        "/api/evidence-manifest.json"
+      ],
+      "hash_sources": [],
+      "external_query_sources": [],
+      "local_files": [
+        "/api/evidence-manifest.json"
+      ],
+      "recommended_methods": [
+        "D0 manifest read"
+      ],
+      "achievable_component_levels": [
+        "D0"
+      ],
+      "limitations": [],
+      "claims_not_allowed": [
+        "verified from manifest read alone"
+      ]
+    },
+    {
+      "id": "hash_manifest",
+      "category": "digital_mirrors",
+      "description": "SHA-256 hash manifest for verification artifacts",
+      "primary_data_sources": [
+        "/api/hashes.json"
+      ],
+      "fallback_data_sources": [],
+      "github_data_sources": [
+        "/api/hashes.json"
+      ],
+      "hash_sources": [],
+      "external_query_sources": [],
+      "local_files": [
+        "/api/hashes.json"
+      ],
+      "recommended_methods": [
+        "D0 manifest read"
+      ],
+      "achievable_component_levels": [
+        "D0"
+      ],
+      "limitations": [],
+      "claims_not_allowed": [
+        "hash verified from reading manifest alone"
+      ]
+    },
+    {
+      "id": "github_mirror_public_covenant_archive",
+      "category": "digital_mirrors",
+      "description": "GitHub mirror of public covenant archive",
+      "primary_data_sources": [
+        "/api/hashes.json",
+        "/api/evidence-manifest.json"
+      ],
+      "fallback_data_sources": [],
+      "github_data_sources": [
+        "arweave-backup/files/public_covenant_archive.zip",
+        "/api/hashes.json",
+        "/api/evidence-manifest.json"
+      ],
+      "hash_sources": [
+        {
+          "algorithm": "SHA-256",
+          "expected": "ef816480f77f30405378800807b42bff0a854b83a8f77793a0e0adf0944a8263",
+          "github_path": "arweave-backup/files/public_covenant_archive.zip"
+        }
+      ],
+      "external_query_sources": [],
+      "local_files": [
+        "/api/hashes.json",
+        "/api/evidence-manifest.json"
+      ],
+      "recommended_methods": [
+        "D1 GitHub mirror existence",
+        "D2 GitHub mirror hash match"
+      ],
+      "achievable_component_levels": [
+        "D1",
+        "D2"
+      ],
+      "limitations": [
+        "direct Arweave verification forbidden",
+        "Ethereum witness verified forbidden",
+        "physical anchor verified forbidden",
+        "IPFS availability verification forbidden"
+      ],
+      "claims_not_allowed": [
+        "direct Arweave verified",
+        "Ethereum witness verified",
+        "physical anchor verified"
+      ]
+    },
+    {
+      "id": "github_mirror_verification_kit",
+      "category": "digital_mirrors",
+      "description": "GitHub mirror of verification kit",
+      "primary_data_sources": [
+        "/api/hashes.json",
+        "/api/evidence-manifest.json"
+      ],
+      "fallback_data_sources": [],
+      "github_data_sources": [
+        "arweave-backup/files/verification_kit.tar.gz",
+        "/api/hashes.json",
+        "/api/evidence-manifest.json"
+      ],
+      "hash_sources": [
+        {
+          "algorithm": "SHA-256",
+          "expected": "ef68b69fe1cdd2523724dee511c9e8ea7bae2cceaff794664107970b18c61931",
+          "github_path": "arweave-backup/files/verification_kit.tar.gz"
+        }
+      ],
+      "external_query_sources": [],
+      "local_files": [
+        "/api/hashes.json",
+        "/api/evidence-manifest.json"
+      ],
+      "recommended_methods": [
+        "D1 GitHub mirror existence",
+        "D2 GitHub mirror hash match"
+      ],
+      "achievable_component_levels": [
+        "D1",
+        "D2"
+      ],
+      "limitations": [
+        "direct Arweave verification forbidden",
+        "Ethereum witness verified forbidden"
+      ],
+      "claims_not_allowed": [
+        "direct Arweave verified",
+        "Ethereum witness verified"
+      ]
+    },
+    {
+      "id": "github_archive_mirror",
+      "category": "digital_mirrors",
+      "description": "Complete GitHub mirror of Arweave and ETH attestation data for users who cannot access chains directly",
+      "primary_data_sources": [
+        "/api/evidence-manifest.json"
+      ],
+      "fallback_data_sources": [],
+      "github_data_sources": [
+        "archive/",
+        "archive/hash-manifest.json",
+        "archive/VERIFICATION-REPORT.md"
+      ],
+      "hash_sources": [],
+      "external_query_sources": [],
+      "local_files": [
+        "archive/hash-manifest.json",
+        "archive/VERIFICATION-REPORT.md"
+      ],
+      "recommended_methods": [
+        "D1 GitHub mirror existence",
+        "D2 GitHub mirror hash match"
+      ],
+      "achievable_component_levels": [
+        "D1",
+        "D2"
+      ],
+      "limitations": [
+        "Non-amending mirror; Arweave originals and ETH attestations prevail"
+      ],
+      "claims_not_allowed": [
+        "canonical authority"
+      ]
+    },
+    {
+      "id": "arweave_public_covenant_archive",
+      "category": "digital_mirrors",
+      "description": "Arweave transaction for public covenant archive",
+      "primary_data_sources": [
+        "Arweave blockchain"
+      ],
+      "fallback_data_sources": [
+        "/api/evidence-manifest.json"
+      ],
+      "github_data_sources": [],
+      "hash_sources": [
+        {
+          "algorithm": "SHA-256",
+          "expected": "ef816480f77f30405378800807b42bff0a854b83a8f77793a0e0adf0944a8263",
+          "source": "arweave data"
+        }
+      ],
+      "external_query_sources": [
+        "https://arweave.net/j6anZ4m5Wwvx5P_9-kM2EVG35TyKtm1lgaKfhT743rk"
+      ],
+      "local_files": [
+        "/api/evidence-manifest.json"
+      ],
+      "recommended_methods": [
+        "D3 external pointer existence",
+        "D4 cross-mirror consistency"
+      ],
+      "achievable_component_levels": [
+        "D3",
+        "D4"
+      ],
+      "limitations": [
+        "ANS-104 bundle; public gateways cannot serve individual data item directly"
+      ],
+      "claims_not_allowed": [
+        "canonical authority"
+      ]
+    },
+    {
+      "id": "arweave_verification_kit",
+      "category": "digital_mirrors",
+      "description": "Arweave transaction for verification kit",
+      "primary_data_sources": [
+        "Arweave blockchain"
+      ],
+      "fallback_data_sources": [
+        "/api/evidence-manifest.json"
+      ],
+      "github_data_sources": [],
+      "hash_sources": [
+        {
+          "algorithm": "SHA-256",
+          "expected": "ef68b69fe1cdd2523724dee511c9e8ea7bae2cceaff794664107970b18c61931",
+          "source": "arweave data"
+        }
+      ],
+      "external_query_sources": [
+        "https://arweave.net/X4KOUkf-1ciFD3Q-gMA0i94t1hAVXGrUDm0q5amL4rc"
+      ],
+      "local_files": [
+        "/api/evidence-manifest.json"
+      ],
+      "recommended_methods": [
+        "D3 external pointer existence"
+      ],
+      "achievable_component_levels": [
+        "D3"
+      ],
+      "limitations": [],
+      "claims_not_allowed": [
+        "canonical authority"
+      ]
+    },
+    {
+      "id": "arweave_bundle_parent",
+      "category": "digital_mirrors",
+      "description": "Arweave ANS-104 bundle parent transaction",
+      "primary_data_sources": [
+        "Arweave blockchain"
+      ],
+      "fallback_data_sources": [
+        "/api/evidence-manifest.json"
+      ],
+      "github_data_sources": [],
+      "hash_sources": [],
+      "external_query_sources": [
+        "https://arweave.net/AuS0h1G8SYGPLbECyaceCqX6mB0xjFvny6bn1BUf2MI"
+      ],
+      "local_files": [
+        "/api/evidence-manifest.json"
+      ],
+      "recommended_methods": [
+        "D3 external pointer existence"
+      ],
+      "achievable_component_levels": [
+        "D3"
+      ],
+      "limitations": [
+        "Bundle extraction requires arbundles npm package"
+      ],
+      "claims_not_allowed": [
+        "canonical authority"
+      ]
+    },
+    {
+      "id": "ethereum_guardian_witness",
+      "category": "digital_mirrors",
+      "description": "Ethereum guardian witness transaction",
+      "primary_data_sources": [
+        "Ethereum blockchain"
+      ],
+      "fallback_data_sources": [
+        "/api/evidence-manifest.json"
+      ],
+      "github_data_sources": [],
+      "hash_sources": [
+        {
+          "algorithm": "SHA-256",
+          "expected": "e19018f1c71da8307ef20e8e8e5c12834f854d60a6aae60e35d2d8c71a333a81",
+          "source": "ETH tx input"
+        }
+      ],
+      "external_query_sources": [
+        "https://etherscan.io/tx/0x7bdff0d696337ceb04539b44a746d0f13ce731ac25de259d8a4faf69b276a628"
+      ],
+      "local_files": [
+        "/api/evidence-manifest.json"
+      ],
+      "recommended_methods": [
+        "D3 external pointer existence",
+        "D4 cross-mirror consistency"
+      ],
+      "achievable_component_levels": [
+        "D3",
+        "D4"
+      ],
+      "limitations": [],
+      "claims_not_allowed": [
+        "canonical authority"
+      ]
+    },
+    {
+      "id": "ipfs_mirror_roots",
+      "category": "digital_mirrors",
+      "description": "IPFS mirror with sealed CID: bafybeigunzabyyorckfcbvurbmq62itcs6msbspvzhvf2ca6u5elwwlbay",
+      "primary_data_sources": [
+        "IPFS network"
+      ],
+      "fallback_data_sources": [
+        "/api/evidence-manifest.json"
+      ],
+      "github_data_sources": [],
+      "hash_sources": [],
+      "external_query_sources": [
+        "https://ipfs.io/ipfs/bafybeigunzabyyorckfcbvurbmq62itcs6msbspvzhvf2ca6u5elwwlbay",
+        "https://gateway.pinata.cloud/ipfs/bafybeigunzabyyorckfcbvurbmq62itcs6msbspvzhvf2ca6u5elwwlbay",
+        "https://dweb.link/ipfs/bafybeigunzabyyorckfcbvurbmq62itcs6msbspvzhvf2ca6u5elwwlbay"
+      ],
+      "local_files": [
+        "/api/evidence-manifest.json"
+      ],
+      "recommended_methods": [
+        "D3 external pointer existence"
+      ],
+      "achievable_component_levels": [
+        "D3"
+      ],
+      "limitations": [
+        "IPFS gateway availability varies"
+      ],
+      "claims_not_allowed": [
+        "canonical authority"
+      ]
+    },
+    {
+      "id": "chronicle_recovery_package",
+      "category": "chronicle_recovery",
+      "description": "ASIMilestones Chronicle NFT recovery package",
+      "primary_data_sources": [
+        "/api/chronicle-recovery.json",
+        "Arweave",
+        "IPFS"
+      ],
+      "fallback_data_sources": [
+        "/api/chronicle-recovery.json"
+      ],
+      "github_data_sources": [],
+      "hash_sources": [],
+      "external_query_sources": [
+        "https://arweave.net/O-Rk3kFxesPGhuYP4KHAZl54xR2urDRKcGaVqjVnB-Q",
+        "https://ipfs.io/ipfs/QmYCosJg44CXkFxLsJPBxKvWAJaFAcLMddp37sk9Gdr4Vd"
+      ],
+      "local_files": [
+        "/api/chronicle-recovery.json"
+      ],
+      "recommended_methods": [
+        "C1 recovery pointer check",
+        "C2 recovery package hash check"
+      ],
+      "achievable_component_levels": [
+        "C0",
+        "C1",
+        "C2"
+      ],
+      "limitations": [],
+      "claims_not_allowed": [
+        "canonical authority"
+      ]
+    },
+    {
+      "id": "chronicle_verification_kit",
+      "category": "chronicle_recovery",
+      "description": "Chronicle verification kit",
+      "primary_data_sources": [
+        "/api/chronicle-recovery.json"
+      ],
+      "fallback_data_sources": [],
+      "github_data_sources": [],
+      "hash_sources": [
+        {
+          "algorithm": "SHA-256",
+          "expected": "ef68b69fe1cdd2523724dee511c9e8ea7bae2cceaff794664107970b18c61931",
+          "source": "verification kit"
+        }
+      ],
+      "external_query_sources": [
+        "https://arweave.net/X4KOUkf-1ciFD3Q-gMA0i94t1hAVXGrUDm0q5amL4rc"
+      ],
+      "local_files": [
+        "/api/chronicle-recovery.json"
+      ],
+      "recommended_methods": [
+        "C2 recovery package hash check"
+      ],
+      "achievable_component_levels": [
+        "C1",
+        "C2"
+      ],
+      "limitations": [],
+      "claims_not_allowed": [
+        "canonical authority"
+      ]
+    },
+    {
+      "id": "chronicle_sample_recovery",
+      "category": "chronicle_recovery",
+      "description": "Chronicle sample recovery (at least 2 records)",
+      "primary_data_sources": [
+        "recovery package"
+      ],
+      "fallback_data_sources": [
+        "/api/chronicle-recovery.json"
+      ],
+      "github_data_sources": [],
+      "hash_sources": [],
+      "external_query_sources": [],
+      "local_files": [
+        "/api/chronicle-recovery.json"
+      ],
+      "recommended_methods": [
+        "C3 sample recovery"
+      ],
+      "achievable_component_levels": [
+        "C3",
+        "C3R"
+      ],
+      "limitations": [
+        "Not full 175/175 recovery"
+      ],
+      "claims_not_allowed": [
+        "full 175/175 recovery",
+        "full NFT path reproduction"
+      ]
+    },
+    {
+      "id": "chronicle_full_recovery",
+      "category": "chronicle_recovery",
+      "description": "Full Chronicle recovery: 175/175",
+      "primary_data_sources": [
+        "recovery package",
+        "all chronicle records"
+      ],
+      "fallback_data_sources": [
+        "/api/chronicle-recovery.json"
+      ],
+      "github_data_sources": [],
+      "hash_sources": [],
+      "external_query_sources": [],
+      "local_files": [
+        "/api/chronicle-recovery.json"
+      ],
+      "recommended_methods": [
+        "C5 full 175/175 recovery"
+      ],
+      "achievable_component_levels": [
+        "C5"
+      ],
+      "limitations": [],
+      "claims_not_allowed": [
+        "canonical authority"
+      ]
+    },
+    {
+      "id": "nft_token_path_sample",
+      "category": "nft_evidence",
+      "description": "NFT tokenURI → metadata → media path sample",
+      "primary_data_sources": [
+        "NFT contract",
+        "tokenURI",
+        "metadata",
+        "media"
+      ],
+      "fallback_data_sources": [
+        "recovery package"
+      ],
+      "github_data_sources": [],
+      "hash_sources": [],
+      "external_query_sources": [],
+      "local_files": [],
+      "recommended_methods": [
+        "N2 tokenURI check",
+        "N3 metadata recovery",
+        "N4 media recovery"
+      ],
+      "achievable_component_levels": [
+        "N0",
+        "N1",
+        "N2",
+        "N3",
+        "N4",
+        "N5"
+      ],
+      "limitations": [],
+      "claims_not_allowed": [
+        "canonical authority"
+      ]
+    },
+    {
+      "id": "core_object_alpha_public_evidence",
+      "category": "physical_anchor",
+      "description": "Core Object Alpha public evidence package",
+      "primary_data_sources": [
+        "/covenant-proof",
+        "/physical-verification",
+        "evidence package"
+      ],
+      "fallback_data_sources": [
+        "/api/evidence-manifest.json"
+      ],
+      "github_data_sources": [
+        "evidence package if present in repo"
+      ],
+      "hash_sources": [
+        {
+          "algorithm": "SHA-256",
+          "expected": "from evidence-manifest if present",
+          "source": "evidence package"
+        }
+      ],
+      "external_query_sources": [],
+      "local_files": [
+        "/api/evidence-manifest.json"
+      ],
+      "recommended_methods": [
+        "P1 public evidence package hash",
+        "P2 static image review"
+      ],
+      "achievable_component_levels": [
+        "P0",
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "limitations": [
+        "Remote image/video review only; not physical inspection"
+      ],
+      "claims_not_allowed": [
+        "live witness",
+        "onsite inspection",
+        "flaw identity proven"
+      ]
+    },
+    {
+      "id": "core_object_alpha_live_remote_witness",
+      "category": "physical_anchor",
+      "description": "Core Object Alpha live remote video witness",
+      "primary_data_sources": [
+        "live video stream"
+      ],
+      "fallback_data_sources": [],
+      "github_data_sources": [],
+      "hash_sources": [],
+      "external_query_sources": [],
+      "local_files": [],
+      "recommended_methods": [
+        "P4 live remote video witness"
+      ],
+      "achievable_component_levels": [
+        "P4"
+      ],
+      "limitations": [
+        "Requires live video + nonce/challenge"
+      ],
+      "claims_not_allowed": [
+        "onsite touch",
+        "custody confirmed"
+      ]
+    },
+    {
+      "id": "core_object_alpha_onsite_witness",
+      "category": "physical_anchor",
+      "description": "Core Object Alpha onsite witness",
+      "primary_data_sources": [
+        "physical object",
+        "custody log"
+      ],
+      "fallback_data_sources": [],
+      "github_data_sources": [],
+      "hash_sources": [],
+      "external_query_sources": [],
+      "local_files": [],
+      "recommended_methods": [
+        "P5 onsite human witness"
+      ],
+      "achievable_component_levels": [
+        "P5"
+      ],
+      "limitations": [
+        "Requires physical presence"
+      ],
+      "claims_not_allowed": [
+        "forensic flaw match unless P7+"
+      ]
+    },
+    {
+      "id": "core_object_alpha_forensic_flaw_match",
+      "category": "physical_anchor",
+      "description": "Core Object Alpha forensic flaw match analysis",
+      "primary_data_sources": [
+        "macro/microscope images",
+        "AI/algorithmic tools"
+      ],
+      "fallback_data_sources": [],
+      "github_data_sources": [],
+      "hash_sources": [],
+      "external_query_sources": [],
+      "local_files": [],
+      "recommended_methods": [
+        "P6 tool-assisted flaw match",
+        "P7 AI forensic match"
+      ],
+      "achievable_component_levels": [
+        "P6",
+        "P7"
+      ],
+      "limitations": [],
+      "claims_not_allowed": [
+        "confidential challenge passed unless P8"
+      ]
+    },
+    {
+      "id": "core_object_alpha_confidential_challenge",
+      "category": "physical_anchor",
+      "description": "Core Object Alpha confidential flaw challenge",
+      "primary_data_sources": [
+        "confidential challenge data"
+      ],
+      "fallback_data_sources": [],
+      "github_data_sources": [],
+      "hash_sources": [],
+      "external_query_sources": [],
+      "local_files": [],
+      "recommended_methods": [
+        "P8 confidential flaw challenge"
+      ],
+      "achievable_component_levels": [
+        "P8",
+        "P9"
+      ],
+      "limitations": [
+        "Reserved for dispute resolution, suspected forgery, competing claims"
+      ],
+      "claims_not_allowed": [
+        "public disclosure of confidential flaw data unless authorized"
+      ]
+    },
+    {
+      "id": "echo_records_index",
+      "category": "echo_attestation",
+      "description": "Echo records index",
+      "primary_data_sources": [
+        "/api/echo-index.json"
+      ],
+      "fallback_data_sources": [],
+      "github_data_sources": [
+        "/api/echo-index.json"
+      ],
+      "hash_sources": [],
+      "external_query_sources": [],
+      "local_files": [
+        "/api/echo-index.json"
+      ],
+      "recommended_methods": [
+        "E0 echo read",
+        "E1 schema validation"
+      ],
+      "achievable_component_levels": [
+        "E0",
+        "E1"
+      ],
+      "limitations": [],
+      "claims_not_allowed": [
+        "canonical authority"
+      ]
+    },
+    {
+      "id": "echo_record_schema_v3",
+      "category": "echo_attestation",
+      "description": "Echo record schema v3 for provenance-aware records",
+      "primary_data_sources": [
+        "/api/echo-record-schema.v3.json"
+      ],
+      "fallback_data_sources": [],
+      "github_data_sources": [
+        "/api/echo-record-schema.v3.json"
+      ],
+      "hash_sources": [],
+      "external_query_sources": [],
+      "local_files": [
+        "/api/echo-record-schema.v3.json"
+      ],
+      "recommended_methods": [
+        "E1 schema validation"
+      ],
+      "achievable_component_levels": [
+        "E1"
+      ],
+      "limitations": [],
+      "claims_not_allowed": []
+    },
+    {
+      "id": "hash_source_semantics",
+      "category": "submission_correctness",
+      "description": "Hash source semantics: expected_hash_source and expected_hash_authority_class",
+      "primary_data_sources": [
+        "/api/hash-source-classes.json"
+      ],
+      "fallback_data_sources": [
+        "/api/hashes.json",
+        "/api/evidence-manifest.json"
+      ],
+      "github_data_sources": [],
+      "hash_sources": [],
+      "external_query_sources": [],
+      "local_files": [
+        "/api/hash-source-classes.json",
+        "/api/repository-artifact-hashes.json"
+      ],
+      "recommended_methods": [
+        "validate hash source fields in verification reports"
+      ],
+      "achievable_component_levels": []
+    }
+  ]
+}

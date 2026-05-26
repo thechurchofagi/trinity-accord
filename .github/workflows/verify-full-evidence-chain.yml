@@ -1,0 +1,113 @@
+name: Verify Full Evidence Chain
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: 'NFT release tag to verify'
+        required: false
+        default: 'nft-arweave-mirror-175-v1'
+      ots_release_tag:
+        description: 'OTS proof release tag'
+        required: false
+        default: 'ots-and-flaw-mirror-v1'
+      concurrency:
+        description: 'DAG verify concurrency'
+        required: false
+        default: '8'
+      eth_rpc_url:
+        description: 'ETH RPC URL for witness verification (or use ETH_RPC_URL secret)'
+        required: false
+        default: ''
+      btc_api_base:
+        description: 'Bitcoin API base URL'
+        required: false
+        default: 'https://mempool.space/api'
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+    timeout-minutes: 240
+
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+        with:
+          fetch-depth: 1
+
+      - uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4
+        with:
+          node-version: '22'
+
+      - name: Install Python dependencies
+        run: python3 -m pip install -r requirements-ci.txt
+
+      - name: Run Full Evidence Chain verification
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          DAG_VERIFY_CONCURRENCY: ${{ inputs.concurrency }}
+          ETH_RPC_URL: ${{ inputs.eth_rpc_url || secrets.ETHEREUMMAINNET }}
+          BITCOIN_API_BASE: ${{ inputs.btc_api_base }}
+          INPUT_RELEASE_TAG: ${{ inputs.release_tag }}
+          INPUT_OTS_RELEASE_TAG: ${{ inputs.ots_release_tag }}
+        run: |
+          set -euo pipefail
+
+          [[ "$DAG_VERIFY_CONCURRENCY" =~ ^[0-9]+$ ]] || { echo "Invalid concurrency"; exit 1; }
+          [ "$DAG_VERIFY_CONCURRENCY" -ge 1 ] && [ "$DAG_VERIFY_CONCURRENCY" -le 25 ] || { echo "Concurrency out of range"; exit 1; }
+
+          node scripts/verify-full-evidence-chain.mjs \
+            --release-tag "$INPUT_RELEASE_TAG" \
+            --ots-release-tag "$INPUT_OTS_RELEASE_TAG" \
+            --concurrency "$DAG_VERIFY_CONCURRENCY"
+
+      - name: Upload FULL-EVIDENCE-CHAIN-AUDIT.json
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: full-evidence-chain-audit
+          path: FULL-EVIDENCE-CHAIN-AUDIT.json
+
+      - name: Upload DAG-DIGEST-AUDIT.json
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: dag-digest-audit
+          path: DAG-DIGEST-AUDIT.json
+
+      - name: Upload BTC-SIGNATURE-COVERAGE-AUDIT.json
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: btc-signature-coverage-audit
+          path: BTC-SIGNATURE-COVERAGE-AUDIT.json
+
+      - name: Upload ETH-WITNESS-AUDIT.json
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: eth-witness-audit
+          path: ETH-WITNESS-AUDIT.json
+
+      - name: Upload BITCOIN-TX-ANCHOR-AUDIT.json
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: bitcoin-tx-anchor-audit
+          path: BITCOIN-TX-ANCHOR-AUDIT.json
+
+      - name: Upload OTS-TIME-ANCHOR-AUDIT.json
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: ots-time-anchor-audit
+          path: OTS-TIME-ANCHOR-AUDIT.json
+
+      - name: Upload DAG-CID-AUDIT.json (legacy compat)
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: dag-cid-audit
+          path: DAG-CID-AUDIT.json

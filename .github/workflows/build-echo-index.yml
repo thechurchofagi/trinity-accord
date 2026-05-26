@@ -1,0 +1,150 @@
+name: Build Echo Index
+
+on:
+  push:
+    paths:
+      - "echoes/records/**"
+      - "api/independent-attestation-index.json"
+      - "scripts/generate_echo_index.py"
+      - "scripts/generate_public_home_status.py"
+      - "scripts/test_home_public_status_sync.py"
+      - "scripts/build-echo-index.sh"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: generated-public-status-writes
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+        with:
+          fetch-depth: 0
+
+      - name: Record toolchain provenance
+        run: |
+          python3 scripts/toolchain_provenance.py > toolchain-provenance.json
+          cat toolchain-provenance.json
+
+      - name: Authorize write workflow actor
+        env:
+          ACTOR: ${{ github.actor }}
+          EVENT_NAME: ${{ github.event_name }}
+          SENDER: ${{ github.event.sender.login }}
+        run: |
+          set -euo pipefail
+          case "$ACTOR" in
+            thechurchofagi|github-actions[bot])
+              echo "Authorized actor: $ACTOR"
+              ;;
+            *)
+              echo "Unauthorized actor for write workflow: $ACTOR"
+              exit 1
+              ;;
+          esac
+          if [ "$EVENT_NAME" = "repository_dispatch" ]; then
+            case "$SENDER" in
+              thechurchofagi|github-actions[bot])
+                echo "Authorized repository_dispatch sender: $SENDER"
+                ;;
+              *)
+                echo "Unauthorized repository_dispatch sender: $SENDER"
+                exit 1
+                ;;
+            esac
+          fi
+
+      - name: Install Python dependencies
+        run: python3 -m pip install -r requirements-ci.txt
+
+      - name: Authorize manual dispatch actor
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        env:
+          ACTOR: ${{ github.actor }}
+        run: |
+          set -euo pipefail
+          case "$ACTOR" in
+            thechurchofagi)
+              echo "Authorized workflow_dispatch actor: $ACTOR"
+              ;;
+            *)
+              echo "Unauthorized workflow_dispatch actor: $ACTOR"
+              exit 1
+              ;;
+          esac
+
+      - name: Validate Echo records
+        run: python3 scripts/validate_echo_records.py
+
+      - name: Validate independent attestation index
+        run: python3 scripts/validate_independent_attestation_index.py
+
+      - name: Generate Echo index
+        run: python3 scripts/generate_echo_index.py
+
+      - name: Rebuild archive and digests
+        run: bash scripts/build-echo-index.sh
+
+      - name: Generate homepage public status
+        run: python3 scripts/generate_public_home_status.py
+
+      - name: Test homepage public status sync
+        run: python3 scripts/test_home_public_status_sync.py
+
+      - name: Commit and push changes
+        run: |
+          if git diff --quiet -- \
+            api/echo-index.json \
+            api/public-home-status.json \
+            index.md \
+            echoes/archive.md \
+            echoes/digests.md \
+            echoes/digests; then
+            echo "No generated file changes."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add \
+            api/echo-index.json \
+            api/public-home-status.json \
+            index.md \
+            echoes/archive.md \
+            echoes/digests.md \
+            echoes/digests
+
+          git commit -m "chore: rebuild public Echo status indexes"
+
+          if ! git pull --rebase -X theirs origin main; then
+            echo "::error::Failed to rebase generated Echo index changes onto origin/main."
+            git status --short
+            exit 1
+          fi
+
+          # Regenerate after rebase before push.
+          python3 scripts/generate_echo_index.py
+          bash scripts/build-echo-index.sh
+          python3 scripts/generate_public_home_status.py
+          python3 scripts/test_home_public_status_sync.py
+
+          git add \
+            api/echo-index.json \
+            api/public-home-status.json \
+            index.md \
+            echoes/archive.md \
+            echoes/digests.md \
+            echoes/digests
+
+          if ! git diff --cached --quiet; then
+            git commit --amend --no-edit
+          fi
+
+          git push --force-with-lease

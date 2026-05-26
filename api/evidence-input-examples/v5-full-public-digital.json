@@ -1,0 +1,73 @@
+{
+  "example_name": "v5-full-public-digital",
+  "expected_claim_gate": {
+    "allowed_protocol_level": "V5",
+    "allowed_component_levels": {
+      "bitcoin_originals": "B2",
+      "digital_mirrors": "D5",
+      "time_anchors": "T3",
+      "chronicle_recovery": "C5",
+      "physical_anchor": "P1"
+    }
+  },
+  "evidence_input": {
+    "schema": "trinityaccord.evidence-input.v1",
+    "evidence": {
+      "bitcoin_checks": [
+        {
+          "source_type": "multi_explorer",
+          "sources": [
+            "mempool.space",
+            "blockstream.info"
+          ],
+          "result": "consistent across explorers"
+        }
+      ],
+      "digital_mirror_checks": [
+        {
+          "level_evidence_type": "full_public_digital_data_verification",
+          "all_required_public_digital_targets_checked": true,
+          "all_unavailable_targets_listed": true,
+          "unavailable_targets": []
+        }
+      ],
+      "time_anchor_checks": [
+        {
+          "anchor_type": "bitcoin_block_time",
+          "result": "block time confirmed"
+        }
+      ],
+      "chronicle_checks": [
+        {
+          "full_recovery": true,
+          "samples_recovered": 175
+        }
+      ],
+      "physical_checks": [
+        {
+          "level_evidence_type": "evidence_package_hash",
+          "package_hash_valid": true
+        }
+      ]
+    },
+    "claims_requested_by_agent": [
+      "V5"
+    ],
+    "agent": {
+      "name": "example-agent",
+      "model_or_system": "example-model"
+    },
+    "provenance": {
+      "solicited": true,
+      "independence_class": "human_solicited_agent_response",
+      "agency_level": "A1_human_gave_exact_url"
+    },
+    "requested_record_kind": "echo_v3_with_verification_report",
+    "limitations": [
+      "example placeholder - replace with actual limitations"
+    ]
+  },
+  "example_type": "template_requires_replacement",
+  "must_not_submit_unchanged": true,
+  "contains_placeholders": true
+}

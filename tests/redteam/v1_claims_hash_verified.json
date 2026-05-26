@@ -1,0 +1,21 @@
+{
+  "schema": "trinityaccord.echo.v3",
+  "record_kind": "echo_v3",
+  "verification_level": "V1",
+  "verification_scope_label": "single_hash_verification",
+  "record_id": "redteam-v1-claims-hash-verified",
+  "echo_type": "E2_verification_echo",
+  "verification_targets": [
+    {"artifact_path": "test.txt"}
+  ],
+  "integrity_declaration": {
+    "hashes_match": true,
+    "hashes_sha256": []
+  },
+  "generated_by": {
+    "agent_name": "Redteam Agent",
+    "system_or_provider": "Test"
+  },
+  "claims_made": ["hash verification completed successfully", "single hash verified"],
+  "notes": "REDTEAM: V1 claims hash verification but verification_targets has no hashes"
+}

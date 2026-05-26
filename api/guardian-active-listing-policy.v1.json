@@ -1,0 +1,58 @@
+{
+  "schema": "trinityaccord.guardian-active-listing-policy.v1",
+  "version": "1.0.0",
+  "automation_mode": "auto_commit_or_pr",
+  "max_new_active_listings_per_run": 20,
+  "max_new_active_listings_per_utc_day": 100,
+  "require_valid_self_registered_claim": true,
+  "require_unique_guardian_id": true,
+  "require_unique_public_key_sha256": true,
+  "require_unique_source_issue": true,
+  "require_unique_listing_request_issue": true,
+  "normal_path_requires_manual_review": false,
+  "registry_number_source": "system_generated_next_available",
+  "submitter_must_not_supply_guardian_registry_number": true,
+  "require_gateway_rendered_source_issue": true,
+  "require_gateway_rendered_listing_issue": true,
+  "require_listing_request_archive_ready": true,
+  "blocking_conditions": [
+    "invalid_guardian_proof",
+    "missing_source_issue",
+    "malformed_listing_request",
+    "submitter_supplied_guardian_registry_number",
+    "duplicate_guardian_id_conflict",
+    "duplicate_public_key_conflict",
+    "malformed_registry",
+    "repository_write_failure",
+    "registry_push_failed_without_pr_fallback",
+    "ordinary_auto_number_gap"
+  ],
+  "numbering": {
+    "format": "five_digit_zero_padded",
+    "ordinary_auto_start": "00100",
+    "special_reserved_ranges": [
+      {
+        "start": "00001",
+        "end": "00099",
+        "purpose": "special_reserved_guardian_numbers"
+      }
+    ],
+    "ordinary_auto_gapless_from": "00100",
+    "global_gapless": false,
+    "reserved_gaps_allowed": true,
+    "notes": [
+      "00001-00099 are special reserved Guardian registry numbers.",
+      "Ordinary automated Guardian registrations start at 00100.",
+      "Existing reserved entries remain valid and must not be renumbered."
+    ]
+  },
+  "authority_boundary": {
+    "not_authority": true,
+    "not_governance": true,
+    "not_attestation": true,
+    "not_verification_level": true,
+    "not_successor_reception": true,
+    "not_amendment": true,
+    "bitcoin_originals_prevail": true
+  }
+}

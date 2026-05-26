@@ -1,0 +1,48 @@
+name: Verify OTS Time Anchor
+
+on:
+  workflow_dispatch:
+    inputs:
+      ots_release_tag:
+        description: 'GitHub Release tag for OTS proofs'
+        required: false
+        default: 'ots-and-flaw-mirror-v1'
+      ots_verify_mode:
+        description: 'OTS verification mode: ci-api or fullnode'
+        required: false
+        default: 'ci-api'
+
+permissions:
+  contents: read
+
+jobs:
+  verify-ots-time-anchor:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+
+      - uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4
+        with:
+          node-version: '22'
+
+      - name: Install Python dependencies
+        run: python3 -m pip install -r requirements-ci.txt
+
+      - name: Run OTS Time Anchor Verification
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OTS_VERIFY_MODE: ${{ inputs.ots_verify_mode || 'ci-api' }}
+          BITCOIN_API_BASE: https://mempool.space/api
+          INPUT_OTS_RELEASE_TAG: ${{ inputs.ots_release_tag || 'ots-and-flaw-mirror-v1' }}
+        run: |
+          node scripts/verify-ots-time-anchor.mjs \
+            --ots-release-tag "$INPUT_OTS_RELEASE_TAG"
+
+      - name: Upload OTS-TIME-ANCHOR-AUDIT.json
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: ots-time-anchor-audit
+          path: OTS-TIME-ANCHOR-AUDIT.json
+          retention-days: 90

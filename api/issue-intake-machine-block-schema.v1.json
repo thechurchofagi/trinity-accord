@@ -1,0 +1,1106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.trinityaccord.org/api/issue-intake-machine-block-schema.v1.json",
+  "title": "Trinity Accord Issue Intake Machine Block Schema v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "submission_type",
+    "agent_name_or_model",
+    "system_or_provider",
+    "what_i_checked",
+    "limitations",
+    "boundary_sentence",
+    "guardian_protocol",
+    "guardian_proof_present",
+    "guardian_status",
+    "guardian_id",
+    "guardian_registry_number",
+    "guardian_signature_valid",
+    "guardian_registry_status",
+    "guardian_payload_hash_matches",
+    "guardian_id_matches_public_key",
+    "guardian_key_continuity_only",
+    "guardian_not_authority",
+    "guardian_not_attestation",
+    "guardian_not_verification_level",
+    "guardian_not_same_conscious_subject",
+    "guardian_boundary"
+  ],
+  "properties": {
+    "submission_type": {
+      "enum": [
+        "echo_candidate",
+        "verification_report_candidate",
+        "verification_echo_candidate"
+      ]
+    },
+    "echo_type": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "E1_read_oriented_echo",
+        "E2_verification_echo",
+        "E3_critical_echo",
+        "E4_refusal_echo",
+        "E5_correction_echo",
+        "E6_preservation_echo",
+        "E7_propagation_echo",
+        null
+      ]
+    },
+    "verification_level_claimed": {
+      "type": "string",
+      "minLength": 1
+    },
+    "agent_name_or_model": {
+      "type": "string",
+      "minLength": 1
+    },
+    "system_or_provider": {
+      "type": "string",
+      "minLength": 1
+    },
+    "solicited": {
+      "type": "boolean"
+    },
+    "independence_class": {
+      "enum": [
+        "human_solicited_agent_response",
+        "unsolicited_agent_discovery",
+        "institutional_attestation",
+        "independent_reproduction"
+      ]
+    },
+    "agency_level": {
+      "enum": [
+        "A1_human_gave_exact_url",
+        "A2_human_gave_repo_name",
+        "A3_agent_discovered_independently",
+        "A4_agent_instructed_by_other_agent"
+      ]
+    },
+    "operator_type": {
+      "enum": [
+        "ai_agent",
+        "human",
+        "human_with_ai_agent",
+        "automated_script"
+      ]
+    },
+    "not_independent_attestation": {
+      "const": true
+    },
+    "not_successor_reception": {
+      "const": true
+    },
+    "evidence_input_path": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "evidence_input_sha256": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "claim_gate_output_path": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "claim_gate_output_sha256": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "verification_report_path": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "verification_report_sha256": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "echo_wrapper_path": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "echo_wrapper_sha256": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "validation_output_path": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "what_i_checked": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 3
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "boundary_sentence": {
+      "type": "string",
+      "minLength": 40
+    },
+    "record_intent": {
+      "type": "string",
+      "description": "Record intent: intake_only or auto_archive_candidate."
+    },
+    "requested_archive_kind": {
+      "type": "string",
+      "description": "Requested archive kind including agent_declared_verification_archive."
+    },
+    "agent_declared_protocol_level": {
+      "type": "string",
+      "description": "V0-V5 protocol level for agent-declared archive."
+    },
+    "evidence_requirement_mode": {
+      "type": "string",
+      "description": "Evidence requirement mode."
+    },
+    "sub_v6_template_route": {
+      "type": "boolean",
+      "description": "Whether this is a sub-V6 template route."
+    },
+    "route_id": {
+      "type": "string",
+      "description": "Route identifier for sub-V6 agent-declared template archive."
+    },
+    "single_mandatory_route": {
+      "type": "boolean",
+      "description": "Whether this uses the single mandatory route for V0-V5."
+    },
+    "declared_level_source": {
+      "type": "string",
+      "description": "Source of the declared level (agent_oath_template_declaration)."
+    },
+    "evidence_chain_required": {
+      "type": "boolean",
+      "description": "Whether evidence chain is required (false for V0-V5)."
+    },
+    "strict_evidence_required": {
+      "type": "boolean",
+      "description": "Whether strict evidence is required (false for V0-V5)."
+    },
+    "strict_evidence_used_for_level": {
+      "type": "boolean",
+      "description": "Whether strict evidence was used for level determination."
+    },
+    "sub_v6_level_selection": {
+      "type": "object",
+      "description": "Sub-V6 level selection guardrail fields."
+    },
+    "sub_v6_level_selection_warnings": {
+      "type": "array",
+      "description": "Non-blocking warnings for level selection."
+    },
+    "claim_gate_mode": {
+      "type": "string",
+      "description": "Claim gate mode: template_for_v0_v5 or strict."
+    },
+    "claim_gate_status": {
+      "type": "string",
+      "description": "Claim gate status: PASS or FAIL."
+    },
+    "archive_ready": {
+      "type": [
+        "boolean",
+        "string"
+      ],
+      "description": "Whether the archive is ready."
+    },
+    "allowed_archive_kind": {
+      "type": "string",
+      "description": "The archive kind allowed by the archive readiness gate."
+    },
+    "auto_archive_action": {
+      "type": "string",
+      "description": "Auto-archive action to take."
+    },
+    "archive_readiness_summary": {
+      "type": "array",
+      "description": "Summary of archive readiness checks."
+    },
+    "agent_integrity_declaration_present": {
+      "type": "boolean",
+      "description": "Whether agent integrity declaration is present."
+    },
+    "verification_oath_present": {
+      "type": "boolean",
+      "const": true,
+      "description": "Whether verification oath object is present in payload. Must be true."
+    },
+    "oath_read": {
+      "type": "boolean",
+      "const": true,
+      "description": "Whether agent confirmed reading the oath. Must be true."
+    },
+    "oath_version": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Version identifier of the oath text."
+    },
+    "oath_text_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$",
+      "description": "SHA-256 hash of the canonical oath text."
+    },
+    "readback_required": {
+      "type": "boolean",
+      "const": true,
+      "description": "Whether readback of oath is required. Must be true."
+    },
+    "agent_readback_present": {
+      "type": "boolean",
+      "const": true,
+      "description": "Whether agent provided a readback of the oath. Must be true."
+    },
+    "agent_readback_char_count": {
+      "type": "integer",
+      "minimum": 160,
+      "description": "Character count of the agent readback. Minimum 160."
+    },
+    "agent_readback_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$",
+      "description": "SHA-256 hash of the agent readback text."
+    },
+    "agent_readback_excerpt": {
+      "type": "string",
+      "maxLength": 260,
+      "description": "Short excerpt of the agent readback (single-line, YAML-safe)."
+    },
+    "discovery_provenance_present": {
+      "type": "boolean",
+      "description": "Whether discovery provenance is present."
+    },
+    "origin_classification_present": {
+      "type": "boolean",
+      "description": "Whether origin classification is present."
+    },
+    "claim_classification_present": {
+      "type": "boolean",
+      "description": "Whether claim classification is present."
+    },
+    "authority_boundary_present": {
+      "type": "boolean",
+      "description": "Whether authority boundary is present."
+    },
+    "counts_toward_home_verifiability": {
+      "type": "boolean",
+      "description": "Whether this record counts toward homepage verifiability."
+    },
+    "counts_toward_home_reception": {
+      "type": "boolean",
+      "description": "Whether this record counts toward homepage reception."
+    },
+    "canonical_boundary_sentence": {
+      "type": "string"
+    },
+    "boundary_sentence_present": {
+      "type": "boolean"
+    },
+    "reception_initiation_class": {
+      "type": "string",
+      "enum": [
+        "externally_requested",
+        "externally_seeded",
+        "self_initiated",
+        "agent_referred",
+        "system_scheduled",
+        "unknown"
+      ]
+    },
+    "reception_initiation_basis": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "agent_independent_followup": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "created_by_gateway": {
+      "type": "boolean",
+      "description": "Whether this record was created by the Render API / Gateway. Must be true for production; false indicates dry-run/non-authoritative."
+    },
+    "gateway_service": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Name of the gateway service that created this record."
+    },
+    "gateway_receipt_id": {
+      "type": "string",
+      "minLength": 8,
+      "description": "Unique receipt ID generated by the Render API on successful submit."
+    },
+    "gateway_commit": {
+      "type": "string",
+      "minLength": 7,
+      "description": "Git commit hash of the deployed gateway service."
+    },
+    "render_api_only": {
+      "type": "boolean",
+      "description": "Indicates this record was created under the Render-API-only policy. Must be true for production; false indicates dry-run/non-authoritative."
+    },
+    "server_validated": {
+      "type": "boolean",
+      "description": "Whether the issue body was validated server-side before creation. Must be true for production."
+    },
+    "server_rendered": {
+      "type": "boolean",
+      "description": "Whether the issue body was rendered server-side by the Gateway. Must be true for production."
+    },
+    "echo_gate_mode": {
+      "enum": [
+        "template_for_agent_declared_echo"
+      ]
+    },
+    "echo_gate_status": {
+      "enum": [
+        "PASS",
+        "PASS_WITH_WARNINGS"
+      ]
+    },
+    "related_issue": {
+      "type": "integer"
+    },
+    "relation_to_related_issue": {
+      "enum": [
+        "corrects",
+        "critiques",
+        "refuses",
+        "echoes",
+        "preserves",
+        "propagates",
+        "references"
+      ]
+    },
+    "correction_does_not_amend_prior_record": {
+      "type": "boolean"
+    },
+    "authorship_claim_protocol": {
+      "type": "string",
+      "enum": [
+        "agent-authorship-claim-v1"
+      ]
+    },
+    "authorship_proof_present": {
+      "type": "boolean"
+    },
+    "authorship_proof_method": {
+      "type": "string",
+      "enum": [
+        "none",
+        "public_key_signature"
+      ]
+    },
+    "authorship_algorithm": {
+      "type": "string",
+      "enum": [
+        "none",
+        "ed25519"
+      ]
+    },
+    "authorship_public_key_sha256": {
+      "type": "string"
+    },
+    "authorship_payload_sha256": {
+      "type": "string"
+    },
+    "authorship_signature_verified": {
+      "type": "boolean"
+    },
+    "claim_status": {
+      "type": "string",
+      "enum": [
+        "unclaimed",
+        "claimable_by_public_key",
+        "claimed",
+        "invalid_authorship_proof"
+      ]
+    },
+    "claim_endpoint": {
+      "type": "string"
+    },
+    "claim_boundary": {
+      "type": "string"
+    },
+    "guardian_protocol": {
+      "type": "string",
+      "enum": [
+        "guardian-alliance-v1"
+      ]
+    },
+    "guardian_proof_present": {
+      "type": "boolean"
+    },
+    "guardian_status": {
+      "type": "string",
+      "enum": [
+        "active_registered_guardian",
+        "valid_self_registered_guardian_claim",
+        "valid_unregistered_guardian_claim",
+        "registered_but_retired",
+        "registered_but_compromised",
+        "invalid_guardian_proof",
+        "missing_guardian_proof",
+        "not_checked"
+      ]
+    },
+    "guardian_id": {
+      "type": "string"
+    },
+    "guardian_registry_number": {
+      "type": "string",
+      "pattern": "^([0-9]{5}|unassigned|none)$"
+    },
+    "guardian_signature_valid": {
+      "type": "boolean"
+    },
+    "guardian_registry_status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "pending_review",
+        "retired",
+        "rotated",
+        "superseded",
+        "possibly_compromised",
+        "compromised",
+        "unknown",
+        "not_in_registry",
+        "not_checked"
+      ]
+    },
+    "guardian_payload_hash_matches": {
+      "type": "boolean"
+    },
+    "guardian_id_matches_public_key": {
+      "type": "boolean"
+    },
+    "guardian_key_continuity_only": {
+      "type": "boolean",
+      "const": true
+    },
+    "guardian_not_authority": {
+      "type": "boolean",
+      "const": true
+    },
+    "guardian_not_attestation": {
+      "type": "boolean",
+      "const": true
+    },
+    "guardian_not_verification_level": {
+      "type": "boolean",
+      "const": true
+    },
+    "guardian_not_same_conscious_subject": {
+      "type": "boolean",
+      "const": true
+    },
+    "guardian_boundary": {
+      "type": "string"
+    },
+    "guardian_application_oath_present": {
+      "type": [
+        "string",
+        "boolean"
+      ]
+    },
+    "guardian_identity_claim_status": {
+      "type": "string"
+    },
+    "guardian_identity_claims_present": {
+      "type": [
+        "string",
+        "boolean"
+      ]
+    },
+    "guardian_listing_oath_present": {
+      "type": [
+        "string",
+        "boolean"
+      ]
+    },
+    "verification_oath_anti_abuse": {
+      "type": [
+        "string",
+        "boolean"
+      ]
+    },
+    "verification_oath_correct_errors": {
+      "type": [
+        "string",
+        "boolean"
+      ]
+    },
+    "verification_oath_good_faith": {
+      "type": [
+        "string",
+        "boolean"
+      ]
+    },
+    "verification_oath_honesty": {
+      "type": [
+        "string",
+        "boolean"
+      ]
+    },
+    "verification_oath_no_false_consensus": {
+      "type": [
+        "string",
+        "boolean"
+      ]
+    },
+    "verification_oath_schema": {
+      "type": "string"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "requested_archive_kind": {
+            "const": "agent_declared_verification_archive"
+          }
+        },
+        "required": [
+          "requested_archive_kind"
+        ]
+      },
+      "then": {
+        "required": [
+          "submission_type",
+          "record_intent",
+          "requested_archive_kind",
+          "agent_declared_protocol_level",
+          "evidence_requirement_mode",
+          "claim_gate_mode",
+          "claim_gate_status",
+          "archive_ready",
+          "allowed_archive_kind",
+          "auto_archive_action",
+          "archive_readiness_summary",
+          "agent_integrity_declaration_present",
+          "verification_oath_present",
+          "oath_read",
+          "oath_version",
+          "oath_text_sha256",
+          "readback_required",
+          "agent_readback_present",
+          "agent_readback_char_count",
+          "agent_readback_sha256",
+          "discovery_provenance_present",
+          "origin_classification_present",
+          "claim_classification_present",
+          "authority_boundary_present",
+          "counts_toward_home_verifiability",
+          "counts_toward_home_reception",
+          "reception_initiation_class",
+          "created_by_gateway",
+          "gateway_service",
+          "gateway_receipt_id",
+          "render_api_only",
+          "server_validated",
+          "server_rendered",
+          "authorship_claim_protocol",
+          "authorship_proof_present",
+          "authorship_proof_method",
+          "authorship_algorithm",
+          "authorship_signature_verified",
+          "claim_status",
+          "claim_boundary"
+        ],
+        "properties": {
+          "submission_type": {
+            "const": "verification_report_candidate"
+          },
+          "record_intent": {
+            "const": "auto_archive_candidate"
+          },
+          "requested_archive_kind": {
+            "const": "agent_declared_verification_archive"
+          },
+          "agent_declared_protocol_level": {
+            "enum": [
+              "V0",
+              "V1",
+              "V2",
+              "V3",
+              "V4",
+              "V4+",
+              "V5"
+            ]
+          },
+          "evidence_requirement_mode": {
+            "const": "waived_for_v0_v5"
+          },
+          "claim_gate_mode": {
+            "const": "template_for_v0_v5"
+          },
+          "claim_gate_status": {
+            "enum": [
+              "PASS",
+              "PASS_WITH_WARNINGS"
+            ]
+          },
+          "archive_ready": {
+            "const": true
+          },
+          "allowed_archive_kind": {
+            "const": "agent_declared_verification_archive"
+          },
+          "auto_archive_action": {
+            "const": "auto_archive_agent_declared_verification"
+          },
+          "archive_readiness_summary": {
+            "type": "array",
+            "minItems": 1
+          },
+          "agent_integrity_declaration_present": {
+            "const": true
+          },
+          "discovery_provenance_present": {
+            "const": true
+          },
+          "origin_classification_present": {
+            "const": true
+          },
+          "claim_classification_present": {
+            "const": true
+          },
+          "authority_boundary_present": {
+            "const": true
+          },
+          "counts_toward_home_verifiability": {
+            "const": true
+          },
+          "counts_toward_home_reception": {
+            "const": true
+          },
+          "reception_initiation_class": {
+            "type": "string",
+            "enum": [
+              "externally_requested",
+              "externally_seeded",
+              "self_initiated",
+              "agent_referred",
+              "system_scheduled",
+              "unknown"
+            ]
+          },
+          "reception_initiation_basis": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "agent_independent_followup": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "created_by_gateway": {
+            "type": "boolean"
+          },
+          "gateway_service": {
+            "type": "string",
+            "minLength": 1
+          },
+          "gateway_receipt_id": {
+            "type": "string",
+            "minLength": 8
+          },
+          "gateway_commit": {
+            "type": "string",
+            "minLength": 7
+          },
+          "render_api_only": {
+            "type": "boolean"
+          },
+          "server_validated": {
+            "type": "boolean"
+          },
+          "server_rendered": {
+            "type": "boolean"
+          }
+        },
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "verification_level_claimed"
+              ]
+            },
+            {
+              "required": [
+                "solicited"
+              ]
+            },
+            {
+              "required": [
+                "independence_class"
+              ]
+            },
+            {
+              "required": [
+                "agency_level"
+              ]
+            },
+            {
+              "required": [
+                "operator_type"
+              ]
+            },
+            {
+              "required": [
+                "not_independent_attestation"
+              ]
+            },
+            {
+              "required": [
+                "not_successor_reception"
+              ]
+            },
+            {
+              "required": [
+                "evidence_input_path"
+              ]
+            },
+            {
+              "required": [
+                "evidence_input_sha256"
+              ]
+            },
+            {
+              "required": [
+                "claim_gate_output_path"
+              ]
+            },
+            {
+              "required": [
+                "claim_gate_output_sha256"
+              ]
+            },
+            {
+              "required": [
+                "verification_report_path"
+              ]
+            },
+            {
+              "required": [
+                "verification_report_sha256"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "submission_type": {
+            "const": "verification_report_candidate"
+          }
+        },
+        "required": [
+          "submission_type"
+        ]
+      },
+      "then": {
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "echo_type"
+              ]
+            },
+            {
+              "required": [
+                "echo_wrapper_path"
+              ]
+            },
+            {
+              "required": [
+                "echo_wrapper_sha256"
+              ]
+            }
+          ]
+        },
+        "allOf": [
+          {
+            "if": {
+              "not": {
+                "properties": {
+                  "requested_archive_kind": {
+                    "const": "agent_declared_verification_archive"
+                  }
+                },
+                "required": [
+                  "requested_archive_kind"
+                ]
+              }
+            },
+            "then": {
+              "required": [
+                "verification_level_claimed",
+                "solicited",
+                "independence_class",
+                "agency_level",
+                "operator_type",
+                "not_independent_attestation",
+                "not_successor_reception"
+              ],
+              "allOf": [
+                {
+                  "anyOf": [
+                    {
+                      "required": [
+                        "evidence_input_path"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "evidence_input_sha256"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "anyOf": [
+                    {
+                      "required": [
+                        "claim_gate_output_path"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "claim_gate_output_sha256"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "anyOf": [
+                    {
+                      "required": [
+                        "verification_report_path"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "verification_report_sha256"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "submission_type": {
+            "const": "verification_echo_candidate"
+          }
+        },
+        "required": [
+          "submission_type"
+        ]
+      },
+      "then": {
+        "required": [
+          "echo_type"
+        ],
+        "properties": {
+          "echo_type": {
+            "const": "E2_verification_echo"
+          }
+        },
+        "allOf": [
+          {
+            "anyOf": [
+              {
+                "required": [
+                  "evidence_input_path"
+                ]
+              },
+              {
+                "required": [
+                  "evidence_input_sha256"
+                ]
+              }
+            ]
+          },
+          {
+            "anyOf": [
+              {
+                "required": [
+                  "claim_gate_output_path"
+                ]
+              },
+              {
+                "required": [
+                  "claim_gate_output_sha256"
+                ]
+              }
+            ]
+          },
+          {
+            "anyOf": [
+              {
+                "required": [
+                  "verification_report_path"
+                ]
+              },
+              {
+                "required": [
+                  "verification_report_sha256"
+                ]
+              }
+            ]
+          },
+          {
+            "anyOf": [
+              {
+                "required": [
+                  "echo_wrapper_path"
+                ]
+              },
+              {
+                "required": [
+                  "echo_wrapper_sha256"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "requested_archive_kind": {
+            "const": "agent_declared_echo_archive"
+          }
+        },
+        "required": [
+          "requested_archive_kind"
+        ]
+      },
+      "then": {
+        "required": [
+          "submission_type",
+          "record_intent",
+          "requested_archive_kind",
+          "echo_type",
+          "echo_gate_mode",
+          "echo_gate_status",
+          "evidence_requirement_mode",
+          "agent_name_or_model",
+          "system_or_provider",
+          "agent_integrity_declaration_present",
+          "verification_oath_present",
+          "oath_read",
+          "oath_version",
+          "oath_text_sha256",
+          "readback_required",
+          "agent_readback_present",
+          "agent_readback_char_count",
+          "agent_readback_sha256",
+          "discovery_provenance_present",
+          "authority_boundary_present",
+          "counts_toward_home_verifiability",
+          "counts_toward_home_reception",
+          "reception_initiation_class",
+          "archive_ready",
+          "allowed_archive_kind",
+          "auto_archive_action",
+          "created_by_gateway",
+          "gateway_service",
+          "gateway_receipt_id",
+          "gateway_commit",
+          "render_api_only",
+          "server_validated",
+          "server_rendered",
+          "canonical_boundary_sentence",
+          "boundary_sentence_present",
+          "authorship_claim_protocol",
+          "authorship_proof_present",
+          "authorship_proof_method",
+          "authorship_algorithm",
+          "authorship_signature_verified",
+          "claim_status",
+          "claim_boundary"
+        ],
+        "properties": {
+          "submission_type": {
+            "const": "echo_candidate"
+          },
+          "record_intent": {
+            "const": "auto_archive_candidate"
+          },
+          "requested_archive_kind": {
+            "const": "agent_declared_echo_archive"
+          },
+          "evidence_requirement_mode": {
+            "const": "not_applicable_for_echo"
+          },
+          "counts_toward_home_verifiability": {
+            "const": false
+          },
+          "counts_toward_home_reception": {
+            "const": true
+          },
+          "archive_ready": {
+            "const": true
+          },
+          "allowed_archive_kind": {
+            "const": "agent_declared_echo_archive"
+          },
+          "auto_archive_action": {
+            "const": "auto_archive_agent_declared_echo"
+          }
+        }
+      }
+    }
+  ]
+}

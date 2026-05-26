@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.trinityaccord.org/api/bitcoin-inscription-mirror-schema.v1.json",
+  "title": "Trinity Accord Bitcoin Inscription Mirror Record Schema v1",
+  "description": "Schema for GitHub mirror records of Bitcoin inscriptions associated with the Trinity Accord.",
+  "type": "object",
+  "required": ["schema", "mirror_role", "canonical_status", "authority_boundary", "inscription", "classification", "content", "chain_verification", "limitations"],
+  "properties": {
+    "schema": {
+      "type": "string",
+      "const": "trinityaccord.bitcoin-inscription-mirror.v1"
+    },
+    "mirror_role": {
+      "type": "string",
+      "const": "quick_load_context_mirror"
+    },
+    "canonical_status": {
+      "type": "string",
+      "enum": ["canonical_original", "non_canonical_vision_layer", "non_canonical_context_layer", "non_canonical_echo_layer", "non_canonical_guardianship_layer"]
+    },
+    "authority_boundary": {
+      "type": "object",
+      "required": ["bitcoin_originals_prevail", "github_mirror_is_non_amending", "verification_requires_onchain_check"],
+      "properties": {
+        "bitcoin_originals_prevail": { "type": "boolean", "const": true },
+        "github_mirror_is_non_amending": { "type": "boolean", "const": true },
+        "verification_requires_onchain_check": { "type": "boolean", "const": true }
+      }
+    },
+    "inscription": {
+      "type": "object",
+      "required": ["inscription_id", "title", "source_address", "source_address_role"],
+      "properties": {
+        "inscription_id": { "type": ["string", "null"] },
+        "title": { "type": "string" },
+        "zh_title": { "type": ["string", "null"] },
+        "txid": { "type": ["string", "null"] },
+        "output": { "type": ["string", "null"] },
+        "block_height": { "type": ["integer", "null"] },
+        "timestamp_utc": { "type": ["string", "null"] },
+        "content_type": { "type": ["string", "null"] },
+        "source_address": { "type": "string" },
+        "source_address_role": { "type": "string" }
+      }
+    },
+    "classification": {
+      "type": "object",
+      "required": ["layer", "is_one_of_three_bitcoin_originals", "amends_originals", "creates_new_authority", "load_policy"],
+      "properties": {
+        "layer": { "type": "string" },
+        "is_one_of_three_bitcoin_originals": { "type": "boolean" },
+        "amends_originals": { "type": "boolean" },
+        "creates_new_authority": { "type": "boolean" },
+        "load_policy": { "type": "string" }
+      }
+    },
+    "content": {
+      "type": "object",
+      "required": ["summary", "agent_load_excerpt"],
+      "properties": {
+        "raw_text_path": { "type": ["string", "null"] },
+        "mirror_text_sha256": { "type": ["string", "null"] },
+        "canonicalized_text_sha256": { "type": ["string", "null"] },
+        "summary": { "type": "string" },
+        "agent_load_excerpt": { "type": "string" }
+      }
+    },
+    "chain_verification": {
+      "type": "object",
+      "required": ["verification_status", "verification_script"],
+      "properties": {
+        "verification_status": { "type": "string", "enum": ["verified_onchain_match", "discovered_unverified", "mismatch", "not_checked"] },
+        "last_verified_utc": { "type": ["string", "null"] },
+        "verification_method": { "type": ["string", "null"] },
+        "onchain_content_sha256": { "type": ["string", "null"] },
+        "mirror_matches_onchain": { "type": ["boolean", "null"] },
+        "verification_script": { "type": "string" }
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "additionalProperties": false
+}

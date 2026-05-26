@@ -1,0 +1,80 @@
+{
+  "schema": "trinityaccord.single-token-timestamp-diagnosis.v1",
+  "contract": "0x019372bBee377109b8Eae66d7267f5C4EaAdBb79",
+  "token_id": "85210329807936527805363210873332413577559846505703131855064182995898737885245",
+  "scan_window": {
+    "start_block": 21322023,
+    "end_block": 21545428,
+    "mode": "neighbor_bounded"
+  },
+  "recovered": true,
+  "recovered_record": {
+    "tx_hash": "0x83aec527d3b14be4d2b72539da3097f2c5b763c74b24bd967f11ece978226cb5",
+    "block": 21436618,
+    "log_index": 314,
+    "method": "erc721_transfer_from_zero_topic3",
+    "status": "mint",
+    "timestamp": 1734611939,
+    "datetime": "2024-12-19T12:38:59Z"
+  },
+  "interface_probes": {
+    "erc721": true,
+    "erc721_metadata": true,
+    "erc1155": false,
+    "erc1155_metadata_uri": false
+  },
+  "token_existence_probes": [
+    {
+      "method": "ownerOf",
+      "selector": "0x6352211e",
+      "raw_result": "0x000000000000000000000000bc63566a41cbfdb9c266a5941cbe47894daa54a8",
+      "decoded": "non_zero_address"
+    },
+    {
+      "method": "tokenURI",
+      "selector": "0xc87b56dd",
+      "raw_result": "0x00000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000047697066733a2f2f697066732f6261666b72656968716665366435776a7271736b78657874677a6d7537797269773373736266666265756d6f7937347437777a6c73646e786e377900000000000000000000000000000000000000000000000000",
+      "decoded": "has_uri"
+    },
+    {
+      "method": "erc1155_uri",
+      "selector": "0x0e89341c",
+      "raw_result": null,
+      "decoded": "empty"
+    }
+  ],
+  "event_attempts": [
+    {
+      "method": "erc721_transfer_from_zero_topic3",
+      "log_count": 1,
+      "first_log": {
+        "transactionHash": "0x83aec527d3b14be4d2b72539da3097f2c5b763c74b24bd967f11ece978226cb5",
+        "blockNumber": "0x14724ca",
+        "logIndex": "0x13a"
+      }
+    },
+    {
+      "method": "erc721_transfer_any_topic3",
+      "log_count": 0,
+      "first_log": null
+    },
+    {
+      "method": "erc1155_transfer_single_from_zero",
+      "log_count": 0,
+      "matched_count": 0,
+      "first_log": null
+    },
+    {
+      "method": "erc1155_transfer_batch_from_zero",
+      "log_count": 0,
+      "matched_count": 0,
+      "first_log": null
+    }
+  ],
+  "final_status": "recovered",
+  "boundary": [
+    "Recovered timestamp, if present, is an Ethereum event block timestamp.",
+    "Token existence probes do not prove historical metadata truth.",
+    "If no standard event is found, no timestamp is fabricated."
+  ]
+}

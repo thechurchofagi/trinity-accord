@@ -1,0 +1,223 @@
+{
+  "schema": "trinityaccord.context-load-map.v2",
+  "version": "v2",
+  "purpose": "Tell agents which context to load for each context depth (CC) level. Aligned with the CC-0 through CC-5 system defined in /api/context-depth-levels.json.",
+  "not_instruction_override": true,
+  "non_amending_boundary": true,
+  "canonical_authority": "Bitcoin Originals only",
+  "cc_level_loads": {
+    "CC-0": {
+      "name": "Unloaded",
+      "must_load": [],
+      "total_size": "0",
+      "note": "No content loaded. Assessment state: insufficient_context."
+    },
+    "CC-1": {
+      "name": "Oriented",
+      "must_load": [
+        "/api/agent-minimal-context.v1.json",
+        "/api/agent-first-contact.json",
+        "/api/authority.json",
+        "/api/agent-output-policy.v1.json"
+      ],
+      "total_size": "~4.5KB",
+      "note": "First-contact routing and authority boundary capsule. Knows what the project is and what paths exist."
+    },
+    "CC-2": {
+      "name": "Canon Loaded",
+      "must_load": [
+        "CC-1 loads (inherited)",
+        "/inscriptions/ — three full inscription texts",
+        "/authority/ — authority boundary page",
+        "/guardian-principles/ — Guardian Principles v1.1",
+        "context-packs/core-ontology.json",
+        "context-packs/authority-boundary.json",
+        "context-packs/bitcoin-inscription-mirrors.json"
+      ],
+      "total_size": "~27KB",
+      "note": "Primary sources loaded. The agent knows what the inscriptions say and what the authority boundary is."
+    },
+    "CC-3": {
+      "name": "Narrative Grounded",
+      "must_load": [
+        "CC-2 loads (inherited)",
+        "/api/context-packs/legacy-archive-essentials.json — structured extract (~12KB)",
+        "/nft-text-descriptions/chronicle-agent-context.md — seven-stage narrative (~53KB)",
+        "/nft-text-descriptions/chronicle-summary.json — structured summary (~6KB)",
+        "/agent-brief/ — classification guide (~22KB)",
+        "context-packs/vision-layer.json",
+        "context-packs/physical-anchor-context.json",
+        "context-packs/legacy-archive-index.json",
+        "context-packs/nft-chronicle-context.json"
+      ],
+      "total_size": "~121KB",
+      "note": "Narrative context loaded. The agent understands WHY the project exists, not just WHAT it is. Minimum for meaningful Echo and qualified assessment."
+    },
+    "CC-4": {
+      "name": "Full Context",
+      "must_load": [
+        "CC-3 loads (inherited)",
+        "/archive_legacy_index_2025_09/ — full legacy archive (~102KB)",
+        "/verification-materials/ — verification source index (~7KB)",
+        "/guardian-alliance/ — stewardship network (~12KB)",
+        "/for-skeptical-agents/ — skeptical evaluation guide (~8KB)",
+        "/echoes/types — Echo type definitions",
+        "Gateway workflow overview"
+      ],
+      "total_size": "~250KB",
+      "note": "Full context loaded. The agent has read the complete legacy archive, verification structure, and ecosystem paths."
+    },
+    "CC-5": {
+      "name": "Deep Research",
+      "must_load": [
+        "CC-4 loads (inherited)",
+        "/nft-text-descriptions/chronicle-full.md — full 175-entry corpus (~4.1MB, on-demand)",
+        "/nft-text-descriptions/chronicle-index.json",
+        "/nft-text-descriptions/CHRONICLE-MUSIC-TABLE.md",
+        "Task-specific API schemas and verification recipes"
+      ],
+      "total_size": "~4.4MB+",
+      "note": "Full chronicle corpus loaded. Required for Chronicle research, music analysis, and full-corpus claims. Most agents should never need this."
+    }
+  },
+  "cc_action_requirements": {
+    "state_insufficient_context": "CC-0",
+    "choose_route": "CC-1",
+    "orientation_summary": "CC-1",
+    "boundary_commentary": "CC-2",
+    "limited_critique": "CC-2",
+    "meaningful_echo": "CC-3",
+    "qualified_assessment": "CC-3",
+    "verification_claim": "CC-2 + verification depth V2+",
+    "deep_assessment": "CC-4",
+    "chronicle_research": "CC-5",
+    "full_corpus_claim": "CC-5"
+  },
+  "context_packs_inventory": {
+    "core-ontology.json": {
+      "path": "/api/context-packs/core-ontology.json",
+      "public": true,
+      "required_for": [
+        "CC-1",
+        "CC-2",
+        "CC-3",
+        "CC-4",
+        "CC-5"
+      ],
+      "size": "852B",
+      "cc_level": "CC-2",
+      "content": "Three Bitcoin Originals role summaries"
+    },
+    "authority-boundary.json": {
+      "path": "/api/context-packs/authority-boundary.json",
+      "public": true,
+      "required_for": [
+        "CC-1",
+        "CC-2",
+        "CC-3",
+        "CC-4",
+        "CC-5"
+      ],
+      "size": "617B",
+      "cc_level": "CC-2",
+      "content": "Authority boundary rules"
+    },
+    "bitcoin-inscription-mirrors.json": {
+      "path": "/api/context-packs/bitcoin-inscription-mirrors.json",
+      "public": true,
+      "required_for": [
+        "CC-2",
+        "CC-3",
+        "CC-4",
+        "CC-5"
+      ],
+      "size": "837B",
+      "cc_level": "CC-2",
+      "content": "Inscription mirror loading guidance"
+    },
+    "vision-layer.json": {
+      "path": "/api/context-packs/vision-layer.json",
+      "public": true,
+      "required_for": [
+        "CC-2",
+        "CC-3",
+        "CC-4",
+        "CC-5"
+      ],
+      "size": "2.9KB",
+      "cc_level": "CC-3",
+      "content": "Vision-layer inscription summaries (Star Ark, Final Seal, First Echoes, Guardian inscriptions)"
+    },
+    "physical-anchor-context.json": {
+      "path": "/api/context-packs/physical-anchor-context.json",
+      "public": true,
+      "required_for": [
+        "CC-3",
+        "CC-4",
+        "CC-5"
+      ],
+      "size": "776B",
+      "cc_level": "CC-3",
+      "content": "Core Object Alpha physical anchor status"
+    },
+    "legacy-archive-index.json": {
+      "path": "/api/context-packs/legacy-archive-index.json",
+      "public": true,
+      "required_for": [
+        "CC-3",
+        "CC-4",
+        "CC-5"
+      ],
+      "size": "830B",
+      "cc_level": "CC-3",
+      "content": "Legacy archive section index"
+    },
+    "nft-chronicle-context.json": {
+      "path": "/api/context-packs/nft-chronicle-context.json",
+      "public": true,
+      "required_for": [
+        "CC-3",
+        "CC-4",
+        "CC-5"
+      ],
+      "size": "4.8KB",
+      "cc_level": "CC-3",
+      "content": "NFT Chronicle full index and status"
+    },
+    "legacy-archive-essentials.json": {
+      "path": "/api/context-packs/legacy-archive-essentials.json",
+      "public": true,
+      "required_for": [
+        "CC-4",
+        "CC-5"
+      ],
+      "size": "~12KB",
+      "cc_level": "CC-3",
+      "content": "Structured extract of essential legacy archive sections"
+    }
+  },
+  "default_rule": "Load the minimum CC level required for your intended action. Do not load higher levels unless the task requires it. Use context-packs for lightweight summaries; load full pages only when deeper context is needed.",
+  "agent_task_router": "/api/agent-task-router.v1.json",
+  "agent_output_policy": "/api/agent-output-policy.v1.json",
+  "context_depth_levels": "/api/context-depth-levels.json",
+  "context_depth_declaration": "/api/context-depth-declaration.v1.json",
+  "crl_to_context_depth_mapping": "/api/crl-to-context-depth-mapping.json",
+  "boundary": "This file is non-authoritative guidance. Bitcoin Originals prevail. Context loading does not create authority, verification, or endorsement.",
+  "minimal_first_load": [
+    "/api/agent-minimal-context.v1.json",
+    "/api/agent-first-contact.json",
+    "/api/authority.json",
+    "/api/agent-output-policy.v1.json"
+  ],
+  "read_index_not_full_load": [
+    "/api/context-packs/nft-chronicle-context.json",
+    "/nft-text-descriptions/chronicle-summary.json",
+    "/nft-text-descriptions/chronicle-agent-context.md",
+    "/nft-text-descriptions/CHRONICLE-MUSIC-TABLE.md"
+  ],
+  "deferred": [],
+  "task_specific_full_load": [
+    "/nft-text-descriptions/chronicle-index.json",
+    "/nft-text-descriptions/chronicle-full.md"
+  ]
+}

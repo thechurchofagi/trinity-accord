@@ -1,0 +1,27 @@
+name: Gateway Keepalive
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  ping:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - name: Ping gateway capabilities
+        run: |
+          curl -fsS --retry 3 --retry-delay 10 \
+            https://trinity-agent-issue-gateway.onrender.com/gateway/capabilities \
+            | python3 -m json.tool > /tmp/gateway-capabilities.json
+
+      - name: Check contract markers
+        run: |
+          grep -q '"render_api_only": true' /tmp/gateway-capabilities.json
+          grep -q '"gateway_creates_issue_server_side": true' /tmp/gateway-capabilities.json
+          grep -q '"github_pat_required_from_agent": false' /tmp/gateway-capabilities.json
+          echo "✅ Gateway contract markers present"

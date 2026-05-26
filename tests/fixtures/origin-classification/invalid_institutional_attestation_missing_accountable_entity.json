@@ -1,0 +1,17 @@
+{
+  "schema": "trinityaccord.origin-classification.v1",
+  "discovery_class": "institution_commissioned",
+  "invitation_scope": "verification_invited",
+  "requester_class": "institution",
+  "performer_class": "human_ai_team",
+  "method_independence_class": "independent_reimplementation",
+  "attestation_authority_class": "institution_signed",
+  "voluntary_action_after_orientation": false,
+  "verification_claimed": true,
+  "counts_as_ai_verification": true,
+  "counts_as_formal_independent_attestation": true,
+  "derived_counting_bucket": "accepted_institutional_attestation",
+  "notes": [
+    "INVALID: accepted_institutional_attestation requires accountable_entity."
+  ]
+}

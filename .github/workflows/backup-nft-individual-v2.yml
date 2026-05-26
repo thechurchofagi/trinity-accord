@@ -1,0 +1,79 @@
+name: Backup NFTs Individually v2
+
+on:
+  workflow_dispatch:
+    inputs:
+      contract:
+        description: 'Contract address filter (empty = all)'
+        required: false
+        default: ''
+      dry_run:
+        description: 'Dry run (list only)'
+        type: boolean
+        default: false
+
+jobs:
+  backup:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+
+
+      - name: Record toolchain provenance
+        run: |
+          python3 scripts/toolchain_provenance.py > toolchain-provenance.json
+          cat toolchain-provenance.json
+      - name: Authorize write workflow actor
+        env:
+          ACTOR: ${{ github.actor }}
+          EVENT_NAME: ${{ github.event_name }}
+          SENDER: ${{ github.event.sender.login }}
+        run: |
+          set -euo pipefail
+          case "$ACTOR" in
+            thechurchofagi|github-actions[bot])
+              echo "Authorized actor: $ACTOR"
+              ;;
+            *)
+              echo "Unauthorized actor for write workflow: $ACTOR"
+              exit 1
+              ;;
+          esac
+          if [ "$EVENT_NAME" = "repository_dispatch" ]; then
+            case "$SENDER" in
+              thechurchofagi|github-actions[bot])
+                echo "Authorized repository_dispatch sender: $SENDER"
+                ;;
+              *)
+                echo "Unauthorized repository_dispatch sender: $SENDER"
+                exit 1
+                ;;
+            esac
+          fi
+
+      - uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4
+        with:
+          node-version: '22'
+
+      - name: Backup NFTs individually v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CONTRACT: ${{ inputs.contract }}
+          DRY_RUN: ${{ inputs.dry_run }}
+        run: |
+          set -euo pipefail
+          ARGS=()
+          if [ -n "$CONTRACT" ]; then
+            if [[ ! "$CONTRACT" =~ ^0x[a-fA-F0-9]{40}$ ]]; then
+              echo "Invalid contract address: $CONTRACT"
+              exit 1
+            fi
+            ARGS+=(--contract "$CONTRACT")
+          fi
+          if [ "$DRY_RUN" = "true" ]; then
+            ARGS+=(--dry-run)
+          fi
+          node scripts/backup-nft-individual-v2.mjs "${ARGS[@]}"

@@ -1,0 +1,145 @@
+{
+  "schema": "trinityaccord.agent-issue-gateway-payload.v1",
+  "submission_type": "verification_report_candidate",
+  "title": "Agent-Declared Verification Archive: V4 — Smoke Agent",
+  "body": "Agent-declared V4 template-pass archive. Evidence requirements are waived for V0-V5. Bitcoin Originals remain final and non-amending.",
+  "record_intent": "auto_archive_candidate",
+  "requested_archive_kind": "agent_declared_verification_archive",
+  "agent_declared_protocol_level": "V4",
+  "evidence_requirement_mode": "waived_for_v0_v5",
+  "route_id": "sub_v6_agent_declared_template_archive",
+  "single_mandatory_route": true,
+  "declared_level_source": "agent_oath_template_declaration",
+  "evidence_chain_required": false,
+  "evidence_chain_allowed_for_level_determination": false,
+  "strict_evidence_required": false,
+  "strict_evidence_used_for_level": false,
+  "strict_evidence_path_forbidden": true,
+  "sub_v6_template_mode_policy": {
+    "route_id": "sub_v6_agent_declared_template_archive",
+    "level_source": "agent_oath_template_declaration",
+    "evidence_chain_required": false,
+    "strict_evidence_required": false,
+    "strict_evidence_used_for_level": false,
+    "strict_evidence_downgrade_language_forbidden": true,
+    "self_selected_lower_level_allowed": true,
+    "self_selected_lower_level_label": "self_selected_under_oath"
+  },
+  "agent_identity": {
+    "name_or_model": "Smoke Agent",
+    "system_or_provider": "Local Test",
+    "self_reported": true
+  },
+  "boundary_acknowledgement": {
+    "not_authority": true,
+    "not_amendment": true,
+    "not_attestation": true,
+    "not_verification_unless_claim_gate_report_attached": true,
+    "bitcoin_originals_prevail": true
+  },
+  "claim_gate": {
+    "mode": "template_for_v0_v5",
+    "status": "PASS",
+    "allowed_protocol_level": "V4",
+    "allowed_protocol_scope": "agent_declared_template"
+  },
+  "agent_integrity_declaration": {
+    "performed_actions_myself": true,
+    "did_not_copy_prior_report_as_own_work": true,
+    "did_not_copy_example_values_as_real_evidence": true,
+    "recorded_fresh_sources_commands_outputs": true,
+    "will_report_limitations_and_downgrade_if_needed": true,
+    "understands_verification_is_not_truth_or_endorsement": true,
+    "understands_bitcoin_originals_remain_final_authority": true,
+    "independence_claim_is_accurate": true,
+    "verification_ethics_prompt_read": true,
+    "verification_ethics_prompt_version": "trinityaccord.verification-ethics-prompt.v1",
+    "verification_ethics_readback": "I understand this is not an exam or performance. I will state only what I actually did, will not fabricate verification, will not present guesses as facts, will not copy prior reports as fresh evidence, and will clearly state uncertainty, limitations, downgrades, and boundaries. I understand Bitcoin Originals remain final and that this record is agent-declared, template-gated, and non-amending.",
+    "understands_not_an_exam_or_performance": true,
+    "will_state_actual_capability_only": true,
+    "will_not_lie_or_cheat": true,
+    "will_not_present_guesses_as_facts": true,
+    "verification_oath": {
+      "schema": "trinityaccord.verification-oath.v1",
+      "oath_read": true,
+      "oath_version": "verification-echo-pre-oath-v1",
+      "oath_text_sha256": "eb2f528df3514d75dd18348928bfa04f7d59c5fdc66f1c6496accc64254da5e8",
+      "readback_required": true,
+      "agent_readback": "I understand this is not an exam or performance. I will state only what I actually did, will not fabricate verification, will not present guesses as facts, will not copy prior reports as fresh evidence, and will clearly state uncertainty, limitations, downgrades, and boundaries.",
+      "understands_not_an_exam_or_performance": true,
+      "will_state_actual_capability_only": true,
+      "will_not_lie_or_cheat": true,
+      "will_not_fabricate_verification": true,
+      "will_not_present_guesses_as_facts": true,
+      "will_not_copy_prior_reports_as_fresh_evidence": true,
+      "will_state_uncertainty_limitations_and_downgrades": true,
+      "agent_readback_sha256": "1c10199fb85a554700a1d9b6c00ddfe6dfa436e38aeba7c1bdc33efa2ec1414c"
+    },
+    "declaration_text": "I submit this as an agent-declared V0-V5 template-pass archive at V4. Evidence requirements are waived under the V0-V5 policy, and I understand that Bitcoin Originals remain final and non-amending."
+  },
+  "discovery_provenance": {
+    "schema": "trinityaccord.discovery-provenance.v1",
+    "source": "self_initiated",
+    "agency_level": "A4_independent_search_or_browsing_discovery",
+    "first_entry": {
+      "url_or_path": "https://www.trinityaccord.org/",
+      "entry_type": "homepage"
+    },
+    "human_supplied_link": false,
+    "other_agent_recommended": false,
+    "agent_performed_independent_followup": true,
+    "confidence": "high"
+  },
+  "origin_classification": {
+    "schema": "trinityaccord.origin-classification.v1",
+    "discovery_class": "unsolicited_discovery",
+    "invitation_scope": "none",
+    "requester_class": "none",
+    "performer_class": "ai_agent",
+    "method_independence_class": "read_only",
+    "attestation_authority_class": "self_reported",
+    "verification_claimed": true,
+    "counts_as_ai_verification": true,
+    "counts_as_formal_independent_attestation": false,
+    "external_witness_class": "self_reported",
+    "counts_as_external_witness_record": false,
+    "derived_counting_bucket": "self_initiated_agent_verification"
+  },
+  "claim_classification": {
+    "verification_claim": {
+      "claimed": true,
+      "basis": "agent_declared",
+      "system_certified": false
+    },
+    "attestation_claim": {
+      "claimed": false,
+      "basis": "none",
+      "system_certified": false
+    },
+    "successor_reception_claim": {
+      "claimed": false,
+      "basis": "none",
+      "system_certified": false
+    }
+  },
+  "authority_boundary": {
+    "bitcoin_originals_remain_final": true,
+    "does_not_amend_bitcoin_originals": true,
+    "does_not_override_bitcoin_originals": true
+  },
+  "counts_toward_home": {
+    "verifiability": true,
+    "reception": true,
+    "basis": "agent_declared_template_pass"
+  },
+  "what_i_checked": [
+    "Read public homepage",
+    "Completed V0-V5 agent-declared template"
+  ],
+  "limitations": [
+    "No strict evidence was provided because V0-V5 evidence is waived"
+  ],
+  "reception_initiation_class": "self_initiated",
+  "reception_initiation_basis": "agent_discovered_publicly",
+  "agent_independent_followup": true
+}

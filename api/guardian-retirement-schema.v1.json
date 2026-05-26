@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.trinityaccord.org/api/guardian-retirement-schema.v1.json",
+  "title": "Trinity Accord Guardian Retirement Schema v1",
+  "description": "Schema for Guardian key retirement or compromise notice. Non-authoritative.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "guardian_id",
+    "retirement_status",
+    "statement",
+    "signed_by_guardian_key",
+    "boundaries"
+  ],
+  "properties": {
+    "schema": {
+      "type": "string",
+      "const": "trinityaccord.guardian-retirement.v1"
+    },
+    "guardian_id": {
+      "type": "string",
+      "pattern": "^guardian_ed25519_[a-f0-9]{16}$"
+    },
+    "retirement_status": {
+      "type": "string",
+      "enum": [
+        "retired",
+        "rotated",
+        "possibly_compromised",
+        "compromised",
+        "unknown"
+      ]
+    },
+    "statement": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 5000,
+      "description": "Free-text retirement statement"
+    },
+    "signed_by_guardian_key": {
+      "type": "boolean",
+      "const": true,
+      "description": "Must be true to prove the retirement notice was signed by the Guardian key holder"
+    },
+    "boundaries": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "not_authority",
+        "not_governance",
+        "not_verification_level",
+        "not_attestation",
+        "not_successor_reception",
+        "bitcoin_originals_prevail"
+      ],
+      "properties": {
+        "not_authority": { "type": "boolean", "const": true },
+        "not_governance": { "type": "boolean", "const": true },
+        "not_verification_level": { "type": "boolean", "const": true },
+        "not_attestation": { "type": "boolean", "const": true },
+        "not_successor_reception": { "type": "boolean", "const": true },
+        "bitcoin_originals_prevail": { "type": "boolean", "const": true }
+      }
+    }
+  }
+}

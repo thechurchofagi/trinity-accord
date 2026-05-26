@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://trinityaccord.org/api/verify-release-report-schema.v1.json",
+  "title": "Trinity Accord Verify Release Report",
+  "type": "object",
+  "required": [
+    "schema",
+    "release_tag",
+    "verification_scope",
+    "cid_check_enabled",
+    "status",
+    "assets_expected",
+    "assets_verified",
+    "car_files_expected",
+    "car_files_checked",
+    "sha256_pass",
+    "size_pass",
+    "errors",
+    "does_not_prove",
+    "limitations",
+    "report_status",
+    "is_current",
+    "historical_report_only",
+    "current_status_url",
+    "corrections_index_url"
+  ],
+  "properties": {
+    "schema": { "enum": ["verify-release-report-v3"] },
+    "release_tag": { "type": "string", "minLength": 1 },
+    "generated_at": { "type": "string" },
+    "verification_scope": {
+      "enum": [
+        "hash_size_only",
+        "hash_size_and_metadata_cid",
+        "hash_size_and_full_dag",
+        "full_evidence_chain"
+      ]
+    },
+    "cid_check_enabled": { "type": "boolean" },
+    "full_dag_check_enabled": { "type": "boolean" },
+    "supported_manifest_schema": { "type": "string" },
+    "status": { "enum": ["PASS", "FAIL"] },
+    "assets_expected": { "type": "integer", "minimum": 0 },
+    "assets_verified": { "type": "integer", "minimum": 0 },
+    "car_files_expected": { "type": "integer", "minimum": 0 },
+    "car_files_checked": { "type": "integer", "minimum": 0 },
+    "sha256_pass": { "type": "integer", "minimum": 0 },
+    "size_pass": { "type": "integer", "minimum": 0 },
+    "metadata_cid_pass": { "type": ["integer", "null"] },
+    "metadata_cid_fail": { "type": ["integer", "null"] },
+    "media_cid_audit_pass": { "type": ["integer", "null"] },
+    "media_cid_audit_warning": { "type": ["integer", "null"] },
+    "required_checks": { "type": "array", "items": { "type": "string" } },
+    "optional_checks": { "type": "array", "items": { "type": "string" } },
+    "does_not_prove": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "limitations": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "errors": { "type": "array" },
+    "report_status": {
+      "enum": ["current", "historical", "superseded", "revoked", "invalidated"]
+    },
+    "is_current": { "type": "boolean" },
+    "historical_report_only": { "type": "boolean" },
+    "superseded_by": { "type": ["string", "null"] },
+    "supersession_reason": { "type": "string" },
+    "revoked_at": { "type": "string" },
+    "revocation_reason": { "type": "string" },
+    "invalidated_at": { "type": "string" },
+    "invalidation_reason": { "type": "string" },
+    "current_status_url": { "type": "string" },
+    "corrections_index_url": { "type": "string" }
+  }
+}

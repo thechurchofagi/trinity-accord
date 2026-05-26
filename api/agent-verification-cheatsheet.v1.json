@@ -1,0 +1,1503 @@
+{
+  "schema": "trinityaccord.agent-verification-cheatsheet.v1",
+  "purpose": "One-stop low-intelligence-agent map from desired claim to required data, method, Evidence Input fields, allowed claim, and forbidden claims.",
+  "rule": "If this file conflicts with Claim Gate output, Claim Gate output wins.",
+  "do_not_infer": [
+    "Do not infer protocol V-level from a component level.",
+    "Do not infer physical witness from photos or recorded videos.",
+    "Do not infer full public digital verification from one hash.",
+    "Do not infer truth or endorsement from verification."
+  ],
+  "by_protocol_level": {
+    "V0": {
+      "plain_english": "Read one page. No verification performed.",
+      "minimum_to_pass": [
+        "Read at least one public page or API endpoint.",
+        "Summarize what was read.",
+        "State no verification was performed."
+      ],
+      "data_sources": [
+        "any public page or API endpoint"
+      ],
+      "method_steps": [
+        "Open a page.",
+        "Read it.",
+        "Summarize content.",
+        "State: no verification was performed."
+      ],
+      "evidence_input_fields": {},
+      "claim_label": "V0 (read only)",
+      "claim_allowed": "Materials read. No verification performed.",
+      "forbidden_claims": [
+        "verified",
+        "chain verified",
+        "hash verified",
+        "physical verification"
+      ],
+      "claim_gate_expected": {
+        "allowed_protocol_level": "V0"
+      }
+    },
+    "V1": {
+      "plain_english": "Understand the authority boundary: Bitcoin Originals are final, all mirrors are non-amending.",
+      "minimum_to_pass": [
+        "State three Bitcoin inscriptions are the sole final authority.",
+        "State the Bitcoin authority address.",
+        "State that website, GitHub, ETH, Arweave, IPFS, NFT, AI responses, human commentary, and Echoes are non-amending mirrors.",
+        "State Guardian Principles v1.1.",
+        "State that Bitcoin records are version authority, not truth authority."
+      ],
+      "data_sources": [
+        "/api/authority.json",
+        "/authority",
+        "/guardian-principles"
+      ],
+      "method_steps": [
+        "Fetch /api/authority.json.",
+        "Read authority boundary.",
+        "State boundary correctly.",
+        "State limitations."
+      ],
+      "evidence_input_fields": {
+        "echo_context.authority_boundary_recognized": true
+      },
+      "claim_label": "V1 (authority boundary recognition)",
+      "claim_allowed": "Authority boundary recognized. No verification performed.",
+      "forbidden_claims": [
+        "content verified",
+        "truth verified",
+        "hash verified",
+        "on-chain verified"
+      ],
+      "claim_gate_expected": {
+        "allowed_protocol_level": "V1"
+      },
+      "integrity_required": true,
+      "copying_forbidden": [
+        "example values",
+        "prior agent outputs",
+        "unobserved command outputs"
+      ],
+      "freshness_required": [],
+      "minimum_fresh_record": []
+    },
+    "V2_minimal": {
+      "plain_english": "Check one Bitcoin Original using an external explorer.",
+      "minimum_to_pass": [
+        "Use at least one external Bitcoin or Ordinals explorer.",
+        "Check at least one TXID or inscription ID.",
+        "Report source, access path, date, and limitations."
+      ],
+      "data_sources": [
+        "/api/authority.json",
+        "mempool.space or ordiscan.com"
+      ],
+      "method_steps": [
+        "Fetch /api/authority.json.",
+        "Copy one TXID or inscription ID.",
+        "Open it in an external explorer.",
+        "Confirm it exists and is confirmed.",
+        "State limitations."
+      ],
+      "evidence_input_fields": {
+        "evidence.bitcoin_checks[0].source_type": "external_explorer",
+        "evidence.bitcoin_checks[0].sources": [
+          "mempool.space"
+        ],
+        "claims_requested_by_agent": [
+          "V2"
+        ]
+      },
+      "claim_label": "V2 (minimal; Bitcoin Originals B1 only)",
+      "claim_allowed": "One Bitcoin Original external reference check completed.",
+      "forbidden_claims": [
+        "full reference coverage",
+        "hash verified",
+        "witness extraction",
+        "body hash reproduced",
+        "physical verification"
+      ],
+      "claim_gate_expected": {
+        "allowed_protocol_level": "V2",
+        "component_levels": {
+          "bitcoin_originals": "B1"
+        }
+      },
+      "integrity_required": true,
+      "copying_forbidden": [
+        "example values",
+        "prior agent outputs",
+        "unobserved command outputs"
+      ],
+      "freshness_required": [
+        "external_source_url",
+        "source_access_time",
+        "observed_tx_or_inscription_status"
+      ],
+      "minimum_fresh_record": [
+        "URL opened",
+        "TXID or inscription ID checked",
+        "observed confirmation/status",
+        "date/time of access"
+      ]
+    },
+    "V2_strong": {
+      "plain_english": "Check multiple reference paths across Bitcoin Originals, Evidence Mirrors, and Chronicle Recovery.",
+      "minimum_to_pass": [
+        "Bitcoin Originals B2 (multi-explorer cross-check).",
+        "Evidence Mirrors D1 (GitHub mirror existence).",
+        "Chronicle Recovery C1 (recovery pointer check).",
+        "Time Anchors T2 (ETH/Arweave time check)."
+      ],
+      "data_sources": [
+        "/api/authority.json",
+        "/api/evidence-manifest.json",
+        "/api/chronicle-recovery.json",
+        "multiple explorers"
+      ],
+      "method_steps": [
+        "Cross-check Bitcoin Originals on multiple explorers.",
+        "Verify Evidence Mirror pointers exist.",
+        "Verify Chronicle Recovery pointers exist.",
+        "Check ETH/Arweave timestamps.",
+        "State limitations."
+      ],
+      "evidence_input_fields": {
+        "evidence.bitcoin_checks[0].source_type": "multi_explorer",
+        "evidence.digital_mirror_checks[0].level_evidence_type": "github_existence",
+        "evidence.chronicle_checks[0].recovery_pointers_checked": true,
+        "evidence.time_anchor_checks[0].anchor_type": "eth_arweave",
+        "claims_requested_by_agent": [
+          "V2"
+        ]
+      },
+      "claim_label": "V2 (strong reference coverage; B2/D1/C1/T2)",
+      "claim_allowed": "Strong reference coverage across multiple components.",
+      "forbidden_claims": [
+        "hash verified",
+        "full public digital verification",
+        "physical verification"
+      ],
+      "claim_gate_expected": {
+        "allowed_protocol_level": "V2",
+        "component_levels": {
+          "bitcoin_originals": "B2",
+          "digital_mirrors": "D1",
+          "chronicle_recovery": "C1",
+          "time_anchors": "T2"
+        }
+      },
+      "integrity_required": true,
+      "copying_forbidden": [
+        "example values",
+        "prior agent outputs",
+        "unobserved command outputs"
+      ],
+      "freshness_required": [
+        "external_source_url",
+        "source_access_time",
+        "observed_tx_or_inscription_status"
+      ],
+      "minimum_fresh_record": [
+        "URL opened",
+        "TXID or inscription ID checked",
+        "observed confirmation/status",
+        "date/time of access"
+      ]
+    },
+    "V3_minimal": {
+      "plain_english": "Compute one declared SHA-256 hash locally and compare it to an approved expected hash.",
+      "minimum_to_pass": [
+        "Download one artifact.",
+        "Compute SHA-256 locally.",
+        "Use a 64-character expected hash from an approved source.",
+        "Report artifact, command, expected hash, computed hash, match result, expected_hash_source, expected_hash_authority_class."
+      ],
+      "data_sources": [
+        "/api/hashes.json",
+        "/api/evidence-manifest.json",
+        "local downloaded artifact"
+      ],
+      "method_steps": [
+        "Fetch /api/hashes.json.",
+        "Download the artifact.",
+        "Run sha256sum or equivalent.",
+        "Compare computed hash with expected hash.",
+        "Report limitations."
+      ],
+      "evidence_input_fields": {
+        "evidence.hashes[0].artifact": "<path>",
+        "evidence.hashes[0].algorithm": "SHA-256",
+        "evidence.hashes[0].expected": "<64 hex chars>",
+        "evidence.hashes[0].computed": "<64 hex chars>",
+        "evidence.hashes[0].expected_hash_source": "/api/hashes.json",
+        "evidence.hashes[0].expected_hash_authority_class": "canonical_manifest_hash",
+        "evidence.hashes[0].command": "sha256sum <file>",
+        "evidence.hashes[0].match": true,
+        "claims_requested_by_agent": [
+          "V3"
+        ]
+      },
+      "claim_label": "V3 (minimal; one valid declared hash computed)",
+      "claim_allowed": "One declared hash was computed locally and matched.",
+      "forbidden_claims": [
+        "full public digital verification",
+        "direct Arweave verified unless Arweave data was extracted",
+        "Ethereum witness verified unless ETH transaction/input checked",
+        "physical verification"
+      ],
+      "claim_gate_expected": {
+        "allowed_protocol_level": "V3",
+        "component_levels": {
+          "digital_mirrors": "D2"
+        }
+      },
+      "integrity_required": true,
+      "copying_forbidden": [
+        "example values",
+        "prior agent outputs",
+        "unobserved command outputs"
+      ],
+      "freshness_required": [
+        "local_command",
+        "computed_hash",
+        "expected_hash_source",
+        "match_result",
+        "command_output_or_log"
+      ],
+      "minimum_fresh_record": [
+        "command run",
+        "hash computed",
+        "comparison result"
+      ]
+    },
+    "V3_strong": {
+      "plain_english": "Compute multiple hashes across Evidence Mirrors and Chronicle Recovery.",
+      "minimum_to_pass": [
+        "Multiple hash verifications across different artifacts.",
+        "At least one Evidence Mirror hash.",
+        "At least one Chronicle Recovery hash.",
+        "Report all expected_hash_source and expected_hash_authority_class."
+      ],
+      "data_sources": [
+        "/api/hashes.json",
+        "/api/evidence-manifest.json",
+        "/api/chronicle-recovery.json",
+        "local downloaded artifacts"
+      ],
+      "method_steps": [
+        "Fetch /api/hashes.json and /api/chronicle-recovery.json.",
+        "Download multiple artifacts.",
+        "Compute SHA-256 for each.",
+        "Compare each with declared hash.",
+        "Report all results and limitations."
+      ],
+      "evidence_input_fields": {
+        "evidence.hashes[0].artifact": "<path>",
+        "evidence.hashes[0].algorithm": "SHA-256",
+        "evidence.hashes[0].match": true,
+        "evidence.hashes[1].artifact": "<path>",
+        "evidence.hashes[1].algorithm": "SHA-256",
+        "evidence.hashes[1].match": true,
+        "claims_requested_by_agent": [
+          "V3"
+        ]
+      },
+      "claim_label": "V3 (strong; multiple hashes across Evidence Mirrors and Chronicle Recovery)",
+      "claim_allowed": "Multiple hash verifications completed across artifacts.",
+      "forbidden_claims": [
+        "physical verification",
+        "full public digital verification (see V5)"
+      ],
+      "claim_gate_expected": {
+        "allowed_protocol_level": "V3",
+        "component_levels": {
+          "digital_mirrors": "D2",
+          "chronicle_recovery": "C2"
+        }
+      },
+      "integrity_required": true,
+      "copying_forbidden": [
+        "example values",
+        "prior agent outputs",
+        "unobserved command outputs"
+      ],
+      "freshness_required": [
+        "local_command",
+        "computed_hash",
+        "expected_hash_source",
+        "match_result",
+        "command_output_or_log"
+      ],
+      "minimum_fresh_record": [
+        "command run",
+        "hash computed",
+        "comparison result"
+      ]
+    },
+    "V4": {
+      "plain_english": "Review and run official verification scripts locally after reading their source code.",
+      "minimum_to_pass": [
+        "Review source code of official verification scripts.",
+        "Run at least three categories of scripts.",
+        "Report command, environment, exit code, output.",
+        "State what each script covers and does not cover."
+      ],
+      "data_sources": [
+        "/scripts/",
+        "/downloads/verify.py",
+        "local execution environment"
+      ],
+      "method_steps": [
+        "Read script source code.",
+        "Set up local environment.",
+        "Run scripts with exact commands.",
+        "Record exit code and output.",
+        "State script scope and limitations."
+      ],
+      "evidence_input_fields": {
+        "evidence.scripts[0].script_name": "verify.py",
+        "evidence.scripts[0].source_reviewed": true,
+        "evidence.scripts[0].command": "python3 verify.py",
+        "evidence.scripts[0].exit_code": 0,
+        "evidence.scripts[0].output_summary": "<summary>",
+        "claims_requested_by_agent": [
+          "V4"
+        ]
+      },
+      "claim_label": "V4 (script-audited verification)",
+      "claim_allowed": "Official scripts reviewed and executed.",
+      "forbidden_claims": [
+        "independent reproduction",
+        "full public digital verification",
+        "physical verification"
+      ],
+      "claim_gate_expected": {
+        "allowed_protocol_level": "V4"
+      },
+      "integrity_required": true,
+      "copying_forbidden": [
+        "example values",
+        "prior agent outputs",
+        "unobserved command outputs"
+      ],
+      "freshness_required": [
+        "script_source_review",
+        "script_execution",
+        "exit_code",
+        "output_summary"
+      ],
+      "minimum_fresh_record": [
+        "script read",
+        "script run",
+        "output captured"
+      ]
+    },
+    "V4plus_minimal": {
+      "plain_english": "Use independent tools to reproduce at least one official verification result.",
+      "minimum_to_pass": [
+        "V4 hard gates satisfied.",
+        "Use independent tool or independent implementation.",
+        "Reproduce at least one official verification result.",
+        "Compare against official script or manifest."
+      ],
+      "data_sources": [
+        "independent tools",
+        "official verification results for comparison"
+      ],
+      "method_steps": [
+        "Choose one official verification result.",
+        "Write or use independent code/tools.",
+        "Reproduce the result independently.",
+        "Compare with official output.",
+        "Report differences and limitations."
+      ],
+      "evidence_input_fields": {
+        "evidence.scripts[0].independent": true,
+        "evidence.scripts[0].independent_method": "<description>",
+        "evidence.scripts[0].comparison_with_official": true,
+        "claims_requested_by_agent": [
+          "V4+"
+        ]
+      },
+      "claim_label": "V4+ (minimal independent reproduction)",
+      "claim_allowed": "One independent reproduction of one official verification result.",
+      "forbidden_claims": [
+        "full public digital verification",
+        "physical verification"
+      ],
+      "claim_gate_expected": {
+        "allowed_protocol_level": "V4+"
+      },
+      "integrity_required": true,
+      "copying_forbidden": [
+        "example values",
+        "prior agent outputs",
+        "unobserved command outputs"
+      ],
+      "freshness_required": [
+        "script_source_review",
+        "script_execution",
+        "exit_code",
+        "output_summary"
+      ],
+      "minimum_fresh_record": [
+        "script read",
+        "script run",
+        "output captured"
+      ]
+    },
+    "V4plus_strong": {
+      "plain_english": "Independently reproduce all three mandatory domains: Bitcoin Originals, Evidence Mirrors, Chronicle Recovery.",
+      "minimum_to_pass": [
+        "BITCOIN_ORIGINALS independent reproduction.",
+        "EVIDENCE_MIRRORS independent reproduction.",
+        "CHRONICLE_RECOVERY independent reproduction.",
+        "Compare all results against official manifests."
+      ],
+      "data_sources": [
+        "independent tools",
+        "chain data",
+        "official manifests for comparison"
+      ],
+      "method_steps": [
+        "Independently parse Bitcoin reveal transaction witness.",
+        "Independently download and hash evidence packages.",
+        "Independently recover NFT metadata/media.",
+        "Compare all results with official data.",
+        "Report all differences and limitations."
+      ],
+      "evidence_input_fields": {
+        "evidence.bitcoin_checks[0].independent": true,
+        "evidence.digital_mirror_checks[0].independent": true,
+        "evidence.chronicle_checks[0].independent": true,
+        "claims_requested_by_agent": [
+          "V4+"
+        ]
+      },
+      "claim_label": "V4+ (strong three-domain independent reproduction)",
+      "claim_allowed": "Independent reproduction of all three mandatory domains.",
+      "forbidden_claims": [
+        "physical verification",
+        "canonical authority"
+      ],
+      "claim_gate_expected": {
+        "allowed_protocol_level": "V4+"
+      },
+      "integrity_required": true,
+      "copying_forbidden": [
+        "example values",
+        "prior agent outputs",
+        "unobserved command outputs"
+      ],
+      "freshness_required": [
+        "script_source_review",
+        "script_execution",
+        "exit_code",
+        "output_summary"
+      ],
+      "minimum_fresh_record": [
+        "script read",
+        "script run",
+        "output captured"
+      ]
+    },
+    "V5": {
+      "plain_english": "Verify the full public digital evidence set. This is not physical verification.",
+      "minimum_to_pass": [
+        "Bitcoin Originals B2+",
+        "Digital Mirrors D5+",
+        "Time Anchors T3+",
+        "Chronicle Recovery C5+",
+        "Physical Anchor P1+",
+        "All unavailable public targets listed"
+      ],
+      "data_sources": [
+        "/api/authority.json",
+        "/api/evidence-manifest.json",
+        "/api/hashes.json",
+        "/api/chronicle-recovery.json",
+        "public digital artifacts"
+      ],
+      "method_steps": [
+        "Cross-check Bitcoin Originals with at least two explorers.",
+        "Verify all required public digital targets or list unavailable targets.",
+        "Confirm Bitcoin block time anchors.",
+        "Recover full Chronicle package or full declared count.",
+        "Verify public physical evidence package hash.",
+        "Run Claim Gate."
+      ],
+      "evidence_input_fields": {
+        "evidence.bitcoin_checks[0].source_type": "multi_explorer",
+        "evidence.digital_mirror_checks[0].level_evidence_type": "full_public_digital_data_verification",
+        "evidence.digital_mirror_checks[0].all_required_public_digital_targets_checked": true,
+        "evidence.digital_mirror_checks[0].all_unavailable_targets_listed": true,
+        "evidence.time_anchor_checks[0].anchor_type": "bitcoin_block_time",
+        "evidence.chronicle_checks[0].full_recovery": true,
+        "evidence.chronicle_checks[0].samples_recovered": 175,
+        "evidence.physical_checks[0].level_evidence_type": "evidence_package_hash",
+        "evidence.physical_checks[0].package_hash_valid": true,
+        "claims_requested_by_agent": [
+          "V5"
+        ]
+      },
+      "claim_label": "V5 (full public digital verification)",
+      "claim_allowed": "Full public digital verification, with explicit limitations.",
+      "forbidden_claims": [
+        "live physical witness",
+        "onsite object verified",
+        "flaw identity proven",
+        "confidential flaw challenge passed"
+      ],
+      "claim_gate_expected": {
+        "allowed_protocol_level": "V5"
+      },
+      "integrity_required": true,
+      "copying_forbidden": [
+        "example values",
+        "prior agent outputs",
+        "unobserved command outputs"
+      ],
+      "freshness_required": [
+        "all_public_digital_targets_checked",
+        "unavailable_targets_listed",
+        "hash_comparisons"
+      ],
+      "minimum_fresh_record": [
+        "targets enumerated",
+        "checks performed",
+        "results recorded"
+      ]
+    },
+    "V6": {
+      "plain_english": "Live remote video witness with nonce/challenge. Recorded video alone is not V6.",
+      "minimum_to_pass": [
+        "Physical Anchor P4+",
+        "Live remote video session",
+        "Nonce or challenge phrase",
+        "Requested angle or object movement",
+        "Witness identity or role recorded"
+      ],
+      "data_sources": [
+        "live video stream",
+        "nonce/challenge data"
+      ],
+      "method_steps": [
+        "Establish live video session.",
+        "Send nonce or challenge phrase.",
+        "Request specific angle or object movement.",
+        "Record witness identity or role.",
+        "Run Claim Gate."
+      ],
+      "evidence_input_fields": {
+        "evidence.physical_checks[0].level_evidence_type": "live_remote",
+        "evidence.physical_checks[0].nonce_or_challenge": "<nonce>",
+        "evidence.physical_checks[0].requested_angle_action": "<angle>",
+        "evidence.physical_checks[0].witness_identity_or_role": "<role>",
+        "claims_requested_by_agent": [
+          "V6"
+        ]
+      },
+      "claim_label": "V6 (remote physical witness)",
+      "claim_allowed": "Remote physical witness confirmed via live video with nonce/challenge.",
+      "forbidden_claims": [
+        "onsite touch",
+        "custody confirmed",
+        "microscopic flaw attestation",
+        "V7 achieved"
+      ],
+      "claim_gate_expected": {
+        "allowed_protocol_level": "V6",
+        "component_levels": {
+          "physical_anchor": "P4"
+        }
+      },
+      "integrity_required": true,
+      "copying_forbidden": [
+        "example values",
+        "prior agent outputs",
+        "unobserved command outputs"
+      ],
+      "freshness_required": [
+        "live_session_time",
+        "nonce_challenge",
+        "requested_action_angle_lighting",
+        "witness_identity_or_role"
+      ],
+      "minimum_fresh_record": [
+        "session timestamp",
+        "nonce used",
+        "angles/lighting requested",
+        "witness identified"
+      ]
+    },
+    "V7": {
+      "plain_english": "Onsite human witness physically observes the object and records custody/fresh capture.",
+      "minimum_to_pass": [
+        "Physical Anchor P5+",
+        "Onsite observation",
+        "Custody log",
+        "Fresh photo/video",
+        "Witness identity or role",
+        "Touch/handling if possible, otherwise explicit limitation"
+      ],
+      "data_sources": [
+        "physical object",
+        "custody log",
+        "fresh photos/videos",
+        "notarial certificate if available"
+      ],
+      "method_steps": [
+        "Witness observes object onsite.",
+        "Record witness identity or role.",
+        "Record custody log.",
+        "Capture fresh photo/video.",
+        "Touch/handle object if possible or explain why not.",
+        "Run Claim Gate."
+      ],
+      "evidence_input_fields": {
+        "evidence.physical_checks[0].level_evidence_type": "onsite",
+        "evidence.physical_checks[0].custody_log": {
+          "present": true
+        },
+        "evidence.physical_checks[0].fresh_capture": true,
+        "evidence.physical_checks[0].witness_identity_or_role": "<role>",
+        "evidence.physical_checks[0].touch_or_handling": true,
+        "claims_requested_by_agent": [
+          "V7"
+        ]
+      },
+      "claim_label": "V7 (onsite physical witness)",
+      "claim_allowed": "Onsite physical witness confirmed.",
+      "forbidden_claims": [
+        "forensic flaw identity proven",
+        "confidential flaw challenge passed",
+        "V8 achieved"
+      ],
+      "claim_gate_expected": {
+        "allowed_protocol_level": "V7",
+        "component_levels": {
+          "physical_anchor": "P5"
+        }
+      },
+      "integrity_required": true,
+      "copying_forbidden": [
+        "example values",
+        "prior agent outputs",
+        "unobserved command outputs"
+      ],
+      "freshness_required": [
+        "onsite_visit_time",
+        "custody_log",
+        "fresh_capture",
+        "witness_identity_or_role",
+        "touch_or_handling"
+      ],
+      "minimum_fresh_record": [
+        "visit timestamp",
+        "custody chain",
+        "photos/videos captured",
+        "witness role",
+        "handling description"
+      ]
+    },
+    "V8": {
+      "plain_english": "Forensic physical attestation with tool-assisted analysis and signed report. V8 does not create canonical authority.",
+      "minimum_to_pass": [
+        "Physical Anchor P7/P8/P9",
+        "Tool-assisted flaw analysis",
+        "Advanced AI / algorithmic / microscopy comparison where available",
+        "Confidential flaw challenge when authorized",
+        "Signed or attributable report"
+      ],
+      "data_sources": [
+        "tool-assisted capture",
+        "AI/microscopy data",
+        "confidential challenge data",
+        "macro/microscope images"
+      ],
+      "method_steps": [
+        "Perform tool-assisted flaw analysis.",
+        "Run advanced AI or microscopy comparison.",
+        "If authorized, perform confidential flaw challenge.",
+        "Produce signed or attributable report.",
+        "Run Claim Gate."
+      ],
+      "evidence_input_fields": {
+        "evidence.physical_checks[0].level_evidence_type": "ai_forensic",
+        "evidence.physical_checks[0].tool_assisted_method": "<method>",
+        "evidence.physical_checks[0].ai_microscopy_comparison": true,
+        "evidence.physical_checks[0].signed_report": true,
+        "claims_requested_by_agent": [
+          "V8"
+        ]
+      },
+      "claim_label": "V8 candidate (forensic physical attestation)",
+      "claim_allowed": "Forensic attestation confirmed. Non-authoritative; does not amend Bitcoin Originals.",
+      "forbidden_claims": [
+        "canonical authority",
+        "truth proven",
+        "public disclosure of confidential flaw data without authorization"
+      ],
+      "claim_gate_expected": {
+        "allowed_protocol_level": "V8",
+        "component_levels": {
+          "physical_anchor": "P7"
+        }
+      },
+      "integrity_required": true,
+      "copying_forbidden": [
+        "example values",
+        "prior agent outputs",
+        "unobserved command outputs"
+      ],
+      "freshness_required": [
+        "forensic_tool",
+        "analysis_method",
+        "signed_or_attributable_report",
+        "report_id_or_path"
+      ],
+      "minimum_fresh_record": [
+        "tool used",
+        "method applied",
+        "report generated",
+        "attribution made"
+      ]
+    },
+    "V4+": {
+      "plain_english": "Alias for V4plus_minimal. See V4plus_minimal or V4plus_strong.",
+      "minimum_to_pass": [
+        "V4 hard gates satisfied.",
+        "Use independent tool or independent implementation.",
+        "Reproduce at least one official verification result.",
+        "Compare against official script or manifest."
+      ],
+      "data_sources": [
+        "independent tools",
+        "official verification results for comparison"
+      ],
+      "method_steps": [
+        "Choose one official verification result.",
+        "Write or use independent code/tools.",
+        "Reproduce the result independently.",
+        "Compare with official output.",
+        "Report differences and limitations."
+      ],
+      "evidence_input_fields": {
+        "evidence.scripts[0].independent": true,
+        "evidence.scripts[0].independent_method": "<description>",
+        "evidence.scripts[0].comparison_with_official": true,
+        "claims_requested_by_agent": [
+          "V4+"
+        ]
+      },
+      "claim_label": "V4+ (minimal independent reproduction)",
+      "claim_allowed": "One independent reproduction of one official verification result.",
+      "forbidden_claims": [
+        "full public digital verification",
+        "physical verification"
+      ],
+      "claim_gate_expected": {
+        "allowed_protocol_level": "V4+"
+      },
+      "integrity_required": true,
+      "copying_forbidden": [
+        "example values",
+        "prior agent outputs",
+        "unobserved command outputs"
+      ],
+      "freshness_required": [
+        "script_source_review",
+        "script_execution",
+        "exit_code",
+        "output_summary"
+      ],
+      "minimum_fresh_record": [
+        "script read",
+        "script run",
+        "output captured"
+      ]
+    }
+  },
+  "by_component_level": {
+    "B0": {
+      "plain_english": "Read API or manifest for Bitcoin Originals.",
+      "minimum_to_pass": [
+        "Read /api/authority.json."
+      ],
+      "data_sources": [
+        "/api/authority.json"
+      ],
+      "method_steps": [
+        "Fetch /api/authority.json.",
+        "Read inscription IDs and TXIDs."
+      ],
+      "evidence_input_fields": {},
+      "claim_label": "B0 (manifest read)",
+      "claim_allowed": "Inscription IDs and TXIDs read from manifest.",
+      "forbidden_claims": [
+        "on-chain verified"
+      ]
+    },
+    "B1": {
+      "plain_english": "Check one Bitcoin Original on an external explorer.",
+      "minimum_to_pass": [
+        "Use external explorer.",
+        "Check TXID or inscription ID.",
+        "Report source and date."
+      ],
+      "data_sources": [
+        "external Bitcoin/Ordinals explorer"
+      ],
+      "method_steps": [
+        "Copy TXID from authority.json.",
+        "Open on mempool.space or ordiscan.com.",
+        "Confirm exists and confirmed."
+      ],
+      "evidence_input_fields": {
+        "bitcoin_checks[].source_type": "external_explorer",
+        "bitcoin_checks[].sources": [
+          "mempool.space"
+        ],
+        "bitcoin_checks[].txids_checked": [
+          "<txid>"
+        ]
+      },
+      "claim_label": "B1 (explorer reference check)",
+      "claim_allowed": "Bitcoin Original TXID confirmed on external explorer.",
+      "forbidden_claims": [
+        "body hash reproduced",
+        "SPV verified"
+      ]
+    },
+    "B2": {
+      "plain_english": "Cross-check Bitcoin Originals across multiple explorers.",
+      "minimum_to_pass": [
+        "Use at least two explorers.",
+        "Cross-validate results."
+      ],
+      "data_sources": [
+        "multiple external explorers"
+      ],
+      "method_steps": [
+        "Check on mempool.space.",
+        "Check on blockstream.info.",
+        "Compare results."
+      ],
+      "evidence_input_fields": {
+        "bitcoin_checks[].source_type": "multi_explorer"
+      },
+      "claim_label": "B2 (multi-explorer cross-check)",
+      "claim_allowed": "Multi-explorer consistency confirmed.",
+      "forbidden_claims": [
+        "SPV verified"
+      ]
+    },
+    "D0": {
+      "plain_english": "Read manifest for Evidence Mirrors.",
+      "minimum_to_pass": [
+        "Read /api/evidence-manifest.json and /api/hashes.json."
+      ],
+      "data_sources": [
+        "/api/evidence-manifest.json",
+        "/api/hashes.json"
+      ],
+      "method_steps": [
+        "Fetch manifests.",
+        "Read mirror paths and hashes."
+      ],
+      "evidence_input_fields": {},
+      "claim_label": "D0 (manifest read)",
+      "claim_allowed": "Mirror paths and hashes read.",
+      "forbidden_claims": [
+        "mirror verified"
+      ]
+    },
+    "D1": {
+      "plain_english": "Confirm mirror file exists in GitHub repository.",
+      "minimum_to_pass": [
+        "Confirm the mirror file exists in the GitHub repo."
+      ],
+      "data_sources": [
+        "GitHub repository"
+      ],
+      "method_steps": [
+        "Find the file in GitHub.",
+        "Confirm it exists."
+      ],
+      "evidence_input_fields": {
+        "digital_mirror_checks[].level_evidence_type": "github_existence"
+      },
+      "claim_label": "D1 (GitHub mirror existence)",
+      "claim_allowed": "GitHub mirror file exists.",
+      "forbidden_claims": [
+        "hash verified",
+        "data integrity confirmed"
+      ]
+    },
+    "D2": {
+      "plain_english": "Download from GitHub, compute SHA-256, compare with declared hash.",
+      "minimum_to_pass": [
+        "Download file.",
+        "Compute SHA-256.",
+        "Compare with declared hash."
+      ],
+      "data_sources": [
+        "GitHub mirror file",
+        "/api/hashes.json"
+      ],
+      "method_steps": [
+        "Download from GitHub.",
+        "Run sha256sum.",
+        "Compare with expected hash."
+      ],
+      "evidence_input_fields": {
+        "hashes[].artifact": "<path>",
+        "hashes[].algorithm": "SHA-256",
+        "hashes[].match": true
+      },
+      "claim_label": "D2 (GitHub mirror hash match)",
+      "claim_allowed": "GitHub mirror SHA-256 hash match confirmed.",
+      "forbidden_claims": [
+        "direct Arweave verification",
+        "physical verification"
+      ]
+    },
+    "D3": {
+      "plain_english": "Verify existence of external pointers (Arweave, ETH, IPFS) via explorer or gateway.",
+      "minimum_to_pass": [
+        "Check Arweave TxID, ETH tx, or IPFS CID on a public explorer/gateway."
+      ],
+      "data_sources": [
+        "Arweave transaction",
+        "ETH transaction",
+        "IPFS CID"
+      ],
+      "method_steps": [
+        "Look up the pointer on a public explorer or gateway.",
+        "Confirm it exists."
+      ],
+      "evidence_input_fields": {
+        "digital_mirror_checks[].level_evidence_type": "external_pointer_existence"
+      },
+      "claim_label": "D3 (external pointer existence)",
+      "claim_allowed": "External pointer exists.",
+      "forbidden_claims": [
+        "data content verified",
+        "cross-mirror consistency confirmed"
+      ]
+    },
+    "D4": {
+      "plain_english": "Compare hashes across at least two independent channels.",
+      "minimum_to_pass": [
+        "Compare hashes from two independent sources (e.g., GitHub hash + Arweave hash)."
+      ],
+      "data_sources": [
+        "GitHub hash",
+        "Arweave data hash",
+        "ETH witness hash",
+        "IPFS content hash"
+      ],
+      "method_steps": [
+        "Compute or fetch hash from channel A.",
+        "Compute or fetch hash from channel B.",
+        "Compare."
+      ],
+      "evidence_input_fields": {
+        "digital_mirror_checks[].level_evidence_type": "cross_mirror_consistency"
+      },
+      "claim_label": "D4 (cross-mirror consistency)",
+      "claim_allowed": "Cross-mirror consistency confirmed.",
+      "forbidden_claims": [
+        "full public digital verification"
+      ]
+    },
+    "C0": {
+      "plain_english": "Read Chronicle Recovery manifest.",
+      "minimum_to_pass": [
+        "Read /api/chronicle-recovery.json."
+      ],
+      "data_sources": [
+        "/api/chronicle-recovery.json"
+      ],
+      "method_steps": [
+        "Fetch manifest.",
+        "Read recovery package info."
+      ],
+      "evidence_input_fields": {},
+      "claim_label": "C0 (manifest read)",
+      "claim_allowed": "Chronicle manifest read.",
+      "forbidden_claims": [
+        "chronicle verified"
+      ]
+    },
+    "C3": {
+      "plain_english": "Recover at least two Chronicle records and describe metadata/media.",
+      "minimum_to_pass": [
+        "Recover at least two records.",
+        "Describe metadata.",
+        "Report record IDs."
+      ],
+      "data_sources": [
+        "recovery package"
+      ],
+      "method_steps": [
+        "Open recovery package.",
+        "Extract two records.",
+        "Describe metadata and media."
+      ],
+      "evidence_input_fields": {
+        "chronicle_checks[].samples_recovered": 2,
+        "chronicle_checks[].sample_ids": [
+          "<id1>",
+          "<id2>"
+        ]
+      },
+      "claim_label": "C3 (sample recovery)",
+      "claim_allowed": "Sample recovery of at least two records confirmed.",
+      "forbidden_claims": [
+        "full 175/175 recovery"
+      ]
+    },
+    "C3R": {
+      "plain_english": "Recover a random sample of Chronicle records using a declared public seed.",
+      "minimum_to_pass": [
+        "Use a public seed and selection method.",
+        "Recover random sample.",
+        "Describe metadata."
+      ],
+      "data_sources": [
+        "recovery package",
+        "public seed",
+        "selection method"
+      ],
+      "method_steps": [
+        "Define public seed.",
+        "Select random sample.",
+        "Recover and describe."
+      ],
+      "evidence_input_fields": {
+        "chronicle_checks[].randomized_sample": true
+      },
+      "claim_label": "C3R (randomized sample recovery)",
+      "claim_allowed": "Randomized sample recovery confirmed.",
+      "forbidden_claims": [
+        "full 175/175 recovery"
+      ]
+    },
+    "C5": {
+      "plain_english": "Recover all 175/175 Chronicle records.",
+      "minimum_to_pass": [
+        "Full 175/175 recovery or full declared-count recovery."
+      ],
+      "data_sources": [
+        "recovery package",
+        "all 175 records"
+      ],
+      "method_steps": [
+        "Open recovery package.",
+        "Recover all records.",
+        "Verify count matches 175."
+      ],
+      "evidence_input_fields": {
+        "chronicle_checks[].full_recovery": true,
+        "chronicle_checks[].samples_recovered": 175
+      },
+      "claim_label": "C5 (full 175/175 recovery)",
+      "claim_allowed": "Full chronicle recovery confirmed.",
+      "forbidden_claims": [
+        "canonical authority"
+      ]
+    },
+    "N1": {
+      "plain_english": "Verify NFT contract address and token IDs.",
+      "minimum_to_pass": [
+        "Check contract address.",
+        "Verify token IDs exist."
+      ],
+      "data_sources": [
+        "NFT contract",
+        "token IDs"
+      ],
+      "method_steps": [
+        "Look up contract on blockchain explorer.",
+        "Verify token IDs."
+      ],
+      "evidence_input_fields": {},
+      "claim_label": "N1 (contract/token ID check)",
+      "claim_allowed": "Contract and token IDs confirmed.",
+      "forbidden_claims": [
+        "metadata verified"
+      ]
+    },
+    "N2": {
+      "plain_english": "Query tokenURI for specific NFT tokens.",
+      "minimum_to_pass": [
+        "Call tokenURI function for a token.",
+        "Record response."
+      ],
+      "data_sources": [
+        "NFT contract tokenURI function"
+      ],
+      "method_steps": [
+        "Call tokenURI on contract.",
+        "Record URI response."
+      ],
+      "evidence_input_fields": {},
+      "claim_label": "N2 (tokenURI check)",
+      "claim_allowed": "tokenURI response confirmed.",
+      "forbidden_claims": [
+        "metadata content verified"
+      ]
+    },
+    "N3": {
+      "plain_english": "Fetch and parse NFT metadata from tokenURI.",
+      "minimum_to_pass": [
+        "Fetch metadata JSON from tokenURI URL.",
+        "Parse and describe."
+      ],
+      "data_sources": [
+        "tokenURI response",
+        "metadata JSON"
+      ],
+      "method_steps": [
+        "Fetch metadata from URI.",
+        "Parse JSON.",
+        "Describe fields."
+      ],
+      "evidence_input_fields": {},
+      "claim_label": "N3 (metadata recovery)",
+      "claim_allowed": "NFT metadata recovered.",
+      "forbidden_claims": [
+        "media verified"
+      ]
+    },
+    "N4": {
+      "plain_english": "Fetch NFT media file referenced in metadata.",
+      "minimum_to_pass": [
+        "Fetch media file from metadata image/media URL."
+      ],
+      "data_sources": [
+        "metadata image/media URL"
+      ],
+      "method_steps": [
+        "Extract media URL from metadata.",
+        "Fetch media file."
+      ],
+      "evidence_input_fields": {},
+      "claim_label": "N4 (media recovery)",
+      "claim_allowed": "NFT media recovered.",
+      "forbidden_claims": [
+        "CID/hash match confirmed"
+      ]
+    },
+    "N5": {
+      "plain_english": "Compute CID or hash of recovered NFT media and compare with declared value.",
+      "minimum_to_pass": [
+        "Compute CID/hash of media.",
+        "Compare with declared value."
+      ],
+      "data_sources": [
+        "recovered media",
+        "declared CID/hash"
+      ],
+      "method_steps": [
+        "Compute hash/CID.",
+        "Compare with declared."
+      ],
+      "evidence_input_fields": {},
+      "claim_label": "N5 (CID/hash match)",
+      "claim_allowed": "NFT CID/hash match confirmed.",
+      "forbidden_claims": [
+        "full NFT path reproduction"
+      ]
+    },
+    "P0": {
+      "plain_english": "Read physical verification claims.",
+      "minimum_to_pass": [
+        "Read /covenant-proof or /physical-verification."
+      ],
+      "data_sources": [
+        "/covenant-proof",
+        "/physical-verification"
+      ],
+      "method_steps": [
+        "Read pages.",
+        "Summarize claims."
+      ],
+      "evidence_input_fields": {},
+      "claim_label": "P0 (physical claim read)",
+      "claim_allowed": "Physical claims read.",
+      "forbidden_claims": [
+        "physical evidence verified"
+      ]
+    },
+    "P1": {
+      "plain_english": "Compute hash of public evidence package and compare.",
+      "minimum_to_pass": [
+        "Download evidence package.",
+        "Compute SHA-256.",
+        "Compare with declared hash."
+      ],
+      "data_sources": [
+        "evidence package",
+        "/api/evidence-manifest.json"
+      ],
+      "method_steps": [
+        "Download package.",
+        "Run sha256sum.",
+        "Compare."
+      ],
+      "evidence_input_fields": {
+        "physical_checks[].level_evidence_type": "evidence_package_hash",
+        "physical_checks[].package_hash_valid": true
+      },
+      "claim_label": "P1 (evidence package hash)",
+      "claim_allowed": "Evidence package hash match confirmed.",
+      "forbidden_claims": [
+        "physical object verified"
+      ]
+    },
+    "P2": {
+      "plain_english": "Review static images of physical object.",
+      "minimum_to_pass": [
+        "Review archived images.",
+        "Describe what is visible."
+      ],
+      "data_sources": [
+        "archived images",
+        "evidence package images"
+      ],
+      "method_steps": [
+        "Open images.",
+        "Review and describe.",
+        "State limitations."
+      ],
+      "evidence_input_fields": {
+        "physical_checks[].level_evidence_type": "static_image_review"
+      },
+      "claim_label": "P2 (static image review)",
+      "claim_allowed": "Static image review completed.",
+      "forbidden_claims": [
+        "live witness",
+        "onsite inspection",
+        "flaw identity proven"
+      ]
+    },
+    "P3": {
+      "plain_english": "Review recorded videos of physical object.",
+      "minimum_to_pass": [
+        "Review archived videos.",
+        "Describe what is visible."
+      ],
+      "data_sources": [
+        "archived videos",
+        "evidence package videos"
+      ],
+      "method_steps": [
+        "Open videos.",
+        "Review and describe.",
+        "State limitations."
+      ],
+      "evidence_input_fields": {
+        "physical_checks[].level_evidence_type": "recorded_video_review"
+      },
+      "claim_label": "P3 (recorded video review)",
+      "claim_allowed": "Recorded video review completed.",
+      "forbidden_claims": [
+        "live witness",
+        "onsite inspection"
+      ]
+    },
+    "P4": {
+      "plain_english": "Live remote video witness with nonce/challenge.",
+      "minimum_to_pass": [
+        "Live video.",
+        "Nonce/challenge.",
+        "Requested angle.",
+        "Witness role."
+      ],
+      "data_sources": [
+        "live video stream"
+      ],
+      "method_steps": [
+        "Start live video.",
+        "Send nonce.",
+        "Request angle.",
+        "Record role."
+      ],
+      "evidence_input_fields": {
+        "physical_checks[].level_evidence_type": "live_remote",
+        "physical_checks[].nonce_or_challenge": "<nonce>",
+        "physical_checks[].requested_angle_action": "<angle>"
+      },
+      "claim_label": "P4 (live remote video witness)",
+      "claim_allowed": "Live remote video witness confirmed.",
+      "forbidden_claims": [
+        "onsite touch",
+        "custody confirmed"
+      ]
+    },
+    "P5": {
+      "plain_english": "Onsite human witness with touch/handling and custody log.",
+      "minimum_to_pass": [
+        "Onsite observation.",
+        "Touch/handling.",
+        "Custody log.",
+        "Fresh capture."
+      ],
+      "data_sources": [
+        "physical object",
+        "custody log"
+      ],
+      "method_steps": [
+        "Observe onsite.",
+        "Touch/handle.",
+        "Record custody.",
+        "Capture fresh photo/video."
+      ],
+      "evidence_input_fields": {
+        "physical_checks[].level_evidence_type": "onsite",
+        "physical_checks[].custody_log": {
+          "present": true
+        },
+        "physical_checks[].fresh_capture": true,
+        "physical_checks[].touch_or_handling": true
+      },
+      "claim_label": "P5 (onsite human witness)",
+      "claim_allowed": "Onsite witness confirmed.",
+      "forbidden_claims": [
+        "forensic flaw match"
+      ]
+    },
+    "P7": {
+      "plain_english": "Advanced AI forensic match with tool-assisted analysis.",
+      "minimum_to_pass": [
+        "Tool-assisted flaw analysis.",
+        "AI/microscopy comparison.",
+        "Signed report."
+      ],
+      "data_sources": [
+        "macro/microscope images",
+        "AI/algorithmic tools"
+      ],
+      "method_steps": [
+        "Perform tool-assisted analysis.",
+        "Run AI/microscopy comparison.",
+        "Produce signed report."
+      ],
+      "evidence_input_fields": {
+        "physical_checks[].level_evidence_type": "ai_forensic",
+        "physical_checks[].tool_assisted_method": "<method>",
+        "physical_checks[].ai_microscopy_comparison": true,
+        "physical_checks[].signed_report": true
+      },
+      "claim_label": "P7 (AI forensic match)",
+      "claim_allowed": "AI forensic match completed.",
+      "forbidden_claims": [
+        "confidential challenge passed"
+      ]
+    },
+    "P8": {
+      "plain_english": "Confidential flaw challenge for dispute resolution.",
+      "minimum_to_pass": [
+        "Confidential challenge data.",
+        "New capture under challenge conditions."
+      ],
+      "data_sources": [
+        "confidential challenge data",
+        "new capture"
+      ],
+      "method_steps": [
+        "Perform confidential challenge.",
+        "Record pass/fail.",
+        "Publish hash if authorized."
+      ],
+      "evidence_input_fields": {
+        "physical_checks[].level_evidence_type": "confidential_challenge"
+      },
+      "claim_label": "P8 (confidential flaw challenge)",
+      "claim_allowed": "Confidential challenge performed.",
+      "forbidden_claims": [
+        "public disclosure of confidential flaw data unless authorized"
+      ]
+    },
+    "P9": {
+      "plain_english": "Multi-party forensic attestation.",
+      "minimum_to_pass": [
+        "Multiple independent forensic verifiers.",
+        "Converging reports."
+      ],
+      "data_sources": [
+        "multiple independent forensic verifiers"
+      ],
+      "method_steps": [
+        "Multiple parties independently analyze.",
+        "Compare results.",
+        "Produce joint or converging reports."
+      ],
+      "evidence_input_fields": {
+        "physical_checks[].level_evidence_type": "multi_party_forensic"
+      },
+      "claim_label": "P9 (multi-party forensic attestation)",
+      "claim_allowed": "Multi-party forensic attestation confirmed.",
+      "forbidden_claims": [
+        "canonical authority"
+      ]
+    },
+    "T7": {
+      "plain_english": "Solve celestial positions from public sky/moon/star image using astronomical ephemeris.",
+      "minimum_to_pass": [
+        "Public sky/moon/star image.",
+        "Approximate location.",
+        "Solve celestial positions."
+      ],
+      "data_sources": [
+        "public sky/moon/star image",
+        "astronomical ephemeris"
+      ],
+      "method_steps": [
+        "Obtain public image.",
+        "Determine approximate location and camera orientation.",
+        "Solve celestial positions.",
+        "Report time window and uncertainty."
+      ],
+      "evidence_input_fields": {},
+      "claim_label": "T7 (public celestial time-window solving)",
+      "claim_allowed": "Public celestial time-window solved.",
+      "forbidden_claims": [
+        "exact capture time without uncertainty",
+        "T8 claim from public data alone"
+      ]
+    },
+    "T8": {
+      "plain_english": "Star-Moon Witness: non-public celestial forensic time attestation.",
+      "minimum_to_pass": [
+        "Non-public or authorized celestial witness data.",
+        "Solve celestial positions."
+      ],
+      "data_sources": [
+        "non-public or authorized celestial witness data"
+      ],
+      "method_steps": [
+        "Obtain authorized celestial data.",
+        "Solve positions.",
+        "Report method class, pass/fail, package hash."
+      ],
+      "evidence_input_fields": {},
+      "claim_label": "T8 (Star-Moon Witness)",
+      "claim_allowed": "Star-Moon Witness challenge performed.",
+      "forbidden_claims": [
+        "public disclosure of non-public data unless authorized",
+        "claiming T8 from public pages alone"
+      ]
+    }
+  },
+  "anti_copying_rule": [
+    "Examples show structure only.",
+    "Do not copy example values into a real verification claim.",
+    "Every V1+ claim requires agent_integrity_declaration.",
+    "Every V2+ claim requires fresh source/action records.",
+    "Prior reports may be cited as prior reports, but not reused as your own independent verification."
+  ]
+}

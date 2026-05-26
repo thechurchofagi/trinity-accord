@@ -1,0 +1,155 @@
+{
+  "overall_status": "PASS_ALL",
+  "commit": "ba5bb3b",
+  "commit_message": "test: complete redteam test plan — all 14 sections PASS",
+  "test_baseline": {
+    "repository": "thechurchofagi/trinity-accord",
+    "branch": "main",
+    "commit_sha": "ba5bb3b",
+    "test_start_time": "2026-05-09T14:00:28Z",
+    "test_end_time": "2026-05-09T14:01:00Z",
+    "python_version": "3.12.3",
+    "node_version": "v22.22.1",
+    "git_version": "2.43.0",
+    "network_used": true
+  },
+  "sections": {
+    "P0_triage_normalized_scan": {
+      "status": "PASS",
+      "tests_run": 88,
+      "tests_passed": 88,
+      "script": "scripts/test_triage_normalized_risk_scan.py",
+      "payload_matrix": "PASS (27/27 — prompt injection, forbidden/overclaim, authority/amendment, boundary near-miss, negative controls)"
+    },
+    "P0_claim_text_safety": {
+      "status": "PASS",
+      "tests_run": 25,
+      "tests_passed": 25,
+      "script": "scripts/test_claim_text_safety.py"
+    },
+    "P0_inscription_semantic_boundary": {
+      "status": "PASS",
+      "tests_run": 24,
+      "tests_passed": 24,
+      "script": "scripts/test_inscription_semantic_boundaries.py",
+      "checks": "原文保留, Semantic boundary note within 20 lines, does_not_mean, preservation note, glossary, API"
+    },
+    "P0_bilingual_boundaries": {
+      "status": "PASS",
+      "tests_run": 11,
+      "tests_passed": 11,
+      "script": "scripts/test_bilingual_boundaries.py"
+    },
+    "P1_unknown_field_guard": {
+      "status": "PASS",
+      "tests_run": 2,
+      "tests_passed": 2,
+      "script": "scripts/test_unknown_field_guard.py",
+      "checks": "harmless unknown passes, forbidden claim in unknown fails"
+    },
+    "P1_cross_field_consistency": {
+      "status": "PASS",
+      "tests_run": 3,
+      "tests_passed": 3,
+      "script": "scripts/test_echo_cross_field_consistency.py",
+      "checks": "echo_v3+report fields FAIL, report_v2+echo fields FAIL, attestation without identity FAIL"
+    },
+    "P1_jsonschema_fail_closed": {
+      "status": "PASS",
+      "tests_run": 7,
+      "tests_passed": 7,
+      "script": "scripts/test_validator_schema_dependency.py",
+      "checks": "ALLOW_MISSING_JSONSCHEMA flag, fail-closed message, requirements-ci.txt, no --allow in workflows"
+    },
+    "P1_legacy_records": {
+      "status": "PASS",
+      "tests_run": 10,
+      "tests_passed": 10,
+      "script": "scripts/test_legacy_echo_records.py",
+      "known_data_issues": ["echo-2026-05-02-000008.json: echo_v3 with report-only field component_findings"]
+    },
+    "P2_provenance_required": {
+      "status": "PASS",
+      "tests_run": 6,
+      "tests_passed": 6,
+      "script": "scripts/test_echo_provenance_required.py"
+    },
+    "P2_content_abuse_boundaries": {
+      "status": "PASS",
+      "tests_run": 13,
+      "tests_passed": 13,
+      "script": "scripts/test_content_abuse_boundaries.py",
+      "checks": "no bare Value thesis, no Timing value, no bare PASS, non-financial boundary, no Preserve/Propagate"
+    },
+    "P2_ai_facing_density": {
+      "status": "PASS",
+      "tests_run": 12,
+      "tests_passed": 12,
+      "script": "scripts/test_ai_facing_language_boundaries.py",
+      "checks": "no Read first, no Do not assess, has Suggested evaluation, has historical rhetorical language boundary"
+    },
+    "P3_workflow_input_hardening": {
+      "status": "PASS",
+      "tests_run": 8,
+      "tests_passed": 8,
+      "script": "scripts/test_workflow_untrusted_input_hardening.py",
+      "checks": "--event-json support, GITHUB_EVENT_PATH, no ISSUE_TITLE/ISSUE_BODY env, malicious body not executed"
+    },
+    "P3_workflow_permissions": {
+      "status": "PASS",
+      "tests_run": 8,
+      "tests_passed": 8,
+      "script": "scripts/test_workflow_permissions.py"
+    },
+    "P3_deprecated_worker_surface": {
+      "status": "PASS",
+      "tests_run": 27,
+      "tests_passed": 27,
+      "script": "scripts/test_no_deprecated_worker_surface.py",
+      "checks": "no top-level trinity-echo-worker/, archive/deprecated/ exists, no wrangler deploy in workflows"
+    },
+    "P3_status_json_deployment": {
+      "status": "PASS",
+      "online_check": "PASS",
+      "url": "https://www.trinityaccord.org/api/status.json",
+      "response": {
+        "schema": "trinityaccord.status.v1",
+        "full_evidence_chain": {
+          "historical_pass": true,
+          "historical_pass_date": "2026-05-01",
+          "current_pass_restatement": false,
+          "fresh_run_required_before_claiming_current_pass": true
+        }
+      }
+    }
+  },
+  "existing_tests_regressed": [
+    {"script": "scripts/test_triage_echo_issue.py", "status": "PASS"},
+    {"script": "scripts/test_claim_gate_cases.py", "status": "PASS", "results": "43/43 passed"},
+    {"script": "scripts/test_agent_submission_cases.py", "status": "PASS"}
+  ],
+  "validator_on_all_records": {
+    "total": 9,
+    "pass": 5,
+    "legacy_pass": 3,
+    "known_data_issue": 1,
+    "details": {
+      "000001": "legacy PASS",
+      "000002": "legacy PASS",
+      "000003": "legacy PASS (superseded)",
+      "000004": "legacy PASS (superseded, known missing verification_integrity)",
+      "000006": "legacy PASS (superseded, known missing verification_integrity)",
+      "000007": "PASS",
+      "000008": "KNOWN_DATA_ISSUE: echo_v3 with report-only field component_findings",
+      "000009": "PASS",
+      "000010": "PASS"
+    }
+  },
+  "failed_tests": [],
+  "warnings": [
+    "echo-2026-05-02-000008.json: echo_v3 record contains report-only field component_findings (pre-existing data issue, requires human decision)"
+  ],
+  "unknowns": [],
+  "total_tests_run": 251,
+  "total_tests_passed": 251
+}

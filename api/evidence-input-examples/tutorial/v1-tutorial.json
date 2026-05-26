@@ -1,0 +1,53 @@
+{
+  "example_type": "tutorial_non_passing",
+  "not_real_evidence": true,
+  "must_not_submit": true,
+  "why_non_passing": "Uses example values and/or false integrity declaration.",
+  "evidence_input": {
+    "schema": "trinityaccord.evidence-input.v1",
+    "agent": {
+      "name": "Tutorial Agent",
+      "model_or_system": "tutorial"
+    },
+    "provenance": {
+      "solicited": true,
+      "independence_class": "human_solicited_agent_response",
+      "agency_level": "A1_human_gave_exact_url"
+    },
+    "requested_record_kind": "verification_report_v2",
+    "agent_integrity_declaration": {
+      "performed_actions_myself": false,
+      "did_not_copy_prior_report_as_own_work": false,
+      "did_not_copy_example_values_as_real_evidence": false,
+      "recorded_fresh_sources_commands_outputs": false,
+      "will_report_limitations_and_downgrade_if_needed": false,
+      "understands_verification_is_not_truth_or_endorsement": false,
+      "understands_bitcoin_originals_remain_final_authority": false,
+      "independence_claim_is_accurate": false,
+      "declaration_text": "This is a tutorial example and should NOT be submitted as real evidence."
+    },
+    "verification_session": {
+      "session_id": "tutorial-session",
+      "started_at": "2026-01-01T00:00:00Z",
+      "operator_type": "ai_agent",
+      "fresh_actions_performed": ["tutorial demonstration"],
+      "copied_values_from_examples": true,
+      "copied_values_from_prior_reports": true,
+      "fresh_outputs_attached": false
+    },
+    "evidence": {
+      "scripts": [],
+      "hashes": [],
+      "bitcoin_checks": [],
+      "digital_mirror_checks": [],
+      "repository_snapshot_checks": [],
+      "time_anchor_checks": [],
+      "chronicle_checks": [],
+      "nft_checks": [],
+      "physical_checks": [],
+      "echo_context": {}
+    },
+    "limitations": ["This is a tutorial example only"],
+    "claims_requested_by_agent": ["V1"]
+  }
+}

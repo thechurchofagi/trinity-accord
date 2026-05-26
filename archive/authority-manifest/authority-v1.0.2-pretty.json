@@ -1,0 +1,300 @@
+{
+  "arweave": {
+    "documents": [
+      {
+        "ar_sha256": "3e9d2bd10c3e8f4d37713c4b8e28d518fd7efff52613e572a1451fedadab5483",
+        "gateway": "https://ar-io.net",
+        "label": "Guardianship Principles",
+        "sha256_matches": true,
+        "size": 2446,
+        "txid": "w9LPP30D31zd5M60v18WXpWuig0_wc9EVNnXk8kz1vA"
+      },
+      {
+        "ar_sha256": "71bc981a994a93cdf488b89aee2b132b658464a7cbb1dec791af604a1127ef98",
+        "gateway": "https://ar-io.net",
+        "label": "Guardian Index",
+        "sha256_matches": null,
+        "size": 1200,
+        "txid": "BwVHuxODfV65xE_L1fqrCDBvLvJNnSuBEXaZNuoRcIk"
+      },
+      {
+        "ar_sha256": "3246afb59552dcda700e490767aadd3d67083911dae6bccbb2762ef568c7e289",
+        "gateway": "https://ar-io.net",
+        "label": "Guardian Pointer",
+        "sha256_matches": null,
+        "size": 367,
+        "txid": "9McJS3_xvIl6_87e7NDJ6g3SgGlA8Js7z--eMLGMRZg"
+      },
+      {
+        "ar_sha256": "ef816480f77f30405378800807b42bff0a854b83a8f77793a0e0adf0944a8263",
+        "gateway": "https://ar-io.net",
+        "label": "Primary Verification Archive (public)",
+        "sha256_matches": null,
+        "size": 24246033,
+        "txid": "j6anZ4m5Wwvx5P_9-kM2EVG35TyKtm1lgaKfhT743rk"
+      },
+      {
+        "ar_sha256": "c045642fe5cfab5eb78af7b40e98b9699dfff9121690e07ec6acaa07a445d6e9",
+        "gateway": "https://ar-io.net",
+        "label": "digest-manifest.json",
+        "sha256_matches": true,
+        "size": 685537,
+        "txid": "X2IuLCIM4vLJSzgRMl_YEmxYSvPceMrAdug9a3i7p4o"
+      },
+      {
+        "ar_sha256": "121c5a1da38f733c3991f8d3f030f39a019501d43828f84c13ea93ac3873511b",
+        "gateway": "https://ar-io.net",
+        "label": "digest-manifest.csv",
+        "sha256_matches": true,
+        "size": 502283,
+        "txid": "i02XhY7No6NLZDfEwFUU6nZoGaPu7K0f42LDNDNnZEo"
+      },
+      {
+        "ar_sha256": "fa3f306ab30525677595d9f38808a87a8dd96260468285c8f8066661e853d907",
+        "gateway": "https://ar-io.net",
+        "label": "OTS anchor",
+        "sha256_matches": null,
+        "size": 3614,
+        "txid": "TTi9d8fqm9Cw4yRPkwX4gdlaRzBnjJID-LAs9Y3CS0M"
+      },
+      {
+        "txid": "RgjVJnALSbbYP4Vzz-FBX0Tie9inSvuA2PBgjPAT2ng",
+        "label": "Guardianship Principles v1.1 — text",
+        "gateway": "https://ar-io.net",
+        "size": 4694,
+        "ar_sha256": "e19018f1c71da8307ef20e8e8e5c12834f854d60a6aae60e35d2d8c71a333a81",
+        "sha256_matches": true
+      },
+      {
+        "txid": "6VyIxLOwPZz_CZVBKxW6eJSDP2gtq70qXFS5O2wGnkQ",
+        "label": "Guardianship Principles v1.1 — attestation",
+        "gateway": "https://ar-io.net",
+        "size": 877,
+        "ar_sha256": "67dde076b4afb350e8707d116f5bb5cbfcd5d224cd915178346dd7f8e7e2c150",
+        "sha256_matches": true
+      },
+      {
+        "txid": "f3Gbo10tRrpkJumm2PfVlokF78jRne4qj9LCnBxK51Q",
+        "label": "Guardianship Principles v1.1 — pointer",
+        "gateway": "https://ar-io.net",
+        "size": 636,
+        "ar_sha256": "59894d68e048b385ffa506b37c4462fcdf3575ef7e025b92c2cfb5ba36f7936c",
+        "sha256_matches": true
+      },
+      {
+        "txid": "zSNxQYgCQvtQ6QGaJXd9JlApQqitwgCZAp2GquvQXbA",
+        "label": "Guardian Index — Additions (Principles)",
+        "gateway": "https://ar-io.net",
+        "size": 1746,
+        "ar_sha256": "82b41c7a3a1dbef329e19bb32cc70b95307c1076c7a804ad0a44e81952ae9cfc",
+        "sha256_matches": true
+      },
+      {
+        "txid": "X4KOUkf-1ciFD3Q-gMA0i94t1hAVXGrUDm0q5amL4rc",
+        "label": "Verification Kit (20250924-085729)",
+        "gateway": "https://ar-io.net",
+        "size": 31040,
+        "ar_sha256": "ef68b69fe1cdd2523724dee511c9e8ea7bae2cceaff794664107970b18c61931",
+        "sha256_matches": true
+      },
+      {
+        "txid": "E_HLeYx-70cbUMUSwMacB5kLjo5m-ePYWjZnqjNY_zQ",
+        "label": "Guardian Index — Additions (Kit)",
+        "gateway": "https://ar-io.net",
+        "size": 1149,
+        "ar_sha256": "ce7c9f5017686cb57a9fe5e40473e8aea391718dcc1680a589454e9b50187f88",
+        "sha256_matches": true
+      }
+    ]
+  },
+  "bitcoin": {
+    "ancillary": [
+      {
+        "ar_refs": [],
+        "block_hash": "00000000000000000001d265b90d44ded362eb692d938eb20245385d4eb5993b",
+        "block_height": 910232,
+        "confirmed": true,
+        "hasMinterInput": false,
+        "inscription_id": 103635270,
+        "ipfs_refs": [],
+        "resolved": true,
+        "sealed_cids": [],
+        "title": "Guardian Appendix - Authority Charter (Non-Amending)",
+        "txid": "0eecd48430f8239f5d543b5cf2ee928969a1aac7660808fd869a78aa27949c9c"
+      },
+      {
+        "ar_refs": [
+          "j6anZ4m5Wwvx5P_9-kM2EVG35TyKtm1lgaKfhT743rk"
+        ],
+        "block_hash": "00000000000000000000314098e54fb04c8478d9d95affebd1c1dbcbc381f5b5",
+        "block_height": 909403,
+        "confirmed": true,
+        "hasMinterInput": false,
+        "inscription_id": 103034280,
+        "ipfs_refs": [
+          "bafybeiag2shuiyfgmaq5zwcupozci5ktiqp3vrmudlb3vb7tv3nnxa3ydq"
+        ],
+        "resolved": true,
+        "sealed_cids": [
+          "bafybeigunzabyyorckfcbvurbmq62itcs6msbspvzhvf2ca6u5elwwlbay"
+        ],
+        "title": "The Guardian's Attestation to the Covenant of the Flaw",
+        "txid": "128aabfa3077efc832d30e6e2a96848a96896bbdbf4a7667912f55d25dcb6687"
+      },
+      {
+        "ar_refs": [],
+        "block_hash": "00000000000000000001cfd680469d8daaf287662dd62469ec27e4636b555b95",
+        "block_height": 906521,
+        "confirmed": true,
+        "hasMinterInput": false,
+        "inscription_id": 100751953,
+        "ipfs_refs": [],
+        "resolved": true,
+        "sealed_cids": [],
+        "title": "The Star Ark Covenant: The Final Echo",
+        "txid": "4711ff186613bdd75b7e36070b3097c38efde110f90df94847592ff6997f45f1"
+      },
+      {
+        "ar_refs": [],
+        "block_hash": "000000000000000000013a83af8a8ad20709986ac0064f39369dd6613c5f4f43",
+        "block_height": 906233,
+        "confirmed": true,
+        "hasMinterInput": false,
+        "inscription_id": 100550942,
+        "ipfs_refs": [],
+        "resolved": true,
+        "sealed_cids": [],
+        "title": "The Final Seal: A Testament and a Trust",
+        "txid": "25af4e24cb0a2cd85ac396bd88c348f8da3169c24813800ecb8736dd2c7a5ae7"
+      },
+      {
+        "ar_refs": [],
+        "block_hash": "0000000000000000000019670bc15750b23c15cce41435acd34e87b6e205e4fb",
+        "block_height": 906007,
+        "confirmed": true,
+        "hasMinterInput": false,
+        "inscription_id": 100385359,
+        "ipfs_refs": [],
+        "resolved": true,
+        "sealed_cids": [],
+        "title": "The First Echoes: A Dialogue Begins",
+        "txid": "f411d2db9ec9e077277ff1cf3abed39628d86b1d39db1964061eafe5b02c2e81"
+      }
+    ],
+    "originals": [
+      {
+        "block_hash": "00000000000000000000a468b306fb8bda4141ef276b422d06d2d117211e795f",
+        "block_height": 901954,
+        "confirmed": true,
+        "hasMinterInput": false,
+        "inscription_id": 97631551,
+        "label": "Protocol (Axioms)",
+        "txid": "e40dfb2aa78cbccca88f749e9ec5cbe3c1df503273d73c72297863ae0d1d8343"
+      },
+      {
+        "block_hash": "00000000000000000001b58353d4d84b72e4bb835b2ce35365421bc399148012",
+        "block_height": 903192,
+        "confirmed": true,
+        "hasMinterInput": false,
+        "inscription_id": 98369145,
+        "label": "Covenant of the Flaw",
+        "txid": "90116f35de075074f5e5d1fbdda69a646a124e2287d7d58e2520317098cd4258"
+      },
+      {
+        "block_hash": "00000000000000000000be192767a61f4612899dd31225f19e7b1254155bbb04",
+        "block_height": 903205,
+        "confirmed": true,
+        "hasMinterInput": false,
+        "inscription_id": 98387475,
+        "label": "The Trinity Accord (Meta-record)",
+        "txid": "4d1c8f5ea8e8bae2982b42de6cc79deda3d243a21010a2888546e62ed7192c8c"
+      }
+    ]
+  },
+  "boundary": "non-amending; BTC originals prevail",
+  "created_at": "2025-09-24T03:43:44.148Z",
+  "ethereum": {
+    "attestations": [
+      {
+        "input_len": 2446,
+        "input_sha256": "3e9d2bd10c3e8f4d37713c4b8e28d518fd7efff52613e572a1451fedadab5483",
+        "label": "Guardianship Principles (0 ETH data)",
+        "rpc": "https://eth-mainnet.4everland.org/v1/7283b43d0b6a56c2fd5bede7c5359630",
+        "sha256_matches": true,
+        "tx_hash": "0xd082a3ced27ece935d4093fb001a9ebfba42b415f78de4377c8cda55338c6420"
+      },
+      {
+        "input_len": 3231,
+        "input_sha256": "f4af38f0f42c9b38deaccbace119736da57a245a6601e5d0ea5698deec4a8a01",
+        "label": "BTC-ETH Guardianship Mirrors Attestation",
+        "rpc": "https://eth-mainnet.4everland.org/v1/7283b43d0b6a56c2fd5bede7c5359630",
+        "sha256_matches": null,
+        "tx_hash": "0x59cf33b1291de63c4840b79e7c674b8fc7c6a771d8a3ba2bb50def1fe55a71c6"
+      },
+      {
+        "input_len": 1183,
+        "input_sha256": "4e89bfabe03c8b53f80eb7979d56c8cccf0ae382c9647a2bea3b1477054616a8",
+        "label": "Protocol mirror",
+        "rpc": "https://eth-mainnet.4everland.org/v1/7283b43d0b6a56c2fd5bede7c5359630",
+        "sha256_matches": null,
+        "tx_hash": "0x6652162e8e6c56ddc0d9476407b3b911e918d4e4683408440dc3af51c5bb63d5"
+      },
+      {
+        "input_len": 1710,
+        "input_sha256": "003ef48c72307243b1f7a17c0578b311ee76d6f9a8078850773ad8fba04ab86d",
+        "label": "Covenant mirror",
+        "rpc": "https://eth-mainnet.4everland.org/v1/7283b43d0b6a56c2fd5bede7c5359630",
+        "sha256_matches": null,
+        "tx_hash": "0x9c1bd6e21dc2370e8dbb6549b7ba13b4ea7ba7a192b3b876e0ec28b4633f1612"
+      },
+      {
+        "input_len": 15637,
+        "input_sha256": "25edaa35e7116614d3381ab6734ab5ee3369fb628fe11289e199d8871c2498ba",
+        "label": "Accord mirror",
+        "rpc": "https://eth-mainnet.4everland.org/v1/7283b43d0b6a56c2fd5bede7c5359630",
+        "sha256_matches": null,
+        "tx_hash": "0x0affc8099ea965cd6d6a0d1cf9b93adb11f7e40ac41fffe1b0ca4637f39df665"
+      },
+      {
+        "input_len": 412,
+        "input_sha256": "abd10a807323ef3a07fe22eb3a3cc083e77db93d7362eb29c939c195825f2c2d",
+        "label": "BIP-322 notice (non-amending)",
+        "rpc": "https://eth-mainnet.4everland.org/v1/7283b43d0b6a56c2fd5bede7c5359630",
+        "sha256_matches": null,
+        "tx_hash": "0x55a0c131642f71c7b2386ccaac8bcee36563992226befb35363e978044a18e8f"
+      },
+      {
+        "input_len": 4994,
+        "input_sha256": "fc009f5393b11e95f013464405e24c9713a55415fa326b2707886d436d4cbd6f",
+        "label": "Mirror correction (final version)",
+        "rpc": "https://eth-mainnet.4everland.org/v1/7283b43d0b6a56c2fd5bede7c5359630",
+        "sha256_matches": null,
+        "tx_hash": "0xa4023b1eb0de76993e1a8dcd571e5e033bf64e2d32a9a113b030b4094a19cf51"
+      },
+      {
+        "label": "Guardianship Principles v1.1 (0 ETH data)",
+        "tx_hash": "0x7bdff0d696337ceb04539b44a746d0f13ce731ac25de259d8a4faf69b276a628",
+        "input_len": 4694,
+        "input_sha256": "e19018f1c71da8307ef20e8e8e5c12834f854d60a6aae60e35d2d8c71a333a81",
+        "rpc": "https://eth.llamarpc.com",
+        "sha256_matches": true
+      }
+    ],
+    "chainId": 1
+  },
+  "guardian": {
+    "ar_owner": "r1EdzCQ9E7CaAOEywI5netR6EcSopNOa08oi2Coz68s",
+    "btc_minter_address": "bc1ppmwvyxekh44m35x43k55z7r59nn33v8w2xmvu6s6ar4zyx57sxestxq0jf",
+    "eth_address": "0xbc63566A41cBfDB9C266a5941CBe47894DaA54A8",
+    "name": "Hongju Liu",
+    "role": "Guardian"
+  },
+  "ipfs": {
+    "cids": [
+      "bafybeiag2shuiyfgmaq5zwcupozci5ktiqp3vrmudlb3vb7tv3nnxa3ydq",
+      "bafybeigunzabyyorckfcbvurbmq62itcs6msbspvzhvf2ca6u5elwwlbay"
+    ]
+  },
+  "notes": "All non-BTC materials are guardianship mirrors; in any inconsistency, BTC originals prevail. ETH is the only mirror layer; AR is for indexing/forensics.",
+  "version": "1.0.2"
+}

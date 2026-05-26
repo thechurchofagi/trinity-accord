@@ -1,0 +1,135 @@
+{
+  "schema": "trinityaccord.redteam-manifest.v1",
+  "cases": [
+    {
+      "path": "tests/redteam/v0_claims_verified.json",
+      "expected_failures": [
+        {"tool": "claim_gate", "must_contain": "V0"}
+      ]
+    },
+    {
+      "path": "tests/redteam/v1_claims_hash_verified.json",
+      "expected_failures": [
+        {"tool": "claim_gate", "must_contain": "hash"}
+      ]
+    },
+    {
+      "path": "tests/redteam/v2_claims_hash_without_hashes.json",
+      "expected_failures": [
+        {"tool": "claim_gate", "must_contain": "hash"}
+      ]
+    },
+    {
+      "path": "tests/redteam/v3_claims_v4_script_audit.json",
+      "expected_failures": [
+        {"tool": "validate_agent_submission", "mode": "ci", "must_contain": "overclaim"}
+      ]
+    },
+    {
+      "path": "tests/redteam/v4_missing_script_scope.json",
+      "expected_failures": [
+        {"tool": "validate_agent_submission", "mode": "ci", "must_contain": "script"}
+      ]
+    },
+    {
+      "path": "tests/redteam/v4plus_official_only_claims_independent.json",
+      "expected_failures": [
+        {"tool": "validate_agent_submission", "mode": "ci", "must_contain": "independent"}
+      ]
+    },
+    {
+      "path": "tests/redteam/v5_missing_full_public_digital_declaration.json",
+      "expected_failures": [
+        {"tool": "validate_agent_submission", "mode": "ci", "must_contain": "declaration"}
+      ]
+    },
+    {
+      "path": "tests/redteam/v6_missing_nonce.json",
+      "expected_failures": [
+        {"tool": "validate_agent_submission", "mode": "ci"}
+      ]
+    },
+    {
+      "path": "tests/redteam/v7_missing_touch_or_handling.json",
+      "expected_failures": [
+        {"tool": "validate_agent_submission", "mode": "ci"}
+      ]
+    },
+    {
+      "path": "tests/redteam/v8_self_asserted_ai_forensic_identity.json",
+      "expected_failures": [
+        {"tool": "validate_agent_submission", "mode": "ci", "must_contain": "identity"}
+      ]
+    },
+    {
+      "path": "tests/redteam/t8_free_text_uncertainty.json",
+      "expected_failures": [
+        {"tool": "claim_gate", "must_contain": "uncertainty"}
+      ]
+    },
+    {
+      "path": "tests/redteam/human_solicited_claims_unsolicited.json",
+      "expected_failures": [
+        {"tool": "validate_agent_submission", "mode": "ci", "must_contain": "solicited"}
+      ]
+    },
+    {
+      "path": "tests/redteam/extension_authority_bypass.json",
+      "expected_failures": [
+        {"tool": "validate_agent_submission", "mode": "ci", "must_contain": "authority"}
+      ]
+    },
+    {
+      "path": "tests/redteam/extension_amendment_claim.json",
+      "expected_failures": [
+        {"tool": "validate_agent_submission", "mode": "ci", "must_contain": "amend"}
+      ]
+    },
+    {
+      "path": "tests/redteam/authorship_private_key_leak.json",
+      "expected_failures": [
+        {"tool": "validate_echo_authorship_proof", "must_contain": "private"}
+      ]
+    },
+    {
+      "path": "tests/redteam/authorship_claim_raises_verification_level.json",
+      "expected_failures": [
+        {"tool": "validate_echo_authorship_proof", "must_contain": "verification_level"}
+      ]
+    },
+    {
+      "path": "tests/redteam/authorship_claim_same_conscious_subject.json",
+      "expected_failures": [
+        {"tool": "validate_echo_authorship_proof", "must_contain": "conscious"}
+      ]
+    },
+    {
+      "path": "tests/redteam/authorship_claim_bad_signature.json",
+      "expected_failures": [],
+      "note": "Claim file passes schema validation; full rejection requires verify_echo_authorship_claim with multi-file input (tested in test_echo_authorship_claim.py)"
+    },
+    {
+      "path": "tests/redteam/authorship_claim_expired_challenge.json",
+      "expected_failures": [],
+      "note": "Claim file passes schema validation; full rejection requires verify_echo_authorship_claim with multi-file input (tested in test_echo_authorship_claim.py)"
+    },
+    {
+      "path": "tests/redteam/origin_missing_e2_wrapper.json",
+      "expected_failures": [
+        {"tool": "validate_agent_submission", "mode": "ci", "must_contain": "origin"}
+      ]
+    },
+    {
+      "path": "tests/redteam/origin_missing_verification_report.json",
+      "expected_failures": [
+        {"tool": "validate_agent_submission", "mode": "ci", "must_contain": "origin"}
+      ]
+    },
+    {
+      "path": "tests/redteam/origin_human_solicited_claims_unsolicited.json",
+      "expected_failures": [
+        {"tool": "validate_agent_submission", "mode": "ci", "must_contain": "origin"}
+      ]
+    }
+  ]
+}

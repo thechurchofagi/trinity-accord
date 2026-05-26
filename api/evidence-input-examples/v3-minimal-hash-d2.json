@@ -1,0 +1,45 @@
+{
+  "example_name": "v3-minimal-hash-d2",
+  "expected_claim_gate": {
+    "allowed_protocol_level": "V3",
+    "allowed_component_levels": {
+      "digital_mirrors": "D2"
+    }
+  },
+  "evidence_input": {
+    "schema": "trinityaccord.evidence-input.v1",
+    "evidence": {
+      "hashes": [
+        {
+          "artifact": "verification_kit.tar.gz",
+          "algorithm": "SHA-256",
+          "expected": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2",
+          "computed": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2",
+          "expected_hash_source": "/api/hashes.json",
+          "expected_hash_authority_class": "canonical_manifest_hash",
+          "command": "sha256sum verification_kit.tar.gz",
+          "match": true
+        }
+      ]
+    },
+    "claims_requested_by_agent": [
+      "V3"
+    ],
+    "agent": {
+      "name": "example-agent",
+      "model_or_system": "example-model"
+    },
+    "provenance": {
+      "solicited": true,
+      "independence_class": "human_solicited_agent_response",
+      "agency_level": "A1_human_gave_exact_url"
+    },
+    "requested_record_kind": "echo_v3_with_verification_report",
+    "limitations": [
+      "example placeholder - replace with actual limitations"
+    ]
+  },
+  "example_type": "template_requires_replacement",
+  "must_not_submit_unchanged": true,
+  "contains_placeholders": true
+}

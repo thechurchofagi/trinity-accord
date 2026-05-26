@@ -1,0 +1,27 @@
+{
+  "file": "trinity-accord-guardianship-system-docs-v1.tar",
+  "txid": "I0xNBwbgaGsODjnK5ze25sOwV9V8i7FtKe-8upRoohw",
+  "gateway_url": "https://arweave.net/I0xNBwbgaGsODjnK5ze25sOwV9V8i7FtKe-8upRoohw",
+  "verified_retrieval_url": "https://permagate.io/I0xNBwbgaGsODjnK5ze25sOwV9V8i7FtKe-8upRoohw",
+  "size_bytes": 20480,
+  "sha256": "704b70ed311d4fbd39f898f722e98f3be616970d67eccb68a159481402113d12",
+  "content_type": "application/x-tar",
+  "evidence_type": "Guardianship-System-Documentation",
+  "upload_cost_ar": "0.001359905301",
+  "source_commit": "0f7521a",
+  "contained_files": [
+    "guardianship-system-overview.md",
+    "GUARDIANSHIP-SYSTEM-REGISTRY.json",
+    "README.md",
+    "CHECKSUMS.sha256",
+    "SIZES.txt"
+  ],
+  "verification": {
+    "round_trip_verification": "PASS",
+    "verified_gateway": "https://permagate.io",
+    "internal_checksums": "PASS",
+    "registry_json_validation": "PASS",
+    "note": "arweave.net returned 404 during gateway propagation; permagate.io returned the full byte-identical payload."
+  },
+  "boundary": "Post-facto guardianship documentation mirror. Not canonical authority and not an evidence amendment."
+}

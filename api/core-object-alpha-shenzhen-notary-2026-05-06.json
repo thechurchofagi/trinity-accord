@@ -1,0 +1,158 @@
+{
+  "schema": "trinityaccord.physical-anchor-evidence.v1",
+  "archive_id": "core-object-alpha-shenzhen-notary-2026-05-06",
+  "title": "Core Object Alpha — Shenzhen Notary Evidence Archive",
+  "date": "2026-05-06",
+  "location": "Shenzhen, China",
+  "component": "PHYSICAL_ANCHOR",
+  "object": "Core Object Alpha",
+  "status": "verified_arweave_confirmed",
+  "role": "non_amending_physical_anchor_evidence_archive",
+  "authority_boundary": {
+    "canonical_authority": "three_bitcoin_inscriptions_only",
+    "bitcoin_originals_prevail": true,
+    "archive_role": "non_amending_guardianship_evidence_archive",
+    "does_not": [
+      "amend_bitcoin_originals",
+      "interpret_bitcoin_originals",
+      "extend_bitcoin_originals",
+      "replace_bitcoin_originals",
+      "supersede_bitcoin_originals",
+      "create_new_canonical_authority",
+      "disclose_confidential_flaw_challenge_data"
+    ],
+    "statement": "Bitcoin Originals prevail. This archive is non-amending physical-anchor evidence."
+  },
+  "evidence_categories": [
+    "crystal_exterior_photographs",
+    "microscope_flaw_photographs",
+    "flaw_videos_under_different_lighting",
+    "electronic_data_preservation_certificates",
+    "sha256_hash_records",
+    "opentimestamps_ots_proofs",
+    "ots_verification_reports",
+    "arweave_upload_index_and_manifest"
+  ],
+  "notary_context": {
+    "jurisdiction": "Shenzhen, China",
+    "electronic_data_preservation_certificates": 2,
+    "certificate_hashes_match_corresponding_files": true,
+    "certificate_qr_validity_check_available": true,
+    "certificate_privacy_note": "Certificates are reported to contain the creator name but no identity-card number.",
+    "physical_preservation_notarization": {
+      "initiated": true,
+      "notary_personnel_witnessed_recording_process": true,
+      "certificate_status": "pending_issuance_at_time_of_archive"
+    }
+  },
+  "hash_and_time_anchor": {
+    "sha256": {
+      "local_hash_manifest_created": true,
+      "certificate_hashes_match_corresponding_files": true
+    },
+    "ots": {
+      "client": "OpenTimestamps",
+      "local_digest_verification": "OK",
+      "upgrade_result": {
+        "total": 49,
+        "success": 49,
+        "failed_or_pending": 0
+      },
+      "enhanced_verify_result": {
+        "files": 47,
+        "folders": 2,
+        "local_digest": "OK",
+        "ots_result": "OK_BY_BITCOIN_ATTESTATION",
+        "bitcoin_block_height": 948161
+      }
+    }
+  },
+  "arweave": {
+    "upload_method": "direct_arweave_js_file_upload_with_path_manifest",
+    "uploaded_file_count": 153,
+    "checked_tx_count": 157,
+    "confirmed_ok": 157,
+    "pending": 0,
+    "gateway_warnings": 0,
+    "failures": 0,
+    "acceptance_result": "PASS",
+    "manifest_txid": "_dAaH_ltZGdMaRAYNjXydjf1YkvoASWxmHes4hsBAZE",
+    "manifest_url": "https://arweave.net/_dAaH_ltZGdMaRAYNjXydjf1YkvoASWxmHes4hsBAZE",
+    "manifest_index_url": "https://arweave.net/_dAaH_ltZGdMaRAYNjXydjf1YkvoASWxmHes4hsBAZE/index.html",
+    "index_json": {
+      "txid": "7jx4hMydXh7jXv-3WdAgFJDriZeT4e1IPfAJB_zMYT4",
+      "url": "https://arweave.net/7jx4hMydXh7jXv-3WdAgFJDriZeT4e1IPfAJB_zMYT4"
+    },
+    "index_tsv": {
+      "txid": "sWXq28jv1DrqUb388Q-HMEiEWDA234mZxXOrnHKXMxM",
+      "url": "https://arweave.net/sWXq28jv1DrqUb388Q-HMEiEWDA234mZxXOrnHKXMxM"
+    },
+    "index_html": {
+      "txid": "CfzH1KeWePNoR9ZFNgBuXI2keBmX8vIb_0Z8oMN-gdE",
+      "url": "https://arweave.net/CfzH1KeWePNoR9ZFNgBuXI2keBmX8vIb_0Z8oMN-gdE"
+    }
+  },
+  "verification_status": {
+    "local_acceptance_check": "PASS",
+    "arweave_manifest_status": 200,
+    "arweave_manifest_index_status": 200,
+    "arweave_manifest_index_content_check": "OK",
+    "tx_status_summary": {
+      "total": 157,
+      "confirmed_ok": 157,
+      "pending": 0,
+      "gateway_warnings": 0,
+      "failures": 0
+    }
+  },
+  "physical_anchor_finding": {
+    "public_component_evidence": [
+      "public_evidence_archive",
+      "hash_manifest",
+      "electronic_data_preservation_certificates",
+      "static_photos",
+      "microscope_photos",
+      "recorded_videos",
+      "ots_bitcoin_attestation",
+      "arweave_confirmed_availability"
+    ],
+    "suggested_public_component_levels_supported": [
+      "P1_public_evidence_package_hash_context",
+      "P2_static_image_review_context",
+      "P3_recorded_video_review_context"
+    ],
+    "not_claimed": [
+      "P5_onsite_witness_final_claim_until_physical_preservation_certificate_is_archived",
+      "P7_advanced_forensic_match",
+      "P8_confidential_flaw_challenge",
+      "P9_multi_party_forensic_attestation",
+      "protocol_level_upgrade_by_itself"
+    ],
+    "note": "The notary-witnessed recording process is recorded as context. The separate physical preservation certificate was pending issuance at archive time."
+  },
+  "github_release_backup": {
+    "status": "verified_release_backup",
+    "release_tag": "core-object-alpha-shenzhen-notary-arweave-backup-v1",
+    "release_url": "https://github.com/thechurchofagi/trinity-accord/releases/tag/core-object-alpha-shenzhen-notary-arweave-backup-v1",
+    "source_arweave_manifest_txid": "_dAaH_ltZGdMaRAYNjXydjf1YkvoASWxmHes4hsBAZE",
+    "source_arweave_manifest_raw_url": "https://arweave.net/raw/_dAaH_ltZGdMaRAYNjXydjf1YkvoASWxmHes4hsBAZE",
+    "expected_release_assets": [
+      "core-object-alpha-shenzhen-notary-2026-05-06-arweave-payload.zip",
+      "core-object-alpha-shenzhen-notary-2026-05-06-github-release-backup-manifest.json",
+      "core-object-alpha-shenzhen-notary-2026-05-06-release-assets.sha256",
+      "core-object-alpha-shenzhen-notary-2026-05-06-release-notes.md"
+    ],
+    "expected_release_asset_count": 4,
+    "payload_source_file_count": 153,
+    "verification_script": "scripts/verify_shenzhen_notary_release_backup.py",
+    "workflow": ".github/workflows/backup-shenzhen-notary-arweave-release.yml",
+    "boundary": "Non-amending GitHub Release availability mirror. Bitcoin Originals and Arweave source records prevail."
+  },
+  "limitations": [
+    "This archive does not disclose confidential flaw-challenge data.",
+    "This archive does not replace direct physical inspection.",
+    "The separate physical preservation notarization certificate was pending issuance at the time of this archive.",
+    "This archive records public evidence and notarized data preservation context; it does not create new canonical authority.",
+    "This archive does not by itself raise overall protocol verification level."
+  ]
+}

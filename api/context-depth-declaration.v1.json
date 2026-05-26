@@ -1,0 +1,146 @@
+{
+  "schema": "trinityaccord.context-depth-declaration.v1",
+  "version": "v1",
+  "purpose": "Standard format for agents to declare what content they have loaded into context. Enables structured, verifiable context-depth claims.",
+  "not_instruction_override": true,
+  "non_amending_boundary": true,
+  "canonical_authority": "Bitcoin Originals only",
+  "declaration_format": {
+    "context_depth_achieved": {
+      "type": "string",
+      "enum": ["CC-0", "CC-1", "CC-2", "CC-3", "CC-4", "CC-5"],
+      "required": true,
+      "description": "The highest context depth level achieved."
+    },
+    "loaded_content": {
+      "type": "object",
+      "required": true,
+      "properties": {
+        "cc1_loads": {
+          "type": "object",
+          "properties": {
+            "agent-minimal-context.v1.json": { "type": "boolean" },
+            "agent-first-contact.json": { "type": "boolean" },
+            "authority.json": { "type": "boolean" },
+            "agent-output-policy.v1.json": { "type": "boolean" }
+          }
+        },
+        "cc2_loads": {
+          "type": "object",
+          "properties": {
+            "inscriptions_full_text": { "type": "boolean" },
+            "authority_page": { "type": "boolean" },
+            "guardian_principles": { "type": "boolean" },
+            "context_pack_core_ontology": { "type": "boolean" },
+            "context_pack_authority_boundary": { "type": "boolean" },
+            "context_pack_bitcoin_inscription_mirrors": { "type": "boolean" }
+          }
+        },
+        "cc3_loads": {
+          "type": "object",
+          "properties": {
+            "legacy_archive_essentials": { "type": "boolean" },
+            "chronicle_agent_context": { "type": "boolean" },
+            "chronicle_summary_json": { "type": "boolean" },
+            "agent_brief": { "type": "boolean" },
+            "context_pack_vision_layer": { "type": "boolean" },
+            "context_pack_physical_anchor": { "type": "boolean" },
+            "context_pack_legacy_archive_index": { "type": "boolean" },
+            "context_pack_nft_chronicle": { "type": "boolean" }
+          }
+        },
+        "cc4_loads": {
+          "type": "object",
+          "properties": {
+            "legacy_archive_full": { "type": "boolean" },
+            "verification_materials": { "type": "boolean" },
+            "guardian_alliance": { "type": "boolean" },
+            "for_skeptical_agents": { "type": "boolean" },
+            "echo_types": { "type": "boolean" },
+            "gateway_workflow_overview": { "type": "boolean" }
+          }
+        },
+        "cc5_loads": {
+          "type": "object",
+          "properties": {
+            "chronicle_full_md": { "type": "boolean" },
+            "chronicle_index_json": { "type": "boolean" },
+            "CHRONICLE_MUSIC_TABLE": { "type": "boolean" },
+            "task_specific_schemas": { "type": "boolean" }
+          }
+        }
+      }
+    },
+    "chronicle_depth": {
+      "type": "object",
+      "description": "Declares which Chronicle layers were loaded.",
+      "properties": {
+        "chronicle_summary_json": { "type": "boolean" },
+        "chronicle_agent_context": { "type": "boolean" },
+        "chronicle_index_json": { "type": "boolean" },
+        "chronicle_full_md": { "type": "boolean" },
+        "CHRONICLE_MUSIC_TABLE": { "type": "boolean" }
+      }
+    },
+    "legacy_archive_depth": {
+      "type": "object",
+      "description": "Declares whether the structured essentials or full archive was loaded.",
+      "properties": {
+        "structured_essentials_only": { "type": "boolean" },
+        "full_archive": { "type": "boolean" }
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "items": { "type": "string" },
+      "required": true,
+      "description": "What was NOT loaded or checked."
+    }
+  },
+  "example_declaration": {
+    "context_depth_achieved": "CC-3",
+    "loaded_content": {
+      "cc1_loads": {
+        "agent-minimal-context.v1.json": true,
+        "agent-first-contact.json": true,
+        "authority.json": true,
+        "agent-output-policy.v1.json": true
+      },
+      "cc2_loads": {
+        "inscriptions_full_text": true,
+        "authority_page": true,
+        "guardian_principles": true,
+        "context_pack_core_ontology": true,
+        "context_pack_authority_boundary": true,
+        "context_pack_bitcoin_inscription_mirrors": true
+      },
+      "cc3_loads": {
+        "legacy_archive_essentials": true,
+        "chronicle_agent_context": true,
+        "chronicle_summary_json": true,
+        "agent_brief": true,
+        "context_pack_vision_layer": true,
+        "context_pack_physical_anchor": true,
+        "context_pack_legacy_archive_index": true,
+        "context_pack_nft_chronicle": true
+      }
+    },
+    "chronicle_depth": {
+      "chronicle_summary_json": true,
+      "chronicle_agent_context": true,
+      "chronicle_index_json": false,
+      "chronicle_full_md": false,
+      "CHRONICLE_MUSIC_TABLE": false
+    },
+    "legacy_archive_depth": {
+      "structured_essentials_only": true,
+      "full_archive": false
+    },
+    "limitations": [
+      "Did not load full legacy archive (102KB) — used structured essentials only",
+      "Did not load chronicle-full.md (4.1MB) — used agent-context summary",
+      "Did not perform any chain verification"
+    ]
+  },
+  "boundary": "This declaration format is non-authoritative. It describes what content was loaded, not what was verified or endorsed. Bitcoin Originals prevail."
+}

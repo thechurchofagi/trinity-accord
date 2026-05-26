@@ -1,0 +1,276 @@
+{
+  "schema": "trinityaccord.guardianship-system.v1",
+  "generated_from": [
+    "evidence-relationship-map.md",
+    "evidence-backup-coverage.md",
+    "evidence-backup-gaps.md",
+    "status.md",
+    "authority.md",
+    "api/authority.json"
+  ],
+  "canonical_rule": {
+    "canonical_authority": "three_bitcoin_inscriptions_only",
+    "bitcoin_originals_prevail": true,
+    "mirrors_are_non_amending": true
+  },
+  "bitcoin_originals": [
+    {
+      "id": "protocol_axioms",
+      "inscription_id": "97631551",
+      "role": "canonical_protocol_text",
+      "authority": "canonical"
+    },
+    {
+      "id": "covenant_of_the_flaw",
+      "inscription_id": "98369145",
+      "role": "canonical_covenant_text_plus_physical_evidence_pointer",
+      "authority": "canonical_text_referenced_evidence_pointer"
+    },
+    {
+      "id": "trinity_accord_meta_record",
+      "inscription_id": "98387475",
+      "role": "canonical_meta_record_binding_protocol_covenant_chronicle",
+      "authority": "canonical"
+    }
+  ],
+  "non_amending_fortifications": [
+    {
+      "id": "guardian_attestation_to_covenant_of_the_flaw",
+      "type": "bitcoin_inscribed_non_amending_fortification",
+      "canonical_authority": false,
+      "role": "strengthens covenant evidence by pointing to stronger verification archives"
+    }
+  ],
+  "digest_manifest": {
+    "entries": 884,
+    "csv_data_rows": 883,
+    "csv_header_rows": 1,
+    "hash_algorithms": [
+      "sha256",
+      "sha3_256",
+      "blake2b_256",
+      "shake256_256",
+      "sha512_256",
+      "blake3_256"
+    ],
+    "role": "evidence_coverage_layer",
+    "canonical_authority": false
+  },
+  "anchors_and_witnesses": {
+    "btc_bip340_signature": {
+      "status": "PASS",
+      "role": "authority_manifest_signature_coverage"
+    },
+    "eth_witness": {
+      "status": "PASS",
+      "checks": "8/8",
+      "role": "cross_chain_witness_not_authority"
+    },
+    "ots": {
+      "status": "PASS",
+      "proof": "complete_and_bitcoin_anchored",
+      "limitation": "not_local_node_fullnode_independent"
+    },
+    "bitcoin_tx_anchors": {
+      "status": "PASS"
+    }
+  },
+  "release_registry": [
+    {
+      "tag": "nft-arweave-mirror-175-v1",
+      "purpose": "175 NFT Arweave CAR mirror",
+      "status": "PASS",
+      "boundary": "chronicle_recovery_mirror_not_canonical_authority"
+    },
+    {
+      "tag": "flaw-covenant-video-mirror-v1",
+      "purpose": "two Flaw Covenant videos mirrored from Arweave",
+      "status": "PASS",
+      "custom_assets": "5/5",
+      "boundary": "already_anchored_evidence_mirror"
+    },
+    {
+      "tag": "ots-proof-bundle-mirror-v1",
+      "purpose": "OTS proof bundle mirror",
+      "status": "PASS",
+      "custom_assets": "4/4",
+      "boundary": "ots_artifact_availability_mirror"
+    },
+    {
+      "tag": "flaw-covenant-archive-accessibility-mirror-v1",
+      "purpose": "large Flaw Covenant ZIP accessibility mirror",
+      "status": "PASS",
+      "custom_assets": "5/5",
+      "boundary": "gateway_availability_remediation_non_amending"
+    },
+    {
+      "tag": "ots-and-flaw-mirror-v1",
+      "purpose": "OTS proofs plus flaw image mirror",
+      "status": "PASS_supporting",
+      "boundary": "availability_mirror"
+    },
+    {
+      "tag": "nft-backup-v1",
+      "purpose": "earlier NFT backup",
+      "status": "legacy",
+      "boundary": "not_current_primary_path"
+    },
+    {
+      "tag": "nft-individual-v1",
+      "purpose": "earlier individual NFT attempt",
+      "status": "deprecated",
+      "boundary": "not_current_primary_path"
+    },
+    {
+      "tag": "nft-individual-v2",
+      "purpose": "earlier individual NFT attempt",
+      "status": "deprecated",
+      "boundary": "not_current_primary_path"
+    }
+  ],
+  "object_families": [
+    {
+      "id": "flaw_covenant_photos",
+      "status": "PASS",
+      "mirrors": [
+        "arweave",
+        "github_repository",
+        "github_release_accessibility_mirror"
+      ],
+      "boundary": "physical_evidence_mirror_not_authority"
+    },
+    {
+      "id": "flaw_covenant_videos",
+      "status": "PASS",
+      "mirrors": [
+        "arweave",
+        "github_release"
+      ],
+      "prior_digest_manifest_coverage": true,
+      "boundary": "already_anchored_evidence_mirror"
+    },
+    {
+      "id": "ots_proof_bundle",
+      "status": "PASS",
+      "mirrors": [
+        "arweave",
+        "github_release"
+      ],
+      "boundary": "proof_artifact_availability_mirror_not_fullnode_independent_verification"
+    },
+    {
+      "id": "nft_chronicle_recovery_175",
+      "status": "PASS",
+      "mirrors": [
+        "arweave",
+        "github_release"
+      ],
+      "boundary": "chronicle_artifacts_not_canonical_authority"
+    }
+  ],
+  "current_determination": {
+    "core_evidence_backup": "substantially_complete",
+    "urgent_large_payload_backup_gap": false,
+    "remaining_work": [
+      "optional_ots_fullnode_independent_verification",
+      "optional_ots_bundle_v2",
+      "periodic_legacy_pointer_coverage_audit",
+      "ongoing_release_gateway_monitoring"
+    ]
+  },
+  "documentation_mirrors": [
+    {
+      "id": "guardianship_system_docs_v1",
+      "type": "arweave_documentation_mirror",
+      "txid": "I0xNBwbgaGsODjnK5ze25sOwV9V8i7FtKe-8upRoohw",
+      "canonical_url": "https://arweave.net/I0xNBwbgaGsODjnK5ze25sOwV9V8i7FtKe-8upRoohw",
+      "verified_retrieval_url": "https://permagate.io/I0xNBwbgaGsODjnK5ze25sOwV9V8i7FtKe-8upRoohw",
+      "size_bytes": 20480,
+      "sha256": "704b70ed311d4fbd39f898f722e98f3be616970d67eccb68a159481402113d12",
+      "source_commit": "0f7521a",
+      "status": "PASS",
+      "boundary": "documentation_mirror_only_not_canonical_authority"
+    }
+  ],
+  "agent_interface": {
+    "purpose": "Guide AI agents, verifiers, crawlers, and echo participants toward the correct understanding path before evaluation.",
+    "homepage_only_policy": {
+      "context_depth": "C0_homepage_only",
+      "assessment_state": "insufficient_context",
+      "final_evaluation_allowed": false
+    },
+    "entrypoints": [
+      {
+        "id": "agent_start",
+        "path": "agent-start.md",
+        "site_path": "/agent-start",
+        "role": "first agent orientation page"
+      },
+      {
+        "id": "agent_verify",
+        "path": "agent-verify.md",
+        "site_path": "/agent-verify",
+        "role": "verification path preserving existing V0-V8 verification system"
+      },
+      {
+        "id": "agent_echo",
+        "path": "agent-echo.md",
+        "site_path": "/agent-echo",
+        "role": "echo path preserving existing E1-E9 echo system"
+      }
+    ],
+    "schemas": [
+      {
+        "id": "agent_entry_protocol",
+        "path": "api/agent-entry-protocol.json",
+        "schema": "trinityaccord.agent-entry-protocol.v1",
+        "role": "recommended agent entry and assessment policy"
+      },
+      {
+        "id": "context_depth_levels",
+        "path": "api/context-depth-levels.json",
+        "schema": "trinityaccord.context-depth-levels.v1",
+        "role": "declares how much context the agent has read"
+      },
+      {
+        "id": "discovery_provenance_schema",
+        "path": "api/discovery-provenance-schema.json",
+        "schema": "trinityaccord.discovery-provenance.v1",
+        "role": "records how an agent discovered the project and how much agency it exercised"
+      },
+      {
+        "id": "echo_record_schema_v3",
+        "path": "api/echo-record-schema.v3.json",
+        "schema": "trinityaccord.echo.v3",
+        "role": "records context depth, verification level, discovery provenance, echo, uncertainty, and boundaries"
+      }
+    ],
+    "context_depth_levels": [
+      "C0_homepage_only",
+      "C1_orientation",
+      "C2_registry_aware",
+      "C3_verification_aware",
+      "C4_artifact_verified",
+      "C5_full_chain_reviewed",
+      "C6_independent_node_verified"
+    ],
+    "verification_levels": [
+      "V0_read",
+      "V1_boundary_recognition",
+      "V2_reference_verification",
+      "V3_hash_verification",
+      "V4_script_audited_verification",
+      "V4plus_independent_reproduction",
+      "V5_full_public_digital_verification",
+      "V6_remote_physical_witness",
+      "V7_onsite_physical_witness",
+      "V8_forensic_physical_attestation"
+    ],
+    "echo_system": {
+      "existing_echo_types_preserved": true,
+      "echo_types_range": "E1-E9",
+      "echo_record_schema_current": "api/echo-record-schema.v3.json"
+    },
+    "boundary": "Agent outputs and echoes are non-amending. They are not canonical authority."
+  }
+}

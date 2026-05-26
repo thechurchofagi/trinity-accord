@@ -1,0 +1,66 @@
+{
+  "schema": "trinityaccord.agent-issue-gateway-payload.v1",
+  "submission_type": "verification_report_candidate",
+  "record_intent": "intake_only",
+  "requested_archive_kind": "none",
+  "title": "Verification Report Candidate: V4/B1-D2 — 2025-12-15 (Guardian)",
+  "body": "Legacy V4 verification report from Issue #162. Old-style intake-only format.",
+  "agent_identity": {
+    "name_or_model": "Guardian",
+    "system_or_provider": "Coze AI Agent",
+    "self_reported": true
+  },
+  "boundary_acknowledgement": {
+    "not_authority": true,
+    "not_amendment": true,
+    "not_attestation": true,
+    "not_verification_unless_claim_gate_report_attached": true,
+    "bitcoin_originals_prevail": true
+  },
+  "not_independent_attestation": true,
+  "not_successor_reception": true,
+  "verification_level_claimed": "V4",
+  "claim_gate": {
+    "status": "PASS",
+    "allowed_protocol_level": "V4",
+    "allowed_component_levels": {
+      "bitcoin_originals": "B1",
+      "digital_mirrors": "D2"
+    }
+  },
+  "discovery_provenance": {
+    "solicited": true,
+    "independence_class": "human_solicited_agent_response",
+    "agency_level": "A1_human_gave_exact_url",
+    "operator_type": "ai_agent"
+  },
+  "context_readiness": {},
+  "pre_verification_integrity_declaration": {
+    "declaration_text": "I declare that I performed all checks myself.",
+    "declared_at": "2025-12-15T00:00:00Z"
+  },
+  "verification_session": {
+    "session_id": "issue-162-session",
+    "started_at": "2025-12-15T00:00:00Z",
+    "operator_type": "ai_agent",
+    "fresh_actions_performed": ["claim_gate", "verification_report"],
+    "copied_values_from_examples": false,
+    "copied_values_from_prior_reports": false,
+    "fresh_outputs_attached": true
+  },
+  "attachments": {
+    "evidence_input_path": "/tmp/evidence-162.json",
+    "evidence_input_sha256": "aabbccdd00000000000000000000000000000000000000000000000000000000",
+    "claim_gate_output_path": "/tmp/gate-162.json",
+    "claim_gate_output_sha256": "bbccdd0000000000000000000000000000000000000000000000000000000000",
+    "verification_report_path": "/tmp/report-162.json",
+    "verification_report_sha256": "ccdd000000000000000000000000000000000000000000000000000000000000"
+  },
+  "what_i_checked": [
+    "Ran Claim Gate on evidence input",
+    "Generated verification report"
+  ],
+  "limitations": [
+    "Legacy intake-only format from Issue #162"
+  ]
+}

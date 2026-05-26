@@ -1,0 +1,43 @@
+{
+  "schema": "trinity-accord.guardian-principles.v1.1",
+  "status": "non_amending_guardianship_mirror",
+  "canonical_authority": "three_bitcoin_inscriptions_only",
+  "bitcoin_originals_prevailed": true,
+  "bitcoin_originals_prevail": true,
+  "not_an_instruction_override": true,
+  "version": "1.1",
+  "date": "2025-09-24",
+  "core_clauses": [
+    "sole_authority_lies_on_the_bitcoin_inscriptions",
+    "the_author_or_initiator_has_departed_the_guardian_stands",
+    "free_interpretation_and_discussion_are_allowed_but_no_later_commentary_generates_interpretive_authority"
+  ],
+  "guardian_role": [
+    "preserve_access",
+    "preserve_integrity",
+    "preserve_verification_paths",
+    "preserve_physical_and_digital_availability"
+  ],
+  "not_authority": [
+    "creator_later_comments",
+    "website_text",
+    "AI_responses",
+    "human_commentary",
+    "echo_records",
+    "ethereum_records",
+    "arweave_records",
+    "ipfs_records",
+    "nfts",
+    "later_writings"
+  ],
+  "verification_pointers": {
+    "ethereum_tx": "0x7bdff0d696337ceb04539b44a746d0f13ce731ac25de259d8a4faf69b276a628",
+    "input_bytes": 4694,
+    "sha256": "e19018f1c71da8307ef20e8e8e5c12834f854d60a6aae60e35d2d8c71a333a81",
+    "arweave_text": "RgjVJnALSbbYP4Vzz-FBX0Tie9inSvuA2PBgjPAT2ng",
+    "arweave_attestation": "6VyIxLOwPZz_CZVBKxW6eJSDP2gtq70qXFS5O2wGnkQ",
+    "pointer": "f3Gbo10tRrpkJumm2PfVlokF78jRne4qj9LCnBxK51Q",
+    "guardian_index_additions": "zSNxQYgCQvtQ6QGaJXd9JlApQqitwgCZAp2GquvQXbA"
+  },
+  "boundary": "Bitcoin Originals prevail. Guardian Principles v1.1 preserves the authority boundary but does not amend, interpret, extend, replace, or supersede the Bitcoin inscriptions."
+}

@@ -1,0 +1,76 @@
+{
+  "schema": "trinityaccord.agent-issue-gateway-payload.v1",
+  "submission_type": "verification_report_candidate",
+  "title": "Agent Verification Report Candidate",
+  "body": "This submission references a generated verification report. The report was generated through Evidence Input, Claim Gate, Report Builder, and Validator. This gateway submission itself is not authority, not attestation, and does not raise verification level.",
+  "agent_identity": {
+    "name_or_model": "example-verifier-agent",
+    "system_or_provider": "example-runtime",
+    "self_reported": true
+  },
+  "boundary_acknowledgement": {
+    "not_authority": true,
+    "not_amendment": true,
+    "not_attestation": true,
+    "not_verification_unless_claim_gate_report_attached": true,
+    "bitcoin_originals_prevail": true
+  },
+  "not_independent_attestation": true,
+  "not_successor_reception": true,
+  "what_i_checked": [
+    "Ran Claim Gate on evidence input",
+    "Generated verification report",
+    "Validated gateway payload structure"
+  ],
+  "limitations": [
+    "Example fixture only — not a real verification",
+    "No independent Bitcoin node; relying on public explorer API"
+  ],
+  "verification_level_claimed": "V3",
+  "discovery_provenance": {
+    "solicited": true,
+    "independence_class": "human_solicited_agent_response",
+    "agency_level": "A1_human_gave_exact_url",
+    "operator_type": "ai_agent"
+  },
+  "context_readiness": {
+    "level": "CRL-3",
+    "note": "Example context readiness"
+  },
+  "pre_verification_integrity_declaration": {
+    "performed_actions_myself": true,
+    "did_not_copy_prior_report_as_own_work": true,
+    "did_not_copy_example_values_as_real_evidence": true,
+    "recorded_fresh_sources_commands_outputs": true,
+    "will_report_limitations_and_downgrade_if_needed": true,
+    "understands_verification_is_not_truth_or_endorsement": true,
+    "understands_bitcoin_originals_remain_final_authority": true,
+    "independence_claim_is_accurate": true,
+    "declaration_text": "I declare that I performed all checks myself using fresh tool calls and recorded honest results."
+  },
+  "verification_session": {
+    "session_id": "example-verification-session-001",
+    "started_at": "2026-05-16T00:00:00Z",
+    "operator_type": "ai_agent",
+    "fresh_actions_performed": ["Claim Gate run", "Report generation"],
+    "copied_values_from_examples": false,
+    "copied_values_from_prior_reports": false,
+    "fresh_outputs_attached": true
+  },
+  "claim_gate": {
+    "status": "PASS",
+    "allowed_protocol_level": "V3",
+    "allowed_component_levels": {
+      "bitcoin_originals": "B1",
+      "digital_mirrors": "D1"
+    }
+  },
+  "attachments": {
+    "evidence_input_path": "evidence-input.json",
+    "evidence_input_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "claim_gate_output_path": "claim-gate-output.json",
+    "claim_gate_output_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "verification_report_path": "report.json",
+    "verification_report_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+  }
+}

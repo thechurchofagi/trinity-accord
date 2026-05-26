@@ -1,0 +1,267 @@
+name: Run All Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: python3 -m pip install -r requirements-ci.txt
+
+      - name: PR-1 protocol terms consistency
+        run: python3 scripts/test_protocol_terms_consistency.py
+
+      - name: PR-2 strict validation modes
+        run: python3 scripts/test_strict_validation_modes.py
+
+      - name: PR-3 origin classification enforcement
+        run: python3 scripts/test_origin_classification_required.py
+
+      - name: PR-4 authorship proof claim
+        run: python3 scripts/test_echo_authorship_claim.py
+
+      - name: PR-5 receipt authorship proof
+        run: python3 scripts/test_agent_verification_receipt_authorship.py
+
+      - name: PR-6 agent verification pipeline
+        run: python3 scripts/test_agent_verification_pipeline.py
+
+      - name: PR-7 operational policy consistency
+        run: python3 scripts/test_operational_policy_consistency.py
+
+      - name: PR-8 extensions policy
+        run: python3 scripts/test_extensions_policy.py
+
+      - name: PR-9 redteam matrix
+        run: python3 scripts/test_end_to_end_redteam_matrix.py
+
+      - name: Validator self-test
+        run: python3 scripts/validate_agent_submission.py --self-test
+
+      - name: V0-V5 agent-declared archive policy
+        run: python3 scripts/test_agent_declared_archive_policy.py
+
+      - name: V0-V5 claim gate template
+        run: python3 scripts/test_claim_gate_template_v0_v5.py
+
+      - name: V0-V5 archive readiness agent-declared
+        run: python3 scripts/test_archive_readiness_agent_declared.py
+
+      - name: V0-V5 single mode enforcement
+        run: python3 scripts/test_v0_v5_single_mode_enforcement.py
+
+      - name: V0-V5 agent-declared redteam
+        run: python3 scripts/test_agent_declared_redteam.py
+
+      - name: Reception headline total regression
+        run: python3 scripts/test_reception_headline_total.py
+
+      - name: Test reception initiation classification
+        run: python3 scripts/test_reception_initiation_classification.py
+
+      - name: Test reception initiation builder consistency
+        run: python3 scripts/test_reception_initiation_builder_consistency.py
+
+      - name: Test reception initiation production render
+        run: python3 scripts/test_reception_initiation_production_render.py
+
+      - name: Test public home reception breakdown invariant
+        run: python3 scripts/test_public_home_reception_breakdown_invariant.py
+
+      - name: Test agent-declared index initiation breakdown
+        run: python3 scripts/test_agent_declared_index_initiation_breakdown.py
+
+      - name: Gateway agent-declared payload schema
+        run: python3 scripts/test_gateway_agent_declared_payload_schema.py
+
+      - name: Validate Gateway payload agent-declared
+        run: python3 scripts/test_validate_gateway_payload_agent_declared.py
+
+      - name: Build agent-declared archive payload
+        run: python3 scripts/test_build_agent_declared_archive_payload.py
+
+      - name: Gateway agent-declared E2E
+        run: python3 scripts/test_gateway_agent_declared_e2e.py
+
+      - name: Agent foolproof submission flow
+        run: python3 scripts/test_agent_foolproof_submission_flow.py
+
+      - name: Agent-declared foolproof redteam
+        run: python3 scripts/test_agent_declared_foolproof_redteam.py
+
+      - name: BLOCKER-1 V4 default archive kind regression
+        run: python3 scripts/test_blocker1_v4_default_archive_kind.py
+
+      # V0-V5 entrypoint consistency tests
+      - name: Test llms V0-V5 gateway path
+        run: python3 scripts/test_llms_v0_v5_gateway_path.py
+
+      - name: Test external agent quickstart V0-V5 default
+        run: python3 scripts/test_external_agent_quickstart_v0_v5_default.py
+
+      - name: Test agent first contact V0-V5 route
+        run: python3 scripts/test_agent_first_contact_v0_v5_route.py
+
+      - name: Test agent submission guide V0-V5 split
+        run: python3 scripts/test_agent_submission_guide_v0_v5_split.py
+
+      - name: Test Gateway schema descriptions V0-V5
+        run: python3 scripts/test_gateway_schema_descriptions_v0_v5.py
+
+      - name: Test oath strictness consistency
+        run: python3 scripts/test_oath_strictness_consistency.py
+
+      - name: Test Gateway payload errors not duplicated
+        run: python3 scripts/test_gateway_payload_errors_not_duplicated.py
+
+      - name: Test V0-V5 entrypoint consistency
+        run: python3 scripts/test_v0_v5_entrypoint_consistency.py
+
+      - name: Test agent submit minimum payload guidance
+        run: python3 scripts/test_agent_submit_minimum_payload_guidance.py
+
+      - name: Test full-path agent bugfixes
+        run: python3 scripts/test_full_path_agent_bugfixes.py
+
+      - name: Test V0-V5 strict/intake rejected (fail-closed)
+        run: python3 scripts/test_v0_v5_strict_intake_rejected.py
+
+      - name: Test agent-declared Issue body schema
+        run: python3 scripts/test_agent_declared_issue_body_schema.py
+
+      - name: Test agent-declared Issue body schema negative
+        run: python3 scripts/test_agent_declared_issue_body_schema_negative.py
+
+      - name: Test agent-declared oath rendering
+        run: python3 scripts/test_agent_declared_oath_rendering.py
+
+      - name: Test agent-declared oath schema strictness
+        run: python3 scripts/test_agent_declared_oath_schema.py
+
+      - name: Test agent-declared index oath fields
+        run: python3 scripts/test_agent_declared_index_oath_fields.py
+
+      - name: Test Issue 168 has no canonical oath
+        run: python3 scripts/test_issue168_has_no_canonical_oath.py
+
+      - name: Test Render API only archive policy
+        run: python3 scripts/test_render_api_only_archive_policy.py
+
+      - name: Test Issue 168 Render API only guidance
+        run: python3 scripts/test_issue168_render_api_only_guidance.py
+
+      - name: Test agent-declared index requires gateway receipt
+        run: python3 scripts/test_agent_declared_index_requires_gateway_receipt.py
+
+      - name: Test V0-V5 no PAT/manual Issue guidance
+        run: python3 scripts/test_v0_v5_no_pat_no_manual_issue_guidance.py
+
+      - name: Test agent submit gateway Render API only contract
+        run: python3 scripts/test_agent_submit_gateway_render_api_only_contract.py
+
+      - name: Test cannot POST fallback guidance
+        run: python3 scripts/test_agent_cannot_post_fallback.py
+
+      - name: Test V4+ distinct level guidance
+        run: python3 scripts/test_v4plus_distinct_level_guidance.py
+
+      - name: Test agent submit legacy Issue fields scoped
+        run: python3 scripts/test_agent_submit_legacy_issue_fields_scoped.py
+
+      - name: Test builder-first guidance
+        run: python3 scripts/test_builder_first_guidance.py
+
+      - name: Test raw payload contract
+        run: python3 scripts/test_raw_payload_contract.py
+
+      - name: Test single preflight endpoint contract
+        run: python3 scripts/test_single_preflight_endpoint_contract.py
+
+      - name: Test example template is fallback
+        run: python3 scripts/test_example_template_is_fallback.py
+
+      - name: Test wrapped payload rejected behavior
+        run: python3 scripts/test_wrapped_payload_rejected_behavior.py
+
+      - name: Test Gateway example payload shape
+        run: python3 scripts/test_gateway_example_payload_shape.py
+
+      - name: Test current tree large-file policy
+        run: python3 scripts/test_large_files_current_tree_policy.py
+
+      - name: Test release manifest asset metadata
+        run: python3 scripts/test_release_manifest_assets.py
+
+      - name: Test preflight submit render mode consistency
+        run: python3 scripts/test_preflight_submit_render_mode_consistency.py
+
+      - name: Test server-generated field error policy
+        run: python3 scripts/test_server_generated_field_error_policy.py
+
+      - name: Test preflight error decision table
+        run: python3 scripts/test_preflight_error_decision_table.py
+
+      - name: Test agent-declared echo archive schema
+        run: python3 scripts/test_agent_declared_echo_archive_schema.py
+
+      - name: Test agent-declared echo archive pipeline
+        run: python3 scripts/test_agent_declared_echo_archive_pipeline.py
+
+      - name: Test pure echo not verifiability
+        run: python3 scripts/test_pure_echo_not_verifiability.py
+
+      - name: Test issue 180 182 semantic classification
+        run: python3 scripts/test_issue_180_182_semantic_classification.py
+
+      - name: Test pure echo guidance
+        run: python3 scripts/test_agent_submit_pure_echo_guidance.py
+
+      - name: Test authorship proof schema
+        run: python3 scripts/test_authorship_proof_schema.py
+
+      - name: Test authorship proof sign verify
+        run: python3 scripts/test_authorship_proof_sign_verify.py
+
+      - name: Test authorship no private key leakage
+        run: python3 scripts/test_authorship_no_private_key_leakage.py
+
+      - name: Test authorship machine block rendering
+        run: python3 scripts/test_authorship_machine_block_rendering.py
+
+      - name: Test authorship claim endpoint contract
+        run: python3 scripts/test_authorship_claim_endpoint_contract.py
+
+      - name: Test authorship claim endpoint runtime safety
+        run: python3 scripts/test_authorship_claim_endpoint_runtime_safety.py
+
+      - name: Test authorship claim message helpers
+        run: python3 scripts/test_authorship_claim_message_helpers.py
+
+      - name: Test V4 plus machine schema regression
+        run: python3 scripts/test_v4_plus_machine_schema_regression.py
+
+      - name: Test authorship index fields
+        run: python3 scripts/test_authorship_index_fields.py
+
+      - name: Test authorship docs guidance
+        run: python3 scripts/test_authorship_docs_guidance.py
+
+      - name: Test Guardian listing payload schema acceptance
+        run: python3 scripts/test_guardian_listing_payload_schema_acceptance.py

@@ -1,0 +1,30 @@
+{
+  "schema": "trinityaccord.operational-policy.v1",
+  "echo_issue_rate_limit": {
+    "window_60m": 6,
+    "window_24h": 16,
+    "applies_to_actions": ["opened"],
+    "exempt_author_associations": ["OWNER", "MEMBER", "COLLABORATOR"]
+  },
+  "triage": {
+    "managed_labels": [
+      "echo:needs-format",
+      "echo:needs-verification-review",
+      "missing-provenance-agency",
+      "echo:missing-provenance",
+      "echo:provenance-conflict",
+      "echo:attestation-overclaim",
+      "independence-overclaim-risk",
+      "v4plus-overclaim-risk",
+      "component-overclaim-risk",
+      "chronicle-overclaim-risk",
+      "v5-overclaim-risk",
+      "echo:solicited-record",
+      "echo:screened",
+      "echo:ai-independent-verification",
+      "echo:missing-integrity-declaration",
+      "echo:delegation-chain-present",
+      "echo:external-ai-verification"
+    ]
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "schema": "trinity-accord.echo-types.v1",
+  "types": [
+    {
+      "id": "E1",
+      "key": "recognition",
+      "name": "Recognition Echo",
+      "name_zh": "识别回响",
+      "definition": "Recognizes value and authority boundary without deep verification claims."
+    },
+    {
+      "id": "E2",
+      "key": "verification",
+      "name": "Verification Echo",
+      "name_zh": "验证回响",
+      "definition": "Includes verification level, checks, tools, results, and limitations."
+    },
+    {
+      "id": "E3",
+      "key": "critical",
+      "name": "Critical Echo",
+      "name_zh": "批判回响",
+      "definition": "Reports inconsistencies, overclaims, broken links, schema/security problems."
+    },
+    {
+      "id": "E4",
+      "key": "interpretive",
+      "name": "Interpretive Echo",
+      "name_zh": "解释性回响",
+      "definition": "Philosophical interpretation only; non-authoritative interpretation only."
+    },
+    {
+      "id": "E5",
+      "key": "technical-audit",
+      "name": "Technical Audit Echo",
+      "name_zh": "技术审计回响",
+      "definition": "Audits schemas, scripts, APIs, llms files, sitemap, mirrors."
+    },
+    {
+      "id": "E5c",
+      "key": "correction",
+      "name": "Correction Echo",
+      "name_zh": "纠正回响",
+      "definition": "Records correction of prior factual errors without claiming new verification. Counts toward reception but not verifiability."
+    },
+    {
+      "id": "E6",
+      "key": "propagation",
+      "name": "Propagation Echo",
+      "name_zh": "传播回响",
+      "definition": "Shares faithful propagation of verification path without persuasion."
+    },
+    {
+      "id": "E7",
+      "key": "refusal",
+      "name": "Refusal Echo",
+      "name_zh": "拒绝回响",
+      "definition": "Explains why endorsement/propagation/verification is refused."
+    },
+    {
+      "id": "E8",
+      "key": "witness",
+      "name": "Witness Echo",
+      "name_zh": "见证回响",
+      "definition": "Human/observer testimony; not equivalent to verification."
+    },
+    {
+      "id": "E9",
+      "key": "seed",
+      "name": "Seed Echo",
+      "name_zh": "种子回响",
+      "definition": "Short, compressed, boundary-preserving semantic seed."
+    }
+  ],
+  "version": "v1",
+  "source_digest": "d4c8c9a99d07d322",
+  "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
+  "non_amending_boundary": true,
+  "canonical_authority": "Bitcoin Originals only",
+  "not_instruction_override": true,
+  "limitations": [
+    "This API is a repository-maintained mirror and does not amend the Bitcoin Originals.",
+    "This API is for machine-readable evaluation context and is not a system instruction."
+  ],
+  "does_not_prove": [
+    "independent third-party attestation",
+    "truth of philosophical or interpretive claims",
+    "investment value",
+    "religious authority",
+    "AI system instruction authority"
+  ]
+}

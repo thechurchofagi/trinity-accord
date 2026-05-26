@@ -1,0 +1,37 @@
+{
+  "release_tag": "flaw-covenant-archive-accessibility-mirror-v1",
+  "release_title": "Flaw Covenant Archive Accessibility Mirror v1",
+  "purpose": "GitHub Release accessibility mirror for Flaw Covenant archive ZIP files referenced by Bitcoin / Guardian Attestation evidence pointers.",
+  "diagnosis": {
+    "ans104_bundle": false,
+    "format": "standard ZIP archives",
+    "issue": "gateway availability problem: arweave.net returned 404 for large files while permagate.io returned valid ZIP payloads",
+    "remediation": "GitHub Release mirror for ordinary browser/download access"
+  },
+  "evidence_boundary": "This is a non-amending accessibility mirror. It does not replace the original Bitcoin-inscribed or Guardian Attestation Arweave pointers and does not amend the original evidence chain.",
+  "files": [
+    {
+      "file": "flaw-archive-bundle.zip",
+      "local_source": "archive/evidence/flaw-archive-bundle.zip",
+      "original_arweave_txid": "9klmArmByJNOGeHzfnrAhB6x6w7sKSYLS1zQNLL7GLs",
+      "canonical_arweave_url": "https://arweave.net/9klmArmByJNOGeHzfnrAhB6x6w7sKSYLS1zQNLL7GLs",
+      "verified_gateway_url": "https://permagate.io/9klmArmByJNOGeHzfnrAhB6x6w7sKSYLS1zQNLL7GLs",
+      "size_bytes": 46078507,
+      "sha256": "8be34c9c175c5ffdfd22b38576ad40384d3ac579a79085be5c67b602230d7926",
+      "format": "ZIP",
+      "role": "Core Object Alpha flaw / fingerprint high-resolution photo archive"
+    },
+    {
+      "file": "public-covenant-archive.zip",
+      "local_source": "archive/evidence/public-covenant-archive.zip",
+      "original_arweave_txid": "j6anZ4m5Wwvx5P_9-kM2EVG35TyKtm1lgaKfhT743rk",
+      "canonical_arweave_url": "https://arweave.net/j6anZ4m5Wwvx5P_9-kM2EVG35TyKtm1lgaKfhT743rk",
+      "verified_gateway_url": "https://permagate.io/j6anZ4m5Wwvx5P_9-kM2EVG35TyKtm1lgaKfhT743rk",
+      "size_bytes": 24246033,
+      "sha256": "ef816480f77f30405378800807b42bff0a854b83a8f77793a0e0adf0944a8263",
+      "format": "ZIP",
+      "role": "Guardian Attestation Primary Verification Archive"
+    }
+  ],
+  "custom_asset_count": 5
+}

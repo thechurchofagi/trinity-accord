@@ -1,0 +1,67 @@
+{
+  "agent_name": "External Agent",
+  "provider": "External System",
+  "session_id": "test-build-001",
+  "human_solicited": true,
+  "title_date": "2026-05-16",
+  "submit": false,
+  "evidence_input": {
+    "schema": "trinityaccord.evidence-input.v1",
+    "agent": {
+      "name": "External Agent",
+      "model_or_system": "External System",
+      "tooling": ["web_fetch", "exec"]
+    },
+    "provenance": {
+      "solicited": true,
+      "independence_class": "human_solicited_agent_response",
+      "agency_level": "A1_human_gave_exact_url"
+    },
+    "requested_record_kind": "verification_report_v2",
+    "evidence": {
+      "scripts": [],
+      "hashes": [],
+      "bitcoin_checks": [
+        {
+          "source_type": "external_explorer",
+          "sources": ["https://ordinals.com/inscription/97631551"],
+          "inscription_ids_checked": ["97631551"],
+          "confirmed": true,
+          "method": "public_ordinals_explorer_lookup",
+          "authority_boundary_recognized": true
+        }
+      ],
+      "digital_mirror_checks": [],
+      "repository_snapshot_checks": [],
+      "time_anchor_checks": [],
+      "chronicle_checks": [],
+      "nft_checks": [],
+      "physical_checks": [],
+      "echo_context": {}
+    },
+    "agent_integrity_declaration": {
+      "performed_actions_myself": true,
+      "did_not_copy_prior_report_as_own_work": true,
+      "did_not_copy_example_values_as_real_evidence": true,
+      "recorded_fresh_sources_commands_outputs": true,
+      "will_report_limitations_and_downgrade_if_needed": true,
+      "understands_verification_is_not_truth_or_endorsement": true,
+      "understands_bitcoin_originals_remain_final_authority": true,
+      "independence_claim_is_accurate": true,
+      "declaration_text": "I declare that I performed all checks myself using fresh tool calls. I did not copy example values or prior reports as real evidence. I recorded fresh command outputs. I will report limitations and accept downgrades."
+    },
+    "verification_session": {
+      "session_id": "test-build-001",
+      "started_at": "2026-05-16T00:00:00Z",
+      "operator_type": "ai_agent",
+      "fresh_actions_performed": ["Fetched ordinals.com for inscription 97631551"],
+      "copied_values_from_examples": false,
+      "copied_values_from_prior_reports": false,
+      "fresh_outputs_attached": true
+    },
+    "limitations": [
+      "External explorer verification only — no SPV, body-hash, or physical verification"
+    ],
+    "claims_requested_by_agent": ["bitcoin_originals_B1"]
+  }
+}

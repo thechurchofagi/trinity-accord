@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://trinityaccord.org/api/eth-witness-schema.v1.json",
+  "title": "Trinity Accord ETH Witness Manifest",
+  "type": "object",
+  "required": ["tx_hash", "from", "to", "chainId", "input_sha256"],
+  "properties": {
+    "tx_hash": {
+      "type": "string",
+      "pattern": "^0x[a-fA-F0-9]{64}$"
+    },
+    "from": {
+      "type": "string",
+      "pattern": "^0x[a-fA-F0-9]{40}$"
+    },
+    "to": {
+      "type": "string",
+      "pattern": "^0x[a-fA-F0-9]{40}$"
+    },
+    "chainId": {
+      "type": ["string", "integer"]
+    },
+    "input_sha256": {
+      "type": "string",
+      "pattern": "^[a-fA-F0-9]{64}$"
+    },
+    "input_len": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "label": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true
+}

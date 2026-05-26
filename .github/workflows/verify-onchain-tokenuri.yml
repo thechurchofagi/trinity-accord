@@ -1,0 +1,63 @@
+name: Verify Onchain tokenURI (ETH audit)
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: 'Release tag (for manifest source)'
+        required: false
+        default: 'nft-arweave-mirror-175-v1'
+      source:
+        description: 'Data source: manifest or token_index'
+        required: false
+        default: 'manifest'
+        type: choice
+        options:
+          - manifest
+          - token_index
+      concurrency:
+        description: 'ETH call concurrency'
+        required: false
+        default: '10'
+
+jobs:
+  verify-onchain:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+    timeout-minutes: 60
+
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+        with:
+          fetch-depth: 1
+
+      - uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4
+        with:
+          node-version: '22'
+
+      - name: Run onchain tokenURI audit
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ETH_RPC_URL: ${{ secrets.ETH_RPC_URL }}
+          REPO: ${{ github.repository }}
+          ETH_CONCURRENCY: ${{ inputs.concurrency }}
+          INPUT_RELEASE_TAG: ${{ inputs.release_tag }}
+          INPUT_SOURCE: ${{ inputs.source }}
+        run: |
+          set -euo pipefail
+
+          [[ "$ETH_CONCURRENCY" =~ ^[0-9]+$ ]] || { echo "Invalid concurrency"; exit 1; }
+          [ "$ETH_CONCURRENCY" -ge 1 ] && [ "$ETH_CONCURRENCY" -le 25 ] || { echo "Concurrency out of range"; exit 1; }
+
+          node scripts/verify-onchain-tokenuri.mjs \
+            --release-tag "$INPUT_RELEASE_TAG" \
+            --source "$INPUT_SOURCE" \
+            --concurrency "$ETH_CONCURRENCY"
+
+      - name: Upload audit report
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: onchain-read-audit
+          path: ONCHAIN-READ-AUDIT.json

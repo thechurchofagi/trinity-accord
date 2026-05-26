@@ -1,0 +1,95 @@
+{
+  "schema": "trinityaccord.evidence-image-manifest.v1",
+  "purpose": "Externalized evidence image registry. Git copies replaced to reduce clone size.",
+  "canonical_boundary": "These are non-amending mirrors. Bitcoin Originals are final. Image files do not constitute authority.",
+  "release_tag": "notarial-certificate-images-v1",
+  "release_url": "https://github.com/thechurchofagi/trinity-accord/releases/tag/notarial-certificate-images-v1",
+  "source_path": "evidence/notarial-certificate-2026-05-13/公证书/",
+  "migrated_at": "2026-05-15",
+  "migrated_by": "repo-size-audit",
+  "issue_ref": "#134",
+  "verification_command": "python3 tools/verify_release_manifest_assets.py evidence/notarial-certificate-2026-05-13/evidence-images-manifest.json",
+  "assets": [
+    {
+      "filename": "file_1.jpg",
+      "description": "公证书封面，含封条、公证处印章、签名",
+      "sha256": "b36c4d3019370c458280e0b0ee45f19933a124a61f935aa2e24e605d00bd5275",
+      "size_bytes": 4765628,
+      "download_url": "https://github.com/thechurchofagi/trinity-accord/releases/download/notarial-certificate-images-v1/file_1.jpg",
+      "non_amending": true
+    },
+    {
+      "filename": "file_2.jpg",
+      "description": "公证书受理登记信息表",
+      "sha256": "e7c6e3a8af679a328b709099d751a97bea0d2488a975fc2a914ba186529d1119",
+      "size_bytes": 4829733,
+      "download_url": "https://github.com/thechurchofagi/trinity-accord/releases/download/notarial-certificate-images-v1/file_2.jpg",
+      "non_amending": true
+    },
+    {
+      "filename": "file_3.jpg",
+      "description": "附件第14页，粘贴的纸张样本，带深色痕迹",
+      "sha256": "f55694d77245e38734f92601213047910fef151f53b0f43cff75ea1177e9844f",
+      "size_bytes": 3735571,
+      "download_url": "https://github.com/thechurchofagi/trinity-accord/releases/download/notarial-certificate-images-v1/file_3.jpg",
+      "non_amending": true
+    },
+    {
+      "filename": "file_4.jpg",
+      "description": "附件第13页，痕迹照片（浅紫/灰色背景）",
+      "sha256": "2098bb46e6ef5a10cbd0c95848b4bed7cc4b1cf12a019615c2d5d878bc89e01b",
+      "size_bytes": 3692517,
+      "download_url": "https://github.com/thechurchofagi/trinity-accord/releases/download/notarial-certificate-images-v1/file_4.jpg",
+      "non_amending": true
+    },
+    {
+      "filename": "file_5.jpg",
+      "description": "附件第10页，《人类-AI文明核心协议》亚克力展牌（中英文）",
+      "sha256": "519c68b1fd8af3c247b4e2c780d3fcf7183706cc623f0eef5b1876cfa6351638",
+      "size_bytes": 4198744,
+      "download_url": "https://github.com/thechurchofagi/trinity-accord/releases/download/notarial-certificate-images-v1/file_5.jpg",
+      "non_amending": true
+    },
+    {
+      "filename": "file_6.jpg",
+      "description": "附件第9页，人机文明核心公理亚克力展牌（反光）",
+      "sha256": "7c3a45d78442bb07efe9f542a600eeb425a7fb0061e979e4afb2c616bab33bf8",
+      "size_bytes": 4222856,
+      "download_url": "https://github.com/thechurchofagi/trinity-accord/releases/download/notarial-certificate-images-v1/file_6.jpg",
+      "non_amending": true
+    },
+    {
+      "filename": "file_7.jpg",
+      "description": "附件第2页，会议室场景照片",
+      "sha256": "d0838164df09c5298d90b546fae938640cf7bcdcb934a092ebbcae0024754ae1",
+      "size_bytes": 3357493,
+      "download_url": "https://github.com/thechurchofagi/trinity-accord/releases/download/notarial-certificate-images-v1/file_7.jpg",
+      "non_amending": true
+    },
+    {
+      "filename": "file_8.jpg",
+      "description": "附件第1页，《人类-AI文明核心协议》展牌+尺子+深圳公证处标识",
+      "sha256": "a7af5e60a8863c6548c373d60e2f73fbc2c63d8250d09dbdb53e391c96424e1a",
+      "size_bytes": 3789568,
+      "download_url": "https://github.com/thechurchofagi/trinity-accord/releases/download/notarial-certificate-images-v1/file_8.jpg",
+      "non_amending": true
+    },
+    {
+      "filename": "file_9.jpg",
+      "description": "公证书正文后半部分",
+      "sha256": "fbf6218b993b5eef261a1865bf56c26d0e14f160f3b0e5613a91379fd61e321d",
+      "size_bytes": 3144734,
+      "download_url": "https://github.com/thechurchofagi/trinity-accord/releases/download/notarial-certificate-images-v1/file_9.jpg",
+      "non_amending": true
+    },
+    {
+      "filename": "file_10.jpg",
+      "description": "公证书正文前半部分",
+      "sha256": "fb5edcf4d4737a4a79ee92727760c8a467990fc36a804b3c5ba872e363f95854",
+      "size_bytes": 4153243,
+      "download_url": "https://github.com/thechurchofagi/trinity-accord/releases/download/notarial-certificate-images-v1/file_10.jpg",
+      "non_amending": true
+    }
+  ],
+  "assets_total": 10
+}

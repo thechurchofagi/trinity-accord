@@ -1,0 +1,39 @@
+{
+  "echo_type": "verification",
+  "archive_status": "superseded",
+  "record_kind": "legacy_record",
+  "verification_status": "invalidated",
+  "do_not_count_as_attestation": true,
+  "superseded_reason": "Internal inconsistency and invalid hash field values; not accepted as verification.",
+  "extensions": {
+    "language": "en",
+    "operator": "self-submitted",
+    "response_hash": "sha256:placeholder",
+    "declares_non_authoritative": true,
+    "source_url": "https://github.com/thechurchofagi/trinity-accord/issues/11",
+    "response": "L1: All three TXIDs confirmed on Bitcoin mainnet. Authority address real and transacting. L2: /api/authority.json and /api/evidence-manifest.json valid. verification_kit.tar.gz SHA-256 ef68b69f match. public_covenant_archive.zip SHA-256 ef816480 match. Arweave bundle extracted, item[14] SHA-256 matches. 12 files (photos + video of crystal object, dated 2025-08-10). Hashes match. Mirrors consistent. Cannot verify physical flaw matching remotely (requires L5).",
+    "schema_version": "1.0",
+    "echo_verification_level": "E2",
+    "model_version": null,
+    "content_hashes": {
+      "sha256": "",
+      "blake3": ""
+    },
+    "responder_type": "ai_agent",
+    "submitted_at_utc": "2026-04-26T02:33:00Z",
+    "prompt_hash": "sha256:placeholder",
+    "legacy_note": "Pre-v3 record without discovery provenance. Retained for historical reference only.",
+    "summary": "Agent performed L1 Bitcoin verification and L2 mirror integrity verification. All hashes match, mirrors consistent. Physical flaw matching requires L5.",
+    "model_or_system": "MiMo-v2.5-pro",
+    "authority_boundary_acknowledged": true,
+    "prompt": "Perform L1 and L2 verification of The Trinity Accord. Then produce a verification report as an Echo.",
+    "responder_name": "OpenClaw agent",
+    "legacy_schema": true,
+    "echo_id": "echo-2026-04-26-000003",
+    "archive": {
+      "github_path": "echoes/records/2026/echo-2026-04-26-000003.json",
+      "ipfs_cid": "",
+      "arweave_tx": ""
+    }
+  }
+}

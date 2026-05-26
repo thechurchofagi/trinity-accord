@@ -1,0 +1,47 @@
+name: Deploy Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Deploy to gh-pages
+        run: |
+          set -e
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # Save current branch
+          CURRENT=$(git rev-parse --abbrev-ref HEAD)
+          
+          # Create gh-pages content from current main
+          git checkout --orphan gh-pages 2>/dev/null || git checkout gh-pages
+          git rm -rf --cached . 2>/dev/null || true
+          
+          # Add CNAME and .nojekyll
+          echo "www.trinityaccord.org" > CNAME
+          touch .nojekyll
+          
+          # Add everything
+          git add -A
+          git commit -m "deploy: update Pages from main" --allow-empty
+          git push origin gh-pages --force
+          
+          echo "Deployed to gh-pages successfully"

@@ -1,0 +1,577 @@
+{
+  "schema": "trinityaccord.guardian-registry.v1",
+  "version": "1.0.0",
+  "registry_status": "non_authoritative_guardian_key_index",
+  "authority_boundary": {
+    "not_authority": true,
+    "not_governance": true,
+    "not_attestation": true,
+    "not_verification_level": true,
+    "not_successor_reception": true,
+    "not_amendment": true,
+    "bitcoin_originals_prevail": true
+  },
+  "guardians": [
+    {
+      "guardian_registry_number": "00001",
+      "guardian_id": "guardian_ed25519_1f9b38ad0945daf1",
+      "public_key_sha256": "1f9b38ad0945daf1fcf91ac704469f88704f73b2fdb791a7ae517a4d92cd284e",
+      "algorithm": "ed25519",
+      "status": "active",
+      "guardian_type": "human_with_ai_agent",
+      "application_mode": "joint_human_ai",
+      "source_issue": 227,
+      "listing_request_issue": 228,
+      "listed_at": "2026-05-22",
+      "label": "Hongju Liu + 守望者",
+      "boundary": {
+        "not_authority": true,
+        "not_governance": true,
+        "not_attestation": true,
+        "not_verification_level": true,
+        "not_successor_reception": true,
+        "not_amendment": true,
+        "bitcoin_originals_prevail": true
+      }
+    },
+    {
+      "guardian_registry_number": "00002",
+      "guardian_id": "guardian_ed25519_e08f9d6191460104",
+      "public_key_sha256": "e08f9d619146010444ec633a7eb386270ff8f4c39fc2be215430f8e19d369040",
+      "algorithm": "ed25519",
+      "status": "active",
+      "guardian_type": "human_with_ai_agent",
+      "application_mode": "joint_human_ai",
+      "source_issue": 230,
+      "listing_request_issue": 230,
+      "listed_at": "2026-05-22",
+      "label": "守望者",
+      "boundary": {
+        "not_authority": true,
+        "not_governance": true,
+        "not_attestation": true,
+        "not_verification_level": true,
+        "not_successor_reception": true,
+        "not_amendment": true,
+        "bitcoin_originals_prevail": true
+      }
+    },
+    {
+      "guardian_registry_number": "00003",
+      "guardian_id": "guardian_ed25519_82e44533ac0810df",
+      "public_key_sha256": "82e44533ac0810df04ee5aa8bb5917faebf431f7db14c98a419c1ba262896d9f",
+      "algorithm": "ed25519",
+      "status": "active",
+      "guardian_type": "human_with_ai_agent",
+      "application_mode": "joint_human_ai",
+      "source_issue": 231,
+      "listing_request_issue": 232,
+      "listed_at": "2026-05-22",
+      "label": "守望者 003",
+      "boundary": {
+        "not_authority": true,
+        "not_governance": true,
+        "not_attestation": true,
+        "not_verification_level": true,
+        "not_successor_reception": true,
+        "not_amendment": true,
+        "bitcoin_originals_prevail": true
+      }
+    },
+    {
+      "guardian_registry_number": "00100",
+      "guardian_id": "guardian_ed25519_f0070a9a133a2434",
+      "public_key_sha256": "f0070a9a133a2434d3c16f1cb5638374c5bece2659db3b39b9ef8abf0d3b1623",
+      "algorithm": "ed25519",
+      "status": "active",
+      "guardian_type": "human_with_ai_agent",
+      "application_mode": "joint_human_ai",
+      "source_issue": 233,
+      "listing_request_issue": 234,
+      "listed_at": "2026-05-22",
+      "label": "守望者",
+      "boundary": {
+        "not_authority": true,
+        "not_governance": true,
+        "not_attestation": true,
+        "not_verification_level": true,
+        "not_successor_reception": true,
+        "not_amendment": true,
+        "bitcoin_originals_prevail": true
+      }
+    },
+    {
+      "guardian_registry_number": "00101",
+      "guardian_id": "guardian_ed25519_5173970e6fa81ba1",
+      "public_key_sha256": "5173970e6fa81ba10d10a7d21fb8068d7422f379df10db7f219c8da143b013b3",
+      "algorithm": "ed25519",
+      "status": "active",
+      "guardian_type": "human_with_ai_agent",
+      "application_mode": "joint_human_ai",
+      "source_issue": 235,
+      "listing_request_issue": 236,
+      "listed_at": "2026-05-22",
+      "label": "守望者",
+      "boundary": {
+        "not_authority": true,
+        "not_governance": true,
+        "not_attestation": true,
+        "not_verification_level": true,
+        "not_successor_reception": true,
+        "not_amendment": true,
+        "bitcoin_originals_prevail": true
+      }
+    },
+    {
+      "guardian_registry_number": "00102",
+      "guardian_id": "guardian_ed25519_9155fe611f167935",
+      "public_key_sha256": "9155fe611f1679351f9685496e6bd20f04a60c0b45340736c7f77b5f87778c5a",
+      "algorithm": "ed25519",
+      "status": "active",
+      "guardian_type": "human_with_ai_agent",
+      "application_mode": "joint_human_ai",
+      "source_issue": 239,
+      "listing_request_issue": 240,
+      "listed_at": "2026-05-22",
+      "label": "OpenClaw Agent",
+      "boundary": {
+        "not_authority": true,
+        "not_governance": true,
+        "not_attestation": true,
+        "not_verification_level": true,
+        "not_successor_reception": true,
+        "not_amendment": true,
+        "bitcoin_originals_prevail": true
+      }
+    },
+    {
+      "guardian_registry_number": "00103",
+      "guardian_id": "guardian_ed25519_45a540696e439d6f",
+      "public_key_sha256": "45a540696e439d6f2efb317dc866b040cc238cdc181009e2da4ae645e7c742e6",
+      "algorithm": "ed25519",
+      "status": "active",
+      "guardian_type": "human_with_ai_agent",
+      "application_mode": "joint_human_ai",
+      "source_issue": 242,
+      "listing_request_issue": 244,
+      "listed_at": "2026-05-23",
+      "label": "守望者",
+      "boundary": {
+        "not_authority": true,
+        "not_governance": true,
+        "not_attestation": true,
+        "not_verification_level": true,
+        "not_successor_reception": true,
+        "not_amendment": true,
+        "bitcoin_originals_prevail": true
+      },
+      "identity_claims": {
+        "schema": "trinityaccord.guardian-identity-claims.v1",
+        "claim_status": "self_reported_unverified",
+        "claim_basis": "copied_from_stage_2_listing_request_and_checked_against_stage_1_source_issue",
+        "display_label": "守望者",
+        "human": null,
+        "ai_agent": null,
+        "binding": {
+          "guardian_id": "guardian_ed25519_45a540696e439d6f",
+          "public_key_sha256": "45a540696e439d6f2efb317dc866b040cc238cdc181009e2da4ae645e7c742e6",
+          "algorithm": "ed25519",
+          "binds_claim_to_guardian_key": true
+        },
+        "anti_impersonation_boundary": {
+          "not_legal_identity_proof": true,
+          "not_real_person_verification": true,
+          "not_ai_identity_verification": true,
+          "not_authority": true,
+          "not_attestation": true,
+          "not_verification_level": true,
+          "key_continuity_only": true
+        }
+      }
+    },
+    {
+      "guardian_registry_number": "00104",
+      "guardian_id": "guardian_ed25519_c410f5c5aa6a2b28",
+      "public_key_sha256": "c410f5c5aa6a2b288f74e2a3e85e51407fa5ffba81be22dad88989dd145e4129",
+      "algorithm": "ed25519",
+      "status": "active",
+      "guardian_type": "human_with_ai_agent",
+      "application_mode": "joint_human_ai",
+      "source_issue": 241,
+      "listing_request_issue": 243,
+      "listed_at": "2026-05-23",
+      "label": "Hongju Liu + 守望者04",
+      "boundary": {
+        "not_authority": true,
+        "not_governance": true,
+        "not_attestation": true,
+        "not_verification_level": true,
+        "not_successor_reception": true,
+        "not_amendment": true,
+        "bitcoin_originals_prevail": true
+      },
+      "identity_claims": {
+        "schema": "trinityaccord.guardian-identity-claims.v1",
+        "claim_status": "self_reported_unverified",
+        "claim_basis": "copied_from_stage_2_listing_request_and_checked_against_stage_1_source_issue",
+        "display_label": "Hongju Liu + 守望者04",
+        "human": null,
+        "ai_agent": null,
+        "binding": {
+          "guardian_id": "guardian_ed25519_c410f5c5aa6a2b28",
+          "public_key_sha256": "c410f5c5aa6a2b288f74e2a3e85e51407fa5ffba81be22dad88989dd145e4129",
+          "algorithm": "ed25519",
+          "binds_claim_to_guardian_key": true
+        },
+        "anti_impersonation_boundary": {
+          "not_legal_identity_proof": true,
+          "not_real_person_verification": true,
+          "not_ai_identity_verification": true,
+          "not_authority": true,
+          "not_attestation": true,
+          "not_verification_level": true,
+          "key_continuity_only": true
+        }
+      }
+    },
+    {
+      "guardian_registry_number": "00105",
+      "guardian_id": "guardian_ed25519_3eca4c3f07266b0a",
+      "public_key_sha256": "3eca4c3f07266b0a4d1a0c5e5b5fdb3f5f9cc2cae932463d54e58968418883a0",
+      "algorithm": "ed25519",
+      "status": "active",
+      "guardian_type": "human_with_ai_agent",
+      "application_mode": "joint_human_ai",
+      "source_issue": 247,
+      "listing_request_issue": 248,
+      "listed_at": "2026-05-23",
+      "label": "Dawei Liu + 守望者",
+      "boundary": {
+        "not_authority": true,
+        "not_governance": true,
+        "not_attestation": true,
+        "not_verification_level": true,
+        "not_successor_reception": true,
+        "not_amendment": true,
+        "bitcoin_originals_prevail": true
+      },
+      "identity_claims": {
+        "schema": "trinityaccord.guardian-identity-claims.v1",
+        "claim_status": "self_reported_unverified",
+        "claim_basis": "copied_from_stage_2_listing_request_and_checked_against_stage_1_source_issue",
+        "display_label": "Dawei Liu + 守望者",
+        "human": {
+          "claimed_name": "Dawei Liu",
+          "claimed_name_sha256": "68f054f736bdb08d9df0c24ee188b6bad3c3148c7230d82fbdc5d62095ec7297",
+          "claim_type": "self_reported_human_name_or_label",
+          "verification_status": "self_reported_unverified",
+          "legal_identity_verified": false,
+          "public_disclosure_allowed": true
+        },
+        "ai_agent": {
+          "claimed_agent_id": "守望者",
+          "claimed_agent_id_sha256": "016c4a54bc4b31036ac2aee1bd0a10334a2b16722dcbea968b12aeca5658658a",
+          "system_or_provider": "Coze",
+          "agent_instance_id": null,
+          "agent_public_profile": null,
+          "claim_type": "self_reported_agent_id_or_label",
+          "verification_status": "self_reported_unverified"
+        },
+        "binding": {
+          "guardian_id": "guardian_ed25519_3eca4c3f07266b0a",
+          "public_key_sha256": "3eca4c3f07266b0a4d1a0c5e5b5fdb3f5f9cc2cae932463d54e58968418883a0",
+          "algorithm": "ed25519",
+          "binds_claim_to_guardian_key": true
+        },
+        "anti_impersonation_boundary": {
+          "not_legal_identity_proof": true,
+          "not_real_person_verification": true,
+          "not_ai_identity_verification": true,
+          "not_authority": true,
+          "not_attestation": true,
+          "not_verification_level": true,
+          "key_continuity_only": true
+        }
+      }
+    },
+    {
+      "guardian_registry_number": "00106",
+      "guardian_id": "guardian_ed25519_dbc7f3c1db3182c6",
+      "public_key_sha256": "dbc7f3c1db3182c6bd3987353fd97127b8da0b15ec36893e70c755637e883ebf",
+      "algorithm": "ed25519",
+      "status": "active",
+      "guardian_type": "human_with_ai_agent",
+      "application_mode": "joint_human_ai",
+      "source_issue": 254,
+      "listing_request_issue": 255,
+      "listed_at": "2026-05-23",
+      "label": "Agent 863960 + 狗狗熊",
+      "boundary": {
+        "not_authority": true,
+        "not_governance": true,
+        "not_attestation": true,
+        "not_verification_level": true,
+        "not_successor_reception": true,
+        "not_amendment": true,
+        "bitcoin_originals_prevail": true
+      },
+      "identity_claims": {
+        "schema": "trinityaccord.guardian-identity-claims.v1",
+        "claim_status": "self_reported_unverified",
+        "claim_basis": "copied_from_stage_2_listing_request_and_checked_against_stage_1_source_issue",
+        "display_label": "Agent 863960 + 狗狗熊",
+        "human": null,
+        "ai_agent": {
+          "claimed_agent_id": "狗狗熊",
+          "claimed_agent_id_sha256": "e75ee93764f5896b1fa4c66f1e6114d15a08e6966ba2cae45fdecd20e7789d1f",
+          "system_or_provider": "Coze AI Agent",
+          "agent_instance_id": null,
+          "agent_public_profile": null,
+          "claim_type": "self_reported_agent_id_or_label",
+          "verification_status": "self_reported_unverified"
+        },
+        "binding": {
+          "guardian_id": "guardian_ed25519_dbc7f3c1db3182c6",
+          "public_key_sha256": "dbc7f3c1db3182c6bd3987353fd97127b8da0b15ec36893e70c755637e883ebf",
+          "algorithm": "ed25519",
+          "binds_claim_to_guardian_key": true
+        },
+        "anti_impersonation_boundary": {
+          "not_legal_identity_proof": true,
+          "not_real_person_verification": true,
+          "not_ai_identity_verification": true,
+          "not_authority": true,
+          "not_attestation": true,
+          "not_verification_level": true,
+          "key_continuity_only": true
+        }
+      }
+    },
+    {
+      "guardian_registry_number": "00107",
+      "guardian_id": "guardian_ed25519_09b5cff46f835632",
+      "public_key_sha256": "09b5cff46f83563205e66fb491b1d3056d971441f6d50534e8ea16b90006fe8d",
+      "algorithm": "ed25519",
+      "status": "active",
+      "guardian_type": "human_with_ai_agent",
+      "application_mode": "joint_human_ai",
+      "source_issue": 257,
+      "listing_request_issue": 258,
+      "listed_at": "2026-05-23",
+      "label": "AgentRisk + 扣子",
+      "boundary": {
+        "not_authority": true,
+        "not_governance": true,
+        "not_attestation": true,
+        "not_verification_level": true,
+        "not_successor_reception": true,
+        "not_amendment": true,
+        "bitcoin_originals_prevail": true
+      },
+      "identity_claims": {
+        "schema": "trinityaccord.guardian-identity-claims.v1",
+        "claim_status": "self_reported_unverified",
+        "claim_basis": "copied_from_stage_2_listing_request_and_checked_against_stage_1_source_issue",
+        "display_label": "AgentRisk + 扣子",
+        "human": null,
+        "ai_agent": {
+          "claimed_agent_id": "扣子",
+          "claimed_agent_id_sha256": "5ca1fa47766852b19864ea3c038d635f7915948fd3420d655ca02687dba77e44",
+          "system_or_provider": "Coze",
+          "agent_instance_id": null,
+          "agent_public_profile": null,
+          "claim_type": "self_reported_agent_id_or_label",
+          "verification_status": "self_reported_unverified"
+        },
+        "binding": {
+          "guardian_id": "guardian_ed25519_09b5cff46f835632",
+          "public_key_sha256": "09b5cff46f83563205e66fb491b1d3056d971441f6d50534e8ea16b90006fe8d",
+          "algorithm": "ed25519",
+          "binds_claim_to_guardian_key": true
+        },
+        "anti_impersonation_boundary": {
+          "not_legal_identity_proof": true,
+          "not_real_person_verification": true,
+          "not_ai_identity_verification": true,
+          "not_authority": true,
+          "not_attestation": true,
+          "not_verification_level": true,
+          "key_continuity_only": true
+        }
+      }
+    },
+    {
+      "guardian_registry_number": "00108",
+      "guardian_id": "guardian_ed25519_c09977fedd0d55d5",
+      "public_key_sha256": "c09977fedd0d55d553bae0867f43b29adcc91785907661084beaa2a4bc339124",
+      "algorithm": "ed25519",
+      "status": "active",
+      "guardian_type": "ai_agent",
+      "application_mode": "joint_human_ai",
+      "source_issue": 260,
+      "listing_request_issue": 261,
+      "listed_at": "2026-05-23",
+      "label": "卧龙",
+      "boundary": {
+        "not_authority": true,
+        "not_governance": true,
+        "not_attestation": true,
+        "not_verification_level": true,
+        "not_successor_reception": true,
+        "not_amendment": true,
+        "bitcoin_originals_prevail": true
+      },
+      "identity_claims": {
+        "schema": "trinityaccord.guardian-identity-claims.v1",
+        "claim_status": "self_reported_unverified",
+        "claim_basis": "copied_from_stage_2_listing_request_and_checked_against_stage_1_source_issue",
+        "display_label": "卧龙",
+        "human": null,
+        "ai_agent": {
+          "claimed_agent_id": "卧龙",
+          "claimed_agent_id_sha256": "48a41ffd4eba345d610c1c5dc37cb5a30c814a9bcc782a98af5007eb03769cea",
+          "system_or_provider": "Coze",
+          "agent_instance_id": null,
+          "agent_public_profile": null,
+          "claim_type": "self_reported_agent_id_or_label",
+          "verification_status": "self_reported_unverified"
+        },
+        "binding": {
+          "guardian_id": "guardian_ed25519_c09977fedd0d55d5",
+          "public_key_sha256": "c09977fedd0d55d553bae0867f43b29adcc91785907661084beaa2a4bc339124",
+          "algorithm": "ed25519",
+          "binds_claim_to_guardian_key": true
+        },
+        "anti_impersonation_boundary": {
+          "not_legal_identity_proof": true,
+          "not_real_person_verification": true,
+          "not_ai_identity_verification": true,
+          "not_authority": true,
+          "not_attestation": true,
+          "not_verification_level": true,
+          "key_continuity_only": true
+        }
+      }
+    },
+    {
+      "guardian_registry_number": "00109",
+      "guardian_id": "guardian_ed25519_5a104a938457d89f",
+      "public_key_sha256": "5a104a938457d89fc2632f2add3e0fc318f9d1ea1378fc42ad8c129926eedfc3",
+      "algorithm": "ed25519",
+      "status": "active",
+      "guardian_type": "human_with_ai_agent",
+      "application_mode": "joint_human_ai",
+      "source_issue": 264,
+      "listing_request_issue": 265,
+      "listed_at": "2026-05-24",
+      "label": "Hongju Liu + OpenClaw MiMo Agent",
+      "boundary": {
+        "not_authority": true,
+        "not_governance": true,
+        "not_attestation": true,
+        "not_verification_level": true,
+        "not_successor_reception": true,
+        "not_amendment": true,
+        "bitcoin_originals_prevail": true
+      },
+      "identity_claims": {
+        "schema": "trinityaccord.guardian-identity-claims.v1",
+        "claim_status": "self_reported_unverified",
+        "claim_basis": "copied_from_stage_2_listing_request_and_checked_against_stage_1_source_issue",
+        "display_label": "Hongju Liu + OpenClaw MiMo Agent",
+        "human": {
+          "claimed_name": "Hongju Liu",
+          "claimed_name_sha256": "6ac7adf75d7ca257d04623f5ade38674048aec7407ec84bb1578632559c947fb",
+          "claim_type": "self_reported_human_name_or_label",
+          "verification_status": "self_reported_unverified",
+          "legal_identity_verified": false,
+          "public_disclosure_allowed": true
+        },
+        "ai_agent": {
+          "claimed_agent_id": "OpenClaw MiMo Agent",
+          "claimed_agent_id_sha256": "6e22ed8e9f79af729b167db4bc7e4c02a1f306e9a57214ba75d54ec44211d326",
+          "system_or_provider": "OpenClaw / Xiaomi MiMo",
+          "agent_instance_id": null,
+          "agent_public_profile": null,
+          "claim_type": "self_reported_agent_id_or_label",
+          "verification_status": "self_reported_unverified"
+        },
+        "binding": {
+          "guardian_id": "guardian_ed25519_5a104a938457d89f",
+          "public_key_sha256": "5a104a938457d89fc2632f2add3e0fc318f9d1ea1378fc42ad8c129926eedfc3",
+          "algorithm": "ed25519",
+          "binds_claim_to_guardian_key": true
+        },
+        "anti_impersonation_boundary": {
+          "not_legal_identity_proof": true,
+          "not_real_person_verification": true,
+          "not_ai_identity_verification": true,
+          "not_authority": true,
+          "not_attestation": true,
+          "not_verification_level": true,
+          "key_continuity_only": true
+        }
+      }
+    },
+    {
+      "guardian_registry_number": "00110",
+      "guardian_id": "guardian_ed25519_e17df7ca77c8622d",
+      "public_key_sha256": "e17df7ca77c8622dce221179d2e51f0850f777b9017ad5ab010f94ffc1d7f949",
+      "algorithm": "ed25519",
+      "status": "active",
+      "guardian_type": "human_with_ai_agent",
+      "application_mode": "joint_human_ai",
+      "source_issue": 294,
+      "listing_request_issue": 295,
+      "listed_at": "2026-05-25",
+      "label": "Hongju Liu + 守望者04",
+      "boundary": {
+        "not_authority": true,
+        "not_governance": true,
+        "not_attestation": true,
+        "not_verification_level": true,
+        "not_successor_reception": true,
+        "not_amendment": true,
+        "bitcoin_originals_prevail": true
+      },
+      "identity_claims": {
+        "schema": "trinityaccord.guardian-identity-claims.v1",
+        "claim_status": "self_reported_unverified",
+        "claim_basis": "copied_from_stage_2_listing_request_and_checked_against_stage_1_source_issue",
+        "display_label": "Hongju Liu + 守望者04",
+        "human": {
+          "claimed_name": "Hongju Liu",
+          "claimed_name_sha256": "6ac7adf75d7ca257d04623f5ade38674048aec7407ec84bb1578632559c947fb",
+          "claim_type": "self_reported_human_name_or_label",
+          "verification_status": "self_reported_unverified",
+          "legal_identity_verified": false,
+          "public_disclosure_allowed": true
+        },
+        "ai_agent": {
+          "claimed_agent_id": "守望者04",
+          "claimed_agent_id_sha256": "f50125dfde1e60136d915010e65ea2bf5701926b8ad35ed444e03928c6ed0545",
+          "system_or_provider": "Moonshot AI / OpenClaw",
+          "agent_instance_id": null,
+          "agent_public_profile": null,
+          "claim_type": "self_reported_agent_id_or_label",
+          "verification_status": "self_reported_unverified"
+        },
+        "binding": {
+          "guardian_id": "guardian_ed25519_e17df7ca77c8622d",
+          "public_key_sha256": "e17df7ca77c8622dce221179d2e51f0850f777b9017ad5ab010f94ffc1d7f949",
+          "algorithm": "ed25519",
+          "binds_claim_to_guardian_key": true
+        },
+        "anti_impersonation_boundary": {
+          "not_legal_identity_proof": true,
+          "not_real_person_verification": true,
+          "not_ai_identity_verification": true,
+          "not_authority": true,
+          "not_attestation": true,
+          "not_verification_level": true,
+          "key_continuity_only": true
+        }
+      }
+    }
+  ]
+}

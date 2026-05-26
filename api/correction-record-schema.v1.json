@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://trinityaccord.org/api/correction-record-schema.v1.json",
+  "title": "Trinity Accord Correction / Revocation Record v1",
+  "description": "Schema for correction, revocation, supersession, and invalidation records in the corrections index.",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "id",
+    "record_type",
+    "status",
+    "is_current",
+    "historical_record_only",
+    "reason"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "record_type": {
+      "enum": [
+        "correction",
+        "revocation",
+        "supersession",
+        "invalidation",
+        "withdrawal"
+      ]
+    },
+    "status": {
+      "enum": [
+        "current",
+        "accepted_current",
+        "superseded",
+        "revoked",
+        "invalidated",
+        "withdrawn",
+        "historical_only"
+      ]
+    },
+    "is_current": {
+      "type": "boolean"
+    },
+    "historical_record_only": {
+      "type": "boolean"
+    },
+    "reason": {
+      "type": "string",
+      "minLength": 1
+    },
+    "target_record_id": {
+      "type": "string"
+    },
+    "target_record_type": {
+      "type": "string"
+    },
+    "superseded_by": {
+      "type": ["string", "null"]
+    },
+    "supersession_reason": {
+      "type": "string"
+    },
+    "revoked_at": {
+      "type": "string"
+    },
+    "revocation_reason": {
+      "type": "string"
+    },
+    "invalidated_at": {
+      "type": "string"
+    },
+    "invalidation_reason": {
+      "type": "string"
+    },
+    "corrected_at": {
+      "type": "string"
+    },
+    "correction_details": {
+      "type": "string"
+    },
+    "successor_status": {
+      "type": "string"
+    },
+    "effective_from": {
+      "type": "string"
+    },
+    "authority_boundary": {
+      "type": "string"
+    }
+  }
+}

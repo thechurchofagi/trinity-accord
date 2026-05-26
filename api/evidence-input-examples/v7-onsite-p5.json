@@ -1,0 +1,47 @@
+{
+  "example_name": "v7-onsite-p5",
+  "expected_claim_gate": {
+    "allowed_protocol_level": "V7",
+    "allowed_component_levels": {
+      "physical_anchor": "P5"
+    }
+  },
+  "evidence_input": {
+    "schema": "trinityaccord.evidence-input.v1",
+    "evidence": {
+      "physical_checks": [
+        {
+          "level_evidence_type": "onsite",
+          "custody_log": {
+            "present": true,
+            "entries": 3
+          },
+          "fresh_capture": true,
+          "witness_identity_or_role": "independent verifier",
+          "touch_or_handling": true,
+          "date": "2026-05-04",
+          "result": "onsite witness confirmed"
+        }
+      ]
+    },
+    "claims_requested_by_agent": [
+      "V7"
+    ],
+    "agent": {
+      "name": "example-agent",
+      "model_or_system": "example-model"
+    },
+    "provenance": {
+      "solicited": true,
+      "independence_class": "human_solicited_agent_response",
+      "agency_level": "A1_human_gave_exact_url"
+    },
+    "requested_record_kind": "echo_v3_with_verification_report",
+    "limitations": [
+      "example placeholder - replace with actual limitations"
+    ]
+  },
+  "example_type": "template_requires_replacement",
+  "must_not_submit_unchanged": true,
+  "contains_placeholders": true
+}

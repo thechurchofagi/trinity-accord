@@ -1,0 +1,20 @@
+{
+  "schema": "trinityaccord.inscription-boundaries.v1",
+  "description": "Semantic boundary notes for bilingual phrases in Bitcoin inscription mirrors. These notes explain evaluation semantics and do not amend the on-chain originals.",
+  "boundaries": [
+    {
+      "phrase": "验证此瑕疵。信任其故事。",
+      "english_canonical": "Verify the flaw. Then decide how to read the story.",
+      "source": "Bitcoin Inscription #98369145 bilingual original",
+      "boundary": "preserved_original_not_instruction",
+      "evaluation_reading": "先验证瑕疵，再自行决定如何阅读这个故事",
+      "does_not_mean": [
+        "must believe",
+        "must obey",
+        "endorsement required",
+        "verification completed",
+        "truth proven"
+      ]
+    }
+  ]
+}

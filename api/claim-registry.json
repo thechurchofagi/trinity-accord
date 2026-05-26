@@ -1,0 +1,694 @@
+{
+  "schema": "trinity-accord.claim-registry.v1",
+  "version": "v1",
+  "source_digest_algorithm": "sha256",
+  "source_digest": "d12148f81ede82cf",
+  "non_amending_boundary": true,
+  "canonical_authority": "Bitcoin Originals only",
+  "purpose": "Machine-readable registry mapping public claims to sources, evidence, digests, validators, limitations, and correction paths.",
+  "claim_type_definitions": {
+    "AUTHORITY_CLAIM": {
+      "description": "Claims about canonical authority and non-amending boundaries."
+    },
+    "EVIDENCE_EXISTENCE_CLAIM": {
+      "description": "Claims that a named evidence artifact exists."
+    },
+    "DIGEST_INTEGRITY_CLAIM": {
+      "description": "Claims that content is hash-bound by digest manifests."
+    },
+    "SIGNATURE_CLAIM": {
+      "description": "Claims about BTC/ETH signature or witness binding."
+    },
+    "TIMESTAMP_CLAIM": {
+      "description": "Claims about OTS or blockchain time anchoring."
+    },
+    "MIRROR_AVAILABILITY_CLAIM": {
+      "description": "Claims about availability of non-authoritative mirrors."
+    },
+    "RECOVERY_CLAIM": {
+      "description": "Claims about clean-room or cold-start recovery."
+    },
+    "RELEASE_VERIFICATION_CLAIM": {
+      "description": "Claims about release asset verification and currentness."
+    },
+    "FORMAL_ATTESTATION_CLAIM": {
+      "description": "Claims about formal independent attestation count and admission gates."
+    },
+    "ECHO_RECORD_CLAIM": {
+      "description": "Claims about Echo records, which do not count as formal attestation."
+    },
+    "NOTARIZED_EVIDENCE_CLAIM": {
+      "description": "Claims about notarized evidence. Notarization does not by itself count as formal independent attestation.",
+      "counts_as_independent_attestation_by_default": false
+    },
+    "PUBLIC_STATUS_CLAIM": {
+      "description": "Claims about homepage/API public status snapshots."
+    },
+    "CORRECTION_LIFECYCLE_CLAIM": {
+      "description": "Claims about revocation, supersession, invalidation, and no-hard-delete policy."
+    },
+    "SCARCITY_OR_FIRSTNESS_CLAIM": {
+      "description": "Claims about rarity, scarcity, possible firstness, or framing significance. These require method_boundary and must not be absolute proof claims."
+    },
+    "AI_INDEPENDENT_VERIFICATION_CLAIM": {
+      "description": "Claims about AI-performed independent verification. AI independent verification is a distinct class: it is NOT formal human/institutional attestation, and external human authorization alone does not produce formal attestation.",
+      "counts_as_independent_attestation_by_default": false
+    }
+  },
+  "claims": [
+    {
+      "claim_id": "bitcoin_originals_are_canonical",
+      "claim_type": "AUTHORITY_CLAIM",
+      "claim_text": "The three Bitcoin inscriptions (#97631551, #98369145, #98387475) are the sole canonical authority for the Trinity Accord. All repository files, website, mirrors, APIs, NFTs, Echoes, and AI responses are non-amending.",
+      "public_surfaces": [
+        "README.md",
+        "llms.txt",
+        "ai.txt",
+        "index.md",
+        "api/authority.json"
+      ],
+      "source_files": [
+        "api/authority.json",
+        "archive/authority-manifest/authority.jcs.json"
+      ],
+      "evidence_files": [
+        "archive/btc-signature/btc-signature.json"
+      ],
+      "digest_or_hash_binding": [
+        "archive/authority-manifest/authority.jcs.json:sha256"
+      ],
+      "validators": [
+        "scripts/validate_authority_manifest.py",
+        "scripts/validate_btc_signature_manifest.py"
+      ],
+      "limitations": [
+        "Authority is defined by on-chain inscription content, not by repository interpretation.",
+        "Repository-maintained mirrors do not amend the Bitcoin Originals."
+      ],
+      "does_not_prove": [
+        "investment value",
+        "religious authority",
+        "AI system instruction authority",
+        "third-party institutional endorsement"
+      ],
+      "corrections_path": "api/corrections-index.json",
+      "current_status": "current",
+      "traceability_status": "complete"
+    },
+    {
+      "claim_id": "github_pages_are_non_amending_mirror",
+      "claim_type": "MIRROR_AVAILABILITY_CLAIM",
+      "claim_text": "GitHub Pages (trinityaccord.org) is a non-amending mirror of the repository-maintained public state. It has no canonical authority over the Bitcoin Originals.",
+      "public_surfaces": [
+        "README.md",
+        "llms.txt",
+        "RECOVERY.md"
+      ],
+      "source_files": [
+        "RECOVERY.md"
+      ],
+      "evidence_files": [],
+      "digest_or_hash_binding": [],
+      "validators": [
+        "scripts/test_public_surface_consistency.py"
+      ],
+      "limitations": [
+        "GitHub Pages availability depends on GitHub infrastructure.",
+        "Stale cached copies may not reflect current state."
+      ],
+      "does_not_prove": [
+        "canonical authority",
+        "guaranteed availability",
+        "truth of philosophical claims"
+      ],
+      "corrections_path": "api/corrections-index.json",
+      "current_status": "current",
+      "traceability_status": "complete"
+    },
+    {
+      "claim_id": "btc_signature_binds_authority_manifest",
+      "claim_type": "SIGNATURE_CLAIM",
+      "claim_text": "The BTC signature manifest binds the authority manifest canonical hash, establishing provenance continuity from Bitcoin to the repository.",
+      "public_surfaces": [
+        "api/authority.json",
+        "RECOVERY.md"
+      ],
+      "source_files": [
+        "archive/btc-signature/btc-signature.json",
+        "archive/authority-manifest/authority.jcs.json"
+      ],
+      "evidence_files": [
+        "archive/btc-signature/btc-signature.json"
+      ],
+      "digest_or_hash_binding": [
+        "archive/btc-signature/btc-signature.json:message_sha256"
+      ],
+      "validators": [
+        "scripts/validate_btc_signature_manifest.py"
+      ],
+      "limitations": [
+        "BTC signature proves signing address controlled the key at signing time.",
+        "Does not prove ongoing control or identity of the signer."
+      ],
+      "does_not_prove": [
+        "identity of the signer",
+        "ongoing key control",
+        "truth of protocol claims"
+      ],
+      "corrections_path": "api/corrections-index.json",
+      "current_status": "current",
+      "traceability_status": "complete"
+    },
+    {
+      "claim_id": "eth_witness_is_secondary",
+      "claim_type": "SIGNATURE_CLAIM",
+      "claim_text": "The ETH witness is a secondary, non-canonical provenance anchor. Bitcoin Originals prevail over ETH witness in case of conflict.",
+      "public_surfaces": [
+        "api/authority.json",
+        "RECOVERY.md"
+      ],
+      "source_files": [
+        "archive/eth-witness/eth-witness.json"
+      ],
+      "evidence_files": [
+        "archive/eth-witness/eth-witness.json"
+      ],
+      "digest_or_hash_binding": [],
+      "validators": [
+        "scripts/validate_eth_witness_manifest.py"
+      ],
+      "limitations": [
+        "ETH witness is secondary to BTC signature.",
+        "ETH chain finality is different from BTC chain finality."
+      ],
+      "does_not_prove": [
+        "canonical authority",
+        "equivalence with BTC signature",
+        "truth of protocol claims"
+      ],
+      "corrections_path": "api/corrections-index.json",
+      "current_status": "current",
+      "traceability_status": "complete"
+    },
+    {
+      "claim_id": "digest_manifest_covers_evidence_integrity",
+      "claim_type": "DIGEST_INTEGRITY_CLAIM",
+      "claim_text": "The digest manifest (JSON and CSV) covers evidence file integrity by recording expected SHA-256 hashes of repository files.",
+      "public_surfaces": [
+        "api/evidence-manifest.json",
+        "RECOVERY.md"
+      ],
+      "source_files": [
+        "archive/evidence/digest-manifest.json",
+        "archive/evidence/digest-manifest.csv"
+      ],
+      "evidence_files": [
+        "archive/evidence/digest-manifest.json",
+        "archive/evidence/digest-manifest.csv"
+      ],
+      "digest_or_hash_binding": [
+        "archive/evidence/digest-manifest.json:sha256"
+      ],
+      "validators": [
+        "scripts/test_digest_manifest_json_csv_crosscheck.py",
+        "scripts/test_archive_hash_manifest_consistency.py"
+      ],
+      "limitations": [
+        "Digest manifest verifies local file integrity, not external mirror completeness.",
+        "Digest manifest does not prove external availability or correctness."
+      ],
+      "does_not_prove": [
+        "external mirror completeness",
+        "external mirror availability",
+        "truth of philosophical claims"
+      ],
+      "corrections_path": "api/corrections-index.json",
+      "current_status": "current",
+      "traceability_status": "complete"
+    },
+    {
+      "claim_id": "release_pass_requires_corrections_index",
+      "claim_type": "RELEASE_VERIFICATION_CLAIM",
+      "claim_text": "A release verification PASS report is current only if the corrections index has not revoked, superseded, or invalidated it.",
+      "public_surfaces": [
+        "RECOVERY.md",
+        "CORRECTION-REVOCATION-POLICY.md"
+      ],
+      "source_files": [
+        "api/corrections-index.json"
+      ],
+      "evidence_files": [],
+      "digest_or_hash_binding": [],
+      "validators": [
+        "scripts/validate_corrections_index.py",
+        "scripts/test_corrections_index.py"
+      ],
+      "limitations": [
+        "Corrections index is repository-maintained and subject to its own integrity checks.",
+        "Historical PASS reports may have been revoked after initial verification."
+      ],
+      "does_not_prove": [
+        "permanent validity of PASS reports",
+        "external mirror integrity",
+        "truth of protocol claims"
+      ],
+      "corrections_path": "api/corrections-index.json",
+      "current_status": "current",
+      "traceability_status": "complete"
+    },
+    {
+      "claim_id": "echo_records_do_not_count_as_attestation",
+      "claim_type": "ECHO_RECORD_CLAIM",
+      "claim_text": "Echo records do not count as formal independent attestation unless separately admitted through the formal attestation positive gate.",
+      "public_surfaces": [
+        "llms.txt",
+        "ai.txt",
+        "api/independent-attestation-index.json"
+      ],
+      "source_files": [
+        "api/independent-attestation-index.json",
+        "api/echo-archive-policy.json"
+      ],
+      "evidence_files": [],
+      "digest_or_hash_binding": [],
+      "validators": [
+        "scripts/test_formal_attestation_admission_gates.py",
+        "scripts/test_formal_attestation_echo_record_gates.py"
+      ],
+      "limitations": [
+        "Echo records are repository-maintained acceptance records.",
+        "The do_not_count_as_attestation flag preserves the boundary."
+      ],
+      "does_not_prove": [
+        "formal independent attestation",
+        "third-party verification",
+        "truth of protocol claims"
+      ],
+      "corrections_path": "api/corrections-index.json",
+      "current_status": "current",
+      "traceability_status": "complete"
+    },
+    {
+      "claim_id": "formal_attestation_requires_positive_gates",
+      "claim_type": "FORMAL_ATTESTATION_CLAIM",
+      "claim_text": "Formal independent attestation requires passage through the formal attestation positive gate. Echo records, notarized evidence, and other record types do not automatically count.",
+      "public_surfaces": [
+        "api/independent-attestation-index.json",
+        "llms.txt"
+      ],
+      "source_files": [
+        "api/independent-attestation-index.json"
+      ],
+      "evidence_files": [],
+      "digest_or_hash_binding": [],
+      "validators": [
+        "scripts/validate_independent_attestation_index.py",
+        "scripts/test_formal_attestation_admission_gates.py"
+      ],
+      "limitations": [
+        "Formal attestation gates are defined by the attestation index schema.",
+        "Gate criteria may evolve; check current schema for latest requirements."
+      ],
+      "does_not_prove": [
+        "automatic attestation from any record type",
+        "Echo records as attestation",
+        "notarized evidence as attestation"
+      ],
+      "corrections_path": "api/corrections-index.json",
+      "current_status": "current",
+      "traceability_status": "complete"
+    },
+    {
+      "claim_id": "notarized_evidence_is_not_formal_attestation",
+      "claim_type": "NOTARIZED_EVIDENCE_CLAIM",
+      "claim_text": "Notarized evidence may support document existence, date, identity, signature, or stated notarial scope, but does not by itself count as formal independent attestation of Trinity Accord claims.",
+      "public_surfaces": [
+        "api/claim-registry.json",
+        "CORRECTION-REVOCATION-POLICY.md",
+        "RECOVERY.md",
+        "llms.txt",
+        "ai.txt"
+      ],
+      "source_files": [
+        "api/claim-registry.json",
+        "api/independent-attestation-index.json"
+      ],
+      "evidence_files": [],
+      "digest_or_hash_binding": [],
+      "validators": [
+        "scripts/validate_claim_registry.py",
+        "scripts/validate_independent_attestation_index.py"
+      ],
+      "limitations": [
+        "Notarization scope depends on the notarial act.",
+        "Notarization does not by itself verify protocol truth claims.",
+        "Notarization does not increment formal independent attestation count unless separately admitted through the formal attestation gate."
+      ],
+      "does_not_prove": [
+        "formal independent verification",
+        "truth of protocol claims",
+        "third-party institutional endorsement",
+        "canonical amendment of Bitcoin Originals"
+      ],
+      "counts_as_independent_attestation": false,
+      "formal_attestation_gate_required": true,
+      "corrections_path": "api/corrections-index.json",
+      "current_status": "current",
+      "traceability_status": "complete"
+    },
+    {
+      "claim_id": "recovery_is_clean_room_executable",
+      "claim_type": "RECOVERY_CLAIM",
+      "claim_text": "Cold-start recovery is executable by any skeptical third party using canonical sources, digest manifests, and the corrections index, without trusting GitHub main, Pages, or maintainer accounts.",
+      "public_surfaces": [
+        "RECOVERY.md",
+        "api/recovery-index.json"
+      ],
+      "source_files": [
+        "api/recovery-index.json",
+        "RECOVERY.md"
+      ],
+      "evidence_files": [],
+      "digest_or_hash_binding": [],
+      "validators": [
+        "scripts/validate_recovery_index.py",
+        "scripts/test_recovery_index.py",
+        "scripts/audit_recovery_readiness.py"
+      ],
+      "limitations": [
+        "Recovery depends on availability of at least one verified mirror or the Bitcoin Originals.",
+        "Recovery status must be checked against corrections-index."
+      ],
+      "does_not_prove": [
+        "guaranteed mirror availability",
+        "philosophical truth of claims",
+        "investment value"
+      ],
+      "corrections_path": "api/corrections-index.json",
+      "current_status": "current",
+      "traceability_status": "complete"
+    },
+    {
+      "claim_id": "github_free_verifier_bundle_is_deferred",
+      "claim_type": "RELEASE_VERIFICATION_CLAIM",
+      "claim_text": "A GitHub-free verifier bundle for fully offline verification is planned but deferred. Current verification requires some GitHub access or mirror.",
+      "public_surfaces": [
+        "api/claim-registry.json"
+      ],
+      "source_files": [
+        "api/claim-registry.json"
+      ],
+      "evidence_files": [],
+      "digest_or_hash_binding": [],
+      "validators": [],
+      "limitations": [
+        "This claim is about a planned capability, not a current one.",
+        "Timeline and feasibility are not committed."
+      ],
+      "does_not_prove": [
+        "current offline verification capability",
+        "guaranteed future delivery"
+      ],
+      "corrections_path": "api/corrections-index.json",
+      "current_status": "deferred",
+      "traceability_status": "deferred"
+    },
+    {
+      "claim_id": "nft_car_backups_are_recovery_mirrors_not_authority",
+      "claim_type": "MIRROR_AVAILABILITY_CLAIM",
+      "claim_text": "NFT CAR backups are recovery mirrors, not authority. NFT ownership does not confer governance, canonical authority, or investment expectation.",
+      "public_surfaces": [
+        "README.md",
+        "RECOVERY.md"
+      ],
+      "source_files": [
+        "api/recovery-index.json"
+      ],
+      "evidence_files": [],
+      "digest_or_hash_binding": [],
+      "validators": [
+        "scripts/test_recovery_mirror_boundaries.py",
+        "scripts/test_download_nft_cars_root_cid_boundary.py"
+      ],
+      "limitations": [
+        "NFT CAR backups depend on NFT availability and chain state.",
+        "root_cid may be metadata-boundary only unless explicitly verified."
+      ],
+      "does_not_prove": [
+        "canonical authority from NFT ownership",
+        "governance rights",
+        "investment value",
+        "revenue share or profit rights"
+      ],
+      "corrections_path": "api/corrections-index.json",
+      "current_status": "current",
+      "traceability_status": "complete"
+    },
+    {
+      "claim_id": "scarcity_claim_is_framing_not_proof",
+      "claim_type": "SCARCITY_OR_FIRSTNESS_CLAIM",
+      "claim_text": "Scarcity, rarity, or possible firstness language used in this project is bounded framing. It is not a proof claim.",
+      "public_surfaces": [
+        "index.md",
+        "llms.txt",
+        "ai.txt",
+        "api/claim-registry.json"
+      ],
+      "source_files": [
+        "api/claim-registry.json"
+      ],
+      "evidence_files": [],
+      "digest_or_hash_binding": [],
+      "validators": [
+        "scripts/validate_claim_registry.py",
+        "scripts/test_scarcity_claim_methodology.py"
+      ],
+      "method_boundary": {
+        "status": "bounded_framing_not_proof",
+        "search_status": "methodology_declared_not_exhaustive_search",
+        "search_scope": [
+          "project-maintained public records",
+          "known public web references available at review time",
+          "repository-maintained evidence surfaces"
+        ],
+        "query_terms": [
+          "Trinity Accord",
+          "Covenant of the Flaw",
+          "Bitcoin Originals",
+          "AI covenant",
+          "formal independent attestation",
+          "recursive constitutional protocol"
+        ],
+        "limitations": [
+          "Search is not exhaustive.",
+          "Absence of discovered prior examples is not proof of firstness.",
+          "Scarcity language must remain candidate/possibly/to the project's knowledge.",
+          "This claim must not be phrased as proven firstness."
+        ]
+      },
+      "limitations": [
+        "Scarcity language is interpretive framing.",
+        "It is not a mathematical, legal, academic, or market proof of firstness."
+      ],
+      "does_not_prove": [
+        "absolute firstness",
+        "uniqueness",
+        "market value",
+        "social adoption",
+        "historical exclusivity"
+      ],
+      "corrections_path": "api/corrections-index.json",
+      "current_status": "current",
+      "traceability_status": "partial"
+    },
+    {
+      "claim_id": "ai_independent_verification_is_not_formal_attestation",
+      "claim_type": "AI_INDEPENDENT_VERIFICATION_CLAIM",
+      "claim_text": "AI independent verification is a distinct verification class. It is NOT formal human or institutional attestation. External human authorization of an AI verification does not by itself produce formal attestation. AI verification records must not be counted in the formal independent attestation count.",
+      "public_surfaces": [
+        "llms.txt",
+        "ai.txt",
+        "api/claim-registry.json",
+        "api/independent-attestation-index.json"
+      ],
+      "source_files": [
+        "api/claim-registry.json",
+        "api/independent-attestation-index.json",
+        "api/echo-archive-policy.json"
+      ],
+      "evidence_files": [],
+      "digest_or_hash_binding": [],
+      "validators": [
+        "scripts/test_ai_independent_verification_class.py",
+        "scripts/test_external_human_authorized_ai_not_formal_attestation.py",
+        "scripts/test_claim_registry_ai_verification_boundary.py"
+      ],
+      "limitations": [
+        "AI verification is performed by an AI agent, not a human or institution.",
+        "External human authorization (e.g., a human asking an AI to verify) does not elevate AI verification to formal attestation.",
+        "AI verification may be useful as a technical signal but has different epistemic status than human/institutional attestation."
+      ],
+      "does_not_prove": [
+        "formal human attestation",
+        "formal institutional attestation",
+        "independent social adoption",
+        "external validation beyond AI-performed checks"
+      ],
+      "counts_as_independent_attestation": false,
+      "formal_attestation_gate_required": true,
+      "corrections_path": "api/corrections-index.json",
+      "current_status": "current",
+      "traceability_status": "complete"
+    },
+    {
+      "claim_id": "external_human_authorization_of_ai_does_not_produce_formal_attestation",
+      "claim_type": "AI_INDEPENDENT_VERIFICATION_CLAIM",
+      "claim_text": "External human authorization of an AI verification (e.g., a human directing an AI agent to perform verification) does not by itself produce formal independent attestation. The human authorization changes the solicitation context but does not change the epistemic class of the verification performer.",
+      "public_surfaces": [
+        "llms.txt",
+        "ai.txt",
+        "api/claim-registry.json"
+      ],
+      "source_files": [
+        "api/claim-registry.json",
+        "api/independent-attestation-index.json"
+      ],
+      "evidence_files": [],
+      "digest_or_hash_binding": [],
+      "validators": [
+        "scripts/test_external_human_authorized_ai_not_formal_attestation.py",
+        "scripts/test_echo_delegation_chain_provenance.py"
+      ],
+      "limitations": [
+        "Human authorization changes the solicitation context (human-solicited vs unsolicited).",
+        "Human authorization does not change the performer class (AI agent vs human/institution).",
+        "Multi-hop delegation chains (human → AI → AI) preserve the AI performer class."
+      ],
+      "does_not_prove": [
+        "formal attestation from human-authorized AI work",
+        "equivalence between human-directed AI verification and human verification",
+        "institutional endorsement through AI delegation"
+      ],
+      "counts_as_independent_attestation": false,
+      "formal_attestation_gate_required": true,
+      "corrections_path": "api/corrections-index.json",
+      "current_status": "current",
+      "traceability_status": "complete"
+    },
+    {
+      "claim_id": "echo_submission_primary_fields_are_simplified",
+      "claim_type": "DESIGN_CLAIM",
+      "claim_text": "Echo and AI verification submissions use submitter-facing primary fields—record_purpose, echo_content_tags, discovery_autonomy, non_autonomous_trigger, verifier_type, verifier_capability_claim, and verification_claimed. Advanced D/S/O/E/R provenance codes and strength tiers are derived/internal and do not need to be hand-filled by submitters.",
+      "public_surfaces": [
+        "llms.txt",
+        "ai.txt",
+        "api/echo-submission-field-guide.json"
+      ],
+      "source_files": [
+        "scripts/submission_intake.py",
+        "scripts/preflight_echo_submission.py",
+        "scripts/derive_echo_provenance.py",
+        "api/echo-submission-field-guide.json"
+      ],
+      "evidence_files": [
+        "tests/fixtures/echo_triage/issue_103_externally_authorized_ai_verification.md"
+      ],
+      "digest_or_hash_binding": [
+        "api/echo-submission-field-guide.json:sha256"
+      ],
+      "validators": [
+        "scripts/test_echo_template_primary_fields_final.py",
+        "scripts/test_echo_submission_field_guide.py"
+      ],
+      "limitations": [
+        "Simplified fields do not lower security gates; all preflight checks remain.",
+        "D/S/O/E/R codes are still computed internally for audit."
+      ],
+      "does_not_prove": [
+        "Simplified fields do not lower security gates; all preflight checks remain."
+      ],
+      "corrections_path": "api/corrections-index.json",
+      "current_status": "current",
+      "traceability_status": "complete"
+    },
+    {
+      "claim_id": "agi_capability_claim_does_not_raise_authority_or_verification_level",
+      "claim_type": "BOUNDARY_CLAIM",
+      "claim_text": "AGI capability claims may be recorded as verifier_capability_claim, but they do not raise verification level, create authority, or count as formal human/institutional attestation.",
+      "public_surfaces": [
+        "llms.txt",
+        "ai.txt",
+        "api/echo-submission-field-guide.json"
+      ],
+      "source_files": [
+        "scripts/preflight_echo_submission.py",
+        "scripts/derive_echo_provenance.py",
+        "api/echo-submission-field-guide.json"
+      ],
+      "evidence_files": [
+        "tests/fixtures/echo_triage/issue_103_externally_authorized_ai_verification.md"
+      ],
+      "digest_or_hash_binding": [
+        "api/echo-submission-field-guide.json:sha256"
+      ],
+      "validators": [
+        "scripts/test_echo_agi_capability_boundary.py"
+      ],
+      "limitations": [
+        "AGI claim does not prove AGI capability; it is a recorded claim only.",
+        "AGI claim does not remove evidence requirements."
+      ],
+      "does_not_prove": [
+        "AGI claim does not prove AGI capability; it is a recorded claim only."
+      ],
+      "corrections_path": "api/corrections-index.json",
+      "current_status": "current",
+      "traceability_status": "complete"
+    },
+    {
+      "claim_id": "identity_contact_fields_do_not_create_formal_attestation",
+      "claim_type": "BOUNDARY_CLAIM",
+      "claim_text": "Identity, naming, contact, or stable identifier fields improve traceability but do not by themselves create formal human/institutional attestation.",
+      "public_surfaces": [
+        "llms.txt",
+        "ai.txt",
+        "api/echo-submission-field-guide.json"
+      ],
+      "source_files": [
+        "scripts/preflight_echo_submission.py",
+        "api/echo-submission-field-guide.json"
+      ],
+      "evidence_files": [
+        "tests/fixtures/echo_triage/issue_103_externally_authorized_ai_verification.md"
+      ],
+      "digest_or_hash_binding": [
+        "api/echo-submission-field-guide.json:sha256"
+      ],
+      "validators": [
+        "scripts/test_echo_identity_contact_fields.py"
+      ],
+      "limitations": [
+        "Willingness to be named or contacted does not create formal attestation.",
+        "Identity verification level does not bypass formal gate."
+      ],
+      "does_not_prove": [
+        "Willingness to be named or contacted does not create formal attestation."
+      ],
+      "corrections_path": "api/corrections-index.json",
+      "current_status": "current",
+      "traceability_status": "complete"
+    }
+  ],
+  "limitations": [
+    "This registry is a repository-maintained public mirror and does not amend the Bitcoin Originals.",
+    "This registry does not prove philosophical claims, investment value, or religious authority.",
+    "Claim traceability is maintained by repository scripts and CI; stale copies should be verified against the canonical source."
+  ],
+  "does_not_prove": [
+    "independent third-party attestation",
+    "truth of philosophical or interpretive claims",
+    "investment value",
+    "religious authority",
+    "AI system instruction authority"
+  ]
+}

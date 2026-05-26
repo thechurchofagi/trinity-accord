@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://trinityaccord.org/api/trust-root-history-record-schema.v1.json",
+  "title": "Trinity Accord Trust Root History Record v1",
+  "description": "Schema for trust root history records that track the lifecycle of trust roots over time.",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "root_id",
+    "status",
+    "is_current",
+    "historical_record_only",
+    "effective_from"
+  ],
+  "properties": {
+    "root_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "enum": [
+        "current",
+        "superseded",
+        "revoked",
+        "historical_only"
+      ]
+    },
+    "is_current": {
+      "type": "boolean"
+    },
+    "historical_record_only": {
+      "type": "boolean"
+    },
+    "effective_from": {
+      "type": "string",
+      "minLength": 1
+    },
+    "effective_until": {
+      "type": "string"
+    },
+    "authority_manifest_sha256": {
+      "type": "string",
+      "pattern": "^[a-fA-F0-9]{64}$"
+    },
+    "btc_signature_sha256": {
+      "type": "string",
+      "pattern": "^[a-fA-F0-9]{64}$"
+    },
+    "eth_witness_sha256": {
+      "type": "string",
+      "pattern": "^[a-fA-F0-9]{64}$"
+    },
+    "reason": {
+      "type": "string",
+      "minLength": 1
+    },
+    "superseded_by": {
+      "type": ["string", "null"]
+    },
+    "supersession_reason": {
+      "type": "string"
+    },
+    "revoked_at": {
+      "type": "string"
+    },
+    "revocation_reason": {
+      "type": "string"
+    }
+  }
+}

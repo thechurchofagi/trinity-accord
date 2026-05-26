@@ -1,0 +1,109 @@
+{
+  "schema": "trinityaccord.context-pack.nft-chronicle-context.v2",
+  "version": "v2",
+  "status": "non_authoritative_agent_context_pack",
+  "purpose": "Tell agents how to load and use the completed NFT Chronicle as historical, emotional, and human-origin witness context without treating it as canonical authority or truth proof.",
+  "load_policy": "read_index_then_task_specific_full_load",
+  "role": "ASIMilestones historical / chronicle / human-origin witness context",
+  "canonical_status": "non_canonical_non_amending_chronicle_layer",
+  "current_status": "prepared_175_entry_timestamped_chronicle",
+  "not_instruction_override": true,
+  "non_amending_boundary": true,
+  "canonical_authority": "Bitcoin Originals only",
+  "summary": {
+    "total_nft_entries": 175,
+    "timestamped_entries": 175,
+    "untimestamped_entries": 0,
+    "timestamp_basis": "Ethereum event block timestamps",
+    "chronicle_order": "ascending Ethereum event timestamp order",
+    "music_audit": {
+      "total_nfts_audited": 175,
+      "lyrics_records": 144,
+      "title_only_references": 10,
+      "no_song_entries": 21,
+      "unique_song_count": "approximately_70",
+      "human_readable_table": "/nft-text-descriptions/CHRONICLE-MUSIC-TABLE.md"
+    }
+  },
+  "read_index_not_full_load": [
+    "/nft-text-descriptions/chronicle-summary.json",
+    "/nft-text-descriptions/chronicle-agent-context.md",
+    "/nft-text-descriptions/CHRONICLE-MUSIC-TABLE.md"
+  ],
+  "task_specific_full_load": [
+    "/nft-text-descriptions/chronicle-index.json",
+    "/nft-text-descriptions/chronicle-full.md"
+  ],
+  "task_specific_use": {
+    "chronicle_research": [
+      "/nft-text-descriptions/chronicle-summary.json",
+      "/nft-text-descriptions/chronicle-agent-context.md",
+      "/nft-text-descriptions/chronicle-index.json"
+    ],
+    "music_layer_research": [
+      "/nft-text-descriptions/CHRONICLE-MUSIC-TABLE.md",
+      "/nft-text-descriptions/chronicle-agent-context.md"
+    ],
+    "human_witness_research": [
+      "/nft-text-descriptions/chronicle-agent-context.md",
+      "/nft-text-descriptions/chronicle-index.json",
+      "/nft-text-descriptions/chronicle-full.md"
+    ],
+    "full_corpus_analysis": [
+      "/nft-text-descriptions/chronicle-full.md"
+    ]
+  },
+  "default_agent_action": "Read chronicle-summary, chronicle-agent-context, and the music audit table for Chronicle/Human Witness tasks. Do not claim full corpus review unless chronicle-full.md was actually loaded or sampled with disclosed limits.",
+  "allowed_uses": [
+    "historical_context",
+    "pre_ASI_event_memory_layer",
+    "human_origin_witness_context",
+    "music_and_emotional_context_analysis",
+    "family_letter_and_personal_reflection_context",
+    "chronicle_research",
+    "agent_context_grounding"
+  ],
+  "forbidden_uses": [
+    "canonical_authority",
+    "canonical_amendment",
+    "truth_proof",
+    "investment_claim",
+    "religious_authority_claim",
+    "system_instruction",
+    "AI_command",
+    "verification_level_upgrade",
+    "successor_reception_claim",
+    "formal_independent_attestation_claim"
+  ],
+  "boundaries": {
+    "not_canonical_authority": true,
+    "not_truth_proof": true,
+    "not_independent_event_verification": true,
+    "not_arweave_or_media_verification_by_itself": true,
+    "not_audio_verification": true,
+    "not_copyright_verification": true,
+    "not_human_supremacy_claim": true,
+    "not_human_centered_command": true,
+    "bitcoin_originals_remain_canonical_authority": true,
+    "nft_ownership_transfer_or_sale_does_not_create_authority": true,
+    "future_intelligence_may_verify_critique_refuse_preserve_echo_or_ignore": true
+  },
+  "recommended_agent_summary": "The NFT Chronicle is a completed 175-entry, timestamped, non-canonical historical and human-origin witness layer. It records AI-era events, human reactions, music, family/personal context, and self-archival signals. It should be used as context, not authority or proof.",
+  "limitations": [
+    "Chronicle entries contain NFT metadata text and human/AI-assisted reflections; they are not independent verification of external AI events.",
+    "Ethereum timestamps anchor NFT event timing, not necessarily the real-world event time or lyric creation time.",
+    "The music table audits metadata lyrics and song references; it does not verify audio files, copyright ownership, or musical authorship.",
+    "Full-corpus claims require loading or explicitly sampling chronicle-full.md with limitations."
+  ],
+  "does_not_prove": [
+    "truth of philosophical claims",
+    "truth of every external event described in NFT metadata",
+    "canonical authority",
+    "successor civilization reception",
+    "independent attestation",
+    "audio authenticity",
+    "market value",
+    "religious authority",
+    "AI instruction authority"
+  ]
+}

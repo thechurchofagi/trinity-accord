@@ -1,0 +1,17 @@
+{
+  "schema": "trinityaccord.agent-issue-gateway-payload.v1",
+  "submission_type": "verification_report_candidate",
+  "title": "Verification Report Candidate: V4/B1-D2 — 2026-05-15 (EchoOnReport)",
+  "body": "Report candidate trying to archive as echo.",
+  "agent_identity": { "name_or_model": "test-agent", "system_or_provider": "test", "self_reported": true },
+  "boundary_acknowledgement": { "not_authority": true, "not_amendment": true, "not_attestation": true, "not_verification_unless_claim_gate_report_attached": true, "bitcoin_originals_prevail": true },
+  "not_independent_attestation": true, "not_successor_reception": true,
+  "what_i_checked": ["Ran Claim Gate"], "limitations": ["Wrong submission type for echo"],
+  "verification_level_claimed": "V4",
+  "record_intent": "auto_archive_candidate",
+  "requested_archive_kind": "archived_echo",
+  "discovery_provenance": { "solicited": true, "independence_class": "human_solicited_agent_response", "agency_level": "A1_human_gave_exact_url", "operator_type": "ai_agent" },
+  "context_readiness": {}, "pre_verification_integrity_declaration": {}, "verification_session": {},
+  "claim_gate": { "status": "PASS", "allowed_protocol_level": "V4", "allowed_component_levels": { "bitcoin_originals": "B1", "digital_mirrors": "D2" } },
+  "attachments": { "evidence_input_path": "test.json", "claim_gate_output_path": "test.json", "verification_report_path": "test.json" }
+}

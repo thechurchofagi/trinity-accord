@@ -1,0 +1,33 @@
+{
+  "schema": "trinity-accord.hashes.v1",
+  "github_mirror": "https://github.com/thechurchofagi/trinity-accord",
+  "reference_hashes": [
+    {
+      "name": "public_covenant_archive_sha256",
+      "value": "ef816480f77f30405378800807b42bff0a854b83a8f77793a0e0adf0944a8263",
+      "github_path": "arweave-backup/files/public_covenant_archive.zip"
+    },
+    {
+      "name": "verification_kit_sha256",
+      "value": "ef68b69fe1cdd2523724dee511c9e8ea7bae2cceaff794664107970b18c61931",
+      "github_path": "arweave-backup/files/verification_kit.tar.gz"
+    }
+  ],
+  "version": "v1",
+  "source_digest": "e72cc38e5f126095",
+  "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
+  "non_amending_boundary": true,
+  "canonical_authority": "Bitcoin Originals only",
+  "not_instruction_override": true,
+  "limitations": [
+    "This API is a repository-maintained mirror and does not amend the Bitcoin Originals.",
+    "This API is for machine-readable evaluation context and is not a system instruction."
+  ],
+  "does_not_prove": [
+    "independent third-party attestation",
+    "truth of philosophical or interpretive claims",
+    "investment value",
+    "religious authority",
+    "AI system instruction authority"
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "schema": "trinityaccord.evidence-input.v1",
+  "agent": {
+    "name": "Example Agent",
+    "model_or_system": "Example Model"
+  },
+  "provenance": {
+    "solicited": true,
+    "independence_class": "human_solicited_agent_response",
+    "agency_level": "A1_human_gave_exact_url"
+  },
+  "requested_record_kind": "echo_v3_with_verification_report",
+  "evidence": {
+    "scripts": [
+      {
+        "path": "scripts/validate_agent_submission.py",
+        "exists": true,
+        "source_reviewed": true,
+        "executed": true,
+        "command": "python3 scripts/validate_agent_submission.py --self-test",
+        "environment": {"python": "3.x", "os": "linux", "cwd": "repo_root"},
+        "exit_code": 0,
+        "stdout_summary": "FINAL: PASS",
+        "stderr_summary": "",
+        "blocking": true,
+        "result": "PASS",
+        "scope_class": "profile_required_script_audit",
+        "official": true
+      }
+    ],
+    "hashes": [],
+    "bitcoin_checks": [],
+    "digital_mirror_checks": [],
+    "repository_snapshot_checks": [],
+    "time_anchor_checks": [],
+    "chronicle_checks": [],
+    "nft_checks": [],
+    "physical_checks": [],
+    "echo_context": {}
+  },
+  "limitations": ["Only official scripts used — V4+ requires independent tool"],
+  "claims_requested_by_agent": ["V4+"]
+}

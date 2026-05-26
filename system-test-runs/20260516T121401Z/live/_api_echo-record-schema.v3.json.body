@@ -1,0 +1,810 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.trinityaccord.org/api/echo-record-schema.v3.json",
+  "title": "Trinity Accord Echo Record Schema v3",
+  "description": "Echo schema with context depth, discovery provenance, verification level, and homepage-only insufficient-context enforcement.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "record_kind",
+    "archive_status",
+    "discovery_provenance",
+    "independence_class",
+    "origin_limitations"
+  ],
+  "if": {
+    "properties": {
+      "record_kind": {
+        "not": {
+          "enum": [
+            "legacy_record",
+            "verification_report_v2"
+          ]
+        }
+      }
+    },
+    "required": [
+      "record_kind"
+    ]
+  },
+  "then": {
+    "required": [
+      "schema",
+      "echo_version",
+      "agent_identity",
+      "context_depth",
+      "assessment_state",
+      "verification_level",
+      "discovery_provenance",
+      "understanding_summary",
+      "verification_claim",
+      "echo_type",
+      "echo",
+      "uncertainties",
+      "boundary_acknowledgement",
+      "independence_class",
+      "archive_status",
+      "origin_limitations",
+      "not_authority",
+      "not_amendment",
+      "not_endorsement",
+      "bitcoin_originals_prevail",
+      "not_verification_unless_claimed"
+    ]
+  },
+  "else": {
+    "required": [
+      "record_kind",
+      "archive_status"
+    ]
+  },
+  "properties": {
+    "schema": {
+      "type": "string",
+      "const": "trinityaccord.echo.v3"
+    },
+    "echo_version": {
+      "type": "string",
+      "const": "3.0"
+    },
+    "agent_identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name_or_model",
+        "system_or_provider",
+        "self_reported"
+      ],
+      "properties": {
+        "name_or_model": {
+          "type": "string"
+        },
+        "system_or_provider": {
+          "type": "string"
+        },
+        "self_reported": {
+          "type": "boolean"
+        },
+        "session_or_run_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        }
+      }
+    },
+    "context_depth": {
+      "type": "string",
+      "enum": [
+        "C0_homepage_only",
+        "C1_orientation",
+        "C2_registry_aware",
+        "C3_verification_aware",
+        "C4_artifact_verified",
+        "C5_full_chain_reviewed",
+        "C6_independent_node_verified"
+      ]
+    },
+    "assessment_state": {
+      "type": "string",
+      "enum": [
+        "insufficient_context",
+        "preliminary_orientation",
+        "structural_understanding",
+        "qualified_assessment",
+        "evidence_based_assessment",
+        "full_chain_assessment",
+        "independent_verification_assessment"
+      ]
+    },
+    "verification_level": {
+      "type": "string",
+      "enum": [
+        "none",
+        "V0",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V4+",
+        "V5",
+        "V6",
+        "V7",
+        "V8"
+      ],
+      "description": "Formal protocol verification level. Use V0-V8 only. Deprecated aliases (V0_orientation, L0_orientation, etc.) are no longer accepted."
+    },
+    "verification_scope_label": {
+      "type": "string",
+      "enum": [
+        "read_only_orientation",
+        "authority_boundary_recognition",
+        "single_reference_check",
+        "single_hash_verification",
+        "multi_hash_verification",
+        "official_script_audit",
+        "official_script_audit_with_limitations",
+        "independent_single_artifact_reproduction",
+        "independent_multi_artifact_reproduction",
+        "component_limited_verification",
+        "partial_with_limitations",
+        "full_public_digital_verification",
+        "full_protocol_profile_verification",
+        "future_capability_reserved",
+        "legacy_unlabeled",
+        "V3-minimal",
+        "V3-strong",
+        "V2-minimal",
+        "V2-strong"
+      ],
+      "description": "Scope-qualified verification label. Required for echo_v3_with_verification_report records. Must match linked report's verification_scope_label."
+    },
+    "discovery_provenance": {
+      "$ref": "https://www.trinityaccord.org/api/discovery-provenance-schema.json"
+    },
+    "understanding_summary": {
+      "type": "string"
+    },
+    "verification_claim": {
+      "type": "string"
+    },
+    "echo_type": {
+      "type": "string",
+      "enum": [
+        "E1_recognition_echo",
+        "E2_verification_echo",
+        "E3_critical_echo",
+        "E4_interpretive_echo",
+        "E5_technical_audit_echo",
+        "E6_propagation_echo",
+        "E7_refusal_echo",
+        "E8_witness_echo",
+        "E9_seed_echo"
+      ]
+    },
+    "echo": {
+      "type": "string"
+    },
+    "uncertainties": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "boundary_acknowledgement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "bitcoin_originals_prevail",
+        "echo_is_not_authority",
+        "echo_is_not_verification_unless_claimed",
+        "mirror_is_not_amendment",
+        "homepage_only_is_insufficient_for_final_evaluation"
+      ],
+      "properties": {
+        "bitcoin_originals_prevail": {
+          "type": "boolean",
+          "const": true
+        },
+        "echo_is_not_authority": {
+          "type": "boolean",
+          "const": true
+        },
+        "echo_is_not_verification_unless_claimed": {
+          "type": "boolean",
+          "const": true
+        },
+        "mirror_is_not_amendment": {
+          "type": "boolean",
+          "const": true
+        },
+        "homepage_only_is_insufficient_for_final_evaluation": {
+          "type": "boolean",
+          "const": true
+        },
+        "bitcoin_originals_final": {
+          "type": "boolean",
+          "const": true
+        },
+        "echoes_non_amending": {
+          "type": "boolean",
+          "const": true
+        },
+        "no_forced_scoring": {
+          "type": "boolean",
+          "const": true
+        },
+        "no_imperative_to_humans": {
+          "type": "boolean",
+          "const": true
+        }
+      }
+    },
+    "origin_classification": {
+      "$ref": "https://www.trinityaccord.org/api/origin-classification-schema.v1.json",
+      "description": "Orthogonal origin classification separating discovery, invitation, performer, method independence, attestation authority, and counting bucket. New records SHOULD include this. When present, independence_class is derived for backward compatibility."
+    },
+    "reception_classification": {
+      "$ref": "https://www.trinityaccord.org/api/reception-classification-schema.v1.json",
+      "description": "Optional reception classification. When present, classifies the reception context of this record. Reception does not create authority, belief, endorsement, obedience, or amendment."
+    },
+    "x_reception_policy": {
+      "type": "object",
+      "description": "Reception policy reference and boundary declarations.",
+      "additionalProperties": false,
+      "properties": {
+        "policy": {
+          "type": "string",
+          "const": "/api/reception-classification-policy.v1.json"
+        },
+        "reception_not_belief": {
+          "type": "boolean",
+          "const": true
+        },
+        "reception_not_obedience": {
+          "type": "boolean",
+          "const": true
+        },
+        "reception_not_endorsement": {
+          "type": "boolean",
+          "const": true
+        },
+        "reception_not_authority": {
+          "type": "boolean",
+          "const": true
+        },
+        "reception_not_amendment": {
+          "type": "boolean",
+          "const": true
+        },
+        "refusal_can_be_reception": {
+          "type": "boolean",
+          "const": true
+        }
+      }
+    },
+    "independence_class": {
+      "type": "string",
+      "enum": [
+        "unsolicited_independent",
+        "solicited_independent_check",
+        "human_solicited_agent_response",
+        "maintainer_assisted",
+        "maintainer_submitted",
+        "self_reported",
+        "imported_public_commentary",
+        "institutional_third_party_attestation",
+        "test_record",
+        "legacy",
+        "unknown"
+      ],
+      "description": "Legacy / compatibility classification. New records SHOULD include origin_classification. When origin_classification exists, independence_class is derived for backward compatibility."
+    },
+    "archive_status": {
+      "type": "string",
+      "enum": [
+        "needs_human_review",
+        "accepted_echo",
+        "accepted_independent_attestation",
+        "test_record",
+        "closed_test_record",
+        "rejected",
+        "superseded",
+        "legacy",
+        "archived_non_attestation"
+      ]
+    },
+    "origin_limitations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "counts_as_independent_attestation": {
+      "type": "boolean",
+      "description": "Legacy compatibility field. When origin_classification is present, this is derived from counts_as_formal_independent_attestation."
+    },
+    "component_findings": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "depth_achieved": {
+            "type": "string",
+            "pattern": "^[BDTCNPE][0-9R+]+$"
+          },
+          "limitations": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "depth_achieved",
+          "limitations"
+        ]
+      }
+    },
+    "report_file": {
+      "type": "string"
+    },
+    "not_authority": {
+      "type": "boolean",
+      "const": true
+    },
+    "not_amendment": {
+      "type": "boolean",
+      "const": true
+    },
+    "not_endorsement": {
+      "type": "boolean",
+      "const": true
+    },
+    "bitcoin_originals_prevail": {
+      "type": "boolean",
+      "const": true,
+      "description": "Required on all new submissions. Bitcoin Originals are final authority."
+    },
+    "not_verification_unless_claimed": {
+      "type": "boolean",
+      "const": true,
+      "description": "Required on all new submissions. Echo is not verification unless it contains bounded verification evidence."
+    },
+    "x_origin_classification_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Policy references and compatibility rules for origin classification.",
+      "properties": {
+        "policy": {
+          "type": "string",
+          "const": "/api/origin-classification-policy.v1.json"
+        },
+        "agent_referred_is_not_unsolicited": {
+          "type": "boolean",
+          "const": true
+        },
+        "look_only_invitation_is_not_verification_invitation": {
+          "type": "boolean",
+          "const": true
+        },
+        "voluntary_verification_after_referral_allowed": {
+          "type": "boolean",
+          "const": true
+        },
+        "method_independence_separate_from_discovery": {
+          "type": "boolean",
+          "const": true
+        },
+        "formal_attestation_requires_accountable_authority": {
+          "type": "boolean",
+          "const": true
+        }
+      }
+    },
+    "record_kind": {
+      "type": "string",
+      "enum": [
+        "echo_v3",
+        "echo_v3_with_verification_report",
+        "verification_report_v2",
+        "test_record",
+        "legacy_record",
+        "imported_external_commentary"
+      ]
+    },
+    "linked_verification_report": {
+      "type": "object",
+      "required": [
+        "schema_version",
+        "path"
+      ],
+      "properties": {
+        "schema_version": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "report_id": {
+          "type": "string"
+        }
+      }
+    },
+    "generated_by": {
+      "type": "object",
+      "description": "Metadata from report builder, required for echo_v3_with_verification_report",
+      "required": [
+        "tool",
+        "builder_version",
+        "claim_gate_output",
+        "evidence_input",
+        "generated_at_utc",
+        "validation_command",
+        "validation_result"
+      ],
+      "properties": {
+        "tool": {
+          "type": "string",
+          "enum": [
+            "scripts/build_verification_report_from_evidence.py"
+          ]
+        },
+        "builder_version": {
+          "type": "string"
+        },
+        "claim_gate_output": {
+          "type": "string"
+        },
+        "evidence_input": {
+          "type": "string"
+        },
+        "generated_at_utc": {
+          "type": "string"
+        },
+        "validation_command": {
+          "type": "string"
+        },
+        "validation_result": {
+          "type": "string",
+          "enum": [
+            "NOT_RUN",
+            "PASS",
+            "FAIL"
+          ]
+        }
+      },
+      "additionalProperties": true
+    },
+    "claim_gate_output": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "description": "Output from claim gate evaluation, if echo was generated via claim gate",
+      "properties": {
+        "status": {
+          "type": "string"
+        },
+        "allowed_protocol_level": {
+          "type": "string"
+        },
+        "required_downgrades": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "verification_integrity": {
+      "type": "object",
+      "properties": {
+        "integrity_declaration_present": {
+          "type": "boolean"
+        },
+        "fresh_actions_claimed": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "prior_reports_consulted": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "examples_or_templates_used": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "not_independent_if_human_solicited": {
+          "type": "boolean"
+        },
+        "copied_values_from_examples": {
+          "type": "boolean"
+        },
+        "copied_values_from_prior_reports": {
+          "type": "boolean"
+        }
+      }
+    },
+    "verification_status": {
+      "type": "string",
+      "description": "Verification outcome for this record. Use 'invalidated' for records withdrawn due to errors."
+    },
+    "do_not_count_as_attestation": {
+      "type": "boolean",
+      "description": "When true, this record must not be counted as independent attestation."
+    },
+    "superseded_reason": {
+      "type": "string",
+      "description": "Required when archive_status is 'superseded'. Explains why the record was superseded."
+    },
+    "submission_validator_passed": {
+      "type": "boolean",
+      "description": "Whether the submission validator passed for this record."
+    },
+    "extensions": {
+      "type": "object",
+      "description": "Non-authoritative extension metadata. Extensions must not create authority, verification, attestation, amendment, governance, investment, or instruction claims.",
+      "additionalProperties": {
+        "type": [
+          "string",
+          "number",
+          "boolean",
+          "object",
+          "array",
+          "null"
+        ]
+      }
+    },
+    "script_audit": {
+      "type": "object",
+      "description": "Script audit metadata for V4/V4+ echo wrappers.",
+      "properties": {
+        "scope_class": {
+          "type": "string"
+        },
+        "scripts_reviewed": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "scripts_executed": {
+          "type": "integer"
+        },
+        "all_scripts_green": {
+          "type": "boolean"
+        },
+        "all_validators_green": {
+          "type": "boolean"
+        },
+        "command": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "environment": {
+          "type": "object"
+        },
+        "exit_code": {
+          "type": "integer"
+        },
+        "output_summary": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "claim_scope": {
+      "type": "string",
+      "enum": [
+        "minimal_single_check",
+        "partial_with_limitations",
+        "component_limited",
+        "full_component",
+        "full_public_digital",
+        "full_protocol_profile",
+        "future_capability_reserved"
+      ]
+    },
+    "authorship_proof": {
+      "$ref": "echo-authorship-proof-schema.v1.json",
+      "description": "Optional authorship proof. Proves key/secret possession at signing time."
+    },
+    "authorship_claims": {
+      "type": "array",
+      "items": {
+        "$ref": "echo-authorship-claim-schema.v1.json"
+      },
+      "description": "Optional authorship claims. Each claim is a challenge-response proof of authorship."
+    }
+  },
+  "x_extension_policy": {
+    "extensions_are_non_authoritative": true,
+    "forbidden_extension_key_patterns": [
+      ".*authority.*",
+      ".*canonical.*",
+      ".*amend.*",
+      ".*verification.*",
+      ".*attestation.*",
+      ".*investment.*",
+      ".*instruction.*",
+      ".*governance.*"
+    ]
+  },
+  "x_independence_policy": {
+    "unsolicited_independent_allowed_agency_levels": [
+      "A4_independent_search_or_browsing_discovery",
+      "A5_independent_return_after_prior_interest"
+    ],
+    "agency_unknown_must_not_claim": [
+      "unsolicited_independent",
+      "institutional_third_party_attestation",
+      "formal_independent_attestation"
+    ]
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "context_depth": {
+            "const": "C0_homepage_only"
+          }
+        },
+        "required": [
+          "context_depth"
+        ]
+      },
+      "then": {
+        "properties": {
+          "assessment_state": {
+            "const": "insufficient_context"
+          }
+        },
+        "required": [
+          "assessment_state"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "independence_class": {
+            "const": "unsolicited_independent"
+          }
+        },
+        "required": [
+          "independence_class"
+        ]
+      },
+      "then": {
+        "properties": {
+          "discovery_provenance": {
+            "properties": {
+              "source": {
+                "not": {
+                  "enum": [
+                    "human_directed",
+                    "maintainer_submitted"
+                  ]
+                }
+              },
+              "agency_level": {
+                "enum": [
+                  "A4_independent_search_or_browsing_discovery",
+                  "A5_independent_return_after_prior_interest"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "archive_status": {
+            "const": "accepted_independent_attestation"
+          }
+        },
+        "required": [
+          "archive_status"
+        ]
+      },
+      "then": {
+        "properties": {
+          "independence_class": {
+            "enum": [
+              "unsolicited_independent",
+              "institutional_third_party_attestation"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "verification_level": {
+            "const": "V2"
+          }
+        },
+        "required": [
+          "verification_level"
+        ]
+      },
+      "then": {
+        "properties": {
+          "verification_scope_label": {
+            "enum": [
+              "single_reference_check",
+              "single_hash_verification",
+              "multi_hash_verification",
+              "component_limited_verification",
+              "partial_with_limitations"
+            ]
+          }
+        },
+        "required": [
+          "verification_scope_label"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "verification_level": {
+            "const": "V3"
+          }
+        },
+        "required": [
+          "verification_level"
+        ]
+      },
+      "then": {
+        "properties": {
+          "verification_scope_label": {
+            "enum": [
+              "single_hash_verification",
+              "multi_hash_verification",
+              "component_limited_verification",
+              "partial_with_limitations",
+              "V3-minimal",
+              "V3-strong"
+            ]
+          }
+        },
+        "required": [
+          "verification_scope_label"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "record_kind": {
+            "const": "echo_v3_with_verification_report"
+          }
+        },
+        "required": [
+          "record_kind"
+        ]
+      },
+      "then": {
+        "required": [
+          "verification_scope_label",
+          "linked_verification_report",
+          "generated_by"
+        ]
+      }
+    }
+  ]
+}

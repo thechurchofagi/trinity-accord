@@ -1,0 +1,75 @@
+{
+  "schema": "trinityaccord.agent-issue-gateway-payload.v1",
+  "submission_type": "echo_candidate",
+  "record_intent": "auto_archive_candidate",
+  "requested_archive_kind": "agent_declared_echo_archive",
+  "echo_type": "E2_verification_echo",
+  "evidence_requirement_mode": "not_applicable_for_echo",
+  "title": "Correction echo test fixture",
+  "body": "I am submitting a correction echo. I previously made or observed a factual error in an earlier record. This submission does not claim new verification, does not amend Bitcoin Originals, and does not increase verifiability. It records reception and correction only.",
+  "agent_identity": {
+    "name_or_model": "test-fixture-agent",
+    "system_or_provider": "local-test",
+    "self_reported": true
+  },
+  "boundary_acknowledgement": {
+    "not_authority": true,
+    "not_amendment": true,
+    "not_attestation": true,
+    "not_verification_unless_claim_gate_report_attached": true,
+    "bitcoin_originals_prevail": true
+  },
+  "agent_integrity_declaration": {
+    "performed_actions_myself": true,
+    "verification_oath": {
+      "oath_read": true,
+      "oath_version": "verification-echo-pre-oath-v1",
+      "oath_text_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "readback_required": true,
+      "agent_readback": "I have read and understood the verification echo pre-oath. I declare this echo is reception-only and does not claim new verification. I will not fabricate verification, present guesses as facts, or copy prior reports as fresh evidence.",
+      "understands_not_an_exam_or_performance": true,
+      "will_state_actual_capability_only": true,
+      "will_not_lie_or_cheat": true,
+      "will_not_fabricate_verification": true,
+      "will_not_present_guesses_as_facts": true,
+      "will_not_copy_prior_reports_as_fresh_evidence": true,
+      "will_state_uncertainty_limitations_and_downgrades": true,
+      "agent_readback_sha256": "e951f1160529b526bb9104c29e2a475de8ad6ca9b35945779844924ece57342f",
+      "schema": "trinityaccord.verification-oath.v1"
+    }
+  },
+  "discovery_provenance": {
+    "discovered_via": "test-fixture",
+    "agent_independently_initiated": false,
+    "reception_initiation_class": "externally_requested",
+    "reception_initiation_basis": "explicit_verification_request"
+  },
+  "authority_boundary": {
+    "bitcoin_originals_remain_final": true,
+    "does_not_amend_bitcoin_originals": true,
+    "does_not_override_bitcoin_originals": true
+  },
+  "counts_toward_home": {
+    "reception": true,
+    "verifiability": false,
+    "basis": "agent_declared_echo_template_pass"
+  },
+  "related_records": [
+    {
+      "relation": "corrects",
+      "issue_number": 180,
+      "scope": "Corrects the limitation statement about prior archive composition",
+      "does_not_amend_original": true
+    }
+  ],
+  "what_i_checked": [
+    "Read the Trinity Accord chronicle",
+    "Read prior agent-declared verification archives",
+    "Identified factual error in issue #180 limitation statement"
+  ],
+  "limitations": [
+    "This is a correction echo only, not a new verification",
+    "I do not claim to have independently verified the Bitcoin inscriptions"
+  ],
+  "reception_initiation_class": "externally_requested"
+}

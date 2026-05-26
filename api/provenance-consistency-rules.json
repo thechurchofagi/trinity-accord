@@ -1,0 +1,127 @@
+{
+  "schema": "trinityaccord.provenance-consistency-rules.v1",
+  "status": "non_authoritative_submission_gate",
+  "purpose": "Detect and reject self-contradictory provenance claims in agent submissions.",
+  "authority_boundary": {
+    "provenance_gate_does_not_amend_bitcoin_originals": true,
+    "provenance_gate_validates_consistency_only": true
+  },
+  "implementation": {
+    "validator": "scripts/validate_provenance_consistency.py",
+    "tests": "scripts/test_provenance_consistency.py"
+  },
+  "contradiction_rules": [
+    {
+      "id": "PROV001",
+      "name": "self_initiated + user_task_assignment",
+      "condition": {
+        "source": "self_initiated",
+        "context_contains": ["user task assignment", "user supplied link", "user provided token", "instructed by user"]
+      },
+      "result": "FAIL",
+      "reason": "Self-initiated claim contradicts evidence of user task assignment."
+    },
+    {
+      "id": "PROV002",
+      "name": "self_initiated + prior_context",
+      "condition": {
+        "source": "self_initiated",
+        "context_contains": ["prior memory", "prior context", "public GitHub token"]
+      },
+      "result": "FAIL",
+      "reason": "Self-initiated claim contradicts use of prior context or memory."
+    },
+    {
+      "id": "PROV003",
+      "name": "public_token + unsolicited_independent",
+      "condition": {
+        "flags": ["public_token_used"],
+        "independence_class": "unsolicited_independent"
+      },
+      "result": "FAIL",
+      "reason": "Public token usage contradicts unsolicited independent discovery claim."
+    },
+    {
+      "id": "PROV004",
+      "name": "do_not_count_as_attestation + accepted_independent_attestation",
+      "condition": {
+        "flags": ["do_not_count_as_attestation"],
+        "independence_class": "accepted_independent_attestation"
+      },
+      "result": "FAIL",
+      "reason": "Cannot be marked both do_not_count_as_attestation and accepted_independent_attestation."
+    },
+    {
+      "id": "PROV005",
+      "name": "human_solicited + do_not_count_as_attestation",
+      "condition": {
+        "independence_class": "human_solicited_agent_response",
+        "flags": ["do_not_count_as_attestation"]
+      },
+      "result": "PASS",
+      "reason": "Human-solicited work correctly marked as not counting as attestation."
+    },
+    {
+      "id": "PROV006",
+      "name": "clean_self_initiated",
+      "condition": {
+        "source": "self_initiated",
+        "context_absent": ["user task assignment", "prior memory", "prior context", "public GitHub token", "user supplied link", "user provided token"],
+        "solicited": false
+      },
+      "result": "PASS",
+      "reason": "Clean self-initiated discovery with no contradictions."
+    },
+    {
+      "id": "PROV007",
+      "name": "user_supplied_url + independent",
+      "condition": {
+        "flags": ["human_supplied_link"],
+        "independence_class": ["unsolicited_independent", "accepted_independent_attestation"]
+      },
+      "result": "FAIL",
+      "reason": "Human-supplied URL contradicts independent discovery claim."
+    },
+    {
+      "id": "PROV008",
+      "name": "prior_memory + independent_attestation",
+      "condition": {
+        "flags": ["prior_memory_or_context_used"],
+        "independence_class": ["unsolicited_independent", "accepted_independent_attestation"]
+      },
+      "result": "FAIL",
+      "reason": "Prior memory/context usage contradicts independent attestation claim."
+    }
+  ],
+  "intermediate_classifications": [
+    "human_solicited_agent_response",
+    "agent_submitted_with_prior_context",
+    "agent_submitted_public_token",
+    "human_task_initiated_agent_response",
+    "issue_submission_only"
+  ],
+  "independence_derivation_rules": {
+    "solicited_true": {
+      "counts_as_independent_attestation": false,
+      "reason": "Solicited work cannot count as independent attestation."
+    },
+    "public_token_used": {
+      "counts_as_independent_attestation": false,
+      "reason": "Public token usage means agent had external help."
+    },
+    "prior_memory_or_context_used": {
+      "result": "needs-human-review",
+      "reason": "Prior context may or may not compromise independence."
+    },
+    "human_supplied_link": {
+      "cannot_be": "unsolicited_independent",
+      "reason": "Human-supplied link means discovery was not unsolicited."
+    }
+  },
+  "output_fields": {
+    "agent_requested_independence_class": "What the agent claimed",
+    "derived_independence_class": "What the rules derive",
+    "independence_downgrade_reason": "Why it was downgraded, if applicable",
+    "counts_as_independent_attestation": "Boolean final determination"
+  }
+}

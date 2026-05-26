@@ -1,0 +1,78 @@
+#!/usr/bin/env python3
+"""Test that Gateway capabilities expose all foolproof agent paths."""
+import json
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+errors = []
+
+
+def check(condition, msg):
+    if not condition:
+        errors.append(msg)
+        print(f"  FAIL: {msg}")
+    else:
+        print(f"  PASS: {msg}")
+
+
+server = (ROOT / "examples" / "github-app-backend" / "server.js").read_text()
+
+print("--- capabilities entries ---")
+check("pure_echo_path:" in server, "capabilities has pure_echo_path")
+check("v0_v5_archive_submission:" in server, "capabilities has v0_v5_archive_submission")
+check("strict_evidence_report_path:" in server, "capabilities has strict_evidence_report_path")
+check("verification_echo_path:" in server, "capabilities has verification_echo_path")
+check("authorship_proof:" in server, "capabilities has authorship_proof")
+
+print("\n--- verification_echo_path details ---")
+check("/gateway/examples/verification-echo/raw" in server,
+      "verification_echo_path raw endpoint present")
+
+print("\n--- V0-V5 per-level endpoints ---")
+for level in ["v0", "v1", "v2", "v3", "v4", "v4plus", "v5"]:
+    check(f"agent_declared_{level}_raw" in server,
+          f"capabilities has agent_declared_{level}_raw")
+
+print("\n--- sub-V6 single mandatory route policy ---")
+check("single_mandatory_route_policy" in server,
+      "capabilities has single_mandatory_route_policy")
+check("only_valid_route_for_below_v6" in server,
+      "capabilities says only_valid_route_for_below_v6")
+check("evidence_chain_required: false" in server or "evidence_chain_required: false," in server,
+      "capabilities says evidence_chain_required false")
+check("strict_evidence_path_forbidden: true" in server or "strict_evidence_path_forbidden: true," in server,
+      "capabilities says strict_evidence_path_forbidden true")
+check("declared_level_source: \"agent_oath_template_declaration\"" in server,
+      "capabilities says declared_level_source agent_oath_template_declaration")
+
+print("\n--- authorship_proof details ---")
+check("private_key_must_never_be_submitted" in server,
+      "authorship_proof says private key must never be submitted")
+check("does_not_affect_counts" in server,
+      "authorship_proof says does_not_affect_counts")
+
+print("\n--- authorship_default_policy ---")
+check("authorship_default_policy:" in server,
+      "capabilities has authorship_default_policy")
+check("enabled_by_default: true" in server,
+      "authorship_default_policy says enabled_by_default true")
+check("gateway_never_receives_private_key: true" in server,
+      "authorship_default_policy says gateway_never_receives_private_key true")
+check("gateway_never_generates_private_key: true" in server,
+      "authorship_default_policy says gateway_never_generates_private_key true")
+check("private_key_must_remain_local: true" in server,
+      "authorship_default_policy says private_key_must_remain_local true")
+check("opt_out_flag: \"--no-authorship-proof\"" in server,
+      "authorship_default_policy says opt_out_flag --no-authorship-proof")
+
+print("\n--- per-path authorship_proof_default ---")
+check("authorship_proof_default: \"enabled_by_default_local_keypair\"" in server,
+      "major paths expose authorship_proof_default")
+
+print(f"\n--- Results: {len(errors)} errors ---")
+if errors:
+    for e in errors:
+        print(f"  ERROR: {e}")
+    sys.exit(1)
+print("GATEWAY_CAPABILITIES_FOOLPROOF_PATHS_OK")

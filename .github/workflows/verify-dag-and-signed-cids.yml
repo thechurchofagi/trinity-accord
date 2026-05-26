@@ -1,0 +1,90 @@
+name: Verify DAG and Signed CIDs (175 NFTs)
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: 'Release tag to verify'
+        required: false
+        default: 'nft-arweave-mirror-175-v1'
+      eth_audit_file:
+        description: 'Path to ONCHAIN-READ-AUDIT.json (optional)'
+        required: false
+        default: ''
+      concurrency:
+        description: 'DAG verify concurrency'
+        required: false
+        default: '8'
+      eth_rpc_url:
+        description: 'ETH RPC URL for witness verification'
+        required: false
+        default: 'https://eth.llamarpc.com'
+      btc_api_base:
+        description: 'Bitcoin API base URL'
+        required: false
+        default: 'https://mempool.space/api'
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+    timeout-minutes: 180
+
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+        with:
+          fetch-depth: 1
+
+      - uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4
+        with:
+          node-version: '22'
+
+      - name: Run full verification (4 chains)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          DAG_VERIFY_CONCURRENCY: ${{ inputs.concurrency }}
+          ETH_RPC_URL: ${{ inputs.eth_rpc_url }}
+          BTC_API_BASE: ${{ inputs.btc_api_base }}
+          INPUT_RELEASE_TAG: ${{ inputs.release_tag }}
+          INPUT_ETH_AUDIT_FILE: ${{ inputs.eth_audit_file }}
+        run: |
+          set -euo pipefail
+
+          [[ "$DAG_VERIFY_CONCURRENCY" =~ ^[0-9]+$ ]] || { echo "Invalid concurrency"; exit 1; }
+          [ "$DAG_VERIFY_CONCURRENCY" -ge 1 ] && [ "$DAG_VERIFY_CONCURRENCY" -le 25 ] || { echo "Concurrency out of range"; exit 1; }
+
+          [[ "$INPUT_RELEASE_TAG" =~ ^[A-Za-z0-9._/-]{1,100}$ ]] || { echo "Invalid release tag"; exit 1; }
+
+          if [ -n "$INPUT_ETH_AUDIT_FILE" ]; then
+            [[ "$INPUT_ETH_AUDIT_FILE" =~ ^[A-Za-z0-9._/-]{1,180}$ ]] || { echo "Invalid eth audit file path"; exit 1; }
+          fi
+
+          ARGS=(--release-tag "$INPUT_RELEASE_TAG" --concurrency "$DAG_VERIFY_CONCURRENCY")
+          if [ -n "$INPUT_ETH_AUDIT_FILE" ]; then
+            ARGS+=(--eth-audit-file "$INPUT_ETH_AUDIT_FILE")
+          fi
+
+          node scripts/verify-dag-and-signed-cids.mjs "${ARGS[@]}"
+
+      - name: Upload DAG-CID-AUDIT.json
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: dag-cid-audit
+          path: DAG-CID-AUDIT.json
+
+      - name: Upload ETH-WITNESS-AUDIT.json
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: eth-witness-audit
+          path: ETH-WITNESS-AUDIT.json
+
+      - name: Upload BITCOIN-TIME-ANCHOR-AUDIT.json
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: bitcoin-time-anchor-audit
+          path: BITCOIN-TIME-ANCHOR-AUDIT.json

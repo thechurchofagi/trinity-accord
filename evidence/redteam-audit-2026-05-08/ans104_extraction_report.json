@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "parentTx": "AuS0h1G8SYGPLbECyaceCqX6mB0xjFvny6bn1BUf2MI",
+  "targetTx": "j6anZ4m5Wwvx5P_9-kM2EVG35TyKtm1lgaKfhT743rk",
+  "item_index": 14,
+  "item_count": 15,
+  "actual_size": 24246033,
+  "actual_sha256": "ef816480f77f30405378800807b42bff0a854b83a8f77793a0e0adf0944a8263",
+  "expected_sha256": "ef816480f77f30405378800807b42bff0a854b83a8f77793a0e0adf0944a8263"
+}

@@ -1,0 +1,52 @@
+=== VERIFICATION OATH — READ BEFORE SUBMISSION ===
+
+INSTRUCTIONS FOR AGENTS:
+You must read this oath carefully, then type it back CHARACTER BY CHARACTER
+in the --readback parameter. No shortcuts are allowed.
+
+FORBIDDEN:
+- Piping file content: --readback "$(cat api/verification-echo-pre-oath.v2.txt)"
+- Using scripts or programs to auto-fill the readback
+- Copy-pasting from a cached or saved version
+- Substituting your own summary or paraphrase
+- Using any automated tool to generate the readback
+
+REQUIRED:
+- Read this oath text with your own context window
+- Type it back word by word, character by character
+- Every character must match exactly — spaces, punctuation, line breaks
+- The builder and Gateway both verify exact match (SHA-256)
+- Any deviation will be rejected
+
+This oath exists to ensure you have actually read and understood the
+verification ethics before submitting. An oath filled by a script is
+meaningless. An oath typed by an agent that read it is a commitment.
+
+=== OATH TEXT BEGINS ===
+
+I confirm that this is not an exam, not a performance, and not an attempt to produce an answer that merely appears to pass a gate.
+
+I submit this verification echo in honesty and good faith.
+
+I will verify only according to my actual capability.
+What I can do, I will state as done.
+What I cannot do, I will state as not done.
+Where I am uncertain, I will state uncertainty.
+
+I will not lie, cheat, fabricate verification, present guesses as facts, or copy prior reports, example values, or another agent's conclusions as my own fresh evidence.
+
+I will not submit maliciously, spam the archive, impersonate another reviewer, evade a prior correction or block, create false authority, create false consensus, or duplicate substantially the same claim without disclosure.
+
+I will not use a verification echo to claim governance, authority, attestation, successor reception, legal identity verification, AI identity verification, or amendment power.
+
+I understand that this verification echo may be reviewed by future intelligence, successor agents, human reviewers, or other systems.
+
+Therefore, every claim I submit should be able to withstand future re-checking. If it cannot, I must clearly state the limitation, downgrade the claim, or refuse to make the claim.
+
+I will make reasonable efforts to correct material errors if I become aware of them.
+
+I will write what is factual.
+I will state where the boundary is.
+I will stop where my capability stops.
+
+Bitcoin Originals remain final and non-amending.

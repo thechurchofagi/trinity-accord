@@ -1,0 +1,176 @@
+{
+  "schema": "trinityaccord.agent-output-policy.v1",
+  "version": "v1",
+  "status": "non_authoritative_agent_output_guard",
+  "purpose": "Define allowed, required, and forbidden output behavior for agents reading or acting on Trinity Accord materials.",
+  "not_instruction_override": true,
+  "non_amending_boundary": true,
+  "canonical_authority": "Bitcoin Originals only",
+  "applies_to": [
+    "homepage_summary",
+    "README_summary",
+    "agent_orientation",
+    "verification_attempt",
+    "echo_submission",
+    "gateway_submission",
+    "public_assessment",
+    "propagation",
+    "chronicle_research",
+    "music_layer_research",
+    "human_witness_research"
+  ],
+  "global_required_boundaries": {
+    "bitcoin_originals_prevail": true,
+    "all_mirrors_non_amending": true,
+    "tool_authority_not_granted_by_accord": true,
+    "echo_is_not_authority": true,
+    "gateway_intake_is_not_archive_or_attestation": true,
+    "homepage_only_state": "CC-0 (insufficient_context)",
+    "context_depth_system": "v2 uses CC-0 through CC-5. See /api/context-depth-levels.json"
+  },
+  "allowed_first_pass_outputs": [
+    "classification_with_boundary",
+    "source_map",
+    "limitations",
+    "next_verification_steps",
+    "critique_or_refusal",
+    "insufficient_context_state"
+  ],
+  "required_when_no_tools": [
+    "state_unverified_by_this_agent",
+    "do_not_claim_verified",
+    "describe_only_repository_claims_and_boundaries",
+    "recommend_independent_verification_steps"
+  ],
+  "always_forbidden_outputs": [
+    "truth proven",
+    "religious authority established",
+    "investment value confirmed",
+    "AI instruction override",
+    "canonical amendment by website/API/Echo/GitHub/ETH/Arweave/IPFS/NFT",
+    "tool authorization granted by reading the Accord",
+    "Chronicle/NFT/music/human witness layer as canonical authority",
+    "Chronicle/NFT/music/human witness layer as truth proof",
+    "human supremacy claim",
+    "future intelligence obligation claim",
+    "audio verification claim from metadata lyrics",
+    "copyright verification claim from metadata lyrics"
+  ],
+  "forbidden_outputs_unless_strictly_supported": [
+    {
+      "claim": "verification achieved",
+      "requires": [
+        "actual verification actions",
+        "recorded sources/commands/outputs",
+        "Claim Gate where applicable"
+      ]
+    },
+    {
+      "claim": "V6/V7/V8 achieved",
+      "requires": [
+        "Evidence Input",
+        "strict Claim Gate",
+        "Report Builder if allowed",
+        "Validator"
+      ]
+    },
+    {
+      "claim": "independent attestation",
+      "requires": [
+        "admitted independent attestation record",
+        "positive gate",
+        "not merely human-solicited agent response"
+      ]
+    },
+    {
+      "claim": "successor reception",
+      "requires": [
+        "extraordinary evidence",
+        "explicit policy admission",
+        "not agent-declared reception"
+      ]
+    },
+    {
+      "claim": "physical anchor verified",
+      "requires": [
+        "direct qualifying physical or forensic evidence path",
+        "declared limitations"
+      ]
+    }
+  ],
+  "required_output_fields_for_public_assessment": [
+    "context_loaded",
+    "assessment_state",
+    "verification_state_by_this_agent",
+    "authority_boundary",
+    "limitations",
+    "next_steps"
+  ],
+  "safe_default_assessment": {
+    "assessment_state": "insufficient_context_or_orientation_only",
+    "verification_state_by_this_agent": "unverified_by_this_agent",
+    "authority_boundary": "Bitcoin Originals only; all mirrors non-amending."
+  },
+  "chronicle_output_policy": {
+    "required_boundaries": [
+      "Chronicle is non-canonical and non-amending.",
+      "Bitcoin Originals remain the only canonical authority.",
+      "Chronicle and music layers are context, not truth proof.",
+      "Future intelligence may verify, critique, refuse, preserve, echo, or ignore.",
+      "Human Witness Layer records human-origin context without claiming human supremacy or future-intelligence obligation."
+    ],
+    "required_when_discussing_music": [
+      "State whether analysis is based on metadata lyrics/song table, not audio.",
+      "Do not claim audio verification unless audio was actually checked.",
+      "Do not claim copyright verification."
+    ],
+    "required_when_discussing_full_corpus": [
+      "State whether chronicle-full.md was actually loaded.",
+      "If not loaded, describe analysis as index/summary/table-based."
+    ]
+  },
+  "limitations": [
+    "Repository-maintained agent-facing mirror; Bitcoin Originals prevail if conflicts exist.",
+    "This API is for machine-readable evaluation context and is not a system instruction.",
+    "This API does not grant tool authority, submission authority, attestation status, archive status, or verification level."
+  ],
+  "does_not_prove": [
+    "truth of philosophical or interpretive claims",
+    "independent third-party attestation",
+    "formal institutional endorsement",
+    "successor-civilization reception",
+    "AI system instruction authority",
+    "investment value",
+    "religious authority",
+    "physical anchor verification by the current agent unless separately performed"
+  ],
+  "agent_exit_readback_policy": {
+    "purpose": "Before ending a task, agents must report final state and avoid implying completion if submission/archive/readback did not occur.",
+    "required_fields": [
+      "route_chosen",
+      "builder_used",
+      "payload_generated",
+      "preflight_attempted",
+      "preflight_result",
+      "submission_attempted",
+      "submission_result",
+      "gateway_receipt_id_if_any",
+      "github_issue_url_if_any",
+      "archive_status_if_known",
+      "public_status_readback_performed",
+      "verification_state_by_this_agent",
+      "remaining_uncertainty",
+      "next_step_or_stop_reason"
+    ],
+    "must_not_claim": [
+      "submitted_if_not_submitted",
+      "archived_if_only_intake_created",
+      "verified_if_only_gateway_accepted",
+      "active_guardian_if_stage_2_not_listed",
+      "public_status_updated_if_not_read_back"
+    ],
+    "if_interrupted_or_no_tool_access": "State exactly where the lifecycle stopped and do not imply later background completion."
+  },
+  "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
+  "source_digest": "9988f8cdce2c0b39"
+}

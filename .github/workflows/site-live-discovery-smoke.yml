@@ -1,0 +1,37 @@
+name: Site Live Discovery Smoke
+
+on:
+  workflow_dispatch:
+    inputs:
+      site_url:
+        description: "Public site base URL"
+        required: false
+        default: "https://www.trinityaccord.org"
+      strict_digest:
+        description: "Require live links.json source_digest to match repository source_digest"
+        required: false
+        default: "false"
+  schedule:
+    # Daily lightweight live smoke. Keep it off the critical PR path.
+    - cron: "23 4 * * *"
+
+permissions:
+  contents: read
+
+jobs:
+  live-discovery:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+
+      - name: Smoke live public discovery contract
+        run: |
+          STRICT=""
+          if [ "${{ github.event.inputs.strict_digest || 'false' }}" = "true" ]; then
+            STRICT="--strict-digest"
+          fi
+          python3 scripts/smoke_live_discovery_contract.py \
+            --site "${{ github.event.inputs.site_url || 'https://www.trinityaccord.org' }}" \
+            ${STRICT}

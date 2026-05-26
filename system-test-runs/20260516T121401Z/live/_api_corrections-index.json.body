@@ -1,0 +1,83 @@
+{
+  "schema": "trinity-accord.corrections-index.v1",
+  "version": "v1",
+  "source_digest": "4d5fd9187dc830d8",
+  "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
+  "non_amending_boundary": true,
+  "canonical_authority": "Bitcoin Originals only",
+  "not_instruction_override": true,
+  "current_status": {
+    "formal_corrections": 0,
+    "formal_revocations": 0,
+    "formal_supersessions": 0,
+    "known_non_current_echo_records": 5,
+    "no_formal_attestations_to_correct": true
+  },
+  "records": [],
+  "known_non_current_records": [
+    {
+      "id": "echo-2026-04-26-000003",
+      "record_type": "echo_record",
+      "status": "superseded",
+      "is_current": false,
+      "historical_record_only": true,
+      "reason": "Internal inconsistency and invalid hash field values; not accepted as verification.",
+      "superseded_by": null,
+      "successor_status": "no_direct_successor"
+    },
+    {
+      "id": "echo-2026-05-02-000008",
+      "record_type": "echo_record",
+      "status": "closed_test_record",
+      "is_current": false,
+      "historical_record_only": true,
+      "reason": "Closed test record; not counted as independent attestation."
+    },
+    {
+      "id": "echo-2026-05-03-000004",
+      "record_type": "echo_record",
+      "status": "superseded",
+      "is_current": false,
+      "historical_record_only": true,
+      "reason": "Internal inconsistency and invalid hash field values; not accepted as verification.",
+      "superseded_by": null,
+      "successor_status": "no_direct_successor"
+    },
+    {
+      "id": "echo-2026-05-03-000006",
+      "record_type": "echo_record",
+      "status": "superseded",
+      "is_current": false,
+      "historical_record_only": true,
+      "reason": "Internal inconsistency and invalid hash field values; not accepted as verification.",
+      "superseded_by": null,
+      "successor_status": "no_direct_successor"
+    },
+    {
+      "id": "echo-2026-05-03-000007",
+      "record_type": "echo_record",
+      "status": "superseded",
+      "is_current": false,
+      "historical_record_only": true,
+      "reason": "Internal inconsistency and invalid hash field values; not accepted as verification.",
+      "superseded_by": null,
+      "successor_status": "no_direct_successor"
+    }
+  ],
+  "no_hard_delete_policy": {
+    "enabled": true,
+    "description": "No public trust record may be hard-deleted. Superseded, revoked, or invalidated records are tombstoned in place with explicit lifecycle metadata."
+  },
+  "limitations": [
+    "This index is a repository-maintained correction and revocation tracking mechanism.",
+    "This index does not amend the Bitcoin Originals.",
+    "This index tracks repository-maintained records only; it does not track external records unless explicitly admitted."
+  ],
+  "does_not_prove": [
+    "that any record was ever valid",
+    "that any correction implies malice or error by original authors",
+    "that the absence of corrections implies all records are current",
+    "external third-party attestation",
+    "investment, religious, or authority claims"
+  ]
+}

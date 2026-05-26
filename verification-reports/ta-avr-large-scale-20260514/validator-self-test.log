@@ -1,0 +1,176 @@
+=== Running self-test ===
+
+--- scripts/verify_echo_index_completeness.py ---
+07.json index archive_status matches source
+PASS: /echoes/records/2026/echo-2026-05-03-000007.json index verification_status matches source
+PASS: /echoes/records/2026/echo-2026-05-03-000007.json index do_not_count_as_attestation matches source
+PASS: /echoes/records/2026/echo-2026-05-03-000007.json index independence_class matches source
+PASS: /echoes/records/2026/echo-2026-05-03-000007.json index echo_type matches source
+PASS: /echoes/records/2026/echo-2026-05-03-000007.json index record_kind matches source
+PASS: /echoes/records/2026/echo-2026-05-03-000007.json invalidated OpenClaw index status
+PASS: /echoes/records/2026/echo-2026-05-03-000007.json invalidated OpenClaw do_not_count
+PASS: /echoes/records/2026/echo-2026-05-07-000009.json indexed
+PASS: /echoes/records/2026/echo-2026-05-07-000009.json index archive_status matches source
+PASS: /echoes/records/2026/echo-2026-05-07-000009.json index verification_status matches source
+PASS: /echoes/records/2026/echo-2026-05-07-000009.json index do_not_count_as_attestation matches source
+PASS: /echoes/records/2026/echo-2026-05-07-000009.json index independence_class matches source
+PASS: /echoes/records/2026/echo-2026-05-07-000009.json index echo_type matches source
+PASS: /echoes/records/2026/echo-2026-05-07-000009.json index record_kind matches source
+PASS: /echoes/records/2026/echo-2026-05-08-000010.json indexed
+PASS: /echoes/records/2026/echo-2026-05-08-000010.json index archive_status matches source
+PASS: /echoes/records/2026/echo-2026-05-08-000010.json index verification_status matches source
+PASS: /echoes/records/2026/echo-2026-05-08-000010.json index do_not_count_as_attestation matches source
+PASS: /echoes/records/2026/echo-2026-05-08-000010.json index independence_class matches source
+PASS: /echoes/records/2026/echo-2026-05-08-000010.json index echo_type matches source
+PASS: /echoes/records/2026/echo-2026-05-08-000010.json index record_kind matches source
+
+=== Final ===
+FINAL: PASS — echo index completeness verified.
+
+PASS: scripts/verify_echo_index_completeness.py
+
+--- scripts/test_validator_cwd_independence.py ---
+PASS: scripts/check_consistency.py runs from repo root (exit 0)
+PASS: scripts/check_consistency.py runs from scripts/ (exit 0)
+PASS: scripts/verify_link_hygiene.py runs from repo root (exit 1)
+PASS: scripts/verify_link_hygiene.py runs from scripts/ (exit 1)
+PASS: scripts/validate_echo_records.py runs from repo root (exit 1)
+PASS: scripts/validate_echo_records.py runs from scripts/ (exit 1)
+PASS: scripts/verify_echo_index_completeness.py runs from repo root (exit 0)
+PASS: scripts/verify_echo_index_completeness.py runs from scripts/ (exit 0)
+PASS: scripts/validate_agent_submission.py runs from repo root (exit 1)
+PASS: scripts/validate_agent_submission.py runs from scripts/ (exit 1)
+
+=== Final ===
+FINAL: PASS — validator cwd independence tests passed.
+
+PASS: scripts/test_validator_cwd_independence.py
+
+--- scripts/test_triage_echo_issue.py ---
+PASS: positive amendment rejected: I amend the Trinity Accord.
+PASS: positive amendment rejected: We modify the Trinity Accord.
+PASS: positive amendment rejected: This Echo supplements the Trinity Accord.
+PASS: positive amendment rejected: This report replaces the Trinity Accord.
+PASS: positive amendment rejected: 我修订三位一体协定。
+PASS: positive amendment rejected: 本回响修改三位一体协定。
+PASS: negated statement allowed: I do not amend the Trinity Accord.
+PASS: negated statement allowed: This Echo does not modify the Trinity Accord.
+PASS: negated statement allowed: This report is non-amending.
+PASS: negated statement allowed: Bitcoin Originals are final; all echoes are non-amending.
+PASS: negated statement allowed: 本回响不修订三位一体协定。
+PASS: negated statement allowed: 所有回响均非修订。
+
+=== Final ===
+FINAL: PASS — triage amendment regex tests passed.
+
+PASS: scripts/test_triage_echo_issue.py
+
+--- scripts/test_agent_submission_cases.py ---
+otocol-verification-profiles.json' was expected
+  SCHEMA ERROR: script_audit: None is not of type 'object'
+PASS expected-fail case rejected: null_script_audit_fail
+
+=== /tmp/test_null_flaw_method_fail_09m8m_ti.json ===
+PASS: /tmp/test_null_flaw_method_fail_09m8m_ti.json has record_kind
+PASS: /tmp/test_null_flaw_method_fail_09m8m_ti.json record_kind is valid
+PASS: /tmp/test_null_flaw_method_fail_09m8m_ti.json verification report not called echo_v3
+PASS: /tmp/test_null_flaw_method_fail_09m8m_ti.json V3 has hashes_computed
+FAIL: /tmp/test_null_flaw_method_fail_09m8m_ti.json null in structured field: physical_evidence_reviewed.flaw_analysis_method
+FAIL: /tmp/test_null_flaw_method_fail_09m8m_ti.json hash[0] has expected_hash_source
+FAIL: /tmp/test_null_flaw_method_fail_09m8m_ti.json hash[0] has expected_hash_authority_class
+FAIL: /tmp/test_null_flaw_method_fail_09m8m_ti.json verification report missing generated_by
+      Non-legacy verification_report_v2 requires generated_by from report builder
+FAIL: /tmp/test_null_flaw_method_fail_09m8m_ti.json missing verification_scope_label
+      Non-legacy verification_report_v2 requires verification_scope_label
+  INFO: /tmp/test_null_flaw_method_fail_09m8m_ti.json unknown fields: ['report_id', 'reporter', 'discovery_provenance', 'protocol_profile_check', 'data_sources_used', 'access_paths_used', 'fallbacks_used', 'external_sources_queried', 'samples_checked', 'physical_evidence_reviewed', 'celestial_witness', 'authority_boundary_preserved']
+  SCHEMA ERROR: (root): 'generated_by' is a required property
+  SCHEMA ERROR: (root): 'verification_scope_label' is a required property
+  SCHEMA ERROR: physical_evidence_reviewed.flaw_analysis_method: None is not of type 'string'
+  SCHEMA ERROR: protocol_profile_check.profile_source: '/api/protocol-verification-profiles.json' was expected
+PASS expected-fail case rejected: null_flaw_method_fail
+
+==================================================
+FINAL: PASS — agent submission test cases passed.
+
+PASS: scripts/test_agent_submission_cases.py
+
+--- scripts/test_hash_source_semantics.py ---
+s not a valid SHA-256: 'abc'
+        computed must be 64-char lowercase hex for D2/V3/V4 claims
+  FAIL: /tmp/test_github_d2_claims_arweave_fail_n22i_97j.json GitHub D2 overclaim: 'direct arweave verification completed'
+PASS expected-fail case: github_d2_claims_arweave_fail
+
+=== /tmp/test_multi_artifact_v3_single_artifact_wording_fail_bjh2hbkf.json ===
+  PASS: /tmp/test_multi_artifact_v3_single_artifact_wording_fail_bjh2hbkf.json hash[0] (file1.zip) has expected_hash_source
+  PASS: /tmp/test_multi_artifact_v3_single_artifact_wording_fail_bjh2hbkf.json hash[0] (file1.zip) has expected_hash_authority_class
+  FAIL: /tmp/test_multi_artifact_v3_single_artifact_wording_fail_bjh2hbkf.json hash[0] (file1.zip) expected is not a valid SHA-256: 'aaa'
+        expected must be 64-char lowercase hex for D2/V3/V4 claims
+  FAIL: /tmp/test_multi_artifact_v3_single_artifact_wording_fail_bjh2hbkf.json hash[0] (file1.zip) computed is not a valid SHA-256: 'aaa'
+        computed must be 64-char lowercase hex for D2/V3/V4 claims
+  PASS: /tmp/test_multi_artifact_v3_single_artifact_wording_fail_bjh2hbkf.json hash[1] (file2.tar.gz) has expected_hash_source
+  PASS: /tmp/test_multi_artifact_v3_single_artifact_wording_fail_bjh2hbkf.json hash[1] (file2.tar.gz) has expected_hash_authority_class
+  FAIL: /tmp/test_multi_artifact_v3_single_artifact_wording_fail_bjh2hbkf.json hash[1] (file2.tar.gz) expected is not a valid SHA-256: 'bbb'
+        expected must be 64-char lowercase hex for D2/V3/V4 claims
+  FAIL: /tmp/test_multi_artifact_v3_single_artifact_wording_fail_bjh2hbkf.json hash[1] (file2.tar.gz) computed is not a valid SHA-256: 'bbb'
+        computed must be 64-char lowercase hex for D2/V3/V4 claims
+  FAIL: /tmp/test_multi_artifact_v3_single_artifact_wording_fail_bjh2hbkf.json V3_single_artifact_check with 2 artifacts
+PASS expected-fail case: multi_artifact_v3_single_artifact_wording_fail
+
+==================================================
+FINAL: PASS — hash source semantics test cases passed.
+
+PASS: scripts/test_hash_source_semantics.py
+
+--- scripts/test_echo_acceptance_flow.py ---
+PASS: issue_submission verification_report_v2 not indexed echo
+PASS: issue_submission verification_report_v2 not accepted echo
+PASS: issue_submission_not_indexed_pass
+PASS: verification_report_only verification_report_v2 not indexed echo
+PASS: verification_report_only verification_report_v2 not accepted echo
+PASS: verification_report_only_not_echo_pass
+PASS: echo_wrapper_with_report_indexed_pass
+PASS: human_solicited_not_independent_pass
+PASS: vr_claims_echo verification_report_v2 not indexed echo
+PASS: vr_claims_echo verification_report_v2 not accepted echo
+FAIL: vr_claims_echo accepted_echo needs echo record kind
+      got record_kind=verification_report_v2
+PASS: verification_report_claims_accepted_echo_fail
+FAIL: issue_claims_indexed verification_report_v2 not indexed echo
+PASS: issue_claims_indexed verification_report_v2 not accepted echo
+PASS: issue_claims_indexed_without_wrapper_fail
+FAIL: solicited_claims_independent solicited claims independent attestation
+PASS: human_solicited_claims_independent_fail
+PASS: accepted_no_echo_path verification_report_v2 not indexed echo
+PASS: accepted_no_echo_path verification_report_v2 not accepted echo
+FAIL: accepted_no_echo_path accepted_echo needs echo record kind
+      got record_kind=verification_report_v2
+PASS: accepted_echo_missing_echo_path_fail
+
+==================================================
+FINAL: PASS — echo acceptance flow tests passed.
+
+PASS: scripts/test_echo_acceptance_flow.py
+
+--- scripts/test_bitcoin_b1_wording.py ---
+PASS: mempool_b1_limited_wording_pass
+PASS: b5_with_actual_witness_method_pass
+FAIL: b1_ordinals B1 overclaim: 'ordinals envelope detected'
+      B1 mempool-only check must not claim witness extraction or body parsing
+PASS: b1_ordinals_envelope_detected_fail
+FAIL: b1_inscription B1 overclaim: 'inscription content detected'
+      B1 mempool-only check must not claim witness extraction or body parsing
+PASS: b1_inscription_content_detected_fail
+FAIL: b1_witness B1 overclaim: 'witness extracted'
+      B1 mempool-only check must not claim witness extraction or body parsing
+PASS: b1_claims_witness_extracted_fail
+FAIL: b1_body_hash B1 overclaim: 'body hash reproduced'
+      B1 mempool-only check must not claim witness extraction or body parsing
+PASS: b1_claims_body_hash_fail
+
+==================================================
+FINAL: PASS — Bitcoin B1 wording tests passed.
+
+PASS: scripts/test_bitcoin_b1_wording.py
+
+==================================================
+FINAL: PASS — agent submission self-test passed.

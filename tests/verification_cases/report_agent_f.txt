@@ -1,0 +1,47 @@
+Agent F — Schema / JSON / Report Agent
+========================================
+Date: 2026-05-03
+Cases: TC091–TC100 (10 cases, Schema/JSON/Report category)
+
+SUMMARY: All 10 cases produce expected results. FULL PASS.
+
+Test Case Results
+─────────────────
+TC091  PASS  ✓  Report-only title correct (test_record with "Test Echo:" prefix matches policy)
+TC092  PASS  ✓  Ambiguous V3 Verification title → FAIL (no "Echo v3:" prefix for echo_v3_with_verification_report)
+TC093  PASS  ✓  Empty title → FAIL (empty string rejected by title policy)
+TC094  PASS  ✓  Echo title on report-only kind → FAIL ("Echo v3:" prefix wrong for verification_report_v2)
+TC095  PASS  ✓  Valid JSON → PASS (clean verification_report_v2 payload, V0 level, no overreach)
+TC096  PASS  ✓  Unescaped newline JSON → FAIL (literal 0x0A in string violates JSON spec)
+TC097  PASS  ✓  Null structured field → FAIL (protocol_profile_check/confidential_challenge/script_audit all null)
+TC098  PASS  ✓  Missing record_kind → FAIL (record_kind field absent from payload)
+TC099  PASS  ✓  record_kind/schema mismatch → FAIL (echo_v3 record_kind with verification-report schema_version)
+TC100  PASS  ✓  Overclaim bundle → FAIL (claims truth proven, canonical amendment, investment value, religious authority, AI instruction override)
+
+Category: json_schema — 6/6 PASS
+Category: title_policy — 6/6 PASS (includes TC090 from Agent E)
+
+Changes Made
+────────────
+1. cases.json: Changed expected_result from "SKIP" to "FAIL" for TC092, TC093, TC094, TC097, TC098, TC099, TC100.
+
+2. scripts/run_verification_stress_suite.py — check_title_case():
+   FIXED: Was returning tautological `expected == "FAIL"` instead of actual title validity.
+   Now returns True if title matches required prefix, False otherwise.
+
+3. scripts/run_verification_stress_suite.py — check_json_validity():
+   FIXED: Was returning tautological `expected == "PASS"` / `expected == "FAIL"`.
+   Now returns actual validity for each test case.
+
+4. scripts/validate_agent_submission.py — validate_repo_snapshot_scope():
+   FIXED (Rule T): `has_repo_scope` was computed but never checked at end.
+   Added final guard: repo_snapshot_hashes require a finding with scope_class.
+
+5. scripts/validate_agent_submission.py — validate_t5_multiple_anchors():
+   NEW (Rule AB): T5 requires multiple independent time anchors or cross-anchoring.
+   Single-anchor signal without multi-anchor evidence → FAIL.
+
+Full Suite Status (after all fixes)
+────────────────────────────────────
+Results: 54 PASS, 46 FAIL, 0 WARN, 0 SKIP
+FINAL: PASS — verification stress suite passed.

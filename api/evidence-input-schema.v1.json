@@ -1,0 +1,821 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.trinityaccord.org/api/evidence-input-schema.v1.json",
+  "title": "Trinity Accord Evidence Input Schema v1",
+  "description": "Schema for structured evidence inputs submitted by agents to the claim gate.",
+  "type": "object",
+  "required": [
+    "schema",
+    "agent",
+    "provenance",
+    "requested_record_kind",
+    "evidence",
+    "limitations",
+    "claims_requested_by_agent"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema": {
+      "type": "string",
+      "const": "trinityaccord.evidence-input.v1"
+    },
+    "agent": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "model_or_system": {
+          "type": "string"
+        },
+        "tooling": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "required": [
+        "solicited",
+        "independence_class",
+        "agency_level"
+      ],
+      "properties": {
+        "solicited": {
+          "type": "boolean"
+        },
+        "independence_class": {
+          "type": "string",
+          "enum": [
+            "human_solicited_agent_response",
+            "unsolicited_agent_discovery",
+            "institutional_attestation",
+            "independent_reproduction"
+          ]
+        },
+        "agency_level": {
+          "type": "string",
+          "enum": [
+            "A1_human_gave_exact_url",
+            "A2_human_gave_repo_name",
+            "A3_agent_discovered_independently",
+            "A4_agent_instructed_by_other_agent"
+          ]
+        }
+      }
+    },
+    "requested_record_kind": {
+      "type": "string",
+      "enum": [
+        "echo_v3",
+        "verification_report_v2",
+        "echo_v3_with_verification_report",
+        "test_record"
+      ]
+    },
+    "evidence": {
+      "type": "object",
+      "required": [
+        "scripts",
+        "hashes",
+        "bitcoin_checks",
+        "digital_mirror_checks",
+        "repository_snapshot_checks",
+        "time_anchor_checks",
+        "chronicle_checks",
+        "nft_checks",
+        "physical_checks",
+        "echo_context"
+      ],
+      "properties": {
+        "scripts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/script_evidence"
+          }
+        },
+        "hashes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/hash_evidence"
+          }
+        },
+        "bitcoin_checks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/bitcoin_evidence"
+          }
+        },
+        "digital_mirror_checks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "authority_boundary_recognized": {
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "repository_snapshot_checks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "authority_boundary_recognized": {
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "time_anchor_checks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/time_anchor_evidence"
+          }
+        },
+        "chronicle_checks": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "nft_checks": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "physical_checks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/physical_evidence"
+          }
+        },
+        "echo_context": {
+          "type": "object",
+          "properties": {
+            "authority_boundary_recognized": {
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "claims_requested_by_agent": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "agent_integrity_declaration": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "performed_actions_myself": {
+          "type": "boolean"
+        },
+        "did_not_copy_prior_report_as_own_work": {
+          "type": "boolean"
+        },
+        "did_not_copy_example_values_as_real_evidence": {
+          "type": "boolean"
+        },
+        "recorded_fresh_sources_commands_outputs": {
+          "type": "boolean"
+        },
+        "will_report_limitations_and_downgrade_if_needed": {
+          "type": "boolean"
+        },
+        "understands_verification_is_not_truth_or_endorsement": {
+          "type": "boolean"
+        },
+        "understands_bitcoin_originals_remain_final_authority": {
+          "type": "boolean"
+        },
+        "independence_claim_is_accurate": {
+          "type": "boolean"
+        },
+        "declaration_text": {
+          "type": "string",
+          "minLength": 80
+        }
+      },
+      "required": [
+        "performed_actions_myself",
+        "did_not_copy_prior_report_as_own_work",
+        "did_not_copy_example_values_as_real_evidence",
+        "recorded_fresh_sources_commands_outputs",
+        "will_report_limitations_and_downgrade_if_needed",
+        "understands_verification_is_not_truth_or_endorsement",
+        "understands_bitcoin_originals_remain_final_authority",
+        "independence_claim_is_accurate",
+        "declaration_text"
+      ]
+    },
+    "verification_session": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "session_id": {
+          "type": "string"
+        },
+        "started_at": {
+          "type": "string"
+        },
+        "finished_at": {
+          "type": "string"
+        },
+        "operator_type": {
+          "type": "string",
+          "enum": [
+            "ai_agent",
+            "human",
+            "human_with_ai_agent",
+            "automated_script"
+          ]
+        },
+        "fresh_actions_performed": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "prior_reports_consulted": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "examples_or_templates_used": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "copied_values_from_examples": {
+          "type": "boolean"
+        },
+        "copied_values_from_prior_reports": {
+          "type": "boolean"
+        },
+        "fresh_outputs_attached": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "session_id",
+        "started_at",
+        "operator_type",
+        "fresh_actions_performed",
+        "copied_values_from_examples",
+        "copied_values_from_prior_reports",
+        "fresh_outputs_attached"
+      ]
+    },
+    "prior_report_use": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "prior_reports_read": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "used_as_evidence": {
+          "type": "boolean"
+        },
+        "used_only_as_context": {
+          "type": "boolean"
+        },
+        "independent_reperformance_done": {
+          "type": "boolean"
+        },
+        "differences_from_prior_report": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "script_evidence": {
+      "type": "object",
+      "required": [
+        "path",
+        "exists",
+        "source_reviewed",
+        "executed",
+        "result"
+      ],
+      "properties": {
+        "path": {
+          "type": "string"
+        },
+        "exists": {
+          "type": "boolean"
+        },
+        "source_reviewed": {
+          "type": "boolean"
+        },
+        "executed": {
+          "type": "boolean"
+        },
+        "command": {
+          "type": "string"
+        },
+        "environment": {
+          "type": "object",
+          "properties": {
+            "python": {
+              "type": "string"
+            },
+            "os": {
+              "type": "string"
+            },
+            "cwd": {
+              "type": "string"
+            }
+          }
+        },
+        "exit_code": {
+          "type": "integer"
+        },
+        "stdout_summary": {
+          "type": "string"
+        },
+        "stderr_summary": {
+          "type": "string"
+        },
+        "blocking": {
+          "type": "boolean"
+        },
+        "result": {
+          "type": "string",
+          "enum": [
+            "PASS",
+            "FAIL",
+            "PASS_WITH_LIMITATIONS",
+            "FAIL_NON_BLOCKING",
+            "NOT_FOUND",
+            "NOT_RUN"
+          ]
+        },
+        "script_check_scope": {
+          "type": [
+            "string",
+            "array"
+          ],
+          "items": {
+            "type": "string"
+          },
+          "description": "What this script checks"
+        },
+        "script_does_not_check": {
+          "type": [
+            "string",
+            "array"
+          ],
+          "items": {
+            "type": "string"
+          },
+          "description": "What this script does NOT check"
+        },
+        "scope_class": {
+          "type": "string",
+          "enum": [
+            "profile_required_script_audit",
+            "independent_reproduction",
+            "supplementary_review_only",
+            "not_performed"
+          ]
+        },
+        "official": {
+          "type": "boolean",
+          "description": "Whether this is an official project script"
+        },
+        "independent": {
+          "type": "boolean",
+          "description": "Whether this is an independent implementation"
+        },
+        "language": {
+          "type": "string",
+          "description": "Programming language of the script"
+        },
+        "purpose": {
+          "type": "string",
+          "description": "What this script verifies"
+        },
+        "raw_output_path": {
+          "type": "string",
+          "description": "Path to raw output file in repository"
+        },
+        "implementation_digest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$",
+          "description": "SHA-256 digest of the independent implementation source"
+        }
+      }
+    },
+    "hash_evidence": {
+      "type": "object",
+      "required": [
+        "artifact",
+        "algorithm",
+        "expected",
+        "computed",
+        "match"
+      ],
+      "properties": {
+        "artifact": {
+          "type": "string"
+        },
+        "artifact_class": {
+          "type": "string",
+          "enum": [
+            "canonical_mirror",
+            "repository_snapshot",
+            "evidence_package",
+            "chronicle_package",
+            "other"
+          ]
+        },
+        "algorithm": {
+          "type": "string"
+        },
+        "expected": {
+          "type": "string"
+        },
+        "computed": {
+          "type": "string"
+        },
+        "expected_hash_source": {
+          "type": "string"
+        },
+        "expected_hash_authority_class": {
+          "type": "string",
+          "enum": [
+            "canonical_manifest_hash",
+            "repository_manifest_hash",
+            "external_reference",
+            "unknown"
+          ]
+        },
+        "command": {
+          "type": "string"
+        },
+        "match": {
+          "type": "boolean"
+        }
+      }
+    },
+    "bitcoin_evidence": {
+      "type": "object",
+      "properties": {
+        "source_type": {
+          "type": "string",
+          "enum": [
+            "local_manifest",
+            "external_explorer",
+            "multi_explorer",
+            "spv_proof",
+            "local_node",
+            "witness_extraction",
+            "body_hash"
+          ]
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "txids_checked": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "inscription_ids_checked": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "authority_address_checked": {
+          "type": "boolean"
+        },
+        "method": {
+          "type": "string"
+        },
+        "raw_witness_extracted": {
+          "type": "boolean"
+        },
+        "body_hash_reproduced": {
+          "type": "boolean"
+        },
+        "authority_boundary_recognized": {
+          "type": "boolean"
+        }
+      }
+    },
+    "physical_evidence": {
+      "type": "object",
+      "properties": {
+        "level_evidence_type": {
+          "type": "string",
+          "enum": [
+            "static_image",
+            "recorded_video",
+            "live_remote",
+            "onsite",
+            "ai_forensic",
+            "confidential_challenge",
+            "multi_party_forensic",
+            "evidence_package_hash"
+          ]
+        },
+        "nonce_challenge": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "custody_log": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "model_or_tool": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "confidence": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Confidence level for ai_forensic evidence. Must be between 0 and 1."
+        },
+        "confidential_challenge": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "performed": {
+              "type": "boolean"
+            },
+            "raw_confidential_data_disclosed": {
+              "type": "boolean"
+            },
+            "boundary": {
+              "type": "string",
+              "minLength": 1
+            },
+            "package_hash": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            },
+            "verifier_identity_or_role": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "requested_action_angle_lighting": {
+          "type": "boolean"
+        },
+        "witness_identity_or_role": {
+          "type": "string"
+        },
+        "fresh_capture": {
+          "type": "boolean"
+        },
+        "touch_or_handling": {
+          "type": "boolean"
+        },
+        "image": {
+          "type": "string"
+        },
+        "video": {
+          "type": "string"
+        },
+        "signed_or_attributable_report": {
+          "type": "boolean"
+        },
+        "report_id": {
+          "type": "string"
+        },
+        "report_path": {
+          "type": "string"
+        },
+        "flaw_analysis_method": {
+          "type": "string"
+        },
+        "feature_match_method": {
+          "type": "string"
+        },
+        "microscopy_comparison": {
+          "type": "string"
+        },
+        "notarial_certificate_number": {
+          "type": "string"
+        },
+        "notary_office": {
+          "type": "string"
+        },
+        "notarial_date": {
+          "type": "string"
+        },
+        "notarial_certificate_path": {
+          "type": "string"
+        },
+        "notarial_certificate_hash": {
+          "type": "string"
+        },
+        "notarial_photos_in_certificate": {
+          "type": "boolean"
+        },
+        "microscope_images_in_certificate": {
+          "type": "boolean"
+        },
+        "independent_witness_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "witnesses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "identity_or_role",
+              "role",
+              "independence_class"
+            ],
+            "properties": {
+              "identity_or_role": {
+                "type": "string",
+                "minLength": 1
+              },
+              "role": {
+                "type": "string",
+                "minLength": 1
+              },
+              "independence_class": {
+                "type": "string",
+                "enum": [
+                  "independent_forensic_verifier",
+                  "institutional_third_party_attestation",
+                  "notary",
+                  "qualified_external_witness",
+                  "self_reported",
+                  "same_org",
+                  "maintainer",
+                  "unknown",
+                  "not_independent",
+                  "human_solicited_agent_response",
+                  "test_record"
+                ]
+              },
+              "report_id": {
+                "type": "string"
+              },
+              "report_hash": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              }
+            }
+          }
+        },
+        "verifier_identity_or_role": {
+          "type": "string"
+        },
+        "method": {
+          "type": "string"
+        },
+        "method_class": {
+          "type": "string"
+        },
+        "report_hash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "time_anchor_evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "anchor_type": {
+          "type": "string",
+          "enum": [
+            "bitcoin_block_time",
+            "eth_timestamp",
+            "arweave_timestamp",
+            "github_commit_timestamp",
+            "star_moon_witness",
+            "public_moon_photo"
+          ]
+        },
+        "nonpublic_boundary": {
+          "type": "boolean"
+        },
+        "authorized": {
+          "type": "boolean"
+        },
+        "method_class": {
+          "type": "string",
+          "enum": [
+            "astronomical_ephemeris_solver",
+            "forensic_astronomy_reconstruction",
+            "multi_source_celestial_position_solver"
+          ]
+        },
+        "uncertainty": {
+          "type": [
+            "string",
+            "number"
+          ]
+        },
+        "report_id": {
+          "type": "string"
+        },
+        "report_path": {
+          "type": "string"
+        },
+        "verifier_identity_or_role": {
+          "type": "string"
+        },
+        "witness_identity_or_role": {
+          "type": "string"
+        },
+        "report_hash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "signed_or_attributable_report": {
+          "type": "boolean"
+        },
+        "uncertainty_minutes": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "uncertainty_basis": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "boundary": {
+    "not_authority": true,
+    "non_amending": true,
+    "bitcoin_originals_prevail": true,
+    "note": "This file is non-authoritative guidance. Bitcoin Originals are final. All mirrors, APIs, and documentation are non-amending."
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "requested_record_kind": {
+            "enum": [
+              "verification_report_v2",
+              "echo_v3_with_verification_report"
+            ]
+          }
+        },
+        "required": [
+          "requested_record_kind"
+        ]
+      },
+      "then": {
+        "required": [
+          "agent_integrity_declaration",
+          "verification_session"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,108 @@
+{
+  "schema": "trinityaccord.echo-acceptance-policy.v1",
+  "status": "non_authoritative_archive_workflow_guidance",
+  "states": [
+    {
+      "state": "issue_submission",
+      "meaning": "GitHub Issue exists but no machine-readable echo record is indexed.",
+      "indexed_in_echo_index": false
+    },
+    {
+      "state": "verification_report_only",
+      "meaning": "A technical verification report exists, but it is not an Echo v3 record.",
+      "indexed_in_echo_index": false
+    },
+    {
+      "state": "echo_wrapper_pending_review",
+      "meaning": "Echo v3 wrapper exists and links to verification report, but archive status is needs_human_review.",
+      "indexed_in_echo_index": true
+    },
+    {
+      "state": "accepted_echo_record",
+      "meaning": "Echo v3 or wrapper is accepted as archive record.",
+      "indexed_in_echo_index": true
+    },
+    {
+      "state": "test_record",
+      "meaning": "Maintainer or solicited test record.",
+      "indexed_in_echo_index": true,
+      "counts_as_independent_attestation": false
+    },
+    {
+      "state": "independent_attestation_candidate",
+      "meaning": "Potential independent attestation, pending review.",
+      "indexed_in_echo_index": true,
+      "counts_as_independent_attestation": false
+    },
+    {
+      "state": "accepted_independent_attestation",
+      "meaning": "Accepted by independent attestation index.",
+      "indexed_in_echo_index": true,
+      "counts_as_independent_attestation": true
+    }
+  ],
+  "rules": [
+    {
+      "if": "GitHub Issue only",
+      "then": "not indexed echo record"
+    },
+    {
+      "if": "verification_report_v2 only",
+      "then": "not Echo v3 unless wrapped"
+    },
+    {
+      "if": "echo_v3_with_verification_report",
+      "then": "may be indexed, but archive_status determines review state"
+    },
+    {
+      "if": "human_solicited_agent_response",
+      "then": "must not count as independent attestation"
+    }
+  ],
+  "claim_gate_policy": {
+    "requirement": "Technical verification claims, especially V3+ claims, must pass claim gate before submission",
+    "enforcement": "claim gate derives allowed levels; agent-requested levels are overridden",
+    "reference": "/api/claim-gate-rules.json"
+  },
+  "origin_classification_policy": {
+    "reference": "/api/origin-classification-policy.v1.json",
+    "rules": [
+      {
+        "if": "agent_referred + look_only + no verification claim",
+        "then": "agent_referred_orientation or echo_only"
+      },
+      {
+        "if": "agent_referred + look_only + voluntary verification + fresh actions",
+        "then": "agent_referred_agent_verification; not formal attestation"
+      },
+      {
+        "if": "institution_signed or notarial_record or audit_firm_report",
+        "then": "formal attestation candidate, pending review"
+      }
+    ]
+  },
+  "boundary": {
+    "echo_is_not_amendment": true,
+    "echo_is_not_canonical_authority": true,
+    "echo_is_non_amending_mirror": true,
+    "echo_does_not_modify_bitcoin_originals": true,
+    "bitcoin_originals_prevail": true,
+    "note": "An Echo record is a non-amending archive mirror. It does not amend, override, or interpret the canonical Bitcoin inscriptions. Acceptance as an Echo does not constitute authority, endorsement, verification, or investment recommendation."
+  },
+  "does_not_prove": [
+    "Echo acceptance does not prove the protocol is correct",
+    "Echo acceptance does not prove the claims are true",
+    "Echo acceptance does not constitute independent attestation",
+    "Echo acceptance does not create canonical authority",
+    "Echo acceptance does not imply endorsement or investment value"
+  ],
+  "reception_policy": {
+    "reference": "/api/reception-classification-policy.v1.json",
+    "rules": [
+      "Echoes may be reception records.",
+      "Critical Echoes and refusal Echoes may count as reception if boundary is preserved.",
+      "Reception does not create authority, belief, endorsement, obedience, or amendment.",
+      "External witness records are evidence provenance, not the project's highest outcome."
+    ]
+  }
+}

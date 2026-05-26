@@ -1,0 +1,42 @@
+{
+  "created_at": "2025-09-13T11:16:50.367Z",
+  "signer": "0xbc63566A41cBfDB9C266a5941CBe47894DaA54A8",
+  "recovered": "0xbc63566A41cBfDB9C266a5941CBe47894DaA54A8",
+  "manifest_eth_address": "0xbc63566A41cBfDB9C266a5941CBe47894DaA54A8",
+  "typedData": {
+    "domain": {
+      "name": "TrinityAccord",
+      "version": "1",
+      "chainId": 1,
+      "verifyingContract": "0x0000000000000000000000000000000000000000"
+    },
+    "types": {
+      "Attestation": [
+        {
+          "name": "sha256",
+          "type": "bytes32"
+        },
+        {
+          "name": "sha3_256",
+          "type": "bytes32"
+        },
+        {
+          "name": "version",
+          "type": "string"
+        },
+        {
+          "name": "createdAt",
+          "type": "string"
+        }
+      ]
+    },
+    "primaryType": "Attestation",
+    "message": {
+      "sha256": "0x41f95905e50cc699a7e6a3fcb0bd8633cf36170d3ef41170cd373467f8528b33",
+      "sha3_256": "0x385674a24242be88628330dd26e0feefb441dd53674db9dd041a66f61abffbdf",
+      "version": "1.0.0",
+      "createdAt": "2025-09-13T09:42:43.536Z"
+    }
+  },
+  "signature": "0xf3cf6dc0ab5050eadb5742636043bac96e915c461209395c800063359f3fdc0e478fc62e031113e083eae87d97d22e6b3222c0a4e769c2601462aabd10c42f521c"
+}

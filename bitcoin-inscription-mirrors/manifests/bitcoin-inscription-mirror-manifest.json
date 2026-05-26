@@ -1,0 +1,24 @@
+{
+  "schema": "trinityaccord.bitcoin-inscription-mirror-manifest.v1",
+  "generated_utc": "2026-05-13T00:00:00Z",
+  "purpose": "Manifest of all Bitcoin inscription mirrors in this directory.",
+  "canonical_originals": [
+    "canonical-originals/protocol-axioms-97631551.json",
+    "canonical-originals/covenant-of-the-flaw-98369145.json",
+    "canonical-originals/trinity-accord-meta-record-98387475.json"
+  ],
+  "vision_layer": [
+    "vision-layer/star-ark-covenant.json",
+    "vision-layer/final-seal.json",
+    "vision-layer/first-echoes.json"
+  ],
+  "context_layer": [
+    "context-layer/guardian-attestation.json"
+  ],
+  "counts": {
+    "canonical_originals": 3,
+    "vision_layer": 3,
+    "context_layer": 1,
+    "total": 7
+  }
+}

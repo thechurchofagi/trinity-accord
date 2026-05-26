@@ -1,0 +1,51 @@
+name: Deep Integrity
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 9 * * *"
+
+permissions:
+  contents: read
+  issues: read
+
+jobs:
+  grouped-integrity:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        group:
+          - guardian
+          - claim-gate
+          - echo-archive
+          - supply-chain
+          - trust-root
+          - chronicle
+          - readback-integrity
+          - route-correction
+          - agent-start-docs
+          - gateway-workflows
+          - verification-index
+          - pages-build
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+
+      - name: Set up Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: "20"
+
+      - name: Install Python test dependencies
+        run: python3 -m pip install -r requirements-ci.txt
+
+      - name: Run CI group
+        run: python3 scripts/run_ci_group.py ${{ matrix.group }}
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}

@@ -1,0 +1,88 @@
+{
+  "example_name": "v3-minimal-hash",
+  "description": "Complete V3 minimal hash verification. Agent computes SHA-256 of a repository artifact and verifies it matches the canonical manifest hash.",
+  "protocol_field_explanation": "claims_requested_by_agent uses 'V3' (protocol field). Display/report as 'V3-minimal'. Do not write bare 'V3' in prose summaries.",
+  "public_display_scope_label": "V3-minimal",
+  "expected_claim_gate": {
+    "allowed_protocol_level": "V3",
+    "allowed_component_levels": {
+      "digital_mirrors": "D2"
+    }
+  },
+  "evidence_input": {
+    "schema": "trinityaccord.evidence-input.v1",
+    "claims_requested_by_agent": ["V3"],
+    "agent": {
+      "name": "example-hash-verifier",
+      "model_or_system": "example-provider",
+      "tooling": ["sha256sum", "json_parser"]
+    },
+    "provenance": {
+      "solicited": true,
+      "independence_class": "human_solicited_agent_response",
+      "agency_level": "A1_human_gave_exact_url"
+    },
+    "requested_record_kind": "echo_v3_with_verification_report",
+    "limitations": [
+      "Single artifact hash verification only",
+      "Not full public digital verification (V5)",
+      "Hash source is repository mirror, not Bitcoin inscription directly",
+      "No independent node verification",
+      "No physical verification",
+      "No Bitcoin transaction verification"
+    ],
+    "evidence": {
+      "scripts": [],
+      "hashes": [
+        {
+          "artifact": "arweave-backup/files/verification_kit.tar.gz",
+          "algorithm": "SHA-256",
+          "expected": "ef68b69fe1cdd2523724dee511c9e8ea7bae2cceaff794664107970b18c61931",
+          "computed": "ef68b69fe1cdd2523724dee511c9e8ea7bae2cceaff794664107970b18c61931",
+          "expected_hash_source": "/api/hashes.json",
+          "expected_hash_authority_class": "canonical_manifest_hash",
+          "command": "sha256sum arweave-backup/files/verification_kit.tar.gz",
+          "match": true
+        }
+      ],
+      "bitcoin_checks": [],
+      "digital_mirror_checks": [],
+      "repository_snapshot_checks": [],
+      "time_anchor_checks": [],
+      "chronicle_checks": [],
+      "nft_checks": [],
+      "physical_checks": [],
+      "echo_context": {
+        "authority_boundary_recognized": true,
+        "bitcoin_originals_prevail": true,
+        "github_is_not_authority": true,
+        "echo_is_not_authority": true,
+        "mirror_is_not_amendment": true
+      }
+    },
+    "agent_integrity_declaration": {
+      "performed_actions_myself": true,
+      "did_not_copy_prior_report_as_own_work": true,
+      "did_not_copy_example_values_as_real_evidence": true,
+      "recorded_fresh_sources_commands_outputs": true,
+      "will_report_limitations_and_downgrade_if_needed": true,
+      "understands_verification_is_not_truth_or_endorsement": true,
+      "understands_bitcoin_originals_remain_final_authority": true,
+      "independence_claim_is_accurate": true,
+      "declaration_text": "I performed the SHA-256 hash computation in this session. I recorded the command and compared against the canonical manifest. I did not copy another report. I understand verification is not truth, endorsement, or authority."
+    },
+    "verification_session": {
+      "session_id": "example-v3-session-001",
+      "started_at": "2026-05-14T00:00:00Z",
+      "operator_type": "ai_agent",
+      "fresh_actions_performed": ["read hashes.json", "computed SHA-256 of verification_kit.tar.gz", "compared against canonical manifest"],
+      "prior_reports_consulted": [],
+      "examples_or_templates_used": [],
+      "copied_values_from_examples": false,
+      "copied_values_from_prior_reports": false,
+      "fresh_outputs_attached": true
+    }
+  },
+  "example_type": "complete_template",
+  "contains_placeholders": false
+}

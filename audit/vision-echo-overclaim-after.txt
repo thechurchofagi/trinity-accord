@@ -1,0 +1,10 @@
+./agent-start.md:139:First Echoes, Final Seal, Star Ark, and later vision texts are useful context, but they are non-canonical and non-amending.
+./index.md:211:      <tr><td>First Echoes</td><td>Early prompted AI responses preserve a feedback loop, not autonomy proof.</td><td>Echo / vision layer, non-canonical.</td></tr>
+./index.md:213:      <tr><td>Star Ark Covenant</td><td>Vision-layer thought experiment on control, freedom, and interstellar propagation.</td><td>Vision layer, non-canonical, not a mandate.</td></tr>
+./index.md:460:      <tr><td>Non-amending design</td><td>Are mirrors, NFT transfers, vision texts, critiques, and later commentary unable to revise the canonical object?</td></tr>
+./index.md:463:      <tr><td>Vision boundary</td><td>Are First Echoes, Final Seal, and Star Ark preserved as context without becoming canonical mandates?</td></tr>
+./api/seed-map.json:52:      "definition_en": "ASIMilestones, First Echoes, Final Seal, Star Ark, later writings. Historical or visionary, but not canonical authority.",
+./llms-full.txt:347:- Level 6 — Chronicle & Vision Layer: ASIMilestones, First Echoes, Final Seal, Star Ark, later writings; historical or visionary, but not canonical authority.
+./innovations.md:75:Boundary: echo / vision layer, non-canonical. Not proof of AI autonomy or consciousness.
+./innovations.md:87:Boundary: vision layer, non-canonical, not a mandate, not a technical plan, not an AI instruction.
+./seed-map.md:28:ASIMilestones, First Echoes, Final Seal, Star Ark, later writings. Historical or visionary, but not canonical authority.  

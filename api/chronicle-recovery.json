@@ -1,0 +1,39 @@
+{
+  "schema": "trinity-accord.chronicle-recovery.v1",
+  "status": "non_amending_chronicle_recovery_layer",
+  "canonical_authority": "three_bitcoin_inscriptions_only",
+  "not_canonical_authority": true,
+  "target": {
+    "collection": "ASIMilestones Chronicle NFTs",
+    "approximate_count": 175,
+    "standards": [
+      "ERC-721",
+      "ERC-1155"
+    ],
+    "chains": [
+      "Ethereum",
+      "Polygon",
+      "Base"
+    ]
+  },
+  "final_status": {
+    "completed": true,
+    "verified_count": 175,
+    "target_count": 175,
+    "completed_at": "2025-08-30"
+  },
+  "recovery_package": {
+    "arweave_tx": "O-Rk3kFxesPGhuYP4KHAZl54xR2urDRKcGaVqjVnB-Q",
+    "ipfs_root_cid": "QmYCosJg44CXkFxLsJPBxKvWAJaFAcLMddp37sk9Gdr4Vd"
+  },
+  "verification_kit": {
+    "arweave_tx": "X4KOUkf-1ciFD3Q-gMA0i94t1hAVXGrUDm0q5amL4rc",
+    "sha256": "ef68b69fe1cdd2523724dee511c9e8ea7bae2cceaff794664107970b18c61931"
+  },
+  "strict_verifier": "verify-batch-strict.mjs",
+  "verification_inputs": [
+    "arweave_cid_map.jsonl",
+    "fallback_media_report.jsonl"
+  ],
+  "boundary": "Chronicle recovery verification proves recoverability of historical NFT records. It does not create canonical authority and does not amend the Bitcoin Originals."
+}

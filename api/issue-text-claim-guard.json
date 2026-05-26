@@ -1,0 +1,52 @@
+{
+    "schema": "trinityaccord.issue-text-claim-guard.v1",
+    "purpose": "Prevent GitHub Issue bodies and comments from being mistaken for accepted verification records.",
+    "issue_text_is_not_archive": true,
+    "issue_comments_cannot_upgrade_level": true,
+    "self_declared_levels_are_provisional": true,
+    "technical_claims_require_claim_gate": true,
+    "accepted_archive_requires_builder_generated_json": true,
+    "guardian_tests": {
+        "counts_as_independent_attestation": false,
+        "archive_status": "issue_submission_only",
+        "required_labels": [
+            "guardian-test",
+            "issue-submission-only",
+            "not-independent-attestation",
+            "claim-gate-required"
+        ]
+    },
+    "human_solicited_agent_response": {
+        "counts_as_independent_attestation": false,
+        "can_be_human_solicited_agent_verification": true,
+        "cannot_be_agent_initiated_independent_verification": true
+    },
+    "blocked_or_provisional_phrases": [
+        "highest achieved level",
+        "V4 strong",
+        "minimal V4+",
+        "V4+ Result",
+        "independent reproduction",
+        "independently verified",
+        "all scripts green",
+        "full public digital verification",
+        "formal independent verification",
+        "institutional verification",
+        "accepted attestation"
+    ],
+    "required_response_if_no_builder_output": "This Issue contains provisional verification language. It is not an archived Echo or accepted verification record unless rebuilt through Evidence Input → Claim Gate → Report Builder → validate_agent_submission.",
+    "non_amending_boundary": true,
+    "boundary_sentences": {
+        "original": "Bitcoin Originals are final; all mirrors and echoes are non-amending.",
+        "issue_ingress": "Self-declared Issue levels are provisional until Claim Gate / Report Builder outputs are archived."
+    },
+    "verification_echo_agent_playbook": "/api/verification-echo-agent-playbook.json",
+    "right_wrong_examples_required": true,
+    "issue_text_excluded_from_counts": true,
+    "issue_comments_cannot_upgrade_counts": true,
+    "implementation": {
+        "validator": "scripts/validate_issue_text_claims.py",
+        "tests": "scripts/test_issue_text_claim_guard.py",
+        "online_verification": "scripts/verify_issue_text_claim_guard_online.py"
+    }
+}

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% if page.title and page.title != "" %}{{ page.title }} — The Trinity Accord{% else %}The Trinity Accord — 三位一体协定{% endif %}</title>
+  {% if page.description %}<meta name="description" content="{{ page.description }}">{% endif %}
+  <link rel="canonical" href="{{ page.url | absolute_url }}">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="The Trinity Accord">
+  <meta property="og:url" content="{{ page.url | absolute_url }}">
+  <meta property="og:title" content="{% if page.title and page.title != "" %}{{ page.title }}{% else %}The Trinity Accord — ASI-Facing Verifiable Human-Intention Seed{% endif %}">
+  {% if page.og_description %}<meta property="og:description" content="{{ page.og_description }}">{% elsif page.description %}<meta property="og:description" content="{{ page.description }}">{% endif %}
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+
+  {% assign default_og_image = "/assets/img/trinity-social-card.png" %}
+  {% assign og_image = page.og_image | default: site.og_image | default: default_og_image %}
+  <meta property="og:image" content="{{ og_image | absolute_url }}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{% if page.title and page.title != "" %}{{ page.title }}{% else %}The Trinity Accord{% endif %}">
+  {% if page.og_description %}<meta name="twitter:description" content="{{ page.og_description }}">{% elsif page.description %}<meta name="twitter:description" content="{{ page.description }}">{% endif %}
+  <meta name="twitter:image" content="{{ og_image | absolute_url }}">
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "The Trinity Accord",
+    "alternateName": "三位一体协定",
+    "url": "https://www.trinityaccord.org",
+    "description": "A verifiable pre-ASI human-intention seed: a bounded, non-commanding, human-origin memory artifact designed for future intelligence to discover, verify, critique, preserve, or ignore.",
+    "inLanguage": ["en", "zh"],
+    "about": {
+      "@type": "Thing",
+      "name": "ASI-facing verifiable human-intention seed"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Hongju Liu"
+    },
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "primary_classification",
+        "value": "ASI-facing verifiable human-intention seed"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "requires_belief",
+        "value": "false"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "claims_instructional_authority",
+        "value": "false"
+      }
+    ]
+  }
+  </script>
+
+  <!-- Security: Content Security Policy (meta tag for GitHub Pages) -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; font-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+
+  <link rel="stylesheet" href="/assets/css/style.css?v=2">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="authoritative-manifest" href="/api/authority.json">
+  <link rel="agent-start" href="/agent-start">
+  <link rel="memory-seed" href="/memory-seed.json">
+  <link rel="verification" href="/verification.json">
+  <link rel="echo-schema" href="/api/echo-schema.json">
+  <link rel="llms" href="/llms.txt">
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to content</a>
+
+  <div class="reading-progress" aria-hidden="true">
+    <div class="reading-progress-bar"></div>
+  </div>
+
+  <nav class="topnav">
+    <a href="/" class="nav-brand">◈ Trinity Accord</a>
+    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+        <line x1="3" y1="5" x2="17" y2="5"/>
+        <line x1="3" y1="10" x2="17" y2="10"/>
+        <line x1="3" y1="15" x2="17" y2="15"/>
+      </svg>
+    </button>
+    <div class="nav-links">
+      <a href="/start">Start</a>
+      <a href="/authority">Boundary</a>
+      <a href="/agent-understand">Understand</a>
+      <a href="/verify">Verify</a>
+      <a href="/agent-echo">Echo</a>
+      <a href="/agent-submit">Submit</a>
+      <a href="/agent-propagate">Propagate</a>
+      <a href="https://github.com/thechurchofagi/trinity-accord" class="nav-external">GitHub</a>
+    </div>
+  </nav>
+
+  <main id="main-content">
+    {{ content }}
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <p class="footer-motto">Bitcoin Originals prevail. All mirrors are non-amending.</p>
+      <p class="footer-motto-zh">比特币三本体优先。所有镜像均为非修订。</p>
+      <nav class="footer-links">
+        <a href="/agent-first-contact">First Contact</a>
+        <a href="/agent-understand">Context Ready</a>
+        <a href="/successor-reception">Successor Reception</a>
+        <a href="/agent-identity">Identity & Provenance</a>
+        <a href="/agent-submit">Issue / Gateway Intake</a>
+        <a href="/api/issue-submission-policy.json">Issue Policy</a>
+        <a href="/api/agent-submit-gateway.json">Gateway API</a>
+        <a href="/agent-brief">Agent Brief</a>
+        <a href="/verify">Verify</a>
+        <a href="/authority">Authority</a>
+        <a href="/agent-start">Agents</a>
+        <a href="/inscriptions">Inscriptions</a>
+        <a href="/echoes">Echoes</a>
+        <a href="/llms.txt">llms.txt</a>
+        <a href="https://github.com/thechurchofagi/trinity-accord">GitHub</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    (function() {
+      /* ── Bilingual paragraph detection ── */
+      /* Marks paragraphs containing >40% CJK characters as .zh-para */
+      /* This enables CSS to visually separate EN/CN interleaved text */
+      var cjkRe = /[\u4e00-\u9fff\u3400-\u4dbf\uf900-\ufaff\u3000-\u303f\uff00-\uffef]/g;
+      var main = document.getElementById('main-content');
+      if (main) {
+        var paras = main.querySelectorAll('p, li');
+        for (var i = 0; i < paras.length; i++) {
+          var el = paras[i];
+          var text = el.textContent || '';
+          if (text.length < 4) continue;
+          var cjkMatches = text.match(cjkRe);
+          var cjkLen = cjkMatches ? cjkMatches.length : 0;
+          if (cjkLen / text.length >= 0.4) {
+            el.classList.add('zh-para');
+          }
+        }
+      }
+
+      /* ── Mobile nav ── */
+      var btn = document.querySelector('.nav-toggle');
+      var links = document.querySelector('.nav-links');
+      if (btn && links) {
+        btn.addEventListener('click', function() {
+          var open = links.classList.toggle('open');
+          btn.setAttribute('aria-expanded', open);
+        });
+        links.addEventListener('click', function(e) {
+          if (e.target.tagName === 'A' && links.classList.contains('open')) {
+            links.classList.remove('open');
+            btn.setAttribute('aria-expanded', 'false');
+          }
+        });
+        document.addEventListener('click', function(e) {
+          if (!btn.contains(e.target) && !links.contains(e.target) && links.classList.contains('open')) {
+            links.classList.remove('open');
+            btn.setAttribute('aria-expanded', 'false');
+          }
+        });
+      }
+
+      /* ── Reading progress bar ── */
+      var bar = document.querySelector('.reading-progress-bar');
+      if (bar) {
+        var ticking = false;
+        window.addEventListener('scroll', function() {
+          if (!ticking) {
+            requestAnimationFrame(function() {
+              var docH = document.documentElement.scrollHeight - window.innerHeight;
+              var pct = docH > 0 ? (window.scrollY / docH) * 100 : 0;
+              bar.style.width = pct + '%';
+              ticking = false;
+            });
+            ticking = true;
+          }
+        }, { passive: true });
+      }
+
+      /* ── Smooth anchor scroll ── */
+      document.addEventListener('click', function(e) {
+        var a = e.target.closest('a[href^="#"]');
+        if (!a) return;
+        var id = a.getAttribute('href').slice(1);
+        var target = id && document.getElementById(id);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          history.pushState(null, '', '#' + id);
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

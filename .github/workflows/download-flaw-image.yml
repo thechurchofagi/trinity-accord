@@ -1,0 +1,95 @@
+name: Download flaw images from Arweave
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  download:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+
+
+      - name: Record toolchain provenance
+        run: |
+          python3 scripts/toolchain_provenance.py > toolchain-provenance.json
+          cat toolchain-provenance.json
+      - name: Authorize write workflow actor
+        env:
+          ACTOR: ${{ github.actor }}
+          EVENT_NAME: ${{ github.event_name }}
+          SENDER: ${{ github.event.sender.login }}
+        run: |
+          set -euo pipefail
+          case "$ACTOR" in
+            thechurchofagi|github-actions[bot])
+              echo "Authorized actor: $ACTOR"
+              ;;
+            *)
+              echo "Unauthorized actor for write workflow: $ACTOR"
+              exit 1
+              ;;
+          esac
+          if [ "$EVENT_NAME" = "repository_dispatch" ]; then
+            case "$SENDER" in
+              thechurchofagi|github-actions[bot])
+                echo "Authorized repository_dispatch sender: $SENDER"
+                ;;
+              *)
+                echo "Unauthorized repository_dispatch sender: $SENDER"
+                exit 1
+                ;;
+            esac
+          fi
+
+      - name: Download from Arweave
+        run: |
+          TXID="9klmArmByJNOGeHzfnrAhB6x6w7sKSYLS1zQNLL7GLs"
+          for GW in "https://ar-io.dev" "https://arweave.net" "https://g8way.io"; do
+            echo "Trying: $GW"
+            if curl -L --connect-timeout 30 --max-time 600 --retry 3 --retry-delay 10 \
+              "$GW/$TXID" -o /tmp/arweave-raw.bin 2>&1; then
+              SIZE=$(stat -c%s /tmp/arweave-raw.bin 2>/dev/null || echo 0)
+              echo "Downloaded: $SIZE bytes from $GW"
+              [ "$SIZE" -gt 1000 ] && break
+            fi
+          done
+          echo "Type: $(file /tmp/arweave-raw.bin)"
+          echo "SHA-256: $(sha256sum /tmp/arweave-raw.bin | awk '{print $1}')"
+
+      - name: Save raw archive and extract images
+        run: |
+          FILE_TYPE=$(file -b /tmp/arweave-raw.bin)
+          echo "File type: $FILE_TYPE"
+          mkdir -p archive/evidence/flaw-images
+
+          if echo "$FILE_TYPE" | grep -qi "zip"; then
+            echo "ZIP archive detected"
+            cp /tmp/arweave-raw.bin archive/evidence/flaw-archive-bundle.zip
+            unzip -o /tmp/arweave-raw.bin -d archive/evidence/flaw-images/
+            echo "=== Extracted ==="
+            find archive/evidence/flaw-images -type f -exec ls -la {} \;
+          elif echo "$FILE_TYPE" | grep -qi "tar"; then
+            cp /tmp/arweave-raw.bin archive/evidence/flaw-image-provenance.tar
+            tar xvf /tmp/arweave-raw.bin -C archive/evidence/flaw-images/
+          fi
+
+      - name: Verify
+        run: |
+          echo "=== Mirror Summary ==="
+          ls -la archive/evidence/flaw-archive-bundle.zip 2>/dev/null || true
+          echo "Extracted: $(find archive/evidence/flaw-images -type f | wc -l) files"
+          du -sh archive/evidence/flaw-images/
+          sha256sum archive/evidence/flaw-archive-bundle.zip 2>/dev/null || true
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add archive/evidence/flaw-archive-bundle.zip archive/evidence/flaw-images/
+          git commit -m "feat: mirror flaw images from Arweave (11 JPGs, Core Object Alpha physical evidence)" || echo "No changes"
+          git push

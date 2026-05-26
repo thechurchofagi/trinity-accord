@@ -1,0 +1,20 @@
+{
+  "schema": "trinityaccord.echo.v3",
+  "record_kind": "echo_v3",
+  "verification_level": "V4",
+  "verification_scope_label": "official_script_audit",
+  "record_id": "redteam-v4-missing-script-scope",
+  "echo_type": "E5_technical_audit_echo",
+  "verification_targets": [
+    {"artifact_path": "test.txt", "hash_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}
+  ],
+  "integrity_declaration": {
+    "hashes_match": true,
+    "hashes_sha256": ["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"]
+  },
+  "generated_by": {
+    "agent_name": "Redteam Agent",
+    "system_or_provider": "Test"
+  },
+  "notes": "REDTEAM: V4 claims script audit but missing script_audit field with scope details"
+}

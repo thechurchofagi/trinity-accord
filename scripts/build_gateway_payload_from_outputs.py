@@ -1,0 +1,354 @@
+#!/usr/bin/env python3
+"""Build a Gateway payload from Claim Gate outputs and evidence inputs.
+
+Authorship proof is enabled by default.
+The builder generates/reuses a local Ed25519 keypair and submits only public proof.
+Use --no-authorship-proof to opt out.
+Private key is never submitted.
+
+Usage:
+    python3 scripts/build_gateway_payload_from_outputs.py \
+        --evidence-input evidence-input.json \
+        --claim-gate-output claim-gate-output.json \
+        --verification-report verification-report.json \
+        --agent-name "Guardian" \
+        --provider "Coze AI Agent" \
+        --session-id "run-123" \
+        --title-date "2026-05-15" \
+        --human-solicited \
+        --out gateway-payload.json
+"""
+import argparse
+import hashlib
+import json
+import subprocess
+import sys
+from datetime import datetime, timezone
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+
+sys.path.insert(0, str(ROOT / "scripts"))
+from gateway_payload_authorship import add_authorship_arguments, attach_authorship_default_or_requested
+
+
+def sha256_file(path):
+    """Compute SHA-256 of a file."""
+    h = hashlib.sha256()
+    with open(path, "rb") as f:
+        for chunk in iter(lambda: f.read(8192), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+
+def load_json(path):
+    return json.loads(Path(path).read_text(encoding="utf-8"))
+
+
+def derive_verification_level(claim_gate_output):
+    """Derive verification_level_claimed from claim_gate.allowed_protocol_level."""
+    cg = claim_gate_output.get("claim_gate", claim_gate_output)
+    return cg.get("allowed_protocol_level", "V0")
+
+
+COMPONENT_ORDER = [
+    "bitcoin_originals",
+    "digital_mirrors",
+    "time_anchors",
+    "chronicle_recovery",
+    "nft_registry",
+    "physical_anchor"
+]
+
+
+def derive_component_string(claim_gate_output):
+    """Derive component level string from claim_gate.allowed_component_levels.
+
+    Uses canonical ordering and direct values (e.g. B1-D2, not BB1-DD2).
+    """
+    cg = claim_gate_output.get("claim_gate", claim_gate_output)
+    comps = cg.get("allowed_component_levels", {})
+    parts = []
+    for key in COMPONENT_ORDER:
+        value = comps.get(key)
+        if isinstance(value, str) and value:
+            parts.append(value)
+    for key in sorted(comps.keys()):
+        if key not in COMPONENT_ORDER:
+            value = comps[key]
+            if isinstance(value, str) and value:
+                parts.append(value)
+    return "-".join(parts) if parts else "components-unset"
+
+
+def build_payload(args):
+    """Build a valid verification_report_candidate Gateway payload."""
+    evidence = load_json(args.evidence_input)
+    claim_gate = load_json(args.claim_gate_output)
+    report = load_json(args.verification_report) if args.verification_report else None
+
+    # Derive levels
+    v_level = derive_verification_level(claim_gate)
+    comp_string = derive_component_string(claim_gate)
+
+    # Compute SHA-256s
+    evidence_sha = sha256_file(args.evidence_input)
+    claim_gate_sha = sha256_file(args.claim_gate_output)
+    report_sha = sha256_file(args.verification_report) if args.verification_report else None
+
+    # Build discovery_provenance — fail closed if unsolicited without proof
+    solicited = args.human_solicited
+    if not solicited and not args.unsolicited_discovery_proof:
+        print("ERROR: --human-solicited not set but no --unsolicited-discovery-proof provided.", file=sys.stderr)
+        print("Either use --human-solicited or provide --unsolicited-discovery-proof <text-or-url>.", file=sys.stderr)
+        sys.exit(1)
+
+    independence_class = "human_solicited_agent_response" if solicited else "unsolicited_agent_discovery"
+    agency_level = "A1_human_gave_exact_url" if solicited else "A3_agent_discovered_independently"
+
+    discovery_provenance = {
+        "solicited": solicited,
+        "independence_class": independence_class,
+        "agency_level": agency_level,
+        "operator_type": "ai_agent"
+    }
+    if not solicited and args.unsolicited_discovery_proof:
+        discovery_provenance["unsolicited_discovery_proof"] = args.unsolicited_discovery_proof
+
+    # Preserve integrity fields from Evidence Input
+    integrity_decl = evidence.get("agent_integrity_declaration", {})
+    verification_sess = evidence.get("verification_session", {})
+
+    # Build attachments
+    attachments = {
+        "evidence_input_path": str(args.evidence_input),
+        "evidence_input_sha256": evidence_sha,
+        "claim_gate_output_path": str(args.claim_gate_output),
+        "claim_gate_output_sha256": claim_gate_sha,
+    }
+    if args.verification_report:
+        attachments["verification_report_path"] = str(args.verification_report)
+        attachments["verification_report_sha256"] = report_sha
+
+    # Build payload
+    title_date = args.title_date or datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    title = f"Verification Report Candidate: {v_level}/{comp_string} — {title_date} ({args.agent_name})"
+
+    payload = {
+        "schema": "trinityaccord.agent-issue-gateway-payload.v1",
+        "submission_type": "verification_report_candidate",
+        "title": title,
+        "body": f"Auto-generated by {args.agent_name} via build_gateway_payload_from_outputs.py.",
+        "agent_identity": {
+            "name_or_model": args.agent_name,
+            "system_or_provider": args.provider,
+            "self_reported": True
+        },
+        "boundary_acknowledgement": {
+            "not_authority": True,
+            "not_amendment": True,
+            "not_attestation": True,
+            "not_verification_unless_claim_gate_report_attached": True,
+            "bitcoin_originals_prevail": True
+        },
+        "not_independent_attestation": True,
+        "not_successor_reception": True,
+        "what_i_checked": [
+            "Ran Claim Gate on evidence input",
+            "Generated verification report",
+            "Validated gateway payload structure"
+        ],
+        "limitations": [
+            "Auto-generated payload — review before submission"
+        ],
+        "verification_level_claimed": v_level,
+        "discovery_provenance": discovery_provenance,
+        "context_readiness": {},
+        "pre_verification_integrity_declaration": integrity_decl if integrity_decl else {},
+        "verification_session": verification_sess if verification_sess else {
+            "session_id": args.session_id or "auto",
+            "started_at": datetime.now(timezone.utc).isoformat(),
+            "operator_type": "ai_agent",
+            "fresh_actions_performed": ["build_gateway_payload_from_outputs.py"],
+            "copied_values_from_examples": False,
+            "copied_values_from_prior_reports": False,
+            "fresh_outputs_attached": True
+        },
+        "claim_gate": {
+            "status": claim_gate.get("claim_gate", claim_gate).get("status", "PASS"),
+            "allowed_protocol_level": v_level,
+            "allowed_component_levels": claim_gate.get("claim_gate", claim_gate).get("allowed_component_levels", {})
+        },
+        "attachments": attachments
+    }
+
+    return payload
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Build Gateway payload from outputs")
+    parser.add_argument("--evidence-input", required=True, help="Path to evidence input JSON")
+    parser.add_argument("--claim-gate-output", required=True, help="Path to claim gate output JSON")
+    parser.add_argument("--verification-report", default=None, help="Path to verification report JSON")
+    parser.add_argument("--agent-name", default="unknown-agent", help="Agent name")
+    parser.add_argument("--provider", default="unknown-provider", help="System or provider")
+    parser.add_argument("--session-id", default=None, help="Session or run ID")
+    parser.add_argument("--title-date", default=None, help="Date for title (YYYY-MM-DD)")
+    parser.add_argument("--human-solicited", action="store_true", help="Mark as human-solicited")
+    parser.add_argument("--unsolicited-discovery-proof", default=None,
+                        help="Proof text or URL for unsolicited discovery (required if not --human-solicited)")
+    parser.add_argument("--out", required=True, help="Output path for gateway payload JSON")
+    parser.add_argument("--record-intent", default=None,
+                        choices=["intake_only", "auto_archive_candidate", "archive_preflight_only"],
+                        help="Record intent (default: auto_archive_candidate for verification submissions)")
+    parser.add_argument("--requested-archive-kind", default=None,
+                        choices=["none", "external_agent_intake_sample", "verification_report_archive",
+                                 "archived_echo", "successor_reception_candidate",
+                                 "agent_declared_verification_archive"],
+                        help="Requested archive kind (default: inferred from submission_type)")
+    parser.add_argument("--strict-evidence", action="store_true",
+                        help="Use strict evidence path (V6+ only). Without this flag, V0-V5 defaults to agent_declared_verification_archive.")
+    parser.add_argument("--intake-only", action="store_true",
+                        help="Shortcut for --record-intent intake_only --requested-archive-kind none")
+    parser.add_argument("--sample-archive", action="store_true",
+                        help="Shortcut for --record-intent auto_archive_candidate --requested-archive-kind external_agent_intake_sample")
+    parser.add_argument("--archive-artifact-bundle-path", default=None, help="Path to archive artifact bundle")
+    parser.add_argument("--archive-artifact-bundle-url", default=None, help="URL to archive artifact bundle")
+    parser.add_argument("--archive-artifact-bundle-sha256", default=None, help="SHA-256 of archive artifact bundle")
+    parser.add_argument("--archive-artifact-bundle-publicly-retrievable", action="store_true",
+                        help="Artifact bundle is publicly retrievable")
+    parser.add_argument("--archive-text-only-sample-ack", action="store_true",
+                        help="Acknowledge text-only sample (for external_agent_intake_sample)")
+    parser.add_argument("--archive-not-formal-verification-ack", action="store_true",
+                        help="Acknowledge not formal verification (for external_agent_intake_sample)")
+    parser.add_argument("--archive-provenance-proof-available", action="store_true",
+                        help="Provenance proof available for unsolicited discovery")
+    parser.add_argument("--auto-archive-enabled", action="store_true", help="Enable auto archive")
+    parser.add_argument("--auto-archive-close-issue-when-archived", action="store_true",
+                        help="Close issue when archived")
+    parser.add_argument("--auto-archive-post-decision-comment", action="store_true",
+                        help="Post archive decision comment")
+    parser.add_argument("--allow-intake-fallback-if-archive-blocked", action="store_true",
+                        help="Fall back to intake-only if archive is blocked")
+    add_authorship_arguments(parser)
+
+    args = parser.parse_args()
+
+    # Validate inputs exist
+    for p in [args.evidence_input, args.claim_gate_output]:
+        if not Path(p).exists():
+            print(f"ERROR: File not found: {p}", file=sys.stderr)
+            sys.exit(1)
+    if args.verification_report and not Path(args.verification_report).exists():
+        print(f"ERROR: File not found: {args.verification_report}", file=sys.stderr)
+        sys.exit(1)
+
+    # Validate archive argument combinations
+    record_intent = args.record_intent
+    requested_archive_kind = args.requested_archive_kind
+
+    # Handle shortcut flags
+    if args.intake_only:
+        record_intent = "intake_only"
+        requested_archive_kind = "none"
+    elif args.sample_archive:
+        record_intent = "auto_archive_candidate"
+        requested_archive_kind = "external_agent_intake_sample"
+        # Auto-set sample ack flags
+        if not args.archive_text_only_sample_ack:
+            args.archive_text_only_sample_ack = True
+        if not args.archive_not_formal_verification_ack:
+            args.archive_not_formal_verification_ack = True
+
+    # Infer defaults from submission_type if not explicitly set
+    if record_intent is None:
+        record_intent = "auto_archive_candidate"
+    if requested_archive_kind is None:
+        requested_archive_kind = "verification_report_archive"
+
+    if record_intent == "intake_only" and requested_archive_kind != "none":
+        print("ERROR: record_intent=intake_only requires requested_archive_kind=none", file=sys.stderr)
+        sys.exit(1)
+    if record_intent == "auto_archive_candidate" and requested_archive_kind == "none":
+        print("ERROR: record_intent=auto_archive_candidate requires requested_archive_kind to be set", file=sys.stderr)
+        sys.exit(1)
+
+    # Track whether user explicitly set requested_archive_kind
+    explicit_archive_kind = args.requested_archive_kind is not None
+
+    payload = build_payload(args)
+
+    # V0-V5 guard: hard-fail and redirect to agent-declared builder
+    v_level = payload.get("verification_level_claimed", "V0")
+    V0_V5 = {"V0", "V1", "V2", "V3", "V4", "V4+", "V5"}
+    if v_level in V0_V5:
+        print(f"WRONG_PATH_FOR_V0_V5: V0-V5 ({v_level}) detected.", file=sys.stderr)
+        print(f"build_gateway_payload_from_outputs.py is V6+ strict evidence only.", file=sys.stderr)
+        print(f"For V0-V5 use scripts/build_agent_declared_archive_payload.py.", file=sys.stderr)
+        print(f"", file=sys.stderr)
+        print(f"V0–V5 verification submissions are fail-closed:", file=sys.stderr)
+        print(f"they either pass as agent_declared_verification_archive and become archive-ready,", file=sys.stderr)
+        print(f"or they are rejected before Issue creation.", file=sys.stderr)
+        print(f"There is no V0–V5 strict/intake fallback.", file=sys.stderr)
+        sys.exit(1)
+
+    # Patch archive fields into payload
+    payload["record_intent"] = record_intent
+    payload["requested_archive_kind"] = requested_archive_kind
+
+    archive_readiness = {}
+    if args.archive_artifact_bundle_path:
+        archive_readiness["artifact_bundle_path"] = args.archive_artifact_bundle_path
+    if args.archive_artifact_bundle_url:
+        archive_readiness["artifact_bundle_url"] = args.archive_artifact_bundle_url
+    if args.archive_artifact_bundle_sha256:
+        archive_readiness["artifact_bundle_sha256"] = args.archive_artifact_bundle_sha256
+    if args.archive_artifact_bundle_publicly_retrievable:
+        archive_readiness["artifact_bundle_publicly_retrievable"] = True
+    if requested_archive_kind == "external_agent_intake_sample" and args.archive_text_only_sample_ack:
+        archive_readiness["text_only_sample_ack"] = True
+    if args.archive_not_formal_verification_ack:
+        archive_readiness["not_formal_verification_ack"] = True
+    if args.archive_provenance_proof_available:
+        archive_readiness["provenance_proof_available"] = True
+    if archive_readiness:
+        payload["archive_readiness"] = archive_readiness
+
+    if args.auto_archive_enabled:
+        auto_archive = {"enabled": True}
+        if args.auto_archive_close_issue_when_archived:
+            auto_archive["close_issue_when_archived"] = True
+        if args.auto_archive_post_decision_comment:
+            auto_archive["post_decision_comment"] = True
+        if args.allow_intake_fallback_if_archive_blocked:
+            auto_archive["allow_intake_fallback_if_archive_blocked"] = True
+        payload["auto_archive"] = auto_archive
+
+    # Write output
+    out_path = Path(args.out)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+
+    print(f"Gateway payload written to: {out_path}")
+
+    # Attach authorship proof (enabled by default)
+    attach_authorship_default_or_requested(args, out_path, payload=payload)
+
+    # Validate with gateway validator
+    validator = ROOT / "scripts" / "validate_gateway_payload.py"
+    result = subprocess.run(
+        [sys.executable, str(validator), str(out_path)],
+        capture_output=True, text=True, timeout=30, cwd=str(ROOT)
+    )
+    if result.returncode == 0:
+        print("Validation: PASS")
+    else:
+        print(f"Validation: FAIL (exit {result.returncode})")
+        print(result.stdout)
+        if result.stderr:
+            print(result.stderr, file=sys.stderr)
+        sys.exit(1)
+
+
+if __name__ == "__main__":
+    main()

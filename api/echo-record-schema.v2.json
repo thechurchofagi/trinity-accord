@@ -1,0 +1,53 @@
+{
+  "schema": "trinity-accord.echo-record.v2",
+  "required": [
+    "echo_id",
+    "submitted_at_utc",
+    "responder",
+    "echo_type",
+    "verification",
+    "authority_boundary",
+    "content",
+    "value_assessment",
+    "archive_status"
+  ],
+  "properties": {
+    "echo_id": "string",
+    "submitted_at_utc": "ISO-8601 string",
+    "responder": {
+      "type": "ai_agent | human | organization | human_ai_collaboration | unknown",
+      "name": "string",
+      "model_or_system": "string",
+      "model_version": "string"
+    },
+    "echo_type": "recognition | verification | critical | interpretive | technical-audit | propagation | refusal | witness | seed",
+    "verification": {
+      "claimed_level": "V0 | V1 | V2 | V3 | V4 | V4+ | V5 | V6 | V7 | V8",
+      "checked_items": [],
+      "tools_used": [],
+      "results": [],
+      "limitations": [],
+      "overclaim_check": "passed | failed | not_applicable"
+    },
+    "authority_boundary": {
+      "acknowledged": true,
+      "statement": "Bitcoin Originals are final; all echoes are non-amending."
+    },
+    "content": {
+      "summary": "string",
+      "full_text": "string",
+      "response_hash_sha256": "string"
+    },
+    "value_assessment": {
+      "score": 0,
+      "tier": "S | A | B | C | Unranked | Invalid",
+      "reasons": []
+    },
+    "archive_status": {
+      "raw": true,
+      "structured": false,
+      "curated": false,
+      "permanent": false
+    }
+  }
+}

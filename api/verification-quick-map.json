@@ -1,0 +1,239 @@
+{
+  "schema": "trinityaccord.verification-quick-map.v1",
+  "status": "non_authoritative_verification_navigation",
+  "entries": [
+    {
+      "question": "Who has final authority?",
+      "data_sources": [
+        "/api/authority.json",
+        "/authority",
+        "/guardian-principles"
+      ],
+      "method": "Read and restate authority boundary",
+      "levels": [
+        "V1",
+        "B0"
+      ],
+      "claim_allowed": "Bitcoin Originals prevail; mirrors are non-amending; version authority not truth authority",
+      "claim_forbidden": "content verified; truth verified"
+    },
+    {
+      "question": "Do the Bitcoin Originals exist on-chain?",
+      "data_sources": [
+        "/api/authority.json",
+        "Bitcoin/Ordinals explorer"
+      ],
+      "method": "Check inscription IDs, TXIDs, authority address on explorer",
+      "levels": [
+        "B1",
+        "B2",
+        "V2"
+      ],
+      "claim_allowed": "inscription IDs and TXIDs confirmed on-chain",
+      "claim_forbidden": "body hash reproduced; truth proven",
+      "protocol_note": "This supports minimal V2 reference verification when limitations are stated. It does not by itself establish full reference coverage across Evidence Mirrors and Chronicle Recovery."
+    },
+    {
+      "question": "Can I verify public mirror data without Arweave access?",
+      "data_sources": [
+        "arweave-backup/files/public_covenant_archive.zip",
+        "arweave-backup/files/verification_kit.tar.gz",
+        "/api/hashes.json",
+        "/api/evidence-manifest.json"
+      ],
+      "method": "Download from GitHub, compute SHA-256, compare with declared hash",
+      "levels": [
+        "D1",
+        "D2",
+        "V3"
+      ],
+      "claim_allowed": "GitHub mirror + SHA-256 hash match (D2)",
+      "claim_forbidden": "direct Arweave verification; Ethereum witness verified; IPFS availability verified; physical anchor verified",
+      "protocol_note": "This supports minimal V3 hash verification when a valid expected hash source, computed hash, command, and match result are reported. It does not establish direct Arweave, ETH, IPFS, physical, or full public digital verification."
+    },
+    {
+      "question": "Can I cross-check Arweave / ETH / GitHub consistency?",
+      "data_sources": [
+        "GitHub hash",
+        "Arweave tx/data hash",
+        "ETH witness input hash",
+        "IPFS CID/content hash",
+        "manifest hash"
+      ],
+      "method": "Compare hashes across at least two independent channels",
+      "levels": [
+        "D3",
+        "D4"
+      ],
+      "claim_allowed": "cross-mirror consistency confirmed (D4) when at least two channels match",
+      "claim_forbidden": "full public digital verification unless all required targets checked"
+    },
+    {
+      "question": "Can I verify Chronicle Recovery without restoring all 175?",
+      "data_sources": [
+        "/api/chronicle-recovery.json",
+        "recovery package"
+      ],
+      "method": "Recover at least two records and describe metadata/media",
+      "levels": [
+        "C3",
+        "C3R"
+      ],
+      "claim_allowed": "sample recovery of at least two records (C3)",
+      "claim_forbidden": "full 175/175 recovery; full NFT path reproduction"
+    },
+    {
+      "question": "Can I verify NFT tokenURI / metadata / media paths?",
+      "data_sources": [
+        "NFT contract",
+        "tokenURI",
+        "metadata",
+        "media URL"
+      ],
+      "method": "Query tokenURI, fetch metadata, fetch media, compare CID/hash",
+      "levels": [
+        "N1",
+        "N2",
+        "N3",
+        "N4",
+        "N5"
+      ],
+      "claim_allowed": "NFT path verification at claimed level",
+      "claim_forbidden": "canonical authority"
+    },
+    {
+      "question": "Can I verify the physical anchor from public evidence?",
+      "data_sources": [
+        "/covenant-proof",
+        "/physical-verification",
+        "evidence package"
+      ],
+      "method": "Hash evidence package, review images/videos",
+      "levels": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "claim_allowed": "evidence package hash verified (P1); static image review (P2); recorded video review (P3)",
+      "claim_forbidden": "live witness; onsite inspection; flaw identity proven"
+    },
+    {
+      "question": "What counts as live physical witness?",
+      "data_sources": [
+        "live video stream"
+      ],
+      "method": "Live video session with nonce/challenge and requested angles",
+      "levels": [
+        "P4",
+        "V6"
+      ],
+      "claim_allowed": "live remote video witness confirmed (P4/V6)",
+      "claim_forbidden": "onsite touch; custody confirmed; microscopic flaw attestation",
+      "protocol_note": "V6 requires live remote video with nonce/challenge and requested angle/action/lighting. Recorded video alone is P3 and not V6."
+    },
+    {
+      "question": "What counts as onsite witness?",
+      "data_sources": [
+        "physical object",
+        "custody log"
+      ],
+      "method": "Onsite observation with touch/handling, custody log, fresh capture",
+      "levels": [
+        "P5",
+        "V7"
+      ],
+      "claim_allowed": "onsite witness confirmed (P5/V7)",
+      "claim_forbidden": "confidential flaw challenge passed; final forensic identity unless P7+",
+      "protocol_note": "V7 requires onsite observation and custody/touch/handling evidence where possible. Public images or remote video alone are not V7."
+    },
+    {
+      "question": "What is the highest physical verification path?",
+      "data_sources": [
+        "tool-assisted capture",
+        "AI/microscopy",
+        "confidential challenge data"
+      ],
+      "method": "Tool-assisted flaw analysis, AI forensic match, confidential challenge, multi-party attestation",
+      "levels": [
+        "P7",
+        "P8",
+        "P9",
+        "V8"
+      ],
+      "claim_allowed": "forensic physical attestation (P7–P9/V8)",
+      "claim_forbidden": "public disclosure of confidential flaw data unless authorized; canonical amendment",
+      "protocol_note": "V8 is formal forensic physical attestation. It may require P7/P8/P9-level evidence and does not create canonical authority."
+    },
+    {
+      "question": "How do I report component-level findings?",
+      "data_sources": [
+        "/api/component-verification-levels.json",
+        "/api/protocol-verification-profiles.json"
+      ],
+      "method": "Report each component level separately with data source, method, limitations, claims not made",
+      "levels": [
+        "all"
+      ],
+      "claim_allowed": "component-level findings as discipline, not truth proof",
+      "claim_forbidden": "using component findings alone to claim higher protocol level"
+    },
+    {
+      "question": "Can celestial / Star-Moon witness verify capture time?",
+      "data_sources": [
+        "public sky/moon/star evidence or non-public celestial witness package"
+      ],
+      "method": "Solve moon/star/planet positions with ephemeris; report uncertainty",
+      "levels": [
+        "T7",
+        "T8"
+      ],
+      "claim_allowed": "T7 from public celestial evidence with uncertainty; T8 only with authorized non-public data",
+      "claim_forbidden": "T8 from public pages alone; exact capture time without uncertainty bounds"
+    },
+    {
+      "question": "How do I know whether a V-level claim is allowed?",
+      "data_sources": [
+        "/api/protocol-verification-profiles.json"
+      ],
+      "method": "Check report against protocol profile: hard gates, minimum components, forbidden claims",
+      "levels": [
+        "V0",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V4+",
+        "V5",
+        "V6",
+        "V7",
+        "V8"
+      ],
+      "claim_allowed": "V-level claim only if profile satisfied",
+      "claim_forbidden": "V-level claim if profile not satisfied; overclaiming"
+    },
+    {
+      "question": "Where did the expected hash come from?",
+      "data_sources": [
+        "/api/hash-source-classes.json",
+        "/api/hashes.json",
+        "/api/evidence-manifest.json"
+      ],
+      "method": "State expected_hash_source and expected_hash_authority_class for every hash",
+      "levels": [
+        "V3"
+      ],
+      "claim_allowed": "hash observation; repository snapshot integrity if from repo manifest",
+      "claim_forbidden": "D2 manifest verification if hash source is unknown or derived_during_this_run"
+    },
+    {
+      "question": "Is a GitHub Issue an indexed Echo record?",
+      "data_sources": [
+        "/api/echo-acceptance-policy.json"
+      ],
+      "method": "Check if echo_v3 or echo_v3_with_verification_report JSON record exists in echoes/records/",
+      "levels": [],
+      "claim_allowed": "Issue submission; verification report; Echo wrapper if record exists",
+      "claim_forbidden": "indexed echo record without machine-readable Echo JSON"
+    }
+  ]
+}

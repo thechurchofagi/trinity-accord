@@ -1,0 +1,175 @@
+name: Rebuild Agent-Declared Verification Index
+
+on:
+  # Trigger when an issue is closed (completed or not)
+  issues:
+    types: [closed, labeled]
+  # Allow manual trigger
+  workflow_dispatch:
+    inputs:
+      include_test:
+        description: 'Include test records'
+        required: false
+        default: 'false'
+        type: boolean
+
+permissions:
+  contents: write
+  issues: read
+
+concurrency:
+  group: generated-public-status-writes
+  cancel-in-progress: false
+
+jobs:
+  rebuild-index:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Authorize write workflow actor
+        env:
+          ACTOR: ${{ github.actor }}
+          EVENT_NAME: ${{ github.event_name }}
+          SENDER: ${{ github.event.sender.login }}
+        run: |
+          set -euo pipefail
+          case "$ACTOR" in
+            thechurchofagi|github-actions[bot])
+              echo "Authorized actor: $ACTOR"
+              ;;
+            trinity-accord-agent-issue-gateway\[bot\])
+              if [ "$EVENT_NAME" = "issues" ]; then
+                echo "Authorized Gateway bot issue event: $ACTOR"
+              else
+                echo "Gateway bot is only authorized for issues events, got: $EVENT_NAME"
+                exit 1
+              fi
+              ;;
+            *)
+              echo "Unauthorized actor for write workflow: $ACTOR"
+              exit 1
+              ;;
+          esac
+          if [ "$EVENT_NAME" = "repository_dispatch" ]; then
+            case "$SENDER" in
+              thechurchofagi|github-actions[bot])
+                echo "Authorized repository_dispatch sender: $SENDER"
+                ;;
+              *)
+                echo "Unauthorized repository_dispatch sender: $SENDER"
+                exit 1
+                ;;
+            esac
+          fi
+
+      - name: Validate issue event
+        id: gate
+        if: github.event_name == 'issues'
+        env:
+          ACTION: ${{ github.event.action }}
+          LABEL_NAME: ${{ github.event.label.name }}
+        run: |
+          set -euo pipefail
+
+          if [ "$ACTION" = "closed" ]; then
+            echo "Issue closed — rebuilding index."
+            echo "should_run=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          if [ "$ACTION" = "labeled" ]; then
+            case "$LABEL_NAME" in
+              authorship:claimed|authorship:key-verified)
+                echo "Authorship label '$LABEL_NAME' added — rebuilding index."
+                echo "should_run=true" >> "$GITHUB_OUTPUT"
+                exit 0
+                ;;
+              *)
+                echo "Label '$LABEL_NAME' is not an authorship label — skipping rebuild."
+                echo "should_run=false" >> "$GITHUB_OUTPUT"
+                exit 0
+                ;;
+            esac
+          fi
+
+          echo "Unsupported issue action: $ACTION — skipping rebuild."
+          echo "should_run=false" >> "$GITHUB_OUTPUT"
+
+      - name: Checkout
+        if: ${{ github.event_name == 'workflow_dispatch' || steps.gate.outputs.should_run == 'true' }}
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+
+      - name: Setup Python
+        if: ${{ github.event_name == 'workflow_dispatch' || steps.gate.outputs.should_run == 'true' }}
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: '3.12'
+
+      - name: Record toolchain provenance
+        if: ${{ github.event_name == 'workflow_dispatch' || steps.gate.outputs.should_run == 'true' }}
+        run: |
+          python3 scripts/toolchain_provenance.py > toolchain-provenance.json
+          cat toolchain-provenance.json
+
+      - name: Verify gh CLI
+        if: ${{ github.event_name == 'workflow_dispatch' || steps.gate.outputs.should_run == 'true' }}
+        run: |
+          if ! command -v gh &>/dev/null; then
+            echo "::error::gh CLI not found on runner. Install it manually."
+            exit 1
+          fi
+          gh --version
+
+      - name: Authenticate gh
+        if: ${{ github.event_name == 'workflow_dispatch' || steps.gate.outputs.should_run == 'true' }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh auth setup-git
+
+      - name: Rebuild index from Issues
+        if: ${{ github.event_name == 'workflow_dispatch' || steps.gate.outputs.should_run == 'true' }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          INCLUDE_TEST: ${{ inputs.include_test }}
+        run: |
+          EXTRA_ARGS=""
+          if [ "$INCLUDE_TEST" = "true" ]; then
+            EXTRA_ARGS="--include-test"
+          fi
+          python3 scripts/build_agent_declared_verification_index_from_issues.py \
+            --repo "${{ github.repository }}" \
+            $EXTRA_ARGS
+
+      - name: Regenerate homepage status
+        if: ${{ github.event_name == 'workflow_dispatch' || steps.gate.outputs.should_run == 'true' }}
+        run: python3 scripts/generate_public_home_status.py
+
+      - name: Check for changes
+        if: ${{ github.event_name == 'workflow_dispatch' || steps.gate.outputs.should_run == 'true' }}
+        id: diff
+        run: |
+          if git diff --quiet api/agent-declared-verification-index.json api/public-home-status.json index.md; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Commit and push
+        if: ${{ (github.event_name == 'workflow_dispatch' || steps.gate.outputs.should_run == 'true') && steps.diff.outputs.changed == 'true' }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add api/agent-declared-verification-index.json api/public-home-status.json index.md
+          git commit -m "chore: rebuild agent-declared verification index from Issues [skip ci]"
+          # DEEP-REBASE-001: regenerate after rebase
+          if ! git pull --rebase -X theirs origin main; then
+            echo "::error::Failed to rebase onto origin/main. Refusing to continue."
+            git status --short
+            exit 1
+          fi
+          python3 scripts/generate_public_home_status.py
+          python3 scripts/test_home_public_status_sync.py
+          git add api/agent-declared-verification-index.json api/public-home-status.json index.md
+          if ! git diff --cached --quiet; then
+            git commit --amend --no-edit
+          fi
+          git push --force-with-lease

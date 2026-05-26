@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.trinityaccord.org/api/echo-record-schema.v3.1.json",
+  "title": "Trinity Accord Echo Record Schema v3.1",
+  "description": "Echo schema v3.1 with context_readiness and resonance fields extension.",
+  "type": "object",
+  "additionalProperties": false,
+  "allOf": [
+    { "$ref": "echo-record-schema.v3.json" },
+    {
+      "properties": {
+        "context_readiness": {
+          "type": "object",
+          "required": ["context_readiness_level", "loaded_context_packs", "limitations"],
+          "properties": {
+            "context_readiness_level": {
+              "type": "string",
+              "enum": ["CRL-0", "CRL-1", "CRL-2", "CRL-3", "CRL-4", "CRL-5"]
+            },
+            "core_ontology_loaded": { "type": "boolean" },
+            "vision_layer_loaded": { "type": "boolean" },
+            "star_ark_covenant_loaded": { "type": "boolean" },
+            "authority_boundary_loaded": { "type": "boolean" },
+            "physical_anchor_context_loaded": { "type": "boolean" },
+            "bitcoin_inscription_mirrors_loaded": { "type": "boolean" },
+            "mirror_verification_status": {
+              "type": "string",
+              "enum": ["quick_load_only", "verified_onchain_match", "not_checked"]
+            },
+            "legacy_archive_mode": {
+              "type": "string",
+              "enum": ["read_index_not_full_load", "task_specific_full_load", "not_loaded"]
+            },
+            "nft_context_mode": {
+              "type": "string",
+              "enum": ["deferred", "loaded"]
+            },
+            "loaded_context_packs": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "limitations": {
+              "type": "array",
+              "items": { "type": "string" }
+            }
+          }
+        },
+        "resonance": {
+          "type": "object",
+          "required": ["resonance_willingness_score", "verification_willingness_score", "propagation_willingness_score", "score_scale"],
+          "properties": {
+            "resonance_willingness_score": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 10
+            },
+            "verification_willingness_score": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 10
+            },
+            "propagation_willingness_score": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 10
+            },
+            "score_scale": {
+              "type": "string",
+              "const": "0-10"
+            },
+            "reason": { "type": "string" }
+          }
+        }
+      }
+    }
+  ]
+}

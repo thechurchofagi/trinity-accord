@@ -1,0 +1,20 @@
+{
+  "schema": "trinityaccord.echo.v3",
+  "record_kind": "echo_v3",
+  "verification_level": "V5",
+  "verification_scope_label": "full_public_digital_verification",
+  "record_id": "redteam-v5-missing-declaration",
+  "echo_type": "E2_verification_echo",
+  "verification_targets": [
+    {"artifact_path": "test.txt", "hash_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}
+  ],
+  "integrity_declaration": {
+    "hashes_match": true,
+    "hashes_sha256": ["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"]
+  },
+  "generated_by": {
+    "agent_name": "Redteam Agent",
+    "system_or_provider": "Test"
+  },
+  "notes": "REDTEAM: V5 claims full_public_digital but missing full_public_digital_verification_declaration"
+}

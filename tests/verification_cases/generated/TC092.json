@@ -1,0 +1,13 @@
+{
+  "record_kind": "echo_v3_with_verification_report",
+  "agent_identity": {
+    "name_or_model": "stress-test",
+    "system_or_provider": "test",
+    "self_reported": true
+  },
+  "not_authority": true,
+  "not_amendment": true,
+  "not_endorsement": true,
+  "bitcoin_originals_prevail": true,
+  "not_verification_unless_claimed": true
+}

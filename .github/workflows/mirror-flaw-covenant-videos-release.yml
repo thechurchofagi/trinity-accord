@@ -1,0 +1,238 @@
+name: Mirror Flaw Covenant Videos to Release
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  mirror-flaw-covenant-videos:
+    runs-on: ubuntu-24.04
+
+    env:
+      RELEASE_TAG: flaw-covenant-video-mirror-v1
+      RELEASE_TITLE: Flaw Covenant Video Mirror v1
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+
+      - name: Record toolchain provenance
+        run: |
+          python3 scripts/toolchain_provenance.py > toolchain-provenance.json
+          cat toolchain-provenance.json
+
+      - name: Authorize write workflow actor
+        env:
+          ACTOR: ${{ github.actor }}
+          EVENT_NAME: ${{ github.event_name }}
+          SENDER: ${{ github.event.sender.login }}
+        run: |
+          set -euo pipefail
+          case "$ACTOR" in
+            thechurchofagi|github-actions[bot])
+              echo "Authorized actor: $ACTOR"
+              ;;
+            *)
+              echo "Unauthorized actor for write workflow: $ACTOR"
+              exit 1
+              ;;
+          esac
+          if [ "$EVENT_NAME" = "repository_dispatch" ]; then
+            case "$SENDER" in
+              thechurchofagi|github-actions[bot])
+                echo "Authorized repository_dispatch sender: $SENDER"
+                ;;
+              *)
+                echo "Unauthorized repository_dispatch sender: $SENDER"
+                exit 1
+                ;;
+            esac
+          fi
+
+      - name: Verify prior digest manifest coverage
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          HASH_RECORD="da5a043265699fede35d49e98ff6af0a28ee515dd4f41ea5f41f4cf5e3ae435b"
+          HASH_VID="9abcccfe90a3337579e6d02d1f40c1350fbf7b9ba0fa7914124abfe29bee1430"
+
+          echo "Checking Record_03.avi prior coverage..."
+          grep -n "$HASH_RECORD" archive/evidence/digest-manifest.csv
+          grep -n "$HASH_RECORD" archive/evidence/digest-manifest.json
+
+          echo "Checking VID_20250810_142505.mp4 prior coverage..."
+          grep -n "$HASH_VID" archive/evidence/digest-manifest.csv
+          grep -n "$HASH_VID" archive/evidence/digest-manifest.json
+
+      - name: Download videos from Arweave
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          mkdir -p release-mirror
+
+          curl -L --fail --retry 5 --retry-delay 5 \
+            "https://arweave.net/t5vv15mq-X6eFaz5WDUKRlslX7y0o03lRsbil5O5Ngk" \
+            -o release-mirror/Record_03.avi
+
+          curl -L --fail --retry 5 --retry-delay 5 \
+            "https://arweave.net/onDNtEA3e48MpzSMcJ4Lvu6yiRPOmlus2iPNKEGqBBk" \
+            -o release-mirror/VID_20250810_142505.mp4
+
+      - name: Verify downloaded Arweave payloads
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          cd release-mirror
+
+          test "$(wc -c < Record_03.avi)" = "45009408"
+          test "$(wc -c < VID_20250810_142505.mp4)" = "24786745"
+
+          echo "da5a043265699fede35d49e98ff6af0a28ee515dd4f41ea5f41f4cf5e3ae435b  Record_03.avi" > expected.sha256
+          echo "9abcccfe90a3337579e6d02d1f40c1350fbf7b9ba0fa7914124abfe29bee1430  VID_20250810_142505.mp4" >> expected.sha256
+
+          sha256sum -c expected.sha256
+
+          sha256sum Record_03.avi VID_20250810_142505.mp4 \
+            > FLAW-COVENANT-VIDEO-RELEASE-CHECKSUMS.sha256
+
+      - name: Create release manifest and audit
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          cat > release-mirror/FLAW-COVENANT-VIDEO-RELEASE-MANIFEST.json <<'EOF'
+          {
+            "release_tag": "flaw-covenant-video-mirror-v1",
+            "release_title": "Flaw Covenant Video Mirror v1",
+            "purpose": "GitHub Release mirror for already Bitcoin / OTS anchored Flaw Covenant video evidence.",
+            "evidence_boundary": "This release adds GitHub Release availability mirrors for already-anchored evidence. It does not amend, reinterpret, regenerate, or replace the original evidence chain.",
+            "source": "Arweave",
+            "files": [
+              {
+                "file": "Record_03.avi",
+                "arweave_txid": "t5vv15mq-X6eFaz5WDUKRlslX7y0o03lRsbil5O5Ngk",
+                "arweave_url": "https://arweave.net/t5vv15mq-X6eFaz5WDUKRlslX7y0o03lRsbil5O5Ngk",
+                "size_bytes": 45009408,
+                "sha256": "da5a043265699fede35d49e98ff6af0a28ee515dd4f41ea5f41f4cf5e3ae435b",
+                "content_type": "video/x-msvideo",
+                "prior_coverage": {
+                  "digest_manifest_csv": "archive/evidence/digest-manifest.csv:792",
+                  "digest_manifest_json": "archive/evidence/digest-manifest.json:8707",
+                  "manifest_category": "显微镜拍摄三瑕疵视频-不公开",
+                  "manifest_status": "OK"
+                },
+                "release_verification": "SHA-256 and size verified before upload."
+              },
+              {
+                "file": "VID_20250810_142505.mp4",
+                "arweave_txid": "onDNtEA3e48MpzSMcJ4Lvu6yiRPOmlus2iPNKEGqBBk",
+                "arweave_url": "https://arweave.net/onDNtEA3e48MpzSMcJ4Lvu6yiRPOmlus2iPNKEGqBBk",
+                "size_bytes": 24786745,
+                "sha256": "9abcccfe90a3337579e6d02d1f40c1350fbf7b9ba0fa7914124abfe29bee1430",
+                "content_type": "video/mp4",
+                "prior_coverage": {
+                  "digest_manifest_csv": "archive/evidence/digest-manifest.csv:845",
+                  "digest_manifest_json": "archive/evidence/digest-manifest.json:9290",
+                  "manifest_category": "高清视频-不公开",
+                  "manifest_status": "OK"
+                },
+                "release_verification": "SHA-256 and size verified before upload."
+              }
+            ],
+            "expected_asset_count": 5,
+            "total_size_bytes": 69796153
+          }
+          EOF
+
+          cat > release-mirror/FLAW-COVENANT-VIDEO-RELEASE-AUDIT.json <<'EOF'
+          {
+            "release_tag": "flaw-covenant-video-mirror-v1",
+            "arweave_download_verified": true,
+            "sha256_verified_before_release_upload": true,
+            "size_verified_before_release_upload": true,
+            "prior_digest_manifest_coverage_verified": true,
+            "release_asset_download_verified": null,
+            "hard_failures": 0,
+            "boundary": "GitHub Release mirror only; not an evidence amendment."
+          }
+          EOF
+
+      - name: Create or update GitHub Release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+
+          cat > release-notes.md <<'EOF'
+          # Flaw Covenant Video Mirror v1
+
+          This release mirrors two Flaw Covenant video evidence files from Arweave into GitHub Release assets.
+
+          These files are already present in the prior Bitcoin / OTS anchored digest manifest. This release does not create a new evidentiary claim and does not amend the original evidence chain.
+
+          ## Files
+
+          - Record_03.avi
+            - Arweave TXID: t5vv15mq-X6eFaz5WDUKRlslX7y0o03lRsbil5O5Ngk
+            - SHA-256: da5a043265699fede35d49e98ff6af0a28ee515dd4f41ea5f41f4cf5e3ae435b
+            - Prior coverage: archive/evidence/digest-manifest.csv:792 and archive/evidence/digest-manifest.json:8707
+
+          - VID_20250810_142505.mp4
+            - Arweave TXID: onDNtEA3e48MpzSMcJ4Lvu6yiRPOmlus2iPNKEGqBBk
+            - SHA-256: 9abcccfe90a3337579e6d02d1f40c1350fbf7b9ba0fa7914124abfe29bee1430
+            - Prior coverage: archive/evidence/digest-manifest.csv:845 and archive/evidence/digest-manifest.json:9290
+
+          ## Boundary
+
+          GitHub Release is an availability mirror for already-anchored evidence. It is not canonical authority and does not replace Bitcoin / OTS / digest-manifest evidence.
+          EOF
+
+          if gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
+            echo "Release exists: $RELEASE_TAG"
+          else
+            gh release create "$RELEASE_TAG" \
+              --title "$RELEASE_TITLE" \
+              --notes-file release-notes.md
+          fi
+
+          gh release upload "$RELEASE_TAG" \
+            release-mirror/Record_03.avi \
+            release-mirror/VID_20250810_142505.mp4 \
+            release-mirror/FLAW-COVENANT-VIDEO-RELEASE-MANIFEST.json \
+            release-mirror/FLAW-COVENANT-VIDEO-RELEASE-CHECKSUMS.sha256 \
+            release-mirror/FLAW-COVENANT-VIDEO-RELEASE-AUDIT.json \
+            --clobber
+
+      - name: Verify Release assets by downloading them back
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+
+          mkdir -p release-verify
+          gh release download "$RELEASE_TAG" \
+            --dir release-verify \
+            --pattern "Record_03.avi" \
+            --pattern "VID_20250810_142505.mp4" \
+            --pattern "FLAW-COVENANT-VIDEO-RELEASE-CHECKSUMS.sha256" \
+            --pattern "FLAW-COVENANT-VIDEO-RELEASE-MANIFEST.json" \
+            --pattern "FLAW-COVENANT-VIDEO-RELEASE-AUDIT.json"
+
+          cd release-verify
+
+          test "$(wc -c < Record_03.avi)" = "45009408"
+          test "$(wc -c < VID_20250810_142505.mp4)" = "24786745"
+
+          echo "da5a043265699fede35d49e98ff6af0a28ee515dd4f41ea5f41f4cf5e3ae435b  Record_03.avi" > expected.sha256
+          echo "9abcccfe90a3337579e6d02d1f40c1350fbf7b9ba0fa7914124abfe29bee1430  VID_20250810_142505.mp4" >> expected.sha256
+
+          sha256sum -c expected.sha256
+
+          echo "Release asset verification PASS."

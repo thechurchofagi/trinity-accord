@@ -1,0 +1,20 @@
+{
+  "schema": "trinityaccord.context-pack.physical-anchor.v1",
+  "load_policy": "must_load_summary",
+  "source": "/api/core-object-alpha-shenzhen-notary-2026-05-06.json",
+  "object": "Core Object Alpha",
+  "role": "non_amending_physical_anchor_evidence",
+  "supported_public_context_levels": [
+    "P1_public_evidence_package_hash_context",
+    "P2_static_image_review_context",
+    "P3_recorded_video_review_context"
+  ],
+  "not_claimed": [
+    "P5_onsite_witness_final_claim",
+    "P7_advanced_forensic_match",
+    "P8_confidential_flaw_challenge",
+    "P9_multi_party_forensic_attestation",
+    "protocol_level_upgrade_by_itself"
+  ],
+  "boundary": "Physical anchor context supports context readiness. It does not amend Bitcoin Originals or create final forensic proof."
+}

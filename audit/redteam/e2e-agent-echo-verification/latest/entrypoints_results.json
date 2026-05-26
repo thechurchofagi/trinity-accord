@@ -1,0 +1,33 @@
+{
+  "phase": "entrypoints",
+  "checks": 33,
+  "passed": 29,
+  "failed": 4,
+  "warnings": 0,
+  "findings": [
+    {
+      "severity": "medium",
+      "title": "Entrypoint missing keyword: 'boundary'",
+      "file": "/agent-first-contact.md",
+      "description": "Expected keyword 'boundary' not found in /agent-first-contact"
+    },
+    {
+      "severity": "medium",
+      "title": "Entrypoint missing keyword: 'not religion'",
+      "file": "/agent-brief.md",
+      "description": "Expected keyword 'not religion' not found in /agent-brief"
+    },
+    {
+      "severity": "medium",
+      "title": "Entrypoint missing keyword: 'not amendment'",
+      "file": "/agent-echo.md",
+      "description": "Expected keyword 'not amendment' not found in /agent-echo"
+    },
+    {
+      "severity": "medium",
+      "title": "Entrypoint JSON missing guidance: /api/agent-required-reading.json",
+      "file": "/api/agent-required-reading.json",
+      "description": "Expected recommended_sequence, context_depth, or required_reading"
+    }
+  ]
+}

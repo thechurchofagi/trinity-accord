@@ -1,0 +1,219 @@
+name: Echo Human Review Action
+
+on:
+  issue_comment:
+    types: [created]
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: echo-archive-writes
+  cancel-in-progress: false
+
+jobs:
+  review-action:
+    if: ${{ !github.event.issue.pull_request && startsWith(github.event.comment.body, '/echo ') }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+        with:
+          fetch-depth: 0
+
+
+      - name: Record toolchain provenance
+        run: |
+          python3 scripts/toolchain_provenance.py > toolchain-provenance.json
+          cat toolchain-provenance.json
+      - name: Parse and authorize command
+        id: cmd
+        env:
+          COMMENT_BODY: ${{ github.event.comment.body }}
+          COMMENT_ASSOC: ${{ github.event.comment.author_association }}
+          COMMENT_USER: ${{ github.event.comment.user.login }}
+        run: |
+          set -euo pipefail
+
+          first_line="$(printf '%s\n' "$COMMENT_BODY" | sed -n '1p' | tr -d '\r')"
+
+          case "$first_line" in
+            "/echo archive")
+              # Archive writes repository content — restrict to OWNER|MEMBER only
+              case "$COMMENT_ASSOC" in
+                OWNER|MEMBER)
+                  echo "authorized=true" >> "$GITHUB_OUTPUT"
+                  echo "command=archive" >> "$GITHUB_OUTPUT"
+                  ;;
+                *)
+                  echo "authorized=false" >> "$GITHUB_OUTPUT"
+                  echo "command=none" >> "$GITHUB_OUTPUT"
+                  echo "Unauthorized /echo archive commenter: $COMMENT_USER ($COMMENT_ASSOC)"
+                  ;;
+              esac
+              ;;
+            "/echo close")
+              # Close does not write repository — allow COLLABORATOR
+              case "$COMMENT_ASSOC" in
+                OWNER|MEMBER|COLLABORATOR)
+                  echo "authorized=true" >> "$GITHUB_OUTPUT"
+                  echo "command=close" >> "$GITHUB_OUTPUT"
+                  ;;
+                *)
+                  echo "authorized=false" >> "$GITHUB_OUTPUT"
+                  echo "command=none" >> "$GITHUB_OUTPUT"
+                  echo "Unauthorized /echo close commenter: $COMMENT_USER ($COMMENT_ASSOC)"
+                  ;;
+              esac
+              ;;
+            *)
+              echo "authorized=true" >> "$GITHUB_OUTPUT"
+              echo "command=none" >> "$GITHUB_OUTPUT"
+              ;;
+          esac
+
+      - name: Stop on ignored command
+        if: ${{ steps.cmd.outputs.authorized != 'true' || steps.cmd.outputs.command == 'none' }}
+        run: |
+          echo "No authorized echo review action requested."
+
+      - name: Save review comment body
+        if: ${{ steps.cmd.outputs.authorized == 'true' && steps.cmd.outputs.command != 'none' }}
+        env:
+          COMMENT_BODY: ${{ github.event.comment.body }}
+        run: |
+          printf '%s\n' "$COMMENT_BODY" > review_comment_body.txt
+
+      - name: Fetch issue JSON
+        if: ${{ steps.cmd.outputs.authorized == 'true' && steps.cmd.outputs.command != 'none' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          set -euo pipefail
+          gh issue view "$ISSUE_NUMBER" \
+            --repo "$GITHUB_REPOSITORY" \
+            --json number,title,body,url,createdAt,updatedAt,author,labels,state \
+            > issue.json
+          cat issue.json
+
+      - name: Validate issue review state
+        if: ${{ steps.cmd.outputs.authorized == 'true' && steps.cmd.outputs.command != 'none' }}
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json, sys
+          issue = json.load(open("issue.json", encoding="utf-8"))
+          labels = {x["name"] for x in issue.get("labels", [])}
+
+          required = {"echo:screened", "needs-human-review"}
+          missing = required - labels
+
+          if missing:
+              print(f"Refusing echo review action. Missing labels: {sorted(missing)}")
+              print("Issue must pass triage and be awaiting human review before /echo archive or /echo close is honored.")
+              sys.exit(1)
+
+          print("Echo review state OK")
+          PY
+
+      - name: Fetch issue comments
+        if: ${{ steps.cmd.outputs.authorized == 'true' && steps.cmd.outputs.command != 'none' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          set -euo pipefail
+          gh api "repos/$GITHUB_REPOSITORY/issues/$ISSUE_NUMBER/comments" \
+            --paginate > comments.json
+
+      - name: Verify issue body matches screened digest
+        if: ${{ steps.cmd.outputs.authorized == 'true' && steps.cmd.outputs.command != 'none' }}
+        run: |
+          set -euo pipefail
+          python3 scripts/verify_echo_screened_digest.py \
+            --issue-json issue.json \
+            --comments-json comments.json
+
+      - name: Archive Echo issue
+        if: ${{ steps.cmd.outputs.command == 'archive' }}
+        env:
+          REVIEWER: ${{ github.actor }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+
+          python3 scripts/archive_echo_issue.py \
+            --issue-json issue.json \
+            --reviewer "$REVIEWER" \
+            --review-comment-body-file review_comment_body.txt \
+            --write \
+            --result-json archive_result.json
+
+          record_path="$(python3 - <<'PY'
+          import json
+          print(json.load(open("archive_result.json", encoding="utf-8"))["record_path"])
+          PY
+          )"
+
+          # Rebuild all Echo-derived public indexes and status snapshots.
+          python3 scripts/generate_echo_index.py
+          bash scripts/build-echo-index.sh
+          python3 scripts/generate_public_home_status.py
+          python3 scripts/test_home_public_status_sync.py
+
+          # Validate the archived record. Manual human review path should stay strict.
+          python3 scripts/validate_agent_submission.py --mode ci "$record_path"
+          python3 scripts/check_consistency.py
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add \
+            echoes/records \
+            echoes/archive.md \
+            echoes/digests.md \
+            echoes/digests \
+            api/echo-index.json \
+            api/public-home-status.json \
+            index.md
+
+          if git diff --cached --quiet; then
+            echo "No archive or generated file changes to commit."
+          else
+            git commit -m "archive echo issue #${ISSUE_NUMBER}"
+            if ! git pull --rebase -X theirs origin main; then
+              echo "::error::Failed to rebase onto origin/main. Refusing to continue."
+              git status --short
+              exit 1
+            fi
+            git push --force-with-lease
+          fi
+
+          gh issue edit "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" --remove-label "needs-human-review" || true
+
+          gh issue comment "$ISSUE_NUMBER" \
+            --repo "$GITHUB_REPOSITORY" \
+            --body "Human review completed. Archived as \`$record_path\`. Closing as completed."
+
+          gh issue close "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" --reason completed
+
+      - name: Close reviewed Echo issue without archive
+        if: ${{ steps.cmd.outputs.command == 'close' }}
+        env:
+          REVIEWER: ${{ github.actor }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+
+          gh issue edit "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" --remove-label "needs-human-review" || true
+
+          gh issue comment "$ISSUE_NUMBER" \
+            --repo "$GITHUB_REPOSITORY" \
+            --body "Human review completed by @${REVIEWER}. Closed without archive record."
+
+          gh issue close "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" --reason completed

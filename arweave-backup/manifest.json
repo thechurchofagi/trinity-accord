@@ -1,0 +1,48 @@
+{
+  "version": "1.1",
+  "source": "arweave",
+  "description": "Backup manifest for Arweave stored assets",
+  "last_updated": "2026-04-30",
+  "entries": [
+    {
+      "arweave_tx": "j6anZ4m5Wwvx5P_9-kM2EVG35TyKtm1lgaKfhT743rk",
+      "github_path": "arweave-backup/files/public_covenant_archive.zip",
+      "hash_sha256": "ef816480f77f30405378800807b42bff0a854b83a8f77793a0e0adf0944a8263",
+      "hash_blake3": "(pending)",
+      "mime_type": "application/zip",
+      "description": "Public Covenant Archive - Core Object Alpha evidence (8 photos + 2 videos)",
+      "size_bytes": 24246033,
+      "uploaded_at": "2026-04-25T12:03:00Z"
+    },
+    {
+      "arweave_tx": "X4KOUkf-1ciFD3Q-gMA0i94t1hAVXGrUDm0q5amL4rc",
+      "github_path": "arweave-backup/files/verification_kit.tar.gz",
+      "hash_sha256": "ef68b69fe1cdd2523724dee511c9e8ea7bae2cceaff794664107970b18c61931",
+      "hash_blake3": "(pending)",
+      "mime_type": "application/gzip",
+      "description": "Verification Kit - SPV proofs, inscription manifest, verify scripts",
+      "size_bytes": 31040,
+      "uploaded_at": "2026-04-25T12:03:00Z"
+    },
+    {
+      "arweave_tx": "LV2XKhVXMdwrUF_7U6M2bydqHKn-6AEsd2sptl84m1s",
+      "github_path": "archive/evidence/ta-verification-bundle-v1.zip",
+      "hash_sha256": "bad5f9a3cdf1b4bbd2d2277cd5db968fb6fe28d28ad4b8479d185ddc19d503c6",
+      "hash_blake3": "(pending)",
+      "mime_type": "application/zip",
+      "description": "Verification Bundle v1 - SPV proofs and verification tools",
+      "size_bytes": 15689,
+      "uploaded_at": "2026-04-30T01:30:00Z"
+    },
+    {
+      "arweave_tx": "O-Rk3kFxesPGhuYP4KHAZl54xR2urDRKcGaVqjVnB-Q",
+      "github_path": "archive/evidence/nft-recovery-package/recovery-package.bin",
+      "hash_sha256": "f8b0dad700ad7a88ba343930ded7d8c3e94b57720ddbdafa0d731b732acdffbc",
+      "hash_blake3": "(pending)",
+      "mime_type": "application/octet-stream",
+      "description": "Main Recovery Package - 175 NFT backup index (IPFS DAG-CBOR format)",
+      "size_bytes": 716478,
+      "uploaded_at": "2026-04-30T01:35:00Z"
+    }
+  ]
+}

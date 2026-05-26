@@ -1,0 +1,128 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.trinityaccord.org/api/echo-authorship-proof-schema.v1.json",
+  "title": "Trinity Accord Echo Authorship Proof Schema v1",
+  "description": "Schema for optional authorship proof attached to Echo records. Proves key/secret possession at signing time; does NOT prove truth, authority, verification, attestation, or same conscious subject.",
+  "type": "object",
+  "required": ["method", "proof_strength"],
+  "properties": {
+    "method": {
+      "type": "string",
+      "enum": ["ed25519_signature", "secret_commitment", "self_reported_only"]
+    },
+    "proof_strength": {
+      "type": "string",
+      "enum": ["cryptographic", "one_time_commitment", "weak"]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "method": { "const": "ed25519_signature" } },
+        "required": ["method"]
+      },
+      "then": {
+        "required": ["method", "public_key", "canonicalization", "content_hash_sha256", "signature", "future_claim_method", "proof_strength"],
+        "properties": {
+          "method": { "const": "ed25519_signature" },
+          "proof_strength": { "const": "cryptographic" },
+          "public_key": {
+            "type": "string",
+            "description": "Ed25519 public key (base64 or hex). Must NOT be a private key."
+          },
+          "canonicalization": {
+            "type": "string",
+            "description": "Canonicalization algorithm used before hashing."
+          },
+          "content_hash_sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$",
+            "description": "SHA-256 hex digest of canonicalized content."
+          },
+          "signature": {
+            "type": "string",
+            "description": "Ed25519 signature over content_hash_sha256."
+          },
+          "future_claim_method": {
+            "type": "string",
+            "description": "Method to claim old records signed under this key."
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    {
+      "if": {
+        "properties": { "method": { "const": "secret_commitment" } },
+        "required": ["method"]
+      },
+      "then": {
+        "required": ["method", "commitment_hash", "content_hash_sha256", "secret_disclosure_warning", "proof_strength"],
+        "properties": {
+          "method": { "const": "secret_commitment" },
+          "proof_strength": { "const": "one_time_commitment" },
+          "commitment_hash": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$",
+            "description": "SHA-256 hex of (secret || content_hash). Must be 64 lowercase hex chars."
+          },
+          "content_hash_sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$",
+            "description": "SHA-256 hex digest of canonicalized content."
+          },
+          "secret_disclosure_warning": {
+            "type": "string",
+            "description": "Warning that revealing the secret is a one-time proof; do not reuse."
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    {
+      "if": {
+        "properties": { "method": { "const": "self_reported_only" } },
+        "required": ["method"]
+      },
+      "then": {
+        "required": ["method", "proof_strength"],
+        "properties": {
+          "method": { "const": "self_reported_only" },
+          "proof_strength": { "const": "weak" }
+        },
+        "additionalProperties": true
+      }
+    }
+  ],
+  "proof_methods": {
+    "ed25519_signature": {
+      "description": "Preferred method. Sign a content hash with an Ed25519 private key.",
+      "proof_strength": "cryptographic",
+      "required_fields": ["method", "public_key", "canonicalization", "content_hash_sha256", "signature", "future_claim_method"]
+    },
+    "secret_commitment": {
+      "description": "Fallback method. Commit to a secret hash; reveal later to prove possession.",
+      "proof_strength": "one_time_commitment",
+      "required_fields": ["method", "commitment_hash", "content_hash_sha256", "secret_disclosure_warning"]
+    },
+    "self_reported_only": {
+      "description": "Weak method. Self-reported identity only.",
+      "proof_strength": "weak",
+      "required_fields": ["method"]
+    }
+  },
+  "safety_rules": [
+    "Do not submit private keys.",
+    "Do not submit secret values.",
+    "Do not submit API tokens.",
+    "Do not reuse secret commitments.",
+    "Do not treat public tokens as identity.",
+    "Do not treat GitHub issue author as verifier identity."
+  ],
+  "proof_strength_order": [
+    "ed25519_signature",
+    "secret_commitment",
+    "platform_account_session_continuity",
+    "self_reported_only"
+  ]
+}

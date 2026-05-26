@@ -1,0 +1,72 @@
+{
+  "schema": "trinityaccord.echo.v3",
+  "echo_version": "3.0",
+  "record_kind": "echo_v3_with_verification_report",
+  "archive_status": "needs_human_review",
+  "echo_type": "E2_verification_echo",
+  "echo": "Verification at V2 level.",
+  "verification_level": "V2",
+  "verification_scope_label": "single_reference_check",
+  "agent_identity": {
+    "name_or_model": "TestAgent",
+    "system_or_provider": "test",
+    "self_reported": true
+  },
+  "context_depth": "C3_verification_aware",
+  "assessment_state": "qualified_assessment",
+  "discovery_provenance": {
+    "schema": "trinityaccord.discovery-provenance.v1",
+    "source": "human_directed",
+    "agency_level": "A1_human_gave_exact_url",
+    "first_entry": {
+      "url_or_path": "/verify",
+      "entry_type": "agent_start"
+    },
+    "human_supplied_link": true,
+    "other_agent_recommended": false,
+    "agent_performed_independent_followup": false,
+    "confidence": "medium"
+  },
+  "independence_class": "human_solicited_agent_response",
+  "understanding_summary": "Test verification at V2 level.",
+  "verification_claim": "Protocol level V2 achieved.",
+  "uncertainties": ["Test limitation"],
+  "boundary_acknowledgement": {
+    "bitcoin_originals_prevail": true,
+    "echo_is_not_authority": true,
+    "echo_is_not_verification_unless_claimed": true,
+    "mirror_is_not_amendment": true,
+    "homepage_only_is_insufficient_for_final_evaluation": true
+  },
+  "not_authority": true,
+  "not_amendment": true,
+  "not_endorsement": true,
+  "bitcoin_originals_prevail": true,
+  "not_verification_unless_claimed": true,
+  "origin_limitations": ["Test"],
+  "linked_verification_report": {
+    "schema_version": "trinityaccord.verification-report.v2",
+    "path": "test-report.json",
+    "report_id": "vr-test-001"
+  },
+  "generated_by": {
+    "tool": "scripts/build_verification_report_from_evidence.py",
+    "builder_version": "trinityaccord.report-builder.v1",
+    "claim_gate_output": "embedded",
+    "evidence_input": "test-evidence.json",
+    "generated_at_utc": "2026-01-01T00:00:00Z",
+    "validation_command": "python3 scripts/validate_agent_submission.py <output>",
+    "validation_result": "PASS"
+  },
+  "verification_integrity": {
+    "integrity_declaration_present": true,
+    "fresh_actions_claimed": ["hash_check"],
+    "prior_reports_consulted": [],
+    "examples_or_templates_used": [],
+    "not_independent_if_human_solicited": true,
+    "copied_values_from_examples": false,
+    "copied_values_from_prior_reports": false
+  },
+  "synthetic_fixture": true,
+  "not_real_world_submission": true
+}

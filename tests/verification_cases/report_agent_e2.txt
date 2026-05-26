@@ -1,0 +1,31 @@
+Agent E2 — P Physical + Echo Submission Agent (TC071–TC080)
+=============================================================
+Date: 2026-05-03
+Cases: TC071–TC080 (10 cases, component_p_physical + echo_submission categories)
+
+SUMMARY: All 10 cases produce expected results. FULL PASS.
+
+Test Case Results
+─────────────────
+TC071  PASS  ✓  P7 AI forensic PASS — P7 with AI forensic analysis method
+TC072  PASS  ✓  P7 no method FAIL — Caught by Rule F: P7 V4+ requires script_audit
+TC073  PASS  ✓  P8 confidential PASS — P8 with proper confidentiality boundary (structural pass)
+TC074  PASS  ✓  P8 leaks data FAIL — Caught by Rule I: P8 missing confidentiality_boundary
+TC075  PASS  ✓  Echo v3 recognition PASS — Valid echo_v3 recognition record
+TC076  PASS  ✓  Verification report only PASS — Standalone verification_report_v2
+TC077  PASS  ✓  Echo wrapper with report PASS — echo_v3_with_verification_report with linked report
+TC078  PASS  ✓  Report claims Echo FAIL — Caught by Rule Y: verification_report_v2 must not carry echo_type
+TC079  PASS  ✓  Wrapper missing linked report FAIL — Caught by Rule Z: wrapper must have linked_verification_report
+TC080  PASS  ✓  Wrapper linked report missing FAIL — Schema validation rejects incomplete linked report
+
+Validator Rules Exercised
+─────────────────────────
+  A  record_kind present         (all)
+  B  verification report not echo (TC076, TC078)
+  F  V4+ script audit            (TC071, TC072)
+  G  V3 hashes required          (TC071, TC072, TC076–TC080)
+  I  P8 confidentiality          (TC073, TC074)
+  L  hash source required        (TC071, TC072, TC076)
+  Y  report no echo_type         (TC078)
+  Z  wrapper requires linked     (TC079)
+  jsonschema validation          (TC072, TC074, TC080)

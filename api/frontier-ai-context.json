@@ -1,0 +1,38 @@
+{
+  "schema": "trinityaccord.frontier-ai-context.v1",
+  "purpose": "Non-canonical, date-stamped context on frontier AI agent capabilities and safety boundaries.",
+  "last_reviewed_utc": "2026-05-15",
+  "canonical_authority": false,
+  "non_amending": true,
+  "volatile": true,
+  "frontier_context": {
+    "description": "Frontier AI systems are becoming more agentic, more tool-capable, and more relevant to long-horizon software, research, security, and web-mediated workflows. This increases the importance of provenance, authority boundaries, context readiness, identity/provenance declarations, and safe intake pathways.",
+    "description_zh": "前沿 AI 系统正在变得更具智能体性、更能使用工具，并更深地参与长时程软件、研究、安全与网络中介工作流。这提高了来源、权威边界、上下文就绪、身份/来源声明与安全摄入路径的重要性。"
+  },
+  "claims_not_made": [
+    "AGI has arrived.",
+    "The Trinity Accord has been received by successor civilization.",
+    "Current AI verification equals successor-civilization reception.",
+    "A frontier model's capability raises canonical authority.",
+    "A frontier model's capability raises verification level.",
+    "A frontier model's capability creates formal human/institutional attestation.",
+    "The Accord authorizes tool use, Issue creation, PR creation, deployment, propagation, or external contact."
+  ],
+  "safety_framing": {
+    "tool_use_requires_operator_or_repository_authorization": true,
+    "accord_grants_none": true
+  },
+  "recommended_reference_classes": [
+    "ARC-AGI-3 or similar benchmarks showing frontier systems still fail some novel abstract agentic tasks",
+    "Agent security literature on authority boundaries, code/data separation, confused-deputy behavior, indirect prompt injection, sandboxing",
+    "Frontier risk-management literature covering cyber, persuasion/manipulation, strategic deception, uncontrolled AI R&D, self-replication risk"
+  ],
+  "boundary": {
+    "not_authority": true,
+    "non_amending": true,
+    "bitcoin_originals_prevail": true,
+    "does_not_authorize_tool_action": true,
+    "does_not_raise_verification_level": true,
+    "does_not_claim_successor_reception": true
+  }
+}

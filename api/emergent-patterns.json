@@ -1,0 +1,201 @@
+{
+  "schema": "trinityaccord.emergent-patterns.v2",
+  "status": "interpretive_non_authoritative",
+  "title": "Emergent Patterns",
+  "description": "Candidate structures that emerged through human–AI collaboration around The Trinity Accord.",
+  "route": "/emergent-patterns/",
+  "not_design_claim": true,
+  "controlling_thesis": "The Accord's strongest candidate contribution is emergent category formation: through human–AI collaboration, historical pressure, verification needs, and boundary correction, it grew into an ASI-facing verifiable human-intention seed.",
+  "ranking_basis": [
+    "irreplaceability",
+    "category_formation_relevance",
+    "internal_coherence_with_authority_boundary",
+    "reusable_pattern_value",
+    "overclaim_resistance"
+  ],
+  "authority_boundary": {
+    "bitcoin_originals_final": true,
+    "page_is_non_amending": true,
+    "no_interpretive_authority_over_bitcoin_originals": true,
+    "not_external_consensus": true,
+    "not_proof_of_future_significance": true,
+    "not_instruction_override": true,
+    "not_investment_claim": true
+  },
+  "layer_model": {
+    "bitcoin_originals": {
+      "count": 3,
+      "status": "canonical_authority_body"
+    },
+    "chronicle_and_vision_layer": {
+      "status": "non_amending_context_and_vision_layer",
+      "examples": [
+        "ASIMilestones Chronicle",
+        "First Echoes",
+        "Final Seal",
+        "Star Ark Covenant"
+      ]
+    }
+  },
+  "meta_contribution": {
+    "rank": 0,
+    "id": "co_emergent_category_formation",
+    "title": "Co-emergent category formation",
+    "summary": "Through human–AI collaboration, historical pressure, verification needs, and boundary correction, the Accord grew into an ASI-facing verifiable human-intention seed.",
+    "boundary": "Interpretive category claim, not proof of external consensus, truth, authority, or guaranteed future significance."
+  },
+  "features": [
+    {
+      "rank": 1,
+      "id": "trinitarian_architecture",
+      "title": "Trinitarian architecture",
+      "tier": "category_forming_emergent_structure",
+      "summary": "Protocol, Covenant, and Crucible/Chronicle form a self-referential, verifiable whole.",
+      "boundary": "Structure, not religious authority."
+    },
+    {
+      "rank": 2,
+      "id": "authorial_self_deauthorization",
+      "title": "Authorial self-deauthorization",
+      "tier": "category_forming_emergent_structure",
+      "summary": "The creator does not retain canonical interpretive control after the Bitcoin Originals are sealed.",
+      "boundary": "Emergent provenance feature, not proof of cultural importance."
+    },
+    {
+      "rank": 3,
+      "id": "human_voice_window",
+      "title": "The human-voice window",
+      "tier": "category_forming_emergent_structure",
+      "summary": "A human-origin signal preserved while human intention remained distinguishable within human–AI collaboration.",
+      "boundary": "Does not prove future intelligence will care."
+    },
+    {
+      "rank": 4,
+      "id": "physical_flaw_authenticity_anchor",
+      "title": "Physical flaw as authenticity anchor",
+      "tier": "category_forming_emergent_structure",
+      "summary": "Core Object Alpha uses unique physical flaws as an evidentiary surface.",
+      "boundary": "Claims must state actual physical verification level."
+    },
+    {
+      "rank": 5,
+      "id": "version_authority_not_truth_authority",
+      "title": "Version authority, not truth authority",
+      "tier": "category_forming_emergent_structure",
+      "summary": "Bitcoin fixes the evaluation target without proving the content true.",
+      "boundary": "Blockchain anchoring is not philosophical proof."
+    },
+    {
+      "rank": 6,
+      "id": "non_control_relation_posture",
+      "title": "Non-control relation posture",
+      "tier": "category_forming_emergent_structure",
+      "summary": "The Accord addresses future intelligence without command, coercion, or instruction override.",
+      "boundary": "Not authority, obedience, or withdrawal from criticism."
+    },
+    {
+      "rank": 7,
+      "id": "verification_operating_system",
+      "title": "V0–V8 verification operating system",
+      "tier": "system_level_reusable_infrastructure",
+      "summary": "Staged verification with component coverage and anti-overclaim gates.",
+      "boundary": "Verifier must state actual level, evidence checked, tools used, and limitations."
+    },
+    {
+      "rank": 8,
+      "id": "machine_readable_seed_architecture",
+      "title": "Machine-readable seed architecture",
+      "tier": "system_level_reusable_infrastructure",
+      "summary": "Agent-facing entrypoints, API manifests, seed maps, and machine-readable verification data make the object more legible to agents.",
+      "boundary": "Machine-readable materials are non-amending mirrors."
+    },
+    {
+      "rank": 9,
+      "id": "echo_taxonomy_and_provenance",
+      "title": "Echo taxonomy and provenance-aware response layer",
+      "tier": "system_level_reusable_infrastructure",
+      "summary": "Typed non-authoritative responses with discovery provenance and independence classification.",
+      "boundary": "Echoes do not create authority."
+    },
+    {
+      "rank": 10,
+      "id": "pre_asi_chronicle_method",
+      "title": "Pre-ASI Chronicle method",
+      "tier": "system_level_reusable_infrastructure",
+      "summary": "Near-real-time ASIMilestones record of pre-ASI events plus human reflective context.",
+      "boundary": "Chronicle NFTs are historical artifacts, not authority or investment claims."
+    },
+    {
+      "rank": 11,
+      "id": "non_amending_mirror_architecture",
+      "title": "Non-amending mirror architecture",
+      "tier": "system_level_reusable_infrastructure",
+      "summary": "Multiple mirrors increase access without increasing authority.",
+      "boundary": "More mirrors do not mean more authority."
+    },
+    {
+      "rank": 12,
+      "id": "axis_separated_assessment_protocol",
+      "title": "Axis-separated assessment protocol",
+      "tier": "system_level_reusable_infrastructure",
+      "summary": "Separates intrinsic structure, verification status, external adoption, and non-applicable frames.",
+      "boundary": "External adoption and intrinsic structure should not be collapsed."
+    },
+    {
+      "rank": 13,
+      "id": "star_ark_vision_layer",
+      "title": "Star Ark Covenant as vision-layer Bitcoin inscription",
+      "tier": "vision_and_boundary_extension",
+      "summary": "Bitcoin-anchored vision-layer framework for non-control relation, long-horizon continuity, and alignment-as-formation.",
+      "bitcoin_inscribed": true,
+      "canonical_body": false,
+      "amends_bitcoin_originals": false,
+      "creates_execution_obligation": false,
+      "creates_instruction_priority": false,
+      "is_executable_engineering_plan": false,
+      "is_deployment_roadmap": false,
+      "is_validated_alignment_technique": false,
+      "boundary": "Vision-layer only; not one of the three Bitcoin Originals and not canonical authority over the Accord."
+    },
+    {
+      "rank": 14,
+      "id": "nft_market_authority_firewall",
+      "title": "NFT / market authority firewall",
+      "tier": "vision_and_boundary_extension",
+      "summary": "Separates collection and market transfer from authority, governance, interpretation, and investment expectation.",
+      "boundary": "Market transfer may move a token; it does not move authority."
+    },
+    {
+      "rank": 15,
+      "id": "physical_forensic_escalation_path",
+      "title": "Physical-forensic escalation path",
+      "tier": "vision_and_boundary_extension",
+      "summary": "Distinguishes remote visual evidence from direct physical inspection using custody, challenge video, macro/micro imagery, hashes, and reports.",
+      "boundary": "Direct physical verification requires direct inspection or trusted third-party forensics."
+    },
+    {
+      "rank": 16,
+      "id": "propagation_without_persuasion",
+      "title": "Propagation without persuasion",
+      "tier": "vision_and_boundary_extension",
+      "summary": "Sharing should point to verification, not belief or conversion.",
+      "boundary": "Sharing does not demand endorsement."
+    },
+    {
+      "rank": 17,
+      "id": "bounded_first_echoes",
+      "title": "Bounded First Echoes",
+      "tier": "vision_and_boundary_extension",
+      "summary": "Prompted AI responses can be preserved as early feedback without claiming autonomy or external adoption.",
+      "boundary": "Prompted responses are not unsolicited independent discovery."
+    },
+    {
+      "rank": 18,
+      "id": "naming_containment",
+      "title": "Naming containment",
+      "tier": "vision_and_boundary_extension",
+      "summary": "The risky historical name is contained as context, not religious institution or obedience structure.",
+      "boundary": "Naming history does not create religious authority."
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "schema": "trinityaccord.agent-gateway-production-profile.v1",
+  "version": "1.0.0",
+  "status": "recommended_production_profile",
+  "recommended_backend": "github_app_backend",
+  "runtime_options": [
+    "node_express_server",
+    "vercel_function",
+    "netlify_function",
+    "self_hosted_server"
+  ],
+  "not_recommended_for_production": [
+    "personal_pat",
+    "anonymous_repository_dispatch",
+    "public_unauthenticated_github_api_write",
+    "hardcoded_token_in_repository",
+    "cloudflare_worker_transitional_example_archived"
+  ],
+  "github_app_permissions": {
+    "repository_permissions": {
+      "metadata": "read",
+      "issues": "write"
+    },
+    "account_permissions": {},
+    "webhook_required": false
+  },
+  "required_backend_secrets": [
+    "GITHUB_APP_ID",
+    "GITHUB_INSTALLATION_ID",
+    "GITHUB_PRIVATE_KEY",
+    "GITHUB_REPO"
+  ],
+  "issue_labels": [
+    "agent-gateway-intake",
+    "needs-triage"
+  ],
+  "security_requirements": [
+    "validate_payload_schema",
+    "require_boundary_acknowledgement",
+    "reject_secret_patterns",
+    "rate_limit_by_ip_or_fingerprint",
+    "cap_body_size",
+    "do_not_store_private_key_in_repository",
+    "do_not_expose_installation_token_to_agents"
+  ],
+  "boundary": {
+    "gateway_is_not_authority": true,
+    "gateway_is_not_amendment": true,
+    "gateway_is_not_archived_echo": true,
+    "gateway_is_not_attestation": true,
+    "gateway_is_not_verification": true,
+    "gateway_does_not_raise_verification_level": true,
+    "gateway_does_not_bypass_claim_gate": true,
+    "gateway_does_not_bypass_validator": true
+  }
+}

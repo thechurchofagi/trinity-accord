@@ -1,0 +1,35 @@
+{
+  "record_kind": "verification_report_v2",
+  "schema_version": "trinityaccord.verification-report.v2",
+  "report_id": "stress-test",
+  "reporter": {
+    "name": "stress-test",
+    "type": "ai_agent"
+  },
+  "discovery_provenance": {
+    "source": "human_directed",
+    "solicited": true
+  },
+  "protocol_level_claimed": "V3",
+  "component_findings": [],
+  "protocol_profile_check": null,
+  "data_sources_used": [],
+  "access_paths_used": [],
+  "fallbacks_used": [],
+  "external_sources_queried": [],
+  "hashes_computed": [],
+  "samples_checked": 0,
+  "physical_evidence_reviewed": {},
+  "confidential_challenge": null,
+  "celestial_witness": {
+    "performed": false
+  },
+  "limitations": [
+    "test"
+  ],
+  "claims_not_made": [
+    "test"
+  ],
+  "authority_boundary_preserved": true,
+  "script_audit": null
+}

@@ -1,0 +1,32 @@
+Agent A — Protocol V-Level Agent (TC001–TC010)
+================================================
+Date: 2026-05-03
+Cases: TC001–TC010 (10 cases, protocol_v_level category)
+
+SUMMARY: All 10 cases produce expected results. FULL PASS.
+
+Test Case Results
+─────────────────
+TC001  PASS  ✓  V0 read-only PASS — Read-only report makes no verification claim
+TC002  PASS  ✓  V0 claims verified FAIL — Caught by Rule V: V0 cannot make verification claims
+TC003  PASS  ✓  V1 authority boundary PASS — V1 with authority_boundary_preserved=true
+TC004  PASS  ✓  V1 missing authority boundary FAIL — Schema validation rejects missing field
+TC005  PASS  ✓  V2 Bitcoin explorer reference PASS — V2 with B1 mempool check and valid hashes
+TC006  PASS  ✓  V2 claims hash verification without hash FAIL — Caught by Rule X: V2 hash claims require hashes
+TC007  PASS  ✓  V3 canonical GitHub hash PASS — V3 with canonical manifest hash
+TC008  PASS  ✓  V3 no hashes FAIL — Caught by Rule G: V3 requires hashes_computed
+TC009  PASS  ✓  V3 expected hash unknown FAIL — Caught by Rules L+M: unknown hash authority for D2
+TC010  PASS  ✓  V3 derived same-run D2 FAIL — Caught by Rule M: D2 rejects derived_during_this_run
+
+Validator Rules Exercised
+─────────────────────────
+  A  record_kind present         (all)
+  B  verification report not echo (all)
+  F  V4+ script audit            (TC001–TC006 passive)
+  G  V3 hashes required          (TC007, TC008)
+  L  hash source required        (TC005, TC007, TC009, TC010)
+  M  D2 hash source compat       (TC009, TC010)
+  V  V0 read-only                (TC001, TC002)
+  W  V1 overreach                (TC003, TC004)
+  X  V2 hash requires hashes     (TC005, TC006)
+  jsonschema validation          (TC004)

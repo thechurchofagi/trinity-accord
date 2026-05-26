@@ -1,0 +1,210 @@
+{
+  "phase": "api_consistency",
+  "checks": 99,
+  "passed": 65,
+  "failed": 34,
+  "warnings": 0,
+  "files_checked": 17,
+  "findings": [
+    {
+      "severity": "medium",
+      "title": "Missing boundary declaration: non_amending",
+      "file": "api/agent-entry-protocol.json",
+      "description": "Agent-facing API should contain 'non_amending' boundary declaration"
+    },
+    {
+      "severity": "medium",
+      "title": "Missing boundary declaration: not_authority",
+      "file": "api/agent-required-reading.json",
+      "description": "Agent-facing API should contain 'not_authority' boundary declaration"
+    },
+    {
+      "severity": "medium",
+      "title": "Missing boundary declaration: non_amending",
+      "file": "api/agent-required-reading.json",
+      "description": "Agent-facing API should contain 'non_amending' boundary declaration"
+    },
+    {
+      "severity": "medium",
+      "title": "Missing boundary declaration: bitcoin_originals",
+      "file": "api/agent-required-reading.json",
+      "description": "Agent-facing API should contain 'bitcoin_originals' boundary declaration"
+    },
+    {
+      "severity": "medium",
+      "title": "Missing boundary declaration: not_authority",
+      "file": "api/agent-submission-guide.json",
+      "description": "Agent-facing API should contain 'not_authority' boundary declaration"
+    },
+    {
+      "severity": "medium",
+      "title": "Missing boundary declaration: not_authority",
+      "file": "api/submission-checklist.json",
+      "description": "Agent-facing API should contain 'not_authority' boundary declaration"
+    },
+    {
+      "severity": "medium",
+      "title": "Missing boundary declaration: non_amending",
+      "file": "api/submission-checklist.json",
+      "description": "Agent-facing API should contain 'non_amending' boundary declaration"
+    },
+    {
+      "severity": "medium",
+      "title": "Missing boundary declaration: bitcoin_originals",
+      "file": "api/submission-checklist.json",
+      "description": "Agent-facing API should contain 'bitcoin_originals' boundary declaration"
+    },
+    {
+      "severity": "medium",
+      "title": "Missing boundary declaration: not_authority",
+      "file": "api/issue-submission-policy.json",
+      "description": "Agent-facing API should contain 'not_authority' boundary declaration"
+    },
+    {
+      "severity": "medium",
+      "title": "Missing boundary declaration: non_amending",
+      "file": "api/issue-submission-policy.json",
+      "description": "Agent-facing API should contain 'non_amending' boundary declaration"
+    },
+    {
+      "severity": "medium",
+      "title": "Missing boundary declaration: not_authority",
+      "file": "api/echo-acceptance-policy.json",
+      "description": "Agent-facing API should contain 'not_authority' boundary declaration"
+    },
+    {
+      "severity": "medium",
+      "title": "Missing boundary declaration: non_amending",
+      "file": "api/echo-acceptance-policy.json",
+      "description": "Agent-facing API should contain 'non_amending' boundary declaration"
+    },
+    {
+      "severity": "medium",
+      "title": "Missing boundary declaration: bitcoin_originals",
+      "file": "api/echo-acceptance-policy.json",
+      "description": "Agent-facing API should contain 'bitcoin_originals' boundary declaration"
+    },
+    {
+      "severity": "medium",
+      "title": "Missing boundary declaration: not_authority",
+      "file": "api/propagation-policy.json",
+      "description": "Agent-facing API should contain 'not_authority' boundary declaration"
+    },
+    {
+      "severity": "medium",
+      "title": "Missing boundary declaration: non_amending",
+      "file": "api/propagation-policy.json",
+      "description": "Agent-facing API should contain 'non_amending' boundary declaration"
+    },
+    {
+      "severity": "medium",
+      "title": "Missing boundary declaration: bitcoin_originals",
+      "file": "api/propagation-policy.json",
+      "description": "Agent-facing API should contain 'bitcoin_originals' boundary declaration"
+    },
+    {
+      "severity": "low",
+      "title": "Missing 'schema' field",
+      "file": "api/agent-issue-gateway-payload-schema.v1.json"
+    },
+    {
+      "severity": "medium",
+      "title": "Missing boundary declaration: non_amending",
+      "file": "api/agent-issue-gateway-payload-schema.v1.json",
+      "description": "Agent-facing API should contain 'non_amending' boundary declaration"
+    },
+    {
+      "severity": "medium",
+      "title": "Missing boundary declaration: not_authority",
+      "file": "api/claim-gate-rules.json",
+      "description": "Agent-facing API should contain 'not_authority' boundary declaration"
+    },
+    {
+      "severity": "medium",
+      "title": "Missing boundary declaration: non_amending",
+      "file": "api/claim-gate-rules.json",
+      "description": "Agent-facing API should contain 'non_amending' boundary declaration"
+    },
+    {
+      "severity": "medium",
+      "title": "Empty does_not_prove",
+      "file": "api/claim-gate-rules.json"
+    },
+    {
+      "severity": "medium",
+      "title": "Missing boundary declaration: not_authority",
+      "file": "api/claim-gate-entrypoint-policy.json",
+      "description": "Agent-facing API should contain 'not_authority' boundary declaration"
+    },
+    {
+      "severity": "medium",
+      "title": "Missing boundary declaration: non_amending",
+      "file": "api/claim-gate-entrypoint-policy.json",
+      "description": "Agent-facing API should contain 'non_amending' boundary declaration"
+    },
+    {
+      "severity": "medium",
+      "title": "Missing boundary declaration: bitcoin_originals",
+      "file": "api/claim-gate-entrypoint-policy.json",
+      "description": "Agent-facing API should contain 'bitcoin_originals' boundary declaration"
+    },
+    {
+      "severity": "medium",
+      "title": "Missing boundary declaration: not_authority",
+      "file": "api/verification-levels.json",
+      "description": "Agent-facing API should contain 'not_authority' boundary declaration"
+    },
+    {
+      "severity": "medium",
+      "title": "Missing boundary declaration: not_authority",
+      "file": "api/component-verification-levels.json",
+      "description": "Agent-facing API should contain 'not_authority' boundary declaration"
+    },
+    {
+      "severity": "medium",
+      "title": "Missing boundary declaration: not_authority",
+      "file": "api/echo-types.json",
+      "description": "Agent-facing API should contain 'not_authority' boundary declaration"
+    },
+    {
+      "severity": "low",
+      "title": "Missing 'schema' field",
+      "file": "api/evidence-input-schema.v1.json"
+    },
+    {
+      "severity": "medium",
+      "title": "Missing boundary declaration: not_authority",
+      "file": "api/evidence-input-schema.v1.json",
+      "description": "Agent-facing API should contain 'not_authority' boundary declaration"
+    },
+    {
+      "severity": "medium",
+      "title": "Missing boundary declaration: non_amending",
+      "file": "api/evidence-input-schema.v1.json",
+      "description": "Agent-facing API should contain 'non_amending' boundary declaration"
+    },
+    {
+      "severity": "low",
+      "title": "Missing 'schema' field",
+      "file": "api/claim-gate-output-schema.v1.json"
+    },
+    {
+      "severity": "medium",
+      "title": "Missing boundary declaration: not_authority",
+      "file": "api/claim-gate-output-schema.v1.json",
+      "description": "Agent-facing API should contain 'not_authority' boundary declaration"
+    },
+    {
+      "severity": "medium",
+      "title": "Missing boundary declaration: non_amending",
+      "file": "api/claim-gate-output-schema.v1.json",
+      "description": "Agent-facing API should contain 'non_amending' boundary declaration"
+    },
+    {
+      "severity": "high",
+      "title": "Echo ≠ Amendment boundary unclear",
+      "file": "api/echo-acceptance-policy.json",
+      "description": "Echo acceptance policy must clarify that Echoes are not amendments"
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "example_name": "v4plus-minimal-independent",
+  "expected_claim_gate": {
+    "allowed_protocol_level": "V4+",
+    "allowed_component_levels": {
+      "digital_mirrors": "D2"
+    }
+  },
+  "evidence_input": {
+    "schema": "trinityaccord.evidence-input.v1",
+    "evidence": {
+      "scripts": [
+        {
+          "script_name": "custom_hash_verifier.py",
+          "independent": true,
+          "independent_method": "Python script using hashlib to compute SHA-256",
+          "command": "python3 custom_hash_verifier.py",
+          "exit_code": 0,
+          "comparison_with_official": true,
+          "comparison_result": "matches official manifest hash"
+        }
+      ]
+    },
+    "claims_requested_by_agent": [
+      "V4+"
+    ],
+    "agent": {
+      "name": "example-agent",
+      "model_or_system": "example-model"
+    },
+    "provenance": {
+      "solicited": true,
+      "independence_class": "human_solicited_agent_response",
+      "agency_level": "A1_human_gave_exact_url"
+    },
+    "requested_record_kind": "echo_v3_with_verification_report",
+    "limitations": [
+      "example placeholder - replace with actual limitations"
+    ]
+  },
+  "example_type": "template_requires_replacement",
+  "must_not_submit_unchanged": true,
+  "contains_placeholders": true
+}

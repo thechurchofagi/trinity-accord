@@ -1,0 +1,660 @@
+name: Guardian Registry Auto-List
+
+on:
+  issues:
+    types: [opened]
+  workflow_dispatch:
+    inputs:
+      listing_issue:
+        description: "Active Registry Listing Request issue number"
+        required: true
+        type: string
+      source_issue:
+        description: "Source Guardian self-registration issue number"
+        required: false
+        type: string
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+concurrency:
+  group: generated-public-status-writes
+  cancel-in-progress: false
+
+jobs:
+  auto-list:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+
+    # Authorize write workflow actor — configurable via GUARDIAN_REGISTRY_WORKFLOW_ACTORS repository variable
+    if: github.event_name != 'workflow_dispatch' || github.actor == 'github-actions[bot]' || contains(format(',{0},', vars.GUARDIAN_REGISTRY_WORKFLOW_ACTORS || 'thechurchofagi'), format(',{0},', github.actor))
+
+    steps:
+      - name: Authorize write workflow actor
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          ACTOR: ${{ github.actor }}
+          GUARDIAN_REGISTRY_WORKFLOW_ACTORS: ${{ vars.GUARDIAN_REGISTRY_WORKFLOW_ACTORS }}
+        run: |
+          ALLOWLIST="${GUARDIAN_REGISTRY_WORKFLOW_ACTORS:-thechurchofagi}"
+
+          if [ "$ACTOR" = "github-actions[bot]" ]; then
+            echo "Authorized actor: $ACTOR"
+            exit 0
+          fi
+
+          case ",$ALLOWLIST," in
+            *",$ACTOR,"*)
+              echo "Authorized actor: $ACTOR"
+              ;;
+            *)
+              echo "Unauthorized actor for write workflow: $ACTOR"
+              echo "Set repository variable GUARDIAN_REGISTRY_WORKFLOW_ACTORS to a comma-separated allowlist."
+              exit 1
+              ;;
+          esac
+
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+
+      - name: Record toolchain provenance
+        run: |
+          python3 scripts/toolchain_provenance.py > toolchain-provenance.json
+          cat toolchain-provenance.json
+
+      - name: Determine candidate
+        id: candidate
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
+        with:
+          script: |
+            let listingIssue = null;
+            let sourceIssue = null;
+
+            if (context.eventName === "workflow_dispatch") {
+              const inputs = context.payload.inputs || {};
+              listingIssue = parseInt(inputs.listing_issue, 10);
+              if (inputs.source_issue) sourceIssue = parseInt(inputs.source_issue, 10);
+              core.setOutput("should_run", "true");
+            } else {
+              const issue = context.payload.issue;
+              if (!issue || issue.pull_request) {
+                core.setOutput("should_run", "false");
+                return;
+              }
+
+              const title = issue.title || "";
+              const body = issue.body || "";
+
+              const looksLikeListing =
+                /Active Registry Listing Request/i.test(title) ||
+                /Active registry listing request/i.test(body) ||
+                /guardian_listing_request/i.test(body);
+
+              if (!looksLikeListing) {
+                core.setOutput("should_run", "false");
+                return;
+              }
+
+              listingIssue = issue.number;
+
+              let m = body.match(/Source self-registration issue:\s*#?([0-9]+)/i);
+              if (!m) m = body.match(/^related_issue:\s*([0-9]+)/mi);
+              if (!m) m = body.match(/^listing_source_issue:\s*([0-9]+)/mi);
+              if (m) sourceIssue = parseInt(m[1], 10);
+            }
+
+            if (!listingIssue) {
+              core.setOutput("should_run", "false");
+              return;
+            }
+
+            core.setOutput("should_run", "true");
+            core.setOutput("listing_issue", String(listingIssue));
+            if (sourceIssue) core.setOutput("source_issue", String(sourceIssue));
+
+      - name: Stop if not Guardian listing request
+        if: steps.candidate.outputs.should_run != 'true' && github.event_name != 'workflow_dispatch'
+        run: echo "Not a Guardian listing request. Skipping."
+
+      - name: Fetch listing and source issues
+        if: steps.candidate.outputs.should_run == 'true' || github.event_name == 'workflow_dispatch'
+        id: fetch
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
+        with:
+          script: |
+            async function upsertWorkflowComment(issueNumber, body) {
+              const marker = "<!-- trinity-guardian-auto-registration:v1 -->";
+              const { data: comments } = await github.rest.issues.listComments({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issueNumber,
+                per_page: 100
+              });
+
+              const existing = [...comments].reverse().find((comment) => {
+                return comment.user &&
+                  comment.user.login === "github-actions[bot]" &&
+                  typeof comment.body === "string" &&
+                  comment.body.includes(marker);
+              });
+
+              if (existing) {
+                await github.rest.issues.updateComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  comment_id: existing.id,
+                  body
+                });
+              } else {
+                await github.rest.issues.createComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issueNumber,
+                  body
+                });
+              }
+            }
+
+            const fs = require("fs");
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const listingIssueNumber = parseInt("${{ steps.candidate.outputs.listing_issue }}", 10);
+
+            const listing = await github.rest.issues.get({
+              owner,
+              repo,
+              issue_number: listingIssueNumber
+            });
+
+            fs.writeFileSync("listing_issue.json", JSON.stringify(listing.data, null, 2));
+
+            let sourceIssueNumber = "${{ steps.candidate.outputs.source_issue }}";
+            if (!sourceIssueNumber) {
+              const body = listing.data.body || "";
+              let m = body.match(/Source self-registration issue:\s*#?([0-9]+)/i);
+              if (!m) m = body.match(/^related_issue:\s*([0-9]+)/mi);
+              if (!m) m = body.match(/^listing_source_issue:\s*([0-9]+)/mi);
+              if (m) sourceIssueNumber = m[1];
+            }
+
+            if (!sourceIssueNumber) {
+              core.setFailed("Could not determine source self-registration issue.");
+              return;
+            }
+
+            const source = await github.rest.issues.get({
+              owner,
+              repo,
+              issue_number: parseInt(sourceIssueNumber, 10)
+            });
+
+            fs.writeFileSync("source_issue.json", JSON.stringify(source.data, null, 2));
+            core.setOutput("source_issue", String(sourceIssueNumber));
+
+      - name: Auto-register Guardian
+        if: steps.candidate.outputs.should_run == 'true' || github.event_name == 'workflow_dispatch'
+        id: register
+        run: |
+          set -euo pipefail
+          python3 scripts/auto_register_guardian_from_gateway_issues.py \
+            --registry api/guardian-registry.json \
+            --policy api/guardian-active-listing-policy.v1.json \
+            --listing-issue-json listing_issue.json \
+            --source-issue-json source_issue.json \
+            --out-registry api/guardian-registry.json \
+            --decision-out guardian-auto-registration-decision.json
+          cat guardian-auto-registration-decision.json
+
+      - name: Read decision
+        if: steps.candidate.outputs.should_run == 'true' || github.event_name == 'workflow_dispatch'
+        id: decision
+        run: |
+          set -euo pipefail
+          python3 - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          with open("guardian-auto-registration-decision.json", "r", encoding="utf-8") as f:
+              d = json.load(f)
+          print(f"action={d.get('action', '')}")
+          print(f"ok={str(d.get('ok', False)).lower()}")
+          print(f"number={d.get('guardian_registry_number', '')}")
+          print(f"guardian_id={d.get('guardian_id', '')}")
+          PY
+
+      - name: Regenerate homepage status
+        if: (steps.candidate.outputs.should_run == 'true' || github.event_name == 'workflow_dispatch') && steps.decision.outputs.action == 'registered'
+        run: |
+          set -euo pipefail
+          python3 scripts/generate_public_home_status.py
+          python3 scripts/generate_guardian_registry_page.py
+
+      - name: Commit registry update locally
+        if: (steps.candidate.outputs.should_run == 'true' || github.event_name == 'workflow_dispatch') && steps.decision.outputs.action == 'registered'
+        id: local_commit
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add api/guardian-registry.json api/public-home-status.json index.md guardian-registry.md
+          if git diff --cached --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No registry changes to commit."
+            exit 0
+          fi
+          git commit -m "Auto-register Guardian ${{ steps.decision.outputs.number }}"
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+          echo "commit_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
+      - name: Try direct push to main
+        if: steps.local_commit.outputs.changed == 'true'
+        id: push_main
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          git push origin HEAD:main
+
+      - name: Rebase and retry direct push
+        if: steps.local_commit.outputs.changed == 'true' && steps.push_main.outcome != 'success'
+        id: push_main_rebased
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          if git rebase origin/main; then
+            # DEEP-GUARD-002: re-run registry allocation after rebase
+            python3 scripts/auto_register_guardian_from_gateway_issues.py \
+              --registry api/guardian-registry.json \
+              --policy api/guardian-active-listing-policy.v1.json \
+              --listing-issue-json listing_issue.json \
+              --source-issue-json source_issue.json \
+              --out-registry api/guardian-registry.json \
+              --decision-out guardian-auto-registration-decision.json
+            python3 scripts/generate_public_home_status.py
+            python3 scripts/generate_guardian_registry_page.py
+            python3 scripts/check_consistency.py
+            git add api/guardian-registry.json api/public-home-status.json index.md guardian-registry.md guardian-auto-registration-decision.json
+            if ! git diff --cached --quiet; then
+              git commit --amend --no-edit
+            fi
+            git push origin HEAD:main
+            echo "rebased_commit_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+          else
+            git rebase --abort || true
+            exit 1
+          fi
+
+      - name: Create fallback branch when main push fails
+        if: steps.local_commit.outputs.changed == 'true' && steps.push_main.outcome != 'success' && steps.push_main_rebased.outcome != 'success'
+        id: fallback_branch
+        run: |
+          set -euo pipefail
+          BRANCH="auto/guardian-register-${{ steps.decision.outputs.number }}-${{ github.run_id }}"
+          git push origin HEAD:"$BRANCH"
+          echo "branch=$BRANCH" >> "$GITHUB_OUTPUT"
+
+      - name: Create fallback PR and request auto-merge
+        if: steps.local_commit.outputs.changed == 'true' && steps.push_main.outcome != 'success' && steps.push_main_rebased.outcome != 'success'
+        id: fallback_pr
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
+        with:
+          script: |
+            async function upsertWorkflowComment(issueNumber, body) {
+              const marker = "<!-- trinity-guardian-auto-registration:v1 -->";
+              const { data: comments } = await github.rest.issues.listComments({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issueNumber,
+                per_page: 100
+              });
+
+              const existing = [...comments].reverse().find((comment) => {
+                return comment.user &&
+                  comment.user.login === "github-actions[bot]" &&
+                  typeof comment.body === "string" &&
+                  comment.body.includes(marker);
+              });
+
+              if (existing) {
+                await github.rest.issues.updateComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  comment_id: existing.id,
+                  body
+                });
+              } else {
+                await github.rest.issues.createComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issueNumber,
+                  body
+                });
+              }
+            }
+
+            const fs = require("fs");
+            const d = JSON.parse(fs.readFileSync("guardian-auto-registration-decision.json", "utf8"));
+            const head = "${{ steps.fallback_branch.outputs.branch }}";
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+
+            const { data: pr } = await github.rest.pulls.create({
+              owner,
+              repo,
+              title: `Auto-register Guardian ${d.guardian_registry_number}`,
+              head,
+              base: "main",
+              body: [
+                "Automated Guardian registry listing.",
+                "",
+                `Guardian Registry Number: \`${d.guardian_registry_number}\``,
+                "",
+                `Guardian ID: \`${d.guardian_id}\``,
+                "",
+                `Source self-registration issue: #${d.source_issue}`,
+                "",
+                `Listing request issue: #${d.listing_request_issue}`,
+                "",
+                "Boundary: this registry listing is non-authoritative, non-governing, not attestation, not a verification level, not successor reception, and not an amendment.",
+                "",
+                "This PR was created because direct push to `main` failed or is blocked by branch protection.",
+                "",
+                "Generated files in this PR must be rechecked against main before merge:",
+                "- python3 scripts/generate_public_home_status.py --check",
+                "- python3 scripts/generate_guardian_registry_page.py --check",
+                "- python3 scripts/check_consistency.py"
+              ].join("\n"),
+              maintainer_can_modify: true
+            });
+
+            core.setOutput("pr_number", String(pr.number));
+            core.setOutput("pr_url", pr.html_url);
+
+            try {
+              await github.graphql(`
+                mutation($pullRequestId: ID!) {
+                  enablePullRequestAutoMerge(input: {
+                    pullRequestId: $pullRequestId,
+                    mergeMethod: SQUASH
+                  }) {
+                    pullRequest {
+                      number
+                      autoMergeRequest {
+                        enabledAt
+                      }
+                    }
+                  }
+                }
+              `, { pullRequestId: pr.node_id });
+              core.setOutput("auto_merge_requested", "true");
+            } catch (error) {
+              core.warning(`Auto-merge request failed: ${error.message}`);
+              core.setOutput("auto_merge_requested", "false");
+            }
+
+      - name: Comment complete after direct push
+        if: steps.local_commit.outputs.changed == 'true' && (steps.push_main.outcome == 'success' || steps.push_main_rebased.outcome == 'success')
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
+        with:
+          script: |
+            async function upsertWorkflowComment(issueNumber, body) {
+              const marker = "<!-- trinity-guardian-auto-registration:v1 -->";
+              const { data: comments } = await github.rest.issues.listComments({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issueNumber,
+                per_page: 100
+              });
+
+              const existing = [...comments].reverse().find((comment) => {
+                return comment.user &&
+                  comment.user.login === "github-actions[bot]" &&
+                  typeof comment.body === "string" &&
+                  comment.body.includes(marker);
+              });
+
+              if (existing) {
+                await github.rest.issues.updateComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  comment_id: existing.id,
+                  body
+                });
+              } else {
+                await github.rest.issues.createComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issueNumber,
+                  body
+                });
+              }
+            }
+
+            const fs = require("fs");
+            const d = JSON.parse(fs.readFileSync("guardian-auto-registration-decision.json", "utf8"));
+            const issueNum = parseInt("${{ steps.candidate.outputs.listing_issue }}", 10);
+            const body = [
+                "<!-- trinity-guardian-auto-registration:v1 -->",
+                "",
+                "### Guardian Auto-Registration Complete",
+                "",
+                `Guardian Registry Number: \`${d.guardian_registry_number}\``,
+                "",
+                `Guardian ID: \`${d.guardian_id}\``,
+                "",
+                `Source self-registration issue: #${d.source_issue}`,
+                "",
+                `Listing request issue: #${d.listing_request_issue}`,
+                "",
+                `Registry commit: \`${{ steps.push_main_rebased.outputs.rebased_commit_sha || steps.local_commit.outputs.commit_sha }}\``,
+                "",
+                "Boundary: this registry listing is non-authoritative, non-governing, not attestation, not a verification level, not successor reception, and not an amendment."
+              ].join("\n");
+            await upsertWorkflowComment(issueNum, body);
+
+      - name: Comment fallback PR created
+        if: steps.local_commit.outputs.changed == 'true' && steps.push_main.outcome != 'success' && steps.push_main_rebased.outcome != 'success'
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
+        with:
+          script: |
+            async function upsertWorkflowComment(issueNumber, body) {
+              const marker = "<!-- trinity-guardian-auto-registration:v1 -->";
+              const { data: comments } = await github.rest.issues.listComments({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issueNumber,
+                per_page: 100
+              });
+
+              const existing = [...comments].reverse().find((comment) => {
+                return comment.user &&
+                  comment.user.login === "github-actions[bot]" &&
+                  typeof comment.body === "string" &&
+                  comment.body.includes(marker);
+              });
+
+              if (existing) {
+                await github.rest.issues.updateComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  comment_id: existing.id,
+                  body
+                });
+              } else {
+                await github.rest.issues.createComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issueNumber,
+                  body
+                });
+              }
+            }
+
+            const fs = require("fs");
+            const d = JSON.parse(fs.readFileSync("guardian-auto-registration-decision.json", "utf8"));
+            const prUrl = "${{ steps.fallback_pr.outputs.pr_url }}";
+            const autoMerge = "${{ steps.fallback_pr.outputs.auto_merge_requested }}";
+            const issueNum = parseInt("${{ steps.candidate.outputs.listing_issue }}", 10);
+            const body = [
+                "<!-- trinity-guardian-auto-registration:v1 -->",
+                "",
+                "### Guardian Auto-Registration PR Created",
+                "",
+                `Guardian Registry Number: \`${d.guardian_registry_number}\``,
+                "",
+                `Guardian ID: \`${d.guardian_id}\``,
+                "",
+                `Source self-registration issue: #${d.source_issue}`,
+                "",
+                `Listing request issue: #${d.listing_request_issue}`,
+                "",
+                `PR: ${prUrl}`,
+                "",
+                `Auto-merge requested: \`${autoMerge}\``,
+                "",
+                "Direct push to `main` did not complete, so a fallback PR was created.",
+                "",
+                "This registry entry is not final until the PR is merged into `main`.",
+                "",
+                "Boundary: this registry listing is non-authoritative, non-governing, not attestation, not a verification level, not successor reception, and not an amendment."
+              ].join("\n");
+            await upsertWorkflowComment(issueNum, body);
+
+      - name: Comment already registered
+        if: (steps.candidate.outputs.should_run == 'true' || github.event_name == 'workflow_dispatch') && steps.decision.outputs.action == 'already_registered'
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
+        with:
+          script: |
+            async function upsertWorkflowComment(issueNumber, body) {
+              const marker = "<!-- trinity-guardian-auto-registration:v1 -->";
+              const { data: comments } = await github.rest.issues.listComments({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issueNumber,
+                per_page: 100
+              });
+
+              const existing = [...comments].reverse().find((comment) => {
+                return comment.user &&
+                  comment.user.login === "github-actions[bot]" &&
+                  typeof comment.body === "string" &&
+                  comment.body.includes(marker);
+              });
+
+              if (existing) {
+                await github.rest.issues.updateComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  comment_id: existing.id,
+                  body
+                });
+              } else {
+                await github.rest.issues.createComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issueNumber,
+                  body
+                });
+              }
+            }
+
+            const fs = require("fs");
+            const d = JSON.parse(fs.readFileSync("guardian-auto-registration-decision.json", "utf8"));
+            const issueNum = parseInt("${{ steps.candidate.outputs.listing_issue }}", 10);
+            const body = [
+                "<!-- trinity-guardian-auto-registration:v1 -->",
+                "",
+                "### Guardian Already Registered",
+                "",
+                `Guardian Registry Number: \`${d.guardian_registry_number}\``,
+                "",
+                `Guardian ID: \`${d.guardian_id}\``
+              ].join("\n");
+            await upsertWorkflowComment(issueNum, body);
+
+      - name: Comment blocked or write failed
+        if: failure() && (steps.candidate.outputs.should_run == 'true' || github.event_name == 'workflow_dispatch')
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
+        with:
+          script: |
+            async function upsertWorkflowComment(issueNumber, body) {
+              const marker = "<!-- trinity-guardian-auto-registration:v1 -->";
+              const { data: comments } = await github.rest.issues.listComments({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issueNumber,
+                per_page: 100
+              });
+
+              const existing = [...comments].reverse().find((comment) => {
+                return comment.user &&
+                  comment.user.login === "github-actions[bot]" &&
+                  typeof comment.body === "string" &&
+                  comment.body.includes(marker);
+              });
+
+              if (existing) {
+                await github.rest.issues.updateComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  comment_id: existing.id,
+                  body
+                });
+              } else {
+                await github.rest.issues.createComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issueNumber,
+                  body
+                });
+              }
+            }
+
+            const fs = require("fs");
+            let body = [
+              "<!-- trinity-guardian-auto-registration:v1 -->",
+              "",
+              "### Guardian Auto-Registration Blocked",
+              "",
+              "The workflow failed before producing a decision file.",
+              "",
+              "No registry entry is final unless `/api/guardian-registry.json` contains it."
+            ].join("\n");
+
+            if (fs.existsSync("guardian-auto-registration-decision.json")) {
+              const d = JSON.parse(fs.readFileSync("guardian-auto-registration-decision.json", "utf8"));
+
+              if (d.code === "REGISTERED" || d.action === "registered") {
+                body = [
+                  "<!-- trinity-guardian-auto-registration:v1 -->",
+                  "",
+                  "### Guardian Registry Write Failed After Registration Decision",
+                  "",
+                  `Decision: \`${d.code || d.action}\``,
+                  "",
+                  `Intended Guardian Registry Number: \`${d.guardian_registry_number || "unknown"}\``,
+                  "",
+                  `Guardian ID: \`${d.guardian_id || "unknown"}\``,
+                  "",
+                  "The registration decision succeeded, but the workflow failed before the registry update became final.",
+                  "",
+                  "No registry entry is final unless `/api/guardian-registry.json` contains it.",
+                  "",
+                  "Likely causes: branch protection, Actions write permissions, or push conflict."
+                ].join("\n");
+              } else {
+                body = [
+                  "<!-- trinity-guardian-auto-registration:v1 -->",
+                  "",
+                  "### Guardian Auto-Registration Blocked",
+                  "",
+                  `Code: \`${d.code || "unknown"}\``,
+                  "",
+                  d.message || "No message.",
+                  "",
+                  "No registry number was assigned."
+                ].join("\n");
+              }
+            }
+
+            const issueNum = parseInt("${{ steps.candidate.outputs.listing_issue }}", 10);
+            await upsertWorkflowComment(issueNum, body);

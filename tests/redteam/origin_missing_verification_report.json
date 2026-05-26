@@ -1,0 +1,88 @@
+{
+  "schema_version": "trinityaccord.verification-report.v2",
+  "report_id": "vr-test-002",
+  "record_kind": "verification_report_v2",
+  "verification_scope_label": "single_reference_check",
+  "reporter": {
+    "name": "TestAgent",
+    "type": "ai_agent",
+    "version": "test",
+    "tooling": ["test"]
+  },
+  "discovery_provenance": {
+    "schema": "trinityaccord.discovery-provenance.v1",
+    "source": "human_directed",
+    "agency_level": "A1_human_gave_exact_url"
+  },
+  "protocol_level_claimed": "V2",
+  "component_findings": [
+    {
+      "component": "bitcoin_originals",
+      "level_claimed": "B1",
+      "target_id": "bitcoin_originals",
+      "data_sources": [],
+      "access_paths": [],
+      "method": "evidence_review",
+      "evidence": [],
+      "limitations": [],
+      "claims_not_made": []
+    }
+  ],
+  "protocol_profile_check": {
+    "profile_source": "/api/protocol-verification-profiles.json",
+    "hard_gates_satisfied": true,
+    "minimum_components_satisfied": true,
+    "recommended_components_satisfied": "partial",
+    "underreported_items": [],
+    "incompatible_claims": []
+  },
+  "data_sources_used": [],
+  "access_paths_used": [],
+  "fallbacks_used": [],
+  "external_sources_queried": [],
+  "hashes_computed": [],
+  "samples_checked": 0,
+  "physical_evidence_reviewed": {
+    "images_reviewed": [],
+    "videos_reviewed": [],
+    "live_witness": false,
+    "onsite_witness": false,
+    "custody_log": false,
+    "flaw_analysis_method": "not_performed",
+    "nonce_challenge": false,
+    "requested_action_angle_lighting": false,
+    "witness_identity_or_role": "",
+    "fresh_capture": false,
+    "touch_or_handling": false
+  },
+  "confidential_challenge": {"performed": false},
+  "celestial_witness": {},
+  "limitations": ["Test"],
+  "claims_not_made": [],
+  "authority_boundary_preserved": true,
+  "integrity_boundary": {
+    "agent_integrity_declaration_present": true,
+    "performed_actions_myself": true,
+    "did_not_copy_prior_report_as_own_work": true,
+    "did_not_copy_example_values_as_real_evidence": true,
+    "fresh_actions_claimed": ["hash_check"],
+    "prior_reports_consulted": [],
+    "examples_or_templates_used": [],
+    "copied_values_from_examples": false,
+    "copied_values_from_prior_reports": false,
+    "fresh_outputs_attached": true,
+    "copying_warning": "This report is invalid if example values or prior agent outputs were copied as fresh evidence."
+  },
+  "generated_by": {
+    "tool": "scripts/build_verification_report_from_evidence.py",
+    "builder_version": "trinityaccord.report-builder.v1",
+    "claim_gate_output": "embedded",
+    "evidence_input": "test-evidence.json",
+    "generated_at_utc": "2026-01-01T00:00:00Z",
+    "validation_command": "python3 scripts/validate_agent_submission.py <output>",
+    "validation_result": "PASS"
+  },
+  "timestamp": "2026-01-01T00:00:00Z",
+  "synthetic_fixture": true,
+  "not_real_world_submission": true
+}

@@ -1,0 +1,213 @@
+name: Mirror OTS Proof Bundle to Release
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  mirror-ots-proof-bundle:
+    runs-on: ubuntu-24.04
+
+    env:
+      RELEASE_TAG: ots-proof-bundle-mirror-v1
+      RELEASE_TITLE: Trinity Accord OTS Proof Bundle Mirror v1
+      BUNDLE_HASH: f23e76de12ae0506a5086dc61ad51df33f381809f6d1127c6afe7bb939d9821a
+      BUNDLE_SIZE: 317440
+      BUNDLE_FILE: trinity-accord-ots-proof-bundle-v1.tar
+      ARWEAVE_TXID: gYI39vlK3weHsD8Tkn7GAcvxEsj7hoDY8OeYlYFuQ_c
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+
+      - name: Record toolchain provenance
+        run: |
+          python3 scripts/toolchain_provenance.py > toolchain-provenance.json
+          cat toolchain-provenance.json
+
+      - name: Authorize write workflow actor
+        env:
+          ACTOR: ${{ github.actor }}
+          EVENT_NAME: ${{ github.event_name }}
+          SENDER: ${{ github.event.sender.login }}
+        run: |
+          set -euo pipefail
+          case "$ACTOR" in
+            thechurchofagi|github-actions[bot])
+              echo "Authorized actor: $ACTOR"
+              ;;
+            *)
+              echo "Unauthorized actor for write workflow: $ACTOR"
+              exit 1
+              ;;
+          esac
+          if [ "$EVENT_NAME" = "repository_dispatch" ]; then
+            case "$SENDER" in
+              thechurchofagi|github-actions[bot])
+                echo "Authorized repository_dispatch sender: $SENDER"
+                ;;
+              *)
+                echo "Unauthorized repository_dispatch sender: $SENDER"
+                exit 1
+                ;;
+            esac
+          fi
+
+      - name: Download bundle from Arweave
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          mkdir -p release-mirror
+
+          echo "Trying arweave.net gateway..."
+          if ! curl -L --fail --retry 3 --retry-delay 5 \
+            "https://arweave.net/${ARWEAVE_TXID}" \
+            -o release-mirror/${BUNDLE_FILE}; then
+
+            echo "arweave.net returned error, falling back to permagate.io..."
+            curl -L --fail --retry 5 --retry-delay 5 \
+              "https://permagate.io/${ARWEAVE_TXID}" \
+              -o release-mirror/${BUNDLE_FILE}
+          fi
+
+      - name: Verify downloaded Arweave payload
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          cd release-mirror
+
+          test "$(wc -c < ${BUNDLE_FILE})" = "${BUNDLE_SIZE}"
+
+          echo "${BUNDLE_HASH}  ${BUNDLE_FILE}" > expected.sha256
+          sha256sum -c expected.sha256
+
+          sha256sum ${BUNDLE_FILE} \
+            > OTS-PROOF-BUNDLE-RELEASE-CHECKSUMS.sha256
+
+      - name: Create release manifest and audit
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          cat > release-mirror/OTS-PROOF-BUNDLE-RELEASE-MANIFEST.json <<'EOF'
+          {
+            "release_tag": "ots-proof-bundle-mirror-v1",
+            "release_title": "Trinity Accord OTS Proof Bundle Mirror v1",
+            "purpose": "GitHub Release mirror for Arweave-published OTS proof bundle.",
+            "evidence_boundary": "This release adds a GitHub Release availability mirror for the Arweave-published OTS proof bundle. It does not amend, reinterpret, regenerate, or replace the original evidence chain.",
+            "source": "Arweave",
+            "files": [
+              {
+                "file": "trinity-accord-ots-proof-bundle-v1.tar",
+                "arweave_txid": "gYI39vlK3weHsD8Tkn7GAcvxEsj7hoDY8OeYlYFuQ_c",
+                "arweave_url": "https://arweave.net/gYI39vlK3weHsD8Tkn7GAcvxEsj7hoDY8OeYlYFuQ_c",
+                "verified_retrieval_url": "https://permagate.io/gYI39vlK3weHsD8Tkn7GAcvxEsj7hoDY8OeYlYFuQ_c",
+                "size_bytes": 317440,
+                "sha256": "f23e76de12ae0506a5086dc61ad51df33f381809f6d1127c6afe7bb939d9821a",
+                "content_type": "application/x-tar",
+                "evidence_type": "OTS-Proof-Bundle",
+                "upload_cost": "0.002684969561 AR",
+                "wallet": "r1EdzCQ9E7CaAOEywI5netR6EcSopNOa08oi2Coz68s",
+                "internal_verification": {
+                  "verify-report.json": "OK",
+                  "digest-manifest.json.ots": "OK",
+                  "digest-manifest.csv.ots.bak": "OK",
+                  "digest-manifest.csv.ots": "OK",
+                  "verify-report.json.ots.bak": "OK",
+                  "ots-run.py": "OK",
+                  "digest-manifest.json.ots.bak": "OK",
+                  "ots-run.py.digests.json": "OK",
+                  "ots-summary.json": "OK",
+                  "verify-report.json.ots": "OK"
+                },
+                "release_verification": "SHA-256 and size verified before upload."
+              }
+            ],
+            "expected_asset_count": 4,
+            "total_size_bytes": 317440
+          }
+          EOF
+
+          cat > release-mirror/OTS-PROOF-BUNDLE-RELEASE-AUDIT.json <<'EOF'
+          {
+            "release_tag": "ots-proof-bundle-mirror-v1",
+            "arweave_download_verified": true,
+            "arweave_gateway_fallback": "permagate.io",
+            "sha256_verified_before_release_upload": true,
+            "size_verified_before_release_upload": true,
+            "release_asset_download_verified": null,
+            "hard_failures": 0,
+            "boundary": "GitHub Release mirror only; not an evidence amendment."
+          }
+          EOF
+
+      - name: Create or update GitHub Release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+
+          cat > release-notes.md <<'EOF'
+          # Trinity Accord OTS Proof Bundle Mirror v1
+
+          This release mirrors the Trinity Accord OTS proof bundle from Arweave into GitHub Release assets.
+
+          The bundle contains OpenTimestamps proof files, OTS backup files, verification reports, digest summaries, and process-context artifacts.
+
+          This release does not create a new evidentiary claim and does not amend the original evidence chain.
+
+          ## File
+
+          - trinity-accord-ots-proof-bundle-v1.tar
+            - Arweave TXID: gYI39vlK3weHsD8Tkn7GAcvxEsj7hoDY8OeYlYFuQ_c
+            - SHA-256: f23e76de12ae0506a5086dc61ad51df33f381809f6d1127c6afe7bb939d9821a
+            - Size: 317440 bytes
+
+          ## Boundary
+
+          GitHub Release is an availability mirror for the Arweave-published OTS proof bundle. It is not canonical authority and does not replace Bitcoin / OTS / digest-manifest evidence.
+          EOF
+
+          if gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
+            echo "Release exists: $RELEASE_TAG"
+          else
+            gh release create "$RELEASE_TAG" \
+              --title "$RELEASE_TITLE" \
+              --notes-file release-notes.md
+          fi
+
+          gh release upload "$RELEASE_TAG" \
+            release-mirror/${BUNDLE_FILE} \
+            release-mirror/OTS-PROOF-BUNDLE-RELEASE-MANIFEST.json \
+            release-mirror/OTS-PROOF-BUNDLE-RELEASE-CHECKSUMS.sha256 \
+            release-mirror/OTS-PROOF-BUNDLE-RELEASE-AUDIT.json \
+            --clobber
+
+      - name: Verify Release assets by downloading them back
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+
+          mkdir -p release-verify
+          gh release download "$RELEASE_TAG" \
+            --dir release-verify \
+            --pattern "${BUNDLE_FILE}" \
+            --pattern "OTS-PROOF-BUNDLE-RELEASE-CHECKSUMS.sha256" \
+            --pattern "OTS-PROOF-BUNDLE-RELEASE-MANIFEST.json" \
+            --pattern "OTS-PROOF-BUNDLE-RELEASE-AUDIT.json"
+
+          cd release-verify
+
+          test "$(wc -c < ${BUNDLE_FILE})" = "${BUNDLE_SIZE}"
+
+          echo "${BUNDLE_HASH}  ${BUNDLE_FILE}" > expected.sha256
+          sha256sum -c expected.sha256
+
+          echo "Release asset verification PASS."

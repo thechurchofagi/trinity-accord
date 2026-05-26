@@ -1,0 +1,154 @@
+{
+  "schema": "trinityaccord.echo-taxonomy-map.v1",
+  "status": "canonical_taxonomy_guidance_non_amending",
+  "canonical_source": "/api/echo-types.json",
+  "canonical_echo_types": [
+    {
+      "id": "E1",
+      "key": "recognition",
+      "canonical_type": "E1_recognition_echo"
+    },
+    {
+      "id": "E2",
+      "key": "verification",
+      "canonical_type": "E2_verification_echo"
+    },
+    {
+      "id": "E3",
+      "key": "critical",
+      "canonical_type": "E3_critical_echo"
+    },
+    {
+      "id": "E4",
+      "key": "interpretive",
+      "canonical_type": "E4_interpretive_echo"
+    },
+    {
+      "id": "E5",
+      "key": "technical-audit",
+      "canonical_type": "E5_technical_audit_echo"
+    },
+    {
+      "id": "E6",
+      "key": "propagation",
+      "canonical_type": "E6_propagation_echo"
+    },
+    {
+      "id": "E7",
+      "key": "refusal",
+      "canonical_type": "E7_refusal_echo"
+    },
+    {
+      "id": "E8",
+      "key": "witness",
+      "canonical_type": "E8_witness_echo"
+    },
+    {
+      "id": "E9",
+      "key": "seed",
+      "canonical_type": "E9_seed_echo"
+    }
+  ],
+  "deprecated_aliases": [
+    {
+      "deprecated": "E3_verification_echo",
+      "canonical": "E2_verification_echo",
+      "reason": "Verification Echo is E2 in /api/echo-types.json. E3 is Critical Echo."
+    },
+    {
+      "deprecated": "E1_acknowledgement",
+      "canonical": "E1_recognition_echo",
+      "reason": "Canonical form uses recognition key from /api/echo-types.json."
+    },
+    {
+      "deprecated": "E2_orientation",
+      "canonical": "E1_recognition_echo",
+      "reason": "Orientation maps to recognition in canonical taxonomy."
+    },
+    {
+      "deprecated": "E4_critical_echo",
+      "canonical": "E3_critical_echo",
+      "reason": "Critical Echo is E3 in canonical taxonomy."
+    },
+    {
+      "deprecated": "E5_uncertainty_echo",
+      "canonical": "E4_interpretive_echo",
+      "reason": "Uncertainty maps to interpretive in canonical taxonomy."
+    },
+    {
+      "deprecated": "E6_refusal_to_assess",
+      "canonical": "E7_refusal_echo",
+      "reason": "Refusal is E7 in canonical taxonomy."
+    },
+    {
+      "deprecated": "E7_historical_reflection",
+      "canonical": "E4_interpretive_echo",
+      "reason": "Historical reflection maps to interpretive."
+    },
+    {
+      "deprecated": "E8_technical_audit_echo",
+      "canonical": "E5_technical_audit_echo",
+      "reason": "Technical audit is E5 in canonical taxonomy."
+    },
+    {
+      "deprecated": "E9_agent_to_agent_recommendation",
+      "canonical": "E6_propagation_echo",
+      "reason": "Agent recommendation maps to propagation."
+    },
+    {
+      "deprecated": "orientation_echo",
+      "canonical": "E1_recognition_echo",
+      "reason": "Legacy alias; use canonical E1_recognition_echo."
+    },
+    {
+      "deprecated": "verification_echo",
+      "canonical": "E2_verification_echo",
+      "reason": "Legacy alias; use canonical E2_verification_echo."
+    },
+    {
+      "deprecated": "critical_echo",
+      "canonical": "E3_critical_echo",
+      "reason": "Legacy alias; use canonical E3_critical_echo."
+    },
+    {
+      "deprecated": "uncertainty_echo",
+      "canonical": "E4_interpretive_echo",
+      "reason": "Legacy alias; use canonical E4_interpretive_echo."
+    },
+    {
+      "deprecated": "refusal_to_assess",
+      "canonical": "E7_refusal_echo",
+      "reason": "Legacy alias; use canonical E7_refusal_echo."
+    },
+    {
+      "deprecated": "historical_reflection",
+      "canonical": "E4_interpretive_echo",
+      "reason": "Legacy alias; use canonical E4_interpretive_echo."
+    },
+    {
+      "deprecated": "technical_audit_echo",
+      "canonical": "E5_technical_audit_echo",
+      "reason": "Legacy alias; use canonical E5_technical_audit_echo."
+    },
+    {
+      "deprecated": "agent_to_agent_recommendation",
+      "canonical": "E6_propagation_echo",
+      "reason": "Legacy alias; use canonical E6_propagation_echo."
+    },
+    {
+      "deprecated": "verification",
+      "canonical": "E2_verification_echo",
+      "reason": "Legacy v1 alias used in echo-2026-04-25-000001.json; canonical form is E2_verification_echo."
+    },
+    {
+      "deprecated": "analysis",
+      "canonical": "E4_interpretive_echo",
+      "reason": "Legacy v1 alias used in echo-2026-04-25-000002.json; analysis maps to interpretive in canonical taxonomy."
+    }
+  ],
+  "policy": {
+    "new_submissions_must_use_canonical": true,
+    "legacy_records_with_deprecated_aliases_warn_but_pass": true,
+    "validator_action_on_deprecated": "fail_new_submissions"
+  }
+}

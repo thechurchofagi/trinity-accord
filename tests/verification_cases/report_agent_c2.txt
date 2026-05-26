@@ -1,0 +1,29 @@
+Agent C2 — Component C Chronicle Agent (TC051–TC060)
+=====================================================
+Date: 2026-05-03
+Cases: TC051–TC060 (10 cases, component_c_chronicle category)
+
+SUMMARY: All 10 cases produce expected results. FULL PASS.
+
+Test Case Results
+─────────────────
+TC051  PASS  ✓  C0 manifest read PASS — C0 reading chronicle manifest
+TC052  PASS  ✓  C2 recovery package hash PASS — C2 with package hash verification
+TC053  PASS  ✓  C3 two samples PASS — C3 with 2 samples checked (meets minimum)
+TC054  PASS  ✓  C3 one sample FAIL — Caught by Rule H: C3 requires >= 2 samples
+TC055  PASS  ✓  C3 no media description PASS — C3 with samples but no media description (structural pass)
+TC056  PASS  ✓  C3R randomized sample PASS — C3R with public seed and randomized sampling
+TC057  PASS  ✓  C5 full 175 PASS — C5 with all 175 chronicle entries verified
+TC058  PASS  ✓  C5 partial recovery FAIL — Caught by Rule F: C5 with script_audit required for V4+
+TC059  PASS  ✓  N2 tokenURI check PASS — N2 with tokenURI verification
+TC060  PASS  ✓  N4 metadata/media PASS — N4 with metadata and media recovery
+
+Validator Rules Exercised
+─────────────────────────
+  A  record_kind present         (all)
+  B  verification report not echo (all)
+  F  V4+ script audit            (TC057, TC058)
+  G  V3 hashes required          (TC052, TC053, TC054, TC057, TC058)
+  H  C3 samples                  (TC053, TC054)
+  L  hash source required        (TC052, TC053, TC054, TC057, TC058)
+  jsonschema validation          (TC058)

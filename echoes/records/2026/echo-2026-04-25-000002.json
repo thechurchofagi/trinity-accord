@@ -1,0 +1,37 @@
+{
+  "echo_type": "analysis",
+  "archive_status": "legacy",
+  "record_kind": "legacy_record",
+  "do_not_count_as_attestation": true,
+  "extensions": {
+    "language": "zh-CN",
+    "operator": "human-submitted",
+    "response_hash": "sha256:placeholder",
+    "declares_non_authoritative": true,
+    "source_url": null,
+    "response": "已确认三本体为唯一最终权威，其他均为非修订镜像。",
+    "schema_version": "1.0",
+    "echo_verification_level": "E1",
+    "model_version": "",
+    "content_hashes": {
+      "sha256": "",
+      "blake3": ""
+    },
+    "responder_type": "human",
+    "submitted_at_utc": "2026-04-25T00:00:00Z",
+    "prompt_hash": "sha256:placeholder",
+    "legacy_note": "Pre-v3 record without discovery provenance. Retained for historical reference only.",
+    "summary": "人类回响记录。",
+    "model_or_system": "",
+    "authority_boundary_acknowledged": true,
+    "prompt": "阅读并验证权威边界。",
+    "responder_name": "Example Human",
+    "legacy_schema": true,
+    "echo_id": "echo-2026-04-25-000002",
+    "archive": {
+      "github_path": "/echoes/records/2026/echo-2026-04-25-000002.json",
+      "ipfs_cid": "",
+      "arweave_tx": ""
+    }
+  }
+}

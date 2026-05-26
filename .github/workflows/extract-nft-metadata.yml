@@ -1,0 +1,191 @@
+name: Extract NFT Text Descriptions
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  extract:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+
+      - name: Record toolchain provenance
+        run: |
+          python3 scripts/toolchain_provenance.py > toolchain-provenance.json
+          cat toolchain-provenance.json
+
+      - name: Authorize write workflow actor
+        env:
+          ACTOR: ${{ github.actor }}
+          EVENT_NAME: ${{ github.event_name }}
+          SENDER: ${{ github.event.sender.login }}
+        run: |
+          set -euo pipefail
+          case "$ACTOR" in
+            thechurchofagi|github-actions[bot])
+              echo "Authorized actor: $ACTOR"
+              ;;
+            *)
+              echo "Unauthorized actor for write workflow: $ACTOR"
+              exit 1
+              ;;
+          esac
+
+      - name: Extract NFT metadata
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python3 << 'PYEOF'
+          import json, os, re, time, tarfile, io
+          from pathlib import Path
+          from concurrent.futures import ThreadPoolExecutor, as_completed
+          import urllib.request, urllib.error
+
+          REPO = os.environ.get("GITHUB_REPOSITORY", "thechurchofagi/trinity-accord")
+          TOKEN = os.environ.get("GH_TOKEN", "")
+          RELEASE_TAG = "nft-arweave-mirror-175-v1"
+          OUT_DIR = Path("nft-text-descriptions")
+          INDEX_PATH = OUT_DIR / "index.json"
+          TI_PATH = Path("token_index.json")
+
+          def api_get(url, accept="application/json"):
+              req = urllib.request.Request(url)
+              req.add_header("Authorization", f"Bearer {TOKEN}")
+              req.add_header("Accept", accept)
+              req.add_header("User-Agent", "extractor")
+              return urllib.request.urlopen(req, timeout=120)
+
+          with open(TI_PATH) as f:
+              token_index = json.load(f)
+
+          if INDEX_PATH.exists():
+              with open(INDEX_PATH) as f:
+                  index = json.load(f)
+              done = {(e["contract"], e["token_id"]) for e in index}
+          else:
+              index = []
+              done = set()
+
+          print(f"Fetching release assets...")
+          resp = api_get(f"https://api.github.com/repos/{REPO}/releases/tags/{RELEASE_TAG}")
+          asset_map = {a["name"]: a["id"] for a in json.loads(resp.read()).get("assets", [])}
+          print(f"Found {len(asset_map)} assets")
+
+          todo = []
+          for contract, tokens in token_index.items():
+              for token_id in tokens:
+                  if (contract, token_id) not in done:
+                      name = f"nft-{contract.lower()}-{token_id}.tar"
+                      if name in asset_map:
+                          todo.append((contract, token_id, asset_map[name]))
+                          continue
+                      # Try without 0x prefix case variations
+                      for a_name, a_id in asset_map.items():
+                          if token_id in a_name and contract.lower() in a_name:
+                              todo.append((contract, token_id, a_id))
+                              break
+
+          print(f"Done: {len(done)}, Todo: {len(todo)}")
+
+          def extract_one(contract, token_id, asset_id):
+              url = f"https://api.github.com/repos/{REPO}/releases/assets/{asset_id}"
+              try:
+                  resp = api_get(url, accept="application/octet-stream")
+                  data = resp.read()
+              except Exception as e:
+                  return (contract, token_id, f"download error: {e}")
+
+              # Parse tar using tarfile module (more robust than manual parsing)
+              try:
+                  with tarfile.open(fileobj=io.BytesIO(data)) as tf:
+                      for member in tf.getmembers():
+                          if not member.name.endswith('metadata.car'):
+                              continue
+                          f = tf.extractfile(member)
+                          if not f:
+                              continue
+                          car = f.read()
+                          # Try to find JSON in CAR data using multiple strategies
+                          # Strategy 1: scan for JSON start markers
+                          text = car.decode('utf-8', errors='replace')
+                          best_obj = None
+                          for needle in ['{"name":', '{"Name":', '{"NAME":', '{"description":', '{"Description":', '{"']:
+                              idx = text.find(needle)
+                              if idx < 0:
+                                  continue
+                              # Try progressively larger substrings
+                              for end_offset in range(idx + 50, min(idx + 50000, len(text)), 100):
+                                  snippet = text[idx:end_offset]
+                                  brace_count = 0
+                                  last_close = -1
+                                  for ci, ch in enumerate(snippet):
+                                      if ch == '{':
+                                          brace_count += 1
+                                      elif ch == '}':
+                                          brace_count -= 1
+                                          if brace_count == 0:
+                                              last_close = ci
+                                              break
+                                  if last_close >= 0:
+                                      try:
+                                          obj = json.loads(snippet[:last_close+1])
+                                          if "name" in obj or "Name" in obj or "NAME" in obj:
+                                              best_obj = obj
+                                              break
+                                          elif best_obj is None:
+                                              best_obj = obj
+                                      except json.JSONDecodeError:
+                                          continue
+                              if best_obj and ("name" in best_obj or "Name" in best_obj or "NAME" in best_obj):
+                                  break
+
+                          if best_obj:
+                              name = best_obj.get("name") or best_obj.get("Name") or best_obj.get("NAME") or "Unknown"
+                              desc = best_obj.get("description") or best_obj.get("Description") or "No description."
+                              fname_md = f"{contract}_{token_id}.md"
+                              md = f"# {name}\n\n**Contract**: `{contract}`\n\n**Token ID**: `{token_id}`\n\n## Description\n\n{desc}\n"
+                              (OUT_DIR / fname_md).write_text(md, encoding="utf-8")
+                              return (contract, token_id, name)
+                          return (contract, token_id, "JSON parse failed")
+                  return (contract, token_id, "no metadata.car in tar")
+              except tarfile.TarError as e:
+                  return (contract, token_id, f"tar error: {e}")
+
+          success = fail = 0
+          for bs in range(0, len(todo), 5):
+              batch = todo[bs:bs+5]
+              print(f"Batch {bs//5+1}/{(len(todo)+4)//5} ({bs+1}-{bs+len(batch)}/{len(todo)})...")
+              with ThreadPoolExecutor(max_workers=5) as ex:
+                  for contract, token_id, result in [f.result() for f in [ex.submit(extract_one, c, t, a) for c, t, a in batch]]:
+                      if result.startswith(("download", "JSON", "no ")):
+                          fail += 1
+                          print(f"  FAIL {token_id[-8:]}: {result}")
+                      else:
+                          success += 1
+                          index.append({"contract":contract,"token_id":token_id,"name":result.strip(),"file":f"{contract}_{token_id}.md"})
+                          print(f"  OK {token_id[-8:]}: {result[:50]}")
+              with open(INDEX_PATH, "w") as f:
+                  json.dump(index, f, indent=2, ensure_ascii=False)
+
+          readme = (OUT_DIR / "README.md").read_text()
+          remaining = 175 - len(index)
+          readme = re.sub(r'- \*\*已完成\*\*: \d+ / \d+', f'- **已完成**: {len(index)} / 175', readme)
+          readme = re.sub(r'- \*\*剩余\*\*: \d+', f'- **剩余**: {remaining}', readme)
+          readme = re.sub(r'- \*\*最后更新\*\*: [\d-]+', f'- **最后更新**: {time.strftime("%Y-%m-%d")}', readme)
+          (OUT_DIR / "README.md").write_text(readme, encoding="utf-8")
+
+          print(f"\n=== DONE === Success: {success}, Failed: {fail}, Total: {len(index)}/175")
+          PYEOF
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add nft-text-descriptions/
+          git diff --cached --quiet && echo "No changes" && exit 0
+          COUNT=$(python3 -c "import json; print(len(json.load(open('nft-text-descriptions/index.json'))))")
+          git commit -m "feat: extract NFT text descriptions ($COUNT/175)"
+          git push

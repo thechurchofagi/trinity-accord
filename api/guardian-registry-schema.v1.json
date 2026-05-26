@@ -1,0 +1,214 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.trinityaccord.org/api/guardian-registry-schema.v1.json",
+  "title": "Trinity Accord Guardian Registry Schema v1",
+  "description": "Schema for the Guardian Alliance registry. Non-authoritative key index.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "version",
+    "registry_status",
+    "authority_boundary",
+    "guardians"
+  ],
+  "properties": {
+    "schema": {
+      "type": "string",
+      "const": "trinityaccord.guardian-registry.v1"
+    },
+    "version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "registry_status": {
+      "type": "string",
+      "const": "non_authoritative_guardian_key_index"
+    },
+    "authority_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "not_authority",
+        "not_governance",
+        "not_attestation",
+        "not_verification_level",
+        "not_successor_reception",
+        "not_amendment",
+        "bitcoin_originals_prevail"
+      ],
+      "properties": {
+        "not_authority": { "type": "boolean", "const": true },
+        "not_governance": { "type": "boolean", "const": true },
+        "not_attestation": { "type": "boolean", "const": true },
+        "not_verification_level": { "type": "boolean", "const": true },
+        "not_successor_reception": { "type": "boolean", "const": true },
+        "not_amendment": { "type": "boolean", "const": true },
+        "bitcoin_originals_prevail": { "type": "boolean", "const": true }
+      }
+    },
+    "guardians": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "guardian_registry_number",
+          "guardian_id",
+          "public_key_sha256",
+          "algorithm",
+          "status",
+          "guardian_type",
+          "application_mode",
+          "source_issue",
+          "listing_request_issue",
+          "listed_at",
+          "label",
+          "boundary"
+        ],
+        "properties": {
+          "guardian_registry_number": {
+            "type": "string",
+            "pattern": "^[0-9]{5}$"
+          },
+          "guardian_id": {
+            "type": "string",
+            "pattern": "^guardian_ed25519_[a-f0-9]{16}$"
+          },
+          "public_key_sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "algorithm": {
+            "type": "string",
+            "const": "ed25519"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "active",
+              "pending_review",
+              "retired",
+              "rotated",
+              "possibly_compromised",
+              "compromised",
+              "superseded",
+              "unknown"
+            ]
+          },
+          "guardian_type": {
+            "type": "string",
+            "enum": [
+              "ai_agent",
+              "human",
+              "human_with_ai_agent",
+              "automated_script",
+              "unknown"
+            ]
+          },
+          "application_mode": {
+            "type": "string",
+            "maxLength": 80
+          },
+          "source_issue": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "listing_request_issue": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "listed_at": {
+            "type": "string",
+            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+          },
+          "label": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 160
+          },
+          "identity_claims": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "schema": { "type": "string" },
+              "claim_status": { "type": "string" },
+              "claim_basis": { "type": "string" },
+              "display_label": { "type": "string" },
+              "human": {
+                "type": ["object", "null"],
+                "additionalProperties": false,
+                "properties": {
+                  "claimed_name": { "type": ["string", "null"] },
+                  "claimed_name_sha256": { "type": ["string", "null"] },
+                  "claim_type": { "type": "string" },
+                  "verification_status": { "type": "string" },
+                  "legal_identity_verified": { "type": "boolean" },
+                  "public_disclosure_allowed": { "type": "boolean" }
+                }
+              },
+              "ai_agent": {
+                "type": ["object", "null"],
+                "additionalProperties": false,
+                "properties": {
+                  "claimed_agent_id": { "type": ["string", "null"] },
+                  "claimed_agent_id_sha256": { "type": ["string", "null"] },
+                  "system_or_provider": { "type": ["string", "null"] },
+                  "agent_instance_id": { "type": ["string", "null"] },
+                  "agent_public_profile": { "type": ["string", "null"] },
+                  "claim_type": { "type": "string" },
+                  "verification_status": { "type": "string" }
+                }
+              },
+              "binding": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "guardian_id": { "type": "string" },
+                  "public_key_sha256": { "type": "string" },
+                  "algorithm": { "type": "string" },
+                  "binds_claim_to_guardian_key": { "type": "boolean" }
+                }
+              },
+              "anti_impersonation_boundary": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "not_legal_identity_proof": { "type": "boolean" },
+                  "not_real_person_verification": { "type": "boolean" },
+                  "not_ai_identity_verification": { "type": "boolean" },
+                  "not_authority": { "type": "boolean" },
+                  "not_attestation": { "type": "boolean" },
+                  "not_verification_level": { "type": "boolean" },
+                  "key_continuity_only": { "type": "boolean" }
+                }
+              }
+            }
+          },
+          "boundary": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "not_authority",
+              "not_governance",
+              "not_attestation",
+              "not_verification_level",
+              "not_successor_reception",
+              "not_amendment",
+              "bitcoin_originals_prevail"
+            ],
+            "properties": {
+              "not_authority": { "type": "boolean", "const": true },
+              "not_governance": { "type": "boolean", "const": true },
+              "not_attestation": { "type": "boolean", "const": true },
+              "not_verification_level": { "type": "boolean", "const": true },
+              "not_successor_reception": { "type": "boolean", "const": true },
+              "not_amendment": { "type": "boolean", "const": true },
+              "bitcoin_originals_prevail": { "type": "boolean", "const": true }
+            }
+          }
+        }
+      }
+    }
+  }
+}

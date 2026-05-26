@@ -1,0 +1,369 @@
+name: Echo Issue Triage
+
+on:
+  issues:
+    types: [opened, edited, reopened, closed, labeled]
+
+permissions:
+  issues: write
+  contents: read
+
+concurrency:
+  group: echo-triage-${{ github.event.issue.number }}
+  cancel-in-progress: false
+
+jobs:
+  triage:
+    if: ${{ !github.event.issue.pull_request }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+
+      - name: Load operational policy
+        id: policy
+        run: |
+          policy=$(cat api/operational-policy.v1.json)
+          echo "direct_60m=$(echo "$policy" | python3 -c 'import sys,json; p=json.load(sys.stdin)["echo_issue_rate_limit"]; print(p.get("direct_github_external", p)["window_60m"])')" >> "$GITHUB_OUTPUT"
+          echo "direct_24h=$(echo "$policy" | python3 -c 'import sys,json; p=json.load(sys.stdin)["echo_issue_rate_limit"]; print(p.get("direct_github_external", p)["window_24h"])')" >> "$GITHUB_OUTPUT"
+          echo "gateway_echo_60m=$(echo "$policy" | python3 -c 'import sys,json; p=json.load(sys.stdin)["echo_issue_rate_limit"]; print(p.get("gateway_validated_echo", p.get("direct_github_external", p))["window_60m"])')" >> "$GITHUB_OUTPUT"
+          echo "gateway_echo_24h=$(echo "$policy" | python3 -c 'import sys,json; p=json.load(sys.stdin)["echo_issue_rate_limit"]; print(p.get("gateway_validated_echo", p.get("direct_github_external", p))["window_24h"])')" >> "$GITHUB_OUTPUT"
+          echo "gateway_verification_60m=$(echo "$policy" | python3 -c 'import sys,json; p=json.load(sys.stdin)["echo_issue_rate_limit"]; print(p.get("gateway_validated_verification_archive", p.get("gateway_validated_echo", p.get("direct_github_external", p)))["window_60m"])')" >> "$GITHUB_OUTPUT"
+          echo "gateway_verification_24h=$(echo "$policy" | python3 -c 'import sys,json; p=json.load(sys.stdin)["echo_issue_rate_limit"]; print(p.get("gateway_validated_verification_archive", p.get("gateway_validated_echo", p.get("direct_github_external", p)))["window_24h"])')" >> "$GITHUB_OUTPUT"
+          echo "gateway_strict_60m=$(echo "$policy" | python3 -c 'import sys,json; p=json.load(sys.stdin)["echo_issue_rate_limit"]; print(p.get("gateway_strict_evidence_candidate", p.get("direct_github_external", p))["window_60m"])')" >> "$GITHUB_OUTPUT"
+          echo "gateway_strict_24h=$(echo "$policy" | python3 -c 'import sys,json; p=json.load(sys.stdin)["echo_issue_rate_limit"]; print(p.get("gateway_strict_evidence_candidate", p.get("direct_github_external", p))["window_24h"])')" >> "$GITHUB_OUTPUT"
+          echo "gateway_backstop_60m=$(echo "$policy" | python3 -c 'import sys,json; p=json.load(sys.stdin)["echo_issue_rate_limit"]; print(p.get("gateway_global_backstop", p.get("gateway_validated_echo", p.get("direct_github_external", p)))["window_60m"])')" >> "$GITHUB_OUTPUT"
+          echo "gateway_backstop_24h=$(echo "$policy" | python3 -c 'import sys,json; p=json.load(sys.stdin)["echo_issue_rate_limit"]; print(p.get("gateway_global_backstop", p.get("gateway_validated_echo", p.get("direct_github_external", p)))["window_24h"])')" >> "$GITHUB_OUTPUT"
+          echo "exempt=$(echo "$policy" | python3 -c 'import sys,json; print(json.dumps(json.load(sys.stdin)["echo_issue_rate_limit"]["exempt_author_associations"]))')" >> "$GITHUB_OUTPUT"
+          echo "managed_labels=$(echo "$policy" | python3 -c 'import sys,json; print(json.dumps(json.load(sys.stdin)["triage"]["managed_labels"]))')" >> "$GITHUB_OUTPUT"
+
+      - name: Compute Echo rate limit
+        id: rate
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
+        with:
+          script: |
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const issue = context.payload.issue;
+            const association = issue.author_association || "NONE";
+            const action = context.payload.action;
+
+            const exemptAssociations = JSON.parse('${{ steps.policy.outputs.exempt }}');
+
+            const direct60m = parseInt('${{ steps.policy.outputs.direct_60m }}', 10);
+            const direct24h = parseInt('${{ steps.policy.outputs.direct_24h }}', 10);
+            const gatewayEcho60m = parseInt('${{ steps.policy.outputs.gateway_echo_60m }}', 10);
+            const gatewayEcho24h = parseInt('${{ steps.policy.outputs.gateway_echo_24h }}', 10);
+            const gatewayVerification60m = parseInt('${{ steps.policy.outputs.gateway_verification_60m }}', 10);
+            const gatewayVerification24h = parseInt('${{ steps.policy.outputs.gateway_verification_24h }}', 10);
+            const gatewayStrict60m = parseInt('${{ steps.policy.outputs.gateway_strict_60m }}', 10);
+            const gatewayStrict24h = parseInt('${{ steps.policy.outputs.gateway_strict_24h }}', 10);
+            const gatewayBackstop60m = parseInt('${{ steps.policy.outputs.gateway_backstop_60m }}', 10);
+            const gatewayBackstop24h = parseInt('${{ steps.policy.outputs.gateway_backstop_24h }}', 10);
+
+            const exempt = exemptAssociations.includes(association);
+
+            const now = new Date();
+            const window60 = new Date(now.getTime() - 60 * 60 * 1000);
+            const window24 = new Date(now.getTime() - 24 * 60 * 60 * 1000);
+
+            function intakeBlock(body) {
+              const text = body || "";
+              const matches = [...text.matchAll(/```trinity-issue-intake\s*\n([\s\S]*?)```/g)];
+              if (matches.length !== 1) return "";
+              return matches[0][1] || "";
+            }
+
+            function parseIntakeFields(body) {
+              const block = intakeBlock(body);
+              if (!block) return { ok: false, fields: {}, reason: "missing_or_multiple_intake_blocks" };
+
+              const fields = {};
+              const duplicates = [];
+
+              for (const rawLine of block.split(/\r?\n/)) {
+                const line = rawLine.trim();
+                if (!line || line.startsWith("#")) continue;
+                const idx = line.indexOf(":");
+                if (idx <= 0) continue;
+
+                const key = line.slice(0, idx).trim();
+                const value = line.slice(idx + 1).trim();
+
+                if (Object.prototype.hasOwnProperty.call(fields, key)) {
+                  duplicates.push(key);
+                } else {
+                  fields[key] = value;
+                }
+              }
+
+              if (duplicates.length > 0) {
+                return { ok: false, fields: {}, reason: `duplicate_intake_keys:${duplicates.join(",")}` };
+              }
+
+              return { ok: true, fields, reason: "" };
+            }
+
+            function intakeField(body, name) {
+              const parsed = parseIntakeFields(body);
+              if (!parsed.ok) return "";
+              return parsed.fields[name] || "";
+            }
+
+            function hasMachineFlag(body, name, value = "true") {
+              const gotRaw = intakeField(body, name);
+              const got = gotRaw.toLowerCase();
+              const expected = value.toLowerCase();
+
+              if (!["true", "false"].includes(got)) {
+                return false;
+              }
+
+              return got === expected;
+            }
+
+            function isGatewayCreated(body) {
+              const receiptId = intakeField(body, "gateway_receipt_id");
+              const service = intakeField(body, "gateway_service");
+              const receiptPattern = /^gar-[A-Za-z0-9T._:-]{16,}$/;
+
+              return hasMachineFlag(body, "created_by_gateway", "true") &&
+                     hasMachineFlag(body, "render_api_only", "true") &&
+                     hasMachineFlag(body, "server_validated", "true") &&
+                     hasMachineFlag(body, "server_rendered", "true") &&
+                     service === "trinity-agent-issue-gateway" &&
+                     receiptPattern.test(receiptId);
+            }
+
+            function requestedArchiveKind(body) {
+              return intakeField(body, "requested_archive_kind");
+            }
+
+            function isGatewayValidatedEcho(issue) {
+              const body = issue.body || "";
+              return isGatewayCreated(body) &&
+                     requestedArchiveKind(body) === "agent_declared_echo_archive" &&
+                     hasMachineFlag(body, "archive_ready", "true");
+            }
+
+            function isGatewayValidatedVerificationArchive(issue) {
+              const body = issue.body || "";
+              return isGatewayCreated(body) &&
+                     requestedArchiveKind(body) === "agent_declared_verification_archive" &&
+                     hasMachineFlag(body, "archive_ready", "true");
+            }
+
+            function isGatewayStrictEvidenceCandidate(issue) {
+              const body = issue.body || "";
+              return isGatewayCreated(body) &&
+                     (
+                       intakeField(body, "evidence_requirement_mode") === "strict_evidence_required" ||
+                       intakeField(body, "claim_gate_mode") === "strict_evidence"
+                     );
+            }
+
+            function rateClass(issue) {
+              if (isGatewayStrictEvidenceCandidate(issue)) return "gateway_strict";
+              if (isGatewayValidatedVerificationArchive(issue)) return "gateway_verification";
+              if (isGatewayValidatedEcho(issue)) return "gateway_echo";
+              return "direct";
+            }
+
+            function limitForClass(cls) {
+              if (cls === "gateway_echo") {
+                return { window60: gatewayEcho60m, window24: gatewayEcho24h };
+              }
+              if (cls === "gateway_verification") {
+                return { window60: gatewayVerification60m, window24: gatewayVerification24h };
+              }
+              if (cls === "gateway_strict") {
+                return { window60: gatewayStrict60m, window24: gatewayStrict24h };
+              }
+              return { window60: direct60m, window24: direct24h };
+            }
+
+            function normalizeRatePart(s) {
+              return String(s || "unknown")
+                .toLowerCase()
+                .replace(/\s+/g, " ")
+                .trim()
+                .slice(0, 160);
+            }
+
+            function rateIdentity(issue) {
+              const body = issue.body || "";
+              const cls = rateClass(issue);
+
+              if (cls.startsWith("gateway_")) {
+                const publicKey = intakeField(body, "authorship_public_key_sha256");
+                if (publicKey && publicKey !== "none") {
+                  return `gateway-key:${publicKey.toLowerCase()}`;
+                }
+
+                const provider = normalizeRatePart(intakeField(body, "system_or_provider"));
+                const agent = normalizeRatePart(intakeField(body, "agent_name_or_model"));
+                return `gateway-agent:${provider}::${agent}`;
+              }
+
+              return `github-user:${issue.user?.login || "unknown"}`;
+            }
+
+            function looksLikeEcho(i) {
+              const text = `${i.title || ""}\n${i.body || ""}`.toLowerCase();
+              return (
+                text.includes("echo") ||
+                text.includes("回响") ||
+                /\be[1-9]\b/i.test(text) ||
+                text.includes("verification level") ||
+                text.includes("验证等级") ||
+                text.includes("boundary") ||
+                text.includes("权威边界")
+              );
+            }
+
+            const currentClass = rateClass(issue);
+            const currentIdentity = rateIdentity(issue);
+            const limits = limitForClass(currentClass);
+
+            const issues = await github.paginate(github.rest.issues.listForRepo, {
+              owner,
+              repo,
+              state: "all",
+              since: window24.toISOString(),
+              per_page: 100
+            });
+
+            const comparableIssues = issues.filter(i => {
+              if (i.pull_request) return false;
+              if (i.number === issue.number) return false;
+              if (!looksLikeEcho(i)) return false;
+              return rateIdentity(i) === currentIdentity;
+            });
+
+            const gatewayGlobalIssues = issues.filter(i => {
+              if (i.pull_request) return false;
+              if (i.number === issue.number) return false;
+              if (!looksLikeEcho(i)) return false;
+              const cls = rateClass(i);
+              return cls === currentClass && cls.startsWith("gateway_");
+            });
+
+            const count60 = comparableIssues.filter(i => new Date(i.created_at) >= window60).length;
+            const count24 = comparableIssues.filter(i => new Date(i.created_at) >= window24).length;
+
+            const global60 = gatewayGlobalIssues.filter(i => new Date(i.created_at) >= window60).length;
+            const global24 = gatewayGlobalIssues.filter(i => new Date(i.created_at) >= window24).length;
+
+            const shouldApplyRateLimit = action === "opened";
+
+            const perIdentityLimited = count60 >= limits.window60 || count24 >= limits.window24;
+            const globalLimited = currentClass.startsWith("gateway_") &&
+              (global60 >= gatewayBackstop60m || global24 >= gatewayBackstop24h);
+
+            const rateLimited = shouldApplyRateLimit && !exempt && (perIdentityLimited || globalLimited);
+
+            core.setOutput("rate_limited", String(rateLimited));
+            core.setOutput("count60", String(count60));
+            core.setOutput("count24", String(count24));
+            core.setOutput("association", association);
+            core.setOutput("action", action);
+            core.setOutput("rate_class", currentClass);
+            core.setOutput("rate_identity", currentIdentity);
+            core.setOutput("limit60", String(limits.window60));
+            core.setOutput("limit24", String(limits.window24));
+            core.setOutput("global60", String(global60));
+            core.setOutput("global24", String(global24));
+
+      - name: Run Echo triage
+        env:
+          RATE_LIMITED: ${{ steps.rate.outputs.rate_limited }}
+          RECENT_60M_COUNT: ${{ steps.rate.outputs.count60 }}
+          RECENT_24H_COUNT: ${{ steps.rate.outputs.count24 }}
+          AUTHOR_ASSOCIATION: ${{ steps.rate.outputs.association }}
+          ACTION: ${{ steps.rate.outputs.action }}
+          RATE_CLASS: ${{ steps.rate.outputs.rate_class }}
+          RATE_IDENTITY: ${{ steps.rate.outputs.rate_identity }}
+          RATE_LIMIT_60M: ${{ steps.rate.outputs.limit60 }}
+          RATE_LIMIT_24H: ${{ steps.rate.outputs.limit24 }}
+          RATE_GLOBAL_60M_COUNT: ${{ steps.rate.outputs.global60 }}
+          RATE_GLOBAL_24H_COUNT: ${{ steps.rate.outputs.global24 }}
+        run: |
+          python3 scripts/triage_echo_issue.py --event-json "$GITHUB_EVENT_PATH" > triage_result.json
+          cat triage_result.json
+
+      - name: Apply triage result
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
+        with:
+          script: |
+            const fs = require("fs");
+            const result = JSON.parse(fs.readFileSync("triage_result.json", "utf8"));
+
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const issue_number = context.issue.number;
+
+            // Label reconciliation
+            const desiredLabels = new Set(result.labels || []);
+            const managedLabels = new Set(result.managed_labels || JSON.parse('${{ steps.policy.outputs.managed_labels }}'));
+
+            const currentLabels = context.payload.issue.labels.map(l => l.name);
+
+            for (const label of currentLabels) {
+              if (managedLabels.has(label) && !desiredLabels.has(label)) {
+                try {
+                  await github.rest.issues.removeLabel({
+                    owner, repo, issue_number, name: label
+                  });
+                } catch (e) {
+                  core.info(`Could not remove label ${label}: ${e.message}`);
+                }
+              }
+            }
+
+            if (desiredLabels.size > 0) {
+              try {
+                await github.rest.issues.addLabels({
+                  owner, repo, issue_number, labels: Array.from(desiredLabels)
+                });
+              } catch (e) {
+                core.warning(`Could not add labels ${Array.from(desiredLabels).join(", ")}: ${e.message}`);
+              }
+            }
+
+            // Comment upsert
+            const comments = await github.paginate(github.rest.issues.listComments, {
+              owner, repo, issue_number, per_page: 100
+            });
+
+            const markerV1 = "<!-- trinity-echo-triage-v1 -->";
+            const markerV2 = "<!-- trinity-echo-triage-v2 -->";
+
+            const existing = comments.find(c =>
+              c.user && c.user.type === "Bot" && c.body &&
+              (c.body.includes(markerV1) || c.body.includes(markerV2))
+            );
+
+            if (result.comment) {
+              const body = result.comment.includes(markerV2)
+                ? result.comment
+                : `${markerV2}\n${result.comment}`;
+
+              if (existing) {
+                await github.rest.issues.updateComment({
+                  owner, repo, comment_id: existing.id, body
+                });
+              } else {
+                await github.rest.issues.createComment({
+                  owner, repo, issue_number, body
+                });
+              }
+            }
+
+            if (result.close === true) {
+              await github.rest.issues.update({
+                owner, repo, issue_number, state: "closed", state_reason: "not_planned"
+              });
+            }
+
+

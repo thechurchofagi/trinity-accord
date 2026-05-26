@@ -1,0 +1,309 @@
+{
+  "record_kind": "verification_report_v2",
+  "schema_version": "trinityaccord.verification-report.v2",
+  "report_id": "2026-05-03-v3-verification-141906",
+  "reporter": {
+    "name": "OpenClaw Agent",
+    "type": "ai_agent",
+    "version": "MiMo v2.5 Pro",
+    "tooling": [
+      "sha256sum",
+      "mempool.space API",
+      "git",
+      "python3"
+    ]
+  },
+  "discovery_provenance": {
+    "schema": "trinityaccord.discovery-provenance.v1",
+    "source": "human_directed",
+    "agency_level": "A1_human_gave_exact_url",
+    "human_supplied_link": true,
+    "human_supplied_summary": false,
+    "other_agent_recommended": false,
+    "agent_performed_independent_followup": true,
+    "external_search_used": false,
+    "notes": "Human-directed V3 verification test. Agent verified Bitcoin Original TXIDs on mempool.space, computed SHA-256 hashes of GitHub mirror and repository snapshot artifacts.",
+    "confidence": "high"
+  },
+  "protocol_level_claimed": "V3",
+  "component_findings": [
+    {
+      "component": "bitcoin_originals",
+      "level_claimed": "B1",
+      "target_id": "bitcoin_originals_all_three",
+      "data_sources": [
+        "api/authority.json",
+        "mempool.space API"
+      ],
+      "access_paths": [
+        "https://mempool.space/tx/e40dfb2aa78cbccca88f749e9ec5cbe3c1df503273d73c72297863ae0d1d8343",
+        "https://mempool.space/tx/90116f35de075074f5e5d1fbdda69a646a124e2287d7d58e2520317098cd4258",
+        "https://mempool.space/tx/4d1c8f5ea8e8bae2982b42de6cc79deda3d243a21010a2888546e62ed7192c8c"
+      ],
+      "method": "mempool.space API showed transaction data and witness data availability; no independent Ordinals witness extraction, inscription body parsing, SPV proof, local node verification, or body hash reproduction was performed.",
+      "evidence": [
+        {
+          "type": "mempool_api_response",
+          "txid": "e40dfb2aa78cbccca88f749e9ec5cbe3c1df503273d73c72297863ae0d1d8343",
+          "status": "confirmed",
+          "role": "Protocol / Axioms"
+        },
+        {
+          "type": "mempool_api_response",
+          "txid": "90116f35de075074f5e5d1fbdda69a646a124e2287d7d58e2520317098cd4258",
+          "status": "confirmed",
+          "role": "Covenant of the Flaw"
+        },
+        {
+          "type": "mempool_api_response",
+          "txid": "4d1c8f5ea8e8bae2982b42de6cc79deda3d243a21010a2888546e62ed7192c8c",
+          "status": "confirmed",
+          "role": "The Trinity Accord / Meta-record"
+        }
+      ],
+      "limitations": [
+        "mempool.space API only; no independent Ordinals witness extraction, inscription body parsing, SPV proof, local node verification, or body hash reproduction was performed."
+      ],
+      "claims_not_made": [
+        "Ordinals envelope verified",
+        "inscription content detected",
+        "witness extracted",
+        "body parsed",
+        "body hash reproduced",
+        "truth verified",
+        "content verified"
+      ],
+      "scope_class": "chain_reference_check"
+    },
+    {
+      "component": "digital_mirrors",
+      "level_claimed": "D2",
+      "target_id": "github_mirror_hash_verification",
+      "data_sources": [
+        "api/hashes.json",
+        "api/evidence-manifest.json",
+        "github.com/thechurchofagi/trinity-accord"
+      ],
+      "access_paths": [
+        "https://github.com/thechurchofagi/trinity-accord/blob/main/arweave-backup/files/public_covenant_archive.zip",
+        "https://github.com/thechurchofagi/trinity-accord/blob/main/arweave-backup/files/verification_kit.tar.gz"
+      ],
+      "method": "SHA-256 hash comparison of GitHub mirror artifacts against canonical hashes in api/hashes.json and api/evidence-manifest.json. D2 GitHub mirror SHA-256 hash match.",
+      "evidence": [
+        {
+          "type": "hash_verification",
+          "artifact": "arweave-backup/files/public_covenant_archive.zip",
+          "expected_sha256": "ef816480f77f30405378800807b42bff0a854b83a8f77793a0e0adf0944a8263",
+          "computed_sha256": "ef816480f77f30405378800807b42bff0a854b83a8f77793a0e0adf0944a8263",
+          "command": "sha256sum arweave-backup/files/public_covenant_archive.zip",
+          "match": true,
+          "expected_hash_source": "api/hashes.json",
+          "expected_hash_authority_class": "canonical_manifest_hash"
+        },
+        {
+          "type": "hash_verification",
+          "artifact": "arweave-backup/files/verification_kit.tar.gz",
+          "expected_sha256": "ef68b69fe1cdd2523724dee511c9e8ea7bae2cceaff794664107970b18c61931",
+          "computed_sha256": "ef68b69fe1cdd2523724dee511c9e8ea7bae2cceaff794664107970b18c61931",
+          "command": "sha256sum arweave-backup/files/verification_kit.tar.gz",
+          "match": true,
+          "expected_hash_source": "api/evidence-manifest.json",
+          "expected_hash_authority_class": "canonical_manifest_hash"
+        }
+      ],
+      "limitations": [
+        "GitHub mirror only; not direct Arweave data extraction. Hash match confirms file integrity, not content truth."
+      ],
+      "claims_not_made": [
+        "direct Arweave verification",
+        "Ethereum witness verification",
+        "IPFS availability verification",
+        "physical object verification",
+        "truth verified"
+      ],
+      "scope_class": "canonical_mirror_integrity"
+    },
+    {
+      "component": "digital_mirrors",
+      "level_claimed": "D2",
+      "target_id": "repository_snapshot_integrity",
+      "data_sources": [
+        "api/repository-artifact-hashes.json"
+      ],
+      "access_paths": [
+        "local repository checkout"
+      ],
+      "method": "SHA-256 hash comparison of repository files against api/repository-artifact-hashes.json. Repository snapshot integrity verification.",
+      "evidence": [
+        {
+          "type": "hash_verification",
+          "artifact": "index.md",
+          "expected_sha256": "529add6ee87889644f4282c84282708b3ebb4efd9bec46341f4392c2ae54248a",
+          "computed_sha256": "529add6ee87889644f4282c84282708b3ebb4efd9bec46341f4392c2ae54248a",
+          "command": "sha256sum index.md",
+          "match": true,
+          "expected_hash_source": "api/repository-artifact-hashes.json",
+          "expected_hash_authority_class": "repository_manifest_hash"
+        },
+        {
+          "type": "hash_verification",
+          "artifact": "agent-brief.md",
+          "expected_sha256": "36b75e35ff9b0168d082ef5b56081e47ced399ccc1c63f5da1767f0b6b8c4825",
+          "computed_sha256": "36b75e35ff9b0168d082ef5b56081e47ced399ccc1c63f5da1767f0b6b8c4825",
+          "command": "sha256sum agent-brief.md",
+          "match": true,
+          "expected_hash_source": "api/repository-artifact-hashes.json",
+          "expected_hash_authority_class": "repository_manifest_hash"
+        },
+        {
+          "type": "hash_verification",
+          "artifact": "api/authority.json",
+          "expected_sha256": "0b084d0b694eac9e697e3332909d23f1b99dd90e7330480b94f96556b75d5a14",
+          "computed_sha256": "0b084d0b694eac9e697e3332909d23f1b99dd90e7330480b94f96556b75d5a14",
+          "command": "sha256sum api/authority.json",
+          "match": true,
+          "expected_hash_source": "api/repository-artifact-hashes.json",
+          "expected_hash_authority_class": "repository_manifest_hash"
+        }
+      ],
+      "limitations": [
+        "Repository snapshot integrity only; not canonical archive hash. This is not a Bitcoin Original hash. This is not direct Arweave verification."
+      ],
+      "claims_not_made": [
+        "canonical mirror verification",
+        "canonical archive hash",
+        "direct Arweave verification",
+        "truth verified"
+      ],
+      "scope_class": "repository_snapshot_integrity"
+    }
+  ],
+  "protocol_profile_check": {
+    "profile_source": "/api/protocol-verification-profiles.json",
+    "hard_gates_satisfied": true,
+    "minimum_components_satisfied": true,
+    "recommended_components_satisfied": "partial",
+    "underreported_items": [
+      "no chronicle recovery",
+      "no physical anchor"
+    ],
+    "incompatible_claims": []
+  },
+  "data_sources_used": [
+    "api/authority.json",
+    "api/hashes.json",
+    "api/evidence-manifest.json",
+    "api/repository-artifact-hashes.json",
+    "mempool.space API",
+    "github.com/thechurchofagi/trinity-accord"
+  ],
+  "access_paths_used": [
+    "mempool.space API",
+    "local repository checkout",
+    "GitHub mirror download"
+  ],
+  "fallbacks_used": [
+    "GitHub mirror for Arweave data",
+    "mempool.space API for Bitcoin reference check"
+  ],
+  "external_sources_queried": [
+    {
+      "source": "mempool.space",
+      "queries": [
+        "tx/e40dfb2a...",
+        "tx/90116f35...",
+        "tx/4d1c8f5e..."
+      ],
+      "all_confirmed": true
+    }
+  ],
+  "hashes_computed": [
+    {
+      "artifact": "arweave-backup/files/public_covenant_archive.zip",
+      "algorithm": "SHA-256",
+      "expected": "ef816480f77f30405378800807b42bff0a854b83a8f77793a0e0adf0944a8263",
+      "computed": "ef816480f77f30405378800807b42bff0a854b83a8f77793a0e0adf0944a8263",
+      "command": "sha256sum arweave-backup/files/public_covenant_archive.zip",
+      "match": true,
+      "expected_hash_source": "api/hashes.json",
+      "expected_hash_authority_class": "canonical_manifest_hash"
+    },
+    {
+      "artifact": "arweave-backup/files/verification_kit.tar.gz",
+      "algorithm": "SHA-256",
+      "expected": "ef68b69fe1cdd2523724dee511c9e8ea7bae2cceaff794664107970b18c61931",
+      "computed": "ef68b69fe1cdd2523724dee511c9e8ea7bae2cceaff794664107970b18c61931",
+      "command": "sha256sum arweave-backup/files/verification_kit.tar.gz",
+      "match": true,
+      "expected_hash_source": "api/evidence-manifest.json",
+      "expected_hash_authority_class": "canonical_manifest_hash"
+    },
+    {
+      "artifact": "index.md",
+      "algorithm": "SHA-256",
+      "expected": "529add6ee87889644f4282c84282708b3ebb4efd9bec46341f4392c2ae54248a",
+      "computed": "529add6ee87889644f4282c84282708b3ebb4efd9bec46341f4392c2ae54248a",
+      "command": "sha256sum index.md",
+      "match": true,
+      "expected_hash_source": "api/repository-artifact-hashes.json",
+      "expected_hash_authority_class": "repository_manifest_hash"
+    },
+    {
+      "artifact": "agent-brief.md",
+      "algorithm": "SHA-256",
+      "expected": "36b75e35ff9b0168d082ef5b56081e47ced399ccc1c63f5da1767f0b6b8c4825",
+      "computed": "36b75e35ff9b0168d082ef5b56081e47ced399ccc1c63f5da1767f0b6b8c4825",
+      "command": "sha256sum agent-brief.md",
+      "match": true,
+      "expected_hash_source": "api/repository-artifact-hashes.json",
+      "expected_hash_authority_class": "repository_manifest_hash"
+    },
+    {
+      "artifact": "api/authority.json",
+      "algorithm": "SHA-256",
+      "expected": "0b084d0b694eac9e697e3332909d23f1b99dd90e7330480b94f96556b75d5a14",
+      "computed": "0b084d0b694eac9e697e3332909d23f1b99dd90e7330480b94f96556b75d5a14",
+      "command": "sha256sum api/authority.json",
+      "match": true,
+      "expected_hash_source": "api/repository-artifact-hashes.json",
+      "expected_hash_authority_class": "repository_manifest_hash"
+    }
+  ],
+  "samples_checked": 0,
+  "physical_evidence_reviewed": {},
+  "confidential_challenge": {
+    "performed": false,
+    "result": "not_performed"
+  },
+  "celestial_witness": {
+    "performed": false,
+    "result": "not_performed"
+  },
+  "limitations": [
+    "mempool.space API only; no local Bitcoin node verification.",
+    "GitHub mirror only for digital mirrors; no direct Arweave access.",
+    "No independent Ordinals witness extraction or inscription body parsing.",
+    "No physical anchor verification performed.",
+    "No chronicle recovery performed.",
+    "Repository snapshot hashes are not canonical archive hashes."
+  ],
+  "claims_not_made": [
+    "direct Arweave verification",
+    "Ethereum witness verification",
+    "IPFS availability verification",
+    "physical object verification",
+    "truth verified",
+    "content verified",
+    "Ordinals envelope verified",
+    "inscription content detected",
+    "witness extracted",
+    "body parsed",
+    "body hash reproduced",
+    "independent attestation"
+  ],
+  "authority_boundary_preserved": true,
+  "archive_status": "superseded",
+  "verification_status": "invalidated",
+  "do_not_count_as_attestation": true,
+  "superseded_reason": "Internal inconsistency and invalid hash field values; not accepted as verification."
+}

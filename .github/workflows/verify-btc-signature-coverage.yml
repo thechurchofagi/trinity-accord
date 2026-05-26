@@ -1,0 +1,30 @@
+name: Verify BTC Signature Coverage
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-btc-signature:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+
+      - uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4
+        with:
+          node-version: '22'
+      - run: npm ci
+
+      - name: Run BTC Signature Coverage Verification
+        run: node scripts/verify-btc-signature-coverage.mjs
+
+      - name: Upload BTC-SIGNATURE-COVERAGE-AUDIT.json
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: btc-signature-coverage-audit
+          path: BTC-SIGNATURE-COVERAGE-AUDIT.json
+          retention-days: 90

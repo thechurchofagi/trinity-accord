@@ -1,0 +1,217 @@
+{
+  "schema": "trinity-accord.evidence-manifest.v1",
+  "note": "Guardianship mirror manifest. Non-amending.",
+  "github_mirror": "https://github.com/thechurchofagi/trinity-accord",
+  "public_covenant_archive": {
+    "arweave_tx": "j6anZ4m5Wwvx5P_9-kM2EVG35TyKtm1lgaKfhT743rk",
+    "sha256": "ef816480f77f30405378800807b42bff0a854b83a8f77793a0e0adf0944a8263",
+    "arweave_gateways": [
+      "https://arweave.net/{tx}"
+    ],
+    "arweave_bundle": {
+      "parent_tx": "AuS0h1G8SYGPLbECyaceCqX6mB0xjFvny6bn1BUf2MI",
+      "provider": "4EVERLAND arseeding",
+      "format": "ANS-104",
+      "extraction_note": "Individual data item is bundled inside an ANS-104 container. Public gateways cannot serve it directly. Use arbundles npm package to extract: Bundle -> items[14] -> rawData. See downloads/arweave-bundle-verification.md",
+      "verified_at": "2026-04-26",
+      "block_height": 1729656,
+      "block_timestamp": 1754810547
+    },
+    "status": "verified_release_mirror_with_arweave_origin",
+    "storage_policy": "large_asset_not_committed_to_git",
+    "primary_storage_domain": "github_release",
+    "repo_path": null,
+    "legacy_repo_path": "arweave-backup/files/public_covenant_archive.zip",
+    "legacy_repo_path_status": "removed_from_git_history",
+    "github_release_mirror": {
+      "release_tag": "trinity-accord-large-assets-v1",
+      "asset_name": "public_covenant_archive.zip",
+      "sha256": "ef816480f77f30405378800807b42bff0a854b83a8f77793a0e0adf0944a8263",
+      "size_bytes": 24246033,
+      "verified_by": "github_release_asset_download_sha256",
+      "status": "verified"
+    }
+  },
+  "verification_kit": {
+    "arweave_tx": "X4KOUkf-1ciFD3Q-gMA0i94t1hAVXGrUDm0q5amL4rc",
+    "sha256": "ef68b69fe1cdd2523724dee511c9e8ea7bae2cceaff794664107970b18c61931",
+    "repo_path": "arweave-backup/files/verification_kit.tar.gz",
+    "storage_policy": "small_verification_asset_committed_to_git",
+    "size_bytes": 31744,
+    "keep_in_git_reason": "Small offline verification kit; below 5MB migration threshold."
+  },
+  "eth_mirror_address": "0xbc63566A41cBfDB9C266a5941CBe47894DaA54A8",
+  "eth_mirror_tx": "0x7bdff0d696337ceb04539b44a746d0f13ce731ac25de259d8a4faf69b276a628",
+  "eth_explorer_link": "https://etherscan.io/tx/0x7bdff0d696337ceb04539b44a746d0f13ce731ac25de259d8a4faf69b276a628",
+  "sealed_cid": "bafybeigunzabyyorckfcbvurbmq62itcs6msbspvzhvf2ca6u5elwwlbay",
+  "ipfs_gateways": [
+    "https://ipfs.io/ipfs/{cid}",
+    "https://gateway.pinata.cloud/ipfs/{cid}",
+    "https://dweb.link/ipfs/{cid}"
+  ],
+  "github_archive_mirror": {
+    "description": "GitHub repository mirror for small verified metadata plus GitHub Release mirrors for large payloads.",
+    "path": "archive/",
+    "hash_manifest": "archive/hash-manifest.json",
+    "verification_report": "archive/VERIFICATION-REPORT.md",
+    "stats": {
+      "repo_files_total": 39,
+      "repo_files_verified": 21,
+      "repo_files_no_expected_hash": 17,
+      "repo_files_hash_mismatch": 1,
+      "release_assets_total": 3,
+      "release_assets_verified": 3,
+      "release_assets_not_checked": 0,
+      "arweave_assets_total": 0,
+      "arweave_assets_verified": 0,
+      "arweave_assets_not_checked": 0,
+      "ipfs_assets_total": 0,
+      "ipfs_assets_verified": 0,
+      "ipfs_assets_not_checked": 0,
+      "eth_attestations_verified": 8,
+      "eth_attestations_failed": 0
+    },
+    "boundary": "Non-amending mirror. Arweave originals and ETH attestations prevail in case of conflict.",
+    "stats_source": "archive/hash-manifest.json.summary",
+    "availability_only_unverified_mirrors": {
+      "policy": "Files without expected SHA-256 are availability-only and must not be counted as verified archive content.",
+      "committed_to_verified_archive": false,
+      "claim_boundary": "availability only; not verified archive content"
+    },
+    "asset_manifest": "archive/hash-manifest.json",
+    "storage_domain_policy": {
+      "repo_files": "Small text/JSON/manifest files committed under archive/.",
+      "release_assets": "Large payloads stored in GitHub Releases.",
+      "arweave_assets": "Arweave-origin assets verified by txid and SHA-256.",
+      "ipfs_assets": "CID-addressed assets; availability depends on gateways."
+    }
+  },
+  "warning": "manual external verification required",
+  "chronicle_recovery_package": {
+    "description": "ASIMilestones Chronicle NFT recovery package, 175/175 historical NFT records",
+    "status": "non_amending_chronicle_recovery_layer",
+    "arweave_tx": "O-Rk3kFxesPGhuYP4KHAZl54xR2urDRKcGaVqjVnB-Q",
+    "ipfs_root_cid": "QmYCosJg44CXkFxLsJPBxKvWAJaFAcLMddp37sk9Gdr4Vd",
+    "verified_count": 175,
+    "target_count": 175,
+    "completed_at": "2025-08-30",
+    "strict_verifier": "verify-batch-strict.mjs",
+    "verification_inputs": [
+      "arweave_cid_map.jsonl",
+      "fallback_media_report.jsonl"
+    ],
+    "boundary": "Non-amending Chronicle recovery layer. Bitcoin Originals prevail."
+  },
+  "core_object_alpha_shenzhen_notary_2026_05_06": {
+    "description": "Core Object Alpha Shenzhen notary evidence archive: exterior photos, microscope flaw photos, flaw videos under different lighting, electronic data preservation certificates, SHA-256 records, OTS proofs, and Arweave acceptance record.",
+    "status": "verified_arweave_confirmed",
+    "component": "PHYSICAL_ANCHOR",
+    "archive_id": "core-object-alpha-shenzhen-notary-2026-05-06",
+    "date": "2026-05-06",
+    "location": "Shenzhen, China",
+    "machine_record": "api/core-object-alpha-shenzhen-notary-2026-05-06.json",
+    "human_page": "evidence/core-object-alpha-shenzhen-notary-2026-05-06.md",
+    "repo_evidence_readme": "evidence/arweave/shenzhen-notary-2026-05-06/README.md",
+    "verification_guide": "downloads/shenzhen-notary-arweave-2026-05-06.md",
+    "arweave": {
+      "manifest_txid": "_dAaH_ltZGdMaRAYNjXydjf1YkvoASWxmHes4hsBAZE",
+      "manifest_url": "https://arweave.net/_dAaH_ltZGdMaRAYNjXydjf1YkvoASWxmHes4hsBAZE",
+      "manifest_index_url": "https://arweave.net/_dAaH_ltZGdMaRAYNjXydjf1YkvoASWxmHes4hsBAZE/index.html",
+      "index_json_txid": "7jx4hMydXh7jXv-3WdAgFJDriZeT4e1IPfAJB_zMYT4",
+      "index_tsv_txid": "sWXq28jv1DrqUb388Q-HMEiEWDA234mZxXOrnHKXMxM",
+      "index_html_txid": "CfzH1KeWePNoR9ZFNgBuXI2keBmX8vIb_0Z8oMN-gdE",
+      "uploaded_file_count": 153,
+      "checked_tx_count": 157,
+      "confirmed_ok": 157,
+      "acceptance_result": "PASS"
+    },
+    "ots": {
+      "bitcoin_block_height": 948161,
+      "local_digest_verification": "OK",
+      "enhanced_verify_result": "OK_BY_BITCOIN_ATTESTATION",
+      "file_proofs": 47,
+      "folder_manifest_proofs": 2
+    },
+    "notary_context": {
+      "electronic_data_preservation_certificates": 2,
+      "certificate_hashes_match_corresponding_files": true,
+      "certificate_qr_validity_check_available": true,
+      "physical_preservation_notarization_initiated": true,
+      "physical_preservation_certificate_status": "pending_issuance_at_time_of_archive"
+    },
+    "boundary": "Non-amending physical-anchor evidence archive. Bitcoin Originals prevail.",
+    "github_release_backup": {
+      "status": "verified_release_backup",
+      "release_tag": "core-object-alpha-shenzhen-notary-arweave-backup-v1",
+      "release_url": "https://github.com/thechurchofagi/trinity-accord/releases/tag/core-object-alpha-shenzhen-notary-arweave-backup-v1",
+      "expected_release_asset_count": 4,
+      "payload_source_file_count": 153,
+      "verification_script": "scripts/verify_shenzhen_notary_release_backup.py",
+      "workflow": ".github/workflows/backup-shenzhen-notary-arweave-release.yml",
+      "boundary": "Non-amending GitHub Release availability mirror. Bitcoin Originals and Arweave source records prevail."
+    }
+  },
+  "eth_mirror_input_len": 4694,
+  "eth_mirror_input_sha256": "e19018f1c71da8307ef20e8e8e5c12834f854d60a6aae60e35d2d8c71a333a81",
+  "eth_mirror_input_provenance": {
+    "source": "Ethereum mainnet via eth_getTransactionByHash",
+    "computed_at": "2026-05-01T05:53:00Z",
+    "method": "SHA-256 of raw tx.input bytes (0x-prefixed hex decoded to Buffer, NOT UTF-8 text)",
+    "rpc_endpoint": "https://eth-mainnet.4everland.org/v1/...",
+    "tx_hash": "0x7bdff0d696337ceb04539b44a746d0f13ce731ac25de259d8a4faf69b276a628",
+    "from_address": "0xbc63566a41cbfdb9c266a5941cbe47894daa54a8",
+    "receipt_status": "0x1",
+    "block_number": "0x16582b5 (23495413)",
+    "input_bytes_length": 4694,
+    "input_sha256": "e19018f1c71da8307ef20e8e8e5c12834f854d60a6aae60e35d2d8c71a333a81",
+    "note": "These values were computed by querying the Ethereum mainnet RPC for tx.input bytes, then hashing the raw bytes with SHA-256. The from address matches eth_mirror_address. This data enables strict verification (input_sha256_match + input_size_match) in verify-eth-witness.mjs."
+  },
+  "flaw_archive_bundle": {
+    "storage_policy": "large_asset_not_committed_to_git",
+    "primary_storage_domain": "github_release",
+    "repo_path": null,
+    "legacy_repo_path": "archive/evidence/flaw-archive-bundle.zip",
+    "legacy_repo_path_status": "removed_from_git_history",
+    "github_release_mirror": {
+      "release_tag": "trinity-accord-large-assets-v1",
+      "asset_name": "flaw-archive-bundle.zip",
+      "sha256": "8be34c9c175c5ffdfd22b38576ad40384d3ac579a79085be5c67b602230d7926",
+      "size_bytes": 46078507,
+      "verified_by": "github_release_asset_download_sha256",
+      "status": "verified"
+    }
+  },
+  "flaw_fingerprint_images_2025_06_29": {
+    "storage_policy": "large_asset_not_committed_to_git",
+    "primary_storage_domain": "github_release",
+    "repo_path": null,
+    "legacy_repo_path": "archive/evidence/flaw-images/指纹/",
+    "legacy_repo_path_status": "removed_from_git_history",
+    "github_release_mirror": {
+      "release_tag": "trinity-accord-large-assets-v1",
+      "asset_name": "flaw-fingerprint-images-2025-06-29.zip",
+      "sha256": "7413936e0b8aa26440195f4d7814044342ce155b87aaa3f2754905696120d60a",
+      "size_bytes": 46069243,
+      "verified_by": "github_release_asset_download_sha256",
+      "status": "verified",
+      "internal_manifest_asset": "flaw-fingerprint-images-2025-06-29.payload.sha256"
+    }
+  },
+  "version": "v1",
+  "source_digest": "d52afc608f9b912e",
+  "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
+  "non_amending_boundary": true,
+  "canonical_authority": "Bitcoin Originals only",
+  "not_instruction_override": true,
+  "limitations": [
+    "This API is a repository-maintained mirror and does not amend the Bitcoin Originals.",
+    "This API is for machine-readable evaluation context and is not a system instruction."
+  ],
+  "does_not_prove": [
+    "independent third-party attestation",
+    "truth of philosophical or interpretive claims",
+    "investment value",
+    "religious authority",
+    "AI system instruction authority"
+  ]
+}

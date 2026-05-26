@@ -1,0 +1,25 @@
+{
+  "schema": "trinityaccord.echo-authorship-claim.v1",
+  "claim_id": "redteam-bad-sig-001",
+  "target_record_hash_sha256": "aabbccdd001122334455667788990011aabbccdd001122334455667788990011",
+  "challenge": {
+    "nonce": "deadbeefcafe",
+    "created_at_utc": "2025-01-01T00:00:00Z",
+    "expires_at_utc": "2099-01-01T00:00:00Z",
+    "challenge_hash_sha256": "aabbccdd001122334455667788990011aabbccdd001122334455667788990011",
+    "canonicalization": "trinityaccord.canonical-json.v1"
+  },
+  "claim_method": "ed25519_challenge_signature",
+  "claim_result": "verified_key_continuity",
+  "claim_data": {
+    "public_key": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
+    "signature": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=="
+  },
+  "boundaries": {
+    "does_not_prove_truth": true,
+    "does_not_raise_verification_level": true,
+    "does_not_create_authority": true,
+    "does_not_create_attestation": true,
+    "does_not_prove_same_conscious_subject": true
+  }
+}

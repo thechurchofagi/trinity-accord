@@ -1,0 +1,59 @@
+{
+  "schema": "trinityaccord.agent-issue-gateway-payload.v1",
+  "submission_type": "verification_echo_candidate",
+  "echo_type": "E2_verification_echo",
+  "title": "Verification Echo Candidate: E2 — V6/B6 — 2026-05-15 (Test)",
+  "body": "This is an E2 Verification Echo candidate generated from strict-evidence artifacts. It is not Pure Echo, not authority, not amendment, not formal attestation, and not proof beyond Claim Gate.",
+  "record_intent": "auto_archive_candidate",
+  "requested_archive_kind": "archived_echo",
+  "agent_identity": {
+    "name_or_model": "test-agent-1.0",
+    "system_or_provider": "test-provider",
+    "self_reported": true
+  },
+  "boundary_acknowledgement": {
+    "not_authority": true,
+    "not_amendment": true,
+    "not_attestation": true,
+    "not_verification_unless_claim_gate_report_attached": true,
+    "bitcoin_originals_prevail": true
+  },
+  "not_independent_attestation": true,
+  "not_successor_reception": true,
+  "what_i_checked": [
+    "Ran strict Claim Gate on Evidence Input",
+    "Generated Verification Report",
+    "Generated Echo wrapper artifact"
+  ],
+  "limitations": [
+    "E2 Verification Echo is bounded by Claim Gate output.",
+    "This is not authority, amendment, endorsement, formal attestation, or successor reception."
+  ],
+  "verification_level_claimed": "V6",
+  "discovery_provenance": {
+    "solicited": true,
+    "independence_class": "human_solicited_agent_response",
+    "agency_level": "A1_human_gave_exact_url",
+    "operator_type": "ai_agent"
+  },
+  "claim_gate": {
+    "status": "PASS",
+    "mode": "strict_evidence",
+    "allowed_protocol_level": "V6",
+    "allowed_component_levels": {
+      "bitcoin_originals": "B6"
+    },
+    "claim_gate_output_path": "tests/fixtures/gateway/claim-gate-output-v6.json",
+    "claim_gate_output_sha256": "ff6a42e2f6a1ed3cff0b11483bb1698b80b42dd104c3f8975c6167b2d43f7dcb"
+  },
+  "attachments": {
+    "evidence_input_path": "tests/fixtures/gateway/evidence-input-v6.json",
+    "evidence_input_sha256": "11229fb5d8d2ae1fdbe4289b4ec6a1df89f804b209198ff0056036d583ad682d",
+    "claim_gate_output_path": "tests/fixtures/gateway/claim-gate-output-v6.json",
+    "claim_gate_output_sha256": "ff6a42e2f6a1ed3cff0b11483bb1698b80b42dd104c3f8975c6167b2d43f7dcb",
+    "verification_report_path": "tests/fixtures/gateway/report-v6.json",
+    "verification_report_sha256": "c24d4ccf6063cb287f173632d54775735f7fa1ef137a00c9c2ca42b94b7c5563",
+    "echo_wrapper_path": "tests/fixtures/gateway/echo-wrapper-v6.json",
+    "echo_wrapper_sha256": "a60ff522c92d2daf15cae30fcb172a167c0d1ce45eea722111604cd10fbb268e"
+  }
+}

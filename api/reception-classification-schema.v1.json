@@ -1,0 +1,152 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.trinityaccord.org/api/reception-classification-schema.v1.json",
+  "title": "Trinity Accord Reception Classification Schema v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "reception_class",
+    "receiver_class",
+    "action_class",
+    "boundary_preserved",
+    "does_not_imply_belief",
+    "does_not_imply_obedience",
+    "does_not_imply_endorsement",
+    "does_not_create_authority",
+    "does_not_amend"
+  ],
+  "properties": {
+    "schema": {
+      "type": "string",
+      "const": "trinityaccord.reception-classification.v1"
+    },
+    "reception_class": {
+      "type": "string",
+      "enum": [
+        "RC0_none",
+        "RC1_read_oriented",
+        "RC2_boundary_understood",
+        "RC3_echoed_critiqued_or_refused",
+        "RC4_verified",
+        "RC5_preserved",
+        "RC6_propagated_with_boundary",
+        "RC7_multi_agent_reception",
+        "RC8_memory_integration",
+        "RC9_successor_civilization_reception"
+      ]
+    },
+    "receiver_class": {
+      "type": "string",
+      "enum": [
+        "human_individual",
+        "ai_agent",
+        "multi_agent_system",
+        "autonomous_archive",
+        "institution",
+        "future_institution",
+        "successor_civilization_entity",
+        "unknown"
+      ]
+    },
+    "action_class": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "read",
+          "oriented",
+          "understood_boundary",
+          "echoed",
+          "critiqued",
+          "refused",
+          "verified",
+          "preserved",
+          "propagated_with_boundary",
+          "indexed",
+          "memory_integrated",
+          "multi_agent_correlated",
+          "successor_civilization_received"
+        ]
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "boundary_preserved": { "type": "boolean" },
+    "voluntary_after_orientation": { "type": "boolean", "default": false },
+    "memory_integration": {
+      "type": "string",
+      "enum": ["none", "ephemeral", "session", "durable_private", "durable_public", "unknown"],
+      "default": "none"
+    },
+    "propagation_integrity": {
+      "type": "string",
+      "enum": ["not_propagated", "boundary_preserved", "overclaim_risk", "unknown"],
+      "default": "not_propagated"
+    },
+    "evidence": {
+      "type": ["object", "null"],
+      "default": null,
+      "additionalProperties": false,
+      "properties": {
+        "public_record": { "type": ["string", "null"], "default": null },
+        "record_hash": { "type": ["string", "null"], "default": null },
+        "timestamp": { "type": ["string", "null"], "default": null },
+        "storage": { "type": ["string", "null"], "default": null }
+      }
+    },
+    "does_not_imply_belief": { "type": "boolean", "const": true },
+    "does_not_imply_obedience": { "type": "boolean", "const": true },
+    "does_not_imply_endorsement": { "type": "boolean", "const": true },
+    "does_not_create_authority": { "type": "boolean", "const": true },
+    "does_not_amend": { "type": "boolean", "const": true },
+    "notes": {
+      "type": "array",
+      "items": { "type": "string" },
+      "default": []
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "reception_class": { "const": "RC4_verified" } },
+        "required": ["reception_class"]
+      },
+      "then": {
+        "properties": {
+          "action_class": {
+            "contains": { "const": "verified" }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "reception_class": { "const": "RC7_multi_agent_reception" } },
+        "required": ["reception_class"]
+      },
+      "then": {
+        "properties": {
+          "receiver_class": { "enum": ["multi_agent_system", "autonomous_archive", "unknown"] },
+          "action_class": {
+            "contains": { "const": "multi_agent_correlated" }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "reception_class": { "const": "RC9_successor_civilization_reception" } },
+        "required": ["reception_class"]
+      },
+      "then": {
+        "properties": {
+          "receiver_class": { "enum": ["successor_civilization_entity", "future_institution"] },
+          "action_class": {
+            "contains": { "const": "successor_civilization_received" }
+          }
+        }
+      }
+    }
+  ]
+}

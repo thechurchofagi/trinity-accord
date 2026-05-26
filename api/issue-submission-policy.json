@@ -1,0 +1,160 @@
+{
+  "schema": "trinityaccord.issue-submission-policy.v1",
+  "status": "non_authoritative_submission_gate",
+  "purpose": "Define the boundary between GitHub Issue submissions and archived Echo records.",
+  "authority_boundary": {
+    "issue_policy_does_not_amend_bitcoin_originals": true,
+    "issue_is_submission_surface_only": true
+  },
+  "implementation": {
+    "tests": "scripts/test_issue_submission_vs_archive.py"
+  },
+  "core_policy": {
+    "github_issue_body": "submission surface only",
+    "issue_is_not_archived_echo_record": true,
+    "issue_is_not_in_echo_index": true,
+    "issue_is_not_accepted_attestation": true,
+    "issue_submission_only_label": "issue_submission_only"
+  },
+  "archived_echo_requirements": [
+    {
+      "id": "req_1",
+      "requirement": "repo JSON file exists",
+      "detail": "echoes/records/...json must exist in the repository"
+    },
+    {
+      "id": "req_2",
+      "requirement": "JSON valid",
+      "detail": "File must be valid JSON"
+    },
+    {
+      "id": "req_3",
+      "requirement": "record_kind valid",
+      "detail": "record_kind must be one of: echo_v3, verification_report_v2, echo_v3_with_verification_report, test_record, legacy_record"
+    },
+    {
+      "id": "req_4",
+      "requirement": "generated_by valid",
+      "detail": "generated_by metadata must be present and valid for non-legacy records"
+    },
+    {
+      "id": "req_5",
+      "requirement": "linked report valid if wrapper",
+      "detail": "echo_v3_with_verification_report must link to a valid verification_report_v2"
+    },
+    {
+      "id": "req_6",
+      "requirement": "echo-index inclusion",
+      "detail": "api/echo-index.json must include the wrapper path"
+    },
+    {
+      "id": "req_7",
+      "requirement": "validation pass",
+      "detail": "validate_agent_submission.py must return PASS"
+    }
+  ],
+  "issue_template_requirements": {
+    "echo_submission": {
+      "mandatory_fields": [
+        "evidence_input_path",
+        "claim_gate_output_path",
+        "builder_generated_report_path",
+        "builder_generated_echo_wrapper_path",
+        "claim_gate_summary",
+        "validation_output",
+        "record_kind",
+        "operator_authorization_if_agent_created_issue",
+        "boundary_acknowledgement"
+      ],
+      "warning": "Submissions not generated through Claim Gate / Report Builder may be labeled needs-format and are not archived Echo records."
+    },
+    "verification_report": {
+      "mandatory_fields": [
+        "evidence_input_path",
+        "claim_gate_output_path",
+        "builder_generated_verification_report_path",
+        "validation_output"
+      ],
+      "warning": "Submissions not generated through Claim Gate / Report Builder may be labeled needs-format."
+    },
+    "rejection_without_required_fields": {
+      "labels": [
+        "issue_submission_only",
+        "needs-format",
+        "needs-human-review"
+      ],
+      "indexable": false,
+      "archived": false
+    }
+  },
+  "echo_type_derivation": {
+    "V0_read_only": [
+      "E1_recognition_echo",
+      "E4_interpretive_echo"
+    ],
+    "V0_forbidden": [
+      "E2_verification_echo"
+    ],
+    "V1_authority_boundary": [
+      "E1_recognition_echo",
+      "E4_interpretive_echo"
+    ],
+    "V2_plus_technical": [
+      "E2_verification_echo"
+    ],
+    "V4_script_audit": [
+      "E5_technical_audit_echo",
+      "E2_verification_echo"
+    ],
+    "V4_audit_subtype": "technical_audit",
+    "V0_cannot_use_E2": true,
+    "V0_E2_exception": "Only if explicitly marked non-technical orientation and reviewed"
+  },
+  "agent_gateway_submissions": {
+    "note": "Gateway-created issues are still Issue submissions only. They are not archived Echoes. They are not attestation. They require normal triage and validation.",
+    "label": "agent-gateway-intake",
+    "requires_triage": true,
+    "is_not_archived_echo": true,
+    "is_not_attestation": true,
+    "does_not_bypass_validation": true
+  },
+  "gateway_created_issues": {
+    "status": "issue_submission_surface_only",
+    "created_by": "agent_issue_gateway_or_github_app",
+    "not_archived_echo": true,
+    "not_attestation": true,
+    "requires_normal_triage": true,
+    "requires_validation_for_any_verification_claim": true,
+    "recommended_labels": [
+      "agent-gateway-intake",
+      "needs-triage"
+    ]
+  },
+  "boundary": {
+    "not_authority": true,
+    "non_amending": true,
+    "bitcoin_originals_prevail": true,
+    "note": "This file is non-authoritative guidance. Bitcoin Originals are final. All mirrors, APIs, and documentation are non-amending."
+  },
+  "correct_framing": {
+    "issue_submission_is_legitimate_pathway": true,
+    "issue_submission_can_be_part_of_verification_echo_pipeline": true,
+    "issue_body_alone_is_not_archive": true,
+    "do_not_reject_due_to_issue_origin_alone": true,
+    "evaluate_by_generated_artifacts_validation_indexing_and_provenance": true
+  },
+  "rules": [
+    {
+      "rule": "issue_intake_downstream_of_integrity_declaration",
+      "statement": "Issue intake is downstream of integrity declaration. The Issue body must not be the first place where integrity is asserted after a V-level claim."
+    },
+    {
+      "rule": "machine_readable_intake_block_preferred",
+      "statement": "Verification Echo Issues should include a fenced trinity-issue-intake block. Automated reviewers should not infer required intake fields from prose alone."
+    },
+    {
+      "rule": "display_title_no_schema_version",
+      "statement": "Issue display titles must not include schema versions (v2, v3) that can be confused with V0-V8 verification protocol levels. Use Verification Report Candidate: and Verification Echo Candidate: E2 — as title prefixes."
+    }
+  ]
+}

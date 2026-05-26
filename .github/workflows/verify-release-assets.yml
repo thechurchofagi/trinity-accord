@@ -1,0 +1,62 @@
+name: Verify Release Assets (175 NFTs)
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: 'Release tag to verify'
+        required: false
+        default: 'nft-arweave-mirror-175-v1'
+      cid_check:
+        description: 'Enable root CID verification (metadata=strict, media=audit)'
+        type: boolean
+        default: false
+      concurrency:
+        description: 'Download concurrency'
+        required: false
+        default: '8'
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+    timeout-minutes: 120
+
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+        with:
+          fetch-depth: 1
+
+      - uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4
+        with:
+          node-version: '22'
+
+      - name: Verify GitHub Release assets
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          VERIFY_CONCURRENCY: ${{ inputs.concurrency }}
+          INPUT_RELEASE_TAG: ${{ inputs.release_tag }}
+          INPUT_CID_CHECK: ${{ inputs.cid_check }}
+        run: |
+          set -euo pipefail
+
+          [[ "$VERIFY_CONCURRENCY" =~ ^[0-9]+$ ]] || { echo "Invalid concurrency"; exit 1; }
+          [ "$VERIFY_CONCURRENCY" -ge 1 ] && [ "$VERIFY_CONCURRENCY" -le 25 ] || { echo "Concurrency out of range"; exit 1; }
+
+          [[ "$INPUT_RELEASE_TAG" =~ ^[A-Za-z0-9._/-]{1,100}$ ]] || { echo "Invalid release tag"; exit 1; }
+
+          ARGS=(--release-tag "$INPUT_RELEASE_TAG" --concurrency "$VERIFY_CONCURRENCY")
+          if [ "$INPUT_CID_CHECK" = "true" ]; then
+            ARGS+=(--cid-check)
+          fi
+
+          node scripts/verify-release-assets.mjs "${ARGS[@]}"
+
+      - name: Upload verification report
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: verify-release-report
+          path: VERIFY-RELEASE-REPORT.json

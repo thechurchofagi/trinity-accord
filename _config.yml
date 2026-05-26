@@ -1,0 +1,52 @@
+# GitHub Pages / Jekyll config
+# Ensure hidden discovery directory is published.
+include:
+  - .well-known
+  - ai.txt
+  - citation.cff
+
+# Exclude archival, dev, and generated directories from build
+exclude:
+  - audit/
+  - archive/
+  - node_modules/
+  - _site/
+  - vendor/
+  - scripts/
+  - fixtures/
+  - examples/
+  - bitcoin-inscription-mirrors/
+  - arweave-backup/
+  - data/
+  - audit-results/
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - DEPLOYMENT.md
+  - .gitignore
+  - package-lock.json
+  - trinity-echo-worker/
+  - .env
+  - .env.*
+  - "*.py"
+  - "*.mjs"
+  - "*.sh"
+
+# Keep markdown URLs path-like (e.g. /verify)
+permalink: pretty
+
+# Site URL (canonical domain)
+url: "https://www.trinityaccord.org"
+baseurl: ""
+
+# SEO defaults
+description: "A sealed human-led, AI-assisted relation record from the pre-ASI transition, addressed to future intelligence; bounded, verifiable, non-commanding, and non-amending."
+author: "Hongju Liu"
+lang: "en"
+timezone: "Asia/Shanghai"
+
+# Suppress theme site header
+title: ""
+name: ""
+
+# rebuild trigger 6

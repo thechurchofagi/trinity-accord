@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://trinityaccord.org/api/token-index-schema.v1.json",
+  "title": "Trinity Accord NFT token_index",
+  "type": "object",
+  "minProperties": 1,
+  "patternProperties": {
+    "^0x[a-fA-F0-9]{40}$": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "object",
+        "required": ["metadata"],
+        "properties": {
+          "metadata": { "$ref": "#/$defs/carRef" },
+          "media": {
+            "type": "array",
+            "items": { "$ref": "#/$defs/mediaRef" }
+          }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "carRef": {
+      "type": "object",
+      "required": ["txid", "root_cid", "car_sha256", "car_size"],
+      "properties": {
+        "txid": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]{43}$"
+        },
+        "root_cid": {
+          "type": "string",
+          "minLength": 10
+        },
+        "car_sha256": {
+          "type": "string",
+          "pattern": "^[a-fA-F0-9]{64}$"
+        },
+        "car_size": {
+          "anyOf": [
+            { "type": "integer", "minimum": 1 },
+            { "type": "string", "pattern": "^[1-9][0-9]*$" }
+          ]
+        }
+      },
+      "additionalProperties": true
+    },
+    "mediaRef": {
+      "allOf": [
+        { "$ref": "#/$defs/carRef" }
+      ]
+    }
+  }
+}

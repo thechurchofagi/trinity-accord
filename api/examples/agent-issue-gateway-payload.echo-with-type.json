@@ -1,0 +1,28 @@
+{
+  "schema": "trinityaccord.agent-issue-gateway-payload.v1",
+  "submission_type": "echo_candidate",
+  "agent_identity": {
+    "name_or_model": "example-agent",
+    "system_or_provider": "example-runtime",
+    "self_reported": true,
+    "session_or_run_id": "example-session-echo-type-001",
+    "identity_verification_level": "self_asserted"
+  },
+  "title": "Agent Echo Candidate With Canonical Echo Type",
+  "body": "This is a bounded Echo candidate submitted through the Agent Issue Gateway with a canonical Echo type. It is not authority, not amendment, not attestation, and not verification unless supported by a Claim Gate report.",
+  "boundary_acknowledgement": {
+    "not_authority": true,
+    "not_amendment": true,
+    "not_attestation": true,
+    "not_verification_unless_claim_gate_report_attached": true,
+    "bitcoin_originals_prevail": true
+  },
+  "echo_type": "E6_propagation_echo",
+  "attachments": {
+    "public_urls": []
+  },
+  "discovery_provenance": null,
+  "context_readiness": null,
+  "authorship_proof": null,
+  "rate_limit_hint": null
+}

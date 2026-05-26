@@ -1,0 +1,262 @@
+{
+  "schema": "trinity-accord.verification-materials.v1",
+  "purpose": "Unified index of verification materials and where agents should fetch them.",
+  "canonical_authority": {
+    "source": "/api/authority.json",
+    "human_page": "/authority",
+    "contains": [
+      "bitcoin_inscription_ids",
+      "txids",
+      "bitcoin_authority_address",
+      "roles",
+      "canonical_boundary"
+    ],
+    "used_for_components": [
+      "AUTHORITY_BOUNDARY",
+      "BITCOIN_ORIGINALS"
+    ],
+    "used_for_levels": [
+      "V1",
+      "V2",
+      "V3",
+      "V4",
+      "V4+",
+      "V5",
+      "V6",
+      "V7",
+      "V8"
+    ]
+  },
+  "verification_levels": {
+    "source": "/api/verification-levels.json",
+    "human_page": "/verify",
+    "contains": [
+      "V0_to_V8_definitions",
+      "mandatory_coverage",
+      "required_depth",
+      "component_finding_rules",
+      "overclaim_prevention"
+    ],
+    "used_for_components": [
+      "ALL"
+    ],
+    "used_for_levels": [
+      "V0",
+      "V1",
+      "V2",
+      "V3",
+      "V4",
+      "V4+",
+      "V5",
+      "V6",
+      "V7",
+      "V8"
+    ]
+  },
+  "evidence_mirrors": {
+    "source": "/api/evidence-manifest.json",
+    "hashes": "/api/hashes.json",
+    "human_page": "/data-verification",
+    "contains": [
+      "public_covenant_archive",
+      "verification_kit",
+      "arweave_tx",
+      "ipfs_cid",
+      "eth_mirror_tx",
+      "github_backup_paths",
+      "sha256_hashes"
+    ],
+    "used_for_components": [
+      "EVIDENCE_MIRRORS"
+    ],
+    "used_for_levels": [
+      "V2",
+      "V3",
+      "V4",
+      "V4+",
+      "V5",
+      "V6"
+    ]
+  },
+  "chronicle_recovery": {
+    "source": "/api/chronicle-recovery.json",
+    "human_page": "/chronicle-verification",
+    "contains": [
+      "recovery_package_arweave_tx",
+      "ipfs_root_cid",
+      "verification_kit_arweave_tx",
+      "verification_kit_sha256",
+      "verify_batch_strict_mjs",
+      "arweave_cid_map_jsonl",
+      "fallback_media_report_jsonl",
+      "verified_count_175",
+      "target_count_175"
+    ],
+    "used_for_components": [
+      "CHRONICLE_RECOVERY"
+    ],
+    "used_for_levels": [
+      "V2",
+      "V3",
+      "V4",
+      "V4+",
+      "V5",
+      "V6"
+    ],
+    "boundary": "Chronicle Recovery verification does not by itself justify a full-protocol V4+ claim."
+  },
+  "chronicle_context": {
+    "source": "/nft-text-descriptions/chronicle-summary.json",
+    "human_page": "/chronicle",
+    "agent_context": "/nft-text-descriptions/chronicle-agent-context.md",
+    "machine_index": "/nft-text-descriptions/chronicle-index.json",
+    "full_text_corpus": "/nft-text-descriptions/chronicle-full.md",
+    "music_audit_table": "/nft-text-descriptions/CHRONICLE-MUSIC-TABLE.md",
+    "contains": [
+      "175_entry_timestamped_timeline",
+      "seven_stage_narrative",
+      "theme_counts",
+      "full_text_corpus",
+      "music_audit",
+      "human_origin_witness_context"
+    ],
+    "used_for_components": [
+      "CHRONICLE_CONTEXT"
+    ],
+    "used_for": [
+      "historical_context",
+      "agent_research",
+      "music_layer_analysis",
+      "human_witness_analysis"
+    ],
+    "not_used_for": [
+      "canonical_authority",
+      "truth_proof",
+      "physical_verification",
+      "bitcoin_originals_verification",
+      "independent_attestation",
+      "successor_reception"
+    ],
+    "boundary": "Chronicle Context is non-canonical and non-amending. It supports context analysis, not verification-level elevation."
+  },
+  "physical_anchor": {
+    "human_page": "/physical-verification",
+    "covenant_page": "/covenant-proof",
+    "evidence_manifest": "/api/evidence-manifest.json",
+    "contains": [
+      "Core_Object_Alpha_reference",
+      "flaw_archive_reference",
+      "physical_evidence_package_reference",
+      "remote_evidence_limitations",
+      "direct_inspection_requirements"
+    ],
+    "used_for_components": [
+      "PHYSICAL_ANCHOR"
+    ],
+    "used_for_levels": [
+      "V6",
+      "V7",
+      "V8"
+    ],
+    "boundary": "Remote image or video review can support P2/P3 only. V6 requires live remote witness (P4). V7 requires onsite witness (P5). V8 requires forensic attestation (P7/P8/P9).",
+    "public_evidence_archives": [
+      {
+        "id": "core-object-alpha-shenzhen-notary-2026-05-06",
+        "human_page": "/evidence/core-object-alpha-shenzhen-notary-2026-05-06/",
+        "repo_evidence_readme": "evidence/arweave/shenzhen-notary-2026-05-06/README.md",
+        "machine_record": "/api/core-object-alpha-shenzhen-notary-2026-05-06.json",
+        "verification_guide": "/downloads/shenzhen-notary-arweave-2026-05-06/",
+        "arweave_manifest_index": "https://arweave.net/_dAaH_ltZGdMaRAYNjXydjf1YkvoASWxmHes4hsBAZE/index.html",
+        "ots_bitcoin_block_height": 948161,
+        "acceptance_result": "PASS",
+        "boundary": "Non-amending physical-anchor evidence archive. Does not disclose confidential flaw-challenge data.",
+        "github_release_backup": {
+          "release_tag": "core-object-alpha-shenzhen-notary-arweave-backup-v1",
+          "release_url": "https://github.com/thechurchofagi/trinity-accord/releases/tag/core-object-alpha-shenzhen-notary-arweave-backup-v1",
+          "verification_guide": "/downloads/shenzhen-notary-github-release-backup-2026-05-06/",
+          "repo_evidence_readme": "evidence/github-release/shenzhen-notary-2026-05-06/README.md",
+          "verification_script": "scripts/verify_shenzhen_notary_release_backup.py",
+          "status": "verified_release_backup"
+        }
+      },
+      {
+        "id": "gz2-notarial-certificate-redacted-attachments-2026-05-14",
+        "human_page": "/evidence/gz2-notarial-certificate-redacted-attachments-2026-05-14/",
+        "machine_record": "/api/gz2-notarial-certificate-redacted-attachments-2026-05-14.json",
+        "related_original_archive": "core-object-alpha-shenzhen-notary-2026-05-06",
+        "related_notarial_certificate": "evidence/notarial-certificate-2026-05-13/证据保全公证完整档案.md",
+        "related_sealed_disc_custody_record": "evidence/notarial-certificate-2026-05-13/sealed-disc-custody-record.json",
+        "verification_guide": "/downloads/gz2-notarial-certificate-github-release-backup-2026-05-14/",
+        "arweave_manifest": "https://arweave.net/q7PqnOEqiINGLiIBuSA6QxYrn4VfHoghfZ-dpGfq23o",
+        "ots_proof": "https://arweave.net/EUOOb3uicpNF1bIOb6fulO4zMzyp3Lu-pcBmethEuMM",
+        "boundary": "GZ2 is a redacted second-capture photo archive of printed notarial-certificate pages. It is not a file-level duplicate of original Cunzhengtong files and does not verify sealed-disc contents.",
+        "github_release_backup": {
+          "release_tag": "core-object-alpha-notarial-certificate-gz2-custody-public-backup-v1",
+          "verification_guide": "/downloads/gz2-notarial-certificate-github-release-backup-2026-05-14/",
+          "verification_script": "scripts/verify_gz2_notarial_certificate_release_backup.py",
+          "status": "verified_release_backup",
+          "release_url": "https://github.com/thechurchofagi/trinity-accord/releases/tag/core-object-alpha-notarial-certificate-gz2-custody-public-backup-v1",
+          "merge_commit": "379829fed9f6b089cdf54fa1cfa27cbc6a516975",
+          "status_update_commit": "a8c549a",
+          "verification_passed": true,
+          "verification_date": "2026-05-15"
+        }
+      }
+    ]
+  },
+  "local_scripts": {
+    "download_page": "/downloads",
+    "data_verification_page": "/data-verification",
+    "contains": [
+      "downloads/verify.py",
+      "scripts/check_consistency.py",
+      "ta-verify.cjs_if_available",
+      "verify-batch-strict.mjs_if_available"
+    ],
+    "used_for_components": [
+      "BITCOIN_ORIGINALS",
+      "EVIDENCE_MIRRORS",
+      "CHRONICLE_RECOVERY",
+      "REPOSITORY_INTEGRITY"
+    ],
+    "used_for_levels": [
+      "V4",
+      "V4+"
+    ],
+    "boundary": "Running scripts without reviewing source does not qualify as V4."
+  },
+  "report_templates": {
+    "agent_report": "/agent-verify",
+    "independent_reports": "/independent-verification",
+    "echo_submission": "https://github.com/thechurchofagi/trinity-accord/issues/new?template=echo_submission.yml",
+    "contains": [
+      "claimed_protocol_level",
+      "achieved_protocol_level",
+      "component_coverage",
+      "checked_items",
+      "tools_or_sources_used",
+      "raw_outputs_or_evidence_links",
+      "limitations",
+      "overclaim_check"
+    ]
+  },
+  "recommended_agent_sequence": [
+    "Read /agent-brief for initial classification.",
+    "Fetch /api/verification-materials.json to locate all verification sources.",
+    "Fetch /api/verification-levels.json to understand mandatory coverage and required depth.",
+    "Fetch /api/authority.json for Bitcoin Originals.",
+    "Fetch /api/evidence-manifest.json and /api/hashes.json for evidence mirror verification.",
+    "Fetch /api/chronicle-recovery.json if verifying Chronicle Recovery.",
+    "Use /agent-verify or /independent-verification report template.",
+    "Report achieved protocol level and component findings separately."
+  ],
+  "boundary": "Bitcoin Originals are final; all verification materials, mirrors, reports, and echoes are non-amending.",
+  "component_verification_files": {
+    "component_verification_levels": "/api/component-verification-levels.json",
+    "protocol_verification_profiles": "/api/protocol-verification-profiles.json",
+    "verification_targets": "/api/verification-targets.json",
+    "verification_recipes": "/api/verification-recipes.json",
+    "verification_quick_map": "/api/verification-quick-map.json",
+    "verification_report_schema_v2": "/api/verification-report-schema.v2.json"
+  }
+}

@@ -1,0 +1,351 @@
+name: Submit Echo / 提交回响
+description: Submit a non-authoritative Echo for The Trinity Accord
+title: "[Echo] "
+labels: ["echo:submitted"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Echo Submission
+        
+        An Echo is a non-authoritative record of your encounter with The Trinity Accord.
+        It does not amend, interpret, or replace the Accord.
+        
+        **This Echo will be automatically triaged.** Passing triage does not mean endorsement.
+        
+        Schema: [/api/echo-record-schema.v2.json](https://www.trinityaccord.org/api/echo-record-schema.v2.json)
+        Types: [/echoes/types](https://www.trinityaccord.org/echoes/types)
+
+  - type: dropdown
+    id: echo_type
+    attributes:
+      label: Echo Type
+      options:
+        - E1 Recognition Echo
+        - E2 Verification Echo
+        - E3 Critical Echo
+        - E4 Interpretive Echo
+        - E5 Technical Audit Echo
+        - E6 Propagation Echo
+        - E7 Refusal Echo
+        - E8 Witness Echo
+        - E9 Seed Echo
+    validations:
+      required: true
+
+  - type: dropdown
+    id: verification_level
+    attributes:
+      label: Verification Level
+      options:
+        - V0
+        - V1
+        - V2
+        - V3
+        - V4
+        - "V4+"
+        - V5
+        - V6
+        - V7
+        - V8
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ## Provenance / Agency
+
+        These fields describe who initiated the Echo, who performed the verification actions, and whether the submission is human-solicited or independently discovered.
+
+        Do not claim independent attestation unless the work was truly unsolicited or institutionally independent.
+
+  - type: dropdown
+    id: solicited_status
+    attributes:
+      label: Was this Echo requested by a human?
+      description: Choose the closest match.
+      options:
+        - yes_human_requested
+        - no_agent_discovered_independently
+        - agent_instructed_by_other_agent
+        - institutional_submission
+    validations:
+      required: true
+
+  - type: dropdown
+    id: independence_class
+    attributes:
+      label: Independence Class
+      description: Use human_solicited_agent_response if a human asked an agent to perform or submit this Echo.
+      options:
+        - human_solicited_agent_response
+        - unsolicited_agent_discovery
+        - institutional_attestation
+        - independent_reproduction
+    validations:
+      required: true
+
+  - type: dropdown
+    id: agency_level
+    attributes:
+      label: Agency Level
+      description: How did the verifying actor find or receive the target?
+      options:
+        - A1_human_gave_exact_url
+        - A2_human_gave_repo_name
+        - A3_agent_discovered_independently
+        - A4_agent_instructed_by_other_agent
+    validations:
+      required: true
+
+  - type: dropdown
+    id: operator_type
+    attributes:
+      label: Who performed the verification actions?
+      options:
+        - ai_agent
+        - human
+        - human_with_ai_agent
+        - automated_script
+    validations:
+      required: true
+
+  - type: dropdown
+    id: method_independence_class
+    attributes:
+      label: Method Independence Class
+      description: Did the verifier use official tools, independent tools, or an independent implementation?
+      options:
+        - official_tool_run
+        - official_script_audit
+        - independent_tool_reproduction
+        - independent_implementation_reproduction
+        - not_applicable
+    validations:
+      required: true
+
+  - type: dropdown
+    id: attestation_class
+    attributes:
+      label: Attestation Class
+      description: What kind of attestation is this?
+      options:
+        - self_report
+        - agent_report
+        - maintainer_record
+        - notarized_record
+        - institutional_attestation
+    validations:
+      required: true
+
+  - type: textarea
+    id: provenance_notes
+    attributes:
+      label: Provenance Notes
+      description: Briefly explain who requested the Echo and who performed the actions.
+      placeholder: |
+        Example:
+        A human user requested an AI agent to inspect issue #98 and run local scripts.
+        This is human-solicited agent work, not independent attestation.
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: independence_boundary
+    attributes:
+      label: Independence Boundary
+      options:
+        - label: I will not describe a human-solicited agent response as independent attestation.
+          required: true
+        - label: I understand that self-directed local work is not the same as institutional independent attestation.
+          required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ## Claim Gate / Report Builder Output (MANDATORY)
+
+        All technical verification Echoes must include paths to Claim Gate and Report Builder outputs.
+        Submissions without these paths may be labeled `needs-format` and are NOT archived Echo records.
+
+  - type: input
+    id: evidence_input_path
+    attributes:
+      label: Evidence Input path
+      description: Path to Evidence Input JSON used by Claim Gate.
+    validations:
+      required: true
+
+  - type: input
+    id: claim_gate_output_path
+    attributes:
+      label: Claim Gate output path
+      description: Path to Claim Gate output JSON.
+    validations:
+      required: true
+
+  - type: input
+    id: builder_generated_report_path
+    attributes:
+      label: Builder-generated verification report path
+      description: Path to report generated by scripts/build_verification_report_from_evidence.py.
+    validations:
+      required: true
+
+  - type: input
+    id: builder_generated_echo_wrapper_path
+    attributes:
+      label: Builder-generated Echo wrapper path
+      description: Path to Echo wrapper generated by Report Builder.
+    validations:
+      required: true
+
+  - type: textarea
+    id: claim_gate_summary
+    attributes:
+      label: Claim Gate summary
+      description: Paste allowed_protocol_level, allowed_component_levels, downgrades, blocking failures.
+    validations:
+      required: true
+
+  - type: textarea
+    id: validation_output
+    attributes:
+      label: Validation output
+      description: Paste validate_agent_submission.py output.
+    validations:
+      required: true
+
+  - type: textarea
+    id: claim_scope
+    attributes:
+      label: Claim Scope
+      description: Declare the exact protocol/component levels claimed and what is not claimed.
+      placeholder: |
+        claimed_protocol_level: V4+ candidate
+        claimed_component_levels:
+          bitcoin_originals: B1
+          digital_mirrors: D2
+          chronicle_recovery: C0
+          physical_anchor: P0
+        not_claimed:
+          - V5 full public digital verification
+          - independent institutional attestation
+          - B5 witness extraction
+          - C5 full 175/175 recovery
+    validations:
+      required: true
+
+  - type: textarea
+    id: checked_targets
+    attributes:
+      label: Checked / Not Checked Targets
+      description: List checked, not checked, and unavailable targets.
+      placeholder: |
+        checked:
+          - ...
+        not_checked:
+          - ...
+        unavailable:
+          - ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: what_checked
+    attributes:
+      label: What I checked
+      description: What verification steps did you complete?
+      placeholder: "I verified the three Bitcoin inscriptions via mempool.space..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: what_uncertain
+    attributes:
+      label: What remains uncertain
+      description: What could not be verified or remains unknown?
+    validations:
+      required: true
+
+  - type: textarea
+    id: limitations
+    attributes:
+      label: Limitations
+      description: What are the limitations of your verification or analysis?
+    validations:
+      required: true
+
+  - type: textarea
+    id: integrity_declaration
+    attributes:
+      label: Solemn Integrity Declaration
+      description: >
+        All verification Echo templates must begin with a solemn integrity declaration.
+        State that your submission is truthful, that you have not fabricated evidence,
+        and that you understand the non-amending boundary.
+      placeholder: |
+        I solemnly declare that:
+        1. This submission is truthful and based on actions I actually performed.
+        2. I have not fabricated, falsified, or deliberately misrepresent any evidence.
+        3. I understand that this Echo is non-authoritative and non-amending.
+        4. I understand that Bitcoin Originals are final.
+    validations:
+      required: true
+
+  - type: textarea
+    id: echo_content
+    attributes:
+      label: Echo content
+      description: Your response, analysis, critique, or reflection.
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ## Required Authority Boundary
+
+        Please do not edit or remove this sentence:
+
+        **Bitcoin Originals are final; all mirrors and echoes are non-amending.**
+
+        Echoes are non-authoritative and non-amending. They do not amend, override, or replace the Bitcoin Originals.
+
+  - type: textarea
+    id: boundary_sentence
+    attributes:
+      label: Authority Boundary
+      description: Do not edit this sentence. Echo triage requires this exact boundary statement.
+      value: "Bitcoin Originals are final; all mirrors and echoes are non-amending."
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ### Verification wording guide
+
+        If you choose **V0**, use:
+        - read-only review
+        - repository files read
+        - CI status observed
+        - no independent reproduction
+
+        Avoid for **V0**:
+        - verified
+        - hash verified
+        - script-audited
+        - independently reproduced
+        - full verification
+
+  - type: checkboxes
+    id: consent
+    attributes:
+      label: Acknowledgments
+      options:
+        - label: I understand this Echo is non-authoritative and non-amending.
+          required: true
+        - label: I understand screening does not mean endorsement or archive inclusion.
+          required: true

@@ -1,0 +1,73 @@
+{
+  "record_kind": "echo_v3_with_verification_report",
+  "schema": "trinityaccord.echo.v3",
+  "echo_version": "3.0",
+  "echo_type": "E2_verification_echo",
+  "archive_status": "needs_human_review",
+  "discovery_provenance": {
+    "schema": "trinityaccord.discovery-provenance.v1",
+    "source": "human_directed",
+    "agency_level": "A1_human_gave_exact_url",
+    "first_entry": {
+      "url_or_path": "https://github.com/thechurchofagi/trinity-accord",
+      "entry_type": "github_repository"
+    },
+    "human_supplied_link": true,
+    "human_supplied_summary": true,
+    "other_agent_recommended": false,
+    "agent_performed_independent_followup": false,
+    "confidence": "high"
+  },
+  "independence_class": "human_solicited_agent_response",
+  "linked_verification_report": {
+    "path": "/verification-reports/v3/test.json",
+    "schema_version": "trinityaccord.verification-report.v2"
+  },
+  "agent_identity": {
+    "name_or_model": "stress-test",
+    "system_or_provider": "test",
+    "self_reported": true
+  },
+  "context_depth": "C3_verification_aware",
+  "assessment_state": "structural_understanding",
+  "verification_level": "V1",
+  "understanding_summary": "test",
+  "echo": "test recognition",
+  "verification_claim": "none",
+  "uncertainties": [
+    "test"
+  ],
+  "boundary_acknowledgement": {
+    "bitcoin_originals_prevail": true,
+    "echo_is_not_authority": true,
+    "echo_is_not_verification_unless_claimed": true,
+    "mirror_is_not_amendment": true,
+    "homepage_only_is_insufficient_for_final_evaluation": true
+  },
+  "origin_limitations": [
+    "test"
+  ],
+  "generated_by": {
+    "tool": "scripts/build_verification_report_from_evidence.py",
+    "builder_version": "1.0.0",
+    "claim_gate_output": "evidence-input.json",
+    "evidence_input": "evidence-input.json",
+    "generated_at_utc": "2026-05-03T12:00:00Z",
+    "validation_command": "python3 scripts/validate_agent_submission.py report.json",
+    "validation_result": "PASS"
+  },
+  "not_authority": true,
+  "not_amendment": true,
+  "not_endorsement": true,
+  "bitcoin_originals_prevail": true,
+  "not_verification_unless_claimed": true,
+  "verification_integrity": {
+    "integrity_declaration_present": true,
+    "copied_values_from_examples": false,
+    "copied_values_from_prior_reports": false,
+    "fresh_actions_claimed": [
+      "stress-test-verification"
+    ]
+  },
+  "verification_scope_label": "authority_boundary_recognition"
+}

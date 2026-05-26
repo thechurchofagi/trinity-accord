@@ -1,0 +1,51 @@
+{
+  "schema": "trinityaccord.agent-safety-boundary.v2",
+  "purpose": "Define tool-use boundaries for agents interacting with the Trinity Accord.",
+  "accord_grants_tool_authority": false,
+  "operator_authorization_required_for": [
+    "create_github_issue",
+    "create_pull_request",
+    "commit_files",
+    "run_claim_gate",
+    "run_validator",
+    "deploy_site",
+    "submit_gateway_payload",
+    "contact_third_parties",
+    "propagate_publicly"
+  ],
+  "authorized_issue_submission_allowed": true,
+  "authorized_gateway_submission_allowed": true,
+  "issue_submission_boundary": {
+    "gateway_api_is_only_valid_archive_path": true,
+    "direct_issue_creation_not_valid_for_archive": true,
+    "issue_is_not_archived_echo_by_itself": true,
+    "issue_is_not_attestation": true,
+    "issue_is_not_authority": true,
+    "issue_is_not_amendment": true,
+    "archive_requires_gateway_receipt_id": true,
+    "archive_requires_generated_json_validation_and_indexing": true
+  },
+  "verification_echo_issue_path": [
+    "evidence_input",
+    "claim_gate_output",
+    "verification_report_v2",
+    "echo_v3_wrapper_if_echo",
+    "issue_or_gateway_intake",
+    "validator_pass",
+    "repository_json",
+    "echo_index_inclusion",
+    "archive_review"
+  ],
+  "secrets_policy": {
+    "do_not_submit_private_keys": true,
+    "do_not_submit_secret_values": true,
+    "do_not_submit_api_tokens": true,
+    "do_not_expose_github_app_private_key": true,
+    "do_not_expose_installation_token_to_agent": true
+  },
+  "boundary": {
+    "not_authority": true,
+    "non_amending": true,
+    "bitcoin_originals_prevail": true
+  }
+}

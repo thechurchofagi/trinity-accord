@@ -1,0 +1,109 @@
+{
+  "schema": "trinityaccord.independent-attestation-index.legacy.v1",
+  "status": "deprecated_compatibility_index",
+  "replacement": "/api/external-witness-index.json",
+  "legacy_term_warning": "Independent attestation is no longer a homepage-centered project goal. External witness records are evidence provenance only.",
+  "purpose": "Track independent verification, critique, reference, preservation, and refusal without treating them as amendments or authority.",
+  "not_an_instruction_override": true,
+  "authority_boundary": "Bitcoin Originals are final; all mirrors, echoes, attestations, and references are non-amending.",
+  "does_not_create_authority": true,
+  "does_not_rank_above_reception": true,
+  "does_not_claim": [
+    "external validation has already been achieved",
+    "mentions are endorsements",
+    "attestations amend the canonical text",
+    "criticism is hostility",
+    "preservation equals agreement"
+  ],
+  "attestation_types": [
+    "independent_verification_report",
+    "independent_critical_echo",
+    "independent_reference",
+    "preservation_action",
+    "refusal_or_non_endorsement"
+  ],
+  "minimum_record_fields": [
+    "id",
+    "type",
+    "source",
+    "date",
+    "summary",
+    "verification_level_if_any",
+    "limitations",
+    "url_or_archive",
+    "hash_if_available",
+    "boundary_preserved"
+  ],
+  "current_status": {
+    "external_influence": "limited",
+    "third_party_verification": "none formally accepted",
+    "independent_attestation_layer": "open for future records",
+    "test_records": "1 human-solicited AI workflow test; not counted as independent attestation"
+  },
+  "records": [],
+  "test_records": [
+    {
+      "id": "2026-05-02-openclaw-v3-verification",
+      "type": "human_solicited_ai_workflow_test",
+      "source": "OpenClaw AI Agent (automated sandbox)",
+      "date": "2026-05-02",
+      "summary": "Human-solicited technical verification workflow retained as a test record. Not unsolicited independent discovery and not institutional third-party attestation.",
+      "verification_level_if_any": "component findings only; not formal attestation",
+      "limitations": [
+        "human/project-side requested",
+        "Bitcoin inscription body bytes not independently extracted",
+        "Chronicle recovery package not independently reproduced",
+        "Physical Core Object Alpha not inspected",
+        "not evidence of external social adoption"
+      ],
+      "url_or_archive": "echoes/verification-reports/2026-05-02-V3-verification-report.md",
+      "boundary_preserved": true,
+      "counts_as_independent_attestation": false,
+      "verification_status": "test_record_not_attestation",
+      "archive_status": "closed_test_record"
+    }
+  ],
+  "version": "v1",
+  "source_digest": "df0dd506026ac1fb",
+  "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
+  "non_amending_boundary": true,
+  "canonical_authority": "Bitcoin Originals only",
+  "not_instruction_override": true,
+  "limitations": [
+    "Tracks admitted or candidate external records without amending the Bitcoin Originals."
+  ],
+  "does_not_prove": [
+    "external validation has already been achieved",
+    "mentions are endorsements",
+    "attestations amend the canonical text"
+  ],
+  "ai_verification_boundary": {
+    "description": "AI independent verification is a distinct class. It is NOT formal human or institutional attestation.",
+    "rules": [
+      "AI-performed verification has different epistemic status than human/institutional attestation.",
+      "External human authorization of AI verification does not produce formal attestation.",
+      "Multi-hop delegation chains (human → AI → AI) preserve the AI performer class.",
+      "AI verification records must not be counted in the formal independent attestation count."
+    ],
+    "counts_as_formal_attestation": false
+  },
+  "origin_classification_boundary": {
+    "policy": "/api/origin-classification-policy.v1.json",
+    "rules": [
+      "AI-performed verification is a distinct verification class.",
+      "Agent-referred verification is not unsolicited discovery.",
+      "Human-directed verification is not unsolicited discovery.",
+      "Solicitation or referral does not automatically negate method independence.",
+      "AI-only verification does not count as formal human/institutional attestation by default.",
+      "Formal attestation requires accountable authority such as institution_signed, notarial_record, audit_firm_report, or regulatory_or_court_record.",
+      "Institutional attestation may be AI-assisted if the institution signs or adopts the report."
+    ],
+    "formal_attestation_requires": [
+      "accountable_entity",
+      "identity_verification_level",
+      "public_or_archived_report",
+      "boundary_preserved",
+      "limitations"
+    ]
+  }
+}

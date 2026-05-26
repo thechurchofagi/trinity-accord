@@ -1,0 +1,58 @@
+# Trinity Accord sensitive-path ownership
+#
+# These paths affect public trust, verification levels, formal attestation,
+# homepage status, trust roots, evidence roots, or privileged automation.
+# Changes should receive explicit maintainer review before merge.
+
+# Workflow / automation authority
+.github/workflows/ @thechurchofagi
+CODEOWNERS @thechurchofagi
+
+# Public homepage / public status
+index.md @thechurchofagi
+
+# Formal attestation / public API trust surfaces
+api/ @thechurchofagi
+api/independent-attestation-index.json @thechurchofagi
+api/independent-attestation-record-schema.v1.json @thechurchofagi
+
+# Core verification / generation scripts
+scripts/claim_gate.py @thechurchofagi
+scripts/build_verification_report_from_evidence.py @thechurchofagi
+scripts/validate_agent_submission.py @thechurchofagi
+scripts/validate_independent_attestation_index.py @thechurchofagi
+scripts/generate_public_home_status.py @thechurchofagi
+scripts/archive_echo_issue.py @thechurchofagi
+scripts/triage_echo_issue.py @thechurchofagi
+
+# Full evidence / trust-root verifiers
+scripts/verify-full-evidence-chain.mjs @thechurchofagi
+scripts/verify-signed-manifest-coverage.mjs @thechurchofagi
+scripts/verify-ots-time-anchor.mjs @thechurchofagi
+scripts/verify-onchain-tokenuri.mjs @thechurchofagi
+scripts/verify-dag-and-signed-cids.mjs @thechurchofagi
+scripts/verify-release-assets.mjs @thechurchofagi
+scripts/download-nft-cars.mjs @thechurchofagi
+
+# Trust-root validators
+scripts/validate_full_evidence_chain_audit.py @thechurchofagi
+scripts/validate_verify_release_report.py @thechurchofagi
+scripts/validate_token_index.py @thechurchofagi
+scripts/validate_authority_manifest.py @thechurchofagi
+scripts/validate_btc_signature_manifest.py @thechurchofagi
+scripts/validate_eth_witness_manifest.py @thechurchofagi
+scripts/validate_trust_root_policy.py @thechurchofagi
+
+# Trust-root artifacts
+archive/authority-manifest/ @thechurchofagi
+archive/btc-signature/ @thechurchofagi
+archive/eth-witness/ @thechurchofagi
+archive/evidence/digest-manifest.json @thechurchofagi
+archive/evidence/digest-manifest.csv @thechurchofagi
+archive/evidence/verify-report.json @thechurchofagi
+archive/evidence/ots-proofs/ @thechurchofagi
+archive/evidence/nft-recovery-package/recovery-package.bin @thechurchofagi
+archive/evidence/nft-recovery-package/recovery-package.sha256 @thechurchofagi
+
+# Trust-root governance policy
+archive/trust-root-policy.json @thechurchofagi

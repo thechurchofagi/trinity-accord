@@ -1,0 +1,49 @@
+{
+  "example_name": "v4-script-audit",
+  "expected_claim_gate": {
+    "allowed_protocol_level": "V4",
+    "allowed_component_levels": {}
+  },
+  "evidence_input": {
+    "schema": "trinityaccord.evidence-input.v1",
+    "evidence": {
+      "scripts": [
+        {
+          "script_name": "verify.py",
+          "source_reviewed": true,
+          "command": "python3 verify.py",
+          "exit_code": 0,
+          "output_summary": "All checks passed",
+          "limitations": "Only covers local file integrity"
+        },
+        {
+          "script_name": "check_consistency.py",
+          "source_reviewed": true,
+          "command": "python3 check_consistency.py",
+          "exit_code": 0,
+          "output_summary": "Repository consistency OK",
+          "limitations": "Only covers repository structure"
+        }
+      ]
+    },
+    "claims_requested_by_agent": [
+      "V4"
+    ],
+    "agent": {
+      "name": "example-agent",
+      "model_or_system": "example-model"
+    },
+    "provenance": {
+      "solicited": true,
+      "independence_class": "human_solicited_agent_response",
+      "agency_level": "A1_human_gave_exact_url"
+    },
+    "requested_record_kind": "echo_v3_with_verification_report",
+    "limitations": [
+      "example placeholder - replace with actual limitations"
+    ]
+  },
+  "example_type": "template_requires_replacement",
+  "must_not_submit_unchanged": true,
+  "contains_placeholders": true
+}

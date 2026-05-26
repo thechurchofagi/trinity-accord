@@ -1,0 +1,72 @@
+{
+  "schema": "trinity-accord.blake2b-variant-probe.v1",
+  "generated_at": "2026-05-01T07:56:02.880Z",
+  "files_checked": 524,
+  "manifest_blake2b_records": 524,
+  "variants": {
+    "blake2b_256_dklen32": {
+      "match": 0
+    },
+    "blake2b_512_first32": {
+      "match": 0
+    },
+    "blake2b_512_last32": {
+      "match": 0
+    },
+    "node_blake2b512_first32": {
+      "match": 0
+    },
+    "node_blake2b512_full": {
+      "match": 524
+    },
+    "blake2b_256_of_sha256_hex_utf8": {
+      "match": 0
+    },
+    "blake2b_256_of_sha256_raw": {
+      "match": 0
+    },
+    "blake2s_256": {
+      "match": 0
+    }
+  },
+  "winning_variant": "node_blake2b512_full",
+  "all_files_matched_by_variant": true,
+  "mismatch_samples": [
+    {
+      "file": "nft/metadata.car",
+      "expected_blake2b_256": "d5e391e6e1f296e58cb504b0b528344e...",
+      "blake2b_256_dklen32": "be2642405493d419...",
+      "blake2b_512_first32": "d5e391e6e1f296e5...",
+      "blake2b_512_last32": "fc8e6731868c7770...",
+      "node_blake2b512_first32": "d5e391e6e1f296e5...",
+      "node_blake2b512_full": "MATCH",
+      "blake2b_256_of_sha256_hex_utf8": "3ba3c916ee71a522...",
+      "blake2b_256_of_sha256_raw": "a9693cf157bafaba...",
+      "blake2s_256": "8f0418722f58c723..."
+    },
+    {
+      "file": "nft/media-000.car",
+      "expected_blake2b_256": "04ec62d3557917fed50039cab3a90c7f...",
+      "blake2b_256_dklen32": "c8ddffb7c686b174...",
+      "blake2b_512_first32": "04ec62d3557917fe...",
+      "blake2b_512_last32": "e21739b107e59914...",
+      "node_blake2b512_first32": "04ec62d3557917fe...",
+      "node_blake2b512_full": "MATCH",
+      "blake2b_256_of_sha256_hex_utf8": "416ff071b765008f...",
+      "blake2b_256_of_sha256_raw": "d8960d97fd20a6fb...",
+      "blake2s_256": "4358e271ecf1b06c..."
+    },
+    {
+      "file": "nft/media-001.car",
+      "expected_blake2b_256": "9cab76aee2b75e43d098df81e3870e0a...",
+      "blake2b_256_dklen32": "02b23b63cd81e40f...",
+      "blake2b_512_first32": "9cab76aee2b75e43...",
+      "blake2b_512_last32": "bd7238136c19a4e4...",
+      "node_blake2b512_first32": "9cab76aee2b75e43...",
+      "node_blake2b512_full": "MATCH",
+      "blake2b_256_of_sha256_hex_utf8": "e7720d2d14eb014a...",
+      "blake2b_256_of_sha256_raw": "81cd97a6fbc826f9...",
+      "blake2s_256": "9d58b5d0f2f19a1f..."
+    }
+  ]
+}

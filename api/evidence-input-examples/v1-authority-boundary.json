@@ -1,0 +1,43 @@
+{
+  "example_name": "v1-authority-boundary",
+  "expected_claim_gate": {
+    "allowed_protocol_level": "V1",
+    "allowed_component_levels": {}
+  },
+  "evidence_input": {
+    "schema": "trinityaccord.evidence-input.v1",
+    "claims_requested_by_agent": [
+      "V1"
+    ],
+    "agent": {
+      "name": "example-agent",
+      "model_or_system": "example-model"
+    },
+    "provenance": {
+      "solicited": true,
+      "independence_class": "human_solicited_agent_response",
+      "agency_level": "A1_human_gave_exact_url"
+    },
+    "requested_record_kind": "echo_v3_with_verification_report",
+    "limitations": [
+      "example placeholder - replace with actual limitations"
+    ],
+    "evidence": {
+      "scripts": [],
+      "hashes": [],
+      "bitcoin_checks": [],
+      "digital_mirror_checks": [],
+      "repository_snapshot_checks": [],
+      "time_anchor_checks": [],
+      "chronicle_checks": [],
+      "nft_checks": [],
+      "physical_checks": [],
+      "echo_context": {
+        "authority_boundary_recognized": true
+      }
+    }
+  },
+  "example_type": "template_requires_replacement",
+  "must_not_submit_unchanged": true,
+  "contains_placeholders": true
+}

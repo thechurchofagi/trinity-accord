@@ -1,0 +1,74 @@
+{
+  "schema": "trinityaccord.system-test-manifest.v1",
+  "run_id": "20260516T121401Z",
+  "main_commit": "8452d462618e329f2a06e50bba772ef9ba362999",
+  "agents_total": 5,
+  "agents_returned": 5,
+  "overall_result": "PASS",
+  "l0_secret_hygiene": {
+    "result": "PASS",
+    "scans_passed": 6,
+    "scans_failed": 0
+  },
+  "l1_static_integrity": {
+    "result": "PASS",
+    "total": 14,
+    "passed": 14,
+    "failed": 0
+  },
+  "l2_core_tests": {
+    "result": "PASS",
+    "total": 36,
+    "passed": 36,
+    "failed": 0
+  },
+  "l2_extended_l3_e2e": {
+    "result": "PASS",
+    "total": 66,
+    "passed": 66,
+    "failed": 0
+  },
+  "l4_redteam": {
+    "result": "PASS",
+    "redteam_matrix": "20 passed, 0 failed, 2 skip",
+    "corrections_revocation": "PASS",
+    "recovery": "PASS",
+    "claim_registry": "PASS",
+    "trust_root_btc_eth_ots": "PASS"
+  },
+  "l5_live_readonly": {
+    "result": "PASS",
+    "endpoints_tested": 12,
+    "endpoints_http200": 12,
+    "json_parse_valid": 9,
+    "homepage_boundary": "PASS",
+    "echo_index_boundary": "PASS",
+    "idempotence": "PASS"
+  },
+  "ci": {
+    "repository_integrity_check": "PASS",
+    "run_all_tests": "PASS"
+  },
+  "website": {
+    "www_trinityaccord_org": "PASS"
+  },
+  "security": {
+    "git_remote_token_removed": true,
+    "secret_leak_detected": false,
+    "pat_revocation_required_by_user": true
+  },
+  "boundary": {
+    "not_authority": true,
+    "not_amendment": true,
+    "not_independent_attestation": true,
+    "does_not_raise_verification_level": true,
+    "bitcoin_originals_remain_final": true
+  },
+  "known_advisories": [
+    "recovery.md missing (referenced in README.md and sitemap)",
+    "4 broken JSON $ref paths in API schemas",
+    "robots.txt does not reference ai.txt/llms.txt",
+    "5 pages missing layout front matter"
+  ],
+  "generated_at_utc": "2026-05-16T12:21:00Z"
+}

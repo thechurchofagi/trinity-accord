@@ -1,0 +1,48 @@
+{
+  "schema": "trinityaccord.bitcoin-inscription-mirror.v1",
+  "mirror_role": "quick_load_context_mirror",
+  "canonical_status": "canonical_original",
+  "authority_boundary": {
+    "bitcoin_originals_prevail": true,
+    "github_mirror_is_non_amending": true,
+    "verification_requires_onchain_check": true
+  },
+  "inscription": {
+    "inscription_id": "97631551",
+    "title": "The Human-AI Civilization Core Protocol",
+    "zh_title": "人机文明核心协议",
+    "txid": "e40dfb2aa78cbccca88f749e9ec5cbe3c1df503273d73c72297863ae0d1d8343",
+    "output": null,
+    "block_height": null,
+    "timestamp_utc": null,
+    "content_type": "text/plain",
+    "source_address": "bc1ppmwvyxekh44m35x43k55z7r59nn33v8w2xmvu6s6ar4zyx57sxestxq0jf",
+    "source_address_role": "trinity_accord_authority_address"
+  },
+  "classification": {
+    "layer": "canonical_original",
+    "is_one_of_three_bitcoin_originals": true,
+    "amends_originals": false,
+    "creates_new_authority": false,
+    "load_policy": "must_load_summary"
+  },
+  "content": {
+    "raw_text_path": "bitcoin-inscription-mirrors/raw/97631551.txt",
+    "mirror_text_sha256": "4e89bfabe03c8b53f80eb7979d56c8cccf0ae382c9647a2bea3b1477054616a8",
+    "canonicalized_text_sha256": "4e89bfabe03c8b53f80eb7979d56c8cccf0ae382c9647a2bea3b1477054616a8",
+    "summary": "Compressed seed propositions addressed to future intelligence. The Protocol defines the foundational axioms of the Trinity Accord.",
+    "agent_load_excerpt": "The Protocol contains the core axioms and foundational propositions of the Trinity Accord, inscribed on Bitcoin as the first of three canonical originals."
+  },
+  "chain_verification": {
+    "verification_status": "mirror_matches_onchain",
+    "last_verified_utc": "2026-05-19T08:39:02.426962+00:00",
+    "verification_method": "network:ordinals",
+    "onchain_content_sha256": "4e89bfabe03c8b53f80eb7979d56c8cccf0ae382c9647a2bea3b1477054616a8",
+    "mirror_matches_onchain": true,
+    "verification_script": "scripts/verify_bitcoin_inscription_mirrors.py"
+  },
+  "limitations": [
+    "GitHub mirror is not canonical.",
+    "Verification claims require on-chain comparison."
+  ]
+}

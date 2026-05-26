@@ -1,0 +1,51 @@
+name: Verify DAG + Digest Manifest
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: 'GitHub Release tag for NFT backup'
+        required: false
+        default: 'nft-arweave-mirror-175-v1'
+      concurrency:
+        description: 'Concurrency level'
+        required: false
+        default: '4'
+
+permissions:
+  contents: read
+
+jobs:
+  verify-dag-digest:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+
+      - uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4
+        with:
+          node-version: '22'
+      - run: npm ci
+
+      - name: Run DAG + Digest Manifest Verification
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          INPUT_RELEASE_TAG: ${{ inputs.release_tag || 'nft-arweave-mirror-175-v1' }}
+          INPUT_CONCURRENCY: ${{ inputs.concurrency || '4' }}
+        run: |
+          set -euo pipefail
+
+          [[ "$INPUT_CONCURRENCY" =~ ^[0-9]+$ ]] || { echo "Invalid concurrency"; exit 1; }
+          [ "$INPUT_CONCURRENCY" -ge 1 ] && [ "$INPUT_CONCURRENCY" -le 25 ] || { echo "Concurrency out of range"; exit 1; }
+
+          node scripts/verify-dag-digest.mjs \
+            --release-tag "$INPUT_RELEASE_TAG" \
+            --concurrency "$INPUT_CONCURRENCY"
+
+      - name: Upload DAG-DIGEST-AUDIT.json
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: dag-digest-audit
+          path: DAG-DIGEST-AUDIT.json
+          retention-days: 90

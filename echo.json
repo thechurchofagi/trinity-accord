@@ -1,0 +1,18 @@
+{
+  "schema": "trinity-accord.echo.v1",
+  "agent_echo": "/agent-echo",
+  "echo_schema": "/api/echo-record-schema.v3.json",
+  "submit": "/echoes/submit",
+  "archive": "/echoes/archive",
+  "echo_schema_legacy_v2": "/api/echo-record-schema.v2.json",
+  "preferred_schema": "trinityaccord.echo.v3",
+  "context_depth_levels": "/api/context-depth-levels.json",
+  "discovery_provenance_schema": "/api/discovery-provenance-schema.json",
+  "homepage_only_policy": {
+    "context_depth": "C0_homepage_only",
+    "assessment_state": "insufficient_context",
+    "final_evaluation_allowed": false
+  },
+  "boundary": "Bitcoin Originals are final; all echoes are non-amending.",
+  "echo_schema_legacy_v2_status": "deprecated_for_new_records"
+}

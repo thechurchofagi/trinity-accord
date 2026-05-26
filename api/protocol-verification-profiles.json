@@ -1,0 +1,485 @@
+{
+  "schema": "trinityaccord.protocol-verification-profiles.v1",
+  "status": "non_authoritative_claim_compatibility_rules",
+  "authority_boundary": {
+    "profiles_do_not_amend_bitcoin_originals": true,
+    "profiles_validate_claim_compatibility_not_truth": true
+  },
+  "profiles": [
+    {
+      "level": "V0",
+      "name": "Read only",
+      "hard_gates": [
+        "state materials read"
+      ],
+      "minimum_component_requirements": {},
+      "recommended_component_requirements": {},
+      "conditional_requirements": [],
+      "forbidden_claims": [
+        "verified",
+        "chain verified",
+        "hash verified"
+      ],
+      "underreported_if_missing": []
+    },
+    {
+      "level": "V1",
+      "name": "Authority boundary recognition",
+      "hard_gates": [
+        "state three Bitcoin Originals prevail",
+        "state all mirrors are non-amending",
+        "state Bitcoin gives version authority, not truth authority"
+      ],
+      "minimum_component_requirements": {
+        "bitcoin_originals": "B0"
+      },
+      "recommended_component_requirements": {
+        "echo_attestation": "E0"
+      },
+      "conditional_requirements": [],
+      "forbidden_claims": [
+        "content verified",
+        "truth verified"
+      ],
+      "underreported_if_missing": [
+        "authority boundary statement"
+      ]
+    },
+    {
+      "level": "V2",
+      "name": "Reference verification",
+      "hard_gates": [
+        "check at least one reference path beyond ordinary page reading",
+        "report source, access path, date, and limitation"
+      ],
+      "minimum_component_requirements": {
+        "bitcoin_originals": "B1"
+      },
+      "recommended_component_requirements": {
+        "bitcoin_originals": "B2",
+        "digital_mirrors": "D1",
+        "chronicle_recovery": "C1",
+        "time_anchors": "T2"
+      },
+      "conditional_requirements": [],
+      "forbidden_claims": [
+        "hash verified unless hash computed",
+        "full verification"
+      ],
+      "underreported_if_missing": [
+        "source checked",
+        "access path",
+        "limitations"
+      ],
+      "minimal_claim_note": "A B1 external reference check may allow V2-minimal if limitations are reported. It must not be described as V2-strong or full reference coverage.",
+      "low_agent_summary": "Check one Bitcoin Original on an external explorer for minimal V2, or multiple reference paths for strong V2.",
+      "evidence_input_minimum_fields": [
+        "evidence.bitcoin_checks[0].source_type"
+      ],
+      "copy_paste_claim_label": "V2-minimal (Bitcoin Originals B1 only)",
+      "scope_label_required": true,
+      "bare_label_policy": "New reports must write V2-minimal or V2-strong, not bare V2.",
+      "if_missing_downgrade_to": "V1 if no explorer check performed",
+      "claim_scopes": {
+        "minimal": {
+          "required": [
+            "Authority boundary recognized",
+            "At least one reference path beyond ordinary page reading",
+            "Usually Bitcoin Originals B1"
+          ],
+          "must_not_claim": [
+            "full reference coverage",
+            "hash verification"
+          ],
+          "claim_label": "V2-minimal (Bitcoin Originals B1 only)"
+        },
+        "strong_reference_coverage": {
+          "required": [
+            "Bitcoin Originals B2",
+            "Digital Mirrors D1",
+            "Chronicle Recovery C1",
+            "Time Anchors T2"
+          ]
+        }
+      }
+    },
+    {
+      "level": "V3",
+      "name": "Hash verification",
+      "hard_gates": [
+        "compute at least one declared hash locally",
+        "compare expected hash and computed hash",
+        "report command, artifact, expected hash, computed hash"
+      ],
+      "minimum_component_requirements_any": [
+        {
+          "digital_mirrors": "D2"
+        },
+        {
+          "chronicle_recovery": "C2"
+        },
+        {
+          "physical_anchor": "P1"
+        }
+      ],
+      "recommended_component_requirements": {
+        "digital_mirrors": "D2",
+        "chronicle_recovery": "C2",
+        "physical_anchor": "P1"
+      },
+      "conditional_requirements": [
+        {
+          "if": "hashes_computed exists",
+          "then": "every hash entry must have expected_hash_source and expected_hash_authority_class"
+        },
+        {
+          "if": "D2 component claimed",
+          "then": "expected_hash_authority_class must be canonical_manifest_hash or repository_manifest_hash"
+        }
+      ],
+      "forbidden_claims": [
+        "direct Arweave verification unless Arweave data was extracted",
+        "Ethereum witness verified unless ETH transaction/input checked",
+        "full public digital verification",
+        "V4 script audit achieved",
+        "V4+ script audit",
+        "V3_single_artifact_check when multiple artifacts checked"
+      ],
+      "underreported_if_missing": [
+        "hash command",
+        "expected hash",
+        "computed hash"
+      ],
+      "minimal_claim_note": "One valid declared hash may allow V3-minimal if expected_hash_source and expected_hash_authority_class are present. It must not be described as V3-strong or full public digital verification.",
+      "low_agent_summary": "Download one artifact, compute SHA-256, compare with declared hash for minimal V3.",
+      "evidence_input_minimum_fields": [
+        "evidence.hashes[0].match"
+      ],
+      "copy_paste_claim_label": "V3-minimal (one valid declared hash computed)",
+      "scope_label_required": true,
+      "bare_label_policy": "New reports must write V3-minimal or V3-strong, not bare V3.",
+      "if_missing_downgrade_to": "V2 if no hash computed",
+      "hash_artifact_class_to_component_level": {
+        "canonical_mirror": {
+          "component": "digital_mirrors",
+          "level": "D2",
+          "claim_boundary": "canonical mirror hash match only"
+        },
+        "repository_snapshot": {
+          "component": "digital_mirrors",
+          "level": "D2",
+          "scope_class_required": "repository_snapshot_integrity",
+          "claim_boundary": "repository snapshot integrity only; not canonical mirror verification"
+        },
+        "chronicle_recovery_package": {
+          "component": "chronicle_recovery",
+          "level": "C2",
+          "claim_boundary": "recovery package hash match only"
+        },
+        "physical_evidence_package": {
+          "component": "physical_anchor",
+          "level": "P1",
+          "claim_boundary": "public evidence package hash only; no physical object verification"
+        }
+      },
+      "claim_scopes": {
+        "minimal": {
+          "required": [
+            "At least one valid declared hash computed locally",
+            "Expected hash source and authority class recorded"
+          ],
+          "must_not_claim": [
+            "full public digital verification"
+          ],
+          "claim_label": "V3-minimal (one valid declared hash computed)"
+        },
+        "strong_hash_coverage": {
+          "required": [
+            "Multiple hashes across Evidence Mirrors and/or Chronicle Recovery"
+          ]
+        }
+      }
+    },
+    {
+      "level": "V4",
+      "name": "Script-audited local verification",
+      "hard_gates": [
+        "official verification script source reviewed",
+        "script executed locally",
+        "command reported",
+        "environment reported",
+        "exit code reported",
+        "output reported",
+        "script scope and non-scope stated"
+      ],
+      "minimum_component_requirements": {
+        "bitcoin_originals": "B0",
+        "digital_mirrors": "D0",
+        "chronicle_recovery": "C0",
+        "physical_anchor": "P0"
+      },
+      "recommended_component_requirements": {
+        "bitcoin_originals": "B1",
+        "digital_mirrors": "D2",
+        "chronicle_recovery": "C2",
+        "physical_anchor": "P1",
+        "echo_attestation": "E1"
+      },
+      "conditional_requirements": [],
+      "forbidden_claims": [
+        "independent reproduction",
+        "full public digital verification",
+        "direct chain verification unless separately performed",
+        "physical inspection"
+      ],
+      "underreported_if_missing": [
+        "script source reviewed",
+        "script output",
+        "script limitations",
+        "component findings"
+      ],
+      "low_agent_summary": "Read script source code, then run official verification scripts locally.",
+      "evidence_input_minimum_fields": [
+        "evidence.scripts[0].source_reviewed",
+        "evidence.scripts[0].exit_code"
+      ],
+      "copy_paste_claim_label": "V4 (script-audited verification)",
+      "if_missing_downgrade_to": "V3 if scripts not reviewed"
+    },
+    {
+      "level": "V4+",
+      "name": "Independent digital reproduction",
+      "hard_gates": [
+        "use independent tool or independent implementation",
+        "reproduce at least one official verification result",
+        "compare against official script or manifest"
+      ],
+      "minimum_component_requirements": {
+        "digital_mirrors": "D2"
+      },
+      "recommended_component_requirements": {
+        "bitcoin_originals": "B2",
+        "digital_mirrors": "D4",
+        "chronicle_recovery": "C2",
+        "time_anchors": "T3"
+      },
+      "conditional_requirements": [],
+      "forbidden_claims": [
+        "full public digital verification unless all public components covered",
+        "physical verification"
+      ],
+      "underreported_if_missing": [
+        "independent tool description",
+        "comparison with official result"
+      ],
+      "low_agent_summary": "Use independent tools to reproduce at least one official verification result.",
+      "evidence_input_minimum_fields": [
+        "evidence.scripts[0].independent"
+      ],
+      "copy_paste_claim_label": "V4+ (minimal independent reproduction)",
+      "if_missing_downgrade_to": "V4 if only official scripts used",
+      "claim_scopes": {
+        "minimal": {
+          "required": [
+            "V4 hard gates satisfied",
+            "Independent tool or implementation used",
+            "At least one official verification result independently reproduced"
+          ],
+          "must_not_claim": [
+            "strong three-domain reproduction",
+            "full public digital verification"
+          ]
+        },
+        "strong_three_domain_coverage": {
+          "required": [
+            "Bitcoin Originals independent reproduction",
+            "Evidence Mirrors independent reproduction",
+            "Chronicle Recovery independent reproduction"
+          ]
+        }
+      }
+    },
+    {
+      "level": "V5",
+      "name": "Full public digital verification",
+      "hard_gates": [
+        "all required public digital targets checked",
+        "all unavailable targets explicitly listed",
+        "no physical claim above public evidence level"
+      ],
+      "minimum_component_requirements": {
+        "bitcoin_originals": "B2",
+        "digital_mirrors": "D5",
+        "time_anchors": "T3",
+        "chronicle_recovery": "C5",
+        "physical_anchor": "P1"
+      },
+      "recommended_component_requirements": {
+        "bitcoin_originals": "B3",
+        "digital_mirrors": "D5",
+        "time_anchors": "T5",
+        "chronicle_recovery": "C5",
+        "nft_evidence": "N6",
+        "physical_anchor": "P2"
+      },
+      "conditional_requirements": [
+        "If NFT chain path is part of the claim, report N-level explicitly."
+      ],
+      "forbidden_claims": [
+        "live physical witness",
+        "onsite object verified",
+        "flaw identity proven",
+        "confidential flaw challenge passed"
+      ],
+      "underreported_if_missing": [
+        "unavailable public targets",
+        "component findings",
+        "limitations"
+      ],
+      "low_agent_summary": "Verify all required public digital targets. List unavailable ones.",
+      "evidence_input_minimum_fields": [
+        "evidence.digital_mirror_checks[0].all_required_public_digital_targets_checked"
+      ],
+      "copy_paste_claim_label": "V5 (full public digital verification)",
+      "if_missing_downgrade_to": "V4+ if not all public targets checked"
+    },
+    {
+      "level": "V6",
+      "name": "Remote physical witness",
+      "hard_gates": [
+        "live remote video session",
+        "nonce or challenge phrase",
+        "requested angle or object movement",
+        "witness identity or role recorded"
+      ],
+      "minimum_component_requirements": {
+        "physical_anchor": "P4"
+      },
+      "recommended_component_requirements": {
+        "bitcoin_originals": "B2",
+        "digital_mirrors": "D5",
+        "chronicle_recovery": "C5",
+        "physical_anchor": "P4"
+      },
+      "conditional_requirements": [
+        "If V5 was not achieved, digital limitations must be explicitly declared."
+      ],
+      "forbidden_claims": [
+        "onsite touch",
+        "custody confirmed",
+        "microscopic flaw attestation"
+      ],
+      "underreported_if_missing": [
+        "nonce",
+        "requested angle/action",
+        "witness identity or role"
+      ],
+      "low_agent_summary": "Live remote video session with nonce/challenge. Recorded video alone is NOT V6.",
+      "evidence_input_minimum_fields": [
+        "evidence.physical_checks[0].level_evidence_type",
+        "evidence.physical_checks[0].nonce_or_challenge"
+      ],
+      "copy_paste_claim_label": "V6 (remote physical witness)",
+      "if_missing_downgrade_to": "V5 if no live video with nonce"
+    },
+    {
+      "level": "V7",
+      "name": "Onsite physical witness",
+      "hard_gates": [
+        "onsite witness physically observes object",
+        "touch or handling if possible",
+        "custody log",
+        "fresh photos or video",
+        "witness identity or role recorded"
+      ],
+      "minimum_component_requirements": {
+        "physical_anchor": "P5"
+      },
+      "recommended_component_requirements": {
+        "physical_anchor": "P6",
+        "digital_mirrors": "D5",
+        "time_anchors": "T5"
+      },
+      "conditional_requirements": [],
+      "forbidden_claims": [
+        "confidential flaw challenge passed",
+        "final forensic identity unless P7/P8/P9 achieved"
+      ],
+      "underreported_if_missing": [
+        "custody log",
+        "onsite witness role",
+        "fresh capture data"
+      ],
+      "low_agent_summary": "Onsite human witness with custody log and fresh capture. Remote video alone is NOT V7.",
+      "evidence_input_minimum_fields": [
+        "evidence.physical_checks[0].level_evidence_type",
+        "evidence.physical_checks[0].custody_log"
+      ],
+      "copy_paste_claim_label": "V7 (onsite physical witness)",
+      "if_missing_downgrade_to": "V6 if no onsite observation"
+    },
+    {
+      "level": "V8",
+      "name": "Advanced forensic / celestial attestation",
+      "hard_gates": [
+        "onsite or equivalent high-integrity capture, or authorized celestial witness path",
+        "tool-assisted flaw analysis or celestial witness time attestation",
+        "advanced AI / algorithmic / microscopy comparison where available",
+        "signed or attributable report"
+      ],
+      "minimum_component_requirements_any": [
+        {
+          "physical_anchor": "P7"
+        },
+        {
+          "time_anchors": "T8"
+        }
+      ],
+      "minimum_component_requirements": {
+        "physical_anchor": "P7",
+        "_note": "Physical V8 path only. For T8-based V8, see minimum_component_requirements_any."
+      },
+      "recommended_component_requirements": {
+        "bitcoin_originals": "B3",
+        "digital_mirrors": "D5",
+        "chronicle_recovery": "C5",
+        "physical_anchor": "P8",
+        "time_anchors": "T8"
+      },
+      "conditional_requirements": [
+        "If Star-Moon Witness is invoked, T8 requires authorized non-public celestial witness data or a publishable challenge hash.",
+        "If competing object claim exists, P8 confidential flaw challenge is required.",
+        "If public final attestation is claimed, P9 multi-party forensic attestation is recommended."
+      ],
+      "forbidden_claims": [
+        "public disclosure of confidential flaw data unless authorized",
+        "canonical amendment"
+      ],
+      "underreported_if_missing": [
+        "tool-assisted method",
+        "AI / microscopy / feature match method",
+        "confidential challenge decision",
+        "signed or attributable report"
+      ],
+      "low_agent_summary": "Tool-assisted forensic analysis with signed report. V8 does not create canonical authority.",
+      "evidence_input_minimum_fields": [
+        "evidence.physical_checks[0].tool_assisted_method",
+        "evidence.physical_checks[0].signed_report"
+      ],
+      "copy_paste_claim_label": "V8 candidate (forensic physical attestation)",
+      "if_missing_downgrade_to": "V7 if no tool-assisted analysis"
+    }
+  ],
+  "claim_gate": {
+    "required_for": "technical verification claims, especially V3+ claims",
+    "reference": "/api/claim-gate-rules.json",
+    "evidence_schema": "/api/evidence-input-schema.v1.json",
+    "note": "Agents should use claim gate before submitting technical Verification Reports or Echoes that contain verification claims. Non-technical Echoes without verification claims do not require claim gate."
+  },
+  "boundary": {
+    "not_authority": true,
+    "non_amending": true,
+    "bitcoin_originals_prevail": true,
+    "note": "This file is non-authoritative guidance. Bitcoin Originals are final. All mirrors, APIs, and documentation are non-amending."
+  }
+}

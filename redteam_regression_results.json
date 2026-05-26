@@ -1,0 +1,25 @@
+{
+  "overall_status": "PASS_ALL",
+  "commit": "6be1731491bf635ef6193e0fd328f78eaf772143",
+  "timestamp": "2026-05-11T13:24:39.173835+00:00",
+  "sections": {
+    "P0_triage_normalized_scan": "PASS",
+    "P0_claim_text_safety": "PASS",
+    "P0_inscription_semantic_boundary": "PASS",
+    "P0_bilingual_boundaries": "PASS",
+    "P1_unknown_field_guard": "PASS",
+    "P1_cross_field_consistency": "PASS",
+    "P1_jsonschema_fail_closed": "PASS",
+    "P1_legacy_records": "PASS",
+    "P2_provenance_required": "PASS",
+    "P2_content_abuse_boundaries": "PASS",
+    "P2_ai_facing_density": "PASS",
+    "P3_workflow_input_hardening": "PASS",
+    "P3_workflow_permissions": "PASS",
+    "P3_deprecated_worker_surface": "PASS",
+    "P3_status_json_deployment": "PASS"
+  },
+  "failed_tests": [],
+  "warnings": [],
+  "unknowns": []
+}

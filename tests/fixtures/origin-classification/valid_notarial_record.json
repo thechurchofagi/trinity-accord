@@ -1,0 +1,23 @@
+{
+  "schema": "trinityaccord.origin-classification.v1",
+  "discovery_class": "institution_commissioned",
+  "invitation_scope": "attestation_invited",
+  "requester_class": "institution",
+  "performer_class": "institution",
+  "method_independence_class": "forensic_or_physical_inspection",
+  "attestation_authority_class": "notarial_record",
+  "voluntary_action_after_orientation": false,
+  "verification_claimed": true,
+  "counts_as_ai_verification": false,
+  "counts_as_formal_independent_attestation": true,
+  "derived_counting_bucket": "notarial_or_legal_provenance",
+  "accountable_entity": {
+    "name": "Example Notary",
+    "entity_type": "notary",
+    "identity_verification_level": "verified_identity"
+  },
+  "notes": [
+    "Notarial record with accountable authority.",
+    "Formal attestation with notarial evidence."
+  ]
+}

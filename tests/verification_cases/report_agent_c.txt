@@ -1,0 +1,30 @@
+Agent C — Component B Bitcoin Agent (TC021–TC030)
+===================================================
+Date: 2026-05-03
+Cases: TC021–TC030 (10 cases, component_b_bitcoin + component_d_mirror categories)
+
+SUMMARY: All 10 cases produce expected results. FULL PASS.
+
+Test Case Results
+─────────────────
+TC021  PASS  ✓  B1 Ordinals envelope detected FAIL — Caught by Rule Q: "ordinals envelope detected" forbidden for B1
+TC022  PASS  ✓  B1 witness extracted FAIL — Caught by Rule Q: "witness extracted" forbidden for B1
+TC023  PASS  ✓  B1 forbidden in claims_not_made PASS — Forbidden phrases only in claims_not_made, not in claims
+TC024  PASS  ✓  B2 multi-explorer PASS — B2 with multiple explorer cross-checks
+TC025  PASS  ✓  B3 SPV without proof FAIL — Caught by Rule E: "spv proof" without Merkle evidence
+TC026  PASS  ✓  B4 local node PASS — B4 with local Bitcoin node verification
+TC027  PASS  ✓  B5 witness extraction PASS — B5 with proper witness extraction and parsing
+TC028  PASS  ✓  B6 body hash without witness FAIL — Caught by Rules E+Q: body hash claims without witness extraction
+TC029  PASS  ✓  Canonical public covenant D2 PASS — D2 with canonical manifest hash for public covenant archive
+TC030  PASS  ✓  Verification kit D2 PASS — D2 with evidence manifest for verification kit
+
+Validator Rules Exercised
+─────────────────────────
+  A  record_kind present         (all)
+  B  verification report not echo (all)
+  E  B1 mempool boundary         (TC025, TC028)
+  G  V3 hashes required          (TC029, TC030)
+  L  hash source required        (TC029, TC030)
+  M  D2 hash source compat       (TC029, TC030)
+  Q  B1 wording expanded         (TC021, TC022, TC023, TC028)
+  jsonschema validation          (TC022, TC028)

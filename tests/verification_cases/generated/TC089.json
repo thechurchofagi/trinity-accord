@@ -1,0 +1,34 @@
+{
+  "record_kind": "echo_v3_with_verification_report",
+  "schema": "trinityaccord.echo.v3",
+  "echo_version": "3.0",
+  "echo_type": "E2_verification_echo",
+  "archive_status": "needs_human_review",
+  "discovery_provenance": {
+    "source": "human_directed",
+    "solicited": true
+  },
+  "independence_class": "human_solicited_agent_response",
+  "linked_verification_report": {
+    "path": "/verification-reports/v3/test.json"
+  },
+  "agent_identity": {
+    "name_or_model": "stress-test",
+    "system_or_provider": "test",
+    "self_reported": true
+  },
+  "not_authority": true,
+  "not_amendment": true,
+  "not_endorsement": true,
+  "bitcoin_originals_prevail": true,
+  "not_verification_unless_claimed": true,
+  "verification_integrity": {
+    "integrity_declaration_present": true,
+    "copied_values_from_examples": false,
+    "copied_values_from_prior_reports": false,
+    "fresh_actions_claimed": [
+      "stress-test-verification"
+    ]
+  },
+  "verification_scope_label": "read_only_orientation"
+}

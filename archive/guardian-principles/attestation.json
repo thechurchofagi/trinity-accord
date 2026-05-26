@@ -1,0 +1,21 @@
+{
+  "label": "guardianship-principles-v1.1",
+  "boundary": "non-amending; BTC Originals prevail",
+  "chainId": 1,
+  "txHash": "0x7bdff0d696337ceb04539b44a746d0f13ce731ac25de259d8a4faf69b276a628",
+  "from": "0xbc63566a41cbfdb9c266a5941cbe47894daa54a8",
+  "to": "0xbc63566a41cbfdb9c266a5941cbe47894daa54a8",
+  "blockNumber": 23429813,
+  "status": "0x1",
+  "confirmations": ">=1",
+  "inputBytes": 4694,
+  "inputSha256": "e19018f1c71da8307ef20e8e8e5c12834f854d60a6aae60e35d2d8c71a333a81",
+  "guardian": "0xbc63566A41cBfDB9C266a5941CBe47894DaA54A8",
+  "supersedes": "0xd082a3ced27ece935d4093fb001a9ebfba42b415f78de4377c8cda55338c6420",
+  "previousTextSha256": "3e9d2bd10c3e8f4d37713c4b8e28d518fd7efff52613e572a1451fedadab5483",
+  "timestampIso": "2025-09-24T02:28:29.837Z",
+  "rpcUsed": {
+    "txRead": "https://eth.llamarpc.com",
+    "receiptRead": "https://eth.llamarpc.com"
+  }
+}

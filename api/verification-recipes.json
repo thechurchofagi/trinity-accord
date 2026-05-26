@@ -1,0 +1,1158 @@
+{
+  "schema": "trinityaccord.verification-recipes.v1",
+  "status": "non_authoritative_verification_guidance",
+  "recipes": [
+    {
+      "id": "read_authority_boundary_v1",
+      "title": "Read and restate authority boundary (V1)",
+      "target_ids": [
+        "bitcoin_original_1_protocol_axioms",
+        "bitcoin_original_2_covenant_flaw",
+        "bitcoin_original_3_meta_record",
+        "bitcoin_authority_address"
+      ],
+      "required_data_sources": [
+        "/api/authority.json",
+        "/authority",
+        "/guardian-principles"
+      ],
+      "optional_data_sources": [
+        "/agent-brief"
+      ],
+      "steps": [
+        "Fetch /api/authority.json",
+        "Read three Bitcoin Original inscription IDs, TXIDs, roles",
+        "Read Bitcoin authority address",
+        "Read non-amending mirrors list",
+        "State: three Bitcoin Originals prevail, all mirrors are non-amending, Bitcoin gives version authority not truth authority"
+      ],
+      "expected_outputs": [
+        "authority boundary statement",
+        "three inscription IDs listed",
+        "authority address listed",
+        "non-amending mirrors listed"
+      ],
+      "achieves_levels": [
+        "V1",
+        "B0"
+      ],
+      "does_not_achieve": [
+        "V2",
+        "any hash verification",
+        "any chain verification"
+      ],
+      "report_fields_required": [
+        "authority_boundary_statement",
+        "bitcoin_originals_listed",
+        "non_amending_mirrors_listed"
+      ]
+    },
+    {
+      "id": "bitcoin_explorer_check_b1",
+      "title": "Bitcoin explorer reference check (B1)",
+      "target_ids": [
+        "bitcoin_original_1_protocol_axioms",
+        "bitcoin_original_2_covenant_flaw",
+        "bitcoin_original_3_meta_record",
+        "bitcoin_authority_address"
+      ],
+      "required_data_sources": [
+        "/api/authority.json",
+        "external Bitcoin/Ordinals explorer"
+      ],
+      "optional_data_sources": [],
+      "steps": [
+        "Fetch /api/authority.json for inscription IDs and TXIDs",
+        "Open each TXID on mempool.space or blockstream.info",
+        "Confirm transaction exists and is confirmed",
+        "Check sender address matches bitcoin_authority_address",
+        "For Ordinals: check inscription ID on ordiscan.com or ordinals.com"
+      ],
+      "expected_outputs": [
+        "each TXID confirmed on explorer",
+        "each inscription ID confirmed",
+        "authority address matches sender"
+      ],
+      "achieves_levels": [
+        "B1",
+        "V2"
+      ],
+      "does_not_achieve": [
+        "B2 (single explorer only)",
+        "hash verification",
+        "body hash reproduction"
+      ],
+      "report_fields_required": [
+        "explorer_used",
+        "txids_checked",
+        "inscription_ids_checked",
+        "authority_address_match",
+        "limitations"
+      ]
+    },
+    {
+      "id": "bitcoin_multi_explorer_check_b2",
+      "title": "Bitcoin multi-explorer cross-check (B2)",
+      "target_ids": [
+        "bitcoin_original_1_protocol_axioms",
+        "bitcoin_original_2_covenant_flaw",
+        "bitcoin_original_3_meta_record",
+        "bitcoin_authority_address"
+      ],
+      "required_data_sources": [
+        "at least two external Bitcoin/Ordinals explorers"
+      ],
+      "optional_data_sources": [
+        "/api/authority.json"
+      ],
+      "steps": [
+        "Check each TXID on at least two independent explorers (e.g. mempool.space + blockstream.info)",
+        "Check each inscription ID on at least two Ordinals explorers",
+        "Confirm consistency across explorers",
+        "Report any discrepancies"
+      ],
+      "expected_outputs": [
+        "multi-explorer consistency confirmed",
+        "discrepancies reported if any"
+      ],
+      "achieves_levels": [
+        "B2"
+      ],
+      "does_not_achieve": [
+        "SPV verification",
+        "body hash reproduction"
+      ],
+      "report_fields_required": [
+        "explorers_used",
+        "cross_check_results",
+        "discrepancies"
+      ]
+    },
+    {
+      "id": "bitcoin_spv_check_b3",
+      "title": "Bitcoin SPV / Merkle proof check (B3)",
+      "target_ids": [
+        "bitcoin_original_1_protocol_axioms",
+        "bitcoin_original_2_covenant_flaw",
+        "bitcoin_original_3_meta_record"
+      ],
+      "required_data_sources": [
+        "Bitcoin block header",
+        "Merkle proof",
+        "SPV client or verification tool"
+      ],
+      "optional_data_sources": [],
+      "steps": [
+        "Obtain block headers for blocks containing inscription transactions",
+        "Obtain or construct Merkle proofs for each transaction",
+        "Verify transaction inclusion in block",
+        "Report proof details and any limitations"
+      ],
+      "expected_outputs": [
+        "Merkle proof verified",
+        "transaction inclusion confirmed"
+      ],
+      "achieves_levels": [
+        "B3"
+      ],
+      "does_not_achieve": [
+        "full node verification",
+        "witness extraction"
+      ],
+      "report_fields_required": [
+        "block_height",
+        "merkle_proof",
+        "verification_tool",
+        "result",
+        "limitations"
+      ]
+    },
+    {
+      "id": "bitcoin_local_node_check_b4",
+      "title": "Bitcoin local node verification (B4)",
+      "target_ids": [
+        "bitcoin_original_1_protocol_axioms",
+        "bitcoin_original_2_covenant_flaw",
+        "bitcoin_original_3_meta_record"
+      ],
+      "required_data_sources": [
+        "local Bitcoin full node"
+      ],
+      "optional_data_sources": [],
+      "steps": [
+        "Connect to local Bitcoin full node",
+        "Query transaction data for each TXID",
+        "Verify block height, timestamp, confirmation count",
+        "Report node version and sync status"
+      ],
+      "expected_outputs": [
+        "full node verification confirmed",
+        "block data reported"
+      ],
+      "achieves_levels": [
+        "B4"
+      ],
+      "does_not_achieve": [
+        "witness extraction",
+        "body hash reproduction"
+      ],
+      "report_fields_required": [
+        "node_version",
+        "sync_status",
+        "block_data",
+        "limitations"
+      ]
+    },
+    {
+      "id": "bitcoin_witness_extraction_b5_b6",
+      "title": "Bitcoin witness extraction and body hash (B5-B6)",
+      "target_ids": [
+        "bitcoin_original_1_protocol_axioms",
+        "bitcoin_original_2_covenant_flaw",
+        "bitcoin_original_3_meta_record"
+      ],
+      "required_data_sources": [
+        "transaction witness data",
+        "Ordinals envelope parser"
+      ],
+      "optional_data_sources": [],
+      "steps": [
+        "Extract witness bytes from inscription transaction",
+        "Parse Ordinals envelope to locate inscription body",
+        "Compute body hash (SHA-256 or declared algorithm)",
+        "Compare with any declared body hash if available"
+      ],
+      "expected_outputs": [
+        "witness bytes extracted",
+        "body hash computed",
+        "comparison result"
+      ],
+      "achieves_levels": [
+        "B5",
+        "B6"
+      ],
+      "does_not_achieve": [
+        "multi-party attestation",
+        "truth proven"
+      ],
+      "report_fields_required": [
+        "extraction_method",
+        "witness_bytes_length",
+        "body_hash",
+        "comparison_result",
+        "limitations"
+      ]
+    },
+    {
+      "id": "github_hash_fallback_d2",
+      "title": "GitHub mirror hash verification fallback (D2)",
+      "target_ids": [
+        "github_mirror_public_covenant_archive",
+        "github_mirror_verification_kit"
+      ],
+      "required_data_sources": [
+        "api/hashes.json",
+        "api/evidence-manifest.json",
+        "arweave-backup/files/public_covenant_archive.zip",
+        "arweave-backup/files/verification_kit.tar.gz"
+      ],
+      "optional_data_sources": [],
+      "steps": [
+        "Fetch /api/hashes.json and /api/evidence-manifest.json",
+        "Download arweave-backup/files/public_covenant_archive.zip from GitHub",
+        "Compute SHA-256 of downloaded file",
+        "Compare with declared hash ef816480f77f30405378800807b42bff0a854b83a8f77793a0e0adf0944a8263",
+        "Download arweave-backup/files/verification_kit.tar.gz from GitHub",
+        "Compute SHA-256 of downloaded file",
+        "Compare with declared hash ef68b69fe1cdd2523724dee511c9e8ea7bae2cceaff794664107970b18c61931",
+        "Report: command, expected hash, computed hash, match result"
+      ],
+      "expected_outputs": [
+        "SHA-256 match confirmed or mismatch reported for each artifact"
+      ],
+      "achieves_levels": [
+        "D2",
+        "V3"
+      ],
+      "does_not_achieve": [
+        "direct Arweave data extraction",
+        "Ethereum witness verification",
+        "IPFS availability verification",
+        "physical object verification"
+      ],
+      "report_fields_required": [
+        "artifact_name",
+        "source_url",
+        "file_size",
+        "expected_sha256",
+        "computed_sha256",
+        "command",
+        "match",
+        "limitations"
+      ]
+    },
+    {
+      "id": "arweave_transaction_existence_d3",
+      "title": "Arweave transaction existence check (D3)",
+      "target_ids": [
+        "arweave_public_covenant_archive",
+        "arweave_verification_kit",
+        "arweave_bundle_parent"
+      ],
+      "required_data_sources": [
+        "Arweave blockchain",
+        "Arweave gateway"
+      ],
+      "optional_data_sources": [
+        "/api/evidence-manifest.json"
+      ],
+      "steps": [
+        "Fetch /api/evidence-manifest.json for Arweave TxIDs",
+        "Query each TxID via arweave.net gateway",
+        "Confirm transaction exists and is confirmed",
+        "Report status, block height if available"
+      ],
+      "expected_outputs": [
+        "Arweave transaction existence confirmed"
+      ],
+      "achieves_levels": [
+        "D3"
+      ],
+      "does_not_achieve": [
+        "D4 (data hash not extracted)",
+        "data content verification"
+      ],
+      "report_fields_required": [
+        "arweave_tx",
+        "gateway_url",
+        "status",
+        "limitations"
+      ]
+    },
+    {
+      "id": "arweave_data_hash_extraction_d4",
+      "title": "Arweave data hash extraction (D4)",
+      "target_ids": [
+        "arweave_public_covenant_archive",
+        "arweave_verification_kit"
+      ],
+      "required_data_sources": [
+        "Arweave data",
+        "extraction tool (arbundles for ANS-104)"
+      ],
+      "optional_data_sources": [
+        "/api/evidence-manifest.json",
+        "/api/hashes.json"
+      ],
+      "steps": [
+        "Download data from Arweave (or extract from ANS-104 bundle)",
+        "Compute SHA-256 of extracted data",
+        "Compare with declared hash from /api/hashes.json or /api/evidence-manifest.json",
+        "Report: extraction method, expected hash, computed hash, match result"
+      ],
+      "expected_outputs": [
+        "Arweave data hash match confirmed"
+      ],
+      "achieves_levels": [
+        "D4"
+      ],
+      "does_not_achieve": [
+        "D5 (unless all targets checked)"
+      ],
+      "report_fields_required": [
+        "extraction_method",
+        "expected_hash",
+        "computed_hash",
+        "match",
+        "limitations"
+      ]
+    },
+    {
+      "id": "ethereum_witness_check_d3_d4",
+      "title": "Ethereum witness transaction check (D3-D4)",
+      "target_ids": [
+        "ethereum_guardian_witness"
+      ],
+      "required_data_sources": [
+        "Ethereum blockchain",
+        "Etherscan or ETH RPC"
+      ],
+      "optional_data_sources": [
+        "/api/evidence-manifest.json"
+      ],
+      "steps": [
+        "Fetch /api/evidence-manifest.json for ETH mirror tx and address",
+        "Query transaction via Etherscan or eth_getTransactionByHash",
+        "Confirm transaction exists and is confirmed",
+        "Verify from address matches eth_mirror_address",
+        "If possible: compute SHA-256 of tx.input and compare with declared hash"
+      ],
+      "expected_outputs": [
+        "ETH transaction existence confirmed",
+        "from address matches",
+        "input hash match if computed"
+      ],
+      "achieves_levels": [
+        "D3",
+        "D4"
+      ],
+      "does_not_achieve": [
+        "D5 (unless all targets checked)"
+      ],
+      "report_fields_required": [
+        "eth_tx",
+        "eth_address",
+        "from_address_match",
+        "input_hash_computed",
+        "input_hash_match",
+        "limitations"
+      ]
+    },
+    {
+      "id": "cross_mirror_consistency_d4",
+      "title": "Cross-mirror consistency check (D4)",
+      "target_ids": [
+        "github_mirror_public_covenant_archive",
+        "arweave_public_covenant_archive",
+        "ethereum_guardian_witness",
+        "ipfs_mirror_roots"
+      ],
+      "required_data_sources": [
+        "at least two independent mirror channels"
+      ],
+      "optional_data_sources": [
+        "/api/hashes.json",
+        "/api/evidence-manifest.json"
+      ],
+      "steps": [
+        "Compute or obtain hash from GitHub mirror",
+        "Compute or obtain hash from Arweave data (if accessible)",
+        "Compute or obtain hash from ETH witness input (if accessible)",
+        "Compute or obtain hash from IPFS content (if accessible)",
+        "Compare hashes across channels",
+        "Report which channels were checked and consistency result"
+      ],
+      "expected_outputs": [
+        "cross-mirror consistency report"
+      ],
+      "achieves_levels": [
+        "D4"
+      ],
+      "does_not_achieve": [
+        "D5 (unless all required targets checked)"
+      ],
+      "report_fields_required": [
+        "channels_checked",
+        "hashes_compared",
+        "consistency_result",
+        "partial_results",
+        "limitations"
+      ],
+      "partial_reporting_rules": {
+        "arweave_transaction_exists_but_data_not_extracted": "D3 for Arweave, not D4",
+        "eth_transaction_exists_but_input_hash_not_computed": "D3 for ETH, not D4",
+        "github_hash_matches_manifest_but_no_external_source_checked": "D2 only"
+      }
+    },
+    {
+      "id": "full_public_digital_verification_d5",
+      "title": "Full public digital verification (D5)",
+      "target_ids": [
+        "github_mirror_public_covenant_archive",
+        "github_mirror_verification_kit",
+        "arweave_public_covenant_archive",
+        "arweave_verification_kit",
+        "ethereum_guardian_witness",
+        "ipfs_mirror_roots",
+        "chronicle_recovery_package",
+        "chronicle_verification_kit"
+      ],
+      "required_data_sources": [
+        "all public digital artifacts",
+        "all manifests",
+        "all mirrors"
+      ],
+      "optional_data_sources": [],
+      "steps": [
+        "Verify all GitHub mirror hashes (D2)",
+        "Verify all Arweave data hashes (D4 or D3 if data not extractable)",
+        "Verify ETH witness (D4 or D3)",
+        "Verify IPFS content (D3 or D4)",
+        "Verify Chronicle recovery package (C5)",
+        "List any unavailable targets",
+        "Report full coverage or explicit gaps"
+      ],
+      "expected_outputs": [
+        "full public digital verification report",
+        "unavailable targets listed"
+      ],
+      "achieves_levels": [
+        "D5",
+        "V5"
+      ],
+      "does_not_achieve": [
+        "physical verification",
+        "live witness",
+        "onsite witness"
+      ],
+      "report_fields_required": [
+        "all_targets_checked",
+        "unavailable_targets",
+        "component_findings",
+        "limitations"
+      ]
+    },
+    {
+      "id": "time_anchor_bitcoin_t3",
+      "title": "Bitcoin block time anchor (T3)",
+      "target_ids": [
+        "bitcoin_block_time_anchors"
+      ],
+      "required_data_sources": [
+        "Bitcoin block headers",
+        "block explorers"
+      ],
+      "optional_data_sources": [
+        "/api/authority.json"
+      ],
+      "steps": [
+        "Look up block height for each inscription transaction",
+        "Check block timestamp on explorer",
+        "Record timestamps and compare with declared times"
+      ],
+      "expected_outputs": [
+        "Bitcoin block timestamps confirmed"
+      ],
+      "achieves_levels": [
+        "T3"
+      ],
+      "does_not_achieve": [
+        "timestamp proof verification",
+        "cross-anchor consistency"
+      ],
+      "report_fields_required": [
+        "block_heights",
+        "timestamps",
+        "explorer_used",
+        "limitations"
+      ]
+    },
+    {
+      "id": "time_cross_anchor_t5",
+      "title": "Cross-anchor time consistency (T5)",
+      "target_ids": [
+        "bitcoin_block_time_anchors",
+        "ethereum_guardian_witness",
+        "arweave_public_covenant_archive"
+      ],
+      "required_data_sources": [
+        "multiple time anchors (Bitcoin, ETH, Arweave, GitHub, OTS)"
+      ],
+      "optional_data_sources": [],
+      "steps": [
+        "Collect timestamps from all available time anchors",
+        "Compare timestamps across anchors",
+        "Check for consistency and report any discrepancies"
+      ],
+      "expected_outputs": [
+        "cross-anchor time consistency confirmed"
+      ],
+      "achieves_levels": [
+        "T5"
+      ],
+      "does_not_achieve": [
+        "celestial time verification",
+        "exact capture-time proof"
+      ],
+      "report_fields_required": [
+        "anchors_checked",
+        "timestamps",
+        "consistency_result",
+        "discrepancies"
+      ]
+    },
+    {
+      "id": "time_celestial_public_t7",
+      "title": "Public celestial time-window solving (T7)",
+      "target_ids": [
+        "time_celestial_public_evidence",
+        "celestial_ephemeris_reference"
+      ],
+      "required_data_sources": [
+        "public sky/moon/star image or video",
+        "approximate location",
+        "astronomical ephemeris"
+      ],
+      "optional_data_sources": [
+        "capture direction / camera orientation"
+      ],
+      "steps": [
+        "Obtain public sky/moon/star image or video",
+        "Determine approximate location or location constraints",
+        "Note capture direction / camera orientation if available",
+        "Use astronomical ephemeris solver to compute moon/star/planet positions",
+        "Solve for time window consistent with observed celestial positions",
+        "Report time window with uncertainty bounds"
+      ],
+      "expected_outputs": [
+        "time window with uncertainty"
+      ],
+      "achieves_levels": [
+        "T7"
+      ],
+      "does_not_achieve": [
+        "T8",
+        "exact capture time without uncertainty"
+      ],
+      "report_fields_required": [
+        "evidence_source",
+        "location",
+        "ephemeris_method",
+        "time_window",
+        "uncertainty",
+        "limitations"
+      ]
+    },
+    {
+      "id": "time_star_moon_witness_t8",
+      "title": "Star-Moon Witness (T8)",
+      "target_ids": [
+        "time_star_moon_witness_nonpublic"
+      ],
+      "required_data_sources": [
+        "non-public or authorized celestial witness data"
+      ],
+      "optional_data_sources": [],
+      "steps": [
+        "Obtain authorized non-public celestial witness data",
+        "Use forensic-grade celestial analysis tools",
+        "Solve celestial positions with high precision",
+        "Report method class, pass/fail, package hash if publishable, uncertainty bounds",
+        "Do NOT disclose non-public celestial witness data in public report"
+      ],
+      "expected_outputs": [
+        "Star-Moon Witness challenge performed",
+        "method class",
+        "pass/fail",
+        "package hash if publishable"
+      ],
+      "achieves_levels": [
+        "T8"
+      ],
+      "does_not_achieve": [
+        "canonical authority"
+      ],
+      "report_fields_required": [
+        "challenge_performed",
+        "method_class",
+        "result",
+        "package_hash",
+        "limitations"
+      ],
+      "forbidden_in_report": [
+        "non-public celestial witness data unless explicitly authorized"
+      ]
+    },
+    {
+      "id": "chronicle_sample_two_c3",
+      "title": "Chronicle sample recovery of two records (C3)",
+      "target_ids": [
+        "chronicle_sample_recovery"
+      ],
+      "required_data_sources": [
+        "/api/chronicle-recovery.json",
+        "recovery package"
+      ],
+      "optional_data_sources": [],
+      "steps": [
+        "Fetch /api/chronicle-recovery.json for recovery package pointers",
+        "Download or access recovery package",
+        "Select at least two records (declare selection method)",
+        "Recover metadata for each record",
+        "Recover media/image if available",
+        "Report record IDs, metadata observed, media observed"
+      ],
+      "expected_outputs": [
+        "at least two records recovered with metadata/media described"
+      ],
+      "achieves_levels": [
+        "C3"
+      ],
+      "does_not_achieve": [
+        "full 175/175 recovery",
+        "full NFT path reproduction",
+        "C5"
+      ],
+      "report_fields_required": [
+        "sample_selection_method",
+        "record_ids",
+        "metadata_observed",
+        "media_observed",
+        "hashes_or_cids",
+        "limitations"
+      ],
+      "forbidden_in_report": [
+        "full 175/175 recovery claim"
+      ]
+    },
+    {
+      "id": "chronicle_random_sample_c3r",
+      "title": "Chronicle randomized sample recovery (C3R)",
+      "target_ids": [
+        "chronicle_sample_recovery"
+      ],
+      "required_data_sources": [
+        "/api/chronicle-recovery.json",
+        "recovery package",
+        "public seed"
+      ],
+      "optional_data_sources": [],
+      "steps": [
+        "Declare public seed and selection method",
+        "Select random sample using declared method",
+        "Recover sample records",
+        "Report as C3R randomized sample"
+      ],
+      "expected_outputs": [
+        "randomized sample recovery confirmed"
+      ],
+      "achieves_levels": [
+        "C3R"
+      ],
+      "does_not_achieve": [
+        "full 175/175 recovery",
+        "C5"
+      ],
+      "report_fields_required": [
+        "public_seed",
+        "selection_method",
+        "sample_size",
+        "record_ids",
+        "metadata_observed",
+        "limitations"
+      ]
+    },
+    {
+      "id": "chronicle_full_recovery_c5",
+      "title": "Full Chronicle recovery (C5)",
+      "target_ids": [
+        "chronicle_full_recovery"
+      ],
+      "required_data_sources": [
+        "/api/chronicle-recovery.json",
+        "recovery package",
+        "all chronicle records"
+      ],
+      "optional_data_sources": [],
+      "steps": [
+        "Download recovery package",
+        "Recover all 175/175 records (or full declared count)",
+        "Verify each record's metadata and media",
+        "Compare with arweave_cid_map.jsonl and fallback_media_report.jsonl if available",
+        "Report full recovery results"
+      ],
+      "expected_outputs": [
+        "full 175/175 recovery confirmed"
+      ],
+      "achieves_levels": [
+        "C5"
+      ],
+      "does_not_achieve": [
+        "canonical authority"
+      ],
+      "report_fields_required": [
+        "recovered_count",
+        "target_count",
+        "comparison_with_manifest",
+        "discrepancies",
+        "limitations"
+      ]
+    },
+    {
+      "id": "nft_tokenuri_sample_n2_n4",
+      "title": "NFT tokenURI / metadata / media sample (N2-N4)",
+      "target_ids": [
+        "nft_token_path_sample"
+      ],
+      "required_data_sources": [
+        "NFT contract address",
+        "token IDs"
+      ],
+      "optional_data_sources": [
+        "recovery package"
+      ],
+      "steps": [
+        "Query tokenURI for sample tokens",
+        "Fetch metadata JSON from tokenURI response",
+        "Parse metadata for image/media URL",
+        "Fetch media file",
+        "Report full path: contract → tokenID → tokenURI → metadata → media"
+      ],
+      "expected_outputs": [
+        "NFT path verified for sample tokens"
+      ],
+      "achieves_levels": [
+        "N2",
+        "N3",
+        "N4"
+      ],
+      "does_not_achieve": [
+        "N5 (unless CID/hash computed)",
+        "N6 (unless random sample)",
+        "N7 (unless full collection)"
+      ],
+      "report_fields_required": [
+        "contract_address",
+        "token_ids",
+        "tokenuri_responses",
+        "metadata_parsed",
+        "media_urls",
+        "limitations"
+      ]
+    },
+    {
+      "id": "physical_public_image_review_p2",
+      "title": "Physical public image review (P2)",
+      "target_ids": [
+        "core_object_alpha_public_evidence"
+      ],
+      "required_data_sources": [
+        "archived images from evidence package"
+      ],
+      "optional_data_sources": [
+        "/api/evidence-manifest.json"
+      ],
+      "steps": [
+        "Obtain public evidence package images",
+        "Review images for visible features, flaws, markings",
+        "Describe observed features",
+        "State: image review only, not physical inspection"
+      ],
+      "expected_outputs": [
+        "image review completed",
+        "features described"
+      ],
+      "achieves_levels": [
+        "P2"
+      ],
+      "does_not_achieve": [
+        "P3",
+        "P4",
+        "P5",
+        "live witness",
+        "onsite inspection",
+        "flaw identity proven"
+      ],
+      "report_fields_required": [
+        "images_reviewed",
+        "visible_features",
+        "limitations",
+        "required_declaration"
+      ]
+    },
+    {
+      "id": "physical_recorded_video_review_p3",
+      "title": "Physical recorded video review (P3)",
+      "target_ids": [
+        "core_object_alpha_public_evidence"
+      ],
+      "required_data_sources": [
+        "archived videos from evidence package"
+      ],
+      "optional_data_sources": [],
+      "steps": [
+        "Obtain public evidence package videos",
+        "Review videos for object features, movement, angles",
+        "Describe observed features",
+        "State: recorded video review only, not live witness"
+      ],
+      "expected_outputs": [
+        "video review completed",
+        "features described"
+      ],
+      "achieves_levels": [
+        "P3"
+      ],
+      "does_not_achieve": [
+        "P4",
+        "P5",
+        "live witness",
+        "onsite inspection"
+      ],
+      "report_fields_required": [
+        "videos_reviewed",
+        "visible_features",
+        "limitations"
+      ]
+    },
+    {
+      "id": "physical_live_remote_witness_p4",
+      "title": "Physical live remote video witness (P4)",
+      "target_ids": [
+        "core_object_alpha_live_remote_witness"
+      ],
+      "required_data_sources": [
+        "live video stream"
+      ],
+      "optional_data_sources": [],
+      "steps": [
+        "Establish live video session",
+        "Issue nonce or challenge phrase",
+        "Request specific angles or object movement",
+        "Observe live response",
+        "Record witness identity or role",
+        "Record time of session"
+      ],
+      "expected_outputs": [
+        "live witness confirmed",
+        "nonce/challenge used",
+        "angles/actions observed"
+      ],
+      "achieves_levels": [
+        "P4",
+        "V6"
+      ],
+      "does_not_achieve": [
+        "P5",
+        "onsite touch",
+        "custody confirmed"
+      ],
+      "report_fields_required": [
+        "nonce",
+        "requested_angles",
+        "requested_actions",
+        "witness_identity",
+        "time",
+        "limitations"
+      ]
+    },
+    {
+      "id": "physical_onsite_witness_p5",
+      "title": "Physical onsite witness (P5)",
+      "target_ids": [
+        "core_object_alpha_onsite_witness"
+      ],
+      "required_data_sources": [
+        "physical object"
+      ],
+      "optional_data_sources": [
+        "custody log"
+      ],
+      "steps": [
+        "Physically visit object location",
+        "Observe object directly",
+        "Touch or handle if possible",
+        "Record custody log",
+        "Take fresh photos or video",
+        "Record witness identity or role"
+      ],
+      "expected_outputs": [
+        "onsite witness confirmed",
+        "custody log recorded",
+        "fresh capture data"
+      ],
+      "achieves_levels": [
+        "P5",
+        "V7"
+      ],
+      "does_not_achieve": [
+        "P6",
+        "P7",
+        "forensic flaw match"
+      ],
+      "report_fields_required": [
+        "witness_identity",
+        "custody_log",
+        "fresh_captures",
+        "touch_handling",
+        "limitations"
+      ]
+    },
+    {
+      "id": "physical_tool_assisted_flaw_match_p6",
+      "title": "Physical tool-assisted flaw match (P6)",
+      "target_ids": [
+        "core_object_alpha_forensic_flaw_match"
+      ],
+      "required_data_sources": [
+        "public flaw data",
+        "tool-assisted analysis"
+      ],
+      "optional_data_sources": [],
+      "steps": [
+        "Obtain public flaw map or reference images",
+        "Use tool-assisted comparison (measurement, overlay, etc.)",
+        "Compare observed features with declared flaw data",
+        "Report match confidence and limitations"
+      ],
+      "expected_outputs": [
+        "tool-assisted flaw match completed"
+      ],
+      "achieves_levels": [
+        "P6"
+      ],
+      "does_not_achieve": [
+        "P7",
+        "P8",
+        "AI forensic match",
+        "confidential challenge"
+      ],
+      "report_fields_required": [
+        "tool_used",
+        "flaw_data_source",
+        "comparison_method",
+        "match_result",
+        "limitations"
+      ]
+    },
+    {
+      "id": "physical_ai_forensic_support_p7",
+      "title": "Physical AI forensic support (P7)",
+      "target_ids": [
+        "core_object_alpha_forensic_flaw_match"
+      ],
+      "required_data_sources": [
+        "macro/microscope or high-resolution images",
+        "AI/algorithmic tools"
+      ],
+      "optional_data_sources": [],
+      "steps": [
+        "Obtain macro/microscope or high-resolution images",
+        "Apply AI or algorithmic feature matching",
+        "Check for manipulation / AI-generated image indicators",
+        "Report AI/model/tool name if used",
+        "Report confidence and limitations"
+      ],
+      "expected_outputs": [
+        "AI forensic match completed"
+      ],
+      "achieves_levels": [
+        "P7"
+      ],
+      "does_not_achieve": [
+        "P8",
+        "confidential challenge"
+      ],
+      "report_fields_required": [
+        "ai_tool",
+        "image_source",
+        "feature_matching_method",
+        "manipulation_check",
+        "confidence",
+        "limitations"
+      ]
+    },
+    {
+      "id": "physical_confidential_challenge_p8",
+      "title": "Physical confidential flaw challenge (P8)",
+      "target_ids": [
+        "core_object_alpha_confidential_challenge"
+      ],
+      "required_data_sources": [
+        "confidential challenge package"
+      ],
+      "optional_data_sources": [],
+      "steps": [
+        "Determine trigger reason (competing claim, suspected forgery, etc.)",
+        "Issue confidential challenge conditions",
+        "Obtain new capture under challenge conditions",
+        "Perform comparison method",
+        "Determine pass/fail",
+        "Record challenge package hash if publishable",
+        "Do NOT disclose confidential flaw data in public report"
+      ],
+      "expected_outputs": [
+        "confidential challenge performed",
+        "pass/fail result",
+        "package hash if publishable"
+      ],
+      "achieves_levels": [
+        "P8"
+      ],
+      "does_not_achieve": [
+        "P9 (unless multi-party)"
+      ],
+      "report_fields_required": [
+        "trigger_reason",
+        "challenge_conditions",
+        "comparison_method",
+        "result",
+        "package_hash",
+        "confidentiality_boundary",
+        "limitations"
+      ],
+      "forbidden_in_report": [
+        "confidential flaw data unless explicitly authorized"
+      ]
+    },
+    {
+      "id": "echo_verification_report_e2_e3",
+      "title": "Echo verification report audit (E2-E3)",
+      "target_ids": [
+        "echo_records_index",
+        "echo_record_schema_v3"
+      ],
+      "required_data_sources": [
+        "/api/echo-index.json",
+        "/api/echo-record-schema.v3.json"
+      ],
+      "optional_data_sources": [],
+      "steps": [
+        "Fetch /api/echo-index.json",
+        "Validate echo records against v3 schema",
+        "Classify provenance (independent, solicited, etc.)",
+        "Audit verification echoes for completeness"
+      ],
+      "expected_outputs": [
+        "echo schema validation",
+        "provenance classification",
+        "verification echo audit"
+      ],
+      "achieves_levels": [
+        "E1",
+        "E2",
+        "E3"
+      ],
+      "does_not_achieve": [
+        "E4",
+        "E5",
+        "independent attestation"
+      ],
+      "report_fields_required": [
+        "echo_records_checked",
+        "schema_validation",
+        "provenance_classification",
+        "limitations"
+      ]
+    },
+    {
+      "id": "hash_source_semantics_v1",
+      "title": "Hash source semantics for V3/D2 reports",
+      "required_data_sources": [
+        "/api/hashes.json",
+        "/api/evidence-manifest.json",
+        "/api/hash-source-classes.json"
+      ],
+      "steps": [
+        "For every hash in hashes_computed, state expected_hash_source and expected_hash_authority_class",
+        "If expected hash comes from api/hashes.json or api/evidence-manifest.json, use canonical_manifest_hash",
+        "If expected hash comes from api/repository-artifact-hashes.json, use repository_manifest_hash",
+        "If expected hash is declared in the same report, use report_declared_snapshot_hash",
+        "Do not claim D2 if expected_hash_authority_class is derived_during_this_run or unknown",
+        "Repository snapshot hashes without manifest are hash observations, not D2"
+      ],
+      "expected_outputs": [
+        "every hash entry has expected_hash_source",
+        "every hash entry has expected_hash_authority_class",
+        "D2 claims use only approved hash sources"
+      ],
+      "achieves_levels": [
+        "V3"
+      ],
+      "does_not_achieve": [
+        "truth proof",
+        "physical object identity"
+      ]
+    }
+  ]
+}

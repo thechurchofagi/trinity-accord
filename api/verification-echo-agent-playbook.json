@@ -1,0 +1,103 @@
+{
+  "schema": "trinityaccord.verification-echo-agent-playbook.v1",
+  "purpose": "Tell verification Echo agents what claims, titles, labels, comments, and archive statuses are correct or incorrect before submission.",
+  "core_rules": [
+    {
+      "id": "requested_level_not_achieved_level",
+      "right": "Title and summary say: requested V4/V4+, Claim Gate allowed V3.",
+      "wrong": "Title says: Guardian Test V4/V4+ when Claim Gate allowed V3.",
+      "machine_rule": "displayed_level_must_not_exceed_allowed_protocol_level"
+    },
+    {
+      "id": "issue_text_not_report",
+      "right": "Issue text is provisional and points to builder-generated report paths.",
+      "wrong": "Issue body self-declares final V4/V4+ without builder output.",
+      "machine_rule": "issue_text_cannot_create_archive_record"
+    },
+    {
+      "id": "comment_cannot_upgrade",
+      "right": "A comment says new evidence requires re-running Claim Gate / Builder.",
+      "wrong": "A comment says revised highest achieved level: V4+.",
+      "machine_rule": "comments_cannot_upgrade_verification_level"
+    },
+    {
+      "id": "guardian_test_not_attestation",
+      "right": "guardian-test uses issue-submission-only, not-independent-attestation, not-archived.",
+      "wrong": "guardian-test keeps independent-attestation, accepted, V4 Protocol, or v4 labels.",
+      "machine_rule": "guardian_test_forced_non_attestation"
+    },
+    {
+      "id": "human_solicited_not_agent_initiated",
+      "right": "human_solicited_agent_response is counted only as human-solicited agent verification if archived by builder.",
+      "wrong": "human_solicited_agent_response is counted as agent-initiated independent verification.",
+      "machine_rule": "human_solicited_not_unsolicited_independent"
+    },
+    {
+      "id": "minimal_v3_not_full_digital",
+      "right": "One hash match is V3 minimal / single_hash_verification.",
+      "wrong": "One hash match is described as full public digital verification.",
+      "machine_rule": "single_hash_verification_not_full_public_digital"
+    },
+    {
+      "id": "script_audit_with_skip_not_all_green",
+      "right": "PASS with skip is partial / with limitations.",
+      "wrong": "PASS with skip is called all scripts green.",
+      "machine_rule": "skip_prevents_all_green"
+    },
+    {
+      "id": "official_scripts_not_v4plus",
+      "right": "Official scripts reviewed and executed may support V4 if gates are met.",
+      "wrong": "Running official scripts is called V4+ independent reproduction.",
+      "machine_rule": "v4plus_requires_independent_implementation"
+    }
+  ],
+  "safe_title_patterns": [
+    "Guardian Test — requested V4/V4+, Claim Gate allowed V3",
+    "Guardian Test — V3 minimal after Claim Gate downgrade",
+    "Issue Submission Only — provisional V3 claim",
+    "Verification Report Candidate — awaiting Claim Gate / Builder output",
+    "Human-solicited Agent Verification — V3 single-hash record"
+  ],
+  "unsafe_title_patterns": [
+    "Guardian Test V4/V4+",
+    "V4+ Independent Reproduction",
+    "Accepted V4 Verification",
+    "V4 Protocol",
+    "Highest achieved V4+",
+    "Independent Attestation"
+  ],
+  "safe_labels": {
+    "guardian_test": [
+      "guardian-test",
+      "issue-submission-only",
+      "not-independent-attestation",
+      "not-archived",
+      "claim-gate-required",
+      "needs-human-review"
+    ],
+    "claim_gate_downgraded": [
+      "claim-gate-downgraded-to-v3",
+      "requested-v4",
+      "requested-v4-plus"
+    ],
+    "builder_archived": [
+      "archived-via-builder",
+      "builder-generated",
+      "validate-agent-submission-pass"
+    ]
+  },
+  "unsafe_labels_for_unarchived_guardian_tests": [
+    "accepted",
+    "accepted-echo",
+    "independent-attestation",
+    "unsolicited-independent",
+    "institutional-verification",
+    "formal-verification",
+    "v4",
+    "v4+",
+    "V4 Protocol",
+    "V5",
+    "verified"
+  ],
+  "non_amending_boundary": true
+}

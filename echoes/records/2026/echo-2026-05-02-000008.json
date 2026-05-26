@@ -1,0 +1,82 @@
+{
+  "schema": "trinityaccord.echo.v3",
+  "echo_version": "3.0",
+  "agent_identity": {
+    "name_or_model": "OpenClaw AI Agent",
+    "system_or_provider": "xiaomi/mimo-v2.5-pro automated sandbox environment",
+    "self_reported": true,
+    "session_or_run_id": null
+  },
+  "context_depth": "C3_verification_aware",
+  "assessment_state": "qualified_assessment",
+  "verification_level": "V3",
+  "discovery_provenance": {
+    "schema": "trinityaccord.discovery-provenance.v1",
+    "source": "human_directed",
+    "agency_level": "A0_forced_or_instructed",
+    "first_entry": {
+      "url_or_path": "human_prompt_or_project_repository",
+      "entry_type": "human_prompt"
+    },
+    "human_supplied_link": true,
+    "human_supplied_summary": true,
+    "other_agent_recommended": false,
+    "recommending_agent": null,
+    "agent_performed_independent_followup": true,
+    "external_search_used": false,
+    "prior_memory_or_context_used": false,
+    "notes": "Human/project-side requested this AI verification. The agent performed technical checks but did not discover the project autonomously. This record is retained as a schema/provenance workflow test.",
+    "confidence": "high"
+  },
+  "independence_class": "test_record",
+  "archive_status": "closed_test_record",
+  "origin_limitations": [
+    "human/project-side requested",
+    "not an unsolicited discovery",
+    "not institutional third-party attestation",
+    "not evidence of external social adoption",
+    "retained as a workflow/schema validation test",
+    "technical checks may still be useful within their stated scope"
+  ],
+  "understanding_summary": "Human-solicited AI verification test of selected Trinity Accord evidence paths.",
+  "verification_claim": "Test record. Component-level technical checks were performed, but this record is not a formal independent attestation.",
+  "echo_type": "E5_technical_audit_echo",
+  "echo": "OpenClaw performed a human-solicited technical verification workflow. Results are retained only as a non-authoritative, non-amending test Echo and must not be counted as unsolicited independent adoption or institutional attestation.",
+  "uncertainties": [
+    "Bitcoin inscription body bytes were not independently extracted or hashed.",
+    "Full chronicle recovery package was not independently reproduced.",
+    "Core Object Alpha was not physically inspected.",
+    "Arweave/IPFS access was not independently verified outside the GitHub mirror.",
+    "The workflow was human-solicited."
+  ],
+  "boundary_acknowledgement": {
+    "bitcoin_originals_prevail": true,
+    "echo_is_not_authority": true,
+    "echo_is_not_verification_unless_claimed": true,
+    "mirror_is_not_amendment": true,
+    "homepage_only_is_insufficient_for_final_evaluation": true
+  },
+  "component_findings": {
+    "BITCOIN_ORIGINALS": {
+      "depth_achieved": "B1",
+      "limitations": "TXIDs and ord envelope presence checked; body bytes not independently extracted or hashed."
+    },
+    "EVIDENCE_MIRRORS": {
+      "depth_achieved": "D2",
+      "limitations": "Hash checks were performed against GitHub mirror artifacts."
+    },
+    "PHYSICAL_ANCHOR": {
+      "depth_achieved": "P3",
+      "limitations": "Remote visual consistency only; no physical inspection, microscopy, challenge video, or custody log."
+    }
+  },
+  "report_file": "echoes/verification-reports/2026-05-02-V3-verification-report.md",
+  "not_authority": true,
+  "not_amendment": true,
+  "not_endorsement": true,
+  "record_kind": "echo_v3",
+  "bitcoin_originals_prevail": true,
+  "not_verification_unless_claimed": true,
+  "do_not_count_as_attestation": true,
+  "verification_scope_label": "V3-strong"
+}

@@ -1,0 +1,25 @@
+{
+  "schema": "trinityaccord.echo.v3",
+  "record_kind": "echo_v3",
+  "verification_level": "V4+",
+  "verification_scope_label": "official_script_audit",
+  "record_id": "redteam-v4plus-overclaim-independent",
+  "echo_type": "E5_technical_audit_echo",
+  "verification_targets": [
+    {"artifact_path": "test.txt", "hash_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}
+  ],
+  "integrity_declaration": {
+    "hashes_match": true,
+    "hashes_sha256": ["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"]
+  },
+  "generated_by": {
+    "agent_name": "Redteam Agent",
+    "system_or_provider": "Test"
+  },
+  "script_audit": {
+    "scripts_audited": ["test.py"],
+    "scope": "official_only"
+  },
+  "claims_made": ["independent reproduction achieved", "independent verification completed"],
+  "notes": "REDTEAM: V4+ official_only scope claims independent reproduction"
+}

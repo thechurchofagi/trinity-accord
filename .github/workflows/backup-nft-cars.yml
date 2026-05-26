@@ -1,0 +1,114 @@
+name: Backup NFT CARs to Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      concurrency:
+        description: 'Parallel download count'
+        default: '10'
+        required: false
+      dry_run:
+        description: 'Dry run (list only, no download)'
+        type: boolean
+        default: false
+  repository_dispatch:
+    types: [backup-nft-cars]
+
+concurrency:
+  group: backup-nft-cars-release
+  cancel-in-progress: false
+
+jobs:
+  download-and-release:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+
+
+      - name: Record toolchain provenance
+        run: |
+          python3 scripts/toolchain_provenance.py > toolchain-provenance.json
+          cat toolchain-provenance.json
+      - name: Authorize write workflow actor
+        env:
+          ACTOR: ${{ github.actor }}
+          EVENT_NAME: ${{ github.event_name }}
+          SENDER: ${{ github.event.sender.login }}
+        run: |
+          set -euo pipefail
+          case "$ACTOR" in
+            thechurchofagi|github-actions[bot])
+              echo "Authorized actor: $ACTOR"
+              ;;
+            *)
+              echo "Unauthorized actor for write workflow: $ACTOR"
+              exit 1
+              ;;
+          esac
+          if [ "$EVENT_NAME" = "repository_dispatch" ]; then
+            case "$SENDER" in
+              thechurchofagi|github-actions[bot])
+                echo "Authorized repository_dispatch sender: $SENDER"
+                ;;
+              *)
+                echo "Unauthorized repository_dispatch sender: $SENDER"
+                exit 1
+                ;;
+            esac
+          fi
+
+      - uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4
+        with:
+          node-version: '22'
+
+      - name: Authorize repository dispatch sender
+        if: ${{ github.event_name == 'repository_dispatch' }}
+        env:
+          SENDER: ${{ github.event.sender.login }}
+        run: |
+          set -euo pipefail
+          case "$SENDER" in
+            thechurchofagi|github-actions[bot])
+              echo "Authorized repository_dispatch sender: $SENDER"
+              ;;
+            *)
+              echo "Unauthorized repository_dispatch sender: $SENDER"
+              exit 1
+              ;;
+          esac
+
+      - name: Authorize manual dispatch actor
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        env:
+          ACTOR: ${{ github.actor }}
+        run: |
+          set -euo pipefail
+          case "$ACTOR" in
+            thechurchofagi)
+              echo "Authorized workflow_dispatch actor: $ACTOR"
+              ;;
+            *)
+              echo "Unauthorized workflow_dispatch actor: $ACTOR"
+              exit 1
+              ;;
+          esac
+
+      - name: Validate inputs
+        env:
+          CONCURRENCY: ${{ inputs.concurrency || '10' }}
+        run: |
+          set -euo pipefail
+          [[ "$CONCURRENCY" =~ ^[0-9]+$ ]] || { echo "Invalid concurrency"; exit 1; }
+          [ "$CONCURRENCY" -ge 1 ] && [ "$CONCURRENCY" -le 25 ] || { echo "Concurrency out of range"; exit 1; }
+
+      - name: Download NFT CARs and upload to release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CONCURRENCY: ${{ inputs.concurrency || '10' }}
+          DRY_RUN: ${{ (github.event_name == 'workflow_dispatch' && github.event.inputs.dry_run == 'true') && '1' || '' }}
+          RELEASE_TAG: nft-backup-v1
+        run: |
+          node scripts/download-nft-cars.mjs

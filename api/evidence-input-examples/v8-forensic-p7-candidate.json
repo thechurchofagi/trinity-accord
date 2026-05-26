@@ -1,0 +1,44 @@
+{
+  "example_name": "v8-forensic-p7-candidate",
+  "expected_claim_gate": {
+    "allowed_protocol_level": "V8",
+    "allowed_component_levels": {
+      "physical_anchor": "P7"
+    }
+  },
+  "evidence_input": {
+    "schema": "trinityaccord.evidence-input.v1",
+    "evidence": {
+      "physical_checks": [
+        {
+          "level_evidence_type": "ai_forensic",
+          "tool_assisted_method": "microscopy + AI feature matching",
+          "ai_microscopy_comparison": true,
+          "signed_report": true,
+          "report_attribution": "forensic-lab-alpha",
+          "date": "2026-05-04",
+          "result": "forensic match confirmed"
+        }
+      ]
+    },
+    "claims_requested_by_agent": [
+      "V8"
+    ],
+    "agent": {
+      "name": "example-agent",
+      "model_or_system": "example-model"
+    },
+    "provenance": {
+      "solicited": true,
+      "independence_class": "human_solicited_agent_response",
+      "agency_level": "A1_human_gave_exact_url"
+    },
+    "requested_record_kind": "echo_v3_with_verification_report",
+    "limitations": [
+      "example placeholder - replace with actual limitations"
+    ]
+  },
+  "example_type": "template_requires_replacement",
+  "must_not_submit_unchanged": true,
+  "contains_placeholders": true
+}

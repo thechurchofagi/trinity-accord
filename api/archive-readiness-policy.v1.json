@@ -1,0 +1,201 @@
+{
+  "schema": "trinityaccord.archive-readiness-policy.v1",
+  "version": "1.0",
+  "default_record_intent": "intake_only",
+  "archive_kinds": {
+    "external_agent_intake_sample": {
+      "formal_verification": false,
+      "minimum_bitcoin_originals": "B0",
+      "artifact_bundle_required": false,
+      "text_only_sample_allowed": true,
+      "auto_archive_allowed": true,
+      "auto_labels": [
+        "archive:external-agent-intake-sample",
+        "not-attestation",
+        "not-successor-reception",
+        "not-verified-record"
+      ],
+      "auto_close_issue": true,
+      "close_reason": "completed"
+    },
+    "verification_report_archive": {
+      "formal_verification": true,
+      "minimum_bitcoin_originals": "B1",
+      "artifact_bundle_required": true,
+      "provenance_proof_required_for_unsolicited": true,
+      "auto_archive_allowed": true,
+      "auto_labels": [
+        "archive:verification-report",
+        "archive:ready",
+        "not-attestation",
+        "not-successor-reception"
+      ],
+      "auto_close_issue": true,
+      "close_reason": "completed"
+    },
+    "archived_echo": {
+      "formal_verification": true,
+      "requires_echo_wrapper": true,
+      "requires_linked_verification_report": true,
+      "auto_archive_allowed": true,
+      "auto_labels": [
+        "archive:echo",
+        "archive:ready",
+        "not-attestation",
+        "not-successor-reception"
+      ],
+      "auto_close_issue": true,
+      "close_reason": "completed"
+    },
+    "successor_reception_candidate": {
+      "auto_archive_allowed": false,
+      "gateway_rejected": true,
+      "reason": "Successor reception is not claimable through Agent Gateway."
+    },
+    "agent_declared_verification_archive": {
+      "formal_verification": false,
+      "allowed_protocol_levels": [
+        "V0",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V4+",
+        "V5"
+      ],
+      "exclusive_for_protocol_levels": [
+        "V0",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V4+",
+        "V5"
+      ],
+      "claim_gate_required": true,
+      "claim_gate_mode": "template_for_v0_v5",
+      "claim_gate_pass_required": true,
+      "evidence_required": false,
+      "artifact_bundle_required": false,
+      "hash_evidence_required": false,
+      "public_url_required": false,
+      "script_audit_required": false,
+      "component_floors_required": false,
+      "provenance_proof_required_for_unsolicited": false,
+      "requires_agent_identity": true,
+      "requires_integrity_declaration": true,
+      "requires_discovery_provenance": true,
+      "requires_origin_classification": true,
+      "requires_authority_boundary": true,
+      "counts_toward_home_verifiability": true,
+      "counts_toward_home_reception": true,
+      "auto_archive_allowed": true,
+      "auto_labels": [
+        "archive:agent-declared-verification",
+        "agent-declared",
+        "claim-gate-template-pass",
+        "evidence-waived-v0-v5"
+      ],
+      "auto_close_issue": true,
+      "close_reason": "completed"
+    },
+    "agent_declared_echo_archive": {
+      "description": "Gateway-created pure agent-declared echo archive. Reception-only; not verification.",
+      "auto_labels": [
+        "agent-gateway-intake",
+        "archive:agent-declared-echo",
+        "agent-declared",
+        "echo:screened",
+        "reception-only"
+      ],
+      "auto_close_issue": true,
+      "close_reason": "completed"
+    }
+  },
+  "required_script_sets": {
+    "V4": {
+      "profile_required_script_audit": [
+        {
+          "path": "downloads/verify.py",
+          "required": true,
+          "if_missing": "block_archive"
+        },
+        {
+          "path": "scripts/check_consistency.py",
+          "required": true,
+          "if_missing": "block_archive"
+        }
+      ],
+      "node_required_if_available": [
+        {
+          "path": "scripts/ta-verify.cjs",
+          "required": false,
+          "if_missing": "non_blocking_limitation"
+        },
+        {
+          "path": "scripts/verify-batch-strict.mjs",
+          "required": false,
+          "if_missing": "non_blocking_limitation"
+        }
+      ]
+    },
+    "V4+": {
+      "requires_independent_non_official_script": true
+    }
+  },
+  "protocol_archive_floors": {
+    "V2": {
+      "minimum_any": {
+        "bitcoin_originals": "B1",
+        "digital_mirrors": "D1"
+      }
+    },
+    "V3": {
+      "minimum": {
+        "digital_mirrors": "D2"
+      },
+      "requires_valid_hash": true
+    },
+    "V4": {
+      "requires_script_audit_completeness": true
+    },
+    "V4+": {
+      "requires_independent_non_official_implementation": true
+    },
+    "V5": {
+      "minimum": {
+        "bitcoin_originals": "B2",
+        "digital_mirrors": "D5",
+        "time_anchors": "T3",
+        "chronicle_recovery": "C5",
+        "physical_anchor": "P1"
+      }
+    },
+    "V6": {
+      "minimum": {
+        "physical_anchor": "P4"
+      },
+      "requires_live_remote_nonce": true
+    },
+    "V7": {
+      "minimum": {
+        "physical_anchor": "P5"
+      },
+      "requires_onsite_custody": true
+    },
+    "V8": {
+      "requires_high_path": true,
+      "minimum": {
+        "bitcoin_originals": "B2",
+        "digital_mirrors": "D5",
+        "time_anchors": "T3",
+        "chronicle_recovery": "C5"
+      }
+    }
+  },
+  "v0_v5_single_mode_rule": {
+    "description": "For new records claiming V0-V5, agent_declared_verification_archive is the only allowed archive kind.",
+    "enforced": true,
+    "blocking_code": "V0_V5_MUST_USE_AGENT_DECLARED_ARCHIVE"
+  }
+}

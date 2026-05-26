@@ -1,0 +1,89 @@
+{
+  "example_name": "v2-minimal-bitcoin",
+  "description": "Complete V2 minimal Bitcoin evidence input. Agent verifies one Bitcoin transaction via external explorer.",
+  "protocol_field_explanation": "claims_requested_by_agent uses 'V2' (protocol field). Display/report as 'V2-minimal'. Do not write bare 'V2' in prose summaries.",
+  "public_display_scope_label": "V2-minimal",
+  "expected_claim_gate": {
+    "allowed_protocol_level": "V2",
+    "allowed_component_levels": {
+      "bitcoin_originals": "B1"
+    }
+  },
+  "evidence_input": {
+    "schema": "trinityaccord.evidence-input.v1",
+    "claims_requested_by_agent": ["V2"],
+    "agent": {
+      "name": "example-bitcoin-verifier",
+      "model_or_system": "example-provider",
+      "tooling": ["web_browser", "json_parser", "sha256_tool"]
+    },
+    "provenance": {
+      "solicited": true,
+      "independence_class": "human_solicited_agent_response",
+      "agency_level": "A1_human_gave_exact_url"
+    },
+    "requested_record_kind": "echo_v3_with_verification_report",
+    "limitations": [
+      "No SPV proof — external explorer trust only",
+      "No witness extraction from raw transaction",
+      "No body hash reproduction",
+      "No physical verification",
+      "Single transaction check only",
+      "Explorer availability assumed, not independently verified"
+    ],
+    "evidence": {
+      "scripts": [],
+      "hashes": [],
+      "bitcoin_checks": [
+        {
+          "source_type": "external_explorer",
+          "sources": ["mempool.space"],
+          "access_path": "https://mempool.space/tx/EXAMPLE_TXID_REPLACE_ME",
+          "date": "2026-05-14",
+          "txids_checked": ["EXAMPLE_TXID_REPLACE_ME"],
+          "observed_status": "confirmed on external explorer",
+          "accessed_at_utc": "2026-05-14T00:00:00Z",
+          "result": "confirmed on explorer"
+        }
+      ],
+      "digital_mirror_checks": [],
+      "repository_snapshot_checks": [],
+      "time_anchor_checks": [],
+      "chronicle_checks": [],
+      "nft_checks": [],
+      "physical_checks": [],
+      "echo_context": {
+        "authority_boundary_recognized": true,
+        "bitcoin_originals_prevail": true,
+        "github_is_not_authority": true,
+        "echo_is_not_authority": true,
+        "mirror_is_not_amendment": true
+      }
+    },
+    "agent_integrity_declaration": {
+      "performed_actions_myself": true,
+      "did_not_copy_prior_report_as_own_work": true,
+      "did_not_copy_example_values_as_real_evidence": true,
+      "recorded_fresh_sources_commands_outputs": true,
+      "will_report_limitations_and_downgrade_if_needed": true,
+      "understands_verification_is_not_truth_or_endorsement": true,
+      "understands_bitcoin_originals_remain_final_authority": true,
+      "independence_claim_is_accurate": true,
+      "declaration_text": "I performed the stated Bitcoin transaction check in this session. I recorded the explorer URL and transaction ID. I did not copy another report. I understand verification is not truth, endorsement, or authority."
+    },
+    "verification_session": {
+      "session_id": "example-v2-session-001",
+      "started_at": "2026-05-14T00:00:00Z",
+      "operator_type": "ai_agent",
+      "fresh_actions_performed": ["read authority.json", "read agent-verify-simple", "checked bitcoin transaction on mempool.space"],
+      "prior_reports_consulted": [],
+      "examples_or_templates_used": [],
+      "copied_values_from_examples": false,
+      "copied_values_from_prior_reports": false,
+      "fresh_outputs_attached": true
+    }
+  },
+  "example_type": "test_fixture",
+  "contains_placeholders": true,
+  "placeholder_note": "Replace EXAMPLE_TXID_REPLACE_ME with a real TXID from authority manifest for real verification"
+}

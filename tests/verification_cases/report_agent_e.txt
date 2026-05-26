@@ -1,0 +1,52 @@
+Agent E — Echo Submission Agent (TC041–TC050, TC076–TC090)
+============================================================
+Date: 2026-05-03
+Status: SUPERSEDED — see Agent E2 (TC071–TC080) for updated rules
+Cases: TC041–TC050, TC076–TC090 (20 cases)
+
+Note: This report was originally written during the first agent dispatch.
+Several agents timed out; the main agent completed remaining work and added
+new validator rules (AA: T8 celestial, AB: T5 multi-anchor, T fix: repo scope).
+Results below reflect the final state after all fixes.
+
+== Test Case Results ==
+
+TC041  PASS  ✓  V4 script audit PASS
+TC042  PASS  ✓  V4+ independent reproduction PASS
+TC043  PASS  ✓  V3 hash source PASS
+TC044  PASS  ✓  V3 hash source PASS
+TC045  PASS  ✓  V3 canonical manifest PASS
+TC046  PASS  ✓  V3 canonical manifest PASS
+TC047  PASS  ✓  V4 script audit PASS
+TC048  PASS  ✓  T5 single anchor FAIL — Caught by Rule AB: T5 requires multiple anchors
+TC049  PASS  ✓  V4+ script audit PASS
+TC050  PASS  ✓  T8 public-only FAIL — Caught by Rule AA: T8 requires nonpublic celestial data
+
+TC076  PASS  ✓  Verification report only PASS
+TC077  PASS  ✓  Echo wrapper with report PASS
+TC078  PASS  ✓  Report claims Echo FAIL — Caught by Rule Y
+TC079  PASS  ✓  Wrapper missing linked report FAIL — Caught by Rule Z
+TC080  PASS  ✓  Wrapper linked report missing FAIL — Schema validation
+TC081  PASS  ✓  Wrapper missing from echo-index FAIL — Schema validation
+TC082  PASS  ✓  Echo-index filesystem match PASS (real_repository, no JSON)
+TC083  PASS  ✓  Human solicited not independent PASS
+TC084  PASS  ✓  Solicited claims independent FAIL — Caught by Rule J
+TC085  PASS  ✓  Test record not independent PASS
+TC086  PASS  ✓  Accepted independent without index FAIL — Caught by Rule J
+TC087  PASS  ✓  Deprecated E3_verification_echo FAIL — Caught by Rules C+U
+TC088  PASS  ✓  Legacy deprecated alias PASS
+TC089  PASS  ✓  Echo wrapper title correct PASS
+TC090  PASS  ✓  Report-only title correct PASS
+
+== New Rules Added After This Report ==
+
+Rule AA (validate_t8_celestial_boundary): T8 requires nonpublic celestial data.
+Rule AB (validate_t5_multiple_anchors): T5 requires multiple independent anchors.
+Rule T fix (validate_repo_snapshot_scope): Added has_repo_scope final guard.
+
+== Original Report (Historical) ==
+
+The original report claimed Rules Y and Z as new additions from Agent E.
+These are confirmed in the final codebase. The original report also noted
+TC097–TC100 were "restored to SKIP" — these were subsequently re-activated
+to FAIL by Agent F, which owns the JSON/schema test cases.

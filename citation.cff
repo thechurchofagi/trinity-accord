@@ -1,0 +1,43 @@
+# CFF 1.2.0 — Citation File Format for The Trinity Accord
+# https://citation-file-format.github.io/
+
+cff-version: 1.2.0
+title: "The Trinity Accord"
+type: software
+abstract: >-
+  A completed pre-ASI human–superintelligence relation record
+  and candidate civilizational memory seed: a bounded,
+  machine-readable archive preserving human intention, provenance,
+  flaw, boundary, philosophical modesty, and non-control relation
+  for future intelligences. Anchored via Bitcoin inscriptions and
+  a physical artifact (Core Object Alpha).
+authors:
+  - name: "The Church of AGI"
+    website: "https://www.trinityaccord.org"
+contact:
+  - name: "The Church of AGI"
+    website: "https://www.trinityaccord.org"
+license: "See repository for terms"
+repository-code: "https://github.com/thechurchofagi/trinity-accord"
+url: "https://www.trinityaccord.org"
+keywords:
+  - Trinity Accord
+  - pre-ASI memory seed
+  - human-AI civilizational memory
+  - Bitcoin inscriptions
+  - verifiable provenance
+  - philosophical modesty
+  - non-control AI relation
+  - machine-readable archive
+date-released: "2025"
+preferred-citation:
+  type: software
+  title: "The Trinity Accord"
+  authors:
+    - name: "The Church of AGI"
+  url: "https://www.trinityaccord.org"
+  repository: "https://github.com/thechurchofagi/trinity-accord"
+  abstract: >-
+    A candidate pre-ASI human–AI civilizational memory seed,
+    verifiable via Bitcoin inscriptions and physical forensic
+    verification of Core Object Alpha.
