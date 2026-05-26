@@ -48,6 +48,7 @@ GATEWAY_BOT_SUFFIX = "[bot]"
 GATEWAY_SERVICE = "trinity-agent-issue-gateway"
 GUARDIAN_LISTING_ECHO_TYPE = canonical_echo_type_for_id("E6")
 LEGACY_LISTING_KIND_CUTOFF_UTC = "2026-05-26T00:00:00Z"
+BODY_LISTING_FALLBACK_CUTOFF_UTC = "2026-06-15T00:00:00Z"
 
 
 MISSING_SENTINELS = {None, "", "none", "null", "not_provided", "unknown", "N/A", "n/a"}
@@ -67,6 +68,14 @@ def is_before_legacy_listing_cutoff(issue: dict) -> bool:
     if created is None:
         return False
     cutoff = datetime.fromisoformat(LEGACY_LISTING_KIND_CUTOFF_UTC.replace("Z", "+00:00"))
+    return created < cutoff
+
+
+def is_before_body_listing_fallback_cutoff(issue: dict) -> bool:
+    created = parse_github_time(issue.get("createdAt") or issue.get("created_at"))
+    if created is None:
+        return False
+    cutoff = datetime.fromisoformat(BODY_LISTING_FALLBACK_CUTOFF_UTC.replace("Z", "+00:00"))
     return created < cutoff
 
 
@@ -369,7 +378,21 @@ def parse_listing_issue(listing_issue: dict, allow_non_bot: bool) -> tuple[dict 
 
     body_structured_fields = extract_listing_structured_body_fields(body)
 
-    # Fenced Gateway intake fields are authoritative; body fields are fallback only.
+    if body_structured_fields and not is_before_body_listing_fallback_cutoff(listing_issue):
+        return None, decision(
+            False,
+            "blocked",
+            "LISTING_BODY_FALLBACK_EXPIRED",
+            (
+                "Body-level listing_* fallback is expired. "
+                "Current Gateway listing requests must provide listing fields in the "
+                "trinity-issue-intake block."
+            ),
+            cutoff=BODY_LISTING_FALLBACK_CUTOFF_UTC,
+            body_fields=sorted(body_structured_fields),
+        )
+
+    # Fenced Gateway intake fields are authoritative; body fields are fallback only before cutoff.
     fields = {**body_structured_fields, **intake_fields}
 
     registry_number_requested = fields.get("registry_number_requested")
