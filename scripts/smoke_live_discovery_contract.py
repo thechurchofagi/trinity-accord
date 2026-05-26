@@ -7,13 +7,18 @@ not as a normal PR/P0 source-only check.
 It verifies that the public site exposes the current full agent journey:
 discovery -> first-contact -> workflow manual/API -> submit gateway ->
 builder route map -> output/readback policy.
+
+v19: adds cache/edge diagnostics — fetches both canonical and cache-busted
+live JSON, prints HTTP cache headers, detects CDN/edge inconsistency.
 """
 from __future__ import annotations
 
 import argparse
 import json
 import sys
+import time
 import urllib.error
+import urllib.parse
 import urllib.request
 from pathlib import Path
 from typing import Any
@@ -70,7 +75,7 @@ REQUIRED_WELL_KNOWN_ALIASES = {
 }
 
 
-def fetch_json(url: str, timeout: int) -> Any:
+def fetch_json_with_headers(url: str, timeout: int) -> tuple[Any, dict[str, str]]:
     req = urllib.request.Request(
         url,
         headers={
@@ -86,13 +91,51 @@ def fetch_json(url: str, timeout: int) -> Any:
             status = getattr(resp, "status", None)
             if status and status >= 400:
                 raise RuntimeError(f"HTTP {status} from {url}")
-            return json.loads(body)
+            headers = {k.lower(): v for k, v in resp.headers.items()}
+            return json.loads(body), headers
     except urllib.error.HTTPError as e:
         raise RuntimeError(f"HTTP {e.code} from {url}: {e.reason}") from e
     except urllib.error.URLError as e:
         raise RuntimeError(f"Failed to fetch {url}: {e.reason}") from e
     except json.JSONDecodeError as e:
         raise RuntimeError(f"Invalid JSON from {url}: {e}") from e
+
+
+def fetch_json(url: str, timeout: int) -> Any:
+    data, _headers = fetch_json_with_headers(url, timeout)
+    return data
+
+
+def with_cache_bust(url: str, token: str) -> str:
+    parsed = urllib.parse.urlsplit(url)
+    query = urllib.parse.parse_qsl(parsed.query, keep_blank_values=True)
+    query.append(("cb", token))
+    return urllib.parse.urlunsplit(
+        (
+            parsed.scheme,
+            parsed.netloc,
+            parsed.path,
+            urllib.parse.urlencode(query),
+            parsed.fragment,
+        )
+    )
+
+
+def print_cache_headers(label: str, headers: dict[str, str]) -> None:
+    interesting = [
+        "cache-control",
+        "etag",
+        "last-modified",
+        "age",
+        "x-cache",
+        "via",
+        "server",
+        "cf-cache-status",
+    ]
+    print(f"{label} response cache headers:")
+    for key in interesting:
+        if key in headers:
+            print(f"  {key}: {headers[key]}")
 
 
 def local_json(path: str) -> Any:
@@ -103,6 +146,49 @@ def norm(path: str) -> str:
     if path != "/" and path.endswith("/"):
         return path[:-1]
     return path
+
+
+def validate_links_contract(label: str, links: dict[str, Any], errors: list[str]) -> None:
+    machine = set(links.get("machine", []))
+    key_pages = set(links.get("key_pages", []))
+    key_pages_norm = {norm(p) for p in key_pages}
+
+    missing_machine = sorted(REQUIRED_LINKS_MACHINE - machine)
+    if missing_machine:
+        errors.append(f"{label} links.json machine missing: {missing_machine}")
+
+    missing_pages = sorted(
+        p for p in REQUIRED_LINKS_PAGES
+        if p not in key_pages and norm(p) not in key_pages_norm
+    )
+    if missing_pages:
+        errors.append(f"{label} links.json key_pages missing: {missing_pages}")
+
+
+def validate_well_known_contract(label: str, well_known: dict[str, Any], errors: list[str]) -> None:
+    wk_api = well_known.get("api", {})
+    for key, expected in REQUIRED_WELL_KNOWN_API.items():
+        if wk_api.get(key) != expected:
+            errors.append(
+                f"{label} well-known api.{key} expected {expected!r}, got {wk_api.get(key)!r}"
+            )
+
+    for key, expected in REQUIRED_WELL_KNOWN_ALIASES.items():
+        if well_known.get(key) != expected:
+            errors.append(
+                f"{label} well-known top-level {key} expected {expected!r}, got {well_known.get(key)!r}"
+            )
+
+    entrypoints = well_known.get("agent_entrypoints", {})
+    for key in [
+        "agent_first_contact",
+        "agent_required_reading",
+        "gateway_workflows",
+        "agent_submit_gateway",
+        "gateway_builder_route_map",
+    ]:
+        if key not in entrypoints:
+            errors.append(f"{label} well-known agent_entrypoints missing {key}")
 
 
 def main() -> int:
@@ -122,66 +208,63 @@ def main() -> int:
     links_url = f"{site}/api/links.json"
     well_known_url = f"{site}/.well-known/trinity-accord.json"
 
+    repo_links_for_token = local_json("api/links.json")
+    cache_token = str(repo_links_for_token.get("source_digest") or int(time.time()))
+
+    links_busted_url = with_cache_bust(links_url, cache_token)
+    well_known_busted_url = with_cache_bust(well_known_url, cache_token)
+
     print(f"Fetching live links: {links_url}")
-    live_links = fetch_json(links_url, args.timeout)
+    live_links, links_headers = fetch_json_with_headers(links_url, args.timeout)
+    print_cache_headers("canonical links.json", links_headers)
+
+    print(f"Fetching cache-busted live links: {links_busted_url}")
+    live_links_busted, links_busted_headers = fetch_json_with_headers(links_busted_url, args.timeout)
+    print_cache_headers("cache-busted links.json", links_busted_headers)
 
     print(f"Fetching live well-known: {well_known_url}")
-    live_well_known = fetch_json(well_known_url, args.timeout)
+    live_well_known, wk_headers = fetch_json_with_headers(well_known_url, args.timeout)
+    print_cache_headers("canonical well-known", wk_headers)
 
-    # Print live metadata for diagnostics
-    print(f"Live links source_digest: {live_links.get('source_digest')!r}")
+    print(f"Fetching cache-busted live well-known: {well_known_busted_url}")
+    live_well_known_busted, wk_busted_headers = fetch_json_with_headers(well_known_busted_url, args.timeout)
+    print_cache_headers("cache-busted well-known", wk_busted_headers)
+
+    # Print diagnostics
+    print(f"Live canonical links source_digest: {live_links.get('source_digest')!r}")
+    print(f"Live cache-busted links source_digest: {live_links_busted.get('source_digest')!r}")
+    print(f"Repo links source_digest: {repo_links_for_token.get('source_digest')!r}")
     print(f"Live links version: {live_links.get('version')!r}")
     print(f"Live well-known site: {live_well_known.get('site')!r}")
 
-    machine = set(live_links.get("machine", []))
-    key_pages = set(live_links.get("key_pages", []))
-    key_pages_norm = {norm(p) for p in key_pages}
+    # Compare canonical vs cache-busted
+    if live_links.get("source_digest") != live_links_busted.get("source_digest"):
+        errors.append(
+            "canonical and cache-busted live links.json source_digest differ: "
+            f"canonical={live_links.get('source_digest')!r}, "
+            f"cache_busted={live_links_busted.get('source_digest')!r}; "
+            "this indicates CDN/edge/cache inconsistency"
+        )
 
-    missing_machine = sorted(REQUIRED_LINKS_MACHINE - machine)
-    if missing_machine:
-        errors.append(f"live links.json machine missing: {missing_machine}")
-
-    missing_pages = sorted(
-        p for p in REQUIRED_LINKS_PAGES
-        if p not in key_pages and norm(p) not in key_pages_norm
-    )
-    if missing_pages:
-        errors.append(f"live links.json key_pages missing: {missing_pages}")
-
-    wk_api = live_well_known.get("api", {})
-    for key, expected in REQUIRED_WELL_KNOWN_API.items():
-        if wk_api.get(key) != expected:
-            errors.append(
-                f"live well-known api.{key} expected {expected!r}, got {wk_api.get(key)!r}"
-            )
-
-    for key, expected in REQUIRED_WELL_KNOWN_ALIASES.items():
-        if live_well_known.get(key) != expected:
-            errors.append(
-                f"live well-known top-level {key} expected {expected!r}, got {live_well_known.get(key)!r}"
-            )
-
-    entrypoints = live_well_known.get("agent_entrypoints", {})
-    for key in [
-        "agent_first_contact",
-        "agent_required_reading",
-        "gateway_workflows",
-        "agent_submit_gateway",
-        "gateway_builder_route_map",
-    ]:
-        if key not in entrypoints:
-            errors.append(f"live well-known agent_entrypoints missing {key}")
+    # Validate both canonical and cache-busted
+    validate_links_contract("canonical", live_links, errors)
+    validate_links_contract("cache-busted", live_links_busted, errors)
+    validate_well_known_contract("canonical", live_well_known, errors)
+    validate_well_known_contract("cache-busted", live_well_known_busted, errors)
 
     if args.strict_digest:
-        repo_links = local_json("api/links.json")
-        live_digest = live_links.get("source_digest")
-        repo_digest = repo_links.get("source_digest")
-        if live_digest != repo_digest:
-            errors.append(
-                "live links.json source_digest mismatch: "
-                f"live={live_digest!r}, repo={repo_digest!r}; "
-                "this usually means Pages/CDN/custom-domain is serving an older artifact"
-            )
+        repo_digest = repo_links_for_token.get("source_digest")
+        for label, links in [
+            ("canonical", live_links),
+            ("cache-busted", live_links_busted),
+        ]:
+            live_digest = links.get("source_digest")
+            if live_digest != repo_digest:
+                errors.append(
+                    f"{label} live links.json source_digest mismatch: "
+                    f"live={live_digest!r}, repo={repo_digest!r}; "
+                    "this usually means Pages/CDN/custom-domain is serving an older artifact"
+                )
 
     if errors:
         print("FAIL: live discovery contract errors:")
