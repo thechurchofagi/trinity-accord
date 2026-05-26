@@ -1,0 +1,45 @@
+name: Deep Integrity
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 9 * * *"
+
+jobs:
+  grouped-integrity:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        group:
+          - guardian
+          - claim-gate
+          - echo-archive
+          - supply-chain
+          - trust-root
+          - chronicle
+          - readback-integrity
+          - route-correction
+          - agent-start-docs
+          - gateway-workflows
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install Python test dependencies
+        run: |
+          python3 -m pip install --upgrade pip
+          python3 -m pip install jsonschema pyyaml
+
+      - name: Run CI group
+        run: python3 scripts/run_ci_group.py ${{ matrix.group }}
