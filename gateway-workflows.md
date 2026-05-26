@@ -661,13 +661,13 @@ python3 scripts/build_guardian_echo_payload.py
 | `--body-file` | yes | Echo body | Same rules as Pure Echo. | yes |
 | `--agent-readback` | optional | Exact canonical oath body | Use only if providing the exact oath body directly. Mutually exclusive with `--agent-readback-file`. | yes |
 | `--agent-readback-file` | optional | Exact oath readback file | Preferred. Must contain the exact canonical oath body; do not summarize or paraphrase. | yes |
-
-Guardian-signed Echo uses the same exact oath readback rule as Pure Echo. Use the Pure Echo builder's print-oath mode to obtain the canonical oath body.
 | `--related-issue` | optional | Related issue | Use for correction/reference. | yes |
 | `--idempotency-key` | optional | Dedup key | Usually omit. | yes if used |
 | `--guardian-challenge` | optional | Challenge string | Use if required. | yes if used |
 | `--registry-path` | test only | Alternate registry path | Use only in tests. | no production |
 | `--out` | yes | Final payload | Submit exact file. | yes |
+
+Guardian-signed Echo uses the same exact oath readback rule as Pure Echo. Use the Pure Echo builder's print-oath mode to obtain the canonical oath body.
 
 ### Example
 

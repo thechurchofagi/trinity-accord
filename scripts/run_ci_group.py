@@ -66,6 +66,7 @@ GROUPS = {
         ["python3", "scripts/test_guardian_listing_stage2_workflow_cli_contract.py"],
         ["python3", "scripts/test_guardian_signed_echo_workflow_wording.py"],
         ["python3", "scripts/test_gateway_workflows_final_checklist_post_submit.py"],
+        ["python3", "scripts/test_gateway_workflow_tables_are_contiguous.py"],
 
         # Gateway / Guardian core
         ["python3", "scripts/test_gateway_endpoint_contracts.py"],

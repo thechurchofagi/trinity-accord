@@ -97,6 +97,7 @@ required = [
     "python3 scripts/test_guardian_listing_stage2_workflow_cli_contract.py",
     "python3 scripts/test_guardian_signed_echo_workflow_wording.py",
     "python3 scripts/test_gateway_workflows_final_checklist_post_submit.py",
+    "python3 scripts/test_gateway_workflow_tables_are_contiguous.py",
 
     # Generated drift
     "python3 scripts/check_verification_index_urllib.py --repo thechurchofagi/trinity-accord",
