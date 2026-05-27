@@ -35,30 +35,22 @@ jobs:
           set -euo pipefail
           python3 scripts/test_formal_builder_bundles_contract.py
 
-      - name: Build with Jekyll
+      - name: Build site with Jekyll
         uses: actions/jekyll-build-pages@44a6e6beabd48582f863aeeb6cb2151cc1716697 # v1
         with:
           source: ./
           destination: ./_site
 
-      - name: Ensure builder-bundles in Pages artifact
+      - name: Inject builder-bundles into Pages artifact
         run: |
           set -euo pipefail
-          echo "=== workspace contents ==="
-          ls -la "$GITHUB_WORKSPACE/"
-          echo "=== builder-bundles/ ==="
-          ls -la "$GITHUB_WORKSPACE/builder-bundles/" || echo "EMPTY or MISSING"
-          echo "=== _site/ top-level ==="
-          ls "$GITHUB_WORKSPACE/_site/" | head -20 || echo "MISSING"
-          echo "=== copying builder-bundles into _site/ ==="
-          mkdir -p "$GITHUB_WORKSPACE/_site/builder-bundles"
-          # Copy tar.gz and manifest files
-          cp -v "$GITHUB_WORKSPACE"/builder-bundles/*.tar.gz "$GITHUB_WORKSPACE/_site/builder-bundles/"
-          cp -v "$GITHUB_WORKSPACE"/builder-bundles/*.json "$GITHUB_WORKSPACE/_site/builder-bundles/"
-          # Copy helper script (Jekyll *.py exclude strips it)
-          cp -v "$GITHUB_WORKSPACE/scripts/download_and_run_builder_bundle.py" "$GITHUB_WORKSPACE/_site/builder-bundles/"
-          echo "=== final _site/builder-bundles/ ==="
-          ls -la "$GITHUB_WORKSPACE/_site/builder-bundles/"
+          # Jekyll Docker action creates _site/ as root. Fix ownership so we
+          # can copy builder-bundle files into it.
+          sudo chown -R "$(id -u):$(id -g)" _site
+          mkdir -p _site/builder-bundles
+          cp builder-bundles/*.tar.gz _site/builder-bundles/
+          cp builder-bundles/*.json _site/builder-bundles/
+          cp scripts/download_and_run_builder_bundle.py _site/builder-bundles/
 
       - name: Verify built agent discovery artifacts
         run: |
