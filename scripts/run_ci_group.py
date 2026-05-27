@@ -106,9 +106,11 @@ GROUPS = {
         ["python3", "scripts/test_external_agent_entrypoint_journey_smoke_contract.py"],
         ["python3", "scripts/test_site_agent_entrypoint_journey_workflow.py"],
 
-        # External write lifecycle canary guards (v23)
+        # External write lifecycle canary guards (v24 zero-manual)
         ["python3", "scripts/test_external_write_lifecycle_canary_contract.py"],
         ["python3", "scripts/test_site_agent_write_lifecycle_canary_workflow.py"],
+        ["python3", "scripts/test_live_canary_policy_contract.py"],
+        ["python3", "scripts/test_gateway_discovery_for_canary.py"],
 
         # before_leaving exit/readback contract
         ["python3", "scripts/test_agent_output_policy_before_leaving_exit_contract.py"],

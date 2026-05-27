@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Write lifecycle canary workflow must be manual-only and gated."""
+"""Write lifecycle canary workflow must be zero-manual and gated."""
 import sys
 from pathlib import Path
 
@@ -14,11 +14,11 @@ text = workflow.read_text(encoding="utf-8")
 
 required = [
     "workflow_dispatch:",
-    "permissions:",
+    "schedule:",
     "contents: read",
     "smoke_external_agent_write_lifecycle_canary.py",
-    "TRINITY_LIVE_CANARY_WRITE",
-    "secrets.TRINITY_LIVE_CANARY_WRITE",
+    "confirm_live_canary",
+    "--confirm-live-canary",
     "preflight-only",
     "single-write-canary",
     "duplicate-canary",
@@ -32,7 +32,10 @@ if missing:
     sys.exit(1)
 
 for forbidden in [
-    "schedule:",
+    "gateway_url:",
+    "TRINITY_GATEWAY_URL",
+    "TRINITY_LIVE_CANARY_WRITE",
+    "secrets.TRINITY_LIVE_CANARY_WRITE",
     "contents: write",
     "issues: write",
     "pages: write",
@@ -42,4 +45,4 @@ for forbidden in [
         print(f"FAIL: write canary workflow should not include {forbidden}")
         sys.exit(1)
 
-print("PASS: write lifecycle canary workflow is manual-only and gated")
+print("PASS: write lifecycle canary workflow is zero-manual and gated")
