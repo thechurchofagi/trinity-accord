@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import copy
+import gzip
 import hashlib
 import json
 import tarfile
@@ -146,6 +147,16 @@ def assert_safe_path(rel: str) -> None:
             raise SystemExit(f"Refusing to bundle unsafe path: {rel}")
 
 
+def _normalize_tar_info(info: tarfile.TarInfo, mtime: int) -> tarfile.TarInfo:
+    """Normalize tar metadata for deterministic output."""
+    info.mtime = mtime
+    info.uid = 0
+    info.gid = 0
+    info.uname = ""
+    info.gname = ""
+    return info
+
+
 def export_bundle(name: str, spec: dict, out_dir: Path) -> dict:
     archive_path = out_dir / spec["archive"]
     manifest_path = out_dir / spec["archive"].replace(".tar.gz", ".manifest.json")
@@ -166,9 +177,30 @@ def export_bundle(name: str, spec: dict, out_dir: Path) -> dict:
             "size_bytes": path.stat().st_size,
         })
 
-    with tarfile.open(archive_path, "w:gz") as tar:
-        for item in entries:
-            tar.add(ROOT / item["path"], arcname=item["path"])
+    # Sort entries for deterministic ordering and use a fixed mtime
+    # to ensure identical tar.gz across CI runs regardless of checkout time.
+    # Both the tar entries AND the gzip header carry timestamps, so we
+    # normalize both: tar entries via filter, gzip via explicit mtime=0.
+    sorted_entries = sorted(entries, key=lambda e: e["path"])
+    epoch = 0  # fixed mtime for reproducibility
+    tar_path = archive_path.with_suffix("")  # .tar without .gz
+
+    with tarfile.open(tar_path, "w") as tar:
+        for item in sorted_entries:
+            tar.add(
+                ROOT / item["path"],
+                arcname=item["path"],
+                recursive=False,
+                filter=lambda info: _normalize_tar_info(info, epoch),
+            )
+
+    # gzip with fixed mtime for deterministic output
+    with open(tar_path, "rb") as f_in:
+        tar_bytes = f_in.read()
+    with open(archive_path, "wb") as f_out:
+        with gzip.GzipFile(filename="", mtime=epoch, mode="wb", fileobj=f_out) as gz:
+            gz.write(tar_bytes)
+    tar_path.unlink()
 
     archive_sha = sha256_file(archive_path)
     manifest = {
@@ -179,7 +211,7 @@ def export_bundle(name: str, spec: dict, out_dir: Path) -> dict:
         "archive_size_bytes": archive_path.stat().st_size,
         "entrypoint": spec["entrypoint"],
         "requires_full_repo_clone": False,
-        "files": entries,
+        "files": sorted_entries,
         "forbidden_contents_checked": FORBIDDEN_PARTS,
     }
 

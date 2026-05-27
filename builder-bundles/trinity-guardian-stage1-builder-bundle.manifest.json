@@ -1,20 +1,10 @@
 {
   "archive": "trinity-guardian-stage1-builder-bundle.tar.gz",
-  "archive_sha256": "5dfe0344e7f01eaa8017b55cd444f3557c896c33a1bce7014be5481c88915117",
-  "archive_size_bytes": 27145,
+  "archive_sha256": "c48cfd9492f8e63d33c919fd84d582d2b8dc9ef763c265634ce032ba979734b0",
+  "archive_size_bytes": 26549,
   "bundle": "guardian_application_stage_1",
   "entrypoint": "scripts/create_guardian_application.mjs",
   "files": [
-    {
-      "path": "scripts/create_guardian_application.mjs",
-      "sha256": "02ea41859e4004f817997eb5ee36cfbbd54f5abe6ca43be1174e30b40e859ea8",
-      "size_bytes": 36218
-    },
-    {
-      "path": "scripts/proof_canonical.mjs",
-      "sha256": "24d381d806ce2cf42b0b86dc1f62d7efdea86ec96ed5f2b14a3975da841916ab",
-      "size_bytes": 4442
-    },
     {
       "path": "api/agent-issue-gateway-payload-schema.v1.json",
       "sha256": "2321fad78e3b5c9e3f38803183dd71daa251741952016351e727dc1a7ef03ca8",
@@ -34,6 +24,16 @@
       "path": "api/gateway-workflows.v1.json",
       "sha256": "e4af52130b681294de456c10bd315b1046f6185bdd89dbadf3e5fcb781ee5024",
       "size_bytes": 28751
+    },
+    {
+      "path": "scripts/create_guardian_application.mjs",
+      "sha256": "02ea41859e4004f817997eb5ee36cfbbd54f5abe6ca43be1174e30b40e859ea8",
+      "size_bytes": 36218
+    },
+    {
+      "path": "scripts/proof_canonical.mjs",
+      "sha256": "24d381d806ce2cf42b0b86dc1f62d7efdea86ec96ed5f2b14a3975da841916ab",
+      "size_bytes": 4442
     }
   ],
   "forbidden_contents_checked": [
