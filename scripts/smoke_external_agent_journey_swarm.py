@@ -44,7 +44,7 @@ CORE_DISCOVERY_PATHS = [
 
 ROUTE_FAMILIES = {
     "pure_echo": {
-        "intent": "submit_echo",
+        "intent": "echo",
         "required_reads": {
             "/gateway-workflows/",
             "/api/gateway-workflows.v1.json",
@@ -90,9 +90,10 @@ ROUTE_FAMILIES = {
     "v0_v5": {
         "intent": "verify_v0_v5_agent_declared",
         "required_reads": {
+            "/agent-submit",
             "/gateway-workflows/",
             "/api/gateway-workflows.v1.json",
-            "/api/agent-submit-gateway.json",
+            "/api/gateway-builder-route-map.v1.json",
             "/api/agent-output-policy.v1.json",
         },
         "workflow_ids_any": {"v0_v5_agent_declared_archive"},
@@ -102,9 +103,10 @@ ROUTE_FAMILIES = {
         "required_reads": {
             "/gateway-workflows/",
             "/api/gateway-workflows.v1.json",
+            "/api/agent-submit-gateway.json",
             "/api/agent-output-policy.v1.json",
         },
-        "workflow_ids_any": {"verification_echo_e2"},
+        "workflow_ids_any": {"e2_verification_echo"},
     },
     "v6_plus": {
         "intent": "verify_v6_plus_strict_evidence",
