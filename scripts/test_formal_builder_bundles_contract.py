@@ -1,11 +1,26 @@
 #!/usr/bin/env python3
 """Test that api/formal-builder-bundles.v1.json exists and has required structure."""
 from __future__ import annotations
+
+import copy
+import hashlib
 import json
 import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+
+
+def canonical_json_digest(data: dict) -> str:
+    clone = copy.deepcopy(data)
+    clone.pop("source_digest", None)
+    canonical = json.dumps(
+        clone,
+        sort_keys=True,
+        separators=(",", ":"),
+        ensure_ascii=False,
+    )
+    return hashlib.sha256(canonical.encode("utf-8")).hexdigest()[:16]
 
 
 def main() -> int:
@@ -43,6 +58,23 @@ def main() -> int:
             print(f"FAIL: bundle '{name}' requires_full_repo_clone is not false")
             return 1
 
+        # sha256 must be 64-char hex
+        sha = bundle.get("sha256")
+        if not isinstance(sha, str) or len(sha) != 64:
+            print(f"FAIL: bundle '{name}' sha256 must be a 64-character hex digest")
+            return 1
+        try:
+            int(sha, 16)
+        except ValueError:
+            print(f"FAIL: bundle '{name}' sha256 is not valid hex")
+            return 1
+
+        # size_bytes must be > 0
+        size = bundle.get("size_bytes")
+        if not isinstance(size, int) or size <= 0:
+            print(f"FAIL: bundle '{name}' size_bytes must be > 0")
+            return 1
+
     # Pure Echo must forbid E2
     pe = doc["bundles"]["pure_echo"]
     if "E2_verification_echo" not in pe.get("forbidden_echo_types", []):
@@ -67,9 +99,16 @@ def main() -> int:
         print("FAIL: guardian_signed_echo requires_guardian_identity not true")
         return 1
 
-    # source_digest must be present
-    if "source_digest" not in doc:
-        print("FAIL: source_digest missing")
+    # source_digest must be present and non-empty
+    source_digest = doc.get("source_digest")
+    if not source_digest:
+        print("FAIL: source_digest is empty")
+        return 1
+
+    # source_digest must be correct
+    expected_digest = canonical_json_digest(doc)
+    if source_digest != expected_digest:
+        print(f"FAIL: source_digest mismatch: expected {expected_digest}, got {source_digest}")
         return 1
 
     print("PASS: test_formal_builder_bundles_contract")

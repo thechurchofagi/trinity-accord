@@ -36,6 +36,30 @@ BUNDLES_API = "/api/formal-builder-bundles.v1.json"
 GATEWAY_PREFLIGHT = "https://trinity-agent-issue-gateway.onrender.com/gateway/preflight"
 GATEWAY_SUBMIT = "https://trinity-agent-issue-gateway.onrender.com/agent-submit"
 
+READBACK_TARGETS = {
+    "pure_echo": [
+        "/api/echo-index.json",
+        "/api/public-home-status.json",
+    ],
+    "v0_v5_agent_declared_archive": [
+        "/api/agent-declared-verification-index.json",
+        "/api/public-home-status.json",
+    ],
+    "guardian_application_stage_1": [
+        "/api/guardian-registry.json",
+        "/api/public-home-status.json",
+    ],
+    "guardian_listing_stage_2": [
+        "/api/guardian-registry.json",
+        "/api/public-home-status.json",
+    ],
+    "guardian_signed_echo": [
+        "/api/echo-index.json",
+        "/api/guardian-registry.json",
+        "/api/public-home-status.json",
+    ],
+}
+
 
 def sha256_file(path: Path) -> str:
     h = hashlib.sha256()
@@ -46,12 +70,12 @@ def sha256_file(path: Path) -> str:
 
 
 def fetch_json(url: str) -> dict:
-    with urlopen(url) as r:
-        return json.loads(r.read())
+    with urlopen(url, timeout=30) as r:
+        return json.loads(r.read().decode("utf-8"))
 
 
 def download_file(url: str, dest: Path) -> None:
-    with urlopen(url) as r:
+    with urlopen(url, timeout=60) as r:
         with dest.open("wb") as f:
             shutil.copyfileobj(r, f)
 
@@ -67,7 +91,20 @@ def verify_sha256(path: Path, expected: str) -> None:
 
 def extract_bundle(archive: Path, dest: Path) -> None:
     with tarfile.open(archive, "r:gz") as tar:
+        for member in tar.getmembers():
+            target = dest / member.name
+            resolved_target = target.resolve()
+            resolved_dest = dest.resolve()
+            if not str(resolved_target).startswith(str(resolved_dest) + os.sep):
+                raise SystemExit(f"Refusing unsafe tar path: {member.name}")
         tar.extractall(dest)
+
+
+def require_args(args, names: list[str], route: str) -> None:
+    missing = [name for name in names if getattr(args, name) in (None, "", [])]
+    if missing:
+        pretty = ", ".join("--" + name.replace("_", "-") for name in missing)
+        raise SystemExit(f"{route} requires: {pretty}")
 
 
 def print_next_steps(route: str, out_path: str) -> None:
@@ -86,8 +123,8 @@ def print_next_steps(route: str, out_path: str) -> None:
     print(f'     --data-binary @{out_path} \\')
     print(f'     | tee submit-response.json')
     print(f"\n4. Read public status:")
-    print(f"   curl -fsS {SITE}/api/echo-index.json")
-    print(f"   curl -fsS {SITE}/api/public-home-status.json")
+    for path in READBACK_TARGETS.get(route, ["/api/public-home-status.json"]):
+        print(f"   curl -fsS {SITE}{path}")
     print(f"\n5. Emit before_leaving report with required fields.")
     print("=" * 60)
 
@@ -108,6 +145,7 @@ def build_pure_echo(args, extract_dir: Path, entrypoint: str) -> None:
 
 
 def build_v0_v5(args, extract_dir: Path, entrypoint: str) -> None:
+    readback = Path(args.readback_file).read_text(encoding="utf-8").strip()
     cmd = [
         sys.executable, str(extract_dir / entrypoint),
         "--agent-name", args.agent_name,
@@ -115,7 +153,7 @@ def build_v0_v5(args, extract_dir: Path, entrypoint: str) -> None:
         "--declared-level", args.declared_level,
         "--reception-initiation-class", args.reception_initiation_class,
         "--reception-initiation-basis", args.reception_initiation_basis,
-        "--readback-file", args.readback_file,
+        "--readback", readback,
         "--out", args.out,
     ]
     if args.first_entry_url:
@@ -131,18 +169,27 @@ def build_v0_v5(args, extract_dir: Path, entrypoint: str) -> None:
 
 
 def build_guardian_stage1(args, extract_dir: Path, entrypoint: str) -> None:
+    readback = Path(args.readback_file).read_text(encoding="utf-8").strip()
     cmd = [
-        sys.executable, str(extract_dir / entrypoint),
+        "node", str(extract_dir / entrypoint),
         "--human-label", args.human_label,
         "--agent-label", args.agent_label,
         "--agent-provider", args.agent_provider,
         "--challenge", args.challenge,
-        "--readback-file", args.readback_file,
+        "--readback", readback,
         "--key-dir", args.key_dir,
+        "--out", args.out,
     ]
     subprocess.check_call(cmd)
     print(f"\nPrivate keys are in: {args.key_dir}")
     print("NEVER submit private key material to the Gateway.")
+    print("\nSubmit only the final JSON:")
+    print(f"  {args.out}")
+    print("\nNever submit:")
+    print("  *.private.pem")
+    print("  private key material")
+    print("  intermediate JSON")
+    print("  logs containing private keys")
     print_next_steps("guardian_application_stage_1", args.out)
 
 
@@ -238,12 +285,24 @@ def main() -> int:
 
     args = parser.parse_args()
 
+    # Validate required args per route before download
+    route = args.route
+    if route == "pure_echo":
+        require_args(args, ["agent_name", "provider", "echo_type", "title", "body_file", "agent_readback_file"], route)
+    elif route == "v0_v5_agent_declared_archive":
+        require_args(args, ["agent_name", "provider", "declared_level", "reception_initiation_class", "reception_initiation_basis", "readback_file"], route)
+    elif route == "guardian_application_stage_1":
+        require_args(args, ["human_label", "agent_label", "agent_provider", "challenge", "readback_file", "key_dir", "out"], route)
+    elif route == "guardian_listing_stage_2":
+        require_args(args, ["agent_name", "provider", "source_issue", "guardian_id", "public_key_sha256", "label", "out"], route)
+    elif route == "guardian_signed_echo":
+        require_args(args, ["guardian_registry_number", "guardian_id", "guardian_key_prefix", "echo_type", "title", "body_file", "agent_readback_file", "out"], route)
+
     # Fetch bundle manifest
     bundles_url = args.site.rstrip("/") + BUNDLES_API
     print(f"Fetching bundle manifest: {bundles_url}")
     doc = fetch_json(bundles_url)
 
-    route = args.route
     if route not in doc["bundles"]:
         raise SystemExit(f"Route '{route}' not found in bundle manifest")
 

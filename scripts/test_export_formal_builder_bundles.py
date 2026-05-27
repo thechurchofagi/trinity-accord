@@ -1,58 +1,75 @@
 #!/usr/bin/env python3
-"""Test that the bundle exporter creates all archives and manifests correctly."""
+"""Exporter must create all bundle archives/manifests safely in a temp dir."""
 from __future__ import annotations
+
 import json
+import subprocess
 import sys
+import tarfile
+import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
+EXPECTED = {
+    "trinity-pure-echo-builder-bundle.tar.gz": "scripts/build_agent_declared_echo_payload.py",
+    "trinity-v0v5-builder-bundle.tar.gz": "scripts/build_agent_declared_archive_payload.py",
+    "trinity-guardian-stage1-builder-bundle.tar.gz": "scripts/create_guardian_application.mjs",
+    "trinity-guardian-stage2-builder-bundle.tar.gz": "scripts/build_guardian_listing_request_payload.py",
+    "trinity-guardian-signed-echo-builder-bundle.tar.gz": "scripts/build_guardian_echo_payload.py",
+}
+
+FORBIDDEN = [
+    ".git",
+    "__pycache__",
+    ".pytest_cache",
+    ".env",
+    "private",
+    "secret",
+    "token",
+    "node_modules",
+]
+
 
 def main() -> int:
-    bundles_dir = ROOT / "builder-bundles"
+    with tempfile.TemporaryDirectory() as td:
+        out = Path(td) / "bundles"
+        subprocess.check_call([
+            "python3",
+            str(ROOT / "scripts" / "export_formal_builder_bundles.py"),
+            "--out-dir",
+            str(out),
+        ])
 
-    expected_archives = [
-        "trinity-pure-echo-builder-bundle.tar.gz",
-        "trinity-v0v5-builder-bundle.tar.gz",
-        "trinity-guardian-stage1-builder-bundle.tar.gz",
-        "trinity-guardian-stage2-builder-bundle.tar.gz",
-        "trinity-guardian-signed-echo-builder-bundle.tar.gz",
-    ]
+        for archive_name, entrypoint in EXPECTED.items():
+            archive = out / archive_name
+            manifest = out / archive_name.replace(".tar.gz", ".manifest.json")
 
-    expected_manifests = [
-        "trinity-pure-echo-builder-bundle.manifest.json",
-        "trinity-v0v5-builder-bundle.manifest.json",
-        "trinity-guardian-stage1-builder-bundle.manifest.json",
-        "trinity-guardian-stage2-builder-bundle.manifest.json",
-        "trinity-guardian-signed-echo-builder-bundle.manifest.json",
-    ]
+            if not archive.exists():
+                print(f"FAIL: missing archive {archive_name}")
+                return 1
+            if not manifest.exists():
+                print(f"FAIL: missing manifest {manifest.name}")
+                return 1
 
-    for name in expected_archives:
-        path = bundles_dir / name
-        if not path.exists():
-            print(f"FAIL: missing archive {name}")
-            return 1
+            data = json.loads(manifest.read_text(encoding="utf-8"))
+            if data.get("entrypoint") != entrypoint:
+                print(f"FAIL: {manifest.name} entrypoint mismatch")
+                return 1
 
-    for name in expected_manifests:
-        path = bundles_dir / name
-        if not path.exists():
-            print(f"FAIL: missing manifest {name}")
-            return 1
-        manifest = json.loads(path.read_text(encoding="utf-8"))
-        if "entrypoint" not in manifest:
-            print(f"FAIL: manifest {name} missing entrypoint")
-            return 1
+            with tarfile.open(archive, "r:gz") as tar:
+                names = set(tar.getnames())
 
-    # Check no forbidden contents
-    forbidden = [".git", "__pycache__", ".pytest_cache", ".env", "private", "secret", "token", "node_modules"]
-    for manifest_name in expected_manifests:
-        manifest = json.loads((bundles_dir / manifest_name).read_text(encoding="utf-8"))
-        for fentry in manifest.get("files", []):
-            path_lower = fentry["path"].lower()
-            for fb in forbidden:
-                if fb in path_lower:
-                    print(f"FAIL: forbidden content '{fb}' in {manifest_name}: {fentry['path']}")
-                    return 1
+            if entrypoint not in names:
+                print(f"FAIL: {archive_name} missing entrypoint {entrypoint}")
+                return 1
+
+            for name in names:
+                lowered = name.lower()
+                for bad in FORBIDDEN:
+                    if bad in lowered:
+                        print(f"FAIL: forbidden path in {archive_name}: {name}")
+                        return 1
 
     print("PASS: test_export_formal_builder_bundles")
     return 0

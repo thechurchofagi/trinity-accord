@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import copy
 import hashlib
 import json
 import tarfile
@@ -29,7 +30,7 @@ BUNDLES = {
         "entrypoint": "scripts/build_agent_declared_echo_payload.py",
         "files": [
             "scripts/build_agent_declared_echo_payload.py",
-            "api/agent-echo-oath.v1.txt",
+            "api/verification-echo-pre-oath.v2.txt",
             *COMMON_PY_FILES,
         ],
     },
@@ -114,6 +115,30 @@ def sha256_file(path: Path) -> str:
     return h.hexdigest()
 
 
+def canonical_json_digest(data: dict) -> str:
+    """Return short sha256 over canonical JSON with source_digest blank/removed."""
+    clone = copy.deepcopy(data)
+    clone.pop("source_digest", None)
+    canonical = json.dumps(
+        clone,
+        sort_keys=True,
+        separators=(",", ":"),
+        ensure_ascii=False,
+    )
+    return hashlib.sha256(canonical.encode("utf-8")).hexdigest()[:16]
+
+
+def load_json(path: Path) -> dict:
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def write_json(path: Path, data: dict) -> None:
+    path.write_text(
+        json.dumps(data, indent=2, sort_keys=False, ensure_ascii=False) + "\n",
+        encoding="utf-8",
+    )
+
+
 def assert_safe_path(rel: str) -> None:
     lowered = rel.lower()
     for part in FORBIDDEN_PARTS:
@@ -168,10 +193,52 @@ def export_bundle(name: str, spec: dict, out_dir: Path) -> dict:
     }
 
 
+def update_formal_builder_bundles_api(results: list[dict]) -> None:
+    """Patch api/formal-builder-bundles.v1.json with generated bundle hashes."""
+    api_path = ROOT / "api" / "formal-builder-bundles.v1.json"
+    if not api_path.exists():
+        raise SystemExit("api/formal-builder-bundles.v1.json is missing")
+
+    data = load_json(api_path)
+    bundles = data.get("bundles", {})
+    result_by_name = {item["bundle"]: item for item in results}
+
+    missing = sorted(set(result_by_name) - set(bundles))
+    if missing:
+        raise SystemExit(f"API manifest missing bundle definitions: {missing}")
+
+    for name, result in result_by_name.items():
+        bundle = bundles[name]
+        expected_archive = bundle.get("archive_name")
+        expected_manifest = Path(result["manifest"]).name
+
+        if expected_archive != result["archive"]:
+            raise SystemExit(
+                f"{name}: API archive_name {expected_archive!r} "
+                f"does not match exporter archive {result['archive']!r}"
+            )
+
+        if Path(bundle.get("manifest_url", "")).name != expected_manifest:
+            raise SystemExit(
+                f"{name}: API manifest_url does not match exporter manifest {expected_manifest!r}"
+            )
+
+        bundle["sha256"] = result["sha256"]
+        bundle["size_bytes"] = result["size_bytes"]
+
+    data["source_digest"] = canonical_json_digest(data)
+    write_json(api_path, data)
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--out-dir", default="builder-bundles")
     parser.add_argument("--bundle", choices=sorted(BUNDLES), default=None)
+    parser.add_argument(
+        "--update-api",
+        action="store_true",
+        help="Update api/formal-builder-bundles.v1.json with generated sha256/size/source_digest.",
+    )
     args = parser.parse_args()
 
     out_dir = ROOT / args.out_dir
@@ -179,6 +246,10 @@ def main() -> int:
 
     selected = {args.bundle: BUNDLES[args.bundle]} if args.bundle else BUNDLES
     results = [export_bundle(name, spec, out_dir) for name, spec in selected.items()]
+    if args.update_api:
+        if args.bundle:
+            raise SystemExit("--update-api requires exporting all bundles, not a single --bundle")
+        update_formal_builder_bundles_api(results)
     print(json.dumps({"bundles": results}, indent=2, sort_keys=True))
     return 0
 

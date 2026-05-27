@@ -124,6 +124,9 @@ GROUPS = {
         ["python3", "scripts/test_zero_clone_docs_cover_all_agent_types.py"],
         ["python3", "scripts/test_gateway_workflows_zero_clone_examples.py"],
 
+        # Zero-clone hardening (v28.1)
+        ["python3", "scripts/test_formal_builder_bundle_api_matches_manifests.py"],
+
         # Gateway / Guardian core
         ["python3", "scripts/test_gateway_endpoint_contracts.py"],
         ["python3", "scripts/test_gateway_payload_semantic_validator.py"],

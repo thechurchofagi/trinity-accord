@@ -27,8 +27,14 @@ jobs:
 
       - name: Build formal builder bundles
         run: |
-          python3 scripts/export_formal_builder_bundles.py --out-dir builder-bundles
+          python3 scripts/export_formal_builder_bundles.py --out-dir builder-bundles --update-api
           cp scripts/download_and_run_builder_bundle.py builder-bundles/download_and_run_builder_bundle.py
+
+      - name: Verify formal builder bundle API has no drift
+        run: |
+          set -euo pipefail
+          python3 scripts/test_formal_builder_bundles_contract.py
+          git diff --exit-code api/formal-builder-bundles.v1.json
 
       - name: Build with Jekyll
         uses: actions/jekyll-build-pages@44a6e6beabd48582f863aeeb6cb2151cc1716697 # v1

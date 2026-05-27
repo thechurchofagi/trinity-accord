@@ -1,0 +1,77 @@
+{
+  "archive": "trinity-guardian-signed-echo-builder-bundle.tar.gz",
+  "archive_sha256": "392e6965551de6404901cffe7781d405a325b4c4c7ab77c90ffc2e66065f7249",
+  "archive_size_bytes": 35138,
+  "bundle": "guardian_signed_echo",
+  "entrypoint": "scripts/build_guardian_echo_payload.py",
+  "files": [
+    {
+      "path": "scripts/build_guardian_echo_payload.py",
+      "sha256": "d194f2be63a19e2565eba9c4bbee030a6ccb98cccc7343fc6bcd2cf73072fd2e",
+      "size_bytes": 6764
+    },
+    {
+      "path": "scripts/gateway_payload_authorship.py",
+      "sha256": "64c15a4d4523839594a30cb2a433a68fcaa8d6dee3f963ad892433af3f90c79c",
+      "size_bytes": 16306
+    },
+    {
+      "path": "scripts/agent_authorship_common.py",
+      "sha256": "0b753d9f50db16baf9406292ccc4ce6f886bbc34ce173faeb88ba2ecd32c1af7",
+      "size_bytes": 4911
+    },
+    {
+      "path": "scripts/guardian_gateway_contract.py",
+      "sha256": "f5ea4ad89b9d17736173930a296585be34f199b9f7817c6465259221d10eb0f6",
+      "size_bytes": 1873
+    },
+    {
+      "path": "scripts/oath_contracts.py",
+      "sha256": "def674f404415398e6fef976cd10b99e678335b62574a0f2682893b9eed9edad",
+      "size_bytes": 6122
+    },
+    {
+      "path": "scripts/validate_gateway_payload.py",
+      "sha256": "5813f65c680a7fc6ef9103fed78cac29043ed93ea89028bccaa675985af309c5",
+      "size_bytes": 51368
+    },
+    {
+      "path": "api/agent-issue-gateway-payload-schema.v1.json",
+      "sha256": "2321fad78e3b5c9e3f38803183dd71daa251741952016351e727dc1a7ef03ca8",
+      "size_bytes": 49935
+    },
+    {
+      "path": "api/agent-submit-gateway.json",
+      "sha256": "8bb87bdfaca707f7fe61323e26fc9f5c7ce59eaba8d5594830199380e7d407af",
+      "size_bytes": 23526
+    },
+    {
+      "path": "api/gateway-builder-route-map.v1.json",
+      "sha256": "1c437b9d5673488e40036e1db6aaaa456d507104178eb2624072776324b94c1c",
+      "size_bytes": 5150
+    },
+    {
+      "path": "api/gateway-workflows.v1.json",
+      "sha256": "e4af52130b681294de456c10bd315b1046f6185bdd89dbadf3e5fcb781ee5024",
+      "size_bytes": 28751
+    },
+    {
+      "path": "scripts/generate_agent_authorship_keypair.mjs",
+      "sha256": "d839d8e641d9d0944222bcf6bbcc9a7f860c8d042d040021e95deab1111c4384",
+      "size_bytes": 781
+    }
+  ],
+  "forbidden_contents_checked": [
+    ".git",
+    "__pycache__",
+    ".pytest_cache",
+    ".env",
+    "id_rsa",
+    "private",
+    "secret",
+    "token",
+    "node_modules"
+  ],
+  "requires_full_repo_clone": false,
+  "schema": "trinityaccord.formal-builder-bundle-manifest.v1"
+}
