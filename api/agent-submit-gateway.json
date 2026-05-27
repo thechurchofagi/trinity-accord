@@ -546,5 +546,17 @@
         "Gateway wrapped payload before digest"
       ]
     }
+  },
+  "gateway_discovery": {
+    "primary_base_url": "https://trinity-agent-issue-gateway.onrender.com",
+    "preflight_path": "/gateway/preflight",
+    "submit_path": "/gateway/submit",
+    "health_paths": [
+      "/healthz",
+      "/readiness",
+      "/"
+    ],
+    "canary_supported": true,
+    "canary_policy": "/api/live-canary-policy.v1.json"
   }
 }

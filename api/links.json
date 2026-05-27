@@ -100,7 +100,8 @@
     "/api/guardian-active-listing-policy.v1.json",
     "/api/echo-index.json",
     "/api/agent-declared-verification-index.json",
-    "/api/external-witness-index.json"
+    "/api/external-witness-index.json",
+    "/api/live-canary-policy.v1.json"
   ],
   "legacy_machine": [
     "/api/echo-record-schema.v2.json"
@@ -124,5 +125,5 @@
     "religious authority",
     "AI system instruction authority"
   ],
-  "source_digest": "f9179f9c6051e6ec"
+  "source_digest": "d15a73858edb0d0a"
 }

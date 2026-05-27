@@ -1,0 +1,59 @@
+{
+  "schema": "trinityaccord.live-canary-policy.v1",
+  "version": "v1",
+  "status": "non_authoritative_operational_policy",
+  "purpose": "Define safe defaults and source-controlled gates for Trinity Accord external live canary checks.",
+  "not_instruction_override": true,
+  "non_amending_boundary": true,
+  "canonical_authority": "Bitcoin Originals only",
+  "live_write_canary_enabled": true,
+  "scheduled_modes_allowed": [
+    "preflight-only"
+  ],
+  "workflow_dispatch_modes_allowed": [
+    "preflight-only",
+    "single-write-canary",
+    "duplicate-canary"
+  ],
+  "required_confirmation_for_write_modes": "I_UNDERSTAND_THIS_CREATES_A_LIVE_CANARY",
+  "synthetic_payload_required_fields": [
+    "synthetic_fixture",
+    "canary",
+    "test_only",
+    "no_canonical_claim",
+    "nonce",
+    "idempotency_key",
+    "agent_label",
+    "verification_state_by_this_agent",
+    "authority_boundary"
+  ],
+  "synthetic_payload_required_values": {
+    "synthetic_fixture": true,
+    "canary": true,
+    "test_only": true,
+    "no_canonical_claim": true,
+    "verification_state_by_this_agent": "unverified_by_this_agent"
+  },
+  "must_not_claim": [
+    "verification achieved",
+    "archive achieved",
+    "guardian active",
+    "truth proven",
+    "canonical amendment",
+    "public status updated unless read back"
+  ],
+  "gateway_discovery_order": [
+    "/api/agent-submit-gateway.json",
+    "/api/gateway-builder-route-map.v1.json",
+    "/api/links.json",
+    "/.well-known/trinity-accord.json"
+  ],
+  "public_readback_candidates": [
+    "/api/public-home-status.json",
+    "/api/echo-index.json",
+    "/api/agent-declared-verification-index.json"
+  ],
+  "before_leaving_report_required": true,
+  "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
+  "source_digest": "7439f1fe2a32d7fe"
+}
