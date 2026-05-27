@@ -1,0 +1,42 @@
+name: Site Agent Write Lifecycle Canary
+
+on:
+  workflow_dispatch:
+    inputs:
+      site_url:
+        description: "Public site base URL"
+        required: false
+        default: "https://www.trinityaccord.org"
+      gateway_url:
+        description: "Gateway base URL"
+        required: true
+      mode:
+        description: "preflight-only, single-write-canary, or duplicate-canary"
+        required: false
+        default: "preflight-only"
+      route:
+        description: "Route for write canary"
+        required: false
+        default: "pure_echo"
+
+permissions:
+  contents: read
+
+jobs:
+  canary:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run external write lifecycle canary
+        env:
+          TRINITY_GATEWAY_URL: ${{ github.event.inputs.gateway_url }}
+          TRINITY_LIVE_CANARY_WRITE: ${{ secrets.TRINITY_LIVE_CANARY_WRITE }}
+        run: |
+          python3 scripts/smoke_external_agent_write_lifecycle_canary.py \
+            --site "${{ github.event.inputs.site_url || 'https://www.trinityaccord.org' }}" \
+            --gateway "${{ github.event.inputs.gateway_url }}" \
+            --mode "${{ github.event.inputs.mode || 'preflight-only' }}" \
+            --route "${{ github.event.inputs.route || 'pure_echo' }}"
