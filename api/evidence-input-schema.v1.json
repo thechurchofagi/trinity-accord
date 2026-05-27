@@ -719,6 +719,9 @@
         "report_hash": {
           "type": "string",
           "pattern": "^[a-f0-9]{64}$"
+        },
+        "package_hash_valid": {
+          "type": "boolean"
         }
       },
       "additionalProperties": false

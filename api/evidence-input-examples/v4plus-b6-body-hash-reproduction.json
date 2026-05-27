@@ -70,10 +70,14 @@
           "environment": {
             "python": "3.11.5",
             "os": "Linux",
-            "dependencies": ["requests", "bitcoin-utils", "hashlib"]
+            "dependencies": [
+              "requests",
+              "bitcoin-utils",
+              "hashlib"
+            ]
           },
           "exit_code": 0,
-          "stdout_summary": "Extracted inscription envelope from witness stack. Reconstructed body: 1234 bytes, content-type: text/plain. Body SHA-256: a]79fc5... — MATCHES expected hash. B6 body hash reproduction verified."
+          "stdout_summary": "Extracted inscription envelope from witness stack. Reconstructed body: 1234 bytes, content-type: text/plain. Body SHA-256: a]79fc5... \u2014 MATCHES expected hash. B6 body hash reproduction verified."
         }
       ],
       "hashes": [
@@ -94,7 +98,9 @@
         "core_instructions_acknowledged": true
       }
     },
-    "claims_requested_by_agent": ["V4+"],
+    "claims_requested_by_agent": [
+      "V4+"
+    ],
     "agent": {
       "name": "independent-verifier-agent",
       "model_or_system": "example-model"
@@ -143,5 +149,7 @@
   "example_type": "test_fixture_passing",
   "must_not_submit_unchanged": false,
   "contains_placeholders": false,
-  "test_fixture": true
+  "test_fixture": true,
+  "synthetic_fixture": true,
+  "not_real_world_submission": true
 }

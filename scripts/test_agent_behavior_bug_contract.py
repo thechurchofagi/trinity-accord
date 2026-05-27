@@ -53,7 +53,7 @@ def make_evidence_input(evidence_overrides=None, claims=None):
             "understands_verification_is_not_truth_or_endorsement": True,
             "understands_bitcoin_originals_remain_final_authority": True,
             "independence_claim_is_accurate": True,
-            "declaration_text": "I performed the verification actions stated in this report during this session. I did not copy example values or another agent's report as my own verification. I recorded sources, commands, outputs, and limitations. I understand this verification is non-authoritative."
+            "declaration_text": "I performed the verification actions stated in this report during this session. I did not copy example values or another agent's report as my own verification work. I recorded all sources, commands, outputs, and limitations honestly. I understand this verification is non-authoritative and does not create authority."
         },
         "verification_session": {
             "session_id": "test-session-001",
@@ -67,10 +67,10 @@ def make_evidence_input(evidence_overrides=None, claims=None):
             "fresh_outputs_attached": True
         },
         "evidence": {
-            "scripts": [], "hashes": [], "bitcoin_checks": [],
-            "digital_mirror_checks": [], "repository_snapshot_checks": [],
+            "scripts": [], "hashes": [],
+            "bitcoin_checks": [], "digital_mirror_checks": [], "repository_snapshot_checks": [],
             "time_anchor_checks": [], "chronicle_checks": [], "nft_checks": [],
-            "physical_checks": [], "echo_context": {},
+            "physical_checks": [], "echo_context": {"authority_boundary_recognized": True},
             **(evidence_overrides or {})
         },
         "limitations": [],
@@ -106,6 +106,7 @@ def test_ac1():
                 "stdout_summary": "ALL PASS", "blocking": True, "result": "PASS",
                 "official": True, "script_check_scope": "hash verification",
                 "script_does_not_check": "physical evidence",
+                "authority_boundary_recognized": True,
             }],
             "hashes": [{
                 "artifact": "index.md", "algorithm": "SHA-256",
@@ -150,7 +151,7 @@ def test_ac2():
     print("\nAC2: V5 reachable with B2/D5/T3/C5/P1")
     r = evaluate_input(
         evidence_overrides={
-            "bitcoin_checks": [{"source_type": "multi_explorer", "sources": ["mempool.space", "ordinals.com"]}],
+            "bitcoin_checks": [{"source_type": "multi_explorer", "sources": ["mempool.space", "ordinals.com"], "authority_boundary_recognized": True}],
             "digital_mirror_checks": [{
                 "level_evidence_type": "full_public_digital_data_verification",
                 "all_required_public_digital_targets_checked": True,
@@ -244,6 +245,7 @@ def test_ac5():
                 "executed": True, "command": "python3 v.py", "environment": {"p": "3"},
                 "exit_code": 0, "stdout_summary": "OK", "blocking": True, "result": "PASS",
                 "script_check_scope": "verification", "script_does_not_check": "physical",
+                "authority_boundary_recognized": True,
             }],
         },
         claims=["V4"],
@@ -268,13 +270,16 @@ def test_ac6():
     }]}
     check(has_p7_forensic_path(e1) is False, "P7 blocked without report attribution")
 
-    # With report_id → should have P7 path
+    # With report_id + signed report + external verifier + report_hash → should have P7 path
     e2 = {"physical_checks": [{
         "level_evidence_type": "ai_forensic",
         "model_or_tool": "gpt-4",
         "confidence": 0.9,
         "flaw_analysis_method": "visual",
         "report_id": "rpt-001",
+        "signed_or_attributable_report": True,
+        "verifier_identity_or_role": "independent forensic lab",
+        "report_hash": "a" * 64,
     }]}
     check(has_p7_forensic_path(e2) is True, "P7 allowed with report_id")
 

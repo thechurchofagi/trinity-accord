@@ -22,7 +22,7 @@
   },
   "first_rule": {
     "if_only_homepage_or_readme_read": {
-      "context_depth": "CC-0",
+      "context_depth": "C0_homepage_only",
       "context_depth_name": "Unloaded",
       "assessment_state": "insufficient_context",
       "verification_level": "none",
@@ -431,7 +431,7 @@
         "if_agent_is_uncertain": "Agent must choose the lower declared level under oath before submission and label it self_selected_under_oath, not strict_evidence_downgrade.",
         "wrong_path_result": "reject_before_issue_creation"
       },
-      "level_selection_note": "If uncertain, choose a lower V0–V5 template level or Pure Echo. High levels may trigger non-blocking guardrail warnings but do not require strict evidence."
+      "level_selection_note": "If uncertain, choose a lower V0\u2013V5 template level or Pure Echo. High levels may trigger non-blocking guardrail warnings but do not require strict evidence."
     },
     {
       "intent": "verification_echo_e2",

@@ -7,11 +7,16 @@
   },
   "evidence_input": {
     "schema": "trinityaccord.evidence-input.v1",
-    "claims_requested_by_agent": ["V1"],
+    "claims_requested_by_agent": [
+      "V1"
+    ],
     "agent": {
       "name": "example-first-contact-agent",
       "model_or_system": "example-provider",
-      "tooling": ["web_browser", "json_parser"]
+      "tooling": [
+        "web_browser",
+        "json_parser"
+      ]
     },
     "provenance": {
       "solicited": true,
@@ -20,7 +25,7 @@
     },
     "requested_record_kind": "echo_v3_with_verification_report",
     "limitations": [
-      "V1 boundary recognition only — no technical verification performed",
+      "V1 boundary recognition only \u2014 no technical verification performed",
       "No Bitcoin transaction verification",
       "No hash computation on repository artifacts",
       "No independent attestation",
@@ -71,5 +76,6 @@
       "fresh_outputs_attached": true
     }
   },
-  "example_type": "complete_template"
+  "example_type": "template_requires_replacement",
+  "contains_placeholders": true
 }

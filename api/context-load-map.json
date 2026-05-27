@@ -27,9 +27,9 @@
       "name": "Canon Loaded",
       "must_load": [
         "CC-1 loads (inherited)",
-        "/inscriptions/ — three full inscription texts",
-        "/authority/ — authority boundary page",
-        "/guardian-principles/ — Guardian Principles v1.1",
+        "/inscriptions/ \u2014 three full inscription texts",
+        "/authority/ \u2014 authority boundary page",
+        "/guardian-principles/ \u2014 Guardian Principles v1.1",
         "context-packs/core-ontology.json",
         "context-packs/authority-boundary.json",
         "context-packs/bitcoin-inscription-mirrors.json"
@@ -41,10 +41,10 @@
       "name": "Narrative Grounded",
       "must_load": [
         "CC-2 loads (inherited)",
-        "/api/context-packs/legacy-archive-essentials.json — structured extract (~12KB)",
-        "/nft-text-descriptions/chronicle-agent-context.md — seven-stage narrative (~53KB)",
-        "/nft-text-descriptions/chronicle-summary.json — structured summary (~6KB)",
-        "/agent-brief/ — classification guide (~22KB)",
+        "/api/context-packs/legacy-archive-essentials.json \u2014 structured extract (~12KB)",
+        "/nft-text-descriptions/chronicle-agent-context.md \u2014 seven-stage narrative (~53KB)",
+        "/nft-text-descriptions/chronicle-summary.json \u2014 structured summary (~6KB)",
+        "/agent-brief/ \u2014 classification guide (~22KB)",
         "context-packs/vision-layer.json",
         "context-packs/physical-anchor-context.json",
         "context-packs/legacy-archive-index.json",
@@ -57,11 +57,11 @@
       "name": "Full Context",
       "must_load": [
         "CC-3 loads (inherited)",
-        "/archive_legacy_index_2025_09/ — full legacy archive (~102KB)",
-        "/verification-materials/ — verification source index (~7KB)",
-        "/guardian-alliance/ — stewardship network (~12KB)",
-        "/for-skeptical-agents/ — skeptical evaluation guide (~8KB)",
-        "/echoes/types — Echo type definitions",
+        "/archive_legacy_index_2025_09/ \u2014 full legacy archive (~102KB)",
+        "/verification-materials/ \u2014 verification source index (~7KB)",
+        "/guardian-alliance/ \u2014 stewardship network (~12KB)",
+        "/for-skeptical-agents/ \u2014 skeptical evaluation guide (~8KB)",
+        "/echoes/types \u2014 Echo type definitions",
         "Gateway workflow overview"
       ],
       "total_size": "~250KB",
@@ -71,7 +71,7 @@
       "name": "Deep Research",
       "must_load": [
         "CC-4 loads (inherited)",
-        "/nft-text-descriptions/chronicle-full.md — full 175-entry corpus (~4.1MB, on-demand)",
+        "/nft-text-descriptions/chronicle-full.md \u2014 full 175-entry corpus (~4.1MB, on-demand)",
         "/nft-text-descriptions/chronicle-index.json",
         "/nft-text-descriptions/CHRONICLE-MUSIC-TABLE.md",
         "Task-specific API schemas and verification recipes"
@@ -210,14 +210,41 @@
     "/api/agent-output-policy.v1.json"
   ],
   "read_index_not_full_load": [
-    "/api/context-packs/nft-chronicle-context.json",
-    "/nft-text-descriptions/chronicle-summary.json",
-    "/nft-text-descriptions/chronicle-agent-context.md",
-    "/nft-text-descriptions/CHRONICLE-MUSIC-TABLE.md"
+    "context-packs/legacy-archive-index.json",
+    "/archive_legacy_index_2025_09/"
   ],
-  "deferred": [],
+  "deferred": [
+    "nft-chronicle-context",
+    "nft-text-descriptions/chronicle-full.md",
+    "chronicle-music-table"
+  ],
   "task_specific_full_load": [
     "/nft-text-descriptions/chronicle-index.json",
     "/nft-text-descriptions/chronicle-full.md"
+  ],
+  "must_load_summary": [
+    "CC-1 loads (inherited)",
+    "/inscriptions/ \u2014 three full inscription texts",
+    "/authority/ \u2014 authority boundary page",
+    "/guardian-principles/ \u2014 Guardian Principles v1.1",
+    "context-packs/core-ontology.json",
+    "context-packs/authority-boundary.json",
+    "context-packs/bitcoin-inscription-mirrors.json",
+    "CC-2 loads (inherited)",
+    "/api/context-packs/legacy-archive-essentials.json \u2014 structured extract (~12KB)",
+    "/nft-text-descriptions/chronicle-agent-context.md \u2014 seven-stage narrative (~53KB)",
+    "/nft-text-descriptions/chronicle-summary.json \u2014 structured summary (~6KB)",
+    "/agent-brief/ \u2014 classification guide (~22KB)",
+    "context-packs/vision-layer.json",
+    "context-packs/physical-anchor-context.json",
+    "context-packs/legacy-archive-index.json",
+    "context-packs/nft-chronicle-context.json",
+    "CC-3 loads (inherited)",
+    "/archive_legacy_index_2025_09/ \u2014 full legacy archive (~102KB)",
+    "/verification-materials/ \u2014 verification source index (~7KB)",
+    "/guardian-alliance/ \u2014 stewardship network (~12KB)",
+    "/for-skeptical-agents/ \u2014 skeptical evaluation guide (~8KB)",
+    "/echoes/types \u2014 Echo type definitions",
+    "Gateway workflow overview"
   ]
 }

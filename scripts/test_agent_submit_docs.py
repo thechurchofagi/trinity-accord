@@ -36,7 +36,7 @@ check("/agent-submit" in fc, "agent-first-contact.md references /agent-submit")
 # 3. api/agent-first-contact.json has if_no_github_access in echo and verify
 fc_json = load_json("api/agent-first-contact.json")
 echo_intent = next((i for i in fc_json["choose_one"] if i["intent"] == "echo"), None)
-verify_intent = next((i for i in fc_json["choose_one"] if i["intent"] == "verify"), None)
+verify_intent = next((i for i in fc_json["choose_one"] if "verify" in i["intent"] and "echo" not in i["intent"]), None)
 
 check(echo_intent is not None, "echo intent exists")
 check(verify_intent is not None, "verify intent exists")

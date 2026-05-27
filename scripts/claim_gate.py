@@ -1406,6 +1406,9 @@ def evaluate(input_path):
             "reason": "V2+ technical verification requires explicit authority boundary recognition: Bitcoin Originals remain final authority; mirrors/reports/echoes are non-amending."
         })
 
+    # Filter out no-op downgrades (from == to)
+    downgrades = [d for d in downgrades if d.get("from") != d.get("to")]
+
     # Combine non-blocking with script limitations for output
     all_non_blocking = non_blocking + script_limitations
 

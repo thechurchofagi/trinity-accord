@@ -220,6 +220,29 @@ def independent_script():
 
 # ========== TEST SUITES ==========
 
+
+def _v8_base_evidence():
+    """Baseline evidence required for V8: B2+D5+T3+C5."""
+    return {
+        "bitcoin_checks": [{"source_type": "multi_explorer", "sources": ["mempool.space", "ordinals.com"], "authority_boundary_recognized": True}],
+        "hashes": [{"artifact": "index.md", "algorithm": "SHA-256", "expected": "a"*64, "computed": "a"*64, "match": True, "expected_hash_source": "api/repository-artifact-hashes.json", "expected_hash_authority_class": "repository_manifest_hash"}],
+        "digital_mirror_checks": [{"level_evidence_type": "full_public_digital_data_verification", "all_required_public_digital_targets_checked": True, "all_unavailable_targets_listed": True}],
+        "time_anchor_checks": [{"anchor_type": "bitcoin_block_time"}],
+        "chronicle_checks": [{"full_recovery": True, "samples_recovered": 175, "package_hash_valid": True}],
+    }
+
+
+def _merge_evidence(base, override):
+    """Merge override into base evidence dict."""
+    merged = dict(base)
+    for k, v in override.items():
+        if k in merged and isinstance(merged[k], list) and isinstance(v, list):
+            merged[k] = merged[k] + v
+        else:
+            merged[k] = v
+    return merged
+
+
 def test_v0_read_only():
     print("\n=== V0: Read Only ===")
     # V0 with no evidence at all
@@ -458,20 +481,23 @@ def test_v7_onsite():
 def test_v8_forensic():
     print("\n=== V8: Forensic Physical Attestation ===")
     test("V8-p7-ai-forensic",
-         make_input(evidence={
+         make_input(evidence=_merge_evidence(_v8_base_evidence(), {
              "physical_checks": [{
                  "level_evidence_type": "ai_forensic",
                  "model_or_tool": "feature-matcher-v1",
                  "confidence": 0.91,
                  "flaw_analysis_method": "macro/microscopy feature comparison",
                  "signed_or_attributable_report": True,
+                 "verifier_identity_or_role": "independent forensic laboratory",
+                 "report_hash": "a" * 64,
+                 "report_id": "RPT-P7-001",
              }],
-         }, claims=["V8"]),
+         }), claims=["V8"]),
          expected_protocol="V8",
          expected_components={"physical_anchor": "P7"})
 
     test("V8-p8-confidential",
-         make_input(evidence={
+         make_input(evidence=_merge_evidence(_v8_base_evidence(), {
              "physical_checks": [{
                  "level_evidence_type": "confidential_challenge",
                  "confidential_challenge": {
@@ -481,40 +507,46 @@ def test_v8_forensic():
                      "package_hash": "ef816480f77f30405378800807b42bff0a854b83a8f77793a0e0adf0944a8263",
                      "verifier_identity_or_role": "independent auditor",
                  },
+                 "signed_or_attributable_report": True,
+                 "verifier_identity_or_role": "independent auditor",
                  "report_id": "RPT-P8-001",
+                 "report_hash": "b" * 64,
              }],
-         }, claims=["V8"]),
+         }), claims=["V8"]),
          expected_protocol="V8",
          expected_components={"physical_anchor": "P8"})
 
     test("V8-p9-multi-party",
-         make_input(evidence={
+         make_input(evidence=_merge_evidence(_v8_base_evidence(), {
              "physical_checks": [{
                  "level_evidence_type": "multi_party_forensic",
                  "independent_witness_count": 3,
                  "witnesses": [
-                     {"role": "forensic analyst", "independence_class": "independent_third_party"},
-                     {"role": "materials scientist", "independence_class": "independent_third_party"},
-                     {"role": "chain-of-custody officer", "independence_class": "institutional_representative"},
+                     {"identity_or_role": "forensic analyst", "role": "forensic analyst", "independence_class": "independent_forensic_verifier"},
+                     {"identity_or_role": "materials scientist", "role": "materials scientist", "independence_class": "qualified_external_witness"},
+                     {"identity_or_role": "chain-of-custody officer", "role": "chain-of-custody officer", "independence_class": "institutional_third_party_attestation"},
                  ],
                  "method": "multi-spectral microscopy + Raman spectroscopy",
                  "signed_or_attributable_report": True,
              }],
-         }, claims=["V8"]),
+         }), claims=["V8"]),
          expected_protocol="V8",
          expected_components={"physical_anchor": "P9"})
 
     test("V8-t8-celestial",
-         make_input(evidence={
+         make_input(evidence=_merge_evidence(_v8_base_evidence(), {
              "time_anchor_checks": [{
                  "anchor_type": "star_moon_witness",
                  "nonpublic_boundary": True,
                  "authorized": True,
-                 "method_class": "celestial_alignment_observation",
-                 "uncertainty": "±2 hours",
+                 "method_class": "astronomical_ephemeris_solver",
+                 "uncertainty_minutes": 5,
                  "report_path": "reports/t8-celestial-observation.pdf",
+                 "signed_or_attributable_report": True,
+                 "verifier_identity_or_role": "independent天文台观测员",
+                 "report_hash": "c" * 64,
              }],
-         }, claims=["V8"]),
+         }), claims=["V8"]),
          expected_protocol="V8")
 
     test("V8-p7-no-confidence",
@@ -581,8 +613,6 @@ def test_component_edge_cases():
                  "fresh_capture": True,
                  "witness_identity_or_role": "onsite verifier",
                  "touch_or_handling": True,
-                 "detailed_inspection": True,
-                 "tool_assisted": False,
              }],
          }, claims=["V7"]),
          expected_protocol="V7",
@@ -617,12 +647,19 @@ def test_component_edge_cases():
                  "anchor_type": "star_moon_witness",
                  "nonpublic_boundary": True,
                  "authorized": True,
-                 "method_class": "celestial_alignment_observation",
-                 "uncertainty": "±2 hours",
+                 "method_class": "astronomical_ephemeris_solver",
+                 "uncertainty_minutes": 5,
                  "report_path": "reports/t8-celestial-observation.pdf",
+                 "signed_or_attributable_report": True,
+                 "verifier_identity_or_role": "independent天文台",
+                 "report_hash": "d" * 64,
              }],
-         }, claims=["V1"]),
-         expected_protocol="V8",  # T8 authorized celestial path derives V8
+             "bitcoin_checks": [{"source_type": "multi_explorer", "sources": ["mempool.space"], "authority_boundary_recognized": True}],
+             "hashes": [{"artifact": "index.md", "algorithm": "SHA-256", "expected": "a"*64, "computed": "a"*64, "match": True, "expected_hash_source": "api/repository-artifact-hashes.json", "expected_hash_authority_class": "repository_manifest_hash"}],
+             "digital_mirror_checks": [{"level_evidence_type": "full_public_digital_data_verification", "all_required_public_digital_targets_checked": True, "all_unavailable_targets_listed": True}],
+             "chronicle_checks": [{"full_recovery": True, "samples_recovered": 175, "package_hash_valid": True}],
+         }, claims=["V8"]),
+         expected_protocol="V8",  # T8 + baseline derives V8
          expected_components={"time_anchors": "T8"})
 
 
@@ -664,11 +701,18 @@ def test_cross_level_interactions():
                          "verifier_identity_or_role": "independent auditor",
                      },
                      "witness_identity_or_role": "independent auditor",
+                     "signed_or_attributable_report": True,
                      "report_id": "RPT-P8-002",
+                     "report_hash": "e" * 64,
                  },
              ],
+             "bitcoin_checks": [{"source_type": "multi_explorer", "sources": ["mempool.space"], "authority_boundary_recognized": True}],
+             "hashes": [{"artifact": "index.md", "algorithm": "SHA-256", "expected": "a"*64, "computed": "a"*64, "match": True, "expected_hash_source": "api/repository-artifact-hashes.json", "expected_hash_authority_class": "repository_manifest_hash"}],
+             "digital_mirror_checks": [{"level_evidence_type": "full_public_digital_data_verification", "all_required_public_digital_targets_checked": True, "all_unavailable_targets_listed": True}],
+             "time_anchor_checks": [{"anchor_type": "bitcoin_block_time"}],
+             "chronicle_checks": [{"full_recovery": True, "samples_recovered": 175, "package_hash_valid": True}],
          }, claims=["V8"]),
-         expected_protocol="V8",  # P8 path overrides V7
+         expected_protocol="V8",  # P8 path + baseline derives V8
          expected_components={"physical_anchor": "P8"})
 
     # Multiple physical checks, highest wins

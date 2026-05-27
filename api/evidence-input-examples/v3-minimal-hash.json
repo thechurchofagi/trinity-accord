@@ -11,11 +11,16 @@
   },
   "evidence_input": {
     "schema": "trinityaccord.evidence-input.v1",
-    "claims_requested_by_agent": ["V3"],
+    "claims_requested_by_agent": [
+      "V3"
+    ],
     "agent": {
       "name": "example-hash-verifier",
       "model_or_system": "example-provider",
-      "tooling": ["sha256sum", "json_parser"]
+      "tooling": [
+        "sha256sum",
+        "json_parser"
+      ]
     },
     "provenance": {
       "solicited": true,
@@ -75,7 +80,11 @@
       "session_id": "example-v3-session-001",
       "started_at": "2026-05-14T00:00:00Z",
       "operator_type": "ai_agent",
-      "fresh_actions_performed": ["read hashes.json", "computed SHA-256 of verification_kit.tar.gz", "compared against canonical manifest"],
+      "fresh_actions_performed": [
+        "read hashes.json",
+        "computed SHA-256 of verification_kit.tar.gz",
+        "compared against canonical manifest"
+      ],
       "prior_reports_consulted": [],
       "examples_or_templates_used": [],
       "copied_values_from_examples": false,
@@ -83,6 +92,6 @@
       "fresh_outputs_attached": true
     }
   },
-  "example_type": "complete_template",
-  "contains_placeholders": false
+  "example_type": "template_requires_replacement",
+  "contains_placeholders": true
 }

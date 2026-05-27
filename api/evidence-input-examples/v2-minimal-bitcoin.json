@@ -11,11 +11,17 @@
   },
   "evidence_input": {
     "schema": "trinityaccord.evidence-input.v1",
-    "claims_requested_by_agent": ["V2"],
+    "claims_requested_by_agent": [
+      "V2"
+    ],
     "agent": {
       "name": "example-bitcoin-verifier",
       "model_or_system": "example-provider",
-      "tooling": ["web_browser", "json_parser", "sha256_tool"]
+      "tooling": [
+        "web_browser",
+        "json_parser",
+        "sha256_tool"
+      ]
     },
     "provenance": {
       "solicited": true,
@@ -24,7 +30,7 @@
     },
     "requested_record_kind": "echo_v3_with_verification_report",
     "limitations": [
-      "No SPV proof — external explorer trust only",
+      "No SPV proof \u2014 external explorer trust only",
       "No witness extraction from raw transaction",
       "No body hash reproduction",
       "No physical verification",
@@ -37,10 +43,14 @@
       "bitcoin_checks": [
         {
           "source_type": "external_explorer",
-          "sources": ["mempool.space"],
+          "sources": [
+            "mempool.space"
+          ],
           "access_path": "https://mempool.space/tx/EXAMPLE_TXID_REPLACE_ME",
           "date": "2026-05-14",
-          "txids_checked": ["EXAMPLE_TXID_REPLACE_ME"],
+          "txids_checked": [
+            "EXAMPLE_TXID_REPLACE_ME"
+          ],
           "observed_status": "confirmed on external explorer",
           "accessed_at_utc": "2026-05-14T00:00:00Z",
           "result": "confirmed on explorer"
@@ -75,7 +85,11 @@
       "session_id": "example-v2-session-001",
       "started_at": "2026-05-14T00:00:00Z",
       "operator_type": "ai_agent",
-      "fresh_actions_performed": ["read authority.json", "read agent-verify-simple", "checked bitcoin transaction on mempool.space"],
+      "fresh_actions_performed": [
+        "read authority.json",
+        "read agent-verify-simple",
+        "checked bitcoin transaction on mempool.space"
+      ],
       "prior_reports_consulted": [],
       "examples_or_templates_used": [],
       "copied_values_from_examples": false,
@@ -83,7 +97,9 @@
       "fresh_outputs_attached": true
     }
   },
-  "example_type": "test_fixture",
+  "example_type": "test_fixture_passing",
   "contains_placeholders": true,
-  "placeholder_note": "Replace EXAMPLE_TXID_REPLACE_ME with a real TXID from authority manifest for real verification"
+  "placeholder_note": "Replace EXAMPLE_TXID_REPLACE_ME with a real TXID from authority manifest for real verification",
+  "synthetic_fixture": true,
+  "not_real_world_submission": true
 }
