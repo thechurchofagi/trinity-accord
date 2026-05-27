@@ -1,0 +1,37 @@
+name: Site Agent Journey Swarm Smoke
+
+on:
+  workflow_dispatch:
+    inputs:
+      site_url:
+        description: "Public site base URL"
+        required: false
+        default: "https://www.trinityaccord.org"
+      agents:
+        description: "Number of concurrent simulated agents"
+        required: false
+        default: "14"
+      rounds:
+        description: "Number of swarm rounds"
+        required: false
+        default: "2"
+  schedule:
+    - cron: "37 5 * * *"
+
+permissions:
+  contents: read
+
+jobs:
+  swarm:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: External multi-agent full journey swarm smoke
+        run: |
+          python3 scripts/smoke_external_agent_journey_swarm.py \
+            --site "${{ github.event.inputs.site_url || 'https://www.trinityaccord.org' }}" \
+            --agents "${{ github.event.inputs.agents || '14' }}" \
+            --rounds "${{ github.event.inputs.rounds || '2' }}"
