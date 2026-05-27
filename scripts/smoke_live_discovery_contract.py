@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import socket
 import sys
 import time
 import urllib.error
@@ -204,6 +205,15 @@ def main() -> int:
 
     site = args.site.rstrip("/")
     errors: list[str] = []
+
+    # DNS resolution for vantage diagnostics
+    hostname = site.split("://")[-1].split("/")[0].split(":")[0]
+    try:
+        resolved_ip = socket.gethostbyname(hostname)
+        print(f"Resolved {hostname} -> {resolved_ip}")
+    except socket.gaierror as e:
+        print(f"DNS resolution failed for {hostname}: {e}")
+        resolved_ip = "unknown"
 
     links_url = f"{site}/api/links.json"
     well_known_url = f"{site}/.well-known/trinity-accord.json"
