@@ -98,6 +98,10 @@ GROUPS = {
         ["python3", "scripts/test_pages_diagnose_cache_busted.py"],
         ["python3", "scripts/test_deploy_pages_action_allowlist.py"],
 
+        # External agent journey swarm smoke guards (v21)
+        ["python3", "scripts/test_external_agent_journey_swarm_smoke_contract.py"],
+        ["python3", "scripts/test_site_agent_journey_swarm_workflow.py"],
+
         # Gateway / Guardian core
         ["python3", "scripts/test_gateway_endpoint_contracts.py"],
         ["python3", "scripts/test_gateway_payload_semantic_validator.py"],

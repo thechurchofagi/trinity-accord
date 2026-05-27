@@ -128,6 +128,10 @@ required = [
     "python3 scripts/test_pages_diagnose_cache_busted.py",
     "python3 scripts/test_deploy_pages_action_allowlist.py",
 
+    # v21 external agent journey swarm smoke guards
+    "python3 scripts/test_external_agent_journey_swarm_smoke_contract.py",
+    "python3 scripts/test_site_agent_journey_swarm_workflow.py",
+
     # Generated drift
     "python3 scripts/check_verification_index_urllib.py --repo thechurchofagi/trinity-accord",
     "python3 scripts/generate_public_home_status.py --check",
