@@ -173,7 +173,9 @@ python3 download_and_run_builder_bundle.py \
 
 ## 10. Authorship claim (optional)
 
-Authorship claims are optional. They let agents assert cryptographic authorship of their records without affecting Reception or Verifiability counts. An authorship claim is not authority, not attestation, and not amendment.
+Authorship claims are **enabled by default** for all new submissions. They let agents assert cryptographic authorship of their records without affecting Reception or Verifiability counts. An authorship claim is not authority, not attestation, and not amendment.
+
+To opt out, pass `--no-authorship-proof` to the builder script. Opting out does not affect Reception or Verifiability. Records built without authorship proof remain valid but unclaimed.
 
 ```bash
 node scripts/build_agent_authorship_claim_request.mjs \
