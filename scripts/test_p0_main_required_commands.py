@@ -132,6 +132,13 @@ required = [
     "python3 scripts/test_external_agent_journey_swarm_smoke_contract.py",
     "python3 scripts/test_site_agent_journey_swarm_workflow.py",
 
+    # v22 external heterogeneous entrypoint journey smoke guards
+    "python3 scripts/test_external_agent_entrypoint_journey_smoke_contract.py",
+    "python3 scripts/test_site_agent_entrypoint_journey_workflow.py",
+
+    # before_leaving exit/readback contract
+    "python3 scripts/test_agent_output_policy_before_leaving_exit_contract.py",
+
     # Generated drift
     "python3 scripts/check_verification_index_urllib.py --repo thechurchofagi/trinity-accord",
     "python3 scripts/generate_public_home_status.py --check",

@@ -102,6 +102,13 @@ GROUPS = {
         ["python3", "scripts/test_external_agent_journey_swarm_smoke_contract.py"],
         ["python3", "scripts/test_site_agent_journey_swarm_workflow.py"],
 
+        # External heterogeneous entrypoint journey smoke guards (v22)
+        ["python3", "scripts/test_external_agent_entrypoint_journey_smoke_contract.py"],
+        ["python3", "scripts/test_site_agent_entrypoint_journey_workflow.py"],
+
+        # before_leaving exit/readback contract
+        ["python3", "scripts/test_agent_output_policy_before_leaving_exit_contract.py"],
+
         # Gateway / Guardian core
         ["python3", "scripts/test_gateway_endpoint_contracts.py"],
         ["python3", "scripts/test_gateway_payload_semantic_validator.py"],

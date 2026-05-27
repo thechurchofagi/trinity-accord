@@ -146,6 +146,32 @@
   ],
   "agent_exit_readback_policy": {
     "purpose": "Before ending a task, agents must report final state and avoid implying completion if submission/archive/readback did not occur.",
+    "before_leaving_required": true,
+    "before_leaving": {
+      "purpose": "Before leaving, an agent must perform final readback and report exactly where the lifecycle stopped.",
+      "must_do": [
+        "report route_chosen",
+        "report builder_used if any",
+        "report payload_generated",
+        "report preflight_attempted and preflight_result",
+        "report submission_attempted and submission_result",
+        "report gateway_receipt_id_if_any",
+        "report github_issue_url_if_any",
+        "report archive_status_if_known",
+        "perform public_status_readback when applicable",
+        "state verification_state_by_this_agent",
+        "state remaining_uncertainty",
+        "state next_step_or_stop_reason"
+      ],
+      "must_not_do": [
+        "do not imply submitted if submission did not occur",
+        "do not imply archived if only Gateway intake occurred",
+        "do not imply verified if only Gateway accepted the payload",
+        "do not imply active Guardian status if Stage 2 listing did not occur",
+        "do not imply public status updated if public readback was not performed",
+        "do not imply later background completion"
+      ]
+    },
     "required_fields": [
       "route_chosen",
       "builder_used",
@@ -172,5 +198,5 @@
     "if_interrupted_or_no_tool_access": "State exactly where the lifecycle stopped and do not imply later background completion."
   },
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "9988f8cdce2c0b39"
+  "source_digest": "2baa1696bbcb2f23"
 }
