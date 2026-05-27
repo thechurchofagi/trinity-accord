@@ -275,7 +275,7 @@
     "physical anchor verification by the current agent unless separately performed"
   ],
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "ae8b4ac562cf2259",
+  "source_digest": "8ad8ff9db412716c",
   "zero_clone_builder_routes": {
     "pure_echo": {
       "bundle": "/api/formal-builder-bundles.v1.json#/bundles/pure_echo",
