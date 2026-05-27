@@ -41,6 +41,14 @@ jobs:
           source: ./
           destination: ./_site
 
+      - name: Ensure builder-bundles in Pages artifact
+        run: |
+          set -euo pipefail
+          # Jekyll's global "*.py" exclude may strip files from builder-bundles/.
+          # Force-copy to guarantee they end up in _site/.
+          mkdir -p _site/builder-bundles
+          cp -v builder-bundles/* _site/builder-bundles/
+
       - name: Verify built agent discovery artifacts
         run: |
           set -euo pipefail
