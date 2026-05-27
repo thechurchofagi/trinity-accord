@@ -4,6 +4,7 @@ include:
   - .well-known
   - ai.txt
   - citation.cff
+  - builder-bundles
 
 # Exclude archival, dev, and generated directories from build
 exclude:

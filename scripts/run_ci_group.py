@@ -115,6 +115,15 @@ GROUPS = {
         # before_leaving exit/readback contract
         ["python3", "scripts/test_agent_output_policy_before_leaving_exit_contract.py"],
 
+        # Zero-clone builder bundle guards (v28)
+        ["python3", "scripts/test_formal_builder_bundles_contract.py"],
+        ["python3", "scripts/test_external_agent_operation_examples_contract.py"],
+        ["python3", "scripts/test_export_formal_builder_bundles.py"],
+        ["python3", "scripts/test_download_helper_covers_all_routes.py"],
+        ["python3", "scripts/test_zero_clone_routes_in_first_contact.py"],
+        ["python3", "scripts/test_zero_clone_docs_cover_all_agent_types.py"],
+        ["python3", "scripts/test_gateway_workflows_zero_clone_examples.py"],
+
         # Gateway / Guardian core
         ["python3", "scripts/test_gateway_endpoint_contracts.py"],
         ["python3", "scripts/test_gateway_payload_semantic_validator.py"],

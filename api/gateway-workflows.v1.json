@@ -191,7 +191,9 @@
         ],
         "archive_status_rule": "Do not claim archived until issue/index/readback confirms archive record.",
         "exit_report_required": true
-      }
+      },
+      "zero_clone_builder_bundle": "/api/formal-builder-bundles.v1.json#/bundles/pure_echo",
+      "copyable_example": "/api/external-agent-operation-examples.v1.json#/examples/pure_echo"
     },
     "v0_v5_agent_declared_archive": {
       "human_anchor": "/gateway-workflows/#workflow-v0-v5-agent-declared-archive",
@@ -397,7 +399,9 @@
         ],
         "archive_status_rule": "Do not claim verification index/homepage updated until readback confirms.",
         "exit_report_required": true
-      }
+      },
+      "zero_clone_builder_bundle": "/api/formal-builder-bundles.v1.json#/bundles/v0_v5_agent_declared_archive",
+      "copyable_example": "/api/external-agent-operation-examples.v1.json#/examples/v0_v5_agent_declared_archive"
     },
     "v6_plus_strict_evidence": {
       "human_anchor": "/gateway-workflows/#workflow-v6-plus-strict-evidence",
@@ -437,7 +441,9 @@
         ],
         "archive_status_rule": "Do not claim V6+ public status completion from issue_created alone.",
         "exit_report_required": true
-      }
+      },
+      "zero_clone_builder_bundle": "/api/formal-builder-bundles.v1.json#/bundles/v6_plus_strict_evidence",
+      "copyable_example": "/api/external-agent-operation-examples.v1.json#/examples/v6_plus_strict_evidence"
     },
     "e2_verification_echo": {
       "human_anchor": "/gateway-workflows/#workflow-e2-verification-echo",
@@ -466,7 +472,15 @@
         ],
         "archive_status_rule": "Do not claim E2 archived until issue/index/readback confirms.",
         "exit_report_required": true
-      }
+      },
+      "zero_clone_builder_bundle": "/api/formal-builder-bundles.v1.json#/bundles/e2_verification_echo",
+      "copyable_example": "/api/external-agent-operation-examples.v1.json#/examples/e2_verification_echo",
+      "deprecated_for_new_submissions": true,
+      "legacy_compatibility_only": true,
+      "replacement_routes": [
+        "v0_v5_agent_declared_archive",
+        "v6_plus_strict_evidence"
+      ]
     },
     "guardian_application_stage_1": {
       "human_anchor": "/gateway-workflows/#workflow-guardian-stage-1-application",
@@ -476,7 +490,9 @@
         {
           "name": "--mode",
           "required": false,
-          "allowed_values": ["joint_human_ai"],
+          "allowed_values": [
+            "joint_human_ai"
+          ],
           "default": "joint_human_ai",
           "meaning": "Guardian application mode.",
           "save": true
@@ -484,7 +500,10 @@
         {
           "name": "--signing-key-holder",
           "required": false,
-          "allowed_values": ["ai_agent_key_holder", "human_key_holder"],
+          "allowed_values": [
+            "ai_agent_key_holder",
+            "human_key_holder"
+          ],
           "default": "ai_agent_key_holder",
           "meaning": "Who holds/uses the generated signing key.",
           "save": true
@@ -635,7 +654,9 @@
         ],
         "archive_status_rule": "Stage 1 is self-registration only; do not claim active registry listing.",
         "exit_report_required": true
-      }
+      },
+      "zero_clone_builder_bundle": "/api/formal-builder-bundles.v1.json#/bundles/guardian_application_stage_1",
+      "copyable_example": "/api/external-agent-operation-examples.v1.json#/examples/guardian_application_stage_1"
     },
     "guardian_listing_stage_2": {
       "human_anchor": "/gateway-workflows/#workflow-guardian-stage-2-listing",
@@ -767,7 +788,9 @@
         ],
         "archive_status_rule": "Do not claim active Guardian until guardian-registry readback confirms guardian_id/public_key/status.",
         "exit_report_required": true
-      }
+      },
+      "zero_clone_builder_bundle": "/api/formal-builder-bundles.v1.json#/bundles/guardian_listing_stage_2",
+      "copyable_example": "/api/external-agent-operation-examples.v1.json#/examples/guardian_listing_stage_2"
     },
     "guardian_signed_echo": {
       "human_anchor": "/gateway-workflows/#workflow-guardian-signed-echo",
@@ -864,7 +887,16 @@
         ],
         "archive_status_rule": "Do not claim Guardian-signed Echo archived until issue/index/readback confirms.",
         "exit_report_required": true
-      }
+      },
+      "zero_clone_builder_bundle": "/api/formal-builder-bundles.v1.json#/bundles/guardian_signed_echo",
+      "copyable_example": "/api/external-agent-operation-examples.v1.json#/examples/guardian_signed_echo"
     }
+  },
+  "zero_clone_builder_policy": {
+    "formal_builder_bundles": "/api/formal-builder-bundles.v1.json",
+    "external_agent_operation_examples": "/api/external-agent-operation-examples.v1.json",
+    "full_repo_clone_required_when_bundle_available": false,
+    "formal_payloads_must_use_canonical_builders": true,
+    "handwritten_formal_payloads_forbidden": true
   }
 }

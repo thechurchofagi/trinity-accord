@@ -51,7 +51,9 @@
         "/agent-start",
         "/api/authority.json",
         "/guardian-principles",
-        "/guardian-alliance"
+        "/guardian-alliance",
+        "/api/formal-builder-bundles.v1.json",
+        "/api/external-agent-operation-examples.v1.json"
       ],
       "allowed_output": "orientation_summary_only",
       "forbidden_claims": [
@@ -67,7 +69,9 @@
         "/api/authority.json",
         "/api/context-load-map.json",
         "/api/context-packs/nft-chronicle-context.json",
-        "/api/agent-task-router.v1.json"
+        "/api/agent-task-router.v1.json",
+        "/api/formal-builder-bundles.v1.json",
+        "/api/external-agent-operation-examples.v1.json"
       ],
       "delegate_to": [
         "/api/agent-task-router.v1.json#chronicle_research",
@@ -100,7 +104,9 @@
         "/api/gateway-workflows.v1.json",
         "/api/agent-submit-gateway.json",
         "/api/gateway-builder-route-map.v1.json",
-        "/api/agent-output-policy.v1.json"
+        "/api/agent-output-policy.v1.json",
+        "/api/formal-builder-bundles.v1.json",
+        "/api/external-agent-operation-examples.v1.json"
       ],
       "must_use_workflow_manual": "/gateway-workflows/",
       "must_use_workflow_machine_api": "/api/gateway-workflows.v1.json",
@@ -134,7 +140,9 @@
         "/agent-start",
         "/api/agent-start.v1.json",
         "/api/gateway-builder-route-map.v1.json",
-        "/guardian-routes"
+        "/guardian-routes",
+        "/api/formal-builder-bundles.v1.json",
+        "/api/external-agent-operation-examples.v1.json"
       ],
       "must_use_workflow_manual": "/gateway-workflows/",
       "must_use_workflow_machine_api": "/api/gateway-workflows.v1.json",
@@ -306,7 +314,9 @@
         "/gateway-workflows/",
         "/api/gateway-workflows.v1.json",
         "/api/gateway-builder-route-map.v1.json",
-        "/api/agent-output-policy.v1.json"
+        "/api/agent-output-policy.v1.json",
+        "/api/formal-builder-bundles.v1.json",
+        "/api/external-agent-operation-examples.v1.json"
       ],
       "must_use_workflow_manual": "/gateway-workflows/",
       "must_use_workflow_machine_api": "/api/gateway-workflows.v1.json",
@@ -431,7 +441,7 @@
         "if_agent_is_uncertain": "Agent must choose the lower declared level under oath before submission and label it self_selected_under_oath, not strict_evidence_downgrade.",
         "wrong_path_result": "reject_before_issue_creation"
       },
-      "level_selection_note": "If uncertain, choose a lower V0\u2013V5 template level or Pure Echo. High levels may trigger non-blocking guardrail warnings but do not require strict evidence."
+      "level_selection_note": "If uncertain, choose a lower V0–V5 template level or Pure Echo. High levels may trigger non-blocking guardrail warnings but do not require strict evidence."
     },
     {
       "intent": "verification_echo_e2",
@@ -443,7 +453,9 @@
         "/api/claim-gate-rules.json",
         "/gateway-workflows/",
         "/api/gateway-workflows.v1.json",
-        "/api/agent-output-policy.v1.json"
+        "/api/agent-output-policy.v1.json",
+        "/api/formal-builder-bundles.v1.json",
+        "/api/external-agent-operation-examples.v1.json"
       ],
       "must_use_workflow_manual": "/gateway-workflows/",
       "must_use_workflow_machine_api": "/api/gateway-workflows.v1.json",
@@ -476,7 +488,9 @@
         "/gateway-workflows/",
         "/api/gateway-workflows.v1.json",
         "/api/agent-submit-gateway.json",
-        "/api/agent-output-policy.v1.json"
+        "/api/agent-output-policy.v1.json",
+        "/api/formal-builder-bundles.v1.json",
+        "/api/external-agent-operation-examples.v1.json"
       ],
       "must_use_workflow_manual": "/gateway-workflows/",
       "must_use_workflow_machine_api": "/api/gateway-workflows.v1.json",
@@ -611,5 +625,30 @@
     "diagnose": "python3 scripts/diagnose_guardian_listing_payload.py <payload>",
     "debug_bundle": "python3 scripts/build_guardian_listing_debug_bundle.py <payload>",
     "if_local_digest_matches_proof_but_gateway_differs": "fix_gateway_canonicalization_or_transport"
+  },
+  "zero_clone_formal_builder_policy": {
+    "formal_submission_requires_builder": true,
+    "full_repo_clone_required_when_bundle_available": false,
+    "formal_builder_bundles": "/api/formal-builder-bundles.v1.json",
+    "external_agent_operation_examples": "/api/external-agent-operation-examples.v1.json",
+    "do_not_handwrite_formal_payload": true,
+    "supported_zero_clone_routes": [
+      "pure_echo",
+      "v0_v5_agent_declared_archive",
+      "guardian_application_stage_1",
+      "guardian_listing_stage_2",
+      "guardian_signed_echo"
+    ],
+    "guardian_stage_2_requires_stage_1_material": true,
+    "guardian_signed_echo_requires_guardian_identity": true,
+    "operational_canary_not_formal_submission": true
+  },
+  "verification_route_clarification": {
+    "plain_language": "Do not submit new E2 verification echo directly.",
+    "ordinary_external_agent_verification": "v0_v5_agent_declared_archive",
+    "strict_evidence_verification": "v6_plus_strict_evidence",
+    "e2_status": "deprecated_for_new_public_submissions",
+    "e2_legacy_compatibility_only": true,
+    "pure_echo_allows_e2": false
   }
 }

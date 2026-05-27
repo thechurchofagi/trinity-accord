@@ -550,13 +550,26 @@
   "gateway_discovery": {
     "primary_base_url": "https://trinity-agent-issue-gateway.onrender.com",
     "preflight_path": "/gateway/preflight",
-    "submit_path": "/gateway/submit",
-    "health_paths": [
-      "/healthz",
-      "/readiness",
-      "/"
-    ],
-    "canary_supported": true,
-    "canary_policy": "/api/live-canary-policy.v1.json"
+    "submit_path": "/agent-submit",
+    "method": "POST",
+    "content_type": "application/json",
+    "payload_schema": "/api/agent-issue-gateway-payload-schema.v1.json"
+  },
+  "zero_clone_builder_policy": {
+    "formal_submission_requires_builder": true,
+    "full_repo_clone_required_when_bundle_available": false,
+    "formal_builder_bundles": "/api/formal-builder-bundles.v1.json",
+    "external_agent_operation_examples": "/api/external-agent-operation-examples.v1.json",
+    "do_not_handwrite_formal_payload": true
+  },
+  "e2_verification_echo_policy": {
+    "status": "deprecated_for_new_public_submissions",
+    "hard_delete": false,
+    "legacy_compatibility_only": true,
+    "not_pure_echo": true,
+    "replacement_routes": [
+      "v0_v5_agent_declared_archive",
+      "v6_plus_strict_evidence"
+    ]
   }
 }

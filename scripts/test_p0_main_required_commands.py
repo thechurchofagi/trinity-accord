@@ -149,6 +149,15 @@ required = [
     "python3 scripts/check_verification_index_urllib.py --repo thechurchofagi/trinity-accord",
     "python3 scripts/generate_public_home_status.py --check",
     "python3 scripts/test_home_public_status_sync.py",
+
+    # v28 zero-clone builder bundle guards
+    "python3 scripts/test_formal_builder_bundles_contract.py",
+    "python3 scripts/test_external_agent_operation_examples_contract.py",
+    "python3 scripts/test_export_formal_builder_bundles.py",
+    "python3 scripts/test_download_helper_covers_all_routes.py",
+    "python3 scripts/test_zero_clone_routes_in_first_contact.py",
+    "python3 scripts/test_zero_clone_docs_cover_all_agent_types.py",
+    "python3 scripts/test_gateway_workflows_zero_clone_examples.py",
 ]
 
 missing = [r for r in required if r not in cmds]

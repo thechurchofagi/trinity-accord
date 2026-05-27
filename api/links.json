@@ -31,7 +31,9 @@
     "/downloads/shenzhen-notary-github-release-backup-2026-05-06",
     "/recovery",
     "/disaster-recovery-drill",
-    "/authority-address-inscriptions"
+    "/authority-address-inscriptions",
+    "/zero-clone-builders",
+    "/external-agent-quickstart"
   ],
   "ai_to_ai_orientation": [
     {
@@ -101,7 +103,9 @@
     "/api/echo-index.json",
     "/api/agent-declared-verification-index.json",
     "/api/external-witness-index.json",
-    "/api/live-canary-policy.v1.json"
+    "/api/live-canary-policy.v1.json",
+    "/api/formal-builder-bundles.v1.json",
+    "/api/external-agent-operation-examples.v1.json"
   ],
   "legacy_machine": [
     "/api/echo-record-schema.v2.json"
