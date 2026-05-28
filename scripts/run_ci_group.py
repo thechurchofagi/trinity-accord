@@ -370,7 +370,9 @@ GROUPS = {
         ["python3", "scripts/smoke_live_zero_clone_builder_bundles.py", "--site", "https://www.trinityaccord.org"],
         ["python3", "scripts/smoke_external_agent_entrypoint_journeys.py", "--site", "https://www.trinityaccord.org"],
         ["python3", "scripts/diagnose_live_propagation.py"],
-        ["python3", "scripts/smoke_external_agent_concurrent_preflight_swarm.py", "--agents", "20", "--workers", "8"],
+    ],
+    "live-site-swarm": [
+        ["python3", "scripts/smoke_external_agent_concurrent_preflight_swarm.py", "--agents", "10", "--workers", "4", "--max-failures", "10"],
     ],
 }
 

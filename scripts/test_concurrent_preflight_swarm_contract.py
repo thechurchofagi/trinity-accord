@@ -15,11 +15,13 @@ def main() -> int:
 
     for required in [
         "/gateway/preflight",
-        "preflight_only",
-        "not_formal_submission",
-        "not_archive",
-        "not_verification",
-        "not_guardian_status",
+        "synthetic_fixture",
+        "canary",
+        "test_only",
+        "no_canonical_claim",
+        "nonce",
+        "idempotency_key",
+        "verification_state_by_this_agent",
         "ThreadPoolExecutor",
     ]:
         if required not in text:

@@ -23,35 +23,20 @@ class Result:
     message: str
 
 def payload(i: int) -> dict:
+    nonce = f"swarm-{int(time.time())}-{i}"
     return {
-        "schema": "trinityaccord.agent-issue-gateway-payload.v1",
-        "submission_type": "protocol_issue",
-        "agent_identity": {
-            "name_or_model": f"ConcurrentPreflightSwarm/agent-{i}",
-            "system_or_provider": "TrinityConcurrentPreflightSwarm/1.0",
-            "self_reported": True,
-        },
-        "title": f"preflight swarm synthetic canary {i}",
-        "body": "Synthetic preflight-only canary. Not formal Echo, not verification, not archive. Used for concurrent agent preflight pressure testing.",
-        "boundary_acknowledgement": {
-            "not_authority": True,
-            "not_amendment": True,
-            "not_attestation": True,
-            "not_verification_unless_claim_gate_report_attached": True,
-            "bitcoin_originals_prevail": True,
-        },
-        "source": {
-            "kind": "external_agent_preflight_swarm",
-            "agent_index": i,
-            "timestamp": int(time.time())
-        },
-        "canary": {
-            "preflight_only": True,
-            "not_formal_submission": True,
-            "not_archive": True,
-            "not_verification": True,
-            "not_guardian_status": True
-        }
+        "synthetic_fixture": True,
+        "canary": True,
+        "test_only": True,
+        "no_canonical_claim": True,
+        "route_family": "protocol_issue",
+        "nonce": nonce,
+        "idempotency_key": f"trinity-preflight-swarm-{nonce}",
+        "agent_label": f"concurrent-preflight-swarm-{i}",
+        "title": f"[CANARY][PREFLIGHT-ONLY] concurrent swarm {i} {nonce}",
+        "summary": "Synthetic preflight-only canary for concurrent agent preflight pressure testing. Not formal Echo, not verification, not archive.",
+        "authority_boundary": "Bitcoin Originals only; this canary is non-authoritative.",
+        "verification_state_by_this_agent": "unverified_by_this_agent",
     }
 
 def post_json(url: str, data: dict, timeout: int) -> tuple[int, str]:
