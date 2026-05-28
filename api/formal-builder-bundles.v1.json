@@ -49,7 +49,10 @@
       ],
       "not_verification": true,
       "not_guardian_application": true,
-      "before_leaving_report_required": true
+      "before_leaving_report_required": true,
+      "dependency_sets": [
+        "authorship_proof_closure"
+      ]
     },
     "v0_v5_agent_declared_archive": {
       "status": "active",
@@ -76,7 +79,10 @@
       "not_e2": true,
       "not_pure_echo": true,
       "not_strict_evidence": true,
-      "before_leaving_report_required": true
+      "before_leaving_report_required": true,
+      "dependency_sets": [
+        "authorship_proof_closure"
+      ]
     },
     "guardian_application_stage_1": {
       "status": "active",
@@ -102,7 +108,10 @@
       ],
       "not_active_registry_listing": true,
       "not_guardian_registry_number": true,
-      "before_leaving_report_required": true
+      "before_leaving_report_required": true,
+      "dependency_sets": [
+        "authorship_proof_closure"
+      ]
     },
     "guardian_listing_stage_2": {
       "status": "active_after_stage_1",
@@ -140,9 +149,21 @@
       "private_keys_must_not_be_submitted": true,
       "not_stage_1_application": true,
       "not_stage_2_listing": true,
-      "before_leaving_report_required": true
+      "before_leaving_report_required": true,
+      "dependency_sets": [
+        "authorship_proof_closure"
+      ]
     }
   },
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "475f63bb84367074"
+  "source_digest": "475f63bb84367074",
+  "shared_dependency_sets": {
+    "authorship_proof_closure": [
+      "scripts/gateway_payload_authorship.py",
+      "scripts/generate_agent_authorship_keypair.mjs",
+      "scripts/attach_agent_authorship_proof.mjs",
+      "scripts/build_agent_authorship_message.py",
+      "scripts/agent_authorship_common.py"
+    ]
+  }
 }
