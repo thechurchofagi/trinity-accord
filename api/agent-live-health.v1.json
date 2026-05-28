@@ -24,5 +24,8 @@
     "scripts/smoke_external_agent_concurrent_preflight_swarm.py"
   ],
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "f1e56065f47952d2"
+  "source_digest": "86e8a59c0d84a48b",
+  "concurrent_preflight_swarm_supported": false,
+  "concurrent_preflight_swarm_status": "experimental",
+  "concurrent_preflight_swarm_note": "Concurrent preflight swarm is experimental and optional until Gateway accepts the synthetic swarm canary payload shape. Do not treat as stable live-site contract."
 }

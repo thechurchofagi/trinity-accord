@@ -372,7 +372,7 @@ GROUPS = {
         ["python3", "scripts/diagnose_live_propagation.py"],
     ],
     "live-site-swarm": [
-        ["python3", "scripts/smoke_external_agent_concurrent_preflight_swarm.py", "--agents", "10", "--workers", "4", "--max-failures", "10"],
+        ["python3", "scripts/smoke_external_agent_concurrent_preflight_swarm.py", "--agents", "20", "--workers", "8", "--max-failures", "20"],
     ],
 }
 
