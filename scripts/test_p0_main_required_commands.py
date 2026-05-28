@@ -172,6 +172,22 @@ required = [
     # v28.3 CI hardening
     "python3 scripts/test_deploy_pages_workflow_contract_is_static.py",
     "python3 scripts/test_run_ci_group_timeouts.py",
+
+    # v29 homepage zero-clone paths
+    "python3 scripts/test_homepage_exposes_zero_clone_agent_paths.py",
+
+    # v29 signed builder bundle manifests
+    "python3 scripts/test_formal_builder_bundle_signature_contract.py",
+    "python3 scripts/verify_formal_builder_bundle_signatures.py",
+
+    # v29 before_leaving schema
+    "python3 scripts/test_agent_before_leaving_report_schema.py",
+
+    # v29 concurrent preflight swarm contract
+    "python3 scripts/test_concurrent_preflight_swarm_contract.py",
+
+    # v29 agent live-health
+    "python3 scripts/test_agent_live_health_contract.py",
 ]
 
 missing = [r for r in required if r not in cmds]

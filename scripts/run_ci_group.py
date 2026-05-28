@@ -173,6 +173,22 @@ GROUPS = {
         ["python3", "scripts/test_deploy_pages_workflow_contract_is_static.py"],
         ["python3", "scripts/test_run_ci_group_timeouts.py"],
 
+        # v29 homepage zero-clone paths
+        ["python3", "scripts/test_homepage_exposes_zero_clone_agent_paths.py"],
+
+        # v29 signed builder bundle manifests
+        ["python3", "scripts/test_formal_builder_bundle_signature_contract.py"],
+        ["python3", "scripts/verify_formal_builder_bundle_signatures.py"],
+
+        # v29 before_leaving schema
+        ["python3", "scripts/test_agent_before_leaving_report_schema.py"],
+
+        # v29 concurrent preflight swarm contract
+        ["python3", "scripts/test_concurrent_preflight_swarm_contract.py"],
+
+        # v29 agent live-health
+        ["python3", "scripts/test_agent_live_health_contract.py"],
+
         # Gateway / Guardian core
         ["python3", "scripts/test_gateway_endpoint_contracts.py"],
         ["python3", "scripts/test_gateway_payload_semantic_validator.py"],
@@ -354,6 +370,7 @@ GROUPS = {
         ["python3", "scripts/smoke_live_zero_clone_builder_bundles.py", "--site", "https://www.trinityaccord.org"],
         ["python3", "scripts/smoke_external_agent_entrypoint_journeys.py", "--site", "https://www.trinityaccord.org"],
         ["python3", "scripts/diagnose_live_propagation.py"],
+        ["python3", "scripts/smoke_external_agent_concurrent_preflight_swarm.py", "--agents", "20", "--workers", "8"],
     ],
 }
 
