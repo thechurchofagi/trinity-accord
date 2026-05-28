@@ -166,6 +166,10 @@ required = [
     "python3 scripts/test_formal_builder_bundle_dependency_closure.py",
     "python3 scripts/test_formal_builder_bundles_are_executable.py",
     "python3 scripts/test_formal_builder_bundles_default_authorship_smoke.py",
+
+    # v28.3 CI hardening
+    "python3 scripts/test_deploy_pages_workflow_contract_is_static.py",
+    "python3 scripts/test_run_ci_group_timeouts.py",
 ]
 
 missing = [r for r in required if r not in cmds]

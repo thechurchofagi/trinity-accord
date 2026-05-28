@@ -5,6 +5,41 @@ import argparse
 import subprocess
 import sys
 
+DEFAULT_TEST_TIMEOUT_SECONDS = 180
+LONG_TEST_TIMEOUT_SECONDS = 600
+
+LONG_RUNNING_COMMAND_KEYWORDS = [
+    "test_formal_builder_bundles_default_authorship_smoke.py",
+    "test_formal_builder_bundles_are_executable.py",
+]
+
+
+def timeout_for_command(cmd: list[str]) -> int:
+    joined = " ".join(cmd)
+    for keyword in LONG_RUNNING_COMMAND_KEYWORDS:
+        if keyword in joined:
+            return LONG_TEST_TIMEOUT_SECONDS
+    return DEFAULT_TEST_TIMEOUT_SECONDS
+
+
+def run_command(cmd: list[str]) -> int:
+    timeout = timeout_for_command(cmd)
+    print(f"$ {' '.join(cmd)}", flush=True)
+    try:
+        result = subprocess.run(
+            cmd,
+            text=True,
+            timeout=timeout,
+        )
+    except subprocess.TimeoutExpired:
+        print(
+            f"FAIL: command timed out after {timeout}s: {' '.join(cmd)}",
+            flush=True,
+        )
+        return 124
+
+    return result.returncode
+
 GROUPS = {
     "p0-main": [
         # Public surface / sitemap / API metadata
@@ -131,6 +166,10 @@ GROUPS = {
         ["python3", "scripts/test_formal_builder_bundle_dependency_closure.py"],
         ["python3", "scripts/test_formal_builder_bundles_are_executable.py"],
         ["python3", "scripts/test_formal_builder_bundles_default_authorship_smoke.py"],
+
+        # CI hardening (v28.3)
+        ["python3", "scripts/test_deploy_pages_workflow_contract_is_static.py"],
+        ["python3", "scripts/test_run_ci_group_timeouts.py"],
 
         # Gateway / Guardian core
         ["python3", "scripts/test_gateway_endpoint_contracts.py"],
@@ -309,6 +348,10 @@ GROUPS = {
         ["python3", "scripts/test_oath_strictness_consistency.py"],
         ["python3", "scripts/test_v0_v5_entrypoint_consistency.py"],
     ],
+    "live-site": [
+        ["python3", "scripts/smoke_live_zero_clone_builder_bundles.py", "--site", "https://www.trinityaccord.org"],
+        ["python3", "scripts/diagnose_live_propagation.py"],
+    ],
 }
 
 
@@ -326,10 +369,10 @@ def main():
     failures = []
     for cmd in GROUPS[args.group]:
         print(f"::group::{args.group}: {' '.join(cmd)}", flush=True)
-        result = subprocess.run(cmd)
+        rc = run_command(cmd)
         print("::endgroup::", flush=True)
-        if result.returncode != 0:
-            failures.append((cmd, result.returncode))
+        if rc != 0:
+            failures.append((cmd, rc))
             break
 
     if failures:
