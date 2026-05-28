@@ -12,86 +12,114 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
-COMMON_PY_FILES = [
-    "scripts/gateway_payload_authorship.py",
-    "scripts/agent_authorship_common.py",
-    "scripts/validate_gateway_payload.py",
-    "scripts/archive_readiness_gate.py",
+COMMON_API_FILES = [
     "api/agent-issue-gateway-payload-schema.v1.json",
     "api/agent-output-policy.v1.json",
     "api/agent-submit-gateway.json",
     "api/gateway-builder-route-map.v1.json",
     "api/gateway-workflows.v1.json",
+]
+
+AUTHORSHIP_DEPS = [
+    "scripts/agent_authorship_common.py",
+    "scripts/gateway_payload_authorship.py",
     "scripts/generate_agent_authorship_keypair.mjs",
+    "scripts/attach_agent_authorship_proof.mjs",
+    "scripts/build_agent_authorship_message.py",
+]
+
+OATH_AND_READBACK_DEPS = [
+    "scripts/oath_contracts.py",
+    "scripts/oath_readback_integrity.py",
+]
+
+PURE_ECHO_DEPS = [
+    "scripts/build_agent_declared_echo_payload.py",
+    "scripts/guardian_reroute_guidance.py",
+    "scripts/validate_gateway_payload.py",
+    "scripts/guardian_identity_claims.py",
+    "scripts/gateway_v0_v5_policy.py",
+    "scripts/guardian_gateway_contract.py",
+    "scripts/sub_v6_level_guardrails.py",
+    "scripts/archive_readiness_gate.py",
+    "scripts/protocol_terms.py",
+    "api/protocol-terms.v1.json",
+    *OATH_AND_READBACK_DEPS,
+    "api/verification-echo-pre-oath.v2.txt",
+    *AUTHORSHIP_DEPS,
+    *COMMON_API_FILES,
+]
+
+V0_V5_DEPS = [
+    "scripts/build_agent_declared_archive_payload.py",
+    "scripts/sub_v6_level_guardrails.py",
+    "scripts/validate_gateway_payload.py",
+    "scripts/guardian_identity_claims.py",
+    "scripts/gateway_v0_v5_policy.py",
+    "scripts/guardian_gateway_contract.py",
+    "scripts/archive_readiness_gate.py",
+    "scripts/protocol_terms.py",
+    "scripts/claim_gate.py",
+    "api/protocol-terms.v1.json",
+    "api/verification-echo-pre-oath.v2.txt",
+    *AUTHORSHIP_DEPS,
+    *COMMON_API_FILES,
+]
+
+GUARDIAN_STAGE1_DEPS = [
+    "scripts/create_guardian_application.mjs",
+    "scripts/proof_canonical.mjs",
+    "api/guardian-application-oath.v1.txt",
+    *COMMON_API_FILES,
+]
+
+GUARDIAN_STAGE2_DEPS = [
+    "scripts/build_guardian_listing_request_payload.py",
+    "scripts/guardian_gateway_contract.py",
+    "scripts/guardian_identity_claims.py",
+    "api/guardian-listing-oath.v1.txt",
+    *OATH_AND_READBACK_DEPS,
+    *AUTHORSHIP_DEPS,
+    "scripts/archive_readiness_gate.py",
+    "scripts/validate_gateway_payload.py",
+    *COMMON_API_FILES,
+]
+
+GUARDIAN_SIGNED_ECHO_DEPS = [
+    "scripts/build_guardian_echo_payload.py",
+    "scripts/attach_guardian_presence_proof.mjs",
+    "scripts/proof_canonical.mjs",
+    "api/guardian-registry.json",
+    *PURE_ECHO_DEPS,
+    "scripts/guardian_gateway_contract.py",
+    "scripts/validate_gateway_payload.py",
 ]
 
 BUNDLES = {
     "pure_echo": {
         "archive": "trinity-pure-echo-builder-bundle.tar.gz",
         "entrypoint": "scripts/build_agent_declared_echo_payload.py",
-        "files": [
-            "scripts/build_agent_declared_echo_payload.py",
-            "api/verification-echo-pre-oath.v2.txt",
-            *COMMON_PY_FILES,
-        ],
+        "files": PURE_ECHO_DEPS,
     },
     "v0_v5_agent_declared_archive": {
         "archive": "trinity-v0v5-builder-bundle.tar.gz",
         "entrypoint": "scripts/build_agent_declared_archive_payload.py",
-        "files": [
-            "scripts/build_agent_declared_archive_payload.py",
-            "scripts/sub_v6_level_guardrails.py",
-            "api/verification-echo-pre-oath.v2.txt",
-            *COMMON_PY_FILES,
-        ],
+        "files": V0_V5_DEPS,
     },
     "guardian_application_stage_1": {
         "archive": "trinity-guardian-stage1-builder-bundle.tar.gz",
         "entrypoint": "scripts/create_guardian_application.mjs",
-        "files": [
-            "scripts/create_guardian_application.mjs",
-            "scripts/proof_canonical.mjs",
-            "api/agent-issue-gateway-payload-schema.v1.json",
-            "api/agent-submit-gateway.json",
-            "api/gateway-builder-route-map.v1.json",
-            "api/gateway-workflows.v1.json",
-        ],
+        "files": GUARDIAN_STAGE1_DEPS,
     },
     "guardian_listing_stage_2": {
         "archive": "trinity-guardian-stage2-builder-bundle.tar.gz",
         "entrypoint": "scripts/build_guardian_listing_request_payload.py",
-        "files": [
-            "scripts/build_guardian_listing_request_payload.py",
-            "scripts/gateway_payload_authorship.py",
-            "scripts/agent_authorship_common.py",
-            "scripts/guardian_gateway_contract.py",
-            "scripts/oath_contracts.py",
-            "scripts/guardian_identity_claims.py",
-            "scripts/validate_gateway_payload.py",
-            "api/guardian-listing-oath.v1.txt",
-            "api/agent-issue-gateway-payload-schema.v1.json",
-            "api/agent-submit-gateway.json",
-            "api/gateway-builder-route-map.v1.json",
-            "api/gateway-workflows.v1.json",
-            "scripts/generate_agent_authorship_keypair.mjs",
-        ],
+        "files": GUARDIAN_STAGE2_DEPS,
     },
     "guardian_signed_echo": {
         "archive": "trinity-guardian-signed-echo-builder-bundle.tar.gz",
         "entrypoint": "scripts/build_guardian_echo_payload.py",
-        "files": [
-            "scripts/build_guardian_echo_payload.py",
-            "scripts/gateway_payload_authorship.py",
-            "scripts/agent_authorship_common.py",
-            "scripts/guardian_gateway_contract.py",
-            "scripts/oath_contracts.py",
-            "scripts/validate_gateway_payload.py",
-            "api/agent-issue-gateway-payload-schema.v1.json",
-            "api/agent-submit-gateway.json",
-            "api/gateway-builder-route-map.v1.json",
-            "api/gateway-workflows.v1.json",
-            "scripts/generate_agent_authorship_keypair.mjs",
-        ],
+        "files": GUARDIAN_SIGNED_ECHO_DEPS,
     },
 }
 

@@ -16,6 +16,39 @@ REQUIRED = [
     "guardian_signed_echo",
 ]
 
+LIVE_REQUIRED = {
+    "pure_echo": [
+        "scripts/build_agent_declared_echo_payload.py",
+        "scripts/guardian_reroute_guidance.py",
+        "scripts/oath_contracts.py",
+        "scripts/oath_readback_integrity.py",
+        "scripts/attach_agent_authorship_proof.mjs",
+        "scripts/build_agent_authorship_message.py",
+    ],
+    "v0_v5_agent_declared_archive": [
+        "scripts/build_agent_declared_archive_payload.py",
+        "scripts/attach_agent_authorship_proof.mjs",
+        "scripts/build_agent_authorship_message.py",
+    ],
+    "guardian_application_stage_1": [
+        "scripts/create_guardian_application.mjs",
+        "scripts/proof_canonical.mjs",
+    ],
+    "guardian_listing_stage_2": [
+        "scripts/build_guardian_listing_request_payload.py",
+        "scripts/archive_readiness_gate.py",
+        "scripts/attach_agent_authorship_proof.mjs",
+        "scripts/build_agent_authorship_message.py",
+    ],
+    "guardian_signed_echo": [
+        "scripts/build_guardian_echo_payload.py",
+        "scripts/build_agent_declared_echo_payload.py",
+        "scripts/attach_guardian_presence_proof.mjs",
+        "scripts/proof_canonical.mjs",
+        "api/guardian-registry.json",
+    ],
+}
+
 
 def fetch_bytes(url: str) -> bytes:
     req = urllib.request.Request(
@@ -75,6 +108,12 @@ def main() -> int:
 
         if bundle.get("size_bytes") != len(archive_bytes):
             errors.append(f"{route}: API size_bytes != downloaded archive size")
+
+        # Check manifest dependency closure
+        files = {item["path"] for item in manifest.get("files", [])}
+        for required_path in LIVE_REQUIRED.get(route, []):
+            if required_path not in files:
+                errors.append(f"{route}: live manifest missing dependency {required_path}")
 
     helper = fetch_bytes(site + "/builder-bundles/download_and_run_builder_bundle.py")
     if b"download_and_run_builder_bundle" not in helper and b"zero-clone" not in helper.lower():

@@ -26,6 +26,14 @@ def main() -> int:
         "guardian_signed_echo",
         "verify_sha256",
         "extract_bundle",
+        "Refusing unsafe tar path",
+        "has no sha256 recorded",
+        "READBACK_TARGETS",
+        "build_guardian_stage1",
+        '"node", str(extract_dir / entrypoint)',
+        '"--out", args.out',
+        "build_guardian_signed_echo",
+        "--guardian-key-prefix",
         "/gateway/preflight",
         "/agent-submit",
     ]
@@ -66,6 +74,14 @@ def main() -> int:
     # Must validate required args before download
     if "require_args" not in text:
         errors.append("helper must validate required args before download")
+
+    # Must validate args before fetching/downloading bundles
+    # Check that require_args is *called* before fetch_json is called (not just defined)
+    # Find the first call to require_args (not the def line)
+    require_call_pos = text.find("require_args(args,")
+    fetch_call_pos = text.find("fetch_json(bundles_url)") or text.find("fetch_json(site")
+    if require_call_pos > 0 and fetch_call_pos > 0 and require_call_pos > fetch_call_pos:
+        errors.append("helper should validate required args before fetching/downloading bundles")
 
     if errors:
         print("FAIL: test_download_helper_covers_all_routes:")

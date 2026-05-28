@@ -1,7 +1,7 @@
 {
   "archive": "trinity-guardian-stage2-builder-bundle.tar.gz",
-  "archive_sha256": "d0e2c898a76e180668a83d28aaa39f0c29693293079684931a6a53cf92f1e935",
-  "archive_size_bytes": 38895,
+  "archive_sha256": "b66ffc800134fc13568ab68fe12e1f4a46ddd98c9a7d43d757969585d80df2bf",
+  "archive_size_bytes": 52599,
   "bundle": "guardian_listing_stage_2",
   "entrypoint": "scripts/build_guardian_listing_request_payload.py",
   "files": [
@@ -9,6 +9,11 @@
       "path": "api/agent-issue-gateway-payload-schema.v1.json",
       "sha256": "2321fad78e3b5c9e3f38803183dd71daa251741952016351e727dc1a7ef03ca8",
       "size_bytes": 49935
+    },
+    {
+      "path": "api/agent-output-policy.v1.json",
+      "sha256": "4f9b00e3ac9a406c123a1aff10c364a6e2a6742b5077c493e4debb9de5b2a931",
+      "size_bytes": 7536
     },
     {
       "path": "api/agent-submit-gateway.json",
@@ -34,6 +39,21 @@
       "path": "scripts/agent_authorship_common.py",
       "sha256": "0b753d9f50db16baf9406292ccc4ce6f886bbc34ce173faeb88ba2ecd32c1af7",
       "size_bytes": 4911
+    },
+    {
+      "path": "scripts/archive_readiness_gate.py",
+      "sha256": "892d4258602996737dac2072557057a7377152639e83e1d3978f62058ea4be7f",
+      "size_bytes": 57604
+    },
+    {
+      "path": "scripts/attach_agent_authorship_proof.mjs",
+      "sha256": "746d513f162377830c95e7f67654f0c1e82bb0023c65c2c41b2861d073104cc0",
+      "size_bytes": 1817
+    },
+    {
+      "path": "scripts/build_agent_authorship_message.py",
+      "sha256": "68f9c88b422a8d06001aa30ee274a8de1903ee836b155fdc46bc54f8c1099dc7",
+      "size_bytes": 1872
     },
     {
       "path": "scripts/build_guardian_listing_request_payload.py",
@@ -64,6 +84,11 @@
       "path": "scripts/oath_contracts.py",
       "sha256": "def674f404415398e6fef976cd10b99e678335b62574a0f2682893b9eed9edad",
       "size_bytes": 6122
+    },
+    {
+      "path": "scripts/oath_readback_integrity.py",
+      "sha256": "9259127958331f6f7033c39346b6e1c8384d1e08334a73878e1cb1a73d018137",
+      "size_bytes": 3310
     },
     {
       "path": "scripts/validate_gateway_payload.py",

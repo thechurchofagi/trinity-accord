@@ -127,6 +127,11 @@ GROUPS = {
         # Zero-clone hardening (v28.1)
         ["python3", "scripts/test_formal_builder_bundle_api_matches_manifests.py"],
 
+        # Zero-clone hardening (v28.2)
+        ["python3", "scripts/test_formal_builder_bundle_dependency_closure.py"],
+        ["python3", "scripts/test_formal_builder_bundles_are_executable.py"],
+        ["python3", "scripts/test_formal_builder_bundles_default_authorship_smoke.py"],
+
         # Gateway / Guardian core
         ["python3", "scripts/test_gateway_endpoint_contracts.py"],
         ["python3", "scripts/test_gateway_payload_semantic_validator.py"],

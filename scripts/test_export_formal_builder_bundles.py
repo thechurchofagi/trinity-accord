@@ -30,6 +30,31 @@ FORBIDDEN = [
     "node_modules",
 ]
 
+REQUIRED_TRANSITIVE = {
+    "trinity-pure-echo-builder-bundle.tar.gz": {
+        "scripts/attach_agent_authorship_proof.mjs",
+        "scripts/build_agent_authorship_message.py",
+        "scripts/oath_contracts.py",
+        "scripts/oath_readback_integrity.py",
+        "scripts/guardian_reroute_guidance.py",
+    },
+    "trinity-v0v5-builder-bundle.tar.gz": {
+        "scripts/attach_agent_authorship_proof.mjs",
+        "scripts/build_agent_authorship_message.py",
+    },
+    "trinity-guardian-stage2-builder-bundle.tar.gz": {
+        "scripts/archive_readiness_gate.py",
+        "scripts/attach_agent_authorship_proof.mjs",
+        "scripts/build_agent_authorship_message.py",
+    },
+    "trinity-guardian-signed-echo-builder-bundle.tar.gz": {
+        "scripts/build_agent_declared_echo_payload.py",
+        "scripts/attach_guardian_presence_proof.mjs",
+        "scripts/proof_canonical.mjs",
+        "api/guardian-registry.json",
+    },
+}
+
 
 def main() -> int:
     with tempfile.TemporaryDirectory() as td:
@@ -62,6 +87,13 @@ def main() -> int:
 
             if entrypoint not in names:
                 print(f"FAIL: {archive_name} missing entrypoint {entrypoint}")
+                return 1
+
+            missing_transitive = sorted(REQUIRED_TRANSITIVE.get(archive_name, set()) - names)
+            if missing_transitive:
+                print(f"FAIL: {archive_name} missing transitive dependencies:")
+                for item in missing_transitive:
+                    print("  -", item)
                 return 1
 
             for name in names:
