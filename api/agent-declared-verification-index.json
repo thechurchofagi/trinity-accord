@@ -8,7 +8,7 @@
     "scripts/gateway_v0_v5_policy.py"
   ],
   "rebuild_source": "github_issues",
-  "rebuild_timestamp": "2026-05-26T07:30:51.859209+00:00",
+  "rebuild_timestamp": "2026-05-28T10:25:10.057020+00:00",
   "render_api_only_effective_at": "2026-05-17T05:30:00Z",
   "override_count": 1,
   "overrides_applied": [
@@ -192,6 +192,10 @@
     {
       "issue_number": 295,
       "reason": "duplicate intake key 'agent_readback_sha256' at line 74"
+    },
+    {
+      "issue_number": 298,
+      "reason": "duplicate intake key 'agent_readback_sha256' at line 69"
     }
   ],
   "records": [
