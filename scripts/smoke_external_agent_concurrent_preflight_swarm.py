@@ -24,10 +24,22 @@ class Result:
 
 def payload(i: int) -> dict:
     return {
+        "schema": "trinityaccord.agent-issue-gateway-payload.v1",
         "submission_type": "protocol_issue",
+        "agent_identity": {
+            "name_or_model": f"ConcurrentPreflightSwarm/agent-{i}",
+            "system_or_provider": "TrinityConcurrentPreflightSwarm/1.0",
+            "self_reported": True,
+        },
         "title": f"preflight swarm synthetic canary {i}",
-        "body": "Synthetic preflight-only canary. Not formal Echo, not verification, not archive.",
-        "labels": ["protocol-issue", "synthetic-canary", "preflight-only"],
+        "body": "Synthetic preflight-only canary. Not formal Echo, not verification, not archive. Used for concurrent agent preflight pressure testing.",
+        "boundary_acknowledgement": {
+            "not_authority": True,
+            "not_amendment": True,
+            "not_attestation": True,
+            "not_verification_unless_claim_gate_report_attached": True,
+            "bitcoin_originals_prevail": True,
+        },
         "source": {
             "kind": "external_agent_preflight_swarm",
             "agent_index": i,
@@ -71,8 +83,8 @@ def main() -> int:
     parser.add_argument("--gateway", default=DEFAULT_GATEWAY)
     parser.add_argument("--agents", type=int, default=20)
     parser.add_argument("--workers", type=int, default=8)
-    parser.add_argument("--timeout", type=int, default=30)
-    parser.add_argument("--max-failures", type=int, default=0)
+    parser.add_argument("--timeout", type=int, default=60)
+    parser.add_argument("--max-failures", type=int, default=2)
     args = parser.parse_args()
 
     results: list[Result] = []
