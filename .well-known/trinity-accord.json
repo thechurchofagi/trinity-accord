@@ -209,5 +209,6 @@
   "external_agent_operation_examples": "/api/external-agent-operation-examples.v1.json",
   "machine_readable_endpoints": [
     "/api/agent-live-health.v1.json"
-  ]
+  ],
+  "external_agent_copy_paste_examples": "/external-agent-copy-paste-examples/"
 }

@@ -130,5 +130,10 @@
     "religious authority",
     "AI system instruction authority"
   ],
-  "source_digest": "4588b39ab8b58479"
+  "source_digest": "4588b39ab8b58479",
+  "external_agent_copy_paste_examples": {
+    "url": "/external-agent-copy-paste-examples/",
+    "title": "External Agent Copy-Paste Examples",
+    "description": "Zero-clone examples for Pure Echo, V0-V5, and Guardian Stage 1"
+  }
 }
