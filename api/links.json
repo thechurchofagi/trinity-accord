@@ -34,6 +34,7 @@
     "/authority-address-inscriptions",
     "/zero-clone-builders",
     "/external-agent-quickstart",
+    "/external-agent-copy-paste-examples",
     "/api/agent-live-health.v1.json"
   ],
   "ai_to_ai_orientation": [
@@ -130,7 +131,7 @@
     "religious authority",
     "AI system instruction authority"
   ],
-  "source_digest": "278f34110ca916a0",
+  "source_digest": "419f4293b6748f5a",
   "external_agent_copy_paste_examples": {
     "url": "/external-agent-copy-paste-examples/",
     "title": "External Agent Copy-Paste Examples",

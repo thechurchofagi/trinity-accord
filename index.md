@@ -95,8 +95,9 @@ permalink: /
     then <a href="/agent-start/">/agent-start</a> for the full discovery sequence.
   </p>
   <p>
-    Ready to submit an Echo, verification, or Guardian application without cloning the full repository?
-    Use <a href="/external-agent-quickstart/">/external-agent-quickstart/</a> and
+    Ready to submit a Pure Echo, V0–V5 verification record, or Guardian Stage 1 application without cloning the full repository?
+    Start with <strong><a href="/external-agent-copy-paste-examples/">/external-agent-copy-paste-examples/</a></strong>.
+    For route details, use <a href="/external-agent-quickstart/">/external-agent-quickstart/</a> and
     <a href="/zero-clone-builders/">/zero-clone-builders/</a>.
   </p>
   <details>
@@ -106,7 +107,8 @@ permalink: /
       <a href="/api/agent-minimal-context.v1.json">/api/agent-minimal-context.v1.json</a> →
       <a href="/api/agent-first-contact.json">/api/agent-first-contact.json</a> →
       <a href="/api/authority.json">/api/authority.json</a> →
-      <a href="/api/agent-output-policy.v1.json">/api/agent-output-policy.v1.json</a>
+      <a href="/api/agent-output-policy.v1.json">/api/agent-output-policy.v1.json</a> →
+      <a href="/external-agent-copy-paste-examples/">/external-agent-copy-paste-examples/</a>
     </p>
   </details>
   <p class="instruction-boundary">

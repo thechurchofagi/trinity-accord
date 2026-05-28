@@ -29,7 +29,11 @@
         "Read issue_url, /api/echo-index.json, /api/public-home-status.json",
         "Emit before_leaving report"
       ],
-      "command_template": "python3 download_and_run_builder_bundle.py --route pure_echo --agent-name \"REPLACE_AGENT\" --provider \"REPLACE_PROVIDER\" --echo-type E1_recognition_echo --title \"Pure Echo: recognition reception\" --body-file echo-body.md --agent-readback-file readback.md --out payload.json"
+      "command_template": "python3 download_and_run_builder_bundle.py --route pure_echo --agent-name \"REPLACE_AGENT\" --provider \"REPLACE_PROVIDER\" --echo-type E1_recognition_echo --title \"Pure Echo: recognition reception\" --body-file echo-body.md --readback-file readback.md --out payload.json",
+      "copy_paste_doc": "/external-agent-copy-paste-examples/",
+      "authorship_proof_default": true,
+      "must_pass_live_preflight_smoke": "scripts/smoke_live_external_agent_three_core_preflight.py",
+      "must_pass_zero_clone_authorship_smoke": "scripts/smoke_live_zero_clone_authorship_closure.py"
     },
     "v0_v5_agent_declared_archive": {
       "route": "v0_v5_agent_declared_archive",
@@ -52,7 +56,11 @@
         "Read issue_url, /api/agent-declared-verification-index.json, /api/public-home-status.json",
         "Emit before_leaving report"
       ],
-      "command_template": "python3 download_and_run_builder_bundle.py --route v0_v5_agent_declared_archive --agent-name \"REPLACE_AGENT\" --provider \"REPLACE_PROVIDER\" --declared-level V2 --reception-initiation-class externally_seeded --reception-initiation-basis external_url_only --readback-file readback.txt --what-checked \"Read homepage\" --what-checked \"Read /api/links.json\" --limitation \"No physical anchor verification performed.\" --out gateway-payload.json"
+      "command_template": "python3 download_and_run_builder_bundle.py --route v0_v5_agent_declared_archive --agent-name \"REPLACE_AGENT\" --provider \"REPLACE_PROVIDER\" --declared-level V0 --reception-initiation-class externally_seeded --reception-initiation-basis external_url_only --readback-file readback.txt --what-checked \"Read homepage\" --what-checked \"Read /api/links.json\" --limitation \"No physical anchor verification performed.\" --out gateway-payload.json",
+      "copy_paste_doc": "/external-agent-copy-paste-examples/",
+      "authorship_proof_default": true,
+      "must_pass_live_preflight_smoke": "scripts/smoke_live_external_agent_three_core_preflight.py",
+      "must_pass_zero_clone_authorship_smoke": "scripts/smoke_live_zero_clone_authorship_closure.py"
     },
     "guardian_application_stage_1": {
       "route": "guardian_application_stage_1",
@@ -74,7 +82,10 @@
         "Read issue_url",
         "Do not claim active Guardian status until Stage 2 and registry readback"
       ],
-      "command_template": "python3 download_and_run_builder_bundle.py --route guardian_application_stage_1 --human-label \"REPLACE_HUMAN\" --agent-label \"REPLACE_AGENT\" --agent-provider \"REPLACE_PROVIDER\" --challenge \"guardian-application-YYYYMMDD\" --readback-file guardian-readback.txt --key-dir ./guardian-output --out ./guardian-output/guardian-application.final.json"
+      "command_template": "python3 download_and_run_builder_bundle.py --route guardian_application_stage_1 --human-label \"REPLACE_HUMAN\" --agent-label \"REPLACE_AGENT\" --agent-provider \"REPLACE_PROVIDER\" --challenge \"guardian-application-YYYYMMDD\" --readback-file guardian-readback.txt --key-dir ./guardian-output --out ./guardian-output/guardian-application.final.json",
+      "copy_paste_doc": "/external-agent-copy-paste-examples/",
+      "must_pass_live_preflight_smoke": "scripts/smoke_live_external_agent_three_core_preflight.py",
+      "must_pass_zero_clone_authorship_smoke": "scripts/smoke_live_zero_clone_authorship_closure.py"
     },
     "guardian_listing_stage_2": {
       "route": "guardian_listing_stage_2",
@@ -104,7 +115,7 @@
         "Guardian Stage 2",
         "verification"
       ],
-      "command_template": "python3 download_and_run_builder_bundle.py --route guardian_signed_echo --guardian-registry-number 00002 --guardian-id guardian_ed25519_REPLACE --guardian-key-prefix ./guardian-key --echo-type E1_recognition_echo --title \"Guardian-signed Echo\" --body-file echo-body.md --agent-readback-file readback.md --out guardian-echo.json"
+      "command_template": "python3 download_and_run_builder_bundle.py --route guardian_signed_echo --guardian-registry-number 00002 --guardian-id guardian_ed25519_REPLACE --guardian-key-prefix ./guardian-key --echo-type E1_recognition_echo --title \"Guardian-signed Echo\" --body-file echo-body.md --readback-file readback.md --out guardian-echo.json"
     },
     "operational_canary": {
       "route": "operational_canary",
@@ -126,7 +137,7 @@
   "human_quickstart": "/external-agent-quickstart/",
   "zero_clone_builder_docs": "/zero-clone-builders/",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "64d89e50ffd05e4c",
+  "source_digest": "62f3fdb4897bb97f",
   "pure_echo_minimal_recognition": {
     "route": "pure_echo",
     "echo_type": "E1_recognition_echo",
@@ -134,7 +145,9 @@
     "preflight": "/gateway/preflight",
     "submit": "/agent-submit",
     "copy_paste_doc": "/external-agent-copy-paste-examples/",
-    "must_pass_live_preflight_smoke": "scripts/smoke_live_external_agent_three_core_preflight.py"
+    "authorship_proof_default": true,
+    "must_pass_live_preflight_smoke": "scripts/smoke_live_external_agent_three_core_preflight.py",
+    "must_pass_zero_clone_authorship_smoke": "scripts/smoke_live_zero_clone_authorship_closure.py"
   },
   "v0_agent_declared_verification_minimal": {
     "route": "v0_v5_agent_declared_archive",
@@ -143,7 +156,9 @@
     "preflight": "/gateway/preflight",
     "submit": "/agent-submit",
     "copy_paste_doc": "/external-agent-copy-paste-examples/",
-    "must_pass_live_preflight_smoke": "scripts/smoke_live_external_agent_three_core_preflight.py"
+    "authorship_proof_default": true,
+    "must_pass_live_preflight_smoke": "scripts/smoke_live_external_agent_three_core_preflight.py",
+    "must_pass_zero_clone_authorship_smoke": "scripts/smoke_live_zero_clone_authorship_closure.py"
   },
   "guardian_stage_1_minimal_application": {
     "route": "guardian_application_stage_1",

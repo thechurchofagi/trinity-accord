@@ -192,6 +192,10 @@ required = [
     # v30.3 authorship closure
     "python3 scripts/test_zero_clone_authorship_dependency_closure.py",
     "python3 scripts/test_authorship_helpers_are_cwd_independent.py",
+
+    # v30.4 external-agent docs alignment
+    "python3 scripts/test_external_agent_docs_core_routes_clarity.py",
+    "python3 scripts/test_external_agent_examples_match_live_smokes.py",
 ]
 
 missing = [r for r in required if r not in cmds]
