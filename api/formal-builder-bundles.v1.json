@@ -156,7 +156,6 @@
     }
   },
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "475f63bb84367074",
   "shared_dependency_sets": {
     "authorship_proof_closure": [
       "scripts/gateway_payload_authorship.py",
@@ -165,5 +164,6 @@
       "scripts/build_agent_authorship_message.py",
       "scripts/agent_authorship_common.py"
     ]
-  }
+  },
+  "source_digest": "b529307aaa5e2eee"
 }
