@@ -126,7 +126,7 @@
   "human_quickstart": "/external-agent-quickstart/",
   "zero_clone_builder_docs": "/zero-clone-builders/",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "47cd36e58d27b08c",
+  "source_digest": "64d89e50ffd05e4c",
   "pure_echo_minimal_recognition": {
     "route": "pure_echo",
     "echo_type": "E1_recognition_echo",

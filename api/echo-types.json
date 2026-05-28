@@ -125,5 +125,5 @@
   "active_gateway_value_field": "gateway_echo_type",
   "short_id_field": "id",
   "short_ids_are_aliases_not_gateway_values": true,
-  "source_digest": "f5ce91542504bed9"
+  "source_digest": "dd6a8d5d401f7290"
 }
