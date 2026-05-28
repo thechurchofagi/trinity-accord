@@ -209,6 +209,9 @@ GROUPS = {
         ["python3", "scripts/generate_public_home_status.py", "--check"],
         ["python3", "scripts/test_home_public_status_sync.py"],
 
+        # v30.3 authorship closure
+        ["python3", "scripts/test_zero_clone_authorship_dependency_closure.py"],
+        ["python3", "scripts/test_authorship_helpers_are_cwd_independent.py"],
         # P0 group guards
         ["python3", "scripts/test_p0_main_required_commands.py"],
         ["python3", "scripts/test_p0_uses_public_core_consistency.py"],
@@ -411,3 +414,10 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+    "live-site-gateway-core": [
+        ["python3", "scripts/smoke_live_external_agent_three_core_preflight.py"],
+        ["python3", "scripts/smoke_live_zero_clone_authorship_closure.py"],
+    ],
+
+}
