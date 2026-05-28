@@ -86,7 +86,7 @@ def discover_gateway_base_url(site: str, timeout: int) -> tuple[str, str, str]:
     candidates.extend(str(item) for item in discovery.get("base_url_candidates", []))
 
     preflight_path = discovery.get("preflight_path", "/gateway/preflight")
-    submit_path = discovery.get("submit_path", "/gateway/submit")
+    submit_path = discovery.get("submit_path", "/agent-submit")
 
     for base in candidates:
         base = base.rstrip("/")
