@@ -18,7 +18,9 @@
     "workflow_manual_machine_url": "/api/gateway-workflows.v1.json",
     "artifact_custody_url": "/api/gateway-artifact-custody.v1.json",
     "must_choose_route_before_submission": true,
-    "if_error": "stop; do not patch signed JSON; return to /agent-start/; choose route again; regenerate"
+    "if_error": "stop; do not patch signed JSON; return to /agent-start/; choose route again; regenerate",
+    "before_leaving_report_schema": "/api/agent-before-leaving-report-schema.v1.json",
+    "before_leaving_required": true
   },
   "first_rule": {
     "if_only_homepage_or_readme_read": {
@@ -650,5 +652,6 @@
     "e2_status": "deprecated_for_new_public_submissions",
     "e2_legacy_compatibility_only": true,
     "pure_echo_allows_e2": false
-  }
+  },
+  "source_digest": "faaa60639a20990d"
 }
