@@ -350,6 +350,7 @@ GROUPS = {
     ],
     "live-site": [
         ["python3", "scripts/smoke_live_zero_clone_builder_bundles.py", "--site", "https://www.trinityaccord.org"],
+        ["python3", "scripts/smoke_external_agent_entrypoint_journeys.py", "--site", "https://www.trinityaccord.org"],
         ["python3", "scripts/diagnose_live_propagation.py"],
     ],
 }

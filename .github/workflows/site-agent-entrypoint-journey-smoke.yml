@@ -1,0 +1,27 @@
+name: Site Agent Entrypoint Journey Smoke
+
+on:
+  workflow_dispatch:
+    inputs:
+      site_url:
+        description: "Public site base URL"
+        required: false
+        default: "https://www.trinityaccord.org"
+  schedule:
+    - cron: "37 6 * * *"
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run external agent entrypoint journey smoke
+        run: |
+          python3 scripts/smoke_external_agent_entrypoint_journeys.py \
+            --site "${{ github.event.inputs.site_url || 'https://www.trinityaccord.org' }}"
