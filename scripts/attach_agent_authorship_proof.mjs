@@ -2,6 +2,11 @@
 import { createHash, sign } from "node:crypto";
 import { readFileSync, writeFileSync } from "node:fs";
 import { execFileSync } from "node:child_process";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
+
+const HERE = dirname(fileURLToPath(import.meta.url));
+const BUILD_AUTHORSHIP_MESSAGE = join(HERE, "build_agent_authorship_message.py");
 
 function arg(name) {
   const i = process.argv.indexOf(name);
@@ -19,13 +24,13 @@ const publicKeyPath = arg("--public-key");
 const outPath = arg("--out");
 
 const message = execFileSync("python3", [
-  "scripts/build_agent_authorship_message.py",
+  BUILD_AUTHORSHIP_MESSAGE,
   payloadPath,
   "--print-message"
 ], { encoding: "utf8" });
 
 const digest = execFileSync("python3", [
-  "scripts/build_agent_authorship_message.py",
+  BUILD_AUTHORSHIP_MESSAGE,
   payloadPath,
   "--print-digest"
 ], { encoding: "utf8" }).trim();
