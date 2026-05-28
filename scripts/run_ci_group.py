@@ -380,6 +380,10 @@ GROUPS = {
     "live-site-swarm": [
         ["python3", "scripts/smoke_external_agent_concurrent_preflight_swarm.py", "--agents", "20", "--workers", "8", "--max-failures", "20"],
     ],
+    "live-site-gateway-core": [
+        ["python3", "scripts/smoke_live_external_agent_three_core_preflight.py"],
+        ["python3", "scripts/smoke_live_zero_clone_authorship_closure.py"],
+    ],
 }
 
 
@@ -412,12 +416,7 @@ def main():
     print(f"CI_GROUP_{marker}_OK")
 
 
+
+
 if __name__ == "__main__":
     main()
-
-    "live-site-gateway-core": [
-        ["python3", "scripts/smoke_live_external_agent_three_core_preflight.py"],
-        ["python3", "scripts/smoke_live_zero_clone_authorship_closure.py"],
-    ],
-
-}
