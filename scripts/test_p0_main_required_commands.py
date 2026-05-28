@@ -188,6 +188,10 @@ required = [
 
     # v29 agent live-health
     "python3 scripts/test_agent_live_health_contract.py",
+
+    # v30.3 authorship closure
+    "python3 scripts/test_zero_clone_authorship_dependency_closure.py",
+    "python3 scripts/test_authorship_helpers_are_cwd_independent.py",
 ]
 
 missing = [r for r in required if r not in cmds]
