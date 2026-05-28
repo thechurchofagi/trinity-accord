@@ -549,11 +549,37 @@
   },
   "gateway_discovery": {
     "primary_base_url": "https://trinity-agent-issue-gateway.onrender.com",
+    "base_url_candidates": [
+      "https://trinity-agent-issue-gateway.onrender.com"
+    ],
     "preflight_path": "/gateway/preflight",
     "submit_path": "/agent-submit",
+    "health_paths": [
+      "/healthz",
+      "/readiness",
+      "/gateway/readiness",
+      "/"
+    ],
     "method": "POST",
     "content_type": "application/json",
-    "payload_schema": "/api/agent-issue-gateway-payload-schema.v1.json"
+    "payload_schema": "/api/agent-issue-gateway-payload-schema.v1.json",
+    "canary_supported": true,
+    "canary_policy": "/api/live-canary-policy.v1.json",
+    "synthetic_canary_route": {
+      "submission_type": "protocol_issue",
+      "builder_required": false,
+      "allowed_only_for": [
+        "preflight-only",
+        "single-write-canary",
+        "duplicate-canary"
+      ],
+      "not_formal_echo": true,
+      "not_archive": true,
+      "not_attestation": true,
+      "not_verification": true,
+      "not_guardian_status": true,
+      "not_canonical_amendment": true
+    }
   },
   "zero_clone_builder_policy": {
     "formal_submission_requires_builder": true,
