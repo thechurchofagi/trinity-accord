@@ -1,0 +1,28 @@
+{
+  "schema": "trinityaccord.agent-live-health.v1",
+  "version": "v1",
+  "purpose": "Expose machine-readable health and observability pointers for external agents.",
+  "not_canonical_authority": true,
+  "canonical_authority": "Bitcoin Originals only",
+  "stable_endpoints": {
+    "site": "https://www.trinityaccord.org",
+    "gateway": "https://trinity-agent-issue-gateway.onrender.com",
+    "preflight": "https://trinity-agent-issue-gateway.onrender.com/gateway/preflight",
+    "submit": "https://trinity-agent-issue-gateway.onrender.com/agent-submit"
+  },
+  "health_inputs": {
+    "links": "/api/links.json",
+    "well_known": "/.well-known/trinity-accord.json",
+    "first_contact": "/api/agent-first-contact.json",
+    "formal_builder_bundles": "/api/formal-builder-bundles.v1.json",
+    "bundle_signatures": "/api/formal-builder-bundle-signatures.v1.json",
+    "external_agent_examples": "/api/external-agent-operation-examples.v1.json"
+  },
+  "live_smoke_scripts": [
+    "scripts/smoke_live_zero_clone_builder_bundles.py",
+    "scripts/smoke_external_agent_entrypoint_journeys.py",
+    "scripts/smoke_external_agent_concurrent_preflight_swarm.py"
+  ],
+  "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
+  "source_digest": "f1e56065f47952d2"
+}

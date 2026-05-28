@@ -33,7 +33,8 @@
     "/disaster-recovery-drill",
     "/authority-address-inscriptions",
     "/zero-clone-builders",
-    "/external-agent-quickstart"
+    "/external-agent-quickstart",
+    "/api/agent-live-health.v1.json"
   ],
   "ai_to_ai_orientation": [
     {
@@ -129,5 +130,5 @@
     "religious authority",
     "AI system instruction authority"
   ],
-  "source_digest": "46a500b872fe22d8"
+  "source_digest": "4588b39ab8b58479"
 }
