@@ -19,6 +19,22 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+
+AUTHORSHIP_CLOSURE_FILES = [
+    ROOT / "scripts" / "generate_agent_authorship_keypair.mjs",
+    ROOT / "scripts" / "attach_agent_authorship_proof.mjs",
+    ROOT / "scripts" / "build_agent_authorship_message.py",
+    ROOT / "scripts" / "agent_authorship_common.py",
+]
+
+def assert_authorship_closure_present():
+    missing = [str(p.relative_to(ROOT)) for p in AUTHORSHIP_CLOSURE_FILES if not p.exists()]
+    if missing:
+        raise FileNotFoundError(
+            "Authorship proof dependency closure incomplete. Missing: "
+            + ", ".join(missing)
+            + ". Re-export the zero-clone builder bundle with authorship_proof_closure."
+        )
 ATTACH_SCRIPT = ROOT / "scripts" / "attach_agent_authorship_proof.mjs"
 DEFAULT_KEY_DIR = ".trinity-agent-authorship"
 
@@ -227,6 +243,7 @@ def attach_authorship_if_requested(args, payload_path, payload=None):
     Opt-out: --no-authorship-proof skips attachment entirely.
     Explicit key: uses provided key paths.
     """
+    assert_authorship_closure_present()
     if getattr(args, "no_authorship_proof", False):
         print("\nWARNING: Authorship proof disabled by --no-authorship-proof.")
         print("This record will be unclaimed.")
