@@ -1,6 +1,7 @@
 
 # Authorship keys - never commit private keys
 *.private.pem
+.secrets/
 *.authorship.private.pem
 agent-authorship-key.private.pem
 .trinity-agent-authorship/

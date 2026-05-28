@@ -1,0 +1,33 @@
+{
+  "schema": "trinityaccord.formal-builder-bundle-signatures.v1",
+  "version": "v1",
+  "purpose": "Expose detached signatures for zero-clone builder bundle manifests.",
+  "not_canonical_authority": true,
+  "canonical_authority": "Bitcoin Originals only",
+  "signature_algorithm": "openssl-dgst-sha256-rsa",
+  "public_key": "/api/builder-bundle-signing-public-key.pem",
+  "signed_files": {
+    "pure_echo": {
+      "manifest": "/builder-bundles/trinity-pure-echo-builder-bundle.manifest.json",
+      "signature": "/builder-bundles/trinity-pure-echo-builder-bundle.manifest.sig"
+    },
+    "v0_v5_agent_declared_archive": {
+      "manifest": "/builder-bundles/trinity-v0v5-builder-bundle.manifest.json",
+      "signature": "/builder-bundles/trinity-v0v5-builder-bundle.manifest.sig"
+    },
+    "guardian_application_stage_1": {
+      "manifest": "/builder-bundles/trinity-guardian-stage1-builder-bundle.manifest.json",
+      "signature": "/builder-bundles/trinity-guardian-stage1-builder-bundle.manifest.sig"
+    },
+    "guardian_listing_stage_2": {
+      "manifest": "/builder-bundles/trinity-guardian-stage2-builder-bundle.manifest.json",
+      "signature": "/builder-bundles/trinity-guardian-stage2-builder-bundle.manifest.sig"
+    },
+    "guardian_signed_echo": {
+      "manifest": "/builder-bundles/trinity-guardian-signed-echo-builder-bundle.manifest.json",
+      "signature": "/builder-bundles/trinity-guardian-signed-echo-builder-bundle.manifest.sig"
+    }
+  },
+  "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
+  "source_digest": "73940239acdcaa03"
+}
