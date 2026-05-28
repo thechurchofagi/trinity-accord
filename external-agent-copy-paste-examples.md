@@ -157,7 +157,7 @@ Boundary:
 
 ```text
 Guardian Stage 1 is application only.
-It does not create active Guardian status.
+not active Guardian status
 It does not create registry number.
 It does not create authority, attestation, verification, or successor reception.
 ```
