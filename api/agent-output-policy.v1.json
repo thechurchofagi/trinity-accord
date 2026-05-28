@@ -195,8 +195,9 @@
       "active_guardian_if_stage_2_not_listed",
       "public_status_updated_if_not_read_back"
     ],
-    "if_interrupted_or_no_tool_access": "State exactly where the lifecycle stopped and do not imply later background completion."
+    "if_interrupted_or_no_tool_access": "State exactly where the lifecycle stopped and do not imply later background completion.",
+    "before_leaving_report_schema": "/api/agent-before-leaving-report-schema.v1.json"
   },
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "2baa1696bbcb2f23"
+  "source_digest": "3948844fafa1b079"
 }

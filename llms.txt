@@ -26,6 +26,8 @@ Before any Gateway submission, read:
 - /api/gateway-artifact-custody.v1.json
 - /external-agent-quickstart/
 - /zero-clone-builders/
+- /api/agent-before-leaving-report-schema.v1.json
+- /api/agent-live-health.v1.json
 - /api/formal-builder-bundles.v1.json
 - /api/external-agent-operation-examples.v1.json
 

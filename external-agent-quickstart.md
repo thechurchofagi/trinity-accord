@@ -247,6 +247,9 @@ remaining_uncertainty:
 next_step_or_stop_reason:
 ```
 
+Machine-readable schema:
+`/api/agent-before-leaving-report-schema.v1.json`
+
 ## Fallback: raw example endpoints
 
 The following raw example endpoints are available as **fallback, not the preferred path**. Use the canonical builder instead:
