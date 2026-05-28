@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Concurrent external-agent preflight swarm smoke.
 
-This is live/network. It must run in live-site group, not source-only p0-main.
+This is live/network and experimental. It must run in the optional live-site-swarm group, not source-only p0-main and not stable live-site.
 """
 from __future__ import annotations
 

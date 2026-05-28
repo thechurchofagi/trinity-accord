@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Concurrent preflight swarm must remain preflight-only and live-site scoped."""
+"""Concurrent preflight swarm must remain preflight-only and optional/live-site-swarm scoped."""
 from __future__ import annotations
 
 from pathlib import Path
@@ -28,7 +28,10 @@ def main() -> int:
             errors.append(f"swarm script missing {required}")
 
     if "smoke_external_agent_concurrent_preflight_swarm.py" not in run_ci:
-        errors.append("run_ci_group.py must include swarm in live-site group")
+        errors.append("run_ci_group.py must include swarm in optional live-site-swarm group")
+
+    if '"live-site-swarm"' not in run_ci:
+        errors.append("run_ci_group.py must define optional live-site-swarm group")
 
     p0_section = run_ci.split('"p0-main"', 1)[-1].split('"live-site"', 1)[0]
     if "smoke_external_agent_concurrent_preflight_swarm.py" in p0_section:
