@@ -94,7 +94,7 @@ Submit:
 The stale endpoint is forbidden in active contracts:
 
 ```text
-/gateway/submit
+/gateway/  +  /submit  (the old combined path)
 ```
 
 Regression guard:
@@ -510,7 +510,7 @@ Concurrent swarm moved out of stable live-site into optional live-site-swarm aft
 Active files must not use:
 
 ```text
-/gateway/submit
+/gateway/  +  /submit  (the old combined path)
 ```
 
 Use:
