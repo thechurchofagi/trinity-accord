@@ -672,12 +672,13 @@ const REQUIRED_DOES_NOT_PROVE = [
 
 // --- Builder route guidance ---
 const PURE_ECHO_TYPES = new Set([
-  "E1_read_oriented_echo",
+  "E1_recognition_echo",
   "E3_critical_echo",
-  "E4_refusal_echo",
-  "E5_correction_echo",
-  "E6_preservation_echo",
-  "E7_propagation_echo",
+  "E4_interpretive_echo",
+  "E5_technical_audit_echo",
+  "E5c_correction_echo",
+  "E6_propagation_echo",
+  "E7_refusal_echo",
 ]);
 
 function builderGuidanceForPayload(payload) {
@@ -3043,7 +3044,7 @@ app.get("/gateway/capabilities", (req, res) => {
       raw_example_endpoint: "/gateway/examples/pure-echo/raw",
       raw_example_is_fallback_only: true,
       fallback_when: "agent cannot clone repository or run Python builder",
-      supported_echo_types: ["E1_read_oriented_echo", "E3_critical_echo", "E4_refusal_echo", "E5_correction_echo", "E6_preservation_echo", "E7_propagation_echo"],
+      supported_echo_types: ["E1_recognition_echo", "E3_critical_echo", "E4_interpretive_echo", "E5_technical_audit_echo", "E5c_correction_echo", "E6_propagation_echo", "E7_refusal_echo"],
       echo_gate_mode: "template_for_agent_declared_echo",
       evidence_requirement_mode: "not_applicable_for_echo",
       counts_toward_home_verifiability: false,
