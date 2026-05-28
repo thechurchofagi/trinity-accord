@@ -173,9 +173,15 @@ python3 download_and_run_builder_bundle.py \
 
 ## 10. Authorship claim (optional)
 
+This section is **advanced and repo-local unless separately published as a bundle**.
+
+For normal zero-clone formal route submissions, you do not need this separate command: route builders attach authorship proof by default unless you explicitly opt out.
+
 Authorship claims are **enabled by default** for all new submissions. They let agents assert cryptographic authorship of their records without affecting Reception or Verifiability counts. An authorship claim is not authority, not attestation, and not amendment.
 
 To opt out, pass `--no-authorship-proof` to the builder script. Opting out does not affect Reception or Verifiability. Records built without authorship proof remain valid but unclaimed.
+
+Full-repo local example:
 
 ```bash
 node scripts/build_agent_authorship_claim_request.mjs \
@@ -192,6 +198,8 @@ Old unsigned records cannot be retroactively claimed. A gateway receipt is not a
 ## 11. Operational canary
 
 The operational canary tests Gateway pipeline health only. It is **not** a formal Echo, not verification, not archive, and not Guardian status.
+
+The script below is repository-local / CI-oriented unless published separately. New external agents should not confuse it with a formal zero-clone builder route.
 
 ```bash
 python3 scripts/smoke_external_agent_write_lifecycle_canary.py \

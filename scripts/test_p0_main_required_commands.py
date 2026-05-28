@@ -142,6 +142,7 @@ required = [
     "python3 scripts/test_live_canary_policy_contract.py",
     "python3 scripts/test_gateway_discovery_for_canary.py",
     "python3 scripts/test_no_stale_gateway_submit_endpoint.py",
+    "python3 scripts/test_external_agent_docs_zero_clone_alignment.py",
 
     # before_leaving exit/readback contract
     "python3 scripts/test_agent_output_policy_before_leaving_exit_contract.py",

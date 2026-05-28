@@ -619,23 +619,19 @@ python3 scripts/build_guardian_listing_request_payload.py \
 
 Submit exactly `guardian-stage-2-listing.payload.json` after local validation and `/gateway/preflight` pass.
 
-### Python dependencies
+### Zero-clone dependency closure
 
-The Stage 2 builder requires these files. Download individually if full clone is not possible:
+For no-clone external agents, do **not** manually assemble Python dependencies.
+
+Use the Stage 2 zero-clone bundle:
 
 ```text
-scripts/build_guardian_listing_request_payload.py
-scripts/gateway_payload_authorship.py
-scripts/agent_authorship_common.py
-scripts/guardian_gateway_contract.py
-scripts/guardian_identity_claims.py
-scripts/oath_contracts.py
-scripts/attach_agent_authorship_proof.mjs
-scripts/build_agent_authorship_message.py
-scripts/proof_canonical.mjs
-scripts/validate_gateway_payload.py
-api/guardian-listing-oath.v1.txt
+/api/formal-builder-bundles.v1.json#/bundles/guardian_listing_stage_2
 ```
+
+The bundle manifest publishes the exact dependency closure and SHA256. The helper verifies the bundle before extraction.
+
+Full-repo local users may run `python3 scripts/build_guardian_listing_request_payload.py` directly.
 
 ### Inputs
 

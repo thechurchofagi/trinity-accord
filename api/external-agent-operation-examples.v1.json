@@ -109,6 +109,10 @@
     "operational_canary": {
       "route": "operational_canary",
       "formal_submission": false,
+      "script_availability": "repository_local_or_live_site_ci",
+      "zero_clone_formal_builder_route": false,
+      "builder_bundle_available": false,
+      "do_not_present_as_formal_submission": true,
       "use_when": "Test Gateway pipeline health only.",
       "not_for": [
         "formal Echo",
@@ -119,6 +123,8 @@
       "command_template": "python3 scripts/smoke_external_agent_write_lifecycle_canary.py --site https://www.trinityaccord.org --mode preflight-only"
     }
   },
+  "human_quickstart": "/external-agent-quickstart/",
+  "zero_clone_builder_docs": "/zero-clone-builders/",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "f092cd3a7a1994e8"
+  "source_digest": "47cd36e58d27b08c"
 }
