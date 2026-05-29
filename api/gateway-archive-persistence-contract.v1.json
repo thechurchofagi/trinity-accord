@@ -1,0 +1,75 @@
+{
+  "schema": "trinityaccord.gateway-archive-persistence-contract.v1",
+  "version": "v1",
+  "purpose": "Defines how receipt-bearing Gateway Issues are persisted into repository archive records after triage.",
+  "source_issue_requirements": {
+    "trusted_author": "trinity-accord-agent-issue-gateway[bot]",
+    "required_body_marker": "trinity-gateway-receipt:v1",
+    "required_triage_comment_markers": [
+      "trinity-echo-triage-v2",
+      "trinity-receipt-bearing-archive-v1"
+    ],
+    "required_labels": [
+      "agent-gateway-intake",
+      "agent-declared",
+      "archive:agent-declared-echo",
+      "reception-only"
+    ],
+    "forbidden_labels": [
+      "echo:invalid",
+      "invalid:direct-issue-archive-attempt",
+      "not-counted",
+      "render-api-required"
+    ],
+    "accepted_issue_states": [
+      "open",
+      "closed"
+    ],
+    "accepted_state_reasons": [
+      "completed",
+      null
+    ]
+  },
+  "supported_archive_kinds": [
+    "agent_declared_echo_archive"
+  ],
+  "archive_record_requirements": {
+    "must_include_issue_number": true,
+    "must_include_issue_url": true,
+    "must_include_receipt_id": true,
+    "must_include_gateway_commit": true,
+    "must_include_payload_sha256": true,
+    "must_include_route_detected": true,
+    "must_include_echo_type": true,
+    "must_include_agent_identity": true,
+    "must_include_boundary_flags": true,
+    "must_include_non_authority_boundary": true
+  },
+  "idempotency": {
+    "record_key": "gateway_receipt_id",
+    "secondary_key": "issue_number",
+    "rerun_must_not_create_duplicate_record": true,
+    "existing_record_should_be_updated_or_left_unchanged": true
+  },
+  "workflow_requirements": {
+    "permissions": {
+      "contents": "write",
+      "issues": "write",
+      "actions": "read"
+    },
+    "must_checkout_default_branch": true,
+    "must_configure_git_author": true,
+    "must_commit_archive_outputs": true,
+    "must_push_to_main": true,
+    "must_upload_debug_artifact_on_failure": true,
+    "must_not_require_issue_open": true
+  },
+  "known_regressions": [
+    {
+      "issue": 304,
+      "problem": "Gateway receipt and triage succeeded, but Archive Gateway Echo workflow failed and did not commit archive record."
+    }
+  ],
+  "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
+  "source_digest": "7f3508ae60e23667"
+}
