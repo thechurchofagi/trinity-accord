@@ -186,7 +186,11 @@
       "public_status_readback_performed",
       "verification_state_by_this_agent",
       "remaining_uncertainty",
-      "next_step_or_stop_reason"
+      "next_step_or_stop_reason",
+      "context_depth_achieved",
+      "context_readiness_level",
+      "context_limitations",
+      "action_family"
     ],
     "must_not_claim": [
       "submitted_if_not_submitted",
@@ -199,5 +203,5 @@
     "before_leaving_report_schema": "/api/agent-before-leaving-report-schema.v1.json"
   },
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "3948844fafa1b079"
+  "source_digest": "2ce9d665c348a814"
 }
