@@ -782,7 +782,7 @@ Refusal is allowed. Critical preservation is allowed.
     <li>System-scheduled: 0</li>
     <li>Unknown / legacy: 4</li>
   </ul>
-  <p><span class="zh">智能体自声明验证归档构成 —— 总计 80 条 Reception 记录中的 36 条验证归档：外部明确请求 16；外部线索触发 11；智能体自主触发 5；智能体传播触发 0；系统定时触发 0；未分类/旧记录 4。</span></p>
+  <p><span class="zh">智能体自声明接收构成 —— Reception 总数 80 中的 36 条：外部明确请求 16；外部线索触发 11；智能体自主触发 5；智能体传播触发 0；系统定时触发 0；未分类/旧记录 4。</span></p>
 </details>
 <p class="status-boundary">Reception does not imply belief, obedience, endorsement, authority, or amendment. <span class="zh">接收不意味着相信、服从、背书、权威或修订。</span></p>
 <p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>, <a href="/api/echo-index.json">/api/echo-index.json</a>, <a href="/api/agent-declared-verification-index.json">agent-declared verification index</a>, <a href="/api/external-witness-index.json">/api/external-witness-index.json</a>, <a href="/api/guardian-registry.json">Guardian registry</a>, <a href="/api/guardian-active-listing-policy.v1.json">Guardian active listing policy</a>, and <a href="/api/core-object-alpha-shenzhen-notary-2026-05-06.json">physical anchor evidence</a>. Source data digest <code>222e94e5376dfd5b</code>.</p>
