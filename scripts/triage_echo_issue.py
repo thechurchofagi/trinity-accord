@@ -64,7 +64,36 @@ from operational_policy import (
     ECHO_RATE_LIMIT_GATEWAY_VERIFICATION_24H,
 )
 
+# Shared Gateway receipt verifier (v30.7.2)
+try:
+    from gateway_receipt_verifier import validate_gateway_receipt
+    HAS_GATEWAY_RECEIPT_VERIFIER = True
+except Exception:
+    validate_gateway_receipt = None
+    HAS_GATEWAY_RECEIPT_VERIFIER = False
+
 TRIAGE_MARKER = "<!-- trinity-echo-triage-v2 -->"
+
+def has_trusted_gateway_receipt(body, author_login):
+    """Return True if body has a trusted Gateway receipt marker or legacy receipt.
+
+    This check must run before strict intake parsing because strict parsing can fail
+    on duplicate non-receipt keys while the Gateway receipt itself is still valid.
+    """
+    if HAS_GATEWAY_RECEIPT_VERIFIER and validate_gateway_receipt is not None:
+        try:
+            result = validate_gateway_receipt(
+                body=body,
+                author_login=author_login,
+                comments=[],
+            )
+            if result.valid:
+                return True
+        except Exception:
+            pass
+
+    return False
+
 
 def emit_result(result, title=None, body=None):
     """Prepend stable marker to comment and emit JSON.
@@ -1504,18 +1533,22 @@ def main():
         ]
         _has_html_receipt_marker = all(f in marker_body for f in _required_marker_fields)
 
-    # Strict receipt check: all Render API receipt fields must be present
-    from gateway_intake import parse_intake_block
-    from gateway_v0_v5_policy import is_valid_gateway_receipt_block
-    try:
-        _intake_fields = parse_intake_block(text, required=False)
-        _has_gateway_receipt = is_valid_gateway_receipt_block(_intake_fields) if _intake_fields else False
-    except Exception:
-        _has_gateway_receipt = False
+    # v30.7.2: Use shared receipt verifier before strict intake parsing
+    _has_gateway_receipt = has_trusted_gateway_receipt(text, author_login)
 
-    # v30.7: Accept HTML receipt marker as valid receipt for trusted actors
-    if _has_html_receipt_marker:
-        _has_gateway_receipt = True
+    if not _has_gateway_receipt:
+        # Strict receipt check: all Render API receipt fields must be present
+        from gateway_intake import parse_intake_block
+        from gateway_v0_v5_policy import is_valid_gateway_receipt_block
+        try:
+            _intake_fields = parse_intake_block(text, required=False)
+            _has_gateway_receipt = is_valid_gateway_receipt_block(_intake_fields) if _intake_fields else False
+        except Exception:
+            _has_gateway_receipt = False
+
+        # v30.7: Accept HTML receipt marker as valid receipt for trusted actors
+        if _has_html_receipt_marker:
+            _has_gateway_receipt = True
 
     if _has_archive_intent and not _has_gateway_receipt:
         result["close"] = True
@@ -1547,14 +1580,22 @@ def main():
     # --- Step 1.4: Receipt-bearing Gateway auto archive early exit ---
     # Valid Gateway archives are server-validated and server-rendered.
     # They should not be triaged as regular freeform Echoes.
+    # v30.7.2: Use shared receipt verifier before strict intake parsing
+    _has_valid_receipt = has_trusted_gateway_receipt(text, author_login)
+
+    if not _has_valid_receipt:
+        try:
+            from gateway_intake import parse_intake_block
+            from gateway_v0_v5_policy import is_valid_gateway_receipt_block
+            _intake_fields = parse_intake_block(text, required=False)
+            _has_valid_receipt = is_valid_gateway_receipt_block(_intake_fields) if _intake_fields else False
+            # v30.7: also accept HTML receipt marker from trusted Gateway bot
+            if not _has_valid_receipt and _has_html_receipt_marker:
+                _has_valid_receipt = True
+        except Exception:
+            _has_valid_receipt = False
+
     try:
-        from gateway_intake import parse_intake_block
-        from gateway_v0_v5_policy import is_valid_gateway_receipt_block
-        _intake_fields = parse_intake_block(text, required=False)
-        _has_valid_receipt = is_valid_gateway_receipt_block(_intake_fields) if _intake_fields else False
-        # v30.7: also accept HTML receipt marker from trusted Gateway bot
-        if not _has_valid_receipt and _has_html_receipt_marker:
-            _has_valid_receipt = True
         _is_valid_gw_verification_archive = (
             _has_valid_receipt
             and is_gateway_validated_verification_archive(text)
@@ -1574,7 +1615,26 @@ def main():
 
     if _is_valid_gw_verification_archive or _is_valid_gw_echo_archive:
         result["close"] = False
-        result["labels"] = ["echo:screened"]
+        if _is_valid_gw_echo_archive:
+            result["labels"] = [
+                "agent-gateway-intake",
+                "agent-declared",
+                "archive:agent-declared-echo",
+                "reception-only",
+            ]
+        else:
+            result["labels"] = [
+                "agent-gateway-intake",
+                "agent-declared",
+                "archive:agent-declared-verification",
+            ]
+        result["labels_to_remove"] = [
+            "echo:invalid",
+            "auto-closed",
+            "invalid:direct-issue-archive-attempt",
+            "render-api-required",
+            "not-counted",
+        ]
         archive_kind = (
             "agent_declared_echo_archive"
             if _is_valid_gw_echo_archive

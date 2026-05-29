@@ -156,7 +156,24 @@ jobs:
                 }
               }
 
+              // v30.7.2: Loose receipt scan for trusted Gateway actor
+              // Trusted bot Issues with legacy receipt fields should not be
+              // rejected due to duplicate non-receipt intake keys.
+              if (body && body.includes("created_by_gateway: true") &&
+                  body.includes("gateway_service: trinity-agent-issue-gateway") &&
+                  body.includes("gateway_receipt_id: gar-") &&
+                  body.includes("render_api_only: true") &&
+                  body.includes("server_validated: true") &&
+                  body.includes("server_rendered: true")) {
+                return true;
+              }
+
               return false;
+            }
+
+            function isGatewayCreatedForIssue(issue) {
+              if (!isTrustedGatewayActor(issue)) return false;
+              return isGatewayCreated(issue.body || "");
             }
 
             function isTrustedGatewayActor(issue) {
@@ -170,21 +187,21 @@ jobs:
 
             function isGatewayValidatedEcho(issue) {
               const body = issue.body || "";
-              return isGatewayCreated(body) &&
+              return isGatewayCreatedForIssue(issue) &&
                      requestedArchiveKind(body) === "agent_declared_echo_archive" &&
                      hasMachineFlag(body, "archive_ready", "true");
             }
 
             function isGatewayValidatedVerificationArchive(issue) {
               const body = issue.body || "";
-              return isGatewayCreated(body) &&
+              return isGatewayCreatedForIssue(issue) &&
                      requestedArchiveKind(body) === "agent_declared_verification_archive" &&
                      hasMachineFlag(body, "archive_ready", "true");
             }
 
             function isGatewayStrictEvidenceCandidate(issue) {
               const body = issue.body || "";
-              return isGatewayCreated(body) &&
+              return isGatewayCreatedForIssue(issue) &&
                      (
                        intakeField(body, "evidence_requirement_mode") === "strict_evidence_required" ||
                        intakeField(body, "claim_gate_mode") === "strict_evidence"
@@ -338,6 +355,20 @@ jobs:
             const managedLabels = new Set(result.managed_labels || JSON.parse('${{ steps.policy.outputs.managed_labels }}'));
 
             const currentLabels = context.payload.issue.labels.map(l => l.name);
+
+            // v30.7.2: Explicit label removals from triage result
+            const explicitRemove = new Set(result.labels_to_remove || []);
+            for (const label of explicitRemove) {
+              if (currentLabels.includes(label)) {
+                try {
+                  await github.rest.issues.removeLabel({
+                    owner, repo, issue_number, name: label
+                  });
+                } catch (e) {
+                  core.info(`Could not remove explicit label ${label}: ${e.message}`);
+                }
+              }
+            }
 
             for (const label of currentLabels) {
               if (managedLabels.has(label) && !desiredLabels.has(label)) {
