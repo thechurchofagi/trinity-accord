@@ -105,7 +105,7 @@
     "required_live_group": "live-site-gateway-core"
   },
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "9437b06a8de1e2c3",
+  "source_digest": "fba22e277408f118",
   "final_closure": {
     "v30_5_complete": true,
     "p0_main": "CI_GROUP_P0_MAIN_OK",
@@ -126,5 +126,17 @@
     ],
     "human_closure_report": "/docs/closure/v30.5-final-closure-report.md",
     "changelog": "/CHANGELOG.md"
+  },
+  "gateway_receipt_triage_alignment": {
+    "status": "source_verified_pending_live",
+    "contract": "/api/gateway-receipt-contract.v1.json",
+    "known_regression": 299,
+    "required_tests": [
+      "scripts/test_gateway_receipt_contract.py",
+      "scripts/test_gateway_receipt_verifier.py",
+      "scripts/test_triage_accepts_gateway_receipt.py",
+      "scripts/test_triage_rejects_forged_gateway_receipt.py",
+      "scripts/test_issue_299_gateway_receipt_regression.py"
+    ]
   }
 }

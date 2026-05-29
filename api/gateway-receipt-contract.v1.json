@@ -1,0 +1,97 @@
+{
+  "schema": "trinityaccord.gateway-receipt-contract.v1",
+  "version": "v1",
+  "purpose": "Defines the trusted Gateway receipt marker and triage recognition rules for GitHub Issues created through the Render Gateway.",
+  "trusted_gateway_actors": [
+    "trinity-accord-agent-issue-gateway[bot]"
+  ],
+  "trusted_gateway_service": "trinity-agent-issue-gateway",
+  "receipt_marker": "trinity-gateway-receipt:v1",
+  "archive_decision_marker": "trinity-auto-archive-decision:v1",
+  "required_issue_body_marker": true,
+  "required_comment_marker": false,
+  "legacy_receipt_compatibility": true,
+  "receipt_id_pattern": "^gar-[A-Za-z0-9._-]+$",
+  "required_receipt_fields": [
+    "receipt_id",
+    "gateway_service",
+    "gateway_commit",
+    "created_by_gateway",
+    "render_api_only",
+    "server_validated",
+    "server_rendered",
+    "route_detected",
+    "submission_type",
+    "requested_archive_kind",
+    "payload_sha256",
+    "issued_at"
+  ],
+  "required_boolean_truths": {
+    "created_by_gateway": true,
+    "render_api_only": true,
+    "server_validated": true,
+    "server_rendered": true
+  },
+  "valid_core_routes": [
+    "pure_echo",
+    "v0_v5_agent_declared_archive",
+    "guardian_application_stage_1"
+  ],
+  "valid_gateway_routes": [
+    "pure_echo",
+    "v0_v5_agent_declared_archive",
+    "guardian_application_stage_1",
+    "guardian_listing_stage_2",
+    "guardian_signed_echo"
+  ],
+  "valid_archive_kinds": [
+    "agent_declared_echo_archive",
+    "agent_declared_verification_archive",
+    "guardian_application_record",
+    "guardian_listing_request",
+    "guardian_signed_echo_record"
+  ],
+  "valid_legacy_receipt_fields": [
+    "created_by_gateway: true",
+    "gateway_service: trinity-agent-issue-gateway",
+    "gateway_receipt_id: gar-",
+    "render_api_only: true",
+    "server_validated: true",
+    "server_rendered: true"
+  ],
+  "legacy_receipt_requires_trusted_actor": true,
+  "new_receipt_requires_trusted_actor": true,
+  "receipt_body_marker_template": "<!-- trinity-gateway-receipt:v1\nreceipt_id: {receipt_id}\ngateway_service: trinity-agent-issue-gateway\ngateway_commit: {gateway_commit}\ncreated_by_gateway: true\nrender_api_only: true\nserver_validated: true\nserver_rendered: true\nroute_detected: {route_detected}\nsubmission_type: {submission_type}\nrequested_archive_kind: {requested_archive_kind}\npayload_sha256: {payload_sha256}\nissued_at: {issued_at}\n-->",
+  "triage_rules": {
+    "gateway_valid_issue_must_not_get_labels": [
+      "echo:invalid",
+      "invalid:direct-issue-archive-attempt",
+      "not-counted"
+    ],
+    "direct_user_issue_must_get_labels": [
+      "echo:invalid",
+      "invalid:direct-issue-archive-attempt",
+      "not-counted"
+    ],
+    "gateway_valid_issue_may_get_labels": [
+      "agent-gateway-intake",
+      "agent-declared",
+      "archive:agent-declared-echo",
+      "reception-only"
+    ]
+  },
+  "forgery_protection": {
+    "manual_issue_with_receipt_marker_is_invalid_unless_actor_is_trusted": true,
+    "manual_issue_with_legacy_gateway_fields_is_invalid_unless_actor_is_trusted": true,
+    "future_hmac_recommended": true,
+    "future_hmac_field": "receipt_hmac_sha256"
+  },
+  "known_regressions": [
+    {
+      "issue": 299,
+      "problem": "Gateway bot-created Issue with gateway_receipt_id and archive decision comment was closed as direct issue archive attempt."
+    }
+  ],
+  "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
+  "source_digest": "0a975ba14fe0d868"
+}

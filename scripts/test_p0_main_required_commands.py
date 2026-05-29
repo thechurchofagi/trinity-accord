@@ -216,6 +216,13 @@ required = [
     "python3 scripts/test_no_stale_or_invented_echo_payload_fields.py",
     "python3 scripts/test_first_contact_forces_copy_paste_or_route_selector.py",
     "python3 scripts/test_runtime_and_route_selector_forbid_invented_values.py",
+
+    # v30.7 gateway receipt triage alignment
+    "python3 scripts/test_gateway_receipt_contract.py",
+    "python3 scripts/test_gateway_receipt_verifier.py",
+    "python3 scripts/test_triage_accepts_gateway_receipt.py",
+    "python3 scripts/test_triage_rejects_forged_gateway_receipt.py",
+    "python3 scripts/test_issue_299_gateway_receipt_regression.py",
 ]
 
 missing = [r for r in required if r not in cmds]

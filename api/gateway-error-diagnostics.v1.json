@@ -124,8 +124,25 @@
         "scripts/build_agent_declared_echo_payload.py",
         "scripts/validate_gateway_payload.py"
       ]
+    },
+    {
+      "code": "GATEWAY_RECEIPT_NOT_RECOGNIZED_BY_TRIAGE",
+      "matches": [
+        "Detected an archive-like direct GitHub Issue, but no valid Gateway receipt was present",
+        "invalid:direct-issue-archive-attempt",
+        "not-counted"
+      ],
+      "likely_cause": "Gateway-created Issue did not include the receipt marker expected by triage, or triage did not recognize the Gateway bot / legacy receipt fields.",
+      "external_agent_fix": "Do not resubmit directly to GitHub. Keep the Gateway receipt_id and issue URL. Maintainers should retriage after receipt contract alignment.",
+      "maintainer_fix": "Verify /api/gateway-receipt-contract.v1.json, Gateway issue body marker, and triage receipt verifier. Run scripts/test_issue_299_gateway_receipt_regression.py and retriage false invalid Gateway Issues.",
+      "related_files": [
+        "/api/gateway-receipt-contract.v1.json",
+        "scripts/gateway_receipt_verifier.py",
+        "scripts/test_issue_299_gateway_receipt_regression.py",
+        "scripts/retriage_gateway_receipt_false_invalids.py"
+      ]
     }
   ],
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "33f2ce7125f2b339"
+  "source_digest": "2a4ea8dc3d1fefc0"
 }

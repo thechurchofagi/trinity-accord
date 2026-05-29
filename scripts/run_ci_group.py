@@ -236,6 +236,13 @@ GROUPS = {
         ["python3", "scripts/test_deep_integrity_includes_pages_build.py"],
         ["python3", "scripts/test_gateway_online_smoke_workflow.py"],
         ["python3", "scripts/test_public_core_consistency_required_links.py"],
+
+        # v30.7 Gateway receipt triage alignment
+        ["python3", "scripts/test_gateway_receipt_contract.py"],
+        ["python3", "scripts/test_gateway_receipt_verifier.py"],
+        ["python3", "scripts/test_triage_accepts_gateway_receipt.py"],
+        ["python3", "scripts/test_triage_rejects_forged_gateway_receipt.py"],
+        ["python3", "scripts/test_issue_299_gateway_receipt_regression.py"],
     ],
     "guardian": [
         ["python3", "scripts/test_guardian_automated_verification.py"],
@@ -401,6 +408,9 @@ GROUPS = {
     "live-site-gateway-core": [
         ["python3", "scripts/smoke_live_external_agent_three_core_preflight.py"],
         ["python3", "scripts/smoke_live_zero_clone_authorship_closure.py"],
+    ],
+    "live-site-gateway-receipt": [
+        ["python3", "scripts/smoke_live_gateway_receipt_triage_alignment.py"],
     ],
 }
 
