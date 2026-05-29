@@ -77,6 +77,7 @@ def validate_gateway_archive_eligibility(issue: dict[str, Any]) -> None:
         "archive:agent-declared-echo",
         "archive:agent-declared-verification",
         "archive:guardian-active-registry-listing",
+        "archive:guardian-listing-request",
         "reception-only",
     }
 
