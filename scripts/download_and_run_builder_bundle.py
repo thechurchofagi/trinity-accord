@@ -293,16 +293,22 @@ def main() -> int:
 
     args = parser.parse_args()
 
-    # Handle --print-oath: just print oath text and exit
+    # Handle --print-oath: just print oath body text and exit
+    OATH_MARKER = "=== OATH TEXT BEGINS ==="
     if args.print_oath:
         # Try local repo first, then fetch from live site
         local_oath = Path(__file__).resolve().parents[1] / "api" / "verification-echo-pre-oath.v2.txt"
         if local_oath.exists():
-            print(local_oath.read_text(encoding="utf-8").strip())
+            raw = local_oath.read_text(encoding="utf-8").strip()
         else:
             oath_url = args.site.rstrip("/") + "/api/verification-echo-pre-oath.v2.txt"
             with urlopen(oath_url, timeout=30) as r:
-                print(r.read().decode("utf-8").strip())
+                raw = r.read().decode("utf-8").strip()
+        # Print oath body only (after marker), matching builder behavior
+        if OATH_MARKER in raw:
+            print(raw.split(OATH_MARKER)[1].strip())
+        else:
+            print(raw)
         return 0
 
     # Validate --out is required for builds
