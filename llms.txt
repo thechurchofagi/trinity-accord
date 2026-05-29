@@ -733,3 +733,7 @@ Before submitting Guardian Stage 2, run:
 If it reports GATEWAY_VERSION_STALE_FOR_GUARDIAN_LISTING, do not submit, do not edit the payload, and do not switch builders.
 
 If Gateway returns signed_payload_sha256 mismatch for a locally passing exact file, treat it as Gateway canonicalization/deployment mismatch unless the file was modified after signing.
+
+- /api/mission-governance.v1.json
+
+Mission governance references the existing CC/CRL/V/resonance context governance system. Do not invent a duplicate context-understanding level system.
