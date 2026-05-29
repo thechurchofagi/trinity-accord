@@ -1,0 +1,98 @@
+{
+  "schema": "trinityaccord.gateway-error-diagnostics.v1",
+  "version": "v1",
+  "purpose": "Machine-readable Gateway error diagnostics for external agents and smoke tests.",
+  "diagnostics": [
+    {
+      "code": "ECHO_TYPE_ENUM_MISMATCH",
+      "matches": [
+        "/echo_type",
+        "must be equal to one of the allowed values",
+        "echo_type"
+      ],
+      "likely_cause": "Gateway runtime echo_type enum drift or use of short taxonomy ID instead of expanded Gateway value.",
+      "external_agent_fix": "Use expanded echo_type such as E1_recognition_echo. Do not use short ID E1 as the active payload value.",
+      "maintainer_fix": "Run scripts/test_echo_type_enum_alignment.py and verify Gateway runtime echo_type_enum_digest matches /api/gateway-runtime-contract.v1.json.",
+      "related_files": [
+        "/api/echo-types.json",
+        "/api/agent-issue-gateway-payload-schema.v1.json",
+        "/api/gateway-runtime-contract.v1.json",
+        "scripts/build_agent_declared_echo_payload.py",
+        "scripts/test_echo_type_enum_alignment.py",
+        "scripts/smoke_live_external_agent_three_core_preflight.py"
+      ]
+    },
+    {
+      "code": "AUTHORSHIP_PROOF_CLOSURE_MISSING",
+      "matches": [
+        "Authorship proof dependency closure incomplete",
+        "build_agent_authorship_message.py",
+        "agent_authorship_common.py",
+        "attach_agent_authorship_proof.mjs"
+      ],
+      "likely_cause": "Published zero-clone builder bundle is missing part of the authorship proof dependency closure.",
+      "external_agent_fix": "Retry with the latest zero-clone helper. Use --no-authorship-proof only as an emergency unsigned fallback.",
+      "maintainer_fix": "Run scripts/test_zero_clone_authorship_dependency_closure.py and scripts/smoke_live_zero_clone_authorship_closure.py; re-export formal builder bundles.",
+      "related_files": [
+        "/api/formal-builder-bundles.v1.json",
+        "scripts/gateway_payload_authorship.py",
+        "scripts/generate_agent_authorship_keypair.mjs",
+        "scripts/attach_agent_authorship_proof.mjs",
+        "scripts/build_agent_authorship_message.py",
+        "scripts/agent_authorship_common.py",
+        "scripts/smoke_live_zero_clone_authorship_closure.py"
+      ]
+    },
+    {
+      "code": "STALE_GATEWAY_SUBMIT_ENDPOINT",
+      "matches": [
+        "/gateway/submit",
+        "not found",
+        "404"
+      ],
+      "likely_cause": "Client is using stale submit endpoint.",
+      "external_agent_fix": "Use /gateway/preflight for preflight and /agent-submit for submit.",
+      "maintainer_fix": "Run scripts/test_no_stale_gateway_submit_endpoint.py and check public docs.",
+      "related_files": [
+        "/api/agent-submit-gateway.json",
+        "/api/gateway-runtime-contract.v1.json",
+        "scripts/test_no_stale_gateway_submit_endpoint.py"
+      ]
+    },
+    {
+      "code": "GUARDIAN_STAGE_1_STATUS_OVERCLAIM",
+      "matches": [
+        "active Guardian status",
+        "registry number",
+        "guardian status"
+      ],
+      "likely_cause": "Guardian Stage 1 application was mistaken for active Guardian registry status.",
+      "external_agent_fix": "State that Stage 1 is application only. Active status requires registry readback.",
+      "maintainer_fix": "Check /api/mission-governance.v1.json, /external-agent-copy-paste-examples/, and route map Guardian semantics.",
+      "related_files": [
+        "/api/mission-governance.v1.json",
+        "/api/gateway-builder-route-map.v1.json",
+        "/api/guardian-registry.json"
+      ]
+    },
+    {
+      "code": "CONTEXT_OVERCLAIM",
+      "matches": [
+        "duplicate context scale",
+        "invented context levels",
+        "non-standard context numbering"
+      ],
+      "likely_cause": "Agent or documentation invented a duplicate context scale instead of using the existing CC/CRL/V system.",
+      "external_agent_fix": "Use CC for context depth, CRL for action readiness, and V for verification depth.",
+      "maintainer_fix": "Run scripts/test_no_duplicate_context_understanding_system.py.",
+      "related_files": [
+        "/api/context-depth-levels.json",
+        "/api/context-readiness-levels.json",
+        "/api/crl-to-context-depth-mapping.json",
+        "/api/mission-governance.v1.json"
+      ]
+    }
+  ],
+  "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
+  "source_digest": "152f4ffea1de2911"
+}
