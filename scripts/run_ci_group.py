@@ -250,6 +250,8 @@ GROUPS = {
         ["python3", "scripts/test_gateway_archive_persistence_contract.py"],
         ["python3", "scripts/test_gateway_archive_issue_reader_issue_304.py"],
         ["python3", "scripts/test_archive_gateway_echo_workflow_contract.py"],
+        # Guardian retirement automation
+        ["python3", "scripts/test_guardian_retirement_automation.py"],
         ["python3", "scripts/test_render_gateway_issue_body_receipt_marker.py"],
         ["python3", "scripts/test_readback_hash_policy.py"],
     ],

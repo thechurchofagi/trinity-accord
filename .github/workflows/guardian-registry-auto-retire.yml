@@ -1,0 +1,75 @@
+name: Guardian Registry Auto-Retire
+
+on:
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: "Retirement request issue number"
+        required: true
+        type: string
+  issue_comment:
+    types: [created]
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: guardian-registry-writes
+  cancel-in-progress: false
+
+jobs:
+  retire:
+    if: >
+      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'issue_comment' &&
+       contains(github.event.comment.body, 'guardian-retirement-request'))
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Authorize write workflow actor
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          if [ "${{ github.actor }}" != "thechurchofagi" ] && [ "${{ github.actor }}" != "github-actions[bot]" ]; then
+            echo "::error::Unauthorized actor: ${{ github.actor }}"
+            exit 1
+          fi
+
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+        with:
+          persist-credentials: true
+
+      - name: Process Guardian retirement
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ISSUE_NUMBER: ${{ github.event.issue.number || github.event.inputs.issue_number }}
+        run: |
+          set -euo pipefail
+
+          if [ -z "$ISSUE_NUMBER" ]; then
+            echo "Error: issue_number is required"
+            exit 1
+          fi
+
+          echo "Processing Guardian retirement for issue #${ISSUE_NUMBER}..."
+
+          BODY_FILE=$(mktemp)
+          gh issue view "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" --json number,title,body,url,state,labels > "$BODY_FILE"
+
+          # Process retirement
+          python3 scripts/process_guardian_retirement.py --issue-json "$BODY_FILE"
+
+      - name: Comment on issue
+        if: success()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ISSUE_NUMBER: ${{ github.event.issue.number || github.event.inputs.issue_number }}
+        run: |
+          gh issue comment "$ISSUE_NUMBER" \
+            --repo "$GITHUB_REPOSITORY" \
+            --body "Guardian retirement processed. Registry updated. This action is non-authoritative and non-amending."
+
+          STATE=$(gh issue view "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" --json state -q '.state')
+          if [ "$STATE" = "OPEN" ]; then
+            gh issue close "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" --reason completed
+          fi
