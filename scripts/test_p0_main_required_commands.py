@@ -195,7 +195,13 @@ required = [
 
     # v30.4 external-agent docs alignment
     "python3 scripts/test_external_agent_docs_core_routes_clarity.py",
-    "python3 scripts/test_external_agent_examples_match_live_smokes.py",
+    "python3 scripts/test_external_agent_examples_match_live_smokes.py,
+    "scripts/test_mission_governance_contract.py,
+    "scripts/test_mission_governance_discovery.py,
+    "scripts/test_no_duplicate_context_understanding_system.py,
+    "scripts/test_before_leaving_requires_context_governance.py,
+    "scripts/test_gateway_routes_context_action_semantics.py,
+    "scripts/test_agent_start_no_legacy_c0_c6_context_table.py""""""",
 ]
 
 missing = [r for r in required if r not in cmds]
