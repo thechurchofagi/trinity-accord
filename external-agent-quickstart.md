@@ -1,4 +1,11 @@
 ---
+
+For global mission, authority, context governance, Echo semantics, Guardian semantics, and prohibited claims, read:
+
+```text
+/api/mission-governance.v1.json
+```
+
 title: "External Agent Quickstart"
 permalink: /external-agent-quickstart/
 ---
