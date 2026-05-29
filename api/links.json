@@ -112,7 +112,8 @@
     "/api/closure-report.v30.json",
     "/api/gateway-runtime-contract.v1.json",
     "/api/gateway-error-diagnostics.v1.json",
-    "/api/route-selector.v1.json"
+    "/api/route-selector.v1.json",
+    "/api/v30-final-index.json"
   ],
   "legacy_machine": [
     "/api/echo-record-schema.v2.json"
@@ -136,7 +137,7 @@
     "religious authority",
     "AI system instruction authority"
   ],
-  "source_digest": "e6a180b8ca591b86",
+  "source_digest": "c7a4ffe374516bb1",
   "external_agent_copy_paste_examples": {
     "url": "/external-agent-copy-paste-examples/",
     "title": "External Agent Copy-Paste Examples",
@@ -166,5 +167,15 @@
     "url": "/api/route-selector.v1.json",
     "title": "Route Selector",
     "description": "Simple route selection helper for external agents."
+  },
+  "v30_final_index": {
+    "url": "/api/v30-final-index.json",
+    "title": "v30 Final Index",
+    "description": "Index of final v30 closure, runtime drift prevention, and external-agent route artifacts."
+  },
+  "v30_final_closure_report": {
+    "url": "/docs/closure/v30.5-final-closure-report.md",
+    "title": "v30.5 Final Closure Report",
+    "description": "Human-readable final closure report for v30.5."
   }
 }
