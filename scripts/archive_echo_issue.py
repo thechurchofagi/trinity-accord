@@ -49,6 +49,11 @@ def validate_gateway_archive_eligibility(issue: dict[str, Any]) -> None:
     if not is_valid_gateway_receipt_block(intake):
         raise SystemExit("Refusing archive: invalid Gateway receipt fields")
 
+    # Guardian application detection — do NOT echo-archive these.
+    # They must be processed by guardian-registry-auto-list workflow instead.
+    if _is_guardian_application(intake, body, labels):
+        raise SystemExit("SKIP_ARCHIVE_GUARDIAN_APPLICATION: This is a Guardian Stage 1 application, not an echo. Route to guardian-registry-auto-list workflow.")
+
     try:
         archive_ready = parse_bool(
             intake.get("archive_ready"),
@@ -65,6 +70,7 @@ def validate_gateway_archive_eligibility(issue: dict[str, Any]) -> None:
         "agent_declared_echo_archive",
         "agent_declared_verification_archive",
         "guardian_active_registry_listing_request",
+        "guardian_application_archive",
         "pure_echo_archive",
     }
 
@@ -78,6 +84,7 @@ def validate_gateway_archive_eligibility(issue: dict[str, Any]) -> None:
         "archive:agent-declared-verification",
         "archive:guardian-active-registry-listing",
         "archive:guardian-listing-request",
+        "archive:guardian-application",
         "reception-only",
     }
 
@@ -86,6 +93,22 @@ def validate_gateway_archive_eligibility(issue: dict[str, Any]) -> None:
             "Refusing archive: issue lacks expected screened/archive labels: "
             + ", ".join(sorted(labels))
         )
+
+
+def _is_guardian_application(intake: dict, body: str, labels: set) -> bool:
+    """Detect Guardian Stage 1 applications that should not be echo-archived."""
+    # Check intake block for guardian-specific fields
+    if intake.get("guardian_registration") or intake.get("guardian_presence_proof"):
+        return True
+    if intake.get("requested_archive_kind") == "guardian_application_archive":
+        return True
+    # Check labels set by Gateway
+    if "archive:guardian-application" in labels:
+        return True
+    # Check title/body for Guardian application markers
+    if "guardian-application" in body.lower() or "guardian_registration" in body:
+        return True
+    return False
 
 
 def extract_intake_block_fields(body: str) -> dict[str, str]:
