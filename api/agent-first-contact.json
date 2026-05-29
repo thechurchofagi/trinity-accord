@@ -659,5 +659,31 @@
     "e2_legacy_compatibility_only": true,
     "pure_echo_allows_e2": false
   },
-  "source_digest": "fa7ddd1aa8505e33"
+  "source_digest": "6eb2ff65bf94d2f9",
+  "submission_safety": {
+    "homepage_is_discovery_only": true,
+    "do_not_infer_payload_fields_from_homepage": true,
+    "do_not_handwrite_formal_payloads": true,
+    "do_not_use_chat_memory_or_cached_examples_as_schema": true,
+    "required_before_submission": [
+      "/external-agent-copy-paste-examples/",
+      "/api/route-selector.v1.json",
+      "/api/gateway-runtime-contract.v1.json",
+      "/api/formal-builder-bundles.v1.json",
+      "/api/formal-builder-bundle-signatures.v1.json"
+    ],
+    "canonical_minimal_echo_type": "E1_recognition_echo",
+    "active_echo_type_source": "/api/gateway-runtime-contract.v1.json",
+    "runtime_echo_type_source": "Gateway /gateway/preflight response gateway_schema.echo_type_enum_values",
+    "forbidden_invented_values": [
+      "E1_read_oriented_echo",
+      "read_oriented_echo",
+      "agent_readback_sha256",
+      "agentreadbacksha256"
+    ],
+    "builder_required_for_formal_payloads": true,
+    "zero_clone_builder_entry": "/zero-clone-builders/",
+    "copy_paste_entry": "/external-agent-copy-paste-examples/",
+    "route_selector_entry": "/api/route-selector.v1.json"
+  }
 }

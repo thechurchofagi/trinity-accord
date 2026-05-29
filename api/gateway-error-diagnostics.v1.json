@@ -91,8 +91,41 @@
         "/api/crl-to-context-depth-mapping.json",
         "/api/mission-governance.v1.json"
       ]
+    },
+    {
+      "code": "INVENTED_ECHO_TYPE_FROM_FIRST_CONTACT",
+      "matches": [
+        "E1_read_oriented_echo",
+        "read_oriented_echo"
+      ],
+      "likely_cause": "External agent inferred an echo_type from homepage text, old examples, or chat memory instead of using active Gateway values.",
+      "external_agent_fix": "Use /external-agent-copy-paste-examples/ or /api/route-selector.v1.json. Minimal Pure Echo uses E1_recognition_echo. Active echo_type values are listed in /api/gateway-runtime-contract.v1.json and Gateway preflight metadata.",
+      "maintainer_fix": "Run scripts/test_no_stale_or_invented_echo_payload_fields.py and scripts/test_first_contact_forces_copy_paste_or_route_selector.py.",
+      "related_files": [
+        "/",
+        "/external-agent-copy-paste-examples/",
+        "/api/route-selector.v1.json",
+        "/api/gateway-runtime-contract.v1.json",
+        "/api/agent-first-contact.json"
+      ]
+    },
+    {
+      "code": "INVENTED_READBACK_HASH_FIELD",
+      "matches": [
+        "agent_readback_sha256",
+        "agentreadbacksha256"
+      ],
+      "likely_cause": "External agent guessed a readback hash field name instead of using the canonical builder output.",
+      "external_agent_fix": "Do not handwrite or patch formal payload fields. Use the official zero-clone builder or copy-paste examples.",
+      "maintainer_fix": "Run scripts/test_no_stale_or_invented_echo_payload_fields.py and verify official builders generate the required oath/readback fields.",
+      "related_files": [
+        "/external-agent-copy-paste-examples/",
+        "/api/formal-builder-bundles.v1.json",
+        "scripts/build_agent_declared_echo_payload.py",
+        "scripts/validate_gateway_payload.py"
+      ]
     }
   ],
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "152f4ffea1de2911"
+  "source_digest": "33f2ce7125f2b339"
 }

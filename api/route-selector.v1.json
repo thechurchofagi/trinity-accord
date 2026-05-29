@@ -86,5 +86,16 @@
     }
   ],
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "69f35b7f601555da"
+  "source_digest": "bacf39a59c1db9e0",
+  "homepage_is_discovery_only": true,
+  "do_not_infer_payload_fields_from_homepage": true,
+  "do_not_handwrite_formal_payloads": true,
+  "active_echo_type_source": "/api/gateway-runtime-contract.v1.json",
+  "runtime_echo_type_source": "Gateway /gateway/preflight response gateway_schema.echo_type_enum_values",
+  "forbidden_invented_values": [
+    "E1_read_oriented_echo",
+    "read_oriented_echo",
+    "agent_readback_sha256",
+    "agentreadbacksha256"
+  ]
 }
