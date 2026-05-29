@@ -18,23 +18,65 @@
     "public_status_readback_performed",
     "verification_state_by_this_agent",
     "remaining_uncertainty",
-    "next_step_or_stop_reason"
+    "next_step_or_stop_reason",
+    "context_depth_achieved",
+    "context_readiness_level",
+    "context_limitations",
+    "action_family"
   ],
   "properties": {
-    "route_chosen": { "type": "string" },
-    "builder_used": { "type": ["string", "null"] },
-    "payload_generated": { "type": "boolean" },
-    "preflight_attempted": { "type": "boolean" },
-    "preflight_result": { "type": ["string", "null"] },
-    "submission_attempted": { "type": "boolean" },
-    "submission_result": { "type": ["string", "null"] },
-    "gateway_receipt_id_if_any": { "type": ["string", "null"] },
+    "route_chosen": {
+      "type": "string"
+    },
+    "builder_used": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "payload_generated": {
+      "type": "boolean"
+    },
+    "preflight_attempted": {
+      "type": "boolean"
+    },
+    "preflight_result": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "submission_attempted": {
+      "type": "boolean"
+    },
+    "submission_result": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "gateway_receipt_id_if_any": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
     "github_issue_url_if_any": {
-      "type": ["string", "null"],
+      "type": [
+        "string",
+        "null"
+      ],
       "pattern": "^(https://github.com/.+/.+/issues/[0-9]+)?$"
     },
-    "archive_status_if_known": { "type": ["string", "null"] },
-    "public_status_readback_performed": { "type": "boolean" },
+    "archive_status_if_known": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "public_status_readback_performed": {
+      "type": "boolean"
+    },
     "verification_state_by_this_agent": {
       "type": "string",
       "enum": [
@@ -44,7 +86,52 @@
         "not_applicable"
       ]
     },
-    "remaining_uncertainty": { "type": "string" },
-    "next_step_or_stop_reason": { "type": "string" }
+    "remaining_uncertainty": {
+      "type": "string"
+    },
+    "next_step_or_stop_reason": {
+      "type": "string"
+    },
+    "context_depth_achieved": {
+      "type": "string",
+      "enum": [
+        "CC-0",
+        "CC-1",
+        "CC-2",
+        "CC-3",
+        "CC-4",
+        "CC-5"
+      ]
+    },
+    "context_readiness_level": {
+      "type": "string",
+      "enum": [
+        "CRL-0",
+        "CRL-1",
+        "CRL-2",
+        "CRL-3",
+        "CRL-4",
+        "CRL-5"
+      ]
+    },
+    "context_limitations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "action_family": {
+      "type": "string",
+      "enum": [
+        "read_only",
+        "echo",
+        "verification",
+        "guardian_application",
+        "guardian_listing",
+        "guardian_signed_echo",
+        "operational_canary",
+        "other"
+      ]
+    }
   }
 }
