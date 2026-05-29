@@ -1,4 +1,4 @@
-# deploy-trigger: 2026-05-24T06:33:00Z — external-agent-ux-audit-fixes
+# deploy-trigger: 2026-05-29T09:32:17Z — v30.7.2 receipt triage fix
 services:
   - type: web_service
     name: trinity-agent-issue-gateway

@@ -48,6 +48,21 @@ server_rendered: true
 ```
 """
 
+DUPLICATE_KEY_LEGACY_GATEWAY_BODY = """
+```trinity-issue-intake
+requested_archive_kind: agent_declared_echo_archive
+archive_ready: true
+created_by_gateway: true
+gateway_service: trinity-agent-issue-gateway
+gateway_receipt_id: gar-1780043626003-3a6bec179e4b3b95
+render_api_only: true
+server_validated: true
+server_rendered: true
+agent_readback_sha256: abc
+agent_readback_sha256: abc
+```
+"""
+
 def assert_true(value: bool, message: str) -> None:
     if not value:
         raise AssertionError(message)
@@ -77,6 +92,13 @@ def main() -> int:
         comments=["<!-- trinity-auto-archive-decision:v1 sha256=abc -->"],
     )
     assert_true(comment_only.valid, "trusted Gateway archive decision comment should be compatibility-valid")
+
+    # v30.7.2: Duplicate non-receipt keys must not invalidate trusted Gateway receipt
+    duplicate_legacy = validate_gateway_receipt(
+        body=DUPLICATE_KEY_LEGACY_GATEWAY_BODY,
+        author_login=TRUSTED,
+    )
+    assert_true(duplicate_legacy.valid, "trusted legacy receipt must remain valid even with duplicate non-receipt key")
 
     print("PASS: gateway receipt verifier accepts trusted receipts and rejects forged receipts")
     return 0
