@@ -223,6 +223,10 @@ required = [
     "python3 scripts/test_triage_accepts_gateway_receipt.py",
     "python3 scripts/test_triage_rejects_forged_gateway_receipt.py",
     "python3 scripts/test_issue_299_gateway_receipt_regression.py",
+    "python3 scripts/test_issue_302_gateway_receipt_regression.py",
+    "python3 scripts/test_triage_uses_shared_receipt_verifier.py",
+    "python3 scripts/test_render_gateway_issue_body_receipt_marker.py",
+    "python3 scripts/test_readback_hash_policy.py",
 ]
 
 missing = [r for r in required if r not in cmds]

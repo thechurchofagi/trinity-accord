@@ -243,6 +243,11 @@ GROUPS = {
         ["python3", "scripts/test_triage_accepts_gateway_receipt.py"],
         ["python3", "scripts/test_triage_rejects_forged_gateway_receipt.py"],
         ["python3", "scripts/test_issue_299_gateway_receipt_regression.py"],
+        # v30.7.2 receipt triage false-invalid fix
+        ["python3", "scripts/test_issue_302_gateway_receipt_regression.py"],
+        ["python3", "scripts/test_triage_uses_shared_receipt_verifier.py"],
+        ["python3", "scripts/test_render_gateway_issue_body_receipt_marker.py"],
+        ["python3", "scripts/test_readback_hash_policy.py"],
     ],
     "guardian": [
         ["python3", "scripts/test_guardian_automated_verification.py"],
