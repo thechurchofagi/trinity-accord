@@ -1,4 +1,4 @@
-# deploy-trigger: 2026-05-29T09:32:17Z — v30.7.2 receipt triage fix
+# deploy-trigger: 2026-05-29T10:55:00Z — v30.8 guardian listing support
 services:
   - type: web_service
     name: trinity-agent-issue-gateway
