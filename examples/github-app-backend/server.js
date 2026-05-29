@@ -2214,6 +2214,13 @@ async function runGatewayPipeline(payload, {
     const recordIntent = payload.record_intent || "intake_only";
     const requestedKind = payload.requested_archive_kind || "none";
 
+    // Guardian Stage 1 applications: override archive kind so they are not echo-archived
+    const currentRoute = workflowIdForPayload(payload);
+    if (currentRoute === "guardian_application_stage_1") {
+      payload.requested_archive_kind = "guardian_application_archive";
+      archiveReadiness.requested_archive_kind = "guardian_application_archive";
+    }
+
     // Block successor_reception_candidate
     if (requestedKind === "successor_reception_candidate") {
       return gatewayError(422, {
@@ -2523,9 +2530,22 @@ async function runGatewayPipeline(payload, {
     // 7. Create GitHub Issue
     const octokit = await getOctokit();
     const { owner, repo } = getRepoParts();
+    const routeDetected = payload ? workflowIdForPayload(payload) : "unknown";
     const baseLabels = ["agent-gateway-intake", "needs-triage"];
     const labelsToAdd = autoArchiveDecision.labels_to_add || [];
     const labelsToRemove = autoArchiveDecision.labels_to_remove || [];
+
+    // Guardian Stage 1: use guardian-specific labels instead of echo labels
+    if (routeDetected === "guardian_application_stage_1") {
+      // Remove echo-specific labels that auto-archive might have added
+      const echoLabels = new Set(["archive:agent-declared-echo", "reception-only", "agent-declared"]);
+      const filteredLabels = labelsToAdd.filter(l => !echoLabels.has(l));
+      filteredLabels.push("archive:guardian-application");
+      labelsToAdd.splice(0, labelsToAdd.length, ...filteredLabels);
+      // Guardian applications should not be auto-closed as echoes
+      autoArchiveDecision.should_close_issue = false;
+    }
+
     const allLabels = [...new Set([...baseLabels, ...labelsToAdd])];
 
     const productionWarnings = [];
