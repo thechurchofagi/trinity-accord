@@ -128,12 +128,40 @@ jobs:
               const service = intakeField(body, "gateway_service");
               const receiptPattern = /^gar-[A-Za-z0-9T._:-]{16,}$/;
 
-              return hasMachineFlag(body, "created_by_gateway", "true") &&
+              // Legacy: check trinity-issue-intake code block fields
+              const legacyMatch = hasMachineFlag(body, "created_by_gateway", "true") &&
                      hasMachineFlag(body, "render_api_only", "true") &&
                      hasMachineFlag(body, "server_validated", "true") &&
                      hasMachineFlag(body, "server_rendered", "true") &&
                      service === "trinity-agent-issue-gateway" &&
                      receiptPattern.test(receiptId);
+
+              if (legacyMatch) return true;
+
+              // v30.7: check HTML receipt marker <!-- trinity-gateway-receipt:v1 ... -->
+              const markerRe = /<!--\s*trinity-gateway-receipt:v1[\s\S]*?-->/;
+              if (markerRe.test(body || "")) {
+                // Validate marker contains required fields
+                const markerMatch = (body || "").match(markerRe);
+                if (markerMatch) {
+                  const markerBody = markerMatch[0];
+                  const hasRequired = [
+                    "receipt_id:", "gateway_service:", "gateway_commit:",
+                    "created_by_gateway: true", "render_api_only: true",
+                    "server_validated: true", "server_rendered: true",
+                    "route_detected:", "submission_type:", "requested_archive_kind:",
+                    "payload_sha256:", "issued_at:"
+                  ].every(f => markerBody.includes(f));
+                  if (hasRequired) return true;
+                }
+              }
+
+              return false;
+            }
+
+            function isTrustedGatewayActor(issue) {
+              const login = (issue.user && issue.user.login) || "";
+              return login === "trinity-accord-agent-issue-gateway[bot]";
             }
 
             function requestedArchiveKind(body) {
@@ -164,6 +192,8 @@ jobs:
             }
 
             function rateClass(issue) {
+              // v30.7: Gateway receipt recognition requires trusted actor
+              if (!isTrustedGatewayActor(issue)) return "direct";
               if (isGatewayStrictEvidenceCandidate(issue)) return "gateway_strict";
               if (isGatewayValidatedVerificationArchive(issue)) return "gateway_verification";
               if (isGatewayValidatedEcho(issue)) return "gateway_echo";

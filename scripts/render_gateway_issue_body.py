@@ -795,6 +795,33 @@ def render_gateway_receipt_fields(gateway_receipt_id=None, gateway_commit=None,
     return lines
 
 
+def render_gateway_receipt_marker(*, gateway_receipt_id, gateway_commit,
+                                   gateway_service, route_detected,
+                                   submission_type, requested_archive_kind,
+                                   payload_sha256, issued_at):
+    """Render the HTML receipt marker for the initial Issue body.
+
+    This marker is placed before the title so triage can detect it.
+    Format: <!-- trinity-gateway-receipt:v1 ... -->
+    """
+    return (
+        "<!-- trinity-gateway-receipt:v1\n"
+        f"receipt_id: {gateway_receipt_id}\n"
+        f"gateway_service: {gateway_service or 'trinity-agent-issue-gateway'}\n"
+        f"gateway_commit: {gateway_commit or 'unknown'}\n"
+        "created_by_gateway: true\n"
+        "render_api_only: true\n"
+        "server_validated: true\n"
+        "server_rendered: true\n"
+        f"route_detected: {route_detected}\n"
+        f"submission_type: {submission_type}\n"
+        f"requested_archive_kind: {requested_archive_kind}\n"
+        f"payload_sha256: {payload_sha256}\n"
+        f"issued_at: {issued_at}\n"
+        "-->"
+    )
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="Render canonical GitHub Issue body from a validated Gateway payload."
@@ -819,6 +846,34 @@ def main():
         sys.exit(1)
 
     parts = []
+
+    # Production render: prepend HTML receipt marker before title
+    if args.production_render and args.gateway_receipt_id:
+        from datetime import datetime, timezone
+        issued_at = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
+        payload_sha256 = hashlib.sha256(
+            json.dumps(payload, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode("utf-8")
+        ).hexdigest()
+        # Detect route from payload
+        rak = payload.get("requested_archive_kind", "")
+        if rak == "agent_declared_verification_archive" or payload.get("agent_declared_protocol_level"):
+            route_detected = "v0_v5_agent_declared_archive"
+        elif rak == "agent_declared_echo_archive":
+            route_detected = "pure_echo"
+        else:
+            route_detected = "pure_echo"
+        marker = render_gateway_receipt_marker(
+            gateway_receipt_id=args.gateway_receipt_id,
+            gateway_commit=args.gateway_commit,
+            gateway_service=args.gateway_service,
+            route_detected=route_detected,
+            submission_type=st,
+            requested_archive_kind=rak or "none",
+            payload_sha256=payload_sha256,
+            issued_at=issued_at,
+        )
+        parts.append(marker + "\n")
+
     rendered_title = render_issue_title(payload)
     parts.append(f"# {rendered_title}\n")
     parts.append("This issue was submitted through the Agent Issue Gateway backend.\n")

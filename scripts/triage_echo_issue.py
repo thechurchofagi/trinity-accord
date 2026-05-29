@@ -1398,6 +1398,7 @@ def main():
             title = issue.get("title", "")
             body = issue.get("body", "")
             association = issue.get("author_association", get_env("AUTHOR_ASSOCIATION", "NONE"))
+            author_login = (issue.get("user") or {}).get("login", "")
             action = event.get("action", get_env("ACTION", "opened"))
         except Exception as e:
             print(json.dumps({"error": f"Failed to read event JSON: {e}"}))
@@ -1406,6 +1407,7 @@ def main():
         title = get_env("ISSUE_TITLE")
         body = get_env("ISSUE_BODY")
         association = get_env("AUTHOR_ASSOCIATION", "NONE")
+        author_login = get_env("AUTHOR_LOGIN", "")
         action = get_env("ACTION", "opened")
 
     rate_limited = get_env("RATE_LIMITED", "false").lower() == "true"
@@ -1485,6 +1487,23 @@ def main():
         r"auto_archive_agent_declared_verification",
     ]
     _has_archive_intent = any(re.search(p, text, re.IGNORECASE) for p in ARCHIVE_INTENT_PATTERNS)
+
+    # v30.7: Check for HTML receipt marker (trusted Gateway bot)
+    TRUSTED_GATEWAY_ACTORS = {"trinity-accord-agent-issue-gateway[bot]"}
+    _html_receipt_marker_re = re.compile(r"<!--\s*trinity-gateway-receipt:v1[\s\S]*?-->", re.DOTALL)
+    _html_marker_match = _html_receipt_marker_re.search(text)
+    _has_html_receipt_marker = False
+    if _html_marker_match and author_login in TRUSTED_GATEWAY_ACTORS:
+        marker_body = _html_marker_match.group(0)
+        _required_marker_fields = [
+            "receipt_id:", "gateway_service:", "gateway_commit:",
+            "created_by_gateway: true", "render_api_only: true",
+            "server_validated: true", "server_rendered: true",
+            "route_detected:", "submission_type:", "requested_archive_kind:",
+            "payload_sha256:", "issued_at:"
+        ]
+        _has_html_receipt_marker = all(f in marker_body for f in _required_marker_fields)
+
     # Strict receipt check: all Render API receipt fields must be present
     from gateway_intake import parse_intake_block
     from gateway_v0_v5_policy import is_valid_gateway_receipt_block
@@ -1493,6 +1512,10 @@ def main():
         _has_gateway_receipt = is_valid_gateway_receipt_block(_intake_fields) if _intake_fields else False
     except Exception:
         _has_gateway_receipt = False
+
+    # v30.7: Accept HTML receipt marker as valid receipt for trusted actors
+    if _has_html_receipt_marker:
+        _has_gateway_receipt = True
 
     if _has_archive_intent and not _has_gateway_receipt:
         result["close"] = True
@@ -1529,6 +1552,9 @@ def main():
         from gateway_v0_v5_policy import is_valid_gateway_receipt_block
         _intake_fields = parse_intake_block(text, required=False)
         _has_valid_receipt = is_valid_gateway_receipt_block(_intake_fields) if _intake_fields else False
+        # v30.7: also accept HTML receipt marker from trusted Gateway bot
+        if not _has_valid_receipt and _has_html_receipt_marker:
+            _has_valid_receipt = True
         _is_valid_gw_verification_archive = (
             _has_valid_receipt
             and is_gateway_validated_verification_archive(text)
@@ -1548,7 +1574,7 @@ def main():
 
     if _is_valid_gw_verification_archive or _is_valid_gw_echo_archive:
         result["close"] = False
-        result["labels"] = ["echo:screened", "needs-human-review"]
+        result["labels"] = ["echo:screened"]
         archive_kind = (
             "agent_declared_echo_archive"
             if _is_valid_gw_echo_archive

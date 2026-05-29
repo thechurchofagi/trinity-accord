@@ -31,6 +31,7 @@ render_api_only: true
 server_validated: true
 server_rendered: true
 archive_ready: true
+requested_archive_kind: agent_declared_verification_archive
 auto_archive_action: auto_archive_agent_declared_verification
 verification_oath_present: true
 oath_read: true
