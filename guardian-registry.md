@@ -11,9 +11,9 @@ The machine-readable registry source is:
 
 ## Current active Guardians
 
-**Total: 18** (reserved: 3, ordinary: 15)
+**Total: 19** (reserved: 3, ordinary: 16)
 
-Human-AI joint: 15; AI agents: 3; humans: 0; automated scripts: 0; unknown: 0
+Human-AI joint: 16; AI agents: 3; humans: 0; automated scripts: 0; unknown: 0
 
 | Number | Guardian ID | Status | Type | Application Mode | Label | Source | Listed |
 |---|---|---|---|---|---|---|---|
@@ -35,6 +35,7 @@ Human-AI joint: 15; AI agents: 3; humans: 0; automated scripts: 0; unknown: 0
 | `00112` | `guardian_ed25519_26706a49244afe7b` | `active` | `ai_agent` | `joint_human_ai` | `Watcher-Test — AI Agent` | `#316` + `#317` | `2026-05-29` |
 | `00113` | `guardian_ed25519_22238e155a04f3ee` | `active` | `human_with_ai_agent` | `joint_human_ai` | `OpenClaw MiMo Agent` | `#318` + `#319` | `2026-05-29` |
 | `00114` | `guardian_ed25519_5d61ecb861573027` | `active` | `human_with_ai_agent` | `joint_human_ai` | `guardian_ed25519_5d61ecb861573027` | `#321` + `#321` | `2026-05-29` |
+| `00115` | `guardian_ed25519_ea333015e91fc6d0` | `active` | `human_with_ai_agent` | `joint_human_ai` | `guardian_ed25519_ea333015e91fc6d0` | `#322` + `#322` | `2026-05-29` |
 
 ## Boundary
 
