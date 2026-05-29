@@ -428,12 +428,14 @@ def main():
 
         # Value validation — echo fields must have correct values
         requested_kind = data.get("requested_archive_kind")
-        if requested_kind == "guardian_active_registry_listing_request":
+        is_guardian_listing_kind = requested_kind == "guardian_active_registry_listing_request"
+
+        if is_guardian_listing_kind:
             ECHO_EXPECTED = {
                 "submission_type": "echo_candidate",
                 "record_intent": "auto_archive_candidate",
                 "requested_archive_kind": "guardian_active_registry_listing_request",
-                "evidence_requirement_mode": "not_applicable_for_echo",
+                "evidence_requirement_mode": ("not_applicable_for_echo", "not_applicable_for_listing_request"),
                 "archive_ready": True,
                 "allowed_archive_kind": "guardian_active_registry_listing_request",
                 "auto_archive_action": "auto_archive_guardian_listing_request",
@@ -452,10 +454,16 @@ def main():
             }
         for k, expected in ECHO_EXPECTED.items():
             actual = data.get(k)
-            if actual is not None and actual != expected:
-                errors.append(
-                    f"echo archive field {k}: expected {expected!r}, got {actual!r}"
-                )
+            if actual is not None:
+                if isinstance(expected, tuple):
+                    if actual not in expected:
+                        errors.append(
+                            f"echo archive field {k}: expected one of {expected!r}, got {actual!r}"
+                        )
+                elif actual != expected:
+                    errors.append(
+                        f"echo archive field {k}: expected {expected!r}, got {actual!r}"
+                    )
 
         # Guardian listing count rules
         is_guardian_listing = (
@@ -496,7 +504,7 @@ def main():
                 errors.append(f"forbidden field in echo archive block: {k}")
 
         # Echo gate validation
-        VALID_ECHO_GATE_MODES = {"template_for_agent_declared_echo"}
+        VALID_ECHO_GATE_MODES = {"template_for_agent_declared_echo", "template_for_guardian_listing_request"}
         egm = data.get("echo_gate_mode")
         if egm is not None and egm not in VALID_ECHO_GATE_MODES:
             errors.append(f"echo_gate_mode must be one of {VALID_ECHO_GATE_MODES}, got {egm!r}")

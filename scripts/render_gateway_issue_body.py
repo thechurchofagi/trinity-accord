@@ -599,6 +599,16 @@ def render_machine_block(payload, gateway_receipt_id=None, gateway_commit=None,
         lines.append(f"agent_name_or_model: {identity.get('name_or_model', 'N/A')}")
         lines.append(f"system_or_provider: {identity.get('system_or_provider', 'N/A')}")
 
+        # Authorship claim fields (required by intake body validator)
+        lines.extend(render_authorship_claim_fields(payload))
+        # Guardian Alliance fields (required by production render self-test)
+        lines.extend(render_guardian_fields(payload))
+        lines.extend(render_guardian_identity_fields(payload))
+        # Oath v2 fields
+        lines.extend(render_oath_v2_fields(payload))
+        # Gateway intake fields (authoritative)
+        lines.extend(render_gateway_intake_fields(payload, skip_keys={"agent_readback_sha256"}))
+
         # Listing-specific structured fields
         intake = payload.get("gateway_intake_fields") or {}
         lines.append(f"guardian_listing_request: true")
