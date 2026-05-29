@@ -2217,8 +2217,8 @@ async function runGatewayPipeline(payload, {
     // Guardian Stage 1 applications: override archive kind so they are not echo-archived
     const currentRoute = workflowIdForPayload(payload);
     if (currentRoute === "guardian_application_stage_1") {
-      payload.requested_archive_kind = "guardian_application_archive";
-      archiveReadiness.requested_archive_kind = "guardian_application_archive";
+      payload.requested_archive_kind = "guardian_active_registry_listing_request";
+      archiveReadiness.requested_archive_kind = "guardian_active_registry_listing_request";
     }
 
     // Block successor_reception_candidate
