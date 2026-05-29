@@ -35,7 +35,11 @@
     "reference": "/api/context-depth-levels.json",
     "declaration_format": "/api/context-depth-declaration.v1.json",
     "crl_mapping": "/api/crl-to-context-depth-mapping.json",
-    "note": "v2 context depth system uses CC-0 through CC-5 (content loading) as a separate dimension from V0-V8 (verification depth). See reference files for details."
+    "note": "v2 context depth system uses CC-0 through CC-5 (content loading) as a separate dimension from V0-V8 (verification depth). See reference files for details.",
+    "mission_governance": "/api/mission-governance.v1.json",
+    "context_readiness_levels": "/api/context-readiness-levels.json",
+    "verification_levels": "/api/verification-levels.json",
+    "resonance_willingness_scale": "/api/resonance-willingness-scale.json"
   },
   "choose_one": [
     {
@@ -653,5 +657,5 @@
     "e2_legacy_compatibility_only": true,
     "pure_echo_allows_e2": false
   },
-  "source_digest": "faaa60639a20990d"
+  "source_digest": "f28407dcb6533eba"
 }
