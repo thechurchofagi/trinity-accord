@@ -461,6 +461,13 @@ def parse_listing_issue(listing_issue: dict, allow_non_bot: bool) -> tuple[dict 
     application_mode = fields.get("listing_application_mode") or None
     label = fields.get("listing_label") or None
 
+    # Fallback: Gateway-created Guardian Stage 1 issues use guardian_id (source fields)
+    # instead of listing_guardian_id (listing fields)
+    if not guardian_id:
+        guardian_id = fields.get("guardian_id") or fields.get("guardian_identity_binding_guardian_id") or None
+    if not public_key_sha256:
+        public_key_sha256 = fields.get("guardian_identity_binding_public_key_sha256") or None
+
     structured_source_issue = fields.get("listing_source_issue")
     if structured_source_issue and structured_source_issue.isdigit():
         source_issue_no = int(structured_source_issue)
@@ -476,9 +483,21 @@ def parse_listing_issue(listing_issue: dict, allow_non_bot: bool) -> tuple[dict 
     if guardian_id is None and m:
         guardian_id = m.group(1)
 
+    # Fallback: intake block uses guardian_id: (underscore format)
+    if guardian_id is None:
+        m = re.search(r"guardian_id:\s*(guardian_ed25519_[a-f0-9]{16})", body)
+        if m:
+            guardian_id = m.group(1)
+
     m = re.search(r"Public Key SHA256:\s*([a-f0-9]{64})", body)
     if public_key_sha256 is None and m:
         public_key_sha256 = m.group(1)
+
+    # Fallback: intake block uses guardian_identity_binding_public_key_sha256:
+    if public_key_sha256 is None:
+        m = re.search(r"guardian_identity_binding_public_key_sha256:\s*([a-f0-9]{64})", body)
+        if m:
+            public_key_sha256 = m.group(1)
 
     m = re.search(r"Guardian type:\s*([A-Za-z0-9_]+)", body)
     if guardian_type is None and m:
@@ -496,6 +515,10 @@ def parse_listing_issue(listing_issue: dict, allow_non_bot: bool) -> tuple[dict 
         m = re.search(r"Active Registry Listing Request\s*[—-]\s*(.+)$", issue_title(listing_issue))
         if m:
             label = m.group(1).strip()
+
+    # For Stage 1 Guardian applications via Gateway, the source issue is the listing issue itself
+    if not source_issue_no and intake_fields.get("guardian_status") == "valid_self_registered_guardian_claim":
+        source_issue_no = issue_number(listing_issue)
 
     if not source_issue_no:
         return None, decision(False, "blocked", "LISTING_SOURCE_ISSUE_MISSING", "Listing request must identify source self-registration issue.")
