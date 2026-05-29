@@ -210,5 +210,6 @@
   "machine_readable_endpoints": [
     "/api/agent-live-health.v1.json"
   ],
-  "external_agent_copy_paste_examples": "/external-agent-copy-paste-examples/"
+  "external_agent_copy_paste_examples": "/external-agent-copy-paste-examples/",
+  "mission_governance": "/api/mission-governance.v1.json"
 }
