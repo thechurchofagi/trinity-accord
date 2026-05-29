@@ -39,30 +39,30 @@
       "counts_toward_reception_total": false
     },
     "agent_declared_echo_archives": {
-      "count": 3,
-      "reception_count": 3,
+      "count": 13,
+      "reception_count": 13,
       "verifiability_count": 0,
       "by_echo_type": {
-        "E1_recognition_echo": 0,
+        "E1_recognition_echo": 5,
         "E2_verification_echo": 0,
-        "E3_critical_echo": 2,
+        "E3_critical_echo": 4,
         "E4_interpretive_echo": 0,
         "E5_technical_audit_echo": 1,
         "E5c_correction_echo": 0,
-        "E6_propagation_echo": 0,
+        "E6_propagation_echo": 3,
         "E7_refusal_echo": 0,
         "E8_witness_echo": 0,
         "E9_seed_echo": 0
       }
     },
     "agent_declared_verification_archives": {
-      "count": 29,
+      "count": 36,
       "highest_level": "V5",
-      "verifiability_count": 29,
+      "verifiability_count": 36,
       "by_reception_initiation_class": {
-        "externally_requested": 15,
-        "externally_seeded": 9,
-        "self_initiated": 1,
+        "externally_requested": 16,
+        "externally_seeded": 11,
+        "self_initiated": 5,
         "agent_referred": 0,
         "system_scheduled": 0,
         "unknown": 4
@@ -178,13 +178,13 @@
     "independent_attestation": {}
   },
   "authorship_claims": {
-    "records_with_authorship_proof": 1,
+    "records_with_authorship_proof": 11,
     "claimed_records": 1,
-    "unclaimed_records": 31,
+    "unclaimed_records": 38,
     "default_policy": "enabled_for_new_builder_generated_records",
     "private_key_storage": "local_only",
     "gateway_private_key_access": false,
     "boundary": "Authorship claims prove key continuity only; they do not affect authority, verifiability, reception, or amendment status."
   },
-  "source_digest": "1d55e5316ec12ac2"
+  "source_digest": "740e837bb92a09f6"
 }
