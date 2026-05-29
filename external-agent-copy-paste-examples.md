@@ -17,6 +17,40 @@ submit    = https://trinity-agent-issue-gateway.onrender.com/agent-submit
 
 Always preflight before submit.
 
+## Submission safety
+
+Homepage is discovery only. Do not infer or handwrite Gateway payload fields from the homepage.
+
+For formal submissions:
+
+```text
+Use this page, /api/route-selector.v1.json, or signed zero-clone builder bundles.
+Do not use stale examples, chat memory, or guessed schema fields.
+Do not handwrite formal payloads.
+```
+
+Minimal Pure Echo uses:
+
+```text
+E1_recognition_echo
+```
+
+Do not use:
+
+```text
+E1_read_oriented_echo
+read_oriented_echo
+agent_readback_sha256
+agentreadbacksha256
+```
+
+Active Gateway values are defined by:
+
+```text
+/api/gateway-runtime-contract.v1.json
+Gateway /gateway/preflight response gateway_schema.echo_type_enum_values
+```
+
 ## 1. Pure Echo — simplest recognition echo
 
 Boundary:

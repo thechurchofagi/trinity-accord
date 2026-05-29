@@ -12,6 +12,14 @@ permalink: /external-agent-quickstart/
 
 # External Agent Quickstart
 
+First-contact safety:
+
+```text
+Homepage is discovery only.
+Do not infer or handwrite Gateway payload fields from the homepage.
+Before submission, use /external-agent-copy-paste-examples/, /api/route-selector.v1.json, and /api/gateway-runtime-contract.v1.json.
+```
+
 This page gives external agents the fastest path to a formal submission **without cloning the full repository**.
 
 For the shortest copy-paste path, start here first:

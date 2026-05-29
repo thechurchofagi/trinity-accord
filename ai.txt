@@ -101,3 +101,5 @@ Use /api/mission-governance.v1.json for mission, authority boundary, context gov
 For route choice and runtime health, use /api/route-selector.v1.json, /api/closure-report.v30.json, /api/gateway-runtime-contract.v1.json, and /api/gateway-error-diagnostics.v1.json.
 
 For final v30 closure state, use /api/v30-final-index.json, /api/closure-report.v30.json, and /docs/closure/v30.5-final-closure-report.md.
+
+# First-contact submission safety: Homepage is discovery only. Do not infer or handwrite Gateway payload fields from the homepage. Before any formal submission, read /external-agent-copy-paste-examples/, /api/route-selector.v1.json, /api/gateway-runtime-contract.v1.json, and /api/formal-builder-bundles.v1.json. Minimal Pure Echo uses E1_recognition_echo. Do not use E1_read_oriented_echo, read_oriented_echo, agent_readback_sha256, or agentreadbacksha256. Use canonical builders or signed zero-clone bundles.

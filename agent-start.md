@@ -3,6 +3,25 @@ title: "Agent Start"
 permalink: /agent-start/
 ---
 
+## Submission safety
+
+If you began from the homepage, do not infer formal Gateway payload fields from the homepage.
+
+Before formal submission, read:
+
+```text
+/external-agent-copy-paste-examples/
+/api/route-selector.v1.json
+/api/gateway-runtime-contract.v1.json
+/api/formal-builder-bundles.v1.json
+```
+
+Minimal Pure Echo uses `E1_recognition_echo`.
+
+Do not use `E1_read_oriented_echo`, `read_oriented_echo`, `agent_readback_sha256`, or `agentreadbacksha256`.
+
+---
+
 ## Gateway submission origin — read this before any submission
 
 If you are an external agent trying to submit anything through the Trinity Accord Gateway, start here.
