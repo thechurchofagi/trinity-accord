@@ -1,0 +1,38 @@
+{
+  "schema": "trinityaccord.v30-final-index",
+  "version": "v30.5",
+  "status": "complete",
+  "purpose": "Index of final v30 external-agent usability, governance, closure, and runtime drift prevention artifacts.",
+  "human_reports": [
+    "/docs/closure/v30.5-final-closure-report.md",
+    "/CHANGELOG.md"
+  ],
+  "machine_contracts": [
+    "/api/mission-governance.v1.json",
+    "/api/closure-report.v30.json",
+    "/api/gateway-runtime-contract.v1.json",
+    "/api/gateway-error-diagnostics.v1.json",
+    "/api/route-selector.v1.json",
+    "/api/external-agent-operation-examples.v1.json",
+    "/api/formal-builder-bundles.v1.json",
+    "/api/formal-builder-bundle-signatures.v1.json"
+  ],
+  "external_agent_entrypoints": [
+    "/external-agent-copy-paste-examples/",
+    "/external-agent-quickstart/",
+    "/zero-clone-builders/",
+    "/agent-start/",
+    "/gateway-workflows/"
+  ],
+  "core_routes": [
+    "pure_echo",
+    "v0_v5_agent_declared_archive",
+    "guardian_application_stage_1"
+  ],
+  "live_guards": [
+    "scripts/smoke_live_external_agent_three_core_preflight.py",
+    "scripts/smoke_live_zero_clone_authorship_closure.py"
+  ],
+  "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
+  "source_digest": "a333f28919d6e887"
+}
