@@ -1,7 +1,7 @@
 {
   "schema": "trinityaccord.closure-report.v30",
   "version": "v30",
-  "status": "complete_source_and_live_verified",
+  "status": "source_and_live_verified",
   "purpose": "Machine-readable closure evidence for v30.3/v30.4/v30 unified v2 external-agent usability, zero-clone authorship closure, and mission/context/action governance.",
   "canonical_boundary": {
     "canonical_authority": "Bitcoin Originals only",
@@ -105,7 +105,7 @@
     "required_live_group": "live-site-gateway-core"
   },
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "3e2805629214afba",
+  "source_digest": "9437b06a8de1e2c3",
   "final_closure": {
     "v30_5_complete": true,
     "p0_main": "CI_GROUP_P0_MAIN_OK",
