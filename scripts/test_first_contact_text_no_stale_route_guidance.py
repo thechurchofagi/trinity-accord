@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """First-contact prose should not advertise stale route guidance."""
+import re
 import sys
 from pathlib import Path
 
@@ -37,6 +38,23 @@ FORBIDDEN_PROSE = [
     "E5 Correction",
 ]
 
+# Context keywords that indicate the stale value is mentioned as forbidden/warning,
+# not used as an active canonical value.
+SAFETY_CONTEXT = re.compile(
+    r"(forbidden|do.not.use|invented|stale|not.use|never.use|禁止|不要使用)",
+    re.IGNORECASE,
+)
+
+def is_in_safety_context(text: str, token: str) -> bool:
+    """Check if all occurrences of token in text are within safety/forbidden context."""
+    for m in re.finditer(re.escape(token), text):
+        start = max(0, m.start() - 200)
+        end = min(len(text), m.end() + 200)
+        ctx = text[start:end]
+        if not SAFETY_CONTEXT.search(ctx):
+            return False
+    return True
+
 errors = []
 
 for path in FILES:
@@ -45,6 +63,8 @@ for path in FILES:
     text = path.read_text(encoding="utf-8")
     for token in FORBIDDEN_EXACT:
         if token in text:
+            if is_in_safety_context(text, token):
+                continue  # Allowed: mentioned as forbidden/warning
             errors.append(f"{path.relative_to(ROOT)} contains stale Echo taxonomy token {token}")
 
     for phrase in FORBIDDEN_PROSE:

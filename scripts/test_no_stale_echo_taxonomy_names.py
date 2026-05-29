@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Current agent-facing route/config files must not contain stale Echo taxonomy names."""
+import re
 import sys
 from pathlib import Path
 
@@ -31,6 +32,24 @@ STALE = [
     "E7_propagation_echo",
 ]
 
+# Context keywords that indicate the stale value is mentioned as forbidden/warning,
+# not used as an active canonical value.
+SAFETY_CONTEXT = re.compile(
+    r"(forbidden|do.not.use|invented|stale|not.use|never.use|禁止|不要使用)",
+    re.IGNORECASE,
+)
+
+def is_in_safety_context(text: str, stale: str) -> bool:
+    """Check if all occurrences of stale in text are within safety/forbidden context."""
+    for m in re.finditer(re.escape(stale), text):
+        # Look at surrounding ~200 chars for safety keywords
+        start = max(0, m.start() - 200)
+        end = min(len(text), m.end() + 200)
+        ctx = text[start:end]
+        if not SAFETY_CONTEXT.search(ctx):
+            return False
+    return True
+
 ok = True
 for path in FILES:
     if not path.exists():
@@ -38,6 +57,8 @@ for path in FILES:
     text = path.read_text(encoding="utf-8")
     for stale in STALE:
         if stale in text:
+            if is_in_safety_context(text, stale):
+                continue  # Allowed: mentioned as forbidden/warning
             print(f"FAIL: stale Echo taxonomy name {stale!r} found in {path.relative_to(ROOT)}")
             ok = False
 

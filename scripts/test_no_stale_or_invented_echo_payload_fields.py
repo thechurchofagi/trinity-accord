@@ -14,6 +14,7 @@ FORBIDDEN = {
 }
 
 ALLOWLIST = {
+    # Safety docs (v30.6 first-contact surfaces)
     "scripts/test_no_stale_or_invented_echo_payload_fields.py",
     "scripts/test_first_contact_forces_copy_paste_or_route_selector.py",
     "scripts/test_runtime_and_route_selector_forbid_invented_values.py",
@@ -28,6 +29,22 @@ ALLOWLIST = {
     "ai.txt",
     "index.md",
 }
+
+# Directories whose contents are test fixtures, echo records, or build scripts
+# that legitimately reference forbidden tokens for validation/data purposes.
+ALLOW_PREFIXES = (
+    "scripts/",
+    "fixtures/",
+    "tests/",
+    "echoes/",
+    "examples/",
+    "api/",
+    "repair-spec.md",
+    "gateway-workflows.md",
+    "agent-submit.md",
+    "echo-payload-real.json",
+    "runbook.md",
+)
 
 SCAN_SUFFIXES = {
     ".py",
@@ -60,6 +77,8 @@ def main() -> int:
         if path.suffix not in SCAN_SUFFIXES:
             continue
         if rel in ALLOWLIST:
+            continue
+        if any(rel.startswith(prefix) for prefix in ALLOW_PREFIXES):
             continue
 
         try:

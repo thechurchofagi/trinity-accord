@@ -5,7 +5,7 @@ permalink: /agent-start/
 
 ## Submission safety
 
-If you began from the homepage, do not infer formal Gateway payload fields from the homepage.
+Homepage is discovery only. If you began from the homepage, do not infer formal Gateway payload fields from the homepage.
 
 Before formal submission, read:
 
