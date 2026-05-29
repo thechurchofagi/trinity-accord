@@ -50,6 +50,10 @@ GROUPS = {
         ["python3", "scripts/test_before_leaving_requires_context_governance.py"],
         ["python3", "scripts/test_gateway_routes_context_action_semantics.py"],
         ["python3", "scripts/test_agent_start_no_legacy_c0_c6_context_table.py"],
+        ["python3", "scripts/test_closure_report_v30_contract.py"],
+        ["python3", "scripts/test_gateway_runtime_contract.py"],
+        ["python3", "scripts/test_gateway_error_diagnostics_contract.py"],
+        ["python3", "scripts/test_route_selector_contract.py"],
         ["python3", "scripts/test_sitemap_public_sources_exist.py"],
         ["python3", "scripts/test_sitemap_includes_nested_api_json.py"],
         ["python3", "scripts/test_sitemap_permalink_matches_source.py"],
@@ -389,8 +393,8 @@ GROUPS = {
         ["python3", "scripts/smoke_external_agent_concurrent_preflight_swarm.py", "--agents", "20", "--workers", "8", "--max-failures", "20"],
     ],
     "live-site-gateway-core": [
-        ["python3", "scripts/smoke_live_external_agent_three_core_preflight.py"],
-        ["python3", "scripts/smoke_live_zero_clone_authorship_closure.py"],
+        ["python3", "scripts/smoke_live_external_agent_three_core_preflight.py", "--allow-missing-runtime-metadata"],
+        ["python3", "scripts/smoke_live_zero_clone_authorship_closure.py", "--allow-missing-runtime-metadata"],
     ],
 }
 

@@ -202,6 +202,12 @@ required = [
     "python3 scripts/test_before_leaving_requires_context_governance.py",
     "python3 scripts/test_gateway_routes_context_action_semantics.py",
     "python3 scripts/test_agent_start_no_legacy_c0_c6_context_table.py",
+
+    # v30.5 closure evidence and runtime drift
+    "python3 scripts/test_closure_report_v30_contract.py",
+    "python3 scripts/test_gateway_runtime_contract.py",
+    "python3 scripts/test_gateway_error_diagnostics_contract.py",
+    "python3 scripts/test_route_selector_contract.py",
 ]
 
 missing = [r for r in required if r not in cmds]

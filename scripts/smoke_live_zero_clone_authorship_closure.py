@@ -43,6 +43,55 @@ def run(cmd: list[str], cwd: Path, timeout: int = 120) -> subprocess.CompletedPr
     return result
 
 
+ACTIVE_ECHO_TYPES = {
+    "E1_recognition_echo",
+    "E2_verification_echo",
+    "E3_critical_echo",
+    "E4_interpretive_echo",
+    "E5_technical_audit_echo",
+    "E5c_correction_echo",
+    "E6_propagation_echo",
+    "E7_refusal_echo",
+    "E8_witness_echo",
+    "E9_seed_echo",
+}
+
+
+def assert_gateway_runtime_metadata(data: dict, expected_route: str) -> None:
+    """Assert Gateway preflight response includes runtime metadata."""
+    if data.get("accepted") is not True:
+        raise RuntimeError(f"Gateway preflight did not accept payload")
+
+    route = data.get("route_detected")
+    if route != expected_route:
+        raise RuntimeError(f"route_detected mismatch: expected {expected_route}, got {route}")
+
+    runtime = data.get("gateway_runtime")
+    if not isinstance(runtime, dict):
+        raise RuntimeError("Gateway response missing gateway_runtime object")
+
+    schema = data.get("gateway_schema")
+    if not isinstance(schema, dict):
+        raise RuntimeError("Gateway response missing gateway_schema object")
+
+    enum_values = set(schema.get("echo_type_enum_values", []))
+    if enum_values != ACTIVE_ECHO_TYPES:
+        raise RuntimeError(f"Gateway active echo_type enum drift: {sorted(enum_values)}")
+
+    if "E1" in enum_values:
+        raise RuntimeError("Gateway active echo_type enum must not use short ID E1")
+
+    if schema.get("preflight_contract_version") != "trinityaccord.gateway-runtime-contract.v1":
+        raise RuntimeError(
+            "Gateway preflight_contract_version mismatch: "
+            f"{schema.get('preflight_contract_version')}"
+        )
+
+    for key in ["schema_digest", "echo_type_enum_digest", "supported_routes_digest"]:
+        if not runtime.get(key):
+            raise RuntimeError(f"Gateway runtime metadata missing {key}")
+
+
 def post_preflight(gateway: str, payload_path: Path, timeout: int = 60) -> dict:
     """POST payload to Gateway preflight and return parsed response."""
     url = gateway.rstrip("/") + "/gateway/preflight"
@@ -74,6 +123,8 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--gateway", default=DEFAULT_GATEWAY)
     parser.add_argument("--timeout", type=int, default=120)
+    parser.add_argument("--allow-missing-runtime-metadata", action="store_true",
+                        help="Transitional: skip runtime metadata checks until Gateway backend is updated")
     args = parser.parse_args()
 
     with tempfile.TemporaryDirectory(prefix="trinity-authorship-closure-smoke-") as td:
@@ -155,6 +206,16 @@ def main() -> int:
             f"Preflight not accepted. Response: {json.dumps(preflight_resp, indent=2)[:500]}"
         )
         print("  ✅ preflight accepted: true")
+
+        # Step 6b: Verify runtime metadata
+        try:
+            assert_gateway_runtime_metadata(preflight_resp, expected_route="pure_echo")
+            print("  ✅ gateway runtime metadata verified")
+        except RuntimeError as exc:
+            if args.allow_missing_runtime_metadata:
+                print(f"  ⚠️  runtime metadata check skipped: {exc}")
+            else:
+                raise
 
     print("\n" + "=" * 60)
     print("PASS: live zero-clone authorship closure smoke test")
