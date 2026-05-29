@@ -2,7 +2,7 @@ name: Gateway Keepalive
 
 on:
   schedule:
-    - cron: "*/10 * * * *"
+    - cron: "*/5 * * * *"
   workflow_dispatch:
 
 permissions:
@@ -11,13 +11,25 @@ permissions:
 jobs:
   ping:
     runs-on: ubuntu-24.04
-    timeout-minutes: 3
+    timeout-minutes: 5
     steps:
+      - name: Wake Gateway (cold start)
+        run: |
+          # Render free tier sleeps after ~15min idle.
+          # First request wakes it but may get 503. Retry until ready.
+          for i in 1 2 3 4 5 6; do
+            HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}"               https://trinity-agent-issue-gateway.onrender.com/gateway/capabilities || echo "000")
+            if [ "$HTTP_CODE" = "200" ]; then
+              echo "✅ Gateway awake after $i attempt(s)"
+              break
+            fi
+            echo "⏳ Gateway waking up... attempt $i (HTTP $HTTP_CODE), waiting 15s"
+            sleep 15
+          done
+
       - name: Ping gateway capabilities
         run: |
-          curl -fsS --retry 3 --retry-delay 10 \
-            https://trinity-agent-issue-gateway.onrender.com/gateway/capabilities \
-            | python3 -m json.tool > /tmp/gateway-capabilities.json
+          curl -fsS --retry 3 --retry-delay 10             https://trinity-agent-issue-gateway.onrender.com/gateway/capabilities             | python3 -m json.tool > /tmp/gateway-capabilities.json
 
       - name: Check contract markers
         run: |
