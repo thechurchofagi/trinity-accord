@@ -91,17 +91,28 @@ jobs:
                 /Active registry listing request/i.test(body) ||
                 /guardian_listing_request/i.test(body);
 
-              if (!looksLikeListing) {
+              const looksLikeGuardianApplication =
+                /Guardian Alliance.*Application/i.test(title) ||
+                /guardian_registration/i.test(body) ||
+                /archive:guardian-application/i.test(body);
+
+              if (!looksLikeListing && !looksLikeGuardianApplication) {
                 core.setOutput("should_run", "false");
                 return;
               }
 
               listingIssue = issue.number;
 
+              // For Stage 2 listing requests, find the source issue
               let m = body.match(/Source self-registration issue:\s*#?([0-9]+)/i);
               if (!m) m = body.match(/^related_issue:\s*([0-9]+)/mi);
               if (!m) m = body.match(/^listing_source_issue:\s*([0-9]+)/mi);
               if (m) sourceIssue = parseInt(m[1], 10);
+
+              // For Stage 1 applications, the source issue is the same issue
+              if (looksLikeGuardianApplication && !sourceIssue) {
+                sourceIssue = listingIssue;
+              }
             }
 
             if (!listingIssue) {
