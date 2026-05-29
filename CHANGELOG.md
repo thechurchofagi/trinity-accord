@@ -1,5 +1,15 @@
 # Trinity Accord - Changelog
 
+## v30.7.2 — Receipt marker deployment and duplicate intake key false-invalid fix
+
+- Fixed live #302 regression where a Gateway bot Issue was falsely labeled `echo:invalid`.
+- Ensured Gateway Issue bodies include `trinity-gateway-receipt:v1` in the initial body.
+- Ensured triage uses shared Gateway receipt verifier before strict intake parsing.
+- Fixed duplicate `agent_readback_sha256` emission in the intake block.
+- Clarified that `agent_readback_sha256` is builder-generated only, not a forbidden field itself.
+- Added #302 regression tests.
+- Added `labels_to_remove` support in triage workflow for explicit label cleanup.
+
 ## v30.5 -- Closure Evidence and Runtime Drift Prevention
 
 ### Status

@@ -112,8 +112,11 @@
     {
       "code": "INVENTED_READBACK_HASH_FIELD",
       "matches": [
-        "agent_readback_sha256",
-        "agentreadbacksha256"
+        "agentreadbacksha256",
+        "agent_readback_hash",
+        "readback_sha256",
+        "readback_hash_sha256",
+        "agent_readback_digest"
       ],
       "likely_cause": "External agent guessed a readback hash field name instead of using the canonical builder output.",
       "external_agent_fix": "Do not handwrite or patch formal payload fields. Use the official zero-clone builder or copy-paste examples.",
@@ -144,5 +147,25 @@
     }
   ],
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "2a4ea8dc3d1fefc0"
+  "source_digest": "fe5318a109564f00",
+  "error_codes": [
+    {
+      "code": "GATEWAY_RECEIPT_FALSE_INVALID_DUE_TO_DUPLICATE_INTAKE_KEY",
+      "matches": [
+        "duplicate_intake_keys",
+        "agent_readback_sha256",
+        "Detected an archive-like direct GitHub Issue, but no valid Gateway receipt was present"
+      ],
+      "likely_cause": "A trusted Gateway-created Issue had duplicate non-receipt intake keys, causing strict intake parsing to fail before receipt recognition.",
+      "external_agent_fix": "Do not resubmit. Keep the Gateway receipt and issue URL. Maintainers must run the v30.7.2 backfill after fixing triage.",
+      "maintainer_fix": "Ensure triage uses scripts/gateway_receipt_verifier.py before strict intake parsing; fix render_gateway_issue_body.py to emit one agent_readback_sha256 key; run scripts/test_issue_302_gateway_receipt_regression.py.",
+      "related_files": [
+        "render_gateway_issue_body.py",
+        "scripts/triage_echo_issue.py",
+        "scripts/gateway_receipt_verifier.py",
+        "scripts/test_issue_302_gateway_receipt_regression.py",
+        "scripts/retriage_gateway_receipt_false_invalids.py"
+      ]
+    }
+  ]
 }

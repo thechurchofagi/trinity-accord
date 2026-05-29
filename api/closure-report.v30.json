@@ -105,7 +105,7 @@
     "required_live_group": "live-site-gateway-core"
   },
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "fba22e277408f118",
+  "source_digest": "facba9e09611bcd7",
   "final_closure": {
     "v30_5_complete": true,
     "p0_main": "CI_GROUP_P0_MAIN_OK",
@@ -128,15 +128,19 @@
     "changelog": "/CHANGELOG.md"
   },
   "gateway_receipt_triage_alignment": {
-    "status": "source_verified_pending_live",
+    "status": "v30.7.1_failed_on_issue_302_v30.7.2_required",
     "contract": "/api/gateway-receipt-contract.v1.json",
     "known_regression": 299,
     "required_tests": [
-      "scripts/test_gateway_receipt_contract.py",
-      "scripts/test_gateway_receipt_verifier.py",
-      "scripts/test_triage_accepts_gateway_receipt.py",
-      "scripts/test_triage_rejects_forged_gateway_receipt.py",
-      "scripts/test_issue_299_gateway_receipt_regression.py"
+      "scripts/test_issue_299_gateway_receipt_regression.py",
+      "scripts/test_issue_302_gateway_receipt_regression.py",
+      "scripts/test_triage_uses_shared_receipt_verifier.py",
+      "scripts/test_render_gateway_issue_body_receipt_marker.py",
+      "scripts/test_readback_hash_policy.py"
+    ],
+    "known_regressions": [
+      299,
+      302
     ]
   }
 }

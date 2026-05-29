@@ -90,8 +90,14 @@
     {
       "issue": 299,
       "problem": "Gateway bot-created Issue with gateway_receipt_id and archive decision comment was closed as direct issue archive attempt."
+    },
+    {
+      "issue": 302,
+      "problem": "Gateway bot-created Issue with legacy receipt fields and duplicate agent_readback_sha256 was closed as direct issue archive attempt."
     }
   ],
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "0a975ba14fe0d868"
+  "source_digest": "083811d1b7d92d02",
+  "receipt_recognition_must_run_before_strict_intake_parse": true,
+  "duplicate_non_receipt_keys_must_not_invalidate_trusted_gateway_receipt": true
 }
