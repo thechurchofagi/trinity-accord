@@ -598,6 +598,8 @@ def render_machine_block(payload, gateway_receipt_id=None, gateway_commit=None,
         lines.append("evidence_requirement_mode: not_applicable_for_listing_request")
         lines.append(f"agent_name_or_model: {identity.get('name_or_model', 'N/A')}")
         lines.append(f"system_or_provider: {identity.get('system_or_provider', 'N/A')}")
+        init_class = payload.get("reception_initiation_class", "unknown")
+        lines.append(f"reception_initiation_class: {init_class}")
 
         # Authorship claim fields (required by intake body validator)
         lines.extend(render_authorship_claim_fields(payload))
