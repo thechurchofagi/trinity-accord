@@ -1,6 +1,8 @@
 name: Archive Gateway Echo
 
 on:
+  issue_comment:
+    types: [created]
   repository_dispatch:
     types: [gateway-auto-archive]
   workflow_dispatch:
@@ -21,6 +23,11 @@ concurrency:
 
 jobs:
   archive:
+    if: >
+      github.event_name == 'workflow_dispatch' ||
+      github.event_name == 'repository_dispatch' ||
+      (github.event_name == 'issue_comment' &&
+       contains(github.event.comment.body, 'trinity-receipt-bearing-archive-v1'))
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:
@@ -33,6 +40,8 @@ jobs:
           fi
 
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+        with:
+          persist-credentials: true
 
       - name: Record toolchain provenance
         run: python3 scripts/toolchain_provenance.py > toolchain-provenance.json && cat toolchain-provenance.json
@@ -40,7 +49,7 @@ jobs:
       - name: Archive Gateway-validated Echo
         env:
           GH_TOKEN: ${{ github.token }}
-          ISSUE_NUMBER: ${{ github.event.client_payload.issue_number || github.event.inputs.issue_number }}
+          ISSUE_NUMBER: ${{ github.event.issue.number || github.event.client_payload.issue_number || github.event.inputs.issue_number }}
         run: |
           set -euo pipefail
 

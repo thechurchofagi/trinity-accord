@@ -533,6 +533,44 @@ def build_record(issue: dict[str, Any], reviewer: str, review_comment_body: str 
         },
     }
 
+def archive_record_path(issue_number: int) -> Path:
+    """Return the canonical path for a gateway echo archive record."""
+    return ROOT / "api" / "archives" / "gateway-echo" / f"issue-{issue_number}.json"
+
+
+def write_gateway_archive_record(record: dict) -> Path:
+    """Write a deterministic gateway echo archive record, idempotent by receipt_id."""
+    path = archive_record_path(int(record["issue_number"]))
+    path.parent.mkdir(parents=True, exist_ok=True)
+
+    if path.exists():
+        existing = json.loads(path.read_text(encoding="utf-8"))
+        if existing.get("receipt_id") == record.get("receipt_id"):
+            record["archived_at"] = existing.get("archived_at") or record.get("archived_at")
+
+    path.write_text(json.dumps(record, indent=2, ensure_ascii=False, sort_keys=True) + "\n", encoding="utf-8")
+    return path
+
+
+def archive_gateway_issue(issue: dict, comments: list[str]) -> Path:
+    """Archive a receipt-bearing Gateway Issue using the shared reader for normalization."""
+    from gateway_archive_issue_reader import normalize_gateway_archive_issue, to_jsonable
+
+    normalized = normalize_gateway_archive_issue(issue, comments)
+    record = to_jsonable(normalized)
+    record.update({
+        "schema": "trinityaccord.gateway-echo-archive-record.v1",
+        "archive_kind": "agent_declared_echo_archive",
+        "counts_toward_home_reception": True,
+        "counts_toward_home_verifiability": False,
+        "non_authority_boundary": True,
+        "non_amending": True,
+        "not_attestation": True,
+        "archived_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
+    })
+    return write_gateway_archive_record(record)
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--issue-json", required=True)
