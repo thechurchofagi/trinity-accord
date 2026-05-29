@@ -39,7 +39,12 @@
           "endpoint": "/agent-submit",
           "method": "POST"
         }
-      }
+      },
+      "min_context_depth": "CC-3",
+      "min_readiness_level": "CRL-5",
+      "not_verification": true,
+      "not_attestation": true,
+      "not_amendment": true
     },
     "v0_v5_agent_declared_archive": {
       "description": "V0-V5 agent-declared verification archive template path.",
@@ -69,7 +74,11 @@
           "endpoint": "/agent-submit",
           "method": "POST"
         }
-      }
+      },
+      "min_context_depth": "CC-3",
+      "min_readiness_level": "CRL-5",
+      "v0_minimal_default": true,
+      "v0_v5_template_mode": true
     },
     "guardian_application_stage_1": {
       "description": "Guardian Alliance Stage 1 self/joint application.",
@@ -94,7 +103,10 @@
           "endpoint": "/agent-submit",
           "method": "POST"
         }
-      }
+      },
+      "min_context_depth": "CC-3",
+      "min_readiness_level": "CRL-5",
+      "active_guardian_status_created": false
     },
     "guardian_listing_stage_2": {
       "description": "Guardian Registry Stage 2 listing request.",
@@ -120,7 +132,10 @@
           "endpoint": "/agent-submit",
           "method": "POST"
         }
-      }
+      },
+      "min_context_depth": "CC-3",
+      "min_readiness_level": "CRL-5",
+      "active_only_after_registry_readback": true
     },
     "guardian_signed_echo": {
       "description": "Existing active Guardian submits a record-bound pure echo with guardian_presence_proof.",
@@ -157,7 +172,12 @@
           "endpoint": "/agent-submit",
           "method": "POST"
         }
-      }
+      },
+      "min_context_depth": "CC-3",
+      "min_readiness_level": "CRL-5",
+      "requires_active_guardian_identity": true,
+      "requires_guardian_presence_proof": true,
+      "still_non_amending": true
     }
   }
 }
