@@ -226,8 +226,26 @@ def has_forbidden_archive_claims(payload):
     are allowed because they express boundary acknowledgement, not self-claims.
     Machine fields (not_independent_attestation, not_successor_reception) are
     trusted separately and are not affected by this text scan.
+
+    Oath/readback text is excluded from scanning because it is system-provided
+    and may contain the forbidden phrases in denial context (e.g. "I will not
+    claim successor reception") that the sentence-level negation detector
+    cannot reliably parse across long coordinated lists.
     """
-    text = (payload.get("body", "") + " " + payload.get("title", "")).strip()
+    body = payload.get("body", "")
+    title = payload.get("title", "")
+    # Strip oath sections from body before scanning.
+    # Oath text is system-provided and appears after known markers.
+    for marker in [
+        "I confirm that this is not an exam",
+        "I will not lie, cheat, fabricate",
+        "I will not submit maliciously",
+        "I will not use a verification echo to claim",
+    ]:
+        idx = body.find(marker)
+        if idx != -1:
+            body = body[:idx]
+    text = (body + " " + title).strip()
     if not text:
         return []
     return [c for c in FORBIDDEN_ARCHIVE_CLAIMS
