@@ -95,3 +95,5 @@
 # Identity/contact fields improve traceability but do not create formal attestation.
 # D/S/O/E/R provenance codes are system-derived; submitters use simplified fields above.
 # Field guide: /api/echo-submission-field-guide.json
+
+Use /api/mission-governance.v1.json for mission, authority boundary, context governance, Echo semantics, Guardian semantics, and prohibited claims. Do not invent a duplicate context-understanding level system.
