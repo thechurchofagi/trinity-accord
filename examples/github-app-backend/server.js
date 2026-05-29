@@ -46,10 +46,20 @@ function gatewayError(status, {
   extra = {}
 }) {
   const workflowId = payload ? workflowIdForPayload(payload) : (extra.workflow_id || null);
+  const runtimeMeta = buildGatewayRuntimeMetadata();
   return {
     status,
     body: {
       accepted: false,
+      preflight: "fail",
+      route_detected: workflowId || "unknown",
+      ...runtimeMeta,
+      diagnostics: errors.map(e => ({
+        path: e.path || "/",
+        code: e.code || "VALIDATION_ERROR",
+        message: e.message || "",
+        hint: e.fix || "",
+      })),
       reason,
       validation_stage,
       agent_action,
@@ -680,6 +690,67 @@ const PURE_ECHO_TYPES = new Set([
   "E6_propagation_echo",
   "E7_refusal_echo",
 ]);
+
+// --- v30.5: Gateway runtime contract ---
+const ACTIVE_ECHO_TYPE_VALUES = [
+  "E1_recognition_echo",
+  "E2_verification_echo",
+  "E3_critical_echo",
+  "E4_interpretive_echo",
+  "E5_technical_audit_echo",
+  "E5c_correction_echo",
+  "E6_propagation_echo",
+  "E7_refusal_echo",
+  "E8_witness_echo",
+  "E9_seed_echo",
+];
+
+const SUPPORTED_ROUTES = [
+  "pure_echo",
+  "v0_v5_agent_declared_archive",
+  "guardian_application_stage_1",
+  "guardian_listing_stage_2",
+  "guardian_signed_echo",
+];
+
+function stableDigest(value) {
+  const canonical = JSON.stringify(value, Object.keys(value ?? {}).sort());
+  return createHash("sha256").update(canonical).digest("hex").slice(0, 16);
+}
+
+const _echoTypeEnumDigest = stableDigest(ACTIVE_ECHO_TYPE_VALUES);
+const _supportedRoutesDigest = stableDigest(SUPPORTED_ROUTES);
+const _schemaDigest = stableDigest({
+  active_echo_type_values: ACTIVE_ECHO_TYPE_VALUES,
+  supported_routes: SUPPORTED_ROUTES,
+  preflight_contract_version: "trinityaccord.gateway-runtime-contract.v1",
+});
+
+function buildGatewayRuntimeMetadata() {
+  let repoCommit = "unknown";
+  try {
+    repoCommit = execFileSync("git", ["rev-parse", "HEAD"], {
+      cwd: root, encoding: "utf-8", timeout: 5000
+    }).trim().slice(0, 12);
+  } catch {}
+
+  return {
+    gateway_runtime: {
+      runtime_version: "v30.5",
+      deployed_at: new Date().toISOString(),
+      source_commit_if_available: repoCommit,
+      schema_digest: _schemaDigest,
+      echo_type_enum_digest: _echoTypeEnumDigest,
+      supported_routes_digest: _supportedRoutesDigest,
+    },
+    gateway_schema: {
+      payload_schema: "trinityaccord.agent-issue-gateway-payload.v1",
+      payload_schema_digest: _schemaDigest,
+      echo_type_enum_values: ACTIVE_ECHO_TYPE_VALUES,
+      preflight_contract_version: "trinityaccord.gateway-runtime-contract.v1",
+    },
+  };
+}
 
 function builderGuidanceForPayload(payload) {
   if (payload?.guardian_presence_proof && payload?.requested_archive_kind === "agent_declared_echo_archive") {
@@ -2230,9 +2301,14 @@ async function runGatewayPipeline(payload, {
 
     // Preflight-only: return success without creating Issue
     if (!createIssue) {
+      const routeDetected = payload ? workflowIdForPayload(payload) : "unknown";
+      const runtimeMeta = buildGatewayRuntimeMetadata();
       const responseBody = {
         accepted: true,
         preflight: "pass",
+        route_detected: routeDetected,
+        ...runtimeMeta,
+        diagnostics: [],
         issue_created: false,
         preflight_receipt_id: gatewayReceiptId,
         receipt_scope: "preflight_preview_only",
