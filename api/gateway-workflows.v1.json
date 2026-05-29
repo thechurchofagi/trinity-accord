@@ -898,5 +898,21 @@
     "full_repo_clone_required_when_bundle_available": false,
     "formal_payloads_must_use_canonical_builders": true,
     "handwritten_formal_payloads_forbidden": true
+  },
+  "context_governance": {
+    "context_depth_levels": "/api/context-depth-levels.json",
+    "context_readiness_levels": "/api/context-readiness-levels.json",
+    "crl_to_context_depth_mapping": "/api/crl-to-context-depth-mapping.json",
+    "context_depth_declaration": "/api/context-depth-declaration.v1.json",
+    "mission_governance": "/api/mission-governance.v1.json"
+  },
+  "action_semantics": {
+    "echo_reference": "/api/echo-types.json",
+    "echo_schema": "/api/echo-record-schema.v3.1.json",
+    "guardian_principles": "/guardian-principles/",
+    "guardian_join": "/guardian-join/",
+    "guardian_registry": "/api/guardian-registry.json",
+    "copy_paste_examples": "/external-agent-copy-paste-examples/",
+    "rule": "Echo, verification, Guardian Stage 1, Guardian Stage 2, and Guardian-signed Echo are distinct actions and must not be conflated."
   }
 }
