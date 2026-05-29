@@ -51,7 +51,7 @@ EXPECTED_GATEWAY_LABELS = [
     "agent-declared",
 ]
 
-CANARY_TITLE_PREFIX = "[smoke-test] Gateway receipt triage canary"
+CANARY_TITLE_PREFIX = "[smoke-test] E1 Recognition Echo — Gateway receipt triage canary"
 
 
 # --- Helpers ---
