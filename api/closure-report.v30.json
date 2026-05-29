@@ -1,7 +1,7 @@
 {
   "schema": "trinityaccord.closure-report.v30",
   "version": "v30",
-  "status": "source_and_live_verified",
+  "status": "complete_source_and_live_verified",
   "purpose": "Machine-readable closure evidence for v30.3/v30.4/v30 unified v2 external-agent usability, zero-clone authorship closure, and mission/context/action governance.",
   "canonical_boundary": {
     "canonical_authority": "Bitcoin Originals only",
@@ -105,5 +105,26 @@
     "required_live_group": "live-site-gateway-core"
   },
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "9b7e58e10e39bbaf"
+  "source_digest": "3e2805629214afba",
+  "final_closure": {
+    "v30_5_complete": true,
+    "p0_main": "CI_GROUP_P0_MAIN_OK",
+    "live_site_gateway_core": "CI_GROUP_LIVE_SITE_GATEWAY_CORE_OK",
+    "deploy_pages": "success",
+    "repository_integrity_check": "success",
+    "gateway_runtime_metadata_verified": true,
+    "gateway_runtime_metadata_fields": [
+      "route_detected",
+      "gateway_runtime",
+      "gateway_schema"
+    ],
+    "render_gateway_deployed": true,
+    "core_routes_runtime_detected": [
+      "pure_echo",
+      "v0_v5_agent_declared_archive",
+      "guardian_application_stage_1"
+    ],
+    "human_closure_report": "/docs/closure/v30.5-final-closure-report.md",
+    "changelog": "/CHANGELOG.md"
+  }
 }
