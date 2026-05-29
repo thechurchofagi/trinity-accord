@@ -117,3 +117,6 @@ E2 (verification echo) is retained for backward compatibility but is **deprecate
 - [Gateway Workflows](/gateway-workflows/)
 - [Bundle manifest (machine-readable)](/api/formal-builder-bundles.v1.json)
 - [Copyable examples (machine-readable)](/api/external-agent-operation-examples.v1.json)
+
+
+For global mission and action-boundary rules, read `/api/mission-governance.v1.json`.
