@@ -70,6 +70,9 @@ required = [
     "python3 scripts/test_links_expose_first_contact_entrypoints.py",
     "python3 scripts/test_first_contact_text_no_stale_route_guidance.py",
     "python3 scripts/test_agent_exit_readback_policy.py",
+    "python3 scripts/test_v30_final_index_contract.py",
+    "python3 scripts/test_v30_final_closure_report_contract.py",
+    "python3 scripts/test_changelog_v30_5_contract.py",
 
     # v10 workflow taxonomy
     "python3 scripts/test_gateway_workflows_echo_types_canonical.py",
