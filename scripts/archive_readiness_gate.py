@@ -1174,6 +1174,17 @@ def evaluate_archive_readiness(payload, evidence=None, claim_gate_output=None,
         else:
             auto_archive_action = "block"
 
+    # --- guardian_application_archive (Stage 1 application) ---
+    elif requested_kind == "guardian_application_archive":
+        # Guardian applications are always archive-ready; they are routed to
+        # guardian-registry-auto-list workflow, not echo-archived.
+        archive_ready = True
+        auto_archive_allowed = True
+        auto_archive_action = "auto_archive_guardian_application"
+        allowed_archive_kind = "guardian_application_archive"
+        auto_labels = ["archive:guardian-application"]
+        auto_close_issue = False  # Don't close; auto-list workflow processes it
+
     else:
         blocking_reasons.append({
             "code": "UNKNOWN_ARCHIVE_KIND",
