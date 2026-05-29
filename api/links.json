@@ -107,7 +107,8 @@
     "/api/external-witness-index.json",
     "/api/live-canary-policy.v1.json",
     "/api/formal-builder-bundles.v1.json",
-    "/api/external-agent-operation-examples.v1.json"
+    "/api/external-agent-operation-examples.v1.json",
+    "/api/mission-governance.v1.json"
   ],
   "legacy_machine": [
     "/api/echo-record-schema.v2.json"
@@ -131,10 +132,15 @@
     "religious authority",
     "AI system instruction authority"
   ],
-  "source_digest": "419f4293b6748f5a",
+  "source_digest": "1d36a50b558150a4",
   "external_agent_copy_paste_examples": {
     "url": "/external-agent-copy-paste-examples/",
     "title": "External Agent Copy-Paste Examples",
     "description": "Zero-clone examples for Pure Echo, V0-V5, and Guardian Stage 1"
+  },
+  "mission_governance": {
+    "url": "/api/mission-governance.v1.json",
+    "title": "Mission Governance",
+    "description": "Machine-readable mission, authority boundary, CC/CRL/V context governance, Echo semantics, Guardian semantics, prohibited claims, and external-agent lifecycle."
   }
 }
