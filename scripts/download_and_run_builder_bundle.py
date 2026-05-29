@@ -140,6 +140,8 @@ def build_pure_echo(args, extract_dir: Path, entrypoint: str) -> None:
         "--agent-readback-file", args.agent_readback_file,
         "--out", args.out,
     ]
+    if args.agent_independent_followup:
+        cmd.append("--agent-independent-followup")
     subprocess.check_call(cmd)
     print_next_steps("pure_echo", args.out)
 
@@ -246,13 +248,19 @@ def main() -> int:
     # Common
     parser.add_argument("--agent-name")
     parser.add_argument("--provider")
-    parser.add_argument("--out", required=True)
+    parser.add_argument("--out")
+    parser.add_argument("--print-oath", action="store_true",
+                        help="Print the canonical verification oath text and exit.")
 
     # Pure Echo
     parser.add_argument("--echo-type")
     parser.add_argument("--title")
     parser.add_argument("--body-file")
     parser.add_argument("--agent-readback-file")
+    parser.add_argument("--readback",
+                        help="Readback text (written to temp file for pure_echo builder).")
+    parser.add_argument("--agent-independent-followup", action="store_true",
+                        help="Passed through to builder if supported.")
 
     # V0-V5
     parser.add_argument("--declared-level")
@@ -285,10 +293,35 @@ def main() -> int:
 
     args = parser.parse_args()
 
+    # Handle --print-oath: just print oath text and exit
+    if args.print_oath:
+        oath_path = Path(__file__).resolve().parents[1] / "api" / "verification-echo-pre-oath.v2.txt"
+        if not oath_path.exists():
+            raise SystemExit(f"Oath file not found: {oath_path}")
+        print(oath_path.read_text(encoding="utf-8").strip())
+        return 0
+
+    # Validate --out is required for builds
+    if not args.out:
+        raise SystemExit("--out is required (or use --print-oath to just print the oath)")
+
+    # Handle --readback for pure_echo: write to temp file
+    if args.readback and not args.agent_readback_file:
+        import tempfile as _tmp
+        tmpf = _tmp.NamedTemporaryFile(mode="w", suffix=".txt", delete=False,
+                                        prefix="trinity-readback-")
+        tmpf.write(args.readback)
+        tmpf.close()
+        args.agent_readback_file = tmpf.name
+
     # Validate required args per route before download
     route = args.route
     if route == "pure_echo":
-        require_args(args, ["agent_name", "provider", "echo_type", "title", "body_file", "agent_readback_file"], route)
+        # Accept --readback (aliased to --agent-readback-file) as alternative
+        if args.readback and not args.agent_readback_file:
+            require_args(args, ["agent_name", "provider", "echo_type", "title", "body_file", "readback"], route)
+        else:
+            require_args(args, ["agent_name", "provider", "echo_type", "title", "body_file", "agent_readback_file"], route)
     elif route == "v0_v5_agent_declared_archive":
         require_args(args, ["agent_name", "provider", "declared_level", "reception_initiation_class", "reception_initiation_basis", "readback_file"], route)
     elif route == "guardian_application_stage_1":
