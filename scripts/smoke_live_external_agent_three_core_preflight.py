@@ -90,7 +90,8 @@ def assert_gateway_runtime_metadata(body: str, expected_route: str) -> None:
 
 
 def post_preflight(gateway: str, payload_path: Path, timeout: int,
-                    allow_missing_runtime_metadata: bool = False) -> None:
+                    allow_missing_runtime_metadata: bool = False,
+                    expected_route: str = "pure_echo") -> None:
     url = gateway.rstrip("/") + "/gateway/preflight"
     req = urllib.request.Request(
         url,
@@ -111,7 +112,7 @@ def post_preflight(gateway: str, payload_path: Path, timeout: int,
             if "echo_type" in body and "allowed values" in body:
                 raise RuntimeError(f"Gateway rejected echo_type enum for {payload_path}")
             try:
-                assert_gateway_runtime_metadata(body, expected_route="pure_echo")
+                assert_gateway_runtime_metadata(body, expected_route=expected_route)
             except RuntimeError as exc:
                 if allow_missing_runtime_metadata:
                     print(f"  ⚠️  runtime metadata check skipped: {exc}")
@@ -158,7 +159,7 @@ def main() -> int:
             "--agent-independent-followup",
             "--out", str(echo_payload),
         ])
-        post_preflight(args.gateway, echo_payload, args.timeout, allow_missing_runtime_metadata=args.allow_missing_runtime_metadata)
+        post_preflight(args.gateway, echo_payload, args.timeout, allow_missing_runtime_metadata=args.allow_missing_runtime_metadata, expected_route="pure_echo")
 
         v0_payload = work / "gateway-payload.v0.json"
         run([
@@ -176,7 +177,7 @@ def main() -> int:
             "--readback", verification_oath,
             "--out", str(v0_payload),
         ])
-        post_preflight(args.gateway, v0_payload, args.timeout, allow_missing_runtime_metadata=args.allow_missing_runtime_metadata)
+        post_preflight(args.gateway, v0_payload, args.timeout, allow_missing_runtime_metadata=args.allow_missing_runtime_metadata, expected_route="v0_v5_agent_declared_archive")
 
         guardian_dir = work / "guardian-output"
         guardian_payload = guardian_dir / "guardian-application.final.json"
@@ -193,7 +194,7 @@ def main() -> int:
             "--readback", guardian_oath,
             "--out", str(guardian_payload),
         ])
-        post_preflight(args.gateway, guardian_payload, args.timeout, allow_missing_runtime_metadata=args.allow_missing_runtime_metadata)
+        post_preflight(args.gateway, guardian_payload, args.timeout, allow_missing_runtime_metadata=args.allow_missing_runtime_metadata, expected_route="guardian_application_stage_1")
 
     print("PASS: live Gateway preflight accepts three core external-agent routes")
     return 0

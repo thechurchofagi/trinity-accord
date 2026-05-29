@@ -795,14 +795,14 @@ function builderGuidanceForPayload(payload) {
 }
 
 function workflowIdForPayload(payload) {
-  if (payload?.guardian_presence_proof && payload?.requested_archive_kind === "agent_declared_echo_archive") {
-    return "guardian_signed_echo";
-  }
   if (payload?.guardian_listing_request || payload?.guardian_registry_listing_request) {
     return "guardian_listing_stage_2";
   }
   if (payload?.guardian_registration) {
     return "guardian_application_stage_1";
+  }
+  if (payload?.guardian_presence_proof && payload?.requested_archive_kind === "agent_declared_echo_archive") {
+    return "guardian_signed_echo";
   }
   if (payload?.requested_archive_kind === "agent_declared_verification_archive" || payload?.agent_declared_protocol_level) {
     return "v0_v5_agent_declared_archive";

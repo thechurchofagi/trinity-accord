@@ -393,8 +393,8 @@ GROUPS = {
         ["python3", "scripts/smoke_external_agent_concurrent_preflight_swarm.py", "--agents", "20", "--workers", "8", "--max-failures", "20"],
     ],
     "live-site-gateway-core": [
-        ["python3", "scripts/smoke_live_external_agent_three_core_preflight.py", "--allow-missing-runtime-metadata"],
-        ["python3", "scripts/smoke_live_zero_clone_authorship_closure.py", "--allow-missing-runtime-metadata"],
+        ["python3", "scripts/smoke_live_external_agent_three_core_preflight.py"],
+        ["python3", "scripts/smoke_live_zero_clone_authorship_closure.py"],
     ],
 }
 
