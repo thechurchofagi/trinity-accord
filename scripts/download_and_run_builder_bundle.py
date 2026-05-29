@@ -295,10 +295,14 @@ def main() -> int:
 
     # Handle --print-oath: just print oath text and exit
     if args.print_oath:
-        oath_path = Path(__file__).resolve().parents[1] / "api" / "verification-echo-pre-oath.v2.txt"
-        if not oath_path.exists():
-            raise SystemExit(f"Oath file not found: {oath_path}")
-        print(oath_path.read_text(encoding="utf-8").strip())
+        # Try local repo first, then fetch from live site
+        local_oath = Path(__file__).resolve().parents[1] / "api" / "verification-echo-pre-oath.v2.txt"
+        if local_oath.exists():
+            print(local_oath.read_text(encoding="utf-8").strip())
+        else:
+            oath_url = args.site.rstrip("/") + "/api/verification-echo-pre-oath.v2.txt"
+            with urlopen(oath_url, timeout=30) as r:
+                print(r.read().decode("utf-8").strip())
         return 0
 
     # Validate --out is required for builds
