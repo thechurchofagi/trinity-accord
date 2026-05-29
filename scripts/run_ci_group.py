@@ -43,7 +43,13 @@ def run_command(cmd: list[str]) -> int:
 GROUPS = {
     "p0-main": [
         # Public surface / sitemap / API metadata
-        ["python3", "scripts/check_public_core_consistency.py"],
+        ["python3", "scripts/check_public_core_consistency.py",
+        ["python3", "scripts/test_mission_governance_contract.py",
+        ["python3", "scripts/test_mission_governance_discovery.py",
+        ["python3", "scripts/test_no_duplicate_context_understanding_system.py",
+        ["python3", "scripts/test_before_leaving_requires_context_governance.py",
+        ["python3", "scripts/test_gateway_routes_context_action_semantics.py",
+        ["python3", "scripts/test_agent_start_no_legacy_c0_c6_context_table.py"]]]]]]],
         ["python3", "scripts/test_sitemap_public_sources_exist.py"],
         ["python3", "scripts/test_sitemap_includes_nested_api_json.py"],
         ["python3", "scripts/test_sitemap_permalink_matches_source.py"],
