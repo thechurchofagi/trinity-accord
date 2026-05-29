@@ -40,7 +40,7 @@ jobs:
         run: |
           set -euo pipefail
           case "$ACTOR" in
-            thechurchofagi|github-actions[bot])
+            thechurchofagi|"github-actions[bot]")
               echo "Authorized actor: $ACTOR"
               ;;
             *)
@@ -50,7 +50,7 @@ jobs:
           esac
           if [ "$EVENT_NAME" = "repository_dispatch" ]; then
             case "$SENDER" in
-              thechurchofagi|github-actions[bot])
+              thechurchofagi|"github-actions[bot]")
                 echo "Authorized repository_dispatch sender: $SENDER"
                 ;;
               *)
