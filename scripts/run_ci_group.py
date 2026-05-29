@@ -246,6 +246,10 @@ GROUPS = {
         # v30.7.2 receipt triage false-invalid fix
         ["python3", "scripts/test_issue_302_gateway_receipt_regression.py"],
         ["python3", "scripts/test_triage_uses_shared_receipt_verifier.py"],
+        # v30.8 Gateway archive persistence
+        ["python3", "scripts/test_gateway_archive_persistence_contract.py"],
+        ["python3", "scripts/test_gateway_archive_issue_reader_issue_304.py"],
+        ["python3", "scripts/test_archive_gateway_echo_workflow_contract.py"],
         ["python3", "scripts/test_render_gateway_issue_body_receipt_marker.py"],
         ["python3", "scripts/test_readback_hash_policy.py"],
     ],
