@@ -40,9 +40,10 @@ Do not use:
 ```text
 E1_read_oriented_echo
 read_oriented_echo
-agent_readback_sha256
 agentreadbacksha256
 ```
+
+Do not handwrite readback hash fields. Use builder-generated `agent_readback_sha256` only.
 
 Active Gateway values are defined by:
 

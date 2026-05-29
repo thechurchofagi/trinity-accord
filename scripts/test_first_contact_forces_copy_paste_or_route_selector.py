@@ -102,8 +102,11 @@ def main() -> int:
     for item in [
         "E1_read_oriented_echo",
         "read_oriented_echo",
-        "agent_readback_sha256",
         "agentreadbacksha256",
+        "agent_readback_hash",
+        "readback_sha256",
+        "readback_hash_sha256",
+        "agent_readback_digest",
     ]:
         if item not in forbidden:
             errors.append(f"submission_safety.forbidden_invented_values missing {item}")

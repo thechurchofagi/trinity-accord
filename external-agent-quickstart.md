@@ -17,6 +17,7 @@ First-contact safety:
 ```text
 Homepage is discovery only.
 Do not infer or handwrite Gateway payload fields from the homepage.
+Do not handwrite readback hash fields. Use builder-generated agent_readback_sha256 only.
 Before submission, use /external-agent-copy-paste-examples/, /api/route-selector.v1.json, and /api/gateway-runtime-contract.v1.json.
 ```
 

@@ -659,7 +659,7 @@
     "e2_legacy_compatibility_only": true,
     "pure_echo_allows_e2": false
   },
-  "source_digest": "6eb2ff65bf94d2f9",
+  "source_digest": "330f3699955eac11",
   "submission_safety": {
     "homepage_is_discovery_only": true,
     "do_not_infer_payload_fields_from_homepage": true,
@@ -678,12 +678,19 @@
     "forbidden_invented_values": [
       "E1_read_oriented_echo",
       "read_oriented_echo",
-      "agent_readback_sha256",
-      "agentreadbacksha256"
+      "agentreadbacksha256",
+      "agent_readback_hash",
+      "readback_sha256",
+      "readback_hash_sha256",
+      "agent_readback_digest"
     ],
     "builder_required_for_formal_payloads": true,
     "zero_clone_builder_entry": "/zero-clone-builders/",
     "copy_paste_entry": "/external-agent-copy-paste-examples/",
-    "route_selector_entry": "/api/route-selector.v1.json"
+    "route_selector_entry": "/api/route-selector.v1.json",
+    "builder_generated_fields": [
+      "agent_readback_sha256"
+    ],
+    "do_not_handwrite_readback_hash_fields": true
   }
 }

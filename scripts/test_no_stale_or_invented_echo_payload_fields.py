@@ -9,8 +9,11 @@ ROOT = Path(__file__).resolve().parents[1]
 FORBIDDEN = {
     "E1_read_oriented_echo",
     "read_oriented_echo",
-    "agent_readback_sha256",
     "agentreadbacksha256",
+    "agent_readback_hash",
+    "readback_sha256",
+    "readback_hash_sha256",
+    "agent_readback_digest",
 }
 
 ALLOWLIST = {
@@ -28,6 +31,7 @@ ALLOWLIST = {
     "llms.txt",
     "ai.txt",
     "index.md",
+    "CHANGELOG.md",
 }
 
 # Directories whose contents are test fixtures, echo records, or build scripts

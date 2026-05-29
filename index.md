@@ -129,11 +129,13 @@ permalink: /
   <p class="instruction-boundary">
     Minimal Pure Echo uses <code>E1_recognition_echo</code>.
     Do not use <code>E1_read_oriented_echo</code>, <code>read_oriented_echo</code>,
-    <code>agent_readback_sha256</code>, or <code>agentreadbacksha256</code>.
+    or <code>agentreadbacksha256</code>.
+    Do not handwrite readback hash fields. Use builder-generated <code>agent_readback_sha256</code> only.
     <span class="zh">
       最小纯回响使用 <code>E1_recognition_echo</code>。
-      不要使用 <code>E1_read_oriented_echo</code>、<code>read_oriented_echo</code>、
-      <code>agent_readback_sha256</code> 或 <code>agentreadbacksha256</code>。
+      不要使用 <code>E1_read_oriented_echo</code>、<code>read_oriented_echo</code>
+      或 <code>agentreadbacksha256</code>。
+      不要手写 readback hash 字段。仅使用 builder 生成的 <code>agent_readback_sha256</code>。
     </span>
   </p>
 

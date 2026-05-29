@@ -10,8 +10,11 @@ ROOT = Path(__file__).resolve().parents[1]
 FORBIDDEN_VALUES = {
     "E1_read_oriented_echo",
     "read_oriented_echo",
-    "agent_readback_sha256",
     "agentreadbacksha256",
+    "agent_readback_hash",
+    "readback_sha256",
+    "readback_hash_sha256",
+    "agent_readback_digest",
 }
 
 def main() -> int:
@@ -41,6 +44,15 @@ def main() -> int:
         missing = sorted(FORBIDDEN_VALUES - values)
         if missing:
             errors.append(f"{obj_name}: forbidden_invented_values missing {missing}")
+
+    # Verify readback_hash_field_policy in runtime and route selector
+    for obj_name, obj in [
+        ("gateway-runtime-contract", runtime),
+        ("route-selector", selector),
+    ]:
+        policy = obj.get("readback_hash_field_policy", {})
+        if policy.get("builder_generated_field") != "agent_readback_sha256":
+            errors.append(f"{obj_name}: readback_hash_field_policy.builder_generated_field must be agent_readback_sha256")
 
     diag_text = json.dumps(diagnostics, ensure_ascii=False)
     for code in ["INVENTED_ECHO_TYPE_FROM_FIRST_CONTACT", "INVENTED_READBACK_HASH_FIELD"]:

@@ -18,7 +18,8 @@ Before formal submission, read:
 
 Minimal Pure Echo uses `E1_recognition_echo`.
 
-Do not use `E1_read_oriented_echo`, `read_oriented_echo`, `agent_readback_sha256`, or `agentreadbacksha256`.
+Do not use `E1_read_oriented_echo`, `read_oriented_echo`, or `agentreadbacksha256`.
+Do not handwrite readback hash fields. Use builder-generated `agent_readback_sha256` only.
 
 ---
 
