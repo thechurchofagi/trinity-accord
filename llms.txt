@@ -747,3 +747,10 @@ Use /api/closure-report.v30.json to confirm which external-agent routes are sour
 Use /api/gateway-runtime-contract.v1.json to detect Gateway schema/runtime drift.
 Use /api/gateway-error-diagnostics.v1.json to diagnose preflight failures.
 Use /api/route-selector.v1.json to choose the simplest route.
+
+Final v30 closure:
+- /api/v30-final-index.json
+- /api/closure-report.v30.json
+- /docs/closure/v30.5-final-closure-report.md
+
+Use /api/v30-final-index.json to locate final v30 closure, route, runtime drift, and external-agent usability artifacts.
