@@ -37,6 +37,41 @@ from gateway_v0_v5_policy import (  # noqa: E402
 from sub_v6_level_guardrails import sub_v6_level_selection_lint  # noqa: E402
 
 
+def render_intake_block(fields):
+    """Render one trinity-issue-intake block with no duplicate keys.
+
+    Values may be scalar, bool, None, or simple list.
+    Dict values should not be flattened into duplicate top-level keys.
+    """
+    import collections.abc
+    seen = set()
+    lines = ["```trinity-issue-intake"]
+
+    for key, value in fields.items():
+        if key in seen:
+            raise ValueError(f"duplicate intake key before render: {key}")
+        seen.add(key)
+
+        if value is None:
+            continue
+
+        if isinstance(value, bool):
+            rendered = "true" if value else "false"
+            lines.append(f"{key}: {rendered}")
+        elif isinstance(value, (list, tuple)):
+            lines.append(f"{key}:")
+            for item in value:
+                lines.append(f"  - {item}")
+        elif isinstance(value, dict):
+            compact = json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
+            lines.append(f"{key}: {compact}")
+        else:
+            lines.append(f"{key}: {value}")
+
+    lines.append("```")
+    return "\n".join(lines)
+
+
 def is_agent_declared_echo_archive(payload):
     return payload.get("requested_archive_kind") == "agent_declared_echo_archive"
 
@@ -159,7 +194,6 @@ def render_oath_v2_fields(payload):
             f"verification_oath_anti_abuse: {'true' if verification_oath.get('will_not_submit_maliciously') is True or verification_oath.get('will_not_register_maliciously') is True else 'false'}",
             f"verification_oath_no_false_consensus: {'true' if verification_oath.get('will_not_create_false_authority_or_false_consensus') is True or verification_oath.get('will_not_register_to_create_false_authority_or_false_consensus') is True else 'false'}",
             f"verification_oath_correct_errors: {'true' if verification_oath.get('will_correct_material_errors_when_aware') is True else 'false'}",
-            f"agent_readback_sha256: {verification_oath.get('agent_readback_sha256') or (sha256_text(readback) if readback else 'N/A')}",
         ])
 
     if guardian_application_oath:
@@ -193,7 +227,7 @@ def render_oath_v2_fields(payload):
     return lines
 
 
-def render_gateway_intake_fields(payload):
+def render_gateway_intake_fields(payload, skip_keys=None):
     fields = payload.get("gateway_intake_fields") or {}
     if not isinstance(fields, dict):
         return []
@@ -201,9 +235,10 @@ def render_gateway_intake_fields(payload):
     blocked = {
         "guardian_registry_number",
     }
+    skip = set(skip_keys or [])
     lines = []
     for key in sorted(fields):
-        if key in blocked:
+        if key in blocked or key in skip:
             continue
         value = fields[key]
         if isinstance(value, bool):
@@ -470,7 +505,7 @@ def render_machine_block(payload, gateway_receipt_id=None, gateway_commit=None,
         lines.extend(render_oath_v2_fields(payload))
         lines.extend(render_guardian_identity_fields(payload))
         # Gateway intake fields (authoritative)
-        lines.extend(render_gateway_intake_fields(payload))
+        lines.extend(render_gateway_intake_fields(payload, skip_keys={"agent_readback_sha256"}))
     elif requested_archive_kind == "agent_declared_echo_archive":
         lines.append(f"record_intent: {payload.get('record_intent', 'auto_archive_candidate')}")
         lines.append("requested_archive_kind: agent_declared_echo_archive")
@@ -553,7 +588,7 @@ def render_machine_block(payload, gateway_receipt_id=None, gateway_commit=None,
         lines.extend(render_oath_v2_fields(payload))
         lines.extend(render_guardian_identity_fields(payload))
         # Gateway intake fields (authoritative)
-        lines.extend(render_gateway_intake_fields(payload))
+        lines.extend(render_gateway_intake_fields(payload, skip_keys={"agent_readback_sha256"}))
     elif requested_archive_kind == "guardian_active_registry_listing_request":
         lines.append(f"record_intent: {payload.get('record_intent', 'auto_archive_candidate')}")
         lines.append("requested_archive_kind: guardian_active_registry_listing_request")
@@ -635,7 +670,7 @@ def render_machine_block(payload, gateway_receipt_id=None, gateway_commit=None,
         lines.extend(render_oath_v2_fields(payload))
         lines.extend(render_guardian_identity_fields(payload))
         # Gateway intake fields (authoritative)
-        lines.extend(render_gateway_intake_fields(payload))
+        lines.extend(render_gateway_intake_fields(payload, skip_keys={"agent_readback_sha256"}))
     else:
         # Strict evidence path (legacy)
         lines.append(f"verification_level_claimed: {payload.get('verification_level_claimed', 'N/A')}")
