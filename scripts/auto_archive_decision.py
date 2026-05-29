@@ -193,6 +193,11 @@ def build_decision(readiness):
                 action=action,
                 archive_ready=str(archive_ready).lower()
             )
+        elif requested_kind == "guardian_application_archive":
+            # Guardian Stage 1 applications: no echo comment, no auto-close.
+            # The guardian-registry-auto-list workflow will process it.
+            comment_markdown = None
+            should_close_issue = False
         else:
             # Strict evidence path
             cg = readiness.get("claim_gate", {})
