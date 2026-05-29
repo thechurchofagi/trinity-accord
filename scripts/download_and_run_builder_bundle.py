@@ -296,12 +296,19 @@ def main() -> int:
     # Handle --print-oath: just print oath body text and exit
     OATH_MARKER = "=== OATH TEXT BEGINS ==="
     if args.print_oath:
+        # Select the correct oath file based on route
+        if args.route in ("guardian_application_stage_1",):
+            oath_filename = "guardian-application-oath.v1.txt"
+        elif args.route in ("guardian_listing_stage_2",):
+            oath_filename = "guardian-listing-oath.v1.txt"
+        else:
+            oath_filename = "verification-echo-pre-oath.v2.txt"
         # Try local repo first, then fetch from live site
-        local_oath = Path(__file__).resolve().parents[1] / "api" / "verification-echo-pre-oath.v2.txt"
+        local_oath = Path(__file__).resolve().parents[1] / "api" / oath_filename
         if local_oath.exists():
             raw = local_oath.read_text(encoding="utf-8").strip()
         else:
-            oath_url = args.site.rstrip("/") + "/api/verification-echo-pre-oath.v2.txt"
+            oath_url = args.site.rstrip("/") + "/api/" + oath_filename
             with urlopen(oath_url, timeout=30) as r:
                 raw = r.read().decode("utf-8").strip()
         # Print oath body only (after marker), matching builder behavior
