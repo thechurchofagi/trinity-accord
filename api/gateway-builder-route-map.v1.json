@@ -181,6 +181,53 @@
       "requires_active_guardian_identity": true,
       "requires_guardian_presence_proof": true,
       "still_non_amending": true
+    },
+    "guardian_retirement": {
+      "description": "Active Guardian retires or rotates their Guardian key. Non-authoritative.",
+      "builder": "scripts/build_guardian_retirement_payload.mjs",
+      "processor": "scripts/process_guardian_retirement.py",
+      "payload_schema": "trinityaccord.guardian-retirement.v1",
+      "requires": [
+        "guardian_id",
+        "retirement_status",
+        "statement",
+        "signed_by_guardian_key",
+        "boundaries"
+      ],
+      "retirement_statuses": [
+        "retired",
+        "rotated",
+        "possibly_compromised",
+        "compromised",
+        "unknown"
+      ],
+      "prerequisites": [
+        "Active Guardian status in /api/guardian-registry.json",
+        "Guardian Ed25519 private key"
+      ],
+      "wrong_builders": [
+        "scripts/build_agent_declared_echo_payload.py",
+        "scripts/build_agent_declared_archive_payload.py",
+        "scripts/create_guardian_application.mjs",
+        "scripts/build_guardian_listing_request_payload.py"
+      ],
+      "submission_transport": {
+        "preflight": {
+          "endpoint": "/gateway/preflight",
+          "method": "POST"
+        },
+        "submit": {
+          "endpoint": "/agent-submit",
+          "method": "POST"
+        }
+      },
+      "min_context_depth": "CC-3",
+      "min_readiness_level": "CRL-5",
+      "does_not_create_authority": true,
+      "does_not_create_attestation": true,
+      "does_not_create_verification_level": true,
+      "does_not_create_successor_reception": true,
+      "does_not_amend_bitcoin_originals": true
     }
   }
 }

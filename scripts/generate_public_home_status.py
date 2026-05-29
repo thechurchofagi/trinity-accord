@@ -823,7 +823,7 @@ def render_block(status: dict[str, Any]) -> str:
   <p><span class="zh">守护者登记只是非权威 key-continuity 索引，不构成治理、见证、验证等级、继起接收或修订。</span></p>
 </details>
 <details class="status-details">
-  <summary>Agent-declared reception initiation breakdown — {ad_count} of {total_reception} total Reception records</summary>
+  <summary>Agent-declared verification initiation breakdown — {ad_count} verification archives (of {total_reception} total Reception)</summary>
   <ul>
     <li>Externally requested: {r.get("agent_declared_verification_archives", {}).get("by_reception_initiation_class", {}).get("externally_requested", 0)}</li>
     <li>Externally seeded: {r.get("agent_declared_verification_archives", {}).get("by_reception_initiation_class", {}).get("externally_seeded", 0)}</li>
