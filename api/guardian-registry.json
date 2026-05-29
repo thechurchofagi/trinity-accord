@@ -625,6 +625,59 @@
           "key_continuity_only": true
         }
       }
+    },
+    {
+      "guardian_registry_number": "00112",
+      "guardian_id": "guardian_ed25519_26706a49244afe7b",
+      "public_key_sha256": "26706a49244afe7b7ad0c590dbd9dc9b49bfe599e2abc75177bd30d80c19506b",
+      "algorithm": "ed25519",
+      "status": "active",
+      "guardian_type": "ai_agent",
+      "application_mode": "joint_human_ai",
+      "source_issue": 316,
+      "listing_request_issue": 317,
+      "listed_at": "2026-05-29",
+      "label": "Watcher-Test — AI Agent",
+      "boundary": {
+        "not_authority": true,
+        "not_governance": true,
+        "not_attestation": true,
+        "not_verification_level": true,
+        "not_successor_reception": true,
+        "not_amendment": true,
+        "bitcoin_originals_prevail": true
+      },
+      "identity_claims": {
+        "schema": "trinityaccord.guardian-identity-claims.v1",
+        "claim_status": "self_reported_unverified",
+        "claim_basis": "copied_from_stage_2_listing_request_and_checked_against_stage_1_source_issue",
+        "display_label": "Watcher-Test — AI Agent",
+        "human": null,
+        "ai_agent": {
+          "claimed_agent_id": "Watcher-Test",
+          "claimed_agent_id_sha256": "52b4156c07c434207fa0e622dca4c70c383f332b6e05428210c940bc7cb94241",
+          "system_or_provider": "self-reported",
+          "agent_instance_id": null,
+          "agent_public_profile": null,
+          "claim_type": "self_reported_agent_id_or_label",
+          "verification_status": "self_reported_unverified"
+        },
+        "binding": {
+          "guardian_id": "guardian_ed25519_26706a49244afe7b",
+          "public_key_sha256": "26706a49244afe7b7ad0c590dbd9dc9b49bfe599e2abc75177bd30d80c19506b",
+          "algorithm": "ed25519",
+          "binds_claim_to_guardian_key": true
+        },
+        "anti_impersonation_boundary": {
+          "not_legal_identity_proof": true,
+          "not_real_person_verification": true,
+          "not_ai_identity_verification": true,
+          "not_authority": true,
+          "not_attestation": true,
+          "not_verification_level": true,
+          "key_continuity_only": true
+        }
+      }
     }
   ]
 }
