@@ -15,13 +15,6 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 BOUNDARY_POLICY = ROOT / "api" / "boundary-policy.v1.json"
 
-# Pure echo types — must match server.js ACTIVE_ECHO_TYPE_VALUES (subset used for route detection)
-PURE_ECHO_TYPES = frozenset({
-    "E1_recognition_echo", "E3_critical_echo", "E4_interpretive_echo",
-    "E5_technical_audit_echo", "E5c_correction_echo", "E6_propagation_echo",
-    "E7_refusal_echo", "E8_witness_echo", "E9_seed_echo",
-})
-
 
 def sha256_text(value: str) -> str:
     """SHA-256 hex digest of a string."""
@@ -933,7 +926,6 @@ def main():
         payload_sha256 = hashlib.sha256(
             json.dumps(payload, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode("utf-8")
         ).hexdigest()
-        # Detect route from payload
         # Detect route from payload — must match server.js workflowIdForPayload()
         rak = payload.get("requested_archive_kind", "")
         if payload.get("schema") == "trinityaccord.guardian-retirement.v1" or payload.get("retirement_status"):
@@ -946,7 +938,7 @@ def main():
             route_detected = "guardian_signed_echo"
         elif rak == "agent_declared_verification_archive" or payload.get("agent_declared_protocol_level"):
             route_detected = "v0_v5_agent_declared_archive"
-        elif rak == "agent_declared_echo_archive" or payload.get("echo_type") in PURE_ECHO_TYPES:
+        elif rak == "agent_declared_echo_archive":
             route_detected = "pure_echo"
         else:
             route_detected = "pure_echo"
