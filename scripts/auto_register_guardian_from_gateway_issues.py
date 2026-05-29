@@ -434,8 +434,12 @@ def parse_listing_issue(listing_issue: dict, allow_non_bot: bool) -> tuple[dict 
     elif requested_kind == "agent_declared_echo_archive" and is_before_legacy_listing_cutoff(listing_issue):
         # Legacy compatibility for pre-migration Gateway listing issues only.
         pass
+    elif requested_kind == "agent_declared_echo_archive" and fields.get("guardian_status") == "valid_self_registered_guardian_claim":
+        # Gateway-created Guardian applications use agent_declared_echo_archive;
+        # accept when the intake block contains a valid Guardian self-registration.
+        pass
     else:
-        return None, decision(False, "blocked", "LISTING_WRONG_ARCHIVE_KIND", "Active Guardian registry listing must use requested_archive_kind=guardian_active_registry_listing_request. Legacy agent_declared_echo_archive listing is accepted only for pre-cutoff issues.", got=requested_kind, cutoff=LEGACY_LISTING_KIND_CUTOFF_UTC)
+        return None, decision(False, "blocked", "LISTING_WRONG_ARCHIVE_KIND", "Active Guardian registry listing must use requested_archive_kind=guardian_active_registry_listing_request. Legacy agent_declared_echo_archive listing is accepted only for pre-cutoff issues or valid Guardian self-registrations.", got=requested_kind, cutoff=LEGACY_LISTING_KIND_CUTOFF_UTC)
 
     if fields.get("echo_type") != GUARDIAN_LISTING_ECHO_TYPE:
         return None, decision(
