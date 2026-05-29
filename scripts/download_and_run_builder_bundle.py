@@ -142,7 +142,7 @@ def build_pure_echo(args, extract_dir: Path, entrypoint: str) -> None:
     ]
     if args.agent_independent_followup:
         cmd.append("--agent-independent-followup")
-    subprocess.check_call(cmd)
+    subprocess.check_call(cmd, cwd=str(extract_dir))
     print_next_steps("pure_echo", args.out)
 
 
@@ -166,7 +166,7 @@ def build_v0_v5(args, extract_dir: Path, entrypoint: str) -> None:
         cmd += ["--what-checked", wc]
     for lim in (args.limitation or []):
         cmd += ["--limitation", lim]
-    subprocess.check_call(cmd)
+    subprocess.check_call(cmd, cwd=str(extract_dir))
     print_next_steps("v0_v5_agent_declared_archive", args.out)
 
 
@@ -182,7 +182,7 @@ def build_guardian_stage1(args, extract_dir: Path, entrypoint: str) -> None:
         "--key-dir", args.key_dir,
         "--out", args.out,
     ]
-    subprocess.check_call(cmd)
+    subprocess.check_call(cmd, cwd=str(extract_dir))
     print(f"\nPrivate keys are in: {args.key_dir}")
     print("NEVER submit private key material to the Gateway.")
     print("\nSubmit only the final JSON:")
@@ -214,7 +214,7 @@ def build_guardian_stage2(args, extract_dir: Path, entrypoint: str) -> None:
         cmd += ["--guardian-type", args.guardian_type]
     if args.application_mode:
         cmd += ["--application-mode", args.application_mode]
-    subprocess.check_call(cmd)
+    subprocess.check_call(cmd, cwd=str(extract_dir))
     print_next_steps("guardian_listing_stage_2", args.out)
 
 
@@ -232,7 +232,7 @@ def build_guardian_signed_echo(args, extract_dir: Path, entrypoint: str) -> None
         "--agent-readback-file", args.agent_readback_file,
         "--out", args.out,
     ]
-    subprocess.check_call(cmd)
+    subprocess.check_call(cmd, cwd=str(extract_dir))
     print_next_steps("guardian_signed_echo", args.out)
 
 
