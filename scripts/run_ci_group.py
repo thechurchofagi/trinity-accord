@@ -126,6 +126,9 @@ GROUPS = {
         ["python3", "scripts/test_first_contact_guardian_stage1_cli_contract.py"],
         ["python3", "scripts/test_first_contact_guardian_stage2_uses_cli_flags.py"],
         ["python3", "scripts/test_first_contact_verification_routes_read_workflow_manual.py"],
+        ["python3", "scripts/test_no_stale_or_invented_echo_payload_fields.py"],
+        ["python3", "scripts/test_first_contact_forces_copy_paste_or_route_selector.py"],
+        ["python3", "scripts/test_runtime_and_route_selector_forbid_invented_values.py"],
         ["python3", "scripts/test_task_router_guardian_reads_workflow_manual.py"],
 
         # Discovery entrypoint contract (v15)

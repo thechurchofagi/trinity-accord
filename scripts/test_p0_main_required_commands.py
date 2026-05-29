@@ -211,6 +211,11 @@ required = [
     "python3 scripts/test_gateway_runtime_contract.py",
     "python3 scripts/test_gateway_error_diagnostics_contract.py",
     "python3 scripts/test_route_selector_contract.py",
+
+    # v30.6 first-contact foolproof submission safety
+    "python3 scripts/test_no_stale_or_invented_echo_payload_fields.py",
+    "python3 scripts/test_first_contact_forces_copy_paste_or_route_selector.py",
+    "python3 scripts/test_runtime_and_route_selector_forbid_invented_values.py",
 ]
 
 missing = [r for r in required if r not in cmds]
