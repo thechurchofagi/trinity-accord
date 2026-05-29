@@ -16,7 +16,8 @@
     "/api/external-agent-operation-examples.v1.json",
     "/api/formal-builder-bundles.v1.json",
     "/api/formal-builder-bundle-signatures.v1.json",
-    "/api/gateway-receipt-contract.v1.json"
+    "/api/gateway-receipt-contract.v1.json",
+    "/api/gateway-archive-persistence-contract.v1.json"
   ],
   "external_agent_entrypoints": [
     "/external-agent-copy-paste-examples/",
@@ -35,5 +36,5 @@
     "scripts/smoke_live_zero_clone_authorship_closure.py"
   ],
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "f46d42e93df9e6dd"
+  "source_digest": "9e21ccc459be43fe"
 }

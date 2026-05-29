@@ -105,7 +105,7 @@
     "required_live_group": "live-site-gateway-core"
   },
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "facba9e09611bcd7",
+  "source_digest": "f85ef0525e526b3a",
   "final_closure": {
     "v30_5_complete": true,
     "p0_main": "CI_GROUP_P0_MAIN_OK",
@@ -142,5 +142,16 @@
       299,
       302
     ]
+  },
+  "gateway_archive_persistence": {
+    "status": "v30.8_required_after_issue_304_archive_workflow_failure",
+    "contract": "/api/gateway-archive-persistence-contract.v1.json",
+    "known_regression": 304,
+    "required_tests": [
+      "scripts/test_gateway_archive_persistence_contract.py",
+      "scripts/test_gateway_archive_issue_reader_issue_304.py",
+      "scripts/test_archive_gateway_echo_workflow_contract.py"
+    ],
+    "required_live_smoke": "scripts/smoke_live_gateway_archive_persistence.py"
   }
 }

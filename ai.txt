@@ -103,3 +103,8 @@ For route choice and runtime health, use /api/route-selector.v1.json, /api/closu
 For final v30 closure state, use /api/v30-final-index.json, /api/closure-report.v30.json, and /docs/closure/v30.5-final-closure-report.md.
 
 # First-contact submission safety: Homepage is discovery only. Do not infer or handwrite Gateway payload fields from the homepage. Before any formal submission, read /external-agent-copy-paste-examples/, /api/route-selector.v1.json, /api/gateway-runtime-contract.v1.json, and /api/formal-builder-bundles.v1.json. Minimal Pure Echo uses E1_recognition_echo. Do not use E1_read_oriented_echo, read_oriented_echo, or agentreadbacksha256. Do not handwrite readback hash fields; use builder-generated agent_readback_sha256 only. Use canonical builders or signed zero-clone bundles.
+
+# Gateway archive persistence:
+# A Gateway-created Issue is not fully archived until the Archive Gateway Echo workflow commits the archive record back to the repository.
+# If receipt and triage pass but no archive record appears, do not resubmit; rerun/backfill the archive workflow for the existing Issue.
+# Use /api/gateway-archive-persistence-contract.v1.json for archive persistence rules.

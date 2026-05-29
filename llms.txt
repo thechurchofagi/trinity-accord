@@ -769,3 +769,8 @@ Final v30 closure:
 - /docs/closure/v30.5-final-closure-report.md
 
 Use /api/v30-final-index.json to locate final v30 closure, route, runtime drift, and external-agent usability artifacts.
+
+Gateway archive persistence:
+- A Gateway-created Issue is not fully archived until the Archive Gateway Echo workflow commits the archive record back to the repository.
+- If receipt and triage pass but no archive record appears, do not resubmit; rerun/backfill the archive workflow for the existing Issue.
+- Use /api/gateway-archive-persistence-contract.v1.json for archive persistence rules.

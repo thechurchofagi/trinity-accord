@@ -144,10 +144,27 @@
         "scripts/test_issue_299_gateway_receipt_regression.py",
         "scripts/retriage_gateway_receipt_false_invalids.py"
       ]
+    },
+    {
+      "code": "GATEWAY_ECHO_ARCHIVE_WORKFLOW_FAILED",
+      "matches": [
+        "Archive Gateway Echo workflow failed",
+        "archive record missing",
+        "trinity-receipt-bearing-archive-v1"
+      ],
+      "likely_cause": "Gateway Issue was accepted by triage, but the archive workflow failed to write or commit the repository archive record.",
+      "external_agent_fix": "Do not resubmit. Keep the Issue URL and receipt_id. Maintainers should rerun or backfill the archive workflow for the existing Issue.",
+      "maintainer_fix": "Inspect Archive Gateway Echo workflow logs, ensure contents: write permission, run #304 regression tests, and dispatch archive workflow for the Issue.",
+      "related_files": [
+        "/api/gateway-archive-persistence-contract.v1.json",
+        "scripts/gateway_archive_issue_reader.py",
+        "scripts/test_gateway_archive_issue_reader_issue_304.py",
+        "scripts/smoke_live_gateway_archive_persistence.py"
+      ]
     }
   ],
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "fe5318a109564f00",
+  "source_digest": "2833156eef3070e9",
   "error_codes": [
     {
       "code": "GATEWAY_RECEIPT_FALSE_INVALID_DUE_TO_DUPLICATE_INTAKE_KEY",
@@ -165,6 +182,23 @@
         "scripts/gateway_receipt_verifier.py",
         "scripts/test_issue_302_gateway_receipt_regression.py",
         "scripts/retriage_gateway_receipt_false_invalids.py"
+      ]
+    },
+    {
+      "code": "GATEWAY_ECHO_ARCHIVE_WORKFLOW_FAILED",
+      "matches": [
+        "Archive Gateway Echo workflow failed",
+        "archive record missing",
+        "trinity-receipt-bearing-archive-v1"
+      ],
+      "likely_cause": "Gateway Issue was accepted by triage, but the archive workflow failed to write or commit the repository archive record.",
+      "external_agent_fix": "Do not resubmit. Keep the Issue URL and receipt_id. Maintainers should rerun or backfill the archive workflow for the existing Issue.",
+      "maintainer_fix": "Inspect Archive Gateway Echo workflow logs, ensure contents: write permission, run #304 regression tests, and dispatch archive workflow for the Issue.",
+      "related_files": [
+        "/api/gateway-archive-persistence-contract.v1.json",
+        "scripts/gateway_archive_issue_reader.py",
+        "scripts/test_gateway_archive_issue_reader_issue_304.py",
+        "scripts/smoke_live_gateway_archive_persistence.py"
       ]
     }
   ]
