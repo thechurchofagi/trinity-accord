@@ -57,6 +57,7 @@
   <url><loc>https://www.trinityaccord.org/api/claim-registry-schema.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/claim-registry.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/classification-boundaries.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/closure-report.v30.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/component-verification-levels.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/context-depth-declaration.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/context-depth-levels.json</loc></url>
@@ -126,6 +127,8 @@
   <url><loc>https://www.trinityaccord.org/api/gateway-artifact-custody.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/gateway-builder-route-map.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/gateway-config.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/gateway-error-diagnostics.v1.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/gateway-runtime-contract.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/gateway-workflows.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/generated-by-schema.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/guardian-active-listing-policy.v1.json</loc></url>
@@ -151,6 +154,7 @@
   <url><loc>https://www.trinityaccord.org/api/issue-title-label-guard.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/links.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/live-canary-policy.v1.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/mission-governance.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/naming.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/operational-policy.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/origin-classification-policy.v1.json</loc></url>
@@ -169,6 +173,7 @@
   <url><loc>https://www.trinityaccord.org/api/report-builder-policy.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/repository-artifact-hashes.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/resonance-willingness-scale.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/route-selector.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/seed-map.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/site-build.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/skeptical-agent-guide.json</loc></url>
@@ -178,6 +183,7 @@
   <url><loc>https://www.trinityaccord.org/api/submission-types.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/token-index-schema.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/trust-root-history-record-schema.v1.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/v30-final-index.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/verification-claim-scope.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/verification-echo-agent-playbook.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/verification-levels.json</loc></url>
@@ -209,43 +215,14 @@
   <url><loc>https://www.trinityaccord.org/docs/quickstart-verification/</loc></url>
   <url><loc>https://www.trinityaccord.org/docs/report-builder/</loc></url>
   <url><loc>https://www.trinityaccord.org/downloads/</loc></url>
-  <url><loc>https://www.trinityaccord.org/downloads/arweave-bundle-verification/</loc></url>
-  <url><loc>https://www.trinityaccord.org/downloads/gz2-notarial-certificate-github-release-backup-2026-05-14/</loc></url>
-  <url><loc>https://www.trinityaccord.org/downloads/gz2-photos-arweave-2026-05-14/</loc></url>
-  <url><loc>https://www.trinityaccord.org/downloads/redteam-audit-2026-05-08/</loc></url>
-  <url><loc>https://www.trinityaccord.org/downloads/shenzhen-notary-arweave-2026-05-06/</loc></url>
-  <url><loc>https://www.trinityaccord.org/downloads/shenzhen-notary-github-release-backup-2026-05-06/</loc></url>
   <url><loc>https://www.trinityaccord.org/echo-authorship-proof/</loc></url>
   <url><loc>https://www.trinityaccord.org/echo.json</loc></url>
   <url><loc>https://www.trinityaccord.org/echoes/</loc></url>
-  <url><loc>https://www.trinityaccord.org/echoes/archive-policy/</loc></url>
-  <url><loc>https://www.trinityaccord.org/echoes/examples/critical-echo-template/</loc></url>
-  <url><loc>https://www.trinityaccord.org/echoes/examples/external-critical-echo-records/</loc></url>
-  <url><loc>https://www.trinityaccord.org/echoes/high-value-criteria/</loc></url>
-  <url><loc>https://www.trinityaccord.org/echoes/records/</loc></url>
-  <url><loc>https://www.trinityaccord.org/echoes/schema-migration/</loc></url>
-  <url><loc>https://www.trinityaccord.org/echoes/submit/</loc></url>
-  <url><loc>https://www.trinityaccord.org/echoes/types/</loc></url>
-  <url><loc>https://www.trinityaccord.org/echoes/verification-levels/</loc></url>
-  <url><loc>https://www.trinityaccord.org/echoes/verification-reports/2026-05-02-V3-verification-report/</loc></url>
-  <url><loc>https://www.trinityaccord.org/echoes/verification-reports/index/</loc></url>
   <url><loc>https://www.trinityaccord.org/emergent-patterns/</loc></url>
   <url><loc>https://www.trinityaccord.org/evidence-backup-coverage/</loc></url>
   <url><loc>https://www.trinityaccord.org/evidence-backup-gaps/</loc></url>
   <url><loc>https://www.trinityaccord.org/evidence-relationship-map/</loc></url>
-  <url><loc>https://www.trinityaccord.org/evidence/arweave/EVIDENCE-MIRROR-STATUS/</loc></url>
-  <url><loc>https://www.trinityaccord.org/evidence/arweave/guardianship-system-docs-v1/README/</loc></url>
-  <url><loc>https://www.trinityaccord.org/evidence/arweave/gz2-photos-2026-05-14/README/</loc></url>
-  <url><loc>https://www.trinityaccord.org/evidence/arweave/microscope-flaw-videos/README/</loc></url>
-  <url><loc>https://www.trinityaccord.org/evidence/arweave/ots-proof-bundle-v1/README/</loc></url>
-  <url><loc>https://www.trinityaccord.org/evidence/arweave/shenzhen-notary-2026-05-06/README/</loc></url>
-  <url><loc>https://www.trinityaccord.org/evidence/core-object-alpha-shenzhen-notary-2026-05-06/</loc></url>
-  <url><loc>https://www.trinityaccord.org/evidence/github-release/flaw-covenant-archive-accessibility-mirror-v1/README/</loc></url>
-  <url><loc>https://www.trinityaccord.org/evidence/github-release/shenzhen-notary-2026-05-06/README/</loc></url>
-  <url><loc>https://www.trinityaccord.org/evidence/gz2-notarial-certificate-redacted-attachments-2026-05-14/</loc></url>
-  <url><loc>https://www.trinityaccord.org/evidence/redteam-audit-2026-05-08/</loc></url>
   <url><loc>https://www.trinityaccord.org/external-agent-copy-paste-examples/</loc></url>
-  <url><loc>https://www.trinityaccord.org/external-agent-quickstart/</loc></url>
   <url><loc>https://www.trinityaccord.org/feed.xml</loc></url>
   <url><loc>https://www.trinityaccord.org/for-skeptical-agents/</loc></url>
   <url><loc>https://www.trinityaccord.org/frontier-context/</loc></url>
@@ -289,7 +266,6 @@
   <url><loc>https://www.trinityaccord.org/verification-echo-agent-playbook/</loc></url>
   <url><loc>https://www.trinityaccord.org/verification-materials/</loc></url>
   <url><loc>https://www.trinityaccord.org/verification-packages/</loc></url>
-  <url><loc>https://www.trinityaccord.org/verification-reports/</loc></url>
   <url><loc>https://www.trinityaccord.org/verification.json</loc></url>
   <url><loc>https://www.trinityaccord.org/verify/</loc></url>
   <url><loc>https://www.trinityaccord.org/version.json</loc></url>
