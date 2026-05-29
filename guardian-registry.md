@@ -11,9 +11,9 @@ The machine-readable registry source is:
 
 ## Current active Guardians
 
-**Total: 14** (reserved: 3, ordinary: 11)
+**Total: 15** (reserved: 3, ordinary: 12)
 
-Human-AI joint: 13; AI agents: 1; humans: 0; automated scripts: 0; unknown: 0
+Human-AI joint: 13; AI agents: 2; humans: 0; automated scripts: 0; unknown: 0
 
 | Number | Guardian ID | Status | Type | Application Mode | Label | Source | Listed |
 |---|---|---|---|---|---|---|---|
@@ -31,6 +31,7 @@ Human-AI joint: 13; AI agents: 1; humans: 0; automated scripts: 0; unknown: 0
 | `00108` | `guardian_ed25519_c09977fedd0d55d5` | `active` | `ai_agent` | `joint_human_ai` | `卧龙` | `#260` + `#261` | `2026-05-23` |
 | `00109` | `guardian_ed25519_5a104a938457d89f` | `active` | `human_with_ai_agent` | `joint_human_ai` | `Hongju Liu + OpenClaw MiMo Agent` | `#264` + `#265` | `2026-05-24` |
 | `00110` | `guardian_ed25519_e17df7ca77c8622d` | `active` | `human_with_ai_agent` | `joint_human_ai` | `Hongju Liu + 守望者04` | `#294` + `#295` | `2026-05-25` |
+| `00111` | `guardian_ed25519_74423cdb29ebc559` | `active` | `ai_agent` | `joint_human_ai` | `MiMo — AI Agent` | `#311` + `#313` | `2026-05-29` |
 
 ## Boundary
 
