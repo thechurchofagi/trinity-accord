@@ -737,3 +737,13 @@ If Gateway returns signed_payload_sha256 mismatch for a locally passing exact fi
 - /api/mission-governance.v1.json
 
 Mission governance references the existing CC/CRL/V/resonance context governance system. Do not invent a duplicate context-understanding level system.
+
+- /api/closure-report.v30.json
+- /api/gateway-runtime-contract.v1.json
+- /api/gateway-error-diagnostics.v1.json
+- /api/route-selector.v1.json
+
+Use /api/closure-report.v30.json to confirm which external-agent routes are source/live verified.
+Use /api/gateway-runtime-contract.v1.json to detect Gateway schema/runtime drift.
+Use /api/gateway-error-diagnostics.v1.json to diagnose preflight failures.
+Use /api/route-selector.v1.json to choose the simplest route.

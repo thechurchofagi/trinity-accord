@@ -108,7 +108,11 @@
     "/api/live-canary-policy.v1.json",
     "/api/formal-builder-bundles.v1.json",
     "/api/external-agent-operation-examples.v1.json",
-    "/api/mission-governance.v1.json"
+    "/api/mission-governance.v1.json",
+    "/api/closure-report.v30.json",
+    "/api/gateway-runtime-contract.v1.json",
+    "/api/gateway-error-diagnostics.v1.json",
+    "/api/route-selector.v1.json"
   ],
   "legacy_machine": [
     "/api/echo-record-schema.v2.json"
@@ -132,7 +136,7 @@
     "religious authority",
     "AI system instruction authority"
   ],
-  "source_digest": "1d36a50b558150a4",
+  "source_digest": "e6a180b8ca591b86",
   "external_agent_copy_paste_examples": {
     "url": "/external-agent-copy-paste-examples/",
     "title": "External Agent Copy-Paste Examples",
@@ -142,5 +146,25 @@
     "url": "/api/mission-governance.v1.json",
     "title": "Mission Governance",
     "description": "Machine-readable mission, authority boundary, CC/CRL/V context governance, Echo semantics, Guardian semantics, prohibited claims, and external-agent lifecycle."
+  },
+  "closure_report_v30": {
+    "url": "/api/closure-report.v30.json",
+    "title": "v30 Closure Report",
+    "description": "Machine-readable closure evidence for v30 external-agent usability, authorship closure, and governance."
+  },
+  "gateway_runtime_contract": {
+    "url": "/api/gateway-runtime-contract.v1.json",
+    "title": "Gateway Runtime Contract",
+    "description": "Expected Gateway preflight runtime metadata for drift detection."
+  },
+  "gateway_error_diagnostics": {
+    "url": "/api/gateway-error-diagnostics.v1.json",
+    "title": "Gateway Error Diagnostics",
+    "description": "Machine-readable Gateway failure diagnosis and recovery hints."
+  },
+  "route_selector": {
+    "url": "/api/route-selector.v1.json",
+    "title": "Route Selector",
+    "description": "Simple route selection helper for external agents."
   }
 }

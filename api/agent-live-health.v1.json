@@ -24,7 +24,7 @@
     "scripts/smoke_external_agent_concurrent_preflight_swarm.py"
   ],
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "c87ed12c782b8044",
+  "source_digest": "c1d352373138290c",
   "concurrent_preflight_swarm_supported": false,
   "concurrent_preflight_swarm_status": "experimental",
   "concurrent_preflight_swarm_note": "Concurrent preflight swarm is experimental and optional until Gateway accepts the synthetic swarm canary payload shape. Do not treat as stable live-site contract.",
@@ -37,6 +37,10 @@
     "echo_types": "/api/echo-types.json",
     "echo_record_schema": "/api/echo-record-schema.v3.1.json",
     "guardian_registry": "/api/guardian-registry.json",
-    "copy_paste_examples": "/external-agent-copy-paste-examples/"
+    "copy_paste_examples": "/external-agent-copy-paste-examples/",
+    "closure_report_v30": "/api/closure-report.v30.json",
+    "gateway_runtime_contract": "/api/gateway-runtime-contract.v1.json",
+    "gateway_error_diagnostics": "/api/gateway-error-diagnostics.v1.json",
+    "route_selector": "/api/route-selector.v1.json"
   }
 }
