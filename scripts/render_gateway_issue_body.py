@@ -235,7 +235,32 @@ def render_gateway_intake_fields(payload, skip_keys=None):
     blocked = {
         "guardian_registry_number",
     }
-    skip = set(skip_keys or [])
+    # Skip oath keys already rendered by render_oath_v2_fields to avoid duplicates
+    oath_rendered_keys = {
+        "agent_readback_sha256",
+        "verification_oath_honesty",
+        "verification_oath_good_faith",
+        "verification_oath_anti_abuse",
+        "verification_oath_no_false_consensus",
+        "verification_oath_correct_errors",
+        "verification_oath_schema",
+        "guardian_application_oath_present",
+        "guardian_application_oath_version",
+        "guardian_application_oath_honesty",
+        "guardian_application_oath_good_faith",
+        "guardian_application_oath_anti_abuse",
+        "guardian_application_oath_no_false_consensus",
+        "guardian_application_oath_readback_sha256",
+        "guardian_listing_oath_present",
+        "guardian_listing_oath_version",
+        "guardian_listing_oath_honesty",
+        "guardian_listing_oath_good_faith",
+        "guardian_listing_oath_anti_abuse",
+        "guardian_listing_oath_system_generated_number",
+        "guardian_listing_oath_readback_sha256",
+        "guardian_listing_oath_sha256",
+    }
+    skip = set(skip_keys or []) | oath_rendered_keys
     lines = []
     for key in sorted(fields):
         if key in blocked or key in skip:
