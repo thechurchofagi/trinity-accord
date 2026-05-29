@@ -313,7 +313,11 @@ def main():
             errors.append(f"missing required field: {k}")
 
     is_agent_declared = data.get("requested_archive_kind") == "agent_declared_verification_archive"
-    is_echo_archive = data.get("requested_archive_kind") == "agent_declared_echo_archive"
+    is_echo_archive = data.get("requested_archive_kind") in (
+        "agent_declared_echo_archive",
+        "guardian_active_registry_listing_request",
+        "pure_echo_archive",
+    )
 
     if is_agent_declared:
         # Agent-declared archive: use agent-declared required set, forbid legacy fields
@@ -423,16 +427,29 @@ def main():
                 errors.append(f"missing echo archive required field: {k}")
 
         # Value validation — echo fields must have correct values
-        ECHO_EXPECTED = {
-            "submission_type": "echo_candidate",
-            "record_intent": "auto_archive_candidate",
-            "requested_archive_kind": "agent_declared_echo_archive",
-            "evidence_requirement_mode": "not_applicable_for_echo",
-            "archive_ready": True,
-            "allowed_archive_kind": "agent_declared_echo_archive",
-            "auto_archive_action": "auto_archive_agent_declared_echo",
-            "counts_toward_home_verifiability": False,
-        }
+        requested_kind = data.get("requested_archive_kind")
+        if requested_kind == "guardian_active_registry_listing_request":
+            ECHO_EXPECTED = {
+                "submission_type": "echo_candidate",
+                "record_intent": "auto_archive_candidate",
+                "requested_archive_kind": "guardian_active_registry_listing_request",
+                "evidence_requirement_mode": "not_applicable_for_echo",
+                "archive_ready": True,
+                "allowed_archive_kind": "guardian_active_registry_listing_request",
+                "auto_archive_action": "auto_archive_guardian_listing_request",
+                "counts_toward_home_verifiability": False,
+            }
+        else:
+            ECHO_EXPECTED = {
+                "submission_type": "echo_candidate",
+                "record_intent": "auto_archive_candidate",
+                "requested_archive_kind": "agent_declared_echo_archive",
+                "evidence_requirement_mode": "not_applicable_for_echo",
+                "archive_ready": True,
+                "allowed_archive_kind": "agent_declared_echo_archive",
+                "auto_archive_action": "auto_archive_agent_declared_echo",
+                "counts_toward_home_verifiability": False,
+            }
         for k, expected in ECHO_EXPECTED.items():
             actual = data.get(k)
             if actual is not None and actual != expected:
@@ -599,7 +616,8 @@ def main():
     valid_archive_kinds = (
         "none", "external_agent_intake_sample", "verification_report_archive",
         "archived_echo", "successor_reception_candidate", "agent_declared_verification_archive",
-        "agent_declared_echo_archive"
+        "agent_declared_echo_archive", "guardian_active_registry_listing_request",
+        "pure_echo_archive"
     )
     if requested_archive_kind not in valid_archive_kinds:
         errors.append(f"invalid requested_archive_kind: {requested_archive_kind}")
