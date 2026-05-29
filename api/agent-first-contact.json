@@ -24,8 +24,10 @@
   },
   "first_rule": {
     "if_only_homepage_or_readme_read": {
-      "context_depth": "C0_homepage_only",
+      "context_depth": "CC-0",
+      "legacy_context_depth_alias": "C0_homepage_only",
       "context_depth_name": "Unloaded",
+      "context_readiness_level": "CRL-0",
       "assessment_state": "insufficient_context",
       "verification_level": "none",
       "final_evaluation_allowed": false
@@ -657,5 +659,5 @@
     "e2_legacy_compatibility_only": true,
     "pure_echo_allows_e2": false
   },
-  "source_digest": "f28407dcb6533eba"
+  "source_digest": "fa7ddd1aa8505e33"
 }
