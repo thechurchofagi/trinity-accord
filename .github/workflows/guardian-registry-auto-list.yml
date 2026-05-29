@@ -93,7 +93,9 @@ jobs:
 
               const looksLikeGuardianApplication =
                 /Guardian Alliance.*Application/i.test(title) ||
+                /Guardian.*Application/i.test(title) ||
                 /guardian_registration/i.test(body) ||
+                /guardian_status:\s*valid_self_registered_guardian_claim/i.test(body) ||
                 /archive:guardian-application/i.test(body);
 
               if (!looksLikeListing && !looksLikeGuardianApplication) {
