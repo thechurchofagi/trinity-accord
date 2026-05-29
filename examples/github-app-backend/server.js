@@ -711,6 +711,7 @@ const SUPPORTED_ROUTES = [
   "guardian_application_stage_1",
   "guardian_listing_stage_2",
   "guardian_signed_echo",
+  "guardian_retirement",
 ];
 
 function stableDigest(value) {
@@ -736,7 +737,7 @@ function buildGatewayRuntimeMetadata() {
 
   return {
     gateway_runtime: {
-      runtime_version: "v30.5",
+      runtime_version: "v30.9",
       deployed_at: new Date().toISOString(),
       source_commit_if_available: repoCommit,
       schema_digest: _schemaDigest,
@@ -795,6 +796,9 @@ function builderGuidanceForPayload(payload) {
 }
 
 function workflowIdForPayload(payload) {
+  if (payload?.schema === "trinityaccord.guardian-retirement.v1" || payload?.retirement_status) {
+    return "guardian_retirement";
+  }
   if (payload?.guardian_listing_request || payload?.guardian_registry_listing_request) {
     return "guardian_listing_stage_2";
   }
@@ -821,7 +825,8 @@ function workflowDocumentForId(workflowId) {
     e2_verification_echo: "https://www.trinityaccord.org/gateway-workflows/#workflow-e2-verification-echo",
     guardian_application_stage_1: "https://www.trinityaccord.org/gateway-workflows/#workflow-guardian-stage-1-application",
     guardian_listing_stage_2: "https://www.trinityaccord.org/gateway-workflows/#workflow-guardian-stage-2-listing",
-    guardian_signed_echo: "https://www.trinityaccord.org/gateway-workflows/#workflow-guardian-signed-echo"
+    guardian_signed_echo: "https://www.trinityaccord.org/gateway-workflows/#workflow-guardian-signed-echo",
+    guardian_retirement: "https://www.trinityaccord.org/guardian-join/#retirement"
   };
   return map[workflowId] || WORKFLOW_MANUAL;
 }
@@ -1659,6 +1664,148 @@ async function runGatewayPipeline(payload, {
         fix: "Run scripts/build_agent_declared_archive_payload.py and POST the generated raw JSON object. If using the example endpoint, use /gateway/examples/agent-declared-v4/raw or extract .payload."
       }]
     });
+  }
+
+  // 0b. Guardian retirement payload bypass — different schema, skip main pipeline.
+  if (payload?.schema === "trinityaccord.guardian-retirement.v1" || payload?.retirement_status) {
+    const retirementErrors = [];
+    if (!payload.guardian_id) retirementErrors.push({ code: "MISSING_GUARDIAN_ID", path: "guardian_id", message: "guardian_id is required" });
+    if (!payload.retirement_status) retirementErrors.push({ code: "MISSING_RETIREMENT_STATUS", path: "retirement_status", message: "retirement_status is required" });
+    if (!payload.statement) retirementErrors.push({ code: "MISSING_STATEMENT", path: "statement", message: "statement is required" });
+    if (payload.signed_by_guardian_key !== true) retirementErrors.push({ code: "MUST_BE_SIGNED", path: "signed_by_guardian_key", message: "signed_by_guardian_key must be true" });
+    if (!payload.boundaries) retirementErrors.push({ code: "MISSING_BOUNDARIES", path: "boundaries", message: "boundaries object is required" });
+
+    if (retirementErrors.length > 0) {
+      return gatewayError(422, {
+        reason: "invalid_retirement_payload",
+        validation_stage: "retirement_schema",
+        agent_action: "Fix the retirement payload fields listed in errors, then resubmit.",
+        errors: retirementErrors,
+        payload,
+      });
+    }
+
+    const idempotencyKey = computeIdempotencyKey(payload);
+    const routeDetected = "guardian_retirement";
+
+    if (!createIssue) {
+      return {
+        status: 200,
+        body: {
+          accepted: true,
+          preflight: "pass",
+          route_detected: routeDetected,
+          ...buildGatewayRuntimeMetadata(),
+          diagnostics: [],
+          issue_created: false,
+          retirement_payload: {
+            guardian_id: payload.guardian_id,
+            retirement_status: payload.retirement_status,
+            statement_preview: String(payload.statement || "").slice(0, 200),
+          },
+          ...recoveryContext(),
+          idempotency_key: idempotencyKey,
+          idempotency_scope: "preflight_preview_only",
+        }
+      };
+    }
+
+    // DRY_RUN or CANARY — validate only, no Issue creation
+    if (DRY_RUN || CANARY_MODE) {
+      return {
+        status: 200,
+        body: {
+          accepted: true,
+          dry_run: true,
+          route_detected: routeDetected,
+          would_create_issue: {
+            title: `[Guardian Retirement] ${payload.guardian_id} — ${payload.retirement_status}`,
+            labels: ["guardian-retirement-request"],
+          },
+          retirement_payload: {
+            guardian_id: payload.guardian_id,
+            retirement_status: payload.retirement_status,
+          },
+          idempotency_key: idempotencyKey,
+        }
+      };
+    }
+
+    // Create GitHub Issue for retirement request
+    try {
+      const octokit = await getOctokit();
+      const { owner, repo } = getRepoParts();
+
+      const issueTitle = `[Guardian Retirement] ${payload.guardian_id} — ${payload.retirement_status}`;
+      const issueBody = [
+        `## Guardian Retirement Request`,
+        ``,
+        `<!-- guardian-retirement-request -->`,
+        ``,
+        `| Field | Value |`,
+        `|---|---|`,
+        `| Guardian ID | \`${payload.guardian_id}\` |`,
+        `| Retirement Status | ${payload.retirement_status} |`,
+        `| Signed by Guardian Key | ${payload.signed_by_guardian_key} |`,
+        ``,
+        `### Statement`,
+        ``,
+        String(payload.statement || "No statement provided."),
+        ``,
+        `### Boundaries`,
+        ``,
+        `- not_authority: ${payload.boundaries?.not_authority ?? "N/A"}`,
+        `- not_governance: ${payload.boundaries?.not_governance ?? "N/A"}`,
+        `- not_verification_level: ${payload.boundaries?.not_verification_level ?? "N/A"}`,
+        `- not_attestation: ${payload.boundaries?.not_attestation ?? "N/A"}`,
+        `- not_successor_reception: ${payload.boundaries?.not_successor_reception ?? "N/A"}`,
+        `- bitcoin_originals_prevail: ${payload.boundaries?.bitcoin_originals_prevail ?? "N/A"}`,
+        ``,
+        `### Raw Payload`,
+        ``,
+        "```json",
+        JSON.stringify(payload, null, 2),
+        "```",
+        ``,
+        `<!-- ${idempotencyMarker(idempotencyKey)} -->`,
+      ].join("\n");
+
+      await ensureLabel(octokit, { owner, repo, name: "guardian-retirement-request", color: "D93F0B", description: "Guardian retirement request processed by Gateway" });
+
+      const result = await octokit.request("POST /repos/{owner}/{repo}/issues", {
+        owner, repo,
+        title: issueTitle,
+        body: issueBody,
+        labels: ["guardian-retirement-request"],
+      });
+
+      return {
+        status: 201,
+        body: {
+          accepted: true,
+          status: "issue_created",
+          issue_created: true,
+          route_detected: routeDetected,
+          issue_number: result.data.number,
+          issue_url: result.data.html_url,
+          retirement_payload: {
+            guardian_id: payload.guardian_id,
+            retirement_status: payload.retirement_status,
+          },
+          idempotency_key: idempotencyKey,
+          boundary: "Guardian retirement request; not authority, not attestation, not verification, not successor reception, not amendment.",
+        }
+      };
+    } catch (err) {
+      console.error("guardian retirement pipeline error:", err.message);
+      return gatewayError(500, {
+        reason: "retirement_issue_creation_failed",
+        validation_stage: "retirement_submit",
+        agent_action: "Retry or create a GitHub Issue manually with the retirement payload.",
+        errors: [{ code: "RETIREMENT_SUBMIT_ERROR", message: err.message }],
+        payload,
+      });
+    }
   }
 
   // 1. Authorship proof verification MUST run on the original submitted

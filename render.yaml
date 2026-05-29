@@ -1,4 +1,4 @@
-# deploy-trigger: 2026-05-29T10:55:00Z — v30.8 guardian listing support
+# deploy-trigger: 2026-05-29T13:35:00Z — v30.9 guardian retirement route support
 services:
   - type: web_service
     name: trinity-agent-issue-gateway
