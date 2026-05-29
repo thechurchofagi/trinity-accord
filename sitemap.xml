@@ -128,6 +128,7 @@
   <url><loc>https://www.trinityaccord.org/api/gateway-builder-route-map.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/gateway-config.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/gateway-error-diagnostics.v1.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/gateway-receipt-contract.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/gateway-runtime-contract.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/gateway-workflows.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/generated-by-schema.v1.json</loc></url>
