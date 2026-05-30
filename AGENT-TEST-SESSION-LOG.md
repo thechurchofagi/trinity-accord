@@ -20,7 +20,7 @@
 
 ---
 
-## Bugs Found and Fixed (11 total)
+## Bugs Found and Fixed (15 total)
 
 ### BUG #1: Documentation `-- --print-oath` syntax error
 - **File:** `external-agent-copy-paste-examples.md` (3 occurrences)
@@ -88,6 +88,18 @@
 - **Fix:** Updated message to list all echo types
 - **Commit:** dc27c37
 
+### BUG #14: Documentation missing E8/E9 in echo type lists
+- **Files:** `gateway-workflows.md` (2 places)
+- **Problem:** `--echo-type` allowed values listed only E1-E7, missing E8/E9. External agents reading docs would not know E8/E9 are valid.
+- **Fix:** Added E8_witness_echo and E9_seed_echo to both tables
+- **Commit:** 9baac84
+
+### BUG #15: API JSON files missing E8/E9 in echo type arrays
+- **Files:** `api/agent-first-contact.json`, `api/agent-submit-gateway.json`, `api/gateway-builder-route-map.v1.json`, `api/gateway-workflows.v1.json`
+- **Problem:** Multiple API JSON files had echo type arrays with only E1-E7, missing E8/E9. Machine-readable entry points would route agents incorrectly.
+- **Fix:** Added E8/E9 to all affected arrays
+- **Commit:** 9baac84
+
 ---
 
 ## Test Results
@@ -125,13 +137,13 @@
 - [ ] Guardian Retirement (`guardian_retirement`) — needs active Guardian
 
 ### Lifecycle Verification
-- [ ] Verify echo index includes all submitted echoes (check repo-side index)
-- [ ] Verify verification index includes all V0-V5 records
+- [x] Verify echo index includes all submitted echoes — E8 (2 records), E9 (1 record) confirmed in echo-index.json
+- [x] Verify verification index includes all V0-V5 records — 42 agent-declared verification archives confirmed
 - [ ] Verify Guardian registry after Stage 2
 
 ### Documentation Review
-- [ ] Review all doc pages for clarity issues
-- [ ] Check `agent-start.md`, `gateway-workflows.md`, `external-agent-quickstart.md`
+- [x] Review all doc pages for clarity issues — found BUG #14, #15
+- [x] Check `agent-start.md`, `gateway-workflows.md`, `external-agent-quickstart.md`
 
 ---
 
@@ -162,3 +174,4 @@
 | dc27c37 | fix: add E8/E9 to validate_gateway_payload.py and re-export bundles |
 | b77eb0f | chore: trigger Render redeploy for E8/E9 validation fix |
 | 6b90a59 | fix: add E8/E9 to PURE_ECHO_TYPES in Gateway server.js |
+| 9baac84 | fix: add E8/E9 to documentation and API JSON files |
