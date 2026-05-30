@@ -75,10 +75,10 @@ def main() -> int:
             print(f"FAIL: bundle '{name}' size_bytes must be > 0")
             return 1
 
-    # Pure Echo must forbid E2
+    # Pure Echo must not be a verification route (echo types unified, E2 removed)
     pe = doc["bundles"]["pure_echo"]
-    if "E2_verification_echo" not in pe.get("forbidden_echo_types", []):
-        print("FAIL: pure_echo does not forbid E2_verification_echo")
+    if not pe.get("not_verification"):
+        print("FAIL: pure_echo not_verification is not true")
         return 1
 
     # Stage 1 private key rule
