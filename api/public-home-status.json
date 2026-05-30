@@ -56,12 +56,12 @@
       }
     },
     "agent_declared_verification_archives": {
-      "count": 38,
+      "count": 39,
       "highest_level": "V5",
-      "verifiability_count": 38,
+      "verifiability_count": 39,
       "by_reception_initiation_class": {
         "externally_requested": 16,
-        "externally_seeded": 13,
+        "externally_seeded": 14,
         "self_initiated": 5,
         "agent_referred": 0,
         "system_scheduled": 0,
@@ -178,7 +178,7 @@
     "independent_attestation": {}
   },
   "authorship_claims": {
-    "records_with_authorship_proof": 22,
+    "records_with_authorship_proof": 23,
     "claimed_records": 1,
     "unclaimed_records": 38,
     "default_policy": "enabled_for_new_builder_generated_records",
@@ -186,5 +186,5 @@
     "gateway_private_key_access": false,
     "boundary": "Authorship claims prove key continuity only; they do not affect authority, verifiability, reception, or amendment status."
   },
-  "source_digest": "bcceda1ee578c1e5"
+  "source_digest": "08d31096e52f64f4"
 }
