@@ -20,7 +20,7 @@
 
 ---
 
-## Bugs Found and Fixed (7 total)
+## Bugs Found and Fixed (11 total)
 
 ### BUG #1: Documentation `-- --print-oath` syntax error
 - **File:** `external-agent-copy-paste-examples.md` (3 occurrences)
@@ -64,6 +64,30 @@
 - **Problem:** Pre-built tar.gz bundles don't update when repo source changes. Must manually run `scripts/export_formal_builder_bundles.py` and commit.
 - **Status:** Documented — not a code bug, but a workflow issue
 
+### BUG #10: `formal-builder-bundles.v1.json` manifest missing E8/E9 in allowed_echo_types
+- **File:** `api/formal-builder-bundles.v1.json`
+- **Problem:** `allowed_echo_types` for pure_echo bundle listed only E1/E3/E4/E5/E5c/E6/E7, missing E8/E9. External agents using zero-clone approach saw E8/E9 rejected by builder manifest validation.
+- **Fix:** Added E8_witness_echo and E9_seed_echo to allowed_echo_types array
+- **Commit:** 79293a7
+
+### BUG #11: `validate_gateway_payload.py` missing E8/E9 in allowed_echo_types set
+- **File:** `scripts/validate_gateway_payload.py`
+- **Problem:** Hardcoded `allowed_echo_types` set in `validate_agent_declared_echo_archive()` only had E1-E7. This was the Python-side validator that rejected E8/E9 payloads.
+- **Fix:** Added E8_witness_echo and E9_seed_echo to the set, updated error message
+- **Commit:** dc27c37
+
+### BUG #12: Gateway `server.js` PURE_ECHO_TYPES missing E8/E9
+- **File:** `examples/github-app-backend/server.js`
+- **Problem:** `PURE_ECHO_TYPES` Set (used for validation and route detection) was hardcoded without E8/E9, even though `ACTIVE_ECHO_TYPE_VALUES` included them. This was the JS-side Gateway validation that rejected E8/E9 at preflight/submit time.
+- **Fix:** Added E8_witness_echo and E9_seed_echo to PURE_ECHO_TYPES, updated error messages
+- **Commit:** 6b90a59
+
+### BUG #13: `archive_readiness_gate.py` outdated error message
+- **File:** `scripts/archive_readiness_gate.py`
+- **Problem:** Error message said "E1/E3/E4/E5/E6/E7" but the code already accepted E8/E9. Misleading for debugging.
+- **Fix:** Updated message to list all echo types
+- **Commit:** dc27c37
+
 ---
 
 ## Test Results
@@ -84,14 +108,16 @@
 | 12 | V2 Verification | v0_v5 | #335 | ✅ PASS |
 | 13 | V3 Verification | v0_v5 | #336 | ✅ PASS |
 | 14 | V5 Verification | v0_v5 | #337 | ✅ PASS |
+| 15 | E8 Witness Echo | pure_echo | #338 | ✅ PASS |
+| 16 | E9 Seed Echo | pure_echo | #339 | ✅ PASS |
 
 ---
 
 ## TODO — Not Yet Tested
 
-### Echo Types (E8/E9 — code fixed, bundles re-exported, deploy triggered, need to re-test)
-- [ ] E8 Witness Echo
-- [ ] E9 Seed Echo
+### Echo Types (E8/E9 — ✅ DONE)
+- [x] E8 Witness Echo — #338
+- [x] E9 Seed Echo — #339
 
 ### Guardian Advanced (requires active Guardian status)
 - [ ] Guardian Stage 2 Listing (`guardian_listing_stage_2`) — needs Stage 1 processed first
@@ -132,3 +158,7 @@
 | dde95d1 | fix: detect 'not claiming this is authority' as negated boundary |
 | 6346e36 | fix: add E8/E9 echo types to builder and archive gate |
 | 8fe37eb | chore: re-export builder bundles with E8/E9 support |
+| 79293a7 | fix: add E8/E9 to allowed_echo_types in builder bundle manifest |
+| dc27c37 | fix: add E8/E9 to validate_gateway_payload.py and re-export bundles |
+| b77eb0f | chore: trigger Render redeploy for E8/E9 validation fix |
+| 6b90a59 | fix: add E8/E9 to PURE_ECHO_TYPES in Gateway server.js |
