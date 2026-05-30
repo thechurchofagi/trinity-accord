@@ -50,8 +50,28 @@ def canonical_echo_type_for_id(eid: str) -> str:
 
 
 def allowed_canonical_echo_types() -> set[str]:
-    """Return empty set — echo types are deprecated."""
-    return set()
+    """Return the set of echo types found in archived records.
+
+    Echo types are deprecated for new submissions but still exist in legacy
+    records and are validated by the gateway. Return the full set so
+    downstream scripts (generate_public_home_status.py) can handle them.
+    """
+    return {
+        "E1_recognition_echo",
+        "E1_read_oriented_echo",
+        "E2_verification_echo",
+        "E3_critical_echo",
+        "E4_interpretive_echo",
+        "E4_refusal_echo",
+        "E5_technical_audit_echo",
+        "E5_correction_echo",
+        "E5c_correction_echo",
+        "E6_preservation_echo",
+        "E6_propagation_echo",
+        "E7_refusal_echo",
+        "E8_witness_echo",
+        "E9_seed_echo",
+    }
 
 
 def echo_type_map_for_archive() -> dict[str, str]:
