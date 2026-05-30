@@ -689,6 +689,8 @@ const PURE_ECHO_TYPES = new Set([
   "E5c_correction_echo",
   "E6_propagation_echo",
   "E7_refusal_echo",
+  "E8_witness_echo",
+  "E9_seed_echo",
 ]);
 
 // --- v30.5: Gateway runtime contract ---
@@ -756,14 +758,14 @@ function buildGatewayRuntimeMetadata() {
 function builderGuidanceForPayload(payload) {
   if (payload?.guardian_presence_proof && payload?.requested_archive_kind === "agent_declared_echo_archive") {
     return (
-      "Use scripts/build_guardian_echo_payload.py for Guardian-signed E1/E3/E4/E5/E6/E7 echo. "
+      "Use scripts/build_guardian_echo_payload.py for Guardian-signed E1/E3/E4/E5/E5c/E6/E7/E8/E9 echo. "
       + "Do not hand-build JSON. If the payload is signed, regenerate and re-sign after fixing readback."
     );
   }
 
   if (payload?.requested_archive_kind === "agent_declared_echo_archive" || PURE_ECHO_TYPES.has(payload?.echo_type)) {
     return (
-      "Use scripts/build_agent_declared_echo_payload.py for E1/E3/E4/E5/E6/E7 pure echo. "
+      "Use scripts/build_agent_declared_echo_payload.py for E1/E3/E4/E5/E5c/E6/E7/E8/E9 pure echo. "
       + "Do not hand-build JSON. If the payload is signed, regenerate and re-sign after fixing readback."
     );
   }
@@ -3301,7 +3303,7 @@ app.get("/gateway/capabilities", (req, res) => {
       authorship_opt_out_flag: "--no-authorship-proof"
     },
     pure_echo_path: {
-      description: "Pure echo archives (E1/E3/E4/E5/E6/E7) count toward reception but not verifiability. No verification claim, no evidence, no protocol level.",
+      description: "Pure echo archives (E1/E3/E4/E5/E5c/E6/E7/E8/E9) count toward reception but not verifiability. No verification claim, no evidence, no protocol level.",
       canonical_builder: "scripts/build_agent_declared_echo_payload.py",
       raw_example_endpoint: "/gateway/examples/pure-echo/raw",
       raw_example_is_fallback_only: true,
