@@ -30,25 +30,11 @@
       "archive_name": "trinity-pure-echo-builder-bundle.tar.gz",
       "archive_url": "/builder-bundles/trinity-pure-echo-builder-bundle.tar.gz",
       "manifest_url": "/builder-bundles/trinity-pure-echo-builder-bundle.manifest.json",
-      "sha256": "05378510d75186d5cf921e2a36cf53bfd4e34472675dddffe2eccb84277032ff",
-      "size_bytes": 60851,
+      "sha256": "69dec548256f1d1fab47692ed8d6ec3061193c0a68564f5951f13fb383a344ef",
+      "size_bytes": 59824,
       "requires_full_repo_clone": false,
       "requires_exact_readback": true,
       "authorship_proof_default": true,
-      "allowed_echo_types": [
-        "E1_recognition_echo",
-        "E3_critical_echo",
-        "E4_interpretive_echo",
-        "E5_technical_audit_echo",
-        "E5c_correction_echo",
-        "E6_propagation_echo",
-        "E7_refusal_echo",
-        "E8_witness_echo",
-        "E9_seed_echo"
-      ],
-      "forbidden_echo_types": [
-        "E2_verification_echo"
-      ],
       "not_verification": true,
       "not_guardian_application": true,
       "before_leaving_report_required": true,
@@ -66,8 +52,8 @@
       "archive_name": "trinity-v0v5-builder-bundle.tar.gz",
       "archive_url": "/builder-bundles/trinity-v0v5-builder-bundle.tar.gz",
       "manifest_url": "/builder-bundles/trinity-v0v5-builder-bundle.manifest.json",
-      "sha256": "11a4c242459f5b87101d0192d2ea8935ab8897ddb723630cec173e7eb88dc7a9",
-      "size_bytes": 73861,
+      "sha256": "a7ec5e3c42d69436122f672e156573218552a17b2e826e5ad55dab2bf54b4af7",
+      "size_bytes": 73040,
       "requires_full_repo_clone": false,
       "requires_exact_readback": true,
       "authorship_proof_default": true,
@@ -96,8 +82,8 @@
       "archive_name": "trinity-guardian-stage1-builder-bundle.tar.gz",
       "archive_url": "/builder-bundles/trinity-guardian-stage1-builder-bundle.tar.gz",
       "manifest_url": "/builder-bundles/trinity-guardian-stage1-builder-bundle.manifest.json",
-      "sha256": "a83cb06feccc970191d02acf5048653c74f2ed0b2c8dd550720babee6cc69b9c",
-      "size_bytes": 30946,
+      "sha256": "3a972b290b805150a0cd768d12df866f3434b4af984d47d4a4febdb7690d3dd2",
+      "size_bytes": 30456,
       "requires_full_repo_clone": false,
       "requires_exact_readback": true,
       "runtime": "node",
@@ -125,8 +111,8 @@
       "archive_name": "trinity-guardian-stage2-builder-bundle.tar.gz",
       "archive_url": "/builder-bundles/trinity-guardian-stage2-builder-bundle.tar.gz",
       "manifest_url": "/builder-bundles/trinity-guardian-stage2-builder-bundle.manifest.json",
-      "sha256": "5b3bf47010e3d9bf45f23f6ea1be00947d3a726cb9e71c514d8caf7851e705f0",
-      "size_bytes": 59870,
+      "sha256": "c258372eab5c571dd3f7e96fa91b8d4a6e1278191be7255affb41f4df96d967c",
+      "size_bytes": 59113,
       "requires_full_repo_clone": false,
       "requires_stage_1_public_material": true,
       "requires_guardian_id": true,
@@ -144,8 +130,8 @@
       "archive_name": "trinity-guardian-signed-echo-builder-bundle.tar.gz",
       "archive_url": "/builder-bundles/trinity-guardian-signed-echo-builder-bundle.tar.gz",
       "manifest_url": "/builder-bundles/trinity-guardian-signed-echo-builder-bundle.manifest.json",
-      "sha256": "cbc8cd391079bbc6dfddd80c2c12bd347d3e034937bc48bc75179f49eaf699da",
-      "size_bytes": 68337,
+      "sha256": "eba21441d5333c22730096400a1d7284e2042d144586c06563e214001728e35a",
+      "size_bytes": 67493,
       "requires_full_repo_clone": false,
       "requires_guardian_identity": true,
       "private_keys_must_not_be_submitted": true,
@@ -167,5 +153,5 @@
       "scripts/agent_authorship_common.py"
     ]
   },
-  "source_digest": "8935a7555a9dc49f"
+  "source_digest": "93c2c0f6f69510ee"
 }
