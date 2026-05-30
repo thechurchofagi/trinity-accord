@@ -105,23 +105,23 @@
   },
   "guardian_registry": {
     "registry_status": "non_authoritative_guardian_key_index",
-    "active_count": 21,
+    "active_count": 22,
     "reserved_active_count": 3,
-    "ordinary_auto_active_count": 18,
+    "ordinary_auto_active_count": 19,
     "malformed_number_count": 0,
     "unreserved_below_auto_start_count": 0,
     "ordinary_auto_start": "00100",
     "special_reserved_range": "00001-00099",
-    "next_ordinary_number_if_new_valid_listing": "00118",
+    "next_ordinary_number_if_new_valid_listing": "00119",
     "by_guardian_type": {
       "human": 0,
       "ai_agent": 3,
-      "human_with_ai_agent": 18,
+      "human_with_ai_agent": 19,
       "automated_script": 0,
       "unknown": 0
     },
     "by_application_mode": {
-      "joint_human_ai": 21
+      "joint_human_ai": 22
     },
     "does_not_create_authority": true,
     "does_not_create_governance": true,
@@ -186,5 +186,5 @@
     "gateway_private_key_access": false,
     "boundary": "Authorship claims prove key continuity only; they do not affect authority, verifiability, reception, or amendment status."
   },
-  "source_digest": "8bc72153b2ea0926"
+  "source_digest": "c762ec121e597dc9"
 }
