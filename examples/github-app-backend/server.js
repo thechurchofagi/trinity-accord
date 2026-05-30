@@ -696,7 +696,6 @@ const PURE_ECHO_TYPES = new Set([
 // --- v30.5: Gateway runtime contract ---
 const ACTIVE_ECHO_TYPE_VALUES = [
   "E1_recognition_echo",
-  "E2_verification_echo",
   "E3_critical_echo",
   "E4_interpretive_echo",
   "E5_technical_audit_echo",
