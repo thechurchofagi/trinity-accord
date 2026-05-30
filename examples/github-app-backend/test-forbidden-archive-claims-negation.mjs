@@ -1,7 +1,9 @@
 import assert from "node:assert";
 
 function splitSentences(text) {
-  return String(text || "")
+  // Join continuation lines: newline + lowercase letter → single space
+  const joined = String(text || "").replace(/\n(?=[a-zà-ÿ])/g, " ");
+  return joined
     .split(/(?<=[.!?。！？])\s+|\n+/)
     .map(s => s.trim())
     .filter(Boolean);
@@ -115,3 +117,20 @@ assert.equal(
 );
 
 console.log("PASS: test-forbidden-archive-claims-negation");
+
+// Cross-line continuation: "I am not claiming authority,\namendment, or successor reception."
+assert.equal(
+  findForbiddenPositiveArchiveClaims(
+    "I am not claiming verification, attestation,\nauthority, amendment, or successor reception. Bitcoin Originals remain final."
+  ).length, 0,
+  "cross-line negated coordinated list must be allowed"
+);
+
+assert.equal(
+  findForbiddenPositiveArchiveClaims(
+    "This is a pure recognition Echo. I am not claiming verification, attestation,\nauthority, amendment, or successor reception. Bitcoin Originals remain final."
+  ).length, 0,
+  "cross-line negated boundary in echo body must be allowed"
+);
+
+console.log("PASS: test-forbidden-archive-claims-negation (cross-line)");

@@ -898,7 +898,11 @@ const FORBIDDEN_POSITIVE_CLAIM_PATTERNS = [
 ];
 
 function splitSentences(text) {
-  return String(text || "")
+  // Join continuation lines: newline + lowercase letter → single space
+  // Prevents splitting "attestation,\nauthority" into separate fragments
+  // which would break negation detection for coordinated lists.
+  const joined = String(text || "").replace(/\n(?=[a-zà-ÿ])/g, " ");
+  return joined
     .split(/(?<=[.!?。！？])\s+|\n+/)
     .map(s => s.trim())
     .filter(Boolean);
