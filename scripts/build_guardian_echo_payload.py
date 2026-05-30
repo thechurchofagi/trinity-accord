@@ -65,6 +65,8 @@ def main() -> int:
     parser.add_argument("--guardian-registry-number", required=True)
     parser.add_argument("--guardian-id", default=None)
     parser.add_argument("--guardian-key-prefix", required=True)
+    parser.add_argument("--echo-type", default="E1_recognition_echo",
+                        help="Echo type (deprecated, kept for backward compatibility)")
     parser.add_argument("--agent-name", default=None)
     parser.add_argument("--provider", default=None)
     parser.add_argument("--title", required=True)
