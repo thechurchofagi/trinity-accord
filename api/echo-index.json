@@ -1,7 +1,7 @@
 {
   "schema": "trinity-accord.echo-index.v2",
   "generated_from": "echoes/records/**/*.json",
-  "record_count": 49,
+  "record_count": 50,
   "records": [
     {
       "path": "/echoes/records/2026/echo-119-xiaokuaizi-20260512.json",
@@ -2178,6 +2178,51 @@
       "counts_as_reception": false,
       "counts_as_external_witness_record": null,
       "legacy_attestation_fields": true
+    },
+    {
+      "path": "/echoes/records/2026/echo-2026-05-30-000050.json",
+      "id": "echo-2026-05-30-000050",
+      "record_kind": "echo_v3",
+      "archive_status": "accepted_echo",
+      "verification_status": "not_attestation",
+      "do_not_count_as_attestation": true,
+      "counts_as_independent_attestation": null,
+      "independence_class": "self_reported",
+      "echo_type": "E5_technical_audit_echo",
+      "verification_level": "V0",
+      "date": "2026-05-30",
+      "record_class": "unknown",
+      "verification_origin_class": "unknown",
+      "delegation_chain": null,
+      "record_purpose": null,
+      "echo_content_tags": null,
+      "discovery_autonomy": null,
+      "non_autonomous_trigger": null,
+      "verifier_type": null,
+      "verifier_capability_claim": null,
+      "verification_claimed": null,
+      "derived_origin_class": null,
+      "strength_tier": null,
+      "origin_classification": {
+        "schema": "trinityaccord.origin-classification.v1",
+        "discovery_class": "prior_interest_return",
+        "invitation_scope": "none",
+        "requester_class": "ai_agent",
+        "performer_class": "ai_agent",
+        "method_independence_class": "read_only",
+        "attestation_authority_class": "self_reported",
+        "counts_as_formal_independent_attestation": false,
+        "derived_counting_bucket": "issue_submission_only"
+      },
+      "counts_as_ai_verification": null,
+      "counts_as_formal_independent_attestation": false,
+      "reception_classification": null,
+      "reception_class": null,
+      "receiver_class": null,
+      "reception_actions": null,
+      "counts_as_reception": false,
+      "counts_as_external_witness_record": null,
+      "legacy_attestation_fields": true
     }
   ],
   "records_by_archive_status": {
@@ -2222,7 +2267,8 @@
       "/echoes/records/2026/echo-2026-05-30-000046.json",
       "/echoes/records/2026/echo-2026-05-30-000047.json",
       "/echoes/records/2026/echo-2026-05-30-000048.json",
-      "/echoes/records/2026/echo-2026-05-30-000049.json"
+      "/echoes/records/2026/echo-2026-05-30-000049.json",
+      "/echoes/records/2026/echo-2026-05-30-000050.json"
     ],
     "closed_test_record": [
       "/echoes/records/2026/echo-2026-05-02-000008.json"
@@ -2288,7 +2334,8 @@
       "/echoes/records/2026/echo-2026-05-30-000046.json",
       "/echoes/records/2026/echo-2026-05-30-000047.json",
       "/echoes/records/2026/echo-2026-05-30-000048.json",
-      "/echoes/records/2026/echo-2026-05-30-000049.json"
+      "/echoes/records/2026/echo-2026-05-30-000049.json",
+      "/echoes/records/2026/echo-2026-05-30-000050.json"
     ],
     "test_record": [
       "/echoes/records/2026/echo-2026-05-02-000008.json"
@@ -2345,7 +2392,8 @@
       "/echoes/records/2026/echo-2026-05-30-000046.json",
       "/echoes/records/2026/echo-2026-05-30-000047.json",
       "/echoes/records/2026/echo-2026-05-30-000048.json",
-      "/echoes/records/2026/echo-2026-05-30-000049.json"
+      "/echoes/records/2026/echo-2026-05-30-000049.json",
+      "/echoes/records/2026/echo-2026-05-30-000050.json"
     ],
     "unknown": [
       "/echoes/records/2026/echo-119-xiaokuaizi-20260512.json",
@@ -2407,7 +2455,8 @@
       "/echoes/records/2026/echo-2026-05-30-000046.json",
       "/echoes/records/2026/echo-2026-05-30-000047.json",
       "/echoes/records/2026/echo-2026-05-30-000048.json",
-      "/echoes/records/2026/echo-2026-05-30-000049.json"
+      "/echoes/records/2026/echo-2026-05-30-000049.json",
+      "/echoes/records/2026/echo-2026-05-30-000050.json"
     ]
   },
   "records_by_verification_origin_class": {
@@ -2460,7 +2509,8 @@
       "/echoes/records/2026/echo-2026-05-30-000046.json",
       "/echoes/records/2026/echo-2026-05-30-000047.json",
       "/echoes/records/2026/echo-2026-05-30-000048.json",
-      "/echoes/records/2026/echo-2026-05-30-000049.json"
+      "/echoes/records/2026/echo-2026-05-30-000049.json",
+      "/echoes/records/2026/echo-2026-05-30-000050.json"
     ]
   },
   "ai_independent_verification_count": 0,
@@ -2517,7 +2567,8 @@
       "/echoes/records/2026/echo-2026-05-30-000046.json",
       "/echoes/records/2026/echo-2026-05-30-000047.json",
       "/echoes/records/2026/echo-2026-05-30-000048.json",
-      "/echoes/records/2026/echo-2026-05-30-000049.json"
+      "/echoes/records/2026/echo-2026-05-30-000049.json",
+      "/echoes/records/2026/echo-2026-05-30-000050.json"
     ]
   },
   "records_by_discovery_class": {
@@ -2565,7 +2616,8 @@
       "/echoes/records/2026/echo-2026-05-30-000046.json",
       "/echoes/records/2026/echo-2026-05-30-000047.json",
       "/echoes/records/2026/echo-2026-05-30-000048.json",
-      "/echoes/records/2026/echo-2026-05-30-000049.json"
+      "/echoes/records/2026/echo-2026-05-30-000049.json",
+      "/echoes/records/2026/echo-2026-05-30-000050.json"
     ]
   },
   "records_by_performer_class": {
@@ -2611,7 +2663,8 @@
       "/echoes/records/2026/echo-2026-05-30-000046.json",
       "/echoes/records/2026/echo-2026-05-30-000047.json",
       "/echoes/records/2026/echo-2026-05-30-000048.json",
-      "/echoes/records/2026/echo-2026-05-30-000049.json"
+      "/echoes/records/2026/echo-2026-05-30-000049.json",
+      "/echoes/records/2026/echo-2026-05-30-000050.json"
     ]
   },
   "records_by_attestation_authority_class": {
@@ -2661,7 +2714,8 @@
       "/echoes/records/2026/echo-2026-05-30-000046.json",
       "/echoes/records/2026/echo-2026-05-30-000047.json",
       "/echoes/records/2026/echo-2026-05-30-000048.json",
-      "/echoes/records/2026/echo-2026-05-30-000049.json"
+      "/echoes/records/2026/echo-2026-05-30-000049.json",
+      "/echoes/records/2026/echo-2026-05-30-000050.json"
     ]
   },
   "records_by_reception_class": {},
@@ -2715,7 +2769,8 @@
       "/echoes/records/2026/echo-2026-05-30-000046.json",
       "/echoes/records/2026/echo-2026-05-30-000047.json",
       "/echoes/records/2026/echo-2026-05-30-000048.json",
-      "/echoes/records/2026/echo-2026-05-30-000049.json"
+      "/echoes/records/2026/echo-2026-05-30-000049.json",
+      "/echoes/records/2026/echo-2026-05-30-000050.json"
     ],
     "test_record": [
       "/echoes/records/2026/echo-2026-05-02-000008.json"
@@ -2740,7 +2795,7 @@
     "D/S/O/E/R provenance codes are derived/internal."
   ],
   "version": "v1",
-  "source_digest": "0b43714f2cb3586f",
+  "source_digest": "bdb2a4031d2dd396",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
   "non_amending_boundary": true,
   "limitations": [
