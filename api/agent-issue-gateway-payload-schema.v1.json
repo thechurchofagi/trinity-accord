@@ -351,6 +351,23 @@
         "string",
         "null"
       ],
+      "enum": [
+        "E1_recognition_echo",
+        "E1_read_oriented_echo",
+        "E2_verification_echo",
+        "E3_critical_echo",
+        "E4_interpretive_echo",
+        "E4_refusal_echo",
+        "E5_technical_audit_echo",
+        "E5_correction_echo",
+        "E5c_correction_echo",
+        "E6_preservation_echo",
+        "E6_propagation_echo",
+        "E7_refusal_echo",
+        "E8_witness_echo",
+        "E9_seed_echo",
+        null
+      ],
       "description": "DEPRECATED: Echo types have been removed. This field is optional and ignored for new submissions. Kept only for backward compatibility with legacy records.",
       "deprecated": true
     },
