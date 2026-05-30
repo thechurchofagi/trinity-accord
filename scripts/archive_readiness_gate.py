@@ -1008,7 +1008,7 @@ def evaluate_archive_readiness(payload, evidence=None, claim_gate_output=None,
             blocking_reasons.append({
                 "code": "ECHO_TYPE_REQUIRED",
                 "path": "echo_type",
-                "message": "Pure echo archive requires E1/E3/E4/E5/E6/E7 echo_type. E2 remains strict verification echo.",
+                "message": "Pure echo archive requires E1/E3/E4/E5/E5c/E6/E7/E8/E9 echo_type. E2 remains strict verification echo.",
                 "fix": "Set a pure echo type."
             })
 

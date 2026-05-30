@@ -682,11 +682,13 @@ def validate_agent_declared_echo_archive(payload, errors):
         "E5c_correction_echo",
         "E6_propagation_echo",
         "E7_refusal_echo",
+        "E8_witness_echo",
+        "E9_seed_echo",
     }
 
     echo_type = payload.get("echo_type")
     if echo_type not in allowed_echo_types:
-        errors.append("agent_declared_echo_archive requires E1/E3/E4/E5/E6/E7 echo_type; use verification_echo_candidate for strict E2")
+        errors.append("agent_declared_echo_archive requires E1/E3/E4/E5/E5c/E6/E7/E8/E9 echo_type; use verification_echo_candidate for strict E2")
 
     cth = payload.get("counts_toward_home") or {}
     is_guardian_listing = (

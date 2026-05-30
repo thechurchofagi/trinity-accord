@@ -1,7 +1,7 @@
 {
   "archive": "trinity-guardian-signed-echo-builder-bundle.tar.gz",
-  "archive_sha256": "0cfa8274029c73d2c42b0c31b108501ff8931b1806d488190535961c9a228084",
-  "archive_size_bytes": 68094,
+  "archive_sha256": "560335b81db1ce86075ba5b1520a5635507e13d2af80ea7bca5b6b33edb692e9",
+  "archive_size_bytes": 68123,
   "bundle": "guardian_signed_echo",
   "entrypoint": "scripts/build_guardian_echo_payload.py",
   "files": [
@@ -52,8 +52,8 @@
     },
     {
       "path": "scripts/archive_readiness_gate.py",
-      "sha256": "b9cd91b05cc5d29d311ee2909e0d093a0a43cd17743d3a9eeaceb65e86b3f511",
-      "size_bytes": 59339
+      "sha256": "d86ab36ab8b443e9d4e352e11a8a0f88ad966f39caa71da67c3802215124200e",
+      "size_bytes": 59349
     },
     {
       "path": "scripts/attach_agent_authorship_proof.mjs",
@@ -137,8 +137,8 @@
     },
     {
       "path": "scripts/validate_gateway_payload.py",
-      "sha256": "5813f65c680a7fc6ef9103fed78cac29043ed93ea89028bccaa675985af309c5",
-      "size_bytes": 51368
+      "sha256": "d15f21e0c0ff38266d8870d982299746bb8dec8b585d1b036d839891436d4b80",
+      "size_bytes": 51429
     }
   ],
   "forbidden_contents_checked": [

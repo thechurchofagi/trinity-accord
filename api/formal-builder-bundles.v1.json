@@ -30,8 +30,8 @@
       "archive_name": "trinity-pure-echo-builder-bundle.tar.gz",
       "archive_url": "/builder-bundles/trinity-pure-echo-builder-bundle.tar.gz",
       "manifest_url": "/builder-bundles/trinity-pure-echo-builder-bundle.manifest.json",
-      "sha256": "dec421fd2f97982eb977c2bbf3191a506e5ea541d0207e1a4f4bfd7f05b6c9da",
-      "size_bytes": 60639,
+      "sha256": "f84ad0674f28ddf4b916d4e9a6d1869aec2af929c6b0f8dab0d267e8fc059661",
+      "size_bytes": 60661,
       "requires_full_repo_clone": false,
       "requires_exact_readback": true,
       "authorship_proof_default": true,
@@ -66,8 +66,8 @@
       "archive_name": "trinity-v0v5-builder-bundle.tar.gz",
       "archive_url": "/builder-bundles/trinity-v0v5-builder-bundle.tar.gz",
       "manifest_url": "/builder-bundles/trinity-v0v5-builder-bundle.manifest.json",
-      "sha256": "ca5c2ce141ca4372c2183c4dc68874a41ceef1829dd27ff1b888e4b2b573cb96",
-      "size_bytes": 73646,
+      "sha256": "df0480eba2ce7a36e967c132cbabcd951f4e92bbd3d9c92ab3c750eb7a9cd53d",
+      "size_bytes": 73679,
       "requires_full_repo_clone": false,
       "requires_exact_readback": true,
       "authorship_proof_default": true,
@@ -125,8 +125,8 @@
       "archive_name": "trinity-guardian-stage2-builder-bundle.tar.gz",
       "archive_url": "/builder-bundles/trinity-guardian-stage2-builder-bundle.tar.gz",
       "manifest_url": "/builder-bundles/trinity-guardian-stage2-builder-bundle.manifest.json",
-      "sha256": "b730bd6d990570b1124a109ba3234981de495403db32bcf096c6f84350831f42",
-      "size_bytes": 54391,
+      "sha256": "7332132a932450b99fb8ff6247aad078a6bda9edf38fc887ad66c05e5838b6a9",
+      "size_bytes": 54425,
       "requires_full_repo_clone": false,
       "requires_stage_1_public_material": true,
       "requires_guardian_id": true,
@@ -144,8 +144,8 @@
       "archive_name": "trinity-guardian-signed-echo-builder-bundle.tar.gz",
       "archive_url": "/builder-bundles/trinity-guardian-signed-echo-builder-bundle.tar.gz",
       "manifest_url": "/builder-bundles/trinity-guardian-signed-echo-builder-bundle.manifest.json",
-      "sha256": "0cfa8274029c73d2c42b0c31b108501ff8931b1806d488190535961c9a228084",
-      "size_bytes": 68094,
+      "sha256": "560335b81db1ce86075ba5b1520a5635507e13d2af80ea7bca5b6b33edb692e9",
+      "size_bytes": 68123,
       "requires_full_repo_clone": false,
       "requires_guardian_identity": true,
       "private_keys_must_not_be_submitted": true,
@@ -167,5 +167,5 @@
       "scripts/agent_authorship_common.py"
     ]
   },
-  "source_digest": "cb31fd4c9c22fa6c"
+  "source_digest": "16166cb6f3a816ae"
 }
