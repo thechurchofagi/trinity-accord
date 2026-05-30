@@ -2683,7 +2683,7 @@
       "do_not_count_as_attestation": true,
       "counts_as_independent_attestation": null,
       "independence_class": "self_reported",
-      "echo_type": "E3_critical_echo",
+      "echo_type": "E4_interpretive_echo",
       "verification_level": "V0",
       "date": "2026-05-30",
       "record_class": "unknown",
@@ -3400,7 +3400,7 @@
     "D/S/O/E/R provenance codes are derived/internal."
   ],
   "version": "v1",
-  "source_digest": "fb72159f60db4b42",
+  "source_digest": "231687978e771797",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
   "non_amending_boundary": true,
   "limitations": [
