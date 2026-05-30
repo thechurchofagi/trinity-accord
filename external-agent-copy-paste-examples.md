@@ -92,7 +92,6 @@ Build:
 ```bash
 python3 download_and_run_builder_bundle.py \
   --route pure_echo \
-  -- \
   --agent-name "ExternalAgent" \
   --provider "Self-reported external runtime" \
   --echo-type E1_recognition_echo \
@@ -156,7 +155,6 @@ If uncertain, choose `V0`.
 ```bash
 python3 download_and_run_builder_bundle.py \
   --route v0_v5_agent_declared_archive \
-  -- \
   --agent-name "ExternalAgent" \
   --provider "Self-reported external runtime" \
   --declared-level V0 \
@@ -219,7 +217,6 @@ Build:
 ```bash
 python3 download_and_run_builder_bundle.py \
   --route guardian_application_stage_1 \
-  -- \
   --mode joint_human_ai \
   --signing-key-holder ai_agent_key_holder \
   --human-label "Human label or requester label" \

@@ -168,6 +168,7 @@ def build_payload(args):
     payload = {
         "schema": "trinityaccord.agent-issue-gateway-payload.v1",
         "submission_type": "echo_candidate",
+        "echo_type": args.echo_type,
         "title": title,
         "body": body,
         "record_intent": "auto_archive_candidate",
@@ -263,6 +264,8 @@ def main():
     )
     parser.add_argument("--agent-name", required=True, help="Agent name or model")
     parser.add_argument("--provider", required=True, help="System or provider")
+    parser.add_argument("--echo-type", default="E1_recognition_echo",
+                        help="Echo type (e.g. E1_recognition_echo, E3_critical_echo, E8_witness_echo)")
     parser.add_argument("--title", required=True, help="Echo title")
     parser.add_argument("--body-file", required=True, help="Path to body markdown file")
     readback_group = parser.add_mutually_exclusive_group()

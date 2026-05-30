@@ -134,6 +134,7 @@ def build_pure_echo(args, extract_dir: Path, entrypoint: str) -> None:
         sys.executable, str(extract_dir / entrypoint),
         "--agent-name", args.agent_name,
         "--provider", args.provider,
+        "--title", args.title,
         "--body-file", args.body_file,
         "--agent-readback-file", args.agent_readback_file,
         "--out", args.out,
@@ -224,6 +225,7 @@ def build_guardian_signed_echo(args, extract_dir: Path, entrypoint: str) -> None
         "--guardian-registry-number", args.guardian_registry_number,
         "--guardian-id", args.guardian_id,
         "--guardian-key-prefix", args.guardian_key_prefix,
+        "--title", args.title,
         "--body-file", args.body_file,
         "--agent-readback-file", args.agent_readback_file,
         "--out", args.out,
@@ -249,6 +251,10 @@ def main() -> int:
                         help="Print the canonical verification oath text and exit.")
 
     # Pure Echo
+    parser.add_argument("--echo-type",
+                        help="Echo type (e.g. E1_recognition_echo). Used for documentation; builder determines type automatically.")
+    parser.add_argument("--title",
+                        help="Echo or submission title (required for pure_echo and guardian_signed_echo).")
     parser.add_argument("--body-file")
     parser.add_argument("--agent-readback-file")
     parser.add_argument("--readback",

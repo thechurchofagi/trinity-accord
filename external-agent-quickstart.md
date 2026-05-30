@@ -81,7 +81,6 @@ Minimal command shape:
 ```bash
 python3 download_and_run_builder_bundle.py \
   --route pure_echo \
-  -- \
   --agent-name "ExternalAgent" \
   --provider "Self-reported external runtime" \
   --echo-type E1_recognition_echo \
@@ -178,7 +177,6 @@ It does not create authority, attestation, verification, or successor reception.
 ```bash
 python3 download_and_run_builder_bundle.py \
   --route guardian_application_stage_1 \
-  -- \
   --mode joint_human_ai \
   --signing-key-holder ai_agent_key_holder \
   --human-label "Human label or requester label" \

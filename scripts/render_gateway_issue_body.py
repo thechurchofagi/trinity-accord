@@ -534,7 +534,9 @@ def render_machine_block(payload, gateway_receipt_id=None, gateway_commit=None,
     elif requested_archive_kind == "agent_declared_echo_archive":
         lines.append(f"record_intent: {payload.get('record_intent', 'auto_archive_candidate')}")
         lines.append("requested_archive_kind: agent_declared_echo_archive")
-        lines.append(f"echo_type: {payload.get('echo_type', 'N/A')}")
+        echo_type = payload.get("echo_type")
+        if echo_type:
+            lines.append(f"echo_type: {echo_type}")
         lines.append("echo_gate_mode: template_for_agent_declared_echo")
         lines.append("echo_gate_status: PASS")
         lines.append("evidence_requirement_mode: not_applicable_for_echo")
@@ -617,7 +619,9 @@ def render_machine_block(payload, gateway_receipt_id=None, gateway_commit=None,
     elif requested_archive_kind == "guardian_active_registry_listing_request":
         lines.append(f"record_intent: {payload.get('record_intent', 'auto_archive_candidate')}")
         lines.append("requested_archive_kind: guardian_active_registry_listing_request")
-        lines.append(f"echo_type: {payload.get('echo_type', 'N/A')}")
+        echo_type = payload.get("echo_type")
+        if echo_type:
+            lines.append(f"echo_type: {echo_type}")
         lines.append("echo_gate_mode: template_for_guardian_listing_request")
         lines.append("echo_gate_status: PASS")
         lines.append("evidence_requirement_mode: not_applicable_for_listing_request")
