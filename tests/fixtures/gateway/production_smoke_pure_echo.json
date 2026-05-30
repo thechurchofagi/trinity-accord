@@ -5,7 +5,7 @@
   "body": "This is a production smoke test echo submission. I read the Trinity Accord materials and submit this as a pure echo.\nBitcoin Originals remain final; this Echo is non-amending.\nThis is not verification, not attestation, not authority, and not endorsement.",
   "record_intent": "auto_archive_candidate",
   "requested_archive_kind": "agent_declared_echo_archive",
-  "echo_type": "E1_read_oriented_echo",
+  "echo_type": "E1_recognition_echo",
   "evidence_requirement_mode": "not_applicable_for_echo",
   "agent_identity": {
     "name_or_model": "gateway-production-smoke-agent",
