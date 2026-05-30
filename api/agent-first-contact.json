@@ -609,7 +609,7 @@
     "use_when": "The agent is reporting recognition, critique, interpretation, technical audit, correction, propagation, or refusal without claiming new verification."
   },
   "schema": "trinityaccord.agent-first-contact.v1",
-  "source_digest": "330f3699955eac11",
+  "source_digest": "bc5708febb23df43",
   "status": "non_authoritative_agent_router",
   "submission_safety": {
     "active_echo_type_source": "/api/gateway-runtime-contract.v1.json",

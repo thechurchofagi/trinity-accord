@@ -1,7 +1,7 @@
 # Metadata:
 # surface: ai.txt
 # version: v2.2
-# content_digest: 765efd4e39527746
+# content_digest: 3cf87b213998122c
 # content_digest_algorithm: sha256(file_without_content_digest_line)
 # canonical_url: https://www.trinityaccord.org/ai.txt
 # non_amending_boundary: true
