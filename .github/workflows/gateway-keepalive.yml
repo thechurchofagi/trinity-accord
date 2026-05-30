@@ -2,38 +2,86 @@ name: Gateway Keepalive
 
 on:
   schedule:
-    - cron: "*/5 * * * *"
+    # Every 3 min — Render free tier sleeps after ~15 min idle.
+    # GitHub cron is unreliable (may skip under load), so 3 min gives safety margin.
+    - cron: "*/3 * * * *"
   workflow_dispatch:
 
 permissions:
   contents: read
 
+env:
+  GATEWAY: https://trinity-agent-issue-gateway.onrender.com
+
 jobs:
-  ping:
+  keepalive:
     runs-on: ubuntu-24.04
-    timeout-minutes: 5
+    timeout-minutes: 3
     steps:
-      - name: Wake Gateway (cold start)
+      - name: Wake and verify Gateway
+        id: wake
         run: |
-          # Render free tier sleeps after ~15min idle.
-          # First request wakes it but may get 503. Retry until ready.
-          for i in 1 2 3 4 5 6; do
-            HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}"               https://trinity-agent-issue-gateway.onrender.com/gateway/capabilities || echo "000")
+          set -euo pipefail
+
+          # Phase 1: Wake from cold start (capabilities = lightweight)
+          echo "=== Phase 1: Wake from cold start ==="
+          AWAKE=false
+          for i in 1 2 3 4 5 6 7 8; do
+            HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" \
+              --connect-timeout 10 --max-time 30 \
+              "${GATEWAY}/gateway/capabilities" || echo "000")
             if [ "$HTTP_CODE" = "200" ]; then
               echo "✅ Gateway awake after $i attempt(s)"
+              AWAKE=true
               break
             fi
-            echo "⏳ Gateway waking up... attempt $i (HTTP $HTTP_CODE), waiting 15s"
+            echo "⏳ Waking... attempt $i/8 (HTTP $HTTP_CODE), waiting 15s"
             sleep 15
           done
 
-      - name: Ping gateway capabilities
-        run: |
-          curl -fsS --retry 3 --retry-delay 10             https://trinity-agent-issue-gateway.onrender.com/gateway/capabilities             | python3 -m json.tool > /tmp/gateway-capabilities.json
+          if [ "$AWAKE" != "true" ]; then
+            echo "::error::Gateway failed to wake after 8 attempts (~2 min)"
+            echo "gateway_up=false" >> "$GITHUB_OUTPUT"
+            exit 1
+          fi
+
+          # Phase 2: Verify actual preflight endpoint (what users hit)
+          echo ""
+          echo "=== Phase 2: Verify preflight endpoint ==="
+          PREFLIGHT_CODE=$(curl -s -o /dev/null -w "%{http_code}" \
+            --connect-timeout 10 --max-time 30 \
+            -X POST \
+            -H "Content-Type: application/json" \
+            -d '{"schema":"trinityaccord.agent-issue-gateway-payload.v1","submission_type":"echo_candidate","agent_identity":{"name_or_model":"keepalive-bot","system_or_provider":"github-actions","self_reported":true},"title":"keepalive healthcheck","body":"Automated keepalive ping. Not a real submission.","boundary_acknowledgement":{"bitcoin_originals_prevail":true,"all_mirrors_non_amending":true,"echo_is_not_authority":true,"gateway_intake_is_not_archive_or_attestation":true}}' \
+            "${GATEWAY}/gateway/preflight" || echo "000")
+
+          if [ "$PREFLIGHT_CODE" = "200" ] || [ "$PREFLIGHT_CODE" = "422" ]; then
+            # 422 = validation error = endpoint is alive and processing
+            echo "✅ Preflight endpoint alive (HTTP $PREFLIGHT_CODE)"
+            echo "gateway_up=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::warning::Preflight endpoint returned HTTP $PREFLIGHT_CODE"
+            echo "gateway_up=false" >> "$GITHUB_OUTPUT"
+          fi
 
       - name: Check contract markers
         run: |
+          set -euo pipefail
+          curl -fsS --retry 2 --retry-delay 10 \
+            --connect-timeout 10 --max-time 30 \
+            "${GATEWAY}/gateway/capabilities" \
+            | python3 -m json.tool > /tmp/gateway-capabilities.json
+
           grep -q '"render_api_only": true' /tmp/gateway-capabilities.json
           grep -q '"gateway_creates_issue_server_side": true' /tmp/gateway-capabilities.json
           grep -q '"github_pat_required_from_agent": false' /tmp/gateway-capabilities.json
           echo "✅ Gateway contract markers present"
+
+      - name: Report status
+        if: always()
+        run: |
+          if [ "${{ steps.wake.outputs.gateway_up }}" = "true" ]; then
+            echo "🟢 Gateway is UP and preflight endpoint is responsive"
+          else
+            echo "🔴 Gateway is DOWN or preflight endpoint is not responding"
+          fi
