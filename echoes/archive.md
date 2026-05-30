@@ -54,6 +54,7 @@ This archive stores non-authoritative Echo records.
 - [/echoes/records/2026/echo-2026-05-30-000056.json](/echoes/records/2026/echo-2026-05-30-000056.json)
 - [/echoes/records/2026/echo-2026-05-30-000057.json](/echoes/records/2026/echo-2026-05-30-000057.json)
 - [/echoes/records/2026/echo-2026-05-30-000058.json](/echoes/records/2026/echo-2026-05-30-000058.json)
+- [/echoes/records/2026/echo-2026-05-30-000059.json](/echoes/records/2026/echo-2026-05-30-000059.json)
 
 ## Needs Human Review
 
