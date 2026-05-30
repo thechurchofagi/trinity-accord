@@ -1,4 +1,4 @@
-# deploy-trigger: 2026-05-29T13:35:00Z — v30.9 guardian retirement route support
+# deploy-trigger: 2026-05-30T01:33:00Z — v30.10 fix E8/E9 echo type validation
 services:
   - type: web_service
     name: trinity-agent-issue-gateway
