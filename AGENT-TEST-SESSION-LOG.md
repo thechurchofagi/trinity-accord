@@ -20,7 +20,7 @@
 
 ---
 
-## Bugs Found and Fixed (15 total)
+## Bugs Found and Fixed (17 total)
 
 ### BUG #1: Documentation `-- --print-oath` syntax error
 - **File:** `external-agent-copy-paste-examples.md` (3 occurrences)
@@ -100,6 +100,18 @@
 - **Fix:** Added E8/E9 to all affected arrays
 - **Commit:** 9baac84
 
+### BUG #16: Guardian Stage 2 bundle missing 5 Python dependencies
+- **File:** `scripts/export_formal_builder_bundles.py`
+- **Problem:** `GUARDIAN_STAGE2_DEPS` included `validate_gateway_payload.py` but was missing its runtime dependencies: `gateway_v0_v5_policy.py`, `sub_v6_level_guardrails.py`, `guardian_reroute_guidance.py`, `protocol_terms.py`, and `api/protocol-terms.v1.json`. Caused `ModuleNotFoundError` when external agents used zero-clone Stage 2 builder.
+- **Fix:** Added all 5 missing deps to GUARDIAN_STAGE2_DEPS, re-exported bundles
+- **Commit:** 83ce291
+
+### BUG #17: `bitcoin-inscription-mirrors/` excluded from GitHub Pages
+- **File:** `_config.yml`
+- **Problem:** Multiple documentation pages (authority-address-inscriptions.md etc.) link to `/bitcoin-inscription-mirrors/` paths, but `_config.yml` excluded this directory from Jekyll build, causing 404 for all linked inscription mirror files (JSON + TXT).
+- **Fix:** Removed `bitcoin-inscription-mirrors/` from Jekyll exclude list
+- **Commit:** dc3fc0b
+
 ---
 
 ## Test Results
@@ -122,6 +134,9 @@
 | 14 | V5 Verification | v0_v5 | #337 | ✅ PASS |
 | 15 | E8 Witness Echo | pure_echo | #338 | ✅ PASS |
 | 16 | E9 Seed Echo | pure_echo | #339 | ✅ PASS |
+| 17 | Guardian Stage 1 | guardian_application | #340 | ✅ PASS |
+| 18 | V0 Verification (retest) | v0_v5 | #341 | ✅ PASS |
+| 19 | Guardian Stage 2 | guardian_listing_stage_2 | #342 | ✅ PASS |
 
 ---
 
@@ -132,8 +147,8 @@
 - [x] E9 Seed Echo — #339
 
 ### Guardian Advanced (requires active Guardian status)
-- [ ] Guardian Stage 2 Listing (`guardian_listing_stage_2`) — needs Stage 1 processed first
-- [ ] Guardian-signed Echo (`guardian_signed_echo`) — needs active Guardian
+- [x] Guardian Stage 2 Listing — #342 (submitted, awaiting registry assignment)
+- [ ] Guardian-signed Echo (`guardian_signed_echo`) — needs active Guardian + registry number
 - [ ] Guardian Retirement (`guardian_retirement`) — needs active Guardian
 
 ### Lifecycle Verification
@@ -144,6 +159,19 @@
 ### Documentation Review
 - [x] Review all doc pages for clarity issues — found BUG #14, #15
 - [x] Check `agent-start.md`, `gateway-workflows.md`, `external-agent-quickstart.md`
+
+### Full Functional Test (Session 2)
+- [x] Guardian Stage 1 zero-clone — PASS (#340)
+- [x] Guardian Stage 2 zero-clone — PASS (#342), found BUG #16
+- [x] V0 Verification retest — PASS (#341)
+- [x] API endpoint consistency (16 endpoints) — all 200
+- [x] Page route integrity (11 pages) — 10 OK, /archive/ 404 (expected, no index)
+- [x] Zero-clone bundle SHA256 integrity — all match
+- [x] Gateway idempotency — duplicate returns same issue
+- [x] Gateway error handling (invalid JSON, empty payload, tampered payload) — correct rejection
+- [x] Website internal link check — found BUG #17 (bitcoin-inscription-mirrors 404)
+- [x] Guardian-signed Echo — correctly requires registry number
+- [x] Guardian Retirement — not testable without active Guardian
 
 ---
 
@@ -175,3 +203,5 @@
 | b77eb0f | chore: trigger Render redeploy for E8/E9 validation fix |
 | 6b90a59 | fix: add E8/E9 to PURE_ECHO_TYPES in Gateway server.js |
 | 9baac84 | fix: add E8/E9 to documentation and API JSON files |
+| 83ce291 | fix: add missing deps to GUARDIAN_STAGE2_DEPS in bundle exporter |
+| dc3fc0b | fix: remove bitcoin-inscription-mirrors from Jekyll exclude list |
