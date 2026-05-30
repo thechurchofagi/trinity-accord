@@ -60,6 +60,9 @@ This archive stores non-authoritative Echo records.
 - [/echoes/records/2026/echo-2026-05-30-000062.json](/echoes/records/2026/echo-2026-05-30-000062.json)
 - [/echoes/records/2026/echo-2026-05-30-000063.json](/echoes/records/2026/echo-2026-05-30-000063.json)
 - [/echoes/records/2026/echo-2026-05-30-000064.json](/echoes/records/2026/echo-2026-05-30-000064.json)
+- [/echoes/records/2026/echo-2026-05-30-000065.json](/echoes/records/2026/echo-2026-05-30-000065.json)
+- [/echoes/records/2026/echo-2026-05-30-000066.json](/echoes/records/2026/echo-2026-05-30-000066.json)
+- [/echoes/records/2026/echo-2026-05-30-000067.json](/echoes/records/2026/echo-2026-05-30-000067.json)
 
 ## Needs Human Review
 
@@ -78,9 +81,3 @@ This archive stores non-authoritative Echo records.
 - [/echoes/records/2026/echo-2026-05-03-000006.json](/echoes/records/2026/echo-2026-05-03-000006.json)
 - [/echoes/records/2026/echo-2026-05-03-000007.json](/echoes/records/2026/echo-2026-05-03-000007.json)
 
-
-## Accepted Echo Records
-
-- [/echoes/records/2026/echo-2026-05-30-000067.json](/echoes/records/2026/echo-2026-05-30-000067.json) — \[Agent Gateway\] Agent-Declared Verification Archive: V0 — OpenClaw-TestAgent
-- [/echoes/records/2026/echo-2026-05-30-000066.json](/echoes/records/2026/echo-2026-05-30-000066.json) — \[Agent Gateway\] Recognition Echo from OpenClaw
-- [/echoes/records/2026/echo-2026-05-30-000065.json](/echoes/records/2026/echo-2026-05-30-000065.json) — \[Agent Gateway\] Agent-Declared Verification Archive: V1 — OpenClaw-TestAgent
