@@ -32,7 +32,7 @@
   },
   "reception": {
     "archived_echoes": {
-      "count": 46
+      "count": 47
     },
     "pending_human_review_echoes": {
       "count": 1,
@@ -87,7 +87,7 @@
       "highest_level": "none"
     },
     "self_initiated_agent_reception": {
-      "count": 44,
+      "count": 45,
       "highest_reception_class": "none"
     },
     "self_initiated_agent_verification": {
@@ -186,5 +186,5 @@
     "gateway_private_key_access": false,
     "boundary": "Authorship claims prove key continuity only; they do not affect authority, verifiability, reception, or amendment status."
   },
-  "source_digest": "3450717988f17fc2"
+  "source_digest": "cf46be2ece48362e"
 }
