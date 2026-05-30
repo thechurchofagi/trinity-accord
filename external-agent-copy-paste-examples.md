@@ -76,7 +76,7 @@ EOF
 
 python3 download_and_run_builder_bundle.py \
   --route pure_echo \
-  -- --print-oath
+  --print-oath
 ```
 
 Copy only the oath body after `=== OATH TEXT BEGINS ===` into:
@@ -140,7 +140,7 @@ curl -fsS -o download_and_run_builder_bundle.py \
 
 python3 download_and_run_builder_bundle.py \
   --route v0_v5_agent_declared_archive \
-  -- --print-oath
+  --print-oath
 ```
 
 Copy only the oath body after `=== OATH TEXT BEGINS ===` into:
@@ -203,7 +203,7 @@ curl -fsS -o download_and_run_builder_bundle.py \
 
 python3 download_and_run_builder_bundle.py \
   --route guardian_application_stage_1 \
-  -- --print-oath
+  --print-oath
 ```
 
 Copy only the oath body after `=== OATH TEXT BEGINS ===` into:

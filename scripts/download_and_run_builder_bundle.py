@@ -293,6 +293,18 @@ def main() -> int:
 
     args = parser.parse_args()
 
+    # Normalize readback file aliases: --readback-file works for all routes
+    if args.readback_file and not args.agent_readback_file:
+        args.agent_readback_file = args.readback_file
+    elif args.agent_readback_file and not args.readback_file:
+        args.readback_file = args.agent_readback_file
+
+    # Resolve file paths to absolute so they work when builder runs in a temp directory
+    for attr in ("body_file", "agent_readback_file", "readback_file", "out", "key_dir"):
+        val = getattr(args, attr, None)
+        if val and not os.path.isabs(val):
+            setattr(args, attr, os.path.abspath(val))
+
     # Handle --print-oath: just print oath body text and exit
     OATH_MARKER = "=== OATH TEXT BEGINS ==="
     if args.print_oath:
