@@ -136,7 +136,14 @@ _NEGATION_PREFIXES = re.compile(
 
 
 def _split_sentences(text):
-    """Split text into sentences for per-sentence claim checking."""
+    """Split text into sentences for per-sentence claim checking.
+
+    Joins continuation lines before splitting: a newline followed by a
+    lowercase letter (e.g. "attestation,\nauthority") is treated as a
+    soft wrap within the same sentence, not a sentence boundary.
+    """
+    # Join continuation lines: newline + lowercase letter → single space
+    text = re.sub(r'\n(?=[a-zà-ÿ])', ' ', text)
     return [s.strip() for s in re.split(r'(?<=[.!?。！？])\s+|\n+', text) if s.strip()]
 
 
