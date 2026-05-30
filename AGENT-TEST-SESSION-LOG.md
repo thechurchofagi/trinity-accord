@@ -275,3 +275,64 @@ Builder → validate_gateway_payload.py → archive_readiness_gate.py → Gatewa
 3. `git add -A && git commit && git push`
 4. Wait ~10 min for CDN cache
 5. Test with zero-clone approach
+
+---
+
+## Session 3 — 2026-05-30 19:16–20:10 (GMT+8)
+
+**Agent:** OpenClaw (mimo-v2.5-pro) via webchat
+**Method:** External agent, zero-credentials testing + repo fix cycle
+
+### Bugs Found and Fixed (4 commits, 9 bugs)
+
+| # | File | Bug | Fix | Commit |
+|---|------|-----|-----|--------|
+| 1 | api/agent-first-contact.json | source_digest stale (330f3699→bc5708fe) | Recomputed digest | d514bb8 |
+| 2 | api/formal-builder-bundles.v1.json | source_digest stale (93c2c0f6→acfaf1a4) | Recomputed digest | d514bb8 |
+| 3 | api/public-home-status.json | source_digest stale (c762ec12→9e4c47c3) | Recomputed digest | d514bb8 |
+| 4 | ai.txt | content_digest stale (765efd4e→3cf87b21) | Recomputed digest | d514bb8 |
+| 5 | llms.txt | content_digest stale (5f2606c1→324256e0) | Recomputed digest | d514bb8 |
+| 6 | tests/fixtures/gateway/valid_pure_echo.json | echo_type=E1_read_oriented_echo (forbidden) | → E1_recognition_echo | 14f6ab0 |
+| 7 | tests/fixtures/gateway/production_smoke_pure_echo.json | echo_type=E1_read_oriented_echo (forbidden) | → E1_recognition_echo | 14f6ab0 |
+| 8 | echo-payload-real.json | echo_type=E1_read_oriented_echo (forbidden) | → E1_recognition_echo | 14f6ab0 |
+| 9 | sitemap.xml | /echoes/verification-reports/index/ → 404 | → /echoes/verification-reports/ | 7b0c116 |
+
+### Additional Fix (not repo bug)
+
+| Issue | Action |
+|-------|--------|
+| Gateway schema hash mismatch (stale deploy at c57e990) | Triggered Render redeploy via API → now at 7b0c116, schema hash matches |
+
+### Test Coverage
+
+| Dimension | Result |
+|-----------|--------|
+| Sitemap URLs (301) | ✅ All 200 after fix |
+| Key pages (29 from links.json) | ✅ All 200 |
+| API source_digest (31 files) | ✅ All correct after fix |
+| Text content_digest (ai.txt, llms.txt) | ✅ All correct after fix |
+| Echo index vs records (64) | ✅ Perfect match |
+| Live vs Repo data (11 core files) | ✅ Identical |
+| Builder bundles (5 archives + 5 manifests) | ✅ All downloadable |
+| Gateway health/version | ✅ Healthy |
+| Gateway preflight (pure_echo) | ✅ accepted=true |
+| Gateway schema hash | ✅ Gateway = Repo (after redeploy) |
+| Guardian registry (22 guardians) | ✅ Data consistent |
+| Corrections index | ✅ 5 known non-current records |
+| Recovery index | ✅ Valid |
+| External witness index | ✅ Valid (0 records) |
+
+### Root Causes
+
+1. **Stale digests:** Files modified after digest computation without updating digest values. The `scripts/public_metadata_utils.py` has `canonical_json_digest()` but it's not auto-run on every file change.
+
+2. **Forbidden echo_type in fixtures:** Test fixtures used `E1_read_oriented_echo` which is listed in `gateway-runtime-contract.v1.json` forbidden_invented_values. Fixtures were created before the forbidden list was enforced.
+
+3. **Sitemap /index/ path:** Jekyll serves `index.md` at `/path/` not `/path/index/`. Sitemap generation included the raw filename.
+
+4. **Gateway stale deploy:** Render auto-deploy only triggers on `examples/github-app-backend/` changes. Schema changes in `api/` don't trigger redeploy.
+
+### Edge Issues (Not Fixed)
+
+- `api/gateway-archive-persistence-contract.v1.json` not in sitemap or links.json (accessible but not discoverable)
+- Gateway auto-deploy doesn't watch `api/` directory for schema changes
