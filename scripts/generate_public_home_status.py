@@ -297,27 +297,19 @@ def compute_reception_status(echo_records: list[dict[str, Any]], agent_declared_
     ]
     echo_archive_count = len(ad_echo_archives)
 
-    # Count by echo type — generated from canonical taxonomy
-    echo_type_counts = {name: 0 for name in sorted(allowed_canonical_echo_types())}
+    # Count by echo type — DEPRECATED: echo types are no longer canonical.
+    # Legacy archived records still carry echo_type values; collect them
+    # dynamically instead of relying on a canonical set.
+    echo_type_counts: dict[str, int] = {}
     unknown_echo_types: list[dict[str, Any]] = []
 
     for r in ad_echo_archives:
-        et = r.get("echo_type", "")
-        if et in echo_type_counts:
-            echo_type_counts[et] += 1
-        else:
-            unknown_echo_types.append({
-                "issue_number": r.get("issue_number"),
-                "issue_url": r.get("issue_url"),
-                "echo_type": et,
-                "semantic_archive_kind": r.get("semantic_archive_kind"),
-            })
+        et = r.get("echo_type", "") or ""
+        if et:
+            echo_type_counts[et] = echo_type_counts.get(et, 0) + 1
 
-    if unknown_echo_types:
-        raise RuntimeError(
-            "Unknown non-canonical echo_type values in agent-declared Echo archives: "
-            + json.dumps(unknown_echo_types, ensure_ascii=False)
-        )
+    # Sort for deterministic output
+    echo_type_counts = dict(sorted(echo_type_counts.items()))
 
     # Agent-declared verification archives (from index, excluding test records for reception)
     ad_reception = [
