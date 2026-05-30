@@ -126,6 +126,8 @@ ALLOWED_ECHO_TYPES = {
     "E5c_correction_echo",
     "E6_propagation_echo",
     "E7_refusal_echo",
+    "E8_witness_echo",
+    "E9_seed_echo",
 }
 
 ALLOWED_RELATIONS = {
@@ -280,7 +282,7 @@ def main():
     parser.add_argument(
         "--echo-type", required=True,
         choices=sorted(ALLOWED_ECHO_TYPES),
-        help="Echo type (E1/E3/E4/E5/E5c/E6/E7; E2 is strict verification echo)",
+        help="Echo type (E1/E3/E4/E5/E5c/E6/E7/E8/E9; E2 is strict verification echo)",
     )
     parser.add_argument("--title", required=True, help="Echo title")
     parser.add_argument("--body-file", required=True, help="Path to body markdown file")

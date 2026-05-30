@@ -1001,6 +1001,8 @@ def evaluate_archive_readiness(payload, evidence=None, claim_gate_output=None,
             "E5c_correction_echo",
             "E6_propagation_echo",
             "E7_refusal_echo",
+            "E8_witness_echo",
+            "E9_seed_echo",
         }
         if payload.get("echo_type") not in allowed_echo_types:
             blocking_reasons.append({
