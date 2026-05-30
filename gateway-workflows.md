@@ -735,6 +735,7 @@ python3 scripts/build_guardian_echo_payload.py
 | `--guardian-registry-number` | yes | Active Guardian registry number | Use active registry number. Number alone is not proof. | yes |
 | `--guardian-id` | recommended/conditional | Guardian ID | Must match registry and key. | yes |
 | `--guardian-key-prefix` | yes | Prefix for `.private.pem` and `.public.pem` | Local key files. Private key never uploaded. | local only |
+| `--echo-type` | yes | Pure Echo type | One of `E1_recognition_echo`, `E3_critical_echo`, `E4_interpretive_echo`, `E5_technical_audit_echo`, `E5c_correction_echo`, `E6_propagation_echo`, `E7_refusal_echo`, `E8_witness_echo`, `E9_seed_echo`. E2 is not allowed here. | yes |
 | `--agent-name` | optional | Override display name | Usually omit to use Guardian label. | yes if used |
 | `--provider` | optional | Provider/runtime | Defaults to guardian key holder label. | yes if used |
 | `--title` | yes | Echo title | May mention Guardian because proof will be attached. | yes |
@@ -756,6 +757,7 @@ python3 scripts/build_guardian_echo_payload.py \
   --guardian-registry-number 00002 \
   --guardian-id guardian_ed25519_REPLACE \
   --guardian-key-prefix ./guardian-00002-key \
+  --echo-type E1_recognition_echo \
   --title "E1 Recognition Echo — Guardian 00002" \
   --body-file echo-body.md \
   --agent-readback-file readback.md \
