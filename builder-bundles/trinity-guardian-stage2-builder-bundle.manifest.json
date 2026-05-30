@@ -1,7 +1,7 @@
 {
   "archive": "trinity-guardian-stage2-builder-bundle.tar.gz",
-  "archive_sha256": "7332132a932450b99fb8ff6247aad078a6bda9edf38fc887ad66c05e5838b6a9",
-  "archive_size_bytes": 54425,
+  "archive_sha256": "5b3bf47010e3d9bf45f23f6ea1be00947d3a726cb9e71c514d8caf7851e705f0",
+  "archive_size_bytes": 59870,
   "bundle": "guardian_listing_stage_2",
   "entrypoint": "scripts/build_guardian_listing_request_payload.py",
   "files": [
@@ -17,23 +17,28 @@
     },
     {
       "path": "api/agent-submit-gateway.json",
-      "sha256": "450f1925929ae8102f85b01514bb11bc4785231e1243d0e5f653afc6b2fc43bc",
-      "size_bytes": 24240
+      "sha256": "6ee8997ad35ff56754c99cc875c9ef5c81acd4414af19620ee17fb342d79c1b9",
+      "size_bytes": 24287
     },
     {
       "path": "api/gateway-builder-route-map.v1.json",
-      "sha256": "5d3ac376ce17b260ae3335b1570153f020e80fdf969c6685674d058af17fa783",
-      "size_bytes": 7602
+      "sha256": "81de929fb0bf754019b26a6694a6292f54797c77697c685d191d7f3914785cb0",
+      "size_bytes": 7704
     },
     {
       "path": "api/gateway-workflows.v1.json",
-      "sha256": "cc400548e0d7ab713a8e3460c40d9b13a2476d46c693316393a36b4946f27011",
-      "size_bytes": 29616
+      "sha256": "f0efcf5dedbdb8140d7543f488b7f824af799ee618a6329d1a9e91b25834187d",
+      "size_bytes": 29734
     },
     {
       "path": "api/guardian-listing-oath.v1.txt",
       "sha256": "3f988027603fc7aa5509b35852a69904d0385d0a7d2f0a353389f0923b27ad67",
       "size_bytes": 1131
+    },
+    {
+      "path": "api/protocol-terms.v1.json",
+      "sha256": "3524bdf1f0535d5647af29e6535bfd58436184f2ed92d16116f6ef58d1fa5f3d",
+      "size_bytes": 3750
     },
     {
       "path": "scripts/agent_authorship_common.py",
@@ -66,6 +71,11 @@
       "size_bytes": 17003
     },
     {
+      "path": "scripts/gateway_v0_v5_policy.py",
+      "sha256": "a3018399bade3d6aad0806f8f01eff51c5930e4dc9e7689c5472dc8fad2cbc1a",
+      "size_bytes": 4989
+    },
+    {
       "path": "scripts/generate_agent_authorship_keypair.mjs",
       "sha256": "d839d8e641d9d0944222bcf6bbcc9a7f860c8d042d040021e95deab1111c4384",
       "size_bytes": 781
@@ -81,6 +91,11 @@
       "size_bytes": 5844
     },
     {
+      "path": "scripts/guardian_reroute_guidance.py",
+      "sha256": "cb5e6ed468f169870083e329af5b5503929d0712cd7989dfdc54b453bdb8b5cb",
+      "size_bytes": 2934
+    },
+    {
       "path": "scripts/oath_contracts.py",
       "sha256": "def674f404415398e6fef976cd10b99e678335b62574a0f2682893b9eed9edad",
       "size_bytes": 6122
@@ -89,6 +104,16 @@
       "path": "scripts/oath_readback_integrity.py",
       "sha256": "9259127958331f6f7033c39346b6e1c8384d1e08334a73878e1cb1a73d018137",
       "size_bytes": 3310
+    },
+    {
+      "path": "scripts/protocol_terms.py",
+      "sha256": "ba037ae5865d7b3a4d5d80617e991b0b1e8670effab6b21d9912167cfb2f1400",
+      "size_bytes": 2245
+    },
+    {
+      "path": "scripts/sub_v6_level_guardrails.py",
+      "sha256": "aa3540416aed3bd820ec96ff9fc25c6322399f35fd602076c601fe2b96a9bcac",
+      "size_bytes": 5686
     },
     {
       "path": "scripts/validate_gateway_payload.py",
