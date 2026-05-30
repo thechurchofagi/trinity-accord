@@ -1,34 +1,34 @@
 {
   "archive": "trinity-pure-echo-builder-bundle.tar.gz",
-  "archive_sha256": "906c41e58b5af4bc81b1d19611420f64c3824b8210a42bcededdee1ff352a7d6",
-  "archive_size_bytes": 58876,
+  "archive_sha256": "dec421fd2f97982eb977c2bbf3191a506e5ea541d0207e1a4f4bfd7f05b6c9da",
+  "archive_size_bytes": 60639,
   "bundle": "pure_echo",
   "entrypoint": "scripts/build_agent_declared_echo_payload.py",
   "files": [
     {
       "path": "api/agent-issue-gateway-payload-schema.v1.json",
-      "sha256": "2321fad78e3b5c9e3f38803183dd71daa251741952016351e727dc1a7ef03ca8",
-      "size_bytes": 49935
+      "sha256": "5975ad6fc08257c235aa16bbd689364e4ab215a09c41aa2384bd07a90f6a68ac",
+      "size_bytes": 50193
     },
     {
       "path": "api/agent-output-policy.v1.json",
-      "sha256": "4f9b00e3ac9a406c123a1aff10c364a6e2a6742b5077c493e4debb9de5b2a931",
-      "size_bytes": 7536
+      "sha256": "92f47eb4f85980bdd258d08a9bb9b108c945967144578fa6c4660fd45ee7127c",
+      "size_bytes": 7740
     },
     {
       "path": "api/agent-submit-gateway.json",
-      "sha256": "8bb87bdfaca707f7fe61323e26fc9f5c7ce59eaba8d5594830199380e7d407af",
-      "size_bytes": 23526
+      "sha256": "450f1925929ae8102f85b01514bb11bc4785231e1243d0e5f653afc6b2fc43bc",
+      "size_bytes": 24240
     },
     {
       "path": "api/gateway-builder-route-map.v1.json",
-      "sha256": "1c437b9d5673488e40036e1db6aaaa456d507104178eb2624072776324b94c1c",
-      "size_bytes": 5150
+      "sha256": "5d3ac376ce17b260ae3335b1570153f020e80fdf969c6685674d058af17fa783",
+      "size_bytes": 7602
     },
     {
       "path": "api/gateway-workflows.v1.json",
-      "sha256": "e4af52130b681294de456c10bd315b1046f6185bdd89dbadf3e5fcb781ee5024",
-      "size_bytes": 28751
+      "sha256": "cc400548e0d7ab713a8e3460c40d9b13a2476d46c693316393a36b4946f27011",
+      "size_bytes": 29616
     },
     {
       "path": "api/protocol-terms.v1.json",
@@ -47,13 +47,13 @@
     },
     {
       "path": "scripts/archive_readiness_gate.py",
-      "sha256": "892d4258602996737dac2072557057a7377152639e83e1d3978f62058ea4be7f",
-      "size_bytes": 57604
+      "sha256": "b9cd91b05cc5d29d311ee2909e0d093a0a43cd17743d3a9eeaceb65e86b3f511",
+      "size_bytes": 59339
     },
     {
       "path": "scripts/attach_agent_authorship_proof.mjs",
-      "sha256": "746d513f162377830c95e7f67654f0c1e82bb0023c65c2c41b2861d073104cc0",
-      "size_bytes": 1817
+      "sha256": "b2245c27ccff1d187ad579bdf318768d6f975164900f494ad4ab99fd19c6afc5",
+      "size_bytes": 2001
     },
     {
       "path": "scripts/build_agent_authorship_message.py",
@@ -62,13 +62,13 @@
     },
     {
       "path": "scripts/build_agent_declared_echo_payload.py",
-      "sha256": "d0c493e6616d4c7e57d8ba45828a785193a5eb32d4e72d5fd45d6240fb34d715",
-      "size_bytes": 18555
+      "sha256": "e8546d4679a48f7c1fc4df87b9ed1863ec513199e63d52c7937b7bb9b2981541",
+      "size_bytes": 18604
     },
     {
       "path": "scripts/gateway_payload_authorship.py",
-      "sha256": "64c15a4d4523839594a30cb2a433a68fcaa8d6dee3f963ad892433af3f90c79c",
-      "size_bytes": 16306
+      "sha256": "81e3d72fb9f9f4ebfbff4a227057eba9e4af347b98329a43263684d963d0b8ca",
+      "size_bytes": 17003
     },
     {
       "path": "scripts/gateway_v0_v5_policy.py",
