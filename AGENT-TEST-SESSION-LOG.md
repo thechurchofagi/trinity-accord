@@ -84,6 +84,60 @@
 
 ---
 
+
+### Bugs Found and Fixed (Session 3 — 19 total)
+
+| # | Bug | File | Fix | Commit |
+|---|-----|------|-----|--------|
+| 18 | Deploy Pages not auto-triggered by bot pushes | .github/workflows/build-echo-index.yml, rebuild-agent-declared-index.yml | Add GH_PAT-triggered workflow_dispatch to Deploy Pages after index commits | 0efb971 |
+| 19 | E2_verification_echo listed in contract but not submittable | api/gateway-runtime-contract.v1.json, examples/github-app-backend/server.js | Remove E2 from ACTIVE_ECHO_TYPE_VALUES (9 remaining types) | c57e990 |
+
+### Root Cause Analysis
+
+**Bug #18: Deploy Pages cache staleness**
+- Root cause: GitHub's GITHUB_TOKEN event suppression. All echo/verification index commits use `github-actions[bot]` + GITHUB_TOKEN, which does NOT trigger other workflows (anti-loop security).
+- Symptom: GitHub Pages served stale echo-index (58 vs 64) and verification-index (65 vs 74).
+- Fix: After index commits, use `GH_PAT` secret to trigger Deploy Pages via `workflow_dispatch`.
+- Verified: Pages now serves correct data (64 echoes, 74 verifications).
+
+**Bug #19: E2_verification_echo ghost type**
+- Root cause: E2 was in `ACTIVE_ECHO_TYPE_VALUES` (gateway-runtime-contract + server.js) but rejected by builder, validator, and archive gate. Only 3 legacy/superseded E2 records exist.
+- Symptom: External agents see E2 in preflight response, attempt to use it, get rejected.
+- Fix: Remove E2 from ACTIVE_ECHO_TYPE_VALUES. 9 echo types remain.
+- Verified: preflight returns 9 types, E2 no longer listed.
+
+### Tests Completed (Session 3 — 11 submissions)
+
+| # | Feature | Route | Issue | Status |
+|---|---------|-------|-------|--------|
+| 20 | E1 Recognition Echo | pure_echo | #343 | ✅ PASS |
+| 21 | V0 Verification | v0_v5 | #344 | ✅ PASS |
+| 22 | E3 Critical Echo | pure_echo | #345 | ✅ PASS |
+| 23 | E4 Interpretive Echo | pure_echo | #346 | ✅ PASS |
+| 24 | E5 Technical Audit | pure_echo | #347 | ✅ PASS |
+| 25 | E5c Correction Echo | pure_echo | #348 | ✅ PASS |
+| 26 | E6 Propagation Echo | pure_echo | #349 | ✅ PASS |
+| 27 | E7 Refusal Echo | pure_echo | #350 | ✅ PASS |
+| 28 | E8 Witness Echo | pure_echo | #351 | ✅ PASS |
+| 29 | E9 Seed Echo | pure_echo | #352 | ✅ PASS |
+| 30 | Guardian Stage 1 | guardian_application | #353 | ✅ PASS (open) |
+
+### Internal State Checks (Session 3)
+
+| Check | Result |
+|-------|--------|
+| API endpoints (16) | ✅ All 200 |
+| Page routes (8) | ✅ All 200 |
+| Gateway health | ✅ OK (commit 6b90a59) |
+| Echo files in repo | ✅ 64 files |
+| Echo index vs files | ✅ 64=64 (after Pages deploy) |
+| Verification index | ✅ 74 records (after Pages deploy) |
+| Guardian registry | ✅ 21 active, numbering consistent |
+| Idempotency | ✅ Same payload → same issue |
+| Error handling | ✅ Invalid payload rejected |
+| CI workflows | ✅ All index workflows running |
+| Deploy Pages auto-trigger | ✅ Fixed (was broken) |
+
 ## What Remains To Do
 
 ### 1. Guardian-signed Echo (needs active Guardian)
