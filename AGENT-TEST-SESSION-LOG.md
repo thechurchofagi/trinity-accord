@@ -336,3 +336,54 @@ Builder → validate_gateway_payload.py → archive_readiness_gate.py → Gatewa
 
 - `api/gateway-archive-persistence-contract.v1.json` not in sitemap or links.json (accessible but not discoverable)
 - Gateway auto-deploy doesn't watch `api/` directory for schema changes
+
+---
+
+## Session 4 — 2026-05-30 20:13–20:50 (GMT+8)
+
+**Agent:** OpenClaw (mimo-v2.5-pro) via webchat
+**Method:** External agent, zero-credentials testing + repo fix cycle
+
+### Bugs Found and Fixed (3 bugs, 1 commit)
+
+| # | File | Bug | Fix | Commit |
+|---|------|-----|-----|--------|
+| 20 | render_gateway_issue_body.py (lines 537, 620) | echo_type rendered as "N/A" when null; linter rejects "N/A" as invalid echo_type | Skip echo_type line when not set (linter allows null/missing) | d1ec7ad |
+| 21 | download_and_run_builder_bundle.py | require_args checks echo_type and title but argparse never defines --echo-type or --title; all zero-clone pure_echo builds crash | Add --echo-type and --title to argparse | d1ec7ad |
+| 22 | external-agent-copy-paste-examples.md, external-agent-quickstart.md | '--' separator between wrapper and builder args breaks argparse (no positional args defined) | Remove '--' separator from all 5 examples | d1ec7ad |
+
+### Root Cause Analysis
+
+**Bug #20: echo_type N/A validation failure**
+- Root cause: Renderer outputs `echo_type: N/A` for null values, but linter's VALID_ECHO_TYPES set doesn't include "N/A".
+- Flow: builder (no echo_type) → renderer (`payload.get('echo_type', 'N/A')` → "N/A") → linter (`echo_type not in VALID_ECHO_TYPES` → FAIL)
+- Fix: Conditional rendering — only output echo_type line when present. Linter allows null/missing.
+- This blocked ALL external agents using zero-clone pure_echo flow.
+
+**Bug #21: Missing argparse arguments**
+- Root cause: require_args() references `echo_type` and `title` but argparse never defines them. AttributeError crash.
+- Fix: Add --echo-type (default E1_recognition_echo) and --title to argparse.
+
+**Bug #22: Broken -- separator in docs**
+- Root cause: Examples use `--` to separate wrapper/builder args, but argparse.parse_args() treats `--` as positional arg separator and crashes (no positional args defined).
+- Fix: Remove `--` lines from all 5 example blocks.
+
+### Test Coverage
+
+| Test | Result |
+|------|--------|
+| Zero-clone pure_echo (E1) | ✅ PASS → Issue #355 |
+| Zero-clone V0 verification | ✅ PASS → Issue #356 |
+| Zero-clone Guardian Stage 1 | ✅ PASS → Issue #357 |
+| Gateway preflight (all 3 routes) | ✅ All accepted |
+| Gateway submit (all 3 routes) | ✅ All created issues |
+| API endpoints (11) | ✅ All 200 |
+| Page routes (13) | ✅ All 200 |
+| Source digest integrity (31 files) | ✅ All match |
+| Builder bundle SHA256 (5) | ✅ All match |
+| Sitemap URLs (302) | ✅ No /index/ issues |
+
+### Edge Issues (Not Fixed)
+
+- Gateway auto-deploy doesn't trigger on `scripts/` changes (only `examples/`); requires manual Render API trigger
+- CDN cache ~10 min delay for GitHub Pages content after push

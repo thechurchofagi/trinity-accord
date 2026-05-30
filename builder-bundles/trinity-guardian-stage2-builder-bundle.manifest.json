@@ -1,14 +1,14 @@
 {
   "archive": "trinity-guardian-stage2-builder-bundle.tar.gz",
-  "archive_sha256": "5b3bf47010e3d9bf45f23f6ea1be00947d3a726cb9e71c514d8caf7851e705f0",
-  "archive_size_bytes": 59870,
+  "archive_sha256": "c258372eab5c571dd3f7e96fa91b8d4a6e1278191be7255affb41f4df96d967c",
+  "archive_size_bytes": 59113,
   "bundle": "guardian_listing_stage_2",
   "entrypoint": "scripts/build_guardian_listing_request_payload.py",
   "files": [
     {
       "path": "api/agent-issue-gateway-payload-schema.v1.json",
-      "sha256": "5975ad6fc08257c235aa16bbd689364e4ab215a09c41aa2384bd07a90f6a68ac",
-      "size_bytes": 50193
+      "sha256": "8e58feceaeb27a947179626e0421a653375f4b36d4c66f337cae191dc5c5a345",
+      "size_bytes": 49254
     },
     {
       "path": "api/agent-output-policy.v1.json",
@@ -17,18 +17,18 @@
     },
     {
       "path": "api/agent-submit-gateway.json",
-      "sha256": "6ee8997ad35ff56754c99cc875c9ef5c81acd4414af19620ee17fb342d79c1b9",
-      "size_bytes": 24287
+      "sha256": "16fa945350ab39cd449909c8ffb650e1a46b47f4e59718076f99f28e1b8de58b",
+      "size_bytes": 24013
     },
     {
       "path": "api/gateway-builder-route-map.v1.json",
-      "sha256": "81de929fb0bf754019b26a6694a6292f54797c77697c685d191d7f3914785cb0",
-      "size_bytes": 7704
+      "sha256": "9c29657c4e73502b36b4f7f3be7dac840fc2d0d4d73348e4e63513cc1b7918ac",
+      "size_bytes": 7112
     },
     {
       "path": "api/gateway-workflows.v1.json",
-      "sha256": "f0efcf5dedbdb8140d7543f488b7f824af799ee618a6329d1a9e91b25834187d",
-      "size_bytes": 29734
+      "sha256": "c025139b069e874fd7ce4421130050d31d4bb6772849f63a7bc5f995d9882a34",
+      "size_bytes": 28761
     },
     {
       "path": "api/guardian-listing-oath.v1.txt",
@@ -47,8 +47,8 @@
     },
     {
       "path": "scripts/archive_readiness_gate.py",
-      "sha256": "d86ab36ab8b443e9d4e352e11a8a0f88ad966f39caa71da67c3802215124200e",
-      "size_bytes": 59349
+      "sha256": "7024ba21884519a8bbf4d8afb063ec9ca173e3f9cd168eec9f740fc9a021d685",
+      "size_bytes": 58368
     },
     {
       "path": "scripts/attach_agent_authorship_proof.mjs",
@@ -117,8 +117,8 @@
     },
     {
       "path": "scripts/validate_gateway_payload.py",
-      "sha256": "d15f21e0c0ff38266d8870d982299746bb8dec8b585d1b036d839891436d4b80",
-      "size_bytes": 51429
+      "sha256": "3d3b78fbbcad6283bfed7150c8c695bb5cc8d1d0dd97b2970c5c421aa3261532",
+      "size_bytes": 50769
     }
   ],
   "forbidden_contents_checked": [

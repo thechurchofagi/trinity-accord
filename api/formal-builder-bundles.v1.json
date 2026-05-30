@@ -30,8 +30,8 @@
       "archive_name": "trinity-pure-echo-builder-bundle.tar.gz",
       "archive_url": "/builder-bundles/trinity-pure-echo-builder-bundle.tar.gz",
       "manifest_url": "/builder-bundles/trinity-pure-echo-builder-bundle.manifest.json",
-      "sha256": "69dec548256f1d1fab47692ed8d6ec3061193c0a68564f5951f13fb383a344ef",
-      "size_bytes": 59824,
+      "sha256": "30a9d87acb1cd3235a7b540f63ac7d32ce7f125802fa1a4cd2e4d70b77a9fcd0",
+      "size_bytes": 59895,
       "requires_full_repo_clone": false,
       "requires_exact_readback": true,
       "authorship_proof_default": true,
@@ -130,8 +130,8 @@
       "archive_name": "trinity-guardian-signed-echo-builder-bundle.tar.gz",
       "archive_url": "/builder-bundles/trinity-guardian-signed-echo-builder-bundle.tar.gz",
       "manifest_url": "/builder-bundles/trinity-guardian-signed-echo-builder-bundle.manifest.json",
-      "sha256": "eba21441d5333c22730096400a1d7284e2042d144586c06563e214001728e35a",
-      "size_bytes": 67493,
+      "sha256": "cd8512d4fef4c9f3c07a9339830ff27970605402b5751454882ae86625ee8c3b",
+      "size_bytes": 67559,
       "requires_full_repo_clone": false,
       "requires_guardian_identity": true,
       "private_keys_must_not_be_submitted": true,
@@ -153,5 +153,5 @@
       "scripts/agent_authorship_common.py"
     ]
   },
-  "source_digest": "acfaf1a45b27d92a"
+  "source_digest": "08ec84682d84608a"
 }
