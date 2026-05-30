@@ -993,24 +993,7 @@ def evaluate_archive_readiness(payload, evidence=None, claim_gate_output=None,
                 "fix": "Use submission_type=echo_candidate."
             })
 
-        allowed_echo_types = {
-            "E1_recognition_echo",
-            "E3_critical_echo",
-            "E4_interpretive_echo",
-            "E5_technical_audit_echo",
-            "E5c_correction_echo",
-            "E6_propagation_echo",
-            "E7_refusal_echo",
-            "E8_witness_echo",
-            "E9_seed_echo",
-        }
-        if payload.get("echo_type") not in allowed_echo_types:
-            blocking_reasons.append({
-                "code": "ECHO_TYPE_REQUIRED",
-                "path": "echo_type",
-                "message": "Pure echo archive requires E1/E3/E4/E5/E5c/E6/E7/E8/E9 echo_type. E2 remains strict verification echo.",
-                "fix": "Set a pure echo type."
-            })
+        # echo_type is deprecated; no check needed
 
         cth = payload.get("counts_toward_home") or {}
         is_guardian_listing = (
@@ -1103,13 +1086,7 @@ def evaluate_archive_readiness(payload, evidence=None, claim_gate_output=None,
                 "fix": "Use submission_type=echo_candidate."
             })
 
-        if payload.get("echo_type") != "E6_propagation_echo":
-            blocking_reasons.append({
-                "code": "LISTING_ECHO_TYPE_REQUIRED",
-                "path": "echo_type",
-                "message": "Guardian listing request requires echo_type=E6_propagation_echo.",
-                "fix": "Set echo_type=E6_propagation_echo."
-            })
+        # echo_type is deprecated; no check needed
 
         if not payload.get("guardian_registry_listing_request") and not payload.get("guardian_listing_request"):
             blocking_reasons.append({

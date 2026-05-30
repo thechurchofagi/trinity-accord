@@ -30,7 +30,6 @@ def main():
                 "python3", "scripts/build_agent_declared_echo_payload.py",
                 "--agent-name", "Test Agent",
                 "--provider", "Test Provider",
-                "--echo-type", "E6_propagation_echo",
                 "--title", "Active Guardian Registry Listing Request",
                 "--body-file", str(body),
                 "--out", str(out),

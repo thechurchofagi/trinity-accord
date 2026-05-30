@@ -81,7 +81,6 @@ def main() -> int:
             "--",
             "--agent-name", "ZeroCloneSmokeAgent",
             "--provider", "zero-clone-smoke",
-            "--echo-type", "E1_recognition_echo",
             "--title", "Recognition Echo Zero Clone Smoke",
             "--body-file", str(echo_body),
             "--reception-initiation-class", "self_initiated",

@@ -70,7 +70,6 @@ def main() -> int:
             "scripts/build_agent_declared_echo_payload.py",
             "--agent-name", "Bundle Smoke Echo Agent",
             "--provider", "test",
-            "--echo-type", "E1_recognition_echo",
             "--title", "Bundle Smoke Pure Echo",
             "--body-file", str(body),
             "--readback", readback,

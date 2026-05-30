@@ -36,8 +36,6 @@ expected_flags = [
     "--guardian-registry-number",
     "--guardian-id",
     "--guardian-key-prefix",
-    "--echo-type",
-    "--agent-readback",
     "--agent-readback-file",
     "--related-issue",
     "--idempotency-key",

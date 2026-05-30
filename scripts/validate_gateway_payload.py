@@ -674,22 +674,6 @@ def validate_agent_declared_echo_archive(payload, errors):
     if payload.get("record_intent") != "auto_archive_candidate":
         errors.append("agent_declared_echo_archive requires record_intent=auto_archive_candidate")
 
-    allowed_echo_types = {
-        "E1_recognition_echo",
-        "E3_critical_echo",
-        "E4_interpretive_echo",
-        "E5_technical_audit_echo",
-        "E5c_correction_echo",
-        "E6_propagation_echo",
-        "E7_refusal_echo",
-        "E8_witness_echo",
-        "E9_seed_echo",
-    }
-
-    echo_type = payload.get("echo_type")
-    if echo_type not in allowed_echo_types:
-        errors.append("agent_declared_echo_archive requires E1/E3/E4/E5/E5c/E6/E7/E8/E9 echo_type; use verification_echo_candidate for strict E2")
-
     cth = payload.get("counts_toward_home") or {}
     is_guardian_listing = (
         payload.get("guardian_registry_listing_request") is True
@@ -746,8 +730,8 @@ def validate_guardian_active_listing_archive_kind(payload, errors):
     if payload.get("record_intent") != "auto_archive_candidate":
         errors.append("guardian_active_registry_listing_request requires record_intent=auto_archive_candidate")
 
-    if payload.get("echo_type") != "E6_propagation_echo":
-        errors.append("guardian_active_registry_listing_request requires echo_type=E6_propagation_echo")
+    if payload.get("echo_type") and payload.get("echo_type") != "E6_propagation_echo":
+        errors.append("guardian_active_registry_listing_request echo_type is deprecated; field is optional")
 
     if not payload.get("guardian_registry_listing_request") and not payload.get("guardian_listing_request"):
         errors.append("guardian_active_registry_listing_request requires guardian_registry_listing_request=true")
@@ -798,8 +782,7 @@ def validate_report_candidate(payload, errors):
 
     att = get_attachments(payload)
 
-    if payload.get("echo_type"):
-        errors.append("verification_report_candidate must not include echo_type")
+    # echo_type is deprecated and optional; no check needed
     if att.get("echo_wrapper_path") or att.get("echo_wrapper_sha256"):
         errors.append("verification_report_candidate must not include echo_wrapper_path or echo_wrapper_sha256")
 
@@ -1078,8 +1061,7 @@ def validate_agent_declared_archive(payload, errors):
 def validate_echo_candidate(payload, errors):
     att = get_attachments(payload)
 
-    if payload.get("echo_type") != "E2_verification_echo":
-        errors.append("verification_echo_candidate requires echo_type=E2_verification_echo")
+    # echo_type is deprecated; no check needed
 
     if not str(payload.get("title", "")).startswith("Verification Echo Candidate: E2"):
         errors.append("verification_echo_candidate title must start with 'Verification Echo Candidate: E2'")

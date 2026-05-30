@@ -44,7 +44,6 @@ def main() -> None:
             str(ROOT / "scripts" / "build_agent_declared_echo_payload.py"),
             "--agent-name", "TestAgent",
             "--provider", "TestProvider",
-            "--echo-type", "E1_recognition_echo",
             "--title", "E1 Read-Oriented Echo — Guardian 00002",
             "--body-file", str(body),
             "--no-authorship-proof",

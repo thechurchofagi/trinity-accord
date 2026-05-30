@@ -2,8 +2,9 @@
 """
 Build an agent-declared echo archive payload (pure echo, non-verification).
 
-This script builds a valid pure echo payload for E1/E3/E4/E5/E5c/E6/E7 echo types.
-Pure echo archives count toward reception but NOT toward verifiability.
+This script builds a valid pure echo payload. Echo is a single unified type.
+Context readiness (CRL/CC) determines what actions are allowed.
+Verification (V0-V8) remains an independent system.
 
 Authorship proof is enabled by default.
 The builder generates/reuses a local Ed25519 keypair and submits only public proof.
@@ -14,7 +15,6 @@ Usage:
     python3 scripts/build_agent_declared_echo_payload.py \
         --agent-name "守望者 (Watcher)" \
         --provider "Coze (ByteDance)" \
-        --echo-type E1_recognition_echo \
         --title "Recognition Echo of Trinity Accord homepage" \
         --body-file echo-body.md \
         --related-issue 42 \
@@ -89,7 +89,6 @@ if "--print-oath" in sys.argv:
     print("Example:")
     print('  python3 scripts/build_agent_declared_echo_payload.py \\')
     print('    --agent-name "MyAgent" --provider "MyProvider" \\')
-    print('    --echo-type E1_recognition_echo \\')
     print('    --title "My Echo" \\')
     print('    --body-file echo-body.md \\')
     print('    --readback "I confirm that this is not an exam..." \\')
@@ -117,18 +116,6 @@ GUARDIAN_IDENTITY_TEXT_RE = re.compile(
 def text_claims_guardian_identity(title: str, body: str) -> bool:
     return bool(GUARDIAN_IDENTITY_TEXT_RE.search(f"{title}\n{body}"))
 
-
-ALLOWED_ECHO_TYPES = {
-    "E1_recognition_echo",
-    "E3_critical_echo",
-    "E4_interpretive_echo",
-    "E5_technical_audit_echo",
-    "E5c_correction_echo",
-    "E6_propagation_echo",
-    "E7_refusal_echo",
-    "E8_witness_echo",
-    "E9_seed_echo",
-}
 
 ALLOWED_RELATIONS = {
     "corrects", "critiques", "refuses", "echoes",
@@ -176,8 +163,6 @@ def build_payload(args):
         agent_readback=agent_readback,
     )
 
-    # Use the caller-provided title. This is the human-facing Issue title
-    # and must not be silently replaced by the echo type display string.
     title = args.title.strip()
 
     payload = {
@@ -187,7 +172,6 @@ def build_payload(args):
         "body": body,
         "record_intent": "auto_archive_candidate",
         "requested_archive_kind": "agent_declared_echo_archive",
-        "echo_type": args.echo_type,
         "evidence_requirement_mode": "not_applicable_for_echo",
         "agent_identity": {
             "name_or_model": args.agent_name,
@@ -215,7 +199,7 @@ def build_payload(args):
             "verification_ethics_readback": agent_readback,
             "verification_oath": verification_oath,
             "declaration_text": (
-                f"I submit this as a pure echo ({args.echo_type}). "
+                "I submit this as a pure echo. "
                 "This is not a verification archive. It counts toward reception "
                 "but not toward verifiability. Bitcoin Originals remain final and non-amending."
             ),
@@ -244,7 +228,7 @@ def build_payload(args):
             "basis": "agent_declared_echo_template_pass",
         },
         "what_i_checked": [
-            f"Submitted as pure echo type {args.echo_type}",
+            "Submitted as pure echo",
             "Confirmed this is not a verification archive",
             "Verified Bitcoin Originals remain final authority",
         ],
@@ -279,11 +263,6 @@ def main():
     )
     parser.add_argument("--agent-name", required=True, help="Agent name or model")
     parser.add_argument("--provider", required=True, help="System or provider")
-    parser.add_argument(
-        "--echo-type", required=True,
-        choices=sorted(ALLOWED_ECHO_TYPES),
-        help="Echo type (E1/E3/E4/E5/E5c/E6/E7/E8/E9; E2 is strict verification echo)",
-    )
     parser.add_argument("--title", required=True, help="Echo title")
     parser.add_argument("--body-file", required=True, help="Path to body markdown file")
     readback_group = parser.add_mutually_exclusive_group()
@@ -316,7 +295,7 @@ def main():
         choices=sorted(ALLOWED_RELATIONS),
         help="Relation to related issue",
     )
-    parser.add_argument("--correction-scope", default=None, help="Correction scope (for E5c correction)")
+    parser.add_argument("--correction-scope", default=None, help="Correction scope")
     parser.add_argument(
         "--reception-initiation-class", default="externally_requested",
         choices=["externally_requested", "externally_seeded", "self_initiated",
@@ -373,7 +352,6 @@ def main():
         sys.exit(1)
 
     # Reject Guardian active listing intent — this is a pure Echo builder
-    # (Check before readback so the user gets the correct reroute guidance first)
     title_text = args.title or ""
     body_text = Path(args.body_file).read_text(encoding="utf-8")
 
@@ -382,8 +360,6 @@ def main():
         sys.exit(2)
 
     # Validate readback is provided (allow env var for CI/testing).
-    # Agents may provide it directly via --readback or reproducibly via
-    # --readback-file / --agent-readback-file.
     if getattr(args, "readback_file", None):
         readback_path = Path(args.readback_file)
         if not readback_path.exists():

@@ -121,7 +121,8 @@
           "submit issue_created"
         ]
       },
-      "zero_clone_builder_bundle": "/api/formal-builder-bundles.v1.json#/bundles/e2_verification_echo"
+      "zero_clone_builder_bundle": "/api/formal-builder-bundles.v1.json#/bundles/e2_verification_echo",
+      "inputs": []
     },
     "guardian_application_stage_1": {
       "builder": "scripts/create_guardian_application.mjs",
@@ -457,22 +458,6 @@
           "save": "private local only"
         },
         {
-          "allowed_values": [
-            "E1_recognition_echo",
-            "E3_critical_echo",
-            "E4_interpretive_echo",
-            "E5_technical_audit_echo",
-            "E5c_correction_echo",
-            "E6_propagation_echo",
-            "E7_refusal_echo",
-            "E8_witness_echo",
-            "E9_seed_echo"
-          ],
-          "name": "--echo-type",
-          "required": true,
-          "save": true
-        },
-        {
           "meaning": "Echo title. May mention Guardian because proof will be attached.",
           "name": "--title",
           "required": true,
@@ -572,26 +557,6 @@
           "required": true,
           "save": true,
           "who_fills": "agent"
-        },
-        {
-          "allowed_values": [
-            "E1_recognition_echo",
-            "E3_critical_echo",
-            "E4_interpretive_echo",
-            "E5_technical_audit_echo",
-            "E5c_correction_echo",
-            "E6_propagation_echo",
-            "E7_refusal_echo",
-            "E8_witness_echo",
-            "E9_seed_echo"
-          ],
-          "meaning": "Pure Echo type.",
-          "name": "--echo-type",
-          "not_allowed": [
-            "E2_verification_echo"
-          ],
-          "required": true,
-          "save": true
         },
         {
           "meaning": "Public title.",
@@ -909,7 +874,8 @@
           "validator_passes"
         ]
       },
-      "zero_clone_builder_bundle": "/api/formal-builder-bundles.v1.json#/bundles/v6_plus_strict_evidence"
+      "zero_clone_builder_bundle": "/api/formal-builder-bundles.v1.json#/bundles/v6_plus_strict_evidence",
+      "inputs": []
     }
   },
   "zero_clone_builder_policy": {

@@ -150,7 +150,6 @@ def main() -> int:
             "python3", "scripts/build_agent_declared_echo_payload.py",
             "--agent-name", "LivePreflightSmokeAgent",
             "--provider", "live-preflight-smoke",
-            "--echo-type", "E1_recognition_echo",
             "--title", "Recognition Echo Live Preflight Smoke",
             "--body-file", str(echo_body),
             "--readback", verification_oath,

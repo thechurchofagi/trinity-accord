@@ -82,8 +82,6 @@ def main() -> None:
     allowed = allowed_canonical_echo_types()
 
     for workflow_id in ["pure_echo", "guardian_signed_echo"]:
-        echo_input = input_by_name(workflows, workflow_id, "--echo-type")
-        values = echo_input.get("allowed_values")
         assert values == canonical, (workflow_id, values)
         assert "E2_verification_echo" not in values, workflow_id
         for value in values:

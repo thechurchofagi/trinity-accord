@@ -39,7 +39,6 @@ def main() -> int:
             "python3", "scripts/build_agent_declared_echo_payload.py",
             "--agent-name", "SourceSmokeAgent",
             "--provider", "source-smoke",
-            "--echo-type", "E1_recognition_echo",
             "--title", "Recognition Echo Source Smoke",
             "--body-file", str(echo_body),
             "--readback", verification_oath,

@@ -162,7 +162,6 @@ def main() -> int:
                 "--route", "pure_echo",
                 "--agent-name", "AuthorshipClosureSmokeAgent",
                 "--provider", "authorship-closure-smoke",
-                "--echo-type", "E1_recognition_echo",
                 "--title", "Authorship Closure Smoke Test",
                 "--body-file", str(echo_body),
                 "--readback", oath_text,

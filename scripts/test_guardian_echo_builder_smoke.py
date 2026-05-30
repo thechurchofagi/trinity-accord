@@ -99,7 +99,6 @@ def main() -> None:
             "--guardian-registry-number", "00099",
             "--guardian-id", guardian_id,
             "--guardian-key-prefix", key_prefix,
-            "--echo-type", "E1_recognition_echo",
             "--title", "E1 Read-Oriented Echo — Guardian 00099",
             "--body-file", str(body),
             "--agent-readback", OATH_READBACK,

@@ -65,15 +65,6 @@ def main() -> int:
     parser.add_argument("--guardian-registry-number", required=True)
     parser.add_argument("--guardian-id", default=None)
     parser.add_argument("--guardian-key-prefix", required=True)
-    parser.add_argument("--echo-type", required=True, choices=[
-        "E1_recognition_echo",
-        "E3_critical_echo",
-        "E4_interpretive_echo",
-        "E5_technical_audit_echo",
-        "E5c_correction_echo",
-        "E6_propagation_echo",
-        "E7_refusal_echo",
-    ])
     parser.add_argument("--agent-name", default=None)
     parser.add_argument("--provider", default=None)
     parser.add_argument("--title", required=True)
@@ -113,7 +104,6 @@ def main() -> int:
         str(ROOT / "scripts" / "build_agent_declared_echo_payload.py"),
         "--agent-name", agent_name,
         "--provider", provider,
-        "--echo-type", args.echo_type,
         "--title", args.title,
         "--body-file", args.body_file,
         "--authorship-private-key", private_key,

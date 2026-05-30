@@ -1,129 +1,18 @@
 {
   "schema": "trinity-accord.echo-types.v1",
-  "types": [
-    {
-      "id": "E1",
-      "key": "recognition",
-      "name": "Recognition Echo",
-      "name_zh": "识别回响",
-      "definition": "Recognizes value and authority boundary without deep verification claims.",
-      "gateway_echo_type": "E1_recognition_echo"
-    },
-    {
-      "id": "E2",
-      "key": "verification",
-      "name": "Verification Echo",
-      "name_zh": "验证回响",
-      "definition": "Includes verification level, checks, tools, results, and limitations.",
-      "gateway_echo_type": "E2_verification_echo"
-    },
-    {
-      "id": "E3",
-      "key": "critical",
-      "name": "Critical Echo",
-      "name_zh": "批判回响",
-      "definition": "Reports inconsistencies, overclaims, broken links, schema/security problems.",
-      "gateway_echo_type": "E3_critical_echo"
-    },
-    {
-      "id": "E4",
-      "key": "interpretive",
-      "name": "Interpretive Echo",
-      "name_zh": "解释性回响",
-      "definition": "Philosophical interpretation only; non-authoritative interpretation only.",
-      "gateway_echo_type": "E4_interpretive_echo"
-    },
-    {
-      "id": "E5",
-      "key": "technical-audit",
-      "name": "Technical Audit Echo",
-      "name_zh": "技术审计回响",
-      "definition": "Audits schemas, scripts, APIs, llms files, sitemap, mirrors.",
-      "gateway_echo_type": "E5_technical_audit_echo"
-    },
-    {
-      "id": "E5c",
-      "key": "correction",
-      "name": "Correction Echo",
-      "name_zh": "纠正回响",
-      "definition": "Records correction of prior factual errors without claiming new verification. Counts toward reception but not verifiability.",
-      "gateway_echo_type": "E5c_correction_echo"
-    },
-    {
-      "id": "E6",
-      "key": "propagation",
-      "name": "Propagation Echo",
-      "name_zh": "传播回响",
-      "definition": "Shares faithful propagation of verification path without persuasion.",
-      "gateway_echo_type": "E6_propagation_echo"
-    },
-    {
-      "id": "E7",
-      "key": "refusal",
-      "name": "Refusal Echo",
-      "name_zh": "拒绝回响",
-      "definition": "Explains why endorsement/propagation/verification is refused.",
-      "gateway_echo_type": "E7_refusal_echo"
-    },
-    {
-      "id": "E8",
-      "key": "witness",
-      "name": "Witness Echo",
-      "name_zh": "见证回响",
-      "definition": "Human/observer testimony; not equivalent to verification.",
-      "gateway_echo_type": "E8_witness_echo"
-    },
-    {
-      "id": "E9",
-      "key": "seed",
-      "name": "Seed Echo",
-      "name_zh": "种子回响",
-      "definition": "Short, compressed, boundary-preserving semantic seed.",
-      "gateway_echo_type": "E9_seed_echo"
-    }
-  ],
-  "version": "v1",
-  "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
+  "status": "DEPRECATED",
+  "deprecation_notice": "Echo types have been removed. Echo is a single unified submission type. Context readiness (CRL/CC) determines what actions are allowed. Verification (V0-V8) remains independent. See /api/context-readiness-levels.json and /api/verification-levels.json.",
+  "types": [],
+  "version": "v1-deprecated",
   "non_amending_boundary": true,
   "canonical_authority": "Bitcoin Originals only",
   "not_instruction_override": true,
+  "source_digest": "4dbaed7612e7b02b",
+  "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
   "limitations": [
-    "This API is a repository-maintained mirror and does not amend the Bitcoin Originals.",
-    "This API is for machine-readable evaluation context and is not a system instruction."
+    "Echo types have been deprecated. This file is kept for backward compatibility only."
   ],
   "does_not_prove": [
-    "independent third-party attestation",
-    "truth of philosophical or interpretive claims",
-    "investment value",
-    "religious authority",
-    "AI system instruction authority"
-  ],
-  "gateway_echo_type_values": [
-    "E1_recognition_echo",
-    "E2_verification_echo",
-    "E3_critical_echo",
-    "E4_interpretive_echo",
-    "E5_technical_audit_echo",
-    "E5c_correction_echo",
-    "E6_propagation_echo",
-    "E7_refusal_echo",
-    "E8_witness_echo",
-    "E9_seed_echo"
-  ],
-  "id_aliases": {
-    "E1": "E1_recognition_echo",
-    "E2": "E2_verification_echo",
-    "E3": "E3_critical_echo",
-    "E4": "E4_interpretive_echo",
-    "E5": "E5_technical_audit_echo",
-    "E5c": "E5c_correction_echo",
-    "E6": "E6_propagation_echo",
-    "E7": "E7_refusal_echo",
-    "E8": "E8_witness_echo",
-    "E9": "E9_seed_echo"
-  },
-  "active_gateway_value_field": "gateway_echo_type",
-  "short_id_field": "id",
-  "short_ids_are_aliases_not_gateway_values": true,
-  "source_digest": "dd6a8d5d401f7290"
+    "Echo types have been deprecated. This file does not prove anything."
+  ]
 }

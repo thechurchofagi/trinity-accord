@@ -230,7 +230,6 @@ def test_builder_guardian_registration_smoke():
                 "python3", "scripts/build_agent_declared_echo_payload.py",
                 "--agent-name", "Guardian Builder Smoke Agent",
                 "--provider", "local-test",
-                "--echo-type", "E6_propagation_echo",
                 "--title", "Guardian builder registration smoke",
                 "--body-file", str(body_path),
                 "--authorship-key-prefix", str(key_prefix),

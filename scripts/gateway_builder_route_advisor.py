@@ -1,17 +1,13 @@
 #!/usr/bin/env python3
-"""Route advisor for Gateway payload builders.
+"""Route advisor for Gateway payload routes to the correct builder based on payload content, not echo type.
 
-This tool detects whether a payload/intention belongs to:
-- pure echo,
-- V0-V5 agent-declared archive,
-- Guardian Stage 1 application,
-- Guardian Stage 2 listing,
-- Guardian-signed echo.
-
-It is intentionally dependency-light so Gateway errors and local preflight can
-return actionable builder guidance instead of vague validation failures.
+Detection priority:
+1. Guardian listing/application/retirement
+2. Guardian-signed echo
+3. Verification archive (has agent_declared_protocol_level)
+4. Pure echo (requested_archive_kind == agent_declared_echo_archive)
+5. Unknown
 """
-
 from __future__ import annotations
 
 import argparse
@@ -22,16 +18,6 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 ROUTE_MAP_PATH = ROOT / "api" / "gateway-builder-route-map.v1.json"
-
-PURE_ECHO_TYPES = {
-    "E1_recognition_echo",
-    "E3_critical_echo",
-    "E4_interpretive_echo",
-    "E5_technical_audit_echo",
-    "E5c_correction_echo",
-    "E6_propagation_echo",
-    "E7_refusal_echo",
-}
 
 V0_V5_LEVELS = {"V0", "V1", "V2", "V3", "V4", "V4+", "V5"}
 
@@ -60,13 +46,12 @@ def detect_route(payload: dict[str, Any]) -> str:
     if payload.get("guardian_presence_proof") and payload.get("requested_archive_kind") == "agent_declared_echo_archive":
         return "guardian_signed_echo"
 
-    echo_type = payload.get("echo_type")
-    if echo_type in PURE_ECHO_TYPES or payload.get("requested_archive_kind") == "agent_declared_echo_archive":
-        return "pure_echo"
-
     level = payload.get("agent_declared_protocol_level")
     if level in V0_V5_LEVELS or payload.get("requested_archive_kind") == "agent_declared_verification_archive":
         return "v0_v5_agent_declared_archive"
+
+    if payload.get("requested_archive_kind") == "agent_declared_echo_archive":
+        return "pure_echo"
 
     return "unknown"
 

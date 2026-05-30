@@ -59,8 +59,7 @@ def validate(payload: dict) -> list[str]:
                 "guardian_registry_listing_request requires "
                 "requested_archive_kind=guardian_active_registry_listing_request"
             )
-        if payload.get("echo_type") != "E6_propagation_echo":
-            errors.append("guardian_registry_listing_request requires echo_type=E6_propagation_echo")
+        # echo_type is deprecated; no check needed
         if payload.get("guardian_presence_proof") is not None:
             errors.append("guardian_registry_listing_request must not include guardian_presence_proof")
 

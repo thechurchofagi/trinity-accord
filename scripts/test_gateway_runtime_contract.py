@@ -59,13 +59,11 @@ def main() -> int:
         if field not in data.get("required_preflight_response_fields", []):
             errors.append(f"required_preflight_response_fields missing {field}")
 
-    for field in ["runtime_version", "schema_digest", "echo_type_enum_digest", "supported_routes_digest"]:
+    for field in ["runtime_version", "schema_digest", "supported_routes_digest"]:
         if field not in data.get("gateway_runtime_required_fields", []):
             errors.append(f"gateway_runtime_required_fields missing {field}")
 
-    enum_values = set(data.get("active_echo_type_values", []))
-    if enum_values != ACTIVE_ECHO_TYPES:
-        errors.append(f"active_echo_type_values mismatch: {sorted(enum_values)}")
+    # echo_type values are deprecated; no check needed
 
     routes = set(data.get("required_supported_routes", []))
     missing_routes = sorted(REQUIRED_ROUTES - routes)

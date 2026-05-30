@@ -336,7 +336,7 @@
       },
       "intent": "verify_v0_v5_agent_declared",
       "issue_oath_summary_required": true,
-      "level_selection_note": "If uncertain, choose a lower V0\u2013V5 template level or Pure Echo. High levels may trigger non-blocking guardrail warnings but do not require strict evidence.",
+      "level_selection_note": "If uncertain, choose a lower V0–V5 template level or Pure Echo. High levels may trigger non-blocking guardrail warnings but do not require strict evidence.",
       "must_follow_post_submit_readback": true,
       "must_use_workflow_machine_api": "/api/gateway-workflows.v1.json",
       "must_use_workflow_manual": "/gateway-workflows/",
@@ -597,17 +597,6 @@
       "/gateway/examples/agent-declared-v4/raw"
     ],
     "do_not_wrap_payload": true,
-    "echo_types": [
-      "E1_recognition_echo",
-      "E3_critical_echo",
-      "E4_interpretive_echo",
-      "E5_technical_audit_echo",
-      "E5c_correction_echo",
-      "E6_propagation_echo",
-      "E7_refusal_echo",
-      "E8_witness_echo",
-      "E9_seed_echo"
-    ],
     "enabled": true,
     "fallback_when": "agent cannot clone repository or run Python builder",
     "preferred_builder": "scripts/build_agent_declared_echo_payload.py",

@@ -68,7 +68,6 @@ with tempfile.TemporaryDirectory() as td:
         str(BUILDER),
         "--agent-name", "CI Test Agent",
         "--provider", "CI",
-        "--echo-type", "E1_recognition_echo",
         "--title", "Pure Echo: readback file alias test",
         "--body-file", str(body),
         "--agent-readback-file", str(readback),
