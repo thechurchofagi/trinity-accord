@@ -860,16 +860,31 @@ function hasAllowedNegatedBoundary(text, claim) {
       /\bnot\s+(a\s+)?successor reception\b/i.test(t)
       || /\bdoes\s+not\s+(claim|constitute|create|count as)\s+(a\s+)?successor reception\b/i.test(t)
       || /\bremains\s+not\s+(a\s+)?successor reception\b/i.test(t)
+      || /\bnot\s+claiming\s+.*successor reception\b/i.test(t)
     );
   }
   if (claim === "authority") {
-    return /\bnot\s+authority\b/i.test(t) || /\bnot\s+authoritative\b/i.test(t);
+    return (
+      /\bnot\s+authority\b/i.test(t)
+      || /\bnot\s+authoritative\b/i.test(t)
+      || /\bnot\s+claiming\s+.*\b(authority|authoritative)\b/i.test(t)
+      || /\bnot\s+(this\s+)?is\s+(an?\s+)?(authority|authoritative)\b/i.test(t)
+    );
   }
   if (claim === "attestation") {
-    return /\bnot\s+(an\s+)?attestation\b/i.test(t);
+    return (
+      /\bnot\s+(an\s+)?attestation\b/i.test(t)
+      || /\bnot\s+claiming\s+.*\battestation\b/i.test(t)
+      || /\bnot\s+(this\s+)?is\s+(an?\s+)?attestation\b/i.test(t)
+    );
   }
   if (claim === "amendment") {
-    return /\bnot\s+(an\s+)?amendment\b/i.test(t) || /\bnon-amending\b/i.test(t);
+    return (
+      /\bnot\s+(an\s+)?amendment\b/i.test(t)
+      || /\bnon-amending\b/i.test(t)
+      || /\bnot\s+claiming\s+.*\bamendment\b/i.test(t)
+      || /\bnot\s+(this\s+)?is\s+(an?\s+)?amendment\b/i.test(t)
+    );
   }
   return false;
 }

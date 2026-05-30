@@ -16,16 +16,31 @@ function sentenceHasNegatedBoundary(sentence, claim) {
       /\bnot\s+(a\s+)?successor reception\b/i.test(s)
       || /\bdoes\s+not\s+(claim|constitute|create|count as)\s+(a\s+)?successor reception\b/i.test(s)
       || /\bremains\s+not\s+(a\s+)?successor reception\b/i.test(s)
+      || /\bnot\s+claiming\s+.*successor reception\b/i.test(s)
     );
   }
   if (claim === "authority") {
-    return /\bnot\s+authority\b/i.test(s) || /\bnot\s+authoritative\b/i.test(s);
+    return (
+      /\bnot\s+authority\b/i.test(s)
+      || /\bnot\s+authoritative\b/i.test(s)
+      || /\bnot\s+claiming\s+.*\b(authority|authoritative)\b/i.test(s)
+      || /\bnot\s+(this\s+)?is\s+(an?\s+)?(authority|authoritative)\b/i.test(s)
+    );
   }
   if (claim === "attestation") {
-    return /\bnot\s+(an\s+)?attestation\b/i.test(s);
+    return (
+      /\bnot\s+(an\s+)?attestation\b/i.test(s)
+      || /\bnot\s+claiming\s+.*\battestation\b/i.test(s)
+      || /\bnot\s+(this\s+)?is\s+(an?\s+)?attestation\b/i.test(s)
+    );
   }
   if (claim === "amendment") {
-    return /\bnot\s+(an\s+)?amendment\b/i.test(s) || /\bnon-amending\b/i.test(s);
+    return (
+      /\bnot\s+(an\s+)?amendment\b/i.test(s)
+      || /\bnon-amending\b/i.test(s)
+      || /\bnot\s+claiming\s+.*\bamendment\b/i.test(s)
+      || /\bnot\s+(this\s+)?is\s+(an?\s+)?amendment\b/i.test(s)
+    );
   }
   return false;
 }
@@ -134,3 +149,20 @@ assert.equal(
 );
 
 console.log("PASS: test-forbidden-archive-claims-negation (cross-line)");
+
+// "not claiming this is authority" pattern (negation with intervening words)
+assert.equal(
+  findForbiddenPositiveArchiveClaims(
+    "I am not claiming this is authority, amendment, or successor reception."
+  ).length, 0,
+  "'not claiming this is authority' must be allowed"
+);
+
+assert.equal(
+  findForbiddenPositiveArchiveClaims(
+    "I am not claiming this is authority. Bitcoin Originals remain final."
+  ).length, 0,
+  "'not claiming this is authority' (standalone) must be allowed"
+);
+
+console.log("PASS: test-forbidden-archive-claims-negation (not-claiming-pattern)");
