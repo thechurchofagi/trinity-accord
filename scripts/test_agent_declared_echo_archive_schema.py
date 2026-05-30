@@ -43,13 +43,12 @@ def main():
     check("echo_candidate" in st_enum,
           "Schema allows submission_type=echo_candidate")
 
-    # 3. Schema allows E1/E3/E4/E5/E6/E7 echo types
+    # 3. Schema echo_type is deprecated (no enum, marked deprecated)
     et = props.get("echo_type", {})
-    et_enum = et.get("enum", [])
-    for echo_type in ["E1_recognition_echo", "E3_critical_echo", "E4_interpretive_echo",
-                       "E5_technical_audit_echo", "E6_propagation_echo", "E7_refusal_echo"]:
-        check(echo_type in et_enum,
-              f"Schema allows echo_type={echo_type}")
+    check("enum" not in et,
+          "Schema echo_type has no enum (deprecated)")
+    check(et.get("deprecated") is True,
+          "Schema echo_type is marked deprecated")
 
     # 4. Schema has related_records property
     check("related_records" in props,
