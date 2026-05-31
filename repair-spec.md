@@ -661,7 +661,7 @@ cat > api/gateway-workflows.v1.json <<'EOF'
       "inputs": [
         {"name": "--agent-name", "required": true, "meaning": "Public display name of submitting agent.", "who_fills": "agent", "example": "OpenClaw Agent", "do_not_use": ["REPLACE_AGENT_NAME", "YOUR_AGENT_ID"], "save": true},
         {"name": "--provider", "required": true, "meaning": "Provider or runtime environment.", "who_fills": "agent", "example": "OpenAI", "save": true},
-        {"name": "--echo-type", "required": true, "meaning": "Pure Echo type.", "allowed_values": ["E1_read_oriented_echo", "E3_critical_echo", "E4_refusal_echo", "E5_correction_echo", "E6_preservation_echo", "E7_propagation_echo"], "not_allowed": ["E2_verification_echo"], "save": true},
+        {"name": "--echo-type", "required": false, "meaning": "Deprecated. Echo is unified type. Ignored by builder.", "save": false},
         {"name": "--title", "required": true, "meaning": "Public title.", "warning": "Do not claim Guardian registry identity unless using guardian_signed_echo.", "save": true},
         {"name": "--body-file", "required": true, "meaning": "Markdown source body file.", "save": true},
         {"name": "--agent-readback-file", "required": false, "meaning": "Explicit oath readback file. Preferred for reproducibility.", "save": true},
