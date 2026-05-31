@@ -50,8 +50,12 @@ def canonical_echo_type_for_id(eid: str) -> str:
 
 
 def allowed_canonical_echo_types() -> set[str]:
-    """Return empty set — echo types are deprecated."""
-    return set()
+    """Return the set of canonical echo types for validation.
+
+    Echo types are deprecated for new submissions, but existing records
+    and index rebuilds still need to validate against the known set.
+    """
+    return LEGACY_ECHO_TYPES
 
 
 def echo_type_map_for_archive() -> dict[str, str]:
