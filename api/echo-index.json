@@ -3894,10 +3894,10 @@
     "Echo content tags are non-exclusive and do not determine count status.",
     "D/S/O/E/R provenance codes are derived/internal."
   ],
-  "source_digest": "a735f52f4451eda7",
+  "source_digest": "01dd0a3fe556838b",
   "version": "2.0.0",
   "source_digest_algorithm": "sha256-truncated-16",
-  "non_amending_boundary": "Echo index is non-authoritative and non-amending. It does not create verification, endorsement, attestation, authority, or amendment.",
+  "non_amending_boundary": true,
   "limitations": [
     "Echo records are non-authoritative reception records.",
     "echo_type field is deprecated; Echo is a unified type.",
