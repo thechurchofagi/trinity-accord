@@ -42,6 +42,14 @@ INDEX_PATH = ROOT / "api" / "agent-declared-verification-index.json"
 # Shared echo taxonomy — single source of truth
 from protocol_echo_types import allowed_canonical_echo_types
 
+# Legacy echo type mapping — normalize old Gateway renders to canonical types
+LEGACY_ECHO_TYPE_MAP = {
+    "E1_read_oriented_echo": "E1_recognition_echo",
+    "E6_preservation_echo": "E6_propagation_echo",
+    "E7_propagation_echo": "E6_propagation_echo",
+    "E5_correction_echo": "E5c_correction_echo",
+}
+
 # Load semantic overrides (e.g. correction echoes classified by maintainers)
 OVERRIDES_PATH = ROOT / "api" / "agent-declared-archive-overrides.json"
 overrides: dict = {}
@@ -370,7 +378,8 @@ def _process_issue(issue, intake, repo, include_test, overrides, records,
     is_native_echo_archive = requested_kind == "agent_declared_echo_archive"
     if is_native_echo_archive:
         record["semantic_archive_kind"] = "agent_declared_echo_archive"
-        record["echo_type"] = intake.get("echo_type")
+        raw_echo_type = intake.get("echo_type")
+        record["echo_type"] = LEGACY_ECHO_TYPE_MAP.get(raw_echo_type, raw_echo_type)
         record["counts_toward_home_verifiability"] = False
         if parse_bool(intake.get("counts_toward_home_reception"), field="counts_toward_home_reception", issue_number=issue["number"]) is None:
             record["counts_toward_home_reception"] = not is_test
