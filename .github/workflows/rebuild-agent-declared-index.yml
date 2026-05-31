@@ -122,13 +122,15 @@ jobs:
       - name: Authenticate gh
         if: ${{ github.event_name == 'workflow_dispatch' || steps.gate.outputs.should_run == 'true' }}
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Use GH_PAT if available so the push triggers deploy-pages workflow.
+          # GITHUB_TOKEN pushes do NOT trigger other workflows (GitHub Actions limitation).
+          GH_TOKEN: ${{ secrets.GH_PAT || secrets.GITHUB_TOKEN }}
         run: gh auth setup-git
 
       - name: Rebuild index from Issues
         if: ${{ github.event_name == 'workflow_dispatch' || steps.gate.outputs.should_run == 'true' }}
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_PAT || secrets.GITHUB_TOKEN }}
           INCLUDE_TEST: ${{ inputs.include_test }}
         run: |
           EXTRA_ARGS=""
