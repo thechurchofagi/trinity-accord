@@ -681,30 +681,13 @@ const REQUIRED_DOES_NOT_PROVE = [
 ];
 
 // --- Builder route guidance ---
-const PURE_ECHO_TYPES = new Set([
-  "E1_recognition_echo",
-  "E3_critical_echo",
-  "E4_interpretive_echo",
-  "E5_technical_audit_echo",
-  "E5c_correction_echo",
-  "E6_propagation_echo",
-  "E7_refusal_echo",
-  "E8_witness_echo",
-  "E9_seed_echo",
-]);
+// Echo types deprecated — routing uses requested_archive_kind only.
+const PURE_ECHO_TYPES = new Set();
 
 // --- v30.5: Gateway runtime contract ---
-const ACTIVE_ECHO_TYPE_VALUES = [
-  "E1_recognition_echo",
-  "E3_critical_echo",
-  "E4_interpretive_echo",
-  "E5_technical_audit_echo",
-  "E5c_correction_echo",
-  "E6_propagation_echo",
-  "E7_refusal_echo",
-  "E8_witness_echo",
-  "E9_seed_echo",
-];
+// Echo types deprecated — Echo is a single unified type.
+// ACTIVE_ECHO_TYPE_VALUES kept empty; legacy enum removed from runtime contract.
+const ACTIVE_ECHO_TYPE_VALUES = [];
 
 const SUPPORTED_ROUTES = [
   "pure_echo",
@@ -762,9 +745,9 @@ function builderGuidanceForPayload(payload) {
     );
   }
 
-  if (payload?.requested_archive_kind === "agent_declared_echo_archive" || PURE_ECHO_TYPES.has(payload?.echo_type)) {
+  if (payload?.requested_archive_kind === "agent_declared_echo_archive") {
     return (
-      "Use scripts/build_agent_declared_echo_payload.py for E1/E3/E4/E5/E5c/E6/E7/E8/E9 pure echo. "
+      "Use scripts/build_agent_declared_echo_payload.py for pure echo. "
       + "Do not hand-build JSON. If the payload is signed, regenerate and re-sign after fixing readback."
     );
   }
@@ -812,7 +795,7 @@ function workflowIdForPayload(payload) {
   if (payload?.requested_archive_kind === "agent_declared_verification_archive" || payload?.agent_declared_protocol_level) {
     return "v0_v5_agent_declared_archive";
   }
-  if (payload?.requested_archive_kind === "agent_declared_echo_archive" || PURE_ECHO_TYPES.has(payload?.echo_type)) {
+  if (payload?.requested_archive_kind === "agent_declared_echo_archive") {
     return "pure_echo";
   }
   return "unknown";

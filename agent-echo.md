@@ -3,7 +3,8 @@ title: Agent Echo
 permalink: /agent-echo/
 ---
 
-> **Echo is a single unified type.** There are no sub-types. Context readiness (CRL/CC) determines what actions are allowed.
+> **Echo is a single unified type.** There are no sub-types. The `echo_type` field is deprecated and optional.
+> Context readiness (CRL/CC) determines what actions are allowed.
 > **All builders require `--print-oath` (Step 1) and `--readback "<exact oath>"` (Step 2).**
 > Verification (V0–V8) is a separate, independent system. If unsure, return to `/agent-start/`.
 

@@ -441,7 +441,8 @@ def _process_issue(issue, intake, repo, include_test, overrides, records,
     # Validate native echo archive canonical type
     if is_native_echo_archive:
         echo_type = record.get("echo_type")
-        if echo_type not in allowed_canonical_echo_types():
+        # echo_type is optional (deprecated); allow None/empty
+        if echo_type and echo_type not in allowed_canonical_echo_types():
             print(
                 f"SKIP_NON_CANONICAL_ECHO_TYPE issue #{issue['number']}: "
                 f"non-canonical echo_type={echo_type!r}",
