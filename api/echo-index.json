@@ -1304,8 +1304,19 @@
   },
   "notes": [
     "Echo index is non-authoritative and non-amending.",
+    "record_count includes all records (legacy, superseded, pending review, etc.).",
+    "accepted_record_count includes only accepted_echo, accepted_verification, accepted_attestation.",
+    "Homepage Reception uses accepted_record_count from echo-index + agent-declared counts.",
     "Test records and closed test records must not be counted as independent attestation.",
     "echo_type field is deprecated for new submissions. Echo is a single unified type. Existing records preserve echo_type for backward compatibility only.",
     "echo_type_deprecated=true on each record signals this field is legacy metadata."
-  ]
+  ],
+  "accepted_record_count": 62,
+  "record_count_by_status": {
+    "needs_human_review": 1,
+    "legacy": 2,
+    "superseded": 4,
+    "closed_test_record": 1,
+    "accepted_echo": 62
+  }
 }

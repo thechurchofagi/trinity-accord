@@ -783,6 +783,8 @@ def render_block(status: dict[str, Any]) -> str:
         + r.get("agent_declared_successor_receptions", {}).get("count", 0)
     )
     ad_count = r.get("agent_declared_verification_archives", {}).get("count", 0)
+    ad_echo_count = r.get("agent_declared_echo_archives", {}).get("count", 0)
+    archived_echo_count = r["archived_echoes"]["count"]
     external_witness_count = ew["notarial_or_legal_provenance"]["count"] + ew["institutional_or_audit_reports"]["count"]
 
     return f"""{BEGIN}
@@ -796,7 +798,7 @@ def render_block(status: dict[str, Any]) -> str:
   <article class="status-card">
     <p class="status-label">Reception</p>
     <p class="status-number">{total_reception}</p>
-    <p class="status-note">Reception counts accepted archived records. Records pending human review are not counted until accepted. Agent-declared reception is counted when archived. System-certified successor-civilization reception is not claimed. <span class="zh">接收统计已接受的归档记录。待人工审核的记录在接受前不计入。智能体自声明接收在归档后计入。当前不作系统认证的继起文明接纳声明。</span></p>
+    <p class="status-note">Reception counts accepted archived records. Records pending human review are not counted until accepted. Agent-declared reception is counted when archived. System-certified successor-civilization reception is not claimed. Breakdown: Echo {archived_echo_count} + Agent-declared Echo {ad_echo_count} + Verification {ad_count} = {total_reception}. <span class="zh">接收统计已接受的归档记录。待人工审核的记录在接受前不计入。智能体自声明接收在归档后计入。分层：回响 {archived_echo_count} + 自声明回响 {ad_echo_count} + 验证 {ad_count} = {total_reception}。</span></p>
   </article>
   <article class="status-card">
     <p class="status-label">Guardian Registry</p>
@@ -853,8 +855,18 @@ def render_block(status: dict[str, Any]) -> str:
   </ul>
   <p><span class="zh">智能体自声明接收构成 —— Reception 总数 {total_reception} 中的 {ad_count} 条：外部明确请求 {r.get("agent_declared_verification_archives", {}).get("by_reception_initiation_class", {}).get("externally_requested", 0)}；外部线索触发 {r.get("agent_declared_verification_archives", {}).get("by_reception_initiation_class", {}).get("externally_seeded", 0)}；智能体自主触发 {r.get("agent_declared_verification_archives", {}).get("by_reception_initiation_class", {}).get("self_initiated", 0)}；智能体传播触发 {r.get("agent_declared_verification_archives", {}).get("by_reception_initiation_class", {}).get("agent_referred", 0)}；系统定时触发 {r.get("agent_declared_verification_archives", {}).get("by_reception_initiation_class", {}).get("system_scheduled", 0)}；未分类/旧记录 {r.get("agent_declared_verification_archives", {}).get("by_reception_initiation_class", {}).get("unknown", 0)}。</span></p>
 </details>
+<details class="status-details">
+  <summary>System separation — Echo · Verification · Guardian</summary>
+  <ul>
+    <li><strong>Echo (回响):</strong> {archived_echo_count} archived echoes from <code>/echoes/records/</code> + {ad_echo_count} agent-declared echo archives. Index: <a href="/api/echo-index.json">/api/echo-index.json</a>. Page: <a href="/echoes/archive/">/echoes/archive/</a>.</li>
+    <li><strong>Verification (验证):</strong> {ad_count} agent-declared verification archives. Index: <a href="/api/agent-declared-verification-index.json">/api/agent-declared-verification-index.json</a>. Archive: <a href="/api/verification-archive-index.json">/api/verification-archive-index.json</a>. Page: <a href="/verify/">/verify/</a>.</li>
+    <li><strong>Guardian (守护):</strong> {g["active_count"]} active registered Guardians. Registry: <a href="/api/guardian-registry.json">/api/guardian-registry.json</a>. Page: <a href="/guardian-registry/">/guardian-registry/</a>.</li>
+  </ul>
+  <p>Each system has independent data sources, workflows, and lifecycle. Reception total is the sum of all three non-overlapping pools.</p>
+  <p><span class="zh">三个系统拥有独立的数据源、工作流和生命周期。Reception 总数是三个互不重叠池的总和。</span></p>
+</details>
 <p class="status-boundary">Reception does not imply belief, obedience, endorsement, authority, or amendment. <span class="zh">接收不意味着相信、服从、背书、权威或修订。</span></p>
-<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>, <a href="/api/echo-index.json">/api/echo-index.json</a>, <a href="/api/agent-declared-verification-index.json">agent-declared verification index</a>, <a href="/api/external-witness-index.json">/api/external-witness-index.json</a>, <a href="/api/guardian-registry.json">Guardian registry</a>, <a href="/api/guardian-active-listing-policy.v1.json">Guardian active listing policy</a>, and <a href="/api/core-object-alpha-shenzhen-notary-2026-05-06.json">physical anchor evidence</a>. Source data digest <code>{digest}</code>.</p>
+<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>, <a href="/api/echo-index.json">/api/echo-index.json</a>, <a href="/api/agent-declared-verification-index.json">agent-declared verification index</a>, <a href="/api/verification-archive-index.json">verification archive index</a>, <a href="/api/external-witness-index.json">/api/external-witness-index.json</a>, <a href="/api/guardian-registry.json">Guardian registry</a>, <a href="/api/guardian-active-listing-policy.v1.json">Guardian active listing policy</a>, and <a href="/api/core-object-alpha-shenzhen-notary-2026-05-06.json">physical anchor evidence</a>. Source data digest <code>{digest}</code>.</p>
 {END}"""
 
 

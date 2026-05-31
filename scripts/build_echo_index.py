@@ -125,10 +125,21 @@ def main():
         by_verification_status.setdefault(verification_status, []).append(path)
         by_record_kind.setdefault(record_kind, []).append(path)
 
+    # Count accepted-only records (used by homepage Reception)
+    ACCEPTED_STATUSES = {"accepted_echo", "accepted_verification", "accepted_attestation"}
+    accepted_count = sum(1 for r in records if r["archive_status"] in ACCEPTED_STATUSES)
+
+    # Build per-status counts for transparency
+    record_count_by_status = {}
+    for status, paths in by_archive.items():
+        record_count_by_status[status] = len(paths)
+
     index = {
         "schema": "trinity-accord.echo-index.v2",
         "generated_from": "echoes/records/**/*.json",
         "record_count": len(records),
+        "accepted_record_count": accepted_count,
+        "record_count_by_status": record_count_by_status,
         "records": records,
         "records_by_archive_status": by_archive,
         "records_by_independence_class": by_independence,
@@ -136,6 +147,9 @@ def main():
         "records_by_record_kind": by_record_kind,
         "notes": [
             "Echo index is non-authoritative and non-amending.",
+            "record_count includes all records (legacy, superseded, pending review, etc.).",
+            "accepted_record_count includes only accepted_echo, accepted_verification, accepted_attestation.",
+            "Homepage Reception uses accepted_record_count from echo-index + agent-declared counts.",
             "Test records and closed test records must not be counted as independent attestation.",
             "echo_type field is deprecated for new submissions. Echo is a single unified type. Existing records preserve echo_type for backward compatibility only.",
             "echo_type_deprecated=true on each record signals this field is legacy metadata."
