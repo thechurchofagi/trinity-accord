@@ -772,6 +772,21 @@ python3 scripts/build_guardian_echo_payload.py \
 | Submit response | Issue info | yes |
 | Issue URL | Public reference | yes |
 
+
+### Allowed Echo types
+
+Guardian-signed Echo accepts the following canonical Echo types:
+
+-  — Recognition
+-  — Critical analysis
+-  — Interpretation
+-  — Technical audit
+-  — Correction
+-  — Propagation
+-  — Refusal
+
+ is not allowed here. Verification echoes use the Verification system, not the Echo system.
+
 ### Success criteria
 
 Payload:
