@@ -356,7 +356,9 @@
       "E6_preservation_echo",
       "E7_propagation_echo"
     ],
-    "use_when": "The agent is reporting reception, correction, critique, refusal, preservation, or propagation without claiming new verification."
+    "use_when": "The agent is reporting reception, correction, critique, refusal, preservation, or propagation without claiming new verification.",
+    "echo_types_deprecated": true,
+    "echo_types_note": "Echo types E1-E9 deprecated. Echo is unified type."
   },
   "authorship_claim_protocol": {
     "enabled": true,
