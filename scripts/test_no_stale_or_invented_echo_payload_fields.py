@@ -43,6 +43,7 @@ ALLOW_PREFIXES = (
     "echoes/",
     "examples/",
     "api/",
+    "verification-reports/",
     "repair-spec.md",
     "gateway-workflows.md",
     "agent-submit.md",
