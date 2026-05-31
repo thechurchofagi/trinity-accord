@@ -105,7 +105,7 @@
     "required_live_group": "live-site-gateway-core"
   },
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "f85ef0525e526b3a",
+  "source_digest": "aab681eed2048079",
   "final_closure": {
     "v30_5_complete": true,
     "p0_main": "CI_GROUP_P0_MAIN_OK",
