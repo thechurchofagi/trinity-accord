@@ -62,5 +62,5 @@
     "external_agents_must_not_handwrite_readback_hash_fields": true,
     "official_gateway_may_render_agent_readback_sha256": true
   },
-  "source_digest": "1e6dad11f7c1024a"
+  "source_digest": "3bf11faf76f32f5f"
 }
