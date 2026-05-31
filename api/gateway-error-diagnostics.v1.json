@@ -20,7 +20,8 @@
         "scripts/build_agent_declared_echo_payload.py",
         "scripts/test_echo_type_enum_alignment.py",
         "scripts/smoke_live_external_agent_three_core_preflight.py"
-      ]
+      ],
+      "echo_type_deprecated": true
     },
     {
       "code": "AUTHORSHIP_PROOF_CLOSURE_MISSING",
@@ -107,7 +108,8 @@
         "/api/route-selector.v1.json",
         "/api/gateway-runtime-contract.v1.json",
         "/api/agent-first-contact.json"
-      ]
+      ],
+      "echo_type_deprecated": true
     },
     {
       "code": "INVENTED_READBACK_HASH_FIELD",
@@ -201,5 +203,6 @@
         "scripts/smoke_live_gateway_archive_persistence.py"
       ]
     }
-  ]
+  ],
+  "_echo_type_deprecated": "echo_type field is deprecated. Echo is a single unified type. Diagnostic messages below reference legacy field names for backward compatibility."
 }
