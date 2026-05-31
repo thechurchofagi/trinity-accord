@@ -1,9 +1,12 @@
 name: Rebuild Agent-Declared Verification Index
 
 on:
-  # Trigger when an issue is closed (completed or not)
+  # Trigger when an issue is closed only.
+  # Removed 'labeled' — each label addition created a separate run,
+  # causing 6+ concurrent runs per issue close (1 close + 5 labels).
+  # Authorship label changes can use workflow_dispatch manually.
   issues:
-    types: [closed, labeled]
+    types: [closed]
   # Allow manual trigger
   workflow_dispatch:
     inputs:
