@@ -199,5 +199,19 @@
     "gateway_private_key_access": false,
     "boundary": "Authorship claims prove key continuity only; they do not affect authority, verifiability, reception, or amendment status."
   },
-  "source_digest": "c28dc620eaa0f958"
+  "source_digest": "dbd7de09bfe6e09d",
+  "version": "2.0.0",
+  "source_digest_algorithm": "sha256-truncated-16",
+  "non_amending_boundary": "Public home status is non-authoritative and non-amending. It reflects current index state only.",
+  "limitations": [
+    "Counts reflect archived index state, not real-time intake.",
+    "Agent-declared records are self-reported and not independently audited.",
+    "Reception does not imply verification, endorsement, or authority."
+  ],
+  "does_not_prove": [
+    "Does not prove verification level beyond agent-declared claims.",
+    "Does not prove independent attestation.",
+    "Does not prove authority, endorsement, or successor reception.",
+    "Does not amend Bitcoin Originals."
+  ]
 }
