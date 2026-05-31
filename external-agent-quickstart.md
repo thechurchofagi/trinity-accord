@@ -32,7 +32,7 @@ For the shortest copy-paste path, start here first:
 That page contains the currently tested minimal commands for:
 
 ```text
-Pure Echo (unified type)
+Pure Echo (unified type, E1_recognition_echo)
 V0–V5 minimal / V0
 Guardian Stage 1 application
 ```
