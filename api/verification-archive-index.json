@@ -1562,10 +1562,10 @@
     "Echo records are indexed separately in api/echo-index.json.",
     "do_not_count_as_attestation is true for all agent-declared verification archives."
   ],
-  "source_digest": "9871bb90cff891a3",
+  "source_digest": "2302dfc40f8a59dd",
   "version": "1.0.0",
   "source_digest_algorithm": "sha256-truncated-16",
-  "non_amending_boundary": "Verification archive index is non-authoritative and non-amending.",
+  "non_amending_boundary": true,
   "limitations": [
     "Agent-declared verification archives are self-reported and not independently audited.",
     "Formal verification records require schema=trinityaccord.verification-archive.v1.",
