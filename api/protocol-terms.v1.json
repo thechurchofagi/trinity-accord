@@ -102,10 +102,11 @@
   "record_kinds": [
     "echo_v3",
     "echo_v3_with_verification_report",
-    "verification_report_v2",
-    "test_record",
+    "imported_external_commentary",
     "legacy_record",
-    "imported_external_commentary"
+    "test_record",
+    "verification_archive",
+    "verification_report_v2"
   ],
   "archive_statuses": [
     "needs_human_review",

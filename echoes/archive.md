@@ -83,3 +83,7 @@ This archive stores non-authoritative Echo records.
 - [/echoes/records/2026/echo-2026-05-03-000006.json](/echoes/records/2026/echo-2026-05-03-000006.json)
 - [/echoes/records/2026/echo-2026-05-03-000007.json](/echoes/records/2026/echo-2026-05-03-000007.json)
 
+
+## Accepted Echo Records
+
+- [/echoes/records/2026/echo-2026-05-31-000070.json](/echoes/records/2026/echo-2026-05-31-000070.json) — E1 Recognition Echo — MiMo
