@@ -190,8 +190,7 @@ def parse_intake_block(
             continue
 
         if key in seen:
-            # Tolerate duplicate keys: use the last value.
-            # Historical Gateway renders sometimes wrote the same field twice.
+            # Warn but tolerate — some historical issues have duplicate keys.
             import sys
             print(f"[gateway_intake] WARNING: duplicate intake key {key!r} — using last value", file=sys.stderr)
 

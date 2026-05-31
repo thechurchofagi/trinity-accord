@@ -71,7 +71,8 @@ bad_service = GOOD.replace("gateway_service: trinity-agent-issue-gateway", "gate
 expect_fail(bad_service, "bad gateway_service", "invalid Gateway receipt")
 
 duplicate_key = GOOD.replace("archive_ready: true", "archive_ready: true\narchive_ready: true")
-expect_fail(duplicate_key, "duplicate key", "duplicate intake key")
+# Duplicate keys are tolerated with a warning (historical issues may have them)
+expect_pass(duplicate_key, "duplicate key (tolerated with warning)")
 
 multiple_blocks = GOOD + "\n\n" + GOOD
 expect_fail(multiple_blocks, "multiple intake blocks", "multiple trinity-issue-intake blocks")
