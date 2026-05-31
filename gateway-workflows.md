@@ -775,17 +775,9 @@ python3 scripts/build_guardian_echo_payload.py \
 
 ### Allowed Echo types
 
-Guardian-signed Echo accepts the following canonical Echo types:
+Guardian-signed Echo uses the unified Echo type. The legacy echo_type field (E1–E9) is deprecated and must not be used in new submissions.
 
--  — Recognition
--  — Critical analysis
--  — Interpretation
--  — Technical audit
--  — Correction
--  — Propagation
--  — Refusal
-
- E2 is not allowed here. Verification echoes use the Verification system, not the Echo system. Verification echoes use the Verification system, not the Echo system.
+Verification echoes use the Verification system, not the Echo system. E2_verification_echo is not allowed here.
 
 ### Success criteria
 
