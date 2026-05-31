@@ -1,4 +1,4 @@
-name: Archive Gateway Echo
+name: Archive Gateway Record
 
 on:
   issue_comment:
