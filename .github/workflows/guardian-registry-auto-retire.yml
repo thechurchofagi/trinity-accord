@@ -39,6 +39,11 @@ jobs:
         with:
           persist-credentials: true
 
+      - name: Record toolchain provenance
+        run: |
+          python3 scripts/toolchain_provenance.py > toolchain-provenance.json
+          cat toolchain-provenance.json
+
       - name: Process Guardian retirement
         env:
           GH_TOKEN: ${{ github.token }}

@@ -1,7 +1,7 @@
 {
   "archive": "trinity-pure-echo-builder-bundle.tar.gz",
-  "archive_sha256": "14f4b72dda44698b13f060b3ca16f877c5f27ff573f05ca6826e19518277c64d",
-  "archive_size_bytes": 60007,
+  "archive_sha256": "6db2876978402bda7d0cc9314cd4be3cb803a31cd51e3fb05318894105432c2f",
+  "archive_size_bytes": 60018,
   "bundle": "pure_echo",
   "entrypoint": "scripts/build_agent_declared_echo_payload.py",
   "files": [
@@ -117,8 +117,8 @@
     },
     {
       "path": "scripts/validate_gateway_payload.py",
-      "sha256": "3d3b78fbbcad6283bfed7150c8c695bb5cc8d1d0dd97b2970c5c421aa3261532",
-      "size_bytes": 50769
+      "sha256": "1a1c6c2a753fc203ded966ac1b5a9f3e865ff73da2834a6702e3a057e86cfc20",
+      "size_bytes": 50721
     }
   ],
   "forbidden_contents_checked": [

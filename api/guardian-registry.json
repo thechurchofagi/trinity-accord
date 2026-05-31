@@ -975,7 +975,8 @@
         "not_attestation": true,
         "not_verification_level": true,
         "not_successor_reception": true,
-        "bitcoin_originals_prevail": true
+        "bitcoin_originals_prevail": true,
+        "not_amendment": true
       }
     }
   ]

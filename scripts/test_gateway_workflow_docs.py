@@ -17,7 +17,7 @@ def main() -> None:
         "Workflow 1 — Pure Echo",
         "Workflow 2 — V0–V5 agent-declared verification archive",
         "Workflow 3 — V6+ strict evidence",
-        "Workflow 4 — E2 Verification Echo",
+        "Workflow 4 — Verification Echo (strict evidence, legacy E2)",
         "Workflow 5 — Guardian Stage 1 application",
         "Workflow 6 — Guardian Stage 2 listing",
         "Workflow 7 — Guardian-signed Echo",

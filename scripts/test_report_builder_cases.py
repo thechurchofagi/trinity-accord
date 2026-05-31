@@ -344,7 +344,7 @@ def test_rb011():
             errs.append("No wrapper generated")
             return errs
         required = ["schema", "echo_version", "agent_identity", "verification_level",
-                     "echo_type", "record_kind"]
+                     "record_kind"]
         for field in required:
             if field not in wrapper:
                 errs.append(f"Missing wrapper field: {field}")

@@ -342,3 +342,4 @@ Do not use the V4 verification example for Pure Echo submissions.
 - Copyable examples: [`/api/external-agent-operation-examples.v1.json`](/api/external-agent-operation-examples.v1.json)
 - Route map: [`/api/gateway-builder-route-map.v1.json`](/api/gateway-builder-route-map.v1.json)
 - Workflow manual: [`/gateway-workflows/`](/gateway-workflows/)
+- Workflow API: [`/api/gateway-workflows.v1.json`](/api/gateway-workflows.v1.json)

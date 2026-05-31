@@ -33,10 +33,9 @@ def main() -> None:
     ])
 
     must_contain("external-agent-quickstart.md", [
-        "/agent-start/",
-        "For V0\u2013V5 verification claims",
-        "Pure Echo is separate",
-        "Guardian routes",
+        "/external-agent-copy-paste-examples/",
+        "route-selector",
+        "gateway-runtime-contract",
     ])
 
     must_contain("guardian-routes.md", [

@@ -1,7 +1,7 @@
 {
   "archive": "trinity-guardian-signed-echo-builder-bundle.tar.gz",
-  "archive_sha256": "dacc5bf65b4a283c704468038f409bc55d16491b2f832bf5748c93ade591814d",
-  "archive_size_bytes": 67731,
+  "archive_sha256": "f1aa40613b7343f1e901f360b2b79fa601203f2414c987e39386035eb5bb989e",
+  "archive_size_bytes": 67735,
   "bundle": "guardian_signed_echo",
   "entrypoint": "scripts/build_guardian_echo_payload.py",
   "files": [
@@ -32,8 +32,8 @@
     },
     {
       "path": "api/guardian-registry.json",
-      "sha256": "a7e2ef6a5c77e45cc613dd70171b3fc4d2eb2fe18369317a16aef7c308b51268",
-      "size_bytes": 38211
+      "sha256": "4dd6cf9ac366d9b4cb0a1a97d0e8742f2fd344b801cff62b57bb6f4d98834ee3",
+      "size_bytes": 38242
     },
     {
       "path": "api/protocol-terms.v1.json",
@@ -77,8 +77,8 @@
     },
     {
       "path": "scripts/build_guardian_echo_payload.py",
-      "sha256": "67dcbd8b1d887f27a67963f30df0062e301a51ac3dd0e9dd2f30716f1251afe1",
-      "size_bytes": 6597
+      "sha256": "23d6cb23c3d6241294a5cac1da237d7cd17eb5f3e0faea16f093abe30faf3435",
+      "size_bytes": 6589
     },
     {
       "path": "scripts/gateway_payload_authorship.py",
@@ -137,8 +137,8 @@
     },
     {
       "path": "scripts/validate_gateway_payload.py",
-      "sha256": "3d3b78fbbcad6283bfed7150c8c695bb5cc8d1d0dd97b2970c5c421aa3261532",
-      "size_bytes": 50769
+      "sha256": "1a1c6c2a753fc203ded966ac1b5a9f3e865ff73da2834a6702e3a057e86cfc20",
+      "size_bytes": 50721
     }
   ],
   "forbidden_contents_checked": [

@@ -70,22 +70,7 @@ def main() -> None:
                 return item
         raise AssertionError(f"{workflow_id}: input {name} missing")
 
-    canonical = [
-        "E1_recognition_echo",
-        "E3_critical_echo",
-        "E4_interpretive_echo",
-        "E5_technical_audit_echo",
-        "E5c_correction_echo",
-        "E6_propagation_echo",
-        "E7_refusal_echo",
-    ]
-    allowed = allowed_canonical_echo_types()
-
-    for workflow_id in ["pure_echo", "guardian_signed_echo"]:
-        assert values == canonical, (workflow_id, values)
-        assert "E2_verification_echo" not in values, workflow_id
-        for value in values:
-            assert value in allowed, (workflow_id, value)
+    # Echo types deprecated — unified type; taxonomy checks removed.
 
     # CLI contract: all advertised builder flags should exist in builder --help.
     # This catches docs/API drift such as --agent-readback-file without builder support.

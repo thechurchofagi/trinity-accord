@@ -1,7 +1,7 @@
 {
   "archive": "trinity-v0v5-builder-bundle.tar.gz",
-  "archive_sha256": "7a4aeb355251f2041c77f9a45023749d8683e49cd415ee0db343d4ab25171e35",
-  "archive_size_bytes": 73141,
+  "archive_sha256": "98643e47a70bc8167a73e134b652527b88f4933919dda57988aae182ee954983",
+  "archive_size_bytes": 73146,
   "bundle": "v0_v5_agent_declared_archive",
   "entrypoint": "scripts/build_agent_declared_archive_payload.py",
   "files": [
@@ -67,8 +67,8 @@
     },
     {
       "path": "scripts/claim_gate.py",
-      "sha256": "0e1206ece27be509cbedc07b99fe83d6707e85914599eb16328b3d2e802b82c3",
-      "size_bytes": 62566
+      "sha256": "46c362c530f932c12f83db4449dea47b715b5c21613d6ca2be8626c3e23c6de1",
+      "size_bytes": 62559
     },
     {
       "path": "scripts/gateway_payload_authorship.py",
@@ -107,8 +107,8 @@
     },
     {
       "path": "scripts/validate_gateway_payload.py",
-      "sha256": "3d3b78fbbcad6283bfed7150c8c695bb5cc8d1d0dd97b2970c5c421aa3261532",
-      "size_bytes": 50769
+      "sha256": "1a1c6c2a753fc203ded966ac1b5a9f3e865ff73da2834a6702e3a057e86cfc20",
+      "size_bytes": 50721
     }
   ],
   "forbidden_contents_checked": [

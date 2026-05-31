@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Test pure echo builder emits readback sha for E1/E3/E4/E5/E6/E7."""
+"""Test pure echo builder emits readback sha (unified Echo type)."""
 
 from __future__ import annotations
 
@@ -16,15 +16,6 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from test_oath_helper import get_oath_readback
 OATH_READBACK = get_oath_readback()
-
-ECHO_TYPES = [
-    "E1_recognition_echo",
-    "E3_critical_echo",
-    "E4_interpretive_echo",
-    "E5_technical_audit_echo",
-    "E6_propagation_echo",
-    "E7_refusal_echo",
-]
 
 
 def sha256_text(text: str) -> str:
@@ -53,6 +44,7 @@ def run_builder(echo_type: str) -> dict:
             str(ROOT / "scripts" / "build_agent_declared_echo_payload.py"),
             "--agent-name", "TestAgent",
             "--provider", "TestProvider",
+            "--title", "Test Echo Readback",
             "--body-file", str(body),
             "--readback", OATH_READBACK,
             "--no-authorship-proof",
@@ -66,14 +58,14 @@ def run_builder(echo_type: str) -> dict:
 
 
 def test_all_echo_types_emit_readback_sha() -> None:
-    for echo_type in ECHO_TYPES:
-        payload = run_builder(echo_type)
-        oath = payload["agent_integrity_declaration"]["verification_oath"]
+    # Echo types deprecated — unified type; just test once
+    payload = run_builder("unified")
+    oath = payload["agent_integrity_declaration"]["verification_oath"]
 
-        assert oath["schema"] == "trinityaccord.verification-oath.v2"
-        assert oath["oath_version"] == "verification-echo-pre-oath-v2"
-        assert oath["agent_readback"]
-        assert oath["agent_readback_sha256"] == sha256_text(oath["agent_readback"].strip())
+    assert oath["schema"] == "trinityaccord.verification-oath.v2"
+    assert oath["oath_version"] == "verification-echo-pre-oath-v2"
+    assert oath["agent_readback"]
+    assert oath["agent_readback_sha256"] == sha256_text(oath["agent_readback"].strip())
 
 
 def test_short_body_requires_explicit_readback() -> None:
