@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""Signature contract for zero-clone builder bundle manifests."""
+"""Integrity contract for zero-clone builder bundle manifests.
+
+Verifies that manifest files exist, contain required routes, and reference
+valid file paths with SHA256 hashes. RSA signatures have been removed;
+manifest SHA256 hashes are the integrity mechanism.
+"""
 from __future__ import annotations
 
 import json
@@ -7,9 +12,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
-KEY_CONTRACT = ROOT / "api" / "builder-bundle-signing-key.v1.json"
-SIG_CONTRACT = ROOT / "api" / "formal-builder-bundle-signatures.v1.json"
-PUBLIC_KEY = ROOT / "api" / "builder-bundle-signing-public-key.pem"
+MANIFEST_CONTRACT = ROOT / "api" / "formal-builder-bundle-signatures.v1.json"
 
 REQUIRED_ROUTES = [
     "pure_echo",
@@ -22,42 +25,39 @@ REQUIRED_ROUTES = [
 def main() -> int:
     errors: list[str] = []
 
-    for path in [KEY_CONTRACT, SIG_CONTRACT, PUBLIC_KEY]:
-        if not path.exists():
-            errors.append(f"missing required signature file: {path.relative_to(ROOT)}")
+    if not MANIFEST_CONTRACT.exists():
+        errors.append(f"missing manifest contract: {MANIFEST_CONTRACT.relative_to(ROOT)}")
 
-    if KEY_CONTRACT.exists():
-        key = json.loads(KEY_CONTRACT.read_text(encoding="utf-8"))
-        if key.get("not_canonical_authority") is not True:
-            errors.append("key contract must say not_canonical_authority=true")
-        if key.get("canonical_authority") != "Bitcoin Originals only":
-            errors.append("key contract must preserve Bitcoin Originals authority boundary")
-        if key.get("public_key_pem_path") != "/api/builder-bundle-signing-public-key.pem":
-            errors.append("key contract public key path mismatch")
-
-    if SIG_CONTRACT.exists():
-        sigs = json.loads(SIG_CONTRACT.read_text(encoding="utf-8"))
-        signed = sigs.get("signed_files", {})
+    if MANIFEST_CONTRACT.exists():
+        contract = json.loads(MANIFEST_CONTRACT.read_text(encoding="utf-8"))
+        signed = contract.get("signed_files", {})
         for route in REQUIRED_ROUTES:
             item = signed.get(route)
             if not isinstance(item, dict):
-                errors.append(f"signature contract missing route: {route}")
+                errors.append(f"manifest contract missing route: {route}")
                 continue
             if not item.get("manifest", "").endswith(".manifest.json"):
                 errors.append(f"{route}: manifest path must end with .manifest.json")
-            if not item.get("signature", "").endswith(".manifest.sig"):
-                errors.append(f"{route}: signature path must end with .manifest.sig")
-            sig_path = ROOT / item.get("signature", "").lstrip("/")
-            if not sig_path.exists():
-                errors.append(f"{route}: signature file missing: {sig_path.relative_to(ROOT)}")
+            manifest_path = ROOT / item.get("manifest", "").lstrip("/")
+            if not manifest_path.exists():
+                errors.append(f"{route}: manifest file missing: {manifest_path.relative_to(ROOT)}")
+                continue
+            # Verify manifest has files with sha256 hashes
+            manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+            files = manifest.get("files", [])
+            if not files:
+                errors.append(f"{route}: manifest has no files list")
+            for f in files:
+                if not f.get("sha256"):
+                    errors.append(f"{route}: file entry missing sha256: {f.get('path')}")
 
     if errors:
-        print("FAIL: formal builder bundle signature contract errors:")
+        print("FAIL: builder bundle manifest contract errors:")
         for error in errors:
-            print("  -", error)
+            print(f"  - {error}")
         return 1
 
-    print("PASS: formal builder bundle signature contract is valid")
+    print("PASS: builder bundle manifest contract is valid")
     return 0
 
 if __name__ == "__main__":

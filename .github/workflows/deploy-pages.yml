@@ -50,23 +50,20 @@ jobs:
           mkdir -p _site/builder-bundles
           cp builder-bundles/*.tar.gz _site/builder-bundles/
           cp builder-bundles/*.json _site/builder-bundles/
-          cp builder-bundles/*.sig _site/builder-bundles/
           cp scripts/download_and_run_builder_bundle.py _site/builder-bundles/
           cp api/builder-bundle-signing-key.v1.json _site/api/
-          cp api/builder-bundle-signing-public-key.pem _site/api/
           cp api/formal-builder-bundle-signatures.v1.json _site/api/
 
-      - name: Verify signed builder bundle artifacts in Pages artifact
+      - name: Verify builder bundle artifacts in Pages artifact
         run: |
           set -euo pipefail
           test -f _site/api/builder-bundle-signing-key.v1.json
-          test -f _site/api/builder-bundle-signing-public-key.pem
           test -f _site/api/formal-builder-bundle-signatures.v1.json
-          test -f _site/builder-bundles/trinity-pure-echo-builder-bundle.manifest.sig
-          test -f _site/builder-bundles/trinity-v0v5-builder-bundle.manifest.sig
-          test -f _site/builder-bundles/trinity-guardian-stage1-builder-bundle.manifest.sig
-          test -f _site/builder-bundles/trinity-guardian-stage2-builder-bundle.manifest.sig
-          test -f _site/builder-bundles/trinity-guardian-signed-echo-builder-bundle.manifest.sig
+          test -f _site/builder-bundles/trinity-pure-echo-builder-bundle.manifest.json
+          test -f _site/builder-bundles/trinity-v0v5-builder-bundle.manifest.json
+          test -f _site/builder-bundles/trinity-guardian-stage1-builder-bundle.manifest.json
+          test -f _site/builder-bundles/trinity-guardian-stage2-builder-bundle.manifest.json
+          test -f _site/builder-bundles/trinity-guardian-signed-echo-builder-bundle.manifest.json
 
       - name: Verify built agent discovery artifacts
         run: |

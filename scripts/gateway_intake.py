@@ -190,9 +190,7 @@ def parse_intake_block(
             continue
 
         if key in seen:
-            # Allow duplicate keys (last value wins) — rendering bug may have
-            # produced duplicates in existing issues; tolerate them gracefully.
-            pass
+            raise IntakeParseError(f"duplicate intake key: {key!r}")
 
         seen.add(key)
         fields[key] = value

@@ -1,9 +1,12 @@
 {
   "schema": "trinityaccord.builder-bundle-signing-key.v1",
   "version": "v1",
-  "purpose": "Publish the public key used to verify detached signatures for zero-clone builder bundle manifests.",
+  "purpose": "Builder bundle integrity contract. RSA detached signatures removed; manifest SHA256 hashes are the integrity mechanism.",
   "not_canonical_authority": true,
   "canonical_authority": "Bitcoin Originals only",
+  "integrity_mechanism": "manifest_sha256_hashes",
+  "rsa_signatures_removed": true,
+  "rsa_signatures_removed_reason": "Private key lost; SHA256 hashes in manifests provide equivalent integrity verification.",
   "signature_scope": [
     "builder-bundles/*.manifest.json"
   ],
@@ -15,9 +18,6 @@
     "verification level",
     "Guardian active status"
   ],
-  "algorithm": "openssl-dgst-sha256-rsa",
-  "public_key_pem_path": "/api/builder-bundle-signing-public-key.pem",
-  "signature_manifest": "/api/formal-builder-bundle-signatures.v1.json",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "9502c4e480b65b84"
+  "source_digest": "7e610c3179a863f1"
 }

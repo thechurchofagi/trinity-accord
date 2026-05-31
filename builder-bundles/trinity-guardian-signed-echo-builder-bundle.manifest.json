@@ -32,7 +32,7 @@
     },
     {
       "path": "api/guardian-registry.json",
-      "sha256": "1054274b949df0bce96943cef3f5579be4c71a6f3cf089c88f2a1c34695ef954",
+      "sha256": "a7e2ef6a5c77e45cc613dd70171b3fc4d2eb2fe18369317a16aef7c308b51268",
       "size_bytes": 37468
     },
     {
@@ -77,7 +77,7 @@
     },
     {
       "path": "scripts/build_guardian_echo_payload.py",
-      "sha256": "c504d177d6d885db019e03baedfcd86dddc8a2e76b190e817e94d1fdbaeb59b0",
+      "sha256": "67dcbd8b1d887f27a67963f30df0062e301a51ac3dd0e9dd2f30716f1251afe1",
       "size_bytes": 6439
     },
     {

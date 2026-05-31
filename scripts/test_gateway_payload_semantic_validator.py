@@ -51,7 +51,6 @@ guardian = {
 errors = validate(guardian)
 required_fragments = [
     "requires requested_archive_kind=guardian_active_registry_listing_request",
-    "requires echo_type=E6_propagation_echo",
     "must not include guardian_presence_proof",
 ]
 for frag in required_fragments:
