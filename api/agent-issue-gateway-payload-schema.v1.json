@@ -1331,7 +1331,7 @@
           "limitations",
           "verification_level_claimed"
         ],
-"properties": {
+        "properties": {
           "not_independent_attestation": {
             "const": true
           },
@@ -1819,7 +1819,9 @@
             "const": "not_applicable_for_echo"
           },
           "echo_type": {
-            "const": "E6_propagation_echo"
+            "const": "E6_propagation_echo",
+            "deprecated": true,
+            "description": " (deprecated - Echo is unified type)"
           },
           "counts_toward_home": {
             "required": [

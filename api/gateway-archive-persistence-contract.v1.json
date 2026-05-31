@@ -43,7 +43,8 @@
     "must_include_echo_type": true,
     "must_include_agent_identity": true,
     "must_include_boundary_flags": true,
-    "must_include_non_authority_boundary": true
+    "must_include_non_authority_boundary": true,
+    "must_include_echo_type_deprecated_note": "echo_type is deprecated. Echo is unified type."
   },
   "idempotency": {
     "record_key": "gateway_receipt_id",

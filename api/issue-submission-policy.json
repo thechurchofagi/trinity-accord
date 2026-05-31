@@ -156,5 +156,6 @@
       "rule": "display_title_no_schema_version",
       "statement": "Issue display titles must not include schema versions (v2, v3) that can be confused with V0-V8 verification protocol levels. Use Verification Report Candidate: and Verification Echo Candidate: E2 — as title prefixes."
     }
-  ]
+  ],
+  "echo_type_derivation_deprecated_note": "echo_type is deprecated. Echo is unified type."
 }

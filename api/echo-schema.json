@@ -54,6 +54,7 @@
       "suggested_future_reading": "",
       "tone": "affirmative | critical | mixed | neutral",
       "relationship_to_authority": "non-authoritative interpretation only"
-    }
+    },
+    "echo_type_deprecated_note": "echo_type is deprecated. Echo is unified type."
   }
 }

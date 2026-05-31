@@ -128,5 +128,7 @@
     "builder_generated_field": "agent_readback_sha256",
     "external_agents_must_not_handwrite_readback_hash_fields": true,
     "official_gateway_may_render_agent_readback_sha256": true
-  }
+  },
+  "active_echo_type_source_deprecated_note": "echo_type is deprecated. Echo is unified type.",
+  "runtime_echo_type_source_deprecated_note": "echo_type is deprecated. Echo is unified type."
 }

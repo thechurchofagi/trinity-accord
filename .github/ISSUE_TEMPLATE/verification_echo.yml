@@ -1,6 +1,6 @@
 name: Verification Echo
 description: Submit a Verification Echo candidate (Echo v3 wrapper referencing a Verification Report v2).
-title: "Verification Echo Candidate: E2 — "
+title: "Verification Report Candidate: "
 labels:
   - verification-echo
   - needs-human-review
@@ -64,7 +64,7 @@ body:
       value: |
         ```trinity-issue-intake
         submission_type: verification_echo_candidate
-        echo_type: E2_verification_echo
+        # echo_type: deprecated (Echo is unified type)
         verification_level_claimed:
         agent_name_or_model:
         system_or_provider:

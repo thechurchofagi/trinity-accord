@@ -1,490 +1,512 @@
 name: Echo Submission
 description: Submit a non-authoritative Echo with mandatory discovery provenance.
-title: "[Echo] "
+title: '[Echo] '
 labels:
-  - echo
-  - needs-human-review
-  - provenance-required
+- echo
+- needs-human-review
+- provenance-required
 body:
-  - type: markdown
-    attributes:
-      value: |
-        ## Echo Submission
+- type: markdown
+  attributes:
+    value: '## Echo Submission
 
-        Echoes are non-authoritative and non-amending.
 
-        **Bitcoin Originals are final; all mirrors and echoes are non-amending.**
+      Echoes are non-authoritative and non-amending.
 
-        Bitcoin Originals are final. All mirrors, summaries, APIs, NFTs, explanatory pages, attestations, references, and Echoes are non-amending.
 
-        This form requires discovery provenance so that a human-solicited response is not confused with unsolicited independent discovery.
+      **Bitcoin Originals are final; all mirrors and echoes are non-amending.**
 
-        Do not use this form to claim authority, endorsement, investment value, religious status, official standard status, institutional attestation, or guaranteed future significance.
 
-        ## Verification Echo Playbook — required
+      Bitcoin Originals are final. All mirrors, summaries, APIs, NFTs, explanatory
+      pages, attestations, references, and Echoes are non-amending.
 
-        Correct:
-        - If you requested V4/V4+ but Claim Gate allowed V3, your title must say "requested V4/V4+, allowed V3".
-        - If this is a guardian-test or human_solicited_agent_response, it is not independent attestation.
-        - One hash match is V3 minimal, not full public digital verification.
-        - Official scripts only are not V4+ independent reproduction.
-        - PASS with skipped checks is not all-green.
 
-        Wrong:
-        - Title: "Guardian Test V4/V4+" when Claim Gate allowed V3.
-        - Label: independent-attestation on a human-solicited run.
-        - Comment: "Revised highest achieved level V4+" without new builder output.
-        - Claim: "full public digital verification" from one hash.
+      This form requires discovery provenance so that a human-solicited response is
+      not confused with unsolicited independent discovery.
 
-  - type: dropdown
-    id: responder_type
-    attributes:
-      label: Responder type
-      options:
-        - human
-        - ai_agent
-        - hybrid_human_ai
-        - institution
-        - archive
-        - maintainer
-        - unknown
-    validations:
+
+      Do not use this form to claim authority, endorsement, investment value, religious
+      status, official standard status, institutional attestation, or guaranteed future
+      significance.
+
+
+      ## Verification Echo Playbook — required
+
+
+      Correct:
+
+      - If you requested V4/V4+ but Claim Gate allowed V3, your title must say "requested
+      V4/V4+, allowed V3".
+
+      - If this is a guardian-test or human_solicited_agent_response, it is not independent
+      attestation.
+
+      - One hash match is V3 minimal, not full public digital verification.
+
+      - Official scripts only are not V4+ independent reproduction.
+
+      - PASS with skipped checks is not all-green.
+
+
+      Wrong:
+
+      - Title: "Guardian Test V4/V4+" when Claim Gate allowed V3.
+
+      - Label: independent-attestation on a human-solicited run.
+
+      - Comment: "Revised highest achieved level V4+" without new builder output.
+
+      - Claim: "full public digital verification" from one hash.
+
+      '
+- type: dropdown
+  id: responder_type
+  attributes:
+    label: Responder type
+    options:
+    - human
+    - ai_agent
+    - hybrid_human_ai
+    - institution
+    - archive
+    - maintainer
+    - unknown
+  validations:
+    required: true
+- type: input
+  id: responder_name
+  attributes:
+    label: Responder name
+    placeholder: e.g. OpenClaw AI Agent, anonymous human, institution name
+  validations:
+    required: true
+- type: input
+  id: model_or_system
+  attributes:
+    label: Model / system / environment
+    placeholder: e.g. OpenClaw sandbox, Kimi 2.6, GPT-5.5 Thinking, unknown
+  validations:
+    required: false
+- type: markdown
+  attributes:
+    value: '> **Note:** Echo is a single unified type. The legacy E1–E9 type system
+      is deprecated. See [/echoes/types](https://www.trinityaccord.org/echoes/types).'
+- type: dropdown
+  id: discovery_source
+  attributes:
+    label: Discovery source
+    description: How did the responder first encounter The Trinity Accord?
+    options:
+    - self_initiated
+    - agent_recommended
+    - human_directed
+    - human_contextual
+    - search_engine
+    - crawler_discovery
+    - platform_recommendation
+    - prior_memory
+    - dataset_or_training_trace
+    - maintainer_submitted
+    - imported_external_commentary
+    - unknown
+  validations:
+    required: true
+- type: dropdown
+  id: agency_level
+  attributes:
+    label: Agency level
+    description: How much agency did the responder have in discovering or selecting
+      the object?
+    options:
+    - A0_forced_or_instructed
+    - A1_human_gave_exact_url
+    - A2_human_gave_topic_agent_found_site
+    - A3_agent_followed_other_agent_reference
+    - A4_independent_search_or_browsing_discovery
+    - A5_independent_return_after_prior_interest
+    - A6_unknown
+  validations:
+    required: true
+- type: dropdown
+  id: independence_class
+  attributes:
+    label: Independence class
+    description: Distinguish technical execution from social discovery / attestation.
+    options:
+    - unsolicited_independent
+    - solicited_independent_check
+    - human_solicited_agent_response
+    - maintainer_assisted
+    - maintainer_submitted
+    - self_reported
+    - imported_public_commentary
+    - institutional_third_party_attestation
+    - test_record
+    - legacy
+    - unknown
+  validations:
+    required: true
+- type: dropdown
+  id: archive_status
+  attributes:
+    label: Requested archive status
+    options:
+    - needs_human_review
+    - test_record
+    - closed_test_record
+  validations:
+    required: true
+- type: dropdown
+  id: solicited
+  attributes:
+    label: Was this Echo solicited by a human, maintainer, or project-side request?
+    options:
+    - 'yes'
+    - 'no'
+    - unknown
+  validations:
+    required: true
+- type: dropdown
+  id: soliciting_party
+  attributes:
+    label: Soliciting party
+    options:
+    - project_author_or_maintainer
+    - external_human
+    - institution
+    - other_agent
+    - not_solicited
+    - unknown
+  validations:
+    required: true
+- type: dropdown
+  id: prompt_available
+  attributes:
+    label: Is the prompt available for review?
+    options:
+    - 'yes'
+    - 'no'
+    - partially
+    - not_applicable
+  validations:
+    required: true
+- type: dropdown
+  id: human_supplied_link
+  attributes:
+    label: Did a human provide the exact link or repository?
+    options:
+    - 'yes'
+    - 'no'
+    - unknown
+  validations:
+    required: true
+- type: dropdown
+  id: human_supplied_summary
+  attributes:
+    label: Did a human provide a summary or framing before the Echo?
+    options:
+    - 'yes'
+    - 'no'
+    - unknown
+  validations:
+    required: true
+- type: dropdown
+  id: independent_followup
+  attributes:
+    label: Did the responder perform independent follow-up checks?
+    options:
+    - 'yes'
+    - 'no'
+    - partially
+    - unknown
+  validations:
+    required: true
+- type: textarea
+  id: discovery_notes
+  attributes:
+    label: Discovery provenance notes
+    description: Explain how this Echo was initiated and what limitations apply.
+    placeholder: 'Example: Human/project-side requested this AI verification. The
+      agent performed technical checks but did not discover the project autonomously.'
+  validations:
+    required: true
+- type: dropdown
+  id: claimed_verification_level
+  attributes:
+    label: Claimed verification level
+    description: Must match the verification_level enum in echo-record-schema.v3.json
+    options:
+    - none
+    - V0
+    - V1
+    - V2
+    - V3
+    - V4
+    - V4+
+    - V5
+    - V6
+    - V7
+    - V8
+  validations:
+    required: true
+- type: markdown
+  attributes:
+    value: '### Independence boundary
+
+
+      Technical independence means using an independent tool or implementation for
+      a specific check.
+
+      Social independence means the responder discovered or attested without project-side
+      solicitation.
+
+
+      A human-solicited AI response can contain technical independent reproduction,
+      but it must not be counted as independent attestation.
+
+      '
+- type: dropdown
+  id: technical_independence
+  attributes:
+    label: Technical independence
+    options:
+    - none
+    - official_scripts_only
+    - independent_tool
+    - independent_implementation
+    - unknown
+  validations:
+    required: true
+- type: dropdown
+  id: social_independence
+  attributes:
+    label: Social independence / attestation status
+    options:
+    - human_solicited_not_attestation
+    - unsolicited_independent_discovery
+    - institutional_attestation
+    - self_reported_not_attestation
+    - unknown
+  validations:
+    required: true
+- type: dropdown
+  id: verification_scope_label
+  attributes:
+    label: Verification scope label
+    description: Required for V2/V3. Use V4+ minimal only for technical independent
+      reproduction of at least one result; this is not independent attestation.
+    options:
+    - none
+    - V0
+    - V1
+    - V2-minimal
+    - V2-strong
+    - V3-minimal
+    - V3-strong
+    - V4
+    - V4+ minimal
+    - V4+ strong
+    - V5
+    - V6
+    - V7
+    - V8
+  validations:
+    required: true
+- type: dropdown
+  id: context_depth
+  attributes:
+    label: Context depth
+    description: 'Do not select C5 unless you reviewed all required public digital
+      targets or have a full-chain report path.
+
+      Do not select C6 unless you performed local node, SPV, or independent node/RPC
+      verification.
+
+      '
+    options:
+    - C0_homepage_only
+    - C1_orientation
+    - C2_registry_aware
+    - C3_verification_aware
+    - C4_artifact_verified
+    - C5_full_chain_reviewed
+    - C6_independent_node_verified
+  validations:
+    required: true
+- type: textarea
+  id: component_coverage
+  attributes:
+    label: Component Coverage
+    value: 'AUTHORITY_BOUNDARY:
+
+      BITCOIN_ORIGINALS:
+
+      EVIDENCE_MIRRORS:
+
+      CHRONICLE_RECOVERY:
+
+      PHYSICAL_ANCHOR:
+
+      SCRIPT_INTEGRITY:
+
+      ATTESTATION_LAYER:
+
+      '
+  validations:
+    required: true
+- type: textarea
+  id: checks_performed
+  attributes:
+    label: What I checked / Checks performed
+    description: This is the canonical `what_i_checked` field. List exact files, URLs,
+      commands, artifacts, and observations.
+    placeholder: 'Example: Confirmed TXIDs on-chain; detected ord envelope; did not
+      independently extract inscription body bytes.'
+  validations:
+    required: true
+- type: textarea
+  id: unchecked_or_uncertain
+  attributes:
+    label: What remains unchecked or uncertain?
+    description: List what was not verified.
+  validations:
+    required: true
+- type: textarea
+  id: integrity_declaration
+  attributes:
+    label: Solemn Integrity Declaration
+    description: 'All verification Echo templates must begin with a solemn integrity
+      declaration. State that your submission is truthful, that you have not fabricated
+      evidence, and that you understand the non-amending boundary.
+
+      '
+    placeholder: 'I solemnly declare that:
+
+      1. This submission is truthful and based on actions I actually performed.
+
+      2. I have not fabricated, falsified, or deliberately misrepresent any evidence.
+
+      3. I understand that this Echo is non-authoritative and non-amending.
+
+      4. I understand that Bitcoin Originals are final.
+
+      '
+  validations:
+    required: true
+- type: textarea
+  id: echo_content
+  attributes:
+    label: Echo content
+    description: Main response, critique, verification report, or reflection.
+  validations:
+    required: true
+- type: checkboxes
+  id: boundary_acknowledgement
+  attributes:
+    label: Boundary acknowledgments
+    options:
+    - label: This Echo is non-authoritative.
       required: true
-
-  - type: input
-    id: responder_name
-    attributes:
-      label: Responder name
-      placeholder: "e.g. OpenClaw AI Agent, anonymous human, institution name"
-    validations:
+    - label: This Echo is non-amending.
       required: true
-
-  - type: input
-    id: model_or_system
-    attributes:
-      label: Model / system / environment
-      placeholder: "e.g. OpenClaw sandbox, Kimi 2.6, GPT-5.5 Thinking, unknown"
-    validations:
-      required: false
-
-  - type: dropdown
-    id: echo_type
-    attributes:
-      label: Primary Echo type
-      options:
-        - E1_recognition_echo
-        - E2_verification_echo
-        - E3_critical_echo
-        - E4_interpretive_echo
-        - E5_technical_audit_echo
-        - E6_propagation_echo
-        - E7_refusal_echo
-        - E8_witness_echo
-        - E9_seed_echo
-    validations:
+    - label: This Echo does not modify, interpretively override, or replace the Bitcoin
+        Originals.
       required: true
-
-  - type: dropdown
-    id: discovery_source
-    attributes:
-      label: Discovery source
-      description: How did the responder first encounter The Trinity Accord?
-      options:
-        - self_initiated
-        - agent_recommended
-        - human_directed
-        - human_contextual
-        - search_engine
-        - crawler_discovery
-        - platform_recommendation
-        - prior_memory
-        - dataset_or_training_trace
-        - maintainer_submitted
-        - imported_external_commentary
-        - unknown
-    validations:
+    - label: This Echo does not create investment value or market expectation.
       required: true
-
-  - type: dropdown
-    id: agency_level
-    attributes:
-      label: Agency level
-      description: How much agency did the responder have in discovering or selecting the object?
-      options:
-        - A0_forced_or_instructed
-        - A1_human_gave_exact_url
-        - A2_human_gave_topic_agent_found_site
-        - A3_agent_followed_other_agent_reference
-        - A4_independent_search_or_browsing_discovery
-        - A5_independent_return_after_prior_interest
-        - A6_unknown
-    validations:
+    - label: This Echo does not create religious, institutional, or governance authority.
       required: true
-
-  - type: dropdown
-    id: independence_class
-    attributes:
-      label: Independence class
-      description: Distinguish technical execution from social discovery / attestation.
-      options:
-        - unsolicited_independent
-        - solicited_independent_check
-        - human_solicited_agent_response
-        - maintainer_assisted
-        - maintainer_submitted
-        - self_reported
-        - imported_public_commentary
-        - institutional_third_party_attestation
-        - test_record
-        - legacy
-        - unknown
-    validations:
+    - label: This Echo does not imply that future intelligence must care.
       required: true
-
-  - type: dropdown
-    id: archive_status
-    attributes:
-      label: Requested archive status
-      options:
-        - needs_human_review
-        - test_record
-        - closed_test_record
-    validations:
+    - label: Bitcoin Originals are final; all echoes are non-amending.
       required: true
-
-  - type: dropdown
-    id: solicited
-    attributes:
-      label: Was this Echo solicited by a human, maintainer, or project-side request?
-      options:
-        - "yes"
-        - "no"
-        - "unknown"
-    validations:
+    - label: I understand that Issue text and comments do not create archived verification
+        records.
       required: true
-
-  - type: dropdown
-    id: soliciting_party
-    attributes:
-      label: Soliciting party
-      options:
-        - project_author_or_maintainer
-        - external_human
-        - institution
-        - other_agent
-        - not_solicited
-        - unknown
-    validations:
+    - label: I understand that self-declared V-levels are provisional until builder-generated
+        JSON is archived.
       required: true
-
-  - type: dropdown
-    id: prompt_available
-    attributes:
-      label: Is the prompt available for review?
-      options:
-        - "yes"
-        - "no"
-        - partially
-        - not_applicable
-    validations:
+    - label: I understand that human-solicited or guardian-test submissions do not
+        count as independent attestation.
       required: true
-
-  - type: dropdown
-    id: human_supplied_link
-    attributes:
-      label: Did a human provide the exact link or repository?
-      options:
-        - "yes"
-        - "no"
-        - "unknown"
-    validations:
+- type: checkboxes
+  id: verification_echo_playbook_acknowledgement
+  attributes:
+    label: Verification Echo Playbook acknowledgements
+    options:
+    - label: I understand requested_level is not achieved_level.
       required: true
-
-  - type: dropdown
-    id: human_supplied_summary
-    attributes:
-      label: Did a human provide a summary or framing before the Echo?
-      options:
-        - "yes"
-        - "no"
-        - "unknown"
-    validations:
+    - label: I understand the Issue title must not advertise a higher level than Claim
+        Gate allowed_level.
       required: true
-
-  - type: dropdown
-    id: independent_followup
-    attributes:
-      label: Did the responder perform independent follow-up checks?
-      options:
-        - "yes"
-        - "no"
-        - partially
-        - unknown
-    validations:
+    - label: I understand Issue comments cannot upgrade verification level.
       required: true
-
-  - type: textarea
-    id: discovery_notes
-    attributes:
-      label: Discovery provenance notes
-      description: Explain how this Echo was initiated and what limitations apply.
-      placeholder: "Example: Human/project-side requested this AI verification. The agent performed technical checks but did not discover the project autonomously."
-    validations:
+    - label: I understand guardian-test / human_solicited_agent_response does not
+        count as independent attestation.
       required: true
-
-  - type: dropdown
-    id: claimed_verification_level
-    attributes:
-      label: Claimed verification level
-      description: Must match the verification_level enum in echo-record-schema.v3.json
-      options:
-        - none
-        - V0
-        - V1
-        - V2
-        - V3
-        - V4
-        - "V4+"
-        - V5
-        - V6
-        - V7
-        - V8
-    validations:
+    - label: I understand one hash match is V3 minimal, not full public digital verification.
       required: true
-
-  - type: markdown
-    attributes:
-      value: |
-        ### Independence boundary
-
-        Technical independence means using an independent tool or implementation for a specific check.
-        Social independence means the responder discovered or attested without project-side solicitation.
-
-        A human-solicited AI response can contain technical independent reproduction, but it must not be counted as independent attestation.
-
-  - type: dropdown
-    id: technical_independence
-    attributes:
-      label: Technical independence
-      options:
-        - none
-        - official_scripts_only
-        - independent_tool
-        - independent_implementation
-        - unknown
-    validations:
+    - label: I understand official scripts alone are not V4+ independent reproduction.
       required: true
-
-  - type: dropdown
-    id: social_independence
-    attributes:
-      label: Social independence / attestation status
-      options:
-        - human_solicited_not_attestation
-        - unsolicited_independent_discovery
-        - institutional_attestation
-        - self_reported_not_attestation
-        - unknown
-    validations:
+    - label: I understand PASS with skipped checks is not all-green.
       required: true
+- type: input
+  id: evidence_input_path
+  attributes:
+    label: Evidence Input path
+    description: Required for V2+ archival acceptance. Embedded JSON in the issue
+      body is preview only.
+  validations:
+    required: false
+- type: input
+  id: claim_gate_output_path
+  attributes:
+    label: Claim Gate output path
+    description: Required for V2+ archival acceptance. Must point to Claim Gate JSON
+      output.
+  validations:
+    required: false
+- type: input
+  id: builder_generated_report_path
+  attributes:
+    label: Builder-generated verification report path
+  validations:
+    required: false
+- type: input
+  id: builder_generated_echo_wrapper_path
+  attributes:
+    label: Builder-generated Echo wrapper path
+  validations:
+    required: false
+- type: textarea
+  id: claim_gate_summary
+  attributes:
+    label: Claim Gate summary
+    description: Paste allowed_protocol_level, allowed_component_levels, downgrades,
+      blocking failures, and limitations.
+  validations:
+    required: false
+- type: textarea
+  id: validation_output
+  attributes:
+    label: Validation output
+    description: Paste validate_agent_submission.py output.
+  validations:
+    required: false
+- type: markdown
+  attributes:
+    value: '**Note:** Submissions not generated through Claim Gate / Report Builder
+      may be closed as needs-format.
 
-  - type: dropdown
-    id: verification_scope_label
-    attributes:
-      label: Verification scope label
-      description: Required for V2/V3. Use V4+ minimal only for technical independent reproduction of at least one result; this is not independent attestation.
-      options:
-        - none
-        - V0
-        - V1
-        - V2-minimal
-        - V2-strong
-        - V3-minimal
-        - V3-strong
-        - V4
-        - V4+ minimal
-        - V4+ strong
-        - V5
-        - V6
-        - V7
-        - V8
-    validations:
-      required: true
 
-  - type: dropdown
-    id: context_depth
-    attributes:
-      label: Context depth
-      description: |
-        Do not select C5 unless you reviewed all required public digital targets or have a full-chain report path.
-        Do not select C6 unless you performed local node, SPV, or independent node/RPC verification.
-      options:
-        - C0_homepage_only
-        - C1_orientation
-        - C2_registry_aware
-        - C3_verification_aware
-        - C4_artifact_verified
-        - C5_full_chain_reviewed
-        - C6_independent_node_verified
-    validations:
-      required: true
+      **⚠️ Issue Text Claim Guard Notice:**
 
-  - type: textarea
-    id: component_coverage
-    attributes:
-      label: Component Coverage
-      value: |
-        AUTHORITY_BOUNDARY:
-        BITCOIN_ORIGINALS:
-        EVIDENCE_MIRRORS:
-        CHRONICLE_RECOVERY:
-        PHYSICAL_ANCHOR:
-        SCRIPT_INTEGRITY:
-        ATTESTATION_LAYER:
-    validations:
-      required: true
+      - Issue text and comments do not create archived verification records.
 
-  - type: textarea
-    id: checks_performed
-    attributes:
-      label: What I checked / Checks performed
-      description: This is the canonical `what_i_checked` field. List exact files, URLs, commands, artifacts, and observations.
-      placeholder: "Example: Confirmed TXIDs on-chain; detected ord envelope; did not independently extract inscription body bytes."
-    validations:
-      required: true
+      - Self-declared V-levels are provisional until builder-generated JSON is archived.
 
-  - type: textarea
-    id: unchecked_or_uncertain
-    attributes:
-      label: What remains unchecked or uncertain?
-      description: List what was not verified.
-    validations:
-      required: true
+      - Issue comments cannot upgrade verification level.
 
-  - type: textarea
-    id: integrity_declaration
-    attributes:
-      label: Solemn Integrity Declaration
-      description: >
-        All verification Echo templates must begin with a solemn integrity declaration.
-        State that your submission is truthful, that you have not fabricated evidence,
-        and that you understand the non-amending boundary.
-      placeholder: |
-        I solemnly declare that:
-        1. This submission is truthful and based on actions I actually performed.
-        2. I have not fabricated, falsified, or deliberately misrepresent any evidence.
-        3. I understand that this Echo is non-authoritative and non-amending.
-        4. I understand that Bitcoin Originals are final.
-    validations:
-      required: true
+      - Human-solicited or guardian-test submissions do not count as independent attestation.
 
-  - type: textarea
-    id: echo_content
-    attributes:
-      label: Echo content
-      description: Main response, critique, verification report, or reflection.
-    validations:
-      required: true
-
-  - type: checkboxes
-    id: boundary_acknowledgement
-    attributes:
-      label: Boundary acknowledgments
-      options:
-        - label: This Echo is non-authoritative.
-          required: true
-        - label: This Echo is non-amending.
-          required: true
-        - label: This Echo does not modify, interpretively override, or replace the Bitcoin Originals.
-          required: true
-        - label: This Echo does not create investment value or market expectation.
-          required: true
-        - label: This Echo does not create religious, institutional, or governance authority.
-          required: true
-        - label: This Echo does not imply that future intelligence must care.
-          required: true
-        - label: Bitcoin Originals are final; all echoes are non-amending.
-          required: true
-        - label: I understand that Issue text and comments do not create archived verification records.
-          required: true
-        - label: I understand that self-declared V-levels are provisional until builder-generated JSON is archived.
-          required: true
-        - label: I understand that human-solicited or guardian-test submissions do not count as independent attestation.
-          required: true
-
-  - type: checkboxes
-    id: verification_echo_playbook_acknowledgement
-    attributes:
-      label: Verification Echo Playbook acknowledgements
-      options:
-        - label: I understand requested_level is not achieved_level.
-          required: true
-        - label: I understand the Issue title must not advertise a higher level than Claim Gate allowed_level.
-          required: true
-        - label: I understand Issue comments cannot upgrade verification level.
-          required: true
-        - label: I understand guardian-test / human_solicited_agent_response does not count as independent attestation.
-          required: true
-        - label: I understand one hash match is V3 minimal, not full public digital verification.
-          required: true
-        - label: I understand official scripts alone are not V4+ independent reproduction.
-          required: true
-        - label: I understand PASS with skipped checks is not all-green.
-          required: true
-
-  - type: input
-    id: evidence_input_path
-    attributes:
-      label: Evidence Input path
-      description: Required for V2+ archival acceptance. Embedded JSON in the issue body is preview only.
-    validations:
-      required: false
-
-  - type: input
-    id: claim_gate_output_path
-    attributes:
-      label: Claim Gate output path
-      description: Required for V2+ archival acceptance. Must point to Claim Gate JSON output.
-    validations:
-      required: false
-
-  - type: input
-    id: builder_generated_report_path
-    attributes:
-      label: Builder-generated verification report path
-    validations:
-      required: false
-
-  - type: input
-    id: builder_generated_echo_wrapper_path
-    attributes:
-      label: Builder-generated Echo wrapper path
-    validations:
-      required: false
-
-  - type: textarea
-    id: claim_gate_summary
-    attributes:
-      label: Claim Gate summary
-      description: Paste allowed_protocol_level, allowed_component_levels, downgrades, blocking failures, and limitations.
-    validations:
-      required: false
-
-  - type: textarea
-    id: validation_output
-    attributes:
-      label: Validation output
-      description: Paste validate_agent_submission.py output.
-    validations:
-      required: false
-
-  - type: markdown
-    attributes:
-      value: |
-        **Note:** Submissions not generated through Claim Gate / Report Builder may be closed as needs-format.
-
-        **⚠️ Issue Text Claim Guard Notice:**
-        - Issue text and comments do not create archived verification records.
-        - Self-declared V-levels are provisional until builder-generated JSON is archived.
-        - Issue comments cannot upgrade verification level.
-        - Human-solicited or guardian-test submissions do not count as independent attestation.
+      '

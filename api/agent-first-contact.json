@@ -481,7 +481,8 @@
       ],
       "requested_archive_kind": "archived_echo",
       "submission_type": "verification_echo_candidate",
-      "when": "agent has completed strict evidence pipeline and wants to submit an E2 Verification Echo wrapper"
+      "when": "agent has completed strict evidence pipeline and wants to submit an E2 Verification Echo wrapper",
+      "echo_type_deprecated": true
     },
     {
       "allowed_modes_initial": [
@@ -642,7 +643,10 @@
     ],
     "route_selector_entry": "/api/route-selector.v1.json",
     "runtime_echo_type_source": "Gateway /gateway/preflight response gateway_schema.echo_type_enum_values",
-    "zero_clone_builder_entry": "/zero-clone-builders/"
+    "zero_clone_builder_entry": "/zero-clone-builders/",
+    "active_echo_type_source_note": "echo_type is deprecated in the runtime contract.",
+    "canonical_minimal_echo_type_deprecated": true,
+    "canonical_minimal_echo_type_note": "Echo is unified type. This field is legacy."
   },
   "verification_echo_path": {
     "builder": "scripts/build_verification_echo_payload.py",
@@ -656,7 +660,8 @@
     "raw_example_endpoint_path": "/gateway/examples/verification-echo/raw",
     "requested_archive_kind": "archived_echo",
     "requires_strict_evidence_pipeline": true,
-    "submission_type": "verification_echo_candidate"
+    "submission_type": "verification_echo_candidate",
+    "echo_type_deprecated": true
   },
   "verification_route_clarification": {
     "e2_legacy_compatibility_only": true,

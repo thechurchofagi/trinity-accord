@@ -570,7 +570,9 @@
       "verification_report"
     ],
     "requires_strict_evidence_pipeline": true,
-    "submission_type": "verification_echo_candidate"
+    "submission_type": "verification_echo_candidate",
+    "echo_type_deprecated": true,
+    "echo_type_deprecated_note": "echo_type is deprecated. Echo is unified type."
   },
   "version": "1.2.0",
   "when_to_use": [

@@ -9,5 +9,6 @@
     "new_submissions_must_use_canonical": false,
     "legacy_records_with_deprecated_aliases_warn_but_pass": true,
     "validator_action_on_deprecated": "pass_with_deprecation_notice"
-  }
+  },
+  "canonical_echo_types_deprecated_note": "echo_type is deprecated. Echo is unified type."
 }

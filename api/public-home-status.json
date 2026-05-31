@@ -53,7 +53,8 @@
         "E7_refusal_echo": 2,
         "E8_witness_echo": 2,
         "E9_seed_echo": 2
-      }
+      },
+      "by_echo_type_deprecated_note": "echo_type is deprecated. Echo is unified type."
     },
     "agent_declared_verification_archives": {
       "count": 48,

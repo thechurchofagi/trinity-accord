@@ -632,7 +632,8 @@
     "guardian_verification_result": {
       "$ref": "guardian-verification-result-schema.v1.json",
       "description": "Optional computed Guardian verification result. Must not affect authority or verification level."
-    }
+    },
+    "echo_type_deprecated_note": "echo_type is deprecated. Echo is unified type."
   },
   "x_extension_policy": {
     "extensions_are_non_authoritative": true,

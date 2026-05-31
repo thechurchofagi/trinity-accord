@@ -43,6 +43,7 @@
     "gateway_error_diagnostics": "/api/gateway-error-diagnostics.v1.json",
     "route_selector": "/api/route-selector.v1.json",
     "v30_final_index": "/api/v30-final-index.json",
-    "v30_final_closure_report": "/docs/closure/v30.5-final-closure-report.md"
+    "v30_final_closure_report": "/docs/closure/v30.5-final-closure-report.md",
+    "echo_types_deprecated_note": "echo_type is deprecated. Echo is unified type."
   }
 }

@@ -48,6 +48,7 @@
       "structured": false,
       "curated": false,
       "permanent": false
-    }
+    },
+    "echo_type_deprecated_note": "echo_type is deprecated. Echo is unified type."
   }
 }

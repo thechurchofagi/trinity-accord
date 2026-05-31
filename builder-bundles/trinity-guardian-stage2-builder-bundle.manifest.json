@@ -1,14 +1,14 @@
 {
   "archive": "trinity-guardian-stage2-builder-bundle.tar.gz",
-  "archive_sha256": "c258372eab5c571dd3f7e96fa91b8d4a6e1278191be7255affb41f4df96d967c",
-  "archive_size_bytes": 59113,
+  "archive_sha256": "fb8117307bb54f14f28b41de1c3fb9119ca043bdc8be4d25ffd3bb82f94602ed",
+  "archive_size_bytes": 59218,
   "bundle": "guardian_listing_stage_2",
   "entrypoint": "scripts/build_guardian_listing_request_payload.py",
   "files": [
     {
       "path": "api/agent-issue-gateway-payload-schema.v1.json",
-      "sha256": "8e58feceaeb27a947179626e0421a653375f4b36d4c66f337cae191dc5c5a345",
-      "size_bytes": 49254
+      "sha256": "70ba63700d2437903d7909c970246edb571beea590deff72d8e7003088114d7c",
+      "size_bytes": 49361
     },
     {
       "path": "api/agent-output-policy.v1.json",
@@ -17,8 +17,8 @@
     },
     {
       "path": "api/agent-submit-gateway.json",
-      "sha256": "16fa945350ab39cd449909c8ffb650e1a46b47f4e59718076f99f28e1b8de58b",
-      "size_bytes": 24013
+      "sha256": "15f792d74cb424fd675be76dc1c4143345125cb326ed54f2c7b5b5e8434cd2be",
+      "size_bytes": 24130
     },
     {
       "path": "api/gateway-builder-route-map.v1.json",
@@ -37,8 +37,8 @@
     },
     {
       "path": "api/protocol-terms.v1.json",
-      "sha256": "3524bdf1f0535d5647af29e6535bfd58436184f2ed92d16116f6ef58d1fa5f3d",
-      "size_bytes": 3750
+      "sha256": "2414d5be178394e3b3702eb8b632b016a93bda2d4973a6f46336472ba93f9e04",
+      "size_bytes": 3778
     },
     {
       "path": "scripts/agent_authorship_common.py",

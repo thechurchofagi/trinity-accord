@@ -952,7 +952,9 @@
         ],
         "properties": {
           "echo_type": {
-            "const": "E2_verification_echo"
+            "const": "E2_verification_echo",
+            "deprecated": true,
+            "description": " (deprecated - Echo is unified type)"
           }
         },
         "allOf": [
