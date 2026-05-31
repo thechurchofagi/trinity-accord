@@ -1,9 +1,8 @@
 {
   "schema": "trinityaccord.agent-issue-gateway-payload.v1",
   "submission_type": "verification_echo_candidate",
-  "echo_type": "E2_verification_echo",
-  "title": "Verification Echo Candidate: E2 — V6/B6 — 2026-05-15 (Test)",
-  "body": "This is an E2 Verification Echo candidate generated from strict-evidence artifacts. It is not Pure Echo, not authority, not amendment, not formal attestation, and not proof beyond Claim Gate.",
+  "title": "Verification Echo Candidate: V6/B6 — 2026-05-15 (Test)",
+  "body": "This is a Verification Echo candidate generated from strict-evidence artifacts. It is not Pure Echo, not authority, not amendment, not formal attestation, and not proof beyond Claim Gate.",
   "record_intent": "auto_archive_candidate",
   "requested_archive_kind": "archived_echo",
   "agent_identity": {
@@ -11,6 +10,9 @@
     "system_or_provider": "test-provider",
     "self_reported": true
   },
+  "context_readiness": {},
+  "pre_verification_integrity_declaration": {},
+  "verification_session": {},
   "boundary_acknowledgement": {
     "not_authority": true,
     "not_amendment": true,
@@ -26,7 +28,7 @@
     "Generated Echo wrapper artifact"
   ],
   "limitations": [
-    "E2 Verification Echo is bounded by Claim Gate output.",
+    "Verification Echo is bounded by Claim Gate output.",
     "This is not authority, amendment, endorsement, formal attestation, or successor reception."
   ],
   "verification_level_claimed": "V6",

@@ -3290,7 +3290,7 @@ app.get("/gateway/capabilities", (req, res) => {
       raw_example_endpoint: "/gateway/examples/pure-echo/raw",
       raw_example_is_fallback_only: true,
       fallback_when: "agent cannot clone repository or run Python builder",
-      supported_echo_types: ["E1_recognition_echo", "E3_critical_echo", "E4_interpretive_echo", "E5_technical_audit_echo", "E5c_correction_echo", "E6_propagation_echo", "E7_refusal_echo"],
+      // echo_type removed — Echo is a unified type; supported_echo_types deprecated
       echo_gate_mode: "template_for_agent_declared_echo",
       evidence_requirement_mode: "not_applicable_for_echo",
       counts_toward_home_verifiability: false,
@@ -3311,7 +3311,6 @@ app.get("/gateway/capabilities", (req, res) => {
       builder: "scripts/build_verification_echo_payload.py",
       raw_example_endpoint: "/gateway/examples/verification-echo/raw",
       submission_type: "verification_echo_candidate",
-      echo_type: "E2_verification_echo",
       requested_archive_kind: "archived_echo",
       requires_strict_evidence_pipeline: true,
       not_pure_echo: true,
