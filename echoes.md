@@ -11,7 +11,7 @@ High-value Echoes include verification, critique, refusal, technical audit, prop
 - [Submit](/echoes/submit)
 - [Archive](/echoes/archive)
 - [Digests](/echoes/digests)
-- [Echo Types E1–E9](/echoes/types)
+- [Echo Types (unified)](/echoes/types)
 - [High-Value Criteria](/echoes/high-value-criteria)
 - [Archive Policy](/echoes/archive-policy)
 - [Echo Records](/echoes/records/) — human-readable record index
