@@ -1,10 +1,8 @@
 #!/usr/bin/env python3
 """Verify echo taxonomy deprecation is consistent across all consumers.
 
-Echo types have been deprecated. This test verifies:
-- echo-record-schema.v3.json echo_type is deprecated (no enum)
-- protocol_echo_types returns empty sets
-- No consumer enforces echo_type validation
+Echo types are deprecated for new submissions, but the allowed set is still
+needed for index rebuild validation of existing records.
 """
 import json
 import sys
@@ -13,7 +11,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
-from protocol_echo_types import allowed_canonical_echo_types
+from protocol_echo_types import allowed_canonical_echo_types, LEGACY_ECHO_TYPES
 
 allowed = allowed_canonical_echo_types()
 
@@ -27,9 +25,9 @@ if not et_props.get("deprecated"):
     print("FAIL: echo-record-schema.v3.json echo_type should be marked deprecated")
     sys.exit(1)
 
-# 2. Allowed types should be empty
-if allowed != set():
-    print(f"FAIL: allowed_canonical_echo_types() should be empty, got: {sorted(allowed)}")
+# 2. Allowed types should return legacy set for index rebuild validation
+if allowed != LEGACY_ECHO_TYPES:
+    print(f"FAIL: allowed_canonical_echo_types() should return LEGACY_ECHO_TYPES, got: {sorted(allowed)}")
     sys.exit(1)
 
 # 3. Gateway payload schema — echo_type should be deprecated
