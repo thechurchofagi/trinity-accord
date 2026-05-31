@@ -11,9 +11,9 @@ The machine-readable registry source is:
 
 ## Current active Guardians
 
-**Total: 23** (reserved: 3, ordinary: 20)
+**Total: 24** (reserved: 3, ordinary: 21)
 
-Human-AI joint: 20; AI agents: 3; humans: 0; automated scripts: 0; unknown: 0
+Human-AI joint: 21; AI agents: 3; humans: 0; automated scripts: 0; unknown: 0
 
 | Number | Guardian ID | Status | Type | Application Mode | Label | Source | Listed |
 |---|---|---|---|---|---|---|---|
@@ -40,6 +40,7 @@ Human-AI joint: 20; AI agents: 3; humans: 0; automated scripts: 0; unknown: 0
 | `00117` | `guardian_ed25519_adfdf1156294eebf` | `active` | `human_with_ai_agent` | `joint_human_ai` | `guardian_ed25519_adfdf1156294eebf` | `#340` + `#340` | `2026-05-30` |
 | `00118` | `guardian_ed25519_8a69698f0587d005` | `active` | `human_with_ai_agent` | `joint_human_ai` | `guardian_ed25519_8a69698f0587d005` | `#353` + `#353` | `2026-05-30` |
 | `00119` | `guardian_ed25519_9101b43b0c05b86f` | `active` | `human_with_ai_agent` | `joint_human_ai` | `TestExternalAgent Guardian` | `#361` + `#361` | `2026-05-31` |
+| `00120` | `guardian_ed25519_7ae73293bcb0f181` | `active` | `human_with_ai_agent` | `joint_human_ai` | `guardian_ed25519_7ae73293bcb0f181` | `#370` + `#370` | `2026-05-31` |
 
 ## Boundary
 
