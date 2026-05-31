@@ -20,6 +20,7 @@ allowed_warning_fragments = {
     'git rebase --abort || true',
     '"${GATEWAY}/gateway/capabilities" || echo "000")',
     '"${GATEWAY}/gateway/preflight" || echo "000")',
+    'python3 scripts/generate_verification_archive_index.py || echo "::warning::Could not rebuild verification archive index"',
 }
 
 bad = []

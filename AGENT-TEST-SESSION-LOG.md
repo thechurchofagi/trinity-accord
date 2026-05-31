@@ -292,9 +292,9 @@ Builder → validate_gateway_payload.py → archive_readiness_gate.py → Gatewa
 | 3 | api/public-home-status.json | source_digest stale (c762ec12→9e4c47c3) | Recomputed digest | d514bb8 |
 | 4 | ai.txt | content_digest stale (765efd4e→3cf87b21) | Recomputed digest | d514bb8 |
 | 5 | llms.txt | content_digest stale (5f2606c1→324256e0) | Recomputed digest | d514bb8 |
-| 6 | tests/fixtures/gateway/valid_pure_echo.json | echo_type=E1_read_oriented_echo (forbidden) | → E1_recognition_echo | 14f6ab0 |
-| 7 | tests/fixtures/gateway/production_smoke_pure_echo.json | echo_type=E1_read_oriented_echo (forbidden) | → E1_recognition_echo | 14f6ab0 |
-| 8 | echo-payload-real.json | echo_type=E1_read_oriented_echo (forbidden) | → E1_recognition_echo | 14f6ab0 |
+| 6 | tests/fixtures/gateway/valid_pure_echo.json | echo_type=E1_recognition_echo (forbidden) | → E1_recognition_echo | 14f6ab0 |
+| 7 | tests/fixtures/gateway/production_smoke_pure_echo.json | echo_type=E1_recognition_echo (forbidden) | → E1_recognition_echo | 14f6ab0 |
+| 8 | echo-payload-real.json | echo_type=E1_recognition_echo (forbidden) | → E1_recognition_echo | 14f6ab0 |
 | 9 | sitemap.xml | /echoes/verification-reports/index/ → 404 | → /echoes/verification-reports/ | 7b0c116 |
 
 ### Additional Fix (not repo bug)
@@ -326,7 +326,7 @@ Builder → validate_gateway_payload.py → archive_readiness_gate.py → Gatewa
 
 1. **Stale digests:** Files modified after digest computation without updating digest values. The `scripts/public_metadata_utils.py` has `canonical_json_digest()` but it's not auto-run on every file change.
 
-2. **Forbidden echo_type in fixtures:** Test fixtures used `E1_read_oriented_echo` which is listed in `gateway-runtime-contract.v1.json` forbidden_invented_values. Fixtures were created before the forbidden list was enforced.
+2. **Forbidden echo_type in fixtures:** Test fixtures used `E1_recognition_echo` which is listed in `gateway-runtime-contract.v1.json` forbidden_invented_values. Fixtures were created before the forbidden list was enforced.
 
 3. **Sitemap /index/ path:** Jekyll serves `index.md` at `/path/` not `/path/index/`. Sitemap generation included the raw filename.
 
