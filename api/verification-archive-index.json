@@ -1562,5 +1562,18 @@
     "Echo records are indexed separately in api/echo-index.json.",
     "do_not_count_as_attestation is true for all agent-declared verification archives."
   ],
-  "source_digest": "78b149d2ed4c1c13"
+  "source_digest": "9871bb90cff891a3",
+  "version": "1.0.0",
+  "source_digest_algorithm": "sha256-truncated-16",
+  "non_amending_boundary": "Verification archive index is non-authoritative and non-amending.",
+  "limitations": [
+    "Agent-declared verification archives are self-reported and not independently audited.",
+    "Formal verification records require schema=trinityaccord.verification-archive.v1.",
+    "This index does not create verification level or authority."
+  ],
+  "does_not_prove": [
+    "Does not prove independent third-party verification.",
+    "Does not prove authority or endorsement.",
+    "Does not amend Bitcoin Originals."
+  ]
 }
