@@ -166,7 +166,7 @@
     }
   ],
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "2833156eef3070e9",
+  "source_digest": "3c40e3b808efbdaa",
   "error_codes": [
     {
       "code": "GATEWAY_RECEIPT_FALSE_INVALID_DUE_TO_DUPLICATE_INTAKE_KEY",
