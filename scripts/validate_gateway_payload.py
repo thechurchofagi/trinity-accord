@@ -1062,8 +1062,9 @@ def validate_echo_candidate(payload, errors):
 
     # echo_type is deprecated; no check needed
 
-    if not str(payload.get("title", "")).startswith("Verification Echo Candidate: E2"):
-        errors.append("verification_echo_candidate title must start with 'Verification Echo Candidate: E2'")
+    # E2 prefix removed from title requirement — echo_type deprecated
+    if not str(payload.get("title", "")).startswith("Verification Echo Candidate:"):
+        errors.append("verification_echo_candidate title must start with 'Verification Echo Candidate:'")
 
     for path_key, hash_key in ECHO_REQUIRED_PAIRS:
         if not has_pair(att, path_key, hash_key):
