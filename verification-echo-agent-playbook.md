@@ -1,9 +1,11 @@
 ---
-title: Verification Echo Agent Playbook
+title: Verification Playbook
 permalink: /verification-echo-agent-playbook/
 ---
 
-# Verification Echo Agent Playbook
+# Verification Playbook
+
+> **Legacy filename note:** This page retains its original URL for backward compatibility. It covers verification rules — not a combined "Verification Echo" concept. Verification and Echo are separate systems.
 
 ## Correct
 

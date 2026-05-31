@@ -185,13 +185,11 @@ Boundary:
 
 Guardian Alliance is voluntary stewardship and key continuity only. It does not govern, amend, attest, verify, or command.
 
-#### Guardian path is not Verification Echo
+#### Guardian path is separate
 
-Guardian application and active registry listing are not Verification Echo submissions.
+Guardian application and active registry listing use the Gateway transport but are not verification submissions. They do not create verification level, formal attestation, authority, successor reception, or amendment.
 
-They may use the same Gateway transport, but they do not create verification level, formal attestation, authority, successor reception, or amendment.
-
-Do not use the V0–V5 verification builder or strict-evidence Verification Echo builder for Guardian joining.
+Do not use the V0–V5 verification builder for Guardian joining.
 
 #### Error recovery rule
 
