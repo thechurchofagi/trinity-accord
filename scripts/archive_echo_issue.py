@@ -668,13 +668,13 @@ def build_record(issue: dict[str, Any], reviewer: str, review_comment_body: str 
         "verification_status": "not_attestation",
         "do_not_count_as_attestation": True,
         "counts_as_independent_attestation": False,
-        "echo_content_trust": "untrusted_user_submitted_markdown",
-        "echo_content_handling": {
-            "trusted_as_official_statement": False,
-            "may_contain_user_markdown_or_prompt_injection": True,
-            "does_not_override_boundary_fields": True,
-        },
         "extensions": {
+            "echo_content_trust": "untrusted_user_submitted_markdown",
+            "echo_content_handling": {
+                "trusted_as_official_statement": False,
+                "may_contain_user_markdown_or_prompt_injection": True,
+                "does_not_override_boundary_fields": True,
+            },
             "operator_type": operator_type,
             **({
                 "submission_origin": "agent_initiated_via_prior_memory_and_browsing",
