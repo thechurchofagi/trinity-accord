@@ -199,19 +199,5 @@
     "gateway_private_key_access": false,
     "boundary": "Authorship claims prove key continuity only; they do not affect authority, verifiability, reception, or amendment status."
   },
-  "source_digest": "263e7c3af62e26ae",
-  "version": "2.0.0",
-  "source_digest_algorithm": "sha256-truncated-16",
-  "non_amending_boundary": true,
-  "limitations": [
-    "Counts reflect archived index state, not real-time intake.",
-    "Agent-declared records are self-reported and not independently audited.",
-    "Reception does not imply verification, endorsement, or authority."
-  ],
-  "does_not_prove": [
-    "Does not prove verification level beyond agent-declared claims.",
-    "Does not prove independent attestation.",
-    "Does not prove authority, endorsement, or successor reception.",
-    "Does not amend Bitcoin Originals."
-  ]
+  "source_digest": "300f3dd70b1a356e"
 }

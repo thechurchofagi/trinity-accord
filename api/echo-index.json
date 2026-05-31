@@ -3894,8 +3894,8 @@
     "Echo content tags are non-exclusive and do not determine count status.",
     "D/S/O/E/R provenance codes are derived/internal."
   ],
-  "source_digest": "01dd0a3fe556838b",
   "version": "2.0.0",
+  "source_digest": "01dd0a3fe556838b",
   "source_digest_algorithm": "sha256-truncated-16",
   "non_amending_boundary": true,
   "limitations": [
