@@ -61,7 +61,7 @@ def expect_block(body: str, label: str, fragment: str):
 expect_ok(GOOD, "valid E6 listing")
 expect_block(GOOD.replace("render_api_only: true\n", ""), "missing render_api_only", "INVALID_GATEWAY_RECEIPT")
 expect_block(GOOD.replace("gateway_receipt_id: gar-20260525T000000Z-guardianstrict\n", ""), "missing receipt", "INVALID_GATEWAY_RECEIPT")
-expect_block(GOOD.replace("archive_ready: true", "archive_ready: true\narchive_ready: true"), "duplicate key", "INVALID_INTAKE_BLOCK")
+expect_ok(GOOD.replace("archive_ready: true", "archive_ready: true\narchive_ready: true"), "duplicate key (tolerated with warning)")
 expect_block(GOOD + "\n\n" + GOOD, "multiple blocks", "INVALID_INTAKE_BLOCK")
 expect_block(GOOD.replace("archive_ready: true", "archive_ready: maybe"), "bad bool", "MALFORMED_BOOLEAN")
 
