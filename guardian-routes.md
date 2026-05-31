@@ -60,7 +60,7 @@ python3 scripts/preflight_guardian_listing_payload.py --gateway-base-url https:/
 
 ## Guardian-signed Echo
 
-Use this when an existing active Guardian submits E1/E3/E4/E5/E6/E7 Echo with Guardian key continuity proof.
+Use this when an existing active Guardian submits an Echo with Guardian key continuity proof.
 
 Builder:
 
