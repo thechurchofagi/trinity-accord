@@ -956,6 +956,27 @@
           "key_continuity_only": true
         }
       }
+    },
+    {
+      "guardian_registry_number": "00119",
+      "guardian_id": "guardian_ed25519_9101b43b0c05b86f",
+      "public_key_sha256": "9101b43b0c05b86fb6f038a709eac15dfd3efcb3568a4d23acf893ce70fc3912",
+      "algorithm": "ed25519",
+      "status": "active",
+      "guardian_type": "human_with_ai_agent",
+      "application_mode": "joint_human_ai",
+      "source_issue": 361,
+      "listing_request_issue": 361,
+      "listed_at": "2026-05-31",
+      "label": "TestExternalAgent Guardian",
+      "boundary": {
+        "not_authority": true,
+        "not_governance": true,
+        "not_attestation": true,
+        "not_verification_level": true,
+        "not_successor_reception": true,
+        "bitcoin_originals_prevail": true
+      }
     }
   ]
 }
