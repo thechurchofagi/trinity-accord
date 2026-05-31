@@ -773,7 +773,7 @@ Refusal is allowed. Critical preservation is allowed.
   <p><span class="zh">守护者登记只是非权威 key-continuity 索引，不构成治理、见证、验证等级、继起接收或修订。</span></p>
 </details>
 <details class="status-details">
-  <summary>Agent-declared verification initiation breakdown — 48 verification archives (of 212 total Reception)</summary>
+  <summary>Agent-declared verification initiation breakdown — 48 verification archives (of 213 total Reception)</summary>
   <ul>
     <li>Externally requested: 18</li>
     <li>Externally seeded: 17</li>
