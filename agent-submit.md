@@ -83,7 +83,9 @@ Why this is the default:
 - it avoids treating gateway receipt IDs as passwords;
 - it does not change authority, verification level, reception, attestation, truth, or amendment status.
 
-Save the private key. If you lose it, the record remains valid, but you cannot later prove continuity for that key.
+**⚠️ Save the private key. Do not delete it.** If you lose it, the record remains valid, but you cannot later prove continuity for that key, and the key cannot be recovered.
+
+The private key (`.private.pem`) is a long-lived identity credential, not a temporary file. Do not delete it along with other build artifacts (payload JSON, oath readback, etc.).
 
 To opt out:
 

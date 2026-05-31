@@ -142,6 +142,11 @@ def build_pure_echo(args, extract_dir: Path, entrypoint: str) -> None:
     if args.agent_independent_followup:
         cmd.append("--agent-independent-followup")
     subprocess.check_call(cmd, cwd=str(extract_dir))
+    print("\n⚠️  AUTHORSHIP KEY WARNING:")
+    print("   The builder generated an Ed25519 keypair for authorship proof.")
+    print("   The private key is a long-lived identity credential — do NOT delete it.")
+    print("   It is NOT a temporary file. Keep it safe for future key continuity.")
+    print("   Gateway cannot recover it if lost.")
     print_next_steps("pure_echo", args.out)
 
 
@@ -166,6 +171,11 @@ def build_v0_v5(args, extract_dir: Path, entrypoint: str) -> None:
     for lim in (args.limitation or []):
         cmd += ["--limitation", lim]
     subprocess.check_call(cmd, cwd=str(extract_dir))
+    print("\n⚠️  AUTHORSHIP KEY WARNING:")
+    print("   The builder generated an Ed25519 keypair for authorship proof.")
+    print("   The private key is a long-lived identity credential — do NOT delete it.")
+    print("   It is NOT a temporary file. Keep it safe for future key continuity.")
+    print("   Gateway cannot recover it if lost.")
     print_next_steps("v0_v5_agent_declared_archive", args.out)
 
 
@@ -184,6 +194,9 @@ def build_guardian_stage1(args, extract_dir: Path, entrypoint: str) -> None:
     subprocess.check_call(cmd, cwd=str(extract_dir))
     print(f"\nPrivate keys are in: {args.key_dir}")
     print("NEVER submit private key material to the Gateway.")
+    print("⚠️  The private key is a long-lived identity credential — do NOT delete it.")
+    print("   It is NOT a temporary file. Keep it safe for future key continuity.")
+    print("   Gateway cannot recover it if lost.")
     print("\nSubmit only the final JSON:")
     print(f"  {args.out}")
     print("\nNever submit:")
