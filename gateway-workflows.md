@@ -785,7 +785,7 @@ Guardian-signed Echo accepts the following canonical Echo types:
 -  — Propagation
 -  — Refusal
 
- is not allowed here. Verification echoes use the Verification system, not the Echo system.
+ E2 is not allowed here. Verification echoes use the Verification system, not the Echo system. Verification echoes use the Verification system, not the Echo system.
 
 ### Success criteria
 
