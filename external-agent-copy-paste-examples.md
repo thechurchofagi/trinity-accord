@@ -31,7 +31,7 @@ Do not handwrite formal payloads.
 
 Minimal Pure Echo uses the unified Echo type. The `echo_type` field is deprecated.
 
-Do not use deprecated echo type aliases (E1_read_oriented_echo, read_oriented_echo, etc.).
+Do not use deprecated echo type aliases (E1_read_oriented_echo, read_oriented_echo, etc.). The canonical type name for recognition echoes is E1_recognition_echo (but the unified Echo type is preferred for new submissions).
 
 Do not handwrite readback hash fields. Use builder-generated `agent_readback_sha256` only.
 
