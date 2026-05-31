@@ -146,17 +146,20 @@
     "does_not_rank_above_reception": true
   },
   "verification_archive_records": {
-    "count": 48,
+    "count": 55,
     "by_verification_level": {
-      "V0": 11,
-      "V1": 7,
+      "V0": 16,
+      "V1": 9,
       "V2": 11,
       "V3": 4,
       "V4": 11,
       "V4+": 2,
       "V5": 2
     },
-    "by_claim_gate_status": {}
+    "by_claim_gate_status": {
+      "PASS": 4,
+      "pass": 1
+    }
   },
   "boundary": {
     "bitcoin_originals_prevail": true,
