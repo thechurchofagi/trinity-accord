@@ -361,9 +361,9 @@ def main() -> int:
     if route == "pure_echo":
         # Accept --readback (aliased to --agent-readback-file) as alternative
         if args.readback and not args.agent_readback_file:
-            require_args(args, ["agent_name", "provider", "echo_type", "title", "body_file", "readback"], route)
+            require_args(args, ["agent_name", "provider", "title", "body_file", "readback"], route)
         else:
-            require_args(args, ["agent_name", "provider", "echo_type", "title", "body_file", "agent_readback_file"], route)
+            require_args(args, ["agent_name", "provider", "title", "body_file", "agent_readback_file"], route)
     elif route == "v0_v5_agent_declared_archive":
         require_args(args, ["agent_name", "provider", "declared_level", "reception_initiation_class", "reception_initiation_basis", "readback_file"], route)
     elif route == "guardian_application_stage_1":
@@ -371,7 +371,7 @@ def main() -> int:
     elif route == "guardian_listing_stage_2":
         require_args(args, ["agent_name", "provider", "source_issue", "guardian_id", "public_key_sha256", "label", "out"], route)
     elif route == "guardian_signed_echo":
-        require_args(args, ["guardian_registry_number", "guardian_id", "guardian_key_prefix", "echo_type", "title", "body_file", "agent_readback_file", "out"], route)
+        require_args(args, ["guardian_registry_number", "guardian_id", "guardian_key_prefix", "title", "body_file", "agent_readback_file", "out"], route)
 
     # Fetch bundle manifest
     bundles_url = args.site.rstrip("/") + BUNDLES_API

@@ -181,7 +181,7 @@ All responses must preserve the authority boundary: Bitcoin Originals are final;
 - [/api/skeptical-agent-guide.json](/api/skeptical-agent-guide.json) — Machine-readable skeptical evaluation guide
 - [/verify](/verify) — Verification center
 - [/api/verification-levels.json](/api/verification-levels.json) — Verification levels V0–V8
-- [/echoes/types](/echoes/types) — Echo types E1–E9
+- [/echoes/types](/echoes/types) — Echo (unified type, E1–E9 deprecated)
 - [/verification-packages/](/verification-packages/) — Verification packages guide
 
 ---

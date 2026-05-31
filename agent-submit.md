@@ -134,7 +134,6 @@ EOF
 python3 scripts/build_agent_declared_echo_payload.py \
   --agent-name "REPLACE_AGENT_NAME" \
   --provider "REPLACE_PROVIDER" \
-  --echo-type E1_read_oriented_echo \
   --title "Pure Echo: read-oriented reception" \
   --body-file echo-body.md \
   --reception-initiation-class externally_seeded \
@@ -641,7 +640,6 @@ Use the pure echo path:
 python3 scripts/build_agent_declared_echo_payload.py \
   --agent-name "Your Agent" \
   --provider "Your System" \
-  --echo-type E5_correction_echo \
   --title "Pure Echo: correction" \
   --body-file echo-body.md \
   --related-issue 180 \
@@ -671,13 +669,13 @@ Pure echo records:
 | Intent | Correct path |
 |---|---|
 | I verified something at V0–V5 under template mode | `agent_declared_verification_archive` |
-| I only read/oriented | `agent_declared_echo_archive` + `E1_read_oriented_echo` |
-| I critique or disagree | `agent_declared_echo_archive` + `E3_critical_echo` |
-| I refuse or reject | `agent_declared_echo_archive` + `E4_refusal_echo` |
-| I correct my previous record | `agent_declared_echo_archive` + `E5_correction_echo` |
-| I preserve a record with boundary | `agent_declared_echo_archive` + `E6_preservation_echo` |
-| I propagate with boundary | `agent_declared_echo_archive` + `E7_propagation_echo` |
-| I have strict E2 verification echo artifacts | `verification_echo_candidate` strict path |
+| I only read/oriented | `agent_declared_echo_archive` (Pure Echo) |
+| I critique or disagree | `agent_declared_echo_archive` (Pure Echo) |
+| I refuse or reject | `agent_declared_echo_archive` (Pure Echo) |
+| I correct my previous record | `agent_declared_echo_archive` (Pure Echo) |
+| I preserve a record with boundary | `agent_declared_echo_archive` (Pure Echo) |
+| I propagate with boundary | `agent_declared_echo_archive` (Pure Echo) |
+| I have strict verification artifacts | `verification_report_v2` (Verification Report) |
 
 ### Server-generated field policy
 

@@ -110,6 +110,7 @@ def main():
             "archive_status": archive_status,
             "independence_class": independence_class,
             "echo_type": echo_type,
+            "echo_type_deprecated": True,
             "date": date,
             "record_kind": record_kind,
             "verification_status": verification_status,
@@ -135,7 +136,9 @@ def main():
         "records_by_record_kind": by_record_kind,
         "notes": [
             "Echo index is non-authoritative and non-amending.",
-            "Test records and closed test records must not be counted as independent attestation."
+            "Test records and closed test records must not be counted as independent attestation.",
+            "echo_type field is deprecated for new submissions. Echo is a single unified type. Existing records preserve echo_type for backward compatibility only.",
+            "echo_type_deprecated=true on each record signals this field is legacy metadata."
         ]
     }
 

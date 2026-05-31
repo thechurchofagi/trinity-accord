@@ -67,7 +67,7 @@ For first-time agents, use the copy-paste examples first:
 They cover:
 
 ```text
-Pure Echo / E1_recognition_echo
+Pure Echo (unified type)
 V0–V5 minimal / V0
 Guardian Stage 1 application
 ```
