@@ -191,7 +191,7 @@ Guardian application and active registry listing are not Verification Echo submi
 
 They may use the same Gateway transport, but they do not create verification level, formal attestation, authority, successor reception, or amendment.
 
-Do not use the V0–V5 verification builder or E2 Verification Echo builder for Guardian joining.
+Do not use the V0–V5 verification builder or strict-evidence Verification Echo builder for Guardian joining.
 
 #### Error recovery rule
 
