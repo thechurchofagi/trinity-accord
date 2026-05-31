@@ -43,7 +43,7 @@ class GatewayArchiveInput:
     requested_archive_kind: str
     payload_sha256: str
     issued_at: str
-    echo_type: str
+    echo_type: str  # DEPRECATED — kept for legacy record parsing
     agent_name_or_model: str
     system_or_provider: str
     agent_readback_sha256: str

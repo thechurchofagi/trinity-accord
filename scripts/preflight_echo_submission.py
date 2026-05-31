@@ -127,8 +127,8 @@ def preflight_check(text):
         or re.search(r"完整性声明", raw_text)
         or re.search(r"郑重声明", raw_text)
     )
-    # Check if this is a verification echo (E2-E5, E8 types or V1+ level)
-    echo_type_match = re.search(r"\b(E[2-5]|E8)\b", raw_text, re.IGNORECASE)
+    # Check if this is a verification echo (V1+ level preferred; echo_type pattern deprecated)
+    echo_type_match = re.search(r"\b(E[2-5]|E8)\b", raw_text, re.IGNORECASE)  # DEPRECATED fallback
     vlevel_match = re.search(r"\bV[1-8]\b", raw_text, re.IGNORECASE)
     is_verification_echo = bool(echo_type_match or (vlevel_match and intake.declared_level not in (None, "none", "V0")))
 

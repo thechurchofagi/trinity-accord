@@ -33,7 +33,7 @@ BASE_INTAKE_FIELDS = {
     "claim_gate_status",
     "echo_gate_mode",
     "echo_gate_status",
-    "echo_type",
+    "echo_type",  # DEPRECATED — kept for legacy record parsing only
     "payload_profile",
     "gateway_contract_version",
     "authorship_canonical_version",

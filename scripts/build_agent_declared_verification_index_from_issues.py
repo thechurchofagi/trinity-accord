@@ -42,7 +42,9 @@ INDEX_PATH = ROOT / "api" / "agent-declared-verification-index.json"
 # Shared echo taxonomy — single source of truth
 from protocol_echo_types import allowed_canonical_echo_types
 
-# Legacy echo type mapping — normalize old Gateway renders to canonical types
+# LEGACY ONLY: echo_type is deprecated. This mapping normalizes old Gateway renders
+# to canonical types for backward compatibility with existing records.
+# New submissions must not use echo_type.
 LEGACY_ECHO_TYPE_MAP = {
     "E1_read_oriented_echo": "E1_recognition_echo",
     "E6_preservation_echo": "E6_propagation_echo",

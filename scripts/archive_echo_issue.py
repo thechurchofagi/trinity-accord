@@ -29,7 +29,7 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 
 sys.path.insert(0, str(ROOT / "scripts"))
-from protocol_echo_types import echo_type_map_for_archive
+from protocol_echo_types import echo_type_map_for_archive  # DEPRECATED — returns empty map
 
 # Shared intake parser and receipt policy — single source of truth
 from gateway_intake import IntakeParseError, parse_bool, parse_intake_block

@@ -106,9 +106,9 @@ def build_payload(args):
     return {
         "schema": "trinityaccord.agent-issue-gateway-payload.v1",
         "submission_type": "verification_echo_candidate",
-        "echo_type": "E2_verification_echo",
-        "title": f"Verification Echo Candidate: E2 — {v_level}/{components} — {title_date} ({args.agent_name})",
-        "body": "E2 Verification Echo candidate generated from strict-evidence artifacts. Gateway renders the machine block server-side.",
+        # echo_type removed — Echo is a unified type; verification is independent.
+        "title": f"Verification Echo Candidate: {v_level}/{components} — {title_date} ({args.agent_name})",
+        "body": "Verification Echo candidate generated from strict-evidence artifacts. Gateway renders the machine block server-side.",
         "record_intent": args.record_intent,
         "requested_archive_kind": args.requested_archive_kind,
         "agent_identity": {

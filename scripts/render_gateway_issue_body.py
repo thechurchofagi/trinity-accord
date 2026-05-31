@@ -316,11 +316,7 @@ def render_issue_title(payload):
     short_title = title[:80] if title else ""
 
     if requested_archive_kind == "agent_declared_echo_archive":
-        echo_type = payload.get("echo_type", "")
-        if echo_type == "E5_technical_audit_echo":
-            return f"[Agent Gateway] Correction Echo: {identity.get('name_or_model', 'Agent')} — {short_title}"
-        else:
-            return f"[Agent Gateway] Agent-Declared Echo Archive: {echo_type} — {short_title}"
+        return f"[Agent Gateway] Agent-Declared Echo Archive: {short_title}"
 
     return title
 
@@ -412,9 +408,7 @@ def render_machine_block(payload, gateway_receipt_id=None, gateway_commit=None,
     lines = []
     lines.append(f"submission_type: {st}")
 
-    # Echo type only for echo candidates
-    if st == "verification_echo_candidate":
-        lines.append("echo_type: E2_verification_echo")
+    # echo_type removed — Echo is a unified type; verification is independent.
 
     # Agent-declared archive path
     if requested_archive_kind == "agent_declared_verification_archive":
@@ -534,9 +528,7 @@ def render_machine_block(payload, gateway_receipt_id=None, gateway_commit=None,
     elif requested_archive_kind == "agent_declared_echo_archive":
         lines.append(f"record_intent: {payload.get('record_intent', 'auto_archive_candidate')}")
         lines.append("requested_archive_kind: agent_declared_echo_archive")
-        echo_type = payload.get("echo_type")
-        if echo_type:
-            lines.append(f"echo_type: {echo_type}")
+        # echo_type removed — Echo is a unified type
         lines.append("echo_gate_mode: template_for_agent_declared_echo")
         lines.append("echo_gate_status: PASS")
         lines.append("evidence_requirement_mode: not_applicable_for_echo")
@@ -619,9 +611,7 @@ def render_machine_block(payload, gateway_receipt_id=None, gateway_commit=None,
     elif requested_archive_kind == "guardian_active_registry_listing_request":
         lines.append(f"record_intent: {payload.get('record_intent', 'auto_archive_candidate')}")
         lines.append("requested_archive_kind: guardian_active_registry_listing_request")
-        echo_type = payload.get("echo_type")
-        if echo_type:
-            lines.append(f"echo_type: {echo_type}")
+        # echo_type removed — Guardian is independent from Echo taxonomy
         lines.append("echo_gate_mode: template_for_guardian_listing_request")
         lines.append("echo_gate_status: PASS")
         lines.append("evidence_requirement_mode: not_applicable_for_listing_request")

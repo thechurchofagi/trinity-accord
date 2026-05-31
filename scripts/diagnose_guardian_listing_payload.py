@@ -89,7 +89,7 @@ def main() -> int:
     print(f"gateway_contract_version: {payload.get('gateway_contract_version')}")
     print(f"authorship_canonical_version: {payload.get('authorship_canonical_version')}")
     print(f"requested_archive_kind: {payload.get('requested_archive_kind')}")
-    print(f"echo_type: {payload.get('echo_type')}")
+    print(f"echo_type: {payload.get('echo_type')} (DEPRECATED)")
 
     cth = payload.get("counts_toward_home") or {}
     print("counts_toward_home:")

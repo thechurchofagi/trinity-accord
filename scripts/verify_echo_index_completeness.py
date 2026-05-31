@@ -72,7 +72,7 @@ def main():
             "verification_status",
             "do_not_count_as_attestation",
             "independence_class",
-            "echo_type",
+            # echo_type removed — deprecated; Echo is a unified type
             "record_kind",
         ]:
             if field == "do_not_count_as_attestation":

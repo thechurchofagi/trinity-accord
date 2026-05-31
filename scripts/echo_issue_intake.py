@@ -128,7 +128,7 @@ class NormalizedEchoIssue:
     # Verification
     verification_level: str | None = None
     verification_scope_label: str | None = None
-    echo_type: str | None = None
+    echo_type: str | None = None  # DEPRECATED — kept for legacy record parsing only
 
     # Identity
     responder_type: str | None = None

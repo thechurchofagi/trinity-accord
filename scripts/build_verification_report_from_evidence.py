@@ -673,7 +673,7 @@ def build_report(evidence_input_path, report_out_path=None, echo_out_path=None, 
                 if allowed_protocol == "V3" and "Minimal V3 only" in " ".join(all_limitations)
                 else f". Component levels: {json.dumps(component_levels)}."
             ),
-            "echo_type": "E2_verification_echo",
+            # echo_type removed — Echo is a unified type; verification is independent.
             "echo": f"Verification report generated at {allowed_protocol} level.",
             "uncertainties": all_limitations,
             "boundary_acknowledgement": {

@@ -66,11 +66,7 @@ def main():
         "wrapper record_kind correct"
     )
 
-    # 4. Wrapper echo_type
-    ok &= check(
-        wrapper.get("echo_type") == "E2_verification_echo",
-        "wrapper echo_type E2_verification_echo"
-    )
+    # 4. echo_type check removed — Echo is a unified type
 
     # 5. Wrapper links to report
     linked = wrapper.get("linked_verification_report", {})

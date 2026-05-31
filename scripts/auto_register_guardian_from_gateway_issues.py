@@ -42,11 +42,10 @@ from guardian_numbering_policy import (
 )
 from gateway_intake import IntakeParseError, BoolParseError, parse_bool, parse_intake_block
 from gateway_v0_v5_policy import is_valid_gateway_receipt_block
-from protocol_echo_types import canonical_echo_type_for_id
+# echo_type removed — Echo is a unified type; Guardian is independent.
 
 GATEWAY_BOT_SUFFIX = "[bot]"
 GATEWAY_SERVICE = "trinity-agent-issue-gateway"
-GUARDIAN_LISTING_ECHO_TYPE = canonical_echo_type_for_id("E6")
 LEGACY_LISTING_KIND_CUTOFF_UTC = "2026-05-26T00:00:00Z"
 BODY_LISTING_FALLBACK_CUTOFF_UTC = "2026-06-15T00:00:00Z"
 
@@ -441,14 +440,7 @@ def parse_listing_issue(listing_issue: dict, allow_non_bot: bool) -> tuple[dict 
     else:
         return None, decision(False, "blocked", "LISTING_WRONG_ARCHIVE_KIND", "Active Guardian registry listing must use requested_archive_kind=guardian_active_registry_listing_request. Legacy agent_declared_echo_archive listing is accepted only for pre-cutoff issues or valid Guardian self-registrations.", got=requested_kind, cutoff=LEGACY_LISTING_KIND_CUTOFF_UTC)
 
-    if fields.get("echo_type") != GUARDIAN_LISTING_ECHO_TYPE:
-        return None, decision(
-            False,
-            "blocked",
-            "LISTING_NOT_E6_PROPAGATION_ECHO",
-            f"Listing request must be {GUARDIAN_LISTING_ECHO_TYPE}.",
-            got=fields.get("echo_type"),
-        )
+    # echo_type check removed — Echo is a unified type; Guardian is independent.
 
     err = require_true_field(fields, "archive_ready", "listing", issue_number(listing_issue))
     if err:

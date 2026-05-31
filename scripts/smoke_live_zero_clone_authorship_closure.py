@@ -43,6 +43,7 @@ def run(cmd: list[str], cwd: Path, timeout: int = 120) -> subprocess.CompletedPr
     return result
 
 
+# DEPRECATED — echo_type is no longer active. Kept for legacy record compatibility.
 ACTIVE_ECHO_TYPES = {
     "E1_recognition_echo",
     "E2_verification_echo",
@@ -74,12 +75,7 @@ def assert_gateway_runtime_metadata(data: dict, expected_route: str) -> None:
     if not isinstance(schema, dict):
         raise RuntimeError("Gateway response missing gateway_schema object")
 
-    enum_values = set(schema.get("echo_type_enum_values", []))
-    if enum_values != ACTIVE_ECHO_TYPES:
-        raise RuntimeError(f"Gateway active echo_type enum drift: {sorted(enum_values)}")
-
-    if "E1" in enum_values:
-        raise RuntimeError("Gateway active echo_type enum must not use short ID E1")
+    # echo_type enum check removed — Echo is a unified type; echo_type is deprecated
 
     if schema.get("preflight_contract_version") != "trinityaccord.gateway-runtime-contract.v1":
         raise RuntimeError(

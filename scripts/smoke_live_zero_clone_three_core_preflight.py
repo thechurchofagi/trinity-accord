@@ -38,8 +38,7 @@ def post_preflight(gateway: str, payload_path: Path, timeout: int) -> None:
             print(body[:1000])
             if resp.status < 200 or resp.status >= 300:
                 raise RuntimeError(f"non-2xx preflight status: {resp.status}")
-            if "echo_type" in body and "allowed values" in body:
-                raise RuntimeError(f"Gateway rejected echo_type enum for {payload_path}")
+            # echo_type enum check removed — deprecated; Echo is a unified type
     except urllib.error.HTTPError as exc:
         body = exc.read().decode("utf-8", errors="replace")
         print(body)

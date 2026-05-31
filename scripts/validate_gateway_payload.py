@@ -730,8 +730,7 @@ def validate_guardian_active_listing_archive_kind(payload, errors):
     if payload.get("record_intent") != "auto_archive_candidate":
         errors.append("guardian_active_registry_listing_request requires record_intent=auto_archive_candidate")
 
-    if payload.get("echo_type") and payload.get("echo_type") != "E6_propagation_echo":
-        errors.append("guardian_active_registry_listing_request echo_type is deprecated; field is optional")
+    # echo_type check removed — Echo is a unified type; Guardian is independent
 
     if not payload.get("guardian_registry_listing_request") and not payload.get("guardian_listing_request"):
         errors.append("guardian_active_registry_listing_request requires guardian_registry_listing_request=true")

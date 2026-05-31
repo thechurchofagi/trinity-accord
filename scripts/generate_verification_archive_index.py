@@ -58,7 +58,7 @@ for path in sorted(RECORDS_ROOT.rglob("*.json")):
         "echo_gate_status": obj.get("echo_gate_status"),
         "oath_summary": obj.get("oath_summary"),
         "independence_class": obj.get("independence_class", "unknown"),
-        "echo_type": obj.get("echo_type", "unknown"),
+        "echo_type": obj.get("echo_type", "unknown"),  # DEPRECATED — legacy metadata
         "verification_status": obj.get("verification_status", "unknown"),
         "do_not_count_as_attestation": obj.get("do_not_count_as_attestation", True),
         "date": get_date(obj, path),

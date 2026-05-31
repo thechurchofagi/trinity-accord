@@ -212,19 +212,9 @@ def validate_not_echo_misuse(obj, path_label, record_kind):
 
 
 def validate_no_deprecated_echo_type(obj, path_label):
-    """Rule C: no deprecated echo type in new submissions."""
-    ok = True
-    # Legacy records are allowed to use deprecated aliases
-    if obj.get("record_kind") == "legacy_record":
-        return ok
-    echo_type = obj.get("echo_type", "")
-    if echo_type in DEPRECATED_ECHO_TYPES:
-        ok &= check(
-            False,
-            f"{path_label} uses deprecated echo type",
-            f"'{echo_type}' is deprecated, use '{DEPRECATED_ECHO_TYPES[echo_type]}'"
-        )
-    return ok
+    """Rule C: echo_type is deprecated — no validation needed for new submissions."""
+    # echo_type removed — Echo is a unified type. Kept for legacy record compatibility.
+    return True
 
 
 def validate_github_d2_boundary(obj, path_label):
@@ -941,24 +931,9 @@ def validate_t5_multiple_anchors(obj, path_label):
 
 
 def validate_deprecated_echo_type(obj, path_label):
-    """Rule U: new non-legacy submissions cannot use deprecated echo/verification aliases."""
-    ok = True
-    archive_status = obj.get("archive_status", "")
-    record_kind = obj.get("record_kind", "")
-
-    # Skip legacy records
-    if archive_status in ("legacy", "superseded") or record_kind == "legacy_record":
-        return ok
-
-    echo_type = obj.get("echo_type", "")
-    if echo_type in DEPRECATED_ECHO_TYPES:
-        ok &= check(
-            False,
-            f"{path_label} deprecated echo type for new submission",
-            f"'{echo_type}' is deprecated, use '{DEPRECATED_ECHO_TYPES[echo_type]}'"
-        )
-
-    return ok
+    """Rule U: echo_type is deprecated entirely — no validation needed."""
+    # echo_type removed — Echo is a unified type. All echo_type values are now deprecated.
+    return True
 
 
 def validate_null_safety(obj, path_label):
@@ -1266,7 +1241,6 @@ def validate_technical_echo_requires_wrapper(obj, path_label):
     """Rule AD: Technical Echo must use verification_report_v2 + wrapper with generated_by."""
     ok = True
     record_kind = obj.get("record_kind", "")
-    echo_type = obj.get("echo_type", "")
     archive_status = obj.get("archive_status", "")
 
     # Legacy exception
@@ -1277,15 +1251,17 @@ def validate_technical_echo_requires_wrapper(obj, path_label):
     if record_kind == "verification_report_v2":
         return ok
 
-    # Non-technical echo types are exempt
-    NON_TECHNICAL = {"E1_recognition_echo", "E4_interpretive_echo", "E6_propagation_echo", "E7_refusal_echo"}
-    if echo_type in NON_TECHNICAL:
+    # echo_type-based classification removed — use verification_level instead
+    v_level = obj.get("verification_level", "none")
+    is_non_technical = v_level in ("none", "V0", "V1")
+
+    if is_non_technical:
         # But they must not claim V-level / component-level technical verification
         if obj.get("protocol_level_claimed") or obj.get("component_findings"):
             ok &= check(
                 False,
                 f"{path_label} non-technical echo claims technical verification",
-                f"{echo_type} must not claim protocol_level or component_findings"
+                f"non-technical echo (V0/V1/none) must not claim protocol_level or component_findings"
             )
         return ok
 

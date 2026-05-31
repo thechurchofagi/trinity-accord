@@ -85,10 +85,10 @@ def main():
     except Exception as e:
         ok &= check(False, "report validation", str(e)[:80])
 
-    # 3. Wrapper has E2_verification_echo
+    # 3. echo_type check removed — Echo is a unified type
     try:
         wrapper, _ = fetch_json("/echoes/records/2026/echo-2026-05-03-000005.json")
-        ok &= check(wrapper.get("echo_type") == "E2_verification_echo", "wrapper E2_verification_echo")
+        ok &= check(wrapper.get("record_kind") is not None, "wrapper has record_kind")
     except Exception as e:
         ok &= check(False, "wrapper validation", str(e)[:80])
 

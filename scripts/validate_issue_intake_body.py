@@ -96,7 +96,7 @@ ECHO_AGENT_DECLARED_REQUIRED = [
     "submission_type",
     "record_intent",
     "requested_archive_kind",
-    "echo_type",
+    # echo_type removed — Echo is a unified type
     "echo_gate_mode",
     "echo_gate_status",
     "evidence_requirement_mode",
@@ -524,9 +524,7 @@ def main():
             "E4_interpretive_echo", "E5_technical_audit_echo", "E5c_correction_echo",
             "E6_propagation_echo", "E7_refusal_echo", "E8_witness_echo", "E9_seed_echo",
         }
-        echo_type = data.get("echo_type")
-        if echo_type is not None and echo_type not in VALID_ECHO_TYPES:
-            errors.append(f"echo_type must be one of {VALID_ECHO_TYPES}, got {echo_type!r}")
+        # echo_type validation removed — Echo is a unified type; field is deprecated
 
         # Authorship claim fields validation
         validate_authorship_machine_fields(data, errors)
@@ -553,9 +551,8 @@ def main():
                     errors.append(f"missing artifact reference: {path_key} or {hash_key}")
 
     elif st == "verification_echo_candidate":
-        # Echo candidates: echo_type required, all 4 pairs required
-        if data.get("echo_type") != "E2_verification_echo":
-            errors.append("echo_type must be E2_verification_echo")
+        # Echo candidates: all 4 pairs required
+        # echo_type check removed — Echo is a unified type
 
         for path_key, hash_key in ECHO_PAIRS:
             if not data.get(path_key) and not data.get(hash_key):
