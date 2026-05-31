@@ -84,12 +84,10 @@ function main() {
 
   // Build the retirement request payload (without proof)
   const payload = {
-    schema: "trinityaccord.echo.v3",
-    echo_version: "3.0",
-    record_kind: "echo_v3",
-    submission_type: "echo_candidate",
+    schema: "trinityaccord.guardian-retirement.v1",
+    record_kind: "guardian_retirement",
+    submission_type: "guardian_retirement",
     requested_archive_kind: "guardian_retirement",
-    echo_type: "E7_refusal_echo",
     archive_ready: true,
     created_by_gateway: false,
     render_api_only: true,
@@ -97,11 +95,22 @@ function main() {
     guardian_id: guardianId,
     guardian_public_key_sha256: pubSha,
     guardian_registry_number: opts.registryNumber || "",
+    retirement_status: "retired",
     retirement_reason: opts.reason || "voluntary retirement",
+    statement: opts.reason || "voluntary retirement",
+    signed_by_guardian_key: true,
     agent_identity: {
       name_or_model: guardianId,
       system_or_provider: "Guardian self-service retirement",
       self_reported: true,
+    },
+    boundaries: {
+      not_authority: true,
+      not_governance: true,
+      not_verification_level: true,
+      not_attestation: true,
+      not_successor_reception: true,
+      bitcoin_originals_prevail: true,
     },
     boundary_acknowledgement: {
       bitcoin_originals_prevail: true,
