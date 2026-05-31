@@ -53,6 +53,7 @@ EXTERNAL_WITNESS_INDEX = ROOT / "api" / "external-witness-index.json"
 ATTESTATION_INDEX = ROOT / "api" / "independent-attestation-index.json"
 AGENT_DECLARED_INDEX = ROOT / "api" / "agent-declared-verification-index.json"
 AGENT_DECLARED_ECHO_INDEX = ROOT / "api" / "agent-declared-echo-index.json"
+VERIFICATION_ARCHIVE_INDEX = ROOT / "api" / "verification-archive-index.json"
 PHYSICAL_ANCHOR = ROOT / "api" / "core-object-alpha-shenzhen-notary-2026-05-06.json"
 GUARDIAN_REGISTRY = ROOT / "api" / "guardian-registry.json"
 GUARDIAN_ACTIVE_LISTING_POLICY = ROOT / "api" / "guardian-active-listing-policy.v1.json"
@@ -671,6 +672,19 @@ def compute_authorship_claims(agent_declared_records: list[dict[str, Any]]) -> d
 
 
 # ---------------------------------------------------------------------------
+# Helpers
+# ---------------------------------------------------------------------------
+def _count_by(records: list[dict], field: str) -> dict[str, int]:
+    """Count records by a string field value, skipping None/empty."""
+    counts: dict[str, int] = {}
+    for r in records:
+        val = r.get(field)
+        if val:
+            counts[val] = counts.get(val, 0) + 1
+    return dict(sorted(counts.items()))
+
+
+# ---------------------------------------------------------------------------
 # Compute full status
 # ---------------------------------------------------------------------------
 def compute_status() -> dict[str, Any]:
@@ -699,6 +713,12 @@ def compute_status() -> dict[str, Any]:
     # echo archives are now tracked via agent-declared-verification-index with semantic overrides.
     # Kept as legacy file only; no longer merged into agent_declared_records.
 
+    # Load verification-archive-index (verification records split from echo archive)
+    verification_archive_records = []
+    if VERIFICATION_ARCHIVE_INDEX.exists():
+        va_index = load_json(VERIFICATION_ARCHIVE_INDEX)
+        verification_archive_records = [r for r in va_index.get("records", []) if isinstance(r, dict)]
+
     generated_from = [
         "/api/echo-index.json",
         "/api/external-witness-index.json",
@@ -708,6 +728,8 @@ def compute_status() -> dict[str, Any]:
     ]
     if AGENT_DECLARED_INDEX.exists():
         generated_from.append("/api/agent-declared-verification-index.json")
+    if VERIFICATION_ARCHIVE_INDEX.exists():
+        generated_from.append("/api/verification-archive-index.json")
     # DEEP-IDX-002: agent-declared-echo-index removed from live inputs (deprecated)
 
     return {
@@ -717,6 +739,11 @@ def compute_status() -> dict[str, Any]:
         "reception": compute_reception_status(echo_records, agent_declared_records),
         "guardian_registry": compute_guardian_registry_status(guardian_registry, guardian_policy),
         "external_witness_records": compute_external_witness_status(echo_records, external_witness),
+        "verification_archive_records": {
+            "count": len(verification_archive_records),
+            "by_verification_level": _count_by(verification_archive_records, "verification_level"),
+            "by_claim_gate_status": _count_by(verification_archive_records, "claim_gate_status"),
+        },
         "boundary": compute_boundary_status(),
         "legacy_counts": compute_legacy_counts(echo_records, attestation_records),
         "authorship_claims": compute_authorship_claims(agent_declared_records),

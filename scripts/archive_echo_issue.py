@@ -361,6 +361,180 @@ def update_archive_md(archive_md: Path, record_path: Path, title: str) -> None:
 
     archive_md.write_text("\n".join(out).rstrip() + "\n", encoding="utf-8")
 
+# --- Verification archive routing ---
+VERIFICATION_ARCHIVE_KINDS = {
+    "agent_declared_verification_archive",
+}
+
+def is_verification_archive_kind(intake: dict[str, Any]) -> bool:
+    """Check if the intake indicates a verification archive (not an echo archive)."""
+    kind = intake.get("requested_archive_kind", "")
+    return kind in VERIFICATION_ARCHIVE_KINDS
+
+def build_verification_record(issue: dict[str, Any], reviewer: str, review_comment_body: str = "") -> dict[str, Any]:
+    """Build a verification-archive.v1 record, preserving verification-specific semantics."""
+    body = issue.get("body") or ""
+    created_at = parse_dt(issue.get("createdAt", ""))
+    labels = [x.get("name", "") for x in issue.get("labels", [])]
+
+    issue_number = issue.get("number")
+    title = issue.get("title") or f"Verification Issue #{issue_number}"
+    url = issue.get("url") or ""
+
+    echo_type = detect_echo_type(issue)
+    verification_level = detect_verification_level(issue, review_comment_body)
+
+    metadata_text = body + "\n\n" + review_comment_body
+
+    intake = extract_intake_block_fields(body)
+
+    independence_class = extract_bullet_field(metadata_text, "independence_class") or "human_solicited_agent_response"
+    if independence_class not in VALID_INDEPENDENCE_CLASSES:
+        independence_class = "human_solicited_agent_response"
+
+    agency_level = extract_bullet_field(metadata_text, "agency_level") or "A1_human_gave_exact_url"
+    if agency_level not in VALID_AGENCY_LEVELS:
+        agency_level = "A1_human_gave_exact_url"
+
+    operator_type = extract_bullet_field(metadata_text, "operator_type") or "github_issue_submission"
+
+    # Extract verification-specific fields from intake block
+    claim_gate_status = intake.get("claim_gate_status")
+    evidence_requirement_mode = intake.get("evidence_requirement_mode")
+    claim_gate_mode = intake.get("claim_gate_mode")
+    echo_gate_mode = intake.get("echo_gate_mode")
+    echo_gate_status = intake.get("echo_gate_status")
+    agent_declared_protocol_level = intake.get("agent_declared_protocol_level")
+    oath_summary = intake.get("oath_summary")
+
+    limitations_section = extract_section(body, "Limitations")
+    observed_section = extract_section(body, "What I observed") or extract_section(body, "What Is Being Witnessed")
+    checked_section = extract_section(body, "What I checked")
+
+    understanding = first_nonempty_paragraph(
+        observed_section or checked_section,
+        f"Human-reviewed Verification issue #{issue_number}: {title}",
+    )
+
+    source = "maintainer_submitted" if "trinity-accord-guardian" in labels else "human_directed"
+
+    submission_origin = extract_bullet_field(metadata_text, "submission_origin") or ""
+    human_directed_submission = parse_bool_text(extract_bullet_field(metadata_text, "human_directed_submission"))
+    agent_initiated = (
+        submission_origin == "agent_initiated_via_prior_memory_and_browsing"
+        or human_directed_submission is False
+    )
+
+    if agent_initiated:
+        source = "prior_memory"
+        agency_level = "A5_independent_return_after_prior_interest"
+        independence_class = "self_reported"
+        confidence = "medium"
+    else:
+        confidence = "high"
+
+    origin_classification = build_origin_classification(agent_initiated, independence_class, source)
+
+    record: dict[str, Any] = {
+        "schema": "trinityaccord.verification-archive.v1",
+        "verification_archive_version": "1.0",
+        "record_kind": "verification_archive",
+        "origin_classification": origin_classification,
+        "agent_identity": {
+            "name_or_model": (issue.get("author") or {}).get("login", "github_issue_author"),
+            "system_or_provider": "GitHub Issue submission",
+            "self_reported": True,
+            "session_or_run_id": f"issue-{issue_number}",
+        },
+        "verification_level": verification_level,
+        "agent_declared_protocol_level": agent_declared_protocol_level,
+        # Verification-specific semantic fields (preserved, not flattened)
+        "claim_gate_status": claim_gate_status,
+        "evidence_requirement_mode": evidence_requirement_mode,
+        "claim_gate_mode": claim_gate_mode,
+        "echo_gate_mode": echo_gate_mode,
+        "echo_gate_status": echo_gate_status,
+        "oath_summary": oath_summary,
+        "discovery_provenance": {
+            "schema": "trinityaccord.discovery-provenance.v1",
+            "source": source,
+            "agency_level": agency_level,
+            "first_entry": {
+                "url_or_path": url if not agent_initiated else url.rsplit("/issues/", 1)[0] if "/issues/" in url else url,
+                "entry_type": "github_repository",
+            },
+            "confidence": confidence,
+        },
+        "understanding_summary": understanding,
+        "echo_type": echo_type,
+        "echo": body,
+        "uncertainties": sentence_limitations(limitations_section),
+        "boundary_acknowledgement": {
+            "bitcoin_originals_prevail": True,
+            "echo_is_not_authority": True,
+            "echo_is_not_verification_unless_claimed": True,
+            "mirror_is_not_amendment": True,
+            "homepage_only_is_insufficient_for_final_evaluation": True,
+        },
+        "independence_class": independence_class,
+        "archive_status": "accepted_verification",
+        "origin_limitations": sentence_limitations(limitations_section),
+        "not_authority": True,
+        "not_amendment": True,
+        "not_endorsement": True,
+        "bitcoin_originals_prevail": True,
+        "verification_status": "agent_declared_verification",
+        "do_not_count_as_attestation": True,
+        "extensions": {
+            "operator_type": operator_type,
+            "source_issue": {
+                "number": issue_number,
+                "url": url,
+                "title": title,
+                "created_at": issue.get("createdAt"),
+                "updated_at": issue.get("updatedAt"),
+                "author": (issue.get("author") or {}).get("login"),
+                "labels": labels,
+            },
+            "human_review": {
+                "status": "completed",
+                "reviewer": reviewer,
+                "reviewed_at_utc": datetime.now(timezone.utc).isoformat(),
+                "action": "archive",
+            },
+        },
+    }
+
+    return record
+
+
+def next_verification_record_path(records_root: Path, created_at: datetime) -> Path:
+    """Next path for a verification archive record under verification-reports/."""
+    year = created_at.strftime("%Y")
+    date_part = created_at.strftime("%Y-%m-%d")
+    year_dir = records_root / year
+    year_dir.mkdir(parents=True, exist_ok=True)
+
+    max_seq = 0
+    for p in records_root.glob("*/verification-*.json"):
+        m = re.search(r"verification-\d{4}-\d{2}-\d{2}-(\d{6})\.json$", p.name)
+        if m:
+            max_seq = max(max_seq, int(m.group(1)))
+
+    return year_dir / f"verification-{date_part}-{max_seq + 1:06d}.json"
+
+
+def find_existing_verification_record(records_root: Path, issue_number: int) -> Path | None:
+    for p in records_root.glob("*/verification-*.json"):
+        try:
+            obj = json.loads(p.read_text(encoding="utf-8"))
+        except Exception:
+            continue
+        if obj.get("extensions", {}).get("source_issue", {}).get("number") == issue_number:
+            return p
+    return None
+
+
 def build_record(issue: dict[str, Any], reviewer: str, review_comment_body: str = "") -> dict[str, Any]:
     body = issue.get("body") or ""
     created_at = parse_dt(issue.get("createdAt", ""))
@@ -594,6 +768,7 @@ def main() -> int:
     ap.add_argument("--issue-json", required=True)
     ap.add_argument("--reviewer", required=True)
     ap.add_argument("--records-root", default="echoes/records")
+    ap.add_argument("--verification-records-root", default="verification-reports")
     ap.add_argument("--archive-md", default="echoes/archive.md")
     ap.add_argument("--write", action="store_true")
     ap.add_argument("--result-json", default="")
@@ -614,35 +789,74 @@ def main() -> int:
         if p.exists():
             review_comment_body = p.read_text(encoding="utf-8")
 
-    records_root = ROOT / args.records_root
-    archive_md = ROOT / args.archive_md
+    # Route by requested_archive_kind: verification vs echo
+    body = issue.get("body") or ""
+    intake = extract_intake_block_fields(body)
+    is_verification = is_verification_archive_kind(intake)
 
-    existing = find_existing_record(records_root, issue_number)
-    if existing:
+    if is_verification:
+        # --- Verification archive path ---
+        records_root = ROOT / args.verification_records_root
+        existing = find_existing_verification_record(records_root, issue_number)
+        if existing:
+            result = {
+                "status": "already_archived",
+                "record_path": existing.relative_to(ROOT).as_posix(),
+                "issue_number": issue_number,
+                "archive_type": "verification",
+            }
+            if args.result_json:
+                Path(args.result_json).write_text(json.dumps(result, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+            print(json.dumps(result, indent=2, ensure_ascii=False))
+            return 0
+
+        record_path = next_verification_record_path(records_root, parse_dt(issue.get("createdAt", "")))
+        record = build_verification_record(issue, args.reviewer, review_comment_body)
+
+        if args.write:
+            record_path.parent.mkdir(parents=True, exist_ok=True)
+            record_path.write_text(json.dumps(record, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+
         result = {
-            "status": "already_archived",
-            "record_path": existing.relative_to(ROOT).as_posix(),
+            "status": "archived" if args.write else "dry_run",
+            "record_path": record_path.relative_to(ROOT).as_posix(),
             "issue_number": issue_number,
+            "title": issue.get("title"),
+            "archive_type": "verification",
         }
-        if args.result_json:
-            Path(args.result_json).write_text(json.dumps(result, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-        print(json.dumps(result, indent=2, ensure_ascii=False))
-        return 0
+    else:
+        # --- Echo archive path (original behavior) ---
+        records_root = ROOT / args.records_root
+        archive_md = ROOT / args.archive_md
 
-    record_path = next_record_path(records_root, parse_dt(issue.get("createdAt", "")))
-    record = build_record(issue, args.reviewer, review_comment_body)
+        existing = find_existing_record(records_root, issue_number)
+        if existing:
+            result = {
+                "status": "already_archived",
+                "record_path": existing.relative_to(ROOT).as_posix(),
+                "issue_number": issue_number,
+                "archive_type": "echo",
+            }
+            if args.result_json:
+                Path(args.result_json).write_text(json.dumps(result, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+            print(json.dumps(result, indent=2, ensure_ascii=False))
+            return 0
 
-    if args.write:
-        record_path.parent.mkdir(parents=True, exist_ok=True)
-        record_path.write_text(json.dumps(record, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-        update_archive_md(archive_md, record_path.relative_to(ROOT), issue.get("title") or f"Issue #{issue_number}")
+        record_path = next_record_path(records_root, parse_dt(issue.get("createdAt", "")))
+        record = build_record(issue, args.reviewer, review_comment_body)
 
-    result = {
-        "status": "archived" if args.write else "dry_run",
-        "record_path": record_path.relative_to(ROOT).as_posix(),
-        "issue_number": issue_number,
-        "title": issue.get("title"),
-    }
+        if args.write:
+            record_path.parent.mkdir(parents=True, exist_ok=True)
+            record_path.write_text(json.dumps(record, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+            update_archive_md(archive_md, record_path.relative_to(ROOT), issue.get("title") or f"Issue #{issue_number}")
+
+        result = {
+            "status": "archived" if args.write else "dry_run",
+            "record_path": record_path.relative_to(ROOT).as_posix(),
+            "issue_number": issue_number,
+            "title": issue.get("title"),
+            "archive_type": "echo",
+        }
 
     if args.result_json:
         Path(args.result_json).write_text(json.dumps(result, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")

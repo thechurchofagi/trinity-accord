@@ -1,0 +1,18 @@
+{
+  "schema": "trinityaccord.verification-archive-index.v1",
+  "generated_from": "verification-reports/**/*.json",
+  "record_count": 0,
+  "records": [],
+  "records_by_verification_level": {},
+  "records_by_archive_status": {},
+  "records_by_claim_gate_status": {},
+  "records_by_evidence_requirement_mode": {},
+  "records_by_independence_class": {},
+  "notes": [
+    "Verification archive index is non-authoritative and non-amending.",
+    "Records here preserve verification-specific semantics (claim_gate_status, evidence_requirement_mode, oath_summary).",
+    "Echo records are indexed separately in api/echo-index.json.",
+    "do_not_count_as_attestation is true for all agent-declared verification archives."
+  ],
+  "source_digest": "d6e17660471c7153"
+}

@@ -56,6 +56,12 @@ for path in sorted(RECORDS_ROOT.rglob("*.json")):
     obj = load(path)
     rel = "/" + path.relative_to(ROOT).as_posix()
 
+    # Skip verification-archive records — they have their own index
+    if obj.get("schema") == "trinityaccord.verification-archive.v1":
+        continue
+    if obj.get("record_kind") == "verification_archive":
+        continue
+
     item = {
         "path": rel,
         "id": obj.get("id") or obj.get("echo_id") or obj.get("report_id") or path.stem,

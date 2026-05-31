@@ -100,9 +100,11 @@ jobs:
 
           RECORD_PATH=$(python3 -c "import json,sys; print(json.load(open(sys.argv[1]))['record_path'])" /tmp/archive_result.json)
           STATUS=$(python3 -c "import json,sys; print(json.load(open(sys.argv[1]))['status'])" /tmp/archive_result.json)
+          ARCHIVE_TYPE=$(python3 -c "import json,sys; print(json.load(open(sys.argv[1])).get('archive_type','echo'))" /tmp/archive_result.json)
 
           echo "Archive status: ${STATUS}"
           echo "Record path: ${RECORD_PATH}"
+          echo "Archive type: ${ARCHIVE_TYPE}"
 
           # A3: already_archived recovery path
           if [ "$STATUS" = "already_archived" ]; then
@@ -117,7 +119,11 @@ jobs:
               --repo "$GITHUB_REPOSITORY" \
               --body "Already archived as \`$RECORD_PATH\`. Ensuring derived indexes are rebuilt. This record remains non-authoritative, non-amending, and not independent attestation."
 
-            gh workflow run build-echo-index.yml --ref main || echo "::warning::Could not trigger echo index rebuild"
+            if [ "$ARCHIVE_TYPE" = "verification" ]; then
+              python3 scripts/generate_verification_archive_index.py || echo "::warning::Could not rebuild verification archive index"
+            else
+              gh workflow run build-echo-index.yml --ref main || echo "::warning::Could not trigger echo index rebuild"
+            fi
 
             echo "archive_record=$RECORD_PATH" >> "$GITHUB_OUTPUT"
             exit 0
@@ -133,22 +139,37 @@ jobs:
           fi
 
           # A4: Rebuild derived files before commit
-          python3 scripts/generate_echo_index.py
-          bash scripts/build-echo-index.sh
-          python3 scripts/generate_public_home_status.py
-          python3 scripts/test_home_public_status_sync.py
+          if [ "$ARCHIVE_TYPE" = "verification" ]; then
+            python3 scripts/generate_verification_archive_index.py
+            python3 scripts/generate_public_home_status.py
+            python3 scripts/test_home_public_status_sync.py
+          else
+            python3 scripts/generate_echo_index.py
+            bash scripts/build-echo-index.sh
+            python3 scripts/generate_public_home_status.py
+            python3 scripts/test_home_public_status_sync.py
+          fi
 
           # Commit and push
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add \
-            echoes/records \
-            echoes/archive.md \
-            echoes/digests.md \
-            echoes/digests \
-            api/echo-index.json \
-            api/public-home-status.json \
-            index.md
+
+          if [ "$ARCHIVE_TYPE" = "verification" ]; then
+            git add \
+              verification-reports \
+              api/verification-archive-index.json \
+              api/public-home-status.json \
+              index.md
+          else
+            git add \
+              echoes/records \
+              echoes/archive.md \
+              echoes/digests.md \
+              echoes/digests \
+              api/echo-index.json \
+              api/public-home-status.json \
+              index.md
+          fi
 
           # DEEP-ARCH-003: archive reported but no staged changes = fail
           if [ "$STATUS" = "archived" ] && git diff --cached --quiet; then
@@ -160,7 +181,7 @@ jobs:
           if git diff --cached --quiet; then
             echo "No archive file changes to commit."
           else
-            git commit -m "auto-archive echo issue #${ISSUE_NUMBER} (via ${ORIGIN})"
+            git commit -m "auto-archive ${ARCHIVE_TYPE} issue #${ISSUE_NUMBER} (via ${ORIGIN})"
 
             # A2: Require push success
             PUSHED=false
@@ -171,18 +192,29 @@ jobs:
                 exit 1
               fi
               # DEEP-REBASE-001: regenerate derived state after rebase
-              python3 scripts/generate_echo_index.py
-              bash scripts/build-echo-index.sh
-              python3 scripts/generate_public_home_status.py
-              python3 scripts/test_home_public_status_sync.py
-              git add \
-                echoes/records \
-                echoes/archive.md \
-                echoes/digests.md \
-                echoes/digests \
-                api/echo-index.json \
-                api/public-home-status.json \
-                index.md
+              if [ "$ARCHIVE_TYPE" = "verification" ]; then
+                python3 scripts/generate_verification_archive_index.py
+                python3 scripts/generate_public_home_status.py
+                python3 scripts/test_home_public_status_sync.py
+                git add \
+                  verification-reports \
+                  api/verification-archive-index.json \
+                  api/public-home-status.json \
+                  index.md
+              else
+                python3 scripts/generate_echo_index.py
+                bash scripts/build-echo-index.sh
+                python3 scripts/generate_public_home_status.py
+                python3 scripts/test_home_public_status_sync.py
+                git add \
+                  echoes/records \
+                  echoes/archive.md \
+                  echoes/digests.md \
+                  echoes/digests \
+                  api/echo-index.json \
+                  api/public-home-status.json \
+                  index.md
+              fi
               if ! git diff --cached --quiet; then
                 git commit --amend --no-edit
               fi
@@ -210,9 +242,13 @@ jobs:
           # Post confirmation comment
           gh issue comment "$ISSUE_NUMBER" \
             --repo "$GITHUB_REPOSITORY" \
-            --body "Auto-archived as \`$RECORD_PATH\` (via ${ORIGIN}). This record remains non-authoritative, non-amending, and not independent attestation."
+            --body "Auto-archived as \`$RECORD_PATH\` (${ARCHIVE_TYPE} archive via ${ORIGIN}). This record remains non-authoritative, non-amending, and not independent attestation."
 
-          # Trigger echo index rebuild (GITHUB_TOKEN pushes don't fire push events)
-          gh workflow run build-echo-index.yml --ref main || echo "::warning::Could not trigger echo index rebuild"
+          # Trigger appropriate index rebuild
+          if [ "$ARCHIVE_TYPE" = "verification" ]; then
+            python3 scripts/generate_verification_archive_index.py || echo "::warning::Could not rebuild verification archive index"
+          else
+            gh workflow run build-echo-index.yml --ref main || echo "::warning::Could not trigger echo index rebuild"
+          fi
 
           echo "archive_record=$RECORD_PATH" >> "$GITHUB_OUTPUT"
