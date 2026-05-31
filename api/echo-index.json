@@ -1318,5 +1318,21 @@
     "Test records and closed test records must not be counted as independent attestation.",
     "echo_type field is deprecated for new submissions. Echo is a single unified type. Existing records preserve echo_type for backward compatibility only.",
     "echo_type_deprecated=true on each record signals this field is legacy metadata."
-  ]
+  ],
+  "version": "2.0.0",
+  "source_digest_algorithm": "sha256-truncated-16",
+  "non_amending_boundary": true,
+  "limitations": [
+    "Echo records are non-authoritative reception records.",
+    "echo_type field is deprecated; Echo is a unified type.",
+    "Test records and closed test records must not be counted as independent attestation.",
+    "This index does not include agent-declared echo archives (tracked in agent-declared-verification-index)."
+  ],
+  "does_not_prove": [
+    "Does not prove verification level.",
+    "Does not prove independent attestation.",
+    "Does not prove authority or endorsement.",
+    "Does not prove successor civilization reception."
+  ],
+  "source_digest": "4f6cde9bf0d18838"
 }
