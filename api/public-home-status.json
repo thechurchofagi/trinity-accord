@@ -146,12 +146,12 @@
     "does_not_rank_above_reception": true
   },
   "verification_archive_records": {
-    "count": 3,
+    "count": 4,
     "by_verification_level": {
-      "V0": 3
+      "V0": 4
     },
     "by_claim_gate_status": {
-      "PASS": 2,
+      "PASS": 3,
       "pass": 1
     }
   },
