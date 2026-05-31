@@ -199,5 +199,5 @@
     "gateway_private_key_access": false,
     "boundary": "Authorship claims prove key continuity only; they do not affect authority, verifiability, reception, or amendment status."
   },
-  "source_digest": "1db64f04598c4a31"
+  "source_digest": "8b4e79d960587e48"
 }
