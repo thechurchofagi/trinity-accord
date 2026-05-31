@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Guardian-signed Echo workflow wording must use canonical taxonomy and exact oath readback."""
+"""Guardian-signed Echo workflow wording must use unified Echo type and exact oath readback."""
 import re
 import sys
 from pathlib import Path
@@ -21,14 +21,8 @@ if not section:
 errors = []
 
 required = [
-    "E1_recognition_echo",
-    "E3_critical_echo",
-    "E4_interpretive_echo",
-    "E5_technical_audit_echo",
-    "E5c_correction_echo",
-    "E6_propagation_echo",
-    "E7_refusal_echo",
-    "E2 is not allowed here",
+    "unified Echo type",
+    "E2_verification_echo is not allowed here",
     "Exact canonical oath body",
     "exact canonical oath body",
     "do not summarize or paraphrase",
@@ -37,6 +31,22 @@ required = [
 for phrase in required:
     if phrase not in section:
         errors.append(f"Guardian-signed Echo section missing: {phrase}")
+
+# Echo type names (E1, E3, E4, E5, E5c, E6, E7) must NOT appear as required types
+# since echo_type is deprecated. Only E2_verification_echo remains as a forbidden type.
+deprecated_echo_types = [
+    "E1_recognition_echo",
+    "E3_critical_echo",
+    "E4_interpretive_echo",
+    "E5_technical_audit_echo",
+    "E5c_correction_echo",
+    "E6_propagation_echo",
+    "E7_refusal_echo",
+]
+
+for phrase in deprecated_echo_types:
+    if phrase in section:
+        errors.append(f"Guardian-signed Echo section contains deprecated echo type: {phrase}")
 
 for forbidden in [
     "E1/E3/E4/E5/E6/E7 only",
