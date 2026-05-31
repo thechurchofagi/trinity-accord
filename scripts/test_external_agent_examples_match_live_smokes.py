@@ -11,7 +11,6 @@ PATH = ROOT / "api" / "external-agent-operation-examples.v1.json"
 REQUIRED_TOP_LEVEL = {
     "pure_echo_minimal_recognition": {
         "route": "pure_echo",
-        "echo_type": "E1_recognition_echo",
         "authorship_proof_default": True,
     },
     "v0_agent_declared_verification_minimal": {
