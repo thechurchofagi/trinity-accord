@@ -22,7 +22,7 @@
   "core_live_smoked_routes": [
     {
       "route": "pure_echo",
-      "minimal_example": "E1_recognition_echo",
+      "minimal_example": "unified_echo_type (deprecated: E1_recognition_echo)",
       "builder_bundle_route": "pure_echo",
       "copy_paste_doc": "/external-agent-copy-paste-examples/",
       "preflight_path": "/gateway/preflight",

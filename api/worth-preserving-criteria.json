@@ -40,7 +40,7 @@
       "description": "Graduated verification system with explicit overclaim prevention gates."
     },
     {
-      "signal": "echo types E1–E9",
+      "signal": "Echo (unified type, E1–E9 deprecated)",
       "description": "Structured taxonomy for non-authoritative responses, including E3 Critical Echo for dissent."
     },
     {

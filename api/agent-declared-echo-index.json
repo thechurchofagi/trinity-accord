@@ -37,7 +37,11 @@
       "echo_type": "E5_correction_echo",
       "related_issue": 180,
       "relation_to_related_issue": "corrects",
-      "semantic_override_reason": "Issue body states no new verification claimed and corrects Issue #180."
+      "semantic_override_reason": "Issue body states no new verification claimed and corrects Issue #180.",
+      "echo_type_deprecated": true
     }
+  ],
+  "notes": [
+    "echo_type field is deprecated. Echo is a single unified type."
   ]
 }

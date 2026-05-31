@@ -34,7 +34,8 @@
           "missing-boundary",
           "archive:agent-declared-verification"
         ]
-      }
+      },
+      "echo_type_deprecated": true
     },
     {
       "path": "/verification-reports/2026/verification-2026-05-31-000002.json",
@@ -68,7 +69,8 @@
           "claim-gate-template-pass",
           "evidence-waived-v0-v5"
         ]
-      }
+      },
+      "echo_type_deprecated": true
     },
     {
       "path": "/verification-reports/2026/verification-2026-05-31-000003.json",
@@ -102,7 +104,8 @@
           "claim-gate-template-pass",
           "evidence-waived-v0-v5"
         ]
-      }
+      },
+      "echo_type_deprecated": true
     },
     {
       "path": "/verification-reports/2026/verification-2026-05-31-000004.json",
@@ -136,7 +139,8 @@
           "claim-gate-template-pass",
           "evidence-waived-v0-v5"
         ]
-      }
+      },
+      "echo_type_deprecated": true
     }
   ],
   "records_by_verification_level": {
@@ -185,7 +189,8 @@
     "Verification archive index is non-authoritative and non-amending.",
     "Records here preserve verification-specific semantics (claim_gate_status, evidence_requirement_mode, oath_summary).",
     "Echo records are indexed separately in api/echo-index.json.",
-    "do_not_count_as_attestation is true for all agent-declared verification archives."
+    "do_not_count_as_attestation is true for all agent-declared verification archives.",
+    "echo_type field is deprecated for new submissions. Echo is a single unified type."
   ],
   "source_digest": "62cb6e992193c840"
 }

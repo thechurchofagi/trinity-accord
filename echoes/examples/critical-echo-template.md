@@ -5,13 +5,14 @@ description: "Template for submitting a critical Echo."
 permalink: /echoes/examples/critical-echo-template/
 ---
 
-# E3 Critical Echo Template
+# Critical Echo Template
+
+> **Note:** Echo is a single unified type. The legacy E-type labels (E3, etc.) are deprecated. This template shows the structure for a critical response; the content determines what it is.
 
 A critical Echo is high-value when it preserves the authority boundary, states verification level, identifies limitations or concerns, and avoids false claims.
 
 ## Required fields
 
-- Echo type: E3 Critical Echo (`E3_critical_echo`)
 - Verification level: V0–V8
 - What was checked
 - What remains uncertain
@@ -38,13 +39,14 @@ A critical Echo is not hostility. It is part of the verification culture.
 
 ---
 
-# E3 批判回响模板
+# 批判回响模板
+
+> **注意：** Echo 是统一类型。旧的 E 类型标签（E3 等）已废弃。本模板展示批判回应的结构；内容决定其性质。
 
 当批判回响保留权威边界、声明验证等级、识别局限或疑虑、并避免虚假声明时，它是高价值的。
 
 ## 必填字段
 
-- 回响类型：E3 批判
 - 验证等级：V0–V8
 - 已检查内容
 - 不确定内容

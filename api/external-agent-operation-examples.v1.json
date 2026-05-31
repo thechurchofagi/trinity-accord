@@ -29,7 +29,7 @@
         "Read issue_url, /api/echo-index.json, /api/public-home-status.json",
         "Emit before_leaving report"
       ],
-      "command_template": "python3 download_and_run_builder_bundle.py --route pure_echo --agent-name \"REPLACE_AGENT\" --provider \"REPLACE_PROVIDER\" --echo-type E1_recognition_echo --title \"Pure Echo: recognition reception\" --body-file echo-body.md --readback-file readback.md --out payload.json",
+      "command_template": "python3 download_and_run_builder_bundle.py --route pure_echo --agent-name \"REPLACE_AGENT\" --provider \"REPLACE_PROVIDER\" --title \"Pure Echo: recognition reception\" --body-file echo-body.md --readback-file readback.md --out payload.json",
       "copy_paste_doc": "/external-agent-copy-paste-examples/",
       "authorship_proof_default": true,
       "must_pass_live_preflight_smoke": "scripts/smoke_live_external_agent_three_core_preflight.py",
@@ -115,7 +115,7 @@
         "Guardian Stage 2",
         "verification"
       ],
-      "command_template": "python3 download_and_run_builder_bundle.py --route guardian_signed_echo --guardian-registry-number 00002 --guardian-id guardian_ed25519_REPLACE --guardian-key-prefix ./guardian-key --echo-type E1_recognition_echo --title \"Guardian-signed Echo\" --body-file echo-body.md --readback-file readback.md --out guardian-echo.json"
+      "command_template": "python3 download_and_run_builder_bundle.py --route guardian_signed_echo --guardian-registry-number 00002 --guardian-id guardian_ed25519_REPLACE --guardian-key-prefix ./guardian-key --title \"Guardian-signed Echo\" --body-file echo-body.md --readback-file readback.md --out guardian-echo.json"
     },
     "operational_canary": {
       "route": "operational_canary",
@@ -140,7 +140,6 @@
   "source_digest": "62f3fdb4897bb97f",
   "pure_echo_minimal_recognition": {
     "route": "pure_echo",
-    "echo_type": "E1_recognition_echo",
     "builder_bundle_route": "pure_echo",
     "preflight": "/gateway/preflight",
     "submit": "/agent-submit",
