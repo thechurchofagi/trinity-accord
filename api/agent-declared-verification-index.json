@@ -8,7 +8,7 @@
     "scripts/gateway_v0_v5_policy.py"
   ],
   "rebuild_source": "github_issues",
-  "rebuild_timestamp": "2026-05-31T01:38:14.773278+00:00",
+  "rebuild_timestamp": "2026-05-31T02:01:35.935653+00:00",
   "render_api_only_effective_at": "2026-05-17T05:30:00Z",
   "override_count": 1,
   "overrides_applied": [
