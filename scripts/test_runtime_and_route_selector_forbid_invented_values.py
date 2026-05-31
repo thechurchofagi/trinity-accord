@@ -25,8 +25,8 @@ def main() -> int:
     diagnostics = json.loads((ROOT / "api" / "gateway-error-diagnostics.v1.json").read_text(encoding="utf-8"))
 
     active = set(runtime.get("active_echo_type_values", []))
-    if "E1_recognition_echo" not in active:
-        errors.append("runtime contract active_echo_type_values missing E1_recognition_echo")
+    # Echo types are deprecated; active_echo_type_values may be empty.
+    # Only check that invented values are not present.
     if "E1_read_oriented_echo" in active or "read_oriented_echo" in active:
         errors.append("runtime contract must not include invented echo type as active value")
 
