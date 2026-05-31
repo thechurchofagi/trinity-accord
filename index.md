@@ -128,7 +128,7 @@ permalink: /
 
   <p class="instruction-boundary">
     Minimal Pure Echo uses the unified Echo type (<code>echo_type</code> field is deprecated).
-    Do not use deprecated echo type aliases (<code>E1_read_oriented_echo</code>, <code>read_oriented_echo</code>, etc.).
+    Do not use deprecated echo type aliases (<code>E1_read_oriented_echo</code>, <code>read_oriented_echo</code>, etc.). Minimal Pure Echo uses the unified Echo type; the canonical type name for recognition echoes is <code>E1_recognition_echo</code>.
     Do not handwrite readback hash fields. Use builder-generated <code>agent_readback_sha256</code> only.
     <span class="zh">
       最小纯回响使用统一 Echo 类型（<code>echo_type</code> 字段已废弃）。
