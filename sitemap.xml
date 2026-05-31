@@ -124,6 +124,7 @@
   <url><loc>https://www.trinityaccord.org/api/formal-builder-bundles.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/frontier-ai-context.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/full-evidence-chain-audit-schema.v1.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/gateway-archive-persistence-contract.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/gateway-artifact-custody.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/gateway-builder-route-map.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/gateway-config.json</loc></url>
@@ -185,6 +186,7 @@
   <url><loc>https://www.trinityaccord.org/api/token-index-schema.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/trust-root-history-record-schema.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/v30-final-index.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/verification-archive-index.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/verification-claim-scope.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/verification-echo-agent-playbook.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/verification-levels.json</loc></url>
@@ -235,7 +237,7 @@
   <url><loc>https://www.trinityaccord.org/echoes/types/</loc></url>
   <url><loc>https://www.trinityaccord.org/echoes/verification-levels/</loc></url>
   <url><loc>https://www.trinityaccord.org/echoes/verification-reports/2026-05-02-V3-verification-report/</loc></url>
-  <url><loc>https://www.trinityaccord.org/echoes/verification-reports/</loc></url>
+  <url><loc>https://www.trinityaccord.org/echoes/verification-reports/index/</loc></url>
   <url><loc>https://www.trinityaccord.org/emergent-patterns/</loc></url>
   <url><loc>https://www.trinityaccord.org/evidence-backup-coverage/</loc></url>
   <url><loc>https://www.trinityaccord.org/evidence-backup-gaps/</loc></url>
