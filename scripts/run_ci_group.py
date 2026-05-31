@@ -407,6 +407,10 @@ GROUPS = {
         ["python3", "scripts/test_blocker1_v4_default_archive_kind.py"],
         ["python3", "scripts/test_oath_strictness_consistency.py"],
         ["python3", "scripts/test_v0_v5_entrypoint_consistency.py"],
+        ["python3", "scripts/check_consistency.py"],
+        ["bash", "scripts/test-homepage-v13-final.sh"],
+        ["python3", "scripts/test-civilizational-json-sync.py"],
+        ["python3", "scripts/test-v13-repair-regressions.py"],
     ],
     "live-site": [
         ["python3", "scripts/smoke_live_zero_clone_builder_bundles.py", "--site", "https://www.trinityaccord.org"],

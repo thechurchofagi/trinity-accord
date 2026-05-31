@@ -50,10 +50,30 @@ def check_workflow():
     text = read(path)
     steps = split_yaml_steps(text)
 
-    check("python3 scripts/check_consistency.py" in text, "workflow runs check_consistency.py")
-    check("bash scripts/test-homepage-v13-final.sh" in text, "workflow runs homepage v1.3 test")
-    check("python3 scripts/test-civilizational-json-sync.py" in text, "workflow runs civilizational JSON sync")
-    check("python3 scripts/test-v13-repair-regressions.py" in text, "workflow runs v1.3 repair regression test")
+    # The workflow delegates to run_ci_group.py; verify it invokes fast-regression
+    check("run_ci_group.py" in text and "fast-regression" in text,
+          "workflow runs fast-regression CI group")
+
+    # Verify the 4 v1.3 regression scripts are registered in the fast-regression CI group
+    ci_group_path = "scripts/run_ci_group.py"
+    check(exists(ci_group_path), "run_ci_group.py exists")
+    if exists(ci_group_path):
+        ci_text = read(ci_group_path)
+        # Find the fast-regression section and verify all 4 scripts appear in it
+        fr_idx = ci_text.find('"fast-regression"')
+        if fr_idx >= 0:
+            # Take a chunk after fast-regression (enough to cover all entries)
+            fr_block = ci_text[fr_idx:fr_idx + 2000]
+            check("check_consistency.py" in fr_block,
+                  "CI group fast-regression runs check_consistency.py")
+            check("test-homepage-v13-final.sh" in fr_block,
+                  "CI group fast-regression runs homepage v1.3 test")
+            check("test-civilizational-json-sync.py" in fr_block,
+                  "CI group fast-regression runs civilizational JSON sync")
+            check("test-v13-repair-regressions.py" in fr_block,
+                  "CI group fast-regression runs v1.3 repair regression test")
+        else:
+            check(False, "CI group fast-regression block found in run_ci_group.py")
 
     for idx, step in enumerate(steps, start=1):
         block = "\n".join(step)
