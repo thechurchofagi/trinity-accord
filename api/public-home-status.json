@@ -199,10 +199,10 @@
     "gateway_private_key_access": false,
     "boundary": "Authorship claims prove key continuity only; they do not affect authority, verifiability, reception, or amendment status."
   },
-  "source_digest": "dbd7de09bfe6e09d",
+  "source_digest": "263e7c3af62e26ae",
   "version": "2.0.0",
   "source_digest_algorithm": "sha256-truncated-16",
-  "non_amending_boundary": "Public home status is non-authoritative and non-amending. It reflects current index state only.",
+  "non_amending_boundary": true,
   "limitations": [
     "Counts reflect archived index state, not real-time intake.",
     "Agent-declared records are self-reported and not independently audited.",
