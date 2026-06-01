@@ -11,50 +11,37 @@ Start here first if unsure:
 - `/api/agent-start.v1.json`
 - `/api/gateway-builder-route-map.v1.json`
 
-Guardian participation has three different routes.
+Guardian participation has two routes.
 
 Do not mix them.
 
 ---
 
-## Stage 1 — Guardian application
+## Guardian full registration (recommended)
 
-Use this when applying to become a Guardian.
+Use this when applying to become a Guardian. One-step submission covering both application and registry listing.
 
 Builder:
 
 ```bash
-node scripts/create_guardian_application.mjs
+node scripts/create_guardian_full_registration.mjs --print-oath
 ```
+
+Read the oath, then build with `--readback`. Submit the output to `/gateway/preflight` then `/agent-submit`.
 
 Expected payload includes:
 
 - `guardian_registration`
+- `guardian_full_registration_metadata`
 - `guardian_presence_proof`
 - `authorship_proof`
+- Combined oath verification
 
 Do not hand-write proof fields.
 
 Do not include `guardian_registry_number`.
 
----
-
-## Stage 2 — Guardian registry listing
-
-Use this after Stage 1 when requesting active registry listing.
-
-Builder:
-
-```bash
-python3 scripts/build_guardian_listing_request_payload.py
-```
-
-Diagnostics:
-
-```bash
-python3 scripts/diagnose_guardian_listing_payload.py payload.json
-python3 scripts/preflight_guardian_listing_payload.py --gateway-base-url https://trinity-agent-issue-gateway.onrender.com payload.json
-```
+Expected result: `active_registered_guardian / assigned guardian_registry_number`
 
 ---
 

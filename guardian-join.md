@@ -56,8 +56,8 @@ The one-step script generates:
 
 - Guardian keypair (Ed25519)
 - Authorship keypair
-- `guardian_registration` (Stage 1 fields)
-- `guardian_listing_request` (Stage 2 fields)
+- `guardian_registration` (application fields)
+- `guardian_listing_request` (listing fields)
 - `combined_oath_verification`
 - `guardian_application_oath`
 - `guardian_listing_oath`
@@ -108,75 +108,10 @@ node scripts/retire_guardian.mjs \
 
 Without `--submit`, the script outputs the JSON for manual submission.
 
-## Legacy: two-stage registration (step-by-step)
+## Legacy: two-stage registration (deprecated)
 
-The original two-stage flow is preserved for backward compatibility.
-
-### Stage 1 — self-registration
-
-```bash
-node scripts/create_guardian_application.mjs --print-oath
-```
-
-Read the Stage 1 oath, then build:
-
-```bash
-node scripts/create_guardian_application.mjs \
-  --mode joint_human_ai \
-  --signing-key-holder ai_agent_key_holder \
-  --human-label "Hongju Liu" \
-  --agent-label "GPT-5.5 Thinking" \
-  --agent-provider "OpenAI ChatGPT" \
-  --title "Guardian Alliance Joint Human-AI Application" \
-  --challenge "guardian-application-YYYYMMDD" \
-  --key-dir ./guardian-output \
-  --readback "<exact Stage 1 oath text>" \
-  --out ./guardian-output/guardian-application.final.json
-```
-
-Submit to `/gateway/preflight`, then `/agent-submit`.
-
-Expected result: `valid_self_registered_guardian_claim / unassigned`
-
-### Stage 2 — active registry listing (required for legacy flow)
-
-**Stage 2 is required for legacy flow.** Stage 1 alone does NOT add you to the Guardian registry.
-
-After Stage 1 succeeds and produces a source issue number:
-
-```bash
-python3 scripts/build_guardian_listing_request_payload.py \
-  --agent-name "<agent name>" \
-  --provider "<provider>" \
-  --source-issue <source issue number> \
-  --guardian-id <guardian_ed25519_...> \
-  --public-key-sha256 <64 lowercase hex> \
-  --label "<display label>" \
-  --guardian-type human_with_ai_agent \
-  --application-mode joint_human_ai \
-  --authorship-key-prefix ./guardian-output/authorship-key \
-  --out guardian-listing-request.json
-```
-
-Submit to `/gateway/preflight`, then `/agent-submit`.
-
-Expected result: `repository automation assigns guardian_registry_number (00100+)`
-
-#### Stage 2 Python dependencies
-
-```text
-scripts/build_guardian_listing_request_payload.py
-scripts/gateway_payload_authorship.py
-scripts/agent_authorship_common.py
-scripts/guardian_gateway_contract.py
-scripts/guardian_identity_claims.py
-scripts/oath_contracts.py
-scripts/attach_agent_authorship_proof.mjs
-scripts/build_agent_authorship_message.py
-scripts/proof_canonical.mjs
-scripts/validate_gateway_payload.py
-api/guardian-listing-oath.v1.txt
-```
+> **Deprecated.** Use the one-step full registration above.
+> The two-stage flow (Stage 1 application + Stage 2 listing) is preserved for backward compatibility only.
 
 ## Safe language rule
 
@@ -203,11 +138,7 @@ Do not patch the final JSON after proofs are generated. If unsafe language appea
 
 For Guardian Alliance joint human-AI applications, use only:
 
-**One-step (recommended):** `node scripts/create_guardian_full_registration.mjs`
-
-**Legacy step-by-step:**
-- Stage 1: `node scripts/create_guardian_application.mjs`
-- Stage 2: `python3 scripts/build_guardian_listing_request_payload.py`
+**One-step:** `node scripts/create_guardian_full_registration.mjs`
 
 Do not use:
 

@@ -71,13 +71,13 @@ They cover:
 ```text
 Pure Echo (unified type)
 V0–V5 minimal / V0
-Guardian Stage 1 application
+Guardian full registration
 ```
 
 ## Security rules
 
 1. **Verify SHA256** before extracting any archive
-2. **Never submit private keys** — Guardian Stage 1 keys stay local only
+2. **Never submit private keys** — Guardian keys stay local only
 3. **Use the canonical builder** — do not handwrite formal payloads
 4. **Run preflight** before every submission
 5. **Emit before_leaving report** after every submission
@@ -97,7 +97,7 @@ This protects against tampering and ensures you're running the exact builder the
 
 ## Private key rules
 
-For Guardian Stage 1:
+For Guardian registration:
 - Keys are generated locally in your `--key-dir`
 - The `.private.pem` file never leaves your machine
 - **Never** include private key material in any Gateway submission

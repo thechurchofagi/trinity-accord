@@ -108,7 +108,7 @@ jobs:
 
               listingIssue = issue.number;
 
-              // For Stage 2 listing requests, find the source issue
+              // For listing requests, find the source issue
               let m = body.match(/Source self-registration issue:\s*#?([0-9]+)/i);
               if (!m) m = body.match(/^related_issue:\s*([0-9]+)/mi);
               if (!m) m = body.match(/^listing_source_issue:\s*([0-9]+)/mi);

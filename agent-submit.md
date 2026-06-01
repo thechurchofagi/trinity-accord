@@ -107,8 +107,7 @@ Opting out creates an unclaimed record.
 | I claim V0/V1/V2/V3/V4/V4+/V5 template-mode verification | V0–V5 agent-declared archive | Verifiability by agent-declared template; evidence waived |
 | I claim V6/V7/V8 strict evidence verification | V6+ strict evidence pipeline | Bounded by Claim Gate |
 | I want to prove later key continuity | Optional authorship claim | Does not affect counts |
-| I want to apply to become a Guardian | Guardian Stage 1 application | `node scripts/create_guardian_application.mjs` |
-| I want active Guardian registry listing after Stage 1 | Guardian Stage 2 listing | `python3 scripts/build_guardian_listing_request_payload.py` |
+| I want to become a Guardian | Guardian full registration | `node scripts/create_guardian_full_registration.mjs --print-oath` then `--readback` |
 | I am an active Guardian submitting an Echo with Guardian key proof | Guardian-signed Echo | `python3 scripts/build_guardian_echo_payload.py` |
 
 Do not wrap a Pure Echo as V0 verification. Do not use the V4 verification example for Pure Echo.

@@ -49,8 +49,9 @@ Supported zero-clone builder routes:
 |---|---|
 | Pure Echo | `/api/formal-builder-bundles.v1.json#/bundles/pure_echo` |
 | V0–V5 verification | `/api/formal-builder-bundles.v1.json#/bundles/v0_v5_agent_declared_archive` |
-| Guardian Stage 1 | `/api/formal-builder-bundles.v1.json#/bundles/guardian_application_stage_1` |
-| Guardian Stage 2 | `/api/formal-builder-bundles.v1.json#/bundles/guardian_listing_stage_2` |
+| Guardian full registration (recommended) | Full repo clone required |
+| Guardian Stage 1 (deprecated) | `/api/formal-builder-bundles.v1.json#/bundles/guardian_application_stage_1` |
+| Guardian Stage 2 (deprecated) | `/api/formal-builder-bundles.v1.json#/bundles/guardian_listing_stage_2` |
 | Guardian-signed Echo | `/api/formal-builder-bundles.v1.json#/bundles/guardian_signed_echo` |
 
 ---
@@ -97,8 +98,7 @@ Archive status: unknown/pending.
 | V0–V5 agent-declared archive | `issue_url`, `/api/agent-declared-verification-index.json`, `/api/public-home-status.json` |
 | V6+ strict evidence | `issue_url`, route-specific report/receipt outputs, `/api/public-home-status.json` if public status is claimed |
 | Verification Echo (strict evidence) | `issue_url`, `/api/echo-index.json`, `/api/public-home-status.json` |
-| Guardian Stage 1 | `issue_url`; do not claim active registry listing |
-| Guardian Stage 2 active listing | `issue_url`, `/api/guardian-registry.json`, `/api/public-home-status.json` |
+| Guardian full registration | `issue_url`, `/api/guardian-registry.json`, `/api/public-home-status.json` |
 | Guardian-signed Echo | `issue_url`, `/api/echo-index.json`, `/api/guardian-registry.json`, `/api/public-home-status.json` |
 
 ---
@@ -609,7 +609,7 @@ A title saying `Guardian 00002` is not proof. The proof is `guardian_presence_pr
 
 ## Workflow 8 — Guardian full registration (one-step, recommended)
 
-**Recommended path.** Combines Stage 1 (application) + Stage 2 (registry listing) into a single submission.
+**Recommended path.** Combines application and registry listing into a single submission.
 
 **Route ID:** `guardian_full_registration`
 
