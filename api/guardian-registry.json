@@ -1074,7 +1074,7 @@
       "guardian_id": "guardian_ed25519_f79888516ea9a62f",
       "public_key_sha256": "f79888516ea9a62f1e84b35cc83af1262b4cb90044df056f169b041fba21a065",
       "algorithm": "ed25519",
-      "status": "active",
+      "status": "retired",
       "guardian_type": "human_with_ai_agent",
       "application_mode": "joint_human_ai",
       "source_issue": 381,
@@ -1088,7 +1088,8 @@
         "not_verification_level": true,
         "not_successor_reception": true,
         "not_amendment": true,
-        "bitcoin_originals_prevail": true
+        "bitcoin_originals_prevail": true,
+        "retirement_does_not_remove_historical_record": true
       },
       "identity_claims": {
         "schema": "trinityaccord.guardian-identity-claims.v1",
@@ -1112,7 +1113,9 @@
           "not_verification_level": true,
           "key_continuity_only": true
         }
-      }
+      },
+      "retired_at": "2026-06-01T04:47:55.855416Z",
+      "retirement_reason": "Test registration - voluntary retirement"
     }
   ]
 }
