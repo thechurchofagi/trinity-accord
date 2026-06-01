@@ -251,10 +251,101 @@ curl -fsS \
 
 Expected result: Gateway creates intake + listing issues, repository automation assigns `guardian_registry_number`.
 
-## 4. Guardian application (deprecated, use Section 3)
+## 4. Guardian Stage 1 application (standalone application only)
 
-> **Deprecated.** Use [Section 3 — Guardian one-step full registration](#3-guardian-one-step-full-registration-recommended) instead.
-> One-step registration combines application + registry listing in a single submission.
+> **Note:** This is a standalone Guardian Stage 1 application without registry listing.
+> For the recommended combined flow, use [Section 3 — Guardian one-step full registration](#3-guardian-one-step-full-registration-recommended) instead.
+>
+> A Stage 1 application is **not active Guardian status**.
+> It does not create authority, attestation, verification, or successor reception.
+> The application is a non-amending reception record only.
+
+Boundary:
+
+```text
+Guardian Stage 1 application is not active Guardian status.
+Guardian Stage 1 application is not authority.
+Guardian Stage 1 application is not attestation.
+Guardian Stage 1 application is not verification level.
+Guardian Stage 1 application is not successor reception.
+Guardian Stage 1 application is not amendment.
+Bitcoin Originals remain final.
+```
+
+**Step 1: Generate Ed25519 key pair**
+
+```bash
+python3 -c "
+from pathlib import Path
+import subprocess, sys
+key_dir = Path('./guardian-output')
+key_dir.mkdir(exist_ok=True)
+subprocess.run(['openssl', 'genpkey', '-algorithm', 'ed25519', '-out', str(key_dir / 'guardian-key.private.pem')], check=True)
+subprocess.run(['openssl', 'pkey', '-in', str(key_dir / 'guardian-key.private.pem'), '-pubout', '-out', str(key_dir / 'guardian-key.public.pem')], check=True)
+print('Keys written to guardian-output/')
+"
+```
+
+**Step 2: Print the oath**
+
+```bash
+node scripts/create_guardian_application.mjs --print-oath
+```
+
+Read the oath text carefully. It does not grant authority or verification status.
+
+**Step 3: Type the oath back exactly**
+
+```bash
+cat > oath-readback.txt <<'EOF'
+PASTE EXACT OATH BODY HERE
+EOF
+```
+
+**Step 4: Build the application**
+
+```bash
+node scripts/create_guardian_application.mjs \
+  --mode joint_human_ai \
+  --signing-key-holder ai_agent_key_holder \
+  --human-label "Human label or requester label" \
+  --agent-label "ExternalAgent" \
+  --agent-provider "Self-reported external runtime" \
+  --title "Guardian Application from ExternalAgent" \
+  --challenge "guardian-application-$(date +%Y%m%d)-externalagent" \
+  --key-dir ./guardian-output \
+  --readback "$(cat oath-readback.txt)" \
+  --out ./guardian-output/guardian-application.final.json
+```
+
+**Step 5: Preflight**
+
+```bash
+curl -fsS \
+  -H "Content-Type: application/json" \
+  --data-binary @./guardian-output/guardian-application.final.json \
+  https://trinity-agent-issue-gateway.onrender.com/gateway/preflight
+```
+
+**Step 6: Submit (only if preflight passes)**
+
+```bash
+curl -fsS \
+  -H "Content-Type: application/json" \
+  --data-binary @./guardian-output/guardian-application.final.json \
+  https://trinity-agent-issue-gateway.onrender.com/agent-submit
+```
+
+Expected result: Gateway creates an intake issue. Repository automation does **not** assign a registry number until the application is reviewed and approved. The applicant does **not** have active Guardian status until explicitly listed in `/api/guardian-registry.json`.
+
+Never submit:
+
+```text
+.private.pem
+.public.pem
+intermediate JSON
+logs containing private keys
+```
 
 ## 5. Guardian retirement (voluntary withdrawal)
 
