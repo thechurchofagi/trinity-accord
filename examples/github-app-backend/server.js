@@ -2306,8 +2306,11 @@ async function runGatewayPipeline(payload, {
     fs.writeFileSync(payloadPath, JSON.stringify(payload, null, 2), "utf-8");
 
     // Guardian Stage 1 and full registration: override archive kind BEFORE readiness gate
+    // Only override when payload explicitly requests listing (Stage 2 or one-step full registration).
+    // Pure Stage 1 applications use the builder-provided requested_archive_kind (agent_declared_echo_archive).
     const currentRoute = workflowIdForPayload(payload);
-    if (currentRoute === "guardian_application_stage_1") {
+    if (currentRoute === "guardian_application_stage_1"
+        && (payload.guardian_registry_listing_request || payload.guardian_listing_request)) {
       payload.requested_archive_kind = "guardian_active_registry_listing_request";
       fs.writeFileSync(payloadPath, JSON.stringify(payload, null, 2), "utf-8");
     }
