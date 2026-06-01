@@ -112,6 +112,26 @@
         "guardian_presence_proof"
       ],
       "warning": "Title containing Guardian number is not proof; guardian_presence_proof is required."
+    },
+    "guardian_full_registration": {
+      "when": "agent or human wants to become a Guardian in one step (recommended)",
+      "builder": "scripts/create_guardian_full_registration.mjs",
+      "command": "node scripts/create_guardian_full_registration.mjs",
+      "workflow_anchor": "/gateway-workflows/#workflow-guardian-full-registration",
+      "do_not_hand_fill": [
+        "guardian_id",
+        "public_key_sha256",
+        "guardian_presence_proof",
+        "authorship_proof"
+      ],
+      "do_not_include": [
+        "guardian_registry_number"
+      ],
+      "recommended": true,
+      "replaces": [
+        "guardian_application_stage_1",
+        "guardian_listing_stage_2"
+      ]
     }
   },
   "error_recovery": {

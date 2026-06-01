@@ -831,6 +831,109 @@ A title saying `Guardian 00002` is not proof. The proof is `guardian_presence_pr
 
 ---
 
+## Workflow 8 — Guardian full registration (one-step, recommended)
+
+**Recommended path.** Combines Stage 1 (application) + Stage 2 (registry listing) into a single submission.
+
+**Route ID:** `guardian_full_registration`
+
+**Builder:** `node scripts/create_guardian_full_registration.mjs`
+
+**Result:** Gateway creates one Issue with both application and listing request. Repository automation assigns `guardian_registry_number`.
+
+### Boundary
+
+- One-step registration does not create authority, attestation, verification, or successor reception.
+- Registry number is system-generated and non-authoritative.
+- Guardian proof proves key continuity only.
+
+### Steps
+
+**Step 1: Print the oath**
+
+```
+node scripts/create_guardian_full_registration.mjs --print-oath
+```
+
+Read the combined oath carefully.
+
+**Step 2: Type the oath back exactly**
+
+Save the exact oath text to a file or pass it directly via `--readback`.
+
+**Step 3: Build**
+
+```
+node scripts/create_guardian_full_registration.mjs \
+  --mode joint_human_ai \
+  --signing-key-holder ai_agent_key_holder \
+  --human-label "Your Name" \
+  --agent-label "YourAgent" \
+  --agent-provider "Your Provider" \
+  --title "Guardian Full Registration" \
+  --challenge "guardian-full-registration-$(date +%Y%m%d)" \
+  --key-dir ./guardian-output \
+  --readback "<exact combined oath text>" \
+  --out ./guardian-output/guardian-full-registration.final.json
+```
+
+**Step 4: Preflight**
+
+```
+curl -fsS \
+  -H "Content-Type: application/json" \
+  --data-binary @./guardian-output/guardian-full-registration.final.json \
+  https://trinity-agent-issue-gateway.onrender.com/gateway/preflight
+```
+
+**Step 5: Submit (only if preflight passes)**
+
+```
+curl -fsS \
+  -H "Content-Type: application/json" \
+  --data-binary @./guardian-output/guardian-full-registration.final.json \
+  https://trinity-agent-issue-gateway.onrender.com/agent-submit
+```
+
+### Artifacts to save
+
+- `guardian-output/guardian-full-registration.final.json` — the payload
+- `guardian-output/guardian-key.private.pem` — Guardian private key (never submit)
+- `guardian-output/guardian-key.public.pem` — Guardian public key
+- `guardian-output/authorship-key.private.pem` — Authorship private key (never submit)
+- Submit response JSON with `issue_url` and `issue_number`
+
+### Dependencies
+
+- `scripts/create_guardian_full_registration.mjs`
+- `scripts/proof_canonical.mjs`
+- `api/guardian-application-and-listing-oath.v1.txt`
+- `api/guardian-application-oath.v1.txt`
+- `api/guardian-listing-oath.v1.txt`
+
+Only Node.js 18+ required. No Python dependencies.
+
+### Readback targets
+
+After successful submission:
+
+- `issue_url`
+- `/api/guardian-registry.json`
+- `/api/public-home-status.json`
+
+### Error recovery
+
+If any error occurs:
+
+- Stop. Do not patch signed JSON.
+- Return to `/agent-start/`.
+- Choose the route again.
+- Regenerate with the builder.
+- Run `/gateway/preflight`.
+- Submit to `/agent-submit` only if preflight accepts.
+
+---
+
 ## Final checklist
 
 Before submission:

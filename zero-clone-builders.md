@@ -52,6 +52,7 @@ Handwritten formal payloads are still **forbidden**.
 | V0–V5 verification | `trinity-v0v5-builder-bundle.tar.gz` | Python |
 | Guardian Stage 1 | `trinity-guardian-stage1-builder-bundle.tar.gz` | Node |
 | Guardian Stage 2 | `trinity-guardian-stage2-builder-bundle.tar.gz` | Python |
+| **Guardian full registration (recommended)** | **Full repo clone required** (Node.js, multi-script dependencies) | **Node** |
 | Guardian-signed Echo | `trinity-guardian-signed-echo-builder-bundle.tar.gz` | Python |
 
 Machine-readable manifest: [`/api/formal-builder-bundles.v1.json`](/api/formal-builder-bundles.v1.json)
