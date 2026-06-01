@@ -131,6 +131,7 @@
   <url><loc>https://www.trinityaccord.org/api/gateway-error-diagnostics.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/gateway-receipt-contract.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/gateway-runtime-contract.v1.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/gateway-v1-legacy-status.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/gateway-workflows.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/generated-by-schema.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/guardian-active-listing-policy.v1.json</loc></url>
@@ -170,6 +171,7 @@
   <url><loc>https://www.trinityaccord.org/api/reception-classification-policy.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/reception-classification-schema.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/reception-initiation-classification.v1.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/record-chain-status.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/recovery-index-schema.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/recovery-index.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/report-builder-policy.json</loc></url>

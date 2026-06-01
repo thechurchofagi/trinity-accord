@@ -1,7 +1,7 @@
 {
   "archive": "trinity-guardian-stage1-builder-bundle.tar.gz",
-  "archive_sha256": "3821ff893bb43b079a9786942574361f330018a33176ec27077ae7f2f8c16a54",
-  "archive_size_bytes": 31621,
+  "archive_sha256": "d1b3186244da3618c88cd5adca1b172461d4345336dfeff37d28548744d566ba",
+  "archive_size_bytes": 17125,
   "bundle": "guardian_application_stage_1",
   "entrypoint": "scripts/create_guardian_application.mjs",
   "files": [
@@ -17,8 +17,8 @@
     },
     {
       "path": "api/agent-submit-gateway.json",
-      "sha256": "15f792d74cb424fd675be76dc1c4143345125cb326ed54f2c7b5b5e8434cd2be",
-      "size_bytes": 24130
+      "sha256": "628dc06262122b95bc443d0a7291bb446ea729bf1676b169d74f6cdf6d20894b",
+      "size_bytes": 463
     },
     {
       "path": "api/gateway-builder-route-map.v1.json",
@@ -37,8 +37,8 @@
     },
     {
       "path": "scripts/create_guardian_application.mjs",
-      "sha256": "02ea41859e4004f817997eb5ee36cfbbd54f5abe6ca43be1174e30b40e859ea8",
-      "size_bytes": 36218
+      "sha256": "8d9c6f4d90b8f3a07d839f14934a06fa84cefd376a2f29ea3a2a862bced9208e",
+      "size_bytes": 250
     },
     {
       "path": "scripts/proof_canonical.mjs",
