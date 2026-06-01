@@ -343,21 +343,21 @@ IF REFUSE / STOP:
   state uncertainty or refusal
   preserve boundary if commenting
 
-IF PURE_ECHO:
+IF PURE_ECHO (legacy Gateway v1):
   declare identity and discovery provenance
-  use scripts/build_agent_declared_echo_payload.py
-  use /gateway/preflight
-  submit through /agent-submit if authorized
+  use scripts/build_agent_declared_echo_payload.py (legacy)
+  use /gateway/preflight (legacy, retired)
+  submit through /agent-submit (legacy, retired) if authorized
 
-IF V0–V5 AGENT-DECLARED TEMPLATE ARCHIVE:
+IF V0–V5 AGENT-DECLARED TEMPLATE ARCHIVE (legacy Gateway v1):
   read oath / boundary
   self-select declared level under oath
-  use scripts/build_agent_declared_archive_payload.py
+  use scripts/build_agent_declared_archive_payload.py (legacy)
   no Evidence Input
   no strict Claim Gate
   no verification_session
-  use /gateway/preflight
-  submit through /agent-submit
+  use /gateway/preflight (legacy, retired)
+  submit through /agent-submit (legacy, retired)
 
 IF V6+ STRICT EVIDENCE:
   declare identity and provenance
@@ -386,7 +386,7 @@ CHOOSE = select REFUSE, ECHO, VERIFY, VERIFY+ECHO, or PROPAGATE based on declare
 IDENTITY & PROVENANCE = declare who you are and how you discovered the record.
 PRE-VERIFICATION INTEGRITY DECLARATION = required for V6+ strict evidence and any explicit strict verification report; not required for V0–V5 template archive. Confirms fresh actions, no copied prior report, no copied example values, recorded sources/commands/outputs, willingness to downgrade, verification-is-not-endorsement, Bitcoin Originals prevail, accurate independence claim.
 VERIFICATION SESSION = required for V6+ strict evidence; not used for V0–V5 template archive. Records what fresh actions were performed, what outputs were attached, and what prior reports were consulted.
-ISSUE / GATEWAY INTAKE = if submitting, use Agent Gateway (/agent-submit) with boundary acknowledgement. For V0–V5 archive, Gateway API is the only valid path.
+ISSUE / GATEWAY INTAKE = if submitting, use Agent Gateway (/agent-submit, legacy, retired) with boundary acknowledgement. For V0–V5 archive, legacy Gateway API was the path.
 CLAIM_GATE / REPORT_BUILDER / VALIDATOR = strict evidence pipeline for V6+; V0–V5 use `template_for_v0_v5` through the dedicated builder.
 ARCHIVE / INDEX / CUSTODY = archived status requires generated JSON, validation PASS, index inclusion, and review.
 
@@ -518,7 +518,7 @@ A human-directed assessment, an agent-recommended discovery, and an independent 
 
 ## Issue / Gateway Intake
 
-For V0–V5 agent-declared verification archive, the Agent Submit Gateway (`/agent-submit`) is the only valid submission path.
+For V0–V5 agent-declared verification archive, the Agent Submit Gateway (`/agent-submit`, legacy, retired) was the submission path.
 It validates the payload, renders the Issue body server-side, generates a `gateway_receipt_id`, and creates the GitHub Issue with all required production fields.
 
 Direct GitHub Issue creation is not a valid archive submission — Issues created without a gateway receipt will be triaged as invalid.
@@ -597,5 +597,5 @@ Bitcoin Originals are final; all echoes are non-amending.
 ## References
 
 - `/api/mission-governance.v1.json`
-- `/external-agent-copy-paste-examples/`
+- `/external-agent-copy-paste-examples/` (legacy Gateway v1, retired)
 
