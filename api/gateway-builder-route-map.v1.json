@@ -208,8 +208,14 @@
         "scripts/create_guardian_application.mjs",
         "scripts/build_guardian_listing_request_payload.py"
       ]
+    },
+    "guardian_full_registration": {
+      "builder": "scripts/create_guardian_full_registration.mjs",
+      "requested_archive_kind": "guardian_full_registration",
+      "zero_clone_builder_bundle": "/api/formal-builder-bundles.v1.json#/bundles/guardian_full_registration"
     }
   },
   "schema": "trinityaccord.gateway-builder-route-map.v1",
-  "version": "1.0.0"
+  "version": "1.0.0",
+  "source_digest": "508f61c054c97779"
 }
