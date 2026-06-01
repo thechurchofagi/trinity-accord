@@ -504,9 +504,21 @@ def parse_listing_issue(listing_issue: dict, allow_non_bot: bool) -> tuple[dict 
     if guardian_type is None and m:
         guardian_type = m.group(1)
 
+    # Fallback: intake block guardian_type (full registration / Stage 1)
+    if guardian_type is None:
+        m = re.search(r"(?<!\w)guardian_type:\s*([a-z_]+)", body, re.MULTILINE)
+        if m:
+            guardian_type = m.group(1)
+
     m = re.search(r"Application mode:\s*([A-Za-z0-9_]+)", body)
     if application_mode is None and m:
         application_mode = m.group(1)
+
+    # Fallback: intake block application_mode (full registration / Stage 1)
+    if application_mode is None:
+        m = re.search(r"(?<!\w)application_mode:\s*([a-z_]+)", body, re.MULTILINE)
+        if m:
+            application_mode = m.group(1)
 
     m = re.search(r"Active registry listing request for Guardian\s+(.+?)\.", body)
     if label is None and m:
@@ -514,6 +526,12 @@ def parse_listing_issue(listing_issue: dict, allow_non_bot: bool) -> tuple[dict 
 
     if not label:
         m = re.search(r"Active Registry Listing Request\s*[—-]\s*(.+)$", issue_title(listing_issue))
+        if m:
+            label = m.group(1).strip()
+
+    # Fallback: intake block guardian_identity_display_label (full registration / Stage 1)
+    if not label:
+        m = re.search(r"guardian_identity_display_label:\s*(.+)$", body, re.MULTILINE)
         if m:
             label = m.group(1).strip()
 
