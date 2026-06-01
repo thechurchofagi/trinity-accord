@@ -17,7 +17,7 @@ permissions:
   issues: write
 
 concurrency:
-  group: guardian-registry-writes
+  group: guardian-registry-retire-${{ github.event.issue.number || github.event.inputs.issue_number || 'default' }}
   cancel-in-progress: false
 
 jobs:
