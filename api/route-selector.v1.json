@@ -1,4 +1,11 @@
 {
+  "legacy_status": {
+    "status": "legacy",
+    "effective_date": "2026-06-01T00:00:00Z",
+    "migration_target": "native_record_chain",
+    "notice": "This API is in legacy status. New submissions should use scripts/trinity_record_builder.py with the native record-chain. See api/gateway-v1-legacy-status.json for details.",
+    "backward_compatibility": "maintained_until_further_notice"
+  },
   "schema": "trinityaccord.route-selector.v1",
   "version": "v1",
   "purpose": "Simple route selection helper for external agents.",
