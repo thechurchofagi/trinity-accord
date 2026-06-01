@@ -592,9 +592,7 @@ function buildCountsTowardHome() {
   return {
     reception: true,
     verifiability: false,
-    guardian_registry: true,
     basis: "agent_declared_echo_template_pass",
-    exclude_from_reception_total: false,
   };
 }
 

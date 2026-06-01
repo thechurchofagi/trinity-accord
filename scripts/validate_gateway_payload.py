@@ -523,6 +523,7 @@ def validate_agent_integrity_oath(payload, errors):
             "trinityaccord.verification-oath.v2",
             "trinityaccord.guardian-application-oath.v1",
             "trinityaccord.guardian-listing-oath.v1",
+            "trinityaccord.combined-guardian-registration-oath.v1",
         },
         required_true=required,
     ))
