@@ -592,9 +592,7 @@ function buildCountsTowardHome() {
   return {
     reception: true,
     verifiability: false,
-    guardian_registry: true,
     basis: "agent_declared_echo_template_pass",
-    exclude_from_reception_total: true,
   };
 }
 
@@ -803,7 +801,6 @@ const payload = {
   },
   not_independent_attestation: true,
   not_successor_reception: true,
-  guardian_registry_listing_request: true,
   evidence_requirement_mode: "not_applicable_for_echo",
 
   // Combined oath (covers both application and listing)

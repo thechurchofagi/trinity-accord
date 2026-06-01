@@ -2307,7 +2307,7 @@ async function runGatewayPipeline(payload, {
 
     // Guardian Stage 1 and full registration: override archive kind BEFORE readiness gate
     const currentRoute = workflowIdForPayload(payload);
-    if (currentRoute === "guardian_application_stage_1" || currentRoute === "guardian_full_registration") {
+    if (currentRoute === "guardian_application_stage_1") {
       payload.requested_archive_kind = "guardian_active_registry_listing_request";
       fs.writeFileSync(payloadPath, JSON.stringify(payload, null, 2), "utf-8");
     }

@@ -1171,6 +1171,22 @@ def evaluate_archive_readiness(payload, evidence=None, claim_gate_output=None,
         auto_labels = ["archive:guardian-application"]
         auto_close_issue = False  # Don't close; auto-list workflow processes it
 
+    # --- guardian_full_registration (one-step: application + listing) ---
+    elif requested_kind == "guardian_full_registration":
+        # Full registration is always archive-ready; the auto-list workflow
+        # processes both the intake and listing in one Issue.
+        archive_ready = True
+        auto_archive_allowed = True
+        auto_archive_action = "auto_archive_guardian_full_registration"
+        allowed_archive_kind = "guardian_full_registration"
+        auto_labels = [
+            "agent-gateway-intake",
+            "archive:guardian-application",
+            "archive:guardian-full-registration",
+            "agent-declared",
+        ]
+        auto_close_issue = False  # Don't close; auto-list workflow processes it
+
     else:
         blocking_reasons.append({
             "code": "UNKNOWN_ARCHIVE_KIND",
