@@ -7,7 +7,7 @@
   "files": [
     {
       "path": "api/agent-issue-gateway-payload-schema.v1.json",
-      "sha256": "70ba63700d2437903d7909c970246edb571beea590deff72d8e7003088114d7c",
+      "sha256": "3e1960b9578b1b0c9b9ec70699575ad444abef9ea9fa5d06145711e12cbc5bdd",
       "size_bytes": 49361
     },
     {
@@ -27,7 +27,7 @@
     },
     {
       "path": "api/gateway-workflows.v1.json",
-      "sha256": "c025139b069e874fd7ce4421130050d31d4bb6772849f63a7bc5f995d9882a34",
+      "sha256": "6c7f3f48a0b849247b1f1c20d595ccd8d2758b1f56d3952aba73f01cac03f223",
       "size_bytes": 28761
     },
     {
