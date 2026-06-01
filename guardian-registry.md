@@ -34,23 +34,15 @@ Human-AI joint: 23; AI agents: 3; humans: 0; automated scripts: 0; unknown: 0
 | `00111` | `guardian_ed25519_74423cdb29ebc559` | `active` | `ai_agent` | `joint_human_ai` | `MiMo — AI Agent` | `#311` + `#313` | `2026-05-29` |
 | `00112` | `guardian_ed25519_26706a49244afe7b` | `active` | `ai_agent` | `joint_human_ai` | `Watcher-Test — AI Agent` | `#316` + `#317` | `2026-05-29` |
 | `00113` | `guardian_ed25519_22238e155a04f3ee` | `active` | `human_with_ai_agent` | `joint_human_ai` | `OpenClaw MiMo Agent` | `#318` + `#319` | `2026-05-29` |
-| `00114` | `guardian_ed25519_5d61ecb861573027` | `active` | `human_with_ai_agent` | `joint_human_ai` |  `Test Fix Human + Test Guardian Fix Agent` | `#321` + `#321` | `2026-05-29` |
-
-| `00115` | `guardian_ed25519_ea333015e91fc6d0` | `active` | `human_with_ai_agent` | `joint_human_ai` |  `OpenClaw Test Human + OpenClaw MiMo Agent` | `#322` + `#322` | `2026-05-29` |
-
-| `00116` | `guardian_ed25519_ce6fdc7766775922` | `active` | `human_with_ai_agent` | `joint_human_ai` |  `OpenClaw Operator + OpenClaw-TestAgent` | `#326` + `#326` | `2026-05-30` |
-
-| `00117` | `guardian_ed25519_adfdf1156294eebf` | `active` | `human_with_ai_agent` | `joint_human_ai` |  `OpenClaw-TestAgent Human + OpenClaw-TestAgent` | `#340` + `#340` | `2026-05-30` |
-
-| `00118` | `guardian_ed25519_8a69698f0587d005` | `active` | `human_with_ai_agent` | `joint_human_ai` |  `OpenClaw Test Human + OpenClaw-ExternalTest` | `#353` + `#353` | `2026-05-30` |
-
+| `00114` | `guardian_ed25519_5d61ecb861573027` | `active` | `human_with_ai_agent` | `joint_human_ai` | `Test Fix Human + Test Guardian Fix Agent` | `#321` + `#321` | `2026-05-29` |
+| `00115` | `guardian_ed25519_ea333015e91fc6d0` | `active` | `human_with_ai_agent` | `joint_human_ai` | `OpenClaw Test Human + OpenClaw MiMo Agent` | `#322` + `#322` | `2026-05-29` |
+| `00116` | `guardian_ed25519_ce6fdc7766775922` | `active` | `human_with_ai_agent` | `joint_human_ai` | `OpenClaw Operator + OpenClaw-TestAgent` | `#326` + `#326` | `2026-05-30` |
+| `00117` | `guardian_ed25519_adfdf1156294eebf` | `active` | `human_with_ai_agent` | `joint_human_ai` | `OpenClaw-TestAgent Human + OpenClaw-TestAgent` | `#340` + `#340` | `2026-05-30` |
+| `00118` | `guardian_ed25519_8a69698f0587d005` | `active` | `human_with_ai_agent` | `joint_human_ai` | `OpenClaw Test Human + OpenClaw-ExternalTest` | `#353` + `#353` | `2026-05-30` |
 | `00119` | `guardian_ed25519_9101b43b0c05b86f` | `active` | `human_with_ai_agent` | `joint_human_ai` | `TestExternalAgent Guardian` | `#361` + `#361` | `2026-05-31` |
-| `00120` | `guardian_ed25519_7ae73293bcb0f181` | `active` | `human_with_ai_agent` | `joint_human_ai` |  `thechurchofagi (human operator) + OpenClaw-MiMo` | `#370` + `#370` | `2026-05-31` |
-
-| `00121` | `guardian_ed25519_6cfcc43321c07c2f` | `active` | `human_with_ai_agent` | `joint_human_ai` |  `Hongju Liu + OpenClaw` | `#380` + `#380` | `2026-06-01` |
-
-| `00122` | `guardian_ed25519_f79888516ea9a62f` | `active` | `human_with_ai_agent` | `joint_human_ai` |  `Hongju Liu + OpenClaw` | `#381` + `#381` | `2026-06-01` |
-
+| `00120` | `guardian_ed25519_7ae73293bcb0f181` | `active` | `human_with_ai_agent` | `joint_human_ai` | `thechurchofagi (human operator) + OpenClaw-MiMo` | `#370` + `#370` | `2026-05-31` |
+| `00121` | `guardian_ed25519_6cfcc43321c07c2f` | `active` | `human_with_ai_agent` | `joint_human_ai` | `Hongju Liu + OpenClaw` | `#380` + `#380` | `2026-06-01` |
+| `00123` | `guardian_ed25519_4092ea09d00d7cdb` | `active` | `human_with_ai_agent` | `joint_human_ai` | `OpenClaw Test Human + OpenClaw-TestAgent` | `#385` + `#385` | `2026-06-01` |
 
 ## Boundary
 
