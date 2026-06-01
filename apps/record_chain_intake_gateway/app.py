@@ -16,10 +16,10 @@ from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import JSONResponse
 
-from gateway.authorship import strip_authorship_for_signing, verify_authorship_proof
-from gateway.canonical import canonical_dumps, sha256_canonical_json
-from gateway.github_adapter import get_file_sha, get_file_text, put_file
-from gateway.models import (
+from apps.record_chain_intake_gateway.gateway.authorship import strip_authorship_for_signing, verify_authorship_proof
+from apps.record_chain_intake_gateway.gateway.canonical import canonical_dumps, sha256_canonical_json
+from apps.record_chain_intake_gateway.gateway.github_adapter import get_file_sha, get_file_text, put_file
+from apps.record_chain_intake_gateway.gateway.models import (
     Diagnostic,
     ErrorResponse,
     PreflightResponse,
@@ -28,9 +28,9 @@ from gateway.models import (
     ServerReceipt,
     SubmitResponse,
 )
-from gateway.receipts import make_receipt
-from gateway.runtime import get_runtime_info
-from gateway.validation import ALLOWED_RECORD_TYPES, detect_route, validate_submission
+from apps.record_chain_intake_gateway.gateway.receipts import make_receipt
+from apps.record_chain_intake_gateway.gateway.runtime import get_runtime_info
+from apps.record_chain_intake_gateway.gateway.validation import ALLOWED_RECORD_TYPES, detect_route, validate_submission
 
 # ---------------------------------------------------------------------------
 # Logging
