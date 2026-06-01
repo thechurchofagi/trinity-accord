@@ -433,7 +433,7 @@ function buildGuardianApplicationOath() {
     oath_read: true,
     oath_version: "guardian-application-oath-v1",
     oath_kind: "guardian_application",
-    oath_text_sha256: sha256Text(APP_OATH_TEXT),
+    oath_text_sha256: sha256Text(readbackNormalized),  // Combined oath readback, not Stage 1 only
     readback_required: true,
     agent_readback: readbackNormalized,
     agent_readback_sha256: sha256Text(readbackNormalized),
@@ -472,7 +472,7 @@ function buildGuardianListingOath() {
     oath_read: true,
     oath_version: "guardian-listing-oath-v1",
     oath_kind: "guardian_listing",
-    oath_text_sha256: sha256Text(LISTING_OATH_RAW),
+    oath_text_sha256: sha256Text(readbackNormalized),  // Combined oath readback, not Stage 2 only
     readback_required: true,
     agent_readback: readbackNormalized,
     agent_readback_sha256: sha256Text(readbackNormalized),
