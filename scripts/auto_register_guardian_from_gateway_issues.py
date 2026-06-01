@@ -430,6 +430,9 @@ def parse_listing_issue(listing_issue: dict, allow_non_bot: bool) -> tuple[dict 
 
     if requested_kind == "guardian_active_registry_listing_request":
         pass
+    elif requested_kind == "guardian_full_registration":
+        # One-step full registration (application + listing in single submission).
+        pass
     elif requested_kind == "agent_declared_echo_archive" and is_before_legacy_listing_cutoff(listing_issue):
         # Legacy compatibility for pre-migration Gateway listing issues only.
         pass
@@ -438,7 +441,7 @@ def parse_listing_issue(listing_issue: dict, allow_non_bot: bool) -> tuple[dict 
         # accept when the intake block contains a valid Guardian self-registration.
         pass
     else:
-        return None, decision(False, "blocked", "LISTING_WRONG_ARCHIVE_KIND", "Active Guardian registry listing must use requested_archive_kind=guardian_active_registry_listing_request. Legacy agent_declared_echo_archive listing is accepted only for pre-cutoff issues or valid Guardian self-registrations.", got=requested_kind, cutoff=LEGACY_LISTING_KIND_CUTOFF_UTC)
+        return None, decision(False, "blocked", "LISTING_WRONG_ARCHIVE_KIND", "Active Guardian registry listing must use requested_archive_kind=guardian_active_registry_listing_request, guardian_full_registration, or legacy agent_declared_echo_archive.", got=requested_kind, cutoff=LEGACY_LISTING_KIND_CUTOFF_UTC)
 
     # echo_type check removed — Echo is a unified type; Guardian is independent.
 
@@ -488,6 +491,12 @@ def parse_listing_issue(listing_issue: dict, allow_non_bot: bool) -> tuple[dict 
     # Fallback: intake block uses guardian_identity_binding_public_key_sha256:
     if public_key_sha256 is None:
         m = re.search(r"guardian_identity_binding_public_key_sha256:\s*([a-f0-9]{64})", body)
+        if m:
+            public_key_sha256 = m.group(1)
+
+    # Fallback: intake block uses public_key_sha256: (full registration flow)
+    if public_key_sha256 is None:
+        m = re.search(r"(?<!\w)public_key_sha256:\s*([a-f0-9]{64})", body)
         if m:
             public_key_sha256 = m.group(1)
 

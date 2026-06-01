@@ -768,6 +768,16 @@ def render_machine_block(payload, gateway_receipt_id=None, gateway_commit=None,
         lines.extend(render_guardian_fields(payload))
         lines.extend(render_oath_v2_fields(payload))
         lines.extend(render_guardian_identity_fields(payload))
+
+        # Listing-compatible fields for auto-registration script
+        reg = payload.get("guardian_registration") or {}
+        intake = payload.get("gateway_intake_fields") or {}
+        lines.append(f"guardian_listing_request: true")
+        lines.append(f"listing_guardian_id: {intake.get('listing_guardian_id') or reg.get('guardian_id', 'N/A')}")
+        lines.append(f"listing_public_key_sha256: {intake.get('listing_public_key_sha256') or reg.get('public_key_sha256', 'N/A')}")
+        lines.append(f"listing_guardian_type: {intake.get('listing_guardian_type') or reg.get('guardian_type', 'N/A')}")
+        lines.append(f"listing_application_mode: {intake.get('listing_application_mode') or reg.get('application_mode', 'N/A')}")
+        lines.append(f"listing_label: {intake.get('listing_label') or payload.get('gateway_intake_fields', {}).get('guardian_identity_display_label', 'N/A')}")
         lines.extend(render_gateway_intake_fields(payload, skip_keys={"agent_readback_sha256"}))
     else:
         # Strict evidence path (legacy)
