@@ -1167,7 +1167,7 @@
       "guardian_id": "guardian_ed25519_ad874fec9f68a2ce",
       "public_key_sha256": "ad874fec9f68a2ce5788abeef06c54435e2983c836bc0ddda74d54b0de734f92",
       "algorithm": "ed25519",
-      "status": "active",
+      "status": "retired",
       "guardian_type": "human_with_ai_agent",
       "application_mode": "joint_human_ai",
       "source_issue": 388,
@@ -1181,7 +1181,8 @@
         "not_verification_level": true,
         "not_successor_reception": true,
         "not_amendment": true,
-        "bitcoin_originals_prevail": true
+        "bitcoin_originals_prevail": true,
+        "retirement_does_not_remove_historical_record": true
       },
       "identity_claims": {
         "schema": "trinityaccord.guardian-identity-claims.v1",
@@ -1205,7 +1206,9 @@
           "not_verification_level": true,
           "key_continuity_only": true
         }
-      }
+      },
+      "retired_at": "2026-06-01T05:54:18.417989Z",
+      "retirement_reason": "Retest with correct registry number"
     }
   ]
 }
