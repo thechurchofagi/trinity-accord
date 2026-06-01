@@ -153,5 +153,10 @@
     "legacy_heavy_ci_retired": true,
     "current_system_ci_enabled": true,
     "completion_date": "2026-06-01T18:55:00+08:00"
+  },
+  "public_submission": {
+    "method": "render_record_chain_intake_gateway",
+    "contract": "/api/record-chain-intake-gateway.v1.json",
+    "external_agents_must_not_append_directly": true
   }
 }

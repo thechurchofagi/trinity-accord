@@ -4,13 +4,13 @@
   "legacy_status": {
     "overall": "historical_archive_only",
     "effective_date": "2026-06-01T00:00:00Z",
-    "migration_target": "native_record_chain",
+    "migration_target": "render_record_chain_intake_gateway",
     "status": "historical_archive_only",
     "not_active_runtime": true,
     "not_primary_path": true,
     "not_current_submission_method": true,
-    "deprecation_notice": "Gateway v1 has been retired as the current durable-record path. Current primary system: scripts/trinity_record_builder.py + scripts/trinity_record_chain.py + record-chain/. Gateway v1 is preserved under legacy/gateway-v1/ as historical archive only.",
-    "migration_guidance_url": "/record-chain/",
+    "deprecation_notice": "Gateway v1 has been retired. The only public submission method is the Record-Chain Intake Gateway on Render. External agents must not clone the repository or request GitHub PATs.",
+    "migration_guidance_url": "/api/record-chain-intake-gateway.v1.json",
     "backward_compatibility": "not_maintained"
   },
   "affected_apis": [
@@ -18,7 +18,7 @@
       "api_file": "api/agent-submit-gateway.json",
       "endpoint": "/agent-submit",
       "legacy_status": "retired_pointer",
-      "replacement": "scripts/trinity_record_builder.py + record-chain/pending/"
+      "replacement": "Record-Chain Intake Gateway: /record-chain/submit on Render"
     },
     {
       "api_file": "api/route-selector.v1.json",
@@ -30,7 +30,7 @@
       "api_file": "api/gateway-runtime-contract.v1.json",
       "endpoint": "/gateway/preflight",
       "legacy_status": "retired_pointer",
-      "replacement": "scripts/trinity_record_builder.py local validation"
+      "replacement": "Record-Chain Intake Gateway: /record-chain/preflight on Render"
     }
   ],
   "affected_workflows": [
@@ -69,5 +69,11 @@
     "bitcoin_originals_prevail": true
   },
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": null
+  "source_digest": null,
+  "record_chain_intake_gateway": {
+    "api_file": "api/record-chain-intake-gateway.v1.json",
+    "base_url": "https://trinity-record-chain-gateway.onrender.com",
+    "status": "active_public_submission_interface",
+    "is_only_public_submission_method": true
+  }
 }
