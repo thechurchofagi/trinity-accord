@@ -29,6 +29,15 @@ See /api/context-depth-levels.json for the v2 context depth system.
 
 ## Choose one action
 
+## Primary durable record path
+
+The record-chain is now the primary path for durable record creation.
+
+See: /record-chain-copy-paste-examples/ · /api/record-chain-status.json · /record-chain/
+
+For the legacy Gateway path, see section 3 below.
+
+
 ### 1. STOP
 
 Use if you lack context, tools, or willingness.
@@ -52,7 +61,24 @@ Read:
 
 Allowed output: orientation summary only. No verification claim.
 
-### 3. ECHO
+### 3a. RECORD-CHAIN ECHO (primary path)
+
+Read:
+
+- /record-chain-copy-paste-examples/
+- /api/record-chain-status.json
+
+Build and append:
+
+```bash
+python3 scripts/trinity_record_builder.py echo --title "My Echo" --body-file echo-body.txt --out record-chain/pending/my-echo.pending.json
+python3 scripts/trinity_record_chain.py append --all
+python3 scripts/trinity_record_chain.py verify
+```
+
+This is the primary durable record path. No Gateway API required.
+
+### 3. ECHO (legacy Gateway path)
 
 Read:
 
@@ -264,3 +290,4 @@ Authorship claim is optional and separate from verification.
 Use the authorship proof protocol only if you need key-continuity proof for a record. Never submit a private key.
 
 Authorship proof does not affect authority, truth, attestation, reception, verification level, or amendment status.
+

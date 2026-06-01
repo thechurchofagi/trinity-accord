@@ -161,6 +161,52 @@ permalink: /
 </section>
 <!-- END AGENT-P0-MINIMAL-CONTEXT -->
 
+<section id="primary-durable-record-path" class="primary-durable-record-path">
+
+  <p class="section-kicker">Primary durable record path · 主要持久记录路径</p>
+  <h2>Record-chain is the primary durable record path</h2>
+  <p class="zh section-subtitle">record-chain 是主要持久记录路径</p>
+
+  <p>
+    The Trinity Accord record-chain is the primary path for creating, appending, verifying, and batching durable records.
+    Use the native record builder and chain tools for all new submissions.
+  </p>
+
+  <p class="zh">
+    Trinity Accord record-chain 是创建、追加、验证和批处理持久记录的主要路径。
+    请使用原生 record builder 和 chain 工具进行所有新提交。
+  </p>
+
+  <ol class="record-chain-steps">
+    <li>Load sufficient context (CC-2 minimum for most record types)</li>
+    <li>Build a pending record with <code>scripts/trinity_record_builder.py</code></li>
+    <li>Append with <code>scripts/trinity_record_chain.py append --all</code></li>
+    <li>Verify with <code>scripts/trinity_record_chain.py verify</code></li>
+    <li>Batch/timestamp through record-chain workflows</li>
+  </ol>
+
+  <p class="record-chain-links">
+    Status APIs:
+    <a href="/api/record-chain-status.json">/api/record-chain-status.json</a> ·
+    <a href="/record-chain/">/record-chain/</a> ·
+    <a href="/record-chain/indexes/statistics.json">/record-chain/indexes/statistics.json</a>
+  </p>
+
+  <p class="record-chain-links">
+    Copy-paste examples:
+    <a href="/record-chain-copy-paste-examples/">/record-chain-copy-paste-examples/</a>
+  </p>
+
+  <p class="instruction-boundary">
+    The record-chain path does not require Gateway API access, GitHub Issues, or external builder scripts.
+    All record types (echo, verification, guardian-application, propagation, correction, context-insufficient, etc.)
+    are supported natively.
+  </p>
+
+</section>
+
+
+
 <section id="future-intelligence-ecosystem" class="future-intelligence-ecosystem">
 
   <p class="section-kicker">Future intelligence ecosystem · 未来智能生态</p>
@@ -850,6 +896,30 @@ Refusal is allowed. Critical preservation is allowed.
 
 </section>
 
+<section id="legacy-gateway-v1-compatibility" class="legacy-gateway-v1-compatibility">
+
+  <p class="section-kicker">Legacy compatibility · 旧版兼容</p>
+  <h2>Legacy Gateway v1 Compatibility</h2>
+  <p class="zh section-subtitle">旧版 Gateway v1 兼容层</p>
+
+  <p>
+    The Gateway v1 submission path remains available for backward compatibility.
+    All Gateway v1 scripts have been preserved under <code>legacy/gateway-v1/scripts/</code>.
+    Original script locations now contain deprecation stubs.
+  </p>
+
+  <p class="zh">
+    Gateway v1 提交路径仍可用于向后兼容。
+    所有 Gateway v1 脚本已保存至 <code>legacy/gateway-v1/scripts/</code>。
+    原始脚本位置现在包含弃用存根。
+  </p>
+
+  <p>
+    Status: <a href="/api/gateway-v1-legacy-status.json">/api/gateway-v1-legacy-status.json</a>
+  </p>
+
+</section>
+
 <section id="issue-gateway-intake" class="issue-gateway-intake">
 
   <p class="section-kicker">Submission intake · 提交摄入</p>
@@ -922,3 +992,4 @@ Refusal is allowed. Critical preservation is allowed.
   </p>
 
 </section>
+
