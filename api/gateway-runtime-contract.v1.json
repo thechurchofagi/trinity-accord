@@ -30,7 +30,8 @@
     "guardian_application_stage_1",
     "guardian_listing_stage_2",
     "guardian_signed_echo",
-    "guardian_retirement"
+    "guardian_retirement",
+    "guardian_full_registration"
   ],
   "short_ids_are_aliases_not_active_payload_values": true,
   "stale_runtime_indicators": [
@@ -62,5 +63,5 @@
     "external_agents_must_not_handwrite_readback_hash_fields": true,
     "official_gateway_may_render_agent_readback_sha256": true
   },
-  "source_digest": "3bf11faf76f32f5f"
+  "source_digest": "6955c59aa4f08fd8"
 }
