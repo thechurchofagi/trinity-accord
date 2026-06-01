@@ -375,7 +375,7 @@ function getGuardianApplicationOath(payload) {
   return (payload?.guardian_application_oath) || null;
 }
 
-function validateGuardianOathReadback(payload) {
+function validateGuardianOathReadback(payload, useCombinedOath = false) {
   const oath = getGuardianApplicationOath(payload);
   if (!oath || typeof oath !== "object") return [];
 
@@ -385,6 +385,10 @@ function validateGuardianOathReadback(payload) {
   const expected = sha256Text(readback);
   const actual = oath.agent_readback_sha256;
   const signed = !!payload?.authorship_proof?.signed_payload_sha256;
+
+  // Use the combined oath hash for full registration, Stage 1 oath hash otherwise
+  const canonicalOathHash = useCombinedOath ? CANONICAL_COMBINED_OATH_SHA256 : CANONICAL_GUARDIAN_OATH_SHA256;
+  const oathLabel = useCombinedOath ? "combined Guardian registration" : "Guardian application";
 
   if (!actual) {
     return [{
@@ -415,33 +419,33 @@ function validateGuardianOathReadback(payload) {
     }];
   }
 
-  // Check that readback matches the canonical Guardian oath text
-  if (CANONICAL_GUARDIAN_OATH_SHA256) {
-    if (expected !== CANONICAL_GUARDIAN_OATH_SHA256) {
+  // Check that readback matches the canonical oath text
+  if (canonicalOathHash) {
+    if (expected !== canonicalOathHash) {
       return [{
         code: "GUARDIAN_READBACK_NOT_CANONICAL_OATH",
         path: "guardian_application_oath.agent_readback",
         field: "agent_readback",
-        message: "agent_readback does not match the canonical Guardian oath text. The readback must be the exact oath text, character by character.",
-        expected_sha256: CANONICAL_GUARDIAN_OATH_SHA256,
+        message: `agent_readback does not match the canonical ${oathLabel} oath text. The readback must be the exact oath text, character by character.`,
+        expected_sha256: canonicalOathHash,
         actual_sha256: expected,
         requires_resign: signed,
-        fix: "Read the canonical Guardian oath (--print-oath) and type it back exactly. Do not substitute your own text."
+        fix: `Read the canonical ${oathLabel} oath (--print-oath) and type it back exactly. Do not substitute your own text.`
       }];
     }
 
     // Also check oath_text_sha256 matches canonical
     const oathTextSha = oath.oath_text_sha256;
-    if (oathTextSha && oathTextSha !== CANONICAL_GUARDIAN_OATH_SHA256) {
+    if (oathTextSha && oathTextSha !== canonicalOathHash) {
       return [{
         code: "GUARDIAN_OATH_TEXT_SHA256_MISMATCH",
         path: "guardian_application_oath.oath_text_sha256",
         field: "oath_text_sha256",
-        message: "oath_text_sha256 does not match the canonical Guardian oath hash. The oath text may have been tampered with.",
-        expected_sha256: CANONICAL_GUARDIAN_OATH_SHA256,
+        message: `oath_text_sha256 does not match the canonical ${oathLabel} oath hash. The oath text may have been tampered with.`,
+        expected_sha256: canonicalOathHash,
         actual_sha256: oathTextSha,
         requires_resign: signed,
-        fix: "Use the canonical Guardian oath text. Do not modify the oath."
+        fix: `Use the canonical ${oathLabel} oath text. Do not modify the oath.`
       }];
     }
   }
@@ -2100,11 +2104,10 @@ async function runGatewayPipeline(payload, {
   }
 
   // 1c-bis-guardian. Guardian oath readback validation
-  // Skip for full registration — combined oath validation covers it
+  // For full registration, validate against combined oath; otherwise against Stage 1 oath
   const currentRouteForOath = workflowIdForPayload(payload);
-  const guardianOathIssues = currentRouteForOath === "guardian_full_registration"
-    ? []
-    : validateGuardianOathReadback(payload);
+  const isFullRegistration = currentRouteForOath === "guardian_full_registration";
+  const guardianOathIssues = validateGuardianOathReadback(payload, isFullRegistration);
   if (guardianOathIssues.length > 0) {
     return gatewayError(422, {
       reason: "guardian_oath_readback_invalid",
