@@ -2,6 +2,12 @@ name: Append Record Chain Entries
 
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "record-chain/pending/**"
+      - "record-chain/intake/submissions/**"
+      - "record-chain/intake/receipts/**"
 
 concurrency:
   group: record-chain-append
@@ -13,33 +19,10 @@ permissions:
 jobs:
   append:
     runs-on: ubuntu-latest
-    # Authorize write workflow actor
-    if: github.event_name != 'workflow_dispatch' || github.actor == 'github-actions[bot]' || contains(format(',{0},', vars.GUARDIAN_REGISTRY_WORKFLOW_ACTORS || 'thechurchofagi'), format(',{0},', github.actor))
     steps:
-      - name: Authorize write workflow actor
-        if: github.event_name == 'workflow_dispatch'
-        env:
-          ACTOR: ${{ github.actor }}
-          GUARDIAN_REGISTRY_WORKFLOW_ACTORS: ${{ vars.GUARDIAN_REGISTRY_WORKFLOW_ACTORS }}
-        run: |
-          ALLOWLIST="${GUARDIAN_REGISTRY_WORKFLOW_ACTORS:-thechurchofagi}"
-
-          if [ "$ACTOR" = "github-actions[bot]" ]; then
-            echo "Authorized actor: $ACTOR"
-            exit 0
-          fi
-
-          case ",$ALLOWLIST," in
-            *",$ACTOR,"*)
-              echo "Authorized actor: $ACTOR"
-              ;;
-            *)
-              echo "Unauthorized actor for write workflow: $ACTOR"
-              echo "Set repository variable GUARDIAN_REGISTRY_WORKFLOW_ACTORS to a comma-separated allowlist."
-              exit 1
-              ;;
-          esac
       - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
@@ -50,6 +33,6 @@ jobs:
             git config user.name "trinity-record-chain-bot"
             git config user.email "actions@github.com"
             git add record-chain/
-            git commit -m "Append record-chain entries"
+            git commit -m "Append record-chain entries from Render intake"
             git push
           fi
