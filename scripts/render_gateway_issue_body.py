@@ -709,6 +709,47 @@ def render_machine_block(payload, gateway_receipt_id=None, gateway_commit=None,
         lines.extend(render_guardian_identity_fields(payload))
         # Gateway intake fields (authoritative)
         lines.extend(render_gateway_intake_fields(payload, skip_keys={"agent_readback_sha256"}))
+    elif requested_archive_kind == "guardian_full_registration":
+        # Guardian full registration: application + listing in one issue
+        lines.append(f"record_intent: {payload.get('record_intent', 'auto_archive_candidate')}")
+        lines.append(f"requested_archive_kind: {requested_archive_kind}")
+        lines.append(f"agent_name_or_model: {identity.get('name_or_model', 'N/A')}")
+        lines.append(f"system_or_provider: {identity.get('system_or_provider', 'N/A')}")
+
+        dp = payload.get("discovery_provenance") or {}
+        lines.append(f"discovery_provenance_present: {'true' if dp else 'false'}")
+        ab = payload.get("authority_boundary") or {}
+        lines.append(f"authority_boundary_present: {'true' if ab else 'false'}")
+
+        cth = payload.get("counts_toward_home") or {}
+        lines.append(f"counts_toward_home_verifiability: {'true' if cth.get('verifiability') else 'false'}")
+        lines.append(f"counts_toward_home_reception: {'true' if cth.get('reception') else 'false'}")
+        if cth.get("guardian_registry") is not None:
+            lines.append(f"counts_toward_home_guardian_registry: {'true' if cth.get('guardian_registry') else 'false'}")
+        if cth.get("exclude_from_reception_total") is not None:
+            lines.append(f"counts_toward_home_exclude_from_reception_total: {'true' if cth.get('exclude_from_reception_total') else 'false'}")
+        if cth.get("basis"):
+            lines.append(f"counts_toward_home_basis: {cth.get('basis')}")
+
+        lines.append("guardian_full_registration: true")
+        lines.append("guardian_registry_listing_request: true")
+
+        lines.append("archive_ready: true")
+        lines.append("allowed_archive_kind: guardian_full_registration")
+        lines.append("auto_archive_action: auto_archive_guardian_listing_request")
+
+        receipt_lines = render_gateway_receipt_fields(
+            gateway_receipt_id=gateway_receipt_id,
+            gateway_commit=gateway_commit,
+            gateway_service=gateway_service,
+            dry_run=dry_run,
+            production_render=production_render,
+        )
+        lines.extend(receipt_lines)
+        lines.extend(render_guardian_fields(payload))
+        lines.extend(render_oath_v2_fields(payload))
+        lines.extend(render_guardian_identity_fields(payload))
+        lines.extend(render_gateway_intake_fields(payload, skip_keys={"agent_readback_sha256"}))
     else:
         # Strict evidence path (legacy)
         lines.append(f"verification_level_claimed: {payload.get('verification_level_claimed', 'N/A')}")
@@ -765,7 +806,7 @@ def render_machine_block(payload, gateway_receipt_id=None, gateway_commit=None,
             lines.append("  - INTAKE_ONLY_NOT_ARCHIVE")
 
     # Authorship claim fields (for strict evidence path)
-    if requested_archive_kind not in ("agent_declared_verification_archive", "agent_declared_echo_archive", "guardian_active_registry_listing_request"):
+    if requested_archive_kind not in ("agent_declared_verification_archive", "agent_declared_echo_archive", "guardian_active_registry_listing_request", "guardian_full_registration"):
         lines.extend(render_authorship_claim_fields(payload))
 
     # Guardian Alliance fields (rendered for all paths)
@@ -791,7 +832,7 @@ def render_machine_block(payload, gateway_receipt_id=None, gateway_commit=None,
         lines.append("limitations: []")
 
     # Unsolicited provenance proof (only for strict path)
-    if requested_archive_kind not in ("agent_declared_verification_archive", "agent_declared_echo_archive", "guardian_active_registry_listing_request"):
+    if requested_archive_kind not in ("agent_declared_verification_archive", "agent_declared_echo_archive", "guardian_active_registry_listing_request", "guardian_full_registration"):
         if prov.get("independence_class") == "unsolicited_agent_discovery":
             lines.append(f"unsolicited_discovery_proof_available: {'true' if prov.get('unsolicited_discovery_proof') else 'false'}")
 
