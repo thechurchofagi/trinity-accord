@@ -140,6 +140,10 @@ def rebuild_indexes() -> None:
 
 def commit_and_push(guardian_id: str, registry_number: str) -> bool:
     """Commit registry change and push."""
+    # Stash any unstaged changes (e.g. toolchain-provenance.json from CI)
+    # before rebasing, to avoid "cannot pull with rebase: unstaged changes".
+    subprocess.run(["git", "stash", "--include-untracked"], capture_output=True, text=True, cwd=str(ROOT))
+
     git_cmds = [
         ["git", "config", "user.name", "github-actions[bot]"],
         ["git", "config", "user.email", "41898282+github-actions[bot]@users.noreply.github.com"],
