@@ -1,14 +1,14 @@
 {
   "archive": "trinity-guardian-stage2-builder-bundle.tar.gz",
-  "archive_sha256": "026a8c41e6f8dcac0efa55b8d1ac5e79d42d5aff899036c809167ca843087764",
-  "archive_size_bytes": 59258,
+  "archive_sha256": "0bc9189f6133e8de2d059096aec96f505abc30869ad616d1af1cc9e0083f26ef",
+  "archive_size_bytes": 61422,
   "bundle": "guardian_listing_stage_2",
   "entrypoint": "scripts/build_guardian_listing_request_payload.py",
   "files": [
     {
       "path": "api/agent-issue-gateway-payload-schema.v1.json",
       "sha256": "3e1960b9578b1b0c9b9ec70699575ad444abef9ea9fa5d06145711e12cbc5bdd",
-      "size_bytes": 49361
+      "size_bytes": 49984
     },
     {
       "path": "api/agent-output-policy.v1.json",
@@ -23,12 +23,12 @@
     {
       "path": "api/gateway-builder-route-map.v1.json",
       "sha256": "b2530714c3ab7deb6ab2a57431a17b09896af3beb7b429a68b6225ca770de95d",
-      "size_bytes": 7112
+      "size_bytes": 7430
     },
     {
       "path": "api/gateway-workflows.v1.json",
       "sha256": "6c7f3f48a0b849247b1f1c20d595ccd8d2758b1f56d3952aba73f01cac03f223",
-      "size_bytes": 28761
+      "size_bytes": 34172
     },
     {
       "path": "api/guardian-listing-oath.v1.txt",
@@ -47,8 +47,8 @@
     },
     {
       "path": "scripts/archive_readiness_gate.py",
-      "sha256": "f3f9e7605cd3255e9e7974838f4238830059d9b9f4582caf039581aba65c728c",
-      "size_bytes": 58368
+      "sha256": "555d3ca8573896f8624071bdefde6406b1e05fa4e788edc677dc4ab18051fd97",
+      "size_bytes": 59109
     },
     {
       "path": "scripts/attach_agent_authorship_proof.mjs",
@@ -93,7 +93,7 @@
     {
       "path": "scripts/guardian_reroute_guidance.py",
       "sha256": "723afc30d4b941ae7dcd7586652045458602ddca875fa22f9b21765ae7ee504a",
-      "size_bytes": 2934
+      "size_bytes": 3101
     },
     {
       "path": "scripts/oath_contracts.py",
@@ -117,8 +117,8 @@
     },
     {
       "path": "scripts/validate_gateway_payload.py",
-      "sha256": "c63258bb2a065fbcd76e210c640128d8759a0cfe2b4aca71aa28fbeadc043da8",
-      "size_bytes": 50721
+      "sha256": "639565748f67c8051f5ee34cdef7be2814a6715222dd7f879da704fdfb6367e5",
+      "size_bytes": 51894
     }
   ],
   "forbidden_contents_checked": [
