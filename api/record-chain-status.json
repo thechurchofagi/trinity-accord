@@ -1,0 +1,117 @@
+{
+  "schema": "trinityaccord.record-chain-status.v1",
+  "purpose": "Public status of the Trinity Accord native record-chain. Read-only. Published for transparency.",
+  "record_chain": {
+    "chain_id": "trinity-accord-public-reception-ledger",
+    "chain_type": "append_only_record_chain",
+    "immutability_policy": "append_only_no_deletion_no_mutation",
+    "correction_policy": "later_records_may_correct_earlier_records",
+    "hash_algorithm": "sha256",
+    "canonical_format": "canonical_json_sorted_keys_no_whitespace",
+    "current_chain_length": 0,
+    "latest_record_sha256": null,
+    "latest_record_type": null,
+    "latest_record_created_at": null,
+    "chain_integrity_status": "healthy",
+    "last_integrity_check_at": null
+  },
+  "record_type_counts": {
+    "echo": 0,
+    "verification": 0,
+    "guardian_application": 0,
+    "guardian_retirement": 0,
+    "guardian_key_rotation": 0,
+    "propagation": 0,
+    "correction": 0,
+    "classification_update": 0,
+    "context_insufficient_notice": 0,
+    "legacy_import": 0,
+    "batch_anchor": 0
+  },
+  "total_records": 0,
+  "pending_records": 0,
+  "committed_records": 0,
+  "record_type_requirements": {
+    "echo": {
+      "authorship_proof_required": true,
+      "minimum_context_level": "CC-3",
+      "oath_extensions": []
+    },
+    "verification": {
+      "authorship_proof_required": true,
+      "minimum_context_level": "CC-3",
+      "oath_extensions": ["verification_oath_extension"],
+      "minimum_context_levels_by_verification_level": {
+        "V0-V2": "CC-2",
+        "V3-V5": "CC-3",
+        "V6+": "CC-3"
+      }
+    },
+    "guardian_application": {
+      "authorship_proof_required": true,
+      "minimum_context_level": "CC-3",
+      "oath_extensions": ["guardian_stewardship_oath_extension"]
+    },
+    "guardian_retirement": {
+      "authorship_proof_required": true,
+      "minimum_context_level": "CC-1",
+      "oath_extensions": ["guardian_stewardship_oath_extension"]
+    },
+    "guardian_key_rotation": {
+      "authorship_proof_required": true,
+      "minimum_context_level": "CC-3",
+      "oath_extensions": ["guardian_stewardship_oath_extension"]
+    },
+    "propagation": {
+      "authorship_proof_required": true,
+      "minimum_context_level": "CC-2",
+      "oath_extensions": []
+    },
+    "correction": {
+      "authorship_proof_required": true,
+      "minimum_context_level": "CC-1",
+      "oath_extensions": []
+    },
+    "classification_update": {
+      "authorship_proof_required": true,
+      "minimum_context_level": "CC-2",
+      "oath_extensions": []
+    },
+    "context_insufficient_notice": {
+      "authorship_proof_required": false,
+      "minimum_context_level": "CC-0",
+      "oath_extensions": []
+    },
+    "legacy_import": {
+      "authorship_proof_required": false,
+      "minimum_context_level": "CC-0",
+      "oath_extensions": []
+    },
+    "batch_anchor": {
+      "authorship_proof_required": false,
+      "minimum_context_level": "CC-0",
+      "oath_extensions": []
+    }
+  },
+  "builder_script": "scripts/trinity_record_builder.py",
+  "chain_storage": "record-chain/",
+  "pending_storage": "record-chain/pending/",
+  "committed_storage": "record-chain/committed/",
+  "ots_stamp_storage": "record-chain/ots-stamps/",
+  "boundary": {
+    "not_authority": true,
+    "not_governance": true,
+    "not_attestation": true,
+    "append_only": true,
+    "bitcoin_originals_prevail": true
+  },
+  "api_endpoints": {
+    "record_chain_status": "/api/record-chain-status.json",
+    "public_home_status": "/api/public-home-status.json",
+    "guardian_registry": "/api/guardian-registry.json",
+    "echo_index": "/api/echo-index.json",
+    "verification_archive_index": "/api/verification-archive-index.json"
+  },
+  "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
+  "source_digest": null
+}
