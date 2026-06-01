@@ -146,9 +146,9 @@
     "does_not_rank_above_reception": true
   },
   "verification_archive_records": {
-    "count": 61,
+    "count": 62,
     "by_verification_level": {
-      "V0": 21,
+      "V0": 22,
       "V1": 9,
       "V2": 11,
       "V3": 5,
@@ -157,7 +157,7 @@
       "V5": 2
     },
     "by_claim_gate_status": {
-      "PASS": 9,
+      "PASS": 10,
       "pass": 1
     }
   },
