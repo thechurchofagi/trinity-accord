@@ -649,7 +649,8 @@ def main():
         "none", "block", "needs_more_evidence",
         "auto_archive_sample", "auto_archive_verification_report", "auto_archive_echo",
         "auto_archive_agent_declared_verification", "auto_archive_agent_declared_echo",
-        "auto_archive_guardian_listing_request"
+        "auto_archive_guardian_listing_request", "auto_archive_guardian_application",
+        "auto_archive_guardian_full_registration"
     )
     if auto_archive_action not in valid_actions:
         errors.append(f"invalid auto_archive_action: {auto_archive_action}")
