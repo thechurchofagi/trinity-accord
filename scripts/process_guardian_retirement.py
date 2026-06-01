@@ -140,23 +140,33 @@ def rebuild_indexes() -> None:
 
 def commit_and_push(guardian_id: str, registry_number: str) -> bool:
     """Commit registry change and push."""
-    # Stash any unstaged changes (e.g. toolchain-provenance.json from CI)
-    # before rebasing, to avoid "cannot pull with rebase: unstaged changes".
-    subprocess.run(["git", "stash", "--include-untracked"], capture_output=True, text=True, cwd=str(ROOT))
-
-    git_cmds = [
+    # Commit registry changes first, then stash any other unstaged files
+    # (e.g. toolchain-provenance.json from CI) before rebasing.
+    commit_cmds = [
         ["git", "config", "user.name", "github-actions[bot]"],
         ["git", "config", "user.email", "41898282+github-actions[bot]@users.noreply.github.com"],
         ["git", "add", "api/guardian-registry.json", "api/public-home-status.json"],
         ["git", "commit", "-m", f"guardian: retire #{registry_number} ({guardian_id})"],
-        ["git", "pull", "--rebase", "-X", "theirs", "origin", "main"],
-        ["git", "push", "origin", "HEAD:main"],
     ]
-    for cmd in git_cmds:
+    for cmd in commit_cmds:
         result = subprocess.run(cmd, capture_output=True, text=True, cwd=str(ROOT))
         if result.returncode != 0:
             print(f"FAILED: {' '.join(cmd)}: {result.stderr}", file=sys.stderr)
             return False
+
+    # Stash any remaining unstaged/untracked files before pull --rebase
+    subprocess.run(["git", "stash", "--include-untracked"], capture_output=True, text=True, cwd=str(ROOT))
+
+    push_cmds = [
+        ["git", "pull", "--rebase", "-X", "theirs", "origin", "main"],
+        ["git", "push", "origin", "HEAD:main"],
+    ]
+    for cmd in push_cmds:
+        result = subprocess.run(cmd, capture_output=True, text=True, cwd=str(ROOT))
+        if result.returncode != 0:
+            print(f"FAILED: {' '.join(cmd)}: {result.stderr}", file=sys.stderr)
+            return False
+
     print("✅ Committed and pushed")
     return True
 
