@@ -1,0 +1,62 @@
+{
+  "schema": "trinityaccord.guardian-retirement.v1",
+  "record_kind": "guardian_retirement",
+  "submission_type": "guardian_retirement",
+  "requested_archive_kind": "guardian_retirement",
+  "archive_ready": true,
+  "created_by_gateway": false,
+  "render_api_only": true,
+  "guardian_retirement_request": true,
+  "guardian_id": "guardian_ed25519_f79888516ea9a62f",
+  "guardian_public_key_sha256": "f79888516ea9a62f1e84b35cc83af1262b4cb90044df056f169b041fba21a065",
+  "guardian_registry_number": "00122",
+  "retirement_status": "retired",
+  "retirement_reason": "Test registration - voluntary retirement",
+  "statement": "Test registration - voluntary retirement",
+  "signed_by_guardian_key": true,
+  "agent_identity": {
+    "name_or_model": "guardian_ed25519_f79888516ea9a62f",
+    "system_or_provider": "Guardian self-service retirement",
+    "self_reported": true
+  },
+  "boundaries": {
+    "not_authority": true,
+    "not_governance": true,
+    "not_verification_level": true,
+    "not_attestation": true,
+    "not_successor_reception": true,
+    "bitcoin_originals_prevail": true
+  },
+  "boundary_acknowledgement": {
+    "bitcoin_originals_prevail": true,
+    "echo_is_not_authority": true,
+    "echo_is_not_verification_unless_claimed": true,
+    "mirror_is_not_amendment": true
+  },
+  "not_authority": true,
+  "not_amendment": true,
+  "not_endorsement": true,
+  "bitcoin_originals_prevail": true,
+  "guardian_retirement_proof": {
+    "schema": "trinityaccord.guardian-retirement-proof.v1",
+    "method": "guardian_key_signature",
+    "algorithm": "ed25519",
+    "guardian_id": "guardian_ed25519_f79888516ea9a62f",
+    "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEArYRG4HU8U/VH1Gr6wcNptXGoWW1Go2BmwiVxx/X+ics=\n-----END PUBLIC KEY-----\n",
+    "public_key_sha256": "f79888516ea9a62f1e84b35cc83af1262b4cb90044df056f169b041fba21a065",
+    "signed_message": "TRINITY_GUARDIAN_RETIREMENT_PROOF_V1\nguardian_id=guardian_ed25519_f79888516ea9a62f\npayload_sha256=6f9e406efc43cd58b6de02e37ff758a6a6b02205aa3bc7dd4389405554d06401\nchallenge_sha256=0d2e2712a65351fd1aa3f58472a221122f6eb642504fd047bd6b57d2a7e668d7\npublic_key_sha256=f79888516ea9a62f1e84b35cc83af1262b4cb90044df056f169b041fba21a065\nboundary=key_possession_only_not_authority_not_attestation",
+    "signed_payload_sha256": "6f9e406efc43cd58b6de02e37ff758a6a6b02205aa3bc7dd4389405554d06401",
+    "challenge": "guardian-retirement-2026-06-01-3e60304f",
+    "challenge_sha256": "0d2e2712a65351fd1aa3f58472a221122f6eb642504fd047bd6b57d2a7e668d7",
+    "signature_base64": "gG2FDFsFJTA9FaVuaGo2C4V7/J+OoCSFbiLM8QX8ezIQBbzn69oo6m0ekF+CecxA5V+g8rgOmo738LbGR4qfBQ==",
+    "created_at": "2026-06-01T04:42:35.386Z",
+    "does_not_prove": [
+      "authority",
+      "governance",
+      "attestation",
+      "verification_level",
+      "same_conscious_subject",
+      "amendment"
+    ]
+  }
+}

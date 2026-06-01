@@ -161,45 +161,61 @@ def extract_retirement_from_issue(issue: dict) -> dict | None:
     """Extract retirement payload from a Gateway Issue body."""
     body = issue.get("body") or ""
 
-    # Look for guardian_retirement_request in the intake block
+    # Try 1: Look for guardian_retirement_request in the intake block
     import re
     matches = re.findall(r"```trinity-issue-intake\s*\n([\s\S]*?)```", body)
-    if not matches:
-        return None
+    if matches:
+        block = matches[0]
+        if "guardian_retirement_request: true" in block:
+            # Extract the JSON payload from the issue body
+            json_matches = re.findall(r"```json\s*\n([\s\S]*?)```", body)
+            if json_matches:
+                try:
+                    return json.loads(json_matches[0])
+                except json.JSONDecodeError:
+                    pass
 
-    block = matches[0]
-    if "guardian_retirement_request: true" not in block:
-        return None
+            # If no JSON block, try to construct from intake fields
+            intake = {}
+            for line in block.splitlines():
+                if ":" in line:
+                    k, v = line.split(":", 1)
+                    intake[k.strip()] = v.strip()
 
-    # Extract the JSON payload from the issue body
-    # The payload should be in a JSON code block
+            if intake.get("guardian_retirement_request") == "true":
+                return {
+                    "guardian_id": intake.get("guardian_id"),
+                    "guardian_public_key_sha256": intake.get("guardian_public_key_sha256"),
+                    "guardian_registry_number": intake.get("guardian_registry_number"),
+                    "retirement_reason": intake.get("retirement_reason", "voluntary retirement"),
+                    "guardian_retirement_proof": {
+                        "signed_message": intake.get("retirement_signed_message"),
+                        "signature_base64": intake.get("retirement_signature_base64"),
+                        "public_key_pem": intake.get("retirement_public_key_pem"),
+                        "public_key_sha256": intake.get("guardian_public_key_sha256"),
+                        "guardian_id": intake.get("guardian_id"),
+                    },
+                }
+
+    # Try 2: Raw JSON payload in code block (Gateway retirement render format)
     json_matches = re.findall(r"```json\s*\n([\s\S]*?)```", body)
     if json_matches:
         try:
-            return json.loads(json_matches[0])
+            payload = json.loads(json_matches[0])
+            if payload.get("guardian_retirement_request") or payload.get("schema") == "trinityaccord.guardian-retirement.v1":
+                return payload
         except json.JSONDecodeError:
             pass
 
-    # If no JSON block, try to construct from intake fields
-    intake = {}
-    for line in block.splitlines():
-        if ":" in line:
-            k, v = line.split(":", 1)
-            intake[k.strip()] = v.strip()
-
-    if intake.get("guardian_retirement_request") == "true":
+    # Try 3: Guardian retirement request marker in body
+    if "<!-- guardian-retirement-request -->" in body:
+        # Extract guardian_id from table
+        gid_match = re.search(r"guardian_ed25519_[a-f0-9]{16}", body)
+        reason_match = re.search(r"### Statement\s*\n\s*(.+?)(?:\n|$)", body)
         return {
-            "guardian_id": intake.get("guardian_id"),
-            "guardian_public_key_sha256": intake.get("guardian_public_key_sha256"),
-            "guardian_registry_number": intake.get("guardian_registry_number"),
-            "retirement_reason": intake.get("retirement_reason", "voluntary retirement"),
-            "guardian_retirement_proof": {
-                "signed_message": intake.get("retirement_signed_message"),
-                "signature_base64": intake.get("retirement_signature_base64"),
-                "public_key_pem": intake.get("retirement_public_key_pem"),
-                "public_key_sha256": intake.get("guardian_public_key_sha256"),
-                "guardian_id": intake.get("guardian_id"),
-            },
+            "guardian_id": gid_match.group(0) if gid_match else None,
+            "retirement_reason": reason_match.group(1).strip() if reason_match else "voluntary retirement",
+            "guardian_retirement_request": True,
         }
 
     return None
