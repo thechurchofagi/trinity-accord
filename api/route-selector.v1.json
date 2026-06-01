@@ -124,7 +124,7 @@
     }
   ],
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "f303487cf2fd0695",
+  "source_digest": "ac186c8beb28477a",
   "homepage_is_discovery_only": true,
   "do_not_infer_payload_fields_from_homepage": true,
   "do_not_handwrite_formal_payloads": true,
