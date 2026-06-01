@@ -1,0 +1,58 @@
+{
+  "schema": "trinityaccord.gateway-v1-legacy-status.v1",
+  "purpose": "Status of Gateway v1 APIs. These APIs are in legacy status and will be superseded by the native record-chain.",
+  "legacy_status": {
+    "overall": "legacy",
+    "effective_date": "2026-06-01T00:00:00Z",
+    "migration_target": "native_record_chain",
+    "deprecation_notice": "Gateway v1 APIs are in legacy status. New submissions should use the native record-chain builder (scripts/trinity_record_builder.py). Existing Gateway v1 workflows continue to function for backward compatibility but are no longer the primary path.",
+    "migration_guidance_url": "/record-chain/",
+    "backward_compatibility": "maintained_until_further_notice"
+  },
+  "affected_apis": [
+    {
+      "api_file": "api/agent-submit-gateway.json",
+      "endpoint": "/agent-submit",
+      "legacy_status": "legacy",
+      "replacement": "scripts/trinity_record_builder.py + record-chain/pending/"
+    },
+    {
+      "api_file": "api/route-selector.v1.json",
+      "endpoint": "/api/route-selector.v1.json",
+      "legacy_status": "legacy",
+      "replacement": "scripts/trinity_record_builder.py CLI with record-type subcommands"
+    },
+    {
+      "api_file": "api/gateway-runtime-contract.v1.json",
+      "endpoint": "/gateway/preflight",
+      "legacy_status": "legacy",
+      "replacement": "scripts/trinity_record_builder.py local validation"
+    }
+  ],
+  "affected_workflows": [
+    {
+      "workflow_file": ".github/workflows/echo-triage.yml",
+      "legacy_status": "disabled_automatic",
+      "note": "Replaced with stub. Manual dispatch only with legacy notice."
+    },
+    {
+      "workflow_file": ".github/workflows/guardian-registry-auto-list.yml",
+      "legacy_status": "disabled_automatic",
+      "note": "Replaced with stub. Manual dispatch only with legacy notice."
+    }
+  ],
+  "native_record_chain_status": {
+    "api_file": "api/record-chain-status.json",
+    "status": "active",
+    "builder": "scripts/trinity_record_builder.py",
+    "storage": "record-chain/"
+  },
+  "boundary": {
+    "legacy_apis_still_functional": true,
+    "new_submissions_should_use_record_chain": true,
+    "no_data_loss": true,
+    "existing_records_preserved": true
+  },
+  "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
+  "source_digest": null
+}
