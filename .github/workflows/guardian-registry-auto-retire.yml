@@ -7,6 +7,8 @@ on:
         description: "Retirement request issue number"
         required: true
         type: string
+  issues:
+    types: [opened]
   issue_comment:
     types: [created]
 
@@ -23,7 +25,10 @@ jobs:
     if: >
       github.event_name == 'workflow_dispatch' ||
       (github.event_name == 'issue_comment' &&
-       contains(github.event.comment.body, 'guardian-retirement-request'))
+       contains(github.event.comment.body, 'guardian-retirement-request')) ||
+      (github.event_name == 'issues' &&
+       contains(github.event.issue.title, 'Guardian Retirement') &&
+       !github.event.issue.pull_request)
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:

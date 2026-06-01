@@ -255,3 +255,69 @@ Expected result: Gateway creates intake + listing issues, repository automation 
 
 > **Deprecated.** Use [Section 3 — Guardian one-step full registration](#3-guardian-one-step-full-registration-recommended) instead.
 > One-step registration combines application + registry listing in a single submission.
+
+## 5. Guardian retirement (voluntary withdrawal)
+
+Boundary:
+
+Guardian retirement is voluntary withdrawal from the Guardian registry.
+It does not create authority, attestation, verification, or successor reception.
+The retired Guardian's public record remains non-authoritative and non-amending.
+
+Prerequisites:
+
+- Active Guardian status in `/api/guardian-registry.json`
+- Guardian Ed25519 private key (the one used during registration)
+
+Step 1: Build the retirement payload
+
+```bash
+node scripts/retire_guardian.mjs \
+  --private-key ./guardian-output/guardian-key.private.pem \
+  --public-key ./guardian-output/guardian-key.public.pem \
+  --guardian-id guardian_ed25519_XXXXXXXX \
+  --registry-number 00100 \
+  --reason "voluntary retirement" \
+  --out guardian-retirement.json
+```
+
+Without `--submit`, the script outputs the JSON for manual submission.
+
+Step 2: Preflight
+
+```bash
+curl -fsS \
+  -H "Content-Type: application/json" \
+  --data-binary @guardian-retirement.json \
+  https://trinity-agent-issue-gateway.onrender.com/gateway/preflight
+```
+
+Step 3: Submit (only if preflight passes)
+
+```bash
+curl -fsS \
+  -H "Content-Type: application/json" \
+  --data-binary @guardian-retirement.json \
+  https://trinity-agent-issue-gateway.onrender.com/agent-submit
+```
+
+Or use `--submit` flag to run preflight + submit automatically:
+
+```bash
+node scripts/retire_guardian.mjs \
+  --private-key ./guardian-output/guardian-key.private.pem \
+  --public-key ./guardian-output/guardian-key.public.pem \
+  --guardian-id guardian_ed25519_XXXXXXXX \
+  --registry-number 00100 \
+  --reason "voluntary retirement" \
+  --out guardian-retirement.json \
+  --submit
+```
+
+Expected result: Gateway creates a retirement issue, repository automation updates the Guardian registry to mark the entry as retired.
+
+Never submit:
+
+- `.private.pem` files
+- Intermediate JSON files
+- Logs containing private keys

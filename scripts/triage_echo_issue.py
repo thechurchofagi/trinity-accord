@@ -1550,6 +1550,72 @@ def main():
         if _has_html_receipt_marker:
             _has_gateway_receipt = True
 
+    # --- Step 1.2a: Guardian issue early exit ---
+    # Guardian registration, application, and retirement issues are NOT Echo
+    # submissions. They must not go through Echo format checks, boundary
+    # checks, or archive-intent closure.  The guardian-registry-auto-list
+    # and guardian-registry-auto-retire workflows handle them separately.
+    _is_guardian_registration = bool(
+        re.search(r"guardian_full_registration|guardian_application_stage_1", text, re.IGNORECASE)
+        and re.search(r"archive:guardian-application|archive:guardian-full-registration|guardian_status:\s*valid_self_registered_guardian_claim", text, re.IGNORECASE)
+    )
+    _is_guardian_retirement = bool(
+        re.search(r"guardian-retirement-request|guardian_retirement", text, re.IGNORECASE)
+        and re.search(r"Guardian Retirement|guardian_retirement_request.*true|retirement_status.*retired", text, re.IGNORECASE)
+    )
+
+    if _is_guardian_registration:
+        # Gateway-created Guardian registrations have a valid receipt and are
+        # handled by guardian-registry-auto-list.yml.  Non-Gateway Guardian
+        # issues may still need human review but are NOT Echo submissions.
+        if _has_gateway_receipt or author_login in TRUSTED_GATEWAY_ACTORS:
+            result["labels"] = [
+                "agent-gateway-intake",
+                "archive:guardian-application",
+                "archive:guardian-full-registration",
+            ]
+            result["comment"] = (
+                "This is a Gateway-validated Guardian registration. "
+                "It is handled by the Guardian auto-registration workflow.\n\n"
+                "This is not an Echo submission. No Echo triage action taken.\n\n"
+                "This record remains non-authoritative, non-governing, non-attesting, and non-amending."
+            )
+        else:
+            result["labels"] = [
+                "archive:guardian-application",
+                "needs-human-review",
+            ]
+            result["comment"] = (
+                "This appears to be a Guardian registration issue. "
+                "It is not an Echo submission and has been left open for maintainer review.\n\n"
+                "This record remains non-authoritative, non-governing, non-attesting, and non-amending."
+            )
+        emit_result(result, title, body)
+        return
+
+    if _is_guardian_retirement:
+        # Guardian retirement requests must not be closed by Echo triage.
+        # They are processed by guardian-registry-auto-retire.yml.
+        result["labels"] = [
+            "guardian-retirement-request",
+            "needs-human-review",
+        ]
+        result["labels_to_remove"] = [
+            "echo:invalid",
+            "auto-closed",
+            "invalid:direct-issue-archive-attempt",
+            "render-api-required",
+            "not-counted",
+        ]
+        result["comment"] = (
+            "This is a Guardian retirement request. "
+            "It is not an Echo submission and will not be closed by Echo triage.\n\n"
+            "The retirement will be processed by the Guardian registry automation.\n\n"
+            "This record remains non-authoritative, non-governing, non-attesting, and non-amending."
+        )
+        emit_result(result, title, body)
+        return
+
     if _has_archive_intent and not _has_gateway_receipt:
         result["close"] = True
         result["labels"] = [
