@@ -749,6 +749,14 @@ def render_machine_block(payload, gateway_receipt_id=None, gateway_commit=None,
         lines.append("allowed_archive_kind: guardian_full_registration")
         lines.append("auto_archive_action: auto_archive_guardian_listing_request")
 
+        # Oath and reception fields required by production self-test
+        oath = payload.get("agent_integrity_declaration", {}).get("verification_oath") or payload.get("combined_oath_verification") or {}
+        readback = oath.get("agent_readback", "")
+        lines.append(f"verification_oath_present: {'true' if oath else 'false'}")
+        lines.append(f"agent_readback_sha256: {oath.get('agent_readback_sha256') or (sha256_text(readback) if readback else 'N/A')}")
+        init_class = payload.get("reception_initiation_class", "unknown")
+        lines.append(f"reception_initiation_class: {init_class}")
+
         receipt_lines = render_gateway_receipt_fields(
             gateway_receipt_id=gateway_receipt_id,
             gateway_commit=gateway_commit,
