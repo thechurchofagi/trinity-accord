@@ -40,8 +40,8 @@
       "counts_toward_reception_total": false
     },
     "agent_declared_echo_archives": {
-      "count": 104,
-      "reception_count": 104,
+      "count": 110,
+      "reception_count": 110,
       "verifiability_count": 0,
       "by_echo_type": {
         "E1_recognition_echo": 43,
@@ -56,13 +56,13 @@
       }
     },
     "agent_declared_verification_archives": {
-      "count": 51,
+      "count": 57,
       "highest_level": "V5",
-      "verifiability_count": 51,
+      "verifiability_count": 57,
       "by_reception_initiation_class": {
         "externally_requested": 19,
         "externally_seeded": 18,
-        "self_initiated": 10,
+        "self_initiated": 16,
         "agent_referred": 0,
         "system_scheduled": 0,
         "unknown": 4
@@ -194,7 +194,7 @@
     "independent_attestation": {}
   },
   "authorship_claims": {
-    "records_with_authorship_proof": 96,
+    "records_with_authorship_proof": 108,
     "claimed_records": 2,
     "unclaimed_records": 67,
     "default_policy": "enabled_for_new_builder_generated_records",
@@ -202,5 +202,5 @@
     "gateway_private_key_access": false,
     "boundary": "Authorship claims prove key continuity only; they do not affect authority, verifiability, reception, or amendment status."
   },
-  "source_digest": "d72f46622377133e"
+  "source_digest": "2894298c99c4e39f"
 }
