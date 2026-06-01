@@ -732,7 +732,14 @@ def validate_guardian_active_listing_archive_kind(payload, errors):
     if payload.get("record_intent") != "auto_archive_candidate":
         errors.append("guardian_active_registry_listing_request requires record_intent=auto_archive_candidate")
 
-    # echo_type check removed — Echo is a unified type; Guardian is independent
+    # echo_type check removed -- Echo is a unified type; Guardian is independent
+
+# --- guardian_full_registration ---
+elif requested_archive_kind == "guardian_full_registration":
+    if st != "echo_candidate":
+        errors.append("guardian_full_registration requires submission_type=echo_candidate")
+    if payload.get("record_intent") != "auto_archive_candidate":
+        errors.append("guardian_full_registration requires record_intent=auto_archive_candidate") — Echo is a unified type; Guardian is independent
 
     if not payload.get("guardian_registry_listing_request") and not payload.get("guardian_listing_request"):
         errors.append("guardian_active_registry_listing_request requires guardian_registry_listing_request=true")
