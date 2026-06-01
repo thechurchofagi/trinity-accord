@@ -2100,7 +2100,11 @@ async function runGatewayPipeline(payload, {
   }
 
   // 1c-bis-guardian. Guardian oath readback validation
-  const guardianOathIssues = validateGuardianOathReadback(payload);
+  // Skip for full registration — combined oath validation covers it
+  const currentRouteForOath = workflowIdForPayload(payload);
+  const guardianOathIssues = currentRouteForOath === "guardian_full_registration"
+    ? []
+    : validateGuardianOathReadback(payload);
   if (guardianOathIssues.length > 0) {
     return gatewayError(422, {
       reason: "guardian_oath_readback_invalid",
