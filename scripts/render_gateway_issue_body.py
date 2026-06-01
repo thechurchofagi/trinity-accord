@@ -715,9 +715,18 @@ def render_machine_block(payload, gateway_receipt_id=None, gateway_commit=None,
         lines.append(f"requested_archive_kind: {requested_archive_kind}")
         lines.append(f"agent_name_or_model: {identity.get('name_or_model', 'N/A')}")
         lines.append(f"system_or_provider: {identity.get('system_or_provider', 'N/A')}")
+        lines.append(f"verification_level_claimed: {payload.get('verification_level_claimed', 'none')}")
 
         dp = payload.get("discovery_provenance") or {}
         lines.append(f"discovery_provenance_present: {'true' if dp else 'false'}")
+        solicited = dp.get("solicited")
+        if solicited is None:
+            solicited = dp.get("independence_class", "") == "human_solicited_agent_response"
+        lines.append(f"solicited: {str(bool(solicited)).lower()}")
+        lines.append(f"independence_class: {dp.get('independence_class', 'N/A')}")
+        lines.append(f"agency_level: {dp.get('agency_level', 'N/A')}")
+        lines.append(f"operator_type: {dp.get('operator_type', 'N/A')}")
+
         ab = payload.get("authority_boundary") or {}
         lines.append(f"authority_boundary_present: {'true' if ab else 'false'}")
 
@@ -733,6 +742,8 @@ def render_machine_block(payload, gateway_receipt_id=None, gateway_commit=None,
 
         lines.append("guardian_full_registration: true")
         lines.append("guardian_registry_listing_request: true")
+        lines.append("not_independent_attestation: true")
+        lines.append("not_successor_reception: true")
 
         lines.append("archive_ready: true")
         lines.append("allowed_archive_kind: guardian_full_registration")
