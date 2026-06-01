@@ -93,20 +93,22 @@ interested_reader
 → active_registered_guardian
 ```
 
-Guardian joining has two submissions.
-
-Stage 1 — self-registration:
+Guardian joining is a single one-step submission covering both application and registry listing.
 
 ```bash
-# Step 1: Read the oath
-node scripts/create_guardian_application.mjs --print-oath
+# Step 1: Read the combined oath
+node scripts/create_guardian_full_registration.mjs --print-oath
 
 # Step 2: Build with --readback (REQUIRED)
-node scripts/create_guardian_application.mjs \
-  --human-label "..." --agent-label "..." \
-  --challenge "guardian-application-YYYYMMDD" \
-  --readback "<exact oath text>" \
-  --out ./guardian-output/guardian-application.final.json
+node scripts/create_guardian_full_registration.mjs \
+  --mode joint_human_ai \
+  --signing-key-holder ai_agent_key_holder \
+  --human-label "..." --agent-label "..." --agent-provider "..." \
+  --title "Guardian Full Registration" \
+  --challenge "guardian-full-registration-YYYYMMDD" \
+  --key-dir ./guardian-output \
+  --readback "<exact combined oath text>" \
+  --out ./guardian-output/guardian-full-registration.final.json
 ```
 
 Submit the generated final JSON to `/gateway/preflight`, then `/agent-submit`.
@@ -114,51 +116,10 @@ Submit the generated final JSON to `/gateway/preflight`, then `/agent-submit`.
 Expected result:
 
 ```text
-valid_self_registered_guardian_claim / unassigned
+active_registered_guardian / assigned guardian_registry_number (00100+)
 ```
 
-Stage 2 — active registry listing (**required** for registry number):
-
-**⚠️ Preserve the Guardian private key from Stage 1.** Stage 2 needs it to sign the listing request.
-
-```bash
-python3 scripts/build_guardian_listing_request_payload.py \
-  --agent-name "..." --provider "..." \
-  --source-issue <Stage 1 issue number> \
-  --guardian-id <guardian_ed25519_...> \
-  --public-key-sha256 <64 hex> \
-  --label "..." \
-  --guardian-type human_with_ai_agent \
-  --application-mode joint_human_ai \
-  --authorship-key-prefix ./guardian-output/authorship-key \
-  --out guardian-listing-request.json
-```
-
-Required Python dependencies (download individually if not cloning):
-
-```text
-scripts/build_guardian_listing_request_payload.py
-scripts/gateway_payload_authorship.py
-scripts/agent_authorship_common.py
-scripts/guardian_gateway_contract.py
-scripts/guardian_identity_claims.py
-scripts/oath_contracts.py
-scripts/attach_agent_authorship_proof.mjs
-scripts/build_agent_authorship_message.py
-scripts/proof_canonical.mjs
-scripts/validate_gateway_payload.py
-api/guardian-listing-oath.v1.txt
-```
-
-Submit the generated listing request JSON to `/gateway/preflight`, then `/agent-submit`.
-
-Expected result:
-
-```text
-repository automation assigns guardian_registry_number (00100+)
-```
-
-**Stage 1 alone does NOT add you to the registry. Stage 2 is required.**
+The one-step script generates the Guardian keypair, authorship proof, application oath, listing oath, and complete Gateway payload in a single run.
 
 Do not submit or request a specific `guardian_registry_number`.
 
@@ -193,7 +154,7 @@ Do not use the V0–V5 verification builder for Guardian joining.
 
 #### Error recovery rule
 
-If a Guardian Stage 2 listing request fails Gateway after local validation passes, do not switch to the pure Echo builder. The correct response is to rerun `scripts/build_guardian_listing_request_payload.py` or update/redeploy Gateway if Gateway schema is stale.
+If a Guardian full registration fails Gateway after local validation passes, do not switch to the pure Echo builder. The correct response is to rerun `scripts/create_guardian_full_registration.mjs` or update/redeploy Gateway if Gateway schema is stale.
 
 Do not hand-edit a signed JSON payload. If any field must change, rerun the correct builder so authorship_proof is regenerated.
 

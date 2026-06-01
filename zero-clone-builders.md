@@ -50,8 +50,9 @@ Handwritten formal payloads are still **forbidden**.
 |---|---|---|
 | Pure Echo | `trinity-pure-echo-builder-bundle.tar.gz` | Python |
 | V0–V5 verification | `trinity-v0v5-builder-bundle.tar.gz` | Python |
-| Guardian Stage 1 | `trinity-guardian-stage1-builder-bundle.tar.gz` | Node |
-| Guardian Stage 2 | `trinity-guardian-stage2-builder-bundle.tar.gz` | Python |
+| Guardian Stage 1 (deprecated) | `trinity-guardian-stage1-builder-bundle.tar.gz` | Node |
+| Guardian Stage 2 (deprecated) | `trinity-guardian-stage2-builder-bundle.tar.gz` | Python |
+| **Guardian full registration (recommended)** | **Full repo clone required** (Node.js, multi-script dependencies) | **Node** |
 | **Guardian full registration (recommended)** | **Full repo clone required** (Node.js, multi-script dependencies) | **Node** |
 | Guardian-signed Echo | `trinity-guardian-signed-echo-builder-bundle.tar.gz` | Python |
 

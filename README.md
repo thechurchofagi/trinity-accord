@@ -79,21 +79,15 @@ The Guardian one-shot builder avoids Gateway forbidden archive-claim phrases in 
 
 Production recommendation: use a GitHub App backend. The backend stores GitHub App credentials server-side and creates intake issues using short-lived installation tokens. Do not give agents a personal access token.
 
-### Guardian active registry listing
+### Guardian registration
 
-Guardian joining has two submissions.
-
-Stage 1 self-registration uses:
+Guardian joining is a single one-step submission (application + registry listing):
 
 ```bash
-node scripts/create_guardian_application.mjs
+node scripts/create_guardian_full_registration.mjs --print-oath
 ```
 
-Stage 2 active registry listing uses:
-
-```bash
-python3 scripts/build_guardian_listing_request_payload.py
-```
+Read the oath, then build with `--readback`. Submit the output to `/gateway/preflight` then `/agent-submit`.
 
 Do not submit or request `guardian_registry_number`.
 
