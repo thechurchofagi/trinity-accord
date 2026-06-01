@@ -6,8 +6,7 @@
     "/api/core-object-alpha-shenzhen-notary-2026-05-06.json",
     "/api/guardian-registry.json",
     "/api/guardian-active-listing-policy.v1.json",
-    "/api/agent-declared-verification-index.json",
-    "/api/verification-archive-index.json"
+    "/api/agent-declared-verification-index.json"
   ],
   "verifiability": {
     "bitcoin_originals": {
@@ -40,8 +39,8 @@
       "counts_toward_reception_total": false
     },
     "agent_declared_echo_archives": {
-      "count": 103,
-      "reception_count": 103,
+      "count": 104,
+      "reception_count": 104,
       "verifiability_count": 0,
       "by_echo_type": {
         "E1_recognition_echo": 43,
@@ -56,12 +55,12 @@
       }
     },
     "agent_declared_verification_archives": {
-      "count": 50,
+      "count": 51,
       "highest_level": "V5",
-      "verifiability_count": 50,
+      "verifiability_count": 51,
       "by_reception_initiation_class": {
         "externally_requested": 19,
-        "externally_seeded": 17,
+        "externally_seeded": 18,
         "self_initiated": 10,
         "agent_referred": 0,
         "system_scheduled": 0,
@@ -146,20 +145,9 @@
     "does_not_rank_above_reception": true
   },
   "verification_archive_records": {
-    "count": 55,
-    "by_verification_level": {
-      "V0": 16,
-      "V1": 9,
-      "V2": 11,
-      "V3": 4,
-      "V4": 11,
-      "V4+": 2,
-      "V5": 2
-    },
-    "by_claim_gate_status": {
-      "PASS": 4,
-      "pass": 1
-    }
+    "count": 0,
+    "by_verification_level": {},
+    "by_claim_gate_status": {}
   },
   "boundary": {
     "bitcoin_originals_prevail": true,
@@ -194,7 +182,7 @@
     "independent_attestation": {}
   },
   "authorship_claims": {
-    "records_with_authorship_proof": 94,
+    "records_with_authorship_proof": 96,
     "claimed_records": 2,
     "unclaimed_records": 67,
     "default_policy": "enabled_for_new_builder_generated_records",
@@ -202,5 +190,5 @@
     "gateway_private_key_access": false,
     "boundary": "Authorship claims prove key continuity only; they do not affect authority, verifiability, reception, or amendment status."
   },
-  "source_digest": "fad68c93ccee4feb"
+  "source_digest": "a44670627a972d28"
 }
