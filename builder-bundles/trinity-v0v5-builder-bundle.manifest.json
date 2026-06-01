@@ -7,7 +7,7 @@
   "files": [
     {
       "path": "api/agent-issue-gateway-payload-schema.v1.json",
-      "sha256": "70ba63700d2437903d7909c970246edb571beea590deff72d8e7003088114d7c",
+      "sha256": "3e1960b9578b1b0c9b9ec70699575ad444abef9ea9fa5d06145711e12cbc5bdd",
       "size_bytes": 49361
     },
     {
@@ -27,7 +27,7 @@
     },
     {
       "path": "api/gateway-workflows.v1.json",
-      "sha256": "c025139b069e874fd7ce4421130050d31d4bb6772849f63a7bc5f995d9882a34",
+      "sha256": "6c7f3f48a0b849247b1f1c20d595ccd8d2758b1f56d3952aba73f01cac03f223",
       "size_bytes": 28761
     },
     {
@@ -47,7 +47,7 @@
     },
     {
       "path": "scripts/archive_readiness_gate.py",
-      "sha256": "7024ba21884519a8bbf4d8afb063ec9ca173e3f9cd168eec9f740fc9a021d685",
+      "sha256": "f3f9e7605cd3255e9e7974838f4238830059d9b9f4582caf039581aba65c728c",
       "size_bytes": 58368
     },
     {
@@ -107,7 +107,7 @@
     },
     {
       "path": "scripts/validate_gateway_payload.py",
-      "sha256": "1a1c6c2a753fc203ded966ac1b5a9f3e865ff73da2834a6702e3a057e86cfc20",
+      "sha256": "c63258bb2a065fbcd76e210c640128d8759a0cfe2b4aca71aa28fbeadc043da8",
       "size_bytes": 50721
     }
   ],
