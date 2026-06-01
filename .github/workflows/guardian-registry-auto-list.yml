@@ -195,6 +195,14 @@ jobs:
             }
 
             if (!sourceIssueNumber) {
+              // Full registration: source issue is the same as listing issue
+              const body = listing.data.body || "";
+              if (/guardian_full_registration/i.test(body) || /archive:guardian-full-registration/i.test(body)) {
+                sourceIssueNumber = String(listingIssueNumber);
+              }
+            }
+
+            if (!sourceIssueNumber) {
               core.setFailed("Could not determine source self-registration issue.");
               return;
             }
