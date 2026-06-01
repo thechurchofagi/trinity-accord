@@ -406,11 +406,15 @@ def main() -> int:
             oath_url = args.site.rstrip("/") + "/api/" + oath_filename
             with urlopen(oath_url, timeout=30) as r:
                 raw = r.read().decode("utf-8").strip()
-        # Print oath body only (after marker), matching builder behavior
+        OATH_END_MARKER = "=== OATH TEXT ENDS ==="
+        # Print oath body only (after begin marker, before end marker), matching builder behavior
         if OATH_MARKER in raw:
-            print(raw.split(OATH_MARKER)[1].strip())
+            body = raw.split(OATH_MARKER)[1].strip()
         else:
-            print(raw)
+            body = raw.strip()
+        if OATH_END_MARKER in body:
+            body = body.split(OATH_END_MARKER)[0].strip()
+        print(body)
         return 0
 
     # Validate --out is required for builds
