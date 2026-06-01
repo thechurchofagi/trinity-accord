@@ -2305,6 +2305,13 @@ async function runGatewayPipeline(payload, {
     payload._guardian_status = guardianStatus;
     fs.writeFileSync(payloadPath, JSON.stringify(payload, null, 2), "utf-8");
 
+    // Guardian Stage 1 and full registration: override archive kind BEFORE readiness gate
+    const currentRoute = workflowIdForPayload(payload);
+    if (currentRoute === "guardian_application_stage_1" || currentRoute === "guardian_full_registration") {
+      payload.requested_archive_kind = "guardian_active_registry_listing_request";
+      fs.writeFileSync(payloadPath, JSON.stringify(payload, null, 2), "utf-8");
+    }
+
     // 5. Archive Readiness Gate — MUST run before render so computed values are available
     let archiveReadiness, autoArchiveDecision;
     if (precomputedArchiveReadiness && precomputedAutoArchiveDecision) {
@@ -2340,13 +2347,6 @@ async function runGatewayPipeline(payload, {
     // --- Archive gate enforcement ---
     const recordIntent = payload.record_intent || "intake_only";
     const requestedKind = payload.requested_archive_kind || "none";
-
-    // Guardian Stage 1 and full registration: override archive kind so they are not echo-archived
-    const currentRoute = workflowIdForPayload(payload);
-    if (currentRoute === "guardian_application_stage_1" || currentRoute === "guardian_full_registration") {
-      payload.requested_archive_kind = "guardian_active_registry_listing_request";
-      archiveReadiness.requested_archive_kind = "guardian_active_registry_listing_request";
-    }
 
     // Block successor_reception_candidate
     if (requestedKind === "successor_reception_candidate") {
