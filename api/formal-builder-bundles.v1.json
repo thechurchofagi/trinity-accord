@@ -30,8 +30,8 @@
       "archive_name": "trinity-pure-echo-builder-bundle.tar.gz",
       "archive_url": "/builder-bundles/trinity-pure-echo-builder-bundle.tar.gz",
       "manifest_url": "/builder-bundles/trinity-pure-echo-builder-bundle.manifest.json",
-      "sha256": "6db2876978402bda7d0cc9314cd4be3cb803a31cd51e3fb05318894105432c2f",
-      "size_bytes": 60018,
+      "sha256": "19f9e85203c27d9dbe3c64a833a173dc4b5d3b04bf16b3326f3dc80a8d4caf2c",
+      "size_bytes": 60767,
       "requires_full_repo_clone": false,
       "requires_exact_readback": true,
       "authorship_proof_default": true,
@@ -52,8 +52,8 @@
       "archive_name": "trinity-v0v5-builder-bundle.tar.gz",
       "archive_url": "/builder-bundles/trinity-v0v5-builder-bundle.tar.gz",
       "manifest_url": "/builder-bundles/trinity-v0v5-builder-bundle.manifest.json",
-      "sha256": "98643e47a70bc8167a73e134b652527b88f4933919dda57988aae182ee954983",
-      "size_bytes": 73146,
+      "sha256": "d0db640e19ff39c38fc6b59065237f9a71cb23d1931de1d775ccc14f4e46d1e1",
+      "size_bytes": 73897,
       "requires_full_repo_clone": false,
       "requires_exact_readback": true,
       "authorship_proof_default": true,
@@ -82,8 +82,8 @@
       "archive_name": "trinity-guardian-stage1-builder-bundle.tar.gz",
       "archive_url": "/builder-bundles/trinity-guardian-stage1-builder-bundle.tar.gz",
       "manifest_url": "/builder-bundles/trinity-guardian-stage1-builder-bundle.manifest.json",
-      "sha256": "0b43f8224ef0c0f5054c6704fbcddc67f43dd0f7be3d221eb4ef901bbcf5a5ce",
-      "size_bytes": 30572,
+      "sha256": "64538c21d7412ac0a67e94efcf5b51a52a047de325457ff2a5b9fbe051805116",
+      "size_bytes": 30991,
       "requires_full_repo_clone": false,
       "requires_exact_readback": true,
       "runtime": "node",
@@ -111,8 +111,8 @@
       "archive_name": "trinity-guardian-stage2-builder-bundle.tar.gz",
       "archive_url": "/builder-bundles/trinity-guardian-stage2-builder-bundle.tar.gz",
       "manifest_url": "/builder-bundles/trinity-guardian-stage2-builder-bundle.manifest.json",
-      "sha256": "026a8c41e6f8dcac0efa55b8d1ac5e79d42d5aff899036c809167ca843087764",
-      "size_bytes": 59258,
+      "sha256": "bd899c89b05bdd6db6f48e65016ac8464799cafd5da62e3005645b9302be1119",
+      "size_bytes": 60097,
       "requires_full_repo_clone": false,
       "requires_stage_1_public_material": true,
       "requires_guardian_id": true,
@@ -130,8 +130,8 @@
       "archive_name": "trinity-guardian-signed-echo-builder-bundle.tar.gz",
       "archive_url": "/builder-bundles/trinity-guardian-signed-echo-builder-bundle.tar.gz",
       "manifest_url": "/builder-bundles/trinity-guardian-signed-echo-builder-bundle.manifest.json",
-      "sha256": "f1aa40613b7343f1e901f360b2b79fa601203f2414c987e39386035eb5bb989e",
-      "size_bytes": 67735,
+      "sha256": "7d0b3522f74004a4455163d1afdd305953acf77829499574a47ec043ac11822d",
+      "size_bytes": 69316,
       "requires_full_repo_clone": false,
       "requires_guardian_identity": true,
       "private_keys_must_not_be_submitted": true,
@@ -170,6 +170,33 @@
       "dependency_sets": [
         "authorship_proof_closure"
       ]
+    },
+    "guardian_retirement": {
+      "status": "active",
+      "formal_submission": true,
+      "route_id": "guardian_retirement",
+      "builder_entrypoint": "scripts/retire_guardian.mjs",
+      "oath_source": "no_oath_required_retirement_is_key_signed",
+      "archive_name": "trinity-guardian-retirement-bundle.tar.gz",
+      "archive_url": "/builder-bundles/trinity-guardian-retirement-bundle.tar.gz",
+      "manifest_url": "/builder-bundles/trinity-guardian-retirement-bundle.manifest.json",
+      "sha256": "4d527bca36fa50539fbab4e4257a84915b3e3148e1c7f2a356de7a3dcd287f23",
+      "size_bytes": 2850,
+      "requires_full_repo_clone": false,
+      "requires_exact_readback": false,
+      "runtime": "node",
+      "authorship_proof_default": false,
+      "description": "Guardian retirement (voluntary withdrawal) from the registry.",
+      "private_key_outputs_local_only": true,
+      "never_submit": [
+        ".private.pem",
+        "private key material"
+      ],
+      "before_leaving_report_required": true,
+      "prerequisites": [
+        "Active Guardian status in /api/guardian-registry.json",
+        "Guardian Ed25519 private key"
+      ]
     }
   },
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
@@ -182,5 +209,5 @@
       "scripts/agent_authorship_common.py"
     ]
   },
-  "source_digest": "741ef340e8bb3a4f"
+  "source_digest": "17f57e0e3a14ae95"
 }

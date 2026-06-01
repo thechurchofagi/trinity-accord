@@ -17,6 +17,7 @@ Supported routes:
   guardian_listing_stage_2
   guardian_signed_echo
   guardian_full_registration
+  guardian_retirement
 """
 from __future__ import annotations
 
@@ -60,6 +61,10 @@ READBACK_TARGETS = {
         "/api/public-home-status.json",
     ],
     "guardian_full_registration": [
+        "/api/guardian-registry.json",
+        "/api/public-home-status.json",
+    ],
+    "guardian_retirement": [
         "/api/guardian-registry.json",
         "/api/public-home-status.json",
     ],
@@ -283,6 +288,23 @@ def build_guardian_full_registration(args, extract_dir: Path, entrypoint: str) -
     print_next_steps("guardian_full_registration", args.out)
 
 
+def build_guardian_retirement(args, extract_dir: Path, entrypoint: str) -> None:
+    cmd = [
+        "node", str(extract_dir / entrypoint),
+        "--private-key", args.guardian_private_key,
+        "--public-key", args.guardian_public_key,
+        "--reason", args.reason or "voluntary retirement",
+        "--out", args.out,
+    ]
+    if args.guardian_id:
+        cmd += ["--guardian-id", args.guardian_id]
+    if args.guardian_registry_number:
+        cmd += ["--registry-number", args.guardian_registry_number]
+    subprocess.check_call(cmd, cwd=str(extract_dir))
+    print("\n⚠️  Do NOT submit .private.pem files.")
+    print_next_steps("guardian_retirement", args.out)
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Download and run a Trinity Accord zero-clone builder bundle")
     parser.add_argument("--site", default=SITE)
@@ -290,6 +312,7 @@ def main() -> int:
         "pure_echo", "v0_v5_agent_declared_archive",
         "guardian_application_stage_1", "guardian_listing_stage_2",
         "guardian_signed_echo", "guardian_full_registration",
+        "guardian_retirement",
     ])
 
     # Common
@@ -344,6 +367,11 @@ def main() -> int:
     parser.add_argument("--guardian-registry-number")
     parser.add_argument("--guardian-key-prefix")
 
+    # Guardian Retirement
+    parser.add_argument("--guardian-private-key")
+    parser.add_argument("--guardian-public-key")
+    parser.add_argument("--reason")
+
     args = parser.parse_args()
 
     # Normalize readback file aliases: --readback-file works for all routes
@@ -353,7 +381,7 @@ def main() -> int:
         args.readback_file = args.agent_readback_file
 
     # Resolve file paths to absolute so they work when builder runs in a temp directory
-    for attr in ("body_file", "agent_readback_file", "readback_file", "out", "key_dir"):
+    for attr in ("body_file", "agent_readback_file", "readback_file", "out", "key_dir", "guardian_private_key", "guardian_public_key"):
         val = getattr(args, attr, None)
         if val and not os.path.isabs(val):
             setattr(args, attr, os.path.abspath(val))
@@ -416,6 +444,8 @@ def main() -> int:
         require_args(args, ["guardian_registry_number", "guardian_id", "guardian_key_prefix", "title", "body_file", "agent_readback_file", "out"], route)
     elif route == "guardian_full_registration":
         require_args(args, ["human_label", "agent_label", "challenge", "readback_file", "key_dir", "out"], route)
+    elif route == "guardian_retirement":
+        require_args(args, ["guardian_private_key", "guardian_public_key", "out"], route)
 
     # Fetch bundle manifest — try local repo first, then live site
     local_manifest = Path(__file__).resolve().parents[1] / "api" / "formal-builder-bundles.v1.json"
@@ -477,6 +507,8 @@ def main() -> int:
                 build_guardian_signed_echo(args, extract_dir, entrypoint)
             elif route == "guardian_full_registration":
                 build_guardian_full_registration(args, extract_dir, entrypoint)
+            elif route == "guardian_retirement":
+                build_guardian_retirement(args, extract_dir, entrypoint)
     else:
         # Route requires full repo clone — run from local repo
         local_repo = Path(__file__).resolve().parents[1]
@@ -488,6 +520,8 @@ def main() -> int:
 
         if route == "guardian_full_registration":
             build_guardian_full_registration(args, extract_dir, entrypoint)
+        elif route == "guardian_retirement":
+            build_guardian_retirement(args, extract_dir, entrypoint)
         else:
             raise SystemExit(f"Route '{route}' requires full repo clone. Clone the repo first.")
 

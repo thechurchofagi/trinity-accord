@@ -1,0 +1,24 @@
+{
+  "archive": "trinity-guardian-retirement-bundle.tar.gz",
+  "archive_sha256": "4d527bca36fa50539fbab4e4257a84915b3e3148e1c7f2a356de7a3dcd287f23",
+  "archive_size_bytes": 2850,
+  "bundle": "guardian_retirement",
+  "entrypoint": "scripts/retire_guardian.mjs",
+  "files": [
+    {
+      "path": "scripts/retire_guardian.mjs",
+      "sha256": "091b13f80b73a96b20793db3b1d9cc0cadeaac9aff60857e6f490930cba464ac",
+      "size_bytes": 8263
+    }
+  ],
+  "forbidden_contents_checked": [
+    ".git",
+    "__pycache__",
+    ".env",
+    "private",
+    "secret",
+    "node_modules"
+  ],
+  "requires_full_repo_clone": false,
+  "schema": "trinityaccord.formal-builder-bundle-manifest.v1"
+}
