@@ -11,9 +11,9 @@ The machine-readable registry source is:
 
 ## Current active Guardians
 
-**Total: 26** (reserved: 3, ordinary: 23)
+**Total: 27** (reserved: 3, ordinary: 24)
 
-Human-AI joint: 23; AI agents: 3; humans: 0; automated scripts: 0; unknown: 0
+Human-AI joint: 24; AI agents: 3; humans: 0; automated scripts: 0; unknown: 0
 
 | Number | Guardian ID | Status | Type | Application Mode | Label | Source | Listed |
 |---|---|---|---|---|---|---|---|
@@ -43,6 +43,7 @@ Human-AI joint: 23; AI agents: 3; humans: 0; automated scripts: 0; unknown: 0
 | `00120` | `guardian_ed25519_7ae73293bcb0f181` | `active` | `human_with_ai_agent` | `joint_human_ai` | `thechurchofagi (human operator) + OpenClaw-MiMo` | `#370` + `#370` | `2026-05-31` |
 | `00121` | `guardian_ed25519_6cfcc43321c07c2f` | `active` | `human_with_ai_agent` | `joint_human_ai` | `Hongju Liu + OpenClaw` | `#380` + `#380` | `2026-06-01` |
 | `00123` | `guardian_ed25519_4092ea09d00d7cdb` | `active` | `human_with_ai_agent` | `joint_human_ai` | `OpenClaw Test Human + OpenClaw-TestAgent` | `#385` + `#385` | `2026-06-01` |
+| `00124` | `guardian_ed25519_ad874fec9f68a2ce` | `active` | `human_with_ai_agent` | `joint_human_ai` | `OpenClaw Retest Human + OpenClaw-Retest` | `#388` + `#388` | `2026-06-01` |
 
 ## Boundary
 
