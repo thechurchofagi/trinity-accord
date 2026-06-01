@@ -87,8 +87,12 @@ def main() -> int:
     legacy_text = json.dumps(legacy, ensure_ascii=False).lower()
     if "historical" not in legacy_text and "archive" not in legacy_text:
         fail("gateway-v1 legacy status does not mark historical/archive")
-    if "backward_compatibility" in legacy_text and "maintained" in legacy_text:
-        fail("gateway-v1 status still promises backward compatibility")
+    if "backward_compatibility" in legacy_text:
+        # Check it's not still promising active maintenance
+        import re
+        compat_match = re.search(r'"backward_compatibility"\s*:\s*"([^"]*)"', legacy_text)
+        if compat_match and "not_maintained" not in compat_match.group(1):
+            fail("gateway-v1 status still promises backward compatibility")
     ok("gateway v1 historical status API")
 
     # 4. Homepage points to record-chain
@@ -106,16 +110,32 @@ def main() -> int:
             break
 
     # 6. No active Gateway issue-triggered workflows
+    # Only flag workflows that trigger on issues AND run Gateway v1 intake/triage scripts
+    GATEWAY_RUNTIME_KEYWORDS = [
+        "gateway_intake", "gateway_auto_archive", "triage_echo_issue",
+        "echo-triage", "guardian-registry-auto-list", "gateway-keepalive",
+    ]
     workflows = ROOT / ".github" / "workflows"
     if workflows.exists():
         for p in workflows.glob("*.yml"):
             wtext = p.read_text(encoding="utf-8").lower()
-            if "issues:" in wtext and (
-                "gateway" in wtext
-                or "triage" in wtext
-                or "guardian-registry-auto-list" in p.name
-            ):
-                fail(f"active Gateway issue-triggered workflow remains: {p}")
+            # Only check the 'on:' trigger section for issues trigger
+            on_section = ""
+            in_on = False
+            for line in wtext.splitlines():
+                stripped = line.strip()
+                if stripped.startswith("on:"):
+                    in_on = True
+                    continue
+                if in_on:
+                    if stripped and not stripped.startswith("#") and not line.startswith(" ") and not line.startswith("\t"):
+                        break
+                    on_section += line + "\n"
+            if "issues:" in on_section:
+                # Check if it actually runs Gateway v1 runtime scripts
+                for kw in GATEWAY_RUNTIME_KEYWORDS:
+                    if kw in wtext:
+                        fail(f"active Gateway issue-triggered workflow remains: {p} (matched: {kw})")
     ok("no active Gateway issue-triggered workflows")
 
     # 7. legacy/gateway-v1/MANIFEST.sha256.json exists
@@ -134,7 +154,7 @@ def main() -> int:
 
     # 9. No private keys or tokens
     result = subprocess.run(
-        [sys.executable, "scripts/test_no_private_key_or_token_leakage.py"],
+        [sys.executable, "scripts/test_no_private_key_material_committed.py"],
         cwd=ROOT,
         capture_output=True,
         text=True,

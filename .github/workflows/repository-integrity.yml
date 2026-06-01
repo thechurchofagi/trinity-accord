@@ -44,4 +44,4 @@ jobs:
         run: python3 scripts/generate_public_home_status.py --check
 
       - name: Check no private keys or tokens
-        run: python3 scripts/test_no_private_key_or_token_leakage.py
+        run: python3 scripts/test_no_private_key_material_committed.py
