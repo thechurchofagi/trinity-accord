@@ -30,7 +30,7 @@ def verify_signature(signed_message: str, signature_b64: str, public_key_pem: st
 
     proof = {
         "signed_message": signed_message,
-        "signature": signature_b64,
+        "signature_base64": signature_b64,
         "public_key_pem": public_key_pem,
     }
 
