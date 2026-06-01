@@ -1,0 +1,72 @@
+{
+  "archive": "trinity-guardian-full-registration-bundle.tar.gz",
+  "archive_sha256": "dc62606df0b9310879c381ffad3eb94484e03e9d72fee75cd6e5af854a6891fb",
+  "archive_size_bytes": 32585,
+  "bundle": "guardian_full_registration",
+  "entrypoint": "scripts/create_guardian_full_registration.mjs",
+  "files": [
+    {
+      "path": "api/agent-issue-gateway-payload-schema.v1.json",
+      "sha256": "3e1960b9578b1b0c9b9ec70699575ad444abef9ea9fa5d06145711e12cbc5bdd",
+      "size_bytes": 49984
+    },
+    {
+      "path": "api/agent-output-policy.v1.json",
+      "sha256": "92f47eb4f85980bdd258d08a9bb9b108c945967144578fa6c4660fd45ee7127c",
+      "size_bytes": 7740
+    },
+    {
+      "path": "api/agent-submit-gateway.json",
+      "sha256": "15f792d74cb424fd675be76dc1c4143345125cb326ed54f2c7b5b5e8434cd2be",
+      "size_bytes": 24130
+    },
+    {
+      "path": "api/gateway-builder-route-map.v1.json",
+      "sha256": "b2530714c3ab7deb6ab2a57431a17b09896af3beb7b429a68b6225ca770de95d",
+      "size_bytes": 7430
+    },
+    {
+      "path": "api/gateway-workflows.v1.json",
+      "sha256": "6c7f3f48a0b849247b1f1c20d595ccd8d2758b1f56d3952aba73f01cac03f223",
+      "size_bytes": 34172
+    },
+    {
+      "path": "api/guardian-application-and-listing-oath.v1.txt",
+      "sha256": "7bd6e79be1b689a75eff101986111d06a8e3b52542700c7f4491c36cba33e646",
+      "size_bytes": 3377
+    },
+    {
+      "path": "api/guardian-application-oath.v1.txt",
+      "sha256": "ce2405704d7f8c80fdc30670b6bb6799698e2e67fdfd9ff614b0033f6e4683e2",
+      "size_bytes": 2843
+    },
+    {
+      "path": "api/guardian-listing-oath.v1.txt",
+      "sha256": "3f988027603fc7aa5509b35852a69904d0385d0a7d2f0a353389f0923b27ad67",
+      "size_bytes": 1131
+    },
+    {
+      "path": "scripts/create_guardian_full_registration.mjs",
+      "sha256": "b1170867133218d273f04570de9011998b39fcabfeba74195586f7c979c92b63",
+      "size_bytes": 35929
+    },
+    {
+      "path": "scripts/proof_canonical.mjs",
+      "sha256": "24d381d806ce2cf42b0b86dc1f62d7efdea86ec96ed5f2b14a3975da841916ab",
+      "size_bytes": 4442
+    }
+  ],
+  "forbidden_contents_checked": [
+    ".git",
+    "__pycache__",
+    ".pytest_cache",
+    ".env",
+    "id_rsa",
+    "private",
+    "secret",
+    "token",
+    "node_modules"
+  ],
+  "requires_full_repo_clone": false,
+  "schema": "trinityaccord.formal-builder-bundle-manifest.v1"
+}

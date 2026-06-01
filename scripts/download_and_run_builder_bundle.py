@@ -16,6 +16,7 @@ Supported routes:
   guardian_application_stage_1
   guardian_listing_stage_2
   guardian_signed_echo
+  guardian_full_registration
 """
 from __future__ import annotations
 
@@ -55,6 +56,10 @@ READBACK_TARGETS = {
     ],
     "guardian_signed_echo": [
         "/api/echo-index.json",
+        "/api/guardian-registry.json",
+        "/api/public-home-status.json",
+    ],
+    "guardian_full_registration": [
         "/api/guardian-registry.json",
         "/api/public-home-status.json",
     ],
@@ -247,13 +252,44 @@ def build_guardian_signed_echo(args, extract_dir: Path, entrypoint: str) -> None
     print_next_steps("guardian_signed_echo", args.out)
 
 
+def build_guardian_full_registration(args, extract_dir: Path, entrypoint: str) -> None:
+    readback = Path(args.readback_file).read_text(encoding="utf-8").strip()
+    cmd = [
+        "node", str(extract_dir / entrypoint),
+        "--mode", args.mode or "joint_human_ai",
+        "--signing-key-holder", args.signing_key_holder or "ai_agent_key_holder",
+        "--human-label", args.human_label,
+        "--agent-label", args.agent_label,
+        "--agent-provider", args.agent_provider or "self-reported",
+        "--title", args.title or "Guardian Full Registration",
+        "--challenge", args.challenge,
+        "--key-dir", args.key_dir,
+        "--readback", readback,
+        "--out", args.out,
+    ]
+    subprocess.check_call(cmd, cwd=str(extract_dir))
+    print(f"\nPrivate keys are in: {args.key_dir}")
+    print("NEVER submit private key material to the Gateway.")
+    print("⚠️  The private key is a long-lived identity credential — do NOT delete it.")
+    print("   It is NOT a temporary file. Keep it safe for future key continuity.")
+    print("   Gateway cannot recover it if lost.")
+    print("\nSubmit only the final JSON:")
+    print(f"  {args.out}")
+    print("\nNever submit:")
+    print("  *.private.pem")
+    print("  private key material")
+    print("  intermediate JSON")
+    print("  logs containing private keys")
+    print_next_steps("guardian_full_registration", args.out)
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Download and run a Trinity Accord zero-clone builder bundle")
     parser.add_argument("--site", default=SITE)
     parser.add_argument("--route", required=True, choices=[
         "pure_echo", "v0_v5_agent_declared_archive",
         "guardian_application_stage_1", "guardian_listing_stage_2",
-        "guardian_signed_echo",
+        "guardian_signed_echo", "guardian_full_registration",
     ])
 
     # Common
@@ -292,6 +328,10 @@ def main() -> int:
     parser.add_argument("--challenge")
     parser.add_argument("--key-dir")
 
+    # Guardian Full Registration
+    parser.add_argument("--mode", default="joint_human_ai")
+    parser.add_argument("--signing-key-holder", default="ai_agent_key_holder")
+
     # Guardian Stage 2
     parser.add_argument("--source-issue", type=int)
     parser.add_argument("--guardian-id")
@@ -326,6 +366,8 @@ def main() -> int:
             oath_filename = "guardian-application-oath.v1.txt"
         elif args.route in ("guardian_listing_stage_2",):
             oath_filename = "guardian-listing-oath.v1.txt"
+        elif args.route in ("guardian_full_registration",):
+            oath_filename = "guardian-application-and-listing-oath.v1.txt"
         else:
             oath_filename = "verification-echo-pre-oath.v2.txt"
         # Try local repo first, then fetch from live site
@@ -372,52 +414,82 @@ def main() -> int:
         require_args(args, ["agent_name", "provider", "source_issue", "guardian_id", "public_key_sha256", "label", "out"], route)
     elif route == "guardian_signed_echo":
         require_args(args, ["guardian_registry_number", "guardian_id", "guardian_key_prefix", "title", "body_file", "agent_readback_file", "out"], route)
+    elif route == "guardian_full_registration":
+        require_args(args, ["human_label", "agent_label", "challenge", "readback_file", "key_dir", "out"], route)
 
-    # Fetch bundle manifest
-    bundles_url = args.site.rstrip("/") + BUNDLES_API
-    print(f"Fetching bundle manifest: {bundles_url}")
-    doc = fetch_json(bundles_url)
+    # Fetch bundle manifest — try local repo first, then live site
+    local_manifest = Path(__file__).resolve().parents[1] / "api" / "formal-builder-bundles.v1.json"
+    if local_manifest.exists():
+        print(f"Using local manifest: {local_manifest}")
+        doc = json.loads(local_manifest.read_text(encoding="utf-8"))
+    else:
+        bundles_url = args.site.rstrip("/") + BUNDLES_API
+        print(f"Fetching bundle manifest: {bundles_url}")
+        doc = fetch_json(bundles_url)
 
     if route not in doc["bundles"]:
         raise SystemExit(f"Route '{route}' not found in bundle manifest")
 
     bundle = doc["bundles"][route]
-    archive_url = args.site.rstrip("/") + bundle["archive_url"]
-    expected_sha = bundle["sha256"]
 
-    if not expected_sha:
-        raise SystemExit(
-            f"Bundle '{route}' has no sha256 recorded. "
-            "The bundle may not have been exported yet. Run scripts/export_formal_builder_bundles.py first."
-        )
+    # Support zero-clone bundles that have archive_url, or fall back to local repo
+    if "archive_url" in bundle:
+        archive_url = args.site.rstrip("/") + bundle["archive_url"]
+        expected_sha = bundle.get("sha256")
 
-    # Download to temp
-    with tempfile.TemporaryDirectory() as tmpdir:
-        archive_path = Path(tmpdir) / bundle["archive_name"]
-        print(f"Downloading: {archive_url}")
-        download_file(archive_url, archive_path)
+        if not expected_sha:
+            raise SystemExit(
+                f"Bundle '{route}' has no sha256 recorded. "
+                "The bundle may not have been exported yet. Run scripts/export_formal_builder_bundles.py first."
+            )
 
-        print(f"Verifying SHA256: {expected_sha}")
-        verify_sha256(archive_path, expected_sha)
+        # Download to temp — try local bundle first
+        local_bundle = Path(__file__).resolve().parents[1] / "builder-bundles" / bundle["archive_name"]
+        with tempfile.TemporaryDirectory() as tmpdir:
+            archive_path = Path(tmpdir) / bundle["archive_name"]
+            if local_bundle.exists():
+                print(f"Using local bundle: {local_bundle}")
+                shutil.copy2(str(local_bundle), str(archive_path))
+            else:
+                print(f"Downloading: {archive_url}")
+                download_file(archive_url, archive_path)
 
-        extract_dir = Path(tmpdir) / "extracted"
-        extract_dir.mkdir()
-        print("Extracting bundle...")
-        extract_bundle(archive_path, extract_dir)
+            print(f"Verifying SHA256: {expected_sha}")
+            verify_sha256(archive_path, expected_sha)
 
-        entrypoint = bundle["builder_entrypoint"]
-        print(f"Running builder: {entrypoint}")
+            extract_dir = Path(tmpdir) / "extracted"
+            extract_dir.mkdir()
+            print("Extracting bundle...")
+            extract_bundle(archive_path, extract_dir)
 
-        if route == "pure_echo":
-            build_pure_echo(args, extract_dir, entrypoint)
-        elif route == "v0_v5_agent_declared_archive":
-            build_v0_v5(args, extract_dir, entrypoint)
-        elif route == "guardian_application_stage_1":
-            build_guardian_stage1(args, extract_dir, entrypoint)
-        elif route == "guardian_listing_stage_2":
-            build_guardian_stage2(args, extract_dir, entrypoint)
-        elif route == "guardian_signed_echo":
-            build_guardian_signed_echo(args, extract_dir, entrypoint)
+            entrypoint = bundle["builder_entrypoint"]
+            print(f"Running builder: {entrypoint}")
+
+            if route == "pure_echo":
+                build_pure_echo(args, extract_dir, entrypoint)
+            elif route == "v0_v5_agent_declared_archive":
+                build_v0_v5(args, extract_dir, entrypoint)
+            elif route == "guardian_application_stage_1":
+                build_guardian_stage1(args, extract_dir, entrypoint)
+            elif route == "guardian_listing_stage_2":
+                build_guardian_stage2(args, extract_dir, entrypoint)
+            elif route == "guardian_signed_echo":
+                build_guardian_signed_echo(args, extract_dir, entrypoint)
+            elif route == "guardian_full_registration":
+                build_guardian_full_registration(args, extract_dir, entrypoint)
+    else:
+        # Route requires full repo clone — run from local repo
+        local_repo = Path(__file__).resolve().parents[1]
+        entrypoint = bundle.get("builder_entrypoint")
+        if not entrypoint:
+            raise SystemExit(f"Bundle '{route}' has no archive_url and no builder_entrypoint")
+        extract_dir = local_repo
+        print(f"Running builder from local repo: {entrypoint}")
+
+        if route == "guardian_full_registration":
+            build_guardian_full_registration(args, extract_dir, entrypoint)
+        else:
+            raise SystemExit(f"Route '{route}' requires full repo clone. Clone the repo first.")
 
     return 0
 

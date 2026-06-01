@@ -147,29 +147,29 @@
       "formal_submission": true,
       "route_id": "guardian_full_registration",
       "builder_entrypoint": "scripts/create_guardian_full_registration.mjs",
-      "runtime": "node",
-      "requires_full_repo_clone": true,
+      "payload_schema": "api/agent-issue-gateway-payload-schema.v1.json",
+      "oath_source": "builder_embedded_oath_printed_by_--print-oath",
+      "archive_name": "trinity-guardian-full-registration-bundle.tar.gz",
+      "archive_url": "/builder-bundles/trinity-guardian-full-registration-bundle.tar.gz",
+      "manifest_url": "/builder-bundles/trinity-guardian-full-registration-bundle.manifest.json",
+      "sha256": "dc62606df0b9310879c381ffad3eb94484e03e9d72fee75cd6e5af854a6891fb",
+      "size_bytes": 32585,
+      "requires_full_repo_clone": false,
       "requires_exact_readback": true,
+      "runtime": "node",
       "authorship_proof_default": true,
       "description": "One-step Guardian registration combining application + listing. Recommended path.",
-      "note": "Requires full repository clone due to multi-script dependencies (proof_canonical.mjs, oath files). No zero-clone bundle available.",
-      "dependencies": [
-        "scripts/create_guardian_full_registration.mjs",
-        "scripts/proof_canonical.mjs",
-        "api/guardian-application-and-listing-oath.v1.txt",
-        "api/guardian-application-oath.v1.txt",
-        "api/guardian-listing-oath.v1.txt"
+      "private_key_outputs_local_only": true,
+      "never_submit": [
+        ".private.pem",
+        "private key material",
+        "logs containing private keys",
+        "intermediate JSON"
       ],
-      "submission_transport": {
-        "preflight": {
-          "endpoint": "/gateway/preflight",
-          "method": "POST"
-        },
-        "submit": {
-          "endpoint": "/agent-submit",
-          "method": "POST"
-        }
-      }
+      "before_leaving_report_required": true,
+      "dependency_sets": [
+        "authorship_proof_closure"
+      ]
     }
   },
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
@@ -182,5 +182,5 @@
       "scripts/agent_authorship_common.py"
     ]
   },
-  "source_digest": "301c307803dff2e6"
+  "source_digest": "741ef340e8bb3a4f"
 }
