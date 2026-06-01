@@ -1,0 +1,32 @@
+name: Build Record Chain Batch
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 3 * * *"
+
+concurrency:
+  group: record-chain-batch
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  build-batch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python scripts/trinity_record_chain.py build-batch
+      - run: python scripts/trinity_record_chain.py verify
+      - run: |
+          if ! git diff --quiet; then
+            git config user.name "trinity-record-chain-bot"
+            git config user.email "actions@github.com"
+            git add record-chain/
+            git commit -m "Build record-chain batch"
+            git push
+          fi

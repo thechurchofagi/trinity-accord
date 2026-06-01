@@ -1,0 +1,30 @@
+name: Append Record Chain Entries
+
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: record-chain-append
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  append:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python scripts/trinity_record_chain.py append --all
+      - run: python scripts/trinity_record_chain.py verify
+      - run: |
+          if ! git diff --quiet; then
+            git config user.name "trinity-record-chain-bot"
+            git config user.email "actions@github.com"
+            git add record-chain/
+            git commit -m "Append record-chain entries"
+            git push
+          fi
