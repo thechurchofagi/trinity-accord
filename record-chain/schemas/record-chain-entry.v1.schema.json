@@ -1,0 +1,1 @@
+{"$id":"https://www.trinityaccord.org/record-chain/schemas/record-chain-entry.v1.schema.json","$schema":"https://json-schema.org/draft/2020-12/schema","additionalProperties":true,"required":["schema","chain_id","record_type","actor_identity","context_readiness","boundary_acknowledgement"],"title":"Trinity Accord Record Chain Entry v1","type":"object"}

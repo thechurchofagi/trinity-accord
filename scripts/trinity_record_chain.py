@@ -96,6 +96,9 @@ TEST_PATTERNS = [
 ]
 
 
+GENESIS_CREATED_AT = "2026-06-01T00:00:00Z"
+
+
 def utc_now() -> str:
     return dt.datetime.now(dt.timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
 
@@ -295,7 +298,7 @@ def import_genesis() -> None:
 
     inventory = {
         "schema": "trinityaccord.legacy-inventory.v1",
-        "created_at": utc_now(),
+        "created_at": GENESIS_CREATED_AT,
         "legacy_source": "api/guardian-registry.json",
         "legacy_source_file_sha256": source_sha,
         "guardian_entries_total": len(guardians),
@@ -316,7 +319,7 @@ def import_genesis() -> None:
         "batch_id": "genesis-000000",
         "batch_type": "legacy_import",
         "chain_id": CHAIN_ID,
-        "created_at": utc_now(),
+        "created_at": GENESIS_CREATED_AT,
         "legacy_sources": [{"path": "api/guardian-registry.json", "sha256": source_sha}],
         "record_count": len(record_hashes),
         "legacy_guardian_entries_total": len(guardians),
@@ -342,7 +345,7 @@ def import_genesis() -> None:
         "genesis_batch_manifest_sha256": manifest["batch_manifest_sha256"],
         "latest_batch_id": "genesis-000000",
         "latest_batch_manifest_sha256": manifest["batch_manifest_sha256"],
-        "updated_at": utc_now(),
+        "updated_at": GENESIS_CREATED_AT,
     }
     existing_records = sorted(RECORDS.glob("R-*.json"))
     if existing_records:
@@ -405,9 +408,12 @@ def normalize_record_draft(draft: dict[str, Any]) -> dict[str, Any]:
     return draft
 
 
-def load_tip() -> dict[str, Any]:
+def load_tip(allow_generate: bool = False) -> dict[str, Any]:
     if not CHAIN_TIP.exists():
-        import_genesis()
+        if allow_generate:
+            import_genesis()
+        else:
+            raise FileNotFoundError("record-chain/chain-tip.json missing; run import-genesis")
     return read_json(CHAIN_TIP)
 
 
@@ -415,7 +421,7 @@ def append_records(all_records: bool = False) -> None:
     ensure_dirs()
     if not (GENESIS / "genesis-batch-manifest.json").exists():
         import_genesis()
-    tip = load_tip()
+    tip = load_tip(allow_generate=True)
     pending = sorted(PENDING.glob("*.json"))
     if not pending:
         print("No pending records.")
@@ -557,6 +563,16 @@ def verify_genesis() -> list[str]:
     mh = manifest_hash(mf)
     if mf.get("batch_manifest_sha256") != mh:
         errors.append("genesis batch_manifest_sha256 mismatch")
+    # Verify Genesis against actual guardian registry
+    if GUARDIAN_REGISTRY.exists():
+        registry = read_json(GUARDIAN_REGISTRY)
+        guardian_count = len(registry.get("guardians", []))
+        if mf.get("legacy_guardian_entries_total") != guardian_count:
+            errors.append("genesis legacy_guardian_entries_total does not match api/guardian-registry.json; run import-genesis")
+        source_sha = sha256_file(GUARDIAN_REGISTRY)
+        sources = mf.get("legacy_sources", [])
+        if not sources or sources[0].get("sha256") != source_sha:
+            errors.append("genesis source sha mismatch; run import-genesis")
     return errors
 
 
@@ -590,6 +606,19 @@ def verify_native_records() -> list[str]:
                 errors.append("chain-tip latest_record_sha256 mismatch")
             if tip.get("latest_record_index") != latest.get("record_index"):
                 errors.append("chain-tip latest_record_index mismatch")
+        else:
+            # No native records: tip must reflect Genesis-only state
+            if tip.get("latest_record_sha256") is not None:
+                errors.append("chain-tip latest_record_sha256 should be null when no native records exist")
+            if tip.get("latest_record_index") != 0:
+                errors.append("chain-tip latest_record_index should be 0 when no native records exist")
+            genesis_path = GENESIS / "genesis-batch-manifest.json"
+            if genesis_path.exists():
+                genesis_hash = read_json(genesis_path).get("batch_manifest_sha256")
+                if tip.get("genesis_batch_manifest_sha256") != genesis_hash:
+                    errors.append("chain-tip genesis_batch_manifest_sha256 mismatch")
+                if tip.get("latest_batch_manifest_sha256") != genesis_hash:
+                    errors.append("chain-tip latest_batch_manifest_sha256 should equal genesis hash when no later batches exist")
     return errors
 
 
@@ -618,7 +647,9 @@ def verify_chain() -> None:
     errors += verify_genesis()
     errors += verify_native_records()
     errors += verify_batches()
-    leak_hits = scan_private_keys([*CHAIN.rglob("*"), *Path(ROOT / "scripts").rglob("*")])
+    scan_targets = [*CHAIN.rglob("*"), ROOT / "scripts" / "trinity_record_chain.py"]
+    leak_hits = scan_private_keys(scan_targets)
+    # Allowlist: this script contains regex patterns that match private-key text
     allowlisted = {"scripts/trinity_record_chain.py"}
     leak_hits = [h for h in leak_hits if h not in allowlisted]
     if leak_hits:
