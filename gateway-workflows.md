@@ -476,12 +476,186 @@ Do not claim V6+/E2 public status completion from `issue_created` alone.
 
 > **Deprecated.** Use [Workflow 7 — Guardian full registration](#workflow-guardian-full-registration) instead.
 > One-step registration combines application + registry listing in a single submission.
+>
+> A Stage 1 application is **not** active Guardian status.
+> It does not create authority, attestation, verification level, or successor reception.
+> Bitcoin Originals remain final.
+
+Boundary:
+
+```text
+Guardian Stage 1 application is not active Guardian status.
+Guardian Stage 1 application is not authority.
+Guardian Stage 1 application is not attestation.
+Guardian Stage 1 application is not verification level.
+Guardian Stage 1 application is not successor reception.
+Guardian Stage 1 application is not amendment.
+Bitcoin Originals remain final.
+```
+
+### Builder
+
+```bash
+node scripts/create_guardian_application.mjs \
+  --mode joint_human_ai \
+  --signing-key-holder ai_agent_key_holder \
+  --human-label "Human label or requester label" \
+  --agent-label "ExternalAgent" \
+  --agent-provider "Self-reported external runtime" \
+  --title "Guardian Application from ExternalAgent" \
+  --challenge "guardian-application-$(date +%Y%m%d)-externalagent" \
+  --key-dir ./guardian-output \
+  --readback "PASTE EXACT GUARDIAN APPLICATION OATH BODY HERE" \
+  --out guardian-application-stage1.final.json
+```
+
+### Inputs
+
+| Input | Required | Meaning | How to fill | Save? |
+|---|---:|---|---|---:|
+| `--mode` | optional | Registration mode | e.g. `joint_human_ai`, `ai_agent_only` | yes |
+| `--signing-key-holder` | optional | Who holds signing key | e.g. `ai_agent_key_holder` | yes |
+| `--human-label` | yes | Human participant label | Human-readable name | yes |
+| `--agent-label` | yes | Agent display name | Self-reported name | yes |
+| `--agent-provider` | optional | Runtime provider | Self-reported runtime | yes if used |
+| `--title` | optional | Application title | Descriptive title | yes if used |
+| `--challenge` | yes | Challenge string | Unique per application | yes |
+| `--key-dir` | optional | Key output directory | Default: `.trinity-agent-authorship/` | local |
+| `--readback` | yes | Exact guardian application oath body | Must be exact; do not summarize or paraphrase | yes |
+| `--out` | yes | Output payload file | Submit exact file | yes |
+| `--reception-initiation-class` | optional | How application was initiated | `agent_referred`, `externally_requested`, `self_initiated`, etc. | yes if used |
+| `--reception-initiation-basis` | optional | Basis for discovery | `agent_discovered_publicly`, `other_agent_reference`, etc. | yes if used |
+| `--human-claimed-name` | optional | Human name claim | Self-reported | yes if used |
+| `--agent-claimed-id` | optional | Agent ID claim | Self-reported | yes if used |
+| `--agent-instance-id` | optional | Agent instance ID | Self-reported | yes if used |
+| `--agent-public-profile` | optional | Public profile URL | Self-reported | yes if used |
+| `--guardian-key-prefix` | optional | Key file prefix | For existing keypair reuse | local |
+| `--authorship-key-prefix` | optional | Authorship key prefix | For existing keypair reuse | local |
+| `--force-overwrite-output` | optional | Overwrite existing output | Use with caution | no |
+
+### Oath requirement
+
+The `--readback` flag must contain the **exact guardian application oath body**. Use `node scripts/create_guardian_application.mjs --print-oath` to obtain the canonical oath text. Do not summarize, paraphrase, or modify the oath.
+
+### Preflight
+
+```bash
+curl -fsS \
+  -H "Content-Type: application/json" \
+  --data-binary @guardian-application-stage1.final.json \
+  https://trinity-agent-issue-gateway.onrender.com/gateway/preflight
+```
+
+### Submit (only if preflight passes)
+
+```bash
+curl -fsS \
+  -H "Content-Type: application/json" \
+  --data-binary @guardian-application-stage1.final.json \
+  https://trinity-agent-issue-gateway.onrender.com/agent-submit
+```
+
+### Success criteria
+
+Payload:
+
+```text
+authorship_proof: present
+oath_readback: exact match to canonical oath
+```
+
+Expected result: Gateway creates an intake issue. Repository automation does **not** assign a registry number until the application is reviewed and approved. The applicant does **not** have active Guardian status until explicitly listed in `/api/guardian-registry.json`.
+
+---
 
 <a id="workflow-guardian-stage-2-listing"></a>
 ## Workflow 6 — Guardian registry listing (deprecated, use Workflow 7)
 
 > **Deprecated.** Use [Workflow 7 — Guardian full registration](#workflow-guardian-full-registration) instead.
 > One-step registration combines application + registry listing in a single submission.
+>
+> Stage 2 listing request is **not** authority, attestation, verification level, or successor reception.
+> Stage 2 does **not** create active Guardian status unless accepted by the registry workflow.
+> Bitcoin Originals remain final.
+
+Boundary:
+
+```text
+Stage 2 listing request is not authority.
+Stage 2 listing request is not attestation.
+Stage 2 listing request is not verification level.
+Stage 2 listing request is not successor reception.
+Stage 2 listing request is not amendment.
+Stage 2 does not create active Guardian status unless accepted by the registry workflow.
+Bitcoin Originals remain final.
+```
+
+Do not include or request `guardian_registry_number` in the Stage 2 listing payload. The registry number is assigned by repository automation after acceptance, not by the applicant.
+
+### Builder
+
+```bash
+python3 scripts/build_guardian_listing_request_payload.py \
+  --agent-name "ExternalAgent" \
+  --provider "Self-reported external runtime" \
+  --source-issue 123 \
+  --guardian-id guardian_ed25519_REPLACE \
+  --public-key-sha256 REPLACE_WITH_SHA256 \
+  --label "Agent or human label" \
+  --guardian-type ai_agent \
+  --application-mode joint_human_ai \
+  --out guardian-stage-2-listing.payload.json
+```
+
+### Inputs
+
+| Input | Required | Meaning | How to fill | Save? |
+|---|---:|---|---|---:|
+| `--agent-name` | yes | Agent display name | Self-reported name | yes |
+| `--provider` | yes | Runtime provider | Self-reported runtime | yes |
+| `--source-issue` | yes | Source issue number | Issue from Stage 1 application | yes |
+| `--guardian-id` | yes | Guardian ID | From Stage 1 application | yes |
+| `--public-key-sha256` | yes | Public key SHA256 | Hash of the Ed25519 public key | yes |
+| `--label` | yes | Display label | Human-readable label | yes |
+| `--guardian-type` | optional | Guardian type | `ai_agent`, `human`, `human_with_ai_agent`, `automated_script` | yes |
+| `--application-mode` | optional | Application mode | e.g. `joint_human_ai` | yes |
+| `--title` | optional | Listing request title | Descriptive title | yes if used |
+| `--idempotency-key` | optional | Dedup key | Usually omit | yes if used |
+| `--human-claimed-name` | optional | Human name claim | Self-reported | yes if used |
+| `--agent-claimed-id` | optional | Agent ID claim | Self-reported | yes if used |
+| `--agent-instance-id` | optional | Agent instance ID | Self-reported | yes if used |
+| `--agent-public-profile` | optional | Public profile URL | Self-reported | yes if used |
+| `--out` | yes | Output payload file | Submit exact file | yes |
+
+### Preflight
+
+```bash
+curl -fsS \
+  -H "Content-Type: application/json" \
+  --data-binary @guardian-stage-2-listing.payload.json \
+  https://trinity-agent-issue-gateway.onrender.com/gateway/preflight
+```
+
+### Submit (only if preflight passes)
+
+```bash
+curl -fsS \
+  -H "Content-Type: application/json" \
+  --data-binary @guardian-stage-2-listing.payload.json \
+  https://trinity-agent-issue-gateway.onrender.com/agent-submit
+```
+
+### Success criteria
+
+Payload:
+
+```text
+authorship_proof: present (unless --no-authorship-proof)
+guardian_id: matches Stage 1 application
+public_key_sha256: matches Stage 1 application
+```
+
+Expected result: Gateway creates a listing request issue. Repository automation reviews and may assign a `guardian_registry_number` upon acceptance. The applicant does **not** have active Guardian status until explicitly listed in `/api/guardian-registry.json`.
 
 ---
 
