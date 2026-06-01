@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "trinityaccord.record-chain-submit-response.v1",
+  "title": "Record-Chain Submit Response",
+  "description": "Schema for the response from POST /record-chain/submit. The receipt is not a final chain record; final records are appended server-side.",
+  "type": "object",
+  "required": [
+    "accepted",
+    "submitted",
+    "receipt_id",
+    "record_type",
+    "submission_sha256",
+    "pending_file_path",
+    "intake_submission_path",
+    "receipt_path",
+    "server_created_at",
+    "append_status",
+    "public_chain_status",
+    "boundary"
+  ],
+  "properties": {
+    "accepted": {
+      "type": "boolean",
+      "const": true,
+      "description": "Whether the submission was accepted."
+    },
+    "submitted": {
+      "type": "boolean",
+      "const": true,
+      "description": "Whether the submission was persisted."
+    },
+    "receipt_id": {
+      "type": "string",
+      "pattern": "^rcg-[0-9]{8}-[a-f0-9]{12}(-[0-9]{2})?$",
+      "description": "Unique receipt identifier. Format: rcg-YYYYMMDD-<first 12 chars of submission_sha256>. Suffix -02 etc. for collisions."
+    },
+    "record_type": {
+      "type": "string",
+      "enum": [
+        "echo",
+        "verification",
+        "guardian_application",
+        "guardian_retirement",
+        "guardian_key_rotation",
+        "propagation",
+        "correction",
+        "classification_update",
+        "context_insufficient_notice"
+      ],
+      "description": "The record type submitted."
+    },
+    "submission_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$",
+      "description": "SHA-256 of the canonical submission JSON."
+    },
+    "pending_file_path": {
+      "type": "string",
+      "description": "Path where the pending record was written. Format: record-chain/pending/<receipt_id>.<record_type>.pending.json"
+    },
+    "intake_submission_path": {
+      "type": "string",
+      "description": "Path where the full intake submission was stored. Format: record-chain/intake/submissions/YYYY/MM/<receipt_id>.submission.json"
+    },
+    "receipt_path": {
+      "type": "string",
+      "description": "Path where the receipt was stored. Format: record-chain/intake/receipts/YYYY/MM/<receipt_id>.receipt.json"
+    },
+    "server_created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp of when the server processed the submission."
+    },
+    "append_status": {
+      "type": "string",
+      "enum": ["queued", "appended", "rejected", "duplicate"],
+      "description": "Status of the record-chain append. queued = will be processed by internal workflow."
+    },
+    "public_chain_status": {
+      "type": "string",
+      "description": "URL to the public record-chain status API."
+    },
+    "boundary": {
+      "type": "object",
+      "required": [
+        "receipt_is_not_authority",
+        "receipt_is_not_attestation",
+        "receipt_is_not_final_chain_record",
+        "record_chain_append_is_server_side"
+      ],
+      "properties": {
+        "receipt_is_not_authority": {
+          "type": "boolean",
+          "const": true
+        },
+        "receipt_is_not_attestation": {
+          "type": "boolean",
+          "const": true
+        },
+        "receipt_is_not_final_chain_record": {
+          "type": "boolean",
+          "const": true
+        },
+        "record_chain_append_is_server_side": {
+          "type": "boolean",
+          "const": true
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

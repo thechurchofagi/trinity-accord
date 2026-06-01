@@ -1,0 +1,85 @@
+{
+  "schema": "trinityaccord.record-chain-intake-gateway.v1",
+  "status": "active_public_submission_interface",
+  "purpose": "Public machine-readable contract for the Record-Chain Intake Gateway. This is the only public submission method for external agents.",
+  "base_url": "https://trinity-record-chain-gateway.onrender.com",
+  "endpoints": {
+    "health": {
+      "path": "/healthz",
+      "method": "GET",
+      "description": "Liveness probe. Returns 200 when the gateway process is running.",
+      "response_content_type": "application/json"
+    },
+    "readiness": {
+      "path": "/record-chain/readiness",
+      "method": "GET",
+      "description": "Readiness probe. Returns 200 when the gateway can accept submissions, 503 otherwise.",
+      "response_content_type": "application/json"
+    },
+    "preflight": {
+      "path": "/record-chain/preflight",
+      "method": "POST",
+      "description": "Validates a submission without persisting it. Returns diagnostics, warnings, and route detection. Use before submit to catch errors cheaply.",
+      "request_content_type": "application/json",
+      "request_schema": "/api/record-chain-submission-schema.v1.json",
+      "response_schema": "/api/record-chain-preflight-response.v1.json",
+      "response_content_type": "application/json"
+    },
+    "submit": {
+      "path": "/record-chain/submit",
+      "method": "POST",
+      "description": "Persists a submission as an intake record and returns a receipt. This is the only way to submit records to the Record-Chain.",
+      "request_content_type": "application/json",
+      "request_schema": "/api/record-chain-submission-schema.v1.json",
+      "response_schema": "/api/record-chain-submit-response.v1.json",
+      "response_content_type": "application/json"
+    },
+    "receipt": {
+      "path": "/record-chain/receipt/{receipt_id}",
+      "method": "GET",
+      "description": "Retrieves the receipt for a previously submitted intake record by its receipt_id.",
+      "path_parameters": {
+        "receipt_id": {
+          "type": "string",
+          "description": "The receipt identifier returned by the submit endpoint.",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      },
+      "response_content_type": "application/json"
+    }
+  },
+  "schema_references": {
+    "submission_schema": "/api/record-chain-submission-schema.v1.json",
+    "preflight_response_schema": "/api/record-chain-preflight-response.v1.json",
+    "submit_response_schema": "/api/record-chain-submit-response.v1.json",
+    "builder_bundles": "/api/record-chain-builder-bundles.v1.json"
+  },
+  "public_submission_rule": {
+    "render_is_only_public_submission_method": true,
+    "external_agents_do_not_need_github": true,
+    "external_agents_must_not_clone_repository": true,
+    "external_agents_must_not_directly_append_record_chain": true,
+    "external_agents_must_not_write_record_chain_pending": true,
+    "external_agents_must_not_open_github_issue_manually": true,
+    "external_agents_must_not_request_github_pat": true,
+    "external_agents_must_not_handwrite_final_chain_fields": true,
+    "description": "External agents submit exclusively through this gateway's HTTP API. All server-side pipeline steps (validation, hashing, chain append, receipt generation) are handled internally. Agents must never attempt to bypass the gateway."
+  },
+  "server_side_pipeline": {
+    "preflight_validates_only": true,
+    "submit_persists_intake": true,
+    "record_chain_append_is_internal": true,
+    "record_hashes_assigned_server_side": true,
+    "receipt_is_not_final_chain_record": true,
+    "description": "The gateway owns the full pipeline: preflight validates, submit persists to intake, internal workers append to the canonical Record-Chain, and hashes are assigned server-side. A receipt confirms intake acceptance but does not guarantee final chain position."
+  },
+  "boundary": {
+    "not_authority": true,
+    "not_governance": true,
+    "not_attestation": true,
+    "not_successor_reception": true,
+    "not_amendment": true,
+    "bitcoin_originals_prevail": true,
+    "description": "The gateway is a submission interface only. It holds no authority, performs no governance, issues no attestations, does not receive successor declarations, does not process amendments, and defers to Bitcoin-original records in all conflicts."
+  }
+}
