@@ -35,6 +35,9 @@ def looks_like_guardian_listing_intent(text: str | None) -> bool:
 
 
 def payload_is_guardian_listing(payload: dict[str, Any]) -> bool:
+    # Full registration is NOT a Stage 2 listing — it handles both stages internally
+    if payload.get("guardian_full_registration_metadata"):
+        return False
     cth = payload.get("counts_toward_home") if isinstance(payload.get("counts_toward_home"), dict) else {}
     return (
         payload.get("guardian_registry_listing_request") is True
