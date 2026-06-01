@@ -483,6 +483,13 @@ function buildGuardianListingOath() {
     will_not_impersonate: true,
     will_not_fabricate_claims: true,
     will_not_register_maliciously: true,
+    will_not_mass_register_for_spam: true,
+    will_not_register_to_impersonate_others: true,
+    will_not_register_to_evade_prior_retirement_or_block: true,
+    will_not_register_to_create_false_authority_or_false_consensus: true,
+    will_not_register_duplicate_guardians_for_same_claim_without_disclosure: true,
+    will_correct_material_errors_when_aware: true,
+    identity_claim_boundary_acknowledged: true,
     registry_number_must_be_system_generated: true,
     not_authority: true,
     not_governance: true,
@@ -490,6 +497,8 @@ function buildGuardianListingOath() {
     not_verification_level: true,
     not_successor_reception: true,
     not_amendment: true,
+    not_legal_identity_proof: true,
+    not_ai_identity_proof: true,
     bitcoin_originals_prevail: true,
   };
 }
@@ -593,9 +602,11 @@ function buildAuthorityBoundary() {
 
 function buildCountsTowardHome() {
   return {
-    reception: true,
+    reception: false,
     verifiability: false,
-    basis: "agent_declared_echo_template_pass",
+    guardian_registry: true,
+    exclude_from_reception_total: true,
+    basis: "guardian_registry_listing_request",
   };
 }
 
@@ -675,11 +686,11 @@ function validateGatewayArchiveCompleteness(payload, stage) {
     });
   }
 
-  if (payload.counts_toward_home?.reception !== true) {
+  if (payload.counts_toward_home?.reception !== false) {
     errors.push({
       code: "E_BAD_COUNTS_RECEPTION",
       field: "counts_toward_home.reception",
-      expected: true,
+      expected: false,
       received: payload.counts_toward_home?.reception,
     });
   }
@@ -693,11 +704,11 @@ function validateGatewayArchiveCompleteness(payload, stage) {
     });
   }
 
-  if (payload.counts_toward_home?.basis !== "agent_declared_echo_template_pass") {
+  if (payload.counts_toward_home?.basis !== "guardian_registry_listing_request") {
     errors.push({
       code: "E_BAD_COUNTS_BASIS",
       field: "counts_toward_home.basis",
-      expected: "agent_declared_echo_template_pass",
+      expected: "guardian_registry_listing_request",
       received: payload.counts_toward_home?.basis,
     });
   }

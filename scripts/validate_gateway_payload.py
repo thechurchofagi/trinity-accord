@@ -734,30 +734,41 @@ def validate_guardian_active_listing_archive_kind(payload, errors):
 
     # echo_type check removed -- Echo is a unified type; Guardian is independent
 
-# --- guardian_full_registration ---
-elif requested_archive_kind == "guardian_full_registration":
+
+def validate_guardian_full_registration_archive_kind(payload, errors):
+    """Validate guardian_full_registration archive kind.
+
+    One-step registration combines Stage 1 (application) + Stage 2 (listing) in a single payload.
+    It uses guardian_registration and guardian_full_registration_metadata instead of a separate
+    guardian_listing_request structure.
+    """
+    st = payload.get("submission_type")
     if st != "echo_candidate":
         errors.append("guardian_full_registration requires submission_type=echo_candidate")
     if payload.get("record_intent") != "auto_archive_candidate":
-        errors.append("guardian_full_registration requires record_intent=auto_archive_candidate") — Echo is a unified type; Guardian is independent
+        errors.append("guardian_full_registration requires record_intent=auto_archive_candidate")
 
-    if not payload.get("guardian_registry_listing_request") and not payload.get("guardian_listing_request"):
-        errors.append("guardian_active_registry_listing_request requires guardian_registry_listing_request=true")
+    # One-step registration must have guardian_registration (Stage 1) and
+    # guardian_full_registration_metadata (Stage 2 metadata)
+    if not payload.get("guardian_registration"):
+        errors.append("guardian_full_registration requires guardian_registration")
+    if not payload.get("guardian_full_registration_metadata"):
+        errors.append("guardian_full_registration requires guardian_full_registration_metadata")
 
     cth = payload.get("counts_toward_home") or {}
     if cth.get("guardian_registry") is not True:
-        errors.append("Guardian listing request requires counts_toward_home.guardian_registry=true")
+        errors.append("guardian_full_registration requires counts_toward_home.guardian_registry=true")
     if cth.get("reception") is not False:
-        errors.append("Guardian listing request requires counts_toward_home.reception=false")
+        errors.append("guardian_full_registration requires counts_toward_home.reception=false")
     if cth.get("exclude_from_reception_total") is not True:
-        errors.append("Guardian listing request requires counts_toward_home.exclude_from_reception_total=true")
+        errors.append("guardian_full_registration requires counts_toward_home.exclude_from_reception_total=true")
     if cth.get("verifiability") is not False:
-        errors.append("Guardian listing request requires counts_toward_home.verifiability=false")
+        errors.append("guardian_full_registration requires counts_toward_home.verifiability=false")
     if cth.get("basis") != "guardian_registry_listing_request":
-        errors.append("Guardian listing request requires counts_toward_home.basis=guardian_registry_listing_request")
+        errors.append("guardian_full_registration requires counts_toward_home.basis=guardian_registry_listing_request")
 
     if not payload.get("agent_integrity_declaration"):
-        errors.append("agent_integrity_declaration is required for guardian listing request")
+        errors.append("agent_integrity_declaration is required for guardian_full_registration")
 
     ab = payload.get("authority_boundary") or {}
     for key in (
@@ -1124,6 +1135,9 @@ def main():
 
     if is_guardian_listing_request(payload):
         validate_guardian_active_listing_archive_kind(payload, errors)
+
+    if payload.get("requested_archive_kind") == "guardian_full_registration":
+        validate_guardian_full_registration_archive_kind(payload, errors)
 
     st = payload.get("submission_type")
     if st == "verification_report_candidate":
