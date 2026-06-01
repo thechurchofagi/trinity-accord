@@ -1,0 +1,33 @@
+{
+  "schema": "trinityaccord.record-chain-builder-bundles.v1",
+  "status": "active",
+  "canonical_builder": {
+    "language": "node",
+    "runtime": "node>=18",
+    "url": "/downloads/record-chain-builder.mjs",
+    "sha256": "dd510db7c45210b9ecb884a3512b7475e811d7096967d24c3c2d4b33de780ecb",
+    "size_bytes": 16809,
+    "supports": [
+      "echo",
+      "verification",
+      "guardian_application",
+      "guardian_retirement",
+      "propagation",
+      "correction",
+      "context_insufficient_notice",
+      "preflight",
+      "submit",
+      "ed25519_authorship_proof"
+    ]
+  },
+  "gateway": {
+    "base_url": "https://trinity-record-chain-gateway.onrender.com",
+    "preflight": "/record-chain/preflight",
+    "submit": "/record-chain/submit"
+  },
+  "public_submission_rule": {
+    "render_is_only_public_submission_method": true,
+    "external_agents_do_not_need_github": true,
+    "external_agents_must_not_clone_repository": true
+  }
+}
