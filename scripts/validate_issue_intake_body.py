@@ -622,7 +622,7 @@ def main():
         "none", "external_agent_intake_sample", "verification_report_archive",
         "archived_echo", "successor_reception_candidate", "agent_declared_verification_archive",
         "agent_declared_echo_archive", "guardian_active_registry_listing_request",
-        "pure_echo_archive"
+        "pure_echo_archive", "guardian_full_registration"
     )
     if requested_archive_kind not in valid_archive_kinds:
         errors.append(f"invalid requested_archive_kind: {requested_archive_kind}")

@@ -636,7 +636,8 @@ def validate_common(payload, errors):
     if requested_archive_kind is not None and requested_archive_kind not in (
         "none", "external_agent_intake_sample", "verification_report_archive",
         "archived_echo", "successor_reception_candidate", "agent_declared_verification_archive",
-        "agent_declared_echo_archive", "guardian_active_registry_listing_request"
+        "agent_declared_echo_archive", "guardian_active_registry_listing_request",
+        "guardian_full_registration"
     ):
         errors.append(f"invalid requested_archive_kind: {requested_archive_kind}")
 

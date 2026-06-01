@@ -799,6 +799,12 @@ const payload = {
     not_verification_unless_claim_gate_report_attached: true,
     bitcoin_originals_prevail: true,
   },
+  not_independent_attestation: true,
+  not_successor_reception: true,
+  not_authority: true,
+  not_amendment: true,
+  not_endorsement: true,
+  bitcoin_originals_prevail: true,
   evidence_requirement_mode: "not_applicable_for_echo",
 
   // Combined oath (covers both application and listing)
