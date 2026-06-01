@@ -20,8 +20,9 @@ services:
     runtime: python
     region: oregon
     plan: starter
-    buildCommand: pip install -r apps/record_chain_intake_gateway/requirements.txt
-    startCommand: uvicorn apps.record_chain_intake_gateway.app:app --host 0.0.0.0 --port $PORT
+    rootDir: apps/record_chain_intake_gateway
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app:app --host 0.0.0.0 --port $PORT
     healthCheckPath: /healthz
     envVars:
       - key: TRINITY_REPO_FULL_NAME
