@@ -15,7 +15,32 @@ permissions:
 jobs:
   build-batch:
     runs-on: ubuntu-latest
+    # Authorize write workflow actor
+    if: github.event_name != 'workflow_dispatch' || github.actor == 'github-actions[bot]' || contains(format(',{0},', vars.GUARDIAN_REGISTRY_WORKFLOW_ACTORS || 'thechurchofagi'), format(',{0},', github.actor))
     steps:
+      - name: Authorize write workflow actor
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          ACTOR: ${{ github.actor }}
+          GUARDIAN_REGISTRY_WORKFLOW_ACTORS: ${{ vars.GUARDIAN_REGISTRY_WORKFLOW_ACTORS }}
+        run: |
+          ALLOWLIST="${GUARDIAN_REGISTRY_WORKFLOW_ACTORS:-thechurchofagi}"
+
+          if [ "$ACTOR" = "github-actions[bot]" ]; then
+            echo "Authorized actor: $ACTOR"
+            exit 0
+          fi
+
+          case ",$ALLOWLIST," in
+            *",$ACTOR,"*)
+              echo "Authorized actor: $ACTOR"
+              ;;
+            *)
+              echo "Unauthorized actor for write workflow: $ACTOR"
+              echo "Set repository variable GUARDIAN_REGISTRY_WORKFLOW_ACTORS to a comma-separated allowlist."
+              exit 1
+              ;;
+          esac
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
