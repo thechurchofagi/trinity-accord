@@ -440,7 +440,8 @@
         null,
         "agent_declared_verification_archive",
         "agent_declared_echo_archive",
-        "guardian_active_registry_listing_request"
+        "guardian_active_registry_listing_request",
+        "guardian_full_registration"
       ],
       "description": "Requested archive kind. Gateway infers from submission_type when not provided: verification_report_candidate with agent_declared_protocol_level V0–V5 -> agent_declared_verification_archive; verification_report_candidate V6+ strict evidence -> verification_report_archive; verification_echo_candidate V6+ strict echo -> archived_echo; non-verification intake -> none. Explicit intake_only requires none."
     },
@@ -1245,6 +1246,22 @@
       ],
       "additionalProperties": true,
       "description": "Guardian active listing oath: honesty, good faith, anti-abuse, system-generated registry number, non-authority boundary."
+    },
+    "combined_oath_verification": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": true,
+      "description": "Combined Guardian registration oath covering both application and listing. Used for one-step full registration."
+    },
+    "guardian_full_registration_metadata": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": true,
+      "description": "Metadata for one-step Guardian full registration. Gateway uses this to create the listing request internally after the intake issue is created."
     }
   },
   "allOf": [

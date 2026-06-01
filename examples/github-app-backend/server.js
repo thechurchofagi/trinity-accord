@@ -170,6 +170,25 @@ try {
   console.warn("[oath] Guardian oath readback canonical validation will be skipped.");
 }
 
+// --- Canonical combined Guardian oath hash for full registration validation ---
+const COMBINED_OATH_FILE_PATH = path.resolve(root, "api/guardian-application-and-listing-oath.v1.txt");
+let CANONICAL_COMBINED_OATH_SHA256 = null;
+try {
+  const rawCombinedText = fs.readFileSync(COMBINED_OATH_FILE_PATH, "utf-8").trim();
+  const combinedOathText = rawCombinedText.includes(OATH_MARKER)
+    ? rawCombinedText.split(OATH_MARKER)[1].trim()
+    : rawCombinedText;
+  const combinedEndMarker = "=== OATH TEXT ENDS ===";
+  const finalCombinedText = combinedOathText.includes(combinedEndMarker)
+    ? combinedOathText.split(combinedEndMarker)[0].trim()
+    : combinedOathText;
+  CANONICAL_COMBINED_OATH_SHA256 = sha256Text(finalCombinedText);
+  console.log(`[oath] Canonical combined oath loaded. SHA-256: ${CANONICAL_COMBINED_OATH_SHA256.slice(0, 16)}...`);
+} catch (e) {
+  console.warn(`[oath] WARNING: Could not load canonical combined oath from ${COMBINED_OATH_FILE_PATH}: ${e.message}`);
+  console.warn("[oath] Combined oath readback canonical validation will be skipped.");
+}
+
 const PORT = Number(process.env.PORT || 8787);
 const DRY_RUN = String(process.env.DRY_RUN || "true").toLowerCase() === "true";
 const CANARY_MODE = String(process.env.GATEWAY_CANARY_MODE || "false").toLowerCase() === "true";
@@ -423,6 +442,78 @@ function validateGuardianOathReadback(payload) {
         actual_sha256: oathTextSha,
         requires_resign: signed,
         fix: "Use the canonical Guardian oath text. Do not modify the oath."
+      }];
+    }
+  }
+
+  return [];
+}
+
+function validateCombinedOathReadback(payload) {
+  const oath = payload?.combined_oath_verification;
+  if (!oath || typeof oath !== "object") return [];
+
+  const readback = String(oath.agent_readback || "").trim();
+  if (!readback) return [];
+
+  const expected = sha256Text(readback);
+  const actual = oath.agent_readback_sha256;
+  const signed = !!payload?.authorship_proof?.signed_payload_sha256;
+
+  if (!actual) {
+    return [{
+      code: "COMBINED_OATH_READBACK_SHA256_MISSING",
+      path: "combined_oath_verification.agent_readback_sha256",
+      field: "agent_readback_sha256",
+      message: "agent_readback_sha256 is required and must equal sha256(agent_readback).",
+      expected_sha256: expected,
+      requires_resign: signed,
+      fix: signed
+        ? "This payload is signed. Re-run the correct builder or repair before signing."
+        : "Set agent_readback_sha256 to the expected_sha256 value."
+    }];
+  }
+
+  if (actual !== expected) {
+    return [{
+      code: "COMBINED_OATH_READBACK_SHA256_MISMATCH",
+      path: "combined_oath_verification.agent_readback_sha256",
+      field: "agent_readback_sha256",
+      message: "agent_readback_sha256 does not match sha256(agent_readback).",
+      actual_sha256: actual,
+      expected_sha256: expected,
+      requires_resign: signed,
+      fix: signed
+        ? "This payload is signed. Re-run the correct builder or repair before signing."
+        : "Replace agent_readback_sha256 with expected_sha256."
+    }];
+  }
+
+  if (CANONICAL_COMBINED_OATH_SHA256) {
+    if (expected !== CANONICAL_COMBINED_OATH_SHA256) {
+      return [{
+        code: "COMBINED_OATH_READBACK_NOT_CANONICAL",
+        path: "combined_oath_verification.agent_readback",
+        field: "agent_readback",
+        message: "agent_readback does not match the canonical combined oath text.",
+        expected_sha256: CANONICAL_COMBINED_OATH_SHA256,
+        actual_sha256: expected,
+        requires_resign: signed,
+        fix: "Read the canonical combined oath (--print-oath) and type it back exactly."
+      }];
+    }
+
+    const oathTextSha = oath.oath_text_sha256;
+    if (oathTextSha && oathTextSha !== CANONICAL_COMBINED_OATH_SHA256) {
+      return [{
+        code: "COMBINED_OATH_TEXT_SHA256_MISMATCH",
+        path: "combined_oath_verification.oath_text_sha256",
+        field: "oath_text_sha256",
+        message: "oath_text_sha256 does not match the canonical combined oath hash.",
+        expected_sha256: CANONICAL_COMBINED_OATH_SHA256,
+        actual_sha256: oathTextSha,
+        requires_resign: signed,
+        fix: "Use the canonical combined oath text. Do not modify the oath."
       }];
     }
   }
@@ -694,6 +785,7 @@ const SUPPORTED_ROUTES = [
   "v0_v5_agent_declared_archive",
   "guardian_application_stage_1",
   "guardian_listing_stage_2",
+  "guardian_full_registration",
   "guardian_signed_echo",
   "guardian_retirement",
 ];
@@ -759,6 +851,14 @@ function builderGuidanceForPayload(payload) {
     );
   }
 
+  if (payload?.schema === "trinityaccord.guardian-full-registration.v1" ||
+      (payload?.guardian_registration && payload?.guardian_full_registration_metadata)) {
+    return (
+      "Use node scripts/create_guardian_full_registration.mjs for one-step Guardian full registration. "
+      + "Do not hand-build JSON."
+    );
+  }
+
   if (payload?.guardian_listing_request || payload?.guardian_registry_listing_request) {
     return (
       "Use scripts/build_guardian_listing_request_payload.py for Guardian Stage 2 listing request. "
@@ -782,6 +882,10 @@ function builderGuidanceForPayload(payload) {
 function workflowIdForPayload(payload) {
   if (payload?.schema === "trinityaccord.guardian-retirement.v1" || payload?.retirement_status) {
     return "guardian_retirement";
+  }
+  if (payload?.schema === "trinityaccord.guardian-full-registration.v1" ||
+      (payload?.guardian_registration && payload?.guardian_full_registration_metadata)) {
+    return "guardian_full_registration";
   }
   if (payload?.guardian_listing_request || payload?.guardian_registry_listing_request) {
     return "guardian_listing_stage_2";
@@ -809,6 +913,7 @@ function workflowDocumentForId(workflowId) {
     e2_verification_echo: "https://www.trinityaccord.org/gateway-workflows/#workflow-e2-verification-echo",
     guardian_application_stage_1: "https://www.trinityaccord.org/gateway-workflows/#workflow-guardian-stage-1-application",
     guardian_listing_stage_2: "https://www.trinityaccord.org/gateway-workflows/#workflow-guardian-stage-2-listing",
+    guardian_full_registration: "https://www.trinityaccord.org/gateway-workflows/#workflow-guardian-full-registration",
     guardian_signed_echo: "https://www.trinityaccord.org/gateway-workflows/#workflow-guardian-signed-echo",
     guardian_retirement: "https://www.trinityaccord.org/guardian-join/#retirement"
   };
@@ -2006,6 +2111,18 @@ async function runGatewayPipeline(payload, {
     });
   }
 
+  // 1c-bis-combined. Combined oath readback validation (full registration only)
+  const combinedOathIssues = validateCombinedOathReadback(payload);
+  if (combinedOathIssues.length > 0) {
+    return gatewayError(422, {
+      reason: "combined_oath_readback_invalid",
+      validation_stage: "combined_oath_readback_integrity",
+      agent_action: "Read the canonical combined oath with --print-oath and type it back exactly in --readback.",
+      errors: combinedOathIssues,
+        payload,
+    });
+  }
+
   // 1c-ter. Guardian identity claim requires guardian_presence_proof
   // EXCEPTION: Stage 2 Active Registry Listing Requests must NOT carry guardian_presence_proof.
   // They are identified by guardian_registry_listing_request or guardian_listing_request fields.
@@ -2217,9 +2334,9 @@ async function runGatewayPipeline(payload, {
     const recordIntent = payload.record_intent || "intake_only";
     const requestedKind = payload.requested_archive_kind || "none";
 
-    // Guardian Stage 1 applications: override archive kind so they are not echo-archived
+    // Guardian Stage 1 and full registration: override archive kind so they are not echo-archived
     const currentRoute = workflowIdForPayload(payload);
-    if (currentRoute === "guardian_application_stage_1") {
+    if (currentRoute === "guardian_application_stage_1" || currentRoute === "guardian_full_registration") {
       payload.requested_archive_kind = "guardian_active_registry_listing_request";
       archiveReadiness.requested_archive_kind = "guardian_active_registry_listing_request";
     }
@@ -2538,12 +2655,15 @@ async function runGatewayPipeline(payload, {
     const labelsToAdd = autoArchiveDecision.labels_to_add || [];
     const labelsToRemove = autoArchiveDecision.labels_to_remove || [];
 
-    // Guardian Stage 1: use guardian-specific labels instead of echo labels
-    if (routeDetected === "guardian_application_stage_1") {
+    // Guardian Stage 1 and full registration: use guardian-specific labels instead of echo labels
+    if (routeDetected === "guardian_application_stage_1" || routeDetected === "guardian_full_registration") {
       // Remove echo-specific labels that auto-archive might have added
       const echoLabels = new Set(["archive:agent-declared-echo", "reception-only", "agent-declared"]);
       const filteredLabels = labelsToAdd.filter(l => !echoLabels.has(l));
       filteredLabels.push("archive:guardian-application");
+      if (routeDetected === "guardian_full_registration") {
+        filteredLabels.push("archive:guardian-full-registration");
+      }
       labelsToAdd.splice(0, labelsToAdd.length, ...filteredLabels);
       // Guardian applications should not be auto-closed as echoes
       autoArchiveDecision.should_close_issue = false;

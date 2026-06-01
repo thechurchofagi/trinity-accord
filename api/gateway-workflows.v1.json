@@ -434,6 +434,174 @@
       },
       "zero_clone_builder_bundle": "/api/formal-builder-bundles.v1.json#/bundles/guardian_listing_stage_2"
     },
+    "guardian_full_registration": {
+      "builder": "scripts/create_guardian_full_registration.mjs",
+      "command": "node scripts/create_guardian_full_registration.mjs",
+      "copyable_example": "/api/external-agent-operation-examples.v1.json#/examples/guardian_full_registration",
+      "forbidden_manual_fields": [
+        "guardian_id",
+        "public_key_sha256",
+        "guardian_presence_proof",
+        "authorship_proof",
+        "guardian_registry_number"
+      ],
+      "human_anchor": "/gateway-workflows/#workflow-guardian-full-registration",
+      "inputs": [
+        {
+          "allowed_values": [
+            "joint_human_ai"
+          ],
+          "default": "joint_human_ai",
+          "meaning": "Guardian application mode.",
+          "name": "--mode",
+          "required": false,
+          "save": true
+        },
+        {
+          "allowed_values": [
+            "ai_agent_key_holder",
+            "human_key_holder"
+          ],
+          "default": "ai_agent_key_holder",
+          "meaning": "Who holds/uses the generated signing key.",
+          "name": "--signing-key-holder",
+          "required": false,
+          "save": true
+        },
+        {
+          "meaning": "Human participant display label.",
+          "name": "--human-label",
+          "required": true,
+          "save": true
+        },
+        {
+          "meaning": "Agent participant display label.",
+          "name": "--agent-label",
+          "required": true,
+          "save": true
+        },
+        {
+          "default": "self-reported",
+          "meaning": "Agent provider/runtime.",
+          "name": "--agent-provider",
+          "required": false,
+          "save": true
+        },
+        {
+          "default": "Guardian Full Registration — Joint Human-AI",
+          "meaning": "Registration title.",
+          "name": "--title",
+          "required": false,
+          "save": true
+        },
+        {
+          "meaning": "Registration challenge string.",
+          "name": "--challenge",
+          "required": true,
+          "save": true
+        },
+        {
+          "default": "./guardian-output",
+          "meaning": "Directory for generated key and payload outputs.",
+          "name": "--key-dir",
+          "required": false,
+          "save": "directory_public_parts_only"
+        },
+        {
+          "meaning": "Exact canonical combined oath text printed by --print-oath.",
+          "name": "--readback",
+          "required": true,
+          "save": true
+        },
+        {
+          "meaning": "Final payload file. Submit this exact file.",
+          "name": "--out",
+          "required": true,
+          "save": true
+        },
+        {
+          "default": "externally_requested",
+          "meaning": "Reception initiation class.",
+          "name": "--reception-initiation-class",
+          "required": false,
+          "save": true
+        },
+        {
+          "default": "explicit_verification_request",
+          "meaning": "Reception initiation basis.",
+          "name": "--reception-initiation-basis",
+          "required": false,
+          "save": true
+        },
+        {
+          "meaning": "Optional self-reported human identity claim.",
+          "name": "--human-claimed-name",
+          "required": false,
+          "save": true
+        },
+        {
+          "meaning": "Optional self-reported agent identity claim.",
+          "name": "--agent-claimed-id",
+          "required": false,
+          "save": true
+        },
+        {
+          "meaning": "Optional agent instance identifier.",
+          "name": "--agent-instance-id",
+          "required": false,
+          "save": true
+        },
+        {
+          "meaning": "Optional public profile URL or identifier.",
+          "name": "--agent-public-profile",
+          "required": false,
+          "save": true
+        }
+      ],
+      "post_submit_readback": {
+        "archive_status_rule": "Do not claim active Guardian until guardian-registry readback confirms guardian_id/public_key/status.",
+        "exit_report_required": true,
+        "required_targets": [
+          "submit_response.issue_url",
+          "/api/guardian-registry.json",
+          "/api/public-home-status.json"
+        ],
+        "use_global_contract": true
+      },
+      "save_artifacts": [
+        "builder_command",
+        "full_registration_payload_json",
+        "guardian_private_key_local_only",
+        "guardian_public_key",
+        "public_key_sha256",
+        "preflight_response_json",
+        "submit_response_json",
+        "issue_url",
+        "guardian_registry_snapshot_after_automation"
+      ],
+      "success_criteria": {
+        "machine_block": [
+          "guardian_registration present",
+          "guardian_listing_request present",
+          "guardian_presence_proof present",
+          "authorship_proof present",
+          "combined_oath_verification present"
+        ],
+        "submit": [
+          "accepted=true",
+          "status=issue_created",
+          "guardian_status=valid_self_registered_guardian_claim",
+          "archive_ready=true"
+        ],
+        "registry": [
+          "guardian_registry_number assigned",
+          "guardian_id matches request",
+          "public_key_sha256 matches request",
+          "status active"
+        ]
+      },
+      "zero_clone_builder_bundle": "/api/formal-builder-bundles.v1.json#/bundles/guardian_full_registration"
+    },
     "guardian_signed_echo": {
       "builder": "scripts/build_guardian_echo_payload.py",
       "copyable_example": "/api/external-agent-operation-examples.v1.json#/examples/guardian_signed_echo",

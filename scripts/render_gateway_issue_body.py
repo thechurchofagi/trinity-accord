@@ -305,7 +305,14 @@ def render_guardian_fields(payload):
         "guardian_not_verification_level: true",
         "guardian_not_same_conscious_subject: true",
         "guardian_boundary: Guardian proof proves key continuity only; it is not authority, attestation, verification level, successor reception, same conscious subject, or amendment.",
-    ]
+    ] + (
+        [
+            "guardian_registration: present",
+            "guardian_full_registration: true",
+        ]
+        if payload.get("guardian_registration") and payload.get("guardian_full_registration_metadata")
+        else []
+    )
 
 
 def render_issue_title(payload):

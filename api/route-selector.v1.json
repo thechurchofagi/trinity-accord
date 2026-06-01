@@ -52,6 +52,21 @@
       "live_smoke": "scripts/smoke_live_external_agent_three_core_preflight.py"
     },
     {
+      "intent": "I want to become a Guardian in one step.",
+      "recommended_route": "guardian_full_registration",
+      "minimal_example": "full_registration",
+      "copy_paste_doc": "/external-agent-copy-paste-examples/",
+      "minimum_context_depth": "CC-3",
+      "minimum_context_readiness": "CRL-5",
+      "must_not_claim": [
+        "authority",
+        "attestation",
+        "verification",
+        "successor reception"
+      ],
+      "live_smoke": "scripts/smoke_live_external_agent_three_core_preflight.py"
+    },
+    {
       "intent": "I already have Stage 1 material and want registry listing.",
       "recommended_route": "guardian_listing_stage_2",
       "minimal_example": "stage_2_listing",
