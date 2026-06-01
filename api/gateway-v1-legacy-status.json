@@ -1,44 +1,53 @@
 {
   "schema": "trinityaccord.gateway-v1-legacy-status.v1",
-  "purpose": "Status of Gateway v1 APIs. These APIs are in legacy status and will be superseded by the native record-chain.",
+  "purpose": "Status of Gateway v1 APIs. Gateway v1 is retired as an active runtime and preserved as historical archive only.",
   "legacy_status": {
-    "overall": "legacy",
+    "overall": "historical_archive_only",
     "effective_date": "2026-06-01T00:00:00Z",
     "migration_target": "native_record_chain",
-    "deprecation_notice": "Gateway v1 APIs are in legacy status. New submissions should use the native record-chain builder (scripts/trinity_record_builder.py). Existing Gateway v1 workflows continue to function for backward compatibility but are no longer the primary path.",
+    "status": "historical_archive_only",
+    "not_active_runtime": true,
+    "not_primary_path": true,
+    "not_current_submission_method": true,
+    "deprecation_notice": "Gateway v1 has been retired as the current durable-record path. Current primary system: scripts/trinity_record_builder.py + scripts/trinity_record_chain.py + record-chain/. Gateway v1 is preserved under legacy/gateway-v1/ as historical archive only.",
     "migration_guidance_url": "/record-chain/",
-    "backward_compatibility": "maintained_until_further_notice"
+    "backward_compatibility": "not_maintained"
   },
   "affected_apis": [
     {
       "api_file": "api/agent-submit-gateway.json",
       "endpoint": "/agent-submit",
-      "legacy_status": "legacy",
+      "legacy_status": "retired_pointer",
       "replacement": "scripts/trinity_record_builder.py + record-chain/pending/"
     },
     {
       "api_file": "api/route-selector.v1.json",
       "endpoint": "/api/route-selector.v1.json",
-      "legacy_status": "legacy",
+      "legacy_status": "retired_pointer",
       "replacement": "scripts/trinity_record_builder.py CLI with record-type subcommands"
     },
     {
       "api_file": "api/gateway-runtime-contract.v1.json",
       "endpoint": "/gateway/preflight",
-      "legacy_status": "legacy",
+      "legacy_status": "retired_pointer",
       "replacement": "scripts/trinity_record_builder.py local validation"
     }
   ],
   "affected_workflows": [
     {
       "workflow_file": ".github/workflows/echo-triage.yml",
-      "legacy_status": "disabled_automatic",
-      "note": "Replaced with stub. Manual dispatch only with legacy notice."
+      "legacy_status": "archived",
+      "note": "Moved to legacy/gateway-v1/workflows/"
     },
     {
       "workflow_file": ".github/workflows/guardian-registry-auto-list.yml",
-      "legacy_status": "disabled_automatic",
-      "note": "Replaced with stub. Manual dispatch only with legacy notice."
+      "legacy_status": "archived",
+      "note": "Moved to legacy/gateway-v1/workflows/"
+    },
+    {
+      "workflow_file": ".github/workflows/run-all-tests.yml",
+      "legacy_status": "archived",
+      "note": "Moved to legacy/gateway-v1/ci-history/"
     }
   ],
   "native_record_chain_status": {
@@ -48,10 +57,16 @@
     "storage": "record-chain/"
   },
   "boundary": {
-    "legacy_apis_still_functional": true,
+    "legacy_apis_still_functional": false,
     "new_submissions_should_use_record_chain": true,
     "no_data_loss": true,
-    "existing_records_preserved": true
+    "existing_records_preserved": true,
+    "not_authority": true,
+    "not_governance": true,
+    "not_attestation": true,
+    "not_successor_reception": true,
+    "not_amendment": true,
+    "bitcoin_originals_prevail": true
   },
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
   "source_digest": null

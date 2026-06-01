@@ -11,19 +11,13 @@ concurrency:
 
 permissions:
   contents: read
-  issues: read
 
 jobs:
-  p0-fast-gate:
+  current-system-integrity:
     runs-on: ubuntu-24.04
-    timeout-minutes: 25
-
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
-
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
-        with:
-          node-version-file: .node-version
 
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
         with:
@@ -35,37 +29,19 @@ jobs:
         run: python3 -m pip install -r requirements-ci.txt
 
       - name: Validate JSON
-        run: |
-          find . -name "*.json" -print0 | xargs -0 -n1 python3 -m json.tool > /dev/null
+        run: find . -name "*.json" -print0 | xargs -0 -n1 python3 -m json.tool > /dev/null
 
-      - name: Run P0 main function group
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: python3 scripts/run_ci_group.py p0-main
+      - name: Verify record-chain
+        run: python3 scripts/trinity_record_chain.py verify
 
-      - name: Verify guardian registry page has no drift
-        run: python3 scripts/generate_guardian_registry_page.py --check
+      - name: Run current system tests
+        run: python3 scripts/run_current_system_tests.py
 
       - name: Verify sitemap has no drift
         run: python3 scripts/generate_sitemap.py --check
 
-      - name: Test workflow dispatch input safety
-        run: python3 scripts/test_workflow_dispatch_input_safety.py
+      - name: Verify public home status has no drift
+        run: python3 scripts/generate_public_home_status.py --check
 
-      - name: Test workflow dispatch write hardening
-        run: python3 scripts/test_workflow_dispatch_write_hardening.py
-
-      - name: Test CODEOWNERS sensitive path coverage
-        run: python3 scripts/test_codeowners_sensitive_paths.py
-
-      - name: Test write workflows actor gates
-        run: python3 scripts/test_write_workflows_actor_gates.py
-
-      - name: Test repository integrity is P0 fast gate
-        run: python3 scripts/test_repository_integrity_is_p0_fast_gate.py
-
-      - name: Test repository integrity has no duplicate step names
-        run: python3 scripts/test_repository_integrity_no_duplicate_step_names.py
-
-      - name: Run fast-regression CI group
-        run: python3 scripts/run_ci_group.py fast-regression
+      - name: Check no private keys or tokens
+        run: python3 scripts/test_no_private_key_or_token_leakage.py
