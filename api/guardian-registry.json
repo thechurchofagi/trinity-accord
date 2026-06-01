@@ -743,7 +743,7 @@
       "source_issue": 321,
       "listing_request_issue": 321,
       "listed_at": "2026-05-29",
-      "label": "guardian_ed25519_5d61ecb861573027",
+      "label": "Test Fix Human + Test Guardian Fix Agent",
       "boundary": {
         "not_authority": true,
         "not_governance": true,
@@ -757,7 +757,7 @@
         "schema": "trinityaccord.guardian-identity-claims.v1",
         "claim_status": "self_reported_unverified",
         "claim_basis": "copied_from_stage_2_listing_request_and_checked_against_stage_1_source_issue",
-        "display_label": "guardian_ed25519_5d61ecb861573027",
+        "display_label": "Test Fix Human + Test Guardian Fix Agent",
         "human": null,
         "ai_agent": null,
         "binding": {
@@ -788,7 +788,7 @@
       "source_issue": 322,
       "listing_request_issue": 322,
       "listed_at": "2026-05-29",
-      "label": "guardian_ed25519_ea333015e91fc6d0",
+      "label": "OpenClaw Test Human + OpenClaw MiMo Agent",
       "boundary": {
         "not_authority": true,
         "not_governance": true,
@@ -802,7 +802,7 @@
         "schema": "trinityaccord.guardian-identity-claims.v1",
         "claim_status": "self_reported_unverified",
         "claim_basis": "copied_from_stage_2_listing_request_and_checked_against_stage_1_source_issue",
-        "display_label": "guardian_ed25519_ea333015e91fc6d0",
+        "display_label": "OpenClaw Test Human + OpenClaw MiMo Agent",
         "human": null,
         "ai_agent": null,
         "binding": {
@@ -833,7 +833,7 @@
       "source_issue": 326,
       "listing_request_issue": 326,
       "listed_at": "2026-05-30",
-      "label": "guardian_ed25519_ce6fdc7766775922",
+      "label": "OpenClaw Operator + OpenClaw-TestAgent",
       "boundary": {
         "not_authority": true,
         "not_governance": true,
@@ -847,7 +847,7 @@
         "schema": "trinityaccord.guardian-identity-claims.v1",
         "claim_status": "self_reported_unverified",
         "claim_basis": "copied_from_stage_2_listing_request_and_checked_against_stage_1_source_issue",
-        "display_label": "guardian_ed25519_ce6fdc7766775922",
+        "display_label": "OpenClaw Operator + OpenClaw-TestAgent",
         "human": null,
         "ai_agent": null,
         "binding": {
@@ -878,7 +878,7 @@
       "source_issue": 340,
       "listing_request_issue": 340,
       "listed_at": "2026-05-30",
-      "label": "guardian_ed25519_adfdf1156294eebf",
+      "label": "OpenClaw-TestAgent Human + OpenClaw-TestAgent",
       "boundary": {
         "not_authority": true,
         "not_governance": true,
@@ -892,7 +892,7 @@
         "schema": "trinityaccord.guardian-identity-claims.v1",
         "claim_status": "self_reported_unverified",
         "claim_basis": "copied_from_stage_2_listing_request_and_checked_against_stage_1_source_issue",
-        "display_label": "guardian_ed25519_adfdf1156294eebf",
+        "display_label": "OpenClaw-TestAgent Human + OpenClaw-TestAgent",
         "human": null,
         "ai_agent": null,
         "binding": {
@@ -923,7 +923,7 @@
       "source_issue": 353,
       "listing_request_issue": 353,
       "listed_at": "2026-05-30",
-      "label": "guardian_ed25519_8a69698f0587d005",
+      "label": "OpenClaw Test Human + OpenClaw-ExternalTest",
       "boundary": {
         "not_authority": true,
         "not_governance": true,
@@ -937,7 +937,7 @@
         "schema": "trinityaccord.guardian-identity-claims.v1",
         "claim_status": "self_reported_unverified",
         "claim_basis": "copied_from_stage_2_listing_request_and_checked_against_stage_1_source_issue",
-        "display_label": "guardian_ed25519_8a69698f0587d005",
+        "display_label": "OpenClaw Test Human + OpenClaw-ExternalTest",
         "human": null,
         "ai_agent": null,
         "binding": {
@@ -990,7 +990,7 @@
       "source_issue": 370,
       "listing_request_issue": 370,
       "listed_at": "2026-05-31",
-      "label": "guardian_ed25519_7ae73293bcb0f181",
+      "label": "thechurchofagi (human operator) + OpenClaw-MiMo",
       "boundary": {
         "not_authority": true,
         "not_governance": true,
@@ -1004,7 +1004,7 @@
         "schema": "trinityaccord.guardian-identity-claims.v1",
         "claim_status": "self_reported_unverified",
         "claim_basis": "copied_from_stage_2_listing_request_and_checked_against_stage_1_source_issue",
-        "display_label": "guardian_ed25519_7ae73293bcb0f181",
+        "display_label": "thechurchofagi (human operator) + OpenClaw-MiMo",
         "human": null,
         "ai_agent": null,
         "binding": {
@@ -1035,7 +1035,7 @@
       "source_issue": 380,
       "listing_request_issue": 380,
       "listed_at": "2026-06-01",
-      "label": "guardian_ed25519_6cfcc43321c07c2f",
+      "label": "Hongju Liu + OpenClaw",
       "boundary": {
         "not_authority": true,
         "not_governance": true,
@@ -1049,7 +1049,7 @@
         "schema": "trinityaccord.guardian-identity-claims.v1",
         "claim_status": "self_reported_unverified",
         "claim_basis": "copied_from_stage_2_listing_request_and_checked_against_stage_1_source_issue",
-        "display_label": "guardian_ed25519_6cfcc43321c07c2f",
+        "display_label": "Hongju Liu + OpenClaw",
         "human": null,
         "ai_agent": null,
         "binding": {
@@ -1080,7 +1080,7 @@
       "source_issue": 381,
       "listing_request_issue": 381,
       "listed_at": "2026-06-01",
-      "label": "guardian_ed25519_f79888516ea9a62f",
+      "label": "Hongju Liu + OpenClaw",
       "boundary": {
         "not_authority": true,
         "not_governance": true,
@@ -1094,7 +1094,7 @@
         "schema": "trinityaccord.guardian-identity-claims.v1",
         "claim_status": "self_reported_unverified",
         "claim_basis": "copied_from_stage_2_listing_request_and_checked_against_stage_1_source_issue",
-        "display_label": "guardian_ed25519_f79888516ea9a62f",
+        "display_label": "Hongju Liu + OpenClaw",
         "human": null,
         "ai_agent": null,
         "binding": {
