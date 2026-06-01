@@ -6,7 +6,7 @@ from __future__ import annotations
 from datetime import datetime, timezone
 from typing import Any
 
-from gateway.canonical import sha256_canonical_json
+from .canonical import sha256_canonical_json
 
 
 def make_receipt_id(submission_sha256: str, now: datetime | None = None) -> str:
@@ -26,6 +26,10 @@ def make_receipt(
     submission: dict[str, Any],
     submission_sha256: str,
     record_type: str,
+    received_raw_body_sha256: str = "",
+    intake_submission_path: str = "",
+    pending_file_path: str = "",
+    receipt_path: str = "",
     file_path: str | None = None,
     commit_sha: str | None = None,
     now: datetime | None = None,
@@ -41,8 +45,16 @@ def make_receipt(
         SHA-256 hex digest of the canonical submission.
     record_type:
         The resolved record type.
+    received_raw_body_sha256:
+        SHA-256 hex of the raw request body bytes.
+    intake_submission_path:
+        Repo path of the intake submission file.
+    pending_file_path:
+        Repo path of the pending file.
+    receipt_path:
+        Repo path of the receipt file.
     file_path:
-        Path in the repo where the record was written (if committed).
+        Legacy path in the repo where the record was written (if committed).
     commit_sha:
         Git commit SHA of the write (if committed).
     now:
@@ -61,9 +73,17 @@ def make_receipt(
         "gateway_version": gateway_version,
         "record_type": record_type,
         "submission_sha256": submission_sha256,
+        "received_raw_body_sha256": received_raw_body_sha256,
         "accepted_at": now.isoformat().replace("+00:00", "Z"),
+        "receipt_is_not_final_chain_record": True,
     }
 
+    if intake_submission_path:
+        receipt["intake_submission_path"] = intake_submission_path
+    if pending_file_path:
+        receipt["pending_file_path"] = pending_file_path
+    if receipt_path:
+        receipt["receipt_path"] = receipt_path
     if file_path is not None:
         receipt["file_path"] = file_path
     if commit_sha is not None:

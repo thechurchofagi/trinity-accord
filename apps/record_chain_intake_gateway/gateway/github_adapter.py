@@ -60,6 +60,34 @@ async def get_file_sha(path: str) -> str | None:
     raise RuntimeError(f"GitHub API error {resp.status_code} fetching {path}")
 
 
+async def get_file_text(path: str) -> str | None:
+    """Return the text content of *path* in the repo (base64-decoded), or ``None`` if absent.
+
+    Uses the GitHub Contents API. Returns the decoded UTF-8 text of the file.
+    """
+    url = f"{_GITHUB_API}/repos/{_repo()}/contents/{path}"
+    params = {"ref": _branch()}
+    async with httpx.AsyncClient(timeout=30) as client:
+        resp = await client.get(url, headers=_headers(), params=params)
+    if resp.status_code == 404:
+        return None
+    if resp.status_code != 200:
+        logger.error("GitHub GET %s returned %d: %s", path, resp.status_code, resp.text[:500])
+        raise RuntimeError(f"GitHub API error {resp.status_code} fetching {path}")
+
+    data: dict[str, Any] = resp.json()
+    content_b64 = data.get("content", "")
+    encoding = data.get("encoding", "base64")
+    if encoding == "base64":
+        try:
+            return base64.b64decode(content_b64).decode("utf-8")
+        except Exception as exc:
+            logger.error("Failed to decode base64 content for %s: %s", path, exc)
+            raise RuntimeError(f"Failed to decode file content for {path}: {exc}")
+    # Fallback: treat as raw text
+    return content_b64
+
+
 async def put_file(
     path: str,
     content: str,

@@ -1,10 +1,28 @@
 # gateway/validation.py
-"""Submission validation, security scanning, and context-readiness checks."""
+"""Submission validation, security scanning, boundary checks, and context-readiness checks."""
 
 from __future__ import annotations
 
+import logging
 import re
 from typing import Any
+
+logger = logging.getLogger(__name__)
+
+# ---------------------------------------------------------------------------
+# Allowed public intake record types
+# ---------------------------------------------------------------------------
+ALLOWED_RECORD_TYPES: frozenset[str] = frozenset({
+    "echo",
+    "verification",
+    "guardian_application",
+    "guardian_retirement",
+    "guardian_key_rotation",
+    "propagation",
+    "correction",
+    "classification_update",
+    "context_insufficient_notice",
+})
 
 # ---------------------------------------------------------------------------
 # Forbidden chain fields — the gateway (or downstream record-chain writer)
@@ -47,12 +65,38 @@ _SECURITY_PATTERNS: list[re.Pattern[str]] = [
 ]
 
 # ---------------------------------------------------------------------------
+# Placeholder patterns — reject obvious placeholder / test tokens.
+# ---------------------------------------------------------------------------
+_PLACEHOLDER_PATTERNS: list[re.Pattern[str]] = [
+    re.compile(r"REPLACE_ME", re.IGNORECASE),
+    re.compile(r"YOUR_VALUE_HERE", re.IGNORECASE),
+    re.compile(r"YOUR_TOKEN", re.IGNORECASE),
+    re.compile(r"YOUR_PRIVATE_KEY", re.IGNORECASE),
+    re.compile(r"INSERT_", re.IGNORECASE),
+    re.compile(r"TODO_AUTH", re.IGNORECASE),
+    re.compile(r"TODO_SIGNATURE", re.IGNORECASE),
+    re.compile(r"<\.\.\.>"),  # <...> literal
+    re.compile(r"your_github_token", re.IGNORECASE),
+    re.compile(r"your-token-here", re.IGNORECASE),
+    re.compile(r"insert_token", re.IGNORECASE),
+]
+
+# ---------------------------------------------------------------------------
+# Boundary acknowledgement fields — all 6 must be present and true.
+# ---------------------------------------------------------------------------
+REQUIRED_BOUNDARY_FIELDS: frozenset[str] = frozenset({
+    "not_authority",
+    "not_governance",
+    "not_attestation",
+    "not_successor_reception",
+    "not_amendment",
+    "bitcoin_originals_prevail",
+})
+
+# ---------------------------------------------------------------------------
 # Context-completeness minimums per record type / verification version.
-# Keys are (record_type, verification_version_range_description).
-# Values are the minimum CC level required.
-#
-# Verification versions are encoded as integers (e.g. V0 = 0, V6 = 6).
-# We store ranges as (lo, hi) tuples; hi=None means "6 and above".
+# Keys are record_type strings. Values are lists of ((lo, hi), min_cc).
+# hi=None means "6 and above".
 # ---------------------------------------------------------------------------
 _CC_RULES: dict[str, list[tuple[tuple[int, int | None], int]]] = {
     "echo": [
@@ -66,22 +110,32 @@ _CC_RULES: dict[str, list[tuple[tuple[int, int | None], int]]] = {
     "guardian_application": [
         ((0, None), 3),
     ],
-    "council_record": [
-        ((0, None), 3),
+    "guardian_retirement": [
+        ((0, None), 1),
     ],
-    "memory_anchor": [
-        ((0, None), 3),
+    "guardian_key_rotation": [
+        ((0, None), 2),
     ],
-    "attestation": [
-        ((0, None), 3),
+    "propagation": [
+        ((0, None), 2),
     ],
-    "amendment": [
-        ((0, None), 3),
+    "correction": [
+        ((0, None), 1),
+    ],
+    "classification_update": [
+        ((0, None), 2),
+    ],
+    "context_insufficient_notice": [
+        ((0, None), 0),
     ],
 }
 
 _DEFAULT_CC_MINIMUM = 3  # fallback for unknown record types
 
+
+# ---------------------------------------------------------------------------
+# Internal helpers
+# ---------------------------------------------------------------------------
 
 def _walk(obj: Any, visitor: Any) -> None:
     """Depth-first walk over a JSON-like structure, calling *visitor* on every value."""
@@ -94,34 +148,51 @@ def _walk(obj: Any, visitor: Any) -> None:
             _walk(v, visitor)
 
 
+def _find_forbidden_keys_recursive(obj: Any, path: str = "") -> list[str]:
+    """Recursively find all forbidden chain fields anywhere in a nested structure."""
+    errors: list[str] = []
+    if isinstance(obj, dict):
+        for key, value in obj.items():
+            current_path = f"{path}.{key}" if path else key
+            if key in FORBIDDEN_CHAIN_FIELDS:
+                errors.append(
+                    f"Forbidden field '{key}' at '{current_path}'; "
+                    "this field is assigned by the gateway"
+                )
+            errors.extend(_find_forbidden_keys_recursive(value, current_path))
+    elif isinstance(obj, list):
+        for i, item in enumerate(obj):
+            errors.extend(_find_forbidden_keys_recursive(item, f"{path}[{i}]"))
+    return errors
+
+
+def _extract_context_level(draft: dict[str, Any]) -> Any:
+    """Extract declared_context_level from draft.context_readiness.declared_context_level.
+
+    Falls back to draft.context_completeness_level for backward compat.
+    """
+    context_readiness = draft.get("context_readiness")
+    if isinstance(context_readiness, dict):
+        level = context_readiness.get("declared_context_level")
+        if level is not None:
+            return level
+    # Backward compat
+    return draft.get("context_completeness_level")
+
+
 # ---------------------------------------------------------------------------
 # Public API
 # ---------------------------------------------------------------------------
 
 def reject_forbidden_chain_fields(obj: dict[str, Any]) -> list[str]:
-    """Return a list of error messages for any forbidden chain fields found in *obj*.
-
-    Only the top-level keys of *obj* and of nested ``draft`` / ``record_draft``
-    dicts are checked (the places where submitters might try to set server-owned
-    fields).
-    """
-    errors: list[str] = []
-    for scope_name, scope in [("submission", obj), ("draft", obj.get("draft") or obj.get("record_draft") or {})]:
-        if not isinstance(scope, dict):
-            continue
-        for key in scope:
-            if key in FORBIDDEN_CHAIN_FIELDS:
-                errors.append(
-                    f"Forbidden field '{key}' found in {scope_name}; "
-                    "this field is assigned by the gateway"
-                )
-    return errors
+    """Return error messages for any forbidden chain fields found recursively in *obj*."""
+    return _find_forbidden_keys_recursive(obj)
 
 
 def reject_private_keys(obj: Any) -> list[str]:
     """Scan the entire submission for embedded private-key material."""
     errors: list[str] = []
-    serialised = repr(obj)  # cheap stringification
+    serialised = repr(obj)
     for pat in _SECURITY_PATTERNS:
         m = pat.search(serialised)
         if m:
@@ -133,36 +204,55 @@ def reject_private_keys(obj: Any) -> list[str]:
 
 
 def reject_placeholders(obj: Any) -> list[str]:
-    """Reject obvious placeholder / test tokens."""
+    """Reject obvious placeholder / test tokens using strengthened patterns."""
     errors: list[str] = []
-    serialised = repr(obj).lower()
-    placeholders = [
-        "your_github_token",
-        "your-token-here",
-        "insert_token",
-        "replace_me",
-        "todo",
-        "xxx",
-        "example.com",
-    ]
-    for ph in placeholders:
-        if ph in serialised:
-            errors.append(f"Placeholder detected: '{ph}' — replace with a real value")
+    serialised = repr(obj)
+    for pat in _PLACEHOLDER_PATTERNS:
+        m = pat.search(serialised)
+        if m:
+            errors.append(
+                f"Placeholder detected: matches pattern '{pat.pattern}' — replace with a real value"
+            )
+    return errors
+
+
+def validate_boundary_acknowledgement(submission: dict[str, Any]) -> list[str]:
+    """Validate that boundary_acknowledgement contains all 6 required boolean true fields."""
+    errors: list[str] = []
+    boundary = submission.get("boundary_acknowledgement")
+    if boundary is None:
+        errors.append("Missing required field 'boundary_acknowledgement'")
+        return errors
+    if not isinstance(boundary, dict):
+        errors.append("'boundary_acknowledgement' must be a JSON object")
+        return errors
+
+    for field in REQUIRED_BOUNDARY_FIELDS:
+        if field not in boundary:
+            errors.append(f"boundary_acknowledgement missing required field '{field}'")
+        elif boundary[field] is not True:
+            errors.append(
+                f"boundary_acknowledgement.'{field}' must be boolean true, "
+                f"got {boundary[field]!r}"
+            )
     return errors
 
 
 def validate_context_readiness(record_type: str, draft: dict[str, Any]) -> list[str]:
     """Check that *draft* meets the minimum context-completeness level for *record_type*."""
     errors: list[str] = []
-    cc_level = draft.get("context_completeness_level")
+    cc_level = _extract_context_level(draft)
     if cc_level is None:
-        errors.append("Missing required field 'context_completeness_level' in draft")
+        errors.append(
+            "Missing required field 'context_readiness.declared_context_level' "
+            "(or legacy 'context_completeness_level') in draft"
+        )
         return errors
 
     try:
         cc_level = int(cc_level)
     except (TypeError, ValueError):
-        errors.append(f"'context_completeness_level' must be an integer, got {cc_level!r}")
+        errors.append(f"'declared_context_level' must be an integer, got {cc_level!r}")
         return errors
 
     verification_version: int | None = None
@@ -181,7 +271,6 @@ def validate_context_readiness(record_type: str, draft: dict[str, Any]) -> list[
                 required_cc = min_cc
                 break
         else:
-            # No version info; use the broadest match
             required_cc = min_cc
 
     if cc_level < required_cc:
@@ -222,14 +311,12 @@ def validate_verification_rules(draft: dict[str, Any]) -> list[str]:
 def detect_route(submission: dict[str, Any]) -> str:
     """Determine the processing route for *submission*.
 
-    Returns one of: ``"echo"``, ``"verification"``, ``"guardian_application"``,
-    ``"council_record"``, ``"memory_anchor"``, ``"attestation"``, ``"amendment"``,
-    or ``"unknown"``.
+    Returns the record_type string if valid, otherwise ``"unknown"``.
     """
     record_type = submission.get("record_type") or submission.get("type") or ""
     if isinstance(record_type, str):
         record_type = record_type.strip().lower()
-    if record_type in _CC_RULES:
+    if record_type in ALLOWED_RECORD_TYPES:
         return record_type
     return "unknown"
 
@@ -250,6 +337,13 @@ def validate_submission(submission: dict[str, Any]) -> list[str]:
         errors.append("Missing required field 'record_type'")
     elif not isinstance(record_type, str):
         errors.append(f"'record_type' must be a string, got {type(record_type).__name__}")
+    else:
+        rt = record_type.strip().lower()
+        if rt not in ALLOWED_RECORD_TYPES:
+            errors.append(
+                f"Unknown record_type '{record_type}'; "
+                f"allowed types: {sorted(ALLOWED_RECORD_TYPES)}"
+            )
 
     draft = submission.get("draft") or submission.get("record_draft")
     if draft is None:
@@ -257,7 +351,10 @@ def validate_submission(submission: dict[str, Any]) -> list[str]:
     elif not isinstance(draft, dict):
         errors.append("'draft' must be a JSON object")
 
-    # --- forbidden fields ---
+    # --- boundary acknowledgement ---
+    errors.extend(validate_boundary_acknowledgement(submission))
+
+    # --- forbidden fields (recursive) ---
     errors.extend(reject_forbidden_chain_fields(submission))
 
     # --- security scans ---
@@ -266,7 +363,8 @@ def validate_submission(submission: dict[str, Any]) -> list[str]:
 
     # --- context-readiness ---
     if isinstance(draft, dict) and record_type:
-        errors.extend(validate_context_readiness(str(record_type), draft))
+        rt = record_type.strip().lower() if isinstance(record_type, str) else ""
+        errors.extend(validate_context_readiness(rt, draft))
         errors.extend(validate_verification_rules(draft))
 
     # --- authorship proof presence (optional but recommended) ---

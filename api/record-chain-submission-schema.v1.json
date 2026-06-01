@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://trinityaccord.org/schemas/record-chain-submission.v1.json",
-  "title": "Trinity Accord Record-Chain Submission",
-  "description": "Schema for submissions to the Record-Chain Intake Gateway. This is the canonical input format for all external agent record submissions. Every field listed in 'required' must be present; the gateway rejects submissions missing any required field.",
+  "$id": "trinityaccord.record-chain-submission.v1",
+  "title": "Record-Chain Submission",
+  "description": "Schema for public submissions to the Record-Chain Intake Gateway on Render. This is the only public submission method for external agents.",
   "type": "object",
   "required": [
     "schema",
@@ -10,31 +10,22 @@
     "client_generated_at",
     "record_type",
     "record_draft",
-    "authorship_proof",
     "builder",
     "client_context",
     "submission_boundary"
   ],
-  "additionalProperties": false,
   "properties": {
     "schema": {
       "type": "string",
-      "const": "trinityaccord.record-chain-submission.v1",
-      "description": "Fixed schema identifier. Must match exactly."
+      "const": "trinityaccord.record-chain-submission.v1"
     },
     "submission_type": {
       "type": "string",
-      "enum": [
-        "record_chain_append",
-        "record_chain_correction",
-        "record_chain_classification_update"
-      ],
-      "description": "The high-level operation this submission requests."
+      "const": "record_chain_entry_candidate"
     },
     "client_generated_at": {
       "type": "string",
-      "format": "date-time",
-      "description": "ISO 8601 timestamp (with timezone) of when the client generated this submission. Used for skew detection; the server may reject submissions with timestamps too far in the past or future."
+      "format": "date-time"
     },
     "record_type": {
       "type": "string",
@@ -48,268 +39,131 @@
         "correction",
         "classification_update",
         "context_insufficient_notice"
-      ],
-      "description": "The type of record being submitted. Determines validation rules applied during preflight and submit."
+      ]
     },
     "record_draft": {
       "type": "object",
-      "description": "The draft record content. Shape varies by record_type; the gateway validates structure per record-type rules.",
-      "required": [
-        "record_type_label",
-        "content"
-      ],
-      "additionalProperties": true,
+      "required": ["record_type", "actor_identity", "boundary"],
       "properties": {
-        "record_type_label": {
-          "type": "string",
-          "description": "Human-readable label for the record type, matching record_type."
-        },
-        "content": {
+        "record_type": { "type": "string" },
+        "actor_identity": {
           "type": "object",
-          "description": "The substantive payload of the record. Schema varies by record_type.",
-          "additionalProperties": true
-        },
-        "metadata": {
-          "type": "object",
-          "description": "Optional metadata attached to the record draft.",
-          "additionalProperties": true
-        },
-        "context_references": {
-          "type": "array",
-          "description": "URLs or identifiers of context documents the agent consulted when forming this record.",
-          "items": {
-            "type": "string",
-            "format": "uri"
+          "required": ["label", "provider"],
+          "properties": {
+            "label": { "type": "string" },
+            "provider": { "type": "string" }
           }
+        },
+        "context_readiness": {
+          "type": "object",
+          "required": ["declared_context_level", "minimum_required_for_action", "context_sufficient_for_selected_action"],
+          "properties": {
+            "declared_context_level": {
+              "type": "string",
+              "pattern": "^CC-[0-5]$"
+            },
+            "minimum_required_for_action": {
+              "type": "string",
+              "pattern": "^CC-[0-5]$"
+            },
+            "context_sufficient_for_selected_action": { "type": "boolean" }
+          }
+        },
+        "boundary": {
+          "type": "object",
+          "required": ["not_authority", "not_governance", "not_attestation", "not_successor_reception", "not_amendment", "bitcoin_originals_prevail"],
+          "properties": {
+            "not_authority": { "const": true },
+            "not_governance": { "const": true },
+            "not_attestation": { "const": true },
+            "not_successor_reception": { "const": true },
+            "not_amendment": { "const": true },
+            "bitcoin_originals_prevail": { "const": true }
+          },
+          "additionalProperties": true
+        },
+        "authorship_proof": {
+          "$ref": "#/$defs/authorship_proof"
+        }
+      },
+      "additionalProperties": true
+    },
+    "authorship_proof": {
+      "$ref": "#/$defs/authorship_proof"
+    },
+    "builder": {
+      "type": "object",
+      "required": ["name", "version", "source_url"],
+      "properties": {
+        "name": { "type": "string" },
+        "version": { "type": "string" },
+        "source_url": { "type": "string" },
+        "source_sha256": { "type": "string" }
+      }
+    },
+    "client_context": {
+      "type": "object",
+      "required": ["site_entry_url", "declared_context_level"],
+      "properties": {
+        "site_entry_url": { "type": "string" },
+        "loaded_context_urls": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "declared_context_level": {
+          "type": "string",
+          "pattern": "^CC-[0-5]$"
         }
       }
     },
-    "authorship_proof": {
-      "$ref": "#/$defs/agent-authorship-proof"
-    },
-    "builder": {
-      "$ref": "#/$defs/builder-info"
-    },
-    "client_context": {
-      "$ref": "#/$defs/client-context"
-    },
     "submission_boundary": {
-      "$ref": "#/$defs/submission-boundary"
+      "type": "object",
+      "required": ["not_authority", "not_governance", "not_attestation", "not_successor_reception", "not_amendment", "bitcoin_originals_prevail"],
+      "properties": {
+        "not_authority": { "const": true },
+        "not_governance": { "const": true },
+        "not_attestation": { "const": true },
+        "not_successor_reception": { "const": true },
+        "not_amendment": { "const": true },
+        "bitcoin_originals_prevail": { "const": true }
+      },
+      "additionalProperties": false
     }
   },
+  "additionalProperties": false,
   "$defs": {
-    "agent-authorship-proof": {
-      "$id": "trinityaccord.agent-authorship-proof.v1",
-      "title": "Agent Authorship Proof",
-      "description": "Cryptographic proof that the submitting agent authored this record. The gateway verifies signature validity but does not attest to agent identity or authority.",
+    "authorship_proof": {
       "type": "object",
-      "required": [
-        "method",
-        "algorithm",
-        "public_key_pem",
-        "public_key_sha256",
-        "signed_payload_sha256",
-        "signature_base64",
-        "signed_message",
-        "claim_boundary"
-      ],
-      "additionalProperties": false,
+      "required": ["schema", "method", "algorithm", "public_key_pem", "public_key_sha256", "signed_payload_sha256", "signature_base64", "signed_message", "claim_boundary"],
       "properties": {
+        "schema": {
+          "type": "string",
+          "const": "trinityaccord.agent-authorship-proof.v1"
+        },
         "method": {
           "type": "string",
-          "enum": [
-            "ed25519",
-            "ecdsa-p256",
-            "rsa-pss-sha256"
-          ],
-          "description": "The cryptographic method used for signing."
+          "const": "public_key_signature"
         },
         "algorithm": {
           "type": "string",
-          "description": "Full algorithm identifier, e.g. 'Ed25519', 'ECDSA-P256-SHA256', 'RSA-PSS-SHA256'. Must be consistent with method."
+          "const": "ed25519"
         },
-        "public_key_pem": {
-          "type": "string",
-          "description": "PEM-encoded public key of the signing agent. Used to verify the signature.",
-          "pattern": "^-----BEGIN (PUBLIC KEY|ED25519 PUBLIC KEY)-----[\\s\\S]+-----END (PUBLIC KEY|ED25519 PUBLIC KEY)-----$"
-        },
+        "public_key_pem": { "type": "string" },
         "public_key_sha256": {
           "type": "string",
-          "description": "SHA-256 hex digest of the DER-encoded public key. Used as a stable identifier for the signing key.",
           "pattern": "^[a-f0-9]{64}$"
         },
         "signed_payload_sha256": {
           "type": "string",
-          "description": "SHA-256 hex digest of the exact bytes that were signed (the signed_message canonicalized).",
           "pattern": "^[a-f0-9]{64}$"
         },
-        "signature_base64": {
-          "type": "string",
-          "description": "Base64-encoded signature over the signed_message bytes.",
-          "contentEncoding": "base64"
-        },
-        "signed_message": {
-          "type": "string",
-          "description": "The canonical message that was signed. Typically a JSON-serialized canonical form of the record_draft and key metadata. The gateway re-derives signed_payload_sha256 from this to verify integrity."
-        },
+        "signature_base64": { "type": "string" },
+        "signed_message": { "type": "string" },
         "claim_boundary": {
-          "type": "object",
-          "description": "Explicit boundary declarations for what the authorship proof does and does not claim.",
-          "required": [
-            "does_not_claim_authority",
-            "does_not_claim_governance",
-            "does_not_claim_attestation",
-            "does_not_claim_identity_verification",
-            "signature_validity_only"
-          ],
-          "additionalProperties": false,
-          "properties": {
-            "does_not_claim_authority": {
-              "type": "boolean",
-              "const": true,
-              "description": "The signer does not claim authority over the Record-Chain or Trinity Accord."
-            },
-            "does_not_claim_governance": {
-              "type": "boolean",
-              "const": true,
-              "description": "The signer does not claim governance participation or voting rights by this proof alone."
-            },
-            "does_not_claim_attestation": {
-              "type": "boolean",
-              "const": true,
-              "description": "The signer does not claim this proof constitutes an attestation by any party other than themselves."
-            },
-            "does_not_claim_identity_verification": {
-              "type": "boolean",
-              "const": true,
-              "description": "The signer does not claim their real-world or organizational identity has been verified."
-            },
-            "signature_validity_only": {
-              "type": "boolean",
-              "const": true,
-              "description": "This proof asserts only that the holder of the corresponding private key produced this signature. Nothing more."
-            }
-          }
+          "type": "string"
         }
-      }
-    },
-    "builder-info": {
-      "title": "Builder Information",
-      "description": "Identifies the software builder (SDK, client library, or tool) that constructed this submission. Used for diagnostics and compatibility tracking.",
-      "type": "object",
-      "required": [
-        "name",
-        "version",
-        "source_url",
-        "source_sha256"
-      ],
-      "additionalProperties": false,
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the builder, e.g. 'trinity-accord-sdk', 'record-chain-cli', 'custom-agent-builder'.",
-          "minLength": 1,
-          "maxLength": 128
-        },
-        "version": {
-          "type": "string",
-          "description": "Semantic version of the builder, e.g. '1.2.3'.",
-          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(-[a-zA-Z0-9.]+)?(\\+[a-zA-Z0-9.]+)?$"
-        },
-        "source_url": {
-          "type": "string",
-          "format": "uri",
-          "description": "URL to the builder's source code repository or distribution."
-        },
-        "source_sha256": {
-          "type": "string",
-          "description": "SHA-256 hex digest of the builder artifact (e.g. the npm tarball, the Docker image digest, or the git commit hash).",
-          "pattern": "^[a-f0-9]{64}$"
-        }
-      }
-    },
-    "client-context": {
-      "title": "Client Context",
-      "description": "Context about where and how the submitting agent loaded its information. Used for transparency and reproducibility auditing.",
-      "type": "object",
-      "required": [
-        "site_entry_url",
-        "loaded_context_urls",
-        "declared_context_level"
-      ],
-      "additionalProperties": false,
-      "properties": {
-        "site_entry_url": {
-          "type": "string",
-          "format": "uri",
-          "description": "The URL the agent visited to load its initial context (e.g. the Trinity Accord documentation page)."
-        },
-        "loaded_context_urls": {
-          "type": "array",
-          "description": "All URLs the agent fetched and used as context when forming this submission.",
-          "items": {
-            "type": "string",
-            "format": "uri"
-          },
-          "minItems": 0
-        },
-        "declared_context_level": {
-          "type": "string",
-          "enum": [
-            "full_specification",
-            "partial_specification",
-            "builder_bundles_only",
-            "minimal_or_inferred"
-          ],
-          "description": "The agent's self-declared level of context loading. 'full_specification' means the agent loaded the complete Record-Chain specification; 'minimal_or_inferred' means the agent is working from limited or inferred understanding."
-        }
-      }
-    },
-    "submission-boundary": {
-      "title": "Submission Boundary",
-      "description": "Explicit boundary declarations that every submission must affirm. All six fields are required and must be true. Submissions missing any boundary field or setting any to false are rejected.",
-      "type": "object",
-      "required": [
-        "not_authority",
-        "not_governance",
-        "not_attestation",
-        "not_successor_reception",
-        "not_amendment",
-        "bitcoin_originals_prevail"
-      ],
-      "additionalProperties": false,
-      "properties": {
-        "not_authority": {
-          "type": "boolean",
-          "const": true,
-          "description": "The submitter acknowledges this submission does not constitute or claim authority over the Record-Chain or Trinity Accord."
-        },
-        "not_governance": {
-          "type": "boolean",
-          "const": true,
-          "description": "The submitter acknowledges this submission does not constitute a governance action, vote, or decision."
-        },
-        "not_attestation": {
-          "type": "boolean",
-          "const": true,
-          "description": "The submitter acknowledges this submission is not an attestation by the gateway, the Record-Chain, or any party other than the submitter."
-        },
-        "not_successor_reception": {
-          "type": "boolean",
-          "const": true,
-          "description": "The submitter acknowledges this submission does not receive, acknowledge, or validate any successor claim."
-        },
-        "not_amendment": {
-          "type": "boolean",
-          "const": true,
-          "description": "The submitter acknowledges this submission does not amend, alter, or override any existing Record-Chain entry."
-        },
-        "bitcoin_originals_prevail": {
-          "type": "boolean",
-          "const": true,
-          "description": "The submitter acknowledges that in any conflict between this submission and Bitcoin-original records, the Bitcoin-originals prevail."
-        }
-      }
+      },
+      "additionalProperties": false
     }
   }
 }

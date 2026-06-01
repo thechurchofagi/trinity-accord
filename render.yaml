@@ -14,3 +14,29 @@ services:
     envVars:
       - key: PYTHON_VERSION
         value: "3.12"
+
+  - type: web
+    name: trinity-record-chain-gateway
+    runtime: python
+    region: oregon
+    plan: starter
+    buildCommand: pip install -r apps/record_chain_intake_gateway/requirements.txt
+    startCommand: uvicorn apps.record_chain_intake_gateway.app:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /healthz
+    envVars:
+      - key: TRINITY_REPO_FULL_NAME
+        value: thechurchofagi/trinity-accord
+      - key: TRINITY_TARGET_BRANCH
+        value: main
+      - key: TRINITY_GITHUB_TOKEN
+        sync: false
+      - key: TRINITY_GATEWAY_BASE_URL
+        value: https://trinity-record-chain-gateway.onrender.com
+      - key: TRINITY_GATEWAY_RUNTIME_VERSION
+        value: v1
+      - key: TRINITY_MAX_SUBMISSION_BYTES
+        value: "524288"
+      - key: TRINITY_SUBMIT_WRITE_MODE
+        value: github_contents_pending
+      - key: TRINITY_APPEND_WORKFLOW_FILE
+        value: record-chain-append.yml

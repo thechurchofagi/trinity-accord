@@ -16,9 +16,28 @@ from cryptography.hazmat.primitives.serialization import (
     load_pem_public_key,
 )
 
-from gateway.canonical import canonical_bytes, sha256_bytes
+from .canonical import canonical_bytes, sha256_bytes
 
 logger = logging.getLogger(__name__)
+
+# Required claim_boundary keys that must be True
+_REQUIRED_CLAIM_BOUNDARY_KEYS = frozenset({
+    "not authority",
+    "not attestation",
+    "not amendment",
+})
+
+
+def strip_authorship_for_signing(record_draft: dict[str, Any]) -> dict[str, Any]:
+    """Return a shallow copy of *record_draft* with ``authorship_proof`` removed.
+
+    The proof cannot sign itself, so it must be stripped before computing the
+    signed payload.
+    """
+    cleaned = dict(record_draft)
+    cleaned.pop("authorship_proof", None)
+    cleaned.pop("proof", None)
+    return cleaned
 
 
 def signed_payload_sha256(record_draft: dict[str, Any]) -> str:
@@ -29,7 +48,7 @@ def signed_payload_sha256(record_draft: dict[str, Any]) -> str:
     return sha256_bytes(canonical_bytes(record_draft))
 
 
-def public_key_sha256(public_key_pem: str) -> str:
+def public_key_sha256_from_pem(public_key_pem: str) -> str:
     """Return the SHA-256 hex digest of the raw public-key bytes (32 bytes for Ed25519)."""
     key = load_pem_public_key(public_key_pem.encode("utf-8") if isinstance(public_key_pem, str) else public_key_pem)
     raw = key.public_bytes(
@@ -37,6 +56,34 @@ def public_key_sha256(public_key_pem: str) -> str:
         format=PublicFormat.Raw,
     )
     return sha256_bytes(raw)
+
+
+def _extract_signature_b64(proof: dict[str, Any]) -> str | None:
+    """Extract signature_base64, accepting 'signature' as a legacy alias."""
+    sig = proof.get("signature_base64")
+    if sig is not None:
+        return sig
+    return proof.get("signature")  # legacy alias
+
+
+def _check_claim_boundary(proof: dict[str, Any]) -> str | None:
+    """Verify that claim_boundary contains all required keys set to True.
+
+    Returns an error message string on failure, None on success.
+    """
+    boundary = proof.get("claim_boundary")
+    if boundary is None:
+        return "authorship_proof missing required 'claim_boundary'"
+    if not isinstance(boundary, dict):
+        return "'claim_boundary' must be a JSON object"
+
+    for key in _REQUIRED_CLAIM_BOUNDARY_KEYS:
+        if boundary.get(key) is not True:
+            return (
+                f"claim_boundary.'{key}' must be boolean true; "
+                f"author cannot claim authority/attestation/amendment"
+            )
+    return None
 
 
 def verify_authorship_proof(
@@ -49,11 +96,18 @@ def verify_authorship_proof(
     ----------
     record_draft:
         The record draft object (will be canonicalised before hashing).
+        authorship_proof is stripped before computing the signed payload.
     proof:
-        Must contain:
-        - ``public_key_pem``: PEM-encoded Ed25519 public key
-        - ``signature``: Base-64 encoded Ed25519 signature over the canonical
-          JSON hash of *record_draft*.
+        The authorship proof dict. Expected shape:
+        - ``schema``: proof schema identifier (optional)
+        - ``method``: signing method, e.g. "ed25519" (optional)
+        - ``algorithm``: algorithm identifier (optional)
+        - ``public_key_pem``: PEM-encoded Ed25519 public key (required)
+        - ``public_key_sha256``: SHA-256 hex of raw public key bytes (verified if present)
+        - ``signed_payload_sha256``: SHA-256 hex of canonical draft bytes (verified if present)
+        - ``signature_base64`` (or legacy ``signature``): Base-64 Ed25519 signature (required)
+        - ``signed_message``: human-readable message (optional)
+        - ``claim_boundary``: dict with required boundary claims (required)
 
     Returns
     -------
@@ -61,11 +115,19 @@ def verify_authorship_proof(
         ``ok`` is ``True`` when the signature is valid; ``error_message`` is
         ``None`` on success or a human-readable explanation on failure.
     """
+    # --- extract fields ---
     pub_pem = proof.get("public_key_pem")
-    sig_b64 = proof.get("signature")
+    sig_b64 = _extract_signature_b64(proof)
 
-    if not pub_pem or not sig_b64:
-        return False, "authorship_proof must contain 'public_key_pem' and 'signature'"
+    if not pub_pem:
+        return False, "authorship_proof must contain 'public_key_pem'"
+    if not sig_b64:
+        return False, "authorship_proof must contain 'signature_base64' (or legacy 'signature')"
+
+    # --- claim boundary check ---
+    boundary_err = _check_claim_boundary(proof)
+    if boundary_err:
+        return False, boundary_err
 
     # --- load public key ---
     try:
@@ -81,16 +143,41 @@ def verify_authorship_proof(
     if not isinstance(public_key, Ed25519PublicKey):
         return False, "Public key must be Ed25519"
 
+    # --- verify public_key_sha256 if supplied ---
+    expected_pub_sha = proof.get("public_key_sha256")
+    if expected_pub_sha is not None:
+        raw_pub = public_key.public_bytes(
+            encoding=Encoding.Raw,
+            format=PublicFormat.Raw,
+        )
+        actual_pub_sha = sha256_bytes(raw_pub)
+        if actual_pub_sha != expected_pub_sha:
+            return False, (
+                f"public_key_sha256 mismatch: expected {actual_pub_sha}, "
+                f"got {expected_pub_sha}"
+            )
+
     # --- decode signature ---
     try:
         signature = base64.b64decode(sig_b64)
     except Exception as exc:
         return False, f"Invalid base64 signature: {exc}"
 
-    # --- compute expected payload ---
-    payload = canonical_bytes(record_draft)
+    # --- compute expected payload (strip proof from draft first) ---
+    draft_for_signing = strip_authorship_for_signing(record_draft)
+    payload = canonical_bytes(draft_for_signing)
 
-    # --- verify ---
+    # --- verify signed_payload_sha256 if supplied ---
+    expected_payload_sha = proof.get("signed_payload_sha256")
+    if expected_payload_sha is not None:
+        actual_payload_sha = sha256_bytes(payload)
+        if actual_payload_sha != expected_payload_sha:
+            return False, (
+                f"signed_payload_sha256 mismatch: expected {actual_payload_sha}, "
+                f"got {expected_payload_sha}"
+            )
+
+    # --- verify signature ---
     try:
         public_key.verify(signature, payload)
     except InvalidSignature:

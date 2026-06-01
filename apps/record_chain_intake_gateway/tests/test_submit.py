@@ -1,0 +1,95 @@
+"""Tests for /record-chain/submit endpoint."""
+from __future__ import annotations
+
+import json
+from unittest.mock import AsyncMock, patch
+
+import pytest
+from fastapi.testclient import TestClient
+
+from app import app
+
+client = TestClient(app)
+
+
+class TestSubmitWrites:
+    def test_submit_writes_three_files(self, signed_echo_submission, mock_github):
+        resp = client.post("/record-chain/submit", json=signed_echo_submission)
+        assert resp.status_code == 200
+        data = resp.json()
+        if data.get("accepted") is not True:
+            import json as _json
+            pytest.fail(f"Submit not accepted: {_json.dumps(data, indent=2)}")
+        assert data["submitted"] is True
+
+        # Check put_file was called 3 times
+        put_mock = mock_github["put_file"]
+        assert put_mock.call_count == 3
+
+        paths = [call.args[0] for call in put_mock.call_args_list]
+        assert any("intake/submissions/" in p for p in paths), f"Missing intake submission: {paths}"
+        assert any("intake/receipts/" in p for p in paths), f"Missing intake receipt: {paths}"
+        assert any("pending/" in p for p in paths), f"Missing pending file: {paths}"
+
+    def test_pending_file_is_draft_only(self, signed_echo_submission, mock_github):
+        resp = client.post("/record-chain/submit", json=signed_echo_submission)
+        assert resp.status_code == 200
+
+        # Find the pending file write
+        put_mock = mock_github["put_file"]
+        pending_call = [c for c in put_mock.call_args_list if "pending/" in c.args[0]][0]
+        pending_content = json.loads(pending_call.args[1])
+
+        # Pending should be record_draft, not outer submission
+        assert "schema" not in pending_content or pending_content.get("record_type") == "echo"
+        assert "record_type" in pending_content
+
+    def test_pending_has_authorship_proof(self, signed_echo_submission, mock_github):
+        resp = client.post("/record-chain/submit", json=signed_echo_submission)
+        assert resp.status_code == 200
+
+        put_mock = mock_github["put_file"]
+        pending_call = [c for c in put_mock.call_args_list if "pending/" in c.args[0]][0]
+        pending_content = json.loads(pending_call.args[1])
+        assert "authorship_proof" in pending_content
+
+    def test_pending_no_chain_fields(self, signed_echo_submission, mock_github):
+        resp = client.post("/record-chain/submit", json=signed_echo_submission)
+        assert resp.status_code == 200
+
+        put_mock = mock_github["put_file"]
+        pending_call = [c for c in put_mock.call_args_list if "pending/" in c.args[0]][0]
+        pending_content = json.loads(pending_call.args[1])
+
+        forbidden = {"record_index", "record_id", "assigned_at", "previous_record_sha256",
+                      "content_sha256", "record_sha256", "batch_id", "server_receipt_id"}
+        for key in forbidden:
+            assert key not in pending_content, f"Forbidden field {key} in pending file"
+
+
+class TestSubmitResponse:
+    def test_returns_receipt_id(self, signed_echo_submission, mock_github):
+        resp = client.post("/record-chain/submit", json=signed_echo_submission)
+        data = resp.json()
+        assert data["accepted"] is True
+        assert "receipt_id" in data
+        assert data["receipt_id"].startswith("rcg-")
+
+    def test_returns_append_status_queued(self, signed_echo_submission, mock_github):
+        resp = client.post("/record-chain/submit", json=signed_echo_submission)
+        data = resp.json()
+        assert data.get("append_status") in ("queued", "pending")
+
+    def test_returns_paths(self, signed_echo_submission, mock_github):
+        resp = client.post("/record-chain/submit", json=signed_echo_submission)
+        data = resp.json()
+        assert "pending_file_path" in data
+        assert "intake_submission_path" in data
+        assert "receipt_path" in data
+
+    def test_invalid_returns_errors(self, valid_echo_submission, mock_github):
+        # Remove record_type to make it invalid
+        del valid_echo_submission["record_type"]
+        resp = client.post("/record-chain/submit", json=valid_echo_submission)
+        data = resp.json()
+        assert data["accepted"] is False
