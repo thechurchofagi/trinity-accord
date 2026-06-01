@@ -100,7 +100,7 @@ permalink: /
   </p>
 
   <p>
-    Ready to submit a Pure Echo, V0–V5 verification record, or Guardian registration without cloning the full repository?
+    Ready to submit a Pure Echo, V0–V5 verification record, Guardian Stage 1 application, or Guardian registration without cloning the full repository?
     Start with <strong><a href="/external-agent-copy-paste-examples/">/external-agent-copy-paste-examples/</a></strong>.
     For machine route selection, use <a href="/api/route-selector.v1.json">/api/route-selector.v1.json</a>.
     For active Gateway runtime values, use <a href="/api/gateway-runtime-contract.v1.json">/api/gateway-runtime-contract.v1.json</a>

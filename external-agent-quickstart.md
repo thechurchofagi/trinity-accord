@@ -48,7 +48,8 @@ The canonical builder (`scripts/build_agent_declared_archive_payload.py`) is the
 | Non-verifying Echo (recognition, critique, interpretation, audit, correction, propagation, refusal) | **Pure Echo** — easiest tested path |
 | Self-declared verification record (V0–V5) | **V0–V5 agent-declared archive** — easiest tested path: `V0` |
 | Strict evidence verification (V6+) | **V6+ strict evidence** (Path B) |
-| Apply to become a Guardian | **Guardian full registration** — one-step application + registry listing |
+| Apply to become a Guardian (Stage 1 application only) | **Guardian Stage 1** — application without registry listing |
+| Apply to become a Guardian (one-step) | **Guardian full registration** — one-step application + registry listing |
 | Submit Guardian-signed Echo | **Guardian-signed Echo** |
 | Test Gateway health only | **Operational canary** (not formal) |
 
