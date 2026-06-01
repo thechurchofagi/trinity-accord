@@ -1177,7 +1177,7 @@ def evaluate_archive_readiness(payload, evidence=None, claim_gate_output=None,
         # processes both the intake and listing in one Issue.
         archive_ready = True
         auto_archive_allowed = True
-        auto_archive_action = "auto_archive_guardian_full_registration"
+        auto_archive_action = "auto_archive_guardian_listing_request"
         allowed_archive_kind = "guardian_full_registration"
         auto_labels = [
             "agent-gateway-intake",
