@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://trinity-accord.dev/schemas/server_receipt.schema.json",
+  "title": "Server Receipt",
+  "description": "A server receipt returned after a successful record-chain submission.",
+  "type": "object",
+  "required": [
+    "server_receipt_id",
+    "service",
+    "gateway_version",
+    "record_type",
+    "submission_sha256",
+    "accepted_at",
+    "receipt_sha256"
+  ],
+  "properties": {
+    "server_receipt_id": {
+      "type": "string",
+      "pattern": "^rcg-\\d{8}-[a-f0-9]{12}$",
+      "description": "Unique receipt identifier in the format rcg-YYYYMMDD-<12hex>."
+    },
+    "service": {
+      "type": "string",
+      "const": "record-chain-intake-gateway"
+    },
+    "gateway_version": {
+      "type": "string",
+      "description": "Semver of the gateway that produced this receipt."
+    },
+    "record_type": {
+      "type": "string",
+      "description": "The resolved record type."
+    },
+    "submission_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$",
+      "description": "SHA-256 of the canonical submission JSON."
+    },
+    "accepted_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 UTC timestamp when the submission was accepted."
+    },
+    "file_path": {
+      "type": "string",
+      "description": "Repository-relative path where the record was persisted."
+    },
+    "commit_sha": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{40}$",
+      "description": "Git commit SHA of the persist operation."
+    },
+    "receipt_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$",
+      "description": "SHA-256 of the receipt contents (self-referencing integrity hash)."
+    }
+  },
+  "additionalProperties": false
+}

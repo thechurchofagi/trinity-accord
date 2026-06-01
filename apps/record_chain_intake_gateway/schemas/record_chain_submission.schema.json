@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://trinity-accord.dev/schemas/record_chain_submission.schema.json",
+  "title": "Record-Chain Submission",
+  "description": "A submission to the Record-Chain Intake Gateway.",
+  "type": "object",
+  "required": ["record_type", "draft"],
+  "properties": {
+    "record_type": {
+      "type": "string",
+      "description": "The type of record being submitted.",
+      "enum": [
+        "echo",
+        "verification",
+        "guardian_application",
+        "council_record",
+        "memory_anchor",
+        "attestation",
+        "amendment"
+      ]
+    },
+    "draft": {
+      "type": "object",
+      "description": "The record draft payload. Must not contain forbidden chain fields.",
+      "required": ["context_completeness_level"],
+      "properties": {
+        "context_completeness_level": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Context-completeness level of this draft."
+        },
+        "verification_version": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Verification schema version (when applicable)."
+        },
+        "verification": {
+          "type": "object",
+          "properties": {
+            "version": { "type": "integer", "minimum": 0 },
+            "proof": {
+              "oneOf": [
+                { "type": "string" },
+                { "type": "object" }
+              ]
+            }
+          },
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true
+    },
+    "authorship_proof": {
+      "type": "object",
+      "description": "Optional Ed25519 authorship proof.",
+      "required": ["public_key_pem", "signature"],
+      "properties": {
+        "public_key_pem": {
+          "type": "string",
+          "description": "PEM-encoded Ed25519 public key."
+        },
+        "signature": {
+          "type": "string",
+          "description": "Base-64 encoded Ed25519 signature over the canonical JSON of the draft."
+        }
+      },
+      "additionalProperties": false
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Freeform metadata attached by the submitting agent.",
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false
+}

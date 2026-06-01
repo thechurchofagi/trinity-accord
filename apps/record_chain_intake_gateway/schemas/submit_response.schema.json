@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://trinity-accord.dev/schemas/submit_response.schema.json",
+  "title": "Submit Response",
+  "description": "Response from the submit endpoint.",
+  "type": "object",
+  "required": ["ok"],
+  "properties": {
+    "ok": {
+      "type": "boolean",
+      "description": "True if the submission was accepted and persisted."
+    },
+    "receipt": {
+      "type": "object",
+      "description": "Server receipt (present when ok=true).",
+      "required": [
+        "server_receipt_id",
+        "service",
+        "gateway_version",
+        "record_type",
+        "submission_sha256",
+        "accepted_at",
+        "receipt_sha256"
+      ],
+      "properties": {
+        "server_receipt_id": {
+          "type": "string",
+          "pattern": "^rcg-\\d{8}-[a-f0-9]{12}$",
+          "description": "Unique receipt identifier."
+        },
+        "service": {
+          "type": "string"
+        },
+        "gateway_version": {
+          "type": "string"
+        },
+        "record_type": {
+          "type": "string"
+        },
+        "submission_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$",
+          "description": "SHA-256 of the canonical submission JSON."
+        },
+        "accepted_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO 8601 UTC timestamp of acceptance."
+        },
+        "file_path": {
+          "type": "string",
+          "description": "Repository path where the record was written."
+        },
+        "commit_sha": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{40}$",
+          "description": "Git commit SHA of the write."
+        },
+        "receipt_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$",
+          "description": "SHA-256 of the receipt contents (excluding this field)."
+        }
+      },
+      "additionalProperties": false
+    },
+    "errors": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "List of error messages (empty when ok=true)."
+    }
+  },
+  "additionalProperties": false
+}

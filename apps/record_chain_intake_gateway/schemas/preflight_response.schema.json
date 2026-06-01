@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://trinity-accord.dev/schemas/preflight_response.schema.json",
+  "title": "Preflight Response",
+  "description": "Response from the preflight (validate-only) endpoint.",
+  "type": "object",
+  "required": ["ok", "route"],
+  "properties": {
+    "ok": {
+      "type": "boolean",
+      "description": "True if the submission passed all validation checks."
+    },
+    "route": {
+      "type": "string",
+      "description": "The detected processing route for this submission."
+    },
+    "errors": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "List of validation error messages (empty when ok=true)."
+    },
+    "warnings": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Non-fatal warnings."
+    }
+  },
+  "additionalProperties": false
+}

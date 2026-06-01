@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: record-chain-intake-gateway
+    runtime: python
+    region: oregon
+    plan: starter
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /healthz
+    envVars:
+      - key: TRINITY_REPO_FULL_NAME
+        sync: false
+      - key: TRINITY_TARGET_BRANCH
+        sync: false
+      - key: TRINITY_GITHUB_TOKEN
+        sync: false
+        generateValue: false
+      - key: TRINITY_GATEWAY_BASE_URL
+        sync: false
+      - key: TRINITY_GATEWAY_RUNTIME_VERSION
+        sync: false
+      - key: TRINITY_MAX_SUBMISSION_BYTES
+        sync: false
+      - key: TRINITY_SUBMIT_WRITE_MODE
+        sync: false
