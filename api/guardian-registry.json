@@ -1311,7 +1311,7 @@
       "guardian_id": "guardian_ed25519_b3d173799b01912c",
       "public_key_sha256": "b3d173799b01912c50dea1732a10281b164e2821cfb777566a6fa5dd4fda3605",
       "algorithm": "ed25519",
-      "status": "active",
+      "status": "retired",
       "guardian_type": "human_with_ai_agent",
       "application_mode": "joint_human_ai",
       "source_issue": 402,
@@ -1325,7 +1325,8 @@
         "not_verification_level": true,
         "not_successor_reception": true,
         "not_amendment": true,
-        "bitcoin_originals_prevail": true
+        "bitcoin_originals_prevail": true,
+        "retirement_does_not_remove_historical_record": true
       },
       "identity_claims": {
         "schema": "trinityaccord.guardian-identity-claims.v1",
@@ -1349,7 +1350,9 @@
           "not_verification_level": true,
           "key_continuity_only": true
         }
-      }
+      },
+      "retired_at": "2026-06-01T06:53:25.782687Z",
+      "retirement_reason": "voluntary retirement after zero-clone full test"
     }
   ]
 }
