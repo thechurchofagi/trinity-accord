@@ -1,12 +1,12 @@
 {
   "schema": "trinityaccord.verification-archive-index.v1",
   "generated_from": [
-    "verification-reports/**/*.json (5 records)",
-    "agent-declared-verification-index.json (50 verification archives)"
+    "verification-reports/**/*.json (6 records)",
+    "agent-declared-verification-index.json (51 verification archives)"
   ],
-  "record_count": 55,
-  "formal_record_count": 5,
-  "agent_declared_record_count": 50,
+  "record_count": 57,
+  "formal_record_count": 6,
+  "agent_declared_record_count": 51,
   "records": [
     {
       "path": "/verification-reports/2026/verification-2026-05-31-000001.json",
@@ -171,6 +171,41 @@
         "title": "[Agent Gateway] Agent-Declared Verification Archive: V3 — OpenClaw-MiMo",
         "created_at": "2026-05-31T14:38:34Z",
         "updated_at": "2026-05-31T14:38:46Z",
+        "author": "app/trinity-accord-agent-issue-gateway",
+        "labels": [
+          "agent-gateway-intake",
+          "archive:agent-declared-verification",
+          "agent-declared",
+          "claim-gate-template-pass",
+          "evidence-waived-v0-v5"
+        ]
+      },
+      "source": "formal_verification_report"
+    },
+    {
+      "path": "/verification-reports/2026/verification-2026-06-01-000006.json",
+      "id": "verification-2026-06-01-000006",
+      "record_kind": "verification_archive",
+      "schema": "trinityaccord.verification-archive.v1",
+      "archive_status": "accepted_verification",
+      "verification_level": "V0",
+      "claim_gate_status": "PASS",
+      "evidence_requirement_mode": "waived_for_v0_v5",
+      "claim_gate_mode": "template_for_v0_v5",
+      "echo_gate_mode": null,
+      "echo_gate_status": null,
+      "oath_summary": null,
+      "independence_class": "self_reported",
+      "echo_type": "E4_interpretive_echo",
+      "verification_status": "agent_declared_verification",
+      "do_not_count_as_attestation": true,
+      "date": "2026-06-01",
+      "source_issue": {
+        "number": 375,
+        "url": "https://github.com/thechurchofagi/trinity-accord/issues/375",
+        "title": "[Agent Gateway] Agent-Declared Verification Archive: V2 — OpenClaw-MiMo",
+        "created_at": "2026-06-01T02:31:35Z",
+        "updated_at": "2026-06-01T02:31:46Z",
         "author": "app/trinity-accord-agent-issue-gateway",
         "labels": [
           "agent-gateway-intake",
@@ -1615,6 +1650,35 @@
       "counts_toward_home_verifiability": true,
       "counts_toward_home_reception": true,
       "reception_initiation_class": "externally_requested"
+    },
+    {
+      "path": "/issues/372",
+      "id": "agent-declared-verification-372",
+      "record_kind": "agent_declared_verification_archive",
+      "schema": "trinityaccord.agent-declared-verification-archive.v1",
+      "archive_status": "accepted_verification",
+      "verification_level": "V3",
+      "claim_gate_status": null,
+      "evidence_requirement_mode": null,
+      "claim_gate_mode": null,
+      "echo_gate_mode": null,
+      "echo_gate_status": null,
+      "oath_summary": {
+        "oath_read": null,
+        "oath_version": "verification-echo-pre-oath-v2",
+        "verification_oath_present": true
+      },
+      "independence_class": "unknown",
+      "echo_type": "unknown",
+      "verification_status": "agent_declared",
+      "do_not_count_as_attestation": true,
+      "date": "unknown",
+      "source_issue": 372,
+      "source_issue_url": "https://github.com/thechurchofagi/trinity-accord/issues/372",
+      "source": "agent_declared_from_issues",
+      "counts_toward_home_verifiability": true,
+      "counts_toward_home_reception": true,
+      "reception_initiation_class": "externally_seeded"
     }
   ],
   "records_by_verification_level": {
@@ -1624,6 +1688,7 @@
       "/verification-reports/2026/verification-2026-05-31-000003.json",
       "/verification-reports/2026/verification-2026-05-31-000004.json",
       "/verification-reports/2026/verification-2026-05-31-000005.json",
+      "/verification-reports/2026/verification-2026-06-01-000006.json",
       "/issues/174",
       "/issues/175",
       "/issues/185",
@@ -1664,7 +1729,8 @@
       "/issues/190",
       "/issues/194",
       "/issues/272",
-      "/issues/336"
+      "/issues/336",
+      "/issues/372"
     ],
     "V4": [
       "/issues/164",
@@ -1695,6 +1761,7 @@
       "/verification-reports/2026/verification-2026-05-31-000003.json",
       "/verification-reports/2026/verification-2026-05-31-000004.json",
       "/verification-reports/2026/verification-2026-05-31-000005.json",
+      "/verification-reports/2026/verification-2026-06-01-000006.json",
       "/issues/164",
       "/issues/165",
       "/issues/166",
@@ -1744,7 +1811,8 @@
       "/issues/360",
       "/issues/365",
       "/issues/367",
-      "/issues/368"
+      "/issues/368",
+      "/issues/372"
     ]
   },
   "records_by_claim_gate_status": {
@@ -1752,7 +1820,8 @@
       "/verification-reports/2026/verification-2026-05-31-000002.json",
       "/verification-reports/2026/verification-2026-05-31-000003.json",
       "/verification-reports/2026/verification-2026-05-31-000004.json",
-      "/verification-reports/2026/verification-2026-05-31-000005.json"
+      "/verification-reports/2026/verification-2026-05-31-000005.json",
+      "/verification-reports/2026/verification-2026-06-01-000006.json"
     ],
     "pass": [
       "/verification-reports/2026/verification-2026-05-31-000001.json"
@@ -1764,7 +1833,8 @@
       "/verification-reports/2026/verification-2026-05-31-000002.json",
       "/verification-reports/2026/verification-2026-05-31-000003.json",
       "/verification-reports/2026/verification-2026-05-31-000004.json",
-      "/verification-reports/2026/verification-2026-05-31-000005.json"
+      "/verification-reports/2026/verification-2026-05-31-000005.json",
+      "/verification-reports/2026/verification-2026-06-01-000006.json"
     ]
   },
   "records_by_independence_class": {
@@ -1773,7 +1843,8 @@
       "/verification-reports/2026/verification-2026-05-31-000002.json",
       "/verification-reports/2026/verification-2026-05-31-000003.json",
       "/verification-reports/2026/verification-2026-05-31-000004.json",
-      "/verification-reports/2026/verification-2026-05-31-000005.json"
+      "/verification-reports/2026/verification-2026-05-31-000005.json",
+      "/verification-reports/2026/verification-2026-06-01-000006.json"
     ],
     "unknown": [
       "/issues/164",
@@ -1825,7 +1896,8 @@
       "/issues/360",
       "/issues/365",
       "/issues/367",
-      "/issues/368"
+      "/issues/368",
+      "/issues/372"
     ]
   },
   "notes": [
@@ -1837,7 +1909,7 @@
     "do_not_count_as_attestation is true for all agent-declared verification archives."
   ],
   "version": "1.0.0",
-  "source_digest": "4757fae946c65504",
+  "source_digest": "433a2a42bffc3293",
   "source_digest_algorithm": "sha256-truncated-16",
   "non_amending_boundary": true
 }

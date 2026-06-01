@@ -146,18 +146,18 @@
     "does_not_rank_above_reception": true
   },
   "verification_archive_records": {
-    "count": 55,
+    "count": 57,
     "by_verification_level": {
-      "V0": 16,
+      "V0": 17,
       "V1": 9,
       "V2": 11,
-      "V3": 4,
+      "V3": 5,
       "V4": 11,
       "V4+": 2,
       "V5": 2
     },
     "by_claim_gate_status": {
-      "PASS": 4,
+      "PASS": 5,
       "pass": 1
     }
   },
