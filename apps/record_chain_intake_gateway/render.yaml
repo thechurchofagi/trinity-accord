@@ -1,5 +1,6 @@
+# This file is a mirror. Canonical config is in the repo-root render.yaml.
 services:
-  - type: web
+  - type: web_service
     name: trinity-record-chain-gateway
     runtime: python
     region: oregon
@@ -8,6 +9,8 @@ services:
     startCommand: uvicorn apps.record_chain_intake_gateway.app:app --host 0.0.0.0 --port $PORT
     healthCheckPath: /healthz
     envVars:
+      - key: PYTHON_VERSION
+        value: "3.12"
       - key: TRINITY_REPO_FULL_NAME
         value: thechurchofagi/trinity-accord
       - key: TRINITY_TARGET_BRANCH
