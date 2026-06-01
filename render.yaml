@@ -15,7 +15,7 @@ services:
       - key: PYTHON_VERSION
         value: "3.12"
 
-  - type: web
+  - type: web_service
     name: trinity-record-chain-gateway
     runtime: python
     region: oregon
@@ -25,6 +25,8 @@ services:
     startCommand: uvicorn app:app --host 0.0.0.0 --port $PORT
     healthCheckPath: /healthz
     envVars:
+      - key: PYTHON_VERSION
+        value: "3.12"
       - key: TRINITY_REPO_FULL_NAME
         value: thechurchofagi/trinity-accord
       - key: TRINITY_TARGET_BRANCH
