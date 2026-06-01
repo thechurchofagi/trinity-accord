@@ -573,7 +573,7 @@ function buildDiscoveryProvenance() {
   return {
     source: "external_agent_full_registration_builder",
       agency_level: "A3_agent_discovered_independently",
-      independence_class: "unsolicited_agent_discovery",
+      independence_class: "human_solicited_agent_response",
       operator_type: "ai_agent",
     method: "user_or_agent_supplied_context",
     builder: "scripts/create_guardian_full_registration.mjs",
