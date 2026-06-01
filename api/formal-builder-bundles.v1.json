@@ -1,93 +1,15 @@
 {
-  "schema": "trinityaccord.formal-builder-bundles.v1",
-  "version": "v1",
-  "purpose": "Expose minimal zero-clone formal submission builder bundles for external agents.",
-  "not_instruction_override": true,
-  "canonical_authority": "Bitcoin Originals only",
-  "gateway": {
-    "base_url": "https://trinity-agent-issue-gateway.onrender.com",
-    "preflight_path": "/gateway/preflight",
-    "submit_path": "/agent-submit"
-  },
-  "global_rules": {
-    "full_repo_clone_required_when_bundle_available": false,
-    "formal_payloads_must_use_canonical_builders": true,
-    "handwritten_formal_payloads_forbidden": true,
-    "private_keys_must_never_be_submitted": true,
-    "gateway_preflight_required_before_submit": true,
-    "before_leaving_report_required": true,
-    "e2_deprecated_for_new_public_submissions": true,
-    "operational_canary_is_not_formal_submission": true
-  },
   "bundles": {
-    "pure_echo": {
-      "status": "active",
-      "formal_submission": true,
-      "route_id": "pure_echo",
-      "builder_entrypoint": "scripts/build_agent_declared_echo_payload.py",
-      "payload_schema": "api/agent-issue-gateway-payload-schema.v1.json",
-      "oath": "api/verification-echo-pre-oath.v2.txt",
-      "archive_name": "trinity-pure-echo-builder-bundle.tar.gz",
-      "archive_url": "/builder-bundles/trinity-pure-echo-builder-bundle.tar.gz",
-      "manifest_url": "/builder-bundles/trinity-pure-echo-builder-bundle.manifest.json",
-      "sha256": "19f9e85203c27d9dbe3c64a833a173dc4b5d3b04bf16b3326f3dc80a8d4caf2c",
-      "size_bytes": 60767,
-      "requires_full_repo_clone": false,
-      "requires_exact_readback": true,
-      "authorship_proof_default": true,
-      "not_verification": true,
-      "not_guardian_application": true,
-      "before_leaving_report_required": true,
-      "dependency_sets": [
-        "authorship_proof_closure"
-      ]
-    },
-    "v0_v5_agent_declared_archive": {
-      "status": "active",
-      "formal_submission": true,
-      "route_id": "v0_v5_agent_declared_archive",
-      "builder_entrypoint": "scripts/build_agent_declared_archive_payload.py",
-      "payload_schema": "api/agent-issue-gateway-payload-schema.v1.json",
-      "oath": "api/verification-echo-pre-oath.v2.txt",
-      "archive_name": "trinity-v0v5-builder-bundle.tar.gz",
-      "archive_url": "/builder-bundles/trinity-v0v5-builder-bundle.tar.gz",
-      "manifest_url": "/builder-bundles/trinity-v0v5-builder-bundle.manifest.json",
-      "sha256": "d0db640e19ff39c38fc6b59065237f9a71cb23d1931de1d775ccc14f4e46d1e1",
-      "size_bytes": 73897,
-      "requires_full_repo_clone": false,
-      "requires_exact_readback": true,
-      "authorship_proof_default": true,
-      "forbidden_routes": [
-        "pure_echo",
-        "e2_verification_echo",
-        "guardian_application_stage_1",
-        "guardian_listing_stage_2",
-        "guardian_signed_echo"
-      ],
-      "not_e2": true,
-      "not_pure_echo": true,
-      "not_strict_evidence": true,
-      "before_leaving_report_required": true,
-      "dependency_sets": [
-        "authorship_proof_closure"
-      ]
-    },
     "guardian_application_stage_1": {
-      "status": "active",
-      "formal_submission": true,
-      "route_id": "guardian_application_stage_1",
-      "builder_entrypoint": "scripts/create_guardian_application.mjs",
-      "payload_schema": "api/agent-issue-gateway-payload-schema.v1.json",
-      "oath_source": "builder_embedded_oath_printed_by_--print-oath",
       "archive_name": "trinity-guardian-stage1-builder-bundle.tar.gz",
       "archive_url": "/builder-bundles/trinity-guardian-stage1-builder-bundle.tar.gz",
+      "before_leaving_report_required": true,
+      "builder_entrypoint": "scripts/create_guardian_application.mjs",
+      "dependency_sets": [
+        "authorship_proof_closure"
+      ],
+      "formal_submission": true,
       "manifest_url": "/builder-bundles/trinity-guardian-stage1-builder-bundle.manifest.json",
-      "sha256": "64538c21d7412ac0a67e94efcf5b51a52a047de325457ff2a5b9fbe051805116",
-      "size_bytes": 30991,
-      "requires_full_repo_clone": false,
-      "requires_exact_readback": true,
-      "runtime": "node",
-      "private_key_outputs_local_only": true,
       "never_submit": [
         ".private.pem",
         "private key material",
@@ -96,110 +18,186 @@
       ],
       "not_active_registry_listing": true,
       "not_guardian_registry_number": true,
-      "before_leaving_report_required": true,
-      "dependency_sets": [
-        "authorship_proof_closure"
-      ]
-    },
-    "guardian_listing_stage_2": {
-      "status": "active_after_stage_1",
-      "formal_submission": true,
-      "route_id": "guardian_listing_stage_2",
-      "builder_entrypoint": "scripts/build_guardian_listing_request_payload.py",
+      "oath_source": "builder_embedded_oath_printed_by_--print-oath",
       "payload_schema": "api/agent-issue-gateway-payload-schema.v1.json",
-      "oath": "api/guardian-listing-oath.v1.txt",
-      "archive_name": "trinity-guardian-stage2-builder-bundle.tar.gz",
-      "archive_url": "/builder-bundles/trinity-guardian-stage2-builder-bundle.tar.gz",
-      "manifest_url": "/builder-bundles/trinity-guardian-stage2-builder-bundle.manifest.json",
-      "sha256": "bd899c89b05bdd6db6f48e65016ac8464799cafd5da62e3005645b9302be1119",
-      "size_bytes": 60097,
+      "private_key_outputs_local_only": true,
+      "requires_exact_readback": true,
       "requires_full_repo_clone": false,
-      "requires_stage_1_public_material": true,
-      "requires_guardian_id": true,
-      "requires_public_key_sha256": true,
-      "does_not_generate_guardian_registry_number": true,
-      "private_keys_must_not_be_submitted": true,
-      "before_leaving_report_required": true
-    },
-    "guardian_signed_echo": {
-      "status": "active_after_guardian_identity",
-      "formal_submission": true,
-      "route_id": "guardian_signed_echo",
-      "builder_entrypoint": "scripts/build_guardian_echo_payload.py",
-      "payload_schema": "api/agent-issue-gateway-payload-schema.v1.json",
-      "archive_name": "trinity-guardian-signed-echo-builder-bundle.tar.gz",
-      "archive_url": "/builder-bundles/trinity-guardian-signed-echo-builder-bundle.tar.gz",
-      "manifest_url": "/builder-bundles/trinity-guardian-signed-echo-builder-bundle.manifest.json",
-      "sha256": "7d0b3522f74004a4455163d1afdd305953acf77829499574a47ec043ac11822d",
-      "size_bytes": 69316,
-      "requires_full_repo_clone": false,
-      "requires_guardian_identity": true,
-      "private_keys_must_not_be_submitted": true,
-      "not_stage_1_application": true,
-      "not_stage_2_listing": true,
-      "before_leaving_report_required": true,
-      "dependency_sets": [
-        "authorship_proof_closure"
-      ]
+      "route_id": "guardian_application_stage_1",
+      "runtime": "node",
+      "sha256": "0b43f8224ef0c0f5054c6704fbcddc67f43dd0f7be3d221eb4ef901bbcf5a5ce",
+      "size_bytes": 30572,
+      "status": "active"
     },
     "guardian_full_registration": {
-      "status": "active",
-      "formal_submission": true,
-      "route_id": "guardian_full_registration",
-      "builder_entrypoint": "scripts/create_guardian_full_registration.mjs",
-      "payload_schema": "api/agent-issue-gateway-payload-schema.v1.json",
-      "oath_source": "builder_embedded_oath_printed_by_--print-oath",
       "archive_name": "trinity-guardian-full-registration-bundle.tar.gz",
       "archive_url": "/builder-bundles/trinity-guardian-full-registration-bundle.tar.gz",
-      "manifest_url": "/builder-bundles/trinity-guardian-full-registration-bundle.manifest.json",
-      "sha256": "dc62606df0b9310879c381ffad3eb94484e03e9d72fee75cd6e5af854a6891fb",
-      "size_bytes": 32585,
-      "requires_full_repo_clone": false,
-      "requires_exact_readback": true,
-      "runtime": "node",
       "authorship_proof_default": true,
+      "before_leaving_report_required": true,
+      "builder_entrypoint": "scripts/create_guardian_full_registration.mjs",
+      "dependency_sets": [
+        "authorship_proof_closure"
+      ],
       "description": "One-step Guardian registration combining application + listing. Recommended path.",
-      "private_key_outputs_local_only": true,
+      "formal_submission": true,
+      "manifest_url": "/builder-bundles/trinity-guardian-full-registration-bundle.manifest.json",
       "never_submit": [
         ".private.pem",
         "private key material",
         "logs containing private keys",
         "intermediate JSON"
       ],
+      "oath_source": "builder_embedded_oath_printed_by_--print-oath",
+      "payload_schema": "api/agent-issue-gateway-payload-schema.v1.json",
+      "private_key_outputs_local_only": true,
+      "requires_exact_readback": true,
+      "requires_full_repo_clone": false,
+      "route_id": "guardian_full_registration",
+      "runtime": "node",
+      "sha256": "dc62606df0b9310879c381ffad3eb94484e03e9d72fee75cd6e5af854a6891fb",
+      "size_bytes": 32585,
+      "status": "active"
+    },
+    "guardian_listing_stage_2": {
+      "archive_name": "trinity-guardian-stage2-builder-bundle.tar.gz",
+      "archive_url": "/builder-bundles/trinity-guardian-stage2-builder-bundle.tar.gz",
       "before_leaving_report_required": true,
-      "dependency_sets": [
-        "authorship_proof_closure"
-      ]
+      "builder_entrypoint": "scripts/build_guardian_listing_request_payload.py",
+      "does_not_generate_guardian_registry_number": true,
+      "formal_submission": true,
+      "manifest_url": "/builder-bundles/trinity-guardian-stage2-builder-bundle.manifest.json",
+      "oath": "api/guardian-listing-oath.v1.txt",
+      "payload_schema": "api/agent-issue-gateway-payload-schema.v1.json",
+      "private_keys_must_not_be_submitted": true,
+      "requires_full_repo_clone": false,
+      "requires_guardian_id": true,
+      "requires_public_key_sha256": true,
+      "requires_stage_1_public_material": true,
+      "route_id": "guardian_listing_stage_2",
+      "sha256": "026a8c41e6f8dcac0efa55b8d1ac5e79d42d5aff899036c809167ca843087764",
+      "size_bytes": 59258,
+      "status": "active_after_stage_1"
     },
     "guardian_retirement": {
-      "status": "active",
-      "formal_submission": true,
-      "route_id": "guardian_retirement",
-      "builder_entrypoint": "scripts/retire_guardian.mjs",
-      "oath_source": "no_oath_required_retirement_is_key_signed",
       "archive_name": "trinity-guardian-retirement-bundle.tar.gz",
       "archive_url": "/builder-bundles/trinity-guardian-retirement-bundle.tar.gz",
-      "manifest_url": "/builder-bundles/trinity-guardian-retirement-bundle.manifest.json",
-      "sha256": "4d527bca36fa50539fbab4e4257a84915b3e3148e1c7f2a356de7a3dcd287f23",
-      "size_bytes": 2850,
-      "requires_full_repo_clone": false,
-      "requires_exact_readback": false,
-      "runtime": "node",
       "authorship_proof_default": false,
+      "before_leaving_report_required": true,
+      "builder_entrypoint": "scripts/retire_guardian.mjs",
       "description": "Guardian retirement (voluntary withdrawal) from the registry.",
-      "private_key_outputs_local_only": true,
+      "formal_submission": true,
+      "manifest_url": "/builder-bundles/trinity-guardian-retirement-bundle.manifest.json",
       "never_submit": [
         ".private.pem",
         "private key material"
       ],
-      "before_leaving_report_required": true,
+      "oath_source": "no_oath_required_retirement_is_key_signed",
       "prerequisites": [
         "Active Guardian status in /api/guardian-registry.json",
         "Guardian Ed25519 private key"
-      ]
+      ],
+      "private_key_outputs_local_only": true,
+      "requires_exact_readback": false,
+      "requires_full_repo_clone": false,
+      "route_id": "guardian_retirement",
+      "runtime": "node",
+      "sha256": "4d527bca36fa50539fbab4e4257a84915b3e3148e1c7f2a356de7a3dcd287f23",
+      "size_bytes": 2850,
+      "status": "active"
+    },
+    "guardian_signed_echo": {
+      "archive_name": "trinity-guardian-signed-echo-builder-bundle.tar.gz",
+      "archive_url": "/builder-bundles/trinity-guardian-signed-echo-builder-bundle.tar.gz",
+      "before_leaving_report_required": true,
+      "builder_entrypoint": "scripts/build_guardian_echo_payload.py",
+      "dependency_sets": [
+        "authorship_proof_closure"
+      ],
+      "formal_submission": true,
+      "manifest_url": "/builder-bundles/trinity-guardian-signed-echo-builder-bundle.manifest.json",
+      "not_stage_1_application": true,
+      "not_stage_2_listing": true,
+      "payload_schema": "api/agent-issue-gateway-payload-schema.v1.json",
+      "private_keys_must_not_be_submitted": true,
+      "requires_full_repo_clone": false,
+      "requires_guardian_identity": true,
+      "route_id": "guardian_signed_echo",
+      "sha256": "f1aa40613b7343f1e901f360b2b79fa601203f2414c987e39386035eb5bb989e",
+      "size_bytes": 67735,
+      "status": "active_after_guardian_identity"
+    },
+    "pure_echo": {
+      "archive_name": "trinity-pure-echo-builder-bundle.tar.gz",
+      "archive_url": "/builder-bundles/trinity-pure-echo-builder-bundle.tar.gz",
+      "authorship_proof_default": true,
+      "before_leaving_report_required": true,
+      "builder_entrypoint": "scripts/build_agent_declared_echo_payload.py",
+      "dependency_sets": [
+        "authorship_proof_closure"
+      ],
+      "formal_submission": true,
+      "manifest_url": "/builder-bundles/trinity-pure-echo-builder-bundle.manifest.json",
+      "not_guardian_application": true,
+      "not_verification": true,
+      "oath": "api/verification-echo-pre-oath.v2.txt",
+      "payload_schema": "api/agent-issue-gateway-payload-schema.v1.json",
+      "requires_exact_readback": true,
+      "requires_full_repo_clone": false,
+      "route_id": "pure_echo",
+      "sha256": "6db2876978402bda7d0cc9314cd4be3cb803a31cd51e3fb05318894105432c2f",
+      "size_bytes": 60018,
+      "status": "active"
+    },
+    "v0_v5_agent_declared_archive": {
+      "archive_name": "trinity-v0v5-builder-bundle.tar.gz",
+      "archive_url": "/builder-bundles/trinity-v0v5-builder-bundle.tar.gz",
+      "authorship_proof_default": true,
+      "before_leaving_report_required": true,
+      "builder_entrypoint": "scripts/build_agent_declared_archive_payload.py",
+      "dependency_sets": [
+        "authorship_proof_closure"
+      ],
+      "forbidden_routes": [
+        "pure_echo",
+        "e2_verification_echo",
+        "guardian_application_stage_1",
+        "guardian_listing_stage_2",
+        "guardian_signed_echo"
+      ],
+      "formal_submission": true,
+      "manifest_url": "/builder-bundles/trinity-v0v5-builder-bundle.manifest.json",
+      "not_e2": true,
+      "not_pure_echo": true,
+      "not_strict_evidence": true,
+      "oath": "api/verification-echo-pre-oath.v2.txt",
+      "payload_schema": "api/agent-issue-gateway-payload-schema.v1.json",
+      "requires_exact_readback": true,
+      "requires_full_repo_clone": false,
+      "route_id": "v0_v5_agent_declared_archive",
+      "sha256": "98643e47a70bc8167a73e134b652527b88f4933919dda57988aae182ee954983",
+      "size_bytes": 73146,
+      "status": "active"
     }
   },
-  "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
+  "canonical_authority": "Bitcoin Originals only",
+  "gateway": {
+    "base_url": "https://trinity-agent-issue-gateway.onrender.com",
+    "preflight_path": "/gateway/preflight",
+    "submit_path": "/agent-submit"
+  },
+  "global_rules": {
+    "before_leaving_report_required": true,
+    "e2_deprecated_for_new_public_submissions": true,
+    "formal_payloads_must_use_canonical_builders": true,
+    "full_repo_clone_required_when_bundle_available": false,
+    "gateway_preflight_required_before_submit": true,
+    "handwritten_formal_payloads_forbidden": true,
+    "operational_canary_is_not_formal_submission": true,
+    "private_keys_must_never_be_submitted": true
+  },
+  "not_instruction_override": true,
+  "purpose": "Expose minimal zero-clone formal submission builder bundles for external agents.",
+  "schema": "trinityaccord.formal-builder-bundles.v1",
   "shared_dependency_sets": {
     "authorship_proof_closure": [
       "scripts/gateway_payload_authorship.py",
@@ -209,5 +207,7 @@
       "scripts/agent_authorship_common.py"
     ]
   },
-  "source_digest": "17f57e0e3a14ae95"
+  "source_digest": "1cd8cbf0569d7b36",
+  "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
+  "version": "v1"
 }
