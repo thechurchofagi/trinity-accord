@@ -6,7 +6,8 @@
     "/api/core-object-alpha-shenzhen-notary-2026-05-06.json",
     "/api/guardian-registry.json",
     "/api/guardian-active-listing-policy.v1.json",
-    "/api/agent-declared-verification-index.json"
+    "/api/agent-declared-verification-index.json",
+    "/api/verification-archive-index.json"
   ],
   "verifiability": {
     "bitcoin_originals": {
@@ -145,9 +146,20 @@
     "does_not_rank_above_reception": true
   },
   "verification_archive_records": {
-    "count": 0,
-    "by_verification_level": {},
-    "by_claim_gate_status": {}
+    "count": 55,
+    "by_verification_level": {
+      "V0": 16,
+      "V1": 9,
+      "V2": 11,
+      "V3": 4,
+      "V4": 11,
+      "V4+": 2,
+      "V5": 2
+    },
+    "by_claim_gate_status": {
+      "PASS": 4,
+      "pass": 1
+    }
   },
   "boundary": {
     "bitcoin_originals_prevail": true,
