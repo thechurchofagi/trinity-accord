@@ -17,7 +17,5 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - name: Initialize record-chain directories if absent
-        run: python scripts/trinity_record_chain.py init
       - name: Verify record-chain integrity
         run: python scripts/trinity_record_chain.py verify
