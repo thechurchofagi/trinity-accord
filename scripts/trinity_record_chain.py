@@ -642,6 +642,49 @@ def verify_genesis() -> list[str]:
     return errors
 
 
+
+
+def _verify_oath_in_record(obj: dict, path: str, errors: list[str]) -> None:
+    """Verify oath gate data in a persisted record. Does not require oath on old records."""
+    record_type = obj.get("record_type") or obj.get("type") or ""
+    if isinstance(record_type, str):
+        record_type = record_type.strip().lower()
+
+    # Skip non-formal types and historical imports
+    if record_type in AUTHORSHIP_EXEMPT_TYPES or record_type not in FORMAL_RECORD_TYPES:
+        return
+
+    # Check for raw readback_text in persisted records (must not exist)
+    _check_no_raw_readback(obj, path, errors, "")
+
+    # If oath block exists, verify internal consistency
+    oath = obj.get("submission_oath_verification")
+    if isinstance(oath, dict):
+        # Check required boolean declarations are present
+        required_bools = [
+            "oath_read", "participant_readback_provided", "readback_matches_canonical_oath",
+            "no_shortcut_oath_acknowledged", "oath_does_not_prove_subjective_understanding",
+            "oath_verifies_exact_readback_only", "not_authority", "not_governance",
+            "not_attestation", "not_amendment", "bitcoin_originals_prevail",
+        ]
+        for field in required_bools:
+            if oath.get(field) is not True:
+                errors.append(f"{path}: oath.{field} is not true")
+
+
+def _check_no_raw_readback(obj: Any, path: str, errors: list[str], prefix: str) -> None:
+    """Recursively verify no raw readback_text exists in persisted records."""
+    if isinstance(obj, dict):
+        for key, value in obj.items():
+            current = f"{prefix}.{key}" if prefix else key
+            if key == "readback_text" and isinstance(value, str) and value:
+                errors.append(f"{path}: raw readback_text found at {current} — must be redacted")
+            _check_no_raw_readback(value, path, errors, current)
+    elif isinstance(obj, list):
+        for i, item in enumerate(obj):
+            _check_no_raw_readback(item, path, errors, f"{prefix}[{i}]")
+
+
 def verify_native_records() -> list[str]:
     errors: list[str] = []
     records = sorted(RECORDS.glob("R-*.json"))
@@ -663,6 +706,8 @@ def verify_native_records() -> list[str]:
             require_authorship(obj)
         except Exception as exc:
             errors.append(f"{p}: {exc}")
+        # --- oath gate verification ---
+        _verify_oath_in_record(obj, p, errors)
         previous = obj.get("record_sha256")
     if CHAIN_TIP.exists():
         tip = read_json(CHAIN_TIP)

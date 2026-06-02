@@ -64,6 +64,10 @@ _GATEWAY_SCHEMA: dict[str, Any] = {
     "optional_submission_fields": ["authorship_proof", "metadata", "boundary_acknowledgement"],
     "boundary_acknowledgement_fields": 8,
     "context_readiness_path": "record_draft.context_readiness.declared_context_level",
+    "oath_gate": {
+        "required": True,
+        "policy_url": "/api/record-chain-oath-policy.v1.json",
+    },
 }
 
 
@@ -407,6 +411,7 @@ async def readiness() -> ReadinessResponse:
         token_configured=os.environ.get("TRINITY_GITHUB_TOKEN", "") != "",
         write_mode=info["write_mode"],
         max_submission_bytes=info["max_submission_bytes"],
+        oath_gate_mode=os.environ.get("TRINITY_OATH_GATE_MODE", "required"),
     )
 
 
@@ -576,6 +581,12 @@ async def submit(request: Request) -> SubmitResponse:
                 boundary=_build_boundary(body),
             )
         authorship_verified = True
+
+    # --- redact transient oath readback before persistence ---
+    from apps.record_chain_intake_gateway.gateway.validation import redact_transient_oath_readback
+    body = redact_transient_oath_readback(body)
+    # Re-extract draft after redaction
+    draft = body.get("record_draft") or body.get("draft") or {}
 
     # --- check for linked Guardian request ---
     has_linked_guardian = _has_linked_guardian_request(draft)

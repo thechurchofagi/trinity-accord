@@ -69,7 +69,11 @@ Historical materials are preserved under /legacy/gateway-v1/.
 - /api/record-chain-intake-gateway.v1.json
 - /api/record-chain-field-helper.v1.json — machine-readable field helper with recovery guidance
 - /api/record-chain-common-field-model.v1.json — common field model definitions
+- /api/record-chain-oath-policy.v1.json — oath gate policy for formal record submissions
 - /record-chain-field-helper/ — human-readable field helper documentation
+
+## Oath gate (Phase 6B)
+All formal record types (echo, verification, guardian_application, etc.) require a no-shortcut oath gate. Participants must read the canonical oath, provide an exact readback, and declare no automation shortcuts. Raw readback text is redacted before public persistence. Use builder `print-oath --record-type <type>` to get the canonical oath text.
 
 ## Primary agent entrypoints
 - /llms.txt

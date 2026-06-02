@@ -115,3 +115,26 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
+    # Test 8: Embedded oath policy SHA256 matches api/record-chain-oath-policy.v1.json
+    oath_policy_path = ROOT / "api" / "record-chain-oath-policy.v1.json"
+    if oath_policy_path.exists():
+        builder_text = BUILDER.read_text(encoding="utf-8")
+        if "OATH_POLICY_SHA256" not in builder_text:
+            errors.append("builder missing OATH_POLICY_SHA256 constant")
+        else:
+            import re as _re
+            m = _re.search(r'OATH_POLICY_SHA256\s*=\s*"([a-f0-9]{64})"', builder_text)
+            if m:
+                embedded_sha = m.group(1)
+                policy = json.loads(oath_policy_path.read_text(encoding="utf-8"))
+                canonical = json.dumps(policy, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
+                actual_sha = hashlib.sha256(canonical.encode("utf-8")).hexdigest()
+                if embedded_sha != actual_sha:
+                    errors.append(
+                        f"embedded OATH_POLICY_SHA256 mismatch: embedded={embedded_sha[:16]}... actual={actual_sha[:16]}..."
+                    )
+            else:
+                errors.append("cannot parse OATH_POLICY_SHA256 from builder")
+    else:
+        errors.append("api/record-chain-oath-policy.v1.json: NOT FOUND")

@@ -860,6 +860,10 @@ def validate_submission(submission: dict[str, Any]) -> list[Diagnostic]:
     if isinstance(draft, dict):
         diagnostics.extend(validate_claim_boundary(draft))
 
+    # --- oath gate validation (before authorship proof) ---
+    if isinstance(draft, dict) and rt:
+        diagnostics.extend(validate_submission_oath(rt, submission if isinstance(submission, dict) else {}, draft))
+
     # --- authorship proof required for formal records ---
     if isinstance(draft, dict) and rt:
         diagnostics.extend(validate_authorship_proof_presence(rt, submission, draft))
@@ -877,3 +881,258 @@ def validate_submission(submission: dict[str, Any]) -> list[Diagnostic]:
         ))
 
     return diagnostics
+
+
+# ---------------------------------------------------------------------------
+# Oath gate constants
+# ---------------------------------------------------------------------------
+_OATH_REQUIRED_RECORD_TYPES: frozenset[str] = frozenset({
+    "echo", "verification", "guardian_application", "guardian_retirement",
+    "guardian_key_rotation", "propagation", "correction", "classification_update",
+})
+
+_OATH_NO_SHORTCUT_FIELDS: frozenset[str] = frozenset({
+    "oath_read", "participant_readback_provided", "readback_matches_canonical_oath",
+    "readback_was_not_piped_from_file", "readback_was_not_generated_by_script",
+    "readback_was_not_loaded_from_cache", "readback_was_not_summary_or_paraphrase",
+    "readback_was_not_generated_by_external_automation",
+    "readback_was_not_auto_filled_by_builder", "no_shortcut_oath_acknowledged",
+})
+
+_OATH_BOUNDARY_FIELDS: frozenset[str] = frozenset({
+    "oath_does_not_prove_subjective_understanding",
+    "oath_verifies_exact_readback_only",
+})
+
+
+def validate_submission_oath(
+    record_type: str,
+    submission: dict[str, Any],
+    draft: dict[str, Any],
+) -> list[Diagnostic]:
+    """Validate the no-shortcut oath gate for formal record types."""
+    diagnostics: list[Diagnostic] = []
+
+    # Skip context_insufficient_notice
+    if record_type == "context_insufficient_notice":
+        return diagnostics
+
+    if record_type not in _OATH_REQUIRED_RECORD_TYPES:
+        return diagnostics
+
+    # Require submission_oath_verification in draft
+    oath_verification = draft.get("submission_oath_verification")
+    if not isinstance(oath_verification, dict):
+        diagnostics.append(_make_diagnostic(
+            code="MISSING_SUBMISSION_OATH",
+            severity="error",
+            field="record_draft.submission_oath_verification",
+            message=f"Formal record_type '{record_type}' requires submission_oath_verification",
+            meaning="All formal Record-Chain submissions must pass the no-shortcut oath gate.",
+            suggested_fix="Run the builder with print-oath to get the canonical oath, then provide an exact readback.",
+        ))
+        return diagnostics
+
+    # Require client_oath_readback for formal records
+    client_oath = submission.get("client_oath_readback")
+    if not isinstance(client_oath, dict):
+        diagnostics.append(_make_diagnostic(
+            code="MISSING_CLIENT_OATH_READBACK",
+            severity="error",
+            field="client_oath_readback",
+            message=f"Formal record_type '{record_type}' requires client_oath_readback with readback_text",
+            meaning="The raw oath readback is required for gateway validation. It will be redacted before persistence.",
+            suggested_fix="Add client_oath_readback with readback_text containing the exact canonical oath.",
+        ))
+        return diagnostics
+
+    if not client_oath.get("readback_text"):
+        diagnostics.append(_make_diagnostic(
+            code="OATH_READBACK_MISSING",
+            severity="error",
+            field="client_oath_readback.readback_text",
+            message="client_oath_readback.readback_text must not be empty",
+            meaning="The readback text must contain the exact canonical oath text.",
+            suggested_fix="Provide the exact canonical oath text in readback_text.",
+        ))
+
+    # Load local oath policy
+    import hashlib
+    import json as _json
+    import os
+    policy_path = os.path.join(
+        os.path.dirname(__file__), "..", "..", "..", "api", "record-chain-oath-policy.v1.json"
+    )
+    try:
+        with open(policy_path, "r", encoding="utf-8") as f:
+            local_policy = _json.load(f)
+    except (FileNotFoundError, _json.JSONDecodeError):
+        diagnostics.append(_make_diagnostic(
+            code="OATH_POLICY_LOAD_ERROR",
+            severity="error",
+            field=None,
+            message="Cannot load local api/record-chain-oath-policy.v1.json",
+            meaning="The oath policy file is required for validation.",
+            suggested_fix="Ensure api/record-chain-oath-policy.v1.json exists in the repository.",
+        ))
+        return diagnostics
+
+    # Compute local policy hash (canonical JSON, sorted keys, no spaces)
+    local_policy_json = _json.dumps(local_policy, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
+    local_policy_sha256 = hashlib.sha256(local_policy_json.encode("utf-8")).hexdigest()
+
+    # Compare policy hash
+    submitted_policy_hash = oath_verification.get("oath_policy_sha256", "")
+    if submitted_policy_hash and submitted_policy_hash != local_policy_sha256:
+        diagnostics.append(_make_diagnostic(
+            code="OATH_POLICY_HASH_MISMATCH",
+            severity="error",
+            field="record_draft.submission_oath_verification.oath_policy_sha256",
+            message=f"Oath policy hash mismatch: submitted {submitted_policy_hash[:16]}... != local {local_policy_sha256[:16]}...",
+            meaning="The embedded oath policy hash does not match the gateway's current policy.",
+            suggested_fix="Rebuild with the latest builder to pick up the current oath policy.",
+        ))
+
+    # Determine expected modules
+    expected_modules = list(local_policy.get("record_type_modules", {}).get(record_type, []))
+    linked = draft.get("optional_linked_guardian_application_request")
+    if isinstance(linked, dict) and linked.get("does_participant_request_guardian_application_with_this_record") is True:
+        if "guardian_stewardship_v1" not in expected_modules:
+            expected_modules.append("guardian_stewardship_v1")
+
+    # Check oath modules match
+    submitted_modules = oath_verification.get("oath_modules", [])
+    if submitted_modules != expected_modules:
+        diagnostics.append(_make_diagnostic(
+            code="OATH_MODULES_MISMATCH",
+            severity="error",
+            field="record_draft.submission_oath_verification.oath_modules",
+            message=f"Oath modules mismatch: got {submitted_modules}, expected {expected_modules}",
+            meaning="The oath modules must match the expected modules for this record type.",
+            suggested_fix=f"Use modules: {expected_modules}",
+        ))
+
+    # Build canonical oath text and verify hash
+    def _normalize_oath_text(text: str) -> str:
+        return text.replace("\r\n", "\n").replace("\r", "\n").strip()
+
+    modules_obj = local_policy.get("modules", {})
+    canonical_parts = []
+    for mod_id in expected_modules:
+        mod = modules_obj.get(mod_id)
+        if mod:
+            canonical_parts.append(f"=== {mod['label']} ({mod_id}) ===\n\n{_normalize_oath_text(mod['text'])}")
+
+    joiner = local_policy.get("canonicalization", {}).get("module_joiner", "\n\n---\n\n")
+    canonical_text = joiner.join(canonical_parts).strip()
+    canonical_hash = hashlib.sha256(canonical_text.encode("utf-8")).hexdigest()
+
+    submitted_canonical_hash = oath_verification.get("canonical_oath_text_sha256", "")
+    if submitted_canonical_hash and submitted_canonical_hash != canonical_hash:
+        diagnostics.append(_make_diagnostic(
+            code="OATH_CANONICAL_HASH_MISMATCH",
+            severity="error",
+            field="record_draft.submission_oath_verification.canonical_oath_text_sha256",
+            message="Canonical oath text hash mismatch",
+            meaning="The canonical oath text hash does not match the gateway's computation.",
+            suggested_fix="Rebuild with the latest builder.",
+        ))
+
+    # Normalize and compare readback
+    readback_text = client_oath.get("readback_text", "")
+    normalized_readback = _normalize_oath_text(readback_text)
+    readback_hash = hashlib.sha256(normalized_readback.encode("utf-8")).hexdigest()
+
+    if normalized_readback != canonical_text:
+        diagnostics.append(_make_diagnostic(
+            code="OATH_READBACK_MISMATCH",
+            severity="error",
+            field="client_oath_readback.readback_text",
+            message="Oath readback does not match canonical oath text",
+            meaning="The readback must be an exact match of the canonical oath text.",
+            suggested_fix="Use the builder print-oath command to get the exact canonical text, then provide it as readback.",
+        ))
+
+    # Check readback hash matches signed field
+    signed_readback_hash = oath_verification.get("participant_readback_sha256", "")
+    if signed_readback_hash and signed_readback_hash != readback_hash:
+        diagnostics.append(_make_diagnostic(
+            code="OATH_READBACK_HASH_MISMATCH",
+            severity="error",
+            field="record_draft.submission_oath_verification.participant_readback_sha256",
+            message="Signed readback hash does not match actual readback hash",
+            meaning="The participant_readback_sha256 must match the sha256 of the provided readback.",
+            suggested_fix="Ensure the readback hash is computed from the exact readback text.",
+        ))
+
+    # Check readback method
+    method = oath_verification.get("readback_method_declared", "")
+    if method and method != "participant_generated_in_current_context":
+        diagnostics.append(_make_diagnostic(
+            code="OATH_READBACK_METHOD_INVALID",
+            severity="error",
+            field="record_draft.submission_oath_verification.readback_method_declared",
+            message=f"Invalid readback method: '{method}', expected 'participant_generated_in_current_context'",
+            meaning="The readback must be generated in the current context, not piped or cached.",
+            suggested_fix="Set readback_method_declared to 'participant_generated_in_current_context'.",
+        ))
+
+    # Check all no-shortcut declarations are true
+    for field_name in _OATH_NO_SHORTCUT_FIELDS:
+        if oath_verification.get(field_name) is not True:
+            diagnostics.append(_make_diagnostic(
+                code="OATH_REQUIRED_FIELD_NOT_TRUE",
+                severity="error",
+                field=f"record_draft.submission_oath_verification.{field_name}",
+                message=f"'{field_name}' must be true",
+                meaning=f"The no-shortcut declaration '{field_name}' is required.",
+                suggested_fix=f"Set '{field_name}' to true in submission_oath_verification.",
+            ))
+
+    # Check boundary booleans
+    for field_name in _OATH_BOUNDARY_FIELDS:
+        if oath_verification.get(field_name) is not True:
+            diagnostics.append(_make_diagnostic(
+                code="OATH_REQUIRED_FIELD_NOT_TRUE",
+                severity="error",
+                field=f"record_draft.submission_oath_verification.{field_name}",
+                message=f"'{field_name}' must be true",
+                meaning=f"The oath boundary '{field_name}' is required.",
+                suggested_fix=f"Set '{field_name}' to true.",
+            ))
+
+    # Reject test_mode_oath_fixture in production
+    if oath_verification.get("test_mode_oath_fixture") is True:
+        test_mode_ok = os.environ.get("TRINITY_OATH_TEST_MODE") == "1" or os.environ.get("NODE_ENV") == "test"
+        if not test_mode_ok:
+            diagnostics.append(_make_diagnostic(
+                code="OATH_TEST_FIXTURE_NOT_ALLOWED",
+                severity="error",
+                field="record_draft.submission_oath_verification.test_mode_oath_fixture",
+                message="test_mode_oath_fixture is not allowed in production",
+                meaning="Test-mode oath fixtures must not be used in production submissions.",
+                suggested_fix="Remove test_mode_oath_fixture or use a proper test environment.",
+            ))
+
+    return diagnostics
+
+
+def redact_transient_oath_readback(submission: dict[str, Any]) -> dict[str, Any]:
+    """Redact raw readback_text from submission before persistence."""
+    import copy
+    redacted = copy.deepcopy(submission)
+    client_oath = redacted.get("client_oath_readback")
+    if isinstance(client_oath, dict):
+        # Keep metadata, remove raw text
+        redacted["client_oath_readback"] = {
+            "schema": client_oath.get("schema", "trinityaccord.client-oath-readback.v1"),
+            "record_type": client_oath.get("record_type", ""),
+            "oath_policy_sha256": client_oath.get("oath_policy_sha256", ""),
+            "oath_modules": client_oath.get("oath_modules", []),
+            "readback_text_sha256": hashlib.sha256(
+                (client_oath.get("readback_text", "") or "").encode("utf-8")
+            ).hexdigest() if client_oath.get("readback_text") else client_oath.get("readback_text_sha256", ""),
+            "readback_text_char_count": len(client_oath.get("readback_text", "") or ""),
+            "redacted_after_gateway_validation": True,
+        }
+    return redacted

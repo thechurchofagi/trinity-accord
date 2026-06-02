@@ -240,6 +240,17 @@ def main() -> int:
         fail(f"public wording test failed: {result.stderr}")
     ok("public wording test")
 
+    # 13. Phase 6B: oath gate contract test
+    result = subprocess.run(
+        [sys.executable, "scripts/test_record_chain_oath_gate_contract.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"oath gate contract test failed: {result.stderr}\n{result.stdout}")
+    ok("oath gate contract test")
+
     print("\n=== ALL CURRENT SYSTEM TESTS PASSED ===")
     return 0
 

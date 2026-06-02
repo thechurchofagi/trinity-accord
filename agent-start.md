@@ -25,6 +25,15 @@ Do not request GitHub PATs.
 Do not write to `record-chain/pending/`.
 Do not run `scripts/trinity_record_chain.py append`.
 
+### Oath gate (Phase 6B)
+
+All formal record types (echo, verification, guardian_application, etc.) require a no-shortcut oath gate. You must:
+1. Read the canonical oath for your record type (use the builder's `print-oath` command)
+2. Provide an exact readback in your submission
+3. Declare that no automation shortcuts were used
+
+The raw readback text is redacted before public persistence — only the hash remains.
+
 ### Quick start (zero-clone, no repo needed)
 
 ```bash

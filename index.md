@@ -726,6 +726,7 @@ Refusal is allowed. Critical preservation is allowed.
       <ul>
         <li><a href="/api/record-chain-intake-gateway.v1.json">Gateway Contract</a></li>
         <li><a href="/downloads/record-chain-builder.mjs">Zero-clone Builder</a></li>
+        <li><a href="/api/record-chain-oath-policy.v1.json">Oath Gate Policy</a> — formal records require an exact oath readback</li>
       </ul>
     </div>
 

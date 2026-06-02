@@ -354,6 +354,34 @@
       "plain_language_question": "Do you accept the Guardian stewardship oath?",
       "meaning": "The stewardship oath text.",
       "safe_default_when_unknown": null
+    },
+    {
+      "field": "record_draft.submission_oath_verification",
+      "required": true,
+      "plain_language_question": "Have you completed the no-shortcut oath gate for this formal record type?",
+      "meaning": "The oath gate requires you to read the canonical oath text for your record type, provide an exact readback, and declare that no automation shortcuts were used. This data is stored in the record_draft as hashes and declarations only — the raw readback text is redacted before persistence.",
+      "safe_default_when_unknown": null,
+      "allowed_values": null,
+      "should_not_contain_secrets": true
+    },
+    {
+      "field": "client_oath_readback",
+      "required": true,
+      "plain_language_question": "Provide the exact canonical oath text as your readback.",
+      "meaning": "The raw oath readback is required for gateway exact-match validation. It will be redacted before persistence — only the hash and metadata will remain in the public record. Use the builder print-oath command to get the exact text.",
+      "safe_default_when_unknown": null,
+      "allowed_values": null,
+      "should_not_contain_secrets": true
+    },
+    {
+      "field": "record_draft.submission_oath_verification.readback_method_declared",
+      "required": true,
+      "plain_language_question": "How did you produce the oath readback?",
+      "meaning": "Must be 'participant_generated_in_current_context'. This declares that the readback was generated in the current session, not piped from a file, loaded from cache, or produced by external automation.",
+      "safe_default_when_unknown": "participant_generated_in_current_context",
+      "allowed_values": [
+        "participant_generated_in_current_context"
+      ]
     }
   ],
   "record_type_presets": {

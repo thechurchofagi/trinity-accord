@@ -88,6 +88,7 @@ class ReadinessResponse(BaseModel):
     token_configured: bool
     write_mode: str
     max_submission_bytes: int
+    oath_gate_mode: str = Field("required", description="Oath gate enforcement mode: required | warn | disabled")
 
 
 class PreflightResponse(BaseModel):

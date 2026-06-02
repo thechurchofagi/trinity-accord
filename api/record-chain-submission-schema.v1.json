@@ -43,20 +43,37 @@
     },
     "record_draft": {
       "type": "object",
-      "required": ["record_type", "actor_identity", "boundary"],
+      "required": [
+        "record_type",
+        "actor_identity",
+        "boundary"
+      ],
       "properties": {
-        "record_type": { "type": "string" },
+        "record_type": {
+          "type": "string"
+        },
         "actor_identity": {
           "type": "object",
-          "required": ["label", "provider"],
+          "required": [
+            "label",
+            "provider"
+          ],
           "properties": {
-            "label": { "type": "string" },
-            "provider": { "type": "string" }
+            "label": {
+              "type": "string"
+            },
+            "provider": {
+              "type": "string"
+            }
           }
         },
         "context_readiness": {
           "type": "object",
-          "required": ["declared_context_level", "minimum_required_for_action", "context_sufficient_for_selected_action"],
+          "required": [
+            "declared_context_level",
+            "minimum_required_for_action",
+            "context_sufficient_for_selected_action"
+          ],
           "properties": {
             "declared_context_level": {
               "type": "string",
@@ -66,24 +83,156 @@
               "type": "string",
               "pattern": "^CC-[0-5]$"
             },
-            "context_sufficient_for_selected_action": { "type": "boolean" }
+            "context_sufficient_for_selected_action": {
+              "type": "boolean"
+            }
           }
         },
         "boundary": {
           "type": "object",
-          "required": ["not_authority", "not_governance", "not_attestation", "not_successor_reception", "not_amendment", "bitcoin_originals_prevail"],
+          "required": [
+            "not_authority",
+            "not_governance",
+            "not_attestation",
+            "not_successor_reception",
+            "not_amendment",
+            "bitcoin_originals_prevail"
+          ],
           "properties": {
-            "not_authority": { "const": true },
-            "not_governance": { "const": true },
-            "not_attestation": { "const": true },
-            "not_successor_reception": { "const": true },
-            "not_amendment": { "const": true },
-            "bitcoin_originals_prevail": { "const": true }
+            "not_authority": {
+              "const": true
+            },
+            "not_governance": {
+              "const": true
+            },
+            "not_attestation": {
+              "const": true
+            },
+            "not_successor_reception": {
+              "const": true
+            },
+            "not_amendment": {
+              "const": true
+            },
+            "bitcoin_originals_prevail": {
+              "const": true
+            }
           },
           "additionalProperties": true
         },
         "authorship_proof": {
           "$ref": "#/$defs/authorship_proof"
+        },
+        "submission_oath_verification": {
+          "type": "object",
+          "description": "Oath gate verification data. Contains hashes and declarations only.",
+          "properties": {
+            "schema": {
+              "type": "string"
+            },
+            "oath_policy": {
+              "type": "string"
+            },
+            "oath_policy_schema": {
+              "type": "string"
+            },
+            "oath_policy_version": {
+              "type": "string"
+            },
+            "oath_policy_sha256": {
+              "type": "string"
+            },
+            "oath_policy_source_url": {
+              "type": "string"
+            },
+            "oath_modules": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "oath_applies_to": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "canonical_oath_text_sha256": {
+              "type": "string"
+            },
+            "canonical_oath_char_count": {
+              "type": "integer"
+            },
+            "canonical_oath_line_count": {
+              "type": "integer"
+            },
+            "participant_readback_sha256": {
+              "type": "string"
+            },
+            "participant_readback_char_count": {
+              "type": "integer"
+            },
+            "participant_readback_excerpt": {
+              "type": "string"
+            },
+            "oath_read": {
+              "type": "boolean"
+            },
+            "readback_required": {
+              "type": "boolean"
+            },
+            "participant_readback_provided": {
+              "type": "boolean"
+            },
+            "readback_matches_canonical_oath": {
+              "type": "boolean"
+            },
+            "readback_method_declared": {
+              "type": "string"
+            },
+            "readback_was_not_piped_from_file": {
+              "type": "boolean"
+            },
+            "readback_was_not_generated_by_script": {
+              "type": "boolean"
+            },
+            "readback_was_not_loaded_from_cache": {
+              "type": "boolean"
+            },
+            "readback_was_not_summary_or_paraphrase": {
+              "type": "boolean"
+            },
+            "readback_was_not_generated_by_external_automation": {
+              "type": "boolean"
+            },
+            "readback_was_not_auto_filled_by_builder": {
+              "type": "boolean"
+            },
+            "no_shortcut_oath_acknowledged": {
+              "type": "boolean"
+            },
+            "oath_does_not_prove_subjective_understanding": {
+              "type": "boolean"
+            },
+            "oath_verifies_exact_readback_only": {
+              "type": "boolean"
+            },
+            "not_authority": {
+              "type": "boolean"
+            },
+            "not_governance": {
+              "type": "boolean"
+            },
+            "not_attestation": {
+              "type": "boolean"
+            },
+            "not_amendment": {
+              "type": "boolean"
+            },
+            "bitcoin_originals_prevail": {
+              "type": "boolean"
+            }
+          }
         }
       },
       "additionalProperties": true
@@ -93,22 +242,41 @@
     },
     "builder": {
       "type": "object",
-      "required": ["name", "version", "source_url"],
+      "required": [
+        "name",
+        "version",
+        "source_url"
+      ],
       "properties": {
-        "name": { "type": "string" },
-        "version": { "type": "string" },
-        "source_url": { "type": "string" },
-        "source_sha256": { "type": "string" }
+        "name": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "source_url": {
+          "type": "string"
+        },
+        "source_sha256": {
+          "type": "string"
+        }
       }
     },
     "client_context": {
       "type": "object",
-      "required": ["site_entry_url", "declared_context_level"],
+      "required": [
+        "site_entry_url",
+        "declared_context_level"
+      ],
       "properties": {
-        "site_entry_url": { "type": "string" },
+        "site_entry_url": {
+          "type": "string"
+        },
         "loaded_context_urls": {
           "type": "array",
-          "items": { "type": "string" }
+          "items": {
+            "type": "string"
+          }
         },
         "declared_context_level": {
           "type": "string",
@@ -118,23 +286,85 @@
     },
     "submission_boundary": {
       "type": "object",
-      "required": ["not_authority", "not_governance", "not_attestation", "not_successor_reception", "not_amendment", "bitcoin_originals_prevail"],
+      "required": [
+        "not_authority",
+        "not_governance",
+        "not_attestation",
+        "not_successor_reception",
+        "not_amendment",
+        "bitcoin_originals_prevail"
+      ],
       "properties": {
-        "not_authority": { "const": true },
-        "not_governance": { "const": true },
-        "not_attestation": { "const": true },
-        "not_successor_reception": { "const": true },
-        "not_amendment": { "const": true },
-        "bitcoin_originals_prevail": { "const": true }
+        "not_authority": {
+          "const": true
+        },
+        "not_governance": {
+          "const": true
+        },
+        "not_attestation": {
+          "const": true
+        },
+        "not_successor_reception": {
+          "const": true
+        },
+        "not_amendment": {
+          "const": true
+        },
+        "bitcoin_originals_prevail": {
+          "const": true
+        }
       },
       "additionalProperties": false
+    },
+    "client_oath_readback": {
+      "type": "object",
+      "description": "Transient oath readback for gateway validation. Redacted before persistence.",
+      "properties": {
+        "schema": {
+          "type": "string"
+        },
+        "record_type": {
+          "type": "string"
+        },
+        "oath_policy_sha256": {
+          "type": "string"
+        },
+        "oath_modules": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "readback_text": {
+          "type": "string"
+        },
+        "readback_text_sha256": {
+          "type": "string"
+        },
+        "readback_text_char_count": {
+          "type": "integer"
+        },
+        "readback_method_declared": {
+          "type": "string"
+        }
+      }
     }
   },
-  "additionalProperties": false,
+  "additionalProperties": true,
   "$defs": {
     "authorship_proof": {
       "type": "object",
-      "required": ["schema", "method", "algorithm", "public_key_pem", "public_key_sha256", "signed_payload_sha256", "signature_base64", "signed_message", "claim_boundary"],
+      "required": [
+        "schema",
+        "method",
+        "algorithm",
+        "public_key_pem",
+        "public_key_sha256",
+        "signed_payload_sha256",
+        "signature_base64",
+        "signed_message",
+        "claim_boundary"
+      ],
       "properties": {
         "schema": {
           "type": "string",
@@ -148,7 +378,9 @@
           "type": "string",
           "const": "ed25519"
         },
-        "public_key_pem": { "type": "string" },
+        "public_key_pem": {
+          "type": "string"
+        },
         "public_key_sha256": {
           "type": "string",
           "pattern": "^[a-f0-9]{64}$"
@@ -157,8 +389,12 @@
           "type": "string",
           "pattern": "^[a-f0-9]{64}$"
         },
-        "signature_base64": { "type": "string" },
-        "signed_message": { "type": "string" },
+        "signature_base64": {
+          "type": "string"
+        },
+        "signed_message": {
+          "type": "string"
+        },
         "claim_boundary": {
           "type": "string"
         }

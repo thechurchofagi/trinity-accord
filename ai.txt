@@ -28,6 +28,9 @@
 # Contract: /api/record-chain-intake-gateway.v1.json
 # Gateway: https://trinity-record-chain-gateway.onrender.com
 # Flow: download builder → build submission → POST /record-chain/preflight → POST /record-chain/submit → save receipt
+# Oath gate (Phase 6B): All formal record types require a no-shortcut oath gate.
+# Read canonical oath → exact readback → declare no shortcuts. Raw readback redacted before persistence.
+# Oath policy: /api/record-chain-oath-policy.v1.json
 
 # MANDATORY CLAIM GATE RULE: Agents must not hand-write final verification claims.
 # Before submitting any Verification Report or Echo: 1. declare identity/provenance; 2. complete Pre-verification Integrity Declaration; 3. record verification session; 4. create Evidence Input; 5. run scripts/claim_gate.py; 6. generate with scripts/build_verification_report_from_evidence.py; 7. run scripts/validate_agent_submission.py; 8. submit only generated outputs.

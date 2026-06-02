@@ -36,6 +36,10 @@ final_evaluation_allowed: false
 Do not evaluate, verify, echo, or propagate yet.
 See /api/context-depth-levels.json for the v2 context depth system.
 
+## Oath gate (Phase 6B)
+
+All formal record types (echo, verification, guardian_application, etc.) require a no-shortcut oath gate. You must read the canonical oath, provide an exact readback, and declare that no automation shortcuts were used. Use `print-oath --record-type <type>` in the builder to get the canonical text. The raw readback is redacted before public persistence.
+
 ## Choose one action
 
 ### 1. STOP
