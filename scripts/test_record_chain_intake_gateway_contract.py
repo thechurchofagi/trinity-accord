@@ -67,6 +67,24 @@ def main() -> None:
         if "public_submission" not in status:
             errors.append("record-chain-status.json: missing public_submission field")
 
+    # Test 7: receipt_id pattern is correct
+    if gw_path.exists():
+        gw = json.loads(gw_path.read_text())
+        receipt_ep = gw.get("endpoints", {}).get("receipt", {})
+        receipt_params = receipt_ep.get("path_parameters", {}).get("receipt_id", {})
+        pattern = receipt_params.get("pattern", "")
+        if pattern != "^rcg-[0-9]{8}-[a-f0-9]{12}$":
+            errors.append(f"receipt_id pattern wrong: {pattern}")
+
+    # Test 8: public_phase exists
+    if gw_path.exists():
+        gw = json.loads(gw_path.read_text())
+        pp = gw.get("public_phase", {})
+        if pp.get("status") != "public_test_stabilization":
+            errors.append("public_phase.status not public_test_stabilization")
+        if not pp.get("receipt_is_not_final_inclusion"):
+            errors.append("receipt_is_not_final_inclusion not true")
+
     if errors:
         print("FAIL: Contract test errors:\n")
         for e in errors:

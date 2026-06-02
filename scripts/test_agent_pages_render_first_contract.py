@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+import json
 import re
 from pathlib import Path
 
@@ -31,6 +32,10 @@ OLD_GATEWAY_TERMS = [
     "/external-agent-copy-paste-examples/",
     "external-agent-copy-paste-examples",
     "Gateway v1",
+    "scripts/build_agent_declared_archive_payload.py",
+    "scripts/build_agent_declared_echo_payload.py",
+    "scripts/create_guardian_application.mjs",
+    "scripts/build_guardian_listing_request_payload.py",
 ]
 
 # These words make an old Gateway mention acceptable.
@@ -169,6 +174,27 @@ def main() -> int:
 
     if not found:
         fail("No agent-facing pages found to test")
+
+    # Check JSON API files for old gateway references
+    JSON_CANDIDATES = [
+        "api/agent-first-contact.json",
+        "api/agent-start.v1.json",
+        "api/agent-start.v2.json",
+    ]
+    for jf in JSON_CANDIDATES:
+        jp = ROOT / jf
+        if not jp.exists():
+            continue
+        try:
+            jdata = json.loads(jp.read_text(encoding="utf-8"))
+            jtext = json.dumps(jdata, ensure_ascii=False)
+        except json.JSONDecodeError:
+            continue
+        for term in OLD_GATEWAY_TERMS:
+            if term.lower() in jtext.lower():
+                # Check if it's in a retired/legacy context
+                if "retired" not in jtext.lower() and "historical" not in jtext.lower() and "legacy" not in jtext.lower():
+                    fail(f"{jf}: old Gateway term in active context: {term}")
 
     print("PASS: agent pages are Render-first; old Gateway mentions are only historical/negative")
     return 0

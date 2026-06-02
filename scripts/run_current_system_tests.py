@@ -82,6 +82,17 @@ def main() -> int:
         fail("record-chain-status does not reference record-chain")
     ok("record-chain status API")
 
+    # 2b. Public test phase disclosure
+    result = subprocess.run(
+        [sys.executable, "scripts/test_public_test_phase_disclosure.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"public test phase disclosure test failed: {result.stderr}\n{result.stdout}")
+    ok("public test phase disclosure")
+
     # 3. gateway-v1-legacy-status.json marks historical archive only
     legacy = load_json("api/gateway-v1-legacy-status.json")
     legacy_text = json.dumps(legacy, ensure_ascii=False).lower()
