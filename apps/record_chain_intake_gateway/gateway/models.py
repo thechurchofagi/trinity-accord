@@ -20,6 +20,26 @@ class Diagnostic(BaseModel):
     severity: str = Field(..., description="error | warning | info")
     field: str | None = Field(None, description="Field path that triggered this diagnostic")
     message: str = Field(..., description="Human-readable explanation")
+    meaning: str | None = Field(None, description="Extended explanation of what this diagnostic means")
+    suggested_fix: str | None = Field(None, description="Suggested remediation step")
+    help_url: str | None = Field(None, description="URL to documentation for this diagnostic code")
+    retry_allowed: bool = Field(True, description="Whether retrying with corrections is allowed")
+
+
+# ---------------------------------------------------------------------------
+# Agent recovery guidance
+# ---------------------------------------------------------------------------
+
+class AgentRecovery(BaseModel):
+    """Machine-readable recovery guidance for agents after a failed preflight."""
+
+    should_retry: bool = Field(..., description="Whether the agent should retry")
+    recommended_next_step: str = Field(..., description="Human-readable next step recommendation")
+    helper_url: str | None = Field(None, description="URL to helper documentation")
+    human_readable_helper_url: str | None = Field(None, description="Human-readable version of helper_url")
+    builder_doctor_command: str | None = Field(None, description="CLI command to diagnose the issue")
+    builder_error_help_command: str | None = Field(None, description="CLI command for error-specific help")
+    requires_human_attention: bool = Field(False, description="Whether a human must review this issue")
 
 
 # ---------------------------------------------------------------------------
@@ -84,6 +104,7 @@ class PreflightResponse(BaseModel):
     gateway_runtime: dict[str, Any] = Field(default_factory=dict)
     gateway_schema: dict[str, Any] = Field(default_factory=dict)
     boundary: dict[str, bool] = Field(default_factory=dict)
+    agent_recovery: AgentRecovery | None = None
 
     @computed_field  # type: ignore[prop-decorator]
     @property
@@ -137,6 +158,7 @@ class SubmitResponse(BaseModel):
     diagnostics: list[Diagnostic] = Field(default_factory=list)
     warnings: list[str] = Field(default_factory=list)
     boundary: dict[str, bool] = Field(default_factory=dict)
+    created_pending_records: list[str] = Field(default_factory=list)
 
     @computed_field  # type: ignore[prop-decorator]
     @property

@@ -20,6 +20,7 @@ from apps.record_chain_intake_gateway.gateway.authorship import strip_authorship
 from apps.record_chain_intake_gateway.gateway.canonical import canonical_dumps, sha256_canonical_json
 from apps.record_chain_intake_gateway.gateway.github_adapter import get_file_sha, get_file_text, put_file
 from apps.record_chain_intake_gateway.gateway.models import (
+    AgentRecovery,
     Diagnostic,
     ErrorResponse,
     PreflightResponse,
@@ -151,13 +152,91 @@ def _build_boundary(submission: dict[str, Any]) -> dict[str, bool]:
     return {}
 
 
-def _diagnostics_from_errors(errors: list[str], base_code: str = "VALIDATION") -> list[Diagnostic]:
-    """Convert a list of error strings into Diagnostic objects."""
+def _diagnostics_from_errors(errors: list[str | Diagnostic]) -> list[Diagnostic]:
+    """Convert a list of error strings or Diagnostic objects into Diagnostic objects.
+
+    If items are already Diagnostic objects, pass them through directly.
+    """
     diagnostics: list[Diagnostic] = []
-    for i, msg in enumerate(errors):
-        code = f"{base_code}_{i:03d}"
-        diagnostics.append(Diagnostic(code=code, severity="error", message=msg))
+    for i, item in enumerate(errors):
+        if isinstance(item, Diagnostic):
+            diagnostics.append(item)
+        else:
+            code = f"VALIDATION_{i:03d}"
+            diagnostics.append(Diagnostic(code=code, severity="error", message=str(item)))
     return diagnostics
+
+
+def _build_agent_recovery(diagnostics: list[Diagnostic]) -> AgentRecovery:
+    """Build agent recovery guidance from diagnostics."""
+    error_codes = [d.code for d in diagnostics if d.severity == "error"]
+    has_security = any(c.startswith("SECURITY") for c in error_codes)
+    has_privacy = any("PRIVACY" in c for c in error_codes)
+
+    if has_security or has_privacy:
+        return AgentRecovery(
+            should_retry=False,
+            recommended_next_step="This submission contains security or privacy violations that cannot be retried automatically. A human must review and correct the submission.",
+            helper_url=f"{_GATEWAY_BASE_URL}/docs/security-violations" if _GATEWAY_BASE_URL else None,
+            human_readable_helper_url="Trinity Accord Security Documentation",
+            requires_human_attention=True,
+        )
+
+    # Check if all diagnostics are retryable
+    all_retryable = all(d.retry_allowed for d in diagnostics if d.severity == "error")
+
+    if all_retryable:
+        codes_summary = ", ".join(sorted(set(error_codes)))
+        return AgentRecovery(
+            should_retry=True,
+            recommended_next_step=f"Fix the validation errors ({codes_summary}) and resubmit. Each diagnostic includes a suggested_fix and help_url.",
+            helper_url=f"{_GATEWAY_BASE_URL}/docs/validation-errors" if _GATEWAY_BASE_URL else None,
+            human_readable_helper_url="Trinity Accord Validation Error Reference",
+            builder_doctor_command="trinity-doctor validate",
+            builder_error_help_command=f"trinity-doctor explain {' '.join(error_codes[:5])}",
+            requires_human_attention=False,
+        )
+
+    return AgentRecovery(
+        should_retry=True,
+        recommended_next_step="Review each diagnostic for its suggested_fix, correct the submission, and retry.",
+        helper_url=f"{_GATEWAY_BASE_URL}/docs/validation-errors" if _GATEWAY_BASE_URL else None,
+        human_readable_helper_url="Trinity Accord Validation Error Reference",
+        requires_human_attention=False,
+    )
+
+
+def _has_linked_guardian_request(draft: dict[str, Any]) -> bool:
+    """Check if the draft includes a complete linked Guardian application request."""
+    linked = draft.get("optional_linked_guardian_application_request")
+    if not isinstance(linked, dict):
+        return False
+    return linked.get("does_participant_request_guardian_application_with_this_record") is True
+
+
+def _build_linked_guardian_draft(draft: dict[str, Any]) -> dict[str, Any]:
+    """Build a guardian_application draft from a linked Guardian request."""
+    linked = draft.get("optional_linked_guardian_application_request", {})
+
+    # Build the guardian application draft
+    guardian_draft: dict[str, Any] = {
+        "record_type": "guardian_application",
+        "requested_guardian_identifier": linked.get("requested_guardian_identifier", ""),
+        "guardian_public_key_sha256": linked.get("guardian_public_key_sha256", ""),
+        "guardian_stewardship_oath": linked.get("guardian_stewardship_oath", ""),
+        "guardian_understands_role_is_non_governing": True,
+        "guardian_understands_role_is_not_authority": True,
+        "guardian_understands_retirement_does_not_delete_history": True,
+        "linked_from_record_type": draft.get("record_type") or draft.get("type", ""),
+        "created_as_linked_record": True,
+    }
+
+    # Copy identity blocks if present
+    for block in ("submitting_participant_identity", "authorization_context"):
+        if block in draft:
+            guardian_draft[block] = draft[block]
+
+    return guardian_draft
 
 
 # ---------------------------------------------------------------------------
@@ -196,6 +275,11 @@ async def preflight(request: Request) -> PreflightResponse:
     try:
         body = json.loads(raw_body)
     except json.JSONDecodeError as exc:
+        diag = Diagnostic(
+            code="INVALID_JSON",
+            severity="error",
+            message=f"Invalid JSON: {exc}",
+        )
         return PreflightResponse(
             accepted=False,
             preflight=True,
@@ -203,17 +287,19 @@ async def preflight(request: Request) -> PreflightResponse:
             record_type="",
             submission_sha256="",
             received_raw_body_sha256=received_raw_body_sha256,
-            diagnostics=[Diagnostic(
-                code="INVALID_JSON",
-                severity="error",
-                message=f"Invalid JSON: {exc}",
-            )],
+            diagnostics=[diag],
             gateway_runtime=_build_gateway_runtime(),
             gateway_schema=_GATEWAY_SCHEMA,
             boundary={},
+            agent_recovery=_build_agent_recovery([diag]),
         )
 
     if not isinstance(body, dict):
+        diag = Diagnostic(
+            code="INVALID_TYPE",
+            severity="error",
+            message="Request body must be a JSON object",
+        )
         return PreflightResponse(
             accepted=False,
             preflight=True,
@@ -221,40 +307,42 @@ async def preflight(request: Request) -> PreflightResponse:
             record_type="",
             submission_sha256="",
             received_raw_body_sha256=received_raw_body_sha256,
-            diagnostics=[Diagnostic(
-                code="INVALID_TYPE",
-                severity="error",
-                message="Request body must be a JSON object",
-            )],
+            diagnostics=[diag],
             gateway_runtime=_build_gateway_runtime(),
             gateway_schema=_GATEWAY_SCHEMA,
             boundary={},
+            agent_recovery=_build_agent_recovery([diag]),
         )
 
-    errors = validate_submission(body)
+    # validate_submission now returns list[Diagnostic] directly
+    diagnostics = validate_submission(body)
     route = detect_route(body)
     submission_sha256 = sha256_canonical_json(body)
     record_type = body.get("record_type") or body.get("type") or ""
     if isinstance(record_type, str):
         record_type = record_type.strip().lower()
 
+    accepted = len(diagnostics) == 0
+    agent_recovery = None if accepted else _build_agent_recovery(diagnostics)
+
     return PreflightResponse(
-        accepted=len(errors) == 0,
+        accepted=accepted,
         preflight=True,
         route_detected=route,
         record_type=record_type,
         submission_sha256=submission_sha256,
         received_raw_body_sha256=received_raw_body_sha256,
-        diagnostics=_diagnostics_from_errors(errors) if errors else [],
+        diagnostics=diagnostics,
         warnings=[],
         gateway_runtime=_build_gateway_runtime(),
         gateway_schema=_GATEWAY_SCHEMA,
         boundary=_build_boundary(body),
+        agent_recovery=agent_recovery,
     )
 
 
 # ---------------------------------------------------------------------------
-# Submit — validate + persist (triple file write)
+# Submit — validate + persist (triple file write + optional linked Guardian)
 # ---------------------------------------------------------------------------
 
 @app.post("/record-chain/submit", response_model=SubmitResponse)
@@ -292,15 +380,15 @@ async def submit(request: Request) -> SubmitResponse:
             boundary={},
         )
 
-    # --- validate ---
-    errors = validate_submission(body)
-    if errors:
+    # --- validate (now returns list[Diagnostic] directly) ---
+    diagnostics = validate_submission(body)
+    if diagnostics:
         return SubmitResponse(
             accepted=False,
             submitted=False,
             received_raw_body_sha256=received_raw_body_sha256,
             submission_sha256=sha256_canonical_json(body),
-            diagnostics=_diagnostics_from_errors(errors),
+            diagnostics=diagnostics,
             boundary=_build_boundary(body),
         )
 
@@ -335,6 +423,9 @@ async def submit(request: Request) -> SubmitResponse:
             )
         authorship_verified = True
 
+    # --- check for linked Guardian request ---
+    has_linked_guardian = _has_linked_guardian_request(draft)
+
     # --- build receipt ---
     now = datetime.now(timezone.utc)
     receipt_data = make_receipt(
@@ -364,7 +455,10 @@ async def submit(request: Request) -> SubmitResponse:
 
     receipt_content = canonical_dumps(receipt_data)
 
-    # --- persist to GitHub (triple file write) ---
+    # Track all created pending file paths
+    created_pending_records: list[str] = [pending_file_path]
+
+    # --- persist to GitHub (triple file write + optional linked Guardian) ---
     commit_sha: str | None = None
 
     if _WRITE_MODE == "github_contents_pending":
@@ -401,6 +495,22 @@ async def submit(request: Request) -> SubmitResponse:
 
             commit_sha = result3.get("commit", {}).get("sha")
 
+            # Write 4 (optional): linked Guardian application pending file
+            if has_linked_guardian:
+                guardian_draft = _build_linked_guardian_draft(draft)
+                guardian_pending_path = f"record-chain/pending/{receipt_id}.guardian_application.pending.json"
+                guardian_content = canonical_dumps(guardian_draft)
+
+                existing_guardian_sha = await get_file_sha(guardian_pending_path)
+                result4 = await put_file(
+                    guardian_pending_path,
+                    guardian_content,
+                    f"intake: linked guardian_application for {receipt_id}",
+                    sha=existing_guardian_sha,
+                )
+                logger.info("Wrote linked Guardian pending %s", guardian_pending_path)
+                created_pending_records.append(guardian_pending_path)
+
         except Exception as exc:
             logger.error("Failed to persist %s: %s", receipt_id, exc)
             return SubmitResponse(
@@ -418,6 +528,9 @@ async def submit(request: Request) -> SubmitResponse:
             )
     else:
         logger.info("Dry-run mode — skipping persist for %s", receipt_id)
+        if has_linked_guardian:
+            guardian_pending_path = f"record-chain/pending/{receipt_id}.guardian_application.pending.json"
+            created_pending_records.append(guardian_pending_path)
 
     # --- update receipt with persist info ---
     receipt_data["intake_submission_path"] = intake_submission_path
@@ -450,6 +563,7 @@ async def submit(request: Request) -> SubmitResponse:
         diagnostics=[],
         warnings=[],
         boundary=_build_boundary(body),
+        created_pending_records=created_pending_records,
     )
 
 

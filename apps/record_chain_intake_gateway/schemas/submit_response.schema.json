@@ -10,6 +10,53 @@
       "type": "boolean",
       "description": "True if the submission was accepted and persisted."
     },
+    "accepted": {
+      "type": "boolean",
+      "description": "Whether the submission was accepted."
+    },
+    "submitted": {
+      "type": "boolean",
+      "description": "Whether the submission was persisted."
+    },
+    "receipt_id": {
+      "type": "string",
+      "description": "Unique receipt identifier for this submission."
+    },
+    "record_type": {
+      "type": "string",
+      "description": "The record type of the submission."
+    },
+    "submission_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$",
+      "description": "SHA-256 of the canonical submission JSON."
+    },
+    "received_raw_body_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$",
+      "description": "SHA-256 of the raw request body."
+    },
+    "pending_file_path": {
+      "type": "string",
+      "description": "Path to the primary pending record file."
+    },
+    "intake_submission_path": {
+      "type": "string",
+      "description": "Path to the intake submission file."
+    },
+    "receipt_path": {
+      "type": "string",
+      "description": "Path to the receipt file."
+    },
+    "server_created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 UTC timestamp of acceptance."
+    },
+    "append_status": {
+      "type": "string",
+      "description": "Status of the append operation."
+    },
     "receipt": {
       "type": "object",
       "description": "Server receipt (present when ok=true).",
@@ -62,12 +109,39 @@
           "description": "SHA-256 of the receipt contents (excluding this field)."
         }
       },
-      "additionalProperties": false
+      "additionalProperties": true
     },
-    "errors": {
+    "diagnostics": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["code", "severity", "message"],
+        "properties": {
+          "code": { "type": "string", "description": "Machine-readable diagnostic code." },
+          "severity": { "type": "string", "enum": ["error", "warning", "info"] },
+          "field": { "type": "string", "description": "Field path that triggered this diagnostic." },
+          "message": { "type": "string", "description": "Human-readable explanation." },
+          "meaning": { "type": "string", "description": "Extended explanation of what this diagnostic means." },
+          "suggested_fix": { "type": "string", "description": "Suggested remediation step." },
+          "help_url": { "type": "string", "format": "uri", "description": "URL to documentation for this diagnostic code." },
+          "retry_allowed": { "type": "boolean", "description": "Whether retrying with corrections is allowed." }
+        }
+      },
+      "description": "Structured diagnostics (empty when ok=true)."
+    },
+    "warnings": {
       "type": "array",
       "items": { "type": "string" },
-      "description": "List of error messages (empty when ok=true)."
+      "description": "Non-fatal warnings."
+    },
+    "boundary": {
+      "type": "object",
+      "description": "Boundary acknowledgement as a dict of bools."
+    },
+    "created_pending_records": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "List of pending file paths created by this submission. Contains the primary record path, and optionally a linked guardian_application path."
     }
   },
   "additionalProperties": false

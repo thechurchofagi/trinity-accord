@@ -75,7 +75,7 @@ def _check_claim_boundary(proof: dict[str, Any]) -> str | None:
     if boundary is None:
         return "authorship_proof missing required 'claim_boundary'"
     if not isinstance(boundary, dict):
-        return "'claim_boundary' must be a JSON object"
+        return "'claim_boundary' must be a JSON object (not a string)"
 
     for key in _REQUIRED_CLAIM_BOUNDARY_KEYS:
         if boundary.get(key) is not True:
