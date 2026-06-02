@@ -58,6 +58,9 @@ Historical materials are preserved under /legacy/gateway-v1/.
 - /api/guardian-registry.json
 - /api/record-chain-status.json
 - /api/record-chain-intake-gateway.v1.json
+- /api/record-chain-field-helper.v1.json — machine-readable field helper with recovery guidance
+- /api/record-chain-common-field-model.v1.json — common field model definitions
+- /record-chain-field-helper/ — human-readable field helper documentation
 
 ## Primary agent entrypoints
 - /llms.txt

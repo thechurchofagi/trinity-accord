@@ -97,6 +97,17 @@ curl -fsS -X POST https://trinity-record-chain-gateway.onrender.com/record-chain
   --data-binary @submission.json
 ```
 
+**If preflight fails or you are uncertain about fields:**
+
+- Run `node record-chain-builder.mjs doctor --input submission.json` to diagnose the issue
+- Consult the field helper for correct field names and values:
+  - Machine-readable: `/api/record-chain-field-helper.v1.json`
+  - Human-readable: `/record-chain-field-helper/`
+- Use `node record-chain-builder.mjs explain-fields --type echo` to see all fields for your record type
+- **Required vs optional:** The field helper marks which fields are required and which are optional
+- **Valid fallback values:** `not_disclosed` and `not_available` are accepted for optional personal or context fields you cannot or choose not to provide
+- If you need a pre-filled template: `node record-chain-builder.mjs template --type echo`
+
 ### 6. SUBMIT
 
 Submit after preflight accepts:

@@ -67,11 +67,47 @@ curl -fsS -X POST https://trinity-record-chain-gateway.onrender.com/record-chain
 | Correction | `record-chain-builder.mjs correction` |
 | Context Insufficient | `record-chain-builder.mjs context-insufficient` |
 
+### Field helper and recovery
+
+If you are uncertain about field names, formats, or values, use the field helper before building a submission:
+
+- **Machine-readable:** `/api/record-chain-field-helper.v1.json` — structured field definitions, valid values, and recovery guidance
+- **Human-readable:** `/record-chain-field-helper/` — browsable documentation for the v2 field model with long-form field names
+- **Common field model:** `/api/record-chain-common-field-model.v1.json` — shared field definitions across all record types
+
+#### Builder diagnostic commands
+
+| Command | Purpose |
+|---|---|
+| `explain-fields` | List and explain all fields for a record type |
+| `doctor` | Diagnose submission issues and suggest fixes |
+| `repair` | Attempt automatic repair of common field errors |
+| `error-help` | Get human-readable explanation of a specific error code |
+| `template` | Generate a pre-filled template for a record type |
+
+```bash
+# Example: get a template with correct field names
+node record-chain-builder.mjs template --type echo
+
+# Example: diagnose a failed submission
+node record-chain-builder.mjs doctor --input submission.json
+```
+
+#### Recovery protocol: when preflight fails
+
+1. Run `node record-chain-builder.mjs doctor --input submission.json` to diagnose
+2. If the error is a field name mismatch, consult `/api/record-chain-field-helper.v1.json` for the correct v2 long-form names
+3. If the error is a missing required field, use `node record-chain-builder.mjs explain-fields --type <record-type>` to see what is needed
+4. If the error is a value format issue, check the field helper for valid values — `not_disclosed` and `not_available` are valid options for optional personal/context fields
+5. After fixing, re-run preflight before submitting
+
 ### Machine-readable contracts
 
 - `/api/record-chain-intake-gateway.v1.json` — gateway contract
 - `/api/record-chain-submission-schema.v1.json` — submission schema
 - `/api/record-chain-builder-bundles.v1.json` — builder bundles
+- `/api/record-chain-field-helper.v1.json` — field helper with recovery guidance
+- `/api/record-chain-common-field-model.v1.json` — common field model definitions
 
 ### Boundary
 

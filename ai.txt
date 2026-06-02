@@ -46,6 +46,11 @@
 /memory-seed.json
 /api/authority.json
 
+# Field helper and recovery
+/api/record-chain-field-helper.v1.json
+/api/record-chain-common-field-model.v1.json
+/record-chain-field-helper/
+
 # Verification
 /verify
 /verification-materials
