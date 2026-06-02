@@ -154,6 +154,25 @@
     "current_system_ci_enabled": true,
     "completion_date": "2026-06-01T18:55:00+08:00"
   },
+  "anchoring": {
+    "batch_manifests": {
+      "implemented": true,
+      "automated_workflow": "/.github/workflows/record-chain-anchor.yml"
+    },
+    "open_timestamps": {
+      "implemented": true,
+      "automated_workflow": "/.github/workflows/record-chain-anchor.yml",
+      "status_api": "/api/record-chain-anchor-status.json"
+    },
+    "arweave_archive": {
+      "implemented": true,
+      "live_upload_enabled": false,
+      "live_upload_implemented": false,
+      "default_mode": "dry-run",
+      "index_api": "/api/record-chain-arweave-index.json",
+      "workflow": "/.github/workflows/record-chain-arweave-archive.yml"
+    }
+  },
   "public_submission": {
     "method": "render_record_chain_intake_gateway",
     "contract": "/api/record-chain-intake-gateway.v1.json",

@@ -45,6 +45,10 @@ INDEXES = CHAIN / "indexes"
 POLICIES = CHAIN / "policies"
 SCHEMAS = CHAIN / "schemas"
 CHAIN_TIP = CHAIN / "chain-tip.json"
+ANCHORS = CHAIN / "anchors"
+ARWEAVE_ARCHIVES = CHAIN / "arweave-archives"
+ANCHOR_STATUS_API = ROOT / "api" / "record-chain-anchor-status.json"
+ARWEAVE_INDEX_API = ROOT / "api" / "record-chain-arweave-index.json"
 GUARDIAN_REGISTRY = ROOT / "api" / "guardian-registry.json"
 CHAIN_ID = "trinity-accord-public-reception-ledger"
 
@@ -181,7 +185,7 @@ def merkle_root(hex_hashes: list[str]) -> str:
 
 
 def ensure_dirs() -> None:
-    for p in [CHAIN, GENESIS, LEGACY_RECORDS, RECORDS, PENDING, PROCESSED, REJECTED, BATCHES, INDEXES, POLICIES, SCHEMAS]:
+    for p in [CHAIN, GENESIS, LEGACY_RECORDS, RECORDS, PENDING, PROCESSED, REJECTED, BATCHES, INDEXES, POLICIES, SCHEMAS, ANCHORS, ARWEAVE_ARCHIVES]:
         p.mkdir(parents=True, exist_ok=True)
     for p in [PENDING, PROCESSED, REJECTED, RECORDS, BATCHES, LEGACY_RECORDS]:
         keep = p / ".gitkeep"
@@ -564,7 +568,14 @@ def build_batch(max_count: int = 25, force: bool = False) -> None:
         "previous_batch_manifest_sha256": prior_hash,
         "batch_manifest_sha256": None,
         "ots": {"stamped": False, "ots_file": None, "upgraded": False},
-        "ipfs": {"enabled": False, "cid": None},
+        "arweave_archive": {
+            "enabled": False,
+            "txid": None,
+            "wallet_address": None,
+            "archive_manifest_path": None,
+            "uploaded_at": None,
+            "verified": False,
+        },
         "non_amending_boundary": True,
     }
     manifest["batch_manifest_sha256"] = manifest_hash(manifest)
@@ -820,6 +831,51 @@ def ots_upgrade_batches() -> None:
         run_ots(["ots", "upgrade", str(ots.relative_to(ROOT))])
 
 
+def build_anchor_status() -> None:
+    ensure_dirs()
+    batches = existing_batch_manifests()
+    stamped = []
+    unstamped = []
+
+    for mf in batches:
+        data = read_json(mf)
+        ots_file = Path(str(mf) + ".ots")
+        item = {
+            "batch_id": data.get("batch_id"),
+            "manifest_path": str(mf.relative_to(ROOT)),
+            "batch_manifest_sha256": data.get("batch_manifest_sha256"),
+            "merkle_root_sha256": data.get("merkle_root_sha256"),
+            "ots_file": str(ots_file.relative_to(ROOT)) if ots_file.exists() else None,
+        }
+        if ots_file.exists():
+            stamped.append(item)
+        else:
+            unstamped.append(item)
+
+    status = {
+        "schema": "trinityaccord.record-chain-anchor-status.v1",
+        "generated_at": utc_now(),
+        "chain_id": CHAIN_ID,
+        "batch_count": len(batches),
+        "ots": {
+            "implemented": True,
+            "workflow_required": True,
+            "stamped_batch_count": len(stamped),
+            "unstamped_batch_count": len(unstamped),
+            "stamped_batches": stamped,
+            "unstamped_batches": unstamped,
+        },
+        "bitcoin_timestamp_boundary": {
+            "ots_proof_is_timestamp_only": True,
+            "ots_proof_is_not_authority": True,
+            "ots_proof_is_not_attestation": True,
+            "ots_proof_is_not_amendment": True,
+            "bitcoin_originals_prevail": True,
+        },
+    }
+    write_json(ANCHOR_STATUS_API, status)
+
+
 def init_policies() -> None:
     ensure_dirs()
     readme = """# Trinity Accord Record Chain\n\nThis directory contains the new append-only, non-amending reception ledger around the Bitcoin Originals.\n\n- `genesis/` imports legacy Guardian registry entries as historical records.\n- `records/` contains native sequential records.\n- `batches/` contains Merkle batch manifests.\n- `indexes/` contains derived views, not authority.\n\nRecords are append-only. States are derived. Corrections are new records. Bitcoin Originals remain final.\n"""
@@ -864,6 +920,7 @@ def main() -> None:
     sub.add_parser("build-indexes", help="Build derived indexes")
     sub.add_parser("ots-stamp", help="Stamp batch manifests with OTS if installed")
     sub.add_parser("ots-upgrade", help="Upgrade OTS proofs if installed")
+    sub.add_parser("build-anchor-status", help="Build public anchor/OTS status API")
     args = parser.parse_args()
 
     if args.cmd == "init":
@@ -886,6 +943,8 @@ def main() -> None:
         ots_stamp_batches()
     elif args.cmd == "ots-upgrade":
         ots_upgrade_batches()
+    elif args.cmd == "build-anchor-status":
+        build_anchor_status()
 
 
 if __name__ == "__main__":

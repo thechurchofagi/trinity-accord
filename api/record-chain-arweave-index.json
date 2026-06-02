@@ -1,0 +1,16 @@
+{
+  "schema": "trinityaccord.record-chain-arweave-index.v1",
+  "generated_at": null,
+  "chain_id": "trinity-accord-public-reception-ledger",
+  "current_upload_mode": "dry-run",
+  "live_upload_enabled": false,
+  "live_upload_implemented": false,
+  "arweave_wallet_address": null,
+  "archives": [],
+  "boundary": {
+    "arweave_archive_is_mirror_only": true,
+    "arweave_archive_is_not_authority": true,
+    "arweave_archive_is_not_amendment": true,
+    "bitcoin_originals_prevail": true
+  }
+}

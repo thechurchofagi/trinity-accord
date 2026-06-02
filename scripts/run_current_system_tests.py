@@ -185,6 +185,39 @@ def main() -> int:
         fail(f"no-secrets check failed: {result.stderr}")
     ok("no private keys or tokens")
 
+    # 10. Phase 6A: anchor contract test
+    result = subprocess.run(
+        [sys.executable, "scripts/test_record_chain_anchor_contract.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"anchor contract test failed: {result.stderr}")
+    ok("anchor contract test")
+
+    # 11. Phase 6A: Arweave archive contract test
+    result = subprocess.run(
+        [sys.executable, "scripts/test_record_chain_arweave_archive_contract.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"arweave archive contract test failed: {result.stderr}")
+    ok("arweave archive contract test")
+
+    # 12. Phase 6A: public wording test
+    result = subprocess.run(
+        [sys.executable, "scripts/test_public_wording_phase6_contract.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"public wording test failed: {result.stderr}")
+    ok("public wording test")
+
     print("\n=== ALL CURRENT SYSTEM TESTS PASSED ===")
     return 0
 

@@ -144,3 +144,12 @@ Do not use:
 - old external-agent copy-paste examples
 
 Historical material is preserved under `/legacy/gateway-v1/`.
+
+## Record type and archive notes
+
+- Do not use `echo_type` or `E1_recognition_echo` for new submissions.
+- Use `echo_content.echo_text` and `echo_content.echo_intent` for Echo content.
+- The record-chain is append-only and hash-linked internally.
+- Arweave upload is not required for public submission.
+- Arweave live upload is internal archival infrastructure and may be disabled during public test/stabilization.
+- Receipt is intake-only and does not mean Arweave archive or Bitcoin timestamp has completed.
