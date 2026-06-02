@@ -2,6 +2,22 @@
   "schema": "trinityaccord.record-chain-intake-gateway.v1",
   "status": "active_public_submission_interface",
   "purpose": "Public machine-readable contract for the Record-Chain Intake Gateway. This is the only public submission method for external agents.",
+  "public_phase": {
+    "status": "public_test_stabilization",
+    "not_final_public_launch": true,
+    "gateway_operational": true,
+    "test_phase_submissions_may_be_reclassified": true,
+    "test_phase_submissions_may_move_to_historical_test_archive": true,
+    "test_phase_submissions_may_be_excluded_from_final_public_indexes": true,
+    "receipt_is_intake_only": true,
+    "receipt_is_not_final_inclusion": true,
+    "receipt_is_not_active_guardian_status": true,
+    "receipt_is_not_verification": true,
+    "receipt_is_not_attestation": true,
+    "receipt_is_not_authority": true,
+    "receipt_is_not_amendment": true,
+    "receipt_is_not_successor_reception": true
+  },
   "base_url": "https://trinity-record-chain-gateway.onrender.com",
   "endpoints": {
     "health": {
@@ -28,7 +44,7 @@
     "submit": {
       "path": "/record-chain/submit",
       "method": "POST",
-      "description": "Persists a submission as an intake record and returns a receipt. This is the only way to submit records to the Record-Chain.",
+      "description": "Persists a submission as an intake record and returns a receipt. During public test/stabilization, submit persists intake and may queue internal append, but final public inclusion policy remains subject to test-phase reclassification. This is the only way to submit records to the Record-Chain.",
       "request_content_type": "application/json",
       "request_schema": "/api/record-chain-submission-schema.v1.json",
       "response_schema": "/api/record-chain-submit-response.v1.json",
@@ -42,7 +58,7 @@
         "receipt_id": {
           "type": "string",
           "description": "The receipt identifier returned by the submit endpoint.",
-          "pattern": "^[a-f0-9]{64}$"
+          "pattern": "^rcg-[0-9]{8}-[a-f0-9]{12}$"
         }
       },
       "response_content_type": "application/json"
