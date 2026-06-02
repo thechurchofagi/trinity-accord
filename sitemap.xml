@@ -33,6 +33,7 @@
   <url><loc>https://www.trinityaccord.org/api/agent-required-reading.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/agent-safety-boundary.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/agent-start.v1.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/agent-start.v2.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/agent-submission-guide.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/agent-submit-gateway.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/agent-task-router.v1.json</loc></url>
@@ -171,7 +172,14 @@
   <url><loc>https://www.trinityaccord.org/api/reception-classification-policy.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/reception-classification-schema.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/reception-initiation-classification.v1.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/record-chain-builder-bundles.v1.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/record-chain-common-field-model.v1.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/record-chain-field-helper.v1.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/record-chain-intake-gateway.v1.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/record-chain-preflight-response.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/record-chain-status.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/record-chain-submission-schema.v1.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/record-chain-submit-response.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/recovery-index-schema.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/recovery-index.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/report-builder-policy.json</loc></url>
