@@ -172,13 +172,13 @@
   <url><loc>https://www.trinityaccord.org/api/reception-classification-policy.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/reception-classification-schema.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/reception-initiation-classification.v1.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/record-chain-anchor-status.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/record-chain-arweave-index.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/record-chain-builder-bundles.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/record-chain-common-field-model.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/record-chain-field-helper.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/record-chain-intake-gateway.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/record-chain-preflight-response.v1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/record-chain-anchor-status.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/record-chain-arweave-index.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/record-chain-status.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/record-chain-submission-schema.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/record-chain-submit-response.v1.json</loc></url>
@@ -222,12 +222,12 @@
   <url><loc>https://www.trinityaccord.org/covenant-proof/</loc></url>
   <url><loc>https://www.trinityaccord.org/data-verification/</loc></url>
   <url><loc>https://www.trinityaccord.org/disaster-recovery-drill/</loc></url>
+  <url><loc>https://www.trinityaccord.org/docs/arweave-archive-policy/</loc></url>
   <url><loc>https://www.trinityaccord.org/docs/bilingual-boundary-glossary/</loc></url>
   <url><loc>https://www.trinityaccord.org/docs/claim-gate/</loc></url>
   <url><loc>https://www.trinityaccord.org/docs/echo-triage-maintainer-playbook/</loc></url>
   <url><loc>https://www.trinityaccord.org/docs/end-to-end-agent-audit-and-fix-playbook/</loc></url>
   <url><loc>https://www.trinityaccord.org/docs/latest-verification-echo-closure/</loc></url>
-  <url><loc>https://www.trinityaccord.org/docs/arweave-archive-policy/</loc></url>
   <url><loc>https://www.trinityaccord.org/docs/ops-secrets-policy/</loc></url>
   <url><loc>https://www.trinityaccord.org/docs/quickstart-verification/</loc></url>
   <url><loc>https://www.trinityaccord.org/docs/record-chain-anchoring/</loc></url>
