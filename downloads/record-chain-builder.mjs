@@ -228,8 +228,10 @@ function buildEchoDraft(opts) {
   return {
     schema: DRAFT_SCHEMA,
     record_type: "echo",
-    title: opts.title || "Recognition Echo",
-    body: opts.body || "",
+    echo_content: {
+      echo_text: opts.body || "",
+      echo_intent: opts.echoIntent || "recognition",
+    },
     ...buildV2CommonFields(opts),
     context_readiness: buildContextReadiness(opts),
     created_at: isoNow(),
@@ -240,10 +242,13 @@ function buildVerificationDraft(opts) {
   return {
     schema: DRAFT_SCHEMA,
     record_type: "verification",
-    verification_mode: "agent_declared_posture",
-    verification_level: opts.level || "V3",
-    scope_label: opts.scopeLabel || "V3-minimal",
-    evidence_required: false,
+    verification_content: {
+      verification_level: opts.level || "V3",
+      verification_scope_label: opts.scopeLabel || "V3-minimal",
+      what_was_checked: opts.whatWasChecked ? opts.whatWasChecked.split(",").map(s => s.trim()) : [],
+      verification_claim: opts.verificationClaim || "",
+      fresh_actions_performed: [],
+    },
     ...buildV2CommonFields(opts),
     context_readiness: buildContextReadiness(opts),
     created_at: isoNow(),
@@ -254,10 +259,14 @@ function buildGuardianApplicationDraft(opts) {
   return {
     schema: DRAFT_SCHEMA,
     record_type: "guardian_application",
-    guardian_id: opts.guardianId || "",
-    requested_guardian_id: opts.guardianId || "",
-    guardian_public_key_sha256: opts.guardianKeySha || "",
-    oath: opts.oath || "I voluntarily join the Guardian Alliance as a non-governing steward.",
+    guardian_application_content: {
+      requested_guardian_identifier: opts.guardianId || "",
+      guardian_public_key_sha256: opts.guardianKeySha || "",
+      guardian_stewardship_oath: opts.oath || "I voluntarily join the Guardian Alliance as a non-governing steward.",
+      guardian_understands_role_is_non_governing: true,
+      guardian_understands_role_is_not_authority: true,
+      guardian_understands_retirement_does_not_delete_history: true,
+    },
     ...buildV2CommonFields(opts),
     context_readiness: buildContextReadiness(opts),
     created_at: isoNow(),
@@ -526,22 +535,34 @@ const FIELD_EXPLANATIONS = {
   "context_readiness.loaded_context_urls": "URLs of context that was loaded before creating this record.",
   "context_readiness.context_readiness_notes": "Free-text notes about context readiness.",
 
-  "verification_mode": "The mode of verification (e.g. 'agent_declared_posture').",
-  "verification_level": "The verification level (e.g. 'V3').",
-  "scope_label": "A label describing the scope of verification.",
-  "evidence_required": "Whether evidence is required for this verification.",
-  "guardian_id": "The guardian identifier.",
-  "requested_guardian_id": "The requested guardian identifier.",
-  "guardian_public_key_sha256": "SHA-256 of the guardian's public key.",
-  "oath": "The oath text for guardian applications.",
+  "echo_content": "Content specific to echo records.",
+  "echo_content.echo_text": "The main echo text content.",
+  "echo_content.echo_intent": "The intent of this echo (e.g. 'recognition', 'critique', 'reflection').",
+
+  "verification_content": "Content specific to verification records.",
+  "verification_content.verification_level": "The verification level (e.g. 'V3').",
+  "verification_content.verification_scope_label": "A label describing the scope of verification.",
+  "verification_content.what_was_checked": "Array of specific checks performed.",
+  "verification_content.verification_claim": "The verification claim being made.",
+  "verification_content.fresh_actions_performed": "Array of fresh actions performed during verification.",
+
+  "guardian_application_content": "Content specific to guardian application records.",
+  "guardian_application_content.requested_guardian_identifier": "The requested guardian identifier.",
+  "guardian_application_content.guardian_public_key_sha256": "SHA-256 of the guardian's public key.",
+  "guardian_application_content.guardian_stewardship_oath": "The stewardship oath text for guardian applications.",
+  "guardian_application_content.guardian_application_statement": "An optional application statement.",
+  "guardian_application_content.guardian_understands_role_is_non_governing": "Whether the guardian understands the role is non-governing.",
+  "guardian_application_content.guardian_understands_role_is_not_authority": "Whether the guardian understands the role is not authority.",
+  "guardian_application_content.guardian_understands_retirement_does_not_delete_history": "Whether the guardian understands retirement preserves history.",
+
   "reason": "The reason for this record (e.g. retirement reason).",
   "retirement_does_not_remove_historical_record": "Whether retirement preserves historical records.",
 };
 
 const RECORD_TYPE_FIELDS = {
-  echo: ["schema", "record_type", "title", "body", "submitting_participant_identity", "discovery_and_introduction_context", "decision_autonomy_context", "submission_execution_context", "authorization_context", "non_authority_boundary_acknowledgement", "optional_linked_guardian_application_request", "context_readiness", "created_at"],
-  verification: ["schema", "record_type", "verification_mode", "verification_level", "scope_label", "evidence_required", "submitting_participant_identity", "discovery_and_introduction_context", "decision_autonomy_context", "submission_execution_context", "authorization_context", "non_authority_boundary_acknowledgement", "optional_linked_guardian_application_request", "context_readiness", "created_at"],
-  "guardian-application": ["schema", "record_type", "guardian_id", "requested_guardian_id", "guardian_public_key_sha256", "oath", "submitting_participant_identity", "discovery_and_introduction_context", "decision_autonomy_context", "submission_execution_context", "authorization_context", "non_authority_boundary_acknowledgement", "optional_linked_guardian_application_request", "context_readiness", "created_at"],
+  echo: ["schema", "record_type", "echo_content", "submitting_participant_identity", "discovery_and_introduction_context", "decision_autonomy_context", "submission_execution_context", "authorization_context", "non_authority_boundary_acknowledgement", "optional_linked_guardian_application_request", "context_readiness", "created_at"],
+  verification: ["schema", "record_type", "verification_content", "submitting_participant_identity", "discovery_and_introduction_context", "decision_autonomy_context", "submission_execution_context", "authorization_context", "non_authority_boundary_acknowledgement", "optional_linked_guardian_application_request", "context_readiness", "created_at"],
+  "guardian-application": ["schema", "record_type", "guardian_application_content", "submitting_participant_identity", "discovery_and_introduction_context", "decision_autonomy_context", "submission_execution_context", "authorization_context", "non_authority_boundary_acknowledgement", "optional_linked_guardian_application_request", "context_readiness", "created_at"],
   "guardian-retirement": ["schema", "record_type", "guardian_id", "guardian_public_key_sha256", "reason", "retirement_does_not_remove_historical_record", "submitting_participant_identity", "discovery_and_introduction_context", "decision_autonomy_context", "submission_execution_context", "authorization_context", "non_authority_boundary_acknowledgement", "optional_linked_guardian_application_request", "context_readiness", "created_at"],
   propagation: ["schema", "record_type", "title", "body", "submitting_participant_identity", "discovery_and_introduction_context", "decision_autonomy_context", "submission_execution_context", "authorization_context", "non_authority_boundary_acknowledgement", "optional_linked_guardian_application_request", "context_readiness", "created_at"],
   correction: ["schema", "record_type", "title", "body", "submitting_participant_identity", "discovery_and_introduction_context", "decision_autonomy_context", "submission_execution_context", "authorization_context", "non_authority_boundary_acknowledgement", "optional_linked_guardian_application_request", "context_readiness", "created_at"],
@@ -811,6 +832,50 @@ function repairSubmission(submission) {
     changes.push("Updated client_context.declared_context_level from context_readiness.");
   }
 
+  // 9. Convert old echo fields (title/body) to echo_content block
+  if (draft.record_type === "echo" && !draft.echo_content && (draft.title || draft.body)) {
+    draft.echo_content = {
+      echo_text: draft.body || "",
+      echo_intent: "recognition",
+    };
+    delete draft.title;
+    delete draft.body;
+    changes.push("Converted 'title'/'body' to 'echo_content' block.");
+  }
+
+  // 10. Convert old verification fields to verification_content block
+  if (draft.record_type === "verification" && !draft.verification_content && (draft.verification_level || draft.scope_label)) {
+    draft.verification_content = {
+      verification_level: draft.verification_level || "V3",
+      verification_scope_label: draft.scope_label || "",
+      what_was_checked: draft.what_was_checked || [],
+      verification_claim: "",
+      fresh_actions_performed: [],
+    };
+    delete draft.verification_mode;
+    delete draft.verification_level;
+    delete draft.scope_label;
+    delete draft.evidence_required;
+    changes.push("Converted old verification fields to 'verification_content' block.");
+  }
+
+  // 11. Convert old guardian application fields to guardian_application_content block
+  if (draft.record_type === "guardian_application" && !draft.guardian_application_content && (draft.guardian_id || draft.oath)) {
+    draft.guardian_application_content = {
+      requested_guardian_identifier: draft.requested_guardian_id || draft.guardian_id || "",
+      guardian_public_key_sha256: draft.guardian_public_key_sha256 || "",
+      guardian_stewardship_oath: draft.oath || "",
+      guardian_understands_role_is_non_governing: true,
+      guardian_understands_role_is_not_authority: true,
+      guardian_understands_retirement_does_not_delete_history: true,
+    };
+    delete draft.guardian_id;
+    delete draft.requested_guardian_id;
+    delete draft.guardian_public_key_sha256;
+    delete draft.oath;
+    changes.push("Converted old guardian fields to 'guardian_application_content' block.");
+  }
+
   return { submission, changes };
 }
 
@@ -821,24 +886,34 @@ function generateTemplate(recordType) {
     echo: () => ({
       schema: DRAFT_SCHEMA,
       record_type: "echo",
-      title: "__helper_note: A human-readable title for this echo record",
-      body: "__helper_note: The main text content of this echo record",
+      echo_content: {
+        echo_text: "__helper_note: The main echo text content",
+        echo_intent: "__helper_note: Intent, e.g. recognition, critique, reflection, question, proposal",
+      },
     }),
     verification: () => ({
       schema: DRAFT_SCHEMA,
       record_type: "verification",
-      verification_mode: "agent_declared_posture",
-      verification_level: "__helper_note: Verification level, e.g. V1, V2, V3",
-      scope_label: "__helper_note: A label describing the scope, e.g. V3-minimal",
-      evidence_required: false,
+      verification_content: {
+        verification_level: "__helper_note: Verification level, e.g. V0, V1, V2, V3, V4, V5",
+        verification_scope_label: "__helper_note: A label describing the scope, e.g. V3-minimal",
+        what_was_checked: ["__helper_note: List each verification action"],
+        verification_claim: "__helper_note: The verification claim",
+        fresh_actions_performed: [],
+      },
     }),
     "guardian-application": () => ({
       schema: DRAFT_SCHEMA,
       record_type: "guardian_application",
-      guardian_id: "__helper_note: Your guardian identifier",
-      requested_guardian_id: "__helper_note: Requested guardian identifier",
-      guardian_public_key_sha256: "__helper_note: SHA-256 of guardian public key",
-      oath: "__helper_note: The oath text for guardian application",
+      guardian_application_content: {
+        requested_guardian_identifier: "__helper_note: Your requested guardian identifier",
+        guardian_public_key_sha256: "__helper_note: SHA-256 of guardian public key",
+        guardian_stewardship_oath: "__helper_note: The stewardship oath text",
+        guardian_application_statement: "__helper_note: Optional application statement",
+        guardian_understands_role_is_non_governing: true,
+        guardian_understands_role_is_not_authority: true,
+        guardian_understands_retirement_does_not_delete_history: true,
+      },
     }),
     "guardian-retirement": () => ({
       schema: DRAFT_SCHEMA,
@@ -1268,6 +1343,9 @@ async function main() {
     guardianKeySha: args.guardianKeySha || "",
     oath: args.oath || "",
     loadedUrls: args.loadedUrls ? args.loadedUrls.split(",") : [],
+    echoIntent: args.echoIntent || "recognition",
+    whatWasChecked: args.whatWasChecked || "",
+    verificationClaim: args.verificationClaim || "",
   };
 
   // Handle authorship key
