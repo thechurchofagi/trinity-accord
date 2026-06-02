@@ -73,6 +73,17 @@ def main() -> int:
         fail(f"record-chain verify failed: {result.stderr}")
     ok("record-chain verify")
 
+    # 1b. sitemap drift check
+    result = subprocess.run(
+        [sys.executable, "scripts/generate_sitemap.py", "--check"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"sitemap drift detected:\n{result.stdout}\n{result.stderr}")
+    ok("sitemap up to date")
+
     # 2. record-chain-status.json marks record-chain primary
     status = load_json("api/record-chain-status.json")
     if status.get("schema") != "trinityaccord.record-chain-status.v1":

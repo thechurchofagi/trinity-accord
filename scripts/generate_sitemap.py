@@ -251,9 +251,19 @@ def main() -> int:
             actual = SITEMAP.read_text(encoding="utf-8")
             if actual != expected_content:
                 # Count URLs for diagnostics
-                actual_count = len(re.findall(r"<loc>", actual))
-                expected_count = len(all_paths)
-                print(f"sitemap.xml is out of date ({actual_count} URLs, expected {expected_count}).")
+                actual_urls = set(re.findall(r"<loc>(.*?)</loc>", actual))
+                expected_urls = {f"{BASE_URL}{p}" for p in all_paths}
+                missing = sorted(expected_urls - actual_urls)
+                extra = sorted(actual_urls - expected_urls)
+                print(f"sitemap.xml is out of date ({len(actual_urls)} URLs, expected {len(expected_urls)}).")
+                if missing:
+                    print(f"  Missing URLs ({len(missing)}):")
+                    for u in missing:
+                        print(f"    - {u}")
+                if extra:
+                    print(f"  Extra URLs ({len(extra)}):")
+                    for u in extra:
+                        print(f"    + {u}")
                 return 1
         else:
             print("sitemap.xml does not exist.")
