@@ -1,3 +1,8 @@
+---
+title: "Operations Secrets Policy"
+permalink: /docs/ops-secrets-policy/
+---
+
 # Operations Secrets Policy
 
 ## Secrets

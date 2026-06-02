@@ -1,3 +1,8 @@
+---
+title: "Record-Chain Anchoring"
+permalink: /docs/record-chain-anchoring/
+---
+
 # Record-Chain Anchoring
 
 ## Layer Architecture

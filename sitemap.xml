@@ -177,6 +177,8 @@
   <url><loc>https://www.trinityaccord.org/api/record-chain-field-helper.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/record-chain-intake-gateway.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/record-chain-preflight-response.v1.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/record-chain-anchor-status.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/record-chain-arweave-index.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/record-chain-status.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/record-chain-submission-schema.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/record-chain-submit-response.v1.json</loc></url>

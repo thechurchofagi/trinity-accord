@@ -1,3 +1,8 @@
+---
+title: "Arweave Archive Policy"
+permalink: /docs/arweave-archive-policy/
+---
+
 # Arweave Archive Policy
 
 ## Purpose
