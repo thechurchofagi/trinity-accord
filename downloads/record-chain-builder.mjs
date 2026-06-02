@@ -378,6 +378,8 @@ function buildSubmission(recordDraft, opts) {
       not_successor_reception: true,
       not_amendment: true,
       bitcoin_originals_prevail: true,
+      receipt_is_not_final_inclusion: true,
+      test_phase_submission_may_be_reclassified: true,
     },
   };
 
@@ -1304,3 +1306,4 @@ main().catch((e) => {
   console.error(e);
   process.exit(1);
 });
+
