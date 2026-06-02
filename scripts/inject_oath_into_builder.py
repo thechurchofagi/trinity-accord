@@ -34,13 +34,12 @@ def main() -> None:
         return
 
     # Build the oath policy constant and helper functions
-    # Escape the policy text for JS embedding
-    policy_json_escaped = json.dumps(policy_text)
+    # Embed as direct JS object (avoids escaping issues with JSON-in-string)
+    policy_js = json.dumps(policy, indent=2, ensure_ascii=False)
 
     oath_injection = f'''
 // ── Oath Policy (Phase 6B-OATH) ───────────────────────────────────────
-const OATH_POLICY_TEXT = {policy_json_escaped};
-const OATH_POLICY = JSON.parse(OATH_POLICY_TEXT);
+const OATH_POLICY = {policy_js};
 const OATH_POLICY_SHA256 = "{policy_sha256}";
 
 function getCanonicalOath(recordType) {{

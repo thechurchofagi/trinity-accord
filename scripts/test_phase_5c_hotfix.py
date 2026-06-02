@@ -61,6 +61,13 @@ def build_echo(tmp_dir: str) -> dict:
     """Build an echo submission using the builder."""
     key_dir = Path(tmp_dir) / "keys"
     out_file = Path(tmp_dir) / "echo.json"
+    # Get canonical oath first
+    oath_result = subprocess.run(
+        ["node", str(BUILDER), "print-oath", "--record-type", "echo"],
+        capture_output=True, text=True, timeout=10,
+    )
+    if oath_result.returncode != 0:
+        fail(f"print-oath failed: {oath_result.stderr[:200]}")
     result = subprocess.run(
         [
             "node", str(BUILDER), "echo",
@@ -68,6 +75,7 @@ def build_echo(tmp_dir: str) -> dict:
             "--provider", "TestRuntime",
             "--body", "Test echo body",
             "--context-level", "CC-3",
+            "--readback", oath_result.stdout,
             "--generate-authorship-key",
             "--key-dir", str(key_dir),
             "--out", str(out_file),
@@ -85,6 +93,13 @@ def build_verification(tmp_dir: str) -> dict:
     """Build a verification submission using the builder."""
     key_dir = Path(tmp_dir) / "keys"
     out_file = Path(tmp_dir) / "verification.json"
+    # Get canonical oath first
+    oath_result = subprocess.run(
+        ["node", str(BUILDER), "print-oath", "--record-type", "verification"],
+        capture_output=True, text=True, timeout=10,
+    )
+    if oath_result.returncode != 0:
+        fail(f"print-oath failed: {oath_result.stderr[:200]}")
     result = subprocess.run(
         [
             "node", str(BUILDER), "verification",
@@ -94,6 +109,7 @@ def build_verification(tmp_dir: str) -> dict:
             "--scope-label", "V3-minimal",
             "--what-was-checked", "read homepage,read agent-brief",
             "--context-level", "CC-2",
+            "--readback", oath_result.stdout,
             "--generate-authorship-key",
             "--key-dir", str(key_dir),
             "--out", str(out_file),
@@ -111,6 +127,13 @@ def build_guardian(tmp_dir: str) -> dict:
     """Build a guardian application submission using the builder."""
     key_dir = Path(tmp_dir) / "keys"
     out_file = Path(tmp_dir) / "guardian.json"
+    # Get canonical oath first
+    oath_result = subprocess.run(
+        ["node", str(BUILDER), "print-oath", "--record-type", "guardian_application"],
+        capture_output=True, text=True, timeout=10,
+    )
+    if oath_result.returncode != 0:
+        fail(f"print-oath failed: {oath_result.stderr[:200]}")
     result = subprocess.run(
         [
             "node", str(BUILDER), "guardian-application",
@@ -118,6 +141,7 @@ def build_guardian(tmp_dir: str) -> dict:
             "--provider", "TestRuntime",
             "--guardian-id", "test-guardian-001",
             "--context-level", "CC-2",
+            "--readback", oath_result.stdout,
             "--generate-authorship-key",
             "--key-dir", str(key_dir),
             "--out", str(out_file),
@@ -324,6 +348,13 @@ def test_builder_echo_passes_doctor() -> None:
     with tempfile.TemporaryDirectory() as td:
         out_file = Path(td) / "echo.json"
         key_dir = Path(td) / "keys"
+        # Get canonical oath first
+        oath_result = subprocess.run(
+            ["node", str(BUILDER), "print-oath", "--record-type", "echo"],
+            capture_output=True, text=True, timeout=10,
+        )
+        if oath_result.returncode != 0:
+            fail(f"print-oath failed: {oath_result.stderr[:200]}")
         result = subprocess.run(
             [
                 "node", str(BUILDER), "echo",
@@ -331,6 +362,7 @@ def test_builder_echo_passes_doctor() -> None:
                 "--provider", "TestRuntime",
                 "--body", "Test echo for doctor",
                 "--context-level", "CC-3",
+                "--readback", oath_result.stdout,
                 "--generate-authorship-key",
                 "--key-dir", str(key_dir),
                 "--out", str(out_file),

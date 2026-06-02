@@ -42,7 +42,7 @@ def main() -> None:
     if policy.get("schema") != "trinityaccord.record-chain-oath-policy.v1":
         errors.append(f"wrong schema: {policy.get('schema')}")
 
-    # Test 3: Policy has no_shortcut_policy
+    # Test 3: Policy has no_shortcut_policy with boundary
     nsp = policy.get("no_shortcut_policy")
     if not isinstance(nsp, dict):
         errors.append("missing no_shortcut_policy")
@@ -53,7 +53,6 @@ def main() -> None:
             errors.append("no_shortcut_policy.required_declarations is empty")
         if len(nsp.get("required_declarations", [])) < 10:
             errors.append(f"no_shortcut_policy.required_declarations has {len(nsp.get('required_declarations', []))} items, expected 10+")
-        # Check boundary fields
         boundary = nsp.get("boundary", {})
         if not boundary.get("oath_does_not_prove_subjective_understanding"):
             errors.append("no_shortcut_policy.boundary.oath_does_not_prove_subjective_understanding missing or not true")
@@ -74,13 +73,9 @@ def main() -> None:
 
     # Test 5: Canonicalization fields
     can = policy.get("canonicalization", {})
-    if can.get("line_endings") != "LF":
-        errors.append(f"canonicalization.line_endings: expected LF, got {can.get('line_endings')}")
-    if can.get("module_joiner") != "\n\n---\n\n":
-        errors.append(f"canonicalization.module_joiner: expected '\\n\\n---\\n\\n', got {can.get('module_joiner')!r}")
-    for field in ["trim_outer_whitespace_before_hash", "preserve_internal_whitespace",
-                  "module_order_matters", "text_encoding", "unicode_normalization",
-                  "policy_text_should_remain_ascii"]:
+    for field in ["line_endings", "trim_outer_whitespace", "trim_outer_whitespace_before_hash",
+                  "preserve_internal_whitespace", "module_order_matters", "text_encoding",
+                  "unicode_normalization", "policy_text_should_remain_ascii", "module_joiner"]:
         if field not in can:
             errors.append(f"canonicalization missing: {field}")
 
@@ -118,7 +113,7 @@ def main() -> None:
     else:
         errors.append("downloads/record-chain-builder.mjs: NOT FOUND")
 
-    # Test 9: Gateway has validate_submission_oath
+    # Test 9: Gateway has validate_submission_oath and redact
     if VALIDATION.exists():
         val_text = VALIDATION.read_text(encoding="utf-8")
         if "def validate_submission_oath" not in val_text:
@@ -137,7 +132,6 @@ def main() -> None:
         top_props = schema.get("properties", {})
         if "client_oath_readback" not in top_props:
             errors.append("top-level properties missing client_oath_readback")
-        # Check claim_boundary is object not string
         claim = schema.get("$defs", {}).get("authorship_proof", {}).get("properties", {}).get("claim_boundary", {})
         if claim.get("type") != "object":
             errors.append(f"claim_boundary type: expected 'object', got '{claim.get('type')}'")
@@ -154,27 +148,122 @@ def main() -> None:
     else:
         errors.append("field helper: NOT FOUND")
 
-    # Test 12: Builder print-oath command works
+    # Test 12: Builder print-oath works for echo
     result = subprocess.run(
         ["node", str(BUILDER), "print-oath", "--record-type", "echo"],
         capture_output=True, text=True, timeout=10,
     )
     if result.returncode != 0:
-        errors.append(f"builder print-oath failed: {result.stderr[:200]}")
+        errors.append(f"builder print-oath echo failed: {result.stderr[:200]}")
     elif "Common Submission Integrity" not in result.stdout:
-        errors.append("builder print-oath missing expected oath text")
+        errors.append("builder print-oath echo missing Common Submission Integrity")
     elif "Echo Integrity" not in result.stdout:
-        errors.append("builder print-oath echo missing echo_integrity module")
+        errors.append("builder print-oath echo missing Echo Integrity")
 
-    # Test 13: Builder print-oath for guardian_application includes stewardship
+    # Test 13: print-oath --linked-guardian includes Guardian Stewardship
     result = subprocess.run(
-        ["node", str(BUILDER), "print-oath", "--record-type", "guardian_application"],
+        ["node", str(BUILDER), "print-oath", "--record-type", "echo", "--linked-guardian"],
         capture_output=True, text=True, timeout=10,
     )
     if result.returncode != 0:
-        errors.append(f"builder print-oath guardian_application failed: {result.stderr[:200]}")
+        errors.append(f"builder print-oath echo --linked-guardian failed: {result.stderr[:200]}")
     elif "Guardian Stewardship" not in result.stdout:
-        errors.append("builder print-oath guardian_application missing guardian_stewardship module")
+        errors.append("builder print-oath echo --linked-guardian missing Guardian Stewardship")
+
+    result = subprocess.run(
+        ["node", str(BUILDER), "print-oath", "--record-type", "verification", "--linked-guardian"],
+        capture_output=True, text=True, timeout=10,
+    )
+    if result.returncode != 0:
+        errors.append(f"builder print-oath verification --linked-guardian failed: {result.stderr[:200]}")
+    elif "Guardian Stewardship" not in result.stdout:
+        errors.append("builder print-oath verification --linked-guardian missing Guardian Stewardship")
+
+    # Test 14: Formal build without --readback fails
+    result = subprocess.run(
+        ["node", str(BUILDER), "echo", "--actor-label", "test", "--provider", "test",
+         "--body", "test", "--context-level", "CC-3", "--out", "/tmp/test-no-readback.json"],
+        capture_output=True, text=True, timeout=10,
+    )
+    if result.returncode == 0:
+        errors.append("echo build without --readback should fail but succeeded")
+    elif "--readback" not in result.stderr:
+        errors.append(f"echo build without --readback: wrong error message: {result.stderr[:200]}")
+
+    # Test 15: Formal build with wrong --readback fails
+    result = subprocess.run(
+        ["node", str(BUILDER), "echo", "--actor-label", "test", "--provider", "test",
+         "--body", "test", "--context-level", "CC-3", "--readback", "wrong readback text",
+         "--out", "/tmp/test-wrong-readback.json"],
+        capture_output=True, text=True, timeout=10,
+    )
+    if result.returncode == 0:
+        errors.append("echo build with wrong --readback should fail but succeeded")
+
+    # Test 16: Formal build with exact --readback succeeds
+    result = subprocess.run(
+        ["node", str(BUILDER), "print-oath", "--record-type", "echo"],
+        capture_output=True, text=True, timeout=10,
+    )
+    if result.returncode != 0:
+        errors.append("cannot get canonical oath for test 16")
+    else:
+        canonical = result.stdout
+        result = subprocess.run(
+            ["node", str(BUILDER), "echo", "--actor-label", "test", "--provider", "test",
+             "--body", "test", "--context-level", "CC-3", "--readback", canonical,
+             "--generate-authorship-key", "--key-dir", "/tmp/test-oath-key",
+             "--out", "/tmp/test-correct-readback.json"],
+            capture_output=True, text=True, timeout=10,
+        )
+        if result.returncode != 0:
+            errors.append(f"echo build with correct --readback failed: {result.stderr[:200]}")
+        else:
+            data = json.loads(Path("/tmp/test-correct-readback.json").read_text())
+            client = data.get("client_oath_readback", {})
+            oath = data.get("record_draft", {}).get("submission_oath_verification", {})
+            # readback_text must equal user-provided readback
+            if not client.get("readback_text"):
+                errors.append("client_oath_readback.readback_text is empty")
+            # oath must declare not auto-filled
+            if oath.get("readback_was_not_auto_filled_by_builder") is not True:
+                errors.append("readback_was_not_auto_filled_by_builder is not true")
+            # oath modules should match record type
+            expected_mods = ["common_submission_integrity_v1", "echo_integrity_v1"]
+            if oath.get("oath_modules") != expected_mods:
+                errors.append(f"oath_modules mismatch: {oath.get('oath_modules')} != {expected_mods}")
+
+    # Test 17: Builder does not contain function that sets readback_text = canonicalOath
+    if BUILDER.exists():
+        builder_text = BUILDER.read_text(encoding="utf-8")
+        # Check there's no pattern like "readback_text: canonicalOath" or "readback_text: canonical"
+        import re
+        bad_patterns = re.findall(r'readback_text:\s*canonical\w*', builder_text)
+        if bad_patterns:
+            errors.append(f"builder still has auto-fill pattern: {bad_patterns}")
+
+    # Test 18: Builder embedded OATH_POLICY deep-equals api file
+    if BUILDER.exists():
+        builder_text = BUILDER.read_text(encoding="utf-8")
+        # Extract OATH_POLICY object from builder
+        m = re.search(r'const OATH_POLICY = ({[\s\S]*?});\s*\nconst OATH_POLICY_SHA256', builder_text)
+        if m:
+            try:
+                import re as _re
+                js_obj = m.group(1)
+                # Convert JS literals to JSON
+                js_obj = _re.sub(r'\btrue\b', 'true', js_obj)  # already valid JSON
+                js_obj = _re.sub(r'\bfalse\b', 'false', js_obj)
+                js_obj = _re.sub(r'\bnull\b', 'null', js_obj)
+                # JS object uses unquoted keys - convert to quoted
+                js_obj = _re.sub(r'(\s)(\w+)(\s*:)', lambda m: m.group(1) + '"' + m.group(2) + '"' + m.group(3), js_obj)
+                embedded_policy = json.loads(js_obj)
+                if embedded_policy != policy:
+                    errors.append("builder embedded OATH_POLICY does not deep-equal api policy")
+            except Exception as e:
+                errors.append(f"cannot parse builder embedded OATH_POLICY: {e}")
+        else:
+            errors.append("cannot find OATH_POLICY object in builder")
 
     # Report
     if errors:

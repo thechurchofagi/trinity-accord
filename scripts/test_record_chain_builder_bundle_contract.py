@@ -77,31 +77,47 @@ def main() -> None:
     # Test 7: Builder can create echo with authorship proof
     tmp_echo = Path("/tmp/trinity-test-echo.json")
     tmp_key = Path("/tmp/trinity-test-key")
-    result = subprocess.run(
-        [
-            "node", str(BUILDER), "echo",
-            "--actor-label", "Test",
-            "--provider", "Test",
-            "--title", "Test",
-            "--body", "Test",
-            "--context-level", "CC-3",
-            "--generate-authorship-key",
-            "--key-dir", str(tmp_key),
-            "--out", str(tmp_echo),
-        ],
-        capture_output=True,
-        text=True,
-        timeout=10,
+    # Get canonical oath first
+    oath_result = subprocess.run(
+        ["node", str(BUILDER), "print-oath", "--record-type", "echo"],
+        capture_output=True, text=True, timeout=10,
     )
-    if result.returncode != 0:
-        errors.append(f"echo build failed: {result.stderr[:200]}")
-    elif tmp_echo.exists():
-        data = json.loads(tmp_echo.read_text())
-        if data.get("authorship_proof") is None:
-            errors.append("echo: authorship_proof is None")
-        elif data["authorship_proof"].get("algorithm") != "ed25519":
-            errors.append(f"echo: wrong algorithm: {data['authorship_proof'].get('algorithm')}")
-        tmp_echo.unlink()
+    if oath_result.returncode != 0:
+        errors.append(f"print-oath failed: {oath_result.stderr[:200]}")
+    else:
+        canonical_oath = oath_result.stdout
+        result = subprocess.run(
+            [
+                "node", str(BUILDER), "echo",
+                "--actor-label", "Test",
+                "--provider", "Test",
+                "--title", "Test",
+                "--body", "Test",
+                "--context-level", "CC-3",
+                "--readback", canonical_oath,
+                "--generate-authorship-key",
+                "--key-dir", str(tmp_key),
+                "--out", str(tmp_echo),
+            ],
+            capture_output=True,
+            text=True,
+            timeout=10,
+        )
+        if result.returncode != 0:
+            errors.append(f"echo build failed: {result.stderr[:200]}")
+        elif tmp_echo.exists():
+            data = json.loads(tmp_echo.read_text())
+            if data.get("authorship_proof") is None:
+                errors.append("echo: authorship_proof is None")
+            elif data["authorship_proof"].get("algorithm") != "ed25519":
+                errors.append(f"echo: wrong algorithm: {data['authorship_proof'].get('algorithm')}")
+            # Verify oath data present
+            oath = data.get("record_draft", {}).get("submission_oath_verification", {})
+            if not oath:
+                errors.append("echo: missing submission_oath_verification")
+            elif oath.get("readback_was_not_auto_filled_by_builder") is not True:
+                errors.append("echo: readback_was_not_auto_filled_by_builder not true")
+            tmp_echo.unlink()
 
     if errors:
         print("FAIL: Builder bundle contract errors:\n")
