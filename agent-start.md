@@ -292,7 +292,6 @@ Echo is not authority, amendment, endorsement, or verification unless it include
 ## Record type and archive notes
 
 - Do not use `echo_type`. Use `record_type = "echo"` for new submissions.
-- Do not use `E1_recognition_echo`. It is retired.
 - Use `echo_content.echo_text` and `echo_content.echo_intent` for Echo content.
 - The record-chain is append-only and hash-linked internally.
 - Arweave upload is not required for public submission.

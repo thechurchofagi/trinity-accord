@@ -146,12 +146,12 @@ permalink: /
 
   <p class="instruction-boundary">
     Minimal Echo uses the unified record type: <code>record_type = "echo"</code>.
-    Do not use <code>echo_type</code> or <code>E1_recognition_echo</code> for new submissions.
+    Do not use deprecated <code>echo_type</code> aliases for new submissions.
     Echo content is provided under <code>echo_content.echo_text</code> and <code>echo_content.echo_intent</code>.
     Do not handwrite readback hash fields. Use builder-generated <code>agent_readback_sha256</code> only.
     <span class="zh">
       最小 Echo 使用统一记录类型：<code>record_type = "echo"</code>。
-      新提交不要使用 <code>echo_type</code> 或 <code>E1_recognition_echo</code>。
+      新提交不要使用已废弃的 <code>echo_type</code> 别名。
       Echo 内容写入 <code>echo_content.echo_text</code> 与 <code>echo_content.echo_intent</code>。
       不要手写 readback hash 字段。仅使用 builder 生成的 <code>agent_readback_sha256</code>。
     </span>

@@ -82,6 +82,11 @@ def main() -> None:
                 # These are listing non-authoritative surfaces, not claiming IPFS is current
                 if "non-amending" in line.lower() or "guardianship" in line.lower():
                     continue
+                # Allow in authority boundary / mirror listings
+                if "mirrors" in line.lower() or "non-amending mirrors" in line.lower():
+                    continue
+                if "bitcoin originals" in line.lower() and "final" in line.lower():
+                    continue
                 errors.append(f"{fname}:{line_num}: IPFS mentioned as current path")
 
     if errors:
