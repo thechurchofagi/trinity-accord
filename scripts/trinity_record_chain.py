@@ -402,6 +402,38 @@ def normalize_record_draft(draft: dict[str, Any]) -> dict[str, Any]:
             "bitcoin_originals_prevail": b.get("bitcoin_originals_prevail") is True,
         }
 
+    # --- Content block normalization (B model) ---
+    # Migrate old echo fields to echo_content block
+    if draft.get("record_type") == "echo" and not draft.get("echo_content"):
+        if draft.get("title") or draft.get("body"):
+            draft["echo_content"] = {
+                "echo_text": draft.get("body", ""),
+                "echo_intent": "recognition",
+            }
+
+    # Migrate old verification fields to verification_content block
+    if draft.get("record_type") == "verification" and not draft.get("verification_content"):
+        if draft.get("verification_level") or draft.get("scope_label"):
+            draft["verification_content"] = {
+                "verification_level": draft.get("verification_level", "V3"),
+                "verification_scope_label": draft.get("scope_label", ""),
+                "what_was_checked": draft.get("what_was_checked", []),
+                "verification_claim": "",
+                "fresh_actions_performed": [],
+            }
+
+    # Migrate old guardian application fields to guardian_application_content block
+    if draft.get("record_type") == "guardian_application" and not draft.get("guardian_application_content"):
+        if draft.get("guardian_id") or draft.get("oath"):
+            draft["guardian_application_content"] = {
+                "requested_guardian_identifier": draft.get("requested_guardian_id") or draft.get("guardian_id", ""),
+                "guardian_public_key_sha256": draft.get("guardian_public_key_sha256", ""),
+                "guardian_stewardship_oath": draft.get("oath", ""),
+                "guardian_understands_role_is_non_governing": True,
+                "guardian_understands_role_is_not_authority": True,
+                "guardian_understands_retirement_does_not_delete_history": True,
+            }
+
     draft.setdefault("schema", "trinityaccord.record-chain-entry.v1")
     draft.setdefault("chain_id", CHAIN_ID)
     draft.setdefault("created_at", utc_now())
