@@ -37,6 +37,8 @@ def _minimal_v2_draft(**overrides) -> dict:
             "not_successor_reception": True,
             "not_amendment": True,
             "bitcoin_originals_prevail": True,
+            "receipt_is_not_final_inclusion": True,
+            "test_phase_submission_may_be_reclassified": True,
         },
         "context_readiness": {
             "declared_context_level": 3,

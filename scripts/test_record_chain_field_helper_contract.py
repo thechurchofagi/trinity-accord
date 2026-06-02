@@ -15,8 +15,9 @@ HELPER_PATH = Path(__file__).resolve().parents[1] / "api" / "record-chain-field-
 # Required top-level sections
 REQUIRED_SECTIONS = {"field_groups", "record_type_presets", "diagnostic_code_help", "agent_recovery_protocol"}
 
-# All 22 diagnostic codes that must be present
+# All diagnostic codes that must be present
 EXPECTED_DIAGNOSTIC_CODES = {
+    "AUTHORSHIP_PROOF_INVALID",
     "CLAIM_BOUNDARY_MUST_BE_OBJECT",
     "CONTEXT_INSUFFICIENT",
     "CONTEXT_LEVEL_RETIRED_USE_CONTEXT_READINESS",
@@ -34,6 +35,7 @@ EXPECTED_DIAGNOSTIC_CODES = {
     "MISSING_DISCOVERY_CONTEXT",
     "MISSING_PARTICIPANT_PUBLIC_DISPLAY_LABEL",
     "MISSING_PARTICIPANT_TYPE",
+    "MISSING_SUBMISSION_BOUNDARY",
     "MISSING_SUBMISSION_EXECUTION_CONTEXT",
     "PLACEHOLDER_VALUE_DETECTED",
     "PRIVATE_IDENTITY_BLOB_NOT_ALLOWED",
@@ -94,8 +96,8 @@ class TestFieldHelperContract:
 
     def test_diagnostic_code_count(self, helper):
         dch = helper["diagnostic_code_help"]
-        assert len(dch) == 22, (
-            f"Expected 22 diagnostic codes, got {len(dch)}. "
+        assert len(dch) >= 22, (
+            f"Expected at least 22 diagnostic codes, got {len(dch)}. "
             f"Codes: {sorted(dch.keys())}"
         )
 

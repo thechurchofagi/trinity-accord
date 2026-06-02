@@ -139,6 +139,8 @@ REQUIRED_BOUNDARY_FIELDS: frozenset[str] = frozenset({
     "not_successor_reception",
     "not_amendment",
     "bitcoin_originals_prevail",
+    "receipt_is_not_final_inclusion",
+    "test_phase_submission_may_be_reclassified",
 })
 
 # ---------------------------------------------------------------------------
@@ -260,6 +262,42 @@ def _extract_context_level(draft: dict[str, Any]) -> Any:
             return level
     # Backward compat
     return draft.get("context_completeness_level")
+
+
+def _parse_context_level_value(value: Any) -> int | None:
+    """Parse a context level value that may be 'CC-N' string or integer.
+
+    Returns the integer level, or None if unparseable.
+    """
+    if isinstance(value, bool):
+        return None
+    if isinstance(value, int):
+        return value
+    if isinstance(value, str):
+        value = value.strip().upper()
+        if re.fullmatch(r"CC-[0-9]+", value):
+            return int(value.split("-", 1)[1])
+        if value.isdigit():
+            return int(value)
+    return None
+
+
+def _extract_submission_boundary(submission: dict[str, Any]) -> tuple[dict[str, Any] | None, str]:
+    """Extract boundary from submission_boundary, boundary_acknowledgement, or draft nested field.
+
+    Returns (boundary_dict, field_path) or (None, "submission_boundary") if not found.
+    Only falls back to draft nested field if no top-level boundary is present.
+    """
+    if isinstance(submission.get("submission_boundary"), dict):
+        return submission["submission_boundary"], "submission_boundary"
+    if isinstance(submission.get("boundary_acknowledgement"), dict):
+        return submission["boundary_acknowledgement"], "boundary_acknowledgement"
+    # Only fall back to draft if neither top-level field exists at all
+    if "submission_boundary" not in submission and "boundary_acknowledgement" not in submission:
+        draft = submission.get("record_draft") or submission.get("draft") or {}
+        if isinstance(draft, dict) and isinstance(draft.get("non_authority_boundary_acknowledgement"), dict):
+            return draft["non_authority_boundary_acknowledgement"], "record_draft.non_authority_boundary_acknowledgement"
+    return None, "submission_boundary"
 
 
 # ---------------------------------------------------------------------------
@@ -499,27 +537,27 @@ def validate_claim_boundary(draft: dict[str, Any]) -> list[Diagnostic]:
 
 
 def validate_boundary_acknowledgement(submission: dict[str, Any]) -> list[Diagnostic]:
-    """Validate that boundary_acknowledgement contains all 6 required boolean true fields."""
+    """Validate that submission_boundary/boundary_acknowledgement contains all required fields."""
     diagnostics: list[Diagnostic] = []
-    boundary = submission.get("boundary_acknowledgement")
+    boundary, boundary_path = _extract_submission_boundary(submission)
     if boundary is None:
         diagnostics.append(_make_diagnostic(
             code="MISSING_BOUNDARY_ACKNOWLEDGEMENT",
             severity="error",
-            field="boundary_acknowledgement",
-            message="Missing required field 'boundary_acknowledgement'",
-            meaning="The boundary_acknowledgement object is required in every submission.",
-            suggested_fix="Add a boundary_acknowledgement object with all 6 required boolean true fields.",
+            field="submission_boundary",
+            message="Missing submission_boundary (or boundary_acknowledgement)",
+            meaning="Every submission must acknowledge non-authority boundaries.",
+            suggested_fix="Add submission_boundary with all required fields set to true.",
         ))
         return diagnostics
     if not isinstance(boundary, dict):
         diagnostics.append(_make_diagnostic(
             code="INVALID_BOUNDARY_ACKNOWLEDGEMENT",
             severity="error",
-            field="boundary_acknowledgement",
-            message="'boundary_acknowledgement' must be a JSON object",
-            meaning="boundary_acknowledgement must be an object, not a string or other type.",
-            suggested_fix="Change boundary_acknowledgement to a JSON object.",
+            field=boundary_path,
+            message=f"'{boundary_path}' must be a JSON object",
+            meaning="Boundary acknowledgement must be an object, not a string or other type.",
+            suggested_fix="Change boundary to a JSON object.",
         ))
         return diagnostics
 
@@ -528,22 +566,22 @@ def validate_boundary_acknowledgement(submission: dict[str, Any]) -> list[Diagno
             diagnostics.append(_make_diagnostic(
                 code="MISSING_BOUNDARY_FIELD",
                 severity="error",
-                field=f"boundary_acknowledgement.{field}",
-                message=f"boundary_acknowledgement missing required field '{field}'",
+                field=f"{boundary_path}.{field}",
+                message=f"{boundary_path} missing required field '{field}'",
                 meaning=f"The '{field}' acknowledgement is required in every submission.",
-                suggested_fix=f"Add '{field}: true' to boundary_acknowledgement.",
+                suggested_fix=f"Add '{field}: true' to {boundary_path}.",
             ))
         elif boundary[field] is not True:
             diagnostics.append(_make_diagnostic(
                 code="BOUNDARY_FIELD_NOT_TRUE",
                 severity="error",
-                field=f"boundary_acknowledgement.{field}",
+                field=f"{boundary_path}.{field}",
                 message=(
-                    f"boundary_acknowledgement.'{field}' must be boolean true, "
+                    f"{boundary_path}.'{field}' must be boolean true, "
                     f"got {boundary[field]!r}"
                 ),
                 meaning=f"The '{field}' acknowledgement must be explicitly true.",
-                suggested_fix=f"Set '{field}' to true in boundary_acknowledgement.",
+                suggested_fix=f"Set '{field}' to true in {boundary_path}.",
             ))
     return diagnostics
 
@@ -566,18 +604,18 @@ def validate_context_readiness(record_type: str, draft: dict[str, Any]) -> list[
         ))
         return diagnostics
 
-    try:
-        cc_level = int(cc_level)
-    except (TypeError, ValueError):
+    parsed_cc = _parse_context_level_value(cc_level)
+    if parsed_cc is None:
         diagnostics.append(_make_diagnostic(
             code="INVALID_CONTEXT_LEVEL",
             severity="error",
             field="draft.context_readiness.declared_context_level",
-            message=f"'declared_context_level' must be an integer, got {cc_level!r}",
-            meaning="The context level must be an integer value.",
-            suggested_fix="Set declared_context_level to an integer (e.g. 3).",
+            message=f"declared_context_level must be CC-N or integer, got {cc_level!r}",
+            meaning="Context level may be represented as 'CC-3' or integer 3.",
+            suggested_fix="Use 'CC-3' for Echo and Guardian Application, or 'CC-2'/'CC-3' for Verification depending on level.",
         ))
         return diagnostics
+    cc_level = parsed_cc
 
     verification_version: int | None = None
     ver_raw = draft.get("verification_version") or draft.get("verification", {}).get("version")
@@ -662,6 +700,36 @@ def validate_verification_rules(draft: dict[str, Any]) -> list[Diagnostic]:
             message="'verification.proof' must be a string or object",
             meaning="The verification proof must be a string or JSON object.",
             suggested_fix="Change verification.proof to a string or object.",
+        ))
+
+    return diagnostics
+
+
+def validate_authorship_proof_presence(
+    record_type: str, submission: dict[str, Any], draft: dict[str, Any]
+) -> list[Diagnostic]:
+    """Require authorship_proof for formal record types."""
+    diagnostics: list[Diagnostic] = []
+    if record_type not in _FORMAL_RECORD_TYPES:
+        return diagnostics
+
+    proof = (
+        submission.get("authorship_proof")
+        or submission.get("proof")
+        or (draft.get("authorship_proof") if isinstance(draft, dict) else None)
+        or (draft.get("proof") if isinstance(draft, dict) else None)
+    )
+
+    if not isinstance(proof, dict):
+        diagnostics.append(_make_diagnostic(
+            code="MISSING_AUTHORSHIP_PROOF",
+            severity="error",
+            field="authorship_proof",
+            message=f"Formal record_type '{record_type}' requires authorship_proof",
+            meaning="Echo, Verification, Guardian Application, and other formal records must be signed.",
+            suggested_fix="Run the builder with --generate-authorship-key --key-dir <dir>, or provide a valid Ed25519 authorship proof.",
+            help_url="https://www.trinityaccord.org/record-chain-field-helper/#MISSING_AUTHORSHIP_PROOF",
+            retry_allowed=True,
         ))
 
     return diagnostics
@@ -792,7 +860,11 @@ def validate_submission(submission: dict[str, Any]) -> list[Diagnostic]:
     if isinstance(draft, dict):
         diagnostics.extend(validate_claim_boundary(draft))
 
-    # --- authorship proof presence (optional but recommended) ---
+    # --- authorship proof required for formal records ---
+    if isinstance(draft, dict) and rt:
+        diagnostics.extend(validate_authorship_proof_presence(rt, submission, draft))
+
+    # --- authorship proof type check (optional but if present must be object) ---
     proof = submission.get("authorship_proof") or submission.get("proof")
     if proof is not None and not isinstance(proof, dict):
         diagnostics.append(_make_diagnostic(

@@ -60,9 +60,9 @@ _receipt_store: dict[str, dict[str, Any]] = {}
 _GATEWAY_SCHEMA: dict[str, Any] = {
     "version": "1.0.0",
     "accepted_record_types": sorted(ALLOWED_RECORD_TYPES),
-    "required_submission_fields": ["record_type", "record_draft", "boundary_acknowledgement"],
-    "optional_submission_fields": ["authorship_proof", "metadata"],
-    "boundary_acknowledgement_fields": 6,
+    "required_submission_fields": ["record_type", "record_draft", "submission_boundary"],
+    "optional_submission_fields": ["authorship_proof", "metadata", "boundary_acknowledgement"],
+    "boundary_acknowledgement_fields": 8,
     "context_readiness_path": "record_draft.context_readiness.declared_context_level",
 }
 
@@ -146,7 +146,12 @@ def _build_gateway_runtime() -> dict[str, Any]:
 
 def _build_boundary(submission: dict[str, Any]) -> dict[str, bool]:
     """Extract boundary acknowledgement as a dict of bools for the response."""
-    boundary = submission.get("boundary_acknowledgement", {})
+    boundary = (
+        submission.get("submission_boundary")
+        or submission.get("boundary_acknowledgement")
+    )
+    if not boundary and "submission_boundary" not in submission and "boundary_acknowledgement" not in submission:
+        boundary = (submission.get("record_draft") or {}).get("non_authority_boundary_acknowledgement")
     if isinstance(boundary, dict):
         return {k: bool(v) for k, v in boundary.items()}
     return {}
@@ -214,27 +219,169 @@ def _has_linked_guardian_request(draft: dict[str, Any]) -> bool:
     return linked.get("does_participant_request_guardian_application_with_this_record") is True
 
 
-def _build_linked_guardian_draft(draft: dict[str, Any]) -> dict[str, Any]:
-    """Build a guardian_application draft from a linked Guardian request."""
+_FORMAL_RECORD_TYPES = {
+    "echo",
+    "verification",
+    "guardian_application",
+    "guardian_retirement",
+    "guardian_key_rotation",
+    "propagation",
+    "correction",
+    "classification_update",
+}
+
+
+def _authorship_preflight_diagnostic(body: dict[str, Any]) -> Diagnostic | None:
+    """Verify authorship proof during preflight if proof is present."""
+    draft = body.get("record_draft") or body.get("draft") or {}
+    proof = (
+        body.get("authorship_proof")
+        or body.get("proof")
+        or (draft.get("authorship_proof") if isinstance(draft, dict) else None)
+    )
+    record_type = (
+        body.get("record_type")
+        or body.get("type")
+        or (draft.get("record_type") if isinstance(draft, dict) else "")
+    )
+
+    if not isinstance(draft, dict):
+        return None
+
+    if record_type in _FORMAL_RECORD_TYPES and isinstance(proof, dict):
+        ok, err = verify_authorship_proof(draft, proof)
+        if not ok:
+            return Diagnostic(
+                code="AUTHORSHIP_PROOF_INVALID",
+                severity="error",
+                field="authorship_proof",
+                message=f"Authorship proof verification failed: {err}",
+                meaning="The signature or public-key proof does not match the record draft.",
+                suggested_fix="Rebuild the submission with the latest builder and the correct authorship key.",
+                help_url="https://www.trinityaccord.org/record-chain-field-helper/#AUTHORSHIP_PROOF_INVALID",
+                retry_allowed=True,
+            )
+    return None
+
+
+def _normalize_public_v2_draft_for_pending(draft: dict[str, Any]) -> dict[str, Any]:
+    """Add compatibility projections (actor_identity, boundary) for append path."""
+    normalized = dict(draft)
+
+    if not normalized.get("actor_identity") and isinstance(
+        normalized.get("submitting_participant_identity"), dict
+    ):
+        p = normalized["submitting_participant_identity"]
+        normalized["actor_identity"] = {
+            "label": p.get("participant_public_display_label") or "Unknown Participant",
+            "provider": (
+                p.get("participant_provider_or_platform")
+                or p.get("participant_model_or_runtime")
+                or "Unknown Runtime"
+            ),
+            "id": (
+                p.get("participant_self_declared_identifier")
+                or p.get("participant_public_key_sha256")
+                or None
+            ),
+        }
+
+    if not normalized.get("boundary") and isinstance(
+        normalized.get("non_authority_boundary_acknowledgement"), dict
+    ):
+        b = normalized["non_authority_boundary_acknowledgement"]
+        normalized["boundary"] = {
+            "not_authority": b.get("not_authority") is True,
+            "not_governance": b.get("not_governance") is True,
+            "not_attestation": b.get("not_attestation") is True,
+            "not_successor_reception": b.get("not_successor_reception") is True,
+            "not_amendment": b.get("not_amendment") is True,
+            "bitcoin_originals_prevail": b.get("bitcoin_originals_prevail") is True,
+        }
+
+    return normalized
+
+
+def _build_linked_guardian_draft(
+    draft: dict[str, Any],
+    proof: dict[str, Any] | None,
+    receipt_id: str,
+    submission_sha256: str,
+) -> dict[str, Any]:
+    """Build a complete guardian_application draft from a linked Guardian request."""
     linked = draft.get("optional_linked_guardian_application_request", {})
 
-    # Build the guardian application draft
-    guardian_draft: dict[str, Any] = {
-        "record_type": "guardian_application",
+    guardian_content = {
         "requested_guardian_identifier": linked.get("requested_guardian_identifier", ""),
+        "guardian_public_key_pem": linked.get("guardian_public_key_pem", ""),
         "guardian_public_key_sha256": linked.get("guardian_public_key_sha256", ""),
         "guardian_stewardship_oath": linked.get("guardian_stewardship_oath", ""),
-        "guardian_understands_role_is_non_governing": True,
-        "guardian_understands_role_is_not_authority": True,
-        "guardian_understands_retirement_does_not_delete_history": True,
-        "linked_from_record_type": draft.get("record_type") or draft.get("type", ""),
+        "guardian_application_statement": linked.get("guardian_application_statement", ""),
+        "guardian_understands_role_is_non_governing": linked.get(
+            "guardian_understands_role_is_non_governing"
+        )
+        is True,
+        "guardian_understands_role_is_not_authority": linked.get(
+            "guardian_understands_role_is_not_authority"
+        )
+        is True,
+        "guardian_understands_retirement_does_not_delete_history": linked.get(
+            "guardian_understands_retirement_does_not_delete_history"
+        )
+        is True,
+    }
+
+    authorization_ctx = draft.get("authorization_context", {})
+    if not isinstance(authorization_ctx, dict):
+        authorization_ctx = {}
+
+    guardian_draft: dict[str, Any] = {
+        "schema": draft.get("schema", "trinityaccord.record-chain-entry-draft.v2"),
+        "record_type": "guardian_application",
+        "submitting_participant_identity": draft.get("submitting_participant_identity", {}),
+        "discovery_and_introduction_context": draft.get(
+            "discovery_and_introduction_context", {}
+        ),
+        "decision_autonomy_context": draft.get("decision_autonomy_context", {}),
+        "submission_execution_context": draft.get("submission_execution_context", {}),
+        "authorization_context": {
+            **authorization_ctx,
+            "authorization_scope": "apply_for_guardian",
+        },
+        "context_readiness": draft.get("context_readiness", {}),
+        "non_authority_boundary_acknowledgement": draft.get(
+            "non_authority_boundary_acknowledgement", {}
+        ),
+        "guardian_application_content": guardian_content,
+        # Compatibility fields for current append/index consumers
+        "requested_guardian_identifier": guardian_content["requested_guardian_identifier"],
+        "guardian_public_key_pem": guardian_content["guardian_public_key_pem"],
+        "guardian_public_key_sha256": guardian_content["guardian_public_key_sha256"],
+        "guardian_stewardship_oath": guardian_content["guardian_stewardship_oath"],
+        "guardian_understands_role_is_non_governing": guardian_content[
+            "guardian_understands_role_is_non_governing"
+        ],
+        "guardian_understands_role_is_not_authority": guardian_content[
+            "guardian_understands_role_is_not_authority"
+        ],
+        "guardian_understands_retirement_does_not_delete_history": guardian_content[
+            "guardian_understands_retirement_does_not_delete_history"
+        ],
+        "linked_origin_record": {
+            "originating_submission_sha256": submission_sha256,
+            "originating_record_type": draft.get("record_type"),
+            "originating_receipt_id": receipt_id,
+            "relationship": "guardian_application_requested_during_primary_record_submission",
+        },
         "created_as_linked_record": True,
     }
 
-    # Copy identity blocks if present
-    for block in ("submitting_participant_identity", "authorization_context"):
-        if block in draft:
-            guardian_draft[block] = draft[block]
+    # Copy authorship proof so formal linked Guardian application can append
+    if proof:
+        guardian_draft["authorship_proof"] = proof
+
+    # Add compatibility projections
+    guardian_draft = _normalize_public_v2_draft_for_pending(guardian_draft)
 
     return guardian_draft
 
@@ -316,6 +463,13 @@ async def preflight(request: Request) -> PreflightResponse:
 
     # validate_submission now returns list[Diagnostic] directly
     diagnostics = validate_submission(body)
+
+    # P0-4: verify authorship signature during preflight
+    if not any(d.code == "MISSING_AUTHORSHIP_PROOF" for d in diagnostics):
+        authorship_diag = _authorship_preflight_diagnostic(body)
+        if authorship_diag is not None:
+            diagnostics.append(authorship_diag)
+
     route = detect_route(body)
     submission_sha256 = sha256_canonical_json(body)
     record_type = body.get("record_type") or body.get("type") or ""
@@ -448,7 +602,7 @@ async def submit(request: Request) -> SubmitResponse:
 
     # Pending file = normalized record_draft only (not outer submission)
     # Include authorship_proof if verified
-    pending_content_dict = strip_authorship_for_signing(draft) if not authorship_verified else dict(draft)
+    pending_content_dict = _normalize_public_v2_draft_for_pending(dict(draft))
     if authorship_verified and proof:
         pending_content_dict["authorship_proof"] = proof
     pending_content = canonical_dumps(pending_content_dict)
@@ -497,8 +651,13 @@ async def submit(request: Request) -> SubmitResponse:
 
             # Write 4 (optional): linked Guardian application pending file
             if has_linked_guardian:
-                guardian_draft = _build_linked_guardian_draft(draft)
-                guardian_pending_path = f"record-chain/pending/{receipt_id}.guardian_application.pending.json"
+                guardian_draft = _build_linked_guardian_draft(
+                    draft=draft,
+                    proof=proof if authorship_verified and isinstance(proof, dict) else None,
+                    receipt_id=receipt_id,
+                    submission_sha256=submission_sha256,
+                )
+                guardian_pending_path = f"record-chain/pending/{receipt_id}.guardian_application.linked.pending.json"
                 guardian_content = canonical_dumps(guardian_draft)
 
                 existing_guardian_sha = await get_file_sha(guardian_pending_path)
@@ -529,7 +688,7 @@ async def submit(request: Request) -> SubmitResponse:
     else:
         logger.info("Dry-run mode — skipping persist for %s", receipt_id)
         if has_linked_guardian:
-            guardian_pending_path = f"record-chain/pending/{receipt_id}.guardian_application.pending.json"
+            guardian_pending_path = f"record-chain/pending/{receipt_id}.guardian_application.linked.pending.json"
             created_pending_records.append(guardian_pending_path)
 
     # --- update receipt with persist info ---

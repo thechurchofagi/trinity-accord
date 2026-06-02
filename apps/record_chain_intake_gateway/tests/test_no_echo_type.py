@@ -14,6 +14,7 @@ from gateway.validation import (
     RETIRED_FIELDS,
     validate_submission,
 )
+from conftest import add_mock_proof
 
 
 def _echo_draft() -> dict:
@@ -45,6 +46,8 @@ def _echo_draft() -> dict:
             "not_successor_reception": True,
             "not_amendment": True,
             "bitcoin_originals_prevail": True,
+            "receipt_is_not_final_inclusion": True,
+            "test_phase_submission_may_be_reclassified": True,
         },
         "payload": {"title": "Test", "body": "echo body"},
     }
@@ -68,7 +71,7 @@ class TestNoEchoTypeInDraft:
         """If someone injects echo_type, validation rejects it."""
         draft = _echo_draft()
         draft["echo_type"] = "recognition"
-        submission = {
+        submission = add_mock_proof({
             "record_type": "echo",
             "record_draft": draft,
             "boundary_acknowledgement": {
@@ -78,8 +81,10 @@ class TestNoEchoTypeInDraft:
                 "not_successor_reception": True,
                 "not_amendment": True,
                 "bitcoin_originals_prevail": True,
+                "receipt_is_not_final_inclusion": True,
+                "test_phase_submission_may_be_reclassified": True,
             },
-        }
+        })
         diagnostics = validate_submission(submission)
         codes = [d.code for d in diagnostics]
         assert "RETIRED_FIELD" in codes, f"Expected RETIRED_FIELD diagnostic, got {codes}"

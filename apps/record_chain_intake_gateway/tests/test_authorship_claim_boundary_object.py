@@ -7,6 +7,7 @@ from __future__ import annotations
 import pytest
 
 from gateway.validation import validate_submission
+from conftest import add_mock_proof
 
 
 def _echo_draft(claim_boundary=None) -> dict:
@@ -45,6 +46,8 @@ def _echo_draft(claim_boundary=None) -> dict:
             "not_successor_reception": True,
             "not_amendment": True,
             "bitcoin_originals_prevail": True,
+            "receipt_is_not_final_inclusion": True,
+            "test_phase_submission_may_be_reclassified": True,
         },
         "optional_linked_guardian_application_request": None,
         "payload": {"title": "Test", "body": "echo body"},
@@ -53,7 +56,7 @@ def _echo_draft(claim_boundary=None) -> dict:
 
 
 def _wrap_submission(draft: dict) -> dict:
-    return {
+    return add_mock_proof({
         "record_type": "echo",
         "record_draft": draft,
         "boundary_acknowledgement": {
@@ -63,8 +66,10 @@ def _wrap_submission(draft: dict) -> dict:
             "not_successor_reception": True,
             "not_amendment": True,
             "bitcoin_originals_prevail": True,
+            "receipt_is_not_final_inclusion": True,
+            "test_phase_submission_may_be_reclassified": True,
         },
-    }
+    })
 
 
 class TestClaimBoundaryObject:

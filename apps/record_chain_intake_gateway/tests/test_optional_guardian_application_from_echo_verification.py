@@ -7,6 +7,7 @@ from __future__ import annotations
 import pytest
 
 from gateway.validation import validate_submission
+from conftest import add_mock_proof
 
 
 def _echo_draft_with_guardian_request() -> dict:
@@ -38,6 +39,8 @@ def _echo_draft_with_guardian_request() -> dict:
             "not_successor_reception": True,
             "not_amendment": True,
             "bitcoin_originals_prevail": True,
+            "receipt_is_not_final_inclusion": True,
+            "test_phase_submission_may_be_reclassified": True,
         },
         "optional_linked_guardian_application_request": {
             "does_participant_request_guardian_application_with_this_record": True,
@@ -54,7 +57,7 @@ def _echo_draft_with_guardian_request() -> dict:
 
 
 def _wrap_submission(draft: dict, record_type: str = "echo") -> dict:
-    return {
+    return add_mock_proof({
         "record_type": record_type,
         "record_draft": draft,
         "boundary_acknowledgement": {
@@ -64,8 +67,10 @@ def _wrap_submission(draft: dict, record_type: str = "echo") -> dict:
             "not_successor_reception": True,
             "not_amendment": True,
             "bitcoin_originals_prevail": True,
+            "receipt_is_not_final_inclusion": True,
+            "test_phase_submission_may_be_reclassified": True,
         },
-    }
+    })
 
 
 class TestOptionalGuardianApplicationFromEcho:

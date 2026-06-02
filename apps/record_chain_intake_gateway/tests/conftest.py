@@ -1,15 +1,53 @@
 """Shared fixtures for record-chain intake gateway tests."""
 from __future__ import annotations
 
+import base64
 import copy
 from typing import Any
 from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
+from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
+from cryptography.hazmat.primitives.serialization import Encoding, PublicFormat
+
+from gateway.authorship import canonical_bytes, sha256_bytes, strip_authorship_for_signing
 
 
 # ---------------------------------------------------------------------------
-# Minimal valid v2 echo submission
+# Real Ed25519 keypair for test fixtures
+# ---------------------------------------------------------------------------
+
+_PRIVATE_KEY = Ed25519PrivateKey.generate()
+_PUBLIC_KEY = _PRIVATE_KEY.public_key()
+_PUBLIC_KEY_PEM = _PUBLIC_KEY.public_bytes(
+    encoding=Encoding.PEM, format=PublicFormat.SubjectPublicKeyInfo
+).decode("utf-8")
+_PUBLIC_KEY_RAW_SHA256 = sha256_bytes(
+    _PUBLIC_KEY.public_bytes(encoding=Encoding.Raw, format=PublicFormat.Raw)
+)
+
+
+def _sign_draft(draft: dict[str, Any]) -> dict[str, Any]:
+    """Create a real Ed25519 authorship proof for *draft*."""
+    draft_for_signing = strip_authorship_for_signing(draft)
+    payload = canonical_bytes(draft_for_signing)
+    signature = _PRIVATE_KEY.sign(payload)
+    return {
+        "method": "ed25519",
+        "public_key_pem": _PUBLIC_KEY_PEM,
+        "public_key_sha256": _PUBLIC_KEY_RAW_SHA256,
+        "signed_payload_sha256": sha256_bytes(payload),
+        "signature_base64": base64.b64encode(signature).decode("ascii"),
+        "claim_boundary": {
+            "not authority": True,
+            "not attestation": True,
+            "not amendment": True,
+        },
+    }
+
+
+# ---------------------------------------------------------------------------
+# Minimal valid v2 echo draft
 # ---------------------------------------------------------------------------
 
 def _make_v2_echo_draft() -> dict[str, Any]:
@@ -56,6 +94,8 @@ def _make_v2_echo_draft() -> dict[str, Any]:
             "not_successor_reception": True,
             "not_amendment": True,
             "bitcoin_originals_prevail": True,
+            "receipt_is_not_final_inclusion": True,
+            "test_phase_submission_may_be_reclassified": True,
         },
         "optional_linked_guardian_application_request": None,
         "payload": {
@@ -63,25 +103,17 @@ def _make_v2_echo_draft() -> dict[str, Any]:
             "body": "This is a test echo submission.",
             "echo_intent": "recognition",
         },
-        "authorship_proof": {
-            "method": "ed25519",
-            "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAtest\n-----END PUBLIC KEY-----",
-            "public_key_sha256": "abc123def456",
-            "signed_payload_sha256": "deadbeef01234567",
-            "signature_base64": "dGVzdHNpZ25hdHVyZQ==",
-            "claim_boundary": {
-                "not_authority": True,
-                "not_governance": True,
-            },
-        },
     }
 
 
 def _make_valid_submission() -> dict[str, Any]:
-    """Build a full valid submission envelope."""
+    """Build a full valid submission envelope with real authorship proof."""
+    draft = _make_v2_echo_draft()
+    proof = _sign_draft(draft)
     return {
         "record_type": "echo",
-        "record_draft": _make_v2_echo_draft(),
+        "record_draft": draft,
+        "authorship_proof": proof,
         "boundary_acknowledgement": {
             "not_authority": True,
             "not_governance": True,
@@ -89,25 +121,15 @@ def _make_valid_submission() -> dict[str, Any]:
             "not_successor_reception": True,
             "not_amendment": True,
             "bitcoin_originals_prevail": True,
+            "receipt_is_not_final_inclusion": True,
+            "test_phase_submission_may_be_reclassified": True,
         },
     }
 
 
 def _make_signed_submission() -> dict[str, Any]:
-    """Build a full submission with authorship_proof at top level."""
-    sub = _make_valid_submission()
-    sub["authorship_proof"] = {
-        "method": "ed25519",
-        "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAtest\n-----END PUBLIC KEY-----",
-        "public_key_sha256": "abc123def456",
-        "signed_payload_sha256": "deadbeef01234567",
-        "signature_base64": "dGVzdHNpZ25hdHVyZQ==",
-        "claim_boundary": {
-            "not_authority": True,
-            "not_governance": True,
-        },
-    }
-    return sub
+    """Build a full signed submission (same as valid for real signatures)."""
+    return _make_valid_submission()
 
 
 # ---------------------------------------------------------------------------
@@ -150,6 +172,8 @@ def valid_context_insufficient_submission() -> dict[str, Any]:
             "not_successor_reception": True,
             "not_amendment": True,
             "bitcoin_originals_prevail": True,
+            "receipt_is_not_final_inclusion": True,
+            "test_phase_submission_may_be_reclassified": True,
         },
     }
 
@@ -169,3 +193,33 @@ def mock_github():
             "get_file_sha": sha_mock,
             "get_file_text": text_mock,
         }
+
+
+# ---------------------------------------------------------------------------
+# Helpers for test files that call validate_submission() directly
+# ---------------------------------------------------------------------------
+
+# Minimal mock proof for tests that don't test authorship itself
+MOCK_AUTHORSHIP_PROOF = {
+    "method": "ed25519",
+    "public_key_pem": _PUBLIC_KEY_PEM,
+    "public_key_sha256": _PUBLIC_KEY_RAW_SHA256,
+    "signed_payload_sha256": "deadbeef",
+    "signature_base64": "dGVzdA==",
+    "claim_boundary": {
+        "not authority": True,
+        "not attestation": True,
+        "not amendment": True,
+    },
+}
+
+
+def add_mock_proof(submission: dict[str, Any]) -> dict[str, Any]:
+    """Add a mock authorship_proof to a submission if not already present.
+
+    For tests that don't test authorship validation itself.
+    """
+    sub = dict(submission)
+    if "authorship_proof" not in sub:
+        sub["authorship_proof"] = dict(MOCK_AUTHORSHIP_PROOF)
+    return sub

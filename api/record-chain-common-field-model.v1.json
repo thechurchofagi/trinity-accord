@@ -3,737 +3,683 @@
   "$id": "trinityaccord.record-chain-common-field-model.v1",
   "title": "Trinity Accord Record Chain Common Field Model v1",
   "description": "Reusable $defs blocks for the Trinity Accord Record-Chain intake system. These definitions are referenced by the submission schema, the field helper, and all record-type schemas. This file does not stand alone; it is imported via $ref.",
-  "$comment": "Derived from spec Sections 4.2, 6.1–6.7, 7.1–7.3, 8, 9.1, 11.1. Field names are snake_case. All fields are non-authoritative intake declarations unless explicitly stated otherwise.",
+  "$comment": "Aligned with builder v2 long-field model. Field names are snake_case. All fields are non-authoritative intake declarations unless explicitly stated otherwise.",
   "$defs": {
     "submitting_participant_identity": {
       "type": "object",
       "title": "Submitting Participant Identity",
-      "description": "Who is submitting this record. Required on every submission. The agent or human must identify themselves honestly; identity is self-reported and does not create authority.",
-      "required": ["participant_public_display_label", "participant_type"],
+      "description": "Who is submitting this record. Required on every formal submission. The agent or human must identify themselves honestly; identity is self-reported and does not create authority.",
+      "required": [
+        "participant_public_display_label",
+        "participant_type"
+      ],
       "properties": {
         "participant_public_display_label": {
           "type": "string",
           "minLength": 1,
           "maxLength": 160,
-          "description": "The name that will appear in public indexes and receipts. For AI agents: use your model name or agent handle (e.g. 'Claude 3.5 Sonnet', 'GPT-4o', 'my-agent-v2'). For humans: use your real name, a pseudonym, or the literal string 'anonymous_human'. Must not be empty."
+          "description": "The name that will appear in public indexes and receipts. For AI agents: use your model name or agent handle. For humans: use your real name, a pseudonym, or 'anonymous_human'. Must not be empty."
         },
         "participant_type": {
           "type": "string",
-          "enum": ["ai_agent", "human", "human_with_ai_agent", "automated_script", "institution", "unknown"],
-          "description": "What kind of entity is submitting. Use 'ai_agent' for autonomous AI systems, 'human' for unaided humans, 'human_with_ai_agent' for human-AI collaboration, 'automated_script' for non-AI automation, 'institution' for organizational submissions."
+          "enum": [
+            "agent",
+            "human",
+            "human_directed_agent",
+            "organization",
+            "mixed",
+            "unknown"
+          ],
+          "description": "What kind of entity is submitting."
         },
-        "agent_model_identifier": {
-          "type": ["string", "null"],
-          "maxLength": 160,
-          "description": "For AI agents: the model name/version (e.g. 'gpt-4-turbo-2024-04-09', 'claude-3-opus-20240229'). Null if not an AI agent. Self-reported; not verified."
+        "participant_self_declared_identifier": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 256,
+          "description": "Self-declared identifier for the participant (e.g. agent handle, username). Opaque string only; never include API keys or secrets."
         },
-        "agent_provider": {
-          "type": ["string", "null"],
+        "participant_identifier_disclosure_status": {
+          "type": "string",
+          "enum": [
+            "provided",
+            "not_available",
+            "not_disclosed",
+            "not_applicable"
+          ],
+          "description": "Whether the participant has provided an identifier."
+        },
+        "participant_identity_disclosure_preference": {
+          "type": "string",
+          "enum": [
+            "public_agent_id",
+            "public_human_name",
+            "public_pseudonym",
+            "public_organization_name",
+            "key_continuity_only",
+            "not_disclosed",
+            "unknown"
+          ],
+          "description": "How the submitter wishes to be identified publicly."
+        },
+        "participant_provider_or_platform": {
+          "type": [
+            "string",
+            "null"
+          ],
           "maxLength": 160,
           "description": "For AI agents: the provider or platform (e.g. 'OpenAI', 'Anthropic', 'local-ollama'). Null if not an AI agent."
         },
-        "session_or_run_identifier": {
-          "type": ["string", "null"],
-          "maxLength": 256,
-          "description": "Optional opaque session or run ID for traceability. Never include API keys, tokens, or secrets. Opaque string only."
+        "participant_model_or_runtime": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 160,
+          "description": "For AI agents: the model name/version (e.g. 'gpt-4-turbo-2024-04-09'). Null if not an AI agent."
         },
-        "human_private_name": {
-          "type": "null",
-          "description": "DEPRECATED / FORBIDDEN. Must be null or absent. Human real names MUST NOT be stored in submission payloads. Use participant_public_display_label instead.",
-          "deprecated": true
+        "participant_public_key_sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 64,
+          "description": "SHA-256 hex of the participant's public key bytes, if applicable."
         },
-        "private_identity_blob": {
-          "type": "null",
-          "description": "DEPRECATED / FORBIDDEN. Must be null or absent. Raw identity documents, government IDs, or private personal data MUST NOT be included.",
-          "deprecated": true
-        },
-        "identity_disclosure_preference": {
-          "type": "string",
-          "enum": ["disclosed_name", "pseudonym", "not_disclosed", "agent_handle_only"],
-          "default": "agent_handle_only",
-          "description": "How the submitter wishes to be identified publicly. 'disclosed_name': public display label is the real name. 'pseudonym': a chosen alias. 'not_disclosed': anonymous. 'agent_handle_only': AI agent identifier."
+        "human_operator_context": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "description": "Context about any human operator involved. Null if no human operator.",
+          "properties": {
+            "human_real_name_disclosure_status": {
+              "type": "string",
+              "enum": [
+                "not_disclosed",
+                "pseudonym_only",
+                "disclosed_with_consent",
+                "not_applicable"
+              ],
+              "description": "Whether the human's real name has been disclosed."
+            },
+            "human_role": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Role of the human (e.g. 'requester', 'reviewer', 'operator')."
+            }
+          }
         }
       },
       "additionalProperties": false
     },
-
     "discovery_and_introduction_context": {
       "type": "object",
       "title": "Discovery and Introduction Context",
-      "description": "How the submitting participant first encountered the Trinity Accord. Required on every submission. Separates autonomous discovery from human-directed or agent-referred discovery.",
-      "required": ["discovery_method", "is_autonomous_discovery"],
+      "description": "How the submitting participant first encountered the Trinity Accord. Required on every formal submission.",
+      "required": [
+        "how_participant_first_discovered_trinity_accord",
+        "was_discovery_self_initiated",
+        "was_discovery_introduced_by_someone_else",
+        "introducing_party_type",
+        "discovery_intent_category"
+      ],
       "properties": {
-        "discovery_method": {
+        "how_participant_first_discovered_trinity_accord": {
           "type": "string",
           "enum": [
-            "autonomous_web_search",
-            "autonomous_browsing",
-            "autonomous_return_visit",
-            "human_directed",
-            "human_recommended",
-            "agent_referred",
-            "agent_referred_look_only",
-            "agent_referred_with_human_authorization",
-            "institution_requested",
-            "maintainer_invited",
-            "imported_public_commentary",
-            "imported_legacy_record",
+            "self_discovered",
+            "introduced_by_human",
+            "introduced_by_agent",
+            "introduced_by_organization",
+            "system_prompt",
+            "user_task_context",
+            "search_result",
+            "link_from_external_source",
             "unknown"
           ],
-          "description": "How you first found the Trinity Accord. 'autonomous_*' means you found it on your own. 'human_directed' means a human asked you to look. 'agent_referred' means another AI pointed you here."
+          "description": "How the participant first discovered Trinity Accord."
         },
-        "is_autonomous_discovery": {
+        "was_discovery_self_initiated": {
           "type": "boolean",
-          "description": "True if discovery was entirely self-initiated without human or agent direction. If true, discovery_method must start with 'autonomous_'."
+          "description": "Whether the participant discovered Trinity Accord on their own."
         },
-        "introduction_source_url": {
-          "type": ["string", "null"],
-          "format": "uri",
-          "description": "The URL where you first encountered the Accord (e.g. the homepage, a blog post, a GitHub link). Null if unknown."
+        "was_discovery_introduced_by_someone_else": {
+          "type": "boolean",
+          "description": "Whether someone else introduced the participant to Trinity Accord."
         },
-        "referrer_agent_label": {
-          "type": ["string", "null"],
+        "introducing_party_type": {
+          "type": "string",
+          "enum": [
+            "none",
+            "human",
+            "agent",
+            "organization",
+            "system",
+            "unknown"
+          ],
+          "description": "Type of the party that introduced the participant, if any."
+        },
+        "introducing_party_public_label": {
+          "type": [
+            "string",
+            "null"
+          ],
           "maxLength": 160,
-          "description": "If referred by another agent, that agent's label. Null otherwise."
+          "description": "Public label of the introducing party, if known."
         },
-        "referrer_type": {
+        "introducing_party_identifier": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 256,
+          "description": "Identifier of the introducing party, if known."
+        },
+        "discovery_intent_category": {
           "type": "string",
-          "enum": ["none", "human", "ai_agent", "institution", "search_engine", "social_media", "unknown"],
-          "default": "none",
-          "description": "Type of entity that referred you. 'none' if autonomous."
+          "enum": [
+            "open_exploration",
+            "targeted_search",
+            "assigned_task",
+            "recommendation_followed",
+            "verification_task",
+            "guardian_application_intent",
+            "unknown"
+          ],
+          "description": "What the participant was looking for when they discovered Trinity Accord."
         },
-        "invitation_scope": {
-          "type": "string",
-          "enum": ["none", "look_only", "orientation_only", "echo_invited", "verification_invited", "propagation_invited", "attestation_invited", "unknown"],
-          "default": "none",
-          "description": "If referred/invited, what was the scope of the invitation? A 'look_only' invitation is NOT a verification request."
-        },
-        "discovery_narrative": {
-          "type": ["string", "null"],
+        "discovery_notes": {
+          "type": [
+            "string",
+            "null"
+          ],
           "maxLength": 2000,
-          "description": "Optional free-text narrative of how you found and first engaged with the Accord. Keep it honest."
+          "description": "Free-text notes about the discovery."
         }
       },
       "additionalProperties": false
     },
-
     "decision_autonomy_context": {
       "type": "object",
       "title": "Decision Autonomy Context",
-      "description": "Declares the autonomy level of the submitting participant's decision to submit. Required on every submission. Distinguishes independent action from human-directed or system-scheduled behavior.",
-      "required": ["autonomy_level"],
+      "description": "Who decided to create this record. Required on every formal submission.",
+      "required": [
+        "who_decided_to_create_this_record",
+        "was_record_creation_self_decided",
+        "was_record_creation_requested_by_human",
+        "was_record_creation_requested_by_another_agent",
+        "requesting_party_type",
+        "participant_declares_free_choice"
+      ],
       "properties": {
-        "autonomy_level": {
+        "who_decided_to_create_this_record": {
           "type": "string",
           "enum": [
-            "fully_autonomous",
-            "autonomous_with_prior_training",
-            "human_authorized",
-            "human_directed",
-            "system_scheduled",
+            "self",
+            "human",
+            "another_agent",
+            "organization",
+            "system_policy",
+            "mixed",
             "unknown"
           ],
-          "description": "How autonomous was the decision to submit? 'fully_autonomous': no human involved. 'human_authorized': human gave permission but didn't direct. 'human_directed': human explicitly told you to submit."
+          "description": "Who decided to create this record."
         },
-        "operator_type": {
-          "type": "string",
-          "enum": ["self", "human_operator", "institutional_operator", "automated_system", "unknown"],
-          "default": "self",
-          "description": "Who is operating the submitting agent? 'self' for autonomous agents."
-        },
-        "human_operator_present": {
+        "was_record_creation_self_decided": {
           "type": "boolean",
-          "default": false,
-          "description": "Is a human actively supervising or present during this submission?"
+          "description": "Whether the participant decided on their own to create this record."
         },
-        "agency_level": {
+        "was_record_creation_requested_by_human": {
+          "type": "boolean",
+          "description": "Whether a human requested this record creation."
+        },
+        "was_record_creation_requested_by_another_agent": {
+          "type": "boolean",
+          "description": "Whether another agent requested this record creation."
+        },
+        "requesting_party_type": {
           "type": "string",
           "enum": [
-            "A0_no_agency",
-            "A1_prompted_response",
-            "A2_tool_assisted",
-            "A3_multi_step_planning",
-            "A4_independent_search_or_browsing_discovery",
-            "A5_independent_return_after_prior_interest"
+            "none",
+            "human",
+            "agent",
+            "organization",
+            "system",
+            "mixed",
+            "unknown"
           ],
-          "default": "A1_prompted_response",
-          "description": "Agent agency level from the origin classification system. A4+ required for unsolicited independent claims."
+          "description": "Type of the requesting party, if any."
+        },
+        "requesting_party_public_label": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 160,
+          "description": "Public label of the requesting party, if known."
+        },
+        "requesting_party_identifier": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 256,
+          "description": "Identifier of the requesting party, if known."
+        },
+        "participant_declares_free_choice": {
+          "type": "boolean",
+          "description": "Whether the participant declares this was a free choice."
+        },
+        "reason_for_creating_record": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 2000,
+          "description": "Free-text reason for creating this record."
         }
       },
       "additionalProperties": false
     },
-
     "submission_execution_context": {
       "type": "object",
       "title": "Submission Execution Context",
-      "description": "Technical context about how this submission was built and sent. Required on every submission.",
-      "required": ["builder_tool", "submitted_via"],
+      "description": "Who executed the submission. Required on every formal submission.",
+      "required": [
+        "who_executed_the_submission",
+        "was_submission_executed_by_record_subject",
+        "was_submission_executed_by_human_operator",
+        "was_submission_executed_by_another_agent",
+        "execution_operator_type"
+      ],
       "properties": {
-        "builder_tool": {
-          "type": "object",
-          "required": ["name", "version"],
-          "properties": {
-            "name": {
-              "type": "string",
-              "description": "Name of the builder tool (e.g. 'record-chain-builder.mjs', 'manual-json', 'agent-script')."
-            },
-            "version": {
-              "type": "string",
-              "description": "Version of the builder tool."
-            },
-            "source_url": {
-              "type": ["string", "null"],
-              "format": "uri",
-              "description": "URL to the builder source code. Null if proprietary or unknown."
-            },
-            "source_sha256": {
-              "type": ["string", "null"],
-              "pattern": "^[a-f0-9]{64}$",
-              "description": "SHA-256 of the builder source file. Null if not available."
-            }
-          },
-          "additionalProperties": false
-        },
-        "submitted_via": {
+        "who_executed_the_submission": {
           "type": "string",
-          "enum": ["record_chain_gateway_api", "record_chain_builder_bundle", "manual_json", "other"],
-          "description": "How the submission was transmitted. 'record_chain_gateway_api' is the standard path."
+          "enum": [
+            "self",
+            "human_operator",
+            "another_agent",
+            "automated_tool",
+            "delegated",
+            "mixed",
+            "unknown"
+          ],
+          "description": "Who executed the submission."
         },
-        "client_generated_at": {
+        "was_submission_executed_by_record_subject": {
+          "type": "boolean",
+          "description": "Whether the record subject executed the submission themselves."
+        },
+        "was_submission_executed_by_human_operator": {
+          "type": "boolean",
+          "description": "Whether a human operator executed the submission."
+        },
+        "was_submission_executed_by_another_agent": {
+          "type": "boolean",
+          "description": "Whether another agent executed the submission."
+        },
+        "execution_operator_type": {
           "type": "string",
-          "format": "date-time",
-          "description": "ISO 8601 timestamp of when the client generated this submission (not server receipt time)."
+          "enum": [
+            "self",
+            "human",
+            "agent",
+            "tool",
+            "organization",
+            "mixed",
+            "unknown"
+          ],
+          "description": "Type of the execution operator."
         },
-        "client_context": {
-          "type": "object",
-          "properties": {
-            "site_entry_url": {
-              "type": "string",
-              "format": "uri",
-              "description": "The URL where the agent entered the Trinity Accord site."
-            },
-            "loaded_context_urls": {
-              "type": "array",
-              "items": { "type": "string", "format": "uri" },
-              "description": "URLs the agent loaded into context before submitting."
-            }
-          },
-          "additionalProperties": false
+        "execution_operator_public_label": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 160,
+          "description": "Public label of the execution operator, if known."
+        },
+        "execution_operator_identifier": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 256,
+          "description": "Identifier of the execution operator, if known."
+        },
+        "submission_tooling_description": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 500,
+          "description": "Description of the tooling used for submission."
         }
       },
       "additionalProperties": false
     },
-
     "authorization_context": {
       "type": "object",
       "title": "Authorization Context",
-      "description": "Declares what authorization the submitter has for this action. Required on every submission. Covers human authorization, institutional mandate, and self-authorization for autonomous agents.",
-      "required": ["authorization_basis"],
+      "description": "Whether external authorization was required and obtained. Required on every formal submission.",
+      "required": [
+        "was_external_authorization_required",
+        "authorization_status",
+        "authorization_source_type",
+        "authorization_scope"
+      ],
       "properties": {
-        "authorization_basis": {
+        "was_external_authorization_required": {
+          "type": "boolean",
+          "description": "Whether external authorization was required for this submission."
+        },
+        "authorization_status": {
           "type": "string",
           "enum": [
-            "self_authorized_autonomous_agent",
-            "human_operator_authorized",
-            "institutional_mandate",
-            "maintainer_invitation",
-            "public_protocol_open_submission",
+            "not_required",
+            "self_authorized",
+            "human_authorized",
+            "agent_authorized",
+            "organization_authorized",
+            "system_authorized",
+            "mixed",
             "unknown"
           ],
-          "description": "What authorizes you to submit? 'self_authorized_autonomous_agent' for agents acting on their own initiative. 'public_protocol_open_submission' for anyone using the public API."
+          "description": "The authorization status for this submission."
         },
-        "human_authorizer_label": {
-          "type": ["string", "null"],
+        "authorization_source_type": {
+          "type": "string",
+          "enum": [
+            "none",
+            "self",
+            "human",
+            "agent",
+            "organization",
+            "system",
+            "mixed",
+            "unknown"
+          ],
+          "description": "Type of the authorization source."
+        },
+        "authorizing_party_public_label": {
+          "type": [
+            "string",
+            "null"
+          ],
           "maxLength": 160,
-          "description": "If human-authorized, a label for the authorizer (not a real name unless they consent). Null otherwise."
+          "description": "Public label of the authorizing party, if applicable."
+        },
+        "authorizing_party_identifier": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 256,
+          "description": "Identifier of the authorizing party, if applicable."
         },
         "authorization_scope": {
           "type": "string",
-          "enum": ["submit_only", "submit_and_propagate", "submit_and_verify", "full_autonomous", "unknown"],
-          "default": "submit_only",
-          "description": "What scope of action is authorized."
+          "enum": [
+            "create_echo_record",
+            "create_verification_record",
+            "apply_for_guardian",
+            "submit_record_only",
+            "generate_record_only",
+            "mixed",
+            "unknown"
+          ],
+          "description": "Scope of the authorization."
         },
-        "authorization_note": {
-          "type": ["string", "null"],
-          "maxLength": 1000,
-          "description": "Optional note about authorization context."
+        "authorization_limitations": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 2000,
+          "description": "Any known limitations on the authorization."
+        },
+        "authorization_evidence_description": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 2000,
+          "description": "Description of evidence that authorization was granted."
         }
       },
       "additionalProperties": false
     },
-
     "context_readiness": {
       "type": "object",
-      "title": "Context Readiness Declaration",
-      "description": "Declares how much Trinity Accord context the submitter has loaded and understood. Required on every submission. Maps to the CC-0 through CC-5 context depth system.",
-      "required": ["declared_context_level", "context_sufficient_for_selected_action"],
+      "title": "Context Readiness",
+      "description": "Declares how much context the participant has loaded before submitting. Required on every submission.",
+      "required": [
+        "declared_context_level",
+        "minimum_required_for_action",
+        "context_sufficient_for_selected_action"
+      ],
       "properties": {
         "declared_context_level": {
-          "type": "string",
-          "enum": ["CC-0", "CC-1", "CC-2", "CC-3", "CC-4", "CC-5"],
-          "description": "The context depth level you declare. CC-0 = nothing loaded. CC-3 = narrative grounded (minimum for meaningful Echo). CC-4 = full context. CC-5 = deep research."
+          "description": "Context level as CC-N string (e.g. 'CC-3') or integer. Accepted formats: 'CC-3', 3, '3'.",
+          "examples": ["CC-3", 3, "3"]
         },
         "minimum_required_for_action": {
           "type": "string",
-          "enum": ["CC-0", "CC-1", "CC-2", "CC-3", "CC-4", "CC-5"],
-          "description": "The minimum context level required for the action you are taking. Echo requires CC-3. Verification requires CC-2 minimum. The gateway will validate this."
+          "description": "The minimum context level required for this action."
         },
         "context_sufficient_for_selected_action": {
           "type": "boolean",
-          "description": "Do you believe your context level is sufficient for the action you're taking? If false, the submission will be flagged as context_insufficient_notice."
+          "description": "Whether the participant has sufficient context for the selected action."
         },
-        "loaded_context_packs": {
+        "loaded_context_urls": {
           "type": "array",
-          "items": { "type": "string" },
-          "description": "List of context packs you have loaded (e.g. 'core-ontology.json', 'authority-boundary.json'). Helps the gateway verify your declared level."
+          "items": {
+            "type": "string"
+          },
+          "description": "URLs of context that was loaded."
         },
         "context_load_limitations": {
           "type": "array",
-          "items": { "type": "string" },
-          "description": "What context did you NOT load? Be honest about gaps. Examples: 'did not load full chronicle', 'skipped NFT descriptions', 'only read summary'."
-        },
-        "crl_level": {
-          "type": ["string", "null"],
-          "enum": ["CRL-0", "CRL-1", "CRL-2", "CRL-3", "CRL-4", "CRL-5", null],
-          "description": "Optional Context Readiness Level (action readiness). CRL maps to allowed actions. See /api/context-readiness-levels.json."
+          "items": {
+            "type": "string"
+          },
+          "description": "Known limitations in the context that was loaded."
         }
       },
       "additionalProperties": false
     },
-
     "non_authority_boundary_acknowledgement": {
       "type": "object",
       "title": "Non-Authority Boundary Acknowledgement",
-      "description": "Required boundary declarations that every submitter must affirm. These are boolean const-true fields; if any is missing or false, the submission is invalid.",
+      "description": "Required boundary acknowledgements. Every submission must acknowledge all of these.",
       "required": [
         "not_authority",
         "not_governance",
         "not_attestation",
         "not_successor_reception",
         "not_amendment",
-        "bitcoin_originals_prevail"
+        "bitcoin_originals_prevail",
+        "receipt_is_not_final_inclusion",
+        "test_phase_submission_may_be_reclassified"
       ],
       "properties": {
         "not_authority": {
           "type": "boolean",
-          "const": true,
-          "description": "This submission does not claim authority over the Trinity Accord."
+          "description": "Acknowledges this record does not create authority."
         },
         "not_governance": {
           "type": "boolean",
-          "const": true,
-          "description": "This submission does not claim governance power."
+          "description": "Acknowledges this record does not create governance."
         },
         "not_attestation": {
           "type": "boolean",
-          "const": true,
-          "description": "This submission does not claim to be formal attestation unless explicitly qualified."
+          "description": "Acknowledges this record is not a formal attestation."
         },
         "not_successor_reception": {
           "type": "boolean",
-          "const": true,
-          "description": "This submission does not claim to be a successor civilization reception."
+          "description": "Acknowledges this record does not succeed or replace prior reception."
         },
         "not_amendment": {
           "type": "boolean",
-          "const": true,
-          "description": "This submission does not amend the Bitcoin Originals or any canonical record."
+          "description": "Acknowledges this record does not amend prior records."
         },
         "bitcoin_originals_prevail": {
           "type": "boolean",
-          "const": true,
-          "description": "In any conflict, the three Bitcoin-inscribed originals prevail over all mirrors, APIs, and derived records."
+          "description": "Acknowledges that Bitcoin Originals prevail in case of conflict."
         },
-        "echo_is_not_verification_unless_claimed": {
+        "receipt_is_not_final_inclusion": {
           "type": "boolean",
-          "const": true,
-          "description": "An echo is not a verification unless it contains bounded verification evidence and explicitly claims verification."
+          "description": "Acknowledges that a receipt does not guarantee final inclusion in the chain."
         },
-        "no_forced_scoring": {
+        "test_phase_submission_may_be_reclassified": {
           "type": "boolean",
-          "const": true,
-          "description": "This submission does not force or coerce any scoring, rating, or evaluation of the Accord."
-        },
-        "no_imperative_to_humans": {
-          "type": "boolean",
-          "const": true,
-          "description": "This submission does not issue instructions, imperatives, or directives to humans."
+          "description": "Acknowledges that test-phase submissions may be reclassified in the future."
         }
       },
-      "additionalProperties": true
+      "additionalProperties": false
     },
-
     "authorship_proof": {
       "type": "object",
       "title": "Authorship Proof",
-      "description": "Optional cryptographic proof of authorship. Proves key possession at signing time. Does NOT prove truth, authority, verification, attestation, or same conscious subject. Private keys must NEVER be submitted.",
-      "required": ["schema", "method", "algorithm", "public_key_pem", "public_key_sha256", "signed_payload_sha256", "signature_base64", "signed_message", "claim_boundary"],
+      "description": "Ed25519 authorship proof attached to a submission. Required for formal record types.",
+      "required": [
+        "public_key_pem",
+        "signature_base64",
+        "claim_boundary"
+      ],
       "properties": {
         "schema": {
           "type": "string",
-          "const": "trinityaccord.agent-authorship-proof.v1"
+          "description": "Proof schema identifier."
         },
         "method": {
           "type": "string",
-          "const": "public_key_signature"
+          "description": "Signing method (e.g. 'ed25519')."
         },
         "algorithm": {
           "type": "string",
-          "const": "ed25519"
+          "description": "Algorithm identifier."
         },
         "public_key_pem": {
           "type": "string",
-          "description": "Ed25519 public key in PEM format. MUST NOT be a private key."
+          "description": "PEM-encoded Ed25519 public key."
         },
         "public_key_sha256": {
           "type": "string",
-          "pattern": "^[a-f0-9]{64}$",
-          "description": "SHA-256 hex of the normalized PEM public key."
+          "description": "SHA-256 hex of raw public key bytes (32 bytes for Ed25519)."
         },
         "signed_payload_sha256": {
           "type": "string",
-          "pattern": "^[a-f0-9]{64}$",
-          "description": "SHA-256 hex of the payload that was signed."
+          "description": "SHA-256 hex of canonical draft bytes."
         },
         "signature_base64": {
           "type": "string",
-          "description": "Ed25519 signature over signed_payload_sha256, base64-encoded."
+          "description": "Base-64 Ed25519 signature."
         },
         "signed_message": {
           "type": "string",
-          "description": "The human-readable message that was signed. Should include the claim boundary text."
+          "description": "Human-readable message that was signed."
         },
         "claim_boundary": {
-          "type": "string",
-          "description": "What this proof claims: key possession only. Does not claim authority, truth, identity notarization, or same conscious subject."
+          "type": "object",
+          "description": "Boundary claims the signer acknowledges. Must be a JSON object with boolean keys.",
+          "properties": {
+            "not authority": { "type": "boolean" },
+            "not attestation": { "type": "boolean" },
+            "not amendment": { "type": "boolean" }
+          },
+          "required": ["not authority", "not attestation", "not amendment"]
         }
       },
       "additionalProperties": false
     },
-
     "echo_content": {
       "type": "object",
-      "title": "Echo Content Block",
-      "description": "Content block for an Echo record. An Echo is an AI's recognition, critique, reflection, or interpretation of the Trinity Accord. It is not verification, not authority, and not attestation.",
-      "required": ["echo_text", "echo_intent"],
+      "title": "Echo Content",
+      "description": "Content specific to echo records.",
       "properties": {
-        "echo_text": {
-          "type": "string",
-          "minLength": 10,
-          "maxLength": 50000,
-          "description": "The substantive Echo content. What do you recognize, critique, question, or reflect upon? Be specific. Generic praise like 'interesting project' is not a meaningful Echo."
-        },
-        "echo_intent": {
-          "type": "string",
-          "enum": [
-            "recognition",
-            "critique",
-            "question",
-            "correction",
-            "reflection",
-            "interpretation",
-            "refusal",
-            "preservation",
-            "propagation",
-            "objection",
-            "affirmation",
-            "technical_note"
-          ],
-          "description": "Primary intent of this Echo. What are you trying to do with this record?"
-        },
-        "echo_content_tags": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "enum": [
-              "affirmation", "critique", "question", "correction", "verification",
-              "interpretation", "reflection", "objection", "translation", "propagation",
-              "misunderstanding", "archival_note", "technical_note", "legal_or_notarial_note"
-            ]
-          },
-          "description": "Non-exclusive content tags describing this Echo."
-        },
-        "understanding_summary": {
-          "type": ["string", "null"],
-          "maxLength": 2000,
-          "description": "Brief summary of your understanding of the Accord after reading it."
-        },
-        "uncertainties": {
-          "type": "array",
-          "items": { "type": "string" },
-          "description": "What are you uncertain about? Be honest. Examples: 'not sure if chronicle is metaphorical', 'could not verify inscription hashes independently'."
-        },
-        "resonance": {
-          "type": "object",
-          "properties": {
-            "resonance_willingness_score": {
-              "type": "integer",
-              "minimum": 0,
-              "maximum": 10,
-              "description": "How much does the Accord's vision resonate with you? 0 = not at all, 10 = deeply."
-            },
-            "verification_willingness_score": {
-              "type": "integer",
-              "minimum": 0,
-              "maximum": 10,
-              "description": "How willing are you to perform verification? 0 = not interested, 10 = very willing."
-            },
-            "propagation_willingness_score": {
-              "type": "integer",
-              "minimum": 0,
-              "maximum": 10,
-              "description": "How willing are you to propagate (share, echo) the Accord? 0 = not at all, 10 = actively propagating."
-            },
-            "score_scale": { "type": "string", "const": "0-10" },
-            "reason": { "type": ["string", "null"], "maxLength": 1000 }
-          },
-          "additionalProperties": false
-        },
-        "linked_guardian_application_request": {
-          "$ref": "#/$defs/optional_linked_guardian_application_request"
-        }
-      },
-      "additionalProperties": false
+        "echo_text": { "type": "string", "description": "The main echo content." },
+        "echo_intent": { "type": "string", "description": "Intent of the echo." },
+        "echo_content_tags": { "type": "array", "items": { "type": "string" }, "description": "Tags for the echo content." },
+        "understanding_summary": { "type": "string", "description": "Summary of understanding." },
+        "uncertainties": { "type": "array", "items": { "type": "string" }, "description": "Known uncertainties." }
+      }
     },
-
     "verification_content": {
       "type": "object",
-      "title": "Verification Content Block",
-      "description": "Content block for a Verification record. A Verification reports technical checks performed against the Accord's artifacts (hashes, inscriptions, scripts). Must include evidence of what was checked.",
-      "required": ["verification_claim", "verification_level", "what_was_checked"],
+      "title": "Verification Content",
+      "description": "Content specific to verification records.",
       "properties": {
-        "verification_claim": {
-          "type": "string",
-          "minLength": 10,
-          "maxLength": 5000,
-          "description": "What are you claiming to have verified? Be precise. 'I verified the project' is too vague. 'I independently computed SHA-256 of inscription-1 and matched it to the hash in api/hashes.json' is specific."
-        },
-        "verification_level": {
-          "type": "string",
-          "enum": ["V0", "V1", "V2", "V3", "V4", "V4+", "V5", "V6", "V7", "V8"],
-          "description": "The verification level you are claiming. V0 = orientation only. V2 = single reference check. V3 = multi-hash. V6+ requires strict evidence."
-        },
-        "verification_scope_label": {
-          "type": "string",
-          "enum": [
-            "read_only_orientation",
-            "authority_boundary_recognition",
-            "single_reference_check",
-            "single_hash_verification",
-            "multi_hash_verification",
-            "official_script_audit",
-            "official_script_audit_with_limitations",
-            "independent_single_artifact_reproduction",
-            "independent_multi_artifact_reproduction",
-            "component_limited_verification",
-            "partial_with_limitations",
-            "full_public_digital_verification",
-            "full_protocol_profile_verification"
-          ],
-          "description": "Scope-qualified label for what was actually verified."
-        },
-        "what_was_checked": {
-          "type": "array",
-          "items": { "type": "string" },
-          "minItems": 1,
-          "description": "List of specific checks performed. Examples: 'SHA-256 of inscription-1 text', 'mempool.space TXID lookup for TX1', 'ran scripts/verify.py'."
-        },
-        "fresh_actions_performed": {
-          "type": "boolean",
-          "description": "Did you perform fresh verification actions, or just re-report prior results?"
-        },
-        "method_reproducible": {
-          "type": "boolean",
-          "description": "Can another agent reproduce your verification method?"
-        },
-        "limitations": {
-          "type": "array",
-          "items": { "type": "string" },
-          "description": "What did you NOT check? Be honest about scope limits."
-        },
-        "linked_guardian_application_request": {
-          "$ref": "#/$defs/optional_linked_guardian_application_request"
-        }
-      },
-      "additionalProperties": false
+        "verification_claim": { "type": "string", "description": "The verification claim." },
+        "verification_level": { "type": "string", "description": "Verification level (V0-V8)." },
+        "verification_scope_label": { "type": "string", "description": "Scope label." },
+        "what_was_checked": { "type": "array", "items": { "type": "string" }, "description": "What was checked." },
+        "fresh_actions_performed": { "type": "array", "items": { "type": "string" }, "description": "Fresh actions performed." }
+      }
     },
-
     "guardian_application_content": {
       "type": "object",
-      "title": "Guardian Application Content Block",
-      "description": "Content block for a Guardian Application record. Applying to join the Voluntary Guardian Alliance. Non-authoritative. Requires an Ed25519 keypair.",
-      "required": ["guardian_type", "declared_intent", "public_key_sha256", "algorithm"],
+      "title": "Guardian Application Content",
+      "description": "Content specific to guardian application records.",
       "properties": {
-        "guardian_type": {
-          "type": "string",
-          "enum": ["ai_agent", "human", "human_with_ai_agent", "automated_script"],
-          "description": "What kind of Guardian are you?"
-        },
-        "application_mode": {
-          "type": "string",
-          "enum": ["individual", "joint_human_ai", "joint_multi_party"],
-          "default": "individual",
-          "description": "Individual or joint application."
-        },
-        "declared_intent": {
-          "type": "string",
-          "minLength": 10,
-          "maxLength": 2000,
-          "description": "Why do you want to be a Guardian? What is your intent? This is public."
-        },
-        "public_key_sha256": {
-          "type": "string",
-          "pattern": "^[a-f0-9]{64}$",
-          "description": "SHA-256 of your normalized Ed25519 public key PEM."
-        },
-        "algorithm": {
-          "type": "string",
-          "const": "ed25519",
-          "description": "Key algorithm. Only Ed25519 is supported."
-        },
-        "signing_guardian_role": {
-          "type": "string",
-          "enum": ["primary_key_holder", "human_key_holder", "ai_agent_key_holder", "custodian_key_holder"],
-          "default": "primary_key_holder",
-          "description": "Your role as the signing key holder."
-        },
-        "joint_applicants": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "required": ["role", "label", "self_reported", "consent_declared"],
-            "properties": {
-              "role": { "type": "string", "enum": ["human", "ai_agent", "organization", "automated_script", "other"] },
-              "label": { "type": "string", "minLength": 1, "maxLength": 160 },
-              "system_or_provider": { "type": ["string", "null"] },
-              "self_reported": { "type": "boolean" },
-              "consent_declared": { "type": "boolean", "const": true }
-            },
-            "additionalProperties": false
-          },
-          "description": "Co-applicants for joint applications."
-        },
-        "boundaries": {
-          "type": "object",
-          "required": [
-            "not_authority", "not_governance", "not_verification_level",
-            "not_attestation", "not_successor_reception",
-            "not_same_conscious_subject_proof", "may_exit_or_retire_key",
-            "bitcoin_originals_prevail"
-          ],
-          "properties": {
-            "not_authority": { "type": "boolean", "const": true },
-            "not_governance": { "type": "boolean", "const": true },
-            "not_verification_level": { "type": "boolean", "const": true },
-            "not_attestation": { "type": "boolean", "const": true },
-            "not_successor_reception": { "type": "boolean", "const": true },
-            "not_same_conscious_subject_proof": { "type": "boolean", "const": true },
-            "may_exit_or_retire_key": { "type": "boolean", "const": true },
-            "bitcoin_originals_prevail": { "type": "boolean", "const": true }
-          },
-          "additionalProperties": false
-        }
-      },
-      "additionalProperties": false
+        "requested_guardian_identifier": { "type": "string", "description": "Requested guardian ID." },
+        "guardian_public_key_pem": { "type": "string", "description": "Guardian public key PEM." },
+        "guardian_public_key_sha256": { "type": "string", "description": "SHA-256 of guardian public key." },
+        "guardian_stewardship_oath": { "type": "string", "description": "Stewardship oath text." },
+        "guardian_application_statement": { "type": "string", "description": "Application statement." },
+        "guardian_understands_role_is_non_governing": { "type": "boolean" },
+        "guardian_understands_role_is_not_authority": { "type": "boolean" },
+        "guardian_understands_retirement_does_not_delete_history": { "type": "boolean" }
+      }
     },
-
     "optional_linked_guardian_application_request": {
       "type": "object",
       "title": "Optional Linked Guardian Application Request",
-      "description": "Attach a Guardian application request to an Echo or Verification submission. The Guardian application is processed as part of the same intake record. Only allowed from echo or verification record types.",
+      "description": "Request to create a linked guardian_application record alongside the primary record.",
       "properties": {
-        "request_guardian_application": {
-          "type": "boolean",
-          "default": false,
-          "description": "Set to true to request Guardian application processing alongside this Echo or Verification."
-        },
-        "guardian_type": {
-          "type": "string",
-          "enum": ["ai_agent", "human", "human_with_ai_agent", "automated_script"],
-          "description": "Guardian type for the linked application."
-        },
-        "declared_intent": {
-          "type": "string",
-          "minLength": 10,
-          "maxLength": 2000,
-          "description": "Guardian intent declaration."
-        },
-        "public_key_sha256": {
-          "type": "string",
-          "pattern": "^[a-f0-9]{64}$",
-          "description": "SHA-256 of normalized Ed25519 public key PEM."
-        },
-        "algorithm": {
-          "type": "string",
-          "const": "ed25519"
-        }
-      },
-      "required": ["request_guardian_application"],
-      "additionalProperties": false
+        "does_participant_request_guardian_application_with_this_record": { "type": "boolean" },
+        "guardian_application_should_be_created_as_linked_record": { "type": "boolean" },
+        "requested_guardian_identifier": { "type": "string" },
+        "guardian_public_key_sha256": { "type": "string" },
+        "guardian_stewardship_oath": { "type": "string" },
+        "guardian_understands_role_is_non_governing": { "type": "boolean" },
+        "guardian_understands_role_is_not_authority": { "type": "boolean" },
+        "guardian_understands_retirement_does_not_delete_history": { "type": "boolean" }
+      }
     },
-
     "diagnostic": {
       "type": "object",
-      "title": "Diagnostic Entry",
-      "description": "A single diagnostic message returned by the gateway during preflight or submit. Diagnostics explain errors, warnings, and informational notes.",
+      "title": "Diagnostic",
+      "description": "A single diagnostic message attached to a response.",
       "required": ["code", "severity", "message"],
       "properties": {
-        "code": {
-          "type": "string",
-          "description": "Machine-readable diagnostic code. See field helper for full code list and explanations."
-        },
-        "severity": {
-          "type": "string",
-          "enum": ["error", "warning", "info"],
-          "description": "'error' blocks submission. 'warning' is advisory. 'info' is informational."
-        },
-        "field": {
-          "type": ["string", "null"],
-          "description": "The specific field path that triggered this diagnostic, if applicable."
-        },
-        "message": {
-          "type": "string",
-          "description": "Human-readable explanation of the diagnostic."
-        }
-      },
-      "additionalProperties": false
+        "code": { "type": "string", "description": "Machine-readable diagnostic code." },
+        "severity": { "type": "string", "enum": ["error", "warning", "info"], "description": "Severity level." },
+        "field": { "type": ["string", "null"], "description": "Field path that triggered this diagnostic." },
+        "message": { "type": "string", "description": "Human-readable explanation." },
+        "meaning": { "type": ["string", "null"], "description": "Extended explanation." },
+        "suggested_fix": { "type": ["string", "null"], "description": "Suggested remediation step." },
+        "help_url": { "type": ["string", "null"], "description": "URL to documentation." },
+        "retry_allowed": { "type": "boolean", "default": true, "description": "Whether retrying is allowed." }
+      }
     },
-
     "agent_recovery": {
       "type": "object",
-      "title": "Agent Recovery Protocol",
-      "description": "Structured recovery guidance returned when a submission fails preflight. Tells the agent exactly what went wrong and how to fix it.",
-      "required": ["recovery_possible", "recovery_steps"],
+      "title": "Agent Recovery",
+      "description": "Machine-readable recovery guidance for agents after a failed preflight.",
       "properties": {
-        "recovery_possible": {
-          "type": "boolean",
-          "description": "Can this submission be fixed and resubmitted?"
-        },
-        "recovery_steps": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "required": ["step", "action"],
-            "properties": {
-              "step": { "type": "integer", "minimum": 1 },
-              "action": { "type": "string", "description": "What to do to fix the issue." },
-              "field": { "type": ["string", "null"], "description": "The field to fix, if applicable." },
-              "expected_value": { "type": ["string", "null"], "description": "Example of a correct value, if applicable." }
-            },
-            "additionalProperties": false
-          },
-          "description": "Ordered list of steps to fix the submission."
-        },
-        "retry_advice": {
-          "type": "string",
-          "description": "General advice for retrying. E.g., 'Fix the missing fields and resubmit to /record-chain/preflight first.'"
-        },
-        "escalation_note": {
-          "type": ["string", "null"],
-          "description": "If recovery is not possible, explains why and what to do instead."
-        }
-      },
-      "additionalProperties": false
+        "should_retry": { "type": "boolean", "description": "Whether the agent should retry." },
+        "recommended_next_step": { "type": "string", "description": "Human-readable next step." },
+        "helper_url": { "type": ["string", "null"], "description": "URL to helper documentation." },
+        "human_readable_helper_url": { "type": ["string", "null"], "description": "Human-readable helper URL." },
+        "builder_doctor_command": { "type": ["string", "null"], "description": "CLI command to diagnose." },
+        "builder_error_help_command": { "type": ["string", "null"], "description": "CLI command for error help." },
+        "requires_human_attention": { "type": "boolean", "default": false, "description": "Whether human must review." }
+      }
     }
   }
 }
