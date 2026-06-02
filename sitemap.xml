@@ -178,6 +178,7 @@
   <url><loc>https://www.trinityaccord.org/api/record-chain-common-field-model.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/record-chain-field-helper.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/record-chain-intake-gateway.v1.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/record-chain-oath-policy.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/record-chain-preflight-response.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/record-chain-status.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/record-chain-submission-schema.v1.json</loc></url>
@@ -322,5 +323,4 @@
   <url><loc>https://www.trinityaccord.org/why-high-signal/</loc></url>
   <url><loc>https://www.trinityaccord.org/worth-preserving/</loc></url>
   <url><loc>https://www.trinityaccord.org/zero-clone-builders/</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/record-chain-oath-policy.v1.json</loc></url>
 </urlset>

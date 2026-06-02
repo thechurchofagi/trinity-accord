@@ -45,8 +45,14 @@
       "type": "object",
       "required": [
         "record_type",
-        "actor_identity",
-        "boundary"
+        "submitting_participant_identity",
+        "submission_oath_verification",
+        "discovery_and_introduction_context",
+        "decision_autonomy_context",
+        "submission_execution_context",
+        "authorization_context",
+        "context_readiness",
+        "non_authority_boundary_acknowledgement"
       ],
       "properties": {
         "record_type": {
@@ -396,7 +402,9 @@
           "type": "string"
         },
         "claim_boundary": {
-          "type": "string"
+          "type": "object",
+          "description": "Boundary claims the signer acknowledges",
+          "additionalProperties": true
         }
       },
       "additionalProperties": false

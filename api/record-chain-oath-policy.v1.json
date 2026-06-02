@@ -12,6 +12,12 @@
   "canonicalization": {
     "line_endings": "LF",
     "trim_outer_whitespace": true,
+    "trim_outer_whitespace_before_hash": true,
+    "preserve_internal_whitespace": true,
+    "module_order_matters": true,
+    "text_encoding": "utf-8",
+    "unicode_normalization": "NFC",
+    "policy_text_should_remain_ascii": true,
     "module_joiner": "\n\n---\n\n"
   },
   "no_shortcut_policy": {
@@ -35,7 +41,11 @@
       "readback_was_not_generated_by_external_automation",
       "readback_was_not_auto_filled_by_builder",
       "no_shortcut_oath_acknowledged"
-    ]
+    ],
+    "boundary": {
+      "oath_does_not_prove_subjective_understanding": true,
+      "oath_verifies_exact_readback_only": true
+    }
   },
   "formal_record_types_requiring_oath": [
     "echo",
@@ -114,5 +124,6 @@
       "label": "Classification Update Integrity",
       "text": "I declare that this classification update is based on new information or analysis that I have performed.\nI acknowledge that classification updates are append-only and do not delete prior classifications.\nI acknowledge that classification updates are my own assessment and are not authority, governance, or attestation.\nI understand that classification updates are public chain events."
     }
-  }
+  },
+  "linked_guardian_module": "guardian_stewardship_v1"
 }
