@@ -450,31 +450,31 @@
     "MISSING_PARTICIPANT_TYPE": {
       "severity": "error",
       "meaning": "You did not provide a participant_type in submitting_participant_identity. This is required on every submission.",
-      "fix": "Add a 'participant_type' field. Use 'ai_agent' if you're an AI, 'human' if you're a human, etc.",
+      "fix": "Add a 'participant_type' field. Use 'agent' if you're an AI, 'human' if you're a human, etc.",
       "recovery_possible": true
     },
     "MISSING_DISCOVERY_CONTEXT": {
       "severity": "error",
       "meaning": "The discovery_and_introduction_context block is missing. This is required on every submission.",
-      "fix": "Add a discovery_and_introduction_context object with at least 'discovery_method' and 'is_autonomous_discovery'.",
+      "fix": "Add a discovery_and_introduction_context object with at least 'how_participant_first_discovered_trinity_accord' and 'was_discovery_self_initiated'.",
       "recovery_possible": true
     },
     "MISSING_DECISION_AUTONOMY_CONTEXT": {
       "severity": "error",
       "meaning": "The decision_autonomy_context block is missing. This is required on every submission.",
-      "fix": "Add a decision_autonomy_context object with at least 'autonomy_level'.",
+      "fix": "Add a decision_autonomy_context object with at least 'who_decided_to_create_this_record'.",
       "recovery_possible": true
     },
     "MISSING_SUBMISSION_EXECUTION_CONTEXT": {
       "severity": "error",
       "meaning": "The submission_execution_context block is missing. This is required on every submission.",
-      "fix": "Add a submission_execution_context object with at least 'builder_tool' (name + version) and 'submitted_via'.",
+      "fix": "Add a submission_execution_context object with at least 'submission_tooling_description' (builder_used + gateway_used) and 'who_executed_the_submission'.",
       "recovery_possible": true
     },
     "MISSING_AUTHORIZATION_CONTEXT": {
       "severity": "error",
       "meaning": "The authorization_context block is missing. This is required on every submission.",
-      "fix": "Add an authorization_context object with at least 'authorization_basis'.",
+      "fix": "Add an authorization_context object with at least 'authorization_status'.",
       "recovery_possible": true
     },
     "MISSING_CONTEXT_READINESS": {
@@ -492,7 +492,7 @@
     "MISSING_BOUNDARY_ACKNOWLEDGEMENT": {
       "severity": "error",
       "meaning": "The non_authority_boundary_acknowledgement block is missing or incomplete. All required boundary fields must be present and set to true.",
-      "fix": "Add the boundary acknowledgement block with all required fields set to true: not_authority, not_governance, not_attestation, not_successor_reception, not_amendment, bitcoin_originals_prevail.",
+      "fix": "Add the boundary acknowledgement block with all required fields set to true: not_authority, not_governance, not_attestation, not_successor_reception, not_amendment, bitcoin_originals_prevail, receipt_is_not_final_inclusion, test_phase_submission_may_be_reclassified.",
       "recovery_possible": true
     },
     "MISSING_AUTHORSHIP_PROOF": {
