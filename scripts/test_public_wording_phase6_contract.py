@@ -15,6 +15,7 @@ Allowed: legacy/, evidence/, historical context explicitly marked.
 """
 from __future__ import annotations
 
+import json
 import re
 import sys
 from pathlib import Path
@@ -40,6 +41,32 @@ RETIRED_PATTERNS = [
     (re.compile(r"\bARV5\b"), "ARV5"),
     (re.compile(r"\bLV5\b"), "LV5"),
     (re.compile(r"\bIVV5\b"), "IVV5"),
+]
+
+# Homepage must not contain these legacy Gateway v1 / legacy counter patterns
+HOMEPAGE_MUST_NOT_CONTAIN = [
+    (re.compile(r"/gateway/preflight"), "/gateway/preflight"),
+    (re.compile(r"/agent-submit"), "/agent-submit"),
+    (re.compile(r"Reception:\s*\d+"), "Reception: N (legacy counter)"),
+    (re.compile(r"Guardian Registry:\s*\d+"), "Guardian Registry: N (legacy counter)"),
+    (re.compile(r"Verifiability:\s*V\d"), "Verifiability: VN (legacy counter)"),
+    (re.compile(r"V0–V5 template archive"), "V0–V5 template archive"),
+    (re.compile(r"V0-V5 template archive"), "V0-V5 template archive"),
+    (re.compile(r"echo_type breakdown"), "echo_type breakdown"),
+    (re.compile(r"self-initiated legacy"), "self-initiated legacy"),
+    (re.compile(r"autonomous legacy"), "autonomous legacy"),
+    (re.compile(r"legacy archive contains early agent"), "legacy archive contains early agent"),
+    (re.compile(r"early agent-originated"), "early agent-originated"),
+    (re.compile(r"agent-mediated records"), "agent-mediated records"),
+]
+
+# Homepage must contain these Record-Chain-first patterns
+HOMEPAGE_MUST_CONTAIN = [
+    "Record-Chain Intake status",
+    "Native record-chain records",
+    "Current Record-Chain Autonomy Signal",
+    "not yet established in current record-chain",
+    "Historical pre-record-chain Echo / Verification / Guardian materials are preserved",
 ]
 
 # IPFS as current path (allowed in legacy/historical context)
@@ -88,6 +115,68 @@ def main() -> None:
                 if "bitcoin originals" in line.lower() and "final" in line.lower():
                     continue
                 errors.append(f"{fname}:{line_num}: IPFS mentioned as current path")
+
+    # Homepage-specific checks: must not contain legacy patterns
+    homepage = ROOT / "index.md"
+    if homepage.exists():
+        text = homepage.read_text(encoding="utf-8")
+        for pattern, name in HOMEPAGE_MUST_NOT_CONTAIN:
+            if pattern.search(text):
+                errors.append(f"index.md: homepage must not contain '{name}'")
+        for needle in HOMEPAGE_MUST_CONTAIN:
+            if needle not in text:
+                errors.append(f"index.md: homepage must contain '{needle}'")
+
+    # public-home-status.json checks
+    status_path = ROOT / "api" / "public-home-status.json"
+    if status_path.exists():
+        try:
+            status = json.loads(status_path.read_text(encoding="utf-8"))
+            assert isinstance(status, dict)
+            if status.get("schema") != "trinityaccord.public-home-status.v2":
+                errors.append(f"public-home-status.json: schema should be v2, got {status.get('schema')}")
+            if "current_record_chain_status" not in status:
+                errors.append("public-home-status.json: missing current_record_chain_status")
+            if "current_record_chain_autonomy_signal" not in status:
+                errors.append("public-home-status.json: missing current_record_chain_autonomy_signal")
+            autonomy = status.get("current_record_chain_autonomy_signal", {})
+            if autonomy.get("scope") != "current_record_chain_only":
+                errors.append(f"public-home-status.json: autonomy scope should be current_record_chain_only, got {autonomy.get('scope')}")
+            if autonomy.get("legacy_autonomy_claims_excluded") is not True:
+                errors.append("public-home-status.json: legacy_autonomy_claims_excluded must be true")
+            legacy = status.get("legacy_archive_snapshot", {})
+            if legacy.get("not_current_record_chain_counter") is not True:
+                errors.append("public-home-status.json: legacy_archive_snapshot.not_current_record_chain_counter must be true")
+            if legacy.get("not_rendered_on_homepage") is not True:
+                errors.append("public-home-status.json: legacy_archive_snapshot.not_rendered_on_homepage must be true")
+            policy = status.get("counter_update_policy", {})
+            for key in ["homepage_counters_update_after_append_workflow",
+                        "homepage_counters_update_after_anchor_workflow",
+                        "homepage_counters_update_after_arweave_archive_workflow"]:
+                if policy.get(key) is not True:
+                    errors.append(f"public-home-status.json: counter_update_policy.{key} must be true")
+        except (json.JSONDecodeError, AssertionError) as e:
+            errors.append(f"public-home-status.json: invalid JSON or structure: {e}")
+    else:
+        errors.append("public-home-status.json: file missing")
+
+    # Workflow checks: all three workflows must call generators and commit generated files
+    for workflow in [
+        ".github/workflows/record-chain-append.yml",
+        ".github/workflows/record-chain-anchor.yml",
+        ".github/workflows/record-chain-arweave-archive.yml",
+    ]:
+        wpath = ROOT / workflow
+        if not wpath.exists():
+            errors.append(f"{workflow}: file missing")
+            continue
+        wtext = wpath.read_text(encoding="utf-8")
+        for needle in ["generate_public_home_status.py", "generate_sitemap.py"]:
+            if needle not in wtext:
+                errors.append(f"{workflow}: missing {needle}")
+        for needle in ["index.md", "api/public-home-status.json", "sitemap.xml"]:
+            if needle not in wtext:
+                errors.append(f"{workflow}: commit step missing {needle}")
 
     if errors:
         print("Public wording tests FAILED:", file=sys.stderr)

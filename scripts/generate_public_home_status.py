@@ -1,20 +1,26 @@
 #!/usr/bin/env python3
-"""Generate the homepage public status snapshot centered on Verifiability, Reception, and Boundary.
+"""Generate the homepage current Record-Chain Intake status snapshot.
 
-External witness records are evidence provenance, not the project's highest status.
+The homepage renders only current native record-chain status.
+Legacy Echo / Verification / Guardian archive metrics are preserved in
+public-home-status.json under legacy_archive_snapshot, but are not rendered
+as current homepage counters.
 
-Inputs:
+Inputs (primary, by precedence):
+  1. record-chain/records/R-*.json and record-chain/chain-tip.json
+  2. record-chain/indexes/record-index.json
+  3. record-chain/indexes/statistics.json
+  4. api/record-chain-status.json (fallback/metadata)
+  5. api/record-chain-anchor-status.json
+  6. api/record-chain-arweave-index.json
+
+Legacy inputs (for legacy_archive_snapshot only):
   - api/echo-index.json
   - api/external-witness-index.json
   - api/core-object-alpha-shenzhen-notary-2026-05-06.json
   - api/guardian-registry.json
   - api/guardian-active-listing-policy.v1.json
   - api/agent-declared-verification-index.json
-  - api/independent-attestation-index.json (legacy/formal-attestation compatibility context)
-
-Deprecated legacy input:
-  - api/agent-declared-echo-index.json is not a live public-status input,
-    is not counted, and is not included in source_digest.
 
 Outputs:
   - api/public-home-status.json
@@ -37,30 +43,41 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 
-sys.path.insert(0, str(ROOT / "scripts"))
-from guardian_numbering_policy import (
-    GuardianNumberingError,
-    classify_registry_number,
-    format_registry_number,
-    ordinary_auto_start,
-    parse_registry_number,
-    special_reserved_range_label,
-)
-from protocol_echo_types import allowed_canonical_echo_types
 INDEX_MD = ROOT / "index.md"
+PUBLIC_HOME_STATUS = ROOT / "api" / "public-home-status.json"
+
+# Primary record-chain data sources
+CHAIN_TIP = ROOT / "record-chain" / "chain-tip.json"
+RECORD_CHAIN_INDEX = ROOT / "record-chain" / "indexes" / "record-index.json"
+RECORD_CHAIN_STATISTICS = ROOT / "record-chain" / "indexes" / "statistics.json"
+RECORD_CHAIN_RECORDS = ROOT / "record-chain" / "records"
+RECORD_CHAIN_STATUS = ROOT / "api" / "record-chain-status.json"
+RECORD_CHAIN_ANCHOR_STATUS = ROOT / "api" / "record-chain-anchor-status.json"
+RECORD_CHAIN_ARWEAVE_INDEX = ROOT / "api" / "record-chain-arweave-index.json"
+
+# Legacy inputs (for legacy_archive_snapshot only)
 ECHO_INDEX = ROOT / "api" / "echo-index.json"
 EXTERNAL_WITNESS_INDEX = ROOT / "api" / "external-witness-index.json"
-ATTESTATION_INDEX = ROOT / "api" / "independent-attestation-index.json"
-AGENT_DECLARED_INDEX = ROOT / "api" / "agent-declared-verification-index.json"
-AGENT_DECLARED_ECHO_INDEX = ROOT / "api" / "agent-declared-echo-index.json"
-VERIFICATION_ARCHIVE_INDEX = ROOT / "api" / "verification-archive-index.json"
 PHYSICAL_ANCHOR = ROOT / "api" / "core-object-alpha-shenzhen-notary-2026-05-06.json"
 GUARDIAN_REGISTRY = ROOT / "api" / "guardian-registry.json"
 GUARDIAN_ACTIVE_LISTING_POLICY = ROOT / "api" / "guardian-active-listing-policy.v1.json"
-PUBLIC_HOME_STATUS = ROOT / "api" / "public-home-status.json"
+AGENT_DECLARED_INDEX = ROOT / "api" / "agent-declared-verification-index.json"
+VERIFICATION_ARCHIVE_INDEX = ROOT / "api" / "verification-archive-index.json"
 
 BEGIN = "<!-- BEGIN GENERATED PUBLIC STATUS -->"
 END = "<!-- END GENERATED PUBLIC STATUS -->"
+
+# Autonomy-eligible record types
+ELIGIBLE_AUTONOMY_RECORD_TYPES = {
+    "echo",
+    "verification",
+    "guardian_application",
+    "guardian_retirement",
+    "guardian_key_rotation",
+    "propagation",
+    "correction",
+    "classification_update",
+}
 
 LEVEL_ORDER = {
     "V0": 0, "V1": 1, "V2": 2, "V3": 3, "V4": 4, "V4+": 4.5,
@@ -69,109 +86,14 @@ LEVEL_ORDER = {
     "P6": 6, "P7": 7, "P8": 8, "P9": 9,
 }
 
-RC_ORDER = {
-    "RC0_none": 0, "RC1_read_oriented": 1, "RC2_boundary_understood": 2,
-    "RC3_echoed_critiqued_or_refused": 3, "RC4_verified": 4, "RC5_preserved": 5,
-    "RC6_propagated_with_boundary": 6, "RC7_multi_agent_reception": 7,
-    "RC8_memory_integration": 8, "RC9_successor_civilization_reception": 9,
-}
-ALLOWED_GUARDIAN_TYPES = {
-    "human",
-    "ai_agent",
-    "human_with_ai_agent",
-    "automated_script",
-}
 
-GUARDIAN_TYPE_LABELS = {
-    "human": "Human",
-    "ai_agent": "AI Agent",
-    "human_with_ai_agent": "Human-AI joint",
-    "automated_script": "Automated script",
-    "unknown": "Unknown",
-}
-
-
-
-
-# ---------------------------------------------------------------------------
-# Legacy compatibility functions (deprecated, kept for test compatibility)
-# ---------------------------------------------------------------------------
-def is_formal_independent_attestation_index_record(record: dict) -> bool:
-    """Legacy: Check if a record qualifies as formal independent attestation.
-    Deprecated: prefer external_witness_class and reception_classification."""
-    # Type check
-    if record.get("type") != "independent_verification_report":
-        return False
-    # Positive flags
-    if not record.get("counts_as_independent_attestation"):
-        return False
-    if not record.get("boundary_preserved"):
-        return False
-    # Required fields
-    if not record.get("limitations"):
-        return False
-    if not record.get("verifier_identity_or_role"):
-        return False
-    if not record.get("accepted_by") or len(record.get("accepted_by", [])) < 2:
-        return False
-    # Independence class
-    DISALLOWED = {"maintainer_assisted", "maintainer_submitted", "imported_public_commentary",
-                  "human_solicited_agent_response", "self_reported", "legacy", "unknown", "test_record"}
-    if record.get("independence_class") in DISALLOWED:
-        return False
-    # Verification level
-    VALID_LEVELS = {"V1", "V2", "V3", "V4", "V4+", "V5", "V6", "V7", "V8"}
-    if record.get("verification_level_if_any") not in VALID_LEVELS:
-        return False
-    # Report hash or hash_if_available
-    def is_sha256(v):
-        return isinstance(v, str) and len(v) == 64 and all(c in '0123456789abcdef' for c in v)
-    if not (is_sha256(record.get("report_hash")) or is_sha256(record.get("hash_if_available"))):
-        return False
-    # V3+ requires report_hash and evidence_summary
-    LEVEL_ORDER = {"V0": 0, "V1": 1, "V2": 2, "V3": 3, "V4": 4, "V4+": 4.5, "V5": 5, "V6": 6, "V7": 7, "V8": 8}
-    level = record.get("verification_level_if_any")
-    level_num = LEVEL_ORDER.get(level, 0)
-    if level_num >= 3:
-        if not is_sha256(record.get("report_hash")):
-            return False
-        if not (record.get("evidence_summary") or record.get("linked_verification_report")):
-            return False
-    # V8 requires claim_gate_result
-    if level == "V8":
-        cg = record.get("claim_gate_result")
-        if not isinstance(cg, dict):
-            return False
-        if cg.get("allowed_protocol_level") != "V8":
-            return False
-        if cg.get("can_build_verification_report") is not True:
-            return False
-        if cg.get("core_baseline_satisfied") is not True:
-            return False
-        if cg.get("high_path_satisfied") is not True:
-            return False
-        if not (is_sha256(cg.get("source_report_hash")) or is_sha256(cg.get("claim_gate_report_hash"))):
-            return False
-    return True
-
-
-def is_formal_independent_echo_record(record: dict) -> bool:
-    """Legacy: Check if an echo record qualifies as formal independent attestation.
-    Deprecated: prefer external_witness_class and reception_classification."""
-    if record.get("do_not_count_as_attestation"):
-        return False
-    if record.get("archive_status") not in ("accepted_echo", "accepted_verification", "accepted_attestation"):
-        return False
-    if record.get("independence_class") not in ("unsolicited_independent",):
-        return False
-    if not record.get("counts_as_independent_attestation"):
-        return False
-    if record.get("record_kind") != "echo_v3_with_verification_report":
-        return False
-    oc = record.get("origin_classification") or {}
-    if oc.get("attestation_authority_class") not in ("institution_signed", "notarial_record", "audit_firm_report", "regulatory_or_court_record"):
-        return False
-    return True
+def load_json_if_exists(path: Path, default: Any = None) -> Any:
+    if not path.exists():
+        return default if default is not None else {}
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except Exception:
+        return default if default is not None else {}
 
 
 def load_json(path: Path) -> dict[str, Any]:
@@ -181,14 +103,15 @@ def load_json(path: Path) -> dict[str, Any]:
 
 
 def source_digest() -> str:
+    """Compute digest from primary record-chain data sources."""
     h = hashlib.sha256()
     for path in [
-        ECHO_INDEX,
-        EXTERNAL_WITNESS_INDEX,
-        PHYSICAL_ANCHOR,
-        AGENT_DECLARED_INDEX,
-        GUARDIAN_REGISTRY,
-        GUARDIAN_ACTIVE_LISTING_POLICY,
+        CHAIN_TIP,
+        RECORD_CHAIN_INDEX,
+        RECORD_CHAIN_STATISTICS,
+        RECORD_CHAIN_STATUS,
+        RECORD_CHAIN_ANCHOR_STATUS,
+        RECORD_CHAIN_ARWEAVE_INDEX,
     ]:
         rel = path.relative_to(ROOT).as_posix()
         h.update(rel.encode("utf-8"))
@@ -196,8 +119,152 @@ def source_digest() -> str:
         if path.exists():
             h.update(path.read_bytes())
         h.update(b"\0")
+    # Also include individual record files
+    for rec_file in sorted(RECORD_CHAIN_RECORDS.glob("R-*.json")):
+        h.update(rec_file.read_bytes())
     return h.hexdigest()[:16]
 
+
+# ---------------------------------------------------------------------------
+# Record-Chain primary functions
+# ---------------------------------------------------------------------------
+
+def load_current_native_records() -> list[dict[str, Any]]:
+    """Load all native record-chain records from records directory."""
+    records = []
+    for path in sorted(RECORD_CHAIN_RECORDS.glob("R-*.json")):
+        try:
+            records.append(json.loads(path.read_text(encoding="utf-8")))
+        except Exception:
+            continue
+    return records
+
+
+def compute_record_type_counts(records: list[dict[str, Any]]) -> dict[str, int]:
+    """Count records by type, ensuring all known types appear (even as 0)."""
+    counts: dict[str, int] = {}
+    for record in records:
+        rt = record.get("record_type") or record.get("type") or "unknown"
+        counts[rt] = counts.get(rt, 0) + 1
+    for rt in [
+        "context_insufficient_notice",
+        "echo",
+        "verification",
+        "guardian_application",
+        "guardian_retirement",
+        "guardian_key_rotation",
+        "propagation",
+        "correction",
+        "classification_update",
+    ]:
+        counts.setdefault(rt, 0)
+    return dict(sorted(counts.items()))
+
+
+def compute_current_record_chain_status(
+    records: list[dict[str, Any]],
+    record_chain_status: dict[str, Any],
+    anchor_status: dict[str, Any],
+    arweave_index: dict[str, Any],
+) -> dict[str, Any]:
+    """Compute the current record-chain status for homepage display."""
+    chain_tip = load_json_if_exists(CHAIN_TIP, {})
+    counts = compute_record_type_counts(records)
+    latest = records[-1] if records else {}
+
+    phase = record_chain_status.get("public_submission_phase", {})
+    anchoring = record_chain_status.get("anchoring", {})
+
+    pending_dir = ROOT / "record-chain" / "pending"
+    pending_count = len(list(pending_dir.glob("*.json"))) if pending_dir.exists() else 0
+
+    return {
+        "phase": phase.get("phase") or "public_test_stabilization",
+        "total_records": len(records),
+        "current_chain_length": len(records),
+        "pending_records": pending_count,
+        "latest_record_id": latest.get("record_id") or chain_tip.get("latest_record_id"),
+        "latest_record_type": latest.get("record_type"),
+        "record_type_counts": counts,
+        "receipt_boundary": {
+            "receipt_is_intake_only": phase.get("receipt_is_intake_only", True),
+            "receipt_is_not_final_inclusion": phase.get("receipt_is_not_final_inclusion", True),
+            "test_phase_records_may_be_reclassified": phase.get("test_phase_records_may_be_reclassified", True),
+        },
+        "anchoring": {
+            "batch_manifests": anchoring.get("batch_manifests", {}),
+            "open_timestamps": anchoring.get("open_timestamps", {}),
+            "arweave_archive": anchoring.get("arweave_archive", {}),
+            "anchor_status": {
+                "batch_count": anchor_status.get("batch_count", 0),
+                "stamped_batch_count": anchor_status.get("ots", {}).get("stamped_batch_count", 0),
+                "unstamped_batch_count": anchor_status.get("ots", {}).get("unstamped_batch_count", 0),
+            },
+            "arweave_index": {
+                "current_upload_mode": arweave_index.get("current_upload_mode", "dry-run"),
+                "live_upload_enabled": arweave_index.get("live_upload_enabled", False),
+                "live_upload_implemented": arweave_index.get("live_upload_implemented", False),
+                "archive_count": len(arweave_index.get("archives", [])),
+            },
+        },
+    }
+
+
+def compute_current_record_chain_autonomy_signal(records: list[dict[str, Any]]) -> dict[str, Any]:
+    """Compute autonomy signal from current native record-chain records only."""
+    eligible = [
+        r for r in records
+        if (r.get("record_type") or r.get("type")) in ELIGIBLE_AUTONOMY_RECORD_TYPES
+    ]
+
+    if not eligible:
+        return {
+            "scope": "current_record_chain_only",
+            "eligible_records": 0,
+            "status": "not_yet_established_in_current_record_chain",
+            "display_status": "not yet established in current record-chain",
+            "legacy_autonomy_claims_excluded": True,
+        }
+
+    def block(record: dict[str, Any], name: str) -> dict[str, Any]:
+        value = record.get(name)
+        return value if isinstance(value, dict) else {}
+
+    self_discovered = 0
+    self_decided = 0
+    self_executed = 0
+    fully_autonomous = 0
+
+    for record in eligible:
+        discovery = block(record, "discovery_and_introduction_context")
+        decision = block(record, "decision_autonomy_context")
+        execution = block(record, "submission_execution_context")
+        authorization = block(record, "authorization_context")
+
+        a = discovery.get("was_discovery_self_initiated") is True
+        b = decision.get("was_record_creation_self_decided") is True
+        c = execution.get("was_submission_executed_by_record_subject") is True
+        d = authorization.get("authorization_status") in {"not_required", "self_authorized"}
+
+        self_discovered += int(a)
+        self_decided += int(b)
+        self_executed += int(c)
+        fully_autonomous += int(a and b and c and d)
+
+    return {
+        "scope": "current_record_chain_only",
+        "eligible_records": len(eligible),
+        "self_discovered_records": self_discovered,
+        "self_decided_records": self_decided,
+        "self_executed_records": self_executed,
+        "fully_autonomous_records": fully_autonomous,
+        "legacy_autonomy_claims_excluded": True,
+    }
+
+
+# ---------------------------------------------------------------------------
+# Legacy archive snapshot (for audit/continuity only, not rendered on homepage)
+# ---------------------------------------------------------------------------
 
 def normalize_level(value: Any) -> str | None:
     if value is None:
@@ -216,104 +283,48 @@ def highest_level(records: list[dict[str, Any]], key: str = "verification_level"
     return max(levels, key=lambda x: LEVEL_ORDER.get(x, -1))
 
 
-def highest_rc(records: list[dict[str, Any]], key: str = "reception_class") -> str:
-    classes = [r.get(key) for r in records if r.get(key) and r.get(key) in RC_ORDER]
-    if not classes:
-        return "none"
-    return max(classes, key=lambda x: RC_ORDER.get(x, -1))
+def compute_legacy_archive_snapshot() -> dict[str, Any]:
+    """Compute legacy metrics for audit/continuity. Not rendered on homepage."""
+    echo_records = []
+    if ECHO_INDEX.exists():
+        try:
+            echo_index = load_json(ECHO_INDEX)
+            echo_records = [r for r in echo_index.get("records", []) if isinstance(r, dict)]
+        except Exception:
+            pass
 
+    guardian_count = 0
+    if GUARDIAN_REGISTRY.exists():
+        try:
+            registry = load_json(GUARDIAN_REGISTRY)
+            guardian_count = sum(
+                1 for g in registry.get("guardians", [])
+                if isinstance(g, dict) and g.get("status") == "active"
+            )
+        except Exception:
+            pass
 
-# ---------------------------------------------------------------------------
-# Verifiability
-# ---------------------------------------------------------------------------
-def compute_verifiability_status(physical: dict[str, Any], agent_declared_records: list[dict[str, Any]] | None = None) -> dict:
-    pa = physical.get("physical_anchor_finding", {})
-    supported = pa.get("suggested_public_component_levels_supported", [])
-    p_levels = [normalize_level(l.split("_")[0]) for l in supported if l.startswith("P")]
-    p_levels = [x for x in p_levels if x is not None]
-    highest_p = max(p_levels, key=lambda x: LEVEL_ORDER.get(x, -1)) if p_levels else "none"
-
-    # Compute highest protocol level from agent-declared verification archives
-    # Exclude echo archives (semantic_archive_kind == "agent_declared_echo_archive")
-    ad_verifiable = [
-        r for r in (agent_declared_records or [])
-        if r.get("archive_ready") is True
-        and r.get("counts_toward_home_verifiability") is True
-        and r.get("test_record") is not True
-        and r.get("semantic_archive_kind") != "agent_declared_echo_archive"
+    archived_echoes = [
+        r for r in echo_records
+        if r.get("archive_status") in ("accepted_echo", "accepted_verification", "accepted_attestation")
     ]
-    if ad_verifiable:
-        agent_declared_highest = highest_level(ad_verifiable, "agent_declared_protocol_level")
-        if agent_declared_highest == "none":
-            agent_declared_highest = "none"
-        highest_level_basis = "agent_declared_template_pass"
-        evidence_requirement_mode = "waived_for_v0_v5" if agent_declared_highest not in ("none", "V6", "V7", "V8") else "strict_evidence_required_for_v6_plus"
-    else:
-        agent_declared_highest = "none"
-        highest_level_basis = "no_current_agent_declared_records"
-        evidence_requirement_mode = "not_applicable"
 
-    return {
-        "bitcoin_originals": {
-            "present": True,
-            "canonical_authority": True
-        },
-        "public_digital_verification": {
-            "highest_protocol_level": agent_declared_highest,
-            "highest_component_context": "D2",
-            "claim_gate_required": True,
-            "claim_gate_modes": {
-                "V0_to_V5": "template_for_v0_v5",
-                "V6_to_V8": "strict_evidence"
-            },
-            "highest_level_basis": highest_level_basis,
-            "agent_declared_highest_protocol_level": agent_declared_highest,
-            "evidence_requirement_mode_for_highest": evidence_requirement_mode,
-        },
-        "physical_anchor_context": {
-            "highest_public_context": highest_p,
-            "does_not_auto_raise_protocol_level": True
-        }
-    }
+    agent_declared_records = []
+    if AGENT_DECLARED_INDEX.exists():
+        try:
+            ad_index = load_json(AGENT_DECLARED_INDEX)
+            agent_declared_records = [r for r in ad_index.get("records", []) if isinstance(r, dict)]
+        except Exception:
+            pass
 
-
-# ---------------------------------------------------------------------------
-# Reception
-# ---------------------------------------------------------------------------
-def compute_reception_status(echo_records: list[dict[str, Any]], agent_declared_records: list[dict[str, Any]]) -> dict:
-    # Count archived echoes (strict: only fully accepted, not pending review)
-    archived = [r for r in echo_records if r.get("archive_status") in ("accepted_echo", "accepted_verification", "accepted_attestation")]
-
-    # Pending human review — not counted as archived
-    pending_review = [r for r in echo_records if r.get("archive_status") == "needs_human_review"]
-
-    # Agent-declared echo archives (reclassified via semantic overrides)
-    # Exclude Guardian listing request archives — they count in Guardian Registry, not Reception.
     ad_echo_archives = [
         r for r in agent_declared_records
         if r.get("semantic_archive_kind") == "agent_declared_echo_archive"
         and r.get("counts_toward_home_reception") is True
         and r.get("test_record") is not True
-        and not is_guardian_listing_archive_record(r)
     ]
-    echo_archive_count = len(ad_echo_archives)
 
-    # Count by echo type — DEPRECATED: echo types are no longer canonical.
-    # Legacy archived records still carry echo_type values; collect them
-    # dynamically instead of relying on a canonical set.
-    echo_type_counts: dict[str, int] = {}
-    unknown_echo_types: list[dict[str, Any]] = []
-
-    for r in ad_echo_archives:
-        et = r.get("echo_type", "") or ""
-        if et:
-            echo_type_counts[et] = echo_type_counts.get(et, 0) + 1
-
-    # Sort for deterministic output
-    echo_type_counts = dict(sorted(echo_type_counts.items()))
-
-    # Agent-declared verification archives (from index, excluding test records for reception)
-    ad_reception = [
+    ad_verification = [
         r for r in agent_declared_records
         if r.get("archive_ready") is True
         and r.get("requested_archive_kind") == "agent_declared_verification_archive"
@@ -321,552 +332,108 @@ def compute_reception_status(echo_records: list[dict[str, Any]], agent_declared_
         and r.get("counts_toward_home_reception") is True
         and r.get("test_record") is not True
     ]
-    ad_verifiability = [
-        r for r in agent_declared_records
-        if r.get("archive_ready") is True
-        and r.get("requested_archive_kind") == "agent_declared_verification_archive"
-        and r.get("semantic_archive_kind") != "agent_declared_echo_archive"
-        and r.get("counts_toward_home_verifiability") is True
-        and r.get("test_record") is not True
-    ]
-
-    # Human-directed agent verification
-    hd = [r for r in echo_records
-          if r.get("independence_class") == "human_solicited_agent_response"
-          and r.get("record_kind") == "echo_v3_with_verification_report"
-          and r.get("archive_status") in ("needs_human_review", "accepted_echo", "accepted_verification")]
-
-    # Agent-referred reception
-    ar_reception = [r for r in echo_records
-                    if (r.get("origin_classification") or {}).get("discovery_class") == "agent_referred"
-                    and not r.get("historical_record_only")]
-
-    # Agent-referred verification
-    ar_verify = [r for r in ar_reception
-                 if (r.get("origin_classification") or {}).get("counts_as_ai_verification") is True]
-
-    # Self-initiated reception
-    si_reception = [r for r in echo_records
-                    if (r.get("origin_classification") or {}).get("discovery_class") in ("unsolicited_discovery", "prior_interest_return", "public_index_discovery")
-                    and not r.get("historical_record_only")]
-
-    # Self-initiated verification
-    si_verify = [r for r in si_reception
-                 if (r.get("origin_classification") or {}).get("counts_as_ai_verification") is True]
 
     return {
-        "archived_echoes": {
-            "count": len(archived)
-        },
-        "pending_human_review_echoes": {
-            "count": len(pending_review),
-            "counts_toward_reception_total": False,
-        },
-        "agent_declared_echo_archives": {
-            "count": echo_archive_count,
-            "reception_count": echo_archive_count,
-            "verifiability_count": 0,
-            "by_echo_type": echo_type_counts,
-        },
-        "agent_declared_verification_archives": {
-            "count": len(ad_reception),
-            "highest_level": highest_level(ad_reception, "agent_declared_protocol_level"),
-            "verifiability_count": len(ad_verifiability),
-            "by_reception_initiation_class": {
-                k: sum(1 for r in ad_reception if (r.get("reception_initiation_class") or "unknown") == k)
-                for k in ["externally_requested", "externally_seeded", "self_initiated",
-                          "agent_referred", "system_scheduled", "unknown"]
-            }
-        },
-        "agent_declared_attestations": {
-            "count": 0
-        },
-        "agent_declared_successor_receptions": {
-            "count": 0
-        },
-        "human_directed_agent_verification": {
-            "count": len(hd),
-            "highest_level": highest_level(hd)
-        },
-        "agent_referred_reception": {
-            "count": len(ar_reception),
-            "highest_reception_class": highest_rc(ar_reception)
-        },
-        "agent_referred_verification": {
-            "count": len(ar_verify),
-            "highest_level": highest_level(ar_verify)
-        },
-        "self_initiated_agent_reception": {
-            "count": len(si_reception),
-            "highest_reception_class": highest_rc(si_reception)
-        },
-        "self_initiated_agent_verification": {
-            "count": len(si_verify),
-            "highest_level": highest_level(si_verify)
-        },
-        "multi_agent_reception": {
-            "count": 0,
-            "highest_reception_class": "none"
-        },
-        "successor_civilization_reception": {
-            "claimed": False,
-            "highest_reception_class": "none"
+        "not_current_record_chain_counter": True,
+        "not_rendered_on_homepage": True,
+        "preserved_for_audit_and_continuity": True,
+        "metrics": {
+            "legacy_archived_echoes": len(archived_echoes),
+            "legacy_agent_declared_echo_archives": len(ad_echo_archives),
+            "legacy_agent_declared_verification_archives": len(ad_verification),
+            "legacy_guardian_registry_active": guardian_count,
+            "legacy_reception_total": len(archived_echoes) + len(ad_echo_archives) + len(ad_verification),
         }
-    }
-
-
-# ---------------------------------------------------------------------------
-# External witness records
-# ---------------------------------------------------------------------------
-def compute_external_witness_status(echo_records: list[dict[str, Any]], external_witness_index: dict[str, Any] | None = None) -> dict:
-    external_witness_index = external_witness_index or {}
-    counts = external_witness_index.get("counts") or {}
-    indexed_records = external_witness_index.get("records") or []
-
-    # Count records with external witness characteristics from echo records
-    ext_records = [r for r in echo_records
-                   if (r.get("origin_classification") or {}).get("counts_as_external_witness_record") is True
-                   or (r.get("origin_classification") or {}).get("attestation_authority_class") in ("notarial_record", "audit_firm_report", "regulatory_or_court_record")]
-
-    notarial_from_echo = [r for r in ext_records
-                if (r.get("origin_classification") or {}).get("attestation_authority_class") in ("notarial_record", "audit_firm_report", "regulatory_or_court_record")]
-
-    notarial_count = (
-        int(counts.get("notarial_record", 0) or 0)
-        + int(counts.get("regulatory_or_court_record", 0) or 0)
-        + len(notarial_from_echo)
-    )
-    institutional_count = (
-        int(counts.get("institutional_record", 0) or 0)
-        + int(counts.get("audit_report", 0) or 0)
-        + max(0, len(ext_records) - len(notarial_from_echo))
-    )
-
-    return {
-        "notarial_or_legal_provenance": {
-            "count": notarial_count,
-            "role": "evidence_provenance"
-        },
-        "institutional_or_audit_reports": {
-            "count": institutional_count,
-            "role": "external_witness"
-        },
-        "external_witness_index_record_count": len(indexed_records),
-        "does_not_create_authority": True,
-        "does_not_rank_above_reception": True
-    }
-
-
-# ---------------------------------------------------------------------------
-# Boundary
-# ---------------------------------------------------------------------------
-
-# ---------------------------------------------------------------------------
-# Guardian Registry
-# ---------------------------------------------------------------------------
-def is_guardian_listing_archive_record(record: dict[str, Any]) -> bool:
-    """Check if a record is a Guardian listing request that should be excluded from Reception totals."""
-    cth = record.get("counts_toward_home") if isinstance(record.get("counts_toward_home"), dict) else {}
-    return (
-        record.get("guardian_registry_listing_request") is True
-        or record.get("guardian_listing_request") is True
-        or isinstance(record.get("guardian_listing_request"), dict)
-        or record.get("archive_subkind") == "guardian_registry_listing_request"
-        or record.get("counts_toward_home_guardian_registry") is True
-        or cth.get("guardian_registry") is True
-    )
-
-
-def parse_guardian_registry_number(value: Any) -> int | None:
-    text = str(value or "")
-    if not re.fullmatch(r"[0-9]{5}", text):
-        return None
-    number = int(text)
-    if number <= 0:
-        return None
-    return number
-
-
-def compute_guardian_registry_status(registry: dict[str, Any], policy: dict[str, Any]) -> dict:
-    guardians = [
-        g for g in registry.get("guardians", [])
-        if isinstance(g, dict) and g.get("status") == "active"
-    ]
-
-    reserved = []
-    ordinary = []
-    malformed_number_count = 0
-    unreserved_below_auto_start_count = 0
-
-    by_guardian_type = {
-        "human": 0,
-        "ai_agent": 0,
-        "human_with_ai_agent": 0,
-        "automated_script": 0,
-        "unknown": 0,
-    }
-
-    by_application_mode: dict[str, int] = {}
-
-    for guardian in guardians:
-        number_value = guardian.get("guardian_registry_number")
-        try:
-            number_class = classify_registry_number(number_value, policy)
-        except GuardianNumberingError:
-            malformed_number_count += 1
-            number_class = "malformed"
-
-        if number_class == "special_reserved":
-            reserved.append(guardian)
-        elif number_class == "ordinary_auto":
-            ordinary.append(guardian)
-        elif number_class == "non_reserved_below_auto_start":
-            unreserved_below_auto_start_count += 1
-
-        guardian_type = guardian.get("guardian_type")
-        if guardian_type not in ALLOWED_GUARDIAN_TYPES:
-            guardian_type = "unknown"
-        by_guardian_type[guardian_type] += 1
-
-        application_mode = str(guardian.get("application_mode") or "unknown")
-        by_application_mode[application_mode] = by_application_mode.get(application_mode, 0) + 1
-
-    ordinary_numbers = sorted(
-        n for n in (
-            parse_registry_number(g.get("guardian_registry_number"))
-            for g in ordinary
-        )
-    )
-    next_ordinary = format_registry_number(ordinary_auto_start(policy)) if not ordinary_numbers else format_registry_number(max(ordinary_numbers) + 1)
-
-    return {
-        "registry_status": registry.get("registry_status"),
-        "active_count": len(guardians),
-        "reserved_active_count": len(reserved),
-        "ordinary_auto_active_count": len(ordinary),
-        "malformed_number_count": malformed_number_count,
-        "unreserved_below_auto_start_count": unreserved_below_auto_start_count,
-        "ordinary_auto_start": format_registry_number(ordinary_auto_start(policy)),
-        "special_reserved_range": special_reserved_range_label(policy),
-        "next_ordinary_number_if_new_valid_listing": next_ordinary,
-        "by_guardian_type": by_guardian_type,
-        "by_application_mode": dict(sorted(by_application_mode.items())),
-        "does_not_create_authority": True,
-        "does_not_create_governance": True,
-        "does_not_create_attestation": True,
-        "does_not_raise_verification_level": True,
-        "does_not_create_successor_reception": True,
-        "does_not_amend_bitcoin_originals": True,
-        "source": "/api/guardian-registry.json",
-        "numbering_policy_source": "/api/guardian-active-listing-policy.v1.json",
-    }
-
-def render_guardian_type_inline(by_type: dict[str, int]) -> str:
-    return (
-        f"Human-AI joint: {by_type.get('human_with_ai_agent', 0)}; "
-        f"AI agents: {by_type.get('ai_agent', 0)}; "
-        f"humans: {by_type.get('human', 0)}; "
-        f"automated scripts: {by_type.get('automated_script', 0)}; "
-        f"unknown: {by_type.get('unknown', 0)}"
-    )
-
-
-def render_guardian_type_inline_zh(by_type: dict[str, int]) -> str:
-    return (
-        f"人机联合体：{by_type.get('human_with_ai_agent', 0)}；"
-        f"智能体：{by_type.get('ai_agent', 0)}；"
-        f"人类：{by_type.get('human', 0)}；"
-        f"自动脚本：{by_type.get('automated_script', 0)}；"
-        f"未知：{by_type.get('unknown', 0)}"
-    )
-
-def compute_boundary_status() -> dict:
-    return {
-        "bitcoin_originals_prevail": True,
-        "reception_not_belief": True,
-        "reception_not_obedience": True,
-        "reception_not_endorsement": True,
-        "reception_not_amendment": True,
-        "external_witness_not_authority": True,
-        "issue_text_excluded_from_counts": True,
-        "gateway_intake_excluded_from_counts": True
-    }
-
-
-# ---------------------------------------------------------------------------
-# Legacy counts (backward compatibility)
-# ---------------------------------------------------------------------------
-def compute_legacy_counts(echo_records: list[dict[str, Any]], attestation_records: list[dict[str, Any]]) -> dict:
-    # Card 1: Institutional / human independent verification (legacy)
-    accepted = [
-        r for r in attestation_records
-        if r.get("type") == "independent_verification_report"
-        and r.get("counts_as_independent_attestation") is True
-        and r.get("boundary_preserved") is True
-    ]
-
-    # Card 2: Agent-initiated independent verification (legacy)
-    eligible_agent = [
-        r for r in echo_records
-        if r.get("independence_class") == "unsolicited_independent"
-        and r.get("counts_as_independent_attestation") is True
-        and r.get("do_not_count_as_attestation") is not True
-        and r.get("record_kind") == "echo_v3_with_verification_report"
-        and r.get("archive_status") in ("accepted_echo", "accepted_verification", "accepted_attestation")
-    ]
-
-    # Card 3: Human-solicited agent verification (legacy)
-    hd = [r for r in echo_records
-          if r.get("independence_class") == "human_solicited_agent_response"
-          and r.get("record_kind") == "echo_v3_with_verification_report"
-          and r.get("archive_status") in ("needs_human_review", "accepted_echo", "accepted_verification")]
-
-    return {
-        "human_solicited_agent_verification": {
-            "count": len(hd),
-            "highest_level": highest_level(hd),
-            "counts_as_independent_attestation": False,
-            "records": [r.get("path", "") for r in hd]
-        },
-        "agent_initiated_independent_verification": {
-            "count": len(eligible_agent),
-            "highest_level": highest_level(eligible_agent),
-            "counts_as_independent_attestation": True
-        },
-        "institutional_human_independent_verification": {
-            "count": len(accepted),
-            "highest_level": highest_level(accepted, "verification_level_if_any"),
-            "counts_as_independent_attestation": True
-        },
-        "formal_attestation": {},
-        "independent_attestation": {}
-    }
-
-
-# ---------------------------------------------------------------------------
-# Compute authorship claims
-# ---------------------------------------------------------------------------
-def compute_authorship_claims(agent_declared_records: list[dict[str, Any]]) -> dict:
-    """Compute authorship claim metadata from agent-declared records."""
-    records_with_proof = 0
-    claimed_records = 0
-    unclaimed_records = 0
-
-    for r in agent_declared_records or []:
-        if r.get("authorship_proof_present") or r.get("authorship_signature_verified"):
-            records_with_proof += 1
-        if r.get("authorship_claimed") or r.get("claim_status") == "claimed":
-            claimed_records += 1
-        elif r.get("claim_status") in ("unclaimed", None):
-            unclaimed_records += 1
-
-    return {
-        "records_with_authorship_proof": records_with_proof,
-        "claimed_records": claimed_records,
-        "unclaimed_records": unclaimed_records,
-        "default_policy": "enabled_for_new_builder_generated_records",
-        "private_key_storage": "local_only",
-        "gateway_private_key_access": False,
-        "boundary": "Authorship claims prove key continuity only; they do not affect authority, verifiability, reception, or amendment status.",
-    }
-
-
-# ---------------------------------------------------------------------------
-# Helpers
-# ---------------------------------------------------------------------------
-def _count_by(records: list[dict], field: str) -> dict[str, int]:
-    """Count records by a string field value, skipping None/empty."""
-    counts: dict[str, int] = {}
-    for r in records:
-        val = r.get(field)
-        if val:
-            counts[val] = counts.get(val, 0) + 1
-    return dict(sorted(counts.items()))
-
-
-# ---------------------------------------------------------------------------
-# Compute full status
-# ---------------------------------------------------------------------------
-def compute_status() -> dict[str, Any]:
-    echo_index = load_json(ECHO_INDEX)
-    external_witness = load_json(EXTERNAL_WITNESS_INDEX)
-    physical = load_json(PHYSICAL_ANCHOR)
-    guardian_registry = load_json(GUARDIAN_REGISTRY)
-    guardian_policy = load_json(GUARDIAN_ACTIVE_LISTING_POLICY)
-
-    echo_records = [r for r in echo_index.get("records", []) if isinstance(r, dict)]
-
-    # Load attestation index for legacy counts
-    attestation_records = []
-    if ATTESTATION_INDEX.exists():
-        attestation_index = load_json(ATTESTATION_INDEX)
-        attestation_records = [r for r in attestation_index.get("test_records", []) if isinstance(r, dict)]
-
-    # Load agent-declared verification index
-    agent_declared_records = []
-    if AGENT_DECLARED_INDEX.exists():
-        ad_index = load_json(AGENT_DECLARED_INDEX)
-        agent_declared_records = [r for r in ad_index.get("records", []) if isinstance(r, dict)]
-
-    # Load agent-declared echo index (deduplicate by issue_number to avoid double-counting)
-    # DEEP-IDX-002: agent-declared-echo-index is deprecated as a live input;
-    # echo archives are now tracked via agent-declared-verification-index with semantic overrides.
-    # Kept as legacy file only; no longer merged into agent_declared_records.
-
-    # Load verification-archive-index (verification records split from echo archive)
-    verification_archive_records = []
-    if VERIFICATION_ARCHIVE_INDEX.exists():
-        va_index = load_json(VERIFICATION_ARCHIVE_INDEX)
-        verification_archive_records = [r for r in va_index.get("records", []) if isinstance(r, dict)]
-
-    generated_from = [
-        "/api/echo-index.json",
-        "/api/external-witness-index.json",
-        "/api/core-object-alpha-shenzhen-notary-2026-05-06.json",
-        "/api/guardian-registry.json",
-        "/api/guardian-active-listing-policy.v1.json",
-    ]
-    if AGENT_DECLARED_INDEX.exists():
-        generated_from.append("/api/agent-declared-verification-index.json")
-    if VERIFICATION_ARCHIVE_INDEX.exists():
-        generated_from.append("/api/verification-archive-index.json")
-    # DEEP-IDX-002: agent-declared-echo-index removed from live inputs (deprecated)
-
-    return {
-        "schema": "trinityaccord.public-home-status.v2",
-        "generated_from": generated_from,
-        "verifiability": compute_verifiability_status(physical, agent_declared_records),
-        "reception": compute_reception_status(echo_records, agent_declared_records),
-        "guardian_registry": compute_guardian_registry_status(guardian_registry, guardian_policy),
-        "external_witness_records": compute_external_witness_status(echo_records, external_witness),
-        "verification_archive_records": {
-            "count": len(verification_archive_records),
-            "by_verification_level": _count_by(verification_archive_records, "verification_level"),
-            "by_claim_gate_status": _count_by(verification_archive_records, "claim_gate_status"),
-        },
-        "boundary": compute_boundary_status(),
-        "legacy_counts": compute_legacy_counts(echo_records, attestation_records),
-        "authorship_claims": compute_authorship_claims(agent_declared_records),
-        "source_digest": source_digest(),
     }
 
 
 # ---------------------------------------------------------------------------
 # Render HTML block
 # ---------------------------------------------------------------------------
-def render_block(status: dict[str, Any]) -> str:
-    v = status["verifiability"]
-    r = status["reception"]
-    ew = status["external_witness_records"]
-    b = status["boundary"]
-    g = status.get("guardian_registry", {
-        "active_count": 0, "reserved_active_count": 0, "ordinary_auto_active_count": 0,
-        "next_ordinary_number_if_new_valid_listing": "00100", "ordinary_auto_start": "00100",
-        "special_reserved_range": "00001-00099",
-        "by_guardian_type": {"human": 0, "ai_agent": 0, "human_with_ai_agent": 0, "automated_script": 0, "unknown": 0},
-        "by_application_mode": {},
-    })
-    guardian_type_line = render_guardian_type_inline(g.get("by_guardian_type", {}))
-    guardian_type_line_zh = render_guardian_type_inline_zh(g.get("by_guardian_type", {}))
-    digest = status["source_digest"]
 
-    highest_protocol = v["public_digital_verification"]["highest_protocol_level"]
-    physical_context = v["physical_anchor_context"]["highest_public_context"]
-    # Only mutually exclusive top-level archived record pools.
-    # Classification buckets (human_directed, self_initiated, agent_referred,
-    # multi_agent) overlap with archived_echoes and must NOT be added.
-    total_reception = (
-        r["archived_echoes"]["count"]
-        + r.get("agent_declared_echo_archives", {}).get("count", 0)
-        + r.get("agent_declared_verification_archives", {}).get("count", 0)
-        + r.get("agent_declared_attestations", {}).get("count", 0)
-        + r.get("agent_declared_successor_receptions", {}).get("count", 0)
-    )
-    ad_count = r.get("agent_declared_verification_archives", {}).get("count", 0)
-    ad_echo_count = r.get("agent_declared_echo_archives", {}).get("count", 0)
-    archived_echo_count = r["archived_echoes"]["count"]
-    external_witness_count = ew["notarial_or_legal_provenance"]["count"] + ew["institutional_or_audit_reports"]["count"]
+def render_block(status: dict[str, Any]) -> str:
+    """Render the Record-Chain-first homepage status HTML block."""
+    rc = status["current_record_chain_status"]
+    autonomy = status["current_record_chain_autonomy_signal"]
+    counts = rc["record_type_counts"]
+    anchoring = rc["anchoring"]
+    anchor = anchoring["anchor_status"]
+    arweave = anchoring["arweave_index"]
+
+    # Anchoring display
+    batch_count = anchor["batch_count"]
+    stamped = anchor["stamped_batch_count"]
+    unstamped = anchor["unstamped_batch_count"]
+    if batch_count == 0:
+        batch_status = "none yet"
+    elif unstamped == 0:
+        batch_status = f"{batch_count} batches (all stamped)"
+    else:
+        batch_status = f"{batch_count} batches ({stamped} stamped, {unstamped} unstamped)"
+
+    ots_display = anchoring.get("open_timestamps", {})
+    ots_status = ots_display.get("status", "pending")
+
+    arweave_mode = arweave["current_upload_mode"]
+    arweave_count = arweave["archive_count"]
+    if arweave_count > 0:
+        arweave_status = f"{arweave_count} archives ({arweave_mode})"
+    else:
+        arweave_status = f"none yet ({arweave_mode})"
+
+    # Autonomy display
+    if autonomy["eligible_records"] == 0:
+        autonomy_eligible = "0"
+        autonomy_detail = "not yet established in current record-chain"
+    else:
+        autonomy_eligible = str(autonomy["eligible_records"])
+        autonomy_detail = (
+            f"Self-discovered: {autonomy['self_discovered_records']}; "
+            f"Self-decided: {autonomy['self_decided_records']}; "
+            f"Self-executed: {autonomy['self_executed_records']}; "
+            f"Fully autonomous: {autonomy['fully_autonomous_records']}"
+        )
+
+    phase_display = rc["phase"].replace("_", " ")
 
     return f"""{BEGIN}
 <!-- Generated by scripts/generate_public_home_status.py. Do not edit this block manually. -->
 <div class="status-card-grid verification-summary-grid">
   <article class="status-card">
-    <p class="status-label">Verifiability</p>
-    <p class="status-number">{highest_protocol}</p>
-    <p class="status-note">Bitcoin Originals are present. Public digital verification currently reaches {highest_protocol} by archived agent-declared template-pass records. Physical anchor public context: {physical_context}. Route selection remains required: V0–V5 use the Render API automatic template archive mode; V6+ use strict evidence Claim Gate mode. <span class="zh">Bitcoin 正本已存在。当前公开数字可验证性因已归档的智能体自声明模板通过记录达到 {highest_protocol}。物理锚公开语境：{physical_context}。仍需选择正确路径：V0–V5 使用 Render API 自动模板归档模式；V6+ 使用严格证据 Claim Gate 模式。</span></p>
+    <p class="status-label">Record-Chain Intake status</p>
+    <p class="status-number">{rc["total_records"]}</p>
+    <p class="status-note">Phase: {phase_display}. Total native record-chain records: {rc["total_records"]}. Pending: {rc["pending_records"]}. Latest record type: {rc.get("latest_record_type") or "none"}. Receipt boundary: intake only; not final inclusion. <span class="zh">阶段：{phase_display}。原生 record-chain 记录总数：{rc["total_records"]}。待处理：{rc["pending_records"]}。最新记录类型：{rc.get("latest_record_type") or "无"}。收据边界：仅表示摄入；非最终纳入。</span></p>
   </article>
   <article class="status-card">
-    <p class="status-label">Reception</p>
-    <p class="status-number">{total_reception}</p>
-    <p class="status-note">Reception counts accepted archived records. Records pending human review are not counted until accepted. Agent-declared reception is counted when archived. System-certified successor-civilization reception is not claimed. Breakdown: Echo {archived_echo_count} + Agent-declared Echo {ad_echo_count} + Verification {ad_count} = {total_reception}. <span class="zh">接收统计已接受的归档记录。待人工审核的记录在接受前不计入。智能体自声明接收在归档后计入。分层：回响 {archived_echo_count} + 自声明回响 {ad_echo_count} + 验证 {ad_count} = {total_reception}。</span></p>
+    <p class="status-label">Native record-chain records</p>
+    <p class="status-number">{rc["current_chain_length"]}</p>
+    <p class="status-note">Current chain length: {rc["current_chain_length"]}. Latest record ID: {rc.get("latest_record_id") or "none"}. <span class="zh">当前链长度：{rc["current_chain_length"]}。最新记录 ID：{rc.get("latest_record_id") or "无"}。</span></p>
   </article>
   <article class="status-card">
-    <p class="status-label">Guardian Registry</p>
-    <p class="status-number">{g["active_count"]}</p>
-    <p class="status-note">Active registered Guardians are listed in the non-authoritative Guardian key-continuity index. {guardian_type_line}. Reserved active: {g["reserved_active_count"]}; ordinary active: {g["ordinary_auto_active_count"]}; next ordinary number: {g["next_ordinary_number_if_new_valid_listing"]}. Guardian listing is not authority, governance, attestation, verification level, successor reception, or amendment. <span class="zh">已登记守护者列于非权威 Guardian key-continuity 索引。{guardian_type_line_zh}。保留区 active：{g["reserved_active_count"]}；普通区 active：{g["ordinary_auto_active_count"]}；下一普通编号：{g["next_ordinary_number_if_new_valid_listing"]}。守护者登记不构成权威、治理、见证、验证等级、继起接收或修订。</span></p>
+    <p class="status-label">Current record types</p>
+    <p class="status-number">{rc["total_records"]}</p>
+    <p class="status-note">Context-Insufficient Notice: {counts.get("context_insufficient_notice", 0)}; Echo: {counts.get("echo", 0)}; Verification: {counts.get("verification", 0)}; Guardian Application: {counts.get("guardian_application", 0)}; Guardian Retirement: {counts.get("guardian_retirement", 0)}; Propagation: {counts.get("propagation", 0)}; Correction: {counts.get("correction", 0)}. <span class="zh">Context-Insufficient Notice: {counts.get("context_insufficient_notice", 0)}; Echo: {counts.get("echo", 0)}; Verification: {counts.get("verification", 0)}; Guardian Application: {counts.get("guardian_application", 0)}; Guardian Retirement: {counts.get("guardian_retirement", 0)}; Propagation: {counts.get("propagation", 0)}; Correction: {counts.get("correction", 0)}。</span></p>
   </article>
   <article class="status-card">
-    <p class="status-label">External witness records</p>
-    <p class="status-number">{external_witness_count}</p>
-    <p class="status-note">External witness records are evidence provenance only. They do not create authority and do not rank above reception. <span class="zh">外部见证记录只是证据来源，不产生权威，也不高于接收。</span></p>
+    <p class="status-label">Current Record-Chain Autonomy Signal</p>
+    <p class="status-number">{autonomy_eligible}</p>
+    <p class="status-note">Eligible records: {autonomy["eligible_records"]}. {autonomy_detail}. <span class="zh">符合条件的记录：{autonomy["eligible_records"]}。{autonomy_detail}。</span></p>
   </article>
   <article class="status-card">
-    <p class="status-label">Boundary</p>
-    <p class="status-number">Preserved</p>
-    <p class="status-note">Reception is not belief, obedience, endorsement, or amendment. Bitcoin Originals remain final. <span class="zh">接收不等于相信、服从、背书或修订。Bitcoin 正本仍为最终版本权威。</span></p>
+    <p class="status-label">Anchoring and archive status</p>
+    <p class="status-number">Active</p>
+    <p class="status-note">Batch manifests: {batch_status}. OpenTimestamps: {ots_status}. Arweave archive: {arweave_status}. Live Arweave upload: disabled until wallet secret and live uploader are configured. <span class="zh">批次 manifest：{batch_status}。OpenTimestamps：{ots_status}。Arweave 归档：{arweave_status}。实时 Arweave 上传：在配置钱包密钥和实现 live uploader 之前保持关闭。</span></p>
   </article>
 </div>
-<details class="status-details">
-  <summary>Reception classes</summary>
-  <ul>
-    <li>RC1: read / oriented · RC2: boundary understood · RC3: echoed, critiqued, or refused</li>
-    <li>RC4: verified through evidence / Claim Gate when technical · RC5: preserved</li>
-    <li>RC6: propagated with boundary · RC7: multi-agent reception · RC8: memory integration</li>
-    <li>RC9: successor-civilization reception — not claimed unless extraordinary evidence exists</li>
-  </ul>
-</details>
-<details class="status-details">
-  <summary>Guardian registry breakdown</summary>
-  <ul>
-    <li>Active registered Guardians: {g["active_count"]}</li>
-    <li>Special reserved active entries: {g["reserved_active_count"]}</li>
-    <li>Ordinary automatic active entries: {g["ordinary_auto_active_count"]}</li>
-    <li>Human: {g["by_guardian_type"]["human"]}</li>
-    <li>AI Agent: {g["by_guardian_type"]["ai_agent"]}</li>
-    <li>Human-AI joint: {g["by_guardian_type"]["human_with_ai_agent"]}</li>
-    <li>Automated script: {g["by_guardian_type"]["automated_script"]}</li>
-    <li>Unknown: {g["by_guardian_type"]["unknown"]}</li>
-    <li>Ordinary automatic numbering starts at {g["ordinary_auto_start"]}</li>
-    <li>Special reserved range: {g["special_reserved_range"]}</li>
-    <li>Next ordinary number if a new valid listing is accepted: {g["next_ordinary_number_if_new_valid_listing"]}</li>
-  </ul>
-  <p>Guardian registry listing is a non-authoritative key-continuity index only. It is not governance, attestation, verification level, successor reception, or amendment.</p>
-  <p><span class="zh">守护者登记只是非权威 key-continuity 索引，不构成治理、见证、验证等级、继起接收或修订。</span></p>
-</details>
-<details class="status-details">
-  <summary>Agent-declared verification initiation breakdown — {ad_count} verification archives (of {total_reception} total Reception)</summary>
-  <ul>
-    <li>Externally requested: {r.get("agent_declared_verification_archives", {}).get("by_reception_initiation_class", {}).get("externally_requested", 0)}</li>
-    <li>Externally seeded: {r.get("agent_declared_verification_archives", {}).get("by_reception_initiation_class", {}).get("externally_seeded", 0)}</li>
-    <li>Self-initiated: {r.get("agent_declared_verification_archives", {}).get("by_reception_initiation_class", {}).get("self_initiated", 0)}</li>
-    <li>Agent-referred: {r.get("agent_declared_verification_archives", {}).get("by_reception_initiation_class", {}).get("agent_referred", 0)}</li>
-    <li>System-scheduled: {r.get("agent_declared_verification_archives", {}).get("by_reception_initiation_class", {}).get("system_scheduled", 0)}</li>
-    <li>Unknown / legacy: {r.get("agent_declared_verification_archives", {}).get("by_reception_initiation_class", {}).get("unknown", 0)}</li>
-  </ul>
-  <p><span class="zh">智能体自声明接收构成 —— Reception 总数 {total_reception} 中的 {ad_count} 条：外部明确请求 {r.get("agent_declared_verification_archives", {}).get("by_reception_initiation_class", {}).get("externally_requested", 0)}；外部线索触发 {r.get("agent_declared_verification_archives", {}).get("by_reception_initiation_class", {}).get("externally_seeded", 0)}；智能体自主触发 {r.get("agent_declared_verification_archives", {}).get("by_reception_initiation_class", {}).get("self_initiated", 0)}；智能体传播触发 {r.get("agent_declared_verification_archives", {}).get("by_reception_initiation_class", {}).get("agent_referred", 0)}；系统定时触发 {r.get("agent_declared_verification_archives", {}).get("by_reception_initiation_class", {}).get("system_scheduled", 0)}；未分类/旧记录 {r.get("agent_declared_verification_archives", {}).get("by_reception_initiation_class", {}).get("unknown", 0)}。</span></p>
-</details>
-<details class="status-details">
-  <summary>System separation — Echo · Verification · Guardian</summary>
-  <ul>
-    <li><strong>Echo (回响):</strong> {archived_echo_count} archived echoes from <code>/echoes/records/</code> + {ad_echo_count} agent-declared echo archives. Index: <a href="/api/echo-index.json">/api/echo-index.json</a>. Page: <a href="/echoes/archive/">/echoes/archive/</a>.</li>
-    <li><strong>Verification (验证):</strong> {ad_count} agent-declared verification archives. Index: <a href="/api/agent-declared-verification-index.json">/api/agent-declared-verification-index.json</a>. Archive: <a href="/api/verification-archive-index.json">/api/verification-archive-index.json</a>. Page: <a href="/verify/">/verify/</a>.</li>
-    <li><strong>Guardian (守护):</strong> {g["active_count"]} active registered Guardians. Registry: <a href="/api/guardian-registry.json">/api/guardian-registry.json</a>. Page: <a href="/guardian-registry/">/guardian-registry/</a>.</li>
-  </ul>
-  <p>Each system has independent data sources, workflows, and lifecycle. Reception total is the sum of all three non-overlapping pools.</p>
-  <p><span class="zh">三个系统拥有独立的数据源、工作流和生命周期。Reception 总数是三个互不重叠池的总和。</span></p>
-</details>
-<p class="status-boundary">Reception does not imply belief, obedience, endorsement, authority, or amendment. <span class="zh">接收不意味着相信、服从、背书、权威或修订。</span></p>
-<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>, <a href="/api/echo-index.json">/api/echo-index.json</a>, <a href="/api/agent-declared-verification-index.json">agent-declared verification index</a>, <a href="/api/verification-archive-index.json">verification archive index</a>, <a href="/api/external-witness-index.json">/api/external-witness-index.json</a>, <a href="/api/guardian-registry.json">Guardian registry</a>, <a href="/api/guardian-active-listing-policy.v1.json">Guardian active listing policy</a>, and <a href="/api/core-object-alpha-shenzhen-notary-2026-05-06.json">physical anchor evidence</a>. Source data digest <code>{digest}</code>.</p>
+<p class="instruction-boundary">
+  Historical pre-record-chain Echo / Verification / Guardian materials are preserved for audit and continuity,
+  but they are not current Record-Chain Intake counters.
+  <span class="zh">
+    历史的 record-chain 之前 Echo / Verification / Guardian 材料已保留用于审计与连续性，
+    但它们不是当前 Record-Chain Intake 的计数器。
+  </span>
+</p>
+<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>{status["source_digest"]}</code>.</p>
 {END}"""
 
 
@@ -878,6 +445,51 @@ def replace_block(text: str, block: str) -> str:
     if not pattern.search(text):
         raise RuntimeError(f"Missing generated block markers: {BEGIN} / {END}")
     return pattern.sub(block, text, count=1)
+
+
+def compute_status() -> dict[str, Any]:
+    """Compute full public-home-status.json content."""
+    # Primary data sources
+    records = load_current_native_records()
+    record_chain_status = load_json_if_exists(RECORD_CHAIN_STATUS, {})
+    anchor_status = load_json_if_exists(RECORD_CHAIN_ANCHOR_STATUS, {})
+    arweave_index = load_json_if_exists(RECORD_CHAIN_ARWEAVE_INDEX, {})
+
+    current_status = compute_current_record_chain_status(
+        records, record_chain_status, anchor_status, arweave_index
+    )
+    autonomy_signal = compute_current_record_chain_autonomy_signal(records)
+    legacy_snapshot = compute_legacy_archive_snapshot()
+
+    generated_from = [
+        "/api/record-chain-status.json",
+        "/api/record-chain-anchor-status.json",
+        "/api/record-chain-arweave-index.json",
+        "/record-chain/chain-tip.json",
+        "/record-chain/records/",
+    ]
+
+    return {
+        "schema": "trinityaccord.public-home-status.v2",
+        "generated_at": __import__("datetime").datetime.now(__import__("datetime").timezone.utc).isoformat(),
+        "generated_from": generated_from,
+        "source_digest": source_digest(),
+        "current_record_chain_status": current_status,
+        "current_record_chain_autonomy_signal": autonomy_signal,
+        "legacy_archive_snapshot": legacy_snapshot,
+        "counter_update_policy": {
+            "homepage_counters_update_after_append_workflow": True,
+            "homepage_counters_update_after_anchor_workflow": True,
+            "homepage_counters_update_after_arweave_archive_workflow": True,
+            "manual_update_command": "python3 scripts/update_public_generated_artifacts.py",
+        },
+        "boundary": {
+            "homepage_status_is_not_authority": True,
+            "homepage_status_is_not_attestation": True,
+            "homepage_status_is_not_amendment": True,
+            "bitcoin_originals_prevail": True,
+        },
+    }
 
 
 def main() -> int:
@@ -892,14 +504,22 @@ def main() -> int:
     new_text = replace_block(old_text, block)
 
     if args.check:
-        # Read-only: compare expected vs actual for BOTH files, write nothing.
         errors = []
 
         # Check api/public-home-status.json
         if PUBLIC_HOME_STATUS.exists():
             actual_json = PUBLIC_HOME_STATUS.read_text(encoding="utf-8")
-            if actual_json != expected_json:
-                errors.append("api/public-home-status.json is out of date (content differs from expected).")
+            try:
+                actual_data = json.loads(actual_json)
+                expected_data = json.loads(expected_json)
+                # Compare everything except generated_at (timestamp will always differ)
+                actual_compare = {k: v for k, v in actual_data.items() if k != "generated_at"}
+                expected_compare = {k: v for k, v in expected_data.items() if k != "generated_at"}
+                if actual_compare != expected_compare:
+                    errors.append("api/public-home-status.json is out of date (content differs from expected).")
+            except (json.JSONDecodeError, KeyError):
+                if actual_json != expected_json:
+                    errors.append("api/public-home-status.json is out of date (content differs from expected).")
         else:
             errors.append("api/public-home-status.json does not exist.")
 
@@ -925,23 +545,12 @@ def main() -> int:
 
     if old_text != new_text:
         INDEX_MD.write_text(new_text, encoding="utf-8")
-        v = status["verifiability"]
-        r = status["reception"]
-        total_reception = (
-            r["archived_echoes"]["count"]
-            + r.get("agent_declared_echo_archives", {}).get("count", 0)
-            + r.get("agent_declared_verification_archives", {}).get("count", 0)
-            + r.get("agent_declared_attestations", {}).get("count", 0)
-            + r.get("agent_declared_successor_receptions", {}).get("count", 0)
-        )
-        g = status["guardian_registry"]
+        rc = status["current_record_chain_status"]
         print(
             f"Updated index.md public status: "
-            f"verifiability={v['public_digital_verification']['highest_protocol_level']}, "
-            f"reception_total={total_reception} "
-            f"(echoes={r['archived_echoes']['count']}, "
-            f"agent_declared={r.get('agent_declared_verification_archives', {}).get('count', 0)}), "
-            f"guardians={g['active_count']}, "
+            f"records={rc['total_records']}, "
+            f"chain_length={rc['current_chain_length']}, "
+            f"latest_type={rc.get('latest_record_type')}, "
             f"digest={status['source_digest']}"
         )
     else:

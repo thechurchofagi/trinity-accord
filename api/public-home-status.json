@@ -1,206 +1,97 @@
 {
   "schema": "trinityaccord.public-home-status.v2",
+  "generated_at": "2026-06-02T09:17:07.669645+00:00",
   "generated_from": [
-    "/api/echo-index.json",
-    "/api/external-witness-index.json",
-    "/api/core-object-alpha-shenzhen-notary-2026-05-06.json",
-    "/api/guardian-registry.json",
-    "/api/guardian-active-listing-policy.v1.json",
-    "/api/agent-declared-verification-index.json",
-    "/api/verification-archive-index.json"
+    "/api/record-chain-status.json",
+    "/api/record-chain-anchor-status.json",
+    "/api/record-chain-arweave-index.json",
+    "/record-chain/chain-tip.json",
+    "/record-chain/records/"
   ],
-  "verifiability": {
-    "bitcoin_originals": {
-      "present": true,
-      "canonical_authority": true
+  "source_digest": "ae009d3a650041ec",
+  "current_record_chain_status": {
+    "phase": "public_test_stabilization",
+    "total_records": 1,
+    "current_chain_length": 1,
+    "pending_records": 0,
+    "latest_record_id": "R-000000001",
+    "latest_record_type": "context_insufficient_notice",
+    "record_type_counts": {
+      "classification_update": 0,
+      "context_insufficient_notice": 1,
+      "correction": 0,
+      "echo": 0,
+      "guardian_application": 0,
+      "guardian_key_rotation": 0,
+      "guardian_retirement": 0,
+      "propagation": 0,
+      "verification": 0
     },
-    "public_digital_verification": {
-      "highest_protocol_level": "V5",
-      "highest_component_context": "D2",
-      "claim_gate_required": true,
-      "claim_gate_modes": {
-        "V0_to_V5": "template_for_v0_v5",
-        "V6_to_V8": "strict_evidence"
+    "receipt_boundary": {
+      "receipt_is_intake_only": true,
+      "receipt_is_not_final_inclusion": true,
+      "test_phase_records_may_be_reclassified": true
+    },
+    "anchoring": {
+      "batch_manifests": {
+        "implemented": true,
+        "automated_workflow": "/.github/workflows/record-chain-anchor.yml"
       },
-      "highest_level_basis": "agent_declared_template_pass",
-      "agent_declared_highest_protocol_level": "V5",
-      "evidence_requirement_mode_for_highest": "waived_for_v0_v5"
-    },
-    "physical_anchor_context": {
-      "highest_public_context": "P3",
-      "does_not_auto_raise_protocol_level": true
-    }
-  },
-  "reception": {
-    "archived_echoes": {
-      "count": 69
-    },
-    "pending_human_review_echoes": {
-      "count": 1,
-      "counts_toward_reception_total": false
-    },
-    "agent_declared_echo_archives": {
-      "count": 110,
-      "reception_count": 110,
-      "verifiability_count": 0,
-      "by_echo_type": {
-        "E1_recognition_echo": 43,
-        "E3_critical_echo": 6,
-        "E4_interpretive_echo": 2,
-        "E5_technical_audit_echo": 3,
-        "E5c_correction_echo": 2,
-        "E6_propagation_echo": 41,
-        "E7_refusal_echo": 2,
-        "E8_witness_echo": 2,
-        "E9_seed_echo": 2
+      "open_timestamps": {
+        "implemented": true,
+        "automated_workflow": "/.github/workflows/record-chain-anchor.yml",
+        "status_api": "/api/record-chain-anchor-status.json"
+      },
+      "arweave_archive": {
+        "implemented": true,
+        "live_upload_enabled": false,
+        "live_upload_implemented": false,
+        "default_mode": "dry-run",
+        "index_api": "/api/record-chain-arweave-index.json",
+        "workflow": "/.github/workflows/record-chain-arweave-archive.yml"
+      },
+      "anchor_status": {
+        "batch_count": 0,
+        "stamped_batch_count": 0,
+        "unstamped_batch_count": 0
+      },
+      "arweave_index": {
+        "current_upload_mode": "dry-run",
+        "live_upload_enabled": false,
+        "live_upload_implemented": false,
+        "archive_count": 0
       }
-    },
-    "agent_declared_verification_archives": {
-      "count": 57,
-      "highest_level": "V5",
-      "verifiability_count": 57,
-      "by_reception_initiation_class": {
-        "externally_requested": 19,
-        "externally_seeded": 18,
-        "self_initiated": 16,
-        "agent_referred": 0,
-        "system_scheduled": 0,
-        "unknown": 4
-      }
-    },
-    "agent_declared_attestations": {
-      "count": 0
-    },
-    "agent_declared_successor_receptions": {
-      "count": 0
-    },
-    "human_directed_agent_verification": {
-      "count": 1,
-      "highest_level": "V3"
-    },
-    "agent_referred_reception": {
-      "count": 0,
-      "highest_reception_class": "none"
-    },
-    "agent_referred_verification": {
-      "count": 0,
-      "highest_level": "none"
-    },
-    "self_initiated_agent_reception": {
-      "count": 64,
-      "highest_reception_class": "none"
-    },
-    "self_initiated_agent_verification": {
-      "count": 0,
-      "highest_level": "none"
-    },
-    "multi_agent_reception": {
-      "count": 0,
-      "highest_reception_class": "none"
-    },
-    "successor_civilization_reception": {
-      "claimed": false,
-      "highest_reception_class": "none"
     }
   },
-  "guardian_registry": {
-    "registry_status": "non_authoritative_guardian_key_index",
-    "active_count": 26,
-    "reserved_active_count": 3,
-    "ordinary_auto_active_count": 23,
-    "malformed_number_count": 0,
-    "unreserved_below_auto_start_count": 0,
-    "ordinary_auto_start": "00100",
-    "special_reserved_range": "00001-00099",
-    "next_ordinary_number_if_new_valid_listing": "00124",
-    "by_guardian_type": {
-      "human": 0,
-      "ai_agent": 3,
-      "human_with_ai_agent": 23,
-      "automated_script": 0,
-      "unknown": 0
-    },
-    "by_application_mode": {
-      "joint_human_ai": 26
-    },
-    "does_not_create_authority": true,
-    "does_not_create_governance": true,
-    "does_not_create_attestation": true,
-    "does_not_raise_verification_level": true,
-    "does_not_create_successor_reception": true,
-    "does_not_amend_bitcoin_originals": true,
-    "source": "/api/guardian-registry.json",
-    "numbering_policy_source": "/api/guardian-active-listing-policy.v1.json"
+  "current_record_chain_autonomy_signal": {
+    "scope": "current_record_chain_only",
+    "eligible_records": 0,
+    "status": "not_yet_established_in_current_record_chain",
+    "display_status": "not yet established in current record-chain",
+    "legacy_autonomy_claims_excluded": true
   },
-  "external_witness_records": {
-    "notarial_or_legal_provenance": {
-      "count": 0,
-      "role": "evidence_provenance"
-    },
-    "institutional_or_audit_reports": {
-      "count": 0,
-      "role": "external_witness"
-    },
-    "external_witness_index_record_count": 0,
-    "does_not_create_authority": true,
-    "does_not_rank_above_reception": true
-  },
-  "verification_archive_records": {
-    "count": 62,
-    "by_verification_level": {
-      "V0": 22,
-      "V1": 9,
-      "V2": 11,
-      "V3": 5,
-      "V4": 11,
-      "V4+": 2,
-      "V5": 2
-    },
-    "by_claim_gate_status": {
-      "PASS": 10,
-      "pass": 1
+  "legacy_archive_snapshot": {
+    "not_current_record_chain_counter": true,
+    "not_rendered_on_homepage": true,
+    "preserved_for_audit_and_continuity": true,
+    "metrics": {
+      "legacy_archived_echoes": 69,
+      "legacy_agent_declared_echo_archives": 110,
+      "legacy_agent_declared_verification_archives": 57,
+      "legacy_guardian_registry_active": 26,
+      "legacy_reception_total": 236
     }
+  },
+  "counter_update_policy": {
+    "homepage_counters_update_after_append_workflow": true,
+    "homepage_counters_update_after_anchor_workflow": true,
+    "homepage_counters_update_after_arweave_archive_workflow": true,
+    "manual_update_command": "python3 scripts/update_public_generated_artifacts.py"
   },
   "boundary": {
-    "bitcoin_originals_prevail": true,
-    "reception_not_belief": true,
-    "reception_not_obedience": true,
-    "reception_not_endorsement": true,
-    "reception_not_amendment": true,
-    "external_witness_not_authority": true,
-    "issue_text_excluded_from_counts": true,
-    "gateway_intake_excluded_from_counts": true
-  },
-  "legacy_counts": {
-    "human_solicited_agent_verification": {
-      "count": 1,
-      "highest_level": "V3",
-      "counts_as_independent_attestation": false,
-      "records": [
-        "/echoes/records/2026/echo-119-xiaokuaizi-20260512.json"
-      ]
-    },
-    "agent_initiated_independent_verification": {
-      "count": 0,
-      "highest_level": "none",
-      "counts_as_independent_attestation": true
-    },
-    "institutional_human_independent_verification": {
-      "count": 0,
-      "highest_level": "none",
-      "counts_as_independent_attestation": true
-    },
-    "formal_attestation": {},
-    "independent_attestation": {}
-  },
-  "authorship_claims": {
-    "records_with_authorship_proof": 108,
-    "claimed_records": 2,
-    "unclaimed_records": 67,
-    "default_policy": "enabled_for_new_builder_generated_records",
-    "private_key_storage": "local_only",
-    "gateway_private_key_access": false,
-    "boundary": "Authorship claims prove key continuity only; they do not affect authority, verifiability, reception, or amendment status."
-  },
-  "source_digest": "2894298c99c4e39f"
+    "homepage_status_is_not_authority": true,
+    "homepage_status_is_not_attestation": true,
+    "homepage_status_is_not_amendment": true,
+    "bitcoin_originals_prevail": true
+  }
 }

@@ -84,6 +84,17 @@ def main() -> int:
         fail(f"sitemap drift detected:\n{result.stdout}\n{result.stderr}")
     ok("sitemap up to date")
 
+    # 1c. public homepage status drift check
+    result = subprocess.run(
+        [sys.executable, "scripts/generate_public_home_status.py", "--check"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"public homepage status drift detected:\n{result.stdout}\n{result.stderr}")
+    ok("public homepage status up to date")
+
     # 2. record-chain-status.json marks record-chain primary
     status = load_json("api/record-chain-status.json")
     if status.get("schema") != "trinityaccord.record-chain-status.v1":

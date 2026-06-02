@@ -45,12 +45,17 @@ jobs:
       - name: Verify record chain
         run: python scripts/trinity_record_chain.py verify
 
+      - name: Regenerate public homepage counters
+        run: |
+          python scripts/generate_public_home_status.py
+          python scripts/generate_sitemap.py
+
       - name: Commit Arweave archive metadata
         run: |
           if ! git diff --quiet; then
             git config user.name "trinity-record-chain-bot"
             git config user.email "actions@github.com"
-            git add record-chain/arweave-archives/ api/record-chain-arweave-index.json
+            git add record-chain/arweave-archives/ api/record-chain-arweave-index.json index.md api/public-home-status.json sitemap.xml
             git commit -m "archive: update record-chain Arweave archive metadata"
             git push
           fi
