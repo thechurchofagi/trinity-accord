@@ -93,6 +93,17 @@ def main() -> int:
         fail(f"public test phase disclosure test failed: {result.stderr}\n{result.stdout}")
     ok("public test phase disclosure")
 
+    # 2c. Phase 5C-HOTFIX regression tests
+    result = subprocess.run(
+        [sys.executable, "scripts/test_phase_5c_hotfix.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"Phase 5C-HOTFIX tests failed: {result.stderr}\n{result.stdout}")
+    ok("Phase 5C-HOTFIX regression tests")
+
     # 3. gateway-v1-legacy-status.json marks historical archive only
     legacy = load_json("api/gateway-v1-legacy-status.json")
     legacy_text = json.dumps(legacy, ensure_ascii=False).lower()
