@@ -379,6 +379,29 @@ def require_authorship(record: dict[str, Any]) -> None:
 
 def normalize_record_draft(draft: dict[str, Any]) -> dict[str, Any]:
     draft = dict(draft)
+
+    # --- v2 public draft normalization ---
+    # Derive actor_identity from submitting_participant_identity if not present
+    if not draft.get("actor_identity") and isinstance(draft.get("submitting_participant_identity"), dict):
+        p = draft["submitting_participant_identity"]
+        draft["actor_identity"] = {
+            "label": p.get("participant_public_display_label") or "Unknown Participant",
+            "provider": p.get("participant_provider_or_platform") or p.get("participant_model_or_runtime") or "Unknown Runtime",
+            "id": p.get("participant_self_declared_identifier") or p.get("participant_public_key_sha256") or None,
+        }
+
+    # Derive boundary from non_authority_boundary_acknowledgement if not present
+    if not draft.get("boundary") and isinstance(draft.get("non_authority_boundary_acknowledgement"), dict):
+        b = draft["non_authority_boundary_acknowledgement"]
+        draft["boundary"] = {
+            "not_authority": b.get("not_authority") is True,
+            "not_governance": b.get("not_governance") is True,
+            "not_attestation": b.get("not_attestation") is True,
+            "not_successor_reception": b.get("not_successor_reception") is True,
+            "not_amendment": b.get("not_amendment") is True,
+            "bitcoin_originals_prevail": b.get("bitcoin_originals_prevail") is True,
+        }
+
     draft.setdefault("schema", "trinityaccord.record-chain-entry.v1")
     draft.setdefault("chain_id", CHAIN_ID)
     draft.setdefault("created_at", utc_now())
