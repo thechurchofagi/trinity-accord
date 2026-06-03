@@ -67,13 +67,6 @@ def existing_batch_manifests():
     return sorted(BATCHES.glob("batch-*/manifest.json"))
 
 
-def existing_archive_ids():
-    if not API_INDEX.exists():
-        return set()
-    idx = read_json(API_INDEX)
-    return {a["archive_id"] for a in idx.get("archives", [])}
-
-
 def build_archive_id(first_batch_id: str, last_batch_id: str, source_hash: str) -> str:
     return f"archive-{first_batch_id}-{last_batch_id}-{source_hash[:12]}"
 
@@ -94,8 +87,6 @@ def build_archive_manifest(mode: str) -> None:
         print("No batch manifests found; nothing to archive.")
         return
 
-    already_archived = existing_archive_ids()
-
     included_batches = []
     included_records = []
     record_ids_seen = set()
@@ -103,17 +94,14 @@ def build_archive_manifest(mode: str) -> None:
     for mf_path in batches:
         mf = read_json(mf_path)
         batch_id = mf.get("batch_id", "")
-        # Check if this batch is already in an existing archive
+        # Check if this batch is already in an existing archive via structured index
         already_in_archive = False
-        for aid in already_archived:
-            if batch_id in aid:
-                already_in_archive = True
-                break
-        # Instead of name matching, check the archive index directly
         if API_INDEX.exists():
             idx = read_json(API_INDEX)
             for arc in idx.get("archives", []):
-                if arc.get("first_batch_id") <= batch_id <= arc.get("last_batch_id", ""):
+                first = arc.get("first_batch_id", "")
+                last = arc.get("last_batch_id", "")
+                if first and last and first <= batch_id <= last:
                     already_in_archive = True
                     break
         if already_in_archive:

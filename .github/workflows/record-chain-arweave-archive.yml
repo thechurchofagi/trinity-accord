@@ -1,4 +1,7 @@
 name: Record Chain Arweave Archive
+# Acceptable noise: scheduled daily + on anchor completion.
+# No live upload until Arweave wallet is configured.
+# Retained as-is; workflow_run + schedule is intentional.
 
 on:
   workflow_run:

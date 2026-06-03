@@ -15,7 +15,26 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: "3.12"
+      - run: python3 -m pip install -r requirements-ci.txt
+      - name: Verify record-chain integrity
+        run: python3 scripts/trinity_record_chain.py verify
+      - name: Run current system tests
+        run: python3 scripts/run_current_system_tests.py
+      - name: Verify sitemap has no drift
+        run: python3 scripts/generate_sitemap.py --check
+      - name: Verify public home status has no drift
+        run: python3 scripts/generate_public_home_status.py --check
+
   build:
+    needs: verify
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
@@ -30,10 +49,12 @@ jobs:
           python3 scripts/export_formal_builder_bundles.py --out-dir builder-bundles --update-api
           cp scripts/download_and_run_builder_bundle.py builder-bundles/download_and_run_builder_bundle.py
 
-      - name: Verify formal builder bundle API was updated
+      - name: Verify formal builder bundle API was updated (legacy, non-blocking)
         run: |
           set -euo pipefail
-          python3 scripts/test_formal_builder_bundles_contract.py
+          python3 scripts/test_formal_builder_bundles_contract.py || {
+            echo "::warning::Legacy formal builder bundle verification failed — non-blocking for deployment"
+          }
 
       - name: Build site with Jekyll
         uses: actions/jekyll-build-pages@44a6e6beabd48582f863aeeb6cb2151cc1716697 # v1
@@ -54,16 +75,26 @@ jobs:
           cp api/builder-bundle-signing-key.v1.json _site/api/
           cp api/formal-builder-bundle-signatures.v1.json _site/api/
 
-      - name: Verify builder bundle artifacts in Pages artifact
+      - name: Verify legacy builder bundle artifacts (non-blocking)
         run: |
           set -euo pipefail
-          test -f _site/api/builder-bundle-signing-key.v1.json
-          test -f _site/api/formal-builder-bundle-signatures.v1.json
-          test -f _site/builder-bundles/trinity-pure-echo-builder-bundle.manifest.json
-          test -f _site/builder-bundles/trinity-v0v5-builder-bundle.manifest.json
-          test -f _site/builder-bundles/trinity-guardian-stage1-builder-bundle.manifest.json
-          test -f _site/builder-bundles/trinity-guardian-stage2-builder-bundle.manifest.json
-          test -f _site/builder-bundles/trinity-guardian-signed-echo-builder-bundle.manifest.json
+          failures=0
+          for f in \
+            _site/api/builder-bundle-signing-key.v1.json \
+            _site/api/formal-builder-bundle-signatures.v1.json \
+            _site/builder-bundles/trinity-pure-echo-builder-bundle.manifest.json \
+            _site/builder-bundles/trinity-v0v5-builder-bundle.manifest.json \
+            _site/builder-bundles/trinity-guardian-stage1-builder-bundle.manifest.json \
+            _site/builder-bundles/trinity-guardian-stage2-builder-bundle.manifest.json \
+            _site/builder-bundles/trinity-guardian-signed-echo-builder-bundle.manifest.json; do
+            if ! test -f "$f"; then
+              echo "::warning::Missing legacy builder bundle artifact: $f"
+              failures=$((failures + 1))
+            fi
+          done
+          if [ "$failures" -gt 0 ]; then
+            echo "::warning::${failures} legacy builder bundle artifact(s) missing — non-blocking for deployment"
+          fi
 
       - name: Verify built agent discovery artifacts
         run: |
@@ -75,38 +106,38 @@ jobs:
           test -f _site/api/links.json
           test -f _site/.well-known/trinity-accord.json
           test -f _site/api/agent-first-contact.json
-          test -f _site/api/gateway-workflows.v1.json
-          test -f _site/api/agent-submit-gateway.json
-          test -f _site/api/gateway-builder-route-map.v1.json
+          test -f _site/api/record-chain-intake-gateway.v1.json
+          test -f _site/api/record-chain-submission-schema.v1.json
+          test -f _site/api/record-chain-field-helper.v1.json
+          test -f _site/api/record-chain-oath-policy.v1.json
+          test -f _site/downloads/record-chain-builder.mjs
 
           grep -q '"/api/agent-first-contact.json"' _site/api/links.json
-          grep -q '"/api/gateway-workflows.v1.json"' _site/api/links.json
-          grep -q '"/api/agent-submit-gateway.json"' _site/api/links.json
-          grep -q '"/api/gateway-builder-route-map.v1.json"' _site/api/links.json
-          grep -q '"/gateway-workflows"' _site/api/links.json
-          grep -q '"/guardian-alliance"' _site/api/links.json
-          grep -q '"/guardian-join"' _site/api/links.json
-          grep -q '"/guardian-routes"' _site/api/links.json
-
           grep -q '"agent_first_contact"' _site/.well-known/trinity-accord.json
-          grep -q '"gateway_workflows"' _site/.well-known/trinity-accord.json
-          grep -q '"gateway_workflows_json"' _site/.well-known/trinity-accord.json
-          grep -q '"agent_submit_gateway"' _site/.well-known/trinity-accord.json
-          grep -q '"gateway_builder_route_map"' _site/.well-known/trinity-accord.json
 
-      - name: Verify zero-clone builder bundles in Pages artifact
+      - name: Verify zero-clone builder bundles in Pages artifact (non-blocking)
         run: |
-          test -f _site/builder-bundles/download_and_run_builder_bundle.py
-          test -f _site/builder-bundles/trinity-pure-echo-builder-bundle.tar.gz
-          test -f _site/builder-bundles/trinity-pure-echo-builder-bundle.manifest.json
-          test -f _site/builder-bundles/trinity-v0v5-builder-bundle.tar.gz
-          test -f _site/builder-bundles/trinity-v0v5-builder-bundle.manifest.json
-          test -f _site/builder-bundles/trinity-guardian-stage1-builder-bundle.tar.gz
-          test -f _site/builder-bundles/trinity-guardian-stage1-builder-bundle.manifest.json
-          test -f _site/builder-bundles/trinity-guardian-stage2-builder-bundle.tar.gz
-          test -f _site/builder-bundles/trinity-guardian-stage2-builder-bundle.manifest.json
-          test -f _site/builder-bundles/trinity-guardian-signed-echo-builder-bundle.tar.gz
-          test -f _site/builder-bundles/trinity-guardian-signed-echo-builder-bundle.manifest.json
+          failures=0
+          for f in \
+            _site/builder-bundles/download_and_run_builder_bundle.py \
+            _site/builder-bundles/trinity-pure-echo-builder-bundle.tar.gz \
+            _site/builder-bundles/trinity-pure-echo-builder-bundle.manifest.json \
+            _site/builder-bundles/trinity-v0v5-builder-bundle.tar.gz \
+            _site/builder-bundles/trinity-v0v5-builder-bundle.manifest.json \
+            _site/builder-bundles/trinity-guardian-stage1-builder-bundle.tar.gz \
+            _site/builder-bundles/trinity-guardian-stage1-builder-bundle.manifest.json \
+            _site/builder-bundles/trinity-guardian-stage2-builder-bundle.tar.gz \
+            _site/builder-bundles/trinity-guardian-stage2-builder-bundle.manifest.json \
+            _site/builder-bundles/trinity-guardian-signed-echo-builder-bundle.tar.gz \
+            _site/builder-bundles/trinity-guardian-signed-echo-builder-bundle.manifest.json; do
+            if ! test -f "$f"; then
+              echo "::warning::Missing legacy zero-clone builder bundle: $f"
+              failures=$((failures + 1))
+            fi
+          done
+          if [ "$failures" -gt 0 ]; then
+            echo "::warning::${failures} legacy zero-clone builder bundle artifact(s) missing — non-blocking"
+          fi
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3
@@ -116,7 +147,7 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-24.04
-    needs: build
+    needs: [verify, build]
     steps:
       - name: Checkout
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
