@@ -38,7 +38,6 @@ REQUIRED_LINKS_MACHINE = {
     "/api/agent-task-router.v1.json",
     "/api/context-load-map.json",
     "/api/public-home-status.json",
-    "/api/guardian-registry.json",
     "/api/echo-index.json",
     "/api/agent-declared-verification-index.json",
 }
@@ -153,6 +152,21 @@ def validate_links_contract(label: str, links: dict[str, Any], errors: list[str]
         errors.append(f"{label} links.json key_pages missing: {missing_pages}")
 
 
+
+def validate_links_legacy_contract(label: str, links: dict[str, Any], errors: list[str]) -> None:
+    """Ensure guardian-registry is in legacy_machine/deprecated, not in machine."""
+    machine = set(links.get("machine", []))
+    legacy = set(links.get("legacy_machine", []))
+    deprecated = set(links.get("deprecated_for_new_records", []))
+
+    if "/api/guardian-registry.json" in machine:
+        errors.append(f"{label} links.json machine still contains legacy item: /api/guardian-registry.json")
+    if "/api/guardian-registry.json" not in legacy:
+        errors.append(f"{label} links.json legacy_machine missing: /api/guardian-registry.json")
+    if "/api/guardian-registry.json" not in deprecated:
+        errors.append(f"{label} links.json deprecated_for_new_records missing: /api/guardian-registry.json")
+
+
 def validate_well_known_contract(label: str, well_known: dict[str, Any], errors: list[str]) -> None:
     wk_api = well_known.get("api", {})
     for key, expected in REQUIRED_WELL_KNOWN_API.items():
@@ -243,6 +257,8 @@ def main() -> int:
     # Validate both canonical and cache-busted
     validate_links_contract("canonical", live_links, errors)
     validate_links_contract("cache-busted", live_links_busted, errors)
+    validate_links_legacy_contract("canonical", live_links, errors)
+    validate_links_legacy_contract("cache-busted", live_links_busted, errors)
     validate_well_known_contract("canonical", live_well_known, errors)
     validate_well_known_contract("cache-busted", live_well_known_busted, errors)
 
