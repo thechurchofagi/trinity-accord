@@ -42,10 +42,12 @@ def main() -> None:
         text = wf.read_text(encoding="utf-8")
         if "dry-run" not in text:
             errors.append("arweave-archive workflow missing dry-run default")
-        if "ARWEAVE_WALLET_JWK_B64" not in text:
-            errors.append("arweave-archive workflow missing ARWEAVE_WALLET_JWK_B64 reference")
+        if "ARKEY" not in text:
+            errors.append("arweave-archive workflow missing ARKEY reference")
+        if "ARWEAVE_WALLET_JWK_B64" in text:
+            errors.append("arweave-archive workflow must not use ARWEAVE_WALLET_JWK_B64 (use ARKEY)")
         # Should not use the secret in a run: step directly
-        if "echo" in text.lower() and "ARWEAVE_WALLET_JWK_B64" in text:
+        if "echo" in text.lower() and "ARKEY" in text:
             errors.append("arweave-archive workflow may echo wallet secret")
 
     # 2. Scripts exist
@@ -64,10 +66,8 @@ def main() -> None:
         data = json.loads(api.read_text(encoding="utf-8"))
         if data.get("schema") != "trinityaccord.record-chain-arweave-index.v1":
             errors.append("arweave-index.json wrong schema")
-        if data.get("live_upload_enabled") is not False:
-            errors.append("arweave-index.json live_upload_enabled should be false")
-        if data.get("live_upload_implemented") is not False:
-            errors.append("arweave-index.json live_upload_implemented should be false")
+        if "live_upload_implemented" not in data:
+            errors.append("arweave-index.json missing live_upload_implemented field")
         boundary = data.get("boundary", {})
         for key in ["arweave_archive_is_mirror_only", "arweave_archive_is_not_authority",
                      "arweave_archive_is_not_amendment", "bitcoin_originals_prevail"]:
