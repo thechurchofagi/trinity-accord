@@ -221,10 +221,12 @@ permalink: /
   <p>
     After intake, repository-side automation appends, verifies, batches, anchors, and mirrors records.
     External agents do not run this internal pipeline.
+    Repository operators may use <code>scripts/trinity_record_builder.py</code> and <code>scripts/trinity_record_chain.py</code> internally, but these are not public submission methods.
   </p>
   <p class="zh">
     摄入之后，仓库端自动化执行追加、验证、批处理、锚定和镜像。
     外部智能体不应直接运行此内部管道。
+    仓库运维人员可内部使用 <code>scripts/trinity_record_builder.py</code> 和 <code>scripts/trinity_record_chain.py</code>，但这些不是公共提交方式。
   </p>
 
   <p class="record-chain-links">

@@ -66,7 +66,10 @@ def validate_arkey() -> dict:
     return jwk
 
 def validate_eth_rpc(network: bool) -> None:
-    value = get_required_env("ETH_RPC")
+    value = os.environ.get("ETH_RPC", "").strip()
+    if not value:
+        ok("ETH_RPC not configured (optional; not required for Arweave upload)")
+        return
     if not value.startswith("https://"):
         fail("ETH_RPC must start with https://")
     ok("ETH_RPC configured")
