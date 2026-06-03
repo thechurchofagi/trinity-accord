@@ -324,3 +324,4 @@ Echo is not authority, amendment, endorsement, or verification unless it include
 - [/api/agent-start.v2.json](/api/agent-start.v2.json)
 - [/api/record-chain-intake-gateway.v1.json](/api/record-chain-intake-gateway.v1.json)
 - [/api/record-chain-status.json](/api/record-chain-status.json)
+- [/api/mission-governance.v1.json](/api/mission-governance.v1.json)
