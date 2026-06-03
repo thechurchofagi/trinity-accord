@@ -1,1 +1,44 @@
-{"$id":"https://www.trinityaccord.org/record-chain/schemas/record-chain-entry.v1.schema.json","$schema":"https://json-schema.org/draft/2020-12/schema","additionalProperties":true,"required":["schema","chain_id","record_type","actor_identity","context_readiness","boundary_acknowledgement"],"title":"Trinity Accord Record Chain Entry v1","type":"object"}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.trinityaccord.org/record-chain/schemas/record-chain-entry.v1.schema.json",
+  "title": "Trinity Accord Record Chain Entry v1",
+  "type": "object",
+  "description": "Append-internal final entry schema. Required fields vary by record_type; actor_identity alone is not the only required contract for v2 submissions.",
+  "required": [
+    "schema",
+    "chain_id",
+    "record_type"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "record_type": {
+            "enum": [
+              "echo",
+              "verification",
+              "guardian_application",
+              "guardian_retirement",
+              "guardian_key_rotation",
+              "propagation",
+              "correction",
+              "classification_update"
+            ]
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "schema",
+          "chain_id",
+          "record_type",
+          "actor_identity",
+          "context_readiness",
+          "boundary_acknowledgement",
+          "authorship_verification_status"
+        ]
+      }
+    }
+  ],
+  "additionalProperties": true
+}
