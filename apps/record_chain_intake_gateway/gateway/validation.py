@@ -982,9 +982,24 @@ def validate_submission_oath(
     local_policy_json = _json.dumps(local_policy, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
     local_policy_sha256 = hashlib.sha256(local_policy_json.encode("utf-8")).hexdigest()
 
-    # Compare policy hash
+    # Require and validate hash fields (must exist and be 64 hex)
+    import re as _re
+    _HEX64 = _re.compile(r"^[0-9a-f]{64}$")
+
     submitted_policy_hash = oath_verification.get("oath_policy_sha256", "")
-    if submitted_policy_hash and submitted_policy_hash != local_policy_sha256:
+    if not submitted_policy_hash or not _HEX64.match(submitted_policy_hash):
+        diagnostics.append(_make_diagnostic(
+            code="OATH_REQUIRED_HASH_MISSING",
+            severity="error",
+            field="record_draft.submission_oath_verification.oath_policy_sha256",
+            message="oath_policy_sha256 must be a 64-char lowercase hex sha256",
+            meaning="The oath policy hash is required for all formal submissions.",
+            suggested_fix="Rebuild with the latest builder to include oath_policy_sha256.",
+        ))
+        return diagnostics
+
+    # Compare policy hash
+    if submitted_policy_hash != local_policy_sha256:
         diagnostics.append(_make_diagnostic(
             code="OATH_POLICY_HASH_MISMATCH",
             severity="error",
@@ -1015,7 +1030,8 @@ def validate_submission_oath(
 
     # Build canonical oath text and verify hash
     def _normalize_oath_text(text: str) -> str:
-        return text.replace("\r\n", "\n").replace("\r", "\n").strip()
+        import unicodedata
+        return unicodedata.normalize("NFC", text.replace("\r\n", "\n").replace("\r", "\n").strip())
 
     modules_obj = local_policy.get("modules", {})
     canonical_parts = []
@@ -1029,7 +1045,16 @@ def validate_submission_oath(
     canonical_hash = hashlib.sha256(canonical_text.encode("utf-8")).hexdigest()
 
     submitted_canonical_hash = oath_verification.get("canonical_oath_text_sha256", "")
-    if submitted_canonical_hash and submitted_canonical_hash != canonical_hash:
+    if not submitted_canonical_hash or not _HEX64.match(submitted_canonical_hash):
+        diagnostics.append(_make_diagnostic(
+            code="OATH_REQUIRED_HASH_MISSING",
+            severity="error",
+            field="record_draft.submission_oath_verification.canonical_oath_text_sha256",
+            message="canonical_oath_text_sha256 must be a 64-char lowercase hex sha256",
+            meaning="The canonical oath text hash is required for all formal submissions.",
+            suggested_fix="Rebuild with the latest builder to include canonical_oath_text_sha256.",
+        ))
+    elif submitted_canonical_hash != canonical_hash:
         diagnostics.append(_make_diagnostic(
             code="OATH_CANONICAL_HASH_MISMATCH",
             severity="error",
@@ -1056,7 +1081,16 @@ def validate_submission_oath(
 
     # Check readback hash matches signed field
     signed_readback_hash = oath_verification.get("participant_readback_sha256", "")
-    if signed_readback_hash and signed_readback_hash != readback_hash:
+    if not signed_readback_hash or not _HEX64.match(signed_readback_hash):
+        diagnostics.append(_make_diagnostic(
+            code="OATH_REQUIRED_HASH_MISSING",
+            severity="error",
+            field="record_draft.submission_oath_verification.participant_readback_sha256",
+            message="participant_readback_sha256 must be a 64-char lowercase hex sha256",
+            meaning="The participant readback hash is required for all formal submissions.",
+            suggested_fix="Rebuild with the latest builder to include participant_readback_sha256.",
+        ))
+    elif signed_readback_hash != readback_hash:
         diagnostics.append(_make_diagnostic(
             code="OATH_READBACK_HASH_MISMATCH",
             severity="error",
