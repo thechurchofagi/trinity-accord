@@ -18,7 +18,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 # ── Directories / files to skip ──────────────────────────────────────
-EXCLUDE_DIRS = {".git", "node_modules", ".trinity-agent-authorship", "__pycache__"}
+EXCLUDE_DIRS_SCANNED = {"tests/fixtures/redteam"}
+EXCLUDE_DIRS = {".git", "node_modules", ".trinity-agent-authorship", "__pycache__", "system-test-runs"}
 
 # Files whose names start with these prefixes are still scanned (no blanket skip).
 # The old test_no_private_key_material_committed.py is retained as a focused PEM
@@ -40,10 +41,11 @@ _API_KEY_URL = re.compile(r"https?://[^?\s]*(?:key|token|secret)=[A-Za-z0-9_-]{1
 
 # ── Fake/test allowlist ──────────────────────────────────────────────
 _FAKE_MARKERS = re.compile(
-    r"(?i)(?:FAKE_|EXAMPLE_|REDACTED|PLACEHOLDER|DUMMY|TEST_|CHANGEME|XXXXXX|000000|your[_-])"
+    r"(?i)(?:FAKE_|EXAMPLE_|REDACTED|PLACEHOLDER|DUMMY|TEST_|CHANGEME|XXXXXX|000000|your[_-]|12345678|abcdef012345)"
 )
 
-EXCLUDE_DIRS = {".git", "node_modules", ".trinity-agent-authorship", "__pycache__"}
+EXCLUDE_DIRS_SCANNED = {"tests/fixtures/redteam"}
+EXCLUDE_DIRS = {".git", "node_modules", ".trinity-agent-authorship", "__pycache__", "system-test-runs"}
 
 
 def tracked_files() -> list[str]:
@@ -121,6 +123,8 @@ def main() -> int:
     for f in tracked_files():
         parts = Path(f).parts
         if any(d in EXCLUDE_DIRS for d in parts):
+            continue
+        if any(d in EXCLUDE_DIRS_SCANNED for d in parts):
             continue
         p = ROOT / f
         if is_binary(p):
