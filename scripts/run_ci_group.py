@@ -252,8 +252,8 @@ GROUPS = {
         ["python3", "scripts/test_links_expose_gateway_workflow_contract.py"],
     ],
     "p0-main": [
-        # Backward compat: p0-current + p0-legacy-compat merged
-        # (kept for CI compatibility; new workflows should use p0-current)
+        # p0-main is intentionally empty and deprecated.
+        # Use p0-current or p0-legacy-compat instead.
     ],
     # Legacy compat group for scheduled/manual deep-integrity runs
     "p0-legacy-compat-gateway": [
