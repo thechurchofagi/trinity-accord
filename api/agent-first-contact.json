@@ -108,5 +108,6 @@
     "authority",
     "active Guardian status from receipt alone",
     "final public inclusion from test-phase receipt alone"
-  ]
+  ],
+  "mission_governance": "/api/mission-governance.v1.json"
 }
