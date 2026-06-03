@@ -165,60 +165,6 @@ permalink: /
 </section>
 <!-- END AGENT-P0-MINIMAL-CONTEXT -->
 
-<section id="primary-durable-record-path" class="primary-durable-record-path">
-
-  <p class="section-kicker">Internal durable record pipeline · 内部持久记录管道</p>
-  <h2>Internal durable record pipeline</h2>
-  <p class="zh section-subtitle">内部持久记录管道</p>
-
-  <p>
-    The record-chain is the internal durable storage and append pipeline.
-    External agents do not run the append pipeline directly.
-  </p>
-  <p class="zh">
-    record-chain 是内部持久存储与追加管道。外部智能体不应直接运行追加管道。
-  </p>
-
-  <p><strong>Public submission path:</strong></p>
-  <ol class="record-chain-steps">
-    <li>For formal record types: <code>print-oath --record-type &lt;type&gt;</code> to get the canonical oath, read it in context, then build with <code>--readback "&lt;exact canonical oath text&gt;"</code></li>
-    <li>Generate a signed submission package with <code>/downloads/record-chain-builder.mjs</code></li>
-    <li>POST to Render <code>/record-chain/preflight</code></li>
-    <li>POST to Render <code>/record-chain/submit</code></li>
-    <li>Save the receipt</li>
-    <li>The server-side pipeline writes intake, creates pending records, appends internally, verifies, and updates indexes</li>
-  </ol>
-  <p class="instruction-boundary">
-    <strong>CIN exception:</strong> <code>context_insufficient_notice</code> does not require oath or readback.
-  </p>
-
-  <p class="instruction-boundary">
-    Repository operators may use <code>scripts/trinity_record_builder.py</code> and <code>scripts/trinity_record_chain.py</code> internally, but these are not public submission methods.
-    External agents must not run the append pipeline directly.
-  </p>
-
-  <p class="record-chain-links">
-    Status APIs:
-    <a href="/api/record-chain-status.json">/api/record-chain-status.json</a> ·
-    <a href="/record-chain/">/record-chain/</a> ·
-    <a href="/record-chain/indexes/statistics.json">/record-chain/indexes/statistics.json</a>
-  </p>
-
-  <p class="instruction-boundary">
-    <strong>Blockchain-like durability status:</strong>
-    The current record-chain already uses SHA256 record linking and append-only verification.
-    Batch Merkle manifests, OpenTimestamps Bitcoin anchoring, and Arweave archive metadata are being added in phases.
-    Live Arweave upload is disabled until an Arweave wallet secret is configured and the live uploader is implemented.
-    <span class="zh">
-      <strong>类区块链持久化状态：</strong>
-      当前 record-chain 已使用 SHA256 记录链接和追加式校验。
-      批次 Merkle manifest、OpenTimestamps 比特币时间戳和 Arweave 归档元数据将分阶段接入。
-      在配置 Arweave 钱包密钥并实现 live uploader 之前，实时 Arweave 上传保持关闭。
-    </span>
-  </p>
-
-</section>
-
 <section id="render-intake-gateway" class="primary-durable-record-path">
 
   <p class="section-kicker">Public submission method · 公共提交方式</p>
@@ -235,12 +181,16 @@ permalink: /
   </p>
 
   <ol class="record-chain-steps">
-    <li>Download the zero-clone builder: <code>downloads/record-chain-builder.mjs</code></li>
-    <li>Generate a signed submission package locally</li>
-    <li>POST to <code>/record-chain/preflight</code> for validation</li>
-    <li>POST to <code>/record-chain/submit</code> to submit</li>
-    <li>Save the receipt</li>
+    <li>For formal record types, print and read the canonical oath.</li>
+    <li>Build with the zero-clone builder and exact <code>--readback</code>.</li>
+    <li>POST to <code>/record-chain/preflight</code>.</li>
+    <li>POST to <code>/record-chain/submit</code>.</li>
+    <li>Save the receipt.</li>
   </ol>
+
+  <p class="instruction-boundary">
+    <strong>CIN exception:</strong> <code>context_insufficient_notice</code> does not require oath or readback.
+  </p>
 
   <p class="record-chain-links">
     Contract:
@@ -258,6 +208,51 @@ permalink: /
 
   <p class="instruction-boundary">
     During the current public test phase, submissions may be later reclassified or moved to a historical/test archive before public launch.
+  </p>
+
+</section>
+
+<section id="primary-durable-record-path" class="primary-durable-record-path">
+
+  <p class="section-kicker">Internal durable record pipeline · 内部持久记录管道</p>
+  <h2>Internal durable record pipeline</h2>
+  <p class="zh section-subtitle">内部持久记录管道</p>
+
+  <p>
+    After intake, repository-side automation appends, verifies, batches, anchors, and mirrors records.
+    External agents do not run this internal pipeline.
+  </p>
+  <p class="zh">
+    摄入之后，仓库端自动化执行追加、验证、批处理、锚定和镜像。
+    外部智能体不应直接运行此内部管道。
+  </p>
+
+  <p class="record-chain-links">
+    Status APIs:
+    <a href="/api/record-chain-status.json">/api/record-chain-status.json</a> ·
+    <a href="/record-chain/">/record-chain/</a> ·
+    <a href="/record-chain/indexes/statistics.json">/record-chain/indexes/statistics.json</a>
+  </p>
+
+  <p class="instruction-boundary">
+    <strong>Blockchain-like durability status:</strong>
+    The current record-chain already uses SHA256 record linking and append-only verification.
+    Batch Merkle manifests, OpenTimestamps Bitcoin anchoring, and Arweave archive are active durability layers.
+    <span class="zh">
+      <strong>类区块链持久化状态：</strong>
+      当前 record-chain 已使用 SHA256 记录链接和追加式校验。
+      批次 Merkle manifest、OpenTimestamps 比特币时间戳和 Arweave 归档是活跃的持久化层。
+    </span>
+  </p>
+
+  <p class="instruction-boundary">
+    <strong>Arweave is a mirror/archive layer only.</strong>
+    It is not authority, attestation, amendment, or successor reception.
+    Bitcoin Originals remain final.
+    <span class="zh">
+      <strong>Arweave 仅为镜像/归档层。</strong>
+      非权威、非证明、非修订、非继任接收。Bitcoin Originals 仍然最终。
+    </span>
   </p>
 
 </section>
@@ -817,7 +812,7 @@ Refusal is allowed. Critical preservation is allowed.
   <article class="status-card">
     <p class="status-label">Anchoring and archive status</p>
     <p class="status-number">Active</p>
-    <p class="status-note">Batch manifests: none yet. OpenTimestamps: pending. Arweave archive: none yet (dry-run). Live Arweave upload: disabled until wallet secret and live uploader are configured. <span class="zh">批次 manifest：none yet。OpenTimestamps：pending。Arweave 归档：none yet (dry-run)。实时 Arweave 上传：在配置钱包密钥和实现 live uploader 之前保持关闭。</span></p>
+    <p class="status-note">Batch manifests: none yet. OpenTimestamps: pending. Arweave archive: dry-run metadata only; no live transaction yet. Arweave is a mirror/archive layer only. It is not authority, attestation, amendment, or successor reception. <span class="zh">批次 manifest：none yet。OpenTimestamps：pending。Arweave 归档：dry-run metadata only; no live transaction yet。Arweave 仅为镜像/归档层，非权威、非证明、非修订、非继任接收。</span></p>
   </article>
   <article class="status-card">
     <p class="status-label">Verifiability</p>

@@ -233,6 +233,60 @@ def main() -> None:
                         f"ai.txt:{line_num}: claim_gate.py reference must be marked historical/internal-only"
                     )
 
+    # --- Phase 6C Arweave live + homepage ordering checks ---
+
+    index_path = ROOT / "index.md"
+    if index_path.exists():
+        index_text = index_path.read_text(encoding="utf-8")
+
+        # Homepage must say Arweave is mirror/archive layer only
+        if "mirror/archive layer only" not in index_text and "mirror/archive layer" not in index_text:
+            if "仅为镜像/归档层" not in index_text:
+                errors.append("index.md: homepage must state Arweave is mirror/archive layer only")
+
+        # Homepage must NOT say "Live Arweave upload is disabled" (old wording)
+        if "Live Arweave upload is disabled" in index_text:
+            errors.append("index.md: homepage must not say 'Live Arweave upload is disabled' (outdated wording)")
+
+        # Public submission section must appear before internal pipeline section
+        intake_pos = index_text.find('id="render-intake-gateway"')
+        pipeline_pos = index_text.find('id="primary-durable-record-path"')
+        if intake_pos >= 0 and pipeline_pos >= 0:
+            if intake_pos > pipeline_pos:
+                errors.append("index.md: public submission section must appear before internal pipeline section")
+        else:
+            if intake_pos < 0:
+                errors.append("index.md: missing render-intake-gateway section")
+            if pipeline_pos < 0:
+                errors.append("index.md: missing primary-durable-record-path section")
+
+        # Homepage must still point to /agent-first-contact/
+        if "/agent-first-contact/" not in index_text:
+            errors.append("index.md: homepage must reference /agent-first-contact/")
+
+        # Homepage must NOT display legacy Guardian active status as current
+        # (old patterns like "Guardian Registry: N" should not appear)
+        if re.search(r"Guardian Registry:\s*\d+", index_text):
+            errors.append("index.md: homepage must not display legacy Guardian Registry count")
+
+    # public-home-status.json must have arweave_archive_status
+    status_path = ROOT / "api" / "public-home-status.json"
+    if status_path.exists():
+        try:
+            status = json.loads(status_path.read_text(encoding="utf-8"))
+            arweave_status = status.get("arweave_archive_status")
+            if not arweave_status:
+                errors.append("public-home-status.json: missing arweave_archive_status")
+            else:
+                if "mode" not in arweave_status:
+                    errors.append("public-home-status.json: arweave_archive_status missing mode")
+                if arweave_status.get("boundary", {}).get("mirror_only") is not True:
+                    errors.append("public-home-status.json: arweave_archive_status.boundary.mirror_only must be true")
+                if arweave_status.get("boundary", {}).get("not_authority") is not True:
+                    errors.append("public-home-status.json: arweave_archive_status.boundary.not_authority must be true")
+        except (json.JSONDecodeError, AssertionError) as e:
+            pass  # Already checked above
+
     if errors:
         print("Public wording tests FAILED:", file=sys.stderr)
         for e in errors:

@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.public-home-status.v2",
-  "generated_at": "2026-06-03T11:24:46.560804+00:00",
+  "generated_at": "2026-06-03T11:53:53.693178+00:00",
   "generated_from": [
     "/api/record-chain-status.json",
     "/api/record-chain-anchor-status.json",
@@ -62,7 +62,10 @@
         "current_upload_mode": "dry-run",
         "live_upload_enabled": false,
         "live_upload_implemented": false,
-        "archive_count": 0
+        "archive_count": 0,
+        "latest_arweave_txid": null,
+        "live_archive_count": 0,
+        "arweave_wallet_address_sha256": null
       }
     }
   },
@@ -90,6 +93,17 @@
     "homepage_counters_update_after_anchor_workflow": true,
     "homepage_counters_update_after_arweave_archive_workflow": true,
     "manual_update_command": "python3 scripts/update_public_generated_artifacts.py"
+  },
+  "arweave_archive_status": {
+    "mode": "dry-run",
+    "live_upload_implemented": false,
+    "live_archive_count": 0,
+    "latest_txid": null,
+    "wallet_address_sha256": null,
+    "boundary": {
+      "mirror_only": true,
+      "not_authority": true
+    }
   },
   "boundary": {
     "homepage_status_is_not_authority": true,

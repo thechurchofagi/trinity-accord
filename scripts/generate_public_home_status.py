@@ -205,6 +205,9 @@ def compute_current_record_chain_status(
                 "live_upload_enabled": arweave_index.get("live_upload_enabled", False),
                 "live_upload_implemented": arweave_index.get("live_upload_implemented", False),
                 "archive_count": len(arweave_index.get("archives", [])),
+                "latest_arweave_txid": arweave_index.get("latest_arweave_txid"),
+                "live_archive_count": arweave_index.get("live_archive_count", 0),
+                "arweave_wallet_address_sha256": arweave_index.get("arweave_wallet_address_sha256"),
             },
         },
     }
@@ -376,10 +379,18 @@ def render_block(status: dict[str, Any]) -> str:
 
     arweave_mode = arweave["current_upload_mode"]
     arweave_count = arweave["archive_count"]
-    if arweave_count > 0:
-        arweave_status = f"{arweave_count} archives ({arweave_mode})"
+    live_implemented = arweave.get("live_upload_implemented", False)
+    latest_txid = arweave.get("latest_arweave_txid")
+
+    if arweave_mode == "live" and latest_txid:
+        short_txid = latest_txid[:12] + "..." if len(latest_txid) > 12 else latest_txid
+        arweave_status = f"live mirror active; latest tx {short_txid}"
+    elif live_implemented:
+        arweave_status = "live uploader implemented; no live archive transaction yet"
+    elif arweave_count > 0:
+        arweave_status = f"dry-run metadata only; {arweave_count} archives"
     else:
-        arweave_status = f"none yet ({arweave_mode})"
+        arweave_status = "dry-run metadata only; no live transaction yet"
 
     # Autonomy display
     if autonomy["eligible_records"] == 0:
@@ -422,7 +433,7 @@ def render_block(status: dict[str, Any]) -> str:
   <article class="status-card">
     <p class="status-label">Anchoring and archive status</p>
     <p class="status-number">Active</p>
-    <p class="status-note">Batch manifests: {batch_status}. OpenTimestamps: {ots_status}. Arweave archive: {arweave_status}. Live Arweave upload: disabled until wallet secret and live uploader are configured. <span class="zh">批次 manifest：{batch_status}。OpenTimestamps：{ots_status}。Arweave 归档：{arweave_status}。实时 Arweave 上传：在配置钱包密钥和实现 live uploader 之前保持关闭。</span></p>
+    <p class="status-note">Batch manifests: {batch_status}. OpenTimestamps: {ots_status}. Arweave archive: {arweave_status}. Arweave is a mirror/archive layer only. It is not authority, attestation, amendment, or successor reception. <span class="zh">批次 manifest：{batch_status}。OpenTimestamps：{ots_status}。Arweave 归档：{arweave_status}。Arweave 仅为镜像/归档层，非权威、非证明、非修订、非继任接收。</span></p>
   </article>
   <article class="status-card">
     <p class="status-label">Verifiability</p>
@@ -494,6 +505,19 @@ def compute_status() -> dict[str, Any]:
 
     echo_index = load_json_if_exists(ECHO_INDEX, {})
 
+    arweave_mode = arweave_index.get("current_upload_mode", "dry-run")
+    live_implemented = arweave_index.get("live_upload_implemented", False)
+    live_count = arweave_index.get("live_archive_count", 0)
+    latest_txid = arweave_index.get("latest_arweave_txid")
+    wallet_sha = arweave_index.get("arweave_wallet_address_sha256")
+
+    if arweave_mode == "live" and latest_txid:
+        arweave_status_mode = "live"
+    elif live_implemented:
+        arweave_status_mode = "configured"
+    else:
+        arweave_status_mode = "dry-run"
+
     return {
         "schema": "trinityaccord.public-home-status.v2",
         "generated_at": __import__("datetime").datetime.now(__import__("datetime").timezone.utc).isoformat(),
@@ -507,6 +531,17 @@ def compute_status() -> dict[str, Any]:
             "homepage_counters_update_after_anchor_workflow": True,
             "homepage_counters_update_after_arweave_archive_workflow": True,
             "manual_update_command": "python3 scripts/update_public_generated_artifacts.py",
+        },
+        "arweave_archive_status": {
+            "mode": arweave_status_mode,
+            "live_upload_implemented": live_implemented,
+            "live_archive_count": live_count,
+            "latest_txid": latest_txid,
+            "wallet_address_sha256": wallet_sha,
+            "boundary": {
+                "mirror_only": True,
+                "not_authority": True,
+            },
         },
         "boundary": {
             "homepage_status_is_not_authority": True,
