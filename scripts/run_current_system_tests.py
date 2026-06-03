@@ -273,6 +273,17 @@ def main() -> int:
         fail(f"builder deep tests failed: {result.stderr}\n{result.stdout}")
     ok("builder deep tests")
 
+    # Phase 6B hotfix tests
+    result = subprocess.run(
+        [sys.executable, "scripts/test_phase6b_hotfix.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"Phase 6B hotfix tests failed: {result.stderr}\n{result.stdout}")
+    ok("Phase 6B hotfix tests")
+
     print("\n=== ALL CURRENT SYSTEM TESTS PASSED ===")
     return 0
 
