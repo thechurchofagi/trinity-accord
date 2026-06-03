@@ -8,12 +8,19 @@ Checks:
 - dry-run entries do not claim arweave_txid
 - boundary fields
 - no ARV5/LV5/IPFS current terminology in index
+
+Optional network verification:
+- --network: GET arweave.net/<txid> and compare body SHA256; warn on propagation delay
+- --strict-network: same as --network but fail on propagation delay
 """
 from __future__ import annotations
 
+import argparse
 import hashlib
 import json
 import sys
+import urllib.error
+import urllib.request
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -54,7 +61,48 @@ def read_json(path: Path):
     return json.loads(path.read_text(encoding="utf-8"))
 
 
-def verify() -> list[str]:
+def verify_txid_shape(txid: str) -> bool:
+    """Verify txid looks like a valid Arweave transaction ID (base64url, 43 chars)."""
+    if not txid or not isinstance(txid, str):
+        return False
+    import string
+    allowed = set(string.ascii_letters + string.digits + "-_")
+    return len(txid) >= 40 and all(c in allowed for c in txid)
+
+
+def verify_network(txid: str, expected_sha256: str, strict: bool) -> list[str]:
+    """Verify Arweave transaction is available on network and matches payload hash."""
+    errors = []
+    url = f"https://arweave.net/{txid}"
+    try:
+        req = urllib.request.Request(url, method="GET")
+        with urllib.request.urlopen(req, timeout=60) as resp:
+            body = resp.read()
+    except urllib.error.HTTPError as exc:
+        msg = f"Arweave network fetch failed for txid={txid}: HTTP {exc.code}"
+        if strict:
+            errors.append(msg)
+        else:
+            print(f"WARN: {msg} (propagation delay?)")
+        return errors
+    except Exception as exc:
+        msg = f"Arweave network fetch failed for txid={txid}: {type(exc).__name__}"
+        if strict:
+            errors.append(msg)
+        else:
+            print(f"WARN: {msg} (propagation delay?)")
+        return errors
+
+    body_sha = sha256_bytes(body)
+    if body_sha != expected_sha256:
+        errors.append(f"Arweave body SHA256 mismatch for txid={txid}: expected={expected_sha256[:16]} got={body_sha[:16]}")
+    else:
+        print(f"PASS: Arweave network verification ok for txid={txid}")
+
+    return errors
+
+
+def verify(network: bool = False, strict_network: bool = False) -> list[str]:
     errors: list[str] = []
 
     if not API_INDEX.exists():
@@ -129,11 +177,38 @@ def verify() -> list[str]:
             if term in manifest_text:
                 errors.append(f"{archive['archive_id']}: forbidden term '{term}' in manifest")
 
+        # Verify txid shape if present
+        txid = arweave.get("txid")
+        if txid:
+            if not verify_txid_shape(txid):
+                errors.append(f"{archive['archive_id']}: invalid txid shape: {txid[:20]}...")
+
+            # Network verification if requested
+            if network or strict_network:
+                # Find payload.json for expected hash
+                archive_dir = manifest_path.parent
+                payload_path = archive_dir / "payload.json"
+                if payload_path.exists():
+                    payload_sha = sha256_file(payload_path)
+                    net_errors = verify_network(txid, payload_sha, strict=strict_network)
+                    errors.extend(net_errors)
+                else:
+                    msg = f"{archive['archive_id']}: payload.json not found for network verification"
+                    if strict_network:
+                        errors.append(msg)
+                    else:
+                        print(f"WARN: {msg}")
+
     return errors
 
 
 def main():
-    errors = verify()
+    parser = argparse.ArgumentParser(description="Verify record-chain Arweave archive metadata")
+    parser.add_argument("--network", action="store_true", help="Verify Arweave transactions on network")
+    parser.add_argument("--strict-network", action="store_true", help="Fail on network propagation delays")
+    args = parser.parse_args()
+
+    errors = verify(network=args.network, strict_network=args.strict_network)
     if errors:
         print("Arweave archive verification failed:", file=sys.stderr)
         for e in errors:
