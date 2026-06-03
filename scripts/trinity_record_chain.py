@@ -441,12 +441,10 @@ def normalize_record_draft(draft: dict[str, Any]) -> dict[str, Any]:
     draft.setdefault("schema", "trinityaccord.record-chain-entry.v1")
     draft.setdefault("chain_id", CHAIN_ID)
     draft.setdefault("created_at", utc_now())
-    draft.setdefault("human_context", None)
-    draft.setdefault("discovery_autonomy", None)
-    draft.setdefault("decision_autonomy", None)
-    draft.setdefault("execution_authorization", None)
-    draft.setdefault("guardian_proof", None)
-    draft.setdefault("oath", None)
+    # Phase 6B: legacy defaults (human_context, oath, etc.) are no longer
+    # scattered into the draft here.  They are injected post-append under
+    # server_normalization / legacy_compatibility_projection so that the
+    # canonical record hash reflects only substantive content.
     draft.setdefault("what_i_checked", [])
     draft.setdefault("limitations", [])
     draft.setdefault("related_records", [])
@@ -486,16 +484,64 @@ def append_records(all_records: bool = False) -> None:
         print("No pending records.")
         return
     selected = pending if all_records else pending[:1]
+    rejected_count = 0
+    appended_count = 0
     for path in selected:
         try:
             draft = normalize_record_draft(read_json(path))
+
+            # --- Phase 6B: authorship_verification_status ---
+            # Record the scope of the authorship proof relative to the final
+            # appended record.  The builder signs the *draft* before gateway
+            # append-assigned fields exist; the final record hash is the
+            # server append hash, not the signed payload hash.
+            rtype = draft.get("record_type", "")
+            if rtype in FORMAL_RECORD_TYPES and rtype not in AUTHORSHIP_EXEMPT_TYPES:
+                draft["authorship_verification_status"] = {
+                    "signed_payload_scope": "pre_append_record_draft",
+                    "verified_by_gateway_before_pending": True,
+                    "final_record_contains_append_assigned_fields_not_in_signed_payload": True,
+                }
+
             next_index = int(tip.get("latest_record_index") or 0) + 1
             draft["record_index"] = next_index
             draft["record_id"] = record_id(next_index)
             draft["assigned_at"] = utc_now()
             draft["previous_record_sha256"] = tip.get("latest_record_sha256")
+
+            # --- Phase 6B: append_assigned_metadata ---
+            # Mark fields that are assigned by the server during append and
+            # are NOT part of the original signed payload.
+            draft["append_assigned_metadata"] = {
+                "record_index": next_index,
+                "record_id": record_id(next_index),
+                "assigned_at": draft["assigned_at"],
+                "previous_record_sha256": draft["previous_record_sha256"],
+                "content_sha256": "(computed after all fields set)",
+                "record_sha256": "(computed after all fields set)",
+            }
+
+            # --- Phase 6B: server_normalization projection ---
+            # Legacy compatibility defaults that used to be scattered into the
+            # draft are now isolated in a server_normalization block so they
+            # don't pollute the canonical content hash signed by the author.
+            draft.setdefault("server_normalization", {})
+            sn = draft["server_normalization"]
+            sn.setdefault("legacy_compatibility_projection", {
+                "human_context": None,
+                "discovery_autonomy": None,
+                "decision_autonomy": None,
+                "execution_authorization": None,
+                "guardian_proof": None,
+                "oath": None,
+            })
+
             draft["content_sha256"] = content_hash(draft)
             draft["record_sha256"] = record_hash(draft)
+            # Update append_assigned_metadata with final hashes
+            draft["append_assigned_metadata"]["content_sha256"] = draft["content_sha256"]
+            draft["append_assigned_metadata"]["record_sha256"] = draft["record_sha256"]
+
             out = RECORDS / f"{draft['record_id']}.json"
             if out.exists():
                 raise ValueError(f"record output already exists: {out}")
@@ -509,10 +555,26 @@ def append_records(all_records: bool = False) -> None:
                 "updated_at": utc_now(),
             })
             write_json(CHAIN_TIP, tip)
+            appended_count += 1
         except Exception as exc:
+            # Phase 6B: --all continues after rejection; writes rejection JSON
             REJECTED.mkdir(parents=True, exist_ok=True)
-            shutil.move(str(path), str(REJECTED / path.name))
-            raise SystemExit(f"Rejected pending record {path.name}: {exc}") from exc
+            rejection_path = REJECTED / f"{path.stem}.rejection.json"
+            rejection = {
+                "schema": "trinityaccord.record-chain-rejection.v1",
+                "rejected_at": utc_now(),
+                "source_pending": path.name,
+                "reason": str(exc),
+            }
+            write_json(rejection_path, rejection)
+            if path.exists():
+                shutil.move(str(path), str(REJECTED / path.name))
+            rejected_count += 1
+            if not all_records:
+                raise SystemExit(f"Rejected pending record {path.name}: {exc}") from exc
+            print(f"REJECTED {path.name}: {exc}", file=sys.stderr)
+    if rejected_count:
+        print(f"Append summary: {appended_count} appended, {rejected_count} rejected.")
     build_indexes()
 
 
@@ -671,6 +733,25 @@ def _verify_oath_in_record(obj: dict, path: str, errors: list[str]) -> None:
             if oath.get(field) is not True:
                 errors.append(f"{path}: oath.{field} is not true")
 
+        # --- Phase 6B: strengthened oath hash verification ---
+        # All formal records with submission_oath_verification must have
+        # valid 64-hex-sha256 hash fields.
+        _HEX64 = re.compile(r"^[0-9a-f]{64}$")
+        for hash_field in ("oath_policy_sha256", "canonical_oath_text_sha256", "participant_readback_sha256"):
+            val = oath.get(hash_field)
+            if not val or not _HEX64.match(str(val)):
+                errors.append(f"{path}: oath.{hash_field} missing or not 64-hex sha256")
+
+        # oath_modules must be non-empty
+        modules = oath.get("oath_modules")
+        if not isinstance(modules, list) or len(modules) == 0:
+            errors.append(f"{path}: oath.oath_modules missing or empty")
+
+        # Linked guardian_application must include guardian_stewardship_v1
+        if record_type == "guardian_application":
+            if isinstance(modules, list) and "guardian_stewardship_v1" not in modules:
+                errors.append(f"{path}: guardian_application oath.oath_modules must include guardian_stewardship_v1")
+
 
 def _check_no_raw_readback(obj: Any, path: str, errors: list[str], prefix: str) -> None:
     """Recursively verify no raw readback_text exists in persisted records."""
@@ -706,6 +787,21 @@ def verify_native_records() -> list[str]:
             require_authorship(obj)
         except Exception as exc:
             errors.append(f"{p}: {exc}")
+
+        # --- Phase 6B: authorship_verification_status for formal records ---
+        rtype = obj.get("record_type") or ""
+        if rtype in FORMAL_RECORD_TYPES and rtype not in AUTHORSHIP_EXEMPT_TYPES:
+            avs = obj.get("authorship_verification_status")
+            if not isinstance(avs, dict):
+                errors.append(f"{p}: formal record_type={rtype} missing authorship_verification_status")
+            else:
+                if avs.get("signed_payload_scope") != "pre_append_record_draft":
+                    errors.append(f"{p}: authorship_verification_status.signed_payload_scope must be 'pre_append_record_draft'")
+                if avs.get("verified_by_gateway_before_pending") is not True:
+                    errors.append(f"{p}: authorship_verification_status.verified_by_gateway_before_pending must be true")
+                if avs.get("final_record_contains_append_assigned_fields_not_in_signed_payload") is not True:
+                    errors.append(f"{p}: authorship_verification_status.final_record_contains_append_assigned_fields_not_in_signed_payload must be true")
+
         # --- oath gate verification ---
         _verify_oath_in_record(obj, p, errors)
         previous = obj.get("record_sha256")
@@ -946,7 +1042,21 @@ def init_policies() -> None:
         "$id": "https://www.trinityaccord.org/record-chain/schemas/record-chain-entry.v1.schema.json",
         "title": "Trinity Accord Record Chain Entry v1",
         "type": "object",
-        "required": ["schema", "chain_id", "record_type", "actor_identity", "context_readiness", "boundary_acknowledgement"],
+        "description": "Append-internal final entry schema.  Required fields vary by record_type; "
+                       "actor_identity alone is not the only required contract for v2 submissions.",
+        "required": ["schema", "chain_id", "record_type"],
+        "allOf": [
+            {
+                "if": {"properties": {"record_type": {"enum": sorted(FORMAL_RECORD_TYPES)}}},
+                "then": {
+                    "required": [
+                        "schema", "chain_id", "record_type", "actor_identity",
+                        "context_readiness", "boundary_acknowledgement",
+                        "authorship_verification_status",
+                    ],
+                },
+            },
+        ],
         "additionalProperties": True,
     })
 
