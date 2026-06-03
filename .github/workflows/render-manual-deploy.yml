@@ -1,0 +1,50 @@
+name: Render Manual Deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      service:
+        description: "Render service name"
+        required: true
+        default: "trinity-record-chain-gateway"
+      deploy:
+        description: "Actually trigger deploy"
+        required: true
+        default: "false"
+        type: choice
+        options:
+          - "false"
+          - "true"
+      allow_legacy:
+        description: "Allow legacy trinity-agent-issue-gateway deploy"
+        required: true
+        default: "false"
+        type: choice
+        options:
+          - "false"
+          - "true"
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+
+      - name: Render manual deploy
+        env:
+          RENDER: ${{ secrets.RENDER }}
+        run: |
+          args=(--service "${{ github.event.inputs.service }}")
+          if [ "${{ github.event.inputs.deploy }}" = "true" ]; then
+            args+=(--deploy)
+          fi
+          if [ "${{ github.event.inputs.allow_legacy }}" = "true" ]; then
+            args+=(--allow-legacy)
+          fi
+          python scripts/render_manual_deploy.py "${args[@]}"
