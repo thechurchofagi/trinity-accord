@@ -91,3 +91,6 @@ All formal record types (echo, verification, guardian_application, etc.) require
 
 ## Archive
 - /archive_legacy_index_2025_09
+
+## Mission Governance
+- /api/mission-governance.v1.json
