@@ -178,11 +178,11 @@ function getCanonicalOath(recordType, linkedGuardian = false) {
   for (const modId of modules) {
     const mod = modulesObj[modId];
     if (mod) {
-      const normalizedText = mod.text.replace(/\r\n/g, "\n").replace(/\r/g, "\n").trim();
+      const normalizedText = mod.text.replace(/\r\n/g, "\n").replace(/\r/g, "\n").trim().normalize("NFC");
       parts.push(`=== ${mod.label} (${modId}) ===\n\n${normalizedText}`);
     }
   }
-  return parts.join(joiner).trim();
+  return parts.join(joiner).trim().normalize("NFC");
 }
 
 function getOathModules(recordType, linkedGuardian) {
@@ -194,7 +194,7 @@ function getOathModules(recordType, linkedGuardian) {
 }
 
 function buildSubmissionOathVerification(recordType, canonicalOath, readbackText, linkedGuardian) {
-  const readback = readbackText.replace(/\r\n/g, "\n").replace(/\r/g, "\n").trim();
+  const readback = readbackText.replace(/\r\n/g, "\n").replace(/\r/g, "\n").trim().normalize("NFC");
   return {
     schema: "trinityaccord.submission-oath-verification.v1",
     oath_policy: "record-chain-formal-submission-oath-v1",
@@ -233,7 +233,7 @@ function buildSubmissionOathVerification(recordType, canonicalOath, readbackText
 }
 
 function buildClientOathReadback(recordType, userReadbackText, linkedGuardian) {
-  const normalized = userReadbackText.replace(/\r\n/g, "\n").replace(/\r/g, "\n").trim();
+  const normalized = userReadbackText.replace(/\r\n/g, "\n").replace(/\r/g, "\n").trim().normalize("NFC");
   return {
     schema: "trinityaccord.client-oath-readback.v1",
     record_type: recordType,
@@ -1405,11 +1405,11 @@ async function main() {
     for (const modId of modules) {
       const mod = modulesObj[modId];
       if (mod) {
-        const normalizedText = mod.text.replace(/\r\n/g, "\n").replace(/\r/g, "\n").trim();
+        const normalizedText = mod.text.replace(/\r\n/g, "\n").replace(/\r/g, "\n").trim().normalize("NFC");
         parts.push(`=== ${mod.label} (${modId}) ===\n\n${normalizedText}`);
       }
     }
-    console.log(parts.join(joiner).trim());
+    console.log(parts.join(joiner).trim().normalize("NFC"));
     return;
   }
 
@@ -1630,8 +1630,8 @@ async function main() {
       console.error("Then provide the exact output as --readback.");
       process.exit(1);
     }
-    const normalizedReadback = readback.replace(/\r\n/g, "\n").replace(/\r/g, "\n").trim();
-    const normalizedCanonical = canonicalOath.replace(/\r\n/g, "\n").replace(/\r/g, "\n").trim();
+    const normalizedReadback = readback.replace(/\r\n/g, "\n").replace(/\r/g, "\n").trim().normalize("NFC");
+    const normalizedCanonical = canonicalOath.replace(/\r\n/g, "\n").replace(/\r/g, "\n").trim().normalize("NFC");
     if (normalizedReadback !== normalizedCanonical) {
       console.error("ERROR: --readback does not match canonical oath text.");
       console.error("Use: node record-chain-builder.mjs print-oath --record-type " + draft.record_type + (isLinkedGuardian ? " --linked-guardian" : ""));
