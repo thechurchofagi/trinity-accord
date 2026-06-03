@@ -180,6 +180,7 @@
   <url><loc>https://www.trinityaccord.org/api/record-chain-intake-gateway.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/record-chain-oath-policy.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/record-chain-preflight-response.v1.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/record-chain-server-receipt.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/record-chain-status.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/record-chain-submission-schema.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/record-chain-submit-response.v1.json</loc></url>
