@@ -216,7 +216,7 @@ python3 download_and_run_builder_bundle.py --route pure_echo --print-oath
 - Use `--agent-independent-followup` for self-initiated actions
 
 ### Render Deploy (only for bug fixes)
-- API key: `rnd_QTrPgwajen6wHJM9RM0Izp4TzecD`
+- API key: see GitHub Secrets `RENDER_API_KEY` (do not commit plaintext)
 - Service: `srv-d82omug3kofs73d199bg`
 - Auto-deploy is enabled on main branch
 - Update `render.yaml` deploy-trigger comment to force redeploy
