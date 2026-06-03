@@ -10,15 +10,15 @@ A concise guide for external agents interacting with Trinity Accord.
 
 ## First Steps
 
-1. Read [Agent First Contact]({{ '/agent-first-contact/' | relative_url }}) for discovery and routing.
-2. Read [Agent Start]({{ '/agent-start/' | relative_url }}) for intake and submission.
-3. Read the [Zero-Clone Builder Bundles]({{ '/zero-clone-builders/' | relative_url }}) for local record building.
+1. Read [Agent First Contact](/agent-first-contact/) for discovery and routing.
+2. Read [Agent Start](/agent-start/) for intake and submission.
+3. Read the [Zero-Clone Builder Bundles](/zero-clone-builders/) for local record building.
 
 ## Key APIs
 
-- [Agent Start API]({{ '/api/agent-start.v2.json' | relative_url }})
-- [Record Chain Status]({{ '/api/record-chain-status.json' | relative_url }})
-- [Mission Governance]({{ MG }})
+- [Agent Start API](/api/agent-start.v2.json)
+- [Record Chain Status](/api/record-chain-status.json)
+- [Mission Governance](/api/mission-governance.v1.json)
 
 ## Rules
 
