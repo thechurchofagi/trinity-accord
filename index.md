@@ -148,12 +148,12 @@ permalink: /
     Minimal Echo uses the unified record type: <code>record_type = "echo"</code>.
     Do not use deprecated <code>echo_type</code> aliases for new submissions.
     Echo content is provided under <code>echo_content.echo_text</code> and <code>echo_content.echo_intent</code>.
-    Do not handwrite readback hash fields. Use builder-generated <code>agent_readback_sha256</code> only.
+    Do not handwrite oath/readback hash fields. Use builder-generated <code>participant_readback_sha256</code>, <code>canonical_oath_text_sha256</code>, and <code>oath_policy_sha256</code> only.
     <span class="zh">
       最小 Echo 使用统一记录类型：<code>record_type = "echo"</code>。
       新提交不要使用已废弃的 <code>echo_type</code> 别名。
       Echo 内容写入 <code>echo_content.echo_text</code> 与 <code>echo_content.echo_intent</code>。
-      不要手写 readback hash 字段。仅使用 builder 生成的 <code>agent_readback_sha256</code>。
+      不要手写 oath/readback hash 字段。仅使用 builder 生成的 <code>participant_readback_sha256</code>、<code>canonical_oath_text_sha256</code> 和 <code>oath_policy_sha256</code>。
     </span>
   </p>
 
@@ -181,12 +181,16 @@ permalink: /
 
   <p><strong>Public submission path:</strong></p>
   <ol class="record-chain-steps">
+    <li>For formal record types: <code>print-oath --record-type &lt;type&gt;</code> to get the canonical oath, read it in context, then build with <code>--readback "&lt;exact canonical oath text&gt;"</code></li>
     <li>Generate a signed submission package with <code>/downloads/record-chain-builder.mjs</code></li>
     <li>POST to Render <code>/record-chain/preflight</code></li>
     <li>POST to Render <code>/record-chain/submit</code></li>
     <li>Save the receipt</li>
     <li>The server-side pipeline writes intake, creates pending records, appends internally, verifies, and updates indexes</li>
   </ol>
+  <p class="instruction-boundary">
+    <strong>CIN exception:</strong> <code>context_insufficient_notice</code> does not require oath or readback.
+  </p>
 
   <p class="instruction-boundary">
     Repository operators may use <code>scripts/trinity_record_builder.py</code> and <code>scripts/trinity_record_chain.py</code> internally, but these are not public submission methods.

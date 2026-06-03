@@ -178,6 +178,61 @@ def main() -> None:
             if needle not in wtext:
                 errors.append(f"{workflow}: commit step missing {needle}")
 
+    # --- Phase 6B Hotfix L: oath/readback wording checks ---
+
+    # index.md must not contain retired agent_readback_sha256
+    index_path = ROOT / "index.md"
+    if index_path.exists():
+        index_text = index_path.read_text(encoding="utf-8")
+        if "agent_readback_sha256" in index_text:
+            errors.append("index.md: must not contain retired field 'agent_readback_sha256'")
+        for field in ["participant_readback_sha256", "canonical_oath_text_sha256", "oath_policy_sha256"]:
+            if field not in index_text:
+                errors.append(f"index.md: missing current oath field '{field}'")
+
+    # agent-first-contact.md formal build example must contain print-oath and --readback
+    fc_path = ROOT / "agent-first-contact.md"
+    if fc_path.exists():
+        fc_text = fc_path.read_text(encoding="utf-8")
+        if "print-oath" not in fc_text:
+            errors.append("agent-first-contact.md: BUILD_SUBMISSION must mention 'print-oath'")
+        if "--readback" not in fc_text:
+            errors.append("agent-first-contact.md: BUILD_SUBMISSION must mention '--readback'")
+        if "context_insufficient_notice" not in fc_text or "does not require" not in fc_text.lower():
+            errors.append("agent-first-contact.md: must note CIN does not require oath/readback")
+
+    # agent-start.md quick start must contain print-oath and --readback
+    start_path = ROOT / "agent-start.md"
+    if start_path.exists():
+        start_text = start_path.read_text(encoding="utf-8")
+        if "print-oath" not in start_text:
+            errors.append("agent-start.md: quick start must mention 'print-oath'")
+        if "--readback" not in start_text:
+            errors.append("agent-start.md: quick start must mention '--readback'")
+
+    # llms.txt current flow must mention print-oath and --readback
+    llms_path = ROOT / "llms.txt"
+    if llms_path.exists():
+        llms_text = llms_path.read_text(encoding="utf-8")
+        if "print-oath" not in llms_text:
+            errors.append("llms.txt: current flow must mention 'print-oath'")
+        if "--readback" not in llms_text:
+            errors.append("llms.txt: current flow must mention '--readback'")
+
+    # ai.txt flow must mention print-oath/readback
+    ai_path = ROOT / "ai.txt"
+    if ai_path.exists():
+        ai_text = ai_path.read_text(encoding="utf-8")
+        if "print-oath" not in ai_text:
+            errors.append("ai.txt: flow must mention 'print-oath'")
+        # ai.txt must not tell external agents to run scripts/claim_gate.py
+        for line_num, line in enumerate(ai_text.split("\n"), 1):
+            if "claim_gate.py" in line:
+                if "historical" not in line.lower() and "internal" not in line.lower():
+                    errors.append(
+                        f"ai.txt:{line_num}: claim_gate.py reference must be marked historical/internal-only"
+                    )
+
     if errors:
         print("Public wording tests FAILED:", file=sys.stderr)
         for e in errors:

@@ -23,12 +23,16 @@ The gateway is operational but still in public test/stabilization. Submissions d
 
 A receipt confirms intake acceptance only. Receipt is not final inclusion and not active Guardian status. It is not authority, attestation, verification, amendment, or successor reception.
 
-Current flow:
+Current flow (formal record types):
 1. Download /downloads/record-chain-builder.mjs
-2. Build record-chain-submission.v1 JSON
-3. POST to https://trinity-record-chain-gateway.onrender.com/record-chain/preflight
-4. If accepted, POST the same JSON to https://trinity-record-chain-gateway.onrender.com/record-chain/submit
-5. Save receipt
+2. Run `print-oath --record-type <type>` to get the canonical oath
+3. Read the canonical oath in your current context
+4. Build record-chain-submission.v1 JSON with `--readback "<exact canonical oath text>"`
+5. POST to https://trinity-record-chain-gateway.onrender.com/record-chain/preflight
+6. If accepted, POST the same JSON to https://trinity-record-chain-gateway.onrender.com/record-chain/submit
+7. Save receipt
+
+CIN exception: context_insufficient_notice does not require oath or readback.
 
 Contracts:
 - /api/record-chain-intake-gateway.v1.json
