@@ -512,13 +512,13 @@ def append_records(all_records: bool = False) -> None:
             # --- Phase 6B: append_assigned_metadata ---
             # Mark fields that are assigned by the server during append and
             # are NOT part of the original signed payload.
+            # Hash fields (content_sha256, record_sha256) are intentionally
+            # excluded — they are record-integrity fields, not append assignments.
             draft["append_assigned_metadata"] = {
                 "record_index": next_index,
                 "record_id": record_id(next_index),
                 "assigned_at": draft["assigned_at"],
                 "previous_record_sha256": draft["previous_record_sha256"],
-                "content_sha256": "(computed after all fields set)",
-                "record_sha256": "(computed after all fields set)",
             }
 
             # --- Phase 6B: server_normalization projection ---
@@ -538,9 +538,6 @@ def append_records(all_records: bool = False) -> None:
 
             draft["content_sha256"] = content_hash(draft)
             draft["record_sha256"] = record_hash(draft)
-            # Update append_assigned_metadata with final hashes
-            draft["append_assigned_metadata"]["content_sha256"] = draft["content_sha256"]
-            draft["append_assigned_metadata"]["record_sha256"] = draft["record_sha256"]
 
             out = RECORDS / f"{draft['record_id']}.json"
             if out.exists():
@@ -575,6 +572,17 @@ def append_records(all_records: bool = False) -> None:
             print(f"REJECTED {path.name}: {exc}", file=sys.stderr)
     if rejected_count:
         print(f"Append summary: {appended_count} appended, {rejected_count} rejected.")
+
+    # Phase 6B: immediately verify after append — newly appended records
+    # must pass verify_native_records() before building indexes.
+    if appended_count > 0:
+        verrors = verify_native_records()
+        if verrors:
+            print("Post-append verification FAILED:", file=sys.stderr)
+            for e in verrors:
+                print(f"  - {e}", file=sys.stderr)
+            raise SystemExit("Post-append verify_native_records() failed; indexes not rebuilt.")
+
     build_indexes()
 
 
