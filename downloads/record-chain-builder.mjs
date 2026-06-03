@@ -169,9 +169,9 @@ const OATH_POLICY = {
 };
 const OATH_POLICY_SHA256 = "0ace0d2012a228a390e157f9169d1b704cb4d85d069f3047118e28229023aabe";
 
-function getCanonicalOath(recordType) {
-  const modules = OATH_POLICY.record_type_modules[recordType];
-  if (!modules) return null;
+function getCanonicalOath(recordType, linkedGuardian = false) {
+  const modules = getOathModules(recordType, linkedGuardian);
+  if (!modules.length) return null;
   const modulesObj = OATH_POLICY.modules;
   const joiner = OATH_POLICY.canonicalization?.module_joiner || "\n\n---\n\n";
   const parts = [];
@@ -1582,6 +1582,7 @@ async function main() {
     verificationClaim: args.verificationClaim || "",
     readback: args.readback || "",
     readbackMethod: args.readbackMethod || "participant_generated_in_current_context",
+    linkedGuardian: !!args.linkedGuardian,
   };
 
   // Handle authorship key
@@ -1603,6 +1604,13 @@ async function main() {
 
   const draft = builder(opts);
 
+  // Wire --linked-guardian CLI flag into draft
+  if (opts.linkedGuardian && (cmd === "echo" || cmd === "verification")) {
+    draft.optional_linked_guardian_application_request = {
+      does_participant_request_guardian_application_with_this_record: true,
+    };
+  }
+
   // Inject oath gate for formal record types
   const OATH_TYPES = ["echo", "verification", "guardian_application", "guardian_retirement",
     "guardian_key_rotation", "propagation", "correction", "classification_update"];
@@ -1611,7 +1619,7 @@ async function main() {
     draft.optional_linked_guardian_application_request.does_participant_request_guardian_application_with_this_record === true
   );
   if (OATH_TYPES.includes(draft.record_type)) {
-    const canonicalOath = getCanonicalOath(draft.record_type);
+    const canonicalOath = getCanonicalOath(draft.record_type, isLinkedGuardian);
     if (!canonicalOath) {
       errorExit(`Cannot get canonical oath for record type: ${draft.record_type}`);
     }
