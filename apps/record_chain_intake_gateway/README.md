@@ -44,9 +44,11 @@ All configuration is via environment variables:
 pip install -r requirements.txt
 export TRINITY_REPO_FULL_NAME=your-org/your-repo
 export TRINITY_TARGET_BRANCH=main
-export TRINITY_GITHUB_TOKEN=ghp_...
+export TRINITY_GITHUB_TOKEN=<YOUR_PAT_HERE>  # Never paste real PATs
 uvicorn app:app --reload --port 8000
 ```
+
+> **Security:** Never paste real PATs into issues, logs, chat, or commits.
 
 ## Deployment
 
