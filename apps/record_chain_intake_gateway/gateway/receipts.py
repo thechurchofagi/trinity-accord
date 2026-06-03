@@ -34,6 +34,7 @@ def make_receipt(
     commit_sha: str | None = None,
     now: datetime | None = None,
     gateway_version: str = "1.0.0",
+    oath_verification_summary: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Build a receipt dict for a persisted submission.
 
@@ -61,6 +62,8 @@ def make_receipt(
         Timestamp override (defaults to UTC now).
     gateway_version:
         Version string of this gateway service.
+    oath_verification_summary:
+        Summary of oath verification results (excludes raw readback).
     """
     if now is None:
         now = datetime.now(timezone.utc)
@@ -73,8 +76,11 @@ def make_receipt(
         "gateway_version": gateway_version,
         "record_type": record_type,
         "submission_sha256": submission_sha256,
+        "original_submission_sha256": submission_sha256,
+        "stored_submission_sha256": submission_sha256,
         "received_raw_body_sha256": received_raw_body_sha256,
         "accepted_at": now.isoformat().replace("+00:00", "Z"),
+        "raw_readback_redacted": True,
         "receipt_is_not_final_chain_record": True,
     }
 
@@ -88,6 +94,8 @@ def make_receipt(
         receipt["file_path"] = file_path
     if commit_sha is not None:
         receipt["commit_sha"] = commit_sha
+    if oath_verification_summary is not None:
+        receipt["oath_verification"] = oath_verification_summary
 
     # Compute a receipt hash so callers can verify receipt integrity
     receipt["receipt_sha256"] = sha256_canonical_json(

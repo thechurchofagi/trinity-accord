@@ -148,6 +148,23 @@ def _build_gateway_runtime() -> dict[str, Any]:
     }
 
 
+def _extract_oath_verification_summary(draft: dict[str, Any]) -> dict[str, Any] | None:
+    """Extract a summary of oath verification for the receipt (no raw readback)."""
+    oath = draft.get("submission_oath_verification")
+    if not isinstance(oath, dict):
+        return None
+    return {
+        "oath_policy": oath.get("oath_policy", ""),
+        "oath_policy_sha256": oath.get("oath_policy_sha256", ""),
+        "oath_modules": oath.get("oath_modules", []),
+        "canonical_oath_text_sha256": oath.get("canonical_oath_text_sha256", ""),
+        "participant_readback_sha256": oath.get("participant_readback_sha256", ""),
+        "readback_matches_canonical_oath": oath.get("readback_matches_canonical_oath", False),
+        "no_shortcut_oath_acknowledged": oath.get("no_shortcut_oath_acknowledged", False),
+        "raw_readback_redacted": True,
+    }
+
+
 def _build_boundary(submission: dict[str, Any]) -> dict[str, bool]:
     """Extract boundary acknowledgement as a dict of bools for the response."""
     boundary = (
@@ -312,7 +329,12 @@ def _build_linked_guardian_draft(
     receipt_id: str,
     submission_sha256: str,
 ) -> dict[str, Any]:
-    """Build a complete guardian_application draft from a linked Guardian request."""
+    """Build a complete guardian_application draft from a linked Guardian request.
+
+    The linked Guardian draft copies/derives submission_oath_verification from the
+    originating submission, ensuring guardian_stewardship_v1 is included in oath_modules.
+    Raw readback_text is never included.
+    """
     linked = draft.get("optional_linked_guardian_application_request", {})
 
     guardian_content = {
@@ -338,6 +360,26 @@ def _build_linked_guardian_draft(
     authorization_ctx = draft.get("authorization_context", {})
     if not isinstance(authorization_ctx, dict):
         authorization_ctx = {}
+
+    # Derive submission_oath_verification for linked Guardian
+    origin_oath = draft.get("submission_oath_verification")
+    linked_oath: dict[str, Any] | None = None
+    if isinstance(origin_oath, dict):
+        import copy
+        linked_oath = copy.deepcopy(origin_oath)
+        # Ensure guardian_stewardship_v1 is in oath_modules
+        oath_modules = list(linked_oath.get("oath_modules", []))
+        if "guardian_stewardship_v1" not in oath_modules:
+            oath_modules.append("guardian_stewardship_v1")
+        linked_oath["oath_modules"] = oath_modules
+        # Mark as linked/derived
+        linked_oath["linked_guardian_oath_coverage"] = True
+        linked_oath["derived_from_originating_submission"] = True
+        linked_oath["originating_receipt_id"] = receipt_id
+        linked_oath["originating_submission_sha256"] = submission_sha256
+        # Remove any raw readback text if present
+        linked_oath.pop("readback_text", None)
+        linked_oath.pop("participant_readback_excerpt", None)
 
     guardian_draft: dict[str, Any] = {
         "schema": draft.get("schema", "trinityaccord.record-chain-entry-draft.v2"),
@@ -379,6 +421,10 @@ def _build_linked_guardian_draft(
         },
         "created_as_linked_record": True,
     }
+
+    # Add derived oath verification (no raw readback)
+    if linked_oath is not None:
+        guardian_draft["submission_oath_verification"] = linked_oath
 
     # Copy authorship proof so formal linked Guardian application can append
     if proof:
@@ -423,6 +469,27 @@ async def readiness() -> ReadinessResponse:
 async def preflight(request: Request) -> PreflightResponse:
     raw_body = await request.body()
     received_raw_body_sha256 = _compute_raw_body_sha256(raw_body)
+
+    # Check raw body size (handles requests without Content-Length)
+    if len(raw_body) > _MAX_BODY_BYTES:
+        diag = Diagnostic(
+            code="REQUEST_BODY_TOO_LARGE",
+            severity="error",
+            message=f"Request body too large ({len(raw_body)} > {_MAX_BODY_BYTES} bytes)",
+        )
+        return PreflightResponse(
+            accepted=False,
+            preflight=True,
+            route_detected="unknown",
+            record_type="",
+            submission_sha256="",
+            received_raw_body_sha256=received_raw_body_sha256,
+            diagnostics=[diag],
+            gateway_runtime=_build_gateway_runtime(),
+            gateway_schema=_GATEWAY_SCHEMA,
+            boundary={},
+            agent_recovery=_build_agent_recovery([diag]),
+        )
 
     try:
         body = json.loads(raw_body)
@@ -506,10 +573,24 @@ async def preflight(request: Request) -> PreflightResponse:
 
 @app.post("/record-chain/submit", response_model=SubmitResponse)
 async def submit(request: Request) -> SubmitResponse:
-    _check_config()
-
     raw_body = await request.body()
     received_raw_body_sha256 = _compute_raw_body_sha256(raw_body)
+
+    # Check raw body size (handles requests without Content-Length)
+    if len(raw_body) > _MAX_BODY_BYTES:
+        return SubmitResponse(
+            accepted=False,
+            submitted=False,
+            received_raw_body_sha256=received_raw_body_sha256,
+            diagnostics=[Diagnostic(
+                code="REQUEST_BODY_TOO_LARGE",
+                severity="error",
+                message=f"Request body too large ({len(raw_body)} > {_MAX_BODY_BYTES} bytes)",
+            )],
+            boundary={},
+        )
+
+    _check_config()
 
     try:
         body = json.loads(raw_body)
@@ -591,22 +672,38 @@ async def submit(request: Request) -> SubmitResponse:
     # --- check for linked Guardian request ---
     has_linked_guardian = _has_linked_guardian_request(draft)
 
-    # --- build receipt ---
+    # --- build receipt (prepare all paths FIRST) ---
     now = datetime.now(timezone.utc)
+    receipt_id_local = f"rcg-{now.strftime('%Y%m%d')}-{submission_sha256[:12]}"
+    date_prefix = now.strftime("%Y/%m")
+
+    intake_submission_path = f"record-chain/intake/submissions/{date_prefix}/{receipt_id_local}.submission.json"
+    receipt_path = f"record-chain/intake/receipts/{date_prefix}/{receipt_id_local}.receipt.json"
+    pending_file_path = f"record-chain/pending/{receipt_id_local}.{record_type}.pending.json"
+
+    # Track all created pending file paths
+    created_pending_records: list[str] = [pending_file_path]
+
+    # Add linked guardian pending path if applicable
+    if has_linked_guardian:
+        guardian_pending_path = f"record-chain/pending/{receipt_id_local}.guardian_application.linked.pending.json"
+        created_pending_records.append(guardian_pending_path)
+
+    # Extract oath verification summary for receipt (no raw readback)
+    oath_summary = _extract_oath_verification_summary(draft)
+
     receipt_data = make_receipt(
         submission=body,
         submission_sha256=submission_sha256,
         record_type=record_type,
         received_raw_body_sha256=received_raw_body_sha256,
+        intake_submission_path=intake_submission_path,
+        pending_file_path=pending_file_path,
+        receipt_path=receipt_path,
         now=now,
+        oath_verification_summary=oath_summary,
     )
     receipt_id = receipt_data["server_receipt_id"]
-    date_prefix = now.strftime("%Y/%m")
-
-    # --- define file paths ---
-    intake_submission_path = f"record-chain/intake/submissions/{date_prefix}/{receipt_id}.submission.json"
-    receipt_path = f"record-chain/intake/receipts/{date_prefix}/{receipt_id}.receipt.json"
-    pending_file_path = f"record-chain/pending/{receipt_id}.{record_type}.pending.json"
 
     # --- prepare file contents ---
     submission_content = canonical_dumps(body)
@@ -620,10 +717,7 @@ async def submit(request: Request) -> SubmitResponse:
 
     receipt_content = canonical_dumps(receipt_data)
 
-    # Track all created pending file paths
-    created_pending_records: list[str] = [pending_file_path]
-
-    # --- persist to GitHub (triple file write + optional linked Guardian) ---
+    # --- persist to GitHub (write order: submission → pending → linked guardian → receipt LAST) ---
     commit_sha: str | None = None
 
     if _WRITE_MODE == "github_contents_pending":
@@ -638,19 +732,9 @@ async def submit(request: Request) -> SubmitResponse:
             )
             logger.info("Wrote submission %s", intake_submission_path)
 
-            # Write 2: receipt
-            existing_receipt_sha = await get_file_sha(receipt_path)
-            result2 = await put_file(
-                receipt_path,
-                receipt_content,
-                f"intake: receipt {receipt_id}",
-                sha=existing_receipt_sha,
-            )
-            logger.info("Wrote receipt %s", receipt_path)
-
-            # Write 3: pending file
+            # Write 2: pending file
             existing_pending_sha = await get_file_sha(pending_file_path)
-            result3 = await put_file(
+            result2 = await put_file(
                 pending_file_path,
                 pending_content,
                 f"intake: pending {receipt_id} ({record_type})",
@@ -658,9 +742,7 @@ async def submit(request: Request) -> SubmitResponse:
             )
             logger.info("Wrote pending %s", pending_file_path)
 
-            commit_sha = result3.get("commit", {}).get("sha")
-
-            # Write 4 (optional): linked Guardian application pending file
+            # Write 3 (optional): linked Guardian application pending file
             if has_linked_guardian:
                 guardian_draft = _build_linked_guardian_draft(
                     draft=draft,
@@ -668,18 +750,28 @@ async def submit(request: Request) -> SubmitResponse:
                     receipt_id=receipt_id,
                     submission_sha256=submission_sha256,
                 )
-                guardian_pending_path = f"record-chain/pending/{receipt_id}.guardian_application.linked.pending.json"
                 guardian_content = canonical_dumps(guardian_draft)
 
                 existing_guardian_sha = await get_file_sha(guardian_pending_path)
-                result4 = await put_file(
+                result3 = await put_file(
                     guardian_pending_path,
                     guardian_content,
                     f"intake: linked guardian_application for {receipt_id}",
                     sha=existing_guardian_sha,
                 )
                 logger.info("Wrote linked Guardian pending %s", guardian_pending_path)
-                created_pending_records.append(guardian_pending_path)
+
+            # Write 4: receipt (LAST — so all paths are finalized)
+            existing_receipt_sha = await get_file_sha(receipt_path)
+            result4 = await put_file(
+                receipt_path,
+                receipt_content,
+                f"intake: receipt {receipt_id}",
+                sha=existing_receipt_sha,
+            )
+            logger.info("Wrote receipt %s", receipt_path)
+
+            commit_sha = result4.get("commit", {}).get("sha")
 
         except Exception as exc:
             logger.error("Failed to persist %s: %s", receipt_id, exc)
@@ -698,14 +790,8 @@ async def submit(request: Request) -> SubmitResponse:
             )
     else:
         logger.info("Dry-run mode — skipping persist for %s", receipt_id)
-        if has_linked_guardian:
-            guardian_pending_path = f"record-chain/pending/{receipt_id}.guardian_application.linked.pending.json"
-            created_pending_records.append(guardian_pending_path)
 
-    # --- update receipt with persist info ---
-    receipt_data["intake_submission_path"] = intake_submission_path
-    receipt_data["pending_file_path"] = pending_file_path
-    receipt_data["receipt_path"] = receipt_path
+    # --- finalize receipt with commit info ---
     if commit_sha:
         receipt_data["commit_sha"] = commit_sha
 

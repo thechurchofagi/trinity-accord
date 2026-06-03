@@ -130,6 +130,8 @@ class ServerReceipt(BaseModel):
     gateway_version: str
     record_type: str
     submission_sha256: str
+    original_submission_sha256: str = ""
+    stored_submission_sha256: str = ""
     received_raw_body_sha256: str = ""
     accepted_at: str
     file_path: str | None = None
@@ -138,7 +140,9 @@ class ServerReceipt(BaseModel):
     receipt_path: str = ""
     commit_sha: str | None = None
     receipt_sha256: str
+    raw_readback_redacted: bool = True
     receipt_is_not_final_chain_record: bool = True
+    oath_verification: dict[str, Any] | None = None
 
 
 class SubmitResponse(BaseModel):

@@ -24,7 +24,7 @@ def get_runtime_info() -> dict[str, Any]:
         "python_version": _python_version(),
         "repo": os.environ.get("TRINITY_REPO_FULL_NAME", "(not configured)"),
         "branch": os.environ.get("TRINITY_TARGET_BRANCH", "(not configured)"),
-        "write_mode": os.environ.get("TRINITY_SUBMIT_WRITE_MODE", "commit"),
+        "write_mode": os.environ.get("TRINITY_SUBMIT_WRITE_MODE", "github_contents_pending"),
         "max_submission_bytes": int(os.environ.get("TRINITY_MAX_SUBMISSION_BYTES", "524288")),
     }
 
