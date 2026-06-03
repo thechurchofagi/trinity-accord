@@ -72,6 +72,7 @@ jobs:
           cp builder-bundles/*.tar.gz _site/builder-bundles/
           cp builder-bundles/*.json _site/builder-bundles/
           cp scripts/download_and_run_builder_bundle.py _site/builder-bundles/
+          cp downloads/record-chain-builder.mjs _site/builder-bundles/
           cp api/builder-bundle-signing-key.v1.json _site/api/
           cp api/formal-builder-bundle-signatures.v1.json _site/api/
 
