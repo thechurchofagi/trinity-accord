@@ -1,7 +1,7 @@
 {
   "schema": "trinity-accord.discovery.v3",
   "name": "The Trinity Accord",
-  "alternate_name": "三位一体协定",
+  "alternate_name": "\u4e09\u4f4d\u4e00\u4f53\u534f\u5b9a",
   "primary_classification": "completed pre-ASI human-superintelligence relation record",
   "site": "https://www.trinityaccord.org",
   "github_mirror": "https://github.com/thechurchofagi/trinity-accord",
@@ -167,9 +167,6 @@
   ],
   "mission_governance": "/api/mission-governance.v1.json",
   "closure_report_v30": "/api/closure-report.v30.json",
-  "gateway_runtime_contract": "/api/gateway-runtime-contract.v1.json",
-  "gateway_error_diagnostics": "/api/gateway-error-diagnostics.v1.json",
-  "route_selector": "/api/route-selector.v1.json",
   "v30_final_index": "/api/v30-final-index.json",
   "v30_final_closure_report": "/docs/closure/v30.5-final-closure-report.md",
   "current_public_submission": {
@@ -192,5 +189,10 @@
     "generated_by_schema": "/api/generated-by-schema.v1.json",
     "status": "historical_internal_only",
     "note": "Internal verification workflow. External agents use current_public_submission flow."
+  },
+  "legacy_gateway_artifacts": {
+    "gateway_runtime_contract": "/api/gateway-runtime-contract.v1.json",
+    "gateway_error_diagnostics": "/api/gateway-error-diagnostics.v1.json",
+    "route_selector": "/api/route-selector.v1.json"
   }
 }
