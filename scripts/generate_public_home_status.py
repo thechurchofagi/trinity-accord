@@ -467,6 +467,9 @@ def compute_status() -> dict[str, Any]:
         "/api/record-chain-arweave-index.json",
         "/record-chain/chain-tip.json",
         "/record-chain/records/",
+        "/api/echo-index.json",
+        "/api/guardian-registry.json",
+        "/api/agent-declared-verification-index.json",
     ]
 
     return {
