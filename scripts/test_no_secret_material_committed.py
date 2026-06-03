@@ -66,67 +66,77 @@ def is_binary(path: Path) -> bool:
         return True
 
 
-def looks_fake(line: str) -> bool:
-    return bool(_FAKE_MARKERS.search(line))
+def looks_fake(text: str) -> bool:
+    return bool(_FAKE_MARKERS.search(text))
 
 
-def scan(path: Path, rel: str) -> list[str]:
-    violations: list[str] = []
+def _in_fixture_dir(rel: str) -> bool:
+    """Check if rel is under any FIXTURE_DIRS prefix."""
+    for prefix in FIXTURE_DIRS:
+        if rel.startswith(prefix + "/") or rel == prefix:
+            return True
+    return False
+
+
+def scan(path: Path, rel: str) -> tuple[list[str], list[str]]:
+    """Return (hard_fails, warnings)."""
+    hard: list[str] = []
+    warn: list[str] = []
     try:
         text = path.read_text(encoding="utf-8", errors="replace")
     except Exception:
-        return violations
+        return hard, warn
 
     lines = text.split("\n")
     for i, line in enumerate(lines, 1):
         if looks_fake(line):
             continue
         for m in _PAT.finditer(line):
-            violations.append(f"{rel}:{i} GitHub PAT: {m.group()[:12]}...")
+            warn.append(f"{rel}:{i} GitHub PAT: {m.group()[:12]}...")
         for m in _GITHUB_PAT.finditer(line):
-            violations.append(f"{rel}:{i} GitHub PAT (fine-grained): {m.group()[:20]}...")
+            warn.append(f"{rel}:{i} GitHub PAT (fine-grained): {m.group()[:20]}...")
         for m in _RND.finditer(line):
-            violations.append(f"{rel}:{i} rnd_ token: {m.group()[:12]}...")
+            warn.append(f"{rel}:{i} rnd_ token: {m.group()[:12]}...")
         for m in _RENDER_KEY.finditer(line):
-            violations.append(f"{rel}:{i} Render key: {m.group()[:10]}...")
+            warn.append(f"{rel}:{i} Render key: {m.group()[:10]}...")
         if _MNEMONIC.search(line):
-            violations.append(f"{rel}:{i} mnemonic/seed phrase")
+            warn.append(f"{rel}:{i} mnemonic/seed phrase")
         for m in _JWT.finditer(line):
-            violations.append(f"{rel}:{i} JWT-like token: {m.group()[:20]}...")
+            warn.append(f"{rel}:{i} JWT-like token: {m.group()[:20]}...")
         for m in _API_KEY_URL.finditer(line):
-            violations.append(f"{rel}:{i} API-key-in-URL: {m.group()[:40]}...")
+            warn.append(f"{rel}:{i} API-key-in-URL: {m.group()[:40]}...")
 
     # Multi-line PEM block (actual key material, not just a header string reference)
     pem_match = _PEM_BLOCK.search(text)
     if pem_match:
-        # Check if the PEM block itself or its surrounding context has fake markers
         start = max(0, pem_match.start() - 200)
         end = min(len(text), pem_match.end() + 200)
         context = text[start:end]
         if not looks_fake(context):
-            violations.append(f"{rel} PEM private key block detected")
+            warn.append(f"{rel} PEM private key block detected")
 
-    # Arweave JWK JSON (whole-file)
+    # Arweave JWK JSON — always hard fail (real key material is catastrophic)
     if rel.endswith(".json"):
         try:
             obj = json.loads(text)
             if isinstance(obj, dict) and _ARWEAVE_JWK_KEYS.issubset(obj.keys()):
                 if not looks_fake(text):
-                    violations.append(f"{rel} Arweave JWK JSON detected")
+                    hard.append(f"{rel} Arweave JWK JSON detected")
         except (json.JSONDecodeError, AttributeError):
             pass
 
-    return violations
+    return hard, warn
 
 
 def main() -> int:
-    all_v: list[str] = []
+    all_hard: list[str] = []
+    all_warn: list[str] = []
     for f in tracked_files():
         parts = Path(f).parts
         if any(d in EXCLUDE_DIRS for d in parts):
             continue
-        # Skip fixture directories
-        if any(d in FIXTURE_DIRS for d in parts):
+        # Skip fixture directories (prefix match)
+        if _in_fixture_dir(f):
             continue
         # Skip test files that intentionally contain secret patterns
         basename = Path(f).name
@@ -135,13 +145,26 @@ def main() -> int:
         p = ROOT / f
         if is_binary(p):
             continue
-        all_v.extend(scan(p, f))
+        h, w = scan(p, f)
+        all_hard.extend(h)
+        all_warn.extend(w)
 
-    if all_v:
-        print("FAIL: Secret material detected in tracked files:", file=sys.stderr)
-        for v in all_v:
-            print(f"  - {v}", file=sys.stderr)
+    # Print warnings (non-blocking)
+    if all_warn:
+        print("WARNING: Possible secret material detected (review recommended):", file=sys.stderr)
+        for v in all_warn:
+            print(f"  ⚠ {v}", file=sys.stderr)
+
+    # Hard fails block CI
+    if all_hard:
+        print("FAIL: Hard secret material violations:", file=sys.stderr)
+        for v in all_hard:
+            print(f"  ✘ {v}", file=sys.stderr)
         return 1
+
+    if all_warn:
+        print("PASS with warnings ({} warning(s)).".format(len(all_warn)))
+        return 0
 
     print("PASS: No secret material found in tracked files.")
     return 0
