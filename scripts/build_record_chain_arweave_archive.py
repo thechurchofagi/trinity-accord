@@ -13,6 +13,7 @@ import datetime as dt
 import hashlib
 import json
 import os
+import subprocess
 import sys
 from pathlib import Path
 
@@ -69,6 +70,55 @@ def existing_batch_manifests():
 
 def build_archive_id(first_batch_id: str, last_batch_id: str, source_hash: str) -> str:
     return f"archive-{first_batch_id}-{last_batch_id}-{source_hash[:12]}"
+
+
+def build_payload_json(manifest: dict, archive_dir: Path) -> Path:
+    """Build the Arweave upload payload from the manifest."""
+    payload = {
+        "schema": "trinityaccord.record-chain-arweave-payload.v1",
+        "archive_id": manifest["archive_id"],
+        "created_at": manifest["created_at"],
+        "chain_id": CHAIN_ID,
+        "included_batches": [
+            {"batch_id": b["batch_id"], "batch_manifest_sha256": b.get("batch_manifest_sha256")}
+            for b in manifest.get("included_batches", [])
+        ],
+        "included_records": [
+            {"record_id": r["record_id"], "record_sha256": r.get("record_sha256")}
+            for r in manifest.get("included_records", [])
+        ],
+        "source": manifest.get("source", {}),
+        "boundary": {
+            "arweave_archive_is_mirror_only": True,
+            "arweave_archive_is_not_authority": True,
+            "arweave_archive_is_not_attestation": True,
+            "arweave_archive_is_not_amendment": True,
+            "arweave_archive_is_not_successor_reception": True,
+            "bitcoin_originals_prevail": True,
+        },
+    }
+    payload_path = archive_dir / "payload.json"
+    write_json(payload_path, payload)
+    return payload_path
+
+
+def upload_to_arweave(payload_path: Path, archive_dir: Path) -> dict:
+    """Call Node Arweave uploader and return the result."""
+    result_path = archive_dir / "upload-result.json"
+    uploader = ROOT / "scripts" / "arweave_upload_payload.mjs"
+    if not uploader.exists():
+        raise SystemExit(f"Arweave uploader not found: {uploader}")
+
+    cmd = ["node", str(uploader), "--payload", str(payload_path), "--out", str(result_path)]
+    env = os.environ.copy()
+
+    result = subprocess.run(cmd, env=env, capture_output=True, text=True, timeout=120)
+    if result.returncode != 0:
+        print(f"Arweave upload failed:\nstdout: {result.stdout}\nstderr: {result.stderr}", file=sys.stderr)
+        raise SystemExit(1)
+
+    print(result.stdout.strip())
+    return read_json(result_path)
 
 
 def build_archive_manifest(mode: str) -> None:
@@ -147,8 +197,16 @@ def build_archive_manifest(mode: str) -> None:
     archive_dir = ARCHIVES / archive_id
 
     if archive_dir.exists():
-        print(f"Archive {archive_id} already exists locally; skipping.")
-        return
+        # Check idempotency: if archive already has a txid, skip upload
+        existing_manifest_path = archive_dir / "manifest.json"
+        if existing_manifest_path.exists():
+            existing = read_json(existing_manifest_path)
+            if existing.get("arweave", {}).get("txid"):
+                print(f"Archive {archive_id} already has txid; skipping.")
+                return
+        print(f"Archive {archive_id} exists locally but no txid; will process.")
+    else:
+        archive_dir.mkdir(parents=True, exist_ok=True)
 
     # Build manifest (without archive_manifest_sha256 first)
     manifest = {
@@ -169,7 +227,7 @@ def build_archive_manifest(mode: str) -> None:
             "enabled": False,
             "upload_mode": mode,
             "txid": None,
-            "wallet_address": None,
+            "wallet_address_sha256": None,
             "uploaded_at": None,
             "verified": False,
         },
@@ -181,6 +239,28 @@ def build_archive_manifest(mode: str) -> None:
             "bitcoin_originals_prevail": True,
         },
     }
+
+    if mode == "live":
+        arkey = os.environ.get("ARKEY")
+        if not arkey:
+            raise SystemExit("ARKEY required for live Arweave upload")
+
+        # Build payload
+        payload_path = build_payload_json(manifest, archive_dir)
+
+        # Upload to Arweave
+        upload_result = upload_to_arweave(payload_path, archive_dir)
+
+        # Update manifest with live upload results
+        manifest["arweave"] = {
+            "enabled": True,
+            "upload_mode": "live",
+            "txid": upload_result.get("txid"),
+            "wallet_address_sha256": upload_result.get("wallet_address_sha256"),
+            "uploaded_at": upload_result.get("uploaded_at"),
+            "verified": False,
+        }
+        manifest["mode"] = "live"
 
     # Compute and set archive_manifest_sha256
     manifest["archive_manifest_sha256"] = sha256_canonical_json(manifest)
@@ -195,15 +275,29 @@ def build_archive_manifest(mode: str) -> None:
 def update_arweave_index() -> None:
     archives = sorted(ARCHIVES.glob("*/manifest.json"))
     archive_entries = []
+    live_count = 0
+    latest_txid = None
+    wallet_address_sha256 = None
+
     for mf_path in archives:
         mf = read_json(mf_path)
         batches = mf.get("included_batches", [])
+        arweave = mf.get("arweave", {})
+        txid = arweave.get("txid")
+        is_live = arweave.get("upload_mode") == "live" and txid is not None
+
+        if is_live:
+            live_count += 1
+            latest_txid = txid
+            if arweave.get("wallet_address_sha256"):
+                wallet_address_sha256 = arweave["wallet_address_sha256"]
+
         archive_entries.append({
             "archive_id": mf.get("archive_id"),
             "mode": mf.get("mode"),
             "manifest_path": str(mf_path.relative_to(ROOT)),
             "archive_manifest_sha256": mf.get("archive_manifest_sha256"),
-            "arweave_txid": mf.get("arweave", {}).get("txid"),
+            "arweave_txid": txid,
             "record_count": len(mf.get("included_records", [])),
             "batch_count": len(batches),
             "first_batch_id": batches[0]["batch_id"] if batches else None,
@@ -211,14 +305,21 @@ def update_arweave_index() -> None:
             "created_at": mf.get("created_at"),
         })
 
+    current_mode = "dry-run"
+    live_upload_implemented = True
+    if live_count > 0:
+        current_mode = "live"
+
     index = {
         "schema": "trinityaccord.record-chain-arweave-index.v1",
         "generated_at": utc_now(),
         "chain_id": CHAIN_ID,
-        "current_upload_mode": "dry-run",
-        "live_upload_enabled": False,
-        "live_upload_implemented": False,
-        "arweave_wallet_address": None,
+        "current_upload_mode": current_mode,
+        "live_upload_enabled": True,
+        "live_upload_implemented": live_upload_implemented,
+        "arweave_wallet_address_sha256": wallet_address_sha256,
+        "latest_arweave_txid": latest_txid,
+        "live_archive_count": live_count,
         "archives": archive_entries,
         "boundary": {
             "arweave_archive_is_mirror_only": True,
@@ -234,12 +335,6 @@ def main():
     parser = argparse.ArgumentParser(description="Build record-chain Arweave archive manifest")
     parser.add_argument("--mode", choices=["dry-run", "live", "verify-only"], default="dry-run")
     args = parser.parse_args()
-
-    if args.mode == "live":
-        wallet_b64 = os.environ.get("ARWEAVE_WALLET_JWK_B64")
-        if not wallet_b64:
-            raise SystemExit("ARWEAVE_WALLET_JWK_B64 required for live Arweave upload")
-        raise SystemExit("Live Arweave upload is not implemented in Phase 6A; use --mode dry-run")
 
     if args.mode == "verify-only":
         print("Use verify_record_chain_arweave_archive.py for verification.")
