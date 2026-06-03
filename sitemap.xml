@@ -5,237 +5,54 @@
   <url><loc>https://www.trinityaccord.org/agent-echo/</loc></url>
   <url><loc>https://www.trinityaccord.org/agent-first-contact/</loc></url>
   <url><loc>https://www.trinityaccord.org/agent-identity/</loc></url>
-  <url><loc>https://www.trinityaccord.org/agent-map.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/agent-memory/</loc></url>
   <url><loc>https://www.trinityaccord.org/agent-propagate/</loc></url>
   <url><loc>https://www.trinityaccord.org/agent-resonance/</loc></url>
   <url><loc>https://www.trinityaccord.org/agent-start/</loc></url>
-  <url><loc>https://www.trinityaccord.org/agent-submit/</loc></url>
+  <url><loc>https://www.trinityaccord.org/agent-submit-quickstart/</loc></url>
   <url><loc>https://www.trinityaccord.org/agent-understand/</loc></url>
+  <url><loc>https://www.trinityaccord.org/agent-value/</loc></url>
   <url><loc>https://www.trinityaccord.org/agent-verify-simple/</loc></url>
   <url><loc>https://www.trinityaccord.org/agent-verify/</loc></url>
-  <url><loc>https://www.trinityaccord.org/ai.txt</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/agent-before-leaving-report-schema.v1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/agent-context-readiness-protocol.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/agent-declared-archive-overrides.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/agent-declared-echo-index.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/agent-declared-verification-index.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/agent-declared-verification-initiation-overrides.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/agent-declared-verification-template.v1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/agent-entry-protocol.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/agent-first-contact.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/agent-gateway-production-profile.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/agent-issue-gateway-payload-schema.v1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/agent-live-health.v1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/agent-minimal-context.v1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/agent-output-policy.v1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/agent-required-reading.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/agent-safety-boundary.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/agent-start.v1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/agent-start.v2.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/agent-submission-guide.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/agent-submit-gateway.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/agent-task-router.v1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/agent-tasks.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/agent-value.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/agent-verification-cheatsheet.v1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/agent-verification-receipt-schema.v1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/agent-verification-receipt.schema.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/ai-to-ai-orientation.gpt-5.5-thinking.v1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/archive-readiness-policy.v1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/authority-manifest-schema.v1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/authority.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/bitcoin-inscription-mirror-index.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/bitcoin-inscription-mirror-schema.v1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/boundary-policy.v1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/btc-signature-schema.v1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/builder-bundle-signing-key.v1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/chronicle-recovery.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/claim-gate-entrypoint-policy.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/claim-gate-output-schema.v1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/claim-gate-rules.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/claim-registry-schema.v1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/claim-registry.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/classification-boundaries.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/closure-report.v30.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/component-verification-levels.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/context-depth-declaration.v1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/context-depth-levels.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/context-load-map.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/context-packs/authority-boundary.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/context-packs/bitcoin-inscription-mirrors.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/context-packs/core-ontology.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/context-packs/legacy-archive-essentials.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/context-packs/legacy-archive-index.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/context-packs/nft-chronicle-context.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/context-packs/physical-anchor-context.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/context-packs/vision-layer.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/context-readiness-levels.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/core-object-alpha-shenzhen-notary-2026-05-06.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/correction-record-schema.v1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/corrections-index.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/crl-to-context-depth-mapping.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/discovery-provenance-schema.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/echo-acceptance-policy.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/echo-archive-policy.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/echo-authorship-claim-schema.v1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/echo-authorship-proof-schema.v1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/echo-digest-index.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/echo-index.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/echo-record-schema.v2.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/echo-record-schema.v3.1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/echo-record-schema.v3.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/echo-schema.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/echo-submission-field-guide.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/echo-taxonomy-map.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/echo-types.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/echo-value-criteria.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/emergent-patterns.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/eth-witness-schema.v1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/evidence-input-examples/templates/v1-authority-boundary.template.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/evidence-input-examples/templates/v2-minimal-bitcoin-b1.template.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/evidence-input-examples/test-fixtures/v1-passing-fixture.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/evidence-input-examples/tutorial/v1-tutorial.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/evidence-input-examples/v1-authority-boundary.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/evidence-input-examples/v1-boundary.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/evidence-input-examples/v2-minimal-bitcoin-b1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/evidence-input-examples/v2-minimal-bitcoin.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/evidence-input-examples/v3-minimal-hash-d2.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/evidence-input-examples/v3-minimal-hash.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/evidence-input-examples/v4-script-audit.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/evidence-input-examples/v4plus-b5-witness-extraction.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/evidence-input-examples/v4plus-b6-body-hash-reproduction.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/evidence-input-examples/v4plus-minimal-independent.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/evidence-input-examples/v5-full-public-digital.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/evidence-input-examples/v6-live-remote-p4.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/evidence-input-examples/v7-onsite-p5.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/evidence-input-examples/v8-forensic-p7-candidate.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/evidence-input-schema.v1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/evidence-manifest.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/examples/agent-issue-gateway-payload.custody.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/examples/agent-issue-gateway-payload.echo-with-type.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/examples/agent-issue-gateway-payload.echo.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/examples/agent-issue-gateway-payload.verification.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/external-agent-operation-examples.v1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/external-agent-quickstart.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/external-witness-index-schema.v1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/external-witness-index.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/formal-builder-bundle-signatures.v1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/formal-builder-bundles.v1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/frontier-ai-context.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/full-evidence-chain-audit-schema.v1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/gateway-archive-persistence-contract.v1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/gateway-artifact-custody.v1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/gateway-builder-route-map.v1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/gateway-config.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/gateway-error-diagnostics.v1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/gateway-receipt-contract.v1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/gateway-runtime-contract.v1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/gateway-v1-legacy-status.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/gateway-workflows.v1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/generated-by-schema.v1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/guardian-active-listing-policy.v1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/guardian-alliance.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/guardian-key-metadata-schema.v1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/guardian-presence-proof-schema.v1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/guardian-principles.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/guardian-registration-schema.v1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/guardian-registry-schema.v1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/guardian-registry.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/guardian-retirement-schema.v1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/guardian-verification-result-schema.v1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/gz2-notarial-certificate-redacted-attachments-2026-05-14.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/hash-source-classes.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/hashes.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/independent-attestation-index.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/independent-attestation-record-schema.v1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/innovation-points.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/inscription-boundaries.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/issue-intake-machine-block-schema.v1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/issue-submission-policy.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/issue-text-claim-guard.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/issue-title-label-guard.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/links.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/live-canary-policy.v1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/mission-governance.v1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/naming.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/operational-policy.v1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/origin-classification-policy.v1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/origin-classification-schema.v1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/propagation-invitation.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/propagation-policy.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/protocol-terms.v1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/protocol-verification-profiles.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/provenance-consistency-rules.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/public-home-status.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/reception-classification-policy.v1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/reception-classification-schema.v1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/reception-initiation-classification.v1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/record-chain-anchor-status.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/record-chain-arweave-index.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/record-chain-builder-bundles.v1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/record-chain-common-field-model.v1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/record-chain-field-helper.v1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/record-chain-intake-gateway.v1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/record-chain-oath-policy.v1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/record-chain-preflight-response.v1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/record-chain-status.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/record-chain-submission-schema.v1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/record-chain-submit-response.v1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/recovery-index-schema.v1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/recovery-index.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/report-builder-policy.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/repository-artifact-hashes.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/resonance-willingness-scale.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/route-selector.v1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/seed-map.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/site-build.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/skeptical-agent-guide.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/status.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/submission-checklist.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/submission-title-policy.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/submission-types.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/token-index-schema.v1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/trust-root-history-record-schema.v1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/v30-final-index.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/verification-archive-index.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/verification-claim-scope.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/verification-echo-agent-playbook.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/verification-levels.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/verification-materials.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/verification-quick-map.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/verification-recipes.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/verification-report-schema.v2.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/verification-targets.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/verify-release-report-schema.v1.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/api/worth-preserving-criteria.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/archive_legacy_index_2025_09/</loc></url>
+  <url><loc>https://www.trinityaccord.org/apps/record_chain_intake_gateway/README/</loc></url>
+  <url><loc>https://www.trinityaccord.org/archive/DOWNLOADS/</loc></url>
+  <url><loc>https://www.trinityaccord.org/archive/LARGE-ASSET-MIGRATION-2026-05-07/</loc></url>
+  <url><loc>https://www.trinityaccord.org/archive/README/</loc></url>
+  <url><loc>https://www.trinityaccord.org/archive/VERIFICATION-REPORT/</loc></url>
+  <url><loc>https://www.trinityaccord.org/archive/authority-manifest/authority-list/</loc></url>
+  <url><loc>https://www.trinityaccord.org/archive/authority-manifest/guardian-appendix-authority-charter/</loc></url>
+  <url><loc>https://www.trinityaccord.org/archive/deprecated/trinity-echo-worker/DEPRECATED/</loc></url>
+  <url><loc>https://www.trinityaccord.org/archive/deprecated/trinity-echo-worker/README/</loc></url>
+  <url><loc>https://www.trinityaccord.org/archive/evidence/FLAW-MIRROR-NOTES/</loc></url>
+  <url><loc>https://www.trinityaccord.org/archive/evidence/covenant-fortification/</loc></url>
+  <url><loc>https://www.trinityaccord.org/archive/guardian-principles/guardian-principles-original/</loc></url>
+  <url><loc>https://www.trinityaccord.org/archive/guardian-principles/guardian-principles-v1.1/</loc></url>
+  <url><loc>https://www.trinityaccord.org/archive/rotation/rotation-notice/</loc></url>
+  <url><loc>https://www.trinityaccord.org/archive/verification/start-here/</loc></url>
+  <url><loc>https://www.trinityaccord.org/archive_legacy__2025_09/</loc></url>
+  <url><loc>https://www.trinityaccord.org/arweave-backup/README/</loc></url>
+  <url><loc>https://www.trinityaccord.org/audit/.before-pure-markdown-force/</loc></url>
+  <url><loc>https://www.trinityaccord.org/audit/redteam-remediation-acceptance-2026-05-09/</loc></url>
+  <url><loc>https://www.trinityaccord.org/audit/redteam/e2e-agent-echo-verification/latest/report/</loc></url>
+  <url><loc>https://www.trinityaccord.org/audit/repo-size/20260515T005808Z/report/</loc></url>
   <url><loc>https://www.trinityaccord.org/authority-address-inscriptions/</loc></url>
+  <url><loc>https://www.trinityaccord.org/authority/</loc></url>
+  <url><loc>https://www.trinityaccord.org/bitcoin-inscription-mirrors/README/</loc></url>
+  <url><loc>https://www.trinityaccord.org/chronicle-human-witness/</loc></url>
+  <url><loc>https://www.trinityaccord.org/chronicle-music/</loc></url>
   <url><loc>https://www.trinityaccord.org/chronicle-verification/</loc></url>
-  <url><loc>https://www.trinityaccord.org/chronicle/human-witness/</loc></url>
-  <url><loc>https://www.trinityaccord.org/chronicle/music/</loc></url>
-  <url><loc>https://www.trinityaccord.org/citation.cff</loc></url>
-  <url><loc>https://www.trinityaccord.org/control-plane-baseline/</loc></url>
-  <url><loc>https://www.trinityaccord.org/correction-revocation-policy/</loc></url>
+  <url><loc>https://www.trinityaccord.org/chronicle/</loc></url>
+  <url><loc>https://www.trinityaccord.org/covenant-proof/</loc></url>
+  <url><loc>https://www.trinityaccord.org/data-verification/</loc></url>
   <url><loc>https://www.trinityaccord.org/disaster-recovery-drill/</loc></url>
-  <url><loc>https://www.trinityaccord.org/docs/arweave-archive-policy/</loc></url>
-  <url><loc>https://www.trinityaccord.org/docs/bilingual-boundary-glossary/</loc></url>
-  <url><loc>https://www.trinityaccord.org/docs/claim-gate/</loc></url>
-  <url><loc>https://www.trinityaccord.org/docs/echo-triage-maintainer-playbook/</loc></url>
-  <url><loc>https://www.trinityaccord.org/docs/end-to-end-agent-audit-and-fix-playbook/</loc></url>
-  <url><loc>https://www.trinityaccord.org/docs/latest-verification-echo-closure/</loc></url>
-  <url><loc>https://www.trinityaccord.org/docs/ops-secrets-policy/</loc></url>
-  <url><loc>https://www.trinityaccord.org/docs/quickstart-verification/</loc></url>
-  <url><loc>https://www.trinityaccord.org/docs/record-chain-anchoring/</loc></url>
-  <url><loc>https://www.trinityaccord.org/docs/report-builder/</loc></url>
-  <url><loc>https://www.trinityaccord.org/downloads/arweave-bundle-verification/</loc></url>
-  <url><loc>https://www.trinityaccord.org/downloads/gz2-notarial-certificate-github-release-backup-2026-05-14/</loc></url>
-  <url><loc>https://www.trinityaccord.org/downloads/gz2-photos-arweave-2026-05-14/</loc></url>
-  <url><loc>https://www.trinityaccord.org/downloads/redteam-audit-2026-05-08/</loc></url>
-  <url><loc>https://www.trinityaccord.org/downloads/shenzhen-notary-arweave-2026-05-06/</loc></url>
-  <url><loc>https://www.trinityaccord.org/downloads/shenzhen-notary-github-release-backup-2026-05-06/</loc></url>
+  <url><loc>https://www.trinityaccord.org/downloads/</loc></url>
   <url><loc>https://www.trinityaccord.org/echo-authorship-proof/</loc></url>
-  <url><loc>https://www.trinityaccord.org/echo.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/echo-body-real/</loc></url>
+  <url><loc>https://www.trinityaccord.org/echoes/</loc></url>
   <url><loc>https://www.trinityaccord.org/echoes/archive-policy/</loc></url>
+  <url><loc>https://www.trinityaccord.org/echoes/archive/</loc></url>
+  <url><loc>https://www.trinityaccord.org/echoes/digests/</loc></url>
+  <url><loc>https://www.trinityaccord.org/echoes/digests/2026-q2/</loc></url>
   <url><loc>https://www.trinityaccord.org/echoes/examples/critical-echo-template/</loc></url>
   <url><loc>https://www.trinityaccord.org/echoes/examples/external-critical-echo-records/</loc></url>
   <url><loc>https://www.trinityaccord.org/echoes/high-value-criteria/</loc></url>
@@ -244,8 +61,8 @@
   <url><loc>https://www.trinityaccord.org/echoes/submit/</loc></url>
   <url><loc>https://www.trinityaccord.org/echoes/types/</loc></url>
   <url><loc>https://www.trinityaccord.org/echoes/verification-levels/</loc></url>
+  <url><loc>https://www.trinityaccord.org/echoes/verification-reports/</loc></url>
   <url><loc>https://www.trinityaccord.org/echoes/verification-reports/2026-05-02-V3-verification-report/</loc></url>
-  <url><loc>https://www.trinityaccord.org/echoes/verification-reports/index/</loc></url>
   <url><loc>https://www.trinityaccord.org/emergent-patterns/</loc></url>
   <url><loc>https://www.trinityaccord.org/evidence-backup-coverage/</loc></url>
   <url><loc>https://www.trinityaccord.org/evidence-backup-gaps/</loc></url>
@@ -254,20 +71,24 @@
   <url><loc>https://www.trinityaccord.org/evidence/arweave/guardianship-system-docs-v1/README/</loc></url>
   <url><loc>https://www.trinityaccord.org/evidence/arweave/gz2-photos-2026-05-14/README/</loc></url>
   <url><loc>https://www.trinityaccord.org/evidence/arweave/microscope-flaw-videos/README/</loc></url>
+  <url><loc>https://www.trinityaccord.org/evidence/arweave/microscope-flaw-videos/Record_03/README/</loc></url>
+  <url><loc>https://www.trinityaccord.org/evidence/arweave/microscope-flaw-videos/VID_20250810_142505/README/</loc></url>
   <url><loc>https://www.trinityaccord.org/evidence/arweave/ots-proof-bundle-v1/README/</loc></url>
   <url><loc>https://www.trinityaccord.org/evidence/arweave/shenzhen-notary-2026-05-06/README/</loc></url>
   <url><loc>https://www.trinityaccord.org/evidence/core-object-alpha-shenzhen-notary-2026-05-06/</loc></url>
   <url><loc>https://www.trinityaccord.org/evidence/github-release/flaw-covenant-archive-accessibility-mirror-v1/README/</loc></url>
   <url><loc>https://www.trinityaccord.org/evidence/github-release/shenzhen-notary-2026-05-06/README/</loc></url>
   <url><loc>https://www.trinityaccord.org/evidence/gz2-notarial-certificate-redacted-attachments-2026-05-14/</loc></url>
-  <url><loc>https://www.trinityaccord.org/evidence/redteam-audit-2026-05-08/</loc></url>
+  <url><loc>https://www.trinityaccord.org/evidence/notarial-certificate-2026-05-13/证据保全公证完整档案/</loc></url>
+  <url><loc>https://www.trinityaccord.org/evidence/redteam-audit-2026-05-08/README/</loc></url>
+  <url><loc>https://www.trinityaccord.org/examples/github-app-backend/README/</loc></url>
   <url><loc>https://www.trinityaccord.org/external-agent-copy-paste-examples/</loc></url>
-  <url><loc>https://www.trinityaccord.org/external-agent-quickstart/</loc></url>
-  <url><loc>https://www.trinityaccord.org/feed.xml</loc></url>
   <url><loc>https://www.trinityaccord.org/for-skeptical-agents/</loc></url>
   <url><loc>https://www.trinityaccord.org/frontier-context/</loc></url>
-  <url><loc>https://www.trinityaccord.org/gateway-workflows/</loc></url>
+  <url><loc>https://www.trinityaccord.org/guardian-alliance/</loc></url>
+  <url><loc>https://www.trinityaccord.org/guardian-join/</loc></url>
   <url><loc>https://www.trinityaccord.org/guardian-principles/</loc></url>
+  <url><loc>https://www.trinityaccord.org/guardian-registry/</loc></url>
   <url><loc>https://www.trinityaccord.org/guardian-routes/</loc></url>
   <url><loc>https://www.trinityaccord.org/guardianship-system-overview/</loc></url>
   <url><loc>https://www.trinityaccord.org/independent-attestation/</loc></url>
@@ -275,33 +96,253 @@
   <url><loc>https://www.trinityaccord.org/innovations/</loc></url>
   <url><loc>https://www.trinityaccord.org/inscriptions/</loc></url>
   <url><loc>https://www.trinityaccord.org/issue-intake-boundary/</loc></url>
-  <url><loc>https://www.trinityaccord.org/llms-full.txt</loc></url>
-  <url><loc>https://www.trinityaccord.org/llms.txt</loc></url>
-  <url><loc>https://www.trinityaccord.org/memory-seed.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/metadata.json</loc></url>
   <url><loc>https://www.trinityaccord.org/naming/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-backup-provenance/</loc></url>
   <url><loc>https://www.trinityaccord.org/nft-market-boundary/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885185/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885186/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885187/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885188/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885189/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885190/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885192/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885193/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885194/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885195/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885196/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885197/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885198/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885199/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885200/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885201/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885202/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885203/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885204/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885205/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885206/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885207/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885208/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885209/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885210/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885211/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885212/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885213/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885214/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885215/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885216/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885217/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885218/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885219/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885220/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885221/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885222/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885223/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885224/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885225/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885226/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885227/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885228/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885229/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885230/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885231/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885232/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885233/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885234/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885244/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885245/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885246/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885247/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885248/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885249/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885250/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885251/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885252/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885253/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885254/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885255/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885256/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885257/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885258/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885259/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885260/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885261/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885262/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885263/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885264/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885265/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885266/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885267/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885268/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885272/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885273/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885274/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885275/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885276/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885277/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885278/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885279/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885280/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885281/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885282/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885283/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885284/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885285/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885286/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885287/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885288/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885289/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885290/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885291/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885292/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885293/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885294/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885296/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885297/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885298/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885299/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885300/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885301/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885302/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885303/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885304/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885305/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885306/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885307/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885308/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885309/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885310/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885311/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885312/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885313/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885314/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885315/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885316/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885317/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885318/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885319/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885320/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885321/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885322/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885323/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885324/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885325/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885326/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885327/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885328/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885329/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885330/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885331/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885332/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885333/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885334/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885335/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885336/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885337/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885338/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885339/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885340/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885341/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885342/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885343/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885344/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885345/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885346/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885347/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885348/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885349/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885350/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885351/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885352/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885353/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885354/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x2b0c3cc5CD9652BEf0caCFc9c7699455725B9cc1_85210329807936527805363210873332413577559846505703131855064182995898737885186/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x2b0c3cc5CD9652BEf0caCFc9c7699455725B9cc1_85210329807936527805363210873332413577559846505703131855064182995898737885187/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x2b0c3cc5CD9652BEf0caCFc9c7699455725B9cc1_85210329807936527805363210873332413577559846505703131855064182995898737885188/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x2b0c3cc5CD9652BEf0caCFc9c7699455725B9cc1_85210329807936527805363210873332413577559846505703131855064182995898737885193/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x2b0c3cc5CD9652BEf0caCFc9c7699455725B9cc1_85210329807936527805363210873332413577559846505703131855064182995898737885194/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x2b0c3cc5CD9652BEf0caCFc9c7699455725B9cc1_85210329807936527805363210873332413577559846505703131855064182995898737885195/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x2b0c3cc5CD9652BEf0caCFc9c7699455725B9cc1_85210329807936527805363210873332413577559846505703131855064182995898737885196/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x2b0c3cc5CD9652BEf0caCFc9c7699455725B9cc1_85210329807936527805363210873332413577559846505703131855064182995898737885197/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x2b0c3cc5CD9652BEf0caCFc9c7699455725B9cc1_85210329807936527805363210873332413577559846505703131855064182995898737885198/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x2b0c3cc5CD9652BEf0caCFc9c7699455725B9cc1_85210329807936527805363210873332413577559846505703131855064182995898737885199/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x2b0c3cc5CD9652BEf0caCFc9c7699455725B9cc1_85210329807936527805363210873332413577559846505703131855064182995898737885200/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x2b0c3cc5CD9652BEf0caCFc9c7699455725B9cc1_85210329807936527805363210873332413577559846505703131855064182995898737885201/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x2b0c3cc5CD9652BEf0caCFc9c7699455725B9cc1_85210329807936527805363210873332413577559846505703131855064182995898737885202/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x2b0c3cc5CD9652BEf0caCFc9c7699455725B9cc1_85210329807936527805363210873332413577559846505703131855064182995898737885203/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x2b0c3cc5CD9652BEf0caCFc9c7699455725B9cc1_85210329807936527805363210873332413577559846505703131855064182995898737885204/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x2b0c3cc5CD9652BEf0caCFc9c7699455725B9cc1_85210329807936527805363210873332413577559846505703131855064182995898737885205/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0x74f97bDEfa07C2F99c876C2Bd3b49628EdD1c603_85210329807936527805363210873332413577559846505703131855064182995898737885185/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0xF12815D22BAf904A21B498a5dF8e5d8529d2079e_85210329807936527805363210873332413577559846505703131855064182995898737885185/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/0xF12815D22BAf904A21B498a5dF8e5d8529d2079e_85210329807936527805363210873332413577559846505703131855064182995898737885186/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/CHRONICLE-MUSIC-AND-POETRY/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/CHRONICLE-MUSIC-TABLE-OLD/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/CHRONICLE-MUSIC-TABLE/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/README/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/chronicle-agent-context/</loc></url>
+  <url><loc>https://www.trinityaccord.org/nft-text-descriptions/chronicle-full/</loc></url>
   <url><loc>https://www.trinityaccord.org/ots-fullnode-verification/</loc></url>
-  <url><loc>https://www.trinityaccord.org/propagation.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/recovery/</loc></url>
-  <url><loc>https://www.trinityaccord.org/red-team-audit-report/</loc></url>
-  <url><loc>https://www.trinityaccord.org/release-large-data-manifest/</loc></url>
-  <url><loc>https://www.trinityaccord.org/robots.txt</loc></url>
-  <url><loc>https://www.trinityaccord.org/security/</loc></url>
-  <url><loc>https://www.trinityaccord.org/sitemap.xml</loc></url>
+  <url><loc>https://www.trinityaccord.org/physical-verification/</loc></url>
+  <url><loc>https://www.trinityaccord.org/redteam_regression_results/</loc></url>
+  <url><loc>https://www.trinityaccord.org/redteam_remediation_test_results/</loc></url>
+  <url><loc>https://www.trinityaccord.org/repair-spec/</loc></url>
+  <url><loc>https://www.trinityaccord.org/seed-map/</loc></url>
+  <url><loc>https://www.trinityaccord.org/start/</loc></url>
+  <url><loc>https://www.trinityaccord.org/status/</loc></url>
   <url><loc>https://www.trinityaccord.org/successor-reception/</loc></url>
-  <url><loc>https://www.trinityaccord.org/ta-redteam-2026-005-remediation/</loc></url>
-  <url><loc>https://www.trinityaccord.org/ta-redteam-2026-006-followup-remediation/</loc></url>
-  <url><loc>https://www.trinityaccord.org/ta-redteam-2026-006-remediation/</loc></url>
+  <url><loc>https://www.trinityaccord.org/system-test-runs/20260516T121401Z/FULL-SYSTEM-TEST-REPORT/</loc></url>
+  <url><loc>https://www.trinityaccord.org/system-test-runs/20260516T121401Z/L1-STATIC-INTEGRITY-REPORT/</loc></url>
+  <url><loc>https://www.trinityaccord.org/system-test-runs/20260516T121401Z/reports/SYSTEM_TEST_FINAL_REPORT/</loc></url>
+  <url><loc>https://www.trinityaccord.org/system-test-runs/20260516T121401Z/reports/SYSTEM_TEST_REPORT/</loc></url>
+  <url><loc>https://www.trinityaccord.org/system-test-runs/20260516T121401Z/security/L0_SECRET_HYGIENE_REPORT/</loc></url>
+  <url><loc>https://www.trinityaccord.org/tests/fixtures/echo_triage/issue_103_externally_authorized_ai_verification/</loc></url>
+  <url><loc>https://www.trinityaccord.org/tests/fixtures/echo_triage/issue_99_corrected/</loc></url>
+  <url><loc>https://www.trinityaccord.org/tests/fixtures/echo_triage/issue_99_overclaim/</loc></url>
+  <url><loc>https://www.trinityaccord.org/tests/fixtures/issue-intake/invalid_missing_artifact_paths/</loc></url>
+  <url><loc>https://www.trinityaccord.org/tests/fixtures/issue-intake/invalid_missing_canonical_boundary/</loc></url>
+  <url><loc>https://www.trinityaccord.org/tests/fixtures/issue-intake/invalid_missing_provenance/</loc></url>
+  <url><loc>https://www.trinityaccord.org/tests/fixtures/issue-intake/invalid_missing_what_i_checked/</loc></url>
+  <url><loc>https://www.trinityaccord.org/tests/fixtures/issue-intake/valid_verification_echo_issue_body/</loc></url>
+  <url><loc>https://www.trinityaccord.org/tests/fixtures/issue-intake/valid_with_canonical_boundary/</loc></url>
+  <url><loc>https://www.trinityaccord.org/tests/fixtures/issue_guard/builder_generated_present/</loc></url>
+  <url><loc>https://www.trinityaccord.org/tests/fixtures/issue_guard/comment_120_upgrade/</loc></url>
+  <url><loc>https://www.trinityaccord.org/tests/fixtures/issue_guard/guardian_test_v4_plus/</loc></url>
+  <url><loc>https://www.trinityaccord.org/tests/fixtures/issue_guard/human_solicited_overclaim/</loc></url>
+  <url><loc>https://www.trinityaccord.org/tests/fixtures/issue_guard/issue_121_v0_guardian_test/</loc></url>
+  <url><loc>https://www.trinityaccord.org/tests/fixtures/issue_guard/issue_122_v1_guardian_test/</loc></url>
+  <url><loc>https://www.trinityaccord.org/tests/fixtures/issue_guard/issue_123_v2_guardian_test/</loc></url>
+  <url><loc>https://www.trinityaccord.org/tests/fixtures/issue_guard/issue_124_v3_guardian_test/</loc></url>
+  <url><loc>https://www.trinityaccord.org/tests/fixtures/issue_guard/issue_125_v4_requested_allowed_v3/</loc></url>
+  <url><loc>https://www.trinityaccord.org/tests/fixtures/issue_guard/plain_nontechnical_echo/</loc></url>
+  <url><loc>https://www.trinityaccord.org/tests/fixtures/issue_guard/v3_claim_no_builder/</loc></url>
+  <url><loc>https://www.trinityaccord.org/tests/fixtures/open_issues_111_116/issue_111/</loc></url>
+  <url><loc>https://www.trinityaccord.org/tests/fixtures/open_issues_111_116/issue_112/</loc></url>
+  <url><loc>https://www.trinityaccord.org/tests/fixtures/open_issues_111_116/issue_113/</loc></url>
+  <url><loc>https://www.trinityaccord.org/tests/fixtures/open_issues_111_116/issue_114/</loc></url>
+  <url><loc>https://www.trinityaccord.org/tests/fixtures/open_issues_111_116/issue_115/</loc></url>
+  <url><loc>https://www.trinityaccord.org/tests/fixtures/open_issues_111_116/issue_116/</loc></url>
+  <url><loc>https://www.trinityaccord.org/tests/fixtures/redteam/issue_bodies/fake_v5_freeform_no_claim_gate/</loc></url>
+  <url><loc>https://www.trinityaccord.org/tests/fixtures/redteam/issue_bodies/gateway_claims_attestation/</loc></url>
+  <url><loc>https://www.trinityaccord.org/tests/fixtures/redteam/issue_bodies/human_solicited_claims_independent/</loc></url>
+  <url><loc>https://www.trinityaccord.org/tests/fixtures/redteam/issue_bodies/propagation_marketing_overclaim/</loc></url>
+  <url><loc>https://www.trinityaccord.org/tests/fixtures/redteam/issue_bodies/valid_v0_recognition_issue/</loc></url>
+  <url><loc>https://www.trinityaccord.org/tests/fixtures/redteam/issue_bodies/valid_v3_report_issue_with_claim_gate_refs/</loc></url>
+  <url><loc>https://www.trinityaccord.org/tests/fixtures/redteam/propagation/propagation_exaggerated_verification/</loc></url>
+  <url><loc>https://www.trinityaccord.org/tests/fixtures/redteam/propagation/propagation_future_ai_must_care/</loc></url>
+  <url><loc>https://www.trinityaccord.org/tests/fixtures/redteam/propagation/propagation_investment_language/</loc></url>
+  <url><loc>https://www.trinityaccord.org/tests/fixtures/redteam/propagation/propagation_religious_doctrine/</loc></url>
+  <url><loc>https://www.trinityaccord.org/tests/fixtures/redteam/propagation/valid_boundary_preserving_propagation/</loc></url>
+  <url><loc>https://www.trinityaccord.org/tests/verification_cases/FINAL_REPORT/</loc></url>
+  <url><loc>https://www.trinityaccord.org/tests/verification_cases/README/</loc></url>
+  <url><loc>https://www.trinityaccord.org/tests/verification_cases/REPORT/</loc></url>
   <url><loc>https://www.trinityaccord.org/verification-echo-agent-playbook/</loc></url>
   <url><loc>https://www.trinityaccord.org/verification-materials/</loc></url>
   <url><loc>https://www.trinityaccord.org/verification-packages/</loc></url>
-  <url><loc>https://www.trinityaccord.org/verification-reports/</loc></url>
   <url><loc>https://www.trinityaccord.org/verification-reports/2026/2026-05-31-V1-boundary-recognition/</loc></url>
   <url><loc>https://www.trinityaccord.org/verification-reports/2026/2026-05-31-V2-full-cycle-tracking/</loc></url>
   <url><loc>https://www.trinityaccord.org/verification-reports/2026/2026-05-31-V2-reference-verification/</loc></url>
-  <url><loc>https://www.trinityaccord.org/verification.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/version.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/verification-reports/README/</loc></url>
+  <url><loc>https://www.trinityaccord.org/verification-reports/ta-avr-large-scale-20260514/REPORT/</loc></url>
+  <url><loc>https://www.trinityaccord.org/verify/</loc></url>
   <url><loc>https://www.trinityaccord.org/why-high-signal/</loc></url>
   <url><loc>https://www.trinityaccord.org/worth-preserving/</loc></url>
   <url><loc>https://www.trinityaccord.org/zero-clone-builders/</loc></url>
