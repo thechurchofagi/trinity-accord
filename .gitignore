@@ -27,3 +27,14 @@ package-lock.json
 
 # Build
 _site/
+# Wallets and secrets — never commit
+*.jwk
+*.wallet.json
+wallet.json
+wallet.*.json
+arweave-wallet*.json
+arweave*.jwk
+*.secret.json
+*.secrets.json
+.env.*
+!.env.example
