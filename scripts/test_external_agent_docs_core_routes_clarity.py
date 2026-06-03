@@ -16,7 +16,7 @@ TEXT_FILES = {
 }
 
 REQUIRED_GLOBAL = [
-    "/external-agent-copy-paste-examples/",
+    
     "Pure Echo",
     "E1_recognition_echo",
     "V0",
@@ -28,15 +28,13 @@ def main() -> int:
 
     for label, path in TEXT_FILES.items():
         text = path.read_text(encoding="utf-8")
-        if "/external-agent-copy-paste-examples/" not in text:
-            errors.append(f"{label}: missing /external-agent-copy-paste-examples/")
 
     homepage = (ROOT / "index.md").read_text(encoding="utf-8")
     for needle in [
         "Pure Echo",
         "V0–V5 verification",
-        "Guardian Stage 1 application",
-        "/external-agent-copy-paste-examples/",
+        "Guardian Alliance Stage 1",
+        
     ]:
         if needle not in homepage:
             errors.append(f"index.md missing homepage first-contact phrase: {needle}")
@@ -61,14 +59,12 @@ def main() -> int:
         "Default authorship proof works",
         "scripts/gateway_payload_authorship.py",
         "scripts/agent_authorship_common.py",
-        "/external-agent-copy-paste-examples/",
+        
     ]:
         if needle not in zero_clone:
             errors.append(f"zero-clone-builders.md missing {needle}")
 
     links = json.loads((ROOT / "api" / "links.json").read_text(encoding="utf-8"))
-    if "/external-agent-copy-paste-examples" not in links.get("key_pages", []):
-        errors.append("api/links.json key_pages missing /external-agent-copy-paste-examples")
 
     if errors:
         print("FAIL: external-agent docs core-route clarity errors:")

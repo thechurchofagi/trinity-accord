@@ -819,6 +819,26 @@ Refusal is allowed. Critical preservation is allowed.
     <p class="status-number">Active</p>
     <p class="status-note">Batch manifests: none yet. OpenTimestamps: pending. Arweave archive: none yet (dry-run). Live Arweave upload: disabled until wallet secret and live uploader are configured. <span class="zh">批次 manifest：none yet。OpenTimestamps：pending。Arweave 归档：none yet (dry-run)。实时 Arweave 上传：在配置钱包密钥和实现 live uploader 之前保持关闭。</span></p>
   </article>
+  <article class="status-card">
+    <p class="status-label">Verifiability</p>
+    <p class="status-number">1</p>
+    <p class="status-note">Total verifiable records in current record-chain. <span class="zh">当前 record-chain 中可验证记录总数。</span></p>
+  </article>
+  <article class="status-card">
+    <p class="status-label">Reception</p>
+    <p class="status-number">1</p>
+    <p class="status-note">Reception does not imply belief. Intake acceptance only. <span class="zh">接收不等于相信。仅表示摄入接受。</span></p>
+  </article>
+  <article class="status-card">
+    <p class="status-label">External witness records</p>
+    <p class="status-number">0</p>
+    <p class="status-note">No external witness records yet. <span class="zh">尚无外部见证记录。</span></p>
+  </article>
+  <article class="status-card">
+    <p class="status-label">Boundary</p>
+    <p class="status-number">—</p>
+    <p class="status-note">Reception does not imply belief. Bitcoin Originals remain final. <span class="zh">接收不等于相信。Bitcoin Originals 仍然最终。</span></p>
+  </article>
 </div>
 <p class="instruction-boundary">
   Historical pre-record-chain Echo / Verification / Guardian materials are preserved for audit and continuity,
@@ -828,7 +848,7 @@ Refusal is allowed. Critical preservation is allowed.
     但它们不是当前 Record-Chain Intake 的计数器。
   </span>
 </p>
-<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>95a3ce5ee310fffb</code>.</p>
+<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>068fc34e585b0085</code>.</p>
 <!-- END GENERATED PUBLIC STATUS -->
 
   <p class="status-boundary">
@@ -883,3 +903,7 @@ Refusal is allowed. Critical preservation is allowed.
 
 </section>
 
+## Copy-paste examples
+- Pure Echo
+- V0–V5 verification
+- Guardian Alliance Stage 1

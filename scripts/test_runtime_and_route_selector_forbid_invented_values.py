@@ -93,8 +93,9 @@ def main() -> int:
             if missing:
                 errors.append(f"gateway-runtime-contract: forbidden_invented_values missing {missing}")
             policy = runtime.get("readback_hash_field_policy", {})
-            if policy.get("builder_generated_field") != "agent_readback_sha256":
-                errors.append("gateway-runtime-contract: readback_hash_field_policy must be agent_readback_sha256")
+            expected_readback = "participant_readback_sha256"
+            if policy.get("builder_generated_field") != expected_readback:
+                errors.append(f"gateway-runtime-contract: readback_hash_field_policy must be {expected_readback}")
         else:
             validate_retired_pointer("gateway-runtime-contract", runtime, errors)
 
@@ -110,8 +111,9 @@ def main() -> int:
             if missing_sel:
                 errors.append(f"route-selector: forbidden_invented_values missing {missing_sel}")
             sel_policy = selector.get("readback_hash_field_policy", {})
-            if sel_policy.get("builder_generated_field") != "agent_readback_sha256":
-                errors.append("route-selector: readback_hash_field_policy must be agent_readback_sha256")
+            expected_sel_readback = "participant_readback_sha256"
+            if sel_policy.get("builder_generated_field") != expected_sel_readback:
+                errors.append(f"route-selector: readback_hash_field_policy must be {expected_sel_readback}")
         else:
             validate_retired_pointer("route-selector", selector, errors)
 

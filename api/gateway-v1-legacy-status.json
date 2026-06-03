@@ -68,12 +68,11 @@
     "not_amendment": true,
     "bitcoin_originals_prevail": true
   },
-  "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": null,
   "record_chain_intake_gateway": {
     "api_file": "api/record-chain-intake-gateway.v1.json",
     "base_url": "https://trinity-record-chain-gateway.onrender.com",
     "status": "active_public_submission_interface",
     "is_only_public_submission_method": true
-  }
+  },
+  "source_digest": "38641c0ad85de273"
 }

@@ -274,8 +274,6 @@
     "religious authority",
     "physical anchor verification by the current agent unless separately performed"
   ],
-  "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "8ad8ff9db412716c",
   "zero_clone_builder_routes": {
     "pure_echo": {
       "bundle": "/api/formal-builder-bundles.v1.json#/bundles/pure_echo",
@@ -327,5 +325,6 @@
       "strict_evidence_claim_gate_report": "v6_plus_strict_evidence"
     }
   },
-  "_legacy_note": "external-agent-operation-examples references are historical_archive_only. Use /api/agent-first-contact.json instead."
+  "_legacy_note": "external-agent-operation-examples references are historical_archive_only. Use /api/agent-first-contact.json instead.",
+  "source_digest": "afb4592e212ffee8"
 }

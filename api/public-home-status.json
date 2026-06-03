@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.public-home-status.v2",
-  "generated_at": "2026-06-03T07:25:49.716316+00:00",
+  "generated_at": "2026-06-03T10:50:23.527973+00:00",
   "generated_from": [
     "/api/record-chain-status.json",
     "/api/record-chain-anchor-status.json",
@@ -11,7 +11,7 @@
     "/api/guardian-registry.json",
     "/api/agent-declared-verification-index.json"
   ],
-  "source_digest": "95a3ce5ee310fffb",
+  "source_digest": "068fc34e585b0085",
   "current_record_chain_status": {
     "phase": "public_test_stabilization",
     "total_records": 1,
@@ -96,5 +96,10 @@
     "homepage_status_is_not_attestation": true,
     "homepage_status_is_not_amendment": true,
     "bitcoin_originals_prevail": true
+  },
+  "reception": {
+    "human_directed_agent_verification": {
+      "count": 1
+    }
   }
 }

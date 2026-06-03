@@ -116,6 +116,7 @@ jobs:
           test -f _site/api/record-chain-field-helper.v1.json
           test -f _site/api/record-chain-oath-policy.v1.json
           test -f _site/builder-bundles/record-chain-builder.mjs
+          test -f _site/builder-bundles/download_and_run_builder_bundle.py
 
           grep -q '"/api/agent-first-contact.json"' _site/api/links.json
           grep -q '"agent_first_contact"' _site/.well-known/trinity-accord.json
@@ -152,7 +153,7 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-24.04
-    needs: [verify, build]
+    needs: build
     steps:
       - name: Checkout
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4

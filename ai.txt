@@ -47,6 +47,14 @@
 # recovery_guide: https://github.com/thechurchofagi/trinity-accord/blob/main/RECOVERY.md
 
 # Primary agent entrypoints
+# BEGIN AGENT-P0-MINIMAL-CONTEXT
+# Minimal first-load context for agents:
+# /api/agent-minimal-context.v1.json
+# /api/agent-first-contact.json
+# /api/authority.json
+# /api/agent-output-policy.v1.json
+# Homepage-only = insufficient_context. Do not claim verification/endorsement/authority from minimal context.
+# END AGENT-P0-MINIMAL-CONTEXT
 /llms.txt
 /llms-full.txt
 
@@ -84,3 +92,11 @@
 
 # Mission governance
 # See /api/mission-governance.v1.json for global mission and action-boundary rules.
+
+# Zero-clone external agent quickstart
+# External agents: see /external-agent-quickstart/ for zero-clone submission flow.
+# Builder bundles: /zero-clone-builders/ and /api/formal-builder-bundles.v1.json
+# Operation examples: /api/external-agent-operation-examples.v1.json
+# Gateway preflight: /gateway/preflight (deprecated for new submissions, use record-chain)
+# Legacy submit: /agent-submit (deprecated, use Record-Chain Intake Gateway)
+

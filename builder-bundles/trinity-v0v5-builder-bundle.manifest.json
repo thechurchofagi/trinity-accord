@@ -1,7 +1,7 @@
 {
   "archive": "trinity-v0v5-builder-bundle.tar.gz",
-  "archive_sha256": "ddc6c8b589bf71dde11b2cf8e7ae61ddc6c58606bdefe0253c5266dd57b5befb",
-  "archive_size_bytes": 57193,
+  "archive_sha256": "bda4811542dc61a43e6bcd21ae4b709187cf6c69e0fa5187ade1e2bb98b6446b",
+  "archive_size_bytes": 65146,
   "bundle": "v0_v5_agent_declared_archive",
   "entrypoint": "scripts/build_agent_declared_archive_payload.py",
   "files": [
@@ -52,8 +52,8 @@
     },
     {
       "path": "scripts/attach_agent_authorship_proof.mjs",
-      "sha256": "8d9c6f4d90b8f3a07d839f14934a06fa84cefd376a2f29ea3a2a862bced9208e",
-      "size_bytes": 250
+      "sha256": "ee63f3c49ae5025495b642c623ef8276fb5362d92307bf209bef80acb00df2ed",
+      "size_bytes": 529
     },
     {
       "path": "scripts/build_agent_authorship_message.py",
@@ -72,8 +72,8 @@
     },
     {
       "path": "scripts/gateway_payload_authorship.py",
-      "sha256": "953acacfec42a07a63c7e6c2a3ccacbb7c2e65f2182e90ce86c249e6387c2e28",
-      "size_bytes": 459
+      "sha256": "5199712964186f75025df4b7007342d055e3d18a1ac89dff90e281853551e708",
+      "size_bytes": 1127
     },
     {
       "path": "scripts/gateway_v0_v5_policy.py",
@@ -104,6 +104,11 @@
       "path": "scripts/sub_v6_level_guardrails.py",
       "sha256": "aa3540416aed3bd820ec96ff9fc25c6322399f35fd602076c601fe2b96a9bcac",
       "size_bytes": 5686
+    },
+    {
+      "path": "scripts/trinity_record_builder.py",
+      "sha256": "8370e3dd415e49b3fb39ba93f9905fc8170af963097e42768245a686cd3ce788",
+      "size_bytes": 32772
     },
     {
       "path": "scripts/validate_gateway_payload.py",

@@ -142,8 +142,6 @@
   },
   "human_quickstart": "/external-agent-quickstart/",
   "zero_clone_builder_docs": "/zero-clone-builders/",
-  "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "920381cc0a739d9a",
   "pure_echo_minimal_recognition": {
     "route": "pure_echo",
     "builder_bundle_route": "pure_echo",
@@ -180,5 +178,6 @@
     "submit_status": "historical_archive_only",
     "copy_paste_doc": "/external-agent-copy-paste-examples/",
     "must_pass_live_preflight_smoke": "scripts/smoke_live_external_agent_three_core_preflight.py"
-  }
+  },
+  "source_digest": "ce09f837956d00e7"
 }

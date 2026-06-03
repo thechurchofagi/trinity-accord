@@ -11,23 +11,23 @@ from protocol_echo_types import allowed_canonical_echo_types
 
 allowed_echo_types = allowed_canonical_echo_types()
 
-agent_start = json.loads((ROOT / "api" / "agent-start.v1.json").read_text(encoding="utf-8"))
+agent_start_v1 = json.loads((ROOT / "api" / "agent-start.v1.json").read_text(encoding="utf-8"))
+agent_start_v2 = json.loads((ROOT / "api" / "agent-start.v2.json").read_text(encoding="utf-8"))
 route_map = json.loads((ROOT / "api" / "gateway-builder-route-map.v1.json").read_text(encoding="utf-8"))
 context_map = json.loads((ROOT / "api" / "context-load-map.json").read_text(encoding="utf-8"))
 
-required_agent_routes = {
-    "pure_echo",
-    "v0_v5_agent_declared_archive",
-    "v6_plus_strict_evidence",
-    "e2_verification_echo",
-    "guardian_application_stage_1",
-    "guardian_listing_stage_2",
-    "guardian_signed_echo",
-}
+# v1 must be retired; v2 must be active
+if not agent_start_v1.get("schema", "").endswith(".retired"):
+    print("FAIL: agent-start.v1.json must be retired")
+    sys.exit(1)
+if agent_start_v2.get("schema") != "trinityaccord.agent-start.v2":
+    print("FAIL: agent-start.v2.json schema must be trinityaccord.agent-start.v2")
+    sys.exit(1)
 
-missing_agent_routes = required_agent_routes - set(agent_start.get("routes", {}))
-if missing_agent_routes:
-    print(f"FAIL: agent-start missing routes: {sorted(missing_agent_routes)}")
+# v2 must reference record-chain gateway
+csm = agent_start_v2.get("current_public_submission_method", {})
+if "/record-chain/" not in csm.get("submit", ""):
+    print("FAIL: agent-start.v2.json must reference record-chain gateway")
     sys.exit(1)
 
 required_route_map_routes = {

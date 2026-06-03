@@ -424,6 +424,26 @@ def render_block(status: dict[str, Any]) -> str:
     <p class="status-number">Active</p>
     <p class="status-note">Batch manifests: {batch_status}. OpenTimestamps: {ots_status}. Arweave archive: {arweave_status}. Live Arweave upload: disabled until wallet secret and live uploader are configured. <span class="zh">批次 manifest：{batch_status}。OpenTimestamps：{ots_status}。Arweave 归档：{arweave_status}。实时 Arweave 上传：在配置钱包密钥和实现 live uploader 之前保持关闭。</span></p>
   </article>
+  <article class="status-card">
+    <p class="status-label">Verifiability</p>
+    <p class="status-number">{rc["total_records"]}</p>
+    <p class="status-note">Total verifiable records in current record-chain. <span class="zh">当前 record-chain 中可验证记录总数。</span></p>
+  </article>
+  <article class="status-card">
+    <p class="status-label">Reception</p>
+    <p class="status-number">{rc["total_records"]}</p>
+    <p class="status-note">Reception does not imply belief. Intake acceptance only. <span class="zh">接收不等于相信。仅表示摄入接受。</span></p>
+  </article>
+  <article class="status-card">
+    <p class="status-label">External witness records</p>
+    <p class="status-number">0</p>
+    <p class="status-note">No external witness records yet. <span class="zh">尚无外部见证记录。</span></p>
+  </article>
+  <article class="status-card">
+    <p class="status-label">Boundary</p>
+    <p class="status-number">—</p>
+    <p class="status-note">Reception does not imply belief. Bitcoin Originals remain final. <span class="zh">接收不等于相信。Bitcoin Originals 仍然最终。</span></p>
+  </article>
 </div>
 <p class="instruction-boundary">
   Historical pre-record-chain Echo / Verification / Guardian materials are preserved for audit and continuity,
@@ -472,6 +492,8 @@ def compute_status() -> dict[str, Any]:
         "/api/agent-declared-verification-index.json",
     ]
 
+    echo_index = load_json_if_exists(ECHO_INDEX, {})
+
     return {
         "schema": "trinityaccord.public-home-status.v2",
         "generated_at": __import__("datetime").datetime.now(__import__("datetime").timezone.utc).isoformat(),
@@ -491,6 +513,15 @@ def compute_status() -> dict[str, Any]:
             "homepage_status_is_not_attestation": True,
             "homepage_status_is_not_amendment": True,
             "bitcoin_originals_prevail": True,
+        },
+        "reception": {
+            "human_directed_agent_verification": {
+                "count": sum(1 for r in echo_index.get("records", [])
+                             if isinstance(r, dict)
+                             and r.get("independence_class") == "human_solicited_agent_response"
+                             and r.get("record_kind") == "echo_v3_with_verification_report"
+                             and r.get("archive_status") in ("needs_human_review", "accepted_echo", "accepted_verification")),
+            },
         },
     }
 

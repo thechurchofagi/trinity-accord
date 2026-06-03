@@ -109,5 +109,18 @@
     "active Guardian status from receipt alone",
     "final public inclusion from test-phase receipt alone"
   ],
-  "mission_governance": "/api/mission-governance.v1.json"
+  "mission_governance": "/api/mission-governance.v1.json",
+  "zero_clone_formal_builder_policy": {
+    "do_not_handwrite_formal_payload": true,
+    "full_repo_clone_required_when_bundle_available": false,
+    "builder_bundle_manifest": "/api/formal-builder-bundles.v1.json",
+    "operation_examples": "/api/external-agent-operation-examples.v1.json",
+    "supported_zero_clone_routes": [
+      "pure_echo",
+      "v0_v5_agent_declared_archive",
+      "guardian_application_stage_1",
+      "guardian_listing_stage_2",
+      "guardian_signed_echo"
+    ]
+  }
 }

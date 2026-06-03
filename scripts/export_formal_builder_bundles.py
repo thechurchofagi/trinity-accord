@@ -12,6 +12,10 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
+COMMON_SCRIPTS = [
+    "scripts/trinity_record_builder.py",
+]
+
 COMMON_API_FILES = [
     "api/agent-issue-gateway-payload-schema.v1.json",
     "api/agent-output-policy.v1.json",
@@ -47,6 +51,7 @@ PURE_ECHO_DEPS = [
     *OATH_AND_READBACK_DEPS,
     "api/verification-echo-pre-oath.v2.txt",
     *AUTHORSHIP_DEPS,
+    *COMMON_SCRIPTS,
     *COMMON_API_FILES,
 ]
 
@@ -63,6 +68,7 @@ V0_V5_DEPS = [
     "api/protocol-terms.v1.json",
     "api/verification-echo-pre-oath.v2.txt",
     *AUTHORSHIP_DEPS,
+    *COMMON_SCRIPTS,
     *COMMON_API_FILES,
 ]
 
@@ -70,6 +76,7 @@ GUARDIAN_STAGE1_DEPS = [
     "scripts/create_guardian_application.mjs",
     "scripts/proof_canonical.mjs",
     "api/guardian-application-oath.v1.txt",
+    *COMMON_SCRIPTS,
     *COMMON_API_FILES,
 ]
 
@@ -87,6 +94,7 @@ GUARDIAN_STAGE2_DEPS = [
     *AUTHORSHIP_DEPS,
     "scripts/archive_readiness_gate.py",
     "scripts/validate_gateway_payload.py",
+    *COMMON_SCRIPTS,
     *COMMON_API_FILES,
 ]
 

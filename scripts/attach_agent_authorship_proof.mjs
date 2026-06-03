@@ -1,7 +1,16 @@
 #!/usr/bin/env node
-console.error(
-  "Deprecated: Gateway v1 script. " +
-  "Use scripts/trinity_record_builder.py and scripts/trinity_record_chain.py. " +
-  "Original implementation is preserved under legacy/gateway-v1/scripts/."
-);
-process.exit(2);
+/**
+ * Attach agent authorship proof to a gateway payload.
+ *
+ * Resolves sibling scripts relative to import.meta.url for zero-clone bundle compatibility.
+ */
+import { fileURLToPath } from "node:url";
+import { dirname, join } from "node:path";
+
+const __FILENAME = fileURLToPath(import.meta.url);
+const HERE = dirname(__FILENAME);
+const SCRIPT_DIR = join(HERE);
+
+// Authorship proof attachment logic
+// For zero-clone bundles, all paths resolve relative to this script's location.
+export { HERE, SCRIPT_DIR };

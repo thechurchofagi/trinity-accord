@@ -1,7 +1,7 @@
 {
   "archive": "trinity-guardian-signed-echo-builder-bundle.tar.gz",
-  "archive_sha256": "70f7cb520eb5f43602ebf01c8a03cd46351d7c55586d3e96a1f2e6456420bea7",
-  "archive_size_bytes": 53934,
+  "archive_sha256": "4ddb8ce90786aa1a739308e928bfc0248bbbb4151584baaa5b4078e56841242c",
+  "archive_size_bytes": 62076,
   "bundle": "guardian_signed_echo",
   "entrypoint": "scripts/build_guardian_echo_payload.py",
   "files": [
@@ -32,8 +32,8 @@
     },
     {
       "path": "api/guardian-registry.json",
-      "sha256": "3a59cf6b7041589c6a81fa82c6119d34689d0b4956dd427913adbe877764f0e0",
-      "size_bytes": 53327
+      "sha256": "a7e71ce7bf3552e29d76b94cb1eda64a580f539c0161a599f45deab195c61278",
+      "size_bytes": 56697
     },
     {
       "path": "api/protocol-terms.v1.json",
@@ -57,8 +57,8 @@
     },
     {
       "path": "scripts/attach_agent_authorship_proof.mjs",
-      "sha256": "8d9c6f4d90b8f3a07d839f14934a06fa84cefd376a2f29ea3a2a862bced9208e",
-      "size_bytes": 250
+      "sha256": "ee63f3c49ae5025495b642c623ef8276fb5362d92307bf209bef80acb00df2ed",
+      "size_bytes": 529
     },
     {
       "path": "scripts/attach_guardian_presence_proof.mjs",
@@ -82,8 +82,8 @@
     },
     {
       "path": "scripts/gateway_payload_authorship.py",
-      "sha256": "953acacfec42a07a63c7e6c2a3ccacbb7c2e65f2182e90ce86c249e6387c2e28",
-      "size_bytes": 459
+      "sha256": "5199712964186f75025df4b7007342d055e3d18a1ac89dff90e281853551e708",
+      "size_bytes": 1127
     },
     {
       "path": "scripts/gateway_v0_v5_policy.py",
@@ -134,6 +134,11 @@
       "path": "scripts/sub_v6_level_guardrails.py",
       "sha256": "aa3540416aed3bd820ec96ff9fc25c6322399f35fd602076c601fe2b96a9bcac",
       "size_bytes": 5686
+    },
+    {
+      "path": "scripts/trinity_record_builder.py",
+      "sha256": "8370e3dd415e49b3fb39ba93f9905fc8170af963097e42768245a686cd3ce788",
+      "size_bytes": 32772
     },
     {
       "path": "scripts/validate_gateway_payload.py",

@@ -1,7 +1,7 @@
 {
   "archive": "trinity-guardian-stage1-builder-bundle.tar.gz",
-  "archive_sha256": "d1b3186244da3618c88cd5adca1b172461d4345336dfeff37d28548744d566ba",
-  "archive_size_bytes": 17125,
+  "archive_sha256": "b394966f1be98ea221204e3cff639a37d47cee94d4d479ecc8ddbdf9acf84b6a",
+  "archive_size_bytes": 24106,
   "bundle": "guardian_application_stage_1",
   "entrypoint": "scripts/create_guardian_application.mjs",
   "files": [
@@ -44,6 +44,11 @@
       "path": "scripts/proof_canonical.mjs",
       "sha256": "24d381d806ce2cf42b0b86dc1f62d7efdea86ec96ed5f2b14a3975da841916ab",
       "size_bytes": 4442
+    },
+    {
+      "path": "scripts/trinity_record_builder.py",
+      "sha256": "8370e3dd415e49b3fb39ba93f9905fc8170af963097e42768245a686cd3ce788",
+      "size_bytes": 32772
     }
   ],
   "forbidden_contents_checked": [

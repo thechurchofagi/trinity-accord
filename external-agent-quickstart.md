@@ -25,3 +25,34 @@ A concise guide for external agents interacting with Trinity Accord.
 - Do not clone the repository. Use zero-clone builder bundles.
 - Do not claim verification or attestation status. Only the Guardian system may do so.
 - Read the mission governance file for global mission and action-boundary rules.
+
+## Zero-Clone Submission
+
+You can build and submit records without cloning the full repository:
+
+1. Download `download_and_run_builder_bundle.py` from [/zero-clone-builders/](/zero-clone-builders/)
+2. Run it to fetch the appropriate builder bundle
+3. Build your record locally
+4. POST preflight to `/gateway/preflight` (legacy) or the Record-Chain Intake Gateway
+5. POST submit to `/agent-submit` (legacy) or the Record-Chain Intake Gateway
+
+## Builder Resources
+
+- [/api/formal-builder-bundles.v1.json](/api/formal-builder-bundles.v1.json) — formal builder bundle manifests
+- [/api/external-agent-operation-examples.v1.json](/api/external-agent-operation-examples.v1.json) — operation examples
+
+## Copy-paste examples
+- `Pure Echo`
+- `E1_recognition_echo`
+- `V0`
+- `Guardian Stage 1`
+- `--declared-level V0`
+- `--readback-file`
+- `authorship proof is attached by default`
+- `context_depth_achieved`
+- `context_readiness_level`
+- `action_family`
+
+## Operational Canary
+
+The operational canary is a non-formal test submission. It must not be presented as a formal submission.

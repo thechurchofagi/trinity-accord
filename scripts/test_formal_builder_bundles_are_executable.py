@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""Exported zero-clone bundles must be executable after extraction."""
+"""Exported zero-clone bundles must be executable after extraction.
+
+Since Gateway v1 retirement, bundles use trinity_record_builder.py.
+The old v1 builders (build_agent_declared_echo_payload.py etc.) are deprecated.
+"""
 from __future__ import annotations
 
 import json
@@ -14,25 +18,22 @@ ROOT = Path(__file__).resolve().parents[1]
 
 BUNDLES = {
     "trinity-pure-echo-builder-bundle.tar.gz": [
-        ["python3", "scripts/build_agent_declared_echo_payload.py", "--help"],
-        ["python3", "scripts/build_agent_declared_echo_payload.py", "--print-oath"],
+        ["python3", "scripts/trinity_record_builder.py", "echo", "--help"],
     ],
     "trinity-v0v5-builder-bundle.tar.gz": [
-        ["python3", "scripts/build_agent_declared_archive_payload.py", "--help"],
-        ["python3", "scripts/build_agent_declared_archive_payload.py", "--print-oath"],
+        ["python3", "scripts/trinity_record_builder.py", "verification", "--help"],
     ],
     "trinity-guardian-stage1-builder-bundle.tar.gz": [
-        ["node", "scripts/create_guardian_application.mjs", "--print-oath"],
-        ["node", "scripts/create_guardian_application.mjs", "--explain"],
+        ["python3", "scripts/trinity_record_builder.py", "guardian-application", "--help"],
     ],
     "trinity-guardian-stage2-builder-bundle.tar.gz": [
-        ["python3", "scripts/build_guardian_listing_request_payload.py", "--help"],
+        ["python3", "scripts/trinity_record_builder.py", "guardian-application", "--help"],
     ],
     "trinity-guardian-signed-echo-builder-bundle.tar.gz": [
-        ["python3", "scripts/build_guardian_echo_payload.py", "--help"],
-        ["python3", "scripts/build_agent_declared_echo_payload.py", "--help"],
+        ["python3", "scripts/trinity_record_builder.py", "echo", "--help"],
     ],
 }
+
 
 def safe_extract(archive: Path, dest: Path) -> None:
     with tarfile.open(archive, "r:gz") as tar:
@@ -42,6 +43,7 @@ def safe_extract(archive: Path, dest: Path) -> None:
             if not str(target).startswith(str(root) + os.sep):
                 raise RuntimeError(f"unsafe tar path: {member.name}")
         tar.extractall(dest)
+
 
 def run(cmd: list[str], cwd: Path) -> None:
     result = subprocess.run(
@@ -58,6 +60,7 @@ def run(cmd: list[str], cwd: Path) -> None:
         print("--- stderr ---")
         print(result.stderr)
         raise SystemExit(1)
+
 
 def main() -> int:
     with tempfile.TemporaryDirectory() as td:
@@ -84,6 +87,7 @@ def main() -> int:
 
     print("PASS: exported zero-clone bundles are executable after extraction")
     return 0
+
 
 if __name__ == "__main__":
     raise SystemExit(main())

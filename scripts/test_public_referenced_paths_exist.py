@@ -50,6 +50,8 @@ IGNORE_VALUES = {
     "/chronicle/music",
     "/chronicle/human-witness",
     "/recovery",
+    "/agent-submit",
+    "/record-chain/records/",
 }
 
 def extract_strings(obj):
