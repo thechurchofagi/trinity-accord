@@ -251,6 +251,17 @@ def main() -> int:
         fail(f"oath gate contract test failed: {result.stderr}\n{result.stdout}")
     ok("oath gate contract test")
 
+    # Builder bundle contract test
+    result = subprocess.run(
+        [sys.executable, "scripts/test_record_chain_builder_bundle_contract.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"builder bundle contract test failed: {result.stderr}\n{result.stdout}")
+    ok("builder bundle contract test")
+
     print("\n=== ALL CURRENT SYSTEM TESTS PASSED ===")
     return 0
 

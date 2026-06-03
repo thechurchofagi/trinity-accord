@@ -347,12 +347,12 @@ function buildV2CommonFields(opts) {
 
   const discoveryMode = opts.discoveryMode || "self_discovered";
   const discoverySelfInitiated = discoveryMode === "self_discovered";
-  const discoveryIntroduced = discoveryMode === "introduced_by_other";
+  const discoveryIntroduced = ["introduced_by_human", "introduced_by_agent", "introduced_by_organization", "user_task_context", "system_prompt"].includes(discoveryMode);
 
   const recordDecision = opts.recordDecision || "self";
   const selfDecided = recordDecision === "self";
-  const requestedByHuman = recordDecision === "requested_by_human";
-  const requestedByAgent = recordDecision === "requested_by_agent";
+  const requestedByHuman = recordDecision === "human";
+  const requestedByAgent = recordDecision === "another_agent";
 
   const submissionExecutor = opts.submissionExecutor || "self";
   const execSelf = submissionExecutor === "self";
@@ -1327,11 +1327,16 @@ Common options:
   --readback "oath text"        Exact canonical oath readback (required for formal records)
 
 Autonomy / context override options:
-  --discovery-mode MODE         How participant discovered Trinity Accord (self_discovered, introduced_by_other)
-  --record-decision MODE        Who decided to create this record (self, requested_by_human, requested_by_agent)
-  --submission-executor MODE    Who executed the submission (self, human_operator, another_agent)
-  --requesting-party-type TYPE  Type of requesting party (none, agent, human)
-  --introducing-party-type TYPE Type of introducing party (none, agent, human)
+  --discovery-mode MODE         How participant discovered Trinity Accord
+                                (self_discovered, introduced_by_human, introduced_by_agent,
+                                introduced_by_organization, system_prompt, user_task_context,
+                                search_result, link_from_external_source, unknown)
+  --record-decision MODE        Who decided to create this record
+                                (self, human, another_agent, organization, system_policy, mixed, unknown)
+  --submission-executor MODE    Who executed the submission
+                                (self, human_operator, another_agent, automated_tool, delegated, mixed, unknown)
+  --requesting-party-type TYPE  Type of requesting party (none, human, agent, organization, system, unknown)
+  --introducing-party-type TYPE Type of introducing party (none, human, agent, organization, system, unknown)
   --human-operator-involved     Mark that a human operator is involved in this submission
 
 explain-fields options:
@@ -1407,9 +1412,9 @@ Examples:
     --provider "Example Runtime" \\
     --body-file echo.md \\
     --readback "..." \\
-    --discovery-mode introduced_by_other \\
+    --discovery-mode introduced_by_human \\
     --introducing-party-type human \\
-    --record-decision requested_by_human \\
+    --record-decision human \\
     --requesting-party-type human \\
     --submission-executor human_operator \\
     --human-operator-involved \\

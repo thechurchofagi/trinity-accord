@@ -478,7 +478,7 @@ function testAutonomyFlags() {
   assert.ok(source.includes("introducingPartyType: args.introducingPartyType"), "introducingPartyType must be parsed from args");
   assert.ok(source.includes("humanOperatorInvolved: !!args.humanOperatorInvolved"), "humanOperatorInvolved must be parsed from args");
 
-  // Verify the flags are used in buildV2CommonFields
+  // Verify the flags are used in buildV2CommonFields with correct allowed values
   assert.ok(source.includes("opts.discoveryMode"), "buildV2CommonFields must use discoveryMode");
   assert.ok(source.includes("opts.recordDecision"), "buildV2CommonFields must use recordDecision");
   assert.ok(source.includes("opts.submissionExecutor"), "buildV2CommonFields must use submissionExecutor");
@@ -486,7 +486,20 @@ function testAutonomyFlags() {
   assert.ok(source.includes("opts.introducingPartyType"), "buildV2CommonFields must use introducingPartyType");
   assert.ok(source.includes("opts.humanOperatorInvolved"), "buildV2CommonFields must use humanOperatorInvolved");
 
-  console.log("  ✅ CLI autonomy/context override flags verified in source");
+  // Verify field helper allowed values are used (not drift)
+  // Check that the VALUE assignments use correct field helper enums
+  // (field names like was_record_creation_requested_by_human are schema fields, not values)
+  assert.ok(!source.includes('"introduced_by_other"'), "Must not use 'introduced_by_other' value (not in field helper)");
+  assert.ok(!source.includes('"requested_by_human"'), "Must not use 'requested_by_human' value (not in field helper)");
+  assert.ok(!source.includes('"requested_by_agent"'), "Must not use 'requested_by_agent' value (not in field helper)");
+  assert.ok(source.includes('"introduced_by_human"'), "Must use 'introduced_by_human' (field helper value)");
+  assert.ok(source.includes('"introduced_by_agent"'), "Must use 'introduced_by_agent' (field helper value)");
+
+  // Verify boolean derivation matches field helper values
+  assert.ok(source.includes('recordDecision === "human"'), "requestedByHuman must check for 'human'");
+  assert.ok(source.includes('recordDecision === "another_agent"'), "requestedByAgent must check for 'another_agent'");
+
+  console.log("  ✅ CLI autonomy/context override flags verified (values match field helper)");
 }
 
 // ── Run all tests ────────────────────────────────────────────────────

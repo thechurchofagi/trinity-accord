@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -119,19 +120,6 @@ def main() -> None:
                 errors.append("echo: readback_was_not_auto_filled_by_builder not true")
             tmp_echo.unlink()
 
-    if errors:
-        print("FAIL: Builder bundle contract errors:\n")
-        for e in errors:
-            print(f"  {e}")
-        sys.exit(1)
-    else:
-        print("PASS: All builder bundle contract tests passed.")
-        sys.exit(0)
-
-
-if __name__ == "__main__":
-    main()
-
     # Test 8: Embedded oath policy SHA256 matches api/record-chain-oath-policy.v1.json
     oath_policy_path = ROOT / "api" / "record-chain-oath-policy.v1.json"
     if oath_policy_path.exists():
@@ -139,8 +127,7 @@ if __name__ == "__main__":
         if "OATH_POLICY_SHA256" not in builder_text:
             errors.append("builder missing OATH_POLICY_SHA256 constant")
         else:
-            import re as _re
-            m = _re.search(r'OATH_POLICY_SHA256\s*=\s*"([a-f0-9]{64})"', builder_text)
+            m = re.search(r'OATH_POLICY_SHA256\s*=\s*"([a-f0-9]{64})"', builder_text)
             if m:
                 embedded_sha = m.group(1)
                 policy = json.loads(oath_policy_path.read_text(encoding="utf-8"))
@@ -154,3 +141,17 @@ if __name__ == "__main__":
                 errors.append("cannot parse OATH_POLICY_SHA256 from builder")
     else:
         errors.append("api/record-chain-oath-policy.v1.json: NOT FOUND")
+
+    # ── Report ────────────────────────────────────────────────────────
+    if errors:
+        print("FAIL: Builder bundle contract errors:\n")
+        for e in errors:
+            print(f"  {e}")
+        sys.exit(1)
+    else:
+        print("PASS: All builder bundle contract tests passed.")
+        sys.exit(0)
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
