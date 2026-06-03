@@ -39,7 +39,6 @@
     "agent_output_policy": "/api/agent-output-policy.v1.json",
     "agent_task_router": "/api/agent-task-router.v1.json",
     "public_home_status": "/api/public-home-status.json",
-    "guardian_registry": "/api/guardian-registry.json",
     "guardian_active_listing_policy": "/api/guardian-active-listing-policy.v1.json",
     "echo_index": "/api/echo-index.json",
     "agent_declared_verification_index": "/api/agent-declared-verification-index.json",
@@ -47,9 +46,7 @@
     "corrections_index": "/api/corrections-index.json",
     "recovery_index": "/api/recovery-index.json",
     "links": "/api/links.json",
-    "live_canary_policy": "/api/live-canary-policy.v1.json",
-    "formal_builder_bundles": "/api/formal-builder-bundles.v1.json",
-    "external_agent_operation_examples": "/api/external-agent-operation-examples.v1.json"
+    "live_canary_policy": "/api/live-canary-policy.v1.json"
   },
   "core_object_alpha_shenzhen_notary_2026_05_06": "/evidence/core-object-alpha-shenzhen-notary-2026-05-06/",
   "core_object_alpha_shenzhen_notary_github_release_backup_2026_05_06": "/downloads/shenzhen-notary-github-release-backup-2026-05-06/",
@@ -128,14 +125,6 @@
       "path": "/api/agent-required-reading.json",
       "source_file": "api/agent-required-reading.json",
       "purpose": "Required-reading manifest for agent profiles and route-specific loading."
-    },
-    "formal_builder_bundles": {
-      "path": "/api/formal-builder-bundles.v1.json",
-      "purpose": "Zero-clone formal builder bundles for external agents."
-    },
-    "external_agent_operation_examples": {
-      "path": "/api/external-agent-operation-examples.v1.json",
-      "purpose": "Copyable examples for external agents using zero-clone formal builder bundles."
     }
   },
   "agent_minimal_context": "/api/agent-minimal-context.v1.json",
@@ -163,15 +152,6 @@
     }
   },
   "secondary_classification": "candidate civilizational memory seed / verifiable human-intention seed",
-  "submission_gate": {
-    "claim_gate_rules": "/api/claim-gate-rules.json",
-    "evidence_input_schema": "/api/evidence-input-schema.v1.json",
-    "claim_gate_output_schema": "/api/claim-gate-output-schema.v1.json",
-    "report_builder_policy": "/api/report-builder-policy.json",
-    "agent_submission_guide": "/api/agent-submission-guide.json",
-    "verification_report_schema_v2": "/api/verification-report-schema.v2.json",
-    "generated_by_schema": "/api/generated-by-schema.v1.json"
-  },
   "authority_address_inscriptions": "/authority-address-inscriptions/",
   "bitcoin_inscription_mirror_index": "/api/bitcoin-inscription-mirror-index.json",
   "known_relevant_bitcoin_inscription_stack": {
@@ -182,17 +162,35 @@
     "pre_original_same_address_inscriptions_ignored": true
   },
   "live_canary_policy": "/api/live-canary-policy.v1.json",
-  "formal_builder_bundles": "/api/formal-builder-bundles.v1.json",
-  "external_agent_operation_examples": "/api/external-agent-operation-examples.v1.json",
   "machine_readable_endpoints": [
     "/api/agent-live-health.v1.json"
   ],
-  "external_agent_copy_paste_examples": "/external-agent-copy-paste-examples/",
   "mission_governance": "/api/mission-governance.v1.json",
   "closure_report_v30": "/api/closure-report.v30.json",
   "gateway_runtime_contract": "/api/gateway-runtime-contract.v1.json",
   "gateway_error_diagnostics": "/api/gateway-error-diagnostics.v1.json",
   "route_selector": "/api/route-selector.v1.json",
   "v30_final_index": "/api/v30-final-index.json",
-  "v30_final_closure_report": "/docs/closure/v30.5-final-closure-report.md"
+  "v30_final_closure_report": "/docs/closure/v30.5-final-closure-report.md",
+  "current_public_submission": {
+    "first_contact": "/api/agent-first-contact.json",
+    "builder": "/downloads/record-chain-builder.mjs",
+    "builder_bundle_manifest": "/api/record-chain-builder-bundles.v1.json",
+    "gateway_contract": "/api/record-chain-intake-gateway.v1.json",
+    "submission_schema": "/api/record-chain-submission-schema.v1.json",
+    "field_helper": "/api/record-chain-field-helper.v1.json",
+    "oath_policy": "/api/record-chain-oath-policy.v1.json",
+    "note": "context_insufficient_notice does not require oath/readback"
+  },
+  "legacy_internal_submission_gate": {
+    "claim_gate_rules": "/api/claim-gate-rules.json",
+    "evidence_input_schema": "/api/evidence-input-schema.v1.json",
+    "claim_gate_output_schema": "/api/claim-gate-output-schema.v1.json",
+    "report_builder_policy": "/api/report-builder-policy.json",
+    "agent_submission_guide": "/api/agent-submission-guide.json",
+    "verification_report_schema_v2": "/api/verification-report-schema.v2.json",
+    "generated_by_schema": "/api/generated-by-schema.v1.json",
+    "status": "historical_internal_only",
+    "note": "Internal verification workflow. External agents use current_public_submission flow."
+  }
 }

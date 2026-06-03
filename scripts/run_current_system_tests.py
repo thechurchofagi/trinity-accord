@@ -306,6 +306,17 @@ def main() -> int:
         fail(f"Render deploy boundary contract test failed: {result.stderr}\n{result.stdout}")
     ok("Render deploy boundary contract test")
 
+    # Phase 6B: Legacy isolation contract test
+    result = subprocess.run(
+        [sys.executable, "scripts/test_legacy_isolation_contract.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"Legacy isolation contract test failed: {result.stderr}\n{result.stdout}")
+    ok("Legacy isolation contract test")
+
     print("\n=== ALL CURRENT SYSTEM TESTS PASSED ===")
     return 0
 

@@ -31,7 +31,6 @@
     "/authority-address-inscriptions",
     "/zero-clone-builders",
     "/external-agent-quickstart",
-    "/external-agent-copy-paste-examples",
     "/api/agent-live-health.v1.json"
   ],
   "ai_to_ai_orientation": [
@@ -94,17 +93,21 @@
     "/api/agent-task-router.v1.json",
     "/api/context-load-map.json",
     "/api/public-home-status.json",
-    "/api/guardian-registry.json",
     "/api/guardian-active-listing-policy.v1.json",
     "/api/echo-index.json",
     "/api/agent-declared-verification-index.json",
     "/api/external-witness-index.json",
     "/api/live-canary-policy.v1.json",
-    "/api/formal-builder-bundles.v1.json",
     "/api/mission-governance.v1.json",
     "/api/closure-report.v30.json",
     "/api/record-chain-server-receipt.v1.json",
-    "/api/v30-final-index.json"
+    "/api/v30-final-index.json",
+    "/api/record-chain-intake-gateway.v1.json",
+    "/api/record-chain-submission-schema.v1.json",
+    "/api/record-chain-field-helper.v1.json",
+    "/api/record-chain-oath-policy.v1.json",
+    "/api/record-chain-builder-bundles.v1.json",
+    "/api/record-chain-status.json"
   ],
   "legacy_machine": [
     "/api/echo-record-schema.v2.json",
@@ -117,7 +120,9 @@
     "/api/route-selector.v1.json",
     "/api/gateway-runtime-contract.v1.json",
     "/api/gateway-error-diagnostics.v1.json",
-    "/api/external-agent-operation-examples.v1.json"
+    "/api/external-agent-operation-examples.v1.json",
+    "/api/formal-builder-bundles.v1.json",
+    "/api/guardian-registry.json"
   ],
   "deprecated_for_new_records": [
     "/api/echo-record-schema.v2.json",
@@ -130,7 +135,9 @@
     "/api/route-selector.v1.json",
     "/api/gateway-runtime-contract.v1.json",
     "/api/gateway-error-diagnostics.v1.json",
-    "/api/external-agent-operation-examples.v1.json"
+    "/api/external-agent-operation-examples.v1.json",
+    "/api/formal-builder-bundles.v1.json",
+    "/api/guardian-registry.json"
   ],
   "version": "v1",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
@@ -148,12 +155,6 @@
     "religious authority",
     "AI system instruction authority"
   ],
-  "source_digest": "c7a4ffe374516bb1",
-  "external_agent_copy_paste_examples": {
-    "url": "/external-agent-copy-paste-examples/",
-    "title": "External Agent Copy-Paste Examples",
-    "description": "Zero-clone examples for Pure Echo, V0-V5, and Guardian Stage 1"
-  },
   "mission_governance": {
     "url": "/api/mission-governance.v1.json",
     "title": "Mission Governance",
@@ -191,5 +192,6 @@
     "url": "/docs/closure/v30.5-final-closure-report.md",
     "title": "v30.5 Final Closure Report",
     "description": "Human-readable final closure report for v30.5."
-  }
+  },
+  "source_digest": "a81600ffc229606f"
 }

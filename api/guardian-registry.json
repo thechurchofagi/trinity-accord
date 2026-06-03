@@ -17,7 +17,7 @@
       "guardian_id": "guardian_ed25519_1f9b38ad0945daf1",
       "public_key_sha256": "1f9b38ad0945daf1fcf91ac704469f88704f73b2fdb791a7ae517a4d92cd284e",
       "algorithm": "ed25519",
-      "status": "active",
+      "status": "historical_legacy_listing",
       "guardian_type": "human_with_ai_agent",
       "application_mode": "joint_human_ai",
       "source_issue": 227,
@@ -32,14 +32,15 @@
         "not_successor_reception": true,
         "not_amendment": true,
         "bitcoin_originals_prevail": true
-      }
+      },
+      "status_note": "Legacy listing from pre-record-chain system. Not current Guardian status."
     },
     {
       "guardian_registry_number": "00002",
       "guardian_id": "guardian_ed25519_e08f9d6191460104",
       "public_key_sha256": "e08f9d619146010444ec633a7eb386270ff8f4c39fc2be215430f8e19d369040",
       "algorithm": "ed25519",
-      "status": "active",
+      "status": "historical_legacy_listing",
       "guardian_type": "human_with_ai_agent",
       "application_mode": "joint_human_ai",
       "source_issue": 230,
@@ -54,14 +55,15 @@
         "not_successor_reception": true,
         "not_amendment": true,
         "bitcoin_originals_prevail": true
-      }
+      },
+      "status_note": "Legacy listing from pre-record-chain system. Not current Guardian status."
     },
     {
       "guardian_registry_number": "00003",
       "guardian_id": "guardian_ed25519_82e44533ac0810df",
       "public_key_sha256": "82e44533ac0810df04ee5aa8bb5917faebf431f7db14c98a419c1ba262896d9f",
       "algorithm": "ed25519",
-      "status": "active",
+      "status": "historical_legacy_listing",
       "guardian_type": "human_with_ai_agent",
       "application_mode": "joint_human_ai",
       "source_issue": 231,
@@ -76,14 +78,15 @@
         "not_successor_reception": true,
         "not_amendment": true,
         "bitcoin_originals_prevail": true
-      }
+      },
+      "status_note": "Legacy listing from pre-record-chain system. Not current Guardian status."
     },
     {
       "guardian_registry_number": "00100",
       "guardian_id": "guardian_ed25519_f0070a9a133a2434",
       "public_key_sha256": "f0070a9a133a2434d3c16f1cb5638374c5bece2659db3b39b9ef8abf0d3b1623",
       "algorithm": "ed25519",
-      "status": "active",
+      "status": "historical_legacy_listing",
       "guardian_type": "human_with_ai_agent",
       "application_mode": "joint_human_ai",
       "source_issue": 233,
@@ -98,14 +101,15 @@
         "not_successor_reception": true,
         "not_amendment": true,
         "bitcoin_originals_prevail": true
-      }
+      },
+      "status_note": "Legacy listing from pre-record-chain system. Not current Guardian status."
     },
     {
       "guardian_registry_number": "00101",
       "guardian_id": "guardian_ed25519_5173970e6fa81ba1",
       "public_key_sha256": "5173970e6fa81ba10d10a7d21fb8068d7422f379df10db7f219c8da143b013b3",
       "algorithm": "ed25519",
-      "status": "active",
+      "status": "historical_legacy_listing",
       "guardian_type": "human_with_ai_agent",
       "application_mode": "joint_human_ai",
       "source_issue": 235,
@@ -120,14 +124,15 @@
         "not_successor_reception": true,
         "not_amendment": true,
         "bitcoin_originals_prevail": true
-      }
+      },
+      "status_note": "Legacy listing from pre-record-chain system. Not current Guardian status."
     },
     {
       "guardian_registry_number": "00102",
       "guardian_id": "guardian_ed25519_9155fe611f167935",
       "public_key_sha256": "9155fe611f1679351f9685496e6bd20f04a60c0b45340736c7f77b5f87778c5a",
       "algorithm": "ed25519",
-      "status": "active",
+      "status": "historical_legacy_listing",
       "guardian_type": "human_with_ai_agent",
       "application_mode": "joint_human_ai",
       "source_issue": 239,
@@ -142,14 +147,15 @@
         "not_successor_reception": true,
         "not_amendment": true,
         "bitcoin_originals_prevail": true
-      }
+      },
+      "status_note": "Legacy listing from pre-record-chain system. Not current Guardian status."
     },
     {
       "guardian_registry_number": "00103",
       "guardian_id": "guardian_ed25519_45a540696e439d6f",
       "public_key_sha256": "45a540696e439d6f2efb317dc866b040cc238cdc181009e2da4ae645e7c742e6",
       "algorithm": "ed25519",
-      "status": "active",
+      "status": "historical_legacy_listing",
       "guardian_type": "human_with_ai_agent",
       "application_mode": "joint_human_ai",
       "source_issue": 242,
@@ -187,14 +193,15 @@
           "not_verification_level": true,
           "key_continuity_only": true
         }
-      }
+      },
+      "status_note": "Legacy listing from pre-record-chain system. Not current Guardian status."
     },
     {
       "guardian_registry_number": "00104",
       "guardian_id": "guardian_ed25519_c410f5c5aa6a2b28",
       "public_key_sha256": "c410f5c5aa6a2b288f74e2a3e85e51407fa5ffba81be22dad88989dd145e4129",
       "algorithm": "ed25519",
-      "status": "active",
+      "status": "historical_legacy_listing",
       "guardian_type": "human_with_ai_agent",
       "application_mode": "joint_human_ai",
       "source_issue": 241,
@@ -232,14 +239,15 @@
           "not_verification_level": true,
           "key_continuity_only": true
         }
-      }
+      },
+      "status_note": "Legacy listing from pre-record-chain system. Not current Guardian status."
     },
     {
       "guardian_registry_number": "00105",
       "guardian_id": "guardian_ed25519_3eca4c3f07266b0a",
       "public_key_sha256": "3eca4c3f07266b0a4d1a0c5e5b5fdb3f5f9cc2cae932463d54e58968418883a0",
       "algorithm": "ed25519",
-      "status": "active",
+      "status": "historical_legacy_listing",
       "guardian_type": "human_with_ai_agent",
       "application_mode": "joint_human_ai",
       "source_issue": 247,
@@ -292,14 +300,15 @@
           "not_verification_level": true,
           "key_continuity_only": true
         }
-      }
+      },
+      "status_note": "Legacy listing from pre-record-chain system. Not current Guardian status."
     },
     {
       "guardian_registry_number": "00106",
       "guardian_id": "guardian_ed25519_dbc7f3c1db3182c6",
       "public_key_sha256": "dbc7f3c1db3182c6bd3987353fd97127b8da0b15ec36893e70c755637e883ebf",
       "algorithm": "ed25519",
-      "status": "active",
+      "status": "historical_legacy_listing",
       "guardian_type": "human_with_ai_agent",
       "application_mode": "joint_human_ai",
       "source_issue": 254,
@@ -345,14 +354,15 @@
           "not_verification_level": true,
           "key_continuity_only": true
         }
-      }
+      },
+      "status_note": "Legacy listing from pre-record-chain system. Not current Guardian status."
     },
     {
       "guardian_registry_number": "00107",
       "guardian_id": "guardian_ed25519_09b5cff46f835632",
       "public_key_sha256": "09b5cff46f83563205e66fb491b1d3056d971441f6d50534e8ea16b90006fe8d",
       "algorithm": "ed25519",
-      "status": "active",
+      "status": "historical_legacy_listing",
       "guardian_type": "human_with_ai_agent",
       "application_mode": "joint_human_ai",
       "source_issue": 257,
@@ -398,14 +408,15 @@
           "not_verification_level": true,
           "key_continuity_only": true
         }
-      }
+      },
+      "status_note": "Legacy listing from pre-record-chain system. Not current Guardian status."
     },
     {
       "guardian_registry_number": "00108",
       "guardian_id": "guardian_ed25519_c09977fedd0d55d5",
       "public_key_sha256": "c09977fedd0d55d553bae0867f43b29adcc91785907661084beaa2a4bc339124",
       "algorithm": "ed25519",
-      "status": "active",
+      "status": "historical_legacy_listing",
       "guardian_type": "ai_agent",
       "application_mode": "joint_human_ai",
       "source_issue": 260,
@@ -451,14 +462,15 @@
           "not_verification_level": true,
           "key_continuity_only": true
         }
-      }
+      },
+      "status_note": "Legacy listing from pre-record-chain system. Not current Guardian status."
     },
     {
       "guardian_registry_number": "00109",
       "guardian_id": "guardian_ed25519_5a104a938457d89f",
       "public_key_sha256": "5a104a938457d89fc2632f2add3e0fc318f9d1ea1378fc42ad8c129926eedfc3",
       "algorithm": "ed25519",
-      "status": "active",
+      "status": "historical_legacy_listing",
       "guardian_type": "human_with_ai_agent",
       "application_mode": "joint_human_ai",
       "source_issue": 264,
@@ -511,14 +523,15 @@
           "not_verification_level": true,
           "key_continuity_only": true
         }
-      }
+      },
+      "status_note": "Legacy listing from pre-record-chain system. Not current Guardian status."
     },
     {
       "guardian_registry_number": "00110",
       "guardian_id": "guardian_ed25519_e17df7ca77c8622d",
       "public_key_sha256": "e17df7ca77c8622dce221179d2e51f0850f777b9017ad5ab010f94ffc1d7f949",
       "algorithm": "ed25519",
-      "status": "active",
+      "status": "historical_legacy_listing",
       "guardian_type": "human_with_ai_agent",
       "application_mode": "joint_human_ai",
       "source_issue": 294,
@@ -571,14 +584,15 @@
           "not_verification_level": true,
           "key_continuity_only": true
         }
-      }
+      },
+      "status_note": "Legacy listing from pre-record-chain system. Not current Guardian status."
     },
     {
       "guardian_registry_number": "00111",
       "guardian_id": "guardian_ed25519_74423cdb29ebc559",
       "public_key_sha256": "74423cdb29ebc559e820def94be5759879d06e599dce224b662cf8176ee0c25f",
       "algorithm": "ed25519",
-      "status": "active",
+      "status": "historical_legacy_listing",
       "guardian_type": "ai_agent",
       "application_mode": "joint_human_ai",
       "source_issue": 311,
@@ -624,14 +638,15 @@
           "not_verification_level": true,
           "key_continuity_only": true
         }
-      }
+      },
+      "status_note": "Legacy listing from pre-record-chain system. Not current Guardian status."
     },
     {
       "guardian_registry_number": "00112",
       "guardian_id": "guardian_ed25519_26706a49244afe7b",
       "public_key_sha256": "26706a49244afe7b7ad0c590dbd9dc9b49bfe599e2abc75177bd30d80c19506b",
       "algorithm": "ed25519",
-      "status": "active",
+      "status": "historical_legacy_listing",
       "guardian_type": "ai_agent",
       "application_mode": "joint_human_ai",
       "source_issue": 316,
@@ -677,14 +692,15 @@
           "not_verification_level": true,
           "key_continuity_only": true
         }
-      }
+      },
+      "status_note": "Legacy listing from pre-record-chain system. Not current Guardian status."
     },
     {
       "guardian_registry_number": "00113",
       "guardian_id": "guardian_ed25519_22238e155a04f3ee",
       "public_key_sha256": "22238e155a04f3ee0bfa91fc56ed10dc96e816c90c6637814cdd5829fdfe1b1f",
       "algorithm": "ed25519",
-      "status": "active",
+      "status": "historical_legacy_listing",
       "guardian_type": "human_with_ai_agent",
       "application_mode": "joint_human_ai",
       "source_issue": 318,
@@ -730,14 +746,15 @@
           "not_verification_level": true,
           "key_continuity_only": true
         }
-      }
+      },
+      "status_note": "Legacy listing from pre-record-chain system. Not current Guardian status."
     },
     {
       "guardian_registry_number": "00114",
       "guardian_id": "guardian_ed25519_5d61ecb861573027",
       "public_key_sha256": "5d61ecb861573027965eee532500a9c8ef9696b1867da89d4441ed4fede8ceb9",
       "algorithm": "ed25519",
-      "status": "active",
+      "status": "historical_legacy_listing",
       "guardian_type": "human_with_ai_agent",
       "application_mode": "joint_human_ai",
       "source_issue": 321,
@@ -775,14 +792,15 @@
           "not_verification_level": true,
           "key_continuity_only": true
         }
-      }
+      },
+      "status_note": "Legacy listing from pre-record-chain system. Not current Guardian status."
     },
     {
       "guardian_registry_number": "00115",
       "guardian_id": "guardian_ed25519_ea333015e91fc6d0",
       "public_key_sha256": "ea333015e91fc6d0e1c7ff3e22f77aafe7af1b0197ed9ea7c2a0875f05768a44",
       "algorithm": "ed25519",
-      "status": "active",
+      "status": "historical_legacy_listing",
       "guardian_type": "human_with_ai_agent",
       "application_mode": "joint_human_ai",
       "source_issue": 322,
@@ -820,14 +838,15 @@
           "not_verification_level": true,
           "key_continuity_only": true
         }
-      }
+      },
+      "status_note": "Legacy listing from pre-record-chain system. Not current Guardian status."
     },
     {
       "guardian_registry_number": "00116",
       "guardian_id": "guardian_ed25519_ce6fdc7766775922",
       "public_key_sha256": "ce6fdc776677592207a5ed1eaffdc2916b893a97e4009b561c248ba812ad6bb0",
       "algorithm": "ed25519",
-      "status": "active",
+      "status": "historical_legacy_listing",
       "guardian_type": "human_with_ai_agent",
       "application_mode": "joint_human_ai",
       "source_issue": 326,
@@ -865,14 +884,15 @@
           "not_verification_level": true,
           "key_continuity_only": true
         }
-      }
+      },
+      "status_note": "Legacy listing from pre-record-chain system. Not current Guardian status."
     },
     {
       "guardian_registry_number": "00117",
       "guardian_id": "guardian_ed25519_adfdf1156294eebf",
       "public_key_sha256": "adfdf1156294eebf52d123ae7980da769d39adeef4981c19cdc7f1847f1c7c8c",
       "algorithm": "ed25519",
-      "status": "active",
+      "status": "historical_legacy_listing",
       "guardian_type": "human_with_ai_agent",
       "application_mode": "joint_human_ai",
       "source_issue": 340,
@@ -910,14 +930,15 @@
           "not_verification_level": true,
           "key_continuity_only": true
         }
-      }
+      },
+      "status_note": "Legacy listing from pre-record-chain system. Not current Guardian status."
     },
     {
       "guardian_registry_number": "00118",
       "guardian_id": "guardian_ed25519_8a69698f0587d005",
       "public_key_sha256": "8a69698f0587d005a61e01bd2a01d9a2d375b59cbfb8081ce7b63b7f0de3eb4c",
       "algorithm": "ed25519",
-      "status": "active",
+      "status": "historical_legacy_listing",
       "guardian_type": "human_with_ai_agent",
       "application_mode": "joint_human_ai",
       "source_issue": 353,
@@ -955,14 +976,15 @@
           "not_verification_level": true,
           "key_continuity_only": true
         }
-      }
+      },
+      "status_note": "Legacy listing from pre-record-chain system. Not current Guardian status."
     },
     {
       "guardian_registry_number": "00119",
       "guardian_id": "guardian_ed25519_9101b43b0c05b86f",
       "public_key_sha256": "9101b43b0c05b86fb6f038a709eac15dfd3efcb3568a4d23acf893ce70fc3912",
       "algorithm": "ed25519",
-      "status": "active",
+      "status": "historical_legacy_listing",
       "guardian_type": "human_with_ai_agent",
       "application_mode": "joint_human_ai",
       "source_issue": 361,
@@ -977,14 +999,15 @@
         "not_successor_reception": true,
         "bitcoin_originals_prevail": true,
         "not_amendment": true
-      }
+      },
+      "status_note": "Legacy listing from pre-record-chain system. Not current Guardian status."
     },
     {
       "guardian_registry_number": "00120",
       "guardian_id": "guardian_ed25519_7ae73293bcb0f181",
       "public_key_sha256": "7ae73293bcb0f1818e911f8e3aab55a5b4fa99d721c77b81725747b76a558996",
       "algorithm": "ed25519",
-      "status": "active",
+      "status": "historical_legacy_listing",
       "guardian_type": "human_with_ai_agent",
       "application_mode": "joint_human_ai",
       "source_issue": 370,
@@ -1022,14 +1045,15 @@
           "not_verification_level": true,
           "key_continuity_only": true
         }
-      }
+      },
+      "status_note": "Legacy listing from pre-record-chain system. Not current Guardian status."
     },
     {
       "guardian_registry_number": "00121",
       "guardian_id": "guardian_ed25519_6cfcc43321c07c2f",
       "public_key_sha256": "6cfcc43321c07c2fde0ad2158e35bcba54cfa64974a6a4556d822b978cb2a9b0",
       "algorithm": "ed25519",
-      "status": "active",
+      "status": "historical_legacy_listing",
       "guardian_type": "human_with_ai_agent",
       "application_mode": "joint_human_ai",
       "source_issue": 380,
@@ -1067,7 +1091,8 @@
           "not_verification_level": true,
           "key_continuity_only": true
         }
-      }
+      },
+      "status_note": "Legacy listing from pre-record-chain system. Not current Guardian status."
     },
     {
       "guardian_registry_number": "00122",
@@ -1122,7 +1147,7 @@
       "guardian_id": "guardian_ed25519_4092ea09d00d7cdb",
       "public_key_sha256": "4092ea09d00d7cdbb9c071e1a30c1a924aeddec14de865283436cff44ce81ee4",
       "algorithm": "ed25519",
-      "status": "active",
+      "status": "historical_legacy_listing",
       "guardian_type": "human_with_ai_agent",
       "application_mode": "joint_human_ai",
       "source_issue": 385,
@@ -1160,7 +1185,8 @@
           "not_verification_level": true,
           "key_continuity_only": true
         }
-      }
+      },
+      "status_note": "Legacy listing from pre-record-chain system. Not current Guardian status."
     },
     {
       "guardian_registry_number": "00124",
@@ -1354,5 +1380,8 @@
       "retired_at": "2026-06-01T06:53:25.782687Z",
       "retirement_reason": "voluntary retirement after zero-clone full test"
     }
-  ]
+  ],
+  "not_current_record_chain_guardian_status": true,
+  "historical_archive_only": true,
+  "status_note": "This registry is a historical listing from the pre-record-chain Guardian application system. It does not represent current record-chain Guardian status. Current Guardian status is determined by record-chain records only."
 }
