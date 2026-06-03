@@ -8,7 +8,7 @@ path = ROOT / ".github" / "workflows" / "repository-integrity.yml"
 text = path.read_text(encoding="utf-8")
 
 required = [
-    "python3 scripts/run_ci_group.py p0-main",
+    "python3 scripts/run_ci_group.py p0-current",
     "workflow_dispatch:",
     "permissions:",
     "contents: read",

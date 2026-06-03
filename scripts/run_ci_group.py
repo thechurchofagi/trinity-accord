@@ -41,18 +41,16 @@ def run_command(cmd: list[str]) -> int:
     return result.returncode
 
 GROUPS = {
-    "p0-main": [
+    "p0-current": [
+        # --- Record-chain-first current主线硬门禁 ---
         # Public surface / sitemap / API metadata
         ["python3", "scripts/check_public_core_consistency.py"],
         ["python3", "scripts/test_mission_governance_contract.py"],
         ["python3", "scripts/test_mission_governance_discovery.py"],
         ["python3", "scripts/test_no_duplicate_context_understanding_system.py"],
         ["python3", "scripts/test_before_leaving_requires_context_governance.py"],
-        ["python3", "scripts/test_gateway_routes_context_action_semantics.py"],
         ["python3", "scripts/test_agent_start_no_legacy_c0_c6_context_table.py"],
         ["python3", "scripts/test_closure_report_v30_contract.py"],
-        ["python3", "scripts/test_gateway_runtime_contract.py"],
-        ["python3", "scripts/test_gateway_error_diagnostics_contract.py"],
         ["python3", "scripts/test_route_selector_contract.py"],
         ["python3", "scripts/test_sitemap_public_sources_exist.py"],
         ["python3", "scripts/test_sitemap_includes_nested_api_json.py"],
@@ -68,7 +66,7 @@ GROUPS = {
         ["python3", "scripts/test_public_api_metadata_completeness.py"],
         ["python3", "scripts/test_main_pages_have_machine_counterparts.py"],
 
-        # Context / agent routing
+        # Context / agent routing (current)
         ["python3", "scripts/test_context_load_map.py"],
         ["python3", "scripts/test_context_pack_inventory_paths.py"],
         ["python3", "scripts/test_agent_start_api.py"],
@@ -77,17 +75,14 @@ GROUPS = {
         ["python3", "scripts/test_main_function_route_health.py"],
         ["python3", "scripts/test_e2_verification_echo_not_pure_echo.py"],
 
-        # Route/taxonomy
-        ["python3", "scripts/test_gateway_builder_route_map.py"],
+        # Route/taxonomy (current)
         ["python3", "scripts/test_echo_taxonomy_all_consumers_match_single_source.py"],
         ["python3", "scripts/test_no_stale_echo_taxonomy_names.py"],
         ["python3", "scripts/test_echo_type_enum_alignment.py"],
         ["python3", "scripts/test_external_agent_copy_paste_examples_contract.py"],
         ["python3", "scripts/test_external_agent_three_core_builders_source_smoke.py"],
-        ["python3", "scripts/test_agent_submit_gateway_echo_types_canonical.py"],
         ["python3", "scripts/test_agent_first_contact_echo_types_canonical.py"],
         ["python3", "scripts/test_agent_facing_pure_echo_routes_canonical.py"],
-        ["python3", "scripts/test_gateway_workflows_echo_types_canonical.py"],
         ["python3", "scripts/test_links_expose_first_contact_entrypoints.py"],
         ["python3", "scripts/test_first_contact_text_no_stale_route_guidance.py"],
         ["python3", "scripts/test_agent_exit_readback_policy.py"],
@@ -95,11 +90,76 @@ GROUPS = {
         ["python3", "scripts/test_v30_final_closure_report_contract.py"],
         ["python3", "scripts/test_changelog_v30_5_contract.py"],
         ["python3", "scripts/test_public_api_source_digest_if_present.py"],
-        ["python3", "scripts/test_gateway_workflows_echo_types_canonical.py"],
         ["python3", "scripts/test_write_workflows_no_fail_open_rebase.py"],
         ["python3", "scripts/test_workflow_warning_allowlist.py"],
-        ["python3", "scripts/test_echo_triage_rate_classifier_ambiguity_guards.py"],
 
+        # Discovery entrypoint contract (current)
+        ["python3", "scripts/test_well_known_exposes_agent_first_contact_contract.py"],
+        ["python3", "scripts/test_discovery_entrypoints_cover_full_agent_journey.py"],
+
+        # Pages deploy discovery guards
+        ["python3", "scripts/test_deploy_pages_workflow_contract.py"],
+        ["python3", "scripts/test_pages_build_contains_agent_discovery.py"],
+        ["python3", "scripts/test_pages_custom_domain_contract.py"],
+        ["python3", "scripts/test_deploy_pages_action_allowlist.py"],
+        ["python3", "scripts/test_deploy_pages_workflow_contract_is_static.py"],
+
+        # External agent journey smoke guards
+        ["python3", "scripts/test_external_agent_journey_swarm_smoke_contract.py"],
+        ["python3", "scripts/test_external_agent_entrypoint_journey_smoke_contract.py"],
+        ["python3", "scripts/test_external_write_lifecycle_canary_contract.py"],
+        ["python3", "scripts/test_live_canary_policy_contract.py"],
+        ["python3", "scripts/test_external_agent_docs_zero_clone_alignment.py"],
+        ["python3", "scripts/test_external_agent_docs_core_routes_clarity.py"],
+        ["python3", "scripts/test_external_agent_examples_match_live_smokes.py"],
+        ["python3", "scripts/test_external_agent_operation_examples_contract.py"],
+
+        # before_leaving exit/readback contract
+        ["python3", "scripts/test_agent_output_policy_before_leaving_exit_contract.py"],
+
+        # Zero-clone builder bundle guards (current)
+        ["python3", "scripts/test_formal_builder_bundles_contract.py"],
+        ["python3", "scripts/test_export_formal_builder_bundles.py"],
+        ["python3", "scripts/test_download_helper_covers_all_routes.py"],
+        ["python3", "scripts/test_zero_clone_routes_in_first_contact.py"],
+        ["python3", "scripts/test_zero_clone_docs_cover_all_agent_types.py"],
+        ["python3", "scripts/test_formal_builder_bundle_api_matches_manifests.py"],
+        ["python3", "scripts/test_formal_builder_bundle_dependency_closure.py"],
+        ["python3", "scripts/test_formal_builder_bundles_are_executable.py"],
+        ["python3", "scripts/test_formal_builder_bundles_default_authorship_smoke.py"],
+        ["python3", "scripts/test_formal_builder_bundle_signature_contract.py"],
+        ["python3", "scripts/verify_formal_builder_bundle_signatures.py"],
+
+        # CI hardening
+        ["python3", "scripts/test_run_ci_group_timeouts.py"],
+        ["python3", "scripts/test_p0_main_required_commands.py"],
+        ["python3", "scripts/test_p0_uses_public_core_consistency.py"],
+        ["python3", "scripts/test_deep_integrity_includes_pages_build.py"],
+
+        # Generated drift
+        ["python3", "scripts/generate_public_home_status.py", "--check"],
+        ["python3", "scripts/test_home_public_status_sync.py"],
+
+        # v30.3 authorship closure
+        ["python3", "scripts/test_zero_clone_authorship_dependency_closure.py"],
+        ["python3", "scripts/test_authorship_helpers_are_cwd_independent.py"],
+        ["python3", "scripts/test_public_core_consistency_required_links.py"],
+
+        # Phase 6B security hotfix (current)
+        ["python3", "scripts/test_no_secret_material_committed.py"],
+        ["python3", "scripts/test_no_private_key_material_committed.py"],
+        ["python3", "scripts/test_phase6b_hotfix.py"],
+        ["python3", "scripts/test_phase_6b_hotfix_contract.py"],
+        ["python3", "scripts/test_render_deploy_boundary_contract.py"],
+        ["python3", "scripts/test_legacy_isolation_contract.py"],
+        ["python3", "scripts/test_public_wording_phase6_contract.py"],
+        ["node", "downloads/test-record-chain-builder.mjs"],
+
+        # Phase 6B test registry contract
+        ["python3", "scripts/test_phase6b_test_registry_contract.py"],
+    ],
+    "p0-legacy-compat": [
+        # --- 旧 Gateway v1 / formal builder / old workflow 测试 ---
         # Gateway workflow builder contract (v11)
         ["python3", "scripts/test_builder_readback_file_aliases.py"],
         ["python3", "scripts/test_gateway_workflow_builder_cli_contract.py"],
@@ -131,86 +191,14 @@ GROUPS = {
         ["python3", "scripts/test_runtime_and_route_selector_forbid_invented_values.py"],
         ["python3", "scripts/test_task_router_guardian_reads_workflow_manual.py"],
 
-        # Discovery entrypoint contract (v15)
-        ["python3", "scripts/test_well_known_exposes_agent_first_contact_contract.py"],
-        ["python3", "scripts/test_links_expose_gateway_workflow_contract.py"],
-        ["python3", "scripts/test_discovery_entrypoints_cover_full_agent_journey.py"],
-
-        # Live discovery smoke guards (v16)
-        ["python3", "scripts/test_site_live_discovery_smoke_workflow.py"],
-        ["python3", "scripts/test_gateway_online_smoke_scope_is_clear.py"],
-
-        # Pages deploy discovery guards (v17)
-        ["python3", "scripts/test_deploy_pages_workflow_contract.py"],
-        ["python3", "scripts/test_pages_build_contains_agent_discovery.py"],
-
-        # Pages custom domain / live smoke guards (v18)
-        ["python3", "scripts/test_pages_custom_domain_contract.py"],
-
-        # Pages live cache diagnostics & action allowlist (v19)
-        ["python3", "scripts/test_live_discovery_smoke_cache_diagnostics.py"],
-        ["python3", "scripts/test_pages_diagnose_cache_busted.py"],
-        ["python3", "scripts/test_deploy_pages_action_allowlist.py"],
-
-        # External agent journey swarm smoke guards (v21)
-        ["python3", "scripts/test_external_agent_journey_swarm_smoke_contract.py"],
-        ["python3", "scripts/test_site_agent_journey_swarm_workflow.py"],
-
-        # External heterogeneous entrypoint journey smoke guards (v22)
-        ["python3", "scripts/test_external_agent_entrypoint_journey_smoke_contract.py"],
-        ["python3", "scripts/test_site_agent_entrypoint_journey_workflow.py"],
-
-        # External write lifecycle canary guards (v24 zero-manual)
-        ["python3", "scripts/test_external_write_lifecycle_canary_contract.py"],
-        ["python3", "scripts/test_site_agent_write_lifecycle_canary_workflow.py"],
-        ["python3", "scripts/test_live_canary_policy_contract.py"],
-        ["python3", "scripts/test_gateway_discovery_for_canary.py"],
-        ["python3", "scripts/test_no_stale_gateway_submit_endpoint.py"],
-        ["python3", "scripts/test_external_agent_docs_zero_clone_alignment.py"],
-        ["python3", "scripts/test_external_agent_docs_core_routes_clarity.py"],
-        ["python3", "scripts/test_external_agent_examples_match_live_smokes.py"],
-
-        # before_leaving exit/readback contract
-        ["python3", "scripts/test_agent_output_policy_before_leaving_exit_contract.py"],
-
-        # Zero-clone builder bundle guards (v28)
-        ["python3", "scripts/test_formal_builder_bundles_contract.py"],
-        ["python3", "scripts/test_external_agent_operation_examples_contract.py"],
-        ["python3", "scripts/test_export_formal_builder_bundles.py"],
-        ["python3", "scripts/test_download_helper_covers_all_routes.py"],
-        ["python3", "scripts/test_zero_clone_routes_in_first_contact.py"],
-        ["python3", "scripts/test_zero_clone_docs_cover_all_agent_types.py"],
-        ["python3", "scripts/test_gateway_workflows_zero_clone_examples.py"],
-
-        # Zero-clone hardening (v28.1)
-        ["python3", "scripts/test_formal_builder_bundle_api_matches_manifests.py"],
-
-        # Zero-clone hardening (v28.2)
-        ["python3", "scripts/test_formal_builder_bundle_dependency_closure.py"],
-        ["python3", "scripts/test_formal_builder_bundles_are_executable.py"],
-        ["python3", "scripts/test_formal_builder_bundles_default_authorship_smoke.py"],
-
-        # CI hardening (v28.3)
-        ["python3", "scripts/test_deploy_pages_workflow_contract_is_static.py"],
-        ["python3", "scripts/test_run_ci_group_timeouts.py"],
-
-        # v29 homepage zero-clone paths
-        ["python3", "scripts/test_homepage_exposes_zero_clone_agent_paths.py"],
-
-        # v29 signed builder bundle manifests
-        ["python3", "scripts/test_formal_builder_bundle_signature_contract.py"],
-        ["python3", "scripts/verify_formal_builder_bundle_signatures.py"],
-
-        # v29 before_leaving schema
-        ["python3", "scripts/test_agent_before_leaving_report_schema.py"],
-
-        # v29 concurrent preflight swarm contract
-        ["python3", "scripts/test_concurrent_preflight_swarm_contract.py"],
-
-        # v29 agent live-health
-        ["python3", "scripts/test_agent_live_health_contract.py"],
-
-        # Gateway / Guardian core
+        # Gateway core (legacy)
+        ["python3", "scripts/test_gateway_routes_context_action_semantics.py"],
+        ["python3", "scripts/test_gateway_runtime_contract.py"],
+        ["python3", "scripts/test_gateway_error_diagnostics_contract.py"],
+        ["python3", "scripts/test_gateway_builder_route_map.py"],
+        ["python3", "scripts/test_agent_submit_gateway_echo_types_canonical.py"],
+        ["python3", "scripts/test_gateway_workflows_echo_types_canonical.py"],
+        ["python3", "scripts/test_echo_triage_rate_classifier_ambiguity_guards.py"],
         ["python3", "scripts/test_gateway_endpoint_contracts.py"],
         ["python3", "scripts/test_gateway_payload_semantic_validator.py"],
         ["python3", "scripts/test_gateway_intake_guardian_fields.py"],
@@ -221,32 +209,63 @@ GROUPS = {
         ["python3", "scripts/test_guardian_auto_register_listing_e6_behavior.py"],
         ["python3", "scripts/test_guardian_listing_kind_cutoff.py"],
         ["python3", "scripts/test_guardian_listing_body_fallback_cutoff.py"],
-
-        # Generated drift
-        ["python3", "scripts/check_verification_index_urllib.py", "--repo", "thechurchofagi/trinity-accord"],
-        ["python3", "scripts/generate_public_home_status.py", "--check"],
-        ["python3", "scripts/test_home_public_status_sync.py"],
-
-        # v30.3 authorship closure
-        ["python3", "scripts/test_zero_clone_authorship_dependency_closure.py"],
-        ["python3", "scripts/test_authorship_helpers_are_cwd_independent.py"],
-        # P0 group guards
-        ["python3", "scripts/test_p0_main_required_commands.py"],
-        ["python3", "scripts/test_p0_uses_public_core_consistency.py"],
-        ["python3", "scripts/test_deep_integrity_includes_pages_build.py"],
-        ["python3", "scripts/test_gateway_online_smoke_workflow.py"],
-        ["python3", "scripts/test_public_core_consistency_required_links.py"],
-
-        # v30.7 Gateway receipt triage alignment
         ["python3", "scripts/test_gateway_receipt_contract.py"],
         ["python3", "scripts/test_gateway_receipt_verifier.py"],
         ["python3", "scripts/test_triage_accepts_gateway_receipt.py"],
         ["python3", "scripts/test_triage_rejects_forged_gateway_receipt.py"],
         ["python3", "scripts/test_issue_299_gateway_receipt_regression.py"],
-        # v30.7.2 receipt triage false-invalid fix
         ["python3", "scripts/test_issue_302_gateway_receipt_regression.py"],
         ["python3", "scripts/test_triage_uses_shared_receipt_verifier.py"],
-        # v30.8 Gateway archive persistence
+        ["python3", "scripts/test_gateway_archive_persistence_contract.py"],
+        ["python3", "scripts/test_gateway_archive_issue_reader_issue_304.py"],
+        ["python3", "scripts/test_archive_gateway_echo_workflow_contract.py"],
+        ["python3", "scripts/test_guardian_retirement_automation.py"],
+        ["python3", "scripts/test_render_gateway_issue_body_receipt_marker.py"],
+        ["python3", "scripts/test_readback_hash_policy.py"],
+
+        # Verification index (online)
+        ["python3", "scripts/check_verification_index_urllib.py", "--repo", "thechurchofagi/trinity-accord"],
+
+        # Live discovery smoke
+        ["python3", "scripts/test_site_live_discovery_smoke_workflow.py"],
+        ["python3", "scripts/test_gateway_online_smoke_scope_is_clear.py"],
+        ["python3", "scripts/test_live_discovery_smoke_cache_diagnostics.py"],
+        ["python3", "scripts/test_pages_diagnose_cache_busted.py"],
+
+        # Agent journey smoke
+        ["python3", "scripts/test_site_agent_journey_swarm_workflow.py"],
+        ["python3", "scripts/test_site_agent_entrypoint_journey_workflow.py"],
+        ["python3", "scripts/test_site_agent_write_lifecycle_canary_workflow.py"],
+        ["python3", "scripts/test_gateway_discovery_for_canary.py"],
+        ["python3", "scripts/test_no_stale_gateway_submit_endpoint.py"],
+
+        # before_leaving / agent lifecycle (legacy gateway context)
+        ["python3", "scripts/test_agent_before_leaving_report_schema.py"],
+        ["python3", "scripts/test_concurrent_preflight_swarm_contract.py"],
+        ["python3", "scripts/test_agent_live_health_contract.py"],
+
+        # Homepage
+        ["python3", "scripts/test_homepage_exposes_zero_clone_agent_paths.py"],
+
+        # Gateway workflow guards
+        ["python3", "scripts/test_gateway_online_smoke_workflow.py"],
+        ["python3", "scripts/test_links_expose_gateway_workflow_contract.py"],
+    ],
+    "p0-main": [
+        # Backward compat: p0-current + p0-legacy-compat merged
+        # (kept for CI compatibility; new workflows should use p0-current)
+    ],
+    # Legacy compat group for scheduled/manual deep-integrity runs
+    "p0-legacy-compat-gateway": [
+        # Gateway receipt triage alignment
+        ["python3", "scripts/test_gateway_receipt_contract.py"],
+        ["python3", "scripts/test_gateway_receipt_verifier.py"],
+        ["python3", "scripts/test_triage_accepts_gateway_receipt.py"],
+        ["python3", "scripts/test_triage_rejects_forged_gateway_receipt.py"],
+        ["python3", "scripts/test_issue_299_gateway_receipt_regression.py"],
+        ["python3", "scripts/test_issue_302_gateway_receipt_regression.py"],
+        ["python3", "scripts/test_triage_uses_shared_receipt_verifier.py"],
+        # Gateway archive persistence
         ["python3", "scripts/test_gateway_archive_persistence_contract.py"],
         ["python3", "scripts/test_gateway_archive_issue_reader_issue_304.py"],
         ["python3", "scripts/test_archive_gateway_echo_workflow_contract.py"],

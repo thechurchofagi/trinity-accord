@@ -196,7 +196,17 @@ def main() -> int:
         json.loads(p.read_text(encoding="utf-8"))
     ok("record-chain examples JSON-valid")
 
-    # 9. No private keys or tokens
+    # 9. Secret material scans
+    result = subprocess.run(
+        [sys.executable, "scripts/test_no_secret_material_committed.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"no broad secret material: {result.stderr}")
+    ok("no broad secret material")
+
     result = subprocess.run(
         [sys.executable, "scripts/test_no_private_key_material_committed.py"],
         cwd=ROOT,
@@ -204,8 +214,8 @@ def main() -> int:
         text=True,
     )
     if result.returncode != 0:
-        fail(f"no-secrets check failed: {result.stderr}")
-    ok("no private keys or tokens")
+        fail(f"no PEM private key material: {result.stderr}")
+    ok("no PEM private key material")
 
     # 10. Phase 6A: anchor contract test
     result = subprocess.run(

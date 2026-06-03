@@ -32,6 +32,10 @@ jobs:
         run: python3 scripts/generate_sitemap.py --check
       - name: Verify public home status has no drift
         run: python3 scripts/generate_public_home_status.py --check
+      - name: Scan for secret material (broad)
+        run: python3 scripts/test_no_secret_material_committed.py
+      - name: Check no private keys or tokens (focused PEM)
+        run: python3 scripts/test_no_private_key_material_committed.py
 
   build:
     needs: verify
