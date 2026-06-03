@@ -265,6 +265,95 @@ def main() -> None:
         else:
             errors.append("cannot find OATH_POLICY object in builder")
 
+    # Test 19: echo build with --linked-guardian and exact linked oath succeeds
+    result = subprocess.run(
+        ["node", str(BUILDER), "print-oath", "--record-type", "echo", "--linked-guardian"],
+        capture_output=True, text=True, timeout=10,
+    )
+    if result.returncode != 0:
+        errors.append("cannot get linked guardian canonical oath for test 19")
+    else:
+        linked_oath = result.stdout
+        if "guardian_stewardship_v1" not in linked_oath:
+            errors.append("linked guardian oath should include guardian_stewardship_v1 module")
+        result = subprocess.run(
+            ["node", str(BUILDER), "echo", "--actor-label", "test", "--provider", "test",
+             "--body", "test", "--context-level", "CC-3", "--linked-guardian",
+             "--readback", linked_oath,
+             "--generate-authorship-key", "--key-dir", "/tmp/test-linked-echo-key",
+             "--out", "/tmp/test-linked-echo.json"],
+            capture_output=True, text=True, timeout=10,
+        )
+        if result.returncode != 0:
+            errors.append(f"echo build with --linked-guardian failed: {result.stderr[:200]}")
+        else:
+            data = json.loads(Path("/tmp/test-linked-echo.json").read_text())
+            draft = data.get("record_draft", {})
+            guardian_req = draft.get("optional_linked_guardian_application_request", {})
+            if guardian_req.get("does_participant_request_guardian_application_with_this_record") is not True:
+                errors.append("linked echo: does_participant_request_guardian_application_with_this_record should be true")
+            oath = draft.get("submission_oath_verification", {})
+            if "guardian_stewardship_v1" not in oath.get("oath_modules", []):
+                errors.append(f"linked echo: oath_modules should include guardian_stewardship_v1, got {oath.get('oath_modules')}")
+            client = data.get("client_oath_readback", {})
+            if "guardian_stewardship_v1" not in client.get("oath_modules", []):
+                errors.append(f"linked echo: client_oath_readback.oath_modules should include guardian_stewardship_v1, got {client.get('oath_modules')}")
+
+    # Test 20: verification build with --linked-guardian behaves the same
+    result = subprocess.run(
+        ["node", str(BUILDER), "print-oath", "--record-type", "verification", "--linked-guardian"],
+        capture_output=True, text=True, timeout=10,
+    )
+    if result.returncode != 0:
+        errors.append("cannot get linked guardian canonical oath for test 20")
+    else:
+        linked_oath_v = result.stdout
+        if "guardian_stewardship_v1" not in linked_oath_v:
+            errors.append("linked guardian verification oath should include guardian_stewardship_v1 module")
+        result = subprocess.run(
+            ["node", str(BUILDER), "verification", "--actor-label", "test", "--provider", "test",
+             "--body", "test", "--context-level", "CC-3", "--linked-guardian",
+             "--readback", linked_oath_v,
+             "--generate-authorship-key", "--key-dir", "/tmp/test-linked-verify-key",
+             "--out", "/tmp/test-linked-verify.json"],
+            capture_output=True, text=True, timeout=10,
+        )
+        if result.returncode != 0:
+            errors.append(f"verification build with --linked-guardian failed: {result.stderr[:200]}")
+        else:
+            data = json.loads(Path("/tmp/test-linked-verify.json").read_text())
+            draft = data.get("record_draft", {})
+            guardian_req = draft.get("optional_linked_guardian_application_request", {})
+            if guardian_req.get("does_participant_request_guardian_application_with_this_record") is not True:
+                errors.append("linked verification: does_participant_request_guardian_application_with_this_record should be true")
+            oath = draft.get("submission_oath_verification", {})
+            if "guardian_stewardship_v1" not in oath.get("oath_modules", []):
+                errors.append(f"linked verification: oath_modules should include guardian_stewardship_v1, got {oath.get('oath_modules')}")
+
+    # Test 21: echo build without --linked-guardian keeps default false
+    result = subprocess.run(
+        ["node", str(BUILDER), "print-oath", "--record-type", "echo"],
+        capture_output=True, text=True, timeout=10,
+    )
+    if result.returncode == 0:
+        plain_oath = result.stdout
+        result = subprocess.run(
+            ["node", str(BUILDER), "echo", "--actor-label", "test", "--provider", "test",
+             "--body", "test", "--context-level", "CC-3",
+             "--readback", plain_oath,
+             "--generate-authorship-key", "--key-dir", "/tmp/test-plain-echo-key",
+             "--out", "/tmp/test-plain-echo.json"],
+            capture_output=True, text=True, timeout=10,
+        )
+        if result.returncode == 0:
+            data = json.loads(Path("/tmp/test-plain-echo.json").read_text())
+            guardian_req = data.get("record_draft", {}).get("optional_linked_guardian_application_request", {})
+            if guardian_req.get("does_participant_request_guardian_application_with_this_record") is not False:
+                errors.append("plain echo: does_participant_request_guardian_application_with_this_record should be false")
+            oath = data.get("record_draft", {}).get("submission_oath_verification", {})
+            if "guardian_stewardship_v1" in oath.get("oath_modules", []):
+                errors.append("plain echo: oath_modules should NOT include guardian_stewardship_v1")
+
     # Report
     if errors:
         print("FAIL:")
