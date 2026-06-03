@@ -10,17 +10,11 @@ workflow = ROOT / ".github" / "workflows" / "deploy-pages.yml"
 text = workflow.read_text(encoding="utf-8")
 
 allowed = {
-    "actions/checkout@v4",
     "actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5",
-    "actions/configure-pages@v5",
     "actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b",
-    "actions/jekyll-build-pages@v1",
     "actions/jekyll-build-pages@44a6e6beabd48582f863aeeb6cb2151cc1716697",
-    "actions/upload-pages-artifact@v3",
     "actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa",
-    "actions/deploy-pages@v4",
     "actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e",
-    "actions/setup-python@v5",
     "actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
 }
 

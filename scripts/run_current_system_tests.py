@@ -338,6 +338,17 @@ def main() -> int:
         fail(f"Legacy Gateway deploy boundary test failed: {result.stderr}\n{result.stdout}")
     ok("Legacy Gateway deploy boundary contract test")
 
+    # Phase 6B: Workflow action pinning contract
+    result = subprocess.run(
+        [sys.executable, "scripts/test_workflow_action_pinning_contract.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"Workflow action pinning test failed: {result.stderr}\n{result.stdout}")
+    ok("Workflow action pinning contract test")
+
     # Phase 6B: Test registry contract
     result = subprocess.run(
         [sys.executable, "scripts/test_phase6b_test_registry_contract.py"],

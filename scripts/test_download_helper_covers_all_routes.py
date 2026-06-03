@@ -34,8 +34,8 @@ def main() -> int:
         '"--out", args.out',
         "build_guardian_signed_echo",
         "--guardian-key-prefix",
-        "/gateway/preflight",
-        "/agent-submit",
+        "/record-chain/preflight",
+        "/record-chain/submit",
     ]
     for r in required:
         if r not in text:

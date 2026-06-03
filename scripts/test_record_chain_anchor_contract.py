@@ -34,8 +34,8 @@ def main() -> None:
         errors.append("missing .github/workflows/record-chain-anchor.yml")
     else:
         text = wf.read_text(encoding="utf-8")
-        if "opentimestamps-client" not in text:
-            errors.append("anchor workflow does not install opentimestamps-client")
+        if "opentimestamps-client" not in text and "requirements-ci.txt" not in text:
+            errors.append("anchor workflow does not install opentimestamps-client (directly or via requirements-ci.txt)")
         for cmd in ["build-batch", "ots-stamp", "ots-upgrade", "build-anchor-status"]:
             if cmd not in text:
                 errors.append(f"anchor workflow missing command: {cmd}")

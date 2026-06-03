@@ -35,8 +35,8 @@ from urllib.request import urlopen
 
 SITE = "https://www.trinityaccord.org"
 BUNDLES_API = "/api/formal-builder-bundles.v1.json"
-GATEWAY_PREFLIGHT = "https://trinity-agent-issue-gateway.onrender.com/gateway/preflight"
-GATEWAY_SUBMIT = "https://trinity-agent-issue-gateway.onrender.com/agent-submit"
+GATEWAY_PREFLIGHT = "https://trinity-record-chain-gateway.onrender.com/record-chain/preflight"
+GATEWAY_SUBMIT = "https://trinity-record-chain-gateway.onrender.com/record-chain/submit"
 
 READBACK_TARGETS = {
     "pure_echo": [
