@@ -184,6 +184,15 @@ def test_1_append_includes_authorship_verification_status() -> list[str]:
                 errors.append("verified_by_gateway_before_pending not true")
             if avs.get("final_record_contains_append_assigned_fields_not_in_signed_payload") is not True:
                 errors.append("final_record_contains_append_assigned_fields_not_in_signed_payload not true")
+        # append_assigned_metadata must NOT contain hash fields
+        aam = rec.get("append_assigned_metadata")
+        if not isinstance(aam, dict):
+            errors.append("Missing append_assigned_metadata")
+        else:
+            if "content_sha256" in aam:
+                errors.append("append_assigned_metadata must not contain content_sha256")
+            if "record_sha256" in aam:
+                errors.append("append_assigned_metadata must not contain record_sha256")
     finally:
         _cleanup(tmp)
     return errors
@@ -237,8 +246,16 @@ def test_3_verify_fails_oath_hash_missing() -> list[str]:
             # Missing: oath_policy_sha256, canonical_oath_text_sha256,
             # participant_readback_sha256, oath_modules
         }
-        mod.write_json(mod.PENDING / "test-echo-001.json", draft)
-        mod.append_records(all_records=False)
+        # Write record directly (bypass append's post-verify gate) to test
+        # verify_native_records() in isolation.
+        draft = mod.normalize_record_draft(draft)
+        draft["record_index"] = 1
+        draft["record_id"] = mod.record_id(1)
+        draft["assigned_at"] = mod.utc_now()
+        draft["previous_record_sha256"] = None
+        draft["content_sha256"] = mod.content_hash(draft)
+        draft["record_sha256"] = mod.record_hash(draft)
+        mod.write_json(mod.RECORDS / "R-000000001.json", draft)
         verrors = mod.verify_native_records()
         hash_errors = [e for e in verrors if "oath_policy_sha256" in e or "canonical_oath_text_sha256" in e or "participant_readback_sha256" in e]
         module_errors = [e for e in verrors if "oath_modules" in e]
@@ -274,8 +291,15 @@ def test_4_verify_fails_guardian_without_stewardship() -> list[str]:
             "participant_readback_sha256": "c" * 64,
             "oath_modules": ["common_submission_integrity_v1"],  # Missing guardian_stewardship_v1
         }
-        mod.write_json(mod.PENDING / "test-guardian-001.json", draft)
-        mod.append_records(all_records=False)
+        # Write directly to test verify in isolation
+        draft = mod.normalize_record_draft(draft)
+        draft["record_index"] = 1
+        draft["record_id"] = mod.record_id(1)
+        draft["assigned_at"] = mod.utc_now()
+        draft["previous_record_sha256"] = None
+        draft["content_sha256"] = mod.content_hash(draft)
+        draft["record_sha256"] = mod.record_hash(draft)
+        mod.write_json(mod.RECORDS / "R-000000001.json", draft)
         verrors = mod.verify_native_records()
         steward_errors = [e for e in verrors if "guardian_stewardship_v1" in e]
         if not steward_errors:
@@ -355,12 +379,38 @@ def test_7_raw_readback_text_fails_verify() -> list[str]:
             "oath_modules": ["common_submission_integrity_v1", "echo_integrity_v1"],
             "readback_text": "THIS SHOULD NOT BE HERE",  # FORBIDDEN
         }
-        mod.write_json(mod.PENDING / "test-echo-001.json", draft)
-        mod.append_records(all_records=False)
+        # Write directly to test verify in isolation
+        draft = mod.normalize_record_draft(draft)
+        draft["record_index"] = 1
+        draft["record_id"] = mod.record_id(1)
+        draft["assigned_at"] = mod.utc_now()
+        draft["previous_record_sha256"] = None
+        draft["content_sha256"] = mod.content_hash(draft)
+        draft["record_sha256"] = mod.record_hash(draft)
+        mod.write_json(mod.RECORDS / "R-000000001.json", draft)
         verrors = mod.verify_native_records()
         readback_errors = [e for e in verrors if "readback_text" in e]
         if not readback_errors:
             errors.append("verify should have failed for raw readback_text in record")
+    finally:
+        _cleanup(tmp)
+    return errors
+
+
+def test_8_post_append_verify_passes() -> list[str]:
+    """After a successful append, verify_native_records() must pass (post-append gate)."""
+    errors = []
+    tmp = _setup_chain()
+    try:
+        draft = _make_echo_draft()
+        mod.write_json(mod.PENDING / "test-echo-001.json", draft)
+        mod.append_records(all_records=False)
+        # If append succeeded without raising, verify should also pass
+        # because append_records now calls verify_native_records() internally.
+        # Double-check by calling it explicitly.
+        verrors = mod.verify_native_records()
+        if verrors:
+            errors.append(f"verify_native_records failed after successful append: {verrors}")
     finally:
         _cleanup(tmp)
     return errors
@@ -374,6 +424,7 @@ ALL_TESTS = [
     ("append --all continues after rejection", test_5_append_all_continues_after_rejection),
     ("rejection reason file written", test_6_rejection_reason_file_written),
     ("raw readback_text fails verify", test_7_raw_readback_text_fails_verify),
+    ("post-append verify passes", test_8_post_append_verify_passes),
 ]
 
 
