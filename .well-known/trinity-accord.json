@@ -38,9 +38,6 @@
     "agent_required_reading": "/api/agent-required-reading.json",
     "agent_output_policy": "/api/agent-output-policy.v1.json",
     "agent_task_router": "/api/agent-task-router.v1.json",
-    "gateway_workflows": "/api/gateway-workflows.v1.json",
-    "agent_submit_gateway": "/api/agent-submit-gateway.json",
-    "gateway_builder_route_map": "/api/gateway-builder-route-map.v1.json",
     "public_home_status": "/api/public-home-status.json",
     "guardian_registry": "/api/guardian-registry.json",
     "guardian_active_listing_policy": "/api/guardian-active-listing-policy.v1.json",
@@ -132,22 +129,6 @@
       "source_file": "api/agent-required-reading.json",
       "purpose": "Required-reading manifest for agent profiles and route-specific loading."
     },
-    "gateway_workflows": {
-      "path": "/gateway-workflows/",
-      "machine_path": "/api/gateway-workflows.v1.json",
-      "source_file": "gateway-workflows.md",
-      "purpose": "Gateway workflow manual and machine contract, including post-submit readback and final exit checklist."
-    },
-    "agent_submit_gateway": {
-      "path": "/api/agent-submit-gateway.json",
-      "source_file": "api/agent-submit-gateway.json",
-      "purpose": "Gateway submission contract and route-specific submission guidance."
-    },
-    "gateway_builder_route_map": {
-      "path": "/api/gateway-builder-route-map.v1.json",
-      "source_file": "api/gateway-builder-route-map.v1.json",
-      "purpose": "Builder route map for choosing the correct payload builder."
-    },
     "formal_builder_bundles": {
       "path": "/api/formal-builder-bundles.v1.json",
       "purpose": "Zero-clone formal builder bundles for external agents."
@@ -162,10 +143,6 @@
   "agent_required_reading": "/api/agent-required-reading.json",
   "agent_output_policy": "/api/agent-output-policy.v1.json",
   "agent_task_router": "/api/agent-task-router.v1.json",
-  "gateway_workflows": "/gateway-workflows/",
-  "gateway_workflows_json": "/api/gateway-workflows.v1.json",
-  "agent_submit_gateway": "/api/agent-submit-gateway.json",
-  "gateway_builder_route_map": "/api/gateway-builder-route-map.v1.json",
   "agent_entry_protocol": {
     "path": "/api/agent-entry-protocol.json",
     "homepage_only_assessment_state": "insufficient_context",

@@ -37,9 +37,6 @@ REQUIRED_LINKS_MACHINE = {
     "/api/agent-output-policy.v1.json",
     "/api/agent-task-router.v1.json",
     "/api/context-load-map.json",
-    "/api/gateway-workflows.v1.json",
-    "/api/gateway-builder-route-map.v1.json",
-    "/api/agent-submit-gateway.json",
     "/api/public-home-status.json",
     "/api/guardian-registry.json",
     "/api/echo-index.json",
@@ -49,10 +46,7 @@ REQUIRED_LINKS_MACHINE = {
 REQUIRED_LINKS_PAGES = {
     "/agent-start",
     "/agent-echo",
-    "/gateway-workflows",
     "/guardian-alliance",
-    "/guardian-join",
-    "/guardian-routes",
 }
 
 REQUIRED_WELL_KNOWN_API = {
@@ -61,18 +55,11 @@ REQUIRED_WELL_KNOWN_API = {
     "agent_required_reading": "/api/agent-required-reading.json",
     "agent_output_policy": "/api/agent-output-policy.v1.json",
     "agent_task_router": "/api/agent-task-router.v1.json",
-    "gateway_workflows": "/api/gateway-workflows.v1.json",
-    "agent_submit_gateway": "/api/agent-submit-gateway.json",
-    "gateway_builder_route_map": "/api/gateway-builder-route-map.v1.json",
 }
 
 REQUIRED_WELL_KNOWN_ALIASES = {
     "agent_first_contact": "/api/agent-first-contact.json",
     "agent_required_reading": "/api/agent-required-reading.json",
-    "gateway_workflows": "/gateway-workflows/",
-    "gateway_workflows_json": "/api/gateway-workflows.v1.json",
-    "agent_submit_gateway": "/api/agent-submit-gateway.json",
-    "gateway_builder_route_map": "/api/gateway-builder-route-map.v1.json",
 }
 
 
@@ -184,9 +171,6 @@ def validate_well_known_contract(label: str, well_known: dict[str, Any], errors:
     for key in [
         "agent_first_contact",
         "agent_required_reading",
-        "gateway_workflows",
-        "agent_submit_gateway",
-        "gateway_builder_route_map",
     ]:
         if key not in entrypoints:
             errors.append(f"{label} well-known agent_entrypoints missing {key}")
