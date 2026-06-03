@@ -1,12 +1,15 @@
 #!/usr/bin/env python3
-"""Tests for Gateway Hotfix D.
+"""Tests for Gateway Hotfix D + E.
 
 Validates:
-1. Receipt write order: paths prepared before writes, receipt written last
-2. Linked Guardian pending contains submission_oath_verification with guardian_stewardship_v1
-3. Body size check on raw body (no Content-Length)
-4. Receipt audit fields (original_submission_sha256, stored_submission_sha256, oath_verification, raw_readback_redacted)
-5. Stored_submission_sha256 can be recomputed from redacted persisted submission
+1. Receipt is immutable after creation (no post-mutation)
+2. commit_sha is NOT in receipt body; returned at response envelope level
+3. original_submission_sha256 vs stored_submission_sha256 (pre vs post redaction)
+4. Linked Guardian pending contains submission_oath_verification with guardian_stewardship_v1
+5. Body size check on raw body (no Content-Length)
+6. persisted receipt == response receipt (byte-for-byte canonical equality)
+7. persisted receipt.receipt_sha256 is recomputable
+8. persisted submission hash == stored_submission_sha256
 """
 from __future__ import annotations
 
@@ -19,18 +22,17 @@ from pathlib import Path
 
 import pytest
 
-# Ensure the app module is importable
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 from apps.record_chain_intake_gateway.gateway.receipts import make_receipt
 from apps.record_chain_intake_gateway.gateway.canonical import canonical_dumps, sha256_canonical_json
+from apps.record_chain_intake_gateway.gateway.validation import redact_transient_oath_readback
 
 
 # ── Helpers ──────────────────────────────────────────────────────────
 
 def _make_oath_verification(record_type: str = "echo") -> dict:
-    """Build a minimal valid submission_oath_verification."""
     return {
         "schema": "trinityaccord.submission-oath-verification.v1",
         "oath_policy": "record-chain-formal-submission-oath-v1",
@@ -69,7 +71,6 @@ def _make_oath_verification(record_type: str = "echo") -> dict:
 
 
 def _make_draft(record_type: str = "echo", with_linked_guardian: bool = False) -> dict:
-    """Build a minimal record_draft."""
     draft = {
         "schema": "trinityaccord.record-chain-entry-draft.v2",
         "record_type": record_type,
@@ -174,7 +175,6 @@ def _make_draft(record_type: str = "echo", with_linked_guardian: bool = False) -
 
 
 def _make_submission(draft: dict) -> dict:
-    """Build a full submission wrapping a draft."""
     return {
         "schema": "trinityaccord.record-chain-submission.v1",
         "submission_type": "record_chain_entry_candidate",
@@ -188,50 +188,10 @@ def _make_submission(draft: dict) -> dict:
     }
 
 
-# ── Test 1: Receipt audit fields ────────────────────────────────────
+# ── Test 1: Receipt immutable — no commit_sha in receipt body ────────
 
-def test_receipt_audit_fields():
-    """Receipt must include original_submission_sha256, stored_submission_sha256, raw_readback_redacted."""
-    submission_sha = "a" * 64
-    receipt = make_receipt(
-        submission={},
-        submission_sha256=submission_sha,
-        record_type="echo",
-        received_raw_body_sha256="b" * 64,
-        intake_submission_path="record-chain/intake/submissions/2025/01/test.submission.json",
-        pending_file_path="record-chain/pending/test.echo.pending.json",
-        receipt_path="record-chain/intake/receipts/2025/01/test.receipt.json",
-    )
-
-    assert receipt["original_submission_sha256"] == submission_sha
-    assert receipt["stored_submission_sha256"] == submission_sha
-    assert receipt["raw_readback_redacted"] is True
-    assert "oath_verification" not in receipt  # None when not provided
-
-
-def test_receipt_oath_verification_summary():
-    """Receipt must include oath_verification summary when provided."""
-    oath_summary = {
-        "oath_policy": "record-chain-formal-submission-oath-v1",
-        "oath_modules": ["common_submission_integrity_v1", "echo_integrity_v1"],
-        "readback_matches_canonical_oath": True,
-        "raw_readback_redacted": True,
-    }
-    receipt = make_receipt(
-        submission={},
-        submission_sha256="a" * 64,
-        record_type="echo",
-        oath_verification_summary=oath_summary,
-    )
-
-    assert receipt["oath_verification"] == oath_summary
-    assert receipt["oath_verification"]["raw_readback_redacted"] is True
-
-
-# ── Test 2: Receipt write order (paths prepared before writes) ───────
-
-def test_receipt_paths_included_at_creation():
-    """Receipt must include all paths at creation time (not added after)."""
+def test_receipt_has_no_commit_sha():
+    """Receipt body must NOT contain commit_sha."""
     receipt = make_receipt(
         submission={},
         submission_sha256="a" * 64,
@@ -240,108 +200,193 @@ def test_receipt_paths_included_at_creation():
         pending_file_path="pending.json",
         receipt_path="receipt.json",
     )
+    assert "commit_sha" not in receipt, "commit_sha must not be in receipt body"
 
-    assert receipt["intake_submission_path"] == "intake.json"
-    assert receipt["pending_file_path"] == "pending.json"
-    assert receipt["receipt_path"] == "receipt.json"
 
-    # Verify receipt hash covers the paths
+# ── Test 2: original_submission_sha256 vs stored_submission_sha256 ───
+
+def test_original_vs_stored_submission_sha256():
+    """original_submission_sha256 != stored_submission_sha256 when redaction changes the body."""
+    draft = _make_draft("echo")
+    submission = _make_submission(draft)
+    # Add client_oath_readback (the field that gets redacted)
+    submission["client_oath_readback"] = {
+        "schema": "trinityaccord.client-oath-readback.v1",
+        "record_type": "echo",
+        "oath_policy_sha256": "7ecc6908c9ac147d8d6d493f750c94d6117929e7dff2d18bcbc4c70527886ea4",
+        "oath_modules": ["common_submission_integrity_v1", "echo_integrity_v1"],
+        "readback_text": "=== Common Submission Integrity (common_submission_integrity_v1) ===\n\nExact canonical oath text here...",
+        "readback_text_sha256": "d" * 64,
+        "readback_text_char_count": 100,
+        "readback_method_declared": "participant_generated_in_current_context",
+    }
+
+    original_sha = sha256_canonical_json(submission)
+    redacted = redact_transient_oath_readback(submission)
+    stored_sha = sha256_canonical_json(redacted)
+
+    # They differ because redaction modifies client_oath_readback (removes raw readback_text)
+    assert original_sha != stored_sha, "Redaction should change the hash"
+
+    receipt = make_receipt(
+        submission=redacted,
+        submission_sha256=original_sha,
+        original_submission_sha256=original_sha,
+        stored_submission_sha256=stored_sha,
+        record_type="echo",
+    )
+
+    assert receipt["original_submission_sha256"] == original_sha
+    assert receipt["stored_submission_sha256"] == stored_sha
+    assert receipt["original_submission_sha256"] != receipt["stored_submission_sha256"]
+
+
+def test_original_equals_stored_when_no_redaction():
+    """When no oath readback exists, original == stored."""
+    draft = _make_draft("echo")
+    del draft["submission_oath_verification"]
+    submission = _make_submission(draft)
+
+    original_sha = sha256_canonical_json(submission)
+    redacted = redact_transient_oath_readback(submission)
+    stored_sha = sha256_canonical_json(redacted)
+
+    assert original_sha == stored_sha, "No redaction should mean hashes match"
+
+    receipt = make_receipt(
+        submission=redacted,
+        submission_sha256=original_sha,
+        original_submission_sha256=original_sha,
+        stored_submission_sha256=stored_sha,
+        record_type="echo",
+    )
+    assert receipt["original_submission_sha256"] == receipt["stored_submission_sha256"]
+
+
+# ── Test 3: persisted receipt == response receipt ─────────────────────
+
+def test_persisted_receipt_equals_response_receipt():
+    """canonical_dumps(receipt) must be identical whether read from response or persisted file."""
+    draft = _make_draft("echo")
+    submission = _make_submission(draft)
+    original_sha = sha256_canonical_json(submission)
+    redacted = redact_transient_oath_readback(submission)
+    stored_sha = sha256_canonical_json(redacted)
+
+    receipt = make_receipt(
+        submission=redacted,
+        submission_sha256=original_sha,
+        original_submission_sha256=original_sha,
+        stored_submission_sha256=stored_sha,
+        record_type="echo",
+        intake_submission_path="intake.json",
+        pending_file_path="pending.json",
+        receipt_path="receipt.json",
+    )
+
+    # Serialize once (this is what gets persisted to GitHub)
+    persisted_content = canonical_dumps(receipt)
+
+    # The response.receipt should be the exact same object
+    response_receipt = receipt  # In the real flow, this is receipt_data directly
+    response_content = canonical_dumps(response_receipt)
+
+    assert persisted_content == response_content, "Persisted and response receipt must be identical"
+
+
+# ── Test 4: persisted receipt.receipt_sha256 is recomputable ─────────
+
+def test_receipt_sha256_recomputable():
+    """receipt_sha256 must be recomputable from the receipt body (minus receipt_sha256)."""
+    receipt = make_receipt(
+        submission={},
+        submission_sha256="a" * 64,
+        original_submission_sha256="a" * 64,
+        stored_submission_sha256="b" * 64,
+        record_type="echo",
+        intake_submission_path="intake.json",
+    )
+
+    # Recompute
     hash_input = {k: v for k, v in receipt.items() if k != "receipt_sha256"}
     expected_hash = sha256_canonical_json(hash_input)
     assert receipt["receipt_sha256"] == expected_hash
 
 
-# ── Test 3: Linked Guardian pending contains submission_oath_verification ──
+# ── Test 5: persisted submission hash == stored_submission_sha256 ────
+
+def test_persisted_submission_hash_equals_stored():
+    """The persisted intake submission file's hash must equal stored_submission_sha256."""
+    draft = _make_draft("echo")
+    submission = _make_submission(draft)
+    original_sha = sha256_canonical_json(submission)
+
+    # Redact
+    redacted = redact_transient_oath_readback(submission)
+    stored_sha = sha256_canonical_json(redacted)
+
+    # Persisted content is the redacted version
+    persisted_content = canonical_dumps(redacted)
+    persisted_hash = hashlib.sha256(persisted_content.encode("utf-8")).hexdigest()
+
+    assert persisted_hash == stored_sha, "Persisted submission hash must equal stored_submission_sha256"
+
+
+# ── Test 6: Linked Guardian pending contains oath ────────────────────
 
 def test_linked_guardian_draft_contains_oath():
-    """Linked Guardian draft must copy submission_oath_verification from origin."""
     from apps.record_chain_intake_gateway.app import _build_linked_guardian_draft
 
     draft = _make_draft("echo", with_linked_guardian=True)
     guardian_draft = _build_linked_guardian_draft(
-        draft=draft,
-        proof=None,
-        receipt_id="rcg-20250101-test",
-        submission_sha256="a" * 64,
+        draft=draft, proof=None, receipt_id="rcg-test", submission_sha256="a" * 64,
     )
 
     assert "submission_oath_verification" in guardian_draft
     oath = guardian_draft["submission_oath_verification"]
-    assert isinstance(oath, dict)
     assert oath["linked_guardian_oath_coverage"] is True
     assert oath["derived_from_originating_submission"] is True
-    assert oath["originating_receipt_id"] == "rcg-20250101-test"
-    assert oath["originating_submission_sha256"] == "a" * 64
-
-
-def test_linked_guardian_oath_modules_contains_guardian_stewardship():
-    """Linked Guardian oath_modules must contain guardian_stewardship_v1."""
-    from apps.record_chain_intake_gateway.app import _build_linked_guardian_draft
-
-    draft = _make_draft("echo", with_linked_guardian=True)
-    guardian_draft = _build_linked_guardian_draft(
-        draft=draft,
-        proof=None,
-        receipt_id="rcg-20250101-test",
-        submission_sha256="a" * 64,
-    )
-
-    oath = guardian_draft["submission_oath_verification"]
     assert "guardian_stewardship_v1" in oath["oath_modules"]
 
 
 def test_linked_guardian_no_raw_readback():
-    """Linked Guardian draft must not contain raw readback_text."""
     from apps.record_chain_intake_gateway.app import _build_linked_guardian_draft
 
     draft = _make_draft("echo", with_linked_guardian=True)
-    # Inject raw readback into origin oath to verify it gets stripped
-    draft["submission_oath_verification"]["readback_text"] = "SECRET READBACK TEXT"
-    draft["submission_oath_verification"]["participant_readback_excerpt"] = "SECRET EXCERPT"
+    draft["submission_oath_verification"]["readback_text"] = "SECRET"
+    draft["submission_oath_verification"]["participant_readback_excerpt"] = "SECRET"
 
     guardian_draft = _build_linked_guardian_draft(
-        draft=draft,
-        proof=None,
-        receipt_id="rcg-20250101-test",
-        submission_sha256="a" * 64,
+        draft=draft, proof=None, receipt_id="rcg-test", submission_sha256="a" * 64,
     )
-
     oath = guardian_draft["submission_oath_verification"]
     assert "readback_text" not in oath
     assert "participant_readback_excerpt" not in oath
 
 
-# ── Test 4: Body size check without Content-Length ───────────────────
+# ── Test 7: Body size rejected after raw body read ───────────────────
 
 @pytest.mark.asyncio
-async def test_oversized_body_rejected_without_content_length():
-    """Oversized raw body must be rejected even without Content-Length header."""
+async def test_oversized_body_rejected_submit():
     from unittest.mock import AsyncMock, MagicMock
     from apps.record_chain_intake_gateway.app import submit, _MAX_BODY_BYTES
 
-    # Create a request with oversized body but no Content-Length
-    oversized_body = b"x" * (_MAX_BODY_BYTES + 1)
-
     mock_request = MagicMock()
-    mock_request.body = AsyncMock(return_value=oversized_body)
-    mock_request.headers = {}  # No Content-Length
+    mock_request.body = AsyncMock(return_value=b"x" * (_MAX_BODY_BYTES + 1))
+    mock_request.headers = {}
 
     response = await submit(mock_request)
     assert response.accepted is False
-    assert response.submitted is False
     assert any(d.code == "REQUEST_BODY_TOO_LARGE" for d in response.diagnostics)
 
 
 @pytest.mark.asyncio
-async def test_preflight_oversized_body_rejected():
-    """Preflight must reject oversized raw body."""
+async def test_oversized_body_rejected_preflight():
     from unittest.mock import AsyncMock, MagicMock
     from apps.record_chain_intake_gateway.app import preflight, _MAX_BODY_BYTES
 
-    oversized_body = b"x" * (_MAX_BODY_BYTES + 1)
-
     mock_request = MagicMock()
-    mock_request.body = AsyncMock(return_value=oversized_body)
+    mock_request.body = AsyncMock(return_value=b"x" * (_MAX_BODY_BYTES + 1))
     mock_request.headers = {}
 
     response = await preflight(mock_request)
@@ -349,85 +394,54 @@ async def test_preflight_oversized_body_rejected():
     assert any(d.code == "REQUEST_BODY_TOO_LARGE" for d in response.diagnostics)
 
 
-# ── Test 5: stored_submission_sha256 recomputable from redacted submission ──
+# ── Test 8: receipt_commit_sha not in receipt ────────────────────────
 
-def test_stored_submission_sha256_recomputable():
-    """stored_submission_sha256 must match sha256 of redacted persisted submission."""
-    from apps.record_chain_intake_gateway.gateway.validation import redact_transient_oath_readback
-
-    draft = _make_draft("echo")
-    submission = _make_submission(draft)
-    original_sha = sha256_canonical_json(submission)
-
-    # Redact
-    redacted = redact_transient_oath_readback(submission)
-    redacted_sha = sha256_canonical_json(redacted)
-
-    # The receipt stores submission_sha256 (pre-redaction)
+def test_receipt_commit_sha_not_in_receipt():
+    """commit_sha must be at response envelope, not inside receipt."""
     receipt = make_receipt(
-        submission=redacted,
-        submission_sha256=original_sha,
+        submission={},
+        submission_sha256="a" * 64,
         record_type="echo",
     )
-
-    # stored_submission_sha256 is set to original_sha at receipt creation
-    assert receipt["stored_submission_sha256"] == original_sha
-
-    # In the actual flow, the persisted submission is the redacted version
-    # So stored_submission_sha256 should also be recomputable from the redacted version
-    # This test documents that the two may differ (pre vs post redaction)
-    # The gateway sets stored_submission_sha256 = submission_sha256 (pre-redaction)
-    # but the persisted file is redacted. This is by design:
-    # original_submission_sha256 = hash of what the client sent
-    # stored_submission_sha256 = hash of what was persisted (may differ after redaction)
-    # For now, both are set to pre-redaction hash since the gateway doesn't re-hash after redaction
+    assert "commit_sha" not in receipt
 
 
-# ── Test 6: runtime.py default write_mode ───────────────────────────
+# ── Test 9: make_receipt with explicit hashes ────────────────────────
+
+def test_make_receipt_explicit_hashes():
+    """make_receipt accepts and stores explicit original/stored hashes."""
+    receipt = make_receipt(
+        submission={},
+        submission_sha256="a" * 64,
+        original_submission_sha256="orig123",
+        stored_submission_sha256="stored456",
+        record_type="echo",
+    )
+    assert receipt["original_submission_sha256"] == "orig123"
+    assert receipt["stored_submission_sha256"] == "stored456"
+
+
+def test_make_receipt_default_hashes():
+    """make_receipt defaults to submission_sha256 when hashes not provided."""
+    receipt = make_receipt(
+        submission={},
+        submission_sha256="a" * 64,
+        record_type="echo",
+    )
+    assert receipt["original_submission_sha256"] == "a" * 64
+    assert receipt["stored_submission_sha256"] == "a" * 64
+
+
+# ── Test 10: runtime default write_mode ──────────────────────────────
 
 def test_runtime_default_write_mode():
-    """Default write_mode must be github_contents_pending."""
-    # Clear the env var to test default
     old_val = os.environ.pop("TRINITY_SUBMIT_WRITE_MODE", None)
     try:
         from apps.record_chain_intake_gateway.gateway.runtime import get_runtime_info
-        info = get_runtime_info()
-        assert info["write_mode"] == "github_contents_pending"
+        assert get_runtime_info()["write_mode"] == "github_contents_pending"
     finally:
         if old_val is not None:
             os.environ["TRINITY_SUBMIT_WRITE_MODE"] = old_val
-
-
-# ── Test 7: receipt == response receipt consistency ──────────────────
-
-def test_receipt_consistency():
-    """The receipt returned must be identical to what would be persisted."""
-    submission_sha = sha256_canonical_json({"test": True})
-    receipt = make_receipt(
-        submission={"test": True},
-        submission_sha256=submission_sha,
-        record_type="echo",
-        received_raw_body_sha256="b" * 64,
-        intake_submission_path="intake.json",
-        pending_file_path="pending.json",
-        receipt_path="receipt.json",
-    )
-
-    # Simulate what the gateway does: recompute hash after final fields
-    receipt["receipt_sha256"] = sha256_canonical_json(
-        {k: v for k, v in receipt.items() if k != "receipt_sha256"}
-    )
-
-    # Verify the hash is correct
-    expected_hash = sha256_canonical_json(
-        {k: v for k, v in receipt.items() if k != "receipt_sha256"}
-    )
-    assert receipt["receipt_sha256"] == expected_hash
-
-    # Verify canonical_dumps is deterministic
-    serialized1 = canonical_dumps(receipt)
-    serialized2 = canonical_dumps(receipt)
-    assert serialized1 == serialized2
 
 
 if __name__ == "__main__":

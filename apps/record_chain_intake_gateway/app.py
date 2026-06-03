@@ -665,14 +665,16 @@ async def submit(request: Request) -> SubmitResponse:
 
     # --- redact transient oath readback before persistence ---
     from apps.record_chain_intake_gateway.gateway.validation import redact_transient_oath_readback
+    original_submission_sha256 = sha256_canonical_json(body)
     body = redact_transient_oath_readback(body)
+    stored_submission_sha256 = sha256_canonical_json(body)
     # Re-extract draft after redaction
     draft = body.get("record_draft") or body.get("draft") or {}
 
     # --- check for linked Guardian request ---
     has_linked_guardian = _has_linked_guardian_request(draft)
 
-    # --- build receipt (prepare all paths FIRST) ---
+    # --- build receipt (prepare all paths FIRST, receipt is immutable after creation) ---
     now = datetime.now(timezone.utc)
     receipt_id_local = f"rcg-{now.strftime('%Y%m%d')}-{submission_sha256[:12]}"
     date_prefix = now.strftime("%Y/%m")
@@ -695,6 +697,8 @@ async def submit(request: Request) -> SubmitResponse:
     receipt_data = make_receipt(
         submission=body,
         submission_sha256=submission_sha256,
+        original_submission_sha256=original_submission_sha256,
+        stored_submission_sha256=stored_submission_sha256,
         record_type=record_type,
         received_raw_body_sha256=received_raw_body_sha256,
         intake_submission_path=intake_submission_path,
@@ -718,6 +722,7 @@ async def submit(request: Request) -> SubmitResponse:
     receipt_content = canonical_dumps(receipt_data)
 
     # --- persist to GitHub (write order: submission → pending → linked guardian → receipt LAST) ---
+    # receipt_data is NOT mutated after creation; commit_sha is returned at response envelope level
     commit_sha: str | None = None
 
     if _WRITE_MODE == "github_contents_pending":
@@ -791,16 +796,7 @@ async def submit(request: Request) -> SubmitResponse:
     else:
         logger.info("Dry-run mode — skipping persist for %s", receipt_id)
 
-    # --- finalize receipt with commit info ---
-    if commit_sha:
-        receipt_data["commit_sha"] = commit_sha
-
-    # Recompute receipt hash with final fields
-    receipt_data["receipt_sha256"] = sha256_canonical_json(
-        {k: v for k, v in receipt_data.items() if k != "receipt_sha256"}
-    )
-
-    # --- store receipt in memory ---
+    # --- store receipt in memory (NOT mutated — same bytes as persisted) ---
     _receipt_store[receipt_id] = receipt_data
 
     return SubmitResponse(
@@ -815,6 +811,7 @@ async def submit(request: Request) -> SubmitResponse:
         receipt_path=receipt_path,
         server_created_at=receipt_data["accepted_at"],
         append_status="pending",
+        receipt_commit_sha=commit_sha,
         receipt=receipt_data,
         diagnostics=[],
         warnings=[],

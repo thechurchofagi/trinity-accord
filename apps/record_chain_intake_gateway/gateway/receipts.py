@@ -25,25 +25,37 @@ def make_receipt(
     *,
     submission: dict[str, Any],
     submission_sha256: str,
+    original_submission_sha256: str = "",
+    stored_submission_sha256: str = "",
     record_type: str,
     received_raw_body_sha256: str = "",
     intake_submission_path: str = "",
     pending_file_path: str = "",
     receipt_path: str = "",
     file_path: str | None = None,
-    commit_sha: str | None = None,
     now: datetime | None = None,
     gateway_version: str = "1.0.0",
     oath_verification_summary: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Build a receipt dict for a persisted submission.
 
+    The receipt is immutable once created — callers must NOT mutate it after
+    :func:`sha256_canonical_json` has been computed.  Any runtime-only metadata
+    (e.g. ``commit_sha``) should be returned at the response envelope level,
+    not inside the receipt body.
+
     Parameters
     ----------
     submission:
         The original submission object.
     submission_sha256:
-        SHA-256 hex digest of the canonical submission.
+        SHA-256 hex digest of the canonical submission (pre-redaction).
+    original_submission_sha256:
+        SHA-256 of the original (pre-redaction) canonical submission.
+        Defaults to ``submission_sha256`` when empty.
+    stored_submission_sha256:
+        SHA-256 of the redacted (persisted) canonical submission.
+        Defaults to ``submission_sha256`` when empty.
     record_type:
         The resolved record type.
     received_raw_body_sha256:
@@ -56,8 +68,6 @@ def make_receipt(
         Repo path of the receipt file.
     file_path:
         Legacy path in the repo where the record was written (if committed).
-    commit_sha:
-        Git commit SHA of the write (if committed).
     now:
         Timestamp override (defaults to UTC now).
     gateway_version:
@@ -76,8 +86,8 @@ def make_receipt(
         "gateway_version": gateway_version,
         "record_type": record_type,
         "submission_sha256": submission_sha256,
-        "original_submission_sha256": submission_sha256,
-        "stored_submission_sha256": submission_sha256,
+        "original_submission_sha256": original_submission_sha256 or submission_sha256,
+        "stored_submission_sha256": stored_submission_sha256 or submission_sha256,
         "received_raw_body_sha256": received_raw_body_sha256,
         "accepted_at": now.isoformat().replace("+00:00", "Z"),
         "raw_readback_redacted": True,
@@ -92,12 +102,11 @@ def make_receipt(
         receipt["receipt_path"] = receipt_path
     if file_path is not None:
         receipt["file_path"] = file_path
-    if commit_sha is not None:
-        receipt["commit_sha"] = commit_sha
     if oath_verification_summary is not None:
         receipt["oath_verification"] = oath_verification_summary
 
-    # Compute a receipt hash so callers can verify receipt integrity
+    # Compute a receipt hash so callers can verify receipt integrity.
+    # This MUST be the last mutation — callers must not modify the receipt after this.
     receipt["receipt_sha256"] = sha256_canonical_json(
         {k: v for k, v in receipt.items() if k != "receipt_sha256"}
     )

@@ -159,6 +159,7 @@ class SubmitResponse(BaseModel):
     receipt_path: str = ""
     server_created_at: str = ""
     append_status: str = ""
+    receipt_commit_sha: str | None = None
     receipt: dict[str, Any] | None = None
     diagnostics: list[Diagnostic] = Field(default_factory=list)
     warnings: list[str] = Field(default_factory=list)
