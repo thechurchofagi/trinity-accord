@@ -29,7 +29,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       ARWEAVE_UPLOAD_MODE: ${{ github.event.inputs.upload_mode || 'dry-run' }}
-      ARWEAVE_WALLET_JWK_B64: ${{ secrets.ARWEAVE_WALLET_JWK_B64 }}
     steps:
       - uses: actions/checkout@v4
         with:
