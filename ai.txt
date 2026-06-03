@@ -81,3 +81,6 @@
 # Arweave upload is not required for public submission.
 # Arweave live upload is internal archival infrastructure and may be disabled during public test/stabilization.
 # Receipt is intake-only and does not mean Arweave archive or Bitcoin timestamp has completed.
+
+# Mission governance
+# See /api/mission-governance.v1.json for global mission and action-boundary rules.
