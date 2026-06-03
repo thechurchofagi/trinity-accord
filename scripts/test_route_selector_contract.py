@@ -1,31 +1,20 @@
 #!/usr/bin/env python3
-"""Route selector must point agents to correct core and advanced routes."""
+"""Route selector must be a retired pointer to record-chain-first replacement.
+
+Since round 7/10, route-selector.v1.json is retired. This test verifies
+the retired pointer is correct and does NOT require an active route selector.
+"""
 from __future__ import annotations
 
-import hashlib
 import json
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 PATH = ROOT / "api" / "route-selector.v1.json"
 
-CORE_ROUTES = {
-    "pure_echo",
-    "v0_v5_agent_declared_archive",
-    "guardian_application_stage_1",
-}
-
-ADVANCED_ROUTES = {
-    "guardian_listing_stage_2",
-    "guardian_signed_echo",
-}
-
-
-def digest(data: dict) -> str:
-    clone = dict(data)
-    clone.pop("source_digest", None)
-    canonical = json.dumps(clone, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
-    return hashlib.sha256(canonical.encode("utf-8")).hexdigest()[:16]
+RETIRED_SCHEMA = "trinityaccord.gateway-v1-retired-pointer.v1"
+EXPECTED_REPLACEMENT = "/api/record-chain-status.json"
 
 
 def main() -> int:
@@ -37,52 +26,49 @@ def main() -> int:
 
     data = json.loads(PATH.read_text(encoding="utf-8"))
 
-    if data.get("schema") != "trinityaccord.route-selector.v1":
-        errors.append("schema mismatch")
+    # Must be a retired pointer, not an active route selector
+    if data.get("schema") != RETIRED_SCHEMA:
+        errors.append(f"schema must be {RETIRED_SCHEMA}, got {data.get('schema')}")
 
-    if data.get("default_entry") != "/external-agent-copy-paste-examples/":
-        errors.append("default_entry must be /external-agent-copy-paste-examples/")
+    if data.get("status") != "historical_archive_only":
+        errors.append(f"status must be historical_archive_only, got {data.get('status')}")
 
-    routes = data.get("routes", [])
-    route_names = {item.get("recommended_route") for item in routes}
+    if data.get("not_active_runtime") is not True:
+        errors.append("not_active_runtime must be true")
 
-    for route in CORE_ROUTES:
-        if route not in route_names:
-            errors.append(f"missing core route: {route}")
+    if data.get("not_primary_path") is not True:
+        errors.append("not_primary_path must be true")
 
-    for route in ADVANCED_ROUTES:
-        if route not in route_names:
-            errors.append(f"missing advanced route: {route}")
+    replacement = data.get("replacement", "")
+    if replacement != EXPECTED_REPLACEMENT:
+        errors.append(f"replacement must be {EXPECTED_REPLACEMENT}, got {replacement}")
 
-    for item in routes:
-        route = item.get("recommended_route")
-        if not item.get("intent"):
-            errors.append(f"{route}: missing intent")
-        if not item.get("copy_paste_doc"):
-            errors.append(f"{route}: missing copy_paste_doc")
-        if not item.get("must_not_claim"):
-            errors.append(f"{route}: missing must_not_claim")
-        if route in CORE_ROUTES and item.get("live_smoke") != "scripts/smoke_live_external_agent_three_core_preflight.py":
-            errors.append(f"{route}: core route must reference core live smoke")
-        if route in ADVANCED_ROUTES and "advanced_route_smoke_required" not in item.get("live_smoke", ""):
-            errors.append(f"{route}: advanced route must not pretend to be core live-smoked")
+    # Verify the replacement target exists
+    replacement_path = ROOT / replacement.lstrip("/")
+    if not replacement_path.exists():
+        errors.append(f"replacement target does not exist: {replacement}")
 
-    text = json.dumps(data, ensure_ascii=False)
-    for phrase in ["E1_recognition_echo", "V0", "active Guardian status", "guardian_presence_proof"]:
-        if phrase not in text:
-            errors.append(f"route selector missing phrase: {phrase}")
+    # Verify boundary fields exist
+    boundary = data.get("boundary", {})
+    if not boundary.get("not_authority"):
+        errors.append("boundary.not_authority must be true")
+    if not boundary.get("bitcoin_originals_prevail"):
+        errors.append("boundary.bitcoin_originals_prevail must be true")
 
-    expected = digest(data)
-    if data.get("source_digest") != expected:
-        errors.append(f"source_digest mismatch: expected {expected}, got {data.get('source_digest')}")
+    # Must NOT contain active route-selector fields
+    active_fields = ["routes", "default_entry", "forbidden_invented_values",
+                     "homepage_is_discovery_only", "do_not_infer_payload_fields_from_homepage"]
+    for field in active_fields:
+        if field in data:
+            errors.append(f"retired pointer must not contain active field: {field}")
 
     if errors:
         print("FAIL: route selector contract errors:")
         for error in errors:
-            print("  -", error)
+            print(f"  - {error}")
         return 1
 
-    print("PASS: route selector contract is valid")
+    print("PASS: route selector is correctly retired to record-chain-first replacement")
     return 0
 
 
