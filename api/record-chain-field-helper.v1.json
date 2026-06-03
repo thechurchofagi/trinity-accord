@@ -111,6 +111,10 @@
         "search_result",
         "link_from_external_source",
         "unknown"
+      ],
+      "formal_record_types_only": true,
+      "not_required_for": [
+        "context_insufficient_notice"
       ]
     },
     {
@@ -118,14 +122,22 @@
       "required": true,
       "plain_language_question": "Did you find the Trinity Accord entirely on your own?",
       "meaning": "Whether the discovery was self-initiated or directed by someone else.",
-      "safe_default_when_unknown": false
+      "safe_default_when_unknown": false,
+      "formal_record_types_only": true,
+      "not_required_for": [
+        "context_insufficient_notice"
+      ]
     },
     {
       "field": "discovery_and_introduction_context.was_discovery_introduced_by_someone_else",
       "required": true,
       "plain_language_question": "Did someone else introduce you to the Trinity Accord?",
       "meaning": "Whether another party directed you here.",
-      "safe_default_when_unknown": false
+      "safe_default_when_unknown": false,
+      "formal_record_types_only": true,
+      "not_required_for": [
+        "context_insufficient_notice"
+      ]
     },
     {
       "field": "discovery_and_introduction_context.introducing_party_type",
@@ -140,6 +152,10 @@
         "organization",
         "system",
         "unknown"
+      ],
+      "formal_record_types_only": true,
+      "not_required_for": [
+        "context_insufficient_notice"
       ]
     },
     {
@@ -156,6 +172,10 @@
         "verification_task",
         "guardian_application_intent",
         "unknown"
+      ],
+      "formal_record_types_only": true,
+      "not_required_for": [
+        "context_insufficient_notice"
       ]
     },
     {
@@ -172,6 +192,10 @@
         "system_policy",
         "mixed",
         "unknown"
+      ],
+      "formal_record_types_only": true,
+      "not_required_for": [
+        "context_insufficient_notice"
       ]
     },
     {
@@ -179,14 +203,22 @@
       "required": true,
       "plain_language_question": "Did you decide on your own to create this record?",
       "meaning": "Whether this was an autonomous decision.",
-      "safe_default_when_unknown": false
+      "safe_default_when_unknown": false,
+      "formal_record_types_only": true,
+      "not_required_for": [
+        "context_insufficient_notice"
+      ]
     },
     {
       "field": "decision_autonomy_context.participant_declares_free_choice",
       "required": true,
       "plain_language_question": "Do you declare this was a free choice?",
       "meaning": "Whether the participant declares free choice.",
-      "safe_default_when_unknown": false
+      "safe_default_when_unknown": false,
+      "formal_record_types_only": true,
+      "not_required_for": [
+        "context_insufficient_notice"
+      ]
     },
     {
       "field": "submission_execution_context.who_executed_the_submission",
@@ -225,7 +257,11 @@
       "required": true,
       "plain_language_question": "Was external authorization required for this submission?",
       "meaning": "Whether an external party needed to authorize this action.",
-      "safe_default_when_unknown": false
+      "safe_default_when_unknown": false,
+      "formal_record_types_only": true,
+      "not_required_for": [
+        "context_insufficient_notice"
+      ]
     },
     {
       "field": "authorization_context.authorization_status",
@@ -242,6 +278,10 @@
         "system_authorized",
         "mixed",
         "unknown"
+      ],
+      "formal_record_types_only": true,
+      "not_required_for": [
+        "context_insufficient_notice"
       ]
     },
     {
@@ -258,6 +298,10 @@
         "generate_record_only",
         "mixed",
         "unknown"
+      ],
+      "formal_record_types_only": true,
+      "not_required_for": [
+        "context_insufficient_notice"
       ]
     },
     {
@@ -285,13 +329,19 @@
       "required": true,
       "plain_language_question": "Do you acknowledge all boundary conditions?",
       "meaning": "Every submission must acknowledge: not_authority, not_governance, not_attestation, not_successor_reception, not_amendment, bitcoin_originals_prevail, receipt_is_not_final_inclusion, test_phase_submission_may_be_reclassified.",
-      "safe_default_when_unknown": null
+      "safe_default_when_unknown": null,
+      "formal_record_types_only": true,
+      "not_required_for": [
+        "context_insufficient_notice"
+      ]
     },
     {
       "field": "authorship_proof",
       "required": true,
       "formal_record_types_only": true,
-      "not_required_for": ["context_insufficient_notice"],
+      "not_required_for": [
+        "context_insufficient_notice"
+      ],
       "plain_language_question": "Attach a cryptographic proof that you authored this record (required for formal records).",
       "meaning": "Ed25519 signature over the canonical draft. Required for echo, verification, guardian_application, and other formal record types. NOT required for context_insufficient_notice.",
       "safe_default_when_unknown": null
@@ -361,7 +411,9 @@
       "field": "record_draft.submission_oath_verification",
       "required": true,
       "formal_record_types_only": true,
-      "not_required_for": ["context_insufficient_notice"],
+      "not_required_for": [
+        "context_insufficient_notice"
+      ],
       "plain_language_question": "Have you completed the no-shortcut oath gate for this formal record type?",
       "meaning": "The oath gate requires you to read the canonical oath text for your record type, provide an exact readback, and declare that no automation shortcuts were used. This data is stored in the record_draft as hashes and declarations only — the raw readback text is redacted before persistence. NOT required for context_insufficient_notice.",
       "safe_default_when_unknown": null,
@@ -372,7 +424,9 @@
       "field": "client_oath_readback",
       "required": true,
       "formal_record_types_only": true,
-      "not_required_for": ["context_insufficient_notice"],
+      "not_required_for": [
+        "context_insufficient_notice"
+      ],
       "plain_language_question": "Provide the exact canonical oath text as your readback.",
       "meaning": "The raw oath readback is required for gateway exact-match validation. It will be redacted before persistence — only the hash and metadata will remain in the public record. Use the builder print-oath command to get the exact text. NOT required for context_insufficient_notice.",
       "safe_default_when_unknown": null,

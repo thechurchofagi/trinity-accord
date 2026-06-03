@@ -284,6 +284,17 @@ def main() -> int:
         fail(f"Phase 6B hotfix tests failed: {result.stderr}\n{result.stdout}")
     ok("Phase 6B hotfix tests")
 
+    # Phase 6B Contract Hotfix I tests
+    result = subprocess.run(
+        [sys.executable, "scripts/test_phase_6b_hotfix_contract.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"Phase 6B Contract Hotfix I tests failed: {result.stderr}\n{result.stdout}")
+    ok("Phase 6B Contract Hotfix I tests")
+
     print("\n=== ALL CURRENT SYSTEM TESTS PASSED ===")
     return 0
 

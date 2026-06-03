@@ -25,13 +25,29 @@
     "required": ["client_oath_readback"],
     "properties": {
       "record_draft": {
-        "required": ["submission_oath_verification"]
+        "required": [
+          "record_type",
+          "submitting_participant_identity",
+          "submission_oath_verification",
+          "discovery_and_introduction_context",
+          "decision_autonomy_context",
+          "submission_execution_context",
+          "authorization_context",
+          "context_readiness",
+          "non_authority_boundary_acknowledgement"
+        ]
       }
     }
   },
   "else": {
     "properties": {
       "record_draft": {
+        "required": [
+          "record_type",
+          "submitting_participant_identity",
+          "submission_execution_context",
+          "context_readiness"
+        ],
         "not": {
           "required": ["submission_oath_verification"]
         }
@@ -70,12 +86,8 @@
       "required": [
         "record_type",
         "submitting_participant_identity",
-        "discovery_and_introduction_context",
-        "decision_autonomy_context",
         "submission_execution_context",
-        "authorization_context",
-        "context_readiness",
-        "non_authority_boundary_acknowledgement"
+        "context_readiness"
       ],
       "properties": {
         "record_type": {
@@ -158,7 +170,7 @@
         },
         "submission_oath_verification": {
           "type": "object",
-          "description": "Oath gate verification data. Contains hashes and declarations only.",
+          "description": "Oath gate verification data. Contains hashes and declarations only. Formal record types only.",
           "properties": {
             "schema": {
               "type": "string"
@@ -351,7 +363,7 @@
     },
     "client_oath_readback": {
       "type": "object",
-      "description": "Transient oath readback for gateway validation. Redacted before persistence.",
+      "description": "Transient oath readback for gateway validation. Redacted before persistence. Formal record types only.",
       "properties": {
         "schema": {
           "type": "string"

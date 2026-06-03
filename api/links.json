@@ -101,7 +101,6 @@
     "/api/external-witness-index.json",
     "/api/live-canary-policy.v1.json",
     "/api/formal-builder-bundles.v1.json",
-    "/api/external-agent-operation-examples.v1.json",
     "/api/mission-governance.v1.json",
     "/api/closure-report.v30.json",
     "/api/record-chain-server-receipt.v1.json",
@@ -117,7 +116,8 @@
     "/api/gateway-workflows.v1.json",
     "/api/route-selector.v1.json",
     "/api/gateway-runtime-contract.v1.json",
-    "/api/gateway-error-diagnostics.v1.json"
+    "/api/gateway-error-diagnostics.v1.json",
+    "/api/external-agent-operation-examples.v1.json"
   ],
   "deprecated_for_new_records": [
     "/api/echo-record-schema.v2.json",
@@ -129,7 +129,8 @@
     "/api/gateway-workflows.v1.json",
     "/api/route-selector.v1.json",
     "/api/gateway-runtime-contract.v1.json",
-    "/api/gateway-error-diagnostics.v1.json"
+    "/api/gateway-error-diagnostics.v1.json",
+    "/api/external-agent-operation-examples.v1.json"
   ],
   "version": "v1",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",

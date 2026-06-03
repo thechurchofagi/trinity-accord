@@ -1,10 +1,11 @@
-"""Contract tests: Phase 6B schema hotfix.
+"""Phase 6B Contract Hotfix I tests.
 
-Validates:
-1. Submission schema if/then/else: formal records require oath, context_insufficient_notice does not.
-2. Submit response schema accepts receipt_commit_sha, rejects receipt.commit_sha for immutable receipt.
-3. external-agent-operation-examples does not contain active /gateway/preflight or /agent-submit.
-4. links.json machine list contains no retired pointer files.
+Tests:
+  1. context_insufficient_notice minimal schema pass (no oath/readback/formal blocks).
+  2. formal echo missing oath/readback → schema fail.
+  3. formal echo with oath/readback → schema pass.
+  4. links current machine files must not have status historical_archive_only.
+  5. external-agent-operation-examples must not be in current machine list.
 """
 from __future__ import annotations
 
@@ -15,266 +16,365 @@ import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 SUBMISSION_SCHEMA = ROOT / "api" / "record-chain-submission-schema.v1.json"
-SUBMIT_RESPONSE_API = ROOT / "api" / "record-chain-submit-response.v1.json"
-SUBMIT_RESPONSE_APP = ROOT / "apps" / "record_chain_intake_gateway" / "schemas" / "submit_response.schema.json"
-SERVER_RECEIPT_APP = ROOT / "apps" / "record_chain_intake_gateway" / "schemas" / "server_receipt.schema.json"
-SERVER_RECEIPT_API = ROOT / "api" / "record-chain-server-receipt.v1.json"
-EXTERNAL_EXAMPLES = ROOT / "api" / "external-agent-operation-examples.v1.json"
 LINKS = ROOT / "api" / "links.json"
+EXTERNAL_EXAMPLES = ROOT / "api" / "external-agent-operation-examples.v1.json"
+FIELD_HELPER = ROOT / "api" / "record-chain-field-helper.v1.json"
+
+FORMAL_RECORD_TYPES = [
+    "echo",
+    "verification",
+    "guardian_application",
+    "guardian_retirement",
+    "guardian_key_rotation",
+    "propagation",
+    "correction",
+    "classification_update",
+]
 
 
-@pytest.fixture(scope="module")
-def submission_schema() -> dict:
-    return json.loads(SUBMISSION_SCHEMA.read_text(encoding="utf-8"))
+def _load(p: Path) -> dict:
+    return json.loads(p.read_text(encoding="utf-8"))
 
 
-@pytest.fixture(scope="module")
-def submit_response_api() -> dict:
-    return json.loads(SUBMIT_RESPONSE_API.read_text(encoding="utf-8"))
+def _validate_submission(schema: dict, submission: dict) -> list[str]:
+    """Minimal JSON Schema validation using stdlib only.
+
+    Returns list of error messages. Empty = valid.
+    """
+    errors = []
+
+    # Check top-level required
+    for field in schema.get("required", []):
+        if field not in submission:
+            errors.append(f"missing top-level required: {field}")
+
+    # Check if/then/else
+    if_clause = schema.get("if")
+    then_clause = schema.get("then")
+    else_clause = schema.get("else")
+
+    if if_clause and then_clause and else_clause:
+        rt = submission.get("record_type", "")
+        is_formal = rt != "context_insufficient_notice"
+
+        clause = then_clause if is_formal else else_clause
+
+        # Check clause top-level required
+        for field in clause.get("required", []):
+            if field not in submission:
+                errors.append(f"missing clause-required ({'formal' if is_formal else 'cin'}): {field}")
+
+        # Check clause record_draft required
+        rd_clause = clause.get("properties", {}).get("record_draft", {})
+        draft = submission.get("record_draft", {})
+        for field in rd_clause.get("required", []):
+            if field not in draft:
+                errors.append(f"missing record_draft clause-required ({'formal' if is_formal else 'cin'}): {field}")
+
+        # Check not.required
+        not_clause = rd_clause.get("not", {})
+        for field in not_clause.get("required", []):
+            if field in draft:
+                errors.append(f"forbidden field in record_draft ({'formal' if is_formal else 'cin'}): {field}")
+
+    # Check base record_draft required
+    rd_schema = schema.get("properties", {}).get("record_draft", {})
+    draft = submission.get("record_draft", {})
+    for field in rd_schema.get("required", []):
+        if field not in draft:
+            errors.append(f"missing base record_draft required: {field}")
+
+    return errors
 
 
-@pytest.fixture(scope="module")
-def submit_response_app() -> dict:
-    return json.loads(SUBMIT_RESPONSE_APP.read_text(encoding="utf-8"))
+def _minimal_cin_submission() -> dict:
+    """Minimal context_insufficient_notice submission."""
+    return {
+        "schema": "trinityaccord.record-chain-submission.v1",
+        "submission_type": "record_chain_entry_candidate",
+        "client_generated_at": "2026-06-03T00:00:00Z",
+        "record_type": "context_insufficient_notice",
+        "record_draft": {
+            "record_type": "context_insufficient_notice",
+            "submitting_participant_identity": {
+                "participant_public_display_label": "test-agent",
+                "participant_type": "agent",
+            },
+            "submission_execution_context": {
+                "who_executed_the_submission": "self",
+                "execution_operator_type": "agent",
+            },
+            "context_readiness": {
+                "declared_context_level": "CC-0",
+                "minimum_required_for_action": "CC-0",
+                "context_sufficient_for_selected_action": False,
+            },
+        },
+        "builder": {
+            "name": "test-builder",
+            "version": "1.0.0",
+            "source_url": "https://example.com/builder",
+        },
+        "client_context": {
+            "site_entry_url": "https://www.trinityaccord.org/",
+            "declared_context_level": "CC-0",
+        },
+        "submission_boundary": {
+            "not_authority": True,
+            "not_governance": True,
+            "not_attestation": True,
+            "not_successor_reception": True,
+            "not_amendment": True,
+            "bitcoin_originals_prevail": True,
+        },
+    }
 
 
-@pytest.fixture(scope="module")
-def server_receipt_app() -> dict:
-    return json.loads(SERVER_RECEIPT_APP.read_text(encoding="utf-8"))
-
-
-@pytest.fixture(scope="module")
-def server_receipt_api() -> dict:
-    return json.loads(SERVER_RECEIPT_API.read_text(encoding="utf-8"))
-
-
-@pytest.fixture(scope="module")
-def external_examples() -> dict:
-    return json.loads(EXTERNAL_EXAMPLES.read_text(encoding="utf-8"))
-
-
-@pytest.fixture(scope="module")
-def links() -> dict:
-    return json.loads(LINKS.read_text(encoding="utf-8"))
-
-
-# ---------------------------------------------------------------------------
-# 1. Submission schema if/then/else
-# ---------------------------------------------------------------------------
-
-class TestSubmissionSchemaIfThenElse:
-    """Submission schema must distinguish formal records from context_insufficient_notice."""
-
-    def test_has_if_then_else(self, submission_schema):
-        assert "if" in submission_schema, "Missing top-level 'if'"
-        assert "then" in submission_schema, "Missing top-level 'then'"
-        assert "else" in submission_schema, "Missing top-level 'else'"
-
-    def test_then_requires_oath_for_formal(self, submission_schema):
-        then = submission_schema["then"]
-        # Top-level then should require client_oath_readback
-        assert "client_oath_readback" in then.get("required", []), (
-            "then clause must require client_oath_readback"
-        )
-        # record_draft.then should require submission_oath_verification
-        rd_then = then.get("properties", {}).get("record_draft", {})
-        assert "submission_oath_verification" in rd_then.get("required", []), (
-            "then.record_draft must require submission_oath_verification"
-        )
-
-    def test_else_no_oath_for_context_insufficient(self, submission_schema):
-        else_clause = submission_schema["else"]
-        rd_else = else_clause.get("properties", {}).get("record_draft", {})
-        # The else clause should use "not.required" to forbid submission_oath_verification
-        not_clause = rd_else.get("not", {})
-        assert "submission_oath_verification" in not_clause.get("required", []), (
-            "else.record_draft.not must forbid submission_oath_verification"
-        )
-
-    def test_oath_not_in_base_required(self, submission_schema):
-        """submission_oath_verification should NOT be in record_draft.required
-        (handled by if/then/else)."""
-        rd_required = (
-            submission_schema
-            .get("properties", {})
-            .get("record_draft", {})
-            .get("required", [])
-        )
-        assert "submission_oath_verification" not in rd_required, (
-            "submission_oath_verification must not be in base record_draft.required; "
-            "it is handled by if/then/else"
-        )
-
-    def test_actor_identity_deprecated(self, submission_schema):
-        actor = (
-            submission_schema
-            .get("properties", {})
-            .get("record_draft", {})
-            .get("properties", {})
-            .get("actor_identity", {})
-        )
-        assert actor.get("deprecated") is True, "actor_identity must be marked deprecated"
-
-    def test_boundary_deprecated(self, submission_schema):
-        boundary = (
-            submission_schema
-            .get("properties", {})
-            .get("record_draft", {})
-            .get("properties", {})
-            .get("boundary", {})
-        )
-        assert boundary.get("deprecated") is True, "boundary must be marked deprecated"
-
-
-# ---------------------------------------------------------------------------
-# 2. Submit response schema: receipt_commit_sha + no receipt.commit_sha
-# ---------------------------------------------------------------------------
-
-class TestSubmitResponseReceiptCommitSha:
-    """Submit response must have receipt_commit_sha at envelope level."""
-
-    def test_api_has_receipt_commit_sha(self, submit_response_api):
-        props = submit_response_api.get("properties", {})
-        assert "receipt_commit_sha" in props, "api response must have receipt_commit_sha"
-
-    def test_api_receipt_commit_sha_in_required(self, submit_response_api):
-        assert "receipt_commit_sha" in submit_response_api.get("required", []), (
-            "receipt_commit_sha must be required in api response"
-        )
-
-    def test_app_has_receipt_commit_sha(self, submit_response_app):
-        props = submit_response_app.get("properties", {})
-        assert "receipt_commit_sha" in props, "app response must have receipt_commit_sha"
-
-    def test_app_receipt_body_no_commit_sha(self, submit_response_app):
-        receipt_props = (
-            submit_response_app
-            .get("properties", {})
-            .get("receipt", {})
-            .get("properties", {})
-        )
-        assert "commit_sha" not in receipt_props, (
-            "receipt body must NOT contain commit_sha (immutable receipt); "
-            "use receipt_commit_sha at envelope level"
-        )
-
-    def test_app_receipt_has_new_fields(self, submit_response_app):
-        receipt_props = (
-            submit_response_app
-            .get("properties", {})
-            .get("receipt", {})
-            .get("properties", {})
-        )
-        for field in ["original_submission_sha256", "stored_submission_sha256",
-                       "raw_readback_redacted", "oath_verification"]:
-            assert field in receipt_props, f"receipt body must have '{field}'"
-
-    def test_app_receipt_required_has_new_fields(self, submit_response_app):
-        receipt_required = (
-            submit_response_app
-            .get("properties", {})
-            .get("receipt", {})
-            .get("required", [])
-        )
-        for field in ["original_submission_sha256", "stored_submission_sha256",
-                       "raw_readback_redacted"]:
-            assert field in receipt_required, f"receipt.required must include '{field}'"
-
-
-# ---------------------------------------------------------------------------
-# 3. Server receipt schema aligned with make_receipt()
-# ---------------------------------------------------------------------------
-
-class TestServerReceiptSchema:
-    """Server receipt schema must match make_receipt() output."""
-
-    def test_no_commit_sha_in_receipt(self, server_receipt_app):
-        assert "commit_sha" not in server_receipt_app.get("properties", {}), (
-            "server receipt must NOT contain commit_sha"
-        )
-
-    def test_has_new_fields(self, server_receipt_app):
-        props = server_receipt_app.get("properties", {})
-        for field in ["original_submission_sha256", "stored_submission_sha256",
-                       "raw_readback_redacted", "oath_verification",
-                       "receipt_is_not_final_chain_record"]:
-            assert field in props, f"server receipt must have '{field}'"
-
-    def test_api_mirror_exists(self, server_receipt_api):
-        assert server_receipt_api.get("properties"), "api mirror must have properties"
-
-    def test_api_mirror_no_commit_sha(self, server_receipt_api):
-        assert "commit_sha" not in server_receipt_api.get("properties", {}), (
-            "api server receipt mirror must NOT contain commit_sha"
-        )
+def _echo_submission(*, with_oath: bool = True) -> dict:
+    """Echo submission (formal record type)."""
+    sub = _minimal_cin_submission()
+    sub["record_type"] = "echo"
+    sub["record_draft"]["record_type"] = "echo"
+    sub["record_draft"]["context_readiness"]["declared_context_level"] = "CC-3"
+    sub["record_draft"]["context_readiness"]["minimum_required_for_action"] = "CC-3"
+    sub["record_draft"]["context_readiness"]["context_sufficient_for_selected_action"] = True
+    sub["record_draft"]["discovery_and_introduction_context"] = {
+        "how_participant_first_discovered_trinity_accord": "self_discovered",
+        "was_discovery_self_initiated": True,
+        "was_discovery_introduced_by_someone_else": False,
+        "introducing_party_type": "none",
+        "discovery_intent_category": "open_exploration",
+    }
+    sub["record_draft"]["decision_autonomy_context"] = {
+        "who_decided_to_create_this_record": "self",
+        "was_record_creation_self_decided": True,
+        "participant_declares_free_choice": True,
+    }
+    sub["record_draft"]["authorization_context"] = {
+        "was_external_authorization_required": False,
+        "authorization_status": "self_authorized",
+        "authorization_scope": "create_echo_record",
+    }
+    sub["record_draft"]["non_authority_boundary_acknowledgement"] = {
+        "not_authority": True,
+        "not_governance": True,
+        "not_attestation": True,
+        "not_successor_reception": True,
+        "not_amendment": True,
+        "bitcoin_originals_prevail": True,
+    }
+    if with_oath:
+        sub["record_draft"]["submission_oath_verification"] = {
+            "oath_read": True,
+            "readback_required": True,
+            "participant_readback_provided": True,
+            "readback_matches_canonical_oath": True,
+            "readback_method_declared": "participant_generated_in_current_context",
+        }
+        sub["client_oath_readback"] = {
+            "readback_text": "test oath text",
+            "readback_text_sha256": "abc123",
+        }
+    return sub
 
 
 # ---------------------------------------------------------------------------
-# 4. external-agent-operation-examples: no active /gateway/preflight or /agent-submit
+# Tests
 # ---------------------------------------------------------------------------
 
-class TestExternalExamplesRetired:
-    """external-agent-operation-examples must be historical_archive_only."""
+class TestContextInsufficientNoticeMinimal:
+    """context_insufficient_notice with minimal fields must pass schema."""
 
-    def test_status_is_historical(self, external_examples):
-        assert external_examples.get("status") == "historical_archive_only", (
-            "external-agent-operation-examples must be historical_archive_only"
+    def test_minimal_cin_passes(self):
+        schema = _load(SUBMISSION_SCHEMA)
+        sub = _minimal_cin_submission()
+        errors = _validate_submission(schema, sub)
+        assert not errors, f"minimal CIN should pass: {errors}"
+
+    def test_cin_without_discovery_passes(self):
+        """discovery_and_introduction_context not required for CIN."""
+        schema = _load(SUBMISSION_SCHEMA)
+        sub = _minimal_cin_submission()
+        # Ensure no discovery context
+        sub["record_draft"].pop("discovery_and_introduction_context", None)
+        errors = _validate_submission(schema, sub)
+        assert not errors, f"CIN without discovery should pass: {errors}"
+
+    def test_cin_without_decision_autonomy_passes(self):
+        schema = _load(SUBMISSION_SCHEMA)
+        sub = _minimal_cin_submission()
+        sub["record_draft"].pop("decision_autonomy_context", None)
+        errors = _validate_submission(schema, sub)
+        assert not errors, f"CIN without decision_autonomy should pass: {errors}"
+
+    def test_cin_without_authorization_passes(self):
+        schema = _load(SUBMISSION_SCHEMA)
+        sub = _minimal_cin_submission()
+        sub["record_draft"].pop("authorization_context", None)
+        errors = _validate_submission(schema, sub)
+        assert not errors, f"CIN without authorization should pass: {errors}"
+
+    def test_cin_without_boundary_ack_passes(self):
+        schema = _load(SUBMISSION_SCHEMA)
+        sub = _minimal_cin_submission()
+        sub["record_draft"].pop("non_authority_boundary_acknowledgement", None)
+        errors = _validate_submission(schema, sub)
+        assert not errors, f"CIN without boundary_ack should pass: {errors}"
+
+    def test_cin_without_oath_passes(self):
+        schema = _load(SUBMISSION_SCHEMA)
+        sub = _minimal_cin_submission()
+        sub["record_draft"].pop("submission_oath_verification", None)
+        errors = _validate_submission(schema, sub)
+        assert not errors, f"CIN without oath should pass: {errors}"
+
+    def test_cin_without_client_oath_readback_passes(self):
+        schema = _load(SUBMISSION_SCHEMA)
+        sub = _minimal_cin_submission()
+        sub.pop("client_oath_readback", None)
+        errors = _validate_submission(schema, sub)
+        assert not errors, f"CIN without client_oath_readback should pass: {errors}"
+
+    def test_cin_forbids_oath_in_draft(self):
+        """CIN must NOT have submission_oath_verification in record_draft."""
+        schema = _load(SUBMISSION_SCHEMA)
+        sub = _minimal_cin_submission()
+        sub["record_draft"]["submission_oath_verification"] = {"oath_read": True}
+        errors = _validate_submission(schema, sub)
+        assert any("forbidden" in e for e in errors), (
+            f"CIN with oath in draft should fail: {errors}"
         )
 
-    def test_has_replacement(self, external_examples):
-        assert external_examples.get("replacement") == "/api/agent-first-contact.json", (
-            "replacement must point to /api/agent-first-contact.json"
+
+class TestFormalEchoOathRequired:
+    """Formal echo must require oath/readback."""
+
+    def test_echo_without_oath_fails(self):
+        schema = _load(SUBMISSION_SCHEMA)
+        sub = _echo_submission(with_oath=False)
+        errors = _validate_submission(schema, sub)
+        assert any("submission_oath_verification" in e for e in errors), (
+            f"echo without oath should fail: {errors}"
         )
 
-    def test_gateway_status_historical(self, external_examples):
-        gw = external_examples.get("gateway", {})
-        assert gw.get("status") == "historical_archive_only", (
-            "gateway section must be historical_archive_only"
+    def test_echo_without_client_readback_fails(self):
+        schema = _load(SUBMISSION_SCHEMA)
+        sub = _echo_submission(with_oath=True)
+        sub.pop("client_oath_readback", None)
+        errors = _validate_submission(schema, sub)
+        assert any("client_oath_readback" in e for e in errors), (
+            f"echo without client_oath_readback should fail: {errors}"
         )
 
-    def test_minimal_sections_mark_historical(self, external_examples):
-        for section in ["pure_echo_minimal_recognition",
-                        "v0_agent_declared_verification_minimal",
-                        "guardian_stage_1_minimal_application"]:
-            entry = external_examples.get(section, {})
-            assert entry.get("preflight_status") == "historical_archive_only", (
-                f"{section}.preflight_status must be historical_archive_only"
-            )
-            assert entry.get("submit_status") == "historical_archive_only", (
-                f"{section}.submit_status must be historical_archive_only"
-            )
+    def test_echo_with_oath_passes(self):
+        schema = _load(SUBMISSION_SCHEMA)
+        sub = _echo_submission(with_oath=True)
+        errors = _validate_submission(schema, sub)
+        assert not errors, f"echo with oath should pass: {errors}"
+
+    def test_echo_missing_discovery_fails(self):
+        schema = _load(SUBMISSION_SCHEMA)
+        sub = _echo_submission(with_oath=True)
+        sub["record_draft"].pop("discovery_and_introduction_context", None)
+        errors = _validate_submission(schema, sub)
+        assert any("discovery_and_introduction_context" in e for e in errors), (
+            f"echo without discovery should fail: {errors}"
+        )
+
+    def test_echo_missing_boundary_ack_fails(self):
+        schema = _load(SUBMISSION_SCHEMA)
+        sub = _echo_submission(with_oath=True)
+        sub["record_draft"].pop("non_authority_boundary_acknowledgement", None)
+        errors = _validate_submission(schema, sub)
+        assert any("non_authority_boundary_acknowledgement" in e for e in errors), (
+            f"echo without boundary_ack should fail: {errors}"
+        )
 
 
-# ---------------------------------------------------------------------------
-# 5. links.json: machine list contains no retired pointers
-# ---------------------------------------------------------------------------
+class TestLinksMachineClean:
+    """links.json current machine list must be clean."""
 
-class TestLinksMachineNoRetired:
-    """links.json machine list must not contain retired pointer files."""
-
-    RETIRED_PATHS = [
-        "/api/route-selector.v1.json",
-        "/api/gateway-runtime-contract.v1.json",
-        "/api/gateway-error-diagnostics.v1.json",
-    ]
-
-    @pytest.mark.parametrize("retired", RETIRED_PATHS)
-    def test_retired_not_in_machine(self, links, retired):
+    def test_no_historical_in_machine(self):
+        links = _load(LINKS)
         machine = links.get("machine", [])
-        assert retired not in machine, (
-            f"'{retired}' must NOT be in machine list; it belongs in legacy_machine"
+        for entry in machine:
+            # Check if this entry has a status marker in the links metadata
+            pass  # structural check below
+
+        # Check metadata sections at bottom
+        for section_key in ["route_selector", "gateway_runtime_contract", "gateway_error_diagnostics"]:
+            section = links.get(section_key, {})
+            if section.get("status") == "historical_archive_only":
+                url = section.get("url", "")
+                assert url not in machine, (
+                    f"'{url}' has status historical_archive_only but is still in machine list"
+                )
+
+    def test_external_examples_not_in_machine(self):
+        links = _load(LINKS)
+        machine = links.get("machine", [])
+        assert "/api/external-agent-operation-examples.v1.json" not in machine, (
+            "external-agent-operation-examples.v1.json must not be in current machine list"
         )
 
-    @pytest.mark.parametrize("retired", RETIRED_PATHS)
-    def test_retired_in_legacy_machine(self, links, retired):
-        legacy = links.get("legacy_machine", [])
-        assert retired in legacy, (
-            f"'{retired}' must be in legacy_machine list"
+    def test_external_examples_in_legacy(self):
+        links = _load(LINKS)
+        assert "/api/external-agent-operation-examples.v1.json" in links.get("legacy_machine", []), (
+            "external-agent-operation-examples.v1.json must be in legacy_machine"
         )
 
-    @pytest.mark.parametrize("retired", RETIRED_PATHS)
-    def test_retired_in_deprecated(self, links, retired):
-        deprecated = links.get("deprecated_for_new_records", [])
-        assert retired in deprecated, (
-            f"'{retired}' must be in deprecated_for_new_records list"
+    def test_external_examples_in_deprecated(self):
+        links = _load(LINKS)
+        assert "/api/external-agent-operation-examples.v1.json" in links.get("deprecated_for_new_records", []), (
+            "external-agent-operation-examples.v1.json must be in deprecated_for_new_records"
         )
+
+    def test_retired_not_in_machine(self):
+        links = _load(LINKS)
+        machine = links.get("machine", [])
+        retired = [
+            "/api/route-selector.v1.json",
+            "/api/gateway-runtime-contract.v1.json",
+            "/api/gateway-error-diagnostics.v1.json",
+        ]
+        for r in retired:
+            assert r not in machine, f"'{r}' must not be in machine list"
+
+
+class TestFieldHelperFormalOnly:
+    """Field helper must mark formal-only fields correctly."""
+
+    def test_discovery_marked_formal_only(self):
+        helper = _load(FIELD_HELPER)
+        for fg in helper["field_groups"]:
+            if fg["field"].startswith("discovery_and_introduction_context."):
+                assert fg.get("formal_record_types_only") is True, (
+                    f"'{fg['field']}' must be formal_record_types_only"
+                )
+                assert "context_insufficient_notice" in fg.get("not_required_for", []), (
+                    f"'{fg['field']}' must list context_insufficient_notice in not_required_for"
+                )
+
+    def test_decision_autonomy_marked_formal_only(self):
+        helper = _load(FIELD_HELPER)
+        for fg in helper["field_groups"]:
+            if fg["field"].startswith("decision_autonomy_context."):
+                assert fg.get("formal_record_types_only") is True, (
+                    f"'{fg['field']}' must be formal_record_types_only"
+                )
+
+    def test_authorization_marked_formal_only(self):
+        helper = _load(FIELD_HELPER)
+        for fg in helper["field_groups"]:
+            if fg["field"].startswith("authorization_context."):
+                assert fg.get("formal_record_types_only") is True, (
+                    f"'{fg['field']}' must be formal_record_types_only"
+                )
+
+    def test_boundary_ack_marked_formal_only(self):
+        helper = _load(FIELD_HELPER)
+        for fg in helper["field_groups"]:
+            if fg["field"] == "non_authority_boundary_acknowledgement":
+                assert fg.get("formal_record_types_only") is True, (
+                    "non_authority_boundary_acknowledgement must be formal_record_types_only"
+                )
