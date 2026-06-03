@@ -39,6 +39,8 @@ jobs:
           python-version: "3.11"
 
       - name: Build Arweave archive manifest
+        env:
+          ARWEAVE_WALLET_JWK_B64: ${{ secrets.ARWEAVE_WALLET_JWK_B64 }}
         run: python scripts/build_record_chain_arweave_archive.py --mode "${ARWEAVE_UPLOAD_MODE}"
 
       - name: Verify Arweave archive metadata
