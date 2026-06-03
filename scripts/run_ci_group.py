@@ -157,6 +157,11 @@ GROUPS = {
 
         # Phase 6B test registry contract
         ["python3", "scripts/test_phase6b_test_registry_contract.py"],
+
+        # Phase 6C: operator secret names, Arweave live readiness, Render manual deploy
+        ["python3", "scripts/test_operator_secret_names_contract.py"],
+        ["python3", "scripts/test_arweave_live_readiness_contract.py"],
+        ["python3", "scripts/test_render_manual_deploy_contract.py"],
     ],
     "p0-legacy-compat": [
         # --- 旧 Gateway v1 / formal builder / old workflow 测试 ---

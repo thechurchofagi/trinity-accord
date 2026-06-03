@@ -360,6 +360,39 @@ def main() -> int:
         fail(f"Phase 6B test registry contract failed: {result.stderr}\n{result.stdout}")
     ok("Phase 6B test registry contract")
 
+    # Phase 6C: Operator secret names contract
+    result = subprocess.run(
+        [sys.executable, "scripts/test_operator_secret_names_contract.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"Operator secret names contract failed: {result.stderr}\n{result.stdout}")
+    ok("Operator secret names contract")
+
+    # Phase 6C: Arweave live readiness contract
+    result = subprocess.run(
+        [sys.executable, "scripts/test_arweave_live_readiness_contract.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"Arweave live readiness contract failed: {result.stderr}\n{result.stdout}")
+    ok("Arweave live readiness contract")
+
+    # Phase 6C: Render manual deploy contract
+    result = subprocess.run(
+        [sys.executable, "scripts/test_render_manual_deploy_contract.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"Render manual deploy contract failed: {result.stderr}\n{result.stdout}")
+    ok("Render manual deploy contract")
+
     print("\n=== ALL CURRENT SYSTEM TESTS PASSED ===")
     return 0
 

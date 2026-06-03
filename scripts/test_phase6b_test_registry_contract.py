@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Phase 6B test registry contract: verify critical test files exist and are wired into CI.
+"""Phase 6B/6C test registry contract: verify critical test files exist and are wired into CI.
 
-Checks that key Phase 6B test scripts are present and registered in:
+Checks that key test scripts are present and registered in:
   - run_current_system_tests.py (direct)
   - repository-integrity.yml (direct or indirect via run_current_system_tests.py)
   - deploy-pages.yml (direct or indirect via run_current_system_tests.py)
@@ -13,8 +13,9 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
-# Phase 6B critical test files that must exist and be wired into CI
+# Critical test files that must exist and be wired into CI
 REQUIRED_TESTS = [
+    # Phase 6B
     "scripts/test_phase6b_hotfix.py",
     "scripts/test_phase_6b_hotfix_contract.py",
     "scripts/test_render_deploy_boundary_contract.py",
@@ -22,6 +23,10 @@ REQUIRED_TESTS = [
     "scripts/test_public_wording_phase6_contract.py",
     "scripts/test_no_secret_material_committed.py",
     "downloads/test-record-chain-builder.mjs",
+    # Phase 6C
+    "scripts/test_operator_secret_names_contract.py",
+    "scripts/test_arweave_live_readiness_contract.py",
+    "scripts/test_render_manual_deploy_contract.py",
 ]
 
 # CI wiring targets
