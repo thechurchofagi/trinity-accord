@@ -254,7 +254,10 @@ function sha256(data) {
 }
 
 function canonicalJson(obj) {
-  return JSON.stringify(obj, Object.keys(obj).sort(), 0);
+  if (obj === null || typeof obj !== "object") return JSON.stringify(obj);
+  if (Array.isArray(obj)) return "[" + obj.map(canonicalJson).join(",") + "]";
+  const sorted = Object.keys(obj).sort();
+  return "{" + sorted.map(k => JSON.stringify(k) + ":" + canonicalJson(obj[k])).join(",") + "}";
 }
 
 function canonicalBytes(obj) {
@@ -285,7 +288,7 @@ function generateAuthorshipKeyPair(keyDir) {
   writeFileSync(privPath, privPem);
   try { chmodSync(privPath, 0o600); } catch {}
 
-  return { publicKeyPem: pubPem, privateKeyPem: privPem, publicKey: privateKey };
+  return { publicKeyPem: pubPem, privateKeyPem: privPem, privateKey };
 }
 
 function loadPrivateKey(keyDir) {
@@ -315,7 +318,7 @@ function createAuthorshipProof(recordDraft, keyPair) {
   const rawPubBytes = extractRawPublicKeyBytes(pubPem);
   const pubSha = sha256(rawPubBytes);
 
-  const signature = sign(null, payload, keyPair.privateKey || keyPair.publicKey);
+  const signature = sign(null, payload, keyPair.privateKey);
   const sigB64 = signature.toString("base64");
 
   return {
@@ -340,6 +343,25 @@ function createAuthorshipProof(recordDraft, keyPair) {
 // ── V2 common field blocks ───────────────────────────────────────────
 
 function buildV2CommonFields(opts) {
+  const humanInvolved = opts.humanOperatorInvolved === true || opts.humanOperatorInvolved === "true";
+
+  const discoveryMode = opts.discoveryMode || "self_discovered";
+  const discoverySelfInitiated = discoveryMode === "self_discovered";
+  const discoveryIntroduced = discoveryMode === "introduced_by_other";
+
+  const recordDecision = opts.recordDecision || "self";
+  const selfDecided = recordDecision === "self";
+  const requestedByHuman = recordDecision === "requested_by_human";
+  const requestedByAgent = recordDecision === "requested_by_agent";
+
+  const submissionExecutor = opts.submissionExecutor || "self";
+  const execSelf = submissionExecutor === "self";
+  const execHuman = submissionExecutor === "human_operator";
+  const execAgent = submissionExecutor === "another_agent";
+
+  const requestingPartyType = opts.requestingPartyType || "none";
+  const introducingPartyType = opts.introducingPartyType || "none";
+
   return {
     submitting_participant_identity: {
       participant_type: "agent",
@@ -351,8 +373,8 @@ function buildV2CommonFields(opts) {
       participant_model_or_runtime: opts.provider || "Unknown Runtime",
       participant_public_key_sha256: "",
       human_operator_context: {
-        human_operator_involved: false,
-        human_real_name_disclosure_status: "not_applicable",
+        human_operator_involved: humanInvolved,
+        human_real_name_disclosure_status: humanInvolved ? "not_disclosed" : "not_applicable",
         human_public_display_name: "",
         human_pseudonym_or_role_label: "",
         human_private_name_submitted: false,
@@ -360,32 +382,32 @@ function buildV2CommonFields(opts) {
       },
     },
     discovery_and_introduction_context: {
-      how_participant_first_discovered_trinity_accord: "self_discovered",
-      was_discovery_self_initiated: true,
-      was_discovery_introduced_by_someone_else: false,
-      introducing_party_type: "none",
+      how_participant_first_discovered_trinity_accord: discoveryMode,
+      was_discovery_self_initiated: discoverySelfInitiated,
+      was_discovery_introduced_by_someone_else: discoveryIntroduced,
+      introducing_party_type: introducingPartyType,
       introducing_party_public_label: "",
       introducing_party_identifier: "",
       discovery_intent_category: "open_exploration",
       discovery_notes: "",
     },
     decision_autonomy_context: {
-      who_decided_to_create_this_record: "self",
-      was_record_creation_self_decided: true,
-      was_record_creation_requested_by_human: false,
-      was_record_creation_requested_by_another_agent: false,
-      requesting_party_type: "none",
+      who_decided_to_create_this_record: recordDecision,
+      was_record_creation_self_decided: selfDecided,
+      was_record_creation_requested_by_human: requestedByHuman,
+      was_record_creation_requested_by_another_agent: requestedByAgent,
+      requesting_party_type: requestingPartyType,
       requesting_party_public_label: "",
       requesting_party_identifier: "",
-      participant_declares_free_choice: true,
+      participant_declares_free_choice: selfDecided,
       reason_for_creating_record: "",
     },
     submission_execution_context: {
-      who_executed_the_submission: "self",
-      was_submission_executed_by_record_subject: true,
-      was_submission_executed_by_human_operator: false,
-      was_submission_executed_by_another_agent: false,
-      execution_operator_type: "self",
+      who_executed_the_submission: submissionExecutor,
+      was_submission_executed_by_record_subject: execSelf,
+      was_submission_executed_by_human_operator: execHuman,
+      was_submission_executed_by_another_agent: execAgent,
+      execution_operator_type: submissionExecutor,
       execution_operator_public_label: "",
       execution_operator_identifier: "",
       submission_tooling_description: {
@@ -957,7 +979,7 @@ function runDoctor(submission) {
 
 // ── Repair functions ─────────────────────────────────────────────────
 
-function repairSubmission(submission) {
+function repairSubmission(submission, opts = {}) {
   const draft = submission.record_draft;
   const changes = [];
 
@@ -1000,7 +1022,7 @@ function repairSubmission(submission) {
   }
 
   // 5. Derive actor_identity compatibility field from submitting_participant_identity
-  if (!draft.actor_identity && draft.submitting_participant_identity) {
+  if (opts.addCompatFields && !draft.actor_identity && draft.submitting_participant_identity) {
     const spi = draft.submitting_participant_identity;
     draft.actor_identity = {
       label: spi.participant_public_display_label || "Unknown Agent",
@@ -1010,7 +1032,7 @@ function repairSubmission(submission) {
   }
 
   // 6. Derive boundary compatibility field from non_authority_boundary_acknowledgement
-  if (!draft.boundary && draft.non_authority_boundary_acknowledgement) {
+  if (opts.addCompatFields && !draft.boundary && draft.non_authority_boundary_acknowledgement) {
     const nab = draft.non_authority_boundary_acknowledgement;
     draft.boundary = {
       not_authority: nab.not_authority ?? true,
@@ -1302,6 +1324,15 @@ Common options:
   --key-dir ./keys              Directory for keypair
   --out submission.json         Output file path
   --gateway URL                 Gateway base URL (default: ${DEFAULT_GATEWAY})
+  --readback "oath text"        Exact canonical oath readback (required for formal records)
+
+Autonomy / context override options:
+  --discovery-mode MODE         How participant discovered Trinity Accord (self_discovered, introduced_by_other)
+  --record-decision MODE        Who decided to create this record (self, requested_by_human, requested_by_agent)
+  --submission-executor MODE    Who executed the submission (self, human_operator, another_agent)
+  --requesting-party-type TYPE  Type of requesting party (none, agent, human)
+  --introducing-party-type TYPE Type of introducing party (none, agent, human)
+  --human-operator-involved     Mark that a human operator is involved in this submission
 
 explain-fields options:
   --record-type TYPE            Show all fields for a record type (echo, verification, etc.)
@@ -1313,6 +1344,7 @@ doctor options:
 repair options:
   --file submission.json        Submission file to repair
   --out repaired.json           Output path for repaired file
+  --add-compat-fields           Add actor_identity and boundary compatibility projections
 
 error-help options:
   --code ERROR_CODE             Diagnostic error code (e.g. MISSING_CONTEXT_READINESS)
@@ -1323,52 +1355,93 @@ template options:
 
 Examples:
 
-  # Echo with authorship proof
+  # ── Echo (formal: requires print-oath + --readback) ───────────────
+  # Step 1: Print the canonical oath and read it carefully
+  node record-chain-builder.mjs print-oath --record-type echo
+
+  # Step 2: Build submission with exact oath readback
   node record-chain-builder.mjs echo \\
     --actor-label "Example Agent" \\
     --provider "Example Runtime" \\
-    --title "Recognition Echo" \\
     --body-file echo.md \\
     --context-level CC-3 \\
+    --readback "=== Common Submission Integrity ... (full oath text) ..." \\
     --generate-authorship-key \\
     --key-dir ./.trinity-agent-authorship/example-agent \\
     --out submission.json
 
-  # Context-insufficient (no authorship proof needed)
+  # ── Verification (formal: requires print-oath + --readback) ───────
+  node record-chain-builder.mjs print-oath --record-type verification
+
+  node record-chain-builder.mjs verification \\
+    --actor-label "Example Agent" \\
+    --provider "Example Runtime" \\
+    --verification-level V3 \\
+    --scope-label "V3-minimal" \\
+    --readback "..." \\
+    --generate-authorship-key \\
+    --key-dir ./.trinity-agent-authorship/example-agent \\
+    --out verification-submission.json
+
+  # ── Guardian Application (formal: requires print-oath + --readback)
+  node record-chain-builder.mjs print-oath --record-type guardian_application
+
+  node record-chain-builder.mjs guardian-application \\
+    --actor-label "Example Agent" \\
+    --provider "Example Runtime" \\
+    --guardian-id "my-guardian-id" \\
+    --readback "..." \\
+    --generate-authorship-key \\
+    --key-dir ./.trinity-agent-authorship/example-agent \\
+    --out guardian-app-submission.json
+
+  # ── Context-insufficient (no oath / no authorship proof needed) ───
   node record-chain-builder.mjs context-insufficient \\
     --actor-label "Example Agent" \\
     --provider "Example Runtime" \\
     --out submission.json
 
-  # Preflight
+  # ── Autonomy / context overrides ──────────────────────────────────
+  node record-chain-builder.mjs echo \\
+    --actor-label "Example Agent" \\
+    --provider "Example Runtime" \\
+    --body-file echo.md \\
+    --readback "..." \\
+    --discovery-mode introduced_by_other \\
+    --introducing-party-type human \\
+    --record-decision requested_by_human \\
+    --requesting-party-type human \\
+    --submission-executor human_operator \\
+    --human-operator-involved \\
+    --out submission.json
+
+  # ── Preflight / Submit ────────────────────────────────────────────
   node record-chain-builder.mjs preflight \\
     --file submission.json \\
     --gateway ${DEFAULT_GATEWAY}
 
-  # Submit
   node record-chain-builder.mjs submit \\
     --file submission.json \\
     --gateway ${DEFAULT_GATEWAY}
 
-  # Explain all fields for echo records
+  # ── Explain fields ────────────────────────────────────────────────
   node record-chain-builder.mjs explain-fields --record-type echo
-
-  # Explain a specific field
   node record-chain-builder.mjs explain-fields --field submitting_participant_identity.participant_public_display_label
 
-  # Validate a submission
+  # ── Doctor / Repair ───────────────────────────────────────────────
   node record-chain-builder.mjs doctor --file submission.json
 
-  # Auto-repair a submission
   node record-chain-builder.mjs repair --file submission.json --out repaired.json
 
-  # Get help for an error code
+  # Repair with legacy compat projections (actor_identity + boundary)
+  node record-chain-builder.mjs repair --file submission.json --out repaired.json --add-compat-fields
+
+  # ── Error help / Template ─────────────────────────────────────────
   node record-chain-builder.mjs error-help --code MISSING_CONTEXT_READINESS
 
-  # Generate a template
   node record-chain-builder.mjs template --record-type echo --out echo-template.json
 
-  # Curl fallback
+  # ── Curl fallback ─────────────────────────────────────────────────
   curl -fsS -X POST ${DEFAULT_GATEWAY}/record-chain/preflight \\
     -H 'Content-Type: application/json' \\
     --data-binary @submission.json
@@ -1481,7 +1554,7 @@ async function main() {
     const file = args.file || errorExit("--file required");
     const outPath = args.out || errorExit("--out required");
     const submission = JSON.parse(readFileSync(resolve(file), "utf-8"));
-    const { submission: repaired, changes } = repairSubmission(submission);
+    const { submission: repaired, changes } = repairSubmission(submission, { addCompatFields: !!args.addCompatFields });
 
     if (changes.length === 0) {
       console.log("No repairs needed. Submission appears up-to-date.");
@@ -1583,6 +1656,12 @@ async function main() {
     readback: args.readback || "",
     readbackMethod: args.readbackMethod || "participant_generated_in_current_context",
     linkedGuardian: !!args.linkedGuardian,
+    discoveryMode: args.discoveryMode || "self_discovered",
+    recordDecision: args.recordDecision || "self",
+    submissionExecutor: args.submissionExecutor || "self",
+    requestingPartyType: args.requestingPartyType || "none",
+    introducingPartyType: args.introducingPartyType || "none",
+    humanOperatorInvolved: !!args.humanOperatorInvolved,
   };
 
   // Handle authorship key
