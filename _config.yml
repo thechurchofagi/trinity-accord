@@ -7,7 +7,6 @@ include:
   - citation.cff
   - builder-bundles
   - "builder-bundles/*.py"
-  - "downloads/record-chain-builder.mjs"
 
 # Exclude archival, dev, and generated directories from build
 exclude:

@@ -111,7 +111,7 @@ jobs:
           test -f _site/api/record-chain-submission-schema.v1.json
           test -f _site/api/record-chain-field-helper.v1.json
           test -f _site/api/record-chain-oath-policy.v1.json
-          test -f _site/downloads/record-chain-builder.mjs
+          test -f _site/builder-bundles/record-chain-builder.mjs
 
           grep -q '"/api/agent-first-contact.json"' _site/api/links.json
           grep -q '"agent_first_contact"' _site/.well-known/trinity-accord.json
