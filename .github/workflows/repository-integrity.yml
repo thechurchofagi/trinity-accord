@@ -48,3 +48,6 @@ jobs:
 
       - name: Check no private keys or tokens (focused PEM)
         run: python3 scripts/test_no_private_key_material_committed.py
+
+      - name: Run P0 main fast gate
+        run: python3 scripts/run_ci_group.py p0-main

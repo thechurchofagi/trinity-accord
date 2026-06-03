@@ -9,6 +9,7 @@ FAIL = []
 PATTERNS = [
     r"ghp_[A-Za-z0-9_]{20,}",
     r"github_pat_[A-Za-z0-9_]+",
+    r"rnd_[A-Za-z0-9_]{16,}",
     r"-----BEGIN [A-Z ]*PRIVATE KEY-----",
     r"OPENAI_API_KEY\s*=",
     r"INSTALLATION_TOKEN\s*=",
