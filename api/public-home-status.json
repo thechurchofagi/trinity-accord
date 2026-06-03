@@ -6,7 +6,10 @@
     "/api/record-chain-anchor-status.json",
     "/api/record-chain-arweave-index.json",
     "/record-chain/chain-tip.json",
-    "/record-chain/records/"
+    "/record-chain/records/",
+    "/api/echo-index.json",
+    "/api/guardian-registry.json",
+    "/api/agent-declared-verification-index.json"
   ],
   "source_digest": "95a3ce5ee310fffb",
   "current_record_chain_status": {
