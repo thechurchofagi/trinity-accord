@@ -295,6 +295,17 @@ def main() -> int:
         fail(f"Phase 6B Contract Hotfix I tests failed: {result.stderr}\n{result.stdout}")
     ok("Phase 6B Contract Hotfix I tests")
 
+    # Phase 6B: Render deploy boundary contract test
+    result = subprocess.run(
+        [sys.executable, "scripts/test_render_deploy_boundary_contract.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"Render deploy boundary contract test failed: {result.stderr}\n{result.stdout}")
+    ok("Render deploy boundary contract test")
+
     print("\n=== ALL CURRENT SYSTEM TESTS PASSED ===")
     return 0
 

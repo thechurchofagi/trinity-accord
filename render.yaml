@@ -15,11 +15,15 @@ services:
       - key: PYTHON_VERSION
         value: "3.12"
 
+  # Gateway deploy is manual or explicitly triggered only.
+  # Record-chain data commits, OTS commits, sitemap commits, and homepage
+  # status commits must not redeploy the Gateway runtime.
   - type: web_service
     name: trinity-record-chain-gateway
     runtime: python
     region: oregon
     plan: starter
+    autoDeploy: false
     buildCommand: pip install -r apps/record_chain_intake_gateway/requirements.txt
     startCommand: uvicorn apps.record_chain_intake_gateway.app:app --host 0.0.0.0 --port $PORT
     healthCheckPath: /healthz
