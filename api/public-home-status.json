@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.public-home-status.v2",
-  "generated_at": "2026-06-03T05:20:21.332058+00:00",
+  "generated_at": "2026-06-03T05:20:36.058321+00:00",
   "generated_from": [
     "/api/record-chain-status.json",
     "/api/record-chain-anchor-status.json",
