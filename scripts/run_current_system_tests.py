@@ -262,6 +262,17 @@ def main() -> int:
         fail(f"builder bundle contract test failed: {result.stderr}\n{result.stdout}")
     ok("builder bundle contract test")
 
+    # Builder deep tests (canonicalJson, authorship proof, autonomy flags, etc.)
+    result = subprocess.run(
+        ["node", "downloads/test-record-chain-builder.mjs"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"builder deep tests failed: {result.stderr}\n{result.stdout}")
+    ok("builder deep tests")
+
     print("\n=== ALL CURRENT SYSTEM TESTS PASSED ===")
     return 0
 
