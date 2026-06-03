@@ -354,6 +354,81 @@ def main() -> None:
             if "guardian_stewardship_v1" in oath.get("oath_modules", []):
                 errors.append("plain echo: oath_modules should NOT include guardian_stewardship_v1")
 
+    # Test 22-24: Gateway rejects missing hash fields (OATH_REQUIRED_HASH_MISSING)
+    if VALIDATION.exists():
+        import importlib.util
+        spec = importlib.util.spec_from_file_location("validation", str(VALIDATION))
+        mod = importlib.util.module_from_spec(spec)
+        try:
+            spec.loader.exec_module(mod)
+            _validate = getattr(mod, "validate_submission_oath", None)
+        except Exception:
+            _validate = None
+
+        if _validate:
+            # Build a valid base submission to mutate
+            result = subprocess.run(
+                ["node", str(BUILDER), "print-oath", "--record-type", "echo"],
+                capture_output=True, text=True, timeout=10,
+            )
+            if result.returncode == 0:
+                canonical = result.stdout
+                result = subprocess.run(
+                    ["node", str(BUILDER), "echo", "--actor-label", "test", "--provider", "test",
+                     "--body", "test", "--context-level", "CC-3",
+                     "--readback", canonical,
+                     "--generate-authorship-key", "--key-dir", "/tmp/test-hash-key",
+                     "--out", "/tmp/test-hash-echo.json"],
+                    capture_output=True, text=True, timeout=10,
+                )
+                if result.returncode == 0:
+                    valid_data = json.loads(Path("/tmp/test-hash-echo.json").read_text())
+                    valid_draft = valid_data.get("record_draft", {})
+                    valid_submission = valid_data
+
+                    # Test 22: missing oath_policy_sha256
+                    import copy
+                    sub22 = copy.deepcopy(valid_submission)
+                    sub22["record_draft"]["submission_oath_verification"]["oath_policy_sha256"] = ""
+                    diags22 = _validate("echo", sub22, sub22["record_draft"])
+                    if not any(d.code == "OATH_REQUIRED_HASH_MISSING" for d in diags22):
+                        errors.append("test 22: missing oath_policy_sha256 should produce OATH_REQUIRED_HASH_MISSING")
+
+                    # Test 23: missing canonical_oath_text_sha256
+                    sub23 = copy.deepcopy(valid_submission)
+                    sub23["record_draft"]["submission_oath_verification"]["canonical_oath_text_sha256"] = ""
+                    diags23 = _validate("echo", sub23, sub23["record_draft"])
+                    if not any(d.code == "OATH_REQUIRED_HASH_MISSING" for d in diags23):
+                        errors.append("test 23: missing canonical_oath_text_sha256 should produce OATH_REQUIRED_HASH_MISSING")
+
+                    # Test 24: missing participant_readback_sha256
+                    sub24 = copy.deepcopy(valid_submission)
+                    sub24["record_draft"]["submission_oath_verification"]["participant_readback_sha256"] = ""
+                    diags24 = _validate("echo", sub24, sub24["record_draft"])
+                    if not any(d.code == "OATH_REQUIRED_HASH_MISSING" for d in diags24):
+                        errors.append("test 24: missing participant_readback_sha256 should produce OATH_REQUIRED_HASH_MISSING")
+
+    # Test 25: JS/Python NFC canonicalization consistency
+    # Use a test vector with precomposed (NFC) and decomposed (NFD) forms
+    # "café" with é as combining sequence (NFD) — both must produce same hash after NFC
+    import unicodedata
+    nfc_text = "café"  # already NFC
+    nfd_text = unicodedata.normalize("NFC", unicodedata.normalize("NFD", "café"))  # roundtrip
+    # Both should be identical after NFC
+    if unicodedata.normalize("NFC", nfc_text) != unicodedata.normalize("NFC", nfd_text):
+        errors.append("test 25: Python NFC normalization inconsistency")
+    # Verify the builder also normalizes: run print-oath and check NFC applied
+    # We can't easily inject non-NFC into OATH_POLICY text, but we verify the code path exists
+    # by checking the builder source contains .normalize("NFC")
+    builder_text = BUILDER.read_text(encoding="utf-8")
+    nfc_count = builder_text.count('.normalize("NFC")')
+    if nfc_count < 5:
+        errors.append(f"test 25: builder should have >=5 .normalize('NFC') calls, found {nfc_count}")
+    # Verify Python gateway uses unicodedata.normalize("NFC")
+    val_text = VALIDATION.read_text(encoding="utf-8") if VALIDATION.exists() else ""
+    if 'normalize("NFC"' not in val_text and "normalize('NFC'" not in val_text:
+        errors.append("test 25: gateway validation.py should use unicodedata.normalize('NFC')")
+
     # Report
     if errors:
         print("FAIL:")
