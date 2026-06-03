@@ -327,6 +327,17 @@ def main() -> int:
         fail(f"Legacy isolation contract test failed: {result.stderr}\n{result.stdout}")
     ok("Legacy isolation contract test")
 
+    # Phase 6B: Legacy Gateway deploy boundary contract
+    result = subprocess.run(
+        [sys.executable, "scripts/test_legacy_gateway_deploy_boundary_contract.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"Legacy Gateway deploy boundary test failed: {result.stderr}\n{result.stdout}")
+    ok("Legacy Gateway deploy boundary contract test")
+
     # Phase 6B: Test registry contract
     result = subprocess.run(
         [sys.executable, "scripts/test_phase6b_test_registry_contract.py"],

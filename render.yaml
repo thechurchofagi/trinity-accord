@@ -9,7 +9,7 @@ services:
     buildCommand: pip install -r ../../requirements-ci.txt && yarn
     startCommand: yarn start
     healthCheckPath: /health
-    autoDeploy: true
+    autoDeploy: false
     branch: main
     envVars:
       - key: PYTHON_VERSION
