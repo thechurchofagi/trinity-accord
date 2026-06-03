@@ -327,6 +327,17 @@ def main() -> int:
         fail(f"Legacy isolation contract test failed: {result.stderr}\n{result.stdout}")
     ok("Legacy isolation contract test")
 
+    # Phase 6B: Test registry contract
+    result = subprocess.run(
+        [sys.executable, "scripts/test_phase6b_test_registry_contract.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"Phase 6B test registry contract failed: {result.stderr}\n{result.stdout}")
+    ok("Phase 6B test registry contract")
+
     print("\n=== ALL CURRENT SYSTEM TESTS PASSED ===")
     return 0
 
