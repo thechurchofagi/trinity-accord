@@ -104,9 +104,7 @@
     "/api/external-agent-operation-examples.v1.json",
     "/api/mission-governance.v1.json",
     "/api/closure-report.v30.json",
-    "/api/gateway-runtime-contract.v1.json",
-    "/api/gateway-error-diagnostics.v1.json",
-    "/api/route-selector.v1.json",
+    "/api/record-chain-server-receipt.v1.json",
     "/api/v30-final-index.json"
   ],
   "legacy_machine": [
@@ -116,7 +114,10 @@
     "/guardian-routes",
     "/api/agent-submit-gateway.json",
     "/api/gateway-builder-route-map.v1.json",
-    "/api/gateway-workflows.v1.json"
+    "/api/gateway-workflows.v1.json",
+    "/api/route-selector.v1.json",
+    "/api/gateway-runtime-contract.v1.json",
+    "/api/gateway-error-diagnostics.v1.json"
   ],
   "deprecated_for_new_records": [
     "/api/echo-record-schema.v2.json",
@@ -125,7 +126,10 @@
     "/guardian-routes",
     "/api/agent-submit-gateway.json",
     "/api/gateway-builder-route-map.v1.json",
-    "/api/gateway-workflows.v1.json"
+    "/api/gateway-workflows.v1.json",
+    "/api/route-selector.v1.json",
+    "/api/gateway-runtime-contract.v1.json",
+    "/api/gateway-error-diagnostics.v1.json"
   ],
   "version": "v1",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
@@ -161,18 +165,21 @@
   },
   "gateway_runtime_contract": {
     "url": "/api/gateway-runtime-contract.v1.json",
-    "title": "Gateway Runtime Contract",
-    "description": "Expected Gateway preflight runtime metadata for drift detection."
+    "status": "historical_archive_only",
+    "title": "Gateway Runtime Contract (Historical)",
+    "description": "DEPRECATED — moved to legacy_machine. Historical Gateway preflight runtime metadata for drift detection."
   },
   "gateway_error_diagnostics": {
     "url": "/api/gateway-error-diagnostics.v1.json",
-    "title": "Gateway Error Diagnostics",
-    "description": "Machine-readable Gateway failure diagnosis and recovery hints."
+    "status": "historical_archive_only",
+    "title": "Gateway Error Diagnostics (Historical)",
+    "description": "DEPRECATED — moved to legacy_machine. Historical Gateway failure diagnosis and recovery hints."
   },
   "route_selector": {
     "url": "/api/route-selector.v1.json",
-    "title": "Route Selector",
-    "description": "Simple route selection helper for external agents."
+    "status": "historical_archive_only",
+    "title": "Route Selector (Historical)",
+    "description": "DEPRECATED — moved to legacy_machine. Historical route selection helper for external agents."
   },
   "v30_final_index": {
     "url": "/api/v30-final-index.json",

@@ -4,7 +4,7 @@
   "title": "Record-Chain Submit Response",
   "description": "Schema for the response from POST /record-chain/submit. The receipt is not a final chain record.",
   "type": "object",
-  "required": ["accepted", "submitted", "receipt_id", "record_type", "submission_sha256", "received_raw_body_sha256", "pending_file_path", "intake_submission_path", "receipt_path", "server_created_at", "append_status", "diagnostics", "warnings", "boundary", "created_pending_records"],
+  "required": ["accepted", "submitted", "receipt_id", "record_type", "submission_sha256", "received_raw_body_sha256", "pending_file_path", "intake_submission_path", "receipt_path", "server_created_at", "append_status", "diagnostics", "warnings", "boundary", "created_pending_records", "receipt_commit_sha"],
   "properties": {
     "accepted": { "type": "boolean" },
     "submitted": { "type": "boolean" },
@@ -20,6 +20,11 @@
     "receipt_path": { "type": "string" },
     "server_created_at": { "type": "string", "format": "date-time" },
     "append_status": { "type": "string", "enum": ["queued", "appended", "rejected", "duplicate"] },
+    "receipt_commit_sha": {
+      "type": ["string", "null"],
+      "pattern": "^[a-f0-9]{40}$",
+      "description": "Git commit SHA of the write. Lives in the response envelope, NOT inside the immutable receipt body."
+    },
     "receipt": { "type": "object" },
     "diagnostics": {
       "type": "array",

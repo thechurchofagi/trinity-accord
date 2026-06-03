@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://trinity-accord.dev/schemas/server_receipt.schema.json",
+  "$id": "trinityaccord.record-chain-server-receipt.v1",
   "title": "Server Receipt",
   "description": "A server receipt returned after a successful record-chain submission. commit_sha is NOT in the receipt body — it is immutable once created. Use receipt_commit_sha at the response envelope level.",
   "type": "object",

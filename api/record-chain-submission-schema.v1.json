@@ -14,6 +14,30 @@
     "client_context",
     "submission_boundary"
   ],
+  "if": {
+    "properties": {
+      "record_type": {
+        "not": { "const": "context_insufficient_notice" }
+      }
+    }
+  },
+  "then": {
+    "required": ["client_oath_readback"],
+    "properties": {
+      "record_draft": {
+        "required": ["submission_oath_verification"]
+      }
+    }
+  },
+  "else": {
+    "properties": {
+      "record_draft": {
+        "not": {
+          "required": ["submission_oath_verification"]
+        }
+      }
+    }
+  },
   "properties": {
     "schema": {
       "type": "string",
@@ -46,7 +70,6 @@
       "required": [
         "record_type",
         "submitting_participant_identity",
-        "submission_oath_verification",
         "discovery_and_introduction_context",
         "decision_autonomy_context",
         "submission_execution_context",
@@ -60,6 +83,8 @@
         },
         "actor_identity": {
           "type": "object",
+          "deprecated": true,
+          "description": "DEPRECATED compatibility property. Use submitting_participant_identity instead.",
           "required": [
             "label",
             "provider"
@@ -96,6 +121,8 @@
         },
         "boundary": {
           "type": "object",
+          "deprecated": true,
+          "description": "DEPRECATED compatibility property. Use submission_boundary at the top level instead.",
           "required": [
             "not_authority",
             "not_governance",

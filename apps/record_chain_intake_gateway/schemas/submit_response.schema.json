@@ -57,16 +57,24 @@
       "type": "string",
       "description": "Status of the append operation."
     },
+    "receipt_commit_sha": {
+      "type": ["string", "null"],
+      "pattern": "^[a-f0-9]{40}$",
+      "description": "Git commit SHA of the write. Lives in the response envelope, NOT inside the immutable receipt body."
+    },
     "receipt": {
       "type": "object",
-      "description": "Server receipt (present when ok=true).",
+      "description": "Server receipt (present when ok=true). commit_sha is NOT in the receipt body — use receipt_commit_sha at the envelope level.",
       "required": [
         "server_receipt_id",
         "service",
         "gateway_version",
         "record_type",
         "submission_sha256",
+        "original_submission_sha256",
+        "stored_submission_sha256",
         "accepted_at",
+        "raw_readback_redacted",
         "receipt_sha256"
       ],
       "properties": {
@@ -89,6 +97,16 @@
           "pattern": "^[a-f0-9]{64}$",
           "description": "SHA-256 of the canonical submission JSON."
         },
+        "original_submission_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$",
+          "description": "SHA-256 of the original (pre-redaction) canonical submission."
+        },
+        "stored_submission_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$",
+          "description": "SHA-256 of the redacted (persisted) canonical submission."
+        },
         "accepted_at": {
           "type": "string",
           "format": "date-time",
@@ -98,10 +116,14 @@
           "type": "string",
           "description": "Repository path where the record was written."
         },
-        "commit_sha": {
-          "type": "string",
-          "pattern": "^[a-f0-9]{40}$",
-          "description": "Git commit SHA of the write."
+        "raw_readback_redacted": {
+          "type": "boolean",
+          "const": true,
+          "description": "Always true. Confirms raw oath readback was redacted before receipt creation."
+        },
+        "oath_verification": {
+          "type": ["object", "null"],
+          "description": "Summary of oath verification results (excludes raw readback text)."
         },
         "receipt_sha256": {
           "type": "string",
