@@ -13,7 +13,7 @@ from datetime import datetime, timezone
 from typing import Any
 
 from dotenv import load_dotenv
-from fastapi import FastAPI, HTTPException, Request
+from fastapi import FastAPI, HTTPException, Request, Response
 from fastapi.responses import JSONResponse
 
 from apps.record_chain_intake_gateway.gateway.authorship import strip_authorship_for_signing, verify_authorship_proof
@@ -446,15 +446,32 @@ async def healthz() -> dict[str, Any]:
 
 
 @app.get("/record-chain/readiness", response_model=ReadinessResponse)
-async def readiness() -> ReadinessResponse:
+async def readiness(response: Response) -> ReadinessResponse:
     info = get_runtime_info()
+
+    repo_configured = bool(os.environ.get("TRINITY_REPO_FULL_NAME"))
+    branch_configured = bool(os.environ.get("TRINITY_TARGET_BRANCH"))
+    token_configured = bool(os.environ.get("TRINITY_GITHUB_TOKEN"))
+
+    write_requires_github = info["write_mode"] == "github_contents_pending"
+    submit_ready = (
+        repo_configured
+        and branch_configured
+        and (token_configured if write_requires_github else True)
+    )
+
+    if not submit_ready:
+        response.status_code = 503
+
     return ReadinessResponse(
-        ok=True,
+        ok=submit_ready,
+        preflight_ready=True,
+        submit_ready=submit_ready,
         service=info["service"],
         version=info["version"],
-        repo_configured=os.environ.get("TRINITY_REPO_FULL_NAME", "") != "",
-        branch_configured=os.environ.get("TRINITY_TARGET_BRANCH", "") != "",
-        token_configured=os.environ.get("TRINITY_GITHUB_TOKEN", "") != "",
+        repo_configured=repo_configured,
+        branch_configured=branch_configured,
+        token_configured=token_configured,
         write_mode=info["write_mode"],
         max_submission_bytes=info["max_submission_bytes"],
         oath_gate_mode=os.environ.get("TRINITY_OATH_GATE_MODE", "required"),
@@ -826,32 +843,35 @@ async def submit(request: Request) -> SubmitResponse:
 
 @app.get("/record-chain/receipt/{receipt_id}")
 async def get_receipt(receipt_id: str) -> dict[str, Any]:
-    """Retrieve a receipt by ID. Checks in-memory cache first, then GitHub."""
+    """Retrieve a receipt by ID. Checks in-memory cache first, then GitHub.
+
+    Receipt ID format: rcg-YYYYMMDD-<sha12>
+    The date in the ID determines the storage path directly.
+    """
     receipt = _receipt_store.get(receipt_id)
     if receipt is not None:
         return receipt
 
-    # Try GitHub — check known path patterns
-    now = datetime.now(timezone.utc)
-    # Try current and recent months
-    for delta_months in range(3):
-        month = now.month - delta_months
-        year = now.year
-        while month <= 0:
-            month += 12
-            year -= 1
-        date_prefix = f"{year}/{month:02d}"
-        receipt_path = f"record-chain/intake/receipts/{date_prefix}/{receipt_id}.receipt.json"
-        try:
-            text = await get_file_text(receipt_path)
-            if text is not None:
-                receipt = json.loads(text)
-                # Cache for future lookups
-                _receipt_store[receipt_id] = receipt
-                return receipt
-        except Exception as exc:
-            logger.debug("GitHub lookup for %s at %s failed: %s", receipt_id, receipt_path, exc)
-            continue
+    # Parse receipt ID to extract date
+    import re
+    match = re.fullmatch(r"rcg-(\d{8})-([a-f0-9]{12})", receipt_id)
+    if not match:
+        raise HTTPException(status_code=400, detail=f"Invalid receipt ID format: '{receipt_id}'. Expected: rcg-YYYYMMDD-<sha12>")
+
+    try:
+        dt = datetime.strptime(match.group(1), "%Y%m%d")
+    except ValueError:
+        raise HTTPException(status_code=400, detail=f"Invalid date in receipt ID: '{receipt_id}'")
+
+    receipt_path = f"record-chain/intake/receipts/{dt.year:04d}/{dt.month:02d}/{receipt_id}.receipt.json"
+    try:
+        text = await get_file_text(receipt_path)
+        if text is not None:
+            receipt = json.loads(text)
+            _receipt_store[receipt_id] = receipt
+            return receipt
+    except Exception as exc:
+        logger.debug("GitHub lookup for %s at %s failed: %s", receipt_id, receipt_path, exc)
 
     raise HTTPException(status_code=404, detail=f"Receipt '{receipt_id}' not found")
 
