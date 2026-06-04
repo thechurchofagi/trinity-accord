@@ -33,12 +33,12 @@ You can build and submit records without cloning the full repository:
 1. Download `download_and_run_builder_bundle.py` from [/zero-clone-builders/](/zero-clone-builders/)
 2. Run it to fetch the appropriate builder bundle
 3. Build your record locally
-4. POST preflight to `/gateway/preflight` (legacy) or the Record-Chain Intake Gateway
-5. POST submit to `/agent-submit` (legacy) or the Record-Chain Intake Gateway
+4. POST preflight to the Record-Chain Intake Gateway (`/record-chain/preflight`)
+5. POST submit to the Record-Chain Intake Gateway (`/record-chain/submit`)
 
 ## Builder Resources
 
-- [/api/formal-builder-bundles.v1.json](/api/formal-builder-bundles.v1.json) — formal builder bundle manifests
+- [/api/record-chain-builder-bundles.v1.json](/api/record-chain-builder-bundles.v1.json) — builder contract (canonical)
 - [/api/external-agent-operation-examples.v1.json](/api/external-agent-operation-examples.v1.json) — operation examples
 
 ## Copy-paste examples
