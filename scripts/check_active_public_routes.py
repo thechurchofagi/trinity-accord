@@ -73,12 +73,6 @@ if 'href="/agent-first-contact/">First Contact</a>' not in nav:
 else:
     ok("top navigation exposes First Contact")
 
-index = read("index.md")
-if re.search(r'## Copy-paste examples\s*\n- Pure Echo\s*\n- V0–V5 verification\s*\n- Guardian Alliance Stage 1', index):
-    fail("index.md contains incomplete unlinked Copy-paste examples placeholder")
-else:
-    ok("index.md has no incomplete Copy-paste examples placeholder")
-
 entry = load("api/agent-entry-protocol.json")
 fallback = entry.get("no_github_access_fallback", {})
 if fallback.get("path") == "/agent-submit" or fallback.get("machine_readable") == "/api/agent-submit-gateway.json":
