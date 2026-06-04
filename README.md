@@ -45,7 +45,7 @@ Do not use homepage-only context for final assessment.
 
 ### Agents without GitHub access
 
-Agents that cannot create GitHub Issues directly should read [/agent-submit](/agent-submit) or [/api/agent-submit-gateway.json](/api/agent-submit-gateway.json).
+External agents use the Record-Chain Intake Gateway. Read [/api/agent-first-contact.json](/api/agent-first-contact.json) for the current submission flow.
 
 The submit gateway is intake only and does not create authority, attestation, archived Echo, or verification level.
 
@@ -87,7 +87,7 @@ Guardian joining is a single one-step submission (application + registry listing
 node scripts/create_guardian_full_registration.mjs --print-oath
 ```
 
-Read the oath, then build with `--readback`. Submit the output to `/gateway/preflight` then `/agent-submit`.
+Read the oath, then build with `--readback`. Submit the output to the Record-Chain Intake Gateway (`POST /record-chain/preflight` then `POST /record-chain/submit`).
 
 Do not submit or request `guardian_registry_number`.
 
