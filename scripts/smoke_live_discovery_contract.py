@@ -14,6 +14,7 @@ live JSON, prints HTTP cache headers, detects CDN/edge inconsistency.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import socket
 import sys
@@ -190,6 +191,71 @@ def validate_well_known_contract(label: str, well_known: dict[str, Any], errors:
             errors.append(f"{label} well-known agent_entrypoints missing {key}")
 
 
+
+def validate_builder_contract(label: str, site: str, timeout: int, errors: list[str]) -> None:
+    """Verify live canonical builder matches API contract."""
+    contract_url = f"{site}/api/record-chain-builder-bundles.v1.json"
+    try:
+        contract = fetch_json(contract_url, timeout)
+    except RuntimeError as e:
+        errors.append(f"{label} builder contract fetch failed: {e}")
+        return
+
+    builder = contract.get("canonical_builder", {})
+    canonical_url = builder.get("url")
+    if not canonical_url:
+        errors.append(f"{label} builder contract missing canonical_builder.url")
+        return
+
+    if canonical_url != "/downloads/record-chain-builder.mjs":
+        errors.append(f"{label} unexpected canonical builder URL: {canonical_url!r}")
+        return
+
+    expected_sha = builder.get("sha256")
+    expected_size = builder.get("size_bytes")
+
+    # Fetch canonical builder
+    full_url = f"{site}{canonical_url}"
+    try:
+        req = urllib.request.Request(
+            full_url,
+            headers={"User-Agent": "trinity-accord-live-discovery-smoke/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            body = resp.read()
+    except (urllib.error.HTTPError, urllib.error.URLError) as e:
+        errors.append(f"{label} canonical builder fetch failed: {e}")
+        return
+
+    actual_sha = hashlib.sha256(body).hexdigest()
+    actual_size = len(body)
+
+    if expected_sha and actual_sha != expected_sha:
+        errors.append(
+            f"{label} canonical builder SHA-256 mismatch: "
+            f"expected={expected_sha!r}, actual={actual_sha!r}"
+        )
+    if expected_size and actual_size != expected_size:
+        errors.append(
+            f"{label} canonical builder size mismatch: "
+            f"expected={expected_size}, actual={actual_size}"
+        )
+
+    # Optionally verify mirror
+    mirror_url = f"{site}/builder-bundles/record-chain-builder.mjs"
+    try:
+        req2 = urllib.request.Request(
+            mirror_url,
+            headers={"User-Agent": "trinity-accord-live-discovery-smoke/1.0"},
+        )
+        with urllib.request.urlopen(req2, timeout=timeout) as resp2:
+            mirror_body = resp2.read()
+        if mirror_body != body:
+            errors.append(f"{label} builder mirror differs from canonical")
+    except (urllib.error.HTTPError, urllib.error.URLError):
+        pass  # mirror is optional
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--site", default=DEFAULT_SITE)
@@ -275,6 +341,9 @@ def main() -> int:
                     f"live={live_digest!r}, repo={repo_digest!r}; "
                     "this usually means Pages/CDN/custom-domain is serving an older artifact"
                 )
+
+    # Verify builder contract
+    validate_builder_contract("canonical", site, args.timeout, errors)
 
     if errors:
         print("FAIL: live discovery contract errors:")

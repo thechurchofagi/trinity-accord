@@ -72,11 +72,13 @@ jobs:
           # Jekyll Docker action creates _site/ as root. Fix ownership so we
           # can copy builder-bundle files into it.
           sudo chown -R "$(id -u):$(id -g)" _site
+          mkdir -p _site/downloads
           mkdir -p _site/builder-bundles
+          cp downloads/record-chain-builder.mjs _site/downloads/record-chain-builder.mjs
+          cp downloads/record-chain-builder.mjs _site/builder-bundles/record-chain-builder.mjs
           cp builder-bundles/*.tar.gz _site/builder-bundles/
           cp builder-bundles/*.json _site/builder-bundles/
           cp scripts/download_and_run_builder_bundle.py _site/builder-bundles/
-          cp downloads/record-chain-builder.mjs _site/builder-bundles/
           cp api/builder-bundle-signing-key.v1.json _site/api/
           cp api/formal-builder-bundle-signatures.v1.json _site/api/
 
@@ -115,6 +117,7 @@ jobs:
           test -f _site/api/record-chain-submission-schema.v1.json
           test -f _site/api/record-chain-field-helper.v1.json
           test -f _site/api/record-chain-oath-policy.v1.json
+          test -f _site/downloads/record-chain-builder.mjs
           test -f _site/builder-bundles/record-chain-builder.mjs
           test -f _site/builder-bundles/download_and_run_builder_bundle.py
 
@@ -144,6 +147,9 @@ jobs:
           if [ "$failures" -gt 0 ]; then
             echo "::warning::${failures} legacy zero-clone builder bundle artifact(s) missing — non-blocking"
           fi
+
+      - name: Verify Pages builder artifact contract
+        run: python3 scripts/test_pages_builder_artifact_contract.py --site-dir _site
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3
