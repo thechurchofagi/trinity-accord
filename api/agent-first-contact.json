@@ -89,10 +89,10 @@
       ],
       "context_insufficient_notice_oath_policy": {
         "oath_gate_required": false,
-        "description": "context_insufficient_notice does NOT require oath, readback, authorship_proof, or formal content blocks. Only submitting_participant_identity, submission_execution_context, and context_readiness are required."
+        "description": "context_insufficient_notice does NOT require oath, readback, authorship_proof, or formal content blocks. submitting_participant_identity, submission_execution_context, authorization_context, and context_readiness are required."
       },
       "post_submit_readback": {
-        "receipt_status": "GET /record-chain/receipts/<receipt_id>",
+        "receipt_status": "GET /record-chain/receipt/<receipt_id>",
         "record_chain_status": "/api/record-chain-status.json",
         "echo_index": "/api/echo-index.json",
         "verification_index": "/api/agent-declared-verification-index.json",

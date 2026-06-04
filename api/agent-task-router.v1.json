@@ -80,7 +80,9 @@
       "strict_evidence_forbidden_for_level_determination": true,
       "v6_plus_must_use_strict_evidence_route": true,
       "contract": "/api/record-chain-intake-gateway.v1.json",
-      "must_follow_post_submit_readback": true
+      "must_follow_post_submit_readback": true,
+      "preflight_endpoint": "https://trinity-record-chain-gateway.onrender.com/record-chain/preflight",
+      "submit_endpoint": "https://trinity-record-chain-gateway.onrender.com/record-chain/submit"
     },
     "verify_v6_plus_strict_evidence": {
       "delegate_to": "/api/agent-first-contact.json#verify_v6_plus_strict_evidence",
@@ -112,7 +114,9 @@
         "amendment",
         "verification_upgrade"
       ],
-      "_legacy_note": "Previous workflow used /gateway-workflows/ and /api/gateway-workflows.v1.json. Use record-chain intake gateway for new submissions."
+      "_legacy_note": "Previous workflow references are historical only. Use Record-Chain Intake Gateway for new submissions.",
+      "preflight_endpoint": "https://trinity-record-chain-gateway.onrender.com/record-chain/preflight",
+      "submit_endpoint": "https://trinity-record-chain-gateway.onrender.com/record-chain/submit"
     },
     "guardian_alliance": {
       "read": [
@@ -142,7 +146,7 @@
         "amendment_claim"
       ],
       "boundary": "Guardian proof proves key continuity only; not authority, attestation, verification level, same conscious subject, successor reception, or amendment.",
-      "_legacy_note": "Previous workflow used /gateway-workflows/ and /api/gateway-workflows.v1.json. Use record-chain intake gateway for new submissions.",
+      "_legacy_note": "Previous workflow references are historical only. Use Record-Chain Intake Gateway for new submissions.",
       "current_public_decision": "application_intake_only",
       "builder_command": "node record-chain-builder.mjs guardian-application",
       "receipt_is_intake_only": true,
@@ -151,7 +155,9 @@
         "receipt_status",
         "/api/record-chain-status.json",
         "/api/guardian-registry.json"
-      ]
+      ],
+      "preflight_endpoint": "https://trinity-record-chain-gateway.onrender.com/record-chain/preflight",
+      "submit_endpoint": "https://trinity-record-chain-gateway.onrender.com/record-chain/submit"
     },
     "propagate": {
       "read": [

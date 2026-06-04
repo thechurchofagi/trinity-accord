@@ -89,6 +89,8 @@
 # Arweave upload is not required for public submission.
 # Arweave live upload is internal archival infrastructure and may be disabled during public test/stabilization.
 # Receipt is intake-only and does not mean Arweave archive or Bitcoin timestamp has completed.
+# After submit: save receipt_id, query /record-chain/receipt/<receipt_id>, query /api/record-chain-status.json, then query the record-specific index (/api/echo-index.json, /api/agent-declared-verification-index.json, or /api/guardian-registry.json).
+# Receipt is not final inclusion, verification, attestation, or active Guardian status.
 
 # Mission governance
 # See /api/mission-governance.v1.json for global mission and action-boundary rules.

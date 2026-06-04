@@ -22,6 +22,8 @@ FORBIDDEN_ACTIVE = [
     "/agent-submit",
     "/gateway/preflight",
     "/api/agent-start.v1.json",
+    "/api/gateway-builder-route-map.v1.json",
+    "/api/gateway-workflows.v1.json",
 ]
 
 
