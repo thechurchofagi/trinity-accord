@@ -3,6 +3,11 @@ title: "Zero-clone Builder Bundles"
 permalink: /zero-clone-builders/
 ---
 
+> **Historical archive only.**
+> This page describes the retired formal-builder-bundles system.
+> Do not use it for new public submissions.
+> Current path: `/api/agent-first-contact.json` + `/downloads/record-chain-builder.mjs` + `/api/record-chain-intake-gateway.v1.json`.
+
 # Zero-clone Builder Bundles
 
 ## What are bundles?
