@@ -116,8 +116,16 @@
     "current_builder": "/downloads/record-chain-builder.mjs",
     "current_contract": "/api/record-chain-intake-gateway.v1.json",
     "current_schema": "/api/record-chain-submission-schema.v1.json",
-    "builder_bundle_manifest": "/api/formal-builder-bundles.v1.json",
-    "operation_examples": "/api/external-agent-operation-examples.v1.json",
+    "builder_bundle_manifest": {
+      "status": "historical_archive_only",
+      "do_not_use_for_new_submissions": true,
+      "path": "/api/formal-builder-bundles.v1.json"
+    },
+    "operation_examples": {
+      "status": "historical_archive_only",
+      "do_not_use_for_new_submissions": true,
+      "path": "/api/external-agent-operation-examples.v1.json"
+    },
     "supported_zero_clone_routes": [
       "pure_echo",
       "v0_v5_agent_declared_archive",
