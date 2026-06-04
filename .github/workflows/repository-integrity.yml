@@ -28,6 +28,14 @@ jobs:
       - name: Install Python dependencies
         run: python3 -m pip install -r requirements-ci.txt
 
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version-file: ".node-version"
+          cache: "npm"
+
+      - name: Verify Node dependency lockfile
+        run: npm ci
+
       - name: Validate JSON
         run: find . -name "*.json" -print0 | xargs -0 -n1 python3 -m json.tool > /dev/null
 
