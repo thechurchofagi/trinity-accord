@@ -8,8 +8,60 @@ permissions:
   contents: read
 
 jobs:
-  source-digest-details:
+  list:
     runs-on: ubuntu-24.04
+    outputs:
+      files: ${{ steps.files.outputs.files }}
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
-      - run: python3 scripts/test_public_api_source_digest_if_present.py
+      - id: files
+        shell: bash
+        run: |
+          files=$(python3 - <<'PY'
+          import json
+          from pathlib import Path
+          out = []
+          for path in sorted(Path('api').rglob('*.json')):
+              try:
+                  data = json.loads(path.read_text(encoding='utf-8'))
+              except Exception:
+                  continue
+              if isinstance(data, dict) and 'source_digest' in data:
+                  out.append(str(path))
+          print(json.dumps(out, separators=(',', ':')))
+          PY
+          )
+          echo "files=$files" >> "$GITHUB_OUTPUT"
+
+  verify:
+    needs: list
+    name: ${{ matrix.file }}
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        file: ${{ fromJson(needs.list.outputs.files) }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+      - shell: bash
+        run: |
+          python3 - "${{ matrix.file }}" <<'PY'
+          import json
+          import re
+          import sys
+          from pathlib import Path
+
+          path = Path(sys.argv[1])
+          data = json.loads(path.read_text(encoding='utf-8'))
+          digest = str(data['source_digest'])
+          if not re.fullmatch(r'[a-fA-F0-9]{16}|[a-fA-F0-9]{64}', digest):
+              raise SystemExit(f'invalid source_digest format: {digest}')
+
+          sys.path.insert(0, str(Path('scripts').resolve()))
+          from public_metadata_utils import canonical_json_digest
+
+          expected = canonical_json_digest(path, ignored_fields={'source_digest'})
+          if digest not in (expected[:16], expected):
+              raise SystemExit(f'source_digest mismatch: stored={digest}, expected={expected[:16]}')
+          print('PASS')
+          PY
