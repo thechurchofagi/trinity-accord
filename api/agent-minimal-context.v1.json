@@ -113,6 +113,6 @@
     "physical anchor verification by the current agent unless separately performed"
   ],
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "4af3b5349fb7a039",
+  "source_digest": "e9bc8b2336ee7940",
   "context_depth_reference": "/api/context-depth-levels.json"
 }

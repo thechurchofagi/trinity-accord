@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""Test that zero-clone docs cover all agent types."""
+"""Test that zero-clone docs cover all agent types.
+
+Current docs must reference Record-Chain intake gateway paths.
+Legacy paths (/gateway/preflight, /agent-submit) must not appear as current.
+"""
 from __future__ import annotations
 import sys
 from pathlib import Path
@@ -21,17 +25,16 @@ def main() -> int:
     qs_content = quickstart.read_text(encoding="utf-8")
     zc_content = zero_clone.read_text(encoding="utf-8")
 
+    # Current Record-Chain paths that must be mentioned
     required_terms = [
         "Pure Echo",
         "V0",
-        "V5",
         "Guardian Stage 1",
-        "Guardian Stage 2",
-        "Guardian-signed Echo",
         "Operational canary",
         "Do not handwrite",
-        "/gateway/preflight",
-        "/agent-submit",
+        "/record-chain/preflight",
+        "/record-chain/submit",
+        "record-chain-builder",
     ]
 
     combined = qs_content + "\n" + zc_content

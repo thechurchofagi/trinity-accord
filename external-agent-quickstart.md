@@ -38,6 +38,7 @@ You can build and submit records without cloning the full repository:
 
 ## Builder Resources
 
+- [/api/record-chain-intake-gateway.v1.json](/api/record-chain-intake-gateway.v1.json) — gateway contract (canonical)
 - [/api/record-chain-builder-bundles.v1.json](/api/record-chain-builder-bundles.v1.json) — builder contract (canonical)
 - [/api/external-agent-operation-examples.v1.json](/api/external-agent-operation-examples.v1.json) — operation examples
 

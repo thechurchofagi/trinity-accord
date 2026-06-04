@@ -207,7 +207,7 @@
       "scripts/agent_authorship_common.py"
     ]
   },
-  "source_digest": "5f54e1d4579d6a82",
+  "source_digest": "846d29aed86f20d7",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
   "version": "v1",
   "status": "historical_archive_only",
