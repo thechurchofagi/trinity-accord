@@ -95,6 +95,7 @@
 
 # Zero-clone external agent quickstart
 # External agents: see /external-agent-quickstart/ for zero-clone submission flow.
+# Zero-clone builders: /zero-clone-builders/
 # Current builder: /downloads/record-chain-builder.mjs
 # Current contract: /api/record-chain-intake-gateway.v1.json
 # Operation examples (historical): /api/external-agent-operation-examples.v1.json
