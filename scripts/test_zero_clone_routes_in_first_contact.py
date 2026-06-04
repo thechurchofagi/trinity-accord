@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Test that agent-first-contact.json contains zero-clone builder policy."""
+"""Test that agent-first-contact.json exposes only the current public submission route."""
 from __future__ import annotations
+
 import json
-import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -16,40 +16,37 @@ def main() -> int:
 
     doc = json.loads(path.read_text(encoding="utf-8"))
     raw = json.dumps(doc)
+    current = doc.get("current_public_submission_method", {})
 
-    if "zero_clone_formal_builder_policy" not in doc:
-        print("FAIL: zero_clone_formal_builder_policy missing")
-        return 1
-
-    zcp = doc["zero_clone_formal_builder_policy"]
-
-    if "/api/formal-builder-bundles.v1.json" not in raw:
-        print("FAIL: missing reference to /api/formal-builder-bundles.v1.json")
-        return 1
-    if "/api/external-agent-operation-examples.v1.json" not in raw:
-        print("FAIL: missing reference to /api/external-agent-operation-examples.v1.json")
-        return 1
-
-    required_routes = [
-        "pure_echo",
-        "v0_v5_agent_declared_archive",
-        "guardian_application_stage_1",
-        "guardian_listing_stage_2",
-        "guardian_signed_echo",
-    ]
-    for route in required_routes:
-        if route not in json.dumps(zcp.get("supported_zero_clone_routes", [])):
-            print(f"FAIL: route '{route}' not in supported_zero_clone_routes")
+    required = {
+        "contract": "/api/record-chain-intake-gateway.v1.json",
+        "builder": "/downloads/record-chain-builder.mjs",
+    }
+    for key, expected in required.items():
+        if current.get(key) != expected:
+            print(f"FAIL: current_public_submission_method.{key} expected {expected!r}")
             return 1
 
-    if not zcp.get("do_not_handwrite_formal_payload"):
-        print("FAIL: do_not_handwrite_formal_payload not true")
-        return 1
-    if not zcp.get("full_repo_clone_required_when_bundle_available") is False:
-        print("FAIL: full_repo_clone_required_when_bundle_available not false")
+    if "zero_clone_formal_builder_policy" in doc:
+        print("FAIL: legacy zero_clone_formal_builder_policy remains active")
         return 1
 
-    print("PASS: test_zero_clone_routes_in_first_contact")
+    for legacy in [
+        "/api/formal-builder-bundles.v1.json",
+        "/api/external-agent-operation-examples.v1.json",
+        "guardian_application_stage_1",
+        "guardian_listing_stage_2",
+    ]:
+        if legacy in raw:
+            print(f"FAIL: active first-contact router still references legacy route: {legacy}")
+            return 1
+
+    legacy_block = doc.get("legacy_gateway_v1", {})
+    if legacy_block.get("status") != "historical_archive_only":
+        print("FAIL: legacy_gateway_v1 is not marked historical_archive_only")
+        return 1
+
+    print("PASS: first-contact router exposes current record-chain submission route only")
     return 0
 
 
