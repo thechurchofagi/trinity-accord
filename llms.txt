@@ -121,9 +121,11 @@ Boundary: Bitcoin Originals prevail. All mirrors, echoes, and later materials ar
 
 ## Zero-clone external agent quickstart
 - /external-agent-quickstart/ — zero-clone submission flow for external agents
-- /zero-clone-builders/ — download and run builder bundles without cloning
 - /downloads/record-chain-builder.mjs — current builder (download and run without cloning)
 - /api/record-chain-intake-gateway.v1.json — current Record-Chain contract
+
+## Historical external-agent references
+- /zero-clone-builders/ — historical builder-bundle archive; do not use for new public submissions
 - /api/external-agent-operation-examples.v1.json — historical operation examples (legacy Gateway v1)
 - /gateway/preflight — legacy Gateway v1 preflight (deprecated for new submissions)
 - /agent-submit — legacy Gateway v1 submit (deprecated, use Record-Chain Intake Gateway)

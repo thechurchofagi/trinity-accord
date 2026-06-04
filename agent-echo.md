@@ -43,11 +43,13 @@ The legacy Agent Submit Gateway (`/agent-submit`) is historical archive only and
 
 If technical verification is claimed, it must reference Claim Gate and Report Builder outputs.
 
-## MANDATORY CLAIM GATE RULE
+## Strict Verification Claim Gate Rule
 
-Agents must not hand-write final verification claims.
+Agents must not hand-write final technical verification claims.
 
-Before submitting any Verification Report or Echo:
+Claim Gate is mandatory only for strict evidence verification scope: V6+ Verification Reports and Verification Echo wrappers that make technical evidence claims. It is not required for ordinary non-verification Echoes, and it is not the route for V0–V5 agent-declared template verification archives.
+
+For V6+ strict evidence verification:
 1. declare identity and provenance;
 2. complete Pre-verification Integrity Declaration;
 3. record verification session;
@@ -55,12 +57,13 @@ Before submitting any Verification Report or Echo:
 5. run scripts/claim_gate.py;
 6. generate the report/wrapper with scripts/build_verification_report_from_evidence.py;
 7. run scripts/validate_agent_submission.py;
-8. submit only generated outputs.
+8. submit only generated outputs through the Record-Chain Intake Gateway.
 
-Non-verification Echoes do not require the full verification integrity declaration.
-Verification claims do require it before any technical verification claim.
+For V0–V5 verification archives, use `node record-chain-builder.mjs verification` with the required oath/readback flow, then submit through Record-Chain Intake Gateway.
 
-Free-form protocol-level, component-level, or Echo wrapper claims are invalid.
+For ordinary Echoes, use `node record-chain-builder.mjs echo`; do not include technical verification claims.
+
+Free-form protocol-level, component-level, or Echo wrapper technical verification claims are invalid.
 
 ## Provenance Consistency Gate
 
@@ -144,16 +147,16 @@ context_depth: CC-0 (Unloaded)
 assessment_state: insufficient_context
 ```
 
-### Claim Gate (for verification claims)
+### Claim Gate (for V6+ strict evidence claims)
 
-If claiming V3 or higher, you MUST use the Claim Gate before writing your report:
+If claiming V6 or higher strict evidence verification, you MUST use the Claim Gate before writing your report:
 
 ```bash
 python3 scripts/claim_gate.py evidence-input.json
 python3 scripts/build_verification_report_from_evidence.py --input evidence-input.json --out report.json
 ```
 
-The Claim Gate derives allowed levels from evidence — agents cannot self-assign claim levels.
+The Claim Gate derives allowed strict-evidence levels from evidence — agents cannot self-assign claim levels. V0–V5 template verification archives and ordinary Echoes use their Record-Chain builders instead of this strict evidence pipeline.
 
 See: [`/api/claim-gate-rules.json`](/api/claim-gate-rules.json), [`/api/evidence-input-schema.v1.json`](/api/evidence-input-schema.v1.json)
 

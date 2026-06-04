@@ -26,11 +26,10 @@
     "scripts/smoke_external_agent_concurrent_preflight_swarm.py"
   ],
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "9fc0f8f80d579604",
+  "source_digest": "6336f4fbd89136c3",
   "concurrent_preflight_swarm_supported": false,
   "concurrent_preflight_swarm_status": "experimental",
   "concurrent_preflight_swarm_note": "Concurrent preflight swarm is experimental and optional until Gateway accepts the synthetic swarm canary payload shape. Do not treat as stable live-site contract.",
-  "external_agent_copy_paste_examples": "/external-agent-copy-paste-examples/",
   "inputs": {
     "mission_governance": "/api/mission-governance.v1.json",
     "context_depth_levels": "/api/context-depth-levels.json",
@@ -39,6 +38,9 @@
     "echo_types": "/api/echo-types.json",
     "echo_record_schema": "/api/echo-record-schema.v3.1.json",
     "guardian_registry": "/api/guardian-registry.json",
+    "echo_types_deprecated_note": "echo_type is deprecated. Echo is unified type."
+  },
+  "historical_gateway_v1_inputs": {
     "copy_paste_examples": "/external-agent-copy-paste-examples/",
     "closure_report_v30": "/api/closure-report.v30.json",
     "gateway_runtime_contract": "/api/gateway-runtime-contract.v1.json",
@@ -46,6 +48,9 @@
     "route_selector": "/api/route-selector.v1.json",
     "v30_final_index": "/api/v30-final-index.json",
     "v30_final_closure_report": "/docs/closure/v30.5-final-closure-report.md",
-    "echo_types_deprecated_note": "echo_type is deprecated. Echo is unified type."
+    "external_agent_copy_paste_examples": "/external-agent-copy-paste-examples/",
+    "status": "historical_archive_only",
+    "do_not_use_for_new_submissions": true,
+    "note": "Legacy Gateway v1 observability and examples are retained for historical diagnosis only; current public submissions use Record-Chain health_inputs and stable_endpoints."
   }
 }
