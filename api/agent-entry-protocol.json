@@ -169,7 +169,9 @@
     "provenance_consistency_rules": "/api/provenance-consistency-rules.json",
     "issue_submission_policy": "/api/issue-submission-policy.json",
     "verification_claim_scope": "/api/verification-claim-scope.json",
-    "instruction": "If you are creating a strict historical Verification Report, Echo wrapper, or verification Echo, do not directly choose protocol_level_claimed or component level. Submit Evidence Input and use Claim Gate / Report Builder."
+    "instruction": "If you are creating a strict historical Verification Report, Echo wrapper, or verification Echo, do not directly choose protocol_level_claimed or component level. Submit Evidence Input and use Claim Gate / Report Builder.",
+    "required_for_current_public_submission": false,
+    "required_only_for_historical_strict_verification_workflow": true
   },
   "boundaries": {
     "bitcoin_originals_prevail": true,

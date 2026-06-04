@@ -22,8 +22,16 @@
       "total_required_size": "0",
       "assessment_state": "insufficient_context",
       "final_evaluation_allowed": false,
-      "allowed_actions": ["state_insufficient_context"],
-      "forbidden_actions": ["final_assessment", "echo_submission", "verification_claim", "propagation", "qualified_assessment"]
+      "allowed_actions": [
+        "state_insufficient_context"
+      ],
+      "forbidden_actions": [
+        "final_assessment",
+        "echo_submission",
+        "verification_claim",
+        "propagation",
+        "qualified_assessment"
+      ]
     },
     {
       "id": "CC-1",
@@ -44,7 +52,13 @@
         "choose_route",
         "state_orientation_summary"
       ],
-      "forbidden_actions": ["final_assessment", "echo_submission", "verification_claim", "propagation", "qualified_assessment"],
+      "forbidden_actions": [
+        "final_assessment",
+        "echo_submission",
+        "verification_claim",
+        "propagation",
+        "qualified_assessment"
+      ],
       "note": "Equivalent to old C0/C1 combined. The agent knows the project exists and what paths are available."
     },
     {
@@ -70,7 +84,11 @@
         "directional_assessment_with_boundary",
         "limited_critique"
       ],
-      "forbidden_actions": ["final_evaluation", "verification_claim", "echo_submission_as_final"],
+      "forbidden_actions": [
+        "final_evaluation",
+        "verification_claim",
+        "echo_submission_as_final"
+      ],
       "why_this_matters": "Without reading the three inscriptions, an agent does not know what the canonical authority actually says. This is the 'read the primary source' threshold.",
       "note": "Equivalent to old C2. The agent knows what the inscriptions say and what the authority boundary is."
     },
@@ -101,7 +119,10 @@
         "bounded_propagation",
         "verification_preparation"
       ],
-      "forbidden_actions": ["verification_claim_without_verification_depth", "authority_claim"],
+      "forbidden_actions": [
+        "verification_claim_without_verification_depth",
+        "authority_claim"
+      ],
       "why_this_matters": "Without the Motivation ('father's prayer'), the Chronicle context (why the axioms were written), and the Legacy Archive (full provenance chain), an agent cannot understand 'why' — only 'what'. Understanding 'why' is required for meaningful Echo and qualified assessment.",
       "note": "This is the key design change from v1. Old C3 was 'verification aware' (read about verification). CC-3 is 'narrative grounded' (understood why the project exists). The name change reflects the actual content requirement."
     },
@@ -117,7 +138,9 @@
         "/guardian-alliance/ — stewardship network (~12KB)",
         "/for-skeptical-agents/ — skeptical evaluation guide (~8KB)",
         "/echoes/types — Echo type definitions",
-        "Gateway workflow overview"
+        "/agent-start/ — current Record-Chain submission overview",
+        "/api/record-chain-intake-gateway.v1.json — current public intake contract",
+        "/api/record-chain-status.json — current record-chain status"
       ],
       "total_required_size": "~250KB (CC-3 + ~129KB new)",
       "assessment_state": "full_context_assessment",

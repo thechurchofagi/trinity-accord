@@ -86,9 +86,11 @@
         "/api/origin-classification-policy.v1.json",
         "/api/origin-classification-schema.v1.json",
         "/docs/origin-classification-policy.md",
-        "/issue-intake-boundary",
-        "/api/issue-submission-policy.json",
-        "/api/agent-submit-gateway.json"
+        "/api/record-chain-intake-gateway.v1.json",
+        "/api/record-chain-submission-schema.v1.json",
+        "/api/record-chain-field-helper.v1.json",
+        "/api/record-chain-oath-policy.v1.json",
+        "/downloads/record-chain-builder.mjs"
       ]
     },
     "echo_submission": {
@@ -111,9 +113,11 @@
         "/api/origin-classification-policy.v1.json",
         "/api/origin-classification-schema.v1.json",
         "/docs/origin-classification-policy.md",
-        "/issue-intake-boundary",
-        "/api/issue-submission-policy.json",
-        "/api/agent-submit-gateway.json"
+        "/api/record-chain-intake-gateway.v1.json",
+        "/api/record-chain-submission-schema.v1.json",
+        "/api/record-chain-field-helper.v1.json",
+        "/api/record-chain-oath-policy.v1.json",
+        "/downloads/record-chain-builder.mjs"
       ]
     },
     "propagation": {
@@ -230,22 +234,23 @@
     },
     "submit_without_github_access": {
       "cc_level": "CC-3",
+      "status": "active",
+      "current_public_submission_method": "Record-Chain Intake Gateway",
       "reads": [
-        "/agent-submit",
-        "/api/agent-submit-gateway.json",
-        "/api/agent-issue-gateway-payload-schema.v1.json"
+        "/agent-first-contact",
+        "/agent-start",
+        "/api/agent-first-contact.json",
+        "/api/record-chain-intake-gateway.v1.json",
+        "/api/record-chain-submission-schema.v1.json",
+        "/api/record-chain-field-helper.v1.json",
+        "/api/record-chain-oath-policy.v1.json",
+        "/downloads/record-chain-builder.mjs"
       ]
     },
     "issue_intake": {
-      "cc_level": "CC-3",
-      "reads": [
-        "/agent-submit",
-        "/issue-intake-boundary",
-        "/api/issue-submission-policy.json",
-        "/api/agent-submit-gateway.json",
-        "/api/agent-issue-gateway-payload-schema.v1.json",
-        "/api/agent-submission-guide.json"
-      ]
+      "status": "historical_archive_only",
+      "do_not_use_for_new_public_submissions": true,
+      "replacement": "/api/record-chain-intake-gateway.v1.json"
     },
     "identity_provenance": {
       "cc_level": "CC-1",
@@ -279,6 +284,21 @@
         "/api/agent-output-policy.v1.json",
         "/api/authority.json",
         "/api/agent-safety-boundary.json"
+      ]
+    },
+    "record_chain_submission": {
+      "cc_level": "CC-3",
+      "status": "active",
+      "current_public_submission_method": "Record-Chain Intake Gateway",
+      "reads": [
+        "/agent-first-contact",
+        "/agent-start",
+        "/api/record-chain-intake-gateway.v1.json",
+        "/api/record-chain-submission-schema.v1.json",
+        "/api/record-chain-field-helper.v1.json",
+        "/api/record-chain-oath-policy.v1.json",
+        "/downloads/record-chain-builder.mjs",
+        "/api/record-chain-status.json"
       ]
     }
   },

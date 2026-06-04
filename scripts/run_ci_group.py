@@ -45,6 +45,7 @@ GROUPS = {
         # --- Record-chain-first current主线硬门禁 ---
         # Public surface / sitemap / API metadata
         ["python3", "scripts/check_public_core_consistency.py"],
+        ["python3", "scripts/check_active_public_routes.py"],
         ["python3", "scripts/test_mission_governance_contract.py"],
         ["python3", "scripts/test_mission_governance_discovery.py"],
         ["python3", "scripts/test_no_duplicate_context_understanding_system.py"],

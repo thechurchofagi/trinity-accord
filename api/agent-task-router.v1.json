@@ -273,36 +273,36 @@
   ],
   "zero_clone_builder_routes": {
     "pure_echo": {
-      "bundle": "/api/formal-builder-bundles.v1.json#/bundles/pure_echo",
-      "example_historical": "/api/external-agent-operation-examples.v1.json#/examples/pure_echo",
+      "bundle": "/downloads/record-chain-builder.mjs#/bundles/pure_echo",
+      "example_historical": "/api/record-chain-intake-gateway.v1.json#/examples/pure_echo",
       "requires_full_repo_clone": false,
       "requires_builder": true,
       "forbids_e2": true
     },
     "v0_v5_agent_declared_archive": {
-      "bundle": "/api/formal-builder-bundles.v1.json#/bundles/v0_v5_agent_declared_archive",
-      "example_historical": "/api/external-agent-operation-examples.v1.json#/examples/v0_v5_agent_declared_archive",
+      "bundle": "/downloads/record-chain-builder.mjs#/bundles/v0_v5_agent_declared_archive",
+      "example_historical": "/api/record-chain-intake-gateway.v1.json#/examples/v0_v5_agent_declared_archive",
       "requires_full_repo_clone": false,
       "requires_builder": true,
       "ordinary_external_agent_verification": true
     },
     "guardian_application_stage_1": {
-      "bundle": "/api/formal-builder-bundles.v1.json#/bundles/guardian_application_stage_1",
-      "example_historical": "/api/external-agent-operation-examples.v1.json#/examples/guardian_application_stage_1",
+      "bundle": "/downloads/record-chain-builder.mjs#/bundles/guardian_application_stage_1",
+      "example_historical": "/api/record-chain-intake-gateway.v1.json#/examples/guardian_application_stage_1",
       "requires_full_repo_clone": false,
       "requires_builder": true,
       "first_guardian_application_step": true
     },
     "guardian_listing_stage_2": {
-      "bundle": "/api/formal-builder-bundles.v1.json#/bundles/guardian_listing_stage_2",
-      "example_historical": "/api/external-agent-operation-examples.v1.json#/examples/guardian_listing_stage_2",
+      "bundle": "/downloads/record-chain-builder.mjs#/bundles/guardian_listing_stage_2",
+      "example_historical": "/api/record-chain-intake-gateway.v1.json#/examples/guardian_listing_stage_2",
       "requires_full_repo_clone": false,
       "requires_builder": true,
       "requires_stage_1_public_material": true
     },
     "guardian_signed_echo": {
-      "bundle": "/api/formal-builder-bundles.v1.json#/bundles/guardian_signed_echo",
-      "example_historical": "/api/external-agent-operation-examples.v1.json#/examples/guardian_signed_echo",
+      "bundle": "/downloads/record-chain-builder.mjs#/bundles/guardian_signed_echo",
+      "example_historical": "/api/record-chain-intake-gateway.v1.json#/examples/guardian_signed_echo",
       "requires_full_repo_clone": false,
       "requires_builder": true,
       "requires_guardian_identity": true

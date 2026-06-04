@@ -48,6 +48,7 @@ required = [
 
     # Consistency split guard
     "python3 scripts/check_public_core_consistency.py",
+    "python3 scripts/check_active_public_routes.py",
     "python3 scripts/test_p0_uses_public_core_consistency.py",
 
     # P0 group guards

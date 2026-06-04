@@ -6,17 +6,19 @@
   "canonical_authority": "Bitcoin Originals only",
   "stable_endpoints": {
     "site": "https://www.trinityaccord.org",
-    "gateway": "https://trinity-agent-issue-gateway.onrender.com",
-    "preflight": "https://trinity-agent-issue-gateway.onrender.com/gateway/preflight",
-    "submit": "https://trinity-agent-issue-gateway.onrender.com/agent-submit"
+    "gateway": "https://trinity-record-chain-gateway.onrender.com",
+    "preflight": "https://trinity-record-chain-gateway.onrender.com/record-chain/preflight",
+    "submit": "https://trinity-record-chain-gateway.onrender.com/record-chain/submit"
   },
   "health_inputs": {
     "links": "/api/links.json",
     "well_known": "/.well-known/trinity-accord.json",
     "first_contact": "/api/agent-first-contact.json",
-    "formal_builder_bundles": "/api/formal-builder-bundles.v1.json",
-    "bundle_signatures": "/api/formal-builder-bundle-signatures.v1.json",
-    "external_agent_examples": "/api/external-agent-operation-examples.v1.json"
+    "agent_start_v2": "/api/agent-start.v2.json",
+    "record_chain_contract": "/api/record-chain-intake-gateway.v1.json",
+    "record_chain_schema": "/api/record-chain-submission-schema.v1.json",
+    "record_chain_status": "/api/record-chain-status.json",
+    "record_chain_builder": "/downloads/record-chain-builder.mjs"
   },
   "live_smoke_scripts": [
     "scripts/smoke_live_zero_clone_builder_bundles.py",
@@ -24,7 +26,7 @@
     "scripts/smoke_external_agent_concurrent_preflight_swarm.py"
   ],
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "39dc50eef78ef969",
+  "source_digest": "9fc0f8f80d579604",
   "concurrent_preflight_swarm_supported": false,
   "concurrent_preflight_swarm_status": "experimental",
   "concurrent_preflight_swarm_note": "Concurrent preflight swarm is experimental and optional until Gateway accepts the synthetic swarm canary payload shape. Do not treat as stable live-site contract.",
