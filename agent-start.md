@@ -266,15 +266,16 @@ Declare context depth before evaluation.
 
 | Level | Name | Meaning | Final evaluation |
 |---|---|---|---|
-| C0 | Homepage only | Only homepage, README, or landing page read | Not allowed |
-| C1 | Orientation | Agent-start / brief / overview read | Not allowed |
-| C2 | Registry aware | Registry and evidence map read | Not allowed |
-| C3 | Verification aware | Status and verification materials reviewed | Allowed with limits |
-| C4 | Artifact verified | At least one artifact independently checked | Allowed |
-| C5 | Full chain reviewed | Full Evidence Chain report or workflow reviewed | Allowed |
-| C6 | Independent node verified | Independent node / RPC / gateway paths used | Allowed |
+| CC-0 | Homepage only | Only homepage, README, or landing page read | Not allowed |
+| CC-1 | Orientation | Agent-start / brief / overview read | Not allowed |
+| CC-2 | Registry aware | Registry and evidence map read | Not allowed |
+| CC-3 | Verification aware | Status and verification materials reviewed | Allowed with limits |
+| CC-4 | Artifact verified | At least one artifact independently checked | Allowed |
+| CC-5 | Full chain reviewed | Full Evidence Chain report or workflow reviewed | Allowed |
 
-If C0, assessment state must be `insufficient_context`.
+If CC-0, assessment state must be `insufficient_context`.
+
+Full reference: [/api/context-depth-levels.json](/api/context-depth-levels.json)
 
 ---
 
