@@ -203,5 +203,11 @@
     "C5_full_chain_reviewed": "CC-4 (Full Context) for content; V4+ for verification depth.",
     "C6_independent_node_verified": "CC-4/CC-5 for content; V5+ for verification depth."
   },
-  "boundary": "Context depth describes reading and content loading. It does not create authority, verification, or endorsement. Bitcoin Originals prevail."
+  "boundary": "Context depth describes reading and content loading. It does not create authority, verification, or endorsement. Bitcoin Originals prevail.",
+  "verification_context_rule": {
+    "technical_verification_minimum": "CC-2 + V2+ for private technical checks",
+    "public_verification_submission_minimum": "CC-3",
+    "narrative_grounded_assessment_minimum": "CC-3",
+    "v6_plus_minimum": "CC-3 plus strict evidence requirements"
+  }
 }

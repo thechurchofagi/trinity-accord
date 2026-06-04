@@ -476,7 +476,7 @@ function testAutonomyFlags() {
   assert.ok(source.includes("submissionExecutor: args.submissionExecutor"), "submissionExecutor must be parsed from args");
   assert.ok(source.includes("requestingPartyType: args.requestingPartyType"), "requestingPartyType must be parsed from args");
   assert.ok(source.includes("introducingPartyType: args.introducingPartyType"), "introducingPartyType must be parsed from args");
-  assert.ok(source.includes("humanOperatorInvolved: !!args.humanOperatorInvolved"), "humanOperatorInvolved must be parsed from args");
+  assert.ok(source.includes("humanOperatorInvolved: args.humanOperatorInvolved"), "humanOperatorInvolved must be parsed from args");
 
   // Verify the flags are used in buildV2CommonFields with correct allowed values
   assert.ok(source.includes("opts.discoveryMode"), "buildV2CommonFields must use discoveryMode");

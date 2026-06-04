@@ -23,7 +23,7 @@
 # Do not request GitHub PAT.
 # Do not write to record-chain/pending/.
 # Do not run append.
-# Do not use legacy /gateway/preflight or /agent-submit for new submissions.
+# Do not use Legacy Gateway v1 endpoints for new submissions.
 # Builder: /downloads/record-chain-builder.mjs
 # Contract: /api/record-chain-intake-gateway.v1.json
 # Gateway: https://trinity-record-chain-gateway.onrender.com
@@ -79,7 +79,7 @@
 
 # Legacy Gateway v1
 # Gateway v1 is historical archive only.
-# Do not use /gateway/preflight or /agent-submit for new submissions.
+# Do not use Legacy Gateway v1 endpoints for new submissions.
 # Historical materials are preserved under /legacy/gateway-v1/.
 
 # Record type and archive notes
@@ -100,6 +100,5 @@
 # Historical external-agent references:
 # /zero-clone-builders/ — historical builder-bundle archive; do not use for new public submissions.
 # Operation examples (historical): /api/external-agent-operation-examples.v1.json
-# Gateway preflight: /gateway/preflight (deprecated for new submissions, use record-chain)
-# Legacy submit: /agent-submit (deprecated, use Record-Chain Intake Gateway)
+# Legacy Gateway v1 endpoint names are omitted from active discovery; use Record-Chain Intake Gateway.
 

@@ -64,11 +64,23 @@
       "allowed_output": "verification_report_only_if_actions_performed"
     },
     "verify_v0_v5_agent_declared": {
-      "delegate_to": "/api/agent-first-contact.json#verify_v0_v5_agent_declared",
-      "route_id": "sub_v6_agent_declared_template_archive",
-      "must_use_builder": "scripts/build_agent_declared_archive_payload.py",
+      "route_id": "record_chain_v0_v5_agent_declared_verification",
+      "read": [
+        "/api/agent-first-contact.json",
+        "/api/agent-required-reading.json",
+        "/api/record-chain-intake-gateway.v1.json",
+        "/api/record-chain-submission-schema.v1.json",
+        "/downloads/record-chain-builder.mjs"
+      ],
+      "current_submission_method": "Record-Chain Intake Gateway",
+      "builder": "/downloads/record-chain-builder.mjs",
+      "builder_command": "node record-chain-builder.mjs verification --verification-level V0..V5 --what-was-checked <items> --verification-claim <claim> --fresh-actions <actions>",
+      "requires_explicit_verification_level": true,
+      "requires_explicit_checked_items_claim_and_fresh_actions": true,
       "strict_evidence_forbidden_for_level_determination": true,
-      "render_api_only": true
+      "v6_plus_must_use_strict_evidence_route": true,
+      "contract": "/api/record-chain-intake-gateway.v1.json",
+      "must_follow_post_submit_readback": true
     },
     "verify_v6_plus_strict_evidence": {
       "delegate_to": "/api/agent-first-contact.json#verify_v6_plus_strict_evidence",
@@ -115,11 +127,6 @@
       "builder": "/downloads/record-chain-builder.mjs",
       "contract": "/api/record-chain-intake-gateway.v1.json",
       "must_follow_post_submit_readback": true,
-      "helper_scripts": [
-        "scripts/guardian_common.py",
-        "scripts/attach_guardian_presence_proof.mjs",
-        "scripts/verify_guardian_status.py"
-      ],
       "valid_signature_alone_is_not_active_guardian": true,
       "active_registered_guardian_requires_registry_match": true,
       "does_not_affect_counts": true,
@@ -135,7 +142,16 @@
         "amendment_claim"
       ],
       "boundary": "Guardian proof proves key continuity only; not authority, attestation, verification level, same conscious subject, successor reception, or amendment.",
-      "_legacy_note": "Previous workflow used /gateway-workflows/ and /api/gateway-workflows.v1.json. Use record-chain intake gateway for new submissions."
+      "_legacy_note": "Previous workflow used /gateway-workflows/ and /api/gateway-workflows.v1.json. Use record-chain intake gateway for new submissions.",
+      "current_public_decision": "application_intake_only",
+      "builder_command": "node record-chain-builder.mjs guardian-application",
+      "receipt_is_intake_only": true,
+      "active_registry_listing_guaranteed_by_receipt": false,
+      "post_submit_readback": [
+        "receipt_status",
+        "/api/record-chain-status.json",
+        "/api/guardian-registry.json"
+      ]
     },
     "propagate": {
       "read": [
@@ -279,27 +295,6 @@
       "requires_builder": true,
       "forbids_e2": true
     },
-    "v0_v5_agent_declared_archive": {
-      "bundle": "/downloads/record-chain-builder.mjs#/bundles/v0_v5_agent_declared_archive",
-      "example_historical": "/api/record-chain-intake-gateway.v1.json#/examples/v0_v5_agent_declared_archive",
-      "requires_full_repo_clone": false,
-      "requires_builder": true,
-      "ordinary_external_agent_verification": true
-    },
-    "guardian_application_stage_1": {
-      "bundle": "/downloads/record-chain-builder.mjs#/bundles/guardian_application_stage_1",
-      "example_historical": "/api/record-chain-intake-gateway.v1.json#/examples/guardian_application_stage_1",
-      "requires_full_repo_clone": false,
-      "requires_builder": true,
-      "first_guardian_application_step": true
-    },
-    "guardian_listing_stage_2": {
-      "bundle": "/downloads/record-chain-builder.mjs#/bundles/guardian_listing_stage_2",
-      "example_historical": "/api/record-chain-intake-gateway.v1.json#/examples/guardian_listing_stage_2",
-      "requires_full_repo_clone": false,
-      "requires_builder": true,
-      "requires_stage_1_public_material": true
-    },
     "guardian_signed_echo": {
       "bundle": "/downloads/record-chain-builder.mjs#/bundles/guardian_signed_echo",
       "example_historical": "/api/record-chain-intake-gateway.v1.json#/examples/guardian_signed_echo",
@@ -308,7 +303,23 @@
       "requires_guardian_identity": true
     },
     "_status": "historical_archive_only",
-    "_note": "These routes used the retired formal-builder-bundles system. Use /downloads/record-chain-builder.mjs for new submissions."
+    "_note": "These routes used the retired formal-builder-bundles system. Use /downloads/record-chain-builder.mjs for new submissions.",
+    "record_chain_v0_v5_agent_declared_verification": {
+      "bundle": "/downloads/record-chain-builder.mjs",
+      "requires_full_repo_clone": false,
+      "requires_builder": true,
+      "ordinary_external_agent_verification": true,
+      "builder_command": "verification",
+      "_status": "current_record_chain_builder_route"
+    },
+    "guardian_application_intake": {
+      "bundle": "/downloads/record-chain-builder.mjs",
+      "requires_full_repo_clone": false,
+      "requires_builder": true,
+      "builder_command": "guardian-application",
+      "current_public_decision": "application_intake_only",
+      "_status": "current_record_chain_builder_route"
+    }
   },
   "verification_echo_redirect": {
     "trigger_terms": [
@@ -320,10 +331,10 @@
     "deprecated_direct_route": "e2_verification_echo",
     "do_not_route_to_pure_echo": true,
     "replacement_decision": {
-      "self_declared_template_or_basic_check": "v0_v5_agent_declared_archive",
+      "self_declared_template_or_basic_check": "record_chain_v0_v5_agent_declared_verification",
       "strict_evidence_claim_gate_report": "v6_plus_strict_evidence"
     }
   },
   "_legacy_note": "external-agent-operation-examples references are historical_archive_only. Use /api/agent-first-contact.json instead.",
-  "source_digest": "afb4592e212ffee8"
+  "source_digest": "1c0fd3e7a93299af"
 }

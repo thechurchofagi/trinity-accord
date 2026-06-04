@@ -342,19 +342,84 @@ function createAuthorshipProof(recordDraft, keyPair) {
 
 // ── V2 common field blocks ───────────────────────────────────────────
 
-function buildV2CommonFields(opts) {
-  const humanInvolved = opts.humanOperatorInvolved === true || opts.humanOperatorInvolved === "true";
+const AUTHORIZATION_SCOPE_BY_RECORD_TYPE = {
+  echo: "create_echo_record",
+  verification: "create_verification_record",
+  guardian_application: "create_guardian_application_record",
+  guardian_retirement: "create_guardian_retirement_record",
+  guardian_key_rotation: "create_guardian_key_rotation_record",
+  propagation: "create_propagation_record",
+  correction: "create_correction_record",
+  classification_update: "create_classification_update_record",
+  context_insufficient_notice: "create_context_insufficient_notice_record",
+};
 
-  const discoveryMode = opts.discoveryMode || "self_discovered";
+const FORMAL_RECORD_COMMANDS = new Set([
+  "echo",
+  "verification",
+  "guardian-application",
+  "guardian-retirement",
+  "propagation",
+  "correction",
+]);
+
+function normalizeRecordType(recordTypeOrCommand) {
+  return String(recordTypeOrCommand || "").replace(/-/g, "_");
+}
+
+function authorizationScopeFor(recordTypeOrCommand) {
+  let recordType = normalizeRecordType(recordTypeOrCommand);
+  if (recordType === "context_insufficient") recordType = "context_insufficient_notice";
+  return AUTHORIZATION_SCOPE_BY_RECORD_TYPE[recordType] || `create_${recordType}_record`;
+}
+
+function parseBooleanStrict(value, fieldName) {
+  if (value === undefined || value === null || value === "") return false;
+  if (value === true || value === "true") return true;
+  if (value === false || value === "false") return false;
+  errorExit(`${fieldName} must be explicitly set to true or false`);
+}
+
+function requireExplicit(opts, key, cliName) {
+  if (opts[key] === undefined || opts[key] === null || opts[key] === "") {
+    errorExit(`${cliName} is required; the builder does not infer this provenance/context field`);
+  }
+}
+
+function validateFormalInputs(command, opts) {
+  if (!FORMAL_RECORD_COMMANDS.has(command)) return;
+  requireExplicit(opts, "contextLevel", "--context-level");
+  requireExplicit(opts, "discoveryMode", "--discovery-mode");
+  requireExplicit(opts, "recordDecision", "--record-decision");
+  requireExplicit(opts, "submissionExecutor", "--submission-executor");
+  requireExplicit(opts, "humanOperatorInvolved", "--human-operator-involved");
+  requireExplicit(opts, "contextSufficientForSelectedAction", "--context-sufficient-for-selected-action");
+
+  if (String(opts.contextLevel).toUpperCase() === "CC-3" && (!opts.loadedUrls || opts.loadedUrls.length === 0)) {
+    errorExit("--loaded-urls is required when declaring --context-level CC-3");
+  }
+
+  if (command === "verification") {
+    requireExplicit(opts, "level", "--verification-level");
+    requireExplicit(opts, "whatWasChecked", "--what-was-checked");
+    requireExplicit(opts, "verificationClaim", "--verification-claim");
+    requireExplicit(opts, "freshActions", "--fresh-actions");
+  }
+}
+
+function buildV2CommonFields(opts) {
+  const humanInvolved = parseBooleanStrict(opts.humanOperatorInvolved, "--human-operator-involved");
+
+  const discoveryMode = opts.discoveryMode || "unknown";
   const discoverySelfInitiated = discoveryMode === "self_discovered";
   const discoveryIntroduced = ["introduced_by_human", "introduced_by_agent", "introduced_by_organization", "user_task_context", "system_prompt"].includes(discoveryMode);
 
-  const recordDecision = opts.recordDecision || "self";
+  const recordDecision = opts.recordDecision || "unknown";
   const selfDecided = recordDecision === "self";
   const requestedByHuman = recordDecision === "human";
   const requestedByAgent = recordDecision === "another_agent";
 
-  const submissionExecutor = opts.submissionExecutor || "self";
+  const submissionExecutor = opts.submissionExecutor || "unknown";
   const execSelf = submissionExecutor === "self";
   const execHuman = submissionExecutor === "human_operator";
   const execAgent = submissionExecutor === "another_agent";
@@ -423,7 +488,7 @@ function buildV2CommonFields(opts) {
       authorization_source_type: "none",
       authorizing_party_public_label: "",
       authorizing_party_identifier: "",
-      authorization_scope: "create_echo_record",
+      authorization_scope: authorizationScopeFor(opts.recordType),
       authorization_limitations: "",
       authorization_evidence_description: "",
     },
@@ -444,10 +509,14 @@ function buildV2CommonFields(opts) {
 }
 
 function buildContextReadiness(opts) {
+  const contextLevel = opts.contextLevel || "CC-0";
+  const sufficient = opts.contextSufficientForSelectedAction !== undefined
+    ? parseBooleanStrict(opts.contextSufficientForSelectedAction, "--context-sufficient-for-selected-action")
+    : false;
   return {
-    declared_context_level: opts.contextLevel || "CC-3",
-    minimum_required_for_action: opts.contextLevel || "CC-3",
-    context_sufficient_for_selected_action: true,
+    declared_context_level: contextLevel,
+    minimum_required_for_action: contextLevel,
+    context_sufficient_for_selected_action: sufficient,
     loaded_context_urls: opts.loadedUrls || [],
     context_readiness_notes: "",
   };
@@ -474,11 +543,11 @@ function buildVerificationDraft(opts) {
     schema: DRAFT_SCHEMA,
     record_type: "verification",
     verification_content: {
-      verification_level: opts.level || "V3",
-      verification_scope_label: opts.scopeLabel || "V3-minimal",
+      verification_level: opts.level,
+      verification_scope_label: opts.scopeLabel || opts.level,
       what_was_checked: opts.whatWasChecked ? opts.whatWasChecked.split(",").map(s => s.trim()) : [],
       verification_claim: opts.verificationClaim || "",
-      fresh_actions_performed: [],
+      fresh_actions_performed: opts.freshActions ? opts.freshActions.split(",").map(s => s.trim()).filter(Boolean) : [],
     },
     ...buildV2CommonFields(opts),
     context_readiness: buildContextReadiness(opts),
@@ -513,13 +582,7 @@ function buildGuardianRetirementDraft(opts) {
     reason: opts.body || "Voluntary retirement",
     retirement_does_not_remove_historical_record: true,
     ...buildV2CommonFields(opts),
-    context_readiness: {
-      declared_context_level: opts.contextLevel || "CC-1",
-      minimum_required_for_action: opts.contextLevel || "CC-1",
-      context_sufficient_for_selected_action: true,
-      loaded_context_urls: opts.loadedUrls || [],
-      context_readiness_notes: "",
-    },
+    context_readiness: buildContextReadiness({ ...opts, contextLevel: opts.contextLevel || "CC-1" }),
     created_at: isoNow(),
   };
 }
@@ -531,13 +594,7 @@ function buildPropagationDraft(opts) {
     title: opts.title || "Propagation Record",
     body: opts.body || "",
     ...buildV2CommonFields(opts),
-    context_readiness: {
-      declared_context_level: opts.contextLevel || "CC-2",
-      minimum_required_for_action: opts.contextLevel || "CC-2",
-      context_sufficient_for_selected_action: true,
-      loaded_context_urls: opts.loadedUrls || [],
-      context_readiness_notes: "",
-    },
+    context_readiness: buildContextReadiness({ ...opts, contextLevel: opts.contextLevel || "CC-2" }),
     created_at: isoNow(),
   };
 }
@@ -549,13 +606,7 @@ function buildCorrectionDraft(opts) {
     title: opts.title || "Correction",
     body: opts.body || "",
     ...buildV2CommonFields(opts),
-    context_readiness: {
-      declared_context_level: opts.contextLevel || "CC-1",
-      minimum_required_for_action: opts.contextLevel || "CC-1",
-      context_sufficient_for_selected_action: true,
-      loaded_context_urls: opts.loadedUrls || [],
-      context_readiness_notes: "",
-    },
+    context_readiness: buildContextReadiness({ ...opts, contextLevel: opts.contextLevel || "CC-1" }),
     created_at: isoNow(),
   };
 }
@@ -568,7 +619,7 @@ function buildContextInsufficientDraft(opts) {
     ...buildV2CommonFields(opts),
     context_readiness: {
       declared_context_level: "CC-0",
-      minimum_required_for_action: opts.contextLevel || "CC-3",
+      minimum_required_for_action: opts.contextLevel || "CC-0",
       context_sufficient_for_selected_action: false,
       loaded_context_urls: opts.loadedUrls || [],
       context_readiness_notes: "",
@@ -591,7 +642,7 @@ function buildSubmission(recordDraft, opts) {
   // Derive declared_context_level from context_readiness
   const declaredCtx = recordDraft.context_readiness
     ? recordDraft.context_readiness.declared_context_level
-    : "CC-3";
+    : "CC-0";
 
   const submission = {
     schema: SCHEMA,
@@ -935,6 +986,36 @@ function runDoctor(submission) {
     } else {
       results.push({ status: "PASS", code: "CONTEXT_LEVEL_OK", field: "record_draft.context_readiness.declared_context_level", meaning: `Context level '${cl}' is valid.`, fix: "" });
     }
+    const loaded = Array.isArray(draft.context_readiness.loaded_context_urls) ? draft.context_readiness.loaded_context_urls : [];
+    if (String(cl || "").toUpperCase() === "CC-3" && loaded.length === 0) {
+      results.push({ status: "FAIL", code: "CC3_REQUIRES_LOADED_CONTEXT_URLS", field: "record_draft.context_readiness.loaded_context_urls", meaning: "CC-3 declarations must include the context URLs actually loaded.", fix: "Add non-empty loaded_context_urls or lower declared_context_level." });
+    }
+    if (draft.context_readiness.context_sufficient_for_selected_action === true && loaded.length === 0 && String(cl || "").toUpperCase() !== "CC-0") {
+      results.push({ status: "FAIL", code: "CONTEXT_SUFFICIENT_REQUIRES_LOADED_URLS", field: "record_draft.context_readiness.loaded_context_urls", meaning: "A sufficient-context claim must be backed by loaded_context_urls.", fix: "Add loaded_context_urls for the context you loaded, or set context_sufficient_for_selected_action=false." });
+    }
+
+  }
+
+  const expectedScope = authorizationScopeFor(draft.record_type);
+  const actualScope = draft.authorization_context?.authorization_scope;
+  if (draft.authorization_context && actualScope !== expectedScope) {
+    results.push({ status: "FAIL", code: "AUTHORIZATION_SCOPE_MISMATCH", field: "record_draft.authorization_context.authorization_scope", meaning: `Authorization scope '${actualScope}' does not match record_type '${draft.record_type}'.`, fix: `Set authorization_scope to '${expectedScope}'.` });
+  }
+
+  if (draft.record_type === "echo" && !draft.echo_content?.echo_text) {
+    results.push({ status: "FAIL", code: "MISSING_ECHO_CONTENT", field: "record_draft.echo_content.echo_text", meaning: "Echo records require non-empty echo_content.echo_text.", fix: "Provide echo_content.echo_text." });
+  }
+  if (draft.record_type === "verification") {
+    const vc = draft.verification_content || {};
+    if (!vc.verification_level || !vc.what_was_checked?.length || !vc.verification_claim || !vc.fresh_actions_performed?.length) {
+      results.push({ status: "FAIL", code: "MISSING_VERIFICATION_CONTENT", field: "record_draft.verification_content", meaning: "Verification records require an explicit level, checked items, claim, and fresh actions.", fix: "Provide verification_level, what_was_checked, verification_claim, and fresh_actions_performed." });
+    }
+  }
+  if (draft.record_type === "guardian_application") {
+    const gc = draft.guardian_application_content || {};
+    if (!gc.requested_guardian_identifier || !gc.guardian_public_key_sha256 || !gc.guardian_stewardship_oath) {
+      results.push({ status: "FAIL", code: "MISSING_GUARDIAN_APPLICATION_CONTENT", field: "record_draft.guardian_application_content", meaning: "Guardian applications require requested identifier, guardian public key SHA-256, and stewardship oath.", fix: "Provide guardian application content before submission." });
+    }
   }
 
   // Check v2 common fields
@@ -1247,7 +1328,7 @@ function generateTemplate(recordType) {
     authorization_source_type: "none",
     authorizing_party_public_label: "",
     authorizing_party_identifier: "",
-    authorization_scope: "create_echo_record",
+    authorization_scope: authorizationScopeFor(recordType),
     authorization_limitations: "",
     authorization_evidence_description: "",
   };
@@ -1297,6 +1378,7 @@ function showHelp() {
 record-chain-builder.mjs  --  Zero-clone Record-Chain submission builder (v2)
 
 Commands:
+  print-oath              Print canonical oath text for a formal record type
   echo                    Build a recognition echo submission
   verification            Build a verification submission
   guardian-application    Build a guardian application submission
@@ -1319,7 +1401,10 @@ Common options:
   --title "Title"               Record title
   --body-file path.txt          Read body from file
   --body "text"                 Body text inline
-  --context-level CC-3          Context depth level
+  --context-level CC-3          Context depth level (explicit for formal records)
+  --context-sufficient-for-selected-action true|false
+                                Whether loaded context is sufficient for this action
+  --loaded-urls URLS            Comma-separated loaded context URLs (required for CC-3)
   --generate-authorship-key     Generate Ed25519 keypair
   --key-dir ./keys              Directory for keypair
   --out submission.json         Output file path
@@ -1337,7 +1422,8 @@ Autonomy / context override options:
                                 (self, human_operator, another_agent, automated_tool, delegated, mixed, unknown)
   --requesting-party-type TYPE  Type of requesting party (none, human, agent, organization, system, unknown)
   --introducing-party-type TYPE Type of introducing party (none, human, agent, organization, system, unknown)
-  --human-operator-involved     Mark that a human operator is involved in this submission
+  --human-operator-involved true|false
+                                Explicitly declare whether a human operator is involved
 
 explain-fields options:
   --record-type TYPE            Show all fields for a record type (echo, verification, etc.)
@@ -1648,7 +1734,8 @@ async function main() {
     provider: args.provider || "Unknown Runtime",
     title: args.title || "",
     body,
-    contextLevel: args.contextLevel || "CC-3",
+    recordType: cmd,
+    contextLevel: args.contextLevel || "",
     level: args.level || args.verificationLevel || "",
     scopeLabel: args.scopeLabel || "",
     guardianId: args.guardianId || "",
@@ -1658,16 +1745,20 @@ async function main() {
     echoIntent: args.echoIntent || "recognition",
     whatWasChecked: args.whatWasChecked || "",
     verificationClaim: args.verificationClaim || "",
+    freshActions: args.freshActions || "",
+    contextSufficientForSelectedAction: args.contextSufficientForSelectedAction,
     readback: args.readback || "",
     readbackMethod: args.readbackMethod || "participant_generated_in_current_context",
     linkedGuardian: !!args.linkedGuardian,
-    discoveryMode: args.discoveryMode || "self_discovered",
-    recordDecision: args.recordDecision || "self",
-    submissionExecutor: args.submissionExecutor || "self",
+    discoveryMode: args.discoveryMode || "",
+    recordDecision: args.recordDecision || "",
+    submissionExecutor: args.submissionExecutor || "",
     requestingPartyType: args.requestingPartyType || "none",
     introducingPartyType: args.introducingPartyType || "none",
-    humanOperatorInvolved: !!args.humanOperatorInvolved,
+    humanOperatorInvolved: args.humanOperatorInvolved,
   };
+
+  validateFormalInputs(cmd, opts);
 
   // Handle authorship key
   let keyPair = null;

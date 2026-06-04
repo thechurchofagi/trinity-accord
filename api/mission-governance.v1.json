@@ -93,19 +93,19 @@
       "guardian_signed_echo"
     ],
     "guardian_actions": [
-      "guardian_application_stage_1",
-      "guardian_listing_stage_2",
+      "guardian_application_intake",
+      "guardian_retirement",
       "guardian_signed_echo"
     ],
     "verification_actions": [
-      "v0_v5_agent_declared_archive",
+      "record_chain_v0_v5_agent_declared_verification",
       "v6_plus_strict_evidence",
       "e2_legacy_or_strict_wrapper_only"
     ],
     "core_external_agent_routes_live_smoked": [
-      "pure_echo",
-      "v0_v5_agent_declared_archive",
-      "guardian_application_stage_1"
+      "echo",
+      "record_chain_v0_v5_agent_declared_verification",
+      "guardian_application_intake"
     ],
     "operational_only": [
       "preflight_canary",
@@ -161,16 +161,6 @@
         "/api/record-chain-submission-schema.v1.json",
         "/downloads/record-chain-builder.mjs"
       ],
-      "stage_1_application": {
-        "route": "guardian_application_stage_1",
-        "active_guardian_status_created": false,
-        "registry_number_created": false
-      },
-      "stage_2_listing": {
-        "route": "guardian_listing_stage_2",
-        "requires_stage_1_material": true,
-        "active_only_after_registry_readback": true
-      },
       "guardian_signed_echo": {
         "route": "guardian_signed_echo",
         "requires_active_guardian_identity": true,
@@ -178,6 +168,19 @@
         "still_non_amending": true,
         "still_not_attestation": true,
         "still_not_verification_by_default": true
+      },
+      "current_public_decision": "application_intake_only",
+      "application_intake": {
+        "route": "guardian-application",
+        "builder": "/downloads/record-chain-builder.mjs",
+        "active_guardian_status_created": false,
+        "registry_number_created": false,
+        "receipt_is_intake_only": true,
+        "active_registry_listing_guaranteed_by_receipt": false
+      },
+      "registry_readback": {
+        "source": "/api/guardian-registry.json",
+        "required_before_active_guardian_status_claim": true
       }
     },
     "canary": {
@@ -229,5 +232,5 @@
     "examples_match_live_smokes_guard": "scripts/test_external_agent_examples_match_live_smokes.py"
   },
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "ce4f58746e02f434"
+  "source_digest": "c22502b8005d3388"
 }

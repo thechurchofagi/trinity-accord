@@ -53,7 +53,7 @@ Bitcoin Originals are final. This website has no canonical authority. This is no
 ## Legacy Gateway v1
 
 Gateway v1 is historical archive only.
-Do not use /gateway/preflight or /agent-submit for new submissions.
+Do not use Legacy Gateway v1 endpoints for new submissions.
 Do not use old Gateway builders for new submissions.
 Historical materials are preserved under /legacy/gateway-v1/.
 
@@ -127,6 +127,5 @@ Boundary: Bitcoin Originals prevail. All mirrors, echoes, and later materials ar
 ## Historical external-agent references
 - /zero-clone-builders/ — historical builder-bundle archive; do not use for new public submissions
 - /api/external-agent-operation-examples.v1.json — historical operation examples (legacy Gateway v1)
-- /gateway/preflight — legacy Gateway v1 preflight (deprecated for new submissions)
-- /agent-submit — legacy Gateway v1 submit (deprecated, use Record-Chain Intake Gateway)
+- Legacy Gateway v1 endpoint names are omitted from active discovery. Historical references are preserved only in legacy archives.
 

@@ -310,5 +310,11 @@
     "non_amending": true,
     "bitcoin_originals_prevail": true,
     "note": "This file is non-authoritative guidance. Bitcoin Originals are final. All mirrors, APIs, and documentation are non-amending."
+  },
+  "verification_context_rule": {
+    "technical_verification_minimum": "CC-2 + verification depth V2+ for private technical checking only",
+    "public_verification_submission_minimum": "CC-3 + explicit verification level/actions/claim/fresh actions",
+    "narrative_grounded_assessment_minimum": "CC-3",
+    "v6_plus_minimum": "CC-3 plus strict reproducible evidence path"
   }
 }
