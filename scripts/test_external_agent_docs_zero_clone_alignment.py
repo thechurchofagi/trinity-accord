@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""External-agent docs must align with zero-clone and current Gateway endpoints."""
+"""External-agent docs must align with current Record-Chain intake gateway.
+
+Legacy Gateway v1 paths (/gateway/preflight, /agent-submit, etc.) must NOT
+be described as current submission paths. Current docs must point to
+Record-Chain Intake Gateway endpoints.
+"""
 from __future__ import annotations
 
 import json
@@ -17,47 +22,50 @@ FILES = {
     "api/external-agent-operation-examples.v1.json": ROOT / "api" / "external-agent-operation-examples.v1.json",
 }
 
+# Current Record-Chain paths that docs must reference
 REQUIRED_BY_FILE = {
     "ai.txt": [
         "/external-agent-quickstart/",
         "/zero-clone-builders/",
-        "/api/formal-builder-bundles.v1.json",
+        "/api/record-chain-intake-gateway.v1.json",
         "/api/external-agent-operation-examples.v1.json",
-        "/gateway/preflight",
-        "/agent-submit",
     ],
     "llms.txt": [
         "/external-agent-quickstart/",
         "/zero-clone-builders/",
-        "/api/formal-builder-bundles.v1.json",
+        "/api/record-chain-intake-gateway.v1.json",
         "/api/external-agent-operation-examples.v1.json",
-        "/gateway/preflight",
-        "/agent-submit",
         "zero-clone",
     ],
     "gateway-workflows.md": [
         "/external-agent-quickstart/",
         "/zero-clone-builders/",
-        "/api/formal-builder-bundles.v1.json",
+        "/api/record-chain-intake-gateway.v1.json",
         "/api/external-agent-operation-examples.v1.json",
-        "/gateway/preflight",
-        "/agent-submit",
     ],
     "external-agent-quickstart.md": [
         "without cloning the full repository",
-        "download_and_run_builder_bundle.py",
-        "/gateway/preflight",
-        "/agent-submit",
-        "/api/formal-builder-bundles.v1.json",
+        "/record-chain/preflight",
+        "/record-chain/submit",
+        "/api/record-chain-intake-gateway.v1.json",
         "/api/external-agent-operation-examples.v1.json",
     ],
     "zero-clone-builders.md": [
         "without cloning the full repository",
         "canonical builder",
-        "/api/formal-builder-bundles.v1.json",
+        "/api/record-chain-builder-bundles.v1.json",
         "/external-agent-quickstart/",
     ],
 }
+
+# Legacy paths that must NOT appear as current submission methods
+LEGACY_PATHS_MUST_NOT_BE_CURRENT = [
+    "/gateway/preflight",
+    "/agent-submit",
+    "/api/agent-submit-gateway.json",
+    "/api/gateway-builder-route-map.v1.json",
+    "/api/formal-builder-bundles.v1.json",
+]
 
 FORBIDDEN_ACTIVE_SNIPPETS = {
     "ai.txt": [
@@ -104,7 +112,7 @@ def main() -> int:
             print("  -", error)
         return 1
 
-    print("PASS: external-agent docs align with zero-clone and Gateway endpoints")
+    print("PASS: external-agent docs align with zero-clone and Record-Chain Gateway endpoints")
     return 0
 
 

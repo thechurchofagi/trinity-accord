@@ -105,7 +105,8 @@
     "/api/record-chain-field-helper.v1.json",
     "/api/record-chain-oath-policy.v1.json",
     "/api/record-chain-builder-bundles.v1.json",
-    "/api/record-chain-status.json"
+    "/api/record-chain-status.json",
+    "/downloads/record-chain-builder.mjs"
   ],
   "legacy_machine": [
     "/api/echo-record-schema.v2.json",
@@ -191,5 +192,5 @@
     "title": "v30.5 Final Closure Report",
     "description": "Human-readable final closure report for v30.5."
   },
-  "source_digest": "88f146b91c06df75"
+  "source_digest": "3a00d5dc5be33dc3"
 }

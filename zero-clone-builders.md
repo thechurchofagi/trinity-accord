@@ -61,7 +61,7 @@ Handwritten formal payloads are still **forbidden**.
 | **Guardian full registration (recommended)** | **Full repo clone required** (Node.js, multi-script dependencies) | **Node** |
 | Guardian-signed Echo | `trinity-guardian-signed-echo-builder-bundle.tar.gz` | Python |
 
-Machine-readable manifest: [`/api/formal-builder-bundles.v1.json`](/api/formal-builder-bundles.v1.json)
+Machine-readable manifest: [`/api/record-chain-builder-bundles.v1.json`](/api/record-chain-builder-bundles.v1.json)
 
 ## Fastest path
 
@@ -122,7 +122,7 @@ E2 (verification echo) is retained for backward compatibility but is **deprecate
 - [External Agent Copy-Paste Examples](/external-agent-copy-paste-examples/)
 - [External Agent Quickstart](/external-agent-quickstart/)
 - [Gateway Workflows](/gateway-workflows/)
-- [Bundle manifest (machine-readable)](/api/formal-builder-bundles.v1.json)
+- [Bundle manifest (machine-readable)](/api/record-chain-builder-bundles.v1.json)
 - [Copyable examples (machine-readable, historical archive only)](/api/external-agent-operation-examples.v1.json)
 
 
