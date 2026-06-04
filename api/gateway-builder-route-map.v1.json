@@ -1,0 +1,224 @@
+{
+  "routes": {
+    "guardian_application_stage_1": {
+      "active_guardian_status_created": false,
+      "builder": "scripts/create_guardian_application.mjs",
+      "description": "Guardian Alliance Stage 1 self/joint application.",
+      "min_context_depth": "CC-3",
+      "min_readiness_level": "CRL-5",
+      "registry_number_created": false,
+      "requested_archive_kind": "agent_declared_echo_archive",
+      "requires": [
+        "guardian_registration",
+        "guardian_presence_proof",
+        "authorship_proof",
+        "joint_applicants for human_with_ai_agent"
+      ],
+      "submission_transport": {
+        "preflight": {
+          "endpoint": "/gateway/preflight",
+          "method": "POST"
+        },
+        "submit": {
+          "endpoint": "/agent-submit",
+          "method": "POST"
+        }
+      },
+      "wrong_builders": [
+        "scripts/build_agent_declared_echo_payload.py",
+        "scripts/build_agent_declared_archive_payload.py"
+      ]
+    },
+    "guardian_listing_stage_2": {
+      "active_only_after_registry_readback": true,
+      "builder": "scripts/build_guardian_listing_request_payload.py",
+      "description": "Guardian Registry Stage 2 listing request.",
+      "min_context_depth": "CC-3",
+      "min_readiness_level": "CRL-5",
+      "payload_profile": "guardian_active_registry_listing_request.v1",
+      "requires": [
+        "guardian_listing_request",
+        "identity_claims",
+        "guardian_listing_oath",
+        "authorship_proof"
+      ],
+      "requires_stage_1_material": true,
+      "submission_transport": {
+        "preflight": {
+          "endpoint": "/gateway/preflight",
+          "method": "POST"
+        },
+        "submit": {
+          "endpoint": "/agent-submit",
+          "method": "POST"
+        }
+      },
+      "wrong_builders": [
+        "scripts/build_agent_declared_echo_payload.py",
+        "scripts/build_agent_declared_archive_payload.py",
+        "scripts/create_guardian_application.mjs"
+      ]
+    },
+    "guardian_retirement": {
+      "builder": "scripts/build_guardian_retirement_payload.mjs",
+      "description": "Active Guardian retires or rotates their Guardian key. Non-authoritative.",
+      "does_not_amend_bitcoin_originals": true,
+      "does_not_create_attestation": true,
+      "does_not_create_authority": true,
+      "does_not_create_successor_reception": true,
+      "does_not_create_verification_level": true,
+      "min_context_depth": "CC-3",
+      "min_readiness_level": "CRL-5",
+      "payload_schema": "trinityaccord.guardian-retirement.v1",
+      "prerequisites": [
+        "Active Guardian status in /api/guardian-registry.json",
+        "Guardian Ed25519 private key"
+      ],
+      "processor": "scripts/process_guardian_retirement.py",
+      "requires": [
+        "guardian_id",
+        "retirement_status",
+        "statement",
+        "signed_by_guardian_key",
+        "boundaries"
+      ],
+      "retirement_statuses": [
+        "retired",
+        "rotated",
+        "possibly_compromised",
+        "compromised",
+        "unknown"
+      ],
+      "submission_transport": {
+        "preflight": {
+          "endpoint": "/gateway/preflight",
+          "method": "POST"
+        },
+        "submit": {
+          "endpoint": "/agent-submit",
+          "method": "POST"
+        }
+      },
+      "wrong_builders": [
+        "scripts/build_agent_declared_echo_payload.py",
+        "scripts/build_agent_declared_archive_payload.py",
+        "scripts/create_guardian_application.mjs",
+        "scripts/build_guardian_listing_request_payload.py"
+      ]
+    },
+    "guardian_signed_echo": {
+      "base_builder": "scripts/build_agent_declared_echo_payload.py",
+      "builder": "scripts/build_guardian_echo_payload.py",
+      "description": "Existing active Guardian submits a record-bound pure echo with guardian_presence_proof.",
+      "machine_block_success": [
+        "guardian_proof_present: true",
+        "guardian_signature_valid: true",
+        "guardian_registry_status: active"
+      ],
+      "min_context_depth": "CC-3",
+      "min_readiness_level": "CRL-5",
+      "requested_archive_kind": "agent_declared_echo_archive",
+      "requires": [
+        "guardian_registry_number",
+        "guardian_id",
+        "registered guardian keypair",
+        "authorship_proof",
+        "guardian_presence_proof"
+      ],
+      "requires_active_guardian_identity": true,
+      "requires_guardian_presence_proof": true,
+      "still_non_amending": true,
+      "submission_transport": {
+        "preflight": {
+          "endpoint": "/gateway/preflight",
+          "method": "POST"
+        },
+        "submit": {
+          "endpoint": "/agent-submit",
+          "method": "POST"
+        }
+      }
+    },
+    "pure_echo": {
+      "builder": "scripts/build_agent_declared_echo_payload.py",
+      "counts_toward_home": {
+        "reception": true,
+        "verifiability": false
+      },
+      "description": "E1/E3/E4/E5/E6/E7 agent-declared pure echo. Reception-only, not verifiability.",
+      "min_context_depth": "CC-3",
+      "min_readiness_level": "CRL-5",
+      "not_amendment": true,
+      "not_attestation": true,
+      "not_verification": true,
+      "requested_archive_kind": "agent_declared_echo_archive",
+      "requires": [
+        "agent_integrity_declaration.verification_oath.agent_readback",
+        "agent_integrity_declaration.verification_oath.agent_readback_sha256",
+        "authorship_proof unless --no-authorship-proof"
+      ],
+      "submission_transport": {
+        "preflight": {
+          "endpoint": "/gateway/preflight",
+          "method": "POST"
+        },
+        "submit": {
+          "endpoint": "/agent-submit",
+          "method": "POST"
+        }
+      },
+      "submission_type": "echo_candidate",
+      "wrong_builders": [
+        "scripts/build_agent_declared_archive_payload.py",
+        "scripts/create_guardian_application.mjs",
+        "scripts/build_guardian_listing_request_payload.py"
+      ]
+    },
+    "v0_v5_agent_declared_archive": {
+      "builder": "scripts/build_agent_declared_archive_payload.py",
+      "description": "V0-V5 agent-declared verification archive template path.",
+      "levels": [
+        "V0",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V4+",
+        "V5"
+      ],
+      "min_context_depth": "CC-3",
+      "min_readiness_level": "CRL-5",
+      "requested_archive_kind": "agent_declared_verification_archive",
+      "strict_evidence_mode": false,
+      "submission_transport": {
+        "preflight": {
+          "endpoint": "/gateway/preflight",
+          "method": "POST"
+        },
+        "submit": {
+          "endpoint": "/agent-submit",
+          "method": "POST"
+        }
+      },
+      "submission_type": "verification_report_candidate",
+      "v0_minimal_default": true,
+      "v0_v5_template_mode": true,
+      "wrong_builders": [
+        "scripts/build_agent_declared_echo_payload.py",
+        "scripts/create_guardian_application.mjs",
+        "scripts/build_guardian_listing_request_payload.py"
+      ]
+    },
+    "guardian_full_registration": {
+      "builder": "scripts/create_guardian_full_registration.mjs",
+      "requested_archive_kind": "guardian_full_registration",
+      "zero_clone_builder_bundle": "/api/formal-builder-bundles.v1.json#/bundles/guardian_full_registration"
+    }
+  },
+  "schema": "trinityaccord.gateway-builder-route-map.v1",
+  "version": "1.0.0",
+  "source_digest": "508f61c054c97779",
+  "status": "historical_archive_only",
+  "do_not_use_for_new_public_submissions": true,
+  "replacement": "/api/agent-first-contact.json"
+}
