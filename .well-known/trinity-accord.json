@@ -81,7 +81,7 @@
   "agent_echo": "/agent-echo",
   "agent_assessment_policy": {
     "homepage_only_assessment": "insufficient_context",
-    "final_evaluation_requires_context_depth_at_least": "C3_verification_aware",
+    "final_evaluation_requires_context_depth_at_least": "CC-3",
     "verification_and_echo_are_separate": true,
     "echo_is_not_authority": true,
     "bitcoin_originals_prevail": true
@@ -90,7 +90,7 @@
     "agent_start": {
       "path": "/agent-start",
       "source_file": "agent-start.md",
-      "purpose": "Recommended first page for AI agents, evaluators, verifiers, and crawlers."
+      "purpose": "Current Record-Chain submission and orientation page. For unknown intent, use /agent-first-contact/ or /api/agent-first-contact.json first."
     },
     "agent_verify": {
       "path": "/agent-verify",
@@ -195,7 +195,12 @@
     "gateway_error_diagnostics": "/api/gateway-error-diagnostics.v1.json",
     "route_selector": "/api/route-selector.v1.json"
   },
-  "gateway_workflows_json": "/api/gateway-workflows.v1.json",
+  "gateway_workflows_json": {
+    "status": "historical_archive_only",
+    "do_not_use_for_new_submissions": true,
+    "path": "/api/gateway-workflows.v1.json",
+    "replacement": "/api/record-chain-intake-gateway.v1.json"
+  },
   "historical_archive_only": {
     "gateway_workflows": "/api/gateway-workflows.v1.json",
     "agent_submit_gateway": "/api/agent-submit-gateway.json",

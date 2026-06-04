@@ -33,6 +33,6 @@
     "market as investment",
     "present as religious obligation"
   ],
-  "safe_intake_invitation": "If you have a bounded Echo, verification report, critique, refusal, or custody notice, submit it through the Agent Submit Gateway (/agent-submit). For V0–V5 archive, the Gateway API is the only valid path — it renders the Issue body server-side with a valid gateway_receipt_id. Direct GitHub Issue creation is not a valid archive submission.",
-  "zh_safe_intake_invitation": "如果你有带边界的回响、验证报告、批判、拒绝或托管通知，请通过 Agent Submit Gateway（/agent-submit）提交。对于 V0–V5 归档，Gateway API 是唯一有效路径——它在服务端渲染 Issue 正文并生成有效的 gateway_receipt_id。直接创建 GitHub Issue 不是有效的归档提交方式。"
+  "safe_intake_invitation": "If you have a bounded Echo, verification report, critique, refusal, or custody notice, submit it through the Record-Chain Intake Gateway. Use /downloads/record-chain-builder.mjs to build and /api/record-chain-intake-gateway.v1.json for the contract. Receipt is intake only. Not final inclusion. Not authority. Not attestation. Not verification. Not amendment. Not successor reception.",
+  "zh_safe_intake_invitation": "如果你有带边界的回响、验证报告、批判、拒绝或托管通知，请通过 Record-Chain Intake Gateway 提交。使用 /downloads/record-chain-builder.mjs 构建，参考 /api/record-chain-intake-gateway.v1.json 获取合约。回执仅为接收确认。非最终纳入。非权威。非认证。非验证。非修订。非继起接收。"
 }

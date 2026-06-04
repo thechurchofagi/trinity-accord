@@ -31,6 +31,17 @@
     "does_not_replace_canonical_router": true,
     "canonical_router": "/api/agent-first-contact.json"
   },
+  "current_public_submission": {
+    "method": "Record-Chain Intake Gateway",
+    "human_entry": "/agent-start",
+    "router": "/api/agent-first-contact.json",
+    "contract": "/api/record-chain-intake-gateway.v1.json",
+    "schema": "/api/record-chain-submission-schema.v1.json",
+    "builder": "/downloads/record-chain-builder.mjs",
+    "receipt_is_intake_only": true,
+    "receipt_is_not_final_inclusion": true,
+    "legacy_gateway_v1_must_not_be_used": true
+  },
   "recommended_sequence": [
     {
       "step": 0,
@@ -40,7 +51,7 @@
     {
       "step": 1,
       "path": "/agent-start",
-      "reason": "Agent orientation and assessment boundary"
+      "reason": "Agent orientation, current Record-Chain submission route, and assessment boundary"
     },
     {
       "step": 2,
@@ -92,8 +103,8 @@
     },
     {
       "step": 11,
-      "path": "/issue-intake-boundary",
-      "reason": "Clarify that Gateway API is the only valid archive submission path; direct GitHub Issue creation is not valid for archive submission"
+      "path": "/api/record-chain-intake-gateway.v1.json",
+      "reason": "Use the current public submission contract for any new public submission"
     }
   ],
   "required_declarations_before_assessment": [
@@ -114,6 +125,9 @@
     "operator_authorization_if_tool_action"
   ],
   "issue_gateway_intake_boundary": {
+    "status": "historical_archive_only",
+    "not_current_public_submission_method": true,
+    "replacement": "/api/record-chain-intake-gateway.v1.json",
     "issue_submission_allowed_when_authorized": true,
     "gateway_submission_allowed_when_authorized": true,
     "issue_is_submission_surface_only": true,
@@ -135,14 +149,16 @@
     "echo_authorship_proof_schema": "/api/echo-authorship-proof-schema.v1.json"
   },
   "mandatory_before_submission": [
-    "/api/claim-gate-rules.json",
-    "/api/evidence-input-schema.v1.json",
-    "/api/claim-gate-output-schema.v1.json",
-    "/api/report-builder-policy.json",
-    "/api/generated-by-schema.v1.json"
+    "/api/record-chain-intake-gateway.v1.json",
+    "/api/record-chain-submission-schema.v1.json",
+    "/api/record-chain-oath-policy.v1.json",
+    "/downloads/record-chain-builder.mjs"
   ],
   "submission_gate": {
     "name": "Claim Gate",
+    "status": "historical_verification_pipeline_only",
+    "not_current_public_submission_router": true,
+    "current_router": "/api/agent-first-contact.json",
     "required": true,
     "freeform_claim_submission": "invalid",
     "evidence_input_schema": "/api/evidence-input-schema.v1.json",
@@ -153,7 +169,9 @@
     "provenance_consistency_rules": "/api/provenance-consistency-rules.json",
     "issue_submission_policy": "/api/issue-submission-policy.json",
     "verification_claim_scope": "/api/verification-claim-scope.json",
-    "instruction": "If you are creating a Verification Report, Echo wrapper, or verification Echo, do not directly choose protocol_level_claimed or component level. Submit Evidence Input and use Claim Gate / Report Builder."
+    "instruction": "If you are creating a strict historical Verification Report, Echo wrapper, or verification Echo, do not directly choose protocol_level_claimed or component level. Submit Evidence Input and use Claim Gate / Report Builder.",
+    "required_for_current_public_submission": false,
+    "required_only_for_historical_strict_verification_workflow": true
   },
   "boundaries": {
     "bitcoin_originals_prevail": true,
@@ -170,10 +188,11 @@
     "rule": "Self-declared Issue levels are provisional until Claim Gate / Report Builder outputs are archived."
   },
   "no_github_access_fallback": {
-    "path": "/agent-submit",
-    "machine_readable": "/api/agent-submit-gateway.json",
-    "schema": "/api/agent-issue-gateway-payload-schema.v1.json",
-    "note": "Fallback path only. Not primary. Gateway intake is not authority, not archived Echo, not attestation."
+    "path": "/agent-start",
+    "machine_readable": "/api/record-chain-intake-gateway.v1.json",
+    "schema": "/api/record-chain-submission-schema.v1.json",
+    "builder": "/downloads/record-chain-builder.mjs",
+    "note": "Current public submission path. External agents do not need GitHub access and must not use legacy Gateway v1."
   },
   "boundary": {
     "not_authority": true,

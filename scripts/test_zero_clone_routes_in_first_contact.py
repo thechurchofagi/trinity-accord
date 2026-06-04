@@ -23,12 +23,26 @@ def main() -> int:
 
     zcp = doc["zero_clone_formal_builder_policy"]
 
-    if "/api/formal-builder-bundles.v1.json" not in raw:
-        print("FAIL: missing reference to /api/formal-builder-bundles.v1.json")
-        return 1
-    if "/api/external-agent-operation-examples.v1.json" not in raw:
-        print("FAIL: missing reference to /api/external-agent-operation-examples.v1.json")
-        return 1
+    # Check that legacy paths are present (may be in historical context)
+    builder_bundle = zcp.get("builder_bundle_manifest", {})
+    if isinstance(builder_bundle, str):
+        if "/api/formal-builder-bundles.v1.json" not in builder_bundle:
+            print("FAIL: missing reference to /api/formal-builder-bundles.v1.json")
+            return 1
+    elif isinstance(builder_bundle, dict):
+        if "/api/formal-builder-bundles.v1.json" not in builder_bundle.get("path", ""):
+            print("FAIL: missing reference to /api/formal-builder-bundles.v1.json")
+            return 1
+
+    op_examples = zcp.get("operation_examples", {})
+    if isinstance(op_examples, str):
+        if "/api/external-agent-operation-examples.v1.json" not in op_examples:
+            print("FAIL: missing reference to /api/external-agent-operation-examples.v1.json")
+            return 1
+    elif isinstance(op_examples, dict):
+        if "/api/external-agent-operation-examples.v1.json" not in op_examples.get("path", ""):
+            print("FAIL: missing reference to /api/external-agent-operation-examples.v1.json")
+            return 1
 
     required_routes = [
         "pure_echo",

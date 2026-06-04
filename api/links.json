@@ -86,7 +86,7 @@
     "/api/agent-minimal-context.v1.json",
     "/api/agent-first-contact.json",
     "/api/agent-required-reading.json",
-    "/api/agent-start.v1.json",
+    "/api/agent-start.v2.json",
     "/api/agent-output-policy.v1.json",
     "/api/agent-task-router.v1.json",
     "/api/context-load-map.json",
@@ -121,7 +121,8 @@
     "/api/gateway-error-diagnostics.v1.json",
     "/api/external-agent-operation-examples.v1.json",
     "/api/formal-builder-bundles.v1.json",
-    "/api/guardian-registry.json"
+    "/api/guardian-registry.json",
+    "/api/agent-start.v1.json"
   ],
   "deprecated_for_new_records": [
     "/api/echo-record-schema.v2.json",
@@ -136,7 +137,8 @@
     "/api/gateway-error-diagnostics.v1.json",
     "/api/external-agent-operation-examples.v1.json",
     "/api/formal-builder-bundles.v1.json",
-    "/api/guardian-registry.json"
+    "/api/guardian-registry.json",
+    "/api/agent-start.v1.json"
   ],
   "version": "v1",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
@@ -192,5 +194,5 @@
     "title": "v30.5 Final Closure Report",
     "description": "Human-readable final closure report for v30.5."
   },
-  "source_digest": "3a00d5dc5be33dc3"
+  "source_digest": "40090327404d2d53"
 }

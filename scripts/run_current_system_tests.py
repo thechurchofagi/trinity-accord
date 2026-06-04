@@ -84,7 +84,18 @@ def main() -> int:
         fail(f"sitemap drift detected:\n{result.stdout}\n{result.stderr}")
     ok("sitemap up to date")
 
-    # 1c. public homepage status drift check
+    # 1c. active routes check
+    result = subprocess.run(
+        [sys.executable, "scripts/check_active_public_routes.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"active routes check failed:\n{result.stdout}\n{result.stderr}")
+    ok("active public routes check")
+
+    # 1d. public homepage status drift check
     result = subprocess.run(
         [sys.executable, "scripts/generate_public_home_status.py", "--check"],
         cwd=ROOT,

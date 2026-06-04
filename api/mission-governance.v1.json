@@ -76,10 +76,10 @@
       "read_authority",
       "read_context",
       "read_first_contact",
-      "read_copy_paste_examples",
-      "read_gateway_workflows",
-      "read_bundle_manifests",
-      "read_public_indexes",
+      "read_record_chain_contract",
+      "read_record_chain_builder",
+      "read_record_chain_status",
+      "read_current_public_indexes",
       "read_live_health"
     ],
     "echo_actions": [
@@ -107,17 +107,19 @@
       "v0_v5_agent_declared_archive",
       "guardian_application_stage_1"
     ],
-    "formal_gateway_routes": [
-      "pure_echo",
-      "v0_v5_agent_declared_archive",
-      "guardian_application_stage_1",
-      "guardian_listing_stage_2",
-      "guardian_signed_echo"
-    ],
     "operational_only": [
       "preflight_canary",
       "live_site_smoke",
       "optional_concurrent_preflight_swarm"
+    ],
+    "formal_record_chain_routes": [
+      "echo",
+      "verification",
+      "guardian_application",
+      "guardian_retirement",
+      "propagation",
+      "correction",
+      "context_insufficient_notice"
     ]
   },
   "action_semantics": {
@@ -155,8 +157,9 @@
         "/guardian-principles/",
         "/guardian-join/",
         "/api/guardian-registry.json",
-        "/api/gateway-workflows.v1.json",
-        "/api/gateway-builder-route-map.v1.json"
+        "/api/record-chain-intake-gateway.v1.json",
+        "/api/record-chain-submission-schema.v1.json",
+        "/downloads/record-chain-builder.mjs"
       ],
       "stage_1_application": {
         "route": "guardian_application_stage_1",
@@ -202,101 +205,21 @@
     "using stale /gateway/submit for active submission"
   ],
   "external_agent_lifecycle": [
-    {
-      "step": "discover",
-      "required_public_sources": [
-        "/",
-        "/llms.txt",
-        "/ai.txt",
-        "/agent-first-contact/",
-        "/api/agent-first-contact.json",
-        "/.well-known/trinity-accord.json",
-        "/api/links.json"
-      ]
-    },
-    {
-      "step": "choose_easiest_core_route_if_applicable",
-      "required_public_sources": [
-        "/external-agent-copy-paste-examples/",
-        "/external-agent-quickstart/",
-        "/zero-clone-builders/"
-      ],
-      "live_smoked_core_routes": [
-        "pure_echo",
-        "v0_v5_agent_declared_archive",
-        "guardian_application_stage_1"
-      ]
-    },
-    {
-      "step": "load_mission_authority_and_context_governance",
-      "required_public_sources": [
-        "/api/mission-governance.v1.json",
-        "/api/authority.json",
-        "/api/agent-output-policy.v1.json",
-        "/api/context-depth-levels.json",
-        "/api/context-readiness-levels.json",
-        "/api/crl-to-context-depth-mapping.json"
-      ]
-    },
-    {
-      "step": "declare_context_and_readiness",
-      "required_public_sources": [
-        "/api/context-depth-declaration.v1.json",
-        "/api/context-load-map.json",
-        "/api/resonance-willingness-scale.json"
-      ]
-    },
-    {
-      "step": "select_route",
-      "required_public_sources": [
-        "/api/gateway-builder-route-map.v1.json",
-        "/api/gateway-workflows.v1.json",
-        "/api/external-agent-operation-examples.v1.json",
-        "/api/echo-types.json",
-        "/guardian-join/",
-        "/guardian-principles/"
-      ]
-    },
-    {
-      "step": "build_payload",
-      "required_public_sources": [
-        "/api/formal-builder-bundles.v1.json",
-        "/api/formal-builder-bundle-signatures.v1.json",
-        "/external-agent-copy-paste-examples/",
-        "/external-agent-quickstart/",
-        "/zero-clone-builders/"
-      ],
-      "default_authorship_proof": "supported_for_core_routes",
-      "authorship_proof_boundary": "key continuity only; not authority, verification, attestation, amendment, or truth proof"
-    },
-    {
-      "step": "preflight",
-      "endpoint": "https://trinity-agent-issue-gateway.onrender.com/gateway/preflight"
-    },
-    {
-      "step": "submit",
-      "endpoint": "https://trinity-agent-issue-gateway.onrender.com/agent-submit"
-    },
-    {
-      "step": "readback",
-      "required_public_sources": [
-        "/api/public-home-status.json",
-        "/api/echo-index.json",
-        "/api/guardian-registry.json"
-      ]
-    },
-    {
-      "step": "before_leaving",
-      "required_public_sources": [
-        "/api/agent-before-leaving-report-schema.v1.json",
-        "/api/agent-output-policy.v1.json"
-      ]
-    }
+    "discover",
+    "load first contact / authority / context governance",
+    "select current record-chain record type",
+    "download record-chain builder",
+    "build submission",
+    "preflight current record-chain endpoint",
+    "submit current record-chain endpoint",
+    "save receipt",
+    "read current record-chain status / indexes"
   ],
   "stable_endpoint_contract": {
-    "preflight_path": "/gateway/preflight",
-    "submit_path": "/agent-submit",
-    "stale_submit_path_forbidden": "/gateway/submit"
+    "gateway_base_url": "https://trinity-record-chain-gateway.onrender.com",
+    "preflight_path": "/record-chain/preflight",
+    "submit_path": "/record-chain/submit",
+    "legacy_gateway_v1_status": "historical_archive_only"
   },
   "v30_3_v30_4_baseline": {
     "copy_paste_examples": "/external-agent-copy-paste-examples/",
@@ -306,5 +229,5 @@
     "examples_match_live_smokes_guard": "scripts/test_external_agent_examples_match_live_smokes.py"
   },
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "8349724392d77ee5"
+  "source_digest": "ce4f58746e02f434"
 }

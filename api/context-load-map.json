@@ -62,7 +62,9 @@
         "/guardian-alliance/ — stewardship network (~12KB)",
         "/for-skeptical-agents/ — skeptical evaluation guide (~8KB)",
         "/echoes/types — Echo type definitions",
-        "Gateway workflow overview"
+        "/agent-start/ — current Record-Chain submission overview",
+        "/api/record-chain-intake-gateway.v1.json — current public intake contract",
+        "/api/record-chain-status.json — current record-chain status"
       ],
       "total_size": "~250KB",
       "note": "Full context loaded. The agent has read the complete legacy archive, verification structure, and ecosystem paths."
