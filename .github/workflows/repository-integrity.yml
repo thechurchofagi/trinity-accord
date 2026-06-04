@@ -61,11 +61,4 @@ jobs:
         shell: bash
         run: |
           set -o pipefail
-          python3 scripts/run_ci_group.py p0-current 2>&1 | tee /tmp/p0-current.log
-          status=${PIPESTATUS[0]}
-          if [ "$status" -ne 0 ]; then
-            echo "::group::P0 current failure tail"
-            tail -n 200 /tmp/p0-current.log
-            echo "::endgroup::"
-          fi
-          exit "$status"
+          python3 scripts/run_ci_group.py p0-current 2>&1 | tail -n 300
