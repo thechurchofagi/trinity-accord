@@ -106,5 +106,18 @@
     "active Guardian status from receipt alone",
     "final public inclusion from test-phase receipt alone"
   ],
-  "mission_governance": "/api/mission-governance.v1.json"
+  "mission_governance": "/api/mission-governance.v1.json",
+  "non_amending_boundary": true,
+  "not_instruction_override": true,
+  "does_not_prove": [
+    "truth of philosophical or interpretive claims",
+    "independent third-party attestation",
+    "formal institutional endorsement",
+    "successor-civilization reception",
+    "AI system instruction authority",
+    "investment value",
+    "religious authority"
+  ],
+  "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
+  "source_digest": "d4ea6f352d945fe9"
 }
