@@ -90,10 +90,12 @@
     "limited_critique": "CC-2",
     "meaningful_echo": "CC-3",
     "qualified_assessment": "CC-3",
-    "verification_claim": "CC-2 + verification depth V2+",
+    "verification_claim": "CC-3 for public submission; CC-2 + V2+ only for private technical checking",
     "deep_assessment": "CC-4",
     "chronicle_research": "CC-5",
-    "full_corpus_claim": "CC-5"
+    "full_corpus_claim": "CC-5",
+    "technical_verification_check": "CC-2 + verification depth V2+",
+    "public_verification_submission": "CC-3 + explicit V-level/actions/claim"
   },
   "context_packs_inventory": {
     "core-ontology.json": {
@@ -250,6 +252,12 @@
     "/guardian-alliance/ — stewardship network (~12KB)",
     "/for-skeptical-agents/ — skeptical evaluation guide (~8KB)",
     "/echoes/types — Echo type definitions",
-    "Gateway workflow overview"
-  ]
+    "Record-Chain Intake Gateway overview"
+  ],
+  "verification_context_rule": {
+    "technical_verification_minimum": "CC-2 + verification depth V2+ for private technical checking only",
+    "public_verification_submission_minimum": "CC-3 + explicit verification level/actions/claim/fresh actions",
+    "narrative_grounded_assessment_minimum": "CC-3",
+    "v6_plus_minimum": "CC-3 plus strict reproducible evidence path"
+  }
 }

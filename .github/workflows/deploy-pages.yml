@@ -151,6 +151,9 @@ jobs:
       - name: Verify Pages builder artifact contract
         run: python3 scripts/test_pages_builder_artifact_contract.py --site-dir _site
 
+      - name: Verify deployment freshness surface in Pages artifact
+        run: python3 scripts/check_deployment_freshness.py --site-dir _site
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3
 
@@ -205,3 +208,6 @@ jobs:
           python3 scripts/smoke_live_discovery_contract.py \
             --site "https://www.trinityaccord.org" \
             --strict-digest
+
+      - name: Verify live deployment freshness surface
+        run: python3 scripts/check_deployment_freshness.py --site "https://www.trinityaccord.org"

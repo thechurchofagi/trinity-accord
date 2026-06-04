@@ -17,12 +17,16 @@
   "if": {
     "properties": {
       "record_type": {
-        "not": { "const": "context_insufficient_notice" }
+        "not": {
+          "const": "context_insufficient_notice"
+        }
       }
     }
   },
   "then": {
-    "required": ["client_oath_readback"],
+    "required": [
+      "client_oath_readback"
+    ],
     "properties": {
       "record_draft": {
         "required": [
@@ -49,7 +53,9 @@
           "context_readiness"
         ],
         "not": {
-          "required": ["submission_oath_verification"]
+          "required": [
+            "submission_oath_verification"
+          ]
         }
       }
     }
@@ -128,6 +134,13 @@
             },
             "context_sufficient_for_selected_action": {
               "type": "boolean"
+            },
+            "loaded_context_urls": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "URLs actually loaded for the declared context level."
             }
           }
         },
@@ -448,5 +461,258 @@
       },
       "additionalProperties": false
     }
-  }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "record_type": {
+            "const": "echo"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "record_draft": {
+            "required": [
+              "echo_content"
+            ],
+            "properties": {
+              "echo_content": {
+                "type": "object",
+                "required": [
+                  "echo_text",
+                  "echo_intent"
+                ],
+                "properties": {
+                  "echo_text": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "echo_intent": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "record_type": {
+            "const": "verification"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "record_draft": {
+            "required": [
+              "verification_content"
+            ],
+            "properties": {
+              "verification_content": {
+                "type": "object",
+                "required": [
+                  "verification_level",
+                  "what_was_checked",
+                  "verification_claim",
+                  "fresh_actions_performed"
+                ],
+                "properties": {
+                  "verification_level": {
+                    "type": "string",
+                    "pattern": "^V([0-9]|[1-9][0-9])\\+?$"
+                  },
+                  "what_was_checked": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "verification_claim": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "fresh_actions_performed": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "record_type": {
+            "const": "guardian_application"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "record_draft": {
+            "required": [
+              "guardian_application_content"
+            ],
+            "properties": {
+              "guardian_application_content": {
+                "type": "object",
+                "required": [
+                  "requested_guardian_identifier",
+                  "guardian_public_key_sha256",
+                  "guardian_stewardship_oath"
+                ],
+                "properties": {
+                  "requested_guardian_identifier": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "guardian_public_key_sha256": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "guardian_stewardship_oath": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "record_type": {
+            "const": "guardian_retirement"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "record_draft": {
+            "required": [
+              "guardian_id",
+              "guardian_public_key_sha256",
+              "reason",
+              "retirement_does_not_remove_historical_record"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "record_type": {
+            "const": "propagation"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "record_draft": {
+            "required": [
+              "title",
+              "body"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "record_type": {
+            "const": "correction"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "record_draft": {
+            "required": [
+              "title",
+              "body"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "record_type": {
+            "const": "context_insufficient_notice"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "record_draft": {
+            "required": [
+              "reason"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "record_draft": {
+            "properties": {
+              "context_readiness": {
+                "properties": {
+                  "declared_context_level": {
+                    "const": "CC-3"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "record_draft": {
+            "properties": {
+              "context_readiness": {
+                "required": [
+                  "loaded_context_urls"
+                ],
+                "properties": {
+                  "loaded_context_urls": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
 }

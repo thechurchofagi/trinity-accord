@@ -68,33 +68,21 @@ A Guardian may have:
 
 A Guardian identity is a continuity identity. It is not a rank, office, authority, clergy role, governance seat, legal status, or verification level.
 
-## How to become a Guardian
+## How to apply to become a Guardian
 
-There are three stages:
+Current public product decision: **application intake only**.
 
-### 1. Interested reader
+Use the [Guardian Join Guide](/guardian-join/) and the current Record-Chain Builder command `guardian-application`. The public intake receipt confirms application intake only. It does not guarantee active registry listing, active Guardian status, authority, governance, attestation, verification level, successor reception, or amendment.
 
-- Read the Guardian Alliance page.
-- Read the Guardian Join Guide.
-- No key or proof is required yet.
+Current readback rule:
 
-### 2. Self-registered Guardian
+1. Submit the Guardian application through the Record-Chain Intake Gateway.
+2. Save the receipt.
+3. Query receipt/status.
+4. Read `/api/record-chain-status.json`.
+5. Read `/api/guardian-registry.json` before claiming active Guardian status.
 
-- Generate an Ed25519 keypair.
-- Keep the private key local.
-- Create local Guardian key metadata if desired.
-- Submit a Guardian proof with self-registration.
-- Expected status: `valid_self_registered_guardian_claim`.
-- Registry number: `unassigned`.
-
-### 3. Active registered Guardian
-
-- Submit an Active Registry Listing Request after self-registration.
-- Repository automation assigns the next ordinary automatic `guardian_registry_number`, starting at `00100`, if validation passes.
-- `00001`–`00099` are special reserved Guardian registry numbers.
-- The requester must not submit or request a specific registry number.
-- The registry entry appears in `/api/guardian-registry.json`.
-- Expected status: `active_registered_guardian`.
+Only a matching active registry entry can support an `active_registered_guardian` statement. If no active registry entry exists, state only that an application intake receipt exists.
 
 A registry number is not authority. It is a public reference number for a Guardian key-continuity identity.
 
@@ -122,7 +110,7 @@ Guardian Alliance membership is voluntary. It creates no governance power, legal
 ### 3. 正式登记守护者
 
 - 在完成自注册后，提交 Active Registry Listing Request。
-- 仓库自动化在验证通过后分配下一个普通自动 `guardian_registry_number`，普通自动编号从 `00100` 开始。
+- 当前公开路径仅保证申请摄入；是否出现 active registry listing 必须以后续 `/api/guardian-registry.json` 回读为准。
 - `00001`–`00099` 是特殊保留守护者编号。
 - 请求者不得自行提交或指定具体编号。
 - registry entry 出现在 `/api/guardian-registry.json`。
@@ -240,7 +228,7 @@ This registry number is a public reference number only. It is not authority, gov
 
 ## 当前 active registry
 
-公开 registry 包含已登记的活跃守护者。早期编号 `00001`–`00099` 是特殊保留条目。普通自动登记从 `00100` 开始。
+公开 registry 只证明其中已列出的 active registered Guardians；申请 receipt 本身不是 active Guardian status。
 
 当前条目请始终查阅 `/api/guardian-registry.json`。
 

@@ -26,20 +26,34 @@
       },
       {
         "id": "self_registered_guardian",
-        "description": "Generate keypair, keep private key local, optionally create local key metadata, submit Guardian proof with self-registration.",
-        "expected_status": "valid_self_registered_guardian_claim",
+        "description": "Build and submit a guardian_application through the Record-Chain Builder and Intake Gateway; receipt is application intake only.",
+        "expected_status": "application_intake_receipt_only",
         "guardian_registry_number": "unassigned"
       },
       {
         "id": "active_registered_guardian",
-        "description": "Submit an Active Registry Listing Request after self-registration. Repository automation assigns the next available guardian_registry_number if validation passes.",
-        "expected_status": "active_registered_guardian",
-        "guardian_registry_number_source": "/api/guardian-registry.json"
+        "description": "Active status requires later public registry readback. It is not automatically created or guaranteed by a Guardian application receipt.",
+        "expected_status": "active_only_if_registry_match",
+        "guardian_registry_number_source": "/api/guardian-registry.json",
+        "current_public_route": "not_guaranteed_by_application_intake"
       }
     ],
-    "registry_listing_is_automatic": true,
+    "registry_listing_is_automatic": false,
     "registry_listing_creates_authority": false,
-    "registry_number_is_reference_only": true
+    "registry_number_is_reference_only": true,
+    "current_public_decision": "application_intake_only",
+    "current_builder": "/downloads/record-chain-builder.mjs",
+    "builder_command": "guardian-application",
+    "contract": "/api/record-chain-intake-gateway.v1.json",
+    "legacy_gateway_v1_forbidden_for_new_applications": true,
+    "receipt_means": "application_intake_accepted_only",
+    "receipt_is_not_active_guardian_status": true,
+    "active_registry_listing_guaranteed_by_receipt": false,
+    "post_submit_readback": [
+      "receipt_status",
+      "/api/record-chain-status.json",
+      "/api/guardian-registry.json"
+    ]
   },
   "stewardship_practices": [
     {

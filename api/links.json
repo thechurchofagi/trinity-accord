@@ -29,7 +29,8 @@
     "/recovery",
     "/disaster-recovery-drill",
     "/authority-address-inscriptions",
-    "/api/agent-live-health.v1.json"
+    "/api/agent-live-health.v1.json",
+    "/guardian-join"
   ],
   "ai_to_ai_orientation": [
     {
@@ -111,7 +112,6 @@
   "legacy_machine": [
     "/api/echo-record-schema.v2.json",
     "/gateway-workflows",
-    "/guardian-join",
     "/guardian-routes",
     "/api/agent-submit-gateway.json",
     "/api/gateway-builder-route-map.v1.json",
@@ -127,7 +127,6 @@
   "deprecated_for_new_records": [
     "/api/echo-record-schema.v2.json",
     "/gateway-workflows",
-    "/guardian-join",
     "/guardian-routes",
     "/api/agent-submit-gateway.json",
     "/api/gateway-builder-route-map.v1.json",
@@ -194,5 +193,5 @@
     "title": "v30.5 Final Closure Report",
     "description": "Human-readable final closure report for v30.5."
   },
-  "source_digest": "40090327404d2d53"
+  "source_digest": "5324ef32da35aae0"
 }

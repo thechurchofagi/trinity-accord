@@ -37,10 +37,7 @@
   ],
   "legacy_gateway_v1": {
     "status": "historical_archive_only",
-    "retired_endpoints": [
-      "/gateway/preflight",
-      "/agent-submit"
-    ],
-    "historical_archive": "/legacy/gateway-v1/"
+    "historical_archive": "/legacy/gateway-v1/",
+    "retired_endpoint_names_omitted_from_active_discovery": true
   }
 }

@@ -63,6 +63,19 @@ _REQUIRED_V2_BLOCKS: frozenset[str] = frozenset({
     "non_authority_boundary_acknowledgement",
 })
 
+
+_AUTHORIZATION_SCOPE_BY_RECORD_TYPE: dict[str, str] = {
+    "echo": "create_echo_record",
+    "verification": "create_verification_record",
+    "guardian_application": "create_guardian_application_record",
+    "guardian_retirement": "create_guardian_retirement_record",
+    "guardian_key_rotation": "create_guardian_key_rotation_record",
+    "propagation": "create_propagation_record",
+    "correction": "create_correction_record",
+    "classification_update": "create_classification_update_record",
+    "context_insufficient_notice": "create_context_insufficient_notice_record",
+}
+
 # ---------------------------------------------------------------------------
 # Required identity fields inside submitting_participant_identity.
 # ---------------------------------------------------------------------------
@@ -518,6 +531,68 @@ def validate_linked_guardian_request(draft: dict[str, Any]) -> list[Diagnostic]:
     return diagnostics
 
 
+def validate_record_type_specific_content(record_type: str, draft: dict[str, Any]) -> list[Diagnostic]:
+    """Require content blocks that match the public schema for each record type."""
+    diagnostics: list[Diagnostic] = []
+
+    def missing(code: str, field: str, message: str) -> None:
+        diagnostics.append(_make_diagnostic(
+            code=code,
+            severity="error",
+            field=field,
+            message=message,
+            meaning="Public schema and gateway validation require record-type-specific content.",
+            suggested_fix="Rebuild with the current record-chain-builder.mjs and provide the required fields.",
+        ))
+
+    auth_scope = draft.get("authorization_context", {}).get("authorization_scope")
+    expected_scope = _AUTHORIZATION_SCOPE_BY_RECORD_TYPE.get(record_type)
+    if expected_scope and auth_scope != expected_scope:
+        missing(
+            "AUTHORIZATION_SCOPE_MISMATCH",
+            "draft.authorization_context.authorization_scope",
+            f"authorization_scope must be {expected_scope!r} for record_type {record_type!r}, got {auth_scope!r}",
+        )
+
+    if record_type == "echo":
+        content = draft.get("echo_content")
+        if not isinstance(content, dict) or not content.get("echo_text") or not content.get("echo_intent"):
+            missing("MISSING_ECHO_CONTENT", "draft.echo_content", "Echo records require echo_content.echo_text and echo_content.echo_intent")
+    elif record_type == "verification":
+        content = draft.get("verification_content")
+        if not isinstance(content, dict):
+            missing("MISSING_VERIFICATION_CONTENT", "draft.verification_content", "Verification records require verification_content")
+        else:
+            required = {
+                "verification_level": content.get("verification_level"),
+                "what_was_checked": content.get("what_was_checked"),
+                "verification_claim": content.get("verification_claim"),
+                "fresh_actions_performed": content.get("fresh_actions_performed"),
+            }
+            if (
+                not required["verification_level"]
+                or not isinstance(required["what_was_checked"], list) or not required["what_was_checked"]
+                or not required["verification_claim"]
+                or not isinstance(required["fresh_actions_performed"], list) or not required["fresh_actions_performed"]
+            ):
+                missing("MISSING_VERIFICATION_CONTENT", "draft.verification_content", "Verification records require explicit level, checked items, claim, and fresh actions")
+    elif record_type == "guardian_application":
+        content = draft.get("guardian_application_content")
+        if not isinstance(content, dict) or not content.get("requested_guardian_identifier") or not content.get("guardian_public_key_sha256") or not content.get("guardian_stewardship_oath"):
+            missing("MISSING_GUARDIAN_APPLICATION_CONTENT", "draft.guardian_application_content", "Guardian applications require requested identifier, guardian public key SHA-256, and stewardship oath")
+    elif record_type == "guardian_retirement":
+        for field in ("guardian_id", "guardian_public_key_sha256", "reason"):
+            if not draft.get(field):
+                missing("MISSING_GUARDIAN_RETIREMENT_FIELD", f"draft.{field}", f"Guardian retirement requires {field}")
+    elif record_type in {"propagation", "correction"}:
+        for field in ("title", "body"):
+            if not draft.get(field):
+                missing("MISSING_RECORD_CONTENT", f"draft.{field}", f"{record_type} requires {field}")
+    elif record_type == "context_insufficient_notice" and not draft.get("reason"):
+        missing("MISSING_CONTEXT_INSUFFICIENT_REASON", "draft.reason", "Context-insufficient notices require reason")
+
+    return diagnostics
+
 def validate_claim_boundary(draft: dict[str, Any]) -> list[Diagnostic]:
     """If authorship_proof.claim_boundary exists, it must be a dict (not a string)."""
     diagnostics: list[Diagnostic] = []
@@ -635,6 +710,27 @@ def validate_context_readiness(record_type: str, draft: dict[str, Any]) -> list[
                 break
         else:
             required_cc = min_cc
+
+    context_readiness = draft.get("context_readiness") if isinstance(draft.get("context_readiness"), dict) else {}
+    loaded_urls = context_readiness.get("loaded_context_urls") if isinstance(context_readiness, dict) else None
+    if cc_level >= 3 and (not isinstance(loaded_urls, list) or len(loaded_urls) == 0):
+        diagnostics.append(_make_diagnostic(
+            code="CC3_REQUIRES_LOADED_CONTEXT_URLS",
+            severity="error",
+            field="draft.context_readiness.loaded_context_urls",
+            message="CC-3 declarations require non-empty loaded_context_urls",
+            meaning="Context claims must be backed by the URLs actually loaded.",
+            suggested_fix="Add loaded_context_urls or lower declared_context_level.",
+        ))
+    if context_readiness.get("context_sufficient_for_selected_action") is True and cc_level > 0 and (not isinstance(loaded_urls, list) or len(loaded_urls) == 0):
+        diagnostics.append(_make_diagnostic(
+            code="CONTEXT_SUFFICIENT_REQUIRES_LOADED_URLS",
+            severity="error",
+            field="draft.context_readiness.loaded_context_urls",
+            message="context_sufficient_for_selected_action=true requires loaded_context_urls",
+            meaning="Sufficient-context claims must be auditable from the loaded context URLs.",
+            suggested_fix="Add loaded_context_urls or set context_sufficient_for_selected_action=false.",
+        ))
 
     if cc_level < required_cc:
         diagnostics.append(_make_diagnostic(
@@ -844,6 +940,7 @@ def validate_submission(submission: dict[str, Any]) -> list[Diagnostic]:
     # --- v2 common blocks ---
     if isinstance(draft, dict) and rt:
         diagnostics.extend(validate_v2_common_blocks(rt, draft))
+        diagnostics.extend(validate_record_type_specific_content(rt, draft))
 
     # --- identity validation ---
     if isinstance(draft, dict):

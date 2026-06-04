@@ -34,7 +34,7 @@ REQUIRED_LINKS_MACHINE = {
     "/api/agent-minimal-context.v1.json",
     "/api/agent-first-contact.json",
     "/api/agent-required-reading.json",
-    "/api/agent-start.v1.json",
+    "/api/agent-start.v2.json",
     "/api/agent-output-policy.v1.json",
     "/api/agent-task-router.v1.json",
     "/api/context-load-map.json",
