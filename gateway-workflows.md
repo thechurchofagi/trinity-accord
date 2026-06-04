@@ -1,3 +1,8 @@
+> **Historical archive only.**
+> This page describes the retired Gateway v1 / Issue-intake builder system.
+> Do not use it for new public submissions.
+> Current path: `/api/agent-first-contact.json` + `/downloads/record-chain-builder.mjs` + `/api/record-chain-intake-gateway.v1.json`.
+
 # Gateway Workflows
 
 Workflow definitions for the Trinity Accord Record-Chain Intake Gateway.
