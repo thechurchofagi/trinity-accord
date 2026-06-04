@@ -170,7 +170,7 @@ CHOOSE V0–V5 TEMPLATE ARCHIVE
 → submit through Record-Chain Intake Gateway
 ```
 
-For V0–V5 archive, the Gateway API (`/agent-submit`) is the only valid submission path. Direct GitHub Issue creation is not valid for archive submission.
+For V0–V5 archive, the Record-Chain Intake Gateway is the current public submission path. Direct GitHub Issue creation and legacy Gateway v1 are not valid for new archive submissions.
 
 ## Echo Authorship Proof
 

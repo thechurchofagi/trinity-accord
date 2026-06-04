@@ -95,9 +95,10 @@
 
 # Zero-clone external agent quickstart
 # External agents: see /external-agent-quickstart/ for zero-clone submission flow.
-# Zero-clone builders: /zero-clone-builders/
 # Current builder: /downloads/record-chain-builder.mjs
 # Current contract: /api/record-chain-intake-gateway.v1.json
+# Historical external-agent references:
+# /zero-clone-builders/ — historical builder-bundle archive; do not use for new public submissions.
 # Operation examples (historical): /api/external-agent-operation-examples.v1.json
 # Gateway preflight: /gateway/preflight (deprecated for new submissions, use record-chain)
 # Legacy submit: /agent-submit (deprecated, use Record-Chain Intake Gateway)

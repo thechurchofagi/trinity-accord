@@ -25,15 +25,5 @@ jobs:
         with:
           python-version: "3.12"
       - run: python3 -m pip install -r requirements-ci.txt
-      - name: Diagnose record-chain verify
-        run: python3 scripts/trinity_record_chain.py verify
-      - name: Diagnose sitemap drift
-        run: python3 scripts/generate_sitemap.py --check
-      - name: Diagnose public-home-status drift
-        run: python3 scripts/generate_public_home_status.py --check
-      - name: Diagnose public test phase disclosure
-        run: python3 scripts/test_public_test_phase_disclosure.py
-      - name: Diagnose Phase 5C hotfix
-        run: python3 scripts/test_phase_5c_hotfix.py
       - name: Run full current system tests
         run: python3 scripts/run_current_system_tests.py
