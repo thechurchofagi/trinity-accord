@@ -81,6 +81,8 @@ class ReadinessResponse(BaseModel):
     """Response for the readiness endpoint."""
 
     ok: bool
+    preflight_ready: bool = True
+    submit_ready: bool = True
     service: str
     version: str
     repo_configured: bool
