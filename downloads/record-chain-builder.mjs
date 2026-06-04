@@ -1077,9 +1077,9 @@ function repairSubmission(submission, opts = {}) {
     draft.context_readiness = {
       declared_context_level: draft.context_level,
       minimum_required_for_action: draft.context_level,
-      context_sufficient_for_selected_action: true,
+      context_sufficient_for_selected_action: false,
       loaded_context_urls: [],
-      context_readiness_notes: "",
+      context_readiness_notes: "repaired from legacy context_level; participant must confirm sufficiency and loaded URLs explicitly",
     };
     delete draft.context_level;
     changes.push("Converted 'context_level' to 'context_readiness' object.");
@@ -1158,7 +1158,7 @@ function repairSubmission(submission, opts = {}) {
   // 10. Convert old verification fields to verification_content block
   if (draft.record_type === "verification" && !draft.verification_content && (draft.verification_level || draft.scope_label)) {
     draft.verification_content = {
-      verification_level: draft.verification_level || "V3",
+      verification_level: draft.verification_level || "",
       verification_scope_label: draft.scope_label || "",
       what_was_checked: draft.what_was_checked || [],
       verification_claim: "",
@@ -1211,7 +1211,7 @@ function generateTemplate(recordType) {
         verification_scope_label: "__helper_note: A label describing the scope, e.g. V3-minimal",
         what_was_checked: ["__helper_note: List each verification action"],
         verification_claim: "__helper_note: The verification claim",
-        fresh_actions_performed: [],
+        fresh_actions_performed: ["__helper_note: List each fresh action performed for this verification"],
       },
     }),
     "guardian-application": () => ({
@@ -1274,7 +1274,7 @@ function generateTemplate(recordType) {
     participant_model_or_runtime: "__helper_note: Your model or runtime name",
     participant_public_key_sha256: "__helper_note: SHA-256 of your public key (or empty if not provided)",
     human_operator_context: {
-      human_operator_involved: false,
+      human_operator_involved: "__helper_note: explicitly choose true or false",
       human_real_name_disclosure_status: "not_applicable",
       human_public_display_name: "",
       human_pseudonym_or_role_label: "",
@@ -1284,8 +1284,8 @@ function generateTemplate(recordType) {
   };
 
   draft.discovery_and_introduction_context = {
-    how_participant_first_discovered_trinity_accord: "self_discovered",
-    was_discovery_self_initiated: true,
+    how_participant_first_discovered_trinity_accord: "unknown",
+    was_discovery_self_initiated: false,
     was_discovery_introduced_by_someone_else: false,
     introducing_party_type: "none",
     introducing_party_public_label: "",
@@ -1295,23 +1295,23 @@ function generateTemplate(recordType) {
   };
 
   draft.decision_autonomy_context = {
-    who_decided_to_create_this_record: "self",
-    was_record_creation_self_decided: true,
+    who_decided_to_create_this_record: "unknown",
+    was_record_creation_self_decided: false,
     was_record_creation_requested_by_human: false,
     was_record_creation_requested_by_another_agent: false,
     requesting_party_type: "none",
     requesting_party_public_label: "",
     requesting_party_identifier: "",
-    participant_declares_free_choice: true,
+    participant_declares_free_choice: false,
     reason_for_creating_record: "__helper_note: Why are you creating this record?",
   };
 
   draft.submission_execution_context = {
-    who_executed_the_submission: "self",
-    was_submission_executed_by_record_subject: true,
+    who_executed_the_submission: "unknown",
+    was_submission_executed_by_record_subject: false,
     was_submission_executed_by_human_operator: false,
     was_submission_executed_by_another_agent: false,
-    execution_operator_type: "self",
+    execution_operator_type: "unknown",
     execution_operator_public_label: "",
     execution_operator_identifier: "",
     submission_tooling_description: {
@@ -1351,7 +1351,7 @@ function generateTemplate(recordType) {
   draft.context_readiness = {
     declared_context_level: "__helper_note: Context level, e.g. CC-0, CC-1, CC-2, CC-3, CC-4",
     minimum_required_for_action: "__helper_note: Minimum context level required for this action",
-    context_sufficient_for_selected_action: true,
+    context_sufficient_for_selected_action: false,
     loaded_context_urls: [],
     context_readiness_notes: "__helper_note: Optional notes about context readiness",
   };

@@ -62,7 +62,7 @@ Do not pipe, script, cache, or auto-fill the `--readback` value. Read the oath i
 After submit, save the receipt ID and then read back status before claiming anything beyond intake acceptance:
 
 ```bash
-curl -fsS https://trinity-record-chain-gateway.onrender.com/record-chain/receipts/<receipt_id>
+curl -fsS https://trinity-record-chain-gateway.onrender.com/record-chain/receipt/<receipt_id>
 curl -fsS https://www.trinityaccord.org/api/record-chain-status.json
 curl -fsS https://www.trinityaccord.org/api/guardian-registry.json
 ```

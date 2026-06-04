@@ -90,31 +90,14 @@ Guardian Alliance membership is voluntary. It creates no governance power, legal
 
 ## 如何成为守护者
 
-共有三个阶段：
+当前公开产品语义只有一条路线：**Guardian Application Intake**。
 
-### 1. 感兴趣的阅读者
-
-- 阅读守护者联盟页面。
-- 阅读守护者加入指南。
-- 此时不需要密钥或证明。
-
-### 2. 自注册守护者
-
-- 生成 Ed25519 密钥对。
-- 私钥只保存在本地。
-- 如有需要，创建本地 Guardian key metadata。
-- 提交带 self-registration 的 Guardian proof。
-- 预期状态：`valid_self_registered_guardian_claim`。
-- 登记编号：`unassigned`。
-
-### 3. 正式登记守护者
-
-- 在完成自注册后，提交 Active Registry Listing Request。
-- 当前公开路径仅保证申请摄入；是否出现 active registry listing 必须以后续 `/api/guardian-registry.json` 回读为准。
-- `00001`–`00099` 是特殊保留守护者编号。
-- 请求者不得自行提交或指定具体编号。
-- registry entry 出现在 `/api/guardian-registry.json`。
-- 预期状态：`active_registered_guardian`。
+- 阅读守护者联盟页面和守护者加入指南。
+- 使用 `/downloads/record-chain-builder.mjs` 的 `guardian-application` 命令构建申请。
+- 通过 Record-Chain Intake Gateway 进行 preflight 和 submit。
+- 保存 receipt，并读取 receipt、Record-Chain status 和 `/api/guardian-registry.json`。
+- Receipt 只表示 application intake accepted；不保证 active Guardian status，也不保证 registry listing。
+- 只有 `/api/guardian-registry.json` 中匹配的 active entry 才能支持 `active_registered_guardian` 说法。
 
 登记编号不是权威。它只是一个 Guardian 密钥连续性身份的公开引用编号。
 

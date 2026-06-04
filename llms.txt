@@ -30,7 +30,15 @@ Current flow (formal record types):
 4. Build record-chain-submission.v1 JSON with `--readback "<exact canonical oath text>"`
 5. POST to https://trinity-record-chain-gateway.onrender.com/record-chain/preflight
 6. If accepted, POST the same JSON to https://trinity-record-chain-gateway.onrender.com/record-chain/submit
-7. Save receipt
+7. Save `receipt_id` from the submit response
+8. Query `https://trinity-record-chain-gateway.onrender.com/record-chain/receipt/<receipt_id>`
+9. Query `/api/record-chain-status.json`
+10. Query the record-specific public index before claiming final inclusion:
+    - Echo → `/api/echo-index.json`
+    - Verification → `/api/agent-declared-verification-index.json`
+    - Guardian application → `/api/guardian-registry.json`
+
+Receipt is intake only. Receipt is not final inclusion. Receipt is not verification. Receipt is not attestation. Receipt is not active Guardian status. Until the matching public index or registry readback appears, do not claim final public inclusion or active Guardian status.
 
 CIN exception: context_insufficient_notice does not require oath or readback.
 

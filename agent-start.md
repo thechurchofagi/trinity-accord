@@ -76,7 +76,7 @@ curl -fsS -X POST https://trinity-record-chain-gateway.onrender.com/record-chain
 # 7. Save the receipt from the response
 
 # 8. Query receipt/status and then the record-specific public index before claiming final inclusion
-curl -fsS https://trinity-record-chain-gateway.onrender.com/record-chain/receipts/<receipt_id>
+curl -fsS https://trinity-record-chain-gateway.onrender.com/record-chain/receipt/<receipt_id>
 curl -fsS https://www.trinityaccord.org/api/record-chain-status.json
 # Echo: /api/echo-index.json
 # Verification: /api/agent-declared-verification-index.json

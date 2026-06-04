@@ -50,7 +50,8 @@
           "record_type",
           "submitting_participant_identity",
           "submission_execution_context",
-          "context_readiness"
+          "context_readiness",
+          "authorization_context"
         ],
         "not": {
           "required": [
@@ -93,7 +94,8 @@
         "record_type",
         "submitting_participant_identity",
         "submission_execution_context",
-        "context_readiness"
+        "context_readiness",
+        "authorization_context"
       ],
       "properties": {
         "record_type": {
@@ -683,6 +685,308 @@
                 "properties": {
                   "declared_context_level": {
                     "const": "CC-3"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "record_draft": {
+            "properties": {
+              "context_readiness": {
+                "required": [
+                  "loaded_context_urls"
+                ],
+                "properties": {
+                  "loaded_context_urls": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "$comment": "record type authorization scope: echo",
+      "if": {
+        "properties": {
+          "record_type": {
+            "const": "echo"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "record_draft": {
+            "properties": {
+              "authorization_context": {
+                "type": "object",
+                "required": [
+                  "authorization_scope"
+                ],
+                "properties": {
+                  "authorization_scope": {
+                    "const": "create_echo_record"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "$comment": "record type authorization scope: verification",
+      "if": {
+        "properties": {
+          "record_type": {
+            "const": "verification"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "record_draft": {
+            "properties": {
+              "authorization_context": {
+                "type": "object",
+                "required": [
+                  "authorization_scope"
+                ],
+                "properties": {
+                  "authorization_scope": {
+                    "const": "create_verification_record"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "$comment": "record type authorization scope: guardian_application",
+      "if": {
+        "properties": {
+          "record_type": {
+            "const": "guardian_application"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "record_draft": {
+            "properties": {
+              "authorization_context": {
+                "type": "object",
+                "required": [
+                  "authorization_scope"
+                ],
+                "properties": {
+                  "authorization_scope": {
+                    "const": "create_guardian_application_record"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "$comment": "record type authorization scope: guardian_retirement",
+      "if": {
+        "properties": {
+          "record_type": {
+            "const": "guardian_retirement"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "record_draft": {
+            "properties": {
+              "authorization_context": {
+                "type": "object",
+                "required": [
+                  "authorization_scope"
+                ],
+                "properties": {
+                  "authorization_scope": {
+                    "const": "create_guardian_retirement_record"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "$comment": "record type authorization scope: guardian_key_rotation",
+      "if": {
+        "properties": {
+          "record_type": {
+            "const": "guardian_key_rotation"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "record_draft": {
+            "properties": {
+              "authorization_context": {
+                "type": "object",
+                "required": [
+                  "authorization_scope"
+                ],
+                "properties": {
+                  "authorization_scope": {
+                    "const": "create_guardian_key_rotation_record"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "$comment": "record type authorization scope: propagation",
+      "if": {
+        "properties": {
+          "record_type": {
+            "const": "propagation"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "record_draft": {
+            "properties": {
+              "authorization_context": {
+                "type": "object",
+                "required": [
+                  "authorization_scope"
+                ],
+                "properties": {
+                  "authorization_scope": {
+                    "const": "create_propagation_record"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "$comment": "record type authorization scope: correction",
+      "if": {
+        "properties": {
+          "record_type": {
+            "const": "correction"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "record_draft": {
+            "properties": {
+              "authorization_context": {
+                "type": "object",
+                "required": [
+                  "authorization_scope"
+                ],
+                "properties": {
+                  "authorization_scope": {
+                    "const": "create_correction_record"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "$comment": "record type authorization scope: classification_update",
+      "if": {
+        "properties": {
+          "record_type": {
+            "const": "classification_update"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "record_draft": {
+            "properties": {
+              "authorization_context": {
+                "type": "object",
+                "required": [
+                  "authorization_scope"
+                ],
+                "properties": {
+                  "authorization_scope": {
+                    "const": "create_classification_update_record"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "$comment": "record type authorization scope: context_insufficient_notice",
+      "if": {
+        "properties": {
+          "record_type": {
+            "const": "context_insufficient_notice"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "record_draft": {
+            "properties": {
+              "authorization_context": {
+                "type": "object",
+                "required": [
+                  "authorization_scope"
+                ],
+                "properties": {
+                  "authorization_scope": {
+                    "const": "create_context_insufficient_notice_record"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "$comment": "context sufficient claims require loaded context URLs",
+      "if": {
+        "properties": {
+          "record_draft": {
+            "properties": {
+              "context_readiness": {
+                "properties": {
+                  "context_sufficient_for_selected_action": {
+                    "const": true
                   }
                 }
               }

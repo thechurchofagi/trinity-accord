@@ -124,6 +124,43 @@ def build_formal_journeys(tmp: Path) -> None:
             ],
             "guardian.json",
         ),
+        (
+            "guardian_retirement",
+            [
+                "guardian-retirement",
+                "--guardian-id", "e2e-guardian-applicant",
+                "--guardian-key-sha", "0" * 64,
+                "--body", "Offline E2E guardian retirement notice.",
+                "--readback", oath("guardian_retirement", tmp),
+                "--out", "guardian-retirement.json",
+                *common,
+            ],
+            "guardian-retirement.json",
+        ),
+        (
+            "propagation",
+            [
+                "propagation",
+                "--title", "Offline E2E propagation",
+                "--body", "Offline E2E propagation record.",
+                "--readback", oath("propagation", tmp),
+                "--out", "propagation.json",
+                *common,
+            ],
+            "propagation.json",
+        ),
+        (
+            "correction",
+            [
+                "correction",
+                "--title", "Offline E2E correction",
+                "--body", "Offline E2E correction record.",
+                "--readback", oath("correction", tmp),
+                "--out", "correction.json",
+                *common,
+            ],
+            "correction.json",
+        ),
     ]
 
     for expected_type, args, filename in cases:
@@ -142,6 +179,36 @@ def build_formal_journeys(tmp: Path) -> None:
     router = json.loads((ROOT / "api/agent-task-router.v1.json").read_text(encoding="utf-8"))
     assert router["routes"]["verify_v6_plus_strict_evidence"]["if_pipeline_not_completed"] == "do_not_claim_v6_plus"
 
+
+
+def check_schema_gateway_consistency(tmp: Path) -> None:
+    """Public schema and local gateway validator reject the same core bad payloads."""
+    source = load_submission(tmp / "echo.json")
+    bad = json.loads(json.dumps(source))
+    bad["record_draft"]["authorization_context"]["authorization_scope"] = "create_echo_record"
+    bad["record_type"] = "verification"
+    bad["record_draft"]["record_type"] = "verification"
+    bad["record_draft"].pop("echo_content", None)
+    bad["record_draft"]["verification_content"] = {
+        "verification_level": "",
+        "what_was_checked": [],
+        "verification_claim": "",
+        "fresh_actions_performed": [],
+    }
+
+    if jsonschema is not None:
+        schema = json.loads((ROOT / "api/record-chain-submission-schema.v1.json").read_text(encoding="utf-8"))
+        try:
+            jsonschema.Draft202012Validator(schema).validate(bad)
+        except jsonschema.ValidationError:
+            pass
+        else:
+            raise AssertionError("public schema accepted bad verification payload")
+
+    if validate_submission is not None:
+        diagnostics = validate_submission(bad)
+        codes = {d.code for d in diagnostics}
+        assert "MISSING_VERIFICATION_CONTENT" in codes or "AUTHORIZATION_SCOPE_MISMATCH" in codes, codes
 
 def build_context_insufficient(tmp: Path) -> None:
     node(["context-insufficient", "--actor-label", "E2E Test Agent", "--provider", "Offline Test Runtime", "--out", "cin.json"], tmp)
@@ -171,6 +238,8 @@ def check_docs_and_routes() -> None:
     assert "build_agent_declared_archive_payload.py" not in json.dumps(v0)
     assert "#verify_v0_v5_agent_declared" not in json.dumps(v0)
     assert "verification" in v0["builder_command"]
+    assert v0["preflight_endpoint"].endswith("/record-chain/preflight")
+    assert v0["submit_endpoint"].endswith("/record-chain/submit")
 
     guardian = router["routes"]["guardian_alliance"]
     assert guardian["current_public_decision"] == "application_intake_only"
@@ -186,6 +255,7 @@ def main() -> int:
         tmp = Path(td)
         shutil.copy(BUILDER, tmp / "record-chain-builder.mjs")
         build_formal_journeys(tmp)
+        check_schema_gateway_consistency(tmp)
         build_context_insufficient(tmp)
         check_documented_cli_recovery_commands(tmp)
     check_docs_and_routes()
