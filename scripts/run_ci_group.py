@@ -163,6 +163,9 @@ GROUPS = {
         ["python3", "scripts/test_operator_secret_names_contract.py"],
         ["python3", "scripts/test_arweave_live_readiness_contract.py"],
         ["python3", "scripts/test_render_manual_deploy_contract.py"],
+
+        # Phase 6 scheduled OTS watch
+        ["python3", "scripts/test_phase6_ots_watch_workflow_contract.py"],
     ],
     "p0-legacy-compat": [
         # --- 旧 Gateway v1 / formal builder / old workflow 测试 ---
