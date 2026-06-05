@@ -202,7 +202,18 @@ def mutate_false_no_shortcut(payload: dict[str, Any]) -> dict[str, Any]:
 
 
 def accepted(body: dict[str, Any]) -> bool:
-    return bool(body.get("accepted") is True or body.get("preflight") is True)
+    return body.get("accepted") is True
+
+
+def preflight_ok(body: dict[str, Any]) -> bool:
+    """A preflight is OK if accepted=true OR (preflight=true AND no error diagnostics)."""
+    if body.get("accepted") is True:
+        return True
+    if body.get("preflight") is True:
+        diagnostics = body.get("diagnostics", [])
+        has_errors = any(d.get("severity") == "error" for d in diagnostics)
+        return not has_errors
+    return False
 
 
 def expect_rejected(label: str, status: int, body: dict[str, Any]) -> None:
@@ -253,9 +264,9 @@ def main() -> int:
         result["checks"][label] = {"status": status, "accepted": accepted(body), "body": body}
 
     status, body = post_json(base + preflight_path, payload, args.timeout)
-    if status >= 400 or not accepted(body):
+    if status >= 400 or not preflight_ok(body):
         raise SystemExit(f"positive preflight failed: status={status} body={body}")
-    result["checks"]["positive_preflight"] = {"status": status, "accepted": accepted(body), "body": body}
+    result["checks"]["positive_preflight"] = {"status": status, "preflight_ok": preflight_ok(body), "body": body}
 
     if args.submit_positive_canary:
         if args.confirm_submit_positive_canary != "I_UNDERSTAND_THIS_SUBMITS_A_TEST_ONLY_GUARDIAN_APPLICATION_CANARY":
