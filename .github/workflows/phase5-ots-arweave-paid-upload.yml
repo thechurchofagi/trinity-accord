@@ -1,0 +1,125 @@
+name: Phase 5 OTS Arweave Paid Upload
+
+on:
+  workflow_dispatch:
+    inputs:
+      phase:
+        description: "Phase to run"
+        required: true
+        default: "precheck"
+        type: choice
+        options:
+          - precheck
+          - dry-run-cost
+          - paid-upload
+      confirm:
+        description: "Type I_UNDERSTAND_THIS_UPLOADS_THE_OTS_PROOF_BUNDLE_TO_ARWEAVE for paid upload"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+concurrency:
+  group: phase5-ots-arweave
+  cancel-in-progress: false
+
+jobs:
+  phase5:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+
+    env:
+      E2E_RUN_ID: "phase5-${{ github.event.inputs.phase }}-${{ github.run_id }}"
+      ARWEAVE_MAX_UPLOAD_USD: "0.10"
+      ARWEAVE_SAFETY_MULTIPLIER: "1.20"
+      EXPECTED_ARWEAVE_OWNER: "r1EdzCQ9E7CaAOEywI5netR6EcSopNOa08oi2Coz68s"
+      ARWEAVE_GATEWAY_URL: "https://arweave.net"
+      ARWEAVE_READBACK_GATEWAYS: "https://arweave.net"
+      ARWEAVE_READBACK_TIMEOUT_SECONDS: "900"
+      ARWEAVE_READBACK_RETRY_SECONDS: "15"
+
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: "3.12"
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version-file: ".node-version"
+
+      - name: Install Node dependencies
+        run: npm ci
+
+      - name: Prepare JWK from secret
+        if: github.event.inputs.phase == 'paid-upload'
+        run: |
+          mkdir -p /tmp/arweave-secrets
+          echo '${{ secrets.ARKEY }}' > /tmp/arweave-secrets/wallet.jwk.json
+          chmod 600 /tmp/arweave-secrets/wallet.jwk.json
+          echo "ARWEAVE_JWK_PATH=/tmp/arweave-secrets/wallet.jwk.json" >> "$GITHUB_ENV"
+
+      - name: Verify JWK owner
+        if: github.event.inputs.phase == 'paid-upload'
+        run: |
+          OWNER=$(node -e "
+            const Arweave = require('arweave');
+            const fs = require('fs');
+            const jwk = JSON.parse(fs.readFileSync(process.env.ARWEAVE_JWK_PATH, 'utf8'));
+            Arweave.init({}).wallets.jwkToAddress(jwk).then(a => console.log(a));
+          ")
+          echo "Derived owner: $OWNER"
+          if [ "$OWNER" != "$EXPECTED_ARWEAVE_OWNER" ]; then
+            echo "::error::JWK owner mismatch: derived=$OWNER expected=$EXPECTED_ARWEAVE_OWNER"
+            exit 1
+          fi
+
+      - name: "Phase 5A: Precheck only"
+        if: github.event.inputs.phase == 'precheck'
+        run: |
+          export ARWEAVE_UPLOAD_MODE=dry_run
+          export ALLOW_PAID_ARWEAVE_CANARY=false
+          python3 scripts/run_phase5_ots_arweave_paid_upload.py \
+            --run-id "$E2E_RUN_ID" \
+            --precheck-only
+
+      - name: "Phase 5B: Dry-run cost only"
+        if: github.event.inputs.phase == 'dry-run-cost'
+        run: |
+          export ARWEAVE_UPLOAD_MODE=dry_run
+          export ALLOW_PAID_ARWEAVE_CANARY=false
+          python3 scripts/run_phase5_ots_arweave_paid_upload.py \
+            --run-id "$E2E_RUN_ID" \
+            --dry-run-cost-only
+
+      - name: "Phase 5C: Paid upload"
+        if: github.event.inputs.phase == 'paid-upload'
+        run: |
+          export ARWEAVE_UPLOAD_MODE=production
+          export ALLOW_PAID_ARWEAVE_CANARY=true
+          python3 scripts/run_phase5_ots_arweave_paid_upload.py \
+            --run-id "$E2E_RUN_ID" \
+            --enable-paid-upload \
+            --confirm-paid-upload "${{ github.event.inputs.confirm }}" \
+            --jwk-path "$ARWEAVE_JWK_PATH"
+
+      - name: Commit Phase 5 artifacts
+        if: always()
+        run: |
+          git config user.name "trinity-record-chain-bot"
+          git config user.email "actions@github.com"
+          git add record-chain/ots/arweave-bundles/ record-chain/ots/arweave-registry.json api/record-chain-ots-arweave-registry.json 2>/dev/null || true
+          if ! git diff --quiet --cached; then
+            git commit -m "phase5: update OTS-Arweave bundle and registry (run ${{ github.run_id }})"
+            git push
+          fi
+
+      - name: Upload audit logs
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: phase5-audit-${{ github.run_id }}
+          path: record-chain/audit/phase5/
+          retention-days: 90
