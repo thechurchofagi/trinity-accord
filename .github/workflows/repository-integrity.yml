@@ -42,11 +42,11 @@ jobs:
       - name: Verify record-chain
         run: python3 scripts/trinity_record_chain.py verify
 
-      - name: Run current system tests
-        run: python3 scripts/run_current_system_tests.py
-
       - name: Regenerate sitemap from current files
         run: python3 scripts/generate_sitemap.py
+
+      - name: Run current system tests
+        run: python3 scripts/run_current_system_tests.py
 
       - name: Verify sitemap has no drift
         run: python3 scripts/generate_sitemap.py --check
