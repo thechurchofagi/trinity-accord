@@ -123,6 +123,7 @@
   <url><loc>https://www.trinityaccord.org/api/external-witness-index.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/formal-builder-bundle-signatures.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/formal-builder-bundles.v1.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/founding-guardian-application-readiness.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/frontier-ai-context.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/full-evidence-chain-audit-schema.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/gateway-archive-persistence-contract.v1.json</loc></url>
@@ -130,6 +131,7 @@
   <url><loc>https://www.trinityaccord.org/api/gateway-builder-route-map.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/gateway-config.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/gateway-error-diagnostics.v1.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/gateway-rate-limit-policy.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/gateway-receipt-contract.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/gateway-runtime-contract.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/gateway-v1-legacy-status.json</loc></url>
