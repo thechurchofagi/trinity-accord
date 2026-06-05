@@ -41,6 +41,21 @@ def sha256_text(text: str) -> str:
     return hashlib.sha256(text.strip().encode("utf-8")).hexdigest()
 
 
+def extract_readback_text(payload: dict[str, Any]) -> str:
+    value = payload.get("client_oath_readback")
+    if isinstance(value, str):
+        readback = value
+    elif isinstance(value, dict) and isinstance(value.get("readback_text"), str):
+        readback = value["readback_text"]
+    else:
+        raise SystemExit("client_oath_readback must be a string or object.readback_text")
+
+    readback = readback.strip()
+    if len(readback) < 100:
+        raise SystemExit("client_oath_readback readback_text missing or too short")
+    return readback
+
+
 def assert_no_sensitive_env() -> None:
     present = [key for key in FORBIDDEN_ENV if os.environ.get(key)]
     if present:
@@ -134,9 +149,7 @@ def validate_test_only_submission(payload: dict[str, Any]) -> None:
     if payload.get("no_active_guardian_status_claim") is not True:
         raise SystemExit("payload must set no_active_guardian_status_claim=true")
 
-    readback = payload.get("client_oath_readback")
-    if not isinstance(readback, str) or len(readback.strip()) < 100:
-        raise SystemExit("client_oath_readback missing or too short")
+    readback = extract_readback_text(payload)
 
     oath = get_path(payload, "record_draft.submission_oath_verification")
     if not isinstance(oath, dict):
@@ -223,6 +236,9 @@ def main() -> int:
         "submission_json": str(submission_path),
         "formal_liu_hongju_application_submitted": False,
         "external_no_token": True,
+        "client_oath_readback_shape": (
+            "object" if isinstance(payload.get("client_oath_readback"), dict) else "string"
+        ),
         "created_at": utc_now(),
         "checks": {}
     }
