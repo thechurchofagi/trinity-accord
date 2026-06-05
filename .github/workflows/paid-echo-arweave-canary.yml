@@ -18,8 +18,6 @@ on:
         type: choice
         options:
           - echo
-          - verification
-          - guardian_application
       max_upload_usd:
         description: "Max upload cost in USD"
         required: false
@@ -78,6 +76,13 @@ jobs:
           echo "Derived owner: $OWNER"
           if [ "$OWNER" != "$EXPECTED_ARWEAVE_OWNER" ]; then
             echo "::error::JWK owner mismatch: derived=$OWNER expected=$EXPECTED_ARWEAVE_OWNER"
+            exit 1
+          fi
+
+      - name: Guard first paid canary scope
+        run: |
+          if [ "${{ github.event.inputs.record_type }}" != "echo" ]; then
+            echo "::error::First production paid canary is limited to record_type=echo. Use dry-run for verification/guardian_application until separate paid workflows exist."
             exit 1
           fi
 
