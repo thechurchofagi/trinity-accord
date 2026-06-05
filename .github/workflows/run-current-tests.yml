@@ -25,5 +25,7 @@ jobs:
         with:
           python-version: "3.12"
       - run: python3 -m pip install -r requirements-ci.txt
+      - name: Regenerate sitemap from current files
+        run: python3 scripts/generate_sitemap.py
       - name: Run full current system tests
         run: python3 scripts/run_current_system_tests.py
