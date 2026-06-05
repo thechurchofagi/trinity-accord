@@ -235,17 +235,20 @@ def main() -> int:
         print(f"FAIL: cannot load canary policy: {exc}")
         return 1
 
-    # Discover Gateway URL from public contracts
-    try:
-        gateway_base, preflight_path, submit_path = discover_gateway_base_url(args.site, args.timeout)
-    except SystemExit:
-        raise
-    except Exception as exc:
-        print(f"FAIL: Gateway discovery failed: {exc}")
-        return 1
-
+    # Discover Gateway URL from public contracts (skip if --gateway provided)
     if args.gateway:
         gateway_base = args.gateway.rstrip("/")
+        preflight_path = "/record-chain/preflight"
+        submit_path = "/record-chain/submit"
+        print(f"gateway_base_url_override: {gateway_base}")
+    else:
+        try:
+            gateway_base, preflight_path, submit_path = discover_gateway_base_url(args.site, args.timeout)
+        except SystemExit:
+            raise
+        except Exception as exc:
+            print(f"FAIL: Gateway discovery failed: {exc}")
+            return 1
 
     print(f"gateway_base_url_discovered: {gateway_base}")
 
