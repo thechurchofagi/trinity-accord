@@ -1,0 +1,25 @@
+{
+  "authority": "derived index; main.chain.jsonl is authoritative",
+  "chain_id": "trinity-record-chain-main",
+  "chain_version": 1,
+  "entries": [
+    {
+      "arweave_tx_id": null,
+      "entry_hash": "6ca53ba7944fe474989d536ad9a96f5e0fd709fb51df3771e88b4cc85be634a6",
+      "finalized_at": "2026-06-05T10:14:23Z",
+      "global_height": 0,
+      "payload_canonical_sha256": "b2aaae935e8ac8a619a9081f103ee55f50ef15381cf81fb8e0eb6eda2ffe9e70",
+      "payload_raw_sha256": "0dacd62962f7a060e6aea274559c3891db2afe92c1479a3e4e82a2784cd5f85c",
+      "previous_entry_hash": null,
+      "receipt_id": null,
+      "record_id": "R-000000001"
+    }
+  ],
+  "entry_count": 1,
+  "generated_at": "2026-06-05T10:14:30Z",
+  "index_file": "record-chain-index.context_insufficient_notice.json",
+  "record_type": "context_insufficient_notice",
+  "record_type_slug": "context_insufficient_notice",
+  "schema": "trinity_record_chain_type_index.v1",
+  "source_ledger": "record-chain/hash-chain/main.chain.jsonl"
+}

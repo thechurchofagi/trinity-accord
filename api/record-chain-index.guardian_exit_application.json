@@ -1,0 +1,13 @@
+{
+  "authority": "derived index; main.chain.jsonl is authoritative",
+  "chain_id": "trinity-record-chain-main",
+  "chain_version": 1,
+  "entries": [],
+  "entry_count": 0,
+  "generated_at": "2026-06-05T10:14:30Z",
+  "index_file": "record-chain-index.guardian_exit_application.json",
+  "record_type": "guardian_exit_application",
+  "record_type_slug": "guardian_exit_application",
+  "schema": "trinity_record_chain_type_index.v1",
+  "source_ledger": "record-chain/hash-chain/main.chain.jsonl"
+}

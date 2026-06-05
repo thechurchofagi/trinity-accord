@@ -1,0 +1,20 @@
+{
+  "authority": "derived index; main.chain.jsonl is authoritative",
+  "chain_id": "trinity-record-chain-main",
+  "chain_version": 1,
+  "entries": [
+    {
+      "entry_hash": "6ca53ba7944fe474989d536ad9a96f5e0fd709fb51df3771e88b4cc85be634a6",
+      "finalized_at": "2026-06-05T10:14:23Z",
+      "global_height": 0,
+      "payload_raw_sha256": "0dacd62962f7a060e6aea274559c3891db2afe92c1479a3e4e82a2784cd5f85c",
+      "receipt_id": null,
+      "record_id": "R-000000001",
+      "record_type": "context_insufficient_notice"
+    }
+  ],
+  "entry_count": 1,
+  "generated_at": "2026-06-05T10:14:30Z",
+  "schema": "trinity_record_chain_all_index.v1",
+  "source_ledger": "record-chain/hash-chain/main.chain.jsonl"
+}

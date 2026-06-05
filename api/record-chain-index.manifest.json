@@ -1,0 +1,39 @@
+{
+  "authority": "derived indexes; main.chain.jsonl is authoritative",
+  "chain_id": "trinity-record-chain-main",
+  "generated_at": "2026-06-05T10:14:30Z",
+  "record_types": [
+    {
+      "index_file": "record-chain-index.context_insufficient_notice.json",
+      "record_type": "context_insufficient_notice",
+      "record_type_slug": "context_insufficient_notice"
+    },
+    {
+      "index_file": "record-chain-index.echo.json",
+      "record_type": "echo",
+      "record_type_slug": "echo"
+    },
+    {
+      "index_file": "record-chain-index.exit_application.json",
+      "record_type": "exit_application",
+      "record_type_slug": "exit_application"
+    },
+    {
+      "index_file": "record-chain-index.guardian_application.json",
+      "record_type": "guardian_application",
+      "record_type_slug": "guardian_application"
+    },
+    {
+      "index_file": "record-chain-index.guardian_exit_application.json",
+      "record_type": "guardian_exit_application",
+      "record_type_slug": "guardian_exit_application"
+    },
+    {
+      "index_file": "record-chain-index.verification.json",
+      "record_type": "verification",
+      "record_type_slug": "verification"
+    }
+  ],
+  "schema": "trinity_record_chain_index_manifest.v1",
+  "source_ledger": "/root/.openclaw/workspace/trinity-accord/record-chain/hash-chain/main.chain.jsonl"
+}
