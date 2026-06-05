@@ -137,7 +137,14 @@ def main() -> None:
             if m:
                 embedded_sha = m.group(1)
                 policy = json.loads(oath_policy_path.read_text(encoding="utf-8"))
-                canonical = json.dumps(policy, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
+                # Exclude API metadata fields not in builder's embedded OATH_POLICY
+                _metadata_keys = {
+                    "oath_policy_sha256",
+                    "oath_policy_sha256_semantics",
+                    "canonical_oath_text_hash_is_record_type_specific",
+                }
+                policy_core = {k: v for k, v in policy.items() if k not in _metadata_keys}
+                canonical = json.dumps(policy_core, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
                 actual_sha = hashlib.sha256(canonical.encode("utf-8")).hexdigest()
                 if embedded_sha != actual_sha:
                     errors.append(

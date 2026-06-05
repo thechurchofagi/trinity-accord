@@ -25,7 +25,14 @@ def main() -> None:
     policy = json.loads(policy_text)
 
     # Compute canonical policy hash (sorted keys, no spaces)
-    canonical_policy = json.dumps(policy, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
+    # Exclude API metadata fields not in builder's embedded OATH_POLICY
+    _metadata_keys = {
+        "oath_policy_sha256",
+        "oath_policy_sha256_semantics",
+        "canonical_oath_text_hash_is_record_type_specific",
+    }
+    policy_core = {k: v for k, v in policy.items() if k not in _metadata_keys}
+    canonical_policy = json.dumps(policy_core, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
     policy_sha256 = hashlib.sha256(canonical_policy.encode("utf-8")).hexdigest()
 
     # Check if already injected
