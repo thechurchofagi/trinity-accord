@@ -1,0 +1,179 @@
+name: OTS Bitcoin Verification Watch
+
+on:
+  schedule:
+    # Run hourly at minute 17 UTC.
+    - cron: "17 * * * *"
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "Run mode"
+        required: true
+        default: "auto"
+        type: choice
+        options:
+          - verify_only
+          - auto
+
+permissions:
+  contents: write
+
+defaults:
+  run:
+    shell: bash
+
+concurrency:
+  group: ots-bitcoin-verification-watch
+  cancel-in-progress: false
+
+jobs:
+  watch:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+
+    env:
+      PHASE6_RUN_ID: "phase6-watch-${{ github.run_id }}"
+      ARWEAVE_MAX_UPLOAD_USD: "0.10"
+      ARWEAVE_SAFETY_MULTIPLIER: "1.20"
+      EXPECTED_ARWEAVE_OWNER: "r1EdzCQ9E7CaAOEywI5netR6EcSopNOa08oi2Coz68s"
+      ARWEAVE_GATEWAY_URL: "https://arweave.net"
+      ARWEAVE_READBACK_GATEWAYS: "https://arweave.net"
+      ARWEAVE_READBACK_TIMEOUT_SECONDS: "900"
+      ARWEAVE_READBACK_RETRY_SECONDS: "15"
+
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version-file: ".node-version"
+
+      - name: Install Node dependencies
+        run: npm ci
+
+      - name: Install OpenTimestamps client
+        run: |
+          set -euo pipefail
+          python3 -m pip install -r requirements-ots.txt
+          ots --help
+
+      - name: Run Phase 6 workflow contract test
+        run: |
+          set -euo pipefail
+          python3 scripts/test_phase6_ots_watch_workflow_contract.py
+
+      - name: Prepare Arweave JWK if available
+        id: jwk
+        env:
+          ARKEY_SECRET: ${{ secrets.ARKEY }}
+        run: |
+          set -euo pipefail
+          if [ -z "${ARKEY_SECRET:-}" ]; then
+            echo "has_jwk=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          mkdir -p /tmp/arweave-secrets
+          printf '%s' "$ARKEY_SECRET" > /tmp/arweave-secrets/wallet.jwk.json
+          chmod 600 /tmp/arweave-secrets/wallet.jwk.json
+
+          python3 - <<'PY'
+          import json
+          json.load(open("/tmp/arweave-secrets/wallet.jwk.json"))
+          PY
+
+          echo "ARWEAVE_JWK_PATH=/tmp/arweave-secrets/wallet.jwk.json" >> "$GITHUB_ENV"
+          echo "has_jwk=true" >> "$GITHUB_OUTPUT"
+
+      - name: Verify JWK owner if available
+        if: ${{ steps.jwk.outputs.has_jwk == 'true' }}
+        run: |
+          set -euo pipefail
+          OWNER=$(node - <<'NODE'
+          const Arweave = require("arweave");
+          const fs = require("fs");
+          const jwk = JSON.parse(fs.readFileSync(process.env.ARWEAVE_JWK_PATH, "utf8"));
+          Arweave.init({}).wallets.jwkToAddress(jwk).then((a) => console.log(a));
+          NODE
+          )
+          echo "Derived owner: $OWNER"
+          if [ "$OWNER" != "$EXPECTED_ARWEAVE_OWNER" ]; then
+            echo "::error::JWK owner mismatch: derived=$OWNER expected=$EXPECTED_ARWEAVE_OWNER"
+            exit 1
+          fi
+
+      - name: Run OTS watch verify-only
+        if: ${{ (github.event_name == 'workflow_dispatch' && github.event.inputs.mode == 'verify_only') || steps.jwk.outputs.has_jwk != 'true' }}
+        run: |
+          set -euo pipefail
+          python3 scripts/run_phase6_ots_bitcoin_verify_and_verified_arweave_upload.py \
+            --run-id "$PHASE6_RUN_ID" \
+            --verify-only
+
+      - name: Run OTS watch auto upload verified proof
+        if: ${{ steps.jwk.outputs.has_jwk == 'true' && (github.event_name == 'schedule' || github.event.inputs.mode == 'auto') }}
+        run: |
+          set -euo pipefail
+          python3 scripts/run_phase6_ots_bitcoin_verify_and_verified_arweave_upload.py \
+            --run-id "$PHASE6_RUN_ID" \
+            --enable-paid-upload \
+            --confirm-paid-upload "I_UNDERSTAND_THIS_UPLOADS_THE_VERIFIED_OTS_PROOF_BUNDLE_TO_ARWEAVE" \
+            --jwk-path "$ARWEAVE_JWK_PATH"
+
+      - name: Summarize Phase 6 result
+        if: always()
+        run: |
+          set -euo pipefail
+          SUMMARY="record-chain/audit/phase6/$PHASE6_RUN_ID/99-phase6-summary.json"
+          if [ -f "$SUMMARY" ]; then
+            cat "$SUMMARY"
+          else
+            echo "::warning::Phase 6 summary not found: $SUMMARY"
+          fi
+
+      - name: Commit verified OTS archive state if changed
+        if: success()
+        run: |
+          set -euo pipefail
+          SUMMARY="record-chain/audit/phase6/$PHASE6_RUN_ID/99-phase6-summary.json"
+
+          if [ ! -f "$SUMMARY" ]; then
+            echo "No summary found; no production commit."
+            exit 0
+          fi
+
+          RESULT=$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1])).get("result","missing"))' "$SUMMARY")
+          echo "Phase 6 result: $RESULT"
+
+          if [ "$RESULT" != "pass" ]; then
+            echo "No production commit for result=$RESULT"
+            exit 0
+          fi
+
+          git status --short
+          git add \
+            record-chain/ots/anchors/ \
+            record-chain/ots/arweave-bundles/ \
+            record-chain/ots/arweave-registry.json \
+            api/record-chain-ots-arweave-registry.json
+
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore: archive verified OTS proof on Arweave"
+          git push
+
+      - name: Upload Phase 6 audit logs
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: phase6-ots-watch-audit-${{ github.run_id }}
+          path: record-chain/audit/phase6/${{ env.PHASE6_RUN_ID }}/
+          retention-days: 90
+          if-no-files-found: warn
