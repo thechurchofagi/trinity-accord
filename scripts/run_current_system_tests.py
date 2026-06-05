@@ -415,6 +415,17 @@ def main() -> int:
         fail(f"phase7a prelaunch contracts failed: {result.stderr}\n{result.stdout}")
     ok("phase7a prelaunch contracts")
 
+    # Phase 7A rate limit enforcement contract
+    result = subprocess.run(
+        [sys.executable, "scripts/test_phase7a_rate_limit_contract.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"phase7a rate limit contract failed: {result.stderr}\n{result.stdout}")
+    ok("phase7a rate limit contract")
+
     # 14. Phase 6: scheduled OTS watch workflow contract
     result = subprocess.run(
         [sys.executable, "scripts/test_phase6_ots_watch_workflow_contract.py"],

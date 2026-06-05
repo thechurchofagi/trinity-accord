@@ -169,6 +169,9 @@ GROUPS = {
 
         # Phase 7A prelaunch guardian application readiness
         ["python3", "scripts/test_phase7a_prelaunch_contracts.py"],
+
+        # Phase 7A rate limit enforcement contract
+        ["python3", "scripts/test_phase7a_rate_limit_contract.py"],
     ],
     "p0-legacy-compat": [
         # --- 旧 Gateway v1 / formal builder / old workflow 测试 ---

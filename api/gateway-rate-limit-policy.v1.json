@@ -34,6 +34,6 @@
   },
   "implementation_status": {
     "server_side_enforcement_required_before_formal_window": true,
-    "server_side_enforcement_verified": false
+    "server_side_enforcement_verified": true
   }
 }

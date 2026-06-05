@@ -29,6 +29,7 @@ from apps.record_chain_intake_gateway.gateway.models import (
     ServerReceipt,
     SubmitResponse,
 )
+from apps.record_chain_intake_gateway.gateway.rate_limit import check_rate_limit
 from apps.record_chain_intake_gateway.gateway.receipts import make_receipt
 from apps.record_chain_intake_gateway.gateway.runtime import get_runtime_info
 from apps.record_chain_intake_gateway.gateway.validation import ALLOWED_RECORD_TYPES, detect_route, validate_submission
@@ -646,6 +647,31 @@ async def submit(request: Request) -> SubmitResponse:
             received_raw_body_sha256=received_raw_body_sha256,
             submission_sha256=sha256_canonical_json(body),
             diagnostics=diagnostics,
+            boundary=_build_boundary(body),
+        )
+
+    # --- rate limit check (only on submit, not preflight) ---
+    rate_limit_result = check_rate_limit(body)
+    if rate_limit_result is not None:
+        rate_diags = [
+            Diagnostic(
+                code=d["code"],
+                severity=d["severity"],
+                field=d.get("field", ""),
+                message=d["message"],
+                meaning=d.get("meaning"),
+                suggested_fix=d.get("suggested_fix"),
+                help_url=d.get("help_url"),
+                retry_allowed=d.get("retry_allowed", True),
+            )
+            for d in rate_limit_result.get("diagnostics", [])
+        ]
+        return SubmitResponse(
+            accepted=False,
+            submitted=False,
+            received_raw_body_sha256=received_raw_body_sha256,
+            submission_sha256=sha256_canonical_json(body),
+            diagnostics=rate_diags,
             boundary=_build_boundary(body),
         )
 
