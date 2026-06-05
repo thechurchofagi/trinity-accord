@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.public-home-status.v2",
-  "generated_at": "2026-06-04T20:27:02.468196+00:00",
+  "generated_at": "2026-06-05T03:56:07.182525+00:00",
   "generated_from": [
     "/api/record-chain-status.json",
     "/api/record-chain-anchor-status.json",
@@ -82,10 +82,10 @@
     "preserved_for_audit_and_continuity": true,
     "metrics": {
       "legacy_archived_echoes": 69,
-      "legacy_agent_declared_echo_archives": 110,
-      "legacy_agent_declared_verification_archives": 57,
+      "legacy_agent_declared_echo_archives": 76,
+      "legacy_agent_declared_verification_archives": 51,
       "legacy_guardian_registry_active": 0,
-      "legacy_reception_total": 236
+      "legacy_reception_total": 196
     }
   },
   "counter_update_policy": {
