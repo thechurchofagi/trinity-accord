@@ -15,18 +15,19 @@ import sys
 import urllib.error
 import urllib.request
 
-DEFAULT_GATEWAY = "https://trinity-agent-issue-gateway.onrender.com"
+DEFAULT_GATEWAY = "https://trinity-record-chain-gateway.onrender.com"
 
+# Route name → record_type for /record-chain/preflight
 CORE_ROUTES = [
-    "pure_echo",
-    "v0_v5_agent_declared_archive",
-    "guardian_application_stage_1",
+    ("pure_echo", "echo"),
+    ("v0_v5_agent_declared_archive", "verification"),
+    ("guardian_application_stage_1", "guardian_application"),
 ]
 
 
-def preflight(gateway: str, route: str) -> dict:
-    url = f"{gateway}/gateway/preflight"
-    payload = json.dumps({"route": route}).encode()
+def preflight(gateway: str, route_label: str, record_type: str) -> dict:
+    url = f"{gateway}/record-chain/preflight"
+    payload = json.dumps({"record_type": record_type}).encode()
     req = urllib.request.Request(
         url,
         data=payload,
@@ -47,25 +48,27 @@ def main() -> int:
     args = parser.parse_args()
 
     failures = []
-    for route in CORE_ROUTES:
-        print(f"Preflight {route} ...", end=" ")
-        result = preflight(args.gateway, route)
+    for route_label, record_type in CORE_ROUTES:
+        print(f"Preflight {route_label} ({record_type}) ...", end=" ")
+        result = preflight(args.gateway, route_label, record_type)
         if "error" in result:
             print(f"FAIL ({result['error']})")
-            failures.append((route, result))
+            failures.append((route_label, result))
         else:
+            preflight_ok = result.get("preflight")
+            route_detected = result.get("route_detected")
             accepted = result.get("accepted")
-            print(f"accepted={accepted}")
-            if not accepted:
-                failures.append((route, result))
+            print(f"preflight={preflight_ok} route_detected={route_detected} accepted={accepted}")
+            if not preflight_ok:
+                failures.append((route_label, result))
 
     if failures:
         print(f"\nFAIL: {len(failures)}/{len(CORE_ROUTES)} routes failed")
-        for route, result in failures:
-            print(f"  {route}: {json.dumps(result, indent=2)[:200]}")
+        for route_label, result in failures:
+            print(f"  {route_label}: {json.dumps(result, indent=2)[:300]}")
         return 1
 
-    print(f"\nPASS: all {len(CORE_ROUTES)} core preflight routes accepted")
+    print(f"\nPASS: all {len(CORE_ROUTES)} core preflight routes responded")
     return 0
 
 
