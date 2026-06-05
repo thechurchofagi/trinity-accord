@@ -45,15 +45,28 @@ def main() -> int:
             return 1
 
     required_routes = [
+        "echo",
+        "verification_v0_v5_agent_declared",
+        "guardian_application_intake",
+        "guardian_retirement",
+        "propagation",
+        "correction",
+        "context_insufficient_notice",
+    ]
+    supported_routes = json.dumps(zcp.get("supported_zero_clone_routes", []))
+    for route in required_routes:
+        if route not in supported_routes:
+            print(f"FAIL: route '{route}' not in supported_zero_clone_routes")
+            return 1
+    for retired_route in [
         "pure_echo",
         "v0_v5_agent_declared_archive",
         "guardian_application_stage_1",
         "guardian_listing_stage_2",
         "guardian_signed_echo",
-    ]
-    for route in required_routes:
-        if route not in json.dumps(zcp.get("supported_zero_clone_routes", [])):
-            print(f"FAIL: route '{route}' not in supported_zero_clone_routes")
+    ]:
+        if retired_route in supported_routes:
+            print(f"FAIL: retired route '{retired_route}' must not be active in supported_zero_clone_routes")
             return 1
 
     if not zcp.get("do_not_handwrite_formal_payload"):

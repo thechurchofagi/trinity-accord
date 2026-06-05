@@ -26,6 +26,23 @@ EXPECTED_MODULES = [
     "classification_update_integrity_v1",
 ]
 
+REQUIRED_BUILDER_CONTEXT_ARGS = [
+    "--context-sufficient-for-selected-action", "true",
+    "--loaded-urls", "https://www.trinityaccord.org/agent-first-contact/,https://www.trinityaccord.org/api/record-chain-intake-gateway.v1.json",
+    "--discovery-mode", "user_task_context",
+    "--record-decision", "human",
+    "--submission-executor", "self",
+    "--human-operator-involved", "true",
+]
+
+REQUIRED_VERIFICATION_CONTENT_ARGS = [
+    "--verification-level", "V3",
+    "--scope-label", "oath-gate-contract",
+    "--what-was-checked", "builder oath gate",
+    "--verification-claim", "Test verified the builder oath gate contract locally.",
+    "--fresh-actions", "ran print-oath,ran builder",
+]
+
 
 def main() -> None:
     errors = []
@@ -182,7 +199,7 @@ def main() -> None:
     # Test 14: Formal build without --readback fails
     result = subprocess.run(
         ["node", str(BUILDER), "echo", "--actor-label", "test", "--provider", "test",
-         "--body", "test", "--context-level", "CC-3", "--out", "/tmp/test-no-readback.json"],
+         "--body", "test", "--context-level", "CC-3", *REQUIRED_BUILDER_CONTEXT_ARGS, "--out", "/tmp/test-no-readback.json"],
         capture_output=True, text=True, timeout=10,
     )
     if result.returncode == 0:
@@ -193,7 +210,7 @@ def main() -> None:
     # Test 15: Formal build with wrong --readback fails
     result = subprocess.run(
         ["node", str(BUILDER), "echo", "--actor-label", "test", "--provider", "test",
-         "--body", "test", "--context-level", "CC-3", "--readback", "wrong readback text",
+         "--body", "test", "--context-level", "CC-3", *REQUIRED_BUILDER_CONTEXT_ARGS, "--readback", "wrong readback text",
          "--out", "/tmp/test-wrong-readback.json"],
         capture_output=True, text=True, timeout=10,
     )
@@ -211,7 +228,7 @@ def main() -> None:
         canonical = result.stdout
         result = subprocess.run(
             ["node", str(BUILDER), "echo", "--actor-label", "test", "--provider", "test",
-             "--body", "test", "--context-level", "CC-3", "--readback", canonical,
+             "--body", "test", "--context-level", "CC-3", *REQUIRED_BUILDER_CONTEXT_ARGS, "--readback", canonical,
              "--generate-authorship-key", "--key-dir", "/tmp/test-oath-key",
              "--out", "/tmp/test-correct-readback.json"],
             capture_output=True, text=True, timeout=10,
@@ -278,7 +295,7 @@ def main() -> None:
             errors.append("linked guardian oath should include guardian_stewardship_v1 module")
         result = subprocess.run(
             ["node", str(BUILDER), "echo", "--actor-label", "test", "--provider", "test",
-             "--body", "test", "--context-level", "CC-3", "--linked-guardian",
+             "--body", "test", "--context-level", "CC-3", *REQUIRED_BUILDER_CONTEXT_ARGS, "--linked-guardian",
              "--readback", linked_oath,
              "--generate-authorship-key", "--key-dir", "/tmp/test-linked-echo-key",
              "--out", "/tmp/test-linked-echo.json"],
@@ -312,7 +329,7 @@ def main() -> None:
             errors.append("linked guardian verification oath should include guardian_stewardship_v1 module")
         result = subprocess.run(
             ["node", str(BUILDER), "verification", "--actor-label", "test", "--provider", "test",
-             "--body", "test", "--context-level", "CC-3", "--linked-guardian",
+             *REQUIRED_VERIFICATION_CONTENT_ARGS, "--context-level", "CC-3", *REQUIRED_BUILDER_CONTEXT_ARGS, "--linked-guardian",
              "--readback", linked_oath_v,
              "--generate-authorship-key", "--key-dir", "/tmp/test-linked-verify-key",
              "--out", "/tmp/test-linked-verify.json"],

@@ -21,8 +21,10 @@ for ref in ["context_depth_levels","context_readiness_levels","crl_to_context_de
 if cg.get("no_duplicate_context_understanding_system") is not True:
     errors.append("no_duplicate_context_understanding_system must be True")
 smoked = data.get("supported_public_actions",{}).get("core_external_agent_routes_live_smoked",[])
-for route in ["pure_echo","v0_v5_agent_declared_archive","guardian_application_stage_1"]:
-    if route not in smoked: errors.append(f"missing core route: {route}")
+for route in ["echo","record_chain_v0_v5_agent_declared_verification","guardian_application_intake"]:
+    if route not in smoked: errors.append(f"missing current core route: {route}")
+for retired_route in ["pure_echo","v0_v5_agent_declared_archive","guardian_application_stage_1"]:
+    if retired_route in smoked: errors.append(f"retired Gateway v1 route must not be live-smoked as current: {retired_route}")
 if errors:
     for e in errors: print(f"FAIL: {e}")
     sys.exit(1)
