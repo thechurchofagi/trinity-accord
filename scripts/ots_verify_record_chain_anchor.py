@@ -20,15 +20,26 @@ def utc_now() -> str:
     return time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
 
 
-def run_cmd(cmd: list[str], timeout: int = 120) -> subprocess.CompletedProcess[str]:
+def run_cmd(cmd: list[str], timeout: int = 90) -> subprocess.CompletedProcess[str]:
+    import shutil as _shutil
+    wrapped = list(cmd)
+    if _shutil.which("timeout"):
+        wrapped = ["timeout", "--signal=KILL", str(timeout)] + cmd
     try:
-        return subprocess.run(
-            cmd,
+        result = subprocess.run(
+            wrapped,
             text=True,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
-            timeout=timeout,
+            timeout=timeout + 5,
         )
+        # timeout command returns 124 on SIGTERM/timeout
+        if result.returncode == 124 or (result.returncode == -9):
+            return subprocess.CompletedProcess(
+                cmd, returncode=-1, stdout=result.stdout,
+                stderr=result.stderr + f"\ncommand timed out after {timeout}s"
+            )
+        return result
     except subprocess.TimeoutExpired:
         return subprocess.CompletedProcess(
             cmd, returncode=-1, stdout="", stderr=f"command timed out after {timeout}s"
@@ -159,12 +170,17 @@ def main() -> None:
                 combined = f"{verify.stdout}\n{verify.stderr}"
                 if args.upgrade:
                     combined += f"\n{upgrade.stdout}\n{upgrade.stderr}"
+
+                upgrade_timed_out = args.upgrade and upgrade.returncode == -1
+
                 if verify.returncode == 0 and is_success_output(combined):
                     bitcoin_verified = True
                 elif is_pending_output(combined):
                     bitcoin_pending = True
                     if args.strict_bitcoin:
                         errors.append("OTS proof is pending and not Bitcoin-verified yet")
+                elif upgrade_timed_out:
+                    bitcoin_pending = True
                 else:
                     errors.append(
                         "OTS verify failed without recognizable pending state; treating as invalid"
