@@ -147,7 +147,7 @@ jobs:
           RESULT=$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1])).get("result","missing"))' "$SUMMARY")
           echo "Phase 6 result: $RESULT"
 
-          if [ "$RESULT" != "pass" ]; then
+          if [ "$RESULT" != "pass" ] && [ "$RESULT" != "verified" ]; then
             echo "No production commit for result=$RESULT"
             exit 0
           fi
@@ -157,7 +157,8 @@ jobs:
             record-chain/ots/anchors/ \
             record-chain/ots/arweave-bundles/ \
             record-chain/ots/arweave-registry.json \
-            api/record-chain-ots-arweave-registry.json
+            api/record-chain-ots-arweave-registry.json \
+            api/record-chain-ots-latest.json
 
           if git diff --cached --quiet; then
             echo "No changes to commit"
@@ -166,7 +167,11 @@ jobs:
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "chore: archive verified OTS proof on Arweave"
+          if [ "$RESULT" = "verified" ]; then
+            git commit -m "chore: sync verified OTS anchor and latest status"
+          else
+            git commit -m "chore: archive verified OTS proof on Arweave"
+          fi
           git push
 
       - name: Upload Phase 6 audit logs

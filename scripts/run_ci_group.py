@@ -166,6 +166,7 @@ GROUPS = {
 
         # Phase 6 scheduled OTS watch
         ["python3", "scripts/test_phase6_ots_watch_workflow_contract.py"],
+        ["python3", "scripts/test_ots_pending_detection.py"],
 
         # Phase 7A prelaunch guardian application readiness
         ["python3", "scripts/test_phase7a_prelaunch_contracts.py"],

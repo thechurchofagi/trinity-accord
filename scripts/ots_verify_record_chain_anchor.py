@@ -145,6 +145,8 @@ def main() -> None:
             ots_verify_stderr = verify.stderr
 
             combined = f"{verify.stdout}\n{verify.stderr}"
+            if args.upgrade:
+                combined += f"\n{upgrade.stdout}\n{upgrade.stderr}"
             if verify.returncode == 0 and is_success_output(combined):
                 bitcoin_verified = True
             elif is_pending_output(combined):

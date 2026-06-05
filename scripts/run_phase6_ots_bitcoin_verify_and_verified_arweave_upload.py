@@ -200,6 +200,23 @@ def validate_anchor(anchor_rel: str) -> dict[str, Any]:
     return anchor
 
 
+def sync_latest_ots_from_anchor(anchor_rel: str) -> dict[str, Any]:
+    """Sync api/record-chain-ots-latest.json from the anchor file's current state."""
+    anchor = read_json(repo_path(anchor_rel))
+    now = utc_now()
+
+    latest = read_json(LATEST_OTS)
+    latest["ots_status"] = anchor.get("ots_status", latest.get("ots_status", "pending"))
+    latest["bitcoin_pending"] = anchor.get("bitcoin_pending", latest.get("bitcoin_pending", False))
+    latest["bitcoin_verified"] = anchor.get("bitcoin_verified", latest.get("bitcoin_verified", False))
+    latest["updated_at"] = now
+    if anchor.get("verified_at"):
+        latest["verified_at"] = anchor["verified_at"]
+
+    write_json(LATEST_OTS, latest)
+    return latest
+
+
 def validate_registry() -> dict[str, Any]:
     registry = read_json(REGISTRY)
     api_registry = read_json(API_REGISTRY)
@@ -526,6 +543,8 @@ def main() -> int:
         bitcoin_node_url=args.bitcoin_node_url,
         strict=True,
     )
+
+    sync_latest_ots_from_anchor(anchor_rel)
 
     if not verified:
         assert_core_files_unchanged(core_before)

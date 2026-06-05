@@ -36,9 +36,11 @@ def main() -> None:
         "Verify JWK owner if available",
         "I_UNDERSTAND_THIS_UPLOADS_THE_VERIFIED_OTS_PROOF_BUNDLE_TO_ARWEAVE",
         "RESULT=$(python3 -c",
-        'if [ "$RESULT" != "pass" ]; then',
+        'if [ "$RESULT" != "pass" ] && [ "$RESULT" != "verified" ]; then',
+        "api/record-chain-ots-latest.json",
         "record-chain/audit/phase6/${{ env.PHASE6_RUN_ID }}/",
         "if-no-files-found: warn",
+        "sync verified OTS anchor and latest status",
     ]
 
     runner_markers = [
@@ -55,6 +57,7 @@ def main() -> None:
         "latest_verified_tx_id not updated to verified tx",
         "strict verify returned success but anchor is not marked verified",
         "OTS verify failed for non-pending reason",
+        "sync_latest_ots_from_anchor",
     ]
 
     for marker in workflow_markers:
