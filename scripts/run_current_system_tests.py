@@ -404,6 +404,17 @@ def main() -> int:
         fail(f"Render manual deploy contract failed: {result.stderr}\n{result.stdout}")
     ok("Render manual deploy contract")
 
+    # 14. Phase 6: scheduled OTS watch workflow contract
+    result = subprocess.run(
+        [sys.executable, "scripts/test_phase6_ots_watch_workflow_contract.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"phase6 OTS watch workflow contract failed: {result.stderr}\n{result.stdout}")
+    ok("phase6 OTS watch workflow contract")
+
     print("\n=== ALL CURRENT SYSTEM TESTS PASSED ===")
     return 0
 
