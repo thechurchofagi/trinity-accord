@@ -121,7 +121,14 @@ def main() -> None:
         m = re.search(r'OATH_POLICY_SHA256\s*=\s*"([a-f0-9]{64})"', builder_text)
         if m:
             embedded_sha = m.group(1)
-            canonical = json.dumps(policy, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
+            # Exclude API metadata fields not in builder's embedded OATH_POLICY
+            _metadata_keys = {
+                "oath_policy_sha256",
+                "oath_policy_sha256_semantics",
+                "canonical_oath_text_hash_is_record_type_specific",
+            }
+            policy_core = {k: v for k, v in policy.items() if k not in _metadata_keys}
+            canonical = json.dumps(policy_core, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
             actual_sha = hashlib.sha256(canonical.encode("utf-8")).hexdigest()
             if embedded_sha != actual_sha:
                 errors.append(f"builder OATH_POLICY_SHA256 mismatch: embedded={embedded_sha[:16]}... actual={actual_sha[:16]}...")
@@ -275,7 +282,15 @@ def main() -> None:
                 # JS object uses unquoted keys - convert to quoted
                 js_obj = _re.sub(r'(\s)(\w+)(\s*:)', lambda m: m.group(1) + '"' + m.group(2) + '"' + m.group(3), js_obj)
                 embedded_policy = json.loads(js_obj)
-                if embedded_policy != policy:
+                # Compare core policy fields only (exclude API metadata not in builder)
+                _metadata_keys = {
+                    "oath_policy_sha256",
+                    "oath_policy_sha256_semantics",
+                    "canonical_oath_text_hash_is_record_type_specific",
+                }
+                policy_core = {k: v for k, v in policy.items() if k not in _metadata_keys}
+                embedded_core = {k: v for k, v in embedded_policy.items() if k not in _metadata_keys}
+                if embedded_core != policy_core:
                     errors.append("builder embedded OATH_POLICY does not deep-equal api policy")
             except Exception as e:
                 errors.append(f"cannot parse builder embedded OATH_POLICY: {e}")
