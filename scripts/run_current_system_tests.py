@@ -404,6 +404,17 @@ def main() -> int:
         fail(f"Render manual deploy contract failed: {result.stderr}\n{result.stdout}")
     ok("Render manual deploy contract")
 
+    # Phase 7A prelaunch contracts
+    result = subprocess.run(
+        [sys.executable, "scripts/test_phase7a_prelaunch_contracts.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"phase7a prelaunch contracts failed: {result.stderr}\n{result.stdout}")
+    ok("phase7a prelaunch contracts")
+
     # 14. Phase 6: scheduled OTS watch workflow contract
     result = subprocess.run(
         [sys.executable, "scripts/test_phase6_ots_watch_workflow_contract.py"],

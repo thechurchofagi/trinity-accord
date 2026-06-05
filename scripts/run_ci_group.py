@@ -166,6 +166,9 @@ GROUPS = {
 
         # Phase 6 scheduled OTS watch
         ["python3", "scripts/test_phase6_ots_watch_workflow_contract.py"],
+
+        # Phase 7A prelaunch guardian application readiness
+        ["python3", "scripts/test_phase7a_prelaunch_contracts.py"],
     ],
     "p0-legacy-compat": [
         # --- 旧 Gateway v1 / formal builder / old workflow 测试 ---

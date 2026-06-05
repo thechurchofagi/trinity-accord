@@ -1,0 +1,39 @@
+{
+  "schema": "trinityaccord.gateway-rate-limit-policy.v1",
+  "status": "prelaunch_policy",
+  "purpose": "Simple trust-first rate limit for early external agent submissions.",
+  "policy": {
+    "global_submit_limit_per_hour": 100,
+    "participant_submit_limit_per_hour": 10,
+    "participant_key_preference_order": [
+      "record_draft.submitting_participant_identity.public_key",
+      "record_draft.submitting_participant_identity.label",
+      "record_draft.actor_identity.label",
+      "agent_label",
+      "idempotency_key_prefix"
+    ],
+    "applies_to_record_types": [
+      "echo",
+      "verification",
+      "guardian_application",
+      "guardian_retirement",
+      "guardian_key_rotation",
+      "propagation",
+      "correction",
+      "classification_update"
+    ]
+  },
+  "response_when_limited": {
+    "http_status": 429,
+    "accepted": false,
+    "diagnostic_code": "RATE_LIMIT_EXCEEDED",
+    "retry_after_seconds_required": true
+  },
+  "public_phase_rule": {
+    "formal_founding_guardian_application_must_wait_until_rate_limit_policy_is_enforced": true
+  },
+  "implementation_status": {
+    "server_side_enforcement_required_before_formal_window": true,
+    "server_side_enforcement_verified": false
+  }
+}
