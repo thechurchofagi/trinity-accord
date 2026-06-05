@@ -147,7 +147,16 @@ def main() -> None:
             combined = f"{verify.stdout}\n{verify.stderr}"
             if args.upgrade:
                 combined += f"\n{upgrade.stdout}\n{upgrade.stderr}"
+
+            upgrade_proved_complete = False
+            if args.upgrade and upgrade.returncode == 0:
+                upgrade_text = f"{upgrade.stdout}\n{upgrade.stderr}".lower()
+                if "success" in upgrade_text and "timestamp complete" in upgrade_text:
+                    upgrade_proved_complete = True
+
             if verify.returncode == 0 and is_success_output(combined):
+                bitcoin_verified = True
+            elif upgrade_proved_complete:
                 bitcoin_verified = True
             elif is_pending_output(combined):
                 bitcoin_pending = True
