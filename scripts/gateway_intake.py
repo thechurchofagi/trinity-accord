@@ -190,9 +190,7 @@ def parse_intake_block(
             continue
 
         if key in seen:
-            # Warn but tolerate — some historical issues have duplicate keys.
-            import sys
-            print(f"[gateway_intake] WARNING: duplicate intake key {key!r} — using last value", file=sys.stderr)
+            raise IntakeParseError(f"duplicate intake key: {key!r}")
 
         seen.add(key)
         fields[key] = value
