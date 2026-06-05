@@ -2,5 +2,9 @@
   "dependencies": {
     "@noble/hashes": "2.2.0",
     "arweave": "1.15.7"
+  },
+  "scripts": {
+    "test:arweave-cost-gate": "node scripts/test_arweave_cost_gate_safety.mjs",
+    "test:arweave-readback": "node scripts/test_arweave_readback_hash_fixture.mjs"
   }
 }
