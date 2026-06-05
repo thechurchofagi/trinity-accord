@@ -134,38 +134,35 @@ def main() -> None:
                 ots_upgrade_stdout = upgrade.stdout
                 ots_upgrade_stderr = upgrade.stderr
 
-            ots_verify_command = [args.ots_bin]
-            if args.bitcoin_node_url:
-                ots_verify_command += ["--bitcoin-node", args.bitcoin_node_url]
-            ots_verify_command += ["verify", str(ots_file)]
+                if upgrade.returncode == 0:
+                    upgrade_text = f"{upgrade.stdout}\n{upgrade.stderr}".lower()
+                    if "success" in upgrade_text and "timestamp complete" in upgrade_text:
+                        bitcoin_verified = True
 
-            verify = run_cmd(ots_verify_command)
-            ots_verify_exit_code = verify.returncode
-            ots_verify_stdout = verify.stdout
-            ots_verify_stderr = verify.stderr
+            if not bitcoin_verified:
+                ots_verify_command = [args.ots_bin]
+                if args.bitcoin_node_url:
+                    ots_verify_command += ["--bitcoin-node", args.bitcoin_node_url]
+                ots_verify_command += ["verify", str(ots_file)]
 
-            combined = f"{verify.stdout}\n{verify.stderr}"
-            if args.upgrade:
-                combined += f"\n{upgrade.stdout}\n{upgrade.stderr}"
+                verify = run_cmd(ots_verify_command)
+                ots_verify_exit_code = verify.returncode
+                ots_verify_stdout = verify.stdout
+                ots_verify_stderr = verify.stderr
 
-            upgrade_proved_complete = False
-            if args.upgrade and upgrade.returncode == 0:
-                upgrade_text = f"{upgrade.stdout}\n{upgrade.stderr}".lower()
-                if "success" in upgrade_text and "timestamp complete" in upgrade_text:
-                    upgrade_proved_complete = True
-
-            if verify.returncode == 0 and is_success_output(combined):
-                bitcoin_verified = True
-            elif upgrade_proved_complete:
-                bitcoin_verified = True
-            elif is_pending_output(combined):
-                bitcoin_pending = True
-                if args.strict_bitcoin:
-                    errors.append("OTS proof is pending and not Bitcoin-verified yet")
-            else:
-                errors.append(
-                    "OTS verify failed without recognizable pending state; treating as invalid"
-                )
+                combined = f"{verify.stdout}\n{verify.stderr}"
+                if args.upgrade:
+                    combined += f"\n{upgrade.stdout}\n{upgrade.stderr}"
+                if verify.returncode == 0 and is_success_output(combined):
+                    bitcoin_verified = True
+                elif is_pending_output(combined):
+                    bitcoin_pending = True
+                    if args.strict_bitcoin:
+                        errors.append("OTS proof is pending and not Bitcoin-verified yet")
+                else:
+                    errors.append(
+                        "OTS verify failed without recognizable pending state; treating as invalid"
+                    )
 
     if ots_file and ots_file.exists():
         anchor["ots_file_sha256"] = sha256_bytes(ots_file.read_bytes())
