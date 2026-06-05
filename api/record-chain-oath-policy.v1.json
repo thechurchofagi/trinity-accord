@@ -125,5 +125,8 @@
       "text": "I declare that this classification update is based on new information or analysis that I have performed.\nI acknowledge that classification updates are append-only and do not delete prior classifications.\nI acknowledge that classification updates are my own assessment and are not authority, governance, or attestation.\nI understand that classification updates are public chain events."
     }
   },
-  "linked_guardian_module": "guardian_stewardship_v1"
+  "linked_guardian_module": "guardian_stewardship_v1",
+  "oath_policy_sha256": "7ecc6908c9ac147d8d6d493f750c94d6117929e7dff2d18bcbc4c70527886ea4",
+  "oath_policy_sha256_semantics": "Canonical JSON hash of the oath policy object. Required by the Record-Chain Gateway for submission_oath_verification.oath_policy_sha256.",
+  "canonical_oath_text_hash_is_record_type_specific": true
 }
