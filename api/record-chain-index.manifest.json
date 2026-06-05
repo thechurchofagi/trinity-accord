@@ -35,5 +35,5 @@
     }
   ],
   "schema": "trinity_record_chain_index_manifest.v1",
-  "source_ledger": "/root/.openclaw/workspace/trinity-accord/record-chain/hash-chain/main.chain.jsonl"
+  "source_ledger": "record-chain/hash-chain/main.chain.jsonl"
 }

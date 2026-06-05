@@ -1,5 +1,5 @@
 {
-  "anchored_file": "/root/.openclaw/workspace/trinity-accord/record-chain/ots/anchors/height-0-6ca53ba7944fe474-6bfbc5b03f6666e2.record-chain-head-commitment.json",
+  "anchored_file": "record-chain/ots/anchors/height-0-6ca53ba7944fe474-6bfbc5b03f6666e2.record-chain-head-commitment.json",
   "anchored_file_semantics": "stable record-chain head commitment; generated_at excluded",
   "anchored_file_sha256": "6bfbc5b03f6666e223a1605b31015b0932ee3f16ecd62f6fef240a4fe135c3e5",
   "bitcoin_attestation": null,
@@ -9,15 +9,15 @@
   "chain_version": 1,
   "created_at": "2026-06-05T10:14:35Z",
   "entry_count": 1,
-  "head_entry_hash": "6ca53ba7944fe474989d536ad9a96f5e0fd709fb51df3771e88b4cc85be634a6",
+  "head_entry_hash": "f5a23430fb708a46df935b46d43547f71970fff50c9ebe4ed50c5ce87105ca84",
   "height": 0,
   "ots_command": [
     "ots",
     "stamp",
-    "/root/.openclaw/workspace/trinity-accord/record-chain/ots/anchors/height-0-6ca53ba7944fe474-6bfbc5b03f6666e2.record-chain-head-commitment.json"
+    "record-chain/ots/anchors/height-0-6ca53ba7944fe474-6bfbc5b03f6666e2.record-chain-head-commitment.json"
   ],
   "ots_exit_code": 0,
-  "ots_file": "/root/.openclaw/workspace/trinity-accord/record-chain/ots/anchors/height-0-6ca53ba7944fe474-6bfbc5b03f6666e2.record-chain-head-commitment.json.ots",
+  "ots_file": "record-chain/ots/anchors/height-0-6ca53ba7944fe474-6bfbc5b03f6666e2.record-chain-head-commitment.json.ots",
   "ots_file_exists": true,
   "ots_file_sha256": "e1e6a30e2118a06ef1e6f79da1a01ab105cf225c10c3edd34189eeb3c1dd0bd5",
   "ots_status": "pending",
@@ -26,7 +26,7 @@
   "ots_upgrade_command": [
     "ots",
     "upgrade",
-    "/root/.openclaw/workspace/trinity-accord/record-chain/ots/anchors/height-0-6ca53ba7944fe474-6bfbc5b03f6666e2.record-chain-head-commitment.json.ots"
+    "record-chain/ots/anchors/height-0-6ca53ba7944fe474-6bfbc5b03f6666e2.record-chain-head-commitment.json.ots"
   ],
   "ots_upgrade_exit_code": 1,
   "ots_upgrade_stderr": "Calendar https://btc.calendar.catallaxy.com: Pending confirmation in Bitcoin blockchain\nCalendar https://finney.calendar.eternitywall.com: Pending confirmation in Bitcoin blockchain\nCalendar https://alice.btc.calendar.opentimestamps.org: Pending confirmation in Bitcoin blockchain\nCalendar https://bob.btc.calendar.opentimestamps.org: Pending confirmation in Bitcoin blockchain\nFailed! Timestamp not complete\n",
@@ -34,14 +34,14 @@
   "ots_verify_command": [
     "ots",
     "verify",
-    "/root/.openclaw/workspace/trinity-accord/record-chain/ots/anchors/height-0-6ca53ba7944fe474-6bfbc5b03f6666e2.record-chain-head-commitment.json.ots"
+    "record-chain/ots/anchors/height-0-6ca53ba7944fe474-6bfbc5b03f6666e2.record-chain-head-commitment.json.ots"
   ],
   "ots_verify_exit_code": 1,
-  "ots_verify_stderr": "Assuming target filename is '/root/.openclaw/workspace/trinity-accord/record-chain/ots/anchors/height-0-6ca53ba7944fe474-6bfbc5b03f6666e2.record-chain-head-commitment.json'\nCalendar https://btc.calendar.catallaxy.com: Pending confirmation in Bitcoin blockchain\nCalendar https://finney.calendar.eternitywall.com: Pending confirmation in Bitcoin blockchain\nCalendar https://alice.btc.calendar.opentimestamps.org: Pending confirmation in Bitcoin blockchain\nCalendar https://bob.btc.calendar.opentimestamps.org: Pending confirmation in Bitcoin blockchain\n",
+  "ots_verify_stderr": "Assuming target filename is 'record-chain/ots/anchors/height-0-6ca53ba7944fe474-6bfbc5b03f6666e2.record-chain-head-commitment.json'\nCalendar https://btc.calendar.catallaxy.com: Pending confirmation in Bitcoin blockchain\nCalendar https://finney.calendar.eternitywall.com: Pending confirmation in Bitcoin blockchain\nCalendar https://alice.btc.calendar.opentimestamps.org: Pending confirmation in Bitcoin blockchain\nCalendar https://bob.btc.calendar.opentimestamps.org: Pending confirmation in Bitcoin blockchain\n",
   "ots_verify_stdout": "",
   "schema": "trinity_record_chain_ots_anchor.v1",
   "semantics": "OTS anchors a stable head commitment snapshot; it does not modify chain entries.",
-  "source_head_file": "/root/.openclaw/workspace/trinity-accord/api/record-chain-head.json",
+  "source_head_file": "api/record-chain-head.json",
   "source_head_generated_at": "2026-06-05T10:14:30Z",
   "verified_at": "2026-06-05T10:14:58Z"
 }
