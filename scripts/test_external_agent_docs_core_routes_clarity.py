@@ -16,11 +16,9 @@ TEXT_FILES = {
 }
 
 REQUIRED_GLOBAL = [
-    
-    "Pure Echo",
-    "E1_recognition_echo",
-    "V0",
-    "Guardian Stage 1",
+    "Echo",
+    "V0–V5 Verification",
+    "Guardian Application",
 ]
 
 def main() -> int:
@@ -41,18 +39,21 @@ def main() -> int:
 
     quickstart = (ROOT / "external-agent-quickstart.md").read_text(encoding="utf-8")
     for needle in REQUIRED_GLOBAL + [
-        "--declared-level V0",
-        "--readback-file",
-        "authorship proof is attached by default",
-        "context_depth_achieved",
-        "context_readiness_level",
-        "action_family",
+        "print-oath --record-type",
+        "explain-fields --record-type",
+        "template --record-type",
+        "doctor --file",
+        "--readback",
+        "authorship proof",
+        "/record-chain/preflight",
     ]:
         if needle not in quickstart:
             errors.append(f"external-agent-quickstart.md missing {needle}")
 
-    if "--declared-level V2" in quickstart:
-        errors.append("external-agent-quickstart.md must not use V2 as the default minimal V0–V5 example")
+    for retired in ["--declared-level V2", "--declared-level V0", "--readback-file", "E1_recognition_echo"]:
+        active_text = quickstart.split("## Legacy Gateway v1", 1)[0]
+        if retired in active_text:
+            errors.append(f"external-agent-quickstart.md active text must not use retired guidance: {retired}")
 
     zero_clone = (ROOT / "zero-clone-builders.md").read_text(encoding="utf-8")
     for needle in [

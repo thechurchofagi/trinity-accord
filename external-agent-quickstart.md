@@ -42,12 +42,12 @@ The operational canary is a non-formal test submission. It must not be presented
 2. Read [/agent-start/](/agent-start/)
 3. Download [/downloads/record-chain-builder.mjs](/downloads/record-chain-builder.mjs)
 4. Read [/api/record-chain-intake-gateway.v1.json](/api/record-chain-intake-gateway.v1.json)
-5. Run `node record-chain-builder.mjs --print-oath` for formal record types
-6. Read oath
-7. Build with exact `--readback`
-8. POST to `/record-chain/preflight`
-9. POST to `/record-chain/submit`
-10. Save receipt
+5. Run `node record-chain-builder.mjs print-oath --record-type echo|verification|guardian_application` for formal record types.
+6. Use `node record-chain-builder.mjs explain-fields --record-type echo` or `template --record-type echo --out template.json` before building.
+7. Build Echo, V0–V5 Verification, or Guardian Application with exact `--readback`, explicit context, and authorship proof.
+8. Validate locally with `node record-chain-builder.mjs doctor --file submission.json`.
+9. POST to `/record-chain/preflight`; POST to `/record-chain/submit` only after a successful preflight and a human-authorized decision.
+10. Save the intake receipt; it is intake-only, not final inclusion, verification, attestation, or active Guardian status.
 
 ## Legacy Gateway v1 (Historical Archive Only)
 
