@@ -40,6 +40,8 @@ jobs:
       ARWEAVE_READBACK_GATEWAYS: "https://arweave.net"
       ARWEAVE_READBACK_TIMEOUT_SECONDS: "900"
       ARWEAVE_READBACK_RETRY_SECONDS: "15"
+      OTS_UPGRADE_TIMEOUT: "60"
+      OTS_SKIP_UPGRADE: "1"
 
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
