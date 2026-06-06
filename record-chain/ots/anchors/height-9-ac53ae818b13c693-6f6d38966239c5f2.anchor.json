@@ -1,0 +1,31 @@
+{
+  "anchored_file": "record-chain/ots/anchors/height-9-ac53ae818b13c693-6f6d38966239c5f2.record-chain-head-commitment.json",
+  "anchored_file_semantics": "stable record-chain head commitment; generated_at excluded",
+  "anchored_file_sha256": "6f6d38966239c5f2cd76b4c17dfacaa643f90a04065c75b1cd2895c84b34af57",
+  "bitcoin_attestation": null,
+  "bitcoin_pending": true,
+  "bitcoin_verified": false,
+  "chain_id": "trinity-record-chain-main",
+  "chain_version": 1,
+  "created_at": "2026-06-06T05:43:42Z",
+  "entry_count": 10,
+  "head_entry_hash": "ac53ae818b13c6933b94b306d47c66d02838d1cae00b001c46152bfd7205df4f",
+  "height": 9,
+  "ots_command": [
+    "ots",
+    "stamp",
+    "record-chain/ots/anchors/height-9-ac53ae818b13c693-6f6d38966239c5f2.record-chain-head-commitment.json"
+  ],
+  "ots_exit_code": 0,
+  "ots_file": "record-chain/ots/anchors/height-9-ac53ae818b13c693-6f6d38966239c5f2.record-chain-head-commitment.json.ots",
+  "ots_file_exists": true,
+  "ots_file_sha256": "f556d5d68f19332d52fbe25d19e03614bd5aed744e5b1051ff3ec156ef2b73f4",
+  "ots_status": "pending",
+  "ots_stderr": "Submitting to remote calendar https://a.pool.opentimestamps.org\nSubmitting to remote calendar https://b.pool.opentimestamps.org\nSubmitting to remote calendar https://a.pool.eternitywall.com\nSubmitting to remote calendar https://ots.btc.catallaxy.com\n",
+  "ots_stdout": "",
+  "schema": "trinity_record_chain_ots_anchor.v1",
+  "semantics": "OTS anchors a stable head commitment snapshot; it does not modify chain entries.",
+  "source_head_file": "api/record-chain-head.json",
+  "source_head_generated_at": "2026-06-06T04:49:13Z",
+  "verified_at": null
+}
