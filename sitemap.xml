@@ -200,6 +200,7 @@
   <url><loc>https://www.trinityaccord.org/api/record-chain-testnet/ots-arweave-registry.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/record-chain-testnet/ots-latest.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/record-chain-testnet/record-chain-head.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/record-chain-testnet/status.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/recovery-index-schema.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/recovery-index.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/report-builder-policy.json</loc></url>
