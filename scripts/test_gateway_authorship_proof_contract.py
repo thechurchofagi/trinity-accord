@@ -16,7 +16,7 @@ BUILDER = ROOT / "downloads" / "record-chain-builder.mjs"
 
 sys.path.insert(0, str(ROOT / "apps/record_chain_intake_gateway"))
 from gateway.validation import validate_submission
-from gateway.authorship import verify_authorship_proof
+from gateway.authorship import verify_authorship_proof_submission
 
 PASS = 0
 FAIL = 0
@@ -110,7 +110,7 @@ def test_missing_authorship_proof():
             return
         # Remove authorship_proof
         sub.pop("authorship_proof", None)
-        ok_code, _, _ = verify_authorship_proof(sub)
+        ok_code, _, _ = verify_authorship_proof_submission(sub)
         if not ok_code:
             ok("missing authorship_proof detected")
         else:
@@ -126,7 +126,7 @@ def test_tampered_draft():
             return
         # Tamper with the draft
         sub["record_draft"]["record_type"] = "tampered"
-        ok_val, code, msg = verify_authorship_proof(sub)
+        ok_val, code, msg = verify_authorship_proof_submission(sub)
         if not ok_val and ("PAYLOAD_SHA_MISMATCH" in (code or "") or "SIGNATURE" in (code or "")):
             ok(f"tampered draft detected: {code}")
         else:
@@ -145,7 +145,7 @@ def test_guardian_key_mismatch():
         sub["record_draft"]["guardian_application_content"] = {
             "guardian_public_key_sha256": "0" * 64
         }
-        ok_val, code, msg = verify_authorship_proof(sub)
+        ok_val, code, msg = verify_authorship_proof_submission(sub)
         if not ok_val:
             ok(f"guardian key mismatch detected: {code}")
         else:
@@ -160,7 +160,7 @@ def test_participant_key_mismatch():
             fail("could not build echo submission")
             return
         sub["record_draft"]["submitting_participant_identity"]["participant_public_key_sha256"] = "0" * 64
-        ok_val, code, msg = verify_authorship_proof(sub)
+        ok_val, code, msg = verify_authorship_proof_submission(sub)
         if not ok_val and "PARTICIPANT_KEY_MISMATCH" in (code or ""):
             ok("participant key mismatch detected")
         else:
@@ -176,7 +176,7 @@ def test_private_key_leak():
             return
         # Inject private key material
         sub["record_draft"]["leaked"] = "BEGIN PRIVATE KEY"
-        ok_val, code, msg = verify_authorship_proof(sub)
+        ok_val, code, msg = verify_authorship_proof_submission(sub)
         if not ok_val and "PRIVATE_KEY_LEAK" in (code or ""):
             ok("private key leak detected")
         else:
