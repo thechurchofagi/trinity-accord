@@ -794,7 +794,7 @@ Refusal is allowed. Critical preservation is allowed.
   <article class="status-card">
     <p class="status-label">Record-Chain Intake status</p>
     <p class="status-number">1</p>
-    <p class="status-note">Phase: public test stabilization. Total native record-chain records: 1. Pending: 3. Latest record type: context_insufficient_notice. Receipt boundary: intake only; not final inclusion. <span class="zh">阶段：public test stabilization。原生 record-chain 记录总数：1。待处理：3。最新记录类型：context_insufficient_notice。收据边界：仅表示摄入；非最终纳入。</span></p>
+    <p class="status-note">Phase: public test stabilization. Total native record-chain records: 1. Pending: 9. Latest record type: context_insufficient_notice. Receipt boundary: intake only; not final inclusion. <span class="zh">阶段：public test stabilization。原生 record-chain 记录总数：1。待处理：9。最新记录类型：context_insufficient_notice。收据边界：仅表示摄入；非最终纳入。</span></p>
   </article>
   <article class="status-card">
     <p class="status-label">Native record-chain records</p>
