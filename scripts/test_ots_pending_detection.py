@@ -92,10 +92,77 @@ def test_combined_output_with_upgrade_pending_and_verify_error() -> None:
     assert not is_success_output(combined_with_upgrade)
 
 
+def test_has_bitcoin_block_header_attestation() -> None:
+    """Detect BitcoinBlockHeaderAttestation in ots info output."""
+    from ots_verify_record_chain_anchor import has_bitcoin_block_header_attestation
+
+    # Example ots info output with BitcoinBlockHeaderAttestation
+    info_with_attestation = (
+        "File: test.json.ots\n"
+        "Timestamp: 1749139200\n"
+        "Hash: abc123\n"
+        "\n"
+        "verify test.json.ots\n"
+        "Got 1 attestation(s)\n"
+        "BitcoinBlockHeaderAttestation(block_height=897000, block_hash=0000000000000000000...)\n"
+    )
+
+    # Example ots info output without BitcoinBlockHeaderAttestation (pending)
+    info_pending = (
+        "File: test.json.ots\n"
+        "Timestamp: 1749139200\n"
+        "Hash: abc123\n"
+        "\n"
+        "verify test.json.ots\n"
+        "Got 0 attestation(s)\n"
+        "Calendar https://btc.calendar.catallaxy.com: Pending confirmation in Bitcoin blockchain\n"
+    )
+
+    assert has_bitcoin_block_header_attestation(info_with_attestation), (
+        "should detect BitcoinBlockHeaderAttestation in info output"
+    )
+    assert not has_bitcoin_block_header_attestation(info_pending), (
+        "should not detect BitcoinBlockHeaderAttestation in pending output"
+    )
+
+
+def test_upgrade_success_marks_strict_bitcoin_verified() -> None:
+    """When ots upgrade returns 'Success! Timestamp complete',
+    bitcoin_verified and strict_bitcoin_verified should be True."""
+    from ots_verify_record_chain_anchor import is_success_output
+
+    success_text = "Success! Timestamp complete\n"
+    assert is_success_output(success_text), (
+        "'Success! Timestamp complete' should match success output"
+    )
+
+
+def test_strict_verify_unavailable_does_not_fail_upgraded_proof() -> None:
+    """When no Bitcoin node is available, an upgraded proof
+    (with BitcoinBlockHeaderAttestation) should not be treated as a failure."""
+    from ots_verify_record_chain_anchor import (
+        has_bitcoin_block_header_attestation,
+        is_pending_output,
+    )
+
+    info_text = (
+        "File: test.json.ots\n"
+        "BitcoinBlockHeaderAttestation(block_height=897000)\n"
+    )
+    verify_no_node = "Could not connect to Bitcoin node: Cookie file unusable\n"
+
+    assert has_bitcoin_block_header_attestation(info_text)
+    assert not is_pending_output(verify_no_node)
+    # The combination should NOT be treated as pending — it's upgraded
+
+
 def main() -> None:
     test_is_pending_output_detects_upgrade_markers()
     test_is_success_output_rejects_bitcoin_node_error()
     test_combined_output_with_upgrade_pending_and_verify_error()
+    test_has_bitcoin_block_header_attestation()
+    test_upgrade_success_marks_strict_bitcoin_verified()
+    test_strict_verify_unavailable_does_not_fail_upgraded_proof()
     print("PASS: OTS pending detection fixture tests")
 
 

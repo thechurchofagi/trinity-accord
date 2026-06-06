@@ -9,6 +9,11 @@ def require(text: str, needle: str, label: str) -> None:
         raise SystemExit(f"missing {label} marker: {needle}")
 
 
+def forbid(text: str, needle: str, label: str) -> None:
+    if needle in text:
+        raise SystemExit(f"forbidden {label} marker found: {needle}")
+
+
 def main() -> None:
     workflow = Path(".github/workflows/ots-bitcoin-verification-watch.yml")
     runner = Path("scripts/run_phase6_ots_bitcoin_verify_and_verified_arweave_upload.py")
@@ -36,11 +41,17 @@ def main() -> None:
         "Verify JWK owner if available",
         "I_UNDERSTAND_THIS_UPLOADS_THE_VERIFIED_OTS_PROOF_BUNDLE_TO_ARWEAVE",
         "RESULT=$(python3 -c",
-        'if [ "$RESULT" != "pass" ] && [ "$RESULT" != "verified" ]; then',
+        'if [ "$RESULT" != "pass" ] && [ "$RESULT" != "verified" ] && [ "$RESULT" != "upgraded" ]; then',
         "api/record-chain-ots-latest.json",
         "record-chain/audit/phase6/${{ env.PHASE6_RUN_ID }}/",
         "if-no-files-found: warn",
         "sync verified OTS anchor and latest status",
+        'OTS_UPGRADE_TIMEOUT: "180"',
+    ]
+
+    # OTS_SKIP_UPGRADE must NOT be present in the workflow
+    workflow_forbidden = [
+        "OTS_SKIP_UPGRADE",
     ]
 
     runner_markers = [
@@ -58,10 +69,17 @@ def main() -> None:
         "strict verify returned success but anchor is not marked verified",
         "OTS verify failed for non-pending reason",
         "sync_latest_ots_from_anchor",
+        "calendar_attested",
+        "bitcoin_attestation_embedded",
+        "strict_bitcoin_verified",
+        "strict_verify_unavailable_reason",
     ]
 
     for marker in workflow_markers:
         require(workflow_text, marker, "workflow")
+
+    for marker in workflow_forbidden:
+        forbid(workflow_text, marker, "workflow")
 
     for marker in runner_markers:
         require(runner_text, marker, "runner")

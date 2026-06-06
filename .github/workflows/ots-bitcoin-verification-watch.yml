@@ -40,8 +40,7 @@ jobs:
       ARWEAVE_READBACK_GATEWAYS: "https://arweave.net"
       ARWEAVE_READBACK_TIMEOUT_SECONDS: "900"
       ARWEAVE_READBACK_RETRY_SECONDS: "15"
-      OTS_UPGRADE_TIMEOUT: "60"
-      OTS_SKIP_UPGRADE: "1"
+      OTS_UPGRADE_TIMEOUT: "180"
 
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
@@ -149,7 +148,7 @@ jobs:
           RESULT=$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1])).get("result","missing"))' "$SUMMARY")
           echo "Phase 6 result: $RESULT"
 
-          if [ "$RESULT" != "pass" ] && [ "$RESULT" != "verified" ]; then
+          if [ "$RESULT" != "pass" ] && [ "$RESULT" != "verified" ] && [ "$RESULT" != "upgraded" ]; then
             echo "No production commit for result=$RESULT"
             exit 0
           fi
@@ -169,10 +168,12 @@ jobs:
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          if [ "$RESULT" = "verified" ]; then
+          if [ "$RESULT" = "pass" ]; then
+            git commit -m "chore: archive verified OTS proof on Arweave"
+          elif [ "$RESULT" = "verified" ]; then
             git commit -m "chore: sync verified OTS anchor and latest status"
           else
-            git commit -m "chore: archive verified OTS proof on Arweave"
+            git commit -m "chore: sync upgraded OTS anchor and latest status"
           fi
           git push
 

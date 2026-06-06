@@ -66,6 +66,17 @@ def is_success_output(text: str) -> bool:
     return "success" in lower and ("bitcoin" in lower or "timestamp complete" in lower)
 
 
+def has_bitcoin_block_header_attestation(text: str) -> bool:
+    """Check if ots info output contains a BitcoinBlockHeaderAttestation."""
+    return "bitcoinblockheaderattestation" in text.lower()
+
+
+def run_ots_info(ots_bin: str, ots_file: Path, timeout: int = 90) -> subprocess.CompletedProcess[str]:
+    """Run `ots info` and return the result."""
+    cmd = [ots_bin, "info", str(ots_file)]
+    return run_cmd(cmd, timeout=timeout)
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(
         description="Verify a Record-Chain OTS anchor."
@@ -139,6 +150,15 @@ def main() -> None:
 
     bitcoin_verified = False
     bitcoin_pending = False
+    calendar_attested = False
+    bitcoin_attestation_embedded = False
+    strict_bitcoin_verified = False
+    strict_verify_unavailable_reason = None
+
+    ots_info_command = None
+    ots_info_exit_code = None
+    ots_info_stdout = None
+    ots_info_stderr = None
 
     if not errors:
         if not shutil.which(args.ots_bin):
@@ -151,40 +171,82 @@ def main() -> None:
                 ots_upgrade_stdout = upgrade.stdout
                 ots_upgrade_stderr = upgrade.stderr
 
-                if upgrade.returncode == 0:
-                    upgrade_text = f"{upgrade.stdout}\n{upgrade.stderr}".lower()
-                    if "success" in upgrade_text and "timestamp complete" in upgrade_text:
-                        bitcoin_verified = True
+                upgrade_text = f"{upgrade.stdout}\n{upgrade.stderr}".lower()
+                if upgrade.returncode == 0 and "success" in upgrade_text and "timestamp complete" in upgrade_text:
+                    bitcoin_verified = True
+                    strict_bitcoin_verified = True
+                elif is_pending_output(upgrade_text):
+                    bitcoin_pending = True
+                    calendar_attested = True
+
+            # Run ots info to detect BitcoinBlockHeaderAttestation
+            if ots_file and ots_file.exists():
+                info_result = run_ots_info(args.ots_bin, ots_file)
+                ots_info_command = [args.ots_bin, "info", str(ots_file)]
+                ots_info_exit_code = info_result.returncode
+                ots_info_stdout = info_result.stdout
+                ots_info_stderr = info_result.stderr
+
+                info_text = f"{info_result.stdout}\n{info_result.stderr}"
+                if has_bitcoin_block_header_attestation(info_text):
+                    bitcoin_attestation_embedded = True
+                    calendar_attested = True
 
             if not bitcoin_verified:
-                ots_verify_command = [args.ots_bin]
-                if args.bitcoin_node_url:
-                    ots_verify_command += ["--bitcoin-node", args.bitcoin_node_url]
-                ots_verify_command += ["verify", str(ots_file)]
+                if not args.bitcoin_node_url:
+                    # No Bitcoin node available; cannot do strict verify
+                    strict_verify_unavailable_reason = "no_bitcoin_node"
+                    if bitcoin_attestation_embedded:
+                        # ots info shows BitcoinBlockHeaderAttestation — proof is upgraded
+                        bitcoin_pending = False
+                    elif not bitcoin_pending:
+                        # Check verify output for pending markers
+                        ots_verify_command = [args.ots_bin]
+                        ots_verify_command += ["verify", str(ots_file)]
 
-                verify = run_cmd(ots_verify_command)
-                ots_verify_exit_code = verify.returncode
-                ots_verify_stdout = verify.stdout
-                ots_verify_stderr = verify.stderr
+                        verify = run_cmd(ots_verify_command)
+                        ots_verify_exit_code = verify.returncode
+                        ots_verify_stdout = verify.stdout
+                        ots_verify_stderr = verify.stderr
 
-                combined = f"{verify.stdout}\n{verify.stderr}"
-                if args.upgrade:
-                    combined += f"\n{upgrade.stdout}\n{upgrade.stderr}"
+                        combined = f"{verify.stdout}\n{verify.stderr}"
+                        if args.upgrade:
+                            combined += f"\n{upgrade.stdout}\n{upgrade.stderr}"
 
-                upgrade_timed_out = args.upgrade and upgrade.returncode == -1
-
-                if verify.returncode == 0 and is_success_output(combined):
-                    bitcoin_verified = True
-                elif is_pending_output(combined):
-                    bitcoin_pending = True
-                    if args.strict_bitcoin:
-                        errors.append("OTS proof is pending and not Bitcoin-verified yet")
-                elif upgrade_timed_out:
-                    bitcoin_pending = True
+                        if is_pending_output(combined):
+                            bitcoin_pending = True
+                            calendar_attested = True
                 else:
-                    errors.append(
-                        "OTS verify failed without recognizable pending state; treating as invalid"
-                    )
+                    # Bitcoin node available — do strict verify
+                    ots_verify_command = [args.ots_bin]
+                    ots_verify_command += ["--bitcoin-node", args.bitcoin_node_url]
+                    ots_verify_command += ["verify", str(ots_file)]
+
+                    verify = run_cmd(ots_verify_command)
+                    ots_verify_exit_code = verify.returncode
+                    ots_verify_stdout = verify.stdout
+                    ots_verify_stderr = verify.stderr
+
+                    combined = f"{verify.stdout}\n{verify.stderr}"
+                    if args.upgrade:
+                        combined += f"\n{upgrade.stdout}\n{upgrade.stderr}"
+
+                    upgrade_timed_out = args.upgrade and upgrade.returncode == -1
+
+                    if verify.returncode == 0 and is_success_output(combined):
+                        bitcoin_verified = True
+                        strict_bitcoin_verified = True
+                    elif is_pending_output(combined):
+                        bitcoin_pending = True
+                        calendar_attested = True
+                        if args.strict_bitcoin:
+                            errors.append("OTS proof is pending and not Bitcoin-verified yet")
+                    elif upgrade_timed_out:
+                        bitcoin_pending = True
+                    else:
+                        errors.append(
+                            "OTS verify failed without recognizable pending state; treating as invalid"
+                        )
 
     if ots_file and ots_file.exists():
         anchor["ots_file_sha256"] = sha256_bytes(ots_file.read_bytes())
@@ -198,9 +260,17 @@ def main() -> None:
     anchor["ots_upgrade_exit_code"] = ots_upgrade_exit_code
     anchor["ots_upgrade_stdout"] = ots_upgrade_stdout
     anchor["ots_upgrade_stderr"] = ots_upgrade_stderr
+    anchor["ots_info_command"] = ots_info_command
+    anchor["ots_info_exit_code"] = ots_info_exit_code
+    anchor["ots_info_stdout"] = ots_info_stdout
+    anchor["ots_info_stderr"] = ots_info_stderr
     anchor["bitcoin_verified"] = bitcoin_verified
     anchor["bitcoin_pending"] = bitcoin_pending
-    anchor["ots_status"] = "verified" if bitcoin_verified else "pending"
+    anchor["calendar_attested"] = calendar_attested
+    anchor["bitcoin_attestation_embedded"] = bitcoin_attestation_embedded
+    anchor["strict_bitcoin_verified"] = strict_bitcoin_verified
+    anchor["strict_verify_unavailable_reason"] = strict_verify_unavailable_reason
+    anchor["ots_status"] = "verified" if bitcoin_verified else ("upgraded" if bitcoin_attestation_embedded else "pending")
 
     if args.write_updated_anchor:
         write_json_atomic(anchor_path, anchor)
@@ -215,6 +285,10 @@ def main() -> None:
         "result": result,
         "bitcoin_verified": bitcoin_verified,
         "bitcoin_pending": bitcoin_pending,
+        "calendar_attested": calendar_attested,
+        "bitcoin_attestation_embedded": bitcoin_attestation_embedded,
+        "strict_bitcoin_verified": strict_bitcoin_verified,
+        "strict_verify_unavailable_reason": strict_verify_unavailable_reason,
         "strict_bitcoin": args.strict_bitcoin,
         "errors": errors,
         "generated_at": utc_now(),

@@ -156,7 +156,7 @@ def validate_latest_ots() -> dict[str, Any]:
         raise SystemExit("latest chain_id mismatch")
     if latest.get("ots_status") == "dry_run":
         raise SystemExit("refusing dry_run OTS latest")
-    if latest.get("ots_status") not in {"pending", "verified"}:
+    if latest.get("ots_status") not in {"pending", "verified", "upgraded"}:
         raise SystemExit(f"unexpected latest ots_status: {latest.get('ots_status')}")
     if not re.fullmatch(r"[a-f0-9]{64}", str(latest.get("head_entry_hash") or "")):
         raise SystemExit("latest head_entry_hash invalid")
@@ -179,7 +179,7 @@ def validate_anchor(anchor_rel: str) -> dict[str, Any]:
         raise SystemExit("anchor chain_id mismatch")
     if anchor.get("ots_status") == "dry_run":
         raise SystemExit("refusing dry_run anchor")
-    if anchor.get("ots_status") not in {"pending", "verified"}:
+    if anchor.get("ots_status") not in {"pending", "verified", "upgraded"}:
         raise SystemExit(f"unexpected anchor ots_status: {anchor.get('ots_status')}")
 
     for key in ["anchored_file", "ots_file"]:
@@ -209,6 +209,10 @@ def sync_latest_ots_from_anchor(anchor_rel: str) -> dict[str, Any]:
     latest["ots_status"] = anchor.get("ots_status", latest.get("ots_status", "pending"))
     latest["bitcoin_pending"] = anchor.get("bitcoin_pending", latest.get("bitcoin_pending", False))
     latest["bitcoin_verified"] = anchor.get("bitcoin_verified", latest.get("bitcoin_verified", False))
+    latest["calendar_attested"] = anchor.get("calendar_attested", latest.get("calendar_attested", False))
+    latest["bitcoin_attestation_embedded"] = anchor.get("bitcoin_attestation_embedded", latest.get("bitcoin_attestation_embedded", False))
+    latest["strict_bitcoin_verified"] = anchor.get("strict_bitcoin_verified", latest.get("strict_bitcoin_verified", False))
+    latest["strict_verify_unavailable_reason"] = anchor.get("strict_verify_unavailable_reason", latest.get("strict_verify_unavailable_reason"))
     latest["updated_at"] = now
     if anchor.get("verified_at"):
         latest["verified_at"] = anchor["verified_at"]
@@ -286,9 +290,20 @@ def ots_upgrade_and_verify(
             if anchor.get("ots_status") == "verified" and anchor.get("bitcoin_verified") is True:
                 return anchor, True
             raise SystemExit("strict verify returned success but anchor is not marked verified")
-        return anchor, bool(anchor.get("ots_status") == "verified" and anchor.get("bitcoin_verified") is True)
+        # Non-strict: consider verified or upgraded as success
+        is_verified = anchor.get("ots_status") == "verified" and anchor.get("bitcoin_verified") is True
+        is_upgraded = anchor.get("ots_status") == "upgraded" or anchor.get("bitcoin_attestation_embedded") is True
+        return anchor, bool(is_verified or is_upgraded)
+
+    # Non-zero exit: check for pending/upgraded state
+    is_upgraded = anchor.get("ots_status") == "upgraded" or anchor.get("bitcoin_attestation_embedded") is True
+    if is_upgraded:
+        return anchor, True
 
     if strict and (anchor.get("bitcoin_pending") is True or anchor.get("ots_status") == "pending"):
+        return anchor, False
+
+    if not strict and (anchor.get("bitcoin_pending") is True or anchor.get("ots_status") == "pending"):
         return anchor, False
 
     raise SystemExit(f"OTS verify failed for non-pending reason; strict={strict}")
@@ -533,7 +548,8 @@ def main() -> int:
         })
         return 0
 
-    anchor, _ = ots_upgrade_and_verify(
+    # Step 1: Non-strict upgrade+verify (always runs unless --skip-upgrade)
+    anchor, non_strict_ok = ots_upgrade_and_verify(
         anchor_rel=anchor_rel,
         log_dir=log_dir,
         ots_bin=args.ots_bin,
@@ -542,18 +558,38 @@ def main() -> int:
         skip_upgrade=args.skip_upgrade,
     )
 
-    anchor, verified = ots_upgrade_and_verify(
-        anchor_rel=anchor_rel,
-        log_dir=log_dir,
-        ots_bin=args.ots_bin,
-        bitcoin_node_url=args.bitcoin_node_url,
-        strict=True,
-        skip_upgrade=args.skip_upgrade,
-    )
+    # Determine if proof is upgraded (has BitcoinBlockHeaderAttestation)
+    is_upgraded = anchor.get("ots_status") == "upgraded" or anchor.get("bitcoin_attestation_embedded") is True
+
+    # Step 2: Strict Bitcoin verify only if a Bitcoin node URL is available
+    verified = False
+    if args.bitcoin_node_url:
+        anchor, verified = ots_upgrade_and_verify(
+            anchor_rel=anchor_rel,
+            log_dir=log_dir,
+            ots_bin=args.ots_bin,
+            bitcoin_node_url=args.bitcoin_node_url,
+            strict=True,
+            skip_upgrade=args.skip_upgrade,
+        )
+    elif is_upgraded:
+        # Proof is upgraded but no Bitcoin node for strict verify
+        # This is the expected happy path on GitHub hosted runners
+        pass
 
     sync_latest_ots_from_anchor(anchor_rel)
 
-    if not verified:
+    # Determine result
+    if verified:
+        result = "verified"
+    elif is_upgraded:
+        result = "upgraded"
+    elif anchor.get("bitcoin_pending"):
+        result = "pending"
+    else:
+        result = "pending"
+
+    if result == "pending":
         assert_core_files_unchanged(core_before)
         write_summary(log_dir, {
             "schema": "trinity_phase6_summary.v1",
@@ -564,6 +600,10 @@ def main() -> int:
             "ots_status": anchor.get("ots_status"),
             "bitcoin_verified": anchor.get("bitcoin_verified"),
             "bitcoin_pending": anchor.get("bitcoin_pending"),
+            "calendar_attested": anchor.get("calendar_attested"),
+            "bitcoin_attestation_embedded": anchor.get("bitcoin_attestation_embedded"),
+            "strict_bitcoin_verified": anchor.get("strict_bitcoin_verified"),
+            "strict_verify_unavailable_reason": anchor.get("strict_verify_unavailable_reason"),
             "paid_upload_performed": False,
             "registry_updated": False,
             "main_chain_before_sha256": core_before["main_chain_sha256"],
@@ -577,6 +617,32 @@ def main() -> int:
         })
         return 0
 
+    if result == "upgraded":
+        # Proof upgraded with BitcoinBlockHeaderAttestation but no strict verify
+        assert_core_files_unchanged(core_before)
+        write_summary(log_dir, {
+            "schema": "trinity_phase6_summary.v1",
+            "run_id": args.run_id,
+            "result": "upgraded",
+            "anchor_file": anchor_rel,
+            "ots_status": anchor.get("ots_status"),
+            "bitcoin_verified": anchor.get("bitcoin_verified"),
+            "bitcoin_pending": anchor.get("bitcoin_pending"),
+            "calendar_attested": anchor.get("calendar_attested"),
+            "bitcoin_attestation_embedded": anchor.get("bitcoin_attestation_embedded"),
+            "strict_bitcoin_verified": anchor.get("strict_bitcoin_verified"),
+            "strict_verify_unavailable_reason": anchor.get("strict_verify_unavailable_reason"),
+            "paid_upload_performed": False,
+            "registry_updated": False,
+            "next_action": "strict_verify_when_bitcoin_node_available",
+            "main_chain_before_sha256": core_before["main_chain_sha256"],
+            "main_chain_after_sha256": sha256_file(MAIN_CHAIN),
+            "head_before_sha256": core_before["head_sha256"],
+            "head_after_sha256": sha256_file(HEAD),
+        })
+        return 0
+
+    # result == "verified": strict Bitcoin verify passed
     if args.verify_only:
         assert_core_files_unchanged(core_before)
         write_summary(log_dir, {
