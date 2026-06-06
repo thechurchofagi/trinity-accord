@@ -36,7 +36,7 @@ def main() -> int:
             "enforcement must be required before formal window")
 
     # Verify the rate_limit module constants match
-    import importlib
+    import importlib.util
     spec = importlib.util.spec_from_file_location(
         "rate_limit",
         ROOT / "apps/record_chain_intake_gateway/gateway/rate_limit.py",
