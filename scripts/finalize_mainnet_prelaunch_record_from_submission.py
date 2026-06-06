@@ -11,6 +11,10 @@ import time
 from pathlib import Path
 from typing import Any
 
+ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT / "apps/record_chain_intake_gateway"))
+from gateway.authorship import verify_authorship_proof  # noqa: E402
+
 ROOT = Path(__file__).resolve().parents[1]
 
 MAIN_CHAIN_ID = "trinity-record-chain-main"
@@ -127,6 +131,42 @@ def extract_oath_summary(submission: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+
+def require_authorship_summary(submission: dict[str, Any]) -> dict[str, Any]:
+    ok, code, message = verify_authorship_proof(submission)
+    if not ok:
+        raise SystemExit(f"{code}: {message}")
+
+    proof = submission.get("authorship_proof")
+    if not isinstance(proof, dict):
+        raise SystemExit("MISSING_AUTHORSHIP_PROOF")
+
+    pub_sha = proof.get("public_key_sha256")
+    draft = submission.get("record_draft") or {}
+    spi = draft.get("submitting_participant_identity") or {}
+
+    guardian_key = None
+    if draft.get("record_type") == "guardian_application":
+        guardian_key = (draft.get("guardian_application_content") or {}).get("guardian_public_key_sha256")
+
+    public_key_pem = proof.get("public_key_pem") or ""
+
+    return {
+        "authorship_proof_present": True,
+        "authorship_verification_performed_by_finalizer": True,
+        "authorship_schema": proof.get("schema"),
+        "authorship_algorithm": proof.get("algorithm"),
+        "authorship_public_key_sha256": pub_sha,
+        "authorship_public_key_pem_sha256": hashlib.sha256(public_key_pem.encode("utf-8")).hexdigest() if public_key_pem else None,
+        "signed_payload_sha256": proof.get("signed_payload_sha256"),
+        "signature_present": bool(proof.get("signature_base64")),
+        "participant_public_key_sha256": spi.get("participant_public_key_sha256"),
+        "guardian_public_key_sha256": guardian_key,
+        "guardian_key_bound_to_authorship_key": draft.get("record_type") != "guardian_application" or guardian_key == pub_sha,
+        "private_key_not_embedded": True,
+    }
+
+
 def assert_no_raw_readback(obj: Any) -> None:
     raw = json.dumps(obj, ensure_ascii=False)
     if "readback_text" in raw or "client_oath_readback" in raw:
@@ -235,6 +275,7 @@ def main() -> int:
             "accepted_at": receipt.get("accepted_at"),
             "receipt_id": receipt_id,
             "oath_summary": extract_oath_summary(submission),
+            "authorship_summary": require_authorship_summary(submission),
         },
         "finalization": {
             "finalized_at": utc_now(),
