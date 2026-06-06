@@ -1,0 +1,42 @@
+{
+  "anchored_file_sha256": "757617fe8919f4e28ccea9071699b4fa4904f4917fbb1d676844ad0ad47f79e8",
+  "bitcoin_attestation_embedded": false,
+  "bitcoin_pending": true,
+  "bitcoin_verified": false,
+  "chain_id": "trinity-record-chain-main",
+  "chain_version": 1,
+  "created_at": "2026-06-06T23:47:31Z",
+  "entry_count": 16,
+  "files": [
+    {
+      "base64": "eyJjYW5vbmljYWxpemF0aW9uIjoianNvbi5zb3J0X2tleXMubm9fd2hpdGVzcGFjZS51dGY4LmFsbG93X25hbl9mYWxzZS52MSIsImNoYWluX2lkIjoidHJpbml0eS1yZWNvcmQtY2hhaW4tbWFpbiIsImNoYWluX3ZlcnNpb24iOjEsImVudHJ5X2NvdW50IjoxNiwiaGVhZF9lbnRyeV9oYXNoIjoiNDJmNDJkMzU0NDYyNzQwNDU5M2RlODZiZDZiMzQ1M2QzYWU5NWI4ODI5ZDdhYWMzMzQ3MWFkYjhjZDQ3M2ViMSIsImhlaWdodCI6MTUsImxlZGdlcl9maWxlIjoicmVjb3JkLWNoYWluL2hhc2gtY2hhaW4vbWFpbi5jaGFpbi5qc29ubCIsIm90c19pbnB1dF9zZW1hbnRpY3MiOiJzdGFibGUgY29tbWl0bWVudCBmb3IgT1RTOyBleGNsdWRlcyBnZW5lcmF0ZWRfYXQgYW5kIG90aGVyIHZvbGF0aWxlIGZpZWxkcyIsInJlY2VpcHRfc2VtYW50aWNzIjoicmVjZWlwdCBpcyBpbnRha2Utb25seTsgaGFzaC1jaGFpbiBpbmNsdXNpb24gcmVxdWlyZXMgZmluYWxpemF0aW9uIiwic2NoZW1hIjoidHJpbml0eV9yZWNvcmRfY2hhaW5faGVhZF9jb21taXRtZW50LnYxIiwidHlwZV9pbmRleGVzX2FyZV9kZXJpdmVkIjp0cnVlfQ==",
+      "bytes": 574,
+      "encoding": "base64",
+      "path": "record-chain/ots/anchors/height-15-42f42d3544627404-757617fe8919f4e2.record-chain-head-commitment.json",
+      "role": "head_commitment_snapshot",
+      "sha256": "757617fe8919f4e28ccea9071699b4fa4904f4917fbb1d676844ad0ad47f79e8"
+    },
+    {
+      "base64": "ewogICJhbmNob3JlZF9maWxlIjogInJlY29yZC1jaGFpbi9vdHMvYW5jaG9ycy9oZWlnaHQtMTUtNDJmNDJkMzU0NDYyNzQwNC03NTc2MTdmZTg5MTlmNGUyLnJlY29yZC1jaGFpbi1oZWFkLWNvbW1pdG1lbnQuanNvbiIsCiAgImFuY2hvcmVkX2ZpbGVfc2VtYW50aWNzIjogInN0YWJsZSByZWNvcmQtY2hhaW4gaGVhZCBjb21taXRtZW50OyBnZW5lcmF0ZWRfYXQgZXhjbHVkZWQiLAogICJhbmNob3JlZF9maWxlX3NoYTI1NiI6ICI3NTc2MTdmZTg5MTlmNGUyOGNjZWE5MDcxNjk5YjRmYTQ5MDRmNDkxN2ZiYjFkNjc2ODQ0YWQwYWQ0N2Y3OWU4IiwKICAiYml0Y29pbl9hdHRlc3RhdGlvbiI6IG51bGwsCiAgImJpdGNvaW5fcGVuZGluZyI6IHRydWUsCiAgImJpdGNvaW5fdmVyaWZpZWQiOiBmYWxzZSwKICAiY2hhaW5faWQiOiAidHJpbml0eS1yZWNvcmQtY2hhaW4tbWFpbiIsCiAgImNoYWluX3ZlcnNpb24iOiAxLAogICJjcmVhdGVkX2F0IjogIjIwMjYtMDYtMDZUMjM6NDU6MTNaIiwKICAiZW50cnlfY291bnQiOiAxNiwKICAiaGVhZF9lbnRyeV9oYXNoIjogIjQyZjQyZDM1NDQ2Mjc0MDQ1OTNkZTg2YmQ2YjM0NTNkM2FlOTViODgyOWQ3YWFjMzM0NzFhZGI4Y2Q0NzNlYjEiLAogICJoZWlnaHQiOiAxNSwKICAib3RzX2NvbW1hbmQiOiBbCiAgICAib3RzIiwKICAgICJzdGFtcCIsCiAgICAicmVjb3JkLWNoYWluL290cy9hbmNob3JzL2hlaWdodC0xNS00MmY0MmQzNTQ0NjI3NDA0LTc1NzYxN2ZlODkxOWY0ZTIucmVjb3JkLWNoYWluLWhlYWQtY29tbWl0bWVudC5qc29uIgogIF0sCiAgIm90c19leGl0X2NvZGUiOiAwLAogICJvdHNfZmlsZSI6ICJyZWNvcmQtY2hhaW4vb3RzL2FuY2hvcnMvaGVpZ2h0LTE1LTQyZjQyZDM1NDQ2Mjc0MDQtNzU3NjE3ZmU4OTE5ZjRlMi5yZWNvcmQtY2hhaW4taGVhZC1jb21taXRtZW50Lmpzb24ub3RzIiwKICAib3RzX2ZpbGVfZXhpc3RzIjogdHJ1ZSwKICAib3RzX2ZpbGVfc2hhMjU2IjogIjRhYmEwZTM4Y2ExMDYzYmE3YjhkNzQ5ZWRjYjVkNzY5MDk3ZDk3ODY2Yjg0MjcxNmM5OWYyNGFmNGU2MTk1ODciLAogICJvdHNfc3RhdHVzIjogInBlbmRpbmciLAogICJvdHNfc3RkZXJyIjogIlN1Ym1pdHRpbmcgdG8gcmVtb3RlIGNhbGVuZGFyIGh0dHBzOi8vYS5wb29sLm9wZW50aW1lc3RhbXBzLm9yZ1xuU3VibWl0dGluZyB0byByZW1vdGUgY2FsZW5kYXIgaHR0cHM6Ly9iLnBvb2wub3BlbnRpbWVzdGFtcHMub3JnXG5TdWJtaXR0aW5nIHRvIHJlbW90ZSBjYWxlbmRhciBodHRwczovL2EucG9vbC5ldGVybml0eXdhbGwuY29tXG5TdWJtaXR0aW5nIHRvIHJlbW90ZSBjYWxlbmRhciBodHRwczovL290cy5idGMuY2F0YWxsYXh5LmNvbVxuIiwKICAib3RzX3N0ZG91dCI6ICIiLAogICJzY2hlbWEiOiAidHJpbml0eV9yZWNvcmRfY2hhaW5fb3RzX2FuY2hvci52MSIsCiAgInNlbWFudGljcyI6ICJPVFMgYW5jaG9ycyBhIHN0YWJsZSBoZWFkIGNvbW1pdG1lbnQgc25hcHNob3Q7IGl0IGRvZXMgbm90IG1vZGlmeSBjaGFpbiBlbnRyaWVzLiIsCiAgInNvdXJjZV9oZWFkX2ZpbGUiOiAiYXBpL3JlY29yZC1jaGFpbi1oZWFkLmpzb24iLAogICJzb3VyY2VfaGVhZF9nZW5lcmF0ZWRfYXQiOiAiMjAyNi0wNi0wNlQxMzo1OTo0OVoiLAogICJ2ZXJpZmllZF9hdCI6IG51bGwKfQo=",
+      "bytes": 1649,
+      "encoding": "base64",
+      "path": "record-chain/ots/anchors/height-15-42f42d3544627404-757617fe8919f4e2.anchor.json",
+      "role": "ots_anchor_metadata",
+      "sha256": "3e19f9ae3f2bf9485ffc25e790e981191e5ad07094fb4c1c7f13fb545205b4c1"
+    },
+    {
+      "base64": "AE9wZW5UaW1lc3RhbXBzAABQcm9vZgC/ieLohOiSlAEIdXYX/okZ9OKMzqkHFpm0+kkE9JF/ux1naEStCtR/eejwEOI0did1MFhQji8ik+TUdAoI//AIHsbsYVdOapoI8CC5rq3XKhFyas5oVFh1YQAAlraTwkqTKrd0+6B2hyCZcgjwEDJXb+TafZjY028Nrtf2hToI8QRqJLEI8AjrxCCeZKzi1ACD3+MNLvkMjiwraHR0cHM6Ly9ib2IuYnRjLmNhbGVuZGFyLm9wZW50aW1lc3RhbXBzLm9yZ//wEEGwb7oicNVkNGVDYvDSGQEI8QRqJLEI8Ai/byTXbrvmewCD3+MNLvkMjiMiaHR0cHM6Ly9idGMuY2FsZW5kYXIuY2F0YWxsYXh5LmNvbf/wCJgyhw9hiehqCPAQlvXh3N8t3q0k6wKIlrCgzAjwIC6ueAUPIM10Sdk5kTft03YesyPlb2XIXEVnS/D2GSveCPAgtO+ri/hssUoHzFHL8gr4zwOp9odxCCfUVYKR1OSj16QI8CB48ZIYhNRqUoCJfUkwLFP8zl/5srteB8OwOs5GPACO2gjxBGoksQnwCJO6+XgdS9Q0AIPf4w0u+QyOLi1odHRwczovL2FsaWNlLmJ0Yy5jYWxlbmRhci5vcGVudGltZXN0YW1wcy5vcmfwENdIjDNu/2hBeXGLvd0xyzwI8CDmMFU+qFRr5N4+UqhuPOOiYu40hTK6mIJt0ZRMlTFhmwjxIFLdZZuyFfk29pWHJc2MjvhLLLJ/WrhLJIK7qvCZ7LwgCPEEaiSxCPAICA84KK+b/awAg9/jDS75DI4pKGh0dHBzOi8vZmlubmV5LmNhbGVuZGFyLmV0ZXJuaXR5d2FsbC5jb20=",
+      "bytes": 665,
+      "encoding": "base64",
+      "path": "record-chain/ots/anchors/height-15-42f42d3544627404-757617fe8919f4e2.record-chain-head-commitment.json.ots",
+      "role": "ots_proof",
+      "sha256": "4aba0e38ca1063ba7b8d749edcb5d769097d97866b842716c99f24af4e619587"
+    }
+  ],
+  "head_entry_hash": "42f42d3544627404593de86bd6b3453d3ae95b8829d7aac33471adb8cd473eb1",
+  "height": 15,
+  "ots_status": "pending",
+  "schema": "trinity_record_chain_ots_arweave_bundle.v1",
+  "semantics": "Arweave bundle for an OTS proof of a stable Record-Chain head commitment. This archive is outside main.chain.jsonl and does not modify entry_hash.",
+  "source_anchor_file": "record-chain/ots/anchors/height-15-42f42d3544627404-757617fe8919f4e2.anchor.json"
+}
