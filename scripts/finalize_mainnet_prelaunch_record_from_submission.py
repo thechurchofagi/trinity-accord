@@ -13,7 +13,7 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "apps/record_chain_intake_gateway"))
-from gateway.authorship import verify_authorship_proof  # noqa: E402
+from gateway.authorship import verify_authorship_proof_submission  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -133,7 +133,7 @@ def extract_oath_summary(submission: dict[str, Any]) -> dict[str, Any]:
 
 
 def require_authorship_summary(submission: dict[str, Any]) -> dict[str, Any]:
-    ok, code, message = verify_authorship_proof(submission)
+    ok, code, message = verify_authorship_proof_submission(submission)
     if not ok:
         raise SystemExit(f"{code}: {message}")
 
