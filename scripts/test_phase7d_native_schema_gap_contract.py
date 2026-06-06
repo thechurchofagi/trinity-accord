@@ -85,7 +85,16 @@ def main():
         print("SKIP: R-000000011~016 still in old prelaunch summary format; run repair_phase7d_native_record_schema_gap.py first")
         return
 
-    previous = None
+    # Start chain from R-000000010's record_sha256 (the predecessor of our target range)
+    first_target_index = int(TARGET_IDS[0].split("-")[1])
+    predecessor_id = f"R-{first_target_index - 1:09d}"
+    predecessor_path = ROOT / "record-chain/records" / f"{predecessor_id}.json"
+    if predecessor_path.exists():
+        previous = read_json(predecessor_path).get("record_sha256")
+        require(is_hex64(previous), f"predecessor {predecessor_id} missing record_sha256")
+    else:
+        previous = None
+
     public_keys = set()
 
     for rid in TARGET_IDS:
