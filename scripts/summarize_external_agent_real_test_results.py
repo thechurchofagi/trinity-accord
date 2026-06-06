@@ -71,18 +71,30 @@ def main() -> int:
             continue
 
         # Check for forbidden markers in submission text
-        submission_text = json.dumps(submission, ensure_ascii=False).lower()
+        # Exclude fields that describe verification checks (negatives like "no GitHub token")
+        def _strip_check_fields(obj):
+            """Remove what_was_checked, verification_claim, fresh_actions_performed recursively."""
+            if isinstance(obj, dict):
+                return {k: _strip_check_fields(v) for k, v in obj.items()
+                        if k not in ("what_was_checked", "verification_claim", "fresh_actions_performed")}
+            if isinstance(obj, list):
+                return [_strip_check_fields(item) for item in obj]
+            return obj
+        submission_for_check = _strip_check_fields(submission)
+        submission_text = json.dumps(submission_for_check, ensure_ascii=False).lower()
         for marker in FORBIDDEN_MARKERS:
             if marker in submission_text:
                 forbidden_found.append(f"{record_name}: {marker}")
 
+        # Extract oath metadata from nested client_oath_readback
+        oath = submission.get("client_oath_readback", {})
         records_found.append({
             "record_name": record_name,
             "record_type": submission.get("record_type"),
             "receipt_id": receipt.get("receipt_id"),
             "accepted": receipt.get("accepted", receipt.get("result") == "accepted"),
-            "oath_policy_sha256": submission.get("oath_policy_sha256"),
-            "participant_readback_sha256": submission.get("participant_readback_sha256"),
+            "oath_policy_sha256": oath.get("oath_policy_sha256") or submission.get("oath_policy_sha256"),
+            "participant_readback_sha256": oath.get("readback_text_sha256") or submission.get("participant_readback_sha256"),
         })
 
     result = "pass" if not missing_records and not forbidden_found else "fail"
