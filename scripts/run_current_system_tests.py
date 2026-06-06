@@ -294,6 +294,28 @@ def main() -> int:
         fail(f"builder deep tests failed: {result.stderr}\n{result.stdout}")
     ok("builder deep tests")
 
+    # Mandatory authorship key contract
+    result = subprocess.run(
+        [sys.executable, "scripts/test_mandatory_authorship_key_contract.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"mandatory authorship key contract failed: {result.stderr}\n{result.stdout}")
+    ok("mandatory authorship key contract")
+
+    # Gateway authorship proof contract
+    result = subprocess.run(
+        [sys.executable, "scripts/test_gateway_authorship_proof_contract.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"gateway authorship proof contract failed: {result.stderr}\n{result.stdout}")
+    ok("gateway authorship proof contract")
+
     # Phase 6B hotfix tests
     result = subprocess.run(
         [sys.executable, "scripts/test_phase6b_hotfix.py"],
