@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.public-home-status.v2",
-  "generated_at": "2026-06-06T09:50:02.894201+00:00",
+  "generated_at": "2026-06-06T09:50:21.336701+00:00",
   "generated_from": [
     "/api/record-chain-status.json",
     "/api/record-chain-anchor-status.json",
@@ -11,7 +11,7 @@
     "/api/guardian-registry.json",
     "/api/agent-declared-verification-index.json"
   ],
-  "source_digest": "299cc621d7955416",
+  "source_digest": "286d6a86b1cffb1e",
   "current_record_chain_status": {
     "phase": "mainnet_prelaunch_testing",
     "total_records": 16,
