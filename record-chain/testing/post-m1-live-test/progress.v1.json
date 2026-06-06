@@ -2,14 +2,21 @@
   "schema": "trinityaccord.post-m1-live-test-progress.v1",
   "status": "active",
   "authoritative_progress_branch": "post-m1-test-progress",
-  "current_phase": "M3",
-  "current_step": "M3.done",
-  "current_mode": "INT-CHECKPOINT",
+  "current_phase": "M4",
+  "current_step": "M4.3",
+  "current_mode": "INT-ARCHIVE",
   "overall_status": "pass",
-  "last_safe_resume_step": "M4.1",
+  "last_safe_resume_step": "M4.4",
   "last_checkpoint_id": null,
   "last_checkpoint_at": null,
-  "active_session": null,
+  "active_session": {
+    "session_id": "sandbox-20260607T074843Z",
+    "mode": "INT-ARCHIVE",
+    "owner": "agent",
+    "started_at": "2026-06-06T23:48:43.437898Z",
+    "updated_at": "2026-06-06T23:48:43.437898Z",
+    "expires_at": "2026-06-07T00:23:43.437934Z"
+  },
   "completed_markers": [
     "PHASE7C_BASELINE_RESTORED_OK",
     "MANDATORY_AUTHORSHIP_KEY_ONLY_FINAL_OK",
@@ -30,8 +37,8 @@
     },
     "M4": {
       "name": "Current Head OTS + Arweave Archive",
-      "status": "blocked_waiting_for_M3",
-      "resume_step": null,
+      "status": "in_progress",
+      "resume_step": "M4.4",
       "blocking_issue": "M3 not complete"
     },
     "M5": {
@@ -76,5 +83,5 @@
     "external agent private key",
     "raw private key logs or PEM files"
   ],
-  "updated_at": "2026-06-06T14:17:57.241312Z"
+  "updated_at": "2026-06-06T23:48:43.437898Z"
 }
