@@ -1,0 +1,14 @@
+{
+  "chain_id": "trinity-record-chain-testnet",
+  "chain_version": "1.0.0",
+  "environment": "testnet",
+  "test_only": true,
+  "not_mainnet": true,
+  "status": "initialized",
+  "entry_count": 0,
+  "height": 0,
+  "head_entry_hash": null,
+  "initialized_at": "2026-06-06T02:56:31Z",
+  "schema": "trinityaccord.record-chain-testnet-status.v1",
+  "description": "Isolated testnet Record-Chain for Phase 7B external agent testing. This is NOT the mainnet chain."
+}
