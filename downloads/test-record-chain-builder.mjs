@@ -377,7 +377,7 @@ function testKeyPairReturnShape() {
   // Verify the code fix directly
   const source = readFileSync(BUILDER, "utf-8");
   assert.ok(
-    source.includes("return { publicKeyPem: pubPem, privateKeyPem: privPem, privateKey };"),
+    (source.includes("return { publicKeyPem: pubPem, privateKeyPem: privPem, privateKey };") || source.includes("return { publicKeyPem: pubPem, privateKeyPem: privPem, privateKey, newlyGenerated:")),
     "generateAuthorshipKeyPair must return privateKey field"
   );
   assert.ok(
