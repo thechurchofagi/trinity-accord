@@ -1,7 +1,7 @@
 {
   "archive": "trinity-guardian-stage1-builder-bundle.tar.gz",
-  "archive_sha256": "b394966f1be98ea221204e3cff639a37d47cee94d4d479ecc8ddbdf9acf84b6a",
-  "archive_size_bytes": 24106,
+  "archive_sha256": "93d74fc5e42834cecbbddfeb5f8f261059b559c3bd9cc7950c5214e34b51e3c2",
+  "archive_size_bytes": 24165,
   "bundle": "guardian_application_stage_1",
   "entrypoint": "scripts/create_guardian_application.mjs",
   "files": [
@@ -23,12 +23,12 @@
     {
       "path": "api/gateway-builder-route-map.v1.json",
       "sha256": "a212b2705e77105f6945a2d393ce5a7dbbff10c689845698c82c09ed12f49705",
-      "size_bytes": 7430
+      "size_bytes": 7569
     },
     {
       "path": "api/gateway-workflows.v1.json",
       "sha256": "c08b3322229046f7fb1fbae4bb45d2a17996ebb4840f457e8012261625bd1ecb",
-      "size_bytes": 34172
+      "size_bytes": 34310
     },
     {
       "path": "api/guardian-application-oath.v1.txt",

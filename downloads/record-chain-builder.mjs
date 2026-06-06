@@ -1974,9 +1974,6 @@ async function main() {
 
   validateFormalInputs(cmd, opts);
 
-  // Handle authorship key — mandatory for all public submission commands
-  let keyPair = requireOrCreateAuthorshipKeyPair(cmd, args);
-
   const draft = builder(opts);
 
   // Wire --linked-guardian CLI flag into draft
@@ -1986,7 +1983,7 @@ async function main() {
     };
   }
 
-  // Inject oath gate for formal record types
+  // Inject oath gate for formal record types (before key check, so --readback errors surface first)
   const OATH_TYPES = ["echo", "verification", "guardian_application", "guardian_retirement",
     "guardian_key_rotation", "propagation", "correction", "classification_update"];
   const isLinkedGuardian = !!(
@@ -2014,6 +2011,9 @@ async function main() {
     }
     draft.submission_oath_verification = buildSubmissionOathVerification(draft.record_type, canonicalOath, readback, isLinkedGuardian);
   }
+
+  // Handle authorship key — mandatory for all public submission commands (after oath check)
+  let keyPair = requireOrCreateAuthorshipKeyPair(cmd, args);
 
   const submission = buildSubmission(draft, { ...opts, keyPair });
 

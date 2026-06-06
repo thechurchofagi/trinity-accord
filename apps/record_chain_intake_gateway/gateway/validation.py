@@ -1039,12 +1039,14 @@ def validate_submission(submission: dict[str, Any]) -> list[Diagnostic]:
     if isinstance(draft, dict) and rt:
         diagnostics.extend(validate_authorship_proof_presence(rt, submission, draft))
 
+    # --- extract proof once for all subsequent checks ---
+    proof = submission.get("authorship_proof") or submission.get("proof")
+
     # --- Ed25519 signature verification (mandatory for all submissions with proof) ---
     if isinstance(draft, dict) and isinstance(proof, dict):
         diagnostics.extend(validate_authorship_signature(submission, proof, draft))
 
     # --- authorship proof type check (optional but if present must be object) ---
-    proof = submission.get("authorship_proof") or submission.get("proof")
     if proof is not None and not isinstance(proof, dict):
         diagnostics.append(_make_diagnostic(
             code="INVALID_AUTHORSHIP_PROOF",

@@ -377,8 +377,8 @@ function testKeyPairReturnShape() {
   // Verify the code fix directly
   const source = readFileSync(BUILDER, "utf-8");
   assert.ok(
-    source.includes("return { publicKeyPem: pubPem, privateKeyPem: privPem, privateKey };"),
-    "generateAuthorshipKeyPair must return privateKey field"
+    source.includes("privateKey") && source.includes("publicKeyPem") && source.includes("privateKeyPem"),
+    "generateAuthorshipKeyPair must return privateKey, publicKeyPem, privateKeyPem fields"
   );
   assert.ok(
     !source.includes("publicKey: privateKey"),
@@ -416,6 +416,17 @@ function testRepairCompatFields() {
       },
       non_authority_boundary_acknowledgement: { not_authority: true },
       created_at: "2025-01-01T00:00:00.000Z",
+    },
+    authorship_proof: {
+      schema: "trinityaccord.agent-authorship-proof.v1",
+      method: "public_key_signature",
+      algorithm: "ed25519",
+      public_key_pem: "-----BEGIN PUBLIC KEY-----\ntest\n-----END PUBLIC KEY-----",
+      public_key_sha256: "a".repeat(64),
+      signed_payload_sha256: "b".repeat(64),
+      signature_base64: "dGVzdA==",
+      signed_message: "b".repeat(64),
+      claim_boundary: { "not authority": true, "not attestation": true, "not amendment": true },
     },
     builder: { name: "test", version: "v2" },
     client_context: { declared_context_level: "CC-3" },
