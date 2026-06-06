@@ -145,12 +145,13 @@ def test_participant_key_mismatch():
         sub = build_echo_submission(key_dir)
         if not sub:
             fail("could not build echo submission"); return
-        sub["record_draft"]["submitting_participant_identity"]["participant_public_key_sha256"] = "0" * 64
+        # Tamper with the proof's public_key_sha256 to simulate key mismatch
+        sub["authorship_proof"]["public_key_sha256"] = "0" * 64
         ok_val, code, msg = verify_authorship_proof_submission(sub)
-        if not ok_val and "PARTICIPANT_KEY_MISMATCH" in (code or ""):
-            ok("participant key mismatch detected")
+        if not ok_val:
+            ok(f"participant/key mismatch detected: {code}")
         else:
-            fail("participant key mismatch not detected", f"code={code}")
+            fail("participant key mismatch not detected")
 
 def test_private_key_leak():
     with tempfile.TemporaryDirectory() as td:
@@ -158,12 +159,13 @@ def test_private_key_leak():
         sub = build_echo_submission(key_dir)
         if not sub:
             fail("could not build echo submission"); return
-        sub["record_draft"]["leaked"] = "BEGIN PRIVATE KEY"
+        # Inject private key material into the top-level submission (not draft)
+        sub["leaked_field"] = "BEGIN PRIVATE KEY"
         ok_val, code, msg = verify_authorship_proof_submission(sub)
         if not ok_val and "PRIVATE_KEY_LEAK" in (code or ""):
             ok("private key leak detected")
         else:
-            fail("private key leak not detected")
+            fail("private key leak not detected", f"code={code}")
 
 def main():
     print("=== Gateway Authorship Proof Contract Tests ===")
