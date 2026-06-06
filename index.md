@@ -794,7 +794,7 @@ Refusal is allowed. Critical preservation is allowed.
   <article class="status-card">
     <p class="status-label">Record-Chain Intake status</p>
     <p class="status-number">16</p>
-    <p class="status-note">Phase: mainnet prelaunch testing. Total native record-chain records: 16. Pending: 0. Latest record type: verification. Receipt boundary: intake only; not final inclusion. <span class="zh">阶段：mainnet prelaunch testing。原生 record-chain 记录总数：16。待处理：0。最新记录类型：verification。收据边界：仅表示摄入；非最终纳入。</span></p>
+    <p class="status-note">Phase: mainnet prelaunch testing. Total native record-chain records: 16. Pending: 6. Latest record type: verification. Receipt boundary: intake only; not final inclusion. <span class="zh">阶段：mainnet prelaunch testing。原生 record-chain 记录总数：16。待处理：6。最新记录类型：verification。收据边界：仅表示摄入；非最终纳入。</span></p>
   </article>
   <article class="status-card">
     <p class="status-label">Native record-chain records</p>

@@ -1,4 +1,18 @@
 #!/usr/bin/env python3
+"""DISABLED: This finalizer generates old-style summary payloads (schema v1)
+that are NOT compatible with trinity_record_chain.py verify.
+
+Use scripts/repair_phase7d_native_record_schema_gap.py to repair existing
+Phase 7D records, and scripts/native_prelaunch_finalization.py for the
+native-compatible finalization path.
+
+See: phase7d-native-record-schema-gap hotfix spec.
+"""
+raise SystemExit(
+    "This finalizer is disabled until migrated to native_prelaunch_finalization.py. "
+    "Use scripts/repair_phase7d_native_record_schema_gap.py for current Phase 7D records."
+)
+
 from __future__ import annotations
 
 import argparse

@@ -459,6 +459,17 @@ def main() -> int:
         fail(f"mandatory authorship key contract failed: {result.stderr}\n{result.stdout}")
     ok("mandatory authorship key contract")
 
+    # 17. Phase 7D native schema gap contract
+    result = subprocess.run(
+        [sys.executable, "scripts/test_phase7d_native_schema_gap_contract.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"phase7d native schema gap contract failed: {result.stderr}\n{result.stdout}")
+    ok("phase7d native schema gap contract")
+
     print("\n=== ALL CURRENT SYSTEM TESTS PASSED ===")
     return 0
 
