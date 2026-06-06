@@ -12,8 +12,7 @@
     "record_draft",
     "builder",
     "client_context",
-    "submission_boundary",
-    "authorship_proof"
+    "submission_boundary"
   ],
   "if": {
     "properties": {
@@ -299,8 +298,7 @@
       "additionalProperties": true
     },
     "authorship_proof": {
-      "$ref": "#/$defs/authorship_proof",
-      "description": "All public Record-Chain submissions require Ed25519 authorship_proof for key continuity and future identity claim."
+      "$ref": "#/$defs/authorship_proof"
     },
     "builder": {
       "type": "object",

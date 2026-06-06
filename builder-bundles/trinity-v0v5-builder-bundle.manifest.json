@@ -1,7 +1,7 @@
 {
   "archive": "trinity-v0v5-builder-bundle.tar.gz",
-  "archive_sha256": "9b3d4416af4b2e6a3af21ad8d3e819b18ab770121fffe9a330a9d67126d14a75",
-  "archive_size_bytes": 65211,
+  "archive_sha256": "bda4811542dc61a43e6bcd21ae4b709187cf6c69e0fa5187ade1e2bb98b6446b",
+  "archive_size_bytes": 65146,
   "bundle": "v0_v5_agent_declared_archive",
   "entrypoint": "scripts/build_agent_declared_archive_payload.py",
   "files": [
@@ -23,12 +23,12 @@
     {
       "path": "api/gateway-builder-route-map.v1.json",
       "sha256": "a212b2705e77105f6945a2d393ce5a7dbbff10c689845698c82c09ed12f49705",
-      "size_bytes": 7569
+      "size_bytes": 7430
     },
     {
       "path": "api/gateway-workflows.v1.json",
       "sha256": "c08b3322229046f7fb1fbae4bb45d2a17996ebb4840f457e8012261625bd1ecb",
-      "size_bytes": 34310
+      "size_bytes": 34172
     },
     {
       "path": "api/protocol-terms.v1.json",

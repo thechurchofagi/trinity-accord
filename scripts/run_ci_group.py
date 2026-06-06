@@ -176,12 +176,6 @@ GROUPS = {
 
         # Mainnet prelaunch policy contract
         ["python3", "scripts/test_mainnet_prelaunch_policy_contract.py"],
-
-        # Mandatory authorship key continuity
-        ["python3", "scripts/test_mandatory_authorship_key_contract.py"],
-
-        # Phase 7D native record schema gap contract
-        ["python3", "scripts/test_phase7d_native_schema_gap_contract.py"],
     ],
     "p0-legacy-compat": [
         # --- 旧 Gateway v1 / formal builder / old workflow 测试 ---
