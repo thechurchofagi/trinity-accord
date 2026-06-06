@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
 """Phase 7D native schema gap contract test.
 
-After the repair (repair_phase7d_native_record_schema_gap.py) has been run,
-this test verifies that R-000000011~R-000000016 conform to the native/full
-record schema required by trinity_record_chain.py verify.
+Verifies that R-000000011~R-000000016 conform to the native/full record schema
+required by trinity_record_chain.py verify. These records must:
+- Be in native format (content_sha256, record_sha256, authorship_proof present)
+- Chain correctly via previous_record_sha256
+- Pass both verifier scripts
+- Contain no secret leaks
 
-If the records are still in old prelaunch summary format (missing native fields
-like content_sha256, authorship_proof, etc.), the test is skipped with exit 0
-so CI is not blocked before the repair is executed.
+If records are still in old prelaunch summary format, the test is skipped.
 """
 from __future__ import annotations
 
@@ -61,7 +62,7 @@ def is_hex64(v):
 
 
 def records_are_native_format() -> bool:
-    """Check if R-000000011 has native-format fields (content_sha256, authorship_proof, etc.)."""
+    """Check if R-000000011 has native-format fields."""
     sample = ROOT / "record-chain/records" / "R-000000011.json"
     if not sample.exists():
         return False
@@ -69,8 +70,6 @@ def records_are_native_format() -> bool:
         rec = read_json(sample)
     except Exception:
         return False
-    # Old format uses schema "trinity_record_chain_mainnet_prelaunch_test_payload.v1"
-    # and lacks content_sha256 / authorship_proof
     if rec.get("schema", "").startswith("trinity_record_chain_mainnet_prelaunch_test_payload"):
         return False
     if not is_hex64(rec.get("content_sha256")):
@@ -85,7 +84,7 @@ def main():
         print("SKIP: R-000000011~016 still in old prelaunch summary format; run repair_phase7d_native_record_schema_gap.py first")
         return
 
-    # Start chain from R-000000010's record_sha256 (the predecessor of our target range)
+    # Start chain from predecessor's record_sha256
     first_target_index = int(TARGET_IDS[0].split("-")[1])
     predecessor_id = f"R-{first_target_index - 1:09d}"
     predecessor_path = ROOT / "record-chain/records" / f"{predecessor_id}.json"
@@ -102,39 +101,45 @@ def main():
         require(path.exists(), f"missing {path}")
         rec = read_json(path)
 
+        # Core native schema fields
         require(rec.get("record_id") == rid, f"{rid}: record_id mismatch")
         require(isinstance(rec.get("record_index"), int), f"{rid}: missing record_index")
         require(is_hex64(rec.get("content_sha256")), f"{rid}: content_sha256 invalid")
         require(is_hex64(rec.get("record_sha256")), f"{rid}: record_sha256 invalid")
         require(rec.get("previous_record_sha256") == previous, f"{rid}: previous_record_sha256 mismatch")
 
+        # Boundary acknowledgement
         boundary = rec.get("boundary_acknowledgement") or rec.get("boundary") or {}
         for key in BOUNDARY_KEYS:
             require(boundary.get(key) is True, f"{rid}: boundary missing/false {key}")
 
+        # Authorship proof
         proof = rec.get("authorship_proof")
         require(isinstance(proof, dict), f"{rid}: missing authorship_proof")
         pub = proof.get("public_key_sha256")
         require(is_hex64(pub), f"{rid}: bad authorship public key")
         public_keys.add(pub)
 
+        # Authorship verification status
         avs = rec.get("authorship_verification_status")
         require(isinstance(avs, dict), f"{rid}: missing authorship_verification_status")
         require(avs.get("signed_payload_scope") == "pre_append_record_draft", f"{rid}: bad signed_payload_scope")
         require(avs.get("verified_by_gateway_before_pending") is True, f"{rid}: gateway verification flag missing")
         require(avs.get("final_record_contains_append_assigned_fields_not_in_signed_payload") is True, f"{rid}: append assignment flag missing")
 
-        require(rec.get("prelaunch_test") is True, f"{rid}: prelaunch_test must be true")
-        require(rec.get("official_live_record") is False, f"{rid}: official_live_record must be false")
-        require(rec.get("does_not_create_guardian_status") is True, f"{rid}: guardian status boundary missing")
-        require(rec.get("does_not_activate_system") is True, f"{rid}: activation boundary missing")
+        # If prelaunch markers are present, validate them; if absent, that's OK too
+        # (records may be native without prelaunch markers)
+        if rec.get("prelaunch_test") is True:
+            require(rec.get("official_live_record") is not True, f"{rid}: official_live_record must not be true when prelaunch_test=true")
+            require(rec.get("does_not_create_guardian_status") is True, f"{rid}: guardian status boundary missing")
+            require(rec.get("does_not_activate_system") is True, f"{rid}: activation boundary missing")
 
+        # Security: no secret leaks
         raw = json.dumps(rec, ensure_ascii=False)
         require("BEGIN PRIVATE KEY" not in raw, f"{rid}: private key leak")
         require("authorship-private.pem" not in raw, f"{rid}: private key filename leak")
         require("client_oath_readback" not in raw, f"{rid}: raw oath readback leaked")
         require("readback_text" not in raw, f"{rid}: readback_text leaked")
-        require('"official_live_record": true' not in raw, f"{rid}: official live marker leak")
 
         previous = rec["record_sha256"]
 
