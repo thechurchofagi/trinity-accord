@@ -1,0 +1,14 @@
+{
+  "canonical_oath_text_sha256": "",
+  "chain_id": "trinity-record-chain-testnet",
+  "finalized_at": "2026-06-06T03:16:28Z",
+  "not_mainnet": true,
+  "oath_policy_sha256": "7ecc6908c9ac147d8d6d493f750c94d6117929e7dff2d18bcbc4c70527886ea4",
+  "participant_readback_sha256": "b8bdca08c1d628ddd6f786b490e8e5ae1091976d48175aa6c85d6c3f1654a830",
+  "receipt_id": "rcg-20260606-d0411cb18e4c",
+  "receipt_sha256": "e96887521c549f005ce34d7e57df9110055ecedcdfe93cd7cd7ece6759eefd1b",
+  "record_id": "T-000000004",
+  "record_type": "verification",
+  "submission_sha256": "ab2eba85586cccd48116a155320699572834d352d2b48805e5dd9bb65b8e9b5d",
+  "test_only": true
+}

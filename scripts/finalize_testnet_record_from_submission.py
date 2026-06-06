@@ -58,10 +58,16 @@ def main() -> int:
     if not record_type:
         raise SystemExit("submission missing record_type")
 
-    # Extract record_id from submission or receipt
+    # Extract record_id from submission or receipt, or auto-generate for testnet
     record_id = submission.get("record_id") or receipt.get("record_id")
     if not record_id:
-        raise SystemExit("record_id missing from both submission and receipt")
+        # Auto-generate testnet record_id from ledger position
+        ledger_lines = 0
+        if TESTNET_LEDGER.exists():
+            ledger_lines = sum(1 for line in TESTNET_LEDGER.read_text(encoding="utf-8").splitlines() if line.strip())
+        # Genesis is T-000000000 (entry 0), first record is T-000000001 (entry 1)
+        next_num = ledger_lines + 1
+        record_id = f"T-{next_num:09d}"
 
     # Verify testnet markers
     if submission.get("chain_id") and submission.get("chain_id") != TESTNET_CHAIN_ID:
@@ -75,9 +81,10 @@ def main() -> int:
         json.dumps(receipt, sort_keys=True, ensure_ascii=False).encode()
     )
     receipt_id = receipt.get("receipt_id", "")
-    oath_policy_sha = submission.get("oath_policy_sha256", "")
-    canonical_oath_sha = submission.get("canonical_oath_text_sha256", "")
-    participant_readback_sha = submission.get("participant_readback_sha256", "")
+    oath = submission.get("client_oath_readback", {})
+    oath_policy_sha = oath.get("oath_policy_sha256") or submission.get("oath_policy_sha256", "")
+    canonical_oath_sha = oath.get("canonical_oath_text_sha256") or submission.get("canonical_oath_text_sha256", "")
+    participant_readback_sha = oath.get("readback_text_sha256") or submission.get("participant_readback_sha256", "")
 
     # Build finalized payload — NO raw oath readback
     finalized_payload = {
