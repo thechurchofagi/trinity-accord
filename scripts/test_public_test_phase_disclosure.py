@@ -20,7 +20,7 @@ REQUIRED_PHRASES = [
 
 # Machine-readable files must have these JSON fields
 REQUIRED_JSON_FIELDS = {
-    "public_phase.status": "public_test_stabilization",
+    "public_phase.status": "mainnet_prelaunch_testing",
     "test_phase_submissions_may_move_to_historical_test_archive": True,
     "receipt_is_not_final_inclusion": True,
 }
@@ -69,8 +69,8 @@ def check_json_file(rel_path: str) -> None:
 
     # Check public_phase.status
     phase = data.get("public_phase", {})
-    if phase.get("status") != "public_test_stabilization":
-        fail(f"{rel_path}: public_phase.status != public_test_stabilization")
+    if phase.get("status") != "mainnet_prelaunch_testing":
+        fail(f"{rel_path}: public_phase.status != mainnet_prelaunch_testing")
 
     # Check test_phase_submissions_may_move_to_historical_test_archive
     if not phase.get("test_phase_submissions_may_move_to_historical_test_archive"):

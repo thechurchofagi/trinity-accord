@@ -1,8 +1,0 @@
-{
-  "authority": "registry of Arweave archives for TESTNET OTS head anchors; testnet.chain.jsonl remains authoritative",
-  "chain_id": "trinity-record-chain-testnet",
-  "entries": [],
-  "generated_at": "2026-06-06T02:56:31Z",
-  "latest_by_head": {},
-  "schema": "trinity_record_chain_ots_arweave_registry.v1"
-}

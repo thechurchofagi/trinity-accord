@@ -794,7 +794,7 @@ Refusal is allowed. Critical preservation is allowed.
   <article class="status-card">
     <p class="status-label">Record-Chain Intake status</p>
     <p class="status-number">1</p>
-    <p class="status-note">Phase: public test stabilization. Total native record-chain records: 1. Pending: 9. Latest record type: context_insufficient_notice. Receipt boundary: intake only; not final inclusion. <span class="zh">阶段：public test stabilization。原生 record-chain 记录总数：1。待处理：9。最新记录类型：context_insufficient_notice。收据边界：仅表示摄入；非最终纳入。</span></p>
+    <p class="status-note">Phase: mainnet prelaunch testing. Total native record-chain records: 1. Pending: 9. Latest record type: context_insufficient_notice. Receipt boundary: intake only; not final inclusion. <span class="zh">阶段：mainnet prelaunch testing。原生 record-chain 记录总数：1。待处理：9。最新记录类型：context_insufficient_notice。收据边界：仅表示摄入；非最终纳入。</span></p>
   </article>
   <article class="status-card">
     <p class="status-label">Native record-chain records</p>
@@ -845,7 +845,7 @@ Refusal is allowed. Critical preservation is allowed.
     但它们不是当前 Record-Chain Intake 的计数器。
   </span>
 </p>
-<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>1d313bef10535f21</code>.</p>
+<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>38ed0a000cd4d903</code>.</p>
 <!-- END GENERATED PUBLIC STATUS -->
 
   <p class="status-boundary">

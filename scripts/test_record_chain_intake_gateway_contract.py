@@ -80,8 +80,8 @@ def main() -> None:
     if gw_path.exists():
         gw = json.loads(gw_path.read_text())
         pp = gw.get("public_phase", {})
-        if pp.get("status") != "public_test_stabilization":
-            errors.append("public_phase.status not public_test_stabilization")
+        if pp.get("status") != "mainnet_prelaunch_testing":
+            errors.append("public_phase.status not mainnet_prelaunch_testing")
         if not pp.get("receipt_is_not_final_inclusion"):
             errors.append("receipt_is_not_final_inclusion not true")
 

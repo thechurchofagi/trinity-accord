@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.public-home-status.v2",
-  "generated_at": "2026-06-06T03:09:05.857963+00:00",
+  "generated_at": "2026-06-06T04:16:51.927122+00:00",
   "generated_from": [
     "/api/record-chain-status.json",
     "/api/record-chain-anchor-status.json",
@@ -11,9 +11,9 @@
     "/api/guardian-registry.json",
     "/api/agent-declared-verification-index.json"
   ],
-  "source_digest": "1d313bef10535f21",
+  "source_digest": "38ed0a000cd4d903",
   "current_record_chain_status": {
-    "phase": "public_test_stabilization",
+    "phase": "mainnet_prelaunch_testing",
     "total_records": 1,
     "current_chain_length": 1,
     "pending_records": 9,
@@ -37,20 +37,20 @@
     },
     "anchoring": {
       "batch_manifests": {
-        "implemented": true,
-        "automated_workflow": "/.github/workflows/record-chain-anchor.yml"
+        "automated_workflow": "/.github/workflows/record-chain-anchor.yml",
+        "implemented": true
       },
       "open_timestamps": {
-        "implemented": true,
         "automated_workflow": "/.github/workflows/record-chain-anchor.yml",
+        "implemented": true,
         "status_api": "/api/record-chain-anchor-status.json"
       },
       "arweave_archive": {
+        "default_mode": "dry-run",
         "implemented": true,
+        "index_api": "/api/record-chain-arweave-index.json",
         "live_upload_enabled": false,
         "live_upload_implemented": false,
-        "default_mode": "dry-run",
-        "index_api": "/api/record-chain-arweave-index.json",
         "workflow": "/.github/workflows/record-chain-arweave-archive.yml"
       },
       "anchor_status": {

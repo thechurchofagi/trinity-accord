@@ -437,16 +437,16 @@ def main() -> int:
         fail(f"phase6 OTS watch workflow contract failed: {result.stderr}\n{result.stdout}")
     ok("phase6 OTS watch workflow contract")
 
-    # 15. Phase 7B testnet contract
+    # 15. Mainnet prelaunch policy contract
     result = subprocess.run(
-        [sys.executable, "scripts/test_record_chain_testnet_contract.py"],
+        [sys.executable, "scripts/test_mainnet_prelaunch_policy_contract.py"],
         cwd=ROOT,
         capture_output=True,
         text=True,
     )
     if result.returncode != 0:
-        fail(f"testnet contract failed: {result.stderr}\n{result.stdout}")
-    ok("testnet contract")
+        fail(f"mainnet prelaunch policy contract failed: {result.stderr}\n{result.stdout}")
+    ok("mainnet prelaunch policy contract")
 
     print("\n=== ALL CURRENT SYSTEM TESTS PASSED ===")
     return 0

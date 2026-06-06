@@ -1,0 +1,37 @@
+{
+  "activation_semantics": {
+    "activation_marker_record_type": "mainnet_activation_marker",
+    "activation_marker_required": true,
+    "after_activation_marker_records_may_be_official_live": true,
+    "before_activation_marker_records_remain_prelaunch_history": true
+  },
+  "chain_id": "trinity-record-chain-main",
+  "external_agent_boundary": {
+    "external_agents_must_not_clone_repository": true,
+    "external_agents_must_not_directly_append_record_chain": true,
+    "external_agents_must_not_request_github_pat": true,
+    "external_agents_must_not_use_arweave_key": true,
+    "external_agents_must_not_write_record_chain_pending": true,
+    "receipt_is_intake_only": true,
+    "receipt_is_not_active_guardian_status": true,
+    "receipt_is_not_final_inclusion": true
+  },
+  "formal_liu_hongju_guardian_application_still_deferred": true,
+  "mainnet_activation_marker_recorded": false,
+  "network_phase": "prelaunch",
+  "official_live_record_marker_required_before_live": true,
+  "official_live_records_allowed": false,
+  "prelaunch_record_required_fields": {
+    "does_not_activate_system": true,
+    "does_not_create_guardian_status": true,
+    "network_phase": "prelaunch",
+    "official_live_record": false,
+    "prelaunch_test": true,
+    "record_scope": "mainnet_prelaunch_test"
+  },
+  "prelaunch_test_records_allowed": true,
+  "records_before_activation_marker_are_prelaunch_tests": true,
+  "schema": "trinityaccord.record-chain-mainnet-prelaunch-policy.v1",
+  "status": "active",
+  "updated_at": "2026-06-06T04:14:45Z"
+}
