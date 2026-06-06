@@ -448,6 +448,17 @@ def main() -> int:
         fail(f"mainnet prelaunch policy contract failed: {result.stderr}\n{result.stdout}")
     ok("mainnet prelaunch policy contract")
 
+    # 16. Mandatory authorship key continuity
+    result = subprocess.run(
+        [sys.executable, "scripts/test_mandatory_authorship_key_contract.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"mandatory authorship key contract failed: {result.stderr}\n{result.stdout}")
+    ok("mandatory authorship key contract")
+
     print("\n=== ALL CURRENT SYSTEM TESTS PASSED ===")
     return 0
 
