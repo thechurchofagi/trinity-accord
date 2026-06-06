@@ -106,5 +106,22 @@
     "submit_persists_intake": true
   },
   "status": "active_public_submission_interface",
-  "updated_at": "2026-06-06T04:14:45Z"
+  "updated_at": "2026-06-06T04:14:45Z",
+  "authorship_key_policy": {
+    "authorship_key_required": true,
+    "applies_to_all_public_submissions": true,
+    "algorithm": "ed25519",
+    "builder_requires_key_dir": true,
+    "keypair_files": {
+      "public_key": "authorship-public.pem",
+      "private_key": "authorship-private.pem"
+    },
+    "sandbox_private_key_loss_warning": true,
+    "human_operator_or_guardian_must_securely_backup_private_key": true,
+    "private_key_must_not_be_pasted_into_public_chat": true,
+    "private_key_must_not_be_committed_to_git": true,
+    "private_key_must_not_be_uploaded_in_submission_receipt_or_arweave": true,
+    "public_key_sha256_is_public_identity_anchor": true,
+    "guardian_application_must_bind_guardian_public_key_to_authorship_public_key": true
+  }
 }
