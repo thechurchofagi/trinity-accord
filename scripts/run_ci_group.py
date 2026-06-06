@@ -173,6 +173,9 @@ GROUPS = {
 
         # Phase 7A rate limit enforcement contract
         ["python3", "scripts/test_phase7a_rate_limit_contract.py"],
+
+        # Phase 7B real testnet contract
+        ["python3", "scripts/test_record_chain_testnet_contract.py"],
     ],
     "p0-legacy-compat": [
         # --- 旧 Gateway v1 / formal builder / old workflow 测试 ---
