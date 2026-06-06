@@ -1,8 +1,14 @@
 {
+  "canonicalization": "json.sort_keys.no_whitespace.utf8.allow_nan_false.v1",
   "chain_id": "trinity-record-chain-testnet",
-  "chain_version": "1.0.0",
-  "entry_count": 0,
-  "generated_at": "2026-06-06T02:56:31Z",
-  "head_entry_hash": null,
-  "schema": "trinity_record_chain_head.v1"
+  "chain_version": 1,
+  "entry_count": 6,
+  "generated_at": "2026-06-06T03:16:28Z",
+  "head_entry_hash": "7eebe42564a4048397d9fab5912adfb458d0989200ff5fcea216b55fc22092b6",
+  "height": 5,
+  "ledger_file": "record-chain/hash-chain/main.chain.jsonl",
+  "ots_semantics": "OTS anchors a stable head commitment snapshot, not this volatile API file",
+  "receipt_semantics": "receipt is intake-only; hash-chain inclusion requires finalization",
+  "schema": "trinity_record_chain_head.v1",
+  "type_indexes_are_derived": true
 }
