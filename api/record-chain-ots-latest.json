@@ -17,6 +17,6 @@
   "semantics": "Latest OTS anchor for a stable Record-Chain head commitment snapshot.",
   "strict_bitcoin_verified": false,
   "strict_verify_unavailable_reason": "no_bitcoin_node",
-  "updated_at": "2026-06-06T01:21:40Z",
-  "verified_at": "2026-06-06T01:21:40Z"
+  "updated_at": "2026-06-06T01:24:49Z",
+  "verified_at": "2026-06-06T01:24:49Z"
 }
