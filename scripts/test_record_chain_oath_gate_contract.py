@@ -206,7 +206,7 @@ def main() -> None:
     # Test 14: Formal build without --readback fails
     result = subprocess.run(
         ["node", str(BUILDER), "echo", "--actor-label", "test", "--provider", "test",
-         "--body", "test", "--context-level", "CC-3", *REQUIRED_BUILDER_CONTEXT_ARGS, "--out", "/tmp/test-no-readback.json"],
+         "--body", "test", "--context-level", "CC-3", *REQUIRED_BUILDER_CONTEXT_ARGS, "--key-dir", "/tmp/test-oath-keydir", "--out", "/tmp/test-no-readback.json"],
         capture_output=True, text=True, timeout=10,
     )
     if result.returncode == 0:
@@ -217,7 +217,7 @@ def main() -> None:
     # Test 15: Formal build with wrong --readback fails
     result = subprocess.run(
         ["node", str(BUILDER), "echo", "--actor-label", "test", "--provider", "test",
-         "--body", "test", "--context-level", "CC-3", *REQUIRED_BUILDER_CONTEXT_ARGS, "--readback", "wrong readback text",
+         "--body", "test", "--context-level", "CC-3", *REQUIRED_BUILDER_CONTEXT_ARGS, "--key-dir", "/tmp/test-oath-keydir", "--readback", "wrong readback text",
          "--out", "/tmp/test-wrong-readback.json"],
         capture_output=True, text=True, timeout=10,
     )
