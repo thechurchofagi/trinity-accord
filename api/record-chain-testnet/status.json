@@ -1,15 +1,15 @@
 {
   "chain_id": "trinity-record-chain-testnet",
   "chain_version": "1.0.0",
-  "environment": "testnet",
-  "test_only": true,
-  "not_mainnet": true,
-  "status": "active",
-  "entry_count": 6,
-  "height": 5,
-  "head_entry_hash": "7eebe42564a4048397d9fab5912adfb458d0989200ff5fcea216b55fc22092b6",
-  "initialized_at": "2026-06-06T02:56:31Z",
-  "schema": "trinityaccord.record-chain-testnet-status.v1",
   "description": "Isolated testnet Record-Chain for Phase 7B external agent testing. This is NOT the mainnet chain.",
-  "last_finalized_at": "2026-06-06T03:16:28Z"
+  "entry_count": 6,
+  "environment": "testnet",
+  "head_entry_hash": "365cf8db3f7030c2d8ff6ecc39a508fc4b9b949db937f93dc2f9f73997cabd17",
+  "height": 5,
+  "initialized_at": "2026-06-06T02:56:31Z",
+  "last_finalized_at": "2026-06-06T03:16:28Z",
+  "not_mainnet": true,
+  "schema": "trinityaccord.record-chain-testnet-status.v1",
+  "status": "active",
+  "test_only": true
 }
