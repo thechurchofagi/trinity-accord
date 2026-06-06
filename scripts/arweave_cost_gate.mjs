@@ -73,7 +73,8 @@ function parseArgs(argv) {
     walletAddress: process.env.ARWEAVE_WALLET_ADDRESS || null,
     allowPaid: parseBoolean(process.env.ALLOW_PAID_ARWEAVE_CANARY),
     contentType: "application/json",
-    appName: "Trinity-Accord-E2E-Canary",
+    appName: process.env.ARWEAVE_APP_NAME || "Trinity-Accord-E2E-Canary",
+    extraTagsJson: process.env.ARWEAVE_EXTRA_TAGS_JSON || null,
     skipReadback: false
   };
 
@@ -119,6 +120,12 @@ function parseArgs(argv) {
       i++;
     } else if (key === "--skip-readback") {
       args.skipReadback = true;
+    } else if (key === "--app-name") {
+      args.appName = next;
+      i++;
+    } else if (key === "--extra-tags-json") {
+      args.extraTagsJson = next;
+      i++;
     } else if (key === "--help" || key === "-h") {
       printHelpAndExit();
     } else {
@@ -159,6 +166,41 @@ function parseArgs(argv) {
   }
 
   return args;
+}
+
+function parseExtraTags(extraTagsJson) {
+  if (!extraTagsJson) return [];
+
+  let parsed;
+  try {
+    parsed = JSON.parse(extraTagsJson);
+  } catch {
+    fail("ARWEAVE_EXTRA_TAGS_JSON / --extra-tags-json is not valid JSON");
+  }
+
+  if (!Array.isArray(parsed)) {
+    fail("extra tags must be a JSON array");
+  }
+
+  const tags = [];
+  for (const item of parsed) {
+    if (!item || typeof item !== "object") {
+      fail("each extra tag must be an object");
+    }
+    const name = item.name;
+    const value = item.value;
+    if (typeof name !== "string" || name.length < 1 || name.length > 128) {
+      fail("extra tag name must be a non-empty string <= 128 chars", { item });
+    }
+    if (typeof value !== "string" || value.length > 512) {
+      fail("extra tag value must be a string <= 512 chars", { item });
+    }
+    if (!/^[A-Za-z0-9._:-]+$/.test(name)) {
+      fail("extra tag name contains unsupported characters", { name });
+    }
+    tags.push({ name, value });
+  }
+  return tags;
 }
 
 function printHelpAndExit() {
@@ -467,6 +509,7 @@ async function runReadbackVerifier(args, txId, payloadSha256) {
 
 async function main() {
   const args = parseArgs(process.argv.slice(2));
+  const extraTags = parseExtraTags(args.extraTagsJson);
   const arweave = makeArweave(args.gatewayUrl);
 
   const payloadBytes = await fs.readFile(args.payloadFile);
@@ -565,7 +608,8 @@ async function main() {
     mode: args.mode,
     allow_paid: args.allowPaid,
     decision,
-    reason
+    reason,
+    extra_tags: extraTags
   };
 
   printCostCheck(costEstimate);
@@ -605,6 +649,9 @@ async function main() {
   tx.addTag("Trinity-Arweave-Owner", args.expectedOwner);
   tx.addTag("Canary-Record", "true");
   tx.addTag("Do-Not-Treat-As-First-Real-Agent", "true");
+  for (const tag of extraTags) {
+    tx.addTag(tag.name, tag.value);
+  }
 
   await arweave.transactions.sign(tx, jwk);
 
@@ -675,7 +722,8 @@ async function main() {
       remainingBalanceEstimatedUsd == null
         ? null
         : Number(remainingBalanceEstimatedUsd.toFixed(8)),
-    readback_required: true
+    readback_required: true,
+    extra_tags: extraTags
   };
 
   printUploadResult(uploadResult);
