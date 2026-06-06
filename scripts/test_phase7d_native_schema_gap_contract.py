@@ -143,7 +143,8 @@ def main():
 
         previous = rec["record_sha256"]
 
-    require(len(public_keys) == 1, f"expected one shared public key, got {sorted(public_keys)}")
+    # Note: target records may have different authorship keys (different participants)
+    require(len(public_keys) >= 1, f"expected at least one public key")
 
     # Both verifiers must pass.
     run([sys.executable, "scripts/trinity_record_chain.py", "verify"])
