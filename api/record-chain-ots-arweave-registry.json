@@ -69,16 +69,39 @@
       "registry_key": "height-9-ac53ae818b13c693-pending-afd31a7eecf14071",
       "source_anchor_file": "record-chain/ots/anchors/height-9-ac53ae818b13c693-6f6d38966239c5f2.anchor.json",
       "source_anchor_sha256": "e02cf79775b6cd5ecdb0498c63f72b1d92a33b94e0c3ac19327f39cf601b3477"
+    },
+    {
+      "anchored_file_sha256": "6f6d38966239c5f2cd76b4c17dfacaa643f90a04065c75b1cd2895c84b34af57",
+      "arweave_gateway_url": "https://arweave.net/WbI7AFvvCcHm_zHON47DKVmw2o4uMbDZMNCM-WGmlcU",
+      "arweave_hash_match": true,
+      "arweave_payload_sha256": "cebeb3df0eb2accd7aed1df49f981323de62ce88c6ed9d1c6dbf76048eadbad0",
+      "arweave_readback_sha256": "cebeb3df0eb2accd7aed1df49f981323de62ce88c6ed9d1c6dbf76048eadbad0",
+      "arweave_tx_id": "WbI7AFvvCcHm_zHON47DKVmw2o4uMbDZMNCM-WGmlcU",
+      "bitcoin_attestation_embedded": true,
+      "bitcoin_pending": false,
+      "bitcoin_verified": false,
+      "bundle_bytes": 14678,
+      "bundle_file": "record-chain/ots/arweave-bundles/height-9-ac53ae818b13c693-6f6d38966239c5f2.anchor.upgraded.arweave-bundle.json",
+      "bundle_sha256": "cebeb3df0eb2accd7aed1df49f981323de62ce88c6ed9d1c6dbf76048eadbad0",
+      "chain_id": "trinity-record-chain-main",
+      "created_at": "2026-06-06T11:04:50Z",
+      "entry_count": 10,
+      "head_entry_hash": "ac53ae818b13c6933b94b306d47c66d02838d1cae00b001c46152bfd7205df4f",
+      "height": 9,
+      "ots_status": "upgraded",
+      "registry_key": "height-9-ac53ae818b13c693-upgraded-cebeb3df0eb2accd",
+      "source_anchor_file": "record-chain/ots/anchors/height-9-ac53ae818b13c693-6f6d38966239c5f2.anchor.json",
+      "source_anchor_sha256": "18798cb5a6ebc785c0496de50aefc9987e1972981b01475034446533dc5e7b61"
     }
   ],
-  "entry_count": 3,
-  "generated_at": "2026-06-06T05:59:51Z",
+  "entry_count": 4,
+  "generated_at": "2026-06-06T11:04:50Z",
   "latest_by_head": {
     "ac53ae818b13c6933b94b306d47c66d02838d1cae00b001c46152bfd7205df4f": {
       "height": 9,
-      "latest_any_tx_id": "L5iabEK4QD9kW78ra8aErsQJsPt7YPFIQFLSvIfSjPk",
+      "latest_any_tx_id": "WbI7AFvvCcHm_zHON47DKVmw2o4uMbDZMNCM-WGmlcU",
       "latest_pending_tx_id": "L5iabEK4QD9kW78ra8aErsQJsPt7YPFIQFLSvIfSjPk",
-      "latest_upgraded_tx_id": null,
+      "latest_upgraded_tx_id": "WbI7AFvvCcHm_zHON47DKVmw2o4uMbDZMNCM-WGmlcU",
       "latest_verified_tx_id": null
     },
     "f5a23430fb708a46df935b46d43547f71970fff50c9ebe4ed50c5ce87105ca84": {
