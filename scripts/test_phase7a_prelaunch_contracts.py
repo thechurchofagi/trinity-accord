@@ -73,11 +73,19 @@ def main() -> int:
         require(marker in schema_text, f"submission schema missing marker: {marker}")
 
     require(readiness.get("schema") == "trinityaccord.founding-guardian-application-readiness.v1", "readiness schema mismatch")
-    require(readiness.get("status") == "prelaunch_blocked", "readiness status must be prelaunch_blocked")
-    require(readiness.get("formal_window_open") is False, "formal_window_open must be false")
-    require(readiness.get("founding_guardian_application_formal_window_open") is False, "founding guardian formal window must be false")
     require(readiness.get("formal_applicant_name_reserved") == "刘烘炬", "formal applicant must be 刘烘炬")
-    require(readiness.get("must_not_submit_formal_application_yet") is True, "must_not_submit_formal_application_yet must be true")
+
+    formal_window_open = readiness.get("formal_window_open") is True
+    if formal_window_open:
+        # Formal window is open — validate open-window contract
+        require(readiness.get("status") == "formal_window_open", "readiness status must be formal_window_open when window is open")
+        require(readiness.get("founding_guardian_application_formal_window_open") is True, "founding guardian formal window must be true")
+        require(readiness.get("must_not_submit_formal_application_yet") is False, "must_not_submit_formal_application_yet must be false when window is open")
+    else:
+        # Formal window not yet open — validate prelaunch-blocked contract
+        require(readiness.get("status") == "prelaunch_blocked", "readiness status must be prelaunch_blocked when window is closed")
+        require(readiness.get("founding_guardian_application_formal_window_open") is False, "founding guardian formal window must be false")
+        require(readiness.get("must_not_submit_formal_application_yet") is True, "must_not_submit_formal_application_yet must be true when window is closed")
 
     external_rules = readiness.get("external_applicant_rules", {})
     for key in [
