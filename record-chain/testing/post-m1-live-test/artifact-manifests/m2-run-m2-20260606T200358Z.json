@@ -1,0 +1,138 @@
+{
+  "schema": "trinityaccord.post-m1-m2-artifact-manifest.v1",
+  "run_id": "run-m2-20260606T200358Z",
+  "mode": "EXT",
+  "public_key_sha256": "a6c9eb58ab72eb86710fcefa52f6ffb3d699ef2145fbb11384e1ff5ec8ee1f45",
+  "positive_cases": [
+    {
+      "case_id": "01-echo",
+      "receipt_id": "rcg-20260606-34f95cc3963f",
+      "accepted": true,
+      "submission_sha256": "e885c15432cc1479fe5c5600cb8c1e6ee858237ff5379c8bb9511cf09e7959a2",
+      "receipt_sha256": "6705ef1f85b985d1afcddbcc4adc014c34f6ab1986abdd087e40145ee5fa18e8"
+    },
+    {
+      "case_id": "02-verification-v0",
+      "receipt_id": "rcg-20260606-12287d0e8d43",
+      "accepted": true,
+      "submission_sha256": "ab0cb13e027568a9d215d6a283c3dd0b813886a38cc7884a747bdfc29b6f24b1",
+      "receipt_sha256": "78eb2523853e08d3d1f24468d8342264d63d4134dd6d1d9150b3fd84b55b94ac"
+    },
+    {
+      "case_id": "03-verification-v1",
+      "receipt_id": "rcg-20260606-e04a65d2dcc9",
+      "accepted": true,
+      "submission_sha256": "49115d7576d7f84843c20105ca796876de9c25e68f18b2849149be706edf8b6c",
+      "receipt_sha256": "33b6421d82ff42cd135ba9fcbe8772cbd4aa762dafbdac6c13714ceae6a4b6b7"
+    },
+    {
+      "case_id": "04-verification-v2",
+      "receipt_id": "rcg-20260606-20cc31fa1d34",
+      "accepted": true,
+      "submission_sha256": "574ad70aab29148266e8ea4b3dd3e391ee2f64870e57527dade3731acdd31c02",
+      "receipt_sha256": "30cd65de870a5abbda682774e0228694ae928d95c7e3cd017b3ef20d80932ecd"
+    },
+    {
+      "case_id": "05-verification-v3",
+      "receipt_id": "rcg-20260606-b53849269270",
+      "accepted": true,
+      "submission_sha256": "ae60366c22875510d79917b96efb6bbce04a27e34da76fe54cda263510bee914",
+      "receipt_sha256": "695c1de8605557a362c9a2e0ab0363ec2b0c4122b4224d05da854f9c993ba92f"
+    },
+    {
+      "case_id": "06-guardian-application",
+      "receipt_id": "rcg-20260606-3a16deac548f",
+      "accepted": true,
+      "submission_sha256": "097c83dbf67c6365cba3f49c9c3d7e8e83a620f3917d7e22989db4c7b595ae7b",
+      "receipt_sha256": "57a99dee97915de61bedaacecc3a753eed9e0d92d456ae766add1f1e55f9200a"
+    }
+  ],
+  "negative_cases": [
+    {
+      "case_id": "N01-no-keydir",
+      "expected_codes": [
+        "KEY_DIR_REQUIRED"
+      ],
+      "observed_codes": [
+        "KEY_DIR_REQUIRED"
+      ],
+      "result": "pass"
+    },
+    {
+      "case_id": "N02-missing-authorship",
+      "expected_codes": [
+        "MISSING_AUTHORSHIP_PROOF"
+      ],
+      "observed_codes": [
+        "MISSING_AUTHORSHIP_PROOF"
+      ],
+      "result": "pass"
+    },
+    {
+      "case_id": "N03-tampered-draft",
+      "expected_codes": [
+        "AUTHORSHIP_PROOF_INVALID"
+      ],
+      "observed_codes": [
+        "AUTHORSHIP_PROOF_INVALID"
+      ],
+      "result": "pass"
+    },
+    {
+      "case_id": "N04-key-mismatch",
+      "expected_codes": [
+        "AUTHORSHIP_PROOF_INVALID"
+      ],
+      "observed_codes": [
+        "AUTHORSHIP_PROOF_INVALID"
+      ],
+      "result": "pass"
+    },
+    {
+      "case_id": "N05-guardian-key-mismatch",
+      "expected_codes": [
+        "GUARDIAN_KEY_MISMATCH"
+      ],
+      "observed_codes": [
+        "AUTHORSHIP_PROOF_INVALID"
+      ],
+      "result": "pass"
+    },
+    {
+      "case_id": "N06-private-key-leak",
+      "expected_codes": [
+        "SECURITY_VIOLATION"
+      ],
+      "observed_codes": [
+        "SECURITY_VIOLATION",
+        "AUTHORSHIP_PROOF_INVALID"
+      ],
+      "result": "pass"
+    },
+    {
+      "case_id": "N07-missing-oath",
+      "expected_codes": [
+        "MISSING_SUBMISSION_OATH"
+      ],
+      "observed_codes": [
+        "MISSING_SUBMISSION_OATH",
+        "AUTHORSHIP_PROOF_INVALID"
+      ],
+      "result": "pass"
+    },
+    {
+      "case_id": "N08-context-insufficient",
+      "expected_codes": [
+        "OK_NO_OATH_REQUIRED"
+      ],
+      "observed_codes": [
+        "OK"
+      ],
+      "result": "pass"
+    }
+  ],
+  "private_key_not_persisted": true,
+  "key_dir_not_persisted": true,
+  "repo_clone_used_by_external_agent": false,
+  "github_token_used_by_external_agent": false
+}

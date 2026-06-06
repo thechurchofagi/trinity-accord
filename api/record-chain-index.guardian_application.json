@@ -24,10 +24,21 @@
       "previous_entry_hash": "5fec8b6e093936d452f43c25662d207f198fa3d25f7a5709317c063100db8b3a",
       "receipt_id": null,
       "record_id": "R-000000009"
+    },
+    {
+      "arweave_tx_id": null,
+      "entry_hash": "42f42d3544627404593de86bd6b3453d3ae95b8829d7aac33471adb8cd473eb1",
+      "finalized_at": "2026-06-06T13:59:49Z",
+      "global_height": 15,
+      "payload_canonical_sha256": "078570f97def66bf0bdd3a99b354e4020dbc181c52777ec32c39dfb4c32196ed",
+      "payload_raw_sha256": "62107e321d543ecd03c4493b25ed85e9f8d915df8971bcb233d0cbbcd15bbd0b",
+      "previous_entry_hash": "68269795a8cc4e9a39499936c90b8db165e50771663df806716817aed180ae48",
+      "receipt_id": "rcg-20260606-3a16deac548f",
+      "record_id": "R-000000016"
     }
   ],
-  "entry_count": 2,
-  "generated_at": "2026-06-06T04:49:13Z",
+  "entry_count": 3,
+  "generated_at": "2026-06-06T13:59:49Z",
   "index_file": "record-chain-index.guardian_application.json",
   "record_type": "guardian_application",
   "record_type_slug": "guardian_application",

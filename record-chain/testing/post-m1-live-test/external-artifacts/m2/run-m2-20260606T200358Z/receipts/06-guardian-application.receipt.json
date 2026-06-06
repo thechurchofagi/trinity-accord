@@ -1,0 +1,60 @@
+{
+  "accepted": true,
+  "submitted": true,
+  "receipt_id": "rcg-20260606-3a16deac548f",
+  "record_type": "guardian_application",
+  "submission_sha256": "3a16deac548f3bf6e35179e721720b50cf506f046f8bc9f81583d8e916bc31ed",
+  "received_raw_body_sha256": "a5d664b32ec3d4428c2d67e70babbb737260e206d7ba76bf1da5bbeb66389a4a",
+  "pending_file_path": "record-chain/pending/rcg-20260606-3a16deac548f.guardian_application.pending.json",
+  "intake_submission_path": "record-chain/intake/submissions/2026/06/rcg-20260606-3a16deac548f.submission.json",
+  "receipt_path": "record-chain/intake/receipts/2026/06/rcg-20260606-3a16deac548f.receipt.json",
+  "server_created_at": "2026-06-06T12:13:01.701022Z",
+  "append_status": "pending",
+  "receipt_commit_sha": "c3e5171e5167f9bc7d3c64a5866b01ccbc03285d",
+  "receipt": {
+    "server_receipt_id": "rcg-20260606-3a16deac548f",
+    "service": "record-chain-intake-gateway",
+    "gateway_version": "1.0.0",
+    "record_type": "guardian_application",
+    "submission_sha256": "3a16deac548f3bf6e35179e721720b50cf506f046f8bc9f81583d8e916bc31ed",
+    "original_submission_sha256": "3a16deac548f3bf6e35179e721720b50cf506f046f8bc9f81583d8e916bc31ed",
+    "stored_submission_sha256": "839ce19a2db7e53686281eb944bc080219d486928b00d3a08d20c5160c86589c",
+    "received_raw_body_sha256": "a5d664b32ec3d4428c2d67e70babbb737260e206d7ba76bf1da5bbeb66389a4a",
+    "accepted_at": "2026-06-06T12:13:01.701022Z",
+    "raw_readback_redacted": true,
+    "receipt_is_not_final_chain_record": true,
+    "intake_submission_path": "record-chain/intake/submissions/2026/06/rcg-20260606-3a16deac548f.submission.json",
+    "pending_file_path": "record-chain/pending/rcg-20260606-3a16deac548f.guardian_application.pending.json",
+    "receipt_path": "record-chain/intake/receipts/2026/06/rcg-20260606-3a16deac548f.receipt.json",
+    "oath_verification": {
+      "oath_policy": "record-chain-formal-submission-oath-v1",
+      "oath_policy_sha256": "7ecc6908c9ac147d8d6d493f750c94d6117929e7dff2d18bcbc4c70527886ea4",
+      "oath_modules": [
+        "common_submission_integrity_v1",
+        "guardian_stewardship_v1"
+      ],
+      "canonical_oath_text_sha256": "39aa219d8f656155061ca3c96db4a9eaabc790ffdc6f40c5b3735bd8fc63d612",
+      "participant_readback_sha256": "39aa219d8f656155061ca3c96db4a9eaabc790ffdc6f40c5b3735bd8fc63d612",
+      "readback_matches_canonical_oath": true,
+      "no_shortcut_oath_acknowledged": true,
+      "raw_readback_redacted": true
+    },
+    "receipt_sha256": "a48db2e25d4ac49ca7097d53e7b38369f8ff882bbe6d0aa5e26858718624457a"
+  },
+  "diagnostics": [],
+  "warnings": [],
+  "boundary": {
+    "not_authority": true,
+    "not_governance": true,
+    "not_attestation": true,
+    "not_successor_reception": true,
+    "not_amendment": true,
+    "bitcoin_originals_prevail": true,
+    "receipt_is_not_final_inclusion": true,
+    "test_phase_submission_may_be_reclassified": true
+  },
+  "created_pending_records": [
+    "record-chain/pending/rcg-20260606-3a16deac548f.guardian_application.pending.json"
+  ],
+  "ok": true
+}

@@ -182,6 +182,9 @@ GROUPS = {
 
         # Gateway authorship proof contract
         ["python3", "scripts/test_gateway_authorship_proof_contract.py"],
+
+        # M3 finalizer native compatibility contract
+        ["python3", "scripts/test_m3_finalizer_native_compat_contract.py"],
     ],
     "p0-legacy-compat": [
         # --- 旧 Gateway v1 / formal builder / old workflow 测试 ---

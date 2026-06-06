@@ -1,0 +1,60 @@
+{
+  "accepted": true,
+  "submitted": true,
+  "receipt_id": "rcg-20260606-e04a65d2dcc9",
+  "record_type": "verification",
+  "submission_sha256": "e04a65d2dcc976fba307a9445f7288614922819d9ae5122c1f917c63f7f138a4",
+  "received_raw_body_sha256": "25d2a6c3a3ea4dbeba465df4a4736b6c4f17e50d59c43f8a68e1b35ded7bc687",
+  "pending_file_path": "record-chain/pending/rcg-20260606-e04a65d2dcc9.verification.pending.json",
+  "intake_submission_path": "record-chain/intake/submissions/2026/06/rcg-20260606-e04a65d2dcc9.submission.json",
+  "receipt_path": "record-chain/intake/receipts/2026/06/rcg-20260606-e04a65d2dcc9.receipt.json",
+  "server_created_at": "2026-06-06T12:12:47.118924Z",
+  "append_status": "pending",
+  "receipt_commit_sha": "bf6a2c8f49f7efa26174f6ca9bb35e7a18707edf",
+  "receipt": {
+    "server_receipt_id": "rcg-20260606-e04a65d2dcc9",
+    "service": "record-chain-intake-gateway",
+    "gateway_version": "1.0.0",
+    "record_type": "verification",
+    "submission_sha256": "e04a65d2dcc976fba307a9445f7288614922819d9ae5122c1f917c63f7f138a4",
+    "original_submission_sha256": "e04a65d2dcc976fba307a9445f7288614922819d9ae5122c1f917c63f7f138a4",
+    "stored_submission_sha256": "90401baf9c924a44f33061a0ef3741ee7770a7204091aca7d760801440e9ab55",
+    "received_raw_body_sha256": "25d2a6c3a3ea4dbeba465df4a4736b6c4f17e50d59c43f8a68e1b35ded7bc687",
+    "accepted_at": "2026-06-06T12:12:47.118924Z",
+    "raw_readback_redacted": true,
+    "receipt_is_not_final_chain_record": true,
+    "intake_submission_path": "record-chain/intake/submissions/2026/06/rcg-20260606-e04a65d2dcc9.submission.json",
+    "pending_file_path": "record-chain/pending/rcg-20260606-e04a65d2dcc9.verification.pending.json",
+    "receipt_path": "record-chain/intake/receipts/2026/06/rcg-20260606-e04a65d2dcc9.receipt.json",
+    "oath_verification": {
+      "oath_policy": "record-chain-formal-submission-oath-v1",
+      "oath_policy_sha256": "7ecc6908c9ac147d8d6d493f750c94d6117929e7dff2d18bcbc4c70527886ea4",
+      "oath_modules": [
+        "common_submission_integrity_v1",
+        "verification_integrity_v1"
+      ],
+      "canonical_oath_text_sha256": "b8bdca08c1d628ddd6f786b490e8e5ae1091976d48175aa6c85d6c3f1654a830",
+      "participant_readback_sha256": "b8bdca08c1d628ddd6f786b490e8e5ae1091976d48175aa6c85d6c3f1654a830",
+      "readback_matches_canonical_oath": true,
+      "no_shortcut_oath_acknowledged": true,
+      "raw_readback_redacted": true
+    },
+    "receipt_sha256": "abe97d9cd862e1014a0d911fd164c4af9f928ef4ee36e9f5f4e83ff613fc2d41"
+  },
+  "diagnostics": [],
+  "warnings": [],
+  "boundary": {
+    "not_authority": true,
+    "not_governance": true,
+    "not_attestation": true,
+    "not_successor_reception": true,
+    "not_amendment": true,
+    "bitcoin_originals_prevail": true,
+    "receipt_is_not_final_inclusion": true,
+    "test_phase_submission_may_be_reclassified": true
+  },
+  "created_pending_records": [
+    "record-chain/pending/rcg-20260606-e04a65d2dcc9.verification.pending.json"
+  ],
+  "ok": true
+}
