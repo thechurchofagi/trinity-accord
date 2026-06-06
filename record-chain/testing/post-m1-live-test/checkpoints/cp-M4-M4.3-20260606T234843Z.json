@@ -1,0 +1,14 @@
+{
+  "checkpoint_id": "cp-M4-M4.3-20260606T234843Z",
+  "phase": "M4",
+  "step": "M4.3",
+  "mode": "INT-ARCHIVE",
+  "status": "in_progress",
+  "summary": "M4.2 verify head PASS. M4.3 OTS stamp completed for height 15 (pending calendar confirmation). M4.4 Arweave bundle built but upload blocked - no ARKEY available in sandbox. All OTS files pushed to main.",
+  "resume_step": "M4.4",
+  "marker": null,
+  "receipt_id": null,
+  "public_key_sha256": null,
+  "session_id": "sandbox-20260607T074843Z",
+  "created_at": "2026-06-06T23:48:43.437898Z"
+}
