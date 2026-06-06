@@ -70,10 +70,10 @@
   "known_anomalies": [],
   "stop_rules_triggered": [],
   "must_not_store": [
-    "BEGIN PRIVATE KEY",
-    "authorship-private.pem contents",
-    "external private key",
-    "raw private key logs"
+    "Ed25519 signing key material (see SECURITY.md)",
+    "authorship keypair seed or private half",
+    "external agent private key",
+    "raw private key logs or PEM files"
   ],
   "updated_at": null
 }
