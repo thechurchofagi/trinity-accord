@@ -23,15 +23,39 @@
       "registry_key": "height-0-f5a23430fb708a46-pending-7991bc217b925f43",
       "source_anchor_file": "record-chain/ots/anchors/height-0-6ca53ba7944fe474-6bfbc5b03f6666e2.anchor.json",
       "source_anchor_sha256": "13fdb73f1b1cbc54d9e70eba7bc5618bbbf4ffbfb99cc5a2a4f26fb070564044"
+    },
+    {
+      "anchored_file_sha256": "6bfbc5b03f6666e223a1605b31015b0932ee3f16ecd62f6fef240a4fe135c3e5",
+      "arweave_gateway_url": "https://arweave.net/UnyxCQipksB1OQRp3QDcYVPs3bOMZic7DbzNXO_yFHE",
+      "arweave_hash_match": true,
+      "arweave_payload_sha256": "4bf7a32846661076d639acc85a6122b703e51a672d9e6597295fb1dba9b1ab63",
+      "arweave_readback_sha256": "4bf7a32846661076d639acc85a6122b703e51a672d9e6597295fb1dba9b1ab63",
+      "arweave_tx_id": "UnyxCQipksB1OQRp3QDcYVPs3bOMZic7DbzNXO_yFHE",
+      "bitcoin_attestation_embedded": true,
+      "bitcoin_pending": false,
+      "bitcoin_verified": false,
+      "bundle_bytes": 30490,
+      "bundle_file": "record-chain/ots/arweave-bundles/height-0-6ca53ba7944fe474-6bfbc5b03f6666e2.anchor.upgraded.arweave-bundle.json",
+      "bundle_sha256": "4bf7a32846661076d639acc85a6122b703e51a672d9e6597295fb1dba9b1ab63",
+      "chain_id": "trinity-record-chain-main",
+      "created_at": "2026-06-06T01:44:00Z",
+      "entry_count": 1,
+      "head_entry_hash": "f5a23430fb708a46df935b46d43547f71970fff50c9ebe4ed50c5ce87105ca84",
+      "height": 0,
+      "ots_status": "upgraded",
+      "registry_key": "height-0-f5a23430fb708a46-upgraded-4bf7a32846661076",
+      "source_anchor_file": "record-chain/ots/anchors/height-0-6ca53ba7944fe474-6bfbc5b03f6666e2.anchor.json",
+      "source_anchor_sha256": "5538527995785e3c8092d3d0793b01b86dd0ceb9942e2384b8e32531734b355f"
     }
   ],
-  "entry_count": 1,
-  "generated_at": "2026-06-05T10:59:54Z",
+  "entry_count": 2,
+  "generated_at": "2026-06-06T01:44:00Z",
   "latest_by_head": {
     "f5a23430fb708a46df935b46d43547f71970fff50c9ebe4ed50c5ce87105ca84": {
       "height": 0,
-      "latest_any_tx_id": "Hq9JzoJwSjtyoHeM3b6hYVFsxStNInZ_owxhuztQ-38",
+      "latest_any_tx_id": "UnyxCQipksB1OQRp3QDcYVPs3bOMZic7DbzNXO_yFHE",
       "latest_pending_tx_id": "Hq9JzoJwSjtyoHeM3b6hYVFsxStNInZ_owxhuztQ-38",
+      "latest_upgraded_tx_id": "UnyxCQipksB1OQRp3QDcYVPs3bOMZic7DbzNXO_yFHE",
       "latest_verified_tx_id": null
     }
   },
