@@ -9,7 +9,7 @@ import hashlib
 from typing import Any
 
 from .models import Diagnostic
-from .authorship import verify_authorship_proof
+from .authorship import verify_authorship_proof_submission
 
 logger = logging.getLogger(__name__)
 
@@ -976,7 +976,7 @@ def validate_submission(submission: dict[str, Any]) -> list[Diagnostic]:
 
     # --- Ed25519 authorship proof verification ---
     if isinstance(draft, dict) and rt in ALLOWED_RECORD_TYPES:
-        ok, code, message = verify_authorship_proof(submission)
+        ok, code, message = verify_authorship_proof_submission(submission)
         if not ok:
             diagnostics.append(_make_diagnostic(
                 code=code or "AUTHORSHIP_VERIFICATION_FAILED",
