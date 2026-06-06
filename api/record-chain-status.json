@@ -1,4 +1,23 @@
 {
+  "anchoring": {
+    "arweave_archive": {
+      "default_mode": "dry-run",
+      "implemented": true,
+      "index_api": "/api/record-chain-arweave-index.json",
+      "live_upload_enabled": false,
+      "live_upload_implemented": false,
+      "workflow": "/.github/workflows/record-chain-arweave-archive.yml"
+    },
+    "batch_manifests": {
+      "automated_workflow": "/.github/workflows/record-chain-anchor.yml",
+      "implemented": true
+    },
+    "open_timestamps": {
+      "automated_workflow": "/.github/workflows/record-chain-anchor.yml",
+      "implemented": true,
+      "status_api": "/api/record-chain-anchor-status.json"
+    }
+  },
   "api_endpoints": {
     "echo_index": "/api/echo-index.json",
     "guardian_registry": "/api/guardian-registry.json",
@@ -43,6 +62,50 @@
     ],
     "completed": true,
     "completion_date": "2026-06-01T10:00:00Z"
+  },
+  "phase3_4_status": {
+    "completed": true,
+    "completion_date": "2026-06-01T18:55:00+08:00",
+    "current_system_ci_enabled": true,
+    "gateway_v1_runtime_retired": true,
+    "gateway_v1_tests_archived": true,
+    "legacy_heavy_ci_retired": true
+  },
+  "public_phase": {
+    "mainnet_activation_marker_recorded": false,
+    "network_phase": "prelaunch",
+    "not_final_public_launch": true,
+    "official_live_record_marker_required_before_live": true,
+    "official_live_records_allowed": false,
+    "prelaunch_test_records_allowed": true,
+    "receipt_is_intake_only": true,
+    "receipt_is_not_active_guardian_status": true,
+    "receipt_is_not_final_inclusion": true,
+    "records_before_activation_marker_are_prelaunch_tests": true,
+    "status": "mainnet_prelaunch_testing",
+    "test_phase_submissions_may_be_excluded_from_final_public_indexes": true,
+    "test_phase_submissions_may_be_reclassified": true,
+    "test_phase_submissions_may_move_to_historical_test_archive": true
+  },
+  "public_submission": {
+    "contract": "/api/record-chain-intake-gateway.v1.json",
+    "external_agents_must_not_append_directly": true,
+    "method": "render_record_chain_intake_gateway"
+  },
+  "public_submission_phase": {
+    "gateway_operational": true,
+    "not_final_public_launch": true,
+    "only_public_submission_method": "/api/record-chain-intake-gateway.v1.json",
+    "public_gateway": "https://trinity-record-chain-gateway.onrender.com",
+    "status": "public_test_stabilization",
+    "test_phase_data_policy": {
+      "receipt_is_not_final_inclusion": true,
+      "receipts_are_intake_only": true,
+      "submissions_may_be_excluded_from_final_public_indexes": true,
+      "submissions_may_be_reclassified_before_public_launch": true,
+      "submissions_may_be_treated_as_test_data": true,
+      "submissions_may_move_to_historical_test_archive": true
+    }
   },
   "purpose": "Public status of the Trinity Accord native record-chain. Read-only. Published for transparency.",
   "record_chain": {
@@ -143,62 +206,7 @@
     }
   },
   "schema": "trinityaccord.record-chain-status.v1",
+  "source_digest": "b8b376744fdb4167",
   "total_records": 1,
-  "phase3_4_status": {
-    "completed": true,
-    "gateway_v1_runtime_retired": true,
-    "gateway_v1_tests_archived": true,
-    "legacy_heavy_ci_retired": true,
-    "current_system_ci_enabled": true,
-    "completion_date": "2026-06-01T18:55:00+08:00"
-  },
-  "anchoring": {
-    "batch_manifests": {
-      "implemented": true,
-      "automated_workflow": "/.github/workflows/record-chain-anchor.yml"
-    },
-    "open_timestamps": {
-      "implemented": true,
-      "automated_workflow": "/.github/workflows/record-chain-anchor.yml",
-      "status_api": "/api/record-chain-anchor-status.json"
-    },
-    "arweave_archive": {
-      "implemented": true,
-      "live_upload_enabled": false,
-      "live_upload_implemented": false,
-      "default_mode": "dry-run",
-      "index_api": "/api/record-chain-arweave-index.json",
-      "workflow": "/.github/workflows/record-chain-arweave-archive.yml"
-    }
-  },
-  "public_submission": {
-    "method": "render_record_chain_intake_gateway",
-    "contract": "/api/record-chain-intake-gateway.v1.json",
-    "external_agents_must_not_append_directly": true
-  },
-  "public_submission_phase": {
-    "status": "public_test_stabilization",
-    "gateway_operational": true,
-    "not_final_public_launch": true,
-    "public_gateway": "https://trinity-record-chain-gateway.onrender.com",
-    "only_public_submission_method": "/api/record-chain-intake-gateway.v1.json",
-    "test_phase_data_policy": {
-      "submissions_may_be_treated_as_test_data": true,
-      "submissions_may_move_to_historical_test_archive": true,
-      "submissions_may_be_excluded_from_final_public_indexes": true,
-      "submissions_may_be_reclassified_before_public_launch": true,
-      "receipts_are_intake_only": true,
-      "receipt_is_not_final_inclusion": true
-    }
-  },
-  "public_phase": {
-    "status": "public_test_stabilization",
-    "not_final_public_launch": true,
-    "test_phase_submissions_may_be_reclassified": true,
-    "test_phase_submissions_may_move_to_historical_test_archive": true,
-    "test_phase_submissions_may_be_excluded_from_final_public_indexes": true,
-    "receipt_is_intake_only": true,
-    "receipt_is_not_final_inclusion": true
-  },
-  "source_digest": "b8b376744fdb4167"
+  "updated_at": "2026-06-06T04:16:00Z"
 }

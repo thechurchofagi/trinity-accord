@@ -26,7 +26,7 @@ def main() -> int:
     head = read_json("api/record-chain-head.json")
 
     public_phase = agent.get("public_phase", {})
-    require(public_phase.get("status") == "public_test_stabilization", "agent-start must remain public_test_stabilization during prelaunch")
+    require(public_phase.get("status") == "mainnet_prelaunch_testing", "agent-start must be mainnet_prelaunch_testing during prelaunch")
     require(public_phase.get("not_final_public_launch") is True, "not_final_public_launch must be true during prelaunch")
     require(public_phase.get("receipt_is_intake_only") is True, "receipt_is_intake_only must be true")
 

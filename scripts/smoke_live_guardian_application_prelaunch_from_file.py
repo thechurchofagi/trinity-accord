@@ -106,8 +106,8 @@ def post_json(url: str, payload: dict[str, Any], timeout: int) -> tuple[int, dic
 def discover(site: str, timeout: int) -> tuple[str, str, str]:
     agent = fetch_json(site.rstrip("/") + "/api/agent-start.v2.json", timeout)
     phase = agent.get("public_phase", {})
-    if phase.get("status") != "public_test_stabilization":
-        raise SystemExit("expected public_test_stabilization during prelaunch")
+    if phase.get("status") != "mainnet_prelaunch_testing":
+        raise SystemExit("expected mainnet_prelaunch_testing during prelaunch")
     if phase.get("not_final_public_launch") is not True:
         raise SystemExit("expected not_final_public_launch=true during prelaunch")
 
