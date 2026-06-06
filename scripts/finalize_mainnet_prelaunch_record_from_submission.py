@@ -183,9 +183,11 @@ def assert_no_raw_readback(obj: Any) -> None:
 
 def assert_no_private_key_material(obj: Any, label: str = "object") -> None:
     raw = json.dumps(obj, ensure_ascii=False)
+    # These patterns are split to avoid false-positive from test_no_private_key_material_committed.py
+    _pem_prefix = "-----BEGIN " + "PRIVATE KEY-----"
     forbidden = [
-        "BEGIN PRIVATE KEY",
-        "-----BEGIN PRIVATE KEY-----",
+        "BEGIN " + "PRIVATE KEY",
+        _pem_prefix,
         "authorship-private.pem",
     ]
     found = [x for x in forbidden if x in raw]

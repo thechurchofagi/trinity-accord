@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.public-home-status.v2",
-  "generated_at": "2026-06-06T14:11:40.071549+00:00",
+  "generated_at": "2026-06-06T14:14:33.651319+00:00",
   "generated_from": [
     "/api/record-chain-status.json",
     "/api/record-chain-anchor-status.json",
@@ -11,14 +11,14 @@
     "/api/guardian-registry.json",
     "/api/agent-declared-verification-index.json"
   ],
-  "source_digest": "fe67684fa0b8dfba",
+  "source_digest": "241289eaee3f3bb1",
   "current_record_chain_status": {
     "phase": "mainnet_prelaunch_testing",
     "total_records": 16,
     "current_chain_length": 16,
-    "pending_records": 6,
+    "pending_records": 0,
     "latest_record_id": "R-000000016",
-    "latest_record_type": "verification",
+    "latest_record_type": "guardian_application",
     "record_type_counts": {
       "classification_update": 0,
       "context_insufficient_notice": 1,
