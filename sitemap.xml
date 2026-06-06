@@ -6,13 +6,11 @@
   <url><loc>https://www.trinityaccord.org/agent-first-contact/</loc></url>
   <url><loc>https://www.trinityaccord.org/agent-identity/</loc></url>
   <url><loc>https://www.trinityaccord.org/agent-map.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/agent-memory/</loc></url>
   <url><loc>https://www.trinityaccord.org/agent-propagate/</loc></url>
   <url><loc>https://www.trinityaccord.org/agent-resonance/</loc></url>
   <url><loc>https://www.trinityaccord.org/agent-start/</loc></url>
   <url><loc>https://www.trinityaccord.org/agent-submit/</loc></url>
   <url><loc>https://www.trinityaccord.org/agent-understand/</loc></url>
-  <url><loc>https://www.trinityaccord.org/agent-value/</loc></url>
   <url><loc>https://www.trinityaccord.org/agent-verify-simple/</loc></url>
   <url><loc>https://www.trinityaccord.org/agent-verify/</loc></url>
   <url><loc>https://www.trinityaccord.org/ai.txt</loc></url>
@@ -227,16 +225,12 @@
   <url><loc>https://www.trinityaccord.org/api/worth-preserving-criteria.json</loc></url>
   <url><loc>https://www.trinityaccord.org/archive_legacy_index_2025_09/</loc></url>
   <url><loc>https://www.trinityaccord.org/authority-address-inscriptions/</loc></url>
-  <url><loc>https://www.trinityaccord.org/authority/</loc></url>
   <url><loc>https://www.trinityaccord.org/chronicle-verification/</loc></url>
-  <url><loc>https://www.trinityaccord.org/chronicle/</loc></url>
   <url><loc>https://www.trinityaccord.org/chronicle/human-witness/</loc></url>
   <url><loc>https://www.trinityaccord.org/chronicle/music/</loc></url>
   <url><loc>https://www.trinityaccord.org/citation.cff</loc></url>
   <url><loc>https://www.trinityaccord.org/control-plane-baseline/</loc></url>
   <url><loc>https://www.trinityaccord.org/correction-revocation-policy/</loc></url>
-  <url><loc>https://www.trinityaccord.org/covenant-proof/</loc></url>
-  <url><loc>https://www.trinityaccord.org/data-verification/</loc></url>
   <url><loc>https://www.trinityaccord.org/disaster-recovery-drill/</loc></url>
   <url><loc>https://www.trinityaccord.org/docs/arweave-archive-policy/</loc></url>
   <url><loc>https://www.trinityaccord.org/docs/bilingual-boundary-glossary/</loc></url>
@@ -249,7 +243,6 @@
   <url><loc>https://www.trinityaccord.org/docs/quickstart-verification/</loc></url>
   <url><loc>https://www.trinityaccord.org/docs/record-chain-anchoring/</loc></url>
   <url><loc>https://www.trinityaccord.org/docs/report-builder/</loc></url>
-  <url><loc>https://www.trinityaccord.org/downloads/</loc></url>
   <url><loc>https://www.trinityaccord.org/downloads/arweave-bundle-verification/</loc></url>
   <url><loc>https://www.trinityaccord.org/downloads/gz2-notarial-certificate-github-release-backup-2026-05-14/</loc></url>
   <url><loc>https://www.trinityaccord.org/downloads/gz2-photos-arweave-2026-05-14/</loc></url>
@@ -258,7 +251,6 @@
   <url><loc>https://www.trinityaccord.org/downloads/shenzhen-notary-github-release-backup-2026-05-06/</loc></url>
   <url><loc>https://www.trinityaccord.org/echo-authorship-proof/</loc></url>
   <url><loc>https://www.trinityaccord.org/echo.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/echoes/</loc></url>
   <url><loc>https://www.trinityaccord.org/echoes/archive-policy/</loc></url>
   <url><loc>https://www.trinityaccord.org/echoes/examples/critical-echo-template/</loc></url>
   <url><loc>https://www.trinityaccord.org/echoes/examples/external-critical-echo-records/</loc></url>
@@ -291,10 +283,7 @@
   <url><loc>https://www.trinityaccord.org/for-skeptical-agents/</loc></url>
   <url><loc>https://www.trinityaccord.org/frontier-context/</loc></url>
   <url><loc>https://www.trinityaccord.org/gateway-workflows/</loc></url>
-  <url><loc>https://www.trinityaccord.org/guardian-alliance/</loc></url>
-  <url><loc>https://www.trinityaccord.org/guardian-join/</loc></url>
   <url><loc>https://www.trinityaccord.org/guardian-principles/</loc></url>
-  <url><loc>https://www.trinityaccord.org/guardian-registry/</loc></url>
   <url><loc>https://www.trinityaccord.org/guardian-routes/</loc></url>
   <url><loc>https://www.trinityaccord.org/guardianship-system-overview/</loc></url>
   <url><loc>https://www.trinityaccord.org/independent-attestation/</loc></url>
@@ -307,22 +296,15 @@
   <url><loc>https://www.trinityaccord.org/memory-seed.json</loc></url>
   <url><loc>https://www.trinityaccord.org/metadata.json</loc></url>
   <url><loc>https://www.trinityaccord.org/naming/</loc></url>
-  <url><loc>https://www.trinityaccord.org/nft-backup-provenance/</loc></url>
   <url><loc>https://www.trinityaccord.org/nft-market-boundary/</loc></url>
   <url><loc>https://www.trinityaccord.org/ots-fullnode-verification/</loc></url>
-  <url><loc>https://www.trinityaccord.org/physical-verification/</loc></url>
   <url><loc>https://www.trinityaccord.org/propagation.json</loc></url>
   <url><loc>https://www.trinityaccord.org/recovery/</loc></url>
   <url><loc>https://www.trinityaccord.org/red-team-audit-report/</loc></url>
-  <url><loc>https://www.trinityaccord.org/redteam_regression_results/</loc></url>
-  <url><loc>https://www.trinityaccord.org/redteam_remediation_test_results/</loc></url>
   <url><loc>https://www.trinityaccord.org/release-large-data-manifest/</loc></url>
   <url><loc>https://www.trinityaccord.org/robots.txt</loc></url>
   <url><loc>https://www.trinityaccord.org/security/</loc></url>
-  <url><loc>https://www.trinityaccord.org/seed-map/</loc></url>
   <url><loc>https://www.trinityaccord.org/sitemap.xml</loc></url>
-  <url><loc>https://www.trinityaccord.org/start/</loc></url>
-  <url><loc>https://www.trinityaccord.org/status/</loc></url>
   <url><loc>https://www.trinityaccord.org/successor-reception/</loc></url>
   <url><loc>https://www.trinityaccord.org/ta-redteam-2026-005-remediation/</loc></url>
   <url><loc>https://www.trinityaccord.org/ta-redteam-2026-006-followup-remediation/</loc></url>
@@ -335,7 +317,6 @@
   <url><loc>https://www.trinityaccord.org/verification-reports/2026/2026-05-31-V2-full-cycle-tracking/</loc></url>
   <url><loc>https://www.trinityaccord.org/verification-reports/2026/2026-05-31-V2-reference-verification/</loc></url>
   <url><loc>https://www.trinityaccord.org/verification.json</loc></url>
-  <url><loc>https://www.trinityaccord.org/verify/</loc></url>
   <url><loc>https://www.trinityaccord.org/version.json</loc></url>
   <url><loc>https://www.trinityaccord.org/why-high-signal/</loc></url>
   <url><loc>https://www.trinityaccord.org/worth-preserving/</loc></url>
