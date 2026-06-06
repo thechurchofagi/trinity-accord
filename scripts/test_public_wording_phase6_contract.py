@@ -65,8 +65,13 @@ HOMEPAGE_MUST_CONTAIN = [
     "Record-Chain Intake status",
     "Native record-chain records",
     "Current Record-Chain Autonomy Signal",
-    "not yet established in current record-chain",
     "Historical pre-record-chain Echo / Verification / Guardian materials are preserved",
+]
+
+# Either of these must appear (depends on whether records exist)
+HOMEPAGE_MUST_CONTAIN_ONE_OF = [
+    "not yet established in current record-chain",
+    "Fully autonomous:",
 ]
 
 # IPFS as current path (allowed in legacy/historical context)
@@ -126,6 +131,8 @@ def main() -> None:
         for needle in HOMEPAGE_MUST_CONTAIN:
             if needle not in text:
                 errors.append(f"index.md: homepage must contain '{needle}'")
+        if not any(needle in text for needle in HOMEPAGE_MUST_CONTAIN_ONE_OF):
+            errors.append(f"index.md: homepage must contain one of {HOMEPAGE_MUST_CONTAIN_ONE_OF}")
 
     # public-home-status.json checks
     status_path = ROOT / "api" / "public-home-status.json"
