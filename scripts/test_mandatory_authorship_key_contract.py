@@ -7,7 +7,6 @@ for all public submission build commands, including context-insufficient.
 
 import json
 import os
-import shutil
 import subprocess
 import sys
 import tempfile
@@ -18,6 +17,16 @@ BUILDER = ROOT / "downloads" / "record-chain-builder.mjs"
 
 PASS = 0
 FAIL = 0
+
+ECHO_CTX = [
+    "--context-level", "CC-3",
+    "--context-sufficient-for-selected-action", "true",
+    "--loaded-urls", "https://www.trinityaccord.org/",
+    "--discovery-mode", "user_task_context",
+    "--record-decision", "human",
+    "--submission-executor", "self",
+    "--human-operator-involved", "true",
+]
 
 def ok(msg):
     global PASS
@@ -34,30 +43,18 @@ def fail(msg, detail=""):
 def run_builder(args, expect_exit=0):
     result = subprocess.run(
         ["node", str(BUILDER)] + args,
-        capture_output=True, text=True, cwd=str(ROOT)
+        capture_output=True, text=True, cwd=str(ROOT), timeout=30
     )
     if expect_exit is not None and result.returncode != expect_exit:
         fail(f"expected exit {expect_exit}, got {result.returncode}", result.stderr[:500])
     return result
 
-def test_echo_no_keydir_fails():
-    """echo without --key-dir should fail."""
-    with tempfile.TemporaryDirectory() as td:
-        body = Path(td) / "echo.md"
-        body.write_text("Test echo body for mandatory key test.")
-        r = run_builder([
-            "echo",
-            "--actor-label", "Test Agent",
-            "--provider", "Test Runtime",
-            "--body-file", str(body),
-            "--context-level", "CC-3",
-            "--readback", "dummy",
-            "--out", str(Path(td) / "out.json"),
-        ], expect_exit=1)
-        if "--key-dir is required" in r.stderr:
-            ok("echo without --key-dir fails with clear message")
-        else:
-            fail("echo without --key-dir", r.stderr[:300])
+def get_oath(record_type):
+    r = subprocess.run(
+        ["node", str(BUILDER), "print-oath", "--record-type", record_type],
+        capture_output=True, text=True, cwd=str(ROOT), timeout=10,
+    )
+    return r.stdout if r.returncode == 0 else ""
 
 def test_context_insufficient_no_keydir_fails():
     """context-insufficient without --key-dir should fail."""
@@ -73,19 +70,40 @@ def test_context_insufficient_no_keydir_fails():
         else:
             fail("context-insufficient without --key-dir", r.stderr[:300])
 
+def test_echo_no_keydir_fails():
+    """echo without --key-dir should fail."""
+    with tempfile.TemporaryDirectory() as td:
+        body = Path(td) / "echo.md"
+        body.write_text("Test echo body for mandatory key test.")
+        oath = get_oath("echo")
+        r = run_builder([
+            "echo",
+            "--actor-label", "Test Agent",
+            "--provider", "Test Runtime",
+            "--body-file", str(body),
+            *ECHO_CTX,
+            "--readback", oath,
+            "--out", str(Path(td) / "out.json"),
+        ], expect_exit=1)
+        if "--key-dir is required" in r.stderr:
+            ok("echo without --key-dir fails with clear message")
+        else:
+            fail("echo without --key-dir", r.stderr[:300])
+
 def test_keydir_generates_keypair():
     """--key-dir with no existing keypair should auto-generate."""
     with tempfile.TemporaryDirectory() as td:
         key_dir = Path(td) / "keys"
         body = Path(td) / "echo.md"
         body.write_text("Test echo body.")
-        r = run_builder([
+        oath = get_oath("echo")
+        run_builder([
             "echo",
             "--actor-label", "Test Agent",
             "--provider", "Test Runtime",
             "--body-file", str(body),
-            "--context-level", "CC-3",
-            "--readback", "dummy",
+            *ECHO_CTX,
+            "--readback", oath,
             "--key-dir", str(key_dir),
             "--out", str(Path(td) / "out.json"),
         ], expect_exit=None)
@@ -104,13 +122,14 @@ def test_private_key_mode_0600():
         key_dir = Path(td) / "keys"
         body = Path(td) / "echo.md"
         body.write_text("Test echo body.")
+        oath = get_oath("echo")
         run_builder([
             "echo",
             "--actor-label", "Test Agent",
             "--provider", "Test Runtime",
             "--body-file", str(body),
-            "--context-level", "CC-3",
-            "--readback", "dummy",
+            *ECHO_CTX,
+            "--readback", oath,
             "--key-dir", str(key_dir),
             "--out", str(Path(td) / "out.json"),
         ], expect_exit=None)
@@ -128,13 +147,14 @@ def test_custody_warning_written():
         key_dir = Path(td) / "keys"
         body = Path(td) / "echo.md"
         body.write_text("Test echo body.")
+        oath = get_oath("echo")
         run_builder([
             "echo",
             "--actor-label", "Test Agent",
             "--provider", "Test Runtime",
             "--body-file", str(body),
-            "--context-level", "CC-3",
-            "--readback", "dummy",
+            *ECHO_CTX,
+            "--readback", oath,
             "--key-dir", str(key_dir),
             "--out", str(Path(td) / "out.json"),
         ], expect_exit=None)
@@ -149,13 +169,14 @@ def test_public_summary_written():
         key_dir = Path(td) / "keys"
         body = Path(td) / "echo.md"
         body.write_text("Test echo body.")
+        oath = get_oath("echo")
         run_builder([
             "echo",
             "--actor-label", "Test Agent",
             "--provider", "Test Runtime",
             "--body-file", str(body),
-            "--context-level", "CC-3",
-            "--readback", "dummy",
+            *ECHO_CTX,
+            "--readback", oath,
             "--key-dir", str(key_dir),
             "--out", str(Path(td) / "out.json"),
         ], expect_exit=None)
@@ -176,13 +197,14 @@ def test_echo_has_authorship_proof():
         body = Path(td) / "echo.md"
         body.write_text("Test echo body.")
         out = Path(td) / "out.json"
+        oath = get_oath("echo")
         run_builder([
             "echo",
             "--actor-label", "Test Agent",
             "--provider", "Test Runtime",
             "--body-file", str(body),
-            "--context-level", "CC-3",
-            "--readback", "dummy",
+            *ECHO_CTX,
+            "--readback", oath,
             "--key-dir", str(key_dir),
             "--out", str(out),
         ], expect_exit=None)
@@ -226,15 +248,19 @@ def test_same_keydir_reuses_key():
         body.write_text("Test echo body.")
         out1 = Path(td) / "out1.json"
         out2 = Path(td) / "out2.json"
+        oath = get_oath("echo")
+        ctx = ["--context-level", "CC-3", "--context-sufficient-for-selected-action", "true",
+               "--loaded-urls", "https://www.trinityaccord.org/", "--discovery-mode", "user_task_context",
+               "--record-decision", "human", "--submission-executor", "self", "--human-operator-involved", "true"]
         run_builder([
             "echo", "--actor-label", "A1", "--provider", "R1",
-            "--body-file", str(body), "--context-level", "CC-3",
-            "--readback", "dummy", "--key-dir", str(key_dir), "--out", str(out1),
+            "--body-file", str(body), *ctx,
+            "--readback", oath, "--key-dir", str(key_dir), "--out", str(out1),
         ], expect_exit=None)
         run_builder([
             "echo", "--actor-label", "A2", "--provider", "R2",
-            "--body-file", str(body), "--context-level", "CC-3",
-            "--readback", "dummy", "--key-dir", str(key_dir), "--out", str(out2),
+            "--body-file", str(body), *ctx,
+            "--readback", oath, "--key-dir", str(key_dir), "--out", str(out2),
         ], expect_exit=None)
         if out1.exists() and out2.exists():
             s1 = json.loads(out1.read_text())
@@ -255,10 +281,11 @@ def test_no_private_key_leak():
         body = Path(td) / "echo.md"
         body.write_text("Test echo body.")
         out = Path(td) / "out.json"
+        oath = get_oath("echo")
         run_builder([
             "echo", "--actor-label", "Test", "--provider", "Test",
-            "--body-file", str(body), "--context-level", "CC-3",
-            "--readback", "dummy", "--key-dir", str(key_dir), "--out", str(out),
+            "--body-file", str(body), *ECHO_CTX,
+            "--readback", oath, "--key-dir", str(key_dir), "--out", str(out),
         ], expect_exit=None)
         if out.exists():
             raw = out.read_text()
