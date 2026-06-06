@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.public-home-status.v2",
-  "generated_at": "2026-06-05T20:16:45.970279+00:00",
+  "generated_at": "2026-06-06T03:09:05.857963+00:00",
   "generated_from": [
     "/api/record-chain-status.json",
     "/api/record-chain-anchor-status.json",
@@ -16,7 +16,7 @@
     "phase": "public_test_stabilization",
     "total_records": 1,
     "current_chain_length": 1,
-    "pending_records": 3,
+    "pending_records": 9,
     "latest_record_id": "R-000000001",
     "latest_record_type": "context_insufficient_notice",
     "record_type_counts": {
