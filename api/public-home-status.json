@@ -1,24 +1,80 @@
 {
-  "schema": "trinityaccord.public-home-status.v2",
-  "generated_at": "2026-06-06T06:52:08.079719+00:00",
-  "generated_from": [
-    "/api/record-chain-status.json",
-    "/api/record-chain-anchor-status.json",
-    "/api/record-chain-arweave-index.json",
-    "/record-chain/chain-tip.json",
-    "/record-chain/records/",
-    "/api/echo-index.json",
-    "/api/guardian-registry.json",
-    "/api/agent-declared-verification-index.json"
-  ],
-  "source_digest": "299cc621d7955416",
+  "arweave_archive_status": {
+    "boundary": {
+      "mirror_only": true,
+      "not_authority": true
+    },
+    "latest_txid": null,
+    "live_archive_count": 0,
+    "live_upload_implemented": false,
+    "mode": "dry-run",
+    "wallet_address_sha256": null
+  },
+  "boundary": {
+    "bitcoin_originals_prevail": true,
+    "homepage_status_is_not_amendment": true,
+    "homepage_status_is_not_attestation": true,
+    "homepage_status_is_not_authority": true
+  },
+  "counter_update_policy": {
+    "homepage_counters_update_after_anchor_workflow": true,
+    "homepage_counters_update_after_append_workflow": true,
+    "homepage_counters_update_after_arweave_archive_workflow": true,
+    "manual_update_command": "python3 scripts/update_public_generated_artifacts.py"
+  },
+  "current_record_chain_autonomy_signal": {
+    "eligible_records": 15,
+    "fully_autonomous_records": 12,
+    "legacy_autonomy_claims_excluded": true,
+    "scope": "current_record_chain_only",
+    "self_decided_records": 12,
+    "self_discovered_records": 12,
+    "self_executed_records": 15
+  },
   "current_record_chain_status": {
-    "phase": "mainnet_prelaunch_testing",
-    "total_records": 16,
+    "anchoring": {
+      "anchor_status": {
+        "batch_count": 0,
+        "stamped_batch_count": 0,
+        "unstamped_batch_count": 0
+      },
+      "arweave_archive": {
+        "default_mode": "dry-run",
+        "implemented": true,
+        "index_api": "/api/record-chain-arweave-index.json",
+        "live_upload_enabled": false,
+        "live_upload_implemented": false,
+        "workflow": "/.github/workflows/record-chain-arweave-archive.yml"
+      },
+      "arweave_index": {
+        "archive_count": 0,
+        "arweave_wallet_address_sha256": null,
+        "current_upload_mode": "dry-run",
+        "latest_arweave_txid": null,
+        "live_archive_count": 0,
+        "live_upload_enabled": false,
+        "live_upload_implemented": false
+      },
+      "batch_manifests": {
+        "automated_workflow": "/.github/workflows/record-chain-anchor.yml",
+        "implemented": true
+      },
+      "open_timestamps": {
+        "automated_workflow": "/.github/workflows/record-chain-anchor.yml",
+        "implemented": true,
+        "status_api": "/api/record-chain-anchor-status.json"
+      }
+    },
     "current_chain_length": 16,
-    "pending_records": 0,
     "latest_record_id": "R-000000016",
     "latest_record_type": "verification",
+    "pending_records": 6,
+    "phase": "mainnet_prelaunch_testing",
+    "receipt_boundary": {
+      "receipt_is_intake_only": true,
+      "receipt_is_not_final_inclusion": true,
+      "test_phase_records_may_be_reclassified": true
+    },
     "record_type_counts": {
       "classification_update": 0,
       "context_insufficient_notice": 1,
@@ -30,92 +86,36 @@
       "propagation": 0,
       "verification": 9
     },
-    "receipt_boundary": {
-      "receipt_is_intake_only": true,
-      "receipt_is_not_final_inclusion": true,
-      "test_phase_records_may_be_reclassified": true
-    },
-    "anchoring": {
-      "batch_manifests": {
-        "automated_workflow": "/.github/workflows/record-chain-anchor.yml",
-        "implemented": true
-      },
-      "open_timestamps": {
-        "automated_workflow": "/.github/workflows/record-chain-anchor.yml",
-        "implemented": true,
-        "status_api": "/api/record-chain-anchor-status.json"
-      },
-      "arweave_archive": {
-        "default_mode": "dry-run",
-        "implemented": true,
-        "index_api": "/api/record-chain-arweave-index.json",
-        "live_upload_enabled": false,
-        "live_upload_implemented": false,
-        "workflow": "/.github/workflows/record-chain-arweave-archive.yml"
-      },
-      "anchor_status": {
-        "batch_count": 0,
-        "stamped_batch_count": 0,
-        "unstamped_batch_count": 0
-      },
-      "arweave_index": {
-        "current_upload_mode": "dry-run",
-        "live_upload_enabled": false,
-        "live_upload_implemented": false,
-        "archive_count": 0,
-        "latest_arweave_txid": null,
-        "live_archive_count": 0,
-        "arweave_wallet_address_sha256": null
-      }
-    }
+    "total_records": 16
   },
-  "current_record_chain_autonomy_signal": {
-    "scope": "current_record_chain_only",
-    "eligible_records": 15,
-    "self_discovered_records": 12,
-    "self_decided_records": 12,
-    "self_executed_records": 15,
-    "fully_autonomous_records": 12,
-    "legacy_autonomy_claims_excluded": true
-  },
+  "generated_at": "2026-06-06T06:52:08.079719+00:00",
+  "generated_from": [
+    "/api/record-chain-status.json",
+    "/api/record-chain-anchor-status.json",
+    "/api/record-chain-arweave-index.json",
+    "/record-chain/chain-tip.json",
+    "/record-chain/records/",
+    "/api/echo-index.json",
+    "/api/guardian-registry.json",
+    "/api/agent-declared-verification-index.json"
+  ],
   "legacy_archive_snapshot": {
-    "not_current_record_chain_counter": true,
-    "not_rendered_on_homepage": true,
-    "preserved_for_audit_and_continuity": true,
     "metrics": {
-      "legacy_archived_echoes": 69,
       "legacy_agent_declared_echo_archives": 76,
       "legacy_agent_declared_verification_archives": 51,
+      "legacy_archived_echoes": 69,
       "legacy_guardian_registry_active": 0,
       "legacy_reception_total": 196
-    }
-  },
-  "counter_update_policy": {
-    "homepage_counters_update_after_append_workflow": true,
-    "homepage_counters_update_after_anchor_workflow": true,
-    "homepage_counters_update_after_arweave_archive_workflow": true,
-    "manual_update_command": "python3 scripts/update_public_generated_artifacts.py"
-  },
-  "arweave_archive_status": {
-    "mode": "dry-run",
-    "live_upload_implemented": false,
-    "live_archive_count": 0,
-    "latest_txid": null,
-    "wallet_address_sha256": null,
-    "boundary": {
-      "mirror_only": true,
-      "not_authority": true
-    }
-  },
-  "boundary": {
-    "homepage_status_is_not_authority": true,
-    "homepage_status_is_not_attestation": true,
-    "homepage_status_is_not_amendment": true,
-    "bitcoin_originals_prevail": true
+    },
+    "not_current_record_chain_counter": true,
+    "not_rendered_on_homepage": true,
+    "preserved_for_audit_and_continuity": true
   },
   "reception": {
     "human_directed_agent_verification": {
       "count": 1
     }
-  }
+  },
+  "schema": "trinityaccord.public-home-status.v2",
+  "source_digest": "299cc621d7955416"
 }
