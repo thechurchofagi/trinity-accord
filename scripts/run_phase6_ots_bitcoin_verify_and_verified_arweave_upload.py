@@ -253,6 +253,7 @@ def ots_upgrade_and_verify(
     ots_bin: str,
     bitcoin_node_url: str | None,
     strict: bool,
+    skip_upgrade: bool = False,
 ) -> tuple[dict[str, Any], bool]:
     if not shutil.which(ots_bin):
         raise SystemExit("OTS CLI missing. Install: python3 -m pip install -r requirements-ots.txt")
@@ -262,9 +263,10 @@ def ots_upgrade_and_verify(
         "scripts/ots_verify_record_chain_anchor.py",
         "--anchor-file", anchor_rel,
         "--ots-bin", ots_bin,
-        "--upgrade",
         "--write-updated-anchor",
     ]
+    if not skip_upgrade:
+        cmd.append("--upgrade")
     if bitcoin_node_url:
         cmd += ["--bitcoin-node-url", bitcoin_node_url]
     if strict:
@@ -474,6 +476,9 @@ def main() -> int:
     parser.add_argument("--log-dir", default=None)
     parser.add_argument("--ots-bin", default="ots")
     parser.add_argument("--bitcoin-node-url", default=os.environ.get("OTS_BITCOIN_NODE_URL"))
+    parser.add_argument("--skip-upgrade", action="store_true",
+                        default=bool(os.environ.get("OTS_SKIP_UPGRADE")),
+                        help="Skip ots upgrade step (use when calendar servers are unreachable)")
     parser.add_argument("--verify-only", action="store_true")
     parser.add_argument("--dry-run-cost-only", action="store_true")
     parser.add_argument("--enable-paid-upload", action="store_true")
@@ -534,6 +539,7 @@ def main() -> int:
         ots_bin=args.ots_bin,
         bitcoin_node_url=args.bitcoin_node_url,
         strict=False,
+        skip_upgrade=args.skip_upgrade,
     )
 
     anchor, verified = ots_upgrade_and_verify(
@@ -542,6 +548,7 @@ def main() -> int:
         ots_bin=args.ots_bin,
         bitcoin_node_url=args.bitcoin_node_url,
         strict=True,
+        skip_upgrade=args.skip_upgrade,
     )
 
     sync_latest_ots_from_anchor(anchor_rel)
