@@ -2,9 +2,11 @@
 from __future__ import annotations
 
 import argparse
+import copy
 import hashlib
 import json
 import re
+import shutil
 import subprocess
 import sys
 import time
@@ -16,6 +18,12 @@ sys.path.insert(0, str(ROOT / "apps/record_chain_intake_gateway"))
 from gateway.authorship import verify_authorship_proof_submission  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
+
+NATIVE_CHAIN_ID = "trinity-accord-public-reception-ledger"
+NATIVE_PENDING_DIR = ROOT / "record-chain/pending"
+NATIVE_PROCESSED_DIR = ROOT / "record-chain/processed"
+NATIVE_REJECTED_DIR = ROOT / "record-chain/rejected"
+NATIVE_CHAIN_TIP = ROOT / "record-chain/chain-tip.json"
 
 MAIN_CHAIN_ID = "trinity-record-chain-main"
 MAIN_LEDGER = ROOT / "record-chain/hash-chain/main.chain.jsonl"
@@ -173,6 +181,37 @@ def assert_no_raw_readback(obj: Any) -> None:
         raise SystemExit("finalized payload must not embed raw oath readback/client_oath_readback")
 
 
+def assert_no_private_key_material(obj: Any, label: str = "object") -> None:
+    raw = json.dumps(obj, ensure_ascii=False)
+    forbidden = [
+        "BEGIN PRIVATE KEY",
+        "-----BEGIN PRIVATE KEY-----",
+        "authorship-private.pem",
+    ]
+    found = [x for x in forbidden if x in raw]
+    if found:
+        raise SystemExit(f"{label} contains forbidden private-key marker(s): {', '.join(found)}")
+
+
+def safe_pending_name(receipt_id: Any) -> str:
+    rid = str(receipt_id or "missing-receipt")
+    rid = re.sub(r"[^A-Za-z0-9_.-]+", "-", rid).strip("-")
+    if not rid:
+        rid = "missing-receipt"
+    return f"mainnet-prelaunch-{rid}.json"
+
+
+def ensure_no_unrelated_pending_json() -> None:
+    NATIVE_PENDING_DIR.mkdir(parents=True, exist_ok=True)
+    pending = sorted(p for p in NATIVE_PENDING_DIR.glob("*.json") if p.is_file())
+    if pending:
+        rel = [str(p.relative_to(ROOT)) for p in pending]
+        raise SystemExit(
+            "record-chain/pending contains existing pending JSON; refusing to append ambiguously: "
+            + ", ".join(rel)
+        )
+
+
 def assert_prelaunch_safe_input(submission: dict[str, Any], receipt: dict[str, Any]) -> None:
     raw = json.dumps({"submission": submission, "receipt": receipt}, ensure_ascii=False)
     found = [m for m in FORBIDDEN_SUBSTRINGS if m in raw]
@@ -194,9 +233,146 @@ def run(cmd: list[str]) -> None:
         raise SystemExit(f"command failed ({result.returncode}): {' '.join(cmd)}")
 
 
-def next_record_id() -> str:
-    entries = load_jsonl(MAIN_LEDGER)
-    return f"R-{len(entries) + 1:09d}"
+def build_native_prelaunch_draft(
+    *,
+    submission: dict[str, Any],
+    receipt: dict[str, Any],
+    submission_path: Path,
+    receipt_path: Path,
+    source_run_id: str,
+) -> dict[str, Any]:
+    draft = copy.deepcopy(submission.get("record_draft"))
+    if not isinstance(draft, dict):
+        raise SystemExit("submission.record_draft must be an object")
+
+    proof = submission.get("authorship_proof")
+    if not isinstance(proof, dict):
+        raise SystemExit("submission.authorship_proof must be an object")
+
+    record_type = extract_record_type(submission)
+    verification_level = extract_verification_level(submission)
+    receipt_id = receipt.get("receipt_id")
+
+    # Native verifier requires formal records to contain authorship_proof inside the native draft.
+    # Public submissions keep authorship_proof at top-level, so finalizer bridges that representation here.
+    draft["authorship_proof"] = proof
+
+    draft["network_phase"] = "prelaunch"
+    draft["record_scope"] = "mainnet_prelaunch_test"
+    draft["prelaunch_test"] = True
+    draft["official_live_record"] = False
+    draft["does_not_create_guardian_status"] = True
+    draft["does_not_activate_system"] = True
+
+    draft["source_receipt_semantics"] = {
+        "receipt_is_intake_only": True,
+        "receipt_is_not_final_inclusion": True,
+        "receipt_is_not_active_guardian_status": True,
+    }
+
+    draft["receipt_id"] = receipt_id
+    draft["source_artifacts"] = {
+        "submission_filename": submission_path.name,
+        "submission_sha256": sha256_file(submission_path),
+        "submission_canonical_sha256": sha256_obj(submission),
+        "receipt_filename": receipt_path.name,
+        "receipt_sha256": sha256_file(receipt_path),
+        "receipt_canonical_sha256": sha256_obj(receipt),
+    }
+    draft["source_run_id"] = source_run_id
+
+    draft["source_summary"] = {
+        "record_type": record_type,
+        "verification_level": verification_level,
+        "submission_schema": submission.get("schema"),
+        "submission_type": submission.get("submission_type"),
+        "accepted": receipt.get("accepted"),
+        "accepted_at": receipt.get("accepted_at"),
+        "receipt_id": receipt_id,
+        "oath_summary": extract_oath_summary(submission),
+        "authorship_summary": require_authorship_summary(submission),
+    }
+
+    draft["finalization"] = {
+        "finalized_at": utc_now(),
+        "finalized_by": "record-chain-prelaunch-finalizer",
+        "hash_chain_inclusion_is_finalization_event": True,
+        "prelaunch_test_finalization": True,
+        "official_live_record": False,
+        "does_not_activate_system": True,
+        "does_not_create_guardian_status": True,
+        "native_record_append_is_performed_by_trinity_record_chain": True,
+        "global_hash_chain_append_is_performed_by_append_record_chain_link": True,
+    }
+
+    assert_no_raw_readback(draft)
+    assert_no_private_key_material(draft, "native prelaunch draft")
+
+    return draft
+
+
+def read_chain_tip() -> dict[str, Any]:
+    if not NATIVE_CHAIN_TIP.exists():
+        raise SystemExit("record-chain/chain-tip.json missing; run scripts/trinity_record_chain.py verify/import-genesis first")
+    tip = read_json(NATIVE_CHAIN_TIP)
+    if not isinstance(tip, dict):
+        raise SystemExit("record-chain/chain-tip.json must be an object")
+    return tip
+
+
+def append_native_record_from_draft(native_draft: dict[str, Any], receipt_id: Any) -> tuple[str, Path, dict[str, Any]]:
+    ensure_no_unrelated_pending_json()
+
+    before_tip = read_chain_tip()
+    before_index = int(before_tip.get("latest_record_index") or 0)
+
+    pending_path = NATIVE_PENDING_DIR / safe_pending_name(receipt_id)
+    if pending_path.exists():
+        raise SystemExit(f"pending file already exists: {pending_path.relative_to(ROOT)}")
+
+    write_json(pending_path, native_draft)
+
+    try:
+        run([sys.executable, "scripts/trinity_record_chain.py", "append"])
+    except BaseException:
+        # If append rejects, trinity_record_chain.py should move the pending file to rejected.
+        # If the pending file remains, keep it for debugging but fail loudly.
+        if pending_path.exists():
+            print(f"pending file still exists after append failure: {pending_path.relative_to(ROOT)}", file=sys.stderr)
+        raise
+
+    if pending_path.exists():
+        raise SystemExit(f"native append did not consume pending file: {pending_path.relative_to(ROOT)}")
+
+    after_tip = read_chain_tip()
+    after_index = int(after_tip.get("latest_record_index") or 0)
+    if after_index != before_index + 1:
+        raise SystemExit(f"native append expected latest_record_index {before_index + 1}, got {after_index}")
+
+    record_id = after_tip.get("latest_record_id")
+    if not isinstance(record_id, str) or not record_id.startswith("R-"):
+        raise SystemExit(f"native append did not produce valid latest_record_id: {record_id!r}")
+
+    record_path = MAIN_RECORDS_DIR / f"{record_id}.json"
+    if not record_path.exists():
+        raise SystemExit(f"native appended record missing: {record_path.relative_to(ROOT)}")
+
+    record = read_json(record_path)
+    if record.get("record_id") != record_id:
+        raise SystemExit(f"native record_id mismatch in {record_path.relative_to(ROOT)}")
+    if record.get("record_index") != after_index:
+        raise SystemExit(f"native record_index mismatch in {record_path.relative_to(ROOT)}")
+    if record.get("record_sha256") != after_tip.get("latest_record_sha256"):
+        raise SystemExit("native chain-tip latest_record_sha256 does not match appended record")
+
+    processed_path = NATIVE_PROCESSED_DIR / pending_path.name
+    if not processed_path.exists():
+        raise SystemExit(f"native append did not move pending file to processed: {processed_path.relative_to(ROOT)}")
+
+    assert_no_raw_readback(record)
+    assert_no_private_key_material(record, f"native record {record_id}")
+
+    return record_id, record_path, record
 
 
 def main() -> int:
@@ -237,61 +413,41 @@ def main() -> int:
 
     record_type = extract_record_type(submission)
     verification_level = extract_verification_level(submission)
-    record_id = next_record_id()
     receipt_id = receipt.get("receipt_id")
 
-    payload = {
-        "schema": "trinity_record_chain_mainnet_prelaunch_test_payload.v1",
-        "chain_id": MAIN_CHAIN_ID,
-        "record_id": record_id,
-        "record_type": record_type,
-        "network_phase": "prelaunch",
-        "record_scope": "mainnet_prelaunch_test",
-        "prelaunch_test": True,
-        "official_live_record": False,
-        "does_not_create_guardian_status": True,
-        "does_not_activate_system": True,
-        "source_receipt_semantics": {
-            "receipt_is_intake_only": True,
-            "receipt_is_not_final_inclusion": True,
-            "receipt_is_not_active_guardian_status": True
-        },
-        "receipt_id": receipt_id,
-        "source_artifacts": {
-            "submission_filename": submission_path.name,
-            "submission_sha256": sha256_file(submission_path),
-            "submission_canonical_sha256": sha256_obj(submission),
-            "receipt_filename": receipt_path.name,
-            "receipt_sha256": sha256_file(receipt_path),
-            "receipt_canonical_sha256": sha256_obj(receipt)
-        },
-        "source_run_id": args.source_run_id,
-        "source_summary": {
-            "record_type": record_type,
-            "verification_level": verification_level,
-            "submission_schema": submission.get("schema"),
-            "submission_type": submission.get("submission_type"),
-            "accepted": receipt.get("accepted"),
-            "accepted_at": receipt.get("accepted_at"),
-            "receipt_id": receipt_id,
-            "oath_summary": extract_oath_summary(submission),
-            "authorship_summary": require_authorship_summary(submission),
-        },
-        "finalization": {
-            "finalized_at": utc_now(),
-            "finalized_by": "record-chain-prelaunch-finalizer",
-            "hash_chain_inclusion_is_finalization_event": True,
-            "prelaunch_test_finalization": True,
-            "official_live_record": False,
-            "does_not_activate_system": True
-        },
-    }
+    native_draft = build_native_prelaunch_draft(
+        submission=submission,
+        receipt=receipt,
+        submission_path=submission_path,
+        receipt_path=receipt_path,
+        source_run_id=args.source_run_id,
+    )
 
-    assert_no_raw_readback(payload)
+    record_id, payload_path, native_record = append_native_record_from_draft(native_draft, receipt_id)
 
-    MAIN_RECORDS_DIR.mkdir(parents=True, exist_ok=True)
-    payload_path = MAIN_RECORDS_DIR / f"{record_id}.json"
-    write_json(payload_path, payload)
+    if native_record.get("record_type") != record_type:
+        raise SystemExit("native appended record_type mismatch")
+    if native_record.get("network_phase") != "prelaunch":
+        raise SystemExit("native appended record missing network_phase=prelaunch")
+    if native_record.get("prelaunch_test") is not True:
+        raise SystemExit("native appended record missing prelaunch_test=true")
+    if native_record.get("official_live_record") is not False:
+        raise SystemExit("native appended record must have official_live_record=false")
+    if native_record.get("does_not_create_guardian_status") is not True:
+        raise SystemExit("native appended record must have does_not_create_guardian_status=true")
+    if native_record.get("does_not_activate_system") is not True:
+        raise SystemExit("native appended record must have does_not_activate_system=true")
+
+    source_summary = native_record.get("source_summary") or {}
+    authorship_summary = source_summary.get("authorship_summary")
+    if not isinstance(authorship_summary, dict):
+        raise SystemExit("native appended record missing source_summary.authorship_summary")
+    if authorship_summary.get("authorship_verification_performed_by_finalizer") is not True:
+        raise SystemExit("native appended record authorship was not verified by finalizer")
+    if authorship_summary.get("private_key_not_embedded") is not True:
+        raise SystemExit("native appended record authorship summary must state private_key_not_embedded=true")
+    if record_type == "guardian_application" and authorship_summary.get("guardian_key_bound_to_authorship_key") is not True:
+        raise SystemExit("guardian_application must bind guardian key to authorship key")
 
     run([
         sys.executable,
@@ -328,6 +484,8 @@ def main() -> int:
         "--base-dir", ".",
     ])
 
+    run([sys.executable, "scripts/trinity_record_chain.py", "verify"])
+
     print(json.dumps({
         "result": "pass",
         "record_id": record_id,
@@ -335,8 +493,9 @@ def main() -> int:
         "verification_level": verification_level,
         "receipt_id": receipt_id,
         "payload_file": str(payload_path.relative_to(ROOT)),
+        "native_record_sha256": native_record.get("record_sha256"),
         "network_phase": "prelaunch",
-        "official_live_record": False
+        "official_live_record": False,
     }, indent=2, sort_keys=True, ensure_ascii=False))
     return 0
 

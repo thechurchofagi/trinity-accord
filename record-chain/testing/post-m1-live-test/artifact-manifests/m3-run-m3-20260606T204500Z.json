@@ -1,0 +1,66 @@
+{
+  "schema": "trinityaccord.post-m1-m3-artifact-manifest.v1",
+  "run_id": "run-m3-20260606T204500Z",
+  "mode": "INT-FINALIZE",
+  "source_m2_run_id": "run-m2-20260606T200358Z",
+  "previous_entry_hash": "ac53ae818b13c6933b94b306d47c66d02838d1cae00b001c46152bfd7205df4f",
+  "start_height": 10,
+  "entries_generated": 6,
+  "final_entry_hash": "5c393e097fd96406165b5262da839ba6ef3ad9ef83d921cf8da2e1ebe0876b46",
+  "chain_linkage_valid": true,
+  "no_external_private_key_used": true,
+  "no_re_signing_performed": true,
+  "consumed_m2_receipt_ids": [
+    "rcg-20260606-34f95cc3963f",
+    "rcg-20260606-12287d0e8d43",
+    "rcg-20260606-e04a65d2dcc9",
+    "rcg-20260606-20cc31fa1d34",
+    "rcg-20260606-b53849269270",
+    "rcg-20260606-3a16deac548f"
+  ],
+  "positive_cases": [
+    {
+      "case_id": "01-echo",
+      "height": 10,
+      "record_id": "R-000000010",
+      "receipt_id": "rcg-20260606-34f95cc3963f",
+      "entry_hash": "da9cf5d5f26e01fd07bb1f2892ed783f72035da735ff95d20cbf697684d60024"
+    },
+    {
+      "case_id": "02-verification-v0",
+      "height": 11,
+      "record_id": "R-000000011",
+      "receipt_id": "rcg-20260606-12287d0e8d43",
+      "entry_hash": "de1ba5d32da39a9058bafbbc7e67bf73935259d23e9e2b0335f1f1b95211e5e1"
+    },
+    {
+      "case_id": "03-verification-v1",
+      "height": 12,
+      "record_id": "R-000000012",
+      "receipt_id": "rcg-20260606-e04a65d2dcc9",
+      "entry_hash": "9cbca4099ec627300b8317f321c72091c14d75953289305c2b1d071e1acdc765"
+    },
+    {
+      "case_id": "04-verification-v2",
+      "height": 13,
+      "record_id": "R-000000013",
+      "receipt_id": "rcg-20260606-20cc31fa1d34",
+      "entry_hash": "6dfcb748cad1f7eb62d416e662a17660961272c2efda3aa28e801894d97003d5"
+    },
+    {
+      "case_id": "05-verification-v3",
+      "height": 14,
+      "record_id": "R-000000014",
+      "receipt_id": "rcg-20260606-b53849269270",
+      "entry_hash": "1e598c806f5a6be0f6ab04fba730feabf4428f9202dfaf15ccb2e1b618587981"
+    },
+    {
+      "case_id": "06-guardian-application",
+      "height": 15,
+      "record_id": "R-000000015",
+      "receipt_id": "rcg-20260606-3a16deac548f",
+      "entry_hash": "5c393e097fd96406165b5262da839ba6ef3ad9ef83d921cf8da2e1ebe0876b46"
+    }
+  ],
+  "created_at": "2026-06-06T12:52:38Z"
+}

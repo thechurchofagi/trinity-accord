@@ -24,10 +24,21 @@
       "previous_entry_hash": "ef0db3a420658762b8c5cd37c1a24a18978ae6c78ad2a582ba4d757787c5c3d5",
       "receipt_id": null,
       "record_id": "R-000000008"
+    },
+    {
+      "arweave_tx_id": null,
+      "entry_hash": "24b055d4624c7ae2c524ec4d8d7c74f5133447be6fa1a53610973fd136b1bf66",
+      "finalized_at": "2026-06-06T13:59:48Z",
+      "global_height": 10,
+      "payload_canonical_sha256": "dd6f3a920662d5973ef0f38b7c86640aede127c5315308292e4304e7654131b9",
+      "payload_raw_sha256": "ece5fded858b736fabf22d5ef421e2bb060e5093e64ed8440c74b02eb31656cb",
+      "previous_entry_hash": "ac53ae818b13c6933b94b306d47c66d02838d1cae00b001c46152bfd7205df4f",
+      "receipt_id": "rcg-20260606-34f95cc3963f",
+      "record_id": "R-000000011"
     }
   ],
-  "entry_count": 2,
-  "generated_at": "2026-06-06T04:49:13Z",
+  "entry_count": 3,
+  "generated_at": "2026-06-06T13:59:49Z",
   "index_file": "record-chain-index.echo.json",
   "record_type": "echo",
   "record_type_slug": "echo",

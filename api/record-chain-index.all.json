@@ -92,10 +92,64 @@
       "receipt_id": null,
       "record_id": "R-000000009",
       "record_type": "guardian_application"
+    },
+    {
+      "entry_hash": "24b055d4624c7ae2c524ec4d8d7c74f5133447be6fa1a53610973fd136b1bf66",
+      "finalized_at": "2026-06-06T13:59:48Z",
+      "global_height": 10,
+      "payload_raw_sha256": "ece5fded858b736fabf22d5ef421e2bb060e5093e64ed8440c74b02eb31656cb",
+      "receipt_id": "rcg-20260606-34f95cc3963f",
+      "record_id": "R-000000011",
+      "record_type": "echo"
+    },
+    {
+      "entry_hash": "60cc36272e1dfe8c90d84e338ba7516b11ecfa830a83fae11ab89c1a763d1213",
+      "finalized_at": "2026-06-06T13:59:48Z",
+      "global_height": 11,
+      "payload_raw_sha256": "c858ddbd4d440c0e1fbfde5ece90fb195b087f465fff16887ac312da68f4412b",
+      "receipt_id": "rcg-20260606-12287d0e8d43",
+      "record_id": "R-000000012",
+      "record_type": "verification"
+    },
+    {
+      "entry_hash": "31e5f80ac6c8d0a5a9b1e68a13f51422b9acd730e8363658de11b8c03af9a8b6",
+      "finalized_at": "2026-06-06T13:59:48Z",
+      "global_height": 12,
+      "payload_raw_sha256": "1b1bd4c091f43046de7d60b1a6387f09de5e4bd08d68928d6eb263350d3131a5",
+      "receipt_id": "rcg-20260606-e04a65d2dcc9",
+      "record_id": "R-000000013",
+      "record_type": "verification"
+    },
+    {
+      "entry_hash": "8a915e2127c802665077a0c6832909eef855b79ada3a83f69e55628d0bee8194",
+      "finalized_at": "2026-06-06T13:59:49Z",
+      "global_height": 13,
+      "payload_raw_sha256": "d801c68d66c5b30378667278f26661d8e7642ed5928e4f946c0babb21db004ef",
+      "receipt_id": "rcg-20260606-20cc31fa1d34",
+      "record_id": "R-000000014",
+      "record_type": "verification"
+    },
+    {
+      "entry_hash": "68269795a8cc4e9a39499936c90b8db165e50771663df806716817aed180ae48",
+      "finalized_at": "2026-06-06T13:59:49Z",
+      "global_height": 14,
+      "payload_raw_sha256": "9c05c4044f97a74568eb2ddcd668bbf34afce854f091860247e94b8ed76d3256",
+      "receipt_id": "rcg-20260606-b53849269270",
+      "record_id": "R-000000015",
+      "record_type": "verification"
+    },
+    {
+      "entry_hash": "42f42d3544627404593de86bd6b3453d3ae95b8829d7aac33471adb8cd473eb1",
+      "finalized_at": "2026-06-06T13:59:49Z",
+      "global_height": 15,
+      "payload_raw_sha256": "62107e321d543ecd03c4493b25ed85e9f8d915df8971bcb233d0cbbcd15bbd0b",
+      "receipt_id": "rcg-20260606-3a16deac548f",
+      "record_id": "R-000000016",
+      "record_type": "guardian_application"
     }
   ],
-  "entry_count": 10,
-  "generated_at": "2026-06-06T04:49:13Z",
+  "entry_count": 16,
+  "generated_at": "2026-06-06T13:59:49Z",
   "schema": "trinity_record_chain_all_index.v1",
   "source_ledger": "record-chain/hash-chain/main.chain.jsonl"
 }

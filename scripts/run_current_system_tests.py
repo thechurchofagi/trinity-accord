@@ -470,6 +470,17 @@ def main() -> int:
         fail(f"mainnet prelaunch policy contract failed: {result.stderr}\n{result.stdout}")
     ok("mainnet prelaunch policy contract")
 
+    # 16. M3 finalizer native compatibility contract
+    result = subprocess.run(
+        [sys.executable, "scripts/test_m3_finalizer_native_compat_contract.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"m3 finalizer native compat contract failed: {result.stderr}\n{result.stdout}")
+    ok("m3 finalizer native compatibility contract")
+
     print("\n=== ALL CURRENT SYSTEM TESTS PASSED ===")
     return 0
 

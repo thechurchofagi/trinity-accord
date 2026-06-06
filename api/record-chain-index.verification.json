@@ -57,10 +57,54 @@
       "previous_entry_hash": "db9d4790c05753afa4a8a1435172324d3d44c03300c8816e6469874edf3f3a42",
       "receipt_id": null,
       "record_id": "R-000000007"
+    },
+    {
+      "arweave_tx_id": null,
+      "entry_hash": "60cc36272e1dfe8c90d84e338ba7516b11ecfa830a83fae11ab89c1a763d1213",
+      "finalized_at": "2026-06-06T13:59:48Z",
+      "global_height": 11,
+      "payload_canonical_sha256": "f9926becbf29f3ea5775e2aa8be75a7e75085e306602f3cde3e2e25bf81e156c",
+      "payload_raw_sha256": "c858ddbd4d440c0e1fbfde5ece90fb195b087f465fff16887ac312da68f4412b",
+      "previous_entry_hash": "24b055d4624c7ae2c524ec4d8d7c74f5133447be6fa1a53610973fd136b1bf66",
+      "receipt_id": "rcg-20260606-12287d0e8d43",
+      "record_id": "R-000000012"
+    },
+    {
+      "arweave_tx_id": null,
+      "entry_hash": "31e5f80ac6c8d0a5a9b1e68a13f51422b9acd730e8363658de11b8c03af9a8b6",
+      "finalized_at": "2026-06-06T13:59:48Z",
+      "global_height": 12,
+      "payload_canonical_sha256": "e72c6d63f6e5a8c98a8084a6c5efd9282f4fca0c5231bdbdea8e2851f83637f1",
+      "payload_raw_sha256": "1b1bd4c091f43046de7d60b1a6387f09de5e4bd08d68928d6eb263350d3131a5",
+      "previous_entry_hash": "60cc36272e1dfe8c90d84e338ba7516b11ecfa830a83fae11ab89c1a763d1213",
+      "receipt_id": "rcg-20260606-e04a65d2dcc9",
+      "record_id": "R-000000013"
+    },
+    {
+      "arweave_tx_id": null,
+      "entry_hash": "8a915e2127c802665077a0c6832909eef855b79ada3a83f69e55628d0bee8194",
+      "finalized_at": "2026-06-06T13:59:49Z",
+      "global_height": 13,
+      "payload_canonical_sha256": "fff5e022c8ad88a3db928c9e8a5df69aafe8b3a2b8a966af06f485e1e0dd8325",
+      "payload_raw_sha256": "d801c68d66c5b30378667278f26661d8e7642ed5928e4f946c0babb21db004ef",
+      "previous_entry_hash": "31e5f80ac6c8d0a5a9b1e68a13f51422b9acd730e8363658de11b8c03af9a8b6",
+      "receipt_id": "rcg-20260606-20cc31fa1d34",
+      "record_id": "R-000000014"
+    },
+    {
+      "arweave_tx_id": null,
+      "entry_hash": "68269795a8cc4e9a39499936c90b8db165e50771663df806716817aed180ae48",
+      "finalized_at": "2026-06-06T13:59:49Z",
+      "global_height": 14,
+      "payload_canonical_sha256": "63a0ea1aae003c0f05950553609fcb0f12f07bc8bef93258fb2597c03185f667",
+      "payload_raw_sha256": "9c05c4044f97a74568eb2ddcd668bbf34afce854f091860247e94b8ed76d3256",
+      "previous_entry_hash": "8a915e2127c802665077a0c6832909eef855b79ada3a83f69e55628d0bee8194",
+      "receipt_id": "rcg-20260606-b53849269270",
+      "record_id": "R-000000015"
     }
   ],
-  "entry_count": 5,
-  "generated_at": "2026-06-06T04:49:13Z",
+  "entry_count": 9,
+  "generated_at": "2026-06-06T13:59:49Z",
   "index_file": "record-chain-index.verification.json",
   "record_type": "verification",
   "record_type_slug": "verification",
