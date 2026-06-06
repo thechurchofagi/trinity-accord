@@ -2,17 +2,18 @@
   "schema": "trinityaccord.post-m1-live-test-progress.v1",
   "status": "active",
   "authoritative_progress_branch": "post-m1-test-progress",
-  "current_phase": "M2",
-  "current_step": "M2.1",
-  "current_mode": "EXT",
-  "overall_status": "not_started",
-  "last_safe_resume_step": "M2.1",
+  "current_phase": "M3",
+  "current_step": "M3.done",
+  "current_mode": "INT-CHECKPOINT",
+  "overall_status": "pass",
+  "last_safe_resume_step": "M4.1",
   "last_checkpoint_id": null,
   "last_checkpoint_at": null,
   "active_session": null,
   "completed_markers": [
     "PHASE7C_BASELINE_RESTORED_OK",
-    "MANDATORY_AUTHORSHIP_KEY_ONLY_FINAL_OK"
+    "MANDATORY_AUTHORSHIP_KEY_ONLY_FINAL_OK",
+    "MANDATORY_KEY_MAIN_CHAIN_PRELAUNCH_FINALIZATION_OK"
   ],
   "phase_status": {
     "M2": {
@@ -23,8 +24,8 @@
     },
     "M3": {
       "name": "Internal Hash-Chain Finalization Rehearsal",
-      "status": "blocked_waiting_for_M2",
-      "resume_step": null,
+      "status": "pass",
+      "resume_step": "M4.1",
       "blocking_issue": "M2 not complete"
     },
     "M4": {
@@ -75,5 +76,5 @@
     "external agent private key",
     "raw private key logs or PEM files"
   ],
-  "updated_at": null
+  "updated_at": "2026-06-06T14:17:57.241312Z"
 }

@@ -1,0 +1,14 @@
+{
+  "checkpoint_id": "cp-M3-M3.done-20260606T141757Z",
+  "phase": "M3",
+  "step": "M3.done",
+  "mode": "INT-CHECKPOINT",
+  "status": "pass",
+  "summary": "M3 native-compatible prelaunch finalization passed: both trinity_record_chain.py verify and verify_record_chain_integrity.py passed.",
+  "resume_step": "M4.1",
+  "marker": "MANDATORY_KEY_MAIN_CHAIN_PRELAUNCH_FINALIZATION_OK",
+  "receipt_id": null,
+  "public_key_sha256": null,
+  "session_id": null,
+  "created_at": "2026-06-06T14:17:57.241312Z"
+}
