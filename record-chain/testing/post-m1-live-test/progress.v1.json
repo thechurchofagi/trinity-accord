@@ -1,0 +1,79 @@
+{
+  "schema": "trinityaccord.post-m1-live-test-progress.v1",
+  "status": "active",
+  "authoritative_progress_branch": "post-m1-test-progress",
+  "current_phase": "M2",
+  "current_step": "M2.1",
+  "current_mode": "EXT",
+  "overall_status": "not_started",
+  "last_safe_resume_step": "M2.1",
+  "last_checkpoint_id": null,
+  "last_checkpoint_at": null,
+  "active_session": null,
+  "completed_markers": [
+    "PHASE7C_BASELINE_RESTORED_OK",
+    "MANDATORY_AUTHORSHIP_KEY_ONLY_FINAL_OK"
+  ],
+  "phase_status": {
+    "M2": {
+      "name": "External No-Token Mandatory-Key Submission Rehearsal",
+      "status": "not_started",
+      "resume_step": "M2.1",
+      "blocking_issue": null
+    },
+    "M3": {
+      "name": "Internal Hash-Chain Finalization Rehearsal",
+      "status": "blocked_waiting_for_M2",
+      "resume_step": null,
+      "blocking_issue": "M2 not complete"
+    },
+    "M4": {
+      "name": "Current Head OTS + Arweave Archive",
+      "status": "blocked_waiting_for_M3",
+      "resume_step": null,
+      "blocking_issue": "M3 not complete"
+    },
+    "M5": {
+      "name": "Pre-Live-Test Stability Test",
+      "status": "blocked_waiting_for_M4",
+      "resume_step": null,
+      "blocking_issue": "M4 not complete"
+    },
+    "M6": {
+      "name": "Live-Test Activation Marker",
+      "status": "blocked_waiting_for_M5",
+      "resume_step": null,
+      "blocking_issue": "M5 not complete"
+    },
+    "M7": {
+      "name": "Large Live Operational Test Campaigns",
+      "status": "blocked_waiting_for_M6",
+      "resume_step": null,
+      "blocking_issue": "M6 not complete"
+    },
+    "M8": {
+      "name": "Production Enablement Marker",
+      "status": "blocked_waiting_for_M7",
+      "resume_step": null,
+      "blocking_issue": "M7 not complete"
+    },
+    "M9": {
+      "name": "Liu Hongju Founding Guardian Application",
+      "status": "blocked_waiting_for_M8",
+      "resume_step": null,
+      "blocking_issue": "M8 not complete"
+    }
+  },
+  "latest_external_public_key_sha256": null,
+  "latest_external_receipt_ids": [],
+  "latest_artifact_manifest_sha256": null,
+  "known_anomalies": [],
+  "stop_rules_triggered": [],
+  "must_not_store": [
+    "BEGIN PRIVATE KEY",
+    "authorship-private.pem contents",
+    "external private key",
+    "raw private key logs"
+  ],
+  "updated_at": null
+}
