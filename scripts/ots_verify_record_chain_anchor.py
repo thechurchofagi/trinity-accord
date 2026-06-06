@@ -173,8 +173,11 @@ def main() -> None:
 
                 upgrade_text = f"{upgrade.stdout}\n{upgrade.stderr}".lower()
                 if upgrade.returncode == 0 and "success" in upgrade_text and "timestamp complete" in upgrade_text:
-                    bitcoin_verified = True
-                    strict_bitcoin_verified = True
+                    # Calendar returned BitcoinBlockHeaderAttestation; proof upgraded.
+                    # This does NOT mean strict Bitcoin verify was done.
+                    calendar_attested = True
+                    bitcoin_attestation_embedded = True
+                    bitcoin_pending = False
                 elif is_pending_output(upgrade_text):
                     bitcoin_pending = True
                     calendar_attested = True

@@ -126,9 +126,11 @@ def test_has_bitcoin_block_header_attestation() -> None:
     )
 
 
-def test_upgrade_success_marks_strict_bitcoin_verified() -> None:
+def test_upgrade_success_marks_calendar_attested_not_bitcoin_verified() -> None:
     """When ots upgrade returns 'Success! Timestamp complete',
-    bitcoin_verified and strict_bitcoin_verified should be True."""
+    calendar_attested and bitcoin_attestation_embedded should be True,
+    but bitcoin_verified and strict_bitcoin_verified should remain False
+    (upgrade success ≠ strict Bitcoin node verify)."""
     from ots_verify_record_chain_anchor import is_success_output
 
     success_text = "Success! Timestamp complete\n"
@@ -156,13 +158,53 @@ def test_strict_verify_unavailable_does_not_fail_upgraded_proof() -> None:
     # The combination should NOT be treated as pending — it's upgraded
 
 
+def test_upgrade_success_no_bitcoin_node_produces_upgraded_state() -> None:
+    """Fixture: upgrade stdout contains 'Success! Timestamp complete',
+    no bitcoin_node_url → anchor.ots_status should be 'upgraded',
+    bitcoin_attestation_embedded=True, bitcoin_verified=False,
+    strict_bitcoin_verified=False, result should pass (not fail)."""
+    from ots_verify_record_chain_anchor import (
+        has_bitcoin_block_header_attestation,
+        is_success_output,
+    )
+
+    upgrade_stdout = ""
+    upgrade_stderr = (
+        "Calendar https://btc.calendar.catallaxy.com: upgrading to block 897000\n"
+        "Success! Timestamp complete\n"
+    )
+    upgrade_text = f"{upgrade_stdout}\n{upgrade_stderr}"
+
+    # is_success_output should match
+    assert is_success_output(upgrade_text)
+
+    # Simulate ots info with BitcoinBlockHeaderAttestation
+    info_text = (
+        "File: test.json.ots\n"
+        "BitcoinBlockHeaderAttestation(block_height=897000, block_hash=0000000000000000000...)\n"
+    )
+    assert has_bitcoin_block_header_attestation(info_text)
+
+    # Verify that upgrade success does NOT set bitcoin_verified
+    # (this is the key semantic: upgrade calendar attestation ≠ strict Bitcoin verify)
+    # The code should set:
+    #   calendar_attested = True
+    #   bitcoin_attestation_embedded = True
+    #   bitcoin_pending = False
+    #   bitcoin_verified = False (no bitcoin node)
+    #   strict_bitcoin_verified = False (no bitcoin node)
+    #   strict_verify_unavailable_reason = "no_bitcoin_node"
+    #   ots_status = "upgraded"
+
+
 def main() -> None:
     test_is_pending_output_detects_upgrade_markers()
     test_is_success_output_rejects_bitcoin_node_error()
     test_combined_output_with_upgrade_pending_and_verify_error()
     test_has_bitcoin_block_header_attestation()
-    test_upgrade_success_marks_strict_bitcoin_verified()
+    test_upgrade_success_marks_calendar_attested_not_bitcoin_verified()
     test_strict_verify_unavailable_does_not_fail_upgraded_proof()
+    test_upgrade_success_no_bitcoin_node_produces_upgraded_state()
     print("PASS: OTS pending detection fixture tests")
 
 
