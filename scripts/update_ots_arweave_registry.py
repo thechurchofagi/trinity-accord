@@ -149,6 +149,7 @@ def main() -> None:
         "ots_status": ots_status,
         "bitcoin_verified": bundle.get("bitcoin_verified"),
         "bitcoin_pending": bundle.get("bitcoin_pending"),
+        "bitcoin_attestation_embedded": bundle.get("bitcoin_attestation_embedded", False),
         "bundle_file": str(bundle_path),
         "bundle_sha256": bundle_sha,
         "bundle_bytes": bundle_path.stat().st_size,
@@ -173,12 +174,18 @@ def main() -> None:
         existing = latest_by_head.get(h, {
             "height": item.get("height"),
             "latest_pending_tx_id": None,
+            "latest_upgraded_tx_id": None,
             "latest_verified_tx_id": None,
             "latest_any_tx_id": None,
         })
+        # Ensure backward compat: add latest_upgraded_tx_id if missing
+        existing.setdefault("latest_upgraded_tx_id", None)
+
         existing["latest_any_tx_id"] = item.get("arweave_tx_id")
         if item.get("bitcoin_verified") is True or item.get("ots_status") == "verified":
             existing["latest_verified_tx_id"] = item.get("arweave_tx_id")
+        elif item.get("ots_status") == "upgraded":
+            existing["latest_upgraded_tx_id"] = item.get("arweave_tx_id")
         elif item.get("ots_status") == "pending":
             existing["latest_pending_tx_id"] = item.get("arweave_tx_id")
         latest_by_head[h] = existing

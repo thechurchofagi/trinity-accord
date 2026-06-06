@@ -63,6 +63,14 @@ def main() -> None:
         if entry.get("arweave_payload_sha256") != entry.get("arweave_readback_sha256"):
             errors.append(f"entry[{i}]: payload/readback sha mismatch")
 
+        # Validate upgraded entry fields
+        ots_status = entry.get("ots_status")
+        if ots_status == "upgraded":
+            if entry.get("bitcoin_attestation_embedded") is not True:
+                errors.append(f"entry[{i}]: upgraded entry must have bitcoin_attestation_embedded=true")
+            if entry.get("bitcoin_verified") is not False:
+                errors.append(f"entry[{i}]: upgraded entry must have bitcoin_verified=false")
+
         if args.verify_local_bundles:
             bundle_file = entry.get("bundle_file")
             if not bundle_file:

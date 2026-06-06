@@ -19,6 +19,7 @@ DEFAULT_RUN_ID = time.strftime("phase6-ots-watch-%Y%m%dT%H%M%SZ", time.gmtime())
 CONFIRM_PAID_UPLOAD = "I_UNDERSTAND_THIS_UPLOADS_THE_VERIFIED_OTS_PROOF_BUNDLE_TO_ARWEAVE"
 EXPECTED_OWNER = "r1EdzCQ9E7CaAOEywI5netR6EcSopNOa08oi2Coz68s"
 RECORD_TYPE = "ots_anchor_archive"
+RECORD_TYPE_UPGRADED = "ots_anchor_archive_upgraded"
 MAX_UPLOAD_USD = "0.10"
 SAFETY_MULTIPLIER = "1.20"
 
@@ -246,6 +247,10 @@ def has_verified_archive(registry: dict[str, Any], head_hash: str) -> bool:
     return bool(latest_for_head(registry, head_hash).get("latest_verified_tx_id"))
 
 
+def has_upgraded_archive(registry: dict[str, Any], head_hash: str) -> bool:
+    return bool(latest_for_head(registry, head_hash).get("latest_upgraded_tx_id"))
+
+
 def registry_has_bundle_sha(registry: dict[str, Any], bundle_sha: str) -> bool:
     return any(entry.get("bundle_sha256") == bundle_sha for entry in registry.get("entries", []))
 
@@ -374,6 +379,34 @@ def build_verified_bundle(anchor_rel: str) -> Path:
     bundle = read_json(out)
     if bundle.get("ots_status") != "verified" or bundle.get("bitcoin_verified") is not True:
         raise SystemExit("built bundle is not verified")
+    return out
+
+
+def build_upgraded_bundle(anchor_rel: str) -> Path:
+    """Build an upgraded bundle (calendar attested + Bitcoin block header embedded, but not strictly verified)."""
+    anchor = validate_anchor(anchor_rel)
+    if anchor.get("ots_status") != "upgraded":
+        raise SystemExit("cannot build upgraded bundle: anchor ots_status is not upgraded")
+    if anchor.get("bitcoin_attestation_embedded") is not True:
+        raise SystemExit("cannot build upgraded bundle: bitcoin_attestation_embedded is not true")
+
+    safe_stem = Path(anchor_rel).stem
+    out = ROOT / "record-chain/ots/arweave-bundles" / f"{safe_stem}.upgraded.arweave-bundle.json"
+
+    run_cmd([
+        sys.executable,
+        "scripts/build_ots_arweave_bundle.py",
+        "--anchor-file", anchor_rel,
+        "--out", rel(out),
+    ])
+
+    bundle = read_json(out)
+    if bundle.get("ots_status") != "upgraded":
+        raise SystemExit(f"built bundle ots_status is {bundle.get('ots_status')}, expected upgraded")
+    if bundle.get("bitcoin_attestation_embedded") is not True:
+        raise SystemExit("built bundle missing bitcoin_attestation_embedded")
+    if bundle.get("bitcoin_verified") is not False:
+        raise SystemExit("built bundle bitcoin_verified must be false for upgraded bundles")
     return out
 
 
@@ -619,26 +652,139 @@ def main() -> int:
 
     if result == "upgraded":
         # Proof upgraded with BitcoinBlockHeaderAttestation but no strict verify
+        if not args.enable_paid_upload:
+            assert_core_files_unchanged(core_before)
+            write_summary(log_dir, {
+                "schema": "trinity_phase6_summary.v1",
+                "run_id": args.run_id,
+                "result": "upgraded",
+                "anchor_file": anchor_rel,
+                "ots_status": anchor.get("ots_status"),
+                "bitcoin_verified": anchor.get("bitcoin_verified"),
+                "bitcoin_pending": anchor.get("bitcoin_pending"),
+                "calendar_attested": anchor.get("calendar_attested"),
+                "bitcoin_attestation_embedded": anchor.get("bitcoin_attestation_embedded"),
+                "strict_bitcoin_verified": anchor.get("strict_bitcoin_verified"),
+                "strict_verify_unavailable_reason": anchor.get("strict_verify_unavailable_reason"),
+                "paid_upload_performed": False,
+                "registry_updated": False,
+                "next_action": "strict_verify_when_bitcoin_node_available",
+                "main_chain_before_sha256": core_before["main_chain_sha256"],
+                "main_chain_after_sha256": sha256_file(MAIN_CHAIN),
+                "head_before_sha256": core_before["head_sha256"],
+                "head_after_sha256": sha256_file(HEAD),
+            })
+            return 0
+
+        # --enable-paid-upload: build upgraded bundle and upload to Arweave
+        bundle = build_upgraded_bundle(anchor_rel)
+        bundle_sha = sha256_file(bundle)
+        if not bundle_sha:
+            raise SystemExit("upgraded bundle missing")
+
+        registry = validate_registry()
+        if registry_has_bundle_sha(registry, bundle_sha):
+            raise SystemExit("upgraded bundle sha already exists in registry; refusing duplicate paid upload")
+
+        dry_dir = log_dir / "dry-run-cost"
+        run_cost_gate(
+            payload=bundle,
+            run_id=f"{args.run_id}-dry-run",
+            log_dir=dry_dir,
+            mode="dry_run",
+            jwk_path=None,
+            gateway=args.gateway_url,
+            readback_gateways=args.readback_gateways,
+            timeout=args.readback_timeout_seconds,
+            retry=args.readback_retry_seconds,
+        )
+        dry_cost = validate_dry_cost(dry_dir, bundle_sha)
+
+        if args.dry_run_cost_only:
+            assert_core_files_unchanged(core_before)
+            write_summary(log_dir, {
+                "schema": "trinity_phase6_summary.v1",
+                "run_id": args.run_id,
+                "result": "upgraded_cost_dry_run",
+                "bundle_file": rel(bundle),
+                "bundle_sha256": bundle_sha,
+                "dry_run_cost": dry_cost,
+                "paid_upload_performed": False,
+                "registry_updated": False,
+            })
+            return 0
+
+        if args.confirm_paid_upload != CONFIRM_PAID_UPLOAD:
+            raise SystemExit(f"paid upload requires --confirm-paid-upload {CONFIRM_PAID_UPLOAD!r}")
+
+        paid_dir = log_dir / "paid-upload"
+        run_cost_gate(
+            payload=bundle,
+            run_id=args.run_id,
+            log_dir=paid_dir,
+            mode="production",
+            jwk_path=args.jwk_path,
+            gateway=args.gateway_url,
+            readback_gateways=args.readback_gateways,
+            timeout=args.readback_timeout_seconds,
+            retry=args.readback_retry_seconds,
+        )
+
+        paid_cost, upload, readback = validate_paid(paid_dir, bundle_sha)
+        registry = update_registry(anchor_rel, bundle, paid_dir)
+
+        latest_item = latest_for_head(registry, head_hash)
+        if latest_item.get("latest_upgraded_tx_id") != upload.get("tx_id"):
+            raise SystemExit("latest_upgraded_tx_id not updated to upgraded tx")
+        if latest_item.get("latest_any_tx_id") != upload.get("tx_id"):
+            raise SystemExit("latest_any_tx_id not updated to upgraded tx")
+        if latest_item.get("latest_verified_tx_id") is not None:
+            raise SystemExit("latest_verified_tx_id must remain null for upgraded bundles")
+
         assert_core_files_unchanged(core_before)
+
         write_summary(log_dir, {
             "schema": "trinity_phase6_summary.v1",
             "run_id": args.run_id,
-            "result": "upgraded",
+            "result": "upgraded_archived",
             "anchor_file": anchor_rel,
-            "ots_status": anchor.get("ots_status"),
-            "bitcoin_verified": anchor.get("bitcoin_verified"),
-            "bitcoin_pending": anchor.get("bitcoin_pending"),
-            "calendar_attested": anchor.get("calendar_attested"),
-            "bitcoin_attestation_embedded": anchor.get("bitcoin_attestation_embedded"),
-            "strict_bitcoin_verified": anchor.get("strict_bitcoin_verified"),
-            "strict_verify_unavailable_reason": anchor.get("strict_verify_unavailable_reason"),
-            "paid_upload_performed": False,
-            "registry_updated": False,
-            "next_action": "strict_verify_when_bitcoin_node_available",
+            "bundle_file": rel(bundle),
+            "bundle_sha256": bundle_sha,
+            "ots_status": "upgraded",
+            "bitcoin_verified": False,
+            "bitcoin_attestation_embedded": True,
+            "strict_bitcoin_verified": False,
+            "cost_estimate": {
+                "decision": paid_cost.get("decision"),
+                "estimated_upload_cost_usd_with_buffer": paid_cost.get("estimated_upload_cost_usd_with_buffer"),
+                "balance_before_ar": paid_cost.get("balance_before_ar"),
+            },
+            "upload_result": {
+                "tx_id": upload.get("tx_id"),
+                "gateway_url": upload.get("gateway_url"),
+                "wallet_address": upload.get("wallet_address"),
+                "payload_sha256": upload.get("payload_sha256"),
+                "balance_before_ar": upload.get("balance_before_ar"),
+                "balance_after_ar": upload.get("balance_after_ar"),
+                "actual_delta_ar": upload.get("actual_delta_ar"),
+            },
+            "readback_result": {
+                "result": readback.get("result"),
+                "hash_match": readback.get("hash_match"),
+                "byte_for_byte_match": readback.get("byte_for_byte_match"),
+                "downloaded_sha256": readback.get("downloaded_sha256"),
+            },
+            "latest_pending_tx_id": latest_item.get("latest_pending_tx_id"),
+            "latest_upgraded_tx_id": latest_item.get("latest_upgraded_tx_id"),
+            "latest_verified_tx_id": latest_item.get("latest_verified_tx_id"),
+            "latest_any_tx_id": latest_item.get("latest_any_tx_id"),
+            "paid_upload_performed": True,
+            "registry_updated": True,
             "main_chain_before_sha256": core_before["main_chain_sha256"],
             "main_chain_after_sha256": sha256_file(MAIN_CHAIN),
             "head_before_sha256": core_before["head_sha256"],
             "head_after_sha256": sha256_file(HEAD),
+            "next_action": "strict_verify_when_bitcoin_node_available",
         })
         return 0
 

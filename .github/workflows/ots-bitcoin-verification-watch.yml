@@ -148,7 +148,7 @@ jobs:
           RESULT=$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1])).get("result","missing"))' "$SUMMARY")
           echo "Phase 6 result: $RESULT"
 
-          if [ "$RESULT" != "pass" ] && [ "$RESULT" != "verified" ] && [ "$RESULT" != "upgraded" ]; then
+          if [ "$RESULT" != "pass" ] && [ "$RESULT" != "verified" ] && [ "$RESULT" != "upgraded" ] && [ "$RESULT" != "upgraded_archived" ]; then
             echo "No production commit for result=$RESULT"
             exit 0
           fi
@@ -172,6 +172,8 @@ jobs:
             git commit -m "chore: archive verified OTS proof on Arweave"
           elif [ "$RESULT" = "verified" ]; then
             git commit -m "chore: sync verified OTS anchor and latest status"
+          elif [ "$RESULT" = "upgraded_archived" ]; then
+            git commit -m "chore: archive upgraded OTS proof on Arweave"
           else
             git commit -m "chore: sync upgraded OTS anchor and latest status"
           fi

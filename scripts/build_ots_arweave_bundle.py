@@ -100,6 +100,7 @@ def main() -> None:
         "ots_status": anchor.get("ots_status"),
         "bitcoin_verified": anchor.get("bitcoin_verified"),
         "bitcoin_pending": anchor.get("bitcoin_pending"),
+        "bitcoin_attestation_embedded": anchor.get("bitcoin_attestation_embedded", False),
         "created_at": utc_now(),
         "source_anchor_file": str(anchor_path),
         "files": files,
