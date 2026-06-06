@@ -1,9 +1,9 @@
 {
   "anchored_file_sha256": "6bfbc5b03f6666e223a1605b31015b0932ee3f16ecd62f6fef240a4fe135c3e5",
-  "bitcoin_attestation_embedded": false,
-  "bitcoin_pending": true,
-  "bitcoin_verified": false,
-  "calendar_attested": false,
+  "bitcoin_attestation_embedded": true,
+  "bitcoin_pending": false,
+  "bitcoin_verified": true,
+  "calendar_attested": true,
   "chain_id": "trinity-record-chain-main",
   "created_at": "2026-06-05T10:14:35Z",
   "entry_count": 1,
@@ -12,10 +12,11 @@
   "latest_anchor_file": "record-chain/ots/anchors/height-0-6ca53ba7944fe474-6bfbc5b03f6666e2.anchor.json",
   "latest_anchored_file": "record-chain/ots/anchors/height-0-6ca53ba7944fe474-6bfbc5b03f6666e2.record-chain-head-commitment.json",
   "latest_ots_file": "record-chain/ots/anchors/height-0-6ca53ba7944fe474-6bfbc5b03f6666e2.record-chain-head-commitment.json.ots",
-  "ots_status": "pending",
+  "ots_status": "verified",
   "schema": "trinity_record_chain_ots_latest.v1",
   "semantics": "Latest OTS anchor for a stable Record-Chain head commitment snapshot.",
-  "strict_bitcoin_verified": false,
+  "strict_bitcoin_verified": true,
   "strict_verify_unavailable_reason": null,
-  "updated_at": "2026-06-05T10:14:35Z"
+  "updated_at": "2026-06-06T00:22:19Z",
+  "verified_at": "2026-06-06T00:22:19Z"
 }
