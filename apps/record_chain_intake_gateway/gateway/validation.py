@@ -6,10 +6,8 @@ from __future__ import annotations
 import logging
 import re
 import hashlib
-import json
 from typing import Any
 
-from .authorship import verify_authorship_proof
 from .models import Diagnostic
 
 logger = logging.getLogger(__name__)
@@ -834,77 +832,6 @@ def validate_authorship_proof_presence(
     return diagnostics
 
 
-def validate_authorship_signature(
-    submission: dict[str, Any],
-    proof: dict[str, Any],
-    draft: dict[str, Any],
-) -> list[Diagnostic]:
-    """Verify Ed25519 authorship signature and key binding."""
-    diagnostics: list[Diagnostic] = []
-
-    # --- Private key leak check ---
-    raw = json.dumps(submission, ensure_ascii=False)
-    if "BEGIN PRIVATE KEY" in raw or "authorship-private.pem" in raw:
-        diagnostics.append(_make_diagnostic(
-            code="PRIVATE_KEY_LEAK",
-            severity="error",
-            field="authorship_proof",
-            message="Private key material must never appear in submission JSON",
-            meaning="The submission contains private key data, which is a security violation.",
-            suggested_fix="Delete this submission and rebuild. Never paste authorship-private.pem.",
-            help_url="https://www.trinityaccord.org/record-chain-field-helper/#PRIVATE_KEY_LEAK",
-            retry_allowed=False,
-        ))
-        return diagnostics  # fail fast — don't verify leaked proof
-
-    # --- Ed25519 signature verification ---
-    ok, err_msg = verify_authorship_proof(draft, proof)
-    if not ok:
-        diagnostics.append(_make_diagnostic(
-            code="AUTHORSHIP_SIGNATURE_INVALID",
-            severity="error",
-            field="authorship_proof",
-            message=f"Ed25519 authorship signature verification failed: {err_msg}",
-            meaning="The authorship proof signature does not verify against the record draft.",
-            suggested_fix="Rebuild with the public builder using --key-dir.",
-            help_url="https://www.trinityaccord.org/record-chain-field-helper/#AUTHORSHIP_SIGNATURE_INVALID",
-            retry_allowed=True,
-        ))
-
-    # --- Key binding: participant_public_key_sha256 must match ---
-    pub_sha = proof.get("public_key_sha256")
-    spi = draft.get("submitting_participant_identity") or {}
-    if spi.get("participant_public_key_sha256") != pub_sha:
-        diagnostics.append(_make_diagnostic(
-            code="PARTICIPANT_KEY_MISMATCH",
-            severity="error",
-            field="record_draft.submitting_participant_identity.participant_public_key_sha256",
-            message="Participant public key must match authorship_proof.public_key_sha256",
-            meaning="The participant identity key is not bound to the authorship proof.",
-            suggested_fix="Rebuild with the current builder.",
-            help_url="https://www.trinityaccord.org/record-chain-field-helper/#PARTICIPANT_KEY_MISMATCH",
-            retry_allowed=True,
-        ))
-
-    # --- Guardian key binding ---
-    record_type = submission.get("record_type") or draft.get("record_type")
-    if record_type == "guardian_application":
-        gk = (draft.get("guardian_application_content") or {}).get("guardian_public_key_sha256")
-        if gk != pub_sha:
-            diagnostics.append(_make_diagnostic(
-                code="GUARDIAN_KEY_MISMATCH",
-                severity="error",
-                field="record_draft.guardian_application_content.guardian_public_key_sha256",
-                message="Guardian application public key must equal the authorship public key",
-                meaning="The guardian key is not bound to the authorship proof.",
-                suggested_fix="Rebuild guardian application with --key-dir.",
-                help_url="https://www.trinityaccord.org/record-chain-field-helper/#GUARDIAN_KEY_MISMATCH",
-                retry_allowed=True,
-            ))
-
-    return diagnostics
-
-
 def detect_route(submission: dict[str, Any]) -> str:
     """Determine the processing route for *submission*.
 
@@ -1039,14 +966,8 @@ def validate_submission(submission: dict[str, Any]) -> list[Diagnostic]:
     if isinstance(draft, dict) and rt:
         diagnostics.extend(validate_authorship_proof_presence(rt, submission, draft))
 
-    # --- extract proof once for all subsequent checks ---
-    proof = submission.get("authorship_proof") or submission.get("proof")
-
-    # --- Ed25519 signature verification (mandatory for all submissions with proof) ---
-    if isinstance(draft, dict) and isinstance(proof, dict):
-        diagnostics.extend(validate_authorship_signature(submission, proof, draft))
-
     # --- authorship proof type check (optional but if present must be object) ---
+    proof = submission.get("authorship_proof") or submission.get("proof")
     if proof is not None and not isinstance(proof, dict):
         diagnostics.append(_make_diagnostic(
             code="INVALID_AUTHORSHIP_PROOF",

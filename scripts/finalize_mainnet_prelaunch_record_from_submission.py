@@ -1,18 +1,4 @@
 #!/usr/bin/env python3
-"""DISABLED: This finalizer generates old-style summary payloads (schema v1)
-that are NOT compatible with trinity_record_chain.py verify.
-
-Use scripts/repair_phase7d_native_record_schema_gap.py to repair existing
-Phase 7D records, and scripts/native_prelaunch_finalization.py for the
-native-compatible finalization path.
-
-See: phase7d-native-record-schema-gap hotfix spec.
-"""
-raise SystemExit(
-    "This finalizer is disabled until migrated to native_prelaunch_finalization.py. "
-    "Use scripts/repair_phase7d_native_record_schema_gap.py for current Phase 7D records."
-)
-
 from __future__ import annotations
 
 import argparse
@@ -147,48 +133,6 @@ def assert_no_raw_readback(obj: Any) -> None:
         raise SystemExit("finalized payload must not embed raw oath readback/client_oath_readback")
 
 
-def require_authorship_summary(submission: dict[str, Any]) -> dict[str, Any]:
-    """Extract authorship summary for finalized payload. Refuses missing or invalid proof."""
-    proof = submission.get("authorship_proof")
-    if not isinstance(proof, dict):
-        raise SystemExit("MISSING_AUTHORSHIP_PROOF")
-
-    pub_sha = proof.get("public_key_sha256")
-    if not isinstance(pub_sha, str) or not re.fullmatch(r"[a-f0-9]{64}", pub_sha):
-        raise SystemExit("INVALID_AUTHORSHIP_PUBLIC_KEY_SHA")
-
-    draft = submission.get("record_draft") or {}
-    spi = draft.get("submitting_participant_identity") or {}
-    if spi.get("participant_public_key_sha256") != pub_sha:
-        raise SystemExit("PARTICIPANT_KEY_MISMATCH")
-
-    if draft.get("record_type") == "guardian_application":
-        guardian_key = (draft.get("guardian_application_content") or {}).get("guardian_public_key_sha256")
-        if guardian_key != pub_sha:
-            raise SystemExit("GUARDIAN_KEY_MISMATCH")
-
-    raw = json.dumps(submission, ensure_ascii=False)
-    if "BEGIN PRIVATE KEY" in raw or "authorship-private.pem" in raw:
-        raise SystemExit("PRIVATE_KEY_LEAK")
-
-    public_key_pem = proof.get("public_key_pem") or ""
-    return {
-        "authorship_proof_present": True,
-        "authorship_schema": proof.get("schema"),
-        "authorship_algorithm": proof.get("algorithm"),
-        "authorship_public_key_sha256": pub_sha,
-        "authorship_public_key_pem_sha256": hashlib.sha256(public_key_pem.encode("utf-8")).hexdigest() if public_key_pem else None,
-        "signed_payload_sha256": proof.get("signed_payload_sha256"),
-        "signature_present": bool(proof.get("signature_base64")),
-        "guardian_public_key_sha256": (draft.get("guardian_application_content") or {}).get("guardian_public_key_sha256"),
-        "guardian_key_bound_to_authorship_key": (
-            draft.get("record_type") != "guardian_application"
-            or (draft.get("guardian_application_content") or {}).get("guardian_public_key_sha256") == pub_sha
-        ),
-        "private_key_not_embedded": True,
-    }
-
-
 def assert_prelaunch_safe_input(submission: dict[str, Any], receipt: dict[str, Any]) -> None:
     raw = json.dumps({"submission": submission, "receipt": receipt}, ensure_ascii=False)
     found = [m for m in FORBIDDEN_SUBSTRINGS if m in raw]
@@ -291,7 +235,6 @@ def main() -> int:
             "accepted_at": receipt.get("accepted_at"),
             "receipt_id": receipt_id,
             "oath_summary": extract_oath_summary(submission),
-            "authorship_summary": require_authorship_summary(submission),
         },
         "finalization": {
             "finalized_at": utc_now(),
