@@ -2,9 +2,32 @@
   "authority": "derived index; main.chain.jsonl is authoritative",
   "chain_id": "trinity-record-chain-main",
   "chain_version": 1,
-  "entries": [],
-  "entry_count": 0,
-  "generated_at": "2026-06-05T10:14:30Z",
+  "entries": [
+    {
+      "arweave_tx_id": null,
+      "entry_hash": "47fee73f9dcd539bcc95db422c283f1b2fa5921bf5bd980d2d55c580d1c29c3b",
+      "finalized_at": "2026-06-06T04:46:32Z",
+      "global_height": 3,
+      "payload_canonical_sha256": "10e53ecc63034fadfabc3fff76ffa246e4b0e9c4c39e983e60e01e3a65f3c1ba",
+      "payload_raw_sha256": "5131899064181bc62f48b5054ce04d1449b4866edad1b3c96c1d845347b980e6",
+      "previous_entry_hash": "9f528126c0ef00f08cbff79ee3c5d9120a5a1a0c19663f092a79ed901a88035a",
+      "receipt_id": null,
+      "record_id": "R-000000003"
+    },
+    {
+      "arweave_tx_id": null,
+      "entry_hash": "ac53ae818b13c6933b94b306d47c66d02838d1cae00b001c46152bfd7205df4f",
+      "finalized_at": "2026-06-06T04:46:33Z",
+      "global_height": 9,
+      "payload_canonical_sha256": "ff07a5a5a75bd881f0c211ca44615c97fcf1ca3c9a92c98aa1de9edc004ea8db",
+      "payload_raw_sha256": "ce0b52075f5101424d6111ea37881432a1f29e9688ac5b6ef2c6a6c175cfe199",
+      "previous_entry_hash": "5fec8b6e093936d452f43c25662d207f198fa3d25f7a5709317c063100db8b3a",
+      "receipt_id": null,
+      "record_id": "R-000000009"
+    }
+  ],
+  "entry_count": 2,
+  "generated_at": "2026-06-06T04:49:13Z",
   "index_file": "record-chain-index.guardian_application.json",
   "record_type": "guardian_application",
   "record_type_slug": "guardian_application",
