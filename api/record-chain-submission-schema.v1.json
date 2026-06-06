@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "trinityaccord.record-chain-submission.v1",
   "title": "Record-Chain Submission",
-  "description": "Schema for public submissions to the Record-Chain Intake Gateway on Render. This is the only public submission method for external agents.",
+  "description": "Schema for public submissions to the Record-Chain Intake Gateway. All public submissions require Ed25519 authorship_proof for key continuity and future identity claim.",
   "type": "object",
   "required": [
     "schema",
@@ -12,7 +12,8 @@
     "record_draft",
     "builder",
     "client_context",
-    "submission_boundary"
+    "submission_boundary",
+    "authorship_proof"
   ],
   "if": {
     "properties": {

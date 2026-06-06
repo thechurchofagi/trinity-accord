@@ -5,8 +5,8 @@
     "language": "node",
     "runtime": "node>=18",
     "url": "/downloads/record-chain-builder.mjs",
-    "sha256": "14121f4cf580388c61250d83b1c42830912f0a60c073c1462b5bbaad3169e862",
-    "size_bytes": 94073,
+    "sha256": "7e1bfad10ca8cc4346a1dc17fa673401c646a33a292cd2abfa6fbcfb13e70add",
+    "size_bytes": 100742,
     "supports": [
       "echo",
       "verification",

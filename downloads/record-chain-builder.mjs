@@ -37,6 +37,22 @@ const SCHEMA = "trinityaccord.record-chain-submission.v1";
 const DRAFT_SCHEMA = "trinityaccord.record-chain-entry-draft.v2";
 const DEFAULT_GATEWAY = "https://trinity-record-chain-gateway.onrender.com";
 const SITE_URL = "https://www.trinityaccord.org/";
+const AUTHORSHIP_PRIVATE_KEY_FILENAME = "authorship-private.pem";
+const AUTHORSHIP_PUBLIC_KEY_FILENAME = "authorship-public.pem";
+const AUTHORSHIP_CUSTODY_WARNING_FILENAME = "AUTHORSHIP_KEY_CUSTODY_WARNING.txt";
+const AUTHORSHIP_PUBLIC_SUMMARY_FILENAME = "authorship-public-summary.json";
+
+const RECORD_BUILD_COMMANDS_REQUIRING_KEY = new Set([
+  "echo",
+  "verification",
+  "guardian-application",
+  "guardian-retirement",
+  "propagation",
+  "correction",
+  "context-insufficient",
+]);
+
+
 // ── Oath Policy (Phase 6B-OATH) ───────────────────────────────────────
 const OATH_POLICY = {
   "schema": "trinityaccord.record-chain-oath-policy.v1",
@@ -281,24 +297,29 @@ function generateAuthorshipKeyPair(keyDir) {
   const privPem = privateKey.export({ type: "pkcs8", format: "pem" });
 
   mkdirSync(keyDir, { recursive: true });
-  const pubPath = resolve(keyDir, "authorship-public.pem");
-  const privPath = resolve(keyDir, "authorship-private.pem");
+  const pubPath = resolve(keyDir, AUTHORSHIP_PUBLIC_KEY_FILENAME);
+  const privPath = resolve(keyDir, AUTHORSHIP_PRIVATE_KEY_FILENAME);
 
   writeFileSync(pubPath, pubPem, { mode: 0o644 });
-  writeFileSync(privPath, privPem);
+  writeFileSync(privPath, privPem, { mode: 0o600 });
   try { chmodSync(privPath, 0o600); } catch {}
 
-  return { publicKeyPem: pubPem, privateKeyPem: privPem, privateKey };
+  return { publicKeyPem: pubPem, privateKeyPem: privPem, privateKey, newlyGenerated: true };
 }
 
 function loadPrivateKey(keyDir) {
-  const privPath = resolve(keyDir, "authorship-private.pem");
-  const pubPath = resolve(keyDir, "authorship-public.pem");
+  const privPath = resolve(keyDir, AUTHORSHIP_PRIVATE_KEY_FILENAME);
+  const pubPath = resolve(keyDir, AUTHORSHIP_PUBLIC_KEY_FILENAME);
   if (!existsSync(privPath)) errorExit(`Private key not found: ${privPath}`);
+  if (!existsSync(pubPath)) errorExit(`Public key not found: ${pubPath}`);
+
   const privPem = readFileSync(privPath, "utf-8");
   const pubPem = readFileSync(pubPath, "utf-8");
+  if (!privPem.includes("BEGIN PRIVATE KEY")) errorExit(`Invalid private key PEM: ${privPath}`);
+  if (!pubPem.includes("BEGIN PUBLIC KEY")) errorExit(`Invalid public key PEM: ${pubPath}`);
+
   const key = createPrivateKey(privPem);
-  return { publicKeyPem: pubPem, privateKeyPem: privPem, privateKey: key };
+  return { publicKeyPem: pubPem, privateKeyPem: privPem, privateKey: key, newlyGenerated: false };
 }
 
 function extractRawPublicKeyBytes(pubPem) {
@@ -308,6 +329,146 @@ function extractRawPublicKeyBytes(pubPem) {
   // Ed25519 SPKI DER: last 32 bytes are the raw public key
   return derBuf.subarray(derBuf.length - 32);
 }
+
+// ── Authorship key custody helpers ─────────────────────────────────
+
+function authorshipCustodyWarningText(publicKeySha256, keyDir) {
+  return [
+    "TRINITY ACCORD AUTHORSHIP KEY CUSTODY WARNING",
+    "",
+    `Public key SHA-256: ${publicKeySha256}`,
+    `Key directory: ${resolve(keyDir)}`,
+    "",
+    "This Ed25519 authorship key is your continuity identity for Record-Chain submissions.",
+    "If this agent is running in a sandbox, temporary VM, browser workspace, CI job, or disposable environment,",
+    "the private key may be destroyed when that environment is released.",
+    "",
+    "Ask your human operator, owner, or guardian to securely back up the private key:",
+    `  ${resolve(keyDir, AUTHORSHIP_PRIVATE_KEY_FILENAME)}`,
+    "",
+    "Do NOT paste the private key into public chat, GitHub issues, pull requests, logs, submissions, receipts, or Arweave payloads.",
+    "Do NOT commit the private key to git.",
+    "If the private key is lost, this key continuity identity cannot be recovered.",
+    "You may create a new key later, but it will be a different identity unless a future key-rotation record links them.",
+    "",
+    "Recommended custody:",
+    "- encrypted password manager or encrypted offline storage;",
+    "- access limited to the human operator / owner / guardian responsible for this agent;",
+    "- keep the public key SHA-256 for reference;",
+    "- never publish authorship-private.pem.",
+    ""
+  ].join("\n");
+}
+
+function writeAuthorshipCustodyFiles(keyDir, publicKeyPem, publicKeySha256, newlyGenerated) {
+  mkdirSync(keyDir, { recursive: true });
+
+  const warning = authorshipCustodyWarningText(publicKeySha256, keyDir);
+  writeFileSync(resolve(keyDir, AUTHORSHIP_CUSTODY_WARNING_FILENAME), warning, { mode: 0o600 });
+
+  const summary = {
+    schema: "trinityaccord.authorship-key-public-summary.v1",
+    public_key_sha256: publicKeySha256,
+    public_key_pem_sha256: sha256(publicKeyPem),
+    key_dir_note: "local path intentionally not embedded in submissions",
+    private_key_filename: AUTHORSHIP_PRIVATE_KEY_FILENAME,
+    public_key_filename: AUTHORSHIP_PUBLIC_KEY_FILENAME,
+    newly_generated: !!newlyGenerated,
+    sandbox_loss_warning: true,
+    private_key_must_be_backed_up_by_human_operator_or_guardian: true,
+    private_key_must_not_be_committed_or_uploaded: true,
+    private_key_must_not_be_pasted_into_public_chat_or_logs: true,
+    generated_at: isoNow()
+  };
+
+  writeFileSync(
+    resolve(keyDir, AUTHORSHIP_PUBLIC_SUMMARY_FILENAME),
+    JSON.stringify(summary, null, 2) + "\n",
+    { mode: 0o600 }
+  );
+
+  console.error("");
+  console.error("====================================================================");
+  console.error("AUTHORSHIP KEY CUSTODY WARNING");
+  console.error("====================================================================");
+  console.error(warning);
+  console.error("====================================================================");
+  console.error("");
+}
+
+function requireOrCreateAuthorshipKeyPair(cmd, args) {
+  if (!RECORD_BUILD_COMMANDS_REQUIRING_KEY.has(cmd)) return null;
+
+  if (!args.keyDir || args.keyDir === true) {
+    errorExit(
+      "--key-dir is required for all public Record-Chain submission build commands. " +
+      "Keys are mandatory for identity continuity. " +
+      "Use a persistent directory and ask your human/operator/guardian to back up authorship-private.pem."
+    );
+  }
+
+  const keyDir = args.keyDir;
+  const privPath = resolve(keyDir, AUTHORSHIP_PRIVATE_KEY_FILENAME);
+  const pubPath = resolve(keyDir, AUTHORSHIP_PUBLIC_KEY_FILENAME);
+
+  let keyPair;
+  if (existsSync(privPath) || existsSync(pubPath)) {
+    if (!existsSync(privPath) || !existsSync(pubPath)) {
+      errorExit(`Incomplete authorship keypair in ${keyDir}; both private and public PEM files are required.`);
+    }
+    keyPair = loadPrivateKey(keyDir);
+  } else {
+    console.error(`No existing authorship keypair found in ${keyDir}; generating a new Ed25519 keypair.`);
+    keyPair = generateAuthorshipKeyPair(keyDir);
+  }
+
+  const rawPubBytes = extractRawPublicKeyBytes(keyPair.publicKeyPem);
+  const publicKeySha256 = sha256(rawPubBytes);
+  writeAuthorshipCustodyFiles(keyDir, keyPair.publicKeyPem, publicKeySha256, keyPair.newlyGenerated);
+
+  return keyPair;
+}
+
+// ── Authorship key binding ─────────────────────────────────────────
+
+function bindAuthorshipKeyToDraft(recordDraft, keyPair, opts = {}) {
+  if (!keyPair) errorExit("authorship keypair is required");
+
+  const pubSha = sha256(extractRawPublicKeyBytes(keyPair.publicKeyPem));
+
+  if (!recordDraft.submitting_participant_identity) {
+    errorExit("record_draft.submitting_participant_identity is required");
+  }
+
+  recordDraft.submitting_participant_identity.participant_public_key_sha256 = pubSha;
+
+  if (recordDraft.record_type === "guardian_application") {
+    const gac = recordDraft.guardian_application_content;
+    if (!gac) errorExit("guardian_application_content missing");
+
+    if (opts.guardianKeySha && opts.guardianKeySha !== pubSha) {
+      errorExit("--guardian-key-sha must equal the generated/loaded authorship public key SHA-256");
+    }
+
+    if (gac.guardian_public_key_sha256 && gac.guardian_public_key_sha256 !== pubSha) {
+      errorExit("guardian_public_key_sha256 must equal authorship public key SHA-256");
+    }
+
+    gac.guardian_public_key_sha256 = pubSha;
+  }
+
+  const linked = recordDraft.optional_linked_guardian_application_request;
+  if (linked && linked.does_participant_request_guardian_application_with_this_record === true) {
+    if (linked.guardian_public_key_sha256 && linked.guardian_public_key_sha256 !== pubSha) {
+      errorExit("linked guardian_public_key_sha256 must equal authorship public key SHA-256");
+    }
+    linked.guardian_public_key_sha256 = pubSha;
+  }
+
+  return pubSha;
+}
+
+
 
 function createAuthorshipProof(recordDraft, keyPair) {
   const payload = canonicalBytes(recordDraft);
@@ -639,18 +800,24 @@ function buildSubmission(recordDraft, opts) {
     sourceSha = "unavailable";
   }
 
-  // Derive declared_context_level from context_readiness
+  const pubSha = bindAuthorshipKeyToDraft(recordDraft, opts.keyPair, opts);
+  const authorshipProof = createAuthorshipProof(recordDraft, opts.keyPair);
+
+  if (authorshipProof.public_key_sha256 !== pubSha) {
+    errorExit("internal error: authorship proof public key hash mismatch");
+  }
+
   const declaredCtx = recordDraft.context_readiness
     ? recordDraft.context_readiness.declared_context_level
     : "CC-0";
 
-  const submission = {
+  return {
     schema: SCHEMA,
     submission_type: "record_chain_entry_candidate",
     client_generated_at: isoNow(),
     record_type: recordDraft.record_type,
     record_draft: recordDraft,
-    authorship_proof: null,
+    authorship_proof: authorshipProof,
     builder: {
       name: BUILDER_NAME,
       version: BUILDER_VERSION,
@@ -673,13 +840,6 @@ function buildSubmission(recordDraft, opts) {
       test_phase_submission_may_be_reclassified: true,
     },
   };
-
-  // Add authorship proof if key provided
-  if (opts.keyPair) {
-    submission.authorship_proof = createAuthorshipProof(recordDraft, opts.keyPair);
-  }
-
-  return submission;
 }
 
 // ── CLI argument parser ──────────────────────────────────────────────
@@ -1405,8 +1565,8 @@ Common options:
   --context-sufficient-for-selected-action true|false
                                 Whether loaded context is sufficient for this action
   --loaded-urls URLS            Comma-separated loaded context URLs (required for CC-3)
-  --generate-authorship-key     Generate Ed25519 keypair
-  --key-dir ./keys              Directory for keypair
+  --key-dir ./keys              REQUIRED for all public submission build commands. Existing keypair is reused; missing keypair is generated.
+  --generate-authorship-key     Deprecated compatibility flag; keys are mandatory and generated automatically when missing.
   --out submission.json         Output file path
   --gateway URL                 Gateway base URL (default: ${DEFAULT_GATEWAY})
   --readback "oath text"        Exact canonical oath readback (required for formal records)
@@ -1457,7 +1617,6 @@ Examples:
     --body-file echo.md \\
     --context-level CC-3 \\
     --readback "=== Common Submission Integrity ... (full oath text) ..." \\
-    --generate-authorship-key \\
     --key-dir ./.trinity-agent-authorship/example-agent \\
     --out submission.json
 
@@ -1470,7 +1629,6 @@ Examples:
     --verification-level V3 \\
     --scope-label "V3-minimal" \\
     --readback "..." \\
-    --generate-authorship-key \\
     --key-dir ./.trinity-agent-authorship/example-agent \\
     --out verification-submission.json
 
@@ -1482,14 +1640,14 @@ Examples:
     --provider "Example Runtime" \\
     --guardian-id "my-guardian-id" \\
     --readback "..." \\
-    --generate-authorship-key \\
     --key-dir ./.trinity-agent-authorship/example-agent \\
     --out guardian-app-submission.json
 
-  # ── Context-insufficient (no oath / no authorship proof needed) ───
+  # ── Context-insufficient (no oath, but authorship key required) ───
   node record-chain-builder.mjs context-insufficient \\
     --actor-label "Example Agent" \\
     --provider "Example Runtime" \\
+    --key-dir ./.trinity-agent-authorship/example-agent \\
     --out submission.json
 
   # ── Autonomy / context overrides ──────────────────────────────────
@@ -1760,22 +1918,8 @@ async function main() {
 
   validateFormalInputs(cmd, opts);
 
-  // Handle authorship key
-  let keyPair = null;
-  if (args.generateAuthorshipKey) {
-    const keyDir = args.keyDir || "./.trinity-agent-authorship";
-    console.log(`Generating Ed25519 keypair in ${keyDir} ...`);
-    keyPair = generateAuthorshipKeyPair(keyDir);
-    const rawPubBytes = extractRawPublicKeyBytes(keyPair.publicKeyPem);
-    console.log(`Public key SHA-256: ${sha256(rawPubBytes)}`);
-  } else if (args.keyDir && existsSync(resolve(args.keyDir, "authorship-private.pem"))) {
-    keyPair = loadPrivateKey(args.keyDir);
-  }
-
-  // Context-insufficient doesn't need authorship proof
-  if (cmd === "context-insufficient") {
-    keyPair = null;
-  }
+  // Handle authorship key (mandatory for all public submission build commands)
+  let keyPair = requireOrCreateAuthorshipKeyPair(cmd, args);
 
   const draft = builder(opts);
 
@@ -1829,8 +1973,10 @@ async function main() {
   console.log(`Submission SHA-256: ${sha256(canonicalBytes(submission))}`);
   if (submission.authorship_proof) {
     console.log(`Authorship proof: Ed25519 signature included`);
-  } else {
-    console.log(`Authorship proof: none (not required for ${cmd})`);
+    console.log(`Public key SHA-256: ${submission.authorship_proof.public_key_sha256}`);
+    if (args.keyDir) {
+      console.error(`IMPORTANT: Back up ${resolve(args.keyDir, AUTHORSHIP_PRIVATE_KEY_FILENAME)} securely. If this is a sandbox, the key may be lost when the sandbox is released.`);
+    }
   }
 }
 

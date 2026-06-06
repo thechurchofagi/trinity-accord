@@ -9,6 +9,7 @@ import hashlib
 from typing import Any
 
 from .models import Diagnostic
+from .authorship import verify_authorship_proof_submission
 
 logger = logging.getLogger(__name__)
 
@@ -805,26 +806,21 @@ def validate_verification_rules(draft: dict[str, Any]) -> list[Diagnostic]:
 def validate_authorship_proof_presence(
     record_type: str, submission: dict[str, Any], draft: dict[str, Any]
 ) -> list[Diagnostic]:
-    """Require authorship_proof for formal record types."""
+    """Require top-level authorship_proof for all public record types."""
     diagnostics: list[Diagnostic] = []
-    if record_type not in _FORMAL_RECORD_TYPES:
+    if record_type not in ALLOWED_RECORD_TYPES:
         return diagnostics
 
-    proof = (
-        submission.get("authorship_proof")
-        or submission.get("proof")
-        or (draft.get("authorship_proof") if isinstance(draft, dict) else None)
-        or (draft.get("proof") if isinstance(draft, dict) else None)
-    )
+    proof = submission.get("authorship_proof")
 
     if not isinstance(proof, dict):
         diagnostics.append(_make_diagnostic(
             code="MISSING_AUTHORSHIP_PROOF",
             severity="error",
             field="authorship_proof",
-            message=f"Formal record_type '{record_type}' requires authorship_proof",
-            meaning="Echo, Verification, Guardian Application, and other formal records must be signed.",
-            suggested_fix="Run the builder with --generate-authorship-key --key-dir <dir>, or provide a valid Ed25519 authorship proof.",
+            message=f"Public record_type '{record_type}' requires top-level authorship_proof",
+            meaning="All public Record-Chain submissions must be signed with an Ed25519 authorship key.",
+            suggested_fix="Rebuild with the current builder using --key-dir <persistent-directory>.",
             help_url="https://www.trinityaccord.org/record-chain-field-helper/#MISSING_AUTHORSHIP_PROOF",
             retry_allowed=True,
         ))
@@ -966,8 +962,8 @@ def validate_submission(submission: dict[str, Any]) -> list[Diagnostic]:
     if isinstance(draft, dict) and rt:
         diagnostics.extend(validate_authorship_proof_presence(rt, submission, draft))
 
-    # --- authorship proof type check (optional but if present must be object) ---
-    proof = submission.get("authorship_proof") or submission.get("proof")
+    # --- authorship proof type check (top-level only) ---
+    proof = submission.get("authorship_proof")
     if proof is not None and not isinstance(proof, dict):
         diagnostics.append(_make_diagnostic(
             code="INVALID_AUTHORSHIP_PROOF",
@@ -977,6 +973,19 @@ def validate_submission(submission: dict[str, Any]) -> list[Diagnostic]:
             meaning="If provided, authorship_proof must be a JSON object.",
             suggested_fix="Change authorship_proof to a JSON object or remove it.",
         ))
+
+    # --- Ed25519 authorship proof verification ---
+    if isinstance(draft, dict) and rt in ALLOWED_RECORD_TYPES:
+        ok, code, message = verify_authorship_proof_submission(submission)
+        if not ok:
+            diagnostics.append(_make_diagnostic(
+                code=code or "AUTHORSHIP_VERIFICATION_FAILED",
+                severity="error",
+                field="authorship_proof",
+                message=message or "Authorship proof verification failed.",
+                meaning="Public submissions must be signed by an Ed25519 authorship key.",
+                suggested_fix="Rebuild the submission with the current builder using --key-dir <persistent-directory>.",
+            ))
 
     return diagnostics
 

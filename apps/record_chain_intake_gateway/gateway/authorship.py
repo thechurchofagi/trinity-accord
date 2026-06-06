@@ -16,6 +16,8 @@ from cryptography.hazmat.primitives.serialization import (
     load_pem_public_key,
 )
 
+import json
+
 from .canonical import canonical_bytes, sha256_bytes
 
 logger = logging.getLogger(__name__)
@@ -187,3 +189,112 @@ def verify_authorship_proof(
         return False, f"Verification error: {exc}"
 
     return True, None
+
+
+def verify_authorship_proof_submission(
+    submission: dict[str, Any],
+) -> tuple[bool, str | None, str | None]:
+    """Verify an Ed25519 authorship proof from a full submission dict.
+
+    This is the submission-level entry point used by the gateway intake.
+    It extracts the proof from the submission, validates structure, verifies
+    the signature, and checks key bindings.
+
+    Parameters
+    ----------
+    submission:
+        The full submission dict containing ``authorship_proof`` and ``record_draft``.
+
+    Returns
+    -------
+    (ok, error_code, error_message)
+        ``ok`` is ``True`` when the proof is valid; ``error_code`` and
+        ``error_message`` are ``None`` on success.
+    """
+    proof = submission.get("authorship_proof")
+    if not isinstance(proof, dict):
+        return False, "MISSING_AUTHORSHIP_PROOF", "Missing top-level authorship_proof."
+
+    # Check schema/method/algorithm
+    if proof.get("schema") != "trinityaccord.agent-authorship-proof.v1":
+        return False, "INVALID_AUTHORSHIP_SCHEMA", "Invalid authorship proof schema."
+    if proof.get("method") != "public_key_signature":
+        return False, "INVALID_AUTHORSHIP_METHOD", "Invalid authorship proof method."
+    if proof.get("algorithm") != "ed25519":
+        return False, "INVALID_AUTHORSHIP_ALGORITHM", "Authorship proof must use Ed25519."
+
+    public_key_pem = proof.get("public_key_pem")
+    public_key_sha256 = proof.get("public_key_sha256")
+    signed_payload_sha256 = proof.get("signed_payload_sha256")
+    signature_base64 = proof.get("signature_base64")
+
+    if not isinstance(public_key_pem, str) or "BEGIN PUBLIC KEY" not in public_key_pem:
+        return False, "INVALID_AUTHORSHIP_PUBLIC_KEY", "Invalid or missing public_key_pem."
+    if "PRIVATE KEY" in public_key_pem:
+        return False, "PRIVATE_KEY_LEAK", "Private key material appears in public key field."
+    import re as _re
+    if not isinstance(public_key_sha256, str) or not _re.fullmatch(r"[a-f0-9]{64}", public_key_sha256):
+        return False, "INVALID_AUTHORSHIP_PUBLIC_KEY_SHA", "Invalid public_key_sha256."
+    if not isinstance(signed_payload_sha256, str) or not _re.fullmatch(r"[a-f0-9]{64}", signed_payload_sha256):
+        return False, "INVALID_AUTHORSHIP_SIGNED_PAYLOAD_SHA", "Invalid signed_payload_sha256."
+    if not isinstance(signature_base64, str) or not signature_base64:
+        return False, "INVALID_AUTHORSHIP_SIGNATURE", "Missing signature_base64."
+
+    draft = submission.get("record_draft")
+    if not isinstance(draft, dict):
+        return False, "MISSING_RECORD_DRAFT", "Missing record_draft."
+
+    # Verify payload hash
+    draft_for_signing = strip_authorship_for_signing(draft)
+    payload = canonical_bytes(draft_for_signing)
+    payload_sha = sha256_bytes(payload)
+    if payload_sha != signed_payload_sha256:
+        return False, "AUTHORSHIP_PAYLOAD_SHA_MISMATCH", "record_draft hash does not match signed_payload_sha256."
+    if proof.get("signed_message") != payload_sha:
+        return False, "AUTHORSHIP_SIGNED_MESSAGE_MISMATCH", "signed_message does not match record_draft hash."
+
+    # Load and verify public key
+    try:
+        public_key = load_pem_public_key(public_key_pem.encode("utf-8"))
+        if not isinstance(public_key, Ed25519PublicKey):
+            return False, "AUTHORSHIP_PUBLIC_KEY_NOT_ED25519", "Public key is not Ed25519."
+
+        raw_public = public_key.public_bytes(
+            encoding=Encoding.Raw,
+            format=PublicFormat.Raw,
+        )
+        actual_pub_sha = sha256_bytes(raw_public)
+        if actual_pub_sha != public_key_sha256:
+            return False, "AUTHORSHIP_PUBLIC_KEY_SHA_MISMATCH", "public_key_sha256 does not match public_key_pem."
+
+        signature = base64.b64decode(signature_base64, validate=True)
+        public_key.verify(signature, payload)
+    except InvalidSignature:
+        return False, "AUTHORSHIP_SIGNATURE_INVALID", "Ed25519 signature is invalid."
+    except Exception:
+        return False, "AUTHORSHIP_VERIFICATION_ERROR", "Could not verify authorship proof."
+
+    # Check participant key binding
+    spi = draft.get("submitting_participant_identity") or {}
+    if spi.get("participant_public_key_sha256") != public_key_sha256:
+        return False, "PARTICIPANT_KEY_MISMATCH", "participant_public_key_sha256 must match authorship_proof.public_key_sha256."
+
+    # Check guardian key binding
+    if draft.get("record_type") == "guardian_application":
+        guardian_key = (draft.get("guardian_application_content") or {}).get("guardian_public_key_sha256")
+        if guardian_key != public_key_sha256:
+            return False, "GUARDIAN_KEY_MISMATCH", "guardian_public_key_sha256 must match authorship_proof.public_key_sha256."
+
+    # Check linked guardian key binding
+    linked = draft.get("optional_linked_guardian_application_request")
+    if isinstance(linked, dict) and linked.get("does_participant_request_guardian_application_with_this_record") is True:
+        linked_key = linked.get("guardian_public_key_sha256")
+        if linked_key and linked_key != public_key_sha256:
+            return False, "LINKED_GUARDIAN_KEY_MISMATCH", "linked guardian_public_key_sha256 must match authorship_proof.public_key_sha256."
+
+    # Security scan for private key leaks
+    raw = json.dumps(submission, ensure_ascii=False)
+    if "BEGIN PRIVATE KEY" in raw or "authorship-private.pem" in raw:
+        return False, "PRIVATE_KEY_LEAK", "Private key material must not appear in submission."
+
+    return True, None, None
