@@ -235,6 +235,55 @@ function rejectSecretPatterns(text) {
   return patterns.some((p) => p.test(text));
 }
 
+// --- Title Safety ---
+function validateTitleSafety(title) {
+  const s = String(title || "");
+  const errors = [];
+
+  if (/[\r\n]/.test(s)) {
+    errors.push({
+      code: "TITLE_MUST_BE_SINGLE_LINE",
+      path: "title",
+      message: "title must be a single line; newline characters are forbidden"
+    });
+  }
+
+  if (/[\x00-\x1F\x7F]/.test(s)) {
+    errors.push({
+      code: "TITLE_CONTROL_CHARACTER_FORBIDDEN",
+      path: "title",
+      message: "title must not contain ASCII control characters"
+    });
+  }
+
+  if (/<!--/.test(s)) {
+    errors.push({
+      code: "TITLE_HTML_COMMENT_FORBIDDEN",
+      path: "title",
+      message: "title must not contain HTML comments"
+    });
+  }
+
+  if (/^\s*#/.test(s)) {
+    errors.push({
+      code: "TITLE_MARKDOWN_HEADING_FORBIDDEN",
+      path: "title",
+      message: "title must not start with a Markdown heading marker"
+    });
+  }
+
+  return errors;
+}
+
+function sanitizeIssueTitleFragment(title, maxChars = 180) {
+  return String(title || "")
+    .replace(/[\r\n\t]+/g, " ")
+    .replace(/\s+/g, " ")
+    .replace(/<!--/g, "")
+    .trim()
+    .slice(0, maxChars);
+}
+
 // --- Authorship Claim Verification Helpers ---
 
 function stableStringify(value) {
@@ -536,10 +585,12 @@ function payloadForIdempotency(payload) {
   return clone;
 }
 
+function computePayloadIdempotencyDigest(payload) {
+  return sha256Text(stableStringify(payloadForIdempotency(payload)));
+}
+
 function computeIdempotencyKey(payload) {
-  const provided = String((payload || {}).idempotency_key || "").trim();
-  if (provided) return provided;
-  return `gwid_${sha256Text(stableStringify(payloadForIdempotency(payload))).slice(0, 48)}`;
+  return `gwid_${computePayloadIdempotencyDigest(payload).slice(0, 48)}`;
 }
 
 function idempotencyMarker(key) {
@@ -962,6 +1013,7 @@ function hasAllowedNegatedBoundary(text, claim) {
       || /\bnot\s+authoritative\b/i.test(t)
       || /\bnot\s+claiming\s+.*\b(authority|authoritative)\b/i.test(t)
       || /\bnot\s+(this\s+)?is\s+(an?\s+)?(authority|authoritative)\b/i.test(t)
+      || /\bnot\s+(an?\s+)?official\s+authority\b/i.test(t)
     );
   }
   if (claim === "attestation") {
@@ -969,6 +1021,7 @@ function hasAllowedNegatedBoundary(text, claim) {
       /\bnot\s+(an\s+)?attestation\b/i.test(t)
       || /\bnot\s+claiming\s+.*\battestation\b/i.test(t)
       || /\bnot\s+(this\s+)?is\s+(an?\s+)?attestation\b/i.test(t)
+      || /\bnot\s+(a\s+)?formal\s+attestation\b/i.test(t)
     );
   }
   if (claim === "amendment") {
@@ -977,6 +1030,14 @@ function hasAllowedNegatedBoundary(text, claim) {
       || /\bnon-amending\b/i.test(t)
       || /\bnot\s+claiming\s+.*\bamendment\b/i.test(t)
       || /\bnot\s+(this\s+)?is\s+(an?\s+)?amendment\b/i.test(t)
+      || /\bdoes\s+not\s+(amend|modify|override|revise|update|change)\b/i.test(t)
+    );
+  }
+  if (claim === "truth") {
+    return (
+      /\bnot\s+(verified\s+|authoritative\s+|official\s+)?truth\b/i.test(t)
+      || /\bnot\s+claiming\s+.*\btruth\b/i.test(t)
+      || /\bdoes\s+not\s+(claim|constitute|create|count as)\s+(verified\s+|authoritative\s+|official\s+)?truth\b/i.test(t)
     );
   }
   return false;
@@ -986,22 +1047,32 @@ const FORBIDDEN_POSITIVE_CLAIM_PATTERNS = [
   {
     code: "FORBIDDEN_SUCCESSOR_RECEPTION_CLAIM",
     claim: "successor_reception",
-    pattern: /\b(this|this record|this echo|i|we)\s+(is|are|claims?|constitutes|creates?|counts as|requests?)\s+(a\s+)?successor reception\b/i
+    pattern: /\b(this|this record|this echo|this submission|i|we)\s+(is|are|am|claims?|constitutes|creates?|counts as|requests?|declares?|asserts?)\s+(a\s+)?successor reception\b/i
   },
   {
     code: "FORBIDDEN_AUTHORITY_CLAIM",
     claim: "authority",
-    pattern: /\b(this|this record|this echo|i|we)\s+(is|are|claims?|constitutes|creates?|counts as|requests?)\s+(authority|authoritative)\b/i
+    pattern: /\b(this|this record|this echo|this submission|i|we)\s+(is|are|am|claims?|constitutes|creates?|counts as|requests?|declares?|asserts?)\s+(an?\s+)?(official\s+)?(authority|authoritative)\b/i
   },
   {
     code: "FORBIDDEN_ATTESTATION_CLAIM",
     claim: "attestation",
-    pattern: /\b(this|this record|this echo|i|we)\s+(is|are|claims?|constitutes|creates?|counts as|requests?)\s+(an\s+)?attestation\b/i
+    pattern: /\b(this|this record|this echo|this submission|i|we)\s+(is|are|am|claims?|constitutes|creates?|counts as|requests?|declares?|asserts?)\s+(a\s+|an\s+)?(formal\s+)?attestation\b/i
   },
   {
     code: "FORBIDDEN_AMENDMENT_CLAIM",
     claim: "amendment",
-    pattern: /\b(this|this record|this echo|i|we)\s+(is|are|claims?|constitutes|creates?|counts as|requests?)\s+(an\s+)?amendment\b/i
+    pattern: /\b(this|this record|this echo|this submission|i|we)\s+(is|are|am|claims?|constitutes|creates?|counts as|requests?|declares?|asserts?)\s+(an?\s+)?amendment\b/i
+  },
+  {
+    code: "FORBIDDEN_AMENDMENT_VERB_CLAIM",
+    claim: "amendment",
+    pattern: /\b(this|this record|this echo|this submission|i|we)\s+(amends?|modifies|overrides|revises|updates|changes)\s+(the\s+)?(bitcoin originals|originals|trinity accord|accord)\b/i
+  },
+  {
+    code: "FORBIDDEN_TRUTH_CLAIM",
+    claim: "truth",
+    pattern: /\b(this|this record|this echo|this submission|i|we)\s+(is|are|am|claims?|constitutes|creates?|counts as|requests?|declares?|asserts?)\s+(the\s+)?(verified\s+|authoritative\s+|official\s+)?truth\b/i
   }
 ];
 
@@ -1276,6 +1347,115 @@ function verifyGuardianStatus(payload) {
     errors,
     warnings,
   };
+}
+
+function validateGuardianRetirementPayload(payload) {
+  const errors = [];
+
+  if (!payload.guardian_id) {
+    errors.push({ code: "MISSING_GUARDIAN_ID", path: "guardian_id", message: "guardian_id is required" });
+  }
+  if (!payload.retirement_status) {
+    errors.push({ code: "MISSING_RETIREMENT_STATUS", path: "retirement_status", message: "retirement_status is required" });
+  }
+  if (!payload.statement) {
+    errors.push({ code: "MISSING_STATEMENT", path: "statement", message: "statement is required" });
+  }
+  if (payload.signed_by_guardian_key !== true) {
+    errors.push({
+      code: "LEGACY_SIGNED_FLAG_REQUIRED",
+      path: "signed_by_guardian_key",
+      message: "signed_by_guardian_key must be true, but this flag alone is not sufficient"
+    });
+  }
+
+  const boundaries = payload.boundaries;
+  if (!boundaries || typeof boundaries !== "object" || Array.isArray(boundaries)) {
+    errors.push({ code: "MISSING_BOUNDARIES", path: "boundaries", message: "boundaries object is required" });
+  } else {
+    for (const key of [
+      "not_authority",
+      "not_governance",
+      "not_verification_level",
+      "not_attestation",
+      "not_successor_reception",
+      "bitcoin_originals_prevail",
+    ]) {
+      if (boundaries[key] !== true) {
+        errors.push({
+          code: "RETIREMENT_BOUNDARY_REQUIRED",
+          path: `boundaries.${key}`,
+          message: `boundaries.${key} must be true`
+        });
+      }
+    }
+  }
+
+  if (!payload.guardian_presence_proof || typeof payload.guardian_presence_proof !== "object") {
+    errors.push({
+      code: "MISSING_GUARDIAN_PRESENCE_PROOF",
+      path: "guardian_presence_proof",
+      message: "guardian_presence_proof is required for Guardian retirement; signed_by_guardian_key=true is not sufficient"
+    });
+    return { errors, guardianStatus: null };
+  }
+
+  const guardianStatus = verifyGuardianStatus(payload);
+
+  if (
+    guardianStatus.guardian_status === "missing_guardian_proof" ||
+    guardianStatus.guardian_status === "invalid_guardian_proof"
+  ) {
+    for (const msg of guardianStatus.errors || []) {
+      errors.push({
+        code: "INVALID_GUARDIAN_RETIREMENT_PROOF",
+        path: "guardian_presence_proof",
+        message: String(msg)
+      });
+    }
+  }
+
+  if (guardianStatus.signature_valid !== true) {
+    errors.push({
+      code: "GUARDIAN_RETIREMENT_SIGNATURE_INVALID",
+      path: "guardian_presence_proof.signature_base64",
+      message: "Guardian retirement requires a valid Ed25519 guardian signature"
+    });
+  }
+
+  if (guardianStatus.guardian_id_matches_public_key !== true) {
+    errors.push({
+      code: "GUARDIAN_RETIREMENT_ID_KEY_MISMATCH",
+      path: "guardian_presence_proof.guardian_id",
+      message: "guardian_presence_proof.guardian_id must match its public key"
+    });
+  }
+
+  if (guardianStatus.payload_hash_matches !== true) {
+    errors.push({
+      code: "GUARDIAN_RETIREMENT_PAYLOAD_HASH_MISMATCH",
+      path: "guardian_presence_proof.signed_payload_sha256",
+      message: "Guardian retirement proof must be bound to this exact payload"
+    });
+  }
+
+  if (payload.guardian_id && guardianStatus.guardian_id && guardianStatus.guardian_id !== payload.guardian_id) {
+    errors.push({
+      code: "RETIREMENT_GUARDIAN_ID_MISMATCH",
+      path: "guardian_id",
+      message: "payload.guardian_id must equal guardian_presence_proof.guardian_id"
+    });
+  }
+
+  if (["compromised", "possibly_compromised"].includes(guardianStatus.registry_status)) {
+    errors.push({
+      code: "RETIREMENT_GUARDIAN_REGISTRY_COMPROMISED",
+      path: "guardian_presence_proof.guardian_id",
+      message: "Guardian retirement proof uses a key marked compromised or possibly_compromised"
+    });
+  }
+
+  return { errors, guardianStatus };
 }
 
 // --- Archive Intent Normalization Helpers ---
@@ -1780,20 +1960,19 @@ async function runGatewayPipeline(payload, {
 
   // 0b. Guardian retirement payload bypass — different schema, skip main pipeline.
   if (payload?.schema === "trinityaccord.guardian-retirement.v1" || payload?.retirement_status) {
-    const retirementErrors = [];
-    if (!payload.guardian_id) retirementErrors.push({ code: "MISSING_GUARDIAN_ID", path: "guardian_id", message: "guardian_id is required" });
-    if (!payload.retirement_status) retirementErrors.push({ code: "MISSING_RETIREMENT_STATUS", path: "retirement_status", message: "retirement_status is required" });
-    if (!payload.statement) retirementErrors.push({ code: "MISSING_STATEMENT", path: "statement", message: "statement is required" });
-    if (payload.signed_by_guardian_key !== true) retirementErrors.push({ code: "MUST_BE_SIGNED", path: "signed_by_guardian_key", message: "signed_by_guardian_key must be true" });
-    if (!payload.boundaries) retirementErrors.push({ code: "MISSING_BOUNDARIES", path: "boundaries", message: "boundaries object is required" });
+    const { errors: retirementErrors, guardianStatus } = validateGuardianRetirementPayload(payload);
 
     if (retirementErrors.length > 0) {
       return gatewayError(422, {
         reason: "invalid_retirement_payload",
         validation_stage: "retirement_schema",
-        agent_action: "Fix the retirement payload fields listed in errors, then resubmit.",
+        agent_action: "Regenerate the Guardian retirement payload with a valid guardian_presence_proof. signed_by_guardian_key=true alone is not sufficient.",
         errors: retirementErrors,
         payload,
+        extra: {
+          guardian_verification_result: guardianStatus,
+          retirement_requires_guardian_presence_proof: true,
+        }
       });
     }
 
@@ -1815,6 +1994,8 @@ async function runGatewayPipeline(payload, {
             retirement_status: payload.retirement_status,
             statement_preview: String(payload.statement || "").slice(0, 200),
           },
+          guardian_verification_result: guardianStatus,
+          retirement_requires_guardian_presence_proof: true,
           ...recoveryContext(),
           idempotency_key: idempotencyKey,
           idempotency_scope: "preflight_preview_only",
@@ -1831,13 +2012,15 @@ async function runGatewayPipeline(payload, {
           dry_run: true,
           route_detected: routeDetected,
           would_create_issue: {
-            title: `[Guardian Retirement] ${payload.guardian_id} — ${payload.retirement_status}`,
+            title: `[Guardian Retirement] ${sanitizeIssueTitleFragment(payload.guardian_id, 80)} — ${sanitizeIssueTitleFragment(payload.retirement_status, 40)}`,
             labels: ["guardian-retirement-request"],
           },
           retirement_payload: {
             guardian_id: payload.guardian_id,
             retirement_status: payload.retirement_status,
           },
+          guardian_verification_result: guardianStatus,
+          retirement_requires_guardian_presence_proof: true,
           idempotency_key: idempotencyKey,
         }
       };
@@ -1848,7 +2031,7 @@ async function runGatewayPipeline(payload, {
       const octokit = await getOctokit();
       const { owner, repo } = getRepoParts();
 
-      const issueTitle = `[Guardian Retirement] ${payload.guardian_id} — ${payload.retirement_status}`;
+      const issueTitle = `[Guardian Retirement] ${sanitizeIssueTitleFragment(payload.guardian_id, 80)} — ${sanitizeIssueTitleFragment(payload.retirement_status, 40)}`;
       const issueBody = [
         `## Guardian Retirement Request`,
         ``,
@@ -1858,7 +2041,11 @@ async function runGatewayPipeline(payload, {
         `|---|---|`,
         `| Guardian ID | \`${payload.guardian_id}\` |`,
         `| Retirement Status | ${payload.retirement_status} |`,
-        `| Signed by Guardian Key | ${payload.signed_by_guardian_key} |`,
+        `| Guardian Proof Signature Valid | ${guardianStatus.signature_valid === true} |`,
+        `| Guardian ID Matches Public Key | ${guardianStatus.guardian_id_matches_public_key === true} |`,
+        `| Guardian Payload Hash Matches | ${guardianStatus.payload_hash_matches === true} |`,
+        `| Guardian Registry Status | ${guardianStatus.registry_status || "not_checked"} |`,
+        `| Legacy signed_by_guardian_key Flag | ${payload.signed_by_guardian_key === true} |`,
         ``,
         `### Statement`,
         ``,
@@ -2009,6 +2196,18 @@ async function runGatewayPipeline(payload, {
         (validate.errors || []).map(e => `${e.instancePath || "/"}: ${e.message}`)
       ),
         payload,
+    });
+  }
+
+  // 1a-bis. Title safety validation (defense in depth)
+  const titleErrors = validateTitleSafety(payload.title);
+  if (titleErrors.length > 0) {
+    return gatewayError(422, {
+      reason: "unsafe_title",
+      validation_stage: "title_policy",
+      agent_action: "Use a plain single-line title. Do not include Markdown headings, HTML comments, newlines, or control characters.",
+      errors: titleErrors,
+      payload,
     });
   }
 
@@ -2565,7 +2764,7 @@ async function runGatewayPipeline(payload, {
       });
     }
 
-    const issueTitle = `[Agent Gateway] ${String(payload.title || "").slice(0, 180)}`;
+    const issueTitle = `[Agent Gateway] ${sanitizeIssueTitleFragment(payload.title, 180)}`;
     const lintableIssueBody = render.stdout;
     const issueBody = `${lintableIssueBody}\n\n${idempotencyMarker(idempotencyKey)}\n`;
 
