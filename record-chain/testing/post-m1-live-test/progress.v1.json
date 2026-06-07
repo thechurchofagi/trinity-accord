@@ -1,11 +1,11 @@
 {
   "active_session": {
-    "session_id": "sandbox-20260607T192700Z",
+    "session_id": "sandbox-20260607T132900Z",
     "mode": "INT-CHECKPOINT",
     "owner": "agent",
-    "started_at": "2026-06-07T11:27:00Z",
-    "updated_at": "2026-06-07T12:20:55Z",
-    "expires_at": "2026-06-07T13:17:00Z"
+    "started_at": "2026-06-07T13:29:00Z",
+    "updated_at": "2026-06-07T13:29:00Z",
+    "expires_at": "2026-06-07T14:04:00Z"
   },
   "authoritative_progress_branch": "post-m1-test-progress",
   "completed_markers": [
@@ -20,15 +20,16 @@
     "RECORD_CHAIN_ARWEAVE_DATA_RECOVERY_DRILL_OK",
     "RECORD_CHAIN_DATA_ARCHIVE_INFRA_OK",
     "RECORD_CHAIN_DATA_SNAPSHOT_ARWEAVE_OK",
-    "RECORD_TYPE_SEPARATION_HARDENED_OK"
+    "RECORD_TYPE_SEPARATION_HARDENED_OK",
+    "LIVE_OPERATIONAL_TEST_CAMPAIGNS_OK"
   ],
   "current_mode": "INT-CHECKPOINT",
   "current_phase": "M7",
-  "current_step": "M7.1-C5-checkpoint",
+  "current_step": "M7.done",
   "known_anomalies": [],
-  "last_checkpoint_at": "2026-06-07T12:20:55Z",
-  "last_checkpoint_id": "m7-c5-ots-arweave-registry-ext-pass",
-  "last_safe_resume_step": "M7.1",
+  "last_checkpoint_at": "2026-06-07T13:29:00Z",
+  "last_checkpoint_id": "m7-campaigns-c1-to-c5-all-pass",
+  "last_safe_resume_step": "M8.1",
   "latest_artifact_manifest_sha256": null,
   "latest_external_public_key_sha256": "51457d267a2a606ddbfaf574f8aeca7fd44f27c666db53729b1f76905de097cc",
   "latest_external_receipt_ids": [
@@ -91,8 +92,8 @@
     "M7": {
       "blocking_issue": null,
       "name": "Large Live Operational Test Campaigns",
-      "resume_step": "M7.1",
-      "status": "in_progress",
+      "resume_step": "M8.1",
+      "status": "pass",
       "c1_evidence": {
         "campaign": "C1-Authorship-Key-Continuity",
         "mode": "EXT",
@@ -166,10 +167,10 @@
       }
     },
     "M8": {
-      "blocking_issue": "M7 not complete",
+      "blocking_issue": null,
       "name": "Production Enablement Marker",
-      "resume_step": null,
-      "status": "blocked_waiting_for_M7"
+      "resume_step": "M8.1",
+      "status": "not_started"
     },
     "M9": {
       "blocking_issue": "M8 not complete",
@@ -181,5 +182,5 @@
   "schema": "trinityaccord.post-m1-live-test-progress.v1",
   "status": "active",
   "stop_rules_triggered": [],
-  "updated_at": "2026-06-07T12:20:55Z"
+  "updated_at": "2026-06-07T13:29:00Z"
 }

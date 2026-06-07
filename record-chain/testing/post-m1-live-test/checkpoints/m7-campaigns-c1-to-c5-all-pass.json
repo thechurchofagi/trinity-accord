@@ -1,0 +1,24 @@
+{
+  "schema": "trinityaccord.post-m1-checkpoint.v1",
+  "checkpoint_id": "m7-campaigns-c1-to-c5-all-pass",
+  "phase": "M7",
+  "step": "M7.done",
+  "mode": "INT-CHECKPOINT",
+  "status": "pass",
+  "timestamp": "2026-06-07T13:29:00Z",
+  "session_id": "sandbox-20260607T132900Z",
+  "summary": "M7 Large Live Operational Test Campaigns completed. All 5 campaigns (C1-C5) passed.",
+  "campaigns": {
+    "c1": {"name": "Authorship-Key-Continuity", "status": "pass", "submissions_accepted": 3, "key_continuity_verified": true},
+    "c2": {"name": "Gateway-Negative-Cases", "status": "pass", "total_cases": 6, "passed": 6, "failed": 0},
+    "c3": {"name": "Rate-Limit-Concurrency", "status": "pass", "total_accepted": 9},
+    "c4": {"name": "Finalization-Index-Public-API", "status": "pass", "total_tests": 11, "passed": 11, "failed": 0},
+    "c5": {"name": "OTS-Arweave-Registry", "status": "pass", "passed": 4, "timeout": 1, "failed": 0}
+  },
+  "marker_added": "LIVE_OPERATIONAL_TEST_CAMPAIGNS_OK",
+  "next_phase": "M8",
+  "next_step": "M8.1",
+  "next_mode": "INT-FINALIZE",
+  "private_key_not_included": true,
+  "must_not_store_check": "PASS"
+}
