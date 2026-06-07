@@ -1,0 +1,75 @@
+name: Record Chain Auto Finalize
+
+on:
+  workflow_dispatch:
+    inputs:
+      max_records:
+        required: false
+        default: "10"
+      mode:
+        required: true
+        default: "dry-run"
+        type: choice
+        options: [dry-run, live]
+      confirm:
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+concurrency:
+  group: record-chain-auto-finalize
+  cancel-in-progress: false
+
+jobs:
+  finalize:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: "3.11"
+
+      - name: Guard live mode
+        if: inputs.mode == 'live'
+        run: |
+          test "${{ inputs.confirm }}" = "I_UNDERSTAND_THIS_FINALIZES_ACCEPTED_RECORD_CHAIN_SUBMISSIONS"
+
+      - name: Auto finalize
+        run: |
+          python3 scripts/auto_finalize_accepted_submissions.py \
+            --max-records "${{ inputs.max_records }}" \
+            --source-run-id "auto-finalize-${{ github.run_id }}" \
+            --mode "${{ inputs.mode }}" \
+            | tee /tmp/auto-finalize-summary.json
+
+      - name: Verify after finalize
+        run: |
+          python3 scripts/trinity_record_chain.py verify
+          python3 scripts/verify_record_chain_integrity.py \
+            --ledger record-chain/hash-chain/main.chain.jsonl \
+            --head api/record-chain-head.json \
+            --chain-id trinity-record-chain-main \
+            --verify-payload-files \
+            --base-dir .
+
+      - name: Commit finalization outputs
+        if: inputs.mode == 'live'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add record-chain/records \
+                  record-chain/hash-chain/main.chain.jsonl \
+                  record-chain/chain-tip.json \
+                  record-chain/indexes \
+                  api/record-chain-head.json \
+                  api/record-chain-index.json \
+                  api/record-chain-index.by-type.json \
+                  api/record-chain-index.latest.json
+          if git diff --cached --quiet; then
+            echo "No finalization changes."
+          else
+            git commit -m "record-chain: auto-finalize accepted submissions"
+            git push
+          fi

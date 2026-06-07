@@ -1,0 +1,72 @@
+name: Record Chain Head OTS Anchor
+
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows: ["Record Chain Auto Finalize"]
+    types: [completed]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: record-chain-head-ots-anchor
+  cancel-in-progress: false
+
+jobs:
+  anchor:
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: "3.11"
+
+      - name: Install OTS client
+        run: pip install opentimestamps-client
+
+      - name: Verify chain
+        run: |
+          python3 scripts/verify_record_chain_integrity.py \
+            --ledger record-chain/hash-chain/main.chain.jsonl \
+            --head api/record-chain-head.json \
+            --chain-id trinity-record-chain-main \
+            --verify-payload-files \
+            --base-dir .
+
+      - name: Check if OTS latest already matches head
+        id: check
+        run: |
+          python3 - <<'PY' > /tmp/ots-check.env
+import json
+from pathlib import Path
+head = json.loads(Path("api/record-chain-head.json").read_text())
+ots_path = Path("api/record-chain-ots-latest.json")
+ots = json.loads(ots_path.read_text()) if ots_path.exists() else {}
+matched = ots.get("height") == head.get("height") and ots.get("head_entry_hash") == head.get("head_entry_hash")
+print(f"matched={'true' if matched else 'false'}")
+PY
+          cat /tmp/ots-check.env >> "$GITHUB_OUTPUT"
+
+      - name: Stamp current head
+        if: steps.check.outputs.matched != 'true'
+        run: |
+          python3 scripts/ots_anchor_record_chain_head.py \
+            --mode stamp \
+            --verify-ledger \
+            --base-dir . \
+            --overwrite
+
+      - name: Commit OTS anchor
+        if: steps.check.outputs.matched != 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add record-chain/ots/anchors api/record-chain-ots-latest.json
+          if git diff --cached --quiet; then
+            echo "No OTS anchor changes."
+          else
+            git commit -m "anchor: stamp current record-chain head with OTS"
+            git push
+          fi
