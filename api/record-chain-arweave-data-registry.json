@@ -16,23 +16,39 @@
       "mode": "live",
       "schema": "trinityaccord.record-chain-data-arweave-registry-entry.v1",
       "to_height_inclusive": 15
+    },
+    {
+      "arweave_hash_match": true,
+      "arweave_payload_sha256": "b6e5f7e7c9d71245353d92ca733405b54faa33d5f1fff1310ba63d39d5cbb58c",
+      "arweave_readback_sha256": "b6e5f7e7c9d71245353d92ca733405b54faa33d5f1fff1310ba63d39d5cbb58c",
+      "arweave_tx_id": "D1tVrr8vdvFkfY2y8PpLAR1FFNOWXF3f9XbvwLdM2Go",
+      "bundle_file": "record-chain/arweave-data-bundles/data-snapshot-height-15-42f42d354462-5716ac6bd451.json",
+      "bundle_sha256": "5716ac6bd45186c194a3841a15f3be4b2bb705ad0920c9ab450d3af398c9a3bc",
+      "bundle_type": "snapshot",
+      "created_at": "2026-06-07T06:55:51Z",
+      "from_height_exclusive": 0,
+      "head_entry_hash": "42f42d3544627404593de86bd6b3453d3ae95b8829d7aac33471adb8cd473eb1",
+      "height": 15,
+      "mode": "live",
+      "schema": "trinityaccord.record-chain-data-arweave-registry-entry.v1",
+      "to_height_inclusive": 15
     }
   ],
-  "generated_at": "2026-06-07T06:19:09Z",
+  "generated_at": "2026-06-07T06:55:51Z",
   "latest_by_head": {
     "42f42d3544627404593de86bd6b3453d3ae95b8829d7aac33471adb8cd473eb1": {
       "arweave_hash_match": true,
-      "arweave_tx_id": "aAZ0lUPiRppjYWMjNQZEbOJyePPLSjHdZUs5Ifv2dSg",
-      "bundle_file": "record-chain/arweave-data-bundles/data-snapshot-height-15-42f42d354462.json",
-      "bundle_sha256": "0cf03e4fea46e49ef7c0a91e6b9166fe55a55714b37d4bfc0484927f5a5f0895",
+      "arweave_tx_id": "D1tVrr8vdvFkfY2y8PpLAR1FFNOWXF3f9XbvwLdM2Go",
+      "bundle_file": "record-chain/arweave-data-bundles/data-snapshot-height-15-42f42d354462-5716ac6bd451.json",
+      "bundle_sha256": "5716ac6bd45186c194a3841a15f3be4b2bb705ad0920c9ab450d3af398c9a3bc",
       "bundle_type": "snapshot",
       "height": 15
     }
   },
   "latest_snapshot": {
-    "arweave_tx_id": "aAZ0lUPiRppjYWMjNQZEbOJyePPLSjHdZUs5Ifv2dSg",
-    "bundle_file": "record-chain/arweave-data-bundles/data-snapshot-height-15-42f42d354462.json",
-    "bundle_sha256": "0cf03e4fea46e49ef7c0a91e6b9166fe55a55714b37d4bfc0484927f5a5f0895",
+    "arweave_tx_id": "D1tVrr8vdvFkfY2y8PpLAR1FFNOWXF3f9XbvwLdM2Go",
+    "bundle_file": "record-chain/arweave-data-bundles/data-snapshot-height-15-42f42d354462-5716ac6bd451.json",
+    "bundle_sha256": "5716ac6bd45186c194a3841a15f3be4b2bb705ad0920c9ab450d3af398c9a3bc",
     "head_entry_hash": "42f42d3544627404593de86bd6b3453d3ae95b8829d7aac33471adb8cd473eb1",
     "height": 15
   },
