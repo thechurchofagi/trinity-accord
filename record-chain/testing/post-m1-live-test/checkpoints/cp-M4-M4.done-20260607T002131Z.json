@@ -1,0 +1,14 @@
+{
+  "checkpoint_id": "cp-M4-M4.done-20260607T002131Z",
+  "phase": "M4",
+  "step": "M4.done",
+  "mode": "INT-CHECKPOINT",
+  "status": "pass",
+  "summary": "M4 current-head OTS + Arweave archive completed via Phase 5 paid-upload workflow (run 27077735480). Arweave tx dc7uhY6joyZJ2vOuTwHodV94WSiEHxqOgAzPHgAVLgw with readback verified. Registry verify PASS. Integrity verify PASS.",
+  "resume_step": "M5.1",
+  "marker": "MANDATORY_KEY_CURRENT_HEAD_OTS_ARWEAVE_OK",
+  "receipt_id": null,
+  "public_key_sha256": null,
+  "session_id": null,
+  "created_at": "2026-06-07T00:21:31.011068Z"
+}
