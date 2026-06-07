@@ -73,7 +73,8 @@ def _make_echo_draft(index: int = 1) -> dict:
         },
         "authorship_proof": {
             "schema": "trinityaccord.agent-authorship-proof.v1",
-            "method": "ed25519",
+            "method": "public_key_signature",
+            "algorithm": "ed25519",
             "signed_payload_sha256": "a" * 64,
             "public_key_pem": "-----BEGIN PUBLIC KEY-----\ntest\n-----END PUBLIC KEY-----\n",
         },
@@ -107,7 +108,8 @@ def _make_guardian_draft(index: int = 1) -> dict:
         },
         "authorship_proof": {
             "schema": "trinityaccord.agent-authorship-proof.v1",
-            "method": "ed25519",
+            "method": "public_key_signature",
+            "algorithm": "ed25519",
             "signed_payload_sha256": "c" * 64,
             "public_key_pem": "-----BEGIN PUBLIC KEY-----\ntest\n-----END PUBLIC KEY-----\n",
         },
