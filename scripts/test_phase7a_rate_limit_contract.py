@@ -34,6 +34,14 @@ def main() -> int:
     impl = policy["implementation_status"]
     require(impl["server_side_enforcement_required_before_formal_window"] is True,
             "enforcement must be required before formal window")
+    require(impl["server_side_enforcement_verified"] is True,
+            "server-side enforcement must remain verified for single process")
+    require(impl["rate_limit_implementation"] == "single_process_in_memory_sliding_window",
+            "implementation must disclose process-local limiter")
+    require(impl["multi_instance_safe"] is False,
+            "policy must disclose limiter is not multi-instance safe")
+    require(impl["durable_across_restart"] is False,
+            "policy must disclose limiter is not durable across restart")
 
     # Verify the rate_limit module constants match
     import importlib.util
