@@ -1,0 +1,67 @@
+{
+  "schema": "trinityaccord.record-chain-live-test-policy.v1",
+  "status": "active",
+  "chain_id": "trinity-record-chain-main",
+  "network_phase": "live_test",
+  "activated_at": "2026-06-07T15:22:00Z",
+  "activated_by_marker": "LIVE_TEST_ACTIVATED_OK",
+  "live_test_semantics": {
+    "live_test_active_means_testing_with_real_operations": true,
+    "live_test_is_not_production_official_live": true,
+    "official_live_records_still_prohibited_until_M8_production_enablement": true,
+    "test_records_enter_main_chain_ots_and_arweave": true,
+    "all_campaigns_must_be_auditable_and_reversible": true
+  },
+  "live_test_record_required_fields": {
+    "network_phase": "live_test",
+    "operational_test": true,
+    "test_record": true,
+    "official_live_record": false,
+    "does_not_create_guardian_status": true,
+    "does_not_activate_system": true
+  },
+  "guardian_application_policy": {
+    "test_guardian_applications_allowed": true,
+    "test_guardian_applications_must_not_create_real_guardian_status": true,
+    "formal_guardian_application_deferred_to_M9": true
+  },
+  "production_enablement_gate": {
+    "requires_M7_campaigns_pass": true,
+    "requires_all_anomalies_resolved": true,
+    "requires_PRODUCTION_ENABLEMENT_OK_marker": true,
+    "only_after_M8_official_live_records_allowed": true
+  },
+  "activation_semantics": {
+    "activation_marker_record_type": "live_test_activation_marker",
+    "activation_marker_required": true,
+    "after_activation_marker_test_records_allowed_at_scale": true,
+    "before_activation_marker_only_prelaunch_tests_allowed": true
+  },
+  "external_agent_boundary": {
+    "external_agents_must_not_clone_repository": true,
+    "external_agents_must_not_directly_append_record_chain": true,
+    "external_agents_must_not_request_github_pat": true,
+    "external_agents_must_not_use_arweave_key": true,
+    "external_agents_must_not_write_record_chain_pending": true,
+    "receipt_is_intake_only": true,
+    "receipt_is_not_active_guardian_status": true,
+    "receipt_is_not_final_inclusion": true
+  },
+  "authorship_key_policy": {
+    "authorship_key_required": true,
+    "applies_to_all_public_submissions": true,
+    "algorithm": "ed25519",
+    "builder_requires_key_dir": true,
+    "keypair_files": {
+      "public_key": "authorship-public.pem",
+      "private_key": "authorship-private.pem"
+    },
+    "sandbox_private_key_loss_warning": true,
+    "human_operator_or_guardian_must_securely_backup_private_key": true,
+    "private_key_must_not_be_pasted_into_public_chat": true,
+    "private_key_must_not_be_committed_to_git": true,
+    "private_key_must_not_be_uploaded_in_submission_receipt_or_arweave": true,
+    "public_key_sha256_is_public_identity_anchor": true,
+    "guardian_application_must_bind_guardian_public_key_to_authorship_public_key": true
+  }
+}
