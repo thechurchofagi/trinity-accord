@@ -94,6 +94,40 @@ def sha256_obj(obj: Any) -> str:
     ).hexdigest()
 
 
+def compute_receipt_sha256(receipt: dict[str, Any]) -> str:
+    material = dict(receipt)
+    material.pop("receipt_sha256", None)
+    return sha256_obj(material)
+
+
+def assert_receipt_binds_submission(
+    submission: dict[str, Any],
+    receipt: dict[str, Any],
+    submission_path: Path,
+    receipt_path: Path,
+) -> None:
+    rel_submission = str(submission_path.relative_to(ROOT))
+    rel_receipt = str(receipt_path.relative_to(ROOT))
+
+    if receipt.get("intake_submission_path") != rel_submission:
+        raise SystemExit(
+            f"receipt intake_submission_path mismatch: expected {rel_submission}, got {receipt.get('intake_submission_path')}"
+        )
+
+    if receipt.get("receipt_path") != rel_receipt:
+        raise SystemExit(
+            f"receipt receipt_path mismatch: expected {rel_receipt}, got {receipt.get('receipt_path')}"
+        )
+
+    stored_submission_sha256 = sha256_obj(submission)
+    if receipt.get("stored_submission_sha256") != stored_submission_sha256:
+        raise SystemExit("receipt stored_submission_sha256 does not match current submission file")
+
+    expected_receipt_sha = compute_receipt_sha256(receipt)
+    if receipt.get("receipt_sha256") != expected_receipt_sha:
+        raise SystemExit("receipt_sha256 is not self-consistent")
+
+
 def load_jsonl(path: Path) -> list[dict[str, Any]]:
     if not path.exists() or not path.read_text(encoding="utf-8").strip():
         return []
@@ -250,6 +284,13 @@ def assert_no_private_key_material(obj: Any, label: str = "object") -> None:
         "BEGIN " + "PRIVATE KEY",
         _pem_prefix,
         "authorship-private.pem",
+        "BEGIN ENCRYPTED PRIVATE KEY",
+        "BEGIN PGP PRIVATE KEY BLOCK",
+        "BEGIN AGE ENCRYPTED FILE",
+        "sk-ant-",
+        "xoxb-",
+        "xoxp-",
+        "github_pat_",
     ]
     found = [x for x in forbidden if x in raw]
     if found:
@@ -515,6 +556,7 @@ def main() -> int:
     if not receipt_is_accepted(receipt):
         raise SystemExit("receipt must be an accepted intake receipt before finalization")
 
+    assert_receipt_binds_submission(submission, receipt, submission_path, receipt_path)
     assert_test_safe_input(submission, receipt)
     assert_record_type_separation(submission)
 
