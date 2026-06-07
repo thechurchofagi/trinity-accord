@@ -282,6 +282,16 @@ def main() -> int:
     if result.returncode != 0:
         fail(f"arweave archive contract test failed: {result.stderr}")
     ok("arweave archive contract test")
+    # 11b. Arweave upload readback contract test
+    result = subprocess.run(
+        [sys.executable, "scripts/test_arweave_upload_contract.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"arweave upload readback contract test failed: {result.stderr}")
+    ok("arweave upload readback contract test")
 
     # 12. Phase 6A: public wording test
     result = subprocess.run(

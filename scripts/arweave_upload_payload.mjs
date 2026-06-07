@@ -21,6 +21,10 @@ function parseArkey() {
   return JSON.parse(Buffer.from(text, "base64").toString("utf8"));
 }
 
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 const payloadPath = arg("--payload");
 const outPath = arg("--out");
 
@@ -60,11 +64,52 @@ if (response.status < 200 || response.status >= 300) {
 
 const address = await arweave.wallets.jwkToAddress(jwk);
 
+// --- Readback verification ---
+const READBACK_MAX_RETRIES = 12;
+const READBACK_DELAY_MS = 10000;
+let readbackSha256 = null;
+let readbackVerified = false;
+
+for (let attempt = 1; attempt <= READBACK_MAX_RETRIES; attempt++) {
+  try {
+    console.log(`ARWEAVE_READBACK attempt ${attempt}/${READBACK_MAX_RETRIES} txid=${tx.id}`);
+    const readbackData = await arweave.transactions.getData(tx.id, {
+      decode: true,
+      string: false,
+    });
+    const readbackBuf = Buffer.from(readbackData);
+    readbackSha256 = sha256Hex(readbackBuf);
+    readbackVerified = readbackSha256 === payloadSha256;
+    if (readbackVerified) {
+      console.log(`ARWEAVE_READBACK_OK readback_sha256=${readbackSha256}`);
+      break;
+    } else {
+      console.error(
+        `ARWEAVE_READBACK_MISMATCH attempt=${attempt} payload=${payloadSha256} readback=${readbackSha256}`
+      );
+    }
+  } catch (err) {
+    console.error(`ARWEAVE_READBACK_RETRY attempt=${attempt} error=${err.message}`);
+  }
+  if (attempt < READBACK_MAX_RETRIES) {
+    await sleep(READBACK_DELAY_MS);
+  }
+}
+
+if (!readbackVerified) {
+  throw new Error(
+    `ARWEAVE_READBACK_FAILED after ${READBACK_MAX_RETRIES} attempts: hash_match=false payload_sha256=${payloadSha256} readback_sha256=${readbackSha256}`
+  );
+}
+
 const result = {
   schema: "trinityaccord.arweave-upload-result.v1",
   txid: tx.id,
   uploaded_at: new Date().toISOString(),
   data_sha256: payloadSha256,
+  payload_sha256: payloadSha256,
+  readback_sha256: readbackSha256,
+  hash_match: readbackVerified,
   wallet_address_sha256: sha256Hex(address),
   tags: {
     "Content-Type": "application/json",
@@ -72,7 +117,7 @@ const result = {
     "Record-Chain": "trinity-accord-public-reception-ledger",
     "Archive-Type": "record-chain-batch-archive",
     "Data-SHA256": payloadSha256,
-    "Boundary": "mirror-not-authority"
+    Boundary: "mirror-not-authority",
   },
   boundary: {
     arweave_archive_is_mirror_only: true,
@@ -80,9 +125,9 @@ const result = {
     arweave_archive_is_not_attestation: true,
     arweave_archive_is_not_amendment: true,
     arweave_archive_is_not_successor_reception: true,
-    bitcoin_originals_prevail: true
-  }
+    bitcoin_originals_prevail: true,
+  },
 };
 
 fs.writeFileSync(outPath, JSON.stringify(result, null, 2) + "\n");
-console.log(`ARWEAVE_UPLOAD_OK txid=${tx.id} data_sha256=${payloadSha256}`);
+console.log(`ARWEAVE_UPLOAD_OK txid=${tx.id} data_sha256=${payloadSha256} readback_sha256=${readbackSha256} hash_match=${readbackVerified}`);
