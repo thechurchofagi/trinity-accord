@@ -162,6 +162,7 @@ GROUPS = {
         # Phase 6C: operator secret names, Arweave live readiness, Render manual deploy
         ["python3", "scripts/test_operator_secret_names_contract.py"],
         ["python3", "scripts/test_arweave_live_readiness_contract.py"],
+        ["python3", "scripts/test_arweave_upload_contract.py"],
         ["python3", "scripts/test_render_manual_deploy_contract.py"],
 
         # Phase 6 scheduled OTS watch
