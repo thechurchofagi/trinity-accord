@@ -96,6 +96,10 @@ def main() -> int:
     }
 
     entries = reg.setdefault("entries", [])
+    # When adding a live entry, remove stale dry-run entries for the same bundle file
+    # to prevent "bundle sha mismatch" during verification (bundle was rebuilt, sha changed)
+    if args.mode == "live":
+        entries[:] = [e for e in entries if not (e.get("bundle_file") == args.bundle_file and e.get("mode") != "live")]
     if not any(e.get("bundle_sha256") == bundle_sha and e.get("arweave_tx_id") == txid and e.get("mode") == args.mode for e in entries):
         entries.append(entry)
 
