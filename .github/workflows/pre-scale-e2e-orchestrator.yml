@@ -156,15 +156,53 @@ else:
     ])
 PY
 
-      - name: Upload OTS bundle live via Phase 5 script
+      - name: Check OTS registry for duplicate upload
+        id: ots_dup_check
         if: inputs.mode == 'live'
+        run: |
+          python3 - <<'PY' >> "$GITHUB_OUTPUT"
+import json
+from pathlib import Path
+
+head = json.load(open("api/record-chain-head.json"))
+current_head = head["head_entry_hash"]
+registry_path = Path("record-chain/ots/arweave-registry.json")
+
+if not registry_path.exists():
+    print("skip_ots_upload=false")
+    print("reason=registry_file_missing")
+else:
+    registry = json.load(open(registry_path))
+    latest = registry.get("latest_by_head", {}).get(current_head, {})
+    if any(latest.get(k) for k in [
+        "latest_pending_tx_id",
+        "latest_verified_tx_id",
+        "latest_upgraded_tx_id",
+        "latest_any_tx_id",
+    ]):
+        print("skip_ots_upload=true")
+        print("reason=already_uploaded_for_head")
+    else:
+        print("skip_ots_upload=false")
+        print("reason=no_existing_upload_for_head")
+PY
+
+      - name: Upload OTS bundle live via Phase 5 script
+        if: inputs.mode == 'live' && steps.ots_dup_check.outputs.skip_ots_upload != 'true'
         run: |
           mkdir -p /tmp/arweave-ots
           printf '%s' "$ARKEY" > /tmp/arweave-ots/wallet.jwk.json
           chmod 600 /tmp/arweave-ots/wallet.jwk.json
           python3 scripts/run_phase5_ots_arweave_paid_upload.py \
             --jwk-path /tmp/arweave-ots/wallet.jwk.json \
+            --enable-paid-upload \
             --confirm-paid-upload I_UNDERSTAND_THIS_UPLOADS_THE_OTS_PROOF_BUNDLE_TO_ARWEAVE
+
+      - name: Skip OTS upload (already exists)
+        if: inputs.mode == 'live' && steps.ots_dup_check.outputs.skip_ots_upload == 'true'
+        run: |
+          echo "Skipping Phase 5 OTS paid upload: ${{ steps.ots_dup_check.outputs.reason }}"
+          echo "Current head already has an Arweave tx in the OTS registry."
 
       - name: Verify OTS registry if live
         if: inputs.mode == 'live'
