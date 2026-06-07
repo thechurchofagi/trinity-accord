@@ -329,6 +329,23 @@ def validate_guardian_fields(payload, errors):
         ))
 
 
+
+def validate_title(payload, errors):
+    title = payload.get("title")
+    if title is None:
+        return
+    if not isinstance(title, str):
+        errors.append("title must be a string")
+        return
+    if "\n" in title or "\r" in title:
+        errors.append("title must be a single line; newline characters are forbidden")
+    if any((ord(ch) < 32 or ord(ch) == 127) for ch in title):
+        errors.append("title must not contain ASCII control characters")
+    if "<!--" in title:
+        errors.append("title must not contain HTML comments")
+    if title.lstrip().startswith("#"):
+        errors.append("title must not start with a Markdown heading marker")
+
 def validate_identity(payload, errors):
     identity = payload.get("agent_identity") or {}
     if not identity.get("name_or_model"):
@@ -362,6 +379,23 @@ def validate_provenance(payload, errors):
 
     # Gateway submissions should not be accepted as unsolicited without proof.
     # Agent-declared archives are exempt from this requirement.
+
+    # Cross-field provenance consistency check
+    nested_followup = prov.get("agent_performed_independent_followup")
+    top_followup = payload.get("agent_independent_followup")
+    if isinstance(nested_followup, bool) and isinstance(top_followup, bool):
+        if nested_followup != top_followup:
+            errors.append(
+                "discovery_provenance.agent_performed_independent_followup must match top-level agent_independent_followup when both are present"
+            )
+    if agency_level in {
+        "A3_agent_discovered_independently",
+        "A4_independent_search_or_browsing_discovery",
+    } and nested_followup is False:
+        errors.append(
+            f"agency_level={agency_level} requires discovery_provenance.agent_performed_independent_followup=true"
+        )
+
     if independence_class == "unsolicited_agent_discovery" and not is_agent_declared_archive(payload):
         proof = prov.get("unsolicited_discovery_proof") or payload.get("unsolicited_discovery_proof")
         if not proof:
@@ -557,6 +591,7 @@ def validate_readback_sha256(payload, errors):
 
 def validate_common(payload, errors):
     validate_identity(payload, errors)
+    validate_title(payload, errors)
     validate_provenance(payload, errors)
     validate_authorship_proof(payload, errors)
     validate_guardian_fields(payload, errors)

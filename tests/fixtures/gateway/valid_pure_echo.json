@@ -59,7 +59,7 @@
     },
     "human_supplied_link": false,
     "other_agent_recommended": false,
-    "agent_performed_independent_followup": false,
+    "agent_performed_independent_followup": true,
     "confidence": "high"
   },
   "authority_boundary": {

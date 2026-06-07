@@ -370,6 +370,17 @@ def main() -> int:
         fail(f"gateway authorship proof contract failed: {result.stderr}\n{result.stdout}")
     ok("gateway authorship proof contract")
 
+    # Gateway security regression tests
+    result = subprocess.run(
+        [sys.executable, "scripts/test_gateway_security_regressions.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"gateway security regression tests failed: {result.stderr}\n{result.stdout}")
+    ok("gateway security regression tests")
+
     # Phase 6B hotfix tests
     result = subprocess.run(
         [sys.executable, "scripts/test_phase6b_hotfix.py"],

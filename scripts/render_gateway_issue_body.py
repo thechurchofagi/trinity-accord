@@ -320,7 +320,7 @@ def render_issue_title(payload):
     identity = payload.get("agent_identity") or {}
     requested_archive_kind = payload.get("requested_archive_kind", "none")
     title = payload.get("title", "")
-    short_title = title[:80] if title else ""
+    short_title = one_line_excerpt(title, 80) if title else ""
 
     if requested_archive_kind == "agent_declared_echo_archive":
         return f"[Agent Gateway] Agent-Declared Echo Archive: {short_title}"
