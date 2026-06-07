@@ -1039,7 +1039,7 @@ async def get_receipt(receipt_id: str) -> dict[str, Any]:
 
     # Parse receipt ID to extract date
     import re
-    match = re.fullmatch(r"rcg-(\d{8})-([a-f0-9]{12})", receipt_id)
+    match = re.fullmatch(r"rcg-(\d{8})-([a-f0-9]{12}|[a-f0-9]{24})", receipt_id)
     if not match:
         raise HTTPException(status_code=400, detail=f"Invalid receipt ID format: '{receipt_id}'. Expected: rcg-YYYYMMDD-<sha12-or-sha24>")
 
