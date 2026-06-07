@@ -6,6 +6,7 @@ from __future__ import annotations
 import logging
 import re
 import hashlib
+import unicodedata
 from typing import Any
 
 from .models import Diagnostic
@@ -1195,7 +1196,7 @@ def validate_submission_oath(
     for mod_id in expected_modules:
         mod = modules_obj.get(mod_id)
         if mod:
-            canonical_parts.append(f"=== {mod['label']} ({mod_id}) ===\n\n{normalize_oath_text(mod['text'])}")
+            canonical_parts.append(f"=== {mod['label']} ({mod_id}) ===\n\n{unicodedata.normalize('NFC', normalize_oath_text(mod['text']))}")
 
     joiner = local_policy.get("canonicalization", {}).get("module_joiner", "\n\n---\n\n")
     canonical_text = joiner.join(canonical_parts).strip()
@@ -1223,7 +1224,7 @@ def validate_submission_oath(
 
     # Normalize and compare readback
     readback_text = client_oath.get("readback_text", "")
-    normalized_readback = normalize_oath_text(readback_text)
+    normalized_readback = unicodedata.normalize("NFC", normalize_oath_text(readback_text))
     readback_hash = sha256_text(normalized_readback)
 
     if normalized_readback != canonical_text:
