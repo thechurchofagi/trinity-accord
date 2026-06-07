@@ -27,8 +27,6 @@ jobs:
         with:
           node-version: "20"
       - run: python3 -m pip install -r requirements-ci.txt
-      - name: Install Node.js dependencies for Gateway server
-        run: npm ci --prefix examples/github-app-backend || npm install --prefix examples/github-app-backend
       - name: Verify record-chain integrity
         run: python3 scripts/trinity_record_chain.py verify
       - name: Regenerate sitemap from current files
@@ -43,7 +41,6 @@ jobs:
         run: python3 scripts/test_no_secret_material_committed.py
       - name: Check no private keys or tokens (focused PEM)
         run: python3 scripts/test_no_private_key_material_committed.py
-
   build:
     needs: verify
     runs-on: ubuntu-24.04

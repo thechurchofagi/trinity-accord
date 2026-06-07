@@ -35,9 +35,6 @@ jobs:
 
       - name: Verify Node dependency lockfile
         run: npm ci
-      - name: Install Gateway server Node.js dependencies
-        run: npm ci --prefix examples/github-app-backend || npm install --prefix examples/github-app-backend
-
       - name: Validate JSON
         run: find . -name "*.json" -not -path "*/node_modules/*" -print0 | xargs -0 -n1 python3 -m json.tool > /dev/null
 
