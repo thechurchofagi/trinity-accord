@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
-"""Verify Echo archive writer workflows share echo-archive-writes concurrency."""
+"""Verify active Echo archive writer workflows share echo-archive-writes concurrency."""
 from pathlib import Path
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 files = [
-    ROOT / ".github/workflows/gateway-auto-archive.yml",
     ROOT / ".github/workflows/echo-human-review-action.yml",
 ]
 
@@ -16,4 +15,4 @@ for path in files:
             print(f"{path} calls archive_echo_issue.py but lacks group: echo-archive-writes")
             sys.exit(1)
 
-print("PASS: Echo archive writer workflows share echo-archive-writes concurrency.")
+print("PASS: active Echo archive writer workflows share echo-archive-writes concurrency.")

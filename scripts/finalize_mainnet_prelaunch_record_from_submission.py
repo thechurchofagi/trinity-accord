@@ -100,6 +100,17 @@ def load_jsonl(path: Path) -> list[dict[str, Any]]:
     return [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
 
 
+def receipt_id_from_receipt(receipt: dict[str, Any]) -> str:
+    """Return canonical receipt id across legacy and server receipt schemas."""
+    rid = receipt.get("receipt_id") or receipt.get("server_receipt_id")
+    return str(rid or "")
+
+
+def receipt_is_accepted(receipt: dict[str, Any]) -> bool:
+    """Accept both legacy accepted receipts and immutable server receipts."""
+    return receipt.get("accepted") is True or bool(receipt.get("server_receipt_id"))
+
+
 def get_path(data: Any, dotted: str, default: Any = None) -> Any:
     cur = data
     for part in dotted.split("."):
@@ -339,7 +350,7 @@ def build_native_test_draft(
 
     record_type = extract_record_type(submission)
     verification_level = extract_verification_level(submission)
-    receipt_id = receipt.get("receipt_id")
+    receipt_id = receipt_id_from_receipt(receipt)
 
     draft["authorship_proof"] = proof
 
@@ -383,7 +394,7 @@ def build_native_test_draft(
         "verification_level": verification_level,
         "submission_schema": submission.get("schema"),
         "submission_type": submission.get("submission_type"),
-        "accepted": receipt.get("accepted"),
+        "accepted": receipt_is_accepted(receipt),
         "accepted_at": receipt.get("accepted_at"),
         "receipt_id": receipt_id,
         "oath_summary": extract_oath_summary(submission),
@@ -501,15 +512,15 @@ def main() -> int:
     submission = read_json(submission_path)
     receipt = read_json(receipt_path)
 
-    if receipt.get("accepted") is not True:
-        raise SystemExit("receipt must have accepted=true before finalization")
+    if not receipt_is_accepted(receipt):
+        raise SystemExit("receipt must be an accepted intake receipt before finalization")
 
     assert_test_safe_input(submission, receipt)
     assert_record_type_separation(submission)
 
     record_type = extract_record_type(submission)
     verification_level = extract_verification_level(submission)
-    receipt_id = receipt.get("receipt_id")
+    receipt_id = receipt_id_from_receipt(receipt)
 
     native_draft = build_native_test_draft(
         submission=submission,

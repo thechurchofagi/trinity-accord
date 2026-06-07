@@ -184,14 +184,20 @@ def mock_github():
     put_mock = AsyncMock(return_value={"commit": {"sha": "abc123"}})
     sha_mock = AsyncMock(return_value=None)
     text_mock = AsyncMock(return_value="")
+    dispatch_mock = AsyncMock(return_value=None)
+    delete_mock = AsyncMock(return_value={})
 
     with patch("app.put_file", put_mock), \
          patch("app.get_file_sha", sha_mock), \
-         patch("app.get_file_text", text_mock):
+         patch("app.get_file_text", text_mock), \
+         patch("app.dispatch_workflow", dispatch_mock), \
+         patch("app.delete_file", delete_mock):
         yield {
             "put_file": put_mock,
             "get_file_sha": sha_mock,
             "get_file_text": text_mock,
+            "dispatch_workflow": dispatch_mock,
+            "delete_file": delete_mock,
         }
 
 

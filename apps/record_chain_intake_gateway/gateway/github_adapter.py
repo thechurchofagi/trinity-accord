@@ -130,6 +130,29 @@ async def put_file(
     return resp.json()
 
 
+async def delete_file(
+    path: str,
+    message: str,
+    sha: str,
+) -> dict[str, Any]:
+    """Delete a file in the repo via the Contents API using a known blob SHA."""
+    url = f"{_GITHUB_API}/repos/{_repo()}/contents/{path}"
+    body: dict[str, Any] = {
+        "message": message,
+        "sha": sha,
+        "branch": _branch(),
+    }
+
+    async with httpx.AsyncClient(timeout=30) as client:
+        resp = await client.delete(url, headers=_headers(), json=body)
+
+    if resp.status_code not in (200, 204):
+        logger.error("GitHub DELETE %s returned %d: %s", path, resp.status_code, resp.text[:500])
+        raise RuntimeError(f"GitHub API error {resp.status_code} deleting {path}")
+
+    return resp.json() if resp.content else {}
+
+
 async def dispatch_workflow(
     workflow_file: str,
     ref: str | None = None,
