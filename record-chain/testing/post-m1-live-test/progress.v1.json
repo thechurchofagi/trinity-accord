@@ -3,10 +3,10 @@
   "status": "active",
   "authoritative_progress_branch": "post-m1-test-progress",
   "current_phase": "M4",
-  "current_step": "M4.3",
-  "current_mode": "INT-ARCHIVE",
+  "current_step": "M4.done",
+  "current_mode": "INT-CHECKPOINT",
   "overall_status": "pass",
-  "last_safe_resume_step": "M4.4",
+  "last_safe_resume_step": "M5.1",
   "last_checkpoint_id": null,
   "last_checkpoint_at": null,
   "active_session": {
@@ -20,7 +20,8 @@
   "completed_markers": [
     "PHASE7C_BASELINE_RESTORED_OK",
     "MANDATORY_AUTHORSHIP_KEY_ONLY_FINAL_OK",
-    "MANDATORY_KEY_MAIN_CHAIN_PRELAUNCH_FINALIZATION_OK"
+    "MANDATORY_KEY_MAIN_CHAIN_PRELAUNCH_FINALIZATION_OK",
+    "MANDATORY_KEY_CURRENT_HEAD_OTS_ARWEAVE_OK"
   ],
   "phase_status": {
     "M2": {
@@ -37,8 +38,8 @@
     },
     "M4": {
       "name": "Current Head OTS + Arweave Archive",
-      "status": "in_progress",
-      "resume_step": "M4.4",
+      "status": "pass",
+      "resume_step": "M5.1",
       "blocking_issue": "M3 not complete"
     },
     "M5": {
@@ -83,5 +84,5 @@
     "external agent private key",
     "raw private key logs or PEM files"
   ],
-  "updated_at": "2026-06-06T23:48:43.437898Z"
+  "updated_at": "2026-06-07T00:21:31.011068Z"
 }
