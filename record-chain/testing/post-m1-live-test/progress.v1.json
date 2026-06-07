@@ -4,8 +4,8 @@
     "mode": "INT-CHECKPOINT",
     "owner": "agent",
     "started_at": "2026-06-07T11:27:00Z",
-    "updated_at": "2026-06-07T12:16:51Z",
-    "expires_at": "2026-06-07T13:13:00Z"
+    "updated_at": "2026-06-07T12:20:55Z",
+    "expires_at": "2026-06-07T13:17:00Z"
   },
   "authoritative_progress_branch": "post-m1-test-progress",
   "completed_markers": [
@@ -24,10 +24,10 @@
   ],
   "current_mode": "INT-CHECKPOINT",
   "current_phase": "M7",
-  "current_step": "M7.1-C4-checkpoint",
+  "current_step": "M7.1-C5-checkpoint",
   "known_anomalies": [],
-  "last_checkpoint_at": "2026-06-07T12:16:51Z",
-  "last_checkpoint_id": "m7-c4-finalization-index-api-ext-pass",
+  "last_checkpoint_at": "2026-06-07T12:20:55Z",
+  "last_checkpoint_id": "m7-c5-ots-arweave-registry-ext-pass",
   "last_safe_resume_step": "M7.1",
   "latest_artifact_manifest_sha256": null,
   "latest_external_public_key_sha256": "51457d267a2a606ddbfaf574f8aeca7fd44f27c666db53729b1f76905de097cc",
@@ -150,6 +150,19 @@
         "head_height": 15,
         "head_hash": "42f42d3544627404593de86bd6b3453d3ae95b8829d7aac33471adb8cd473eb1",
         "artifact_manifest": "record-chain/testing/post-m1-live-test/artifact-manifests/m7c4-sandbox-20260607T192700Z.json"
+      },
+      "c5_evidence": {
+        "campaign": "C5-OTS-Arweave-Registry",
+        "mode": "EXT",
+        "status": "pass",
+        "completed_at": "2026-06-07T12:20:55Z",
+        "passed": 4,
+        "timeout": 1,
+        "failed": 0,
+        "head_ots_registry_consistent": true,
+        "arweave_hash_match_all": true,
+        "arweave_gateway_timeout": true,
+        "artifact_manifest": "record-chain/testing/post-m1-live-test/artifact-manifests/m7c5-sandbox-20260607T192700Z.json"
       }
     },
     "M8": {
@@ -168,5 +181,5 @@
   "schema": "trinityaccord.post-m1-live-test-progress.v1",
   "status": "active",
   "stop_rules_triggered": [],
-  "updated_at": "2026-06-07T12:16:51Z"
+  "updated_at": "2026-06-07T12:20:55Z"
 }
