@@ -181,6 +181,17 @@ def main() -> int:
         fail(f"live-test phase finalizer contract failed: {result.stderr}\n{result.stdout}")
     ok("live-test phase finalizer contract")
 
+    # 2h. Auto-finalizer intake discovery contract
+    result = subprocess.run(
+        [sys.executable, "scripts/test_auto_finalize_intake_discovery_contract.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"auto-finalizer intake discovery contract failed: {result.stderr}\n{result.stdout}")
+    ok("auto-finalizer intake discovery contract")
+
     # 3. gateway-v1-legacy-status.json marks historical archive only
     legacy = load_json("api/gateway-v1-legacy-status.json")
     legacy_text = json.dumps(legacy, ensure_ascii=False).lower()

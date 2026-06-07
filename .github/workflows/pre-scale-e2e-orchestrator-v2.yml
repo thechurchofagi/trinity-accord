@@ -23,6 +23,11 @@ on:
         default: ""
         description: "Confirmation text for live mode"
         type: string
+      require_new_records:
+        required: false
+        default: "false"
+        description: "If true, hard fail when no new records are finalized (prevents silent no-op)"
+        type: string
 
 permissions:
   contents: write
@@ -63,10 +68,15 @@ jobs:
 
       - name: Auto finalize accepted submissions
         run: |
+          REQUIRE_FLAG=""
+          if [ "${{ inputs.require_new_records }}" = "true" ]; then
+            REQUIRE_FLAG="--require-new-records"
+          fi
           python3 scripts/auto_finalize_accepted_submissions.py \
             --max-records "${{ inputs.max_records }}" \
             --source-run-id "pre-scale-e2e-${{ github.run_id }}" \
             --mode "${{ inputs.mode }}" \
+            $REQUIRE_FLAG \
             | tee /tmp/auto-finalize-summary.json
 
       - name: Verify chain after finalization
@@ -86,6 +96,10 @@ jobs:
           if [ -z "$BEFORE" ]; then BEFORE="${{ steps.before.outputs.height }}"; fi
           AFTER=$(python3 -c 'import json; print(json.load(open("api/record-chain-head.json"))["height"])')
           if [ "$BEFORE" = "$AFTER" ]; then
+            if [ "${{ inputs.require_new_records }}" = "true" ]; then
+              echo "::error::require_new_records=true but head height unchanged (${BEFORE}=${AFTER}). No new records were finalized."
+              exit 1
+            fi
             python3 scripts/build_record_chain_data_arweave_bundle.py \
               --mode snapshot \
               --height "$AFTER" | tee /tmp/data-build.json

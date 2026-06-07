@@ -41,6 +41,40 @@ def current_confirm_string() -> str:
         return "I_UNDERSTAND_THIS_APPENDS_A_MAINNET_LIVE_TEST_RECORD"
     return "I_UNDERSTAND_THIS_APPENDS_A_MAINNET_PRELAUNCH_TEST_RECORD"
 
+
+def find_receipt_for_submission(
+    submission_path: Path,
+    submissions_dir: Path,
+    receipts_dir: Path,
+) -> Path | None:
+    """Find the matching receipt for a submission, handling date-partitioned layouts.
+
+    Strategy:
+    1. Same relative path under receipts_dir (flat layout: accepted/submissions/X.receipt.json)
+    2. rglob for the exact filename under receipts_dir (date-partitioned: receipts/2026/06/X.receipt.json)
+    3. If multiple matches found, hard fail to avoid ambiguity.
+    """
+    base = submission_path.name.replace(".submission.json", "")
+
+    # Strategy 1: same relative path (flat layout)
+    rel = submission_path.relative_to(submissions_dir)
+    flat_receipt = receipts_dir / rel.with_name(f"{base}.receipt.json")
+    if flat_receipt.exists():
+        return flat_receipt
+
+    # Strategy 2: rglob for the filename anywhere under receipts_dir
+    pattern = f"{base}.receipt.json"
+    matches = sorted(receipts_dir.rglob(pattern))
+    if len(matches) == 0:
+        return None
+    if len(matches) > 1:
+        raise SystemExit(
+            f"ambiguous receipt for {base}: found {len(matches)} matches: "
+            + ", ".join(str(m.relative_to(ROOT)) for m in matches)
+        )
+    return matches[0]
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--submissions-dir", default="record-chain/intake/accepted/submissions")
@@ -48,12 +82,19 @@ def main() -> int:
     ap.add_argument("--max-records", type=int, default=10)
     ap.add_argument("--source-run-id", default="auto-finalize")
     ap.add_argument("--mode", choices=["dry-run", "live"], default="dry-run")
+    ap.add_argument("--require-new-records", action="store_true",
+                    help="If set, hard fail when finalized_count is 0 after processing all candidates")
     args = ap.parse_args()
 
     submissions_dir = ROOT / args.submissions_dir
     receipts_dir = ROOT / args.receipts_dir
 
     if not submissions_dir.exists() or not receipts_dir.exists():
+        if args.require_new_records:
+            raise SystemExit(
+                f"require_new_records is set but intake directories missing: "
+                f"{submissions_dir.relative_to(ROOT)}, {receipts_dir.relative_to(ROOT)}"
+            )
         print(json.dumps({
             "result": "pass",
             "mode": args.mode,
@@ -69,13 +110,13 @@ def main() -> int:
 
     confirm = current_confirm_string()
 
-    for sub in sorted(submissions_dir.glob("*.submission.json")):
+    # Recursive glob to find submissions in date-partitioned subdirectories
+    for sub in sorted(submissions_dir.rglob("*.submission.json")):
         if len(finalized) >= args.max_records:
             break
 
-        base = sub.name.replace(".submission.json", "")
-        receipt = receipts_dir / f"{base}.receipt.json"
-        if not receipt.exists():
+        receipt = find_receipt_for_submission(sub, submissions_dir, receipts_dir)
+        if receipt is None:
             skipped.append({"submission": str(sub.relative_to(ROOT)), "reason": "missing receipt"})
             continue
 
@@ -112,14 +153,22 @@ def main() -> int:
 
         finalized.append({"submission": str(sub.relative_to(ROOT)), "receipt_id": receipt_id})
 
-    print(json.dumps({
+    summary = {
         "result": "pass",
         "mode": args.mode,
         "finalized_count": len(finalized),
         "skipped_count": len(skipped),
         "finalized": finalized,
         "skipped": skipped,
-    }, indent=2, sort_keys=True))
+    }
+    print(json.dumps(summary, indent=2, sort_keys=True))
+
+    if args.require_new_records and len(finalized) == 0:
+        raise SystemExit(
+            f"require_new_records is set but finalized_count=0. "
+            f"Skipped {len(skipped)}: {[s.get('reason') for s in skipped]}"
+        )
+
     return 0
 
 if __name__ == "__main__":
