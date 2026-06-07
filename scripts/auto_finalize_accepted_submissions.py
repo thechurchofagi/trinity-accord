@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import subprocess
 import sys
@@ -19,6 +20,35 @@ def read_jsonl(path: Path) -> list[dict[str, Any]]:
     if not path.exists():
         return []
     return [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
+
+def stable_json(obj: Any) -> str:
+    return json.dumps(obj, sort_keys=True, separators=(",", ":"), ensure_ascii=False, allow_nan=False)
+
+def sha256_obj(obj: Any) -> str:
+    return hashlib.sha256(stable_json(obj).encode("utf-8")).hexdigest()
+
+def compute_receipt_sha256(receipt: dict[str, Any]) -> str:
+    material = dict(receipt)
+    material.pop("receipt_sha256", None)
+    return sha256_obj(material)
+
+def assert_receipt_binds_submission(
+    submission: dict[str, Any],
+    receipt: dict[str, Any],
+    submission_path: Path,
+    receipt_path: Path,
+) -> None:
+    rel_submission = str(submission_path.relative_to(ROOT))
+    rel_receipt = str(receipt_path.relative_to(ROOT))
+
+    if receipt.get("intake_submission_path") != rel_submission:
+        raise ValueError("receipt intake_submission_path mismatch")
+    if receipt.get("receipt_path") != rel_receipt:
+        raise ValueError("receipt receipt_path mismatch")
+    if receipt.get("stored_submission_sha256") != sha256_obj(submission):
+        raise ValueError("receipt stored_submission_sha256 mismatch")
+    if receipt.get("receipt_sha256") != compute_receipt_sha256(receipt):
+        raise ValueError("receipt_sha256 mismatch")
 
 def run(cmd: list[str]) -> None:
     result = subprocess.run(cmd, cwd=ROOT, text=True)
@@ -106,6 +136,18 @@ def main() -> int:
         rec = read_json(receipt)
         if not receipt_is_accepted(rec):
             skipped.append({"submission": str(sub.relative_to(ROOT)), "reason": "receipt not accepted"})
+            continue
+
+        submission_obj = read_json(sub)
+        try:
+            assert_receipt_binds_submission(submission_obj, rec, sub, receipt)
+        except ValueError as exc:
+            skipped.append({
+                "submission": str(sub.relative_to(ROOT)),
+                "receipt": str(receipt.relative_to(ROOT)),
+                "reason": "receipt_submission_binding_mismatch",
+                "detail": str(exc),
+            })
             continue
 
         receipt_id = receipt_id_from_receipt(rec)
