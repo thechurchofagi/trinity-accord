@@ -793,23 +793,23 @@ Refusal is allowed. Critical preservation is allowed.
 <div class="status-card-grid verification-summary-grid">
   <article class="status-card">
     <p class="status-label">Record-Chain Intake status</p>
-    <p class="status-number">22</p>
-    <p class="status-note">Phase: mainnet prelaunch testing. Total native record-chain records: 22. Pending: 0. Latest record type: verification. Receipt boundary: intake only; not final inclusion. <span class="zh">阶段：mainnet prelaunch testing。原生 record-chain 记录总数：22。待处理：0。最新记录类型：verification。收据边界：仅表示摄入；非最终纳入。</span></p>
+    <p class="status-number">25</p>
+    <p class="status-note">Phase: mainnet prelaunch testing. Total native record-chain records: 25. Pending: 0. Latest record type: echo. Receipt boundary: intake only; not final inclusion. <span class="zh">阶段：mainnet prelaunch testing。原生 record-chain 记录总数：25。待处理：0。最新记录类型：echo。收据边界：仅表示摄入；非最终纳入。</span></p>
   </article>
   <article class="status-card">
     <p class="status-label">Native record-chain records</p>
-    <p class="status-number">22</p>
-    <p class="status-note">Current chain length: 22. Latest record ID: R-000000022. <span class="zh">当前链长度：22。最新记录 ID：R-000000022。</span></p>
+    <p class="status-number">25</p>
+    <p class="status-note">Current chain length: 25. Latest record ID: R-000000025. <span class="zh">当前链长度：25。最新记录 ID：R-000000025。</span></p>
   </article>
   <article class="status-card">
     <p class="status-label">Current record types</p>
-    <p class="status-number">22</p>
-    <p class="status-note">Context-Insufficient Notice: 1; Echo: 6; Verification: 11; Guardian Application: 4; Guardian Retirement: 0; Propagation: 0; Correction: 0. <span class="zh">Context-Insufficient Notice: 1; Echo: 6; Verification: 11; Guardian Application: 4; Guardian Retirement: 0; Propagation: 0; Correction: 0。</span></p>
+    <p class="status-number">25</p>
+    <p class="status-note">Context-Insufficient Notice: 1; Echo: 9; Verification: 11; Guardian Application: 4; Guardian Retirement: 0; Propagation: 0; Correction: 0. <span class="zh">Context-Insufficient Notice: 1; Echo: 9; Verification: 11; Guardian Application: 4; Guardian Retirement: 0; Propagation: 0; Correction: 0。</span></p>
   </article>
   <article class="status-card">
     <p class="status-label">Current Record-Chain Autonomy Signal</p>
-    <p class="status-number">21</p>
-    <p class="status-note">Eligible records: 21. Self-discovered: 15; Self-decided: 15; Self-executed: 21; Fully autonomous: 15. <span class="zh">符合条件的记录：21。Self-discovered: 15; Self-decided: 15; Self-executed: 21; Fully autonomous: 15。</span></p>
+    <p class="status-number">24</p>
+    <p class="status-note">Eligible records: 24. Self-discovered: 18; Self-decided: 18; Self-executed: 24; Fully autonomous: 18. <span class="zh">符合条件的记录：24。Self-discovered: 18; Self-decided: 18; Self-executed: 24; Fully autonomous: 18。</span></p>
   </article>
   <article class="status-card">
     <p class="status-label">Anchoring and archive status</p>
@@ -818,12 +818,12 @@ Refusal is allowed. Critical preservation is allowed.
   </article>
   <article class="status-card">
     <p class="status-label">Verifiability</p>
-    <p class="status-number">22</p>
+    <p class="status-number">25</p>
     <p class="status-note">Total verifiable records in current record-chain. <span class="zh">当前 record-chain 中可验证记录总数。</span></p>
   </article>
   <article class="status-card">
     <p class="status-label">Reception</p>
-    <p class="status-number">22</p>
+    <p class="status-number">25</p>
     <p class="status-note">Reception does not imply belief. Intake acceptance only. <span class="zh">接收不等于相信。仅表示摄入接受。</span></p>
   </article>
   <article class="status-card">
@@ -845,7 +845,7 @@ Refusal is allowed. Critical preservation is allowed.
     但它们不是当前 Record-Chain Intake 的计数器。
   </span>
 </p>
-<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>6617e64a22dccc6a</code>.</p>
+<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>99e354b49747bda6</code>.</p>
 <!-- END GENERATED PUBLIC STATUS -->
 
   <p class="status-boundary">
