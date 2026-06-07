@@ -1,88 +1,90 @@
 {
-  "schema": "trinityaccord.post-m1-live-test-progress.v1",
-  "status": "active",
-  "authoritative_progress_branch": "post-m1-test-progress",
-  "current_phase": "M4",
-  "current_step": "M4.done",
-  "current_mode": "INT-CHECKPOINT",
-  "overall_status": "pass",
-  "last_safe_resume_step": "M5.1",
-  "last_checkpoint_id": null,
-  "last_checkpoint_at": null,
   "active_session": {
-    "session_id": "sandbox-20260607T074843Z",
+    "expires_at": "2026-06-07T00:23:43.437934Z",
     "mode": "INT-ARCHIVE",
     "owner": "agent",
+    "session_id": "sandbox-20260607T074843Z",
     "started_at": "2026-06-06T23:48:43.437898Z",
-    "updated_at": "2026-06-06T23:48:43.437898Z",
-    "expires_at": "2026-06-07T00:23:43.437934Z"
+    "updated_at": "2026-06-06T23:48:43.437898Z"
   },
+  "authoritative_progress_branch": "post-m1-test-progress",
   "completed_markers": [
     "PHASE7C_BASELINE_RESTORED_OK",
     "MANDATORY_AUTHORSHIP_KEY_ONLY_FINAL_OK",
     "MANDATORY_KEY_MAIN_CHAIN_PRELAUNCH_FINALIZATION_OK",
-    "MANDATORY_KEY_CURRENT_HEAD_OTS_ARWEAVE_OK"
+    "MANDATORY_KEY_CURRENT_HEAD_OTS_ARWEAVE_OK",
+    "RECORD_TYPE_SEPARATION_HARDENED_OK",
+    "RECORD_CHAIN_DATA_ARCHIVE_INFRA_OK"
   ],
-  "phase_status": {
-    "M2": {
-      "name": "External No-Token Mandatory-Key Submission Rehearsal",
-      "status": "not_started",
-      "resume_step": "M2.1",
-      "blocking_issue": null
-    },
-    "M3": {
-      "name": "Internal Hash-Chain Finalization Rehearsal",
-      "status": "pass",
-      "resume_step": "M4.1",
-      "blocking_issue": "M2 not complete"
-    },
-    "M4": {
-      "name": "Current Head OTS + Arweave Archive",
-      "status": "pass",
-      "resume_step": "M5.1",
-      "blocking_issue": "M3 not complete"
-    },
-    "M5": {
-      "name": "Pre-Live-Test Stability Test",
-      "status": "blocked_waiting_for_M4",
-      "resume_step": null,
-      "blocking_issue": "M4 not complete"
-    },
-    "M6": {
-      "name": "Live-Test Activation Marker",
-      "status": "blocked_waiting_for_M5",
-      "resume_step": null,
-      "blocking_issue": "M5 not complete"
-    },
-    "M7": {
-      "name": "Large Live Operational Test Campaigns",
-      "status": "blocked_waiting_for_M6",
-      "resume_step": null,
-      "blocking_issue": "M6 not complete"
-    },
-    "M8": {
-      "name": "Production Enablement Marker",
-      "status": "blocked_waiting_for_M7",
-      "resume_step": null,
-      "blocking_issue": "M7 not complete"
-    },
-    "M9": {
-      "name": "Liu Hongju Founding Guardian Application",
-      "status": "blocked_waiting_for_M8",
-      "resume_step": null,
-      "blocking_issue": "M8 not complete"
-    }
-  },
+  "current_mode": "INT-CHECKPOINT",
+  "current_phase": "M5",
+  "current_step": "M5.pr1-record-type-data-archive",
+  "known_anomalies": [],
+  "last_checkpoint_at": null,
+  "last_checkpoint_id": null,
+  "last_safe_resume_step": "M5.pr2-e2e-automation",
+  "latest_artifact_manifest_sha256": null,
   "latest_external_public_key_sha256": null,
   "latest_external_receipt_ids": [],
-  "latest_artifact_manifest_sha256": null,
-  "known_anomalies": [],
-  "stop_rules_triggered": [],
   "must_not_store": [
     "Ed25519 signing key material (see SECURITY.md)",
     "authorship keypair seed or private half",
     "external agent private key",
     "raw private key logs or PEM files"
   ],
-  "updated_at": "2026-06-07T00:21:31.011068Z"
+  "overall_status": "pass",
+  "phase_status": {
+    "M2": {
+      "blocking_issue": null,
+      "name": "External No-Token Mandatory-Key Submission Rehearsal",
+      "resume_step": "M2.1",
+      "status": "not_started"
+    },
+    "M3": {
+      "blocking_issue": "M2 not complete",
+      "name": "Internal Hash-Chain Finalization Rehearsal",
+      "resume_step": "M4.1",
+      "status": "pass"
+    },
+    "M4": {
+      "blocking_issue": "M3 not complete",
+      "name": "Current Head OTS + Arweave Archive",
+      "resume_step": "M5.1",
+      "status": "pass"
+    },
+    "M5": {
+      "blocking_issue": null,
+      "name": "Pre-Live-Test Stability Test",
+      "resume_step": "M5.pr2-e2e-automation",
+      "status": "in_progress"
+    },
+    "M6": {
+      "blocking_issue": "M5 not complete",
+      "name": "Live-Test Activation Marker",
+      "resume_step": null,
+      "status": "blocked_waiting_for_M5"
+    },
+    "M7": {
+      "blocking_issue": "M6 not complete",
+      "name": "Large Live Operational Test Campaigns",
+      "resume_step": null,
+      "status": "blocked_waiting_for_M6"
+    },
+    "M8": {
+      "blocking_issue": "M7 not complete",
+      "name": "Production Enablement Marker",
+      "resume_step": null,
+      "status": "blocked_waiting_for_M7"
+    },
+    "M9": {
+      "blocking_issue": "M8 not complete",
+      "name": "Liu Hongju Founding Guardian Application",
+      "resume_step": null,
+      "status": "blocked_waiting_for_M8"
+    }
+  },
+  "schema": "trinityaccord.post-m1-live-test-progress.v1",
+  "status": "active",
+  "stop_rules_triggered": [],
+  "updated_at": "2026-06-07T02:32:57Z"
 }
