@@ -16,6 +16,7 @@ allowed = {
     "actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa",
     "actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e",
     "actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+    "actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
 }
 
 uses = set(re.findall(r"uses:\s*([^\s#]+)", text))
