@@ -1,0 +1,88 @@
+{
+  "schema": "trinityaccord.post-m1-m7c2-artifact-manifest.v1",
+  "run_id": "sandbox-20260607T192700Z",
+  "mode": "EXT",
+  "campaign": "C2-Gateway-Negative-Cases",
+  "public_key_sha256": "f8b1cff2f86d18c0c8b365d2259da93c081fa8e41b2d3d8b0bd3822367d68437",
+  "total_cases": 6,
+  "passed": 6,
+  "failed": 0,
+  "negative_cases": [
+    {
+      "case_id": "N01-no-key-dir",
+      "expected_codes": [
+        "BUILDER_REJECT_NO_KEY_DIR"
+      ],
+      "observed_codes": [
+        "BUILDER_REJECT_NO_KEY_DIR"
+      ],
+      "result": "pass",
+      "note": "Builder rejects build without --key-dir"
+    },
+    {
+      "case_id": "N02-missing-authorship",
+      "expected_codes": [
+        "MISSING_AUTHORSHIP_PROOF"
+      ],
+      "observed_codes": [
+        "MISSING_AUTHORSHIP_PROOF"
+      ],
+      "result": "pass"
+    },
+    {
+      "case_id": "N03-tampered-draft",
+      "expected_codes": [
+        "AUTHORSHIP_PAYLOAD_SHA_MISMATCH",
+        "AUTHORSHIP_SIGNATURE_INVALID"
+      ],
+      "observed_codes": [
+        "AUTHORSHIP_PROOF_INVALID"
+      ],
+      "result": "pass",
+      "note": "Gateway detects signature mismatch on tampered draft"
+    },
+    {
+      "case_id": "N04-participant-key-mismatch",
+      "expected_codes": [
+        "PARTICIPANT_KEY_MISMATCH",
+        "AUTHORSHIP_PAYLOAD_SHA_MISMATCH"
+      ],
+      "observed_codes": [
+        "AUTHORSHIP_PROOF_INVALID"
+      ],
+      "result": "pass",
+      "note": "Gateway detects at signature level before participant key check"
+    },
+    {
+      "case_id": "N06-private-key-leak",
+      "expected_codes": [
+        "SECURITY_VIOLATION",
+        "KEY_MATERIAL_DETECTED"
+      ],
+      "observed_codes": [
+        "SECURITY_VIOLATION",
+        "AUTHORSHIP_PROOF_INVALID"
+      ],
+      "result": "pass",
+      "note": "SECURITY_VIOLATION triggered by REDACTED_KEY_PATTERN pattern"
+    },
+    {
+      "case_id": "N07-missing-oath",
+      "expected_codes": [
+        "MISSING_SUBMISSION_OATH",
+        "MISSING_CLIENT_OATH_READBACK"
+      ],
+      "observed_codes": [
+        "MISSING_SUBMISSION_OATH"
+      ],
+      "result": "pass",
+      "note": "Requires complete oath removal (top-level + record_draft)"
+    }
+  ],
+  "private_key_not_persisted": true,
+  "key_dir_not_persisted": true,
+  "repo_clone_used_by_external_agent": false,
+  "github_token_used_by_external_agent": false,
+  "private_key_leakage_scan_passed": true,
+  "completed_at": "2026-06-07T12:02:12Z"
+}
