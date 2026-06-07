@@ -65,7 +65,7 @@ jobs:
             print("height=" + str(h["height"]))
             print("head=" + h["head_entry_hash"])
             PY_EOF
-            python3 - python3 /tmp/inline_1.py >> "$GITHUB_OUTPUT"
+            python3 /tmp/inline_1.py >> "$GITHUB_OUTPUT"
 
       - name: Auto finalize accepted submissions
         run: |
@@ -94,7 +94,7 @@ jobs:
             import json
             print(json.load(open("api/record-chain-head.json"))["height"])
             PY_EOF
-            AFTER=$(AFTER=$(python3 - python3 /tmp/inline_2.py)
+            AFTER=$(python3 /tmp/inline_2.py)
           if [ "$BEFORE" = "$AFTER" ]; then
             python3 scripts/build_record_chain_data_arweave_bundle.py \
               --mode snapshot \
@@ -110,7 +110,7 @@ jobs:
             obj=json.load(open("/tmp/data-build.json"))
             print("bundle_file=" + obj["bundle_file"])
             PY_EOF
-            python3 - python3 /tmp/inline_3.py >> "$GITHUB_OUTPUT"
+            python3 /tmp/inline_3.py >> "$GITHUB_OUTPUT"
 
       - name: Upload data bundle live
         if: inputs.mode == 'live'
@@ -163,7 +163,7 @@ jobs:
                     "--overwrite",
                 ])
             PY_EOF
-            python3 - python3 /tmp/inline_4.py
+            python3 /tmp/inline_4.py
 
       - name: Check OTS registry for duplicate upload
         id: ots_dup_check
@@ -172,11 +172,11 @@ jobs:
             cat > /tmp/inline_5.py << "PY_EOF"
             import json
             from pathlib import Path
-            
+
             head = json.load(open("api/record-chain-head.json"))
             current_head = head["head_entry_hash"]
             registry_path = Path("record-chain/ots/arweave-registry.json")
-            
+
             if not registry_path.exists():
                 print("skip_ots_upload=false")
                 print("reason=registry_file_missing")
@@ -195,7 +195,7 @@ jobs:
                     print("skip_ots_upload=false")
                     print("reason=no_existing_upload_for_head")
             PY_EOF
-            python3 - python3 /tmp/inline_5.py >> "$GITHUB_OUTPUT"
+            python3 /tmp/inline_5.py >> "$GITHUB_OUTPUT"
 
       - name: Upload OTS bundle live via Phase 5 script
         if: inputs.mode == 'live' && steps.ots_dup_check.outputs.skip_ots_upload != 'true'
