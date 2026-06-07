@@ -1,1 +1,1 @@
-{"batches":[],"derived_at":"2026-06-07T12:12:00Z","schema":"trinityaccord.batch-index.v1"}
+{"batches":[{"batch_id":"batch-000001","batch_manifest_sha256":"08df160719a189860831e89e6965ac0dfa75bdf6b671e6d4a790ecd265877d53","merkle_root_sha256":"160c1adc1c7fabc2a48e719c8ed126929c2e38373da86a8a86b9f178f618744c","path":"record-chain/batches/batch-000001/manifest.json"}],"derived_at":"2026-06-07T12:12:54Z","schema":"trinityaccord.batch-index.v1"}

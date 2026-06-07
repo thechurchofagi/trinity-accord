@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.public-home-status.v2",
-  "generated_at": "2026-06-07T12:12:14.046579+00:00",
+  "generated_at": "2026-06-07T12:12:58.220784+00:00",
   "generated_from": [
     "/api/record-chain-status.json",
     "/api/record-chain-anchor-status.json",
@@ -11,7 +11,7 @@
     "/api/guardian-registry.json",
     "/api/agent-declared-verification-index.json"
   ],
-  "source_digest": "449d943ca55ab554",
+  "source_digest": "78803e049d887aae",
   "current_record_chain_status": {
     "phase": "mainnet_prelaunch_testing",
     "total_records": 32,
@@ -54,8 +54,8 @@
         "workflow": "/.github/workflows/record-chain-arweave-archive.yml"
       },
       "anchor_status": {
-        "batch_count": 0,
-        "stamped_batch_count": 0,
+        "batch_count": 1,
+        "stamped_batch_count": 1,
         "unstamped_batch_count": 0
       },
       "arweave_index": {
