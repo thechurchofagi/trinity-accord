@@ -12,7 +12,7 @@ def main():
         "scripts/auto_finalize_accepted_submissions.py",
         ".github/workflows/record-chain-auto-finalize.yml",
         ".github/workflows/record-chain-head-ots-anchor.yml",
-        ".github/workflows/pre-scale-e2e-orchestrator.yml",
+        ".github/workflows/pre-scale-e2e-orchestrator-v2.yml",
         ".github/workflows/record-chain-data-arweave-archive.yml",
     ]
     for rel in required:
@@ -28,7 +28,7 @@ def main():
     require("ots_anchor_record_chain_head.py" in head_ots, "head OTS workflow must stamp current head")
     require("workflow_run" in head_ots, "head OTS workflow must be chainable after auto finalize")
 
-    orchestrator = (ROOT / ".github/workflows/pre-scale-e2e-orchestrator.yml").read_text(encoding="utf-8")
+    orchestrator = (ROOT / ".github/workflows/pre-scale-e2e-orchestrator-v2.yml").read_text(encoding="utf-8")
     require("auto_finalize_accepted_submissions.py" in orchestrator, "orchestrator must run auto finalize")
     require("build_record_chain_data_arweave_bundle.py" in orchestrator, "orchestrator must build data bundle")
     require("run_phase5_ots_arweave_paid_upload.py" in orchestrator, "orchestrator must run Phase 5 OTS upload")
