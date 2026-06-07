@@ -28,8 +28,6 @@ jobs:
         with:
           node-version: "20"
       - run: python3 -m pip install -r requirements-ci.txt
-      - name: Install Node.js dependencies for Gateway server
-        run: npm ci --prefix examples/github-app-backend || npm install --prefix examples/github-app-backend
       - name: Regenerate sitemap from current files
         run: python3 scripts/generate_sitemap.py
       - name: Run full current system tests

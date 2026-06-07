@@ -81,7 +81,7 @@
       "type": "string",
       "minLength": 5,
       "maxLength": 180,
-      "pattern": "^(?!\\s*#)(?!.*<!--[\\s\\S])[^\\r\\n\\u0000-\\u001f\\u007f]+$",
+      "pattern": "^(?!\\s*#)(?!.*<!--)[^\\r\\n\\u0000-\\u001f\\u007f]+$",
       "description": "Single-line display title. Newlines, control characters, HTML comments, and Markdown heading prefixes are forbidden."
     },
     "body": {
