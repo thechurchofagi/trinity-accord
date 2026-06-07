@@ -47,7 +47,7 @@ jobs:
 
       - name: Install deps
         run: |
-          pip install opentimestamps-client cryptography
+          pip install opentimestamps-client cryptography pytest jsonschema PyYAML
           npm ci || npm install
 
       - name: Guard live mode
