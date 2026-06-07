@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.public-home-status.v2",
-  "generated_at": "2026-06-07T11:34:02.515827+00:00",
+  "generated_at": "2026-06-07T11:34:20.105244+00:00",
   "generated_from": [
     "/api/record-chain-status.json",
     "/api/record-chain-anchor-status.json",
@@ -11,14 +11,14 @@
     "/api/guardian-registry.json",
     "/api/agent-declared-verification-index.json"
   ],
-  "source_digest": "6e14c11422f795d5",
+  "source_digest": "0ecefef297405987",
   "current_record_chain_status": {
     "phase": "mainnet_prelaunch_testing",
-    "total_records": 21,
-    "current_chain_length": 21,
+    "total_records": 22,
+    "current_chain_length": 22,
     "pending_records": 0,
-    "latest_record_id": "R-000000021",
-    "latest_record_type": "echo",
+    "latest_record_id": "R-000000022",
+    "latest_record_type": "verification",
     "record_type_counts": {
       "classification_update": 0,
       "context_insufficient_notice": 1,
@@ -28,7 +28,7 @@
       "guardian_key_rotation": 0,
       "guardian_retirement": 0,
       "propagation": 0,
-      "verification": 10
+      "verification": 11
     },
     "receipt_boundary": {
       "receipt_is_intake_only": true,
@@ -71,11 +71,11 @@
   },
   "current_record_chain_autonomy_signal": {
     "scope": "current_record_chain_only",
-    "eligible_records": 20,
-    "self_discovered_records": 14,
-    "self_decided_records": 14,
-    "self_executed_records": 20,
-    "fully_autonomous_records": 14,
+    "eligible_records": 21,
+    "self_discovered_records": 15,
+    "self_decided_records": 15,
+    "self_executed_records": 21,
+    "fully_autonomous_records": 15,
     "legacy_autonomy_claims_excluded": true
   },
   "legacy_archive_snapshot": {
