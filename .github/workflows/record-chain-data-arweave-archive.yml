@@ -1,0 +1,151 @@
+name: Record Chain Data Arweave Archive
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        required: true
+        default: delta
+        type: choice
+        options: [delta, snapshot]
+      upload_mode:
+        required: true
+        default: dry-run
+        type: choice
+        options: [dry-run, live]
+      from_height_exclusive:
+        required: false
+        default: "15"
+      to_height_inclusive:
+        required: false
+        default: ""
+      snapshot_height:
+        required: false
+        default: ""
+      confirm:
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+concurrency:
+  group: record-chain-data-arweave-archive
+  cancel-in-progress: false
+
+jobs:
+  archive:
+    runs-on: ubuntu-24.04
+    env:
+      ARKEY: ${{ secrets.ARKEY }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "20"
+
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Node deps
+        run: npm ci || npm install
+
+      - name: Verify chain
+        run: |
+          python3 scripts/verify_record_chain_integrity.py \
+            --ledger record-chain/hash-chain/main.chain.jsonl \
+            --head api/record-chain-head.json \
+            --chain-id trinity-record-chain-main \
+            --verify-payload-files \
+            --base-dir .
+
+      - name: Build data bundle
+        id: build
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ "${{ inputs.mode }}" = "delta" ]; then
+            TO="${{ inputs.to_height_inclusive }}"
+            if [ -z "$TO" ]; then
+              TO=$(python3 - <<'PY'
+import json
+print(json.load(open("api/record-chain-head.json"))["height"])
+PY
+)
+            fi
+            python3 scripts/build_record_chain_data_arweave_bundle.py \
+              --mode delta \
+              --from-height-exclusive "${{ inputs.from_height_exclusive }}" \
+              --to-height-inclusive "$TO" | tee /tmp/data-build.json
+          else
+            H="${{ inputs.snapshot_height }}"
+            if [ -z "$H" ]; then
+              H=$(python3 - <<'PY'
+import json
+print(json.load(open("api/record-chain-head.json"))["height"])
+PY
+)
+            fi
+            python3 scripts/build_record_chain_data_arweave_bundle.py \
+              --mode snapshot \
+              --height "$H" | tee /tmp/data-build.json
+          fi
+          python3 - <<'PY' >> "$GITHUB_OUTPUT"
+import json
+obj=json.load(open("/tmp/data-build.json"))
+print("bundle_file=" + obj["bundle_file"])
+PY
+
+      - name: Dry-run registry update
+        if: inputs.upload_mode == 'dry-run'
+        run: |
+          python3 scripts/update_record_chain_data_arweave_registry.py \
+            --bundle-file "${{ steps.build.outputs.bundle_file }}" \
+            --mode dry-run
+
+      - name: Live upload
+        if: inputs.upload_mode == 'live'
+        run: |
+          set -euo pipefail
+          test "${{ inputs.confirm }}" = "I_UNDERSTAND_THIS_UPLOADS_RECORD_CHAIN_DATA_TO_ARWEAVE"
+          test -n "$ARKEY"
+          mkdir -p /tmp/arweave-data
+          printf '%s' "$ARKEY" > /tmp/arweave-data/wallet.jwk.json
+          chmod 600 /tmp/arweave-data/wallet.jwk.json
+          export ARWEAVE_JWK_PATH=/tmp/arweave-data/wallet.jwk.json
+          node scripts/arweave_upload_payload.mjs \
+            --payload "${{ steps.build.outputs.bundle_file }}" \
+            --out /tmp/data-arweave-upload-result.json
+          python3 scripts/update_record_chain_data_arweave_registry.py \
+            --bundle-file "${{ steps.build.outputs.bundle_file }}" \
+            --upload-result-json /tmp/data-arweave-upload-result.json \
+            --mode live
+
+      - name: Verify data registry
+        run: |
+          python3 scripts/verify_record_chain_data_arweave_registry.py \
+            --registry record-chain/arweave-data-registry.json \
+            --verify-local-bundles
+
+      - name: Restore drill for snapshot
+        if: inputs.mode == 'snapshot'
+        run: |
+          python3 scripts/restore_record_chain_from_data_arweave_bundle.py \
+            --bundle-file "${{ steps.build.outputs.bundle_file }}" \
+            --verify
+
+      - name: Commit archive outputs
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add record-chain/arweave-data-bundles \
+                  record-chain/arweave-data-registry.json \
+                  api/record-chain-arweave-data-registry.json
+          if git diff --cached --quiet; then
+            echo "No data archive changes."
+          else
+            git commit -m "archive: record-chain data ${{ inputs.mode }} ${{ inputs.upload_mode }}"
+            git push
+          fi

@@ -123,5 +123,11 @@
     "private_key_must_not_be_uploaded_in_submission_receipt_or_arweave": true,
     "public_key_sha256_is_public_identity_anchor": true,
     "guardian_application_must_bind_guardian_public_key_to_authorship_public_key": true
+  },
+  "record_type_separation_policy": {
+    "echo_records_must_not_embed_guardian_application": true,
+    "verification_records_must_not_embed_guardian_application": true,
+    "guardian_application_must_be_submitted_as_standalone_record": true,
+    "linked_guardian_application_request_disabled": true
   }
 }

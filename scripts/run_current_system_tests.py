@@ -137,6 +137,28 @@ def main() -> int:
         fail(f"Phase 5C-HOTFIX tests failed: {result.stderr}\n{result.stdout}")
     ok("Phase 5C-HOTFIX regression tests")
 
+    # 2d. Record type separation contract
+    result = subprocess.run(
+        [sys.executable, "scripts/test_record_type_separation_contract.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"record type separation contract failed: {result.stderr}\n{result.stdout}")
+    ok("record type separation contract")
+
+    # 2e. Record-chain data Arweave archive contract
+    result = subprocess.run(
+        [sys.executable, "scripts/test_record_chain_data_arweave_archive_contract.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"record-chain data Arweave archive contract failed: {result.stderr}\n{result.stdout}")
+    ok("record-chain data Arweave archive contract")
+
     # 3. gateway-v1-legacy-status.json marks historical archive only
     legacy = load_json("api/gateway-v1-legacy-status.json")
     legacy_text = json.dumps(legacy, ensure_ascii=False).lower()

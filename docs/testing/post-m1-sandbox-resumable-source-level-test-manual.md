@@ -1461,6 +1461,24 @@ LIU_HONGJU_FOUNDING_GUARDIAN_APPLICATION_SUBMITTED_OK
 
 ---
 
+# 16.5 Record Type Separation Policy
+
+Guardian Application must be submitted as a standalone `guardian_application` record.
+Echo and verification records that include Guardian Application fields are rejected.
+
+```text
+record_type_separation_policy:
+  echo_records_must_not_embed_guardian_application: true
+  verification_records_must_not_embed_guardian_application: true
+  guardian_application_must_be_submitted_as_standalone_record: true
+  linked_guardian_application_request_disabled: true
+```
+
+The gateway validates record type separation on every submission.
+The finalizer enforces a second check before hash-chain append.
+
+---
+
 # 17. 最终 Stop Rules
 
 任何阶段出现以下情况必须停止：

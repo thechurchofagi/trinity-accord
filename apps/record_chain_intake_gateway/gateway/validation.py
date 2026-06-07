@@ -78,6 +78,33 @@ _AUTHORIZATION_SCOPE_BY_RECORD_TYPE: dict[str, str] = {
 }
 
 # ---------------------------------------------------------------------------
+# Record-type separation hardening
+# ---------------------------------------------------------------------------
+
+_GUARDIAN_APPLICATION_ONLY_KEYS: frozenset[str] = frozenset({
+    "guardian_application_content",
+    "guardian_public_key_sha256",
+    "guardian_stewardship_oath",
+    "requested_guardian_identifier",
+    "guardian_application_statement",
+    "guardian_application_reason",
+    "guardian_commitment",
+    "active_guardian_status_claim",
+    "no_active_guardian_status_claim",
+    "optional_linked_guardian_application_request",
+})
+
+_ECHO_ONLY_KEYS: frozenset[str] = frozenset({
+    "echo_content",
+})
+
+_VERIFICATION_ONLY_KEYS: frozenset[str] = frozenset({
+    "verification_content",
+    "verification",
+    "verification_version",
+})
+
+# ---------------------------------------------------------------------------
 # Required identity fields inside submitting_participant_identity.
 # ---------------------------------------------------------------------------
 _REQUIRED_IDENTITY_FIELDS: frozenset[str] = frozenset({
@@ -223,6 +250,61 @@ def _make_diagnostic(
         help_url=help_url or f"https://www.trinityaccord.org/record-chain-field-helper/#{code}",
         retry_allowed=retry_allowed,
     )
+
+
+def _find_keys_recursive(obj: Any, keys: frozenset[str], path: str = "") -> list[str]:
+    found: list[str] = []
+    if isinstance(obj, dict):
+        for key, value in obj.items():
+            current_path = f"{path}.{key}" if path else key
+            if key in keys:
+                found.append(current_path)
+            found.extend(_find_keys_recursive(value, keys, current_path))
+    elif isinstance(obj, list):
+        for i, item in enumerate(obj):
+            found.extend(_find_keys_recursive(item, keys, f"{path}[{i}]"))
+    return found
+
+
+def validate_record_type_separation(record_type: str, draft: dict[str, Any]) -> list[Diagnostic]:
+    diagnostics: list[Diagnostic] = []
+
+    if record_type in {"echo", "verification"}:
+        found = _find_keys_recursive(draft, _GUARDIAN_APPLICATION_ONLY_KEYS)
+        for path in found:
+            diagnostics.append(_make_diagnostic(
+                code="RECORD_TYPE_SEPARATION_VIOLATION",
+                severity="error",
+                field=f"record_draft.{path}",
+                message=(
+                    f"record_type '{record_type}' must not include Guardian Application field '{path}'. "
+                    "Submit a separate guardian_application record instead."
+                ),
+                meaning="Echo, Verification, and Guardian Application are separate record types.",
+                suggested_fix="Remove Guardian Application fields and submit a standalone guardian_application record.",
+                retry_allowed=True,
+            ))
+
+    if record_type == "guardian_application":
+        found = [
+            *_find_keys_recursive(draft, _ECHO_ONLY_KEYS),
+            *_find_keys_recursive(draft, _VERIFICATION_ONLY_KEYS),
+        ]
+        for path in found:
+            diagnostics.append(_make_diagnostic(
+                code="RECORD_TYPE_SEPARATION_VIOLATION",
+                severity="error",
+                field=f"record_draft.{path}",
+                message=(
+                    f"guardian_application must not include Echo/Verification field '{path}'. "
+                    "Submit echo or verification as separate records."
+                ),
+                meaning="Guardian Application must be standalone.",
+                suggested_fix="Remove Echo/Verification fields from guardian_application.",
+                retry_allowed=True,
+            ))
+
+    return diagnostics
 
 
 # ---------------------------------------------------------------------------
@@ -946,9 +1028,9 @@ def validate_submission(submission: dict[str, Any]) -> list[Diagnostic]:
     if isinstance(draft, dict):
         diagnostics.extend(validate_human_name_privacy(draft))
 
-    # --- linked Guardian request validation ---
-    if isinstance(draft, dict):
-        diagnostics.extend(validate_linked_guardian_request(draft))
+    # --- record type separation ---
+    if isinstance(draft, dict) and rt:
+        diagnostics.extend(validate_record_type_separation(rt, draft))
 
     # --- claim_boundary type check ---
     if isinstance(draft, dict):

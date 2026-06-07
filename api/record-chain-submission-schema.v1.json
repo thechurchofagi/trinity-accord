@@ -409,6 +409,29 @@
           "type": "string"
         }
       }
+    },
+    "record_type_separation_policy": {
+      "type": "object",
+      "description": "Record type separation policy: echo, verification, and guardian_application are mutually exclusive record types. Guardian Application must be submitted as a standalone guardian_application record. Echo and verification records that include Guardian Application fields are rejected.",
+      "properties": {
+        "echo_records_must_not_embed_guardian_application": {
+          "type": "boolean",
+          "const": true
+        },
+        "verification_records_must_not_embed_guardian_application": {
+          "type": "boolean",
+          "const": true
+        },
+        "guardian_application_must_be_submitted_as_standalone_record": {
+          "type": "boolean",
+          "const": true
+        },
+        "linked_guardian_application_request_disabled": {
+          "type": "boolean",
+          "const": true
+        }
+      },
+      "additionalProperties": false
     }
   },
   "additionalProperties": true,

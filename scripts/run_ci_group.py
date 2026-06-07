@@ -185,6 +185,10 @@ GROUPS = {
 
         # M3 finalizer native compatibility contract
         ["python3", "scripts/test_m3_finalizer_native_compat_contract.py"],
+
+        # Pre-scale record type/data architecture contracts
+        ["python3", "scripts/test_record_type_separation_contract.py"],
+        ["python3", "scripts/test_record_chain_data_arweave_archive_contract.py"],
     ],
     "p0-legacy-compat": [
         # --- 旧 Gateway v1 / formal builder / old workflow 测试 ---
