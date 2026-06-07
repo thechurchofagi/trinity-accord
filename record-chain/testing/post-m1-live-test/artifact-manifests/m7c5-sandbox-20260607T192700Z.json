@@ -1,0 +1,47 @@
+{
+  "schema": "trinityaccord.post-m1-m7c5-artifact-manifest.v1",
+  "run_id": "sandbox-20260607T192700Z",
+  "mode": "EXT",
+  "campaign": "C5-OTS-Arweave-Registry",
+  "tests": {
+    "ots_latest": {
+      "status": "pass",
+      "height": 15,
+      "head_entry_hash": "42f42d3544627404593de86bd6b3453d3ae95b8829d7aac33471adb8cd473eb1",
+      "ots_status": "upgraded",
+      "calendar_attested": true,
+      "bitcoin_pending": false,
+      "anchored_file_sha256": "757617fe8919f4e28ccea9071699b4fa4904f4917fbb1d676844ad0ad47f79e8"
+    },
+    "ots_anchor_file": {
+      "status": "pass",
+      "schema": "trinity_record_chain_ots_anchor.v1",
+      "height": 15
+    },
+    "arweave_registry": {
+      "status": "pass",
+      "total_entries": 6,
+      "all_hash_match": true,
+      "latest_by_head_present": true
+    },
+    "arweave_gateway": {
+      "status": "timeout",
+      "note": "arweave.net unreachable from sandbox (network timeout), not a data issue"
+    },
+    "head_ots_registry_consistency": {
+      "status": "pass",
+      "head_hash": "42f42d3544627404593de86bd6b3453d3ae95b8829d7aac33471adb8cd473eb1",
+      "ots_hash_match": true,
+      "registry_hash_match": true,
+      "all_heights_match": true,
+      "height": 15
+    }
+  },
+  "total_tests": 5,
+  "passed": 4,
+  "timeout": 1,
+  "failed": 0,
+  "anomalies": [],
+  "private_key_not_persisted": true,
+  "completed_at": "2026-06-07T12:20:11Z"
+}
