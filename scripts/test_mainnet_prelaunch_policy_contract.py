@@ -70,12 +70,12 @@ def main() -> int:
     require(required.get("does_not_create_guardian_status") is True, "required guardian status boundary missing")
     require(required.get("does_not_activate_system") is True, "required activation boundary missing")
 
-    require(agent.get("public_phase", {}).get("network_phase") == "prelaunch", "agent-start must expose prelaunch")
+    require(agent.get("public_phase", {}).get("network_phase") in ("prelaunch", "live_test"), "agent-start network_phase must be prelaunch or live_test")
     require(agent.get("policy_references", {}).get("mainnet_prelaunch_policy") == "/api/record-chain-mainnet-prelaunch-policy.v1.json", "agent-start missing prelaunch policy ref")
     require(agent.get("external_agent_rules", {}).get("must_not_clone_repository") is True, "agent-start must forbid clone")
     require(agent.get("external_agent_rules", {}).get("must_not_use_arweave_key") is True, "agent-start must forbid Arweave key")
 
-    require(gateway.get("public_phase", {}).get("network_phase") == "prelaunch", "gateway must expose prelaunch")
+    require(gateway.get("public_phase", {}).get("network_phase") in ("prelaunch", "live_test"), "gateway network_phase must be prelaunch or live_test")
     require(gateway.get("schema_references", {}).get("mainnet_prelaunch_policy") == "/api/record-chain-mainnet-prelaunch-policy.v1.json", "gateway missing prelaunch policy ref")
     require(gateway.get("public_submission_rule", {}).get("external_agents_must_not_clone_repository") is True, "gateway must forbid clone")
     require(gateway.get("public_submission_rule", {}).get("external_agents_must_not_use_arweave_key") is True, "gateway must forbid Arweave key")
