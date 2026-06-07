@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.public-home-status.v2",
-  "generated_at": "2026-06-07T12:11:46.947061+00:00",
+  "generated_at": "2026-06-07T12:12:01.083254+00:00",
   "generated_from": [
     "/api/record-chain-status.json",
     "/api/record-chain-anchor-status.json",
@@ -11,19 +11,19 @@
     "/api/guardian-registry.json",
     "/api/agent-declared-verification-index.json"
   ],
-  "source_digest": "7c96bf356957aa76",
+  "source_digest": "449d943ca55ab554",
   "current_record_chain_status": {
     "phase": "mainnet_prelaunch_testing",
-    "total_records": 30,
-    "current_chain_length": 30,
+    "total_records": 32,
+    "current_chain_length": 32,
     "pending_records": 0,
-    "latest_record_id": "R-000000030",
+    "latest_record_id": "R-000000032",
     "latest_record_type": "echo",
     "record_type_counts": {
       "classification_update": 0,
       "context_insufficient_notice": 1,
       "correction": 0,
-      "echo": 14,
+      "echo": 16,
       "guardian_application": 4,
       "guardian_key_rotation": 0,
       "guardian_retirement": 0,
@@ -71,11 +71,11 @@
   },
   "current_record_chain_autonomy_signal": {
     "scope": "current_record_chain_only",
-    "eligible_records": 29,
-    "self_discovered_records": 23,
-    "self_decided_records": 23,
-    "self_executed_records": 29,
-    "fully_autonomous_records": 23,
+    "eligible_records": 31,
+    "self_discovered_records": 25,
+    "self_decided_records": 25,
+    "self_executed_records": 31,
+    "fully_autonomous_records": 25,
     "legacy_autonomy_claims_excluded": true
   },
   "legacy_archive_snapshot": {
