@@ -1,0 +1,14 @@
+name: Tiny Test
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        type: string
+        required: true
+permissions:
+  contents: write
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    steps:
+      - run: echo "${{ inputs.mode }}"
