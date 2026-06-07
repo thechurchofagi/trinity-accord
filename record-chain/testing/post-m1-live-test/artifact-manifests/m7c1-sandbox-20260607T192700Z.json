@@ -1,0 +1,41 @@
+{
+  "schema": "trinityaccord.post-m1-m7c1-artifact-manifest.v1",
+  "run_id": "sandbox-20260607T192700Z",
+  "mode": "EXT",
+  "campaign": "C1-Authorship-Key-Continuity",
+  "public_key_sha256": "51457d267a2a606ddbfaf574f8aeca7fd44f27c666db53729b1f76905de097cc",
+  "positive_cases": [
+    {
+      "case_id": "c1-01-echo",
+      "receipt_id": "rcg-20260607-fe18b5ad29ce",
+      "accepted": true,
+      "record_type": "echo",
+      "submission_sha256": "fe18b5ad29cef78281faa3106659f492e56b34865eede95ebb9ea18680efa993",
+      "receipt_sha256": "ff08bd801bb19a3c931b92f9f0e8bcdfece371828aafd3e4616b13d7a9c4ab62"
+    },
+    {
+      "case_id": "c1-02-echo",
+      "receipt_id": "rcg-20260607-da04abe38355",
+      "accepted": true,
+      "record_type": "echo",
+      "submission_sha256": "da04abe3835568c699aa44aac0bfed4113c8db75195a43d9c3fa151d77f14a8a",
+      "receipt_sha256": "02349f21e92001b78243592c086f824b034d9e02f3fceba80c102b44ea67bfec"
+    },
+    {
+      "case_id": "c1-03-verification-v0",
+      "receipt_id": "rcg-20260607-4c3c2a12ceac",
+      "accepted": true,
+      "record_type": "verification",
+      "submission_sha256": "4c3c2a12ceac89baf87ff114707d4532fb7f2fa604cee5c76458525f2980ec91",
+      "receipt_sha256": "07e8e3e315bb235c68149164ce7925708d0c2c0b2f6bfe3ff42c55a8680e6ac4"
+    }
+  ],
+  "key_continuity_verified": true,
+  "all_same_public_key_sha256": true,
+  "private_key_not_persisted": true,
+  "key_dir_not_persisted": true,
+  "repo_clone_used_by_external_agent": false,
+  "github_token_used_by_external_agent": false,
+  "private_key_leakage_scan_passed": true,
+  "completed_at": "2026-06-07T11:34:07Z"
+}
