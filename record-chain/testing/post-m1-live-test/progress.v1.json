@@ -14,15 +14,16 @@
     "MANDATORY_KEY_MAIN_CHAIN_PRELAUNCH_FINALIZATION_OK",
     "MANDATORY_KEY_CURRENT_HEAD_OTS_ARWEAVE_OK",
     "RECORD_TYPE_SEPARATION_HARDENED_OK",
-    "RECORD_CHAIN_DATA_ARCHIVE_INFRA_OK"
+    "RECORD_CHAIN_DATA_ARCHIVE_INFRA_OK",
+    "PRE_SCALE_E2E_AUTOMATION_READY_OK"
   ],
   "current_mode": "INT-CHECKPOINT",
   "current_phase": "M5",
-  "current_step": "M5.pr1-record-type-data-archive",
+  "current_step": "M5.pre-scale-automation-ready",
   "known_anomalies": [],
   "last_checkpoint_at": null,
   "last_checkpoint_id": null,
-  "last_safe_resume_step": "M5.pr2-e2e-automation",
+  "last_safe_resume_step": "M5.live-stability",
   "latest_artifact_manifest_sha256": null,
   "latest_external_public_key_sha256": null,
   "latest_external_receipt_ids": [],
@@ -55,7 +56,7 @@
     "M5": {
       "blocking_issue": null,
       "name": "Pre-Live-Test Stability Test",
-      "resume_step": "M5.pr2-e2e-automation",
+      "resume_step": "M5.live-stability",
       "status": "in_progress"
     },
     "M6": {
@@ -86,5 +87,5 @@
   "schema": "trinityaccord.post-m1-live-test-progress.v1",
   "status": "active",
   "stop_rules_triggered": [],
-  "updated_at": "2026-06-07T02:32:57Z"
+  "updated_at": "2026-06-07T02:40:49Z"
 }
