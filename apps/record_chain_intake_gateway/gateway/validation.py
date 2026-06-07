@@ -10,6 +10,12 @@ from typing import Any
 
 from .models import Diagnostic
 from .authorship import verify_authorship_proof_submission
+from .security import (
+    find_private_human_identity_hits,
+    find_secret_hits,
+    normalize_oath_text,
+    sha256_text,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -407,24 +413,18 @@ def reject_forbidden_chain_fields(obj: dict[str, Any]) -> list[Diagnostic]:
 
 
 def reject_private_keys(obj: Any) -> list[Diagnostic]:
-    """Scan the entire submission for embedded private-key material."""
+    """Scan the entire submission recursively for embedded private-key/secret material."""
     diagnostics: list[Diagnostic] = []
-    serialised = repr(obj)
-    for pat in _SECURITY_PATTERNS:
-        m = pat.search(serialised)
-        if m:
-            diagnostics.append(_make_diagnostic(
-                code="SECURITY_VIOLATION",
-                severity="error",
-                field=None,
-                message=(
-                    f"Security violation: content matches pattern '{pat.pattern}' "
-                    "(possible secret/key material)"
-                ),
-                meaning="Private key material or secret tokens were detected in the submission.",
-                suggested_fix="Remove all private keys, tokens, and secret material from your submission.",
-                retry_allowed=False,
-            ))
+    for hit in find_secret_hits(obj):
+        diagnostics.append(_make_diagnostic(
+            code="SECURITY_VIOLATION",
+            severity="error",
+            field=hit["path"],
+            message=f"Security violation: {hit['code']} detected at {hit['path']}",
+            meaning="Private key material or secret tokens were detected in the submission.",
+            suggested_fix="Remove all private keys, tokens, and secret material from your submission.",
+            retry_allowed=False,
+        ))
     return diagnostics
 
 
@@ -501,45 +501,18 @@ def validate_identity(draft: dict[str, Any]) -> list[Diagnostic]:
 
 
 def validate_human_name_privacy(draft: dict[str, Any]) -> list[Diagnostic]:
-    """Reject submissions that include private human name data."""
+    """Reject private human identity data anywhere inside the draft."""
     diagnostics: list[Diagnostic] = []
-
-    # Check human_private_name_submitted = true
-    if draft.get("human_private_name_submitted") is True:
+    for hit in find_private_human_identity_hits(draft):
         diagnostics.append(_make_diagnostic(
-            code="HUMAN_NAME_PRIVACY_VIOLATION",
+            code=hit["code"],
             severity="error",
-            field="draft.human_private_name_submitted",
-            message="human_private_name_submitted must not be true",
-            meaning="Private human names must not be submitted. The record-chain is public.",
-            suggested_fix="Remove 'human_private_name_submitted' or set it to false.",
+            field=f"draft.{hit['path'].removeprefix('$.')}",
+            message="Private human identity fields are not allowed in public record-chain submissions",
+            meaning="The record-chain is public; private human identity material must not be embedded, encrypted, or flagged as submitted.",
+            suggested_fix="Remove the private human identity field. If a human is involved, disclose only public/non-identifying context.",
             retry_allowed=False,
         ))
-
-    # Check for encrypted_human_name
-    if "encrypted_human_name" in draft:
-        diagnostics.append(_make_diagnostic(
-            code="HUMAN_NAME_PRIVACY_VIOLATION",
-            severity="error",
-            field="draft.encrypted_human_name",
-            message="encrypted_human_name is not allowed",
-            meaning="Encrypted human names must not be submitted to the public record-chain.",
-            suggested_fix="Remove 'encrypted_human_name' from your draft.",
-            retry_allowed=False,
-        ))
-
-    # Check for private_identity_blob
-    if "private_identity_blob" in draft:
-        diagnostics.append(_make_diagnostic(
-            code="HUMAN_NAME_PRIVACY_VIOLATION",
-            severity="error",
-            field="draft.private_identity_blob",
-            message="private_identity_blob is not allowed",
-            meaning="Private identity blobs must not be submitted to the public record-chain.",
-            suggested_fix="Remove 'private_identity_blob' from your draft.",
-            retry_allowed=False,
-        ))
-
     return diagnostics
 
 
@@ -1226,7 +1199,7 @@ def validate_submission_oath(
     for mod_id in expected_modules:
         mod = modules_obj.get(mod_id)
         if mod:
-            canonical_parts.append(f"=== {mod['label']} ({mod_id}) ===\n\n{_normalize_oath_text(mod['text'])}")
+            canonical_parts.append(f"=== {mod['label']} ({mod_id}) ===\n\n{normalize_oath_text(mod['text'])}")
 
     joiner = local_policy.get("canonicalization", {}).get("module_joiner", "\n\n---\n\n")
     canonical_text = joiner.join(canonical_parts).strip()
