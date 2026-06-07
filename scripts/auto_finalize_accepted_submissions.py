@@ -70,20 +70,23 @@ def main() -> int:
     ap.add_argument("--max-records", type=int, default=10)
     ap.add_argument("--source-run-id", default="auto-finalize")
     ap.add_argument("--mode", choices=["dry-run", "live"], default="dry-run")
+    ap.add_argument("--require-new-records", action="store_true", default=False,
+                    help="Exit non-zero if no new records were finalized (prevents no-op false success).")
     args = ap.parse_args()
 
     submissions_dir = ROOT / args.submissions_dir
     receipts_dir = ROOT / args.receipts_dir
 
     if not submissions_dir.exists() or not receipts_dir.exists():
+        exit_code = 1 if args.require_new_records else 0
         print(json.dumps({
-            "result": "pass",
+            "result": "fail" if args.require_new_records else "pass",
             "mode": args.mode,
             "finalized_count": 0,
             "skipped_count": 0,
             "reason": "intake directories missing; no-op"
         }, indent=2, sort_keys=True))
-        return 0
+        return exit_code
 
     existing = existing_receipt_ids()
     finalized = []
@@ -133,15 +136,21 @@ def main() -> int:
 
         finalized.append({"submission": str(sub.relative_to(ROOT)), "receipt_id": receipt_id})
 
+    result = "pass"
+    exit_code = 0
+    if args.require_new_records and len(finalized) == 0:
+        result = "fail"
+        exit_code = 1
+
     print(json.dumps({
-        "result": "pass",
+        "result": result,
         "mode": args.mode,
         "finalized_count": len(finalized),
         "skipped_count": len(skipped),
         "finalized": finalized,
         "skipped": skipped,
     }, indent=2, sort_keys=True))
-    return 0
+    return exit_code
 
 if __name__ == "__main__":
     raise SystemExit(main())
