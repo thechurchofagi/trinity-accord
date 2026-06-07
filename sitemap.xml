@@ -190,6 +190,7 @@
   <url><loc>https://www.trinityaccord.org/api/record-chain-index.manifest.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/record-chain-index.verification.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/record-chain-intake-gateway.v1.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/record-chain-live-test-policy.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/record-chain-mainnet-prelaunch-policy.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/record-chain-oath-policy.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/record-chain-ots-arweave-registry.json</loc></url>
