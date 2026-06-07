@@ -1,0 +1,43 @@
+{
+  "schema": "trinityaccord.post-m1-m7c3-artifact-manifest.v1",
+  "run_id": "sandbox-20260607T192700Z",
+  "mode": "EXT",
+  "campaign": "C3-Rate-Limit-Concurrency",
+  "public_key_sha256": "728af323a8728b07d2ecb8d7410e036faa3e6e48c995ab8764d309b28ba944be",
+  "tests": {
+    "sequential_rapid": {
+      "description": "6 submissions fired rapidly one after another with no delay",
+      "total": 6,
+      "accepted": 6,
+      "rejected": 0,
+      "rate_limited": false,
+      "result": "pass"
+    },
+    "parallel_concurrent": {
+      "description": "3 submissions fired simultaneously",
+      "total": 3,
+      "accepted_immediately": 1,
+      "persist_failed_409": 2,
+      "retry_succeeded": 2,
+      "note": "GitHub Contents API 409 conflict on concurrent writes; not an intentional rate limit. Gateway fails gracefully and accepts retry.",
+      "result": "pass"
+    }
+  },
+  "receipt_ids": [
+    "rcg-20260607-7a854076a168",
+    "rcg-20260607-a9dc07f1e12c",
+    "rcg-20260607-474c7218399b",
+    "rcg-20260607-03fd106187b7",
+    "rcg-20260607-a79c7d036a26",
+    "rcg-20260607-41000b3ea23c",
+    "rcg-20260607-f695662a11a1",
+    "rcg-20260607-ded862a86fe7",
+    "rcg-20260607-151cf8b2511b"
+  ],
+  "total_submissions": 9,
+  "total_accepted": 9,
+  "private_key_not_persisted": true,
+  "key_dir_not_persisted": true,
+  "private_key_leakage_scan_passed": true,
+  "completed_at": "2026-06-07T12:12:35Z"
+}
