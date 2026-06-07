@@ -1,25 +1,26 @@
 {
   "active_session": {
-    "session_id": "sandbox-20260607T151900Z",
+    "expires_at": "2026-06-07T16:07:00Z",
     "mode": "INT-CHECKPOINT",
     "owner": "agent",
+    "session_id": "sandbox-20260607T151900Z",
     "started_at": "2026-06-07T15:19:00Z",
-    "updated_at": "2026-06-07T15:32:00Z",
-    "expires_at": "2026-06-07T16:07:00Z"
+    "updated_at": "2026-06-07T15:32:00Z"
   },
   "authoritative_progress_branch": "post-m1-test-progress",
   "completed_markers": [
-    "PHASE7C_BASELINE_RESTORED_OK",
+    "LIVE_TEST_ACTIVATED_OK",
+    "LIVE_TEST_FINALIZER_PHASE_AWARE_OK",
     "MANDATORY_AUTHORSHIP_KEY_ONLY_FINAL_OK",
-    "MANDATORY_KEY_MAIN_CHAIN_PRELAUNCH_FINALIZATION_OK",
     "MANDATORY_KEY_CURRENT_HEAD_OTS_ARWEAVE_OK",
-    "RECORD_TYPE_SEPARATION_HARDENED_OK",
-    "RECORD_CHAIN_DATA_ARCHIVE_INFRA_OK",
-    "PRE_SCALE_E2E_AUTOMATION_READY_OK",
+    "MANDATORY_KEY_MAIN_CHAIN_PRELAUNCH_FINALIZATION_OK",
+    "PHASE7C_BASELINE_RESTORED_OK",
     "PRE_LIVE_TEST_STABILITY_OK",
-    "RECORD_CHAIN_DATA_SNAPSHOT_ARWEAVE_OK",
+    "PRE_SCALE_E2E_AUTOMATION_READY_OK",
     "RECORD_CHAIN_ARWEAVE_DATA_RECOVERY_DRILL_OK",
-    "LIVE_TEST_ACTIVATED_OK"
+    "RECORD_CHAIN_DATA_ARCHIVE_INFRA_OK",
+    "RECORD_CHAIN_DATA_SNAPSHOT_ARWEAVE_OK",
+    "RECORD_TYPE_SEPARATION_HARDENED_OK"
   ],
   "current_mode": "INT-CHECKPOINT",
   "current_phase": "M6",
@@ -59,35 +60,35 @@
     },
     "M5": {
       "blocking_issue": null,
+      "evidence": {
+        "bundle": "record-chain/arweave-data-bundles/data-snapshot-height-15-42f42d354462-5716ac6bd451.json",
+        "completed_at": "2026-06-07T06:56:04Z",
+        "conclusion": "success",
+        "data_snapshot_tx": "D1tVrr8vdvFkfY2y8PpLAR1FFNOWXF3f9XbvwLdM2Go",
+        "hash_match": true,
+        "run": "M5 Run #21",
+        "workflow": "pre-scale-e2e-orchestrator-v2"
+      },
       "name": "Pre-Live-Test Stability Test",
       "resume_step": "M6.1",
-      "status": "pass",
-      "evidence": {
-        "run": "M5 Run #21",
-        "workflow": "pre-scale-e2e-orchestrator-v2",
-        "data_snapshot_tx": "D1tVrr8vdvFkfY2y8PpLAR1FFNOWXF3f9XbvwLdM2Go",
-        "bundle": "record-chain/arweave-data-bundles/data-snapshot-height-15-42f42d354462-5716ac6bd451.json",
-        "hash_match": true,
-        "conclusion": "success",
-        "completed_at": "2026-06-07T06:56:04Z"
-      }
+      "status": "pass"
     },
     "M6": {
-      "name": "Live-Test Activation Marker",
-      "status": "pass",
-      "resume_step": "M7.1",
       "blocking_issue": null,
       "evidence": {
-        "pr": "#446",
+        "completed_at": "2026-06-07T15:32:00Z",
         "merge_sha": "f3b8a6b9b6f04ccf7324fb069ecf7949334fd547",
-        "completed_at": "2026-06-07T15:32:00Z"
-      }
+        "pr": "#446"
+      },
+      "name": "Live-Test Activation Marker",
+      "resume_step": "M7.1",
+      "status": "pass"
     },
     "M7": {
+      "blocking_issue": null,
       "name": "Large Live Operational Test Campaigns",
-      "status": "ready",
       "resume_step": "M7.1",
-      "blocking_issue": null
+      "status": "in_progress"
     },
     "M8": {
       "blocking_issue": "M7 not complete",
