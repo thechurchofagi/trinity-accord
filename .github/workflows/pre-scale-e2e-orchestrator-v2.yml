@@ -1,4 +1,4 @@
-name: Pre-Scale E2E Orchestrator
+name: Pre-Scale E2E Orchestrator v2
 
 on:
   workflow_dispatch:
@@ -6,19 +6,23 @@ on:
       mode:
         required: true
         default: dry-run
-        type: choice
-        options:
-          - dry-run
-          - live
+        description: "Run mode: dry-run or live"
+        type: string
       max_records:
         required: false
         default: "3"
+        description: "Max records to process"
+        type: string
       from_height_exclusive:
         required: false
         default: ""
+        description: "Start height (exclusive)"
+        type: string
       confirm:
         required: false
         default: ""
+        description: "Confirmation text for live mode"
+        type: string
 
 permissions:
   contents: write
