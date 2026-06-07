@@ -77,6 +77,7 @@ def _make_echo_draft(index: int = 1) -> dict:
             "algorithm": "ed25519",
             "signed_payload_sha256": "a" * 64,
             "public_key_pem": "-----BEGIN PUBLIC KEY-----\ntest\n-----END PUBLIC KEY-----\n",
+            "signature_base64": "dGVzdHNpZ25hdHVyZQ==",
         },
     }
 
@@ -112,6 +113,7 @@ def _make_guardian_draft(index: int = 1) -> dict:
             "algorithm": "ed25519",
             "signed_payload_sha256": "c" * 64,
             "public_key_pem": "-----BEGIN PUBLIC KEY-----\ntest\n-----END PUBLIC KEY-----\n",
+            "signature_base64": "dGVzdHNpZ25hdHVyZQ==",
         },
     }
 
@@ -182,8 +184,8 @@ def test_1_append_includes_authorship_verification_status() -> list[str]:
         else:
             if avs.get("signed_payload_scope") != "pre_append_record_draft":
                 errors.append(f"wrong signed_payload_scope: {avs.get('signed_payload_scope')}")
-            if avs.get("verified_by_gateway_before_pending") is not True:
-                errors.append("verified_by_gateway_before_pending not true")
+            if avs.get("verified_by_append_before_record") is not True:
+                errors.append("verified_by_append_before_record not true")
             if avs.get("final_record_contains_append_assigned_fields_not_in_signed_payload") is not True:
                 errors.append("final_record_contains_append_assigned_fields_not_in_signed_payload not true")
         # append_assigned_metadata must NOT contain hash fields
