@@ -29,9 +29,13 @@ MAIN_CHAIN_ID = "trinity-record-chain-main"
 MAIN_LEDGER = ROOT / "record-chain/hash-chain/main.chain.jsonl"
 MAIN_HEAD = ROOT / "api/record-chain-head.json"
 MAIN_RECORDS_DIR = ROOT / "record-chain/records"
-POLICY = ROOT / "api/record-chain-mainnet-prelaunch-policy.v1.json"
 
-CONFIRM = "I_UNDERSTAND_THIS_APPENDS_A_MAINNET_PRELAUNCH_TEST_RECORD"
+AGENT_START = ROOT / "api/agent-start.v2.json"
+LIVE_TEST_POLICY = ROOT / "api/record-chain-live-test-policy.v1.json"
+PRELAUNCH_POLICY = ROOT / "api/record-chain-mainnet-prelaunch-policy.v1.json"
+
+CONFIRM_PRELAUNCH = "I_UNDERSTAND_THIS_APPENDS_A_MAINNET_PRELAUNCH_TEST_RECORD"
+CONFIRM_LIVE_TEST = "I_UNDERSTAND_THIS_APPENDS_A_MAINNET_LIVE_TEST_RECORD"
 
 FORBIDDEN_SUBSTRINGS = [
     "刘烘炬",
@@ -103,6 +107,37 @@ def get_path(data: Any, dotted: str, default: Any = None) -> Any:
             return default
         cur = cur[part]
     return cur
+
+
+def detect_public_test_phase() -> str:
+    """Detect the current public test phase from agent-start config."""
+    agent = read_json(AGENT_START)
+    phase = get_path(agent, "public_phase.network_phase")
+    if phase == "live_test":
+        policy = read_json(LIVE_TEST_POLICY)
+        if policy.get("chain_id") != MAIN_CHAIN_ID:
+            raise SystemExit("live-test policy chain_id mismatch")
+        if policy.get("network_phase") != "live_test":
+            raise SystemExit("live-test policy network_phase mismatch")
+        if get_path(agent, "public_phase.official_live_records_allowed") is not False:
+            raise SystemExit("official live records are not allowed during live-test")
+        if get_path(agent, "public_phase.live_test_active") is not True:
+            raise SystemExit("agent-start live_test_active must be true for live_test phase")
+        return "live_test"
+
+    if phase == "prelaunch":
+        policy = read_json(PRELAUNCH_POLICY)
+        if policy.get("chain_id") != MAIN_CHAIN_ID:
+            raise SystemExit("prelaunch policy chain_id mismatch")
+        if policy.get("network_phase") != "prelaunch":
+            raise SystemExit("prelaunch policy is not in prelaunch phase")
+        if policy.get("mainnet_activation_marker_recorded") is not False:
+            raise SystemExit("activation marker already recorded; refusing prelaunch finalization")
+        if policy.get("official_live_records_allowed") is not False:
+            raise SystemExit("official live records already allowed; refusing prelaunch finalization")
+        return "prelaunch"
+
+    raise SystemExit(f"unsupported public test phase: {phase!r}")
 
 
 def extract_record_type(submission: dict[str, Any]) -> str:
@@ -199,7 +234,6 @@ def assert_no_raw_readback(obj: Any) -> None:
 
 def assert_no_private_key_material(obj: Any, label: str = "object") -> None:
     raw = json.dumps(obj, ensure_ascii=False)
-    # These patterns are split to avoid false-positive from test_no_private_key_material_committed.py
     _pem_prefix = "-----BEGIN " + "PRIVATE KEY-----"
     forbidden = [
         "BEGIN " + "PRIVATE KEY",
@@ -265,14 +299,14 @@ def ensure_no_unrelated_pending_json() -> None:
         )
 
 
-def assert_prelaunch_safe_input(submission: dict[str, Any], receipt: dict[str, Any]) -> None:
+def assert_test_safe_input(submission: dict[str, Any], receipt: dict[str, Any]) -> None:
     raw = json.dumps({"submission": submission, "receipt": receipt}, ensure_ascii=False)
     found = [m for m in FORBIDDEN_SUBSTRINGS if m in raw]
     for pattern in FORBIDDEN_TRUE_PATTERNS:
         if re.search(pattern, raw):
             found.append(pattern)
     if found:
-        raise SystemExit("formal/live marker found in prelaunch test input: " + ", ".join(found))
+        raise SystemExit("formal/live marker found in test input: " + ", ".join(found))
 
 
 def run(cmd: list[str]) -> None:
@@ -286,13 +320,14 @@ def run(cmd: list[str]) -> None:
         raise SystemExit(f"command failed ({result.returncode}): {' '.join(cmd)}")
 
 
-def build_native_prelaunch_draft(
+def build_native_test_draft(
     *,
     submission: dict[str, Any],
     receipt: dict[str, Any],
     submission_path: Path,
     receipt_path: Path,
     source_run_id: str,
+    public_test_phase: str,
 ) -> dict[str, Any]:
     draft = copy.deepcopy(submission.get("record_draft"))
     if not isinstance(draft, dict):
@@ -306,16 +341,25 @@ def build_native_prelaunch_draft(
     verification_level = extract_verification_level(submission)
     receipt_id = receipt.get("receipt_id")
 
-    # Native verifier requires formal records to contain authorship_proof inside the native draft.
-    # Public submissions keep authorship_proof at top-level, so finalizer bridges that representation here.
     draft["authorship_proof"] = proof
 
-    draft["network_phase"] = "prelaunch"
-    draft["record_scope"] = "mainnet_prelaunch_test"
-    draft["prelaunch_test"] = True
-    draft["official_live_record"] = False
-    draft["does_not_create_guardian_status"] = True
-    draft["does_not_activate_system"] = True
+    if public_test_phase == "live_test":
+        draft["network_phase"] = "live_test"
+        draft["record_scope"] = "mainnet_live_test"
+        draft["live_test"] = True
+        draft["operational_test"] = True
+        draft["test_record"] = True
+        draft["prelaunch_test"] = False
+        draft["official_live_record"] = False
+        draft["does_not_create_guardian_status"] = True
+        draft["does_not_activate_system"] = True
+    else:
+        draft["network_phase"] = "prelaunch"
+        draft["record_scope"] = "mainnet_prelaunch_test"
+        draft["prelaunch_test"] = True
+        draft["official_live_record"] = False
+        draft["does_not_create_guardian_status"] = True
+        draft["does_not_activate_system"] = True
 
     draft["source_receipt_semantics"] = {
         "receipt_is_intake_only": True,
@@ -348,9 +392,12 @@ def build_native_prelaunch_draft(
 
     draft["finalization"] = {
         "finalized_at": utc_now(),
-        "finalized_by": "record-chain-prelaunch-finalizer",
+        "finalized_by": "record-chain-test-phase-finalizer",
         "hash_chain_inclusion_is_finalization_event": True,
-        "prelaunch_test_finalization": True,
+        "test_phase_finalization": True,
+        "public_test_phase": public_test_phase,
+        "prelaunch_test_finalization": public_test_phase == "prelaunch",
+        "live_test_finalization": public_test_phase == "live_test",
         "official_live_record": False,
         "does_not_activate_system": True,
         "does_not_create_guardian_status": True,
@@ -359,7 +406,7 @@ def build_native_prelaunch_draft(
     }
 
     assert_no_raw_readback(draft)
-    assert_no_private_key_material(draft, "native prelaunch draft")
+    assert_no_private_key_material(draft, "native test draft")
 
     return draft
 
@@ -388,8 +435,6 @@ def append_native_record_from_draft(native_draft: dict[str, Any], receipt_id: An
     try:
         run([sys.executable, "scripts/trinity_record_chain.py", "append"])
     except BaseException:
-        # If append rejects, trinity_record_chain.py should move the pending file to rejected.
-        # If the pending file remains, keep it for debugging but fail loudly.
         if pending_path.exists():
             print(f"pending file still exists after append failure: {pending_path.relative_to(ROOT)}", file=sys.stderr)
         raise
@@ -429,25 +474,18 @@ def append_native_record_from_draft(native_draft: dict[str, Any], receipt_id: An
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Finalize an external submission as a MAINNET PRELAUNCH TEST record.")
+    parser = argparse.ArgumentParser(description="Finalize an external submission as a test record (phase-aware).")
     parser.add_argument("--submission-json", required=True)
     parser.add_argument("--receipt-json", required=True)
-    parser.add_argument("--source-run-id", default=time.strftime("mainnet-prelaunch-%Y%m%dT%H%M%SZ", time.gmtime()))
+    parser.add_argument("--source-run-id", default=time.strftime("test-phase-finalize-%Y%m%dT%H%M%SZ", time.gmtime()))
     parser.add_argument("--confirm-mainnet-prelaunch-append", required=True)
     args = parser.parse_args()
 
-    if args.confirm_mainnet_prelaunch_append != CONFIRM:
-        raise SystemExit(f"--confirm-mainnet-prelaunch-append must be exactly {CONFIRM!r}")
-
-    policy = read_json(POLICY)
-    if policy.get("chain_id") != MAIN_CHAIN_ID:
-        raise SystemExit("prelaunch policy chain_id mismatch")
-    if policy.get("network_phase") != "prelaunch":
-        raise SystemExit("prelaunch policy is not in prelaunch phase")
-    if policy.get("mainnet_activation_marker_recorded") is not False:
-        raise SystemExit("activation marker already recorded; refusing prelaunch finalization")
-    if policy.get("official_live_records_allowed") is not False:
-        raise SystemExit("official live records already allowed; refusing prelaunch finalization")
+    # Phase-aware confirmation
+    phase = detect_public_test_phase()
+    expected_confirm = CONFIRM_LIVE_TEST if phase == "live_test" else CONFIRM_PRELAUNCH
+    if args.confirm_mainnet_prelaunch_append != expected_confirm:
+        raise SystemExit(f"--confirm-mainnet-prelaunch-append must be exactly {expected_confirm!r} for phase {phase!r}")
 
     submission_path = Path(args.submission_json)
     receipt_path = Path(args.receipt_json)
@@ -462,29 +500,43 @@ def main() -> int:
     if receipt.get("accepted") is not True:
         raise SystemExit("receipt must have accepted=true before finalization")
 
-    assert_prelaunch_safe_input(submission, receipt)
+    assert_test_safe_input(submission, receipt)
     assert_record_type_separation(submission)
 
     record_type = extract_record_type(submission)
     verification_level = extract_verification_level(submission)
     receipt_id = receipt.get("receipt_id")
 
-    native_draft = build_native_prelaunch_draft(
+    native_draft = build_native_test_draft(
         submission=submission,
         receipt=receipt,
         submission_path=submission_path,
         receipt_path=receipt_path,
         source_run_id=args.source_run_id,
+        public_test_phase=phase,
     )
 
     record_id, payload_path, native_record = append_native_record_from_draft(native_draft, receipt_id)
 
     if native_record.get("record_type") != record_type:
         raise SystemExit("native appended record_type mismatch")
-    if native_record.get("network_phase") != "prelaunch":
-        raise SystemExit("native appended record missing network_phase=prelaunch")
-    if native_record.get("prelaunch_test") is not True:
-        raise SystemExit("native appended record missing prelaunch_test=true")
+
+    # Phase-aware native record validation
+    if phase == "live_test":
+        if native_record.get("network_phase") != "live_test":
+            raise SystemExit("native appended record missing network_phase=live_test")
+        if native_record.get("live_test") is not True:
+            raise SystemExit("native appended record missing live_test=true")
+        if native_record.get("operational_test") is not True:
+            raise SystemExit("native appended record missing operational_test=true")
+        if native_record.get("test_record") is not True:
+            raise SystemExit("native appended record missing test_record=true")
+    else:
+        if native_record.get("network_phase") != "prelaunch":
+            raise SystemExit("native appended record missing network_phase=prelaunch")
+        if native_record.get("prelaunch_test") is not True:
+            raise SystemExit("native appended record missing prelaunch_test=true")
+
     if native_record.get("official_live_record") is not False:
         raise SystemExit("native appended record must have official_live_record=false")
     if native_record.get("does_not_create_guardian_status") is not True:
@@ -514,7 +566,7 @@ def main() -> int:
         "--record-id", record_id,
         "--receipt-id", str(receipt_id or ""),
         "--source-run-id", args.source_run_id,
-        "--finalized-by", "record-chain-prelaunch-finalizer",
+        "--finalized-by", "record-chain-test-phase-finalizer",
         "--verify-payload-files",
     ])
 
@@ -548,7 +600,7 @@ def main() -> int:
         "receipt_id": receipt_id,
         "payload_file": str(payload_path.relative_to(ROOT)),
         "native_record_sha256": native_record.get("record_sha256"),
-        "network_phase": "prelaunch",
+        "network_phase": phase,
         "official_live_record": False,
     }, indent=2, sort_keys=True, ensure_ascii=False))
     return 0
