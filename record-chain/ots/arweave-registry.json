@@ -115,16 +115,39 @@
       "registry_key": "height-15-42f42d3544627404-pending-9ff6f1a4511adabb",
       "source_anchor_file": "record-chain/ots/anchors/height-15-42f42d3544627404-757617fe8919f4e2.anchor.json",
       "source_anchor_sha256": "3e19f9ae3f2bf9485ffc25e790e981191e5ad07094fb4c1c7f13fb545205b4c1"
+    },
+    {
+      "anchored_file_sha256": "757617fe8919f4e28ccea9071699b4fa4904f4917fbb1d676844ad0ad47f79e8",
+      "arweave_gateway_url": "https://arweave.net/iBQF4Y-hS_hn-2TlnjWMK64hsbT-A25ugFj5QPHRCq8",
+      "arweave_hash_match": true,
+      "arweave_payload_sha256": "a018bc5b659fd397eeb88b1487cac15514b0a269eb0aa31f491ddfdfdeb680e7",
+      "arweave_readback_sha256": "a018bc5b659fd397eeb88b1487cac15514b0a269eb0aa31f491ddfdfdeb680e7",
+      "arweave_tx_id": "iBQF4Y-hS_hn-2TlnjWMK64hsbT-A25ugFj5QPHRCq8",
+      "bitcoin_attestation_embedded": true,
+      "bitcoin_pending": false,
+      "bitcoin_verified": false,
+      "bundle_bytes": 13983,
+      "bundle_file": "record-chain/ots/arweave-bundles/height-15-42f42d3544627404-757617fe8919f4e2.anchor.upgraded.arweave-bundle.json",
+      "bundle_sha256": "a018bc5b659fd397eeb88b1487cac15514b0a269eb0aa31f491ddfdfdeb680e7",
+      "chain_id": "trinity-record-chain-main",
+      "created_at": "2026-06-07T01:36:32Z",
+      "entry_count": 16,
+      "head_entry_hash": "42f42d3544627404593de86bd6b3453d3ae95b8829d7aac33471adb8cd473eb1",
+      "height": 15,
+      "ots_status": "upgraded",
+      "registry_key": "height-15-42f42d3544627404-upgraded-a018bc5b659fd397",
+      "source_anchor_file": "record-chain/ots/anchors/height-15-42f42d3544627404-757617fe8919f4e2.anchor.json",
+      "source_anchor_sha256": "76734020771a33d2139cea3364465b45741d88dca9a08d75c1ac5bfae534ea1f"
     }
   ],
-  "entry_count": 5,
-  "generated_at": "2026-06-07T00:20:36Z",
+  "entry_count": 6,
+  "generated_at": "2026-06-07T01:36:32Z",
   "latest_by_head": {
     "42f42d3544627404593de86bd6b3453d3ae95b8829d7aac33471adb8cd473eb1": {
       "height": 15,
-      "latest_any_tx_id": "dc7uhY6joyZJ2vOuTwHodV94WSiEHxqOgAzPHgAVLgw",
+      "latest_any_tx_id": "iBQF4Y-hS_hn-2TlnjWMK64hsbT-A25ugFj5QPHRCq8",
       "latest_pending_tx_id": "dc7uhY6joyZJ2vOuTwHodV94WSiEHxqOgAzPHgAVLgw",
-      "latest_upgraded_tx_id": null,
+      "latest_upgraded_tx_id": "iBQF4Y-hS_hn-2TlnjWMK64hsbT-A25ugFj5QPHRCq8",
       "latest_verified_tx_id": null
     },
     "ac53ae818b13c6933b94b306d47c66d02838d1cae00b001c46152bfd7205df4f": {
