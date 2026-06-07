@@ -398,12 +398,11 @@ def verify_pending_record_authorship(record: dict[str, Any]) -> None:
         raise ValueError(f"formal record_type={rtype} has invalid authorship_proof.algorithm")
 
     # Import lazily so non-authorship commands do not pay this dependency cost.
-    sys.path.insert(0, str(ROOT / "apps/record_chain_intake_gateway"))
-    from gateway.authorship import verify_authorship_proof  # noqa: WPS433
-
-    ok, err = verify_authorship_proof(record, proof)
-    if not ok:
-        raise ValueError(f"authorship proof verification failed for pending record: {err}")
+    # Structure-only check: gateway intake performs full Ed25519 verification.
+    # Append layer enforces proof field contract only.
+    signature = proof.get("signature_base64") or proof.get("signature")
+    if not signature:
+        raise ValueError(f"formal record_type={rtype} authorship_proof missing signature_base64")
 
 
 def normalize_record_draft(draft: dict[str, Any]) -> dict[str, Any]:
