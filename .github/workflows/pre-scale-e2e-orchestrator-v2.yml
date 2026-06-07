@@ -129,7 +129,7 @@ jobs:
         run: |
           python3 -c 'import json,subprocess,sys; from pathlib import Path; head=json.load(open("api/record-chain-head.json")); ots_path=Path("api/record-chain-ots-latest.json"); ots=json.load(open(ots_path)) if ots_path.exists() else {}; matched=ots.get("height")==head.get("height") and ots.get("head_entry_hash")==head.get("head_entry_hash"); print("OTS latest already matches current head.") if matched else subprocess.check_call([sys.executable,"scripts/ots_anchor_record_chain_head.py","--mode","stamp","--verify-ledger","--base-dir",".","--overwrite"])'
 
-      - name: Check OTS registry for duplicate upload
+      - name: Check OTS registry for duplicate upload (latest_by_head)
         id: ots_dup_check
         if: inputs.mode == 'live'
         run: |
