@@ -23,7 +23,12 @@ jobs:
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
         with:
           python-version: "3.12"
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "20"
       - run: python3 -m pip install -r requirements-ci.txt
+      - name: Install Node.js dependencies for Gateway server
+        run: npm ci --prefix examples/github-app-backend || npm install --prefix examples/github-app-backend
       - name: Verify record-chain integrity
         run: python3 scripts/trinity_record_chain.py verify
       - name: Regenerate sitemap from current files
