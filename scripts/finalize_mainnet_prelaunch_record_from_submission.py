@@ -411,6 +411,10 @@ def build_native_test_draft(
     return draft
 
 
+# Backward-compatible alias for M3 compat contract
+build_native_prelaunch_draft = build_native_test_draft
+
+
 def read_chain_tip() -> dict[str, Any]:
     if not NATIVE_CHAIN_TIP.exists():
         raise SystemExit("record-chain/chain-tip.json missing; run scripts/trinity_record_chain.py verify/import-genesis first")
