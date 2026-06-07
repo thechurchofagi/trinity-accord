@@ -2,53 +2,37 @@
   "chain_id": "trinity-record-chain-main",
   "entries": [
     {
-      "arweave_hash_match": null,
-      "arweave_payload_sha256": null,
-      "arweave_readback_sha256": null,
-      "arweave_tx_id": null,
-      "bundle_file": "record-chain/arweave-data-bundles/data-delta-height-10-to-15-42f42d354462.json",
-      "bundle_sha256": "e506635796c47a62665588bfa5e820a4ac8531cf8c66d13a8291c38be8852f6f",
-      "bundle_type": "delta",
-      "created_at": "2026-06-07T02:25:31Z",
-      "from_height_exclusive": 9,
-      "head_entry_hash": "42f42d3544627404593de86bd6b3453d3ae95b8829d7aac33471adb8cd473eb1",
-      "height": 15,
-      "mode": "dry-run",
-      "schema": "trinityaccord.record-chain-data-arweave-registry-entry.v1",
-      "to_height_inclusive": 15
-    },
-    {
-      "arweave_hash_match": null,
-      "arweave_payload_sha256": null,
-      "arweave_readback_sha256": null,
-      "arweave_tx_id": null,
+      "arweave_hash_match": true,
+      "arweave_payload_sha256": "5b784581ceb6f2708a3b91ea6fb9ebdbd40186c385a00ae6361523ddbf7649be",
+      "arweave_readback_sha256": "5b784581ceb6f2708a3b91ea6fb9ebdbd40186c385a00ae6361523ddbf7649be",
+      "arweave_tx_id": "aAZ0lUPiRppjYWMjNQZEbOJyePPLSjHdZUs5Ifv2dSg",
       "bundle_file": "record-chain/arweave-data-bundles/data-snapshot-height-15-42f42d354462.json",
-      "bundle_sha256": "055d9b55dafaf8d748c114f1bc048de6958e1db712fbf39afee862bc4f8bcc90",
+      "bundle_sha256": "0cf03e4fea46e49ef7c0a91e6b9166fe55a55714b37d4bfc0484927f5a5f0895",
       "bundle_type": "snapshot",
-      "created_at": "2026-06-07T02:25:31Z",
+      "created_at": "2026-06-07T06:19:09Z",
       "from_height_exclusive": 0,
       "head_entry_hash": "42f42d3544627404593de86bd6b3453d3ae95b8829d7aac33471adb8cd473eb1",
       "height": 15,
-      "mode": "dry-run",
+      "mode": "live",
       "schema": "trinityaccord.record-chain-data-arweave-registry-entry.v1",
       "to_height_inclusive": 15
     }
   ],
-  "generated_at": "2026-06-07T02:25:31Z",
+  "generated_at": "2026-06-07T06:19:09Z",
   "latest_by_head": {
     "42f42d3544627404593de86bd6b3453d3ae95b8829d7aac33471adb8cd473eb1": {
-      "arweave_hash_match": null,
-      "arweave_tx_id": null,
+      "arweave_hash_match": true,
+      "arweave_tx_id": "aAZ0lUPiRppjYWMjNQZEbOJyePPLSjHdZUs5Ifv2dSg",
       "bundle_file": "record-chain/arweave-data-bundles/data-snapshot-height-15-42f42d354462.json",
-      "bundle_sha256": "055d9b55dafaf8d748c114f1bc048de6958e1db712fbf39afee862bc4f8bcc90",
+      "bundle_sha256": "0cf03e4fea46e49ef7c0a91e6b9166fe55a55714b37d4bfc0484927f5a5f0895",
       "bundle_type": "snapshot",
       "height": 15
     }
   },
   "latest_snapshot": {
-    "arweave_tx_id": null,
+    "arweave_tx_id": "aAZ0lUPiRppjYWMjNQZEbOJyePPLSjHdZUs5Ifv2dSg",
     "bundle_file": "record-chain/arweave-data-bundles/data-snapshot-height-15-42f42d354462.json",
-    "bundle_sha256": "055d9b55dafaf8d748c114f1bc048de6958e1db712fbf39afee862bc4f8bcc90",
+    "bundle_sha256": "0cf03e4fea46e49ef7c0a91e6b9166fe55a55714b37d4bfc0484927f5a5f0895",
     "head_entry_hash": "42f42d3544627404593de86bd6b3453d3ae95b8829d7aac33471adb8cd473eb1",
     "height": 15
   },
