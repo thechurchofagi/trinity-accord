@@ -20,6 +20,7 @@ checks = {
         "git pull --rebase",
         "generate_public_home_status.py",
         "Push failed on attempt",
+        "git push origin \"HEAD:${GITHUB_REF_NAME:-main}\"",
     ],
 }
 
