@@ -52,7 +52,10 @@
       "test_record": true,
       "official_live_record": false,
       "does_not_create_guardian_status": true
-    }
+    },
+    "test_phase_submissions_may_be_excluded_from_final_public_indexes": true,
+    "test_phase_submissions_may_be_reclassified": true,
+    "test_phase_submissions_may_move_to_historical_test_archive": true
   },
   "schema": "trinityaccord.agent-start.v2",
   "status": "active",
