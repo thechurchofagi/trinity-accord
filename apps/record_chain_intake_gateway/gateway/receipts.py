@@ -8,6 +8,23 @@ from typing import Any
 
 from .canonical import sha256_canonical_json
 
+RECEIPT_HASH_PREFIX_LEN = 24
+LEGACY_RECEIPT_HASH_PREFIX_LEN = 12
+
+
+def compute_receipt_sha256(receipt: dict[str, Any]) -> str:
+    material = dict(receipt)
+    material.pop("receipt_sha256", None)
+    return sha256_canonical_json(material)
+
+
+def make_legacy_receipt_id(submission_sha256: str, now: datetime | None = None) -> str:
+    """Generate the legacy 12-hex receipt ID for duplicate lookup only."""
+    if now is None:
+        now = datetime.now(timezone.utc)
+    date_part = now.strftime("%Y%m%d")
+    return f"rcg-{date_part}-{submission_sha256[:LEGACY_RECEIPT_HASH_PREFIX_LEN]}"
+
 
 def make_receipt_id(submission_sha256: str, now: datetime | None = None) -> str:
     """Generate a receipt ID.
@@ -17,7 +34,7 @@ def make_receipt_id(submission_sha256: str, now: datetime | None = None) -> str:
     if now is None:
         now = datetime.now(timezone.utc)
     date_part = now.strftime("%Y%m%d")
-    short_hash = submission_sha256[:12]
+    short_hash = submission_sha256[:RECEIPT_HASH_PREFIX_LEN]
     return f"rcg-{date_part}-{short_hash}"
 
 
@@ -107,8 +124,6 @@ def make_receipt(
 
     # Compute a receipt hash so callers can verify receipt integrity.
     # This MUST be the last mutation — callers must not modify the receipt after this.
-    receipt["receipt_sha256"] = sha256_canonical_json(
-        {k: v for k, v in receipt.items() if k != "receipt_sha256"}
-    )
+    receipt["receipt_sha256"] = compute_receipt_sha256(receipt)
 
     return receipt
