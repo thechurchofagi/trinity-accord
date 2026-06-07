@@ -4,8 +4,8 @@
     "mode": "INT-CHECKPOINT",
     "owner": "agent",
     "started_at": "2026-06-07T11:27:00Z",
-    "updated_at": "2026-06-07T12:03:39Z",
-    "expires_at": "2026-06-07T12:56:00Z"
+    "updated_at": "2026-06-07T12:13:09Z",
+    "expires_at": "2026-06-07T13:09:00Z"
   },
   "authoritative_progress_branch": "post-m1-test-progress",
   "completed_markers": [
@@ -24,10 +24,10 @@
   ],
   "current_mode": "INT-CHECKPOINT",
   "current_phase": "M7",
-  "current_step": "M7.1-C2-checkpoint",
+  "current_step": "M7.1-C3-checkpoint",
   "known_anomalies": [],
-  "last_checkpoint_at": "2026-06-07T12:03:39Z",
-  "last_checkpoint_id": "m7-c2-gateway-negative-cases-ext-pass",
+  "last_checkpoint_at": "2026-06-07T12:13:09Z",
+  "last_checkpoint_id": "m7-c3-rate-limit-concurrency-ext-pass",
   "last_safe_resume_step": "M7.1",
   "latest_artifact_manifest_sha256": null,
   "latest_external_public_key_sha256": "51457d267a2a606ddbfaf574f8aeca7fd44f27c666db53729b1f76905de097cc",
@@ -127,6 +127,16 @@
         ],
         "private_key_leakage_scan_passed": true,
         "artifact_manifest": "record-chain/testing/post-m1-live-test/artifact-manifests/m7c2-sandbox-20260607T192700Z.json"
+      },
+      "c3_evidence": {
+        "campaign": "C3-Rate-Limit-Concurrency",
+        "mode": "EXT",
+        "status": "pass",
+        "completed_at": "2026-06-07T12:13:09Z",
+        "sequential_rapid": "6/6 accepted, no rate limit",
+        "parallel_concurrent": "1/3 immediate, 2/2 retry succeeded (GitHub 409)",
+        "total_accepted": 9,
+        "artifact_manifest": "record-chain/testing/post-m1-live-test/artifact-manifests/m7c3-sandbox-20260607T192700Z.json"
       }
     },
     "M8": {
@@ -145,5 +155,5 @@
   "schema": "trinityaccord.post-m1-live-test-progress.v1",
   "status": "active",
   "stop_rules_triggered": [],
-  "updated_at": "2026-06-07T12:03:39Z"
+  "updated_at": "2026-06-07T12:13:09Z"
 }
