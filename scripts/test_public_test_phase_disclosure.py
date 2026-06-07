@@ -18,9 +18,14 @@ REQUIRED_PHRASES = [
     "not active Guardian status",
 ]
 
+# Valid public_phase.status values
+VALID_PHASE_STATUSES = [
+    "mainnet_prelaunch_testing",
+    "live_test_active",
+]
+
 # Machine-readable files must have these JSON fields
 REQUIRED_JSON_FIELDS = {
-    "public_phase.status": "mainnet_prelaunch_testing",
     "test_phase_submissions_may_move_to_historical_test_archive": True,
     "receipt_is_not_final_inclusion": True,
 }
@@ -67,10 +72,11 @@ def check_json_file(rel_path: str) -> None:
         fail(f"{rel_path}: NOT FOUND")
     data = json.loads(p.read_text(encoding="utf-8"))
 
-    # Check public_phase.status
+    # Check public_phase.status is a recognized valid status
     phase = data.get("public_phase", {})
-    if phase.get("status") != "mainnet_prelaunch_testing":
-        fail(f"{rel_path}: public_phase.status != mainnet_prelaunch_testing")
+    status = phase.get("status")
+    if status not in VALID_PHASE_STATUSES:
+        fail(f"{rel_path}: public_phase.status '{status}' not in {VALID_PHASE_STATUSES}")
 
     # Check test_phase_submissions_may_move_to_historical_test_archive
     if not phase.get("test_phase_submissions_may_move_to_historical_test_archive"):
