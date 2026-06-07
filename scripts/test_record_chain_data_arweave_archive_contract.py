@@ -24,6 +24,12 @@ def main():
     require("record_payload" in build, "bundle must include full record payload")
     require("client_oath_readback" in build, "builder must scan client_oath_readback")
     require("readback_text" in build, "builder must scan readback_text")
+    # Immutable filename: bundle content hash must be in filename
+    require("content_hash[:12]" in build, "builder must include content hash in filename")
+    require("data-delta-height" in build, "builder must use delta filename pattern")
+    require("data-snapshot-height" in build, "builder must use snapshot filename pattern")
+    # Anti-overwrite: must refuse to overwrite different content with same name
+    require("refusing to overwrite" in build, "builder must refuse overwriting different content")
 
     verify = (ROOT / "scripts/verify_record_chain_data_arweave_registry.py").read_text(encoding="utf-8")
     require("arweave_hash_match" in verify, "registry verifier must check hash match")

@@ -222,19 +222,28 @@ def main() -> int:
             raise SystemExit("--from-height-exclusive required for delta")
         to_h = args.to_height_inclusive if args.to_height_inclusive is not None else int(head["height"])
         bundle = build_delta(args.from_height_exclusive, to_h)
-        name = f"data-delta-height-{args.from_height_exclusive + 1}-to-{to_h}-{bundle['head_after']['head_entry_hash'][:12]}.json"
+        # Content hash for immutable filename — excludes bundle_canonical_sha256
+        content_hash = sha256_obj({k: v for k, v in bundle.items() if k != "bundle_canonical_sha256"})
+        name = f"data-delta-height-{args.from_height_exclusive + 1}-to-{to_h}-{bundle['head_after']['head_entry_hash'][:12]}-{content_hash[:12]}.json"
     else:
         h = args.height if args.height is not None else int(head["height"])
         bundle = build_snapshot(h)
-        name = f"data-snapshot-height-{h}-{bundle['head_entry_hash'][:12]}.json"
+        content_hash = sha256_obj({k: v for k, v in bundle.items() if k != "bundle_canonical_sha256"})
+        name = f"data-snapshot-height-{h}-{bundle['head_entry_hash'][:12]}-{content_hash[:12]}.json"
 
     path = out_dir / name
+    # Anti-overwrite: if file exists with different content, fail
+    if path.exists():
+        existing = read_json(path)
+        existing_hash = sha256_obj({k: v for k, v in existing.items() if k != "bundle_canonical_sha256"})
+        if existing_hash != content_hash:
+            raise SystemExit(f"refusing to overwrite {name}: existing hash {existing_hash[:12]} != new hash {content_hash[:12]}")
     write_json(path, bundle)
     print(json.dumps({
         "result": "pass",
         "bundle_file": str(path.relative_to(ROOT)),
         "bundle_type": bundle["bundle_type"],
-        "bundle_sha256": sha256_obj(bundle),
+        "bundle_sha256": content_hash,
     }, indent=2, sort_keys=True))
     return 0
 
