@@ -1,13 +1,13 @@
 {
   "archive": "trinity-pure-echo-builder-bundle.tar.gz",
-  "archive_sha256": "cd24d0372a3aed30b13b62a5c153f177f2a2fb82702bdd79a330ac0bb743bf11",
-  "archive_size_bytes": 54074,
+  "archive_sha256": "65052387fbb925172dbf42b851b4683e0beb7a7d3fa8dff1aee8713aa1174269",
+  "archive_size_bytes": 55469,
   "bundle": "pure_echo",
   "entrypoint": "scripts/build_agent_declared_echo_payload.py",
   "files": [
     {
       "path": "api/agent-issue-gateway-payload-schema.v1.json",
-      "sha256": "3e1960b9578b1b0c9b9ec70699575ad444abef9ea9fa5d06145711e12cbc5bdd",
+      "sha256": "f4f7f7d1eec5c726a0cf9c6bc00189e49b1d1b98bbd4bfb0ef865a8ec301d552",
       "size_bytes": 49984
     },
     {
@@ -122,7 +122,7 @@
     },
     {
       "path": "scripts/validate_gateway_payload.py",
-      "sha256": "639565748f67c8051f5ee34cdef7be2814a6715222dd7f879da704fdfb6367e5",
+      "sha256": "c69d3ebe9e368f26525bf1e982501f9613a9554503dad70baf49145076178a26",
       "size_bytes": 51894
     }
   ],

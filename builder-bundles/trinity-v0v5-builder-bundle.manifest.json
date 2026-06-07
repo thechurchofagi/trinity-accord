@@ -1,13 +1,13 @@
 {
   "archive": "trinity-v0v5-builder-bundle.tar.gz",
-  "archive_sha256": "bda4811542dc61a43e6bcd21ae4b709187cf6c69e0fa5187ade1e2bb98b6446b",
-  "archive_size_bytes": 65146,
+  "archive_sha256": "93db5d2e6b39e39ae7991826ac11f33e1b493a00e9cb4d3737cea5d36e4aeb3a",
+  "archive_size_bytes": 66453,
   "bundle": "v0_v5_agent_declared_archive",
   "entrypoint": "scripts/build_agent_declared_archive_payload.py",
   "files": [
     {
       "path": "api/agent-issue-gateway-payload-schema.v1.json",
-      "sha256": "3e1960b9578b1b0c9b9ec70699575ad444abef9ea9fa5d06145711e12cbc5bdd",
+      "sha256": "f4f7f7d1eec5c726a0cf9c6bc00189e49b1d1b98bbd4bfb0ef865a8ec301d552",
       "size_bytes": 49984
     },
     {
@@ -112,7 +112,7 @@
     },
     {
       "path": "scripts/validate_gateway_payload.py",
-      "sha256": "639565748f67c8051f5ee34cdef7be2814a6715222dd7f879da704fdfb6367e5",
+      "sha256": "c69d3ebe9e368f26525bf1e982501f9613a9554503dad70baf49145076178a26",
       "size_bytes": 51894
     }
   ],

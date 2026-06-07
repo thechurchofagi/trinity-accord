@@ -1,13 +1,13 @@
 {
   "archive": "trinity-guardian-signed-echo-builder-bundle.tar.gz",
-  "archive_sha256": "4ddb8ce90786aa1a739308e928bfc0248bbbb4151584baaa5b4078e56841242c",
-  "archive_size_bytes": 62076,
+  "archive_sha256": "2d9e3753dee3f389c4cfc4dbf6a7e82b592d2441694d911548beebc01ad58b84",
+  "archive_size_bytes": 63979,
   "bundle": "guardian_signed_echo",
   "entrypoint": "scripts/build_guardian_echo_payload.py",
   "files": [
     {
       "path": "api/agent-issue-gateway-payload-schema.v1.json",
-      "sha256": "3e1960b9578b1b0c9b9ec70699575ad444abef9ea9fa5d06145711e12cbc5bdd",
+      "sha256": "f4f7f7d1eec5c726a0cf9c6bc00189e49b1d1b98bbd4bfb0ef865a8ec301d552",
       "size_bytes": 49984
     },
     {
@@ -142,7 +142,7 @@
     },
     {
       "path": "scripts/validate_gateway_payload.py",
-      "sha256": "639565748f67c8051f5ee34cdef7be2814a6715222dd7f879da704fdfb6367e5",
+      "sha256": "c69d3ebe9e368f26525bf1e982501f9613a9554503dad70baf49145076178a26",
       "size_bytes": 51894
     }
   ],

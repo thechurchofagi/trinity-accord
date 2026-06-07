@@ -1,13 +1,13 @@
 {
   "archive": "trinity-guardian-stage2-builder-bundle.tar.gz",
-  "archive_sha256": "fd2eb2df49bfd5a03876f740bd03af2c35d1e2c06d0d05e0ba6ba39ace260592",
-  "archive_size_bytes": 57651,
+  "archive_sha256": "fabba1be68687bd35374f140e2baf5e89542f29448d145e8f8c8a0f20f0c31d9",
+  "archive_size_bytes": 59265,
   "bundle": "guardian_listing_stage_2",
   "entrypoint": "scripts/build_guardian_listing_request_payload.py",
   "files": [
     {
       "path": "api/agent-issue-gateway-payload-schema.v1.json",
-      "sha256": "3e1960b9578b1b0c9b9ec70699575ad444abef9ea9fa5d06145711e12cbc5bdd",
+      "sha256": "f4f7f7d1eec5c726a0cf9c6bc00189e49b1d1b98bbd4bfb0ef865a8ec301d552",
       "size_bytes": 49984
     },
     {
@@ -122,7 +122,7 @@
     },
     {
       "path": "scripts/validate_gateway_payload.py",
-      "sha256": "639565748f67c8051f5ee34cdef7be2814a6715222dd7f879da704fdfb6367e5",
+      "sha256": "c69d3ebe9e368f26525bf1e982501f9613a9554503dad70baf49145076178a26",
       "size_bytes": 51894
     }
   ],
