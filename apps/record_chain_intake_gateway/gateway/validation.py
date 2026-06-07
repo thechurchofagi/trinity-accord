@@ -1190,10 +1190,6 @@ def validate_submission_oath(
         ))
 
     # Build canonical oath text and verify hash
-    def _normalize_oath_text(text: str) -> str:
-        import unicodedata
-        return unicodedata.normalize("NFC", text.replace("\r\n", "\n").replace("\r", "\n").strip())
-
     modules_obj = local_policy.get("modules", {})
     canonical_parts = []
     for mod_id in expected_modules:
@@ -1227,8 +1223,8 @@ def validate_submission_oath(
 
     # Normalize and compare readback
     readback_text = client_oath.get("readback_text", "")
-    normalized_readback = _normalize_oath_text(readback_text)
-    readback_hash = hashlib.sha256(normalized_readback.encode("utf-8")).hexdigest()
+    normalized_readback = normalize_oath_text(readback_text)
+    readback_hash = sha256_text(normalized_readback)
 
     if normalized_readback != canonical_text:
         diagnostics.append(_make_diagnostic(
@@ -1320,15 +1316,20 @@ def redact_transient_oath_readback(submission: dict[str, Any]) -> dict[str, Any]
     client_oath = redacted.get("client_oath_readback")
     if isinstance(client_oath, dict):
         # Keep metadata, remove raw text
+        _readback_text = client_oath.get("readback_text", "") or ""
+        _readback_hash = (
+            sha256_text(normalize_oath_text(_readback_text))
+            if _readback_text
+            else client_oath.get("readback_text_sha256", "")
+        )
         redacted["client_oath_readback"] = {
             "schema": client_oath.get("schema", "trinityaccord.client-oath-readback.v1"),
             "record_type": client_oath.get("record_type", ""),
             "oath_policy_sha256": client_oath.get("oath_policy_sha256", ""),
             "oath_modules": client_oath.get("oath_modules", []),
-            "readback_text_sha256": hashlib.sha256(
-                (client_oath.get("readback_text", "") or "").encode("utf-8")
-            ).hexdigest() if client_oath.get("readback_text") else client_oath.get("readback_text_sha256", ""),
-            "readback_text_char_count": len(client_oath.get("readback_text", "") or ""),
+            "readback_text_sha256": _readback_hash,
+            "readback_text_hash_canonicalization": "NFC_CRLF_TO_LF_STRIP",
+            "readback_text_char_count": len(_readback_text),
             "redacted_after_gateway_validation": True,
         }
     return redacted
