@@ -37,6 +37,12 @@ def main():
     require("verify_ots_arweave_registry.py" in orchestrator, "orchestrator must verify OTS registry")
     require("run_current_system_tests.py" in orchestrator, "orchestrator must run current tests")
 
+    # Paid upload guard: --enable-paid-upload must be passed to Phase 5
+    require("--enable-paid-upload" in orchestrator, "orchestrator must pass --enable-paid-upload to Phase 5 script")
+
+    # Duplicate upload prevention: latest_by_head registry check
+    require("latest_by_head" in orchestrator, "orchestrator must check latest_by_head in OTS registry to skip duplicate uploads")
+
     print("PASS: pre-scale e2e automation contract")
 
 if __name__ == "__main__":
