@@ -4,8 +4,8 @@
     "mode": "INT-CHECKPOINT",
     "owner": "agent",
     "started_at": "2026-06-07T11:27:00Z",
-    "updated_at": "2026-06-07T11:53:41Z",
-    "expires_at": "2026-06-07T12:27:00Z"
+    "updated_at": "2026-06-07T12:03:39Z",
+    "expires_at": "2026-06-07T12:56:00Z"
   },
   "authoritative_progress_branch": "post-m1-test-progress",
   "completed_markers": [
@@ -24,10 +24,10 @@
   ],
   "current_mode": "INT-CHECKPOINT",
   "current_phase": "M7",
-  "current_step": "M7.1-C1-checkpoint",
+  "current_step": "M7.1-C2-checkpoint",
   "known_anomalies": [],
-  "last_checkpoint_at": "2026-06-07T11:53:41Z",
-  "last_checkpoint_id": "m7-c1-authorship-key-continuity-ext-pass",
+  "last_checkpoint_at": "2026-06-07T12:03:39Z",
+  "last_checkpoint_id": "m7-c2-gateway-negative-cases-ext-pass",
   "last_safe_resume_step": "M7.1",
   "latest_artifact_manifest_sha256": null,
   "latest_external_public_key_sha256": "51457d267a2a606ddbfaf574f8aeca7fd44f27c666db53729b1f76905de097cc",
@@ -108,6 +108,25 @@
         "key_continuity_verified": true,
         "private_key_leakage_scan_passed": true,
         "artifact_manifest": "record-chain/testing/post-m1-live-test/artifact-manifests/m7c1-sandbox-20260607T192700Z.json"
+      },
+      "c2_evidence": {
+        "campaign": "C2-Gateway-Negative-Cases",
+        "mode": "EXT",
+        "status": "pass",
+        "completed_at": "2026-06-07T12:03:39Z",
+        "total_cases": 6,
+        "passed": 6,
+        "failed": 0,
+        "cases": [
+          "N01-no-key-dir",
+          "N02-missing-authorship",
+          "N03-tampered-draft",
+          "N04-participant-key-mismatch",
+          "N06-private-key-leak",
+          "N07-missing-oath"
+        ],
+        "private_key_leakage_scan_passed": true,
+        "artifact_manifest": "record-chain/testing/post-m1-live-test/artifact-manifests/m7c2-sandbox-20260607T192700Z.json"
       }
     },
     "M8": {
@@ -126,5 +145,5 @@
   "schema": "trinityaccord.post-m1-live-test-progress.v1",
   "status": "active",
   "stop_rules_triggered": [],
-  "updated_at": "2026-06-07T11:53:41Z"
+  "updated_at": "2026-06-07T12:03:39Z"
 }
