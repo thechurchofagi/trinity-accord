@@ -25,6 +25,28 @@ def run(cmd: list[str]) -> None:
     if result.returncode != 0:
         raise SystemExit(f"command failed: {' '.join(cmd)}")
 
+def receipt_id_from_receipt(receipt: dict[str, Any]) -> str:
+    """Return canonical receipt id across legacy and server receipt schemas."""
+    rid = receipt.get("receipt_id") or receipt.get("server_receipt_id")
+    return str(rid or "")
+
+
+def receipt_is_accepted(receipt: dict[str, Any]) -> bool:
+    """Accept both legacy accepted receipts and immutable server receipts."""
+    return receipt.get("accepted") is True or bool(receipt.get("server_receipt_id"))
+
+
+def iter_submission_paths(submissions_dir: Path) -> list[Path]:
+    """Find dated and legacy intake submission files deterministically."""
+    return sorted(submissions_dir.glob("**/*.submission.json"))
+
+
+def find_receipt_for_submission(submission_path: Path, submissions_dir: Path, receipts_dir: Path) -> Path:
+    """Map submissions/YYYY/MM/<id>.submission.json to receipts/YYYY/MM/<id>.receipt.json."""
+    rel = submission_path.relative_to(submissions_dir)
+    return receipts_dir / str(rel).replace(".submission.json", ".receipt.json")
+
+
 def existing_receipt_ids() -> set[str]:
     out: set[str] = set()
     for entry in read_jsonl(LEDGER):
@@ -43,8 +65,8 @@ def current_confirm_string() -> str:
 
 def main() -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--submissions-dir", default="record-chain/intake/accepted/submissions")
-    ap.add_argument("--receipts-dir", default="record-chain/intake/accepted/receipts")
+    ap.add_argument("--submissions-dir", default="record-chain/intake/submissions")
+    ap.add_argument("--receipts-dir", default="record-chain/intake/receipts")
     ap.add_argument("--max-records", type=int, default=10)
     ap.add_argument("--source-run-id", default="auto-finalize")
     ap.add_argument("--mode", choices=["dry-run", "live"], default="dry-run")
@@ -72,22 +94,21 @@ def main() -> int:
 
     confirm = current_confirm_string()
 
-    for sub in sorted(submissions_dir.glob("*.submission.json")):
+    for sub in iter_submission_paths(submissions_dir):
         if len(finalized) >= args.max_records:
             break
 
-        base = sub.name.replace(".submission.json", "")
-        receipt = receipts_dir / f"{base}.receipt.json"
+        receipt = find_receipt_for_submission(sub, submissions_dir, receipts_dir)
         if not receipt.exists():
             skipped.append({"submission": str(sub.relative_to(ROOT)), "reason": "missing receipt"})
             continue
 
         rec = read_json(receipt)
-        if rec.get("accepted") is not True:
+        if not receipt_is_accepted(rec):
             skipped.append({"submission": str(sub.relative_to(ROOT)), "reason": "receipt not accepted"})
             continue
 
-        receipt_id = rec.get("receipt_id")
+        receipt_id = receipt_id_from_receipt(rec)
         if receipt_id in existing:
             skipped.append({"submission": str(sub.relative_to(ROOT)), "reason": "already finalized", "receipt_id": receipt_id})
             continue
