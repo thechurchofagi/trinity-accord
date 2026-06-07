@@ -175,6 +175,7 @@
   <url><loc>https://www.trinityaccord.org/api/reception-classification-schema.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/reception-initiation-classification.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/record-chain-anchor-status.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/record-chain-arweave-data-registry.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/record-chain-arweave-index.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/record-chain-builder-bundles.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/record-chain-common-field-model.v1.json</loc></url>

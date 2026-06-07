@@ -47,6 +47,22 @@ FORBIDDEN_TRUE_PATTERNS = [
     r'"does_not_activate_system"\s*:\s*false',
 ]
 
+GUARDIAN_APPLICATION_ONLY_KEYS = {
+    "guardian_application_content",
+    "guardian_public_key_sha256",
+    "guardian_stewardship_oath",
+    "requested_guardian_identifier",
+    "guardian_application_statement",
+    "guardian_application_reason",
+    "guardian_commitment",
+    "active_guardian_status_claim",
+    "no_active_guardian_status_claim",
+    "optional_linked_guardian_application_request",
+}
+
+ECHO_ONLY_KEYS = {"echo_content"}
+VERIFICATION_ONLY_KEYS = {"verification_content", "verification", "verification_version"}
+
 
 def utc_now() -> str:
     return time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
@@ -193,6 +209,41 @@ def assert_no_private_key_material(obj: Any, label: str = "object") -> None:
     found = [x for x in forbidden if x in raw]
     if found:
         raise SystemExit(f"{label} contains forbidden private-key marker(s): {', '.join(found)}")
+
+
+def find_keys_recursive(obj: Any, keys: set[str], path: str = "") -> list[str]:
+    found: list[str] = []
+    if isinstance(obj, dict):
+        for key, value in obj.items():
+            current_path = f"{path}.{key}" if path else key
+            if key in keys:
+                found.append(current_path)
+            found.extend(find_keys_recursive(value, keys, current_path))
+    elif isinstance(obj, list):
+        for i, item in enumerate(obj):
+            found.extend(find_keys_recursive(item, keys, f"{path}[{i}]"))
+    return found
+
+
+def assert_record_type_separation(submission: dict[str, Any]) -> None:
+    record_type = extract_record_type(submission)
+    draft = submission.get("record_draft")
+    if not isinstance(draft, dict):
+        raise SystemExit("submission.record_draft must be an object")
+
+    if record_type in {"echo", "verification"}:
+        found = find_keys_recursive(draft, GUARDIAN_APPLICATION_ONLY_KEYS)
+        if found:
+            raise SystemExit(
+                f"record_type {record_type!r} must not include guardian application fields: {', '.join(found)}"
+            )
+
+    if record_type == "guardian_application":
+        found = find_keys_recursive(draft, ECHO_ONLY_KEYS | VERIFICATION_ONLY_KEYS)
+        if found:
+            raise SystemExit(
+                "guardian_application must not include echo/verification fields: " + ", ".join(found)
+            )
 
 
 def safe_pending_name(receipt_id: Any) -> str:
@@ -412,6 +463,7 @@ def main() -> int:
         raise SystemExit("receipt must have accepted=true before finalization")
 
     assert_prelaunch_safe_input(submission, receipt)
+    assert_record_type_separation(submission)
 
     record_type = extract_record_type(submission)
     verification_level = extract_verification_level(submission)
