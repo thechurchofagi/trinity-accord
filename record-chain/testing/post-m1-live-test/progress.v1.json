@@ -1,11 +1,11 @@
 {
   "active_session": {
-    "expires_at": "2026-06-07T16:07:00Z",
+    "session_id": "sandbox-20260607T192700Z",
     "mode": "INT-CHECKPOINT",
     "owner": "agent",
-    "session_id": "sandbox-20260607T151900Z",
-    "started_at": "2026-06-07T15:19:00Z",
-    "updated_at": "2026-06-07T15:32:00Z"
+    "started_at": "2026-06-07T11:27:00Z",
+    "updated_at": "2026-06-07T11:53:41Z",
+    "expires_at": "2026-06-07T12:27:00Z"
   },
   "authoritative_progress_branch": "post-m1-test-progress",
   "completed_markers": [
@@ -23,15 +23,19 @@
     "RECORD_TYPE_SEPARATION_HARDENED_OK"
   ],
   "current_mode": "INT-CHECKPOINT",
-  "current_phase": "M6",
-  "current_step": "M6.done",
+  "current_phase": "M7",
+  "current_step": "M7.1-C1-checkpoint",
   "known_anomalies": [],
-  "last_checkpoint_at": "2026-06-07T15:32:00Z",
-  "last_checkpoint_id": "m6-live-test-activation",
+  "last_checkpoint_at": "2026-06-07T11:53:41Z",
+  "last_checkpoint_id": "m7-c1-authorship-key-continuity-ext-pass",
   "last_safe_resume_step": "M7.1",
   "latest_artifact_manifest_sha256": null,
-  "latest_external_public_key_sha256": null,
-  "latest_external_receipt_ids": [],
+  "latest_external_public_key_sha256": "51457d267a2a606ddbfaf574f8aeca7fd44f27c666db53729b1f76905de097cc",
+  "latest_external_receipt_ids": [
+    "rcg-20260607-fe18b5ad29ce",
+    "rcg-20260607-da04abe38355",
+    "rcg-20260607-4c3c2a12ceac"
+  ],
   "must_not_store": [
     "Ed25519 signing key material (see SECURITY.md)",
     "authorship keypair seed or private half",
@@ -88,7 +92,23 @@
       "blocking_issue": null,
       "name": "Large Live Operational Test Campaigns",
       "resume_step": "M7.1",
-      "status": "in_progress"
+      "status": "in_progress",
+      "c1_evidence": {
+        "campaign": "C1-Authorship-Key-Continuity",
+        "mode": "EXT",
+        "status": "pass",
+        "completed_at": "2026-06-07T11:53:41Z",
+        "submissions_accepted": 3,
+        "public_key_sha256": "51457d267a2a606ddbfaf574f8aeca7fd44f27c666db53729b1f76905de097cc",
+        "receipt_ids": [
+          "rcg-20260607-fe18b5ad29ce",
+          "rcg-20260607-da04abe38355",
+          "rcg-20260607-4c3c2a12ceac"
+        ],
+        "key_continuity_verified": true,
+        "private_key_leakage_scan_passed": true,
+        "artifact_manifest": "record-chain/testing/post-m1-live-test/artifact-manifests/m7c1-sandbox-20260607T192700Z.json"
+      }
     },
     "M8": {
       "blocking_issue": "M7 not complete",
@@ -106,5 +126,5 @@
   "schema": "trinityaccord.post-m1-live-test-progress.v1",
   "status": "active",
   "stop_rules_triggered": [],
-  "updated_at": "2026-06-07T15:32:00Z"
+  "updated_at": "2026-06-07T11:53:41Z"
 }
