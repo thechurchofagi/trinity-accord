@@ -1,0 +1,69 @@
+{
+  "schema": "trinityaccord.post-m1-m7c4-artifact-manifest.v1",
+  "run_id": "sandbox-20260607T192700Z",
+  "mode": "EXT",
+  "campaign": "C4-Finalization-Index-Public-API",
+  "tests": {
+    "gateway_health": {
+      "status": "pass",
+      "ok": true
+    },
+    "gateway_readiness": {
+      "status": "pass",
+      "ok": true,
+      "write_mode": "github_contents_pending"
+    },
+    "public_api_head": {
+      "status": "pass",
+      "height": 15,
+      "head_entry_hash": "42f42d3544627404593de86bd6b3453d3ae95b8829d7aac33471adb8cd473eb1",
+      "entry_count": 16
+    },
+    "ots_latest": {
+      "status": "pass",
+      "head_entry_hash": "42f42d3544627404593de86bd6b3453d3ae95b8829d7aac33471adb8cd473eb1",
+      "ots_status": "upgraded"
+    },
+    "ots_arweave_registry": {
+      "status": "pass",
+      "has_entries": true
+    },
+    "head_consistency": {
+      "status": "pass",
+      "head_json_hash": "42f42d3544627404593de86bd6b3453d3ae95b8829d7aac33471adb8cd473eb1",
+      "ots_latest_hash": "42f42d3544627404593de86bd6b3453d3ae95b8829d7aac33471adb8cd473eb1",
+      "match": true
+    },
+    "live_test_policy": {
+      "status": "pass",
+      "network_phase": "live_test",
+      "official_live_records_allowed": false
+    },
+    "receipt_lookup": {
+      "status": "pass",
+      "receipt_id": "rcg-20260607-fe18b5ad29ce",
+      "accepted_at": "2026-06-07T11:33:16.137398Z",
+      "readback_matches_canonical_oath": true
+    },
+    "website_agent_start": {
+      "status": "pass",
+      "http": 200
+    },
+    "website_field_helper": {
+      "status": "pass",
+      "http": 200
+    },
+    "builder_doctor": {
+      "status": "pass",
+      "pass": 12,
+      "fail": 0,
+      "warn": 0
+    }
+  },
+  "total_tests": 11,
+  "passed": 11,
+  "failed": 0,
+  "anomalies": [],
+  "private_key_not_persisted": true,
+  "completed_at": "2026-06-07T12:16:21Z"
+}
