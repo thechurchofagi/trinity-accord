@@ -66,6 +66,22 @@ class TestSubmitWrites:
         for key in forbidden:
             assert key not in pending_content, f"Forbidden field {key} in pending file"
 
+    def test_persist_failure_rolls_back_created_intake_files(self, signed_echo_submission, mock_github):
+        mock_github["put_file"].side_effect = [
+            {"content": {"sha": "submission-sha"}, "commit": {"sha": "c1"}},
+            {"content": {"sha": "pending-sha"}, "commit": {"sha": "c2"}},
+            RuntimeError("receipt write failed"),
+        ]
+
+        resp = client.post("/record-chain/submit", json=signed_echo_submission)
+        data = resp.json()
+
+        assert data["accepted"] is False
+        assert data["diagnostics"][0]["code"] == "PERSIST_FAILED"
+        deleted = [call.args[0] for call in mock_github["delete_file"].await_args_list]
+        assert any("pending/" in p for p in deleted)
+        assert any("intake/submissions/" in p for p in deleted)
+
 
 class TestSubmitResponse:
     def test_returns_receipt_id(self, signed_echo_submission, mock_github):
@@ -79,6 +95,13 @@ class TestSubmitResponse:
         resp = client.post("/record-chain/submit", json=signed_echo_submission)
         data = resp.json()
         assert data.get("append_status") in ("queued", "pending")
+
+    def test_dispatches_append_workflow_after_receipt(self, signed_echo_submission, mock_github):
+        resp = client.post("/record-chain/submit", json=signed_echo_submission)
+        data = resp.json()
+        assert data["accepted"] is True
+        mock_github["dispatch_workflow"].assert_awaited_once()
+        assert data.get("append_status") == "queued"
 
     def test_returns_paths(self, signed_echo_submission, mock_github):
         resp = client.post("/record-chain/submit", json=signed_echo_submission)

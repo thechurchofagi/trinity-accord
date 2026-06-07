@@ -2,10 +2,21 @@ name: Append Record Chain Entries
 
 on:
   workflow_dispatch:
+    inputs:
+      receipt_id:
+        description: "Gateway receipt id that requested this append run"
+        required: false
+        default: ""
+      pending_file_path:
+        description: "Pending file path that requested this append run"
+        required: false
+        default: ""
   push:
     branches: [main]
     paths:
       - "record-chain/pending/**"
+  schedule:
+    - cron: "*/15 * * * *"
 
 concurrency:
   group: record-chain-append
@@ -21,20 +32,46 @@ jobs:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
         with:
           python-version: "3.11"
+      - name: Authorize write workflow actor
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        env:
+          ACTOR: ${{ github.actor }}
+          ALLOWED_ACTORS: ${{ vars.GUARDIAN_REGISTRY_WORKFLOW_ACTORS || 'thechurchofagi' }}
+        run: |
+          set -euo pipefail
+          case ",${ALLOWED_ACTORS}," in
+            *,${ACTOR},*) echo "Authorized write workflow actor: ${ACTOR}" ;;
+            *) echo "Unauthorized actor: ${ACTOR}"; exit 1 ;;
+          esac
+      - name: Rebase before append
+        run: |
+          set -euo pipefail
+          git pull --rebase origin "${GITHUB_REF_NAME:-main}"
       - run: python scripts/trinity_record_chain.py append --all
       - run: python scripts/trinity_record_chain.py verify
       - name: Regenerate public homepage counters
         run: |
           python scripts/generate_public_home_status.py
           python scripts/generate_sitemap.py
-      - run: |
+      - name: Commit and push append updates
+        run: |
+          set -euo pipefail
           if ! git diff --quiet; then
             git config user.name "trinity-record-chain-bot"
             git config user.email "actions@github.com"
             git add record-chain/ index.md api/public-home-status.json sitemap.xml
             git commit -m "Append record-chain entries from Render intake"
-            git push
+            for attempt in 1 2 3; do
+              if git push origin "HEAD:${GITHUB_REF_NAME:-main}"; then
+                exit 0
+              fi
+              echo "Push failed on attempt ${attempt}; rebasing and retrying."
+              git pull --rebase origin "${GITHUB_REF_NAME:-main}"
+            done
+            echo "::error::Failed to push append updates after retries."
+            exit 1
           fi

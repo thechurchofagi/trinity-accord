@@ -18,7 +18,7 @@ from fastapi.responses import JSONResponse
 
 from apps.record_chain_intake_gateway.gateway.authorship import strip_authorship_for_signing, verify_authorship_proof
 from apps.record_chain_intake_gateway.gateway.canonical import canonical_dumps, sha256_canonical_json
-from apps.record_chain_intake_gateway.gateway.github_adapter import get_file_sha, get_file_text, put_file
+from apps.record_chain_intake_gateway.gateway.github_adapter import delete_file, dispatch_workflow, get_file_sha, get_file_text, put_file
 from apps.record_chain_intake_gateway.gateway.models import (
     AgentRecovery,
     Diagnostic,
@@ -52,6 +52,7 @@ load_dotenv()
 _MAX_BODY_BYTES = int(os.environ.get("TRINITY_MAX_SUBMISSION_BYTES", "524288"))
 _WRITE_MODE = os.environ.get("TRINITY_SUBMIT_WRITE_MODE", "github_contents_pending")
 _APPEND_WORKFLOW = os.environ.get("TRINITY_APPEND_WORKFLOW_FILE", "record-chain-append.yml")
+_DISPATCH_APPEND_WORKFLOW = os.environ.get("TRINITY_DISPATCH_APPEND_WORKFLOW", "1").strip().lower() not in {"0", "false", "no", "off"}
 _GATEWAY_BASE_URL = os.environ.get("TRINITY_GATEWAY_BASE_URL", "")
 
 # In-memory receipt store (ephemeral; resets on restart)
@@ -437,6 +438,16 @@ def _build_linked_guardian_draft(
     return guardian_draft
 
 
+async def _best_effort_delete_created_files(created_files: list[tuple[str, str]], receipt_id: str) -> None:
+    """Best-effort rollback for files created during a failed intake transaction."""
+    for path, sha in reversed(created_files):
+        try:
+            await delete_file(path, f"rollback failed intake {receipt_id}: delete {path}", sha=sha)
+            logger.info("Rolled back created intake file %s for %s", path, receipt_id)
+        except Exception as cleanup_exc:
+            logger.error("Failed to roll back %s for %s: %s", path, receipt_id, cleanup_exc)
+
+
 # ---------------------------------------------------------------------------
 # Health & readiness
 # ---------------------------------------------------------------------------
@@ -767,6 +778,9 @@ async def submit(request: Request) -> SubmitResponse:
     # --- persist to GitHub (write order: submission → pending → linked guardian → receipt LAST) ---
     # receipt_data is NOT mutated after creation; commit_sha is returned at response envelope level
     commit_sha: str | None = None
+    created_files_for_rollback: list[tuple[str, str]] = []
+    append_status = "pending"
+    warnings: list[str] = []
 
     if _WRITE_MODE == "github_contents_pending":
         try:
@@ -778,6 +792,8 @@ async def submit(request: Request) -> SubmitResponse:
                 f"intake: submission {receipt_id}",
                 sha=existing_sub_sha,
             )
+            if existing_sub_sha is None and result1.get("content", {}).get("sha"):
+                created_files_for_rollback.append((intake_submission_path, result1["content"]["sha"]))
             logger.info("Wrote submission %s", intake_submission_path)
 
             # Write 2: pending file
@@ -788,6 +804,8 @@ async def submit(request: Request) -> SubmitResponse:
                 f"intake: pending {receipt_id} ({record_type})",
                 sha=existing_pending_sha,
             )
+            if existing_pending_sha is None and result2.get("content", {}).get("sha"):
+                created_files_for_rollback.append((pending_file_path, result2["content"]["sha"]))
             logger.info("Wrote pending %s", pending_file_path)
 
             # Write 3 (optional): linked Guardian application pending file
@@ -807,6 +825,8 @@ async def submit(request: Request) -> SubmitResponse:
                     f"intake: linked guardian_application for {receipt_id}",
                     sha=existing_guardian_sha,
                 )
+                if existing_guardian_sha is None and result3.get("content", {}).get("sha"):
+                    created_files_for_rollback.append((guardian_pending_path, result3["content"]["sha"]))
                 logger.info("Wrote linked Guardian pending %s", guardian_pending_path)
 
             # Write 4: receipt (LAST — so all paths are finalized)
@@ -817,12 +837,35 @@ async def submit(request: Request) -> SubmitResponse:
                 f"intake: receipt {receipt_id}",
                 sha=existing_receipt_sha,
             )
+            if existing_receipt_sha is None and result4.get("content", {}).get("sha"):
+                created_files_for_rollback.append((receipt_path, result4["content"]["sha"]))
             logger.info("Wrote receipt %s", receipt_path)
 
             commit_sha = result4.get("commit", {}).get("sha")
 
+            if _DISPATCH_APPEND_WORKFLOW:
+                try:
+                    await dispatch_workflow(
+                        _APPEND_WORKFLOW,
+                        inputs={
+                            "receipt_id": receipt_id,
+                            "pending_file_path": pending_file_path,
+                        },
+                    )
+                    append_status = "queued"
+                    logger.info("Dispatched append workflow %s for %s", _APPEND_WORKFLOW, receipt_id)
+                except Exception as dispatch_exc:
+                    append_status = "pending_dispatch_failed"
+                    warning = (
+                        f"Append workflow dispatch failed after durable intake writes: {dispatch_exc}. "
+                        "The record remains pending and can be picked up by push/scheduled/manual append."
+                    )
+                    warnings.append(warning)
+                    logger.warning("Append dispatch failed for %s: %s", receipt_id, dispatch_exc)
+
         except Exception as exc:
             logger.error("Failed to persist %s: %s", receipt_id, exc)
+            await _best_effort_delete_created_files(created_files_for_rollback, receipt_id)
             return SubmitResponse(
                 accepted=False,
                 submitted=False,
@@ -838,6 +881,7 @@ async def submit(request: Request) -> SubmitResponse:
             )
     else:
         logger.info("Dry-run mode — skipping persist for %s", receipt_id)
+        append_status = "dry_run"
 
     # --- store receipt in memory (NOT mutated — same bytes as persisted) ---
     _receipt_store[receipt_id] = receipt_data
@@ -853,11 +897,11 @@ async def submit(request: Request) -> SubmitResponse:
         intake_submission_path=intake_submission_path,
         receipt_path=receipt_path,
         server_created_at=receipt_data["accepted_at"],
-        append_status="pending",
+        append_status=append_status,
         receipt_commit_sha=commit_sha,
         receipt=receipt_data,
         diagnostics=[],
-        warnings=[],
+        warnings=warnings,
         boundary=_build_boundary(body),
         created_pending_records=created_pending_records,
     )
