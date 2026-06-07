@@ -65,8 +65,8 @@ if (response.status < 200 || response.status >= 300) {
 const address = await arweave.wallets.jwkToAddress(jwk);
 
 // --- Readback verification ---
-const READBACK_MAX_RETRIES = 12;
-const READBACK_DELAY_MS = 10000;
+const READBACK_MAX_RETRIES = 30;
+const READBACK_DELAY_MS = 15000;
 let readbackSha256 = null;
 let readbackVerified = false;
 
