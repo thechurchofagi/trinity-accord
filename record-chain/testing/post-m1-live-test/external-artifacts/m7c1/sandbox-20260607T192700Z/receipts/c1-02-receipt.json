@@ -1,0 +1,11 @@
+{
+  "server_receipt_id": "rcg-20260607-da04abe38355",
+  "service": "record-chain-intake-gateway",
+  "gateway_version": "1.0.0",
+  "record_type": "echo",
+  "submission_sha256": "da04abe3835568c699aa44aac0bfed4113c8db75195a43d9c3fa151d77f14a8a",
+  "accepted_at": "2026-06-07T11:33:50.496595Z",
+  "receipt_is_not_final_chain_record": true,
+  "readback_matches_canonical_oath": true,
+  "receipt_sha256": "02349f21e92001b78243592c086f824b034d9e02f3fceba80c102b44ea67bfec"
+}
