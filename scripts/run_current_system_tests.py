@@ -170,6 +170,17 @@ def main() -> int:
         fail(f"pre-scale E2E automation contract failed: {result.stderr}\n{result.stdout}")
     ok("pre-scale E2E automation contract")
 
+    # 2g. Live-test phase finalizer contract
+    result = subprocess.run(
+        [sys.executable, "scripts/test_live_test_phase_finalizer_contract.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"live-test phase finalizer contract failed: {result.stderr}\n{result.stdout}")
+    ok("live-test phase finalizer contract")
+
     # 3. gateway-v1-legacy-status.json marks historical archive only
     legacy = load_json("api/gateway-v1-legacy-status.json")
     legacy_text = json.dumps(legacy, ensure_ascii=False).lower()

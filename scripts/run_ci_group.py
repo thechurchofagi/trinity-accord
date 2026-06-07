@@ -191,6 +191,7 @@ GROUPS = {
         ["python3", "scripts/test_record_type_separation_contract.py"],
         ["python3", "scripts/test_record_chain_data_arweave_archive_contract.py"],
         ["python3", "scripts/test_pre_scale_e2e_automation_contract.py"],
+        ["python3", "scripts/test_live_test_phase_finalizer_contract.py"],
     ],
     "p0-legacy-compat": [
         # --- 旧 Gateway v1 / formal builder / old workflow 测试 ---

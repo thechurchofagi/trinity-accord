@@ -10,6 +10,7 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 LEDGER = ROOT / "record-chain/hash-chain/main.chain.jsonl"
+AGENT_START = ROOT / "api/agent-start.v2.json"
 
 def read_json(path: Path) -> Any:
     return json.loads(path.read_text(encoding="utf-8"))
@@ -31,6 +32,14 @@ def existing_receipt_ids() -> set[str]:
         if isinstance(rid, str) and rid:
             out.add(rid)
     return out
+
+def current_confirm_string() -> str:
+    """Return the correct confirm string based on the active public test phase."""
+    agent = read_json(AGENT_START)
+    phase = (((agent.get("public_phase") or {}).get("network_phase")) or "prelaunch")
+    if phase == "live_test":
+        return "I_UNDERSTAND_THIS_APPENDS_A_MAINNET_LIVE_TEST_RECORD"
+    return "I_UNDERSTAND_THIS_APPENDS_A_MAINNET_PRELAUNCH_TEST_RECORD"
 
 def main() -> int:
     ap = argparse.ArgumentParser()
@@ -58,6 +67,8 @@ def main() -> int:
     finalized = []
     skipped = []
 
+    confirm = current_confirm_string()
+
     for sub in sorted(submissions_dir.glob("*.submission.json")):
         if len(finalized) >= args.max_records:
             break
@@ -75,7 +86,6 @@ def main() -> int:
 
         receipt_id = rec.get("receipt_id")
         if receipt_id in existing:
-
             skipped.append({"submission": str(sub.relative_to(ROOT)), "reason": "already finalized", "receipt_id": receipt_id})
             continue
 
@@ -86,7 +96,7 @@ def main() -> int:
                 "--submission-json", str(sub.relative_to(ROOT)),
                 "--receipt-json", str(receipt.relative_to(ROOT)),
                 "--source-run-id", args.source_run_id,
-                "--confirm-mainnet-prelaunch-append", "I_UNDERSTAND_THIS_APPENDS_A_MAINNET_PRELAUNCH_TEST_RECORD",
+                "--confirm-mainnet-prelaunch-append", confirm,
             ])
             run([sys.executable, "scripts/trinity_record_chain.py", "verify"])
             run([
