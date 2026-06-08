@@ -19,54 +19,98 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
         with:
           python-version: "3.11"
 
-      - name: Install OTS client
-        run: pip install opentimestamps-client
+      - name: Install Python dependencies for native OTS
+        run: python -m pip install -r requirements-ci.txt
 
-      - name: Verify chain
-        run: |
-          python3 scripts/verify_record_chain_integrity.py \
-            --ledger record-chain/hash-chain/main.chain.jsonl \
-            --head api/record-chain-head.json \
-            --chain-id trinity-record-chain-main \
-            --verify-payload-files \
-            --base-dir .
+      - name: Verify native record chain
+        run: python3 scripts/trinity_record_chain.py verify
 
-      - name: Check if OTS latest already matches head
+      - name: Check if native OTS latest already matches native head
         id: check
         run: |
-          python3 - <<'PY' > /tmp/ots-check.env
-import json
-from pathlib import Path
-head = json.loads(Path("api/record-chain-head.json").read_text())
-ots_path = Path("api/record-chain-ots-latest.json")
-ots = json.loads(ots_path.read_text()) if ots_path.exists() else {}
-matched = ots.get("height") == head.get("height") and ots.get("head_entry_hash") == head.get("head_entry_hash")
-print(f"matched={'true' if matched else 'false'}")
-PY
-          cat /tmp/ots-check.env >> "$GITHUB_OUTPUT"
+          python3 - <<'PY' > /tmp/native-ots-check.env
+          import json
+          from pathlib import Path
 
-      - name: Stamp current head
+          tip = json.loads(Path("record-chain/chain-tip.json").read_text())
+          ots_path = Path("api/record-chain-native-ots-latest.json")
+          ots = json.loads(ots_path.read_text()) if ots_path.exists() else {}
+
+          matched = (
+              ots.get("latest_record_id") == tip.get("latest_record_id")
+              and ots.get("latest_record_sha256") == tip.get("latest_record_sha256")
+              and ots.get("native_record_count") == tip.get("native_record_count")
+              and ots.get("legacy_main_chain_jsonl_is_not_source") is True
+          )
+          print(f"matched={'true' if matched else 'false'}")
+          print(f"latest_record_id={tip.get('latest_record_id')}")
+          print(f"native_record_count={tip.get('native_record_count')}")
+          PY
+          cat /tmp/native-ots-check.env >> "$GITHUB_OUTPUT"
+          cat /tmp/native-ots-check.env
+
+      - name: Stamp native record-chain head
         if: steps.check.outputs.matched != 'true'
         run: |
-          python3 scripts/ots_anchor_record_chain_head.py \
+          python3 scripts/ots_anchor_native_record_chain_head.py \
             --mode stamp \
-            --verify-ledger \
-            --base-dir . \
             --overwrite
 
-      - name: Commit OTS anchor
+      - name: Verify native OTS output
+        if: steps.check.outputs.matched != 'true'
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          tip = json.loads(Path("record-chain/chain-tip.json").read_text())
+          latest_path = Path("api/record-chain-native-ots-latest.json")
+          if not latest_path.exists():
+              raise SystemExit("api/record-chain-native-ots-latest.json was not created")
+
+          latest = json.loads(latest_path.read_text())
+          checks = {
+              "schema": latest.get("schema") == "trinityaccord.native-record-chain-ots-latest.v1",
+              "latest_record_id": latest.get("latest_record_id") == tip.get("latest_record_id"),
+              "latest_record_sha256": latest.get("latest_record_sha256") == tip.get("latest_record_sha256"),
+              "native_record_count": latest.get("native_record_count") == tip.get("native_record_count"),
+              "legacy_main_chain_jsonl_is_not_source": latest.get("legacy_main_chain_jsonl_is_not_source") is True,
+          }
+          failed = [name for name, ok in checks.items() if not ok]
+          if failed:
+              raise SystemExit(f"native OTS latest validation failed: {failed}")
+
+          anchored_file = Path(latest["latest_anchored_file"])
+          if not anchored_file.exists():
+              raise SystemExit(f"anchored commitment missing: {anchored_file}")
+
+          anchored_text = anchored_file.read_text()
+          _legacy = "main" + ".chain.jsonl"
+          if _legacy in anchored_text:
+              raise SystemExit("native anchored commitment references stale legacy JSONL chain")
+          ots_file = latest.get("latest_ots_file")
+          if not ots_file or not Path(ots_file).exists():
+              raise SystemExit(f"native OTS proof file missing: {ots_file}")
+
+          print("Native OTS output validated.")
+          PY
+
+      - name: Commit native OTS anchor
         if: steps.check.outputs.matched != 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add record-chain/ots/anchors api/record-chain-ots-latest.json
+          git add record-chain/ots/native-anchors api/record-chain-native-ots-latest.json
           if git diff --cached --quiet; then
-            echo "No OTS anchor changes."
+            printf '%s\n' "No native OTS anchor changes."
           else
-            git commit -m "anchor: stamp current record-chain head with OTS"
+            git commit -m "anchor: stamp native record-chain head with OTS"
             git push
           fi

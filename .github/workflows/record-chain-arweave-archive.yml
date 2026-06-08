@@ -1,11 +1,11 @@
 name: Record Chain Arweave Archive
-# Acceptable noise: scheduled daily + on anchor completion.
+# Native record-chain archive workflow.
 # Live upload requires ARKEY secret.
-# Retained as-is; workflow_run + schedule is intentional.
+# Dry-run remains the default for manual, scheduled, and workflow_run executions.
 
 on:
   workflow_run:
-    workflows: ["Record Chain Anchor"]
+    workflows: ["Record Chain Head OTS Anchor"]
     types: [completed]
   workflow_dispatch:
     inputs:
@@ -49,6 +49,41 @@ jobs:
       - name: Install Node dependencies
         run: npm ci
 
+      - name: Verify native OTS latest before archive
+        run: |
+          python3 - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          mode = os.environ.get("ARWEAVE_UPLOAD_MODE", "dry-run")
+          tip = json.loads(Path("record-chain/chain-tip.json").read_text())
+          ots_path = Path("api/record-chain-native-ots-latest.json")
+
+          if not ots_path.exists():
+              msg = "api/record-chain-native-ots-latest.json missing"
+              if mode == "live":
+                  raise SystemExit(msg + "; refusing live Arweave upload without native OTS")
+              print("WARN:", msg, "- dry-run may continue")
+              raise SystemExit(0)
+
+          ots = json.loads(ots_path.read_text())
+          mismatches = []
+          for key in ["latest_record_id", "latest_record_sha256", "native_record_count"]:
+              if ots.get(key) != tip.get(key):
+                  mismatches.append(key)
+          if ots.get("legacy_main_chain_jsonl_is_not_source") is not True:
+              mismatches.append("legacy_main_chain_jsonl_is_not_source")
+
+          if mismatches:
+              msg = f"native OTS latest does not match chain-tip: {mismatches}"
+              if mode == "live":
+                  raise SystemExit(msg + "; refusing live Arweave upload")
+              print("WARN:", msg, "- dry-run may continue")
+          else:
+              print("Native OTS latest matches current chain-tip.")
+          PY
+
       - name: Build Arweave archive manifest
         env:
           ARKEY: ${{ secrets.ARKEY }}
@@ -71,6 +106,6 @@ jobs:
             git config user.name "trinity-record-chain-bot"
             git config user.email "actions@github.com"
             git add record-chain/arweave-archives/ api/record-chain-arweave-index.json index.md api/public-home-status.json sitemap.xml
-            git commit -m "archive: update record-chain Arweave archive metadata"
+            git commit -m "archive: update native record-chain Arweave archive metadata"
             git push
           fi
