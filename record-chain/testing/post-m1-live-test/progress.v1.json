@@ -24,19 +24,20 @@
     "LIVE_OPERATIONAL_TEST_CAMPAIGNS_OK",
     "M8_PR455_DELTA_SMOKE_OK",
     "PRODUCTION_ENABLEMENT_OK",
-    "M9_FINALIZE_OK"
+    "M9_FINALIZE_OK",
+    "M9_ARCHIVE_OK",
+    "M9_OK"
   ],
   "current_mode": "INT-CHECKPOINT",
   "current_phase": "M9",
-  "current_step": "M9.3-archive-blocked-by-main-chain-jsonl",
+  "current_step": "M9.done",
   "known_anomalies": [
-    "blocking: M9.3 INT-ARCHIVE blocked: OTS anchor script reads legacy main.chain.jsonl (16 entries, height 15) instead of native chain-tip (33 records, R-000000033). Running OTS now would anchor stale head. Running Arweave alone would create evidence asymmetry with OTS.",
     "non_blocking: main.chain.jsonl has 16 entries vs chain-tip 33; requires archive-tooling compatibility fix before M9.3 archive can proceed",
     "non_blocking: Rejected echo files (4 pairs) in record-chain/rejected from cryptography dependency incident; deferred to separate maintenance cleanup"
   ],
   "last_checkpoint_at": "2026-06-08T03:40:00Z",
   "last_checkpoint_id": "m9.3-archive-blocked-20260608T034000Z",
-  "last_safe_resume_step": "M9.3-native-archive-tooling-fix",
+  "last_safe_resume_step": "post-M9-maintenance",
   "latest_artifact_manifest_sha256": "2d61e45dd7215ea6f03611e586ee938ae8f47ad541e35fe431b6f85de49e34d1",
   "latest_external_public_key_sha256": "51457d267a2a606ddbfaf574f8aeca7fd44f27c666db53729b1f76905de097cc",
   "latest_external_receipt_ids": [
@@ -50,7 +51,7 @@
     "external agent private key",
     "raw private key logs or PEM files"
   ],
-  "overall_status": "needs_review",
+  "overall_status": "pass",
   "phase_status": {
     "M2": {
       "blocking_issue": null,
@@ -127,10 +128,10 @@
       }
     },
     "M9": {
-      "blocking_issue": "OTS anchor tooling depends on legacy main.chain.jsonl; must be fixed before M9.3 archive can complete",
+      "blocking_issue": null,
       "name": "Liu Hongju Founding Guardian Application",
-      "resume_step": "M9.3-native-archive-tooling-fix",
-      "status": "needs_review",
+      "resume_step": "post-M9-maintenance",
+      "status": "pass",
       "ext_submission": {
         "step": "M9.1-ext-submit",
         "status": "pass",
@@ -200,22 +201,23 @@
       },
       "archive": {
         "step": "M9.3-archive",
-        "status": "blocked",
-        "blocked_at": "2026-06-08T03:40:00Z",
-        "reason": "OTS anchor script depends on record-chain/hash-chain/main.chain.jsonl, which is behind native chain-tip. Running OTS now would anchor stale 16-entry head (height 15) instead of current 33-record native chain-tip (R-000000033). Running Arweave alone would create evidence asymmetry with OTS.",
-        "ots": "not_run",
-        "arweave": "not_run_live",
+        "status": "pass",
+        "completed_at": "2026-06-08T06:42:00Z",
         "native_chain_tip_record_id": "R-000000033",
-        "native_chain_tip_height": 33,
-        "legacy_jsonl_height": 15,
-        "legacy_jsonl_entry_count": 16,
-        "blocking_backlog": "main.chain.jsonl / native chain archive tooling compatibility",
-        "resolution_requires": "Fix OTS/archive head commitment tooling to use native chain-tip.json + record-chain/records instead of legacy main.chain.jsonl"
+        "native_record_count": 33,
+        "ots": "pending-bitcoin",
+        "native_ots_latest": "api/record-chain-native-ots-latest.json",
+        "arweave": "pass",
+        "arweave_txid": "hSyp93ZW2cQQcK7lPdqyREr-jCs4Kj5m4vbjlYGBEZ8",
+        "arweave_commit": "e42ceee4d272e47727d8fb9a6f5dc2d34ea1969e",
+        "ots_commit": "dc6c04cf",
+        "source_type": "native-record-chain",
+        "included_records": 33
       }
     }
   },
   "schema": "trinityaccord.post-m1-live-test-progress.v1",
   "status": "active",
   "stop_rules_triggered": [],
-  "updated_at": "2026-06-08T03:40:00Z"
+  "updated_at": "2026-06-08T06:42:00Z"
 }
