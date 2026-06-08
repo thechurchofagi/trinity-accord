@@ -293,6 +293,16 @@ def main() -> int:
     if result.returncode != 0:
         fail(f"arweave archive contract test failed: {result.stderr}")
     ok("arweave archive contract test")
+    # Native record-chain archive tooling contract
+    result = subprocess.run(
+        [sys.executable, "scripts/test_native_record_chain_archive_tooling.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"native record-chain archive tooling test failed: {result.stderr}\n{result.stdout}")
+    ok("native record-chain archive tooling")
     # 11b. Arweave upload readback contract test
     result = subprocess.run(
         [sys.executable, "scripts/test_arweave_upload_contract.py"],
