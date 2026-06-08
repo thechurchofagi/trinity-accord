@@ -1,0 +1,39 @@
+{
+  "schema": "trinityaccord.m8-pr455-delta-smoke-rerun.v1",
+  "run_id": "m8-pr455-delta-smoke-rerun-20260608T020500Z",
+  "executed_at": "2026-06-08T02:05:00Z",
+  "mode": "EXT",
+  "builder_source": "https://www.trinityaccord.org/downloads/record-chain-builder.mjs",
+  "builder_modified": false,
+  "gateway_url": "https://trinity-record-chain-gateway.onrender.com",
+  "pr_456_merged": true,
+  "pr_456_merge_sha": "dd3f3c5d9e9449ad0cde7d30dcc58c829262a007",
+  "oath_policy_sha256": "9356e8c0955d7f17814dff1a93300cb271acfa21cfe39da63a7b5201364cb820",
+  "checks": {
+    "valid_echo_submit": {
+      "status": "pass",
+      "receipt_id": "rcg-20260608-fcdcf0258ec9dc20a448f85f",
+      "receipt_format": "24-hex",
+      "manual_repair_needed": false
+    },
+    "tampered_preflight_rejected": {
+      "status": "pass",
+      "error_codes": [
+        "AUTHORSHIP_PAYLOAD_SHA_MISMATCH",
+        "AUTHORSHIP_PROOF_INVALID"
+      ]
+    },
+    "duplicate_submit_immutable": {
+      "status": "pass",
+      "append_status": "duplicate_existing_receipt_returned",
+      "same_receipt_id": true
+    },
+    "linked_guardian_disabled": {
+      "status": "pass",
+      "error_code": "RECORD_TYPE_SEPARATION_VIOLATION"
+    }
+  },
+  "all_pass": true,
+  "anomaly": null,
+  "conclusion": "M8.1 delta smoke PASS - official unmodified builder compatible with PR455/PR456 gateway rules"
+}
