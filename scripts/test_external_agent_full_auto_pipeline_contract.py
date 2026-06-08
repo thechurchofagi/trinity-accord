@@ -51,7 +51,19 @@ def main() -> None:
     require("Append Record Chain Entries" in ots_wf, "OTS workflow must listen to real Gateway append workflow")
     require("ots_anchor_native_record_chain_head.py" in ots_wf, "OTS workflow must use native OTS script")
     require("record-chain/records/**" not in ots_wf, "OTS must not accept arbitrary records push trigger")
-    require("record-chain/chain-tip.json" not in ots_wf, "OTS must not accept arbitrary chain-tip push trigger")
+    # Verify push trigger does not include dangerous path globs
+    on_section = ""
+    in_on = False
+    for line in ots_wf.splitlines():
+        stripped = line.strip()
+        if stripped.startswith("on:"):
+            in_on = True
+            continue
+        if in_on:
+            if stripped and not stripped.startswith("#") and not line.startswith(" ") and not line.startswith("\t"):
+                break
+            on_section += line + "\n"
+    require("record-chain/chain-tip.json" not in on_section, "OTS push trigger must not include chain-tip.json")
 
     require('workflows: ["Record Chain Head OTS Anchor"]' in arweave_wf, "Arweave workflow must listen to OTS workflow")
     require("Check if latest live Arweave archive already matches native head" in arweave_wf, "Arweave workflow must check for already archived head")
