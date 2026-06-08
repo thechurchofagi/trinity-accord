@@ -24,6 +24,7 @@ BATCHES = CHAIN / "batches"
 INDEXES = CHAIN / "indexes"
 ARCHIVES = CHAIN / "arweave-archives"
 API_INDEX = ROOT / "api" / "record-chain-arweave-index.json"
+NATIVE_OTS_LATEST = ROOT / "api" / "record-chain-native-ots-latest.json"
 CHAIN_ID = "trinity-accord-public-reception-ledger"
 
 
@@ -58,11 +59,127 @@ def sha256_file(path: Path) -> str:
 def read_json(path: Path):
     return json.loads(path.read_text(encoding="utf-8"))
 
+def source_file_ref(path: Path) -> dict:
+    return {
+        "path": str(path.relative_to(ROOT)),
+        "sha256": sha256_file(path),
+        "bytes": path.stat().st_size,
+    }
+
+
 
 def write_json(path: Path, obj):
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(canonical_dumps(obj), encoding="utf-8")
 
+
+
+
+def load_native_chain_sources() -> dict:
+    chain_tip_path = CHAIN / "chain-tip.json"
+    record_index_path = INDEXES / "record-index.json"
+    guardian_state_path = INDEXES / "guardian-state.json"
+    statistics_path = INDEXES / "statistics.json"
+    batch_index_path = INDEXES / "batch-index.json"
+
+    chain_tip = read_json(chain_tip_path)
+    record_index = read_json(record_index_path)
+
+    if chain_tip.get("schema") != "trinityaccord.chain-tip.v1":
+        raise SystemExit(f"unexpected chain-tip schema: {chain_tip.get('schema')}")
+    if record_index.get("schema") != "trinityaccord.record-index.v1":
+        raise SystemExit(f"unexpected record-index schema: {record_index.get('schema')}")
+
+    native_count = chain_tip.get("native_record_count")
+    latest_record_id = chain_tip.get("latest_record_id")
+    latest_record_sha256 = chain_tip.get("latest_record_sha256")
+    records = record_index.get("records", [])
+
+    if not isinstance(records, list):
+        raise SystemExit("record-index.records must be list")
+    if len(records) != native_count:
+        raise SystemExit(
+            f"record-index count mismatch: records={len(records)} native_record_count={native_count}"
+        )
+    if not records or records[-1].get("record_id") != latest_record_id:
+        raise SystemExit("record-index latest_record_id does not match chain-tip")
+    if records[-1].get("record_sha256") != latest_record_sha256:
+        raise SystemExit("record-index latest_record_sha256 does not match chain-tip")
+
+    included_records = []
+    for i, rec in enumerate(records, start=1):
+        expected_id = f"R-{i:09d}"
+        if rec.get("record_id") != expected_id:
+            raise SystemExit(f"record sequence mismatch: expected {expected_id}, got {rec.get('record_id')}")
+        rec_path = ROOT / rec.get("path", "")
+        if not rec_path.exists():
+            raise SystemExit(f"record file missing: {rec_path}")
+        rec_data = read_json(rec_path)
+        if rec_data.get("record_sha256") != rec.get("record_sha256"):
+            raise SystemExit(f"record sha mismatch: {rec.get('record_id')}")
+        included_records.append({
+            "record_id": rec["record_id"],
+            "path": rec["path"],
+            "record_type": rec.get("record_type"),
+            "record_sha256": rec["record_sha256"],
+        })
+
+    included_batches = []
+    if batch_index_path.exists():
+        batch_index = read_json(batch_index_path)
+        for b in batch_index.get("batches", []):
+            if not isinstance(b, dict):
+                continue
+            manifest_path_value = b.get("path")
+            if not isinstance(manifest_path_value, str):
+                continue
+            manifest_path = ROOT / manifest_path_value
+            if not manifest_path.exists():
+                raise SystemExit(f"batch manifest missing: {manifest_path}")
+            mf = read_json(manifest_path)
+            included_batches.append({
+                "batch_id": b.get("batch_id"),
+                "manifest_path": manifest_path_value,
+                "batch_manifest_sha256": mf.get("batch_manifest_sha256"),
+                "merkle_root_sha256": mf.get("merkle_root_sha256"),
+                "first_record_index": mf.get("first_record_index"),
+                "last_record_index": mf.get("last_record_index"),
+                "record_count": mf.get("record_count"),
+                "coverage_is_auxiliary": True,
+            })
+
+    native_ots_latest_ref = None
+    if NATIVE_OTS_LATEST.exists():
+        native_ots_latest = read_json(NATIVE_OTS_LATEST)
+        native_ots_latest_ref = {
+            "path": str(NATIVE_OTS_LATEST.relative_to(ROOT)),
+            "sha256": sha256_file(NATIVE_OTS_LATEST),
+            "schema": native_ots_latest.get("schema"),
+            "latest_record_id": native_ots_latest.get("latest_record_id"),
+            "latest_record_sha256": native_ots_latest.get("latest_record_sha256"),
+            "native_record_count": native_ots_latest.get("native_record_count"),
+            "latest_anchor_file": native_ots_latest.get("latest_anchor_file"),
+            "latest_anchored_file": native_ots_latest.get("latest_anchored_file"),
+            "ots_status": native_ots_latest.get("ots_status"),
+        }
+
+    source_files = {
+        "chain_tip": source_file_ref(chain_tip_path),
+        "record_index": source_file_ref(record_index_path),
+        "guardian_state": source_file_ref(guardian_state_path),
+        "statistics": source_file_ref(statistics_path),
+    }
+    if batch_index_path.exists():
+        source_files["batch_index"] = source_file_ref(batch_index_path)
+
+    return {
+        "chain_tip": chain_tip,
+        "record_index": record_index,
+        "included_records": included_records,
+        "included_batches": included_batches,
+        "source_files": source_files,
+        "native_ots_latest": native_ots_latest_ref,
+    }
 
 def existing_batch_manifests():
     return sorted(BATCHES.glob("batch-*/manifest.json"))
@@ -124,80 +241,48 @@ def upload_to_arweave(payload_path: Path, archive_dir: Path) -> dict:
 def build_archive_manifest(mode: str) -> None:
     ARCHIVES.mkdir(parents=True, exist_ok=True)
 
-    chain_tip_path = CHAIN / "chain-tip.json"
-    record_index_path = INDEXES / "record-index.json"
-    batch_index_path = INDEXES / "batch-index.json"
+    native = load_native_chain_sources()
+    chain_tip = native["chain_tip"]
+    included_records = native["included_records"]
+    included_batches = native["included_batches"]
 
-    if not chain_tip_path.exists():
-        print("No chain-tip.json found; nothing to archive.")
+    latest_record_id = chain_tip["latest_record_id"]
+    latest_record_sha256 = chain_tip["latest_record_sha256"]
+    native_record_count = chain_tip["native_record_count"]
+
+    if not included_records:
+        print("No native records found; nothing to archive.")
         return
 
-    batches = existing_batch_manifests()
-    if not batches:
-        print("No batch manifests found; nothing to archive.")
-        return
+    # Idempotency: skip if native archive for this head already has txid
+    for existing_manifest_path in ARCHIVES.glob("*/manifest.json"):
+        existing = read_json(existing_manifest_path)
+        source = existing.get("source", {})
+        native_source = source.get("native_chain", {})
+        if (
+            native_source.get("latest_record_id") == latest_record_id
+            and native_source.get("latest_record_sha256") == latest_record_sha256
+            and native_source.get("native_record_count") == native_record_count
+            and existing.get("arweave", {}).get("txid")
+        ):
+            print(f"Native archive for {latest_record_id} already has txid; skipping.")
+            return
 
-    included_batches = []
-    included_records = []
-    record_ids_seen = set()
-
-    for mf_path in batches:
-        mf = read_json(mf_path)
-        batch_id = mf.get("batch_id", "")
-        # Check if this batch is already in an existing archive via structured index
-        already_in_archive = False
-        if API_INDEX.exists():
-            idx = read_json(API_INDEX)
-            for arc in idx.get("archives", []):
-                first = arc.get("first_batch_id", "")
-                last = arc.get("last_batch_id", "")
-                if first and last and first <= batch_id <= last:
-                    already_in_archive = True
-                    break
-        if already_in_archive:
-            continue
-
-        ots_file = mf_path.parent / "manifest.json.ots"
-        batch_entry = {
-            "batch_id": batch_id,
-            "manifest_path": str(mf_path.relative_to(ROOT)),
-            "batch_manifest_sha256": mf.get("batch_manifest_sha256"),
-            "merkle_root_sha256": mf.get("merkle_root_sha256"),
-            "ots_file": str(ots_file.relative_to(ROOT)) if ots_file.exists() else None,
-            "ots_file_sha256": sha256_file(ots_file) if ots_file.exists() else None,
-        }
-        included_batches.append(batch_entry)
-
-        for rid in mf.get("record_ids", []):
-            if rid in record_ids_seen:
-                continue
-            record_ids_seen.add(rid)
-            rec_path = RECORDS / f"{rid}.json"
-            if rec_path.exists():
-                rec = read_json(rec_path)
-                included_records.append({
-                    "record_id": rid,
-                    "path": str(rec_path.relative_to(ROOT)),
-                    "record_sha256": rec.get("record_sha256"),
-                })
-
-    if not included_batches:
-        print("No new Arweave archive needed.")
-        return
-
-    # Compute deterministic archive ID
-    first_batch_id = included_batches[0]["batch_id"]
-    last_batch_id = included_batches[-1]["batch_id"]
-
-    # Source hash from concatenating all batch manifest SHA256s
-    source_concat = "".join(b["batch_manifest_sha256"] or "" for b in included_batches)
-    source_hash = sha256_bytes(source_concat.encode("utf-8"))
-
-    archive_id = build_archive_id(first_batch_id, last_batch_id, source_hash)
+    # Compute deterministic archive ID from native source
+    source_hash_input = {
+        "latest_record_id": latest_record_id,
+        "latest_record_sha256": latest_record_sha256,
+        "native_record_count": native_record_count,
+        "record_index_sha256": native["source_files"]["record_index"]["sha256"],
+        "native_ots_latest_sha256": (
+            native["native_ots_latest"]["sha256"] if native["native_ots_latest"] else None
+        ),
+    }
+    source_hash = sha256_canonical_json(source_hash_input)
+    archive_id = f"archive-native-{latest_record_id}-{source_hash[:12]}"
     archive_dir = ARCHIVES / archive_id
 
     if archive_dir.exists():
-        # Check idempotency: if archive already has a txid, skip upload
         existing_manifest_path = archive_dir / "manifest.json"
         if existing_manifest_path.exists():
             existing = read_json(existing_manifest_path)
@@ -208,7 +293,6 @@ def build_archive_manifest(mode: str) -> None:
     else:
         archive_dir.mkdir(parents=True, exist_ok=True)
 
-    # Build manifest (without archive_manifest_sha256 first)
     manifest = {
         "schema": "trinityaccord.record-chain-arweave-archive-manifest.v1",
         "archive_id": archive_id,
@@ -216,9 +300,21 @@ def build_archive_manifest(mode: str) -> None:
         "mode": mode,
         "chain_id": CHAIN_ID,
         "source": {
-            "chain_tip_path": str(chain_tip_path.relative_to(ROOT)),
-            "record_index_path": str(record_index_path.relative_to(ROOT)) if record_index_path.exists() else None,
-            "batch_index_path": str(batch_index_path.relative_to(ROOT)) if batch_index_path.exists() else None,
+            "source_type": "native-record-chain",
+            "chain_tip_path": "record-chain/chain-tip.json",
+            "record_index_path": "record-chain/indexes/record-index.json",
+            "batch_index_path": "record-chain/indexes/batch-index.json",
+            "native_chain": {
+                "latest_record_id": latest_record_id,
+                "latest_record_sha256": latest_record_sha256,
+                "native_record_count": native_record_count,
+                "latest_batch_id": chain_tip.get("latest_batch_id"),
+                "latest_batch_manifest_sha256": chain_tip.get("latest_batch_manifest_sha256"),
+            },
+            "source_files": native["source_files"],
+            "native_ots_latest": native["native_ots_latest"],
+            "legacy_main_chain_jsonl_is_not_source": True,
+            "batch_manifests_are_auxiliary": True,
         },
         "included_batches": included_batches,
         "included_records": included_records,
@@ -245,13 +341,9 @@ def build_archive_manifest(mode: str) -> None:
         if not arkey:
             raise SystemExit("ARKEY required for live Arweave upload")
 
-        # Build payload
         payload_path = build_payload_json(manifest, archive_dir)
-
-        # Upload to Arweave
         upload_result = upload_to_arweave(payload_path, archive_dir)
 
-        # Update manifest with live upload results
         manifest["arweave"] = {
             "enabled": True,
             "upload_mode": "live",
@@ -262,13 +354,8 @@ def build_archive_manifest(mode: str) -> None:
         }
         manifest["mode"] = "live"
 
-    # Compute and set archive_manifest_sha256
     manifest["archive_manifest_sha256"] = sha256_canonical_json(manifest)
-
-    # Write manifest
     write_json(archive_dir / "manifest.json", manifest)
-
-    # Update public index
     update_arweave_index()
 
 
@@ -292,6 +379,8 @@ def update_arweave_index() -> None:
             if arweave.get("wallet_address_sha256"):
                 wallet_address_sha256 = arweave["wallet_address_sha256"]
 
+        source = mf.get("source", {})
+        native_chain = source.get("native_chain", {})
         archive_entries.append({
             "archive_id": mf.get("archive_id"),
             "mode": mf.get("mode"),
@@ -302,6 +391,11 @@ def update_arweave_index() -> None:
             "batch_count": len(batches),
             "first_batch_id": batches[0]["batch_id"] if batches else None,
             "last_batch_id": batches[-1]["batch_id"] if batches else None,
+            "source_type": source.get("source_type"),
+            "native_latest_record_id": native_chain.get("latest_record_id"),
+            "native_latest_record_sha256": native_chain.get("latest_record_sha256"),
+            "native_record_count": native_chain.get("native_record_count"),
+            "native_ots_latest": source.get("native_ots_latest"),
             "created_at": mf.get("created_at"),
         })
 
