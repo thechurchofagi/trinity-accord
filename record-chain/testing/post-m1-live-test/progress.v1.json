@@ -86,8 +86,8 @@
       "name": "Production Enablement Marker",
       "pre_entry_delta_smoke": {
         "anomaly": null,
-        "artifact_manifest": "record-chain/testing/post-m1-live-test/artifact-manifests/m8-pr455-delta-20260608T012104Z.json",
-        "artifact_manifest_sha256": "2d61e45dd7215ea6f03611e586ee938ae8f47ad541e35fe431b6f85de49e34d1",
+        "artifact_manifest": "record-chain/testing/post-m1-live-test/artifact-manifests/m8-pr455-delta-smoke-rerun-20260608T020500Z.json",
+        "artifact_manifest_sha256": "acd53729628213bd41345de970bac155a6431a608c6fabf05539c5f9fe503d5c",
         "checks": {
           "append_finalization_observation": "finalization_evidence_found",
           "duplicate_submit_immutable": "pass",
