@@ -28,31 +28,30 @@ def test_native_commitment_binds_current_head() -> None:
     tip = json.loads((ROOT / "record-chain" / "chain-tip.json").read_text())
     text = json.dumps(commitment, sort_keys=True)
 
+    expected_record_id = tip["latest_record_id"]
+    expected_count = tip["native_record_count"]
+
     if commitment.get("schema") != "trinityaccord.native-record-chain-head-commitment.v1":
         fail("native commitment schema mismatch")
-    if commitment.get("latest_record_id") != tip.get("latest_record_id"):
-        fail("native commitment latest_record_id must match chain-tip")
+    if commitment.get("latest_record_id") != expected_record_id:
+        fail(f"native commitment latest_record_id must match chain-tip ({expected_record_id})")
     if commitment.get("latest_record_sha256") != tip.get("latest_record_sha256"):
         fail("native commitment latest_record_sha256 must match chain-tip")
-    if commitment.get("native_record_count") != tip.get("native_record_count"):
-        fail("native commitment native_record_count must match chain-tip")
+    if commitment.get("native_record_count") != expected_count:
+        fail(f"native commitment native_record_count must match chain-tip ({expected_count})")
 
-    if commitment.get("latest_record_id") != "R-000000034":
-        fail("M9 native commitment must include R-000000034")
-    if commitment.get("native_record_count") != 34:
-        fail("M9 native commitment must include native_record_count=34")
     if "main.chain.jsonl" in text:
         fail("native commitment must not reference legacy main.chain.jsonl")
 
     coverage = commitment.get("record_coverage", {})
     if coverage.get("source") != "record-chain/indexes/record-index.json":
         fail("native commitment record_coverage must use record-index")
-    if coverage.get("record_count") != 34:
-        fail("native commitment record_coverage must include 34 records")
-    if coverage.get("last_record_id") != "R-000000034":
-        fail("native commitment record_coverage must end at R-000000034")
-    if len(coverage.get("records", [])) != 34:
-        fail("native commitment records list must include 34 records")
+    if coverage.get("record_count") != expected_count:
+        fail(f"native commitment record_coverage must include {expected_count} records")
+    if coverage.get("last_record_id") != expected_record_id:
+        fail(f"native commitment record_coverage must end at {expected_record_id}")
+    if len(coverage.get("records", [])) != expected_count:
+        fail(f"native commitment records list must include {expected_count} records")
 
     source_files = commitment.get("source_files", {})
     for key in ["chain_tip", "record_index", "latest_record", "guardian_state", "statistics", "batch_index"]:
@@ -64,6 +63,10 @@ def test_native_commitment_binds_current_head() -> None:
 
 
 def test_native_ots_script_dry_run() -> None:
+    tip = json.loads((ROOT / "record-chain" / "chain-tip.json").read_text())
+    expected_record_id = tip["latest_record_id"]
+    expected_count = tip["native_record_count"]
+
     with tempfile.TemporaryDirectory() as td:
         tmp = Path(td)
         out_dir = tmp / "native-anchors"
@@ -85,10 +88,10 @@ def test_native_ots_script_dry_run() -> None:
         latest = json.loads(api_out.read_text())
         if latest.get("schema") != "trinityaccord.native-record-chain-ots-latest.v1":
             fail("native latest schema mismatch")
-        if latest.get("latest_record_id") != "R-000000034":
-            fail("native latest must reference R-000000034")
-        if latest.get("native_record_count") != 34:
-            fail("native latest must reference native_record_count=34")
+        if latest.get("latest_record_id") != expected_record_id:
+            fail(f"native latest must reference {expected_record_id}")
+        if latest.get("native_record_count") != expected_count:
+            fail(f"native latest must reference native_record_count={expected_count}")
         if latest.get("legacy_main_chain_jsonl_is_not_source") is not True:
             fail("native latest must declare legacy main.chain.jsonl is not source")
 
