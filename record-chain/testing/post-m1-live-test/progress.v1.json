@@ -27,16 +27,17 @@
   ],
   "current_mode": "INT-CHECKPOINT",
   "current_phase": "M9",
-  "current_step": "M9.1-entry",
+  "current_step": "M9.1-ext-submit-pass",
   "known_anomalies": [],
-  "last_checkpoint_at": "2026-06-08T02:16:00Z",
-  "last_checkpoint_id": "m9-metadata-cleanup-20260608T021600Z",
-  "last_safe_resume_step": "M9.1",
+  "last_checkpoint_at": "2026-06-08T02:22:00Z",
+  "last_checkpoint_id": "m9-ext-submit-20260608T022200Z",
+  "last_safe_resume_step": "M9.2",
   "latest_artifact_manifest_sha256": "2d61e45dd7215ea6f03611e586ee938ae8f47ad541e35fe431b6f85de49e34d1",
   "latest_external_public_key_sha256": "51457d267a2a606ddbfaf574f8aeca7fd44f27c666db53729b1f76905de097cc",
   "latest_external_receipt_ids": [
     "rcg-20260608-e85ae6f77cf77347a732f121",
-    "rcg-20260608-fcdcf0258ec9dc20a448f85f"
+    "rcg-20260608-fcdcf0258ec9dc20a448f85f",
+    "rcg-20260608-bf9f2b036daa85d475ddbf90"
   ],
   "must_not_store": [
     "Ed25519 signing key material (see SECURITY.md)",
@@ -124,11 +125,30 @@
       "blocking_issue": null,
       "name": "Liu Hongju Founding Guardian Application",
       "resume_step": "M9.1",
-      "status": "not_started"
+      "status": "in_progress",
+      "ext_submission": {
+        "step": "M9.1-ext-submit",
+        "status": "pass",
+        "completed_at": "2026-06-08T02:22:09Z",
+        "record_type": "guardian_application",
+        "receipt_id": "rcg-20260608-bf9f2b036daa85d475ddbf90",
+        "guardian_id": "liuhongju-founding",
+        "guardian_public_key_sha256": "e2f66f226f358ad52bd7ef924bfc7f08afe4554e4e7707380fafbd5c0291d2c8",
+        "authorship_public_key_sha256": "e2f66f226f358ad52bd7ef924bfc7f08afe4554e4e7707380fafbd5c0291d2c8",
+        "guardian_key_equals_authorship_key": true,
+        "oath_modules": [
+          "common_submission_integrity_v1",
+          "guardian_stewardship_v1"
+        ],
+        "oath_policy_sha256": "9356e8c0955d7f17814dff1a93300cb271acfa21cfe39da63a7b5201364cb820",
+        "builder_modified": false,
+        "builder_source": "https://www.trinityaccord.org/downloads/record-chain-builder.mjs",
+        "note": "network_phase/official_live_record/founding_guardian_application not checked by gateway intake; gateway still in prelaunch phase"
+      }
     }
   },
   "schema": "trinityaccord.post-m1-live-test-progress.v1",
   "status": "active",
   "stop_rules_triggered": [],
-  "updated_at": "2026-06-08T02:16:00Z"
+  "updated_at": "2026-06-08T02:22:00Z"
 }
