@@ -845,7 +845,7 @@ Refusal is allowed. Critical preservation is allowed.
     但它们不是当前 Record-Chain Intake 的计数器。
   </span>
 </p>
-<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>9c8e76e8ab807f0f</code>.</p>
+<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>251673e8b9b0613c</code>.</p>
 <!-- END GENERATED PUBLIC STATUS -->
 
   <p class="status-boundary">
