@@ -53,6 +53,11 @@ def main() -> None:
     parser.add_argument("--verify-payload-files", action="store_true")
     parser.add_argument("--base-dir", default=".")
     parser.add_argument("--overwrite", action="store_true")
+    parser.add_argument(
+        "--allow-stale-legacy-ledger",
+        action="store_true",
+        help="Allow anchoring legacy main.chain.jsonl even when native chain-tip is ahead. Never use for M9.3.",
+    )
     args = parser.parse_args()
 
     ledger_path = Path(args.ledger)
@@ -61,6 +66,22 @@ def main() -> None:
     api_out = Path(args.api_out)
 
     entries = load_ledger(ledger_path)
+
+    native_tip_path = Path("record-chain/chain-tip.json")
+    if native_tip_path.exists() and not args.allow_stale_legacy_ledger:
+        native_tip = load_json(native_tip_path)
+        native_count = native_tip.get("native_record_count")
+        native_latest = native_tip.get("latest_record_id")
+        legacy_count = len(entries)
+        if isinstance(native_count, int) and native_count != legacy_count:
+            raise SystemExit(
+                "Refusing to anchor stale legacy main.chain.jsonl: "
+                f"legacy_entry_count={legacy_count}, "
+                f"native_record_count={native_count}, "
+                f"native_latest_record_id={native_latest}. "
+                "Use scripts/ots_anchor_native_record_chain_head.py for native chain head anchoring, "
+                "or pass --allow-stale-legacy-ledger only for explicit legacy tests."
+            )
     if args.verify_ledger:
         errors = verify_entries(
             entries,
