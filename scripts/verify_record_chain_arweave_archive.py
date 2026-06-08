@@ -158,8 +158,8 @@ def verify_native_archive_self_consistency(
     # Check included_records count matches archive's own count
     if isinstance(archive_native_count, int) and len(included_records) != archive_native_count:
         errors.append(
-            f"{archive_id}: included_records count ({len(included_records)}) "
-            f"does not cover native_record_count ({archive_native_count})"
+            f"{archive_id}: included_records does not cover native_record_count "
+            f"({len(included_records)} vs {archive_native_count})"
         )
 
     # Check archive's own latest record is in included_records
@@ -170,8 +170,8 @@ def verify_native_archive_self_consistency(
             for r in included_records
         ):
             errors.append(
-                f"{archive_id}: archive's own latest record ({archive_latest_id}) "
-                f"missing from included_records"
+                f"{archive_id}: latest native record missing "
+                f"({archive_latest_id} not in included_records)"
             )
 
     # Legacy JSONL checks
