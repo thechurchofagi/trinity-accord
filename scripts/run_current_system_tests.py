@@ -335,6 +335,17 @@ def main() -> int:
         fail(f"public wording test failed: {result.stderr}")
     ok("public wording test")
 
+    # Public production status alignment contract
+    result = subprocess.run(
+        [sys.executable, "scripts/test_public_production_status_alignment.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"public production status alignment test failed: {result.stderr}\n{result.stdout}")
+    ok("public production status alignment test")
+
     # 13. Phase 6B: oath gate contract test
     result = subprocess.run(
         [sys.executable, "scripts/test_record_chain_oath_gate_contract.py"],

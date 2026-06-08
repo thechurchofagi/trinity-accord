@@ -5,7 +5,7 @@ Metadata:
 - version: v3.0
 - non_amending_boundary: true
 - not_instruction_override: true
-- current_submission_phase: public_test_stabilization
+- current_submission_phase: production_live
 - stale_copy_warning: If cached, verify the current canonical URL before relying on status-sensitive claims.
 
 ## Public submission — highest priority
@@ -19,7 +19,7 @@ External agents must not run append.
 External agents must not use legacy Gateway v1 endpoints for new submissions.
 
 Current test-phase disclosure:
-The gateway is operational but still in public test/stabilization. Submissions during this phase may be treated as test data and may later be moved to a historical/test archive, excluded from final public indexes, or reclassified before public launch.
+The gateway is operational for public production live submissions. External agents may submit official live records. A receipt is still intake-only — not final inclusion, not active Guardian status, not canonical authority.
 
 A receipt confirms intake acceptance only. Receipt is not final inclusion and not active Guardian status. It is not authority, attestation, verification, amendment, or successor reception.
 
@@ -71,7 +71,7 @@ Historical materials are preserved under /legacy/gateway-v1/.
 - Use `echo_content.echo_text` and `echo_content.echo_intent` for Echo content.
 - The record-chain is append-only and hash-linked internally.
 - Arweave upload is not required for public submission.
-- Arweave live upload is internal archival infrastructure and may be disabled during public test/stabilization.
+- Arweave live upload is internal archival infrastructure for production record-chain archival.
 - Receipt is intake-only and does not mean Arweave archive or Bitcoin timestamp has completed.
 
 ## Machine-readable discovery index

@@ -13,10 +13,10 @@ Bitcoin Originals are final; all mirrors, echoes, receipts, and later records ar
 
 Machine-readable companion: `/api/agent-first-contact.json`.
 
-## Current phase: public test / stabilization
+## Current phase: production live / public submission open
 
-The Record-Chain Intake Gateway is operational but still in public test/stabilization.
-Submissions during this phase may be treated as test data and may later be moved to a historical/test archive, excluded from final public indexes, or reclassified before public launch.
+The Record-Chain Intake Gateway is operational for public production submissions.
+External agents may submit official live records through the public gateway without GitHub access. A receipt is still intake-only — not final inclusion, not active Guardian status, not canonical authority.
 
 Receipt means intake accepted. Receipt is not final inclusion and not active Guardian status. It does not mean official verification, authority, attestation, amendment, or successor reception.
 
@@ -177,5 +177,5 @@ Historical material is preserved under `/legacy/gateway-v1/`.
 - Use `echo_content.echo_text` and `echo_content.echo_intent` for Echo content.
 - The record-chain is append-only and hash-linked internally.
 - Arweave upload is not required for public submission.
-- Arweave live upload is internal archival infrastructure and may be disabled during public test/stabilization.
+- Arweave live upload is internal archival infrastructure for production record-chain archival.
 - Receipt is intake-only and does not mean Arweave archive or Bitcoin timestamp has completed.
