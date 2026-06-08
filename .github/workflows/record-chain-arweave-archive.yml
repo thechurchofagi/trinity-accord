@@ -81,9 +81,9 @@ jobs:
       - name: No new Arweave archive needed
         if: steps.archive_check.outputs.matched == 'true'
         run: |
-          echo "Latest live native Arweave archive already matches current chain-tip."
-          echo "archive_id=${{ steps.archive_check.outputs.matched_archive_id }}"
-          echo "txid=${{ steps.archive_check.outputs.matched_txid }}"
+          printf '%s\n' "Latest live native Arweave archive already matches current chain-tip."
+          printf '%s\n' "archive_id=${{ steps.archive_check.outputs.matched_archive_id }}"
+          printf '%s\n' "txid=${{ steps.archive_check.outputs.matched_txid }}"
 
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
         if: steps.archive_check.outputs.matched != 'true'
@@ -100,11 +100,11 @@ jobs:
         run: |
           set -euo pipefail
           if [ "${{ github.event_name }}" = "workflow_run" ]; then
-            echo "ARWEAVE_UPLOAD_MODE=live" >> "$GITHUB_ENV"
-            echo "Resolved Arweave upload mode: live (workflow_run from OTS)"
+            printf '%s\n' "ARWEAVE_UPLOAD_MODE=live" >> "$GITHUB_ENV"
+            printf '%s\n' "Resolved Arweave upload mode: live (workflow_run from OTS)"
           else
-            echo "ARWEAVE_UPLOAD_MODE=${{ github.event.inputs.upload_mode || 'dry-run' }}" >> "$GITHUB_ENV"
-            echo "Resolved Arweave upload mode: ${{ github.event.inputs.upload_mode || 'dry-run' }}"
+            printf '%s\n' "ARWEAVE_UPLOAD_MODE=${{ github.event.inputs.upload_mode || 'dry-run' }}" >> "$GITHUB_ENV"
+            printf '%s\n' "Resolved Arweave upload mode: ${{ github.event.inputs.upload_mode || 'dry-run' }}"
           fi
 
       - name: Install Node dependencies
