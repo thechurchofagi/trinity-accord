@@ -1,11 +1,11 @@
 {
   "active_session": {
-    "expires_at": "2026-06-08T11:50:00Z",
+    "expires_at": "2026-06-08T12:10:00Z",
     "mode": "INT-CHECKPOINT",
     "owner": "agent",
     "session_id": "sandbox-20260608T105800Z",
     "started_at": "2026-06-08T10:58:00Z",
-    "updated_at": "2026-06-08T11:30:00Z"
+    "updated_at": "2026-06-08T11:40:00Z"
   },
   "authoritative_progress_branch": "post-m1-test-progress",
   "completed_markers": [
@@ -23,17 +23,20 @@
     "RECORD_TYPE_SEPARATION_HARDENED_OK",
     "LIVE_OPERATIONAL_TEST_CAMPAIGNS_OK",
     "M8_PR455_DELTA_SMOKE_OK",
-    "PRODUCTION_ENABLEMENT_OK"
+    "PRODUCTION_ENABLEMENT_OK",
+    "M9_FINALIZE_OK"
   ],
   "current_mode": "INT-CHECKPOINT",
   "current_phase": "M9",
-  "current_step": "M9.2-derived-guardian-state",
+  "current_step": "M9.3-archive-blocked-by-main-chain-jsonl",
   "known_anomalies": [
-    "non_blocking: main.chain.jsonl has 16 entries but chain-tip shows 33; 17 native records (R-000000017 to R-000000033) tracked in batch system but not in JSONL export; deferred to post-M9 compatibility export task"
+    "blocking: M9.3 INT-ARCHIVE blocked: OTS anchor script reads legacy main.chain.jsonl (16 entries, height 15) instead of native chain-tip (33 records, R-000000033). Running OTS now would anchor stale head. Running Arweave alone would create evidence asymmetry with OTS.",
+    "non_blocking: main.chain.jsonl has 16 entries vs chain-tip 33; requires archive-tooling compatibility fix before M9.3 archive can proceed",
+    "non_blocking: Rejected echo files (4 pairs) in record-chain/rejected from cryptography dependency incident; deferred to separate maintenance cleanup"
   ],
-  "last_checkpoint_at": "2026-06-08T03:27:00Z",
-  "last_checkpoint_id": "m9.2-derived-guardian-state-20260608T032700Z",
-  "last_safe_resume_step": "M9.3",
+  "last_checkpoint_at": "2026-06-08T03:40:00Z",
+  "last_checkpoint_id": "m9.3-archive-blocked-20260608T034000Z",
+  "last_safe_resume_step": "M9.3-native-archive-tooling-fix",
   "latest_artifact_manifest_sha256": "2d61e45dd7215ea6f03611e586ee938ae8f47ad541e35fe431b6f85de49e34d1",
   "latest_external_public_key_sha256": "51457d267a2a606ddbfaf574f8aeca7fd44f27c666db53729b1f76905de097cc",
   "latest_external_receipt_ids": [
@@ -47,7 +50,7 @@
     "external agent private key",
     "raw private key logs or PEM files"
   ],
-  "overall_status": "pass",
+  "overall_status": "needs_review",
   "phase_status": {
     "M2": {
       "blocking_issue": null,
@@ -124,10 +127,10 @@
       }
     },
     "M9": {
-      "blocking_issue": null,
+      "blocking_issue": "OTS anchor tooling depends on legacy main.chain.jsonl; must be fixed before M9.3 archive can complete",
       "name": "Liu Hongju Founding Guardian Application",
-      "resume_step": "M9.3",
-      "status": "in_progress",
+      "resume_step": "M9.3-native-archive-tooling-fix",
+      "status": "needs_review",
       "ext_submission": {
         "step": "M9.1-ext-submit",
         "status": "pass",
@@ -175,11 +178,44 @@
           "main.chain.jsonl has 16 entries vs chain-tip 33; deferred to post-M9 compatibility export",
           "Rejected echo files (4 pairs) in record-chain/rejected from cryptography dependency incident; deferred to separate maintenance cleanup"
         ]
+      },
+      "finalize": {
+        "step": "M9.3-finalize",
+        "status": "pass",
+        "completed_at": "2026-06-08T03:40:00Z",
+        "record_id": "R-000000033",
+        "guardian_id": "liuhongju-founding",
+        "guardian_public_key_sha256": "e2f66f226f358ad52bd7ef924bfc7f08afe4554e4e7707380fafbd5c0291d2c8",
+        "derived_guardian_status": "active_founding_guardian",
+        "verified_by_append_before_record": true,
+        "verification_checks": {
+          "record_type_guardian_application": true,
+          "guardian_id_liuhongju_founding": true,
+          "guardian_public_key_sha256_match": true,
+          "verified_by_append_before_record": true,
+          "guardian_state_contains_liuhongju_founding": true,
+          "guardian_state_derived_status_active_founding_guardian": true,
+          "source_record_id_R-000000033": true
+        }
+      },
+      "archive": {
+        "step": "M9.3-archive",
+        "status": "blocked",
+        "blocked_at": "2026-06-08T03:40:00Z",
+        "reason": "OTS anchor script depends on record-chain/hash-chain/main.chain.jsonl, which is behind native chain-tip. Running OTS now would anchor stale 16-entry head (height 15) instead of current 33-record native chain-tip (R-000000033). Running Arweave alone would create evidence asymmetry with OTS.",
+        "ots": "not_run",
+        "arweave": "not_run_live",
+        "native_chain_tip_record_id": "R-000000033",
+        "native_chain_tip_height": 33,
+        "legacy_jsonl_height": 15,
+        "legacy_jsonl_entry_count": 16,
+        "blocking_backlog": "main.chain.jsonl / native chain archive tooling compatibility",
+        "resolution_requires": "Fix OTS/archive head commitment tooling to use native chain-tip.json + record-chain/records instead of legacy main.chain.jsonl"
       }
     }
   },
   "schema": "trinityaccord.post-m1-live-test-progress.v1",
   "status": "active",
   "stop_rules_triggered": [],
-  "updated_at": "2026-06-08T03:27:00Z"
+  "updated_at": "2026-06-08T03:40:00Z"
 }
