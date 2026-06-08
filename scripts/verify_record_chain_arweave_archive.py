@@ -29,6 +29,8 @@ RECORDS = CHAIN / "records"
 BATCHES = CHAIN / "batches"
 ARCHIVES = CHAIN / "arweave-archives"
 API_INDEX = ROOT / "api" / "record-chain-arweave-index.json"
+INDEXES = CHAIN / "indexes"
+CHAIN_TIP = CHAIN / "chain-tip.json"
 
 FORBIDDEN_TERMS = {"ARV5", "LV5", "IVV5", "IPFS"}
 
@@ -150,6 +152,39 @@ def verify(network: bool = False, strict_network: bool = False) -> list[str]:
                      "not_successor_reception", "bitcoin_originals_prevail"]:
             if not m_boundary.get(key):
                 errors.append(f"{archive['archive_id']}: manifest boundary missing/false: {key}")
+
+        # Native archive validation
+        source = manifest.get("source", {})
+        if source.get("source_type") == "native-record-chain":
+            chain_tip = read_json(CHAIN_TIP)
+            native_chain = source.get("native_chain", {})
+
+            if native_chain.get("latest_record_id") != chain_tip.get("latest_record_id"):
+                errors.append(f"{archive['archive_id']}: native latest_record_id mismatch")
+            if native_chain.get("latest_record_sha256") != chain_tip.get("latest_record_sha256"):
+                errors.append(f"{archive['archive_id']}: native latest_record_sha256 mismatch")
+            if native_chain.get("native_record_count") != chain_tip.get("native_record_count"):
+                errors.append(f"{archive['archive_id']}: native_record_count mismatch")
+
+            included_records = manifest.get("included_records", [])
+            if len(included_records) != chain_tip.get("native_record_count"):
+                errors.append(
+                    f"{archive['archive_id']}: included_records does not cover native_record_count"
+                )
+
+            if not any(
+                r.get("record_id") == chain_tip.get("latest_record_id")
+                and r.get("record_sha256") == chain_tip.get("latest_record_sha256")
+                for r in included_records
+            ):
+                errors.append(f"{archive['archive_id']}: latest native record missing from included_records")
+
+            if source.get("legacy_main_chain_jsonl_is_not_source") is not True:
+                errors.append(f"{archive['archive_id']}: native archive must declare legacy JSONL is not source")
+
+            manifest_text_for_native = canonical_dumps(manifest)
+            if "main.chain.jsonl" in manifest_text_for_native:
+                errors.append(f"{archive['archive_id']}: native archive must not reference main.chain.jsonl")
 
         # Check included batches
         for batch in manifest.get("included_batches", []):
