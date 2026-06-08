@@ -950,6 +950,34 @@ def build_indexes() -> None:
             "source_record_sha256": rec.get("record_sha256"),
         })
 
+    # --- Native guardian_application records → derived guardian state ---
+    native_guardian_statuses: dict[str, int] = {}
+    for p in native_records:
+        rec = read_json(p)
+        if rec.get("record_type") != "guardian_application":
+            continue
+        gac = rec.get("guardian_application_content", {})
+        avs = rec.get("authorship_verification_status", {})
+        verified = avs.get("verified_by_append_before_record", False)
+        is_founding = bool(
+            gac.get("requested_guardian_identifier", "").endswith("-founding")
+        )
+        if verified:
+            derived = "active_founding_guardian" if is_founding else "active_guardian"
+        else:
+            derived = "pending_verification"
+        native_guardian_statuses[derived] = native_guardian_statuses.get(derived, 0) + 1
+        guardian_state["guardians"].append({
+            "guardian_id": gac.get("requested_guardian_identifier"),
+            "guardian_public_key_sha256": gac.get("guardian_public_key_sha256"),
+            "current_derived_status": derived,
+            "source_record_id": rec.get("record_id"),
+            "source_record_path": str(p.relative_to(ROOT)),
+            "source_record_sha256": rec.get("record_sha256"),
+            "verified_by_append_before_record": verified,
+            "is_founding_guardian": is_founding,
+        })
+
     record_index = {
         "schema": "trinityaccord.record-index.v1",
         "derived_at": utc_now(),
@@ -984,6 +1012,11 @@ def build_indexes() -> None:
         "legacy_retired_at_import": retired_legacy,
         "legacy_classification_totals": classifications,
         "native_record_count": len(native_records),
+        "native_guardian_application_count": sum(
+            1 for p in native_records
+            if read_json(p).get("record_type") == "guardian_application"
+        ),
+        "native_guardian_status_totals": native_guardian_statuses,
         "batch_count": len(batches),
         "independent_agent_total_policy": "legacy records default to false unless future classification_update says otherwise",
     }
