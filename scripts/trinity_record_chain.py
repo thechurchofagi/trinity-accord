@@ -400,11 +400,29 @@ def verify_pending_record_authorship(record: dict[str, Any]) -> None:
     # Import lazily so non-authorship commands do not pay this dependency cost.
     # Import lazily so non-authorship commands do not pay this dependency cost.
     sys.path.insert(0, str(ROOT / "apps/record_chain_intake_gateway"))
-    from gateway.authorship import verify_authorship_proof  # noqa: WPS433
+    from gateway.authorship import (  # noqa: WPS433
+        strip_unsigned_projection_fields,
+        verify_authorship_proof,
+    )
 
-    ok, err = verify_authorship_proof(record, proof)
+    record_for_verification = strip_unsigned_projection_fields(record)
+    ok, err = verify_authorship_proof(record_for_verification, proof)
     if not ok:
         raise ValueError(f"authorship proof verification failed for pending record: {err}")
+
+
+def sanitize_pending_record_for_append(record: dict[str, Any]) -> dict[str, Any]:
+    """Return the pending record object that may proceed to append.
+
+    The returned object removes server-derived or append-assigned projection
+    fields before normalization. This ensures append verifies and normalizes the
+    same signed-scope object rather than verifying a cleaned view but appending
+    the polluted raw pending file.
+    """
+    sys.path.insert(0, str(ROOT / "apps/record_chain_intake_gateway"))
+    from gateway.authorship import strip_unsigned_projection_fields  # noqa: WPS433
+
+    return strip_unsigned_projection_fields(record)
 
 
 def normalize_record_draft(draft: dict[str, Any]) -> dict[str, Any]:
@@ -517,10 +535,11 @@ def append_records(all_records: bool = False) -> None:
     for path in selected:
         try:
             raw_draft = read_json(path)
-            # Verify authorship proof on the raw draft before normalization
-            # modifies it, so the signed payload hash matches exactly.
-            verify_pending_record_authorship(raw_draft)
-            draft = normalize_record_draft(raw_draft)
+            # Verify authorship proof on the signed-scope pending draft before normalization
+            # modifies it. Then append the same sanitized object that was verified.
+            signed_scope_draft = sanitize_pending_record_for_append(raw_draft)
+            verify_pending_record_authorship(signed_scope_draft)
+            draft = normalize_record_draft(signed_scope_draft)
 
             # --- Phase 6B: authorship_verification_status ---
             # Record the scope of the authorship proof relative to the final
