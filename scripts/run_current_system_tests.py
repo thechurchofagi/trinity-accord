@@ -313,6 +313,16 @@ def main() -> int:
     if result.returncode != 0:
         fail(f"M9 native archive workflow contract failed: {result.stderr}\n{result.stdout}")
     ok("M9 native archive workflow contract")
+    # Canonical record-chain write-path guard contract
+    result = subprocess.run(
+        [sys.executable, "scripts/test_record_chain_write_path_guard_contract.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"record-chain write-path guard contract failed: {result.stderr}\n{result.stdout}")
+    ok("record-chain write-path guard contract")
     # 11b. Arweave upload readback contract test
     result = subprocess.run(
         [sys.executable, "scripts/test_arweave_upload_contract.py"],
