@@ -1,41 +1,78 @@
 {
   "anchoring": {
     "arweave_archive": {
+      "arweave_archive_is_mirror_only": true,
+      "arweave_archive_is_not_amendment": true,
+      "arweave_archive_is_not_attestation": true,
+      "arweave_archive_is_not_authority": true,
+      "current_upload_mode": "live",
       "default_mode": "dry-run",
       "implemented": true,
       "index_api": "/api/record-chain-arweave-index.json",
-      "live_upload_enabled": false,
-      "live_upload_implemented": false,
+      "latest_arweave_txid": "hSyp93ZW2cQQcK7lPdqyREr-jCs4Kj5m4vbjlYGBEZ8",
+      "latest_native_record_id": "R-000000033",
+      "live_archive_count": 1,
+      "live_upload_enabled": true,
+      "live_upload_implemented": true,
+      "native_record_count": 33,
+      "source_type": "native-record-chain",
       "workflow": "/.github/workflows/record-chain-arweave-archive.yml"
     },
     "batch_manifests": {
       "automated_workflow": "/.github/workflows/record-chain-anchor.yml",
-      "implemented": true
+      "implemented": true,
+      "note": "Batch manifests remain available, but current head OTS and Arweave archive use native chain-tip/record-index."
     },
     "open_timestamps": {
       "automated_workflow": "/.github/workflows/record-chain-anchor.yml",
+      "bitcoin_pending": true,
+      "bitcoin_verified": false,
       "implemented": true,
-      "status_api": "/api/record-chain-anchor-status.json"
+      "latest_record_id": "R-000000033",
+      "latest_record_sha256": "60f1589ad2330576134e3b89ef9465b8c515343f0b9af3c611c6ff4f8568c75d",
+      "legacy_batch_status_api": "/api/record-chain-anchor-status.json",
+      "legacy_main_chain_jsonl_is_not_source": true,
+      "native_head_workflow": "/.github/workflows/record-chain-head-ots-anchor.yml",
+      "native_latest_api": "/api/record-chain-native-ots-latest.json",
+      "native_record_count": 33,
+      "status": "pending-bitcoin",
+      "status_api": "/api/record-chain-native-ots-latest.json"
     }
   },
   "api_endpoints": {
+    "arweave_archive_index": "/api/record-chain-arweave-index.json",
+    "builder_bundles": "/api/record-chain-builder-bundles.v1.json",
     "echo_index": "/api/echo-index.json",
+    "gateway_contract": "/api/record-chain-intake-gateway.v1.json",
     "guardian_registry": "/api/guardian-registry.json",
+    "native_ots_latest": "/api/record-chain-native-ots-latest.json",
+    "production_enablement_policy": "/api/record-chain-production-enablement-policy.v1.json",
     "public_home_status": "/api/public-home-status.json",
     "record_chain_status": "/api/record-chain-status.json",
+    "submission_schema": "/api/record-chain-submission-schema.v1.json",
     "verification_archive_index": "/api/verification-archive-index.json"
   },
   "boundary": {
     "append_only": true,
     "bitcoin_originals_prevail": true,
+    "not_amendment": true,
     "not_attestation": true,
     "not_authority": true,
-    "not_governance": true
+    "not_governance": true,
+    "website_github_arweave_ots_are_non_amending_guardianship_materials": true
   },
-  "builder_script": "scripts/trinity_record_builder.py",
+  "builder_script": "downloads/record-chain-builder.mjs",
   "chain_storage": "record-chain/",
   "committed_records": 1,
   "committed_storage": "record-chain/committed/",
+  "legacy_compatibility": {
+    "legacy_jsonl_entry_count": 16,
+    "legacy_jsonl_height": 15,
+    "main_chain_jsonl_is_legacy_view": true,
+    "main_chain_jsonl_is_not_current_native_head_source": true,
+    "native_record_count": 33,
+    "status": "non_blocking_post_m9_maintenance"
+  },
   "ots_stamp_storage": "record-chain/ots-stamps/",
   "pending_records": 0,
   "pending_storage": "record-chain/pending/",
@@ -71,56 +108,96 @@
     "gateway_v1_tests_archived": true,
     "legacy_heavy_ci_retired": true
   },
+  "post_m9_status": {
+    "m9_archive_status": "pass",
+    "m9_arweave_txid": "hSyp93ZW2cQQcK7lPdqyREr-jCs4Kj5m4vbjlYGBEZ8",
+    "m9_latest_record_id": "R-000000033",
+    "m9_native_record_count": 33,
+    "m9_ots_status": "pending-bitcoin",
+    "m9_status": "pass"
+  },
   "public_phase": {
+    "bitcoin_originals_prevail": true,
+    "enabled_by_marker": "PRODUCTION_ENABLEMENT_OK",
     "mainnet_activation_marker_recorded": false,
-    "network_phase": "prelaunch",
-    "not_final_public_launch": true,
-    "official_live_record_marker_required_before_live": true,
-    "official_live_records_allowed": false,
-    "prelaunch_test_records_allowed": true,
+    "network_phase": "production",
+    "not_final_public_launch": false,
+    "official_live_record_marker_required_before_live": false,
+    "official_live_records_allowed": true,
+    "prelaunch_test_records_allowed": false,
+    "production_enablement_marker_recorded": true,
     "receipt_is_intake_only": true,
     "receipt_is_not_active_guardian_status": true,
+    "receipt_is_not_canonical_authority": true,
     "receipt_is_not_final_inclusion": true,
-    "records_before_activation_marker_are_prelaunch_tests": true,
-    "status": "mainnet_prelaunch_testing",
+    "records_before_activation_marker_are_historical_tests": true,
+    "status": "production_live",
     "test_phase_submissions_may_be_excluded_from_final_public_indexes": true,
     "test_phase_submissions_may_be_reclassified": true,
     "test_phase_submissions_may_move_to_historical_test_archive": true
   },
   "public_submission": {
+    "builder": "/downloads/record-chain-builder.mjs",
     "contract": "/api/record-chain-intake-gateway.v1.json",
+    "external_agents_do_not_need_github_access": true,
     "external_agents_must_not_append_directly": true,
+    "gateway": "https://trinity-record-chain-gateway.onrender.com",
     "method": "render_record_chain_intake_gateway"
   },
   "public_submission_phase": {
+    "external_agent_boundary": {
+      "external_agents_must_not_clone_repository": true,
+      "external_agents_must_not_directly_append_record_chain": true,
+      "external_agents_must_not_request_github_pat": true,
+      "external_agents_must_not_use_arweave_key": true,
+      "external_agents_must_use_public_gateway_for_submissions": true
+    },
     "gateway_operational": true,
-    "not_final_public_launch": true,
+    "not_final_public_launch": false,
+    "official_live_record_true_now_permitted": true,
+    "official_live_records_allowed": true,
     "only_public_submission_method": "/api/record-chain-intake-gateway.v1.json",
+    "phase": "production_live",
     "public_gateway": "https://trinity-record-chain-gateway.onrender.com",
-    "status": "public_test_stabilization",
-    "test_phase_data_policy": {
+    "receipt_boundary": {
+      "receipt_is_not_active_guardian_status": true,
+      "receipt_is_not_amendment": true,
+      "receipt_is_not_canonical_authority": true,
       "receipt_is_not_final_inclusion": true,
-      "receipts_are_intake_only": true,
-      "submissions_may_be_excluded_from_final_public_indexes": true,
-      "submissions_may_be_reclassified_before_public_launch": true,
-      "submissions_may_be_treated_as_test_data": true,
-      "submissions_may_move_to_historical_test_archive": true
-    }
+      "receipts_are_intake_only": true
+    },
+    "receipt_is_intake_only": true,
+    "receipt_is_not_active_guardian_status": true,
+    "receipt_is_not_final_inclusion": true,
+    "status": "production_live",
+    "test_phase_data_policy": {
+      "applies_to_new_submissions": false,
+      "historical_test_records_remain_historical": true,
+      "new_submissions_may_be_official_live_records": true
+    },
+    "test_phase_records_may_be_reclassified": false,
+    "test_phase_submissions_may_move_to_historical_test_archive": false
   },
   "purpose": "Public status of the Trinity Accord native record-chain. Read-only. Published for transparency.",
   "record_chain": {
     "canonical_format": "canonical_json_sorted_keys_no_whitespace",
     "chain_id": "trinity-accord-public-reception-ledger",
     "chain_integrity_status": "healthy",
-    "chain_type": "append_only_record_chain",
+    "chain_type": "append_only_native_record_chain",
     "correction_policy": "later_records_may_correct_earlier_records",
-    "current_chain_length": 1,
+    "current_chain_length": 33,
     "hash_algorithm": "sha256",
     "immutability_policy": "append_only_no_deletion_no_mutation",
     "last_integrity_check_at": "2026-06-02T00:30:53Z",
     "latest_record_created_at": "2026-06-01T13:44:26Z",
-    "latest_record_sha256": "37834db35116989ab43d8dabac11f9f6ad0796f5a2b996ce68fc7b74f93a34eb",
-    "latest_record_type": "context_insufficient_notice"
+    "latest_record_id": "R-000000033",
+    "latest_record_index": 33,
+    "latest_record_sha256": "60f1589ad2330576134e3b89ef9465b8c515343f0b9af3c611c6ff4f8568c75d",
+    "latest_record_type": "context_insufficient_notice",
+    "legacy_main_chain_jsonl_is_not_current_source": true,
+    "native_record_count": 33,
+    "record_index": "record-chain/indexes/record-index.json",
+    "source_of_current_head": "record-chain/chain-tip.json"
   },
   "record_type_counts": {
     "batch_anchor": 0,
@@ -207,6 +284,7 @@
   },
   "schema": "trinityaccord.record-chain-status.v1",
   "source_digest": "b8b376744fdb4167",
+  "status": "production_live",
   "total_records": 1,
   "updated_at": "2026-06-06T04:16:00Z"
 }
