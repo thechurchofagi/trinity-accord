@@ -168,7 +168,8 @@
         "ci_status": {
           "record_chain_ci": "pass",
           "run_current_tests": "pass",
-          "repository_integrity_check": "in_progress"
+          "repository_integrity_check": "pass",
+          "repository_integrity_check_note": "initial failure on 754f91d was timing (CI ran before append regenerated indexes); passed on subsequent e7e95d6"
         },
         "non_blocking_backlog": [
           "main.chain.jsonl has 16 entries vs chain-tip 33; deferred to post-M9 compatibility export",
