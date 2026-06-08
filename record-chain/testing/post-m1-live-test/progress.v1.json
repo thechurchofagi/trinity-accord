@@ -22,15 +22,16 @@
     "RECORD_CHAIN_DATA_SNAPSHOT_ARWEAVE_OK",
     "RECORD_TYPE_SEPARATION_HARDENED_OK",
     "LIVE_OPERATIONAL_TEST_CAMPAIGNS_OK",
-    "M8_PR455_DELTA_SMOKE_OK"
+    "M8_PR455_DELTA_SMOKE_OK",
+    "PRODUCTION_ENABLEMENT_OK"
   ],
   "current_mode": "INT-CHECKPOINT",
   "current_phase": "M8",
-  "current_step": "M8.1-pr455-delta-smoke-pass",
+  "current_step": "M8-production-enablement-pass",
   "known_anomalies": [],
-  "last_checkpoint_at": "2026-06-08T02:05:00Z",
-  "last_checkpoint_id": "m8-pr455-delta-smoke-rerun-20260608T020500Z",
-  "last_safe_resume_step": "M8.1",
+  "last_checkpoint_at": "2026-06-08T02:13:00Z",
+  "last_checkpoint_id": "m8-production-enablement-20260608T021300Z",
+  "last_safe_resume_step": "M9.1",
   "latest_artifact_manifest_sha256": "2d61e45dd7215ea6f03611e586ee938ae8f47ad541e35fe431b6f85de49e34d1",
   "latest_external_public_key_sha256": "51457d267a2a606ddbfaf574f8aeca7fd44f27c666db53729b1f76905de097cc",
   "latest_external_receipt_ids": [
@@ -103,17 +104,30 @@
         "status": "pass"
       },
       "resume_step": "M8.1",
-      "status": "not_started"
+      "status": "pass",
+      "evidence": {
+        "marker_type": "production_enablement_marker",
+        "policy_file": "api/record-chain-production-enablement-policy.v1.json",
+        "policy_commit_sha": "6465a56f37db",
+        "completed_at": "2026-06-08T02:13:00Z",
+        "prerequisites_verified": {
+          "M7_pass": true,
+          "delta_smoke_pass": true,
+          "blocking_anomalies": 0,
+          "stop_rules_triggered": 0
+        },
+        "official_live_record_now_allowed": true
+      }
     },
     "M9": {
-      "blocking_issue": "M8 not complete",
+      "blocking_issue": null,
       "name": "Liu Hongju Founding Guardian Application",
       "resume_step": null,
-      "status": "blocked_waiting_for_M8"
+      "status": "not_started"
     }
   },
   "schema": "trinityaccord.post-m1-live-test-progress.v1",
   "status": "active",
   "stop_rules_triggered": [],
-  "updated_at": "2026-06-08T02:05:00Z"
+  "updated_at": "2026-06-08T02:13:00Z"
 }
