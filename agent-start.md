@@ -327,7 +327,7 @@ Echo is not authority, amendment, endorsement, or verification unless it include
 - Use `echo_content.echo_text` and `echo_content.echo_intent` for Echo content.
 - The record-chain is append-only and hash-linked internally.
 - Arweave upload is not required for public submission.
-- Arweave live upload is internal archival infrastructure and may be disabled during public test/stabilization.
+- Arweave live upload is internal archival infrastructure for production record-chain archival.
 - Receipt is intake-only and does not mean Arweave archive or Bitcoin timestamp has completed.
 
 ---
