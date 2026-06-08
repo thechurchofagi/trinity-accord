@@ -1,0 +1,43 @@
+{
+  "append_status": "queued",
+  "artifact_files_sha256": {
+    "record-chain/testing/post-m1-live-test/external-artifacts/m8-pr455-delta/m8-pr455-delta-20260608T012104Z/append_status.txt": "baa7ebe58d73e08bf90110a60df9e53255e2f9729df140bc64cb8f71d56a0800",
+    "record-chain/testing/post-m1-live-test/external-artifacts/m8-pr455-delta/m8-pr455-delta-20260608T012104Z/finalization.grep.txt": "9c3b41b15463816c785a3239f1c9cb989c95f8c2145e639e63fe60563a7dd448",
+    "record-chain/testing/post-m1-live-test/external-artifacts/m8-pr455-delta/m8-pr455-delta-20260608T012104Z/finalization.status.txt": "b06ba9e4db884b72e9bcde2679bfd52e92532244d0a20a9e2502a6c35be380a1",
+    "record-chain/testing/post-m1-live-test/external-artifacts/m8-pr455-delta/m8-pr455-delta-20260608T012104Z/healthz.json": "7f317aa55af679100866f534b0c1f6d32d13200398e8d8f0a16b2048eb1037ef",
+    "record-chain/testing/post-m1-live-test/external-artifacts/m8-pr455-delta/m8-pr455-delta-20260608T012104Z/local-submission-digests.json": "b474b146592faa8485ffdacd8cc94f6c62c177bcc6d6a7c0f6ae76598c201868",
+    "record-chain/testing/post-m1-live-test/external-artifacts/m8-pr455-delta/m8-pr455-delta-20260608T012104Z/preflight.tampered.http_code.txt": "c11e3f4837efde2441e23a7b9da02131f53bf59fddeb7147c4ab81afe400460f",
+    "record-chain/testing/post-m1-live-test/external-artifacts/m8-pr455-delta/m8-pr455-delta-20260608T012104Z/preflight.tampered.json": "6dd3f75e5526b57c74599dcf787f297e008e4325224f3e25602283c8086c20eb",
+    "record-chain/testing/post-m1-live-test/external-artifacts/m8-pr455-delta/m8-pr455-delta-20260608T012104Z/preflight.valid.json": "fb0660d13b60025b28c52cf5da46d6876801efb8b92d75b6b74a83a16336835f",
+    "record-chain/testing/post-m1-live-test/external-artifacts/m8-pr455-delta/m8-pr455-delta-20260608T012104Z/readiness.json": "e4920c3ac8a168f976ebd7de335b0aba5bc367e316d06658920ddc5dbe652211",
+    "record-chain/testing/post-m1-live-test/external-artifacts/m8-pr455-delta/m8-pr455-delta-20260608T012104Z/receipt.lookup.24hex.json": "9249bf45ccd52aaec03c43b89f27ac571a3b91dc13152c4acc5d8b9cd5a59399",
+    "record-chain/testing/post-m1-live-test/external-artifacts/m8-pr455-delta/m8-pr455-delta-20260608T012104Z/receipt_id.txt": "cfc9068dd2a72a6d9179fd67cffc16f7636373cfcb733efcac22c4d549238c45",
+    "record-chain/testing/post-m1-live-test/external-artifacts/m8-pr455-delta/m8-pr455-delta-20260608T012104Z/submit.valid.duplicate.json": "d35d11674c12f8001cf040ad41bef55e17b34a4995454adb19e1d2f5aeee70ae",
+    "record-chain/testing/post-m1-live-test/external-artifacts/m8-pr455-delta/m8-pr455-delta-20260608T012104Z/submit.valid.first.json": "924ca8ca4dc9123f92007c78e699a3557cebf1ff2799960be966e888cbf2a70c"
+  },
+  "builder_incompatibility": "official builder emits legacy oath hash (7ecc6908...) and disallowed optional_linked_guardian_application_request for echo records after PR#455",
+  "created_at": "2026-06-08T01:24:42Z",
+  "gateway_base_url_redacted": true,
+  "main_head": "4017d1e7c1f7a27114b065f9ddd7f47ded86bebd",
+  "private_key_material_persisted": false,
+  "progress_branch": "post-m1-test-progress",
+  "purpose": "M8.1 pre-entry delta smoke for PR #455 Record-Chain Intake integrity changes",
+  "raw_submission_persisted": false,
+  "ready_for_m8_1": false,
+  "receipt_ids": [
+    "rcg-20260608-e85ae6f77cf77347a732f121"
+  ],
+  "run_id": "m8-pr455-delta-20260608T012104Z",
+  "schema": "trinityaccord.m8-pr455-delta-smoke-artifact-manifest.v1",
+  "tests": {
+    "append_finalization_observation": "finalization_evidence_found",
+    "duplicate_submit_immutable": "pass",
+    "linked_guardian_source_disabled": "pass",
+    "official_builder_compatibility": "fail",
+    "receipt_lookup_24hex": "pass",
+    "static_current_tests": "pass",
+    "tampered_preflight_rejected": "pass",
+    "valid_echo_preflight": "pass",
+    "valid_echo_submit_24hex_receipt": "pass"
+  }
+}
