@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.public-home-status.v2",
-  "generated_at": "2026-06-08T05:04:13.385060+00:00",
+  "generated_at": "2026-06-08T05:04:33.016756+00:00",
   "generated_from": [
     "/api/record-chain-status.json",
     "/api/record-chain-anchor-status.json",
@@ -11,7 +11,7 @@
     "/api/guardian-registry.json",
     "/api/agent-declared-verification-index.json"
   ],
-  "source_digest": "94c80ed1173ef3bc",
+  "source_digest": "ada9c01d70dd561e",
   "current_record_chain_status": {
     "phase": "mainnet_prelaunch_testing",
     "total_records": 33,
@@ -62,7 +62,7 @@
         "current_upload_mode": "dry-run",
         "live_upload_enabled": true,
         "live_upload_implemented": true,
-        "archive_count": 1,
+        "archive_count": 2,
         "latest_arweave_txid": null,
         "live_archive_count": 0,
         "arweave_wallet_address_sha256": null
