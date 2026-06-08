@@ -66,6 +66,21 @@ def _attach_valid_authorship_proof(draft: dict) -> dict:
     draft = dict(draft)
     draft.pop("authorship_proof", None)
 
+    # Pre-add ALL fields that normalize_record_draft sets via setdefault.
+    # This ensures the signed payload matches the post-normalization canonical form.
+    draft.setdefault("schema", "trinityaccord.record-chain-entry.v1")
+    draft.setdefault("chain_id", CHAIN_ID)
+    draft.setdefault("created_at", utc_now())
+    draft.setdefault("what_i_checked", [])
+    draft.setdefault("limitations", [])
+    draft.setdefault("related_records", [])
+    draft.setdefault("immutability_policy", {
+        "append_only": True,
+        "record_may_be_corrected_by_later_record": True,
+        "record_may_not_be_deleted_or_mutated": True,
+    })
+    draft.setdefault("boundary_acknowledgement", dict(BOUNDARY))
+
     private_key = Ed25519PrivateKey.generate()
     public_key = private_key.public_key()
     public_key_pem = public_key.public_bytes(
