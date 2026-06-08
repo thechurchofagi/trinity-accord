@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.public-home-status.v2",
-  "generated_at": "2026-06-08T07:16:16.643739+00:00",
+  "generated_at": "2026-06-08T07:43:06.446619+00:00",
   "generated_from": [
     "/api/record-chain-status.json",
     "/api/record-chain-anchor-status.json",
@@ -11,9 +11,9 @@
     "/api/guardian-registry.json",
     "/api/agent-declared-verification-index.json"
   ],
-  "source_digest": "9a000b41c15d0ce6",
+  "source_digest": "a05f4c5ad7319ec7",
   "current_record_chain_status": {
-    "phase": "mainnet_prelaunch_testing",
+    "phase": "production_live",
     "total_records": 33,
     "current_chain_length": 33,
     "pending_records": 0,
@@ -33,24 +33,45 @@
     "receipt_boundary": {
       "receipt_is_intake_only": true,
       "receipt_is_not_final_inclusion": true,
-      "test_phase_records_may_be_reclassified": true
+      "test_phase_records_may_be_reclassified": false
     },
     "anchoring": {
       "batch_manifests": {
         "automated_workflow": "/.github/workflows/record-chain-anchor.yml",
-        "implemented": true
+        "implemented": true,
+        "note": "Batch manifests remain available, but current head OTS and Arweave archive use native chain-tip/record-index."
       },
       "open_timestamps": {
         "automated_workflow": "/.github/workflows/record-chain-anchor.yml",
+        "bitcoin_pending": true,
+        "bitcoin_verified": false,
         "implemented": true,
-        "status_api": "/api/record-chain-anchor-status.json"
+        "latest_record_id": "R-000000033",
+        "latest_record_sha256": "60f1589ad2330576134e3b89ef9465b8c515343f0b9af3c611c6ff4f8568c75d",
+        "legacy_batch_status_api": "/api/record-chain-anchor-status.json",
+        "legacy_main_chain_jsonl_is_not_source": true,
+        "native_head_workflow": "/.github/workflows/record-chain-head-ots-anchor.yml",
+        "native_latest_api": "/api/record-chain-native-ots-latest.json",
+        "native_record_count": 33,
+        "status": "pending-bitcoin",
+        "status_api": "/api/record-chain-native-ots-latest.json"
       },
       "arweave_archive": {
+        "arweave_archive_is_mirror_only": true,
+        "arweave_archive_is_not_amendment": true,
+        "arweave_archive_is_not_attestation": true,
+        "arweave_archive_is_not_authority": true,
+        "current_upload_mode": "live",
         "default_mode": "dry-run",
         "implemented": true,
         "index_api": "/api/record-chain-arweave-index.json",
-        "live_upload_enabled": false,
-        "live_upload_implemented": false,
+        "latest_arweave_txid": "hSyp93ZW2cQQcK7lPdqyREr-jCs4Kj5m4vbjlYGBEZ8",
+        "latest_native_record_id": "R-000000033",
+        "live_archive_count": 1,
+        "live_upload_enabled": true,
+        "live_upload_implemented": true,
+        "native_record_count": 33,
+        "source_type": "native-record-chain",
         "workflow": "/.github/workflows/record-chain-arweave-archive.yml"
       },
       "anchor_status": {
