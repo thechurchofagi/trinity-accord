@@ -26,11 +26,11 @@
     "PRODUCTION_ENABLEMENT_OK"
   ],
   "current_mode": "INT-CHECKPOINT",
-  "current_phase": "M8",
-  "current_step": "M8-production-enablement-pass",
+  "current_phase": "M9",
+  "current_step": "M9.1-entry",
   "known_anomalies": [],
-  "last_checkpoint_at": "2026-06-08T02:13:00Z",
-  "last_checkpoint_id": "m8-production-enablement-20260608T021300Z",
+  "last_checkpoint_at": "2026-06-08T02:16:00Z",
+  "last_checkpoint_id": "m9-metadata-cleanup-20260608T021600Z",
   "last_safe_resume_step": "M9.1",
   "latest_artifact_manifest_sha256": "2d61e45dd7215ea6f03611e586ee938ae8f47ad541e35fe431b6f85de49e34d1",
   "latest_external_public_key_sha256": "51457d267a2a606ddbfaf574f8aeca7fd44f27c666db53729b1f76905de097cc",
@@ -50,16 +50,17 @@
       "blocking_issue": null,
       "name": "External No-Token Mandatory-Key Submission Rehearsal",
       "resume_step": "M2.1",
-      "status": "not_started"
+      "status": "skipped",
+      "note": "M2 external rehearsal skipped; M3-M7 completed via internal+EXT hybrid flow"
     },
     "M3": {
-      "blocking_issue": "M2 not complete",
+      "blocking_issue": null,
       "name": "Internal Hash-Chain Finalization Rehearsal",
       "resume_step": "M4.1",
       "status": "pass"
     },
     "M4": {
-      "blocking_issue": "M3 not complete",
+      "blocking_issue": null,
       "name": "Current Head OTS + Arweave Archive",
       "resume_step": "M5.1",
       "status": "pass"
@@ -103,7 +104,7 @@
         "schema": "trinityaccord.m8-pr455-delta-smoke.v1",
         "status": "pass"
       },
-      "resume_step": "M8.1",
+      "resume_step": "M9.1",
       "status": "pass",
       "evidence": {
         "marker_type": "production_enablement_marker",
@@ -122,12 +123,12 @@
     "M9": {
       "blocking_issue": null,
       "name": "Liu Hongju Founding Guardian Application",
-      "resume_step": null,
+      "resume_step": "M9.1",
       "status": "not_started"
     }
   },
   "schema": "trinityaccord.post-m1-live-test-progress.v1",
   "status": "active",
   "stop_rules_triggered": [],
-  "updated_at": "2026-06-08T02:13:00Z"
+  "updated_at": "2026-06-08T02:16:00Z"
 }
