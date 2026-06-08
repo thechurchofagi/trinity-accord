@@ -913,6 +913,8 @@ def verify_chain() -> None:
         for e in errors:
             print(f"- {e}", file=sys.stderr)
         raise SystemExit(1)
+    # Rebuild derived indexes so they stay current even when no new records are appended.
+    build_indexes()
     print("Record chain verification passed.")
 
 
