@@ -48,11 +48,11 @@ def test_native_commitment_binds_current_head() -> None:
     if coverage.get("source") != "record-chain/indexes/record-index.json":
         fail("native commitment record_coverage must use record-index")
     if coverage.get("record_count") != 34:
-        fail("native commitment record_coverage must include 33 records")
+        fail("native commitment record_coverage must include 34 records")
     if coverage.get("last_record_id") != "R-000000034":
         fail("native commitment record_coverage must end at R-000000034")
-    if len(coverage.get("records", [])) != 33:
-        fail("native commitment records list must include 33 records")
+    if len(coverage.get("records", [])) != 34:
+        fail("native commitment records list must include 34 records")
 
     source_files = commitment.get("source_files", {})
     for key in ["chain_tip", "record_index", "latest_record", "guardian_state", "statistics", "batch_index"]:
