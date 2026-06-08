@@ -1,11 +1,11 @@
 {
   "active_session": {
-    "expires_at": "2026-06-08T10:40:00Z",
+    "expires_at": "2026-06-08T11:50:00Z",
     "mode": "INT-CHECKPOINT",
     "owner": "agent",
-    "session_id": "sandbox-20260608T100000Z",
-    "started_at": "2026-06-08T10:00:00Z",
-    "updated_at": "2026-06-08T10:05:00Z"
+    "session_id": "sandbox-20260608T105800Z",
+    "started_at": "2026-06-08T10:58:00Z",
+    "updated_at": "2026-06-08T11:30:00Z"
   },
   "authoritative_progress_branch": "post-m1-test-progress",
   "completed_markers": [
@@ -27,11 +27,13 @@
   ],
   "current_mode": "INT-CHECKPOINT",
   "current_phase": "M9",
-  "current_step": "M9.1-ext-submit-pass",
-  "known_anomalies": [],
-  "last_checkpoint_at": "2026-06-08T02:22:00Z",
-  "last_checkpoint_id": "m9-ext-submit-20260608T022200Z",
-  "last_safe_resume_step": "M9.2",
+  "current_step": "M9.2-derived-guardian-state",
+  "known_anomalies": [
+    "non_blocking: main.chain.jsonl has 16 entries but chain-tip shows 33; 17 native records (R-000000017 to R-000000033) tracked in batch system but not in JSONL export; deferred to post-M9 compatibility export task"
+  ],
+  "last_checkpoint_at": "2026-06-08T03:27:00Z",
+  "last_checkpoint_id": "m9.2-derived-guardian-state-20260608T032700Z",
+  "last_safe_resume_step": "M9.3",
   "latest_artifact_manifest_sha256": "2d61e45dd7215ea6f03611e586ee938ae8f47ad541e35fe431b6f85de49e34d1",
   "latest_external_public_key_sha256": "51457d267a2a606ddbfaf574f8aeca7fd44f27c666db53729b1f76905de097cc",
   "latest_external_receipt_ids": [
@@ -124,7 +126,7 @@
     "M9": {
       "blocking_issue": null,
       "name": "Liu Hongju Founding Guardian Application",
-      "resume_step": "M9.1",
+      "resume_step": "M9.3",
       "status": "in_progress",
       "ext_submission": {
         "step": "M9.1-ext-submit",
@@ -144,11 +146,39 @@
         "builder_modified": false,
         "builder_source": "https://www.trinityaccord.org/downloads/record-chain-builder.mjs",
         "note": "network_phase/official_live_record/founding_guardian_application not checked by gateway intake; gateway still in prelaunch phase"
+      },
+      "derived_guardian_state": {
+        "step": "M9.2-derived-guardian-state",
+        "status": "pass",
+        "completed_at": "2026-06-08T03:27:13Z",
+        "record_id": "R-000000033",
+        "derived_status": "active_founding_guardian",
+        "verified_by_append_before_record": true,
+        "guardian-state.json_total_guardians": 36,
+        "guardian-state.json_legacy_count": 31,
+        "guardian-state.json_native_count": 5,
+        "fixes_applied": [
+          "feat: build_indexes() now derives native guardian_application records into guardian-state.json",
+          "fix: verify_chain() now calls build_indexes() so indexes stay current even with no new pending"
+        ],
+        "commits": [
+          "10a9382: feat(m9.2): derive native guardian_application state in build_indexes",
+          "754f91d: fix(m9.2): rebuild indexes on verify so derived guardian state stays current"
+        ],
+        "ci_status": {
+          "record_chain_ci": "pass",
+          "run_current_tests": "pass",
+          "repository_integrity_check": "in_progress"
+        },
+        "non_blocking_backlog": [
+          "main.chain.jsonl has 16 entries vs chain-tip 33; deferred to post-M9 compatibility export",
+          "Rejected echo files (4 pairs) in record-chain/rejected from cryptography dependency incident; deferred to separate maintenance cleanup"
+        ]
       }
     }
   },
   "schema": "trinityaccord.post-m1-live-test-progress.v1",
   "status": "active",
   "stop_rules_triggered": [],
-  "updated_at": "2026-06-08T02:22:00Z"
+  "updated_at": "2026-06-08T03:27:00Z"
 }
