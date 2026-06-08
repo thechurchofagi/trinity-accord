@@ -138,6 +138,9 @@ GROUPS = {
         ["python3", "scripts/test_deep_integrity_includes_pages_build.py"],
         ["python3", "scripts/test_record_chain_write_path_guard_contract.py"],
 
+        # External-agent full-auto pipeline contract
+        ["python3", "scripts/test_external_agent_full_auto_pipeline_contract.py"],
+
         # Generated drift
         ["python3", "scripts/generate_public_home_status.py", "--check"],
         ["python3", "scripts/test_home_public_status_sync.py"],
