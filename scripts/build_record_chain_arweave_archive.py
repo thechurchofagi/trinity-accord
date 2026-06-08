@@ -310,6 +310,7 @@ def build_archive_manifest(mode: str) -> None:
                 "latest_record_id": latest_record_id,
                 "latest_record_sha256": latest_record_sha256,
                 "native_record_count": native_record_count,
+                "legacy_main_chain_jsonl_is_not_source": True,
                 "latest_batch_id": chain_tip.get("latest_batch_id"),
                 "latest_batch_manifest_sha256": chain_tip.get("latest_batch_manifest_sha256"),
             },
