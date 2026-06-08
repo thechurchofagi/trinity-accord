@@ -159,7 +159,7 @@ def verify_native_archive_self_consistency(
     if isinstance(archive_native_count, int) and len(included_records) != archive_native_count:
         errors.append(
             f"{archive_id}: included_records count ({len(included_records)}) "
-            f"does not match archive native_record_count ({archive_native_count})"
+            f"does not cover native_record_count ({archive_native_count})"
         )
 
     # Check archive's own latest record is in included_records
