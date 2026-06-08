@@ -488,7 +488,8 @@ def normalize_record_draft(draft: dict[str, Any]) -> dict[str, Any]:
         raise ValueError("context_readiness is required")
     require_boundary(draft)
     require_authorship(draft)
-    verify_pending_record_authorship(draft)
+    # verify_pending_record_authorship is called by append_records on the
+    # raw draft before normalization, so we don't re-verify here.
     return draft
 
 
@@ -515,7 +516,11 @@ def append_records(all_records: bool = False) -> None:
     appended_count = 0
     for path in selected:
         try:
-            draft = normalize_record_draft(read_json(path))
+            raw_draft = read_json(path)
+            # Verify authorship proof on the raw draft before normalization
+            # modifies it, so the signed payload hash matches exactly.
+            verify_pending_record_authorship(raw_draft)
+            draft = normalize_record_draft(raw_draft)
 
             # --- Phase 6B: authorship_verification_status ---
             # Record the scope of the authorship proof relative to the final
