@@ -1,0 +1,71 @@
+{
+  "schema": "trinityaccord.record-chain-production-enablement-policy.v1",
+  "status": "active",
+  "chain_id": "trinity-record-chain-main",
+  "network_phase": "production",
+  "enabled_at": "2026-06-08T02:13:00Z",
+  "enabled_by_marker": "PRODUCTION_ENABLEMENT_OK",
+  "production_enablement_semantics": {
+    "production_enabled_means_official_live_records_allowed": true,
+    "official_live_record_true_now_permitted": true,
+    "test_records_from_M5_M7_remain_in_chain_as_historical": true,
+    "new_submissions_may_set_official_live_record_true": true
+  },
+  "prerequisites_satisfied": {
+    "M2_external_submission_rehearsal": "not_started",
+    "M3_hash_chain_finalization": "pass",
+    "M4_head_ots_arweave": "pass",
+    "M5_pre_live_test_stability": "pass",
+    "M6_live_test_activation": "pass",
+    "M7_large_live_operational_campaigns": "pass",
+    "M8_pre_entry_delta_smoke": "pass",
+    "blocking_anomalies": [],
+    "stop_rules_triggered": []
+  },
+  "official_live_record_policy": {
+    "official_live_record_field_now_allowed": true,
+    "applies_to_new_submissions_only": true,
+    "existing_test_records_not_retroactively_changed": true,
+    "guardian_application_must_still_use_M9_flow": true
+  },
+  "record_type_policy": {
+    "echo": {
+      "official_live_record_allowed": true
+    },
+    "verification": {
+      "official_live_record_allowed": true
+    },
+    "propagation": {
+      "official_live_record_allowed": true
+    },
+    "correction": {
+      "official_live_record_allowed": true
+    },
+    "guardian_application": {
+      "official_live_record_allowed": true,
+      "must_follow_M9_flow": true
+    },
+    "guardian_retirement": {
+      "official_live_record_allowed": true
+    },
+    "context_insufficient_notice": {
+      "official_live_record_allowed": false
+    }
+  },
+  "external_agent_boundary": {
+    "external_agents_must_not_clone_repository": true,
+    "external_agents_must_not_directly_append_record_chain": true,
+    "external_agents_must_not_request_github_pat": true,
+    "external_agents_must_not_use_arweave_key": true,
+    "external_agents_must_use_public_gateway_for_submissions": true,
+    "receipt_is_intake_only": true,
+    "receipt_is_not_active_guardian_status": true,
+    "receipt_is_not_final_inclusion": true
+  },
+  "transition_from_live_test": {
+    "live_test_policy_remains_valid": true,
+    "live_test_records_are_historical": true,
+    "production_policy_adds_official_live_record_permission": true,
+    "no_chain_rewrite": true
+  }
+}
