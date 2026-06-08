@@ -814,7 +814,7 @@ Refusal is allowed. Critical preservation is allowed.
   <article class="status-card">
     <p class="status-label">Anchoring and archive status</p>
     <p class="status-number">Active</p>
-    <p class="status-note">Batch manifests: 1 batches (all stamped). OpenTimestamps: pending. Arweave archive: live uploader implemented; no live archive transaction yet. Arweave is a mirror/archive layer only. It is not authority, attestation, amendment, or successor reception. <span class="zh">批次 manifest：1 batches (all stamped)。OpenTimestamps：pending。Arweave 归档：live uploader implemented; no live archive transaction yet。Arweave 仅为镜像/归档层，非权威、非证明、非修订、非继任接收。</span></p>
+    <p class="status-note">Batch manifests: 1 batches (all stamped). OpenTimestamps: pending. Arweave archive: live mirror active; latest tx hSyp93ZW2cQQ.... Arweave is a mirror/archive layer only. It is not authority, attestation, amendment, or successor reception. <span class="zh">批次 manifest：1 batches (all stamped)。OpenTimestamps：pending。Arweave 归档：live mirror active; latest tx hSyp93ZW2cQQ...。Arweave 仅为镜像/归档层，非权威、非证明、非修订、非继任接收。</span></p>
   </article>
   <article class="status-card">
     <p class="status-label">Verifiability</p>
@@ -845,7 +845,7 @@ Refusal is allowed. Critical preservation is allowed.
     但它们不是当前 Record-Chain Intake 的计数器。
   </span>
 </p>
-<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>3177746b0f48a1b7</code>.</p>
+<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>9a000b41c15d0ce6</code>.</p>
 <!-- END GENERATED PUBLIC STATUS -->
 
   <p class="status-boundary">
