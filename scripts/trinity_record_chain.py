@@ -913,13 +913,21 @@ def verify_chain() -> None:
         for e in errors:
             print(f"- {e}", file=sys.stderr)
         raise SystemExit(1)
-    # Rebuild derived indexes so they stay current even when no new records are appended.
-    build_indexes()
+    # Rebuild derived indexes deterministically during verify to avoid CI/public-status drift.
+    existing_stats = INDEXES / "statistics.json"
+    existing_derived_at = None
+    if existing_stats.exists():
+        try:
+            existing_derived_at = read_json(existing_stats).get("derived_at")
+        except Exception:
+            existing_derived_at = None
+    build_indexes(derived_at=existing_derived_at or utc_now())
     print("Record chain verification passed.")
 
 
-def build_indexes() -> None:
+def build_indexes(derived_at: str | None = None) -> None:
     ensure_dirs()
+    derived_at = derived_at or utc_now()
     legacy_records = sorted(LEGACY_RECORDS.glob("legacy-guardian-*.json"))
     native_records = sorted(RECORDS.glob("R-*.json"))
     batches = existing_batch_manifests()
@@ -928,7 +936,7 @@ def build_indexes() -> None:
     active_legacy = retired_legacy = 0
     guardian_state: dict[str, Any] = {
         "schema": "trinityaccord.derived-guardian-state.v1",
-        "derived_at": utc_now(),
+        "derived_at": derived_at,
         "source": "record-chain derived view; non-authoritative",
         "guardians": [],
         "boundary": BOUNDARY,
@@ -982,7 +990,7 @@ def build_indexes() -> None:
 
     record_index = {
         "schema": "trinityaccord.record-index.v1",
-        "derived_at": utc_now(),
+        "derived_at": derived_at,
         "records": [
             {
                 "record_id": read_json(p).get("record_id"),
@@ -995,7 +1003,7 @@ def build_indexes() -> None:
     }
     batch_index = {
         "schema": "trinityaccord.batch-index.v1",
-        "derived_at": utc_now(),
+        "derived_at": derived_at,
         "batches": [
             {
                 "batch_id": read_json(p).get("batch_id"),
@@ -1008,7 +1016,7 @@ def build_indexes() -> None:
     }
     stats = {
         "schema": "trinityaccord.record-chain-statistics.v1",
-        "derived_at": utc_now(),
+        "derived_at": derived_at,
         "historical_legacy_records_imported": len(legacy_records),
         "legacy_active_at_import": active_legacy,
         "legacy_retired_at_import": retired_legacy,
@@ -1026,7 +1034,7 @@ def build_indexes() -> None:
     write_json(INDEXES / "record-index.json", record_index)
     write_json(INDEXES / "batch-index.json", batch_index)
     write_json(INDEXES / "statistics.json", stats)
-    write_json(INDEXES / "propagation-index.json", {"schema": "trinityaccord.propagation-index.v1", "derived_at": utc_now(), "records": []})
+    write_json(INDEXES / "propagation-index.json", {"schema": "trinityaccord.propagation-index.v1", "derived_at": derived_at, "records": []})
 
 
 def run_ots(args: list[str]) -> bool:
