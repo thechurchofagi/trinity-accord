@@ -1,7 +1,8 @@
 name: Record Chain Arweave Archive
 # Native record-chain archive workflow.
 # Live upload requires ARKEY secret.
-# Dry-run remains the default for manual, scheduled, and workflow_run executions.
+# Dry-run remains the default for manual and scheduled executions.
+# Successful workflow_run from native OTS resolves to live upload.
 
 on:
   workflow_run:
@@ -32,24 +33,86 @@ jobs:
     if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-24.04
     env:
-      ARWEAVE_UPLOAD_MODE: ${{ github.event.inputs.upload_mode || 'dry-run' }}
+      ARWEAVE_UPLOAD_MODE: "dry-run"
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Check if latest live Arweave archive already matches native head
+        id: archive_check
+        run: |
+          python3 - <<'PY' > /tmp/arweave-latest-check.env
+          import json
+          from pathlib import Path
+
+          tip = json.loads(Path("record-chain/chain-tip.json").read_text())
+          index_path = Path("api/record-chain-arweave-index.json")
+
+          matched = False
+          matched_archive_id = ""
+          matched_txid = ""
+
+          if index_path.exists():
+              index = json.loads(index_path.read_text())
+              for archive in index.get("archives", []):
+                  if (
+                      archive.get("source_type") == "native-record-chain"
+                      and archive.get("mode") == "live"
+                      and archive.get("arweave_txid")
+                      and archive.get("native_latest_record_id") == tip.get("latest_record_id")
+                      and archive.get("native_latest_record_sha256") == tip.get("latest_record_sha256")
+                      and archive.get("native_record_count") == tip.get("native_record_count")
+                  ):
+                      matched = True
+                      matched_archive_id = archive.get("archive_id") or ""
+                      matched_txid = archive.get("arweave_txid") or ""
+                      break
+
+          print(f"matched={'true' if matched else 'false'}")
+          print(f"matched_archive_id={matched_archive_id}")
+          print(f"matched_txid={matched_txid}")
+          print(f"latest_record_id={tip.get('latest_record_id')}")
+          print(f"native_record_count={tip.get('native_record_count')}")
+          PY
+          cat /tmp/arweave-latest-check.env >> "$GITHUB_OUTPUT"
+          cat /tmp/arweave-latest-check.env
+
+      - name: No new Arweave archive needed
+        if: steps.archive_check.outputs.matched == 'true'
+        run: |
+          echo "Latest live native Arweave archive already matches current chain-tip."
+          echo "archive_id=${{ steps.archive_check.outputs.matched_archive_id }}"
+          echo "txid=${{ steps.archive_check.outputs.matched_txid }}"
+
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        if: steps.archive_check.outputs.matched != 'true'
         with:
           python-version: "3.12"
 
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        if: steps.archive_check.outputs.matched != 'true'
         with:
           node-version-file: ".node-version"
 
+      - name: Resolve Arweave upload mode
+        if: steps.archive_check.outputs.matched != 'true'
+        run: |
+          set -euo pipefail
+          if [ "${{ github.event_name }}" = "workflow_run" ]; then
+            echo "ARWEAVE_UPLOAD_MODE=live" >> "$GITHUB_ENV"
+            echo "Resolved Arweave upload mode: live (workflow_run from OTS)"
+          else
+            echo "ARWEAVE_UPLOAD_MODE=${{ github.event.inputs.upload_mode || 'dry-run' }}" >> "$GITHUB_ENV"
+            echo "Resolved Arweave upload mode: ${{ github.event.inputs.upload_mode || 'dry-run' }}"
+          fi
+
       - name: Install Node dependencies
+        if: steps.archive_check.outputs.matched != 'true'
         run: npm ci
 
       - name: Verify native OTS latest before archive
+        if: steps.archive_check.outputs.matched != 'true'
         run: |
           python3 - <<'PY'
           import json
@@ -85,23 +148,28 @@ jobs:
           PY
 
       - name: Build Arweave archive manifest
+        if: steps.archive_check.outputs.matched != 'true'
         env:
           ARKEY: ${{ secrets.ARKEY }}
           ARWEAVE_UPLOAD_TIMEOUT_SECONDS: "600"
         run: python scripts/build_record_chain_arweave_archive.py --mode "${ARWEAVE_UPLOAD_MODE}"
 
       - name: Verify Arweave archive metadata
+        if: steps.archive_check.outputs.matched != 'true'
         run: python scripts/verify_record_chain_arweave_archive.py
 
       - name: Verify record chain
+        if: steps.archive_check.outputs.matched != 'true'
         run: python scripts/trinity_record_chain.py verify
 
       - name: Regenerate public homepage counters
+        if: steps.archive_check.outputs.matched != 'true'
         run: |
           python scripts/generate_public_home_status.py
           python scripts/generate_sitemap.py
 
       - name: Commit Arweave archive metadata
+        if: steps.archive_check.outputs.matched != 'true'
         run: |
           if ! git diff --quiet; then
             git config user.name "trinity-record-chain-bot"
