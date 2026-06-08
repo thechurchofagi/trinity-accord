@@ -12,10 +12,14 @@ Tests:
 """
 from __future__ import annotations
 
+import base64
 import json
 import shutil
 import sys
 import tempfile
+
+from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
+from cryptography.hazmat.primitives.serialization import Encoding, PublicFormat
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
