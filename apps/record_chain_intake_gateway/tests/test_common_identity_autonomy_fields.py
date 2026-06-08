@@ -54,7 +54,7 @@ def _echo_draft(**overrides) -> dict:
             "not_amendment": True,
             "bitcoin_originals_prevail": True,
             "receipt_is_not_final_inclusion": True,
-            "test_phase_submission_may_be_reclassified": True,
+            "receipt_is_intake_only": True, "later_records_may_reclassify_or_correct_this_record": True,
         },
         "optional_linked_guardian_application_request": None,
         "payload": {"title": "Test", "body": "echo body"},
@@ -75,7 +75,7 @@ def _wrap_submission(draft: dict) -> dict:
             "not_amendment": True,
             "bitcoin_originals_prevail": True,
             "receipt_is_not_final_inclusion": True,
-            "test_phase_submission_may_be_reclassified": True,
+            "receipt_is_intake_only": True, "later_records_may_reclassify_or_correct_this_record": True,
         },
     })
 

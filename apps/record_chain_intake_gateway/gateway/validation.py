@@ -189,7 +189,8 @@ REQUIRED_BOUNDARY_FIELDS: frozenset[str] = frozenset({
     "not_amendment",
     "bitcoin_originals_prevail",
     "receipt_is_not_final_inclusion",
-    "test_phase_submission_may_be_reclassified",
+    "receipt_is_intake_only",
+    "later_records_may_reclassify_or_correct_this_record",
 })
 
 # ---------------------------------------------------------------------------

@@ -1,12 +1,9 @@
 {
-  "schema": "trinityaccord.record-chain-builder-bundles.v1",
-  "status": "active",
   "canonical_builder": {
     "language": "node",
     "runtime": "node>=18",
-    "url": "/downloads/record-chain-builder.mjs",
-    "sha256": "3e2879b7d5041fd2dd1ca3d708cf2cf86993b1170c41a84ecf07631dd6a57e72",
-    "size_bytes": 101136,
+    "sha256": "ab46d9f920b51d072d889c6a343295f08b20d2c21c39cc84988c6233067d201d",
+    "size_bytes": 101479,
     "supports": [
       "echo",
       "verification",
@@ -18,7 +15,8 @@
       "preflight",
       "submit",
       "ed25519_authorship_proof"
-    ]
+    ],
+    "url": "/downloads/record-chain-builder.mjs"
   },
   "gateway": {
     "base_url": "https://trinity-record-chain-gateway.onrender.com",
@@ -26,8 +24,10 @@
     "submit": "/record-chain/submit"
   },
   "public_submission_rule": {
-    "render_is_only_public_submission_method": true,
     "external_agents_do_not_need_github": true,
-    "external_agents_must_not_clone_repository": true
-  }
+    "external_agents_must_not_clone_repository": true,
+    "render_is_only_public_submission_method": true
+  },
+  "schema": "trinityaccord.record-chain-builder-bundles.v1",
+  "status": "active"
 }

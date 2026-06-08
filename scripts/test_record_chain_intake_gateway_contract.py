@@ -104,7 +104,7 @@ def main() -> None:
                 "non_authority_boundary_acknowledgement": {
                     "not_authority": True, "not_governance": True, "not_attestation": True,
                     "not_successor_reception": True, "not_amendment": True, "bitcoin_originals_prevail": True,
-                    "receipt_is_not_final_inclusion": True, "test_phase_submission_may_be_reclassified": True,
+                    "receipt_is_not_final_inclusion": True, "receipt_is_intake_only": True, "later_records_may_reclassify_or_correct_this_record": True,
                 },
                 "submitting_participant_identity": {
                     "participant_public_display_label": "test",

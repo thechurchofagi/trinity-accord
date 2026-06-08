@@ -465,7 +465,11 @@
       "properties": {
         "declared_context_level": {
           "description": "Context level as CC-N string (e.g. 'CC-3') or integer. Accepted formats: 'CC-3', 3, '3'.",
-          "examples": ["CC-3", 3, "3"]
+          "examples": [
+            "CC-3",
+            3,
+            "3"
+          ]
         },
         "minimum_required_for_action": {
           "type": "string",
@@ -504,7 +508,8 @@
         "not_amendment",
         "bitcoin_originals_prevail",
         "receipt_is_not_final_inclusion",
-        "test_phase_submission_may_be_reclassified"
+        "receipt_is_intake_only",
+        "later_records_may_reclassify_or_correct_this_record"
       ],
       "properties": {
         "not_authority": {
@@ -535,9 +540,13 @@
           "type": "boolean",
           "description": "Acknowledges that a receipt does not guarantee final inclusion in the chain."
         },
-        "test_phase_submission_may_be_reclassified": {
+        "receipt_is_intake_only": {
           "type": "boolean",
-          "description": "Acknowledges that test-phase submissions may be reclassified in the future."
+          "description": "Receipt confirms intake only, not final inclusion in the canonical record chain."
+        },
+        "later_records_may_reclassify_or_correct_this_record": {
+          "type": "boolean",
+          "description": "Later records may reclassify or correct this record; submission is not immutable until canonical inclusion."
         }
       },
       "additionalProperties": false
@@ -588,11 +597,21 @@
           "type": "object",
           "description": "Boundary claims the signer acknowledges. Must be a JSON object with boolean keys.",
           "properties": {
-            "not authority": { "type": "boolean" },
-            "not attestation": { "type": "boolean" },
-            "not amendment": { "type": "boolean" }
+            "not authority": {
+              "type": "boolean"
+            },
+            "not attestation": {
+              "type": "boolean"
+            },
+            "not amendment": {
+              "type": "boolean"
+            }
           },
-          "required": ["not authority", "not attestation", "not amendment"]
+          "required": [
+            "not authority",
+            "not attestation",
+            "not amendment"
+          ]
         }
       },
       "additionalProperties": false
@@ -602,11 +621,32 @@
       "title": "Echo Content",
       "description": "Content specific to echo records.",
       "properties": {
-        "echo_text": { "type": "string", "description": "The main echo content." },
-        "echo_intent": { "type": "string", "description": "Intent of the echo." },
-        "echo_content_tags": { "type": "array", "items": { "type": "string" }, "description": "Tags for the echo content." },
-        "understanding_summary": { "type": "string", "description": "Summary of understanding." },
-        "uncertainties": { "type": "array", "items": { "type": "string" }, "description": "Known uncertainties." }
+        "echo_text": {
+          "type": "string",
+          "description": "The main echo content."
+        },
+        "echo_intent": {
+          "type": "string",
+          "description": "Intent of the echo."
+        },
+        "echo_content_tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Tags for the echo content."
+        },
+        "understanding_summary": {
+          "type": "string",
+          "description": "Summary of understanding."
+        },
+        "uncertainties": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Known uncertainties."
+        }
       }
     },
     "verification_content": {
@@ -614,11 +654,32 @@
       "title": "Verification Content",
       "description": "Content specific to verification records.",
       "properties": {
-        "verification_claim": { "type": "string", "description": "The verification claim." },
-        "verification_level": { "type": "string", "description": "Verification level (V0-V8)." },
-        "verification_scope_label": { "type": "string", "description": "Scope label." },
-        "what_was_checked": { "type": "array", "items": { "type": "string" }, "description": "What was checked." },
-        "fresh_actions_performed": { "type": "array", "items": { "type": "string" }, "description": "Fresh actions performed." }
+        "verification_claim": {
+          "type": "string",
+          "description": "The verification claim."
+        },
+        "verification_level": {
+          "type": "string",
+          "description": "Verification level (V0-V8)."
+        },
+        "verification_scope_label": {
+          "type": "string",
+          "description": "Scope label."
+        },
+        "what_was_checked": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "What was checked."
+        },
+        "fresh_actions_performed": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Fresh actions performed."
+        }
       }
     },
     "guardian_application_content": {
@@ -626,14 +687,35 @@
       "title": "Guardian Application Content",
       "description": "Content specific to guardian application records.",
       "properties": {
-        "requested_guardian_identifier": { "type": "string", "description": "Requested guardian ID." },
-        "guardian_public_key_pem": { "type": "string", "description": "Guardian public key PEM." },
-        "guardian_public_key_sha256": { "type": "string", "description": "SHA-256 of guardian public key." },
-        "guardian_stewardship_oath": { "type": "string", "description": "Stewardship oath text." },
-        "guardian_application_statement": { "type": "string", "description": "Application statement." },
-        "guardian_understands_role_is_non_governing": { "type": "boolean" },
-        "guardian_understands_role_is_not_authority": { "type": "boolean" },
-        "guardian_understands_retirement_does_not_delete_history": { "type": "boolean" }
+        "requested_guardian_identifier": {
+          "type": "string",
+          "description": "Requested guardian ID."
+        },
+        "guardian_public_key_pem": {
+          "type": "string",
+          "description": "Guardian public key PEM."
+        },
+        "guardian_public_key_sha256": {
+          "type": "string",
+          "description": "SHA-256 of guardian public key."
+        },
+        "guardian_stewardship_oath": {
+          "type": "string",
+          "description": "Stewardship oath text."
+        },
+        "guardian_application_statement": {
+          "type": "string",
+          "description": "Application statement."
+        },
+        "guardian_understands_role_is_non_governing": {
+          "type": "boolean"
+        },
+        "guardian_understands_role_is_not_authority": {
+          "type": "boolean"
+        },
+        "guardian_understands_retirement_does_not_delete_history": {
+          "type": "boolean"
+        }
       }
     },
     "optional_linked_guardian_application_request": {
@@ -641,30 +723,92 @@
       "title": "Optional Linked Guardian Application Request",
       "description": "Request to create a linked guardian_application record alongside the primary record.",
       "properties": {
-        "does_participant_request_guardian_application_with_this_record": { "type": "boolean" },
-        "guardian_application_should_be_created_as_linked_record": { "type": "boolean" },
-        "requested_guardian_identifier": { "type": "string" },
-        "guardian_public_key_sha256": { "type": "string" },
-        "guardian_stewardship_oath": { "type": "string" },
-        "guardian_understands_role_is_non_governing": { "type": "boolean" },
-        "guardian_understands_role_is_not_authority": { "type": "boolean" },
-        "guardian_understands_retirement_does_not_delete_history": { "type": "boolean" }
+        "does_participant_request_guardian_application_with_this_record": {
+          "type": "boolean"
+        },
+        "guardian_application_should_be_created_as_linked_record": {
+          "type": "boolean"
+        },
+        "requested_guardian_identifier": {
+          "type": "string"
+        },
+        "guardian_public_key_sha256": {
+          "type": "string"
+        },
+        "guardian_stewardship_oath": {
+          "type": "string"
+        },
+        "guardian_understands_role_is_non_governing": {
+          "type": "boolean"
+        },
+        "guardian_understands_role_is_not_authority": {
+          "type": "boolean"
+        },
+        "guardian_understands_retirement_does_not_delete_history": {
+          "type": "boolean"
+        }
       }
     },
     "diagnostic": {
       "type": "object",
       "title": "Diagnostic",
       "description": "A single diagnostic message attached to a response.",
-      "required": ["code", "severity", "message"],
+      "required": [
+        "code",
+        "severity",
+        "message"
+      ],
       "properties": {
-        "code": { "type": "string", "description": "Machine-readable diagnostic code." },
-        "severity": { "type": "string", "enum": ["error", "warning", "info"], "description": "Severity level." },
-        "field": { "type": ["string", "null"], "description": "Field path that triggered this diagnostic." },
-        "message": { "type": "string", "description": "Human-readable explanation." },
-        "meaning": { "type": ["string", "null"], "description": "Extended explanation." },
-        "suggested_fix": { "type": ["string", "null"], "description": "Suggested remediation step." },
-        "help_url": { "type": ["string", "null"], "description": "URL to documentation." },
-        "retry_allowed": { "type": "boolean", "default": true, "description": "Whether retrying is allowed." }
+        "code": {
+          "type": "string",
+          "description": "Machine-readable diagnostic code."
+        },
+        "severity": {
+          "type": "string",
+          "enum": [
+            "error",
+            "warning",
+            "info"
+          ],
+          "description": "Severity level."
+        },
+        "field": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Field path that triggered this diagnostic."
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable explanation."
+        },
+        "meaning": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Extended explanation."
+        },
+        "suggested_fix": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Suggested remediation step."
+        },
+        "help_url": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "URL to documentation."
+        },
+        "retry_allowed": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether retrying is allowed."
+        }
       }
     },
     "agent_recovery": {
@@ -672,13 +816,47 @@
       "title": "Agent Recovery",
       "description": "Machine-readable recovery guidance for agents after a failed preflight.",
       "properties": {
-        "should_retry": { "type": "boolean", "description": "Whether the agent should retry." },
-        "recommended_next_step": { "type": "string", "description": "Human-readable next step." },
-        "helper_url": { "type": ["string", "null"], "description": "URL to helper documentation." },
-        "human_readable_helper_url": { "type": ["string", "null"], "description": "Human-readable helper URL." },
-        "builder_doctor_command": { "type": ["string", "null"], "description": "CLI command to diagnose." },
-        "builder_error_help_command": { "type": ["string", "null"], "description": "CLI command for error help." },
-        "requires_human_attention": { "type": "boolean", "default": false, "description": "Whether human must review." }
+        "should_retry": {
+          "type": "boolean",
+          "description": "Whether the agent should retry."
+        },
+        "recommended_next_step": {
+          "type": "string",
+          "description": "Human-readable next step."
+        },
+        "helper_url": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "URL to helper documentation."
+        },
+        "human_readable_helper_url": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Human-readable helper URL."
+        },
+        "builder_doctor_command": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "CLI command to diagnose."
+        },
+        "builder_error_help_command": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "CLI command for error help."
+        },
+        "requires_human_attention": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether human must review."
+        }
       }
     }
   }

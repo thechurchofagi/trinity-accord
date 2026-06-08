@@ -588,6 +588,28 @@ def main() -> int:
         fail(f"m3 finalizer native compat contract failed: {result.stderr}\n{result.stdout}")
     ok("m3 finalizer native compatibility contract")
 
+    # Authorship projection sanitization regression
+    result = subprocess.run(
+        [sys.executable, "scripts/test_authorship_projection_sanitization.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"authorship projection sanitization test failed: {result.stderr}\n{result.stdout}")
+    ok("authorship projection sanitization")
+
+    # Builder production-live boundary regression
+    result = subprocess.run(
+        [sys.executable, "scripts/test_builder_production_live_boundaries.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"builder production-live boundary test failed: {result.stderr}\n{result.stdout}")
+    ok("builder production-live boundaries")
+
     print("\n=== ALL CURRENT SYSTEM TESTS PASSED ===")
     return 0
 

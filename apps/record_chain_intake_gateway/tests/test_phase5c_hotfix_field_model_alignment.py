@@ -80,7 +80,8 @@ class TestFieldModelAlignment:
     def test_common_model_has_new_boundary_fields(self, common_model):
         required = common_model["$defs"]["non_authority_boundary_acknowledgement"]["required"]
         assert "receipt_is_not_final_inclusion" in required
-        assert "test_phase_submission_may_be_reclassified" in required
+        assert "receipt_is_intake_only" in required
+        assert "later_records_may_reclassify_or_correct_this_record" in required
 
     def test_helper_has_new_identity_fields(self, field_helper):
         fg_fields = [g["field"] for g in field_helper["field_groups"]]

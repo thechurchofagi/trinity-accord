@@ -2,7 +2,7 @@
 """Phase 5C-HOTFIX regression tests.
 
 Tests:
-  1. Builder-generated echo has 8-field submission_boundary
+  1. Builder-generated echo has 9-field submission_boundary
   2. Builder-generated echo passes authorship proof verification (Ed25519)
   3. Linked Guardian draft passes normalize_record_draft()
   4. Helper diagnostic fixes do not mention retired canonical fields
@@ -33,7 +33,8 @@ REQUIRED_BOUNDARY_FIELDS = {
     "not_amendment",
     "bitcoin_originals_prevail",
     "receipt_is_not_final_inclusion",
-    "test_phase_submission_may_be_reclassified",
+    "receipt_is_intake_only",
+    "later_records_may_reclassify_or_correct_this_record",
 }
 
 # Retired field names that must not appear in diagnostic fix text

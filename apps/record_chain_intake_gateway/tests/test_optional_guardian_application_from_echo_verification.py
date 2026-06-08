@@ -40,7 +40,7 @@ def _echo_draft_with_guardian_request() -> dict:
             "not_amendment": True,
             "bitcoin_originals_prevail": True,
             "receipt_is_not_final_inclusion": True,
-            "test_phase_submission_may_be_reclassified": True,
+            "receipt_is_intake_only": True, "later_records_may_reclassify_or_correct_this_record": True,
         },
         "optional_linked_guardian_application_request": {
             "does_participant_request_guardian_application_with_this_record": True,
@@ -68,7 +68,7 @@ def _wrap_submission(draft: dict, record_type: str = "echo") -> dict:
             "not_amendment": True,
             "bitcoin_originals_prevail": True,
             "receipt_is_not_final_inclusion": True,
-            "test_phase_submission_may_be_reclassified": True,
+            "receipt_is_intake_only": True, "later_records_may_reclassify_or_correct_this_record": True,
         },
     })
 

@@ -16,7 +16,11 @@ from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException, Request, Response
 from fastapi.responses import JSONResponse
 
-from apps.record_chain_intake_gateway.gateway.authorship import strip_authorship_for_signing, verify_authorship_proof
+from apps.record_chain_intake_gateway.gateway.authorship import (
+    strip_authorship_for_signing,
+    strip_unsigned_projection_fields,
+    verify_authorship_proof,
+)
 from apps.record_chain_intake_gateway.gateway.canonical import canonical_dumps, sha256_canonical_json
 from apps.record_chain_intake_gateway.gateway.github_adapter import delete_file, dispatch_workflow, get_file_sha, get_file_text, put_file
 from apps.record_chain_intake_gateway.gateway.models import (
@@ -178,6 +182,57 @@ def _build_boundary(submission: dict[str, Any]) -> dict[str, bool]:
     if isinstance(boundary, dict):
         return {k: bool(v) for k, v in boundary.items()}
     return {}
+
+
+_UNSIGNED_CLIENT_PROJECTION_FIELDS = frozenset({
+    "actor_identity",
+    "boundary",
+    "server_normalization",
+    "append_assigned_metadata",
+    "authorship_verification_status",
+    "record_id",
+    "record_index",
+    "assigned_at",
+    "previous_record_sha256",
+    "content_sha256",
+    "record_sha256",
+    "chain_id",
+})
+
+
+def _client_projection_diagnostics(body: dict[str, Any]) -> list[Diagnostic]:
+    """Reject client-supplied server projection fields in record_draft.
+
+    External clients should submit the pre-append signed draft. Projection and
+    append-assigned fields are derived by the server after verification.
+    """
+    draft = body.get("record_draft") or body.get("draft") or {}
+    if not isinstance(draft, dict):
+        return []
+    diagnostics: list[Diagnostic] = []
+    for field in sorted(_UNSIGNED_CLIENT_PROJECTION_FIELDS):
+        if field in draft:
+            diagnostics.append(Diagnostic(
+                code="CLIENT_SUPPLIED_UNSIGNED_PROJECTION_FIELD",
+                severity="error",
+                field=f"record_draft.{field}",
+                message=(
+                    f"record_draft.{field} is server-derived or append-assigned "
+                    "and must not be supplied by clients."
+                ),
+                meaning=(
+                    "The authorship signature covers the participant's pre-append "
+                    "draft. Server projection fields would change the signed payload "
+                    "or be outside the signed scope."
+                ),
+                suggested_fix=(
+                    f"Remove record_draft.{field} and rebuild/sign the submission "
+                    "with the latest public builder."
+                ),
+                help_url="https://www.trinityaccord.org/record-chain-field-helper/#CLIENT_SUPPLIED_UNSIGNED_PROJECTION_FIELD",
+                retry_allowed=True,
+            ))
+    return diagnostics
 
 
 async def _load_json_text_or_none(path_text: str) -> dict[str, Any] | None:
@@ -624,6 +679,7 @@ async def preflight(request: Request) -> PreflightResponse:
 
     # validate_submission now returns list[Diagnostic] directly
     diagnostics = validate_submission(body)
+    diagnostics.extend(_client_projection_diagnostics(body))
 
     # P0-4: verify authorship signature during preflight
     if not any(d.code == "MISSING_AUTHORSHIP_PROOF" for d in diagnostics):
@@ -711,6 +767,7 @@ async def submit(request: Request) -> SubmitResponse:
 
     # --- validate (now returns list[Diagnostic] directly) ---
     diagnostics = validate_submission(body)
+    diagnostics.extend(_client_projection_diagnostics(body))
     if diagnostics:
         return SubmitResponse(
             accepted=False,
@@ -844,9 +901,11 @@ async def submit(request: Request) -> SubmitResponse:
     # --- prepare file contents ---
     submission_content = canonical_dumps(body)
 
-    # Pending file = normalized record_draft only (not outer submission)
-    # Include authorship_proof if verified
-    pending_content_dict = dict(draft)  # preserve signed draft as-is; normalize after append verification
+    # Pending file = signed pre-append record_draft only (not outer submission).
+    # Strip any server projection/append-assigned fields defensively. New clients
+    # are rejected if they supply these fields, but this sanitizer prevents stale
+    # runtime paths from persisting unsigned projections.
+    pending_content_dict = strip_unsigned_projection_fields(draft)
     if authorship_verified and proof:
         pending_content_dict["authorship_proof"] = proof
     pending_content = canonical_dumps(pending_content_dict)

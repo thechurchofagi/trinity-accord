@@ -22,6 +22,40 @@ from .canonical import canonical_bytes, sha256_bytes
 
 logger = logging.getLogger(__name__)
 
+# Fields that are assigned or derived by the server/append layer and are not
+# part of the participant's pre-append signed payload.
+#
+# These must never affect authorship verification for a pending record. They are
+# either compatibility projections (actor_identity, boundary) or append-assigned
+# chain-integrity metadata (record_id, record_index, hashes, etc.).
+UNSIGNED_PROJECTION_FIELDS = frozenset({
+    "actor_identity",
+    "boundary",
+    "server_normalization",
+    "append_assigned_metadata",
+    "authorship_verification_status",
+    "record_id",
+    "record_index",
+    "assigned_at",
+    "previous_record_sha256",
+    "content_sha256",
+    "record_sha256",
+    "chain_id",
+})
+
+
+def strip_unsigned_projection_fields(record_draft: dict[str, Any]) -> dict[str, Any]:
+    """Return a copy without server-derived or append-assigned projection fields.
+
+    This helper is intentionally shallow because all current projection fields
+    are top-level. It preserves the participant-authored nested draft content.
+    """
+    cleaned = dict(record_draft)
+    for field in UNSIGNED_PROJECTION_FIELDS:
+        cleaned.pop(field, None)
+    return cleaned
+
+
 # Required claim_boundary keys that must be True
 _REQUIRED_CLAIM_BOUNDARY_KEYS = frozenset({
     "not authority",
@@ -31,10 +65,14 @@ _REQUIRED_CLAIM_BOUNDARY_KEYS = frozenset({
 
 
 def strip_authorship_for_signing(record_draft: dict[str, Any]) -> dict[str, Any]:
-    """Return a shallow copy of *record_draft* with ``authorship_proof`` removed.
+    """Return a shallow copy of *record_draft* with proof material removed.
 
     The proof cannot sign itself, so it must be stripped before computing the
     signed payload.
+
+    This function intentionally does not strip server projection fields. Call
+    strip_unsigned_projection_fields() first when verifying a pending record
+    that may contain server-derived projection fields.
     """
     cleaned = dict(record_draft)
     cleaned.pop("authorship_proof", None)

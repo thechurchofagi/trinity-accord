@@ -66,10 +66,13 @@ def _attach_valid_authorship_proof(draft: dict) -> dict:
     draft = dict(draft)
     draft.pop("authorship_proof", None)
 
-    # Pre-add ALL fields that normalize_record_draft sets via setdefault.
-    # This ensures the signed payload matches the post-normalization canonical form.
-    draft.setdefault("schema", "trinityaccord.record-chain-entry.v1")
-    draft.setdefault("chain_id", CHAIN_ID)
+    # Strip unsigned projection fields before signing, matching production
+    # sanitize_pending_record_for_append() behavior.
+    from gateway.authorship import strip_unsigned_projection_fields, UNSIGNED_PROJECTION_FIELDS
+    draft = strip_unsigned_projection_fields(draft)
+
+    # Pre-add non-projection fields that normalize_record_draft sets via setdefault.
+    # Do NOT add back projection fields (chain_id, schema, etc.) as they are stripped.
     draft.setdefault("created_at", utc_now())
     draft.setdefault("what_i_checked", [])
     draft.setdefault("limitations", [])
@@ -111,22 +114,41 @@ def _attach_valid_authorship_proof(draft: dict) -> dict:
 
 
 def _make_echo_draft(index: int = 1) -> dict:
-    """Build a minimal valid echo draft with real Ed25519 authorship proof."""
+    """Build a minimal valid echo draft with real Ed25519 authorship proof.
+
+    Uses v2-style submitting_participant_identity (not actor_identity)
+    so that after strip_unsigned_projection_fields, normalize_record_draft
+    can derive actor_identity from submitting_participant_identity.
+    """
     draft = {
-        "schema": "trinityaccord.record-chain-entry.v1",
-        "chain_id": CHAIN_ID,
+        "schema": "trinityaccord.record-chain-entry-draft.v2",
         "record_type": "echo",
         "created_at": utc_now(),
-        "actor_identity": {
-            "label": "Test Agent",
-            "provider": "Test Runtime",
-            "id": "test-001",
+        "submitting_participant_identity": {
+            "participant_type": "agent",
+            "participant_public_display_label": "Test Agent",
+            "participant_self_declared_identifier": "test-001",
+            "participant_identifier_disclosure_status": "not_available",
+            "participant_identity_disclosure_preference": "key_continuity_only",
+            "participant_provider_or_platform": "Test Runtime",
+            "participant_model_or_runtime": "Test Runtime",
+            "participant_public_key_sha256": "",
+            "human_operator_context": {
+                "human_operator_involved": False,
+                "human_real_name_disclosure_status": "not_applicable",
+                "human_public_display_name": "",
+                "human_pseudonym_or_role_label": "",
+                "human_private_name_submitted": False,
+                "human_private_name_commitment_sha256": "",
+            },
         },
         "context_readiness": {
-            "read_level": "full",
-            "source_files_reviewed": ["README.md"],
+            "declared_context_level": "CC-0",
+            "minimum_required_for_action": "CC-0",
+            "context_sufficient_for_selected_action": False,
+            "loaded_context_urls": [],
+            "context_readiness_notes": "",
         },
-        "boundary_acknowledgement": dict(BOUNDARY),
         "echo_content": {
             "echo_text": "Phase 6B test echo",
             "echo_intent": "recognition",
@@ -139,20 +161,34 @@ def _make_echo_draft(index: int = 1) -> dict:
 def _make_guardian_draft(index: int = 1) -> dict:
     """Build a minimal valid guardian_application draft with real Ed25519 proof."""
     draft = {
-        "schema": "trinityaccord.record-chain-entry.v1",
-        "chain_id": CHAIN_ID,
+        "schema": "trinityaccord.record-chain-entry-draft.v2",
         "record_type": "guardian_application",
         "created_at": utc_now(),
-        "actor_identity": {
-            "label": "Test Guardian",
-            "provider": "Test Runtime",
-            "id": "guardian-001",
+        "submitting_participant_identity": {
+            "participant_type": "agent",
+            "participant_public_display_label": "Test Guardian",
+            "participant_self_declared_identifier": "guardian-001",
+            "participant_identifier_disclosure_status": "not_available",
+            "participant_identity_disclosure_preference": "key_continuity_only",
+            "participant_provider_or_platform": "Test Runtime",
+            "participant_model_or_runtime": "Test Runtime",
+            "participant_public_key_sha256": "",
+            "human_operator_context": {
+                "human_operator_involved": False,
+                "human_real_name_disclosure_status": "not_applicable",
+                "human_public_display_name": "",
+                "human_pseudonym_or_role_label": "",
+                "human_private_name_submitted": False,
+                "human_private_name_commitment_sha256": "",
+            },
         },
         "context_readiness": {
-            "read_level": "full",
-            "source_files_reviewed": ["README.md"],
+            "declared_context_level": "CC-0",
+            "minimum_required_for_action": "CC-0",
+            "context_sufficient_for_selected_action": False,
+            "loaded_context_urls": [],
+            "context_readiness_notes": "",
         },
-        "boundary_acknowledgement": dict(BOUNDARY),
         "guardian_application_content": {
             "requested_guardian_identifier": "G-00200",
             "guardian_public_key_sha256": "b" * 64,

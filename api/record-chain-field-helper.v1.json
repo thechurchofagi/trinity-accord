@@ -112,7 +112,7 @@
       "severity": "error"
     },
     "MISSING_BOUNDARY_ACKNOWLEDGEMENT": {
-      "fix": "Add the boundary acknowledgement block with all required fields set to true: not_authority, not_governance, not_attestation, not_successor_reception, not_amendment, bitcoin_originals_prevail, receipt_is_not_final_inclusion, test_phase_submission_may_be_reclassified.",
+      "fix": "Add the boundary acknowledgement block with all required fields set to true: not_authority, not_governance, not_attestation, not_successor_reception, not_amendment, bitcoin_originals_prevail, receipt_is_not_final_inclusion, receipt_is_intake_only, later_records_may_reclassify_or_correct_this_record.",
       "meaning": "The non_authority_boundary_acknowledgement block is missing or incomplete. All required boundary fields must be present and set to true.",
       "recovery_possible": true,
       "severity": "error"
@@ -505,7 +505,7 @@
     {
       "field": "non_authority_boundary_acknowledgement",
       "formal_record_types_only": true,
-      "meaning": "Every submission must acknowledge: not_authority, not_governance, not_attestation, not_successor_reception, not_amendment, bitcoin_originals_prevail, receipt_is_not_final_inclusion, test_phase_submission_may_be_reclassified.",
+      "meaning": "Every submission must acknowledge: not_authority, not_governance, not_attestation, not_successor_reception, not_amendment, bitcoin_originals_prevail, receipt_is_not_final_inclusion, receipt_is_intake_only, later_records_may_reclassify_or_correct_this_record.",
       "not_required_for": [
         "context_insufficient_notice"
       ],
