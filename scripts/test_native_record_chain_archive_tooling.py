@@ -37,20 +37,20 @@ def test_native_commitment_binds_current_head() -> None:
     if commitment.get("native_record_count") != tip.get("native_record_count"):
         fail("native commitment native_record_count must match chain-tip")
 
-    if commitment.get("latest_record_id") != "R-000000033":
-        fail("M9 native commitment must include R-000000033")
-    if commitment.get("native_record_count") != 33:
-        fail("M9 native commitment must include native_record_count=33")
+    if commitment.get("latest_record_id") != "R-000000034":
+        fail("M9 native commitment must include R-000000034")
+    if commitment.get("native_record_count") != 34:
+        fail("M9 native commitment must include native_record_count=34")
     if "main.chain.jsonl" in text:
         fail("native commitment must not reference legacy main.chain.jsonl")
 
     coverage = commitment.get("record_coverage", {})
     if coverage.get("source") != "record-chain/indexes/record-index.json":
         fail("native commitment record_coverage must use record-index")
-    if coverage.get("record_count") != 33:
+    if coverage.get("record_count") != 34:
         fail("native commitment record_coverage must include 33 records")
-    if coverage.get("last_record_id") != "R-000000033":
-        fail("native commitment record_coverage must end at R-000000033")
+    if coverage.get("last_record_id") != "R-000000034":
+        fail("native commitment record_coverage must end at R-000000034")
     if len(coverage.get("records", [])) != 33:
         fail("native commitment records list must include 33 records")
 
@@ -85,10 +85,10 @@ def test_native_ots_script_dry_run() -> None:
         latest = json.loads(api_out.read_text())
         if latest.get("schema") != "trinityaccord.native-record-chain-ots-latest.v1":
             fail("native latest schema mismatch")
-        if latest.get("latest_record_id") != "R-000000033":
-            fail("native latest must reference R-000000033")
-        if latest.get("native_record_count") != 33:
-            fail("native latest must reference native_record_count=33")
+        if latest.get("latest_record_id") != "R-000000034":
+            fail("native latest must reference R-000000034")
+        if latest.get("native_record_count") != 34:
+            fail("native latest must reference native_record_count=34")
         if latest.get("legacy_main_chain_jsonl_is_not_source") is not True:
             fail("native latest must declare legacy main.chain.jsonl is not source")
 
