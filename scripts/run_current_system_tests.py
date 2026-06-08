@@ -311,8 +311,7 @@ def main() -> int:
         text=True,
     )
     if result.returncode != 0:
-        fail(f"M9 native archive workflow contract failed: {result.stderr}
-{result.stdout}")
+        fail(f"M9 native archive workflow contract failed: {result.stderr}\n{result.stdout}")
     ok("M9 native archive workflow contract")
     # 11b. Arweave upload readback contract test
     result = subprocess.run(
