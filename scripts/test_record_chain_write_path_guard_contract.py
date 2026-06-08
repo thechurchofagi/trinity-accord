@@ -149,8 +149,22 @@ def main() -> None:
     require("Record Chain Auto Finalize" in ots_workflow, "OTS must remain chained to Auto Finalize")
     require("Append Record Chain Entries" in ots_workflow, "OTS must listen to the real Gateway append workflow")
     require("workflow_dispatch:" in ots_workflow, "OTS manual repair dispatch must remain available")
-    require("record-chain/records/**" not in ots_workflow, "OTS must not accept arbitrary records push trigger")
-    require("record-chain/chain-tip.json" not in ots_workflow, "OTS must not accept arbitrary chain-tip push trigger")
+
+    # Verify push trigger does NOT include dangerous path globs (only workflow_run + workflow_dispatch)
+    # Extract the on: section to check push triggers specifically
+    on_section = ""
+    in_on = False
+    for line in ots_workflow.splitlines():
+        stripped = line.strip()
+        if stripped.startswith("on:"):
+            in_on = True
+            continue
+        if in_on:
+            if stripped and not stripped.startswith("#") and not line.startswith(" ") and not line.startswith("\t"):
+                break
+            on_section += line + "\n"
+    require("record-chain/records/**" not in on_section, "OTS push trigger must not include records/** glob")
+    require("record-chain/chain-tip.json" not in on_section, "OTS push trigger must not include chain-tip.json")
 
     require('workflows: ["Record Chain Head OTS Anchor"]' in arweave_workflow, "Arweave must remain chained to OTS")
     require("workflow_dispatch:" in arweave_workflow, "Arweave manual repair dispatch must remain available")
