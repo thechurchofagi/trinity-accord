@@ -98,6 +98,7 @@ def main() -> None:
         "RECORD_CHAIN_GATEWAY_ACTORS",
         "record-chain/maintenance-overrides/",
         "record-chain: auto-finalize accepted submissions",
+        "Append record-chain entries from Render intake",
         "anchor: stamp native record-chain head with OTS",
         "archive: update native record-chain Arweave archive metadata",
         "intake: submission ",
@@ -145,7 +146,8 @@ def main() -> None:
     require("git add -A" in auto_finalize, "auto-finalize must use git add -A for moves/deletions")
     require("record-chain: auto-finalize accepted submissions" in auto_finalize, "auto-finalize commit message must remain stable")
 
-    require('workflows: ["Record Chain Auto Finalize"]' in ots_workflow, "OTS must remain chained to Auto Finalize")
+    require("Record Chain Auto Finalize" in ots_workflow, "OTS must remain chained to Auto Finalize")
+    require("Append Record Chain Entries" in ots_workflow, "OTS must listen to the real Gateway append workflow")
     require("workflow_dispatch:" in ots_workflow, "OTS manual repair dispatch must remain available")
     require("record-chain/records/**" not in ots_workflow, "OTS must not accept arbitrary records push trigger")
     require("record-chain/chain-tip.json" not in ots_workflow, "OTS must not accept arbitrary chain-tip push trigger")
@@ -211,6 +213,27 @@ def main() -> None:
         head = commit(repo, "record-chain: auto-finalize accepted submissions")
         result = check_guard(repo, base, head, actor="github-actions[bot]")
         require(result.returncode == 0, f"approved auto-finalize write should pass:\n{result.stdout}\n{result.stderr}")
+
+    with tempfile.TemporaryDirectory() as td:
+        repo = Path(td)
+        run(["git", "init"], cwd=repo)
+        run(["git", "config", "user.email", "test@example.invalid"], cwd=repo)
+        run(["git", "config", "user.name", "Write Path Guard Test"], cwd=repo)
+        write(repo / "scripts/check_record_chain_write_path_guard.py", guard_script)
+        write(repo / "record-chain/pending/pending.json", "{}\n")
+        base = commit(repo, "init")
+
+        run(["git", "rm", "record-chain/pending/pending.json"], cwd=repo)
+        write(repo / "record-chain/records/R-000000001.json", "{}\n")
+        write(repo / "record-chain/chain-tip.json", "{}\n")
+        write(repo / "record-chain/indexes/record-index.json", "{}\n")
+        write(repo / "record-chain/processed/pending.json", "{}\n")
+        write(repo / "api/public-home-status.json", "{}\n")
+        write(repo / "index.md", "append\n")
+        write(repo / "sitemap.xml", "<xml />\n")
+        head = commit(repo, "Append record-chain entries from Render intake")
+        result = check_guard(repo, base, head, actor="github-actions[bot]")
+        require(result.returncode == 0, f"approved append workflow write should pass:\n{result.stdout}\n{result.stderr}")
 
     with tempfile.TemporaryDirectory() as td:
         repo = Path(td)
