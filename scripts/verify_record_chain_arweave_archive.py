@@ -9,6 +9,12 @@ Checks:
 - boundary fields
 - no ARV5/LV5/IPFS current terminology in index
 
+Native archive validation semantics:
+- Each historical native archive is verified against its OWN snapshot
+  (source.native_chain fields vs included_records), not the current chain-tip.
+- Only the latest live native archive is checked against the current chain-tip
+  to ensure archive coverage is up to date.
+
 Optional network verification:
 - --network: GET arweave.net/<txid> and compare body SHA256; warn on propagation delay
 - --strict-network: same as --network but fail on propagation delay
@@ -104,6 +110,110 @@ def verify_network(txid: str, expected_sha256: str, strict: bool) -> list[str]:
     return errors
 
 
+def find_latest_live_native_archive(archives: list[dict]) -> dict | None:
+    """Find the latest live (non-dry-run) native archive from the index."""
+    latest = None
+    for archive in archives:
+        manifest_path = ROOT / archive.get("manifest_path", "")
+        if not manifest_path.exists():
+            continue
+        manifest = read_json(manifest_path)
+        source = manifest.get("source", {})
+        if source.get("source_type") != "native-record-chain":
+            continue
+        if manifest.get("mode") == "dry-run":
+            continue
+        native_chain = source.get("native_chain", {})
+        record_id = native_chain.get("latest_record_id", "")
+        if latest is None or record_id > latest.get("_record_id", ""):
+            latest = {
+                "_record_id": record_id,
+                "_native_chain": native_chain,
+                "_archive_id": archive.get("archive_id", ""),
+                "_manifest": manifest,
+            }
+    return latest
+
+
+def verify_native_archive_self_consistency(
+    archive_id: str,
+    manifest: dict,
+    native_chain: dict,
+) -> list[str]:
+    """Verify a native archive against its own snapshot (self-consistency).
+
+    Historical archives are checked for internal consistency only:
+    - included_records count matches the archive's own native_record_count
+    - included_records contains the archive's own latest_record_id/record_sha256
+    - included record files exist and SHA matches
+    - legacy JSONL references are absent
+    """
+    errors = []
+    archive_native_count = native_chain.get("native_record_count")
+    archive_latest_id = native_chain.get("latest_record_id")
+    archive_latest_sha = native_chain.get("latest_record_sha256")
+
+    included_records = manifest.get("included_records", [])
+
+    # Check included_records count matches archive's own count
+    if isinstance(archive_native_count, int) and len(included_records) != archive_native_count:
+        errors.append(
+            f"{archive_id}: included_records count ({len(included_records)}) "
+            f"does not match archive native_record_count ({archive_native_count})"
+        )
+
+    # Check archive's own latest record is in included_records
+    if archive_latest_id:
+        if not any(
+            r.get("record_id") == archive_latest_id
+            and r.get("record_sha256") == archive_latest_sha
+            for r in included_records
+        ):
+            errors.append(
+                f"{archive_id}: archive's own latest record ({archive_latest_id}) "
+                f"missing from included_records"
+            )
+
+    # Legacy JSONL checks
+    if native_chain.get("legacy_main_chain_jsonl_is_not_source") is not True:
+        errors.append(f"{archive_id}: native archive must declare legacy JSONL is not source")
+
+    manifest_text = canonical_dumps(manifest)
+    if "main.chain.jsonl" in manifest_text:
+        errors.append(f"{archive_id}: native archive must not reference main.chain.jsonl")
+
+    return errors
+
+
+def verify_latest_archive_covers_chain_tip(
+    latest_archive_id: str,
+    native_chain: dict,
+    chain_tip: dict,
+) -> list[str]:
+    """Verify the latest live native archive covers the current chain-tip."""
+    errors = []
+
+    if native_chain.get("latest_record_id") != chain_tip.get("latest_record_id"):
+        errors.append(
+            f"latest live archive ({latest_archive_id}): "
+            f"native latest_record_id ({native_chain.get('latest_record_id')}) "
+            f"does not match chain-tip ({chain_tip.get('latest_record_id')})"
+        )
+    if native_chain.get("latest_record_sha256") != chain_tip.get("latest_record_sha256"):
+        errors.append(
+            f"latest live archive ({latest_archive_id}): "
+            f"native latest_record_sha256 mismatch"
+        )
+    if native_chain.get("native_record_count") != chain_tip.get("native_record_count"):
+        errors.append(
+            f"latest live archive ({latest_archive_id}): "
+            f"native_record_count ({native_chain.get('native_record_count')}) "
+            f"does not match chain-tip ({chain_tip.get('native_record_count')})"
+        )
+
+    return errors
+
+
 def verify(network: bool = False, strict_network: bool = False) -> list[str]:
     errors: list[str] = []
 
@@ -126,7 +236,11 @@ def verify(network: bool = False, strict_network: bool = False) -> list[str]:
         if term in index_text:
             errors.append(f"forbidden current terminology '{term}' found in arweave index")
 
+    # Pre-pass: find latest live native archive for chain-tip coverage check
+    latest_live = find_latest_live_native_archive(index.get("archives", []))
+
     for archive in index.get("archives", []):
+        archive_id = archive.get("archive_id", "unknown")
         manifest_path = ROOT / archive.get("manifest_path", "")
         if not manifest_path.exists():
             errors.append(f"archive manifest missing: {manifest_path}")
@@ -139,84 +253,70 @@ def verify(network: bool = False, strict_network: bool = False) -> list[str]:
         computed["archive_manifest_sha256"] = None
         expected_sha = sha256_canonical_json(computed)
         if manifest.get("archive_manifest_sha256") != expected_sha:
-            errors.append(f"{archive['archive_id']}: archive_manifest_sha256 mismatch")
+            errors.append(f"{archive_id}: archive_manifest_sha256 mismatch")
 
         # Check arweave boundary
         arweave = manifest.get("arweave", {})
         if manifest.get("mode") == "dry-run" and arweave.get("txid") is not None:
-            errors.append(f"{archive['archive_id']}: dry-run but claims arweave_txid")
+            errors.append(f"{archive_id}: dry-run but claims arweave_txid")
 
         # Check boundary fields in manifest
         m_boundary = manifest.get("boundary", {})
         for key in ["not_authority", "not_attestation", "not_amendment",
                      "not_successor_reception", "bitcoin_originals_prevail"]:
             if not m_boundary.get(key):
-                errors.append(f"{archive['archive_id']}: manifest boundary missing/false: {key}")
+                errors.append(f"{archive_id}: manifest boundary missing/false: {key}")
 
         # Native archive validation
         source = manifest.get("source", {})
         if source.get("source_type") == "native-record-chain":
-            chain_tip = read_json(CHAIN_TIP)
             native_chain = source.get("native_chain", {})
 
-            if native_chain.get("latest_record_id") != chain_tip.get("latest_record_id"):
-                errors.append(f"{archive['archive_id']}: native latest_record_id mismatch")
-            if native_chain.get("latest_record_sha256") != chain_tip.get("latest_record_sha256"):
-                errors.append(f"{archive['archive_id']}: native latest_record_sha256 mismatch")
-            if native_chain.get("native_record_count") != chain_tip.get("native_record_count"):
-                errors.append(f"{archive['archive_id']}: native_record_count mismatch")
+            # Self-consistency: verify against the archive's own snapshot
+            sc_errors = verify_native_archive_self_consistency(
+                archive_id, manifest, native_chain
+            )
+            errors.extend(sc_errors)
 
-            included_records = manifest.get("included_records", [])
-            if len(included_records) != chain_tip.get("native_record_count"):
-                errors.append(
-                    f"{archive['archive_id']}: included_records does not cover native_record_count"
+            # Chain-tip coverage: only for the latest live archive
+            if latest_live and archive_id == latest_live["_archive_id"]:
+                chain_tip = read_json(CHAIN_TIP)
+                ct_errors = verify_latest_archive_covers_chain_tip(
+                    archive_id, native_chain, chain_tip
                 )
-
-            if not any(
-                r.get("record_id") == chain_tip.get("latest_record_id")
-                and r.get("record_sha256") == chain_tip.get("latest_record_sha256")
-                for r in included_records
-            ):
-                errors.append(f"{archive['archive_id']}: latest native record missing from included_records")
-
-            if source.get("legacy_main_chain_jsonl_is_not_source") is not True:
-                errors.append(f"{archive['archive_id']}: native archive must declare legacy JSONL is not source")
-
-            manifest_text_for_native = canonical_dumps(manifest)
-            if "main.chain.jsonl" in manifest_text_for_native:
-                errors.append(f"{archive['archive_id']}: native archive must not reference main.chain.jsonl")
+                errors.extend(ct_errors)
 
         # Check included batches
         for batch in manifest.get("included_batches", []):
             batch_path = ROOT / batch.get("manifest_path", "")
             if not batch_path.exists():
-                errors.append(f"{archive['archive_id']}: batch manifest missing: {batch_path}")
+                errors.append(f"{archive_id}: batch manifest missing: {batch_path}")
                 continue
             batch_data = read_json(batch_path)
             if batch_data.get("batch_manifest_sha256") != batch.get("batch_manifest_sha256"):
-                errors.append(f"{archive['archive_id']}: batch {batch.get('batch_id')} sha mismatch")
+                errors.append(f"{archive_id}: batch {batch.get('batch_id')} sha mismatch")
 
         # Check included records
         for rec in manifest.get("included_records", []):
             rec_path = ROOT / rec.get("path", "")
             if not rec_path.exists():
-                errors.append(f"{archive['archive_id']}: record missing: {rec_path}")
+                errors.append(f"{archive_id}: record missing: {rec_path}")
                 continue
             rec_data = read_json(rec_path)
             if rec_data.get("record_sha256") != rec.get("record_sha256"):
-                errors.append(f"{archive['archive_id']}: record {rec.get('record_id')} sha mismatch")
+                errors.append(f"{archive_id}: record {rec.get('record_id')} sha mismatch")
 
         # Check forbidden terminology in manifest
         manifest_text = canonical_dumps(manifest)
         for term in FORBIDDEN_TERMS:
             if term in manifest_text:
-                errors.append(f"{archive['archive_id']}: forbidden term '{term}' in manifest")
+                errors.append(f"{archive_id}: forbidden term '{term}' in manifest")
 
         # Verify txid shape if present
         txid = arweave.get("txid")
         if txid:
             if not verify_txid_shape(txid):
-                errors.append(f"{archive['archive_id']}: invalid txid shape: {txid[:20]}...")
+                errors.append(f"{archive_id}: invalid txid shape: {txid[:20]}...")
 
             # Network verification if requested
             if network or strict_network:
@@ -228,7 +328,7 @@ def verify(network: bool = False, strict_network: bool = False) -> list[str]:
                     net_errors = verify_network(txid, payload_sha, strict=strict_network)
                     errors.extend(net_errors)
                 else:
-                    msg = f"{archive['archive_id']}: payload.json not found for network verification"
+                    msg = f"{archive_id}: payload.json not found for network verification"
                     if strict_network:
                         errors.append(msg)
                     else:
