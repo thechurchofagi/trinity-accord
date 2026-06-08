@@ -846,7 +846,7 @@ async def submit(request: Request) -> SubmitResponse:
 
     # Pending file = normalized record_draft only (not outer submission)
     # Include authorship_proof if verified
-    pending_content_dict = _normalize_public_v2_draft_for_pending(dict(draft))
+    pending_content_dict = dict(draft)  # preserve signed draft as-is; normalize after append verification
     if authorship_verified and proof:
         pending_content_dict["authorship_proof"] = proof
     pending_content = canonical_dumps(pending_content_dict)
