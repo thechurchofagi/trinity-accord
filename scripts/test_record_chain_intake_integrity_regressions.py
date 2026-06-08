@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import importlib.util
 import json
+import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -170,7 +171,7 @@ def test_append_authorship_verification_source_markers() -> None:
         fail("append must define/use verify_pending_record_authorship")
     if "verified_by_append_before_record" not in text:
         fail("append must write verified_by_append_before_record")
-    if "verify_authorship_proof(record, proof)" not in text:
+    if not re.search(r'verify_authorship_proof\(\w+,\s*proof\)', text):
         fail("append must call verify_authorship_proof(record, proof) on pending draft")
     if "invalid authorship_proof.schema" not in text:
         fail("append must validate authorship_proof.schema before verifier")

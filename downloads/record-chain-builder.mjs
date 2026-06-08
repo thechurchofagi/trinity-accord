@@ -662,7 +662,7 @@ function buildV2CommonFields(opts) {
       bitcoin_originals_prevail: true,
       receipt_is_not_final_inclusion: true,
       receipt_is_intake_only: true,
-      later_records_may_reclassify_or_correct_this_record: true,
+    later_records_may_reclassify_or_correct_this_record: true,
     },
   };
 }
@@ -842,7 +842,7 @@ function buildSubmission(recordDraft, opts) {
       bitcoin_originals_prevail: true,
       receipt_is_not_final_inclusion: true,
       receipt_is_intake_only: true,
-      later_records_may_reclassify_or_correct_this_record: true,
+    later_records_may_reclassify_or_correct_this_record: true,
     },
   };
 }
@@ -971,7 +971,7 @@ const FIELD_EXPLANATIONS = {
   "non_authority_boundary_acknowledgement.bitcoin_originals_prevail": "Acknowledges Bitcoin originals prevail in any conflict.",
   "non_authority_boundary_acknowledgement.receipt_is_not_final_inclusion": "Acknowledges that receipt does not guarantee final inclusion.",
   "non_authority_boundary_acknowledgement.receipt_is_intake_only": "Acknowledges that receipt confirms intake only and is not final inclusion.",
-    "non_authority_boundary_acknowledgement.later_records_may_reclassify_or_correct_this_record": "Acknowledges that later append-only records may classify, correct, or supersede this record without mutating it.",
+  "non_authority_boundary_acknowledgement.later_records_may_reclassify_or_correct_this_record": "Acknowledges that later append-only records may classify, correct, or supersede this record without mutating it.",
 
   "optional_linked_guardian_application_request": "Whether the participant is requesting a guardian application alongside this record.",
   "optional_linked_guardian_application_request.does_participant_request_guardian_application_with_this_record": "Whether a guardian application is requested with this record.",
@@ -1514,7 +1514,7 @@ function generateTemplate(recordType) {
     bitcoin_originals_prevail: true,
     receipt_is_not_final_inclusion: true,
     receipt_is_intake_only: true,
-      later_records_may_reclassify_or_correct_this_record: true,
+    later_records_may_reclassify_or_correct_this_record: true,
   };
 
   if (recordType === "guardian_application" || recordType === "guardian_retirement") {

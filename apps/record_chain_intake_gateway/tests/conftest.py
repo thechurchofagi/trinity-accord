@@ -95,7 +95,7 @@ def _make_v2_echo_draft() -> dict[str, Any]:
             "not_amendment": True,
             "bitcoin_originals_prevail": True,
             "receipt_is_not_final_inclusion": True,
-            "test_phase_submission_may_be_reclassified": True,
+            "receipt_is_intake_only": True, "later_records_may_reclassify_or_correct_this_record": True,
         },
         "optional_linked_guardian_application_request": None,
         "payload": {
@@ -122,7 +122,7 @@ def _make_valid_submission() -> dict[str, Any]:
             "not_amendment": True,
             "bitcoin_originals_prevail": True,
             "receipt_is_not_final_inclusion": True,
-            "test_phase_submission_may_be_reclassified": True,
+            "receipt_is_intake_only": True, "later_records_may_reclassify_or_correct_this_record": True,
         },
     }
 
@@ -173,7 +173,7 @@ def valid_context_insufficient_submission() -> dict[str, Any]:
             "not_amendment": True,
             "bitcoin_originals_prevail": True,
             "receipt_is_not_final_inclusion": True,
-            "test_phase_submission_may_be_reclassified": True,
+            "receipt_is_intake_only": True, "later_records_may_reclassify_or_correct_this_record": True,
         },
     }
 
