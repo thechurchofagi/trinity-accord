@@ -51,13 +51,13 @@ def main() -> None:
     commitment_text = json.dumps(commitment, sort_keys=True)
     if "main.chain.jsonl" in commitment_text:
         raise SystemExit("native commitment must not reference legacy main.chain.jsonl")
-    if commitment.get("latest_record_id") != "R-000000033":
+    if commitment.get("latest_record_id") != "R-000000034":
         raise SystemExit(
-            f"M9.3 native archive must include R-000000033, got {commitment.get('latest_record_id')}"
+            f"M9.3 native archive must include R-000000034, got {commitment.get('latest_record_id')}"
         )
-    if commitment.get("native_record_count") != 33:
+    if commitment.get("native_record_count") != 34:
         raise SystemExit(
-            f"M9.3 native archive must include native_record_count=33, got {commitment.get('native_record_count')}"
+            f"M9.3 native archive must include native_record_count=34, got {commitment.get('native_record_count')}"
         )
 
     commitment_bytes = canonical_json_bytes(commitment)

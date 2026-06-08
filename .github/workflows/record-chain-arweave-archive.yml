@@ -87,6 +87,7 @@ jobs:
       - name: Build Arweave archive manifest
         env:
           ARKEY: ${{ secrets.ARKEY }}
+          ARWEAVE_UPLOAD_TIMEOUT_SECONDS: "600"
         run: python scripts/build_record_chain_arweave_archive.py --mode "${ARWEAVE_UPLOAD_MODE}"
 
       - name: Verify Arweave archive metadata

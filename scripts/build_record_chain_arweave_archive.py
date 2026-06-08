@@ -229,7 +229,9 @@ def upload_to_arweave(payload_path: Path, archive_dir: Path) -> dict:
     cmd = ["node", str(uploader), "--payload", str(payload_path), "--out", str(result_path)]
     env = os.environ.copy()
 
-    result = subprocess.run(cmd, env=env, capture_output=True, text=True, timeout=120)
+    timeout_seconds = int(os.environ.get("ARWEAVE_UPLOAD_TIMEOUT_SECONDS", "600"))
+    print(f"Arweave upload timeout: {timeout_seconds}s")
+    result = subprocess.run(cmd, env=env, capture_output=True, text=True, timeout=timeout_seconds)
     if result.returncode != 0:
         print(f"Arweave upload failed:\nstdout: {result.stdout}\nstderr: {result.stderr}", file=sys.stderr)
         raise SystemExit(1)
@@ -308,6 +310,7 @@ def build_archive_manifest(mode: str) -> None:
                 "latest_record_id": latest_record_id,
                 "latest_record_sha256": latest_record_sha256,
                 "native_record_count": native_record_count,
+                "legacy_main_chain_jsonl_is_not_source": True,
                 "latest_batch_id": chain_tip.get("latest_batch_id"),
                 "latest_batch_manifest_sha256": chain_tip.get("latest_batch_manifest_sha256"),
             },
