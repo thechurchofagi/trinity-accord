@@ -1,0 +1,14 @@
+{
+  "run": "M9.3 INT-ARCHIVE live",
+  "status": "pass",
+  "record_id": "R-000000033",
+  "native_record_count": 33,
+  "native_ots_latest": "api/record-chain-native-ots-latest.json",
+  "ots_status": "pending-bitcoin",
+  "arweave_txid": "hSyp93ZW2cQQcK7lPdqyREr-jCs4Kj5m4vbjlYGBEZ8",
+  "arweave_commit": "e42ceee4d272e47727d8fb9a6f5dc2d34ea1969e",
+  "source_type": "native-record-chain",
+  "included_records": 33,
+  "private_key_material_persisted": false,
+  "arkey_persisted": false
+}
