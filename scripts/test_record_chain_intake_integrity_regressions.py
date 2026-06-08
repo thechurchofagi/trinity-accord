@@ -170,10 +170,16 @@ def test_append_authorship_verification_source_markers() -> None:
         fail("append must define/use verify_pending_record_authorship")
     if "verified_by_append_before_record" not in text:
         fail("append must write verified_by_append_before_record")
-    if "signature_base64" not in text:
-        fail("append must check for signature_base64 in authorship proof")
+    if "verify_authorship_proof(record, proof)" not in text:
+        fail("append must call verify_authorship_proof(record, proof) on pending draft")
     if "invalid authorship_proof.schema" not in text:
         fail("append must validate authorship_proof.schema before verifier")
+    if "invalid authorship_proof.method" not in text:
+        fail("append must validate authorship_proof.method before verifier")
+    if "invalid authorship_proof.algorithm" not in text:
+        fail("append must validate authorship_proof.algorithm before verifier")
+    if "Structure-only check" in text:
+        fail("append must not use structure-only authorship verification")
     if '"verified_by_gateway_before_pending": True' in text:
         fail("append must not unconditionally set verified_by_gateway_before_pending true")
 
