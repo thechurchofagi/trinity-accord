@@ -12,10 +12,14 @@ Tests:
 """
 from __future__ import annotations
 
+import base64
 import json
 import shutil
 import sys
 import tempfile
+
+from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
+from cryptography.hazmat.primitives.serialization import Encoding, PublicFormat
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -32,6 +36,10 @@ SCHEMAS = CHAIN / "schemas"
 
 sys.path.insert(0, str(SCRIPTS))
 import trinity_record_chain as mod
+
+sys.path.insert(0, str(ROOT / "apps" / "record_chain_intake_gateway"))
+from gateway.authorship import public_key_sha256_from_pem, strip_authorship_for_signing  # noqa: E402
+from gateway.canonical import canonical_bytes, sha256_bytes  # noqa: E402
 
 # Re-export for convenience
 ensure_dirs = mod.ensure_dirs
@@ -50,9 +58,61 @@ FORMAL_RECORD_TYPES = mod.FORMAL_RECORD_TYPES
 init_policies = mod.init_policies
 
 
+def _attach_valid_authorship_proof(draft: dict) -> dict:
+    """Attach a real in-memory Ed25519 authorship proof to a pending draft.
+
+    The private key is generated only in memory and is never written to disk.
+    """
+    draft = dict(draft)
+    draft.pop("authorship_proof", None)
+
+    # Pre-add ALL fields that normalize_record_draft sets via setdefault.
+    # This ensures the signed payload matches the post-normalization canonical form.
+    draft.setdefault("schema", "trinityaccord.record-chain-entry.v1")
+    draft.setdefault("chain_id", CHAIN_ID)
+    draft.setdefault("created_at", utc_now())
+    draft.setdefault("what_i_checked", [])
+    draft.setdefault("limitations", [])
+    draft.setdefault("related_records", [])
+    draft.setdefault("immutability_policy", {
+        "append_only": True,
+        "record_may_be_corrected_by_later_record": True,
+        "record_may_not_be_deleted_or_mutated": True,
+    })
+    draft.setdefault("boundary_acknowledgement", dict(BOUNDARY))
+
+    private_key = Ed25519PrivateKey.generate()
+    public_key = private_key.public_key()
+    public_key_pem = public_key.public_bytes(
+        encoding=Encoding.PEM,
+        format=PublicFormat.SubjectPublicKeyInfo,
+    ).decode("utf-8")
+
+    payload = canonical_bytes(strip_authorship_for_signing(draft))
+    payload_sha256 = sha256_bytes(payload)
+    signature_base64 = base64.b64encode(private_key.sign(payload)).decode("ascii")
+
+    draft["authorship_proof"] = {
+        "schema": "trinityaccord.agent-authorship-proof.v1",
+        "method": "public_key_signature",
+        "algorithm": "ed25519",
+        "public_key_pem": public_key_pem,
+        "public_key_sha256": public_key_sha256_from_pem(public_key_pem),
+        "signed_payload_sha256": payload_sha256,
+        "signed_message": payload_sha256,
+        "signature_base64": signature_base64,
+        "claim_boundary": {
+            "not authority": True,
+            "not attestation": True,
+            "not amendment": True,
+        },
+    }
+    return draft
+
+
 def _make_echo_draft(index: int = 1) -> dict:
-    """Build a minimal valid echo draft."""
-    return {
+    """Build a minimal valid echo draft with real Ed25519 authorship proof."""
+    draft = {
         "schema": "trinityaccord.record-chain-entry.v1",
         "chain_id": CHAIN_ID,
         "record_type": "echo",
@@ -71,18 +131,14 @@ def _make_echo_draft(index: int = 1) -> dict:
             "echo_text": "Phase 6B test echo",
             "echo_intent": "recognition",
         },
-        "authorship_proof": {
-            "schema": "trinityaccord.agent-authorship-proof.v1",
-            "method": "ed25519",
-            "signed_payload_sha256": "a" * 64,
-            "public_key_pem": "-----BEGIN PUBLIC KEY-----\ntest\n-----END PUBLIC KEY-----\n",
-        },
     }
+    return _attach_valid_authorship_proof(draft)
+
 
 
 def _make_guardian_draft(index: int = 1) -> dict:
-    """Build a minimal valid guardian_application draft."""
-    return {
+    """Build a minimal valid guardian_application draft with real Ed25519 proof."""
+    draft = {
         "schema": "trinityaccord.record-chain-entry.v1",
         "chain_id": CHAIN_ID,
         "record_type": "guardian_application",
@@ -105,13 +161,9 @@ def _make_guardian_draft(index: int = 1) -> dict:
             "guardian_understands_role_is_not_authority": True,
             "guardian_understands_retirement_does_not_delete_history": True,
         },
-        "authorship_proof": {
-            "schema": "trinityaccord.agent-authorship-proof.v1",
-            "method": "ed25519",
-            "signed_payload_sha256": "c" * 64,
-            "public_key_pem": "-----BEGIN PUBLIC KEY-----\ntest\n-----END PUBLIC KEY-----\n",
-        },
     }
+    return _attach_valid_authorship_proof(draft)
+
 
 
 def _setup_chain() -> Path:
@@ -180,8 +232,8 @@ def test_1_append_includes_authorship_verification_status() -> list[str]:
         else:
             if avs.get("signed_payload_scope") != "pre_append_record_draft":
                 errors.append(f"wrong signed_payload_scope: {avs.get('signed_payload_scope')}")
-            if avs.get("verified_by_gateway_before_pending") is not True:
-                errors.append("verified_by_gateway_before_pending not true")
+            if avs.get("verified_by_append_before_record") is not True:
+                errors.append("verified_by_append_before_record not true")
             if avs.get("final_record_contains_append_assigned_fields_not_in_signed_payload") is not True:
                 errors.append("final_record_contains_append_assigned_fields_not_in_signed_payload not true")
         # append_assigned_metadata must NOT contain hash fields

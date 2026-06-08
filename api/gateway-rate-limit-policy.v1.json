@@ -34,6 +34,10 @@
   },
   "implementation_status": {
     "server_side_enforcement_required_before_formal_window": true,
-    "server_side_enforcement_verified": true
+    "server_side_enforcement_verified": true,
+    "rate_limit_implementation": "single_process_in_memory_sliding_window",
+    "multi_instance_safe": false,
+    "durable_across_restart": false,
+    "operator_note": "Current enforcement is process-local and intended for single-instance live-test operation. Production multi-instance deployment requires a shared durable limiter."
   }
 }

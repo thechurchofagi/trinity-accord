@@ -381,6 +381,32 @@ def require_authorship(record: dict[str, Any]) -> None:
         raise ValueError(f"formal record_type={rtype} requires authorship_proof")
 
 
+def verify_pending_record_authorship(record: dict[str, Any]) -> None:
+    rtype = record.get("record_type")
+    if rtype not in FORMAL_RECORD_TYPES or rtype in AUTHORSHIP_EXEMPT_TYPES:
+        return
+
+    proof = record.get("authorship_proof")
+    if not isinstance(proof, dict):
+        raise ValueError(f"formal record_type={rtype} requires authorship_proof")
+
+    if proof.get("schema") != "trinityaccord.agent-authorship-proof.v1":
+        raise ValueError(f"formal record_type={rtype} has invalid authorship_proof.schema")
+    if proof.get("method") != "public_key_signature":
+        raise ValueError(f"formal record_type={rtype} has invalid authorship_proof.method")
+    if proof.get("algorithm") != "ed25519":
+        raise ValueError(f"formal record_type={rtype} has invalid authorship_proof.algorithm")
+
+    # Import lazily so non-authorship commands do not pay this dependency cost.
+    # Import lazily so non-authorship commands do not pay this dependency cost.
+    sys.path.insert(0, str(ROOT / "apps/record_chain_intake_gateway"))
+    from gateway.authorship import verify_authorship_proof  # noqa: WPS433
+
+    ok, err = verify_authorship_proof(record, proof)
+    if not ok:
+        raise ValueError(f"authorship proof verification failed for pending record: {err}")
+
+
 def normalize_record_draft(draft: dict[str, Any]) -> dict[str, Any]:
     draft = dict(draft)
 
@@ -462,6 +488,8 @@ def normalize_record_draft(draft: dict[str, Any]) -> dict[str, Any]:
         raise ValueError("context_readiness is required")
     require_boundary(draft)
     require_authorship(draft)
+    # verify_pending_record_authorship is called by append_records on the
+    # raw draft before normalization, so we don't re-verify here.
     return draft
 
 
@@ -488,7 +516,11 @@ def append_records(all_records: bool = False) -> None:
     appended_count = 0
     for path in selected:
         try:
-            draft = normalize_record_draft(read_json(path))
+            raw_draft = read_json(path)
+            # Verify authorship proof on the raw draft before normalization
+            # modifies it, so the signed payload hash matches exactly.
+            verify_pending_record_authorship(raw_draft)
+            draft = normalize_record_draft(raw_draft)
 
             # --- Phase 6B: authorship_verification_status ---
             # Record the scope of the authorship proof relative to the final
@@ -497,9 +529,13 @@ def append_records(all_records: bool = False) -> None:
             # server append hash, not the signed payload hash.
             rtype = draft.get("record_type", "")
             if rtype in FORMAL_RECORD_TYPES and rtype not in AUTHORSHIP_EXEMPT_TYPES:
+                existing_status = draft.get("authorship_verification_status")
+                if not isinstance(existing_status, dict):
+                    existing_status = {}
                 draft["authorship_verification_status"] = {
                     "signed_payload_scope": "pre_append_record_draft",
-                    "verified_by_gateway_before_pending": True,
+                    "verified_by_gateway_before_pending": existing_status.get("verified_by_gateway_before_pending") is True,
+                    "verified_by_append_before_record": True,
                     "final_record_contains_append_assigned_fields_not_in_signed_payload": True,
                 }
 
@@ -805,8 +841,11 @@ def verify_native_records() -> list[str]:
             else:
                 if avs.get("signed_payload_scope") != "pre_append_record_draft":
                     errors.append(f"{p}: authorship_verification_status.signed_payload_scope must be 'pre_append_record_draft'")
-                if avs.get("verified_by_gateway_before_pending") is not True:
-                    errors.append(f"{p}: authorship_verification_status.verified_by_gateway_before_pending must be true")
+                if avs.get("verified_by_append_before_record") is not True and avs.get("verified_by_gateway_before_pending") is not True:
+                    errors.append(
+                        f"{p}: authorship_verification_status must include verified_by_append_before_record=true "
+                        "or legacy verified_by_gateway_before_pending=true"
+                    )
                 if avs.get("final_record_contains_append_assigned_fields_not_in_signed_payload") is not True:
                     errors.append(f"{p}: authorship_verification_status.final_record_contains_append_assigned_fields_not_in_signed_payload must be true")
 

@@ -30,7 +30,7 @@ from apps.record_chain_intake_gateway.gateway.models import (
     SubmitResponse,
 )
 from apps.record_chain_intake_gateway.gateway.rate_limit import check_rate_limit
-from apps.record_chain_intake_gateway.gateway.receipts import make_receipt
+from apps.record_chain_intake_gateway.gateway.receipts import make_legacy_receipt_id, make_receipt, make_receipt_id
 from apps.record_chain_intake_gateway.gateway.runtime import get_runtime_info
 from apps.record_chain_intake_gateway.gateway.validation import ALLOWED_RECORD_TYPES, detect_route, validate_submission
 
@@ -178,6 +178,66 @@ def _build_boundary(submission: dict[str, Any]) -> dict[str, bool]:
     if isinstance(boundary, dict):
         return {k: bool(v) for k, v in boundary.items()}
     return {}
+
+
+async def _load_json_text_or_none(path_text: str) -> dict[str, Any] | None:
+    text = await get_file_text(path_text)
+    if text is None:
+        return None
+    return json.loads(text)
+
+
+def _existing_receipt_matches_current(
+    *,
+    existing_receipt: dict[str, Any],
+    submission_sha256: str,
+    stored_submission_sha256: str,
+    receipt_path: str,
+) -> bool:
+    return (
+        existing_receipt.get("submission_sha256") == submission_sha256
+        and existing_receipt.get("stored_submission_sha256") == stored_submission_sha256
+        and existing_receipt.get("receipt_path") == receipt_path
+        and isinstance(existing_receipt.get("intake_submission_path"), str)
+    )
+
+
+async def _find_existing_matching_receipt(
+    *,
+    candidate_receipt_paths: list[str],
+    submission_sha256: str,
+    stored_submission_sha256: str,
+) -> tuple[str, dict[str, Any]] | None:
+    for candidate_path in candidate_receipt_paths:
+        existing_sha = await get_file_sha(candidate_path)
+        if existing_sha is None:
+            continue
+        existing_receipt = await _load_json_text_or_none(candidate_path)
+        if not existing_receipt:
+            raise HTTPException(
+                status_code=409,
+                detail={
+                    "code": "RECEIPT_PATH_CONFLICT",
+                    "message": "Receipt path exists but could not be read as JSON. Refusing to overwrite immutable intake artifact.",
+                    "receipt_path": candidate_path,
+                },
+            )
+        if _existing_receipt_matches_current(
+            existing_receipt=existing_receipt,
+            submission_sha256=submission_sha256,
+            stored_submission_sha256=stored_submission_sha256,
+            receipt_path=candidate_path,
+        ):
+            return candidate_path, existing_receipt
+        raise HTTPException(
+            status_code=409,
+            detail={
+                "code": "RECEIPT_PATH_CONFLICT",
+                "message": "Receipt path already exists but does not bind to this exact submission. Refusing to overwrite immutable intake artifact.",
+                "receipt_path": candidate_path,
+            },
+        )
+    return None
 
 
 def _diagnostics_from_errors(errors: list[str | Diagnostic]) -> list[Diagnostic]:
@@ -727,23 +787,41 @@ async def submit(request: Request) -> SubmitResponse:
 
     # --- check for linked Guardian request ---
     has_linked_guardian = _has_linked_guardian_request(draft)
+    if has_linked_guardian:
+        return SubmitResponse(
+            accepted=False,
+            submitted=False,
+            record_type=record_type,
+            submission_sha256=submission_sha256,
+            received_raw_body_sha256=received_raw_body_sha256,
+            diagnostics=[Diagnostic(
+                code="LINKED_GUARDIAN_AUTO_CREATION_DISABLED",
+                severity="error",
+                field="record_draft.optional_linked_guardian_application_request",
+                message="Linked guardian auto-creation is disabled. Submit a separate signed guardian_application record instead.",
+                meaning="The gateway must not copy an authorship proof from one draft onto a newly constructed guardian_application draft.",
+                suggested_fix="Build and sign a standalone guardian_application submission.",
+                retry_allowed=True,
+            )],
+            boundary=_build_boundary(body),
+        )
 
     # --- build receipt (prepare all paths FIRST, receipt is immutable after creation) ---
     now = datetime.now(timezone.utc)
-    receipt_id_local = f"rcg-{now.strftime('%Y%m%d')}-{submission_sha256[:12]}"
+    receipt_id_local = make_receipt_id(submission_sha256, now)
+    legacy_receipt_id_local = make_legacy_receipt_id(submission_sha256, now)
     date_prefix = now.strftime("%Y/%m")
 
     intake_submission_path = f"record-chain/intake/submissions/{date_prefix}/{receipt_id_local}.submission.json"
     receipt_path = f"record-chain/intake/receipts/{date_prefix}/{receipt_id_local}.receipt.json"
     pending_file_path = f"record-chain/pending/{receipt_id_local}.{record_type}.pending.json"
 
+    legacy_intake_submission_path = f"record-chain/intake/submissions/{date_prefix}/{legacy_receipt_id_local}.submission.json"
+    legacy_receipt_path = f"record-chain/intake/receipts/{date_prefix}/{legacy_receipt_id_local}.receipt.json"
+    legacy_pending_file_path = f"record-chain/pending/{legacy_receipt_id_local}.{record_type}.pending.json"
+
     # Track all created pending file paths
     created_pending_records: list[str] = [pending_file_path]
-
-    # Add linked guardian pending path if applicable
-    if has_linked_guardian:
-        guardian_pending_path = f"record-chain/pending/{receipt_id_local}.guardian_application.linked.pending.json"
-        created_pending_records.append(guardian_pending_path)
 
     # Extract oath verification summary for receipt (no raw readback)
     oath_summary = _extract_oath_verification_summary(draft)
@@ -784,60 +862,97 @@ async def submit(request: Request) -> SubmitResponse:
 
     if _WRITE_MODE == "github_contents_pending":
         try:
-            # Write 1: intake submission
+            existing_match = await _find_existing_matching_receipt(
+                candidate_receipt_paths=[receipt_path, legacy_receipt_path],
+                submission_sha256=submission_sha256,
+                stored_submission_sha256=stored_submission_sha256,
+            )
+            if existing_match is not None:
+                existing_receipt_path, existing_receipt = existing_match
+                return SubmitResponse(
+                    accepted=True,
+                    submitted=True,
+                    receipt_id=existing_receipt.get("server_receipt_id") or existing_receipt.get("receipt_id") or receipt_id,
+                    record_type=record_type,
+                    submission_sha256=submission_sha256,
+                    received_raw_body_sha256=received_raw_body_sha256,
+                    pending_file_path=existing_receipt.get("pending_file_path", pending_file_path),
+                    intake_submission_path=existing_receipt.get("intake_submission_path", intake_submission_path),
+                    receipt_path=existing_receipt.get("receipt_path", existing_receipt_path),
+                    server_created_at=existing_receipt.get("accepted_at", ""),
+                    append_status="duplicate_existing_receipt_returned",
+                    receipt_commit_sha=None,
+                    receipt=existing_receipt,
+                    diagnostics=[],
+                    warnings=["Duplicate submission: existing immutable receipt returned; no files were updated."],
+                    boundary=_build_boundary(body),
+                    created_pending_records=[
+                        p for p in [existing_receipt.get("pending_file_path", "")]
+                        if isinstance(p, str) and p
+                    ],
+                )
+
             existing_sub_sha = await get_file_sha(intake_submission_path)
+            existing_pending_sha = await get_file_sha(pending_file_path)
+            legacy_sub_sha = await get_file_sha(legacy_intake_submission_path)
+            legacy_pending_sha = await get_file_sha(legacy_pending_file_path)
+
+            if existing_sub_sha is not None or existing_pending_sha is not None:
+                raise HTTPException(
+                    status_code=409,
+                    detail={
+                        "code": "INTAKE_ARTIFACT_PATH_CONFLICT",
+                        "message": "Submission or pending path already exists without a matching immutable receipt. Refusing to overwrite.",
+                        "submission_path_exists": existing_sub_sha is not None,
+                        "pending_path_exists": existing_pending_sha is not None,
+                        "submission_path": intake_submission_path,
+                        "pending_file_path": pending_file_path,
+                    },
+                )
+
+            if legacy_sub_sha is not None or legacy_pending_sha is not None:
+                raise HTTPException(
+                    status_code=409,
+                    detail={
+                        "code": "LEGACY_INTAKE_ARTIFACT_PATH_CONFLICT",
+                        "message": "Legacy 12-hex submission or pending path exists without a matching immutable receipt. Refusing to create duplicate 24-hex artifact.",
+                        "legacy_submission_path_exists": legacy_sub_sha is not None,
+                        "legacy_pending_path_exists": legacy_pending_sha is not None,
+                        "legacy_submission_path": legacy_intake_submission_path,
+                        "legacy_pending_file_path": legacy_pending_file_path,
+                    },
+                )
+
+            # Write 1: intake submission (create only)
             result1 = await put_file(
                 intake_submission_path,
                 submission_content,
                 f"intake: submission {receipt_id}",
-                sha=existing_sub_sha,
+                sha=None,
             )
-            if existing_sub_sha is None and result1.get("content", {}).get("sha"):
+            if result1.get("content", {}).get("sha"):
                 created_files_for_rollback.append((intake_submission_path, result1["content"]["sha"]))
             logger.info("Wrote submission %s", intake_submission_path)
 
-            # Write 2: pending file
-            existing_pending_sha = await get_file_sha(pending_file_path)
+            # Write 2: pending file (create only)
             result2 = await put_file(
                 pending_file_path,
                 pending_content,
                 f"intake: pending {receipt_id} ({record_type})",
-                sha=existing_pending_sha,
+                sha=None,
             )
-            if existing_pending_sha is None and result2.get("content", {}).get("sha"):
+            if result2.get("content", {}).get("sha"):
                 created_files_for_rollback.append((pending_file_path, result2["content"]["sha"]))
             logger.info("Wrote pending %s", pending_file_path)
 
-            # Write 3 (optional): linked Guardian application pending file
-            if has_linked_guardian:
-                guardian_draft = _build_linked_guardian_draft(
-                    draft=draft,
-                    proof=proof if authorship_verified and isinstance(proof, dict) else None,
-                    receipt_id=receipt_id,
-                    submission_sha256=submission_sha256,
-                )
-                guardian_content = canonical_dumps(guardian_draft)
-
-                existing_guardian_sha = await get_file_sha(guardian_pending_path)
-                result3 = await put_file(
-                    guardian_pending_path,
-                    guardian_content,
-                    f"intake: linked guardian_application for {receipt_id}",
-                    sha=existing_guardian_sha,
-                )
-                if existing_guardian_sha is None and result3.get("content", {}).get("sha"):
-                    created_files_for_rollback.append((guardian_pending_path, result3["content"]["sha"]))
-                logger.info("Wrote linked Guardian pending %s", guardian_pending_path)
-
-            # Write 4: receipt (LAST — so all paths are finalized)
-            existing_receipt_sha = await get_file_sha(receipt_path)
+            # Write 3: receipt (LAST — create only)
             result4 = await put_file(
                 receipt_path,
                 receipt_content,
                 f"intake: receipt {receipt_id}",
-                sha=existing_receipt_sha,
+                sha=None,
             )
-            if existing_receipt_sha is None and result4.get("content", {}).get("sha"):
+            if result4.get("content", {}).get("sha"):
                 created_files_for_rollback.append((receipt_path, result4["content"]["sha"]))
             logger.info("Wrote receipt %s", receipt_path)
 
@@ -915,7 +1030,7 @@ async def submit(request: Request) -> SubmitResponse:
 async def get_receipt(receipt_id: str) -> dict[str, Any]:
     """Retrieve a receipt by ID. Checks in-memory cache first, then GitHub.
 
-    Receipt ID format: rcg-YYYYMMDD-<sha12>
+    Receipt ID format: rcg-YYYYMMDD-<sha12-or-sha24>
     The date in the ID determines the storage path directly.
     """
     receipt = _receipt_store.get(receipt_id)
@@ -924,9 +1039,9 @@ async def get_receipt(receipt_id: str) -> dict[str, Any]:
 
     # Parse receipt ID to extract date
     import re
-    match = re.fullmatch(r"rcg-(\d{8})-([a-f0-9]{12})", receipt_id)
+    match = re.fullmatch(r"rcg-(\d{8})-([a-f0-9]{12}|[a-f0-9]{24})", receipt_id)
     if not match:
-        raise HTTPException(status_code=400, detail=f"Invalid receipt ID format: '{receipt_id}'. Expected: rcg-YYYYMMDD-<sha12>")
+        raise HTTPException(status_code=400, detail=f"Invalid receipt ID format: '{receipt_id}'. Expected: rcg-YYYYMMDD-<sha12-or-sha24>")
 
     try:
         dt = datetime.strptime(match.group(1), "%Y%m%d")

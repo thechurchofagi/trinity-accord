@@ -5,6 +5,10 @@ Implements the trinityaccord.gateway-rate-limit-policy.v1:
 - Global: 100 submits/hour
 - Only applies to /record-chain/submit (not preflight)
 - Uses in-memory sliding window counter
+
+Important: this limiter is process-local. It is not durable across restarts and
+is not shared across multiple service instances. Public policy must not describe
+it as multi-instance/durable enforcement unless replaced by a shared backend.
 """
 from __future__ import annotations
 
