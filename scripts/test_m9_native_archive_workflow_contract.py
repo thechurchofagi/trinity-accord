@@ -37,6 +37,7 @@ def main() -> None:
             "record-chain-native-ots-latest.json",
             "record-chain/ots/native-anchors",
             "legacy_main_chain_jsonl_is_not_source",
+            "Append Record Chain Entries",
         ]:
             require_contains(head_wf, marker, errors)
 
@@ -61,6 +62,13 @@ def main() -> None:
             "ARKEY: ${{ secrets.ARKEY }}",
             "record-chain-native-ots-latest.json",
             "refusing live Arweave upload without native OTS",
+            "Check if latest live Arweave archive already matches native head",
+            "No new Arweave archive needed",
+            "Resolve Arweave upload mode",
+            "ARWEAVE_UPLOAD_MODE=live",
+            "workflow_run from OTS",
+            "ARWEAVE_UPLOAD_TIMEOUT_SECONDS",
+            "archive_check.outputs.matched != 'true'",
         ]:
             require_contains(arweave_wf, marker, errors)
 
