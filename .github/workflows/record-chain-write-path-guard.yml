@@ -1,0 +1,61 @@
+name: Record Chain Write Path Guard
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "record-chain/**"
+      - "api/record-chain-*.json"
+      - "api/public-home-status.json"
+      - "index.md"
+      - "sitemap.xml"
+      - ".github/workflows/record-chain-*.yml"
+      - "scripts/check_record_chain_write_path_guard.py"
+      - "scripts/test_record_chain_write_path_guard_contract.py"
+      - "scripts/run_current_system_tests.py"
+  push:
+    branches: [main]
+    paths:
+      - "record-chain/**"
+      - "api/record-chain-*.json"
+      - "api/public-home-status.json"
+      - "index.md"
+      - "sitemap.xml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: record-chain-write-path-guard-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  guard:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: "3.11"
+
+      - name: Check pull request protected paths
+        if: github.event_name == 'pull_request'
+        run: |
+          git fetch origin "${{ github.base_ref }}" --depth=1
+          python3 scripts/check_record_chain_write_path_guard.py \
+            --mode pull-request \
+            --base "origin/${{ github.base_ref }}" \
+            --head HEAD
+
+      - name: Check push protected paths
+        if: github.event_name == 'push'
+        run: |
+          python3 scripts/check_record_chain_write_path_guard.py \
+            --mode push \
+            --base "${{ github.event.before }}" \
+            --head "${{ github.sha }}" \
+            --github-actor "${{ github.actor }}" \
+            --gateway-actors "${{ vars.RECORD_CHAIN_GATEWAY_ACTORS }}"

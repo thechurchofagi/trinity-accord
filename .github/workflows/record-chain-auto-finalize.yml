@@ -59,7 +59,11 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add record-chain/records \
+          git add -A \
+                  record-chain/pending \
+                  record-chain/processed \
+                  record-chain/rejected \
+                  record-chain/records \
                   record-chain/hash-chain/main.chain.jsonl \
                   record-chain/chain-tip.json \
                   record-chain/indexes \

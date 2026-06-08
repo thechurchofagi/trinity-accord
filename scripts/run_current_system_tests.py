@@ -609,6 +609,16 @@ def main() -> int:
     if result.returncode != 0:
         fail(f"builder production-live boundary test failed: {result.stderr}\n{result.stdout}")
     ok("builder production-live boundaries")
+    # Canonical record-chain write-path guard contract
+    result = subprocess.run(
+        [sys.executable, "scripts/test_record_chain_write_path_guard_contract.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"record-chain write-path guard contract failed: {result.stderr}\n{result.stdout}")
+    ok("record-chain write-path guard contract")
 
     print("\n=== ALL CURRENT SYSTEM TESTS PASSED ===")
     return 0
