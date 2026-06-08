@@ -18,6 +18,11 @@ CHAIN_ALL_INDEX_SCHEMA = "trinity_record_chain_all_index.v1"
 CHAIN_INDEX_MANIFEST_SCHEMA = "trinity_record_chain_index_manifest.v1"
 OTS_ANCHOR_SCHEMA = "trinity_record_chain_ots_anchor.v1"
 OTS_LATEST_SCHEMA = "trinity_record_chain_ots_latest.v1"
+NATIVE_CHAIN_HEAD_COMMITMENT_SCHEMA = "trinityaccord.native-record-chain-head-commitment.v1"
+NATIVE_OTS_ANCHOR_SCHEMA = "trinityaccord.native-record-chain-ots-anchor.v1"
+NATIVE_OTS_LATEST_SCHEMA = "trinityaccord.native-record-chain-ots-latest.v1"
+NATIVE_HEAD_SOURCE_SEMANTICS = "native_chain_tip_records_indexes_batches.v1"
+
 
 DEFAULT_CHAIN_ID = "trinity-record-chain-main"
 HASH_HEX_LEN = 64
@@ -30,6 +35,14 @@ class ChainError(Exception):
 
 def sha256_bytes(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
+
+def sha256_file(path: Path) -> str:
+    h = hashlib.sha256()
+    with path.open("rb") as f:
+        for chunk in iter(lambda: f.read(1024 * 1024), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
 
 
 def canonical_json_bytes(obj: Any) -> bytes:
@@ -49,6 +62,17 @@ def canonical_json_sha256(obj: Any) -> str:
 def load_json(path: Path) -> Any:
     with path.open("r", encoding="utf-8") as f:
         return json.load(f)
+
+def file_ref(root: Path, rel_path: str) -> dict[str, Any]:
+    path = root / rel_path
+    if not path.exists():
+        raise ChainError(f"required source file missing: {rel_path}")
+    return {
+        "path": rel_path,
+        "sha256": sha256_file(path),
+        "bytes": path.stat().st_size,
+    }
+
 
 
 def write_json_atomic(path: Path, obj: Any) -> None:
@@ -497,4 +521,200 @@ def build_all_index(
         "generated_at": generated_at,
         "source_ledger": "record-chain/hash-chain/main.chain.jsonl",
         "authority": "derived index; main.chain.jsonl is authoritative",
+    }
+
+
+def build_native_record_chain_head_commitment(root: Path) -> dict[str, Any]:
+    """Build stable OTS/archive commitment for the native record-chain head.
+
+    Native authoritative coverage is record-index based, not legacy JSONL based
+    and not batch-manifest based.
+    """
+    root = root.resolve()
+
+    chain_tip_rel = "record-chain/chain-tip.json"
+    record_index_rel = "record-chain/indexes/record-index.json"
+    guardian_state_rel = "record-chain/indexes/guardian-state.json"
+    statistics_rel = "record-chain/indexes/statistics.json"
+    batch_index_rel = "record-chain/indexes/batch-index.json"
+
+    chain_tip = load_json(root / chain_tip_rel)
+    record_index = load_json(root / record_index_rel)
+
+    if chain_tip.get("schema") != "trinityaccord.chain-tip.v1":
+        raise ChainError(f"unexpected chain-tip schema: {chain_tip.get('schema')}")
+    if record_index.get("schema") != "trinityaccord.record-index.v1":
+        raise ChainError(f"unexpected record-index schema: {record_index.get('schema')}")
+
+    chain_id = chain_tip.get("chain_id")
+    latest_record_id = chain_tip.get("latest_record_id")
+    latest_record_index = chain_tip.get("latest_record_index")
+    native_record_count = chain_tip.get("native_record_count")
+    latest_record_sha256 = chain_tip.get("latest_record_sha256")
+    latest_batch_id = chain_tip.get("latest_batch_id")
+    latest_batch_manifest_sha256 = chain_tip.get("latest_batch_manifest_sha256")
+    genesis_batch_manifest_sha256 = chain_tip.get("genesis_batch_manifest_sha256")
+
+    if not isinstance(chain_id, str) or not chain_id:
+        raise ChainError("chain-tip.chain_id missing")
+    if not isinstance(latest_record_id, str) or not latest_record_id.startswith("R-"):
+        raise ChainError(f"invalid latest_record_id: {latest_record_id!r}")
+    if not isinstance(latest_record_index, int) or latest_record_index < 1:
+        raise ChainError(f"invalid latest_record_index: {latest_record_index!r}")
+    if not isinstance(native_record_count, int) or native_record_count < 1:
+        raise ChainError(f"invalid native_record_count: {native_record_count!r}")
+    if not is_hash_hex(latest_record_sha256):
+        raise ChainError(f"invalid latest_record_sha256: {latest_record_sha256!r}")
+
+    if latest_record_index != native_record_count:
+        raise ChainError(
+            f"latest_record_index must equal native_record_count for current native sequence: "
+            f"{latest_record_index} != {native_record_count}"
+        )
+
+    records = record_index.get("records")
+    if not isinstance(records, list):
+        raise ChainError("record-index.records must be list")
+    if len(records) != native_record_count:
+        raise ChainError(
+            f"record-index count mismatch: record-index={len(records)} "
+            f"chain-tip.native_record_count={native_record_count}"
+        )
+
+    record_refs: list[dict[str, Any]] = []
+    record_ids: list[str] = []
+    record_sha256s: list[str] = []
+
+    for i, item in enumerate(records, start=1):
+        if not isinstance(item, dict):
+            raise ChainError(f"record-index.records[{i}] is not object")
+
+        expected_record_id = f"R-{i:09d}"
+        record_id = item.get("record_id")
+        record_sha256 = item.get("record_sha256")
+        path = item.get("path")
+
+        if record_id != expected_record_id:
+            raise ChainError(
+                f"record-index sequence mismatch at {i}: expected {expected_record_id}, got {record_id}"
+            )
+        if not is_hash_hex(record_sha256):
+            raise ChainError(f"record-index.records[{i}].record_sha256 invalid")
+        if not isinstance(path, str) or not path.startswith("record-chain/records/"):
+            raise ChainError(f"record-index.records[{i}].path invalid: {path!r}")
+
+        record_path = root / path
+        if not record_path.exists():
+            raise ChainError(f"record file missing: {path}")
+
+        record_data = load_json(record_path)
+        if record_data.get("record_id") != record_id:
+            raise ChainError(f"{path}: record_id mismatch")
+        if record_data.get("record_sha256") != record_sha256:
+            raise ChainError(f"{path}: record_sha256 mismatch")
+
+        record_ids.append(record_id)
+        record_sha256s.append(record_sha256)
+        record_refs.append({
+            "record_id": record_id,
+            "record_sha256": record_sha256,
+            "record_type": item.get("record_type"),
+            "path": path,
+        })
+
+    latest_item = records[-1]
+    if latest_item.get("record_id") != latest_record_id:
+        raise ChainError(
+            f"latest record mismatch: record-index={latest_item.get('record_id')} "
+            f"chain-tip={latest_record_id}"
+        )
+    if latest_item.get("record_sha256") != latest_record_sha256:
+        raise ChainError("latest record sha mismatch between record-index and chain-tip")
+
+    latest_record_rel = f"record-chain/records/{latest_record_id}.json"
+    latest_record = load_json(root / latest_record_rel)
+    if latest_record.get("record_id") != latest_record_id:
+        raise ChainError("latest record file record_id mismatch")
+    if latest_record.get("record_index") != latest_record_index:
+        raise ChainError("latest record file record_index mismatch")
+    if latest_record.get("record_sha256") != latest_record_sha256:
+        raise ChainError("latest record file record_sha256 mismatch")
+
+    auxiliary_batch_refs: list[dict[str, Any]] = []
+    batch_index_path = root / batch_index_rel
+    if batch_index_path.exists():
+        batch_index = load_json(batch_index_path)
+        if batch_index.get("schema") != "trinityaccord.batch-index.v1":
+            raise ChainError(f"unexpected batch-index schema: {batch_index.get('schema')}")
+        for batch in batch_index.get("batches", []):
+            if not isinstance(batch, dict):
+                continue
+            manifest_path = batch.get("path")
+            if not isinstance(manifest_path, str):
+                continue
+            full = root / manifest_path
+            if not full.exists():
+                raise ChainError(f"batch manifest missing: {manifest_path}")
+            batch_manifest = load_json(full)
+            auxiliary_batch_refs.append({
+                "batch_id": batch.get("batch_id"),
+                "path": manifest_path,
+                "file_sha256": sha256_file(full),
+                "batch_manifest_sha256": batch_manifest.get("batch_manifest_sha256"),
+                "first_record_index": batch_manifest.get("first_record_index"),
+                "last_record_index": batch_manifest.get("last_record_index"),
+                "record_count": batch_manifest.get("record_count"),
+                "coverage_is_auxiliary": True,
+            })
+
+    if latest_batch_id and auxiliary_batch_refs:
+        matching = [b for b in auxiliary_batch_refs if b.get("batch_id") == latest_batch_id]
+        if not matching:
+            raise ChainError(f"chain-tip.latest_batch_id not found in batch-index: {latest_batch_id}")
+        if matching[0].get("batch_manifest_sha256") != latest_batch_manifest_sha256:
+            raise ChainError("latest batch manifest sha mismatch between chain-tip and batch manifest")
+
+    source_files = {
+        "chain_tip": file_ref(root, chain_tip_rel),
+        "record_index": file_ref(root, record_index_rel),
+        "latest_record": file_ref(root, latest_record_rel),
+        "guardian_state": file_ref(root, guardian_state_rel),
+        "statistics": file_ref(root, statistics_rel),
+        "batch_index": file_ref(root, batch_index_rel),
+    }
+
+    return {
+        "schema": NATIVE_CHAIN_HEAD_COMMITMENT_SCHEMA,
+        "chain_id": chain_id,
+        "chain_version": 1,
+        "source_semantics": NATIVE_HEAD_SOURCE_SEMANTICS,
+        "native_record_count": native_record_count,
+        "latest_record_id": latest_record_id,
+        "latest_record_index": latest_record_index,
+        "latest_record_sha256": latest_record_sha256,
+        "latest_record_type": latest_record.get("record_type"),
+        "genesis_batch_manifest_sha256": genesis_batch_manifest_sha256,
+        "latest_batch_id": latest_batch_id,
+        "latest_batch_manifest_sha256": latest_batch_manifest_sha256,
+        "record_coverage": {
+            "source": "record-chain/indexes/record-index.json",
+            "first_record_id": record_ids[0],
+            "last_record_id": record_ids[-1],
+            "record_count": len(record_refs),
+            "record_ids_sha256": canonical_json_sha256(record_ids),
+            "record_sha256s_sha256": canonical_json_sha256(record_sha256s),
+            "records": record_refs,
+        },
+        "auxiliary_batch_coverage": {
+            "source": "record-chain/indexes/batch-index.json",
+            "batches": auxiliary_batch_refs,
+            "note": "Batch manifests are auxiliary and may lag native record-index; native record coverage is defined by record-index.",
+        },
+        "source_files": source_files,
+        "canonicalization": "json.sort_keys.no_whitespace.utf8.allow_nan_false.v1",
+        "legacy_main_chain_jsonl_is_not_source": True,
+        "ots_input_semantics": (
+            "stable native record-chain head commitment; excludes volatile generated_at fields; "
+            "binds chain-tip, record-index, all native record refs, guardian-state, statistics, and auxiliary batch metadata"
+        ),
     }
