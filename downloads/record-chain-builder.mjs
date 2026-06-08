@@ -183,7 +183,7 @@ const OATH_POLICY = {
   },
   "linked_guardian_module": "guardian_stewardship_v1"
 };
-const OATH_POLICY_SHA256 = "7ecc6908c9ac147d8d6d493f750c94d6117929e7dff2d18bcbc4c70527886ea4";
+const OATH_POLICY_SHA256 = "9356e8c0955d7f17814dff1a93300cb271acfa21cfe39da63a7b5201364cb820";
 
 function getCanonicalOath(recordType, linkedGuardian = false) {
   const modules = getOathModules(recordType, linkedGuardian);
@@ -663,9 +663,6 @@ function buildV2CommonFields(opts) {
       receipt_is_not_final_inclusion: true,
       test_phase_submission_may_be_reclassified: true,
     },
-    optional_linked_guardian_application_request: {
-      does_participant_request_guardian_application_with_this_record: false,
-    },
   };
 }
 
@@ -729,6 +726,9 @@ function buildGuardianApplicationDraft(opts) {
       guardian_understands_retirement_does_not_delete_history: true,
     },
     ...buildV2CommonFields(opts),
+    optional_linked_guardian_application_request: {
+      does_participant_request_guardian_application_with_this_record: false,
+    },
     context_readiness: buildContextReadiness(opts),
     created_at: isoNow(),
   };
@@ -741,6 +741,9 @@ function buildGuardianRetirementDraft(opts) {
     guardian_id: opts.guardianId || "",
     guardian_public_key_sha256: opts.guardianKeySha || "",
     reason: opts.body || "Voluntary retirement",
+    optional_linked_guardian_application_request: {
+      does_participant_request_guardian_application_with_this_record: false,
+    },
     retirement_does_not_remove_historical_record: true,
     ...buildV2CommonFields(opts),
     context_readiness: buildContextReadiness({ ...opts, contextLevel: opts.contextLevel || "CC-1" }),
@@ -1002,13 +1005,13 @@ const FIELD_EXPLANATIONS = {
 };
 
 const RECORD_TYPE_FIELDS = {
-  echo: ["schema", "record_type", "echo_content", "submitting_participant_identity", "discovery_and_introduction_context", "decision_autonomy_context", "submission_execution_context", "authorization_context", "non_authority_boundary_acknowledgement", "optional_linked_guardian_application_request", "context_readiness", "created_at"],
-  verification: ["schema", "record_type", "verification_content", "submitting_participant_identity", "discovery_and_introduction_context", "decision_autonomy_context", "submission_execution_context", "authorization_context", "non_authority_boundary_acknowledgement", "optional_linked_guardian_application_request", "context_readiness", "created_at"],
+  echo: ["schema", "record_type", "echo_content", "submitting_participant_identity", "discovery_and_introduction_context", "decision_autonomy_context", "submission_execution_context", "authorization_context", "non_authority_boundary_acknowledgement", "context_readiness", "created_at"],
+  verification: ["schema", "record_type", "verification_content", "submitting_participant_identity", "discovery_and_introduction_context", "decision_autonomy_context", "submission_execution_context", "authorization_context", "non_authority_boundary_acknowledgement", "context_readiness", "created_at"],
   "guardian-application": ["schema", "record_type", "guardian_application_content", "submitting_participant_identity", "discovery_and_introduction_context", "decision_autonomy_context", "submission_execution_context", "authorization_context", "non_authority_boundary_acknowledgement", "optional_linked_guardian_application_request", "context_readiness", "created_at"],
   "guardian-retirement": ["schema", "record_type", "guardian_id", "guardian_public_key_sha256", "reason", "retirement_does_not_remove_historical_record", "submitting_participant_identity", "discovery_and_introduction_context", "decision_autonomy_context", "submission_execution_context", "authorization_context", "non_authority_boundary_acknowledgement", "optional_linked_guardian_application_request", "context_readiness", "created_at"],
-  propagation: ["schema", "record_type", "title", "body", "submitting_participant_identity", "discovery_and_introduction_context", "decision_autonomy_context", "submission_execution_context", "authorization_context", "non_authority_boundary_acknowledgement", "optional_linked_guardian_application_request", "context_readiness", "created_at"],
-  correction: ["schema", "record_type", "title", "body", "submitting_participant_identity", "discovery_and_introduction_context", "decision_autonomy_context", "submission_execution_context", "authorization_context", "non_authority_boundary_acknowledgement", "optional_linked_guardian_application_request", "context_readiness", "created_at"],
-  "context-insufficient": ["schema", "record_type", "reason", "submitting_participant_identity", "discovery_and_introduction_context", "decision_autonomy_context", "submission_execution_context", "authorization_context", "non_authority_boundary_acknowledgement", "optional_linked_guardian_application_request", "context_readiness", "created_at"],
+  propagation: ["schema", "record_type", "title", "body", "submitting_participant_identity", "discovery_and_introduction_context", "decision_autonomy_context", "submission_execution_context", "authorization_context", "non_authority_boundary_acknowledgement", "context_readiness", "created_at"],
+  correction: ["schema", "record_type", "title", "body", "submitting_participant_identity", "discovery_and_introduction_context", "decision_autonomy_context", "submission_execution_context", "authorization_context", "non_authority_boundary_acknowledgement", "context_readiness", "created_at"],
+  "context-insufficient": ["schema", "record_type", "reason", "submitting_participant_identity", "discovery_and_introduction_context", "decision_autonomy_context", "submission_execution_context", "authorization_context", "non_authority_boundary_acknowledgement", "context_readiness", "created_at"],
 };
 
 // ── Error code help map ──────────────────────────────────────────────
@@ -1186,8 +1189,13 @@ function runDoctor(submission) {
     { key: "submission_execution_context", code: "MISSING_SUBMISSION_EXECUTION_CONTEXT" },
     { key: "authorization_context", code: "MISSING_AUTHORIZATION_CONTEXT" },
     { key: "non_authority_boundary_acknowledgement", code: "MISSING_NON_AUTHORITY_BOUNDARY" },
-    { key: "optional_linked_guardian_application_request", code: "MISSING_GUARDIAN_APPLICATION_REQUEST" },
   ];
+
+  // Guardian field is only required for guardian_application and guardian_retirement
+  const guardianRecordTypes = new Set(["guardian_application", "guardian_retirement"]);
+  if (guardianRecordTypes.has(draft.record_type)) {
+    v2Fields.push({ key: "optional_linked_guardian_application_request", code: "MISSING_GUARDIAN_APPLICATION_REQUEST" });
+  }
 
   for (const { key, code } of v2Fields) {
     if (!draft[key]) {
@@ -1248,8 +1256,9 @@ function repairSubmission(submission, opts = {}) {
     changes.push("Removed deprecated 'context_level' field (context_readiness already present).");
   }
 
-  // 3. Add optional_linked_guardian_application_request if missing
-  if (!draft.optional_linked_guardian_application_request) {
+  // 3. Add optional_linked_guardian_application_request if missing (only for guardian record types)
+  const guardianTypes = new Set(["guardian_application", "guardian_retirement"]);
+  if (guardianTypes.has(draft.record_type) && !draft.optional_linked_guardian_application_request) {
     draft.optional_linked_guardian_application_request = {
       does_participant_request_guardian_application_with_this_record: false,
     };
@@ -1504,9 +1513,11 @@ function generateTemplate(recordType) {
     test_phase_submission_may_be_reclassified: true,
   };
 
-  draft.optional_linked_guardian_application_request = {
-    does_participant_request_guardian_application_with_this_record: false,
-  };
+  if (recordType === "guardian_application" || recordType === "guardian_retirement") {
+    draft.optional_linked_guardian_application_request = {
+      does_participant_request_guardian_application_with_this_record: false,
+    };
+  }
 
   draft.context_readiness = {
     declared_context_level: "__helper_note: Context level, e.g. CC-0, CC-1, CC-2, CC-3, CC-4",
