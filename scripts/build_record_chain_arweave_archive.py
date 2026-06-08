@@ -265,7 +265,7 @@ def build_archive_manifest(mode: str) -> None:
             and native_source.get("native_record_count") == native_record_count
             and existing.get("arweave", {}).get("txid")
         ):
-            print(f"Native archive for {latest_record_id} already has txid; skipping.")
+            print(f"No new Arweave archive needed: native archive for {latest_record_id} already has txid; skipping.")
             return
 
     # Compute deterministic archive ID from native source
@@ -287,7 +287,7 @@ def build_archive_manifest(mode: str) -> None:
         if existing_manifest_path.exists():
             existing = read_json(existing_manifest_path)
             if existing.get("arweave", {}).get("txid"):
-                print(f"Archive {archive_id} already has txid; skipping.")
+                print(f"No new Arweave archive needed: archive {archive_id} already has txid; skipping.")
                 return
         print(f"Archive {archive_id} exists locally but no txid; will process.")
     else:
