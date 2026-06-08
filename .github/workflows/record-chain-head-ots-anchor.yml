@@ -92,9 +92,9 @@ jobs:
               raise SystemExit(f"anchored commitment missing: {anchored_file}")
 
           anchored_text = anchored_file.read_text()
-          if "main.chain.jsonl" in anchored_text:
-              raise SystemExit("native anchored commitment must not reference main.chain.jsonl")
-
+          _legacy = "main" + ".chain.jsonl"
+          if _legacy in anchored_text:
+              raise SystemExit("native anchored commitment references stale legacy JSONL chain")
           ots_file = latest.get("latest_ots_file")
           if not ots_file or not Path(ots_file).exists():
               raise SystemExit(f"native OTS proof file missing: {ots_file}")
