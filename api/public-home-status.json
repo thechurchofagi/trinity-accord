@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.public-home-status.v2",
-  "generated_at": "2026-06-08T11:28:05.765520+00:00",
+  "generated_at": "2026-06-08T13:27:17.752031+00:00",
   "generated_from": [
     "/api/record-chain-status.json",
     "/api/record-chain-anchor-status.json",
@@ -11,7 +11,7 @@
     "/api/guardian-registry.json",
     "/api/agent-declared-verification-index.json"
   ],
-  "source_digest": "b626336b12fcbb53",
+  "source_digest": "a42e5af26a411b0f",
   "current_record_chain_status": {
     "phase": "production_live",
     "total_records": 34,
@@ -83,9 +83,9 @@
         "current_upload_mode": "live",
         "live_upload_enabled": true,
         "live_upload_implemented": true,
-        "archive_count": 3,
-        "latest_arweave_txid": "hSyp93ZW2cQQcK7lPdqyREr-jCs4Kj5m4vbjlYGBEZ8",
-        "live_archive_count": 1,
+        "archive_count": 4,
+        "latest_arweave_txid": "5qhNn7fSly2ftrY0EUHpdTFUwOZ8IxenFrs4LHblDpw",
+        "live_archive_count": 2,
         "arweave_wallet_address_sha256": "e713712111fc5eaa71d4bbb0d1357f5c6e58acd40202f2c542a6176387c1623e"
       }
     }
@@ -120,8 +120,8 @@
   "arweave_archive_status": {
     "mode": "live",
     "live_upload_implemented": true,
-    "live_archive_count": 1,
-    "latest_txid": "hSyp93ZW2cQQcK7lPdqyREr-jCs4Kj5m4vbjlYGBEZ8",
+    "live_archive_count": 2,
+    "latest_txid": "5qhNn7fSly2ftrY0EUHpdTFUwOZ8IxenFrs4LHblDpw",
     "wallet_address_sha256": "e713712111fc5eaa71d4bbb0d1357f5c6e58acd40202f2c542a6176387c1623e",
     "boundary": {
       "mirror_only": true,
