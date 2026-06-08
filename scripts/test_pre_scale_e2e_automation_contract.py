@@ -25,7 +25,10 @@ def main():
     require("already finalized" in auto, "auto finalizer must be idempotent by receipt_id")
 
     head_ots = (ROOT / ".github/workflows/record-chain-head-ots-anchor.yml").read_text(encoding="utf-8")
-    require("ots_anchor_record_chain_head.py" in head_ots, "head OTS workflow must stamp current head")
+    require("ots_anchor_native_record_chain_head.py" in head_ots, "head OTS workflow must stamp native current head")
+    require("record-chain-native-ots-latest.json" in head_ots, "head OTS workflow must publish native OTS latest")
+    require("main.chain.jsonl" not in head_ots, "head OTS workflow must not use stale legacy JSONL")
+    require("ots_anchor_record_chain_head.py" not in head_ots, "head OTS workflow must not use legacy OTS script")
     require("workflow_run" in head_ots, "head OTS workflow must be chainable after auto finalize")
 
     orchestrator = (ROOT / ".github/workflows/pre-scale-e2e-orchestrator-v2.yml").read_text(encoding="utf-8")
