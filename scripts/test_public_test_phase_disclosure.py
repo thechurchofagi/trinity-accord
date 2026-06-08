@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Test: Public test phase disclosure exists in all required entrypoints."""
+"""Test: Public production phase disclosure exists in all required entrypoints."""
 from __future__ import annotations
 
 import json
@@ -8,25 +8,23 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
-# Human-facing pages must contain these phrases
+# Human-facing pages must contain these phrases (case-insensitive substring match)
 REQUIRED_PHRASES = [
-    "public test",
-    "stabilization",
-    "test data",
-    "historical/test archive",
-    "receipt is not final inclusion",
-    "not active Guardian status",
+    "production live",
+    "not final inclusion",
+    "not active guardian status",
+    "intake-only",
 ]
 
-# Valid public_phase.status values
+# Valid public_phase.status values (updated for production live)
 VALID_PHASE_STATUSES = [
     "mainnet_prelaunch_testing",
     "live_test_active",
+    "production_live",
 ]
 
 # Machine-readable files must have these JSON fields
 REQUIRED_JSON_FIELDS = {
-    "test_phase_submissions_may_move_to_historical_test_archive": True,
     "receipt_is_not_final_inclusion": True,
 }
 
@@ -78,10 +76,6 @@ def check_json_file(rel_path: str) -> None:
     if status not in VALID_PHASE_STATUSES:
         fail(f"{rel_path}: public_phase.status '{status}' not in {VALID_PHASE_STATUSES}")
 
-    # Check test_phase_submissions_may_move_to_historical_test_archive
-    if not phase.get("test_phase_submissions_may_move_to_historical_test_archive"):
-        fail(f"{rel_path}: test_phase_submissions_may_move_to_historical_test_archive not true")
-
     # Check receipt_is_not_final_inclusion
     if not phase.get("receipt_is_not_final_inclusion"):
         # Also check in public_submission_phase for record-chain-status.json
@@ -90,7 +84,7 @@ def check_json_file(rel_path: str) -> None:
         if not tpd.get("receipt_is_not_final_inclusion"):
             fail(f"{rel_path}: receipt_is_not_final_inclusion not true")
 
-    ok(f"{rel_path} contains required test-phase JSON fields")
+    ok(f"{rel_path} contains required production-phase JSON fields")
 
 
 def main() -> None:
@@ -100,7 +94,7 @@ def main() -> None:
     for jf in JSON_FILES:
         check_json_file(jf)
 
-    print("\n=== ALL PUBLIC TEST PHASE DISCLOSURE TESTS PASSED ===")
+    print("\n=== ALL PUBLIC PRODUCTION PHASE DISCLOSURE TESTS PASSED ===")
 
 
 if __name__ == "__main__":
