@@ -136,6 +136,7 @@ GROUPS = {
         ["python3", "scripts/test_p0_main_required_commands.py"],
         ["python3", "scripts/test_p0_uses_public_core_consistency.py"],
         ["python3", "scripts/test_deep_integrity_includes_pages_build.py"],
+        ["python3", "scripts/test_record_chain_write_path_guard_contract.py"],
 
         # Generated drift
         ["python3", "scripts/generate_public_home_status.py", "--check"],
