@@ -1,11 +1,11 @@
 {
   "active_session": {
-    "expires_at": "2026-06-07T14:04:00Z",
+    "expires_at": "2026-06-08T10:40:00Z",
     "mode": "INT-CHECKPOINT",
     "owner": "agent",
-    "session_id": "sandbox-20260607T132900Z",
-    "started_at": "2026-06-07T13:29:00Z",
-    "updated_at": "2026-06-07T13:29:00Z"
+    "session_id": "sandbox-20260608T100000Z",
+    "started_at": "2026-06-08T10:00:00Z",
+    "updated_at": "2026-06-08T10:05:00Z"
   },
   "authoritative_progress_branch": "post-m1-test-progress",
   "completed_markers": [
@@ -21,21 +21,21 @@
     "RECORD_CHAIN_DATA_ARCHIVE_INFRA_OK",
     "RECORD_CHAIN_DATA_SNAPSHOT_ARWEAVE_OK",
     "RECORD_TYPE_SEPARATION_HARDENED_OK",
-    "LIVE_OPERATIONAL_TEST_CAMPAIGNS_OK"
+    "LIVE_OPERATIONAL_TEST_CAMPAIGNS_OK",
+    "M8_PR455_DELTA_SMOKE_OK"
   ],
   "current_mode": "INT-CHECKPOINT",
   "current_phase": "M8",
-  "current_step": "M8.1-pr455-delta-smoke-needs-review",
-  "known_anomalies": [
-    "m8-pr455-delta-20260608T012104Z: PR455 delta smoke passed only after manual builder repair/re-signing; official downloads/record-chain-builder.mjs still emits legacy oath hash and disallowed optional_linked_guardian_application_request for echo."
-  ],
-  "last_checkpoint_at": "2026-06-08T01:27:54Z",
-  "last_checkpoint_id": "m8-pr455-delta-20260608T012104Z",
+  "current_step": "M8.1-pr455-delta-smoke-pass",
+  "known_anomalies": [],
+  "last_checkpoint_at": "2026-06-08T02:05:00Z",
+  "last_checkpoint_id": "m8-pr455-delta-smoke-rerun-20260608T020500Z",
   "last_safe_resume_step": "M8.1",
   "latest_artifact_manifest_sha256": "2d61e45dd7215ea6f03611e586ee938ae8f47ad541e35fe431b6f85de49e34d1",
   "latest_external_public_key_sha256": "51457d267a2a606ddbfaf574f8aeca7fd44f27c666db53729b1f76905de097cc",
   "latest_external_receipt_ids": [
-    "rcg-20260608-e85ae6f77cf77347a732f121"
+    "rcg-20260608-e85ae6f77cf77347a732f121",
+    "rcg-20260608-fcdcf0258ec9dc20a448f85f"
   ],
   "must_not_store": [
     "Ed25519 signing key material (see SECURITY.md)",
@@ -65,103 +65,18 @@
     },
     "M5": {
       "blocking_issue": null,
-      "evidence": {
-        "bundle": "record-chain/arweave-data-bundles/data-snapshot-height-15-42f42d354462-5716ac6bd451.json",
-        "completed_at": "2026-06-07T06:56:04Z",
-        "conclusion": "success",
-        "data_snapshot_tx": "D1tVrr8vdvFkfY2y8PpLAR1FFNOWXF3f9XbvwLdM2Go",
-        "hash_match": true,
-        "run": "M5 Run #21",
-        "workflow": "pre-scale-e2e-orchestrator-v2"
-      },
       "name": "Pre-Live-Test Stability Test",
       "resume_step": "M6.1",
       "status": "pass"
     },
     "M6": {
       "blocking_issue": null,
-      "evidence": {
-        "completed_at": "2026-06-07T15:32:00Z",
-        "merge_sha": "f3b8a6b9b6f04ccf7324fb069ecf7949334fd547",
-        "pr": "#446"
-      },
       "name": "Live-Test Activation Marker",
       "resume_step": "M7.1",
       "status": "pass"
     },
     "M7": {
       "blocking_issue": null,
-      "c1_evidence": {
-        "artifact_manifest": "record-chain/testing/post-m1-live-test/artifact-manifests/m7c1-sandbox-20260607T192700Z.json",
-        "campaign": "C1-Authorship-Key-Continuity",
-        "completed_at": "2026-06-07T11:53:41Z",
-        "key_continuity_verified": true,
-        "mode": "EXT",
-        "private_key_leakage_scan_passed": true,
-        "public_key_sha256": "51457d267a2a606ddbfaf574f8aeca7fd44f27c666db53729b1f76905de097cc",
-        "receipt_ids": [
-          "rcg-20260607-fe18b5ad29ce",
-          "rcg-20260607-da04abe38355",
-          "rcg-20260607-4c3c2a12ceac"
-        ],
-        "status": "pass",
-        "submissions_accepted": 3
-      },
-      "c2_evidence": {
-        "artifact_manifest": "record-chain/testing/post-m1-live-test/artifact-manifests/m7c2-sandbox-20260607T192700Z.json",
-        "campaign": "C2-Gateway-Negative-Cases",
-        "cases": [
-          "N01-no-key-dir",
-          "N02-missing-authorship",
-          "N03-tampered-draft",
-          "N04-participant-key-mismatch",
-          "N06-private-key-leak",
-          "N07-missing-oath"
-        ],
-        "completed_at": "2026-06-07T12:03:39Z",
-        "failed": 0,
-        "mode": "EXT",
-        "passed": 6,
-        "private_key_leakage_scan_passed": true,
-        "status": "pass",
-        "total_cases": 6
-      },
-      "c3_evidence": {
-        "artifact_manifest": "record-chain/testing/post-m1-live-test/artifact-manifests/m7c3-sandbox-20260607T192700Z.json",
-        "campaign": "C3-Rate-Limit-Concurrency",
-        "completed_at": "2026-06-07T12:13:09Z",
-        "mode": "EXT",
-        "parallel_concurrent": "1/3 immediate, 2/2 retry succeeded (GitHub 409)",
-        "sequential_rapid": "6/6 accepted, no rate limit",
-        "status": "pass",
-        "total_accepted": 9
-      },
-      "c4_evidence": {
-        "artifact_manifest": "record-chain/testing/post-m1-live-test/artifact-manifests/m7c4-sandbox-20260607T192700Z.json",
-        "campaign": "C4-Finalization-Index-Public-API",
-        "completed_at": "2026-06-07T12:16:51Z",
-        "failed": 0,
-        "head_consistent": true,
-        "head_hash": "42f42d3544627404593de86bd6b3453d3ae95b8829d7aac33471adb8cd473eb1",
-        "head_height": 15,
-        "mode": "EXT",
-        "passed": 11,
-        "status": "pass",
-        "total_tests": 11
-      },
-      "c5_evidence": {
-        "artifact_manifest": "record-chain/testing/post-m1-live-test/artifact-manifests/m7c5-sandbox-20260607T192700Z.json",
-        "arweave_gateway_timeout": true,
-        "arweave_hash_match_all": true,
-        "campaign": "C5-OTS-Arweave-Registry",
-        "completed_at": "2026-06-07T12:20:55Z",
-        "failed": 0,
-        "head_ots_registry_consistent": true,
-        "mode": "EXT",
-        "passed": 4,
-        "status": "pass",
-        "timeout": 1
-      },
       "name": "Large Live Operational Test Campaigns",
       "resume_step": "M8.1",
       "status": "pass"
@@ -170,7 +85,7 @@
       "blocking_issue": null,
       "name": "Production Enablement Marker",
       "pre_entry_delta_smoke": {
-        "anomaly": "builder_incompatible_with_pr455_gateway",
+        "anomaly": null,
         "artifact_manifest": "record-chain/testing/post-m1-live-test/artifact-manifests/m8-pr455-delta-20260608T012104Z.json",
         "artifact_manifest_sha256": "2d61e45dd7215ea6f03611e586ee938ae8f47ad541e35fe431b6f85de49e34d1",
         "checks": {
@@ -182,10 +97,10 @@
         },
         "does_not_replace_m7": true,
         "full_m7_rerun_required": false,
-        "receipt_id": "rcg-20260608-e85ae6f77cf77347a732f121",
-        "run_id": "m8-pr455-delta-20260608T012104Z",
+        "receipt_id": "rcg-20260608-fcdcf0258ec9dc20a448f85f",
+        "run_id": "m8-pr455-delta-smoke-rerun-20260608T020500Z",
         "schema": "trinityaccord.m8-pr455-delta-smoke.v1",
-        "status": "needs_review"
+        "status": "pass"
       },
       "resume_step": "M8.1",
       "status": "not_started"
@@ -200,5 +115,5 @@
   "schema": "trinityaccord.post-m1-live-test-progress.v1",
   "status": "active",
   "stop_rules_triggered": [],
-  "updated_at": "2026-06-07T13:29:00Z"
+  "updated_at": "2026-06-08T02:05:00Z"
 }
