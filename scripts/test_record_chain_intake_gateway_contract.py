@@ -164,14 +164,8 @@ def main() -> None:
     import hashlib
     wrong_readback = "This is not the canonical oath text"
     policy = json.loads((ROOT / "api" / "record-chain-oath-policy.v1.json").read_text())
-    # Exclude API metadata fields not in builder's embedded OATH_POLICY
-    _metadata_keys = {
-        "oath_policy_sha256",
-        "oath_policy_sha256_semantics",
-        "canonical_oath_text_hash_is_record_type_specific",
-    }
-    policy_core = {k: v for k, v in policy.items() if k not in _metadata_keys}
-    policy_json = json.dumps(policy_core, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
+    # Hash full policy JSON (same as gateway validation.py)
+    policy_json = json.dumps(policy, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
     policy_sha = hashlib.sha256(policy_json.encode("utf-8")).hexdigest()
 
     # Build canonical oath for echo
