@@ -620,6 +620,17 @@ def main() -> int:
         fail(f"record-chain write-path guard contract failed: {result.stderr}\n{result.stdout}")
     ok("record-chain write-path guard contract")
 
+    # External-agent full-auto append -> OTS -> live Arweave pipeline contract
+    result = subprocess.run(
+        [sys.executable, "scripts/test_external_agent_full_auto_pipeline_contract.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"external-agent full-auto pipeline contract failed: {result.stderr}\n{result.stdout}")
+    ok("external-agent full-auto pipeline contract")
+
     print("\n=== ALL CURRENT SYSTEM TESTS PASSED ===")
     return 0
 
