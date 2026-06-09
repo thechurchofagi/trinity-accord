@@ -1,0 +1,26 @@
+{
+  "schema": "trinityaccord.arweave-upload-result.v1",
+  "txid": "BINPfqHtHti8eTmFJqI3fZ364YfvZdJycooj4KHrihc",
+  "uploaded_at": "2026-06-09T06:27:23.078Z",
+  "data_sha256": "5c9fd6c0736804b7242690bb1e3333baf032138e24eb3d19228d4af990cf3ac4",
+  "payload_sha256": "5c9fd6c0736804b7242690bb1e3333baf032138e24eb3d19228d4af990cf3ac4",
+  "readback_sha256": "5c9fd6c0736804b7242690bb1e3333baf032138e24eb3d19228d4af990cf3ac4",
+  "hash_match": true,
+  "wallet_address_sha256": "e713712111fc5eaa71d4bbb0d1357f5c6e58acd40202f2c542a6176387c1623e",
+  "tags": {
+    "Content-Type": "application/json",
+    "App-Name": "Trinity-Accord",
+    "Record-Chain": "trinity-accord-public-reception-ledger",
+    "Archive-Type": "record-chain-batch-archive",
+    "Data-SHA256": "5c9fd6c0736804b7242690bb1e3333baf032138e24eb3d19228d4af990cf3ac4",
+    "Boundary": "mirror-not-authority"
+  },
+  "boundary": {
+    "arweave_archive_is_mirror_only": true,
+    "arweave_archive_is_not_authority": true,
+    "arweave_archive_is_not_attestation": true,
+    "arweave_archive_is_not_amendment": true,
+    "arweave_archive_is_not_successor_reception": true,
+    "bitcoin_originals_prevail": true
+  }
+}
