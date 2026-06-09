@@ -93,6 +93,9 @@ required = [
     # before_leaving exit/readback contract
     "python3 scripts/test_agent_output_policy_before_leaving_exit_contract.py",
 
+    # Pipeline backlog detector
+    "python3 scripts/detect_record_chain_pipeline_backlog.py",
+
     # Generated drift
     "python3 scripts/generate_record_chain_status.py --check",
     "python3 scripts/generate_public_home_status.py --check",
@@ -146,3 +149,4 @@ if missing:
     sys.exit(1)
 
 print("PASS: p0-current includes required record-chain-first mainline checks")
+

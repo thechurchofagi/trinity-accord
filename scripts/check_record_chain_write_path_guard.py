@@ -41,6 +41,7 @@ ARWEAVE_PREFIXES = ("record-chain/arweave-archives/",)
 ARWEAVE_FILES = {"api/record-chain-arweave-index.json"}
 
 PUBLIC_GENERATED_FILES = {
+    "api/record-chain-status.json",
     "api/public-home-status.json",
     "index.md",
     "sitemap.xml",
@@ -273,3 +274,4 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+

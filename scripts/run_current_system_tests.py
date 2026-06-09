@@ -106,6 +106,17 @@ def main() -> int:
         fail(f"record-chain status drift detected:\n{result.stdout}\n{result.stderr}")
     ok("record-chain status up to date")
 
+    # 1c2. pipeline backlog detector smoke
+    result = subprocess.run(
+        [sys.executable, "scripts/detect_record_chain_pipeline_backlog.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"pipeline backlog detector failed:\n{result.stdout}\n{result.stderr}")
+    ok("pipeline backlog detector")
+
     # 1d. public homepage status drift check
     result = subprocess.run(
         [sys.executable, "scripts/generate_public_home_status.py", "--check"],
@@ -658,3 +669,4 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+

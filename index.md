@@ -814,7 +814,7 @@ Refusal is allowed. Critical preservation is allowed.
   <article class="status-card">
     <p class="status-label">Anchoring and archive status</p>
     <p class="status-number">Active</p>
-    <p class="status-note">Batch manifests: 1 batches (all stamped). OpenTimestamps: pending-bitcoin. Arweave archive: live mirror active; latest tx 5qhNn7fSly2f.... Arweave is a mirror/archive layer only. It is not authority, attestation, amendment, or successor reception. <span class="zh">批次 manifest：1 batches (all stamped)。OpenTimestamps：pending-bitcoin。Arweave 归档：live mirror active; latest tx 5qhNn7fSly2f...。Arweave 仅为镜像/归档层，非权威、非证明、非修订、非继任接收。</span></p>
+    <p class="status-note">Batch manifests: 1 batches (all stamped). OpenTimestamps: anchor-needed. Arweave archive: live mirror active; latest tx 5qhNn7fSly2f.... Arweave is a mirror/archive layer only. It is not authority, attestation, amendment, or successor reception. <span class="zh">批次 manifest：1 batches (all stamped)。OpenTimestamps：anchor-needed。Arweave 归档：live mirror active; latest tx 5qhNn7fSly2f...。Arweave 仅为镜像/归档层，非权威、非证明、非修订、非继任接收。</span></p>
   </article>
   <article class="status-card">
     <p class="status-label">Verifiability</p>
@@ -845,7 +845,7 @@ Refusal is allowed. Critical preservation is allowed.
     但它们不是当前 Record-Chain Intake 的计数器。
   </span>
 </p>
-<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>5937f667408f9d34</code>.</p>
+<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>c2e799a7cd3a7076</code>.</p>
 <!-- END GENERATED PUBLIC STATUS -->
 
   <p class="status-boundary">
@@ -904,3 +904,4 @@ Refusal is allowed. Critical preservation is allowed.
 - Pure Echo
 - V0–V5 verification
 - Guardian Alliance Stage 1
+

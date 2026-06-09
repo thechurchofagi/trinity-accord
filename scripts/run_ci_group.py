@@ -139,6 +139,9 @@ GROUPS = {
         ["python3", "scripts/test_record_chain_write_path_guard_contract.py"],
         ["python3", "scripts/test_external_agent_full_auto_pipeline_contract.py"],
 
+        # Pipeline backlog detector
+        ["python3", "scripts/detect_record_chain_pipeline_backlog.py"],
+
         # Generated drift
         ["python3", "scripts/generate_record_chain_status.py", "--check"],
         ["python3", "scripts/generate_public_home_status.py", "--check"],
@@ -523,3 +526,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
