@@ -61,16 +61,21 @@ jobs:
       - name: Prepare Arweave JWK if available
         id: jwk
         env:
-          ARKEY_SECRET: ${{ secrets.ARKEY }}
+          # Prefer secrets, but also honor GitHub environment/repository variables
+          # for deployments where ARKEY was configured as an Actions variable.
+          ARKEY_CONFIGURED: ${{ secrets.ARKEY || vars.ARKEY }}
+          ARWEAVE_JWK_CONFIGURED: ${{ secrets.ARWEAVE_JWK || vars.ARWEAVE_JWK }}
         run: |
           set -euo pipefail
-          if [ -z "${ARKEY_SECRET:-}" ]; then
+          ARWEAVE_JWK_JSON="${ARKEY_CONFIGURED:-${ARWEAVE_JWK_CONFIGURED:-}}"
+          if [ -z "${ARWEAVE_JWK_JSON:-}" ]; then
             echo "has_jwk=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
 
+          echo "::add-mask::$ARWEAVE_JWK_JSON"
           mkdir -p /tmp/arweave-secrets
-          printf '%s' "$ARKEY_SECRET" > /tmp/arweave-secrets/wallet.jwk.json
+          printf '%s' "$ARWEAVE_JWK_JSON" > /tmp/arweave-secrets/wallet.jwk.json
           chmod 600 /tmp/arweave-secrets/wallet.jwk.json
 
           python3 - <<'PY'
