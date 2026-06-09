@@ -172,6 +172,9 @@ GROUPS = {
         ["python3", "scripts/test_phase6_ots_watch_workflow_contract.py"],
         ["python3", "scripts/test_ots_pending_detection.py"],
 
+        # Native OTS upgraded/verified lifecycle
+        ["python3", "scripts/test_native_ots_upgrade_workflow_contract.py"],
+
         # Phase 7A prelaunch guardian application readiness
         ["python3", "scripts/test_phase7a_prelaunch_contracts.py"],
 

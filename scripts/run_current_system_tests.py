@@ -587,6 +587,17 @@ def main() -> int:
         fail(f"phase6 OTS watch workflow contract failed: {result.stderr}\n{result.stdout}")
     ok("phase6 OTS watch workflow contract")
 
+    # 14b. Native OTS upgrade/verify workflow contract
+    result = subprocess.run(
+        [sys.executable, "scripts/test_native_ots_upgrade_workflow_contract.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"native OTS upgrade workflow contract failed: {result.stderr}\n{result.stdout}")
+    ok("native OTS upgrade workflow contract")
+
     # 15. Mainnet prelaunch policy contract
     result = subprocess.run(
         [sys.executable, "scripts/test_mainnet_prelaunch_policy_contract.py"],
