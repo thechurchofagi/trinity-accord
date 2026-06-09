@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.public-home-status.v2",
-  "generated_at": "2026-06-09T02:26:41.332016+00:00",
+  "generated_at": "2026-06-09T03:41:03.199201+00:00",
   "generated_from": [
     "/api/record-chain-status.json",
     "/api/record-chain-anchor-status.json",
@@ -59,7 +59,8 @@
         "latest_anchor_file": "record-chain/ots/native-anchors/native-record-34-R-000000034-aac1593720622ba4-3ca459e1b9b74f60.anchor.json",
         "latest_anchored_file": "record-chain/ots/native-anchors/native-record-34-R-000000034-aac1593720622ba4-3ca459e1b9b74f60.native-record-chain-head-commitment.json",
         "latest_ots_file": "record-chain/ots/native-anchors/native-record-34-R-000000034-aac1593720622ba4-3ca459e1b9b74f60.native-record-chain-head-commitment.json.ots",
-        "ots_status": "pending"
+        "ots_status": "pending",
+        "anchor_needed": true
       },
       "arweave_archive": {
         "arweave_archive_is_mirror_only": true,
@@ -81,7 +82,9 @@
         "latest_archive_id": "archive-native-R-000000034-aff1ad601f17",
         "latest_manifest_path": "record-chain/arweave-archives/archive-native-R-000000034-aff1ad601f17/manifest.json",
         "latest_native_record_sha256": "aac1593720622ba45222856786a6f524b43541439b3f9ade6a573e26b8b987e6",
-        "record_count": 34
+        "record_count": 34,
+        "status": "waiting-for-native-ots",
+        "archive_needed": false
       },
       "anchor_status": {
         "batch_count": 1,
