@@ -4,6 +4,9 @@ title: "Downloads"
 
 # Downloads
 
+## Record-Chain submission builder
+- [record-chain-builder.mjs](/downloads/record-chain-builder.mjs) — zero-clone Node.js builder for external-agent Record-Chain submissions.
+
 ## Verification scripts (local)
 - [verify.py](/downloads/verify.py)
 - [verify.sh](/downloads/verify.sh)
