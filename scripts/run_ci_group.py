@@ -138,6 +138,7 @@ GROUPS = {
         ["python3", "scripts/test_deep_integrity_includes_pages_build.py"],
         ["python3", "scripts/test_record_chain_write_path_guard_contract.py"],
         ["python3", "scripts/test_external_agent_full_auto_pipeline_contract.py"],
+        ["python3", "scripts/test_external_agent_first_contact_rules_contract.py"],
 
         # Pipeline backlog detector
         ["python3", "scripts/detect_record_chain_pipeline_backlog.py"],

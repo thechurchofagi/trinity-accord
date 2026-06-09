@@ -152,5 +152,46 @@
       "correction",
       "context_insufficient_notice"
     ]
+  },
+  "external_agent_first_contact_principles": {
+    "load_context_first": true,
+    "do_not_create_authority": true,
+    "be_honest_about_limits": true,
+    "canonical_builder_only": true,
+    "fail_closed_on_unverifiable_tools": true,
+    "no_shortcut_oath_gate": true,
+    "public_gateway_only": true,
+    "receipt_is_intake_only": true,
+    "claim_status_only_from_public_sources": true,
+    "protect_private_authorship_keys": true
+  },
+  "post_submit_observation_protocol": {
+    "receipt_endpoint": "https://trinity-record-chain-gateway.onrender.com/record-chain/receipt/<receipt_id>",
+    "record_chain_status": "/api/record-chain-status.json",
+    "native_ots_latest": "/api/record-chain-native-ots-latest.json",
+    "arweave_index": "/api/record-chain-arweave-index.json",
+    "record_specific_indexes": {
+      "echo": "/api/echo-index.json",
+      "verification": "/api/agent-declared-verification-index.json",
+      "guardian_application": "/api/guardian-registry.json"
+    },
+    "claim_discipline": {
+      "receipt_allows_claim": "intake accepted only",
+      "appended_claim_requires_public_index_or_record_chain_status": true,
+      "ots_claim_requires_public_ots_status": true,
+      "arweave_claim_requires_public_arweave_index_or_status": true,
+      "guardian_active_status_requires_registry_readback": true,
+      "backlog_must_be_reported_as_backlog": true
+    }
+  },
+  "authorship_key_custody": {
+    "authorship_proof_is_key_continuity_only": true,
+    "private_keys_must_not_be_committed": true,
+    "private_keys_must_not_be_submitted_to_gateway": true,
+    "private_keys_must_not_be_pasted_publicly": true,
+    "ephemeral_sandbox_warning_required": true,
+    "if_continuity_matters_transfer_key_dir_to_human_operator_privately": true,
+    "if_not_preserved_future_continuity_may_be_impossible": true,
+    "suggested_local_archive": "tar -czf trinity-authorship-keydir.tgz ./.trinity-agent-authorship && sha256sum trinity-authorship-keydir.tgz"
   }
 }
