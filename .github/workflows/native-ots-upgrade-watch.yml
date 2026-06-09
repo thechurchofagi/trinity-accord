@@ -1,0 +1,160 @@
+name: Native OTS Upgrade Watch
+
+on:
+  schedule:
+    # Run hourly at minute 42 UTC.
+    - cron: "42 * * * *"
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "Run mode"
+        required: true
+        default: "auto"
+        type: choice
+        options:
+          - verify_only
+          - auto
+
+permissions:
+  contents: write
+
+defaults:
+  run:
+    shell: bash
+
+concurrency:
+  group: native-ots-upgrade-watch
+  cancel-in-progress: false
+
+jobs:
+  watch:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+
+    env:
+      NATIVE_OTS_RUN_ID: "native-ots-watch-${{ github.run_id }}"
+      OTS_UPGRADE_TIMEOUT: "180"
+
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version-file: ".node-version"
+
+      - name: Install Node dependencies
+        run: npm ci
+
+      - name: Install OpenTimestamps client
+        run: |
+          set -euo pipefail
+          python3 -m pip install -r requirements-ots.txt
+          ots --help
+
+      - name: Run Native OTS upgrade workflow contract test
+        run: |
+          set -euo pipefail
+          python3 scripts/test_native_ots_upgrade_workflow_contract.py
+
+      - name: Prepare Arweave JWK if available
+        id: jwk
+        env:
+          ARKEY_SECRET: ${{ secrets.ARKEY }}
+        run: |
+          set -euo pipefail
+          if [ -z "${ARKEY_SECRET:-}" ]; then
+            echo "has_jwk=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          mkdir -p /tmp/arweave-secrets
+          printf '%s' "$ARKEY_SECRET" > /tmp/arweave-secrets/wallet.jwk.json
+          chmod 600 /tmp/arweave-secrets/wallet.jwk.json
+
+          python3 - <<'PY'
+          import json
+          json.load(open("/tmp/arweave-secrets/wallet.jwk.json"))
+          PY
+
+          echo "ARWEAVE_JWK_PATH=/tmp/arweave-secrets/wallet.jwk.json" >> "$GITHUB_ENV"
+          echo "has_jwk=true" >> "$GITHUB_OUTPUT"
+
+      - name: Run native OTS upgrade verify only
+        if: ${{ (github.event_name == 'workflow_dispatch' && github.event.inputs.mode == 'verify_only') || steps.jwk.outputs.has_jwk != 'true' }}
+        run: |
+          set -euo pipefail
+          python3 scripts/run_native_ots_upgrade_verify.py \
+            --run-id "$NATIVE_OTS_RUN_ID" \
+            --verify-only
+
+      - name: Run native OTS upgrade auto
+        if: ${{ steps.jwk.outputs.has_jwk == 'true' && (github.event_name == 'schedule' || github.event.inputs.mode == 'auto') }}
+        run: |
+          set -euo pipefail
+          python3 scripts/run_native_ots_upgrade_verify.py \
+            --run-id "$NATIVE_OTS_RUN_ID"
+
+      - name: Summarize native OTS result
+        if: always()
+        run: |
+          set -euo pipefail
+          SUMMARY="record-chain/audit/native-ots/$NATIVE_OTS_RUN_ID/99-native-ots-summary.json"
+          if [ -f "$SUMMARY" ]; then
+            cat "$SUMMARY"
+          else
+            echo "::warning::Native OTS summary not found: $SUMMARY"
+          fi
+
+      - name: Commit native OTS state if changed
+        if: success()
+        run: |
+          set -euo pipefail
+          SUMMARY="record-chain/audit/native-ots/$NATIVE_OTS_RUN_ID/99-native-ots-summary.json"
+
+          if [ ! -f "$SUMMARY" ]; then
+            echo "No summary found; no production commit."
+            exit 0
+          fi
+
+          RESULT=$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1])).get("result","missing"))' "$SUMMARY")
+          echo "Native OTS result: $RESULT"
+
+          if [ "$RESULT" != "upgraded" ] && [ "$RESULT" != "verified" ] && [ "$RESULT" != "upgraded_archived" ]; then
+            echo "No production commit for result=$RESULT"
+            exit 0
+          fi
+
+          git status --short
+          git add \
+            record-chain/ots/native-anchors/ \
+            record-chain/ots/native-arweave-bundles/ \
+            record-chain/ots/native-arweave-registry.json \
+            api/record-chain-native-ots-arweave-registry.json \
+            api/record-chain-native-ots-latest.json
+
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if [ "$RESULT" = "verified" ]; then
+            git commit -m "chore: sync verified native OTS anchor and registry"
+          elif [ "$RESULT" = "upgraded_archived" ]; then
+            git commit -m "chore: archive upgraded native OTS proof bundle"
+          else
+            git commit -m "chore: sync upgraded native OTS anchor and registry"
+          fi
+          git push
+
+      - name: Upload native OTS audit logs
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: native-ots-watch-audit-${{ github.run_id }}
+          path: record-chain/audit/native-ots/${{ env.NATIVE_OTS_RUN_ID }}/
+          retention-days: 90
+          if-no-files-found: warn

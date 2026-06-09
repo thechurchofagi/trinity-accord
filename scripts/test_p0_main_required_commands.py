@@ -133,6 +133,9 @@ required = [
 
     # Phase 6B test registry contract
     "python3 scripts/test_phase6b_test_registry_contract.py",
+
+    # Native OTS upgraded/verified lifecycle contract
+    "python3 scripts/test_native_ots_upgrade_workflow_contract.py",
 ]
 
 missing = [r for r in required if r not in cmds]
