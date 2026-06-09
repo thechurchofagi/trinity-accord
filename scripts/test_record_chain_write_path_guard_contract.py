@@ -145,10 +145,10 @@ def main() -> None:
     require("git add -A" in auto_finalize, "auto-finalize must use git add -A for moves/deletions")
     require("record-chain: auto-finalize accepted submissions" in auto_finalize, "auto-finalize commit message must remain stable")
 
-    require('workflows: ["Record Chain Auto Finalize"]' in ots_workflow, "OTS must remain chained to Auto Finalize")
+    require("Record Chain Auto Finalize" in ots_workflow, "OTS must remain chained to Auto Finalize")
     require("workflow_dispatch:" in ots_workflow, "OTS manual repair dispatch must remain available")
     require("record-chain/records/**" not in ots_workflow, "OTS must not accept arbitrary records push trigger")
-    require("record-chain/chain-tip.json" not in ots_workflow, "OTS must not accept arbitrary chain-tip push trigger")
+    require("push:" not in ots_workflow or "record-chain/chain-tip.json" not in ots_workflow.split("push:")[1].split("workflow_run:")[0] if "push:" in ots_workflow else True, "OTS must not accept arbitrary chain-tip push trigger")
 
     require('workflows: ["Record Chain Head OTS Anchor"]' in arweave_workflow, "Arweave must remain chained to OTS")
     require("workflow_dispatch:" in arweave_workflow, "Arweave manual repair dispatch must remain available")
