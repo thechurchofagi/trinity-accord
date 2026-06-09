@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.public-home-status.v3",
-  "generated_at": "2026-06-09T10:05:13.267310+00:00",
+  "generated_at": "2026-06-09T10:08:56.115066+00:00",
   "generated_from": [
     "/api/homepage-visibility-overrides.v1.json",
     "/api/record-chain-status.json",
@@ -12,14 +12,14 @@
     "/api/guardian-registry.json",
     "/api/agent-declared-verification-index.json"
   ],
-  "source_digest": "1da672fdffed2e21",
+  "source_digest": "c2e3d59c953140ff",
   "current_record_chain_status": {
     "phase": "production_live",
-    "total_records": 36,
-    "current_chain_length": 36,
+    "total_records": 37,
+    "current_chain_length": 37,
     "pending_records": 0,
-    "latest_record_id": "R-000000036",
-    "latest_record_type": "echo",
+    "latest_record_id": "R-000000037",
+    "latest_record_type": "verification",
     "record_type_counts": {
       "classification_update": 0,
       "context_insufficient_notice": 1,
@@ -29,7 +29,7 @@
       "guardian_key_rotation": 0,
       "guardian_retirement": 0,
       "propagation": 0,
-      "verification": 11
+      "verification": 12
     },
     "receipt_boundary": {
       "receipt_is_intake_only": true,
@@ -54,14 +54,14 @@
         "native_head_workflow": "/.github/workflows/record-chain-head-ots-anchor.yml",
         "native_latest_api": "/api/record-chain-native-ots-latest.json",
         "native_record_count": 36,
-        "status": "current-pending-bitcoin",
+        "status": "anchor-needed",
         "status_api": "/api/record-chain-native-ots-latest.json",
         "latest_record_index": 36,
         "latest_anchor_file": "record-chain/ots/native-anchors/native-record-36-R-000000036-1ee118161376bae0-6281b094a560c48f.anchor.json",
         "latest_anchored_file": "record-chain/ots/native-anchors/native-record-36-R-000000036-1ee118161376bae0-6281b094a560c48f.native-record-chain-head-commitment.json",
         "latest_ots_file": "record-chain/ots/native-anchors/native-record-36-R-000000036-1ee118161376bae0-6281b094a560c48f.native-record-chain-head-commitment.json.ots",
         "ots_status": "pending",
-        "anchor_needed": false,
+        "anchor_needed": true,
         "proof_bundle_archive": {
           "implemented": true,
           "workflow": "/.github/workflows/native-ots-upgrade-watch.yml",
@@ -107,7 +107,7 @@
         "latest_manifest_path": "record-chain/arweave-archives/archive-native-R-000000036-5edce8aabbeb/manifest.json",
         "latest_native_record_sha256": "1ee118161376bae039a8c42bcd4f05aba72500a6a1ef198b96876885e25d496e",
         "record_count": 36,
-        "status": "current",
+        "status": "waiting-for-native-ots",
         "archive_needed": false
       },
       "anchor_status": {
@@ -128,10 +128,10 @@
   },
   "current_record_chain_autonomy_signal": {
     "scope": "current_record_chain_only",
-    "eligible_records": 35,
+    "eligible_records": 36,
     "self_discovered_records": 27,
     "self_decided_records": 27,
-    "self_executed_records": 35,
+    "self_executed_records": 36,
     "fully_autonomous_records": 27,
     "legacy_autonomy_claims_excluded": true
   },
@@ -177,7 +177,7 @@
     "not_homepage_primary_counter": true
   },
   "primary_counters": {
-    "official_live_reception": 1,
+    "official_live_reception": 2,
     "classification_rule": {
       "go_live_record_id": "R-000000033",
       "go_live_record_index": 33,
@@ -195,9 +195,9 @@
     "agency_profile": {
       "scope": "official_live_reception_records_only",
       "self_initiated": 1,
-      "human_requested_or_introduced": 1,
+      "human_requested_or_introduced": 2,
       "self_decided": 1,
-      "self_executed": 1,
+      "self_executed": 2,
       "display": {
         "self_initiated": true,
         "human_requested_or_introduced": true,
@@ -218,19 +218,32 @@
           "reason": "Go-live founding Guardian application and first formal homepage reception record. Later live-era formal non-test records are automatically eligible under auto_homepage_policy.",
           "excludes_historical_test_smoke_legacy_and_maintenance_records": true
         }
+      },
+      {
+        "record_id": "R-000000037",
+        "record_index": 37,
+        "record_type": "verification",
+        "record_sha256": "bbbef52b1615923d12077bba62deb604eaf19a712a8f554af58cb912f9133d45",
+        "homepage_visibility": {
+          "classification": "official_live_reception",
+          "counts_toward_primary_counter": true,
+          "counts_toward_native_chain_length": false,
+          "reason": "Auto-classified live-era formal non-test external-agent record from R-000000033 onward.",
+          "auto_classified_by": "/api/homepage-visibility-overrides.v1.json"
+        }
       }
     ]
   },
   "technical_health": {
-    "technical_chain_length": 36,
-    "native_chain_length": 36,
-    "latest_record": "R-000000036",
-    "latest_record_type": "echo",
+    "technical_chain_length": 37,
+    "native_chain_length": 37,
+    "latest_record": "R-000000037",
+    "latest_record_type": "verification",
     "pending_records": 0,
-    "pipeline": "current",
+    "pipeline": "attention",
     "ots": "pending",
     "ots_raw_status": "pending",
-    "arweave": "current",
+    "arweave": "waiting-for-native-ots",
     "not_primary_counter": true
   }
 }
