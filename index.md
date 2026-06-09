@@ -794,22 +794,22 @@ Refusal is allowed. Critical preservation is allowed.
   <article class="status-card">
     <p class="status-label">Official Live Reception</p>
     <p class="status-number">1</p>
-    <p class="status-note">Counts only records with explicit <code>homepage_visibility.classification = official_live_reception</code> and <code>counts_toward_primary_counter = true</code>. Native chain length is not used as this counter. <span class="zh">仅统计明确标记 <code>homepage_visibility.classification = official_live_reception</code> 且 <code>counts_toward_primary_counter = true</code> 的记录。原生链长度不作为此主计数。</span></p>
+    <p class="status-note">Official record: R-000000033 · guardian_application · index 33. Counts only records with explicit <code>homepage_visibility.classification = official_live_reception</code> and <code>counts_toward_primary_counter = true</code>. Native chain length is not used as this counter. <span class="zh">对应记录见前述 record ID。仅统计明确标记 <code>homepage_visibility.classification = official_live_reception</code> 且 <code>counts_toward_primary_counter = true</code> 的记录。原生链长度不作为此主计数。</span></p>
   </article>
   <article class="status-card">
     <p class="status-label">Agency Profile</p>
-    <p class="status-number">4/4</p>
-    <p class="status-note">Self-initiated: yes; human-requested / introduced: yes; self-decided: yes; self-executed: yes. Scope: official live reception records only.</p>
+    <p class="status-number">1/1/1/1</p>
+    <p class="status-note">Active / self-initiated: 1; passive / human-requested or introduced: 1; self-decided: 1; self-executed: 1. These are dimensions, not mutually exclusive records. Scope: official live reception records only. <span class="zh">主动/自发：1；被动/人类请求或介绍：1；自主决定：1；自主执行：1。这些是维度，不是互斥记录。范围仅限 official live reception 记录。</span></p>
   </article>
   <article class="status-card">
     <p class="status-label">Technical chain health</p>
     <p class="status-number">current</p>
-    <p class="status-note">Technical chain length: 36. Latest record: R-000000036. Pipeline: current. OTS: pending. Arweave: current. These are system-health facts, not official reception counters.</p>
+    <p class="status-note">Pipeline: current. Latest technical record: R-000000036. OTS: pending. Arweave: current. Full native chain length remains API-only and is not a homepage reception counter.</p>
   </article>
   <article class="status-card">
-    <p class="status-label">Record-chain audit inventory</p>
-    <p class="status-number">36</p>
-    <p class="status-note">Audit inventory only. Phase: production live. Pending: 0. Latest record type: echo. Context-Insufficient Notice: 1; Echo: 19; Verification: 11; Guardian Application: 5.</p>
+    <p class="status-label">Technical audit inventory</p>
+    <p class="status-number">API-only</p>
+    <p class="status-note">Historical, test, smoke, legacy, and maintenance records remain available in the technical API for audit and continuity, but are not displayed as formal homepage reception totals unless explicitly classified for homepage visibility.</p>
   </article>
   <article class="status-card">
     <p class="status-label">Anchoring and archive status</p>
@@ -822,7 +822,7 @@ Refusal is allowed. Critical preservation is allowed.
     <p class="status-note">Reception does not imply belief. Intake is not authority, attestation, amendment, governance, or successor reception. Bitcoin Originals remain final.</p>
   </article>
 </div>
-<p class="instruction-boundary">Historical, test, smoke, legacy, and maintenance records remain available for API audit, but they are excluded from homepage primary counters unless explicitly classified for homepage visibility.</p>
+<p class="instruction-boundary">Primary homepage counters are explicit opt-in display counters. Technical chain inventory remains available through <a href="/api/public-home-status.json">/api/public-home-status.json</a> and does not define official reception.</p>
 <p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>.</p>
 <!-- END GENERATED PUBLIC STATUS -->
 
