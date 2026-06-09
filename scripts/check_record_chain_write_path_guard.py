@@ -57,6 +57,7 @@ APPROVED_GATEWAY_PREFIXES = (
 
 APPROVED_ACTIONS_ACTOR = "github-actions[bot]"
 APPROVED_AUTO_FINALIZE_MESSAGE = "record-chain: auto-finalize accepted submissions"
+APPROVED_APPEND_MESSAGE = "Append record-chain entries from Render intake"
 APPROVED_OTS_MESSAGE = "anchor: stamp native record-chain head with OTS"
 APPROVED_ARWEAVE_MESSAGE = "archive: update native record-chain Arweave archive metadata"
 
@@ -208,6 +209,10 @@ def allowed_for_push(
     if cats <= {"auto_finalize", "pending"} and message == APPROVED_AUTO_FINALIZE_MESSAGE:
         ok, reason = require_actions_actor(actor, "auto-finalize")
         return (True, "auto-finalize commit") if ok else (False, reason)
+
+    if cats <= {"auto_finalize", "pending", "public_generated"} and message == APPROVED_APPEND_MESSAGE:
+        ok, reason = require_actions_actor(actor, "append workflow")
+        return (True, "append workflow commit") if ok else (False, reason)
 
     if cats <= {"ots"} and message == APPROVED_OTS_MESSAGE:
         ok, reason = require_actions_actor(actor, "OTS anchor")

@@ -324,6 +324,16 @@ def main() -> int:
     if result.returncode != 0:
         fail(f"M9 native archive workflow contract failed: {result.stderr}\n{result.stdout}")
     ok("M9 native archive workflow contract")
+    # External-agent full-auto pipeline contract
+    result = subprocess.run(
+        [sys.executable, "scripts/test_external_agent_full_auto_pipeline_contract.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"full-auto pipeline contract failed: {result.stderr}\n{result.stdout}")
+    ok("full-auto pipeline contract")
     # 11b. Arweave upload readback contract test
     result = subprocess.run(
         [sys.executable, "scripts/test_arweave_upload_contract.py"],
