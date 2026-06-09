@@ -98,6 +98,9 @@ required = [
     "python3 scripts/generate_public_home_status.py --check",
     "python3 scripts/test_home_public_status_sync.py",
 
+    # Full-auto external agent pipeline
+    "python3 scripts/test_external_agent_full_auto_pipeline_contract.py",
+
     # Zero-clone builder bundle guards (current)
     "python3 scripts/test_formal_builder_bundles_contract.py",
     "python3 scripts/test_external_agent_operation_examples_contract.py",
