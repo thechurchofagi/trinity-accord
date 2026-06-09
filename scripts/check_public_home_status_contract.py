@@ -53,8 +53,14 @@ if "Official Live Reception" not in index_md:
     errors.append("homepage missing Official Live Reception")
 if "Agency Profile" not in index_md:
     errors.append("homepage missing Agency Profile")
-if "Technical chain length:" not in index_md:
-    errors.append("homepage missing downgraded technical chain length display")
+if "Official record: R-000000033" not in index_md:
+    errors.append("homepage missing explicit official record identity")
+if "Active / self-initiated: 1" not in index_md:
+    errors.append("homepage missing active agency count")
+if "passive / human-requested or introduced: 1" not in index_md:
+    errors.append("homepage missing passive agency count")
+if "Full native chain length remains API-only" not in index_md:
+    errors.append("homepage missing API-only native chain boundary")
 if "Native chain length is not used as this counter" not in index_md:
     errors.append("homepage missing native-chain-length boundary for primary counter")
 
