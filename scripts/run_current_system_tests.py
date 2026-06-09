@@ -95,6 +95,17 @@ def main() -> int:
         fail(f"active routes check failed:\n{result.stdout}\n{result.stderr}")
     ok("active public routes check")
 
+    # record-chain-status drift check must run before public-home source_digest check.
+    result = subprocess.run(
+        [sys.executable, "scripts/generate_record_chain_status.py", "--check"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"record-chain status drift detected:\n{result.stdout}\n{result.stderr}")
+    ok("record-chain status up to date")
+
     # 1d. public homepage status drift check
     result = subprocess.run(
         [sys.executable, "scripts/generate_public_home_status.py", "--check"],
