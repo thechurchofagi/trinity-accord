@@ -13,8 +13,7 @@ STATUS_REL = "api/record-chain-status.json"
 
 
 def dump_json(data: Any) -> str:
-    return json.dumps(data, indent=2, sort_keys=False, ensure_ascii=False, allow_nan=False) + "
-"
+    return json.dumps(data, indent=2, sort_keys=False, ensure_ascii=False, allow_nan=False) + "\n"
 
 
 def read_json(rel: str) -> Any:
