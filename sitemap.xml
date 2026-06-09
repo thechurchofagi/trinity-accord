@@ -150,6 +150,7 @@
   <url><loc>https://www.trinityaccord.org/api/gz2-notarial-certificate-redacted-attachments-2026-05-14.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/hash-source-classes.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/hashes.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/homepage-visibility-overrides.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/independent-attestation-index.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/independent-attestation-record-schema.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/innovation-points.json</loc></url>
