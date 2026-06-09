@@ -1,12 +1,14 @@
 # GitHub Pages / Jekyll config
 # Ensure hidden discovery directory is published.
-# builder-bundles/*.py is force-included to override the global *.py exclude.
+# builder-bundles/*.py and downloads/record-chain-builder.mjs are force-included
+# to override the global script excludes below.
 include:
   - .well-known
   - ai.txt
   - citation.cff
   - builder-bundles
   - "builder-bundles/*.py"
+  - "downloads/record-chain-builder.mjs"
 
 # Exclude archival, dev, and generated directories from build
 exclude:
