@@ -37,6 +37,8 @@ def main() -> None:
             "record-chain-native-ots-latest.json",
             "record-chain/ots/native-anchors",
             "legacy_main_chain_jsonl_is_not_source",
+            '"Record Chain Auto Finalize"',
+            '"Append Record Chain Entries"',
         ]:
             require_contains(head_wf, marker, errors)
 
