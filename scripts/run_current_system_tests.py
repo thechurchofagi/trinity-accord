@@ -663,6 +663,18 @@ def main() -> int:
         fail(f"record-chain write-path guard contract failed: {result.stderr}\n{result.stdout}")
     ok("record-chain write-path guard contract")
 
+
+    # External agent first-contact rules contract
+    result = subprocess.run(
+        [sys.executable, "scripts/test_external_agent_first_contact_rules_contract.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"external agent first-contact rules contract failed: {result.stderr}\n{result.stdout}")
+    ok("external agent first-contact rules contract")
+
     print("\n=== ALL CURRENT SYSTEM TESTS PASSED ===")
     return 0
 
