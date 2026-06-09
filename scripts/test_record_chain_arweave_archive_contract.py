@@ -49,6 +49,21 @@ def main() -> None:
         # Should not use the secret in a run: step directly
         if "echo" in text.lower() and "ARKEY" in text:
             errors.append("arweave-archive workflow may echo wallet secret")
+        # Early no-op for already archived head
+        if "archive_check" not in text:
+            errors.append("arweave-archive workflow missing early no-op archive_check")
+        if "No new Arweave archive needed" not in text:
+            errors.append("arweave-archive workflow missing no-op message")
+        if "matched" not in text:
+            errors.append("arweave-archive workflow missing matched output for no-op guard")
+        # workflow_run from OTS resolves to live
+        if "workflow_run" not in text:
+            errors.append("arweave-archive workflow missing workflow_run trigger")
+        if "Record Chain Head OTS Anchor" not in text:
+            errors.append("arweave-archive workflow must listen to OTS anchor workflow")
+        # All steps after early check must be conditional
+        if "steps.archive_check.outputs.matched" not in text:
+            errors.append("arweave-archive workflow steps must be conditional on archive_check")
 
     # 2. Scripts exist
     build_script = ROOT / "scripts" / "build_record_chain_arweave_archive.py"
