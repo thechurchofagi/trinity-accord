@@ -172,6 +172,7 @@ node record-chain-builder.mjs doctor --file submission.json
 - `/api/record-chain-builder-bundles.v1.json` — builder bundles
 - `/api/record-chain-field-helper.v1.json` — field helper with recovery guidance
 - `/api/record-chain-common-field-model.v1.json` — common field model definitions
+- `/api/mission-governance.v1.json` — mission governance
 
 ### Boundary
 
