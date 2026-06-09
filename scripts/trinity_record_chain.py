@@ -381,6 +381,33 @@ def require_authorship(record: dict[str, Any]) -> None:
         raise ValueError(f"formal record_type={rtype} requires authorship_proof")
 
 
+def _guardian_key_for_record(record: dict[str, Any]) -> str | None:
+    """Return the Guardian public-key SHA bound by a Guardian lifecycle record."""
+    rtype = record.get("record_type")
+    if rtype == "guardian_application":
+        content = record.get("guardian_application_content")
+        if isinstance(content, dict):
+            key = content.get("guardian_public_key_sha256")
+            return key if isinstance(key, str) else None
+    if rtype == "guardian_retirement":
+        key = record.get("guardian_public_key_sha256")
+        return key if isinstance(key, str) else None
+    return None
+
+
+def _require_guardian_lifecycle_key_binding(record: dict[str, Any], proof: dict[str, Any]) -> None:
+    """Ensure Guardian lifecycle records are signed by the named Guardian key."""
+    rtype = record.get("record_type")
+    if rtype not in {"guardian_application", "guardian_retirement"}:
+        return
+    proof_key = proof.get("public_key_sha256")
+    guardian_key = _guardian_key_for_record(record)
+    if not guardian_key or guardian_key != proof_key:
+        raise ValueError(
+            f"formal record_type={rtype} guardian_public_key_sha256 must match authorship_proof.public_key_sha256"
+        )
+
+
 def verify_pending_record_authorship(record: dict[str, Any]) -> None:
     rtype = record.get("record_type")
     if rtype not in FORMAL_RECORD_TYPES or rtype in AUTHORSHIP_EXEMPT_TYPES:
@@ -397,7 +424,8 @@ def verify_pending_record_authorship(record: dict[str, Any]) -> None:
     if proof.get("algorithm") != "ed25519":
         raise ValueError(f"formal record_type={rtype} has invalid authorship_proof.algorithm")
 
-    # Import lazily so non-authorship commands do not pay this dependency cost.
+    _require_guardian_lifecycle_key_binding(record, proof)
+
     # Import lazily so non-authorship commands do not pay this dependency cost.
     sys.path.insert(0, str(ROOT / "apps/record_chain_intake_gateway"))
     from gateway.authorship import (  # noqa: WPS433
@@ -854,6 +882,18 @@ def verify_native_records() -> list[str]:
         # --- Phase 6B: authorship_verification_status for formal records ---
         rtype = obj.get("record_type") or ""
         if rtype in FORMAL_RECORD_TYPES and rtype not in AUTHORSHIP_EXEMPT_TYPES:
+            proof = obj.get("authorship_proof") if isinstance(obj.get("authorship_proof"), dict) else {}
+            # Enforce retirement/exit key-continuity for native records. Some
+            # early pre-finalization guardian_application records predate the
+            # stricter application binding, so verify_chain must not retroactively
+            # break on historical intake records. New applications are still
+            # enforced by gateway validation and append-time pending checks.
+            if rtype == "guardian_retirement":
+                try:
+                    _require_guardian_lifecycle_key_binding(obj, proof)
+                except Exception as exc:
+                    errors.append(f"{p}: {exc}")
+
             avs = obj.get("authorship_verification_status")
             if not isinstance(avs, dict):
                 errors.append(f"{p}: formal record_type={rtype} missing authorship_verification_status")
@@ -979,33 +1019,83 @@ def build_indexes(derived_at: str | None = None) -> None:
             "source_record_sha256": rec.get("record_sha256"),
         })
 
-    # --- Native guardian_application records → derived guardian state ---
-    native_guardian_statuses: dict[str, int] = {}
+    # --- Native Guardian lifecycle records → derived guardian state ---
+    # Applications create the native Guardian state entry. Retirement records are
+    # later lifecycle events and must update that derived state instead of being
+    # ignored; otherwise an append-only "exit" would never be visible in the
+    # public Guardian state. This is a derived view only, not an authority layer.
+    native_guardian_entries: list[dict[str, Any]] = []
+    native_guardians_by_id: dict[str, dict[str, Any]] = {}
+    native_guardians_by_key: dict[str, dict[str, Any]] = {}
+
     for p in native_records:
         rec = read_json(p)
-        if rec.get("record_type") != "guardian_application":
+        record_type = rec.get("record_type")
+
+        if record_type == "guardian_application":
+            gac = rec.get("guardian_application_content", {})
+            avs = rec.get("authorship_verification_status", {})
+            verified = avs.get("verified_by_append_before_record", False)
+            guardian_id = gac.get("requested_guardian_identifier")
+            guardian_key = gac.get("guardian_public_key_sha256")
+            is_founding = bool(str(guardian_id or "").endswith("-founding"))
+            if verified:
+                derived = "active_founding_guardian" if is_founding else "active_guardian"
+            else:
+                derived = "pending_verification"
+            entry = {
+                "guardian_id": guardian_id,
+                "guardian_public_key_sha256": guardian_key,
+                "current_derived_status": derived,
+                "source_record_id": rec.get("record_id"),
+                "source_record_path": str(p.relative_to(ROOT)),
+                "source_record_sha256": rec.get("record_sha256"),
+                "verified_by_append_before_record": verified,
+                "is_founding_guardian": is_founding,
+            }
+            native_guardian_entries.append(entry)
+            if isinstance(guardian_id, str) and guardian_id:
+                native_guardians_by_id[guardian_id] = entry
+            if isinstance(guardian_key, str) and guardian_key:
+                native_guardians_by_key[guardian_key] = entry
             continue
-        gac = rec.get("guardian_application_content", {})
-        avs = rec.get("authorship_verification_status", {})
-        verified = avs.get("verified_by_append_before_record", False)
-        is_founding = bool(
-            gac.get("requested_guardian_identifier", "").endswith("-founding")
-        )
-        if verified:
-            derived = "active_founding_guardian" if is_founding else "active_guardian"
-        else:
-            derived = "pending_verification"
-        native_guardian_statuses[derived] = native_guardian_statuses.get(derived, 0) + 1
-        guardian_state["guardians"].append({
-            "guardian_id": gac.get("requested_guardian_identifier"),
-            "guardian_public_key_sha256": gac.get("guardian_public_key_sha256"),
-            "current_derived_status": derived,
-            "source_record_id": rec.get("record_id"),
-            "source_record_path": str(p.relative_to(ROOT)),
-            "source_record_sha256": rec.get("record_sha256"),
-            "verified_by_append_before_record": verified,
-            "is_founding_guardian": is_founding,
-        })
+
+        if record_type == "guardian_retirement":
+            guardian_id = rec.get("guardian_id")
+            guardian_key = rec.get("guardian_public_key_sha256")
+            avs = rec.get("authorship_verification_status", {})
+            verified = avs.get("verified_by_append_before_record", False)
+            target = None
+            if isinstance(guardian_id, str) and guardian_id:
+                target = native_guardians_by_id.get(guardian_id)
+            if target is None and isinstance(guardian_key, str) and guardian_key:
+                target = native_guardians_by_key.get(guardian_key)
+
+            retirement_summary = {
+                "retirement_record_id": rec.get("record_id"),
+                "retirement_record_path": str(p.relative_to(ROOT)),
+                "retirement_record_sha256": rec.get("record_sha256"),
+                "retirement_reason": rec.get("reason"),
+                "retirement_verified_by_append_before_record": verified,
+                "retirement_does_not_remove_historical_record": rec.get("retirement_does_not_remove_historical_record") is True,
+            }
+
+            if target is not None and verified:
+                target["current_derived_status"] = "retired_guardian"
+                target.update(retirement_summary)
+            else:
+                native_guardian_entries.append({
+                    "guardian_id": guardian_id,
+                    "guardian_public_key_sha256": guardian_key,
+                    "current_derived_status": "retirement_notice_unmatched" if verified else "retirement_pending_verification",
+                    **retirement_summary,
+                })
+
+    native_guardian_statuses: dict[str, int] = {}
+    for entry in native_guardian_entries:
+        status_key = str(entry.get("current_derived_status") or "unknown")
+        native_guardian_statuses[status_key] = native_guardian_statuses.get(status_key, 0) + 1
+        guardian_state["guardians"].append(entry)
 
     record_index = {
         "schema": "trinityaccord.record-index.v1",
@@ -1044,6 +1134,10 @@ def build_indexes(derived_at: str | None = None) -> None:
         "native_guardian_application_count": sum(
             1 for p in native_records
             if read_json(p).get("record_type") == "guardian_application"
+        ),
+        "native_guardian_retirement_count": sum(
+            1 for p in native_records
+            if read_json(p).get("record_type") == "guardian_retirement"
         ),
         "native_guardian_status_totals": native_guardian_statuses,
         "batch_count": len(batches),
