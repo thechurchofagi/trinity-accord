@@ -103,6 +103,7 @@ required = [
 
     # Full-auto external agent pipeline
     "python3 scripts/test_external_agent_full_auto_pipeline_contract.py",
+    "python3 scripts/test_external_agent_first_contact_rules_contract.py",
 
     # Zero-clone builder bundle guards (current)
     "python3 scripts/test_formal_builder_bundles_contract.py",
