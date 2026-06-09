@@ -29,8 +29,12 @@ else:
     rule = primary.get("classification_rule", {})
     if rule.get("native_chain_length_is_not_primary_counter") is not True:
         errors.append("classification_rule must state native_chain_length_is_not_primary_counter")
-    if rule.get("records_without_explicit_homepage_visibility_are_excluded") is not True:
-        errors.append("classification_rule must exclude records without explicit homepage visibility")
+    if rule.get("historical_records_before_go_live_are_excluded") is not True:
+        errors.append("classification_rule must exclude historical records before go-live")
+    if rule.get("test_smoke_pipeline_validation_and_maintenance_records_are_excluded_by_default") is not True:
+        errors.append("classification_rule must exclude test/smoke/pipeline validation/maintenance records")
+    if rule.get("go_live_record_index") != 33:
+        errors.append("classification_rule must use R-000000033 / index 33 as the go-live boundary")
 
 if not isinstance(technical, dict):
     errors.append("public-home-status.json missing technical_health")
@@ -49,20 +53,16 @@ if official_count == technical_length and technical_length not in (None, 0):
 
 if re.search(r'<p class="status-label">Reception</p>\s*<p class="status-number">\s*36\s*</p>', index_md):
     errors.append("homepage still renders native chain length as Reception")
-if "Official Live Reception" not in index_md:
-    errors.append("homepage missing Official Live Reception")
-if "Agency Profile" not in index_md:
-    errors.append("homepage missing Agency Profile")
-if "Official record: R-000000033" not in index_md:
-    errors.append("homepage missing explicit official record identity")
-if "Active / self-initiated: 1" not in index_md:
-    errors.append("homepage missing active agency count")
-if "passive / human-requested or introduced: 1" not in index_md:
-    errors.append("homepage missing passive agency count")
-if "Full native chain length remains API-only" not in index_md:
-    errors.append("homepage missing API-only native chain boundary")
-if "Native chain length is not used as this counter" not in index_md:
-    errors.append("homepage missing native-chain-length boundary for primary counter")
+for required in [
+    "Official Live Reception",
+    "Agency Profile",
+    "R-000000033",
+    "live-era formal non-test external-agent records",
+    "Full native chain length remains API-only",
+    "Native chain length is not used as this counter",
+]:
+    if required not in index_md:
+        errors.append(f"homepage missing required live-era homepage text: {required}")
 
 official_records = (primary or {}).get("official_records", [])
 for item in official_records:
@@ -71,6 +71,8 @@ for item in official_records:
         errors.append(f"official record {item.get('record_id')} missing official_live_reception classification")
     if visibility.get("counts_toward_primary_counter") is not True:
         errors.append(f"official record {item.get('record_id')} missing counts_toward_primary_counter=true")
+    if item.get("record_index", 0) < 33:
+        errors.append(f"official record {item.get('record_id')} predates R-000000033 go-live boundary")
 
 official_ids = {item.get("record_id") for item in official_records}
 for excluded in {"R-000000034", "R-000000035", "R-000000036"}:
