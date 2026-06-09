@@ -98,6 +98,9 @@ def main() -> None:
         "RECORD_CHAIN_GATEWAY_ACTORS",
         "record-chain/maintenance-overrides/",
         "record-chain: auto-finalize accepted submissions",
+        "Append record-chain entries from Render intake",
+        "APPROVED_APPEND_MESSAGE",
+        "append workflow",
         "anchor: stamp native record-chain head with OTS",
         "archive: update native record-chain Arweave archive metadata",
         "intake: submission ",
@@ -146,6 +149,7 @@ def main() -> None:
     require("record-chain: auto-finalize accepted submissions" in auto_finalize, "auto-finalize commit message must remain stable")
 
     require("Record Chain Auto Finalize" in ots_workflow, "OTS must remain chained to Auto Finalize")
+    require("Append Record Chain Entries" in ots_workflow, "OTS must listen to Append Record Chain Entries")
     require("workflow_dispatch:" in ots_workflow, "OTS manual repair dispatch must remain available")
     require("record-chain/records/**" not in ots_workflow, "OTS must not accept arbitrary records push trigger")
     require("push:" not in ots_workflow or "record-chain/chain-tip.json" not in ots_workflow.split("push:")[1].split("workflow_run:")[0] if "push:" in ots_workflow else True, "OTS must not accept arbitrary chain-tip push trigger")
