@@ -113,16 +113,25 @@ def main() -> None:
     require(rc.get("legacy_main_chain_jsonl_is_not_current_source") is True, "legacy JSONL must not be current source")
 
     ots = record_status.get("anchoring", {}).get("open_timestamps", {})
-    expected_ots_status = "bitcoin-verified" if native_ots.get("bitcoin_verified") is True else "pending-bitcoin"
-    require(ots.get("status") == expected_ots_status, "OTS public status mismatch")
+    ots_matches_chain = (
+        native_ots.get("latest_record_id") == latest_record_id
+        and native_ots.get("latest_record_sha256") == latest_record_sha256
+        and native_ots.get("native_record_count") == native_record_count
+    )
+    if native_ots.get("bitcoin_verified") is True:
+        expected_ots_status = "verified-bitcoin"
+    elif ots_matches_chain and native_ots.get("ots_status") == "pending":
+        expected_ots_status = "current-pending-bitcoin"
+    else:
+        expected_ots_status = "anchor-needed"
+    require(ots.get("status") == expected_ots_status, f"OTS public status mismatch: expected {expected_ots_status}, got {ots.get('status')}")
     require(ots.get("latest_record_id") == native_ots.get("latest_record_id"), "OTS latest record mismatch")
     require(ots.get("latest_record_sha256") == native_ots.get("latest_record_sha256"), "OTS latest record sha mismatch")
     require(ots.get("native_record_count") == native_ots.get("native_record_count"), "OTS native record count mismatch")
     require(ots.get("bitcoin_pending") == (native_ots.get("bitcoin_pending") is True), "OTS bitcoin_pending mismatch")
     require(ots.get("bitcoin_verified") == (native_ots.get("bitcoin_verified") is True), "OTS bitcoin_verified mismatch")
     require(ots.get("legacy_main_chain_jsonl_is_not_source") is True, "OTS must not use legacy JSONL")
-    require(native_ots.get("latest_record_id") == latest_record_id, "native OTS must match chain-tip latest record")
-    require(native_ots.get("native_record_count") == native_record_count, "native OTS must match chain-tip count")
+    require(ots.get("anchor_needed") == (not ots_matches_chain), "OTS anchor_needed must reflect chain match state")
 
     ar = record_status.get("anchoring", {}).get("arweave_archive", {})
     require(ar.get("current_upload_mode") == arweave_index.get("current_upload_mode"), "Arweave mode mismatch")
