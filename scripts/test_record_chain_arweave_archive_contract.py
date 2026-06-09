@@ -15,6 +15,8 @@ Asserts:
 - archive manifest has arweave.enabled = false in dry-run
 - archive boundary says not authority / not amendment
 - no ARV5/LV5/IPFS current terminology
+- backlog detector present
+- record-chain-status generated before public-home
 """
 from __future__ import annotations
 
@@ -46,24 +48,35 @@ def main() -> None:
             errors.append("arweave-archive workflow missing ARKEY reference")
         if "ARWEAVE_WALLET_JWK_B64" in text:
             errors.append("arweave-archive workflow must not use ARWEAVE_WALLET_JWK_B64 (use ARKEY)")
-        # Should not use the secret in a run: step directly
+        # Check no lowercase "echo" in the workflow file when ARKEY is present
         if "echo" in text.lower() and "ARKEY" in text:
             errors.append("arweave-archive workflow may echo wallet secret")
-        # Early no-op for already archived head
-        if "archive_check" not in text:
-            errors.append("arweave-archive workflow missing early no-op archive_check")
-        if "No new Arweave archive needed" not in text:
-            errors.append("arweave-archive workflow missing no-op message")
-        if "matched" not in text:
-            errors.append("arweave-archive workflow missing matched output for no-op guard")
+        # Backlog detector
+        if "detect_record_chain_pipeline_backlog.py" not in text:
+            errors.append("arweave-archive workflow missing backlog detector")
+        if "arweave_archive_needed" not in text:
+            errors.append("arweave-archive workflow missing arweave_archive_needed guard")
+        if "ots_matches_chain" not in text:
+            errors.append("arweave-archive workflow missing OTS wait guard")
+        # Must regenerate record-chain-status
+        if "generate_record_chain_status.py" not in text:
+            errors.append("arweave-archive workflow must regenerate record-chain-status")
+        # record-chain-status must be generated before public-home status
+        if text.index("generate_record_chain_status.py") > text.index("generate_public_home_status.py"):
+            errors.append("record-chain-status must be generated before public-home status")
+        if "api/record-chain-status.json" not in text:
+            errors.append("arweave archive commit must include api/record-chain-status.json")
         # workflow_run from OTS resolves to live
         if "workflow_run" not in text:
             errors.append("arweave-archive workflow missing workflow_run trigger")
         if "Record Chain Head OTS Anchor" not in text:
             errors.append("arweave-archive workflow must listen to OTS anchor workflow")
-        # All steps after early check must be conditional
-        if "steps.archive_check.outputs.matched" not in text:
-            errors.append("arweave-archive workflow steps must be conditional on archive_check")
+        # 30-minute schedule scanner
+        if "*/30 * * * *" not in text:
+            errors.append("arweave-archive workflow must have 30-minute schedule scanner")
+        # Rebase/retry
+        if "git pull --rebase origin" not in text:
+            errors.append("arweave-archive workflow must rebase before push retry")
 
     # 2. Scripts exist
     build_script = ROOT / "scripts" / "build_record_chain_arweave_archive.py"
@@ -118,6 +131,11 @@ def main() -> None:
             errors.append("verify script missing forbidden terminology check")
         if "not_authority" not in text:
             errors.append("verify script missing boundary check")
+
+    # 7. Backlog detector exists
+    detector = ROOT / "scripts" / "detect_record_chain_pipeline_backlog.py"
+    if not detector.exists():
+        errors.append("missing scripts/detect_record_chain_pipeline_backlog.py")
 
     if errors:
         print("Arweave archive contract tests FAILED:", file=sys.stderr)

@@ -24,6 +24,7 @@ concurrency:
 
 permissions:
   contents: write
+  actions: write
 
 jobs:
   append:
@@ -55,25 +56,41 @@ jobs:
           git pull --rebase origin "${GITHUB_REF_NAME:-main}"
       - run: python scripts/trinity_record_chain.py append --all
       - run: python scripts/trinity_record_chain.py verify
-      - name: Regenerate public homepage counters
+      - name: Regenerate phase-aware public status and homepage counters
         run: |
+          python scripts/generate_record_chain_status.py
           python scripts/generate_public_home_status.py
           python scripts/generate_sitemap.py
       - name: Commit and push append updates
+        id: append_commit
         run: |
           set -euo pipefail
+          printf '%s\n' "committed=false" >> "$GITHUB_OUTPUT"
+
           if ! git diff --quiet; then
             git config user.name "trinity-record-chain-bot"
             git config user.email "actions@github.com"
-            git add record-chain/ index.md api/public-home-status.json sitemap.xml
+            git add record-chain/ api/record-chain-status.json index.md api/public-home-status.json sitemap.xml
             git commit -m "Append record-chain entries from Render intake"
+
             for attempt in 1 2 3; do
               if git push origin "HEAD:${GITHUB_REF_NAME:-main}"; then
+                printf '%s\n' "committed=true" >> "$GITHUB_OUTPUT"
                 exit 0
               fi
-              echo "Push failed on attempt ${attempt}; rebasing and retrying."
+              printf 'Push failed on attempt %s; rebasing and retrying.\n' "${attempt}"
               git pull --rebase origin "${GITHUB_REF_NAME:-main}"
             done
-            echo "::error::Failed to push append updates after retries."
+
+            printf '%s\n' "::error::Failed to push append updates after retries."
             exit 1
           fi
+
+      - name: Dispatch native OTS anchor workflow
+        if: steps.append_commit.outputs.committed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          printf '%s\n' "Dispatching Record Chain Head OTS Anchor on main"
+          gh workflow run record-chain-head-ots-anchor.yml --ref main

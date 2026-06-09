@@ -64,7 +64,11 @@ def record_type_counts(records: list[dict[str, Any]]) -> dict[str, int]:
     return dict(sorted(counts.items()))
 
 
-def latest_live_native_archive(arweave: dict[str, Any], tip: dict[str, Any]) -> dict[str, Any]:
+def latest_live_native_archive(arweave: dict[str, Any]) -> dict[str, Any] | None:
+    """Return the latest live native Arweave archive, or None if none exist.
+
+    Does NOT require chain-tip equality — the caller decides what to do with lag.
+    """
     live = [
         a for a in arweave.get("archives", [])
         if a.get("source_type") == "native-record-chain"
@@ -72,16 +76,65 @@ def latest_live_native_archive(arweave: dict[str, Any], tip: dict[str, Any]) -> 
         and a.get("arweave_txid")
     ]
     if not live:
-        raise SystemExit("no live native Arweave archive found")
+        return None
     live.sort(key=lambda a: (a.get("native_record_count") or 0, a.get("created_at") or ""))
-    latest = live[-1]
-    if latest.get("native_latest_record_id") != tip.get("latest_record_id"):
-        raise SystemExit("latest live native Arweave record id does not match chain-tip")
-    if latest.get("native_latest_record_sha256") != tip.get("latest_record_sha256"):
-        raise SystemExit("latest live native Arweave sha does not match chain-tip")
-    if latest.get("native_record_count") != tip.get("native_record_count"):
-        raise SystemExit("latest live native Arweave count does not match chain-tip")
-    return latest
+    return live[-1]
+
+
+def build_pipeline_status(tip: dict[str, Any], ots: dict[str, Any], latest_live: dict[str, Any] | None) -> dict[str, Any]:
+    chain_head = {
+        "latest_record_id": tip.get("latest_record_id"),
+        "latest_record_sha256": tip.get("latest_record_sha256"),
+        "native_record_count": tip.get("native_record_count"),
+    }
+    ots_head = {
+        "latest_record_id": ots.get("latest_record_id"),
+        "latest_record_sha256": ots.get("latest_record_sha256"),
+        "native_record_count": ots.get("native_record_count"),
+        "ots_status": ots.get("ots_status"),
+        "bitcoin_pending": ots.get("bitcoin_pending"),
+        "bitcoin_verified": ots.get("bitcoin_verified"),
+    }
+    arweave_head = {
+        "latest_record_id": (latest_live or {}).get("native_latest_record_id"),
+        "latest_record_sha256": (latest_live or {}).get("native_latest_record_sha256"),
+        "native_record_count": (latest_live or {}).get("native_record_count"),
+        "archive_id": (latest_live or {}).get("archive_id"),
+        "arweave_txid": (latest_live or {}).get("arweave_txid"),
+    }
+
+    ots_matches_chain = (
+        ots_head["latest_record_id"] == chain_head["latest_record_id"]
+        and ots_head["latest_record_sha256"] == chain_head["latest_record_sha256"]
+        and ots_head["native_record_count"] == chain_head["native_record_count"]
+        and ots.get("legacy_main_chain_jsonl_is_not_source") is True
+    )
+
+    arweave_matches_ots = (
+        arweave_head["latest_record_id"] == ots_head["latest_record_id"]
+        and arweave_head["latest_record_sha256"] == ots_head["latest_record_sha256"]
+        and arweave_head["native_record_count"] == ots_head["native_record_count"]
+        and bool(arweave_head["latest_record_id"])
+    )
+
+    arweave_matches_chain = (
+        arweave_head["latest_record_id"] == chain_head["latest_record_id"]
+        and arweave_head["latest_record_sha256"] == chain_head["latest_record_sha256"]
+        and arweave_head["native_record_count"] == chain_head["native_record_count"]
+        and bool(arweave_head["latest_record_id"])
+    )
+
+    return {
+        "chain_head": chain_head,
+        "ots_head": ots_head,
+        "arweave_head": arweave_head,
+        "ots_matches_chain": ots_matches_chain,
+        "arweave_matches_ots": arweave_matches_ots,
+        "arweave_matches_chain": arweave_matches_chain,
+        "ots_anchor_needed": not ots_matches_chain,
+        "arweave_archive_needed": ots_matches_chain and not arweave_matches_ots,
+        "pipeline_current": ots_matches_chain and arweave_matches_chain,
+    }
 
 
 def build_expected(existing: dict[str, Any]) -> dict[str, Any]:
@@ -111,16 +164,11 @@ def build_expected(existing: dict[str, Any]) -> dict[str, Any]:
     if len(records) != native_count:
         raise SystemExit(f"record-index length {len(records)} != native_count {native_count}")
 
-    if ots.get("latest_record_id") != latest_id:
-        raise SystemExit("native OTS latest id does not match chain-tip")
-    if ots.get("latest_record_sha256") != latest_sha:
-        raise SystemExit("native OTS latest sha does not match chain-tip")
-    if ots.get("native_record_count") != native_count:
-        raise SystemExit("native OTS count does not match chain-tip")
     if ots.get("bitcoin_verified") is True and ots.get("ots_status") != "verified":
         raise SystemExit("invalid OTS state: bitcoin_verified true but ots_status is not verified")
 
-    latest_live = latest_live_native_archive(arweave, tip)
+    latest_live = latest_live_native_archive(arweave)
+    pipeline = build_pipeline_status(tip, ots, latest_live)
 
     latest_type = latest_record.get("record_type") or latest_record.get("type")
     latest_created_at = latest_record.get("created_at") or latest_record.get("assigned_at")
@@ -138,6 +186,8 @@ def build_expected(existing: dict[str, Any]) -> dict[str, Any]:
         rc["latest_batch_id"] = tip.get("latest_batch_id")
     if "latest_batch_manifest_sha256" in tip:
         rc["latest_batch_manifest_sha256"] = tip.get("latest_batch_manifest_sha256")
+
+    status["pipeline_status"] = pipeline
 
     status.setdefault("legacy_compatibility", {})
     status["legacy_compatibility"]["native_record_count"] = native_count
@@ -163,7 +213,14 @@ def build_expected(existing: dict[str, Any]) -> dict[str, Any]:
     ot["bitcoin_pending"] = ots.get("bitcoin_pending")
     ot["bitcoin_verified"] = ots.get("bitcoin_verified")
     ot["legacy_main_chain_jsonl_is_not_source"] = ots.get("legacy_main_chain_jsonl_is_not_source")
-    ot["status"] = "verified-bitcoin" if ots.get("bitcoin_verified") is True else "pending-bitcoin"
+    ot["status"] = (
+        "verified-bitcoin"
+        if ots.get("bitcoin_verified") is True
+        else "current-pending-bitcoin"
+        if pipeline["ots_matches_chain"] and ots.get("ots_status") == "pending"
+        else "anchor-needed"
+    )
+    ot["anchor_needed"] = pipeline["ots_anchor_needed"]
 
     status["anchoring"].setdefault("arweave_archive", {})
     aa = status["anchoring"]["arweave_archive"]
@@ -176,12 +233,20 @@ def build_expected(existing: dict[str, Any]) -> dict[str, Any]:
     aa["live_upload_implemented"] = arweave.get("live_upload_implemented")
     aa["live_archive_count"] = arweave.get("live_archive_count")
     aa["latest_arweave_txid"] = arweave.get("latest_arweave_txid")
-    aa["latest_archive_id"] = latest_live.get("archive_id")
-    aa["latest_manifest_path"] = latest_live.get("manifest_path")
-    aa["latest_native_record_id"] = latest_live.get("native_latest_record_id")
-    aa["latest_native_record_sha256"] = latest_live.get("native_latest_record_sha256")
-    aa["native_record_count"] = latest_live.get("native_record_count")
-    aa["record_count"] = latest_live.get("record_count")
+    aa["latest_archive_id"] = (latest_live or {}).get("archive_id")
+    aa["latest_manifest_path"] = (latest_live or {}).get("manifest_path")
+    aa["latest_native_record_id"] = (latest_live or {}).get("native_latest_record_id")
+    aa["latest_native_record_sha256"] = (latest_live or {}).get("native_latest_record_sha256")
+    aa["native_record_count"] = (latest_live or {}).get("native_record_count")
+    aa["record_count"] = (latest_live or {}).get("record_count")
+    aa["status"] = (
+        "current"
+        if pipeline["arweave_matches_chain"]
+        else "archive-needed"
+        if pipeline["arweave_archive_needed"]
+        else "waiting-for-native-ots"
+    )
+    aa["archive_needed"] = pipeline["arweave_archive_needed"]
     aa.setdefault("default_mode", "dry-run")
     aa.setdefault("arweave_archive_is_mirror_only", True)
     aa.setdefault("arweave_archive_is_not_authority", True)
@@ -190,15 +255,15 @@ def build_expected(existing: dict[str, Any]) -> dict[str, Any]:
 
     status.setdefault("post_m9_status", {})
     m9 = status["post_m9_status"]
-    m9["m9_status"] = "pass"
-    m9["m9_archive_status"] = "pass"
+    m9["m9_status"] = "pass" if pipeline["pipeline_current"] else "backlog"
+    m9["m9_archive_status"] = "pass" if pipeline["arweave_matches_chain"] else "backlog"
     m9["m9_latest_record_id"] = latest_id
     m9["m9_latest_record_sha256"] = latest_sha
     m9["m9_native_record_count"] = native_count
     m9["m9_ots_status"] = ot["status"]
     m9["m9_arweave_txid"] = arweave.get("latest_arweave_txid")
-    m9["m9_arweave_archive_id"] = latest_live.get("archive_id")
-    m9["m9_arweave_manifest_path"] = latest_live.get("manifest_path")
+    m9["m9_arweave_archive_id"] = (latest_live or {}).get("archive_id")
+    m9["m9_arweave_manifest_path"] = (latest_live or {}).get("manifest_path")
 
     return status
 

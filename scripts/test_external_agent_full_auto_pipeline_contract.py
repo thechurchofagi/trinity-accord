@@ -29,6 +29,7 @@ def main() -> None:
     ots_workflow = read(".github/workflows/record-chain-head-ots-anchor.yml")
     arweave_workflow = read(".github/workflows/record-chain-arweave-archive.yml")
     guard_script = read("scripts/check_record_chain_write_path_guard.py")
+    detector_script = read("scripts/detect_record_chain_pipeline_backlog.py")
 
     # Gateway default append workflow
     require(
@@ -48,6 +49,40 @@ def main() -> None:
         "append workflow must use stable commit message 'Append record-chain entries from Render intake'",
     )
 
+    # Append must have actions: write permission
+    require(
+        "actions: write" in append_workflow,
+        "append workflow must have actions: write permission for dispatching OTS",
+    )
+
+    # Append must generate record-chain-status before public-home
+    require(
+        "generate_record_chain_status.py" in append_workflow,
+        "append workflow must generate record-chain-status",
+    )
+    status_pos = append_workflow.index("generate_record_chain_status.py")
+    home_pos = append_workflow.index("generate_public_home_status.py")
+    require(
+        status_pos < home_pos,
+        "record-chain-status must be generated before public-home status in append workflow",
+    )
+
+    # Append must commit api/record-chain-status.json
+    require(
+        "api/record-chain-status.json" in append_workflow,
+        "append workflow must commit api/record-chain-status.json",
+    )
+
+    # Append must dispatch OTS after successful commit
+    require(
+        "gh workflow run record-chain-head-ots-anchor.yml" in append_workflow,
+        "append workflow must dispatch native OTS anchor workflow after commit",
+    )
+    require(
+        "append_commit" in append_workflow,
+        "append workflow must track commit output for conditional dispatch",
+    )
+
     # OTS listens to Append Record Chain Entries
     require(
         '"Append Record Chain Entries"' in ots_workflow,
@@ -58,6 +93,48 @@ def main() -> None:
     require(
         '"Record Chain Auto Finalize"' in ots_workflow,
         "OTS workflow must still listen to 'Record Chain Auto Finalize'",
+    )
+
+    # OTS must have schedule scanner
+    require(
+        "schedule:" in ots_workflow,
+        "OTS workflow must have schedule scanner",
+    )
+    require(
+        "*/15 * * * *" in ots_workflow,
+        "OTS workflow must scan every 15 minutes",
+    )
+
+    # OTS must have actions: write permission
+    require(
+        "actions: write" in ots_workflow,
+        "OTS workflow must have actions: write permission for dispatching Arweave",
+    )
+
+    # OTS must use backlog detector
+    require(
+        "detect_record_chain_pipeline_backlog.py" in ots_workflow,
+        "OTS workflow must use pipeline backlog detector",
+    )
+    require(
+        "ots_anchor_needed" in ots_workflow,
+        "OTS workflow must check ots_anchor_needed from detector",
+    )
+
+    # OTS must dispatch Arweave after successful push
+    require(
+        "gh workflow run record-chain-arweave-archive.yml" in ots_workflow,
+        "OTS workflow must dispatch Arweave archive workflow after successful push",
+    )
+    require(
+        "-f upload_mode=live" in ots_workflow,
+        "OTS dispatch to Arweave must use live upload mode",
+    )
+
+    # OTS must have rebase/retry on push
+    require(
+        "git pull --rebase origin" in ots_workflow,
+        "OTS workflow must rebase before push retry",
     )
 
     # Arweave workflow_run from OTS resolves to live
@@ -75,18 +152,54 @@ def main() -> None:
         "Arweave workflow_run trigger must resolve to live upload mode",
     )
 
+    # Arweave must have 30-minute schedule scanner
+    require(
+        "*/30 * * * *" in arweave_workflow,
+        "Arweave workflow must scan every 30 minutes",
+    )
+
+    # Arweave must use backlog detector
+    require(
+        "detect_record_chain_pipeline_backlog.py" in arweave_workflow,
+        "Arweave workflow must use pipeline backlog detector",
+    )
+    require(
+        "arweave_archive_needed" in arweave_workflow,
+        "Arweave workflow must check arweave_archive_needed from detector",
+    )
+    require(
+        "ots_matches_chain" in arweave_workflow,
+        "Arweave workflow must check ots_matches_chain for OTS wait guard",
+    )
+
+    # Arweave must generate record-chain-status before public-home
+    require(
+        "generate_record_chain_status.py" in arweave_workflow,
+        "Arweave workflow must regenerate record-chain-status",
+    )
+    ar_status_pos = arweave_workflow.index("generate_record_chain_status.py")
+    ar_home_pos = arweave_workflow.index("generate_public_home_status.py")
+    require(
+        ar_status_pos < ar_home_pos,
+        "record-chain-status must be generated before public-home status in Arweave workflow",
+    )
+
+    # Arweave must commit api/record-chain-status.json
+    require(
+        "api/record-chain-status.json" in arweave_workflow,
+        "Arweave workflow must commit api/record-chain-status.json",
+    )
+
     # Arweave has early no-op for already archived head
     require(
-        "archive_check" in arweave_workflow,
-        "Arweave workflow must have early no-op check for already archived head",
+        "backlog" in arweave_workflow,
+        "Arweave workflow must have backlog detector step",
     )
+
+    # Arweave workflow must have rebase/retry on push
     require(
-        "No new Arweave archive needed" in arweave_workflow,
-        "Arweave workflow must print no-op message when archive is up to date",
-    )
-    require(
-        "matched" in arweave_workflow,
-        "Arweave workflow must use matched output for no-op guard",
+        "git pull --rebase origin" in arweave_workflow,
+        "Arweave workflow must rebase before push retry",
     )
 
     # Arweave workflow contains ARKEY but does not contain lowercase echo
@@ -94,9 +207,6 @@ def main() -> None:
         "ARKEY" in arweave_workflow,
         "Arweave workflow must reference ARKEY secret",
     )
-    # Check no lowercase "echo" in the workflow file (the word echo in comments/strings is ok
-    # but the actual workflow text should not have bare lowercase echo that triggers test failures)
-    # The test_record_chain_arweave_archive_contract.py checks for this specifically
 
     # Write-path guard allows append workflow commit message
     require(
@@ -110,6 +220,12 @@ def main() -> None:
     require(
         "append workflow" in guard_script,
         "write-path guard must have append workflow approval path",
+    )
+
+    # Write-path guard must include record-chain-status in public generated files
+    require(
+        "api/record-chain-status.json" in guard_script,
+        "write-path guard must include api/record-chain-status.json in PUBLIC_GENERATED_FILES",
     )
 
     # Append workflow must commit with actions bot identity
@@ -132,6 +248,24 @@ def main() -> None:
     require(
         "generate_sitemap.py" in append_workflow,
         "append workflow must regenerate sitemap",
+    )
+
+    # Backlog detector script must exist and have key outputs
+    require(
+        "ots_anchor_needed" in detector_script,
+        "backlog detector must output ots_anchor_needed",
+    )
+    require(
+        "arweave_archive_needed" in detector_script,
+        "backlog detector must output arweave_archive_needed",
+    )
+    require(
+        "pipeline_current" in detector_script,
+        "backlog detector must output pipeline_current",
+    )
+    require(
+        "--github-output" in detector_script,
+        "backlog detector must support --github-output flag",
     )
 
     print("External-agent full-auto pipeline contract PASSED.")

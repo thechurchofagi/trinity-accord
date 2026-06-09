@@ -96,6 +96,7 @@ def main() -> None:
         "MAINTENANCE_OVERRIDE_TOKEN",
         "APPROVED_ACTIONS_ACTOR",
         "RECORD_CHAIN_GATEWAY_ACTORS",
+        "api/record-chain-status.json",
         "record-chain/maintenance-overrides/",
         "record-chain: auto-finalize accepted submissions",
         "Append record-chain entries from Render intake",
@@ -243,8 +244,28 @@ def main() -> None:
         write(repo / "scripts/check_record_chain_write_path_guard.py", guard_script)
         base = commit(repo, "init")
 
+        write(repo / "record-chain/records/R-999999999.json", "{}\n")
+        write(repo / "record-chain/chain-tip.json", "{}\n")
+        write(repo / "record-chain/indexes/record-index.json", "{}\n")
+        write(repo / "api/record-chain-status.json", "{}\n")
+        write(repo / "api/public-home-status.json", "{}\n")
+        write(repo / "index.md", "status\n")
+        write(repo / "sitemap.xml", "<urlset />\n")
+        head = commit(repo, "Append record-chain entries from Render intake")
+        result = check_guard(repo, base, head, actor="github-actions[bot]")
+        require(result.returncode == 0, f"append workflow with status/public generated should pass:\n{result.stdout}\n{result.stderr}")
+
+    with tempfile.TemporaryDirectory() as td:
+        repo = Path(td)
+        run(["git", "init"], cwd=repo)
+        run(["git", "config", "user.email", "test@example.invalid"], cwd=repo)
+        run(["git", "config", "user.name", "Write Path Guard Test"], cwd=repo)
+        write(repo / "scripts/check_record_chain_write_path_guard.py", guard_script)
+        base = commit(repo, "init")
+
         write(repo / "record-chain/arweave-archives/archive.json", "{}\n")
         write(repo / "api/record-chain-arweave-index.json", "{}\n")
+        write(repo / "api/record-chain-status.json", "{}\n")
         write(repo / "api/public-home-status.json", "{}\n")
         write(repo / "index.md", "archive\n")
         write(repo / "sitemap.xml", "<xml />\n")
@@ -272,3 +293,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+

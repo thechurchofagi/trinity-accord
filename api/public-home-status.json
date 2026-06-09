@@ -53,7 +53,7 @@
         "native_head_workflow": "/.github/workflows/record-chain-head-ots-anchor.yml",
         "native_latest_api": "/api/record-chain-native-ots-latest.json",
         "native_record_count": 34,
-        "status": "pending-bitcoin",
+        "status": "anchor-needed",
         "status_api": "/api/record-chain-native-ots-latest.json",
         "latest_record_index": 34,
         "latest_anchor_file": "record-chain/ots/native-anchors/native-record-34-R-000000034-aac1593720622ba4-3ca459e1b9b74f60.anchor.json",
